@@ -10,6 +10,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.openiaml.model.model.AbstractScope;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
@@ -17,10 +18,10 @@ import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.NamedElement;
-import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.scopes.Scope;
 import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.scopes.Session;
 
@@ -85,6 +86,10 @@ public class ScopesAdapterFactory extends AdapterFactoryImpl {
 				return createSessionAdapter();
 			}
 			@Override
+			public Adapter caseScope(Scope object) {
+				return createScopeAdapter();
+			}
+			@Override
 			public Adapter caseGeneratedElement(GeneratedElement object) {
 				return createGeneratedElementAdapter();
 			}
@@ -105,8 +110,8 @@ public class ScopesAdapterFactory extends AdapterFactoryImpl {
 				return createContainsWiresAdapter();
 			}
 			@Override
-			public Adapter caseScope(Scope object) {
-				return createScopeAdapter();
+			public Adapter caseAbstractScope(AbstractScope object) {
+				return createAbstractScopeAdapter();
 			}
 			@Override
 			public Adapter caseContainsEventTriggers(ContainsEventTriggers object) {
@@ -149,13 +154,13 @@ public class ScopesAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.Scope <em>Scope</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.scopes.Scope <em>Scope</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.openiaml.model.model.Scope
+	 * @see org.openiaml.model.model.scopes.Scope
 	 * @generated
 	 */
 	public Adapter createScopeAdapter() {
@@ -173,6 +178,20 @@ public class ScopesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createContainsWiresAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.AbstractScope <em>Abstract Scope</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.AbstractScope
+	 * @generated
+	 */
+	public Adapter createAbstractScopeAdapter() {
 		return null;
 	}
 

@@ -6,8 +6,10 @@
  */
 package org.openiaml.model.model.visual;
 
-import org.openiaml.model.model.Scope;
+import org.eclipse.emf.common.util.EList;
+import org.openiaml.model.model.AbstractScope;
 import org.openiaml.model.model.VisibleThing;
+import org.openiaml.model.model.scopes.Scope;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,6 +24,7 @@ import org.openiaml.model.model.VisibleThing;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.openiaml.model.model.visual.Page#getUrl <em>Url</em>}</li>
+ *   <li>{@link org.openiaml.model.model.visual.Page#getScopes <em>Scopes</em>}</li>
  * </ul>
  * </p>
  *
@@ -29,7 +32,7 @@ import org.openiaml.model.model.VisibleThing;
  * @model annotation="http://openiaml.org/comment comment='Scope supertype added in 0.2' comment2='represents the scope Window'"
  * @generated
  */
-public interface Page extends VisibleThing, Scope {
+public interface Page extends VisibleThing, AbstractScope {
 	/**
 	 * Returns the value of the '<em><b>Url</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -55,5 +58,22 @@ public interface Page extends VisibleThing, Scope {
 	 * @generated
 	 */
 	void setUrl(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Scopes</b></em>' containment reference list.
+	 * The list contents are of type {@link org.openiaml.model.model.scopes.Scope}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Scopes</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Scopes</em>' containment reference list.
+	 * @see org.openiaml.model.model.visual.VisualPackage#getPage_Scopes()
+	 * @model containment="true"
+	 *        annotation="http://openiaml.org/comment added='0.4.2'"
+	 * @generated
+	 */
+	EList<Scope> getScopes();
 
 } // Page

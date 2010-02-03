@@ -9,6 +9,7 @@ package org.openiaml.model.model.visual;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 import org.openiaml.model.model.ModelPackage;
 
 /**
@@ -250,13 +251,22 @@ public interface VisualPackage extends EPackage {
 	int PAGE__URL = ModelPackage.VISIBLE_THING_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Scopes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PAGE__SCOPES = ModelPackage.VISIBLE_THING_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Page</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PAGE_FEATURE_COUNT = ModelPackage.VISIBLE_THING_FEATURE_COUNT + 2;
+	int PAGE_FEATURE_COUNT = ModelPackage.VISIBLE_THING_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.visual.impl.InputFormImpl <em>Input Form</em>}' class.
@@ -824,6 +834,17 @@ public interface VisualPackage extends EPackage {
 	EAttribute getPage_Url();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.visual.Page#getScopes <em>Scopes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Scopes</em>'.
+	 * @see org.openiaml.model.model.visual.Page#getScopes()
+	 * @see #getPage()
+	 * @generated
+	 */
+	EReference getPage_Scopes();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.visual.InputForm <em>Input Form</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -892,6 +913,14 @@ public interface VisualPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PAGE__URL = eINSTANCE.getPage_Url();
+
+		/**
+		 * The meta object literal for the '<em><b>Scopes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PAGE__SCOPES = eINSTANCE.getPage_Scopes();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.visual.impl.InputFormImpl <em>Input Form</em>}' class.

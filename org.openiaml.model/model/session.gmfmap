@@ -507,7 +507,7 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//Scope/gate"/>
+        href="iaml.ecore#//AbstractScope/gate"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//components/Gate"/>
@@ -528,6 +528,31 @@
           href="session.gmftool#//@palette/@tools.0/@tools.7"/>
       <diagramNode
           href="iaml.gmfgraph#Gate"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//scopes/Session/scopes"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//scopes/Scope"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#ScopeName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#ScopeParentName"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="session.gmftool#//@palette/@tools.0/@tools.8"/>
+      <diagramNode
+          href="iaml.gmfgraph#Scope"/>
     </ownedChild>
   </nodes>
   <links>

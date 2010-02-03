@@ -2406,13 +2406,22 @@ public interface ModelPackage extends EPackage {
 	int INTERNET_APPLICATION__SESSIONS = CONTAINS_OPERATIONS_FEATURE_COUNT + 15;
 
 	/**
+	 * The feature id for the '<em><b>Scopes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERNET_APPLICATION__SCOPES = CONTAINS_OPERATIONS_FEATURE_COUNT + 16;
+
+	/**
 	 * The number of structural features of the '<em>Internet Application</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 16;
+	int INTERNET_APPLICATION_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 17;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -3302,14 +3311,14 @@ public interface ModelPackage extends EPackage {
 	int DOMAIN_OBJECT_INSTANCE_FEATURE_COUNT = APPLICATION_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.openiaml.model.model.impl.ScopeImpl <em>Scope</em>}' class.
+	 * The meta object id for the '{@link org.openiaml.model.model.impl.AbstractScopeImpl <em>Abstract Scope</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.openiaml.model.model.impl.ScopeImpl
-	 * @see org.openiaml.model.model.impl.ModelPackageImpl#getScope()
+	 * @see org.openiaml.model.model.impl.AbstractScopeImpl
+	 * @see org.openiaml.model.model.impl.ModelPackageImpl#getAbstractScope()
 	 * @generated
 	 */
-	int SCOPE = 35;
+	int ABSTRACT_SCOPE = 35;
 
 	/**
 	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
@@ -3318,7 +3327,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__GENERATED_ELEMENTS = GENERATES_ELEMENTS__GENERATED_ELEMENTS;
+	int ABSTRACT_SCOPE__GENERATED_ELEMENTS = GENERATES_ELEMENTS__GENERATED_ELEMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
@@ -3327,7 +3336,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__OVERRIDDEN = GENERATES_ELEMENTS__OVERRIDDEN;
+	int ABSTRACT_SCOPE__OVERRIDDEN = GENERATES_ELEMENTS__OVERRIDDEN;
 
 	/**
 	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
@@ -3336,7 +3345,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__WIRES = GENERATES_ELEMENTS_FEATURE_COUNT + 0;
+	int ABSTRACT_SCOPE__WIRES = GENERATES_ELEMENTS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Gate</b></em>' containment reference.
@@ -3345,17 +3354,16 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__GATE = GENERATES_ELEMENTS_FEATURE_COUNT + 1;
+	int ABSTRACT_SCOPE__GATE = GENERATES_ELEMENTS_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the '<em>Scope</em>' class.
+	 * The number of structural features of the '<em>Abstract Scope</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE_FEATURE_COUNT = GENERATES_ELEMENTS_FEATURE_COUNT + 2;
-
+	int ABSTRACT_SCOPE_FEATURE_COUNT = GENERATES_ELEMENTS_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.impl.ConditionImpl <em>Condition</em>}' class.
@@ -4421,6 +4429,17 @@ public interface ModelPackage extends EPackage {
 	EReference getInternetApplication_Sessions();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.InternetApplication#getScopes <em>Scopes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Scopes</em>'.
+	 * @see org.openiaml.model.model.InternetApplication#getScopes()
+	 * @see #getInternetApplication()
+	 * @generated
+	 */
+	EReference getInternetApplication_Scopes();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.DomainStore <em>Domain Store</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4835,25 +4854,25 @@ public interface ModelPackage extends EPackage {
 	EAttribute getDomainObjectInstance_Autosave();
 
 	/**
-	 * Returns the meta object for class '{@link org.openiaml.model.model.Scope <em>Scope</em>}'.
+	 * Returns the meta object for class '{@link org.openiaml.model.model.AbstractScope <em>Abstract Scope</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Scope</em>'.
-	 * @see org.openiaml.model.model.Scope
+	 * @return the meta object for class '<em>Abstract Scope</em>'.
+	 * @see org.openiaml.model.model.AbstractScope
 	 * @generated
 	 */
-	EClass getScope();
+	EClass getAbstractScope();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.openiaml.model.model.Scope#getGate <em>Gate</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.openiaml.model.model.AbstractScope#getGate <em>Gate</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Gate</em>'.
-	 * @see org.openiaml.model.model.Scope#getGate()
-	 * @see #getScope()
+	 * @see org.openiaml.model.model.AbstractScope#getGate()
+	 * @see #getAbstractScope()
 	 * @generated
 	 */
-	EReference getScope_Gate();
+	EReference getAbstractScope_Gate();
 
 	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.Condition <em>Condition</em>}'.
@@ -5443,6 +5462,14 @@ public interface ModelPackage extends EPackage {
 		EReference INTERNET_APPLICATION__SESSIONS = eINSTANCE.getInternetApplication_Sessions();
 
 		/**
+		 * The meta object literal for the '<em><b>Scopes</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INTERNET_APPLICATION__SCOPES = eINSTANCE.getInternetApplication_Scopes();
+
+		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.impl.DomainStoreImpl <em>Domain Store</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5785,14 +5812,14 @@ public interface ModelPackage extends EPackage {
 		EAttribute DOMAIN_OBJECT_INSTANCE__AUTOSAVE = eINSTANCE.getDomainObjectInstance_Autosave();
 
 		/**
-		 * The meta object literal for the '{@link org.openiaml.model.model.impl.ScopeImpl <em>Scope</em>}' class.
+		 * The meta object literal for the '{@link org.openiaml.model.model.impl.AbstractScopeImpl <em>Abstract Scope</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.openiaml.model.model.impl.ScopeImpl
-		 * @see org.openiaml.model.model.impl.ModelPackageImpl#getScope()
+		 * @see org.openiaml.model.model.impl.AbstractScopeImpl
+		 * @see org.openiaml.model.model.impl.ModelPackageImpl#getAbstractScope()
 		 * @generated
 		 */
-		EClass SCOPE = eINSTANCE.getScope();
+		EClass ABSTRACT_SCOPE = eINSTANCE.getAbstractScope();
 
 		/**
 		 * The meta object literal for the '<em><b>Gate</b></em>' containment reference feature.
@@ -5800,7 +5827,7 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SCOPE__GATE = eINSTANCE.getScope_Gate();
+		EReference ABSTRACT_SCOPE__GATE = eINSTANCE.getAbstractScope_Gate();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.impl.ConditionImpl <em>Condition</em>}' class.

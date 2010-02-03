@@ -1590,6 +1590,45 @@
       <accessors
           figure="//@figures.0/@descriptors.58/@actualFigure/@children.1"/>
     </descriptors>
+    <descriptors
+        name="ScopeFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="ScopeFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="211"
+            green="187"
+            blue="159"/>
+        <border
+            xsi:type="gmfgraph:MarginBorder">
+          <insets
+              top="3"
+              left="3"
+              bottom="3"
+              right="3"/>
+        </border>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ScopeNameFigure"
+            text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ScopeParentNameFigure"
+            text="[none]">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="gray"/>
+        </children>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.59/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.59/@actualFigure/@children.1"/>
+    </descriptors>
   </figures>
   <nodes
       name="EventTrigger"
@@ -1711,6 +1750,9 @@
   <nodes
       name="Gate"
       figure="GateFigure"/>
+  <nodes
+      name="Scope"
+      figure="ScopeFigure"/>
   <connections
       name="DataFlowEdge"
       figure="DataFlowEdgeFigure"/>
@@ -2095,4 +2137,13 @@
       figure="GateFigure"
       elementIcon="false"
       accessor="//@figures.0/@descriptors.58/@accessors.1"/>
+  <labels
+      name="ScopeName"
+      figure="ScopeFigure"
+      accessor="//@figures.0/@descriptors.59/@accessors.0"/>
+  <labels
+      name="ScopeParentName"
+      figure="GateFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.59/@accessors.1"/>
 </gmfgraph:Canvas>

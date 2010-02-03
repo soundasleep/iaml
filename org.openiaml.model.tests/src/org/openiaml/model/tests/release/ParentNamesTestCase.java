@@ -36,6 +36,7 @@ public class ParentNamesTestCase extends XmlTestCase {
 		"CompositeCondition",
 		"Button",
 		"Gate",
+		"Scope",
 	};
 	
 	/**

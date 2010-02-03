@@ -32,7 +32,7 @@ import org.eclipse.emf.common.util.EList;
  * @model annotation="http://openiaml.org/comment comment='Scope supertype added in 0.2\r\n_shouldnt_properties removed in 0.4'"
  * @generated
  */
-public interface CompositeOperation extends PrimitiveOperation, ContainsOperations, ContainsWires, GeneratesElements, Scope, ContainsConditions {
+public interface CompositeOperation extends PrimitiveOperation, ContainsOperations, ContainsWires, GeneratesElements, AbstractScope, ContainsConditions {
 	/**
 	 * Returns the value of the '<em><b>Nodes</b></em>' containment reference list.
 	 * The list contents are of type {@link org.openiaml.model.model.ActivityNode}.

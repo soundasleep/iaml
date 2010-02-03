@@ -6,15 +6,21 @@
  */
 package org.openiaml.model.model.visual.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+import org.openiaml.model.model.AbstractScope;
 import org.openiaml.model.model.ModelPackage;
-import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.components.Gate;
 import org.openiaml.model.model.impl.VisibleThingImpl;
+import org.openiaml.model.model.scopes.Scope;
 import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.visual.VisualPackage;
 
@@ -27,6 +33,7 @@ import org.openiaml.model.model.visual.VisualPackage;
  * <ul>
  *   <li>{@link org.openiaml.model.model.visual.impl.PageImpl#getGate <em>Gate</em>}</li>
  *   <li>{@link org.openiaml.model.model.visual.impl.PageImpl#getUrl <em>Url</em>}</li>
+ *   <li>{@link org.openiaml.model.model.visual.impl.PageImpl#getScopes <em>Scopes</em>}</li>
  * </ul>
  * </p>
  *
@@ -62,6 +69,16 @@ public class PageImpl extends VisibleThingImpl implements Page {
 	 * @ordered
 	 */
 	protected String url = URL_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getScopes() <em>Scopes</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getScopes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Scope> scopes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -151,11 +168,25 @@ public class PageImpl extends VisibleThingImpl implements Page {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Scope> getScopes() {
+		if (scopes == null) {
+			scopes = new EObjectContainmentEList<Scope>(Scope.class, this, VisualPackage.PAGE__SCOPES);
+		}
+		return scopes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case VisualPackage.PAGE__GATE:
 				return basicSetGate(null, msgs);
+			case VisualPackage.PAGE__SCOPES:
+				return ((InternalEList<?>)getScopes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -172,6 +203,8 @@ public class PageImpl extends VisibleThingImpl implements Page {
 				return getGate();
 			case VisualPackage.PAGE__URL:
 				return getUrl();
+			case VisualPackage.PAGE__SCOPES:
+				return getScopes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -181,6 +214,7 @@ public class PageImpl extends VisibleThingImpl implements Page {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -189,6 +223,10 @@ public class PageImpl extends VisibleThingImpl implements Page {
 				return;
 			case VisualPackage.PAGE__URL:
 				setUrl((String)newValue);
+				return;
+			case VisualPackage.PAGE__SCOPES:
+				getScopes().clear();
+				getScopes().addAll((Collection<? extends Scope>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -208,6 +246,9 @@ public class PageImpl extends VisibleThingImpl implements Page {
 			case VisualPackage.PAGE__URL:
 				setUrl(URL_EDEFAULT);
 				return;
+			case VisualPackage.PAGE__SCOPES:
+				getScopes().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -224,6 +265,8 @@ public class PageImpl extends VisibleThingImpl implements Page {
 				return gate != null;
 			case VisualPackage.PAGE__URL:
 				return URL_EDEFAULT == null ? url != null : !URL_EDEFAULT.equals(url);
+			case VisualPackage.PAGE__SCOPES:
+				return scopes != null && !scopes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -235,9 +278,9 @@ public class PageImpl extends VisibleThingImpl implements Page {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == Scope.class) {
+		if (baseClass == AbstractScope.class) {
 			switch (derivedFeatureID) {
-				case VisualPackage.PAGE__GATE: return ModelPackage.SCOPE__GATE;
+				case VisualPackage.PAGE__GATE: return ModelPackage.ABSTRACT_SCOPE__GATE;
 				default: return -1;
 			}
 		}
@@ -251,9 +294,9 @@ public class PageImpl extends VisibleThingImpl implements Page {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == Scope.class) {
+		if (baseClass == AbstractScope.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.SCOPE__GATE: return VisualPackage.PAGE__GATE;
+				case ModelPackage.ABSTRACT_SCOPE__GATE: return VisualPackage.PAGE__GATE;
 				default: return -1;
 			}
 		}

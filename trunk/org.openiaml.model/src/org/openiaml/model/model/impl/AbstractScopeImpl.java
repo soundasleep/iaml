@@ -18,30 +18,30 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.openiaml.model.model.AbstractScope;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.ModelPackage;
-import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.components.Gate;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Scope</b></em>'.
+ * An implementation of the model object '<em><b>Abstract Scope</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getGeneratedElements <em>Generated Elements</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#isOverridden <em>Overridden</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getWires <em>Wires</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getGate <em>Gate</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.AbstractScopeImpl#getGeneratedElements <em>Generated Elements</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.AbstractScopeImpl#isOverridden <em>Overridden</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.AbstractScopeImpl#getWires <em>Wires</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.AbstractScopeImpl#getGate <em>Gate</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ScopeImpl extends EObjectImpl implements Scope {
+public abstract class AbstractScopeImpl extends EObjectImpl implements AbstractScope {
 	/**
 	 * The cached value of the '{@link #getGeneratedElements() <em>Generated Elements</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -97,7 +97,7 @@ public class ScopeImpl extends EObjectImpl implements Scope {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ScopeImpl() {
+	protected AbstractScopeImpl() {
 		super();
 	}
 
@@ -108,7 +108,7 @@ public class ScopeImpl extends EObjectImpl implements Scope {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ModelPackage.Literals.SCOPE;
+		return ModelPackage.Literals.ABSTRACT_SCOPE;
 	}
 
 	/**
@@ -118,7 +118,7 @@ public class ScopeImpl extends EObjectImpl implements Scope {
 	 */
 	public EList<GeneratedElement> getGeneratedElements() {
 		if (generatedElements == null) {
-			generatedElements = new EObjectWithInverseResolvingEList.ManyInverse<GeneratedElement>(GeneratedElement.class, this, ModelPackage.SCOPE__GENERATED_ELEMENTS, ModelPackage.GENERATED_ELEMENT__GENERATED_BY);
+			generatedElements = new EObjectWithInverseResolvingEList.ManyInverse<GeneratedElement>(GeneratedElement.class, this, ModelPackage.ABSTRACT_SCOPE__GENERATED_ELEMENTS, ModelPackage.GENERATED_ELEMENT__GENERATED_BY);
 		}
 		return generatedElements;
 	}
@@ -141,7 +141,7 @@ public class ScopeImpl extends EObjectImpl implements Scope {
 		boolean oldOverridden = overridden;
 		overridden = newOverridden;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.SCOPE__OVERRIDDEN, oldOverridden, overridden));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ABSTRACT_SCOPE__OVERRIDDEN, oldOverridden, overridden));
 	}
 
 	/**
@@ -151,7 +151,7 @@ public class ScopeImpl extends EObjectImpl implements Scope {
 	 */
 	public EList<WireEdge> getWires() {
 		if (wires == null) {
-			wires = new EObjectContainmentEList<WireEdge>(WireEdge.class, this, ModelPackage.SCOPE__WIRES);
+			wires = new EObjectContainmentEList<WireEdge>(WireEdge.class, this, ModelPackage.ABSTRACT_SCOPE__WIRES);
 		}
 		return wires;
 	}
@@ -174,7 +174,7 @@ public class ScopeImpl extends EObjectImpl implements Scope {
 		Gate oldGate = gate;
 		gate = newGate;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.SCOPE__GATE, oldGate, newGate);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.ABSTRACT_SCOPE__GATE, oldGate, newGate);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -189,14 +189,14 @@ public class ScopeImpl extends EObjectImpl implements Scope {
 		if (newGate != gate) {
 			NotificationChain msgs = null;
 			if (gate != null)
-				msgs = ((InternalEObject)gate).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.SCOPE__GATE, null, msgs);
+				msgs = ((InternalEObject)gate).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.ABSTRACT_SCOPE__GATE, null, msgs);
 			if (newGate != null)
-				msgs = ((InternalEObject)newGate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.SCOPE__GATE, null, msgs);
+				msgs = ((InternalEObject)newGate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.ABSTRACT_SCOPE__GATE, null, msgs);
 			msgs = basicSetGate(newGate, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.SCOPE__GATE, newGate, newGate));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ABSTRACT_SCOPE__GATE, newGate, newGate));
 	}
 
 	/**
@@ -208,7 +208,7 @@ public class ScopeImpl extends EObjectImpl implements Scope {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ModelPackage.SCOPE__GENERATED_ELEMENTS:
+			case ModelPackage.ABSTRACT_SCOPE__GENERATED_ELEMENTS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGeneratedElements()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -222,11 +222,11 @@ public class ScopeImpl extends EObjectImpl implements Scope {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ModelPackage.SCOPE__GENERATED_ELEMENTS:
+			case ModelPackage.ABSTRACT_SCOPE__GENERATED_ELEMENTS:
 				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
-			case ModelPackage.SCOPE__WIRES:
+			case ModelPackage.ABSTRACT_SCOPE__WIRES:
 				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
-			case ModelPackage.SCOPE__GATE:
+			case ModelPackage.ABSTRACT_SCOPE__GATE:
 				return basicSetGate(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -240,13 +240,13 @@ public class ScopeImpl extends EObjectImpl implements Scope {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ModelPackage.SCOPE__GENERATED_ELEMENTS:
+			case ModelPackage.ABSTRACT_SCOPE__GENERATED_ELEMENTS:
 				return getGeneratedElements();
-			case ModelPackage.SCOPE__OVERRIDDEN:
+			case ModelPackage.ABSTRACT_SCOPE__OVERRIDDEN:
 				return isOverridden();
-			case ModelPackage.SCOPE__WIRES:
+			case ModelPackage.ABSTRACT_SCOPE__WIRES:
 				return getWires();
-			case ModelPackage.SCOPE__GATE:
+			case ModelPackage.ABSTRACT_SCOPE__GATE:
 				return getGate();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -261,18 +261,18 @@ public class ScopeImpl extends EObjectImpl implements Scope {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ModelPackage.SCOPE__GENERATED_ELEMENTS:
+			case ModelPackage.ABSTRACT_SCOPE__GENERATED_ELEMENTS:
 				getGeneratedElements().clear();
 				getGeneratedElements().addAll((Collection<? extends GeneratedElement>)newValue);
 				return;
-			case ModelPackage.SCOPE__OVERRIDDEN:
+			case ModelPackage.ABSTRACT_SCOPE__OVERRIDDEN:
 				setOverridden((Boolean)newValue);
 				return;
-			case ModelPackage.SCOPE__WIRES:
+			case ModelPackage.ABSTRACT_SCOPE__WIRES:
 				getWires().clear();
 				getWires().addAll((Collection<? extends WireEdge>)newValue);
 				return;
-			case ModelPackage.SCOPE__GATE:
+			case ModelPackage.ABSTRACT_SCOPE__GATE:
 				setGate((Gate)newValue);
 				return;
 		}
@@ -287,16 +287,16 @@ public class ScopeImpl extends EObjectImpl implements Scope {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ModelPackage.SCOPE__GENERATED_ELEMENTS:
+			case ModelPackage.ABSTRACT_SCOPE__GENERATED_ELEMENTS:
 				getGeneratedElements().clear();
 				return;
-			case ModelPackage.SCOPE__OVERRIDDEN:
+			case ModelPackage.ABSTRACT_SCOPE__OVERRIDDEN:
 				setOverridden(OVERRIDDEN_EDEFAULT);
 				return;
-			case ModelPackage.SCOPE__WIRES:
+			case ModelPackage.ABSTRACT_SCOPE__WIRES:
 				getWires().clear();
 				return;
-			case ModelPackage.SCOPE__GATE:
+			case ModelPackage.ABSTRACT_SCOPE__GATE:
 				setGate((Gate)null);
 				return;
 		}
@@ -311,13 +311,13 @@ public class ScopeImpl extends EObjectImpl implements Scope {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ModelPackage.SCOPE__GENERATED_ELEMENTS:
+			case ModelPackage.ABSTRACT_SCOPE__GENERATED_ELEMENTS:
 				return generatedElements != null && !generatedElements.isEmpty();
-			case ModelPackage.SCOPE__OVERRIDDEN:
+			case ModelPackage.ABSTRACT_SCOPE__OVERRIDDEN:
 				return overridden != OVERRIDDEN_EDEFAULT;
-			case ModelPackage.SCOPE__WIRES:
+			case ModelPackage.ABSTRACT_SCOPE__WIRES:
 				return wires != null && !wires.isEmpty();
-			case ModelPackage.SCOPE__GATE:
+			case ModelPackage.ABSTRACT_SCOPE__GATE:
 				return gate != null;
 		}
 		return super.eIsSet(featureID);
@@ -332,7 +332,7 @@ public class ScopeImpl extends EObjectImpl implements Scope {
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == ContainsWires.class) {
 			switch (derivedFeatureID) {
-				case ModelPackage.SCOPE__WIRES: return ModelPackage.CONTAINS_WIRES__WIRES;
+				case ModelPackage.ABSTRACT_SCOPE__WIRES: return ModelPackage.CONTAINS_WIRES__WIRES;
 				default: return -1;
 			}
 		}
@@ -348,7 +348,7 @@ public class ScopeImpl extends EObjectImpl implements Scope {
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == ContainsWires.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.CONTAINS_WIRES__WIRES: return ModelPackage.SCOPE__WIRES;
+				case ModelPackage.CONTAINS_WIRES__WIRES: return ModelPackage.ABSTRACT_SCOPE__WIRES;
 				default: return -1;
 			}
 		}
@@ -371,4 +371,4 @@ public class ScopeImpl extends EObjectImpl implements Scope {
 		return result.toString();
 	}
 
-} //ScopeImpl
+} //AbstractScopeImpl

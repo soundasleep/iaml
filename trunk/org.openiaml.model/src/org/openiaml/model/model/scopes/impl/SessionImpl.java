@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.openiaml.model.model.AbstractScope;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.Condition;
@@ -30,13 +31,13 @@ import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.components.Gate;
+import org.openiaml.model.model.scopes.Scope;
 import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.scopes.Session;
 
@@ -64,6 +65,7 @@ import org.openiaml.model.model.scopes.Session;
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getValues <em>Values</em>}</li>
+ *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getScopes <em>Scopes</em>}</li>
  * </ul>
  * </p>
  *
@@ -289,6 +291,16 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 * @ordered
 	 */
 	protected EList<StaticValue> values;
+
+	/**
+	 * The cached value of the '{@link #getScopes() <em>Scopes</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getScopes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Scope> scopes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -582,6 +594,18 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Scope> getScopes() {
+		if (scopes == null) {
+			scopes = new EObjectContainmentEList<Scope>(Scope.class, this, ScopesPackage.SESSION__SCOPES);
+		}
+		return scopes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<Operation> getOperations() {
 		if (operations == null) {
 			operations = new EObjectContainmentEList<Operation>(Operation.class, this, ScopesPackage.SESSION__OPERATIONS);
@@ -642,6 +666,8 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__VALUES:
 				return ((InternalEList<?>)getValues()).basicRemove(otherEnd, msgs);
+			case ScopesPackage.SESSION__SCOPES:
+				return ((InternalEList<?>)getScopes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -688,6 +714,8 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return getProperties();
 			case ScopesPackage.SESSION__VALUES:
 				return getValues();
+			case ScopesPackage.SESSION__SCOPES:
+				return getScopes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -763,6 +791,10 @@ public class SessionImpl extends EObjectImpl implements Session {
 				getValues().clear();
 				getValues().addAll((Collection<? extends StaticValue>)newValue);
 				return;
+			case ScopesPackage.SESSION__SCOPES:
+				getScopes().clear();
+				getScopes().addAll((Collection<? extends Scope>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -826,6 +858,9 @@ public class SessionImpl extends EObjectImpl implements Session {
 			case ScopesPackage.SESSION__VALUES:
 				getValues().clear();
 				return;
+			case ScopesPackage.SESSION__SCOPES:
+				getScopes().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -872,6 +907,8 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return properties != null && !properties.isEmpty();
 			case ScopesPackage.SESSION__VALUES:
 				return values != null && !values.isEmpty();
+			case ScopesPackage.SESSION__SCOPES:
+				return scopes != null && !scopes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -902,9 +939,9 @@ public class SessionImpl extends EObjectImpl implements Session {
 				default: return -1;
 			}
 		}
-		if (baseClass == Scope.class) {
+		if (baseClass == AbstractScope.class) {
 			switch (derivedFeatureID) {
-				case ScopesPackage.SESSION__GATE: return ModelPackage.SCOPE__GATE;
+				case ScopesPackage.SESSION__GATE: return ModelPackage.ABSTRACT_SCOPE__GATE;
 				default: return -1;
 			}
 		}
@@ -966,9 +1003,9 @@ public class SessionImpl extends EObjectImpl implements Session {
 				default: return -1;
 			}
 		}
-		if (baseClass == Scope.class) {
+		if (baseClass == AbstractScope.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.SCOPE__GATE: return ScopesPackage.SESSION__GATE;
+				case ModelPackage.ABSTRACT_SCOPE__GATE: return ScopesPackage.SESSION__GATE;
 				default: return -1;
 			}
 		}

@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.openiaml.model.model.AbstractScope;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Condition;
@@ -28,7 +29,6 @@ import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.TemporaryVariable;
 import org.openiaml.model.model.components.Gate;
@@ -567,9 +567,9 @@ public class CompositeOperationImpl extends PrimitiveOperationImpl implements Co
 				default: return -1;
 			}
 		}
-		if (baseClass == Scope.class) {
+		if (baseClass == AbstractScope.class) {
 			switch (derivedFeatureID) {
-				case ModelPackage.COMPOSITE_OPERATION__GATE: return ModelPackage.SCOPE__GATE;
+				case ModelPackage.COMPOSITE_OPERATION__GATE: return ModelPackage.ABSTRACT_SCOPE__GATE;
 				default: return -1;
 			}
 		}
@@ -602,9 +602,9 @@ public class CompositeOperationImpl extends PrimitiveOperationImpl implements Co
 				default: return -1;
 			}
 		}
-		if (baseClass == Scope.class) {
+		if (baseClass == AbstractScope.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.SCOPE__GATE: return ModelPackage.COMPOSITE_OPERATION__GATE;
+				case ModelPackage.ABSTRACT_SCOPE__GATE: return ModelPackage.COMPOSITE_OPERATION__GATE;
 				default: return -1;
 			}
 		}

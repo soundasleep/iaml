@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.openiaml.model.model.AbstractScope;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
@@ -44,7 +45,6 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.QueryParameter;
-import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.TemporaryVariable;
@@ -256,7 +256,7 @@ public class ModelSwitch<T> {
 				T result = caseCompositeOperation(compositeOperation);
 				if (result == null) result = casePrimitiveOperation(compositeOperation);
 				if (result == null) result = caseContainsOperations(compositeOperation);
-				if (result == null) result = caseScope(compositeOperation);
+				if (result == null) result = caseAbstractScope(compositeOperation);
 				if (result == null) result = caseContainsConditions(compositeOperation);
 				if (result == null) result = caseOperation(compositeOperation);
 				if (result == null) result = caseExecutionEdgesSource(compositeOperation);
@@ -362,7 +362,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseContainsOperations(internetApplication);
 				if (result == null) result = caseContainsEventTriggers(internetApplication);
 				if (result == null) result = caseNamedElement(internetApplication);
-				if (result == null) result = caseScope(internetApplication);
+				if (result == null) result = caseAbstractScope(internetApplication);
 				if (result == null) result = caseContainsConditions(internetApplication);
 				if (result == null) result = caseGeneratedElement(internetApplication);
 				if (result == null) result = caseContainsWires(internetApplication);
@@ -500,11 +500,11 @@ public class ModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.SCOPE: {
-				Scope scope = (Scope)theEObject;
-				T result = caseScope(scope);
-				if (result == null) result = caseGeneratesElements(scope);
-				if (result == null) result = caseContainsWires(scope);
+			case ModelPackage.ABSTRACT_SCOPE: {
+				AbstractScope abstractScope = (AbstractScope)theEObject;
+				T result = caseAbstractScope(abstractScope);
+				if (result == null) result = caseGeneratesElements(abstractScope);
+				if (result == null) result = caseContainsWires(abstractScope);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1101,17 +1101,17 @@ public class ModelSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Scope</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Abstract Scope</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Scope</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Abstract Scope</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseScope(Scope object) {
+	public T caseAbstractScope(AbstractScope object) {
 		return null;
 	}
 

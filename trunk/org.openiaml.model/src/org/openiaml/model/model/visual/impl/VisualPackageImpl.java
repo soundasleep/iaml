@@ -9,6 +9,7 @@ package org.openiaml.model.model.visual.impl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.components.ComponentsPackage;
@@ -173,6 +174,15 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getPage_Scopes() {
+		return (EReference)pageEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getInputForm() {
 		return inputFormEClass;
 	}
@@ -225,6 +235,7 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 		// Create classes and their features
 		pageEClass = createEClass(PAGE);
 		createEAttribute(pageEClass, PAGE__URL);
+		createEReference(pageEClass, PAGE__SCOPES);
 
 		inputFormEClass = createEClass(INPUT_FORM);
 
@@ -258,6 +269,7 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 
 		// Obtain other dependent packages
 		ModelPackage theModelPackage = (ModelPackage)EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI);
+		ScopesPackage theScopesPackage = (ScopesPackage)EPackage.Registry.INSTANCE.getEPackage(ScopesPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -265,7 +277,7 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 
 		// Add supertypes to classes
 		pageEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
-		pageEClass.getESuperTypes().add(theModelPackage.getScope());
+		pageEClass.getESuperTypes().add(theModelPackage.getAbstractScope());
 		inputFormEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
 		inputTextFieldEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
 		buttonEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
@@ -273,6 +285,7 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 		// Initialize classes and features; add operations and parameters
 		initEClass(pageEClass, Page.class, "Page", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPage_Url(), ecorePackage.getEString(), "url", null, 0, 1, Page.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPage_Scopes(), theScopesPackage.getScope(), null, "scopes", null, 0, -1, Page.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(inputFormEClass, InputForm.class, "InputForm", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -301,7 +314,13 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 		   new String[] {
 			 "comment", "Scope supertype added in 0.2",
 			 "comment2", "represents the scope Window"
-		   });					
+		   });			
+		addAnnotation
+		  (getPage_Scopes(), 
+		   source, 
+		   new String[] {
+			 "added", "0.4.2"
+		   });				
 		addAnnotation
 		  (buttonEClass, 
 		   source, 
@@ -323,7 +342,7 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Represents a single browser window instance."
-		   });		
+		   });			
 		addAnnotation
 		  (inputFormEClass, 
 		   source, 

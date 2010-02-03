@@ -10,6 +10,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.openiaml.model.model.AbstractScope;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
@@ -44,7 +45,6 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.QueryParameter;
-import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.TemporaryVariable;
@@ -250,8 +250,8 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createDomainObjectInstanceAdapter();
 			}
 			@Override
-			public Adapter caseScope(Scope object) {
-				return createScopeAdapter();
+			public Adapter caseAbstractScope(AbstractScope object) {
+				return createAbstractScopeAdapter();
 			}
 			@Override
 			public Adapter caseCondition(Condition object) {
@@ -784,16 +784,16 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.Scope <em>Scope</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.AbstractScope <em>Abstract Scope</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.openiaml.model.model.Scope
+	 * @see org.openiaml.model.model.AbstractScope
 	 * @generated
 	 */
-	public Adapter createScopeAdapter() {
+	public Adapter createAbstractScopeAdapter() {
 		return null;
 	}
 

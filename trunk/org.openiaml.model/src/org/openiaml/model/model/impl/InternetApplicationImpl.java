@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.openiaml.model.model.AbstractScope;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.Condition;
@@ -32,9 +33,9 @@ import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.components.Gate;
+import org.openiaml.model.model.scopes.Scope;
 import org.openiaml.model.model.scopes.Session;
 
 /**
@@ -61,6 +62,7 @@ import org.openiaml.model.model.scopes.Session;
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getDomainStores <em>Domain Stores</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getRuntimeUrl <em>Runtime Url</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getSessions <em>Sessions</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getScopes <em>Scopes</em>}</li>
  * </ul>
  * </p>
  *
@@ -296,6 +298,16 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * @ordered
 	 */
 	protected EList<Session> sessions;
+
+	/**
+	 * The cached value of the '{@link #getScopes() <em>Scopes</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getScopes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Scope> scopes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -610,6 +622,18 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Scope> getScopes() {
+		if (scopes == null) {
+			scopes = new EObjectContainmentEList<Scope>(Scope.class, this, ModelPackage.INTERNET_APPLICATION__SCOPES);
+		}
+		return scopes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -652,6 +676,8 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return ((InternalEList<?>)getDomainStores()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__SESSIONS:
 				return ((InternalEList<?>)getSessions()).basicRemove(otherEnd, msgs);
+			case ModelPackage.INTERNET_APPLICATION__SCOPES:
+				return ((InternalEList<?>)getScopes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -698,6 +724,8 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return getRuntimeUrl();
 			case ModelPackage.INTERNET_APPLICATION__SESSIONS:
 				return getSessions();
+			case ModelPackage.INTERNET_APPLICATION__SCOPES:
+				return getScopes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -772,6 +800,10 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				getSessions().clear();
 				getSessions().addAll((Collection<? extends Session>)newValue);
 				return;
+			case ModelPackage.INTERNET_APPLICATION__SCOPES:
+				getScopes().clear();
+				getScopes().addAll((Collection<? extends Scope>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -835,6 +867,9 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 			case ModelPackage.INTERNET_APPLICATION__SESSIONS:
 				getSessions().clear();
 				return;
+			case ModelPackage.INTERNET_APPLICATION__SCOPES:
+				getScopes().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -881,6 +916,8 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return RUNTIME_URL_EDEFAULT == null ? runtimeUrl != null : !RUNTIME_URL_EDEFAULT.equals(runtimeUrl);
 			case ModelPackage.INTERNET_APPLICATION__SESSIONS:
 				return sessions != null && !sessions.isEmpty();
+			case ModelPackage.INTERNET_APPLICATION__SCOPES:
+				return scopes != null && !scopes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -926,9 +963,9 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				default: return -1;
 			}
 		}
-		if (baseClass == Scope.class) {
+		if (baseClass == AbstractScope.class) {
 			switch (derivedFeatureID) {
-				case ModelPackage.INTERNET_APPLICATION__GATE: return ModelPackage.SCOPE__GATE;
+				case ModelPackage.INTERNET_APPLICATION__GATE: return ModelPackage.ABSTRACT_SCOPE__GATE;
 				default: return -1;
 			}
 		}
@@ -982,9 +1019,9 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				default: return -1;
 			}
 		}
-		if (baseClass == Scope.class) {
+		if (baseClass == AbstractScope.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.SCOPE__GATE: return ModelPackage.INTERNET_APPLICATION__GATE;
+				case ModelPackage.ABSTRACT_SCOPE__GATE: return ModelPackage.INTERNET_APPLICATION__GATE;
 				default: return -1;
 			}
 		}

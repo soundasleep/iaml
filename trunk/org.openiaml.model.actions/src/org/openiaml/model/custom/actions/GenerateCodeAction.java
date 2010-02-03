@@ -21,6 +21,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
+import org.openiaml.model.ModelLoader;
+import org.openiaml.model.ModelLoader.ModelLoadException;
 import org.openiaml.model.actions.QuestionDialogResult;
 import org.openiaml.model.codegen.ICodeGenerator;
 import org.openiaml.model.codegen.php.CheckModelInstance;
@@ -68,12 +70,21 @@ public class GenerateCodeAction extends IamlFileAction {
 	 */
 	@Override
 	public IStatus doExecute(IFile o, IProgressMonitor monitor) throws InferenceException, IOException, CoreException {
-		monitor.beginTask("Generating code for file '" + o.getName() + "'", 130);
+		monitor.beginTask("Generating code for file '" + o.getName() + "'", 140);
+
+		// first, load the model
+		monitor.subTask("Loading model");
+		try {
+			model = ModelLoader.load(o);
+		} catch (ModelLoadException e) {
+			return errorStatus(e);
+		}
+		monitor.worked(10);
 		
 		// first, run OAW checks to check that the initial model instance is valid
 		monitor.subTask("Checking initial model instance");
 		CheckModelInstance check = new CheckModelInstance();
-		final IStatus result = check.checkModel(o, new SubProgressMonitor(monitor, 30));
+		final IStatus result = check.checkModel(model, o.getProject(), new SubProgressMonitor(monitor, 30));
 		final QuestionDialogResult answer = new QuestionDialogResult();
 		
 		if (monitor.isCanceled())
@@ -135,23 +146,10 @@ public class GenerateCodeAction extends IamlFileAction {
 		if (monitor.isCanceled())
 			return Status.CANCEL_STATUS;
 
-		// try and load the file directly
-		ResourceSet resourceSet = new ResourceSetImpl();
-		Resource resource = resourceSet.getResource(URI.createFileURI(o.getLocation().toString()), true);
-		
 		// load the inference elements manager
-		EcoreInferenceHandler handler = new EcoreInferenceHandler(resource);
-		
-		// we can only do one model
-		if (resource.getContents().size() != 1) {
-			return new Status(IStatus.ERROR, PLUGIN_ID, "Could not transform model: unexpected number of model elements in file (expected: 1, found: " + resource.getContents().size() + ")");
-		}
-
-		if (monitor.isCanceled())
-			return Status.CANCEL_STATUS;
+		EcoreInferenceHandler handler = new EcoreInferenceHandler(model.eResource());
 
 		// do inference on the model
-		model = resource.getContents().get(0);
 		CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(handler, false);
 		ce.create(model, new SubProgressMonitor(monitor, 45));
 		

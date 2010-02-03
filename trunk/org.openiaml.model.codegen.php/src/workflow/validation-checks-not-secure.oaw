@@ -10,9 +10,8 @@
        	<registerGeneratedEPackage value="org.openiaml.model.model.ModelPackage" /><!-- loads subpackages -->
 	</bean>
 
-	<!-- load model and store it in slot 'model' -->
-	<component class="org.eclipse.mwe.emf.Reader">
-		<uri value="platform:/resource/${model}" />
+	<!-- get model already loaded in memory, and store it in slot 'model' -->
+	<component class="org.openiaml.model.codegen.php.CurrentModel">
 		<modelSlot value="model" />
 	</component>
 

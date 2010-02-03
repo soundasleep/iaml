@@ -20,6 +20,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.openiaml.docs.modeldoc.EMFClass;
 import org.openiaml.docs.modeldoc.ModeldocFactory;
+import org.openiaml.model.ModelLoader;
+import org.openiaml.model.ModelLoader.ModelLoadException;
 import org.openiaml.model.model.visual.VisualPackage;
 
 /**
@@ -64,14 +66,10 @@ public class Test extends TestCase {
 	/**
 	 * Load a model file directly.
 	 * Assumes that it will only contain one element (and tests this with JUnit).
+	 * @throws ModelLoadException 
 	 */
-	protected static EObject loadModelDirectly(String filename) {
-		ResourceSet resourceSet = new ResourceSetImpl();
-		URI uri = URI.createFileURI(filename);
-		Resource resource = resourceSet.getResource(uri, true);
-		assertNotNull(resource);
-		assertEquals("there should only be one contents in the model file", 1, resource.getContents().size());
-		return resource.getContents().get(0);
+	protected static EObject loadModelDirectly(String filename) throws ModelLoadException {
+		return ModelLoader.load(filename);
 	}
 	
 	/**

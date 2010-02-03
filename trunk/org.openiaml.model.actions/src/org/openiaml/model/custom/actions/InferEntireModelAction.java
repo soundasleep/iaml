@@ -13,11 +13,9 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.openiaml.model.ModelLoader;
+import org.openiaml.model.ModelLoader.ModelLoadException;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.drools.DroolsInferenceEngine;
 import org.openiaml.model.inference.EcoreInferenceHandler;
@@ -75,26 +73,24 @@ public class InferEntireModelAction extends IamlFileAction {
 	 * @throws IOException 
 	 * @throws CoreException 
 	 */
+	@Override
 	public IStatus doExecute(IFile o, IProgressMonitor monitor) throws InferenceException, FileNotFoundException, IOException, CoreException {
-		monitor.beginTask("Inferring model in file '" + o.getName() + "'", 60);
+		monitor.beginTask("Inferring model in file '" + o.getName() + "'", 70);
 		
 		// try and load the file directly
-		ResourceSet resourceSet = new ResourceSetImpl();
-		Resource resource = resourceSet.getResource(URI.createFileURI(o.getLocation().toString()), true);
+		monitor.subTask("Loading model");
+		try {
+			model = ModelLoader.load(o);
+		} catch (ModelLoadException e) {
+			return errorStatus(e);
+		}
+		monitor.worked(10);
 		
 		// load the inference elements manager
-		EcoreInferenceHandler handler = new EcoreInferenceHandler(resource);
-		
-		// we can only do one model
-		if (resource.getContents().size() != 1) {
-			return new Status(IStatus.ERROR, PLUGIN_ID, "Could not transform model: unexpected number of model elements in file (expected: 1, found: " + resource.getContents().size() + ")");
-		}
-
-		if (monitor.isCanceled())
-			return Status.CANCEL_STATUS;
+		EcoreInferenceHandler handler = new EcoreInferenceHandler(model.eResource());
 
 		// do inference on the model
-		model = resource.getContents().get(0);
+		monitor.subTask("Perfoming inference");
 		DroolsInferenceEngine ce = getEngine(handler);
 		ce.create(model, new SubProgressMonitor(monitor, 45));
 
@@ -118,8 +114,8 @@ public class InferEntireModelAction extends IamlFileAction {
 		
 		// create a temporary file to output to
 		File tempJavaFile = File.createTempFile("temp-iaml", ".iaml");
-		Map<?,?> options = resourceSet.getLoadOptions();
-		resource.save(new FileOutputStream(tempJavaFile), options);
+		Map<?,?> options = model.eResource().getResourceSet().getLoadOptions();
+		model.eResource().save(new FileOutputStream(tempJavaFile), options);
 		
 		monitor.worked(5);
 		monitor.subTask("Saving to IFile");

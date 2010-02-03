@@ -19,6 +19,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.openiaml.model.ModelLoader;
+import org.openiaml.model.ModelLoader.ModelLoadException;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.drools.DroolsInferenceEngine;
 import org.openiaml.model.inference.EcoreInferenceHandler;
@@ -83,25 +85,22 @@ public class RemovePhantomEdgesAction extends IamlFileAction {
 	 * @throws IOException 
 	 * @throws CoreException 
 	 */
+	@Override
 	public IStatus doExecute(IFile o, IProgressMonitor monitor2) throws InferenceException, FileNotFoundException, IOException, CoreException {
 		IProgressMonitor monitor = new InfiniteSubProgressMonitor(monitor2, 100);
 		
 		monitor.beginTask("Removing phantom edges: '" + o.getName() + "'", 60);
 		
-		// try and load the file directly
-		ResourceSet resourceSet = new ResourceSetImpl();
-		Resource resource = resourceSet.getResource(URI.createFileURI(o.getLocation().toString()), true);
+		monitor.subTask("Loading model");
+		try {
+			loadedModel = ModelLoader.load(o);
+		} catch (ModelLoadException e) {
+			return errorStatus(e);
+		}
+		monitor.worked(10);
 		
 		// load the handler to remove elements
-		EcoreInferenceHandler handler = new EcoreInferenceHandler(resource);
-		
-		// we can only do one model
-		if (resource.getContents().size() != 1) {
-			return new Status(IStatus.ERROR, PLUGIN_ID, "Could not transform model: unexpected number of model elements in file (expected: 1, found: " + resource.getContents().size() + ")");
-		}
-		
-		// remove phantom edges
-		loadedModel = resource.getContents().get(0);
+		EcoreInferenceHandler handler = new EcoreInferenceHandler(loadedModel.eResource());
 		
 		// we need to store elements to delete in a buffer, or else
 		// deleting elements will affect the iterator and cause exceptions
@@ -110,6 +109,7 @@ public class RemovePhantomEdgesAction extends IamlFileAction {
 		if (monitor.isCanceled())
 			return Status.CANCEL_STATUS;
 
+		monitor.subTask("Identifying phantom edges");
 		Iterator<EObject> it = loadedModel.eAllContents();
 		while (it.hasNext()) {
 			EObject obj = it.next();
@@ -123,20 +123,25 @@ public class RemovePhantomEdgesAction extends IamlFileAction {
 				// remove this one
 				elementsToDelete.add(obj);
 			}
-			monitor.worked(1);
 		}
+		monitor.worked(30);
+		if (monitor.isCanceled())
+			return Status.CANCEL_STATUS;
+		
+		monitor.subTask("Removing phantom edges");
 		for (EObject obj : elementsToDelete) {
 			if (obj.eContainer() != null) {
 				handler.deleteElement(obj, obj.eContainer(), obj.eContainingFeature());
 			}
 		}
+		monitor.worked(10);
 
 		if (monitor.isCanceled())
 			return Status.CANCEL_STATUS;
 
 		// save it
 		monitor.subTask("Saving");
-		resource.save(getSaveOptions());
+		loadedModel.eResource().save(getSaveOptions());
 		
 		// finished
 		monitor.done();

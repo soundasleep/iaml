@@ -7,14 +7,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.emf.ecore.EObject;
 import org.openarchitectureware.workflow.WorkflowRunner;
 import org.openarchitectureware.workflow.util.ProgressMonitorAdapter;
+import org.openiaml.model.codegen.php.CurrentModel;
 import org.openiaml.model.codegen.php.CustomOAWLog;
 
 /**
@@ -43,15 +46,15 @@ public class ValidateModelInstance {
 	public static final String PLUGIN_ID = "org.openiaml.model.codegen.php"; 
 	
 	/**
-	 * Check the instance in a given model file.
+	 * Check the instance in a given model.
 	 * 
 	 * Returns an OK status, or a MultiStatus containing any 
 	 * errors or warnings found.
 	 * 
 	 */
-	public IStatus checkModel(IFile file, IProgressMonitor monitor) {
+	public IStatus checkModel(EObject model, IProject project, IProgressMonitor monitor) {
 
-		monitor.beginTask("Checking model instance '" + file.getName() + "'", 1);
+		monitor.beginTask("Checking model instance", 1);
 		
 		/*
 		 * We have to do some magic to enable OAW logging to go through
@@ -73,7 +76,9 @@ public class ValidateModelInstance {
 			
 			String wfFile = workflow;
 			Map<String,String> properties = new HashMap<String,String>();
-			properties.put("model", file.getFullPath().toString());
+
+			// load the model into the static slot
+			CurrentModel.setCurrentModel(model);
 			
 			Map<String,Object> slotContents = new HashMap<String,Object>();
 			
@@ -81,7 +86,7 @@ public class ValidateModelInstance {
 			
 			// refresh output folder
 			try {
-				file.getProject().refreshLocal(IResource.DEPTH_INFINITE, new SubProgressMonitor(monitor, 1));
+				project.refreshLocal(IResource.DEPTH_INFINITE, new SubProgressMonitor(monitor, 1));
 			} catch (CoreException e) {
 				return new Status(Status.WARNING, PLUGIN_ID, "Could not refresh local project", e);
 			}
@@ -94,6 +99,9 @@ public class ValidateModelInstance {
 			// reset the classloader/log
 			Thread.currentThread().setContextClassLoader(oldcl);
 			CustomOAWLog.unregisterFromLogFactory();
+			
+			// remove the loaded model
+			CurrentModel.setCurrentModel(null);
 			
 			// the monitor is done
 			monitor.done();

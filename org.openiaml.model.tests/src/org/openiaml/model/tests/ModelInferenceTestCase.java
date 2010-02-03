@@ -26,6 +26,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.jaxen.JaxenException;
 import org.openiaml.emf.SoftCache;
+import org.openiaml.model.ModelLoader;
+import org.openiaml.model.ModelLoader.ModelLoadException;
 import org.openiaml.model.codegen.php.CheckModelInstance;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.inference.EcoreInferenceHandler;
@@ -360,17 +362,20 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	 * Assumes that it will only contain one element (and tests this with JUnit).
 	 */
 	protected static EObject loadModelDirectly(String filename) {
-		logTimed("emf: loading model");
+		try {
+			
+			logTimed("emf: loading model");
+			
+			EObject model = ModelLoader.load(filename);
+
+			logTimed("emf: after loading model");
+			return model;
+			
+		} catch (ModelLoadException e) {
+			// fail immediately
+			throw new RuntimeException(e);
+		}
 		
-		ResourceSet resourceSet = new ResourceSetImpl();
-		URI uri = URI.createFileURI(filename);
-		Resource resource = resourceSet.getResource(uri, true);
-		assertNotNull(resource);
-		assertEquals("there should only be one contents in the model file", 1, resource.getContents().size());
-		EObject model = resource.getContents().get(0);
-		
-		logTimed("emf: after loading model");
-		return model;
 	}
 
 	/**
@@ -937,7 +942,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 		assertTrue("File '" + target + "' should now exist", target.exists());
 		
 		CheckModelInstance check = new CheckModelInstance();
-		IStatus result = check.checkModel(target, new NullProgressMonitor());
+		IStatus result = check.checkModel(root, getProject(), new NullProgressMonitor());
 		
 		ModelInferenceTestCase.assertStatusIsOK(result);
 		

@@ -7,12 +7,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.emf.ecore.EObject;
 import org.openarchitectureware.workflow.WorkflowRunner;
 import org.openarchitectureware.workflow.util.ProgressMonitorAdapter;
 
@@ -38,9 +40,9 @@ public class CheckModelInstance {
 	 * errors or warnings found.
 	 * 
 	 */
-	public IStatus checkModel(IFile file, IProgressMonitor monitor) {
+	public IStatus checkModel(EObject model, IProject project, IProgressMonitor monitor) {
 
-		monitor.beginTask("Checking model instance '" + file.getName() + "'", 1);
+		monitor.beginTask("Checking model instance", 1);
 		
 		/*
 		 * We have to do some magic to enable OAW logging to go through
@@ -62,7 +64,9 @@ public class CheckModelInstance {
 			
 			String wfFile = "src/workflow/checks.oaw";
 			Map<String,String> properties = new HashMap<String,String>();
-			properties.put("model", file.getFullPath().toString());
+
+			// load the model into the static slot
+			CurrentModel.setCurrentModel(model);
 			
 			Map<String,Object> slotContents = new HashMap<String,Object>();
 			
@@ -70,7 +74,7 @@ public class CheckModelInstance {
 			
 			// refresh output folder
 			try {
-				file.getProject().refreshLocal(IResource.DEPTH_INFINITE, new SubProgressMonitor(monitor, 1));
+				project.refreshLocal(IResource.DEPTH_INFINITE, new SubProgressMonitor(monitor, 1));
 			} catch (CoreException e) {
 				return new Status(Status.WARNING, PLUGIN_ID, "Could not refresh local project", e);
 			}
@@ -83,6 +87,9 @@ public class CheckModelInstance {
 			// reset the classloader/log
 			Thread.currentThread().setContextClassLoader(oldcl);
 			CustomOAWLog.unregisterFromLogFactory();
+			
+			// remove the loaded model
+			CurrentModel.setCurrentModel(null);
 			
 			// the monitor is done
 			monitor.done();

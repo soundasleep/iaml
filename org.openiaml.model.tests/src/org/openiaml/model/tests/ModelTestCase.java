@@ -37,6 +37,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.openiaml.model.codegen.ICodeGenerator;
+import org.openiaml.model.codegen.php.CustomOAWLog;
 import org.openiaml.model.codegen.php.IACleanerBeautifier;
 import org.openiaml.model.codegen.php.OawCodeGeneratorWithRuntime;
 import org.openiaml.model.tests.xpath.DefaultXpathTestCase;
@@ -85,6 +86,8 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	protected void setUp() throws Exception {
 		// parent setup
 		super.setUp();
+		
+		logTimed("model: setUp");
 		
 		monitor = new NullProgressMonitor();
 		
@@ -196,14 +199,21 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	 */
 	protected void doTransform(Class<?> cacheClass, String inputFile) throws Exception {
 		if (codegenCache.containsKey(cacheClass) && projectCache.containsKey(cacheClass)) {
+			logTimed("codegen: loading from cache");
+			
 			// load from cache
 			loadFromCache(cacheClass);
+			logTimed("codegen: load from cache complete");
 		} else {
 			// codegen manually
+			logTimed("codegen: doing actual codegen");
 			doTransformActual(inputFile);
 			
 			// update cache
+			logTimed("codegen: updating cache");
 			updateCache(cacheClass);
+			
+			logTimed("codegen: saving to cache complete");
 		}
 	}
 	
@@ -725,5 +735,36 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 		return xpath.xpathFirst(e, query);
 	}
 
+	/**
+	 * Should we log the results to TIMED_LOG_FILE?
+	 */
+	private static final boolean ENABLE_TIMED_LOG = true;
+	private static final String TIMED_LOG_FILE = "timed.log";
+	
+	/**
+	 * Extends the CustomOAWLog to allow us to also register the time it
+	 * takes for various operations. 
+	 */
+	static {
+		if (ENABLE_TIMED_LOG)
+			initaliseLogExtender();
+	}
+	
+	private static TimedOAWLogExtender extender;
+	public static void initaliseLogExtender() {
+		
+		extender = new TimedOAWLogExtender(TIMED_LOG_FILE);
+		
+		// register to CustomOAWLog
+		CustomOAWLog.setLogExtender(extender);
+		
+	}
+	
+	protected static void logTimed(String message) {
+		if (ENABLE_TIMED_LOG) {
+			extender.logDirect(message);
+		}
+	}
+	
 	
 }

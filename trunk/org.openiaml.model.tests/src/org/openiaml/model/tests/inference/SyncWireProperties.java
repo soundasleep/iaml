@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.jaxen.JaxenException;
 import org.openiaml.model.model.ApplicationElementProperty;
-import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainObject;
@@ -16,6 +15,7 @@ import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.visual.InputForm;

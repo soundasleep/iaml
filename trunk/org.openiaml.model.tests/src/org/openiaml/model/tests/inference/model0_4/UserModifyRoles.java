@@ -6,11 +6,11 @@ package org.openiaml.model.tests.inference.model0_4;
 import java.util.List;
 
 import org.openiaml.model.model.ApplicationElementProperty;
-import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.FinishNode;

@@ -3,8 +3,6 @@
  */
 package org.openiaml.model.tests.codegen.model0_4_2;
 
-import java.util.Date;
-
 import org.eclipse.core.resources.IFile;
 import org.openiaml.model.tests.CodegenTestCase;
 

@@ -4,6 +4,8 @@
 package org.openiaml.model.tests.codegen.model0_4_2;
 
 import org.eclipse.core.resources.IFile;
+import org.openiaml.model.model.components.Gate;
+import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.tests.CodegenTestCase;
 
 /**

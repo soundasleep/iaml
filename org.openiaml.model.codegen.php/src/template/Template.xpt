@@ -69,6 +69,7 @@
 	«FILE "output/add_permission.php"»«EXPAND php::includes::AddPermissionPhp::addPermissionPhp»«ENDFILE»
 	«FILE "output/remove_role.php"»«EXPAND php::includes::RemoveRolePhp::removeRolePhp»«ENDFILE»
 	«FILE "output/remove_permission.php"»«EXPAND php::includes::RemovePermissionPhp::removePermissionPhp»«ENDFILE»
+	«FILE "output/update_client_cache.php"»«EXPAND php::includes::UpdateClientCache::updateClientCache»«ENDFILE»
 	
 	«FILE "output/database_dump.php"»«EXPAND template::php::DatabaseDump::databaseDump»«ENDFILE»
 	«FILE "output/view_log.php"»«EXPAND php::includes::ViewLog::viewLog»«ENDFILE»

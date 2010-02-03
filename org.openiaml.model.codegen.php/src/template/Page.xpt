@@ -18,6 +18,7 @@ require("config.php");		// runtime library configuration
 require(IAML_RUNTIME_ROOT."global.php");	// runtime library import
 require("create_database.php");		// ensure DB exists
 require("properties_file.php");
+require("update_client_cache.php");
 
 define("CURRENT_PAGE", "«id»");
 
@@ -191,6 +192,9 @@ log_message("«id».php: Session data: " . print_r($_SESSION, true));
 		// domain instances
 		«EXPAND template::domain::Definitions::domainObjectDefinitions(false, this) FOR this-»
 		«EXPAND template::domain::Definitions::domainAttributeDefinitions(false, this) FOR this-»
+
+		// cached primitive operation values
+		«EXPAND template::operations::ClientSideCache::cachedPrimitiveOperations(this) FOR getRoot()»
 
 		/* actual page onload functions (called ONCE the page is fully loaded) */
 		var stored_onload_functions = new Array();

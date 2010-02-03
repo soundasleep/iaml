@@ -10,6 +10,7 @@
  
 require("config.php");		// runtime library configuration
 require(IAML_RUNTIME_ROOT."global.php");	// runtime library import
+require("update_client_cache.php");
 
 «EXPAND template::domain::Definitions::domainDefinitions»
 «EXPAND template::users::Includes::getInclude FOREACH eAllContents.typeSelect(model::users::Role)-»
@@ -47,5 +48,6 @@ $instance = $function_name($instance);
 
 // output any instructions
 echo "ok";
+echo_necessary_update_callbacks();
 
 «ENDDEFINE»

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.126938627f0.15">
+  <children xsi:type="iaml.visual:Page" id="index" name="Home"/>
+  <children xsi:type="iaml.visual:Page" id="visual.126aa99339d.5" name="Page 1">
+    <children xsi:type="iaml.visual:Button" id="visual.126aa99339d.12" name="go to page 2" outEdges="wires.126aa9933dc.1">
+      <wires xsi:type="iaml.wires:NavigateWire" id="wires.126aa9933dc.1" from="visual.126aa99339d.12" to="visual.126aa99339d.6" name="onClick"/>
+    </children>
+  </children>
+  <children xsi:type="iaml.visual:Page" id="visual.126aa99339d.6" name="Page 2" inEdges="wires.126aa9933dc.1"/>
+</iaml:InternetApplication>

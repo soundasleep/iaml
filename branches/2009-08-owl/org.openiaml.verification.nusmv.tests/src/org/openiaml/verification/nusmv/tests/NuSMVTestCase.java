@@ -3,23 +3,10 @@
  */
 package org.openiaml.verification.nusmv.tests;
 
-import java.util.List;
-
-import junit.framework.AssertionFailedError;
-import junit.framework.TestCase;
-
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.openiaml.verification.nusmv.NuSMVViolation;
-import org.openiaml.verification.nusmv.VerificationEngine;
-import org.openiaml.verification.nusmv.VerificationException;
 
 /**
+ * Tests all NuSMV-based verification rules.
+ * 
  * @author jmwright
  *
  */
@@ -92,6 +79,18 @@ public class NuSMVTestCase extends AbstractNuSMVTestCase {
 	public void testOperationCallOperationLoopInfinite() throws Exception {
 		assertValid("models/OperationCallOperationLoopInfinite.iaml", 1);
 
+		// TODO: check that the violation is correct
+	}
+
+	public void testNavigationNormal() throws Exception {
+		assertValid("models/navigation/Normal.iaml", 0);
+		
+		// TODO: check that the violation is correct
+	}
+
+	public void testNavigationSimpleLoop() throws Exception {
+		assertValid("models/navigation/SimpleLoop.iaml", 1);
+		
 		// TODO: check that the violation is correct
 	}
 		

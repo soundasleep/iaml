@@ -18,6 +18,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.verification.nusmv.rules.InfiniteOperationLoop;
+import org.openiaml.verification.nusmv.rules.RedirectionLoop;
 
 /**
  * An abstract engine to verify with CrocoPat.
@@ -52,6 +53,7 @@ public class VerificationEngine {
 	public List<VerificationRule> getVerificationRules() {
 		List<VerificationRule> list = new ArrayList<VerificationRule>();
 		list.add(new InfiniteOperationLoop());
+		list.add(new RedirectionLoop());
 		return list;
 	}
 	

@@ -18,4 +18,5 @@ Require-Bundle: org.eclipse.core.resources;bundle-version="3.5.0",
 Bundle-Activator: org.openiaml.verification.nusmv.VerificationNuSMVPlugin
 Bundle-ActivationPolicy: lazy
 Export-Package: org.openiaml.verification.nusmv,
- org.openiaml.verification.nusmv.oaw
+ org.openiaml.verification.nusmv.oaw,
+ org.openiaml.verification.nusmv.rules

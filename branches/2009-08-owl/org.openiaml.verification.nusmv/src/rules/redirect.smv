@@ -1,0 +1,6 @@
+
+-- checks for infinite loops in redirections 
+
+LTLSPEC
+  -- uses same format as loop.smv
+  G ((!(navigation_running = 1 -> !(F navigation_finished = 1))) U navigation_running = 0)

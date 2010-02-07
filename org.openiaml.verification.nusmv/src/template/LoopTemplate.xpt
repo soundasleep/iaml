@@ -17,10 +17,11 @@ MODULE main
 VAR
 	-- possible running operations
 	«FOREACH eAllContents.typeSelect(model::CompositeOperation) AS operation»
-		running_«safeName(operation)» : process operation_«safeName(operation)»(run_«safeName(operation)»);
+		running_«safeName(operation)» : process operation_«safeName(operation)»(run_«safeName(operation)», navigation_finished);
 		run_«safeName(operation)» : boolean;
 	«ENDFOREACH»
 
+	-- all pages
 	«IF !allPages.isEmpty»
 		current_page : {
 			null 
@@ -30,7 +31,15 @@ VAR
 		};
 	
 		-- allowing NuSMV to select pages at random
+		select_browse_to_page : {
+			«FOREACH allPages AS p SEPARATOR ", "»
+				«safeName(p)»
+			«ENDFOREACH»
+		};
+
+		-- storing the current target
 		browse_to_page : {
+			null,
 			«FOREACH allPages AS p SEPARATOR ", "»
 				«safeName(p)»
 			«ENDFOREACH»
@@ -45,8 +54,12 @@ VAR
 	-- value overflow
 	value_overflow : boolean;
 	
+	-- flags
 	operation_running : boolean;
 	operation_finished : boolean;
+	
+	navigation_running : boolean;
+	navigation_finished : boolean;
 
 ASSIGN
 	init(value_overflow) := 0;
@@ -59,6 +72,14 @@ ASSIGN
 
 	-- current_page is chosen by nusmv
 	-- click_button is chosen by nusmv
+	
+	«IF !allPages.isEmpty»
+	next(browse_to_page) := case
+		operation_running = 1 : browse_to_page;
+		navigation_running = 1 : browse_to_page;
+		1 : select_browse_to_page;
+	esac;
+	«ENDIF»
 	
 	«REM»
 	TODO I think the current implementation supports clicking two buttons
@@ -74,6 +95,9 @@ ASSIGN
 				-- still running
 				1 : 1;
 			esac;
+			
+			-- we have just accessed a page; wait until it is finished
+			navigation_running = 1 : 0;
 			
 			-- executed by accessing a page
 			«REM»
@@ -138,6 +162,16 @@ ASSIGN
 			NOTE this is a design assumption: when an operation is running, the user may not browse to another page
 			«ENDREM»
 			operation_running = 1 : current_page;
+			
+			-- we have just accessed a page which needs instant redirection?
+			«FOREACH allPages AS p»
+				«LET p.eventTriggers.select(e|e.name == "access").outEdges.typeSelect(model::wires::NavigateWire).select(w | model::visual::Page.isInstance(w.to)) AS navs»
+				«IF !navs.isEmpty»
+					current_page = «safeName(p)» : «safeName(navs.first().to)»;
+				«ENDIF»
+				«ENDLET»
+			«ENDFOREACH»
+			
 			-- browse to another page chosen by NuSMV
 			«FOREACH allPages AS p»
 				browse_to_page = «safeName(p)» : «safeName(p)»;
@@ -145,6 +179,57 @@ ASSIGN
 			1 : current_page;
 		esac;
 	«ENDIF»
+	
+	next(navigation_running) := case
+		«REM»can never navigate while an operation is running«ENDREM»
+		operation_running = 1 : 0;
+		
+		«REM»are we currently navigating?«ENDREM»
+		navigation_running = 1 : case
+			«FOREACH allPages AS p»
+				current_page = «safeName(p)» :
+					«LET p.eventTriggers.select(e|e.name == "access").outEdges.typeSelect(model::wires::NavigateWire).select(w | model::visual::Page.isInstance(w.to)) AS navs» 
+						«IF !navs.isEmpty»
+							1«REM»this page redirects to another page«ENDREM»
+						«ELSE»
+							0«REM»this page does not instantly redirect anywhere«ENDREM»
+						«ENDIF»
+					«ENDLET»
+				;
+			«ENDFOREACH»
+			1 : 0;	«REM»nothing can be run«ENDREM»
+		esac;
+		
+		«REM»have we started to browse to another page, as chosen by NuSMV?«ENDREM»
+		-- browse to another page chosen by NuSMV
+		«FOREACH allPages AS p»
+			browse_to_page = «safeName(p)» : 1;
+		«ENDFOREACH»
+		
+		-- otherwise, not navigating
+		1 : 0;
+	esac;
+	
+	next(navigation_finished) := case
+		«REM»are we currently navigating?«ENDREM»
+		navigation_running = 1 : case
+			«FOREACH allPages AS p»
+				current_page = «safeName(p)» : 
+					«LET p.eventTriggers.select(e|e.name == "access").outEdges.typeSelect(model::wires::NavigateWire).select(w | model::visual::Page.isInstance(w.to)) AS navs»
+						«IF !navs.isEmpty»
+							0«REM»this page redirects to another page«ENDREM»
+						«ELSE»
+							1«REM»this page does not instantly redirect anywhere«ENDREM»
+						«ENDIF»
+					«ENDLET»
+				;
+			«ENDFOREACH»
+			1 : 1;	«REM»it has to finish«ENDREM»
+		esac;
+		
+		-- otherwise, navigation hasn't started, so we can't finish it
+		1 : 1;	«REM»otherwise, we haven't started navigation, so we have to finish«ENDREM»
+	esac;
 
 «REM»if we only have 'main' module, we cannot have FAIRNESS«ENDREM»
 «IF !eAllContents.typeSelect(model::CompositeOperation).isEmpty»
@@ -278,7 +363,7 @@ FAIRNESS
 «ENDFOREACH»«REM»SplitNode«ENDREM»
 
 -- operation definition
-MODULE operation_«safeName()»(flag)
+MODULE operation_«safeName()»(flag, navigation_finished)
 
 VAR
 	-- has the operation completed?
@@ -313,7 +398,7 @@ VAR
 	-- operation calls
 	«FOREACH nodes.typeSelect(model::operations::OperationCallNode).outEdges.typeSelect(model::wires::RunInstanceWire).to AS call»
 		run_call_«safeName(call)» : boolean;
-		call_«safeName(call)» : process operation_«safeName(call)»(run_call_«safeName(call)»«REM»operation calls have their own variable instances«ENDREM»);
+		call_«safeName(call)» : process operation_«safeName(call)»(run_call_«safeName(call)»«REM»operation calls have their own variable instances«ENDREM», navigation_finished);
 	«ENDFOREACH»
 	
 	-- value overflow
@@ -348,6 +433,9 @@ ASSIGN
 	next(current_step) := case
 		-- operation hasn't started yet
 		current_step = null : case
+			-- has navigation finished?
+			navigation_finished = 0 : null;
+		
 			«IF selectStartNode() != null»
 			flag = 1 : «safeName(selectStartNode())»;
 			«ENDIF»

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.126aa993255.1b">
+  <children xsi:type="iaml.visual:Page" id="index" name="Home"/>
+  <children xsi:type="iaml.visual:Page" id="visual.126aa99339d.34" name="Page 1" inEdges="wires.126aa9933dc.13">
+    <eventTriggers id="model.126aa993255.21" name="access" outEdges="wires.126aa9933dc.6">
+      <wires xsi:type="iaml.wires:NavigateWire" id="wires.126aa9933dc.6" from="model.126aa993255.21" to="visual.126aa99339d.35" name="redirect"/>
+    </eventTriggers>
+  </children>
+  <children xsi:type="iaml.visual:Page" id="visual.126aa99339d.35" name="Page 2" inEdges="wires.126aa9933dc.6">
+    <eventTriggers id="model.126aa993255.40" name="access" outEdges="wires.126aa9933dc.13">
+      <wires xsi:type="iaml.wires:NavigateWire" id="wires.126aa9933dc.13" from="model.126aa993255.40" to="visual.126aa99339d.34" name="redirect"/>
+    </eventTriggers>
+  </children>
+</iaml:InternetApplication>

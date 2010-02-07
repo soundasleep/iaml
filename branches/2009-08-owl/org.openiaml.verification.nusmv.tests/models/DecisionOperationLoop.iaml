@@ -7,7 +7,6 @@
       <operations xsi:type="iaml:PrimitiveOperation" id="model.12644812769.204" name="setValue" inFlows="model.12644812769.207" inExecutions="model.12644812769.205 model.12644812769.19d" outFlows="model.12644812769.208" outExecutions="model.12644812769.1a2"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.12644812bce.1" outExecutions="model.12644812769.4d"/>
       <nodes xsi:type="iaml.operations:Arithmetic" id="operations.12644812bce.b" inFlows="model.12644812769.50 model.12644812769.52" outFlows="model.12644812769.53"/>
-      <nodes xsi:type="iaml.operations:FinishNode" id="operations.12644812bce.c"/>
       <nodes xsi:type="iaml.operations:Arithmetic" id="operations.12644812bce.31" inFlows="model.12644812769.c6 model.12644812769.206" outFlows="model.12644812769.207"/>
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.12644812bce.67" inExecutions="model.12644812769.1a1"/>
       <dataEdges id="model.12644812769.50" from="model.12644812769.30" to="operations.12644812bce.b"/>

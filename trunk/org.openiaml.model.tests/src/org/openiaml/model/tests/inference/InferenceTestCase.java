@@ -8,6 +8,7 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.jaxen.JaxenException;
+import org.openiaml.model.model.AbstractScope;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ApplicationElementProperty;
@@ -35,7 +36,6 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.PrimitiveOperation;
-import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.WireEdge;
@@ -469,7 +469,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public Gate assertHasGate(Scope root, String string) throws JaxenException {
+	public Gate assertHasGate(AbstractScope root, String string) throws JaxenException {
 		return (Gate) queryOne(root, "iaml:gate[iaml:name='" + string + "']");	
 	}
 	

@@ -98,19 +98,30 @@ public class NuSMVTestCase extends AbstractNuSMVTestCase {
 	public static final String PAGE_1 = "visual_126aa99339d_20e";
 	public static final String PAGE_2 = "visual_126aa99339d_20f";
 	public static final String PAGE_3 = "visual_126aa99339d_210";
-	
-	/*
-	 * G ((!(navigation_running = 1 -> !(F navigation_finished = 1))) 
-	 * 		U navigation_running = 0)
+
+	/**
+	 * Constructed at run-time using helper methods.
 	 */
 	public static final String EMULATED_GATE_CHECK = 
-		getLTLSpec(PAGE_FIRST, PAGE_1) +
-		getLTLSpec(PAGE_FIRST, PAGE_2) +
-		getLTLSpec(PAGE_FIRST, PAGE_3);
+		getLTLVisitRequires(PAGE_FIRST, PAGE_1) +
+		getLTLVisitRequires(PAGE_FIRST, PAGE_2) +
+		getLTLVisitRequires(PAGE_FIRST, PAGE_3) +
+		getLTLCanVisit(PAGE_1) +
+		getLTLCanVisit(PAGE_2) +
+		getLTLCanVisit(PAGE_3) +
+		getLTLCanVisit(PAGE_FIRST);
 	
-	private static String getLTLSpec(String first, String target) {
+	private static String getLTLVisitRequires(String first, String target) {
 		return "\n LTLSPEC \n"
-			+ "  G ((current_page = " + target + " & navigation_running = 0) -> O current_page = " + first + ")\n";
+			+ "  G (! (current_page = " + target + " & ! O (current_page = " + first + ")))\n";
+			// + "  G (F ((current_page = " + target + " -> F navigation_finished = 1) -> O current_page = " + first + "))\n";
+	}
+	
+	private static String getLTLCanVisit(String target) {
+		return "\n LTLSPEC \n"
+			+ "  G (F (current_page = " + target + " & navigation_finished = 1))\n";
+			// + "  F (current_page = " + target + " & navigation_finished = 1 )\n";
+		// U (current_page = " + target + " & navigation_finished = 1)
 	}
 	
 	public void testEmulatedGate() throws Exception {

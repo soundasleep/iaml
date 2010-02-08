@@ -36,6 +36,29 @@ getPassFlow(model::ExecutionEdgesSource this) :
 selectStartNode(model::CompositeOperation this) :
 	nodes.typeSelect(model::operations::StartNode).first() ;
 
+selectStartNode(model::CompositeCondition this) :
+	nodes.typeSelect(model::operations::StartNode).first() ;
+
+/*
+ * all application properties stored in the InternetApplication; i.e.
+ * those outside Sessions. 
+ */
+List[model::ApplicationElementProperty] allApplicationProperties(model::InternetApplication this) :
+	properties.toSet().union( children.typeSelect(model::visual::Page).collect(e|allApplicationProperties(e)).flatten());
+
+List[model::ApplicationElementProperty] allApplicationProperties(model::visual::Page this) :
+	properties.toSet().union( children.typeSelect(model::visual::Page).collect(e|allApplicationProperties(e)).flatten());
+
+model::InternetApplication getRoot(model::InternetApplication this) :
+	this;
+model::InternetApplication getRoot(model::NamedElement this) :
+	getRoot(eContainer);
+model::InternetApplication getRoot(emf::EObject this) :
+	null;
+	
+inConditionWires(model::WireEdgeDestination this) :
+	inEdges.typeSelect(model::wires::ConditionWire);
+
 /** 
  * a hack way to create backtrace-able errors
  * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540

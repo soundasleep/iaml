@@ -6,7 +6,10 @@
 	«FILE "output/check.smv"»	
 
 -- definitions for each CompositeOperation
-«EXPAND operationContents FOREACH eAllContents.typeSelect(model::CompositeOperation)»
+«EXPAND OperationContents::operationContents FOREACH eAllContents.typeSelect(model::CompositeOperation)»
+
+-- definitions for each CompositeCondition
+«EXPAND ConditionContents::conditionContents FOREACH eAllContents.typeSelect(model::CompositeCondition)»
 
 -- main module
 «LET eAllContents.typeSelect(model::visual::Page) AS allPages»
@@ -17,10 +20,18 @@ MODULE main
 VAR
 	-- possible running operations
 	«FOREACH eAllContents.typeSelect(model::CompositeOperation) AS operation»
-		running_«safeName(operation)» : process operation_«safeName(operation)»(run_«safeName(operation)», navigation_finished);
+		running_«safeName(operation)» : process operation_«safeName(operation)»(run_«safeName(operation)», navigation_finished
+			«FOREACH allApplicationProperties() AS p», property_«safeName(p)»«ENDFOREACH»);
 		run_«safeName(operation)» : boolean;
 	«ENDFOREACH»
 
+	-- possible running conditions
+	«FOREACH eAllContents.typeSelect(model::CompositeCondition) AS condition»
+		running_condition_«safeName(condition)» : process condition_«safeName(condition)»(run_condition_«safeName(condition)»
+			«FOREACH allApplicationProperties() AS p», property_«safeName(p)»«ENDFOREACH»);
+		run_condition_«safeName(condition)» : boolean;
+	«ENDFOREACH»
+	
 	-- all pages
 	«IF !allPages.isEmpty»
 		current_page : {
@@ -50,6 +61,11 @@ VAR
 	«FOREACH allButtons AS b»
 	click_«safeName(b)» : boolean;
 	«ENDFOREACH»
+	
+	-- application properties
+	«FOREACH allApplicationProperties() AS p»
+	property_«safeName(p)» : 0..«maximumIntegerSize()»;
+	«ENDFOREACH»
 
 	-- value overflow
 	value_overflow : boolean;
@@ -69,9 +85,19 @@ ASSIGN
 	«FOREACH eAllContents.typeSelect(model::CompositeOperation) AS operation»
 		init(run_«safeName(operation)») := 0;
 	«ENDFOREACH»
+	
+	«FOREACH allApplicationProperties().select(p|p.defaultValue != null) AS p»
+		-- initialise default values, if specified
+		init(property_«safeName(p)») := «p.defaultValue»;
+	«ENDFOREACH»
 
-	-- current_page is chosen by nusmv
+	«IF !allPages.isEmpty»
+		-- we start off without being on any page
+		init(current_page) := null;
+	«ENDIF»		
+	
 	-- click_button is chosen by nusmv
+	-- select_browse_to_page is chosen by nusmv
 	
 	«IF !allPages.isEmpty»
 	next(browse_to_page) := case
@@ -132,9 +158,45 @@ ASSIGN
 		esac;
 	«ENDFOREACH»
 	
+	«FOREACH eAllContents.typeSelect(model::CompositeCondition) AS condition»
+		next(run_condition_«safeName(condition)») := case
+			-- already running
+			run_condition_«safeName(condition)» = 1 : case 
+				-- condition finished?
+				running_condition_«safeName(condition)».finished = 1 : 0;
+				
+				-- still running
+				1 : 1;
+			esac;
+			
+			-- has it finished?
+			running_condition_«safeName(condition)».finished = 1 : 0;
+			
+			-- navigation just started?
+			navigation_running = 1 & navigation_finished = 0 : case
+				«FOREACH allPages AS p»
+					«IF !p.eventTriggers.select(e|e.name == "access" || e.name == "onAccess")
+							.outEdges.typeSelect(model::WireEdgeDestination).select(w | !w.inEdges.select(w|w.from == condition).isEmpty).isEmpty»
+						-- start the condition
+						current_page = «safeName(p)» : 1;
+					«ENDIF»
+				«ENDFOREACH»
+				
+				-- should not be running
+				1 : 0;
+			esac;
+						
+			-- should not be running
+			1 : 0;
+		esac;
+	«ENDFOREACH»
+	
 	next(value_overflow) := case
 		«FOREACH eAllContents.typeSelect(model::CompositeOperation) AS operation»
 			running_«safeName(operation)».value_overflow = 1 : 1;
+		«ENDFOREACH»
+		«FOREACH eAllContents.typeSelect(model::CompositeCondition) AS condition»
+			running_condition_«safeName(condition)».value_overflow = 1 : 1;
 		«ENDFOREACH»
 		1 : value_overflow;
 	esac;
@@ -144,6 +206,10 @@ ASSIGN
 		running_«safeName(operation)».finished = 1 : 0;
 		run_«safeName(operation)» = 1 : 1;
 	«ENDFOREACH»
+	«FOREACH eAllContents.typeSelect(model::CompositeCondition) AS condition»
+		running_condition_«safeName(condition)».finished = 1 : 0;
+		run_condition_«safeName(condition)» = 1 : 1;
+	«ENDFOREACH»
 		1 : 0;
 	esac;
 	
@@ -151,26 +217,44 @@ ASSIGN
 	«FOREACH eAllContents.typeSelect(model::CompositeOperation) AS operation»
 		running_«safeName(operation)».finished = 1 : 1;
 	«ENDFOREACH»
+	«FOREACH eAllContents.typeSelect(model::CompositeCondition) AS condition»
+		running_condition_«safeName(condition)».finished = 1 : 1;
+	«ENDFOREACH»
 		1 : 0;
 	esac;
 	
 	«IF !allPages.isEmpty»
 		-- browsing to a new page
 		next(current_page) := case
+			-- we have just accessed a page which needs instant redirection?
+			«FOREACH allPages AS p»
+				«LET p.eventTriggers.select(e|e.name == "access").outEdges.typeSelect(model::wires::NavigateWire).select(w | model::visual::Page.isInstance(w.to)) AS navs»
+				«IF !navs.isEmpty»
+					«LET navs.first() AS nav»
+						current_page = «safeName(p)» 
+						«IF !inConditionWires(nav).isEmpty»
+							«FOREACH inConditionWires(nav).from.typeSelect(model::Condition) AS condition»
+								«REM»& run_condition_«safeName(condition)» = 1«ENDREM»
+								& running_condition_«safeName(condition)».finished = 1 
+								& running_condition_«safeName(condition)».result = passed								
+							«ENDFOREACH»
+						«ENDIF»
+						:  
+						«safeName(nav.to)»
+						;
+					«ENDLET»
+				«ENDIF»
+				«ENDLET»
+			«ENDFOREACH»
+
 			«REM»
 			cannot change pages if an operation is running.
 			NOTE this is a design assumption: when an operation is running, the user may not browse to another page
 			«ENDREM»
 			operation_running = 1 : current_page;
-			
-			-- we have just accessed a page which needs instant redirection?
-			«FOREACH allPages AS p»
-				«LET p.eventTriggers.select(e|e.name == "access").outEdges.typeSelect(model::wires::NavigateWire).select(w | model::visual::Page.isInstance(w.to)) AS navs»
-				«IF !navs.isEmpty»
-					current_page = «safeName(p)» : «safeName(navs.first().to)»;
-				«ENDIF»
-				«ENDLET»
-			«ENDFOREACH»
+						
+			-- are we still navigating?
+			navigation_running = 1 : current_page;
 			
 			-- browse to another page chosen by NuSMV
 			«FOREACH allPages AS p»
@@ -188,9 +272,25 @@ ASSIGN
 		navigation_running = 1 : case
 			«FOREACH allPages AS p»
 				current_page = «safeName(p)» :
-					«LET p.eventTriggers.select(e|e.name == "access").outEdges.typeSelect(model::wires::NavigateWire).select(w | model::visual::Page.isInstance(w.to)) AS navs» 
+					«LET p.eventTriggers.select(e|e.name == "access").outEdges.typeSelect(model::wires::NavigateWire).select(w | model::visual::Page.isInstance(w.to)) AS navs»
 						«IF !navs.isEmpty»
-							1«REM»this page redirects to another page«ENDREM»
+							«REM»this page redirects to another page«ENDREM»
+							«LET navs.first() AS nav»
+								«IF inConditionWires(nav).isEmpty»
+								1	«REM»always redirects«ENDREM»
+								«ELSE»
+									«REM»redirects based on incoming conditions«ENDREM»
+									case
+									«FOREACH inConditionWires(nav).from.typeSelect(model::Condition) AS condition SEPARATOR " & "»
+										«REM»& run_condition_«safeName(condition)» = 1«ENDREM»
+										running_condition_«safeName(condition)».finished = 1 
+										& running_condition_«safeName(condition)».result = passed								
+									«ENDFOREACH»
+									: 0;
+									1 : 1;
+									esac
+								«ENDIF»
+							«ENDLET»						
 						«ELSE»
 							0«REM»this page does not instantly redirect anywhere«ENDREM»
 						«ENDIF»
@@ -217,7 +317,23 @@ ASSIGN
 				current_page = «safeName(p)» : 
 					«LET p.eventTriggers.select(e|e.name == "access").outEdges.typeSelect(model::wires::NavigateWire).select(w | model::visual::Page.isInstance(w.to)) AS navs»
 						«IF !navs.isEmpty»
-							0«REM»this page redirects to another page«ENDREM»
+							«REM»this page redirects to another page«ENDREM»
+							«LET navs.first() AS nav»
+								«IF inConditionWires(nav).isEmpty»
+								1	«REM»always redirects«ENDREM»
+								«ELSE»
+									«REM»redirects based on incoming conditions«ENDREM»
+									case
+									«FOREACH inConditionWires(nav).from.typeSelect(model::Condition) AS condition SEPARATOR " & "»
+										«REM»& run_condition_«safeName(condition)» = 1«ENDREM»
+										running_condition_«safeName(condition)».finished = 1 
+										& running_condition_«safeName(condition)».result = passed								
+									«ENDFOREACH»
+									: 1;
+									1 : 0;
+									esac
+								«ENDIF»
+							«ENDLET»
 						«ELSE»
 							1«REM»this page does not instantly redirect anywhere«ENDREM»
 						«ENDIF»
@@ -230,6 +346,31 @@ ASSIGN
 		-- otherwise, navigation hasn't started, so we can't finish it
 		1 : 1;	«REM»otherwise, we haven't started navigation, so we have to finish«ENDREM»
 	esac;
+	
+	«FOREACH allApplicationProperties() AS p»
+	next(property_«safeName(p)») := case
+		«REM»find all operations that change it«ENDREM»
+		«FOREACH eAllContents.typeSelect(model::DataFlowEdge)
+				.select(d | d.to == p).eContainer.typeSelect(model::CompositeOperation) AS operation»
+			
+			run_«safeName(operation)» = 1 : case
+				«REM»find all ways that it may be set (may be multiple per composite operation)«ENDREM»
+				«FOREACH operation.operations.typeSelect(model::PrimitiveOperation)
+						.select(o | o.name == "setPropertyToValue")
+						.select(o | !o.outFlows.select(f|f.to == p).isEmpty) AS setOp»
+					running_«safeName(operation)».current_step = «safeName(setOp)» :
+						(«EXPAND Flow::getTemporaryVariableValue FOR setOp.inFlows.from.first()») mod «maximumIntegerSize() + 1»;
+					«REM»TODO value overflow«ENDREM»
+				«ENDFOREACH»
+				
+				1 : property_«safeName(p)»;
+			esac;
+		«ENDFOREACH»
+	
+		-- otherwise, property value cannot change
+		1 : property_«safeName(p)»;
+	esac;
+	«ENDFOREACH»
 
 «REM»if we only have 'main' module, we cannot have FAIRNESS«ENDREM»
 «IF !eAllContents.typeSelect(model::CompositeOperation).isEmpty»
@@ -241,388 +382,6 @@ FAIRNESS
 «ENDLET»
 	
 	«ENDFILE»
-«ENDDEFINE»
-	
-«DEFINE operationContents FOR model::CompositeOperation»
-«LET nodes.typeSelect(model::operations::StartNode) AS startNodes»
-«LET nodes.typeSelect(model::operations::FinishNode) AS finishNodes»
-«LET nodes.typeSelect(model::operations::CancelNode) AS cancelNodes»
-«LET nodes.typeSelect(model::ActivityNode) AS allNodes»
-«LET operations.typeSelect(model::Operation) AS allOperations»
-«LET variables AS allTemporaryVariables»
-
--- definitions for split nodes
-«FOREACH nodes.typeSelect(model::operations::SplitNode) AS split»
-«FOREACH split.outExecutions.to AS splitPath»
-MODULE split_«safeName(splitPath)»(flag«FOREACH variables AS v», «safeName(v)»«ENDFOREACH»)
-
-VAR
-	-- has the operation completed?
-	finished : boolean;
-
-	-- current operation step
-	current_step : {
-		null 
-		«REM»nodes«ENDREM»
-		«FOREACH allNodes AS n»
-			, «safeName(n)»
-		«ENDFOREACH»
-		«REM»operations«ENDREM»
-		«FOREACH allOperations AS n»
-			, «safeName(n)»
-		«ENDFOREACH» 
-	};
-	
-	«REM»TODO split/join paths can not currently support operation calls«ENDREM»
-	
-	-- value overflow
-	value_overflow : boolean;
-
-ASSIGN
-	init(finished) := 0;
-	init(current_step) := null;
-	
-	next(finished) := case
-		-- currently running
-		flag = 1 : case
-			«FOREACH allNodes.typeSelect(model::operations::JoinNode) AS n»
-				current_step = «safeName(n)» : 1;
-			«ENDFOREACH»
-
-			1 : finished;
-		esac;
-		
-		-- operation isn't running
-		1 : 0;
-	esac;
-	
-	next(current_step) := case
-		-- operation hasn't started yet
-		current_step = null : case
-			flag = 1 : «safeName(splitPath)»;
-			1 : null;
-		esac;
-		
-		-- operation is running
-		«REM»we cannot yet support two layers of split/join«ENDREM»
-		«FOREACH allNodes.reject(n|model::operations::SplitNode.isInstance(n)).typeSelect(model::ExecutionEdgesSource).select(n|!n.outExecutions.to.isEmpty) AS n»
-			current_step = «safeName(n)» :
-				«EXPAND nextStep FOR n»;
-		«ENDFOREACH»
-		«FOREACH allOperations.typeSelect(model::ExecutionEdgesSource).select(n|!n.outExecutions.to.isEmpty) AS n»
-			current_step = «safeName(n)» :
-				«EXPAND nextStep FOR n»;
-		«ENDFOREACH»
-		
-		-- operation is running, but shouldn't be
-		1 : null;
-	esac;
-	
-	«FOREACH allTemporaryVariables AS v»
-		next(«safeName(v)») := case
-			-- is operation running?
-			flag = 1 : case
-			
-				-- are we on a step which modifies it?
-				«FOREACH allOperations.typeSelect(model::PrimitiveOperation).select(n|n.name == "set" || n.name == "setValue")
-						.select(n|n.outFlows.to.contains(v)) AS n»
-					current_step = «safeName(n)» : («EXPAND getTemporaryVariableValue FOR n.inFlows.from.first()») mod «maximumIntegerSize() + 1»;
-				«ENDFOREACH»	
-				
-				-- otherwise, it remains the same
-				1 : «safeName(v)»;
-			esac;
-			
-			1 : 0;
-		esac;
-	«ENDFOREACH»
-	
-	-- check for value overflow
-	next(value_overflow) := case
-		flag = 1 : case
-			«FOREACH allTemporaryVariables AS v»
-				«FOREACH allOperations.typeSelect(model::PrimitiveOperation).select(n|n.name == "set" || n.name == "setValue")
-						.select(n|n.outFlows.to.contains(v)) AS n»
-					current_step = «safeName(n)» : case
-						(«EXPAND getTemporaryVariableValue FOR n.inFlows.from.first()») = («EXPAND getTemporaryVariableValue FOR n.inFlows.from.first()») mod «maximumIntegerSize() + 1» : 0;
-						-- if they are not equal, then we have overflowed
-						1 : 1;
-					esac;
-				«ENDFOREACH»
-			«ENDFOREACH»
-			1 : value_overflow;
-		esac;
-		
-		1 : value_overflow;
-	esac;
-	
-FAIRNESS
-	running
-	
-«ENDFOREACH»«REM»splitPath«ENDREM»
-«ENDFOREACH»«REM»SplitNode«ENDREM»
-
--- operation definition
-MODULE operation_«safeName()»(flag, navigation_finished)
-
-VAR
-	-- has the operation completed?
-	finished : boolean;
-
-	-- current operation step
-	«IF !allNodes.isEmpty || !allOperations.isEmpty»
-	current_step : {
-		null 
-		«REM»nodes«ENDREM»
-		«FOREACH allNodes AS n»
-			, «safeName(n)»
-		«ENDFOREACH»
-		«REM»operations«ENDREM»
-		«FOREACH allOperations AS n»
-			, «safeName(n)»
-		«ENDFOREACH» 
-	};
-	«ENDIF»
-	
-	-- temporary variables
-	«FOREACH allTemporaryVariables AS v»
-		«safeName(v)» : 0..«maximumIntegerSize()»;
-	«ENDFOREACH»
-	
-	-- split nodes
-	«FOREACH nodes.typeSelect(model::operations::SplitNode).outExecutions.to AS split»
-		run_split_«safeName(split)» : boolean;
-		split_«safeName(split)» : process split_«safeName(split)»(run_split_«safeName(split)»«FOREACH variables AS v», «safeName(v)»«ENDFOREACH»);
-	«ENDFOREACH»
-	
-	-- operation calls
-	«FOREACH nodes.typeSelect(model::operations::OperationCallNode).outEdges.typeSelect(model::wires::RunInstanceWire).to AS call»
-		run_call_«safeName(call)» : boolean;
-		call_«safeName(call)» : process operation_«safeName(call)»(run_call_«safeName(call)»«REM»operation calls have their own variable instances«ENDREM», navigation_finished);
-	«ENDFOREACH»
-	
-	-- value overflow
-	value_overflow : boolean;
-
-ASSIGN
-	init(finished) := 0;
-	init(current_step) := null;
-	
-	«FOREACH nodes.typeSelect(model::operations::SplitNode).outExecutions.to AS split»
-		init(run_split_«safeName(split)») := 0;
-	«ENDFOREACH»
-	
-	next(finished) := case
-		-- currently running
-		flag = 1 : case
-			«FOREACH finishNodes AS n»
-				current_step = «safeName(n)» : 1;
-			«ENDFOREACH»
-			«FOREACH cancelNodes AS n»
-				current_step = «safeName(n)» : 1;
-			«ENDFOREACH»
-
-			1 : finished;
-		esac;
-		
-		-- operation isn't running
-		1 : 0;
-	esac;
-	
-	«IF !allNodes.isEmpty || !allOperations.isEmpty»
-	next(current_step) := case
-		-- operation hasn't started yet
-		current_step = null : case
-			-- has navigation finished?
-			navigation_finished = 0 : null;
-		
-			«IF selectStartNode() != null»
-			flag = 1 : «safeName(selectStartNode())»;
-			«ENDIF»
-			1 : null;
-		esac;
-		
-		-- operation is running
-		«FOREACH allNodes.typeSelect(model::ExecutionEdgesSource).select(n|!n.outExecutions.to.isEmpty) AS n»
-			current_step = «safeName(n)» :
-				«EXPAND nextStep FOR n»;
-		«ENDFOREACH»
-		«FOREACH allOperations.typeSelect(model::ExecutionEdgesSource).select(n|!n.outExecutions.to.isEmpty) AS n»
-			current_step = «safeName(n)» :
-				«EXPAND nextStep FOR n»;
-		«ENDFOREACH»
-		
-		-- operation is running, but shouldn't be
-		1 : null;
-	esac;
-	«ENDIF»
-	
-	«FOREACH allTemporaryVariables AS v»
-		next(«safeName(v)») := case
-			-- is operation running?
-			flag = 1 : case
-			
-				-- are we on a step which modifies it?
-				«FOREACH allOperations.typeSelect(model::PrimitiveOperation).select(n|n.name == "set" || n.name == "setValue")
-						.select(n|n.outFlows.to.contains(v)) AS n»
-					current_step = «safeName(n)» : («EXPAND getTemporaryVariableValue FOR n.inFlows.from.first()») mod «maximumIntegerSize() + 1»;
-				«ENDFOREACH»	
-				
-				-- otherwise, it remains the same
-				1 : «safeName(v)»;
-			esac;
-			
-			1 : 0;
-		esac;
-	«ENDFOREACH»
-	
-	-- split nodes
-	«FOREACH nodes.typeSelect(model::operations::SplitNode) AS split»
-		«FOREACH split.outExecutions.to AS target»
-		next(run_split_«safeName(target)») := case
-			current_step = «safeName(split)» : 1;
-			1 : 0;
-		esac;
-		«ENDFOREACH»
-	«ENDFOREACH»
-
-	-- operation calls
-	«FOREACH nodes.typeSelect(model::operations::OperationCallNode) AS call»
-		«FOREACH call.outEdges.typeSelect(model::wires::RunInstanceWire).to AS target»
-		next(run_call_«safeName(target)») := case
-			current_step = «safeName(call)» : 1;
-			1 : 0;
-		esac;
-		«ENDFOREACH»
-	«ENDFOREACH»
-		
-	-- check for value overflow
-	next(value_overflow) := case
-		flag = 1 : case
-			«FOREACH allTemporaryVariables AS v»
-				«FOREACH allOperations.typeSelect(model::PrimitiveOperation).select(n|n.name == "set" || n.name == "setValue")
-						.select(n|n.outFlows.to.contains(v)) AS n»
-					current_step = «safeName(n)» : case
-						(«EXPAND getTemporaryVariableValue FOR n.inFlows.from.first()») = («EXPAND getTemporaryVariableValue FOR n.inFlows.from.first()») mod «maximumIntegerSize() + 1» : 0;
-						-- if they are not equal, then we have overflowed
-						1 : 1;
-					esac;
-				«ENDFOREACH»
-			«ENDFOREACH»
-			1 : value_overflow;
-		esac;
-		
-		1 : value_overflow;
-	esac;
-
-FAIRNESS
-  running
-
-«ENDLET»
-«ENDLET»
-«ENDLET»
-«ENDLET»
-«ENDLET»
-«ENDLET»
-
-«ENDDEFINE»
-
-«DEFINE nextStep FOR model::ExecutionEdgesSource»
-	«safeName(outExecutions.to.first())»
-«ENDDEFINE»
-
-«DEFINE nextStep FOR model::operations::DecisionOperation»
-	«IF name == "equal?" || name == "equals?"»
-		«IF getPassFlow().to.size != 1 || getFailFlow().to.size != 1»
-		«safeName(outExecutions.to.first())»
-		«ELSE»
-		case
-			«EXPAND getTemporaryVariableValue FOREACH inFlows.from SEPARATOR " = "» 
-				: «safeName(getPassFlow(this).to.first())»;
-				 
-			1 : «safeName(getFailFlow(this).to.first())»;
-		esac
-		«ENDIF»
-	«ELSE»
-		«EXPAND exception FOR throwException("Unknown decision operation: " + this)»
-	«ENDIF»
-«ENDDEFINE»
-
-«DEFINE nextStep FOR model::operations::SplitNode»
-	-- wait for all split nodes to be finished; we can then resume
-	case 
-		«FOREACH outExecutions.to AS split SEPARATOR " & "»
-			split_«safeName(split)».finished
-		«ENDFOREACH» : «safeName(outExecutions.to.first())»;
-		1 : current_step;
-	esac
-«ENDDEFINE»
-
-«DEFINE nextStep FOR model::operations::OperationCallNode»
-	-- wait for operation call to complete; then we can resume
-	case 
-		«FOREACH outEdges.typeSelect(model::wires::RunInstanceWire).to AS call SEPARATOR " & "»
-			call_«safeName(call)».finished
-		«ENDFOREACH» : «safeName(outExecutions.to.first())»;
-		1 : current_step;
-	esac
-«ENDDEFINE»
-
-/**
- * Changes to temporary variables.
- */
-«DEFINE nextTemporaryVariable FOR model::TemporaryVariable»
-next(«safeName()») := case
-	in_operation = 1 : case
-		-- start of operations
-		current_step = «safeName(eContainer)» : 0; -- init
-
-		-- incoming flows
-		«FOREACH inFlows.from.typeSelect(model::PrimitiveOperation).select(o | o.name == "set" || o.name == "setValue") AS set»
-		current_step = «safeName(set)» :
-			-- work out the incoming variable
-			«IF set.inFlows.from.size != 1»
-				«EXPAND exception FOR throwException("Too many incoming data flows for: " + this)»
-			«ENDIF»
-			(«EXPAND getTemporaryVariableValue FOR set.inFlows.from.first()»)
-			mod «maximumIntegerSize() + 1» -- prevent integer overflow
-			;
-		«ENDFOREACH»
-
-		1 : «safeName()»;
-	esac;	
-	
-	-- otherwise, leave it as it is
-	1 : «safeName()»;
-esac;
-«ENDDEFINE»
-
-«DEFINE getTemporaryVariableValue FOR model::DataFlowEdgesSource»
-	«EXPAND exception FOR throwException("Unknown data flow source: " + this)»
-«ENDDEFINE»
-
-«DEFINE getTemporaryVariableValue FOR model::operations::Arithmetic»
-	«IF operationType.toString() == "ADD"»
-		«EXPAND getTemporaryVariableValue FOREACH inFlows.from SEPARATOR " + "»
-	«ELSEIF operationType.toString() == "SUBTRACT"»
-		«EXPAND getTemporaryVariableValue FOREACH inFlows.from SEPARATOR " - "»
-	«ELSEIF operationType.toString() == "MULTIPLY"»
-		«EXPAND getTemporaryVariableValue FOREACH inFlows.from SEPARATOR " * "»
-	«ELSEIF operationType.toString() == "DIVIDE"»
-		«EXPAND getTemporaryVariableValue FOREACH inFlows.from SEPARATOR " / "»
-	«ELSE»
-		«EXPAND exception FOR throwException("Unknown arithmetic type: " + operationType + " for " + this)»
-	«ENDIF»
-«ENDDEFINE»
-
-«DEFINE getTemporaryVariableValue FOR model::TemporaryVariable»
-	«safeName(this)»
-	-- another temporary variable
-«ENDDEFINE»
-
-«DEFINE getTemporaryVariableValue FOR model::StaticValue»
-	«value» 
-	-- static value
 «ENDDEFINE»
 
 /** 

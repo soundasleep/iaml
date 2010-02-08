@@ -1,0 +1,130 @@
+«IMPORT iaml»
+
+«EXTENSION metamodel::LoopExtensions»
+
+«DEFINE nextStep FOR model::ExecutionEdgesSource»
+	«safeName(outExecutions.to.first())»
+«ENDDEFINE»
+
+«DEFINE nextStep FOR model::operations::DecisionOperation»
+	«IF name == "equal?" || name == "equals?"»
+		«IF getPassFlow().to.size != 1 || getFailFlow().to.size != 1»
+		«safeName(outExecutions.to.first())»
+		«ELSE»
+		case
+			«EXPAND getTemporaryVariableValue FOREACH inFlows.from SEPARATOR " = "» 
+				: «safeName(getPassFlow(this).to.first())»;
+				 
+			1 : «safeName(getFailFlow(this).to.first())»;
+		esac
+		«ENDIF»
+	«ELSE»
+		«EXPAND exception FOR throwException("Unknown decision operation: " + this)»
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE nextStep FOR model::operations::DecisionCondition»
+	«IF name == "equal?" || name == "equals?"»
+		«IF getPassFlow().to.size != 1 || getFailFlow().to.size != 1»
+		«safeName(outExecutions.to.first())»
+		«ELSE»
+		case
+			«EXPAND getTemporaryVariableValue FOREACH inFlows.from SEPARATOR " = "» 
+				: «safeName(getPassFlow(this).to.first())»;
+				 
+			1 : «safeName(getFailFlow(this).to.first())»;
+		esac
+		«ENDIF»
+	«ELSE»
+		«EXPAND exception FOR throwException("Unknown decision operation: " + this)»
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE nextStep FOR model::operations::SplitNode»
+	-- wait for all split nodes to be finished; we can then resume
+	case 
+		«FOREACH outExecutions.to AS split SEPARATOR " & "»
+			split_«safeName(split)».finished
+		«ENDFOREACH» : «safeName(outExecutions.to.first())»;
+		1 : current_step;
+	esac
+«ENDDEFINE»
+
+«DEFINE nextStep FOR model::operations::OperationCallNode»
+	-- wait for operation call to complete; then we can resume
+	case 
+		«FOREACH outEdges.typeSelect(model::wires::RunInstanceWire).to AS call SEPARATOR " & "»
+			call_«safeName(call)».finished
+		«ENDFOREACH» : «safeName(outExecutions.to.first())»;
+		1 : current_step;
+	esac
+«ENDDEFINE»
+
+/**
+ * Changes to temporary variables.
+ */
+«DEFINE nextTemporaryVariable FOR model::TemporaryVariable»
+next(«safeName()») := case
+	in_operation = 1 : case
+		-- start of operations
+		current_step = «safeName(eContainer)» : 0; -- init
+
+		-- incoming flows
+		«FOREACH inFlows.from.typeSelect(model::PrimitiveOperation).select(o | o.name == "set" || o.name == "setValue") AS set»
+		current_step = «safeName(set)» :
+			-- work out the incoming variable
+			«IF set.inFlows.from.size != 1»
+				«EXPAND exception FOR throwException("Too many incoming data flows for: " + this)»
+			«ENDIF»
+			(«EXPAND getTemporaryVariableValue FOR set.inFlows.from.first()»)
+			mod «maximumIntegerSize() + 1» -- prevent integer overflow
+			;
+		«ENDFOREACH»
+
+		1 : «safeName()»;
+	esac;	
+	
+	-- otherwise, leave it as it is
+	1 : «safeName()»;
+esac;
+«ENDDEFINE»
+
+«DEFINE getTemporaryVariableValue FOR model::DataFlowEdgesSource»
+	«EXPAND exception FOR throwException("Unknown data flow source: " + this)»
+«ENDDEFINE»
+
+«DEFINE getTemporaryVariableValue FOR model::operations::Arithmetic»
+	«IF operationType.toString() == "ADD"»
+		«EXPAND getTemporaryVariableValue FOREACH inFlows.from SEPARATOR " + "»
+	«ELSEIF operationType.toString() == "SUBTRACT"»
+		«EXPAND getTemporaryVariableValue FOREACH inFlows.from SEPARATOR " - "»
+	«ELSEIF operationType.toString() == "MULTIPLY"»
+		«EXPAND getTemporaryVariableValue FOREACH inFlows.from SEPARATOR " * "»
+	«ELSEIF operationType.toString() == "DIVIDE"»
+		«EXPAND getTemporaryVariableValue FOREACH inFlows.from SEPARATOR " / "»
+	«ELSE»
+		«EXPAND exception FOR throwException("Unknown arithmetic type: " + operationType + " for " + this)»
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE getTemporaryVariableValue FOR model::TemporaryVariable»
+	«safeName(this)»
+	-- another temporary variable
+«ENDDEFINE»
+
+«DEFINE getTemporaryVariableValue FOR model::ApplicationElementProperty»
+	«REM»we pass all property values by reference to each operation/condition«ENDREM»
+	property_«safeName(this)»
+«ENDDEFINE»
+
+«DEFINE getTemporaryVariableValue FOR model::StaticValue»
+	«value» 
+	-- static value
+«ENDDEFINE»
+
+/** 
+ * a hack way to create backtrace-able errors
+ * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540  
+ */
+«DEFINE exception FOR Object»
+«ENDDEFINE»

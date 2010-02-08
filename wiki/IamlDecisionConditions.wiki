@@ -1,5 +1,4 @@
 #summary Primitive decisions in IAML.
-#labels EndUser
 
 =Introduction=
 
@@ -24,5 +23,13 @@ Decision conditions have a fixed semantics and cannot be changed (without modify
 || *Added in* || [Model0_5 Model 0.4.1] ||
 
 This condition will be *true* if the incoming data flow variable has been set, *false* if not. For example, incoming properties stored within a session that have not been modified will return *false*. It only accepts incoming [ApplicationElementProperty]s.
+
+==equal?==
+
+  _TODO Incomplete documentation: See documentation in [http://code.google.com/p/iaml/wiki/IamlPrimitiveOperations#equal? IamlPrimitiveOperations]_
+
+==true?==
+
+  _TODO Incomplete documentation: See documentation in [http://code.google.com/p/iaml/wiki/IamlPrimitiveOperations#true? IamlPrimitiveOperations]_
 
   _Also see [IamlPrimitiveOperations Primitive Operations], which can generally be used interchangably with a Composite Operation.

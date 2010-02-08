@@ -123,7 +123,7 @@ FAIRNESS
 «ENDFOREACH»«REM»SplitNode«ENDREM»
 
 -- operation definition
-MODULE operation_«safeName()»(flag, navigation_finished
+MODULE operation_«safeName()»(flag
 	«FOREACH allApplicationProperties(getRoot()) AS p», property_«safeName(p)»«ENDFOREACH»)
 
 VAR
@@ -197,9 +197,6 @@ ASSIGN
 		
 		-- operation hasn't started yet
 		current_step = null : case
-			-- has navigation finished?
-			navigation_finished = 0 : null;
-		
 			«IF selectStartNode() != null»
 			flag = 1 : «safeName(selectStartNode())»;
 			«ENDIF»
@@ -278,6 +275,24 @@ ASSIGN
 		
 		1 : value_overflow;
 	esac;
+
+	-- we have to let operations change property values, as they have access
+	-- to their current status
+	«FOREACH allApplicationProperties(getRoot()) AS p»
+	next(property_«safeName(p)») := case
+		«REM»find all operations that change it«ENDREM»
+		«FOREACH operations.typeSelect(model::PrimitiveOperation)
+				.select(o | o.name == "setPropertyToValue")
+				.select(o | !o.outFlows.select(f|f.to == p).isEmpty) AS setOp»
+			current_step = «safeName(setOp)» :
+				(«EXPAND Flow::getTemporaryVariableValue FOR setOp.inFlows.from.first()») mod «maximumIntegerSize() + 1»;
+			«REM»TODO value overflow«ENDREM»
+		«ENDFOREACH»
+	
+		-- otherwise, property value stays the same
+		1 : property_«safeName(p)»;
+	esac;
+	«ENDFOREACH»
 
 FAIRNESS
   running

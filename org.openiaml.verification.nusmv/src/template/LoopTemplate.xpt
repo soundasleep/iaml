@@ -20,7 +20,7 @@ MODULE main
 VAR
 	-- possible running operations
 	«FOREACH eAllContents.typeSelect(model::CompositeOperation) AS operation»
-		running_«safeName(operation)» : process operation_«safeName(operation)»(run_«safeName(operation)», navigation_finished
+		running_«safeName(operation)» : process operation_«safeName(operation)»(run_«safeName(operation)»
 			«FOREACH allApplicationProperties() AS p», property_«safeName(p)»«ENDFOREACH»);
 		run_«safeName(operation)» : boolean;
 	«ENDFOREACH»
@@ -40,15 +40,8 @@ VAR
 				, «safeName(p)»
 			«ENDFOREACH»
 		};
-	
-		-- allowing NuSMV to select pages at random
-		select_browse_to_page : {
-			«FOREACH allPages AS p SEPARATOR ", "»
-				«safeName(p)»
-			«ENDFOREACH»
-		};
 
-		-- storing the current target
+		-- allowing NuSMV to select pages at random
 		browse_to_page : {
 			null,
 			«FOREACH allPages AS p SEPARATOR ", "»
@@ -81,6 +74,7 @@ ASSIGN
 	init(value_overflow) := 0;
 	init(operation_running) := 0;
 	init(operation_finished) := 0;
+	init(navigation_finished) := 1;
 	
 	«FOREACH eAllContents.typeSelect(model::CompositeOperation) AS operation»
 		init(run_«safeName(operation)») := 0;
@@ -97,22 +91,17 @@ ASSIGN
 	«ENDIF»		
 	
 	-- click_button is chosen by nusmv
-	-- select_browse_to_page is chosen by nusmv
-	
-	«IF !allPages.isEmpty»
-	next(browse_to_page) := case
-		operation_running = 1 : browse_to_page;
-		navigation_running = 1 : browse_to_page;
-		1 : select_browse_to_page;
-	esac;
-	«ENDIF»
-	
+	-- browse_to_page is chosen by nusmv
+
 	«REM»
 	TODO I think the current implementation supports clicking two buttons
 	simultaneously, and executing these two operations simultaneously.
 	«ENDREM»
 	«FOREACH eAllContents.typeSelect(model::CompositeOperation) AS operation»
 		next(run_«safeName(operation)») := case
+			-- cannot execute an operation until it has finished navigating
+			navigation_finished = 0 : 0;
+		
 			-- already running
 			run_«safeName(operation)» = 1 : case 
 				-- operation finished?
@@ -122,9 +111,6 @@ ASSIGN
 				1 : 1;
 			esac;
 			
-			-- we have just accessed a page; wait until it is finished
-			navigation_running = 1 : 0;
-			
 			-- executed by accessing a page
 			«REM»
 			«REM»an access operation can be executed many times while in the
@@ -133,21 +119,23 @@ ASSIGN
 				«FOREACH allPages AS p»
 					«IF p.eventTriggers.select(e|e.name == "access" || e.name == "onAccess")
 							.outEdges.typeSelect(model::wires::RunInstanceWire).to.contains(operation)»
-						browse_to_page = «safeName(p)» : 1;
+						current_page = «safeName(p)» : 1;
 					«ENDIF»
-				«ENDFOREACH»
-		
-				-- executed by clicking a button
-				«FOREACH allButtons AS b»
-					«REM»button -> run[onClick] -> operation«ENDREM»
-					«IF !b.outEdges.typeSelect(model::wires::RunInstanceWire).select(w|w.name == "click" || w.name == "onClick").select(w|w.to == operation).isEmpty»				
-					click_«safeName(b)» = 1 : 1;
-					«ENDIF»
-					«REM»button -> event[onClick] -> run -> operation«ENDREM»
-					«IF !b.eventTriggers.select(e|e.name == "click" || e.name == "onClick").outEdges.typeSelect(model::wires::RunInstanceWire).select(w|w.to == operation).isEmpty»				
-					click_«safeName(b)» = 1 : 1;
-					«ENDIF»
-					«REM»TODO button -> event -> run -> operation«ENDREM»
+					
+					-- executed by clicking a button on the page
+					«FOREACH p.children.typeSelect(model::visual::Button) AS b»
+						-- TODO if there is a button on a page with 'access', it can never be executed
+					
+						«REM»button -> run[onClick] -> operation«ENDREM»
+						«IF !b.outEdges.typeSelect(model::wires::RunInstanceWire).select(w|w.name == "click" || w.name == "onClick").select(w|w.to == operation).isEmpty»				
+						current_page = «safeName(p)» & click_«safeName(b)» = 1 : 1;
+						«ENDIF»
+						«REM»button -> event[onClick] -> run -> operation«ENDREM»
+						«IF !b.eventTriggers.select(e|e.name == "click" || e.name == "onClick").outEdges.typeSelect(model::wires::RunInstanceWire).select(w|w.to == operation).isEmpty»				
+						current_page = «safeName(p)» & click_«safeName(b)» = 1 : 1;
+						«ENDIF»
+						«REM»TODO button -> event -> run -> operation«ENDREM»
+					«ENDFOREACH»	
 				«ENDFOREACH»
 			
 				1 : run_«safeName(operation)»;	-- don't change it	
@@ -206,10 +194,6 @@ ASSIGN
 		running_«safeName(operation)».finished = 1 : 0;
 		run_«safeName(operation)» = 1 : 1;
 	«ENDFOREACH»
-	«FOREACH eAllContents.typeSelect(model::CompositeCondition) AS condition»
-		running_condition_«safeName(condition)».finished = 1 : 0;
-		run_condition_«safeName(condition)» = 1 : 1;
-	«ENDFOREACH»
 		1 : 0;
 	esac;
 	
@@ -217,157 +201,172 @@ ASSIGN
 	«FOREACH eAllContents.typeSelect(model::CompositeOperation) AS operation»
 		running_«safeName(operation)».finished = 1 : 1;
 	«ENDFOREACH»
-	«FOREACH eAllContents.typeSelect(model::CompositeCondition) AS condition»
-		running_condition_«safeName(condition)».finished = 1 : 1;
-	«ENDFOREACH»
 		1 : 0;
 	esac;
 	
 	«IF !allPages.isEmpty»
 		-- browsing to a new page
 		next(current_page) := case
-			-- we have just accessed a page which needs instant redirection?
-			«FOREACH allPages AS p»
-				«LET p.eventTriggers.select(e|e.name == "access").outEdges.typeSelect(model::wires::NavigateWire).select(w | model::visual::Page.isInstance(w.to)) AS navs»
-				«IF !navs.isEmpty»
-					«LET navs.first() AS nav»
-						current_page = «safeName(p)» 
-						«IF !inConditionWires(nav).isEmpty»
-							«FOREACH inConditionWires(nav).from.typeSelect(model::Condition) AS condition»
-								«REM»& run_condition_«safeName(condition)» = 1«ENDREM»
-								& running_condition_«safeName(condition)».finished = 1 
-								& running_condition_«safeName(condition)».result = passed								
-							«ENDFOREACH»
-						«ENDIF»
-						:  
-						«safeName(nav.to)»
-						;
+			
+			-- cannot navigate away until finished navigating
+			navigation_running = 1 : case
+				-- does the current page have a redirection attached?
+				«FOREACH allPages AS p»
+				current_page = «safeName(p)» :
+					«LET p.eventTriggers.select(e|e.name == "access").outEdges.typeSelect(model::wires::NavigateWire).select(w | model::visual::Page.isInstance(w.to)) AS navs»
+						«IF navs.size == 1»
+							«LET navs.first() AS nav»
+							«IF inConditionWires(nav).isEmpty»
+								-- an instant redirect
+								«safeName(nav.to)»;
+							«ELSEIF inConditionWires(nav).size == 1»
+								«LET inConditionWires(nav).first() AS condition»
+								-- a conditional redirect '«safeNameString(condition.name)»'
+								case
+									running_condition_«safeName(condition.from)».finished = 0 : current_page;
+									
+									running_condition_«safeName(condition.from)».finished = 1 : case 
+										running_condition_«safeName(condition.from)».result = passed : «safeName(nav.to)»;
+										running_condition_«safeName(condition.from)».result = failed : «safeName(p)»;
+										1 : null;		-- this should never happen
+									esac;
+								esac;
+								«ENDLET»
+							«ELSE»
+								«EXPAND exception FOR throwException("Cannot handle multiple condition wires")»
+							«ENDIF»
+							«ENDLET»
+						«ELSEIF navs.size > 1»
+							«EXPAND exception FOR throwException("Cannot handle multiple navigation wires")»
+						«ELSE»
+							current_page;	-- we must have stopped navigating
+						«ENDIF» 
 					«ENDLET»
-				«ENDIF»
-				«ENDLET»
-			«ENDFOREACH»
-
-			«REM»
-			cannot change pages if an operation is running.
-			NOTE this is a design assumption: when an operation is running, the user may not browse to another page
-			«ENDREM»
+				«ENDFOREACH»
+				
+				-- no redirections; stay where we are
+				1 : current_page;
+			esac;
+		
+			-- cannot navigate away while executing an operation
 			operation_running = 1 : current_page;
-						
-			-- are we still navigating?
-			navigation_running = 1 : current_page;
 			
 			-- browse to another page chosen by NuSMV
 			«FOREACH allPages AS p»
 				browse_to_page = «safeName(p)» : «safeName(p)»;
 			«ENDFOREACH»
+			
+			-- finally, otherwise, stay where we are
 			1 : current_page;
 		esac;
 	«ENDIF»
 	
 	next(navigation_running) := case
-		«REM»can never navigate while an operation is running«ENDREM»
-		operation_running = 1 : 0;
-		
-		«REM»are we currently navigating?«ENDREM»
+		-- we are currently navigating
 		navigation_running = 1 : case
 			«FOREACH allPages AS p»
-				current_page = «safeName(p)» :
-					«LET p.eventTriggers.select(e|e.name == "access").outEdges.typeSelect(model::wires::NavigateWire).select(w | model::visual::Page.isInstance(w.to)) AS navs»
-						«IF !navs.isEmpty»
-							«REM»this page redirects to another page«ENDREM»
-							«LET navs.first() AS nav»
-								«IF inConditionWires(nav).isEmpty»
-								1	«REM»always redirects«ENDREM»
-								«ELSE»
-									«REM»redirects based on incoming conditions«ENDREM»
-									case
-									«FOREACH inConditionWires(nav).from.typeSelect(model::Condition) AS condition SEPARATOR " & "»
-										«REM»& run_condition_«safeName(condition)» = 1«ENDREM»
-										running_condition_«safeName(condition)».finished = 1 
-										& running_condition_«safeName(condition)».result = passed								
-									«ENDFOREACH»
-									: 0;
-									1 : 1;
-									esac
-								«ENDIF»
-							«ENDLET»						
+				current_page = «safeName(p)» :				
+				«LET p.eventTriggers.select(e|e.name == "access").outEdges.typeSelect(model::wires::NavigateWire).select(w | model::visual::Page.isInstance(w.to)) AS navs»
+					«IF navs.size == 1»
+						«LET navs.first() AS nav»
+						«IF inConditionWires(nav).isEmpty»
+							-- an instant redirect
+							1;
+						«ELSEIF inConditionWires(nav).size == 1»
+							«LET inConditionWires(nav).first() AS condition»
+							-- a conditional redirect '«safeNameString(condition.name)»'
+							case
+								running_condition_«safeName(condition.from)».finished = 0 : 1;	-- still navigating
+								
+								running_condition_«safeName(condition.from)».finished = 1 : case 
+									running_condition_«safeName(condition.from)».result = passed : 1;
+									running_condition_«safeName(condition.from)».result = failed : 0;	-- we've stopped
+									1 : 0;		-- this should never happen
+								esac;
+							esac;
+							«ENDLET»
 						«ELSE»
-							0«REM»this page does not instantly redirect anywhere«ENDREM»
+							«EXPAND exception FOR throwException("Cannot handle multiple condition wires")»
 						«ENDIF»
-					«ENDLET»
-				;
+						«ENDLET»
+					«ELSEIF navs.size > 1»
+						«EXPAND exception FOR throwException("Cannot handle multiple navigation wires")»
+					«ELSE»
+						0;	-- we must have stopped navigating
+					«ENDIF»
+				«ENDLET»
 			«ENDFOREACH»
-			1 : 0;	«REM»nothing can be run«ENDREM»
+
+			current_page = null : 0;	-- should never occur
 		esac;
 		
-		«REM»have we started to browse to another page, as chosen by NuSMV?«ENDREM»
+		-- cannot navigate away while executing an operation
+		operation_running = 1 : 0;
+		
 		-- browse to another page chosen by NuSMV
 		«FOREACH allPages AS p»
 			browse_to_page = «safeName(p)» : 1;
 		«ENDFOREACH»
 		
-		-- otherwise, not navigating
+		-- otherwise, we are not navigating
 		1 : 0;
 	esac;
-	
+		
 	next(navigation_finished) := case
-		«REM»are we currently navigating?«ENDREM»
+		-- we are currently navigating
 		navigation_running = 1 : case
 			«FOREACH allPages AS p»
-				current_page = «safeName(p)» : 
-					«LET p.eventTriggers.select(e|e.name == "access").outEdges.typeSelect(model::wires::NavigateWire).select(w | model::visual::Page.isInstance(w.to)) AS navs»
-						«IF !navs.isEmpty»
-							«REM»this page redirects to another page«ENDREM»
-							«LET navs.first() AS nav»
-								«IF inConditionWires(nav).isEmpty»
-								1	«REM»always redirects«ENDREM»
-								«ELSE»
-									«REM»redirects based on incoming conditions«ENDREM»
-									case
-									«FOREACH inConditionWires(nav).from.typeSelect(model::Condition) AS condition SEPARATOR " & "»
-										«REM»& run_condition_«safeName(condition)» = 1«ENDREM»
-										running_condition_«safeName(condition)».finished = 1 
-										& running_condition_«safeName(condition)».result = passed								
-									«ENDFOREACH»
-									: 1;
-									1 : 0;
-									esac
-								«ENDIF»
+				current_page = «safeName(p)» :
+				«LET p.eventTriggers.select(e|e.name == "access").outEdges.typeSelect(model::wires::NavigateWire).select(w | model::visual::Page.isInstance(w.to)) AS navs»
+					«IF navs.size == 1»
+						«LET navs.first() AS nav»
+						«IF inConditionWires(nav).isEmpty»
+							-- an instant redirect
+							1;
+						«ELSEIF inConditionWires(nav).size == 1»
+							«LET inConditionWires(nav).first() AS condition»
+							-- a conditional redirect '«safeNameString(condition.name)»'
+							case
+								running_condition_«safeName(condition.from)».finished = 0 : 1;	-- still navigating
+								
+								running_condition_«safeName(condition.from)».finished = 1 : case 
+									running_condition_«safeName(condition.from)».result = passed : 1;
+									running_condition_«safeName(condition.from)».result = failed : 0;	-- we've stopped
+									1 : 1;		-- this should never happen
+								esac;
+							esac;
 							«ENDLET»
 						«ELSE»
-							1«REM»this page does not instantly redirect anywhere«ENDREM»
+							«EXPAND exception FOR throwException("Cannot handle multiple condition wires")»
 						«ENDIF»
-					«ENDLET»
-				;
+						«ENDLET»
+					«ELSEIF navs.size > 1»
+						«EXPAND exception FOR throwException("Cannot handle multiple navigation wires")»
+					«ELSE»
+						1;	-- we must have stopped navigating
+					«ENDIF» 
+				«ENDLET»
+				
 			«ENDFOREACH»
-			1 : 1;	«REM»it has to finish«ENDREM»
+			
+			current_page = null : 0;	-- should never occur
 		esac;
+	
+		-- cannot navigate away while executing an operation
+		operation_running = 1 : 1;
 		
-		-- otherwise, navigation hasn't started, so we can't finish it
-		1 : 1;	«REM»otherwise, we haven't started navigation, so we have to finish«ENDREM»
+		-- browse to another page chosen by NuSMV
+		«FOREACH allPages AS p»
+			browse_to_page = «safeName(p)» : 0;
+		«ENDFOREACH»
+		
+		-- otherwise, we are not navigating
+		1 : 1;
 	esac;
 	
 	«FOREACH allApplicationProperties() AS p»
 	next(property_«safeName(p)») := case
-		«REM»find all operations that change it«ENDREM»
-		«FOREACH eAllContents.typeSelect(model::DataFlowEdge)
-				.select(d | d.to == p).eContainer.typeSelect(model::CompositeOperation) AS operation»
-			
-			run_«safeName(operation)» = 1 : case
-				«REM»find all ways that it may be set (may be multiple per composite operation)«ENDREM»
-				«FOREACH operation.operations.typeSelect(model::PrimitiveOperation)
-						.select(o | o.name == "setPropertyToValue")
-						.select(o | !o.outFlows.select(f|f.to == p).isEmpty) AS setOp»
-					running_«safeName(operation)».current_step = «safeName(setOp)» :
-						(«EXPAND Flow::getTemporaryVariableValue FOR setOp.inFlows.from.first()») mod «maximumIntegerSize() + 1»;
-					«REM»TODO value overflow«ENDREM»
-				«ENDFOREACH»
-				
-				1 : property_«safeName(p)»;
-			esac;
-		«ENDFOREACH»
-	
-		-- otherwise, property value cannot change
+		-- always stays the same while in the root (i.e. not executing an operation)
 		1 : property_«safeName(p)»;
 	esac;
 	«ENDFOREACH»

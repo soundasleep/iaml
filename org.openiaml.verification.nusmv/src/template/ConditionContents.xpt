@@ -316,6 +316,24 @@ ASSIGN
 		1 : value_overflow;
 	esac;
 
+	-- we have to let operations change property values, as they have access
+	-- to their current status
+	«FOREACH allApplicationProperties(getRoot()) AS p»
+	next(property_«safeName(p)») := case
+		«REM»find all operations that change it«ENDREM»
+		«FOREACH operations.typeSelect(model::PrimitiveOperation)
+				.select(o | o.name == "setPropertyToValue")
+				.select(o | !o.outFlows.select(f|f.to == p).isEmpty) AS setOp»
+			current_step = «safeName(setOp)» :
+				(«EXPAND Flow::getTemporaryVariableValue FOR setOp.inFlows.from.first()») mod «maximumIntegerSize() + 1»;
+			«REM»TODO value overflow«ENDREM»
+		«ENDFOREACH»
+	
+		-- otherwise, property value stays the same
+		1 : property_«safeName(p)»;
+	esac;
+	«ENDFOREACH»
+
 FAIRNESS
   running
 

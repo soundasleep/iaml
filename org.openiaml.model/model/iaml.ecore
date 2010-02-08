@@ -507,7 +507,7 @@
         <details key="documentation" value="When the source element changes, the target element will be updated (but not vice versa)."/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="NavigateWire" eSuperTypes="#//wires/CompositeWire">
+    <eClassifiers xsi:type="ecore:EClass" name="NavigateWire" eSuperTypes="#//wires/CompositeWire #//WireEdgeDestination">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.2"/>
       </eAnnotations>

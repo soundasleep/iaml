@@ -185,6 +185,7 @@ public class WiresSwitch<T> {
 				NavigateWire navigateWire = (NavigateWire)theEObject;
 				T result = caseNavigateWire(navigateWire);
 				if (result == null) result = caseCompositeWire(navigateWire);
+				if (result == null) result = caseWireEdgeDestination(navigateWire);
 				if (result == null) result = caseWireEdge(navigateWire);
 				if (result == null) result = caseNamedElement(navigateWire);
 				if (result == null) result = caseContainsWires(navigateWire);

@@ -6,6 +6,7 @@
  */
 package org.openiaml.model.model.wires;
 
+import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.visual.Page;
 
 
@@ -23,5 +24,5 @@ import org.openiaml.model.model.visual.Page;
  * @model annotation="http://openiaml.org/comment added='0.2'"
  * @generated
  */
-public interface NavigateWire extends CompositeWire {
+public interface NavigateWire extends CompositeWire, WireEdgeDestination {
 } // NavigateWire

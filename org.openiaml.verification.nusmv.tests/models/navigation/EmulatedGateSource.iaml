@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.126aa993255.cc">
+  <children xsi:type="iaml.visual:Page" id="index" name="Home"/>
+  <children xsi:type="iaml.visual:Page" id="visual.126aa99339d.15e" name="First Visit..." inEdges="wires.126aa9933dc.4e"/>
+  <sessions id="scopes.126aa993459.18" name="Session">
+    <gate id="components.126aa993497.8" name="required gate" outEdges="wires.126aa9933dc.4e">
+      <wires xsi:type="iaml.wires:NavigateWire" id="wires.126aa9933dc.4e" from="components.126aa993497.8" to="visual.126aa99339d.15e" name="first"/>
+    </gate>
+    <children xsi:type="iaml.visual:Page" id="visual.126aa99339d.14b" name="Page 1"/>
+    <children xsi:type="iaml.visual:Page" id="visual.126aa99339d.14c" name="Page 2"/>
+    <children xsi:type="iaml.visual:Page" id="visual.126aa99339d.14d" name="Page 3"/>
+  </sessions>
+</iaml:InternetApplication>

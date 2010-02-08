@@ -3,6 +3,7 @@
  */
 package org.openiaml.verification.nusmv.tests;
 
+import java.util.Collections;
 import java.util.List;
 
 import junit.framework.AssertionFailedError;
@@ -18,6 +19,8 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.openiaml.verification.nusmv.NuSMVViolation;
 import org.openiaml.verification.nusmv.VerificationEngine;
 import org.openiaml.verification.nusmv.VerificationException;
+import org.openiaml.verification.nusmv.VerificationRule;
+import org.openiaml.verification.nusmv.rules.StringVerificationRule;
 
 /**
  * @author jmwright
@@ -40,6 +43,38 @@ public class AbstractNuSMVTestCase extends TestCase {
 		assertNotNull(model);
 		
 		VerificationEngine engine = new VerificationEngine(true);
+		
+		return assertValid(model, violationsSize, engine);
+	}
+
+	/**
+	 * Test the given model file for NuSMV validation (provided as a parameter).
+	 * 
+	 * @param modelFile the model file to load
+	 * @param violations the violations to expect
+	 * @param ltlspec the LTL specification to check
+	 * @return a list of the violations found
+	 * @throws VerificationException 
+	 */
+	protected List<NuSMVViolation> assertValid(String modelFile, int violationsSize, final String ltlspec) throws VerificationException {
+		EObject model = loadModelDirectly(modelFile);
+		assertNotNull(model);
+		
+		VerificationEngine engine = new VerificationEngine(true) {
+
+			@Override
+			public List<VerificationRule> getVerificationRules() {
+				VerificationRule rule = new StringVerificationRule(ltlspec);
+				return Collections.singletonList(rule);
+			}
+			
+		};
+
+		return assertValid(model, violationsSize, engine);
+	}
+	
+	protected List<NuSMVViolation> assertValid(EObject model, int violationsSize, VerificationEngine engine) throws VerificationException {
+
 		IStatus status = engine.verify(model, new NullProgressMonitor());
 		
 		List<NuSMVViolation> violations = engine.getViolations();
@@ -59,7 +94,7 @@ public class AbstractNuSMVTestCase extends TestCase {
 		
 		return violations;
 	}
-
+	
 	/**
 	 * Print out the log of the given engine to stdout.
 	 * 

@@ -315,6 +315,7 @@ digraph {
   "org.openiaml.model.tests.diagram" -> "org.openiaml.model.tests";
   "org.openiaml.model.tests.diagram" -> "org.openiaml.model.diagram.custom";
   "org.openiaml.model.tests.diagram" -> "org.openiaml.model.actions";
+  "org.openiaml.model.tests.diagram" -> "org.openiaml.model.diagram.helpers";
   "org.openiaml.verification.tests" -> "org.openiaml.model.tests";
   "org.openiaml.verification.tests" -> "org.openiaml.model";
   "org.openiaml.verification.tests" -> "org.eclipse.emf.ecore";

@@ -79,6 +79,20 @@
 			emailAddressMatch(«EXPAND getDataValue(php, container) FOREACH inFlows SEPARATOR ","»)
 		«ELSEIF name=="is set?"»
 			«EXPAND DataFlow::isSet(php, container) FOREACH inFlows.from SEPARATOR " && "»
+		«ELSEIF name == "equal?"-»
+			«REM»check all inflow targets are identical«ENDREM»
+			«IF php»
+				«EXPAND getDataValue(php, container) FOREACH inFlows SEPARATOR " == "»
+			«ELSE»
+				is_array_equal(new Array(«EXPAND getDataValue(php, container) FOREACH inFlows SEPARATOR ", "»))
+			«ENDIF»
+		«ELSEIF name == "true?"-»
+			«REM»check all inflow targets are identical«ENDREM»
+			«IF php»
+				«EXPAND trueDecisionOperationSource(php, container) FOREACH inFlows SEPARATOR " == "»
+			«ELSE»
+				is_array_true(new Array(«EXPAND trueDecisionOperationSource(php, container) FOREACH inFlows SEPARATOR ", "»))
+			«ENDIF»
 		«ELSE»
 			«REM»unknown condition«ENDREM»
 			«EXPAND exception FOR throwException("Unknown DecisionCondition '" + name + "': " + this)»

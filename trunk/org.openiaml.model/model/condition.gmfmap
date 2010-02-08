@@ -184,6 +184,90 @@
           href="iaml.gmfgraph#DecisionNode"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//ContainsOperations/operations"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//PrimitiveOperation"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( PrimitiveOperation )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveOperationName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveOperationParentName"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="condition.gmftool#//@palette/@tools.0/@tools.4"/>
+      <diagramNode
+          href="iaml.gmfgraph#PrimitiveOperation"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//ContainsOperations/operations"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//CompositeOperation"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( CompositeOperation )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#CompositeOperationName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#CompositeOperationParentName"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="condition.gmftool#//@palette/@tools.0/@tools.5"/>
+      <diagramNode
+          href="iaml.gmfgraph#CompositeOperation"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//CompositeCondition/values"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//StaticValue"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#StaticValueName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          viewPattern=""
+          editorPattern=""
+          editPattern="">
+        <diagramLabel
+            href="iaml.gmfgraph#StaticValueValue"/>
+        <features
+            href="iaml.ecore#//StaticValue/value"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="condition.gmftool#//@palette/@tools.0/@tools.6"/>
+      <diagramNode
+          href="iaml.gmfgraph#StaticValue"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//DataFlowEdge"/>

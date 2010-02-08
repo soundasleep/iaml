@@ -226,11 +226,11 @@
       <viewProvider class="org.openiaml.model.diagram.condition.providers.IamlViewProvider">
          <Priority name="Lowest"/>
          <object id="referencing-diagrams" class="org.eclipse.gmf.runtime.notation.Diagram">
-            <method name="getType()" value="iaml_domain_object_instance,iaml,iaml_condition,iaml_wire,iaml_element,iaml_domain_store,iaml_operation,iaml_visual,iaml_user_store,iaml_domain_object,iaml_session"/>
+            <method name="getType()" value="iaml_domain_object_instance,iaml,iaml_condition,iaml_wire,iaml_element,iaml_domain_store,iaml_operation,iaml_visual,iaml_user_store,iaml_domain_object,iaml_session,iaml_scope"/>
          </object>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_Condition"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2009,2010,2011,2012,2013,2014,2015,2016"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4004,4005,4006"/>
       </viewProvider>
    </extension>
@@ -243,13 +243,13 @@
             <method name="getType()" value="Iaml_Condition"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
-            <method name="getType()" value="2009,2010,2011,2012,2013,2014,2015,2016"/>
+            <method name="getType()" value="2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
             <method name="getType()" value="4004,4005,4006"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5012,5013,5014,5015,5016,5017,5018,5019,5020,5021,5022"/>
+            <method name="getType()" value="5012,5013,5014,5015,5016,5017,5018,5019,5020,5021,5022,5023,5024,5025,5026,5027,5028"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value=""/>
@@ -271,7 +271,10 @@
          <object class="org.openiaml.model.diagram.condition.edit.parts.TemporaryVariableEditPart" id="TemporaryVariable_2014"/>
          <object class="org.openiaml.model.diagram.condition.edit.parts.ApplicationElementPropertyEditPart" id="ApplicationElementProperty_2015"/>
          <object class="org.openiaml.model.diagram.condition.edit.parts.DecisionNodeEditPart" id="DecisionNode_2016"/>
-         <context elements="CompositeCondition_1000,Parameter_2009,StartNode_2010,CancelNode_2011,FinishNode_2012,DecisionCondition_2013,TemporaryVariable_2014,ApplicationElementProperty_2015,DecisionNode_2016"/>
+         <object class="org.openiaml.model.diagram.condition.edit.parts.PrimitiveOperationEditPart" id="PrimitiveOperation_2017"/>
+         <object class="org.openiaml.model.diagram.condition.edit.parts.CompositeOperationEditPart" id="CompositeOperation_2018"/>
+         <object class="org.openiaml.model.diagram.condition.edit.parts.StaticValueEditPart" id="StaticValue_2019"/>
+         <context elements="CompositeCondition_1000,Parameter_2009,StartNode_2010,CancelNode_2011,FinishNode_2012,DecisionCondition_2013,TemporaryVariable_2014,ApplicationElementProperty_2015,DecisionNode_2016,PrimitiveOperation_2017,CompositeOperation_2018,StaticValue_2019"/>
       </modelingAssistantProvider>
    </extension>
 
@@ -294,7 +297,7 @@
       <decoratorProvider class="org.openiaml.model.diagram.condition.providers.IamlShortcutsDecoratorProvider">
          <Priority name="Lowest"/>
          <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
-            <method name="getType()" value="2009,2010,2011,2012,2013,2014,2015,2016"/>
+            <method name="getType()" value="2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019"/>
          </object>
          <context decoratorTargets="generated-top-nodes"/>
       </decoratorProvider>
@@ -394,6 +397,36 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
+               id="org.openiaml.model.diagram.condition.PrimitiveOperation_2017"
+               name="%metatype.name.PrimitiveOperation_2017"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="PrimitiveOperation"
+               edithelper="org.openiaml.model.diagram.condition.edit.helpers.PrimitiveOperationEditHelper">
+            <param name="semanticHint" value="2017"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model0.4">
+         <metamodelType
+               id="org.openiaml.model.diagram.condition.CompositeOperation_2018"
+               name="%metatype.name.CompositeOperation_2018"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="CompositeOperation"
+               edithelper="org.openiaml.model.diagram.condition.edit.helpers.CompositeOperationEditHelper">
+            <param name="semanticHint" value="2018"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model0.4">
+         <metamodelType
+               id="org.openiaml.model.diagram.condition.StaticValue_2019"
+               name="%metatype.name.StaticValue_2019"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="StaticValue"
+               edithelper="org.openiaml.model.diagram.condition.edit.helpers.StaticValueEditHelper">
+            <param name="semanticHint" value="2019"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model0.4">
+         <metamodelType
                id="org.openiaml.model.diagram.condition.DataFlowEdge_4004"
                name="%metatype.name.DataFlowEdge_4004"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
@@ -443,6 +476,9 @@
          <elementType ref="org.openiaml.model.diagram.condition.TemporaryVariable_2014"/>
          <elementType ref="org.openiaml.model.diagram.condition.ApplicationElementProperty_2015"/>
          <elementType ref="org.openiaml.model.diagram.condition.DecisionNode_2016"/>
+         <elementType ref="org.openiaml.model.diagram.condition.PrimitiveOperation_2017"/>
+         <elementType ref="org.openiaml.model.diagram.condition.CompositeOperation_2018"/>
+         <elementType ref="org.openiaml.model.diagram.condition.StaticValue_2019"/>
          <elementType ref="org.openiaml.model.diagram.condition.DataFlowEdge_4004"/>
          <elementType ref="org.openiaml.model.diagram.condition.ExecutionEdge_4005"/>
          <elementType ref="org.openiaml.model.diagram.condition.ConditionalEdge_4006"/>

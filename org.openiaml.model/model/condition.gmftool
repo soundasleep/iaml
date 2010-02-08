@@ -61,6 +61,45 @@
             path="icons/full/obj32/DecisionNode.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="PrimitiveOperation"
+          description="Create new PrimitiveOperation">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/PrimitiveOperation.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/PrimitiveOperation.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="CompositeOperation"
+          description="Create new CompositeOperation">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/CompositeOperation.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/CompositeOperation.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="StaticValue"
+          description="Create new StaticValue">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/StaticValue.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/StaticValue.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
     </tools>
     <tools
         xsi:type="gmftool:ToolGroup"

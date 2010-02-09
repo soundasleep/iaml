@@ -424,7 +424,7 @@ function default_exception_handler($e) {
  * specified conversions: http://code.google.com/p/iaml/wiki/IamlPrimitiveOperations#true?
  */
 function make_into_boolean($value) {
-	if ($value === "0" || $value === "false" || $value === "")
+	if ($value === "0" || $value === "false" || $value === "" || $value === null)
 		return false;
 	if ($value === 0 || $value === 0.0 || $value === false)
 		return false;

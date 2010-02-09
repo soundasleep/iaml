@@ -8,6 +8,7 @@ package org.openiaml.model.model.scopes;
 
 import org.eclipse.emf.common.util.EList;
 import org.openiaml.model.model.AbstractScope;
+import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
@@ -31,6 +32,7 @@ import org.openiaml.model.model.visual.Page;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.openiaml.model.model.scopes.Scope#getScopes <em>Scopes</em>}</li>
+ *   <li>{@link org.openiaml.model.model.scopes.Scope#getProperties <em>Properties</em>}</li>
  * </ul>
  * </p>
  *
@@ -54,5 +56,21 @@ public interface Scope extends AbstractScope, NamedElement, ContainsConditions, 
 	 * @generated
 	 */
 	EList<AbstractScope> getScopes();
+
+	/**
+	 * Returns the value of the '<em><b>Properties</b></em>' containment reference list.
+	 * The list contents are of type {@link org.openiaml.model.model.ApplicationElementProperty}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Properties</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Properties</em>' containment reference list.
+	 * @see org.openiaml.model.model.scopes.ScopesPackage#getScope_Properties()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<ApplicationElementProperty> getProperties();
 
 } // Scope

@@ -405,13 +405,22 @@ public interface ScopesPackage extends EPackage {
 	int SCOPE__SCOPES = ModelPackage.ABSTRACT_SCOPE_FEATURE_COUNT + 10;
 
 	/**
+	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCOPE__PROPERTIES = ModelPackage.ABSTRACT_SCOPE_FEATURE_COUNT + 11;
+
+	/**
 	 * The number of structural features of the '<em>Scope</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE_FEATURE_COUNT = ModelPackage.ABSTRACT_SCOPE_FEATURE_COUNT + 11;
+	int SCOPE_FEATURE_COUNT = ModelPackage.ABSTRACT_SCOPE_FEATURE_COUNT + 12;
 
 	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.scopes.Session <em>Session</em>}'.
@@ -487,6 +496,17 @@ public interface ScopesPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getScope_Scopes();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.scopes.Scope#getProperties <em>Properties</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Properties</em>'.
+	 * @see org.openiaml.model.model.scopes.Scope#getProperties()
+	 * @see #getScope()
+	 * @generated
+	 */
+	EReference getScope_Properties();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -569,6 +589,14 @@ public interface ScopesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SCOPE__SCOPES = eINSTANCE.getScope_Scopes();
+
+		/**
+		 * The meta object literal for the '<em><b>Properties</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SCOPE__PROPERTIES = eINSTANCE.getScope_Properties();
 
 	}
 

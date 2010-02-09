@@ -5,7 +5,7 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE callCondition(Boolean php, model::wires::RunInstanceWire wire, Boolean inStoreDb, model::visual::Page currentPage) FOR model::wires::ConditionWire»
+«DEFINE callCondition(Boolean php, model::WireEdge wire, Boolean inStoreDb, model::visual::Page currentPage) FOR model::wires::ConditionWire»
 	/* ConditionWire: «this-» */
 	condition_«conditionName(from)»(
 		«EXPAND template::operations::Parameters::callParameter(php, wire, inStoreDb, false, currentPage) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»

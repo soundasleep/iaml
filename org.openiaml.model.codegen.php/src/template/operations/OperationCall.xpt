@@ -7,7 +7,29 @@
 
 /* default: don't know what to do */
 «DEFINE callOperation(Boolean php, Boolean inStoreDb, model::visual::Page currentPage) FOR model::WireEdge»
-	«EXPAND exception FOR throwException("Unknown wire edge connected to edit trigger: " + this)»
+	«EXPAND exception FOR throwException("Unknown wire to expand: " + this)»
+«ENDDEFINE»
+
+«DEFINE callOperation(Boolean php, Boolean inStoreDb, model::visual::Page currentPage) FOR model::wires::RunInstanceWire»
+	«IF inEdges.typeSelect(model::wires::ConditionWire).size > 0» 
+		/* expand conditions */
+		if («EXPAND template::conditions::Runtime::callCondition(php, this, inStoreDb, currentPage) FOREACH inEdges.typeSelect(model::wires::ConditionWire) SEPARATOR " && "») {
+			«EXPAND callOperationContents(php, inStoreDb, currentPage) FOR this»
+		}
+	«ELSE»
+		«EXPAND callOperationContents(php, inStoreDb, currentPage) FOR this»
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE callOperation(Boolean php, Boolean inStoreDb, model::visual::Page currentPage) FOR model::wires::NavigateWire»
+	«IF inEdges.typeSelect(model::wires::ConditionWire).size > 0» 
+		/* expand conditions */
+		if («EXPAND template::conditions::Runtime::callCondition(php, this, inStoreDb, currentPage) FOREACH inEdges.typeSelect(model::wires::ConditionWire) SEPARATOR " && "») {
+			«EXPAND callOperationContents(php, inStoreDb, currentPage) FOR this»
+		}
+	«ELSE»
+		«EXPAND callOperationContents(php, inStoreDb, currentPage) FOR this»
+	«ENDIF»
 «ENDDEFINE»
 
 /* 
@@ -20,18 +42,13 @@
  * we instead use '$arg0', which we expect will be set already.
  * @see callOperationsParameterSource() and StoreDbPhp::expandDomainAttributeEvents()
  */
-«DEFINE callOperation(Boolean php, Boolean inStoreDb, model::visual::Page currentPage) FOR model::wires::RunInstanceWire-»
+«DEFINE callOperationContents(Boolean php, Boolean inStoreDb, model::visual::Page currentPage) FOR model::wires::RunInstanceWire-»
 	/* eContainer == «to.eContainer» */
 	
 	«IF php»
 		$result = null;
 	«ELSE»
 		var result = null;
-	«ENDIF»
-	
-	«IF inEdges.typeSelect(model::wires::ConditionWire).size != 0»
-		/* expand conditions */
-		if («EXPAND template::conditions::Runtime::callCondition(php, this, inStoreDb, currentPage) FOREACH inEdges.typeSelect(model::wires::ConditionWire) SEPARATOR " && "») {
 	«ENDIF»
 
 	«IF php»
@@ -90,9 +107,6 @@
 		«EXPAND exception FOR throwException("Unknown target operation type in '" + to.eContainer.metaType.name + "' (this=" + this + ")")»
 	«ENDIF-»
 
-	«IF inEdges.typeSelect(model::wires::ConditionWire).size != 0»
-		}
-	«ENDIF»
 «ENDDEFINE»
 
 /**
@@ -100,7 +114,7 @@
  * We need to switch on the target, because we could navigate to many different types
  * of new destinations?
  */
-«DEFINE callOperation(Boolean php, Boolean inStoreDb, model::visual::Page currentPage) FOR model::wires::NavigateWire»
+«DEFINE callOperationContents(Boolean php, Boolean inStoreDb, model::visual::Page currentPage) FOR model::wires::NavigateWire»
 	«EXPAND navigateTo(php, inStoreDb, currentPage, this) FOR to» 
 «ENDDEFINE»
 

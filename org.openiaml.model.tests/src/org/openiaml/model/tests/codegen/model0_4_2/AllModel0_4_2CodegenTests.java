@@ -22,6 +22,9 @@ public class AllModel0_4_2CodegenTests {
 		
 		suite.addTestSuite(GateDisclaimer.class);
 		suite.addTestSuite(GateRequiredPage.class);
+		suite.addTestSuite(BasicDomainInheritanceAutosave.class);
+		suite.addTestSuite(NavigateConditionWire.class);
+		suite.addTestSuite(NavigateConditionWireServer.class);
 
 		return suite;
 	}

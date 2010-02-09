@@ -63,15 +63,28 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="Gate"
-          description="Create new Gate">
+          title="EntryGate"
+          description="Create new EntryGate">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/Gate.gif"
+            path="icons/full/obj16/EntryGate.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/Gate.gif"
+            path="icons/full/obj32/EntryGate.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="ExitGate"
+          description="Create new ExitGate">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/ExitGate.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/ExitGate.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
     </tools>

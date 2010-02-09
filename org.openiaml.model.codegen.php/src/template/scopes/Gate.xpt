@@ -2,7 +2,7 @@
 
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE runGate(model::visual::Page currentPage) FOR model::components::Gate-»
+«DEFINE runEntryGate(model::visual::Page currentPage) FOR model::components::Gate-»
 /* gate '«safeName()»' */
 
 /* expand conditions */

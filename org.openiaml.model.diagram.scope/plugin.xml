@@ -241,7 +241,7 @@
          </object>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_Scope"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2001,2002,2003,2004,2005,2006,2007,2008"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2001,2002,2003,2004,2005,2009,2007,2008,2010"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4002,4003,4004,4005"/>
       </viewProvider>
    </extension>
@@ -254,13 +254,13 @@
             <method name="getType()" value="Iaml_Scope"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
-            <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2008"/>
+            <method name="getType()" value="2001,2002,2003,2004,2005,2009,2007,2008,2010"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
             <method name="getType()" value="4001,4002,4003,4004,4005"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5001,5002,5003,5004,5005,5006,5007,5008,5009,5010,5011,5012,5013,5014"/>
+            <method name="getType()" value="5001,5002,5003,5004,5005,5006,5007,5008,5009,5015,5016,5012,5013,5014,5017,5018"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value=""/>
@@ -279,10 +279,11 @@
          <object class="org.openiaml.model.diagram.scope.edit.parts.PrimitiveOperationEditPart" id="PrimitiveOperation_2003"/>
          <object class="org.openiaml.model.diagram.scope.edit.parts.CompositeConditionEditPart" id="CompositeCondition_2004"/>
          <object class="org.openiaml.model.diagram.scope.edit.parts.PageEditPart" id="Page_2005"/>
-         <object class="org.openiaml.model.diagram.scope.edit.parts.GateEditPart" id="Gate_2006"/>
+         <object class="org.openiaml.model.diagram.scope.edit.parts.EntryGateEditPart" id="EntryGate_2009"/>
          <object class="org.openiaml.model.diagram.scope.edit.parts.Scope2EditPart" id="Scope_2007"/>
          <object class="org.openiaml.model.diagram.scope.edit.parts.SessionEditPart" id="Session_2008"/>
-         <context elements="Scope_1000,EventTrigger_2001,CompositeOperation_2002,PrimitiveOperation_2003,CompositeCondition_2004,Page_2005,Gate_2006,Scope_2007,Session_2008"/>
+         <object class="org.openiaml.model.diagram.scope.edit.parts.ExitGateEditPart" id="ExitGate_2010"/>
+         <context elements="Scope_1000,EventTrigger_2001,CompositeOperation_2002,PrimitiveOperation_2003,CompositeCondition_2004,Page_2005,EntryGate_2009,Scope_2007,Session_2008,ExitGate_2010"/>
       </modelingAssistantProvider>
    </extension>
 
@@ -305,7 +306,7 @@
       <decoratorProvider class="org.openiaml.model.diagram.scope.providers.IamlShortcutsDecoratorProvider">
          <Priority name="Lowest"/>
          <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
-            <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2008"/>
+            <method name="getType()" value="2001,2002,2003,2004,2005,2009,2007,2008,2010"/>
          </object>
          <context decoratorTargets="generated-top-nodes"/>
       </decoratorProvider>
@@ -375,12 +376,12 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/components">
          <metamodelType
-               id="org.openiaml.model.diagram.scope.Gate_2006"
-               name="%metatype.name.Gate_2006"
+               id="org.openiaml.model.diagram.scope.EntryGate_2009"
+               name="%metatype.name.EntryGate_2009"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="Gate"
-               edithelper="org.openiaml.model.diagram.scope.edit.helpers.GateEditHelper">
-            <param name="semanticHint" value="2006"/>
+               eclass="EntryGate"
+               edithelper="org.openiaml.model.diagram.scope.edit.helpers.EntryGateEditHelper">
+            <param name="semanticHint" value="2009"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/scopes">
@@ -400,6 +401,16 @@
                eclass="Session"
                edithelper="org.openiaml.model.diagram.scope.edit.helpers.SessionEditHelper">
             <param name="semanticHint" value="2008"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/components">
+         <metamodelType
+               id="org.openiaml.model.diagram.scope.ExitGate_2010"
+               name="%metatype.name.ExitGate_2010"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="ExitGate"
+               edithelper="org.openiaml.model.diagram.scope.edit.helpers.ExitGateEditHelper">
+            <param name="semanticHint" value="2010"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
@@ -470,9 +481,10 @@
          <elementType ref="org.openiaml.model.diagram.scope.PrimitiveOperation_2003"/>
          <elementType ref="org.openiaml.model.diagram.scope.CompositeCondition_2004"/>
          <elementType ref="org.openiaml.model.diagram.scope.Page_2005"/>
-         <elementType ref="org.openiaml.model.diagram.scope.Gate_2006"/>
+         <elementType ref="org.openiaml.model.diagram.scope.EntryGate_2009"/>
          <elementType ref="org.openiaml.model.diagram.scope.Scope_2007"/>
          <elementType ref="org.openiaml.model.diagram.scope.Session_2008"/>
+         <elementType ref="org.openiaml.model.diagram.scope.ExitGate_2010"/>
          <elementType ref="org.openiaml.model.diagram.scope.SyncWire_4001"/>
          <elementType ref="org.openiaml.model.diagram.scope.RunInstanceWire_4002"/>
          <elementType ref="org.openiaml.model.diagram.scope.ParameterWire_4003"/>

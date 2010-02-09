@@ -3,9 +3,9 @@
   <children xsi:type="iaml.visual:Page" id="index" name="Home"/>
   <children xsi:type="iaml.visual:Page" id="visual.1268cdc3e5e.d4" name="Required Page" inEdges="wires.1268cdc3e5e.65"/>
   <sessions id="scopes.1268cdc3e6e.1d" name="Session">
-    <gate id="components.1268cdc3e6e.19" name="requires a page is viewed first" outEdges="wires.1268cdc3e5e.65">
+    <entryGate id="components.1268cdc3e6e.19" name="requires a page is viewed first" outEdges="wires.1268cdc3e5e.65">
       <wires xsi:type="iaml.wires:NavigateWire" id="wires.1268cdc3e5e.65" from="components.1268cdc3e6e.19" to="visual.1268cdc3e5e.d4" name="first"/>
-    </gate>
+    </entryGate>
     <children xsi:type="iaml.visual:Page" id="visual.1268cdc3e5e.cc" name="Page 1"/>
     <children xsi:type="iaml.visual:Page" id="visual.1268cdc3e5e.cd" name="Page 2"/>
   </sessions>

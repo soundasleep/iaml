@@ -44,13 +44,22 @@ public interface ComponentsFactory extends EFactory {
 	AccessControlHandler createAccessControlHandler();
 
 	/**
-	 * Returns a new object of class '<em>Gate</em>'.
+	 * Returns a new object of class '<em>Entry Gate</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Gate</em>'.
+	 * @return a new object of class '<em>Entry Gate</em>'.
 	 * @generated
 	 */
-	Gate createGate();
+	EntryGate createEntryGate();
+
+	/**
+	 * Returns a new object of class '<em>Exit Gate</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Exit Gate</em>'.
+	 * @generated
+	 */
+	ExitGate createExitGate();
 
 	/**
 	 * Returns the package supported by this factory.

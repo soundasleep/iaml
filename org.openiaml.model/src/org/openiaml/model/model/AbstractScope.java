@@ -6,7 +6,8 @@
  */
 package org.openiaml.model.model;
 
-import org.openiaml.model.model.components.Gate;
+import org.openiaml.model.model.components.EntryGate;
+import org.openiaml.model.model.components.ExitGate;
 
 /**
  * <!-- begin-user-doc -->
@@ -16,7 +17,8 @@ import org.openiaml.model.model.components.Gate;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.openiaml.model.model.AbstractScope#getGate <em>Gate</em>}</li>
+ *   <li>{@link org.openiaml.model.model.AbstractScope#getEntryGate <em>Entry Gate</em>}</li>
+ *   <li>{@link org.openiaml.model.model.AbstractScope#getExitGate <em>Exit Gate</em>}</li>
  * </ul>
  * </p>
  *
@@ -27,29 +29,55 @@ import org.openiaml.model.model.components.Gate;
  */
 public interface AbstractScope extends GeneratesElements, ContainsWires {
 	/**
-	 * Returns the value of the '<em><b>Gate</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Entry Gate</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Gate</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Entry Gate</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Gate</em>' containment reference.
-	 * @see #setGate(Gate)
-	 * @see org.openiaml.model.model.ModelPackage#getAbstractScope_Gate()
+	 * @return the value of the '<em>Entry Gate</em>' containment reference.
+	 * @see #setEntryGate(EntryGate)
+	 * @see org.openiaml.model.model.ModelPackage#getAbstractScope_EntryGate()
 	 * @model containment="true"
 	 * @generated
 	 */
-	Gate getGate();
+	EntryGate getEntryGate();
 
 	/**
-	 * Sets the value of the '{@link org.openiaml.model.model.AbstractScope#getGate <em>Gate</em>}' containment reference.
+	 * Sets the value of the '{@link org.openiaml.model.model.AbstractScope#getEntryGate <em>Entry Gate</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Gate</em>' containment reference.
-	 * @see #getGate()
+	 * @param value the new value of the '<em>Entry Gate</em>' containment reference.
+	 * @see #getEntryGate()
 	 * @generated
 	 */
-	void setGate(Gate value);
+	void setEntryGate(EntryGate value);
+
+	/**
+	 * Returns the value of the '<em><b>Exit Gate</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Exit Gate</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Exit Gate</em>' containment reference.
+	 * @see #setExitGate(ExitGate)
+	 * @see org.openiaml.model.model.ModelPackage#getAbstractScope_ExitGate()
+	 * @model containment="true"
+	 * @generated
+	 */
+	ExitGate getExitGate();
+
+	/**
+	 * Sets the value of the '{@link org.openiaml.model.model.AbstractScope#getExitGate <em>Exit Gate</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Exit Gate</em>' containment reference.
+	 * @see #getExitGate()
+	 * @generated
+	 */
+	void setExitGate(ExitGate value);
 
 } // AbstractScope

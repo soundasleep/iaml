@@ -395,16 +395,16 @@ model::operations::JoinNode findFinalJoinNode(model::operations::JoinNode this) 
  * Get all necessary gates for the given scope, in order that they
  * need to be applied.
  */
-List[model::components::Gate] getPageGates(model::visual::Page this) :
-	getPageGates(eContainer);
+List[model::components::EntryGate] getPageEntryGates(model::visual::Page this) :
+	getPageEntryGates(eContainer);
 
-List[model::components::Gate] getPageGates(model::scopes::Session this) :
-	if gate == null then
-		getPageGates(eContainer)
+List[model::components::EntryGate] getPageEntryGates(model::scopes::Session this) :
+	if entryGate == null then
+		getPageEntryGates(eContainer)
 	else
-		getPageGates(eContainer).toSet().add( gate );
+		getPageEntryGates(eContainer).toSet().add( entryGate );
 
-List[model::components::Gate] getPageGates(emf::EObject this) :
+List[model::components::EntryGate] getPageEntryGates(emf::EObject this) :
 	{};
 
 /** Get all possible resume targets for this gate. */

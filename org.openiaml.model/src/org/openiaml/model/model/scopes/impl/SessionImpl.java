@@ -36,7 +36,8 @@ import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
-import org.openiaml.model.model.components.Gate;
+import org.openiaml.model.model.components.EntryGate;
+import org.openiaml.model.model.components.ExitGate;
 import org.openiaml.model.model.scopes.Scope;
 import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.scopes.Session;
@@ -57,7 +58,8 @@ import org.openiaml.model.model.scopes.Session;
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getGeneratedElements <em>Generated Elements</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#isOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getWires <em>Wires</em>}</li>
- *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getGate <em>Gate</em>}</li>
+ *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getEntryGate <em>Entry Gate</em>}</li>
+ *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getExitGate <em>Exit Gate</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getEventTriggers <em>Event Triggers</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getOutEdges <em>Out Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getInEdges <em>In Edges</em>}</li>
@@ -213,14 +215,24 @@ public class SessionImpl extends EObjectImpl implements Session {
 	protected EList<WireEdge> wires;
 
 	/**
-	 * The cached value of the '{@link #getGate() <em>Gate</em>}' containment reference.
+	 * The cached value of the '{@link #getEntryGate() <em>Entry Gate</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getGate()
+	 * @see #getEntryGate()
 	 * @generated
 	 * @ordered
 	 */
-	protected Gate gate;
+	protected EntryGate entryGate;
+
+	/**
+	 * The cached value of the '{@link #getExitGate() <em>Exit Gate</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExitGate()
+	 * @generated
+	 * @ordered
+	 */
+	protected ExitGate exitGate;
 
 	/**
 	 * The cached value of the '{@link #getEventTriggers() <em>Event Triggers</em>}' containment reference list.
@@ -434,8 +446,8 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Gate getGate() {
-		return gate;
+	public EntryGate getEntryGate() {
+		return entryGate;
 	}
 
 	/**
@@ -443,11 +455,11 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetGate(Gate newGate, NotificationChain msgs) {
-		Gate oldGate = gate;
-		gate = newGate;
+	public NotificationChain basicSetEntryGate(EntryGate newEntryGate, NotificationChain msgs) {
+		EntryGate oldEntryGate = entryGate;
+		entryGate = newEntryGate;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ScopesPackage.SESSION__GATE, oldGate, newGate);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ScopesPackage.SESSION__ENTRY_GATE, oldEntryGate, newEntryGate);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -458,18 +470,61 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setGate(Gate newGate) {
-		if (newGate != gate) {
+	public void setEntryGate(EntryGate newEntryGate) {
+		if (newEntryGate != entryGate) {
 			NotificationChain msgs = null;
-			if (gate != null)
-				msgs = ((InternalEObject)gate).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ScopesPackage.SESSION__GATE, null, msgs);
-			if (newGate != null)
-				msgs = ((InternalEObject)newGate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ScopesPackage.SESSION__GATE, null, msgs);
-			msgs = basicSetGate(newGate, msgs);
+			if (entryGate != null)
+				msgs = ((InternalEObject)entryGate).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ScopesPackage.SESSION__ENTRY_GATE, null, msgs);
+			if (newEntryGate != null)
+				msgs = ((InternalEObject)newEntryGate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ScopesPackage.SESSION__ENTRY_GATE, null, msgs);
+			msgs = basicSetEntryGate(newEntryGate, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ScopesPackage.SESSION__GATE, newGate, newGate));
+			eNotify(new ENotificationImpl(this, Notification.SET, ScopesPackage.SESSION__ENTRY_GATE, newEntryGate, newEntryGate));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ExitGate getExitGate() {
+		return exitGate;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetExitGate(ExitGate newExitGate, NotificationChain msgs) {
+		ExitGate oldExitGate = exitGate;
+		exitGate = newExitGate;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ScopesPackage.SESSION__EXIT_GATE, oldExitGate, newExitGate);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExitGate(ExitGate newExitGate) {
+		if (newExitGate != exitGate) {
+			NotificationChain msgs = null;
+			if (exitGate != null)
+				msgs = ((InternalEObject)exitGate).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ScopesPackage.SESSION__EXIT_GATE, null, msgs);
+			if (newExitGate != null)
+				msgs = ((InternalEObject)newExitGate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ScopesPackage.SESSION__EXIT_GATE, null, msgs);
+			msgs = basicSetExitGate(newExitGate, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ScopesPackage.SESSION__EXIT_GATE, newExitGate, newExitGate));
 	}
 
 	/**
@@ -650,8 +705,10 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__WIRES:
 				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
-			case ScopesPackage.SESSION__GATE:
-				return basicSetGate(null, msgs);
+			case ScopesPackage.SESSION__ENTRY_GATE:
+				return basicSetEntryGate(null, msgs);
+			case ScopesPackage.SESSION__EXIT_GATE:
+				return basicSetExitGate(null, msgs);
 			case ScopesPackage.SESSION__EVENT_TRIGGERS:
 				return ((InternalEList<?>)getEventTriggers()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__OUT_EDGES:
@@ -698,8 +755,10 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return isOverridden();
 			case ScopesPackage.SESSION__WIRES:
 				return getWires();
-			case ScopesPackage.SESSION__GATE:
-				return getGate();
+			case ScopesPackage.SESSION__ENTRY_GATE:
+				return getEntryGate();
+			case ScopesPackage.SESSION__EXIT_GATE:
+				return getExitGate();
 			case ScopesPackage.SESSION__EVENT_TRIGGERS:
 				return getEventTriggers();
 			case ScopesPackage.SESSION__OUT_EDGES:
@@ -760,8 +819,11 @@ public class SessionImpl extends EObjectImpl implements Session {
 				getWires().clear();
 				getWires().addAll((Collection<? extends WireEdge>)newValue);
 				return;
-			case ScopesPackage.SESSION__GATE:
-				setGate((Gate)newValue);
+			case ScopesPackage.SESSION__ENTRY_GATE:
+				setEntryGate((EntryGate)newValue);
+				return;
+			case ScopesPackage.SESSION__EXIT_GATE:
+				setExitGate((ExitGate)newValue);
 				return;
 			case ScopesPackage.SESSION__EVENT_TRIGGERS:
 				getEventTriggers().clear();
@@ -834,8 +896,11 @@ public class SessionImpl extends EObjectImpl implements Session {
 			case ScopesPackage.SESSION__WIRES:
 				getWires().clear();
 				return;
-			case ScopesPackage.SESSION__GATE:
-				setGate((Gate)null);
+			case ScopesPackage.SESSION__ENTRY_GATE:
+				setEntryGate((EntryGate)null);
+				return;
+			case ScopesPackage.SESSION__EXIT_GATE:
+				setExitGate((ExitGate)null);
 				return;
 			case ScopesPackage.SESSION__EVENT_TRIGGERS:
 				getEventTriggers().clear();
@@ -891,8 +956,10 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return overridden != OVERRIDDEN_EDEFAULT;
 			case ScopesPackage.SESSION__WIRES:
 				return wires != null && !wires.isEmpty();
-			case ScopesPackage.SESSION__GATE:
-				return gate != null;
+			case ScopesPackage.SESSION__ENTRY_GATE:
+				return entryGate != null;
+			case ScopesPackage.SESSION__EXIT_GATE:
+				return exitGate != null;
 			case ScopesPackage.SESSION__EVENT_TRIGGERS:
 				return eventTriggers != null && !eventTriggers.isEmpty();
 			case ScopesPackage.SESSION__OUT_EDGES:
@@ -941,7 +1008,8 @@ public class SessionImpl extends EObjectImpl implements Session {
 		}
 		if (baseClass == AbstractScope.class) {
 			switch (derivedFeatureID) {
-				case ScopesPackage.SESSION__GATE: return ModelPackage.ABSTRACT_SCOPE__GATE;
+				case ScopesPackage.SESSION__ENTRY_GATE: return ModelPackage.ABSTRACT_SCOPE__ENTRY_GATE;
+				case ScopesPackage.SESSION__EXIT_GATE: return ModelPackage.ABSTRACT_SCOPE__EXIT_GATE;
 				default: return -1;
 			}
 		}
@@ -1005,7 +1073,8 @@ public class SessionImpl extends EObjectImpl implements Session {
 		}
 		if (baseClass == AbstractScope.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.ABSTRACT_SCOPE__GATE: return ScopesPackage.SESSION__GATE;
+				case ModelPackage.ABSTRACT_SCOPE__ENTRY_GATE: return ScopesPackage.SESSION__ENTRY_GATE;
+				case ModelPackage.ABSTRACT_SCOPE__EXIT_GATE: return ScopesPackage.SESSION__EXIT_GATE;
 				default: return -1;
 			}
 		}

@@ -18,6 +18,8 @@ import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.components.AccessControlHandler;
 import org.openiaml.model.model.components.ComponentsFactory;
 import org.openiaml.model.model.components.ComponentsPackage;
+import org.openiaml.model.model.components.EntryGate;
+import org.openiaml.model.model.components.ExitGate;
 import org.openiaml.model.model.components.Gate;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.components.LoginHandlerTypes;
@@ -68,7 +70,8 @@ public class ComponentsFactoryImpl extends EFactoryImpl implements ComponentsFac
 		switch (eClass.getClassifierID()) {
 			case ComponentsPackage.LOGIN_HANDLER: return createLoginHandler();
 			case ComponentsPackage.ACCESS_CONTROL_HANDLER: return createAccessControlHandler();
-			case ComponentsPackage.GATE: return createGate();
+			case ComponentsPackage.ENTRY_GATE: return createEntryGate();
+			case ComponentsPackage.EXIT_GATE: return createExitGate();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -129,12 +132,23 @@ public class ComponentsFactoryImpl extends EFactoryImpl implements ComponentsFac
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
-	public Gate createGate() {
-		GateImpl gate = new GateImpl();
-		generateID(gate);
-		return gate;
+	public EntryGate createEntryGate() {
+		EntryGateImpl entryGate = new EntryGateImpl();
+		generateID(entryGate);
+		return entryGate;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ExitGate createExitGate() {
+		ExitGateImpl exitGate = new ExitGateImpl();
+		generateID(exitGate);
+		return exitGate;
 	}
 
 	/**

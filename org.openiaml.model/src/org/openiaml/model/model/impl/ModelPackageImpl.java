@@ -1244,8 +1244,17 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAbstractScope_Gate() {
+	public EReference getAbstractScope_EntryGate() {
 		return (EReference)abstractScopeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAbstractScope_ExitGate() {
+		return (EReference)abstractScopeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1525,7 +1534,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEAttribute(domainObjectInstanceEClass, DOMAIN_OBJECT_INSTANCE__AUTOSAVE);
 
 		abstractScopeEClass = createEClass(ABSTRACT_SCOPE);
-		createEReference(abstractScopeEClass, ABSTRACT_SCOPE__GATE);
+		createEReference(abstractScopeEClass, ABSTRACT_SCOPE__ENTRY_GATE);
+		createEReference(abstractScopeEClass, ABSTRACT_SCOPE__EXIT_GATE);
 
 		conditionEClass = createEClass(CONDITION);
 
@@ -1800,7 +1810,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEAttribute(getDomainObjectInstance_Autosave(), ecorePackage.getEBoolean(), "autosave", "true", 0, 1, DomainObjectInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractScopeEClass, AbstractScope.class, "AbstractScope", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAbstractScope_Gate(), theComponentsPackage.getGate(), null, "gate", null, 0, 1, AbstractScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractScope_EntryGate(), theComponentsPackage.getEntryGate(), null, "entryGate", null, 0, 1, AbstractScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractScope_ExitGate(), theComponentsPackage.getExitGate(), null, "exitGate", null, 0, 1, AbstractScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(conditionEClass, Condition.class, "Condition", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

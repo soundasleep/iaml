@@ -15,6 +15,8 @@ import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.components.AccessControlHandler;
 import org.openiaml.model.model.components.ComponentsFactory;
 import org.openiaml.model.model.components.ComponentsPackage;
+import org.openiaml.model.model.components.EntryGate;
+import org.openiaml.model.model.components.ExitGate;
 import org.openiaml.model.model.components.Gate;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.components.LoginHandlerTypes;
@@ -59,6 +61,20 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 	 * @generated
 	 */
 	private EClass gateEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass entryGateEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass exitGateEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -192,6 +208,24 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getEntryGate() {
+		return entryGateEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getExitGate() {
+		return exitGateEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getLoginHandlerTypes() {
 		return loginHandlerTypesEEnum;
 	}
@@ -230,6 +264,10 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 		accessControlHandlerEClass = createEClass(ACCESS_CONTROL_HANDLER);
 
 		gateEClass = createEClass(GATE);
+
+		entryGateEClass = createEClass(ENTRY_GATE);
+
+		exitGateEClass = createEClass(EXIT_GATE);
 
 		// Create enums
 		loginHandlerTypesEEnum = createEEnum(LOGIN_HANDLER_TYPES);
@@ -275,6 +313,8 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 		gateEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
 		gateEClass.getESuperTypes().add(theModelPackage.getGeneratedElement());
 		gateEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
+		entryGateEClass.getESuperTypes().add(this.getGate());
+		exitGateEClass.getESuperTypes().add(this.getGate());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(loginHandlerEClass, LoginHandler.class, "LoginHandler", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -282,7 +322,11 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 
 		initEClass(accessControlHandlerEClass, AccessControlHandler.class, "AccessControlHandler", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(gateEClass, Gate.class, "Gate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(gateEClass, Gate.class, "Gate", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(entryGateEClass, EntryGate.class, "EntryGate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(exitGateEClass, ExitGate.class, "ExitGate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(loginHandlerTypesEEnum, LoginHandlerTypes.class, "LoginHandlerTypes");
@@ -316,9 +360,21 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 		   source, 
 		   new String[] {
 			 "added", "0.4"
-		   });				
+		   });			
 		addAnnotation
 		  (gateEClass, 
+		   source, 
+		   new String[] {
+			 "added", "0.4.2"
+		   });			
+		addAnnotation
+		  (entryGateEClass, 
+		   source, 
+		   new String[] {
+			 "added", "0.4.2"
+		   });			
+		addAnnotation
+		  (exitGateEClass, 
 		   source, 
 		   new String[] {
 			 "added", "0.4.2"
@@ -344,12 +400,18 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 		   source, 
 		   new String[] {
 			 "documentation", "When placed into a {@link Page} or {@link Session}, enforces that all access contains the {@link Role roles} and {@link Permission permissions} provided by incoming {@link RequiresWire}."
-		   });		
+		   });			
 		addAnnotation
-		  (gateEClass, 
+		  (entryGateEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "When placed into a {@link Scope} (including {@link Session}), all {@link Page} accesses within that Scope must first execute this {@link Gate}. If any outgoing {@link WireEdge wires} {@link Condition can execute}, then access to this {@link Scope} is denied until such time the {@link Condition} is now true."
+		   });			
+		addAnnotation
+		  (exitGateEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "When placed into a {@link Scope} (including {@link Session}), all {@link Page} accesses within that Scope must finally execute this {@link Gate}. If any outgoing {@link WireEdge wires} {@link Condition cannot execute}, then access out of this {@link Scope} is denied until such time the {@link Condition} is now false."
 		   });	
 	}
 

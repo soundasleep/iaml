@@ -74,7 +74,7 @@ define("CURRENT_PAGE", "«id»");
 «EXPAND template::events::Page::runPageEvents(this) FOREACH eventTriggers-»
 
 // run any gates connected to the containing scope(s)
-«EXPAND template::scopes::Gate::runGate(this) FOREACH getPageGates(this)-»
+«EXPAND template::scopes::Gate::runEntryGate(this) FOREACH getPageEntryGates(this)-»
 
 // expand any operations (both in this page and in any surrounding scopes)
 «EXPAND template::operations::Definitions::operationDefinitions(this, true) FOR getRoot()-»		

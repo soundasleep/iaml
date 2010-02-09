@@ -1552,10 +1552,10 @@
           figure="//@figures.0/@descriptors.57/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
-        name="GateFigure">
+        name="EntryGateFigure">
       <actualFigure
           xsi:type="gmfgraph:Rectangle"
-          name="GateFigure">
+          name="EntryGateFigure">
         <layout
             xsi:type="gmfgraph:FlowLayout"
             vertical="true"/>
@@ -1574,11 +1574,11 @@
         </border>
         <children
             xsi:type="gmfgraph:Label"
-            name="GateNameFigure"
+            name="EntryGateNameFigure"
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
-            name="GateParentNameFigure"
+            name="EntryGateParentNameFigure"
             text="[none]">
           <foregroundColor
               xsi:type="gmfgraph:ConstantColor"
@@ -1589,6 +1589,45 @@
           figure="//@figures.0/@descriptors.58/@actualFigure/@children.0"/>
       <accessors
           figure="//@figures.0/@descriptors.58/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors
+        name="ExitGateFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="ExitGateFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="169"
+            green="197"
+            blue="221"/>
+        <border
+            xsi:type="gmfgraph:MarginBorder">
+          <insets
+              top="3"
+              left="3"
+              bottom="3"
+              right="3"/>
+        </border>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ExitGateNameFigure"
+            text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ExitGateParentNameFigure"
+            text="[none]">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="gray"/>
+        </children>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.59/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.59/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="ScopeFigure">
@@ -1625,9 +1664,9 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.59/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.60/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.59/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.60/@actualFigure/@children.1"/>
     </descriptors>
   </figures>
   <nodes
@@ -1748,8 +1787,11 @@
       name="Arithmetic"
       figure="ArithmeticFigure"/>
   <nodes
-      name="Gate"
-      figure="GateFigure"/>
+      name="EntryGate"
+      figure="EntryGateFigure"/>
+  <nodes
+      name="ExitGate"
+      figure="ExitGateFigure"/>
   <nodes
       name="Scope"
       figure="ScopeFigure"/>
@@ -2129,21 +2171,30 @@
       elementIcon="false"
       accessor="//@figures.0/@descriptors.14/@accessors.0"/>
   <labels
-      name="GateName"
-      figure="GateFigure"
+      name="EntryGateName"
+      figure="EntryGateFigure"
       accessor="//@figures.0/@descriptors.58/@accessors.0"/>
   <labels
-      name="GateParentName"
-      figure="GateFigure"
+      name="EntryGateParentName"
+      figure="EntryGateFigure"
       elementIcon="false"
       accessor="//@figures.0/@descriptors.58/@accessors.1"/>
   <labels
-      name="ScopeName"
-      figure="ScopeFigure"
+      name="ExitGateName"
+      figure="ExitGateFigure"
       accessor="//@figures.0/@descriptors.59/@accessors.0"/>
   <labels
-      name="ScopeParentName"
-      figure="GateFigure"
+      name="ExitGateParentName"
+      figure="ExitGateFigure"
       elementIcon="false"
       accessor="//@figures.0/@descriptors.59/@accessors.1"/>
+  <labels
+      name="ScopeName"
+      figure="ScopeFigure"
+      accessor="//@figures.0/@descriptors.60/@accessors.0"/>
+  <labels
+      name="ScopeParentName"
+      figure="EntryGateFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.60/@accessors.1"/>
 </gmfgraph:Canvas>

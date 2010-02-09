@@ -24,6 +24,8 @@ import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.components.AccessControlHandler;
 import org.openiaml.model.model.components.ComponentsPackage;
+import org.openiaml.model.model.components.EntryGate;
+import org.openiaml.model.model.components.ExitGate;
 import org.openiaml.model.model.components.Gate;
 import org.openiaml.model.model.components.LoginHandler;
 
@@ -94,6 +96,14 @@ public class ComponentsAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseGate(Gate object) {
 				return createGateAdapter();
+			}
+			@Override
+			public Adapter caseEntryGate(EntryGate object) {
+				return createEntryGateAdapter();
+			}
+			@Override
+			public Adapter caseExitGate(ExitGate object) {
+				return createExitGateAdapter();
 			}
 			@Override
 			public Adapter caseContainsOperations(ContainsOperations object) {
@@ -202,6 +212,34 @@ public class ComponentsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createGateAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.components.EntryGate <em>Entry Gate</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.components.EntryGate
+	 * @generated
+	 */
+	public Adapter createEntryGateAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.components.ExitGate <em>Exit Gate</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.components.ExitGate
+	 * @generated
+	 */
+	public Adapter createExitGateAdapter() {
 		return null;
 	}
 

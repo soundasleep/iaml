@@ -20,7 +20,7 @@ public class ParentNamesTestCase extends XmlTestCase {
 	public static final String GMF_ROOT = "../org.openiaml.model/model/";
 
 	/**
-	 * Ideally this would be from some design document. This
+	 * TODO Ideally this would be from some design document. This
 	 * is the list of all elements that we expect will contain 
 	 * parent name elements.
 	 */
@@ -35,7 +35,8 @@ public class ParentNamesTestCase extends XmlTestCase {
 		"InputTextField",
 		"CompositeCondition",
 		"Button",
-		"Gate",
+		"EntryGate",
+		"ExitGate",
 		"Scope",
 	};
 	

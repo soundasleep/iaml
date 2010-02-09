@@ -23,7 +23,8 @@ import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.WireEdge;
-import org.openiaml.model.model.components.Gate;
+import org.openiaml.model.model.components.EntryGate;
+import org.openiaml.model.model.components.ExitGate;
 
 /**
  * <!-- begin-user-doc -->
@@ -35,7 +36,8 @@ import org.openiaml.model.model.components.Gate;
  *   <li>{@link org.openiaml.model.model.impl.AbstractScopeImpl#getGeneratedElements <em>Generated Elements</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.AbstractScopeImpl#isOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.AbstractScopeImpl#getWires <em>Wires</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.AbstractScopeImpl#getGate <em>Gate</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.AbstractScopeImpl#getEntryGate <em>Entry Gate</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.AbstractScopeImpl#getExitGate <em>Exit Gate</em>}</li>
  * </ul>
  * </p>
  *
@@ -83,14 +85,24 @@ public abstract class AbstractScopeImpl extends EObjectImpl implements AbstractS
 	protected EList<WireEdge> wires;
 
 	/**
-	 * The cached value of the '{@link #getGate() <em>Gate</em>}' containment reference.
+	 * The cached value of the '{@link #getEntryGate() <em>Entry Gate</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getGate()
+	 * @see #getEntryGate()
 	 * @generated
 	 * @ordered
 	 */
-	protected Gate gate;
+	protected EntryGate entryGate;
+
+	/**
+	 * The cached value of the '{@link #getExitGate() <em>Exit Gate</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExitGate()
+	 * @generated
+	 * @ordered
+	 */
+	protected ExitGate exitGate;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -161,8 +173,8 @@ public abstract class AbstractScopeImpl extends EObjectImpl implements AbstractS
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Gate getGate() {
-		return gate;
+	public EntryGate getEntryGate() {
+		return entryGate;
 	}
 
 	/**
@@ -170,11 +182,11 @@ public abstract class AbstractScopeImpl extends EObjectImpl implements AbstractS
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetGate(Gate newGate, NotificationChain msgs) {
-		Gate oldGate = gate;
-		gate = newGate;
+	public NotificationChain basicSetEntryGate(EntryGate newEntryGate, NotificationChain msgs) {
+		EntryGate oldEntryGate = entryGate;
+		entryGate = newEntryGate;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.ABSTRACT_SCOPE__GATE, oldGate, newGate);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.ABSTRACT_SCOPE__ENTRY_GATE, oldEntryGate, newEntryGate);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -185,18 +197,61 @@ public abstract class AbstractScopeImpl extends EObjectImpl implements AbstractS
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setGate(Gate newGate) {
-		if (newGate != gate) {
+	public void setEntryGate(EntryGate newEntryGate) {
+		if (newEntryGate != entryGate) {
 			NotificationChain msgs = null;
-			if (gate != null)
-				msgs = ((InternalEObject)gate).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.ABSTRACT_SCOPE__GATE, null, msgs);
-			if (newGate != null)
-				msgs = ((InternalEObject)newGate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.ABSTRACT_SCOPE__GATE, null, msgs);
-			msgs = basicSetGate(newGate, msgs);
+			if (entryGate != null)
+				msgs = ((InternalEObject)entryGate).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.ABSTRACT_SCOPE__ENTRY_GATE, null, msgs);
+			if (newEntryGate != null)
+				msgs = ((InternalEObject)newEntryGate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.ABSTRACT_SCOPE__ENTRY_GATE, null, msgs);
+			msgs = basicSetEntryGate(newEntryGate, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ABSTRACT_SCOPE__GATE, newGate, newGate));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ABSTRACT_SCOPE__ENTRY_GATE, newEntryGate, newEntryGate));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ExitGate getExitGate() {
+		return exitGate;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetExitGate(ExitGate newExitGate, NotificationChain msgs) {
+		ExitGate oldExitGate = exitGate;
+		exitGate = newExitGate;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.ABSTRACT_SCOPE__EXIT_GATE, oldExitGate, newExitGate);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExitGate(ExitGate newExitGate) {
+		if (newExitGate != exitGate) {
+			NotificationChain msgs = null;
+			if (exitGate != null)
+				msgs = ((InternalEObject)exitGate).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.ABSTRACT_SCOPE__EXIT_GATE, null, msgs);
+			if (newExitGate != null)
+				msgs = ((InternalEObject)newExitGate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.ABSTRACT_SCOPE__EXIT_GATE, null, msgs);
+			msgs = basicSetExitGate(newExitGate, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ABSTRACT_SCOPE__EXIT_GATE, newExitGate, newExitGate));
 	}
 
 	/**
@@ -226,8 +281,10 @@ public abstract class AbstractScopeImpl extends EObjectImpl implements AbstractS
 				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
 			case ModelPackage.ABSTRACT_SCOPE__WIRES:
 				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
-			case ModelPackage.ABSTRACT_SCOPE__GATE:
-				return basicSetGate(null, msgs);
+			case ModelPackage.ABSTRACT_SCOPE__ENTRY_GATE:
+				return basicSetEntryGate(null, msgs);
+			case ModelPackage.ABSTRACT_SCOPE__EXIT_GATE:
+				return basicSetExitGate(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -246,8 +303,10 @@ public abstract class AbstractScopeImpl extends EObjectImpl implements AbstractS
 				return isOverridden();
 			case ModelPackage.ABSTRACT_SCOPE__WIRES:
 				return getWires();
-			case ModelPackage.ABSTRACT_SCOPE__GATE:
-				return getGate();
+			case ModelPackage.ABSTRACT_SCOPE__ENTRY_GATE:
+				return getEntryGate();
+			case ModelPackage.ABSTRACT_SCOPE__EXIT_GATE:
+				return getExitGate();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -272,8 +331,11 @@ public abstract class AbstractScopeImpl extends EObjectImpl implements AbstractS
 				getWires().clear();
 				getWires().addAll((Collection<? extends WireEdge>)newValue);
 				return;
-			case ModelPackage.ABSTRACT_SCOPE__GATE:
-				setGate((Gate)newValue);
+			case ModelPackage.ABSTRACT_SCOPE__ENTRY_GATE:
+				setEntryGate((EntryGate)newValue);
+				return;
+			case ModelPackage.ABSTRACT_SCOPE__EXIT_GATE:
+				setExitGate((ExitGate)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -296,8 +358,11 @@ public abstract class AbstractScopeImpl extends EObjectImpl implements AbstractS
 			case ModelPackage.ABSTRACT_SCOPE__WIRES:
 				getWires().clear();
 				return;
-			case ModelPackage.ABSTRACT_SCOPE__GATE:
-				setGate((Gate)null);
+			case ModelPackage.ABSTRACT_SCOPE__ENTRY_GATE:
+				setEntryGate((EntryGate)null);
+				return;
+			case ModelPackage.ABSTRACT_SCOPE__EXIT_GATE:
+				setExitGate((ExitGate)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -317,8 +382,10 @@ public abstract class AbstractScopeImpl extends EObjectImpl implements AbstractS
 				return overridden != OVERRIDDEN_EDEFAULT;
 			case ModelPackage.ABSTRACT_SCOPE__WIRES:
 				return wires != null && !wires.isEmpty();
-			case ModelPackage.ABSTRACT_SCOPE__GATE:
-				return gate != null;
+			case ModelPackage.ABSTRACT_SCOPE__ENTRY_GATE:
+				return entryGate != null;
+			case ModelPackage.ABSTRACT_SCOPE__EXIT_GATE:
+				return exitGate != null;
 		}
 		return super.eIsSet(featureID);
 	}

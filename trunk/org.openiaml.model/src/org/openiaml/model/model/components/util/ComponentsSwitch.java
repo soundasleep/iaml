@@ -24,6 +24,8 @@ import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.components.AccessControlHandler;
 import org.openiaml.model.model.components.ComponentsPackage;
+import org.openiaml.model.model.components.EntryGate;
+import org.openiaml.model.model.components.ExitGate;
 import org.openiaml.model.model.components.Gate;
 import org.openiaml.model.model.components.LoginHandler;
 
@@ -150,6 +152,34 @@ public class ComponentsSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ComponentsPackage.ENTRY_GATE: {
+				EntryGate entryGate = (EntryGate)theEObject;
+				T result = caseEntryGate(entryGate);
+				if (result == null) result = caseGate(entryGate);
+				if (result == null) result = caseNamedElement(entryGate);
+				if (result == null) result = caseWireEdgesSource(entryGate);
+				if (result == null) result = caseWireEdgeDestination(entryGate);
+				if (result == null) result = caseGeneratesElements(entryGate);
+				if (result == null) result = caseGeneratedElement(entryGate);
+				if (result == null) result = caseShouldntContainWires(entryGate);
+				if (result == null) result = caseContainsWires(entryGate);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ComponentsPackage.EXIT_GATE: {
+				ExitGate exitGate = (ExitGate)theEObject;
+				T result = caseExitGate(exitGate);
+				if (result == null) result = caseGate(exitGate);
+				if (result == null) result = caseNamedElement(exitGate);
+				if (result == null) result = caseWireEdgesSource(exitGate);
+				if (result == null) result = caseWireEdgeDestination(exitGate);
+				if (result == null) result = caseGeneratesElements(exitGate);
+				if (result == null) result = caseGeneratedElement(exitGate);
+				if (result == null) result = caseShouldntContainWires(exitGate);
+				if (result == null) result = caseContainsWires(exitGate);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -196,6 +226,36 @@ public class ComponentsSwitch<T> {
 	 * @generated
 	 */
 	public T caseGate(Gate object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Entry Gate</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Entry Gate</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEntryGate(EntryGate object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Exit Gate</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Exit Gate</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExitGate(ExitGate object) {
 		return null;
 	}
 

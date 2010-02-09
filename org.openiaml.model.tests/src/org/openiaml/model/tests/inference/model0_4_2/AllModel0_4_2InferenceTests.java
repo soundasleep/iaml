@@ -20,6 +20,7 @@ public class AllModel0_4_2InferenceTests {
 		TestSuite suite = new TestSuite("Model 0.4.2");
 		
 		suite.addTestSuite(GateRequiredPage.class);
+		suite.addTestSuite(ExitGateAdSimple.class);
 		
 		return suite;
 	}

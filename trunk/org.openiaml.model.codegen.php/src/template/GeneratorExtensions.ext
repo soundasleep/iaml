@@ -112,23 +112,39 @@ availableInCurrentScript(model::WireEdgesSource source, model::WireEdgeDestinati
  * - Any operations in the elements contained in this page/container
  * - Any operations contained in the direct parent scope (if any)
  */
-allContainerOperations(model::ApplicationElementContainer this) :
+List[model::Operation] allContainerOperations(model::ApplicationElementContainer this) :
 	// we have to toSet() it so that we *clone* the list of operations, and not
 	// add operations to the list directly
 	// see http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=11142
 	operations.toSet().union( children.allContainerOperations() ).union( possibleParentOperations(eContainer) );
 
-allContainerOperations(model::scopes::Session this) :
-	operations.toSet().union( children.allContainerOperations() ).union( possibleParentOperations(eContainer) );
+List[model::Operation] allContainerOperations(model::scopes::Session this) :
+	operations.toSet().union( children.allContainerOperations() )
+		.union( scopes.typeSelect(model::scopes::Scope).allContainerOperations() )
+		.union( scopes.typeSelect(model::scopes::Session).allContainerOperations() )
+		.union( scopes.typeSelect(model::visual::Page).allContainerOperations() )
+		.union( possibleParentOperations(eContainer) );
 
-allContainerOperations(model::ApplicationElement this) :
+List[model::Operation] allContainerOperations(model::scopes::Scope this) :
+	operations.toSet()
+		.union( scopes.typeSelect(model::scopes::Scope).allContainerOperations() )
+		.union( scopes.typeSelect(model::scopes::Session).allContainerOperations() )
+		.union( scopes.typeSelect(model::visual::Page).allContainerOperations() )
+		.union( possibleParentOperations(eContainer) );
+
+List[model::Operation] allContainerOperations(model::ApplicationElement this) :
 	operations;
 
-allContainerOperations(model::ContainsOperations this) :
+List[model::Operation] allContainerOperations(model::ContainsOperations this) :
 	operations;
 
-allContainerOperations(model::InternetApplication this) :
-	 operations.toSet().union( sessions.allContainerOperations() ).union( children.allContainerOperations() );	 
+List[model::Operation] allContainerOperations(model::InternetApplication this) :
+	 operations.toSet()
+	 	.union( sessions.allContainerOperations() )
+		.union( scopes.typeSelect(model::scopes::Scope).allContainerOperations() )
+		.union( scopes.typeSelect(model::scopes::Session).allContainerOperations() )
+		.union( scopes.typeSelect(model::visual::Page).allContainerOperations() )
+	 	.union( children.allContainerOperations() );	 
 		
 /** All of the ApplicationElementProperties stored within this InternetApplication */
 List[model::ApplicationElementProperty] allApplicationElementProperties(model::InternetApplication this) :
@@ -204,6 +220,29 @@ model::scopes::Session containingSession(model::scopes::Session this) :
 	this;
 
 model::scopes::Session containingSession(model::InternetApplication this) :
+	null;
+
+/** get the containing Scope of the given element, or null if none */
+model::AbstractScope containingScope(emf::EObject this) :
+	null;
+
+model::AbstractScope containingScope(model::NamedElement this) :
+	containingSession(eContainer);
+	
+model::AbstractScope containingScope(model::AbstractScope this) :
+	this;
+
+// definition necessary to remove ambiguity
+model::AbstractScope containingScope(model::visual::Page this) :
+	this;
+// definition necessary to remove ambiguity
+model::AbstractScope containingScope(model::scopes::Session this) :
+	this;
+// definition necessary to remove ambiguity
+model::AbstractScope containingScope(model::scopes::Scope this) :
+	this;
+	
+model::AbstractScope containingScope(model::InternetApplication this) :
 	null;
 
 model::DomainStore getDomainStore(model::DomainStore this) :
@@ -404,14 +443,34 @@ List[model::components::EntryGate] getPageEntryGates(model::scopes::Session this
 	else
 		getPageEntryGates(eContainer).toSet().add( entryGate );
 
+List[model::components::EntryGate] getPageEntryGates(model::scopes::Scope this) :
+	if entryGate == null then
+		getPageEntryGates(eContainer)
+	else
+		getPageEntryGates(eContainer).toSet().add( entryGate );
+
 List[model::components::EntryGate] getPageEntryGates(emf::EObject this) :
 	{};
 
 /**
  * Get all exit gates that may apply to the given page.
+ * They should be provided in a reverse order by depth, i.e.
+ * gates at level 3 should be provided before level 2, etc.
+ * The order should also be consistent across multiple calls.
+ *
+ * @implementation ExitGate
+ * 		{@model ExitGate}s are executed in reverse order from their
+ *		depth from the {@model InternetApplication root}; however, for
+ *		gates at the same node depth, order is undefined.
  */
 getAllExitGates(model::visual::Page this) :
-	getRoot().eAllContents.typeSelect(model::components::ExitGate);
+	getRoot().eAllContents.typeSelect(model::components::ExitGate)
+		.sortBy( n | -getNodeDepth(n) );
+
+int getNodeDepth(emf::EObject this) :
+	if eContainer == null 
+		then 0
+		else 1 + getNodeDepth(eContainer);
 
 /** Get all possible resume targets for this gate. */
 getEntryResumeTargets(model::components::EntryGate this) :
@@ -435,6 +494,39 @@ List[model::Operation] getClientSideCacheOperations(model::InternetApplication t
 		.select(o | model::DomainObjectInstance.isInstance(o.eContainer))
 		.select(o | o.name == "exists?");
 
+/**
+ * Should the given exit gate be activated/enabled on the given page?
+ */
+exitGateNeedsActivating(model::components::ExitGate gate, model::visual::Page page) :
+	page.eContainer != null &&
+	(page.eContainer.eContents.contains( gate ) /* we aren't exiting if we are in the same scope */
+		|| exitGateNeedsActivatingRecurse(gate, page.eContainer));
+
+exitGateNeedsActivatingRecurse(model::components::ExitGate gate, model::AbstractScope scope) :
+	scope.eContainer != null && 
+	(scope.eContainer.eContents.contains( gate )
+		|| exitGateNeedsActivatingRecurse(gate, scope.eContainer));
+
+exitGateNeedsActivatingRecurse(model::components::ExitGate gate, emf::EObject obj) :
+	false;
+
+/**
+ * Does the given exit gate need to block access to the given page if necessary?
+ * This should return false if the gate is contained in the parent scope or session
+ * of the page, or likewise.
+ */
+exitGateNeedsToRedirect(model::components::ExitGate gate, model::visual::Page page) :
+	exitGateNeedsToRedirectRecurse(gate, page.eContainer);
+		
+exitGateNeedsToRedirectRecurse(model::components::ExitGate gate, model::AbstractScope scope) :
+	scope.eContents.contains(gate) || 
+		(scope.eContainer != null && exitGateNeedsToRedirectRecurse(gate, scope.eContainer)); 
+
+exitGateNeedsToRedirectRecurse(model::components::ExitGate gate, model::InternetApplication root) :
+	false;
+exitGateNeedsToRedirectRecurse(model::components::ExitGate gate, emf::EObject obj) :
+	false;
+	
 /** 
  * a hack way to create backtrace-able errors
  * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540

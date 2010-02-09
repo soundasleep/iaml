@@ -10,51 +10,60 @@
 «DEFINE runExitGate(model::visual::Page currentPage) FOR model::components::ExitGate-»
 /* exit gate '«safeName()»' */
 
-/* firstly, is this gate activated? */
-if (
-«IF containingSession(this) != null»
-	isset($_SESSION["«safeName(containingSession(this))»_«safeNameString(id)»_active"]) 
-	&& $_SESSION["«safeName(containingSession(this))»_«safeNameString(id)»_active"]
-«ELSE»
-	get_application_value("«safeNameString(id)»", null) !== null
-«ENDIF»
-) {
-	
-	/* do the gate conditions all fail? */
-	if (
-		«EXPAND template::conditions::Runtime::callCondition(true, this, false, currentPage) FOREACH inEdges.typeSelect(model::wires::ConditionWire) SEPARATOR " || "»
-	) {
-		// one condition passed
-		
-		// save the current page, for resuming
-		$resume = "«safeName(currentPage)»";
-		«IF containingSession(this) != null»
-			$_SESSION["«safeName(containingSession(this))»_«safeNameString(id)»_resume"] = $resume;
-		«ELSE»
-			set_application_value("«safeNameString(id)»_resume", $resume);
-		«ENDIF»
-		
-		// execute gate wires
-		«EXPAND template::events::Page::runGateWires(currentPage) FOR this»
-	} else {
-		// otherwise, disable the activation (it has passed at least once)
-		«IF containingSession(this) != null»
-			unset($_SESSION["«safeName(containingSession(this))»_«safeNameString(id)»_active"]); 
-		«ELSE»
-			set_application_value("«safeNameString(id)»_active", null);
-		«ENDIF»
-	}
-
-}
-
-/* secondly, if we are in the scope that this gate is contained in,
+/* firstly, if we are in the scope that this gate is contained in,
    we need to activate it. */
-«IF containingSession(currentPage) == containingSession(this)»
-	$_SESSION["«safeName(containingSession(this))»_«safeNameString(id)»_active"] = true;
-«ELSEIF currentPage.exitGate == this»
-	set_application_value("«safeNameString(id)»_active", true);
+«IF exitGateNeedsActivating(this, currentPage)»
+	«IF containingSession(this) != null»
+		$_SESSION["«safeName(containingSession(this))»_«safeNameString(id)»_active"] = true;
+	«ELSE»
+		set_application_value("«safeNameString(id)»_active", true);
+	«ENDIF»
 «ELSE»
 	// not activated by this page
+«ENDIF»
+
+«REM»ignore gates which are inside the current scope«ENDREM»
+«IF !exitGateNeedsToRedirect(this, currentPage)»
+	/* secondly, is this gate activated? (may have been activated just before) */
+	if (
+	«IF containingSession(this) != null»
+		isset($_SESSION["«safeName(containingSession(this))»_«safeNameString(id)»_active"]) 
+		&& $_SESSION["«safeName(containingSession(this))»_«safeNameString(id)»_active"]
+	«ELSE»
+		get_application_value("«safeNameString(id)»", null) !== null
+	«ENDIF»
+	) {
+		log_message("[exitgate] Checking exit gate «name»");
+		
+		/* expand conditions - do any of them fail? */
+		if (!(
+			«EXPAND template::conditions::Runtime::callCondition(true, this, false, currentPage) FOREACH inEdges.typeSelect(model::wires::ConditionWire) SEPARATOR " && "»
+		)) {
+			// one condition failed
+			log_message("[exitgate] Exit gate «name» failed");
+			
+			// save the current page, for resuming
+			$resume = "«safeName(currentPage)»";
+			«IF containingSession(this) != null»
+				$_SESSION["«safeName(containingSession(this))»_«safeNameString(id)»_resume"] = $resume;
+			«ELSE»
+				set_application_value("«safeNameString(id)»_resume", $resume);
+			«ENDIF»
+			
+			// execute gate wires
+			«EXPAND template::events::Page::runGateWires(currentPage) FOR this»
+		} else {
+			// otherwise, disable the activation (it has passed at least once)
+			log_message("[exitgate] Exit gate «name» passed");
+	
+			«IF containingSession(this) != null»
+				unset($_SESSION["«safeName(containingSession(this))»_«safeNameString(id)»_active"]); 
+			«ELSE»
+				set_application_value("«safeNameString(id)»_active", null);
+			«ENDIF»
+		}
+	
+	}
 «ENDIF»
 
 «ENDDEFINE»

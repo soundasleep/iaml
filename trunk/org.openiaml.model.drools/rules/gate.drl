@@ -52,9 +52,29 @@ rule "Connect 'click' on 'Continue' button to resume Gate"
 
 end
 
-rule "Create '(gate) flag' property when Gate is connected by 'first' or 'last'"
+/**
+ * TODO when Session and Scope are refactored, remove these duplicate rules
+ */
+rule "Create '(gate) flag' property when Gate is connected by 'first' or 'last' (Session)"
 	when
 		session : Session ( )
+		gate : Gate ( eContainer == session )
+		
+		wire : NavigateWire ( from == gate, name == "first" || name == "last" )
+		
+		not (ApplicationElementProperty ( eContainer == session, eval( name.equals(gate.getName() + " flag")) ))
+	
+	then
+		ApplicationElementProperty prop = handler.generatedApplicationElementProperty(gate, session);
+		handler.setName(prop, gate.getName() + " flag");
+		handler.setValue(prop, ModelPackage.eINSTANCE.getApplicationElementProperty_DefaultValue(), "false");
+		queue.add(prop, drools);
+	
+end
+
+rule "Create '(gate) flag' property when Gate is connected by 'first' or 'last' (Scope)"
+	when
+		session : Scope ( )
 		gate : Gate ( eContainer == session )
 		
 		wire : NavigateWire ( from == gate, name == "first" || name == "last" )
@@ -108,7 +128,7 @@ end
  */
 rule "Create contents of 'set flag' operation"
 	when
-		session : Session ( )
+		session : AbstractScope ( )
 		gate : Gate ( eContainer == session )
 		target : Page ( )
 		nav : NavigateWire ( from == gate, to == target, name == "first" || name == "last" )
@@ -144,7 +164,10 @@ rule "Create contents of 'set flag' operation"
 
 end
 
-rule "Create condition 'check (gate)'"
+/**
+ * TODO remove this when Scope and Session are refactored.
+ */
+rule "Create condition 'check (gate)' (Session)"
 	when
 		session : Session ( )
 		gate : Gate ( eContainer == session )
@@ -159,9 +182,24 @@ rule "Create condition 'check (gate)'"
 
 end
 
+rule "Create condition 'check (gate)' (Scope)"
+	when
+		session : Scope ( )
+		gate : Gate ( eContainer == session )
+		wire : NavigateWire ( from == gate, name == "first" || name == "last" )
+		
+		not ( Condition ( eContainer == session, eval( name.equals("check " + gate.getName())) ))
+	
+	then
+		CompositeCondition cond = handler.generatedCompositeCondition(gate, session);
+		handler.setName(cond, "check " + gate.getName());
+		queue.add(cond, drools);
+
+end
+
 rule "Connect condition 'check (gate)' with gate"
 	when
-		session : Session ( )
+		session : AbstractScope ( )
 		gate : Gate ( eContainer == session )
 		wire : NavigateWire ( from == gate, name == "first" || name == "last" )
 		
@@ -178,7 +216,7 @@ end
 
 rule "Create contents of 'check (gate)' condition"
 	when
-		session : Session ( )
+		session : AbstractScope ( )
 		gate : Gate ( eContainer == session )
 		wire : NavigateWire ( from == gate, name == "first" || name == "last" )
 		property : ApplicationElementProperty ( eContainer == session, eval( name.equals(gate.getName() + " flag")) )
@@ -202,10 +240,9 @@ rule "Create contents of 'check (gate)' condition"
 		
 		ExecutionEdge e1 = handler.generatedExecutionEdge(gate, cond, start, cmp);
 		ExecutionEdge e2 = handler.generatedExecutionEdge(gate, cond, cmp, finish);
-		// put logic in here, instead of making two mostly-identical rules
-		handler.setName(e2, wire.getName().equals("first") ? "y" : "n");
+		handler.setName(e2, "y");
 		ExecutionEdge e3 = handler.generatedExecutionEdge(gate, cond, cmp, cancel);
-		handler.setName(e3, wire.getName().equals("first") ? "n" : "y");
+		handler.setName(e3, "n");
 		DataFlowEdge d1 = handler.generatedDataFlowEdge(gate, cond, property, cmp);
 		
 		queue.add(e1, drools);

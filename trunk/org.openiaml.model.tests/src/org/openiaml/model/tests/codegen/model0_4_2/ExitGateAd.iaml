@@ -29,7 +29,7 @@
         <dataEdges id="model.126b0cb5dec.182" from="model.126b0cb5dec.176" to="model.126b0cb5dec.3e"/>
         <executionEdges id="model.126b0cb5dec.17d" from="operations.126b0cb5e69.8a" to="model.126b0cb5dec.176"/>
         <executionEdges id="model.126b0cb5dec.17f" from="model.126b0cb5dec.176" to="operations.126b0cb5e69.8c"/>
-        <values id="model.126b0cb5dec.178" name="false" outFlows="model.126b0cb5dec.180" value="false"/>
+        <values id="model.126b0cb5dec.178" name="true" outFlows="model.126b0cb5dec.180" value="true"/>
       </operations>
       <eventTriggers id="model.126b0cb5dec.c4" name="access" outEdges="wires.126b0cb5e5a.4b">
         <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.126b0cb5e5a.4b" from="model.126b0cb5dec.c4" to="model.126b0cb5dec.d8" name="run"/>
@@ -38,6 +38,6 @@
         <wires xsi:type="iaml.wires:NavigateWire" id="wires.126b0cb5e5a.10e" from="visual.126b0cb5e5a.2d5" to="components.126b0cb5e69.5" name="onClick"/>
       </children>
     </children>
-    <properties id="model.126b0cb5dec.3e" name="ad viewed?" outFlows="model.126b0cb5dec.8a" inFlows="model.126b0cb5dec.182" defaultValue="true"/>
+    <properties id="model.126b0cb5dec.3e" name="ad viewed?" outFlows="model.126b0cb5dec.8a" inFlows="model.126b0cb5dec.182" defaultValue="false"/>
   </sessions>
 </iaml:InternetApplication>

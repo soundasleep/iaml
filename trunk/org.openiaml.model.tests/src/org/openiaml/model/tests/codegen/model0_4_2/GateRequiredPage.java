@@ -9,15 +9,15 @@ import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.tests.CodegenTestCase;
 
 /**
- * Showing how to simplify the Gate requirements using
+ * Showing how to simplify the EntryGate requirements using
  * Model Completion.
  * 
  * @author jmwright
- * @example Gate 
- * 		If a {@model Gate} is connected by a {@model NavigateWire} called "first", 
+ * @example EntryGate 
+ * 		If a {@model EntryGate} is connected by a {@model NavigateWire} called "first", 
  * 		then the target {@model Page} must be viewed at least once before proceeding.
- * @operational Gate,NavigateWire
- * 		If a {@model Gate} is connected by a {@model NavigateWire} called "first", 
+ * @operational EntryGate,NavigateWire
+ * 		If a {@model EntryGate} is connected by a {@model NavigateWire} called "first", 
  * 		then the target {@model Page} must be viewed at least once before proceeding.
  */
 public class GateRequiredPage extends CodegenTestCase {

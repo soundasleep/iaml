@@ -407,9 +407,23 @@ List[model::components::EntryGate] getPageEntryGates(model::scopes::Session this
 List[model::components::EntryGate] getPageEntryGates(emf::EObject this) :
 	{};
 
+/**
+ * Get all exit gates that may apply to the given page.
+ */
+getAllExitGates(model::visual::Page this) :
+	getRoot().eAllContents.typeSelect(model::components::ExitGate);
+
 /** Get all possible resume targets for this gate. */
-getResumeTargets(model::components::Gate this) :
+getEntryResumeTargets(model::components::EntryGate this) :
 	eContainer.eContents.typeSelect(model::visual::Page);
+
+/** 
+ * For possible exit targets, we will just select all pages.
+ * Technically this should be all pages that are _not_ protected by a Gate,
+ * but I don't think it matters.
+ */
+getExitResumeTargets(model::components::ExitGate this) :
+	getRoot().eAllContents.typeSelect(model::visual::Page);
 
 /**
  * Get all operations which the server needs to keep track of, and 

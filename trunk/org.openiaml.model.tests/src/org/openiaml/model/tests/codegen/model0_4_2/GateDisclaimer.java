@@ -7,20 +7,20 @@ import org.eclipse.core.resources.IFile;
 import org.openiaml.model.tests.CodegenTestCase;
 
 /**
- * Demonstrating the use of Gate to prevent access to a
+ * Demonstrating the use of EntryGate to prevent access to a
  * Scope without first viewing a disclaimer page.
  * 
  * @author jmwright
- * @example Gate 
- * 		Using a {@model Gate} to prevent access to a {@model Scope} without
+ * @example EntryGate 
+ * 		Using a {@model EntryGate} to prevent access to a {@model Scope} without
  * 		first viewing a disclaimer {@model Page}.
- * @operational Gate
+ * @operational EntryGate
  * 		If a {@model Page} is contained within a {@model Session} that contains
- * 		a {@model Gate}, any incoming {@model Condition Conditions} on that Gate 
+ * 		a {@model EntryGate}, any incoming {@model Condition Conditions} on that Gate 
  * 		must first be satisfied in order to proceed.
- * @operational Gate,NavigateWire
+ * @operational EntryGate,NavigateWire
  *		A {@model NavigateWire} may be used to resume {@model Page} access
- *		previously limited by a {@model Gate}. 		
+ *		previously limited by a {@model EntryGate}. 		
  */
 public class GateDisclaimer extends CodegenTestCase {
 	

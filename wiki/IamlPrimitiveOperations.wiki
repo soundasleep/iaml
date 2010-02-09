@@ -69,13 +69,13 @@ Returns true if all incoming parameters have the same value.
 
 ==true?==
 
-Returns true if all incoming parameters can be considered true:
+Returns false if any incoming parameters can be considered false (i.e. only true when _all_ incoming parameters are true):
 
-  * boolean true (although types aren't implemented yet)
-  * "true"
-  * any string not equal to "0", "" or "false"
-  * a non-zero integer
-  * any floating-point number not equal to 0.0
+  * boolean false (although types aren't implemented yet)
+  * an undefined variable, i.e. null
+  * any string equal to "0", "" or "false"
+  * the integer 0
+  * the floating-point number 0.0
 
 This is similiar to the [http://nz2.php.net/manual/en/language.types.boolean.php conversion of booleans in PHP].
 

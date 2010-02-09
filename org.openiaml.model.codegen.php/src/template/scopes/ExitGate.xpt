@@ -1,0 +1,103 @@
+«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+/**
+ * @implementation ExitGate
+ *    When all incoming {@model Condition Conditions} to an activated {@model ExitGate} fail,
+ *    that ExitGate is disabled.
+ */    
+«DEFINE runExitGate(model::visual::Page currentPage) FOR model::components::ExitGate-»
+/* exit gate '«safeName()»' */
+
+/* firstly, is this gate activated? */
+if (
+«IF containingSession(this) != null»
+	isset($_SESSION["«safeName(containingSession(this))»_«safeNameString(id)»_active"]) 
+	&& $_SESSION["«safeName(containingSession(this))»_«safeNameString(id)»_active"]
+«ELSE»
+	get_application_value("«safeNameString(id)»", null) !== null
+«ENDIF»
+) {
+	
+	/* do the gate conditions all fail? */
+	if (
+		«EXPAND template::conditions::Runtime::callCondition(true, this, false, currentPage) FOREACH inEdges.typeSelect(model::wires::ConditionWire) SEPARATOR " || "»
+	) {
+		// one condition passed
+		
+		// save the current page, for resuming
+		$resume = "«safeName(currentPage)»";
+		«IF containingSession(this) != null»
+			$_SESSION["«safeName(containingSession(this))»_«safeNameString(id)»_resume"] = $resume;
+		«ELSE»
+			set_application_value("«safeNameString(id)»_resume", $resume);
+		«ENDIF»
+		
+		// execute gate wires
+		«EXPAND template::events::Page::runGateWires(currentPage) FOR this»
+	} else {
+		// otherwise, disable the activation (it has passed at least once)
+		«IF containingSession(this) != null»
+			unset($_SESSION["«safeName(containingSession(this))»_«safeNameString(id)»_active"]); 
+		«ELSE»
+			set_application_value("«safeNameString(id)»_active", null);
+		«ENDIF»
+	}
+
+}
+
+/* secondly, if we are in the scope that this gate is contained in,
+   we need to activate it. */
+«IF containingSession(currentPage) == containingSession(this)»
+	$_SESSION["«safeName(containingSession(this))»_«safeNameString(id)»_active"] = true;
+«ELSEIF currentPage.exitGate == this»
+	set_application_value("«safeNameString(id)»_active", true);
+«ELSE»
+	// not activated by this page
+«ENDIF»
+
+«ENDDEFINE»
+
+/**
+ * If we have been asked to navigate to the given Gate,
+ * where should we resume?
+ *
+ * Should set '$arg' to the new page ID, or empty if the resume is not set.
+ */
+«DEFINE getExitResumeTarget(String arg) FOR model::components::ExitGate»
+	«IF containingSession(this) != null»
+		$«arg-» = null;
+		if (isset($_SESSION["«safeName(containingSession(this))»_«safeNameString(id)»_resume"]))
+			$«arg-» = $_SESSION["«safeName(containingSession(this))»_«safeNameString(id)»_resume"];
+	«ELSE»
+		$«arg-» = get_application_value("«safeNameString(id)»_resume", null);
+	«ENDIF»
+
+	// check that this is a valid value for this resume
+	$is_valid = false;
+	«FOREACH getExitResumeTargets(this) AS target»
+		if ($«arg-» == "«safeName(target)»")
+			$is_valid = true;  
+	«ENDFOREACH»
+	if (!$is_valid)
+		$«arg-» = "";	// reset
+«ENDDEFINE»
+
+/**
+ * Find _any_ target for the Gate (i.e. the resume has not been set)
+ */
+«DEFINE getExitAnyTarget(String arg) FOR model::components::ExitGate»
+	«IF getExitResumeTargets(this).isEmpty»
+		«EXPAND exception FOR throwException("Gate '" + this + "' did not have any possible resume targets")»
+	«ENDIF»
+	$«arg-» = "«safeName(getExitResumeTargets(this).first())»"; 
+«ENDDEFINE»
+
+/** 
+ * a hack way to create backtrace-able errors
+ * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540  
+ */
+«DEFINE exception FOR Object»
+«ENDDEFINE»
+

@@ -2,8 +2,8 @@
 
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE runEntryGate(model::visual::Page currentPage) FOR model::components::Gate-»
-/* gate '«safeName()»' */
+«DEFINE runEntryGate(model::visual::Page currentPage) FOR model::components::EntryGate-»
+/* entry gate '«safeName()»' */
 
 /* expand conditions */
 if (!(«EXPAND template::conditions::Runtime::callCondition(true, this, false, currentPage) FOREACH inEdges.typeSelect(model::wires::ConditionWire) SEPARATOR " && "»)) {
@@ -29,16 +29,18 @@ if (!(«EXPAND template::conditions::Runtime::callCondition(true, this, false, cu
  *
  * Should set '$arg' to the new page ID, or empty if the resume is not set.
  */
-«DEFINE getResumeTarget(String arg) FOR model::components::Gate»
+«DEFINE getEntryResumeTarget(String arg) FOR model::components::EntryGate»
 	«IF containingSession(this) != null»
-		$«arg-» = $_SESSION["«safeName(containingSession(this))»_«safeNameString(id)»"];
+		$«arg-» = null;
+		if (isset($_SESSION["«safeName(containingSession(this))»_«safeNameString(id)»"]))
+			$«arg-» = $_SESSION["«safeName(containingSession(this))»_«safeNameString(id)»"];
 	«ELSE»
-		$«arg-» = get_application_value("«safeNameString(id)»");
+		$«arg-» = get_application_value("«safeNameString(id)»", null);
 	«ENDIF»
 
 	// check that this is a valid value for this resume
 	$is_valid = false;
-	«FOREACH getResumeTargets(this) AS target»
+	«FOREACH getEntryResumeTargets(this) AS target»
 		if ($«arg-» == "«safeName(target)»")
 			$is_valid = true;  
 	«ENDFOREACH»
@@ -49,11 +51,11 @@ if (!(«EXPAND template::conditions::Runtime::callCondition(true, this, false, cu
 /**
  * Find _any_ target for the Gate (i.e. the resume has not been set)
  */
-«DEFINE getAnyTarget(String arg) FOR model::components::Gate»
-	«IF getResumeTargets(this).isEmpty»
+«DEFINE getEntryAnyTarget(String arg) FOR model::components::EntryGate»
+	«IF getEntryResumeTargets(this).isEmpty»
 		«EXPAND exception FOR throwException("Gate '" + this + "' did not have any possible resume targets")»
 	«ENDIF»
-	$«arg-» = "«safeName(getResumeTargets(this).first())»"; 
+	$«arg-» = "«safeName(getEntryResumeTargets(this).first())»"; 
 «ENDDEFINE»
 
 /** 

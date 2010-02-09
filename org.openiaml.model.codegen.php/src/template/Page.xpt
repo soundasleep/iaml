@@ -73,8 +73,11 @@ define("CURRENT_PAGE", "«id»");
 // exceptions are now covered by the exception handlers above
 «EXPAND template::events::Page::runPageEvents(this) FOREACH eventTriggers-»
 
-// run any gates connected to the containing scope(s)
-«EXPAND template::scopes::Gate::runEntryGate(this) FOREACH getPageEntryGates(this)-»
+// run any entry gates connected to the containing scope(s)
+«EXPAND template::scopes::EntryGate::runEntryGate(this) FOREACH getPageEntryGates(this)-»
+
+// is access to this page prevented by any other exit gate?
+«EXPAND template::scopes::ExitGate::runExitGate(this) FOREACH getAllExitGates(this)-»
 
 // expand any operations (both in this page and in any surrounding scopes)
 «EXPAND template::operations::Definitions::operationDefinitions(this, true) FOR getRoot()-»		

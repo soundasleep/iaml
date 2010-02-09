@@ -15,7 +15,7 @@
       <values id="model.126aaf83900.49b" name="1" outFlows="model.126aaf83900.4a8" value="1"/>
     </conditions>
     <children xsi:type="iaml.visual:Button" id="visual.126aaf8397d.1b5" name="Button" outEdges="wires.126aaf8398c.11d">
-      <wires xsi:type="iaml.wires:NavigateWire" id="wires.126aaf8398c.11d" from="visual.126aaf8397d.1b5" to="visual.126aaf8397d.1bb" name="navigate" inEdges="wires.126aaf8398c.11e"/>
+      <wires xsi:type="iaml.wires:NavigateWire" id="wires.126aaf8398c.11d" from="visual.126aaf8397d.1b5" to="visual.126aaf8397d.1bb" name="click" inEdges="wires.126aaf8398c.11e"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.126aaf8397d.1c3" name="value">
       <properties id="model.126aaf83900.46f" name="fieldValue" outFlows="model.126aaf83900.4a6"/>

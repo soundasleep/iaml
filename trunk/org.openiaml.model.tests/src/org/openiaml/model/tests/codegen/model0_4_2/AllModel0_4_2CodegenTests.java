@@ -26,6 +26,7 @@ public class AllModel0_4_2CodegenTests {
 		suite.addTestSuite(NavigateConditionWire.class);
 		suite.addTestSuite(NavigateConditionWireServer.class);
 		suite.addTestSuite(ExitGateAd.class);
+		suite.addTestSuite(ExitGateAdSimple.class);
 
 		return suite;
 	}

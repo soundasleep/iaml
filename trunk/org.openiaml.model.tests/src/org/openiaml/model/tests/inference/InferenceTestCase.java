@@ -42,7 +42,8 @@ import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.components.AccessControlHandler;
-import org.openiaml.model.model.components.Gate;
+import org.openiaml.model.model.components.EntryGate;
+import org.openiaml.model.model.components.ExitGate;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DecisionCondition;
@@ -465,12 +466,22 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	
 	/**
 	 * Assert that the given element contains the given
-	 * Gate.
+	 * EntryGate.
 	 *
 	 * @return The element found
 	 */
-	public Gate assertHasGate(AbstractScope root, String string) throws JaxenException {
-		return (Gate) queryOne(root, "iaml:gate[iaml:name='" + string + "']");	
+	public EntryGate assertHasEntryGate(AbstractScope root, String string) throws JaxenException {
+		return (EntryGate) queryOne(root, "iaml:entryGate[iaml:name='" + string + "']");	
+	}
+	
+	/**
+	 * Assert that the given element contains the given
+	 * ExitGate.
+	 *
+	 * @return The element found
+	 */
+	public ExitGate assertHasExitGate(AbstractScope root, String string) throws JaxenException {
+		return (ExitGate) queryOne(root, "iaml:exitGate[iaml:name='" + string + "']");	
 	}
 	
 	/**

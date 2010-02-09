@@ -20,7 +20,6 @@ import org.openiaml.model.model.components.ComponentsFactory;
 import org.openiaml.model.model.components.ComponentsPackage;
 import org.openiaml.model.model.components.EntryGate;
 import org.openiaml.model.model.components.ExitGate;
-import org.openiaml.model.model.components.Gate;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.components.LoginHandlerTypes;
 
@@ -136,7 +135,6 @@ public class ComponentsFactoryImpl extends EFactoryImpl implements ComponentsFac
 	 */
 	public EntryGate createEntryGate() {
 		EntryGateImpl entryGate = new EntryGateImpl();
-		generateID(entryGate);
 		return entryGate;
 	}
 
@@ -147,7 +145,6 @@ public class ComponentsFactoryImpl extends EFactoryImpl implements ComponentsFac
 	 */
 	public ExitGate createExitGate() {
 		ExitGateImpl exitGate = new ExitGateImpl();
-		generateID(exitGate);
 		return exitGate;
 	}
 

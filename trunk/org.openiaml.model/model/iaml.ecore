@@ -706,6 +706,8 @@
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="scopes" upperBound="-1"
           eType="#//AbstractScope" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+          eType="#//ApplicationElementProperty" containment="true"/>
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="components" nsURI="http://openiaml.org/model/components" nsPrefix="iaml.components">

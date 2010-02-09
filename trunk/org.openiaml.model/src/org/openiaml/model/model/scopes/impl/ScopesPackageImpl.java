@@ -202,6 +202,15 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getScope_Properties() {
+		return (EReference)scopeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ScopesFactory getScopesFactory() {
 		return (ScopesFactory)getEFactoryInstance();
 	}
@@ -233,6 +242,7 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 
 		scopeEClass = createEClass(SCOPE);
 		createEReference(scopeEClass, SCOPE__SCOPES);
+		createEReference(scopeEClass, SCOPE__PROPERTIES);
 	}
 
 	/**
@@ -292,6 +302,7 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 
 		initEClass(scopeEClass, Scope.class, "Scope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getScope_Scopes(), theModelPackage.getAbstractScope(), null, "scopes", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getScope_Properties(), theModelPackage.getApplicationElementProperty(), null, "properties", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create annotations
 		// http://openiaml.org/comment

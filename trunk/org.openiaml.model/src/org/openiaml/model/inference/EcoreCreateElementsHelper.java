@@ -47,6 +47,7 @@ import org.openiaml.model.model.operations.OperationCallNode;
 import org.openiaml.model.model.operations.OperationsPackage;
 import org.openiaml.model.model.operations.SplitNode;
 import org.openiaml.model.model.operations.StartNode;
+import org.openiaml.model.model.scopes.Scope;
 import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.users.Role;
@@ -87,6 +88,15 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 
 	public ApplicationElementProperty generatedApplicationElementProperty(GeneratesElements by, Session container) throws InferenceException {
 		ApplicationElementProperty fieldValue = (ApplicationElementProperty) createElement( container, ModelPackage.eINSTANCE.getApplicationElementProperty(), ScopesPackage.eINSTANCE.getSession_Properties() );
+		setGeneratedBy(fieldValue, by);
+		return fieldValue;
+	}
+	
+	/**
+	 * TODO remove this method when Scope and Session are refactored in the model.
+	 */
+	public ApplicationElementProperty generatedApplicationElementProperty(GeneratesElements by, Scope container) throws InferenceException {
+		ApplicationElementProperty fieldValue = (ApplicationElementProperty) createElement( container, ModelPackage.eINSTANCE.getApplicationElementProperty(), ScopesPackage.eINSTANCE.getScope_Properties() );
 		setGeneratedBy(fieldValue, by);
 		return fieldValue;
 	}

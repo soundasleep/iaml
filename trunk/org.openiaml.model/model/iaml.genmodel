@@ -225,6 +225,7 @@
       </genClasses>
       <genClasses ecoreClass="iaml.ecore#//scopes/Scope">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//scopes/Scope/scopes"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//scopes/Scope/properties"/>
       </genClasses>
     </nestedGenPackages>
     <nestedGenPackages prefix="Components" basePackage="org.openiaml.model.model"

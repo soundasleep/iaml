@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.AbstractScope;
+import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsEventTriggers;
@@ -54,6 +55,7 @@ import org.openiaml.model.model.scopes.ScopesPackage;
  *   <li>{@link org.openiaml.model.model.scopes.impl.ScopeImpl#getOutEdges <em>Out Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.ScopeImpl#getInEdges <em>In Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.ScopeImpl#getScopes <em>Scopes</em>}</li>
+ *   <li>{@link org.openiaml.model.model.scopes.impl.ScopeImpl#getProperties <em>Properties</em>}</li>
  * </ul>
  * </p>
  *
@@ -209,6 +211,16 @@ public class ScopeImpl extends AbstractScopeImpl implements Scope {
 	 * @ordered
 	 */
 	protected EList<AbstractScope> scopes;
+
+	/**
+	 * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProperties()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ApplicationElementProperty> properties;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -402,6 +414,18 @@ public class ScopeImpl extends AbstractScopeImpl implements Scope {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ApplicationElementProperty> getProperties() {
+		if (properties == null) {
+			properties = new EObjectContainmentEList<ApplicationElementProperty>(ApplicationElementProperty.class, this, ScopesPackage.SCOPE__PROPERTIES);
+		}
+		return properties;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -438,6 +462,8 @@ public class ScopeImpl extends AbstractScopeImpl implements Scope {
 				return ((InternalEList<?>)getInEdges()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SCOPE__SCOPES:
 				return ((InternalEList<?>)getScopes()).basicRemove(otherEnd, msgs);
+			case ScopesPackage.SCOPE__PROPERTIES:
+				return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -472,6 +498,8 @@ public class ScopeImpl extends AbstractScopeImpl implements Scope {
 				return getInEdges();
 			case ScopesPackage.SCOPE__SCOPES:
 				return getScopes();
+			case ScopesPackage.SCOPE__PROPERTIES:
+				return getProperties();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -525,6 +553,10 @@ public class ScopeImpl extends AbstractScopeImpl implements Scope {
 				getScopes().clear();
 				getScopes().addAll((Collection<? extends AbstractScope>)newValue);
 				return;
+			case ScopesPackage.SCOPE__PROPERTIES:
+				getProperties().clear();
+				getProperties().addAll((Collection<? extends ApplicationElementProperty>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -570,6 +602,9 @@ public class ScopeImpl extends AbstractScopeImpl implements Scope {
 			case ScopesPackage.SCOPE__SCOPES:
 				getScopes().clear();
 				return;
+			case ScopesPackage.SCOPE__PROPERTIES:
+				getProperties().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -604,6 +639,8 @@ public class ScopeImpl extends AbstractScopeImpl implements Scope {
 				return inEdges != null && !inEdges.isEmpty();
 			case ScopesPackage.SCOPE__SCOPES:
 				return scopes != null && !scopes.isEmpty();
+			case ScopesPackage.SCOPE__PROPERTIES:
+				return properties != null && !properties.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

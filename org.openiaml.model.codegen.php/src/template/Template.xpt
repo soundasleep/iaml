@@ -26,6 +26,8 @@
 			«EXPAND expandSitemapPage FOREACH children»
 			
 			«EXPAND expandSitemapPage FOREACH sessions»
+
+			«EXPAND expandSitemapPage FOREACH scopes»
 			
 			<li>[<a href="database_dump.php">database dump</a>]</li>
 		</ol>
@@ -80,6 +82,19 @@
 /* expand sessions as if they weren't there */
 «DEFINE expandSession FOR model::scopes::Session»
 	«EXPAND Page::expandPage FOREACH children»
+	«EXPAND expandSession FOREACH scopes»
+«ENDDEFINE»
+
+«DEFINE expandSession FOR model::AbstractScope»
+	«EXPAND exception FOR throwException("Unknown scope: " + this)»
+«ENDDEFINE»
+
+«DEFINE expandSession FOR model::scopes::Scope»
+	«EXPAND expandSession FOREACH scopes»
+«ENDDEFINE»
+
+«DEFINE expandSession FOR model::visual::Page»
+	«EXPAND Page::expandPage FOR this»
 «ENDDEFINE»
 
 /* default = nothing */
@@ -88,6 +103,7 @@
 
 «DEFINE expandSitemapPage FOR model::visual::Page»
 <li>
+	«EXPAND expandSitemapPage FOREACH scopes»
 	<a href="«safeNameString(id)».php">«name»</a>
 </li>
 «ENDDEFINE»
@@ -96,9 +112,23 @@
 <li>
 	[Session «name»]
 	<ol>
+		«EXPAND expandSitemapPage FOREACH scopes»
 		«EXPAND expandSitemapPage FOREACH children»
 	</ol>
 </li>
+«ENDDEFINE»
+
+«DEFINE expandSitemapPage FOR model::scopes::Scope»
+<li>
+	[Scope «name»]
+	<ol>
+		«EXPAND expandSitemapPage FOREACH scopes»
+	</ol>
+</li>
+«ENDDEFINE»
+
+«DEFINE expandSitemapPage FOR model::AbstractScope»
+	«EXPAND exception FOR throwException("Unknown scope: " + this)»
 «ENDDEFINE»
 
 /** 

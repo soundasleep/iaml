@@ -202,8 +202,8 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 		
 		// flow
 		assertGenerated(assertHasExecutionEdge(condition, start, check));
-		assertGenerated(assertHasExecutionEdge(condition, check, cancel, "y"));
-		assertGenerated(assertHasExecutionEdge(condition, check, finish, "n"));
+		assertGenerated(assertHasExecutionEdge(condition, check, finish, "y"));
+		assertGenerated(assertHasExecutionEdge(condition, check, cancel, "n"));
 		assertGenerated(assertHasDataFlowEdge(condition, property, check));		
 		
 	}

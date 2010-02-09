@@ -5,7 +5,7 @@
 «DEFINE runEntryGate(model::visual::Page currentPage) FOR model::components::EntryGate-»
 /* entry gate '«safeName()»' */
 
-/* expand conditions */
+/* expand conditions - do any of them fail? */
 if (!(«EXPAND template::conditions::Runtime::callCondition(true, this, false, currentPage) FOREACH inEdges.typeSelect(model::wires::ConditionWire) SEPARATOR " && "»)) {
 	// condition failed
 	

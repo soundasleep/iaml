@@ -3,7 +3,7 @@
   <children xsi:type="iaml.visual:Page" id="index" name="Home"/>
   <children xsi:type="iaml.visual:Page" id="visual.126b0cb5e5a.20" name="External Page"/>
   <sessions id="scopes.126b0cb5e69.4" name="Advertising Session">
-    <exitGate id="components.126b0cb5e69.5" name="View Ads Exit Gate" outEdges="wires.126b0cb5e5a.e" inEdges="wires.126b0cb5e5a.17">
+    <exitGate id="components.126b0cb5e69.5" name="View Ads Exit Gate" outEdges="wires.126b0cb5e5a.e" inEdges="wires.126b0cb5e5a.17 wires.126b0cb5e5a.10e">
       <wires xsi:type="iaml.wires:NavigateWire" id="wires.126b0cb5e5a.e" from="components.126b0cb5e69.5" to="visual.126b0cb5e5a.4a" name="view ad"/>
     </exitGate>
     <conditions xsi:type="iaml:CompositeCondition" outEdges="wires.126b0cb5e5a.17" id="model.126b0cb5dec.43" name="need to view ad?">
@@ -34,6 +34,9 @@
       <eventTriggers id="model.126b0cb5dec.c4" name="access" outEdges="wires.126b0cb5e5a.4b">
         <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.126b0cb5e5a.4b" from="model.126b0cb5dec.c4" to="model.126b0cb5dec.d8" name="run"/>
       </eventTriggers>
+      <children xsi:type="iaml.visual:Button" id="visual.126b0cb5e5a.2d5" name="Resume" outEdges="wires.126b0cb5e5a.10e">
+        <wires xsi:type="iaml.wires:NavigateWire" id="wires.126b0cb5e5a.10e" from="visual.126b0cb5e5a.2d5" to="components.126b0cb5e69.5" name="onClick"/>
+      </children>
     </children>
     <properties id="model.126b0cb5dec.3e" name="ad viewed?" outFlows="model.126b0cb5dec.8a" inFlows="model.126b0cb5dec.182" defaultValue="true"/>
   </sessions>

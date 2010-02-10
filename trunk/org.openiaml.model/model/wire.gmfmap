@@ -84,8 +84,6 @@
     </ownedChild>
   </nodes>
   <nodes>
-    <containmentFeature
-        href="iaml.ecore#//wires/CompositeWire/children"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//visual/InputTextField"/>

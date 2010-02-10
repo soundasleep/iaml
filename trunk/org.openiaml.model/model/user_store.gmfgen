@@ -14,6 +14,7 @@
     <containsShortcutsTo>iaml_user_store</containsShortcutsTo>
     <containsShortcutsTo>iaml_domain_object</containsShortcutsTo>
     <containsShortcutsTo>iaml_session</containsShortcutsTo>
+    <containsShortcutsTo>iaml_frame</containsShortcutsTo>
     <shortcutsProvidedFor>iaml_domain_object_instance</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_condition</shortcutsProvidedFor>
@@ -25,6 +26,7 @@
     <shortcutsProvidedFor>iaml_user_store</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_domain_object</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_session</shortcutsProvidedFor>
+    <shortcutsProvidedFor>iaml_frame</shortcutsProvidedFor>
     <domainDiagramElement href="iaml.genmodel#//model/users/UserStore"/>
     <topLevelNodes canonicalEditPolicyClassName="CompositeOperationCanonicalEditPolicy" createCommandClassName="CompositeOperationCreateCommand" editPartClassName="CompositeOperationEditPart" graphicalNodeEditPolicyClassName="CompositeOperationGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="CompositeOperationItemSemanticEditPolicy" notationViewFactoryClassName="CompositeOperationViewFactory" visualID="2007">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -236,9 +238,7 @@
       <children iD="org.openiaml.model.diagram.printing" kind="Printing" name="Printing" xsi:type="gmfgen:GenStandardPreferencePage"/>
       <children iD="org.openiaml.model.diagram.rulersAndGrid" kind="RulersAndGrid" name="Rulers And Grid" xsi:type="gmfgen:GenStandardPreferencePage"/>
     </preferencePages>
-  <containsShortcutsTo>iaml_scope</containsShortcutsTo>
-<shortcutsProvidedFor>iaml_scope</shortcutsProvidedFor>
-</diagram>
+  </diagram>
   <plugin iD="org.openiaml.model.diagram.user_store" name="Iaml Diagram Plugin (User Store)" provider="www.openiaml.org" version="0.4.1.qualifier">
     <requiredPlugins>org.eclipse.draw2d</requiredPlugins>
     <requiredPlugins>org.eclipse.gmf.runtime.draw2d.ui</requiredPlugins>

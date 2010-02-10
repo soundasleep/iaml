@@ -25,7 +25,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="session.gmftool#//@palette/@tools.0/@tools.0"/>
+          href="frame.gmftool#//@palette/@tools.0/@tools.0"/>
       <diagramNode
           href="iaml.gmfgraph#EventTrigger"/>
     </ownedChild>
@@ -52,7 +52,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="session.gmftool#//@palette/@tools.0/@tools.2"/>
+          href="frame.gmftool#//@palette/@tools.0/@tools.2"/>
       <diagramNode
           href="iaml.gmfgraph#CompositeOperation"/>
     </ownedChild>
@@ -79,7 +79,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="session.gmftool#//@palette/@tools.0/@tools.1"/>
+          href="frame.gmftool#//@palette/@tools.0/@tools.1"/>
       <diagramNode
           href="iaml.gmfgraph#PrimitiveOperation"/>
     </ownedChild>
@@ -106,7 +106,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="session.gmftool#//@palette/@tools.1/@tools.0"/>
+          href="frame.gmftool#//@palette/@tools.1/@tools.0"/>
       <diagramNode
           href="iaml.gmfgraph#DomainObject"/>
     </ownedChild>
@@ -133,7 +133,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="session.gmftool#//@palette/@tools.1/@tools.1"/>
+          href="frame.gmftool#//@palette/@tools.1/@tools.1"/>
       <diagramNode
           href="iaml.gmfgraph#DomainAttribute"/>
     </ownedChild>
@@ -168,7 +168,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="session.gmftool#//@palette/@tools.0/@tools.3"/>
+          href="frame.gmftool#//@palette/@tools.0/@tools.3"/>
       <diagramNode
           href="iaml.gmfgraph#ApplicationElementProperty"/>
     </ownedChild>
@@ -190,12 +190,14 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="session.gmftool#//@palette/@tools.2/@tools.0"/>
+          href="frame.gmftool#//@palette/@tools.2/@tools.0"/>
       <diagramNode
           href="iaml.gmfgraph#Frame"/>
     </ownedChild>
   </nodes>
   <nodes>
+    <containmentFeature
+        href="iaml.ecore#//visual/Frame/children"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//visual/InputForm"/>
@@ -215,12 +217,14 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="session.gmftool#//@palette/@tools.2/@tools.1"/>
+          href="frame.gmftool#//@palette/@tools.2/@tools.1"/>
       <diagramNode
           href="iaml.gmfgraph#InputForm"/>
     </ownedChild>
   </nodes>
   <nodes>
+    <containmentFeature
+        href="iaml.ecore#//visual/Frame/children"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//visual/InputTextField"/>
@@ -240,7 +244,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="session.gmftool#//@palette/@tools.2/@tools.2"/>
+          href="frame.gmftool#//@palette/@tools.2/@tools.2"/>
       <diagramNode
           href="iaml.gmfgraph#InputTextField"/>
     </ownedChild>
@@ -269,9 +273,32 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="session.gmftool#//@palette/@tools.0/@tools.5"/>
+          href="frame.gmftool#//@palette/@tools.0/@tools.5"/>
       <diagramNode
           href="iaml.gmfgraph#StaticValue"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//ContainsScopes/scopes"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//scopes/Session"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( Session )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          editPattern="">
+        <diagramLabel
+            href="iaml.gmfgraph#SessionName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="frame.gmftool#//@palette/@tools.2/@tools.4"/>
+      <diagramNode
+          href="iaml.gmfgraph#Session"/>
     </ownedChild>
   </nodes>
   <nodes>
@@ -301,7 +328,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="session.gmftool#//@palette/@tools.0/@tools.6"/>
+          href="frame.gmftool#//@palette/@tools.0/@tools.6"/>
       <diagramNode
           href="iaml.gmfgraph#LoginHandler"/>
     </ownedChild>
@@ -329,7 +356,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="session.gmftool#//@palette/@tools.0/@tools.4"/>
+          href="frame.gmftool#//@palette/@tools.0/@tools.4"/>
       <diagramNode
           href="iaml.gmfgraph#CompositeCondition"/>
     </ownedChild>
@@ -361,7 +388,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="session.gmftool#//@palette/@tools.1/@tools.2"/>
+          href="frame.gmftool#//@palette/@tools.1/@tools.2"/>
       <diagramNode
           href="iaml.gmfgraph#DomainObjectInstance"/>
     </ownedChild>
@@ -383,12 +410,14 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="session.gmftool#//@palette/@tools.1/@tools.3"/>
+          href="frame.gmftool#//@palette/@tools.1/@tools.3"/>
       <diagramNode
           href="iaml.gmfgraph#DomainAttributeInstance"/>
     </ownedChild>
   </nodes>
   <nodes>
+    <containmentFeature
+        href="iaml.ecore#//visual/Frame/children"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//visual/Button"/>
@@ -408,9 +437,30 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="session.gmftool#//@palette/@tools.2/@tools.3"/>
+          href="frame.gmftool#//@palette/@tools.2/@tools.3"/>
       <diagramNode
           href="iaml.gmfgraph#Button"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//Scope/parameters"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//QueryParameter"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          editPattern="">
+        <diagramLabel
+            href="iaml.gmfgraph#QueryParameterName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="frame.gmftool#//@palette/@tools.0/@tools.7"/>
+      <diagramNode
+          href="iaml.gmfgraph#QueryParameter"/>
     </ownedChild>
   </nodes>
   <nodes>
@@ -430,7 +480,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="session.gmftool#//@palette/@tools.4/@tools.0"/>
+          href="frame.gmftool#//@palette/@tools.4/@tools.0"/>
       <diagramNode
           href="iaml.gmfgraph#AccessControlHandler"/>
     </ownedChild>
@@ -494,7 +544,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="session.gmftool#//@palette/@tools.4/@tools.3"/>
+          href="frame.gmftool#//@palette/@tools.4/@tools.3"/>
       <diagramNode
           href="iaml.gmfgraph#UserInstance"/>
     </ownedChild>
@@ -506,7 +556,8 @@
       <domainMetaElement
           href="iaml.ecore#//components/EntryGate"/>
       <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
+          xsi:type="gmfmap:FeatureLabelMapping"
+          editPattern="">
         <diagramLabel
             href="iaml.gmfgraph#EntryGateName"/>
         <features
@@ -517,9 +568,6 @@
         <diagramLabel
             href="iaml.gmfgraph#EntryGateParentName"/>
       </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="session.gmftool#//@palette/@tools.0/@tools.7"/>
       <diagramNode
           href="iaml.gmfgraph#EntryGate"/>
     </ownedChild>
@@ -531,7 +579,8 @@
       <domainMetaElement
           href="iaml.ecore#//components/ExitGate"/>
       <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
+          xsi:type="gmfmap:FeatureLabelMapping"
+          editPattern="">
         <diagramLabel
             href="iaml.gmfgraph#ExitGateName"/>
         <features
@@ -542,9 +591,6 @@
         <diagramLabel
             href="iaml.gmfgraph#ExitGateParentName"/>
       </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="session.gmftool#//@palette/@tools.0/@tools.8"/>
       <diagramNode
           href="iaml.gmfgraph#ExitGate"/>
     </ownedChild>
@@ -565,7 +611,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="session.gmftool#//@palette/@tools.3/@tools.0"/>
+        href="frame.gmftool#//@palette/@tools.3/@tools.0"/>
     <diagramLink
         href="iaml.gmfgraph#SyncWire"/>
     <sourceMetaFeature
@@ -591,7 +637,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="session.gmftool#//@palette/@tools.3/@tools.1"/>
+        href="frame.gmftool#//@palette/@tools.3/@tools.1"/>
     <diagramLink
         href="iaml.gmfgraph#RunInstanceWire"/>
     <sourceMetaFeature
@@ -610,7 +656,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="session.gmftool#//@palette/@tools.3/@tools.4"/>
+        href="frame.gmftool#//@palette/@tools.3/@tools.4"/>
     <diagramLink
         href="iaml.gmfgraph#ParameterWire"/>
     <sourceMetaFeature
@@ -643,7 +689,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="session.gmftool#//@palette/@tools.3/@tools.5"/>
+        href="frame.gmftool#//@palette/@tools.3/@tools.5"/>
     <diagramLink
         href="iaml.gmfgraph#SelectWire"/>
     <sourceMetaFeature
@@ -669,7 +715,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="session.gmftool#//@palette/@tools.3/@tools.6"/>
+        href="frame.gmftool#//@palette/@tools.3/@tools.6"/>
     <diagramLink
         href="iaml.gmfgraph#SetWire"/>
     <sourceMetaFeature
@@ -695,7 +741,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="session.gmftool#//@palette/@tools.3/@tools.2"/>
+        href="frame.gmftool#//@palette/@tools.3/@tools.2"/>
     <diagramLink
         href="iaml.gmfgraph#NavigateWire"/>
     <sourceMetaFeature
@@ -721,7 +767,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="session.gmftool#//@palette/@tools.3/@tools.3"/>
+        href="frame.gmftool#//@palette/@tools.3/@tools.3"/>
     <diagramLink
         href="iaml.gmfgraph#ConditionWire"/>
     <sourceMetaFeature
@@ -747,7 +793,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="session.gmftool#//@palette/@tools.3/@tools.7"/>
+        href="frame.gmftool#//@palette/@tools.3/@tools.7"/>
     <diagramLink
         href="iaml.gmfgraph#NewInstanceWire"/>
     <sourceMetaFeature
@@ -771,7 +817,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="session.gmftool#//@palette/@tools.4/@tools.1"/>
+        href="frame.gmftool#//@palette/@tools.4/@tools.1"/>
     <diagramLink
         href="iaml.gmfgraph#RequiresWire"/>
     <sourceMetaFeature
@@ -800,7 +846,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="session.gmftool#//@palette/@tools.4/@tools.2"/>
+        href="frame.gmftool#//@palette/@tools.4/@tools.2"/>
     <diagramLink
         href="iaml.gmfgraph#ConstraintWire"/>
     <sourceMetaFeature
@@ -816,8 +862,8 @@
     <domainModel
         href="iaml.ecore#/"/>
     <domainMetaElement
-        href="iaml.ecore#//scopes/Session"/>
+        href="iaml.ecore#//visual/Frame"/>
     <palette
-        href="session.gmftool#//@palette"/>
+        href="frame.gmftool#//@palette"/>
   </diagram>
 </gmfmap:Mapping>

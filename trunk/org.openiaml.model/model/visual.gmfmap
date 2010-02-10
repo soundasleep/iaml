@@ -85,8 +85,6 @@
     </ownedChild>
   </nodes>
   <nodes>
-    <containmentFeature
-        href="iaml.ecore#//ApplicationElementContainer/children"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//DomainObject"/>
@@ -104,16 +102,11 @@
         <diagramLabel
             href="iaml.gmfgraph#DomainObjectParentName"/>
       </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="visual.gmftool#//@palette/@tools.1/@tools.0"/>
       <diagramNode
           href="iaml.gmfgraph#DomainObject"/>
     </ownedChild>
   </nodes>
   <nodes>
-    <containmentFeature
-        href="iaml.ecore#//ApplicationElementContainer/children"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//DomainAttribute"/>
@@ -131,16 +124,13 @@
         <diagramLabel
             href="iaml.gmfgraph#DomainAttributeParentName"/>
       </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="visual.gmftool#//@palette/@tools.1/@tools.1"/>
       <diagramNode
           href="iaml.gmfgraph#DomainAttribute"/>
     </ownedChild>
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//ApplicationElement/properties"/>
+        href="iaml.ecore#//VisibleThing/properties"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//ApplicationElementProperty"/>
@@ -174,30 +164,25 @@
     </ownedChild>
   </nodes>
   <nodes>
-    <containmentFeature
-        href="iaml.ecore#//ApplicationElementContainer/children"/>
     <ownedChild>
       <domainMetaElement
-          href="iaml.ecore#//visual/Page"/>
+          href="iaml.ecore#//visual/Frame"/>
       <domainSpecialization
-          body="self.oclIsTypeOf( Page )"/>
+          body="self.oclIsTypeOf( Frame )"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
-            href="iaml.gmfgraph#PageName"/>
+            href="iaml.gmfgraph#FrameName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="visual.gmftool#//@palette/@tools.2/@tools.0"/>
       <diagramNode
-          href="iaml.gmfgraph#Page"/>
+          href="iaml.gmfgraph#Frame"/>
     </ownedChild>
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//ApplicationElementContainer/children"/>
+        href="iaml.ecore#//VisibleThing/children"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//visual/InputForm"/>
@@ -217,14 +202,14 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="visual.gmftool#//@palette/@tools.2/@tools.1"/>
+          href="visual.gmftool#//@palette/@tools.1/@tools.0"/>
       <diagramNode
           href="iaml.gmfgraph#InputForm"/>
     </ownedChild>
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//ApplicationElementContainer/children"/>
+        href="iaml.ecore#//VisibleThing/children"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//visual/InputTextField"/>
@@ -244,14 +229,14 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="visual.gmftool#//@palette/@tools.2/@tools.2"/>
+          href="visual.gmftool#//@palette/@tools.1/@tools.1"/>
       <diagramNode
           href="iaml.gmfgraph#InputTextField"/>
     </ownedChild>
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//ApplicationElement/values"/>
+        href="iaml.ecore#//VisibleThing/values"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//StaticValue"/>
@@ -279,8 +264,6 @@
     </ownedChild>
   </nodes>
   <nodes>
-    <containmentFeature
-        href="iaml.ecore#//VisibleThing/sessions"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//scopes/Session"/>
@@ -292,16 +275,11 @@
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="visual.gmftool#//@palette/@tools.2/@tools.4"/>
       <diagramNode
           href="iaml.gmfgraph#Session"/>
     </ownedChild>
   </nodes>
   <nodes>
-    <containmentFeature
-        href="iaml.ecore#//ApplicationElementContainer/children"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//components/LoginHandler"/>
@@ -324,9 +302,6 @@
         <features
             href="iaml.ecore#//components/LoginHandler/type"/>
       </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="visual.gmftool#//@palette/@tools.0/@tools.6"/>
       <diagramNode
           href="iaml.gmfgraph#LoginHandler"/>
     </ownedChild>
@@ -360,8 +335,6 @@
     </ownedChild>
   </nodes>
   <nodes>
-    <containmentFeature
-        href="iaml.ecore#//ApplicationElementContainer/children"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//DomainObjectInstance"/>
@@ -384,16 +357,11 @@
         <features
             href="iaml.ecore#//DomainObjectInstance/autosave"/>
       </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="visual.gmftool#//@palette/@tools.1/@tools.2"/>
       <diagramNode
           href="iaml.gmfgraph#DomainObjectInstance"/>
     </ownedChild>
   </nodes>
   <nodes>
-    <containmentFeature
-        href="iaml.ecore#//ApplicationElementContainer/children"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//DomainAttributeInstance"/>
@@ -406,16 +374,13 @@
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="visual.gmftool#//@palette/@tools.1/@tools.3"/>
       <diagramNode
           href="iaml.gmfgraph#DomainAttributeInstance"/>
     </ownedChild>
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//ApplicationElementContainer/children"/>
+        href="iaml.ecore#//VisibleThing/children"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//visual/Button"/>
@@ -435,14 +400,12 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="visual.gmftool#//@palette/@tools.2/@tools.3"/>
+          href="visual.gmftool#//@palette/@tools.1/@tools.2"/>
       <diagramNode
           href="iaml.gmfgraph#Button"/>
     </ownedChild>
   </nodes>
   <nodes>
-    <containmentFeature
-        href="iaml.ecore#//VisibleThing/parameters"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//QueryParameter"/>
@@ -454,16 +417,11 @@
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="visual.gmftool#//@palette/@tools.0/@tools.7"/>
       <diagramNode
           href="iaml.gmfgraph#QueryParameter"/>
     </ownedChild>
   </nodes>
   <nodes>
-    <containmentFeature
-        href="iaml.ecore#//ApplicationElementContainer/children"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//components/AccessControlHandler"/>
@@ -476,9 +434,6 @@
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="visual.gmftool#//@palette/@tools.4/@tools.0"/>
       <diagramNode
           href="iaml.gmfgraph#AccessControlHandler"/>
     </ownedChild>
@@ -516,8 +471,6 @@
     </ownedChild>
   </nodes>
   <nodes>
-    <containmentFeature
-        href="iaml.ecore#//ApplicationElementContainer/children"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//users/UserInstance"/>
@@ -540,9 +493,6 @@
         <features
             href="iaml.ecore#//DomainObjectInstance/autosave"/>
       </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="visual.gmftool#//@palette/@tools.4/@tools.3"/>
       <diagramNode
           href="iaml.gmfgraph#UserInstance"/>
     </ownedChild>
@@ -605,7 +555,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="visual.gmftool#//@palette/@tools.3/@tools.0"/>
+        href="visual.gmftool#//@palette/@tools.2/@tools.0"/>
     <diagramLink
         href="iaml.gmfgraph#SyncWire"/>
     <sourceMetaFeature
@@ -631,7 +581,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="visual.gmftool#//@palette/@tools.3/@tools.1"/>
+        href="visual.gmftool#//@palette/@tools.2/@tools.1"/>
     <diagramLink
         href="iaml.gmfgraph#RunInstanceWire"/>
     <sourceMetaFeature
@@ -650,7 +600,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="visual.gmftool#//@palette/@tools.3/@tools.4"/>
+        href="visual.gmftool#//@palette/@tools.2/@tools.4"/>
     <diagramLink
         href="iaml.gmfgraph#ParameterWire"/>
     <sourceMetaFeature
@@ -683,7 +633,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="visual.gmftool#//@palette/@tools.3/@tools.5"/>
+        href="visual.gmftool#//@palette/@tools.2/@tools.5"/>
     <diagramLink
         href="iaml.gmfgraph#SelectWire"/>
     <sourceMetaFeature
@@ -709,7 +659,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="visual.gmftool#//@palette/@tools.3/@tools.6"/>
+        href="visual.gmftool#//@palette/@tools.2/@tools.6"/>
     <diagramLink
         href="iaml.gmfgraph#SetWire"/>
     <sourceMetaFeature
@@ -735,7 +685,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="visual.gmftool#//@palette/@tools.3/@tools.2"/>
+        href="visual.gmftool#//@palette/@tools.2/@tools.2"/>
     <diagramLink
         href="iaml.gmfgraph#NavigateWire"/>
     <sourceMetaFeature
@@ -761,7 +711,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="visual.gmftool#//@palette/@tools.3/@tools.3"/>
+        href="visual.gmftool#//@palette/@tools.2/@tools.3"/>
     <diagramLink
         href="iaml.gmfgraph#ConditionWire"/>
     <sourceMetaFeature
@@ -787,7 +737,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="visual.gmftool#//@palette/@tools.3/@tools.7"/>
+        href="visual.gmftool#//@palette/@tools.2/@tools.7"/>
     <diagramLink
         href="iaml.gmfgraph#NewInstanceWire"/>
     <sourceMetaFeature
@@ -809,9 +759,6 @@
     </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/wires"/>
-    <tool
-        xsi:type="gmftool:CreationTool"
-        href="visual.gmftool#//@palette/@tools.4/@tools.1"/>
     <diagramLink
         href="iaml.gmfgraph#RequiresWire"/>
     <sourceMetaFeature
@@ -838,9 +785,6 @@
     </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/wires"/>
-    <tool
-        xsi:type="gmftool:CreationTool"
-        href="visual.gmftool#//@palette/@tools.4/@tools.2"/>
     <diagramLink
         href="iaml.gmfgraph#ConstraintWire"/>
     <sourceMetaFeature

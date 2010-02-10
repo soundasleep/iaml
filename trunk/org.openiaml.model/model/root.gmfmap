@@ -113,16 +113,16 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//InternetApplication/children"/>
+        href="iaml.ecore#//ContainsScopes/scopes"/>
     <ownedChild>
       <domainMetaElement
-          href="iaml.ecore#//visual/Page"/>
+          href="iaml.ecore#//visual/Frame"/>
       <domainSpecialization
-          body="self.oclIsTypeOf(Page)"/>
+          body="self.oclIsTypeOf( Frame )"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
-            href="iaml.gmfgraph#PageName"/>
+            href="iaml.gmfgraph#FrameName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
@@ -130,7 +130,7 @@
           xsi:type="gmftool:CreationTool"
           href="root.gmftool#//@palette/@tools.1/@tools.0"/>
       <diagramNode
-          href="iaml.gmfgraph#Page"/>
+          href="iaml.gmfgraph#Frame"/>
     </ownedChild>
   </nodes>
   <nodes>
@@ -220,10 +220,12 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//InternetApplication/sessions"/>
+        href="iaml.ecore#//ContainsScopes/scopes"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//scopes/Session"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( Session )"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
@@ -317,31 +319,6 @@
           href="root.gmftool#//@palette/@tools.0/@tools.7"/>
       <diagramNode
           href="iaml.gmfgraph#UserStore"/>
-    </ownedChild>
-  </nodes>
-  <nodes>
-    <containmentFeature
-        href="iaml.ecore#//InternetApplication/scopes"/>
-    <ownedChild>
-      <domainMetaElement
-          href="iaml.ecore#//scopes/Scope"/>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="iaml.gmfgraph#ScopeName"/>
-        <features
-            href="iaml.ecore#//NamedElement/name"/>
-      </labelMappings>
-      <labelMappings
-          readOnly="true">
-        <diagramLabel
-            href="iaml.gmfgraph#ScopeParentName"/>
-      </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="root.gmftool#//@palette/@tools.0/@tools.8"/>
-      <diagramNode
-          href="iaml.gmfgraph#Scope"/>
     </ownedChild>
   </nodes>
   <links>

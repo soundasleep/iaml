@@ -40,7 +40,7 @@ public class Migrate0To1 extends DomBasedMigrator implements IamlModelMigrator {
 			String nsPackage = doc.getDocumentElement().getAttribute("xmlns:iaml");
 			String rootId = doc.getDocumentElement().getAttribute("id");
 
-			if (nsPackage.equals("http://openiaml.org/model") && 
+			if (nsPackage.equals(getTargetNamespace()) && 
 					rootId.isEmpty()) {
 				// this is us! (version 0.0)
 				return true;
@@ -136,6 +136,11 @@ public class Migrate0To1 extends DomBasedMigrator implements IamlModelMigrator {
 	public void handleElement(Element old, Element element,
 			List<ExpectedMigrationException> errors) {
 		// does nothing
+	}
+
+	@Override
+	protected String getTargetNamespace() {
+		return "http://openiaml.org/model";
 	}
 
 }

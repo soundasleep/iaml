@@ -14,11 +14,12 @@ import org.openiaml.model.migrate.IamlModelMigrator;
 import org.openiaml.model.migrate.Migrate0To1;
 import org.openiaml.model.migrate.Migrate1To2;
 import org.openiaml.model.migrate.Migrate2To4;
+import org.openiaml.model.migrate.Migrate4To5;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.domain.DomainStoreTypes;
-import org.openiaml.model.model.visual.Page;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.tests.eclipse.migration.AbstractMigrateTestCase;
 
 /**
@@ -68,6 +69,7 @@ public class MigrateDomainObjects extends AbstractMigrateTestCase {
 		assertClassNotIn(Migrate0To1.class, used);
 		assertClassNotIn(Migrate1To2.class, used);
 		assertClassIn(Migrate2To4.class, used);
+		assertClassIn(Migrate4To5.class, used);
 	}
 
 	/**
@@ -88,7 +90,7 @@ public class MigrateDomainObjects extends AbstractMigrateTestCase {
 		assertHasDomainStore(editor, "normal domain store");
 		assertHasDomainStore(editor, "file domain store");
 		assertHasDomainObject(editor, "normal domain object");
-		assertHasPage(editor, "a page");
+		assertHasFrame(editor, "a page");
 		assertHasSession(editor, "session");
 	}
 
@@ -185,15 +187,15 @@ public class MigrateDomainObjects extends AbstractMigrateTestCase {
 	public void testPage() throws Exception {
 		migrateModel();
 		
-		ShapeNodeEditPart part = assertHasPage(editor, "a page");
+		ShapeNodeEditPart part = assertHasFrame(editor, "a page");
 		assertNotNull(part);
 		
-		Page page = (Page) part.resolveSemanticElement();
+		Frame page = (Frame) part.resolveSemanticElement();
 		assertEquals(page.getName(), "a page");
 		
 		// open diagram
 		DiagramDocumentEditor sub = openDiagram(part);
-		assertEditorVisual(sub);
+		assertEditorFrame(sub);
 		
 		// check contents
 		assertEditorHasChildren(4, sub);

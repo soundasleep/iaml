@@ -10,6 +10,7 @@ import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocument
 import org.openiaml.model.migrate.IamlModelMigrator;
 import org.openiaml.model.migrate.Migrate0To1;
 import org.openiaml.model.migrate.Migrate1To2;
+import org.openiaml.model.migrate.Migrate4To5;
 
 /**
  * Tests migrating a very old model version, from 0.1 to 0.2.
@@ -31,6 +32,7 @@ public class Migrate0_2SyncPages extends AbstractMigrateTestCase {
 		List<IamlModelMigrator> used = migrateModelOnly();
 		assertClassNotIn(Migrate0To1.class, used);
 		assertClassIn(Migrate1To2.class, used);
+		assertClassIn(Migrate4To5.class, used);
 	}
 	
 	
@@ -41,11 +43,11 @@ public class Migrate0_2SyncPages extends AbstractMigrateTestCase {
 		assertEditorHasChildren(5, editor);
 		
 		// check the contents
-		assertHasPage(editor, "page1");
-		assertHasPage(editor, "page2");
-		assertHasPage(editor, "page3");
-		assertHasPage(editor, "page4");
-		assertHasPage(editor, "page5");
+		assertHasFrame(editor, "page1");
+		assertHasFrame(editor, "page2");
+		assertHasFrame(editor, "page3");
+		assertHasFrame(editor, "page4");
+		assertHasFrame(editor, "page5");
 	}
 	
 	/**
@@ -57,11 +59,11 @@ public class Migrate0_2SyncPages extends AbstractMigrateTestCase {
 		migrateModel();
 		
 		// open the diagram
-		ShapeNodeEditPart page = assertHasPage(editor, "page1");
+		ShapeNodeEditPart page = assertHasFrame(editor, "page1");
 		assertNotNull(page);
 
 		editor_page = openDiagram(page);
-		assertEditorVisual(editor_page);
+		assertEditorFrame(editor_page);
 		
 		// it should have two children: two text fields
 		assertEditorHasChildren(2, editor_page);
@@ -77,11 +79,11 @@ public class Migrate0_2SyncPages extends AbstractMigrateTestCase {
 		migrateModel();
 		
 		// open the diagram
-		ShapeNodeEditPart page = assertHasPage(editor, "page2");
+		ShapeNodeEditPart page = assertHasFrame(editor, "page2");
 		assertNotNull(page);
 
 		editor_page = openDiagram(page);
-		assertEditorVisual(editor_page);
+		assertEditorFrame(editor_page);
 		
 		// it should have two children: two text fields
 		assertEditorHasChildren(4, editor_page);

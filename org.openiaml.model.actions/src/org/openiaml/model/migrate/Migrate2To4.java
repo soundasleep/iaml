@@ -176,8 +176,8 @@ public class Migrate2To4 extends DomBasedMigrator implements IamlModelMigrator {
 	 * Models of version 0.4 have a different namespace.
 	 */
 	@Override
-	protected Element createElement(Document document, String nodeName) {
-		return document.createElementNS("http://openiaml.org/model0.4", nodeName);
+	protected String getTargetNamespace() {
+		return "http://openiaml.org/model0.4";
 	}
 
 	

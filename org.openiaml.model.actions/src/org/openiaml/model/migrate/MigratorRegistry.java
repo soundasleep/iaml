@@ -13,6 +13,7 @@ import java.util.List;
  *
  */
 public class MigratorRegistry {
+	
 	/**
 	 * Get all of the migrators registered in the system.
 	 * They should be returned in order of migration, e.g. a
@@ -28,6 +29,8 @@ public class MigratorRegistry {
 		migrators.add(new Migrate0To1());
 		migrators.add(new Migrate1To2());
 		migrators.add(new Migrate2To4());
+		migrators.add(new Migrate4To5());
 		return migrators;
 	}
+	
 }

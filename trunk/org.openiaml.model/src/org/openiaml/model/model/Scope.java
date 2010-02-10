@@ -23,6 +23,7 @@ import org.openiaml.model.model.components.ExitGate;
  *   <li>{@link org.openiaml.model.model.Scope#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.Scope#getValues <em>Values</em>}</li>
  *   <li>{@link org.openiaml.model.model.Scope#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.openiaml.model.model.Scope#getElements <em>Elements</em>}</li>
  * </ul>
  * </p>
  *
@@ -31,7 +32,7 @@ import org.openiaml.model.model.components.ExitGate;
  *        annotation="http://openiaml.org/comment changed='0.4: \'domainObjects\', \'domainViews\', \'domainInstances\' references removed\r\n0.4.2: renamed from \'Scope\' to \'AbstractScope\'; added \'gate\' reference'"
  * @generated
  */
-public interface Scope extends GeneratesElements, ContainsWires, ContainsScopes {
+public interface Scope extends GeneratesElements, ContainsWires, ContainsScopes, NamedElement, GeneratedElement, WireEdgesSource, WireEdgeDestination, ContainsEventTriggers, ContainsConditions, CanBeSynced {
 	/**
 	 * Returns the value of the '<em><b>Entry Gate</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -134,5 +135,21 @@ public interface Scope extends GeneratesElements, ContainsWires, ContainsScopes 
 	 * @generated
 	 */
 	EList<QueryParameter> getParameters();
+
+	/**
+	 * Returns the value of the '<em><b>Elements</b></em>' containment reference list.
+	 * The list contents are of type {@link org.openiaml.model.model.ApplicationElement}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Elements</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Elements</em>' containment reference list.
+	 * @see org.openiaml.model.model.ModelPackage#getScope_Elements()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<ApplicationElement> getElements();
 
 } // Scope

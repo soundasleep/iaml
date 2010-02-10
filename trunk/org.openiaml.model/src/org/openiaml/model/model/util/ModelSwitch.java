@@ -14,6 +14,7 @@ import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ApplicationElementProperty;
+import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Condition;
@@ -177,15 +178,16 @@ public class ModelSwitch<T> {
 				DomainObject domainObject = (DomainObject)theEObject;
 				T result = caseDomainObject(domainObject);
 				if (result == null) result = caseApplicationElement(domainObject);
+				if (result == null) result = caseCanBeSynced(domainObject);
 				if (result == null) result = caseContainsOperations(domainObject);
 				if (result == null) result = caseNamedElement(domainObject);
+				if (result == null) result = caseGeneratedElement(domainObject);
 				if (result == null) result = caseContainsEventTriggers(domainObject);
 				if (result == null) result = caseWireEdgesSource(domainObject);
+				if (result == null) result = caseShouldntContainWires(domainObject);
 				if (result == null) result = caseWireEdgeDestination(domainObject);
 				if (result == null) result = caseGeneratesElements(domainObject);
 				if (result == null) result = caseContainsConditions(domainObject);
-				if (result == null) result = caseGeneratedElement(domainObject);
-				if (result == null) result = caseShouldntContainWires(domainObject);
 				if (result == null) result = caseContainsWires(domainObject);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -194,15 +196,16 @@ public class ModelSwitch<T> {
 				DomainAttribute domainAttribute = (DomainAttribute)theEObject;
 				T result = caseDomainAttribute(domainAttribute);
 				if (result == null) result = caseApplicationElement(domainAttribute);
+				if (result == null) result = caseCanBeSynced(domainAttribute);
 				if (result == null) result = caseContainsOperations(domainAttribute);
 				if (result == null) result = caseNamedElement(domainAttribute);
+				if (result == null) result = caseGeneratedElement(domainAttribute);
 				if (result == null) result = caseContainsEventTriggers(domainAttribute);
 				if (result == null) result = caseWireEdgesSource(domainAttribute);
+				if (result == null) result = caseShouldntContainWires(domainAttribute);
 				if (result == null) result = caseWireEdgeDestination(domainAttribute);
 				if (result == null) result = caseGeneratesElements(domainAttribute);
 				if (result == null) result = caseContainsConditions(domainAttribute);
-				if (result == null) result = caseGeneratedElement(domainAttribute);
-				if (result == null) result = caseShouldntContainWires(domainAttribute);
 				if (result == null) result = caseContainsWires(domainAttribute);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -282,15 +285,16 @@ public class ModelSwitch<T> {
 			case ModelPackage.APPLICATION_ELEMENT: {
 				ApplicationElement applicationElement = (ApplicationElement)theEObject;
 				T result = caseApplicationElement(applicationElement);
+				if (result == null) result = caseCanBeSynced(applicationElement);
 				if (result == null) result = caseContainsOperations(applicationElement);
 				if (result == null) result = caseNamedElement(applicationElement);
+				if (result == null) result = caseGeneratedElement(applicationElement);
 				if (result == null) result = caseContainsEventTriggers(applicationElement);
 				if (result == null) result = caseWireEdgesSource(applicationElement);
+				if (result == null) result = caseShouldntContainWires(applicationElement);
 				if (result == null) result = caseWireEdgeDestination(applicationElement);
 				if (result == null) result = caseGeneratesElements(applicationElement);
 				if (result == null) result = caseContainsConditions(applicationElement);
-				if (result == null) result = caseGeneratedElement(applicationElement);
-				if (result == null) result = caseShouldntContainWires(applicationElement);
 				if (result == null) result = caseContainsWires(applicationElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -299,15 +303,16 @@ public class ModelSwitch<T> {
 				ApplicationElementContainer applicationElementContainer = (ApplicationElementContainer)theEObject;
 				T result = caseApplicationElementContainer(applicationElementContainer);
 				if (result == null) result = caseApplicationElement(applicationElementContainer);
+				if (result == null) result = caseCanBeSynced(applicationElementContainer);
 				if (result == null) result = caseContainsOperations(applicationElementContainer);
 				if (result == null) result = caseNamedElement(applicationElementContainer);
+				if (result == null) result = caseGeneratedElement(applicationElementContainer);
 				if (result == null) result = caseContainsEventTriggers(applicationElementContainer);
 				if (result == null) result = caseWireEdgesSource(applicationElementContainer);
+				if (result == null) result = caseShouldntContainWires(applicationElementContainer);
 				if (result == null) result = caseWireEdgeDestination(applicationElementContainer);
 				if (result == null) result = caseGeneratesElements(applicationElementContainer);
 				if (result == null) result = caseContainsConditions(applicationElementContainer);
-				if (result == null) result = caseGeneratedElement(applicationElementContainer);
-				if (result == null) result = caseShouldntContainWires(applicationElementContainer);
 				if (result == null) result = caseContainsWires(applicationElementContainer);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -341,15 +346,16 @@ public class ModelSwitch<T> {
 			case ModelPackage.VISIBLE_THING: {
 				VisibleThing visibleThing = (VisibleThing)theEObject;
 				T result = caseVisibleThing(visibleThing);
+				if (result == null) result = caseCanBeSynced(visibleThing);
 				if (result == null) result = caseContainsConditions(visibleThing);
 				if (result == null) result = caseContainsEventTriggers(visibleThing);
 				if (result == null) result = caseContainsOperations(visibleThing);
 				if (result == null) result = caseWireEdgesSource(visibleThing);
+				if (result == null) result = caseShouldntContainWires(visibleThing);
 				if (result == null) result = caseWireEdgeDestination(visibleThing);
 				if (result == null) result = caseNamedElement(visibleThing);
-				if (result == null) result = caseGeneratesElements(visibleThing);
-				if (result == null) result = caseShouldntContainWires(visibleThing);
 				if (result == null) result = caseGeneratedElement(visibleThing);
+				if (result == null) result = caseGeneratesElements(visibleThing);
 				if (result == null) result = caseContainsWires(visibleThing);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -443,15 +449,16 @@ public class ModelSwitch<T> {
 				DynamicApplicationElementSet dynamicApplicationElementSet = (DynamicApplicationElementSet)theEObject;
 				T result = caseDynamicApplicationElementSet(dynamicApplicationElementSet);
 				if (result == null) result = caseApplicationElement(dynamicApplicationElementSet);
+				if (result == null) result = caseCanBeSynced(dynamicApplicationElementSet);
 				if (result == null) result = caseContainsOperations(dynamicApplicationElementSet);
 				if (result == null) result = caseNamedElement(dynamicApplicationElementSet);
+				if (result == null) result = caseGeneratedElement(dynamicApplicationElementSet);
 				if (result == null) result = caseContainsEventTriggers(dynamicApplicationElementSet);
 				if (result == null) result = caseWireEdgesSource(dynamicApplicationElementSet);
+				if (result == null) result = caseShouldntContainWires(dynamicApplicationElementSet);
 				if (result == null) result = caseWireEdgeDestination(dynamicApplicationElementSet);
 				if (result == null) result = caseGeneratesElements(dynamicApplicationElementSet);
 				if (result == null) result = caseContainsConditions(dynamicApplicationElementSet);
-				if (result == null) result = caseGeneratedElement(dynamicApplicationElementSet);
-				if (result == null) result = caseShouldntContainWires(dynamicApplicationElementSet);
 				if (result == null) result = caseContainsWires(dynamicApplicationElementSet);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -485,15 +492,16 @@ public class ModelSwitch<T> {
 				DomainObjectInstance domainObjectInstance = (DomainObjectInstance)theEObject;
 				T result = caseDomainObjectInstance(domainObjectInstance);
 				if (result == null) result = caseApplicationElement(domainObjectInstance);
+				if (result == null) result = caseCanBeSynced(domainObjectInstance);
 				if (result == null) result = caseContainsOperations(domainObjectInstance);
 				if (result == null) result = caseNamedElement(domainObjectInstance);
+				if (result == null) result = caseGeneratedElement(domainObjectInstance);
 				if (result == null) result = caseContainsEventTriggers(domainObjectInstance);
 				if (result == null) result = caseWireEdgesSource(domainObjectInstance);
+				if (result == null) result = caseShouldntContainWires(domainObjectInstance);
 				if (result == null) result = caseWireEdgeDestination(domainObjectInstance);
 				if (result == null) result = caseGeneratesElements(domainObjectInstance);
 				if (result == null) result = caseContainsConditions(domainObjectInstance);
-				if (result == null) result = caseGeneratedElement(domainObjectInstance);
-				if (result == null) result = caseShouldntContainWires(domainObjectInstance);
 				if (result == null) result = caseContainsWires(domainObjectInstance);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -501,10 +509,18 @@ public class ModelSwitch<T> {
 			case ModelPackage.SCOPE: {
 				Scope scope = (Scope)theEObject;
 				T result = caseScope(scope);
-				if (result == null) result = caseGeneratesElements(scope);
-				if (result == null) result = caseContainsWires(scope);
 				if (result == null) result = caseContainsScopes(scope);
+				if (result == null) result = caseCanBeSynced(scope);
+				if (result == null) result = caseGeneratesElements(scope);
 				if (result == null) result = caseContainsOperations(scope);
+				if (result == null) result = caseNamedElement(scope);
+				if (result == null) result = caseGeneratedElement(scope);
+				if (result == null) result = caseWireEdgesSource(scope);
+				if (result == null) result = caseShouldntContainWires(scope);
+				if (result == null) result = caseWireEdgeDestination(scope);
+				if (result == null) result = caseContainsEventTriggers(scope);
+				if (result == null) result = caseContainsConditions(scope);
+				if (result == null) result = caseContainsWires(scope);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -546,15 +562,16 @@ public class ModelSwitch<T> {
 				DomainAttributeInstance domainAttributeInstance = (DomainAttributeInstance)theEObject;
 				T result = caseDomainAttributeInstance(domainAttributeInstance);
 				if (result == null) result = caseApplicationElement(domainAttributeInstance);
+				if (result == null) result = caseCanBeSynced(domainAttributeInstance);
 				if (result == null) result = caseContainsOperations(domainAttributeInstance);
 				if (result == null) result = caseNamedElement(domainAttributeInstance);
+				if (result == null) result = caseGeneratedElement(domainAttributeInstance);
 				if (result == null) result = caseContainsEventTriggers(domainAttributeInstance);
 				if (result == null) result = caseWireEdgesSource(domainAttributeInstance);
+				if (result == null) result = caseShouldntContainWires(domainAttributeInstance);
 				if (result == null) result = caseWireEdgeDestination(domainAttributeInstance);
 				if (result == null) result = caseGeneratesElements(domainAttributeInstance);
 				if (result == null) result = caseContainsConditions(domainAttributeInstance);
-				if (result == null) result = caseGeneratedElement(domainAttributeInstance);
-				if (result == null) result = caseShouldntContainWires(domainAttributeInstance);
 				if (result == null) result = caseContainsWires(domainAttributeInstance);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -575,6 +592,22 @@ public class ModelSwitch<T> {
 				ContainsScopes containsScopes = (ContainsScopes)theEObject;
 				T result = caseContainsScopes(containsScopes);
 				if (result == null) result = caseContainsOperations(containsScopes);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.CAN_BE_SYNCED: {
+				CanBeSynced canBeSynced = (CanBeSynced)theEObject;
+				T result = caseCanBeSynced(canBeSynced);
+				if (result == null) result = caseNamedElement(canBeSynced);
+				if (result == null) result = caseGeneratesElements(canBeSynced);
+				if (result == null) result = caseContainsEventTriggers(canBeSynced);
+				if (result == null) result = caseContainsOperations(canBeSynced);
+				if (result == null) result = caseContainsConditions(canBeSynced);
+				if (result == null) result = caseWireEdgesSource(canBeSynced);
+				if (result == null) result = caseWireEdgeDestination(canBeSynced);
+				if (result == null) result = caseGeneratedElement(canBeSynced);
+				if (result == null) result = caseShouldntContainWires(canBeSynced);
+				if (result == null) result = caseContainsWires(canBeSynced);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1209,6 +1242,21 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseContainsScopes(ContainsScopes object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Can Be Synced</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Can Be Synced</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCanBeSynced(CanBeSynced object) {
 		return null;
 	}
 

@@ -11,6 +11,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.ApplicationElement;
+import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
@@ -123,15 +124,16 @@ public class UsersSwitch<T> {
 				T result = caseRole(role);
 				if (result == null) result = caseDomainObject(role);
 				if (result == null) result = caseApplicationElement(role);
+				if (result == null) result = caseCanBeSynced(role);
 				if (result == null) result = caseContainsOperations(role);
 				if (result == null) result = caseNamedElement(role);
+				if (result == null) result = caseGeneratedElement(role);
 				if (result == null) result = caseContainsEventTriggers(role);
 				if (result == null) result = caseWireEdgesSource(role);
+				if (result == null) result = caseShouldntContainWires(role);
 				if (result == null) result = caseWireEdgeDestination(role);
 				if (result == null) result = caseGeneratesElements(role);
 				if (result == null) result = caseContainsConditions(role);
-				if (result == null) result = caseGeneratedElement(role);
-				if (result == null) result = caseShouldntContainWires(role);
 				if (result == null) result = caseContainsWires(role);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -153,15 +155,16 @@ public class UsersSwitch<T> {
 				T result = caseUserInstance(userInstance);
 				if (result == null) result = caseDomainObjectInstance(userInstance);
 				if (result == null) result = caseApplicationElement(userInstance);
+				if (result == null) result = caseCanBeSynced(userInstance);
 				if (result == null) result = caseContainsOperations(userInstance);
 				if (result == null) result = caseNamedElement(userInstance);
+				if (result == null) result = caseGeneratedElement(userInstance);
 				if (result == null) result = caseContainsEventTriggers(userInstance);
 				if (result == null) result = caseWireEdgesSource(userInstance);
+				if (result == null) result = caseShouldntContainWires(userInstance);
 				if (result == null) result = caseWireEdgeDestination(userInstance);
 				if (result == null) result = caseGeneratesElements(userInstance);
 				if (result == null) result = caseContainsConditions(userInstance);
-				if (result == null) result = caseGeneratedElement(userInstance);
-				if (result == null) result = caseShouldntContainWires(userInstance);
 				if (result == null) result = caseContainsWires(userInstance);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -392,6 +395,21 @@ public class UsersSwitch<T> {
 	 * @generated
 	 */
 	public T caseWireEdgeDestination(WireEdgeDestination object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Can Be Synced</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Can Be Synced</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCanBeSynced(CanBeSynced object) {
 		return null;
 	}
 

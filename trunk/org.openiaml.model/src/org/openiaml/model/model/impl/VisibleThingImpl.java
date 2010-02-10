@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.ApplicationElementProperty;
+import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
@@ -870,6 +871,11 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 				default: return -1;
 			}
 		}
+		if (baseClass == CanBeSynced.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -934,6 +940,11 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 			switch (baseFeatureID) {
 				case ModelPackage.GENERATES_ELEMENTS__GENERATED_ELEMENTS: return ModelPackage.VISIBLE_THING__GENERATED_ELEMENTS;
 				case ModelPackage.GENERATES_ELEMENTS__OVERRIDDEN: return ModelPackage.VISIBLE_THING__OVERRIDDEN;
+				default: return -1;
+			}
+		}
+		if (baseClass == CanBeSynced.class) {
+			switch (baseFeatureID) {
 				default: return -1;
 			}
 		}

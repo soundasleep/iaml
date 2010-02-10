@@ -10,6 +10,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
@@ -118,16 +119,12 @@ public class VisualAdapterFactory extends AdapterFactoryImpl {
 				return createContainsScopesAdapter();
 			}
 			@Override
-			public Adapter caseScope(Scope object) {
-				return createScopeAdapter();
+			public Adapter caseGeneratedElement(GeneratedElement object) {
+				return createGeneratedElementAdapter();
 			}
 			@Override
-			public Adapter caseContainsConditions(ContainsConditions object) {
-				return createContainsConditionsAdapter();
-			}
-			@Override
-			public Adapter caseContainsEventTriggers(ContainsEventTriggers object) {
-				return createContainsEventTriggersAdapter();
+			public Adapter caseNamedElement(NamedElement object) {
+				return createNamedElementAdapter();
 			}
 			@Override
 			public Adapter caseShouldntContainWires(ShouldntContainWires object) {
@@ -142,12 +139,20 @@ public class VisualAdapterFactory extends AdapterFactoryImpl {
 				return createWireEdgeDestinationAdapter();
 			}
 			@Override
-			public Adapter caseGeneratedElement(GeneratedElement object) {
-				return createGeneratedElementAdapter();
+			public Adapter caseContainsEventTriggers(ContainsEventTriggers object) {
+				return createContainsEventTriggersAdapter();
 			}
 			@Override
-			public Adapter caseNamedElement(NamedElement object) {
-				return createNamedElementAdapter();
+			public Adapter caseContainsConditions(ContainsConditions object) {
+				return createContainsConditionsAdapter();
+			}
+			@Override
+			public Adapter caseCanBeSynced(CanBeSynced object) {
+				return createCanBeSyncedAdapter();
+			}
+			@Override
+			public Adapter caseScope(Scope object) {
+				return createScopeAdapter();
 			}
 			@Override
 			public Adapter caseVisibleThing(VisibleThing object) {
@@ -366,6 +371,20 @@ public class VisualAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createContainsConditionsAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.CanBeSynced <em>Can Be Synced</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.CanBeSynced
+	 * @generated
+	 */
+	public Adapter createCanBeSyncedAdapter() {
 		return null;
 	}
 

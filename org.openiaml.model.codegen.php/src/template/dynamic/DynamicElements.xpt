@@ -5,7 +5,7 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
-/* expand out all dynamic elements for the page */
+/* expand out all dynamic elements for the frame */
 «DEFINE dynamicElements(Boolean php) FOR model::ContainsConditions»
 	«EXPAND dynamicElement(php) FOREACH getRoot().getAllDynamicElements()»
 «ENDDEFINE»

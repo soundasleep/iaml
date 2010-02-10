@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1236407970c.1">
-  <children xsi:type="iaml.visual:Page" id="visual.12364079826.1" name="Home"/>
-  <children xsi:type="iaml.visual:Page" id="visual.12364143556.bc" name="get person">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="model.1236407970c.1">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12364079826.1" name="Home"/>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12364143556.bc" name="get person">
     <values id="model.123641434e9.2ad3" name="person name" outEdges="wires.12364143556.6c8" value="Test Name">
       <wires xsi:type="iaml.wires:ParameterWire" id="wires.12364143556.6c8" from="model.123641434e9.2ad3" to="wires.12364143556.6c6"/>
     </values>
-    <children xsi:type="iaml:DomainObjectInstance" id="model.123641434e9.2abe" name="selected person" inEdges="wires.12364143556.6c6 wires.12364143556.6ca"/>
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.123641434e9.2abe" name="selected person" inEdges="wires.12364143556.6c6 wires.12364143556.6ca"/>
     <children xsi:type="iaml.visual:InputForm" id="visual.12364143556.d2" name="view person" outEdges="wires.12364143556.6ca">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.12364143556.6ca" from="visual.12364143556.d2" to="model.123641434e9.2abe" name="sync"/>
     </children>
-  </children>
-  <children xsi:type="iaml.visual:Page" id="visual.12364143556.e4" name="get student">
+  </scopes>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12364143556.e4" name="get student">
     <values id="model.123641434e9.2c35" name="enrolled param" outEdges="wires.12364143556.752" value="yesterday">
       <wires xsi:type="iaml.wires:ParameterWire" id="wires.12364143556.752" from="model.123641434e9.2c35" to="wires.12364143556.751"/>
     </values>
-    <children xsi:type="iaml:DomainObjectInstance" id="model.123641434e9.2c34" name="current student" inEdges="wires.12364143556.750 wires.12364143556.751"/>
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.123641434e9.2c34" name="current student" inEdges="wires.12364143556.750 wires.12364143556.751"/>
     <children xsi:type="iaml.visual:InputForm" id="visual.12364143556.108" name="view student" outEdges="wires.12364143556.750">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.12364143556.750" from="visual.12364143556.108" to="model.123641434e9.2c34" name="sync"/>
     </children>
-  </children>
-  <children xsi:type="iaml.visual:Page" id="visual.12364143556.132" name="get teacher by id">
+  </scopes>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12364143556.132" name="get teacher by id">
     <values id="model.123641434e9.2de9" name="teacher id" outEdges="wires.12364143556.819" value="24">
       <wires xsi:type="iaml.wires:ParameterWire" id="wires.12364143556.819" from="model.123641434e9.2de9" to="wires.12364143556.818"/>
     </values>
-    <children xsi:type="iaml:DomainObjectInstance" id="model.123641434e9.2de8" name="selected teacher" inEdges="wires.12364143556.817 wires.12364143556.818"/>
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.123641434e9.2de8" name="selected teacher" inEdges="wires.12364143556.817 wires.12364143556.818"/>
     <children xsi:type="iaml.visual:InputForm" id="visual.12364143556.168" name="view teacher" outEdges="wires.12364143556.817">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.12364143556.817" from="visual.12364143556.168" to="model.123641434e9.2de8" name="sync"/>
     </children>
-  </children>
-  <children xsi:type="iaml.visual:Page" id="visual.12364143556.192" name="get doctoral">
+  </scopes>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12364143556.192" name="get doctoral">
     <values id="model.123641434e9.2f0f" name="qualification" outEdges="wires.12364143556.93c" value="bsc">
       <wires xsi:type="iaml.wires:ParameterWire" id="wires.12364143556.93c" from="model.123641434e9.2f0f" to="wires.12364143556.93b"/>
     </values>
     <values id="model.123641434e9.2f10" name="degree" outEdges="wires.12364143556.93d" value="science">
       <wires xsi:type="iaml.wires:ParameterWire" id="wires.12364143556.93d" from="model.123641434e9.2f10" to="wires.12364143556.93b"/>
     </values>
-    <children xsi:type="iaml:DomainObjectInstance" id="model.123641434e9.2f0e" name="current doctoral" inEdges="wires.12364143556.93b wires.12364143556.a92"/>
-    <children xsi:type="iaml.visual:InputForm" id="visual.12364143556.2a7" name="current doctoral" outEdges="wires.12364143556.a92">
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.123641434e9.2f0e" name="current doctoral" inEdges="wires.12364143556.93b wires.12364143556.a92"/>
+    <children xsi:type="iaml.visual:InputForm" id="visual.12364143556.2a7" name="view doctoral" outEdges="wires.12364143556.a92">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.12364143556.a92" from="visual.12364143556.2a7" to="model.123641434e9.2f0e" name="sync"/>
     </children>
-  </children>
+  </scopes>
   <domainStores id="model.1236407970c.5" name="domain store">
     <children id="model.1236407970c.11" name="Person" outEdges="wires.12364143556.6c6" inEdges="wires.12364143556.1 wires.12364143556.3">
       <wires xsi:type="iaml.wires:SelectWire" id="wires.12364143556.6c6" from="model.1236407970c.11" to="model.123641434e9.2abe" name="select" inEdges="wires.12364143556.6c8" query="name = ?"/>

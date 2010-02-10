@@ -10,16 +10,16 @@
  */
 «DEFINE accessControlHandlerDefinitions(Boolean php) FOR model::scopes::Session»
 	«IF php»
-		«EXPAND checkAccessDefinition FOREACH children.typeSelect(model::components::AccessControlHandler)»
+		«EXPAND checkAccessDefinition FOREACH elements.typeSelect(model::components::AccessControlHandler)»
 	«ELSE»
 		/* no client-side access control handler definitions for Session */
 	«ENDIF»
 «ENDDEFINE»
-«DEFINE accessControlHandlerDefinitions(Boolean php) FOR model::visual::Page»
+«DEFINE accessControlHandlerDefinitions(Boolean php) FOR model::visual::Frame»
 	«IF php»
-		«EXPAND checkAccessDefinition FOREACH children.typeSelect(model::components::AccessControlHandler)»
+		«EXPAND checkAccessDefinition FOREACH elements.typeSelect(model::components::AccessControlHandler)»
 	«ELSE»
-		/* no client-side access control handler definitions for Page */
+		/* no client-side access control handler definitions for Frame */
 	«ENDIF»
 «ENDDEFINE»
 

@@ -8,45 +8,45 @@
 /**
  * Data sources
  */
-«DEFINE dataSource(Boolean php, model::visual::Page currentPage) FOR model::DataFlowEdgesSource»
+«DEFINE dataSource(Boolean php, model::visual::Frame currentFrame) FOR model::DataFlowEdgesSource»
 	«EXPAND exception FOR throwException("Unknown data flow edge source for dataSource: " + this)»
 «ENDDEFINE»
 
 /**
  * Inline arithmetic.
  */
-«DEFINE dataSource(Boolean php, model::visual::Page currentPage) FOR model::operations::Arithmetic»
+«DEFINE dataSource(Boolean php, model::visual::Frame currentFrame) FOR model::operations::Arithmetic»
 	«IF operationType.toString() == "ADD"»
 		«IF php»
 			«REM»we can just use PHP's operators; they force + to work only on numbers«ENDREM»
-			«EXPAND dataSource(php, currentPage) FOREACH inFlows.from SEPARATOR " + "»
+			«EXPAND dataSource(php, currentFrame) FOREACH inFlows.from SEPARATOR " + "»
 		«ELSE»
 			«REM»in Javascript, we have to translate them all into floats directly«ENDREM»
-			«EXPAND convertToFloat(currentPage) FOREACH inFlows.from SEPARATOR " + "»
+			«EXPAND convertToFloat(currentFrame) FOREACH inFlows.from SEPARATOR " + "»
 		«ENDIF»
 	«ELSEIF operationType.toString() == "SUBTRACT"»
 		«IF php»
 			«REM»we can just use PHP's operators; they force + to work only on numbers«ENDREM»
-			«EXPAND dataSource(php, currentPage) FOREACH inFlows.from SEPARATOR " - "»
+			«EXPAND dataSource(php, currentFrame) FOREACH inFlows.from SEPARATOR " - "»
 		«ELSE»
 			«REM»in Javascript, we have to translate them all into floats directly«ENDREM»
-			«EXPAND convertToFloat(currentPage) FOREACH inFlows.from SEPARATOR " - "»
+			«EXPAND convertToFloat(currentFrame) FOREACH inFlows.from SEPARATOR " - "»
 		«ENDIF»
 	«ELSEIF operationType.toString() == "MULTIPLY"»
 		«IF php»
 			«REM»we can just use PHP's operators; they force + to work only on numbers«ENDREM»
-			«EXPAND dataSource(php, currentPage) FOREACH inFlows.from SEPARATOR " * "»
+			«EXPAND dataSource(php, currentFrame) FOREACH inFlows.from SEPARATOR " * "»
 		«ELSE»
 			«REM»in Javascript, we have to translate them all into floats directly«ENDREM»
-			«EXPAND convertToFloat(currentPage) FOREACH inFlows.from SEPARATOR " * "»
+			«EXPAND convertToFloat(currentFrame) FOREACH inFlows.from SEPARATOR " * "»
 		«ENDIF»
 	«ELSEIF operationType.toString() == "DIVIDE"»
 		«IF php»
 			«REM»we can just use PHP's operators; they force + to work only on numbers«ENDREM»
-			«EXPAND dataSource(php, currentPage) FOREACH inFlows.from SEPARATOR " / "»
+			«EXPAND dataSource(php, currentFrame) FOREACH inFlows.from SEPARATOR " / "»
 		«ELSE»
 			«REM»in Javascript, we have to translate them all into floats directly«ENDREM»
-			convert_to_nan(«EXPAND convertToFloat(currentPage) FOREACH inFlows.from SEPARATOR " / "»)
+			convert_to_nan(«EXPAND convertToFloat(currentFrame) FOREACH inFlows.from SEPARATOR " / "»)
 		«ENDIF»
 	«ELSE»
 		«EXPAND exception FOR throwException("Unknown arithmetic: " + this)»
@@ -54,11 +54,11 @@
 «ENDDEFINE»
 
 // TODO need to wrap value in some sort of encoding algorithm
-«DEFINE dataSource(Boolean php, model::visual::Page currentPage) FOR model::StaticValue»
+«DEFINE dataSource(Boolean php, model::visual::Frame currentFrame) FOR model::StaticValue»
 	"«value-»" /* static value "«safeName()-»" */ 
 «ENDDEFINE»
 
-«DEFINE dataSource(Boolean php, model::visual::Page currentPage) FOR model::Parameter»
+«DEFINE dataSource(Boolean php, model::visual::Frame currentFrame) FOR model::Parameter»
 	«IF php»
 	$«safeName()»
 	«ELSE»
@@ -66,7 +66,7 @@
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE dataSource(Boolean php, model::visual::Page currentPage) FOR model::TemporaryVariable»
+«DEFINE dataSource(Boolean php, model::visual::Frame currentFrame) FOR model::TemporaryVariable»
 	«IF php»
 	$temp_«safeName()»
 	«ELSE»
@@ -83,8 +83,8 @@
  * In particular, the <code>null</code> parameter will probably cause
  * problems later...
  */
-«DEFINE dataSource(Boolean php, model::visual::Page currentPage) FOR model::ApplicationElementProperty»
-	«EXPAND template::operations::Parameters::callParameterValue(php, null, false, currentPage) FOR this»
+«DEFINE dataSource(Boolean php, model::visual::Frame currentFrame) FOR model::ApplicationElementProperty»
+	«EXPAND template::operations::Parameters::callParameterValue(php, null, false, currentFrame) FOR this»
 «ENDDEFINE»
 
 /**
@@ -104,8 +104,8 @@
  *
  * Uses JS parseFloatOrZero() from Runtime JS.
  */
-«DEFINE convertToFloat(model::visual::Page currentPage) FOR model::DataFlowEdgesSource»
-	parse_float_or_zero(«EXPAND dataSource(false, currentPage) FOR this»)
+«DEFINE convertToFloat(model::visual::Frame currentFrame) FOR model::DataFlowEdgesSource»
+	parse_float_or_zero(«EXPAND dataSource(false, currentFrame) FOR this»)
 «ENDDEFINE»
 
 /**
@@ -115,12 +115,12 @@
  *	only supports incoming {@model ApplicationElementProperty ApplicationElementProperties}
  *	as {@model DataFlowEdge parameters}.   
  */
-«DEFINE isSet(Boolean php, model::visual::Page currentPage) FOR model::DataFlowEdgesSource»
+«DEFINE isSet(Boolean php, model::visual::Frame currentFrame) FOR model::DataFlowEdgesSource»
 	«EXPAND exception FOR throwException("Unknown data flow edge source for isSet: " + this)»
 «ENDDEFINE»
 
-«DEFINE isSet(Boolean php, model::visual::Page currentPage) FOR model::ApplicationElementProperty»
-	«EXPAND template::operations::Parameters::isSetParameter(php, currentPage) FOR this»
+«DEFINE isSet(Boolean php, model::visual::Frame currentFrame) FOR model::ApplicationElementProperty»
+	«EXPAND template::operations::Parameters::isSetParameter(php, currentFrame) FOR this»
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

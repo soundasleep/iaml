@@ -79,13 +79,13 @@ public class ChecksTest extends CodegenTestCase {
 	 * @throws Exception
 	 */
 	public void testNoPages() throws Exception {
-		loadAndCodegenWithFail(ROOT + "codegen/oaw/NoPages.iaml");
+		loadAndCodegenWithFail(ROOT + "codegen/oaw/NoFrames.iaml");
 		
 		// lets investigate the error
 		IStatus s = getTransformStatus();
 		assertFalse(s.isOK());
 		
-		assertStatusMatches(s, "No pages in internet application");
+		assertStatusMatches(s, "No frames in internet application");
 	}
 
 }

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12109331eea.107e">
-  <children xsi:type="iaml.visual:Page" id="visual.12109331f38.e3f" name="container">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="model.12109331eea.107e">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12109331f38.e3f" name="container">
     <values id="model.12109c6242e.5e" name="static value" outEdges="wires.12109dbdd39.54" value="43">
       <wires xsi:type="iaml.wires:ParameterWire" id="wires.12109dbdd39.54" from="model.12109c6242e.5e" to="wires.12109331f38.627"/>
     </values>
-    <children xsi:type="iaml:DomainObjectInstance" id="model.12109331eea.128c" name="&quot;My User&quot;" inEdges="wires.12109331f38.627">
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.12109331eea.128c" name="&quot;My User&quot;" inEdges="wires.12109331f38.627">
       <attributes id="model.12109331eea.12dc" name="name" outEdges="wires.12109c6249b.9">
         <wires xsi:type="iaml.wires:SyncWire" id="wires.12109c6249b.9" from="model.12109331eea.12dc" to="visual.12109331f38.ebf" name="sync"/>
       </attributes>
-    </children>
+    </elements>
     <children xsi:type="iaml.visual:InputTextField" id="visual.12109331f38.ebf" name="textfield" inEdges="wires.12109c6249b.9"/>
-  </children>
+  </scopes>
   <domainStores xsi:type="iaml:DomainStore" id="model.12109331eea.1083" name="domain store">
     <children xsi:type="iaml:DomainObject" id="model.12109331eea.108c" name="User" outEdges="wires.12109331f38.627">
       <wires xsi:type="iaml.wires:SelectWire" id="wires.12109331f38.627" from="model.12109331eea.108c" to="model.12109331eea.128c" name="select" inEdges="wires.12109dbdd39.54" query="id = ?"/>

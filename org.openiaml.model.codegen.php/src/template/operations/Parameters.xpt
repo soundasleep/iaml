@@ -21,28 +21,28 @@
  *
  * @param addKeys add associative array keys to PHP parameters
  */
-«DEFINE callParameter(Boolean php, model::WireEdge wire, Boolean inStoreDb, Boolean addKeys, model::visual::Page currentPage) FOR model::wires::ParameterWire»
+«DEFINE callParameter(Boolean php, model::WireEdge wire, Boolean inStoreDb, Boolean addKeys, model::visual::Frame currentFrame) FOR model::wires::ParameterWire»
 	«IF addKeys && php»
 		«REM»add associative keys for named parameter wires«ENDREM»
 		«IF name != null && name.length > 0»
 			"«safeNameString(name)»" =>
 		«ENDIF» 
 	«ENDIF»
-	«EXPAND callParameterValue(php, wire, inStoreDb, currentPage) FOR from»
+	«EXPAND callParameterValue(php, wire, inStoreDb, currentFrame) FOR from»
 «ENDDEFINE»
 
 /**
  * The sources of parameters for parameter calls, i.e.
  * fetch the runtime value of the parameter.
  */
-«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb, model::visual::Page currentPage) FOR model::WireEdgesSource»
+«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::WireEdgesSource»
 	«EXPAND exception FOR throwException("Unknown parameter wire source: " + this)»
 «ENDDEFINE»
 
 /**
- * TODO can we remove 'wire' parameter and replace it with 'currentPage'?
+ * TODO can we remove 'wire' parameter and replace it with 'currentFrame'?
  */
-«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb, model::visual::Page currentPage) FOR model::ApplicationElementProperty»
+«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::ApplicationElementProperty»
 	«IF php»
 		«IF inStoreDb»
 			$arg0 /* we assume the value is already in $arg0; see store_db.php::expandDomainAttributeEvents */
@@ -77,26 +77,26 @@
 		«ELSE»
 			/* wire = «wire», from = «wire.from», to = «wire.to» */
 			«IF name == "fieldValue"»
-				«REM»where is this value stored? is it available on the current page?«ENDREM»
+				«REM»where is this value stored? is it available on the current frame?«ENDREM»
 				«IF model::DomainAttributeInstance.isInstance(eContainer)»
 					«REM»from a DomainAttributeInstance«ENDREM»
 					«EXPAND RemoteParameter::remoteValue(php, false, wire, this) FOR this.eContainer-»
-				«ELSEIF onCurrentPage(wire.from, this)» 
+				«ELSEIF onCurrentFrame(wire.from, this)» 
 					document.getElementById('«safeName(eContainer)»').value
-				«ELSEIF onCurrentPage(currentPage, this)» 
+				«ELSEIF onCurrentFrame(currentFrame, this)» 
 					document.getElementById('«safeName(eContainer)»').value
 				«ELSEIF model::visual::InputTextField.isInstance(eContainer)»
-					«REM»this is a text field stored outside of the current page«ENDREM»
-					/* if you _don't_ want an operation to use a cached value of a remote Input Text Field, place the operation _outside_ of its containing page. */
-					<?php if («EXPAND isSetParameter(true, currentPage) FOR this») { ?>
-						"<?php echo «EXPAND callParameterValue(true, wire, inStoreDb, currentPage) FOR this»; ?>"
+					«REM»this is a text field stored outside of the current frame«ENDREM»
+					/* if you _don't_ want an operation to use a cached value of a remote Input Text Field, place the operation _outside_ of its containing frame. */
+					<?php if («EXPAND isSetParameter(true, currentFrame) FOR this») { ?>
+						"<?php echo «EXPAND callParameterValue(true, wire, inStoreDb, currentFrame) FOR this»; ?>"
 					<?php } else { ?>
 						/* throw exception */
 						throwJavascriptException("Cached server-side variable '«name»' did not exist")
 					<?php } ?>
 				«ELSE»
 					«REM»
-						it's not on the current page. it could be anywhere!
+						it's not on the current frame. it could be anywhere!
 						but we want it NOW, so we can't just ask the 
 						server. we have to find out where it is.
 					«ENDREM»			
@@ -112,41 +112,41 @@
 /**
  * If we have a Parameter from a TextField, we should use its 'fieldValue' property instead.
  */
-«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb, model::visual::Page currentPage) FOR model::visual::InputTextField»
+«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::visual::InputTextField»
 	«IF php»
 		/* implicitly from InputTextField */
-		«EXPAND callParameterValue(php, wire, inStoreDb, currentPage) FOR properties.select( e | e.name == "fieldValue" ).first()-»
+		«EXPAND callParameterValue(php, wire, inStoreDb, currentFrame) FOR properties.select( e | e.name == "fieldValue" ).first()-»
 	«ELSE»
 		«IF getFieldValue(this) != null»
-			«EXPAND callParameterValue(php, wire, false, currentPage) FOR getFieldValue(this)»
+			«EXPAND callParameterValue(php, wire, false, currentFrame) FOR getFieldValue(this)»
 		«ELSE»
 			«EXPAND exception FOR throwException("No 'fieldValue' property found in the InputTextField '" + this + "', which is being used as a Parameter source.")»
 		«ENDIF» 
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb, model::visual::Page currentPage) FOR model::StaticValue»
+«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::StaticValue»
 	"«value-»" /* static value "«name-»" */
 «ENDDEFINE»
 
-«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb, model::visual::Page currentPage) FOR model::DynamicApplicationElementSet»
+«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::DynamicApplicationElementSet»
 	/* dynamic element set "«name-»" */
 	get_dynamic_elements_«safeName()-»()
 «ENDDEFINE»
 
-«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb, model::visual::Page currentPage) FOR model::visual::Page»
-	/* Page "«name-»" */
-	new Visual_Page("«id-»", "«name-»")
+«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::visual::Frame»
+	/* Frame "«name-»" */
+	new Visual_Frame("«id-»", "«name-»")
 «ENDDEFINE»
 
 «REM»new Users_Role("«id-»", "«name-»")«ENDREM»
-«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb, model::visual::Page currentPage) FOR model::users::Role»
+«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::users::Role»
 	/* Role "«name-»" */
 	'«safeName()-»'
 «ENDDEFINE»
 
 «REM»new Users_Permission("«id-»", "«name-»")«ENDREM»
-«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb, model::visual::Page currentPage) FOR model::users::Permission»
+«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::users::Permission»
 	/* Permission "«name-»" */
 	'«safeName()-»'
 «ENDDEFINE»
@@ -154,18 +154,18 @@
 /**
  * A value specified as part of the URI, e.g. ?key=value
  */
-«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb, model::visual::Page currentPage) FOR model::QueryParameter»
+«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::QueryParameter»
 	«IF php»
 		require_get("«name»"«IF defaultValue != null», "«defaultValue»"«ENDIF»)
 	«ELSE»
-		"<?php echo «EXPAND callParameterValue(true, wire, inStoreDb, currentPage) FOR this»; ?>"
+		"<?php echo «EXPAND callParameterValue(true, wire, inStoreDb, currentFrame) FOR this»; ?>"
 	«ENDIF»
 «ENDDEFINE»
 
 /**
  * Is the given property set?
  */
-«DEFINE isSetParameter(Boolean php, model::visual::Page currentPage) FOR model::ApplicationElementProperty»
+«DEFINE isSetParameter(Boolean php, model::visual::Frame currentFrame) FOR model::ApplicationElementProperty»
 	«IF php»
 		«REM»
 			values stored in sessions will not always be called 'fieldValue';
@@ -182,19 +182,19 @@
 		«ENDIF»
 	«ELSE»
 		«IF name == "fieldValue"»
-			«REM»where is this value stored? is it available on the current page?«ENDREM»
+			«REM»where is this value stored? is it available on the current frame?«ENDREM»
 			«IF model::DomainAttributeInstance.isInstance(eContainer)»
 				«REM»from a DomainAttributeInstance«ENDREM»
 				«EXPAND RemoteParameter::remoteValueIsSet(php, this) FOR this.eContainer-»
 			«REM»
-				if it's on the current page - currently implemented
-			«ELSEIF onCurrentPage(currentPage, this)» 
+				if it's on the current frame - currently implemented
+			«ELSEIF onCurrentFrame(currentFrame, this)» 
 				document.getElementById('«safeName(eContainer)»').value
 			«ENDREM»
 			«ELSEIF model::visual::InputTextField.isInstance(eContainer)»
-				«REM»this is a text field stored outside of the current page«ENDREM»
-				/* if you _don't_ want an operation to use a cached value of a remote Input Text Field, place the operation _outside_ of its containing page. */
-				<?php echo («EXPAND isSetParameter(true, currentPage) FOR this») ? "true" : "false"; ?>
+				«REM»this is a text field stored outside of the current frame«ENDREM»
+				/* if you _don't_ want an operation to use a cached value of a remote Input Text Field, place the operation _outside_ of its containing frame. */
+				<?php echo («EXPAND isSetParameter(true, currentFrame) FOR this») ? "true" : "false"; ?>
 			«ELSE»
 				«EXPAND RemoteParameter::remoteValueIsSet(php, this) FOR this.eContainer-»
 			«ENDIF»

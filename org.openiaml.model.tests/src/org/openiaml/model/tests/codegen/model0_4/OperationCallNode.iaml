@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.124233df234.5d">
-  <children xsi:type="iaml.visual:Page" id="index" name="Home">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="model.124233df234.5d">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <operations xsi:type="iaml:CompositeOperation" inEdges="wires.124233df3ca.1b" id="model.124233df234.66" name="complex operation">
       <nodes xsi:type="iaml.operations:StartNode" id="operations.124233df428.2f" outExecutions="model.1242348c6d7.28"/>
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.124233df428.30" inExecutions="model.1242348c6d7.2a"/>
@@ -26,5 +26,5 @@
     <children xsi:type="iaml.visual:InputTextField" id="visual.124233df292.55" name="target field">
       <properties id="model.124233df234.c5" name="fieldValue" inFlows="model.124233df234.ee"/>
     </children>
-  </children>
+  </scopes>
 </iaml:InternetApplication>

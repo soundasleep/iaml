@@ -3,16 +3,16 @@
 «EXTENSION template::GeneratorExtensions»
 
 /* default = nothing */
-«DEFINE expandPage FOR model::ApplicationElement-»
+«DEFINE expandFrame FOR model::ApplicationElement-»
 «ENDDEFINE»
 
 /**
  * @implementation {@link Gate Gates} are of a lower priority in execution than {@link EventTrigger EventTriggers}.
  */
-«DEFINE expandPage FOR model::visual::Page-»
+«DEFINE expandFrame FOR model::visual::Frame-»
 	«FILE "output/"+safeNameString(id)+".php"-»
 <?php
-/* generated page "«name-»" */
+/* generated frame "«name-»" */
 // include header code
 require("config.php");		// runtime library configuration
 require(IAML_RUNTIME_ROOT."global.php");	// runtime library import
@@ -22,13 +22,13 @@ require("update_client_cache.php");
 
 define("CURRENT_PAGE", "«id»");
 
-// a default fail handler for this page?
+// a default fail handler for this frame?
 «IF getFailHandler(this) != null»
-	function page_fail_handler($e) {
+	function frame_fail_handler($e) {
 		«EXPAND template::operations::Failure::failWire(true) FOR getFailHandler(this)»
 		die;
 	}
-	set_exception_handler('page_fail_handler');
+	set_exception_handler('frame_fail_handler');
 «ENDIF»
 
 // a default fail handler for this session?
@@ -69,17 +69,17 @@ define("CURRENT_PAGE", "«id»");
 	}
 «ENDIF»
 
-// run any event triggers for this page
+// run any event triggers for this frame
 // exceptions are now covered by the exception handlers above
-«EXPAND template::events::Page::runPageEvents(this) FOREACH eventTriggers-»
+«EXPAND template::events::Frame::runFrameEvents(this) FOREACH eventTriggers-»
 
 // run any entry gates connected to the containing scope(s)
-«EXPAND template::scopes::EntryGate::runEntryGate(this) FOREACH getPageEntryGates(this)-»
+«EXPAND template::scopes::EntryGate::runEntryGate(this) FOREACH getFrameEntryGates(this)-»
 
-// is access to this page prevented by any other exit gate?
+// is access to this frame prevented by any other exit gate?
 «EXPAND template::scopes::ExitGate::runExitGate(this) FOREACH getAllExitGates(this)-»
 
-// expand any operations (both in this page and in any surrounding scopes)
+// expand any operations (both in this frame and in any surrounding scopes)
 «EXPAND template::operations::Definitions::operationDefinitions(this, true) FOR getRoot()-»		
 
 // expand all conditions
@@ -88,7 +88,7 @@ define("CURRENT_PAGE", "«id»");
 // expand any dynamic element sources
 «EXPAND template::dynamic::DynamicElements::dynamicElements(true) FOR this-»
 
-// expand any AccessControlHandlers in the page
+// expand any AccessControlHandlers in the frame
 «EXPAND template::users::Definitions::accessControlHandlerDefinitions(true) FOR this-»
 
 «IF containingSession() != null»
@@ -123,11 +123,11 @@ log_message("«id».php: Session data: " . print_r($_SESSION, true));
 	"http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<title>«pageTitle()»</title>
+	<title>«frameTitle()»</title>
 	<link rel="stylesheet" type="text/css" href="<?php echo IAML_RUNTIME_WEB; ?>css/default.css">
 	<script language="Javascript" type="application/javascript">
 	/* <![CDATA[ */
-		var page_id = "«safeNameString(id)-»";
+		var frame_id = "«safeNameString(id)-»";
 	/* ]]> */
 	</script>
 	<script language="Javascript" type="application/javascript" src="<?php echo IAML_RUNTIME_WEB; ?>js/prototype.js"></script>
@@ -199,13 +199,13 @@ log_message("«id».php: Session data: " . print_r($_SESSION, true));
 		// cached primitive operation values
 		«EXPAND template::operations::ClientSideCache::cachedPrimitiveOperations(this) FOR getRoot()»
 
-		/* actual page onload functions (called ONCE the page is fully loaded) */
+		/* actual frame onload functions (called ONCE the frame is fully loaded) */
 		var stored_onload_functions = new Array();
 		function addOnloadFunction(f) {
 			stored_onload_functions.push(f);
 		}
 				
-		// this needs to be loaded *after* the page has loaded
+		// this needs to be loaded *after* the frame has loaded
 		function loadStoredEvents() {
 			// expand all onLoad functions
 			for (var i = 0; i < stored_onload_functions.length; i++) {
@@ -233,7 +233,7 @@ log_message("«id».php: Session data: " . print_r($_SESSION, true));
 <body onLoad="loadStoredEvents()">
 	<div style="font-size:small; text-align: right;"><a href="clear_session.php">clear session</a> - <a href="sitemap.html">sitemap</a></div>
 		
-	<h1>«pageTitle()»</h1>
+	<h1>«frameTitle()»</h1>
 		
 	<div id="runtime_errors"><!-- any runtime errors go into here --></div>
 		
@@ -284,11 +284,8 @@ log_message("«name».php: User browsing finished");
 	«ENDFILE»
 «ENDDEFINE»
 
-/* default values that we should set before we access this page */
-«DEFINE initialiseDefaultValues FOR model::ApplicationElement»
-«ENDDEFINE»
-
-«DEFINE initialiseDefaultValues FOR model::ApplicationElementContainer»
+/* default values that we should set before we access this frame */
+«DEFINE initialiseDefaultValues FOR model::VisibleThing»
 	«EXPAND initialiseDefaultValues FOREACH children»
 «ENDDEFINE»
 

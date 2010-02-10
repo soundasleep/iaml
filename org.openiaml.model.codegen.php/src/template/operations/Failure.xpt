@@ -11,13 +11,13 @@
 
 «DEFINE failWire(Boolean php) FOR model::wires::NavigateWire-»
 	«IF php»
-		// we need to navigate to the fail page
+		// we need to navigate to the fail frame
 		$url = "«safeName(to)».php?fail=" . urlencode($e->getMessage()) . "&trace=" . urlencode($e->getTraceAsString());
 		log_message("[redirect] Redirecting to '$url' (fail)");
 		header("Location: $url");
 		die;
 	«ELSE»
-		// we need to navigate to the fail page
+		// we need to navigate to the fail frame
 		var url = "«safeName(to)».php?fail=" + encodeURIComponent(e);
 		debug("[redirect] Redirecting to '" + url + "' [fail]");
 		window.location = url;

@@ -19,7 +19,7 @@ function store_db($attribute_id, $arg0) {
 	
 	/*
 	 * a simple solution (but not scalable TODO): create a new HTTP request to store the event.
-	 * a better solution is obiously to store the new event in this same page.
+	 * a better solution is obiously to store the new event in this same frame.
 	 */
 	$url = get_baseurl() . "/store_db.php?attribute_id=".urlencode($attribute_id)."&arg0=".urlencode($arg0);
 	

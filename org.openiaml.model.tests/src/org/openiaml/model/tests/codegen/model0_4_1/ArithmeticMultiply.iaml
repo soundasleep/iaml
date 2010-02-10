@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12542c563bb.1b">
-  <children xsi:type="iaml.visual:Page" id="index" name="Home">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="model.12542c563bb.1b">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <children xsi:type="iaml.visual:InputTextField" id="visual.12542c56418.18" name="op1">
       <properties id="model.12542c563bb.35" name="fieldValue" outFlows="model.12542c563bb.e1"/>
     </children>
@@ -27,5 +27,5 @@
     <children xsi:type="iaml.visual:InputTextField" id="visual.12542c56418.1f" name="result">
       <properties id="model.12542c563bb.5f" name="fieldValue" inFlows="model.12542c563bb.e5"/>
     </children>
-  </children>
+  </scopes>
 </iaml:InternetApplication>

@@ -5,7 +5,7 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE renderForm(model::visual::Page currentPage) FOR model::visual::InputForm-»
+«DEFINE renderForm(model::visual::Frame currentFrame) FOR model::visual::InputForm-»
 	<form id="«safeNameString(id)»" 
 			onChange="return onChange_«safeNameString(id)»(this);"
 			onClick="return onClick_«safeNameString(id)»(this);"
@@ -15,14 +15,14 @@
 		/* <![CDATA[ */
 			function onChange_«safeNameString(id)»(obj) {
 				// expand all onChanges
-				«EXPAND template::events::EventCall::callEvent(false, currentPage) FOREACH eventTriggers.select(e | e.name == "edit")-»
+				«EXPAND template::events::EventCall::callEvent(false, currentFrame) FOREACH eventTriggers.select(e | e.name == "edit")-»
 
 				return false;
 			}
 			
 			function onClick_«safeNameString(id)»(obj) {
 				// expand all onClicks
-				«EXPAND template::events::EventCall::callEvent(false, currentPage) FOREACH eventTriggers.select(e | e.name == "click" || e.name == "onClick")-»
+				«EXPAND template::events::EventCall::callEvent(false, currentFrame) FOREACH eventTriggers.select(e | e.name == "click" || e.name == "onClick")-»
 			
 				return false;
 			}
@@ -30,7 +30,7 @@
 		</script>
 		<h2>«formName()»</h2>
 		
-		«EXPAND Render::renderVisual(currentPage) FOREACH children.typeSelect(model::VisibleThing)-»
+		«EXPAND Render::renderVisual(currentFrame) FOREACH children.typeSelect(model::VisibleThing)-»
 	</form>
 «ENDDEFINE»
 

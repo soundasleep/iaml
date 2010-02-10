@@ -84,7 +84,7 @@ $enable_queue_log_messages = true;		// on by default
 $queue_log_messages = "";
 /**
  * If we output _after_ session_start(), but _before_ <html>, it's
- * likely we will end up making the resulting page invalid (which means
+ * likely we will end up making the resulting frame invalid (which means
  * JWebUnit cannot access the <title> etc). So we allow log
  * messages to be queued up.
  *
@@ -110,7 +110,7 @@ if (!$s) {
 	// create the table
 	$q = $db->query("CREATE TABLE stored_events (
 			id INTEGER PRIMARY KEY AUTOINCREMENT,
-			page_id VARCHAR(64) NOT NULL,
+			frame_id VARCHAR(64) NOT NULL,
 			event_name VARCHAR(64) NOT NULL,
 			arg0 BLOB
 		);") or throw_new_IamlRuntimeException("could not create table: " . print_r($db->errorInfo(), true));
@@ -368,10 +368,10 @@ function xpathMatch($a, $b) {
 	if (is_array($b)) {
 		$ids = $b;
 	}
-	if ($a instanceof Visual_Page) {
+	if ($a instanceof Visual_Frame) {
 		$id = $a->getID();
 	}
-	if ($b instanceof Visual_Page) {
+	if ($b instanceof Visual_Frame) {
 		$id = $b->getID();
 	}
 

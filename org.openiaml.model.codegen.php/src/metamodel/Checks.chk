@@ -7,8 +7,8 @@ extension metamodel::Extensions;
 // TODO add test cases for model validation
 // both through Eclipse and through manual test cases (code generation)
 context model::InternetApplication ERROR "No frames in internet application" :
-	children.exists( e | model::visual::Frame.isInstance(e) )
-	|| sessions.exists( e | e.children.exists( f | model::visual::Frame.isInstance( f )) );
+	!(scopes.typeSelect(model::visual::Frame).isEmpty &&
+		scopes.scopes.typeSelect(model::visual::Frame).isEmpty);
 
 context model::visual::Frame ERROR "Frame must have a name" :
 	name.length > 0;
@@ -43,12 +43,6 @@ context model::wires::SyncWire ERROR "A SyncWire cannot connect to itself":
 context model::wires::SyncWire ERROR "You cannot have a SyncWire connecting two ApplicationElementProperties":
 	!(model::ApplicationElementProperty.isInstance(from) && 
 	model::ApplicationElementProperty.isInstance(to));
-	
-context model::scopes::Session ERROR "Sessions cannot directly contain InputTextFields" :
-	!children.exists( e | model::visual::InputTextField.isInstance(e) );
-
-context model::scopes::Session ERROR "Sessions cannot directly contain InputForms" :
-	!children.exists( e | model::visual::InputForm.isInstance(e) );
 	
 context model::DomainObject ERROR "You cannot have a DomainObject called single_values (reserved word)" :
 	name != "single_values";
@@ -113,8 +107,8 @@ context model::wires::RunInstanceWire WARNING "This RunInstanceWire will not do 
 context model::ApplicationElementProperty WARNING "A session property used as part of a login handler should have a default value set, otherwise secure frames will crash with an exception rather than going to the login frame" :
 	!(defaultValue == null && inEdges.typeSelect(model::wires::SetWire).from.typeSelect(model::components::LoginHandler).size > 0); 
 
-context model::QueryParameter ERROR "A QueryParameter cannot be used on a Frame outside of its containing frame (" + containingPage(this.eContainer) + ", " + containingPage(outEdges.first().to.eContainer) + ")" :
-	outEdges.forAll( e | isAccessibleOnPage(containingPage(this.eContainer), e.to) );
+context model::QueryParameter ERROR "A QueryParameter cannot be used on a Frame outside of its containing frame (" + containingFrame(this.eContainer) + ", " + containingFrame(outEdges.first().to.eContainer) + ")" :
+	outEdges.forAll( e | isAccessibleOnFrame(containingFrame(this.eContainer), e.to) );
 
 context model::components::LoginHandler ERROR "A LoginHandler[user] can not have more than one incoming ParameterWire" :
 	(type != model::components::LoginHandlerTypes::USER) || inEdges.typeSelect(model::wires::ParameterWire).size <= 1; 
@@ -123,10 +117,10 @@ context model::wires::SelectWire ERROR "A SelectWire has incoming Parameters, bu
 	inEdges.typeSelect(model::wires::ParameterWire).size == 0 || (query != null && query.length > 0); 
 
 context model::scopes::Session ERROR "A Session can only contain one LoginHandler" :
-	children.typeSelect(model::components::LoginHandler).size <= 1;
+	elements.typeSelect(model::components::LoginHandler).size <= 1;
 
-context model::visual::Page ERROR "A Page cannot contain a LoginHandler" :
-	children.typeSelect(model::components::LoginHandler).size == 0;
+context model::visual::Frame ERROR "A Frame cannot contain a LoginHandler" :
+	elements.typeSelect(model::components::LoginHandler).size == 0;
 
 context model::CompositeOperation ERROR "An Operation can only contain one StartNode" :
 	nodes.typeSelect(model::operations::StartNode).size <= 1;

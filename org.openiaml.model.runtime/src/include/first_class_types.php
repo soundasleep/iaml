@@ -7,9 +7,9 @@
  */
 
 /**
- * Represents a Page: by ID and name
+ * Represents a Frame: by ID and name
  */
-class Visual_Page {
+class Visual_Frame {
 	var $id;
 	var $name;
 

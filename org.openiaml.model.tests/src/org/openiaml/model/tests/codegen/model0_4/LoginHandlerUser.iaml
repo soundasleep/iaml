@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1233b453c1f.10">
-  <children xsi:type="iaml.visual:Page" id="visual.1233b453dc5.9" name="Home"/>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="model.1233b453c1f.10">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.1233b453dc5.9" name="Home"/>
   <domainStores xsi:type="iaml.users:UserStore" id="users.1233b454017.f" name="user store">
     <children xsi:type="iaml.users:Role" id="users.1233b454017.17" name="User" outEdges="wires.1233b453e32.d">
       <wires xsi:type="iaml.wires:ParameterWire" id="wires.1233b453e32.d" from="users.1233b454017.17" to="components.1233b453f6b.5"/>
       <properties id="model.1233b453c1f.5a" name="random property"/>
     </children>
   </domainStores>
-  <sessions id="scopes.1233b453efe.5" name="my session">
-    <children xsi:type="iaml.visual:Page" id="visual.1233b453dc5.f" name="target">
+  <scopes xsi:type="iaml.scopes:Session" id="scopes.1233b453efe.5" name="my session">
+    <scopes xsi:type="iaml.visual:Frame" id="visual.1233b453dc5.f" name="target">
       <children xsi:type="iaml.visual:InputForm" id="visual.1233b453dc5.5d" name="edit current user" inEdges="wires.1233b453e32.2c"/>
-    </children>
-    <children xsi:type="iaml.components:LoginHandler" id="components.1233b453f6b.5" name="user login handler" outEdges="wires.1233b453e32.12" inEdges="wires.1233b453e32.d" type="USER">
+    </scopes>
+    <elements xsi:type="iaml.components:LoginHandler" id="components.1233b453f6b.5" name="user login handler" outEdges="wires.1233b453e32.12" inEdges="wires.1233b453e32.d" type="USER">
       <wires xsi:type="iaml.wires:SetWire" id="wires.1233b453e32.12" from="components.1233b453f6b.5" to="users.1233b454017.31" name="set"/>
-    </children>
-    <children xsi:type="iaml.users:UserInstance" id="users.1233b454017.31" name="current session user" outEdges="wires.1233b453e32.2c" inEdges="wires.1233b453e32.12">
+    </elements>
+    <elements xsi:type="iaml.users:UserInstance" id="users.1233b454017.31" name="current session user" outEdges="wires.1233b453e32.2c" inEdges="wires.1233b453e32.12">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.1233b453e32.2c" from="users.1233b454017.31" to="visual.1233b453dc5.5d" name="sync"/>
-    </children>
-  </sessions>
+    </elements>
+  </scopes>
 </iaml:InternetApplication>

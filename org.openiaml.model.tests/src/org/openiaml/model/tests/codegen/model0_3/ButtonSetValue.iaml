@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12109331eea.4a">
-  <children xsi:type="iaml.visual:Page" id="visual.12109331f38.e1" name="container">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="model.12109331eea.4a">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12109331f38.e1" name="container">
     <children xsi:type="iaml.visual:InputTextField" id="visual.12109331f38.e7" name="source one">
       <properties id="model.12109331eea.5f" name="fieldValue" outEdges="wires.12109331f38.1e">
         <wires xsi:type="iaml.wires:ParameterWire" id="wires.12109331f38.1e" from="model.12109331eea.5f" to="wires.12109331f38.1c"/>
@@ -23,8 +23,8 @@
         <wires xsi:type="iaml.wires:ParameterWire" id="wires.12109331f38.3d" from="model.12109331eea.121" to="wires.12109331f38.3c"/>
       </values>
     </children>
-  </children>
-  <children xsi:type="iaml.visual:Page" id="visual.12109331f38.321" name="implicit">
+  </scopes>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12109331f38.321" name="implicit">
     <children xsi:type="iaml.visual:InputTextField" id="visual.12109331f38.346" name="source two" outEdges="wires.12109331f38.5a5">
       <wires xsi:type="iaml.wires:ParameterWire" id="wires.12109331f38.5a5" from="visual.12109331f38.346" to="wires.12109331f38.5a4"/>
     </children>
@@ -34,5 +34,5 @@
     <children xsi:type="iaml.visual:Button" id="visual.12109331f38.348" name="copy over implicitly" outEdges="wires.12109331f38.5a4">
       <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.12109331f38.5a4" from="visual.12109331f38.348" to="model.12109331eea.d95" name="click" inEdges="wires.12109331f38.5a5"/>
     </children>
-  </children>
+  </scopes>
 </iaml:InternetApplication>

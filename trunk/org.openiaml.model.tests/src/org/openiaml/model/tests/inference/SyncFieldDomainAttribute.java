@@ -10,8 +10,8 @@ import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SyncWire;
@@ -32,7 +32,7 @@ public class SyncFieldDomainAttribute extends InferenceTestCase {
 	}
 
 	public void testInference() throws JaxenException {
-		Page page = assertHasPage(root, "page");
+		Frame page = assertHasFrame(root, "page");
 		InputTextField field = assertHasInputTextField(page, "single-text-field");
 		SyncWire wire = (SyncWire) queryOne(page, "//iaml:wires[iaml:name='syncField']");
 		assertNotNull(wire);

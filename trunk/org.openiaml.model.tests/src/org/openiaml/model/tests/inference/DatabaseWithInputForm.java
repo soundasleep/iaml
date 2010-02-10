@@ -9,9 +9,9 @@ import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SyncWire;
@@ -36,7 +36,7 @@ public class DatabaseWithInputForm extends InferenceTestCase {
 		assertEquals(2, store.getAttributes().size());
 		DomainAttribute attribute = assertHasDomainAttribute(store, "value1");
 
-		Page page = assertHasPage(root, "without form");
+		Frame page = assertHasFrame(root, "without form");
 		InputTextField source = assertHasInputTextField(page, "target");
 		SyncWire wire = (SyncWire) getWireBidirectional(root, source, attribute);
 
@@ -73,7 +73,7 @@ public class DatabaseWithInputForm extends InferenceTestCase {
 		assertEquals(2, store.getAttributes().size());
 		DomainAttribute attribute = assertHasDomainAttribute(store, "value2");
 
-		Page page = assertHasPage(root, "with form");
+		Frame page = assertHasFrame(root, "with form");
 		InputForm form = assertHasInputForm(page, "a form");
 		InputTextField source = assertHasInputTextField(form, "target");
 		SyncWire wire = (SyncWire) getWireBidirectional(root, source, attribute);

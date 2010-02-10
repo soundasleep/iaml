@@ -99,7 +99,7 @@ public class DroolsQueueTest extends XmlTestCase {
 		
 		// initially empty
 		assertEquals(0, root.getDomainStores().size());
-		assertEquals(0, root.getSessions().size());
+		assertEquals(0, root.getScopes().size());
 
 		// infer new elements
 		EcoreCreateElementsHelper helper = new EcoreInferenceHandler(resource);
@@ -109,7 +109,7 @@ public class DroolsQueueTest extends XmlTestCase {
 		
 		// check that it did actually create stuff
 		assertEquals(1, root.getDomainStores().size());
-		assertEquals(1, root.getSessions().size());
+		assertEquals(1, root.getScopes().size());
 		
 		// it should also fire new rules in the rule file
 		assertEquals(root.getName(), "created successfully");

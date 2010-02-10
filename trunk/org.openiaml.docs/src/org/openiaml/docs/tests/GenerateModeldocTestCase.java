@@ -44,9 +44,9 @@ public class GenerateModeldocTestCase extends TestCase {
 		};
 		
 		assertTrue(helper.identifierMatches(new Identifier("model::InternetApplication"), ModelPackage.eINSTANCE.getInternetApplication()));
-		assertTrue(helper.identifierMatches(new Identifier("model::visual::Page"), VisualPackage.eINSTANCE.getPage()));
-		assertFalse(helper.identifierMatches(new Identifier("model::InternetApplication"), VisualPackage.eINSTANCE.getPage()));
-		assertFalse(helper.identifierMatches(new Identifier("model::visual::Page"), ModelPackage.eINSTANCE.getInternetApplication()));
+		assertTrue(helper.identifierMatches(new Identifier("model::visual::Frame"), VisualPackage.eINSTANCE.getFrame()));
+		assertFalse(helper.identifierMatches(new Identifier("model::InternetApplication"), VisualPackage.eINSTANCE.getFrame()));
+		assertFalse(helper.identifierMatches(new Identifier("model::visual::Frame"), ModelPackage.eINSTANCE.getInternetApplication()));
 		
 	}
 

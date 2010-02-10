@@ -14,13 +14,14 @@ import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DecisionCondition;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.StartNode;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.ConditionWire;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
+import org.openiaml.model.tests.inference.SessionSyncWires;
 
 /**
  * Inference of SetWires.
@@ -38,7 +39,7 @@ public class SetWireClient extends InferenceTestCase {
 	public void testInitial() throws Exception {
 		root = loadDirectly(SetWireClient.class);
 
-		Page page = assertHasPage(root, "Home");
+		Frame page = assertHasFrame(root, "Home");
 		assertNotGenerated(page);
 		
 		InputTextField source = assertHasInputTextField(page, "source");
@@ -65,7 +66,7 @@ public class SetWireClient extends InferenceTestCase {
 	public void testSourceToTarget() throws Exception {
 		root = loadAndInfer(SetWireClient.class);
 
-		Page page = assertHasPage(root, "Home");
+		Frame page = assertHasFrame(root, "Home");
 		InputTextField source = assertHasInputTextField(page, "source");
 		InputTextField target = assertHasInputTextField(page, "target");
 
@@ -97,7 +98,7 @@ public class SetWireClient extends InferenceTestCase {
 	public void testTargetToSource() throws Exception {
 		root = loadAndInfer(SetWireClient.class);
 
-		Page page = assertHasPage(root, "Home");
+		Frame page = assertHasFrame(root, "Home");
 		InputTextField source = assertHasInputTextField(page, "source");
 		InputTextField target = assertHasInputTextField(page, "target");
 
@@ -125,7 +126,7 @@ public class SetWireClient extends InferenceTestCase {
 	public void testSourceToTargetInit() throws Exception {
 		root = loadAndInfer(SetWireClient.class);
 
-		Page page = assertHasPage(root, "Home");
+		Frame page = assertHasFrame(root, "Home");
 		InputTextField source = assertHasInputTextField(page, "source");
 		InputTextField target = assertHasInputTextField(page, "target");
 
@@ -165,7 +166,7 @@ public class SetWireClient extends InferenceTestCase {
 	public void testSetWireCondition() throws Exception {
 		root = loadAndInfer(SetWireClient.class);
 
-		Page page = assertHasPage(root, "Home");
+		Frame page = assertHasFrame(root, "Home");
 		InputTextField source = assertHasInputTextField(page, "source");
 		InputTextField target = assertHasInputTextField(page, "target");
 
@@ -190,7 +191,7 @@ public class SetWireClient extends InferenceTestCase {
 	public void testSetWireConditionContents() throws Exception {
 		root = loadAndInfer(SetWireClient.class);
 
-		Page page = assertHasPage(root, "Home");
+		Frame page = assertHasFrame(root, "Home");
 		InputTextField source = assertHasInputTextField(page, "source");
 		ApplicationElementProperty value = assertHasApplicationElementProperty(source, "fieldValue");
 		CompositeCondition cond = assertHasCompositeCondition(source, "fieldValue is set");

@@ -8,8 +8,8 @@ import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.ConditionWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SyncWire;
@@ -29,8 +29,8 @@ public class ConditionWireFalseServer extends InferenceTestCase {
 	}
 
 	public void testInference() throws JaxenException {
-		Page page1 = assertHasPage(root, "page1");
-		Page page2 = assertHasPage(root, "page2");
+		Frame page1 = assertHasFrame(root, "page1");
+		Frame page2 = assertHasFrame(root, "page2");
 		SyncWire wire = (SyncWire) getWireBidirectional(root, page1, page2);
 
 		InputTextField field1 = assertHasInputTextField(page1, "field");
@@ -46,8 +46,8 @@ public class ConditionWireFalseServer extends InferenceTestCase {
 		assertEquals(cw.getTo(), wire);
 
 		// [inferred]
-		// field1 and field2 should be connected by SyncWires
-		SyncWire sw = (SyncWire) getWireBidirectional(root, field1, field2);
+		// field1 and field2 should be connected by SyncWires		
+		SyncWire sw = assertHasSyncWire(root, field1, field2);
 
 		// we should have EventTrigger 'edit' in source
 		EventTrigger srcEdit = assertHasEventTrigger(field1, "edit");

@@ -16,7 +16,7 @@ import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Button;
-import org.openiaml.model.model.visual.Page;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.wires.ConditionWire;
 import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
@@ -43,13 +43,13 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 	public void testInitial() throws Exception {
 		root = loadDirectly(GateRequiredPage.class);
 		
-		Page page = assertHasPage(root, "Home");
+		Frame page = assertHasFrame(root, "Home");
 		assertNotGenerated(page);
 		
 		Session session = assertHasSession(root, "Session");
 		assertNotGenerated(session);
 		
-		Page required = assertHasPage(root, "Required Page");
+		Frame required = assertHasFrame(root, "Required Page");
 		assertNotGenerated(required);
 		
 		EntryGate gate = assertHasEntryGate(session, "requires a page is viewed first");
@@ -69,7 +69,7 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 	public void testRequiredPageHasContinueButton() throws Exception {
 		root = loadAndInfer(GateRequiredPage.class);
 		
-		Page required = assertHasPage(root, "Required Page");
+		Frame required = assertHasFrame(root, "Required Page");
 		
 		Button button = assertHasButton(required, "Continue");
 		assertGenerated(button);
@@ -102,7 +102,7 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		assertEquals(property.getDefaultValue(), "false");
 
 		// required page
-		Page required = assertHasPage(root, "Required Page");
+		Frame required = assertHasFrame(root, "Required Page");
 		EventTrigger access = assertHasEventTrigger(required, "access");
 		assertGenerated(access);
 		
@@ -128,7 +128,7 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		ApplicationElementProperty property = assertHasApplicationElementProperty(session, "requires a page is viewed first flag");
 
 		// required page
-		Page required = assertHasPage(root, "Required Page");
+		Frame required = assertHasFrame(root, "Required Page");
 
 		// set operation
 		CompositeOperation set = assertHasCompositeOperation(required, "Set gate flag");

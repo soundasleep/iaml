@@ -11,9 +11,9 @@ import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.WireEdge;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.ExtendsWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
@@ -34,7 +34,7 @@ public class DomainInheritance extends InferenceTestCase {
 		root = loadDirectly(DomainInheritance.class);
 		
 		{
-			Page page = assertHasPage(root, "get person");
+			Frame page = assertHasFrame(root, "get person");
 			InputForm form = assertHasInputForm(page, "view person");
 			assertHasNone(form, "iaml:children");
 			assertNotGenerated(page);
@@ -42,7 +42,7 @@ public class DomainInheritance extends InferenceTestCase {
 		}
 
 		{
-			Page page = assertHasPage(root, "get student");
+			Frame page = assertHasFrame(root, "get student");
 			InputForm form = assertHasInputForm(page, "view student");
 			assertHasNone(form, "iaml:children");
 			assertNotGenerated(page);
@@ -50,7 +50,7 @@ public class DomainInheritance extends InferenceTestCase {
 		}
 
 		{
-			Page page = assertHasPage(root, "get teacher by id");
+			Frame page = assertHasFrame(root, "get teacher by id");
 			InputForm form = assertHasInputForm(page, "view teacher");
 			assertHasNone(form, "iaml:children");
 			assertNotGenerated(page);
@@ -58,7 +58,7 @@ public class DomainInheritance extends InferenceTestCase {
 		}
 
 		{
-			Page page = assertHasPage(root, "get doctoral");
+			Frame page = assertHasFrame(root, "get doctoral");
 			InputForm form = assertHasInputForm(page, "view doctoral");
 			assertHasNone(form, "iaml:children");
 			assertNotGenerated(page);
@@ -92,7 +92,7 @@ public class DomainInheritance extends InferenceTestCase {
 	public void testPerson() throws Exception {
 		root = loadAndInfer(DomainInheritance.class);
 		
-		Page page = assertHasPage(root, "get person");
+		Frame page = assertHasFrame(root, "get person");
 		InputForm form = assertHasInputForm(page, "view person");
 		
 		InputTextField name = assertHasInputTextField(form, "name");
@@ -116,7 +116,7 @@ public class DomainInheritance extends InferenceTestCase {
 	public void testStudent() throws Exception {
 		root = loadAndInfer(DomainInheritance.class);
 		
-		Page page = assertHasPage(root, "get student");
+		Frame page = assertHasFrame(root, "get student");
 		InputForm form = assertHasInputForm(page, "view student");
 		
 		// direct field
@@ -145,7 +145,7 @@ public class DomainInheritance extends InferenceTestCase {
 	public void testTeacher() throws Exception {
 		root = loadAndInfer(DomainInheritance.class);
 		
-		Page page = assertHasPage(root, "get teacher by id");
+		Frame page = assertHasFrame(root, "get teacher by id");
 		InputForm form = assertHasInputForm(page, "view teacher");
 		
 		// direct field
@@ -177,7 +177,7 @@ public class DomainInheritance extends InferenceTestCase {
 	public void testDoctoral() throws Exception {
 		root = loadAndInfer(DomainInheritance.class);
 		
-		Page page = assertHasPage(root, "get doctoral");
+		Frame page = assertHasFrame(root, "get doctoral");
 		InputForm form = assertHasInputForm(page, "view doctoral");
 		
 		// direct field
@@ -218,7 +218,7 @@ public class DomainInheritance extends InferenceTestCase {
 	public void testPersonInstance() throws Exception {
 		root = loadAndInfer(DomainInheritance.class);
 		
-		Page page = assertHasPage(root, "get person");
+		Frame page = assertHasFrame(root, "get person");
 		DomainObjectInstance instance = assertHasDomainObjectInstance(page, "selected person");
 
 		DomainAttributeInstance name = assertHasDomainAttributeInstance(instance, "name");
@@ -241,7 +241,7 @@ public class DomainInheritance extends InferenceTestCase {
 	public void testStudentInstance() throws Exception {
 		root = loadAndInfer(DomainInheritance.class);
 		
-		Page page = assertHasPage(root, "get student");
+		Frame page = assertHasFrame(root, "get student");
 		DomainObjectInstance instance = assertHasDomainObjectInstance(page, "current student");
 		
 		// direct field
@@ -270,7 +270,7 @@ public class DomainInheritance extends InferenceTestCase {
 	public void testTeacherInstance() throws Exception {
 		root = loadAndInfer(DomainInheritance.class);
 		
-		Page page = assertHasPage(root, "get teacher by id");
+		Frame page = assertHasFrame(root, "get teacher by id");
 		DomainObjectInstance instance = assertHasDomainObjectInstance(page, "selected teacher");
 		
 		// direct field
@@ -305,7 +305,7 @@ public class DomainInheritance extends InferenceTestCase {
 	public void testDoctoralInstance() throws Exception {
 		root = loadAndInfer(DomainInheritance.class);
 		
-		Page page = assertHasPage(root, "get doctoral");
+		Frame page = assertHasFrame(root, "get doctoral");
 		DomainObjectInstance instance = assertHasDomainObjectInstance(page, "current doctoral");
 		
 		// direct field

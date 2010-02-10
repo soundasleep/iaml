@@ -21,9 +21,9 @@ import org.openiaml.model.model.components.LoginHandlerTypes;
 import org.openiaml.model.model.operations.OperationCallNode;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Button;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
@@ -47,7 +47,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 	public void testInitial() throws Exception {
 		root = loadDirectly(LoginHandlerInstance.class);
 
-		Page page = assertHasPage(root, "Home");
+		Frame page = assertHasFrame(root, "Home");
 		assertNotGenerated(page);
 		DomainStore store = assertHasDomainStore(root, "Users");
 		assertNotGenerated(store);
@@ -89,7 +89,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		LoginHandler handler = assertHasLoginHandler(session, "login handler");
 
 		// there should be new pages created
-		Page login = assertHasPage(session, "Login Successful");
+		Frame login = assertHasFrame(session, "Login Successful");
 		{
 			Set<WireEdge> wires = assertHasWiresFromTo(1, root, handler, login);
 			NavigateWire wire = (NavigateWire) wires.iterator().next();
@@ -97,7 +97,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 			assertGenerated(wire);
 		}
 
-		Page logout = assertHasPage(root, "Logout Successful");
+		Frame logout = assertHasFrame(root, "Logout Successful");
 		{
 			Set<WireEdge> wires = assertHasWiresFromTo(1, root, handler, logout);
 			NavigateWire wire = (NavigateWire) wires.iterator().next();
@@ -191,11 +191,11 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		Session session = assertHasSession(root, "my session");
 
 		// a generated 'logout' page
-		Page page = assertHasPage(session, "logout");
+		Frame page = assertHasFrame(session, "logout");
 		assertGenerated(page);
 
 		// this page will have been generated
-		Page target = assertHasPage(root, "Logout Successful");
+		Frame target = assertHasFrame(root, "Logout Successful");
 		assertGenerated(target);
 
 		EventTrigger access = assertHasEventTrigger(page, "access");
@@ -216,7 +216,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 
 		Session session = assertHasSession(root, "my session");
 
-		Page dest = assertHasPage(session, "current user");
+		Frame dest = assertHasFrame(session, "current user");
 		assertNotGenerated(dest);
 
 		Operation check = assertHasOperation(session, "check instance");
@@ -240,7 +240,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 
 		Session session = assertHasSession(root, "my session");
 
-		Page logout = assertHasPage(root, "Logout Successful");
+		Frame logout = assertHasFrame(root, "Logout Successful");
 		assertGenerated(logout);
 
 		Operation op = assertHasOperation(session, "do logout");
@@ -263,7 +263,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 
 		Session session = assertHasSession(root, "my session");
 
-		Page login = assertHasPage(root, "login");
+		Frame login = assertHasFrame(root, "login");
 		assertGenerated(login);
 
 		// it should contain a form
@@ -406,7 +406,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		assertGenerated(check);
 
 		// destination page
-		Page login = assertHasPage(root, "login");
+		Frame login = assertHasFrame(root, "login");
 		{
 			Set<WireEdge> wires = assertHasWiresFromTo(1, root, check, login);
 			NavigateWire wire = (NavigateWire) wires.iterator().next();

@@ -236,18 +236,18 @@ rule "Cascaded SetWires: Parameters from parent to child [set]"
 end
 
 # SetWires do not connect the fields together; they can _also_
-# connect the Pages together.
-rule "Connect Session.init to incoming SetWires (contained in Pages) [set]"
+# connect the Frames together.
+rule "Connect Session.init to incoming SetWires (contained in Frames) [set]"
 	when
 		session : Session ( overridden == false )
 		sw : SetWire( overridden == false )
-		sourcePage : ContainsEventTriggers( eval(!functions.containingSessionEquals(sourcePage, session)) )  
-		targetPage : ContainsOperations( eval(functions.containingSessionEquals(targetPage, session)) )
-		eval( functions.connectsSet(sw, sourcePage, targetPage ))
+		sourceFrame : ContainsEventTriggers( eval(!functions.containingSessionEquals(sourceFrame, session)) )  
+		targetFrame : ContainsOperations( eval(functions.containingSessionEquals(targetFrame, session)) )
+		eval( functions.connectsSet(sw, sourceFrame, targetFrame ))
 
 		sw2 : SetWire ( eContainer == sw, overridden == false)
-		sourceElement : ContainsEventTriggers( eContainer == sourcePage )
-		targetElement : ContainsOperations( eContainer == targetPage )
+		sourceElement : ContainsEventTriggers( eContainer == sourceFrame )
+		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connectsSet(sw2, sourceElement, targetElement ))
 
 		event : EventTrigger( eContainer == sourceElement, name == "edit" )
@@ -265,17 +265,17 @@ rule "Connect Session.init to incoming SetWires (contained in Pages) [set]"
 		
 end
 
-rule "Connect parameter for Session.init to incoming SetWires (contained in Pages) [set]"
+rule "Connect parameter for Session.init to incoming SetWires (contained in Frames) [set]"
 	when
 		session : Session ( overridden == false )
 		sw : SetWire( overridden == false )
-		sourcePage : ContainsEventTriggers( eval(!functions.containingSessionEquals(sourcePage, session)) )  
-		targetPage : ContainsOperations( eval(functions.containingSessionEquals(targetPage, session)) )
-		eval( functions.connectsSet(sw, sourcePage, targetPage ))
+		sourceFrame : ContainsEventTriggers( eval(!functions.containingSessionEquals(sourceFrame, session)) )  
+		targetFrame : ContainsOperations( eval(functions.containingSessionEquals(targetFrame, session)) )
+		eval( functions.connectsSet(sw, sourceFrame, targetFrame ))
 
 		sw2 : SetWire ( eContainer == sw, overridden == false)
-		sourceElement : ContainsEventTriggers( eContainer == sourcePage )
-		targetElement : ContainsOperations( eContainer == targetPage )
+		sourceElement : ContainsEventTriggers( eContainer == sourceFrame )
+		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connectsSet(sw2, sourceElement, targetElement ))
 
 		event : EventTrigger( eContainer == sourceElement, name == "edit" )

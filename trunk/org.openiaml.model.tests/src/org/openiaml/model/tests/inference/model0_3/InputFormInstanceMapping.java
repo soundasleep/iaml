@@ -7,9 +7,9 @@ import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.InternetApplication;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.tests.inference.EclipseInheritanceInterface;
 
 /**
@@ -38,14 +38,15 @@ public class InputFormInstanceMapping extends EclipseInheritanceInterface {
 		assertEquals(1, ds.getChildren().size());
 		assertEquals("User", ds.getChildren().get(0).getName());
 
-		Page page = assertHasPage(root, "container");
+		Frame page = assertHasFrame(root, "container");
 		assertEquals("container", page.getName());
 
 		// the form should be empty
 		InputForm form = assertHasInputForm(page, "target input form");
 		assertEquals(0, form.getChildren().size());
 
-		assertEquals(3, page.getChildren().size());
+		assertEquals(2, page.getChildren().size());	// forms
+		assertEquals(1, page.getElements().size()); // domain object instance
 		DomainObjectInstance obj = assertHasDomainObjectInstance(page, "User instance");
 
 		// the instance should be empty
@@ -70,11 +71,12 @@ public class InputFormInstanceMapping extends EclipseInheritanceInterface {
 		assertEquals(1, ds.getChildren().size());
 		assertEquals("User", ds.getChildren().get(0).getName());
 
-		Page page = assertHasPage(root, "container");
+		Frame page = assertHasFrame(root, "container");
 		assertEquals("container", page.getName());
 
 		// the instance should NOT be empty
-		assertEquals(3, page.getChildren().size());
+		assertEquals(2, page.getChildren().size());	// forms
+		assertEquals(1, page.getElements().size());	// domain object instance
 		DomainObjectInstance obj = assertHasDomainObjectInstance(page, "User instance");
 		assertEquals("User instance", obj.getName());
 

@@ -9,8 +9,8 @@ import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SelectWire;
@@ -32,7 +32,7 @@ public class SelectField extends InferenceTestCase {
 
 	public void testInference() throws Exception {
 		// initial elements
-		Page container = assertHasPage(root, "container");
+		Frame container = assertHasFrame(root, "container");
 		InputTextField field = assertHasInputTextField(container, "editname");
 
 		DomainStore store = assertHasDomainStore(root, "DomainStore");

@@ -73,12 +73,12 @@ rule "Create 'access' event trigger for input text field"
 end
 
 /**
- * @inference Page
- *    A {@model Page} contains an {@model EventTrigger} named 'access'.
+ * @inference Frame
+ *    A {@model Frame} contains an {@model EventTrigger} named 'access'.
  */
 rule "Create 'access' event for all pages"
 	when
-		page : Page( )
+		page : Frame( )
 		not (EventTrigger (eContainer == page, name=="access" ))
 					
 	then

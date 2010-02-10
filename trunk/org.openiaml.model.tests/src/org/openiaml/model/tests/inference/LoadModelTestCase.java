@@ -5,7 +5,7 @@ package org.openiaml.model.tests.inference;
 
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.InternetApplication;
-import org.openiaml.model.model.visual.Page;
+import org.openiaml.model.model.visual.Frame;
 
 /**
  * Tests loading the model.
@@ -31,10 +31,13 @@ public class LoadModelTestCase extends InferenceTestCase {
 
 	public void testContents() {
 		// it should have pages
-		assertEquals(root.getChildren().size(), 3);
-		assertTrue(root.getChildren().get(0) instanceof Page);
-		assertTrue(root.getChildren().get(1) instanceof Page);
-		assertTrue(root.getChildren().get(2) instanceof Page);
+		assertEquals(root.getScopes().size(), 3);
+		assertTrue(root.getScopes().get(0) instanceof Frame);
+		assertTrue(root.getScopes().get(1) instanceof Frame);
+		assertTrue(root.getScopes().get(2) instanceof Frame);
+		
+		// but no visible elements
+		assertEquals(root.getChildren().size(), 0);
 	}
 
 }

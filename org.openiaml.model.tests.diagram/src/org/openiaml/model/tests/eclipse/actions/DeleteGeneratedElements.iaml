@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1227e0889db.38">
-  <children xsi:type="iaml.visual:Page" id="visual.1227e088ab6.15" name="container">
+<iaml:InternetApplication xmi:version="2.0" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1227e0889db.38">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.1227e088ab6.15" name="container">
     <operations xsi:type="iaml:CompositeOperation" inEdges="wires.1227e088ab6.1a" id="model.1227e0889db.4e" name="incoming"/>
     <eventTriggers id="model.1227e0889db.4f" name="outgoing" outEdges="wires.1227e088ab6.1b">
       <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1227e088ab6.1b" from="model.1227e0889db.4f" to="model.1227e0889db.5c" name="run in"/>
@@ -57,5 +57,5 @@
       <eventTriggers generatedBy="visual.1227e088ab6.25" isGenerated="true" id="model.1227e0889db.7b" name="edit"/>
       <properties generatedBy="visual.1227e088ab6.25" isGenerated="true" id="model.1227e0889db.7c" name="fieldValue" inFlows="model.1227e0889db.8c model.1227e0889db.92"/>
     </children>
-  </children>
+  </scopes>
 </iaml:InternetApplication>

@@ -121,16 +121,16 @@ public class PartialInferenceWithinActivations extends AbstractActionTestCase<Gr
 		assertEditorHasChildren(2, editor);
 		
 		// get contents
-		assertHasPage(editor, "target");
-		assertHasPage(editor, "other");
+		assertHasFrame(editor, "target");
+		assertHasFrame(editor, "other");
 		
 		// there should not be a page called 'outside activation'
 		assertNotHasPage(editor, "created");
 		
 		// open page
-		ShapeNodeEditPart page = assertHasPage(editor, "target");
+		ShapeNodeEditPart page = assertHasFrame(editor, "target");
 		editor_page = openDiagram(page);
-		assertEditorVisual(editor_page);
+		assertEditorFrame(editor_page);
 
 		// there should not be a text field called 'created'
 		assertNotHasInputTextField(editor_page, "created");
@@ -151,8 +151,8 @@ public class PartialInferenceWithinActivations extends AbstractActionTestCase<Gr
 			assertEditorHasChildren(2, editor);
 			
 			// get contents
-			ShapeNodeEditPart target = assertHasPage(editor, "target");
-			assertHasPage(editor, "other");
+			ShapeNodeEditPart target = assertHasFrame(editor, "target");
+			assertHasFrame(editor, "other");
 			
 			// select the first text field and infer!
 			runAction(getAction(), target);
@@ -200,9 +200,9 @@ public class PartialInferenceWithinActivations extends AbstractActionTestCase<Gr
 			assertEditorHasChildren(3, editor);
 			
 			// get contents
-			ShapeNodeEditPart target = assertHasPage(editor, "target");
-			assertHasPage(editor, "other");
-			assertHasPage(editor, "outside activation");
+			ShapeNodeEditPart target = assertHasFrame(editor, "target");
+			assertHasFrame(editor, "other");
+			assertHasFrame(editor, "outside activation");
 			
 			// however, if we open up the text field, there should be elements
 			// in here generated
@@ -234,9 +234,9 @@ public class PartialInferenceWithinActivations extends AbstractActionTestCase<Gr
 		assertEditorHasChildren(3, editor);
 		
 		// get contents
-		ShapeNodeEditPart target = assertHasPage(editor, "target");
-		assertHasPage(editor, "other");
-		assertHasPage(editor, "outside activation");
+		ShapeNodeEditPart target = assertHasFrame(editor, "target");
+		assertHasFrame(editor, "other");
+		assertHasFrame(editor, "outside activation");
 		
 		// however, if we open up the text field, there should be elements
 		// in here generated
@@ -249,7 +249,7 @@ public class PartialInferenceWithinActivations extends AbstractActionTestCase<Gr
 	 * Check the editor 'target' (editor_page) to make sure it's been _partially_ inferred.
 	 */
 	protected void checkPartialInferenceEditor() {
-		assertEditorVisual(editor_page);
+		assertEditorFrame(editor_page);
 		
 		assertEditorHasChildren(3, editor_page);
 		
@@ -272,7 +272,7 @@ public class PartialInferenceWithinActivations extends AbstractActionTestCase<Gr
 	 * Check the editor to make sure it's been _fully_ inferred.
 	 */
 	protected void checkFullInferenceEditor() {
-		assertEditorVisual(editor_page);
+		assertEditorFrame(editor_page);
 		
 		// plus an InputForm!
 		assertEditorHasChildren(4, editor_page);

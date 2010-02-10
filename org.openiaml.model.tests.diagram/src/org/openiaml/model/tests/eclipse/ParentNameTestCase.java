@@ -22,7 +22,7 @@ import org.openiaml.model.inference.EcoreCreateElementsHelper;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.InternetApplication;
-import org.openiaml.model.model.visual.Page;
+import org.openiaml.model.model.visual.Frame;
 
 /**
  * Tests that editors that have elements with "parents" rendering
@@ -68,8 +68,9 @@ public class ParentNameTestCase extends EclipseTestCaseHelper {
 		assertEditorHasChildren(1, editor);
 
 		root = (InternetApplication) rendering;
-		assertEquals(1, root.getChildren().size());
-		Page page = (Page) root.getChildren().get(0);
+		assertEquals(0, root.getChildren().size());
+		assertEquals(1, root.getScopes().size());
+		Frame page = (Frame) root.getScopes().get(0);
 		assertEquals("Home", page.getName());
 
 		// should not be empty
@@ -230,8 +231,8 @@ public class ParentNameTestCase extends EclipseTestCaseHelper {
 		gmf.setName(root, "root element");
 		assertEquals(root.getName(), "root element");
 
-		// create a Page
-		Page page = gmf.createPage(root);
+		// create a Frame
+		Frame page = gmf.createFrame(root);
 		assertNotNull(page);
 
 		// set name
@@ -239,14 +240,14 @@ public class ParentNameTestCase extends EclipseTestCaseHelper {
 		assertEquals(page.getName(), "my page");
 
 		// find the edit part for this element
-		ShapeNodeEditPart part = assertHasPage(editor, "my page");
+		ShapeNodeEditPart part = assertHasFrame(editor, "my page");
 		assertNotNull(part);
 
 		// what is the content pane?
 		IFigure fig = part.getContentPane();
-		assertEquals("Page should NOT be extended.",
+		assertEquals("Frame should NOT be extended.",
 				fig.getClass().getSimpleName(),
-				"PageFigure");
+				"FrameFigure");
 	}
 
 	/**

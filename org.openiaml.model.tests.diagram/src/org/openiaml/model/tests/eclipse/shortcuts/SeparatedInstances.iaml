@@ -3,11 +3,11 @@
   <operations xsi:type="iaml:CompositeOperation" id="model.123314d162d.a7" name="root operation">
     <inExecutions href="SeparatedInstances.iaml_operation#model.123314d162d.b2"/>
   </operations>
-  <children xsi:type="iaml.visual:Page" id="visual.123314d169a.30" name="Home">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.123314d169a.30" name="Home">
     <eventTriggers id="model.123314d162d.7d" name="access" outEdges="wires.123314d16aa.17">
       <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.123314d16aa.17" from="model.123314d162d.7d" name="run">
         <to xsi:type="iaml:CompositeOperation" href="SeparatedInstances.iaml_operation#model.123314d162d.77"/>
       </wires>
     </eventTriggers>
-  </children>
+  </scopes>
 </iaml:InternetApplication>

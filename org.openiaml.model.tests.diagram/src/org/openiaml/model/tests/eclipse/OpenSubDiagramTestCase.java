@@ -43,10 +43,10 @@ public class OpenSubDiagramTestCase extends EclipseTestCaseHelper {
 		assertEditorHasChildren(4, editor);
 
 		// check the contents
-		ShapeNodeEditPart page1 = assertHasPage(editor, "page1");
-		ShapeNodeEditPart page2 = assertHasPage(editor, "page2");
+		ShapeNodeEditPart page1 = assertHasFrame(editor, "page1");
+		ShapeNodeEditPart page2 = assertHasFrame(editor, "page2");
 		ShapeNodeEditPart store = assertHasDomainStore(editor, "domainStore");
-		ShapeNodeEditPart page4 = assertHasPage(editor, "last signup user");
+		ShapeNodeEditPart page4 = assertHasFrame(editor, "last signup user");
 
 		// stop warnings
 		assertNotNull(page1);

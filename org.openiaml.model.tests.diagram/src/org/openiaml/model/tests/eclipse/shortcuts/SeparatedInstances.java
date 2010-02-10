@@ -31,7 +31,7 @@ public class SeparatedInstances extends AbstractShortcutsTestCase {
 
 		assertEditorHasChildren(2, editor);
 		
-		ShapeNodeEditPart page = assertHasPage(editor, "Home", false);
+		ShapeNodeEditPart page = assertHasFrame(editor, "Home", false);
 		assertHasOperation(editor, "root operation", false);
 		
 		// open the page

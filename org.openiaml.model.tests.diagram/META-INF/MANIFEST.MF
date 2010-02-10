@@ -29,4 +29,4 @@ Require-Bundle: org.junit,
  org.openiaml.model.diagram.custom;bundle-version="0.3.1",
  org.openiaml.model.actions;bundle-version="0.3.1",
  org.openiaml.model.diagram.helpers;bundle-version="0.3.1",
- org.openiaml.model.diagram.scope;bundle-version="0.4.1"
+ org.openiaml.model.diagram.frame;bundle-version="0.4.1"

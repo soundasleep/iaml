@@ -30,11 +30,11 @@ public class Issue47 extends AbstractShortcutsTestCase {
 		assertEditorHasChildren(1, editor);
 		
 		// check the contents
-		ShapeNodeEditPart page = assertHasPage(editor, "container");
+		ShapeNodeEditPart page = assertHasFrame(editor, "container");
 
 		// open the page
 		editor_page = openDiagram(page);
-		assertEditorVisual(editor_page);
+		assertEditorFrame(editor_page);
 		
 		// there should be two children (text fields) 
 		assertEditorHasChildren(2, editor_page);

@@ -29,12 +29,12 @@ public class ShortcutsOperationTestCase extends AbstractShortcutsTestCase {
 		assertEditorHasChildren(1, editor);
 		
 		// check the contents
-		ShapeNodeEditPart page = assertHasPage(editor, "container");
+		ShapeNodeEditPart page = assertHasFrame(editor, "container");
 
 		// open the page
 		editor_page = openDiagram(page);
 
-		assertEditorVisual(editor_page);
+		assertEditorFrame(editor_page);
 
 		// note that even though there is an executionedge from chained -> final,
 		// it should not display

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.122f42df872.59">
-  <children xsi:type="iaml.visual:Page" id="visual.122f42df8df.4" name="Home" outEdges="wires.122f42df8df.27 wires.122f42df8df.28 wires.122f42df8df.29">
+<iaml:InternetApplication xmi:version="2.0" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.122f42df872.59">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.122f42df8df.4" name="Home" outEdges="wires.122f42df8df.27 wires.122f42df8df.28 wires.122f42df8df.29">
     <wires xsi:type="iaml.wires:SyncWire" id="wires.122f42df8df.27" from="visual.122f42df8df.4"/>
     <wires xsi:type="iaml.wires:SyncWire" id="wires.122f42df8df.28" from="visual.122f42df8df.4"/>
     <wires xsi:type="iaml.wires:SyncWire" id="wires.122f42df8df.29" from="visual.122f42df8df.4"/>
-  </children>
+  </scopes>
 </iaml:InternetApplication>

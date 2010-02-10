@@ -17,9 +17,9 @@ global EcoreCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
-rule "Create a TextField within a Page"
+rule "Create a TextField within a Frame"
 	when
-		a : Page ( )
+		a : Frame ( )
 		not ( tf : InputTextField ( eContainer == a, name == "created" ))
 		
 	then
@@ -31,16 +31,16 @@ end
 rule "Create elements outside the contained element"
 	when
 		ia : InternetApplication ( )
-		a : Page ( eContainer == ia, name == "target" )
+		a : Frame ( eContainer == ia, name == "target" )
 		not ( f : InputForm ( eContainer == a, name == "created" ))
-		not ( p : Page ( eContainer == ia, name == "outside activation" ))
+		not ( p : Frame ( eContainer == ia, name == "outside activation" ))
 		
 	then
 		InputForm f = handler.generatedInputForm( a, a );
 		handler.setName(f, "created");
 		queue.add(f, drools);
 		
-		Page p = handler.generatedPage(ia, ia);
+		Frame p = handler.generatedFrame(ia, ia);
 		handler.setName(p, "outside activation");
 		queue.add(p, drools);
 end

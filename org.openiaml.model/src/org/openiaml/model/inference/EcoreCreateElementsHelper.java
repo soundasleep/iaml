@@ -405,6 +405,12 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setGeneratedBy(field, by);
 		return field;
 	}
+
+	public InputTextField generatedInputTextField(GeneratesElements by, Frame container) throws InferenceException {
+		InputTextField field = (InputTextField) createElement( container, VisualPackage.eINSTANCE.getInputTextField(), VisualPackage.eINSTANCE.getFrame_Children() );
+		setGeneratedBy(field, by);
+		return field;
+	}
 	
 	public Button generatedButton(GeneratesElements by, VisibleThing container) throws InferenceException {
 		Button button = (Button) createElement( container, VisualPackage.eINSTANCE.getButton(), ModelPackage.eINSTANCE.getVisibleThing_Children() );

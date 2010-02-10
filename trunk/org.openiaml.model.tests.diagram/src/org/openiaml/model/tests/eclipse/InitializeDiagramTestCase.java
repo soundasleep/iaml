@@ -42,17 +42,17 @@ public class InitializeDiagramTestCase extends EclipseTestCaseHelper {
 		assertEditorHasChildren(4, editor);
 
 		// check the contents
-		ShapeNodeEditPart page = assertHasPage(editor, "page");
+		ShapeNodeEditPart page = assertHasFrame(editor, "page");
 		assertHasEventTrigger(editor, "et");
 		assertHasOperation(editor, "op");
 
 		// open the domain store
-		DiagramDocumentEditor editor_visual = openDiagram(page);
+		DiagramDocumentEditor editor_page = openDiagram(page);
 
-		assertEditorVisual(editor_visual);
+		assertEditorFrame(editor_page);
 
 		// close editors
-		((DiagramDocumentEditor) editor_visual).close(false);
+		((DiagramDocumentEditor) editor_page).close(false);
 		((DiagramDocumentEditor) editor).close(false);
 	
 	}

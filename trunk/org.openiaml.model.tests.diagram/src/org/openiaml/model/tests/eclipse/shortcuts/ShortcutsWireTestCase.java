@@ -30,12 +30,12 @@ public class ShortcutsWireTestCase extends AbstractShortcutsTestCase {
 		assertEditorHasChildren(1, editor);
 		
 		// check the contents
-		ShapeNodeEditPart page = assertHasPage(editor, "container");
+		ShapeNodeEditPart page = assertHasFrame(editor, "container");
 
 		// open the domain store
 		editor_page = openDiagram(page);
 
-		assertEditorVisual(editor_page);
+		assertEditorFrame(editor_page);
 
 		// there are lots of children because the event triggers here
 		// also reference the operations inside the wire

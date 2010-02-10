@@ -41,13 +41,13 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		assertEditorHasChildren(2, editor);
 		
 		// get contents
-		assertHasPage(editor, "target");
-		assertHasPage(editor, "other");
+		assertHasFrame(editor, "target");
+		assertHasFrame(editor, "other");
 	
 		// open page
-		ShapeNodeEditPart page = assertHasPage(editor, "target");
+		ShapeNodeEditPart page = assertHasFrame(editor, "target");
 		editor_page = openDiagram(page);
-		assertEditorVisual(editor_page);
+		assertEditorFrame(editor_page);
 
 		// get text field
 		ShapeNodeEditPart text1 = assertHasInputTextField(editor_page, "target text field");
@@ -73,9 +73,9 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 			assertEditorHasChildren(2, editor);
 			
 			// open page
-			ShapeNodeEditPart page = assertHasPage(editor, "target");
+			ShapeNodeEditPart page = assertHasFrame(editor, "target");
 			editor_page = openDiagram(page);
-			assertEditorVisual(editor_page);
+			assertEditorFrame(editor_page);
 			
 			// there should be two children (text fields)
 			assertEditorHasChildren(2, editor_page);
@@ -149,9 +149,9 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 			assertEditorHasChildren(2, editor);
 			
 			// open page
-			ShapeNodeEditPart page = assertHasPage(editor, "target");
+			ShapeNodeEditPart page = assertHasFrame(editor, "target");
 			editor_page = openDiagram(page);
-			assertEditorVisual(editor_page);
+			assertEditorFrame(editor_page);
 			
 			// there should be three children (text fields and access)
 			assertEditorHasChildren(3, editor_page);
@@ -186,9 +186,9 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		assertEditorHasChildren(2, editor);
 		
 		// open page
-		ShapeNodeEditPart page = assertHasPage(editor, "target");
+		ShapeNodeEditPart page = assertHasFrame(editor, "target");
 		editor_page = openDiagram(page);
-		assertEditorVisual(editor_page);
+		assertEditorFrame(editor_page);
 		
 		// there should be three children (text fields and access)
 		assertEditorHasChildren(3, editor_page);

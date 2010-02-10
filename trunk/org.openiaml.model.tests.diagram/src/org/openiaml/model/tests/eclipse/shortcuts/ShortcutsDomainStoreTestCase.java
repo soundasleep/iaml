@@ -29,7 +29,7 @@ public class ShortcutsDomainStoreTestCase extends AbstractShortcutsTestCase {
 		assertEditorHasChildren(2, editor);
 		
 		// check the contents
-		ShapeNodeEditPart page = assertHasPage(editor, "page");
+		ShapeNodeEditPart page = assertHasFrame(editor, "page");
 		ShapeNodeEditPart store = assertHasDomainStore(editor, "domain store");
 
 		// open the domain store
@@ -55,7 +55,7 @@ public class ShortcutsDomainStoreTestCase extends AbstractShortcutsTestCase {
 		// open 'page' editor
 		editor_page = openDiagram(page);
 		
-		assertEditorVisual(editor_page);
+		assertEditorFrame(editor_page);
 		
 		// it should have a domain attribute connected to an event trigger
 		assertEditorHasChildren(2, editor_page);

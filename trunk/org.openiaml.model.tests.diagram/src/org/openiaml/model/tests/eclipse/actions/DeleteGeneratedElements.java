@@ -37,9 +37,9 @@ public class DeleteGeneratedElements extends AbstractActionTestCase<IFile> {
 		initializeModelFile();
 
 		// open page
-		ShapeNodeEditPart page = assertHasPage(editor, "container");
+		ShapeNodeEditPart page = assertHasFrame(editor, "container");
 		editor_page = openDiagram(page);
-		assertEditorVisual(editor_page);
+		assertEditorFrame(editor_page);
 
 		// there should be six children
 		assertEditorHasChildren(6, editor_page);
@@ -81,9 +81,9 @@ public class DeleteGeneratedElements extends AbstractActionTestCase<IFile> {
 		initializeModelFile();
 
 		// open page
-		ShapeNodeEditPart page = assertHasPage(editor, "container");
+		ShapeNodeEditPart page = assertHasFrame(editor, "container");
 		editor_page = openDiagram(page);
-		assertEditorVisual(editor_page);
+		assertEditorFrame(editor_page);
 
 		// there should be six children
 		assertEditorHasChildren(6, editor_page);
@@ -119,9 +119,9 @@ public class DeleteGeneratedElements extends AbstractActionTestCase<IFile> {
 		initializeModelFile();
 
 		// open page
-		ShapeNodeEditPart page = assertHasPage(editor, "container");
+		ShapeNodeEditPart page = assertHasFrame(editor, "container");
 		editor_page = openDiagram(page);
-		assertEditorVisual(editor_page);
+		assertEditorFrame(editor_page);
 
 		// there should be six children
 		assertEditorHasChildren(6, editor_page);
@@ -135,8 +135,8 @@ public class DeleteGeneratedElements extends AbstractActionTestCase<IFile> {
 
 		// this message will likely be quite fragile
 		assertEquals("The generated element 'InputTextField 'target'' contains elements which are connected to non-generated elements:\n\n" +
-				"CompositeOperation 'update'\n" +
-				"EventTrigger 'edit'\n\n" +
+				"EventTrigger 'edit'\n" +
+				"CompositeOperation 'update'\n\n" +
 				"Deleting 'InputTextField 'target'' will also delete these generated elements, currently in use:\n\n" +
 				"CompositeOperation 'update'\n" +
 				"EventTrigger 'edit'", handler.getConfirmationMessage(toConfirm));
@@ -146,9 +146,9 @@ public class DeleteGeneratedElements extends AbstractActionTestCase<IFile> {
 		initializeModelFile();
 
 		// open page
-		ShapeNodeEditPart page = assertHasPage(editor, "container");
+		ShapeNodeEditPart page = assertHasFrame(editor, "container");
 		editor_page = openDiagram(page);
-		assertEditorVisual(editor_page);
+		assertEditorFrame(editor_page);
 
 		// there should be six children
 		assertEditorHasChildren(6, editor_page);

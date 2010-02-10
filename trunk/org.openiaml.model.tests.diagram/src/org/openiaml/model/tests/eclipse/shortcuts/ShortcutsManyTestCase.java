@@ -30,12 +30,12 @@ public class ShortcutsManyTestCase extends AbstractShortcutsTestCase {
 		assertEditorHasChildren(1, editor);
 		
 		// check the contents
-		ShapeNodeEditPart page = assertHasPage(editor, "page");
+		ShapeNodeEditPart page = assertHasFrame(editor, "page");
 
 		// open the domain store
 		editor_page = openDiagram(page);
 
-		assertEditorVisual(editor_page);
+		assertEditorFrame(editor_page);
 
 		// it should have two forms
 		assertEditorHasChildren(2, editor_page);

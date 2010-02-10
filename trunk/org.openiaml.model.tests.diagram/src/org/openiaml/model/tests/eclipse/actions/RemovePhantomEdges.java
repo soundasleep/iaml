@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.openiaml.model.custom.actions.RemovePhantomEdgesAction;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.WireEdge;
-import org.openiaml.model.model.visual.Page;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.tests.eclipse.EclipseTestCaseHelper;
 
 /**
@@ -50,9 +50,10 @@ public class RemovePhantomEdges extends EclipseTestCaseHelper {
 		Resource resource = resourceSet.getResource(URI.createPlatformResourceURI(targetModel.getFullPath().toString(), false), true);		
 		InternetApplication model = (InternetApplication) resource.getContents().get(0);
 		
-		// get the Page
-		assertEquals(1, model.getChildren().size());
-		Page page = (Page) model.getChildren().get(0);
+		// get the Frame
+		assertEquals(0, model.getChildren().size());
+		assertEquals(1, model.getScopes().size());
+		Frame page = (Frame) model.getScopes().get(0);
 		
 		assertEquals(3, page.getWires().size());
 		
@@ -80,9 +81,10 @@ public class RemovePhantomEdges extends EclipseTestCaseHelper {
 		Resource resource = resourceSet.getResource(URI.createPlatformResourceURI(targetModel.getFullPath().toString(), false), true);		
 		InternetApplication model = (InternetApplication) resource.getContents().get(0);
 		
-		// get the Page
-		assertEquals(1, model.getChildren().size());
-		Page page = (Page) model.getChildren().get(0);
+		// get the Frame
+		assertEquals(0, model.getChildren().size());
+		assertEquals(1, model.getScopes().size());
+		Frame page = (Frame) model.getScopes().get(0);
 
 		// no more wires
 		assertEquals(0, page.getWires().size());

@@ -9,7 +9,7 @@ import org.openiaml.model.diagram.custom.actions.InferContainedElementsAction;
 import org.openiaml.model.diagram.custom.actions.UpdateWithDroolsAction;
 import org.openiaml.model.diagram.custom.actions.InferContainedElementsAction.CreateElementsWithinContainer;
 import org.openiaml.model.model.DomainObjectInstance;
-import org.openiaml.model.model.visual.Page;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.tests.eclipse.inference.InferenceActionTestCase;
 import org.openiaml.model.tests.inference.EclipseInheritanceInterface;
 import org.openiaml.model.tests.inference.model0_4.DomainInstanceSaveOperation;
@@ -57,7 +57,7 @@ public class EclipseDomainInstanceSaveOperation extends InferenceActionTestCase 
 	 * @throws JaxenException
 	 */
 	protected CreateElementsWithinContainer createContainerHandler(InferContainedElementsAction action) throws JaxenException {
-		Page page = assertHasPage(root, "container");
+		Frame page = assertHasFrame(root, "container");
 		DomainObjectInstance di = assertHasDomainObjectInstance(page, "domain object instance");
 
 		return action.new CreateElementsWithinContainer(di, super.createHandler(root.eResource()));

@@ -28,7 +28,7 @@ public class ShortcutsRootTestCase extends AbstractShortcutsTestCase {
 		assertEditorHasChildren(4, editor);
 		
 		// check the contents
-		ShapeNodeEditPart page = assertHasPage(editor, "page");
+		ShapeNodeEditPart page = assertHasFrame(editor, "page");
 		ShapeNodeEditPart op = assertHasOperation(editor, "op");
 		ShapeNodeEditPart et = assertHasEventTrigger(editor, "et");
 		ShapeNodeEditPart chained = assertHasEventTrigger(editor, "chained");
@@ -44,7 +44,7 @@ public class ShortcutsRootTestCase extends AbstractShortcutsTestCase {
 		// open the page
 		editor_page = openDiagram(page);
 
-		assertEditorVisual(editor_page);
+		assertEditorFrame(editor_page);
 
 		// it should have a domain object
 		assertEditorHasChildren(2, editor_page);

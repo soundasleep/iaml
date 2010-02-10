@@ -19,7 +19,7 @@ import org.openiaml.model.diagram.part.IamlDiagramEditorUtil;
 import org.openiaml.model.inference.EcoreCreateElementsHelper;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.InternetApplication;
-import org.openiaml.model.model.visual.Page;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.wires.SyncWire;
 
 /**
@@ -61,8 +61,9 @@ public class CreateNewDiagramTestCase extends EclipseTestCaseHelper {
 		assertEditorHasChildren(1, editor);
 
 		root = (InternetApplication) rendering;
-		assertEquals(1, root.getChildren().size());
-		Page page = (Page) root.getChildren().get(0);
+		assertEquals(0, root.getChildren().size());
+		assertEquals(1, root.getScopes().size());
+		Frame page = (Frame) root.getScopes().get(0);
 		assertEquals("Home", page.getName());
 
 		// should not be empty
@@ -101,15 +102,15 @@ public class CreateNewDiagramTestCase extends EclipseTestCaseHelper {
 		DomainStore ds = gmf.createDomainStore(root);
 		assertNotNull(ds);
 
-		// and a Page
-		Page page = gmf.createPage(root);
+		// and a Frame
+		Frame page = gmf.createFrame(root);
 		assertNotNull(page);
 
 		// there should be three elements in this editor
 		assertEditorHasChildren(3, editor);
 
-		// add another page
-		Page page2 = gmf.createPage(root);
+		// add another frame
+		Frame page2 = gmf.createFrame(root);
 		assertNotNull(page2);
 
 		// create a SyncWire between the two
@@ -132,7 +133,7 @@ public class CreateNewDiagramTestCase extends EclipseTestCaseHelper {
 		assertEditorHasChildren(1, editor);
 
 		// create a Page
-		Page page = gmf.createPage(root);
+		Frame page = gmf.createFrame(root);
 		assertNotNull(page);
 
 		// set its name
@@ -143,18 +144,18 @@ public class CreateNewDiagramTestCase extends EclipseTestCaseHelper {
 		assertEditorHasChildren(2, editor);
 
 		// find the edit part for the page
-		ShapeNodeEditPart pageNode = assertHasPage(editor, "page1");
+		ShapeNodeEditPart pageNode = assertHasFrame(editor, "page1");
 
 		// open the page
 		DiagramDocumentEditor pageEditor = openDiagram(pageNode);
 		assertNotNull(pageEditor);
-		assertEditorVisual(pageEditor);
+		assertEditorFrame(pageEditor);
 
 		// there shouldn't be anything here
 		assertEditorHasChildren(0, pageEditor);
 
 		// close this editor
-		((org.openiaml.model.diagram.visual.part.IamlDiagramEditor) pageEditor).closeBlocking(false);
+		((org.openiaml.model.diagram.frame.part.IamlDiagramEditor) pageEditor).closeBlocking(false);
 
 		// we're back in the root editor
 		assertEquals(editor.getTitle(), getActiveEditor().getTitle());

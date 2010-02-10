@@ -37,12 +37,12 @@ public class FormDomainObjectMapping extends AbstractActionTestCase<GraphicalEdi
 		assertEditorHasChildren(2, editor);
 		
 		// get contents
-		ShapeNodeEditPart page = assertHasPage(editor, "container");
+		ShapeNodeEditPart page = assertHasFrame(editor, "container");
 		assertHasDomainStore(editor, "domain store");
 		
 		// open page
 		editor_page = openDiagram(page);
-		assertEditorVisual(editor_page);
+		assertEditorFrame(editor_page);
 		
 		// should have two children
 		assertEditorHasChildren(2, editor_page);
@@ -69,7 +69,7 @@ public class FormDomainObjectMapping extends AbstractActionTestCase<GraphicalEdi
 		// there should only be two children
 		
 		// open page
-		ShapeNodeEditPart page = assertHasPage(editor, "container");
+		ShapeNodeEditPart page = assertHasFrame(editor, "container");
 		editor_page = openDiagram(page);
 		ShapeNodeEditPart form = assertHasInputForm(editor_page, "target form", false);
 

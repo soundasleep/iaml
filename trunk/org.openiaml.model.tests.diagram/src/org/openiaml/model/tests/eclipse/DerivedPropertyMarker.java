@@ -38,15 +38,15 @@ public class DerivedPropertyMarker extends AbstractActionTestCase<IFile> {
 	public void testDerivedProperties() throws Exception {
 		initializeModelFile();
 
-		ShapeNodeEditPart page1 = assertHasPage(editor, "Home");
-		ShapeNodeEditPart page2 = assertHasPage(editor, "generated page");
+		ShapeNodeEditPart page1 = assertHasFrame(editor, "Home");
+		ShapeNodeEditPart page2 = assertHasFrame(editor, "generated page");
 		
 		assertNotHasDerivedMarker(page1);
 		assertHasDerivedMarker(page2);
 		
 		// open page
 		editor_page = openDiagram(page1);
-		assertEditorVisual(editor_page);
+		assertEditorFrame(editor_page);
 		
 		ShapeNodeEditPart op1 = assertHasOperation(editor_page, "non-generated");
 		ShapeNodeEditPart op2 = assertHasOperation(editor_page, "generated");

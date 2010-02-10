@@ -41,9 +41,9 @@ import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.TemporaryVariable;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.Session;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.ConditionWire;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
@@ -232,8 +232,8 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * @param name
 	 * @return
 	 */
-	public ShapeNodeEditPart assertHasPage(DiagramDocumentEditor editor, String name, boolean checkShortcut, boolean shortcutRequired) {
-		return assertHasRenderedNamedObject(editor, Page.class, name, checkShortcut, shortcutRequired);
+	public ShapeNodeEditPart assertHasFrame(DiagramDocumentEditor editor, String name, boolean checkShortcut, boolean shortcutRequired) {
+		return assertHasRenderedNamedObject(editor, Frame.class, name, checkShortcut, shortcutRequired);
 	}
 
 	/**
@@ -595,6 +595,15 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 				"org.openiaml.model.diagram.visual.part.IamlDiagramEditor",
 				editor.getClass().getName());
 	}
+	
+	/**
+	 * Assert the given editor is from the frame plugin.
+	 */
+	public void assertEditorFrame(IEditorPart editor) {
+		assertEquals("active editor is the frame plugin",
+				"org.openiaml.model.diagram.frame.part.IamlDiagramEditor",
+				editor.getClass().getName());
+	}
 
 	/**
 	 * Assert the given editor is from the operation plugin.
@@ -770,11 +779,11 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	}
 
 	/**
-	 * @see #assertHasPage(DiagramDocumentEditor, String, boolean, boolean)
+	 * @see #assertHasFrame(DiagramDocumentEditor, String, boolean, boolean)
 	 */
-	public ShapeNodeEditPart assertHasPage(
+	public ShapeNodeEditPart assertHasFrame(
 			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
-		return assertHasRenderedNamedObject(editor, Page.class, name, true, shortcutRequired);
+		return assertHasRenderedNamedObject(editor, Frame.class, name, true, shortcutRequired);
 	}
 
 	/**
@@ -850,11 +859,11 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	}
 
 	/**
-	 * @see #assertHasPage(DiagramDocumentEditor, String, boolean, boolean)
+	 * @see #assertHasFrame(DiagramDocumentEditor, String, boolean, boolean)
 	 */
-	public ShapeNodeEditPart assertHasPage(
+	public ShapeNodeEditPart assertHasFrame(
 			DiagramDocumentEditor editor, String name) {
-		return assertHasPage(editor, name, false, false);
+		return assertHasFrame(editor, name, false, false);
 	}
 
 	/**
@@ -1000,7 +1009,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	public void assertNotHasPage(DiagramDocumentEditor editor, String string) {
 		boolean failed = false;
 		try {
-			assertHasPage(editor, string);
+			assertHasFrame(editor, string);
 			failed = true;
 		} catch (AssertionFailedError e) {
 			// expected

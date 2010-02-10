@@ -47,7 +47,7 @@ public class BreadcrumbTestCase extends EclipseTestCaseHelper {
 		}
 
 		// check the contents
-		ShapeNodeEditPart page2 = assertHasPage(editor, "page2");
+		ShapeNodeEditPart page2 = assertHasFrame(editor, "page2");
 
 		// open the domain store
 		org.openiaml.model.diagram.visual.part.IamlDiagramEditor ep2

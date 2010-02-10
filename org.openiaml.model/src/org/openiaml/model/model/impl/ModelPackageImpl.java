@@ -15,6 +15,7 @@ import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ApplicationElementProperty;
+import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Condition;
@@ -370,6 +371,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EClass containsScopesEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass canBeSyncedEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -1288,6 +1296,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getScope_Elements() {
+		return (EReference)scopeEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getCondition() {
 		return conditionEClass;
 	}
@@ -1425,6 +1442,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 */
 	public EReference getContainsScopes_Scopes() {
 		return (EReference)containsScopesEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCanBeSynced() {
+		return canBeSyncedEClass;
 	}
 
 	/**
@@ -1582,6 +1608,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(scopeEClass, SCOPE__PROPERTIES);
 		createEReference(scopeEClass, SCOPE__VALUES);
 		createEReference(scopeEClass, SCOPE__PARAMETERS);
+		createEReference(scopeEClass, SCOPE__ELEMENTS);
 
 		conditionEClass = createEClass(CONDITION);
 
@@ -1604,6 +1631,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		containsScopesEClass = createEClass(CONTAINS_SCOPES);
 		createEReference(containsScopesEClass, CONTAINS_SCOPES__SCOPES);
+
+		canBeSyncedEClass = createEClass(CAN_BE_SYNCED);
 	}
 
 	/**
@@ -1684,6 +1713,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		applicationElementEClass.getESuperTypes().add(this.getWireEdgeDestination());
 		applicationElementEClass.getESuperTypes().add(this.getGeneratesElements());
 		applicationElementEClass.getESuperTypes().add(this.getContainsConditions());
+		applicationElementEClass.getESuperTypes().add(this.getCanBeSynced());
 		applicationElementContainerEClass.getESuperTypes().add(this.getApplicationElement());
 		applicationElementContainerEClass.getESuperTypes().add(this.getContainsWires());
 		applicationElementPropertyEClass.getESuperTypes().add(this.getNamedElement());
@@ -1703,6 +1733,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		visibleThingEClass.getESuperTypes().add(this.getNamedElement());
 		visibleThingEClass.getESuperTypes().add(this.getGeneratedElement());
 		visibleThingEClass.getESuperTypes().add(this.getGeneratesElements());
+		visibleThingEClass.getESuperTypes().add(this.getCanBeSynced());
 		internetApplicationEClass.getESuperTypes().add(this.getContainsOperations());
 		internetApplicationEClass.getESuperTypes().add(this.getContainsEventTriggers());
 		internetApplicationEClass.getESuperTypes().add(this.getNamedElement());
@@ -1731,6 +1762,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		scopeEClass.getESuperTypes().add(this.getGeneratesElements());
 		scopeEClass.getESuperTypes().add(this.getContainsWires());
 		scopeEClass.getESuperTypes().add(this.getContainsScopes());
+		scopeEClass.getESuperTypes().add(this.getNamedElement());
+		scopeEClass.getESuperTypes().add(this.getGeneratedElement());
+		scopeEClass.getESuperTypes().add(this.getWireEdgesSource());
+		scopeEClass.getESuperTypes().add(this.getWireEdgeDestination());
+		scopeEClass.getESuperTypes().add(this.getContainsEventTriggers());
+		scopeEClass.getESuperTypes().add(this.getContainsConditions());
+		scopeEClass.getESuperTypes().add(this.getCanBeSynced());
 		conditionEClass.getESuperTypes().add(this.getWireEdgesSource());
 		conditionEClass.getESuperTypes().add(this.getDataFlowEdgesSource());
 		conditionEClass.getESuperTypes().add(this.getNamedElement());
@@ -1743,6 +1781,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		queryParameterEClass.getESuperTypes().add(this.getWireEdgesSource());
 		queryParameterEClass.getESuperTypes().add(this.getDataFlowEdgesSource());
 		containsScopesEClass.getESuperTypes().add(this.getContainsOperations());
+		canBeSyncedEClass.getESuperTypes().add(this.getNamedElement());
+		canBeSyncedEClass.getESuperTypes().add(this.getGeneratedElement());
+		canBeSyncedEClass.getESuperTypes().add(this.getGeneratesElements());
+		canBeSyncedEClass.getESuperTypes().add(this.getContainsWires());
+		canBeSyncedEClass.getESuperTypes().add(this.getContainsEventTriggers());
+		canBeSyncedEClass.getESuperTypes().add(this.getContainsOperations());
+		canBeSyncedEClass.getESuperTypes().add(this.getContainsConditions());
+		canBeSyncedEClass.getESuperTypes().add(this.getWireEdgesSource());
+		canBeSyncedEClass.getESuperTypes().add(this.getWireEdgeDestination());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(namedElementEClass, NamedElement.class, "NamedElement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1872,6 +1919,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getScope_Properties(), this.getApplicationElementProperty(), null, "properties", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getScope_Values(), this.getStaticValue(), null, "values", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getScope_Parameters(), this.getQueryParameter(), null, "parameters", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getScope_Elements(), this.getApplicationElement(), null, "elements", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(conditionEClass, Condition.class, "Condition", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1894,6 +1942,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(containsScopesEClass, ContainsScopes.class, "ContainsScopes", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getContainsScopes_Scopes(), this.getScope(), null, "scopes", null, 0, -1, ContainsScopes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(canBeSyncedEClass, CanBeSynced.class, "CanBeSynced", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

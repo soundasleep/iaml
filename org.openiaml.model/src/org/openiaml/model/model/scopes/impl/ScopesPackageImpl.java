@@ -8,7 +8,6 @@ package org.openiaml.model.model.scopes.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.components.ComponentsPackage;
@@ -140,15 +139,6 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSession_Children() {
-		return (EReference)sessionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public ScopesFactory getScopesFactory() {
 		return (ScopesFactory)getEFactoryInstance();
 	}
@@ -173,7 +163,6 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 
 		// Create classes and their features
 		sessionEClass = createEClass(SESSION);
-		createEReference(sessionEClass, SESSION__CHILDREN);
 	}
 
 	/**
@@ -218,7 +207,6 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(sessionEClass, Session.class, "Session", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSession_Children(), theModelPackage.getApplicationElement(), null, "children", null, 0, -1, Session.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create annotations
 		// http://openiaml.org/comment
@@ -249,13 +237,7 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 		   source, 
 		   new String[] {
 			 "changed", "0.4: no longer extends VisibleThing; now extends ContainsEventTriggers, ContainsConditions, WireEdgesSource and WireEdgeDestination\r\n0.4.2 removed \'agents\' reference"
-		   });			
-		addAnnotation
-		  (getSession_Children(), 
-		   source, 
-		   new String[] {
-			 "renamed", "0.4: from \'components\' to \'children\'"
-		   });
+		   });	
 	}
 
 	/**
@@ -271,7 +253,7 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Represents a user session; contained data is normally not accessible by other users."
-		   });	
+		   });
 	}
 
 } //ScopesPackageImpl

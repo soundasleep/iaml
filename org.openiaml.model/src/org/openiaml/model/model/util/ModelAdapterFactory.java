@@ -14,6 +14,7 @@ import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ApplicationElementProperty;
+import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Condition;
@@ -277,6 +278,10 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseContainsScopes(ContainsScopes object) {
 				return createContainsScopesAdapter();
+			}
+			@Override
+			public Adapter caseCanBeSynced(CanBeSynced object) {
+				return createCanBeSyncedAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -883,6 +888,20 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createContainsScopesAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.CanBeSynced <em>Can Be Synced</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.CanBeSynced
+	 * @generated
+	 */
+	public Adapter createCanBeSyncedAdapter() {
 		return null;
 	}
 

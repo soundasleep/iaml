@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
+import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
@@ -108,15 +109,16 @@ public class ComponentsSwitch<T> {
 				T result = caseLoginHandler(loginHandler);
 				if (result == null) result = caseApplicationElementContainer(loginHandler);
 				if (result == null) result = caseApplicationElement(loginHandler);
+				if (result == null) result = caseCanBeSynced(loginHandler);
 				if (result == null) result = caseContainsOperations(loginHandler);
 				if (result == null) result = caseNamedElement(loginHandler);
+				if (result == null) result = caseGeneratedElement(loginHandler);
 				if (result == null) result = caseContainsEventTriggers(loginHandler);
 				if (result == null) result = caseWireEdgesSource(loginHandler);
+				if (result == null) result = caseShouldntContainWires(loginHandler);
 				if (result == null) result = caseWireEdgeDestination(loginHandler);
 				if (result == null) result = caseGeneratesElements(loginHandler);
 				if (result == null) result = caseContainsConditions(loginHandler);
-				if (result == null) result = caseGeneratedElement(loginHandler);
-				if (result == null) result = caseShouldntContainWires(loginHandler);
 				if (result == null) result = caseContainsWires(loginHandler);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -126,15 +128,16 @@ public class ComponentsSwitch<T> {
 				T result = caseAccessControlHandler(accessControlHandler);
 				if (result == null) result = caseApplicationElementContainer(accessControlHandler);
 				if (result == null) result = caseApplicationElement(accessControlHandler);
+				if (result == null) result = caseCanBeSynced(accessControlHandler);
 				if (result == null) result = caseContainsOperations(accessControlHandler);
 				if (result == null) result = caseNamedElement(accessControlHandler);
+				if (result == null) result = caseGeneratedElement(accessControlHandler);
 				if (result == null) result = caseContainsEventTriggers(accessControlHandler);
 				if (result == null) result = caseWireEdgesSource(accessControlHandler);
+				if (result == null) result = caseShouldntContainWires(accessControlHandler);
 				if (result == null) result = caseWireEdgeDestination(accessControlHandler);
 				if (result == null) result = caseGeneratesElements(accessControlHandler);
 				if (result == null) result = caseContainsConditions(accessControlHandler);
-				if (result == null) result = caseGeneratedElement(accessControlHandler);
-				if (result == null) result = caseShouldntContainWires(accessControlHandler);
 				if (result == null) result = caseContainsWires(accessControlHandler);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -406,6 +409,21 @@ public class ComponentsSwitch<T> {
 	 * @generated
 	 */
 	public T caseContainsConditions(ContainsConditions object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Can Be Synced</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Can Be Synced</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCanBeSynced(CanBeSynced object) {
 		return null;
 	}
 

@@ -127,6 +127,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/properties"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/values"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/parameters"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/elements"/>
     </genClasses>
     <genClasses image="false" ecoreClass="iaml.ecore#//Condition"/>
     <genClasses ecoreClass="iaml.ecore#//CompositeCondition">
@@ -149,6 +150,7 @@
     <genClasses image="false" ecoreClass="iaml.ecore#//ContainsScopes">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ContainsScopes/scopes"/>
     </genClasses>
+    <genClasses ecoreClass="iaml.ecore#//CanBeSynced"/>
     <nestedGenPackages prefix="Visual" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//visual">
       <genClasses ecoreClass="iaml.ecore#//visual/Frame">
@@ -222,9 +224,7 @@
     </nestedGenPackages>
     <nestedGenPackages prefix="Scopes" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//scopes">
-      <genClasses ecoreClass="iaml.ecore#//scopes/Session">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//scopes/Session/children"/>
-      </genClasses>
+      <genClasses ecoreClass="iaml.ecore#//scopes/Session"/>
     </nestedGenPackages>
     <nestedGenPackages prefix="Components" basePackage="org.openiaml.model.model"
         disposableProviderFactory="true" ecorePackage="iaml.ecore#//components">

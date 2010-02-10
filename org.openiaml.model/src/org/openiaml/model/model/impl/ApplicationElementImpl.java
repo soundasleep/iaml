@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementProperty;
+import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsEventTriggers;
@@ -834,6 +835,11 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				default: return -1;
 			}
 		}
+		if (baseClass == CanBeSynced.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -898,6 +904,11 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 		if (baseClass == ContainsConditions.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.CONTAINS_CONDITIONS__CONDITIONS: return ModelPackage.APPLICATION_ELEMENT__CONDITIONS;
+				default: return -1;
+			}
+		}
+		if (baseClass == CanBeSynced.class) {
+			switch (baseFeatureID) {
 				default: return -1;
 			}
 		}

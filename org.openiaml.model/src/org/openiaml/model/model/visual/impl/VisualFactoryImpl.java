@@ -77,10 +77,11 @@ public class VisualFactoryImpl extends EFactoryImpl implements VisualFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public Frame createFrame() {
 		FrameImpl frame = new FrameImpl();
+		generateID(frame);
 		return frame;
 	}
 

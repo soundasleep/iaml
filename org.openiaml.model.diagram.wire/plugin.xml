@@ -226,11 +226,11 @@
       <viewProvider class="org.openiaml.model.diagram.wire.providers.IamlViewProvider">
          <Priority name="Lowest"/>
          <object id="referencing-diagrams" class="org.eclipse.gmf.runtime.notation.Diagram">
-            <method name="getType()" value="iaml_domain_object_instance,iaml,iaml_condition,iaml_wire,iaml_element,iaml_domain_store,iaml_operation,iaml_visual,iaml_user_store,iaml_domain_object,iaml_session"/>
+            <method name="getType()" value="iaml_domain_object_instance,iaml,iaml_condition,iaml_wire,iaml_element,iaml_domain_store,iaml_operation,iaml_visual,iaml_user_store,iaml_domain_object,iaml_session,iaml_frame"/>
          </object>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_Wire"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2010,2011,2012,2004,2013,2014,2015,2016,2017"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2010,2011,2012,2018,2013,2014,2015,2016,2017"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4002,4003"/>
       </viewProvider>
    </extension>
@@ -243,13 +243,13 @@
             <method name="getType()" value="Iaml_Wire"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
-            <method name="getType()" value="2010,2011,2012,2004,2013,2014,2015,2016,2017"/>
+            <method name="getType()" value="2010,2011,2012,2018,2013,2014,2015,2016,2017"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
             <method name="getType()" value="4001,4002,4003"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5019,5020,5021,5022,5023,5024,5007,5008,5025,5026,5027,5028,5029,5030,5031,5032,5033,5034"/>
+            <method name="getType()" value="5019,5020,5021,5022,5023,5024,5035,5036,5025,5026,5027,5028,5029,5030,5031,5032,5033,5034"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value=""/>
@@ -266,13 +266,13 @@
          <object class="org.openiaml.model.diagram.wire.edit.parts.CompositeOperationEditPart" id="CompositeOperation_2010"/>
          <object class="org.openiaml.model.diagram.wire.edit.parts.PrimitiveOperationEditPart" id="PrimitiveOperation_2011"/>
          <object class="org.openiaml.model.diagram.wire.edit.parts.DomainAttributeEditPart" id="DomainAttribute_2012"/>
-         <object class="org.openiaml.model.diagram.wire.edit.parts.InputTextFieldEditPart" id="InputTextField_2004"/>
+         <object class="org.openiaml.model.diagram.wire.edit.parts.InputTextFieldEditPart" id="InputTextField_2018"/>
          <object class="org.openiaml.model.diagram.wire.edit.parts.EventTriggerEditPart" id="EventTrigger_2013"/>
          <object class="org.openiaml.model.diagram.wire.edit.parts.ApplicationElementPropertyEditPart" id="ApplicationElementProperty_2014"/>
          <object class="org.openiaml.model.diagram.wire.edit.parts.ParameterEditPart" id="Parameter_2015"/>
          <object class="org.openiaml.model.diagram.wire.edit.parts.StaticValueEditPart" id="StaticValue_2016"/>
          <object class="org.openiaml.model.diagram.wire.edit.parts.CompositeConditionEditPart" id="CompositeCondition_2017"/>
-         <context elements="CompositeWire_1000,CompositeOperation_2010,PrimitiveOperation_2011,DomainAttribute_2012,InputTextField_2004,EventTrigger_2013,ApplicationElementProperty_2014,Parameter_2015,StaticValue_2016,CompositeCondition_2017"/>
+         <context elements="CompositeWire_1000,CompositeOperation_2010,PrimitiveOperation_2011,DomainAttribute_2012,InputTextField_2018,EventTrigger_2013,ApplicationElementProperty_2014,Parameter_2015,StaticValue_2016,CompositeCondition_2017"/>
       </modelingAssistantProvider>
    </extension>
 
@@ -295,7 +295,7 @@
       <decoratorProvider class="org.openiaml.model.diagram.wire.providers.IamlShortcutsDecoratorProvider">
          <Priority name="Lowest"/>
          <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
-            <method name="getType()" value="2010,2011,2012,2004,2013,2014,2015,2016,2017"/>
+            <method name="getType()" value="2010,2011,2012,2018,2013,2014,2015,2016,2017"/>
          </object>
          <context decoratorTargets="generated-top-nodes"/>
       </decoratorProvider>
@@ -345,12 +345,12 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/visual">
          <metamodelType
-               id="org.openiaml.model.diagram.wire.InputTextField_2004"
-               name="%metatype.name.InputTextField_2004"
+               id="org.openiaml.model.diagram.wire.InputTextField_2018"
+               name="%metatype.name.InputTextField_2018"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="InputTextField"
                edithelper="org.openiaml.model.diagram.wire.edit.helpers.InputTextFieldEditHelper">
-            <param name="semanticHint" value="2004"/>
+            <param name="semanticHint" value="2018"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.4">
@@ -449,7 +449,7 @@
          <elementType ref="org.openiaml.model.diagram.wire.CompositeOperation_2010"/>
          <elementType ref="org.openiaml.model.diagram.wire.PrimitiveOperation_2011"/>
          <elementType ref="org.openiaml.model.diagram.wire.DomainAttribute_2012"/>
-         <elementType ref="org.openiaml.model.diagram.wire.InputTextField_2004"/>
+         <elementType ref="org.openiaml.model.diagram.wire.InputTextField_2018"/>
          <elementType ref="org.openiaml.model.diagram.wire.EventTrigger_2013"/>
          <elementType ref="org.openiaml.model.diagram.wire.ApplicationElementProperty_2014"/>
          <elementType ref="org.openiaml.model.diagram.wire.Parameter_2015"/>

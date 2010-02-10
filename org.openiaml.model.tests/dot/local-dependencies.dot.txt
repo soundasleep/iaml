@@ -21,6 +21,7 @@ digraph {
 "org.openiaml.model.diagram.condition";
 "org.openiaml.model.diagram.user_store";
 "org.openiaml.model.diagram.wire";
+"org.openiaml.model.diagram.frame";
 "org.openiaml.model.diagram.operation";
 "org.openiaml.model.diagram.visual";
 "org.openiaml.model.diagram.element";
@@ -30,7 +31,6 @@ digraph {
 "org.openiaml.model.diagram.domain_object";
 "org.openiaml.model.diagram";
 "org.openiaml.model.diagram.session";
-"org.openiaml.model.diagram.scope";
   node [style=filled, fillcolor="#ffffff"];
   "org.openiaml.model.edit" -> "org.openiaml.model";
   "org.openiaml.model.drools" -> "org.openiaml.model";
@@ -54,6 +54,8 @@ digraph {
   "org.openiaml.docs" -> "org.openiaml.model.drools";
   "org.openiaml.model.diagram.wire" -> "org.openiaml.model";
   "org.openiaml.model.diagram.wire" -> "org.openiaml.model.edit";
+  "org.openiaml.model.diagram.frame" -> "org.openiaml.model";
+  "org.openiaml.model.diagram.frame" -> "org.openiaml.model.edit";
   "org.openiaml.model.diagram.operation" -> "org.openiaml.model";
   "org.openiaml.model.diagram.operation" -> "org.openiaml.model.edit";
   "org.openiaml.model.diagram.visual" -> "org.openiaml.model";
@@ -116,6 +118,4 @@ digraph {
   "org.openiaml.emf.properties.tests" -> "org.openiaml.model";
   "org.openiaml.model.diagram.session" -> "org.openiaml.model";
   "org.openiaml.model.diagram.session" -> "org.openiaml.model.edit";
-  "org.openiaml.model.diagram.scope" -> "org.openiaml.model";
-  "org.openiaml.model.diagram.scope" -> "org.openiaml.model.edit";
 }

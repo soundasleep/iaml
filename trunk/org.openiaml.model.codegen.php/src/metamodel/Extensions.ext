@@ -15,29 +15,29 @@ isRunInstanceWire(emf::EObject this) :
 isRunInstanceWire(model::wires::RunInstanceWire this) :
 	true;
 	
-model::visual::Page containingPage(model::visual::Page element) :
+model::visual::Frame containingFrame(model::visual::Frame element) :
 	element;
 	
-model::visual::Page containingPage(model::NamedElement element) :
-	containingPage(element.eContainer);
+model::visual::Frame containingFrame(model::NamedElement element) :
+	containingFrame(element.eContainer);
 
 /* default for any EObject */
-model::visual::Page containingPage(emf::EObject element) :
+model::visual::Frame containingFrame(emf::EObject element) :
 	null;
-model::visual::Page containingPage(Void void) :
+model::visual::Frame containingFrame(Void void) :
 	null;
 	
-isAccessibleOnPage(model::visual::Page page, model::wires::CompositeWire wire) :
-	containingPage(wire.from) == page ||
-	containingPage(wire.to) == page;
+isAccessibleOnFrame(model::visual::Frame f, model::wires::CompositeWire wire) :
+	containingFrame(wire.from) == f ||
+	containingFrame(wire.to) == f;
 
-isAccessibleOnPage(model::visual::Page page, model::wires::SingleWire wire) :
-	containingPage(wire.from) == page ||
-	containingPage(wire.to) == page;
+isAccessibleOnFrame(model::visual::Frame f, model::wires::SingleWire wire) :
+	containingFrame(wire.from) == f ||
+	containingFrame(wire.to) == f;
 
-isAccessibleOnPage(model::visual::Page page, model::NamedElement element) :
-	containingPage(element) == page;
+isAccessibleOnFrame(model::visual::Frame f, model::NamedElement element) :
+	containingFrame(element) == f;
 
-isAccessibleOnPage(model::visual::Page page, emf::EObject element) :
+isAccessibleOnFrame(model::visual::Frame f, emf::EObject element) :
 	false;
 

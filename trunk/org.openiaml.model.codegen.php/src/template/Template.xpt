@@ -8,26 +8,24 @@
 		«EXPAND exception FOR throwException("We should be able to catch this exception.")» 
 	«ENDIF»
 
-	«EXPAND Page::expandPage FOREACH children»
+	«EXPAND Frame::expandFrame FOREACH children»
 
-	«EXPAND expandSession FOREACH sessions»
+	«EXPAND expandSession FOREACH scopes»
 	
 	«REM»create a sitemap«ENDREM»
 	«FILE "output/sitemap.html"»
 		<html>
 		<head>
-			<title>web application '«pageTitle()»': sitemap</title>
+			<title>web application '«frameTitle()»': sitemap</title>
 			<link rel="stylesheet" type="text/css" href="«config_web»css/default.css" />
 		</head>
 		
 		<body>
 		<h1>Sitemap</h1>
 		<ol>
-			«EXPAND expandSitemapPage FOREACH children»
-			
-			«EXPAND expandSitemapPage FOREACH sessions»
+			«EXPAND expandSitemapFrame FOREACH children»
 
-			«EXPAND expandSitemapPage FOREACH scopes»
+			«EXPAND expandSitemapFrame FOREACH scopes»
 			
 			<li>[<a href="database_dump.php">database dump</a>]</li>
 		</ol>
@@ -81,53 +79,38 @@
 
 /* expand sessions as if they weren't there */
 «DEFINE expandSession FOR model::scopes::Session»
-	«EXPAND Page::expandPage FOREACH children»
 	«EXPAND expandSession FOREACH scopes»
 «ENDDEFINE»
 
-«DEFINE expandSession FOR model::AbstractScope»
+«DEFINE expandSession FOR model::Scope»
 	«EXPAND exception FOR throwException("Unknown scope: " + this)»
 «ENDDEFINE»
 
-«DEFINE expandSession FOR model::scopes::Scope»
-	«EXPAND expandSession FOREACH scopes»
-«ENDDEFINE»
-
-«DEFINE expandSession FOR model::visual::Page»
-	«EXPAND Page::expandPage FOR this»
+«DEFINE expandSession FOR model::visual::Frame»
+	«EXPAND Frame::expandFrame FOR this»
 «ENDDEFINE»
 
 /* default = nothing */
-«DEFINE expandSitemapPage FOR model::ApplicationElement»
+«DEFINE expandSitemapFrame FOR model::ApplicationElement»
 «ENDDEFINE»
 
-«DEFINE expandSitemapPage FOR model::visual::Page»
+«DEFINE expandSitemapFrame FOR model::visual::Frame»
 <li>
-	«EXPAND expandSitemapPage FOREACH scopes»
+	«EXPAND expandSitemapFrame FOREACH scopes»
 	<a href="«safeNameString(id)».php">«name»</a>
 </li>
 «ENDDEFINE»
 
-«DEFINE expandSitemapPage FOR model::scopes::Session»
+«DEFINE expandSitemapFrame FOR model::scopes::Session»
 <li>
 	[Session «name»]
 	<ol>
-		«EXPAND expandSitemapPage FOREACH scopes»
-		«EXPAND expandSitemapPage FOREACH children»
+		«EXPAND expandSitemapFrame FOREACH scopes»
 	</ol>
 </li>
 «ENDDEFINE»
 
-«DEFINE expandSitemapPage FOR model::scopes::Scope»
-<li>
-	[Scope «name»]
-	<ol>
-		«EXPAND expandSitemapPage FOREACH scopes»
-	</ol>
-</li>
-«ENDDEFINE»
-
-«DEFINE expandSitemapPage FOR model::AbstractScope»
+«DEFINE expandSitemapFrame FOR model::Scope»
 	«EXPAND exception FOR throwException("Unknown scope: " + this)»
 «ENDDEFINE»
 

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1268cdc3de1.11a">
-  <children xsi:type="iaml.visual:Page" id="index" name="Home"/>
-  <children xsi:type="iaml.visual:Page" id="visual.1268cdc3e5e.138" name="New User">
-    <children xsi:type="iaml:DomainObjectInstance" id="model.1268cdc3de1.1cb" name="New Student" inEdges="wires.1268cdc3e5e.97 wires.1268cdc3e5e.99" autosave="false"/>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="model.1268cdc3de1.11a">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.1268cdc3e5e.138" name="New User">
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.1268cdc3de1.1cb" name="New Student" inEdges="wires.1268cdc3e5e.97 wires.1268cdc3e5e.99" autosave="false"/>
     <children xsi:type="iaml.visual:InputForm" id="visual.1268cdc3e5e.149" name="edit new student" outEdges="wires.1268cdc3e5e.99">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.1268cdc3e5e.99" from="visual.1268cdc3e5e.149" to="model.1268cdc3de1.1cb" name="sync"/>
     </children>
-  </children>
+  </scopes>
   <domainStores id="model.1268cdc3de1.11d" name="Store">
     <children id="model.1268cdc3de1.127" name="Person" inEdges="wires.1268cdc3e5e.7e">
       <attributes id="model.1268cdc3de1.14f" name="name"/>

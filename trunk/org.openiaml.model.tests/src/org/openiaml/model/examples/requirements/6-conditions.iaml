@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1207ff82f9b.28">
-  <scopes xsi:type="iaml.visual:Page" id="visual.1207ff8316f.25" name="container">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.1207ff8316f.25" name="container">
     <conditions xsi:type="iaml:CompositeCondition" outEdges="wires.1207ff8322b.5" id="model.1207ff82f9b.3a" name="alwaysFalse">
       <wires xsi:type="iaml.wires:ConditionWire" id="wires.1207ff8322b.5" from="model.1207ff82f9b.3a" to="wires.1207ff8322b.3"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.1207ff832b7.9" outExecutions="model.1207ff82f9b.4d"/>

@@ -2,15 +2,15 @@
 
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE runEntryGate(model::visual::Page currentPage) FOR model::components::EntryGate-»
+«DEFINE runEntryGate(model::visual::Frame currentFrame) FOR model::components::EntryGate-»
 /* entry gate '«safeName()»' */
 
 /* expand conditions - do any of them fail? */
-if (!(«EXPAND template::conditions::Runtime::callCondition(true, this, false, currentPage) FOREACH inEdges.typeSelect(model::wires::ConditionWire) SEPARATOR " && "»)) {
+if (!(«EXPAND template::conditions::Runtime::callCondition(true, this, false, currentFrame) FOREACH inEdges.typeSelect(model::wires::ConditionWire) SEPARATOR " && "»)) {
 	// condition failed
 	
-	// save the current page, for resuming
-	$resume = "«safeName(currentPage)»";
+	// save the current frame, for resuming
+	$resume = "«safeName(currentFrame)»";
 	«IF containingSession(this) != null»
 		$_SESSION["«safeName(containingSession(this))»_«safeNameString(id)»"] = $resume;
 	«ELSE»
@@ -18,7 +18,7 @@ if (!(«EXPAND template::conditions::Runtime::callCondition(true, this, false, cu
 	«ENDIF»
 	
 	// execute any wires
-	«EXPAND template::events::Page::runGateWires(currentPage) FOR this»
+	«EXPAND template::events::Frame::runGateWires(currentFrame) FOR this»
 }
 
 «ENDDEFINE»
@@ -27,7 +27,7 @@ if (!(«EXPAND template::conditions::Runtime::callCondition(true, this, false, cu
  * If we have been asked to navigate to the given Gate,
  * where should we resume?
  *
- * Should set '$arg' to the new page ID, or empty if the resume is not set.
+ * Should set '$arg' to the new frame ID, or empty if the resume is not set.
  */
 «DEFINE getEntryResumeTarget(String arg) FOR model::components::EntryGate»
 	«IF containingSession(this) != null»

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12311dd5ff7.1">
-  <children xsi:type="iaml.visual:Page" id="visual.12311dd6084.1" name="Home">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="model.12311dd5ff7.1">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12311dd6084.1" name="Home">
     <operations xsi:type="iaml:CompositeOperation" inEdges="wires.12311dd6093.1" id="model.12311dd5ff7.c" name="target operation">
       <operations xsi:type="iaml:PrimitiveOperation" id="model.12311e69386.13" name="setPropertyToValue" inFlows="model.12311eb1e33.36" inExecutions="model.12311e69386.21" outFlows="model.12311e69386.28" outExecutions="model.12311e69386.24"/>
       <operations xsi:type="iaml:PrimitiveOperation" id="model.12311e69386.14" name="setPropertyToValue" inFlows="model.12311eb1e33.38" inExecutions="model.12311e69386.22" outFlows="model.12311e69386.2a" outExecutions="model.12311e69386.25"/>
@@ -39,5 +39,5 @@
     <children xsi:type="iaml.visual:InputTextField" id="visual.12311dd6084.8c" name="field3">
       <properties id="model.12311dd5ff7.1ab" name="fieldValue" inFlows="model.12311e69386.2b"/>
     </children>
-  </children>
+  </scopes>
 </iaml:InternetApplication>

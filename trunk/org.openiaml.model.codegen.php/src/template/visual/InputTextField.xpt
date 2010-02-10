@@ -5,7 +5,7 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE renderTextField(model::visual::Page currentPage) FOR model::visual::InputTextField-»
+«DEFINE renderTextField(model::visual::Frame currentFrame) FOR model::visual::InputTextField-»
 	<div>
 	<label id="label_«safeNameString(id)-»">
 		«textFieldName()»
@@ -15,9 +15,9 @@
 			onClick="return onClick_«safeNameString(id)»(this);"
 
 			«REM»any initial values?«ENDREM»
-			«EXPAND getInitialValuesSetWire(currentPage) FOREACH inEdges.typeSelect(model::wires::SetWire)» 			 
-			«EXPAND getInitialValuesSyncWire(currentPage) FOREACH inEdges.typeSelect(model::wires::SyncWire)» 
-			«EXPAND getInitialValuesSyncWire(currentPage) FOREACH outEdges.typeSelect(model::wires::SyncWire)» 			 
+			«EXPAND getInitialValuesSetWire(currentFrame) FOREACH inEdges.typeSelect(model::wires::SetWire)» 			 
+			«EXPAND getInitialValuesSyncWire(currentFrame) FOREACH inEdges.typeSelect(model::wires::SyncWire)» 
+			«EXPAND getInitialValuesSyncWire(currentFrame) FOREACH outEdges.typeSelect(model::wires::SyncWire)» 			 
 
 			«REM»
 				an initial value?
@@ -25,14 +25,14 @@
 				browser behaviour to place this value as lower priority. we should work
 				out some way to select it programatically.
 			«ENDREM»
-			«EXPAND staticInitialValue(currentPage) FOREACH properties.select( e | e.name == "fieldValue")»			
+			«EXPAND staticInitialValue(currentFrame) FOREACH properties.select( e | e.name == "fieldValue")»			
 		>
 		
 		<script language="Javascript" type="application/javascript">
 		/* <![CDATA[ */
 			function onChange_«safeNameString(id)»(obj) {
 				// expand all onChanges
-				«EXPAND template::events::EventCall::callEvent(false, currentPage) FOREACH eventTriggers.select(e | e.name == "edit")-»
+				«EXPAND template::events::EventCall::callEvent(false, currentFrame) FOREACH eventTriggers.select(e | e.name == "edit")-»
 
 				// outgoing values
 				«REM»any application element properties to change? (both on client and server)«ENDREM»
@@ -50,14 +50,14 @@
 			
 			function onClick_«safeNameString(id)»(obj) {
 				// expand all onClicks
-				«EXPAND template::events::EventCall::callEvent(false, currentPage) FOREACH eventTriggers.select(e | e.name == "click" || e.name == "onClick")-»
+				«EXPAND template::events::EventCall::callEvent(false, currentFrame) FOREACH eventTriggers.select(e | e.name == "click" || e.name == "onClick")-»
 							
 				return false;
 			}
 			
 			«REM»any on-access events?«ENDREM»
 			addOnloadFunction( function() {
-				«EXPAND template::events::EventCall::callEvent(false, currentPage) FOREACH eventTriggers.select(e | e.name == "access")-»				
+				«EXPAND template::events::EventCall::callEvent(false, currentFrame) FOREACH eventTriggers.select(e | e.name == "access")-»				
 			} );
 		/* ]]> */
 		</script>
@@ -67,27 +67,27 @@
 
 /* if it connects to a SyncWire that is an ApplicationElementProperty, use this
    property as the value */
-«DEFINE getInitialValuesSyncWire(model::visual::Page currentPage) FOR model::wires::SyncWire»
-	«EXPAND staticInitialValue(currentPage) FOR from»
-	«EXPAND staticInitialValue(currentPage) FOR to»
+«DEFINE getInitialValuesSyncWire(model::visual::Frame currentFrame) FOR model::wires::SyncWire»
+	«EXPAND staticInitialValue(currentFrame) FOR from»
+	«EXPAND staticInitialValue(currentFrame) FOR to»
 «ENDDEFINE»
 
 /* if it connects to a SetWire that is an ApplicationElementProperty, use this
    property as the value */
-«DEFINE getInitialValuesSetWire(model::visual::Page currentPage) FOR model::wires::SetWire»
-	«EXPAND staticInitialValue(currentPage) FOR from»
+«DEFINE getInitialValuesSetWire(model::visual::Frame currentFrame) FOR model::wires::SetWire»
+	«EXPAND staticInitialValue(currentFrame) FOR from»
 «ENDDEFINE»
 
 /* ignore these sources */
-«DEFINE staticInitialValue(model::visual::Page currentPage) FOR model::WireEdgesSource»
+«DEFINE staticInitialValue(model::visual::Frame currentFrame) FOR model::WireEdgesSource»
 «ENDDEFINE»
-«DEFINE staticInitialValue(model::visual::Page currentPage) FOR model::WireEdgeDestination»
+«DEFINE staticInitialValue(model::visual::Frame currentFrame) FOR model::WireEdgeDestination»
 «ENDDEFINE»
 
 /* we have a property to provide [in PHP] */
-«DEFINE staticInitialValue(model::visual::Page currentPage) FOR model::ApplicationElementProperty»
+«DEFINE staticInitialValue(model::visual::Frame currentFrame) FOR model::ApplicationElementProperty»
 	«IF containingSession(this) == null»
-		«REM»contained in a Page or InternetApplication: a static value«ENDREM»
+		«REM»contained in a Frame or InternetApplication: a static value«ENDREM»
 		value="<?php echo htmlspecialchars(get_application_value("«safeNameString(id)»", "«escapeString(defaultValue)»")); ?>"
 	«ELSE»
 		«REM»contained in a Session: a session value«ENDREM»
@@ -95,16 +95,16 @@
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE staticInitialValue(model::visual::Page currentPage) FOR model::DomainAttributeInstance»
+«DEFINE staticInitialValue(model::visual::Frame currentFrame) FOR model::DomainAttributeInstance»
 	«REM»from a domain attribute instance.«ENDREM»
 	<?php if (has_attribute_instance_«safeName()»()) { ?>
 	value="<?php echo htmlspecialchars(get_attribute_instance_«safeName()»()); ?>"
 	<?php } ?>
 «ENDDEFINE»
 
-«DEFINE staticInitialValue(model::visual::Page currentPage) FOR model::QueryParameter»
+«DEFINE staticInitialValue(model::visual::Frame currentFrame) FOR model::QueryParameter»
 	«REM»from the query«ENDREM»
-	value="<?php echo «EXPAND template::operations::Parameters::callParameterValue(true, null, false, currentPage)»; ?>"
+	value="<?php echo «EXPAND template::operations::Parameters::callParameterValue(true, null, false, currentFrame)»; ?>"
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

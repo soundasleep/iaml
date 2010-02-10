@@ -33,11 +33,11 @@ import org.openiaml.model.model.wires.SyncWire;
  * @author jmwright
  *
  */
-public class SyncWireProperties extends InferenceTestCase {
+public class SyncWiresProperties extends InferenceTestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		root = loadAndInfer(SyncWireProperties.class);
+		root = loadAndInfer(SyncWiresProperties.class);
 	}
 
 	public void testInference() throws JaxenException {

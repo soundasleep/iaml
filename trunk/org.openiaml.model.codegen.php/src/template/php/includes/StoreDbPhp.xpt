@@ -19,12 +19,12 @@ require("properties_file.php");	// properties loading code
  * Recursive functions in PHP. See default.js for Javascript implementations of these.
  * TODO add test cases to make sure these are both identical.
  */
-function store_event($page_id, $event_name, $arg0) {
+function store_event($frame_id, $event_name, $arg0) {
 	// not sure how often this will actually be called: we block on operations
 	/*
 	register_running_functions();
 	
-	$function_id = "store_event_" . $page_id . "_" . $event_name;
+	$function_id = "store_event_" . $frame_id . "_" . $event_name;
 	if (has_running_function($function_id)) {
 		log_message("Breaking out of infinite loop: $function_id");
 		return false;
@@ -33,9 +33,9 @@ function store_event($page_id, $event_name, $arg0) {
 	
 	/*
 	 * a simple solution (but not scalable TODO): create a new HTTP request to store the event.
-	 * a better solution is obviously to store the new event in this same page.
+	 * a better solution is obviously to store the new event in this same frame.
 	 */	
-	$url = get_baseurl() . "/store_event.php?page_id=" . urlencode($page_id)
+	$url = get_baseurl() . "/store_event.php?frame_id=" . urlencode($frame_id)
 		. "&event_name=" . urlencode($event_name)
 		. "&arg0=" . urlencode($arg0);
 		

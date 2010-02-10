@@ -4,10 +4,10 @@
 
 «DEFINE defaultJs FOR emf::EObject»
 /**
- * Populate all of the fields on the page.
+ * Populate all of the fields on the frame.
  */
 function populateFields() {
-	// get all fields on the page
+	// get all fields on the frame
 	debug("populating fields...");
 	populateAll(document.getElementsByTagName("input"));
 	populateAll(document.getElementsByTagName("textarea"));
@@ -27,6 +27,6 @@ function populateAll(fields) {
 	}
 }
 
-/* page onload functions (called before the page is fully loaded) */
+/* frame onload functions (called before the frame is fully loaded) */
 populateFields();
 «ENDDEFINE»

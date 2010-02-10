@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1254759b7c1.724">
-  <children xsi:type="iaml.visual:Page" id="index" name="Home">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="model.1254759b7c1.724">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <operations xsi:type="iaml:CompositeOperation" inEdges="wires.1254759bc84.8f" id="model.1254759b7c1.72b" name="fibonacci">
       <parameters id="model.1254759b7c1.75d" name="max" outFlows="model.1254759b7c1.79e"/>
       <operations xsi:type="iaml:PrimitiveOperation" id="model.1254759b7c1.760" name="setPropertyToValue" inFlows="model.1254759b7c1.798" inExecutions="model.1254759b7c1.761" outFlows="model.1254759b7c1.763" outExecutions="model.1254759b7c1.79a"/>
@@ -44,5 +44,5 @@
     <values id="model.1254759b7c1.741" name="fib value" outEdges="wires.1254759bc84.94" value="5">
       <wires xsi:type="iaml.wires:ParameterWire" id="wires.1254759bc84.94" from="model.1254759b7c1.741" to="wires.1254759bc84.8f"/>
     </values>
-  </children>
+  </scopes>
 </iaml:InternetApplication>

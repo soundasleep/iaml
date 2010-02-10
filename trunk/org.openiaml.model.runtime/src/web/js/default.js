@@ -1,13 +1,13 @@
 
 var stored_ajax_monitor = 0;
-var stored_counter = { 'store_db' : 0, 
-	'store_event' : 0, 
-	'set_session' : 0, 
+var stored_counter = { 'store_db' : 0,
+	'store_event' : 0,
+	'set_session' : 0,
 	'set_application_value' : 0 };
 
 /**
- * If we are calling Ajax calls before the page has even completely
- * loaded, we need to either (1) store them until the page has loaded,
+ * If we are calling Ajax calls before the frame has even completely
+ * loaded, we need to either (1) store them until the frame has loaded,
  * or (2) execute them and keep a track of outstanding calls.
  *
  * In this implementation, we execute them and keep a track, populating
@@ -17,10 +17,10 @@ function initAjaxMonitor() {
 	var monitor = $('ajax_monitor');
 	if (monitor == null)
 		throw new IamlJavascriptException("ajax_monitor ID was null (init)");
-		
+
 	monitor.innerHTML = stored_ajax_monitor;
 	stored_ajax_monitor = null;
-	
+
 	$('counter_store_db').innerHTML = stored_counter['store_db'];
 	$('counter_store_event').innerHTML = stored_counter['store_event'];
 	$('counter_set_session').innerHTML = stored_counter['set_session'];
@@ -71,9 +71,9 @@ var queued_store_events = new Array();
 var store_event_queued = false;
 
 /* approach #2: use event queues stored on the server, if the function is
-   not available on the current page */
-function store_event(page_id, event_name, arg0) {
-	var url = 'store_event.php?page_id=' + escape(page_id) + '&event_name=' + escape(event_name) + "&arg0=" + escape(arg0);
+   not available on the current frame */
+function store_event(frame_id, event_name, arg0) {
+	var url = 'store_event.php?frame_id=' + escape(frame_id) + '&event_name=' + escape(event_name) + "&arg0=" + escape(arg0);
 	execute_queued_url(url, 'store_event', false);
 }
 
@@ -97,14 +97,14 @@ function execute_queued_url(url, counter, function_queue) {
 		      	debug("success: " + response);
 		      	document.getElementById('response').innerHTML = response;
 		      	// run BEFORE decrementing, so counter will never be 0
-	
+
 		      	// execute the function queue (if any)
 		      	if (function_queue) {
 		      		debug('executing function queue');
 		      		function_queue(response); /* provide response as parameter to callback function, even if not requested */
 		      		debug('function queue complete');
 		      	}
-		      	
+
 		      	// are there any instructions in here?
 		      	if (true /* 0.4.2: always allow instructions */ || allow_instructions) {
 		      		debug('executing instructions');
@@ -120,7 +120,7 @@ function execute_queued_url(url, counter, function_queue) {
 		      						}
 		      						debug("[instruction] ok");
 		      						break;		// nothing
-		      					
+
 		      					case "set_value":
 		      						if (bits.length != 3) {
 		      							throw new IamlJavascriptException("'set_value' instruction called with incorrect number of arguments: expected 3, found " + bits.length);
@@ -130,7 +130,7 @@ function execute_queued_url(url, counter, function_queue) {
 		      						debug("[instruction] set value(" + element_id + ")");
 		      						document.getElementById(element_id).value = value;
 		      						break;
-		      					
+
 		      					case "redirect":
 		      						if (bits.length != 2) {
 		      							throw new IamlJavascriptException("'redirect' instruction called with incorrect number of arguments: expected 2, found " + bits.length);
@@ -140,37 +140,37 @@ function execute_queued_url(url, counter, function_queue) {
 									window.location = url;
 									ajaxIncrement();	// prevent other events from executing
 		      						break;
-		      					
+
 		      					case "call_operation":
 		      						// only up to 10 arguments
 		      						if (bits.length < 2 || bits.length > 12) {
 		      							throw new IamlJavascriptException("'call operation' instruction called with incorrect number of arguments: expected 2 <= n <= 12, found " + bits.length);
 		      						}
-		      						
+
 		      						if (!get_operation_handler()) {
 		      							throw new IamlJavascriptException("No operation handler registered");
 		      						}
-		      						
+
 		      						var op = decodeURIComponent(bits[1]);
 		      						var args = new Array();
-		      						
+
 		      						// any arguments (up to 10)
 		      						for (var j = 0; j < 10; j++) {
-		      							args.push(bits.length > (j + 2) ? bits[j + 2] : null); 
+		      							args.push(bits.length > (j + 2) ? bits[j + 2] : null);
 		      						}
-		      						
+
 		      						// call the operation via the operation handler
 		      						debug("[instruction] operation '" + op + ": " + args[0] + ", " + args[1] + ", ...");
 		      						get_operation_handler().execute(op, args);
 		      						debug("[instruction] operation complete");
 		      						break;
-		      					
+
 		      					default:
 		      						throw new IamlJavascriptException("Unknown instruction '" + inst + "'");
 		      				}
 		      			}
-		      		}  
-		      	} 
+		      		}
+		      	}
 		    } catch (e) {
 		    	if (e instanceof IamlJavascriptException) {
 			    	add_runtime_error("Exception within AJAX: " + e);
@@ -180,21 +180,21 @@ function execute_queued_url(url, counter, function_queue) {
 		    		throw e;	// rethrow
 		    	}
 		    }
-		      	
-	      	next_store_event();	
+
+	      	next_store_event();
 	      	ajaxDecrement();
 	    },
-	    onFailure: function(transport){ 
+	    onFailure: function(transport){
 			var fail = 'Ajax failed at ' + url + ': ' + transport.responseText || "no response text";
 			debug("FAILURE: " + fail);
 			//alert(fail);
 			root_alert(fail);
 	      	next_store_event();
-			ajaxFailed(fail);		
+			ajaxFailed(fail);
 	     }
 	  });
   };
-  
+
   if (store_event_queued) {
   	// we're currently in a queue
   	debug(" -- adding to queue: " + url);
@@ -251,67 +251,67 @@ function next_store_event() {
 
 /* save directly to database (only one attribute) */
 function store_db(attribute_id, arg0) {
-	var url = 'store_db.php?attribute_id=' + escape(attribute_id) + '&page=' + escape(page_id) + '&arg0=' + escape(arg0);
+	var url = 'store_db.php?attribute_id=' + escape(attribute_id) + '&frame=' + escape(frame_id) + '&arg0=' + escape(arg0);
 	execute_queued_url(url, 'store_db', false);
 }
 
 /* save a session variable (only one attribute) */
 function set_session(id, arg0, function_queue) {
-	var url = 'set_session.php?id=' + escape(id) + '&page=' + escape(page_id) + '&arg0=' + escape(arg0);
+	var url = 'set_session.php?id=' + escape(id) + '&frame=' + escape(frame_id) + '&arg0=' + escape(arg0);
 	execute_queued_url(url, 'set_session', function_queue);
 }
 
 /* save a server variable (only one attribute) */
 function set_application_value(id, arg0, function_queue) {
-	var url = 'set_application_value.php?id=' + escape(id) + '&page=' + escape(page_id) + '&arg0=' + escape(arg0);
+	var url = 'set_application_value.php?id=' + escape(id) + '&frame=' + escape(frame_id) + '&arg0=' + escape(arg0);
 	execute_queued_url(url, 'set_application_value', function_queue);
 }
 
 /* save a domain instance variable */
 function set_domain_attribute(id, arg0, function_queue) {
-	var url = 'set_domain_attribute.php?id=' + escape(id) + '&page=' + escape(page_id) + '&arg0=' + escape(arg0);
+	var url = 'set_domain_attribute.php?id=' + escape(id) + '&frame=' + escape(frame_id) + '&arg0=' + escape(arg0);
 	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
 function queued_new_domain_instance(id, function_queue) {
-	var url = 'new_domain_instance.php?id=' + escape(id) + '&page=' + escape(page_id);
+	var url = 'new_domain_instance.php?id=' + escape(id) + '&frame=' + escape(frame_id);
 	execute_queued_url(url, 'new_domain_instance', function_queue);
 }
 
 function save_queued_store_domain_attribute(id, function_queue) {
-	var url = 'save_queued_attribute.php?id=' + escape(id) + '&page=' + escape(page_id);
+	var url = 'save_queued_attribute.php?id=' + escape(id) + '&frame=' + escape(frame_id);
 	execute_queued_url(url, 'queued_store_attribute', function_queue);
 }
 
 function save_queued_store_domain_object(id, function_queue) {
-	var url = 'save_queued_store_domain_object.php?id=' + escape(id) + '&page=' + escape(page_id);
+	var url = 'save_queued_store_domain_object.php?id=' + escape(id) + '&frame=' + escape(frame_id);
 	execute_queued_url(url, 'queued_store_object', function_queue);
 }
 
 function queued_add_role(role_id, instance_id, function_queue) {
-	var url = 'add_role.php?role_id=' + escape(role_id) + '&instance_id=' + escape(instance_id) + '&page=' + escape(page_id);
+	var url = 'add_role.php?role_id=' + escape(role_id) + '&instance_id=' + escape(instance_id) + '&frame=' + escape(frame_id);
 	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
 function queued_add_permission(permission_id, instance_id, function_queue) {
-	var url = 'add_permission.php?permission_id=' + escape(permission_id) + '&instance_id=' + escape(instance_id) + '&page=' + escape(page_id);
+	var url = 'add_permission.php?permission_id=' + escape(permission_id) + '&instance_id=' + escape(instance_id) + '&frame=' + escape(frame_id);
 	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
 function queued_remove_role(role_id, instance_id, function_queue) {
-	var url = 'remove_role.php?role_id=' + escape(role_id) + '&instance_id=' + escape(instance_id) + '&page=' + escape(page_id);
+	var url = 'remove_role.php?role_id=' + escape(role_id) + '&instance_id=' + escape(instance_id) + '&frame=' + escape(frame_id);
 	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
 function queued_remove_permission(permission_id, instance_id, function_queue) {
-	var url = 'remove_permission.php?permission_id=' + escape(permission_id) + '&instance_id=' + escape(instance_id) + '&page=' + escape(page_id);
+	var url = 'remove_permission.php?permission_id=' + escape(permission_id) + '&instance_id=' + escape(instance_id) + '&frame=' + escape(frame_id);
 	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
 /* call a remote operation (only one attribute) */
 function call_remote_event(container, operation_name, arg0, arg1, function_queue) {
-	var url = 'call_remote_event.php?container=' + escape(container) 
-		+ '&page=' + escape(page_id) 
+	var url = 'call_remote_event.php?container=' + escape(container)
+		+ '&frame=' + escape(frame_id)
 		+ '&operation_name=' + escape(operation_name)
 		+ '&arg0=' + escape(arg0)
 		+ '&arg1=' + escape(arg1);
@@ -346,11 +346,11 @@ function setField(field) {
 var operation_handler = null;
 
 /**
- * To (hopefully) prevent various XSS attacks, we let each page register
+ * To (hopefully) prevent various XSS attacks, we let each frame register
  * a function which actually lists all the operations that are available
- * within the given page. This function handler will then execute
+ * within the given frame. This function handler will then execute
  * the function as necessary, and acts as a "bridge" between this
- * library script and the generated page.
+ * library script and the generated frame.
  */
 function get_operation_handler() {
 	return operation_handler;
@@ -362,16 +362,16 @@ function set_operation_handler(handler) {
 
 /**
  * Is every element in the array equal?
- */ 
+ */
 function is_array_equal(a) {
 	if (a.length <= 1)
 		return true;
-		
+
 	for (var i = 1; i < a.length; i++) {
 		if (a[0] != a[i])
 			return false;
 	}
-	
+
 	return true;
 }
 
@@ -421,43 +421,43 @@ function load_xml(text) {
 	// Firefox
 	var parser = new DOMParser();
 	return parser.parseFromString(text, "text/xml");
-	
+
 	// nothing
 	// throw new IamlJavascriptException("Could not load XML, no XML loader found.");
 }
 
 /**
  * Comparison function: xpathMatch(a, b)
- * Returns true if 'a' matches the xpath of 'b', or 'b' matches the 
+ * Returns true if 'a' matches the xpath of 'b', or 'b' matches the
  * xpath of 'a' (order doesn't matter).
  */
 function xpathMatch(a, b) {
 	var id = null;
 	var ids = null;
-	
+
 	if (a instanceof Array) {
 		ids = a;
 	}
 	if (b instanceof Array) {
 		ids = b;
 	}
-	if (a instanceof Visual_Page) {
+	if (a instanceof Visual_Frame) {
 		id = a.getID();
 	}
-	if (b instanceof Visual_Page) {
+	if (b instanceof Visual_Frame) {
 		id = b.getID();
 	}
-	
+
 	// make sure we have id and path
 	if (id == null) {
-		throw new IamlJavascriptException("Cannot compare xpath: ID is null. (" + a + ", " + b + ")"); 
+		throw new IamlJavascriptException("Cannot compare xpath: ID is null. (" + a + ", " + b + ")");
 	}
 	if (ids == null) {
-		throw new IamlJavascriptException("Cannot compare xpath: List of results is null."); 
+		throw new IamlJavascriptException("Cannot compare xpath: List of results is null.");
 	}
-	
+
 	debug("Querying XML XPath for ID: '" + id + "'");
-	
+
 	// is the ID in this list?
 	for (var i = 0; i < ids.length; i++) {
 		if (ids[i] == id) {
@@ -476,7 +476,7 @@ function emailAddressMatch(a) {
 	if (a == null) {
 		throw new IamlJavascriptException("Cannot emailAddressMatch a null address.");
 	}
-	
+
 	var re = new RegExp("([A-Za-z0-9\._\-]+)@([A-Za-z0-9_\-]+)(\.[A-Za-z0-9_\-]+)+");
 	return re.exec(a) ? true : false;
 }
@@ -486,9 +486,9 @@ function emailAddressMatch(a) {
  */
 function IamlJavascriptException(message) {
 	this.message = message;
-	
+
 	this.getMessage = function() { return message; };
-	this.toString = function() { return "IamlJavascriptException: " + message; }; 
+	this.toString = function() { return "IamlJavascriptException: " + message; };
 }
 
 /**
@@ -505,21 +505,21 @@ function throwJavascriptException(message) {
  */
 function CallStack() {
 	this.stack = new Array();
-	
+
 	this.history = new Array();
-	
+
 	this.pop = function() {
 		if (this.stack.length == 0) {
 			ajaxIncrement(); // prevent other events from executing
 			alert("Ran out of stack: " + this.history);
 			throw new IamlJavascriptException("Ran out of stack: " + this.history);
 		}
-		
+
 		var s = this.stack.pop();
 		this.history.push(s);
 		return s;
 	}
-	
+
 	this.push = function(s) {
 		this.stack.push(s);
 	}
@@ -528,15 +528,15 @@ function CallStack() {
 // ----- IAML domain concepts
 
 /**
- * Represents a Page: by ID and name
+ * Represents a Frame: by ID and name
  */
-function Visual_Page(id, name) {
+function Visual_Frame(id, name) {
 	this.id = id;
 	this.name = name;
-	
+
 	this.getID = function() { return id; };
 	this.getName = function() { return name; };
-	this.toString = function() { return "Page: id=" + id + " name=" + name; };
+	this.toString = function() { return "Frame: id=" + id + " name=" + name; };
 }
 
 /**
@@ -545,7 +545,7 @@ function Visual_Page(id, name) {
 function Users_Role(id, name) {
 	this.id = id;
 	this.name = name;
-	
+
 	this.getID = function() { return id; };
 	this.getName = function() { return name; };
 	this.toString = function() { return "Role: id=" + id + " name=" + name; };
@@ -557,7 +557,7 @@ function Users_Role(id, name) {
 function Users_Permission(id, name) {
 	this.id = id;
 	this.name = name;
-	
+
 	this.getID = function() { return id; };
 	this.getName = function() { return name; };
 	this.toString = function() { return "Permission: id=" + id + " name=" + name; };

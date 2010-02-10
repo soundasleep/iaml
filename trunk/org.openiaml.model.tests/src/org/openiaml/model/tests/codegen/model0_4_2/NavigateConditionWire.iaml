@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.126aaf83900.45f">
-  <children xsi:type="iaml.visual:Page" id="index" name="Home">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="model.126aaf83900.45f">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <conditions xsi:type="iaml:CompositeCondition" outEdges="wires.126aaf8398c.11e" id="model.126aaf83900.478" name="is value = 1?">
       <conditions xsi:type="iaml.operations:DecisionCondition" id="operations.126aaf8398c.113" name="equal?" outExecutions="model.126aaf83900.4a4 model.126aaf83900.4a5" inExecutions="model.126aaf83900.4a2" inFlows="model.126aaf83900.4a6 model.126aaf83900.4a8"/>
       <wires xsi:type="iaml.wires:ConditionWire" id="wires.126aaf8398c.11e" from="model.126aaf83900.478" to="wires.126aaf8398c.11d"/>
@@ -21,5 +21,5 @@
       <properties id="model.126aaf83900.46f" name="fieldValue" outFlows="model.126aaf83900.4a6"/>
     </children>
   </children>
-  <children xsi:type="iaml.visual:Page" id="visual.126aaf8397d.1bb" name="Destination" inEdges="wires.126aaf8398c.11d"/>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.126aaf8397d.1bb" name="Destination" inEdges="wires.126aaf8398c.11d"/>
 </iaml:InternetApplication>

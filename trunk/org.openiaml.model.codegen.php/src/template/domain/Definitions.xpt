@@ -19,20 +19,20 @@
 /**
  * Expand out all domain object instances.
  */
-«DEFINE domainObjectDefinitions(Boolean php, model::visual::Page currentPage) FOR model::visual::Page»
+«DEFINE domainObjectDefinitions(Boolean php, model::visual::Frame currentFrame) FOR model::visual::Frame»
 	«IF php»
 		«REM»call parent definition (immediately below)«ENDREM»
-		«EXPAND domainObjectDefinitions(php, currentPage) FOR getRoot()»
+		«EXPAND domainObjectDefinitions(php, currentFrame) FOR getRoot()»
 	«ELSE»
 		/* empty */
 	«ENDIF»
 «ENDDEFINE»
-«DEFINE domainObjectDefinitions(Boolean php, model::visual::Page currentPage) FOR model::InternetApplication»
+«DEFINE domainObjectDefinitions(Boolean php, model::visual::Frame currentFrame) FOR model::InternetApplication»
 	«IF php»
 		«EXPAND template::domain::Includes::getInclude FOREACH getRoot().getAllDomainObjects()» 
 
-		«EXPAND GetDefinitions::getDomainObject(currentPage) FOREACH getRoot().getAllDomainObjectInstances()»
-		«EXPAND StoreDefinitions::storeDomainObject(currentPage) FOREACH getRoot().getAllDomainObjectInstances()»
+		«EXPAND GetDefinitions::getDomainObject(currentFrame) FOREACH getRoot().getAllDomainObjectInstances()»
+		«EXPAND StoreDefinitions::storeDomainObject(currentFrame) FOREACH getRoot().getAllDomainObjectInstances()»
 
 		/**
 		 * Get all of the domain joins required in this generated
@@ -56,18 +56,18 @@
 /**
  * Expand out all domain attribute instances.
  */
-«DEFINE domainAttributeDefinitions(Boolean php, model::visual::Page currentPage) FOR model::InternetApplication»
+«DEFINE domainAttributeDefinitions(Boolean php, model::visual::Frame currentFrame) FOR model::InternetApplication»
 	«IF php»
 		«EXPAND Includes::getInclude FOREACH getAllDomainAttributeInstances()»
 	«ELSE»
-		«EXPAND StoreDefinitions::storeDomainAttribute(php, currentPage) FOREACH getAllDomainAttributeInstances()»
+		«EXPAND StoreDefinitions::storeDomainAttribute(php, currentFrame) FOREACH getAllDomainAttributeInstances()»
 	«ENDIF»
 «ENDDEFINE»
-«DEFINE domainAttributeDefinitions(Boolean php, model::visual::Page currentPage) FOR model::visual::Page»
+«DEFINE domainAttributeDefinitions(Boolean php, model::visual::Frame currentFrame) FOR model::visual::Frame»
 	«IF php»
-		«EXPAND domainAttributeDefinitions(php, currentPage) FOR getRoot()»
+		«EXPAND domainAttributeDefinitions(php, currentFrame) FOR getRoot()»
 	«ELSE»
-		«EXPAND StoreDefinitions::storeDomainAttribute(php, currentPage) FOREACH getRoot().getAllDomainAttributeInstances()»
+		«EXPAND StoreDefinitions::storeDomainAttribute(php, currentFrame) FOREACH getRoot().getAllDomainAttributeInstances()»
 	«ENDIF»
 «ENDDEFINE»
 

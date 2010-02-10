@@ -7,10 +7,10 @@
 /**
  * For setting an application value.
  * 
- * $page_id lets the server know which page the client is currently on;
+ * $frame_id lets the server know which frame the client is currently on;
  * the script will search through all properties on the InternetApplication
  * and let the client know if any of these properties (contained on
- * page $page_id) need to update. 
+ * frame $frame_id) need to update. 
  */
  
 require("config.php");		// runtime library configuration
@@ -24,9 +24,9 @@ log_message("set_application_value.php? " . print_r($_GET, true));
 // the property to set
 $id = require_get("id");
 
-// the current page ID we are on
+// the current frame ID we are on
 // (used to select which elements to inform the client to update)
-$page_id = require_get("page");
+$frame_id = require_get("frame");
 
 // the value to set the property to
 $arg0 = require_get("arg0");
@@ -41,7 +41,7 @@ echo "ok";
 try {
 	«EXPAND potentialUpdatesRequired FOREACH allApplicationElementProperties(this)»
 } catch (IamlRuntimeException $e) {
-	// redirect to the exception page
+	// redirect to the exception frame
 	$url = "exception.php?fail=" . urlencode($e->getMessage() . " [from setApplicationValue]");
 	log_message("[exception] " . print_r($e, true));
 	log_message("[update exception handler] Redirecting to '$url' (fail)");
@@ -180,7 +180,7 @@ echo_necessary_update_callbacks();
 «ENDDEFINE»
 
 «DEFINE outgoingValue FOR model::ApplicationElementProperty»
-	if ($page_id == "«safeNameString(containingPage(this).id)-»") {
+	if ($frame_id == "«safeNameString(containingFrame(this).id)-»") {
 		/* the property "«this»" needs to be updated on the client */
 		«IF model::visual::InputTextField.isInstance(eContainer)»
 			log_message("outgoing value to '«eContainer»' («safeNameString(((model::visual::InputTextField) eContainer).id)»): '$value'");

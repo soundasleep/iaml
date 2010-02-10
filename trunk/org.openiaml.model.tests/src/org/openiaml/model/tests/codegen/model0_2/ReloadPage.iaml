@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.1207a0f9605.27b">
-  <children xsi:type="iaml.visual:Page" id="visual.1207a0f96e0.8b" name="container">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.1207a0f96e0.8b" name="container">
     <children xsi:type="iaml.visual:InputTextField" id="visual.1207a0f96e0.91" name="target"/>
-  </children>
+  </scopes>
 </iaml:InternetApplication>

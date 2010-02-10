@@ -7,10 +7,10 @@
 /**
  * Create a new object instance for our session.
  * 
- * $page_id lets the server know which page the client is currently on;
+ * $frame_id lets the server know which frame the client is currently on;
  * the script will search through all properties on the InternetApplication
  * and let the client know if any of these properties (contained on
- * page $page_id) need to update.
+ * frame $frame_id) need to update.
  */
  
 require("config.php");		// runtime library configuration
@@ -23,9 +23,9 @@ log_message("new_domain_instance.php? " . print_r($_GET, true));
 // the domain object instance to set
 $id = require_get("id");
 
-// the current page ID we are on
+// the current frame ID we are on
 // (used to select which elements to inform the client to update)
-$page_id = require_get("page");
+$frame_id = require_get("frame");
 
 // create a function name
 // TODO this is probably insecure
@@ -33,7 +33,7 @@ $function = "new_domain_instance_" . $id;
 
 // execute
 $function();
-log_message("new_domain_instance.php: $function called from page $page_id");
+log_message("new_domain_instance.php: $function called from frame $frame_id");
 
 echo "ok";
 
@@ -42,7 +42,7 @@ echo "ok";
 try {
 	«EXPAND potentialDomainObjectInstanceUpdatesRequired FOREACH eAllContents.typeSelect(model::DomainObjectInstance)»
 } catch (IamlRuntimeException $e) {
-	// redirect to the exception page
+	// redirect to the exception frame
 	$url = "exception.php?fail=" . urlencode($e->getMessage() . " [from setApplicationValue]");
 	log_message("[exception] " . print_r($e, true));
 	log_message("[update exception handler] Redirecting to '$url' (fail)");
@@ -91,8 +91,8 @@ echo_necessary_update_callbacks();
 
 «DEFINE editEventTarget(model::wires::RunInstanceWire wire) FOR model::Operation»
 	/* we have an operation that we should call on edit */
-	/* is it on the current page? */
-	if ($page_id == '«containingPage(this).safeName()»') {
+	/* is it on the current frame? */
+	if ($frame_id == '«containingFrame(this).safeName()»') {
 		// yes: call the operation
 		log_message("calling client-side operation «name»");
 		log_message("call_operation " 

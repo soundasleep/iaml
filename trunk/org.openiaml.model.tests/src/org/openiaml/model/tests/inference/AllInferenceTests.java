@@ -28,7 +28,7 @@ public class AllInferenceTests {
         suite.addTestSuite(SyncWireTestCase.class);
         suite.addTestSuite(SyncFieldDomainAttribute.class);
         suite.addTestSuite(SyncFormDomainObject.class);
-        suite.addTestSuite(SyncWireProperties.class);
+        suite.addTestSuite(SyncWiresProperties.class);
         
         // model 0.2
         suite.addTestSuite(ConditionWireFalse.class);

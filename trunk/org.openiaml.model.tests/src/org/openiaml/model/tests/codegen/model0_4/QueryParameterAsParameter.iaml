@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.123172ceeef.2f">
-  <children xsi:type="iaml.visual:Page" id="visual.123172cef6c.2b" name="Home">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="model.123172ceeef.2f">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.123172cef6c.2b" name="Home">
     <children xsi:type="iaml.visual:InputForm" id="visual.123172cef6c.3f" name="current user" inEdges="wires.123172cef6c.17"/>
-    <children xsi:type="iaml:DomainObjectInstance" id="model.123172ceeef.93" name="selected user" outEdges="wires.123172cef6c.17" inEdges="wires.123172cef6c.13" autosave="false">
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.123172ceeef.93" name="selected user" outEdges="wires.123172cef6c.17" inEdges="wires.123172cef6c.13" autosave="false">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.123172cef6c.17" from="model.123172ceeef.93" to="visual.123172cef6c.3f" name="sync"/>
-    </children>
+    </elements>
     <parameters id="model.123172ceeef.92" name="user_id" outEdges="wires.123172cef6c.15" defaultValue="1">
       <wires xsi:type="iaml.wires:ParameterWire" id="wires.123172cef6c.15" from="model.123172ceeef.92" to="wires.123172cef6c.13"/>
     </parameters>
-  </children>
+  </scopes>
   <domainStores id="model.123172ceeef.32" name="Users">
     <children id="model.123172ceeef.3c" name="User" outEdges="wires.123172cef6c.13">
       <wires xsi:type="iaml.wires:SelectWire" id="wires.123172cef6c.13" from="model.123172ceeef.3c" to="model.123172ceeef.93" name="select" inEdges="wires.123172cef6c.15" query="id = ?"/>

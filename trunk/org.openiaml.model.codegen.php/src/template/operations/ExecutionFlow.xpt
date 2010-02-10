@@ -14,11 +14,11 @@
  * @param operation is the current operation flow from an operation? if false, it is from a condition.  
  */
 # @implementation StartNode If a {@model StartNode} has more than one {@model ExecutionEdge} coming out of it, they will be executed sequentially. 
-«DEFINE executionFlow(Boolean operation, model::visual::Page container, Boolean php) FOR model::operations::StartNode-»
+«DEFINE executionFlow(Boolean operation, model::visual::Frame container, Boolean php) FOR model::operations::StartNode-»
 	«EXPAND executionFlowInternal(operation, container, php, outExecutions) FOR this»
 «ENDDEFINE»
 
-«DEFINE executionFlowInternal(Boolean operation, model::visual::Page container, Boolean php, List[model::ExecutionEdge] edges) FOR model::ExecutionEdgesSource-»
+«DEFINE executionFlowInternal(Boolean operation, model::visual::Frame container, Boolean php, List[model::ExecutionEdge] edges) FOR model::ExecutionEdgesSource-»
 	// flow starts here
 	/**
 	 * Since Javascript does not support GOTO, we must emulate this manually.
@@ -73,7 +73,7 @@
 	 */
 «ENDDEFINE»
 
-«DEFINE executionFlow(Boolean operation, model::visual::Page container, Boolean php) FOR model::ActivityNode-»
+«DEFINE executionFlow(Boolean operation, model::visual::Frame container, Boolean php) FOR model::ActivityNode-»
 	// nothing for an activity node
 «ENDDEFINE»
 
@@ -85,7 +85,7 @@
 	("«safeName(to)-»");
 «ENDDEFINE»
 
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Page container, Boolean php) FOR emf::EObject-»
+«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR emf::EObject-»
 	/* disabled */
 	// all destinations 1:
 	/*
@@ -96,11 +96,11 @@
 /**
  * The individual steps within a flow.
  */
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Page container, Boolean php) FOR model::ExecutionEdgeDestination-»
+«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::ExecutionEdgeDestination-»
 	«EXPAND exception FOR throwException("Unknown operation contents node: " + this)»
 «ENDDEFINE»
 
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Page container, Boolean php) FOR model::operations::CancelNode-»
+«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::operations::CancelNode-»
 	«IF operation»
 		«REM»operations will throw exceptions at CancelNodes«ENDREM»
 		«IF exceptionText.length > 0»
@@ -118,11 +118,11 @@
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Page container, Boolean php) FOR model::operations::StartNode-»
+«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::operations::StartNode-»
 	«EXPAND exception FOR throwException("Should never have the executionFlowStep start at a StartNode: use executionFlow.")»
 «ENDDEFINE»
 
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Page container, Boolean php) FOR model::operations::FinishNode-»
+«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::operations::FinishNode-»
 	// operation finished successfully
 	«IF operation»
 		«REM»operations will continue at FinishNodes (to let threads finish)«ENDREM»
@@ -156,7 +156,7 @@
  *       |-> d ----> e ->|
  */ 
 # @implementation SplitNode,JoinNode Currently execution split is implemented in a single threaded way; each {@model ExecutionEdge execution flow} is executed sequentially until all flows are complete. 
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Page container, Boolean php) FOR model::operations::SplitNode-»
+«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::operations::SplitNode-»
 	/* a split node */
 	
 	«REM»
@@ -166,7 +166,7 @@
 	
 		one side effect of this is that any splitted "set" operations
 		will only get to the first "set" operation before
-		the function queue (which may be a redirect to another page)
+		the function queue (which may be a redirect to another frame)
 		executes, so the other "set" operations would not complete.	
 	«ENDREM»
 	«IF !php»
@@ -229,7 +229,7 @@
 
 «ENDDEFINE»
 
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Page container, Boolean php) FOR model::operations::JoinNode-»
+«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::operations::JoinNode-»
 	// split finished successfully
 	«IF php»
 		$completed_«safeName(start)» = true;
@@ -239,7 +239,7 @@
 «ENDDEFINE»
 
 /* a primitive operation: carry on */
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Page container, Boolean php) FOR model::PrimitiveOperation-»
+«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::PrimitiveOperation-»
 	// primitive operation "«name-»"
 	«EXPAND Contents::operationContents(start, container, php) FOR this-»
 	
@@ -250,7 +250,7 @@
 «ENDDEFINE»
 
 /* a decision operation: expandOperationContents will continue the execution flow */
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Page container, Boolean php) FOR model::operations::DecisionOperation-»
+«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::operations::DecisionOperation-»
 	// decision operation "«name-»"
 	«EXPAND Contents::operationContents(start, container, php) FOR this-»
 
@@ -263,7 +263,7 @@
 /**
  * A decision condition.
  */
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Page container, Boolean php) FOR model::operations::DecisionCondition-»
+«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::operations::DecisionCondition-»
 	// decision condition "«name-»"
 	«EXPAND Contents::operationContents(start, container, php) FOR this-»
 
@@ -278,7 +278,7 @@
  * @operational OperationCall If a {@model OperationCall} does not have any explicit pass/fail
  *    {@model ExecutionEdge ExecutionEdges} defined, then the result value is ignored.
  */
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Page container, Boolean php) FOR model::operations::OperationCallNode-»
+«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::operations::OperationCallNode-»
 	// virtual operation call "«name-»"
 
 	«REM»
@@ -387,20 +387,20 @@
 «DEFINE continueChainedOperations(Boolean php) FOR model::wires::NavigateWire»
 	«IF name != "fail"»
 		«IF php»
-			«IF model::visual::Page.isInstance(to)»
-			/* prevent infinite loops on the current page */
-			if ("«((model::visual::Page) to).id»" != CURRENT_PAGE) {
+			«IF model::visual::Frame.isInstance(to)»
+			/* prevent infinite loops on the current frame */
+			if ("«((model::visual::Frame) to).id»" != CURRENT_PAGE) {
 			«ELSE»
 			if (true) {
 			«ENDIF»
-				// navigate to another page
+				// navigate to another frame
 				$url = "«safeName(to)».php";
 				log_message("[redirect] Redirecting to '$url'");
 				header("Location: $url");
 				die;
 			}
 		«ELSE»
-			// navigate to another page
+			// navigate to another frame
 			var url = "«safeName(to)».php";
 			debug("[redirect] Redirecting to '" + url + "'");
 			window.location = url;

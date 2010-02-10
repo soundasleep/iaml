@@ -7,8 +7,8 @@
 «EXTENSION template::GeneratorExtensions»
 
 /* code to _save_ attributes */
-«DEFINE storeDomainAttribute(Boolean php, model::visual::Page currentPage) FOR model::DomainAttributeInstance-»
-	«EXPAND storeDomainAttributeDefinition(php, currentPage) FOR this»
+«DEFINE storeDomainAttribute(Boolean php, model::visual::Frame currentFrame) FOR model::DomainAttributeInstance-»
+	«EXPAND storeDomainAttributeDefinition(php, currentFrame) FOR this»
 
 	«IF php»
 		«IF isAutosaveOff(this)»
@@ -32,7 +32,7 @@
 					store_domain_attribute_«safeName()-»($arg0);
 				}
 			«ELSE»
-				/* contained within a page */
+				/* contained within a frame */
 				$arg0 = get_application_value("instance_queue_«safeName()-»", false);
 				if ($arg0 !== false) {
 					// lets set it
@@ -57,7 +57,7 @@
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE storeDomainAttributeDefinition(Boolean php, model::visual::Page currentPage) FOR model::DomainAttributeInstance-»
+«DEFINE storeDomainAttributeDefinition(Boolean php, model::visual::Frame currentFrame) FOR model::DomainAttributeInstance-»
 	«IF php»
 		function store_domain_attribute_«safeName()»($arg0) {
 			/* store a value into attribute id '«id»' */
@@ -75,7 +75,7 @@
 					«ENDIF»
 				«ELSE»
 					$attribute_name = "«safeNameString(name)-»";
-					«EXPAND evaluateSelectWireStore(currentPage) FOR inEdges.typeSelect(model::wires::SelectWire).first()»
+					«EXPAND evaluateSelectWireStore(currentFrame) FOR inEdges.typeSelect(model::wires::SelectWire).first()»
 				«ENDIF»
 			«ENDIF»
 		}
@@ -97,10 +97,10 @@
 			throw new IamlRuntimeException("Unexpectedly got an empty new session attribute");
 		}
 	«ELSE»
-		/* contained within a page */
+		/* contained within a frame */
 		$new_id = get_application_value("new_attribute_«safeName()-»", false);
 		if ($new_id === false) {
-			throw new IamlRuntimeException("Unexpectedly got an empty new page attribute");
+			throw new IamlRuntimeException("Unexpectedly got an empty new frame attribute");
 		}
 	«ENDIF»
 
@@ -122,7 +122,7 @@
 	log_message("attribute '$attribute_name' set to '$arg0'");
 «ENDDEFINE»
 
-«DEFINE storeDomainObject(model::visual::Page currentPage) FOR model::DomainObjectInstance-»
+«DEFINE storeDomainObject(model::visual::Frame currentFrame) FOR model::DomainObjectInstance-»
 	function store_object_instance_«safeName()»($attribute_name, $arg0) {
 		/* store a value into object id '«id»' */
 		«IF inEdges.typeSelect(model::wires::SelectWire).isEmpty»
@@ -133,7 +133,7 @@
 				«EXPAND setNewDomainObject(inEdges.typeSelect(model::wires::NewInstanceWire).first()) FOR this»
 			«ENDIF»
 		«ELSE»
-			«EXPAND evaluateSelectWireStore(currentPage) FOR inEdges.typeSelect(model::wires::SelectWire).first()»
+			«EXPAND evaluateSelectWireStore(currentFrame) FOR inEdges.typeSelect(model::wires::SelectWire).first()»
 		«ENDIF»
 	}
 	
@@ -171,7 +171,7 @@
 	«ENDLET»
 «ENDDEFINE»
 
-«DEFINE evaluateSelectWireStore(model::visual::Page currentPage) FOR model::wires::SelectWire»
+«DEFINE evaluateSelectWireStore(model::visual::Frame currentFrame) FOR model::wires::SelectWire»
 	/* selection wire «this» (for storing values), assumes $arg0 exists */
 	
 	«IF model::DomainObjectInstance.isInstance(to.eContainer)»
@@ -204,7 +204,7 @@
 			SET $attribute_name = ?
 			WHERE " . «EXPAND Select::getQuery FOR this-»;
 		$args = array($arg0);
-		$args2 = array(«EXPAND template::operations::Parameters::callParameter(true, this, false, true, currentPage) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ","»);
+		$args2 = array(«EXPAND template::operations::Parameters::callParameter(true, this, false, true, currentFrame) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ","»);
 		foreach ($args2 as $k) {
 			$args[] = $k;
 		}

@@ -6,9 +6,8 @@
  */
 package org.openiaml.model.model.components;
 
-import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.scopes.Session;
-import org.openiaml.model.model.visual.Page;
+import org.openiaml.model.model.wires.ConditionWire;
 
 
 /**
@@ -17,7 +16,7 @@ import org.openiaml.model.model.visual.Page;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * When placed into a {@link Scope} (including {@link Session}), all {@link Page} accesses within that Scope must finally execute this {@link Gate}. If any outgoing {@link WireEdge wires} {@link Condition cannot execute}, then access out of this {@link Scope} is denied until such time the {@link Condition} is now false.
+ * When placed into a {@link Scope} (including {@link Session}), all {@link Page} accesses within that Scope must finally execute this {@link Gate}. If all incoming {@link ConditionWire}s are true, then access to this {@link Scope} is denied until such time any {@link ConditionWire}s becomes false.
  * <!-- end-model-doc -->
  *
  *

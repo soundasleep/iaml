@@ -94,9 +94,9 @@
       <details key="documentation" value="Fundamental building blocks of application functionality. Their intent is based on their name."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CompositeOperation" eSuperTypes="#//PrimitiveOperation #//ContainsOperations #//ContainsWires #//GeneratesElements #//AbstractScope #//ContainsConditions">
+  <eClassifiers xsi:type="ecore:EClass" name="CompositeOperation" eSuperTypes="#//PrimitiveOperation #//ContainsOperations #//ContainsWires #//GeneratesElements #//ContainsConditions">
     <eAnnotations source="http://openiaml.org/comment">
-      <details key="comment" value="Scope supertype added in 0.2&#xD;&#xA;_shouldnt_properties removed in 0.4"/>
+      <details key="changed" value="0.2 added Scope supertype&#xD;&#xA;0.4 removed '_shouldnt_properties'&#xD;&#xA;0.4.2 removed Scope supertype"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Operations which are composed of logic flows, data flows, and other operations."/>
@@ -148,33 +148,40 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VisibleThing" eSuperTypes="#//ApplicationElementContainer">
+  <eClassifiers xsi:type="ecore:EClass" name="VisibleThing" eSuperTypes="#//ContainsConditions #//ContainsEventTriggers #//ContainsOperations #//ContainsWires #//WireEdgesSource #//WireEdgeDestination">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="comment" value="this used to mean nothing; now anything that extends VisibleThing (which unforuntately needs to be concrete) has an editor"/>
       <details key="editor" value="org.openiaml.model.diagram.visual"/>
+      <details key="changed" value="0.4.2 to no longer extend ApplicationElementContainer&#xD;&#xA;0.4.2 extends ContainsConditions&#xD;&#xA;0.4.2 extends ContainsOperatons&#xD;&#xA;0.4.2 extends ContainsEventTriggers&#xD;&#xA;0.4.2 extends ContainsWires&#xD;&#xA;0.4.2 extends WireEdgesSource&#xD;&#xA;0.4.2 extends WireEdgeDestination&#xD;&#xA;0.4.2 removed 'sessions' containment"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An abstract type representing application elements which have some sort of visible representation."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sessions" upperBound="-1"
-        eType="#//scopes/Session" containment="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//VisibleThing" containment="true">
       <eAnnotations source="http://openiaml.org/comment">
-        <details key="added" value="0.2"/>
+        <details key="added" value="0.4.2"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
-        eType="#//QueryParameter" containment="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+        eType="#//ApplicationElementProperty" containment="true">
       <eAnnotations source="http://openiaml.org/comment">
-        <details key="added" value="0.4"/>
-        <details key="about" value="ideally this might only be placed in Page and Session, but allowing it within VisibleThing allows us to (1) reuse our visual editor, and (2) increases modularity of components perhaps?"/>
+        <details key="added" value="0.4.2"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
+        eType="#//StaticValue" containment="true">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="added" value="0.4.2"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="InternetApplication" eSuperTypes="#//ContainsOperations #//ContainsEventTriggers #//NamedElement #//ContainsWires #//GeneratesElements #//AbstractScope #//ContainsConditions">
+  <eClassifiers xsi:type="ecore:EClass" name="InternetApplication" eSuperTypes="#//ContainsOperations #//ContainsEventTriggers #//NamedElement #//ContainsWires #//GeneratesElements #//ContainsConditions #//ContainsScopes">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="comment" value="we cannot have InternetApplications inside of other ElementContainers, thus we don't define it as an ApplicationElement"/>
       <details key="comment2" value="but why can we have it as an ActivityEdgeSource? I don't think there are any examples of InternetApplication wire --> something else; all the wires are from objects INSIDE the IA"/>
       <details key="editor" value="org.openiaml.model.diagram"/>
+      <details key="changed" value="0.4.2 no longer a Scope"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="The top-level type of a model instance, representing all of the information required to define an Internet application."/>
@@ -196,12 +203,6 @@
         eType="#//scopes/Session" containment="true">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.2"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="scopes" upperBound="-1"
-        eType="#//scopes/Scope" containment="true">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="added" value="0.4.2"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -341,7 +342,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractScope" abstract="true" eSuperTypes="#//GeneratesElements #//ContainsWires">
+  <eClassifiers xsi:type="ecore:EClass" name="Scope" abstract="true" eSuperTypes="#//GeneratesElements #//ContainsWires #//ContainsScopes">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="changed" value="0.4: 'domainObjects', 'domainViews', 'domainInstances' references removed&#xD;&#xA;0.4.2: renamed from 'Scope' to 'AbstractScope'; added 'gate' reference"/>
     </eAnnotations>
@@ -349,6 +350,25 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="exitGate" eType="#//components/ExitGate"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+        eType="#//ApplicationElementProperty" containment="true">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="added" value="0.4.2"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
+        eType="#//StaticValue" containment="true">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="added" value="0.4.2"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//QueryParameter" containment="true">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="added" value="0.4"/>
+        <details key="about" value="ideally this might only be placed in Page and Session, but allowing it within VisibleThing allows us to (1) reuse our visual editor, and (2) increases modularity of components perhaps?"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Condition" abstract="true" eSuperTypes="#//WireEdgesSource #//DataFlowEdgesSource #//NamedElement">
     <eAnnotations source="http://openiaml.org/comment">
@@ -409,18 +429,27 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ContainsScopes" abstract="true" interface="true"
+      eSuperTypes="#//ContainsOperations">
+    <eAnnotations source="http://openiaml.org/comment">
+      <details key="comment" value="added in 0.4.2"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scopes" upperBound="-1"
+        eType="#//Scope" containment="true"/>
+  </eClassifiers>
   <eSubpackages name="visual" nsURI="http://openiaml.org/model/visual" nsPrefix="iaml.visual">
-    <eClassifiers xsi:type="ecore:EClass" name="Page" eSuperTypes="#//VisibleThing #//AbstractScope">
+    <eClassifiers xsi:type="ecore:EClass" name="Frame" eSuperTypes="#//Scope">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="Scope supertype added in 0.2"/>
         <details key="comment2" value="represents the scope Window"/>
+        <details key="changed" value="0.4.2 renamed from Page to Frame&#xD;&#xA;0.4.2 no longer extends VisibleThing"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Represents a single browser window instance."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="scopes" upperBound="-1"
-          eType="#//scopes/Scope" containment="true">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+          eType="#//VisibleThing" containment="true">
         <eAnnotations source="http://openiaml.org/comment">
           <details key="added" value="0.4.2"/>
         </eAnnotations>
@@ -665,7 +694,7 @@
       <details key="comment2" value="(it makes sense to put these scopes in here, because they are scoped in terms of visual terms)"/>
       <details key="comment3" value="some scopes aren't here: Host, Organisation, we can add these in later."/>
     </eAnnotations>
-    <eClassifiers xsi:type="ecore:EClass" name="Session" eSuperTypes="#//NamedElement #//ContainsOperations #//AbstractScope #//ContainsWires #//ContainsEventTriggers #//WireEdgesSource #//WireEdgeDestination #//ContainsConditions">
+    <eClassifiers xsi:type="ecore:EClass" name="Session" eSuperTypes="#//NamedElement #//ContainsOperations #//Scope #//ContainsWires #//ContainsEventTriggers #//WireEdgesSource #//WireEdgeDestination #//ContainsConditions">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="changed" value="0.4: no longer extends VisibleThing; now extends ContainsEventTriggers, ContainsConditions, WireEdgesSource and WireEdgeDestination&#xD;&#xA;0.4.2 removed 'agents' reference"/>
       </eAnnotations>
@@ -678,36 +707,6 @@
           <details key="renamed" value="0.4: from 'components' to 'children'"/>
         </eAnnotations>
       </eStructuralFeatures>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
-          eType="#//ApplicationElementProperty" containment="true">
-        <eAnnotations source="http://openiaml.org/comment">
-          <details key="added" value="0.4"/>
-        </eAnnotations>
-      </eStructuralFeatures>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
-          eType="#//StaticValue" containment="true">
-        <eAnnotations source="http://openiaml.org/comment">
-          <details key="added" value="0.4"/>
-        </eAnnotations>
-      </eStructuralFeatures>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="scopes" upperBound="-1"
-          eType="#//scopes/Scope" containment="true">
-        <eAnnotations source="http://openiaml.org/comment">
-          <details key="added" value="0.4.2"/>
-        </eAnnotations>
-      </eStructuralFeatures>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Scope" eSuperTypes="#//AbstractScope #//NamedElement #//ContainsConditions #//ContainsEventTriggers #//ContainsOperations #//ContainsWires #//WireEdgesSource #//WireEdgeDestination">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="added" value="0.4.2"/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Represents some sort of scope, which can be contained within a {@link Page}, {@link Session} or {@link InternetApplication}."/>
-      </eAnnotations>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="scopes" upperBound="-1"
-          eType="#//AbstractScope" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
-          eType="#//ApplicationElementProperty" containment="true"/>
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="components" nsURI="http://openiaml.org/model/components" nsPrefix="iaml.components">

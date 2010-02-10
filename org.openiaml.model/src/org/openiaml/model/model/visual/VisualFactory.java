@@ -26,13 +26,13 @@ public interface VisualFactory extends EFactory {
 	VisualFactory eINSTANCE = org.openiaml.model.model.visual.impl.VisualFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Page</em>'.
+	 * Returns a new object of class '<em>Frame</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Page</em>'.
+	 * @return a new object of class '<em>Frame</em>'.
 	 * @generated
 	 */
-	Page createPage();
+	Frame createFrame();
 
 	/**
 	 * Returns a new object of class '<em>Input Form</em>'.

@@ -7,8 +7,6 @@
 package org.openiaml.model.model;
 
 import org.eclipse.emf.common.util.EList;
-import org.openiaml.model.model.scopes.Scope;
-import org.openiaml.model.model.scopes.Session;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,16 +24,14 @@ import org.openiaml.model.model.scopes.Session;
  *   <li>{@link org.openiaml.model.model.InternetApplication#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.InternetApplication#getDomainStores <em>Domain Stores</em>}</li>
  *   <li>{@link org.openiaml.model.model.InternetApplication#getRuntimeUrl <em>Runtime Url</em>}</li>
- *   <li>{@link org.openiaml.model.model.InternetApplication#getSessions <em>Sessions</em>}</li>
- *   <li>{@link org.openiaml.model.model.InternetApplication#getScopes <em>Scopes</em>}</li>
  * </ul>
  * </p>
  *
  * @see org.openiaml.model.model.ModelPackage#getInternetApplication()
- * @model annotation="http://openiaml.org/comment comment='we cannot have InternetApplications inside of other ElementContainers, thus we don\'t define it as an ApplicationElement' comment2='but why can we have it as an ActivityEdgeSource? I don\'t think there are any examples of InternetApplication wire --> something else; all the wires are from objects INSIDE the IA' editor='org.openiaml.model.diagram'"
+ * @model annotation="http://openiaml.org/comment comment='we cannot have InternetApplications inside of other ElementContainers, thus we don\'t define it as an ApplicationElement' comment2='but why can we have it as an ActivityEdgeSource? I don\'t think there are any examples of InternetApplication wire --> something else; all the wires are from objects INSIDE the IA' editor='org.openiaml.model.diagram' changed='0.4.2 no longer a Scope\r\n0.4.2 removed \'sessions\' containment'"
  * @generated
  */
-public interface InternetApplication extends ContainsOperations, ContainsEventTriggers, NamedElement, ContainsWires, GeneratesElements, AbstractScope, ContainsConditions {
+public interface InternetApplication extends ContainsOperations, ContainsEventTriggers, NamedElement, ContainsWires, GeneratesElements, ContainsConditions, ContainsScopes {
 	/**
 	 * Returns the value of the '<em><b>Properties</b></em>' containment reference list.
 	 * The list contents are of type {@link org.openiaml.model.model.ApplicationElementProperty}.
@@ -111,39 +107,5 @@ public interface InternetApplication extends ContainsOperations, ContainsEventTr
 	 * @generated
 	 */
 	void setRuntimeUrl(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Sessions</b></em>' containment reference list.
-	 * The list contents are of type {@link org.openiaml.model.model.scopes.Session}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Sessions</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Sessions</em>' containment reference list.
-	 * @see org.openiaml.model.model.ModelPackage#getInternetApplication_Sessions()
-	 * @model containment="true"
-	 *        annotation="http://openiaml.org/comment added='0.2'"
-	 * @generated
-	 */
-	EList<Session> getSessions();
-
-	/**
-	 * Returns the value of the '<em><b>Scopes</b></em>' containment reference list.
-	 * The list contents are of type {@link org.openiaml.model.model.scopes.Scope}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Scopes</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Scopes</em>' containment reference list.
-	 * @see org.openiaml.model.model.ModelPackage#getInternetApplication_Scopes()
-	 * @model containment="true"
-	 *        annotation="http://openiaml.org/comment added='0.4.2'"
-	 * @generated
-	 */
-	EList<Scope> getScopes();
 
 } // InternetApplication

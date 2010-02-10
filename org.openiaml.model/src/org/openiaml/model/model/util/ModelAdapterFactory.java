@@ -10,7 +10,6 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.openiaml.model.model.AbstractScope;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
@@ -22,6 +21,7 @@ import org.openiaml.model.model.ConditionalEdge;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
+import org.openiaml.model.model.ContainsScopes;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DataFlowEdgeDestination;
@@ -45,6 +45,7 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.QueryParameter;
+import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.TemporaryVariable;
@@ -250,8 +251,8 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createDomainObjectInstanceAdapter();
 			}
 			@Override
-			public Adapter caseAbstractScope(AbstractScope object) {
-				return createAbstractScopeAdapter();
+			public Adapter caseScope(Scope object) {
+				return createScopeAdapter();
 			}
 			@Override
 			public Adapter caseCondition(Condition object) {
@@ -272,6 +273,10 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseQueryParameter(QueryParameter object) {
 				return createQueryParameterAdapter();
+			}
+			@Override
+			public Adapter caseContainsScopes(ContainsScopes object) {
+				return createContainsScopesAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -784,16 +789,16 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.AbstractScope <em>Abstract Scope</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.Scope <em>Scope</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.openiaml.model.model.AbstractScope
+	 * @see org.openiaml.model.model.Scope
 	 * @generated
 	 */
-	public Adapter createAbstractScopeAdapter() {
+	public Adapter createScopeAdapter() {
 		return null;
 	}
 
@@ -864,6 +869,20 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createQueryParameterAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ContainsScopes <em>Contains Scopes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.ContainsScopes
+	 * @generated
+	 */
+	public Adapter createContainsScopesAdapter() {
 		return null;
 	}
 

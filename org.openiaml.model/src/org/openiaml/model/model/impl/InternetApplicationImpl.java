@@ -18,12 +18,12 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.openiaml.model.model.AbstractScope;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsEventTriggers;
+import org.openiaml.model.model.ContainsScopes;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
@@ -33,11 +33,8 @@ import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.WireEdge;
-import org.openiaml.model.model.components.EntryGate;
-import org.openiaml.model.model.components.ExitGate;
-import org.openiaml.model.model.scopes.Scope;
-import org.openiaml.model.model.scopes.Session;
 
 /**
  * <!-- begin-user-doc -->
@@ -56,15 +53,12 @@ import org.openiaml.model.model.scopes.Session;
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getWires <em>Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getGeneratedElements <em>Generated Elements</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#isOverridden <em>Overridden</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getEntryGate <em>Entry Gate</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getExitGate <em>Exit Gate</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getConditions <em>Conditions</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getScopes <em>Scopes</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getDomainStores <em>Domain Stores</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getRuntimeUrl <em>Runtime Url</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getSessions <em>Sessions</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getScopes <em>Scopes</em>}</li>
  * </ul>
  * </p>
  *
@@ -222,26 +216,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	protected boolean overridden = OVERRIDDEN_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getEntryGate() <em>Entry Gate</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEntryGate()
-	 * @generated
-	 * @ordered
-	 */
-	protected EntryGate entryGate;
-
-	/**
-	 * The cached value of the '{@link #getExitGate() <em>Exit Gate</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getExitGate()
-	 * @generated
-	 * @ordered
-	 */
-	protected ExitGate exitGate;
-
-	/**
 	 * The cached value of the '{@link #getConditions() <em>Conditions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -250,6 +224,16 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * @ordered
 	 */
 	protected EList<Condition> conditions;
+
+	/**
+	 * The cached value of the '{@link #getScopes() <em>Scopes</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getScopes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Scope> scopes;
 
 	/**
 	 * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
@@ -300,26 +284,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * @ordered
 	 */
 	protected String runtimeUrl = RUNTIME_URL_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getSessions() <em>Sessions</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSessions()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Session> sessions;
-
-	/**
-	 * The cached value of the '{@link #getScopes() <em>Scopes</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getScopes()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Scope> scopes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -510,92 +474,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EntryGate getEntryGate() {
-		return entryGate;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetEntryGate(EntryGate newEntryGate, NotificationChain msgs) {
-		EntryGate oldEntryGate = entryGate;
-		entryGate = newEntryGate;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.INTERNET_APPLICATION__ENTRY_GATE, oldEntryGate, newEntryGate);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setEntryGate(EntryGate newEntryGate) {
-		if (newEntryGate != entryGate) {
-			NotificationChain msgs = null;
-			if (entryGate != null)
-				msgs = ((InternalEObject)entryGate).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.INTERNET_APPLICATION__ENTRY_GATE, null, msgs);
-			if (newEntryGate != null)
-				msgs = ((InternalEObject)newEntryGate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.INTERNET_APPLICATION__ENTRY_GATE, null, msgs);
-			msgs = basicSetEntryGate(newEntryGate, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.INTERNET_APPLICATION__ENTRY_GATE, newEntryGate, newEntryGate));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ExitGate getExitGate() {
-		return exitGate;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetExitGate(ExitGate newExitGate, NotificationChain msgs) {
-		ExitGate oldExitGate = exitGate;
-		exitGate = newExitGate;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.INTERNET_APPLICATION__EXIT_GATE, oldExitGate, newExitGate);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setExitGate(ExitGate newExitGate) {
-		if (newExitGate != exitGate) {
-			NotificationChain msgs = null;
-			if (exitGate != null)
-				msgs = ((InternalEObject)exitGate).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.INTERNET_APPLICATION__EXIT_GATE, null, msgs);
-			if (newExitGate != null)
-				msgs = ((InternalEObject)newExitGate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.INTERNET_APPLICATION__EXIT_GATE, null, msgs);
-			msgs = basicSetExitGate(newExitGate, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.INTERNET_APPLICATION__EXIT_GATE, newExitGate, newExitGate));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<Condition> getConditions() {
 		if (conditions == null) {
 			conditions = new EObjectContainmentEList<Condition>(Condition.class, this, ModelPackage.INTERNET_APPLICATION__CONDITIONS);
@@ -665,18 +543,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Session> getSessions() {
-		if (sessions == null) {
-			sessions = new EObjectContainmentEList<Session>(Session.class, this, ModelPackage.INTERNET_APPLICATION__SESSIONS);
-		}
-		return sessions;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<Scope> getScopes() {
 		if (scopes == null) {
 			scopes = new EObjectContainmentEList<Scope>(Scope.class, this, ModelPackage.INTERNET_APPLICATION__SCOPES);
@@ -719,22 +585,16 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__GENERATED_ELEMENTS:
 				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
-			case ModelPackage.INTERNET_APPLICATION__ENTRY_GATE:
-				return basicSetEntryGate(null, msgs);
-			case ModelPackage.INTERNET_APPLICATION__EXIT_GATE:
-				return basicSetExitGate(null, msgs);
 			case ModelPackage.INTERNET_APPLICATION__CONDITIONS:
 				return ((InternalEList<?>)getConditions()).basicRemove(otherEnd, msgs);
+			case ModelPackage.INTERNET_APPLICATION__SCOPES:
+				return ((InternalEList<?>)getScopes()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
 				return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__CHILDREN:
 				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__DOMAIN_STORES:
 				return ((InternalEList<?>)getDomainStores()).basicRemove(otherEnd, msgs);
-			case ModelPackage.INTERNET_APPLICATION__SESSIONS:
-				return ((InternalEList<?>)getSessions()).basicRemove(otherEnd, msgs);
-			case ModelPackage.INTERNET_APPLICATION__SCOPES:
-				return ((InternalEList<?>)getScopes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -767,12 +627,10 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return getGeneratedElements();
 			case ModelPackage.INTERNET_APPLICATION__OVERRIDDEN:
 				return isOverridden();
-			case ModelPackage.INTERNET_APPLICATION__ENTRY_GATE:
-				return getEntryGate();
-			case ModelPackage.INTERNET_APPLICATION__EXIT_GATE:
-				return getExitGate();
 			case ModelPackage.INTERNET_APPLICATION__CONDITIONS:
 				return getConditions();
+			case ModelPackage.INTERNET_APPLICATION__SCOPES:
+				return getScopes();
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
 				return getProperties();
 			case ModelPackage.INTERNET_APPLICATION__CHILDREN:
@@ -781,10 +639,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return getDomainStores();
 			case ModelPackage.INTERNET_APPLICATION__RUNTIME_URL:
 				return getRuntimeUrl();
-			case ModelPackage.INTERNET_APPLICATION__SESSIONS:
-				return getSessions();
-			case ModelPackage.INTERNET_APPLICATION__SCOPES:
-				return getScopes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -833,15 +687,13 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 			case ModelPackage.INTERNET_APPLICATION__OVERRIDDEN:
 				setOverridden((Boolean)newValue);
 				return;
-			case ModelPackage.INTERNET_APPLICATION__ENTRY_GATE:
-				setEntryGate((EntryGate)newValue);
-				return;
-			case ModelPackage.INTERNET_APPLICATION__EXIT_GATE:
-				setExitGate((ExitGate)newValue);
-				return;
 			case ModelPackage.INTERNET_APPLICATION__CONDITIONS:
 				getConditions().clear();
 				getConditions().addAll((Collection<? extends Condition>)newValue);
+				return;
+			case ModelPackage.INTERNET_APPLICATION__SCOPES:
+				getScopes().clear();
+				getScopes().addAll((Collection<? extends Scope>)newValue);
 				return;
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
 				getProperties().clear();
@@ -857,14 +709,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return;
 			case ModelPackage.INTERNET_APPLICATION__RUNTIME_URL:
 				setRuntimeUrl((String)newValue);
-				return;
-			case ModelPackage.INTERNET_APPLICATION__SESSIONS:
-				getSessions().clear();
-				getSessions().addAll((Collection<? extends Session>)newValue);
-				return;
-			case ModelPackage.INTERNET_APPLICATION__SCOPES:
-				getScopes().clear();
-				getScopes().addAll((Collection<? extends Scope>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -908,14 +752,11 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 			case ModelPackage.INTERNET_APPLICATION__OVERRIDDEN:
 				setOverridden(OVERRIDDEN_EDEFAULT);
 				return;
-			case ModelPackage.INTERNET_APPLICATION__ENTRY_GATE:
-				setEntryGate((EntryGate)null);
-				return;
-			case ModelPackage.INTERNET_APPLICATION__EXIT_GATE:
-				setExitGate((ExitGate)null);
-				return;
 			case ModelPackage.INTERNET_APPLICATION__CONDITIONS:
 				getConditions().clear();
+				return;
+			case ModelPackage.INTERNET_APPLICATION__SCOPES:
+				getScopes().clear();
 				return;
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
 				getProperties().clear();
@@ -928,12 +769,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return;
 			case ModelPackage.INTERNET_APPLICATION__RUNTIME_URL:
 				setRuntimeUrl(RUNTIME_URL_EDEFAULT);
-				return;
-			case ModelPackage.INTERNET_APPLICATION__SESSIONS:
-				getSessions().clear();
-				return;
-			case ModelPackage.INTERNET_APPLICATION__SCOPES:
-				getScopes().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -967,12 +802,10 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return generatedElements != null && !generatedElements.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__OVERRIDDEN:
 				return overridden != OVERRIDDEN_EDEFAULT;
-			case ModelPackage.INTERNET_APPLICATION__ENTRY_GATE:
-				return entryGate != null;
-			case ModelPackage.INTERNET_APPLICATION__EXIT_GATE:
-				return exitGate != null;
 			case ModelPackage.INTERNET_APPLICATION__CONDITIONS:
 				return conditions != null && !conditions.isEmpty();
+			case ModelPackage.INTERNET_APPLICATION__SCOPES:
+				return scopes != null && !scopes.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
 				return properties != null && !properties.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__CHILDREN:
@@ -981,10 +814,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return domainStores != null && !domainStores.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__RUNTIME_URL:
 				return RUNTIME_URL_EDEFAULT == null ? runtimeUrl != null : !RUNTIME_URL_EDEFAULT.equals(runtimeUrl);
-			case ModelPackage.INTERNET_APPLICATION__SESSIONS:
-				return sessions != null && !sessions.isEmpty();
-			case ModelPackage.INTERNET_APPLICATION__SCOPES:
-				return scopes != null && !scopes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1030,16 +859,15 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				default: return -1;
 			}
 		}
-		if (baseClass == AbstractScope.class) {
-			switch (derivedFeatureID) {
-				case ModelPackage.INTERNET_APPLICATION__ENTRY_GATE: return ModelPackage.ABSTRACT_SCOPE__ENTRY_GATE;
-				case ModelPackage.INTERNET_APPLICATION__EXIT_GATE: return ModelPackage.ABSTRACT_SCOPE__EXIT_GATE;
-				default: return -1;
-			}
-		}
 		if (baseClass == ContainsConditions.class) {
 			switch (derivedFeatureID) {
 				case ModelPackage.INTERNET_APPLICATION__CONDITIONS: return ModelPackage.CONTAINS_CONDITIONS__CONDITIONS;
+				default: return -1;
+			}
+		}
+		if (baseClass == ContainsScopes.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.INTERNET_APPLICATION__SCOPES: return ModelPackage.CONTAINS_SCOPES__SCOPES;
 				default: return -1;
 			}
 		}
@@ -1087,16 +915,15 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				default: return -1;
 			}
 		}
-		if (baseClass == AbstractScope.class) {
-			switch (baseFeatureID) {
-				case ModelPackage.ABSTRACT_SCOPE__ENTRY_GATE: return ModelPackage.INTERNET_APPLICATION__ENTRY_GATE;
-				case ModelPackage.ABSTRACT_SCOPE__EXIT_GATE: return ModelPackage.INTERNET_APPLICATION__EXIT_GATE;
-				default: return -1;
-			}
-		}
 		if (baseClass == ContainsConditions.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.CONTAINS_CONDITIONS__CONDITIONS: return ModelPackage.INTERNET_APPLICATION__CONDITIONS;
+				default: return -1;
+			}
+		}
+		if (baseClass == ContainsScopes.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.CONTAINS_SCOPES__SCOPES: return ModelPackage.INTERNET_APPLICATION__SCOPES;
 				default: return -1;
 			}
 		}

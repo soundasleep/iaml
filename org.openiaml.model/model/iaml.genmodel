@@ -60,16 +60,15 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//StaticValue/value"/>
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//VisibleThing">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//VisibleThing/sessions"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//VisibleThing/parameters"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//VisibleThing/children"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//VisibleThing/properties"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//VisibleThing/values"/>
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//InternetApplication">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/properties"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/children"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/domainStores"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//InternetApplication/runtimeUrl"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/sessions"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/scopes"/>
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//DomainStore">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainStore/children"/>
@@ -122,9 +121,12 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//DomainObjectInstance/strQuery"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//DomainObjectInstance/autosave"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="iaml.ecore#//AbstractScope">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//AbstractScope/entryGate"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//AbstractScope/exitGate"/>
+    <genClasses image="false" ecoreClass="iaml.ecore#//Scope">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/entryGate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/exitGate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/properties"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/values"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/parameters"/>
     </genClasses>
     <genClasses image="false" ecoreClass="iaml.ecore#//Condition"/>
     <genClasses ecoreClass="iaml.ecore#//CompositeCondition">
@@ -144,11 +146,14 @@
     <genClasses ecoreClass="iaml.ecore#//QueryParameter">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//QueryParameter/defaultValue"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="iaml.ecore#//ContainsScopes">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ContainsScopes/scopes"/>
+    </genClasses>
     <nestedGenPackages prefix="Visual" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//visual">
-      <genClasses ecoreClass="iaml.ecore#//visual/Page">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//visual/Page/url"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//visual/Page/scopes"/>
+      <genClasses ecoreClass="iaml.ecore#//visual/Frame">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//visual/Frame/url"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//visual/Frame/children"/>
       </genClasses>
       <genClasses ecoreClass="iaml.ecore#//visual/InputForm"/>
       <genClasses ecoreClass="iaml.ecore#//visual/InputTextField"/>
@@ -219,13 +224,6 @@
         ecorePackage="iaml.ecore#//scopes">
       <genClasses ecoreClass="iaml.ecore#//scopes/Session">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//scopes/Session/children"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//scopes/Session/properties"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//scopes/Session/values"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//scopes/Session/scopes"/>
-      </genClasses>
-      <genClasses ecoreClass="iaml.ecore#//scopes/Scope">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//scopes/Scope/scopes"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//scopes/Scope/properties"/>
       </genClasses>
     </nestedGenPackages>
     <nestedGenPackages prefix="Components" basePackage="org.openiaml.model.model"

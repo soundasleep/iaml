@@ -10,24 +10,23 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.openiaml.model.model.AbstractScope;
-import org.openiaml.model.model.ApplicationElement;
-import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
+import org.openiaml.model.model.ContainsScopes;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.NamedElement;
+import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.visual.Button;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.visual.VisualPackage;
 
 /**
@@ -87,8 +86,8 @@ public class VisualAdapterFactory extends AdapterFactoryImpl {
 	protected VisualSwitch<Adapter> modelSwitch =
 		new VisualSwitch<Adapter>() {
 			@Override
-			public Adapter casePage(Page object) {
-				return createPageAdapter();
+			public Adapter caseFrame(Frame object) {
+				return createFrameAdapter();
 			}
 			@Override
 			public Adapter caseInputForm(InputForm object) {
@@ -103,24 +102,32 @@ public class VisualAdapterFactory extends AdapterFactoryImpl {
 				return createButtonAdapter();
 			}
 			@Override
-			public Adapter caseContainsOperations(ContainsOperations object) {
-				return createContainsOperationsAdapter();
-			}
-			@Override
-			public Adapter caseGeneratedElement(GeneratedElement object) {
-				return createGeneratedElementAdapter();
-			}
-			@Override
-			public Adapter caseNamedElement(NamedElement object) {
-				return createNamedElementAdapter();
-			}
-			@Override
-			public Adapter caseContainsEventTriggers(ContainsEventTriggers object) {
-				return createContainsEventTriggersAdapter();
+			public Adapter caseGeneratesElements(GeneratesElements object) {
+				return createGeneratesElementsAdapter();
 			}
 			@Override
 			public Adapter caseContainsWires(ContainsWires object) {
 				return createContainsWiresAdapter();
+			}
+			@Override
+			public Adapter caseContainsOperations(ContainsOperations object) {
+				return createContainsOperationsAdapter();
+			}
+			@Override
+			public Adapter caseContainsScopes(ContainsScopes object) {
+				return createContainsScopesAdapter();
+			}
+			@Override
+			public Adapter caseScope(Scope object) {
+				return createScopeAdapter();
+			}
+			@Override
+			public Adapter caseContainsConditions(ContainsConditions object) {
+				return createContainsConditionsAdapter();
+			}
+			@Override
+			public Adapter caseContainsEventTriggers(ContainsEventTriggers object) {
+				return createContainsEventTriggersAdapter();
 			}
 			@Override
 			public Adapter caseShouldntContainWires(ShouldntContainWires object) {
@@ -135,28 +142,16 @@ public class VisualAdapterFactory extends AdapterFactoryImpl {
 				return createWireEdgeDestinationAdapter();
 			}
 			@Override
-			public Adapter caseGeneratesElements(GeneratesElements object) {
-				return createGeneratesElementsAdapter();
+			public Adapter caseGeneratedElement(GeneratedElement object) {
+				return createGeneratedElementAdapter();
 			}
 			@Override
-			public Adapter caseContainsConditions(ContainsConditions object) {
-				return createContainsConditionsAdapter();
-			}
-			@Override
-			public Adapter caseApplicationElement(ApplicationElement object) {
-				return createApplicationElementAdapter();
-			}
-			@Override
-			public Adapter caseApplicationElementContainer(ApplicationElementContainer object) {
-				return createApplicationElementContainerAdapter();
+			public Adapter caseNamedElement(NamedElement object) {
+				return createNamedElementAdapter();
 			}
 			@Override
 			public Adapter caseVisibleThing(VisibleThing object) {
 				return createVisibleThingAdapter();
-			}
-			@Override
-			public Adapter caseAbstractScope(AbstractScope object) {
-				return createAbstractScopeAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -179,16 +174,16 @@ public class VisualAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.visual.Page <em>Page</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.visual.Frame <em>Frame</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.openiaml.model.model.visual.Page
+	 * @see org.openiaml.model.model.visual.Frame
 	 * @generated
 	 */
-	public Adapter createPageAdapter() {
+	public Adapter createFrameAdapter() {
 		return null;
 	}
 
@@ -249,30 +244,30 @@ public class VisualAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.GeneratedElement <em>Generated Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ContainsScopes <em>Contains Scopes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.openiaml.model.model.GeneratedElement
+	 * @see org.openiaml.model.model.ContainsScopes
 	 * @generated
 	 */
-	public Adapter createGeneratedElementAdapter() {
+	public Adapter createContainsScopesAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.NamedElement <em>Named Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.Scope <em>Scope</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.openiaml.model.model.NamedElement
+	 * @see org.openiaml.model.model.Scope
 	 * @generated
 	 */
-	public Adapter createNamedElementAdapter() {
+	public Adapter createScopeAdapter() {
 		return null;
 	}
 
@@ -319,6 +314,34 @@ public class VisualAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.GeneratedElement <em>Generated Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.GeneratedElement
+	 * @generated
+	 */
+	public Adapter createGeneratedElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.NamedElement <em>Named Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.NamedElement
+	 * @generated
+	 */
+	public Adapter createNamedElementAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.GeneratesElements <em>Generates Elements</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -343,20 +366,6 @@ public class VisualAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createContainsConditionsAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ApplicationElement <em>Application Element</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.openiaml.model.model.ApplicationElement
-	 * @generated
-	 */
-	public Adapter createApplicationElementAdapter() {
 		return null;
 	}
 
@@ -389,20 +398,6 @@ public class VisualAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ApplicationElementContainer <em>Application Element Container</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.openiaml.model.model.ApplicationElementContainer
-	 * @generated
-	 */
-	public Adapter createApplicationElementContainerAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.VisibleThing <em>Visible Thing</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -413,20 +408,6 @@ public class VisualAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createVisibleThingAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.AbstractScope <em>Abstract Scope</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.openiaml.model.model.AbstractScope
-	 * @generated
-	 */
-	public Adapter createAbstractScopeAdapter() {
 		return null;
 	}
 

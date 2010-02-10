@@ -131,20 +131,22 @@ public class ComponentsFactoryImpl extends EFactoryImpl implements ComponentsFac
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public EntryGate createEntryGate() {
 		EntryGateImpl entryGate = new EntryGateImpl();
+		generateID(entryGate);
 		return entryGate;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public ExitGate createExitGate() {
 		ExitGateImpl exitGate = new ExitGateImpl();
+		generateID(exitGate);
 		return exitGate;
 	}
 

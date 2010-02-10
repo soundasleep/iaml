@@ -22,7 +22,7 @@ global DroolsHelperFunctions functions;
 rule "Create 'login' page for LoginHandlers [ApplicationElementContainer]"
 	when
 		container : ApplicationElementContainer( )
-		scope : Scope( eContainer == container ) 
+		scope : AbstractScope( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope )
 		not (Page (eContainer == container, name=="login" ))
 			
@@ -37,7 +37,7 @@ end
 rule "Create 'login' page for LoginHandlers [InternetApplication]"
 	when
 		container : InternetApplication( )
-		scope : Scope( eContainer == container ) 
+		scope : AbstractScope( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope )
 		not (Page (eContainer == container, name=="login" ))
 					

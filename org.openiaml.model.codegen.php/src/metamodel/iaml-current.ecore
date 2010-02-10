@@ -706,6 +706,8 @@
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="scopes" upperBound="-1"
           eType="#//AbstractScope" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+          eType="#//ApplicationElementProperty" containment="true"/>
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="components" nsURI="http://openiaml.org/model/components" nsPrefix="iaml.components">
@@ -739,7 +741,7 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="EntryGate" eSuperTypes="#//components/Gate">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="When placed into a {@link Scope} (including {@link Session}), all {@link Page} accesses within that Scope must first execute this {@link Gate}. If any outgoing {@link WireEdge wires} {@link Condition can execute}, then access to this {@link Scope} is denied until such time the {@link Condition} is now true."/>
+        <details key="documentation" value="When placed into a {@link Scope} (including {@link Session}), all {@link Page} accesses within that Scope must first execute this {@link Gate}. If all incoming {@link ConditionWire}s are true, then access to this {@link Scope} is denied until such time any {@link ConditionWire}s becomes false."/>
       </eAnnotations>
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.4.2"/>
@@ -747,7 +749,7 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ExitGate" eSuperTypes="#//components/Gate">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="When placed into a {@link Scope} (including {@link Session}), all {@link Page} accesses within that Scope must finally execute this {@link Gate}. If any outgoing {@link WireEdge wires} {@link Condition cannot execute}, then access out of this {@link Scope} is denied until such time the {@link Condition} is now false."/>
+        <details key="documentation" value="When placed into a {@link Scope} (including {@link Session}), all {@link Page} accesses within that Scope must finally execute this {@link Gate}. If all incoming {@link ConditionWire}s are true, then access to this {@link Scope} is denied until such time any {@link ConditionWire}s becomes false."/>
       </eAnnotations>
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.4.2"/>

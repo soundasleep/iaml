@@ -24,7 +24,7 @@ public class ComparisonFunctions extends JavascriptCodegenTestCase {
 	 * tests xpathMatch()
 	 */
 	public void testXpathMatch() throws Exception {
-		String init = "var a = new Visual_Page('a', 'a'); var b = new Visual_Page('b', 'b'); var c = new Visual_Page('c', 'c');";
+		String init = "var a = new Visual_Frame('a', 'a'); var b = new Visual_Frame('b', 'b'); var c = new Visual_Frame('c', 'c');";
 		
 		assertJavascriptResult(true, init, "xpathMatch(new Array('a'), a)");
 		assertJavascriptResult(true, init, "xpathMatch(new Array('b'), b)");

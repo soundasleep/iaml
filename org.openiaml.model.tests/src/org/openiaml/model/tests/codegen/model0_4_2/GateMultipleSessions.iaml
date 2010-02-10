@@ -12,15 +12,15 @@
     <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.3b3" name="To Enter the Inner Scope" inEdges="wires.126b0cb5e5a.130"/>
     <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.3eb" name="To Exit the Outer Scope" inEdges="wires.126b0cb5e5a.147"/>
     <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.434" name="Unrelated Outer Page"/>
-    <scopes id="scopes.126b0cb5e69.db" name="Inner Scope">
+    <scopes xsi:type="iaml.scopes:Session" id="scopes.126b0cb5e69.db" name="Inner Scope">
       <entryGate id="components.126b0cb5e69.8d" name="Entry Gate" outEdges="wires.126b0cb5e5a.130">
         <wires xsi:type="iaml.wires:NavigateWire" id="wires.126b0cb5e5a.130" from="components.126b0cb5e69.8d" to="visual.126b0cb5e5a.3b3" name="first"/>
       </entryGate>
       <exitGate id="components.126b0cb5e69.8e" name="Exit Gate" outEdges="wires.126b0cb5e5a.125">
         <wires xsi:type="iaml.wires:NavigateWire" id="wires.126b0cb5e5a.125" from="components.126b0cb5e69.8e" to="visual.126b0cb5e5a.39a" name="last"/>
       </exitGate>
-      <scopes xsi:type="iaml.visual:Page" id="visual.126b0cb5e5a.388" name="Inner Page"/>
-      <scopes xsi:type="iaml.visual:Page" id="visual.126b0cb5e5a.39a" name="Out Page" inEdges="wires.126b0cb5e5a.125"/>
+      <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.388" name="Inner Page"/>
+      <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.39a" name="Out Page" inEdges="wires.126b0cb5e5a.125"/>
     </scopes>
   </scopes>
 </iaml:InternetApplication>

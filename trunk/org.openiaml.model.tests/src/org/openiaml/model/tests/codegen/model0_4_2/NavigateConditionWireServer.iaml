@@ -20,6 +20,6 @@
       <executionEdges id="model.126aaf83900.537" name="n" from="operations.126aaf8398c.139" to="operations.126aaf8398c.138"/>
       <executionEdges id="model.126aaf83900.538" from="operations.126aaf8398c.136" to="operations.126aaf8398c.139"/>
     </conditions>
-  </children>
+  </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.126aaf8397d.270" name="Page 2" inEdges="wires.126aaf8398c.137"/>
 </iaml:InternetApplication>

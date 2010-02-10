@@ -24,7 +24,7 @@ public class ComparisonFunctions extends PhpCodegenTestCase {
 	 * tests xpathMatch()
 	 */
 	public void testXpathMatch() throws Exception {
-		String init = "$a = new Visual_Page('a', 'a'); $b = new Visual_Page('b', 'b'); $c = new Visual_Page('c', 'c');";
+		String init = "$a = new Visual_Frame('a', 'a'); $b = new Visual_Frame('b', 'b'); $c = new Visual_Frame('c', 'c');";
 		
 		assertPhpResult(true, init, "xpathMatch(array('a'), $a)");
 		assertPhpResult(true, init, "xpathMatch(array('b'), $b)");

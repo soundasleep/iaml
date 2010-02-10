@@ -44,9 +44,12 @@ public class UserPermissionsRecursive extends AbstractDefaultRoleUserLoginTestCa
 		IFile sitemap = doStandardLoginAs("user@openiaml.org", "user");
 		assertNoProblem();
 		
-		gotoSitemapWithProblem(sitemap, "target");
-		assertTitleNotSame("target");
-		assertProblem();		// who knows where we are?
+		try {
+			gotoSitemapWithProblem(sitemap, "target");
+			fail("Did not expect to get into 'target' page");
+		} catch (FailingHttpStatusCodeException e) {
+			// expected
+		}
 	}
 	
 	/**

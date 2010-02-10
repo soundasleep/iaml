@@ -139,22 +139,11 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return ds;
 	}
 
-	public Session generatedSession(GeneratesElements by, InternetApplication container) throws InferenceException {
-		Session session = createSession(container);
-		setGeneratedBy(session, by);
-		return session;
-	}
-
 	public DomainStore createDomainStore(InternetApplication container) throws InferenceException {
 		DomainStore ds = (DomainStore) createElement( container, ModelPackage.eINSTANCE.getDomainStore(), ModelPackage.eINSTANCE.getInternetApplication_DomainStores() );
 		return ds;
 	}
 	
-	public Session createSession(ContainsScopes container) throws InferenceException {
-		Session session = (Session) createElement( container, ScopesPackage.eINSTANCE.getSession(), ModelPackage.eINSTANCE.getContainsScopes_Scopes() );
-		return session;
-	}
-
 	public EventTrigger generatedEventTrigger(GeneratesElements by, ContainsEventTriggers container) throws InferenceException {
 		EventTrigger event = createEventTrigger(container);
 		setGeneratedBy(event, by);
@@ -387,7 +376,7 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return page;
 	}
 
-	public Session generatedSession(InternetApplication by, ContainsScopes container) throws InferenceException {
+	public Session generatedSession(GeneratesElements by, ContainsScopes container) throws InferenceException {
 		Session session = (Session) createElement( container, ScopesPackage.eINSTANCE.getSession(), ModelPackage.eINSTANCE.getContainsScopes_Scopes() );
 		setGeneratedBy(session, by);
 		return session;

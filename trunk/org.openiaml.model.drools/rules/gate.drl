@@ -52,27 +52,7 @@ rule "Connect 'click' on 'Continue' button to resume Gate"
 
 end
 
-/**
- * TODO when Session and Scope are refactored, remove these duplicate rules
- */
-rule "Create '(gate) flag' property when Gate is connected by 'first' or 'last' (Session)"
-	when
-		session : Session ( )
-		gate : Gate ( eContainer == session )
-		
-		wire : NavigateWire ( from == gate, name == "first" || name == "last" )
-		
-		not (ApplicationElementProperty ( eContainer == session, eval( name.equals(gate.getName() + " flag")) ))
-	
-	then
-		ApplicationElementProperty prop = handler.generatedApplicationElementProperty(gate, session);
-		handler.setName(prop, gate.getName() + " flag");
-		handler.setValue(prop, ModelPackage.eINSTANCE.getApplicationElementProperty_DefaultValue(), "false");
-		queue.add(prop, drools);
-	
-end
-
-rule "Create '(gate) flag' property when Gate is connected by 'first' or 'last' (Scope)"
+rule "Create '(gate) flag' property when Gate is connected by 'first' or 'last'"
 	when
 		session : Scope ( )
 		gate : Gate ( eContainer == session )
@@ -123,9 +103,6 @@ rule "Connect 'access' event with 'set flag' operation"
 
 end
 
-/**
- * TODO perhaps all Scopes should also be able to contain Properties
- */
 rule "Create contents of 'set flag' operation"
 	when
 		session : Scope ( )
@@ -164,25 +141,7 @@ rule "Create contents of 'set flag' operation"
 
 end
 
-/**
- * TODO remove this when Scope and Session are refactored.
- */
-rule "Create condition 'check (gate)' (Session)"
-	when
-		session : Session ( )
-		gate : Gate ( eContainer == session )
-		wire : NavigateWire ( from == gate, name == "first" || name == "last" )
-		
-		not ( Condition ( eContainer == session, eval( name.equals("check " + gate.getName())) ))
-	
-	then
-		CompositeCondition cond = handler.generatedCompositeCondition(gate, session);
-		handler.setName(cond, "check " + gate.getName());
-		queue.add(cond, drools);
-
-end
-
-rule "Create condition 'check (gate)' (Scope)"
+rule "Create condition 'check (gate)'"
 	when
 		session : Scope ( )
 		gate : Gate ( eContainer == session )

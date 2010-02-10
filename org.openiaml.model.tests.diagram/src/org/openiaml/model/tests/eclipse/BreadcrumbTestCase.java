@@ -50,18 +50,18 @@ public class BreadcrumbTestCase extends EclipseTestCaseHelper {
 		ShapeNodeEditPart page2 = assertHasFrame(editor, "page2");
 
 		// open the domain store
-		org.openiaml.model.diagram.visual.part.IamlDiagramEditor ep2
-			= (org.openiaml.model.diagram.visual.part.IamlDiagramEditor) openDiagram(page2);
+		org.openiaml.model.diagram.frame.part.IamlDiagramEditor ep2
+			= (org.openiaml.model.diagram.frame.part.IamlDiagramEditor) openDiagram(page2);
 
 		// if this is actually an ErrorEditPart, then an error has occured
 		// (but it may not be obvious in the log what it is)
-		assertEditorVisual(ep2);
+		assertEditorFrame(ep2);
 
 		{
-			org.openiaml.model.diagram.visual.edit.parts.VisibleThingEditPart iep
-				= (org.openiaml.model.diagram.visual.edit.parts.VisibleThingEditPart) ep2.getDiagramEditPart();
+			org.openiaml.model.diagram.frame.edit.parts.FrameEditPart iep
+				= (org.openiaml.model.diagram.frame.edit.parts.FrameEditPart) ep2.getDiagramEditPart();
 			assertNotNull(iep);
-			assertEquals("InternetApplication > Page: 'page2'", iep.getBreadcrumb()); // it has no name
+			assertEquals("InternetApplication > Frame: 'page2'", iep.getBreadcrumb()); // it has no name
 		}
 
 		// check the contents
@@ -79,7 +79,7 @@ public class BreadcrumbTestCase extends EclipseTestCaseHelper {
 			org.openiaml.model.diagram.visual.edit.parts.VisibleThingEditPart iep
 				= (org.openiaml.model.diagram.visual.edit.parts.VisibleThingEditPart) formd.getDiagramEditPart();
 			assertNotNull(iep);
-			assertEquals("InternetApplication > Page: 'page2' > InputForm: 'form'", iep.getBreadcrumb()); // it has no name
+			assertEquals("InternetApplication > Frame: 'page2' > InputForm: 'form'", iep.getBreadcrumb()); // it has no name
 		}
 
 		// check the contents
@@ -97,7 +97,7 @@ public class BreadcrumbTestCase extends EclipseTestCaseHelper {
 			org.openiaml.model.diagram.visual.edit.parts.VisibleThingEditPart iep
 				= (org.openiaml.model.diagram.visual.edit.parts.VisibleThingEditPart) formd2.getDiagramEditPart();
 			assertNotNull(iep);
-			assertEquals("... > Page: 'page2' > InputForm: 'form' > InputForm: 'test form for BreadcrumbTestCase'", iep.getBreadcrumb()); // it has no name
+			assertEquals("... > Frame: 'page2' > InputForm: 'form' > InputForm: 'test form for BreadcrumbTestCase'", iep.getBreadcrumb()); // it has no name
 		}
 
 		// close editors

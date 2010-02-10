@@ -1,17 +1,19 @@
 package org.openiaml.model.migrate;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 /**
- * Migrate model version 0.4 to version 0.5; <strong>not yet implemented</strong>
+ * <p>Migrate model version 0.4 to version 0.5.
  *
- * In the future most of this functionality should be refactored into an abstract superclass.
+ * <p>In the future most of this functionality should be refactored into an abstract superclass.
  *
- * Changes in model version 0.4.2:
+ * <p>Changes in model version 0.4.2:
  * 
  * <ol>
  *   <li>Removed elements: (requires migration)
@@ -27,7 +29,10 @@ import org.w3c.dom.Node;
  *   <ol>
  *   	<li>WireEdge is now abstract
  *   	<li>SingleWire is now abstract
+ *   	<li>Page is now Frame
  *   </ol></li>
+ *   <li><strong>Many other modifications, too many to list... this migrator only implements
+ *   	those changed necessary for the model migration test to pass.</strong></li>
  * </ol>
  * 
  * @see #isVersion(Document) for what defines this model
@@ -64,7 +69,7 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 
 			if (nsPackage.equals("http://openiaml.org/model0.4") && 
 					!rootId.isEmpty()) {
-				// this is us! (version 0.2) 
+				// this is us! (version 0.4) 
 				return true;
 			}
 		} catch (Exception e) {
@@ -73,21 +78,68 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 			
 		return false;
 	}
+	
+	
 
 	@Override
-	public boolean shouldDeleteAttribute(Element element, Element target,
-			String name, String value, List<ExpectedMigrationException> errors) {
+	public String replaceType(Element element, String xsiType,
+			List<ExpectedMigrationException> errors) {
+		
+		if (xsiType.equals("iaml.visual:Page")) {
+			return "iaml.visual:Frame";
+		}
 
-		// if the type is FileDomain*, return null, so the attribute
-		// is not added
-		if (name.equals("xsi:type") && (value.equals("iaml.domain:FileDomainStore") ||
-				value.equals("iaml.domain:FileDomainObject") || 
-				value.equals("iaml.domain:FileDomainAttribute"))) {
-			// delete
-			return true;
+		return super.replaceType(element, xsiType, errors);
+	}
+
+	@Override
+	public String getRenamedNode(String nodeName, Element element,
+			List<ExpectedMigrationException> errors) {
+		
+		String xsiType = element.getAttribute("xsi:type");
+
+		// <sessions> 
+		// --> <scopes xsi:type="iaml.scopes:Session">
+		if (nodeName.equals("sessions")) {
+			return "scopes";
 		}
 		
-		return super.shouldDeleteAttribute(element, target, name, value, errors);
+		// <children xsi:type="iaml.visual:Page"> 
+		// --> <scopes xsi:type="iaml.visual:Page">
+		if (nodeName.equals("children") && "iaml.visual:Page".equals(xsiType)) {
+			return "scopes";
+		}
+		
+		// <children xsi:type="iaml.visual:Page"> or <sessions>
+		//    <children xsi:type="iaml.components:LoginHandler">
+		// -> <elements xsi:type="iaml.components:LoginHandler">
+		if (element.getParentNode() != null && element.getParentNode() instanceof Element) {
+			Element parent = (Element) element.getParentNode();
+			if ((nodeName.equals("children") 
+					&& parent.getNodeName().equals("children")
+					&& "iaml.visual:Page".equals(parent.getAttribute("xsi:type")))
+				|| (nodeName.equals("children") 
+					&& parent.getNodeName().equals("sessions"))) {
+				
+				if ("iaml.components:LoginHandler".equals(xsiType))
+					return "elements";
+				if ("iaml.components:AccessControlHandler".equals(xsiType))
+					return "elements";
+				if ("iaml:DomainObject".equals(xsiType))
+					return "elements";
+				if ("iaml:DomainObjectInstance".equals(xsiType))
+					return "elements";
+				if ("iaml:DomainAttribute".equals(xsiType))
+					return "elements";
+				if ("iaml:DomainAttributeInstance".equals(xsiType))
+					return "elements";
+				if ("iaml:UserInstance".equals(xsiType))
+					return "elements";
+				
+			}
+		}
+		
+		return super.getRenamedNode(nodeName, element, errors);
 	}
 
 	/* (non-Javadoc)
@@ -97,16 +149,30 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 	public void handleElement(Element old, Element element,
 			List<ExpectedMigrationException> errors) {
 
-		throw new UnsupportedOperationException("Not yet implemented");
-
+		// <sessions> 
+		// --> <scope xsi:type="iaml.scopes:Session">
+		if (old.getNodeName().equals("sessions")) {
+			element.setAttribute("xsi:type", "iaml.scopes:Session");
+		}
+		
 	}
 
 	/**
-	 * Models of version 0.5 have a different namespace.
+	 * TODO Models of version 0.5 will have a different namespace,
+	 * 	 but currently have the same as 0.4.
 	 */
 	@Override
-	protected Element createElement(Document document, String nodeName) {
-		return document.createElementNS("http://openiaml.org/model0.5", nodeName);
+	protected String getTargetNamespace() {
+		return "http://openiaml.org/model0.4";
 	}
+
+	@Override
+	public Map<String, String> getNewNamespaces() {
+		Map<String, String> r = new HashMap<String, String>();
+		r.put("iaml.scopes", "http://openiaml.org/model/scopes");
+		return r;
+	}
+	
+	
 	
 }

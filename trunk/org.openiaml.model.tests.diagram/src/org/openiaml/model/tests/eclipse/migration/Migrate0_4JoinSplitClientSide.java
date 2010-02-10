@@ -11,6 +11,7 @@ import org.openiaml.model.migrate.IamlModelMigrator;
 import org.openiaml.model.migrate.Migrate0To1;
 import org.openiaml.model.migrate.Migrate1To2;
 import org.openiaml.model.migrate.Migrate2To4;
+import org.openiaml.model.migrate.Migrate4To5;
 
 /**
  * Tests migrating a very old model version, from 0.3 to 0.4.
@@ -34,17 +35,18 @@ public class Migrate0_4JoinSplitClientSide extends AbstractMigrateTestCase {
 		assertClassNotIn(Migrate0To1.class, used);
 		assertClassNotIn(Migrate1To2.class, used);
 		assertClassIn(Migrate2To4.class, used);
+		assertClassIn(Migrate4To5.class, used);
 	}
 	
 	public void testLoadModel() throws Exception {
 		migrateModel();
 		
-		ShapeNodeEditPart page = assertHasPage(editor, "Home");
+		ShapeNodeEditPart page = assertHasFrame(editor, "Home");
 		assertNotNull(page);
 		
 		// open page
 		editor_page = openDiagram(page);
-		assertEditorVisual(editor_page);
+		assertEditorFrame(editor_page);
 		
 		ShapeNodeEditPart operation = assertHasOperation(editor_page, "target operation");
 		assertNotNull(operation);

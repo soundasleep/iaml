@@ -72,6 +72,7 @@ public abstract class DomBasedMigrator implements IamlModelMigrator {
 	 * @param errors The list of errors to insert errors into
 	 */
 	protected void recurseOverDocument(Document input, Document output, List<ExpectedMigrationException> errors) {
+		
 		// reset deleted list
 		deletedIds = new ArrayList<String>();
 		
@@ -82,6 +83,20 @@ public abstract class DomBasedMigrator implements IamlModelMigrator {
 		// go over all deleted elements and remove them from all
 		// referenced attributes
 		removeDeletedReferences(output.getDocumentElement());
+
+		for (String nsvalue : getNewNamespaces().keySet()) {
+			String nsuri = getNewNamespaces().get(nsvalue);
+			
+			output.getDocumentElement().setAttributeNS(
+					"http://www.w3.org/2000/xmlns/",
+					"xmlns:" + nsvalue,
+					nsuri);
+			
+		}
+	}
+	
+	public Map<String, String> getNewNamespaces() {
+		return new HashMap<String,String>();
 	}
 	
 	/**
@@ -232,7 +247,7 @@ public abstract class DomBasedMigrator implements IamlModelMigrator {
 	 * @return
 	 */
 	protected Element createElement(Document document, String nodeName) {
-		return document.createElement( nodeName );
+		return document.createElementNS( getTargetNamespace(), nodeName );
 	}
 
 	/**
@@ -322,6 +337,16 @@ public abstract class DomBasedMigrator implements IamlModelMigrator {
 	public boolean shouldDeleteAttribute(Element element, Element target, String name, String value, List<ExpectedMigrationException> errors) {
 		return false;
 	}
+	
+	/**
+	 * What namespace should the migrated model be in?
+	 * Even if the namespace hasn't changed from 0.4 to 0.5, for example,
+	 * this still needs to return the 0.4 namespace.
+	 *  
+	 * @return The namespace. If it doesn't change, this should be the
+	 *   same as the NS used in identifying the version.
+	 */
+	protected abstract String getTargetNamespace();
 	
 	/**
 	 * Calculate what would be the old ID for this element.

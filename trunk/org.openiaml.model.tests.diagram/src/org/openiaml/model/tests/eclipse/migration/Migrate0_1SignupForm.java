@@ -12,6 +12,7 @@ import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocument
 import org.openiaml.model.migrate.IamlModelMigrator;
 import org.openiaml.model.migrate.Migrate0To1;
 import org.openiaml.model.migrate.Migrate2To4;
+import org.openiaml.model.migrate.Migrate4To5;
 
 /**
  * Tests migrating a very old model version, from 0.0 to 0.1.
@@ -34,6 +35,7 @@ public class Migrate0_1SignupForm extends AbstractMigrateTestCase {
 		List<IamlModelMigrator> used = migrateModelOnly();
 		assertClassIn(Migrate0To1.class, used);
 		assertClassIn(Migrate2To4.class, used);
+		assertClassIn(Migrate4To5.class, used);
 	}
 	
 	/**
@@ -49,7 +51,7 @@ public class Migrate0_1SignupForm extends AbstractMigrateTestCase {
 		assertEditorHasChildren(2, editor);
 		
 		// check the contents
-		ShapeNodeEditPart page = assertHasPage(editor, "SignupForm");
+		ShapeNodeEditPart page = assertHasFrame(editor, "SignupForm");
 		ShapeNodeEditPart store = assertHasDomainStore(editor, "domain store");
 		
 		// here we could open the page/stores and see what they contain
@@ -70,7 +72,7 @@ public class Migrate0_1SignupForm extends AbstractMigrateTestCase {
 		assertEditorHasChildren(2, editor);
 		
 		// check the contents
-		ShapeNodeEditPart page = assertHasPage(editor, "SignupForm");
+		ShapeNodeEditPart page = assertHasFrame(editor, "SignupForm");
 		ShapeNodeEditPart store = assertHasDomainStore(editor, "domain store");
 		
 		// here we could open the page/stores and see what they contain
@@ -83,7 +85,7 @@ public class Migrate0_1SignupForm extends AbstractMigrateTestCase {
 		editor_store = null;
 
 		editor_page = openDiagram(page);
-		assertEditorVisual(editor_page);
+		assertEditorFrame(editor_page);
 		editor_page.close(false);
 		editor_page = null;
 		

@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.openiaml.model.model.AbstractScope;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Condition;
@@ -31,8 +30,6 @@ import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.TemporaryVariable;
-import org.openiaml.model.model.components.EntryGate;
-import org.openiaml.model.model.components.ExitGate;
 
 /**
  * <!-- begin-user-doc -->
@@ -44,8 +41,6 @@ import org.openiaml.model.model.components.ExitGate;
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getOperations <em>Operations</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getGeneratedElements <em>Generated Elements</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#isOverridden <em>Overridden</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getEntryGate <em>Entry Gate</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getExitGate <em>Exit Gate</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getConditions <em>Conditions</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getNodes <em>Nodes</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.CompositeOperationImpl#getDataEdges <em>Data Edges</em>}</li>
@@ -97,26 +92,6 @@ public class CompositeOperationImpl extends PrimitiveOperationImpl implements Co
 	 * @ordered
 	 */
 	protected boolean overridden = OVERRIDDEN_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getEntryGate() <em>Entry Gate</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEntryGate()
-	 * @generated
-	 * @ordered
-	 */
-	protected EntryGate entryGate;
-
-	/**
-	 * The cached value of the '{@link #getExitGate() <em>Exit Gate</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getExitGate()
-	 * @generated
-	 * @ordered
-	 */
-	protected ExitGate exitGate;
 
 	/**
 	 * The cached value of the '{@link #getConditions() <em>Conditions</em>}' containment reference list.
@@ -247,92 +222,6 @@ public class CompositeOperationImpl extends PrimitiveOperationImpl implements Co
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EntryGate getEntryGate() {
-		return entryGate;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetEntryGate(EntryGate newEntryGate, NotificationChain msgs) {
-		EntryGate oldEntryGate = entryGate;
-		entryGate = newEntryGate;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.COMPOSITE_OPERATION__ENTRY_GATE, oldEntryGate, newEntryGate);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setEntryGate(EntryGate newEntryGate) {
-		if (newEntryGate != entryGate) {
-			NotificationChain msgs = null;
-			if (entryGate != null)
-				msgs = ((InternalEObject)entryGate).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.COMPOSITE_OPERATION__ENTRY_GATE, null, msgs);
-			if (newEntryGate != null)
-				msgs = ((InternalEObject)newEntryGate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.COMPOSITE_OPERATION__ENTRY_GATE, null, msgs);
-			msgs = basicSetEntryGate(newEntryGate, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.COMPOSITE_OPERATION__ENTRY_GATE, newEntryGate, newEntryGate));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ExitGate getExitGate() {
-		return exitGate;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetExitGate(ExitGate newExitGate, NotificationChain msgs) {
-		ExitGate oldExitGate = exitGate;
-		exitGate = newExitGate;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.COMPOSITE_OPERATION__EXIT_GATE, oldExitGate, newExitGate);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setExitGate(ExitGate newExitGate) {
-		if (newExitGate != exitGate) {
-			NotificationChain msgs = null;
-			if (exitGate != null)
-				msgs = ((InternalEObject)exitGate).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.COMPOSITE_OPERATION__EXIT_GATE, null, msgs);
-			if (newExitGate != null)
-				msgs = ((InternalEObject)newExitGate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.COMPOSITE_OPERATION__EXIT_GATE, null, msgs);
-			msgs = basicSetExitGate(newExitGate, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.COMPOSITE_OPERATION__EXIT_GATE, newExitGate, newExitGate));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<Condition> getConditions() {
 		if (conditions == null) {
 			conditions = new EObjectContainmentEList<Condition>(Condition.class, this, ModelPackage.COMPOSITE_OPERATION__CONDITIONS);
@@ -427,10 +316,6 @@ public class CompositeOperationImpl extends PrimitiveOperationImpl implements Co
 				return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
 			case ModelPackage.COMPOSITE_OPERATION__GENERATED_ELEMENTS:
 				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
-			case ModelPackage.COMPOSITE_OPERATION__ENTRY_GATE:
-				return basicSetEntryGate(null, msgs);
-			case ModelPackage.COMPOSITE_OPERATION__EXIT_GATE:
-				return basicSetExitGate(null, msgs);
 			case ModelPackage.COMPOSITE_OPERATION__CONDITIONS:
 				return ((InternalEList<?>)getConditions()).basicRemove(otherEnd, msgs);
 			case ModelPackage.COMPOSITE_OPERATION__NODES:
@@ -461,10 +346,6 @@ public class CompositeOperationImpl extends PrimitiveOperationImpl implements Co
 				return getGeneratedElements();
 			case ModelPackage.COMPOSITE_OPERATION__OVERRIDDEN:
 				return isOverridden();
-			case ModelPackage.COMPOSITE_OPERATION__ENTRY_GATE:
-				return getEntryGate();
-			case ModelPackage.COMPOSITE_OPERATION__EXIT_GATE:
-				return getExitGate();
 			case ModelPackage.COMPOSITE_OPERATION__CONDITIONS:
 				return getConditions();
 			case ModelPackage.COMPOSITE_OPERATION__NODES:
@@ -500,12 +381,6 @@ public class CompositeOperationImpl extends PrimitiveOperationImpl implements Co
 				return;
 			case ModelPackage.COMPOSITE_OPERATION__OVERRIDDEN:
 				setOverridden((Boolean)newValue);
-				return;
-			case ModelPackage.COMPOSITE_OPERATION__ENTRY_GATE:
-				setEntryGate((EntryGate)newValue);
-				return;
-			case ModelPackage.COMPOSITE_OPERATION__EXIT_GATE:
-				setExitGate((ExitGate)newValue);
 				return;
 			case ModelPackage.COMPOSITE_OPERATION__CONDITIONS:
 				getConditions().clear();
@@ -552,12 +427,6 @@ public class CompositeOperationImpl extends PrimitiveOperationImpl implements Co
 			case ModelPackage.COMPOSITE_OPERATION__OVERRIDDEN:
 				setOverridden(OVERRIDDEN_EDEFAULT);
 				return;
-			case ModelPackage.COMPOSITE_OPERATION__ENTRY_GATE:
-				setEntryGate((EntryGate)null);
-				return;
-			case ModelPackage.COMPOSITE_OPERATION__EXIT_GATE:
-				setExitGate((ExitGate)null);
-				return;
 			case ModelPackage.COMPOSITE_OPERATION__CONDITIONS:
 				getConditions().clear();
 				return;
@@ -594,10 +463,6 @@ public class CompositeOperationImpl extends PrimitiveOperationImpl implements Co
 				return generatedElements != null && !generatedElements.isEmpty();
 			case ModelPackage.COMPOSITE_OPERATION__OVERRIDDEN:
 				return overridden != OVERRIDDEN_EDEFAULT;
-			case ModelPackage.COMPOSITE_OPERATION__ENTRY_GATE:
-				return entryGate != null;
-			case ModelPackage.COMPOSITE_OPERATION__EXIT_GATE:
-				return exitGate != null;
 			case ModelPackage.COMPOSITE_OPERATION__CONDITIONS:
 				return conditions != null && !conditions.isEmpty();
 			case ModelPackage.COMPOSITE_OPERATION__NODES:
@@ -634,13 +499,6 @@ public class CompositeOperationImpl extends PrimitiveOperationImpl implements Co
 				default: return -1;
 			}
 		}
-		if (baseClass == AbstractScope.class) {
-			switch (derivedFeatureID) {
-				case ModelPackage.COMPOSITE_OPERATION__ENTRY_GATE: return ModelPackage.ABSTRACT_SCOPE__ENTRY_GATE;
-				case ModelPackage.COMPOSITE_OPERATION__EXIT_GATE: return ModelPackage.ABSTRACT_SCOPE__EXIT_GATE;
-				default: return -1;
-			}
-		}
 		if (baseClass == ContainsConditions.class) {
 			switch (derivedFeatureID) {
 				case ModelPackage.COMPOSITE_OPERATION__CONDITIONS: return ModelPackage.CONTAINS_CONDITIONS__CONDITIONS;
@@ -667,13 +525,6 @@ public class CompositeOperationImpl extends PrimitiveOperationImpl implements Co
 			switch (baseFeatureID) {
 				case ModelPackage.GENERATES_ELEMENTS__GENERATED_ELEMENTS: return ModelPackage.COMPOSITE_OPERATION__GENERATED_ELEMENTS;
 				case ModelPackage.GENERATES_ELEMENTS__OVERRIDDEN: return ModelPackage.COMPOSITE_OPERATION__OVERRIDDEN;
-				default: return -1;
-			}
-		}
-		if (baseClass == AbstractScope.class) {
-			switch (baseFeatureID) {
-				case ModelPackage.ABSTRACT_SCOPE__ENTRY_GATE: return ModelPackage.COMPOSITE_OPERATION__ENTRY_GATE;
-				case ModelPackage.ABSTRACT_SCOPE__EXIT_GATE: return ModelPackage.COMPOSITE_OPERATION__EXIT_GATE;
 				default: return -1;
 			}
 		}

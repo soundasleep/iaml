@@ -9,7 +9,6 @@ package org.openiaml.model.model.components;
 import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.scopes.Session;
-import org.openiaml.model.model.visual.Page;
 
 /**
  * <!-- begin-user-doc -->

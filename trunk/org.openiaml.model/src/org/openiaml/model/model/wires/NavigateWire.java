@@ -7,7 +7,6 @@
 package org.openiaml.model.model.wires;
 
 import org.openiaml.model.model.WireEdgeDestination;
-import org.openiaml.model.model.visual.Page;
 
 
 /**

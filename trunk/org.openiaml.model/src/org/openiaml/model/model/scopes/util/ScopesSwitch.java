@@ -10,18 +10,18 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.openiaml.model.model.AbstractScope;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
+import org.openiaml.model.model.ContainsScopes;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.NamedElement;
+import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
-import org.openiaml.model.model.scopes.Scope;
 import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.scopes.Session;
 
@@ -103,33 +103,17 @@ public class ScopesSwitch<T> {
 				Session session = (Session)theEObject;
 				T result = caseSession(session);
 				if (result == null) result = caseNamedElement(session);
-				if (result == null) result = caseContainsOperations(session);
-				if (result == null) result = caseAbstractScope(session);
+				if (result == null) result = caseScope(session);
 				if (result == null) result = caseContainsEventTriggers(session);
 				if (result == null) result = caseWireEdgesSource(session);
 				if (result == null) result = caseWireEdgeDestination(session);
 				if (result == null) result = caseContainsConditions(session);
 				if (result == null) result = caseGeneratedElement(session);
 				if (result == null) result = caseGeneratesElements(session);
+				if (result == null) result = caseContainsScopes(session);
 				if (result == null) result = caseShouldntContainWires(session);
+				if (result == null) result = caseContainsOperations(session);
 				if (result == null) result = caseContainsWires(session);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ScopesPackage.SCOPE: {
-				Scope scope = (Scope)theEObject;
-				T result = caseScope(scope);
-				if (result == null) result = caseAbstractScope(scope);
-				if (result == null) result = caseNamedElement(scope);
-				if (result == null) result = caseContainsConditions(scope);
-				if (result == null) result = caseContainsEventTriggers(scope);
-				if (result == null) result = caseContainsOperations(scope);
-				if (result == null) result = caseWireEdgesSource(scope);
-				if (result == null) result = caseWireEdgeDestination(scope);
-				if (result == null) result = caseGeneratesElements(scope);
-				if (result == null) result = caseGeneratedElement(scope);
-				if (result == null) result = caseShouldntContainWires(scope);
-				if (result == null) result = caseContainsWires(scope);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -168,17 +152,17 @@ public class ScopesSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Abstract Scope</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Contains Scopes</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Abstract Scope</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Contains Scopes</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAbstractScope(AbstractScope object) {
+	public T caseContainsScopes(ContainsScopes object) {
 		return null;
 	}
 

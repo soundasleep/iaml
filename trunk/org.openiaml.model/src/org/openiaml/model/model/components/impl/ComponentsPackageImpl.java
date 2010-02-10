@@ -405,13 +405,13 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 		  (entryGateEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "When placed into a {@link Scope} (including {@link Session}), all {@link Page} accesses within that Scope must first execute this {@link Gate}. If any outgoing {@link WireEdge wires} {@link Condition can execute}, then access to this {@link Scope} is denied until such time the {@link Condition} is now true."
+			 "documentation", "When placed into a {@link Scope} (including {@link Session}), all {@link Page} accesses within that Scope must first execute this {@link Gate}. If all incoming {@link ConditionWire}s are true, then access to this {@link Scope} is denied until such time any {@link ConditionWire}s becomes false."
 		   });			
 		addAnnotation
 		  (exitGateEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "When placed into a {@link Scope} (including {@link Session}), all {@link Page} accesses within that Scope must finally execute this {@link Gate}. If any outgoing {@link WireEdge wires} {@link Condition cannot execute}, then access out of this {@link Scope} is denied until such time the {@link Condition} is now false."
+			 "documentation", "When placed into a {@link Scope} (including {@link Session}), all {@link Page} accesses within that Scope must finally execute this {@link Gate}. If all incoming {@link ConditionWire}s are true, then access to this {@link Scope} is denied until such time any {@link ConditionWire}s becomes false."
 		   });	
 	}
 

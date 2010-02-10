@@ -15,9 +15,9 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.visual.Button;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.visual.VisualFactory;
 import org.openiaml.model.model.visual.VisualPackage;
 
@@ -65,7 +65,7 @@ public class VisualFactoryImpl extends EFactoryImpl implements VisualFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case VisualPackage.PAGE: return createPage();
+			case VisualPackage.FRAME: return createFrame();
 			case VisualPackage.INPUT_FORM: return createInputForm();
 			case VisualPackage.INPUT_TEXT_FIELD: return createInputTextField();
 			case VisualPackage.BUTTON: return createButton();
@@ -77,12 +77,11 @@ public class VisualFactoryImpl extends EFactoryImpl implements VisualFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
-	public Page createPage() {
-		PageImpl page = new PageImpl();
-		generateID(page);
-		return page;
+	public Frame createFrame() {
+		FrameImpl frame = new FrameImpl();
+		return frame;
 	}
 
 	/**

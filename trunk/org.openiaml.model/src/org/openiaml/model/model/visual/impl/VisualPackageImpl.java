@@ -24,9 +24,9 @@ import org.openiaml.model.model.scopes.impl.ScopesPackageImpl;
 import org.openiaml.model.model.users.UsersPackage;
 import org.openiaml.model.model.users.impl.UsersPackageImpl;
 import org.openiaml.model.model.visual.Button;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.visual.VisualFactory;
 import org.openiaml.model.model.visual.VisualPackage;
 import org.openiaml.model.model.wires.WiresPackage;
@@ -44,7 +44,7 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass pageEClass = null;
+	private EClass frameEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -156,8 +156,8 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getPage() {
-		return pageEClass;
+	public EClass getFrame() {
+		return frameEClass;
 	}
 
 	/**
@@ -165,8 +165,8 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getPage_Url() {
-		return (EAttribute)pageEClass.getEStructuralFeatures().get(0);
+	public EAttribute getFrame_Url() {
+		return (EAttribute)frameEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -174,8 +174,8 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPage_Scopes() {
-		return (EReference)pageEClass.getEStructuralFeatures().get(1);
+	public EReference getFrame_Children() {
+		return (EReference)frameEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -233,9 +233,9 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 		isCreated = true;
 
 		// Create classes and their features
-		pageEClass = createEClass(PAGE);
-		createEAttribute(pageEClass, PAGE__URL);
-		createEReference(pageEClass, PAGE__SCOPES);
+		frameEClass = createEClass(FRAME);
+		createEAttribute(frameEClass, FRAME__URL);
+		createEReference(frameEClass, FRAME__CHILDREN);
 
 		inputFormEClass = createEClass(INPUT_FORM);
 
@@ -269,23 +269,21 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 
 		// Obtain other dependent packages
 		ModelPackage theModelPackage = (ModelPackage)EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI);
-		ScopesPackage theScopesPackage = (ScopesPackage)EPackage.Registry.INSTANCE.getEPackage(ScopesPackage.eNS_URI);
 
 		// Create type parameters
 
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		pageEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
-		pageEClass.getESuperTypes().add(theModelPackage.getAbstractScope());
+		frameEClass.getESuperTypes().add(theModelPackage.getScope());
 		inputFormEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
 		inputTextFieldEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
 		buttonEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(pageEClass, Page.class, "Page", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPage_Url(), ecorePackage.getEString(), "url", null, 0, 1, Page.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPage_Scopes(), theScopesPackage.getScope(), null, "scopes", null, 0, -1, Page.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(frameEClass, Frame.class, "Frame", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getFrame_Url(), ecorePackage.getEString(), "url", null, 0, 1, Frame.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFrame_Children(), theModelPackage.getVisibleThing(), null, "children", null, 0, -1, Frame.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(inputFormEClass, InputForm.class, "InputForm", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -309,14 +307,15 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 	protected void createCommentAnnotations() {
 		String source = "http://openiaml.org/comment";		
 		addAnnotation
-		  (pageEClass, 
+		  (frameEClass, 
 		   source, 
 		   new String[] {
 			 "comment", "Scope supertype added in 0.2",
-			 "comment2", "represents the scope Window"
+			 "comment2", "represents the scope Window",
+			 "changed", "0.4.2 renamed from Page to Frame\r\n0.4.2 no longer extends VisibleThing"
 		   });			
 		addAnnotation
-		  (getPage_Scopes(), 
+		  (getFrame_Children(), 
 		   source, 
 		   new String[] {
 			 "added", "0.4.2"
@@ -338,7 +337,7 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 	protected void createGenModelAnnotations() {
 		String source = "http://www.eclipse.org/emf/2002/GenModel";			
 		addAnnotation
-		  (pageEClass, 
+		  (frameEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Represents a single browser window instance."

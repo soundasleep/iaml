@@ -16,7 +16,7 @@ import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Button;
-import org.openiaml.model.model.visual.Page;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.wires.ConditionWire;
 import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
@@ -43,21 +43,21 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 	public void testInitial() throws Exception {
 		root = loadDirectly(ExitGateAdSimple.class);
 		
-		Page page = assertHasPage(root, "Home");
+		Frame page = assertHasFrame(root, "Home");
 		assertNotGenerated(page);
 		
 		Session session = assertHasSession(root, "Advertising Session");
 		assertNotGenerated(session);
 		
-		Page external = assertHasPage(root, "External Page");
+		Frame external = assertHasFrame(root, "External Page");
 		assertNotGenerated(external);
 		
-		Page page1 = assertHasPage(session, "Page 1");
+		Frame page1 = assertHasFrame(session, "Page 1");
 		assertNotGenerated(page1);
-		Page page2 = assertHasPage(session, "Page 2");
+		Frame page2 = assertHasFrame(session, "Page 2");
 		assertNotGenerated(page2);
 		
-		Page ad = assertHasPage(session, "Advertisement");
+		Frame ad = assertHasFrame(session, "Advertisement");
 		assertNotGenerated(ad);
 		
 		ExitGate gate = assertHasExitGate(session, "View Ads Exit Gate");
@@ -78,7 +78,7 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 		root = loadAndInfer(ExitGateAdSimple.class);
 
 		Session session = assertHasSession(root, "Advertising Session");
-		Page ad = assertHasPage(session, "Advertisement");
+		Frame ad = assertHasFrame(session, "Advertisement");
 		ExitGate gate = assertHasExitGate(session, "View Ads Exit Gate");
 
 		Button button = assertHasButton(ad, "Continue");
@@ -102,7 +102,7 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 		root = loadAndInfer(ExitGateAdSimple.class);
 		
 		Session session = assertHasSession(root, "Advertising Session");
-		Page ad = assertHasPage(session, "Advertisement");
+		Frame ad = assertHasFrame(session, "Advertisement");
 
 		// generated property
 		ApplicationElementProperty property = assertHasApplicationElementProperty(session, "View Ads Exit Gate flag");
@@ -130,7 +130,7 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 		root = loadAndInfer(ExitGateAdSimple.class);
 		
 		Session session = assertHasSession(root, "Advertising Session");
-		Page ad = assertHasPage(session, "Advertisement");
+		Frame ad = assertHasFrame(session, "Advertisement");
 
 		// generated property
 		ApplicationElementProperty property = assertHasApplicationElementProperty(session, "View Ads Exit Gate flag");

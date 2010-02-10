@@ -14,7 +14,7 @@ import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.DynamicApplicationElementSet;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.WireEdge;
-import org.openiaml.model.model.visual.Page;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.wires.ConditionWire;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
@@ -63,7 +63,7 @@ public abstract class InferenceTestCaseWithConditionWires extends InferenceTestC
 	 * @throws JaxenException 
 	 */
 	protected void assertNotParameterWire(InternetApplication root,
-			CompositeCondition cond, RunInstanceWire rw, Page page) throws JaxenException {
+			CompositeCondition cond, RunInstanceWire rw, Frame page) throws JaxenException {
 
 		Set<WireEdge> conditions = getWiresFromTo(root, cond, rw);
 		for (WireEdge wire : conditions) {
@@ -88,7 +88,7 @@ public abstract class InferenceTestCaseWithConditionWires extends InferenceTestC
 	 */
 	protected void getConditionWireFromToWithParameters(InternetApplication root,
 			CompositeCondition cond, RunInstanceWire rw,
-			DynamicApplicationElementSet dae, Page page1, Page page2) throws JaxenException {
+			DynamicApplicationElementSet dae, Frame page1, Frame page2) throws JaxenException {
 		
 		Set<WireEdge> conditions = getWiresFromTo(root, cond, rw);
 		// should only be two conditions: page1 matches xpath, page2 matches xpath
@@ -127,7 +127,7 @@ public abstract class InferenceTestCaseWithConditionWires extends InferenceTestC
 	 */
 	protected void getConditionWireFromToWithParameters(InternetApplication root,
 			CompositeCondition cond, SyncWire rw,
-			DynamicApplicationElementSet dae, Page page1, Page page2) throws JaxenException {
+			DynamicApplicationElementSet dae, Frame page1, Frame page2) throws JaxenException {
 		
 		Set<WireEdge> conditions = getWiresFromTo(root, cond, rw);
 		
@@ -177,7 +177,7 @@ public abstract class InferenceTestCaseWithConditionWires extends InferenceTestC
 	 */
 	protected void getConditionWireFromToWithParameters(InternetApplication root,
 			CompositeCondition cond, SyncWire rw,
-			DynamicApplicationElementSet dae, Page page1) throws JaxenException {
+			DynamicApplicationElementSet dae, Frame page1) throws JaxenException {
 		
 		Set<WireEdge> conditions = getWiresFromTo(root, cond, rw);
 		
@@ -219,7 +219,7 @@ public abstract class InferenceTestCaseWithConditionWires extends InferenceTestC
 	 * 
 	 * @throws JaxenException 
 	 */
-	protected boolean hasWireFromTo(InternetApplication root2, Page page1,
+	protected boolean hasWireFromTo(InternetApplication root2, Frame page1,
 			ConditionWire cw) throws JaxenException {
 		try {
 			getWireFromTo(root2, page1, cw);

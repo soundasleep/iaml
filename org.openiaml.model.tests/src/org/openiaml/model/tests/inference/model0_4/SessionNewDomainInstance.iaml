@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1230bdbae76.252">
-  <children xsi:type="iaml.visual:Page" id="visual.1230bdbafce.1b6" name="Home"/>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="model.1230bdbae76.252">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.1230bdbafce.1b6" name="Home"/>
   <domainStores id="model.1230bdbae76.25a" name="my store">
     <children id="model.1230bdbae76.263" name="User" outEdges="wires.1230bdbb01c.1bd">
       <wires xsi:type="iaml.wires:NewInstanceWire" id="wires.1230bdbb01c.1bd" from="model.1230bdbae76.263" to="model.1230bdbae76.2a1" name="new"/>
       <attributes id="model.1230bdbae76.27d" name="email"/>
     </children>
   </domainStores>
-  <sessions id="scopes.1230bdbb0e7.8e" name="my session">
-    <children xsi:type="iaml.visual:Page" id="visual.1230bdbafce.1bb" name="container">
+  <scopes xsi:type="iaml.scopes:Session" id="scopes.1230bdbb0e7.8e" name="my session">
+    <scopes xsi:type="iaml.visual:Frame" id="visual.1230bdbafce.1bb" name="container">
       <children xsi:type="iaml.visual:InputForm" id="visual.1230bdbafce.203" name="edit current user" inEdges="wires.1230bdbb01c.1d4"/>
       <children xsi:type="iaml.visual:Button" id="visual.1230bdbafce.226" name="make a new user" outEdges="wires.1230bdbb01c.1f7">
         <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1230bdbb01c.1f7" from="visual.1230bdbafce.226" to="model.1230bdbae76.2d4" name="onClick"/>
       </children>
-    </children>
-    <children xsi:type="iaml:DomainObjectInstance" id="model.1230bdbae76.2a1" name="session user" outEdges="wires.1230bdbb01c.1d4" inEdges="wires.1230bdbb01c.1bd">
+    </scopes>
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.1230bdbae76.2a1" name="session user" outEdges="wires.1230bdbb01c.1d4" inEdges="wires.1230bdbb01c.1bd">
       <operations xsi:type="iaml:PrimitiveOperation" inEdges="wires.1230bdbb01c.1f7" id="model.1230bdbae76.2d4" name="new"/>
       <wires xsi:type="iaml.wires:SyncWire" id="wires.1230bdbb01c.1d4" from="model.1230bdbae76.2a1" to="visual.1230bdbafce.203" name="sync"/>
     </children>
-  </sessions>
+  </scopes>
 </iaml:InternetApplication>

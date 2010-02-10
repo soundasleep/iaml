@@ -13,8 +13,8 @@ import org.openiaml.model.inference.EcoreInferenceHandler;
 import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.visual.VisualPackage;
 import org.openiaml.model.tests.ModelInferenceTestCase.IModelReloader;
 
@@ -54,7 +54,7 @@ public class DroolsPerformanceTest extends ModelInferenceTestCase implements IMo
 					
 					// add the pages etc
 					for (int j = 0; j < i_copy; j++) {
-						Page page = handler.createPage(root);
+						Frame page = handler.createFrame(root);
 						page.setName("test page " + j);
 						
 						/*

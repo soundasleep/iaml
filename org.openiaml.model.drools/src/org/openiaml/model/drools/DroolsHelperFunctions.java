@@ -19,7 +19,7 @@ import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.domain.DomainPackage;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.users.Role;
-import org.openiaml.model.model.visual.Page;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.wires.ExtendsWire;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.SetWire;
@@ -67,7 +67,7 @@ public class DroolsHelperFunctions {
 	 * cases, i.e. //iaml:children[@name], not //Page
 	 * @throws JaxenException 
 	 */
-	public boolean potentialXPathMatch(EObject container, DynamicApplicationElementSet ds, Page target) throws JaxenException {
+	public boolean potentialXPathMatch(EObject container, DynamicApplicationElementSet ds, Frame target) throws JaxenException {
 		String query = ds.getQuery();
 		if (!query.startsWith("xpath:"))
 			throw new RuntimeException("potentialXPathMatch was called without an xpath: query: '" + query + "'");
@@ -80,7 +80,7 @@ public class DroolsHelperFunctions {
 		query = query.replaceAll("\\[([^\\]]+)\\]", "");
 		
 		// evaluate xpath using EMFXPath
-		// TODO move this into Java code (to reduce redunancy of the following code)
+		// TODO move this into Java code (to reduce redundancy of the following code)
 		EMFXPath xpath = new EMFXPath(query);
 		xpath.addNamespace("iaml", ModelPackage.eNS_URI);
 		xpath.addNamespace("iaml.domain", DomainPackage.eNS_URI);

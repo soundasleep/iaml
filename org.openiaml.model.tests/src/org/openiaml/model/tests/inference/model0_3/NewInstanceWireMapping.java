@@ -7,7 +7,7 @@ import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.InternetApplication;
-import org.openiaml.model.model.visual.Page;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.tests.inference.EclipseInheritanceInterface;
 
 /**
@@ -35,11 +35,12 @@ public class NewInstanceWireMapping extends EclipseInheritanceInterface {
 		assertEquals(1, ds.getChildren().size());
 		assertEquals("User", ds.getChildren().get(0).getName());
 
-		Page page = assertHasPage(root, "container");
+		Frame page = assertHasFrame(root, "container");
 		assertEquals("container", page.getName());
 
-		assertEquals(1, page.getChildren().size());
-		DomainObjectInstance obj = (DomainObjectInstance) page.getChildren().get(0);
+		assertEquals(0, page.getChildren().size());
+		assertEquals(1, page.getElements().size());
+		DomainObjectInstance obj = (DomainObjectInstance) page.getElements().get(0);
 		assertEquals("User instance", obj.getName());
 
 		// the instance should be empty
@@ -58,11 +59,12 @@ public class NewInstanceWireMapping extends EclipseInheritanceInterface {
 		assertEquals(1, ds.getChildren().size());
 		assertEquals("User", ds.getChildren().get(0).getName());
 
-		Page page = assertHasPage(root, "container");
+		Frame page = assertHasFrame(root, "container");
 		assertEquals("container", page.getName());
 
-		assertEquals(1, page.getChildren().size());
-		DomainObjectInstance obj = (DomainObjectInstance) page.getChildren().get(0);
+		assertEquals(0, page.getChildren().size());
+		assertEquals(1, page.getElements().size());
+		DomainObjectInstance obj = (DomainObjectInstance) page.getElements().get(0);
 		assertEquals("User instance", obj.getName());
 
 		// the instance should NOT be empty

@@ -16,9 +16,9 @@ import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.components.LoginHandlerTypes;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Button;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
@@ -46,7 +46,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 	public void testInitial() throws Exception {
 		root = loadDirectly(LoginHandlerKey.class);
 
-		Page page = assertHasPage(root, "Home");
+		Frame page = assertHasFrame(root, "Home");
 		assertNotGenerated(page);
 		Session session = assertHasSession(root, "my session");
 		assertNotGenerated(session);
@@ -54,7 +54,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		StaticValue value = assertHasStaticValue(session, "login key");
 		assertNotGenerated(value);
 
-		Page viewkey = assertHasPage(session, "viewkey");
+		Frame viewkey = assertHasFrame(session, "viewkey");
 		assertNotGenerated(viewkey);
 
 		LoginHandler handler = assertHasLoginHandler(session, "Login Handler");
@@ -104,7 +104,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 
 		Session session = assertHasSession(root, "my session");
 
-		Page viewkey = assertHasPage(session, "viewkey");
+		Frame viewkey = assertHasFrame(session, "viewkey");
 		assertNotGenerated(viewkey);
 
 		Operation check = assertHasOperation(session, "check key");
@@ -128,7 +128,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 
 		Session session = assertHasSession(root, "my session");
 
-		Page page = assertHasPage(root, "Home");
+		Frame page = assertHasFrame(root, "Home");
 		assertNotGenerated(page);
 
 		Operation op = assertHasOperation(session, "do logout");
@@ -153,10 +153,10 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		Session session = assertHasSession(root, "my session");
 
 		// a generated 'logout' page
-		Page page = assertHasPage(session, "logout");
+		Frame page = assertHasFrame(session, "logout");
 		assertGenerated(page);
 
-		Page target = assertHasPage(root, "Home");
+		Frame target = assertHasFrame(root, "Home");
 		assertNotGenerated(target);
 
 		EventTrigger access = assertHasEventTrigger(page, "access");
@@ -184,7 +184,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		assertHasNoApplicationElementProperty(session, "current login key");
 		
 		// there should only be one
-		assertHasOne(session, "iaml.scopes:properties", ApplicationElementProperty.class);
+		assertHasOne(session, "iaml:properties", ApplicationElementProperty.class);
 		
 		// there should be a SetWire from the LoginHandler to this
 		LoginHandler loginHandler = assertHasLoginHandler(session, "Login Handler");
@@ -203,7 +203,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 
 		Session session = assertHasSession(root, "my session");
 
-		Page login = assertHasPage(root, "login");
+		Frame login = assertHasFrame(root, "login");
 		assertGenerated(login);
 
 		// it should contain a form
@@ -254,7 +254,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		assertGenerated(check);
 
 		// destination page
-		Page login = assertHasPage(root, "login");
+		Frame login = assertHasFrame(root, "login");
 		{
 			Set<WireEdge> wires = assertHasWiresFromTo(1, root, check, login);
 			NavigateWire wire = (NavigateWire) wires.iterator().next();

@@ -10,9 +10,9 @@ import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.users.UserInstance;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.tests.inference.ValidInferenceTestCase;
@@ -77,7 +77,7 @@ public class UserRolesLoginHandler extends ValidInferenceTestCase {
 	public void testPrimaryKeyNotInputField() throws Exception {
 		root = loadAndInfer(UserRolesLoginHandler.class);
 		
-		Page login = assertHasPage(root, "login");
+		Frame login = assertHasFrame(root, "login");
 		InputForm form = assertHasInputForm(login, "login form");
 		
 		InputTextField email = assertHasInputTextField(form, "email");

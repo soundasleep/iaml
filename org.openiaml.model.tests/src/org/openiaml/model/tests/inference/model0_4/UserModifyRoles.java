@@ -20,9 +20,9 @@ import org.openiaml.model.model.operations.SplitNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Button;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.tests.inference.ValidInferenceTestCase;
@@ -132,7 +132,7 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 		Session session = assertHasSession(root, "target session");
 
 		// get the keys in the input form
-		Page login = assertHasPage(root, "login");
+		Frame login = assertHasFrame(root, "login");
 		InputForm form = assertHasInputForm(login, "login form");
 		InputTextField temail = assertHasInputTextField(form, "email");
 		InputTextField tpass = assertHasInputTextField(form, "password");
@@ -173,7 +173,7 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 		ApplicationElementProperty password = assertHasApplicationElementProperty(session, "current password");
 		
 		// get the keys in the input form
-		Page login = assertHasPage(root, "login");
+		Frame login = assertHasFrame(root, "login");
 		InputForm form = assertHasInputForm(login, "login form");
 		InputTextField temail = assertHasInputTextField(form, "email");
 		InputTextField tpass = assertHasInputTextField(form, "password");

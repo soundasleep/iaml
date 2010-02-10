@@ -5,7 +5,7 @@ package org.openiaml.model.tests.inference.model0_4;
 
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.InternetApplication;
-import org.openiaml.model.model.visual.Page;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.tests.inference.EclipseInheritanceInterface;
 
 /**
@@ -24,11 +24,12 @@ public class DomainInstanceSaveOperation extends EclipseInheritanceInterface {
 	@Override
 	public void checkNotInferredKnowledge(InternetApplication root) throws Exception {
 
-		Page page = assertHasPage(root, "container");
+		Frame page = assertHasFrame(root, "container");
 		DomainObjectInstance di = assertHasDomainObjectInstance(page, "domain object instance");
 
 		// page is otherwise empty
-		assertEquals(1, page.getChildren().size());
+		assertEquals(0, page.getChildren().size());
+		assertEquals(1, page.getElements().size());
 
 		// instance is empty
 		assertEquals(0, di.getAttributes().size());
@@ -39,11 +40,12 @@ public class DomainInstanceSaveOperation extends EclipseInheritanceInterface {
 	@Override
 	public void checkInferredKnowledge(InternetApplication root) throws Exception {
 
-		Page page = assertHasPage(root, "container");
+		Frame page = assertHasFrame(root, "container");
 		DomainObjectInstance di = assertHasDomainObjectInstance(page, "domain object instance");
 
 		// page is otherwise empty
-		assertEquals(1, page.getChildren().size());
+		assertEquals(0, page.getChildren().size());
+		assertEquals(1, page.getElements().size());
 
 		// instance now contains a 'save' method and 'exists?' method
 		assertEquals(2, di.getOperations().size());

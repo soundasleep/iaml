@@ -22,9 +22,9 @@ rule "Connect SyncWires for a dynamic source, referenced by XPath"
 	when
 		container : InternetApplication ( )
 		ds : DynamicApplicationElementSet( eval(functions.isXPath(query)), overridden == false, eContainer == container )
-		source : Page ( ) 
+		source : Frame ( ) 
 		sw : SyncWire ( eval(functions.connects(sw, ds, source)) )
-		target : Page ( eval(source != target), eval(functions.potentialXPathMatch(container, ds, target)) )
+		target : Frame ( eval(source != target), eval(functions.potentialXPathMatch(container, ds, target)) )
 		not ( tw : SyncWire( eval(functions.connects(tw, source, target)) ) )
 		
 	then 
@@ -128,9 +128,9 @@ rule "Create the XPath ConditionWire for generated SyncWires"
 	when
 		container : InternetApplication( )
 		ds : DynamicApplicationElementSet( eval(functions.isXPath(query)), overridden == false, eContainer == container )
-		source : Page ( ) 
+		source : Frame ( ) 
 		sw : SyncWire ( eval(functions.connects(sw, ds, source)) )
-		target : Page ( eval(source != target), eval(functions.potentialXPathMatch(container, ds, target)) )
+		target : Frame ( eval(source != target), eval(functions.potentialXPathMatch(container, ds, target)) )
 		tw : SyncWire ( eval(functions.connects(tw, source, target)) )
 		condition : CompositeCondition ( eContainer == ds )
 		not (
@@ -161,9 +161,9 @@ rule "Connect ParameterWires to empty ConditionWire for XPath"
 	when
 		container : InternetApplication( )
 		ds : DynamicApplicationElementSet( eval(functions.isXPath(query)), overridden == false, eContainer == container )
-		source : Page ( ) 
+		source : Frame ( ) 
 		sw : SyncWire ( eval(functions.connects(sw, ds, source)) )
-		target : Page ( eval(source != target), eval(functions.potentialXPathMatch(container, ds, target)) )
+		target : Frame ( eval(source != target), eval(functions.potentialXPathMatch(container, ds, target)) )
 		tw : SyncWire ( eval(functions.connects(tw, source, target)) )
 		condition : CompositeCondition ( eContainer == ds )
 		cwt : ConditionWire ( from == condition, to == tw )

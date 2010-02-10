@@ -8,7 +8,6 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.jaxen.JaxenException;
-import org.openiaml.model.model.AbstractScope;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.ApplicationElementProperty;
@@ -18,6 +17,7 @@ import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
+import org.openiaml.model.model.ContainsScopes;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DataFlowEdgeDestination;
 import org.openiaml.model.model.DataFlowEdgesSource;
@@ -36,6 +36,7 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.PrimitiveOperation;
+import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.WireEdge;
@@ -58,9 +59,9 @@ import org.openiaml.model.model.users.Role;
 import org.openiaml.model.model.users.UserInstance;
 import org.openiaml.model.model.users.UserStore;
 import org.openiaml.model.model.visual.Button;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.ConditionWire;
 import org.openiaml.model.model.wires.ExtendsWire;
 import org.openiaml.model.model.wires.NavigateWire;
@@ -87,10 +88,10 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public ApplicationElementProperty assertHasApplicationElementProperty(
-			ApplicationElement element, String string) throws JaxenException {
+			Scope element, String string) throws JaxenException {
 		return (ApplicationElementProperty) queryOne(element, "iaml:properties[iaml:name='" + string + "']");
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
 	 * ApplicationElementProperty.
@@ -98,10 +99,21 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public ApplicationElementProperty assertHasApplicationElementProperty(
-			Session element, String string) throws JaxenException {
-		return (ApplicationElementProperty) queryOne(element, "iaml.scopes:properties[iaml:name='" + string + "']");
+			VisibleThing element, String string) throws JaxenException {
+		return (ApplicationElementProperty) queryOne(element, "iaml:properties[iaml:name='" + string + "']");
 	}
 
+	/**
+	 * Assert that the given element contains the given
+	 * ApplicationElementProperty.
+	 *
+	 * @return The element found
+	 */
+	public ApplicationElementProperty assertHasApplicationElementProperty(
+			ApplicationElement element, String string) throws JaxenException {
+		return (ApplicationElementProperty) queryOne(element, "iaml:properties[iaml:name='" + string + "']");
+	}
+	
 	/**
 	 * Assert that the given element does not contains the given
 	 * ApplicationElementProperty.
@@ -120,7 +132,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public void assertHasNoApplicationElementProperty(
-			Session element, String string) throws JaxenException {
+			Scope element, String string) throws JaxenException {
 		assertHasNone(element, "iaml.scopes:properties[iaml:name='" + string + "']");
 	}
 
@@ -234,6 +246,17 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
+	public DomainAttributeInstance assertHasDomainAttributeInstance(Scope obj,
+			String string) throws JaxenException {
+		return (DomainAttributeInstance) queryOne(obj, "iaml:elements[iaml:name='" + string + "']");
+	}
+
+	/**
+	 * Assert that the given element contains the given
+	 * DomainAttributeInstance.
+	 *
+	 * @return The element found
+	 */
 	public DomainAttributeInstance assertHasDomainAttributeInstance(InternetApplication obj,
 			String string) throws JaxenException {
 		return (DomainAttributeInstance) queryOne(obj, "iaml:children[iaml:name='" + string + "']");
@@ -299,6 +322,16 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
+	public DomainObject assertHasDomainObject(Scope store, String string) throws JaxenException {
+		return (DomainObject) queryOne(store, "iaml:elements[iaml:name='" + string + "']");
+	}
+	
+	/**
+	 * Assert that the given element contains the given
+	 * DomainObject.
+	 *
+	 * @return The element found
+	 */
 	public DomainObject assertHasDomainObject(InternetApplication root, String string) throws JaxenException {
 		return (DomainObject) queryOne(root, "iaml:children[iaml:name='" + string + "']");
 	}
@@ -329,8 +362,8 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public UserInstance assertHasUserInstance(Session root, String string) throws JaxenException {
-		return (UserInstance) queryOne(root, "iaml.scopes:children[iaml:name='" + string + "']");
+	public UserInstance assertHasUserInstance(Scope root, String string) throws JaxenException {
+		return (UserInstance) queryOne(root, "iaml:elements[iaml:name='" + string + "']");
 	}
 
 	/**
@@ -341,18 +374,18 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public DomainObjectInstance assertHasDomainObjectInstance(ApplicationElementContainer root, String string) throws JaxenException {
 		return (DomainObjectInstance) queryOne(root, "iaml:children[iaml:name='" + string + "']");
-	}
-	
+	}	
+
 	/**
 	 * Assert that the given element contains the given
 	 * DomainObjectInstance.
 	 *
 	 * @return The element found
 	 */
-	public DomainObjectInstance assertHasDomainObjectInstance(Session root, String string) throws JaxenException {
-		return (DomainObjectInstance) queryOne(root, "iaml.scopes:children[iaml:name='" + string + "']");
+	public DomainObjectInstance assertHasDomainObjectInstance(Scope root, String string) throws JaxenException {
+		return (DomainObjectInstance) queryOne(root, "iaml:elements[iaml:name='" + string + "']");
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
 	 * DomainObjectInstance.
@@ -400,8 +433,28 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
+	public InputTextField assertHasInputTextField(Frame element, String string) throws JaxenException {
+		return (InputTextField) queryOne(element, "iaml.visual:children[iaml:name='" + string + "']");
+	}
+
+	/**
+	 * Assert that the given element contains the given
+	 * InputTextField.
+	 *
+	 * @return The element found
+	 */
 	public InputTextField assertHasInputTextField(VisibleThing element, String string) throws JaxenException {
 		return (InputTextField) queryOne(element, "iaml:children[iaml:name='" + string + "']");
+	}
+
+	/**
+	 * Assert that the given element does not contains the given
+	 * InputTextField.
+	 *
+	 * @return The element found
+	 */
+	public void assertHasNoInputTextField(Frame element, String string) throws JaxenException {
+		assertHasNone(element, "iaml.visual:children[iaml:name='" + string + "']");
 	}
 
 	/**
@@ -426,12 +479,32 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 
 	/**
 	 * Assert that the given element contains the given
+	 * InputForm.
+	 *
+	 * @return The element found
+	 */
+	public InputForm assertHasInputForm(Frame element, String string) throws JaxenException {
+		return (InputForm) queryOne(element, "iaml.visual:children[iaml:name='" + string + "']");
+	}
+
+	/**
+	 * Assert that the given element contains the given
 	 * Button.
 	 *
 	 * @return The element found
 	 */
 	public Button assertHasButton(VisibleThing element, String string) throws JaxenException {
 		return (Button) queryOne(element, "iaml:children[iaml:name='" + string + "']");
+	}
+	
+	/**
+	 * Assert that the given element contains the given
+	 * Button.
+	 *
+	 * @return The element found
+	 */
+	public Button assertHasButton(Frame element, String string) throws JaxenException {
+		return (Button) queryOne(element, "iaml.visual:children[iaml:name='" + string + "']");
 	}
 
 	/**
@@ -460,8 +533,8 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public AccessControlHandler assertHasAccessControlHandler(Session root, String string) throws JaxenException {
-		return (AccessControlHandler) queryOne(root, "iaml.scopes:children[iaml:name='" + string + "']");	
+	public AccessControlHandler assertHasAccessControlHandler(Scope root, String string) throws JaxenException {
+		return (AccessControlHandler) queryOne(root, "iaml:elements[iaml:name='" + string + "']");	
 	}
 	
 	/**
@@ -470,7 +543,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public EntryGate assertHasEntryGate(AbstractScope root, String string) throws JaxenException {
+	public EntryGate assertHasEntryGate(Scope root, String string) throws JaxenException {
 		return (EntryGate) queryOne(root, "iaml:entryGate[iaml:name='" + string + "']");	
 	}
 	
@@ -480,36 +553,24 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public ExitGate assertHasExitGate(AbstractScope root, String string) throws JaxenException {
+	public ExitGate assertHasExitGate(Scope root, String string) throws JaxenException {
 		return (ExitGate) queryOne(root, "iaml:exitGate[iaml:name='" + string + "']");	
-	}
-	
-	/**
-	 * Assert that the given element contains the given
-	 * Page.
-	 *
-	 * @return The element found
-	 */
-	public Page assertHasPage(InternetApplication root, String string) throws JaxenException {
-		return (Page) queryOne(root, "iaml:children[iaml:name='" + string + "']");	
 	}
 
 	/**
 	 * Assert that the given element contains the given
-	 * Page.
-	 *
-	 * @return The element found
+	 * Frame.
 	 */
-	public Page assertHasPage(Session session, String string) throws JaxenException {
-		return (Page) queryOne(session, "iaml.scopes:children[iaml:name='" + string + "']");	
+	public Frame assertHasFrame(ContainsScopes scope, String string) throws JaxenException {
+		return (Frame) queryOne(scope, "iaml:scopes[iaml:name='" + string + "']");
 	}
 
 	/**
 	 * Assert that the given element does not contain the given
-	 * Page.
+	 * Frame.
 	 */
-	public void assertHasNoPage(Session session, String string) throws JaxenException {
-		assertHasNone(session, "iaml.scopes:children[iaml:name='" + string + "']");
+	public void assertHasNoFrame(ContainsScopes scope, String string) throws JaxenException {
+		assertHasNone(scope, "iaml:scopes[iaml:name='" + string + "']");
 	}
 
 	/**
@@ -526,8 +587,8 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public LoginHandler assertHasLoginHandler(Session session, String string) throws JaxenException {
-		return (LoginHandler) queryOne(session, "iaml.scopes:children[iaml:name='" + string + "']");	
+	public LoginHandler assertHasLoginHandler(Scope session, String string) throws JaxenException {
+		return (LoginHandler) queryOne(session, "iaml:elements[iaml:name='" + string + "']");	
 	}
 
 	/**
@@ -536,8 +597,8 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public void assertHasNoLoginHandler(Session session, String string) throws JaxenException {
-		assertHasNone(session, "iaml.scopes:children[iaml:name='" + string + "']");	
+	public void assertHasNoLoginHandler(Scope session, String string) throws JaxenException {
+		assertHasNone(session, "iaml.scopes:elements[iaml:name='" + string + "']");	
 	}
 
 	/**
@@ -547,7 +608,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public Session assertHasSession(InternetApplication root, String string) throws JaxenException {
-		return (Session) queryOne(root, "iaml:sessions[iaml:name='" + string + "']");	
+		return (Session) queryOne(root, "iaml:scopes[iaml:name='" + string + "']");	
 	}
 	
 	/**
@@ -556,8 +617,8 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public StaticValue assertHasStaticValue(Session session, String string) throws JaxenException {
-		return (StaticValue) queryOne(session, "iaml.scopes:values[iaml:name='" + string + "']");	
+	public StaticValue assertHasStaticValue(Scope session, String string) throws JaxenException {
+		return (StaticValue) queryOne(session, "iaml:values[iaml:name='" + string + "']");	
 	}
 	
 	/**

@@ -21,11 +21,14 @@ rule "Sync wires between objects should create sync wires between all elements i
 	when
 		# source : SyncWire(overridden == false, eval(connects(source, p1, p2)) )
 		source : SyncWire(overridden == false)
-		p1 : ApplicationElement( ) from source.from
-		p2 : ApplicationElement(this != p1) from source.to
+		# we put in these to prevent multiple wires being generated for two connects
+		p1 : CanBeSynced( ) from source.from
+		p2 : CanBeSynced( this != p1 ) from source.to
 		
-		e1 : ApplicationElement( eContainer == p1 )
-		e2 : ApplicationElement( eContainer == p2, eval(functions.nameMatches(e1, e2)) )
+		e1 : CanBeSynced( eContainer == p1 )
+		e2 : CanBeSynced( eContainer == p2 )
+
+		eval(functions.nameMatches(e1, e2))
 	
 		not (sw : SyncWire( name == "sync", eContainer == source, eval(functions.connects( sw, e1, e2)) ))
 		
@@ -252,12 +255,12 @@ rule "Cascaded SyncWires: Conditions from parent to child"
 
 		# the containing elements	
 		sw : SyncWire ( overridden == false )
-		source : ApplicationElement( ) from sw.from  
-		target : ApplicationElement( ) from sw.to
+		source : CanBeSynced( ) from sw.from  
+		target : CanBeSynced( this != source ) from sw.to
 		
 		# the elements contained
-		e1 : ApplicationElement( eContainer == source )
-		e2 : ApplicationElement( eContainer == target, eval(functions.nameMatches(e1, e2)) )
+		e1 : CanBeSynced( eContainer == source )
+		e2 : CanBeSynced( eContainer == target, eval(functions.nameMatches(e1, e2)) )
 		esw : SyncWire( name == "sync", eval(functions.connects(esw, e1, e2)), overridden == false )
 		
 		# there is a condition on the containing sync wire
@@ -279,12 +282,12 @@ rule "Cascaded SyncWires: Parameters from parent to child"
 
 		# the containing elements
 		sw : SyncWire ( overridden == false )
-		source : ApplicationElement( ) from sw.from  
-		target : ApplicationElement( ) from sw.to
+		source : CanBeSynced( ) from sw.from  
+		target : CanBeSynced( this != source ) from sw.to
 		
 		# the elements contained
-		e1 : ApplicationElement( eContainer == source )
-		e2 : ApplicationElement( eContainer == target, eval(functions.nameMatches(e1, e2)) )
+		e1 : CanBeSynced( eContainer == source )
+		e2 : CanBeSynced( eContainer == target, eval(functions.nameMatches(e1, e2)) )
 		esw : SyncWire( name == "sync", eval(functions.connects(esw, e1, e2)), overridden == false )
 		
 		# there is a condition on the containing sync wire
@@ -310,18 +313,18 @@ rule "Cascaded SyncWires: Parameters from parent to child"
 end
 
 # SyncWires do not connect the fields together; they can _also_
-# connect the Pages together.
-rule "Connect Session.init to incoming SyncWires (contained in Pages)"
+# connect the Frames together.
+rule "Connect Session.init to incoming SyncWires (contained in Frames)"
 	when
 		session : Session ( overridden == false )
 		sw : SyncWire( overridden == false )
-		sourcePage : ContainsEventTriggers( eval(!functions.containingSessionEquals(sourcePage, session)) )  
-		targetPage : ContainsOperations( eval(functions.containingSessionEquals(targetPage, session)) )
-		eval( functions.connects(sw, sourcePage, targetPage ))
+		sourceFrame : ContainsEventTriggers( eval(!functions.containingSessionEquals(sourceFrame, session)) )  
+		targetFrame : ContainsOperations( eval(functions.containingSessionEquals(targetFrame, session)) )
+		eval( functions.connects(sw, sourceFrame, targetFrame ))
 
 		sw2 : SyncWire ( eContainer == sw, overridden == false)
-		sourceElement : ContainsEventTriggers( eContainer == sourcePage )
-		targetElement : ContainsOperations( eContainer == targetPage )
+		sourceElement : ContainsEventTriggers( eContainer == sourceFrame )
+		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connects(sw2, sourceElement, targetElement ))
 
 		event : EventTrigger( eContainer == sourceElement, name == "edit" )
@@ -339,17 +342,17 @@ rule "Connect Session.init to incoming SyncWires (contained in Pages)"
 		
 end
 
-rule "Connect parameter for Session.init to incoming SyncWires (contained in Pages)"
+rule "Connect parameter for Session.init to incoming SyncWires (contained in Frames)"
 	when
 		session : Session ( overridden == false )
 		sw : SyncWire( overridden == false )
-		sourcePage : ContainsEventTriggers( eval(!functions.containingSessionEquals(sourcePage, session)) )  
-		targetPage : ContainsOperations( eval(functions.containingSessionEquals(targetPage, session)) )
-		eval( functions.connects(sw, sourcePage, targetPage ))
+		sourceFrame : ContainsEventTriggers( eval(!functions.containingSessionEquals(sourceFrame, session)) )  
+		targetFrame : ContainsOperations( eval(functions.containingSessionEquals(targetFrame, session)) )
+		eval( functions.connects(sw, sourceFrame, targetFrame ))
 
 		sw2 : SyncWire ( eContainer == sw, overridden == false)
-		sourceElement : ContainsEventTriggers( eContainer == sourcePage )
-		targetElement : ContainsOperations( eContainer == targetPage )
+		sourceElement : ContainsEventTriggers( eContainer == sourceFrame )
+		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connects(sw2, sourceElement, targetElement ))
 
 		event : EventTrigger( eContainer == sourceElement, name == "edit" )

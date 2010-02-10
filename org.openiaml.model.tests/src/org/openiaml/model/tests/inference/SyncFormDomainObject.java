@@ -10,9 +10,9 @@ import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SyncWire;
@@ -33,7 +33,7 @@ public class SyncFormDomainObject extends InferenceTestCase {
 
 	@SuppressWarnings("unused")
 	public void testInference() throws JaxenException {
-		Page page = assertHasPage(root, "page1");
+		Frame page = assertHasFrame(root, "page1");
 		InputForm form = assertHasInputForm(page, "form1");
 		InputTextField field1 = assertHasInputTextField(form, "field1");
 		InputTextField field2 = assertHasInputTextField(form, "field2");

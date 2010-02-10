@@ -18,9 +18,9 @@ import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.StartNode;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SyncWire;
@@ -41,7 +41,7 @@ public class SyncWireProperties extends InferenceTestCase {
 	}
 
 	public void testInference() throws JaxenException {
-		Page page = assertHasPage(root, "container");
+		Frame page = assertHasFrame(root, "container");
 		InputForm form = assertHasInputForm(page, "target form");
 		DomainStore store = assertHasDomainStore(root, "properties file");
 		DomainObject properties = assertHasDomainObject(store, "properties");
@@ -83,9 +83,10 @@ public class SyncWireProperties extends InferenceTestCase {
 		assertTrue(a4.isPrimaryKey());
 
 		// there should be sync wires between each of these elements
-		SyncWire sw1 = (SyncWire) getWireFromTo(form, f1, a1);
-		SyncWire sw2 = (SyncWire) getWireFromTo(form, f2, a2);
-		SyncWire sw3 = (SyncWire) getWireFromTo(form, f3, a3);
+		// (and the directionality does not matter)
+		SyncWire sw1 = (SyncWire) getWireBidirectional(form, f1, a1);
+		SyncWire sw2 = (SyncWire) getWireBidirectional(form, f2, a2);
+		SyncWire sw3 = (SyncWire) getWireBidirectional(form, f3, a3);
 
 		assertTrue(sw1.isIsGenerated());
 		assertTrue(sw2.isIsGenerated());

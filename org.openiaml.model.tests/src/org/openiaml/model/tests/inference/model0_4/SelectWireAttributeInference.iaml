@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.122f2fbec25.26">
-  <children xsi:type="iaml.visual:Page" id="visual.122f2fbeca2.9" name="container">
-    <children xsi:type="iaml:DomainObject" id="model.122f2fbec25.2d" name="a domain object" outEdges="wires.122f2fbecb2.5">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.122f2fbeca2.9" name="container">
+    <elements xsi:type="iaml:DomainObject" id="model.122f2fbec25.2d" name="a domain object" outEdges="wires.122f2fbecb2.5">
       <wires xsi:type="iaml.wires:SelectWire" id="wires.122f2fbecb2.5" from="model.122f2fbec25.2d" to="model.122f2fbec25.33" name="select" query="id = ?"/>
       <attributes id="model.122f2fbec25.53" name="attribute"/>
-    </children>
-    <children xsi:type="iaml:DomainObjectInstance" id="model.122f2fbec25.33" name="instance" outEdges="wires.122f2fbecb2.11" inEdges="wires.122f2fbecb2.5">
+    </elements>
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.122f2fbec25.33" name="instance" outEdges="wires.122f2fbecb2.11" inEdges="wires.122f2fbecb2.5">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.122f2fbecb2.11" from="model.122f2fbec25.33" to="visual.122f2fbeca2.17" name="sync"/>
-    </children>
+    </elements>
     <children xsi:type="iaml.visual:InputForm" id="visual.122f2fbeca2.17" name="form" inEdges="wires.122f2fbecb2.11"/>
-  </children>
+  </scopes>
 </iaml:InternetApplication>

@@ -8,8 +8,8 @@ import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.DynamicApplicationElementSet;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.ConditionWire;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
@@ -32,9 +32,9 @@ public class ConditionWireXpathThreePages extends InferenceTestCaseWithCondition
   }
 
   public void testInference() throws JaxenException {
-    Page page1 = assertHasPage(root, "page1");
-    Page page2 = assertHasPage(root, "page2");
-    Page page3 = assertHasPage(root, "page3");
+    Frame page1 = assertHasFrame(root, "page1");
+    Frame page2 = assertHasFrame(root, "page2");
+    Frame page3 = assertHasFrame(root, "page3");
     DynamicApplicationElementSet dae = assertHasDynamicApplicationElementSet(root, "xpath");
     SyncWire wire = (SyncWire) getWireBidirectional(root, page1, dae);
 

@@ -12,11 +12,12 @@ import org.openiaml.model.model.operations.DecisionCondition;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.Session;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.ConditionWire;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.tests.inference.model0_4.SetWireClient;
 
 /**
  * Tests sessions: sync wires across session boundaries.
@@ -36,9 +37,9 @@ public class SessionSyncWires extends InferenceTestCase {
 
 	public void testInference() throws Exception {
 		// initial elements
-		Page outside = assertHasPage(root, "outside");
+		Frame outside = assertHasFrame(root, "outside");
 		Session session = assertHasSession(root, "session");
-		Page inside = assertHasPage(session, "inside");
+		Frame inside = assertHasFrame(session, "inside");
 		assertNotSame(outside, inside);
 		InputTextField field1 = assertHasInputTextField(outside, "target");
 		InputTextField field2 = assertHasInputTextField(inside, "target");
@@ -78,9 +79,9 @@ public class SessionSyncWires extends InferenceTestCase {
 	 * @throws Exception
 	 */
 	public void testSessionParamterAddsCheckCondition() throws Exception {
-		Page outside = assertHasPage(root, "outside");
+		Frame outside = assertHasFrame(root, "outside");
 		Session session = assertHasSession(root, "session");
-		Page inside = assertHasPage(session, "inside");
+		Frame inside = assertHasFrame(session, "inside");
 		InputTextField field1 = assertHasInputTextField(outside, "target");
 		InputTextField field2 = assertHasInputTextField(inside, "target");
 		
@@ -114,7 +115,7 @@ public class SessionSyncWires extends InferenceTestCase {
 	 */
 	public void testSessionCheckConditionContents() throws Exception {
 		Session session = assertHasSession(root, "session");
-		Page inside = assertHasPage(session, "inside");
+		Frame inside = assertHasFrame(session, "inside");
 		InputTextField field2 = assertHasInputTextField(inside, "target");
 		
 		ApplicationElementProperty value = assertHasApplicationElementProperty(field2, "fieldValue");

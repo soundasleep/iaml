@@ -16,8 +16,8 @@ import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.StartNode;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SyncWire;
@@ -39,7 +39,7 @@ public class SyncWireTestCase extends InferenceTestCase {
 
 	public void testName1toName2() throws JaxenException {
 		// name1 should have a sync wire to name2
-		Page page = assertHasPage(root, "on-page");
+		Frame page = assertHasFrame(root, "on-page");
 		assertNotGenerated(page);
 		InputTextField name1 = assertHasInputTextField(page, "name1");
 		assertNotGenerated(name1);
@@ -121,8 +121,8 @@ public class SyncWireTestCase extends InferenceTestCase {
 		SyncWire wire = (SyncWire) syncWires.get(0);		// get the first one
 
 		// get the referenced operations of sync1
-		InputTextField name1 = (InputTextField) queryOne(root, "//iaml:children[iaml:name='name1']");
-		InputTextField name2 = (InputTextField) queryOne(root, "//iaml:children[iaml:name='name2']");
+		InputTextField name1 = (InputTextField) queryOne(root, "//iaml.visual:children[iaml:name='name1']");
+		InputTextField name2 = (InputTextField) queryOne(root, "//iaml.visual:children[iaml:name='name2']");
 
 		EventTrigger name1edit = assertHasEventTrigger(name1, "edit");
 		EventTrigger name2edit = assertHasEventTrigger(name2, "edit");

@@ -33,7 +33,7 @@ public class Test extends TestCase {
 	public void testNewModel() throws Exception {
 		
 		// get the EClass from IAML
-		EClass page = VisualPackage.eINSTANCE.getPage();
+		EClass page = VisualPackage.eINSTANCE.getFrame();
 		
 		EMFClass c = ModeldocFactory.eINSTANCE.createEMFClass();
 		c.setTargetClass(page);

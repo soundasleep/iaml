@@ -15,7 +15,7 @@ import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.components.LoginHandlerTypes;
 import org.openiaml.model.model.scopes.Session;
-import org.openiaml.model.model.visual.Page;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
@@ -38,7 +38,7 @@ public class LoginHandlerInstanceMultiple extends InferenceTestCase {
 	public void testInitial() throws Exception {
 		root = loadDirectly(LoginHandlerInstanceMultiple.class);
 
-		Page page = assertHasPage(root, "Home");
+		Frame page = assertHasFrame(root, "Home");
 		assertNotGenerated(page);
 		DomainStore store = assertHasDomainStore(root, "Users");
 		assertNotGenerated(store);

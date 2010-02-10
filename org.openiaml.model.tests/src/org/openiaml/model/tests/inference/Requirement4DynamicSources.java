@@ -15,8 +15,8 @@ import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.DynamicApplicationElementSet;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.ConditionWire;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
@@ -63,10 +63,10 @@ public class Requirement4DynamicSources extends InferenceTestCaseWithConditionWi
 	 *
 	 */
 	public void testUnrelatedSyncWires() throws JaxenException {
-		Page page1 = assertHasPage(root, "page a");
-		Page page2 = assertHasPage(root, "page b");
-		Page fieldList = assertHasPage(root, "FieldList");
-		Page unrelated = assertHasPage(root, "unrelated");
+		Frame page1 = assertHasFrame(root, "page a");
+		Frame page2 = assertHasFrame(root, "page b");
+		Frame fieldList = assertHasFrame(root, "FieldList");
+		Frame unrelated = assertHasFrame(root, "unrelated");
 	    DynamicApplicationElementSet dae = assertHasDynamicApplicationElementSet(root, "all pages");
 		SyncWire sync = (SyncWire) getWireBidirectional(root, fieldList, dae);
 
@@ -112,10 +112,10 @@ public class Requirement4DynamicSources extends InferenceTestCaseWithConditionWi
 	 */
 	public void testTextFieldInitConditionParameters() throws Exception {
 		// initial
-		Page page1 = assertHasPage(root, "page a");
-		Page page2 = assertHasPage(root, "page b");
-		Page page3 = assertHasPage(root, "page c");
-		Page fieldList = assertHasPage(root, "FieldList");
+		Frame page1 = assertHasFrame(root, "page a");
+		Frame page2 = assertHasFrame(root, "page b");
+		Frame page3 = assertHasFrame(root, "page c");
+		Frame fieldList = assertHasFrame(root, "FieldList");
 		DynamicApplicationElementSet dae = assertHasDynamicApplicationElementSet(root, "all pages");
 		
 		// 'xpath' condition

@@ -75,7 +75,7 @@ public class GateRequiredPage extends CodegenTestCase {
 	 * 
 	 * @inference Gate 
 	 * 		If a {@link Gate} is protected by a "first" {@link NavigateWire},
-	 * 		then the destination {@link Page} will have a new {@link Button} created
+	 * 		then the destination {@link Frame} will have a new {@link Button} created
 	 * 		called "Continue"
 	 * @throws Exception
 	 */

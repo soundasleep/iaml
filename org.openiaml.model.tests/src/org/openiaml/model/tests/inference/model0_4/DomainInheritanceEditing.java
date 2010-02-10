@@ -17,9 +17,9 @@ import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.OperationCallNode;
 import org.openiaml.model.model.operations.StartNode;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.ConditionWire;
 import org.openiaml.model.model.wires.NewInstanceWire;
 import org.openiaml.model.model.wires.ParameterWire;
@@ -64,7 +64,7 @@ public class DomainInheritanceEditing extends InferenceTestCase {
 		DomainStore store = assertHasDomainStore(root, "domain store");
 		DomainObject student = assertHasDomainObject(store, "Student");
 		
-		Page page = assertHasPage(root, "get student");
+		Frame page = assertHasFrame(root, "get student");
 		InputForm form = assertHasInputForm(page, "view student");
 		DomainObjectInstance studentInstance = assertHasDomainObjectInstance(page, "current student");
 		
@@ -117,7 +117,7 @@ public class DomainInheritanceEditing extends InferenceTestCase {
 		DomainStore store = assertHasDomainStore(root, "domain store");
 		DomainObject student = assertHasDomainObject(store, "Student");
 		
-		Page page = assertHasPage(root, "create a new student without autosave");
+		Frame page = assertHasFrame(root, "create a new student without autosave");
 		InputForm form = assertHasInputForm(page, "new student form");
 		DomainObjectInstance studentInstance = assertHasDomainObjectInstance(page, "new student");
 		
@@ -166,7 +166,7 @@ public class DomainInheritanceEditing extends InferenceTestCase {
 	public void testExistsConditionCompositiion() throws Exception {
 		root = loadAndInfer(DomainInheritanceEditing.class);
 	
-		Page page = assertHasPage(root, "create a new student without autosave");
+		Frame page = assertHasFrame(root, "create a new student without autosave");
 		DomainObjectInstance instance = assertHasDomainObjectInstance(page, "new student");
 		
 		// the 'exists?' operation

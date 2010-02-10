@@ -7,8 +7,8 @@ import org.jaxen.JaxenException;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.ConditionWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SyncWire;
@@ -27,7 +27,7 @@ public class ConditionWireFalse extends InferenceTestCase {
 	}
 
 	public void testInference() throws JaxenException {
-		Page page = assertHasPage(root, "container");
+		Frame page = assertHasFrame(root, "container");
 		InputTextField source = assertHasInputTextField(page, "source");
 		InputTextField target = assertHasInputTextField(page, "target");
 		SyncWire wire = (SyncWire) queryOne(page, "//iaml:wires[iaml:name='sync']");

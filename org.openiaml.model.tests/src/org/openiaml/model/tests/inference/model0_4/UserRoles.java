@@ -19,9 +19,9 @@ import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.users.Role;
 import org.openiaml.model.model.users.UserInstance;
 import org.openiaml.model.model.users.UserStore;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.ExtendsWire;
 import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.ParameterWire;
@@ -47,7 +47,7 @@ public class UserRoles extends InferenceTestCase {
 	public void testInitial() throws Exception {
 		root = loadDirectly(UserRoles.class);
 
-		Page page = assertHasPage(root, "Home");
+		Frame page = assertHasFrame(root, "Home");
 		assertNotGenerated(page);
 		UserStore store = assertHasUserStore(root, "user store");
 		assertNotGenerated(store);
@@ -57,7 +57,7 @@ public class UserRoles extends InferenceTestCase {
 		Session session = assertHasSession(root, "target session");
 		assertNotGenerated(session);
 		
-		Page target = assertHasPage(session, "target");
+		Frame target = assertHasFrame(session, "target");
 		assertNotGenerated(target);
 		
 		AccessControlHandler ach = assertHasAccessControlHandler(session, "role-based access");
@@ -69,7 +69,7 @@ public class UserRoles extends InferenceTestCase {
 		assertHasNoLoginHandler(session, "role-based login handler");
 		
 		// or a logout page
-		assertHasNoPage(session, "logout");
+		assertHasNoFrame(session, "logout");
 		
 		// or a login page in the root
 		assertHasNoPage(root, "login");
@@ -117,11 +117,11 @@ public class UserRoles extends InferenceTestCase {
 		assertEquals(handler.getType(), LoginHandlerTypes.USER);
 		
 		// so there should be a login page
-		Page login = assertHasPage(root, "login");
+		Frame login = assertHasFrame(root, "login");
 		assertGenerated(login);
 		
 		// and a logout page
-		Page logout = assertHasPage(session, "logout");
+		Frame logout = assertHasFrame(session, "logout");
 		assertGenerated(logout);
 		
 	}
@@ -209,7 +209,7 @@ public class UserRoles extends InferenceTestCase {
 		root = loadAndInfer(UserRoles.class);
 
 		Session session = assertHasSession(root, "target session");
-		Page target = assertHasPage(session, "target");
+		Frame target = assertHasFrame(session, "target");
 		
 		// access event in the session
 		EventTrigger event = assertHasEventTrigger(target, "access");
@@ -224,7 +224,7 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(run);
 		
 		// a failure wire connecting the op to the login page
-		Page login = assertHasPage(root, "login");
+		Frame login = assertHasFrame(root, "login");
 		NavigateWire fail = assertHasNavigateWire(root, pageOp, login, "fail");
 		assertGenerated(fail);
 		
@@ -240,7 +240,7 @@ public class UserRoles extends InferenceTestCase {
 		root = loadAndInfer(UserRoles.class);
 
 		Session session = assertHasSession(root, "target session");
-		Page target = assertHasPage(session, "target");
+		Frame target = assertHasFrame(session, "target");
 		
 		// access event in the page
 		EventTrigger event = assertHasEventTrigger(session, "access");
@@ -268,7 +268,7 @@ public class UserRoles extends InferenceTestCase {
 		root = loadAndInfer(UserRoles.class);
 
 		Session session = assertHasSession(root, "target session");
-		Page target = assertHasPage(session, "target");
+		Frame target = assertHasFrame(session, "target");
 		
 		// find 'check instance'
 		CompositeOperation check = assertHasCompositeOperation(session, "check instance");
@@ -283,7 +283,7 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(run);
 		
 		// a failure wire connecting the op to the login page
-		Page login = assertHasPage(root, "login");
+		Frame login = assertHasFrame(root, "login");
 		NavigateWire fail = assertHasNavigateWire(root, check, login, "fail");
 		assertGenerated(fail);
 		
@@ -300,7 +300,7 @@ public class UserRoles extends InferenceTestCase {
 
 		Session session = assertHasSession(root, "target session");
 		AccessControlHandler ach = assertHasAccessControlHandler(session, "role-based access");
-		Page target = assertHasPage(session, "target");
+		Frame target = assertHasFrame(session, "target");
 		
 		// the actual 'check permissions' operation in the ACH
 		Operation targetOp = assertHasOperation(ach, "check permissions");
@@ -466,7 +466,7 @@ public class UserRoles extends InferenceTestCase {
 	public void testLoginFormAttributes() throws Exception {
 		root = loadAndInfer(UserRoles.class);
 
-		Page login = assertHasPage(root, "login");
+		Frame login = assertHasFrame(root, "login");
 		assertGenerated(login);
 		
 		InputForm form = assertHasInputForm(login, "login form");

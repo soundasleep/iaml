@@ -15,9 +15,9 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Button;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.visual.Page;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
@@ -40,7 +40,7 @@ public class SessionNewDomainInstance extends InferenceTestCase {
 		Session session = assertHasSession(root, "my session");
 		assertNotGenerated(session);
 
-		Page container = assertHasPage(session, "container");
+		Frame container = assertHasFrame(session, "container");
 		assertNotGenerated(container);
 
 		InputForm form = assertHasInputForm(container, "edit current user");
@@ -79,7 +79,7 @@ public class SessionNewDomainInstance extends InferenceTestCase {
 		Session session = assertHasSession(root, "my session");
 		assertNotGenerated(session);
 
-		Page container = assertHasPage(session, "container");
+		Frame container = assertHasFrame(session, "container");
 		assertNotGenerated(container);
 
 		InputForm form = assertHasInputForm(container, "edit current user");

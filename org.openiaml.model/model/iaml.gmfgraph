@@ -510,10 +510,10 @@
           figure="//@figures.0/@descriptors.15/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
-        name="PageFigure">
+        name="FrameFigure">
       <actualFigure
           xsi:type="gmfgraph:Rectangle"
-          name="PageFigure">
+          name="FrameFigure">
         <layout
             xsi:type="gmfgraph:FlowLayout"
             vertical="true"/>
@@ -532,11 +532,11 @@
         </border>
         <children
             xsi:type="gmfgraph:Label"
-            name="PageNameFigure"
+            name="FrameNameFigure"
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
-            name="PageUrlFigure"
+            name="FrameUrlFigure"
             text="&lt;...>"/>
       </actualFigure>
       <accessors
@@ -1712,8 +1712,8 @@
       name="DynamicApplicationElementSet"
       figure="DynamicApplicationElementSetFigure"/>
   <nodes
-      name="Page"
-      figure="PageFigure"/>
+      name="Frame"
+      figure="FrameFigure"/>
   <nodes
       name="InputForm"
       figure="InputFormFigure"/>
@@ -1915,12 +1915,12 @@
       elementIcon="false"
       accessor="//@figures.0/@descriptors.15/@accessors.1"/>
   <labels
-      name="PageName"
-      figure="PageFigure"
+      name="FrameName"
+      figure="FrameFigure"
       accessor="//@figures.0/@descriptors.16/@accessors.0"/>
   <labels
-      name="PageUrl"
-      figure="PageFigure"
+      name="FrameUrl"
+      figure="FrameFigure"
       elementIcon="false"
       accessor="//@figures.0/@descriptors.16/@accessors.1"/>
   <labels

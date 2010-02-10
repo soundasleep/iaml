@@ -76,6 +76,51 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
+          title="StaticValue"
+          description="Create new StaticValue">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/StaticValue.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/StaticValue.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="LoginHandler"
+          description="Create new LoginHandler">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/LoginHandler.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/LoginHandler.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="QueryParameter"
+          description="Create new QueryParameter">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/QueryParameter.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/QueryParameter.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+    </tools>
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="Domain Modelling"
+        description="Domain Modelling"
+        collapsible="true">
+      <tools
+          xsi:type="gmftool:CreationTool"
           title="DomainObject"
           description="Create new DomainObject">
         <smallIcon
@@ -89,28 +134,41 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="DomainStore"
-          description="Create new DomainStore">
+          title="DomainAttribute"
+          description="Create new DomainAttribute">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/DomainStore.gif"
+            path="icons/full/obj16/DomainAttribute.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/DomainStore.gif"
+            path="icons/full/obj32/DomainAttribute.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="UserStore"
-          description="Create new UserStore">
+          title="DomainObjectInstance"
+          description="Create new DomainObjectInstance">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/UserStore.gif"
+            path="icons/full/obj16/DomainObjectInstance.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/UserStore.gif"
+            path="icons/full/obj32/DomainObjectInstance.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="DomainAttributeInstance"
+          description="Create new DomainAttributeInstance">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/DomainAttributeInstance.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/DomainAttributeInstance.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
     </tools>
@@ -130,6 +188,45 @@
         <largeIcon
             xsi:type="gmftool:BundleImage"
             path="icons/full/obj32/Frame.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="InputForm"
+          description="Create new InputForm">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/InputForm.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/InputForm.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="InputTextField"
+          description="Create new InputTextField">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/InputTextField.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/InputTextField.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Button"
+          description="Create new Button">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/Button.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/Button.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
       <tools
@@ -203,36 +300,114 @@
             path="icons/full/obj32/ConditionWire.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
-    </tools>
-    <tools
-        xsi:type="gmftool:ToolGroup"
-        title="Components"
-        description="Components"
-        collapsible="true">
       <tools
           xsi:type="gmftool:CreationTool"
-          title="DynamicApplicationElementSet"
-          description="Create new DynamicApplicationElementSet">
+          title="ParameterWire"
+          description="Create new ParameterWire">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/DynamicApplicationElementSet.gif"
+            path="icons/full/obj16/ParameterWire.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/DynamicApplicationElementSet.gif"
+            path="icons/full/obj32/ParameterWire.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="LoginHandler"
-          description="Create new LoginHandler">
+          title="SelectWire"
+          description="Create new SelectWire">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/LoginHandler.gif"
+            path="icons/full/obj16/SelectWire.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/LoginHandler.gif"
+            path="icons/full/obj32/SelectWire.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="SetWire"
+          description="Create new SetWire">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/SetWire.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/SetWire.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="NewInstanceWire"
+          description="Create new NewInstanceWire">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/NewInstanceWire.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/NewInstanceWire.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+    </tools>
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="Access Control"
+        description="Access Control"
+        collapsible="true">
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="AccessControlHandler"
+          description="Create new AccessControlHandler">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/AccessControlHandler.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/AccessControlHandler.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="RequiresWire"
+          description="Create new RequiresWire">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/RequiresWire.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/RequiresWire.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="ConstraintWire"
+          description="Create new ConstraintWire">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/ConstraintWire.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/ConstraintWire.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="UserInstance"
+          description="Create new UserInstance">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/UserInstance.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/UserInstance.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
     </tools>

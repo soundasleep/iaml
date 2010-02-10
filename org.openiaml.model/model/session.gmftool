@@ -126,19 +126,6 @@
             path="icons/full/obj32/ExitGate.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="Scope"
-          description="Create new Scope">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/Scope.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/Scope.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
     </tools>
     <tools
         xsi:type="gmftool:ToolGroup"
@@ -205,15 +192,15 @@
         collapsible="true">
       <tools
           xsi:type="gmftool:CreationTool"
-          title="Page"
-          description="Create new Page">
+          title="Frame"
+          description="Create new Frame">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/Page.gif"
+            path="icons/full/obj16/Frame.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/Page.gif"
+            path="icons/full/obj32/Frame.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
       <tools

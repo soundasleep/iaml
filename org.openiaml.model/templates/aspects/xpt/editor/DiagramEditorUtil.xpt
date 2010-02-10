@@ -8,13 +8,13 @@
 
 «AROUND createInitialModelMethod FOR gmfgen::GenDiagram»
 	«IF getQualifiedInterfaceName(domainDiagramElement) = "org.openiaml.model.model.InternetApplication"»
-		«EXPAND xpt::Common::generatedMemberComment('Create a new instance of domain element associated with canvas.\n<!-- begin-user-doc -->\n<!-- end-user-doc -->\nIssue 89: Initialise new InternetApplications with a new Page.')»
+		«EXPAND xpt::Common::generatedMemberComment('Create a new instance of domain element associated with canvas.\n<!-- begin-user-doc -->\n<!-- end-user-doc -->\nIssue 89: Initialise new InternetApplications with a new Frame.')»
 		private static «EXPAND MetaModel::QualifiedClassName FOR domainDiagramElement» createInitialModel() {
 			«EXPAND MetaModel::QualifiedClassName FOR domainDiagramElement» app = «EXPAND MetaModel::NewInstance FOR domainDiagramElement»;
-			org.openiaml.model.model.visual.Page page = org.openiaml.model.model.visual.VisualFactory.eINSTANCE.createPage();
-			page.setName("Home");
-			page.setId("index");	// default page
-			app.getChildren().add(page); 
+			org.openiaml.model.model.visual.Frame frame = org.openiaml.model.model.visual.VisualFactory.eINSTANCE.createFrame();
+			frame.setName("Home");
+			frame.setId("index");	// default page
+			app.getScopes().add(frame); 
 			return app;
 		}
 	«ELSE»

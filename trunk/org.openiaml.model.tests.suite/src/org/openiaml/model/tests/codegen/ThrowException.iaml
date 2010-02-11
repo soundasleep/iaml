@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="model.11e19f1adf3.1" name="__test throw exception">
+	<scopes xsi:type="iaml.visual:Frame" id="visual.11e19f1b1ea.2" name="Home" />
+</iaml:InternetApplication>

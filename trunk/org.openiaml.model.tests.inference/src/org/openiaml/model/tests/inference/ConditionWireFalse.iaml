@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.120698370f1.26">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.120698371ac.1e" name="container">
+    <conditions xsi:type="iaml:CompositeCondition" outEdges="wires.120698f1f46.e" id="model.120698f1e7b.1c" name="Always False">
+      <wires xsi:type="iaml.wires:ConditionWire" id="wires.120698f1f46.e" from="model.120698f1e7b.1c" to="wires.120698371ac.2" name="condition"/>
+      <nodes xsi:type="iaml.operations:StartNode" id="operations.120698f1f46.1" outExecutions="model.120698f1e7b.2f"/>
+      <nodes xsi:type="iaml.operations:CancelNode" id="operations.120698f1f46.6" inExecutions="model.120698f1e7b.2f" exceptionText="this condition is always false."/>
+      <executionEdges id="model.120698f1e7b.2f" from="operations.120698f1f46.1" to="operations.120698f1f46.6"/>
+    </conditions>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.120698371ac.25" name="source" outEdges="wires.120698371ac.2">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.120698371ac.2" from="visual.120698371ac.25" to="visual.120698371ac.27" name="sync" inEdges="wires.120698f1f46.e"/>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.120698371ac.27" name="target" inEdges="wires.120698371ac.2"/>
+  </scopes>
+</iaml:InternetApplication>

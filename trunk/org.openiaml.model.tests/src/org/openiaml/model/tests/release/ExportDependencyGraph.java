@@ -8,6 +8,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -71,10 +73,13 @@ public class ExportDependencyGraph extends XmlTestCase {
 				
 			}
 			
+			// sort it
+			sort(bundles);
+			
 			assertNotNull(bundleName);
 			dependencies.put(bundleName, bundles);
 		}
-				
+
 		// now export this out into dot
 		{
 			File outFile = new File("dot/all-dependencies.dot.txt");
@@ -104,18 +109,31 @@ public class ExportDependencyGraph extends XmlTestCase {
 		}
 	}
 
+	/**
+	 * Sort out the list of bundles into a predictable order.
+	 * 
+	 * @param bundles the list of strings to sort; is modified
+	 */
+	private void sort(List<String> bundles) {
+		Collections.sort(bundles);
+	}
+
 	public void exportAllDependencies(Map<String, List<String>> dependencies, Writer out) throws IOException {
 		out.write("digraph {\n");
 		out.write("  size=\"52,52\";\n");
 		out.write("  ratio=expand;\n");
 		
-		Set<String> allBundles = new HashSet<String>();
+		Set<String> allBundles2 = new HashSet<String>();
 		for (String id : dependencies.keySet()) {
-			allBundles.add(id);
+			allBundles2.add(id);
 			for (String req : dependencies.get(id)) {
-				allBundles.add(req);
+				allBundles2.add(req);
 			}
 		}
+		
+		// convert to a list and sort
+		List<String> allBundles = new ArrayList<String>(allBundles2);
+		Collections.sort(allBundles);
 		
 		// print out all nodes that we are using
 		out.write("  node [style=filled, fillcolor=\"#6677cc\"];\n");
@@ -146,7 +164,11 @@ public class ExportDependencyGraph extends XmlTestCase {
 		
 		// normal nodes
 		out.write("  node [style=filled, fillcolor=\"#ffffff\"];\n");
-		for (String bundleName : dependencies.keySet()) {
+		
+		// sort out the key set
+		List<String> bundleSorted = new ArrayList<String>(dependencies.keySet());
+		Collections.sort(bundleSorted);
+		for (String bundleName : bundleSorted) {
 			for (String requires : dependencies.get(bundleName)) {
 				out.write("  \"" + bundleName + "\" -> \"" + requires + "\";\n");
 			}
@@ -161,19 +183,33 @@ public class ExportDependencyGraph extends XmlTestCase {
 		
 		// print out all nodes that we are using
 		out.write("  node [style=filled, fillcolor=\"#6677cc\"];\n");
-		for (String bundleName : dependencies.keySet()) {
-			if (!isDiagram(bundleName))
-				out.write("\"" + bundleName + "\";\n");
+		{
+			// sort out the key set
+			List<String> bundleSorted = new ArrayList<String>(dependencies.keySet());
+			Collections.sort(bundleSorted);
+			for (String bundleName : bundleSorted) {
+				if (!isDiagram(bundleName))
+					out.write("\"" + bundleName + "\";\n");
+			}
 		}
 		out.write("  node [style=filled, fillcolor=\"#cc7766\"];\n");
-		for (String bundleName : dependencies.keySet()) {
-			if (isDiagram(bundleName))
-				out.write("\"" + bundleName + "\";\n");
+		{
+			// sort out the key set
+			List<String> bundleSorted = new ArrayList<String>(dependencies.keySet());
+			Collections.sort(bundleSorted);
+			for (String bundleName : bundleSorted) {
+				if (isDiagram(bundleName))
+					out.write("\"" + bundleName + "\";\n");
+			}
 		}
 		
 		// normal nodes
 		out.write("  node [style=filled, fillcolor=\"#ffffff\"];\n");
-		for (String bundleName : dependencies.keySet()) {
+		
+		// sort out the key set
+		List<String> bundleSorted = new ArrayList<String>(dependencies.keySet());
+		Collections.sort(bundleSorted);
+		for (String bundleName : bundleSorted) {
 			for (String requires : dependencies.get(bundleName)) {
 				// only print out a link if it exists locally
 				if (dependencies.containsKey(requires)) {
@@ -191,23 +227,37 @@ public class ExportDependencyGraph extends XmlTestCase {
 		
 		// print out all nodes that we are using
 		out.write("  node [style=filled, fillcolor=\"#6677cc\"];\n");
-		for (String bundleName : dependencies.keySet()) {
-			// skip tests
-			if (isTest(bundleName)) continue;
-			if (!isDiagram(bundleName))
-				out.write("\"" + bundleName + "\";\n");
+		{
+			// sort out the key set
+			List<String> bundleSorted = new ArrayList<String>(dependencies.keySet());
+			Collections.sort(bundleSorted);
+			for (String bundleName : bundleSorted) {
+				// skip tests
+				if (isTest(bundleName)) continue;
+				if (!isDiagram(bundleName))
+					out.write("\"" + bundleName + "\";\n");
+			}
 		}
 		out.write("  node [style=filled, fillcolor=\"#cc7766\"];\n");
-		for (String bundleName : dependencies.keySet()) {
-			// skip tests
-			if (isTest(bundleName)) continue;
-			if (isDiagram(bundleName))
-				out.write("\"" + bundleName + "\";\n");
+		{
+			// sort out the key set
+			List<String> bundleSorted = new ArrayList<String>(dependencies.keySet());
+			Collections.sort(bundleSorted);
+			for (String bundleName : bundleSorted) {
+				// skip tests
+				if (isTest(bundleName)) continue;
+				if (isDiagram(bundleName))
+					out.write("\"" + bundleName + "\";\n");
+			}
 		}
 		
 		// normal nodes
 		out.write("  node [style=filled, fillcolor=\"#ffffff\"];\n");
-		for (String bundleName : dependencies.keySet()) {
+		
+		// sort out the key set
+		List<String> bundleSorted = new ArrayList<String>(dependencies.keySet());
+		Collections.sort(bundleSorted);
+		for (String bundleName : bundleSorted) {			
 			// skip tests
 			if (isTest(bundleName)) continue;
 			

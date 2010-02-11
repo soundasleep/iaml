@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="model.1268cdc3de1.d9">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.40c" name="To Enter the Outer Scope" inEdges="wires.126b0cb5e5a.15c"/>
+  <scopes xsi:type="iaml.scopes:Session" id="scopes.1268cdc3e6e.17" name="Session 1">
+    <entryGate id="components.126b0cb5e69.e4" name="Entry Gate" outEdges="wires.126b0cb5e5a.15c">
+      <wires xsi:type="iaml.wires:NavigateWire" id="wires.126b0cb5e5a.15c" from="components.126b0cb5e69.e4" to="visual.126b0cb5e5a.40c" name="first"/>
+    </entryGate>
+    <exitGate id="components.126b0cb5e69.bb" name="Exit Gate" outEdges="wires.126b0cb5e5a.147">
+      <wires xsi:type="iaml.wires:NavigateWire" id="wires.126b0cb5e5a.147" from="components.126b0cb5e69.bb" to="visual.126b0cb5e5a.3eb" name="last"/>
+    </exitGate>
+    <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.3b3" name="To Enter the Inner Scope" inEdges="wires.126b0cb5e5a.130"/>
+    <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.3eb" name="To Exit the Outer Scope" inEdges="wires.126b0cb5e5a.147"/>
+    <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.434" name="Unrelated Outer Page"/>
+    <scopes xsi:type="iaml.scopes:Session" id="scopes.126b0cb5e69.db" name="Inner Scope">
+      <entryGate id="components.126b0cb5e69.8d" name="Entry Gate" outEdges="wires.126b0cb5e5a.130">
+        <wires xsi:type="iaml.wires:NavigateWire" id="wires.126b0cb5e5a.130" from="components.126b0cb5e69.8d" to="visual.126b0cb5e5a.3b3" name="first"/>
+      </entryGate>
+      <exitGate id="components.126b0cb5e69.8e" name="Exit Gate" outEdges="wires.126b0cb5e5a.125">
+        <wires xsi:type="iaml.wires:NavigateWire" id="wires.126b0cb5e5a.125" from="components.126b0cb5e69.8e" to="visual.126b0cb5e5a.39a" name="last"/>
+      </exitGate>
+      <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.388" name="Inner Page"/>
+      <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.39a" name="Out Page" inEdges="wires.126b0cb5e5a.125"/>
+    </scopes>
+  </scopes>
+</iaml:InternetApplication>

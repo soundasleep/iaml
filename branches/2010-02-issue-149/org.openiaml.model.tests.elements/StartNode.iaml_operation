@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:CompositeOperation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" id="model.12625f6d47e.11">
+  <nodes xsi:type="iaml.operations:StartNode" id="operations.12625f6d50b.1"/>
+</iaml:CompositeOperation>

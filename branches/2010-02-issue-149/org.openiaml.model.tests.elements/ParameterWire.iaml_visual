@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:VisibleThing xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1263fd37982.c0a">
+  <operations xsi:type="iaml:CompositeOperation" inEdges="wires.1263fd37a0f.5ed" id="model.1263fd37982.c0d" name="Operation"/>
+  <values id="model.1263fd37982.c0e" name="Static value" outEdges="wires.1263fd37a0f.5ee" value="42">
+    <wires xsi:type="iaml.wires:ParameterWire" id="wires.1263fd37a0f.5ee" from="model.1263fd37982.c0e" to="wires.1263fd37a0f.5ed"/>
+  </values>
+  <children xsi:type="iaml.visual:Button" id="visual.1263fd379ff.7e2" name="Button" outEdges="wires.1263fd37a0f.5ed">
+    <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1263fd37a0f.5ed" from="visual.1263fd379ff.7e2" to="model.1263fd37982.c0d" name="click" inEdges="wires.1263fd37a0f.5ee"/>
+  </children>
+</iaml:VisibleThing>

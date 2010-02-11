@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:DomainStore xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1263fd37982.c23">
+  <children id="model.1263fd37982.c26" name="Object1" outEdges="wires.1263fd37a0f.5fa">
+    <wires xsi:type="iaml.wires:ExtendsWire" id="wires.1263fd37a0f.5fa" from="model.1263fd37982.c26" to="model.1263fd37982.c27"/>
+  </children>
+  <children id="model.1263fd37982.c27" name="Object2" inEdges="wires.1263fd37a0f.5fa"/>
+</iaml:DomainStore>

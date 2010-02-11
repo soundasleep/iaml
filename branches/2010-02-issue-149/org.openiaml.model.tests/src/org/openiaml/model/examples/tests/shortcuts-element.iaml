@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.11d889e30c6.1b4">
+  <children xsi:type="iaml.visual:Page" id="visual.11d889e3114.8d" name="page">
+    <children xsi:type="iaml.visual:InputForm" id="visual.11d889e3114.94" name="target">
+      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.11d889e3162.32 wires.11d889e3162.39" id="model.11d889e30c6.1c3" name="op"/>
+      <eventTriggers id="model.11d889e30c6.1c4" name="event" outEdges="wires.11d889e3162.39">
+        <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.11d889e3162.39" from="model.11d889e30c6.1c4" to="model.11d889e30c6.1c3" name="run2"/>
+      </eventTriggers>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.11d889e3114.b4" name="target2" outEdges="wires.11d889e3162.32">
+      <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.11d889e3162.32" from="visual.11d889e3114.b4" to="model.11d889e30c6.1c3" name="run"/>
+    </children>
+  </children>
+</iaml:InternetApplication>

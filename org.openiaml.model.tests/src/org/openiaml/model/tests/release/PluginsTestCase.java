@@ -220,10 +220,39 @@ public class PluginsTestCase extends XmlTestCase {
 					version,
 					xpathFirst(doc, "//plugin").getAttribute("version"));
 		}
+		
+		Error collected = null;
 
 		// now lets test each manifest.mf
+		// r1492: if the version is incorrect, set it manually  
 		for (String file : getAllManifests()) {
 			Properties properties = getManifestCache().get(file);
+			
+			if (!properties.containsKey("Bundle-Version")) {
+				fail(file + " does not contain key 'Bundle-Version'");
+			}
+			
+			if (!properties.get("Bundle-Version").equals(version)) {
+				// lets rewrite it manually
+				/*
+				 * this code mucks up the entire properties file, so we
+				 * will replace it in the file manually.
+				properties.setProperty("Bundle-Vendor", version);
+				
+				System.out.println("Writing new MANIFEST.MF for file '" + file + "'...");
+				properties.store(new FileWriter(new File(file)), "Unknown comments");
+				 */
+				String pfile = readFile(new File(file));
+				pfile = pfile.replace("Bundle-Version: " + properties.get("Bundle-Version"), 
+						"Bundle-Version: " + version);
+				System.out.println("Writing new MANIFEST.MF for file '" + file + "'...");
+				writeFile(new File(file), pfile);
+				
+				// reload
+				properties = loadProperties(file);
+				getManifestCache().put(file, properties);
+			}
+			
 			try {
 				assertEquals( file + ": expected equal version",
 						version,
@@ -232,9 +261,13 @@ public class PluginsTestCase extends XmlTestCase {
 			} catch (AssertionFailedError e) {
 				// print out for easier debugging
 				System.err.println(file.substring(file.indexOf("..")));
-				throw e;	// rethrow
+				if (collected == null)
+					collected = e;
 			}
 		}
+		
+		if (collected != null)
+			throw collected;
 	}
 	
 	/**

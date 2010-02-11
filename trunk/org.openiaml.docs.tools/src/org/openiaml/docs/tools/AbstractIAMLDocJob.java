@@ -38,7 +38,14 @@ public abstract class AbstractIAMLDocJob extends Job {
 	protected IStatus errorStatus(Throwable e) {
 		return new Status(IStatus.ERROR, DocToolsPlugin.PLUGIN_ID, e.getMessage(), e);
 	}
-
+	
+	/**
+	 * Construct an error IStatus with the given message and throwable.
+	 */
+	protected IStatus errorStatus(String message, Throwable e) {
+		return new Status(IStatus.ERROR, DocToolsPlugin.PLUGIN_ID, message, e);
+	}
+	
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.core.runtime.jobs.Job#run(org.eclipse.core.runtime.IProgressMonitor)

@@ -21,7 +21,9 @@ Require-Bundle: org.eclipse.gmf,
  org.openiaml.model.actions;bundle-version="0.3.1",
  org.openiaml.model.diagram.helpers;bundle-version="0.3.1",
  org.openiaml.model.diagram.user_store;bundle-version="0.4.1",
- org.openiaml.model.diagram.condition;bundle-version="0.4.1"
+ org.openiaml.model.diagram.condition;bundle-version="0.4.1",
+ org.openiaml.model.diagram.frame;bundle-version="0.4.1",
+ org.openiaml.model.diagram.session;bundle-version="0.4.1"
 Bundle-Vendor: www.openiaml.org
 Export-Package: org.openiaml.model.diagram.custom.actions,
  org.openiaml.model.diagram.custom.commands,

@@ -15,6 +15,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.ecore.EClass;
@@ -122,6 +123,10 @@ public class ExportIAMLImagesJob extends AbstractIAMLDocJob {
 		// count of images exported
 		int exported = 0;
 		
+		// we collect up all uninitialisable diagrams, so we can
+		// quickly see which ones were unable to open
+		MultiStatus errorResult = new MultiStatus(DocToolsPlugin.PLUGIN_ID, Status.ERROR, "Could not export example images: multiple errors occured", null);
+		
 		for (EClass cls : classes) {
 			monitor.beginTask("Exporting class " + cls.getName(), 105);
 			
@@ -137,7 +142,9 @@ public class ExportIAMLImagesJob extends AbstractIAMLDocJob {
 			try {
 				diagram = init.initialize(project, file, true /* open new diagram */, new SubProgressMonitor(monitor, 50));
 			} catch (InitializeDiagramException e) {
-				return errorStatus(e);
+				// if we couldn't initialise it, skip it
+				errorResult.add(errorStatus("Class '" + cls.getName() + "'", e));
+				continue;
 			}
 			
 			// the diagram should now be opened
@@ -159,6 +166,11 @@ public class ExportIAMLImagesJob extends AbstractIAMLDocJob {
 			
 			exported++;
 
+		}
+		
+		// any errors in initialising?
+		if (errorResult.getChildren().length != 0) {
+			return errorResult;
 		}
 		
 		// done

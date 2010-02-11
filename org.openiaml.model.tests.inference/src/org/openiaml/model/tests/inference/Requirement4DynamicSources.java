@@ -10,7 +10,7 @@ import junit.framework.AssertionFailedError;
 
 import org.eclipse.emf.ecore.EObject;
 import org.jaxen.JaxenException;
-import org.openiaml.model.codegen.php.OawCodeGenerator;
+import org.openiaml.model.helpers.ResolveDynamicApplicationElementSet;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.DynamicApplicationElementSet;
 import org.openiaml.model.model.EventTrigger;
@@ -34,7 +34,7 @@ public class Requirement4DynamicSources extends InferenceTestCaseWithConditionWi
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		root = loadAndInfer(ROOT + "../examples/requirements/4-dynamic_sources.iaml", true);
+		root = loadAndInfer(Requirement4DynamicSources.class, true);
 	}
 
 	public void testXPathQuery() throws JaxenException {
@@ -42,7 +42,7 @@ public class Requirement4DynamicSources extends InferenceTestCaseWithConditionWi
 		DynamicApplicationElementSet set = assertHasDynamicApplicationElementSet(root, "all pages");
 
 		// see what it resolves to
-		Set<EObject> results = OawCodeGenerator.resolveDynamicSet(root, set);
+		Set<EObject> results = ResolveDynamicApplicationElementSet.resolveDynamicSet(root, set);
 
 		// there should be three results
 		try {

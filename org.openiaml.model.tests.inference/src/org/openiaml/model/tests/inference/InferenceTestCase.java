@@ -3,9 +3,12 @@
  */
 package org.openiaml.model.tests.inference;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
 import org.jaxen.JaxenException;
 import org.openiaml.model.model.ApplicationElement;
@@ -81,6 +84,18 @@ import org.openiaml.model.tests.ModelInferenceTestCase;
  */
 public abstract class InferenceTestCase extends ModelInferenceTestCase {
 
+	/**
+	 * TODO clean up this structure.
+	 */
+	@Override
+	protected String getAbsolutePathRoot() {
+		try {
+			return FileLocator.resolve(Platform.getBundle("org.openiaml.model.tests.inference").getEntry("/")).getPath();
+		} catch (IOException e) {
+			throw new RuntimeException(e.getMessage(), e);
+		}
+	}
+	
 	/**
 	 * Assert that the given element contains the given
 	 * ApplicationElementProperty.

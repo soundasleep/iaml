@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="migrated0">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.1203bbadbb8.b7d" name="new container">
+    <children xsi:type="iaml.visual:InputTextField" id="visual.1203bbadbb8.b9c" name="field to edit">
+      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.1203bbadbb8.207" id="model.1203bbadb5b.833" name="alert"/>
+      <eventTriggers id="model.1203bbadb5b.832" name="edit" outEdges="wires.1203bbadbb8.207">
+        <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1203bbadbb8.207" from="model.1203bbadb5b.832" to="model.1203bbadb5b.833" name="run" inEdges="wires.1203bbadbb8.208"/>
+      </eventTriggers>
+      <properties id="model.1203bbadb5b.834" name="fieldValue" outEdges="wires.1203bbadbb8.208">
+        <wires xsi:type="iaml.wires:ParameterWire" id="wires.1203bbadbb8.208" from="model.1203bbadb5b.834" to="wires.1203bbadbb8.207"/>
+      </properties>
+    </children>
+  </scopes>
+</iaml:InternetApplication>

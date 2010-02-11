@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.120b1f587bf.3ca">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.120b1f58907.560" name="without form">
+    <children xsi:type="iaml.visual:InputTextField" id="visual.120b22b5aea.23" name="target" outEdges="wires.120b249acac.12">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.120b249acac.12" from="visual.120b22b5aea.23" to="domain.120b22b5af9.10" name="immediate sync"/>
+    </children>
+  </scopes>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.120b1f58907.561" name="with form">
+    <children xsi:type="iaml.visual:InputForm" id="visual.120b22b5aea.5b" name="a form">
+      <children xsi:type="iaml.visual:InputTextField" id="visual.120b22b5aea.94" name="target" outEdges="wires.120b249acac.12xx">
+        <wires xsi:type="iaml.wires:SyncWire" id="wires.120b249acac.12xx" from="visual.120b22b5aea.94" to="domain.120b22b5af9.13" name="immediate sync"/>
+      </children>
+    </children>
+  </scopes>
+  <domainStores id="domain.120b22b5af9.8" name="a properties file" file="result.properties" type="PROPERTIES_FILE">
+    <attributes id="domain.120b22b5af9.10" name="value1" inEdges="wires.120b249acac.12"/>
+    <attributes id="domain.120b22b5af9.13" name="value2" inEdges="wires.120b249acac.12xx"/>
+  </domainStores>
+</iaml:InternetApplication>

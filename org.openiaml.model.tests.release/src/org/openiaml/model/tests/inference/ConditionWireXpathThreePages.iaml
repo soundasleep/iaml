@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1206a061ec3.17">
+  <scopes xsi:type="iaml.visual:Frame" id="page1" name="page1" outEdges="sync">
+    <wires xsi:type="iaml.wires:SyncWire" id="sync" from="page1" to="xpath" name="sync"/>
+    <children xsi:type="iaml.visual:InputTextField" id="field1" name="target"/>
+  </scopes>
+  <children xsi:type="iaml:DynamicApplicationElementSet" id="xpath" name="xpath" inEdges="sync" query="xpath://*"/>
+  <scopes xsi:type="iaml.visual:Frame" id="page2" name="page2">
+    <children xsi:type="iaml.visual:InputTextField" id="field2" name="target"/>
+  </scopes>
+  <scopes xsi:type="iaml.visual:Frame" id="page3" name="page3">
+    <children xsi:type="iaml.visual:InputTextField" id="field3" name="target"/>
+  </scopes>
+</iaml:InternetApplication>

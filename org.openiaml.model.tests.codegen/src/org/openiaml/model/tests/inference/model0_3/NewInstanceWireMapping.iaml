@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12234bb88ff.99">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12234bb89da.47" name="container">
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.12234bb88ff.1b2" name="User instance" inEdges="wires.12234bb89da.22"/>
+  </scopes>
+  <domainStores id="model.12234bb88ff.9e" name="a domain store">
+    <children id="model.12234bb88ff.e1" name="User" outEdges="wires.12234bb89da.22">
+      <wires xsi:type="iaml.wires:NewInstanceWire" id="wires.12234bb89da.22" from="model.12234bb88ff.e1" to="model.12234bb88ff.1b2"/>
+      <attributes id="model.12234bb88ff.139" name="username"/>
+      <attributes id="model.12234bb88ff.13b" name="email"/>
+    </children>
+  </domainStores>
+</iaml:InternetApplication>

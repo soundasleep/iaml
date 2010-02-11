@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="model.12109331eea.107e">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12109c6248b.129" name="default page"/>
+  <domainStores xsi:type="iaml:DomainStore" id="model.12109331eea.1083" name="domain store">
+    <children xsi:type="iaml:DomainObject" id="model.12109331eea.108c" name="User" outEdges="wires.12109c6249b.b9">
+      <wires xsi:type="iaml.wires:SelectWire" id="wires.12109c6249b.b9" from="model.12109331eea.108c" to="model.12109c6242e.304" name="select" inEdges="wires.12109c6249b.ba" query="email = ?"/>
+      <attributes xsi:type="iaml:DomainAttribute" id="model.12109331eea.10ac" name="name"/>
+      <attributes xsi:type="iaml:DomainAttribute" id="model.12109331eea.10ad" name="email"/>
+      <attributes xsi:type="iaml:DomainAttribute" id="model.12109331eea.10ae" name="password"/>
+      <attributes xsi:type="iaml:DomainAttribute" id="model.12109331eea.10d3" name="id"/>
+    </children>
+  </domainStores>
+  <scopes xsi:type="iaml.scopes:Session" id="scopes.12109c6249b.2" name="my session">
+    <scopes xsi:type="iaml.visual:Frame" id="visual.12109c6248b.11e" name="sessioned container">
+      <children xsi:type="iaml.visual:InputTextField" id="visual.12109c6248b.134" name="select email" outEdges="wires.12109c6249b.ba">
+        <wires xsi:type="iaml.wires:ParameterWire" id="wires.12109c6249b.ba" from="visual.12109c6248b.134" to="wires.12109c6249b.b9"/>
+        <properties id="model.12109c6242e.33d" name="fieldValue" defaultValue="session@jevon.org"/>
+      </children>
+      <children xsi:type="iaml.visual:InputTextField" id="visual.12109c6248b.135" name="edit name" inEdges="wires.12109c6249b.b8"/>
+      <elements xsi:type="iaml:DomainAttributeInstance" id="model.12109c6242e.304" name="name" outEdges="wires.12109c6249b.b8" inEdges="wires.12109c6249b.b9">
+        <wires xsi:type="iaml.wires:SyncWire" id="wires.12109c6249b.b8" from="model.12109c6242e.304" to="visual.12109c6248b.135" name="sync"/>
+      </elements>
+    </scopes>
+  </scopes>
+</iaml:InternetApplication>

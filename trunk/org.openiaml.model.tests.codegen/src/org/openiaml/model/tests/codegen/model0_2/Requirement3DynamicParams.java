@@ -20,7 +20,7 @@ public class Requirement3DynamicParams extends CodegenTestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		root = loadAndCodegen(Requirement3DynamicParams.class, ROOT + "../examples/requirements/3-dynamic_params.iaml");
+		root = loadAndCodegen(Requirement3DynamicParams.class);
 	}
 	
 	public void testRequirement() throws Exception {

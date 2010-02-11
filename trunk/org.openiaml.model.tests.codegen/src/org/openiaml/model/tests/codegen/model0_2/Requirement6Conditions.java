@@ -19,7 +19,7 @@ public class Requirement6Conditions extends CodegenTestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		root = loadAndCodegen(Requirement6Conditions.class, ROOT + "../examples/requirements/6-conditions.iaml");
+		root = loadAndCodegen(Requirement6Conditions.class);
 	}
 	
 	public void testRequirement() throws Exception {

@@ -3,6 +3,7 @@
  */
 package org.openiaml.model.tests;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -15,6 +16,8 @@ import net.sourceforge.jwebunit.junit.WebTestCase;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.InternetApplication;
 
@@ -28,6 +31,21 @@ import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
  */
 public abstract class CodegenTestCase extends ModelInferenceTestCase {
 
+	
+	/**
+	 * TODO fix
+	 * 
+	 * @return
+	 */
+	@Override
+	protected String getAbsolutePathRoot() {
+		try {
+			return FileLocator.resolve(Platform.getBundle("org.openiaml.model.tests.codegen").getEntry("/")).getPath();
+		} catch (IOException e) {
+			throw new RuntimeException(e.getMessage(), e);
+		}
+	}
+	
 	protected InternetApplication root;
 
 	/**

@@ -17,7 +17,7 @@ public class Requirement2StaticParams extends CodegenTestCase {
 
 	protected void setUp() throws Exception {
 		super.setUp();
-		root = loadAndCodegen(Requirement2StaticParams.class, ROOT + "../examples/requirements/2-static_params.iaml");
+		root = loadAndCodegen(Requirement2StaticParams.class);
 	}
 	
 	public void testRequirement() throws Exception {

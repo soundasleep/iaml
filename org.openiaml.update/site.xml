@@ -18,6 +18,9 @@
    <feature url="features/org.openiaml.verification.crocopat.feature_0.4.1.200912071441.jar" id="org.openiaml.verification.crocopat.feature" version="0.4.1.200912071441" os="win32">
       <category name="org.openiaml.verification.crocopat.feature"/>
    </feature>
+   <feature url="features/org.openiaml.model.editor_0.4.2.201002121351.jar" id="org.openiaml.model.editor" version="0.4.2.201002121351">
+      <category name="org.openiaml.model.editor"/>
+   </feature>
    <category-def name="org.openiaml.model.editor" label="IAML Modelling Environment"/>
    <category-def name="org.openiaml.verification.crocopat.feature" label="Verification with Crocopat (Win-only)"/>
 </site>

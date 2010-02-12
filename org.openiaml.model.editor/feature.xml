@@ -2,7 +2,7 @@
 <feature
       id="org.openiaml.model.editor"
       label="IAML Modelling Platform"
-      version="0.4.1.qualifier"
+      version="0.4.2.qualifier"
       provider-name="www.openiaml.org">
 
    <description url="http://www.openiaml.org/">
@@ -87,9 +87,15 @@
       <import feature="ca.ecliptical.emf.xpath" version="2.0.1.20071218052038"/>
       <import feature="ca.ecliptical.emf.xpath" version="2.0.1.20071218052038"/>
       <import feature="ca.ecliptical.emf.xpath" version="2.0.1.20071218052038"/>
+      <import feature="ca.ecliptical.emf.xpath" version="2.0.1.20071218052038"/>
       <import feature="org.openarchitectureware.core.feature" version="4.3.1.20090107-2000PRD"/>
       <import feature="org.openarchitectureware.util.stdlib.feature" version="4.3.1.20090107-2000PRD"/>
       <import feature="org.openiaml.iacleaner.feature" version="0.3.0"/>
+      <import plugin="org.openiaml.model.diagram.user_store" version="0.4.1" match="greaterOrEqual"/>
+      <import plugin="org.openiaml.model.diagram.condition" version="0.4.1" match="greaterOrEqual"/>
+      <import plugin="org.openiaml.model.diagram.frame" version="0.4.1" match="greaterOrEqual"/>
+      <import plugin="org.openiaml.model.diagram.session" version="0.4.1" match="greaterOrEqual"/>
+      <import plugin="org.openiaml.model.diagram.helpers" version="0.4.1" match="greaterOrEqual"/>
    </requires>
 
    <plugin
@@ -227,6 +233,13 @@
 
    <plugin
          id="org.openiaml.emf.properties"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.openiaml.model.diagram.frame"
          download-size="0"
          install-size="0"
          version="0.0.0"

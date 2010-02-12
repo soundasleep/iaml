@@ -18,6 +18,7 @@ import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
+import org.openiaml.model.model.visual.Label;
 import org.openiaml.model.model.visual.VisualFactory;
 import org.openiaml.model.model.visual.VisualPackage;
 
@@ -69,6 +70,7 @@ public class VisualFactoryImpl extends EFactoryImpl implements VisualFactory {
 			case VisualPackage.INPUT_FORM: return createInputForm();
 			case VisualPackage.INPUT_TEXT_FIELD: return createInputTextField();
 			case VisualPackage.BUTTON: return createButton();
+			case VisualPackage.LABEL: return createLabel();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -116,6 +118,17 @@ public class VisualFactoryImpl extends EFactoryImpl implements VisualFactory {
 		ButtonImpl button = new ButtonImpl();
 		generateID(button);
 		return button;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public Label createLabel() {
+		LabelImpl label = new LabelImpl();
+		generateID(label);
+		return label;
 	}
 
 	/**

@@ -28,6 +28,7 @@ import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
+import org.openiaml.model.model.visual.Label;
 import org.openiaml.model.model.visual.VisualPackage;
 
 /**
@@ -177,6 +178,24 @@ public class VisualSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case VisualPackage.LABEL: {
+				Label label = (Label)theEObject;
+				T result = caseLabel(label);
+				if (result == null) result = caseVisibleThing(label);
+				if (result == null) result = caseCanBeSynced(label);
+				if (result == null) result = caseContainsConditions(label);
+				if (result == null) result = caseContainsEventTriggers(label);
+				if (result == null) result = caseContainsOperations(label);
+				if (result == null) result = caseWireEdgesSource(label);
+				if (result == null) result = caseShouldntContainWires(label);
+				if (result == null) result = caseWireEdgeDestination(label);
+				if (result == null) result = caseNamedElement(label);
+				if (result == null) result = caseGeneratedElement(label);
+				if (result == null) result = caseGeneratesElements(label);
+				if (result == null) result = caseContainsWires(label);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -238,6 +257,21 @@ public class VisualSwitch<T> {
 	 * @generated
 	 */
 	public T caseButton(Button object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Label</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Label</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLabel(Label object) {
 		return null;
 	}
 

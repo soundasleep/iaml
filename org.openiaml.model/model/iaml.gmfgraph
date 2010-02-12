@@ -1668,6 +1668,51 @@
       <accessors
           figure="//@figures.0/@descriptors.60/@actualFigure/@children.1"/>
     </descriptors>
+    <descriptors
+        name="LabelFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="LabelFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="232"
+            green="232"
+            blue="222"/>
+        <border
+            xsi:type="gmfgraph:MarginBorder">
+          <insets
+              top="3"
+              left="3"
+              bottom="3"
+              right="3"/>
+        </border>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="LabelNameFigure"
+            text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="LabelValueFigure"
+            text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="LabelParentNameFigure"
+            text="[none]">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="gray"/>
+        </children>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.61/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.61/@actualFigure/@children.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.61/@actualFigure/@children.2"/>
+    </descriptors>
   </figures>
   <nodes
       name="EventTrigger"
@@ -1795,6 +1840,9 @@
   <nodes
       name="Scope"
       figure="ScopeFigure"/>
+  <nodes
+      name="Label"
+      figure="LabelFigure"/>
   <connections
       name="DataFlowEdge"
       figure="DataFlowEdgeFigure"/>
@@ -2197,4 +2245,19 @@
       figure="EntryGateFigure"
       elementIcon="false"
       accessor="//@figures.0/@descriptors.60/@accessors.1"/>
+  <labels
+      name="LabelName"
+      figure="LabelFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.61/@accessors.0"/>
+  <labels
+      name="LabelValue"
+      figure="LabelFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.61/@accessors.1"/>
+  <labels
+      name="LabelParentName"
+      figure="LabelFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.61/@accessors.2"/>
 </gmfgraph:Canvas>

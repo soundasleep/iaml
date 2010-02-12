@@ -106,6 +106,15 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
   # Code generation
     * Operational modelling is now implemented using a call stack, allowing for loops in the execution path
 
+==Release 0.4.2==
+([http://journals.jevon.org/users/jevon-phd/entry/19798 Released] February 2010)
+  # [http://code.google.com/p/iaml/wiki/Model0_5#Model_0.4.2 Expand IAML model]
+    * EntryGate: restricting entry through a given gate
+    * ExitGate: restricting exit through a given gate
+    * "Page" is now "Frame"
+  # Code generation
+    * Conditional modelling is also now implemented using the same call stack in 0.4.1
+
 =Release 0.5=
 ([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.5 Outstanding issues])
   # [Model0_5 Expand IAML model]

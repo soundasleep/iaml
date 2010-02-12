@@ -595,6 +595,40 @@
           href="iaml.gmfgraph#ExitGate"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//visual/Frame/children"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//visual/Label"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( Label )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#LabelName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#LabelValue"/>
+        <features
+            href="iaml.ecore#//visual/Label/value"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#LabelParentName"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="frame.gmftool#//@palette/@tools.2/@tools.5"/>
+      <diagramNode
+          href="iaml.gmfgraph#Label"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/SyncWire"/>

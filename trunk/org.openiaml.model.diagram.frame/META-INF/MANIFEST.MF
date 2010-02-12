@@ -7,7 +7,7 @@ Bundle-ClassPath: .
 Bundle-Activator: org.openiaml.model.diagram.frame.part.IamlDiagramEditorPlugin
 Bundle-Vendor: www.openiaml.org
 Bundle-Localization: plugin
-Export-Package: org.openiaml.model.diagram.frame.edit.parts, 
+Export-Package: org.openiaml.model.diagram.frame.edit.parts,
  org.openiaml.model.diagram.frame.part,
  org.openiaml.model.diagram.frame.providers
 Require-Bundle: org.eclipse.core.runtime,

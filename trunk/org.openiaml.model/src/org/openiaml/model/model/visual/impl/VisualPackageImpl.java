@@ -27,6 +27,7 @@ import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
+import org.openiaml.model.model.visual.Label;
 import org.openiaml.model.model.visual.VisualFactory;
 import org.openiaml.model.model.visual.VisualPackage;
 import org.openiaml.model.model.wires.WiresPackage;
@@ -66,6 +67,13 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 	 * @generated
 	 */
 	private EClass buttonEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass labelEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -210,6 +218,24 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getLabel() {
+		return labelEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getLabel_Value() {
+		return (EAttribute)labelEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public VisualFactory getVisualFactory() {
 		return (VisualFactory)getEFactoryInstance();
 	}
@@ -242,6 +268,9 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 		inputTextFieldEClass = createEClass(INPUT_TEXT_FIELD);
 
 		buttonEClass = createEClass(BUTTON);
+
+		labelEClass = createEClass(LABEL);
+		createEAttribute(labelEClass, LABEL__VALUE);
 	}
 
 	/**
@@ -279,6 +308,7 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 		inputFormEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
 		inputTextFieldEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
 		buttonEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
+		labelEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(frameEClass, Frame.class, "Frame", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -290,6 +320,9 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 		initEClass(inputTextFieldEClass, InputTextField.class, "InputTextField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(buttonEClass, Button.class, "Button", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(labelEClass, Label.class, "Label", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getLabel_Value(), ecorePackage.getEString(), "value", "", 0, 1, Label.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create annotations
 		// http://openiaml.org/comment
@@ -325,6 +358,12 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 		   source, 
 		   new String[] {
 			 "added", "0.2"
+		   });			
+		addAnnotation
+		  (labelEClass, 
+		   source, 
+		   new String[] {
+			 "added", "0.4.3"
 		   });	
 	}
 
@@ -359,6 +398,12 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Represents a clickable button to the user."
+		   });			
+		addAnnotation
+		  (labelEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Represents a static block of text that is not user-editable."
 		   });
 	}
 

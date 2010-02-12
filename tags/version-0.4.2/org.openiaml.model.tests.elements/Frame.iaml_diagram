@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xsi:schemaLocation="http://openiaml.org/model/visual http://openiaml.org/model0.4#//visual" xmi:id="_Ug5eIBaxEd-S9r5DRjo3Qg" type="Iaml" name="Frame.iaml_diagram" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_VWPKsBaxEd-S9r5DRjo3Qg" type="2026">
+    <children xmi:type="notation:DecorationNode" xmi:id="_VWPKthaxEd-S9r5DRjo3Qg" type="5045"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="_VWPKsRaxEd-S9r5DRjo3Qg"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_VWPKshaxEd-S9r5DRjo3Qg"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_VWPKsxaxEd-S9r5DRjo3Qg"/>
+    <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_VWPKtBaxEd-S9r5DRjo3Qg" hint="Iaml_Frame"/>
+    <element xmi:type="iaml.visual:Frame" href="Frame.iaml#visual.126bab8cbe8.1f"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VWPKtRaxEd-S9r5DRjo3Qg" x="274" y="111"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_Ug5eIRaxEd-S9r5DRjo3Qg"/>
+  <element xmi:type="iaml:InternetApplication" href="Frame.iaml#model.126bab8cb7a.d7"/>
+</notation:Diagram>

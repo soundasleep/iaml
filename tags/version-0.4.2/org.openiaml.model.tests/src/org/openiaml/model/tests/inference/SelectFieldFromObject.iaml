@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12109331eea.107e">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12109331f38.e3f" name="container">
+    <children xsi:type="iaml.visual:InputTextField" id="visual.12109331f38.e83" name="textfield" inEdges="wires.12109331f38.61e"/>
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.12109331eea.11a4" name="&quot;my user&quot;" inEdges="wires.12109331f38.60c">
+      <attributes id="model.12109331eea.11ff" name="name" outEdges="wires.12109331f38.61e">
+        <wires xsi:type="iaml.wires:SyncWire" id="wires.12109331f38.61e" from="model.12109331eea.11ff" to="visual.12109331f38.e83" name="sync"/>
+      </attributes>
+    </elements>
+  </scopes>
+  <domainStores xsi:type="iaml:DomainStore" id="model.12109331eea.1083" name="domain store">
+    <children xsi:type="iaml:DomainObject" id="model.12109331eea.108c" name="User" outEdges="wires.12109331f38.60c">
+      <wires xsi:type="iaml.wires:SelectWire" id="wires.12109331f38.60c" from="model.12109331eea.108c" to="model.12109331eea.11a4" name="select"/>
+      <attributes xsi:type="iaml:DomainAttribute" id="model.12109331eea.10ac" name="name"/>
+      <attributes xsi:type="iaml:DomainAttribute" id="model.12109331eea.10ad" name="email"/>
+      <attributes xsi:type="iaml:DomainAttribute" id="model.12109331eea.10ae" name="password"/>
+      <attributes xsi:type="iaml:DomainAttribute" id="model.12109331eea.10d3" name="id"/>
+    </children>
+  </domainStores>
+</iaml:InternetApplication>

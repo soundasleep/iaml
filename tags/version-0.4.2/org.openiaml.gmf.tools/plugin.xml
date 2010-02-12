@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+	<!-- .iaml file extensions -->
+	<extension point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="false"
+            id="org.openiaml.gmf.tools.id1"
+            nameFilter="*.gmfgen"
+            objectClass="org.eclipse.core.resources.IFile">
+
+         <menu
+               id="org.openiaml.gmf.tools.menu1"
+               path="additions"
+               label="&amp;IAML GMF Tools">
+            <separator
+                  name="group">
+            </separator>
+         </menu>
+
+		<!-- more than one popup extension is displayed in reverse order:
+		     a documented bug of eclipse -->
+         <action
+               class="org.openiaml.gmf.tools.GenerateMultipleDiagramCodeAction"
+               id="org.openiaml.gmf.tools.generate"
+               label="&amp;Generate multiple diagram code"
+               menubarPath="org.openiaml.gmf.tools.menu1/group">
+         </action>
+
+      </objectContribution>                    
+
+	</extension>
+
+</plugin>

@@ -1,0 +1,24 @@
+«IMPORT iaml»
+
+/**
+ * Runtime checks of conditions.
+ */
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE callCondition(Boolean php, model::WireEdge wire, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::wires::ConditionWire»
+	/* ConditionWire: «this-» */
+	condition_«conditionName(from)»(
+		«EXPAND template::operations::Parameters::callParameter(php, wire, inStoreDb, false, currentFrame) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»
+	)
+«ENDDEFINE»
+
+«DEFINE callCondition(Boolean php, model::components::Gate gate, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::wires::ConditionWire»
+	/* ConditionWire: «this-» */
+	condition_«conditionName(from)»(
+		«REM»NOTE the 'gate' parameter is lost!«ENDREM»
+		«EXPAND template::operations::Parameters::callParameter(php, null, inStoreDb, false, currentFrame) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»
+	)
+«ENDDEFINE»
+
+«DEFINE exception FOR Object»
+«ENDDEFINE»

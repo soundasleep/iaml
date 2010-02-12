@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml.scopes:Session xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="scopes.1268cdc3e6e.3f">
+  <gate id="components.1268cdc3e6e.2d" name="Gate name"/>
+</iaml.scopes:Session>

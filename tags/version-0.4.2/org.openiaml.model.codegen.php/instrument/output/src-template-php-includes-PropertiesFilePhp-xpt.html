@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>Coverage: PropertiesFilePhp.xpt</title>
+	<link rel="stylesheet" type="text/css" href="default.css" />
+</head>
+<body>
+
+<h1>PropertiesFilePhp.xpt</h1>
+
+<a href="index.html">Summary</a>
+
+<ul id="legend">
+	<li class="none">Never executed</li>
+	<li class="oaw">Generated output</li>
+	<li class="php">Executed on server (PHP)</li>
+	<li class="js">Executed on client (Javascript)</li>
+</ul>
+
+<p><pre>«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+<span class="oaw php " title="19 steps in OAW 64 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\php\includes\PropertiesFilePhp.xpt: 5:DEFINE propertiesFilePhp FOR model::InternetApplication-)"><a name="propertiesFilePhp.html">«DEFINE propertiesFilePhp FOR model::InternetApplication-»</a>
+&lt;?php
+/**
+ * Wrapper to access .properties files.
+ */
+ 
+function load_properties($db_name) {
+	// properties file doesn't exist
+	if (!file_exists($db_name)) {
+		// log_message("properties file $db_name doesn't exist.");
+		return array();	
+	}
+
+	// load the properties file
+	$f = file($db_name);
+	$properties = array();
+	for ($i = 0; $i &lt; count($f); $i++) {
+		// strip comments
+		if (strpos($f[$i], "#") !== false) {
+			$f[$i] = substr($f[$i], 0, strpos($f[$i], "#"));
+		}
+	
+		// skip blank lines
+		if (trim($f[$i]) == "")
+			continue; 
+		
+		// split the property line
+		$split = explode("=", $f[$i], 2);
+		if (count($split) != 2) {
+			throw new IamlRuntimeException("Malformed properties line: " . $f[$i]);
+		}
+		
+		$key = trim($split[0]);
+		$value = trim($split[1]);
+		if (substr(trim($split[1]), -1) == ",") {
+			// continues on the next couple of lines
+			while ($i &lt; count($f)) {
+				$i++;
+				// strip comments
+				if (strpos($f[$i], "#") !== false) {
+					$f[$i] = substr($f[$i], 0, strpos($f[$i], "#"));
+				}
+				
+				// skip blank lines
+				if (trim($f[$i]) != "") {
+					$value .= "\n" . trim($f[$i]);
+				}
+				
+				// break out of continuation
+				if (substr(trim($f[$i]), -1) != ",") {
+					break;
+				}
+			}
+		}
+		
+		// save to properties array
+		$properties[$key] = $value;
+	}
+	
+	return $properties;
+}
+
+function get_property($properties, $row_name, $default = false) {
+	return isset($properties[$row_name]) ? $properties[$row_name] : $default;
+}
+
+function set_property($db_name, $properties, $key, $value) {
+	$properties[$key] = $value;
+	
+	// write new properties file
+	$s = array();
+	foreach ($properties as $key =&gt; $value) {
+		$s[] = "$key=$value";
+	}
+	file_put_contents($db_name, implode("\n", $s));
+
+	// return new properties
+	return $properties;
+}
+
+«ENDDEFINE»</span>
+</pre></p>
+
+</body>
+</html>

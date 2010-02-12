@@ -278,9 +278,13 @@ isDomainObjectInstance(emf::EObject this) :
 isSession(emf::EObject this) :
 	model::scopes::Session.isInstance(this);	
 isFrame(emf::EObject this) :
-	model::visual::Frame.isInstance(this);	
+	model::visual::Frame.isInstance(this);
+canBeSet(emf::EObject this) :
+	isInputTextField(this) || isLabel(this);
 isInputTextField(emf::EObject this) :
 	model::visual::InputTextField.isInstance(this);	
+isLabel(emf::EObject this) :
+	model::visual::Label.isInstance(this);	
 
 isPropertiesFile(model::DomainStore store) :
 	store != null && store.type != null && store.type.toString() == "PROPERTIES_FILE";

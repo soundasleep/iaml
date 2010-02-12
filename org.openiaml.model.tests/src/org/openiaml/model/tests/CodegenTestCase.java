@@ -517,11 +517,11 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 */
 	protected String getLabelIDForText(String text) {
 		logTimed("internal: get label ID for text");
-		IElement element = getElementByXPath("//label[contains(normalize-space(text()), normalize-space('" + text + "'))]");
+		IElement element = getElementByXPath("//label[" + getContainsTextXPath(text) + "]");
 		logTimed("internal: get label ID for text complete");
 		return element.getAttribute("id");
 	}
-	
+
 	/**
 	 * Extension of {@link #getLabelIDForText(String)}; add an extra
 	 * XPath condition for text that it should not contain, 
@@ -534,9 +534,22 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 */
 	protected String getLabelIDForText(String text, String notText) {
 		logTimed("internal: get label ID for text (2)");
-		IElement element = getElementByXPath("//label[contains(normalize-space(text()), normalize-space('" + text + "')) and not(contains(normalize-space(text()), normalize-space('" + notText + "')))]");
+		IElement element = getElementByXPath("//label[" + getContainsTextXPath(text) + " and not " + getContainsTextXPath(notText) + "]");
 		logTimed("internal: get label ID for text (2) complete");
 		return element.getAttribute("id");
+	}
+	
+	/**
+	 * Construct the necessary XPath expression to find a node that 
+	 * contains the specific text.
+	 * 
+	 * <p>Currently returns <code>contains(normalize-space(text()), normalize-space('<u>text</u>'))</code>.
+	 * 
+	 * @param text
+	 * @return
+	 */
+	protected String getContainsTextXPath(String text) {
+		return "contains(normalize-space(text()), normalize-space('" + text + "'))";
 	}
 	
 	/**

@@ -191,7 +191,7 @@
 			// ignore null parameters
 			// a null parameter may occur if the remote parameter source is unavailable, or we will have a stored_event that
 			// will populate this field
-			«IF isInputTextField(outFlows.first().to.eContainer)»
+			«IF canBeSet(outFlows.first().to.eContainer)»
 				// inflow container = «containingFrame(inFlows.first().from)»
 				// outflow container = «containingFrame(outFlows.first().to)»
 				«IF container == containingFrame(outFlows.first().to)»

@@ -21,6 +21,7 @@ public class AllModel0_4_3CodegenTests {
 		TestSuite suite = new TestSuite("Model 0.4.3");
 		
 		suite.addTestSuite(LabelSimple.class);
+		suite.addTestSuite(LabelSyncWire.class);
 
 		return suite;
 	}

@@ -95,7 +95,21 @@
 «ENDDEFINE»
 
 «DEFINE dataTarget(Boolean php) FOR model::ApplicationElementProperty»	
-	document.getElementById('«safeNameString(( (model::NamedElement) eContainer).id)»').value
+	«EXPAND dataTargetContainer(php, this) FOR eContainer»
+«ENDDEFINE»
+
+«DEFINE dataTargetContainer(Boolean php, model::ApplicationElementProperty property) FOR emf::EObject»
+	«EXPAND exception FOR throwException("Unknown property container: " + this)»
+«ENDDEFINE»
+
+«DEFINE dataTargetContainer(Boolean php, model::ApplicationElementProperty property) FOR model::visual::InputTextField»
+	document.getElementById('«safeNameString(id)»').value
+«ENDDEFINE»
+«DEFINE dataTargetContainer(Boolean php, model::ApplicationElementProperty property) FOR model::visual::Button»
+	document.getElementById('«safeNameString(id)»').value
+«ENDDEFINE»
+«DEFINE dataTargetContainer(Boolean php, model::ApplicationElementProperty property) FOR model::visual::Label»
+	document.getElementById('«safeNameString(id)»').innerHTML
 «ENDDEFINE»
 
 /**

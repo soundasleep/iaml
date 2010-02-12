@@ -5,21 +5,16 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE getInlineTagJavascript(model::visual::Frame currentFrame) FOR model::VisibleThing-»
-	onChange="return onChange_«safeNameString(id)»(this);"
+«DEFINE getInlineClickJavascript(model::visual::Frame currentFrame) FOR model::VisibleThing-»
 	onClick="return onClick_«safeNameString(id)»(this);"
 «ENDDEFINE»
+«DEFINE getInlineChangeJavascript(model::visual::Frame currentFrame) FOR model::VisibleThing-»
+	onChange="return onChange_«safeNameString(id)»(this);"
+«ENDDEFINE»
 
-«DEFINE getScriptDefinition(model::visual::Frame currentFrame) FOR model::VisibleThing-»
+«DEFINE getScriptClickDefinition(model::visual::Frame currentFrame) FOR model::VisibleThing-»
 	<script language="Javascript" type="application/javascript">
 	/* <![CDATA[ */
-		function onChange_«safeNameString(id)»(obj) {
-			// expand all onChanges
-			«EXPAND template::events::EventCall::callEvent(false, currentFrame) FOREACH eventTriggers.select(e | e.name == "click")-»
-			
-			return false;
-		}
-		
 		function onClick_«safeNameString(id)»(obj) {
 			// expand all onClicks
 			«EXPAND template::events::EventCall::callEvent(false, currentFrame) FOREACH eventTriggers.select(e | e.name == "click" || e.name == "onClick")-»
@@ -27,6 +22,18 @@
 			// implicit operations
 			«EXPAND implicitButtonClickEvents(currentFrame) FOREACH outEdges-»
 
+			return false;
+		}
+	/* ]]> */
+	</script>
+«ENDDEFINE»
+«DEFINE getScriptChangeDefinition(model::visual::Frame currentFrame) FOR model::VisibleThing-»
+	<script language="Javascript" type="application/javascript">
+	/* <![CDATA[ */
+		function onChange_«safeNameString(id)»(obj) {
+			// expand all onChanges
+			«EXPAND template::events::EventCall::callEvent(false, currentFrame) FOREACH eventTriggers.select(e | e.name == "click")-»
+			
 			return false;
 		}
 	/* ]]> */

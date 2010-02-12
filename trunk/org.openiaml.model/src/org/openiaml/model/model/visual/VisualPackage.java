@@ -922,13 +922,13 @@ public interface VisualPackage extends EPackage {
 	int LABEL__VALUES = ModelPackage.VISIBLE_THING__VALUES;
 
 	/**
-	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * The feature id for the '<em><b>Default Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LABEL__VALUE = ModelPackage.VISIBLE_THING_FEATURE_COUNT + 0;
+	int LABEL__DEFAULT_VALUE = ModelPackage.VISIBLE_THING_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Label</em>' class.
@@ -1012,15 +1012,15 @@ public interface VisualPackage extends EPackage {
 	EClass getLabel();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.openiaml.model.model.visual.Label#getValue <em>Value</em>}'.
+	 * Returns the meta object for the attribute '{@link org.openiaml.model.model.visual.Label#getDefaultValue <em>Default Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see org.openiaml.model.model.visual.Label#getValue()
+	 * @return the meta object for the attribute '<em>Default Value</em>'.
+	 * @see org.openiaml.model.model.visual.Label#getDefaultValue()
 	 * @see #getLabel()
 	 * @generated
 	 */
-	EAttribute getLabel_Value();
+	EAttribute getLabel_DefaultValue();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1111,12 +1111,12 @@ public interface VisualPackage extends EPackage {
 		EClass LABEL = eINSTANCE.getLabel();
 
 		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Default Value</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute LABEL__VALUE = eINSTANCE.getLabel_Value();
+		EAttribute LABEL__DEFAULT_VALUE = eINSTANCE.getLabel_DefaultValue();
 
 	}
 

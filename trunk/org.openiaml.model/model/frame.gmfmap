@@ -613,9 +613,9 @@
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
-            href="iaml.gmfgraph#LabelValue"/>
+            href="iaml.gmfgraph#LabelDefaultValue"/>
         <features
-            href="iaml.ecore#//visual/Label/value"/>
+            href="iaml.ecore#//visual/Label/defaultValue"/>
       </labelMappings>
       <labelMappings
           readOnly="true">

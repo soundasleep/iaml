@@ -1695,7 +1695,7 @@
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
-            name="LabelValueFigure"
+            name="LabelDefaultValueFigure"
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
@@ -2251,7 +2251,7 @@
       elementIcon="false"
       accessor="//@figures.0/@descriptors.61/@accessors.0"/>
   <labels
-      name="LabelValue"
+      name="LabelDefaultValue"
       figure="LabelFigure"
       elementIcon="false"
       accessor="//@figures.0/@descriptors.61/@accessors.1"/>

@@ -20,7 +20,7 @@ import org.openiaml.model.model.visual.VisualPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.openiaml.model.model.visual.impl.LabelImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.openiaml.model.model.visual.impl.LabelImpl#getDefaultValue <em>Default Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -28,24 +28,23 @@ import org.openiaml.model.model.visual.VisualPackage;
  */
 public class LabelImpl extends VisibleThingImpl implements Label {
 	/**
-	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * The default value of the '{@link #getDefaultValue() <em>Default Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
+	 * @see #getDefaultValue()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String VALUE_EDEFAULT = "";
+	protected static final String DEFAULT_VALUE_EDEFAULT = "";
 	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * The cached value of the '{@link #getDefaultValue() <em>Default Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
+	 * @see #getDefaultValue()
 	 * @generated
 	 * @ordered
 	 */
-	protected String value = VALUE_EDEFAULT;
-
+	protected String defaultValue = DEFAULT_VALUE_EDEFAULT;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -70,8 +69,8 @@ public class LabelImpl extends VisibleThingImpl implements Label {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getValue() {
-		return value;
+	public String getDefaultValue() {
+		return defaultValue;
 	}
 
 	/**
@@ -79,11 +78,11 @@ public class LabelImpl extends VisibleThingImpl implements Label {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setValue(String newValue) {
-		String oldValue = value;
-		value = newValue;
+	public void setDefaultValue(String newDefaultValue) {
+		String oldDefaultValue = defaultValue;
+		defaultValue = newDefaultValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VisualPackage.LABEL__VALUE, oldValue, value));
+			eNotify(new ENotificationImpl(this, Notification.SET, VisualPackage.LABEL__DEFAULT_VALUE, oldDefaultValue, defaultValue));
 	}
 
 	/**
@@ -94,8 +93,8 @@ public class LabelImpl extends VisibleThingImpl implements Label {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case VisualPackage.LABEL__VALUE:
-				return getValue();
+			case VisualPackage.LABEL__DEFAULT_VALUE:
+				return getDefaultValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -108,8 +107,8 @@ public class LabelImpl extends VisibleThingImpl implements Label {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case VisualPackage.LABEL__VALUE:
-				setValue((String)newValue);
+			case VisualPackage.LABEL__DEFAULT_VALUE:
+				setDefaultValue((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -123,8 +122,8 @@ public class LabelImpl extends VisibleThingImpl implements Label {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case VisualPackage.LABEL__VALUE:
-				setValue(VALUE_EDEFAULT);
+			case VisualPackage.LABEL__DEFAULT_VALUE:
+				setDefaultValue(DEFAULT_VALUE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -138,8 +137,8 @@ public class LabelImpl extends VisibleThingImpl implements Label {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case VisualPackage.LABEL__VALUE:
-				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+			case VisualPackage.LABEL__DEFAULT_VALUE:
+				return DEFAULT_VALUE_EDEFAULT == null ? defaultValue != null : !DEFAULT_VALUE_EDEFAULT.equals(defaultValue);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -154,8 +153,8 @@ public class LabelImpl extends VisibleThingImpl implements Label {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (value: ");
-		result.append(value);
+		result.append(" (defaultValue: ");
+		result.append(defaultValue);
 		result.append(')');
 		return result.toString();
 	}

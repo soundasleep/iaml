@@ -161,7 +161,7 @@
       <genClasses ecoreClass="iaml.ecore#//visual/InputTextField"/>
       <genClasses ecoreClass="iaml.ecore#//visual/Button"/>
       <genClasses ecoreClass="iaml.ecore#//visual/Label">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//visual/Label/value"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//visual/Label/defaultValue"/>
       </genClasses>
     </nestedGenPackages>
     <nestedGenPackages prefix="Wires" basePackage="org.openiaml.model.model" disposableProviderFactory="true"

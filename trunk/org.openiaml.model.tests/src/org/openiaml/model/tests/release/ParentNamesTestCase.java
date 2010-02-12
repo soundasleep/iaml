@@ -33,6 +33,7 @@ public class ParentNamesTestCase extends XmlTestCase {
 		"ApplicationElementProperty",
 		"InputForm",
 		"InputTextField",
+		"Label",
 		"CompositeCondition",
 		"Button",
 		"EntryGate",

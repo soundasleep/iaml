@@ -160,7 +160,8 @@ public class GmfToolTestCase extends XmlTestCase {
 				}
 				
 				// the icon should exist
-				assertFileExists(prefix, new File( "../" + smallIcon.getAttribute("bundle") + "/" + smallIcon.getAttribute("path") ));				
+				File smallIconFile = new File( "../" + smallIcon.getAttribute("bundle") + "/" + smallIcon.getAttribute("path"));
+				assertFileExists(prefix, smallIconFile);				
 
 				// has it got an icon defined?
 				String largePath = largeIcon.getAttribute("path");
@@ -172,8 +173,16 @@ public class GmfToolTestCase extends XmlTestCase {
 					changed = true;
 				}
 				
+				// if the icon doesn't exist, but it exists in the smallIcon, copy it over
+				File largeIconFile = new File( "../" + largeIcon.getAttribute("bundle") + "/" + largeIcon.getAttribute("path") );
+				if (!largeIconFile.exists()) {
+					assertFileExists(prefix, smallIconFile);	// sanity check
+					System.out.println("Copying " + smallIconFile + " to " + largeIconFile + "...");
+					copyFile(smallIconFile, largeIconFile);		// copy file
+				}
+				
 				// the icon should exist
-				assertFileExists(prefix, new File( "../" + largeIcon.getAttribute("bundle") + "/" + largeIcon.getAttribute("path") ));				
+				assertFileExists(prefix, largeIconFile);				
 
 			}
 			

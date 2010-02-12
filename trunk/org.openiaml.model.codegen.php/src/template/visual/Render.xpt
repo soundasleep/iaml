@@ -21,5 +21,9 @@
 	«EXPAND Button::renderButton(currentFrame) FOR this-»
 «ENDDEFINE»
 
+«DEFINE renderVisual(model::visual::Frame currentFrame) FOR model::visual::Label-»
+	«EXPAND Label::renderLabel(currentFrame) FOR this-»
+«ENDDEFINE»
+
 «DEFINE exception FOR Object»
 «ENDDEFINE»

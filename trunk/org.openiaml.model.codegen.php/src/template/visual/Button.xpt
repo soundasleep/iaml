@@ -7,51 +7,11 @@
 
 /* currently, a "Button" == a submit button. */
 «DEFINE renderButton(model::visual::Frame currentFrame) FOR model::visual::Button-»
-	<input type="submit" id="button_«safeNameString(id)-»" value="«buttonName()»" 
-			onChange="return onChange_«safeNameString(id)»(this);"
-			onClick="return onClick_«safeNameString(id)»(this);"
+	<input type="submit" id="button_«safeNameString(id)-»" value="«buttonName()»"
+		«EXPAND EventHandlers::getInlineTagJavascript(currentFrame)» 
 		>
-	
-	<script language="Javascript" type="application/javascript">
-	/* <![CDATA[ */
-		function onChange_«safeNameString(id)»(obj) {
-			// expand all onChanges
-			«EXPAND template::events::EventCall::callEvent(false, currentFrame) FOREACH eventTriggers.select(e | e.name == "click")-»
-			
-			return false;
-		}
-		
-		function onClick_«safeNameString(id)»(obj) {
-			// expand all onClicks
-			«EXPAND template::events::EventCall::callEvent(false, currentFrame) FOREACH eventTriggers.select(e | e.name == "click" || e.name == "onClick")-»
 
-			// implicit operations
-			«EXPAND implicitButtonClickEvents(currentFrame) FOREACH outEdges-»
-
-			return false;
-		}
-	/* ]]> */
-	</script>
-«ENDDEFINE»
-
-/**
- * If buttons have a NavigateWire or RunInstanceWire called onClick,
- * execute them as if there was an EventTrigger that existed.
- */
-«DEFINE implicitButtonClickEvents(model::visual::Frame currentFrame) FOR model::WireEdge»
-«ENDDEFINE»
-
-«DEFINE implicitButtonClickEvents(model::visual::Frame currentFrame) FOR model::wires::NavigateWire»
-	«IF (name == "click" || name == "onClick")»
-		/* expanding implicit trigger (navigate) */
-		«EXPAND template::operations::OperationCall::callOperation(false, false, currentFrame) FOR this»
-	«ENDIF» 
-«ENDDEFINE»
-«DEFINE implicitButtonClickEvents(model::visual::Frame currentFrame) FOR model::wires::RunInstanceWire»
-	«IF (name == "click" || name == "onClick")»
-		/* expanding implicit trigger (run) */
-		«EXPAND template::operations::OperationCall::callOperation(false, false, currentFrame) FOR this»
-	«ENDIF» 
+	«EXPAND EventHandlers::getScriptDefinition(currentFrame)» 
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

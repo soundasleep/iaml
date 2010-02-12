@@ -28,3 +28,29 @@ Allows for inline arithmetic expressions.
 All [ApplicationElementProperty]s now also create a condition called "X is set" in the container for the property. This is used in [SyncWires] to ensure that init/access does not overwrite the default (or existing) value if there is no value to replace it with. This is powered by a new [IamlDecisionConditions decision condition] "is set?"
 
 Added documentation on [IamlDecisionConditions].
+
+=Model 0.4.2=
+
+*Released [http://journals.jevon.org/users/jevon-phd/entry/19798 February 2010]*
+
+This minor release adds the concept of Entry Gates and Exit Gates, preventing access inside or outside a session without first co-operating with a given requirement (currently only other pages). [url=http://iaml.googlecode.com/svn-history/r1497/trunk/examples/GateDisclaimer/GateDisclaimer-4.html]This example[/url] demonstrates using an Entry Gate to prevent viewing pages until a disclaimer page has been viewed; and [url=http://iaml.googlecode.com/svn-history/r1497/trunk/examples/ExitGateAdSimple/ExitGateAdSimple-1.html]this example[/url] illustrates an advertisement being displayed before the user can exit out of the session.
+
+Conditional modelling is now also generated into code the same way as operational modelling in [#Model_0.4.1 0.4.1].
+
+==New Elements==
+
+===EntryGate===
+
+Restricts access within a [http://openiaml.org/model/Scope Scope] until the incoming condition has been satisfied.
+
+  _See [http://openiaml.org/model/EntryGate]_
+
+===ExitGate===
+
+Restricts access outside of a currently-visited [http://openiaml.org/model/Scope Scope] until the incoming condition has been satisfied.
+
+  _See [http://openiaml.org/model/ExitGate]_
+
+==Changes==
+
+*Pages* have been renamed into [http://openiaml.org/model/Frame Frames]. In the future, this will allow Frames to recursively contain other Frames, which may be replaced using particular [http://openiaml.org/model/WireEdge wires] (the exact specifics have not been decided yet).

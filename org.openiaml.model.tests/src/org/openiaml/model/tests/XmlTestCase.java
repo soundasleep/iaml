@@ -8,6 +8,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -198,8 +199,43 @@ public class XmlTestCase extends TestCase implements IXpath {
 	}
 	
 	/**
-	 * Read in a file into a string.
+	 * Copy a file from the source to the target. 
+	 * Ideal for files containing bytes.
 	 * 
+	 * @see #readFile(File) for reading character files
+	 * @param source source file
+	 * @param target target file
+	 * @throws IOException if the target file exists, or another IO exception occurs
+	 */
+	public static void copyFile(File source, File target) throws IOException {
+		if (target.exists())
+			throw new IOException("File '" + target + "' already exists.");
+		
+		FileInputStream fr = new FileInputStream(source);
+		FileOutputStream fw = new FileOutputStream(target);
+		
+		int bufSize = 1024;
+		byte[] buf = new byte[bufSize];
+		
+		while (true) {
+			int read = fr.read(buf);
+			if (read == -1)
+				break;
+			
+			fw.write(buf, 0, read);
+		}
+		
+		fr.close();
+		fw.close();
+	
+	}
+	
+	/**
+	 * Read in a file into a string. This should not be used
+	 * if the file contains character data; use
+	 * {@link #copyFile(File, File)} instead.
+	 * 
+	 * @see #copyFile(File, File) for copying bytes of data
 	 * @throws IOException if an IO exception occurs
 	 */
 	public static String readFile(File sourceFile) throws IOException {

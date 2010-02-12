@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.126c0191fac.3f">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
+    <conditions xsi:type="iaml:CompositeCondition" outEdges="wires.126c01921cf.39" id="model.126c0191fac.4f" name="allow sync?">
+      <conditions xsi:type="iaml.operations:DecisionCondition" id="operations.126c01921cf.7" name="true?" outExecutions="model.126c0191fac.a4 model.126c0191fac.a5" inExecutions="model.126c0191fac.a2" inFlows="model.126c0191fac.a6"/>
+      <wires xsi:type="iaml.wires:ConditionWire" id="wires.126c01921cf.39" from="model.126c0191fac.4f" to="wires.126c01921cf.1a" name="conditional"/>
+      <nodes xsi:type="iaml.operations:StartNode" id="operations.126c01921cf.1" outExecutions="model.126c0191fac.a2"/>
+      <nodes xsi:type="iaml.operations:FinishNode" id="operations.126c01921cf.3" inExecutions="model.126c0191fac.a5"/>
+      <nodes xsi:type="iaml.operations:CancelNode" id="operations.126c01921cf.5" inExecutions="model.126c0191fac.a4" exceptionText="don't allow sync"/>
+      <dataEdges id="model.126c0191fac.a6" from="model.126c0191fac.5d" to="operations.126c01921cf.7"/>
+      <executionEdges id="model.126c0191fac.a2" from="operations.126c01921cf.1" to="operations.126c01921cf.7"/>
+      <executionEdges id="model.126c0191fac.a4" name="n" from="operations.126c01921cf.7" to="operations.126c01921cf.5"/>
+      <executionEdges id="model.126c0191fac.a5" name="y" from="operations.126c01921cf.7" to="operations.126c01921cf.3"/>
+    </conditions>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.126c01921cf.bf" name="Allow Sync?">
+      <properties id="model.126c0191fac.5d" name="fieldValue" outFlows="model.126c0191fac.a6" defaultValue="true"/>
+    </children>
+    <children xsi:type="iaml.visual:Label" inEdges="wires.126c01921cf.1a" id="visual.126c01921cf.c0" name="Label"/>
+    <children xsi:type="iaml.visual:InputTextField" outEdges="wires.126c01921cf.1a" id="visual.126c01921cf.c1" name="Field">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.126c01921cf.1a" from="visual.126c01921cf.c1" to="visual.126c01921cf.c0" name="sync" inEdges="wires.126c01921cf.39"/>
+    </children>
+  </scopes>
+</iaml:InternetApplication>

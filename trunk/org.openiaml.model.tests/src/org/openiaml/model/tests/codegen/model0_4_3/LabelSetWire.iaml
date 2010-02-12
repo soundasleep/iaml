@@ -2,7 +2,7 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.126c0191fac.1e">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <children xsi:type="iaml.visual:InputTextField" inEdges="wires.126c01921cf.8" id="visual.126c01921cf.35" name="Target Text Field"/>
-    <children xsi:type="iaml.visual:Label" outEdges="wires.126c01921cf.8" id="visual.126c01921cf.36" name="Source Label" value="hello, world!">
+    <children xsi:type="iaml.visual:Label" outEdges="wires.126c01921cf.8" id="visual.126c01921cf.36" name="Source Label" defaultValue="hello, world!">
       <wires xsi:type="iaml.wires:SetWire" id="wires.126c01921cf.8" from="visual.126c01921cf.36" to="visual.126c01921cf.35" name="set"/>
     </children>
   </scopes>

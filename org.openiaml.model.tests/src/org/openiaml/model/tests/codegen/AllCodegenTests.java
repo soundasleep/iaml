@@ -9,6 +9,7 @@ import org.openiaml.model.tests.codegen.model0_3.AllModel0_3CodegenTests;
 import org.openiaml.model.tests.codegen.model0_4.AllModel0_4CodegenTests;
 import org.openiaml.model.tests.codegen.model0_4_1.AllModel0_4_1CodegenTests;
 import org.openiaml.model.tests.codegen.model0_4_2.AllModel0_4_2CodegenTests;
+import org.openiaml.model.tests.codegen.model0_4_3.AllModel0_4_3CodegenTests;
 import org.openiaml.model.tests.codegen.oaw.AllOawTests;
 import org.openiaml.model.tests.codegen.runtime.client.AllClientRuntimeTests;
 import org.openiaml.model.tests.codegen.runtime.server.AllServerRuntimeTests;
@@ -48,6 +49,7 @@ public class AllCodegenTests {
 		suite.addTest(AllModel0_4CodegenTests.suite());
 		suite.addTest(AllModel0_4_1CodegenTests.suite());
 		suite.addTest(AllModel0_4_2CodegenTests.suite());
+		suite.addTest(AllModel0_4_3CodegenTests.suite());
 		
 		// client-side runtime library tests
 		suite.addTest(AllClientRuntimeTests.suite());

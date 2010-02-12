@@ -5,7 +5,7 @@ import junit.framework.TestSuite;
 
 
 /**
- * Code generation tests: model version 0.4.1
+ * Code generation tests: model version 0.4.2
  * 
  * @author jmwright
  *

@@ -35,6 +35,13 @@ escapeString(String s) :
 /* TODO not a complete encoding, misses \r\n\t\v\f\[0-7]{1,3}\x[0-9A-Fa-f]{1,2} and perhaps unicode too */
 escapePhpString(String s):
 	s.replaceAll("[\\\\]", "\\\\").replaceAll("[\"]", "\\\"").replaceAll("[$]", "\\$");
+
+// TODO this should be used everywhere
+/**
+ * Escape an arbitrary unsafe string so it may be used within HTML output.
+ */
+escapeHtmlString(String s) :
+	s.replaceAll("&", "&amp;").replaceAll("\"", "&quot;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 	
 operationName(model::WireEdgeDestination this) : 
 	throwException("Invalid operation: " + this);

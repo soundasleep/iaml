@@ -1,0 +1,22 @@
+«IMPORT iaml»
+
+/**
+ * Visually rendering a label.
+ */
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE renderLabel(model::visual::Frame currentFrame) FOR model::visual::Label-»
+	<label
+		id="label_«safeNameString(id)-»" 
+		«EXPAND EventHandlers::getInlineTagJavascript(currentFrame)»
+		> 
+	«IF defaultValue != null»
+		«escapeHtmlString(defaultValue)»
+	«ENDIF»
+	</label>
+	
+	«EXPAND EventHandlers::getScriptDefinition(currentFrame)» 
+«ENDDEFINE»
+
+«DEFINE exception FOR Object»
+«ENDDEFINE»

@@ -20,7 +20,7 @@ import org.openiaml.model.model.VisibleThing;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.openiaml.model.model.visual.Label#getValue <em>Value</em>}</li>
+ *   <li>{@link org.openiaml.model.model.visual.Label#getDefaultValue <em>Default Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -31,29 +31,29 @@ import org.openiaml.model.model.VisibleThing;
 public interface Label extends VisibleThing {
 
 	/**
-	 * Returns the value of the '<em><b>Value</b></em>' attribute.
+	 * Returns the value of the '<em><b>Default Value</b></em>' attribute.
 	 * The default value is <code>""</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Value</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Default Value</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value</em>' attribute.
-	 * @see #setValue(String)
-	 * @see org.openiaml.model.model.visual.VisualPackage#getLabel_Value()
+	 * @return the value of the '<em>Default Value</em>' attribute.
+	 * @see #setDefaultValue(String)
+	 * @see org.openiaml.model.model.visual.VisualPackage#getLabel_DefaultValue()
 	 * @model default=""
 	 * @generated
 	 */
-	String getValue();
+	String getDefaultValue();
 
 	/**
-	 * Sets the value of the '{@link org.openiaml.model.model.visual.Label#getValue <em>Value</em>}' attribute.
+	 * Sets the value of the '{@link org.openiaml.model.model.visual.Label#getDefaultValue <em>Default Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' attribute.
-	 * @see #getValue()
+	 * @param value the new value of the '<em>Default Value</em>' attribute.
+	 * @see #getDefaultValue()
 	 * @generated
 	 */
-	void setValue(String value);
+	void setDefaultValue(String value);
 } // Label

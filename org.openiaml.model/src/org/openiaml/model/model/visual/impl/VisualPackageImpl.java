@@ -227,7 +227,7 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getLabel_Value() {
+	public EAttribute getLabel_DefaultValue() {
 		return (EAttribute)labelEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -270,7 +270,7 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 		buttonEClass = createEClass(BUTTON);
 
 		labelEClass = createEClass(LABEL);
-		createEAttribute(labelEClass, LABEL__VALUE);
+		createEAttribute(labelEClass, LABEL__DEFAULT_VALUE);
 	}
 
 	/**
@@ -322,7 +322,7 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 		initEClass(buttonEClass, Button.class, "Button", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(labelEClass, Label.class, "Label", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getLabel_Value(), ecorePackage.getEString(), "value", "", 0, 1, Label.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLabel_DefaultValue(), ecorePackage.getEString(), "defaultValue", "", 0, 1, Label.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create annotations
 		// http://openiaml.org/comment

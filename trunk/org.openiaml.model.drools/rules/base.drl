@@ -58,6 +58,23 @@ rule "Create field value for input text field"
 end
 
 /**
+ * @inference Label,ApplicationElementProperty A {@model Label} 
+ * 		contains a {@model ApplicationElementProperty property} named 'fieldValue'.
+ */
+rule "Create field value for label"
+	when
+		f : Label( overridden == false )
+		not (ApplicationElementProperty( eContainer == f, name=="fieldValue" ))
+			
+	then
+		ApplicationElementProperty fieldValue = handler.generatedApplicationElementProperty(f, f);
+		handler.setName(fieldValue, "fieldValue");
+		// TODO do we need to set default to Label.defaultValue?
+		queue.add(fieldValue, drools);
+		
+end
+
+/**
  * @inference DomainAttribute,ApplicationElementProperty A {@model DomainAttribute} 
  *		contains a {@model ApplicationElementProperty property} named 'fieldValue'.
  */

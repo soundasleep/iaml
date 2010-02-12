@@ -81,10 +81,10 @@
 				«IF model::DomainAttributeInstance.isInstance(eContainer)»
 					«REM»from a DomainAttributeInstance«ENDREM»
 					«EXPAND RemoteParameter::remoteValue(php, false, wire, this) FOR this.eContainer-»
-				«ELSEIF onCurrentFrame(wire.from, this)» 
-					document.getElementById('«safeName(eContainer)»').value
+				«ELSEIF onCurrentFrame(wire.from, this)»
+					«EXPAND dataSourceOnFrame FOR eContainer»
 				«ELSEIF onCurrentFrame(currentFrame, this)» 
-					document.getElementById('«safeName(eContainer)»').value
+					«EXPAND dataSourceOnFrame FOR eContainer»
 				«ELSEIF model::visual::InputTextField.isInstance(eContainer)»
 					«REM»this is a text field stored outside of the current frame«ENDREM»
 					/* if you _don't_ want an operation to use a cached value of a remote Input Text Field, place the operation _outside_ of its containing frame. */
@@ -107,6 +107,20 @@
 			«ENDIF»
 		«ENDIF»
 	«ENDIF»
+«ENDDEFINE»
+
+/** Loading a current value from the currently loaded frame (i.e. client-side) */
+«DEFINE dataSourceOnFrame FOR emf::EObject»
+	«EXPAND exception FOR throwException("Unknown data source on current frame: " + this)»
+«ENDDEFINE»
+«DEFINE dataSourceOnFrame FOR model::visual::InputTextField»
+	document.getElementById('«safeName()»').value
+«ENDDEFINE»
+«DEFINE dataSourceOnFrame FOR model::visual::Button»
+	document.getElementById('«safeName()»').value
+«ENDDEFINE»
+«DEFINE dataSourceOnFrame FOR model::visual::Label»
+	document.getElementById('«safeName()»').innerHTML
 «ENDDEFINE»
 
 /**
@@ -186,14 +200,9 @@
 			«IF model::DomainAttributeInstance.isInstance(eContainer)»
 				«REM»from a DomainAttributeInstance«ENDREM»
 				«EXPAND RemoteParameter::remoteValueIsSet(php, this) FOR this.eContainer-»
-			«REM»
-				if it's on the current frame - currently implemented
-			«ELSEIF onCurrentFrame(currentFrame, this)» 
-				document.getElementById('«safeName(eContainer)»').value
-			«ENDREM»
-			«ELSEIF model::visual::InputTextField.isInstance(eContainer)»
+			«ELSEIF model::visual::InputTextField.isInstance(eContainer) || model::visual::Label.isInstance(eContainer)»
 				«REM»this is a text field stored outside of the current frame«ENDREM»
-				/* if you _don't_ want an operation to use a cached value of a remote Input Text Field, place the operation _outside_ of its containing frame. */
+				/* if you _don't_ want an operation to use a cached value of a remote Input Text Field/Label, place the operation _outside_ of its containing frame. */
 				<?php echo («EXPAND isSetParameter(true, currentFrame) FOR this») ? "true" : "false"; ?>
 			«ELSE»
 				«EXPAND RemoteParameter::remoteValueIsSet(php, this) FOR this.eContainer-»

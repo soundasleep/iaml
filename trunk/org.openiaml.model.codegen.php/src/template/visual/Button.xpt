@@ -8,10 +8,12 @@
 /* currently, a "Button" == a submit button. */
 «DEFINE renderButton(model::visual::Frame currentFrame) FOR model::visual::Button-»
 	<input type="submit" id="button_«safeNameString(id)-»" value="«buttonName()»"
-		«EXPAND EventHandlers::getInlineTagJavascript(currentFrame)» 
+		«EXPAND EventHandlers::getInlineClickJavascript(currentFrame)» 
+		«EXPAND EventHandlers::getInlineChangeJavascript(currentFrame)» 
 		>
 
-	«EXPAND EventHandlers::getScriptDefinition(currentFrame)» 
+	«EXPAND EventHandlers::getScriptClickDefinition(currentFrame)» 
+	«EXPAND EventHandlers::getScriptChangeDefinition(currentFrame)» 
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

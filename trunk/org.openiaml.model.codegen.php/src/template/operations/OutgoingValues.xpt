@@ -37,7 +37,7 @@
 
 /* we have a property to set [in Javascript] */
 «DEFINE outgoingValue(model::NamedElement container) FOR model::ApplicationElementProperty»
-	var value = document.getElementById('«safeName(container)-»').value;
+	var value = «EXPAND Parameters::dataSourceOnFrame FOR container»;
 	«EXPAND outgoingValueTarget(false, "value")»
 «ENDDEFINE»
 

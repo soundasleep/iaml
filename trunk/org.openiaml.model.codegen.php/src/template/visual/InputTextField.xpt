@@ -12,7 +12,7 @@
 		
 		<input type="text" id="«safeNameString(id)»" name="«safeNameString(id)»"
 			onChange="return onChange_«safeNameString(id)»(this);"
-			onClick="return onClick_«safeNameString(id)»(this);"
+			«EXPAND EventHandlers::getInlineClickJavascript(currentFrame)»
 
 			«REM»any initial values?«ENDREM»
 			«EXPAND getInitialValuesSetWire(currentFrame) FOREACH inEdges.typeSelect(model::wires::SetWire)» 			 
@@ -48,19 +48,14 @@
 				return false;
 			}
 			
-			function onClick_«safeNameString(id)»(obj) {
-				// expand all onClicks
-				«EXPAND template::events::EventCall::callEvent(false, currentFrame) FOREACH eventTriggers.select(e | e.name == "click" || e.name == "onClick")-»
-							
-				return false;
-			}
-			
 			«REM»any on-access events?«ENDREM»
 			addOnloadFunction( function() {
 				«EXPAND template::events::EventCall::callEvent(false, currentFrame) FOREACH eventTriggers.select(e | e.name == "access")-»				
 			} );
 		/* ]]> */
 		</script>
+
+		«EXPAND EventHandlers::getScriptClickDefinition(currentFrame)»
 	</label>
 	</div>
 «ENDDEFINE»

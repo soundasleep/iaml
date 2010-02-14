@@ -85,7 +85,7 @@
 					«EXPAND dataSourceOnFrame FOR eContainer»
 				«ELSEIF onCurrentFrame(currentFrame, this)» 
 					«EXPAND dataSourceOnFrame FOR eContainer»
-				«ELSEIF model::visual::InputTextField.isInstance(eContainer)»
+				«ELSEIF model::visual::InputTextField.isInstance(eContainer) || model::visual::Label.isInstance(eContainer)»
 					«REM»this is a text field stored outside of the current frame«ENDREM»
 					/* if you _don't_ want an operation to use a cached value of a remote Input Text Field, place the operation _outside_ of its containing frame. */
 					<?php if («EXPAND isSetParameter(true, currentFrame) FOR this») { ?>

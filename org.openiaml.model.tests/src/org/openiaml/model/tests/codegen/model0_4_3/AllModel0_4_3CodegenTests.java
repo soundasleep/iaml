@@ -22,6 +22,7 @@ public class AllModel0_4_3CodegenTests {
 		
 		suite.addTestSuite(LabelSimple.class);
 		suite.addTestSuite(LabelSyncWire.class);
+		suite.addTestSuite(LabelSyncServer.class);
 
 		return suite;
 	}

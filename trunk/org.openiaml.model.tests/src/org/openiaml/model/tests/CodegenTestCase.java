@@ -304,6 +304,17 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	}
 	
 	/**
+	 * Get the root folder of the generated output code. This is the
+	 * base href for the entire navigation.
+	 * 
+	 * @see #gotoSitemapThenPage(IFile, String, String, String)
+	 * @return
+	 */
+	public IFile getOutputRoot() {
+		return getProject().getFile("output/");
+	}
+	
+	/**
 	 * Begin at the sitemap page, and then click on a particular page title.
 	 * This method checks to see the destination page title is the same as
 	 * expectedPageTitle.
@@ -388,7 +399,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	/**
 	 * Go to the sitemap page, and then click on a particular page title.
 	 * 
-	 * If you want the client to be reset (e.g. delete cookies, sessions),
+	 * <p>If you want the client to be reset (e.g. delete cookies, sessions),
 	 * use {@link #beginAtSitemapThenPage(IFile, String)}.
 	 * 
 	 * @param sitemap the sitemap url to start from
@@ -430,6 +441,65 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		}
 
 		logTimed("web: gotoSitemapThenPage complete");
+	}
+
+	/**
+	 * Go to the sitemap page, and then click on a particular page title.
+	 * 
+	 * <p>If you want the client to be reset (e.g. delete cookies, sessions),
+	 * use {@link #beginAtSitemapThenPage(IFile, String)}.
+	 * 
+	 * @param sitemap the sitemap url to start from
+	 * @param pageText the page text link to click
+	 * @param expected the expected page title on the new page, if different from the page text link
+	 * @param query additional query parameters to append to the URL, e.g. "id=123". may be null. 
+	 */ 
+	protected void gotoSitemapThenPage(IFile sitemap, String pageText, String expectedTitle, String query) throws Exception {
+		logTimed("web: gotoSitemapThenPage query");
+	
+		// prepare the query
+		if (query == null || query.isEmpty()) {
+			query = "";
+		} else if (query.startsWith("?")) {
+			// do nothing; already starts with '?'
+		} else {
+			query = "?" + query;
+		}
+		
+		// we can't goto the sitemap if we haven't begun the session yet
+		// (sanity check)
+		if (!hasBegun)
+			throw new RuntimeException("You cannot gotoSitemap() for a session that hasn't started yet. Use beginAt or beginAtSitemapThenPage instead.");
+
+		waitForAjax();
+	
+		gotoPage(sitemap.getProjectRelativePath().toString());
+		hasLoaded = true;		// we have now loaded a page
+		assertTitleMatch("sitemap");
+		
+		// make sure the link exists, first
+		assertLinkPresentWithText(pageText);
+		
+		// now find the link, and get where it goes to
+		IElement element = getElementByXPath("//a[normalize-space(text()) = normalize-space('" + pageText + "')]");		
+		String href = element.getAttribute("href");
+		assertNotNull(href);
+		
+		// construct the url
+		String url = getOutputRoot().getProjectRelativePath().toString()
+		 	+ "/"
+			+ href
+			+ query;
+		
+		// now go there
+		gotoPage(url);
+
+		// check to make sure we didn't run out of execution time
+		if (getPageSource().matches("Maximum execution time of [0-9]+ seconds exceeded in")) {
+			throw new PhpExecutionTimeException("Maximum execution time exceeded in PHP script: '" + pageText + "'");
+		}
+
+		logTimed("web: gotoSitemapThenPage query complete");
 	}
 
 	/**
@@ -770,6 +840,30 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		}
 		logTimed("web: clicking link with text complete");
 	}
+
+	/**
+	 * We wrap the method to try and catch runtime exceptions
+	 * from the PHP server-side code.
+	 */
+	@Override
+	public void gotoPage(String url) {
+		try {
+			super.gotoPage(url);
+		} catch (FailingHttpStatusCodeException f) {
+			// if we failed at exception.php, we can try and read out the error
+			if (PhpRuntimeExceptionException.canHandle(f)) {
+				throw new PhpRuntimeExceptionException(f);
+			}
+			throw f;
+		} catch (RuntimeException e) {
+			// perhaps this exception was caused by PHP running
+			// out of execution time?
+			if (getPageSource().matches("Maximum execution time of [0-9]+ seconds exceeded in")) {
+				throw new PhpExecutionTimeException("Maximum execution time exceeded in PHP script: '" + url + "'", e);
+			}
+			throw e; 
+		}
+	}
 	
 	/**
 	 * Throw a RuntimeException with the various information from the
@@ -848,5 +942,23 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		assertFalse("Unexpectedly found a label with text '" + text + "'", failed);
 	}
 	
+	/**
+	 * Assert that a label exists with the given text, but does
+	 * not contain another text.
+	 * 
+	 * @param text the text to contain
+	 * @param notText the text to <em>not</em> contain
+	 */
+	public void assertLabelTextPresent(String text, String notText) {
+		assertFalse(text.equals(notText));	// sanity check
+		assertFalse("Cannot assert the presence of an empty label", text.isEmpty());
+		
+		IElement match = getElementByXPath("//label[" + getContainsTextXPath(text) + " and not(" + getContainsTextXPath(notText) + ")]");
+		assertNotNull(match);
+		String textContent = match.getTextContent();
+		// normalise
+		textContent = textContent.replaceAll("[\\s]+", " ").trim();
+		assertEquals(text, textContent);
+	}
 	
 }

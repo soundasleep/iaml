@@ -60,6 +60,7 @@ import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
+import org.openiaml.model.model.visual.Label;
 import org.openiaml.model.model.visual.VisualPackage;
 import org.openiaml.model.model.wires.ConditionWire;
 import org.openiaml.model.model.wires.ExtendsWire;
@@ -408,6 +409,24 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 
 	public InputTextField generatedInputTextField(GeneratesElements by, Frame container) throws InferenceException {
 		InputTextField field = (InputTextField) createElement( container, VisualPackage.eINSTANCE.getInputTextField(), VisualPackage.eINSTANCE.getFrame_Children() );
+		setGeneratedBy(field, by);
+		return field;
+	}
+	
+	public Label generatedLabel(GeneratesElements by, ApplicationElementContainer container) throws InferenceException {
+		Label field = (Label) createElement( container, VisualPackage.eINSTANCE.getLabel(), ModelPackage.eINSTANCE.getApplicationElementContainer_Children() );
+		setGeneratedBy(field, by);
+		return field;
+	}
+
+	public Label generatedLabel(GeneratesElements by, VisibleThing container) throws InferenceException {
+		Label field = (Label) createElement( container, VisualPackage.eINSTANCE.getLabel(), ModelPackage.eINSTANCE.getVisibleThing_Children() );
+		setGeneratedBy(field, by);
+		return field;
+	}
+
+	public Label generatedLabel(GeneratesElements by, Frame container) throws InferenceException {
+		Label field = (Label) createElement( container, VisualPackage.eINSTANCE.getLabel(), VisualPackage.eINSTANCE.getFrame_Children() );
 		setGeneratedBy(field, by);
 		return field;
 	}

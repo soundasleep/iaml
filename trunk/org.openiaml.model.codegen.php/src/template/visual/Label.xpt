@@ -31,7 +31,7 @@
 	«REM»Label.property[fieldValue] overrides Label.defaultValue«ENDREM»
 	«EXPAND staticInitialValue(currentFrame) FOREACH properties.select( e | e.name == "fieldValue")»			
 
-	«IF defaultValue != null»
+	«IF defaultValue != null && defaultValue.length > 0»
 		<?php 
 		// default value
 		if (!$label_set) { ?>
@@ -108,13 +108,13 @@
 «DEFINE staticInitialValue(model::visual::Frame currentFrame) FOR model::DomainAttributeInstance»
 	«REM»from a domain attribute instance.«ENDREM»
 	<?php
-	if (has_attribute_instance_«safeName()»()) {
+	«REM»if (has_attribute_instance_«safeName()»()) {«ENDREM»
 		$value = get_attribute_instance_«safeName()»();
 		if (!$label_set) {
 			echo htmlspecialchars($value);
 			$label_set = true;
 		}
-	}		
+	«REM»}«ENDREM»		
 	?>
 «ENDDEFINE»
 

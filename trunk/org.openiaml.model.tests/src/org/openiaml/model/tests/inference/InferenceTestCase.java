@@ -36,6 +36,7 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.PrimitiveOperation;
+import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.VisibleThing;
@@ -62,6 +63,7 @@ import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
+import org.openiaml.model.model.visual.Label;
 import org.openiaml.model.model.wires.ConditionWire;
 import org.openiaml.model.model.wires.ExtendsWire;
 import org.openiaml.model.model.wires.NavigateWire;
@@ -469,6 +471,46 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 
 	/**
 	 * Assert that the given element contains the given
+	 * Label.
+	 *
+	 * @return The element found
+	 */
+	public Label assertHasLabel(Frame element, String string) throws JaxenException {
+		return (Label) queryOne(element, "iaml.visual:children[iaml:name='" + string + "']");
+	}
+
+	/**
+	 * Assert that the given element contains the given
+	 * Label.
+	 *
+	 * @return The element found
+	 */
+	public Label assertHasLabel(VisibleThing element, String string) throws JaxenException {
+		return (Label) queryOne(element, "iaml:children[iaml:name='" + string + "']");
+	}
+
+	/**
+	 * Assert that the given element does not contains the given
+	 * Label.
+	 *
+	 * @return The element found
+	 */
+	public void assertHasNoLabel(Frame element, String string) throws JaxenException {
+		assertHasNone(element, "iaml.visual:children[iaml:name='" + string + "']");
+	}
+
+	/**
+	 * Assert that the given element does not contains the given
+	 * Label.
+	 *
+	 * @return The element found
+	 */
+	public void assertHasNoLabel(VisibleThing element, String string) throws JaxenException {
+		assertHasNone(element, "iaml:children[iaml:name='" + string + "']");
+	}
+
+	/**
+	 * Assert that the given element contains the given
 	 * InputForm.
 	 *
 	 * @return The element found
@@ -782,6 +824,16 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	}
 	
 	/**
+	 * Assert that the given element contains the given
+	 * QueryParameter.
+	 *
+	 * @return The element found
+	 */
+	public QueryParameter assertHasQueryParameter(Frame element, String string) throws JaxenException {
+		return (QueryParameter) queryOne(element, "iaml:parameters[iaml:name='" + string + "']");	
+	}
+	
+	/**
 	 * Assert there exists only one bidirectional SyncWire between
 	 * the given elements.
 	 *
@@ -806,6 +858,16 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		assertEquals(1, x.size());
 		SyncWire sw = (SyncWire) x.iterator().next();
 		return sw;
+	}
+	
+	/**
+	 * Assert there exists only one unidirectional SetWire between
+	 * the given elements, with any name.
+	 *
+	 * @return The element found
+	 */
+	public SetWire assertHasSetWire(EObject container, WireEdgesSource from, WireEdgeDestination to) throws JaxenException {
+		return (SetWire) assertHasWireFromTo(container, from, to, SetWire.class);
 	}
 	
 	/**
@@ -877,11 +939,19 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	/**
 	 * Assert <em>no</em> unidirectional SetWire exists between
 	 * the given elements.
-	 *
-	 * @return The element found
 	 */
 	public void assertHasNoSetWire(EObject container, WireEdgesSource from, WireEdgeDestination to) throws JaxenException {
 		assertHasNoWiresFromTo(container, from, to, SetWire.class);
+	}
+	
+	
+	/**
+	 * Assert <em>no</em> bidirectional SyncWire exists between
+	 * the given elements.
+	 */
+	public void assertHasNoSyncWire(EObject container, WireEdgesSource from, WireEdgeDestination to) throws JaxenException {
+		Set<WireEdge> wires = getWiresBidirectional(container, from, to, SyncWire.class);
+		assertEquals("Unexpected SyncWires found: " + wires, 0, wires.size());
 	}
 	
 	/**

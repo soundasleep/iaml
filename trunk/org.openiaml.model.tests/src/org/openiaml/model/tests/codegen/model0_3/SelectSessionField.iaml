@@ -17,7 +17,7 @@
         <properties id="model.12109c6242e.33d" name="fieldValue" defaultValue="session@jevon.org"/>
       </children>
       <children xsi:type="iaml.visual:InputTextField" id="visual.12109c6248b.135" name="edit name" inEdges="wires.12109c6249b.b8"/>
-      <elements xsi:type="iaml:DomainAttributeInstance" id="model.12109c6242e.304" name="name" outEdges="wires.12109c6249b.b8" inEdges="wires.12109c6249b.b9">
+      <elements xsi:type="iaml:DomainAttributeInstance" id="model.12109c6242e.304" name="name" outEdges="wires.12109c6249b.b8" inEdges="wires.12109c6249b.b9" autosave="true">
         <wires xsi:type="iaml.wires:SyncWire" id="wires.12109c6249b.b8" from="model.12109c6242e.304" to="visual.12109c6248b.135" name="sync"/>
       </elements>
     </scopes>

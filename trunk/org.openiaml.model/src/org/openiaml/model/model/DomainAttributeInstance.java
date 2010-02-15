@@ -31,7 +31,7 @@ public interface DomainAttributeInstance extends ApplicationElement {
 
 	/**
 	 * Returns the value of the '<em><b>Autosave</b></em>' attribute.
-	 * The default value is <code>"true"</code>.
+	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Autosave</em>' attribute isn't clear,
@@ -41,8 +41,8 @@ public interface DomainAttributeInstance extends ApplicationElement {
 	 * @return the value of the '<em>Autosave</em>' attribute.
 	 * @see #setAutosave(boolean)
 	 * @see org.openiaml.model.model.ModelPackage#getDomainAttributeInstance_Autosave()
-	 * @model default="true"
-	 *        annotation="http://openiaml.org/comment added='0.3'"
+	 * @model default="false"
+	 *        annotation="http://openiaml.org/comment added='0.3' changed='0.4.3 to default \'false\' instead of \'true\''"
 	 * @generated
 	 */
 	boolean isAutosave();

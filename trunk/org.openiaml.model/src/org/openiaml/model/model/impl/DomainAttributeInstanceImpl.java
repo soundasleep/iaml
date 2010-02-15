@@ -34,7 +34,7 @@ public class DomainAttributeInstanceImpl extends ApplicationElementImpl implemen
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean AUTOSAVE_EDEFAULT = true;
+	protected static final boolean AUTOSAVE_EDEFAULT = false;
 	/**
 	 * The cached value of the '{@link #isAutosave() <em>Autosave</em>}' attribute.
 	 * <!-- begin-user-doc -->

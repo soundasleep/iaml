@@ -11,7 +11,7 @@
   </domainStores>
   <scopes xsi:type="iaml.scopes:Session" id="scopes.1213cee9bbc.2" name="my session">
     <scopes xsi:type="iaml.visual:Frame" id="visual.1213cee9bad.90" name="session page">
-      <elements xsi:type="iaml:DomainAttributeInstance" id="model.1213cee9b4f.265" name="name" outEdges="wires.1213cee9bad.52" inEdges="wires.1213cee9bad.51" autosave="false">
+      <elements xsi:type="iaml:DomainAttributeInstance" id="model.1213cee9b4f.265" name="name" outEdges="wires.1213cee9bad.52" inEdges="wires.1213cee9bad.51">
         <operations xsi:type="iaml:PrimitiveOperation" inEdges="wires.1213cee9bad.8d" id="model.1213cee9b4f.337" name="save"/>
         <wires xsi:type="iaml.wires:SyncWire" id="wires.1213cee9bad.52" from="model.1213cee9b4f.265" to="visual.1213cee9bad.ad" name="sync"/>
       </elements>

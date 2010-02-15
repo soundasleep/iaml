@@ -14,7 +14,7 @@
     <elements xsi:type="iaml.components:LoginHandler" id="components.1233b453f6b.5" name="user login handler" outEdges="wires.1233b453e32.12" inEdges="wires.1233b453e32.d" type="USER">
       <wires xsi:type="iaml.wires:SetWire" id="wires.1233b453e32.12" from="components.1233b453f6b.5" to="users.1233b454017.31" name="set"/>
     </elements>
-    <elements xsi:type="iaml.users:UserInstance" id="users.1233b454017.31" name="current session user" outEdges="wires.1233b453e32.2c" inEdges="wires.1233b453e32.12">
+    <elements xsi:type="iaml.users:UserInstance" id="users.1233b454017.31" name="current session user" outEdges="wires.1233b453e32.2c" inEdges="wires.1233b453e32.12" autosave="true">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.1233b453e32.2c" from="users.1233b454017.31" to="visual.1233b453dc5.5d" name="sync"/>
     </elements>
   </scopes>

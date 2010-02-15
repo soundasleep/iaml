@@ -32,6 +32,13 @@
 «ENDDEFINE»
 
 /**
+ * Does the given parameter exist? Return 'true' or 'false'. Expected to be in PHP mode.
+ */
+«DEFINE callParameterExists(model::visual::Frame currentFrame) FOR model::wires::ParameterWire»
+	«EXPAND callParameterValueExists(currentFrame) FOR from»
+«ENDDEFINE»
+
+/**
  * The sources of parameters for parameter calls, i.e.
  * fetch the runtime value of the parameter.
  */
@@ -212,6 +219,54 @@
 		«ENDIF»
 	«ENDIF»
 «ENDDEFINE»
+
+/*
+ * Exists calls.
+ */
+
+«DEFINE callParameterValueExists(model::visual::Frame currentFrame) FOR model::WireEdgesSource»
+	«EXPAND exception FOR throwException("Unknown parameter wire source: " + this)»
+«ENDDEFINE»
+
+«DEFINE callParameterValueExists(model::visual::Frame currentFrame) FOR model::ApplicationElementProperty»
+	true
+«ENDDEFINE»
+
+«DEFINE callParameterValueExists(model::visual::Frame currentFrame) FOR model::visual::InputTextField»
+	true
+«ENDDEFINE»
+
+«DEFINE callParameterValueExists(model::visual::Frame currentFrame) FOR model::StaticValue»
+	true
+«ENDDEFINE»
+
+«DEFINE callParameterValueExists(model::visual::Frame currentFrame) FOR model::DynamicApplicationElementSet»
+	true
+«ENDDEFINE»
+
+«DEFINE callParameterValueExists(model::visual::Frame currentFrame) FOR model::visual::Frame»
+	true
+«ENDDEFINE»
+
+«DEFINE callParameterValueExists(model::visual::Frame currentFrame) FOR model::users::Role»
+	true
+«ENDDEFINE»
+
+«DEFINE callParameterValueExists(model::visual::Frame currentFrame) FOR model::users::Permission»
+	true
+«ENDDEFINE»
+
+/**
+ * A value specified as part of the URI, e.g. ?key=value
+ */
+«DEFINE callParameterValueExists(model::visual::Frame currentFrame) FOR model::QueryParameter»
+	«IF defaultValue == null»
+		(require_get("«name»", null) !== null)
+	«ELSE»
+		true
+	«ENDIF»
+«ENDDEFINE»
+
 
 «DEFINE exception FOR Object»
 «ENDDEFINE»

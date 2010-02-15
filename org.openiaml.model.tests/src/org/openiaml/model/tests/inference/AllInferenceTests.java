@@ -6,6 +6,7 @@ import junit.framework.TestSuite;
 import org.openiaml.model.tests.inference.model0_3.AllModel0_3InferenceTests;
 import org.openiaml.model.tests.inference.model0_4.AllModel0_4InferenceTests;
 import org.openiaml.model.tests.inference.model0_4_2.AllModel0_4_2InferenceTests;
+import org.openiaml.model.tests.inference.model0_4_3.AllModel0_4_3InferenceTests;
 
 /**
  * All tests for code generation.
@@ -49,6 +50,7 @@ public class AllInferenceTests {
         suite.addTest(AllModel0_3InferenceTests.suite());
         suite.addTest(AllModel0_4InferenceTests.suite());
         suite.addTest(AllModel0_4_2InferenceTests.suite());
+        suite.addTest(AllModel0_4_3InferenceTests.suite());
         
 		//$JUnit-END$
         return suite; 

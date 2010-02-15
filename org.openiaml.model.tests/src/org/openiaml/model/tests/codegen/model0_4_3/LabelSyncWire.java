@@ -4,7 +4,6 @@
 package org.openiaml.model.tests.codegen.model0_4_3;
 
 import junit.framework.AssertionFailedError;
-import net.sourceforge.jwebunit.api.IElement;
 
 import org.eclipse.core.resources.IFile;
 import org.openiaml.model.tests.CodegenTestCase;

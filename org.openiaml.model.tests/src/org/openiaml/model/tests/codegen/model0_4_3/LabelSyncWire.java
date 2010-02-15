@@ -34,6 +34,7 @@ public class LabelSyncWire extends CodegenTestCase {
 		
 		// the text "initial value" should be on the page (three times)
 		assertMatch("initial");
+		assertLabelTextPresent("initial");
 		
 	}
 	
@@ -49,6 +50,7 @@ public class LabelSyncWire extends CodegenTestCase {
 		String value = "hello, world!";
 		// first, this value should not be on the page
 		assertNoMatch(value);
+		assertLabelTextNotPresent(value);
 		
 		{
 			String target = getLabelIDForText("Text Field");
@@ -60,11 +62,7 @@ public class LabelSyncWire extends CodegenTestCase {
 		assertMatch(value);
 		
 		// in fact, it should be contained within a label
-		{
-			IElement match = getElementByXPath("//label[" + getContainsTextXPath(value) + "]");
-			assertNotNull(match);
-			assertEquals(value, match.getTextContent());
-		}
+		assertLabelTextPresent(value);
 		
 		// if we reload the page, the value is still there
 		reloadPage(sitemap, "Home");
@@ -74,11 +72,7 @@ public class LabelSyncWire extends CodegenTestCase {
 			assertMatch(value);
 			
 			// in fact, it should be contained within a label
-			{
-				IElement match = getElementByXPath("//label[" + getContainsTextXPath(value) + "]");
-				assertNotNull(match);
-				assertEquals(value, match.getTextContent());
-			}
+			assertLabelTextPresent(value);
 		} catch (AssertionFailedError e) {
 			System.err.println(getPageSource());
 			throw e;

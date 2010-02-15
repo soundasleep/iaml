@@ -36,6 +36,56 @@ public class HelperFunctions extends JavascriptCodegenTestCase {
 		assertJavascriptResult(false, "is_array_equal(new Array('a', 'a', 'b', 'a'))");
 	}
 	
+	
+	/**
+	 * tests make_into_boolean()
+	 * @throws Exception
+	 */
+	public void testMakeIntoBoolean() throws Exception {
+		// obvious
+		assertJavascriptResult(true, "make_into_boolean(true)");
+		assertJavascriptResult(false, "make_into_boolean(false)");
+		
+		// strings
+		assertJavascriptResult(false, "make_into_boolean(\"0\")");
+		assertJavascriptResult(true, "make_into_boolean(\"1\")");
+		assertJavascriptResult(false, "make_into_boolean(\"false\")");
+		assertJavascriptResult(true, "make_into_boolean(\"true\")");
+		assertJavascriptResult(true, "make_into_boolean(\"xyz\")");
+		assertJavascriptResult(false, "make_into_boolean(\"\")");
+
+		// null
+		assertJavascriptResult(false, "make_into_boolean(null)");
+		
+		// numbers
+		assertJavascriptResult(false, "make_into_boolean(0.0)");
+		assertJavascriptResult(true, "make_into_boolean(1.0)");
+		assertJavascriptResult(true, "make_into_boolean(1.33)");
+		assertJavascriptResult(false, "make_into_boolean(0)");
+		assertJavascriptResult(true, "make_into_boolean(1)");
+		assertJavascriptResult(true, "make_into_boolean(2)");
+
+	}
+	
+	/**
+	 * tests is_array_true(): are <em>all</em> elements of the array true?
+	 * 
+	 * @throws Exception
+	 */
+	public void testIsArrayTrue() throws Exception {
+		// empty is true
+		assertJavascriptResult(true, "is_array_true(new Array())");
+		
+		assertJavascriptResult(true, "is_array_true(new Array(1, 2, 3))");
+		assertJavascriptResult(false, "is_array_true(new Array(1, 2, 0))");
+		assertJavascriptResult(false, "is_array_true(new Array(0, 0, 0))");
+
+		assertJavascriptResult(true, "is_array_true(new Array(true))");
+		assertJavascriptResult(false, "is_array_true(new Array(false))");
+		assertJavascriptResult(false, "is_array_true(new Array(true, false))");
+		
+	}
+	
 	public void testParseFloatOrZero() throws Exception {
 		// first check JS
 		assertJavascriptResult(true, "parseFloat('1') == parseFloat('1')");

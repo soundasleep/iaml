@@ -376,6 +376,30 @@ function is_array_equal(a) {
 }
 
 /**
+ * Is every element in the array true?
+ */
+function is_array_true(a) {
+	for (var i = 0; i < a.length; i++) {
+		if (!a[i])
+			return false;
+	}
+
+	return true;
+}
+
+/**
+ * Make the given value into a boolean, according to a set of
+ * specified conversions: http://code.google.com/p/iaml/wiki/IamlPrimitiveOperations#true?
+ */
+function make_into_boolean(value) {
+	if (value === "0" || value === "false" || value === "" || value === null)
+		return false;
+	if (value === 0 || value === 0.0 || value === false)
+		return false;
+	return true;
+}
+
+/**
  * Trim whitespace.
  */
 function trim(str) {

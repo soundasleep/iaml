@@ -512,6 +512,9 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * string with the <code>normalize-string()</code> XPath function.
 	 * </p>
 	 * 
+	 * <p>TODO return a custom object, not just a String, which can be easily confused.</p>
+	 * 
+	 * @see #getContainsTextXPath(String)
 	 * @param text
 	 * @return
 	 */

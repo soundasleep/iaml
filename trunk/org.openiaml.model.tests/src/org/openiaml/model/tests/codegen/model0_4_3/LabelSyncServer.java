@@ -51,8 +51,8 @@ public class LabelSyncServer extends CodegenTestCase {
 		assertNoProblem();
 		
 		// the value should be on here
-		assertMatch(value);
-		assertNoMatch("initial");
+		assertLabelTextPresent(value);
+		assertLabelTextNotPresent("initial");
 		
 		// go to Page 3
 		gotoSitemapThenPage(sitemap, "Page 3");

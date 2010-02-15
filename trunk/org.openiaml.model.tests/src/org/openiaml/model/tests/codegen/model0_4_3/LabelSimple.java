@@ -30,6 +30,7 @@ public class LabelSimple extends CodegenTestCase {
 		
 		// the text "initial value" should be on the page
 		assertMatch("initial value");
+		assertLabelTextPresent("initial value");
 		
 	}
 	

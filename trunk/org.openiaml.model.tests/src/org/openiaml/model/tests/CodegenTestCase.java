@@ -813,4 +813,37 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		logTimed("web: set labeled form complete");
 	}
 	
+	/**
+	 * Assert that a label exists with the given text.
+	 * 
+	 * @param text
+	 */
+	public void assertLabelTextPresent(String text) {
+		assertFalse("Cannot assert the presence of an empty label", text.isEmpty());
+		
+		IElement match = getElementByXPath("//label[" + getContainsTextXPath(text) + "]");
+		assertNotNull(match);
+		String textContent = match.getTextContent();
+		// normalise
+		textContent = textContent.replaceAll("[\\s]+", " ").trim();
+		assertEquals(text, textContent);
+	}
+	
+	/**
+	 * Assert that a label <em>does not</em> exist with the given text.
+	 * 
+	 * @param text
+	 */
+	public void assertLabelTextNotPresent(String text) {
+		boolean failed = false;
+		try {
+			getElementByXPath("//label[" + getContainsTextXPath(text) + "]");
+			failed = true;
+		} catch (AssertionFailedError e) {
+			// expected
+		}
+		assertFalse("Unexpectedly found a label with text '" + text + "'", failed);
+	}
+	
+	
 }

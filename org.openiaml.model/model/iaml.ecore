@@ -330,9 +330,10 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="strQuery" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="autosave" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="true">
+        defaultValueLiteral="false">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.3"/>
+        <details key="changed" value="0.4.3 to default 'false' instead of 'true'"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -410,9 +411,10 @@
       <details key="documentation" value="Represents an instance of a {@link DomainAttribute}, which is likely contained within a {@link DomainObjectInstance}."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="autosave" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="true">
+        defaultValueLiteral="false">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.3"/>
+        <details key="changed" value="0.4.3 to default 'false' instead of 'true'"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>

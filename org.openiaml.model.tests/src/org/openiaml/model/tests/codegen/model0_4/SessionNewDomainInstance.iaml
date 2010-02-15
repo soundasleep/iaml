@@ -14,7 +14,7 @@
         <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1230bdbb01c.1f7" from="visual.1230bdbafce.226" to="model.1230bdbae76.2d4" name="onClick"/>
       </children>
     </scopes>
-    <elements xsi:type="iaml:DomainObjectInstance" id="model.1230bdbae76.2a1" name="session user" outEdges="wires.1230bdbb01c.1d4" inEdges="wires.1230bdbb01c.1bd">
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.1230bdbae76.2a1" name="session user" outEdges="wires.1230bdbb01c.1d4" inEdges="wires.1230bdbb01c.1bd" autosave="true">
       <operations xsi:type="iaml:PrimitiveOperation" inEdges="wires.1230bdbb01c.1f7" id="model.1230bdbae76.2d4" name="new"/>
       <wires xsi:type="iaml.wires:SyncWire" id="wires.1230bdbb01c.1d4" from="model.1230bdbae76.2a1" to="visual.1230bdbafce.203" name="sync"/>
     </elements>

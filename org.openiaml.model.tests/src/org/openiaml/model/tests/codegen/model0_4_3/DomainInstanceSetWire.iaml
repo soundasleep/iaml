@@ -4,13 +4,13 @@
     <parameters id="model.126cf449831.f2" name="id" outEdges="wires.126cf449ab2.52">
       <wires xsi:type="iaml.wires:ParameterWire" id="wires.126cf449ab2.52" from="model.126cf449831.f2" to="wires.126cf449ab2.44"/>
     </parameters>
-    <elements xsi:type="iaml:DomainObjectInstance" id="model.126cf449831.f3" name="viewing instance" outEdges="wires.126cf449ab2.72" inEdges="wires.126cf449ab2.44" autosave="false">
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.126cf449831.f3" name="viewing instance" outEdges="wires.126cf449ab2.72" inEdges="wires.126cf449ab2.44">
       <wires xsi:type="iaml.wires:SetWire" id="wires.126cf449ab2.72" from="model.126cf449831.f3" to="visual.126cf4499f6.dd" name="set"/>
     </elements>
     <children xsi:type="iaml.visual:InputForm" inEdges="wires.126cf449ab2.72" id="visual.126cf4499f6.dd" name="View"/>
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.126ceb685c2.bd" name="Add New Product">
-    <elements xsi:type="iaml:DomainObjectInstance" id="model.126ceb68565.d4" name="New Product" outEdges="wires.126cf449ab2.8" inEdges="wires.126cf449ab2.2e" autosave="false">
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.126ceb68565.d4" name="New Product" outEdges="wires.126cf449ab2.8" inEdges="wires.126cf449ab2.2e">
       <operations xsi:type="iaml:PrimitiveOperation" inEdges="wires.126cf449ab2.3" id="model.126cf449831.1c" name="save"/>
       <wires xsi:type="iaml.wires:SyncWire" id="wires.126cf449ab2.8" from="model.126ceb68565.d4" to="visual.126ceb685c2.c6" name="sync"/>
     </elements>

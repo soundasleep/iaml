@@ -74,7 +74,7 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean AUTOSAVE_EDEFAULT = true;
+	protected static final boolean AUTOSAVE_EDEFAULT = false;
 
 	/**
 	 * The cached value of the '{@link #isAutosave() <em>Autosave</em>}' attribute.

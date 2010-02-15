@@ -2,7 +2,7 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12109331eea.e39">
   <scopes xsi:type="iaml.visual:Frame" id="visual.12109331f38.d82" name="container">
     <children xsi:type="iaml.visual:InputTextField" id="visual.12109331f38.d99" name="editname" inEdges="wires.12109331f38.5c9"/>
-    <elements xsi:type="iaml:DomainAttributeInstance" id="model.12109331eea.edd" name="name" outEdges="wires.12109331f38.5c9" inEdges="wires.12109331f38.5c7">
+    <elements xsi:type="iaml:DomainAttributeInstance" id="model.12109331eea.edd" name="name" outEdges="wires.12109331f38.5c9" inEdges="wires.12109331f38.5c7" autosave="true">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.12109331f38.5c9" from="model.12109331eea.edd" to="visual.12109331f38.d99" name="sync"/>
     </elements>
   </scopes>

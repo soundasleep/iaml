@@ -16,7 +16,7 @@
         <wires xsi:type="iaml.wires:ParameterWire" id="wires.12109c6249b.ef" from="visual.12109c6248b.1a2" to="wires.12109c6249b.ee"/>
       </children>
       <children xsi:type="iaml.visual:InputTextField" id="visual.12109c6248b.1a3" name="edit email" inEdges="wires.12109c6249b.112"/>
-      <elements xsi:type="iaml:DomainObjectInstance" id="model.12109c6242e.3bb" name="my user" inEdges="wires.12109c6249b.ee">
+      <elements xsi:type="iaml:DomainObjectInstance" id="model.12109c6242e.3bb" name="my user" inEdges="wires.12109c6249b.ee" autosave="true">
         <attributes id="model.12109c6242e.3f8" name="email" outEdges="wires.12109c6249b.112">
           <wires xsi:type="iaml.wires:SyncWire" id="wires.12109c6249b.112" from="model.12109c6242e.3f8" to="visual.12109c6248b.1a3" name="sync"/>
         </attributes>

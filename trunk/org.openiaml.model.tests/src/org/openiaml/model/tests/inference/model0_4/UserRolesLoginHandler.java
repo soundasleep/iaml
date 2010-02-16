@@ -3,6 +3,7 @@
  */
 package org.openiaml.model.tests.inference.model0_4;
 
+import java.util.List;
 import java.util.Set;
 
 import org.openiaml.model.model.ApplicationElementProperty;
@@ -129,7 +130,7 @@ public class UserRolesLoginHandler extends ValidInferenceTestCase {
 			}, select.getQuery());
 		
 		// there should only be two incoming parameter wires
-		Set<WireEdge> params = getWiresTo(session, select, ParameterWire.class);
+		List<ParameterWire> params = select.getInParameterEdges();
 		assertEquals(params.toString(), 2, params.size());
 		
 		// one from password

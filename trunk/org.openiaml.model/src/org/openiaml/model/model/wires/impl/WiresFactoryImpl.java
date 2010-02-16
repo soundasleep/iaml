@@ -22,7 +22,7 @@ import org.openiaml.model.model.wires.ConstraintWire;
 import org.openiaml.model.model.wires.ExtendsWire;
 import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.NewInstanceWire;
-import org.openiaml.model.model.wires.ParameterWire;
+import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.ProvidesWire;
 import org.openiaml.model.model.wires.RequiresWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
@@ -79,7 +79,7 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 			case WiresPackage.COMPOSITE_WIRE: return createCompositeWire();
 			case WiresPackage.SYNC_WIRE: return createSyncWire();
 			case WiresPackage.RUN_INSTANCE_WIRE: return createRunInstanceWire();
-			case WiresPackage.PARAMETER_WIRE: return createParameterWire();
+			case WiresPackage.PARAMETER_EDGE: return createParameterEdge();
 			case WiresPackage.SET_WIRE: return createSetWire();
 			case WiresPackage.NAVIGATE_WIRE: return createNavigateWire();
 			case WiresPackage.SELECT_WIRE: return createSelectWire();
@@ -162,10 +162,10 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public ParameterWire createParameterWire() {
-		ParameterWireImpl parameterWire = new ParameterWireImpl();
-		generateID(parameterWire);
-		return parameterWire;
+	public ParameterEdge createParameterEdge() {
+		ParameterEdgeImpl parameterEdge = new ParameterEdgeImpl();
+		generateID(parameterEdge);
+		return parameterEdge;
 	}
 
 	/**

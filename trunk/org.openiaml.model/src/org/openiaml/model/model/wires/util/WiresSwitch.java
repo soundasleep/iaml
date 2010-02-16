@@ -25,7 +25,9 @@ import org.openiaml.model.model.wires.ConstraintWire;
 import org.openiaml.model.model.wires.ExtendsWire;
 import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.NewInstanceWire;
-import org.openiaml.model.model.wires.ParameterWire;
+import org.openiaml.model.model.wires.ParameterEdge;
+import org.openiaml.model.model.wires.ParameterEdgeDestination;
+import org.openiaml.model.model.wires.ParameterEdgesSource;
 import org.openiaml.model.model.wires.ProvidesWire;
 import org.openiaml.model.model.wires.RequiresWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
@@ -134,6 +136,7 @@ public class WiresSwitch<T> {
 				T result = caseSyncWire(syncWire);
 				if (result == null) result = caseCompositeWire(syncWire);
 				if (result == null) result = caseWireEdgeDestination(syncWire);
+				if (result == null) result = caseParameterEdgeDestination(syncWire);
 				if (result == null) result = caseWireEdge(syncWire);
 				if (result == null) result = caseNamedElement(syncWire);
 				if (result == null) result = caseContainsWires(syncWire);
@@ -148,6 +151,7 @@ public class WiresSwitch<T> {
 				T result = caseRunInstanceWire(runInstanceWire);
 				if (result == null) result = caseCompositeWire(runInstanceWire);
 				if (result == null) result = caseWireEdgeDestination(runInstanceWire);
+				if (result == null) result = caseParameterEdgeDestination(runInstanceWire);
 				if (result == null) result = caseWireEdge(runInstanceWire);
 				if (result == null) result = caseNamedElement(runInstanceWire);
 				if (result == null) result = caseContainsWires(runInstanceWire);
@@ -157,13 +161,11 @@ public class WiresSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case WiresPackage.PARAMETER_WIRE: {
-				ParameterWire parameterWire = (ParameterWire)theEObject;
-				T result = caseParameterWire(parameterWire);
-				if (result == null) result = caseSingleWire(parameterWire);
-				if (result == null) result = caseNamedElement(parameterWire);
-				if (result == null) result = caseWireEdge(parameterWire);
-				if (result == null) result = caseGeneratedElement(parameterWire);
+			case WiresPackage.PARAMETER_EDGE: {
+				ParameterEdge parameterEdge = (ParameterEdge)theEObject;
+				T result = caseParameterEdge(parameterEdge);
+				if (result == null) result = caseNamedElement(parameterEdge);
+				if (result == null) result = caseGeneratedElement(parameterEdge);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -200,6 +202,7 @@ public class WiresSwitch<T> {
 				T result = caseSelectWire(selectWire);
 				if (result == null) result = caseCompositeWire(selectWire);
 				if (result == null) result = caseWireEdgeDestination(selectWire);
+				if (result == null) result = caseParameterEdgeDestination(selectWire);
 				if (result == null) result = caseWireEdge(selectWire);
 				if (result == null) result = caseNamedElement(selectWire);
 				if (result == null) result = caseContainsWires(selectWire);
@@ -214,6 +217,7 @@ public class WiresSwitch<T> {
 				T result = caseConditionWire(conditionWire);
 				if (result == null) result = caseCompositeWire(conditionWire);
 				if (result == null) result = caseWireEdgeDestination(conditionWire);
+				if (result == null) result = caseParameterEdgeDestination(conditionWire);
 				if (result == null) result = caseWireEdge(conditionWire);
 				if (result == null) result = caseNamedElement(conditionWire);
 				if (result == null) result = caseContainsWires(conditionWire);
@@ -274,6 +278,18 @@ public class WiresSwitch<T> {
 				if (result == null) result = caseSingleWire(providesWire);
 				if (result == null) result = caseWireEdge(providesWire);
 				if (result == null) result = caseGeneratedElement(providesWire);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case WiresPackage.PARAMETER_EDGES_SOURCE: {
+				ParameterEdgesSource parameterEdgesSource = (ParameterEdgesSource)theEObject;
+				T result = caseParameterEdgesSource(parameterEdgesSource);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case WiresPackage.PARAMETER_EDGE_DESTINATION: {
+				ParameterEdgeDestination parameterEdgeDestination = (ParameterEdgeDestination)theEObject;
+				T result = caseParameterEdgeDestination(parameterEdgeDestination);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -342,17 +358,17 @@ public class WiresSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Parameter Wire</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Parameter Edge</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Parameter Wire</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Parameter Edge</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseParameterWire(ParameterWire object) {
+	public T caseParameterEdge(ParameterEdge object) {
 		return null;
 	}
 
@@ -488,6 +504,36 @@ public class WiresSwitch<T> {
 	 * @generated
 	 */
 	public T caseProvidesWire(ProvidesWire object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Parameter Edges Source</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Parameter Edges Source</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseParameterEdgesSource(ParameterEdgesSource object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Parameter Edge Destination</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Parameter Edge Destination</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseParameterEdgeDestination(ParameterEdgeDestination object) {
 		return null;
 	}
 

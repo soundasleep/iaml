@@ -45,7 +45,7 @@ import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ConditionWire;
-import org.openiaml.model.model.wires.ParameterWire;
+import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SyncWire;
@@ -876,14 +876,14 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 
 
 	/**
-	 * Assert that a ParameterWire exists between two elements in the editor.
+	 * Assert that a ParameterEdge exists between two elements in the editor.
 	 *
 	 * @param editor
 	 * @param source
 	 * @param target
 	 * @return
 	 */
-	public ConnectionNodeEditPart assertHasParameterWire(DiagramDocumentEditor editor,
+	public ConnectionNodeEditPart assertHasParameterEdge(DiagramDocumentEditor editor,
 			ShapeNodeEditPart source, ConnectionNodeEditPart target) {
 
 		String found = "";
@@ -892,8 +892,8 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 			if (c instanceof ConnectionNodeEditPart) {
 				ConnectionNodeEditPart connection = (ConnectionNodeEditPart) c;
 				EObject element = connection.resolveSemanticElement();
-				if (element instanceof ParameterWire) {
-					ParameterWire w = (ParameterWire) element;
+				if (element instanceof ParameterEdge) {
+					ParameterEdge w = (ParameterEdge) element;
 					if (connection.getSource().equals(source) &&
 							connection.getTarget().equals(target))
 						return connection;	// found it
@@ -902,7 +902,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 			}
 		}
 
-		fail("assertHasParameterWire: no connection found between '" + source + "' and '" + target + "'. found: " + found);
+		fail("assertHasParameterEdge: no connection found between '" + source + "' and '" + target + "'. found: " + found);
 		return null;
 
 	}

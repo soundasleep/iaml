@@ -117,9 +117,7 @@ public class SessionNewDomainInstance extends InferenceTestCase {
 		assertGenerated(targetRun);
 
 		// email.value --> targetRun wire
-		Set<WireEdge> wires2 = assertHasWiresFromTo(1, session, value, targetRun);
-		ParameterWire targetParam = (ParameterWire) wires2.iterator().next();
-		assertGenerated(targetParam);
+		assertGenerated(getParameterEdgeFromTo(session, value, targetRun));
 
 	}
 

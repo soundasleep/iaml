@@ -58,9 +58,7 @@ public class SyncFieldDomainAttribute extends InferenceTestCase {
 		ApplicationElementProperty fieldValue = assertHasApplicationElementProperty(field, "fieldValue");
 
 		// there should be a parameter wire from fieldValue to the operation
-		ParameterWire paramWire = (ParameterWire) getWireFromTo(page, fieldValue, runWire);
-		assertEquals(paramWire.getFrom(), fieldValue);
-		assertEquals(paramWire.getTo(), runWire);
+		assertGenerated(getParameterEdgeFromTo(page, fieldValue, runWire));
 	}
 
 }

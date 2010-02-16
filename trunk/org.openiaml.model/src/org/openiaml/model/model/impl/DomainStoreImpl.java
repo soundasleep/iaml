@@ -42,6 +42,7 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.domain.DomainStoreTypes;
+import org.openiaml.model.model.wires.ParameterEdge;
 
 /**
  * <!-- begin-user-doc -->
@@ -58,6 +59,7 @@ import org.openiaml.model.model.domain.DomainStoreTypes;
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getGeneratedRule <em>Generated Rule</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getWires <em>Wires</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getParameterEdges <em>Parameter Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getConditions <em>Conditions</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getGeneratedElements <em>Generated Elements</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#isOverridden <em>Overridden</em>}</li>
@@ -180,6 +182,15 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 	 * @ordered
 	 */
 	protected EList<WireEdge> wires;
+	/**
+	 * The cached value of the '{@link #getParameterEdges() <em>Parameter Edges</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParameterEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ParameterEdge> parameterEdges;
 	/**
 	 * The cached value of the '{@link #getConditions() <em>Conditions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -436,6 +447,18 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ParameterEdge> getParameterEdges() {
+		if (parameterEdges == null) {
+			parameterEdges = new EObjectContainmentEList<ParameterEdge>(ParameterEdge.class, this, ModelPackage.DOMAIN_STORE__PARAMETER_EDGES);
+		}
+		return parameterEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<Condition> getConditions() {
 		if (conditions == null) {
 			conditions = new EObjectContainmentEList<Condition>(Condition.class, this, ModelPackage.DOMAIN_STORE__CONDITIONS);
@@ -587,6 +610,8 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 				return ((InternalEList<?>)getGeneratedBy()).basicRemove(otherEnd, msgs);
 			case ModelPackage.DOMAIN_STORE__WIRES:
 				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
+			case ModelPackage.DOMAIN_STORE__PARAMETER_EDGES:
+				return ((InternalEList<?>)getParameterEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.DOMAIN_STORE__CONDITIONS:
 				return ((InternalEList<?>)getConditions()).basicRemove(otherEnd, msgs);
 			case ModelPackage.DOMAIN_STORE__GENERATED_ELEMENTS:
@@ -625,6 +650,8 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 				return getName();
 			case ModelPackage.DOMAIN_STORE__WIRES:
 				return getWires();
+			case ModelPackage.DOMAIN_STORE__PARAMETER_EDGES:
+				return getParameterEdges();
 			case ModelPackage.DOMAIN_STORE__CONDITIONS:
 				return getConditions();
 			case ModelPackage.DOMAIN_STORE__GENERATED_ELEMENTS:
@@ -681,6 +708,10 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 			case ModelPackage.DOMAIN_STORE__WIRES:
 				getWires().clear();
 				getWires().addAll((Collection<? extends WireEdge>)newValue);
+				return;
+			case ModelPackage.DOMAIN_STORE__PARAMETER_EDGES:
+				getParameterEdges().clear();
+				getParameterEdges().addAll((Collection<? extends ParameterEdge>)newValue);
 				return;
 			case ModelPackage.DOMAIN_STORE__CONDITIONS:
 				getConditions().clear();
@@ -747,6 +778,9 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 			case ModelPackage.DOMAIN_STORE__WIRES:
 				getWires().clear();
 				return;
+			case ModelPackage.DOMAIN_STORE__PARAMETER_EDGES:
+				getParameterEdges().clear();
+				return;
 			case ModelPackage.DOMAIN_STORE__CONDITIONS:
 				getConditions().clear();
 				return;
@@ -799,6 +833,8 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case ModelPackage.DOMAIN_STORE__WIRES:
 				return wires != null && !wires.isEmpty();
+			case ModelPackage.DOMAIN_STORE__PARAMETER_EDGES:
+				return parameterEdges != null && !parameterEdges.isEmpty();
 			case ModelPackage.DOMAIN_STORE__CONDITIONS:
 				return conditions != null && !conditions.isEmpty();
 			case ModelPackage.DOMAIN_STORE__GENERATED_ELEMENTS:
@@ -850,6 +886,7 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 		if (baseClass == ContainsWires.class) {
 			switch (derivedFeatureID) {
 				case ModelPackage.DOMAIN_STORE__WIRES: return ModelPackage.CONTAINS_WIRES__WIRES;
+				case ModelPackage.DOMAIN_STORE__PARAMETER_EDGES: return ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES;
 				default: return -1;
 			}
 		}
@@ -900,6 +937,7 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 		if (baseClass == ContainsWires.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.CONTAINS_WIRES__WIRES: return ModelPackage.DOMAIN_STORE__WIRES;
+				case ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES: return ModelPackage.DOMAIN_STORE__PARAMETER_EDGES;
 				default: return -1;
 			}
 		}

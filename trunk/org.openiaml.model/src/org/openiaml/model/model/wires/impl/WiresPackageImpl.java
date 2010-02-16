@@ -33,7 +33,9 @@ import org.openiaml.model.model.wires.ConstraintWire;
 import org.openiaml.model.model.wires.ExtendsWire;
 import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.NewInstanceWire;
-import org.openiaml.model.model.wires.ParameterWire;
+import org.openiaml.model.model.wires.ParameterEdge;
+import org.openiaml.model.model.wires.ParameterEdgeDestination;
+import org.openiaml.model.model.wires.ParameterEdgesSource;
 import org.openiaml.model.model.wires.ProvidesWire;
 import org.openiaml.model.model.wires.RequiresWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
@@ -84,7 +86,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass parameterWireEClass = null;
+	private EClass parameterEdgeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -148,6 +150,20 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * @generated
 	 */
 	private EClass providesWireEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass parameterEdgesSourceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass parameterEdgeDestinationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -344,8 +360,8 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getParameterWire() {
-		return parameterWireEClass;
+	public EClass getParameterEdge() {
+		return parameterEdgeEClass;
 	}
 
 	/**
@@ -353,8 +369,26 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getParameterWire_ParameterName() {
-		return (EAttribute)parameterWireEClass.getEStructuralFeatures().get(0);
+	public EAttribute getParameterEdge_ParameterName() {
+		return (EAttribute)parameterEdgeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getParameterEdge_From() {
+		return (EReference)parameterEdgeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getParameterEdge_To() {
+		return (EReference)parameterEdgeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -470,6 +504,42 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getParameterEdgesSource() {
+		return parameterEdgesSourceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getParameterEdgesSource_OutParameterEdges() {
+		return (EReference)parameterEdgesSourceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getParameterEdgeDestination() {
+		return parameterEdgeDestinationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getParameterEdgeDestination_InParameterEdges() {
+		return (EReference)parameterEdgeDestinationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getConstraintTypes() {
 		return constraintTypesEEnum;
 	}
@@ -517,8 +587,10 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		runInstanceWireEClass = createEClass(RUN_INSTANCE_WIRE);
 		createEAttribute(runInstanceWireEClass, RUN_INSTANCE_WIRE__PRIORITY);
 
-		parameterWireEClass = createEClass(PARAMETER_WIRE);
-		createEAttribute(parameterWireEClass, PARAMETER_WIRE__PARAMETER_NAME);
+		parameterEdgeEClass = createEClass(PARAMETER_EDGE);
+		createEAttribute(parameterEdgeEClass, PARAMETER_EDGE__PARAMETER_NAME);
+		createEReference(parameterEdgeEClass, PARAMETER_EDGE__FROM);
+		createEReference(parameterEdgeEClass, PARAMETER_EDGE__TO);
 
 		setWireEClass = createEClass(SET_WIRE);
 
@@ -540,6 +612,12 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		createEAttribute(constraintWireEClass, CONSTRAINT_WIRE__TYPE);
 
 		providesWireEClass = createEClass(PROVIDES_WIRE);
+
+		parameterEdgesSourceEClass = createEClass(PARAMETER_EDGES_SOURCE);
+		createEReference(parameterEdgesSourceEClass, PARAMETER_EDGES_SOURCE__OUT_PARAMETER_EDGES);
+
+		parameterEdgeDestinationEClass = createEClass(PARAMETER_EDGE_DESTINATION);
+		createEReference(parameterEdgeDestinationEClass, PARAMETER_EDGE_DESTINATION__IN_PARAMETER_EDGES);
 
 		// Create enums
 		constraintTypesEEnum = createEEnum(CONSTRAINT_TYPES);
@@ -584,18 +662,22 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		compositeWireEClass.getESuperTypes().add(theModelPackage.getContainsConditions());
 		syncWireEClass.getESuperTypes().add(this.getCompositeWire());
 		syncWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
+		syncWireEClass.getESuperTypes().add(this.getParameterEdgeDestination());
 		runInstanceWireEClass.getESuperTypes().add(this.getCompositeWire());
 		runInstanceWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
-		parameterWireEClass.getESuperTypes().add(this.getSingleWire());
-		parameterWireEClass.getESuperTypes().add(theModelPackage.getNamedElement());
+		runInstanceWireEClass.getESuperTypes().add(this.getParameterEdgeDestination());
+		parameterEdgeEClass.getESuperTypes().add(theModelPackage.getNamedElement());
+		parameterEdgeEClass.getESuperTypes().add(theModelPackage.getGeneratedElement());
 		setWireEClass.getESuperTypes().add(this.getCompositeWire());
 		setWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
 		navigateWireEClass.getESuperTypes().add(this.getCompositeWire());
 		navigateWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
 		selectWireEClass.getESuperTypes().add(this.getCompositeWire());
 		selectWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
+		selectWireEClass.getESuperTypes().add(this.getParameterEdgeDestination());
 		conditionWireEClass.getESuperTypes().add(this.getCompositeWire());
 		conditionWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
+		conditionWireEClass.getESuperTypes().add(this.getParameterEdgeDestination());
 		newInstanceWireEClass.getESuperTypes().add(this.getCompositeWire());
 		extendsWireEClass.getESuperTypes().add(this.getSingleWire());
 		extendsWireEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
@@ -621,8 +703,10 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		initEClass(runInstanceWireEClass, RunInstanceWire.class, "RunInstanceWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRunInstanceWire_Priority(), ecorePackage.getEInt(), "priority", null, 0, 1, RunInstanceWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(parameterWireEClass, ParameterWire.class, "ParameterWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getParameterWire_ParameterName(), ecorePackage.getEString(), "parameterName", null, 0, 1, ParameterWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(parameterEdgeEClass, ParameterEdge.class, "ParameterEdge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getParameterEdge_ParameterName(), ecorePackage.getEString(), "parameterName", null, 0, 1, ParameterEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getParameterEdge_From(), this.getParameterEdgesSource(), this.getParameterEdgesSource_OutParameterEdges(), "from", null, 1, 1, ParameterEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getParameterEdge_To(), this.getParameterEdgeDestination(), this.getParameterEdgeDestination_InParameterEdges(), "to", null, 1, 1, ParameterEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(setWireEClass, SetWire.class, "SetWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -644,6 +728,12 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		initEAttribute(getConstraintWire_Type(), this.getConstraintTypes(), "type", null, 1, 1, ConstraintWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(providesWireEClass, ProvidesWire.class, "ProvidesWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(parameterEdgesSourceEClass, ParameterEdgesSource.class, "ParameterEdgesSource", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getParameterEdgesSource_OutParameterEdges(), this.getParameterEdge(), this.getParameterEdge_From(), "outParameterEdges", null, 0, -1, ParameterEdgesSource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(parameterEdgeDestinationEClass, ParameterEdgeDestination.class, "ParameterEdgeDestination", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getParameterEdgeDestination_InParameterEdges(), this.getParameterEdge(), this.getParameterEdge_To(), "inParameterEdges", null, 0, -1, ParameterEdgeDestination.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(constraintTypesEEnum, ConstraintTypes.class, "ConstraintTypes");
@@ -696,7 +786,13 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 			 "added", "0.2"
 		   });			
 		addAnnotation
-		  (getParameterWire_ParameterName(), 
+		  (parameterEdgeEClass, 
+		   source, 
+		   new String[] {
+			 "changed", "0.4.3 to no longer be a Wire; added \'from\' and \'to\' references; renamed to ParameterEdge"
+		   });		
+		addAnnotation
+		  (getParameterEdge_ParameterName(), 
 		   source, 
 		   new String[] {
 			 "added", "0.2"
@@ -761,7 +857,19 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		   source, 
 		   new String[] {
 			 "added", "0.4"
-		   });	
+		   });				
+		addAnnotation
+		  (parameterEdgesSourceEClass, 
+		   source, 
+		   new String[] {
+			 "comment", "added in 0.4.3"
+		   });			
+		addAnnotation
+		  (parameterEdgeDestinationEClass, 
+		   source, 
+		   new String[] {
+			 "comment", "added in 0.4.3"
+		   });
 	}
 
 	/**
@@ -785,11 +893,11 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 			 "documentation", "Represents the execution of an {@link Operation}."
 		   });			
 		addAnnotation
-		  (parameterWireEClass, 
+		  (parameterEdgeEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Provides incoming values for {@link Parameter Parameters} of a {@link RunInstanceWire}."
-		   });				
+		   });					
 		addAnnotation
 		  (setWireEClass, 
 		   source, 
@@ -843,7 +951,19 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Indicates that the source {@link Role} provides the target {@link Permission}."
-		   });
+		   });		
+		addAnnotation
+		  (parameterEdgesSourceEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Something which may be used as the source of a {@model ParameterEdge}."
+		   });			
+		addAnnotation
+		  (parameterEdgeDestinationEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Something which may be used as the destination of a {@model ParameterEdge}."
+		   });	
 	}
 
 } //WiresPackageImpl

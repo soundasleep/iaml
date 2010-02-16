@@ -298,6 +298,7 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 
 		// Obtain other dependent packages
 		ModelPackage theModelPackage = (ModelPackage)EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI);
+		WiresPackage theWiresPackage = (WiresPackage)EPackage.Registry.INSTANCE.getEPackage(WiresPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -305,6 +306,7 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 
 		// Add supertypes to classes
 		frameEClass.getESuperTypes().add(theModelPackage.getScope());
+		frameEClass.getESuperTypes().add(theWiresPackage.getParameterEdgesSource());
 		inputFormEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
 		inputTextFieldEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
 		buttonEClass.getESuperTypes().add(theModelPackage.getVisibleThing());

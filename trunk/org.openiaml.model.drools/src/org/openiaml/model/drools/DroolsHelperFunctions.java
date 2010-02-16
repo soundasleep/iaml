@@ -21,7 +21,7 @@ import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.users.Role;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.wires.ExtendsWire;
-import org.openiaml.model.model.wires.ParameterWire;
+import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.SetWire;
 
 import ca.ecliptical.emf.xpath.EMFXPath;
@@ -116,10 +116,10 @@ public class DroolsHelperFunctions {
 	 * @param dobj
 	 * @return
 	 */
-	public boolean hasIncomingParameterWiresFrom(LoginHandler handler, DomainObject dobj) {
-		for (WireEdge wire : handler.getInEdges()) {
-			if (wire instanceof ParameterWire && wire.getFrom() instanceof DomainAttribute) {
-				if (dobj.equals(((DomainAttribute) wire.getFrom()).eContainer())) {
+	public boolean hasIncomingParameterEdgesFrom(LoginHandler handler, DomainObject dobj) {
+		for (ParameterEdge edge : handler.getInParameterEdges()) {
+			if (edge.getFrom() instanceof DomainAttribute) {
+				if (dobj.equals(((DomainAttribute) edge.getFrom()).eContainer())) {
 					// found one
 					return true;
 				}

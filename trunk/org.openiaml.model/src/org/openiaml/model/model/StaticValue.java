@@ -6,6 +6,8 @@
  */
 package org.openiaml.model.model;
 
+import org.openiaml.model.model.wires.ParameterEdgesSource;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -27,7 +29,7 @@ package org.openiaml.model.model;
  * @model
  * @generated
  */
-public interface StaticValue extends NamedElement, WireEdgesSource, DataFlowEdgesSource {
+public interface StaticValue extends NamedElement, WireEdgesSource, DataFlowEdgesSource, ParameterEdgesSource {
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->

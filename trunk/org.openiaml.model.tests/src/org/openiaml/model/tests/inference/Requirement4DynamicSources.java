@@ -18,7 +18,7 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ConditionWire;
-import org.openiaml.model.model.wires.ParameterWire;
+import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SyncWire;
 
@@ -167,10 +167,7 @@ public class Requirement4DynamicSources extends InferenceTestCaseWithConditionWi
 		assertGenerated(initCondition);
 		
 		// parameter wires
-		Set<?> params = getWiresTo(syncCond, initCondition);
-		assertEquals(2, params.size());
-		
-		assertInstanceOf(ParameterWire.class, params);		
+		assertEquals(2, initCondition.getInParameterEdges().size());
 		
 	}
 

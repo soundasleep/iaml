@@ -54,6 +54,7 @@ import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.wires.ParameterEdgesSource;
 
 /**
  * <!-- begin-user-doc -->
@@ -325,6 +326,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseWireEdgeDestination(applicationElementProperty);
 				if (result == null) result = caseDataFlowEdgesSource(applicationElementProperty);
 				if (result == null) result = caseDataFlowEdgeDestination(applicationElementProperty);
+				if (result == null) result = caseParameterEdgesSource(applicationElementProperty);
 				if (result == null) result = caseGeneratedElement(applicationElementProperty);
 				if (result == null) result = caseShouldntContainWires(applicationElementProperty);
 				if (result == null) result = caseContainsWires(applicationElementProperty);
@@ -337,6 +339,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseNamedElement(staticValue);
 				if (result == null) result = caseWireEdgesSource(staticValue);
 				if (result == null) result = caseDataFlowEdgesSource(staticValue);
+				if (result == null) result = caseParameterEdgesSource(staticValue);
 				if (result == null) result = caseGeneratedElement(staticValue);
 				if (result == null) result = caseShouldntContainWires(staticValue);
 				if (result == null) result = caseContainsWires(staticValue);
@@ -347,6 +350,7 @@ public class ModelSwitch<T> {
 				VisibleThing visibleThing = (VisibleThing)theEObject;
 				T result = caseVisibleThing(visibleThing);
 				if (result == null) result = caseCanBeSynced(visibleThing);
+				if (result == null) result = caseParameterEdgesSource(visibleThing);
 				if (result == null) result = caseContainsConditions(visibleThing);
 				if (result == null) result = caseContainsEventTriggers(visibleThing);
 				if (result == null) result = caseContainsOperations(visibleThing);
@@ -449,6 +453,7 @@ public class ModelSwitch<T> {
 				DynamicApplicationElementSet dynamicApplicationElementSet = (DynamicApplicationElementSet)theEObject;
 				T result = caseDynamicApplicationElementSet(dynamicApplicationElementSet);
 				if (result == null) result = caseApplicationElement(dynamicApplicationElementSet);
+				if (result == null) result = caseParameterEdgesSource(dynamicApplicationElementSet);
 				if (result == null) result = caseCanBeSynced(dynamicApplicationElementSet);
 				if (result == null) result = caseContainsOperations(dynamicApplicationElementSet);
 				if (result == null) result = caseNamedElement(dynamicApplicationElementSet);
@@ -582,6 +587,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseNamedElement(queryParameter);
 				if (result == null) result = caseWireEdgesSource(queryParameter);
 				if (result == null) result = caseDataFlowEdgesSource(queryParameter);
+				if (result == null) result = caseParameterEdgesSource(queryParameter);
 				if (result == null) result = caseGeneratedElement(queryParameter);
 				if (result == null) result = caseShouldntContainWires(queryParameter);
 				if (result == null) result = caseContainsWires(queryParameter);
@@ -1257,6 +1263,21 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseCanBeSynced(CanBeSynced object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Parameter Edges Source</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Parameter Edges Source</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseParameterEdgesSource(ParameterEdgesSource object) {
 		return null;
 	}
 

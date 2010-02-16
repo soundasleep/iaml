@@ -62,13 +62,9 @@ public class SelectFieldFromObject extends InferenceTestCase {
 
 		// when the text field is edited, the attr update operation should be called
 		RunInstanceWire runEdit = (RunInstanceWire) getWireFromTo(root, edit, updateAttr);
+		
 		// with a parameter
-		ParameterWire param = (ParameterWire) getWireFromTo(root, fieldValue, runEdit);
-
-		assertNotNull(param);
-		assertNotNull(sw);
-		assertNotNull(select);
-		assertNotNull(update);
+		assertGenerated(getParameterEdgeFromTo(root, fieldValue, runEdit));
 
 	}
 

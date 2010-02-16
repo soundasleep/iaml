@@ -147,10 +147,10 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 		RunInstanceWire run = assertHasRunInstanceWire(login, button, doLogin, "onClick");
 		
 		// assert parameter wires
-		ParameterWire pe = assertHasParameterWire(root, femail, run);
+		ParameterWire pe = assertHasParameterEdge(root, femail, run);
 		assertGenerated(pe);
 		assertEquals("email", pe.getName());
-		ParameterWire pp = assertHasParameterWire(root, fpassword, run);
+		ParameterWire pp = assertHasParameterEdge(root, fpassword, run);
 		assertGenerated(pp);
 		assertEquals("password", pp.getName());
 				

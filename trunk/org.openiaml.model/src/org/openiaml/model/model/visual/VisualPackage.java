@@ -98,6 +98,15 @@ public interface VisualPackage extends EPackage {
 	int FRAME__WIRES = ModelPackage.SCOPE__WIRES;
 
 	/**
+	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME__PARAMETER_EDGES = ModelPackage.SCOPE__PARAMETER_EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -251,13 +260,22 @@ public interface VisualPackage extends EPackage {
 	int FRAME__ELEMENTS = ModelPackage.SCOPE__ELEMENTS;
 
 	/**
+	 * The feature id for the '<em><b>Out Parameter Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME__OUT_PARAMETER_EDGES = ModelPackage.SCOPE_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Url</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FRAME__URL = ModelPackage.SCOPE_FEATURE_COUNT + 0;
+	int FRAME__URL = ModelPackage.SCOPE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -266,7 +284,7 @@ public interface VisualPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FRAME__CHILDREN = ModelPackage.SCOPE_FEATURE_COUNT + 1;
+	int FRAME__CHILDREN = ModelPackage.SCOPE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Frame</em>' class.
@@ -275,7 +293,7 @@ public interface VisualPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FRAME_FEATURE_COUNT = ModelPackage.SCOPE_FEATURE_COUNT + 2;
+	int FRAME_FEATURE_COUNT = ModelPackage.SCOPE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.visual.impl.InputFormImpl <em>Input Form</em>}' class.
@@ -322,6 +340,15 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int INPUT_FORM__WIRES = ModelPackage.VISIBLE_THING__WIRES;
+
+	/**
+	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_FORM__PARAMETER_EDGES = ModelPackage.VISIBLE_THING__PARAMETER_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
@@ -403,6 +430,15 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int INPUT_FORM__OVERRIDDEN = ModelPackage.VISIBLE_THING__OVERRIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Out Parameter Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_FORM__OUT_PARAMETER_EDGES = ModelPackage.VISIBLE_THING__OUT_PARAMETER_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -487,6 +523,15 @@ public interface VisualPackage extends EPackage {
 	int INPUT_TEXT_FIELD__WIRES = ModelPackage.VISIBLE_THING__WIRES;
 
 	/**
+	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_TEXT_FIELD__PARAMETER_EDGES = ModelPackage.VISIBLE_THING__PARAMETER_EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -566,6 +611,15 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int INPUT_TEXT_FIELD__OVERRIDDEN = ModelPackage.VISIBLE_THING__OVERRIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Out Parameter Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_TEXT_FIELD__OUT_PARAMETER_EDGES = ModelPackage.VISIBLE_THING__OUT_PARAMETER_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -651,6 +705,15 @@ public interface VisualPackage extends EPackage {
 	int BUTTON__WIRES = ModelPackage.VISIBLE_THING__WIRES;
 
 	/**
+	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__PARAMETER_EDGES = ModelPackage.VISIBLE_THING__PARAMETER_EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -730,6 +793,15 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int BUTTON__OVERRIDDEN = ModelPackage.VISIBLE_THING__OVERRIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Out Parameter Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__OUT_PARAMETER_EDGES = ModelPackage.VISIBLE_THING__OUT_PARAMETER_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -814,6 +886,15 @@ public interface VisualPackage extends EPackage {
 	int LABEL__WIRES = ModelPackage.VISIBLE_THING__WIRES;
 
 	/**
+	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LABEL__PARAMETER_EDGES = ModelPackage.VISIBLE_THING__PARAMETER_EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -893,6 +974,15 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int LABEL__OVERRIDDEN = ModelPackage.VISIBLE_THING__OVERRIDDEN;
+
+	/**
+	 * The feature id for the '<em><b>Out Parameter Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LABEL__OUT_PARAMETER_EDGES = ModelPackage.VISIBLE_THING__OUT_PARAMETER_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.

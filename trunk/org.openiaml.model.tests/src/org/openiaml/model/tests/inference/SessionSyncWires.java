@@ -15,7 +15,7 @@ import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ConditionWire;
-import org.openiaml.model.model.wires.ParameterWire;
+import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.tests.inference.model0_4.SetWireClient;
 
@@ -52,8 +52,7 @@ public class SessionSyncWires extends InferenceTestCase {
 		RunInstanceWire rw = (RunInstanceWire) getWireFromTo(root, edit, update);
 
 		ApplicationElementProperty fieldValue = assertHasApplicationElementProperty(field1, "fieldValue");
-		ParameterWire pw = (ParameterWire) getWireFromTo(root, fieldValue, rw);
-		assertNotNull(pw);
+		assertGenerated(getParameterEdgeFromTo(root, fieldValue, rw));
 
 		// session should have an 'init' event
 		EventTrigger init = assertHasEventTrigger(session, "init");
@@ -65,8 +64,7 @@ public class SessionSyncWires extends InferenceTestCase {
 		assertEquals("There should only be one out edge from init", 1, init.getOutEdges().size());
 
 		// with the source fieldvalue as a parameter
-		ParameterWire pw2 = (ParameterWire) getWireFromTo(session, fieldValue, rw2);
-		assertNotNull(pw2);
+		assertGenerated(getParameterEdgeFromTo(session, fieldValue, rw2));
 
 	}
 	
@@ -96,7 +94,7 @@ public class SessionSyncWires extends InferenceTestCase {
 		RunInstanceWire run = assertHasRunInstanceWire(field1, access, init, "run");
 		assertGenerated(run);
 		
-		ParameterWire param = assertHasParameterWire(field1, value, run);
+		ParameterEdge param = assertHasParameterEdge(field1, value, run);
 		assertGenerated(param);
 		
 		// newly created condition

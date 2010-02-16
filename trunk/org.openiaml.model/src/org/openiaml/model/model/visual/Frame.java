@@ -9,6 +9,7 @@ package org.openiaml.model.model.visual;
 import org.eclipse.emf.common.util.EList;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.VisibleThing;
+import org.openiaml.model.model.wires.ParameterEdgesSource;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,7 +32,7 @@ import org.openiaml.model.model.VisibleThing;
  * @model annotation="http://openiaml.org/comment comment='Scope supertype added in 0.2' comment2='represents the scope Window' changed='0.4.2 renamed from Page to Frame\r\n0.4.2 no longer extends VisibleThing'"
  * @generated
  */
-public interface Frame extends Scope {
+public interface Frame extends Scope, ParameterEdgesSource {
 	/**
 	 * Returns the value of the '<em><b>Url</b></em>' attribute.
 	 * <!-- begin-user-doc -->

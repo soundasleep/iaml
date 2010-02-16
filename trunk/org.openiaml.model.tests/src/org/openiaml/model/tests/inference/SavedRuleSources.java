@@ -11,6 +11,7 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ConditionWire;
+import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SyncWire;
@@ -115,10 +116,10 @@ public class SavedRuleSources extends InferenceTestCase {
 		assertEquals("Connect ConditionWires to RunInstanceWires created by SyncWires (edit/update)", targetCw.getGeneratedRule());
 
 		// all the ConditionWires need parameters: the XPath source, and the element to evaluate
-		ParameterWire param1 = (ParameterWire) getWireFromTo(root, dae, srcCw);
+		ParameterEdge param1 = getParameterEdgeFromTo(root, dae, srcCw);
 		assertTrue(param1.isIsGenerated());
 		assertEquals("Connect ParameterWires to ConditionWires connected to RunInstanceWires created by SyncWires (edit/update)", param1.getGeneratedRule());
-		ParameterWire param2 = (ParameterWire) getWireFromTo(root, dae, targetCw);
+		ParameterEdge param2 = getParameterEdgeFromTo(root, dae, targetCw); 
 		assertTrue(param2.isIsGenerated());
 		assertEquals("Connect ParameterWires to ConditionWires connected to RunInstanceWires created by SyncWires (edit/update)", param2.getGeneratedRule());
 

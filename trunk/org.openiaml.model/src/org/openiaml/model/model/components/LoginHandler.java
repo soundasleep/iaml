@@ -9,6 +9,7 @@ package org.openiaml.model.model.components;
 import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.scopes.Session;
+import org.openiaml.model.model.wires.ParameterEdgeDestination;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,7 +31,7 @@ import org.openiaml.model.model.scopes.Session;
  * @model
  * @generated
  */
-public interface LoginHandler extends ApplicationElementContainer, GeneratesElements {
+public interface LoginHandler extends ApplicationElementContainer, GeneratesElements, ParameterEdgeDestination {
 
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' attribute.

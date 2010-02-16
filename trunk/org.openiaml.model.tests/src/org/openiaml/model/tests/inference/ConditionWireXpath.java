@@ -11,7 +11,7 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ConditionWire;
-import org.openiaml.model.model.wires.ParameterWire;
+import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SyncWire;
 
@@ -68,8 +68,8 @@ public class ConditionWireXpath extends InferenceTestCase {
 		ConditionWire targetCw = (ConditionWire) getWireFromTo(page1, cond, targetRw);
 
 		// all the ConditionWires need parameters: the XPath source, and the element to evaluate
-		ParameterWire param1 = (ParameterWire) getWireFromTo(root, dae, srcCw);
-		ParameterWire param2 = (ParameterWire) getWireFromTo(root, dae, targetCw);
+		ParameterEdge param1 = getParameterEdgeFromTo(root, dae, srcCw);
+		ParameterEdge param2 = getParameterEdgeFromTo(root, dae, targetCw);
 
 		/**
 		 * cannot test these now, since cond->src will have TWO wires.

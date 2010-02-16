@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import junit.framework.AssertionFailedError;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IStatus;
@@ -44,6 +46,9 @@ import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.domain.DomainPackage;
 import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.visual.VisualPackage;
+import org.openiaml.model.model.wires.ParameterEdge;
+import org.openiaml.model.model.wires.ParameterEdgeDestination;
+import org.openiaml.model.model.wires.ParameterEdgesSource;
 
 import ca.ecliptical.emf.xpath.EMFXPath;
 
@@ -552,14 +557,18 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	}
 
 	/**
-	 * It's not possible to do something like //iaml:wire[iaml:from='id']
+	 * Get <em>any</em> WireEdge connecting the given elements,
+	 * contained with the given container element or any of its children.
+	 * 
+	 * <p>It's not possible to do something like //iaml:wire[iaml:from='id']
 	 * so we need to parse them manually.
 	 *
 	 * @param container
 	 * @param fromElement
 	 * @param toElement
-	 * @return the wire found or null
+	 * @return the wire found
 	 * @throws JaxenException
+	 * @throws AssertionFailedError if no wire was found
 	 */
 	protected WireEdge getWireFromTo(EObject container, WireEdgesSource fromElement, WireEdgeDestination toElement) throws JaxenException {
 		List<?> wires = query(container, "//iaml:wires");
@@ -573,6 +582,53 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 
 		fail("No wire found from [" + fromElement + "] to [" + toElement + "]");
 		return null;
+	}
+
+	/**
+	 * Get <em>any</em> ParameterWire connecting the given elements,
+	 * contained with the given container element or any of its children.
+	 * If many exist, this method fails.
+	 *
+	 * @return the found ParameterEdge
+	 * @throws JaxenException
+	 * @throws AssertionFailedError if no edge was found, or more than one was found
+	 */
+	protected ParameterEdge getParameterEdgeFromTo(EObject container, ParameterEdgesSource from, ParameterEdgeDestination to) throws JaxenException {
+		List<ParameterEdge> edges = to.getInParameterEdges();
+		ParameterEdge result = null;
+		int count = 0;
+		
+		for (ParameterEdge e : edges) {
+			if (from.equals(e.getFrom())) {
+				count++;
+				result = e;
+			}
+		}
+		
+		assertEquals("Expected 1 ParameterEdge from '" + from + "' to '" + to + "'", 1, count);
+		return result;
+	}
+
+	/**
+	 * Get <em>all</em> ParameterWire connecting the given elements,
+	 * contained with the given container element or any of its children.
+	 *
+	 * @return the found ParameterEdges
+	 * @throws JaxenException
+	 */
+	protected Set<ParameterEdge> getParameterEdgesFromTo(EObject container, ParameterEdgesSource from, ParameterEdgeDestination to) throws JaxenException {
+		Set<ParameterEdge> result = new HashSet<ParameterEdge>();
+		
+		List<?> wires = query(container, "//iaml:parameterEdges");
+		for (Object o : wires) {
+			if (o instanceof ParameterEdge) {
+				ParameterEdge w = (ParameterEdge) o;
+				if (w.getFrom().equals(from) && w.getTo().equals(to))
+					result.add(w);
+			}
+		}
+
+		return result;
 	}
 
 	/**

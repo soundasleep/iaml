@@ -6,6 +6,8 @@
  */
 package org.openiaml.model.model;
 
+import org.openiaml.model.model.wires.ParameterEdgesSource;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -23,7 +25,7 @@ package org.openiaml.model.model;
  * @model
  * @generated
  */
-public interface DynamicApplicationElementSet extends ApplicationElement {
+public interface DynamicApplicationElementSet extends ApplicationElement, ParameterEdgesSource {
 	/**
 	 * Returns the value of the '<em><b>Query</b></em>' attribute.
 	 * <!-- begin-user-doc -->

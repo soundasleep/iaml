@@ -68,7 +68,9 @@ import org.openiaml.model.model.wires.ConditionWire;
 import org.openiaml.model.model.wires.ExtendsWire;
 import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.NewInstanceWire;
-import org.openiaml.model.model.wires.ParameterWire;
+import org.openiaml.model.model.wires.ParameterEdge;
+import org.openiaml.model.model.wires.ParameterEdgeDestination;
+import org.openiaml.model.model.wires.ParameterEdgesSource;
 import org.openiaml.model.model.wires.RequiresWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SelectWire;
@@ -871,14 +873,15 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	}
 	
 	/**
-	 * Assert there exists only one unidirectional ParameterWire between
+	 * Assert there exists only one unidirectional ParameterEdge between
 	 * the given elements.
 	 *
 	 * @return The element found
 	 */
-	public ParameterWire assertHasParameterWire(EObject container, WireEdgesSource from, WireEdgeDestination to) throws JaxenException {
-		return (ParameterWire) assertHasWireFromTo(container, from, to, 
-				ParameterWire.class);
+	public ParameterEdge assertHasParameterEdge(EObject container, ParameterEdgesSource from, ParameterEdgeDestination to) throws JaxenException {
+		Set<ParameterEdge> params = getParameterEdgesFromTo(container, from, to);
+		assertEquals("Should be exactly one parameter wire: " + params, 1, params.size());
+		return params.iterator().next();
 	}
 	
 	/**

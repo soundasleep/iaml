@@ -45,7 +45,7 @@ public class Issue69 extends AbstractShortcutsTestCase {
 		ConnectionNodeEditPart select = assertHasSelectWire(editor_page, object, instance, "select");
 		
 		// as with the parameter wire
-		assertHasParameterWire(editor_page, property, select);
+		assertHasParameterEdge(editor_page, property, select);
 	}
 
 	/**

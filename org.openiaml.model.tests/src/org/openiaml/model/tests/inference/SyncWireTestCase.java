@@ -18,7 +18,7 @@ import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.ParameterWire;
+import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SyncWire;
 
@@ -148,8 +148,8 @@ public class SyncWireTestCase extends InferenceTestCase {
 		// run instance wires
 		WireEdge name1editRun = null;
 		WireEdge name2editRun = null;
-		WireEdge name1editParam = null;
-		WireEdge name2editParam = null;
+		ParameterEdge name1editParam = null;
+		ParameterEdge name2editParam = null;
 		// get RunInstanceWires first
 		for (WireEdge w : wire.getWires()) {
 			if (w instanceof RunInstanceWire) {
@@ -160,13 +160,11 @@ public class SyncWireTestCase extends InferenceTestCase {
 			}
 		}
 		// then ParameterWires
-		for (WireEdge w : wire.getWires()) {
-			if (w instanceof ParameterWire) {
-				if (w.getFrom().equals(name1value) && w.getTo().equals(name1editRun) )
-					name1editParam = w;
-				if (w.getFrom().equals(name2value) && w.getTo().equals(name2editRun) )
-					name2editParam = w;
-			}
+		for (ParameterEdge w : wire.getInParameterEdges()) {
+			if (w.getFrom().equals(name1value) && w.getTo().equals(name1editRun) )
+				name1editParam = w;
+			if (w.getFrom().equals(name2value) && w.getTo().equals(name2editRun) )
+				name2editParam = w;
 		}
 
 		// make sure we've got all of these

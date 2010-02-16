@@ -233,9 +233,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		assertGenerated(prop);
 
 		// connecting to the run wire
-		Set<WireEdge> w2 = assertHasWiresFromTo(1, root, prop, run);
-		ParameterWire param = (ParameterWire) w2.iterator().next();
-		assertGenerated(param);
+		assertGenerated(getParameterEdgeFromTo(root, prop, run));
 
 	}
 

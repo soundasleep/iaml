@@ -58,12 +58,8 @@ public class DatabaseWithInputForm extends InferenceTestCase {
 		ApplicationElementProperty attrValue = assertHasApplicationElementProperty(attribute, "fieldValue");
 
 		// they should be parameters
-		ParameterWire textPw = (ParameterWire) getWireFromTo(wire, textValue, srcRw);
-		ParameterWire attrPw = (ParameterWire) getWireFromTo(wire, attrValue, targetRw);
-
-		// remove warnings
-		assertNotNull(textPw);
-		assertNotNull(attrPw);
+		assertGenerated(assertHasParameterEdge(wire, textValue, srcRw));
+		assertGenerated(assertHasParameterEdge(wire, attrValue, targetRw));
 	}
 
 	public void testInferenceWithForm() throws Exception {
@@ -96,12 +92,8 @@ public class DatabaseWithInputForm extends InferenceTestCase {
 		ApplicationElementProperty attrValue = assertHasApplicationElementProperty(attribute, "fieldValue");
 
 		// they should be parameters
-		ParameterWire textPw = (ParameterWire) getWireFromTo(wire, textValue, srcRw);
-		ParameterWire attrPw = (ParameterWire) getWireFromTo(wire, attrValue, targetRw);
-
-		// remove warnings
-		assertNotNull(textPw);
-		assertNotNull(attrPw);
+		assertGenerated(assertHasParameterEdge(wire, textValue, srcRw));
+		assertGenerated(assertHasParameterEdge(wire, attrValue, targetRw));
 	}
 
 }

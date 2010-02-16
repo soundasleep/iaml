@@ -14,9 +14,12 @@ import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.DynamicApplicationElementSet;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.WireEdge;
+import org.openiaml.model.model.WireEdgeDestination;
+import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.wires.ConditionWire;
-import org.openiaml.model.model.wires.ParameterWire;
+import org.openiaml.model.model.wires.ParameterEdge;
+import org.openiaml.model.model.wires.ParameterEdgesSource;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SyncWire;
 
@@ -32,50 +35,20 @@ import org.openiaml.model.model.wires.SyncWire;
 public abstract class InferenceTestCaseWithConditionWires extends InferenceTestCase {
 
 	/**
-	 * Ensure there are only a given number of parameters for a 
-	 * ConditionWire.
-	 * 
-	 * If it fails, it prints out to stderr the ParameterWires found.
-	 */
-	protected void assertHasParameterWireCount(int i, ConditionWire cw) {
-		int counted = 0;
-		List<ParameterWire> results = new ArrayList<ParameterWire>();
-		
-		for (WireEdge w : cw.getInEdges()) {
-			if (w instanceof ParameterWire) {
-				counted++;
-				results.add((ParameterWire) w);
-			}
-		}
-		
-		if (counted != i) {
-			// print out list
-			for (ParameterWire w : results) {
-				System.err.println(w + ", from: " + w.getFrom() + ", to: " + w.getTo());
-			}
-			fail("Expected " + i + " parameters into ConditionWire '" + cw + "': found " + counted);
-		}
-	}
-
-	/**
-	 * Check that there are no ConditionWires from cond to root, with
+	 * Check that there are no ConditionWires from from to to, with
 	 * the given page as a Parameter
+	 * 
 	 * @throws JaxenException 
 	 */
-	protected void assertNotParameterWire(InternetApplication root,
-			CompositeCondition cond, RunInstanceWire rw, Frame page) throws JaxenException {
+	protected void assertNoParamtersToConditionWires(InternetApplication container,
+			WireEdgesSource from, WireEdgeDestination to, ParameterEdgesSource page) throws JaxenException {
 
-		Set<WireEdge> conditions = getWiresFromTo(root, cond, rw);
+		Set<WireEdge> conditions = getWiresFromTo(container, from, to);
 		for (WireEdge wire : conditions) {
 			ConditionWire condition = (ConditionWire) wire;
-			
-			Set<WireEdge> params = getWiresTo(root, condition);
-			for (WireEdge p : params) {
-				ParameterWire param = (ParameterWire) p;
-				if (param.getFrom().equals(page)) {
-					fail("Did not expect a ConditionWire with Page '" + page + "' as a parameter.");
-				}
-			}
+
+			Set<ParameterEdge> params = getParameterEdgesFromTo(container, page, condition);
+			assertNotEqual("Unexpectedly found ParameterEdge: " + params, 0, params.size());
 		}
 		
 	}
@@ -101,8 +74,7 @@ public abstract class InferenceTestCaseWithConditionWires extends InferenceTestC
 			ConditionWire cw = (ConditionWire) wire;
 			
 			// all wires should have a parameter from the set (xpath)
-			ParameterWire pw_set = (ParameterWire) getWireFromTo(root, dae, cw);
-			assertNotNull(pw_set);
+			getParameterEdgeFromTo(root, dae, cw);
 			
 			// but one wire should have page1, the other should have page2
 			if (hasWireFromTo(root, page1, cw)) {
@@ -140,8 +112,7 @@ public abstract class InferenceTestCaseWithConditionWires extends InferenceTestC
 			ConditionWire cw = (ConditionWire) wire;
 			
 			// all wires should have a parameter from the set (xpath)
-			ParameterWire pw_set = (ParameterWire) getWireFromTo(root, dae, cw);
-			assertNotNull(pw_set);
+			getParameterEdgeFromTo(root, dae, cw);
 
 			// but one wire should have page1, the other should have page2
 			if (hasWireFromTo(root, page1, cw)) {
@@ -189,8 +160,7 @@ public abstract class InferenceTestCaseWithConditionWires extends InferenceTestC
 			ConditionWire cw = (ConditionWire) wire;
 			
 			// all wires should have a parameter from the set (xpath)
-			ParameterWire pw_set = (ParameterWire) getWireFromTo(root, dae, cw);
-			assertNotNull(pw_set);
+			getParameterEdgeFromTo(root, dae, cw);
 
 			// but one wire should have page1, the other should have page2
 			if (hasWireFromTo(root, page1, cw)) {

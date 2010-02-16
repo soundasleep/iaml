@@ -25,6 +25,7 @@ import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.wires.ParameterEdge;
 
 /**
  * <!-- begin-user-doc -->
@@ -39,6 +40,7 @@ import org.openiaml.model.model.WireEdgesSource;
  *   <li>{@link org.openiaml.model.model.impl.EventTriggerImpl#getGeneratedRule <em>Generated Rule</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.EventTriggerImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.EventTriggerImpl#getWires <em>Wires</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.EventTriggerImpl#getParameterEdges <em>Parameter Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.EventTriggerImpl#getOutEdges <em>Out Edges</em>}</li>
  * </ul>
  * </p>
@@ -145,6 +147,16 @@ public class EventTriggerImpl extends EObjectImpl implements EventTrigger {
 	 * @ordered
 	 */
 	protected EList<WireEdge> wires;
+
+	/**
+	 * The cached value of the '{@link #getParameterEdges() <em>Parameter Edges</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParameterEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ParameterEdge> parameterEdges;
 
 	/**
 	 * The cached value of the '{@link #getOutEdges() <em>Out Edges</em>}' reference list.
@@ -288,6 +300,18 @@ public class EventTriggerImpl extends EObjectImpl implements EventTrigger {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ParameterEdge> getParameterEdges() {
+		if (parameterEdges == null) {
+			parameterEdges = new EObjectContainmentEList<ParameterEdge>(ParameterEdge.class, this, ModelPackage.EVENT_TRIGGER__PARAMETER_EDGES);
+		}
+		return parameterEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<WireEdge> getOutEdges() {
 		if (outEdges == null) {
 			outEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, ModelPackage.EVENT_TRIGGER__OUT_EDGES, ModelPackage.WIRE_EDGE__FROM);
@@ -324,6 +348,8 @@ public class EventTriggerImpl extends EObjectImpl implements EventTrigger {
 				return ((InternalEList<?>)getGeneratedBy()).basicRemove(otherEnd, msgs);
 			case ModelPackage.EVENT_TRIGGER__WIRES:
 				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
+			case ModelPackage.EVENT_TRIGGER__PARAMETER_EDGES:
+				return ((InternalEList<?>)getParameterEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.EVENT_TRIGGER__OUT_EDGES:
 				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
 		}
@@ -350,6 +376,8 @@ public class EventTriggerImpl extends EObjectImpl implements EventTrigger {
 				return getName();
 			case ModelPackage.EVENT_TRIGGER__WIRES:
 				return getWires();
+			case ModelPackage.EVENT_TRIGGER__PARAMETER_EDGES:
+				return getParameterEdges();
 			case ModelPackage.EVENT_TRIGGER__OUT_EDGES:
 				return getOutEdges();
 		}
@@ -385,6 +413,10 @@ public class EventTriggerImpl extends EObjectImpl implements EventTrigger {
 				getWires().clear();
 				getWires().addAll((Collection<? extends WireEdge>)newValue);
 				return;
+			case ModelPackage.EVENT_TRIGGER__PARAMETER_EDGES:
+				getParameterEdges().clear();
+				getParameterEdges().addAll((Collection<? extends ParameterEdge>)newValue);
+				return;
 			case ModelPackage.EVENT_TRIGGER__OUT_EDGES:
 				getOutEdges().clear();
 				getOutEdges().addAll((Collection<? extends WireEdge>)newValue);
@@ -419,6 +451,9 @@ public class EventTriggerImpl extends EObjectImpl implements EventTrigger {
 			case ModelPackage.EVENT_TRIGGER__WIRES:
 				getWires().clear();
 				return;
+			case ModelPackage.EVENT_TRIGGER__PARAMETER_EDGES:
+				getParameterEdges().clear();
+				return;
 			case ModelPackage.EVENT_TRIGGER__OUT_EDGES:
 				getOutEdges().clear();
 				return;
@@ -446,6 +481,8 @@ public class EventTriggerImpl extends EObjectImpl implements EventTrigger {
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case ModelPackage.EVENT_TRIGGER__WIRES:
 				return wires != null && !wires.isEmpty();
+			case ModelPackage.EVENT_TRIGGER__PARAMETER_EDGES:
+				return parameterEdges != null && !parameterEdges.isEmpty();
 			case ModelPackage.EVENT_TRIGGER__OUT_EDGES:
 				return outEdges != null && !outEdges.isEmpty();
 		}
@@ -462,6 +499,7 @@ public class EventTriggerImpl extends EObjectImpl implements EventTrigger {
 		if (baseClass == ContainsWires.class) {
 			switch (derivedFeatureID) {
 				case ModelPackage.EVENT_TRIGGER__WIRES: return ModelPackage.CONTAINS_WIRES__WIRES;
+				case ModelPackage.EVENT_TRIGGER__PARAMETER_EDGES: return ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES;
 				default: return -1;
 			}
 		}
@@ -489,6 +527,7 @@ public class EventTriggerImpl extends EObjectImpl implements EventTrigger {
 		if (baseClass == ContainsWires.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.CONTAINS_WIRES__WIRES: return ModelPackage.EVENT_TRIGGER__WIRES;
+				case ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES: return ModelPackage.EVENT_TRIGGER__PARAMETER_EDGES;
 				default: return -1;
 			}
 		}

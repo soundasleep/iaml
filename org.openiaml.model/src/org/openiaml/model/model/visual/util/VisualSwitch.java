@@ -30,6 +30,7 @@ import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Label;
 import org.openiaml.model.model.visual.VisualPackage;
+import org.openiaml.model.model.wires.ParameterEdgesSource;
 
 /**
  * <!-- begin-user-doc -->
@@ -109,6 +110,7 @@ public class VisualSwitch<T> {
 				Frame frame = (Frame)theEObject;
 				T result = caseFrame(frame);
 				if (result == null) result = caseScope(frame);
+				if (result == null) result = caseParameterEdgesSource(frame);
 				if (result == null) result = caseContainsScopes(frame);
 				if (result == null) result = caseCanBeSynced(frame);
 				if (result == null) result = caseGeneratesElements(frame);
@@ -129,6 +131,7 @@ public class VisualSwitch<T> {
 				T result = caseInputForm(inputForm);
 				if (result == null) result = caseVisibleThing(inputForm);
 				if (result == null) result = caseCanBeSynced(inputForm);
+				if (result == null) result = caseParameterEdgesSource(inputForm);
 				if (result == null) result = caseContainsConditions(inputForm);
 				if (result == null) result = caseContainsEventTriggers(inputForm);
 				if (result == null) result = caseContainsOperations(inputForm);
@@ -147,6 +150,7 @@ public class VisualSwitch<T> {
 				T result = caseInputTextField(inputTextField);
 				if (result == null) result = caseVisibleThing(inputTextField);
 				if (result == null) result = caseCanBeSynced(inputTextField);
+				if (result == null) result = caseParameterEdgesSource(inputTextField);
 				if (result == null) result = caseContainsConditions(inputTextField);
 				if (result == null) result = caseContainsEventTriggers(inputTextField);
 				if (result == null) result = caseContainsOperations(inputTextField);
@@ -165,6 +169,7 @@ public class VisualSwitch<T> {
 				T result = caseButton(button);
 				if (result == null) result = caseVisibleThing(button);
 				if (result == null) result = caseCanBeSynced(button);
+				if (result == null) result = caseParameterEdgesSource(button);
 				if (result == null) result = caseContainsConditions(button);
 				if (result == null) result = caseContainsEventTriggers(button);
 				if (result == null) result = caseContainsOperations(button);
@@ -183,6 +188,7 @@ public class VisualSwitch<T> {
 				T result = caseLabel(label);
 				if (result == null) result = caseVisibleThing(label);
 				if (result == null) result = caseCanBeSynced(label);
+				if (result == null) result = caseParameterEdgesSource(label);
 				if (result == null) result = caseContainsConditions(label);
 				if (result == null) result = caseContainsEventTriggers(label);
 				if (result == null) result = caseContainsOperations(label);
@@ -317,6 +323,21 @@ public class VisualSwitch<T> {
 	 * @generated
 	 */
 	public T caseScope(Scope object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Parameter Edges Source</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Parameter Edges Source</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseParameterEdgesSource(ParameterEdgesSource object) {
 		return null;
 	}
 

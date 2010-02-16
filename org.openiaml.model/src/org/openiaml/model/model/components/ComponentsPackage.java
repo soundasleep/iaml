@@ -144,6 +144,15 @@ public interface ComponentsPackage extends EPackage {
 	int LOGIN_HANDLER__WIRES = ModelPackage.APPLICATION_ELEMENT_CONTAINER__WIRES;
 
 	/**
+	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOGIN_HANDLER__PARAMETER_EDGES = ModelPackage.APPLICATION_ELEMENT_CONTAINER__PARAMETER_EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -216,13 +225,22 @@ public interface ComponentsPackage extends EPackage {
 	int LOGIN_HANDLER__CHILDREN = ModelPackage.APPLICATION_ELEMENT_CONTAINER__CHILDREN;
 
 	/**
+	 * The feature id for the '<em><b>In Parameter Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOGIN_HANDLER__IN_PARAMETER_EDGES = ModelPackage.APPLICATION_ELEMENT_CONTAINER_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOGIN_HANDLER__TYPE = ModelPackage.APPLICATION_ELEMENT_CONTAINER_FEATURE_COUNT + 0;
+	int LOGIN_HANDLER__TYPE = ModelPackage.APPLICATION_ELEMENT_CONTAINER_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Login Handler</em>' class.
@@ -231,7 +249,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOGIN_HANDLER_FEATURE_COUNT = ModelPackage.APPLICATION_ELEMENT_CONTAINER_FEATURE_COUNT + 1;
+	int LOGIN_HANDLER_FEATURE_COUNT = ModelPackage.APPLICATION_ELEMENT_CONTAINER_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.components.impl.AccessControlHandlerImpl <em>Access Control Handler</em>}' class.
@@ -314,6 +332,15 @@ public interface ComponentsPackage extends EPackage {
 	 * @ordered
 	 */
 	int ACCESS_CONTROL_HANDLER__WIRES = ModelPackage.APPLICATION_ELEMENT_CONTAINER__WIRES;
+
+	/**
+	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACCESS_CONTROL_HANDLER__PARAMETER_EDGES = ModelPackage.APPLICATION_ELEMENT_CONTAINER__PARAMETER_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
@@ -461,13 +488,22 @@ public interface ComponentsPackage extends EPackage {
 	int GATE__WIRES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GATE__PARAMETER_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GATE__OUT_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int GATE__OUT_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
@@ -476,7 +512,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GATE__IN_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int GATE__IN_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
@@ -485,7 +521,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GATE__GENERATED_ELEMENTS = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int GATE__GENERATED_ELEMENTS = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
@@ -494,7 +530,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GATE__OVERRIDDEN = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int GATE__OVERRIDDEN = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Gate</em>' class.
@@ -503,7 +539,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GATE_FEATURE_COUNT = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 5;
+	int GATE_FEATURE_COUNT = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.components.impl.EntryGateImpl <em>Entry Gate</em>}' class.
@@ -568,6 +604,15 @@ public interface ComponentsPackage extends EPackage {
 	 * @ordered
 	 */
 	int ENTRY_GATE__WIRES = GATE__WIRES;
+
+	/**
+	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTRY_GATE__PARAMETER_EDGES = GATE__PARAMETER_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
@@ -677,6 +722,15 @@ public interface ComponentsPackage extends EPackage {
 	 * @ordered
 	 */
 	int EXIT_GATE__WIRES = GATE__WIRES;
+
+	/**
+	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXIT_GATE__PARAMETER_EDGES = GATE__PARAMETER_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.

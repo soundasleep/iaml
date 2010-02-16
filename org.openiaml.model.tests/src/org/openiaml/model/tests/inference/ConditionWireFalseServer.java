@@ -88,8 +88,8 @@ public class ConditionWireFalseServer extends InferenceTestCase {
 		ApplicationElementProperty field2value = assertHasApplicationElementProperty(field2, "fieldValue");
 		assertNotSame(field1value, field2value);
 		
-		assertHasParameterWire(root, field2value, srcInitRun);
-		assertHasParameterWire(root, field1value, targetInitRun);
+		assertHasParameterEdge(root, field2value, srcInitRun);
+		assertHasParameterEdge(root, field1value, targetInitRun);
 		
 		// but they should also have condition wires
 		assertHasConditionWire(page1, cond, srcInitRun);

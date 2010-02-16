@@ -28,7 +28,7 @@ import org.openiaml.model.model.WireEdgeDestination;
  * @model annotation="http://openiaml.org/comment comment='RunWire: a composite wire that contains ExecutionWires/etc'"
  * @generated
  */
-public interface RunInstanceWire extends CompositeWire, WireEdgeDestination {
+public interface RunInstanceWire extends CompositeWire, WireEdgeDestination, ParameterEdgeDestination {
 
 	/**
 	 * Returns the value of the '<em><b>Priority</b></em>' attribute.

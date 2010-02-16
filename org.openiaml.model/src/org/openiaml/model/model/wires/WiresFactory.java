@@ -53,13 +53,13 @@ public interface WiresFactory extends EFactory {
 	RunInstanceWire createRunInstanceWire();
 
 	/**
-	 * Returns a new object of class '<em>Parameter Wire</em>'.
+	 * Returns a new object of class '<em>Parameter Edge</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Parameter Wire</em>'.
+	 * @return a new object of class '<em>Parameter Edge</em>'.
 	 * @generated
 	 */
-	ParameterWire createParameterWire();
+	ParameterEdge createParameterEdge();
 
 	/**
 	 * Returns a new object of class '<em>Set Wire</em>'.

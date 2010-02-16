@@ -100,42 +100,26 @@ public class ConditionWireXpathThreePages extends InferenceTestCaseWithCondition
 
     // for p1<-->p2 and p1<-->p3, since page1 is connected directly with
     // the DynamicSet, p1 should not be a condition in any sync wire
-    assertNotParameterWire(root, cond, rw1_2, page1);
-    assertNotParameterWire(root, cond, rw2_1, page1);
-    assertNotParameterWire(root, cond, rw1_3, page1);
-    assertNotParameterWire(root, cond, rw3_1, page1);
+    assertNoParamtersToConditionWires(root, cond, rw1_2, page1);
+    assertNoParamtersToConditionWires(root, cond, rw2_1, page1);
+    assertNoParamtersToConditionWires(root, cond, rw1_3, page1);
+    assertNoParamtersToConditionWires(root, cond, rw3_1, page1);
 
     // and parameters connecting up the sets... (only one per dae --> condition wire)
-    assertHasWiresFromTo(1, root, dae, cw1_2);
-    ParameterWire pw1_2 = (ParameterWire) getWireFromTo(root, dae, cw1_2);
-    assertGenerated(pw1_2);
-    assertHasWiresFromTo(1, root, dae, cw2_1);
-    ParameterWire pw2_1 = (ParameterWire) getWireFromTo(root, dae, cw2_1);
-    assertGenerated(pw2_1);
-    assertHasWiresFromTo(1, root, dae, cw1_3);
-    ParameterWire pw1_3 = (ParameterWire) getWireFromTo(root, dae, cw1_3);
-    assertGenerated(pw1_3);
-    assertHasWiresFromTo(1, root, dae, cw3_1);
-    ParameterWire pw3_1 = (ParameterWire) getWireFromTo(root, dae, cw3_1);
-    assertGenerated(pw3_1);
+    assertGenerated(getParameterEdgeFromTo(root, dae, cw1_2));
+    assertGenerated(getParameterEdgeFromTo(root, dae, cw2_1));
+    assertGenerated(getParameterEdgeFromTo(root, dae, cw1_3));
+    assertGenerated(getParameterEdgeFromTo(root, dae, cw3_1));
     /*
     ParameterWire pw2_3 = (ParameterWire) getWireFromTo(root, dae, cw2_3);
     ParameterWire pw3_2 = (ParameterWire) getWireFromTo(root, dae, cw3_2);
     */
 
     // ... and the target elements (only one per page --> condition wire)
-    assertHasWiresFromTo(1, root, page2, cw1_2);
-    ParameterWire pw1_2b = (ParameterWire) getWireFromTo(root, page2, cw1_2);
-    assertGenerated(pw1_2b);
-    assertHasWiresFromTo(1, root, page2, cw2_1);
-    ParameterWire pw2_1b = (ParameterWire) getWireFromTo(root, page2, cw2_1);
-    assertGenerated(pw2_1b);
-    assertHasWiresFromTo(1, root, page3, cw1_3);
-    ParameterWire pw1_3b = (ParameterWire) getWireFromTo(root, page3, cw1_3);
-    assertGenerated(pw1_3b);
-    assertHasWiresFromTo(1, root, page3, cw3_1);
-    ParameterWire pw3_1b = (ParameterWire) getWireFromTo(root, page3, cw3_1);
-    assertGenerated(pw3_1b);
+    assertGenerated(getParameterEdgeFromTo(root, page2, cw1_2));
+    assertGenerated(getParameterEdgeFromTo(root, page2, cw2_1));
+    assertGenerated(getParameterEdgeFromTo(root, page3, cw1_3));
+    assertGenerated(getParameterEdgeFromTo(root, page3, cw3_1));
     /*
     ParameterWire pw2_3b = (ParameterWire) getWireFromTo(root, page3, cw2_3);
     ParameterWire pw3_2b = (ParameterWire) getWireFromTo(root, page2, cw3_2);

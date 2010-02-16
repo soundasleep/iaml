@@ -1125,6 +1125,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getContainsWires_ParameterEdges() {
+		return (EReference)containsWiresEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getShouldntContainWires() {
 		return shouldntContainWiresEClass;
 	}
@@ -1584,6 +1593,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		containsWiresEClass = createEClass(CONTAINS_WIRES);
 		createEReference(containsWiresEClass, CONTAINS_WIRES__WIRES);
+		createEReference(containsWiresEClass, CONTAINS_WIRES__PARAMETER_EDGES);
 
 		shouldntContainWiresEClass = createEClass(SHOULDNT_CONTAIN_WIRES);
 
@@ -1721,9 +1731,11 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		applicationElementPropertyEClass.getESuperTypes().add(this.getWireEdgeDestination());
 		applicationElementPropertyEClass.getESuperTypes().add(this.getDataFlowEdgesSource());
 		applicationElementPropertyEClass.getESuperTypes().add(this.getDataFlowEdgeDestination());
+		applicationElementPropertyEClass.getESuperTypes().add(theWiresPackage.getParameterEdgesSource());
 		staticValueEClass.getESuperTypes().add(this.getNamedElement());
 		staticValueEClass.getESuperTypes().add(this.getWireEdgesSource());
 		staticValueEClass.getESuperTypes().add(this.getDataFlowEdgesSource());
+		staticValueEClass.getESuperTypes().add(theWiresPackage.getParameterEdgesSource());
 		visibleThingEClass.getESuperTypes().add(this.getContainsConditions());
 		visibleThingEClass.getESuperTypes().add(this.getContainsEventTriggers());
 		visibleThingEClass.getESuperTypes().add(this.getContainsOperations());
@@ -1734,6 +1746,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		visibleThingEClass.getESuperTypes().add(this.getGeneratedElement());
 		visibleThingEClass.getESuperTypes().add(this.getGeneratesElements());
 		visibleThingEClass.getESuperTypes().add(this.getCanBeSynced());
+		visibleThingEClass.getESuperTypes().add(theWiresPackage.getParameterEdgesSource());
 		internetApplicationEClass.getESuperTypes().add(this.getContainsOperations());
 		internetApplicationEClass.getESuperTypes().add(this.getContainsEventTriggers());
 		internetApplicationEClass.getESuperTypes().add(this.getNamedElement());
@@ -1756,6 +1769,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		conditionalEdgeEClass.getESuperTypes().add(this.getExecutionEdge());
 		conditionalEdgeEClass.getESuperTypes().add(this.getNamedElement());
 		dynamicApplicationElementSetEClass.getESuperTypes().add(this.getApplicationElement());
+		dynamicApplicationElementSetEClass.getESuperTypes().add(theWiresPackage.getParameterEdgesSource());
 		shouldntContainWiresEClass.getESuperTypes().add(this.getContainsWires());
 		domainObjectInstanceEClass.getESuperTypes().add(this.getApplicationElement());
 		domainObjectInstanceEClass.getESuperTypes().add(this.getContainsWires());
@@ -1780,6 +1794,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		queryParameterEClass.getESuperTypes().add(this.getNamedElement());
 		queryParameterEClass.getESuperTypes().add(this.getWireEdgesSource());
 		queryParameterEClass.getESuperTypes().add(this.getDataFlowEdgesSource());
+		queryParameterEClass.getESuperTypes().add(theWiresPackage.getParameterEdgesSource());
 		containsScopesEClass.getESuperTypes().add(this.getContainsOperations());
 		canBeSyncedEClass.getESuperTypes().add(this.getNamedElement());
 		canBeSyncedEClass.getESuperTypes().add(this.getGeneratedElement());
@@ -1895,6 +1910,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(containsWiresEClass, ContainsWires.class, "ContainsWires", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getContainsWires_Wires(), this.getWireEdge(), null, "wires", null, 0, -1, ContainsWires.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getContainsWires_ParameterEdges(), theWiresPackage.getParameterEdge(), null, "parameterEdges", null, 0, -1, ContainsWires.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(shouldntContainWiresEClass, ShouldntContainWires.class, "ShouldntContainWires", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2098,6 +2114,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "changed", "0.4.1 to add NamedElement supertype"
+		   });		
+		addAnnotation
+		  (containsWiresEClass, 
+		   source, 
+		   new String[] {
+			 "changed", "0.4.3 added \'parameterEdges\' containment reference"
 		   });		
 		addAnnotation
 		  (shouldntContainWiresEClass, 
@@ -2315,7 +2337,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Represents the execution flow within an {@link Operation}."
-		   });				
+		   });					
 		addAnnotation
 		  (generatedElementEClass, 
 		   source, 

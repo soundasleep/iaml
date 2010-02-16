@@ -28,6 +28,7 @@ import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.components.ComponentsPackage;
 import org.openiaml.model.model.components.Gate;
+import org.openiaml.model.model.wires.ParameterEdge;
 
 /**
  * <!-- begin-user-doc -->
@@ -42,6 +43,7 @@ import org.openiaml.model.model.components.Gate;
  *   <li>{@link org.openiaml.model.model.components.impl.GateImpl#getGeneratedRule <em>Generated Rule</em>}</li>
  *   <li>{@link org.openiaml.model.model.components.impl.GateImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.openiaml.model.model.components.impl.GateImpl#getWires <em>Wires</em>}</li>
+ *   <li>{@link org.openiaml.model.model.components.impl.GateImpl#getParameterEdges <em>Parameter Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.components.impl.GateImpl#getOutEdges <em>Out Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.components.impl.GateImpl#getInEdges <em>In Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.components.impl.GateImpl#getGeneratedElements <em>Generated Elements</em>}</li>
@@ -151,6 +153,16 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 	 * @ordered
 	 */
 	protected EList<WireEdge> wires;
+
+	/**
+	 * The cached value of the '{@link #getParameterEdges() <em>Parameter Edges</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParameterEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ParameterEdge> parameterEdges;
 
 	/**
 	 * The cached value of the '{@link #getOutEdges() <em>Out Edges</em>}' reference list.
@@ -334,6 +346,18 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ParameterEdge> getParameterEdges() {
+		if (parameterEdges == null) {
+			parameterEdges = new EObjectContainmentEList<ParameterEdge>(ParameterEdge.class, this, ComponentsPackage.GATE__PARAMETER_EDGES);
+		}
+		return parameterEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<WireEdge> getOutEdges() {
 		if (outEdges == null) {
 			outEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, ComponentsPackage.GATE__OUT_EDGES, ModelPackage.WIRE_EDGE__FROM);
@@ -419,6 +443,8 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 				return ((InternalEList<?>)getGeneratedBy()).basicRemove(otherEnd, msgs);
 			case ComponentsPackage.GATE__WIRES:
 				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
+			case ComponentsPackage.GATE__PARAMETER_EDGES:
+				return ((InternalEList<?>)getParameterEdges()).basicRemove(otherEnd, msgs);
 			case ComponentsPackage.GATE__OUT_EDGES:
 				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
 			case ComponentsPackage.GATE__IN_EDGES:
@@ -449,6 +475,8 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 				return getName();
 			case ComponentsPackage.GATE__WIRES:
 				return getWires();
+			case ComponentsPackage.GATE__PARAMETER_EDGES:
+				return getParameterEdges();
 			case ComponentsPackage.GATE__OUT_EDGES:
 				return getOutEdges();
 			case ComponentsPackage.GATE__IN_EDGES:
@@ -489,6 +517,10 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 			case ComponentsPackage.GATE__WIRES:
 				getWires().clear();
 				getWires().addAll((Collection<? extends WireEdge>)newValue);
+				return;
+			case ComponentsPackage.GATE__PARAMETER_EDGES:
+				getParameterEdges().clear();
+				getParameterEdges().addAll((Collection<? extends ParameterEdge>)newValue);
 				return;
 			case ComponentsPackage.GATE__OUT_EDGES:
 				getOutEdges().clear();
@@ -535,6 +567,9 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 			case ComponentsPackage.GATE__WIRES:
 				getWires().clear();
 				return;
+			case ComponentsPackage.GATE__PARAMETER_EDGES:
+				getParameterEdges().clear();
+				return;
 			case ComponentsPackage.GATE__OUT_EDGES:
 				getOutEdges().clear();
 				return;
@@ -571,6 +606,8 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case ComponentsPackage.GATE__WIRES:
 				return wires != null && !wires.isEmpty();
+			case ComponentsPackage.GATE__PARAMETER_EDGES:
+				return parameterEdges != null && !parameterEdges.isEmpty();
 			case ComponentsPackage.GATE__OUT_EDGES:
 				return outEdges != null && !outEdges.isEmpty();
 			case ComponentsPackage.GATE__IN_EDGES:
@@ -593,6 +630,7 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 		if (baseClass == ContainsWires.class) {
 			switch (derivedFeatureID) {
 				case ComponentsPackage.GATE__WIRES: return ModelPackage.CONTAINS_WIRES__WIRES;
+				case ComponentsPackage.GATE__PARAMETER_EDGES: return ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES;
 				default: return -1;
 			}
 		}
@@ -633,6 +671,7 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 		if (baseClass == ContainsWires.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.CONTAINS_WIRES__WIRES: return ComponentsPackage.GATE__WIRES;
+				case ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES: return ComponentsPackage.GATE__PARAMETER_EDGES;
 				default: return -1;
 			}
 		}

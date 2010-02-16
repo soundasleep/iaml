@@ -29,6 +29,9 @@ import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.wires.ParameterEdge;
+import org.openiaml.model.model.wires.ParameterEdgesSource;
+import org.openiaml.model.model.wires.WiresPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -43,10 +46,12 @@ import org.openiaml.model.model.WireEdgesSource;
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getGeneratedRule <em>Generated Rule</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getWires <em>Wires</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getParameterEdges <em>Parameter Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getOutEdges <em>Out Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getInEdges <em>In Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getOutFlows <em>Out Flows</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getInFlows <em>In Flows</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getOutParameterEdges <em>Out Parameter Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getDefaultValue <em>Default Value</em>}</li>
  * </ul>
  * </p>
@@ -155,6 +160,16 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 	protected EList<WireEdge> wires;
 
 	/**
+	 * The cached value of the '{@link #getParameterEdges() <em>Parameter Edges</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParameterEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ParameterEdge> parameterEdges;
+
+	/**
 	 * The cached value of the '{@link #getOutEdges() <em>Out Edges</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -193,6 +208,16 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 	 * @ordered
 	 */
 	protected EList<DataFlowEdge> inFlows;
+
+	/**
+	 * The cached value of the '{@link #getOutParameterEdges() <em>Out Parameter Edges</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOutParameterEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ParameterEdge> outParameterEdges;
 
 	/**
 	 * The default value of the '{@link #getDefaultValue() <em>Default Value</em>}' attribute.
@@ -382,6 +407,18 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ParameterEdge> getOutParameterEdges() {
+		if (outParameterEdges == null) {
+			outParameterEdges = new EObjectWithInverseResolvingEList<ParameterEdge>(ParameterEdge.class, this, ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_PARAMETER_EDGES, WiresPackage.PARAMETER_EDGE__FROM);
+		}
+		return outParameterEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getDefaultValue() {
 		return defaultValue;
 	}
@@ -415,6 +452,18 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ParameterEdge> getParameterEdges() {
+		if (parameterEdges == null) {
+			parameterEdges = new EObjectContainmentEList<ParameterEdge>(ParameterEdge.class, this, ModelPackage.APPLICATION_ELEMENT_PROPERTY__PARAMETER_EDGES);
+		}
+		return parameterEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -429,6 +478,8 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutFlows()).basicAdd(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_FLOWS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInFlows()).basicAdd(otherEnd, msgs);
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_PARAMETER_EDGES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutParameterEdges()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -445,6 +496,8 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				return ((InternalEList<?>)getGeneratedBy()).basicRemove(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__WIRES:
 				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__PARAMETER_EDGES:
+				return ((InternalEList<?>)getParameterEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_EDGES:
 				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_EDGES:
@@ -453,6 +506,8 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				return ((InternalEList<?>)getOutFlows()).basicRemove(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_FLOWS:
 				return ((InternalEList<?>)getInFlows()).basicRemove(otherEnd, msgs);
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_PARAMETER_EDGES:
+				return ((InternalEList<?>)getOutParameterEdges()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -477,6 +532,8 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				return getName();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__WIRES:
 				return getWires();
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__PARAMETER_EDGES:
+				return getParameterEdges();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_EDGES:
 				return getOutEdges();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_EDGES:
@@ -485,6 +542,8 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				return getOutFlows();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_FLOWS:
 				return getInFlows();
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_PARAMETER_EDGES:
+				return getOutParameterEdges();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__DEFAULT_VALUE:
 				return getDefaultValue();
 		}
@@ -520,6 +579,10 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				getWires().clear();
 				getWires().addAll((Collection<? extends WireEdge>)newValue);
 				return;
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__PARAMETER_EDGES:
+				getParameterEdges().clear();
+				getParameterEdges().addAll((Collection<? extends ParameterEdge>)newValue);
+				return;
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_EDGES:
 				getOutEdges().clear();
 				getOutEdges().addAll((Collection<? extends WireEdge>)newValue);
@@ -535,6 +598,10 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_FLOWS:
 				getInFlows().clear();
 				getInFlows().addAll((Collection<? extends DataFlowEdge>)newValue);
+				return;
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_PARAMETER_EDGES:
+				getOutParameterEdges().clear();
+				getOutParameterEdges().addAll((Collection<? extends ParameterEdge>)newValue);
 				return;
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__DEFAULT_VALUE:
 				setDefaultValue((String)newValue);
@@ -569,6 +636,9 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__WIRES:
 				getWires().clear();
 				return;
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__PARAMETER_EDGES:
+				getParameterEdges().clear();
+				return;
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_EDGES:
 				getOutEdges().clear();
 				return;
@@ -580,6 +650,9 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				return;
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_FLOWS:
 				getInFlows().clear();
+				return;
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_PARAMETER_EDGES:
+				getOutParameterEdges().clear();
 				return;
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__DEFAULT_VALUE:
 				setDefaultValue(DEFAULT_VALUE_EDEFAULT);
@@ -608,6 +681,8 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__WIRES:
 				return wires != null && !wires.isEmpty();
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__PARAMETER_EDGES:
+				return parameterEdges != null && !parameterEdges.isEmpty();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_EDGES:
 				return outEdges != null && !outEdges.isEmpty();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_EDGES:
@@ -616,6 +691,8 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				return outFlows != null && !outFlows.isEmpty();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_FLOWS:
 				return inFlows != null && !inFlows.isEmpty();
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_PARAMETER_EDGES:
+				return outParameterEdges != null && !outParameterEdges.isEmpty();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__DEFAULT_VALUE:
 				return DEFAULT_VALUE_EDEFAULT == null ? defaultValue != null : !DEFAULT_VALUE_EDEFAULT.equals(defaultValue);
 		}
@@ -632,6 +709,7 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 		if (baseClass == ContainsWires.class) {
 			switch (derivedFeatureID) {
 				case ModelPackage.APPLICATION_ELEMENT_PROPERTY__WIRES: return ModelPackage.CONTAINS_WIRES__WIRES;
+				case ModelPackage.APPLICATION_ELEMENT_PROPERTY__PARAMETER_EDGES: return ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES;
 				default: return -1;
 			}
 		}
@@ -664,6 +742,12 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				default: return -1;
 			}
 		}
+		if (baseClass == ParameterEdgesSource.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_PARAMETER_EDGES: return WiresPackage.PARAMETER_EDGES_SOURCE__OUT_PARAMETER_EDGES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -677,6 +761,7 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 		if (baseClass == ContainsWires.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.CONTAINS_WIRES__WIRES: return ModelPackage.APPLICATION_ELEMENT_PROPERTY__WIRES;
+				case ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES: return ModelPackage.APPLICATION_ELEMENT_PROPERTY__PARAMETER_EDGES;
 				default: return -1;
 			}
 		}
@@ -706,6 +791,12 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 		if (baseClass == DataFlowEdgeDestination.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.DATA_FLOW_EDGE_DESTINATION__IN_FLOWS: return ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_FLOWS;
+				default: return -1;
+			}
+		}
+		if (baseClass == ParameterEdgesSource.class) {
+			switch (baseFeatureID) {
+				case WiresPackage.PARAMETER_EDGES_SOURCE__OUT_PARAMETER_EDGES: return ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_PARAMETER_EDGES;
 				default: return -1;
 			}
 		}

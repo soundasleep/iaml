@@ -32,6 +32,7 @@ import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.impl.ActivityNodeImpl;
 import org.openiaml.model.model.operations.OperationCallNode;
 import org.openiaml.model.model.operations.OperationsPackage;
+import org.openiaml.model.model.wires.ParameterEdge;
 
 /**
  * <!-- begin-user-doc -->
@@ -45,6 +46,7 @@ import org.openiaml.model.model.operations.OperationsPackage;
  *   <li>{@link org.openiaml.model.model.operations.impl.OperationCallNodeImpl#getInFlows <em>In Flows</em>}</li>
  *   <li>{@link org.openiaml.model.model.operations.impl.OperationCallNodeImpl#getOutFlows <em>Out Flows</em>}</li>
  *   <li>{@link org.openiaml.model.model.operations.impl.OperationCallNodeImpl#getWires <em>Wires</em>}</li>
+ *   <li>{@link org.openiaml.model.model.operations.impl.OperationCallNodeImpl#getParameterEdges <em>Parameter Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.operations.impl.OperationCallNodeImpl#getOutEdges <em>Out Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.operations.impl.OperationCallNodeImpl#getName <em>Name</em>}</li>
  * </ul>
@@ -102,6 +104,16 @@ public class OperationCallNodeImpl extends ActivityNodeImpl implements Operation
 	 * @ordered
 	 */
 	protected EList<WireEdge> wires;
+
+	/**
+	 * The cached value of the '{@link #getParameterEdges() <em>Parameter Edges</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParameterEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ParameterEdge> parameterEdges;
 
 	/**
 	 * The cached value of the '{@link #getOutEdges() <em>Out Edges</em>}' reference list.
@@ -217,6 +229,18 @@ public class OperationCallNodeImpl extends ActivityNodeImpl implements Operation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ParameterEdge> getParameterEdges() {
+		if (parameterEdges == null) {
+			parameterEdges = new EObjectContainmentEList<ParameterEdge>(ParameterEdge.class, this, OperationsPackage.OPERATION_CALL_NODE__PARAMETER_EDGES);
+		}
+		return parameterEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<WireEdge> getOutEdges() {
 		if (outEdges == null) {
 			outEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, OperationsPackage.OPERATION_CALL_NODE__OUT_EDGES, ModelPackage.WIRE_EDGE__FROM);
@@ -286,6 +310,8 @@ public class OperationCallNodeImpl extends ActivityNodeImpl implements Operation
 				return ((InternalEList<?>)getOutFlows()).basicRemove(otherEnd, msgs);
 			case OperationsPackage.OPERATION_CALL_NODE__WIRES:
 				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
+			case OperationsPackage.OPERATION_CALL_NODE__PARAMETER_EDGES:
+				return ((InternalEList<?>)getParameterEdges()).basicRemove(otherEnd, msgs);
 			case OperationsPackage.OPERATION_CALL_NODE__OUT_EDGES:
 				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
 		}
@@ -310,6 +336,8 @@ public class OperationCallNodeImpl extends ActivityNodeImpl implements Operation
 				return getOutFlows();
 			case OperationsPackage.OPERATION_CALL_NODE__WIRES:
 				return getWires();
+			case OperationsPackage.OPERATION_CALL_NODE__PARAMETER_EDGES:
+				return getParameterEdges();
 			case OperationsPackage.OPERATION_CALL_NODE__OUT_EDGES:
 				return getOutEdges();
 			case OperationsPackage.OPERATION_CALL_NODE__NAME:
@@ -347,6 +375,10 @@ public class OperationCallNodeImpl extends ActivityNodeImpl implements Operation
 				getWires().clear();
 				getWires().addAll((Collection<? extends WireEdge>)newValue);
 				return;
+			case OperationsPackage.OPERATION_CALL_NODE__PARAMETER_EDGES:
+				getParameterEdges().clear();
+				getParameterEdges().addAll((Collection<? extends ParameterEdge>)newValue);
+				return;
 			case OperationsPackage.OPERATION_CALL_NODE__OUT_EDGES:
 				getOutEdges().clear();
 				getOutEdges().addAll((Collection<? extends WireEdge>)newValue);
@@ -381,6 +413,9 @@ public class OperationCallNodeImpl extends ActivityNodeImpl implements Operation
 			case OperationsPackage.OPERATION_CALL_NODE__WIRES:
 				getWires().clear();
 				return;
+			case OperationsPackage.OPERATION_CALL_NODE__PARAMETER_EDGES:
+				getParameterEdges().clear();
+				return;
 			case OperationsPackage.OPERATION_CALL_NODE__OUT_EDGES:
 				getOutEdges().clear();
 				return;
@@ -409,6 +444,8 @@ public class OperationCallNodeImpl extends ActivityNodeImpl implements Operation
 				return outFlows != null && !outFlows.isEmpty();
 			case OperationsPackage.OPERATION_CALL_NODE__WIRES:
 				return wires != null && !wires.isEmpty();
+			case OperationsPackage.OPERATION_CALL_NODE__PARAMETER_EDGES:
+				return parameterEdges != null && !parameterEdges.isEmpty();
 			case OperationsPackage.OPERATION_CALL_NODE__OUT_EDGES:
 				return outEdges != null && !outEdges.isEmpty();
 			case OperationsPackage.OPERATION_CALL_NODE__NAME:
@@ -451,6 +488,7 @@ public class OperationCallNodeImpl extends ActivityNodeImpl implements Operation
 		if (baseClass == ContainsWires.class) {
 			switch (derivedFeatureID) {
 				case OperationsPackage.OPERATION_CALL_NODE__WIRES: return ModelPackage.CONTAINS_WIRES__WIRES;
+				case OperationsPackage.OPERATION_CALL_NODE__PARAMETER_EDGES: return ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES;
 				default: return -1;
 			}
 		}
@@ -508,6 +546,7 @@ public class OperationCallNodeImpl extends ActivityNodeImpl implements Operation
 		if (baseClass == ContainsWires.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.CONTAINS_WIRES__WIRES: return OperationsPackage.OPERATION_CALL_NODE__WIRES;
+				case ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES: return OperationsPackage.OPERATION_CALL_NODE__PARAMETER_EDGES;
 				default: return -1;
 			}
 		}

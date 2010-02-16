@@ -549,13 +549,22 @@ public interface ModelPackage extends EPackage {
 	int CONTAINS_WIRES__WIRES = 0;
 
 	/**
+	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTAINS_WIRES__PARAMETER_EDGES = 1;
+
+	/**
 	 * The number of structural features of the '<em>Contains Wires</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTAINS_WIRES_FEATURE_COUNT = 1;
+	int CONTAINS_WIRES_FEATURE_COUNT = 2;
 
 
 	/**
@@ -578,6 +587,15 @@ public interface ModelPackage extends EPackage {
 	int SHOULDNT_CONTAIN_WIRES__WIRES = CONTAINS_WIRES__WIRES;
 
 	/**
+	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHOULDNT_CONTAIN_WIRES__PARAMETER_EDGES = CONTAINS_WIRES__PARAMETER_EDGES;
+
+	/**
 	 * The number of structural features of the '<em>Shouldnt Contain Wires</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -594,6 +612,15 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int WIRE_EDGES_SOURCE__WIRES = SHOULDNT_CONTAIN_WIRES__WIRES;
+
+	/**
+	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIRE_EDGES_SOURCE__PARAMETER_EDGES = SHOULDNT_CONTAIN_WIRES__PARAMETER_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
@@ -668,13 +695,22 @@ public interface ModelPackage extends EPackage {
 	int EVENT_TRIGGER__WIRES = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_TRIGGER__PARAMETER_EDGES = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_TRIGGER__OUT_EDGES = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int EVENT_TRIGGER__OUT_EDGES = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Event Trigger</em>' class.
@@ -683,7 +719,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_TRIGGER_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int EVENT_TRIGGER_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Event Triggers</b></em>' containment reference list.
@@ -794,13 +830,22 @@ public interface ModelPackage extends EPackage {
 	int APPLICATION_ELEMENT__WIRES = CONTAINS_OPERATIONS_FEATURE_COUNT + 6;
 
 	/**
+	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPLICATION_ELEMENT__PARAMETER_EDGES = CONTAINS_OPERATIONS_FEATURE_COUNT + 7;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT__OUT_EDGES = CONTAINS_OPERATIONS_FEATURE_COUNT + 7;
+	int APPLICATION_ELEMENT__OUT_EDGES = CONTAINS_OPERATIONS_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
@@ -809,7 +854,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT__IN_EDGES = CONTAINS_OPERATIONS_FEATURE_COUNT + 8;
+	int APPLICATION_ELEMENT__IN_EDGES = CONTAINS_OPERATIONS_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
@@ -818,7 +863,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT__GENERATED_ELEMENTS = CONTAINS_OPERATIONS_FEATURE_COUNT + 9;
+	int APPLICATION_ELEMENT__GENERATED_ELEMENTS = CONTAINS_OPERATIONS_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
@@ -827,7 +872,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT__OVERRIDDEN = CONTAINS_OPERATIONS_FEATURE_COUNT + 10;
+	int APPLICATION_ELEMENT__OVERRIDDEN = CONTAINS_OPERATIONS_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
@@ -836,7 +881,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT__CONDITIONS = CONTAINS_OPERATIONS_FEATURE_COUNT + 11;
+	int APPLICATION_ELEMENT__CONDITIONS = CONTAINS_OPERATIONS_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -845,7 +890,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT__PROPERTIES = CONTAINS_OPERATIONS_FEATURE_COUNT + 12;
+	int APPLICATION_ELEMENT__PROPERTIES = CONTAINS_OPERATIONS_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
@@ -854,7 +899,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT__VALUES = CONTAINS_OPERATIONS_FEATURE_COUNT + 13;
+	int APPLICATION_ELEMENT__VALUES = CONTAINS_OPERATIONS_FEATURE_COUNT + 14;
 
 	/**
 	 * The number of structural features of the '<em>Application Element</em>' class.
@@ -863,7 +908,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 14;
+	int APPLICATION_ELEMENT_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -936,6 +981,15 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int DOMAIN_OBJECT__WIRES = APPLICATION_ELEMENT__WIRES;
+
+	/**
+	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT__PARAMETER_EDGES = APPLICATION_ELEMENT__PARAMETER_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
@@ -1089,6 +1143,15 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int DOMAIN_ATTRIBUTE__WIRES = APPLICATION_ELEMENT__WIRES;
+
+	/**
+	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_ATTRIBUTE__PARAMETER_EDGES = APPLICATION_ELEMENT__PARAMETER_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
@@ -1497,13 +1560,22 @@ public interface ModelPackage extends EPackage {
 	int PRIMITIVE_OPERATION__WIRES = OPERATION_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_OPERATION__PARAMETER_EDGES = OPERATION_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PRIMITIVE_OPERATION__OUT_EDGES = OPERATION_FEATURE_COUNT + 2;
+	int PRIMITIVE_OPERATION__OUT_EDGES = OPERATION_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Primitive Operation</em>' class.
@@ -1512,7 +1584,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PRIMITIVE_OPERATION_FEATURE_COUNT = OPERATION_FEATURE_COUNT + 3;
+	int PRIMITIVE_OPERATION_FEATURE_COUNT = OPERATION_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
@@ -1621,6 +1693,15 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPOSITE_OPERATION__WIRES = PRIMITIVE_OPERATION__WIRES;
+
+	/**
+	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_OPERATION__PARAMETER_EDGES = PRIMITIVE_OPERATION__PARAMETER_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
@@ -1794,6 +1875,15 @@ public interface ModelPackage extends EPackage {
 	int APPLICATION_ELEMENT_CONTAINER__WIRES = APPLICATION_ELEMENT__WIRES;
 
 	/**
+	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPLICATION_ELEMENT_CONTAINER__PARAMETER_EDGES = APPLICATION_ELEMENT__PARAMETER_EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1929,13 +2019,22 @@ public interface ModelPackage extends EPackage {
 	int APPLICATION_ELEMENT_PROPERTY__WIRES = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPLICATION_ELEMENT_PROPERTY__PARAMETER_EDGES = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT_PROPERTY__OUT_EDGES = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int APPLICATION_ELEMENT_PROPERTY__OUT_EDGES = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
@@ -1944,7 +2043,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT_PROPERTY__IN_EDGES = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int APPLICATION_ELEMENT_PROPERTY__IN_EDGES = NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Out Flows</b></em>' reference list.
@@ -1953,7 +2052,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT_PROPERTY__OUT_FLOWS = NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int APPLICATION_ELEMENT_PROPERTY__OUT_FLOWS = NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>In Flows</b></em>' reference list.
@@ -1962,7 +2061,16 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT_PROPERTY__IN_FLOWS = NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int APPLICATION_ELEMENT_PROPERTY__IN_FLOWS = NAMED_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Out Parameter Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPLICATION_ELEMENT_PROPERTY__OUT_PARAMETER_EDGES = NAMED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Default Value</b></em>' attribute.
@@ -1971,7 +2079,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT_PROPERTY__DEFAULT_VALUE = NAMED_ELEMENT_FEATURE_COUNT + 5;
+	int APPLICATION_ELEMENT_PROPERTY__DEFAULT_VALUE = NAMED_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of structural features of the '<em>Application Element Property</em>' class.
@@ -1980,7 +2088,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT_PROPERTY_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 6;
+	int APPLICATION_ELEMENT_PROPERTY_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Generated By</b></em>' reference list.
@@ -2037,13 +2145,22 @@ public interface ModelPackage extends EPackage {
 	int STATIC_VALUE__WIRES = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_VALUE__PARAMETER_EDGES = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATIC_VALUE__OUT_EDGES = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int STATIC_VALUE__OUT_EDGES = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Out Flows</b></em>' reference list.
@@ -2052,7 +2169,16 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATIC_VALUE__OUT_FLOWS = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int STATIC_VALUE__OUT_FLOWS = NAMED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Out Parameter Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATIC_VALUE__OUT_PARAMETER_EDGES = NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -2061,7 +2187,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATIC_VALUE__VALUE = NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int STATIC_VALUE__VALUE = NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Static Value</em>' class.
@@ -2070,7 +2196,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATIC_VALUE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int STATIC_VALUE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.impl.ConditionalEdgeImpl <em>Conditional Edge</em>}' class.
@@ -2187,13 +2313,22 @@ public interface ModelPackage extends EPackage {
 	int VISIBLE_THING__WIRES = CONTAINS_CONDITIONS_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VISIBLE_THING__PARAMETER_EDGES = CONTAINS_CONDITIONS_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VISIBLE_THING__OUT_EDGES = CONTAINS_CONDITIONS_FEATURE_COUNT + 3;
+	int VISIBLE_THING__OUT_EDGES = CONTAINS_CONDITIONS_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
@@ -2202,7 +2337,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VISIBLE_THING__IN_EDGES = CONTAINS_CONDITIONS_FEATURE_COUNT + 4;
+	int VISIBLE_THING__IN_EDGES = CONTAINS_CONDITIONS_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Generated By</b></em>' reference list.
@@ -2211,7 +2346,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VISIBLE_THING__GENERATED_BY = CONTAINS_CONDITIONS_FEATURE_COUNT + 5;
+	int VISIBLE_THING__GENERATED_BY = CONTAINS_CONDITIONS_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Is Generated</b></em>' attribute.
@@ -2220,7 +2355,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VISIBLE_THING__IS_GENERATED = CONTAINS_CONDITIONS_FEATURE_COUNT + 6;
+	int VISIBLE_THING__IS_GENERATED = CONTAINS_CONDITIONS_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -2229,7 +2364,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VISIBLE_THING__ID = CONTAINS_CONDITIONS_FEATURE_COUNT + 7;
+	int VISIBLE_THING__ID = CONTAINS_CONDITIONS_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
@@ -2238,7 +2373,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VISIBLE_THING__GENERATED_RULE = CONTAINS_CONDITIONS_FEATURE_COUNT + 8;
+	int VISIBLE_THING__GENERATED_RULE = CONTAINS_CONDITIONS_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2247,7 +2382,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VISIBLE_THING__NAME = CONTAINS_CONDITIONS_FEATURE_COUNT + 9;
+	int VISIBLE_THING__NAME = CONTAINS_CONDITIONS_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
@@ -2256,7 +2391,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VISIBLE_THING__GENERATED_ELEMENTS = CONTAINS_CONDITIONS_FEATURE_COUNT + 10;
+	int VISIBLE_THING__GENERATED_ELEMENTS = CONTAINS_CONDITIONS_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
@@ -2265,7 +2400,16 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VISIBLE_THING__OVERRIDDEN = CONTAINS_CONDITIONS_FEATURE_COUNT + 11;
+	int VISIBLE_THING__OVERRIDDEN = CONTAINS_CONDITIONS_FEATURE_COUNT + 12;
+
+	/**
+	 * The feature id for the '<em><b>Out Parameter Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VISIBLE_THING__OUT_PARAMETER_EDGES = CONTAINS_CONDITIONS_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -2274,7 +2418,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VISIBLE_THING__CHILDREN = CONTAINS_CONDITIONS_FEATURE_COUNT + 12;
+	int VISIBLE_THING__CHILDREN = CONTAINS_CONDITIONS_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -2283,7 +2427,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VISIBLE_THING__PROPERTIES = CONTAINS_CONDITIONS_FEATURE_COUNT + 13;
+	int VISIBLE_THING__PROPERTIES = CONTAINS_CONDITIONS_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
@@ -2292,7 +2436,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VISIBLE_THING__VALUES = CONTAINS_CONDITIONS_FEATURE_COUNT + 14;
+	int VISIBLE_THING__VALUES = CONTAINS_CONDITIONS_FEATURE_COUNT + 16;
 
 	/**
 	 * The number of structural features of the '<em>Visible Thing</em>' class.
@@ -2301,7 +2445,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VISIBLE_THING_FEATURE_COUNT = CONTAINS_CONDITIONS_FEATURE_COUNT + 15;
+	int VISIBLE_THING_FEATURE_COUNT = CONTAINS_CONDITIONS_FEATURE_COUNT + 17;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -2376,13 +2520,22 @@ public interface ModelPackage extends EPackage {
 	int INTERNET_APPLICATION__WIRES = CONTAINS_OPERATIONS_FEATURE_COUNT + 6;
 
 	/**
+	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERNET_APPLICATION__PARAMETER_EDGES = CONTAINS_OPERATIONS_FEATURE_COUNT + 7;
+
+	/**
 	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION__GENERATED_ELEMENTS = CONTAINS_OPERATIONS_FEATURE_COUNT + 7;
+	int INTERNET_APPLICATION__GENERATED_ELEMENTS = CONTAINS_OPERATIONS_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
@@ -2391,7 +2544,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION__OVERRIDDEN = CONTAINS_OPERATIONS_FEATURE_COUNT + 8;
+	int INTERNET_APPLICATION__OVERRIDDEN = CONTAINS_OPERATIONS_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
@@ -2400,7 +2553,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION__CONDITIONS = CONTAINS_OPERATIONS_FEATURE_COUNT + 9;
+	int INTERNET_APPLICATION__CONDITIONS = CONTAINS_OPERATIONS_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Scopes</b></em>' containment reference list.
@@ -2409,7 +2562,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION__SCOPES = CONTAINS_OPERATIONS_FEATURE_COUNT + 10;
+	int INTERNET_APPLICATION__SCOPES = CONTAINS_OPERATIONS_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -2418,7 +2571,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION__PROPERTIES = CONTAINS_OPERATIONS_FEATURE_COUNT + 11;
+	int INTERNET_APPLICATION__PROPERTIES = CONTAINS_OPERATIONS_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -2427,7 +2580,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION__CHILDREN = CONTAINS_OPERATIONS_FEATURE_COUNT + 12;
+	int INTERNET_APPLICATION__CHILDREN = CONTAINS_OPERATIONS_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Domain Stores</b></em>' containment reference list.
@@ -2436,7 +2589,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION__DOMAIN_STORES = CONTAINS_OPERATIONS_FEATURE_COUNT + 13;
+	int INTERNET_APPLICATION__DOMAIN_STORES = CONTAINS_OPERATIONS_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Runtime Url</b></em>' attribute.
@@ -2445,7 +2598,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION__RUNTIME_URL = CONTAINS_OPERATIONS_FEATURE_COUNT + 14;
+	int INTERNET_APPLICATION__RUNTIME_URL = CONTAINS_OPERATIONS_FEATURE_COUNT + 15;
 
 	/**
 	 * The number of structural features of the '<em>Internet Application</em>' class.
@@ -2454,7 +2607,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERNET_APPLICATION_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 15;
+	int INTERNET_APPLICATION_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -2529,13 +2682,22 @@ public interface ModelPackage extends EPackage {
 	int DOMAIN_STORE__WIRES = CONTAINS_OPERATIONS_FEATURE_COUNT + 6;
 
 	/**
+	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_STORE__PARAMETER_EDGES = CONTAINS_OPERATIONS_FEATURE_COUNT + 7;
+
+	/**
 	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_STORE__CONDITIONS = CONTAINS_OPERATIONS_FEATURE_COUNT + 7;
+	int DOMAIN_STORE__CONDITIONS = CONTAINS_OPERATIONS_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
@@ -2544,7 +2706,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_STORE__GENERATED_ELEMENTS = CONTAINS_OPERATIONS_FEATURE_COUNT + 8;
+	int DOMAIN_STORE__GENERATED_ELEMENTS = CONTAINS_OPERATIONS_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
@@ -2553,7 +2715,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_STORE__OVERRIDDEN = CONTAINS_OPERATIONS_FEATURE_COUNT + 9;
+	int DOMAIN_STORE__OVERRIDDEN = CONTAINS_OPERATIONS_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -2562,7 +2724,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_STORE__CHILDREN = CONTAINS_OPERATIONS_FEATURE_COUNT + 10;
+	int DOMAIN_STORE__CHILDREN = CONTAINS_OPERATIONS_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -2571,7 +2733,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_STORE__PROPERTIES = CONTAINS_OPERATIONS_FEATURE_COUNT + 11;
+	int DOMAIN_STORE__PROPERTIES = CONTAINS_OPERATIONS_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
@@ -2580,7 +2742,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_STORE__ATTRIBUTES = CONTAINS_OPERATIONS_FEATURE_COUNT + 12;
+	int DOMAIN_STORE__ATTRIBUTES = CONTAINS_OPERATIONS_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>File</b></em>' attribute.
@@ -2589,7 +2751,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_STORE__FILE = CONTAINS_OPERATIONS_FEATURE_COUNT + 13;
+	int DOMAIN_STORE__FILE = CONTAINS_OPERATIONS_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -2598,7 +2760,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_STORE__TYPE = CONTAINS_OPERATIONS_FEATURE_COUNT + 14;
+	int DOMAIN_STORE__TYPE = CONTAINS_OPERATIONS_FEATURE_COUNT + 15;
 
 	/**
 	 * The number of structural features of the '<em>Domain Store</em>' class.
@@ -2607,7 +2769,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_STORE_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 15;
+	int DOMAIN_STORE_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Generated By</b></em>' reference list.
@@ -3033,6 +3195,15 @@ public interface ModelPackage extends EPackage {
 	int DYNAMIC_APPLICATION_ELEMENT_SET__WIRES = APPLICATION_ELEMENT__WIRES;
 
 	/**
+	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_APPLICATION_ELEMENT_SET__PARAMETER_EDGES = APPLICATION_ELEMENT__PARAMETER_EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3096,13 +3267,22 @@ public interface ModelPackage extends EPackage {
 	int DYNAMIC_APPLICATION_ELEMENT_SET__VALUES = APPLICATION_ELEMENT__VALUES;
 
 	/**
+	 * The feature id for the '<em><b>Out Parameter Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DYNAMIC_APPLICATION_ELEMENT_SET__OUT_PARAMETER_EDGES = APPLICATION_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Query</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DYNAMIC_APPLICATION_ELEMENT_SET__QUERY = APPLICATION_ELEMENT_FEATURE_COUNT + 0;
+	int DYNAMIC_APPLICATION_ELEMENT_SET__QUERY = APPLICATION_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Dynamic Application Element Set</em>' class.
@@ -3111,7 +3291,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DYNAMIC_APPLICATION_ELEMENT_SET_FEATURE_COUNT = APPLICATION_ELEMENT_FEATURE_COUNT + 1;
+	int DYNAMIC_APPLICATION_ELEMENT_SET_FEATURE_COUNT = APPLICATION_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
@@ -3211,6 +3391,15 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int DOMAIN_OBJECT_INSTANCE__WIRES = APPLICATION_ELEMENT__WIRES;
+
+	/**
+	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE__PARAMETER_EDGES = APPLICATION_ELEMENT__PARAMETER_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
@@ -3339,13 +3528,22 @@ public interface ModelPackage extends EPackage {
 	int SCOPE__WIRES = GENERATES_ELEMENTS_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCOPE__PARAMETER_EDGES = GENERATES_ELEMENTS_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__OPERATIONS = GENERATES_ELEMENTS_FEATURE_COUNT + 1;
+	int SCOPE__OPERATIONS = GENERATES_ELEMENTS_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Scopes</b></em>' containment reference list.
@@ -3354,7 +3552,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__SCOPES = GENERATES_ELEMENTS_FEATURE_COUNT + 2;
+	int SCOPE__SCOPES = GENERATES_ELEMENTS_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Generated By</b></em>' reference list.
@@ -3363,7 +3561,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__GENERATED_BY = GENERATES_ELEMENTS_FEATURE_COUNT + 3;
+	int SCOPE__GENERATED_BY = GENERATES_ELEMENTS_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Is Generated</b></em>' attribute.
@@ -3372,7 +3570,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__IS_GENERATED = GENERATES_ELEMENTS_FEATURE_COUNT + 4;
+	int SCOPE__IS_GENERATED = GENERATES_ELEMENTS_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -3381,7 +3579,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__ID = GENERATES_ELEMENTS_FEATURE_COUNT + 5;
+	int SCOPE__ID = GENERATES_ELEMENTS_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
@@ -3390,7 +3588,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__GENERATED_RULE = GENERATES_ELEMENTS_FEATURE_COUNT + 6;
+	int SCOPE__GENERATED_RULE = GENERATES_ELEMENTS_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3399,7 +3597,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__NAME = GENERATES_ELEMENTS_FEATURE_COUNT + 7;
+	int SCOPE__NAME = GENERATES_ELEMENTS_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
@@ -3408,7 +3606,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__OUT_EDGES = GENERATES_ELEMENTS_FEATURE_COUNT + 8;
+	int SCOPE__OUT_EDGES = GENERATES_ELEMENTS_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
@@ -3417,7 +3615,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__IN_EDGES = GENERATES_ELEMENTS_FEATURE_COUNT + 9;
+	int SCOPE__IN_EDGES = GENERATES_ELEMENTS_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Event Triggers</b></em>' containment reference list.
@@ -3426,7 +3624,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__EVENT_TRIGGERS = GENERATES_ELEMENTS_FEATURE_COUNT + 10;
+	int SCOPE__EVENT_TRIGGERS = GENERATES_ELEMENTS_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
@@ -3435,7 +3633,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__CONDITIONS = GENERATES_ELEMENTS_FEATURE_COUNT + 11;
+	int SCOPE__CONDITIONS = GENERATES_ELEMENTS_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Entry Gate</b></em>' containment reference.
@@ -3444,7 +3642,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__ENTRY_GATE = GENERATES_ELEMENTS_FEATURE_COUNT + 12;
+	int SCOPE__ENTRY_GATE = GENERATES_ELEMENTS_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Exit Gate</b></em>' containment reference.
@@ -3453,7 +3651,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__EXIT_GATE = GENERATES_ELEMENTS_FEATURE_COUNT + 13;
+	int SCOPE__EXIT_GATE = GENERATES_ELEMENTS_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -3462,7 +3660,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__PROPERTIES = GENERATES_ELEMENTS_FEATURE_COUNT + 14;
+	int SCOPE__PROPERTIES = GENERATES_ELEMENTS_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
@@ -3471,7 +3669,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__VALUES = GENERATES_ELEMENTS_FEATURE_COUNT + 15;
+	int SCOPE__VALUES = GENERATES_ELEMENTS_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -3480,7 +3678,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__PARAMETERS = GENERATES_ELEMENTS_FEATURE_COUNT + 16;
+	int SCOPE__PARAMETERS = GENERATES_ELEMENTS_FEATURE_COUNT + 17;
 
 	/**
 	 * The feature id for the '<em><b>Elements</b></em>' containment reference list.
@@ -3489,7 +3687,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__ELEMENTS = GENERATES_ELEMENTS_FEATURE_COUNT + 17;
+	int SCOPE__ELEMENTS = GENERATES_ELEMENTS_FEATURE_COUNT + 18;
 
 	/**
 	 * The number of structural features of the '<em>Scope</em>' class.
@@ -3498,7 +3696,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE_FEATURE_COUNT = GENERATES_ELEMENTS_FEATURE_COUNT + 18;
+	int SCOPE_FEATURE_COUNT = GENERATES_ELEMENTS_FEATURE_COUNT + 19;
 
 	/**
 	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
@@ -3508,6 +3706,15 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONDITION__WIRES = WIRE_EDGES_SOURCE__WIRES;
+
+	/**
+	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONDITION__PARAMETER_EDGES = WIRE_EDGES_SOURCE__PARAMETER_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
@@ -3610,13 +3817,22 @@ public interface ModelPackage extends EPackage {
 	int COMPOSITE_CONDITION__WIRES = CONTAINS_CONDITIONS_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_CONDITION__PARAMETER_EDGES = CONTAINS_CONDITIONS_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_CONDITION__OUT_EDGES = CONTAINS_CONDITIONS_FEATURE_COUNT + 1;
+	int COMPOSITE_CONDITION__OUT_EDGES = CONTAINS_CONDITIONS_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Out Flows</b></em>' reference list.
@@ -3625,7 +3841,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_CONDITION__OUT_FLOWS = CONTAINS_CONDITIONS_FEATURE_COUNT + 2;
+	int COMPOSITE_CONDITION__OUT_FLOWS = CONTAINS_CONDITIONS_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Generated By</b></em>' reference list.
@@ -3634,7 +3850,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_CONDITION__GENERATED_BY = CONTAINS_CONDITIONS_FEATURE_COUNT + 3;
+	int COMPOSITE_CONDITION__GENERATED_BY = CONTAINS_CONDITIONS_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Is Generated</b></em>' attribute.
@@ -3643,7 +3859,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_CONDITION__IS_GENERATED = CONTAINS_CONDITIONS_FEATURE_COUNT + 4;
+	int COMPOSITE_CONDITION__IS_GENERATED = CONTAINS_CONDITIONS_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -3652,7 +3868,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_CONDITION__ID = CONTAINS_CONDITIONS_FEATURE_COUNT + 5;
+	int COMPOSITE_CONDITION__ID = CONTAINS_CONDITIONS_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
@@ -3661,7 +3877,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_CONDITION__GENERATED_RULE = CONTAINS_CONDITIONS_FEATURE_COUNT + 6;
+	int COMPOSITE_CONDITION__GENERATED_RULE = CONTAINS_CONDITIONS_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3670,7 +3886,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_CONDITION__NAME = CONTAINS_CONDITIONS_FEATURE_COUNT + 7;
+	int COMPOSITE_CONDITION__NAME = CONTAINS_CONDITIONS_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
@@ -3679,7 +3895,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_CONDITION__GENERATED_ELEMENTS = CONTAINS_CONDITIONS_FEATURE_COUNT + 8;
+	int COMPOSITE_CONDITION__GENERATED_ELEMENTS = CONTAINS_CONDITIONS_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
@@ -3688,7 +3904,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_CONDITION__OVERRIDDEN = CONTAINS_CONDITIONS_FEATURE_COUNT + 9;
+	int COMPOSITE_CONDITION__OVERRIDDEN = CONTAINS_CONDITIONS_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -3697,7 +3913,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_CONDITION__OPERATIONS = CONTAINS_CONDITIONS_FEATURE_COUNT + 10;
+	int COMPOSITE_CONDITION__OPERATIONS = CONTAINS_CONDITIONS_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Nodes</b></em>' containment reference list.
@@ -3706,7 +3922,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_CONDITION__NODES = CONTAINS_CONDITIONS_FEATURE_COUNT + 11;
+	int COMPOSITE_CONDITION__NODES = CONTAINS_CONDITIONS_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Data Edges</b></em>' containment reference list.
@@ -3715,7 +3931,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_CONDITION__DATA_EDGES = CONTAINS_CONDITIONS_FEATURE_COUNT + 12;
+	int COMPOSITE_CONDITION__DATA_EDGES = CONTAINS_CONDITIONS_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Execution Edges</b></em>' containment reference list.
@@ -3724,7 +3940,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_CONDITION__EXECUTION_EDGES = CONTAINS_CONDITIONS_FEATURE_COUNT + 13;
+	int COMPOSITE_CONDITION__EXECUTION_EDGES = CONTAINS_CONDITIONS_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Variables</b></em>' containment reference list.
@@ -3733,7 +3949,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_CONDITION__VARIABLES = CONTAINS_CONDITIONS_FEATURE_COUNT + 14;
+	int COMPOSITE_CONDITION__VARIABLES = CONTAINS_CONDITIONS_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
@@ -3742,7 +3958,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_CONDITION__VALUES = CONTAINS_CONDITIONS_FEATURE_COUNT + 15;
+	int COMPOSITE_CONDITION__VALUES = CONTAINS_CONDITIONS_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -3751,7 +3967,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_CONDITION__PARAMETERS = CONTAINS_CONDITIONS_FEATURE_COUNT + 16;
+	int COMPOSITE_CONDITION__PARAMETERS = CONTAINS_CONDITIONS_FEATURE_COUNT + 17;
 
 	/**
 	 * The number of structural features of the '<em>Composite Condition</em>' class.
@@ -3760,7 +3976,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_CONDITION_FEATURE_COUNT = CONTAINS_CONDITIONS_FEATURE_COUNT + 17;
+	int COMPOSITE_CONDITION_FEATURE_COUNT = CONTAINS_CONDITIONS_FEATURE_COUNT + 18;
 
 
 	/**
@@ -3844,6 +4060,15 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int DOMAIN_ATTRIBUTE_INSTANCE__WIRES = APPLICATION_ELEMENT__WIRES;
+
+	/**
+	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_ATTRIBUTE_INSTANCE__PARAMETER_EDGES = APPLICATION_ELEMENT__PARAMETER_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
@@ -3992,13 +4217,22 @@ public interface ModelPackage extends EPackage {
 	int QUERY_PARAMETER__WIRES = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUERY_PARAMETER__PARAMETER_EDGES = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int QUERY_PARAMETER__OUT_EDGES = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int QUERY_PARAMETER__OUT_EDGES = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Out Flows</b></em>' reference list.
@@ -4007,7 +4241,16 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int QUERY_PARAMETER__OUT_FLOWS = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int QUERY_PARAMETER__OUT_FLOWS = NAMED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Out Parameter Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int QUERY_PARAMETER__OUT_PARAMETER_EDGES = NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Default Value</b></em>' attribute.
@@ -4016,7 +4259,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int QUERY_PARAMETER__DEFAULT_VALUE = NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int QUERY_PARAMETER__DEFAULT_VALUE = NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Query Parameter</em>' class.
@@ -4025,7 +4268,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int QUERY_PARAMETER_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int QUERY_PARAMETER_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 6;
 
 
 	/**
@@ -4149,13 +4392,22 @@ public interface ModelPackage extends EPackage {
 	int CAN_BE_SYNCED__WIRES = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAN_BE_SYNCED__PARAMETER_EDGES = NAMED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Event Triggers</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CAN_BE_SYNCED__EVENT_TRIGGERS = NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int CAN_BE_SYNCED__EVENT_TRIGGERS = NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -4164,7 +4416,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CAN_BE_SYNCED__OPERATIONS = NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int CAN_BE_SYNCED__OPERATIONS = NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
@@ -4173,7 +4425,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CAN_BE_SYNCED__CONDITIONS = NAMED_ELEMENT_FEATURE_COUNT + 5;
+	int CAN_BE_SYNCED__CONDITIONS = NAMED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
@@ -4182,7 +4434,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CAN_BE_SYNCED__OUT_EDGES = NAMED_ELEMENT_FEATURE_COUNT + 6;
+	int CAN_BE_SYNCED__OUT_EDGES = NAMED_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
@@ -4191,7 +4443,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CAN_BE_SYNCED__IN_EDGES = NAMED_ELEMENT_FEATURE_COUNT + 7;
+	int CAN_BE_SYNCED__IN_EDGES = NAMED_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Can Be Synced</em>' class.
@@ -4200,7 +4452,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CAN_BE_SYNCED_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 8;
+	int CAN_BE_SYNCED_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 9;
 
 
 	/**
@@ -4974,6 +5226,17 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getContainsWires_Wires();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.ContainsWires#getParameterEdges <em>Parameter Edges</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Parameter Edges</em>'.
+	 * @see org.openiaml.model.model.ContainsWires#getParameterEdges()
+	 * @see #getContainsWires()
+	 * @generated
+	 */
+	EReference getContainsWires_ParameterEdges();
 
 	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.ShouldntContainWires <em>Shouldnt Contain Wires</em>}'.
@@ -6037,6 +6300,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CONTAINS_WIRES__WIRES = eINSTANCE.getContainsWires_Wires();
+
+		/**
+		 * The meta object literal for the '<em><b>Parameter Edges</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONTAINS_WIRES__PARAMETER_EDGES = eINSTANCE.getContainsWires_ParameterEdges();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.ShouldntContainWires <em>Shouldnt Contain Wires</em>}' class.

@@ -19,6 +19,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
+import org.openiaml.model.model.wires.ParameterEdge;
+import org.openiaml.model.model.wires.ParameterEdgeDestination;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.WiresPackage;
 
@@ -30,6 +32,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.openiaml.model.model.wires.impl.SelectWireImpl#getInEdges <em>In Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.wires.impl.SelectWireImpl#getInParameterEdges <em>In Parameter Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.SelectWireImpl#getQuery <em>Query</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.SelectWireImpl#getLimit <em>Limit</em>}</li>
  * </ul>
@@ -47,6 +50,16 @@ public class SelectWireImpl extends CompositeWireImpl implements SelectWire {
 	 * @ordered
 	 */
 	protected EList<WireEdge> inEdges;
+
+	/**
+	 * The cached value of the '{@link #getInParameterEdges() <em>In Parameter Edges</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInParameterEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ParameterEdge> inParameterEdges;
 
 	/**
 	 * The default value of the '{@link #getQuery() <em>Query</em>}' attribute.
@@ -124,6 +137,18 @@ public class SelectWireImpl extends CompositeWireImpl implements SelectWire {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ParameterEdge> getInParameterEdges() {
+		if (inParameterEdges == null) {
+			inParameterEdges = new EObjectWithInverseResolvingEList<ParameterEdge>(ParameterEdge.class, this, WiresPackage.SELECT_WIRE__IN_PARAMETER_EDGES, WiresPackage.PARAMETER_EDGE__TO);
+		}
+		return inParameterEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getQuery() {
 		return query;
 	}
@@ -172,6 +197,8 @@ public class SelectWireImpl extends CompositeWireImpl implements SelectWire {
 		switch (featureID) {
 			case WiresPackage.SELECT_WIRE__IN_EDGES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInEdges()).basicAdd(otherEnd, msgs);
+			case WiresPackage.SELECT_WIRE__IN_PARAMETER_EDGES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInParameterEdges()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -186,6 +213,8 @@ public class SelectWireImpl extends CompositeWireImpl implements SelectWire {
 		switch (featureID) {
 			case WiresPackage.SELECT_WIRE__IN_EDGES:
 				return ((InternalEList<?>)getInEdges()).basicRemove(otherEnd, msgs);
+			case WiresPackage.SELECT_WIRE__IN_PARAMETER_EDGES:
+				return ((InternalEList<?>)getInParameterEdges()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -200,6 +229,8 @@ public class SelectWireImpl extends CompositeWireImpl implements SelectWire {
 		switch (featureID) {
 			case WiresPackage.SELECT_WIRE__IN_EDGES:
 				return getInEdges();
+			case WiresPackage.SELECT_WIRE__IN_PARAMETER_EDGES:
+				return getInParameterEdges();
 			case WiresPackage.SELECT_WIRE__QUERY:
 				return getQuery();
 			case WiresPackage.SELECT_WIRE__LIMIT:
@@ -220,6 +251,10 @@ public class SelectWireImpl extends CompositeWireImpl implements SelectWire {
 			case WiresPackage.SELECT_WIRE__IN_EDGES:
 				getInEdges().clear();
 				getInEdges().addAll((Collection<? extends WireEdge>)newValue);
+				return;
+			case WiresPackage.SELECT_WIRE__IN_PARAMETER_EDGES:
+				getInParameterEdges().clear();
+				getInParameterEdges().addAll((Collection<? extends ParameterEdge>)newValue);
 				return;
 			case WiresPackage.SELECT_WIRE__QUERY:
 				setQuery((String)newValue);
@@ -242,6 +277,9 @@ public class SelectWireImpl extends CompositeWireImpl implements SelectWire {
 			case WiresPackage.SELECT_WIRE__IN_EDGES:
 				getInEdges().clear();
 				return;
+			case WiresPackage.SELECT_WIRE__IN_PARAMETER_EDGES:
+				getInParameterEdges().clear();
+				return;
 			case WiresPackage.SELECT_WIRE__QUERY:
 				setQuery(QUERY_EDEFAULT);
 				return;
@@ -262,6 +300,8 @@ public class SelectWireImpl extends CompositeWireImpl implements SelectWire {
 		switch (featureID) {
 			case WiresPackage.SELECT_WIRE__IN_EDGES:
 				return inEdges != null && !inEdges.isEmpty();
+			case WiresPackage.SELECT_WIRE__IN_PARAMETER_EDGES:
+				return inParameterEdges != null && !inParameterEdges.isEmpty();
 			case WiresPackage.SELECT_WIRE__QUERY:
 				return QUERY_EDEFAULT == null ? query != null : !QUERY_EDEFAULT.equals(query);
 			case WiresPackage.SELECT_WIRE__LIMIT:
@@ -283,6 +323,12 @@ public class SelectWireImpl extends CompositeWireImpl implements SelectWire {
 				default: return -1;
 			}
 		}
+		if (baseClass == ParameterEdgeDestination.class) {
+			switch (derivedFeatureID) {
+				case WiresPackage.SELECT_WIRE__IN_PARAMETER_EDGES: return WiresPackage.PARAMETER_EDGE_DESTINATION__IN_PARAMETER_EDGES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -296,6 +342,12 @@ public class SelectWireImpl extends CompositeWireImpl implements SelectWire {
 		if (baseClass == WireEdgeDestination.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.WIRE_EDGE_DESTINATION__IN_EDGES: return WiresPackage.SELECT_WIRE__IN_EDGES;
+				default: return -1;
+			}
+		}
+		if (baseClass == ParameterEdgeDestination.class) {
+			switch (baseFeatureID) {
+				case WiresPackage.PARAMETER_EDGE_DESTINATION__IN_PARAMETER_EDGES: return WiresPackage.SELECT_WIRE__IN_PARAMETER_EDGES;
 				default: return -1;
 			}
 		}

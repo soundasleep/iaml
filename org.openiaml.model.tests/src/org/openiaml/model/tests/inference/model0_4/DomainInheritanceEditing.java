@@ -22,7 +22,7 @@ import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ConditionWire;
 import org.openiaml.model.model.wires.NewInstanceWire;
-import org.openiaml.model.model.wires.ParameterWire;
+import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SyncWire;
@@ -93,7 +93,7 @@ public class DomainInheritanceEditing extends InferenceTestCase {
 		// a parameter
 		DomainAttributeInstance nameInstance = assertHasDomainAttributeInstance(studentInstance, "name");
 		ApplicationElementProperty instanceValue = assertHasApplicationElementProperty(nameInstance, "fieldValue");
-		ParameterWire param = assertHasParameterWire(root, instanceValue, run);
+		ParameterEdge param = assertHasParameterEdge(root, instanceValue, run);
 		assertGenerated(param);
 		
 		// the condition on the object instance
@@ -146,7 +146,7 @@ public class DomainInheritanceEditing extends InferenceTestCase {
 		// a parameter
 		DomainAttributeInstance nameInstance = assertHasDomainAttributeInstance(studentInstance, "name");
 		ApplicationElementProperty instanceValue = assertHasApplicationElementProperty(nameInstance, "fieldValue");
-		ParameterWire param = assertHasParameterWire(root, instanceValue, run);
+		ParameterEdge param = assertHasParameterEdge(root, instanceValue, run);
 		assertGenerated(param);
 		
 		// the condition on the object instance

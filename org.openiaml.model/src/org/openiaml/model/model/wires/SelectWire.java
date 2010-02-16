@@ -31,7 +31,7 @@ import org.openiaml.model.model.WireEdgeDestination;
  * @model annotation="http://openiaml.org/comment added='0.2' comment='parameters can be provided by ParameterWires'"
  * @generated
  */
-public interface SelectWire extends CompositeWire, WireEdgeDestination {
+public interface SelectWire extends CompositeWire, WireEdgeDestination, ParameterEdgeDestination {
 	/**
 	 * Returns the value of the '<em><b>Query</b></em>' attribute.
 	 * <!-- begin-user-doc -->

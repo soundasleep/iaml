@@ -17,7 +17,7 @@ import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ConditionWire;
-import org.openiaml.model.model.wires.ParameterWire;
+import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
@@ -86,7 +86,7 @@ public class SetWireClient extends InferenceTestCase {
 		assertGenerated(run);
 		
 		// which has a parameter
-		ParameterWire param = assertHasParameterWire(page, value, run);
+		ParameterEdge param = assertHasParameterEdge(page, value, run);
 		assertGenerated(param);
 	}
 
@@ -146,7 +146,7 @@ public class SetWireClient extends InferenceTestCase {
 		assertGenerated(run);
 		
 		// which has a parameter
-		ParameterWire param = assertHasParameterWire(page, value, run);
+		ParameterEdge param = assertHasParameterEdge(page, value, run);
 		assertGenerated(param);
 		
 		// but the parameter of 'target' is not connected to the run wire

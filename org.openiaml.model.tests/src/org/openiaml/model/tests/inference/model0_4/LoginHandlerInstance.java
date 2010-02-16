@@ -161,14 +161,9 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		assertNotNull(currentPassword.getDefaultValue());
 		assertEquals("", currentPassword.getDefaultValue());
 
-
 		// each key should be connected to the select
-		{
-			Set<WireEdge> wires2 = assertHasWiresFromTo(1, handler, currentPassword, select);
-			ParameterWire param = (ParameterWire) wires2.iterator().next();
-			assertGenerated(param);
-		}
-
+		assertGenerated(getParameterEdgeFromTo(handler, currentPassword, select));
+		
 		// there should be a set wire connecting to the generated property
 		{
 			Set<WireEdge> wires2 = assertHasWiresFromTo(1, handler, handler, currentPassword);
@@ -293,9 +288,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		assertGenerated(prop);
 
 		// connecting to the run wire
-		Set<WireEdge> w2 = assertHasWiresFromTo(1, root, prop, run);
-		ParameterWire param = (ParameterWire) w2.iterator().next();
-		assertGenerated(param);
+		assertGenerated(assertHasParameterEdge(root, prop, run));
 
 	}
 

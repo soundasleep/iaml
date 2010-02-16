@@ -170,7 +170,7 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(user);
 		
 		// a Parameter wire: [guest] --> [handler]
-		ParameterWire param = assertHasParameterWire(session, user, handler);
+		ParameterWire param = assertHasParameterEdge(session, user, handler);
 		assertGenerated(param);
 		
 	}
@@ -345,7 +345,7 @@ public class UserRoles extends InferenceTestCase {
 		AccessControlHandler ach = assertHasAccessControlHandler(session, "role-based access");
 		UserInstance instance = assertHasUserInstance(session, "current instance");
 		
-		ParameterWire param = assertHasParameterWire(session, instance, ach);
+		ParameterWire param = assertHasParameterEdge(session, instance, ach);
 		assertGenerated(param);
 		
 	}
@@ -536,9 +536,9 @@ public class UserRoles extends InferenceTestCase {
 		}, selectWire.getQuery());
 		
 		// parameters
-		ParameterWire p1 = assertHasParameterWire(root, email, selectWire);
+		ParameterWire p1 = assertHasParameterEdge(root, email, selectWire);
 		assertGenerated(p1);
-		ParameterWire p2 = assertHasParameterWire(root, password, selectWire);
+		ParameterWire p2 = assertHasParameterEdge(root, password, selectWire);
 		assertGenerated(p2);
 		
 	}

@@ -17,14 +17,14 @@ import org.openiaml.model.tests.eclipse.EclipseTestCaseHelper;
 /**
  * Testing the migration functionality.
  *
- * It tests the migration, loading the model into EMF, initialising the
+ * <p>It tests the migration, loading the model into EMF, initialising the
  * GMF diagram, and then investigating the rendered diagram to make sure
  * the elements are all there.
  *
- * TODO in the future we could add migration tests to ensure that
+ * <p>TODO in the future we could add migration tests to ensure that
  * openable elements can still be opened, etc.
  *
- * Based on ShortcutsTestCase.
+ * <p>Based on ShortcutsTestCase.
  *
  * @see #getModel()
  * @see #migrateModel()

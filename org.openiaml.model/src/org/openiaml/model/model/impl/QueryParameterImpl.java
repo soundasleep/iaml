@@ -27,6 +27,9 @@ import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.wires.ParameterEdge;
+import org.openiaml.model.model.wires.ParameterEdgesSource;
+import org.openiaml.model.model.wires.WiresPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -41,8 +44,10 @@ import org.openiaml.model.model.WireEdgesSource;
  *   <li>{@link org.openiaml.model.model.impl.QueryParameterImpl#getGeneratedRule <em>Generated Rule</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.QueryParameterImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.QueryParameterImpl#getWires <em>Wires</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.QueryParameterImpl#getParameterEdges <em>Parameter Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.QueryParameterImpl#getOutEdges <em>Out Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.QueryParameterImpl#getOutFlows <em>Out Flows</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.QueryParameterImpl#getOutParameterEdges <em>Out Parameter Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.QueryParameterImpl#getDefaultValue <em>Default Value</em>}</li>
  * </ul>
  * </p>
@@ -151,6 +156,16 @@ public class QueryParameterImpl extends EObjectImpl implements QueryParameter {
 	protected EList<WireEdge> wires;
 
 	/**
+	 * The cached value of the '{@link #getParameterEdges() <em>Parameter Edges</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParameterEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ParameterEdge> parameterEdges;
+
+	/**
 	 * The cached value of the '{@link #getOutEdges() <em>Out Edges</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -169,6 +184,16 @@ public class QueryParameterImpl extends EObjectImpl implements QueryParameter {
 	 * @ordered
 	 */
 	protected EList<DataFlowEdge> outFlows;
+
+	/**
+	 * The cached value of the '{@link #getOutParameterEdges() <em>Out Parameter Edges</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOutParameterEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ParameterEdge> outParameterEdges;
 
 	/**
 	 * The default value of the '{@link #getDefaultValue() <em>Default Value</em>}' attribute.
@@ -322,6 +347,18 @@ public class QueryParameterImpl extends EObjectImpl implements QueryParameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ParameterEdge> getParameterEdges() {
+		if (parameterEdges == null) {
+			parameterEdges = new EObjectContainmentEList<ParameterEdge>(ParameterEdge.class, this, ModelPackage.QUERY_PARAMETER__PARAMETER_EDGES);
+		}
+		return parameterEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<WireEdge> getOutEdges() {
 		if (outEdges == null) {
 			outEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, ModelPackage.QUERY_PARAMETER__OUT_EDGES, ModelPackage.WIRE_EDGE__FROM);
@@ -339,6 +376,18 @@ public class QueryParameterImpl extends EObjectImpl implements QueryParameter {
 			outFlows = new EObjectWithInverseResolvingEList<DataFlowEdge>(DataFlowEdge.class, this, ModelPackage.QUERY_PARAMETER__OUT_FLOWS, ModelPackage.DATA_FLOW_EDGE__FROM);
 		}
 		return outFlows;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ParameterEdge> getOutParameterEdges() {
+		if (outParameterEdges == null) {
+			outParameterEdges = new EObjectWithInverseResolvingEList<ParameterEdge>(ParameterEdge.class, this, ModelPackage.QUERY_PARAMETER__OUT_PARAMETER_EDGES, WiresPackage.PARAMETER_EDGE__FROM);
+		}
+		return outParameterEdges;
 	}
 
 	/**
@@ -377,6 +426,8 @@ public class QueryParameterImpl extends EObjectImpl implements QueryParameter {
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutEdges()).basicAdd(otherEnd, msgs);
 			case ModelPackage.QUERY_PARAMETER__OUT_FLOWS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutFlows()).basicAdd(otherEnd, msgs);
+			case ModelPackage.QUERY_PARAMETER__OUT_PARAMETER_EDGES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutParameterEdges()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -393,10 +444,14 @@ public class QueryParameterImpl extends EObjectImpl implements QueryParameter {
 				return ((InternalEList<?>)getGeneratedBy()).basicRemove(otherEnd, msgs);
 			case ModelPackage.QUERY_PARAMETER__WIRES:
 				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
+			case ModelPackage.QUERY_PARAMETER__PARAMETER_EDGES:
+				return ((InternalEList<?>)getParameterEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.QUERY_PARAMETER__OUT_EDGES:
 				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.QUERY_PARAMETER__OUT_FLOWS:
 				return ((InternalEList<?>)getOutFlows()).basicRemove(otherEnd, msgs);
+			case ModelPackage.QUERY_PARAMETER__OUT_PARAMETER_EDGES:
+				return ((InternalEList<?>)getOutParameterEdges()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -421,10 +476,14 @@ public class QueryParameterImpl extends EObjectImpl implements QueryParameter {
 				return getName();
 			case ModelPackage.QUERY_PARAMETER__WIRES:
 				return getWires();
+			case ModelPackage.QUERY_PARAMETER__PARAMETER_EDGES:
+				return getParameterEdges();
 			case ModelPackage.QUERY_PARAMETER__OUT_EDGES:
 				return getOutEdges();
 			case ModelPackage.QUERY_PARAMETER__OUT_FLOWS:
 				return getOutFlows();
+			case ModelPackage.QUERY_PARAMETER__OUT_PARAMETER_EDGES:
+				return getOutParameterEdges();
 			case ModelPackage.QUERY_PARAMETER__DEFAULT_VALUE:
 				return getDefaultValue();
 		}
@@ -460,6 +519,10 @@ public class QueryParameterImpl extends EObjectImpl implements QueryParameter {
 				getWires().clear();
 				getWires().addAll((Collection<? extends WireEdge>)newValue);
 				return;
+			case ModelPackage.QUERY_PARAMETER__PARAMETER_EDGES:
+				getParameterEdges().clear();
+				getParameterEdges().addAll((Collection<? extends ParameterEdge>)newValue);
+				return;
 			case ModelPackage.QUERY_PARAMETER__OUT_EDGES:
 				getOutEdges().clear();
 				getOutEdges().addAll((Collection<? extends WireEdge>)newValue);
@@ -467,6 +530,10 @@ public class QueryParameterImpl extends EObjectImpl implements QueryParameter {
 			case ModelPackage.QUERY_PARAMETER__OUT_FLOWS:
 				getOutFlows().clear();
 				getOutFlows().addAll((Collection<? extends DataFlowEdge>)newValue);
+				return;
+			case ModelPackage.QUERY_PARAMETER__OUT_PARAMETER_EDGES:
+				getOutParameterEdges().clear();
+				getOutParameterEdges().addAll((Collection<? extends ParameterEdge>)newValue);
 				return;
 			case ModelPackage.QUERY_PARAMETER__DEFAULT_VALUE:
 				setDefaultValue((String)newValue);
@@ -501,11 +568,17 @@ public class QueryParameterImpl extends EObjectImpl implements QueryParameter {
 			case ModelPackage.QUERY_PARAMETER__WIRES:
 				getWires().clear();
 				return;
+			case ModelPackage.QUERY_PARAMETER__PARAMETER_EDGES:
+				getParameterEdges().clear();
+				return;
 			case ModelPackage.QUERY_PARAMETER__OUT_EDGES:
 				getOutEdges().clear();
 				return;
 			case ModelPackage.QUERY_PARAMETER__OUT_FLOWS:
 				getOutFlows().clear();
+				return;
+			case ModelPackage.QUERY_PARAMETER__OUT_PARAMETER_EDGES:
+				getOutParameterEdges().clear();
 				return;
 			case ModelPackage.QUERY_PARAMETER__DEFAULT_VALUE:
 				setDefaultValue(DEFAULT_VALUE_EDEFAULT);
@@ -534,10 +607,14 @@ public class QueryParameterImpl extends EObjectImpl implements QueryParameter {
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case ModelPackage.QUERY_PARAMETER__WIRES:
 				return wires != null && !wires.isEmpty();
+			case ModelPackage.QUERY_PARAMETER__PARAMETER_EDGES:
+				return parameterEdges != null && !parameterEdges.isEmpty();
 			case ModelPackage.QUERY_PARAMETER__OUT_EDGES:
 				return outEdges != null && !outEdges.isEmpty();
 			case ModelPackage.QUERY_PARAMETER__OUT_FLOWS:
 				return outFlows != null && !outFlows.isEmpty();
+			case ModelPackage.QUERY_PARAMETER__OUT_PARAMETER_EDGES:
+				return outParameterEdges != null && !outParameterEdges.isEmpty();
 			case ModelPackage.QUERY_PARAMETER__DEFAULT_VALUE:
 				return DEFAULT_VALUE_EDEFAULT == null ? defaultValue != null : !DEFAULT_VALUE_EDEFAULT.equals(defaultValue);
 		}
@@ -554,6 +631,7 @@ public class QueryParameterImpl extends EObjectImpl implements QueryParameter {
 		if (baseClass == ContainsWires.class) {
 			switch (derivedFeatureID) {
 				case ModelPackage.QUERY_PARAMETER__WIRES: return ModelPackage.CONTAINS_WIRES__WIRES;
+				case ModelPackage.QUERY_PARAMETER__PARAMETER_EDGES: return ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES;
 				default: return -1;
 			}
 		}
@@ -574,6 +652,12 @@ public class QueryParameterImpl extends EObjectImpl implements QueryParameter {
 				default: return -1;
 			}
 		}
+		if (baseClass == ParameterEdgesSource.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.QUERY_PARAMETER__OUT_PARAMETER_EDGES: return WiresPackage.PARAMETER_EDGES_SOURCE__OUT_PARAMETER_EDGES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -587,6 +671,7 @@ public class QueryParameterImpl extends EObjectImpl implements QueryParameter {
 		if (baseClass == ContainsWires.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.CONTAINS_WIRES__WIRES: return ModelPackage.QUERY_PARAMETER__WIRES;
+				case ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES: return ModelPackage.QUERY_PARAMETER__PARAMETER_EDGES;
 				default: return -1;
 			}
 		}
@@ -604,6 +689,12 @@ public class QueryParameterImpl extends EObjectImpl implements QueryParameter {
 		if (baseClass == DataFlowEdgesSource.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.DATA_FLOW_EDGES_SOURCE__OUT_FLOWS: return ModelPackage.QUERY_PARAMETER__OUT_FLOWS;
+				default: return -1;
+			}
+		}
+		if (baseClass == ParameterEdgesSource.class) {
+			switch (baseFeatureID) {
+				case WiresPackage.PARAMETER_EDGES_SOURCE__OUT_PARAMETER_EDGES: return ModelPackage.QUERY_PARAMETER__OUT_PARAMETER_EDGES;
 				default: return -1;
 			}
 		}

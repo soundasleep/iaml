@@ -29,6 +29,7 @@ import org.openiaml.model.model.components.EntryGate;
 import org.openiaml.model.model.components.ExitGate;
 import org.openiaml.model.model.components.Gate;
 import org.openiaml.model.model.components.LoginHandler;
+import org.openiaml.model.model.wires.ParameterEdgeDestination;
 
 /**
  * <!-- begin-user-doc -->
@@ -108,6 +109,7 @@ public class ComponentsSwitch<T> {
 				LoginHandler loginHandler = (LoginHandler)theEObject;
 				T result = caseLoginHandler(loginHandler);
 				if (result == null) result = caseApplicationElementContainer(loginHandler);
+				if (result == null) result = caseParameterEdgeDestination(loginHandler);
 				if (result == null) result = caseApplicationElement(loginHandler);
 				if (result == null) result = caseCanBeSynced(loginHandler);
 				if (result == null) result = caseContainsOperations(loginHandler);
@@ -454,6 +456,21 @@ public class ComponentsSwitch<T> {
 	 * @generated
 	 */
 	public T caseApplicationElementContainer(ApplicationElementContainer object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Parameter Edge Destination</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Parameter Edge Destination</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseParameterEdgeDestination(ParameterEdgeDestination object) {
 		return null;
 	}
 

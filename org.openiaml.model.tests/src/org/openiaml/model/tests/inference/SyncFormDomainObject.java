@@ -13,7 +13,7 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.ParameterWire;
+import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SyncWire;
 
@@ -68,13 +68,13 @@ public class SyncFormDomainObject extends InferenceTestCase {
 		ApplicationElementProperty valuea2 = assertHasApplicationElementProperty(attr2, "fieldValue");
 
 		// these field values should be parameters
-		ParameterWire pw1 = (ParameterWire) getWireFrom(root, value1);
+		ParameterEdge pw1 = value1.getOutParameterEdges().get(0);
 		assertTrue(pw1.toString(), pw1.getTo() instanceof RunInstanceWire);
-		ParameterWire pw2 = (ParameterWire) getWireFrom(root, value2);
+		ParameterEdge pw2 = value2.getOutParameterEdges().get(0);
 		assertTrue(pw2.toString(), pw2.getTo() instanceof RunInstanceWire);
-		ParameterWire pwa1 = (ParameterWire) getWireFrom(root, valuea1);
+		ParameterEdge pwa1 = valuea1.getOutParameterEdges().get(0);
 		assertTrue(pwa1.toString(), pwa1.getTo() instanceof RunInstanceWire);
-		ParameterWire pwa2 = (ParameterWire) getWireFrom(root, valuea2);
+		ParameterEdge pwa2 = valuea2.getOutParameterEdges().get(0);
 		assertTrue(pwa2.toString(), pwa2.getTo() instanceof RunInstanceWire);
 	}
 

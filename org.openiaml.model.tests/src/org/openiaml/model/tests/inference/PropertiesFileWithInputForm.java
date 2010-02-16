@@ -58,12 +58,9 @@ public class PropertiesFileWithInputForm extends InferenceTestCase {
 		ApplicationElementProperty attrValue = assertHasApplicationElementProperty(attribute, "fieldValue");
 
 		// they should be parameters
-		ParameterWire textPw = (ParameterWire) getWireFromTo(wire, textValue, srcRw);
-		ParameterWire attrPw = (ParameterWire) getWireFromTo(wire, attrValue, targetRw);
+		assertGenerated(getParameterEdgeFromTo(wire, textValue, srcRw));
+		assertGenerated(getParameterEdgeFromTo(wire, attrValue, targetRw));
 
-		// remove warnings
-		assertNotNull(textPw);
-		assertNotNull(attrPw);
 	}
 
 	public void testInferenceWithForm() throws Exception {
@@ -96,12 +93,9 @@ public class PropertiesFileWithInputForm extends InferenceTestCase {
 		ApplicationElementProperty attrValue = assertHasApplicationElementProperty(attribute, "fieldValue");
 
 		// they should be parameters
-		ParameterWire textPw = (ParameterWire) getWireFromTo(wire, textValue, srcRw);
-		ParameterWire attrPw = (ParameterWire) getWireFromTo(wire, attrValue, targetRw);
+		assertGenerated(getParameterEdgeFromTo(wire, textValue, srcRw));
+		assertGenerated(getParameterEdgeFromTo(wire, attrValue, targetRw));
 
-		// remove warnings
-		assertNotNull(textPw);
-		assertNotNull(attrPw);
 	}
 
 }

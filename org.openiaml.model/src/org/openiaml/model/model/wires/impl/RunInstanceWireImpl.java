@@ -19,6 +19,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
+import org.openiaml.model.model.wires.ParameterEdge;
+import org.openiaml.model.model.wires.ParameterEdgeDestination;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.WiresPackage;
 
@@ -30,6 +32,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.openiaml.model.model.wires.impl.RunInstanceWireImpl#getInEdges <em>In Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.wires.impl.RunInstanceWireImpl#getInParameterEdges <em>In Parameter Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.RunInstanceWireImpl#getPriority <em>Priority</em>}</li>
  * </ul>
  * </p>
@@ -46,6 +49,16 @@ public class RunInstanceWireImpl extends CompositeWireImpl implements RunInstanc
 	 * @ordered
 	 */
 	protected EList<WireEdge> inEdges;
+
+	/**
+	 * The cached value of the '{@link #getInParameterEdges() <em>In Parameter Edges</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInParameterEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ParameterEdge> inParameterEdges;
 
 	/**
 	 * The default value of the '{@link #getPriority() <em>Priority</em>}' attribute.
@@ -102,6 +115,18 @@ public class RunInstanceWireImpl extends CompositeWireImpl implements RunInstanc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ParameterEdge> getInParameterEdges() {
+		if (inParameterEdges == null) {
+			inParameterEdges = new EObjectWithInverseResolvingEList<ParameterEdge>(ParameterEdge.class, this, WiresPackage.RUN_INSTANCE_WIRE__IN_PARAMETER_EDGES, WiresPackage.PARAMETER_EDGE__TO);
+		}
+		return inParameterEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public int getPriority() {
 		return priority;
 	}
@@ -129,6 +154,8 @@ public class RunInstanceWireImpl extends CompositeWireImpl implements RunInstanc
 		switch (featureID) {
 			case WiresPackage.RUN_INSTANCE_WIRE__IN_EDGES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInEdges()).basicAdd(otherEnd, msgs);
+			case WiresPackage.RUN_INSTANCE_WIRE__IN_PARAMETER_EDGES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInParameterEdges()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -143,6 +170,8 @@ public class RunInstanceWireImpl extends CompositeWireImpl implements RunInstanc
 		switch (featureID) {
 			case WiresPackage.RUN_INSTANCE_WIRE__IN_EDGES:
 				return ((InternalEList<?>)getInEdges()).basicRemove(otherEnd, msgs);
+			case WiresPackage.RUN_INSTANCE_WIRE__IN_PARAMETER_EDGES:
+				return ((InternalEList<?>)getInParameterEdges()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -157,6 +186,8 @@ public class RunInstanceWireImpl extends CompositeWireImpl implements RunInstanc
 		switch (featureID) {
 			case WiresPackage.RUN_INSTANCE_WIRE__IN_EDGES:
 				return getInEdges();
+			case WiresPackage.RUN_INSTANCE_WIRE__IN_PARAMETER_EDGES:
+				return getInParameterEdges();
 			case WiresPackage.RUN_INSTANCE_WIRE__PRIORITY:
 				return getPriority();
 		}
@@ -176,6 +207,10 @@ public class RunInstanceWireImpl extends CompositeWireImpl implements RunInstanc
 				getInEdges().clear();
 				getInEdges().addAll((Collection<? extends WireEdge>)newValue);
 				return;
+			case WiresPackage.RUN_INSTANCE_WIRE__IN_PARAMETER_EDGES:
+				getInParameterEdges().clear();
+				getInParameterEdges().addAll((Collection<? extends ParameterEdge>)newValue);
+				return;
 			case WiresPackage.RUN_INSTANCE_WIRE__PRIORITY:
 				setPriority((Integer)newValue);
 				return;
@@ -194,6 +229,9 @@ public class RunInstanceWireImpl extends CompositeWireImpl implements RunInstanc
 			case WiresPackage.RUN_INSTANCE_WIRE__IN_EDGES:
 				getInEdges().clear();
 				return;
+			case WiresPackage.RUN_INSTANCE_WIRE__IN_PARAMETER_EDGES:
+				getInParameterEdges().clear();
+				return;
 			case WiresPackage.RUN_INSTANCE_WIRE__PRIORITY:
 				setPriority(PRIORITY_EDEFAULT);
 				return;
@@ -211,6 +249,8 @@ public class RunInstanceWireImpl extends CompositeWireImpl implements RunInstanc
 		switch (featureID) {
 			case WiresPackage.RUN_INSTANCE_WIRE__IN_EDGES:
 				return inEdges != null && !inEdges.isEmpty();
+			case WiresPackage.RUN_INSTANCE_WIRE__IN_PARAMETER_EDGES:
+				return inParameterEdges != null && !inParameterEdges.isEmpty();
 			case WiresPackage.RUN_INSTANCE_WIRE__PRIORITY:
 				return priority != PRIORITY_EDEFAULT;
 		}
@@ -230,6 +270,12 @@ public class RunInstanceWireImpl extends CompositeWireImpl implements RunInstanc
 				default: return -1;
 			}
 		}
+		if (baseClass == ParameterEdgeDestination.class) {
+			switch (derivedFeatureID) {
+				case WiresPackage.RUN_INSTANCE_WIRE__IN_PARAMETER_EDGES: return WiresPackage.PARAMETER_EDGE_DESTINATION__IN_PARAMETER_EDGES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -243,6 +289,12 @@ public class RunInstanceWireImpl extends CompositeWireImpl implements RunInstanc
 		if (baseClass == WireEdgeDestination.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.WIRE_EDGE_DESTINATION__IN_EDGES: return WiresPackage.RUN_INSTANCE_WIRE__IN_EDGES;
+				default: return -1;
+			}
+		}
+		if (baseClass == ParameterEdgeDestination.class) {
+			switch (baseFeatureID) {
+				case WiresPackage.PARAMETER_EDGE_DESTINATION__IN_PARAMETER_EDGES: return WiresPackage.RUN_INSTANCE_WIRE__IN_PARAMETER_EDGES;
 				default: return -1;
 			}
 		}

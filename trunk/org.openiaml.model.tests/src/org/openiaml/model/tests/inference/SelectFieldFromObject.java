@@ -43,6 +43,12 @@ public class SelectFieldFromObject extends InferenceTestCase {
 		DomainAttributeInstance attr = assertHasDomainAttributeInstance(obj, "name");
 		SyncWire sw = (SyncWire) getWireBidirectional(root, field, attr);
 		SelectWire select = (SelectWire) getWireFromTo(root, user, obj);
+		
+		// should have autosave enabled on both fields
+		assertNotGenerated(obj);
+		assertTrue(obj.isAutosave());
+		assertNotGenerated(attr);
+		assertTrue(attr.isAutosave());
 
 		// [inferred elements]
 		// edit events and operations on the text field

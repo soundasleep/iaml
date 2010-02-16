@@ -580,4 +580,9 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	public void setQuery(SelectWire element, String value) throws InferenceException {
 		setValue(element, WiresPackage.eINSTANCE.getSelectWire_Query(), value);
 	}
+	
+	public void setAutosave(DomainAttributeInstance element, boolean value) throws InferenceException {
+		setValue(element, ModelPackage.eINSTANCE.getDomainAttributeInstance_Autosave(), value);
+	}
+	
 }

@@ -5,7 +5,7 @@
       <wires xsi:type="iaml.wires:ParameterWire" id="wires.12109dbdd39.54" from="model.12109c6242e.5e" to="wires.12109331f38.627"/>
     </values>
     <elements xsi:type="iaml:DomainObjectInstance" id="model.12109331eea.128c" name="&quot;My User&quot;" inEdges="wires.12109331f38.627" autosave="true">
-      <attributes id="model.12109331eea.12dc" name="name" outEdges="wires.12109c6249b.9">
+      <attributes id="model.12109331eea.12dc" name="name" outEdges="wires.12109c6249b.9" autosave="true">
         <wires xsi:type="iaml.wires:SyncWire" id="wires.12109c6249b.9" from="model.12109331eea.12dc" to="visual.12109331f38.ebf" name="sync"/>
       </attributes>
     </elements>

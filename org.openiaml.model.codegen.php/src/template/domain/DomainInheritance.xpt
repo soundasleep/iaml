@@ -10,7 +10,7 @@
 	«EXPAND castSourceAsTarget(this) FOR this»
 	«EXPAND updateInstanceAttributeFrom FOR this»
 	
-	«LET inEdges.typeSelect(model::wires::ExtendsWire).from.typeSelect(model::DomainObject) AS subclasses»
+	«LET inExtendsEdges.from.typeSelect(model::DomainObject) AS subclasses»
 		«REM»expand all direct extends«ENDREM»
 		«FOREACH subclasses AS target»
 			«EXPAND castSourceAsTarget(target) FOR this»
@@ -37,10 +37,10 @@ function cast_«safeName()»_as_«safeName(target)»($instance) {
 		return $instance;
 	«ELSE»
 		log_message("[cast] Casting '«name»' into subclass '«target.name»'...");
-		«FOREACH inEdges.typeSelect(model::wires::ExtendsWire).from.typeSelect(model::DomainObject) AS subclass»
+		«FOREACH inExtendsEdges.from.typeSelect(model::DomainObject) AS subclass»
 			«IF allSubtypes(subclass).contains(target)»
 			«LET attributes.selectFirst(a | a.primaryKey) AS sourceKey»
-				«LET subclass.attributes.select(a | !a.outEdges.typeSelect(model::wires::ExtendsWire).to.select( a | a == sourceKey ).isEmpty).first() AS targetKey»
+				«LET subclass.attributes.select(a | !a.outExtendsEdges.to.select( a | a == sourceKey ).isEmpty).first() AS targetKey»
 					log_message("[cast] Attempting cast into '«subclass.name»'");
 					$source_value = $instance["«safeNameString(sourceKey.name)»"];
 
@@ -102,7 +102,7 @@ function cast_«safeName()»_as_«safeName(target)»($instance) {
 	«ELSE»
 		«IF allSubtypes().contains(target)»
 			// '«target.name»' is a direct subtype of '«name»'
-			«LET inEdges.typeSelect(model::wires::ExtendsWire).to.typeSelect(model::DomainObject).selectFirst( a | allSubtypes(a).contains(target) ) AS firstSubtype»
+			«LET inExtendsEdges.to.typeSelect(model::DomainObject).selectFirst( a | allSubtypes(a).contains(target) ) AS firstSubtype»
 				// the first subtype that has a path: «firstSubtype.name»
 				$new_instance = cast_«safeName()»_as_«safeName(firstSubtype)»($instance);
 				if ($new_instance === null) {
@@ -116,7 +116,7 @@ function cast_«safeName()»_as_«safeName(target)»($instance) {
 		«ELSE»
 			// '«target.name»' is not direct subtype of '«name»'
 			// try all of the supertypes of '«name»'
-			«FOREACH outEdges.typeSelect(model::wires::ExtendsWire).to.typeSelect(model::DomainObject) AS superclass»
+			«FOREACH outExtendsEdges.to.typeSelect(model::DomainObject) AS superclass»
 				// subclass '«superclass.name»'
 				$superclass_instance = get_subclass_«safeName(superclass)»_from_«safeName()»($instance);
 				if ($superclass_instance != null) {
@@ -146,7 +146,7 @@ function get_subclass_«safeName()»_from_«safeName(source)»($instance) {
 	$source_id = "«safeName()-»";
 	$source_class = "«safeNameString(name)-»";
 	$query = "«safeNameString(name)».«safeNameString(getPrimaryKey().name)» = ?";
-	$args = array($instance["«safeNameString(source.attributes.selectFirst( a | !a.outEdges.typeSelect(model::wires::ExtendsWire).select(e | e.to == getPrimaryKey()).isEmpty).name)-»"]);
+	$args = array($instance["«safeNameString(source.attributes.selectFirst( a | !a.outExtendsEdges.select(e | e.to == getPrimaryKey()).isEmpty).name)-»"]);
 	
 	// fetch the instance
 	$subclass_instance = evaluate_select_wire($db_name,
@@ -180,7 +180,7 @@ function update_«safeName()»_attribute_instance($instance, $attribute_name, $arg
 
 		$attribute_name_resolved = null;
 		«REM»only select attributes which are not extensions of subclass attributes«ENDREM»
-		«FOREACH attributes.select(a | a.outEdges.typeSelect(model::wires::ExtendsWire).to.typeSelect(model::DomainAttribute).isEmpty) AS targetAttribute»
+		«FOREACH attributes.select(a | a.outExtendsEdges.to.typeSelect(model::DomainAttribute).isEmpty) AS targetAttribute»
 		if ($attribute_name == '«safeNameString(targetAttribute.name)»') {
 			/* in self instance */
 			$attribute_name_resolved = '«safeNameString(targetAttribute.name)»'; 
@@ -206,7 +206,7 @@ function update_«safeName()»_attribute_instance($instance, $attribute_name, $arg
 		}
 					
 		// we haven't; try all the subclasses of '«name»'
-		«FOREACH outEdges.typeSelect(model::wires::ExtendsWire).to.typeSelect(model::DomainObject) AS targetSubclass»
+		«FOREACH outExtendsEdges.to.typeSelect(model::DomainObject) AS targetSubclass»
 		{
 			/* subclass '«targetSubclass.name»' */
 			// first, get the instance of this subclass
@@ -245,11 +245,11 @@ direct_joins("doctoral") = array(
  	/* «safeNameString(name)» */ 
 	$direct_joins["«safeNameString(id)»"] = array(
 		
-		«FOREACH outEdges.typeSelect(model::wires::ExtendsWire).to.typeSelect(model::DomainObject) AS parent»
+		«FOREACH outExtendsEdges.to.typeSelect(model::DomainObject) AS parent»
 			«REM»find the PK of the parent object«ENDREM»
 			«LET parent.attributes.select(a | a.primaryKey).first() AS parentPK»				
 				«REM»find the corresponding FK of this current object«ENDREM»
-				«LET attributes.select(a | a.outEdges.typeSelect(model::wires::ExtendsWire).to.contains(parentPK)).first() AS fk»
+				«LET attributes.select(a | a.outExtendsEdges.to.contains(parentPK)).first() AS fk»
 					"«safeNameString(parent.id)»" => 
 					"JOIN «safeNameString(parent.name)» ON
 						«safeNameString(parent.name)».«safeNameString(parentPK.name)» 
@@ -274,13 +274,13 @@ function create_new_instance_«safeName()»() {
 
 	// create all superclasses first
 	$superclasses = array();
-	«FOREACH outEdges.typeSelect(model::wires::ExtendsWire).to.typeSelect(model::DomainObject) AS superclass»
+	«FOREACH outExtendsEdges.to.typeSelect(model::DomainObject) AS superclass»
 		// superclass '«safeNameString(superclass.name)»'
 		$superclass = create_new_instance_«safeName(superclass)»();
 		
 		// update the FK
 		«LET superclass.attributes.selectFirst( a | a.primaryKey) AS primaryKey»
-			«LET attributes.selectFirst(a | a.outEdges.typeSelect(model::wires::ExtendsWire).to.contains(primaryKey)) AS foreignKey»
+			«LET attributes.selectFirst(a | a.outExtendsEdges.to.contains(primaryKey)) AS foreignKey»
 				$superclasses["«safeNameString(foreignKey.name)»"] = $superclass["«safeNameString(primaryKey.name)»"];
 			«ENDLET»
 		«ENDLET»

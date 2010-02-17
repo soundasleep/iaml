@@ -49,7 +49,7 @@
 		// create the table
 		$q = $db->query("CREATE TABLE «safeNameString(name)» (
 				«REM»(except for attributes which are extensions of non-primary key attributes)«ENDREM»
-				«EXPAND createDomainAttributeDatabase FOREACH attributes.select(a | a.outEdges.typeSelect(model::wires::ExtendsWire).size == 0 || a.outEdges.typeSelect(model::wires::ExtendsWire).to.typeSelect(model::DomainAttribute).select(a | a.primaryKey).size > 0) SEPARATOR ", "»
+				«EXPAND createDomainAttributeDatabase FOREACH attributes.select(a | a.outExtendsEdges.size == 0 || a.outExtendsEdges.to.typeSelect(model::DomainAttribute).select(a | a.primaryKey).size > 0) SEPARATOR ", "»
 			);") or throw_new_IamlRuntimeException("could not create table: " . print_r($db->errorInfo(), true));
 	}
 «ENDDEFINE»

@@ -28,7 +28,7 @@ function add_role_«safeName(target)»_to_«safeName()»($instance) {
 	«ELSEIF allSubtypes().contains(target)»
 		// the type '«target.name»' is a subtype of '«name»'
 		
-		«LET inEdges.typeSelect(model::wires::ExtendsWire).from.typeSelect(model::users::Role) AS directSubtypes»
+		«LET inExtendsEdges.from.typeSelect(model::users::Role) AS directSubtypes»
 		«FOREACH directSubtypes AS subType»
 			«IF allSubtypes(subType).contains(target)»
 				// the subtype '«subType.name»' has a path to '«target.name»'
@@ -39,7 +39,7 @@ function add_role_«safeName(target)»_to_«safeName()»($instance) {
 					// insert in a new instance
 					
 					«LET getPrimaryKey() AS pk»
-					«LET subType.attributes.select(a|a.outEdges.typeSelect(model::wires::ExtendsWire).to.contains(pk)).first() AS subtypeFk»
+					«LET subType.attributes.select(a|a.outExtendsEdges.to.contains(pk)).first() AS subtypeFk»
 
 					«EXPAND template::domain::Select::selectDatabase FOR subType»
 					
@@ -83,7 +83,7 @@ function add_role_«safeName(target)»_to_«safeName()»($instance) {
 		«ENDLET»		
 	«ELSE»
 		// the target class is not in any subclasses; try the direct superclasses
-		«FOREACH outEdges.typeSelect(model::wires::ExtendsWire).to.typeSelect(model::DomainObject) AS superclass»
+		«FOREACH outExtendsEdges.to.typeSelect(model::DomainObject) AS superclass»
 			// subclass '«superclass.name»'
 			$superclass_instance = get_subclass_«safeName(superclass)»_from_«safeName()»($instance);
 			if ($superclass_instance != null) {
@@ -140,7 +140,7 @@ function remove_role_«safeName(target)»_from_«safeName()»($instance) {
 	«ELSEIF allSubtypes().contains(target)»
 		// the type '«target.name»' is a subtype of '«name»'
 		
-		«LET inEdges.typeSelect(model::wires::ExtendsWire).from.typeSelect(model::users::Role) AS directSubtypes»
+		«LET inExtendsEdges.from.typeSelect(model::users::Role) AS directSubtypes»
 		«FOREACH directSubtypes AS subType»
 			«IF allSubtypes(subType).contains(target)»
 				// the subtype '«subType.name»' has a path to '«target.name»'
@@ -160,7 +160,7 @@ function remove_role_«safeName(target)»_from_«safeName()»($instance) {
 		«ENDLET»		
 	«ELSE»
 		// the target class is not in any subclasses; try the direct superclasses
-		«FOREACH outEdges.typeSelect(model::wires::ExtendsWire).to.typeSelect(model::DomainObject) AS superclass»
+		«FOREACH outExtendsEdges.to.typeSelect(model::DomainObject) AS superclass»
 			// subclass '«superclass.name»'
 			$superclass_instance = get_subclass_«safeName(superclass)»_from_«safeName()»($instance);
 			if ($superclass_instance != null) {

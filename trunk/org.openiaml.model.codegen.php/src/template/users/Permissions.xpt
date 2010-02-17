@@ -31,7 +31,7 @@ function user_instance_«safeName(role)»_has_permission_«safeName()»($instance) {
 		contain a unique ID which is then referenced to a global Permissions
 		table with all Permissions, but this is future work.
 	«ENDREM»
-	«LET role.outEdges.typeSelect(model::wires::ExtendsWire).to.typeSelect(model::users::Role) AS extendsRoles»
+	«LET role.outExtendsEdges.to.typeSelect(model::users::Role) AS extendsRoles»
 		«IF extendsRoles.size > 0»
 			«FOREACH extendsRoles AS superclass»
 				/* ask the parent instance '«superclass.name»' */
@@ -85,7 +85,7 @@ function user_instance_«safeName(role)»_has_permission_«safeName()»($instance) {
  * Returns true if successful.
  */
 function add_permission_«safeName()»_to_«safeName(role)»($instance) {
-	«LET role.outEdges.typeSelect(model::wires::ExtendsWire).to.typeSelect(model::users::Role) AS extendsRoles»
+	«LET role.outExtendsEdges.to.typeSelect(model::users::Role) AS extendsRoles»
 		«IF extendsRoles.size > 0»
 			«FOREACH extendsRoles AS superclass»
 				/* tell the parent instance '«superclass.name»' to add it */
@@ -158,7 +158,7 @@ function add_permission_«safeName()»_to_«safeName(role)»($instance) {
  * Returns true if successful.
  */
 function remove_permission_«safeName()»_from_«safeName(role)»($instance) {
-	«LET role.outEdges.typeSelect(model::wires::ExtendsWire).to.typeSelect(model::users::Role) AS extendsRoles»
+	«LET role.outExtendsEdges.to.typeSelect(model::users::Role) AS extendsRoles»
 		«IF extendsRoles.size > 0»
 			«FOREACH extendsRoles AS superclass»
 				/* tell the parent instance '«superclass.name»' to remove it */

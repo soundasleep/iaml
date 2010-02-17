@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="model.1213cee9b4f.f" xmi:version="2.0">
-  <scopes id="visual.1213cee9bad.9" name="container" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
-    <elements autosave="true" id="model.1213cee9b4f.99" inEdges="wires.1213cee9bad.7" name="&quot;My User&quot;" xsi:type="iaml:DomainObjectInstance">
-      <attributes autosave="true" id="model.1213cee9b4f.e1" inEdges="wires.1213cee9bad.18" name="name"/>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1213cee9b4f.f">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.1213cee9bad.9" name="container">
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.1213cee9b4f.99" name="&quot;My User&quot;" inEdges="wires.1213cee9bad.7" autosave="true">
+      <attributes id="model.1213cee9b4f.e1" name="name" inEdges="wires.1213cee9bad.18" autosave="true"/>
     </elements>
-    <children id="visual.1213cee9bad.48" name="edit new instance name" outEdges="wires.1213cee9bad.18" xsi:type="iaml.visual:InputTextField">
-      <wires from="visual.1213cee9bad.48" id="wires.1213cee9bad.18" name="sync" to="model.1213cee9b4f.e1" xsi:type="iaml.wires:SyncWire"/>
+    <children xsi:type="iaml.visual:InputTextField" outEdges="wires.1213cee9bad.18" id="visual.1213cee9bad.48" name="edit new instance name">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.1213cee9bad.18" from="visual.1213cee9bad.48" to="model.1213cee9b4f.e1" name="sync"/>
     </children>
   </scopes>
-  <domainStores id="model.1213cee9b4f.18" name="domain store" xmlns="http://openiaml.org/model0.4">
+  <domainStores id="model.1213cee9b4f.18" name="domain store">
     <children id="model.1213cee9b4f.29" name="User" outEdges="wires.1213cee9bad.7">
-      <wires from="model.1213cee9b4f.29" id="wires.1213cee9bad.7" to="model.1213cee9b4f.99" xsi:type="iaml.wires:NewInstanceWire"/>
+      <wires xsi:type="iaml.wires:NewInstanceWire" id="wires.1213cee9bad.7" from="model.1213cee9b4f.29" to="model.1213cee9b4f.99"/>
       <attributes id="model.1213cee9b4f.50" name="id" primaryKey="true"/>
       <attributes id="model.1213cee9b4f.57" name="name"/>
       <attributes id="model.1213cee9b4f.58" name="email"/>

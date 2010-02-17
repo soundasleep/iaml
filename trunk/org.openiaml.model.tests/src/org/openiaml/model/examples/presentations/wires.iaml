@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="model.11f8c1216d2.d" xmi:version="2.0">
-  <scopes id="visual.11f8c121981.e" name="Home" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4"/>
-  <scopes id="visual.11f8c121981.f" name="About Us" outEdges="wires.11f8c1219ef.7" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
-    <wires from="visual.11f8c121981.f" id="wires.11f8c1219ef.7" name="Sync" to="visual.11f8c121981.10" xsi:type="iaml.wires:SyncWire"/>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.11f8c1216d2.d">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.11f8c121981.e" name="Home"/>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.11f8c121981.f" name="About Us" outEdges="wires.11f8c1219ef.7">
+    <wires xsi:type="iaml.wires:SyncWire" id="wires.11f8c1219ef.7" from="visual.11f8c121981.f" to="visual.11f8c121981.10" name="Sync"/>
   </scopes>
-  <scopes id="visual.11f8c121981.10" inEdges="wires.11f8c1219ef.7" name="Edit About Us" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4"/>
-  <scopes id="visual.11f8c15932a.8" name="Signup" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4"/>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.11f8c121981.10" name="Edit About Us" inEdges="wires.11f8c1219ef.7"/>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.11f8c15932a.8" name="Signup"/>
 </iaml:InternetApplication>

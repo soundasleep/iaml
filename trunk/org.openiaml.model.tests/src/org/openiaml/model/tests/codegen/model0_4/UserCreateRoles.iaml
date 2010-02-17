@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="model.1233afe61d2.26" xmi:version="2.0">
-  <scopes id="visual.1233afe628e.15" name="Home" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4"/>
-  <scopes id="visual.1233b453dc5.156" name="create a new user" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
-    <elements id="users.1233b53a814.a" inEdges="wires.1233b53a3ce.7 wires.1233b53a3ce.5e8" name="newly created user" xsi:type="iaml.users:UserInstance">
-      <operations id="model.1233b53a1ca.14" inEdges="wires.1233b53a3ce.a" name="save" xsi:type="iaml:PrimitiveOperation"/>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1233afe61d2.26">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.1233afe628e.15" name="Home"/>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.1233b453dc5.156" name="create a new user">
+    <elements xsi:type="iaml.users:UserInstance" id="users.1233b53a814.a" name="newly created user" inEdges="wires.1233b53a3ce.7 wires.1233b53a3ce.5e8">
+      <operations xsi:type="iaml:PrimitiveOperation" inEdges="wires.1233b53a3ce.a" id="model.1233b53a1ca.14" name="save"/>
     </elements>
-    <children id="visual.1233b53a313.1a" name="create new user" outEdges="wires.1233b53a3ce.a" xsi:type="iaml.visual:Button">
-      <wires from="visual.1233b53a313.1a" id="wires.1233b53a3ce.a" name="onClick" to="model.1233b53a1ca.14" xsi:type="iaml.wires:RunInstanceWire"/>
+    <children xsi:type="iaml.visual:Button" outEdges="wires.1233b53a3ce.a" id="visual.1233b53a313.1a" name="create new user">
+      <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1233b53a3ce.a" from="visual.1233b53a313.1a" to="model.1233b53a1ca.14" name="onClick"/>
     </children>
-    <children id="visual.1233b53a313.555" name="edit user properties form" outEdges="wires.1233b53a3ce.5e8" xsi:type="iaml.visual:InputForm">
-      <wires from="visual.1233b53a313.555" id="wires.1233b53a3ce.5e8" name="sync" to="users.1233b53a814.a" xsi:type="iaml.wires:SyncWire"/>
+    <children xsi:type="iaml.visual:InputForm" outEdges="wires.1233b53a3ce.5e8" id="visual.1233b53a313.555" name="edit user properties form">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.1233b53a3ce.5e8" from="visual.1233b53a313.555" to="users.1233b53a814.a" name="sync"/>
     </children>
   </scopes>
-  <domainStores id="users.1233afe655c.1c" name="user store" xsi:type="iaml.users:UserStore" xmlns="http://openiaml.org/model0.4">
-    <children id="users.1233afe655c.23" inEdges="wires.1233afe62eb.2d" name="default role" outEdges="wires.1233b53a3ce.7" xsi:type="iaml.users:Role">
-      <wires from="users.1233afe655c.23" id="wires.1233b53a3ce.7" name="new instance" to="users.1233b53a814.a" xsi:type="iaml.wires:NewInstanceWire"/>
+  <scopes xsi:type="iaml.scopes:Session" id="scopes.1233afe6368.3" name="target session">
+    <scopes xsi:type="iaml.visual:Frame" id="visual.1233afe628e.7e" name="target"/>
+    <elements xsi:type="iaml.components:AccessControlHandler" id="components.1233afe6424.13" name="role-based access" outEdges="wires.1233afe62eb.2d">
+      <wires xsi:type="iaml.wires:RequiresWire" id="wires.1233afe62eb.2d" from="components.1233afe6424.13" to="users.1233afe655c.23"/>
+    </elements>
+  </scopes>
+  <domainStores xsi:type="iaml.users:UserStore" id="users.1233afe655c.1c" name="user store">
+    <children xsi:type="iaml.users:Role" id="users.1233afe655c.23" name="default role" outEdges="wires.1233b53a3ce.7" inEdges="wires.1233afe62eb.2d">
+      <wires xsi:type="iaml.wires:NewInstanceWire" id="wires.1233b53a3ce.7" from="users.1233afe655c.23" to="users.1233b53a814.a" name="new instance"/>
     </children>
   </domainStores>
-  <scopes id="scopes.1233afe6368.3" name="target session" xsi:type="iaml.scopes:Session" xmlns="http://openiaml.org/model0.4">
-    <elements id="components.1233afe6424.13" name="role-based access" outEdges="wires.1233afe62eb.2d" xsi:type="iaml.components:AccessControlHandler">
-      <wires from="components.1233afe6424.13" id="wires.1233afe62eb.2d" to="users.1233afe655c.23" xsi:type="iaml.wires:RequiresWire"/>
-    </elements>
-    <scopes id="visual.1233afe628e.7e" name="target" xsi:type="iaml.visual:Frame"/>
-  </scopes>
 </iaml:InternetApplication>

@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="model.122f7c69efd.9" xmi:version="2.0">
-  <scopes id="visual.122f7c6a006.6" name="Home" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4"/>
-  <domainStores id="model.122f7c69efd.d" name="Users" xmlns="http://openiaml.org/model0.4">
-    <children id="model.122f7c69efd.19" name="User">
-      <attributes id="model.122f7c69efd.37" name="password" outEdges="" outParameterEdges="wires.122f7c6a100.1">
-        <parameterEdges from="model.122f7c69efd.37" id="wires.122f7c6a100.1" to="components.122f7c6a40e.1" xsi:type="iaml.wires:ParameterEdge"/>
-      </attributes>
-      <attributes id="model.122f7c69efd.38" name="name"/>
-      <attributes id="model.122f7c69efd.1ed" name="email" outEdges="" outParameterEdges="wires.122f7c6a100.63">
-        <parameterEdges from="model.122f7c69efd.1ed" id="wires.122f7c6a100.63" to="components.122f7c6a40e.1" xsi:type="iaml.wires:ParameterEdge"/>
-      </attributes>
-    </children>
-  </domainStores>
-  <scopes id="scopes.122f7c6a297.1" name="my session" xsi:type="iaml.scopes:Session" xmlns="http://openiaml.org/model0.4">
-    <elements id="components.122f7c6a40e.1" inEdges="" inParameterEdges="wires.122f7c6a100.1 wires.122f7c6a100.63" name="login handler" outEdges="wires.122f7c6a100.e" type="DOMAIN_OBJECT" xsi:type="iaml.components:LoginHandler">
-      <wires from="components.122f7c6a40e.1" id="wires.122f7c6a100.e" name="set" to="model.122f7c69efd.ad" xsi:type="iaml.wires:SetWire"/>
-    </elements>
-    <scopes id="visual.122f7c6a006.24" name="current user" xsi:type="iaml.visual:Frame">
-      <children id="visual.122f7c6a006.56" inEdges="wires.122f7c6a100.3a" name="current user name" xsi:type="iaml.visual:InputTextField"/>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.122f7c69efd.9">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.122f7c6a006.6" name="Home"/>
+  <scopes xsi:type="iaml.scopes:Session" id="scopes.122f7c6a297.1" name="my session">
+    <scopes xsi:type="iaml.visual:Frame" id="visual.122f7c6a006.24" name="current user">
+      <children xsi:type="iaml.visual:InputTextField" inEdges="wires.122f7c6a100.3a" id="visual.122f7c6a006.56" name="current user name"/>
     </scopes>
-    <elements autosave="true" id="model.122f7c69efd.ad" inEdges="wires.122f7c6a100.e" name="logged in user" xsi:type="iaml:DomainObjectInstance">
-      <attributes autosave="true" id="model.122f7c69efd.106" name="name" outEdges="wires.122f7c6a100.3a">
-        <wires from="model.122f7c69efd.106" id="wires.122f7c6a100.3a" name="sync" to="visual.122f7c6a006.56" xsi:type="iaml.wires:SyncWire"/>
+    <elements xsi:type="iaml.components:LoginHandler" id="components.122f7c6a40e.1" name="login handler" outEdges="wires.122f7c6a100.e" inParameterEdges="wires.122f7c6a100.1 wires.122f7c6a100.63" type="DOMAIN_OBJECT">
+      <wires xsi:type="iaml.wires:SetWire" id="wires.122f7c6a100.e" from="components.122f7c6a40e.1" to="model.122f7c69efd.ad" name="set"/>
+    </elements>
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.122f7c69efd.ad" name="logged in user" inEdges="wires.122f7c6a100.e" autosave="true">
+      <attributes id="model.122f7c69efd.106" name="name" outEdges="wires.122f7c6a100.3a" autosave="true">
+        <wires xsi:type="iaml.wires:SyncWire" id="wires.122f7c6a100.3a" from="model.122f7c69efd.106" to="visual.122f7c6a006.56" name="sync"/>
       </attributes>
     </elements>
   </scopes>
+  <domainStores id="model.122f7c69efd.d" name="Users">
+    <children id="model.122f7c69efd.19" name="User">
+      <attributes id="model.122f7c69efd.37" name="password" outParameterEdges="wires.122f7c6a100.1">
+        <parameterEdges id="wires.122f7c6a100.1" from="model.122f7c69efd.37" to="components.122f7c6a40e.1"/>
+      </attributes>
+      <attributes id="model.122f7c69efd.38" name="name"/>
+      <attributes id="model.122f7c69efd.1ed" name="email" outParameterEdges="wires.122f7c6a100.63">
+        <parameterEdges id="wires.122f7c6a100.63" from="model.122f7c69efd.1ed" to="components.122f7c6a40e.1"/>
+      </attributes>
+    </children>
+  </domainStores>
 </iaml:InternetApplication>

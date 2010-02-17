@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="model.12109331eea.107e" xmi:version="2.0">
-  <scopes id="visual.12109331f38.e3f" name="container" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
-    <values id="model.12109c6242e.5e" name="static value" outEdges="" outParameterEdges="wires.12109dbdd39.54" value="43">
-      <parameterEdges from="model.12109c6242e.5e" id="wires.12109dbdd39.54" to="wires.12109331f38.627" xsi:type="iaml.wires:ParameterEdge"/>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12109331eea.107e">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12109331f38.e3f" name="container">
+    <values id="model.12109c6242e.5e" name="static value" outParameterEdges="wires.12109dbdd39.54" value="43">
+      <parameterEdges id="wires.12109dbdd39.54" from="model.12109c6242e.5e" to="wires.12109331f38.627"/>
     </values>
-    <elements autosave="true" id="model.12109331eea.128c" inEdges="wires.12109331f38.627" name="&quot;My User&quot;" xsi:type="iaml:DomainObjectInstance">
-      <attributes autosave="true" id="model.12109331eea.12dc" name="name" outEdges="wires.12109c6249b.9">
-        <wires from="model.12109331eea.12dc" id="wires.12109c6249b.9" name="sync" to="visual.12109331f38.ebf" xsi:type="iaml.wires:SyncWire"/>
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.12109331eea.128c" name="&quot;My User&quot;" inEdges="wires.12109331f38.627" autosave="true">
+      <attributes id="model.12109331eea.12dc" name="name" outEdges="wires.12109c6249b.9" autosave="true">
+        <wires xsi:type="iaml.wires:SyncWire" id="wires.12109c6249b.9" from="model.12109331eea.12dc" to="visual.12109331f38.ebf" name="sync"/>
       </attributes>
     </elements>
-    <children id="visual.12109331f38.ebf" inEdges="wires.12109c6249b.9" name="textfield" xsi:type="iaml.visual:InputTextField"/>
+    <children xsi:type="iaml.visual:InputTextField" inEdges="wires.12109c6249b.9" id="visual.12109331f38.ebf" name="textfield"/>
   </scopes>
-  <domainStores id="model.12109331eea.1083" name="domain store" xsi:type="iaml:DomainStore" xmlns="http://openiaml.org/model0.4">
-    <children id="model.12109331eea.108c" name="User" outEdges="wires.12109331f38.627" xsi:type="iaml:DomainObject">
-      <wires from="model.12109331eea.108c" id="wires.12109331f38.627" inEdges="" inParameterEdges="wires.12109dbdd39.54" name="select" query="id = ?" to="model.12109331eea.128c" xsi:type="iaml.wires:SelectWire"/>
-      <attributes id="model.12109331eea.10ac" name="name" xsi:type="iaml:DomainAttribute"/>
-      <attributes id="model.12109331eea.10ad" name="email" xsi:type="iaml:DomainAttribute"/>
-      <attributes id="model.12109331eea.10ae" name="password" xsi:type="iaml:DomainAttribute"/>
-      <attributes id="model.12109331eea.10d3" name="id" xsi:type="iaml:DomainAttribute"/>
+  <domainStores id="model.12109331eea.1083" name="domain store">
+    <children id="model.12109331eea.108c" name="User" outEdges="wires.12109331f38.627">
+      <wires xsi:type="iaml.wires:SelectWire" id="wires.12109331f38.627" from="model.12109331eea.108c" to="model.12109331eea.128c" name="select" inParameterEdges="wires.12109dbdd39.54" query="id = ?"/>
+      <attributes id="model.12109331eea.10ac" name="name"/>
+      <attributes id="model.12109331eea.10ad" name="email"/>
+      <attributes id="model.12109331eea.10ae" name="password"/>
+      <attributes id="model.12109331eea.10d3" name="id"/>
     </children>
   </domainStores>
 </iaml:InternetApplication>

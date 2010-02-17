@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="model.12109331eea.11" xmi:version="2.0">
-  <scopes id="visual.12109331f38.f" name="page1" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
-    <children id="visual.12109331f38.19" name="go to page 2" xsi:type="iaml.visual:Button">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12109331eea.11">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12109331f38.f" name="page1">
+    <children xsi:type="iaml.visual:Button" id="visual.12109331f38.19" name="go to page 2">
       <eventTriggers id="model.12109331eea.35" name="onClick" outEdges="wires.12109331f38.11">
-        <wires from="model.12109331eea.35" id="wires.12109331f38.11" name="navigate" to="visual.12109331f38.10" xsi:type="iaml.wires:NavigateWire"/>
+        <wires xsi:type="iaml.wires:NavigateWire" id="wires.12109331f38.11" from="model.12109331eea.35" to="visual.12109331f38.10" name="navigate"/>
       </eventTriggers>
     </children>
-    <children id="visual.12109331f38.1a" name="go nowhere" xsi:type="iaml.visual:Button"/>
-    <children id="visual.12109331f38.28" name="go to page 3 implicitly" outEdges="wires.12109331f38.3" xsi:type="iaml.visual:Button">
-      <wires from="visual.12109331f38.28" id="wires.12109331f38.3" name="onClick" to="visual.12109331f38.44" xsi:type="iaml.wires:NavigateWire"/>
+    <children xsi:type="iaml.visual:Button" id="visual.12109331f38.1a" name="go nowhere"/>
+    <children xsi:type="iaml.visual:Button" outEdges="wires.12109331f38.3" id="visual.12109331f38.28" name="go to page 3 implicitly">
+      <wires xsi:type="iaml.wires:NavigateWire" id="wires.12109331f38.3" from="visual.12109331f38.28" to="visual.12109331f38.44" name="onClick"/>
     </children>
   </scopes>
-  <scopes id="visual.12109331f38.10" inEdges="wires.12109331f38.11" name="page2" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4"/>
-  <scopes id="visual.12109331f38.44" inEdges="wires.12109331f38.3" name="page3" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4"/>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12109331f38.10" name="page2" inEdges="wires.12109331f38.11"/>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12109331f38.44" name="page3" inEdges="wires.12109331f38.3"/>
 </iaml:InternetApplication>

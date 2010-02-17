@@ -9,6 +9,7 @@ package org.openiaml.model.model.components;
 import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.scopes.Session;
+import org.openiaml.model.model.wires.ParameterEdgeDestination;
 import org.openiaml.model.model.wires.RequiresWire;
 
 /**
@@ -25,5 +26,5 @@ import org.openiaml.model.model.wires.RequiresWire;
  * @model annotation="http://openiaml.org/comment added='0.4'"
  * @generated
  */
-public interface AccessControlHandler extends ApplicationElementContainer, GeneratesElements {
+public interface AccessControlHandler extends ApplicationElementContainer, GeneratesElements, ParameterEdgeDestination {
 } // AccessControlHandler

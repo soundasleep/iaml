@@ -1,5 +1,6 @@
 package org.openiaml.model.migrate;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,7 @@ import java.util.Map;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * <p>Migrate model version 0.4 to version 0.5.
@@ -30,6 +32,7 @@ import org.w3c.dom.Node;
  *   	<li>WireEdge is now abstract
  *   	<li>SingleWire is now abstract
  *   	<li>Page is now Frame
+ *      <li>ParameterWire is now ParamaterEdge, and no longer a WireEdge
  *   </ol></li>
  *   <li><strong>Many other modifications, too many to list... this migrator only implements
  *   	those changed necessary for the model migration test to pass.</strong></li>
@@ -46,6 +49,51 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 		return "Migrator 0.4 to 0.5";
 	}
 	
+	private List<String> parameterWires = null;
+	
+	/**
+	 * We will cycle over the document, and find out which edges are
+	 * iaml.wires:ParameterWire, so we can change their IDs to 
+	 * ParameterEdges. 
+	 */	
+	@Override
+	public void prepareDocument(Element documentElement,
+			List<ExpectedMigrationException> errors) {
+		
+		parameterWires = new ArrayList<String>();
+		prepareDocumentRecurse(documentElement, errors);
+
+	}
+	
+	/**
+	 * Actually looks for ParameterWires.
+	 * 
+	 * @param e
+	 * @param errors
+	 */
+	private void prepareDocumentRecurse(Element e,
+			List<ExpectedMigrationException> errors) {
+		
+		if ("wires".equals(e.getNodeName()) &&
+				"iaml.wires:ParameterWire".equals(e.getAttribute("xsi:type"))) {
+			String id = e.getAttribute("id");
+			if (id != null) {
+				parameterWires.add(id);
+			} else {
+				errors.add(new ExpectedMigrationException(this, e, "Element was a ParameterWire but did not have an id attribute."));
+			}
+		}
+		
+		// recurse
+		NodeList list = e.getChildNodes();
+		for (int i = 0; i < list.getLength(); i++) {
+			if (list.item(i) instanceof Element) 
+				prepareDocumentRecurse((Element) list.item(i), errors);
+		}
+		
+	}
+	
+
 	/**
 	 * We can identify a version 0.4 model:
 	 * 
@@ -78,8 +126,6 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 			
 		return false;
 	}
-	
-	
 
 	@Override
 	public String replaceType(Element element, String xsiType,
@@ -87,6 +133,10 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 		
 		if (xsiType.equals("iaml.visual:Page")) {
 			return "iaml.visual:Frame";
+		}
+		
+		if (xsiType.equals("iaml.wires:ParameterWire")) {
+			return "iaml.wires:ParameterEdge";
 		}
 
 		return super.replaceType(element, xsiType, errors);
@@ -108,6 +158,12 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 		// --> <scopes xsi:type="iaml.visual:Page">
 		if (nodeName.equals("children") && "iaml.visual:Page".equals(xsiType)) {
 			return "scopes";
+		}
+		
+		// <wires xsi:type="iaml.wires:ParameterWire"> 
+		// --> <parameterEdges>
+		if (nodeName.equals("wires") && "iaml.wires:ParameterWire".equals(xsiType)) {
+			return "parameterEdges";
 		}
 		
 		// <children xsi:type="iaml.visual:Page"> or <sessions>
@@ -153,6 +209,52 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 		// --> <scope xsi:type="iaml.scopes:Session">
 		if (old.getNodeName().equals("sessions")) {
 			element.setAttribute("xsi:type", "iaml.scopes:Session");
+		}
+		
+		// any inEdges or outEdges to an old ParameterWire?
+		if (!old.getAttribute("inEdges").isEmpty()) {
+			splitReferences(old, "inEdges", parameterWires, "inParameterEdges");
+		}
+
+		if (!old.getAttribute("outEdges").isEmpty()) {
+			splitReferences(old, "outEdges", parameterWires, "outParameterEdges");
+		}
+
+	}
+
+	/**
+	 * Split all references in e[@oldAttribute] that are in
+	 * refs into the new attribute e[@newAttribute].
+	 * 
+	 */
+	private void splitReferences(Element e, String oldAttribute,
+			List<String> refs, String newAttribute) {
+		
+		List<String> newRefs = new ArrayList<String>();
+		List<String> oldRefs = new ArrayList<String>();
+		String[] allRefs = e.getAttribute(oldAttribute).split(" ");
+		for (String s : allRefs) {
+			if (refs.contains(s)) {
+				newRefs.add(s);
+			} else {
+				oldRefs.add(s);
+			}
+		}
+		
+		// join it back together
+		if (!newRefs.isEmpty()) {
+			StringBuffer newRef = new StringBuffer();
+			for (String s : newRefs) {
+				newRef.append(s).append(' ');
+			}
+			e.setAttribute(newAttribute, newRef.toString().trim());
+		}
+			{
+			StringBuffer oldRef = new StringBuffer();
+			for (String s : oldRefs) {
+				oldRef.append(s).append(' ');
+			}
+			e.setAttribute(oldAttribute, oldRef.toString().trim());
 		}
 		
 	}

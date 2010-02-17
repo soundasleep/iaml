@@ -7,6 +7,8 @@
 package org.openiaml.model.model;
 
 import org.eclipse.emf.common.util.EList;
+import org.openiaml.model.model.wires.ParameterEdgeDestination;
+import org.openiaml.model.model.wires.ParameterEdgesSource;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,7 +32,7 @@ import org.eclipse.emf.common.util.EList;
  * @model annotation="http://openiaml.org/comment added='0.2'"
  * @generated
  */
-public interface DomainObjectInstance extends ApplicationElement, ContainsWires {
+public interface DomainObjectInstance extends ApplicationElement, ContainsWires, ParameterEdgesSource, ParameterEdgeDestination {
 	/**
 	 * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
 	 * The list contents are of type {@link org.openiaml.model.model.DomainAttributeInstance}.

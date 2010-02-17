@@ -76,6 +76,9 @@ public abstract class DomBasedMigrator implements IamlModelMigrator {
 		// reset deleted list
 		deletedIds = new ArrayList<String>();
 		
+		// do any preparation
+		prepareDocument( input.getDocumentElement(), errors );
+		
 		// recurse over the document, adding elements and translating
 		// where necessary
 		recurseOverDocument( input.getDocumentElement(), output, output, errors );
@@ -95,6 +98,21 @@ public abstract class DomBasedMigrator implements IamlModelMigrator {
 		}
 	}
 	
+	/**
+	 * Do any preparation of the document, before we
+	 * {@link #recurseOverDocument(Element, Node, Document, List) recurse over it}.
+	 * 
+	 * <p>By default, does nothing.
+	 * 
+	 * @param documentElement the root of the document
+	 * @param errors the list of errors found
+	 */
+	public void prepareDocument(Element documentElement,
+			List<ExpectedMigrationException> errors) {
+
+		// by default, does nothing
+	}
+
 	public Map<String, String> getNewNamespaces() {
 		return new HashMap<String,String>();
 	}

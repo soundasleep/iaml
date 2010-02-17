@@ -23,7 +23,7 @@ import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.ParameterWire;
+import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.tests.inference.ValidInferenceTestCase;
 
@@ -147,10 +147,10 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 		RunInstanceWire run = assertHasRunInstanceWire(login, button, doLogin, "onClick");
 		
 		// assert parameter wires
-		ParameterWire pe = assertHasParameterEdge(root, femail, run);
+		ParameterEdge pe = assertHasParameterEdge(root, femail, run);
 		assertGenerated(pe);
 		assertEquals("email", pe.getName());
-		ParameterWire pp = assertHasParameterEdge(root, fpassword, run);
+		ParameterEdge pp = assertHasParameterEdge(root, fpassword, run);
 		assertGenerated(pp);
 		assertEquals("password", pp.getName());
 				

@@ -21,7 +21,7 @@ import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.ParameterWire;
+import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SyncWire;
 
@@ -105,17 +105,17 @@ public class SyncWiresProperties extends InferenceTestCase {
 
 		// these field values should be parameters to run instance wires
 		{
-			ParameterWire pw1 = (ParameterWire) getWireFrom(root, value1);
+			ParameterEdge pw1 = value1.getOutParameterEdges().get(0);
 			assertTrue(pw1.toString(), pw1.getTo() instanceof RunInstanceWire);
-			ParameterWire pw2 = (ParameterWire) getWireFrom(root, value2);
+			ParameterEdge pw2 = value2.getOutParameterEdges().get(0);
 			assertTrue(pw2.toString(), pw2.getTo() instanceof RunInstanceWire);
-			ParameterWire pw3 = (ParameterWire) getWireFrom(root, value3);
+			ParameterEdge pw3 = value3.getOutParameterEdges().get(0);
 			assertTrue(pw3.toString(), pw3.getTo() instanceof RunInstanceWire);
-			ParameterWire pwa1 = (ParameterWire) getWireFrom(root, valuea1);
+			ParameterEdge pwa1 = valuea1.getOutParameterEdges().get(0);
 			assertTrue(pwa1.toString(), pwa1.getTo() instanceof RunInstanceWire);
-			ParameterWire pwa2 = (ParameterWire) getWireFrom(root, valuea2);
+			ParameterEdge pwa2 = valuea2.getOutParameterEdges().get(0);
 			assertTrue(pwa2.toString(), pwa2.getTo() instanceof RunInstanceWire);
-			ParameterWire pwa3 = (ParameterWire) getWireFrom(root, valuea3);
+			ParameterEdge pwa3 = valuea3.getOutParameterEdges().get(0);
 			assertTrue(pwa3.toString(), pwa3.getTo() instanceof RunInstanceWire);
 		}
 
@@ -133,9 +133,9 @@ public class SyncWiresProperties extends InferenceTestCase {
 			RunInstanceWire rw2 = (RunInstanceWire) getWireFromTo(root, access2, op2);
 			RunInstanceWire rw3 = (RunInstanceWire) getWireFromTo(root, access3, op3);
 
-			ParameterWire pw1 = (ParameterWire) getWireFromTo(root, valuea1, rw1);
-			ParameterWire pw2 = (ParameterWire) getWireFromTo(root, valuea2, rw2);
-			ParameterWire pw3 = (ParameterWire) getWireFromTo(root, valuea3, rw3);
+			ParameterEdge pw1 = getParameterEdgeFromTo(root, valuea1, rw1);
+			ParameterEdge pw2 = getParameterEdgeFromTo(root, valuea2, rw2);
+			ParameterEdge pw3 = getParameterEdgeFromTo(root, valuea3, rw3);
 
 			assertNotNull(pw1);
 			assertNotNull(pw2);

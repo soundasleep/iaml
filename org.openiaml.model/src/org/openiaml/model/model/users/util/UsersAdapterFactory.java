@@ -30,6 +30,8 @@ import org.openiaml.model.model.users.Role;
 import org.openiaml.model.model.users.UserInstance;
 import org.openiaml.model.model.users.UserStore;
 import org.openiaml.model.model.users.UsersPackage;
+import org.openiaml.model.model.wires.ParameterEdgeDestination;
+import org.openiaml.model.model.wires.ParameterEdgesSource;
 
 /**
  * <!-- begin-user-doc -->
@@ -156,8 +158,16 @@ public class UsersAdapterFactory extends AdapterFactoryImpl {
 				return createApplicationElementAdapter();
 			}
 			@Override
+			public Adapter caseParameterEdgesSource(ParameterEdgesSource object) {
+				return createParameterEdgesSourceAdapter();
+			}
+			@Override
 			public Adapter caseDomainObject(DomainObject object) {
 				return createDomainObjectAdapter();
+			}
+			@Override
+			public Adapter caseParameterEdgeDestination(ParameterEdgeDestination object) {
+				return createParameterEdgeDestinationAdapter();
 			}
 			@Override
 			public Adapter caseDomainObjectInstance(DomainObjectInstance object) {
@@ -422,6 +432,20 @@ public class UsersAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.ParameterEdgesSource <em>Parameter Edges Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.wires.ParameterEdgesSource
+	 * @generated
+	 */
+	public Adapter createParameterEdgesSourceAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.DomainObject <em>Domain Object</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -432,6 +456,20 @@ public class UsersAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDomainObjectAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.ParameterEdgeDestination <em>Parameter Edge Destination</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.wires.ParameterEdgeDestination
+	 * @generated
+	 */
+	public Adapter createParameterEdgeDestinationAdapter() {
 		return null;
 	}
 

@@ -396,6 +396,15 @@ public interface UsersPackage extends EPackage {
 	int ROLE__VALUES = ModelPackage.DOMAIN_OBJECT__VALUES;
 
 	/**
+	 * The feature id for the '<em><b>Out Parameter Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROLE__OUT_PARAMETER_EDGES = ModelPackage.DOMAIN_OBJECT__OUT_PARAMETER_EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -505,13 +514,22 @@ public interface UsersPackage extends EPackage {
 	int PERMISSION__IN_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Out Parameter Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERMISSION__OUT_PARAMETER_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Permission</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERMISSION_FEATURE_COUNT = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int PERMISSION_FEATURE_COUNT = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.users.impl.UserInstanceImpl <em>User Instance</em>}' class.
@@ -666,6 +684,24 @@ public interface UsersPackage extends EPackage {
 	 * @ordered
 	 */
 	int USER_INSTANCE__VALUES = ModelPackage.DOMAIN_OBJECT_INSTANCE__VALUES;
+
+	/**
+	 * The feature id for the '<em><b>Out Parameter Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_INSTANCE__OUT_PARAMETER_EDGES = ModelPackage.DOMAIN_OBJECT_INSTANCE__OUT_PARAMETER_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>In Parameter Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_INSTANCE__IN_PARAMETER_EDGES = ModelPackage.DOMAIN_OBJECT_INSTANCE__IN_PARAMETER_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.

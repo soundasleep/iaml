@@ -14,7 +14,7 @@ import org.openiaml.model.model.users.UserInstance;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.ParameterWire;
+import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.tests.inference.ValidInferenceTestCase;
 
@@ -130,20 +130,20 @@ public class UserRolesLoginHandler extends ValidInferenceTestCase {
 			}, select.getQuery());
 		
 		// there should only be two incoming parameter wires
-		List<ParameterWire> params = select.getInParameterEdges();
+		List<ParameterEdge> params = select.getInParameterEdges();
 		assertEquals(params.toString(), 2, params.size());
 		
 		// one from password
 		ApplicationElementProperty password = assertHasApplicationElementProperty(session, "current password");
 		assertGenerated(password);
-		ParameterWire pw = (ParameterWire) assertHasWireFromTo(session, password, select, ParameterWire.class);
+		ParameterEdge pw = getParameterEdgeFromTo(session, password, select);
 		assertGenerated(pw);
 		assertEquals("password", pw.getName());
 
 		// one from email
 		ApplicationElementProperty email = assertHasApplicationElementProperty(session, "current email");
 		assertGenerated(email);
-		ParameterWire pw2 = (ParameterWire) assertHasWireFromTo(session, email, select, ParameterWire.class);
+		ParameterEdge pw2 = getParameterEdgeFromTo(session, email, select);
 		assertGenerated(pw2);
 		assertEquals("email", pw2.getName());
 

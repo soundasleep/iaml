@@ -1698,8 +1698,10 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		eventTriggerEClass.getESuperTypes().add(this.getWireEdgesSource());
 		domainObjectEClass.getESuperTypes().add(this.getApplicationElement());
 		domainObjectEClass.getESuperTypes().add(this.getContainsWires());
+		domainObjectEClass.getESuperTypes().add(theWiresPackage.getParameterEdgesSource());
 		domainAttributeEClass.getESuperTypes().add(this.getApplicationElement());
 		domainAttributeEClass.getESuperTypes().add(this.getContainsWires());
+		domainAttributeEClass.getESuperTypes().add(theWiresPackage.getParameterEdgesSource());
 		activityNodeEClass.getESuperTypes().add(this.getGeneratedElement());
 		operationEClass.getESuperTypes().add(this.getWireEdgeDestination());
 		operationEClass.getESuperTypes().add(this.getNamedElement());
@@ -1773,6 +1775,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		shouldntContainWiresEClass.getESuperTypes().add(this.getContainsWires());
 		domainObjectInstanceEClass.getESuperTypes().add(this.getApplicationElement());
 		domainObjectInstanceEClass.getESuperTypes().add(this.getContainsWires());
+		domainObjectInstanceEClass.getESuperTypes().add(theWiresPackage.getParameterEdgesSource());
+		domainObjectInstanceEClass.getESuperTypes().add(theWiresPackage.getParameterEdgeDestination());
 		scopeEClass.getESuperTypes().add(this.getGeneratesElements());
 		scopeEClass.getESuperTypes().add(this.getContainsWires());
 		scopeEClass.getESuperTypes().add(this.getContainsScopes());

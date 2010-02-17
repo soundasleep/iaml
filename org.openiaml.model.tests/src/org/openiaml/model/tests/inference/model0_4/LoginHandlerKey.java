@@ -20,7 +20,6 @@ import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.NavigateWire;
-import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.tests.inference.ValidInferenceTestCase;

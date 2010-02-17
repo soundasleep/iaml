@@ -30,6 +30,8 @@ import org.openiaml.model.model.users.Role;
 import org.openiaml.model.model.users.UserInstance;
 import org.openiaml.model.model.users.UserStore;
 import org.openiaml.model.model.users.UsersPackage;
+import org.openiaml.model.model.wires.ParameterEdgeDestination;
+import org.openiaml.model.model.wires.ParameterEdgesSource;
 
 /**
  * <!-- begin-user-doc -->
@@ -124,6 +126,7 @@ public class UsersSwitch<T> {
 				T result = caseRole(role);
 				if (result == null) result = caseDomainObject(role);
 				if (result == null) result = caseApplicationElement(role);
+				if (result == null) result = caseParameterEdgesSource(role);
 				if (result == null) result = caseCanBeSynced(role);
 				if (result == null) result = caseContainsOperations(role);
 				if (result == null) result = caseNamedElement(role);
@@ -144,6 +147,7 @@ public class UsersSwitch<T> {
 				if (result == null) result = caseNamedElement(permission);
 				if (result == null) result = caseWireEdgesSource(permission);
 				if (result == null) result = caseWireEdgeDestination(permission);
+				if (result == null) result = caseParameterEdgesSource(permission);
 				if (result == null) result = caseGeneratedElement(permission);
 				if (result == null) result = caseShouldntContainWires(permission);
 				if (result == null) result = caseContainsWires(permission);
@@ -155,6 +159,8 @@ public class UsersSwitch<T> {
 				T result = caseUserInstance(userInstance);
 				if (result == null) result = caseDomainObjectInstance(userInstance);
 				if (result == null) result = caseApplicationElement(userInstance);
+				if (result == null) result = caseParameterEdgesSource(userInstance);
+				if (result == null) result = caseParameterEdgeDestination(userInstance);
 				if (result == null) result = caseCanBeSynced(userInstance);
 				if (result == null) result = caseContainsOperations(userInstance);
 				if (result == null) result = caseNamedElement(userInstance);
@@ -429,6 +435,21 @@ public class UsersSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Parameter Edges Source</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Parameter Edges Source</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseParameterEdgesSource(ParameterEdgesSource object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Domain Object</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -440,6 +461,21 @@ public class UsersSwitch<T> {
 	 * @generated
 	 */
 	public T caseDomainObject(DomainObject object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Parameter Edge Destination</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Parameter Edge Destination</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseParameterEdgeDestination(ParameterEdgeDestination object) {
 		return null;
 	}
 

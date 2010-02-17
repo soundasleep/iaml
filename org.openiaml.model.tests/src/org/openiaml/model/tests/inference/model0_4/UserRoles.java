@@ -24,7 +24,7 @@ import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ExtendsWire;
 import org.openiaml.model.model.wires.NavigateWire;
-import org.openiaml.model.model.wires.ParameterWire;
+import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.RequiresWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SelectWire;
@@ -170,7 +170,7 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(user);
 		
 		// a Parameter wire: [guest] --> [handler]
-		ParameterWire param = assertHasParameterEdge(session, user, handler);
+		ParameterEdge param = assertHasParameterEdge(session, user, handler);
 		assertGenerated(param);
 		
 	}
@@ -345,7 +345,7 @@ public class UserRoles extends InferenceTestCase {
 		AccessControlHandler ach = assertHasAccessControlHandler(session, "role-based access");
 		UserInstance instance = assertHasUserInstance(session, "current instance");
 		
-		ParameterWire param = assertHasParameterEdge(session, instance, ach);
+		ParameterEdge param = assertHasParameterEdge(session, instance, ach);
 		assertGenerated(param);
 		
 	}
@@ -536,9 +536,9 @@ public class UserRoles extends InferenceTestCase {
 		}, selectWire.getQuery());
 		
 		// parameters
-		ParameterWire p1 = assertHasParameterEdge(root, email, selectWire);
+		ParameterEdge p1 = assertHasParameterEdge(root, email, selectWire);
 		assertGenerated(p1);
-		ParameterWire p2 = assertHasParameterEdge(root, password, selectWire);
+		ParameterEdge p2 = assertHasParameterEdge(root, password, selectWire);
 		assertGenerated(p2);
 		
 	}

@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.wires.ExtendsEdge;
@@ -35,6 +36,8 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.wires.impl.ExtendsEdgeImpl#isIsGenerated <em>Is Generated</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.ExtendsEdgeImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.ExtendsEdgeImpl#getGeneratedRule <em>Generated Rule</em>}</li>
+ *   <li>{@link org.openiaml.model.model.wires.impl.ExtendsEdgeImpl#getGeneratedElements <em>Generated Elements</em>}</li>
+ *   <li>{@link org.openiaml.model.model.wires.impl.ExtendsEdgeImpl#isOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.ExtendsEdgeImpl#getFrom <em>From</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.ExtendsEdgeImpl#getTo <em>To</em>}</li>
  * </ul>
@@ -112,6 +115,36 @@ public class ExtendsEdgeImpl extends EObjectImpl implements ExtendsEdge {
 	 * @ordered
 	 */
 	protected String generatedRule = GENERATED_RULE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getGeneratedElements() <em>Generated Elements</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getGeneratedElements()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<GeneratedElement> generatedElements;
+
+	/**
+	 * The default value of the '{@link #isOverridden() <em>Overridden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isOverridden()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean OVERRIDDEN_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isOverridden() <em>Overridden</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isOverridden()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean overridden = OVERRIDDEN_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getFrom() <em>From</em>}' reference.
@@ -225,6 +258,39 @@ public class ExtendsEdgeImpl extends EObjectImpl implements ExtendsEdge {
 		generatedRule = newGeneratedRule;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, WiresPackage.EXTENDS_EDGE__GENERATED_RULE, oldGeneratedRule, generatedRule));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<GeneratedElement> getGeneratedElements() {
+		if (generatedElements == null) {
+			generatedElements = new EObjectWithInverseResolvingEList.ManyInverse<GeneratedElement>(GeneratedElement.class, this, WiresPackage.EXTENDS_EDGE__GENERATED_ELEMENTS, ModelPackage.GENERATED_ELEMENT__GENERATED_BY);
+		}
+		return generatedElements;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isOverridden() {
+		return overridden;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOverridden(boolean newOverridden) {
+		boolean oldOverridden = overridden;
+		overridden = newOverridden;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, WiresPackage.EXTENDS_EDGE__OVERRIDDEN, oldOverridden, overridden));
 	}
 
 	/**
@@ -358,6 +424,8 @@ public class ExtendsEdgeImpl extends EObjectImpl implements ExtendsEdge {
 		switch (featureID) {
 			case WiresPackage.EXTENDS_EDGE__GENERATED_BY:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGeneratedBy()).basicAdd(otherEnd, msgs);
+			case WiresPackage.EXTENDS_EDGE__GENERATED_ELEMENTS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGeneratedElements()).basicAdd(otherEnd, msgs);
 			case WiresPackage.EXTENDS_EDGE__FROM:
 				if (from != null)
 					msgs = ((InternalEObject)from).eInverseRemove(this, WiresPackage.EXTENDS_EDGES_SOURCE__OUT_EXTENDS_EDGES, ExtendsEdgesSource.class, msgs);
@@ -380,6 +448,8 @@ public class ExtendsEdgeImpl extends EObjectImpl implements ExtendsEdge {
 		switch (featureID) {
 			case WiresPackage.EXTENDS_EDGE__GENERATED_BY:
 				return ((InternalEList<?>)getGeneratedBy()).basicRemove(otherEnd, msgs);
+			case WiresPackage.EXTENDS_EDGE__GENERATED_ELEMENTS:
+				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
 			case WiresPackage.EXTENDS_EDGE__FROM:
 				return basicSetFrom(null, msgs);
 			case WiresPackage.EXTENDS_EDGE__TO:
@@ -404,6 +474,10 @@ public class ExtendsEdgeImpl extends EObjectImpl implements ExtendsEdge {
 				return getId();
 			case WiresPackage.EXTENDS_EDGE__GENERATED_RULE:
 				return getGeneratedRule();
+			case WiresPackage.EXTENDS_EDGE__GENERATED_ELEMENTS:
+				return getGeneratedElements();
+			case WiresPackage.EXTENDS_EDGE__OVERRIDDEN:
+				return isOverridden();
 			case WiresPackage.EXTENDS_EDGE__FROM:
 				if (resolve) return getFrom();
 				return basicGetFrom();
@@ -436,6 +510,13 @@ public class ExtendsEdgeImpl extends EObjectImpl implements ExtendsEdge {
 			case WiresPackage.EXTENDS_EDGE__GENERATED_RULE:
 				setGeneratedRule((String)newValue);
 				return;
+			case WiresPackage.EXTENDS_EDGE__GENERATED_ELEMENTS:
+				getGeneratedElements().clear();
+				getGeneratedElements().addAll((Collection<? extends GeneratedElement>)newValue);
+				return;
+			case WiresPackage.EXTENDS_EDGE__OVERRIDDEN:
+				setOverridden((Boolean)newValue);
+				return;
 			case WiresPackage.EXTENDS_EDGE__FROM:
 				setFrom((ExtendsEdgesSource)newValue);
 				return;
@@ -466,6 +547,12 @@ public class ExtendsEdgeImpl extends EObjectImpl implements ExtendsEdge {
 			case WiresPackage.EXTENDS_EDGE__GENERATED_RULE:
 				setGeneratedRule(GENERATED_RULE_EDEFAULT);
 				return;
+			case WiresPackage.EXTENDS_EDGE__GENERATED_ELEMENTS:
+				getGeneratedElements().clear();
+				return;
+			case WiresPackage.EXTENDS_EDGE__OVERRIDDEN:
+				setOverridden(OVERRIDDEN_EDEFAULT);
+				return;
 			case WiresPackage.EXTENDS_EDGE__FROM:
 				setFrom((ExtendsEdgesSource)null);
 				return;
@@ -492,12 +579,50 @@ public class ExtendsEdgeImpl extends EObjectImpl implements ExtendsEdge {
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case WiresPackage.EXTENDS_EDGE__GENERATED_RULE:
 				return GENERATED_RULE_EDEFAULT == null ? generatedRule != null : !GENERATED_RULE_EDEFAULT.equals(generatedRule);
+			case WiresPackage.EXTENDS_EDGE__GENERATED_ELEMENTS:
+				return generatedElements != null && !generatedElements.isEmpty();
+			case WiresPackage.EXTENDS_EDGE__OVERRIDDEN:
+				return overridden != OVERRIDDEN_EDEFAULT;
 			case WiresPackage.EXTENDS_EDGE__FROM:
 				return from != null;
 			case WiresPackage.EXTENDS_EDGE__TO:
 				return to != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == GeneratesElements.class) {
+			switch (derivedFeatureID) {
+				case WiresPackage.EXTENDS_EDGE__GENERATED_ELEMENTS: return ModelPackage.GENERATES_ELEMENTS__GENERATED_ELEMENTS;
+				case WiresPackage.EXTENDS_EDGE__OVERRIDDEN: return ModelPackage.GENERATES_ELEMENTS__OVERRIDDEN;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == GeneratesElements.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.GENERATES_ELEMENTS__GENERATED_ELEMENTS: return WiresPackage.EXTENDS_EDGE__GENERATED_ELEMENTS;
+				case ModelPackage.GENERATES_ELEMENTS__OVERRIDDEN: return WiresPackage.EXTENDS_EDGE__OVERRIDDEN;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**
@@ -516,6 +641,8 @@ public class ExtendsEdgeImpl extends EObjectImpl implements ExtendsEdge {
 		result.append(id);
 		result.append(", generatedRule: ");
 		result.append(generatedRule);
+		result.append(", overridden: ");
+		result.append(overridden);
 		result.append(')');
 		return result.toString();
 	}

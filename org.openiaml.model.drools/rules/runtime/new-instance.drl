@@ -36,7 +36,7 @@ rule "Refresh NewInstanceWire Instance Object mappings"
 		queue.add(attr, drools);
 		
 		# mark it as an extension
-		ExtendsWire w = handler.generatedExtendsWire(wire, instance, attr, attribute);
+		ExtendsEdge w = handler.generatedExtendsEdge(wire, instance, attr, attribute);
 		queue.add(w, drools);
 
 end
@@ -59,7 +59,7 @@ rule "Refresh SelectWire Instance Object mappings"
 		queue.add(attr, drools);
 
 		# mark it as an extension
-		ExtendsWire w = handler.generatedExtendsWire(wire, instance, attr, attribute);
+		ExtendsEdge w = handler.generatedExtendsEdge(wire, instance, attr, attribute);
 		queue.add(w, drools);
 
 end

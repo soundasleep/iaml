@@ -20,7 +20,7 @@ import org.openiaml.model.model.domain.DomainPackage;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.users.Role;
 import org.openiaml.model.model.visual.Frame;
-import org.openiaml.model.model.wires.ExtendsWire;
+import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.SetWire;
 
@@ -139,14 +139,6 @@ public class DroolsHelperFunctions {
 		return !attribute.getName().contains("generated primary key");
 	}
 
-	public boolean hasExtendsWire(java.util.List<?> wires) {
-		for (Object w : wires) {
-			if (w instanceof ExtendsWire)
-				return true;
-		}
-		return false;
-	}
-
 	/**
 	 * What is the last chained operation for the given PrimitiveOperation?
 	 */
@@ -175,7 +167,7 @@ public class DroolsHelperFunctions {
 			if (notPrimaryKey(attribute)) {
 				// ignore attributes which are extensions of other attributes;
 				// these attributes will be selected later
-				if (!hasExtendsWire(attribute.getOutEdges())) {
+				if (attribute.getOutExtendsEdges().isEmpty()) {
 					// add this attribute as a query
 					if (!q.isEmpty()) {
 						q += " and ";
@@ -186,8 +178,8 @@ public class DroolsHelperFunctions {
 		}
 		
 		// get all parents
-		for (WireEdge w : role.getOutEdges()) {
-			if (w instanceof ExtendsWire && w.getTo() instanceof Role) {
+		for (ExtendsEdge w : role.getOutExtendsEdges()) {
+			if (w.getTo() instanceof Role) {
 				String q2 = getUserQueryString((Role) w.getTo());
 				if (!q2.isEmpty()) {
 					if (q.isEmpty()) {
@@ -261,8 +253,8 @@ public class DroolsHelperFunctions {
 		if (attr.isPrimaryKey() && attr.isIsGenerated()) {
 			return false;
 		}
-		for (WireEdge w : attr.getOutEdges()) {
-			if (w instanceof ExtendsWire && w.getTo() instanceof DomainAttribute) {
+		for (ExtendsEdge w : attr.getOutExtendsEdges()) {
+			if (w.getTo() instanceof DomainAttribute) {
 				if (!notExtendingGeneratedPrimaryKey((DomainAttribute) w.getTo())) {
 					// we are extending a generated primary key
 					return false;

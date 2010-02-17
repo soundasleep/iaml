@@ -32,7 +32,7 @@ rule "Create a default primary key for DomainObjects which do not have one"
 
 end 
 
-rule "Domain objects that extend each other will also copy over attributes, connected by ExtendsWires"
+rule "Domain objects that extend each other will also copy over attributes, connected by ExtendsEdges"
 	when
 		sourceObject : DomainObject( )
 		# don't copy primary keys
@@ -40,7 +40,7 @@ rule "Domain objects that extend each other will also copy over attributes, conn
 		
 		targetObject : DomainObject ( this != sourceObject )
 		
-		ext : ExtendsWire ( from == targetObject, to == sourceObject )
+		ext : ExtendsEdge ( from == targetObject, to == sourceObject )
 		
 		not ( DomainAttribute ( eContainer == targetObject, name == sourceAttribute.name )) 
 	
@@ -51,7 +51,7 @@ rule "Domain objects that extend each other will also copy over attributes, conn
 		queue.add(copy, drools);
 		
 		// extends wire to maintain relationship
-		ExtendsWire ext2 = handler.generatedExtendsWire(ext, sourceAttribute, copy, sourceAttribute);
+		ExtendsEdge ext2 = handler.generatedExtendsEdge(ext, sourceAttribute, copy, sourceAttribute);
 		queue.add(ext2, drools);
 
 end
@@ -62,14 +62,14 @@ rule "Domain objects that extend each other should include an indexable referenc
 		
 		targetObject : DomainObject ( this != sourceObject )
 		
-		ext : ExtendsWire ( from == targetObject, to == sourceObject )
+		ext : ExtendsEdge ( from == targetObject, to == sourceObject )
 		
 		sourceId : DomainAttribute ( eContainer == sourceObject, primaryKey == true )
 		
 		not ( 
 		da : DomainAttribute ( eContainer == targetObject, primaryKey == false )
 		and 
-		ExtendsWire ( from == da, to == sourceId ) ) 
+		ExtendsEdge ( from == da, to == sourceId ) ) 
 
 	then
 		# create the target ID attribute
@@ -78,7 +78,7 @@ rule "Domain objects that extend each other should include an indexable referenc
 		queue.add(id_ref, drools);
 		
 		# and set it as extends to signify relationship
-		ExtendsWire ext2 = handler.generatedExtendsWire(ext, sourceId, id_ref, sourceId);
+		ExtendsEdge ext2 = handler.generatedExtendsEdge(ext, sourceId, id_ref, sourceId);
 		queue.add(ext2, drools);		
 
 end		

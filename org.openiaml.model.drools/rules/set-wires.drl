@@ -306,7 +306,7 @@ rule "Refresh New Instance Object mappings (except for generated primary keys) w
 		
 		originalAttribute : DomainAttribute ( primaryKey == false || isGenerated == false )
 		attribute : DomainAttributeInstance( eContainer == instance )
-		ExtendsWire ( from == attribute, to == originalAttribute )
+		ExtendsEdge ( from == attribute, to == originalAttribute )
 		
 		not ( tf : InputTextField( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
 		
@@ -357,7 +357,7 @@ rule "Refresh New Instance Object mappings (except for generated primary keys) w
 		
 		originalAttribute : DomainAttribute ( primaryKey == false || isGenerated == false )
 		attribute : DomainAttributeInstance( eContainer == instance )
-		ExtendsWire ( from == attribute, to == originalAttribute )
+		ExtendsEdge ( from == attribute, to == originalAttribute )
 		
 		not ( tf : Label( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
 		

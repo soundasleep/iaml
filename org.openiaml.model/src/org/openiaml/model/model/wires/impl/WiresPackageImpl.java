@@ -758,6 +758,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		conditionWireEClass.getESuperTypes().add(this.getParameterEdgeDestination());
 		newInstanceWireEClass.getESuperTypes().add(this.getCompositeWire());
 		extendsEdgeEClass.getESuperTypes().add(theModelPackage.getGeneratedElement());
+		extendsEdgeEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
 		requiresWireEClass.getESuperTypes().add(this.getSingleWire());
 		requiresWireEClass.getESuperTypes().add(theModelPackage.getWireEdgesSource());
 		requiresWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());

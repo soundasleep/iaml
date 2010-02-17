@@ -246,6 +246,7 @@ public class WiresSwitch<T> {
 				ExtendsEdge extendsEdge = (ExtendsEdge)theEObject;
 				T result = caseExtendsEdge(extendsEdge);
 				if (result == null) result = caseGeneratedElement(extendsEdge);
+				if (result == null) result = caseGeneratesElements(extendsEdge);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

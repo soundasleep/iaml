@@ -129,6 +129,7 @@ public class ComponentsSwitch<T> {
 				AccessControlHandler accessControlHandler = (AccessControlHandler)theEObject;
 				T result = caseAccessControlHandler(accessControlHandler);
 				if (result == null) result = caseApplicationElementContainer(accessControlHandler);
+				if (result == null) result = caseParameterEdgeDestination(accessControlHandler);
 				if (result == null) result = caseApplicationElement(accessControlHandler);
 				if (result == null) result = caseCanBeSynced(accessControlHandler);
 				if (result == null) result = caseContainsOperations(accessControlHandler);

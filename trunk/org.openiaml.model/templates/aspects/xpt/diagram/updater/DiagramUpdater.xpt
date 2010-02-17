@@ -90,6 +90,16 @@
 				elements.addAll(getAllShortcutsFromDataFlowEdges(doneAlready, edges, view, e,
 						((org.openiaml.model.model.DataFlowEdgeDestination) e).getInFlows()));
 			}
+			if (e instanceof org.openiaml.model.model.wires.ParameterEdgesSource) {
+				// get all incoming edges
+				elements.addAll(getAllShortcutsFromParameterEdges(doneAlready, edges, view, e,
+						((org.openiaml.model.model.wires.ParameterEdgesSource) e).getOutParameterEdges()));
+			}
+			if (e instanceof org.openiaml.model.model.wires.ParameterEdgeDestination) {
+				// get all incoming edges
+				elements.addAll(getAllShortcutsFromParameterEdges(doneAlready, edges, view, e,
+						((org.openiaml.model.model.wires.ParameterEdgeDestination) e).getInParameterEdges()));
+			}
 		}
 	}
 
@@ -115,21 +125,38 @@
 			}
 			
 			// additional special logic: if we have a WireEdgeDestination, get all of the incoming edges
-			// that are ParameterWires, and render these as shortcut elements too (i.e. parameters)
-			// (this covers RunInstanceWires, SelectWires, etc...: see Issue 69)
+			// that are RunInstanceWires, and render these as shortcut elements too (i.e. parameters)
+			// (this covers SelectWires, etc...: see Issue 69)
 			if (wire instanceof org.openiaml.model.model.WireEdgeDestination) {
 				org.openiaml.model.model.WireEdgeDestination run = (org.openiaml.model.model.WireEdgeDestination) wire;
 				java.util.List<org.openiaml.model.model.WireEdge> params = new java.util.ArrayList();
 				for (org.openiaml.model.model.WireEdge e : run.getInEdges()) {
-					if (e instanceof org.openiaml.model.model.wires.ParameterWire ||
-							e instanceof org.openiaml.model.model.wires.ConditionWire ||
+					if (e instanceof org.openiaml.model.model.wires.ConditionWire ||
 							e instanceof org.openiaml.model.model.wires.ConstraintWire) {
 						params.add(e);
 					}
 				}
 				result.addAll(getAllShortcutsFromWireEdges(doneAlready, edges, view, wire, params));
 			} 
+			
+			// ParameterEdges are now done in #getAllShortcutsFromParameterEdges()
 		}
+
+		return result;
+	}
+	
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] For a list of edges, what elements are they all connected to?\n\nNOTE: return type is model-specific")»
+	private static java.util.List<org.openiaml.model.model.wires.ParameterEdge> getAllShortcutsFromParameterEdges(
+			java.util.List<org.eclipse.emf.ecore.EObject> doneAlready, 
+			java.util.List<org.eclipse.emf.ecore.EObject> edges, 
+			org.eclipse.gmf.runtime.notation.View view, 
+			org.eclipse.emf.ecore.EObject source,
+			java.util.List<org.openiaml.model.model.wires.ParameterEdge> outParameterEdges) {
+		java.util.List result = new java.util.LinkedList();
+		
+		edges.addAll(outParameterEdges);
+
+		// ParameterEdges are not the destination of other edges?
 
 		return result;
 	}

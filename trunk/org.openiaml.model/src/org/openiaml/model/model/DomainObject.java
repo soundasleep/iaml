@@ -7,6 +7,7 @@
 package org.openiaml.model.model;
 
 import org.eclipse.emf.common.util.EList;
+import org.openiaml.model.model.wires.ParameterEdgesSource;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,7 +29,7 @@ import org.eclipse.emf.common.util.EList;
  * @model annotation="http://openiaml.org/comment changed='0.2 to extend the abstract counterpart\r\n0.3 to remove the abstract extension, and added \"type\" attribute'"
  * @generated
  */
-public interface DomainObject extends ApplicationElement, ContainsWires {
+public interface DomainObject extends ApplicationElement, ContainsWires, ParameterEdgesSource {
 
 	/**
 	 * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.

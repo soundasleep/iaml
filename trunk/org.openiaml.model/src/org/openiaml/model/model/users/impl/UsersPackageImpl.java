@@ -258,6 +258,7 @@ public class UsersPackageImpl extends EPackageImpl implements UsersPackage {
 
 		// Obtain other dependent packages
 		ModelPackage theModelPackage = (ModelPackage)EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI);
+		WiresPackage theWiresPackage = (WiresPackage)EPackage.Registry.INSTANCE.getEPackage(WiresPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -269,6 +270,7 @@ public class UsersPackageImpl extends EPackageImpl implements UsersPackage {
 		permissionEClass.getESuperTypes().add(theModelPackage.getNamedElement());
 		permissionEClass.getESuperTypes().add(theModelPackage.getWireEdgesSource());
 		permissionEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
+		permissionEClass.getESuperTypes().add(theWiresPackage.getParameterEdgesSource());
 		userInstanceEClass.getESuperTypes().add(theModelPackage.getDomainObjectInstance());
 
 		// Initialize classes and features; add operations and parameters

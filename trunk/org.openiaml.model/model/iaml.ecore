@@ -45,7 +45,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="eventTriggers" upperBound="-1"
         eType="#//EventTrigger" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DomainObject" eSuperTypes="#//ApplicationElement #//ContainsWires">
+  <eClassifiers xsi:type="ecore:EClass" name="DomainObject" eSuperTypes="#//ApplicationElement #//ContainsWires #//wires/ParameterEdgesSource">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="changed" value="0.2 to extend the abstract counterpart&#xD;&#xA;0.3 to remove the abstract extension, and added &quot;type&quot; attribute"/>
     </eAnnotations>
@@ -55,7 +55,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
         eType="#//DomainAttribute" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DomainAttribute" eSuperTypes="#//ApplicationElement #//ContainsWires">
+  <eClassifiers xsi:type="ecore:EClass" name="DomainAttribute" eSuperTypes="#//ApplicationElement #//ContainsWires #//wires/ParameterEdgesSource">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="changed" value="0.2 to extend the abstract counterpart&#xD;&#xA;0.3 to remove the abstract extension, and added &quot;type&quot; attribute"/>
     </eAnnotations>
@@ -320,7 +320,7 @@
         eType="#//GeneratedElement" eOpposite="#//GeneratedElement/generatedBy"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="overridden" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DomainObjectInstance" eSuperTypes="#//ApplicationElement #//ContainsWires">
+  <eClassifiers xsi:type="ecore:EClass" name="DomainObjectInstance" eSuperTypes="#//ApplicationElement #//ContainsWires #//wires/ParameterEdgesSource #//wires/ParameterEdgeDestination">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="added" value="0.2"/>
     </eAnnotations>
@@ -763,7 +763,7 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1"
           eType="#//components/LoginHandlerTypes"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="AccessControlHandler" eSuperTypes="#//ApplicationElementContainer #//GeneratesElements">
+    <eClassifiers xsi:type="ecore:EClass" name="AccessControlHandler" eSuperTypes="#//ApplicationElementContainer #//GeneratesElements #//wires/ParameterEdgeDestination">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.4"/>
       </eAnnotations>
@@ -830,7 +830,7 @@
         <details key="documentation" value="A particular Role that a user may have; may be {@link ExtendsWire inherited} from other Roles."/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Permission" eSuperTypes="#//NamedElement #//WireEdgesSource #//WireEdgeDestination">
+    <eClassifiers xsi:type="ecore:EClass" name="Permission" eSuperTypes="#//NamedElement #//WireEdgesSource #//WireEdgeDestination #//wires/ParameterEdgesSource">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A single Permission that a user may have; may also be {@link ProvidesWire provided} by a {@link Role}."/>
       </eAnnotations>

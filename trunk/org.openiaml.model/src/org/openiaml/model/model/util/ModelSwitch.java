@@ -54,6 +54,7 @@ import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.wires.ParameterEdgeDestination;
 import org.openiaml.model.model.wires.ParameterEdgesSource;
 
 /**
@@ -179,6 +180,7 @@ public class ModelSwitch<T> {
 				DomainObject domainObject = (DomainObject)theEObject;
 				T result = caseDomainObject(domainObject);
 				if (result == null) result = caseApplicationElement(domainObject);
+				if (result == null) result = caseParameterEdgesSource(domainObject);
 				if (result == null) result = caseCanBeSynced(domainObject);
 				if (result == null) result = caseContainsOperations(domainObject);
 				if (result == null) result = caseNamedElement(domainObject);
@@ -197,6 +199,7 @@ public class ModelSwitch<T> {
 				DomainAttribute domainAttribute = (DomainAttribute)theEObject;
 				T result = caseDomainAttribute(domainAttribute);
 				if (result == null) result = caseApplicationElement(domainAttribute);
+				if (result == null) result = caseParameterEdgesSource(domainAttribute);
 				if (result == null) result = caseCanBeSynced(domainAttribute);
 				if (result == null) result = caseContainsOperations(domainAttribute);
 				if (result == null) result = caseNamedElement(domainAttribute);
@@ -497,6 +500,8 @@ public class ModelSwitch<T> {
 				DomainObjectInstance domainObjectInstance = (DomainObjectInstance)theEObject;
 				T result = caseDomainObjectInstance(domainObjectInstance);
 				if (result == null) result = caseApplicationElement(domainObjectInstance);
+				if (result == null) result = caseParameterEdgesSource(domainObjectInstance);
+				if (result == null) result = caseParameterEdgeDestination(domainObjectInstance);
 				if (result == null) result = caseCanBeSynced(domainObjectInstance);
 				if (result == null) result = caseContainsOperations(domainObjectInstance);
 				if (result == null) result = caseNamedElement(domainObjectInstance);
@@ -1278,6 +1283,21 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseParameterEdgesSource(ParameterEdgesSource object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Parameter Edge Destination</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Parameter Edge Destination</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseParameterEdgeDestination(ParameterEdgeDestination object) {
 		return null;
 	}
 

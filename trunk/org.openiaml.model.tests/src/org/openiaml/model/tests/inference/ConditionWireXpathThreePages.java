@@ -11,7 +11,6 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ConditionWire;
-import org.openiaml.model.model.wires.ParameterWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SyncWire;
 
@@ -64,9 +63,9 @@ public class ConditionWireXpathThreePages extends InferenceTestCaseWithCondition
 
     // there should only be two parameters into each condition wire
     ConditionWire cw_sw1 = (ConditionWire) getWireFromTo(root, cond, sw1);
-    assertHasParameterWireCount(2, cw_sw1);
+    assertEquals(cw_sw1.toString(), 2, cw_sw1.getInParameterEdges().size());
     ConditionWire cw_sw2 = (ConditionWire) getWireFromTo(root, cond, sw2);
-    assertHasParameterWireCount(2, cw_sw2);
+    assertEquals(cw_sw2.toString(), 2, cw_sw2.getInParameterEdges().size());
 
     // we can now investigate the SyncWires themselves, and make sure
     // they have the conditions attached too
@@ -126,10 +125,10 @@ public class ConditionWireXpathThreePages extends InferenceTestCaseWithCondition
     */
 
     // there should only be two parameters in these condition wires
-    assertHasParameterWireCount(2, cw1_2);
-    assertHasParameterWireCount(2, cw2_1);
-    assertHasParameterWireCount(2, cw1_3);
-    assertHasParameterWireCount(2, cw3_1);
+    assertEquals(cw1_2.toString(), 2, cw1_2.getInParameterEdges().size());
+    assertEquals(cw2_1.toString(), 2, cw2_1.getInParameterEdges().size());
+    assertEquals(cw1_3.toString(), 2, cw1_3.getInParameterEdges().size());
+    assertEquals(cw3_1.toString(), 2, cw3_1.getInParameterEdges().size());
 
   }
 

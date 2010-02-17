@@ -137,6 +137,22 @@
 					}
 				}
 				result.addAll(getAllShortcutsFromWireEdges(doneAlready, edges, view, wire, params));
+				
+				if (run instanceof org.openiaml.model.model.wires.ParameterEdgesSource) {
+					// specifically, if this wire is also a destination of parameters, follow these up
+					org.openiaml.model.model.wires.ParameterEdgesSource prun =
+						(org.openiaml.model.model.wires.ParameterEdgesSource) run;
+					
+					result.addAll(getAllShortcutsFromParameterEdges(doneAlready, edges, view, wire, prun.getOutParameterEdges())); 
+				}
+
+				if (run instanceof org.openiaml.model.model.wires.ParameterEdgeDestination) {
+					// specifically, if this wire is also a source of parameters, follow these up
+					org.openiaml.model.model.wires.ParameterEdgeDestination prun =
+						(org.openiaml.model.model.wires.ParameterEdgeDestination) run;
+					
+					result.addAll(getAllShortcutsFromParameterEdges(doneAlready, edges, view, wire, prun.getInParameterEdges())); 
+				}
 			} 
 			
 			// ParameterEdges are now done in #getAllShortcutsFromParameterEdges()
@@ -156,7 +172,16 @@
 		
 		edges.addAll(outParameterEdges);
 
-		// ParameterEdges are not the destination of other edges?
+		// get all nodes at the start and end of the edge
+		// that are not the original object source
+		// NOTE: model-specific
+		for (org.openiaml.model.model.wires.ParameterEdge wire : outParameterEdges) {
+			// only look into these edges if we can actually render them...
+			if («EXPAND xpt::editor::VisualIDRegistry::getLinkWithClassVisualIDMethodCall FOR editorGen.diagram»(wire) != -1) {
+				considerElementForShortcut(wire.getFrom(), wire, view, source, doneAlready, result, edges);
+				considerElementForShortcut(wire.getTo(), wire, view, source, doneAlready, result, edges);
+			}
+		}
 
 		return result;
 	}

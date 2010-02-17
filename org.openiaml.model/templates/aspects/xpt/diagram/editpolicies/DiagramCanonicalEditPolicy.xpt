@@ -45,6 +45,9 @@
 		if (relationship instanceof org.openiaml.model.model.DataFlowEdge) {
 			return ((org.openiaml.model.model.DataFlowEdge) relationship).getFrom();
 		}
+		if (relationship instanceof org.openiaml.model.model.wires.ParameterEdge) {
+			return ((org.openiaml.model.model.wires.ParameterEdge) relationship).getFrom();
+		}
 		
 		// if we get this far, there may be a relationship type that
 		// we're not checking for
@@ -72,6 +75,9 @@
 		}
 		if (relationship instanceof org.openiaml.model.model.DataFlowEdge) {
 			return ((org.openiaml.model.model.DataFlowEdge) relationship).getTo();
+		}
+		if (relationship instanceof org.openiaml.model.model.wires.ParameterEdge) {
+			return ((org.openiaml.model.model.wires.ParameterEdge) relationship).getTo();
 		}
 		
 		// if we get this far, there may be a relationship type that

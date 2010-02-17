@@ -54,6 +54,8 @@ import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.wires.ExtendsEdgeDestination;
+import org.openiaml.model.model.wires.ExtendsEdgesSource;
 import org.openiaml.model.model.wires.ParameterEdgeDestination;
 import org.openiaml.model.model.wires.ParameterEdgesSource;
 
@@ -288,6 +290,14 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseParameterEdgesSource(ParameterEdgesSource object) {
 				return createParameterEdgesSourceAdapter();
+			}
+			@Override
+			public Adapter caseExtendsEdgesSource(ExtendsEdgesSource object) {
+				return createExtendsEdgesSourceAdapter();
+			}
+			@Override
+			public Adapter caseExtendsEdgeDestination(ExtendsEdgeDestination object) {
+				return createExtendsEdgeDestinationAdapter();
 			}
 			@Override
 			public Adapter caseParameterEdgeDestination(ParameterEdgeDestination object) {
@@ -926,6 +936,34 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createParameterEdgesSourceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.ExtendsEdgesSource <em>Extends Edges Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.wires.ExtendsEdgesSource
+	 * @generated
+	 */
+	public Adapter createExtendsEdgesSourceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.ExtendsEdgeDestination <em>Extends Edge Destination</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.wires.ExtendsEdgeDestination
+	 * @generated
+	 */
+	public Adapter createExtendsEdgeDestinationAdapter() {
 		return null;
 	}
 

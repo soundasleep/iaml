@@ -3,18 +3,17 @@
  */
 package org.openiaml.model.tests.inference.model0_4;
 
-import java.util.Set;
+import java.util.List;
 
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
-import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.ExtendsWire;
+import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
 /**
@@ -355,9 +354,9 @@ public class DomainInheritance extends InferenceTestCase {
 	 * @throws Exception
 	 */
 	private void assertExtends(DomainAttributeInstance attr, String name) throws Exception {
-		Set<WireEdge> wires = getWiresFrom(root, attr, ExtendsWire.class);
-		assertEquals(1, wires.size());
-		ExtendsWire ext = (ExtendsWire) wires.iterator().next();
+		List<ExtendsEdge> edges = attr.getOutExtendsEdges();
+		assertEquals(1, edges.size());
+		ExtendsEdge ext = (ExtendsEdge) edges.iterator().next();
 		
 		DomainAttribute targetAttr = (DomainAttribute) ext.getTo();
 		assertNotNull(targetAttr);

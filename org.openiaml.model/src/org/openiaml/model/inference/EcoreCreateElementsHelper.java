@@ -63,7 +63,9 @@ import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Label;
 import org.openiaml.model.model.visual.VisualPackage;
 import org.openiaml.model.model.wires.ConditionWire;
-import org.openiaml.model.model.wires.ExtendsWire;
+import org.openiaml.model.model.wires.ExtendsEdge;
+import org.openiaml.model.model.wires.ExtendsEdgeDestination;
+import org.openiaml.model.model.wires.ExtendsEdgesSource;
 import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.ParameterEdgeDestination;
@@ -331,8 +333,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return wire;
 	}
 
-	public ExtendsWire generatedExtendsWire(GeneratesElements by, ContainsWires container, WireEdgesSource source, WireEdgeDestination target) throws InferenceException {
-		ExtendsWire wire = (ExtendsWire) createRelationship(container, WiresPackage.eINSTANCE.getExtendsWire(), source, target, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
+	public ExtendsEdge generatedExtendsEdge(GeneratesElements by, ContainsWires container, ExtendsEdgesSource source, ExtendsEdgeDestination target) throws InferenceException {
+		ExtendsEdge wire = (ExtendsEdge) createRelationship(container, WiresPackage.eINSTANCE.getExtendsEdge(), source, target, ModelPackage.eINSTANCE.getContainsWires_ExtendsEdges(), WiresPackage.eINSTANCE.getExtendsEdge_From(), WiresPackage.eINSTANCE.getExtendsEdge_To());
 		setGeneratedBy(wire, by);
 		return wire;
 	}

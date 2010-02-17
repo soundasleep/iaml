@@ -54,6 +54,8 @@ import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.wires.ExtendsEdgeDestination;
+import org.openiaml.model.model.wires.ExtendsEdgesSource;
 import org.openiaml.model.model.wires.ParameterEdgeDestination;
 import org.openiaml.model.model.wires.ParameterEdgesSource;
 
@@ -181,6 +183,8 @@ public class ModelSwitch<T> {
 				T result = caseDomainObject(domainObject);
 				if (result == null) result = caseApplicationElement(domainObject);
 				if (result == null) result = caseParameterEdgesSource(domainObject);
+				if (result == null) result = caseExtendsEdgesSource(domainObject);
+				if (result == null) result = caseExtendsEdgeDestination(domainObject);
 				if (result == null) result = caseCanBeSynced(domainObject);
 				if (result == null) result = caseContainsOperations(domainObject);
 				if (result == null) result = caseNamedElement(domainObject);
@@ -200,6 +204,8 @@ public class ModelSwitch<T> {
 				T result = caseDomainAttribute(domainAttribute);
 				if (result == null) result = caseApplicationElement(domainAttribute);
 				if (result == null) result = caseParameterEdgesSource(domainAttribute);
+				if (result == null) result = caseExtendsEdgesSource(domainAttribute);
+				if (result == null) result = caseExtendsEdgeDestination(domainAttribute);
 				if (result == null) result = caseCanBeSynced(domainAttribute);
 				if (result == null) result = caseContainsOperations(domainAttribute);
 				if (result == null) result = caseNamedElement(domainAttribute);
@@ -572,6 +578,8 @@ public class ModelSwitch<T> {
 				DomainAttributeInstance domainAttributeInstance = (DomainAttributeInstance)theEObject;
 				T result = caseDomainAttributeInstance(domainAttributeInstance);
 				if (result == null) result = caseApplicationElement(domainAttributeInstance);
+				if (result == null) result = caseExtendsEdgesSource(domainAttributeInstance);
+				if (result == null) result = caseExtendsEdgeDestination(domainAttributeInstance);
 				if (result == null) result = caseCanBeSynced(domainAttributeInstance);
 				if (result == null) result = caseContainsOperations(domainAttributeInstance);
 				if (result == null) result = caseNamedElement(domainAttributeInstance);
@@ -1283,6 +1291,36 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseParameterEdgesSource(ParameterEdgesSource object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Extends Edges Source</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Extends Edges Source</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExtendsEdgesSource(ExtendsEdgesSource object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Extends Edge Destination</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Extends Edge Destination</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExtendsEdgeDestination(ExtendsEdgeDestination object) {
 		return null;
 	}
 

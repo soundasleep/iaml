@@ -65,7 +65,9 @@ import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Label;
 import org.openiaml.model.model.wires.ConditionWire;
-import org.openiaml.model.model.wires.ExtendsWire;
+import org.openiaml.model.model.wires.ExtendsEdge;
+import org.openiaml.model.model.wires.ExtendsEdgeDestination;
+import org.openiaml.model.model.wires.ExtendsEdgesSource;
 import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.NewInstanceWire;
 import org.openiaml.model.model.wires.ParameterEdge;
@@ -880,7 +882,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public ParameterEdge assertHasParameterEdge(EObject container, ParameterEdgesSource from, ParameterEdgeDestination to) throws JaxenException {
 		Set<ParameterEdge> params = getParameterEdgesFromTo(container, from, to);
-		assertEquals("Should be exactly one parameter wire: " + params, 1, params.size());
+		assertEquals("Should be exactly one parameter edge: " + params, 1, params.size());
 		return params.iterator().next();
 	}
 	
@@ -890,9 +892,10 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public ExtendsWire assertHasExtendsWire(EObject container, WireEdgesSource from, WireEdgeDestination to) throws JaxenException {
-		return (ExtendsWire) assertHasWireFromTo(container, from, to, 
-				ExtendsWire.class);
+	public ExtendsEdge assertHasExtendsEdge(EObject container, ExtendsEdgesSource from, ExtendsEdgeDestination to) throws JaxenException {
+		Set<ExtendsEdge> params = getExtendsEdgesFromTo(container, from, to);
+		assertEquals("Should be exactly one extends edge: " + params, 1, params.size());
+		return params.iterator().next();
 	}
 	
 	/**

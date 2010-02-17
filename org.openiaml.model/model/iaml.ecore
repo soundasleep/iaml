@@ -45,7 +45,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="eventTriggers" upperBound="-1"
         eType="#//EventTrigger" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DomainObject" eSuperTypes="#//ApplicationElement #//ContainsWires #//wires/ParameterEdgesSource">
+  <eClassifiers xsi:type="ecore:EClass" name="DomainObject" eSuperTypes="#//ApplicationElement #//ContainsWires #//wires/ParameterEdgesSource #//wires/ExtendsEdgesSource #//wires/ExtendsEdgeDestination">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="changed" value="0.2 to extend the abstract counterpart&#xD;&#xA;0.3 to remove the abstract extension, and added &quot;type&quot; attribute"/>
     </eAnnotations>
@@ -55,7 +55,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
         eType="#//DomainAttribute" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DomainAttribute" eSuperTypes="#//ApplicationElement #//ContainsWires #//wires/ParameterEdgesSource">
+  <eClassifiers xsi:type="ecore:EClass" name="DomainAttribute" eSuperTypes="#//ApplicationElement #//ContainsWires #//wires/ParameterEdgesSource #//wires/ExtendsEdgesSource #//wires/ExtendsEdgeDestination">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="changed" value="0.2 to extend the abstract counterpart&#xD;&#xA;0.3 to remove the abstract extension, and added &quot;type&quot; attribute"/>
     </eAnnotations>
@@ -289,6 +289,8 @@
         eType="#//WireEdge" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameterEdges" upperBound="-1"
         eType="#//wires/ParameterEdge" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extendsEdges" upperBound="-1"
+        eType="#//wires/ExtendsEdge" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ShouldntContainWires" abstract="true"
       interface="true" eSuperTypes="#//ContainsWires">
@@ -408,7 +410,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="conditions" upperBound="-1"
         eType="#//Condition" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DomainAttributeInstance" eSuperTypes="#//ApplicationElement">
+  <eClassifiers xsi:type="ecore:EClass" name="DomainAttributeInstance" eSuperTypes="#//ApplicationElement #//wires/ExtendsEdgesSource #//wires/ExtendsEdgeDestination">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="added" value="0.3"/>
     </eAnnotations>
@@ -596,13 +598,18 @@
         <details key="documentation" value="Creates a new instance of a {@model DomainObjectInstance} or {@model DomainAttributeInstance} from its definition."/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ExtendsWire" eSuperTypes="#//wires/SingleWire #//GeneratesElements">
+    <eClassifiers xsi:type="ecore:EClass" name="ExtendsEdge" eSuperTypes="#//GeneratedElement">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.4"/>
+        <details key="changed" value="0.4.3 to no longer be a Wire; added 'from' and 'to' references; renamed to ExtendsEdge"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Represents the inheritance of all target elements by the source element."/>
       </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1"
+          eType="#//wires/ExtendsEdgesSource" eOpposite="#//wires/ExtendsEdgesSource/outExtendsEdges"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//wires/ExtendsEdgeDestination"
+          eOpposite="#//wires/ExtendsEdgeDestination/inExtendsEdges"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="RequiresWire" eSuperTypes="#//wires/SingleWire #//WireEdgesSource #//WireEdgeDestination">
       <eAnnotations source="http://openiaml.org/comment">
@@ -659,6 +666,28 @@
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="inParameterEdges" upperBound="-1"
           eType="#//wires/ParameterEdge" eOpposite="#//wires/ParameterEdge/to"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ExtendsEdgesSource" abstract="true"
+        interface="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Something which may be used as the source of a {@model ExtendsEdge}."/>
+      </eAnnotations>
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="comment" value="added in 0.4.3"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="outExtendsEdges" upperBound="-1"
+          eType="#//wires/ExtendsEdge" eOpposite="#//wires/ExtendsEdge/from"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ExtendsEdgeDestination" abstract="true"
+        interface="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Something which may be used as the destination of a {@model ExtendsEdge}."/>
+      </eAnnotations>
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="comment" value="added in 0.4.3"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="inExtendsEdges" upperBound="-1"
+          eType="#//wires/ExtendsEdge" eOpposite="#//wires/ExtendsEdge/to"/>
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="operations" nsURI="http://openiaml.org/model/operations" nsPrefix="iaml.operations">

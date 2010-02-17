@@ -107,6 +107,15 @@ public interface VisualPackage extends EPackage {
 	int FRAME__PARAMETER_EDGES = ModelPackage.SCOPE__PARAMETER_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Extends Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME__EXTENDS_EDGES = ModelPackage.SCOPE__EXTENDS_EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -351,6 +360,15 @@ public interface VisualPackage extends EPackage {
 	int INPUT_FORM__PARAMETER_EDGES = ModelPackage.VISIBLE_THING__PARAMETER_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Extends Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_FORM__EXTENDS_EDGES = ModelPackage.VISIBLE_THING__EXTENDS_EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -530,6 +548,15 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int INPUT_TEXT_FIELD__PARAMETER_EDGES = ModelPackage.VISIBLE_THING__PARAMETER_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Extends Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_TEXT_FIELD__EXTENDS_EDGES = ModelPackage.VISIBLE_THING__EXTENDS_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
@@ -714,6 +741,15 @@ public interface VisualPackage extends EPackage {
 	int BUTTON__PARAMETER_EDGES = ModelPackage.VISIBLE_THING__PARAMETER_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Extends Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__EXTENDS_EDGES = ModelPackage.VISIBLE_THING__EXTENDS_EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -893,6 +929,15 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int LABEL__PARAMETER_EDGES = ModelPackage.VISIBLE_THING__PARAMETER_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Extends Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LABEL__EXTENDS_EDGES = ModelPackage.VISIBLE_THING__EXTENDS_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.

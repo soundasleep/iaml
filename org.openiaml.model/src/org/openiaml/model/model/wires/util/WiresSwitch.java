@@ -22,7 +22,9 @@ import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.wires.CompositeWire;
 import org.openiaml.model.model.wires.ConditionWire;
 import org.openiaml.model.model.wires.ConstraintWire;
-import org.openiaml.model.model.wires.ExtendsWire;
+import org.openiaml.model.model.wires.ExtendsEdge;
+import org.openiaml.model.model.wires.ExtendsEdgeDestination;
+import org.openiaml.model.model.wires.ExtendsEdgesSource;
 import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.NewInstanceWire;
 import org.openiaml.model.model.wires.ParameterEdge;
@@ -240,13 +242,10 @@ public class WiresSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case WiresPackage.EXTENDS_WIRE: {
-				ExtendsWire extendsWire = (ExtendsWire)theEObject;
-				T result = caseExtendsWire(extendsWire);
-				if (result == null) result = caseSingleWire(extendsWire);
-				if (result == null) result = caseGeneratesElements(extendsWire);
-				if (result == null) result = caseWireEdge(extendsWire);
-				if (result == null) result = caseGeneratedElement(extendsWire);
+			case WiresPackage.EXTENDS_EDGE: {
+				ExtendsEdge extendsEdge = (ExtendsEdge)theEObject;
+				T result = caseExtendsEdge(extendsEdge);
+				if (result == null) result = caseGeneratedElement(extendsEdge);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -290,6 +289,18 @@ public class WiresSwitch<T> {
 			case WiresPackage.PARAMETER_EDGE_DESTINATION: {
 				ParameterEdgeDestination parameterEdgeDestination = (ParameterEdgeDestination)theEObject;
 				T result = caseParameterEdgeDestination(parameterEdgeDestination);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case WiresPackage.EXTENDS_EDGES_SOURCE: {
+				ExtendsEdgesSource extendsEdgesSource = (ExtendsEdgesSource)theEObject;
+				T result = caseExtendsEdgesSource(extendsEdgesSource);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case WiresPackage.EXTENDS_EDGE_DESTINATION: {
+				ExtendsEdgeDestination extendsEdgeDestination = (ExtendsEdgeDestination)theEObject;
+				T result = caseExtendsEdgeDestination(extendsEdgeDestination);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -448,17 +459,17 @@ public class WiresSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Extends Wire</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Extends Edge</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Extends Wire</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Extends Edge</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseExtendsWire(ExtendsWire object) {
+	public T caseExtendsEdge(ExtendsEdge object) {
 		return null;
 	}
 
@@ -534,6 +545,36 @@ public class WiresSwitch<T> {
 	 * @generated
 	 */
 	public T caseParameterEdgeDestination(ParameterEdgeDestination object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Extends Edges Source</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Extends Edges Source</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExtendsEdgesSource(ExtendsEdgesSource object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Extends Edge Destination</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Extends Edge Destination</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExtendsEdgeDestination(ExtendsEdgeDestination object) {
 		return null;
 	}
 

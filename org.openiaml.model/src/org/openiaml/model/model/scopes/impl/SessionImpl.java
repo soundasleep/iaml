@@ -43,6 +43,7 @@ import org.openiaml.model.model.components.EntryGate;
 import org.openiaml.model.model.components.ExitGate;
 import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.scopes.Session;
+import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
 
 /**
@@ -62,6 +63,7 @@ import org.openiaml.model.model.wires.ParameterEdge;
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#isOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getWires <em>Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getParameterEdges <em>Parameter Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getExtendsEdges <em>Extends Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getScopes <em>Scopes</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getOutEdges <em>Out Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getInEdges <em>In Edges</em>}</li>
@@ -228,6 +230,16 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 * @ordered
 	 */
 	protected EList<ParameterEdge> parameterEdges;
+
+	/**
+	 * The cached value of the '{@link #getExtendsEdges() <em>Extends Edges</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExtendsEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ExtendsEdge> extendsEdges;
 
 	/**
 	 * The cached value of the '{@link #getScopes() <em>Scopes</em>}' containment reference list.
@@ -476,6 +488,18 @@ public class SessionImpl extends EObjectImpl implements Session {
 			parameterEdges = new EObjectContainmentEList<ParameterEdge>(ParameterEdge.class, this, ScopesPackage.SESSION__PARAMETER_EDGES);
 		}
 		return parameterEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ExtendsEdge> getExtendsEdges() {
+		if (extendsEdges == null) {
+			extendsEdges = new EObjectContainmentEList<ExtendsEdge>(ExtendsEdge.class, this, ScopesPackage.SESSION__EXTENDS_EDGES);
+		}
+		return extendsEdges;
 	}
 
 	/**
@@ -756,6 +780,8 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__PARAMETER_EDGES:
 				return ((InternalEList<?>)getParameterEdges()).basicRemove(otherEnd, msgs);
+			case ScopesPackage.SESSION__EXTENDS_EDGES:
+				return ((InternalEList<?>)getExtendsEdges()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__SCOPES:
 				return ((InternalEList<?>)getScopes()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__OUT_EDGES:
@@ -810,6 +836,8 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return getWires();
 			case ScopesPackage.SESSION__PARAMETER_EDGES:
 				return getParameterEdges();
+			case ScopesPackage.SESSION__EXTENDS_EDGES:
+				return getExtendsEdges();
 			case ScopesPackage.SESSION__SCOPES:
 				return getScopes();
 			case ScopesPackage.SESSION__OUT_EDGES:
@@ -879,6 +907,10 @@ public class SessionImpl extends EObjectImpl implements Session {
 			case ScopesPackage.SESSION__PARAMETER_EDGES:
 				getParameterEdges().clear();
 				getParameterEdges().addAll((Collection<? extends ParameterEdge>)newValue);
+				return;
+			case ScopesPackage.SESSION__EXTENDS_EDGES:
+				getExtendsEdges().clear();
+				getExtendsEdges().addAll((Collection<? extends ExtendsEdge>)newValue);
 				return;
 			case ScopesPackage.SESSION__SCOPES:
 				getScopes().clear();
@@ -964,6 +996,9 @@ public class SessionImpl extends EObjectImpl implements Session {
 			case ScopesPackage.SESSION__PARAMETER_EDGES:
 				getParameterEdges().clear();
 				return;
+			case ScopesPackage.SESSION__EXTENDS_EDGES:
+				getExtendsEdges().clear();
+				return;
 			case ScopesPackage.SESSION__SCOPES:
 				getScopes().clear();
 				return;
@@ -1029,6 +1064,8 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return wires != null && !wires.isEmpty();
 			case ScopesPackage.SESSION__PARAMETER_EDGES:
 				return parameterEdges != null && !parameterEdges.isEmpty();
+			case ScopesPackage.SESSION__EXTENDS_EDGES:
+				return extendsEdges != null && !extendsEdges.isEmpty();
 			case ScopesPackage.SESSION__SCOPES:
 				return scopes != null && !scopes.isEmpty();
 			case ScopesPackage.SESSION__OUT_EDGES:
@@ -1079,6 +1116,7 @@ public class SessionImpl extends EObjectImpl implements Session {
 			switch (derivedFeatureID) {
 				case ScopesPackage.SESSION__WIRES: return ModelPackage.CONTAINS_WIRES__WIRES;
 				case ScopesPackage.SESSION__PARAMETER_EDGES: return ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES;
+				case ScopesPackage.SESSION__EXTENDS_EDGES: return ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES;
 				default: return -1;
 			}
 		}
@@ -1160,6 +1198,7 @@ public class SessionImpl extends EObjectImpl implements Session {
 			switch (baseFeatureID) {
 				case ModelPackage.CONTAINS_WIRES__WIRES: return ScopesPackage.SESSION__WIRES;
 				case ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES: return ScopesPackage.SESSION__PARAMETER_EDGES;
+				case ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES: return ScopesPackage.SESSION__EXTENDS_EDGES;
 				default: return -1;
 			}
 		}

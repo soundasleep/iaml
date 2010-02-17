@@ -22,7 +22,7 @@ import org.openiaml.model.model.users.UserStore;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.ExtendsWire;
+import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.RequiresWire;
@@ -364,7 +364,7 @@ public class UserRoles extends InferenceTestCase {
 		Role role = assertHasRole(store, "default role");
 		assertNotGenerated(role);
 		
-		ExtendsWire ext = assertHasExtendsWire(store, role, guest);
+		ExtendsEdge ext = assertHasExtendsEdge(store, role, guest);
 		assertGenerated(ext);
 		
 	}
@@ -413,8 +413,8 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(password2);
 		
 		// there should be extends wires between each attribute
-		assertGenerated(assertHasExtendsWire(store, email2, email));
-		assertGenerated(assertHasExtendsWire(store, password2, password));
+		assertGenerated(assertHasExtendsEdge(store, email2, email));
+		assertGenerated(assertHasExtendsEdge(store, password2, password));
 		
 		// none the other way around
 		assertHasNoWiresFromTo(store, email, email2);
@@ -449,7 +449,7 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(fk);
 		
 		// there should be an extends wire between the PK and FK
-		assertGenerated(assertHasExtendsWire(store, fk, source_id));
+		assertGenerated(assertHasExtendsEdge(store, fk, source_id));
 		
 		// and none between the PK and PK
 		assertHasNoWiresFromTo(store, id, source_id);

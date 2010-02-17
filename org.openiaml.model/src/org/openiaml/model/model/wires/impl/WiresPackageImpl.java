@@ -30,7 +30,9 @@ import org.openiaml.model.model.wires.CompositeWire;
 import org.openiaml.model.model.wires.ConditionWire;
 import org.openiaml.model.model.wires.ConstraintTypes;
 import org.openiaml.model.model.wires.ConstraintWire;
-import org.openiaml.model.model.wires.ExtendsWire;
+import org.openiaml.model.model.wires.ExtendsEdge;
+import org.openiaml.model.model.wires.ExtendsEdgeDestination;
+import org.openiaml.model.model.wires.ExtendsEdgesSource;
 import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.NewInstanceWire;
 import org.openiaml.model.model.wires.ParameterEdge;
@@ -128,7 +130,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass extendsWireEClass = null;
+	private EClass extendsEdgeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -164,6 +166,20 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * @generated
 	 */
 	private EClass parameterEdgeDestinationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass extendsEdgesSourceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass extendsEdgeDestinationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -459,8 +475,26 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getExtendsWire() {
-		return extendsWireEClass;
+	public EClass getExtendsEdge() {
+		return extendsEdgeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getExtendsEdge_From() {
+		return (EReference)extendsEdgeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getExtendsEdge_To() {
+		return (EReference)extendsEdgeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -540,6 +574,42 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getExtendsEdgesSource() {
+		return extendsEdgesSourceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getExtendsEdgesSource_OutExtendsEdges() {
+		return (EReference)extendsEdgesSourceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getExtendsEdgeDestination() {
+		return extendsEdgeDestinationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getExtendsEdgeDestination_InExtendsEdges() {
+		return (EReference)extendsEdgeDestinationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getConstraintTypes() {
 		return constraintTypesEEnum;
 	}
@@ -604,7 +674,9 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 
 		newInstanceWireEClass = createEClass(NEW_INSTANCE_WIRE);
 
-		extendsWireEClass = createEClass(EXTENDS_WIRE);
+		extendsEdgeEClass = createEClass(EXTENDS_EDGE);
+		createEReference(extendsEdgeEClass, EXTENDS_EDGE__FROM);
+		createEReference(extendsEdgeEClass, EXTENDS_EDGE__TO);
 
 		requiresWireEClass = createEClass(REQUIRES_WIRE);
 
@@ -618,6 +690,12 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 
 		parameterEdgeDestinationEClass = createEClass(PARAMETER_EDGE_DESTINATION);
 		createEReference(parameterEdgeDestinationEClass, PARAMETER_EDGE_DESTINATION__IN_PARAMETER_EDGES);
+
+		extendsEdgesSourceEClass = createEClass(EXTENDS_EDGES_SOURCE);
+		createEReference(extendsEdgesSourceEClass, EXTENDS_EDGES_SOURCE__OUT_EXTENDS_EDGES);
+
+		extendsEdgeDestinationEClass = createEClass(EXTENDS_EDGE_DESTINATION);
+		createEReference(extendsEdgeDestinationEClass, EXTENDS_EDGE_DESTINATION__IN_EXTENDS_EDGES);
 
 		// Create enums
 		constraintTypesEEnum = createEEnum(CONSTRAINT_TYPES);
@@ -679,8 +757,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		conditionWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
 		conditionWireEClass.getESuperTypes().add(this.getParameterEdgeDestination());
 		newInstanceWireEClass.getESuperTypes().add(this.getCompositeWire());
-		extendsWireEClass.getESuperTypes().add(this.getSingleWire());
-		extendsWireEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
+		extendsEdgeEClass.getESuperTypes().add(theModelPackage.getGeneratedElement());
 		requiresWireEClass.getESuperTypes().add(this.getSingleWire());
 		requiresWireEClass.getESuperTypes().add(theModelPackage.getWireEdgesSource());
 		requiresWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
@@ -720,7 +797,9 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 
 		initEClass(newInstanceWireEClass, NewInstanceWire.class, "NewInstanceWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(extendsWireEClass, ExtendsWire.class, "ExtendsWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(extendsEdgeEClass, ExtendsEdge.class, "ExtendsEdge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getExtendsEdge_From(), this.getExtendsEdgesSource(), this.getExtendsEdgesSource_OutExtendsEdges(), "from", null, 1, 1, ExtendsEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExtendsEdge_To(), this.getExtendsEdgeDestination(), this.getExtendsEdgeDestination_InExtendsEdges(), "to", null, 1, 1, ExtendsEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(requiresWireEClass, RequiresWire.class, "RequiresWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -734,6 +813,12 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 
 		initEClass(parameterEdgeDestinationEClass, ParameterEdgeDestination.class, "ParameterEdgeDestination", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getParameterEdgeDestination_InParameterEdges(), this.getParameterEdge(), this.getParameterEdge_To(), "inParameterEdges", null, 0, -1, ParameterEdgeDestination.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(extendsEdgesSourceEClass, ExtendsEdgesSource.class, "ExtendsEdgesSource", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getExtendsEdgesSource_OutExtendsEdges(), this.getExtendsEdge(), this.getExtendsEdge_From(), "outExtendsEdges", null, 0, -1, ExtendsEdgesSource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(extendsEdgeDestinationEClass, ExtendsEdgeDestination.class, "ExtendsEdgeDestination", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getExtendsEdgeDestination_InExtendsEdges(), this.getExtendsEdge(), this.getExtendsEdge_To(), "inExtendsEdges", null, 0, -1, ExtendsEdgeDestination.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(constraintTypesEEnum, ConstraintTypes.class, "ConstraintTypes");
@@ -829,10 +914,11 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 			 "added", "0.3"
 		   });			
 		addAnnotation
-		  (extendsWireEClass, 
+		  (extendsEdgeEClass, 
 		   source, 
 		   new String[] {
-			 "added", "0.4"
+			 "added", "0.4",
+			 "changed", "0.4.3 to no longer be a Wire; added \'from\' and \'to\' references; renamed to ExtendsEdge"
 		   });			
 		addAnnotation
 		  (requiresWireEClass, 
@@ -866,6 +952,18 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		   });			
 		addAnnotation
 		  (parameterEdgeDestinationEClass, 
+		   source, 
+		   new String[] {
+			 "comment", "added in 0.4.3"
+		   });			
+		addAnnotation
+		  (extendsEdgesSourceEClass, 
+		   source, 
+		   new String[] {
+			 "comment", "added in 0.4.3"
+		   });			
+		addAnnotation
+		  (extendsEdgeDestinationEClass, 
 		   source, 
 		   new String[] {
 			 "comment", "added in 0.4.3"
@@ -929,7 +1027,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 			 "documentation", "Creates a new instance of a {@model DomainObjectInstance} or {@model DomainAttributeInstance} from its definition."
 		   });			
 		addAnnotation
-		  (extendsWireEClass, 
+		  (extendsEdgeEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Represents the inheritance of all target elements by the source element."
@@ -963,6 +1061,18 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Something which may be used as the destination of a {@model ParameterEdge}."
+		   });			
+		addAnnotation
+		  (extendsEdgesSourceEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Something which may be used as the source of a {@model ExtendsEdge}."
+		   });			
+		addAnnotation
+		  (extendsEdgeDestinationEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Something which may be used as the destination of a {@model ExtendsEdge}."
 		   });	
 	}
 

@@ -30,6 +30,8 @@ import org.openiaml.model.model.users.Role;
 import org.openiaml.model.model.users.UserInstance;
 import org.openiaml.model.model.users.UserStore;
 import org.openiaml.model.model.users.UsersPackage;
+import org.openiaml.model.model.wires.ExtendsEdgeDestination;
+import org.openiaml.model.model.wires.ExtendsEdgesSource;
 import org.openiaml.model.model.wires.ParameterEdgeDestination;
 import org.openiaml.model.model.wires.ParameterEdgesSource;
 
@@ -127,6 +129,8 @@ public class UsersSwitch<T> {
 				if (result == null) result = caseDomainObject(role);
 				if (result == null) result = caseApplicationElement(role);
 				if (result == null) result = caseParameterEdgesSource(role);
+				if (result == null) result = caseExtendsEdgesSource(role);
+				if (result == null) result = caseExtendsEdgeDestination(role);
 				if (result == null) result = caseCanBeSynced(role);
 				if (result == null) result = caseContainsOperations(role);
 				if (result == null) result = caseNamedElement(role);
@@ -446,6 +450,36 @@ public class UsersSwitch<T> {
 	 * @generated
 	 */
 	public T caseParameterEdgesSource(ParameterEdgesSource object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Extends Edges Source</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Extends Edges Source</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExtendsEdgesSource(ExtendsEdgesSource object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Extends Edge Destination</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Extends Edge Destination</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExtendsEdgeDestination(ExtendsEdgeDestination object) {
 		return null;
 	}
 

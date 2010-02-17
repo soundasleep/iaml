@@ -33,6 +33,7 @@ import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.impl.WireEdgeImpl;
 import org.openiaml.model.model.wires.CompositeWire;
+import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.WiresPackage;
 
@@ -46,6 +47,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getWires <em>Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getParameterEdges <em>Parameter Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getExtendsEdges <em>Extends Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getGeneratedElements <em>Generated Elements</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#isOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getConditions <em>Conditions</em>}</li>
@@ -100,6 +102,16 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 	 * @ordered
 	 */
 	protected EList<ParameterEdge> parameterEdges;
+
+	/**
+	 * The cached value of the '{@link #getExtendsEdges() <em>Extends Edges</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExtendsEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ExtendsEdge> extendsEdges;
 
 	/**
 	 * The cached value of the '{@link #getGeneratedElements() <em>Generated Elements</em>}' reference list.
@@ -270,6 +282,18 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ExtendsEdge> getExtendsEdges() {
+		if (extendsEdges == null) {
+			extendsEdges = new EObjectContainmentEList<ExtendsEdge>(ExtendsEdge.class, this, WiresPackage.COMPOSITE_WIRE__EXTENDS_EDGES);
+		}
+		return extendsEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<GeneratedElement> getGeneratedElements() {
 		if (generatedElements == null) {
 			generatedElements = new EObjectWithInverseResolvingEList.ManyInverse<GeneratedElement>(GeneratedElement.class, this, WiresPackage.COMPOSITE_WIRE__GENERATED_ELEMENTS, ModelPackage.GENERATED_ELEMENT__GENERATED_BY);
@@ -409,6 +433,8 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
 			case WiresPackage.COMPOSITE_WIRE__PARAMETER_EDGES:
 				return ((InternalEList<?>)getParameterEdges()).basicRemove(otherEnd, msgs);
+			case WiresPackage.COMPOSITE_WIRE__EXTENDS_EDGES:
+				return ((InternalEList<?>)getExtendsEdges()).basicRemove(otherEnd, msgs);
 			case WiresPackage.COMPOSITE_WIRE__GENERATED_ELEMENTS:
 				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
 			case WiresPackage.COMPOSITE_WIRE__CONDITIONS:
@@ -443,6 +469,8 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 				return getWires();
 			case WiresPackage.COMPOSITE_WIRE__PARAMETER_EDGES:
 				return getParameterEdges();
+			case WiresPackage.COMPOSITE_WIRE__EXTENDS_EDGES:
+				return getExtendsEdges();
 			case WiresPackage.COMPOSITE_WIRE__GENERATED_ELEMENTS:
 				return getGeneratedElements();
 			case WiresPackage.COMPOSITE_WIRE__OVERRIDDEN:
@@ -484,6 +512,10 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 			case WiresPackage.COMPOSITE_WIRE__PARAMETER_EDGES:
 				getParameterEdges().clear();
 				getParameterEdges().addAll((Collection<? extends ParameterEdge>)newValue);
+				return;
+			case WiresPackage.COMPOSITE_WIRE__EXTENDS_EDGES:
+				getExtendsEdges().clear();
+				getExtendsEdges().addAll((Collection<? extends ExtendsEdge>)newValue);
 				return;
 			case WiresPackage.COMPOSITE_WIRE__GENERATED_ELEMENTS:
 				getGeneratedElements().clear();
@@ -541,6 +573,9 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 			case WiresPackage.COMPOSITE_WIRE__PARAMETER_EDGES:
 				getParameterEdges().clear();
 				return;
+			case WiresPackage.COMPOSITE_WIRE__EXTENDS_EDGES:
+				getExtendsEdges().clear();
+				return;
 			case WiresPackage.COMPOSITE_WIRE__GENERATED_ELEMENTS:
 				getGeneratedElements().clear();
 				return;
@@ -586,6 +621,8 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 				return wires != null && !wires.isEmpty();
 			case WiresPackage.COMPOSITE_WIRE__PARAMETER_EDGES:
 				return parameterEdges != null && !parameterEdges.isEmpty();
+			case WiresPackage.COMPOSITE_WIRE__EXTENDS_EDGES:
+				return extendsEdges != null && !extendsEdges.isEmpty();
 			case WiresPackage.COMPOSITE_WIRE__GENERATED_ELEMENTS:
 				return generatedElements != null && !generatedElements.isEmpty();
 			case WiresPackage.COMPOSITE_WIRE__OVERRIDDEN:
@@ -625,6 +662,7 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 			switch (derivedFeatureID) {
 				case WiresPackage.COMPOSITE_WIRE__WIRES: return ModelPackage.CONTAINS_WIRES__WIRES;
 				case WiresPackage.COMPOSITE_WIRE__PARAMETER_EDGES: return ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES;
+				case WiresPackage.COMPOSITE_WIRE__EXTENDS_EDGES: return ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES;
 				default: return -1;
 			}
 		}
@@ -661,6 +699,7 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 			switch (baseFeatureID) {
 				case ModelPackage.CONTAINS_WIRES__WIRES: return WiresPackage.COMPOSITE_WIRE__WIRES;
 				case ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES: return WiresPackage.COMPOSITE_WIRE__PARAMETER_EDGES;
+				case ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES: return WiresPackage.COMPOSITE_WIRE__EXTENDS_EDGES;
 				default: return -1;
 			}
 		}

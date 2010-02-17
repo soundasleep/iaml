@@ -107,13 +107,13 @@ public interface WiresFactory extends EFactory {
 	NewInstanceWire createNewInstanceWire();
 
 	/**
-	 * Returns a new object of class '<em>Extends Wire</em>'.
+	 * Returns a new object of class '<em>Extends Edge</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Extends Wire</em>'.
+	 * @return a new object of class '<em>Extends Edge</em>'.
 	 * @generated
 	 */
-	ExtendsWire createExtendsWire();
+	ExtendsEdge createExtendsEdge();
 
 	/**
 	 * Returns a new object of class '<em>Requires Wire</em>'.

@@ -242,7 +242,7 @@
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_Session"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2001,2002,2003,2040,2041,2042,2043,2044,2045,2046,2047,2013,2048,2049,2050,2051,2019,2020,2052,2053,2054"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4002,4003,4004,4005,4007,4009,4010,4011,4012"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4002,4013,4004,4005,4007,4009,4010,4011,4012"/>
       </viewProvider>
    </extension>
 
@@ -257,7 +257,7 @@
             <method name="getType()" value="2001,2002,2003,2040,2041,2042,2043,2044,2045,2046,2047,2013,2048,2049,2050,2051,2019,2020,2052,2053,2054"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
-            <method name="getType()" value="4001,4002,4003,4004,4005,4007,4009,4010,4011,4012"/>
+            <method name="getType()" value="4001,4002,4013,4004,4005,4007,4009,4010,4011,4012"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
             <method name="getType()" value="5001,5002,5003,5004,5005,5006,5071,5072,5073,5074,5075,5076,5077,5078,5079,5080,5081,5082,5083,5084,5085,5086,5024,5025,5087,5088,5089,5090,5091,5092,5033,5034,5093,5094,5095,5096,5097,5098"/>
@@ -568,12 +568,12 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
-               id="org.openiaml.model.diagram.session.ParameterWire_4003"
-               name="%metatype.name.ParameterWire_4003"
+               id="org.openiaml.model.diagram.session.ParameterEdge_4013"
+               name="%metatype.name.ParameterEdge_4013"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="ParameterWire"
-               edithelper="org.openiaml.model.diagram.session.edit.helpers.ParameterWireEditHelper">
-            <param name="semanticHint" value="4003"/>
+               eclass="ParameterEdge"
+               edithelper="org.openiaml.model.diagram.session.edit.helpers.ParameterEdgeEditHelper">
+            <param name="semanticHint" value="4013"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
@@ -682,7 +682,7 @@
          <elementType ref="org.openiaml.model.diagram.session.ExitGate_2054"/>
          <elementType ref="org.openiaml.model.diagram.session.SyncWire_4001"/>
          <elementType ref="org.openiaml.model.diagram.session.RunInstanceWire_4002"/>
-         <elementType ref="org.openiaml.model.diagram.session.ParameterWire_4003"/>
+         <elementType ref="org.openiaml.model.diagram.session.ParameterEdge_4013"/>
          <elementType ref="org.openiaml.model.diagram.session.SelectWire_4004"/>
          <elementType ref="org.openiaml.model.diagram.session.SetWire_4005"/>
          <elementType ref="org.openiaml.model.diagram.session.NavigateWire_4007"/>

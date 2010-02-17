@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="model.123172ceeef.2f" xmi:version="2.0">
-  <scopes id="visual.123172cef6c.2b" name="Home" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
-    <children id="visual.123172cef6c.3f" inEdges="wires.123172cef6c.17" name="current user" xsi:type="iaml.visual:InputForm"/>
-    <elements id="model.123172ceeef.93" inEdges="wires.123172cef6c.13" name="selected user" outEdges="wires.123172cef6c.17" xsi:type="iaml:DomainObjectInstance">
-      <wires from="model.123172ceeef.93" id="wires.123172cef6c.17" name="sync" to="visual.123172cef6c.3f" xsi:type="iaml.wires:SyncWire"/>
-    </elements>
-    <parameters defaultValue="1" id="model.123172ceeef.92" name="user_id" outEdges="" outParameterEdges="wires.123172cef6c.15">
-      <parameterEdges from="model.123172ceeef.92" id="wires.123172cef6c.15" to="wires.123172cef6c.13" xsi:type="iaml.wires:ParameterEdge"/>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.123172ceeef.2f">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.123172cef6c.2b" name="Home">
+    <parameters id="model.123172ceeef.92" name="user_id" outParameterEdges="wires.123172cef6c.15" defaultValue="1">
+      <parameterEdges id="wires.123172cef6c.15" from="model.123172ceeef.92" to="wires.123172cef6c.13"/>
     </parameters>
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.123172ceeef.93" name="selected user" outEdges="wires.123172cef6c.17" inEdges="wires.123172cef6c.13">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.123172cef6c.17" from="model.123172ceeef.93" to="visual.123172cef6c.3f" name="sync"/>
+    </elements>
+    <children xsi:type="iaml.visual:InputForm" inEdges="wires.123172cef6c.17" id="visual.123172cef6c.3f" name="current user"/>
   </scopes>
-  <domainStores id="model.123172ceeef.32" name="Users" xmlns="http://openiaml.org/model0.4">
+  <domainStores id="model.123172ceeef.32" name="Users">
     <children id="model.123172ceeef.3c" name="User" outEdges="wires.123172cef6c.13">
-      <wires from="model.123172ceeef.3c" id="wires.123172cef6c.13" inEdges="" inParameterEdges="wires.123172cef6c.15" name="select" query="id = ?" to="model.123172ceeef.93" xsi:type="iaml.wires:SelectWire"/>
+      <wires xsi:type="iaml.wires:SelectWire" id="wires.123172cef6c.13" from="model.123172ceeef.3c" to="model.123172ceeef.93" name="select" inParameterEdges="wires.123172cef6c.15" query="id = ?"/>
       <attributes id="model.123172ceeef.57" name="id" primaryKey="true"/>
       <attributes id="model.123172ceeef.59" name="name"/>
       <attributes id="model.123172ceeef.5f" name="email"/>

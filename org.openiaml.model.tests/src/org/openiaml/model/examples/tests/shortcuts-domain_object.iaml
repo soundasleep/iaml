@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="model.11d889e30c6.4a" xmi:version="2.0">
-  <scopes id="visual.11d889e3114.27" name="page" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.11d889e30c6.4a">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.11d889e3114.27" name="page">
     <eventTriggers id="model.11d889e30c6.5e" name="event trigger" outEdges="wires.11d889e3162.14">
-      <wires from="model.11d889e30c6.5e" id="wires.11d889e3162.14" name="runWire" to="model.11d889e30c6.96" xsi:type="iaml.wires:RunInstanceWire"/>
+      <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.11d889e3162.14" from="model.11d889e30c6.5e" to="model.11d889e30c6.96" name="runWire"/>
     </eventTriggers>
   </scopes>
-  <domainStores id="model.11d889e30c6.4f" name="domain store" xmlns="http://openiaml.org/model0.4">
+  <domainStores id="model.11d889e30c6.4f" name="domain store">
     <children id="model.11d889e30c6.70" name="domain object">
-      <attributes id="model.11d889e30c6.96" inEdges="wires.11d889e3162.14" name="domain attribute"/>
+      <attributes id="model.11d889e30c6.96" name="domain attribute" inEdges="wires.11d889e3162.14"/>
     </children>
   </domainStores>
 </iaml:InternetApplication>

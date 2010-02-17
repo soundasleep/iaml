@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="model.120b1f587bf.3ca" xmi:version="2.0">
-  <scopes id="visual.120b1f58907.560" name="without form" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
-    <children id="visual.120b22b5aea.23" name="target" outEdges="wires.120b249acac.12" xsi:type="iaml.visual:InputTextField">
-      <wires from="visual.120b22b5aea.23" id="wires.120b249acac.12" name="immediate sync" to="domain.120b22b5af9.10" xsi:type="iaml.wires:SyncWire"/>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.120b1f587bf.3ca">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.120b1f58907.560" name="without form">
+    <children xsi:type="iaml.visual:InputTextField" outEdges="wires.120b249acac.12" id="visual.120b22b5aea.23" name="target">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.120b249acac.12" from="visual.120b22b5aea.23" to="domain.120b22b5af9.10" name="immediate sync"/>
     </children>
   </scopes>
-  <scopes id="visual.120b1f58907.561" name="with form" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
-    <children id="visual.120b22b5aea.5b" name="a form" xsi:type="iaml.visual:InputForm">
-      <children id="visual.120b22b5aea.94" name="target" outEdges="wires.120b249acac.12xx" xsi:type="iaml.visual:InputTextField">
-        <wires from="visual.120b22b5aea.94" id="wires.120b249acac.12xx" name="immediate sync" to="domain.120b22b5af9.13" xsi:type="iaml.wires:SyncWire"/>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.120b1f58907.561" name="with form">
+    <children xsi:type="iaml.visual:InputForm" id="visual.120b22b5aea.5b" name="a form">
+      <children xsi:type="iaml.visual:InputTextField" outEdges="wires.120b249acac.12xx" id="visual.120b22b5aea.94" name="target">
+        <wires xsi:type="iaml.wires:SyncWire" id="wires.120b249acac.12xx" from="visual.120b22b5aea.94" to="domain.120b22b5af9.13" name="immediate sync"/>
       </children>
     </children>
   </scopes>
-  <domainStores file="result.properties" id="domain.120b22b5af9.8" name="a properties file" type="PROPERTIES_FILE" xmlns="http://openiaml.org/model0.4">
-    <attributes id="domain.120b22b5af9.10" inEdges="wires.120b249acac.12" name="value1"/>
-    <attributes id="domain.120b22b5af9.13" inEdges="wires.120b249acac.12xx" name="value2"/>
+  <domainStores id="domain.120b22b5af9.8" name="a properties file" file="result.properties" type="PROPERTIES_FILE">
+    <attributes id="domain.120b22b5af9.10" name="value1" inEdges="wires.120b249acac.12"/>
+    <attributes id="domain.120b22b5af9.13" name="value2" inEdges="wires.120b249acac.12xx"/>
   </domainStores>
 </iaml:InternetApplication>

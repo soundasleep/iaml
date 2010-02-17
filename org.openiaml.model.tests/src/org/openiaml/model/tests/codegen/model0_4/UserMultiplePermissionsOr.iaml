@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="model.1233afe61d2.26" xmi:version="2.0">
-  <scopes id="visual.1233afe628e.15" name="Home" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4"/>
-  <domainStores id="users.1233afe655c.1c" name="user store" xsi:type="iaml.users:UserStore" xmlns="http://openiaml.org/model0.4">
-    <children id="users.1233afe655c.23" name="default role" outEdges="wires.1233afe62eb.36" xsi:type="iaml.users:Role">
-      <wires from="users.1233afe655c.23" id="wires.1233afe62eb.36" to="users.1233afe655c.72" xsi:type="iaml.wires:ProvidesWire"/>
-    </children>
-    <children id="users.1233afe655c.73" name="another role" outEdges="wires.1233afe62eb.38" xsi:type="iaml.users:Role">
-      <wires from="users.1233afe655c.73" id="wires.1233afe62eb.38" to="users.1233afe655c.74" xsi:type="iaml.wires:ProvidesWire"/>
-    </children>
-    <children id="users.1233afe655c.cc" name="both roles" outEdges="wires.1233afe62eb.65 wires.1233afe62eb.66" xsi:type="iaml.users:Role">
-      <wires from="users.1233afe655c.cc" id="wires.1233afe62eb.65" to="users.1233afe655c.74" xsi:type="iaml.wires:ProvidesWire"/>
-      <wires from="users.1233afe655c.cc" id="wires.1233afe62eb.66" to="users.1233afe655c.72" xsi:type="iaml.wires:ProvidesWire"/>
-    </children>
-    <permissions id="users.1233afe655c.72" inEdges="wires.1233afe62eb.36 wires.1233afe62eb.4a wires.1233afe62eb.66" name="a permission"/>
-    <permissions id="users.1233afe655c.74" inEdges="wires.1233afe62eb.38 wires.1233afe62eb.65 wires.1233afe62eb.82" name="a different permission"/>
-  </domainStores>
-  <scopes id="scopes.1233afe6368.3" name="target session" xsi:type="iaml.scopes:Session" xmlns="http://openiaml.org/model0.4">
-    <elements id="components.1233afe6424.13" name="role-based access" outEdges="wires.1233afe62eb.4a wires.1233afe62eb.82" xsi:type="iaml.components:AccessControlHandler">
-      <wires from="components.1233afe6424.13" id="wires.1233afe62eb.4a" outEdges="wires.1233afe62eb.a7" to="users.1233afe655c.72" xsi:type="iaml.wires:RequiresWire">
-        <wires from="wires.1233afe62eb.4a" id="wires.1233afe62eb.a7" to="wires.1233afe62eb.82" type="OR" xsi:type="iaml.wires:ConstraintWire"/>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1233afe61d2.26">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.1233afe628e.15" name="Home"/>
+  <scopes xsi:type="iaml.scopes:Session" id="scopes.1233afe6368.3" name="target session">
+    <scopes xsi:type="iaml.visual:Frame" id="visual.1233afe628e.6e" name="target"/>
+    <elements xsi:type="iaml.components:AccessControlHandler" id="components.1233afe6424.13" name="role-based access" outEdges="wires.1233afe62eb.4a wires.1233afe62eb.82">
+      <wires xsi:type="iaml.wires:RequiresWire" id="wires.1233afe62eb.4a" from="components.1233afe6424.13" to="users.1233afe655c.72" outEdges="wires.1233afe62eb.a7">
+        <wires xsi:type="iaml.wires:ConstraintWire" id="wires.1233afe62eb.a7" from="wires.1233afe62eb.4a" to="wires.1233afe62eb.82" type="OR"/>
       </wires>
-      <wires from="components.1233afe6424.13" id="wires.1233afe62eb.82" inEdges="wires.1233afe62eb.a7" to="users.1233afe655c.74" xsi:type="iaml.wires:RequiresWire"/>
+      <wires xsi:type="iaml.wires:RequiresWire" id="wires.1233afe62eb.82" from="components.1233afe6424.13" to="users.1233afe655c.74" inEdges="wires.1233afe62eb.a7"/>
     </elements>
-    <scopes id="visual.1233afe628e.6e" name="target" xsi:type="iaml.visual:Frame"/>
   </scopes>
+  <domainStores xsi:type="iaml.users:UserStore" id="users.1233afe655c.1c" name="user store">
+    <children xsi:type="iaml.users:Role" id="users.1233afe655c.23" name="default role" outEdges="wires.1233afe62eb.36">
+      <wires xsi:type="iaml.wires:ProvidesWire" id="wires.1233afe62eb.36" from="users.1233afe655c.23" to="users.1233afe655c.72"/>
+    </children>
+    <children xsi:type="iaml.users:Role" id="users.1233afe655c.73" name="another role" outEdges="wires.1233afe62eb.38">
+      <wires xsi:type="iaml.wires:ProvidesWire" id="wires.1233afe62eb.38" from="users.1233afe655c.73" to="users.1233afe655c.74"/>
+    </children>
+    <children xsi:type="iaml.users:Role" id="users.1233afe655c.cc" name="both roles" outEdges="wires.1233afe62eb.65 wires.1233afe62eb.66">
+      <wires xsi:type="iaml.wires:ProvidesWire" id="wires.1233afe62eb.65" from="users.1233afe655c.cc" to="users.1233afe655c.74"/>
+      <wires xsi:type="iaml.wires:ProvidesWire" id="wires.1233afe62eb.66" from="users.1233afe655c.cc" to="users.1233afe655c.72"/>
+    </children>
+    <permissions id="users.1233afe655c.72" name="a permission" inEdges="wires.1233afe62eb.36 wires.1233afe62eb.4a wires.1233afe62eb.66"/>
+    <permissions id="users.1233afe655c.74" name="a different permission" inEdges="wires.1233afe62eb.38 wires.1233afe62eb.65 wires.1233afe62eb.82"/>
+  </domainStores>
 </iaml:InternetApplication>

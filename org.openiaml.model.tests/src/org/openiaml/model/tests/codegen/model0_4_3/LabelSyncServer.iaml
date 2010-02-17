@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="model.126c0191fac.28" xmi:version="2.0">
-  <scopes id="index" name="Home" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
-    <children id="visual.126c01921cf.4c" name="Source Text Field" outEdges="wires.126c01921cf.c" xsi:type="iaml.visual:InputTextField">
-      <wires from="visual.126c01921cf.4c" id="wires.126c01921cf.c" name="sync" to="visual.126c01921cf.65" xsi:type="iaml.wires:SyncWire"/>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.126c0191fac.28">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
+    <children xsi:type="iaml.visual:InputTextField" outEdges="wires.126c01921cf.c" id="visual.126c01921cf.4c" name="Source Text Field">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.126c01921cf.c" from="visual.126c01921cf.4c" to="visual.126c01921cf.65" name="sync"/>
     </children>
   </scopes>
-  <scopes id="visual.126c01921cf.52" name="Page 2" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
-    <children defaultValue="initial" id="visual.126c01921cf.65" inEdges="wires.126c01921cf.c wires.126c01921cf.13" name="Target Label" xsi:type="iaml.visual:Label"/>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.126c01921cf.52" name="Page 2">
+    <children xsi:type="iaml.visual:Label" inEdges="wires.126c01921cf.c wires.126c01921cf.13" id="visual.126c01921cf.65" name="Target Label" defaultValue="initial"/>
   </scopes>
-  <scopes id="visual.126c01921cf.53" name="Page 3" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
-    <children id="visual.126c01921cf.a0" name="Final Text Field" outEdges="wires.126c01921cf.13" xsi:type="iaml.visual:InputTextField">
-      <wires from="visual.126c01921cf.a0" id="wires.126c01921cf.13" name="sync" to="visual.126c01921cf.65" xsi:type="iaml.wires:SyncWire"/>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.126c01921cf.53" name="Page 3">
+    <children xsi:type="iaml.visual:InputTextField" outEdges="wires.126c01921cf.13" id="visual.126c01921cf.a0" name="Final Text Field">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.126c01921cf.13" from="visual.126c01921cf.a0" to="visual.126c01921cf.65" name="sync"/>
     </children>
   </scopes>
 </iaml:InternetApplication>

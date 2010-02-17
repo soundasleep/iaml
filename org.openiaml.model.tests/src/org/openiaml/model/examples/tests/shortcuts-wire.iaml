@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="model.11d889e30c6.2f4" xmi:version="2.0">
-  <scopes id="visual.11d889e3114.25f" name="container" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
-    <operations id="model.11d889e30c6.2fe" inEdges="wires.11d889e3162.71" name="co" xsi:type="iaml:CompositeOperation"/>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.11d889e30c6.2f4">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.11d889e3114.25f" name="container">
+    <operations xsi:type="iaml:CompositeOperation" inEdges="wires.11d889e3162.71" id="model.11d889e30c6.2fe" name="co"/>
     <eventTriggers id="model.11d889e30c6.2fc" name="et" outEdges="wires.11d889e3162.71 wires.11d889e3162.86">
-      <wires from="model.11d889e30c6.2fc" id="wires.11d889e3162.71" name="wire" to="model.11d889e30c6.2fe" xsi:type="iaml.wires:RunInstanceWire">
-        <operations id="model.11d889e30c6.31d" inEdges="wires.11d889e3162.86" name="op1" xsi:type="iaml:PrimitiveOperation"/>
-        <operations id="model.11d889e30c6.31e" inEdges="wires.11d889e3162.85" name="op2" xsi:type="iaml:PrimitiveOperation"/>
+      <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.11d889e3162.71" from="model.11d889e30c6.2fc" to="model.11d889e30c6.2fe" name="wire">
+        <operations xsi:type="iaml:PrimitiveOperation" inEdges="wires.11d889e3162.86" id="model.11d889e30c6.31d" name="op1"/>
+        <operations xsi:type="iaml:PrimitiveOperation" inEdges="wires.11d889e3162.85" id="model.11d889e30c6.31e" name="op2"/>
       </wires>
-      <wires from="model.11d889e30c6.2fc" id="wires.11d889e3162.86" name="shortcut2" to="model.11d889e30c6.31d" xsi:type="iaml.wires:RunInstanceWire"/>
+      <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.11d889e3162.86" from="model.11d889e30c6.2fc" to="model.11d889e30c6.31d" name="shortcut2"/>
     </eventTriggers>
     <eventTriggers id="model.11d889e30c6.33a" name="et new" outEdges="wires.11d889e3162.85">
-      <wires from="model.11d889e30c6.33a" id="wires.11d889e3162.85" name="shortcut1" to="model.11d889e30c6.31e" xsi:type="iaml.wires:RunInstanceWire"/>
+      <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.11d889e3162.85" from="model.11d889e30c6.33a" to="model.11d889e30c6.31e" name="shortcut1"/>
     </eventTriggers>
   </scopes>
 </iaml:InternetApplication>

@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="model.11d2918ebce.326" xmi:version="2.0">
-  <scopes id="visual.11d293c2f82.33" name="page1" outEdges="wires.11d293c2f82.67" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
-    <wires from="visual.11d293c2f82.33" id="wires.11d293c2f82.67" name="sync" to="visual.11d293c2f82.34" xsi:type="iaml.wires:SyncWire"/>
-    <children id="visual.11d293c2f82.4c" name="text1" xsi:type="iaml.visual:InputTextField"/>
-    <children id="visual.11d293c2f82.5a" name="text2" xsi:type="iaml.visual:InputTextField"/>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.11d2918ebce.326">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.11d293c2f82.33" name="page1" outEdges="wires.11d293c2f82.67">
+    <wires xsi:type="iaml.wires:SyncWire" id="wires.11d293c2f82.67" from="visual.11d293c2f82.33" to="visual.11d293c2f82.34" name="sync"/>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.11d293c2f82.4c" name="text1"/>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.11d293c2f82.5a" name="text2"/>
   </scopes>
-  <scopes id="visual.11d293c2f82.34" inEdges="wires.11d293c2f82.67" name="page2" outEdges="wires.11d293c2f82.68" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
-    <wires from="visual.11d293c2f82.34" id="wires.11d293c2f82.68" name="sync" to="visual.11d293c2f82.35" xsi:type="iaml.wires:SyncWire"/>
-    <children id="visual.11d293c2f82.83" name="text1" xsi:type="iaml.visual:InputTextField"/>
-    <children id="visual.11d293c2f82.84" name="text3" xsi:type="iaml.visual:InputTextField"/>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.11d293c2f82.34" name="page2" outEdges="wires.11d293c2f82.68" inEdges="wires.11d293c2f82.67">
+    <wires xsi:type="iaml.wires:SyncWire" id="wires.11d293c2f82.68" from="visual.11d293c2f82.34" to="visual.11d293c2f82.35" name="sync"/>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.11d293c2f82.83" name="text1"/>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.11d293c2f82.84" name="text3"/>
   </scopes>
-  <scopes id="visual.11d293c2f82.35" inEdges="wires.11d293c2f82.68" name="page3" outEdges="wires.11d293c2f82.69" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
-    <wires from="visual.11d293c2f82.35" id="wires.11d293c2f82.69" name="sync" to="visual.11d293c2f82.36" xsi:type="iaml.wires:SyncWire"/>
-    <children id="visual.11d293c2f82.ba" name="text1" xsi:type="iaml.visual:InputTextField"/>
-    <children id="visual.11d293c2f82.bb" name="text2" xsi:type="iaml.visual:InputTextField"/>
-    <children id="visual.11d293c2f82.bc" name="text3" outEdges="wires.11d293c2f82.4f" xsi:type="iaml.visual:InputTextField">
-      <wires from="visual.11d293c2f82.bc" id="wires.11d293c2f82.4f" name="sync on page" to="visual.11d293c2f82.d8" xsi:type="iaml.wires:SyncWire"/>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.11d293c2f82.35" name="page3" outEdges="wires.11d293c2f82.69" inEdges="wires.11d293c2f82.68">
+    <wires xsi:type="iaml.wires:SyncWire" id="wires.11d293c2f82.69" from="visual.11d293c2f82.35" to="visual.11d293c2f82.36" name="sync"/>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.11d293c2f82.ba" name="text1"/>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.11d293c2f82.bb" name="text2"/>
+    <children xsi:type="iaml.visual:InputTextField" outEdges="wires.11d293c2f82.4f" id="visual.11d293c2f82.bc" name="text3">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.11d293c2f82.4f" from="visual.11d293c2f82.bc" to="visual.11d293c2f82.d8" name="sync on page"/>
     </children>
-    <children id="visual.11d293c2f82.d8" inEdges="wires.11d293c2f82.4f" name="newText" xsi:type="iaml.visual:InputTextField"/>
+    <children xsi:type="iaml.visual:InputTextField" inEdges="wires.11d293c2f82.4f" id="visual.11d293c2f82.d8" name="newText"/>
   </scopes>
-  <scopes id="visual.11d293c2f82.36" inEdges="wires.11d293c2f82.69" name="page4" outEdges="wires.11d293c2f82.6a" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
-    <wires from="visual.11d293c2f82.36" id="wires.11d293c2f82.6a" name="sync" to="visual.11d293c2f82.37" xsi:type="iaml.wires:SyncWire"/>
-    <children id="visual.11d293c2f82.14f" name="newText" outEdges="wires.11d293c2f82.58" xsi:type="iaml.visual:InputTextField">
-      <wires from="visual.11d293c2f82.14f" id="wires.11d293c2f82.58" name="sync on page" to="visual.11d293c2f82.150" xsi:type="iaml.wires:SyncWire"/>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.11d293c2f82.36" name="page4" outEdges="wires.11d293c2f82.6a" inEdges="wires.11d293c2f82.69">
+    <wires xsi:type="iaml.wires:SyncWire" id="wires.11d293c2f82.6a" from="visual.11d293c2f82.36" to="visual.11d293c2f82.37" name="sync"/>
+    <children xsi:type="iaml.visual:InputTextField" outEdges="wires.11d293c2f82.58" id="visual.11d293c2f82.14f" name="newText">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.11d293c2f82.58" from="visual.11d293c2f82.14f" to="visual.11d293c2f82.150" name="sync on page"/>
     </children>
-    <children id="visual.11d293c2f82.150" inEdges="wires.11d293c2f82.58" name="text5" xsi:type="iaml.visual:InputTextField"/>
+    <children xsi:type="iaml.visual:InputTextField" inEdges="wires.11d293c2f82.58" id="visual.11d293c2f82.150" name="text5"/>
   </scopes>
-  <scopes id="visual.11d293c2f82.37" inEdges="wires.11d293c2f82.6a" name="page5" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
-    <children id="visual.11d293c2f82.1cc" name="text5" xsi:type="iaml.visual:InputTextField"/>
-    <children id="visual.11d293c2f82.1cd" name="text6" xsi:type="iaml.visual:InputTextField"/>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.11d293c2f82.37" name="page5" inEdges="wires.11d293c2f82.6a">
+    <children xsi:type="iaml.visual:InputTextField" id="visual.11d293c2f82.1cc" name="text5"/>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.11d293c2f82.1cd" name="text6"/>
   </scopes>
 </iaml:InternetApplication>

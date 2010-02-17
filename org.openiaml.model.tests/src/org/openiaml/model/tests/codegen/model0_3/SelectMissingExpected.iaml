@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="model.12109331eea.107e" xmi:version="2.0">
-  <scopes id="visual.12109331f38.e3f" name="container" outEdges="wires.12109dbdd39.4" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
-    <wires from="visual.12109331f38.e3f" id="wires.12109dbdd39.4" name="fail" to="visual.12109dbdd39.7" xsi:type="iaml.wires:NavigateWire"/>
-    <values id="model.12109c6242e.483" name="a missing id" outEdges="" outParameterEdges="wires.12109c6249b.123" value="impossible">
-      <parameterEdges from="model.12109c6242e.483" id="wires.12109c6249b.123" to="wires.12109c6249b.122" xsi:type="iaml.wires:ParameterEdge"/>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12109331eea.107e">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12109331f38.e3f" name="container" outEdges="wires.12109dbdd39.4">
+    <wires xsi:type="iaml.wires:NavigateWire" id="wires.12109dbdd39.4" from="visual.12109331f38.e3f" to="visual.12109dbdd39.7" name="fail"/>
+    <values id="model.12109c6242e.483" name="a missing id" outParameterEdges="wires.12109c6249b.123" value="impossible">
+      <parameterEdges id="wires.12109c6249b.123" from="model.12109c6242e.483" to="wires.12109c6249b.122"/>
     </values>
-    <elements autosave="true" id="model.12109c6242e.482" inEdges="wires.12109c6249b.122" name="name" outEdges="wires.12109c6249b.124" xsi:type="iaml:DomainAttributeInstance">
-      <wires from="model.12109c6242e.482" id="wires.12109c6249b.124" name="sync" to="visual.12109c6248b.227" xsi:type="iaml.wires:SyncWire"/>
+    <elements xsi:type="iaml:DomainAttributeInstance" id="model.12109c6242e.482" name="name" outEdges="wires.12109c6249b.124" inEdges="wires.12109c6249b.122" autosave="true">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.12109c6249b.124" from="model.12109c6242e.482" to="visual.12109c6248b.227" name="sync"/>
     </elements>
-    <children id="visual.12109c6248b.227" inEdges="wires.12109c6249b.124" name="textfield" xsi:type="iaml.visual:InputTextField"/>
+    <children xsi:type="iaml.visual:InputTextField" inEdges="wires.12109c6249b.124" id="visual.12109c6248b.227" name="textfield"/>
   </scopes>
-  <scopes id="visual.12109dbdd39.7" inEdges="wires.12109dbdd39.4" name="an expected failure" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4"/>
-  <domainStores id="model.12109331eea.1083" name="domain store" xmlns="http://openiaml.org/model0.4">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12109dbdd39.7" name="an expected failure" inEdges="wires.12109dbdd39.4"/>
+  <domainStores id="model.12109331eea.1083" name="domain store">
     <children id="model.12109331eea.108c" name="User" outEdges="wires.12109c6249b.122">
-      <wires from="model.12109331eea.108c" id="wires.12109c6249b.122" inEdges="" inParameterEdges="wires.12109c6249b.123" name="select" query="id = ?" to="model.12109c6242e.482" xsi:type="iaml.wires:SelectWire"/>
+      <wires xsi:type="iaml.wires:SelectWire" id="wires.12109c6249b.122" from="model.12109331eea.108c" to="model.12109c6242e.482" name="select" inParameterEdges="wires.12109c6249b.123" query="id = ?"/>
       <attributes id="model.12109331eea.10ac" name="name"/>
       <attributes id="model.12109331eea.10ad" name="email"/>
       <attributes id="model.12109331eea.10ae" name="password"/>

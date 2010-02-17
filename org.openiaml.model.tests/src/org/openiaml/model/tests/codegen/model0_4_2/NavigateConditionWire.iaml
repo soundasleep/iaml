@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="model.126aaf83900.45f">
-  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
-    <conditions xsi:type="iaml:CompositeCondition" outEdges="wires.126aaf8398c.11e" id="model.126aaf83900.478" name="is value = 1?">
-      <conditions xsi:type="iaml.operations:DecisionCondition" id="operations.126aaf8398c.113" name="equal?" outExecutions="model.126aaf83900.4a4 model.126aaf83900.4a5" inExecutions="model.126aaf83900.4a2" inFlows="model.126aaf83900.4a6 model.126aaf83900.4a8"/>
-      <wires xsi:type="iaml.wires:ConditionWire" id="wires.126aaf8398c.11e" from="model.126aaf83900.478" to="wires.126aaf8398c.11d"/>
-      <nodes xsi:type="iaml.operations:StartNode" id="operations.126aaf8398c.111" outExecutions="model.126aaf83900.4a2"/>
-      <nodes xsi:type="iaml.operations:FinishNode" id="operations.126aaf8398c.118" inExecutions="model.126aaf83900.4a4"/>
-      <nodes xsi:type="iaml.operations:CancelNode" id="operations.126aaf8398c.119" inExecutions="model.126aaf83900.4a5"/>
-      <dataEdges id="model.126aaf83900.4a6" from="model.126aaf83900.46f" to="operations.126aaf8398c.113"/>
-      <dataEdges id="model.126aaf83900.4a8" from="model.126aaf83900.49b" to="operations.126aaf8398c.113"/>
-      <executionEdges id="model.126aaf83900.4a2" from="operations.126aaf8398c.111" to="operations.126aaf8398c.113"/>
-      <executionEdges id="model.126aaf83900.4a4" name="y" from="operations.126aaf8398c.113" to="operations.126aaf8398c.118"/>
-      <executionEdges id="model.126aaf83900.4a5" name="n" from="operations.126aaf8398c.113" to="operations.126aaf8398c.119"/>
+<iaml:InternetApplication xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="model.126aaf83900.45f" xmi:version="2.0">
+  <scopes id="index" name="Home" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
+    <conditions id="model.126aaf83900.478" name="is value = 1?" outEdges="wires.126aaf8398c.11e" xsi:type="iaml:CompositeCondition">
+      <conditions id="operations.126aaf8398c.113" inExecutions="model.126aaf83900.4a2" inFlows="model.126aaf83900.4a6 model.126aaf83900.4a8" name="equal?" outExecutions="model.126aaf83900.4a4 model.126aaf83900.4a5" xsi:type="iaml.operations:DecisionCondition"/>
+      <wires from="model.126aaf83900.478" id="wires.126aaf8398c.11e" to="wires.126aaf8398c.11d" xsi:type="iaml.wires:ConditionWire"/>
+      <nodes id="operations.126aaf8398c.111" outExecutions="model.126aaf83900.4a2" xsi:type="iaml.operations:StartNode"/>
+      <nodes id="operations.126aaf8398c.118" inExecutions="model.126aaf83900.4a4" xsi:type="iaml.operations:FinishNode"/>
+      <nodes id="operations.126aaf8398c.119" inExecutions="model.126aaf83900.4a5" xsi:type="iaml.operations:CancelNode"/>
+      <dataEdges from="model.126aaf83900.46f" id="model.126aaf83900.4a6" to="operations.126aaf8398c.113"/>
+      <dataEdges from="model.126aaf83900.49b" id="model.126aaf83900.4a8" to="operations.126aaf8398c.113"/>
+      <executionEdges from="operations.126aaf8398c.111" id="model.126aaf83900.4a2" to="operations.126aaf8398c.113"/>
+      <executionEdges from="operations.126aaf8398c.113" id="model.126aaf83900.4a4" name="y" to="operations.126aaf8398c.118"/>
+      <executionEdges from="operations.126aaf8398c.113" id="model.126aaf83900.4a5" name="n" to="operations.126aaf8398c.119"/>
       <values id="model.126aaf83900.49b" name="1" outFlows="model.126aaf83900.4a8" value="1"/>
     </conditions>
-    <children xsi:type="iaml.visual:Button" id="visual.126aaf8397d.1b5" name="Button" outEdges="wires.126aaf8398c.11d">
-      <wires xsi:type="iaml.wires:NavigateWire" id="wires.126aaf8398c.11d" from="visual.126aaf8397d.1b5" to="visual.126aaf8397d.1bb" name="click" inEdges="wires.126aaf8398c.11e"/>
+    <children id="visual.126aaf8397d.1b5" name="Button" outEdges="wires.126aaf8398c.11d" xsi:type="iaml.visual:Button">
+      <wires from="visual.126aaf8397d.1b5" id="wires.126aaf8398c.11d" inEdges="wires.126aaf8398c.11e" name="click" to="visual.126aaf8397d.1bb" xsi:type="iaml.wires:NavigateWire"/>
     </children>
-    <children xsi:type="iaml.visual:InputTextField" id="visual.126aaf8397d.1c3" name="value">
+    <children id="visual.126aaf8397d.1c3" name="value" xsi:type="iaml.visual:InputTextField">
       <properties id="model.126aaf83900.46f" name="fieldValue" outFlows="model.126aaf83900.4a6"/>
     </children>
   </scopes>
-  <scopes xsi:type="iaml.visual:Frame" id="visual.126aaf8397d.1bb" name="Destination" inEdges="wires.126aaf8398c.11d"/>
+  <scopes id="visual.126aaf8397d.1bb" inEdges="wires.126aaf8398c.11d" name="Destination" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4"/>
 </iaml:InternetApplication>

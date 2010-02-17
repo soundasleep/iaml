@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="migrated0">
-  <scopes xsi:type="iaml.visual:Frame" id="migrated1" name="container">
-    <children xsi:type="iaml.visual:InputForm" id="migrated3" name="SignupForm" outEdges="migrated2">
-      <wires xsi:type="iaml.wires:SyncWire" id="migrated2" from="migrated3" to="migrated4" name="sync"/>
-      <children xsi:type="iaml.visual:InputTextField" id="migrated6" name="firstName" outEdges="migrated5">
-        <wires xsi:type="iaml.wires:SyncWire" id="migrated5" from="migrated6" to="migrated7" name="sync"/>
+<iaml:InternetApplication xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="migrated0" xmi:version="2.0">
+  <scopes id="migrated1" name="container" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
+    <children id="migrated3" name="SignupForm" outEdges="migrated2" xsi:type="iaml.visual:InputForm">
+      <wires from="migrated3" id="migrated2" name="sync" to="migrated4" xsi:type="iaml.wires:SyncWire"/>
+      <children id="migrated6" name="firstName" outEdges="migrated5" xsi:type="iaml.visual:InputTextField">
+        <wires from="migrated6" id="migrated5" name="sync" to="migrated7" xsi:type="iaml.wires:SyncWire"/>
       </children>
-      <children xsi:type="iaml.visual:InputTextField" id="migrated9" name="password" outEdges="migrated8">
-        <wires xsi:type="iaml.wires:SyncWire" id="migrated8" from="migrated9" to="migrated10" name="sync"/>
+      <children id="migrated9" name="password" outEdges="migrated8" xsi:type="iaml.visual:InputTextField">
+        <wires from="migrated9" id="migrated8" name="sync" to="migrated10" xsi:type="iaml.wires:SyncWire"/>
       </children>
     </children>
   </scopes>
-  <children xsi:type="iaml:DomainObject" id="migrated4" name="UserObject" inEdges="migrated2">
-    <attributes xsi:type="iaml:DomainAttribute" id="migrated7" name="f_name" inEdges="migrated5"/>
-    <attributes xsi:type="iaml:DomainAttribute" id="migrated10" name="pass_hash" inEdges="migrated8"/>
+  <children id="migrated4" inEdges="migrated2" name="UserObject" xsi:type="iaml:DomainObject" xmlns="http://openiaml.org/model0.4">
+    <attributes id="migrated7" inEdges="migrated5" name="f_name" xsi:type="iaml:DomainAttribute"/>
+    <attributes id="migrated10" inEdges="migrated8" name="pass_hash" xsi:type="iaml:DomainAttribute"/>
   </children>
 </iaml:InternetApplication>

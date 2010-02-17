@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="model.12109331eea.107e">
-  <scopes xsi:type="iaml.visual:Frame" id="visual.12109c6248b.18e" name="default page"/>
-  <domainStores xsi:type="iaml:DomainStore" id="model.12109331eea.1083" name="domain store">
-    <children xsi:type="iaml:DomainObject" id="model.12109331eea.108c" name="User" outEdges="wires.12109c6249b.ee">
-      <wires xsi:type="iaml.wires:SelectWire" id="wires.12109c6249b.ee" from="model.12109331eea.108c" to="model.12109c6242e.3bb" name="select" inEdges="wires.12109c6249b.ef" query="name = ?"/>
-      <attributes xsi:type="iaml:DomainAttribute" id="model.12109331eea.10ac" name="name"/>
-      <attributes xsi:type="iaml:DomainAttribute" id="model.12109331eea.10ad" name="email"/>
-      <attributes xsi:type="iaml:DomainAttribute" id="model.12109331eea.10ae" name="password"/>
-      <attributes xsi:type="iaml:DomainAttribute" id="model.12109331eea.10d3" name="id"/>
+<iaml:InternetApplication xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="model.12109331eea.107e" xmi:version="2.0">
+  <scopes id="visual.12109c6248b.18e" name="default page" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4"/>
+  <domainStores id="model.12109331eea.1083" name="domain store" xsi:type="iaml:DomainStore" xmlns="http://openiaml.org/model0.4">
+    <children id="model.12109331eea.108c" name="User" outEdges="wires.12109c6249b.ee" xsi:type="iaml:DomainObject">
+      <wires from="model.12109331eea.108c" id="wires.12109c6249b.ee" inEdges="" inParameterEdges="wires.12109c6249b.ef" name="select" query="name = ?" to="model.12109c6242e.3bb" xsi:type="iaml.wires:SelectWire"/>
+      <attributes id="model.12109331eea.10ac" name="name" xsi:type="iaml:DomainAttribute"/>
+      <attributes id="model.12109331eea.10ad" name="email" xsi:type="iaml:DomainAttribute"/>
+      <attributes id="model.12109331eea.10ae" name="password" xsi:type="iaml:DomainAttribute"/>
+      <attributes id="model.12109331eea.10d3" name="id" xsi:type="iaml:DomainAttribute"/>
     </children>
   </domainStores>
-  <scopes xsi:type="iaml.scopes:Session" id="scopes.12109c6249b.35" name="my session">
-    <scopes xsi:type="iaml.visual:Frame" id="visual.12109c6248b.192" name="sessioned container">
-      <children xsi:type="iaml.visual:InputTextField" id="visual.12109c6248b.1a2" name="select name" outEdges="wires.12109c6249b.ef">
-        <wires xsi:type="iaml.wires:ParameterWire" id="wires.12109c6249b.ef" from="visual.12109c6248b.1a2" to="wires.12109c6249b.ee"/>
+  <scopes id="scopes.12109c6249b.35" name="my session" xsi:type="iaml.scopes:Session" xmlns="http://openiaml.org/model0.4">
+    <scopes id="visual.12109c6248b.192" name="sessioned container" xsi:type="iaml.visual:Frame">
+      <children id="visual.12109c6248b.1a2" name="select name" outEdges="" outParameterEdges="wires.12109c6249b.ef" xsi:type="iaml.visual:InputTextField">
+        <parameterEdges from="visual.12109c6248b.1a2" id="wires.12109c6249b.ef" to="wires.12109c6249b.ee" xsi:type="iaml.wires:ParameterEdge"/>
       </children>
-      <children xsi:type="iaml.visual:InputTextField" id="visual.12109c6248b.1a3" name="edit email" inEdges="wires.12109c6249b.112"/>
-      <elements xsi:type="iaml:DomainObjectInstance" id="model.12109c6242e.3bb" name="my user" inEdges="wires.12109c6249b.ee" autosave="true">
+      <children id="visual.12109c6248b.1a3" inEdges="wires.12109c6249b.112" name="edit email" xsi:type="iaml.visual:InputTextField"/>
+      <elements autosave="true" id="model.12109c6242e.3bb" inEdges="wires.12109c6249b.ee" name="my user" xsi:type="iaml:DomainObjectInstance">
         <attributes id="model.12109c6242e.3f8" name="email" outEdges="wires.12109c6249b.112">
-          <wires xsi:type="iaml.wires:SyncWire" id="wires.12109c6249b.112" from="model.12109c6242e.3f8" to="visual.12109c6248b.1a3" name="sync"/>
+          <wires from="model.12109c6242e.3f8" id="wires.12109c6249b.112" name="sync" to="visual.12109c6248b.1a3" xsi:type="iaml.wires:SyncWire"/>
         </attributes>
       </elements>
     </scopes>

@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="model.12109331eea.4a">
-  <scopes xsi:type="iaml.visual:Frame" id="visual.12109331f38.e1" name="container">
-    <children xsi:type="iaml.visual:InputTextField" id="visual.12109331f38.e7" name="source one">
-      <properties id="model.12109331eea.5f" name="fieldValue" outEdges="wires.12109331f38.1e">
-        <wires xsi:type="iaml.wires:ParameterWire" id="wires.12109331f38.1e" from="model.12109331eea.5f" to="wires.12109331f38.1c"/>
+<iaml:InternetApplication xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="model.12109331eea.4a" xmi:version="2.0">
+  <scopes id="visual.12109331f38.e1" name="container" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
+    <children id="visual.12109331f38.e7" name="source one" xsi:type="iaml.visual:InputTextField">
+      <properties id="model.12109331eea.5f" name="fieldValue" outEdges="" outParameterEdges="wires.12109331f38.1e">
+        <parameterEdges from="model.12109331eea.5f" id="wires.12109331f38.1e" to="wires.12109331f38.1c" xsi:type="iaml.wires:ParameterEdge"/>
       </properties>
     </children>
-    <children xsi:type="iaml.visual:InputTextField" id="visual.12109331f38.e8" name="target one">
-      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.12109331f38.1c wires.12109331f38.3c" id="model.12109331eea.b2" name="update"/>
+    <children id="visual.12109331f38.e8" name="target one" xsi:type="iaml.visual:InputTextField">
+      <operations id="model.12109331eea.b2" inEdges="wires.12109331f38.1c wires.12109331f38.3c" name="update" xsi:type="iaml:CompositeOperation"/>
       <properties id="model.12109331eea.70" name="fieldValue"/>
     </children>
-    <children xsi:type="iaml.visual:Button" id="visual.12109331f38.f0" name="copy value over to target">
+    <children id="visual.12109331f38.f0" name="copy value over to target" xsi:type="iaml.visual:Button">
       <eventTriggers id="model.12109331eea.89" name="onClick" outEdges="wires.12109331f38.1c">
-        <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.12109331f38.1c" from="model.12109331eea.89" to="model.12109331eea.b2" name="run" inEdges="wires.12109331f38.1e"/>
+        <wires from="model.12109331eea.89" id="wires.12109331f38.1c" inEdges="" inParameterEdges="wires.12109331f38.1e" name="run" to="model.12109331eea.b2" xsi:type="iaml.wires:RunInstanceWire"/>
       </eventTriggers>
     </children>
-    <children xsi:type="iaml.visual:Button" id="visual.12109331f38.fa" name="reset target">
+    <children id="visual.12109331f38.fa" name="reset target" xsi:type="iaml.visual:Button">
       <eventTriggers id="model.12109331eea.146" name="onClick" outEdges="wires.12109331f38.3c">
-        <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.12109331f38.3c" from="model.12109331eea.146" to="model.12109331eea.b2" name="run" inEdges="wires.12109331f38.3d"/>
+        <wires from="model.12109331eea.146" id="wires.12109331f38.3c" inEdges="" inParameterEdges="wires.12109331f38.3d" name="run" to="model.12109331eea.b2" xsi:type="iaml.wires:RunInstanceWire"/>
       </eventTriggers>
-      <values id="model.12109331eea.121" name="empty value" outEdges="wires.12109331f38.3d" value="empty">
-        <wires xsi:type="iaml.wires:ParameterWire" id="wires.12109331f38.3d" from="model.12109331eea.121" to="wires.12109331f38.3c"/>
+      <values id="model.12109331eea.121" name="empty value" outEdges="" outParameterEdges="wires.12109331f38.3d" value="empty">
+        <parameterEdges from="model.12109331eea.121" id="wires.12109331f38.3d" to="wires.12109331f38.3c" xsi:type="iaml.wires:ParameterEdge"/>
       </values>
     </children>
   </scopes>
-  <scopes xsi:type="iaml.visual:Frame" id="visual.12109331f38.321" name="implicit">
-    <children xsi:type="iaml.visual:InputTextField" id="visual.12109331f38.346" name="source two" outEdges="wires.12109331f38.5a5">
-      <wires xsi:type="iaml.wires:ParameterWire" id="wires.12109331f38.5a5" from="visual.12109331f38.346" to="wires.12109331f38.5a4"/>
+  <scopes id="visual.12109331f38.321" name="implicit" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
+    <children id="visual.12109331f38.346" name="source two" outEdges="" outParameterEdges="wires.12109331f38.5a5" xsi:type="iaml.visual:InputTextField">
+      <parameterEdges from="visual.12109331f38.346" id="wires.12109331f38.5a5" to="wires.12109331f38.5a4" xsi:type="iaml.wires:ParameterEdge"/>
     </children>
-    <children xsi:type="iaml.visual:InputTextField" id="visual.12109331f38.347" name="target two">
-      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.12109331f38.5a4" id="model.12109331eea.d95" name="update"/>
+    <children id="visual.12109331f38.347" name="target two" xsi:type="iaml.visual:InputTextField">
+      <operations id="model.12109331eea.d95" inEdges="wires.12109331f38.5a4" name="update" xsi:type="iaml:CompositeOperation"/>
     </children>
-    <children xsi:type="iaml.visual:Button" id="visual.12109331f38.348" name="copy over implicitly" outEdges="wires.12109331f38.5a4">
-      <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.12109331f38.5a4" from="visual.12109331f38.348" to="model.12109331eea.d95" name="click" inEdges="wires.12109331f38.5a5"/>
+    <children id="visual.12109331f38.348" name="copy over implicitly" outEdges="wires.12109331f38.5a4" xsi:type="iaml.visual:Button">
+      <wires from="visual.12109331f38.348" id="wires.12109331f38.5a4" inEdges="" inParameterEdges="wires.12109331f38.5a5" name="click" to="model.12109331eea.d95" xsi:type="iaml.wires:RunInstanceWire"/>
     </children>
   </scopes>
 </iaml:InternetApplication>

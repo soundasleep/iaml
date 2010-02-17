@@ -1,81 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="model.1236407970c.1">
-  <scopes xsi:type="iaml.visual:Frame" id="visual.12364079826.1" name="Home"/>
-  <scopes xsi:type="iaml.visual:Frame" id="visual.12364143556.bc" name="get person">
-    <values id="model.123641434e9.2ad3" name="person name" outEdges="wires.12364143556.6c8" value="Test Name">
-      <wires xsi:type="iaml.wires:ParameterWire" id="wires.12364143556.6c8" from="model.123641434e9.2ad3" to="wires.12364143556.6c6"/>
+<iaml:InternetApplication xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="model.1236407970c.1" xmi:version="2.0">
+  <scopes id="visual.12364079826.1" name="Home" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4"/>
+  <scopes id="visual.12364143556.bc" name="get person" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
+    <values id="model.123641434e9.2ad3" name="person name" outEdges="" outParameterEdges="wires.12364143556.6c8" value="Test Name">
+      <parameterEdges from="model.123641434e9.2ad3" id="wires.12364143556.6c8" to="wires.12364143556.6c6" xsi:type="iaml.wires:ParameterEdge"/>
     </values>
-    <elements xsi:type="iaml:DomainObjectInstance" id="model.123641434e9.2abe" name="selected person" inEdges="wires.12364143556.6c6 wires.12364143556.6ca" autosave="true"/>
-    <children xsi:type="iaml.visual:InputForm" id="visual.12364143556.d2" name="view person" outEdges="wires.12364143556.6ca">
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.12364143556.6ca" from="visual.12364143556.d2" to="model.123641434e9.2abe" name="sync"/>
+    <elements autosave="true" id="model.123641434e9.2abe" inEdges="wires.12364143556.6c6 wires.12364143556.6ca" name="selected person" xsi:type="iaml:DomainObjectInstance"/>
+    <children id="visual.12364143556.d2" name="view person" outEdges="wires.12364143556.6ca" xsi:type="iaml.visual:InputForm">
+      <wires from="visual.12364143556.d2" id="wires.12364143556.6ca" name="sync" to="model.123641434e9.2abe" xsi:type="iaml.wires:SyncWire"/>
     </children>
   </scopes>
-  <scopes xsi:type="iaml.visual:Frame" id="visual.12364143556.e4" name="get student">
-    <values id="model.123641434e9.2c35" name="enrolled param" outEdges="wires.12364143556.752" value="yesterday">
-      <wires xsi:type="iaml.wires:ParameterWire" id="wires.12364143556.752" from="model.123641434e9.2c35" to="wires.12364143556.751"/>
+  <scopes id="visual.12364143556.e4" name="get student" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
+    <values id="model.123641434e9.2c35" name="enrolled param" outEdges="" outParameterEdges="wires.12364143556.752" value="yesterday">
+      <parameterEdges from="model.123641434e9.2c35" id="wires.12364143556.752" to="wires.12364143556.751" xsi:type="iaml.wires:ParameterEdge"/>
     </values>
-    <elements xsi:type="iaml:DomainObjectInstance" id="model.123641434e9.2c34" name="current student" inEdges="wires.12364143556.750 wires.12364143556.751" autosave="true"/>
-    <children xsi:type="iaml.visual:InputForm" id="visual.12364143556.108" name="view student" outEdges="wires.12364143556.750">
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.12364143556.750" from="visual.12364143556.108" to="model.123641434e9.2c34" name="sync"/>
+    <elements autosave="true" id="model.123641434e9.2c34" inEdges="wires.12364143556.750 wires.12364143556.751" name="current student" xsi:type="iaml:DomainObjectInstance"/>
+    <children id="visual.12364143556.108" name="view student" outEdges="wires.12364143556.750" xsi:type="iaml.visual:InputForm">
+      <wires from="visual.12364143556.108" id="wires.12364143556.750" name="sync" to="model.123641434e9.2c34" xsi:type="iaml.wires:SyncWire"/>
     </children>
   </scopes>
-  <scopes xsi:type="iaml.visual:Frame" id="visual.12364143556.132" name="get teacher by id">
-    <values id="model.123641434e9.2de9" name="teacher id" outEdges="wires.12364143556.819" value="24">
-      <wires xsi:type="iaml.wires:ParameterWire" id="wires.12364143556.819" from="model.123641434e9.2de9" to="wires.12364143556.818"/>
+  <scopes id="visual.12364143556.132" name="get teacher by id" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
+    <values id="model.123641434e9.2de9" name="teacher id" outEdges="" outParameterEdges="wires.12364143556.819" value="24">
+      <parameterEdges from="model.123641434e9.2de9" id="wires.12364143556.819" to="wires.12364143556.818" xsi:type="iaml.wires:ParameterEdge"/>
     </values>
-    <elements xsi:type="iaml:DomainObjectInstance" id="model.123641434e9.2de8" name="selected teacher" inEdges="wires.12364143556.817 wires.12364143556.818" autosave="true"/>
-    <children xsi:type="iaml.visual:InputForm" id="visual.12364143556.168" name="view teacher" outEdges="wires.12364143556.817">
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.12364143556.817" from="visual.12364143556.168" to="model.123641434e9.2de8" name="sync"/>
+    <elements autosave="true" id="model.123641434e9.2de8" inEdges="wires.12364143556.817 wires.12364143556.818" name="selected teacher" xsi:type="iaml:DomainObjectInstance"/>
+    <children id="visual.12364143556.168" name="view teacher" outEdges="wires.12364143556.817" xsi:type="iaml.visual:InputForm">
+      <wires from="visual.12364143556.168" id="wires.12364143556.817" name="sync" to="model.123641434e9.2de8" xsi:type="iaml.wires:SyncWire"/>
     </children>
   </scopes>
-  <scopes xsi:type="iaml.visual:Frame" id="visual.12364143556.192" name="get doctoral">
-    <values id="model.123641434e9.2f0f" name="qualification" outEdges="wires.12364143556.93c" value="bsc">
-      <wires xsi:type="iaml.wires:ParameterWire" id="wires.12364143556.93c" from="model.123641434e9.2f0f" to="wires.12364143556.93b"/>
+  <scopes id="visual.12364143556.192" name="get doctoral" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
+    <values id="model.123641434e9.2f0f" name="qualification" outEdges="" outParameterEdges="wires.12364143556.93c" value="bsc">
+      <parameterEdges from="model.123641434e9.2f0f" id="wires.12364143556.93c" to="wires.12364143556.93b" xsi:type="iaml.wires:ParameterEdge"/>
     </values>
-    <values id="model.123641434e9.2f10" name="degree" outEdges="wires.12364143556.93d" value="science">
-      <wires xsi:type="iaml.wires:ParameterWire" id="wires.12364143556.93d" from="model.123641434e9.2f10" to="wires.12364143556.93b"/>
+    <values id="model.123641434e9.2f10" name="degree" outEdges="" outParameterEdges="wires.12364143556.93d" value="science">
+      <parameterEdges from="model.123641434e9.2f10" id="wires.12364143556.93d" to="wires.12364143556.93b" xsi:type="iaml.wires:ParameterEdge"/>
     </values>
-    <elements xsi:type="iaml:DomainObjectInstance" id="model.123641434e9.2f0e" name="current doctoral" inEdges="wires.12364143556.93b wires.12364143556.a92" autosave="true"/>
-    <children xsi:type="iaml.visual:InputForm" id="visual.12364143556.2a7" name="view doctoral" outEdges="wires.12364143556.a92">
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.12364143556.a92" from="visual.12364143556.2a7" to="model.123641434e9.2f0e" name="sync"/>
+    <elements autosave="true" id="model.123641434e9.2f0e" inEdges="wires.12364143556.93b wires.12364143556.a92" name="current doctoral" xsi:type="iaml:DomainObjectInstance"/>
+    <children id="visual.12364143556.2a7" name="view doctoral" outEdges="wires.12364143556.a92" xsi:type="iaml.visual:InputForm">
+      <wires from="visual.12364143556.2a7" id="wires.12364143556.a92" name="sync" to="model.123641434e9.2f0e" xsi:type="iaml.wires:SyncWire"/>
     </children>
   </scopes>
-  <domainStores id="model.1236407970c.5" name="domain store">
-    <children id="model.1236407970c.11" name="Person" outEdges="wires.12364143556.6c6" inEdges="wires.12364143556.1 wires.12364143556.3">
-      <wires xsi:type="iaml.wires:SelectWire" id="wires.12364143556.6c6" from="model.1236407970c.11" to="model.123641434e9.2abe" name="select" inEdges="wires.12364143556.6c8" query="name = ?"/>
+  <domainStores id="model.1236407970c.5" name="domain store" xmlns="http://openiaml.org/model0.4">
+    <children id="model.1236407970c.11" inEdges="wires.12364143556.1 wires.12364143556.3" name="Person" outEdges="wires.12364143556.6c6">
+      <wires from="model.1236407970c.11" id="wires.12364143556.6c6" inEdges="" inParameterEdges="wires.12364143556.6c8" name="select" query="name = ?" to="model.123641434e9.2abe" xsi:type="iaml.wires:SelectWire"/>
       <attributes id="model.123641434e9.8a" name="name"/>
       <attributes id="model.123641434e9.29a8" name="id" primaryKey="true"/>
     </children>
-    <children id="model.1236407970c.19" name="Student" outEdges="wires.12364143556.1 wires.12364143556.751" inEdges="wires.12364143556.5 wires.12364143556.6">
-      <wires xsi:type="iaml.wires:ExtendsWire" id="wires.12364143556.1" from="model.1236407970c.19" to="model.1236407970c.11"/>
-      <wires xsi:type="iaml.wires:SelectWire" id="wires.12364143556.751" from="model.1236407970c.19" to="model.123641434e9.2c34" name="select" inEdges="wires.12364143556.752" query="enrolled = ?"/>
+    <children id="model.1236407970c.19" inEdges="wires.12364143556.5 wires.12364143556.6" name="Student" outEdges="wires.12364143556.1 wires.12364143556.751">
+      <wires from="model.1236407970c.19" id="wires.12364143556.1" to="model.1236407970c.11" xsi:type="iaml.wires:ExtendsWire"/>
+      <wires from="model.1236407970c.19" id="wires.12364143556.751" inEdges="" inParameterEdges="wires.12364143556.752" name="select" query="enrolled = ?" to="model.123641434e9.2c34" xsi:type="iaml.wires:SelectWire"/>
       <attributes id="model.123641434e9.f3" name="enrolled"/>
     </children>
-    <children id="model.1236407970c.1a" name="Teacher" outEdges="wires.12364143556.3 wires.12364143556.4 wires.12364143556.818" inEdges="wires.12364143556.8">
-      <wires xsi:type="iaml.wires:ExtendsWire" id="wires.12364143556.3" from="model.1236407970c.1a" to="model.1236407970c.11"/>
-      <wires xsi:type="iaml.wires:ExtendsWire" id="wires.12364143556.4" from="model.1236407970c.1a" to="model.1236407970c.1b"/>
-      <wires xsi:type="iaml.wires:SelectWire" id="wires.12364143556.818" from="model.1236407970c.1a" to="model.123641434e9.2de8" name="select" inEdges="wires.12364143556.819" query="id = ?"/>
+    <children id="model.1236407970c.1a" inEdges="wires.12364143556.8" name="Teacher" outEdges="wires.12364143556.3 wires.12364143556.4 wires.12364143556.818">
+      <wires from="model.1236407970c.1a" id="wires.12364143556.3" to="model.1236407970c.11" xsi:type="iaml.wires:ExtendsWire"/>
+      <wires from="model.1236407970c.1a" id="wires.12364143556.4" to="model.1236407970c.1b" xsi:type="iaml.wires:ExtendsWire"/>
+      <wires from="model.1236407970c.1a" id="wires.12364143556.818" inEdges="" inParameterEdges="wires.12364143556.819" name="select" query="id = ?" to="model.123641434e9.2de8" xsi:type="iaml.wires:SelectWire"/>
       <attributes id="model.123641434e9.163" name="title"/>
     </children>
-    <children id="model.1236407970c.1b" name="Qualified" inEdges="wires.12364143556.4">
+    <children id="model.1236407970c.1b" inEdges="wires.12364143556.4" name="Qualified">
       <attributes id="model.123641434e9.1bb" name="qualification"/>
     </children>
-    <children id="model.1236407970c.1c" name="Postgraduate" outEdges="wires.12364143556.5" inEdges="wires.12364143556.7">
-      <wires xsi:type="iaml.wires:ExtendsWire" id="wires.12364143556.5" from="model.1236407970c.1c" to="model.1236407970c.19"/>
+    <children id="model.1236407970c.1c" inEdges="wires.12364143556.7" name="Postgraduate" outEdges="wires.12364143556.5">
+      <wires from="model.1236407970c.1c" id="wires.12364143556.5" to="model.1236407970c.19" xsi:type="iaml.wires:ExtendsWire"/>
       <attributes id="model.123641434e9.2d2" name="degree"/>
     </children>
-    <children id="model.1236407970c.1d" name="Undergraduate" outEdges="wires.12364143556.6" inEdges="wires.12364143556.3f5">
-      <wires xsi:type="iaml.wires:ExtendsWire" id="wires.12364143556.6" from="model.1236407970c.1d" to="model.1236407970c.19"/>
+    <children id="model.1236407970c.1d" inEdges="wires.12364143556.3f5" name="Undergraduate" outEdges="wires.12364143556.6">
+      <wires from="model.1236407970c.1d" id="wires.12364143556.6" to="model.1236407970c.19" xsi:type="iaml.wires:ExtendsWire"/>
       <attributes id="model.123641434e9.240" name="degree"/>
     </children>
     <children id="model.1236407970c.1e" name="Doctoral" outEdges="wires.12364143556.7 wires.12364143556.8 wires.12364143556.93b">
-      <wires xsi:type="iaml.wires:ExtendsWire" id="wires.12364143556.7" from="model.1236407970c.1e" to="model.1236407970c.1c"/>
-      <wires xsi:type="iaml.wires:ExtendsWire" id="wires.12364143556.8" from="model.1236407970c.1e" to="model.1236407970c.1a"/>
-      <wires xsi:type="iaml.wires:SelectWire" id="wires.12364143556.93b" from="model.1236407970c.1e" to="model.123641434e9.2f0e" inEdges="wires.12364143556.93c wires.12364143556.93d" query="qualification = :qualification and degree = :degree"/>
+      <wires from="model.1236407970c.1e" id="wires.12364143556.7" to="model.1236407970c.1c" xsi:type="iaml.wires:ExtendsWire"/>
+      <wires from="model.1236407970c.1e" id="wires.12364143556.8" to="model.1236407970c.1a" xsi:type="iaml.wires:ExtendsWire"/>
+      <wires from="model.1236407970c.1e" id="wires.12364143556.93b" inEdges="" inParameterEdges="wires.12364143556.93c wires.12364143556.93d" query="qualification = :qualification and degree = :degree" to="model.123641434e9.2f0e" xsi:type="iaml.wires:SelectWire"/>
       <attributes id="model.123641434e9.371" name="thesis title"/>
     </children>
     <children id="model.123641434e9.1e98" name="Completed Undergrad" outEdges="wires.12364143556.3f5">
-      <wires xsi:type="iaml.wires:ExtendsWire" id="wires.12364143556.3f5" from="model.123641434e9.1e98" to="model.1236407970c.1d"/>
+      <wires from="model.123641434e9.1e98" id="wires.12364143556.3f5" to="model.1236407970c.1d" xsi:type="iaml.wires:ExtendsWire"/>
     </children>
   </domainStores>
 </iaml:InternetApplication>

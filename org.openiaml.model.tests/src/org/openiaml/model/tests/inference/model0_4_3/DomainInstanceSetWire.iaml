@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.126ceb68565.70">
-  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
-    <parameters id="model.126cf449831.f2" name="id" outEdges="wires.126cf449ab2.52">
-      <wires xsi:type="iaml.wires:ParameterWire" id="wires.126cf449ab2.52" from="model.126cf449831.f2" to="wires.126cf449ab2.44"/>
+<iaml:InternetApplication xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="model.126ceb68565.70" xmi:version="2.0">
+  <scopes id="index" name="Home" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
+    <parameters id="model.126cf449831.f2" name="id" outEdges="" outParameterEdges="wires.126cf449ab2.52">
+      <parameterEdges from="model.126cf449831.f2" id="wires.126cf449ab2.52" to="wires.126cf449ab2.44" xsi:type="iaml.wires:ParameterEdge"/>
     </parameters>
-    <elements xsi:type="iaml:DomainObjectInstance" id="model.126cf449831.f3" name="viewing instance" outEdges="wires.126cf449ab2.72" inEdges="wires.126cf449ab2.44">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.126cf449ab2.72" from="model.126cf449831.f3" to="visual.126cf4499f6.dd" name="set"/>
+    <elements id="model.126cf449831.f3" inEdges="wires.126cf449ab2.44" name="viewing instance" outEdges="wires.126cf449ab2.72" xsi:type="iaml:DomainObjectInstance">
+      <wires from="model.126cf449831.f3" id="wires.126cf449ab2.72" name="set" to="visual.126cf4499f6.dd" xsi:type="iaml.wires:SetWire"/>
     </elements>
-    <children xsi:type="iaml.visual:InputForm" inEdges="wires.126cf449ab2.72" id="visual.126cf4499f6.dd" name="View"/>
+    <children id="visual.126cf4499f6.dd" inEdges="wires.126cf449ab2.72" name="View" xsi:type="iaml.visual:InputForm"/>
   </scopes>
-  <scopes xsi:type="iaml.visual:Frame" id="visual.126ceb685c2.bd" name="Add New Product">
-    <elements xsi:type="iaml:DomainObjectInstance" id="model.126ceb68565.d4" name="New Product" outEdges="wires.126cf449ab2.8" inEdges="wires.126cf449ab2.2e">
-      <operations xsi:type="iaml:PrimitiveOperation" inEdges="wires.126cf449ab2.3" id="model.126cf449831.1c" name="save"/>
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.126cf449ab2.8" from="model.126ceb68565.d4" to="visual.126ceb685c2.c6" name="sync"/>
+  <scopes id="visual.126ceb685c2.bd" name="Add New Product" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
+    <elements id="model.126ceb68565.d4" inEdges="wires.126cf449ab2.2e" name="New Product" outEdges="wires.126cf449ab2.8" xsi:type="iaml:DomainObjectInstance">
+      <operations id="model.126cf449831.1c" inEdges="wires.126cf449ab2.3" name="save" xsi:type="iaml:PrimitiveOperation"/>
+      <wires from="model.126ceb68565.d4" id="wires.126cf449ab2.8" name="sync" to="visual.126ceb685c2.c6" xsi:type="iaml.wires:SyncWire"/>
     </elements>
-    <children xsi:type="iaml.visual:InputForm" inEdges="wires.126cf449ab2.8" id="visual.126ceb685c2.c6" name="Edit Form"/>
-    <children xsi:type="iaml.visual:Button" outEdges="wires.126cf449ab2.3" id="visual.126cf4499f6.27" name="save">
-      <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.126cf449ab2.3" from="visual.126cf4499f6.27" to="model.126cf449831.1c" name="click"/>
+    <children id="visual.126ceb685c2.c6" inEdges="wires.126cf449ab2.8" name="Edit Form" xsi:type="iaml.visual:InputForm"/>
+    <children id="visual.126cf4499f6.27" name="save" outEdges="wires.126cf449ab2.3" xsi:type="iaml.visual:Button">
+      <wires from="visual.126cf4499f6.27" id="wires.126cf449ab2.3" name="click" to="model.126cf449831.1c" xsi:type="iaml.wires:RunInstanceWire"/>
     </children>
   </scopes>
-  <domainStores id="model.126ceb68565.73" name="Store">
+  <domainStores id="model.126ceb68565.73" name="Store" xmlns="http://openiaml.org/model0.4">
     <children id="model.126ceb68565.7e" name="Product" outEdges="wires.126cf449ab2.2e wires.126cf449ab2.44">
-      <wires xsi:type="iaml.wires:NewInstanceWire" id="wires.126cf449ab2.2e" from="model.126ceb68565.7e" to="model.126ceb68565.d4" name="new"/>
-      <wires xsi:type="iaml.wires:SelectWire" id="wires.126cf449ab2.44" from="model.126ceb68565.7e" to="model.126cf449831.f3" name="select" inEdges="wires.126cf449ab2.52" query="id = ?"/>
+      <wires from="model.126ceb68565.7e" id="wires.126cf449ab2.2e" name="new" to="model.126ceb68565.d4" xsi:type="iaml.wires:NewInstanceWire"/>
+      <wires from="model.126ceb68565.7e" id="wires.126cf449ab2.44" inEdges="" inParameterEdges="wires.126cf449ab2.52" name="select" query="id = ?" to="model.126cf449831.f3" xsi:type="iaml.wires:SelectWire"/>
       <attributes id="model.126ceb68565.9a" name="id"/>
       <attributes id="model.126ceb68565.a0" name="name"/>
       <attributes id="model.126ceb68565.a1" name="price"/>

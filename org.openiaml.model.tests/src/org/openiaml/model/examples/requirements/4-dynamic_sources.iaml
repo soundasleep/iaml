@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="migrated0">
-  <scopes xsi:type="iaml.visual:Frame" id="migrated1" name="page a">
-    <children xsi:type="iaml.visual:InputTextField" id="visual.1203bbadbb8.475" name="target"/>
-    <children xsi:type="iaml.visual:InputTextField" id="visual.1203bbadbb8.476" name="unrelated1"/>
+<iaml:InternetApplication xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="migrated0" xmi:version="2.0">
+  <scopes id="migrated1" name="page a" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
+    <children id="visual.1203bbadbb8.475" name="target" xsi:type="iaml.visual:InputTextField"/>
+    <children id="visual.1203bbadbb8.476" name="unrelated1" xsi:type="iaml.visual:InputTextField"/>
   </scopes>
-  <scopes xsi:type="iaml.visual:Frame" id="migrated2" name="page b"/>
-  <scopes xsi:type="iaml.visual:Frame" id="migrated3" name="page c">
-    <children xsi:type="iaml.visual:InputTextField" id="visual.1203bbadbb8.49b" name="target"/>
+  <scopes id="migrated2" name="page b" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4"/>
+  <scopes id="migrated3" name="page c" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
+    <children id="visual.1203bbadbb8.49b" name="target" xsi:type="iaml.visual:InputTextField"/>
   </scopes>
-  <children xsi:type="iaml:DynamicApplicationElementSet" id="migrated5" name="all pages" outEdges="migrated4" query="xpath:iaml:scopes[starts-with(iaml:name, 'page')]">
-    <wires xsi:type="iaml.wires:SyncWire" id="migrated4" from="migrated5" to="fieldlist" name="sync"/>
+  <children id="migrated5" name="all pages" outEdges="migrated4" query="xpath:iaml:scopes[starts-with(iaml:name, 'page')]" xsi:type="iaml:DynamicApplicationElementSet" xmlns="http://openiaml.org/model0.4">
+    <wires from="migrated5" id="migrated4" name="sync" to="fieldlist" xsi:type="iaml.wires:SyncWire"/>
   </children>
-  <scopes xsi:type="iaml.visual:Frame" id="fieldlist" name="FieldList" inEdges="migrated4">
-    <children xsi:type="iaml.visual:InputTextField" id="visual.1203bbadbb8.458" name="target"/>
+  <scopes id="fieldlist" inEdges="migrated4" name="FieldList" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
+    <children id="visual.1203bbadbb8.458" name="target" xsi:type="iaml.visual:InputTextField"/>
   </scopes>
-  <scopes xsi:type="iaml.visual:Frame" id="unrelated" name="unrelated">
-    <children xsi:type="iaml.visual:InputTextField" id="visual.1204501d03b.8a" name="target"/>
+  <scopes id="unrelated" name="unrelated" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
+    <children id="visual.1204501d03b.8a" name="target" xsi:type="iaml.visual:InputTextField"/>
   </scopes>
 </iaml:InternetApplication>

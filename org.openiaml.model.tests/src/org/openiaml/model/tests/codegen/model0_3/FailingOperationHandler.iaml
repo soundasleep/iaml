@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="model.12109dbdceb.19">
-  <scopes xsi:type="iaml.visual:Frame" id="visual.12109dbdd39.8" name="target page" outEdges="wires.12109dbdd39.1a">
-    <operations xsi:type="iaml:CompositeOperation" inEdges="wires.12109dbdd39.6" id="model.12109dbdceb.2d" name="an instant failure">
-      <nodes xsi:type="iaml.operations:StartNode" id="operations.12109dbdd49.1" outExecutions="model.12109dbdceb.66"/>
-      <nodes xsi:type="iaml.operations:CancelNode" id="operations.12109dbdd49.3" inExecutions="model.12109dbdceb.66" exceptionText="an expected failure message"/>
-      <executionEdges id="model.12109dbdceb.66" from="operations.12109dbdd49.1" to="operations.12109dbdd49.3"/>
+<iaml:InternetApplication xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="model.12109dbdceb.19" xmi:version="2.0">
+  <scopes id="visual.12109dbdd39.8" name="target page" outEdges="wires.12109dbdd39.1a" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
+    <operations id="model.12109dbdceb.2d" inEdges="wires.12109dbdd39.6" name="an instant failure" xsi:type="iaml:CompositeOperation">
+      <nodes id="operations.12109dbdd49.1" outExecutions="model.12109dbdceb.66" xsi:type="iaml.operations:StartNode"/>
+      <nodes exceptionText="an expected failure message" id="operations.12109dbdd49.3" inExecutions="model.12109dbdceb.66" xsi:type="iaml.operations:CancelNode"/>
+      <executionEdges from="operations.12109dbdd49.1" id="model.12109dbdceb.66" to="operations.12109dbdd49.3"/>
     </operations>
     <eventTriggers id="model.12109dbdceb.21" name="access" outEdges="wires.12109dbdd39.6">
-      <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.12109dbdd39.6" from="model.12109dbdceb.21" to="model.12109dbdceb.2d" name="run"/>
+      <wires from="model.12109dbdceb.21" id="wires.12109dbdd39.6" name="run" to="model.12109dbdceb.2d" xsi:type="iaml.wires:RunInstanceWire"/>
     </eventTriggers>
-    <wires xsi:type="iaml.wires:NavigateWire" id="wires.12109dbdd39.1a" from="visual.12109dbdd39.8" to="visual.12109dbdd39.37" name="fail"/>
+    <wires from="visual.12109dbdd39.8" id="wires.12109dbdd39.1a" name="fail" to="visual.12109dbdd39.37" xsi:type="iaml.wires:NavigateWire"/>
   </scopes>
-  <scopes xsi:type="iaml.visual:Frame" id="visual.12109dbdd39.37" name="expected failure page" inEdges="wires.12109dbdd39.1a"/>
+  <scopes id="visual.12109dbdd39.37" inEdges="wires.12109dbdd39.1a" name="expected failure page" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4"/>
 </iaml:InternetApplication>

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="model.11d0841c6f5.a" name="test">
-  <scopes xsi:type="iaml.visual:Frame" id="visual.11d0841c753.5" name="on-page">
-    <children xsi:type="iaml.visual:InputTextField" id="name1" name="name1" outEdges="wires.11d0841c753.6">
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.11d0841c753.6" from="name1" to="name2" name="sync1"/>
+<iaml:InternetApplication xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="model.11d0841c6f5.a" name="test" xmi:version="2.0">
+  <scopes id="visual.11d0841c753.5" name="on-page" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
+    <children id="name1" name="name1" outEdges="wires.11d0841c753.6" xsi:type="iaml.visual:InputTextField">
+      <wires from="name1" id="wires.11d0841c753.6" name="sync1" to="name2" xsi:type="iaml.wires:SyncWire"/>
     </children>
-    <children xsi:type="iaml.visual:InputTextField" id="name2" name="name2" outEdges="wires.11d0841c753.7" inEdges="wires.11d0841c753.6">
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.11d0841c753.7" from="name2" to="name3" name="sync2"/>
+    <children id="name2" inEdges="wires.11d0841c753.6" name="name2" outEdges="wires.11d0841c753.7" xsi:type="iaml.visual:InputTextField">
+      <wires from="name2" id="wires.11d0841c753.7" name="sync2" to="name3" xsi:type="iaml.wires:SyncWire"/>
     </children>
-    <children xsi:type="iaml.visual:InputTextField" id="name3" name="name3" outEdges="wires.11d0841c753.8" inEdges="wires.11d0841c753.7">
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.11d0841c753.8" from="name3" to="name4" name="sync3"/>
+    <children id="name3" inEdges="wires.11d0841c753.7" name="name3" outEdges="wires.11d0841c753.8" xsi:type="iaml.visual:InputTextField">
+      <wires from="name3" id="wires.11d0841c753.8" name="sync3" to="name4" xsi:type="iaml.wires:SyncWire"/>
     </children>
-    <children xsi:type="iaml.visual:InputTextField" id="name4" name="name4" inEdges="wires.11d0841c753.8"/>
-    <children xsi:type="iaml.visual:InputForm" id="visual.11d0841c753.2b" name="form that shouldn't exist (but jwebunit complains otherwise)"/>
-    <children xsi:type="iaml.visual:InputTextField" id="unrelated-field" name="unrelated-field"/>
+    <children id="name4" inEdges="wires.11d0841c753.8" name="name4" xsi:type="iaml.visual:InputTextField"/>
+    <children id="visual.11d0841c753.2b" name="form that shouldn't exist (but jwebunit complains otherwise)" xsi:type="iaml.visual:InputForm"/>
+    <children id="unrelated-field" name="unrelated-field" xsi:type="iaml.visual:InputTextField"/>
   </scopes>
 </iaml:InternetApplication>

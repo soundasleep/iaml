@@ -99,13 +99,13 @@ echo_necessary_update_callbacks();
 			. escape_parameter_string("«safeName()»")
 			/* expand out all parameters */
 			«EXPAND clientSideOperationCallParamater(wire)
-				FOREACH wire.inEdges.typeSelect(model::wires::ParameterWire)»
+				FOREACH wire.inParameterEdges»
 			);
 		echo "\ncall_operation " 
 			. escape_parameter_string("«safeName()»")
 			/* expand out all parameters */
 			«EXPAND clientSideOperationCallParamater(wire)
-				FOREACH wire.inEdges.typeSelect(model::wires::ParameterWire)»
+				FOREACH wire.inParameterEdges»
 			;
 	}
 «ENDDEFINE»
@@ -113,7 +113,7 @@ echo_necessary_update_callbacks();
 /**
  * The parameter to pass to the client.
  */
-«DEFINE clientSideOperationCallParamater(model::wires::RunInstanceWire wire) FOR model::wires::ParameterWire»
+«DEFINE clientSideOperationCallParamater(model::wires::RunInstanceWire wire) FOR model::wires::ParameterEdge»
 	. " " . escape_parameter_string(«EXPAND template::operations::Parameters::callParameterValue(true, wire, false, null) FOR from»)
 «ENDDEFINE»
 

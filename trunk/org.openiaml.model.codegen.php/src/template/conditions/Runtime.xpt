@@ -8,7 +8,7 @@
 «DEFINE callCondition(Boolean php, model::WireEdge wire, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::wires::ConditionWire»
 	/* ConditionWire: «this-» */
 	condition_«conditionName(from)»(
-		«EXPAND template::operations::Parameters::callParameter(php, wire, inStoreDb, false, currentFrame) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»
+		«EXPAND template::operations::Parameters::callParameter(php, wire, inStoreDb, false, currentFrame) FOREACH inParameterEdges SEPARATOR ", "»
 	)
 «ENDDEFINE»
 
@@ -16,7 +16,7 @@
 	/* ConditionWire: «this-» */
 	condition_«conditionName(from)»(
 		«REM»NOTE the 'gate' parameter is lost!«ENDREM»
-		«EXPAND template::operations::Parameters::callParameter(php, null, inStoreDb, false, currentFrame) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»
+		«EXPAND template::operations::Parameters::callParameter(php, null, inStoreDb, false, currentFrame) FOREACH inParameterEdges SEPARATOR ", "»
 	)
 «ENDDEFINE»
 

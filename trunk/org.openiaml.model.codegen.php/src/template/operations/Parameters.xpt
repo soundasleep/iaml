@@ -21,7 +21,7 @@
  *
  * @param addKeys add associative array keys to PHP parameters
  */
-«DEFINE callParameter(Boolean php, model::WireEdge wire, Boolean inStoreDb, Boolean addKeys, model::visual::Frame currentFrame) FOR model::wires::ParameterWire»
+«DEFINE callParameter(Boolean php, model::WireEdge wire, Boolean inStoreDb, Boolean addKeys, model::visual::Frame currentFrame) FOR model::wires::ParameterEdge»
 	«IF addKeys && php»
 		«REM»add associative keys for named parameter wires«ENDREM»
 		«IF name != null && name.length > 0»
@@ -34,7 +34,7 @@
 /**
  * Does the given parameter exist? Return 'true' or 'false'. Expected to be in PHP mode.
  */
-«DEFINE callParameterExists(model::visual::Frame currentFrame) FOR model::wires::ParameterWire»
+«DEFINE callParameterExists(model::visual::Frame currentFrame) FOR model::wires::ParameterEdge»
 	«EXPAND callParameterValueExists(currentFrame) FOR from»
 «ENDDEFINE»
 
@@ -42,7 +42,7 @@
  * The sources of parameters for parameter calls, i.e.
  * fetch the runtime value of the parameter.
  */
-«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::WireEdgesSource»
+«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::wires::ParameterEdgesSource»
 	«EXPAND exception FOR throwException("Unknown parameter wire source: " + this)»
 «ENDDEFINE»
 
@@ -224,7 +224,7 @@
  * Exists calls.
  */
 
-«DEFINE callParameterValueExists(model::visual::Frame currentFrame) FOR model::WireEdgesSource»
+«DEFINE callParameterValueExists(model::visual::Frame currentFrame) FOR model::wires::ParameterEdgesSource»
 	«EXPAND exception FOR throwException("Unknown parameter wire source: " + this)»
 «ENDDEFINE»
 

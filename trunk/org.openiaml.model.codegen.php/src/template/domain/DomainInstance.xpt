@@ -34,33 +34,33 @@
 			«REM»create a new instance of the given DomainObjectInstance«ENDREM»
 			queued_new_domain_instance('«safeNameString(object.id)»')
 		«ELSEIF name=="add role"»
-			«LET wire.inEdges.typeSelect(model::wires::ParameterWire) AS paramWires»
+			«LET wire.inParameterEdges AS paramWires»
 				«IF paramWires.size != 1»
-					«EXPAND exception FOR throwException("Expected exactly one incoming ParameterWire for add_role, got: " + paramWires.size)»
+					«EXPAND exception FOR throwException("Expected exactly one incoming ParameterEdge for add_role, got: " + paramWires.size)»
 				«ELSE»
 					queued_add_role(«EXPAND template::operations::Parameters::callParameter(php, wire, false, false, currentFrame) FOR paramWires.first()», '«safeNameString(object.id)-»')
 				«ENDIF»
 			«ENDLET»
 		«ELSEIF name=="add permission"»
-			«LET wire.inEdges.typeSelect(model::wires::ParameterWire) AS paramWires»
+			«LET wire.inParameterEdges AS paramWires»
 				«IF paramWires.size != 1»
-					«EXPAND exception FOR throwException("Expected exactly one incoming ParameterWire for add_permission, got: " + paramWires.size)»
+					«EXPAND exception FOR throwException("Expected exactly one incoming ParameterEdge for add_permission, got: " + paramWires.size)»
 				«ELSE»
 					queued_add_permission(«EXPAND template::operations::Parameters::callParameter(php, wire, false, false, currentFrame) FOR paramWires.first()», '«safeNameString(object.id)-»')
 				«ENDIF»
 			«ENDLET»
 		«ELSEIF name=="remove role"»
-			«LET wire.inEdges.typeSelect(model::wires::ParameterWire) AS paramWires»
+			«LET wire.inParameterEdges AS paramWires»
 				«IF paramWires.size != 1»
-					«EXPAND exception FOR throwException("Expected exactly one incoming ParameterWire for remove_role, got: " + paramWires.size)»
+					«EXPAND exception FOR throwException("Expected exactly one incoming ParameterEdge for remove_role, got: " + paramWires.size)»
 				«ELSE»
 					queued_remove_role(«EXPAND template::operations::Parameters::callParameter(php, wire, false, false, currentFrame) FOR paramWires.first()», '«safeNameString(object.id)-»')
 				«ENDIF»
 			«ENDLET»
 		«ELSEIF name=="remove permission"»
-			«LET wire.inEdges.typeSelect(model::wires::ParameterWire) AS paramWires»
+			«LET wire.inParameterEdges AS paramWires»
 				«IF paramWires.size != 1»
-					«EXPAND exception FOR throwException("Expected exactly one incoming ParameterWire for remove_permission, got: " + paramWires.size)»
+					«EXPAND exception FOR throwException("Expected exactly one incoming ParameterEdge for remove_permission, got: " + paramWires.size)»
 				«ELSE»
 					queued_remove_permission(«EXPAND template::operations::Parameters::callParameter(php, wire, false, false, currentFrame) FOR paramWires.first()», '«safeNameString(object.id)-»')
 				«ENDIF»

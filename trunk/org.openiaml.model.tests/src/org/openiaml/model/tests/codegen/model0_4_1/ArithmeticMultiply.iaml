@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="model.12542c563bb.1b">
-  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
-    <children xsi:type="iaml.visual:InputTextField" id="visual.12542c56418.18" name="op1">
+<iaml:InternetApplication xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="model.12542c563bb.1b" xmi:version="2.0">
+  <scopes id="index" name="Home" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
+    <children id="visual.12542c56418.18" name="op1" xsi:type="iaml.visual:InputTextField">
       <properties id="model.12542c563bb.35" name="fieldValue" outFlows="model.12542c563bb.e1"/>
     </children>
-    <children xsi:type="iaml.visual:InputTextField" id="visual.12542c56418.1a" name="op2">
+    <children id="visual.12542c56418.1a" name="op2" xsi:type="iaml.visual:InputTextField">
       <properties id="model.12542c563bb.46" name="fieldValue" outFlows="model.12542c563bb.e3"/>
     </children>
-    <children xsi:type="iaml.visual:Button" id="visual.12542c56418.1e" name="calculate">
-      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.12542c56428.3" id="model.12542c563bb.81" name="do calculation">
-        <operations xsi:type="iaml:PrimitiveOperation" id="model.12542c563bb.dc" name="setPropertyToValue" inFlows="model.12542c563bb.e4" inExecutions="model.12542c563bb.e6" outFlows="model.12542c563bb.e5" outExecutions="model.12542c563bb.e8"/>
-        <nodes xsi:type="iaml.operations:StartNode" id="operations.12542c56428.5" outExecutions="model.12542c563bb.e6"/>
-        <nodes xsi:type="iaml.operations:FinishNode" id="operations.12542c56428.7" inExecutions="model.12542c563bb.e8"/>
-        <nodes xsi:type="iaml.operations:Arithmetic" id="operations.12542c56428.10" inFlows="model.12542c563bb.e1 model.12542c563bb.e3" outFlows="model.12542c563bb.e4" operationType="MULTIPLY"/>
-        <dataEdges id="model.12542c563bb.e1" from="model.12542c563bb.35" to="operations.12542c56428.10"/>
-        <dataEdges id="model.12542c563bb.e3" from="model.12542c563bb.46" to="operations.12542c56428.10"/>
-        <dataEdges id="model.12542c563bb.e4" from="operations.12542c56428.10" to="model.12542c563bb.dc"/>
-        <dataEdges id="model.12542c563bb.e5" from="model.12542c563bb.dc" to="model.12542c563bb.5f"/>
-        <executionEdges id="model.12542c563bb.e6" from="operations.12542c56428.5" to="model.12542c563bb.dc"/>
-        <executionEdges id="model.12542c563bb.e8" from="model.12542c563bb.dc" to="operations.12542c56428.7"/>
+    <children id="visual.12542c56418.1e" name="calculate" xsi:type="iaml.visual:Button">
+      <operations id="model.12542c563bb.81" inEdges="wires.12542c56428.3" name="do calculation" xsi:type="iaml:CompositeOperation">
+        <operations id="model.12542c563bb.dc" inExecutions="model.12542c563bb.e6" inFlows="model.12542c563bb.e4" name="setPropertyToValue" outExecutions="model.12542c563bb.e8" outFlows="model.12542c563bb.e5" xsi:type="iaml:PrimitiveOperation"/>
+        <nodes id="operations.12542c56428.5" outExecutions="model.12542c563bb.e6" xsi:type="iaml.operations:StartNode"/>
+        <nodes id="operations.12542c56428.7" inExecutions="model.12542c563bb.e8" xsi:type="iaml.operations:FinishNode"/>
+        <nodes id="operations.12542c56428.10" inFlows="model.12542c563bb.e1 model.12542c563bb.e3" operationType="MULTIPLY" outFlows="model.12542c563bb.e4" xsi:type="iaml.operations:Arithmetic"/>
+        <dataEdges from="model.12542c563bb.35" id="model.12542c563bb.e1" to="operations.12542c56428.10"/>
+        <dataEdges from="model.12542c563bb.46" id="model.12542c563bb.e3" to="operations.12542c56428.10"/>
+        <dataEdges from="operations.12542c56428.10" id="model.12542c563bb.e4" to="model.12542c563bb.dc"/>
+        <dataEdges from="model.12542c563bb.dc" id="model.12542c563bb.e5" to="model.12542c563bb.5f"/>
+        <executionEdges from="operations.12542c56428.5" id="model.12542c563bb.e6" to="model.12542c563bb.dc"/>
+        <executionEdges from="model.12542c563bb.dc" id="model.12542c563bb.e8" to="operations.12542c56428.7"/>
       </operations>
       <eventTriggers id="model.12542c563bb.80" name="click" outEdges="wires.12542c56428.3">
-        <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.12542c56428.3" from="model.12542c563bb.80" to="model.12542c563bb.81" name="run"/>
+        <wires from="model.12542c563bb.80" id="wires.12542c56428.3" name="run" to="model.12542c563bb.81" xsi:type="iaml.wires:RunInstanceWire"/>
       </eventTriggers>
     </children>
-    <children xsi:type="iaml.visual:InputTextField" id="visual.12542c56418.1f" name="result">
-      <properties id="model.12542c563bb.5f" name="fieldValue" inFlows="model.12542c563bb.e5"/>
+    <children id="visual.12542c56418.1f" name="result" xsi:type="iaml.visual:InputTextField">
+      <properties id="model.12542c563bb.5f" inFlows="model.12542c563bb.e5" name="fieldValue"/>
     </children>
   </scopes>
 </iaml:InternetApplication>

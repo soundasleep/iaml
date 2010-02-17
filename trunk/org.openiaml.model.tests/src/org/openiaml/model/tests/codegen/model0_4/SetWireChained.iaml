@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="model.12311ff1569.25f">
-  <scopes xsi:type="iaml.visual:Frame" id="visual.12311ff15c6.f8" name="Home">
-    <children xsi:type="iaml.visual:InputTextField" id="visual.12311ff15c6.ff" name="source" outEdges="wires.12311ff15e6.21">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.12311ff15e6.21" from="visual.12311ff15c6.ff" to="visual.12311ff15c6.100" name="set"/>
+<iaml:InternetApplication xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="model.12311ff1569.25f" xmi:version="2.0">
+  <scopes id="visual.12311ff15c6.f8" name="Home" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
+    <children id="visual.12311ff15c6.ff" name="source" outEdges="wires.12311ff15e6.21" xsi:type="iaml.visual:InputTextField">
+      <wires from="visual.12311ff15c6.ff" id="wires.12311ff15e6.21" name="set" to="visual.12311ff15c6.100" xsi:type="iaml.wires:SetWire"/>
     </children>
-    <children xsi:type="iaml.visual:InputTextField" id="visual.12311ff15c6.100" name="target" outEdges="wires.12311ff15e6.49" inEdges="wires.12311ff15e6.21">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.12311ff15e6.49" from="visual.12311ff15c6.100" to="visual.12311ff15c6.120" name="set"/>
-    </children>
-  </scopes>
-  <scopes xsi:type="iaml.visual:Frame" id="visual.12311ff15c6.10f" name="page2">
-    <children xsi:type="iaml.visual:InputTextField" id="visual.12311ff15c6.120" name="source target" outEdges="wires.12311ff15e6.27" inEdges="wires.12311ff15e6.49">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.12311ff15e6.27" from="visual.12311ff15c6.120" to="visual.12311ff15c6.121" name="set"/>
-    </children>
-    <children xsi:type="iaml.visual:InputTextField" id="visual.12311ff15c6.121" name="on-page target" outEdges="wires.12311ff15e6.38" inEdges="wires.12311ff15e6.27">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.12311ff15e6.38" from="visual.12311ff15c6.121" to="visual.12311ff15c6.14c" name="set"/>
+    <children id="visual.12311ff15c6.100" inEdges="wires.12311ff15e6.21" name="target" outEdges="wires.12311ff15e6.49" xsi:type="iaml.visual:InputTextField">
+      <wires from="visual.12311ff15c6.100" id="wires.12311ff15e6.49" name="set" to="visual.12311ff15c6.120" xsi:type="iaml.wires:SetWire"/>
     </children>
   </scopes>
-  <scopes xsi:type="iaml.visual:Frame" id="visual.12311ff15c6.130" name="page3">
-    <children xsi:type="iaml.visual:InputTextField" id="visual.12311ff15c6.14c" name="final target" inEdges="wires.12311ff15e6.38"/>
+  <scopes id="visual.12311ff15c6.10f" name="page2" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
+    <children id="visual.12311ff15c6.120" inEdges="wires.12311ff15e6.49" name="source target" outEdges="wires.12311ff15e6.27" xsi:type="iaml.visual:InputTextField">
+      <wires from="visual.12311ff15c6.120" id="wires.12311ff15e6.27" name="set" to="visual.12311ff15c6.121" xsi:type="iaml.wires:SetWire"/>
+    </children>
+    <children id="visual.12311ff15c6.121" inEdges="wires.12311ff15e6.27" name="on-page target" outEdges="wires.12311ff15e6.38" xsi:type="iaml.visual:InputTextField">
+      <wires from="visual.12311ff15c6.121" id="wires.12311ff15e6.38" name="set" to="visual.12311ff15c6.14c" xsi:type="iaml.wires:SetWire"/>
+    </children>
+  </scopes>
+  <scopes id="visual.12311ff15c6.130" name="page3" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
+    <children id="visual.12311ff15c6.14c" inEdges="wires.12311ff15e6.38" name="final target" xsi:type="iaml.visual:InputTextField"/>
   </scopes>
 </iaml:InternetApplication>

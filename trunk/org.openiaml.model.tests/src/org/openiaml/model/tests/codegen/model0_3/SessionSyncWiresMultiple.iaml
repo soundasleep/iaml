@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="root">
-  <scopes xsi:type="iaml.visual:Frame" id="outside1" name="outside1" outEdges="sync1">
-    <wires xsi:type="iaml.wires:SyncWire" id="sync1" from="outside1" to="outside2" name="sync outside"/>
-    <children xsi:type="iaml.visual:InputTextField" id="o1_target" name="target"/>
+<iaml:InternetApplication xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="root" xmi:version="2.0">
+  <scopes id="outside1" name="outside1" outEdges="sync1" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
+    <wires from="outside1" id="sync1" name="sync outside" to="outside2" xsi:type="iaml.wires:SyncWire"/>
+    <children id="o1_target" name="target" xsi:type="iaml.visual:InputTextField"/>
   </scopes>
-  <scopes xsi:type="iaml.visual:Frame" id="outside2" name="outside2" outEdges="sync2" inEdges="sync1">
-    <wires xsi:type="iaml.wires:SyncWire" id="sync2" from="outside2" to="inside1" name="sync to inside"/>
-    <children xsi:type="iaml.visual:InputTextField" id="o2_target" name="target"/>
-    <children xsi:type="iaml.visual:InputTextField" id="o2_unrelated" name="unrelated"/>
+  <scopes id="outside2" inEdges="sync1" name="outside2" outEdges="sync2" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
+    <wires from="outside2" id="sync2" name="sync to inside" to="inside1" xsi:type="iaml.wires:SyncWire"/>
+    <children id="o2_target" name="target" xsi:type="iaml.visual:InputTextField"/>
+    <children id="o2_unrelated" name="unrelated" xsi:type="iaml.visual:InputTextField"/>
   </scopes>
-  <scopes xsi:type="iaml.scopes:Session" id="scopes.120a748ed3d.31" name="session">
-    <scopes xsi:type="iaml.visual:Frame" id="inside1" name="inside1" outEdges="sync3" inEdges="sync2">
-      <wires xsi:type="iaml.wires:SyncWire" id="sync3" from="inside1" to="inside2" name="sync"/>
-      <children xsi:type="iaml.visual:InputTextField" id="i1_target" name="target"/>
+  <scopes id="scopes.120a748ed3d.31" name="session" xsi:type="iaml.scopes:Session" xmlns="http://openiaml.org/model0.4">
+    <scopes id="inside1" inEdges="sync2" name="inside1" outEdges="sync3" xsi:type="iaml.visual:Frame">
+      <wires from="inside1" id="sync3" name="sync" to="inside2" xsi:type="iaml.wires:SyncWire"/>
+      <children id="i1_target" name="target" xsi:type="iaml.visual:InputTextField"/>
     </scopes>
-    <scopes xsi:type="iaml.visual:Frame" id="inside2" name="inside2" outEdges="sync4" inEdges="sync3">
-      <wires xsi:type="iaml.wires:SyncWire" id="sync4" from="inside2" to="inside3" name="sync"/>
-      <children xsi:type="iaml.visual:InputTextField" id="i2_target" name="target"/>
+    <scopes id="inside2" inEdges="sync3" name="inside2" outEdges="sync4" xsi:type="iaml.visual:Frame">
+      <wires from="inside2" id="sync4" name="sync" to="inside3" xsi:type="iaml.wires:SyncWire"/>
+      <children id="i2_target" name="target" xsi:type="iaml.visual:InputTextField"/>
     </scopes>
-    <scopes xsi:type="iaml.visual:Frame" id="inside3" name="inside3" inEdges="sync4">
-      <children xsi:type="iaml.visual:InputTextField" id="i3_target" name="target"/>
+    <scopes id="inside3" inEdges="sync4" name="inside3" xsi:type="iaml.visual:Frame">
+      <children id="i3_target" name="target" xsi:type="iaml.visual:InputTextField"/>
     </scopes>
   </scopes>
 </iaml:InternetApplication>

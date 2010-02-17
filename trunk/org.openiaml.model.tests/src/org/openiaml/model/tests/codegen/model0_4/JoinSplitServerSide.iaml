@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="model.12311dd5ff7.1">
-  <scopes xsi:type="iaml.visual:Frame" id="visual.12311dd6084.1" name="Home">
-    <operations xsi:type="iaml:CompositeOperation" inEdges="wires.12311ff15e6.4" id="model.12311dd5ff7.c" name="target operation">
-      <operations xsi:type="iaml:PrimitiveOperation" id="model.12311e69386.13" name="setPropertyToValue" inFlows="model.12311eb1e33.36" inExecutions="model.12311e69386.21" outFlows="model.12311e69386.28" outExecutions="model.12311e69386.24"/>
-      <operations xsi:type="iaml:PrimitiveOperation" id="model.12311e69386.14" name="setPropertyToValue" inFlows="model.12311eb1e33.38" inExecutions="model.12311e69386.22" outFlows="model.12311e69386.2a" outExecutions="model.12311e69386.25"/>
-      <operations xsi:type="iaml:PrimitiveOperation" id="model.12311e69386.15" name="setPropertyToValue" inFlows="model.12311eb1e33.39" inExecutions="model.12311e69386.23" outFlows="model.12311e69386.2b" outExecutions="model.12311e69386.26"/>
-      <nodes xsi:type="iaml.operations:StartNode" id="operations.12311dd6093.3d" outExecutions="model.12311e69386.1f"/>
-      <nodes xsi:type="iaml.operations:FinishNode" id="operations.12311dd6093.3f" inExecutions="model.12311e69386.27"/>
-      <nodes xsi:type="iaml.operations:SplitNode" id="operations.12311e693f4.7" outExecutions="model.12311e69386.21 model.12311e69386.22 model.12311e69386.23" inExecutions="model.12311e69386.1f"/>
-      <nodes xsi:type="iaml.operations:JoinNode" id="operations.12311e693f4.9" outExecutions="model.12311e69386.27" inExecutions="model.12311e69386.24 model.12311e69386.25 model.12311e69386.26"/>
-      <dataEdges id="model.12311e69386.28" from="model.12311e69386.13" to="model.12311dd5ff7.167"/>
-      <dataEdges id="model.12311e69386.2a" from="model.12311e69386.14" to="model.12311dd5ff7.185"/>
-      <dataEdges id="model.12311e69386.2b" from="model.12311e69386.15" to="model.12311dd5ff7.1ab"/>
-      <dataEdges id="model.12311eb1e33.36" from="model.12311eb1e33.2e" to="model.12311e69386.13"/>
-      <dataEdges id="model.12311eb1e33.38" from="model.12311eb1e33.33" to="model.12311e69386.14"/>
-      <dataEdges id="model.12311eb1e33.39" from="model.12311eb1e33.34" to="model.12311e69386.15"/>
-      <executionEdges id="model.12311e69386.1f" from="operations.12311dd6093.3d" to="operations.12311e693f4.7"/>
-      <executionEdges id="model.12311e69386.21" from="operations.12311e693f4.7" to="model.12311e69386.13"/>
-      <executionEdges id="model.12311e69386.22" from="operations.12311e693f4.7" to="model.12311e69386.14"/>
-      <executionEdges id="model.12311e69386.23" from="operations.12311e693f4.7" to="model.12311e69386.15"/>
-      <executionEdges id="model.12311e69386.24" from="model.12311e69386.13" to="operations.12311e693f4.9"/>
-      <executionEdges id="model.12311e69386.25" from="model.12311e69386.14" to="operations.12311e693f4.9"/>
-      <executionEdges id="model.12311e69386.26" from="model.12311e69386.15" to="operations.12311e693f4.9"/>
-      <executionEdges id="model.12311e69386.27" from="operations.12311e693f4.9" to="operations.12311dd6093.3f"/>
+<iaml:InternetApplication xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="model.12311dd5ff7.1" xmi:version="2.0">
+  <scopes id="visual.12311dd6084.1" name="Home" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
+    <operations id="model.12311dd5ff7.c" inEdges="wires.12311ff15e6.4" name="target operation" xsi:type="iaml:CompositeOperation">
+      <operations id="model.12311e69386.13" inExecutions="model.12311e69386.21" inFlows="model.12311eb1e33.36" name="setPropertyToValue" outExecutions="model.12311e69386.24" outFlows="model.12311e69386.28" xsi:type="iaml:PrimitiveOperation"/>
+      <operations id="model.12311e69386.14" inExecutions="model.12311e69386.22" inFlows="model.12311eb1e33.38" name="setPropertyToValue" outExecutions="model.12311e69386.25" outFlows="model.12311e69386.2a" xsi:type="iaml:PrimitiveOperation"/>
+      <operations id="model.12311e69386.15" inExecutions="model.12311e69386.23" inFlows="model.12311eb1e33.39" name="setPropertyToValue" outExecutions="model.12311e69386.26" outFlows="model.12311e69386.2b" xsi:type="iaml:PrimitiveOperation"/>
+      <nodes id="operations.12311dd6093.3d" outExecutions="model.12311e69386.1f" xsi:type="iaml.operations:StartNode"/>
+      <nodes id="operations.12311dd6093.3f" inExecutions="model.12311e69386.27" xsi:type="iaml.operations:FinishNode"/>
+      <nodes id="operations.12311e693f4.7" inExecutions="model.12311e69386.1f" outExecutions="model.12311e69386.21 model.12311e69386.22 model.12311e69386.23" xsi:type="iaml.operations:SplitNode"/>
+      <nodes id="operations.12311e693f4.9" inExecutions="model.12311e69386.24 model.12311e69386.25 model.12311e69386.26" outExecutions="model.12311e69386.27" xsi:type="iaml.operations:JoinNode"/>
+      <dataEdges from="model.12311e69386.13" id="model.12311e69386.28" to="model.12311dd5ff7.167"/>
+      <dataEdges from="model.12311e69386.14" id="model.12311e69386.2a" to="model.12311dd5ff7.185"/>
+      <dataEdges from="model.12311e69386.15" id="model.12311e69386.2b" to="model.12311dd5ff7.1ab"/>
+      <dataEdges from="model.12311eb1e33.2e" id="model.12311eb1e33.36" to="model.12311e69386.13"/>
+      <dataEdges from="model.12311eb1e33.33" id="model.12311eb1e33.38" to="model.12311e69386.14"/>
+      <dataEdges from="model.12311eb1e33.34" id="model.12311eb1e33.39" to="model.12311e69386.15"/>
+      <executionEdges from="operations.12311dd6093.3d" id="model.12311e69386.1f" to="operations.12311e693f4.7"/>
+      <executionEdges from="operations.12311e693f4.7" id="model.12311e69386.21" to="model.12311e69386.13"/>
+      <executionEdges from="operations.12311e693f4.7" id="model.12311e69386.22" to="model.12311e69386.14"/>
+      <executionEdges from="operations.12311e693f4.7" id="model.12311e69386.23" to="model.12311e69386.15"/>
+      <executionEdges from="model.12311e69386.13" id="model.12311e69386.24" to="operations.12311e693f4.9"/>
+      <executionEdges from="model.12311e69386.14" id="model.12311e69386.25" to="operations.12311e693f4.9"/>
+      <executionEdges from="model.12311e69386.15" id="model.12311e69386.26" to="operations.12311e693f4.9"/>
+      <executionEdges from="operations.12311e693f4.9" id="model.12311e69386.27" to="operations.12311dd6093.3f"/>
       <values id="model.12311eb1e33.2e" name="value1" outFlows="model.12311eb1e33.36" value="foo"/>
       <values id="model.12311eb1e33.33" name="value2" outFlows="model.12311eb1e33.38" value="bar"/>
       <values id="model.12311eb1e33.34" name="value3" outFlows="model.12311eb1e33.39" value="baz"/>
     </operations>
     <eventTriggers id="model.12311eb1e33.140" name="access" outEdges="wires.12311ff15e6.4">
-      <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.12311ff15e6.4" from="model.12311eb1e33.140" to="model.12311dd5ff7.c" name="run"/>
+      <wires from="model.12311eb1e33.140" id="wires.12311ff15e6.4" name="run" to="model.12311dd5ff7.c" xsi:type="iaml.wires:RunInstanceWire"/>
     </eventTriggers>
-    <children xsi:type="iaml.visual:InputTextField" id="visual.12311dd6084.8a" name="field1">
-      <properties id="model.12311dd5ff7.167" name="fieldValue" inFlows="model.12311e69386.28"/>
+    <children id="visual.12311dd6084.8a" name="field1" xsi:type="iaml.visual:InputTextField">
+      <properties id="model.12311dd5ff7.167" inFlows="model.12311e69386.28" name="fieldValue"/>
     </children>
-    <children xsi:type="iaml.visual:InputTextField" id="visual.12311dd6084.8b" name="field2">
-      <properties id="model.12311dd5ff7.185" name="fieldValue" inFlows="model.12311e69386.2a"/>
+    <children id="visual.12311dd6084.8b" name="field2" xsi:type="iaml.visual:InputTextField">
+      <properties id="model.12311dd5ff7.185" inFlows="model.12311e69386.2a" name="fieldValue"/>
     </children>
-    <children xsi:type="iaml.visual:InputTextField" id="visual.12311dd6084.8c" name="field3">
-      <properties id="model.12311dd5ff7.1ab" name="fieldValue" inFlows="model.12311e69386.2b"/>
+    <children id="visual.12311dd6084.8c" name="field3" xsi:type="iaml.visual:InputTextField">
+      <properties id="model.12311dd5ff7.1ab" inFlows="model.12311e69386.2b" name="fieldValue"/>
     </children>
   </scopes>
 </iaml:InternetApplication>

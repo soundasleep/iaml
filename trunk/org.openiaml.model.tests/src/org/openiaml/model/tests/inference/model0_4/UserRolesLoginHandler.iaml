@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="model.1233b453c1f.69">
-  <scopes xsi:type="iaml.visual:Frame" id="visual.1233b453dc5.b3" name="Home"/>
-  <domainStores xsi:type="iaml.users:UserStore" id="users.1233b454017.bb" name="user store">
-    <children xsi:type="iaml.users:Role" id="users.1233b454017.c1" name="Guest"/>
-    <children xsi:type="iaml.users:Role" id="users.1233b454017.c2" name="Registered User" outEdges="wires.1233b453e32.5e" inEdges="wires.1233b453e32.66">
-      <wires xsi:type="iaml.wires:ParameterWire" id="wires.1233b453e32.5e" from="users.1233b454017.c2" to="components.1233b453f6b.39"/>
+<iaml:InternetApplication xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="model.1233b453c1f.69" xmi:version="2.0">
+  <scopes id="visual.1233b453dc5.b3" name="Home" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4"/>
+  <domainStores id="users.1233b454017.bb" name="user store" xsi:type="iaml.users:UserStore" xmlns="http://openiaml.org/model0.4">
+    <children id="users.1233b454017.c1" name="Guest" xsi:type="iaml.users:Role"/>
+    <children id="users.1233b454017.c2" inEdges="wires.1233b453e32.66" name="Registered User" outEdges="" outParameterEdges="wires.1233b453e32.5e" xsi:type="iaml.users:Role">
+      <parameterEdges from="users.1233b454017.c2" id="wires.1233b453e32.5e" to="components.1233b453f6b.39" xsi:type="iaml.wires:ParameterEdge"/>
     </children>
   </domainStores>
-  <scopes xsi:type="iaml.scopes:Session" id="scopes.1233b453efe.5b" name="my session">
-    <elements xsi:type="iaml.components:LoginHandler" id="components.1233b453f6b.39" name="user login handler" inEdges="wires.1233b453e32.5e" type="USER"/>
-    <scopes xsi:type="iaml.visual:Frame" id="visual.1233b453dc5.c2" name="target page"/>
-    <elements xsi:type="iaml.components:AccessControlHandler" id="components.1233b453f6b.41" name="access control" outEdges="wires.1233b453e32.66">
-      <wires xsi:type="iaml.wires:RequiresWire" id="wires.1233b453e32.66" from="components.1233b453f6b.41" to="users.1233b454017.c2"/>
+  <scopes id="scopes.1233b453efe.5b" name="my session" xsi:type="iaml.scopes:Session" xmlns="http://openiaml.org/model0.4">
+    <elements id="components.1233b453f6b.39" inEdges="" inParameterEdges="wires.1233b453e32.5e" name="user login handler" type="USER" xsi:type="iaml.components:LoginHandler"/>
+    <scopes id="visual.1233b453dc5.c2" name="target page" xsi:type="iaml.visual:Frame"/>
+    <elements id="components.1233b453f6b.41" name="access control" outEdges="wires.1233b453e32.66" xsi:type="iaml.components:AccessControlHandler">
+      <wires from="components.1233b453f6b.41" id="wires.1233b453e32.66" to="users.1233b454017.c2" xsi:type="iaml.wires:RequiresWire"/>
     </elements>
   </scopes>
 </iaml:InternetApplication>

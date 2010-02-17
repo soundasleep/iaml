@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.11d83490915.1c9">
-  <scopes xsi:type="iaml.visual:Frame" id="visual.11d83490a0f.4c" name="page1">
-    <children xsi:type="iaml.visual:InputForm" id="visual.11d83490a0f.55" name="form1" outEdges="wires.11d83490a7c.81">
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.11d83490a7c.81" from="visual.11d83490a0f.55" to="model.11d83490915.1ff" name="sync"/>
-      <children xsi:type="iaml.visual:InputTextField" id="visual.11d83490a0f.69" name="field1"/>
-      <children xsi:type="iaml.visual:InputTextField" id="visual.11d83490a0f.6a" name="field2"/>
+<iaml:InternetApplication xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="model.11d83490915.1c9" xmi:version="2.0">
+  <scopes id="visual.11d83490a0f.4c" name="page1" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
+    <children id="visual.11d83490a0f.55" name="form1" outEdges="wires.11d83490a7c.81" xsi:type="iaml.visual:InputForm">
+      <wires from="visual.11d83490a0f.55" id="wires.11d83490a7c.81" name="sync" to="model.11d83490915.1ff" xsi:type="iaml.wires:SyncWire"/>
+      <children id="visual.11d83490a0f.69" name="field1" xsi:type="iaml.visual:InputTextField"/>
+      <children id="visual.11d83490a0f.6a" name="field2" xsi:type="iaml.visual:InputTextField"/>
     </children>
   </scopes>
-  <domainStores xsi:type="iaml:DomainStore" id="model.11d83490915.1ce" name="domainStore1">
-    <children xsi:type="iaml:DomainObject" id="model.11d83490915.1ff" name="form1" inEdges="wires.11d83490a7c.81">
-      <attributes xsi:type="iaml:DomainAttribute" id="model.11d83490915.21e" name="field1"/>
-      <attributes xsi:type="iaml:DomainAttribute" id="model.11d83490915.21f" name="field2"/>
-      <attributes xsi:type="iaml:DomainAttribute" id="model.11d83490915.220" name="field3"/>
+  <domainStores id="model.11d83490915.1ce" name="domainStore1" xsi:type="iaml:DomainStore" xmlns="http://openiaml.org/model0.4">
+    <children id="model.11d83490915.1ff" inEdges="wires.11d83490a7c.81" name="form1" xsi:type="iaml:DomainObject">
+      <attributes id="model.11d83490915.21e" name="field1" xsi:type="iaml:DomainAttribute"/>
+      <attributes id="model.11d83490915.21f" name="field2" xsi:type="iaml:DomainAttribute"/>
+      <attributes id="model.11d83490915.220" name="field3" xsi:type="iaml:DomainAttribute"/>
     </children>
   </domainStores>
 </iaml:InternetApplication>

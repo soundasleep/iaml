@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="model.123172ceeef.24">
-  <scopes xsi:type="iaml.visual:Frame" id="visual.123172cef6c.1e" name="Home">
-    <children xsi:type="iaml.visual:InputTextField" id="visual.123172cef6c.25" name="current name" inEdges="wires.123172cef6c.f"/>
-    <parameters id="model.123172ceeef.2a" name="name" outEdges="wires.123172cef6c.f" defaultValue="empty">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.123172cef6c.f" from="model.123172ceeef.2a" to="visual.123172cef6c.25" name="set"/>
+<iaml:InternetApplication xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="model.123172ceeef.24" xmi:version="2.0">
+  <scopes id="visual.123172cef6c.1e" name="Home" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
+    <children id="visual.123172cef6c.25" inEdges="wires.123172cef6c.f" name="current name" xsi:type="iaml.visual:InputTextField"/>
+    <parameters defaultValue="empty" id="model.123172ceeef.2a" name="name" outEdges="wires.123172cef6c.f">
+      <wires from="model.123172ceeef.2a" id="wires.123172cef6c.f" name="set" to="visual.123172cef6c.25" xsi:type="iaml.wires:SetWire"/>
     </parameters>
   </scopes>
 </iaml:InternetApplication>

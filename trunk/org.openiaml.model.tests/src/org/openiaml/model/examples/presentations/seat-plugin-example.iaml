@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.121a45a251b.f" runtimeUrl="http://localhost:8080/runtime-EclipseApplication2/examples/output/">
-  <children xsi:type="iaml.visual:Page" id="visual.121a45a2653.9" name="synchronising on-page">
-    <children xsi:type="iaml.visual:InputTextField" id="visual.121a45a2653.10" name="source" outEdges="wires.121a45a270f.7">
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.121a45a270f.7" from="visual.121a45a2653.10" to="visual.121a45a2653.19" name="sync"/>
-      <properties id="model.121a45a251b.4c" name="fieldValue" outEdges="wires.121a45a270f.71">
-        <wires xsi:type="iaml.wires:ParameterWire" id="wires.121a45a270f.71" from="model.121a45a251b.4c" to="wires.121a45a270f.70"/>
+<iaml:InternetApplication xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="model.121a45a251b.f" runtimeUrl="http://localhost:8080/runtime-EclipseApplication2/examples/output/" xmi:version="2.0">
+  <scopes id="visual.121a45a2653.9" name="synchronising on-page" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
+    <children id="visual.121a45a2653.10" name="source" outEdges="wires.121a45a270f.7" xsi:type="iaml.visual:InputTextField">
+      <wires from="visual.121a45a2653.10" id="wires.121a45a270f.7" name="sync" to="visual.121a45a2653.19" xsi:type="iaml.wires:SyncWire"/>
+      <properties id="model.121a45a251b.4c" name="fieldValue" outEdges="" outParameterEdges="wires.121a45a270f.71">
+        <parameterEdges from="model.121a45a251b.4c" id="wires.121a45a270f.71" to="wires.121a45a270f.70" xsi:type="iaml.wires:ParameterEdge"/>
       </properties>
     </children>
-    <children xsi:type="iaml.visual:InputTextField" id="visual.121a45a2653.19" name="automatic target" inEdges="wires.121a45a270f.7"/>
-    <children xsi:type="iaml.visual:InputTextField" id="visual.121a45a2653.1a" name="manual target">
-      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.121a45a270f.70" id="model.121a45a251b.b3" name="update"/>
+    <children id="visual.121a45a2653.19" inEdges="wires.121a45a270f.7" name="automatic target" xsi:type="iaml.visual:InputTextField"/>
+    <children id="visual.121a45a2653.1a" name="manual target" xsi:type="iaml.visual:InputTextField">
+      <operations id="model.121a45a251b.b3" inEdges="wires.121a45a270f.70" name="update" xsi:type="iaml:CompositeOperation"/>
     </children>
-    <children xsi:type="iaml.visual:InputTextField" id="visual.121a45a2653.24" name="does nothing"/>
-    <children xsi:type="iaml.visual:Button" id="visual.121a45a2653.ca" name="do manual sync">
+    <children id="visual.121a45a2653.24" name="does nothing" xsi:type="iaml.visual:InputTextField"/>
+    <children id="visual.121a45a2653.ca" name="do manual sync" xsi:type="iaml.visual:Button">
       <eventTriggers id="model.121a45a251b.7f" name="onClick" outEdges="wires.121a45a270f.70">
-        <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.121a45a270f.70" from="model.121a45a251b.7f" to="model.121a45a251b.b3" name="run" inEdges="wires.121a45a270f.71"/>
+        <wires from="model.121a45a251b.7f" id="wires.121a45a270f.70" inEdges="" inParameterEdges="wires.121a45a270f.71" name="run" to="model.121a45a251b.b3" xsi:type="iaml.wires:RunInstanceWire"/>
       </eventTriggers>
     </children>
-  </children>
+  </scopes>
 </iaml:InternetApplication>

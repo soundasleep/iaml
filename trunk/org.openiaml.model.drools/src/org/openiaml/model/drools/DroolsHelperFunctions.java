@@ -201,6 +201,25 @@ public class DroolsHelperFunctions {
 		
 		return q;
 	}
+	
+	public String getQueryString(LoginHandler login_handler, DomainObject dobj) {
+		String q = "";
+		for (ParameterEdge wire : login_handler.getInParameterEdges()) {
+			if (wire.getFrom() instanceof DomainAttribute &&
+					dobj.equals(wire.getFrom().eContainer())) {
+				// add this attribute as a query
+				DomainAttribute attribute = (DomainAttribute) wire.getFrom();
+				if (notPrimaryKey(attribute)) {
+					if (!q.isEmpty()) {
+						q += " and ";
+					}
+					q += attribute.getName() + " = :" + attribute.getName();
+				} 
+			}
+		}
+		
+		return q;
+	}
 
 	public boolean nameMatches(NamedElement e1, NamedElement e2) {
 		return e1.getName().toLowerCase().equals(e2.getName().toLowerCase());

@@ -108,6 +108,7 @@ digraph {
   "org.openiaml.model.actions" -> "org.eclipse.core.resources";
   "org.openiaml.model.actions" -> "org.eclipse.core.runtime";
   "org.openiaml.model.actions" -> "org.eclipse.emf.ecore";
+  "org.openiaml.model.actions" -> "org.eclipse.emf.ecore.xmi";
   "org.openiaml.model.actions" -> "org.eclipse.jface";
   "org.openiaml.model.actions" -> "org.eclipse.ui";
   "org.openiaml.model.actions" -> "org.openiaml.model";

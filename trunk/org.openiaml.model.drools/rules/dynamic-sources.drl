@@ -116,8 +116,8 @@ end
  *
  * not (
  *   tw_cw : ConditionWire ( from == condition, to == tw ) and 
- *   tw_pw : ParameterWire ( from == ds, to == tw_cw ) and
- *   tw_pw2 : ParameterWire ( from == target, to == tw_cw )
+ *   tw_pw : ParameterEdge ( from == ds, to == tw_cw ) and
+ *   tw_pw2 : ParameterEdge ( from == target, to == tw_cw )
  * )
  *
  * In order to satisfy our requirement that there are no more than
@@ -144,11 +144,11 @@ rule "Create the XPath ConditionWire for generated SyncWires"
 		
 		# Create the contents like normal
 
-		ParameterWire pwt = handler.generatedParameterWire( cwt, cwt, ds, cwt);
+		ParameterEdge pwt = handler.generatedParameterEdge( cwt, cwt, ds, cwt);
 		handler.setName(pwt, "[xpath] from ds 2");
 		queue.add(pwt, drools);		 
 
-		ParameterWire pwt2 = handler.generatedParameterWire( cwt, cwt, target, cwt);
+		ParameterEdge pwt2 = handler.generatedParameterEdge( cwt, cwt, target, cwt);
 		handler.setName(pwt2, "[xpath] from target");
 		queue.add(pwt2, drools);
 
@@ -157,7 +157,7 @@ end
 /**
  * This is a decomposition of the rule above.
  */
-rule "Connect ParameterWires to empty ConditionWire for XPath"
+rule "Connect ParameterEdges to empty ConditionWire for XPath"
 	when
 		container : InternetApplication( )
 		ds : DynamicApplicationElementSet( eval(functions.isXPath(query)), overridden == false, eContainer == container )
@@ -169,20 +169,20 @@ rule "Connect ParameterWires to empty ConditionWire for XPath"
 		cwt : ConditionWire ( from == condition, to == tw )
 		not (
 			#tw_cw : ConditionWire ( from == condition, to == tw ) and
-			tw_pw : ParameterWire ( from == ds, to == cwt ) 
+			tw_pw : ParameterEdge ( from == ds, to == cwt ) 
 			#and
-			#tw_pw2 : ParameterWire ( from == target, to == tw_cw )
+			#tw_pw2 : ParameterEdge ( from == target, to == tw_cw )
 		)
 	
 	then
 		# We have a ConditionWire that does not have any parameters:
 		# connect the parameters up to the wire
 
-		ParameterWire pwt = handler.generatedParameterWire( cwt, cwt, ds, cwt);
+		ParameterEdge pwt = handler.generatedParameterEdge( cwt, cwt, ds, cwt);
 		handler.setName(pwt, "[xpath] from ds 2");
 		queue.add(pwt, drools);		 
 
-		ParameterWire pwt2 = handler.generatedParameterWire( cwt, cwt, target, cwt);
+		ParameterEdge pwt2 = handler.generatedParameterEdge( cwt, cwt, target, cwt);
 		handler.setName(pwt2, "[xpath] from target");
 		queue.add(pwt2, drools);
 

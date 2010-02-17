@@ -48,7 +48,7 @@ public abstract class InferenceTestCaseWithConditionWires extends InferenceTestC
 			ConditionWire condition = (ConditionWire) wire;
 
 			Set<ParameterEdge> params = getParameterEdgesFromTo(container, page, condition);
-			assertNotEqual("Unexpectedly found ParameterEdge: " + params, 0, params.size());
+			assertEquals("Unexpectedly found ParameterEdge: " + params, 0, params.size());
 		}
 		
 	}
@@ -153,9 +153,7 @@ public abstract class InferenceTestCaseWithConditionWires extends InferenceTestC
 		Set<WireEdge> conditions = getWiresFromTo(root, cond, rw);
 		
 		boolean checksPage1 = false;
-		
-		List<WireEdge> froms = new ArrayList<WireEdge>();
-		
+
 		for (WireEdge wire : conditions) {
 			ConditionWire cw = (ConditionWire) wire;
 			
@@ -163,25 +161,16 @@ public abstract class InferenceTestCaseWithConditionWires extends InferenceTestC
 			getParameterEdgeFromTo(root, dae, cw);
 
 			// but one wire should have page1, the other should have page2
-			if (hasWireFromTo(root, page1, cw)) {
+			if (getParameterEdgesFromTo(root, page1, cw).size() == 1) {
 				checksPage1 = true;
 			}
-			
-			froms.addAll( getWiresTo(root, cw) );
+
 		}
 		
-		try {
-			assertTrue("Page1 '" + page1 + "' should be connected to: " + cond, checksPage1);
+		assertTrue("Page1 '" + page1 + "' should be connected to: " + cond, checksPage1);
 
-			// should only be two conditions: page1 matches xpath, page2 matches xpath
-			assertEquals(1, conditions.size());
-		} catch (AssertionFailedError e) {
-			// print out those that ARE connected
-			for (WireEdge w : froms) {
-				System.err.println(w.getFrom());
-			}
-			throw e;		// rethrow
-		}
+		// should only be two conditions: page1 matches xpath, page2 matches xpath
+		assertEquals(1, conditions.size());
 	}
 	
 	/**

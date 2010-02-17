@@ -117,10 +117,10 @@ public class SavedRuleSources extends InferenceTestCase {
 		// all the ConditionWires need parameters: the XPath source, and the element to evaluate
 		ParameterEdge param1 = getParameterEdgeFromTo(root, dae, srcCw);
 		assertTrue(param1.isIsGenerated());
-		assertEquals("Connect ParameterWires to ConditionWires connected to RunInstanceWires created by SyncWires (edit/update)", param1.getGeneratedRule());
+		assertEquals("Connect ParameterEdges to ConditionWires connected to RunInstanceWires created by SyncWires (edit/update)", param1.getGeneratedRule());
 		ParameterEdge param2 = getParameterEdgeFromTo(root, dae, targetCw); 
 		assertTrue(param2.isIsGenerated());
-		assertEquals("Connect ParameterWires to ConditionWires connected to RunInstanceWires created by SyncWires (edit/update)", param2.getGeneratedRule());
+		assertEquals("Connect ParameterEdges to ConditionWires connected to RunInstanceWires created by SyncWires (edit/update)", param2.getGeneratedRule());
 
 
 	}

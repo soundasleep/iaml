@@ -7,7 +7,6 @@
 package org.openiaml.model.model.users;
 
 import org.openiaml.model.model.DomainObject;
-import org.openiaml.model.model.wires.ExtendsWire;
 
 /**
  * <!-- begin-user-doc -->

@@ -226,13 +226,22 @@ public interface WiresPackage extends EPackage {
 	int COMPOSITE_WIRE__PARAMETER_EDGES = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Extends Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_WIRE__EXTENDS_EDGES = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE__GENERATED_ELEMENTS = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 3;
+	int COMPOSITE_WIRE__GENERATED_ELEMENTS = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
@@ -241,7 +250,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE__OVERRIDDEN = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 4;
+	int COMPOSITE_WIRE__OVERRIDDEN = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
@@ -250,7 +259,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE__CONDITIONS = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 5;
+	int COMPOSITE_WIRE__CONDITIONS = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -259,7 +268,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE__CHILDREN = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 6;
+	int COMPOSITE_WIRE__CHILDREN = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -268,7 +277,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE__PROPERTIES = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 7;
+	int COMPOSITE_WIRE__PROPERTIES = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -277,7 +286,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE__OPERATIONS = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 8;
+	int COMPOSITE_WIRE__OPERATIONS = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Event Triggers</b></em>' containment reference list.
@@ -286,7 +295,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE__EVENT_TRIGGERS = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 9;
+	int COMPOSITE_WIRE__EVENT_TRIGGERS = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -295,7 +304,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE__PARAMETERS = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 10;
+	int COMPOSITE_WIRE__PARAMETERS = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
@@ -304,7 +313,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE__VALUES = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 11;
+	int COMPOSITE_WIRE__VALUES = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 12;
 
 	/**
 	 * The number of structural features of the '<em>Composite Wire</em>' class.
@@ -313,7 +322,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE_FEATURE_COUNT = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 12;
+	int COMPOSITE_WIRE_FEATURE_COUNT = ModelPackage.WIRE_EDGE_FEATURE_COUNT + 13;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.wires.impl.SyncWireImpl <em>Sync Wire</em>}' class.
@@ -405,6 +414,15 @@ public interface WiresPackage extends EPackage {
 	 * @ordered
 	 */
 	int SYNC_WIRE__PARAMETER_EDGES = COMPOSITE_WIRE__PARAMETER_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Extends Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SYNC_WIRE__EXTENDS_EDGES = COMPOSITE_WIRE__EXTENDS_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
@@ -604,6 +622,15 @@ public interface WiresPackage extends EPackage {
 	 * @ordered
 	 */
 	int RUN_INSTANCE_WIRE__PARAMETER_EDGES = COMPOSITE_WIRE__PARAMETER_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Extends Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RUN_INSTANCE_WIRE__EXTENDS_EDGES = COMPOSITE_WIRE__EXTENDS_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
@@ -905,6 +932,15 @@ public interface WiresPackage extends EPackage {
 	int SET_WIRE__PARAMETER_EDGES = COMPOSITE_WIRE__PARAMETER_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Extends Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SET_WIRE__EXTENDS_EDGES = COMPOSITE_WIRE__EXTENDS_EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1095,6 +1131,15 @@ public interface WiresPackage extends EPackage {
 	int NAVIGATE_WIRE__PARAMETER_EDGES = COMPOSITE_WIRE__PARAMETER_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Extends Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAVIGATE_WIRE__EXTENDS_EDGES = COMPOSITE_WIRE__EXTENDS_EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1283,6 +1328,15 @@ public interface WiresPackage extends EPackage {
 	 * @ordered
 	 */
 	int SELECT_WIRE__PARAMETER_EDGES = COMPOSITE_WIRE__PARAMETER_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Extends Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SELECT_WIRE__EXTENDS_EDGES = COMPOSITE_WIRE__EXTENDS_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
@@ -1502,6 +1556,15 @@ public interface WiresPackage extends EPackage {
 	int CONDITION_WIRE__PARAMETER_EDGES = COMPOSITE_WIRE__PARAMETER_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Extends Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONDITION_WIRE__EXTENDS_EDGES = COMPOSITE_WIRE__EXTENDS_EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1701,6 +1764,15 @@ public interface WiresPackage extends EPackage {
 	int NEW_INSTANCE_WIRE__PARAMETER_EDGES = COMPOSITE_WIRE__PARAMETER_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Extends Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NEW_INSTANCE_WIRE__EXTENDS_EDGES = COMPOSITE_WIRE__EXTENDS_EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1791,14 +1863,14 @@ public interface WiresPackage extends EPackage {
 	int NEW_INSTANCE_WIRE_FEATURE_COUNT = COMPOSITE_WIRE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.openiaml.model.model.wires.impl.ExtendsWireImpl <em>Extends Wire</em>}' class.
+	 * The meta object id for the '{@link org.openiaml.model.model.wires.impl.ExtendsEdgeImpl <em>Extends Edge</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.openiaml.model.model.wires.impl.ExtendsWireImpl
-	 * @see org.openiaml.model.model.wires.impl.WiresPackageImpl#getExtendsWire()
+	 * @see org.openiaml.model.model.wires.impl.ExtendsEdgeImpl
+	 * @see org.openiaml.model.model.wires.impl.WiresPackageImpl#getExtendsEdge()
 	 * @generated
 	 */
-	int EXTENDS_WIRE = 10;
+	int EXTENDS_EDGE = 10;
 
 	/**
 	 * The feature id for the '<em><b>Generated By</b></em>' reference list.
@@ -1807,7 +1879,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXTENDS_WIRE__GENERATED_BY = SINGLE_WIRE__GENERATED_BY;
+	int EXTENDS_EDGE__GENERATED_BY = ModelPackage.GENERATED_ELEMENT__GENERATED_BY;
 
 	/**
 	 * The feature id for the '<em><b>Is Generated</b></em>' attribute.
@@ -1816,7 +1888,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXTENDS_WIRE__IS_GENERATED = SINGLE_WIRE__IS_GENERATED;
+	int EXTENDS_EDGE__IS_GENERATED = ModelPackage.GENERATED_ELEMENT__IS_GENERATED;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1825,7 +1897,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXTENDS_WIRE__ID = SINGLE_WIRE__ID;
+	int EXTENDS_EDGE__ID = ModelPackage.GENERATED_ELEMENT__ID;
 
 	/**
 	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
@@ -1834,7 +1906,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXTENDS_WIRE__GENERATED_RULE = SINGLE_WIRE__GENERATED_RULE;
+	int EXTENDS_EDGE__GENERATED_RULE = ModelPackage.GENERATED_ELEMENT__GENERATED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>From</b></em>' reference.
@@ -1843,7 +1915,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXTENDS_WIRE__FROM = SINGLE_WIRE__FROM;
+	int EXTENDS_EDGE__FROM = ModelPackage.GENERATED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>To</b></em>' reference.
@@ -1852,34 +1924,16 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXTENDS_WIRE__TO = SINGLE_WIRE__TO;
+	int EXTENDS_EDGE__TO = ModelPackage.GENERATED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
+	 * The number of structural features of the '<em>Extends Edge</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXTENDS_WIRE__GENERATED_ELEMENTS = SINGLE_WIRE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXTENDS_WIRE__OVERRIDDEN = SINGLE_WIRE_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Extends Wire</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXTENDS_WIRE_FEATURE_COUNT = SINGLE_WIRE_FEATURE_COUNT + 2;
+	int EXTENDS_EDGE_FEATURE_COUNT = ModelPackage.GENERATED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.wires.impl.RequiresWireImpl <em>Requires Wire</em>}' class.
@@ -1964,13 +2018,22 @@ public interface WiresPackage extends EPackage {
 	int REQUIRES_WIRE__PARAMETER_EDGES = SINGLE_WIRE_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Extends Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REQUIRES_WIRE__EXTENDS_EDGES = SINGLE_WIRE_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REQUIRES_WIRE__OUT_EDGES = SINGLE_WIRE_FEATURE_COUNT + 2;
+	int REQUIRES_WIRE__OUT_EDGES = SINGLE_WIRE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
@@ -1979,7 +2042,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REQUIRES_WIRE__IN_EDGES = SINGLE_WIRE_FEATURE_COUNT + 3;
+	int REQUIRES_WIRE__IN_EDGES = SINGLE_WIRE_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Requires Wire</em>' class.
@@ -1988,7 +2051,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REQUIRES_WIRE_FEATURE_COUNT = SINGLE_WIRE_FEATURE_COUNT + 4;
+	int REQUIRES_WIRE_FEATURE_COUNT = SINGLE_WIRE_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.wires.impl.ConstraintWireImpl <em>Constraint Wire</em>}' class.
@@ -2202,6 +2265,62 @@ public interface WiresPackage extends EPackage {
 	int PARAMETER_EDGE_DESTINATION_FEATURE_COUNT = 1;
 
 	/**
+	 * The meta object id for the '{@link org.openiaml.model.model.wires.ExtendsEdgesSource <em>Extends Edges Source</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.model.model.wires.ExtendsEdgesSource
+	 * @see org.openiaml.model.model.wires.impl.WiresPackageImpl#getExtendsEdgesSource()
+	 * @generated
+	 */
+	int EXTENDS_EDGES_SOURCE = 16;
+
+	/**
+	 * The feature id for the '<em><b>Out Extends Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXTENDS_EDGES_SOURCE__OUT_EXTENDS_EDGES = 0;
+
+	/**
+	 * The number of structural features of the '<em>Extends Edges Source</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXTENDS_EDGES_SOURCE_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.model.model.wires.ExtendsEdgeDestination <em>Extends Edge Destination</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.model.model.wires.ExtendsEdgeDestination
+	 * @see org.openiaml.model.model.wires.impl.WiresPackageImpl#getExtendsEdgeDestination()
+	 * @generated
+	 */
+	int EXTENDS_EDGE_DESTINATION = 17;
+
+	/**
+	 * The feature id for the '<em><b>In Extends Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXTENDS_EDGE_DESTINATION__IN_EXTENDS_EDGES = 0;
+
+	/**
+	 * The number of structural features of the '<em>Extends Edge Destination</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXTENDS_EDGE_DESTINATION_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.wires.ConstraintTypes <em>Constraint Types</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2209,7 +2328,7 @@ public interface WiresPackage extends EPackage {
 	 * @see org.openiaml.model.model.wires.impl.WiresPackageImpl#getConstraintTypes()
 	 * @generated
 	 */
-	int CONSTRAINT_TYPES = 16;
+	int CONSTRAINT_TYPES = 18;
 
 	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.wires.SingleWire <em>Single Wire</em>}'.
@@ -2444,14 +2563,36 @@ public interface WiresPackage extends EPackage {
 	EClass getNewInstanceWire();
 
 	/**
-	 * Returns the meta object for class '{@link org.openiaml.model.model.wires.ExtendsWire <em>Extends Wire</em>}'.
+	 * Returns the meta object for class '{@link org.openiaml.model.model.wires.ExtendsEdge <em>Extends Edge</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Extends Wire</em>'.
-	 * @see org.openiaml.model.model.wires.ExtendsWire
+	 * @return the meta object for class '<em>Extends Edge</em>'.
+	 * @see org.openiaml.model.model.wires.ExtendsEdge
 	 * @generated
 	 */
-	EClass getExtendsWire();
+	EClass getExtendsEdge();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.openiaml.model.model.wires.ExtendsEdge#getFrom <em>From</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>From</em>'.
+	 * @see org.openiaml.model.model.wires.ExtendsEdge#getFrom()
+	 * @see #getExtendsEdge()
+	 * @generated
+	 */
+	EReference getExtendsEdge_From();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.openiaml.model.model.wires.ExtendsEdge#getTo <em>To</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>To</em>'.
+	 * @see org.openiaml.model.model.wires.ExtendsEdge#getTo()
+	 * @see #getExtendsEdge()
+	 * @generated
+	 */
+	EReference getExtendsEdge_To();
 
 	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.wires.RequiresWire <em>Requires Wire</em>}'.
@@ -2535,6 +2676,48 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getParameterEdgeDestination_InParameterEdges();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.model.model.wires.ExtendsEdgesSource <em>Extends Edges Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Extends Edges Source</em>'.
+	 * @see org.openiaml.model.model.wires.ExtendsEdgesSource
+	 * @generated
+	 */
+	EClass getExtendsEdgesSource();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.openiaml.model.model.wires.ExtendsEdgesSource#getOutExtendsEdges <em>Out Extends Edges</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Out Extends Edges</em>'.
+	 * @see org.openiaml.model.model.wires.ExtendsEdgesSource#getOutExtendsEdges()
+	 * @see #getExtendsEdgesSource()
+	 * @generated
+	 */
+	EReference getExtendsEdgesSource_OutExtendsEdges();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.model.model.wires.ExtendsEdgeDestination <em>Extends Edge Destination</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Extends Edge Destination</em>'.
+	 * @see org.openiaml.model.model.wires.ExtendsEdgeDestination
+	 * @generated
+	 */
+	EClass getExtendsEdgeDestination();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.openiaml.model.model.wires.ExtendsEdgeDestination#getInExtendsEdges <em>In Extends Edges</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>In Extends Edges</em>'.
+	 * @see org.openiaml.model.model.wires.ExtendsEdgeDestination#getInExtendsEdges()
+	 * @see #getExtendsEdgeDestination()
+	 * @generated
+	 */
+	EReference getExtendsEdgeDestination_InExtendsEdges();
 
 	/**
 	 * Returns the meta object for enum '{@link org.openiaml.model.model.wires.ConstraintTypes <em>Constraint Types</em>}'.
@@ -2765,14 +2948,30 @@ public interface WiresPackage extends EPackage {
 		EClass NEW_INSTANCE_WIRE = eINSTANCE.getNewInstanceWire();
 
 		/**
-		 * The meta object literal for the '{@link org.openiaml.model.model.wires.impl.ExtendsWireImpl <em>Extends Wire</em>}' class.
+		 * The meta object literal for the '{@link org.openiaml.model.model.wires.impl.ExtendsEdgeImpl <em>Extends Edge</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.openiaml.model.model.wires.impl.ExtendsWireImpl
-		 * @see org.openiaml.model.model.wires.impl.WiresPackageImpl#getExtendsWire()
+		 * @see org.openiaml.model.model.wires.impl.ExtendsEdgeImpl
+		 * @see org.openiaml.model.model.wires.impl.WiresPackageImpl#getExtendsEdge()
 		 * @generated
 		 */
-		EClass EXTENDS_WIRE = eINSTANCE.getExtendsWire();
+		EClass EXTENDS_EDGE = eINSTANCE.getExtendsEdge();
+
+		/**
+		 * The meta object literal for the '<em><b>From</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXTENDS_EDGE__FROM = eINSTANCE.getExtendsEdge_From();
+
+		/**
+		 * The meta object literal for the '<em><b>To</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXTENDS_EDGE__TO = eINSTANCE.getExtendsEdge_To();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.wires.impl.RequiresWireImpl <em>Requires Wire</em>}' class.
@@ -2847,6 +3046,42 @@ public interface WiresPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PARAMETER_EDGE_DESTINATION__IN_PARAMETER_EDGES = eINSTANCE.getParameterEdgeDestination_InParameterEdges();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.model.model.wires.ExtendsEdgesSource <em>Extends Edges Source</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.model.model.wires.ExtendsEdgesSource
+		 * @see org.openiaml.model.model.wires.impl.WiresPackageImpl#getExtendsEdgesSource()
+		 * @generated
+		 */
+		EClass EXTENDS_EDGES_SOURCE = eINSTANCE.getExtendsEdgesSource();
+
+		/**
+		 * The meta object literal for the '<em><b>Out Extends Edges</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXTENDS_EDGES_SOURCE__OUT_EXTENDS_EDGES = eINSTANCE.getExtendsEdgesSource_OutExtendsEdges();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.model.model.wires.ExtendsEdgeDestination <em>Extends Edge Destination</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.model.model.wires.ExtendsEdgeDestination
+		 * @see org.openiaml.model.model.wires.impl.WiresPackageImpl#getExtendsEdgeDestination()
+		 * @generated
+		 */
+		EClass EXTENDS_EDGE_DESTINATION = eINSTANCE.getExtendsEdgeDestination();
+
+		/**
+		 * The meta object literal for the '<em><b>In Extends Edges</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXTENDS_EDGE_DESTINATION__IN_EXTENDS_EDGES = eINSTANCE.getExtendsEdgeDestination_InExtendsEdges();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.wires.ConstraintTypes <em>Constraint Types</em>}' enum.

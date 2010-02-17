@@ -46,6 +46,9 @@ import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.domain.DomainPackage;
 import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.visual.VisualPackage;
+import org.openiaml.model.model.wires.ExtendsEdge;
+import org.openiaml.model.model.wires.ExtendsEdgeDestination;
+import org.openiaml.model.model.wires.ExtendsEdgesSource;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.ParameterEdgeDestination;
 import org.openiaml.model.model.wires.ParameterEdgesSource;
@@ -610,7 +613,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	}
 
 	/**
-	 * Get <em>all</em> ParameterWire connecting the given elements,
+	 * Get <em>all</em> ParameterEdge connecting the given elements,
 	 * contained with the given container element or any of its children.
 	 *
 	 * @return the found ParameterEdges
@@ -623,6 +626,28 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 		for (Object o : wires) {
 			if (o instanceof ParameterEdge) {
 				ParameterEdge w = (ParameterEdge) o;
+				if (w.getFrom().equals(from) && w.getTo().equals(to))
+					result.add(w);
+			}
+		}
+
+		return result;
+	}
+	
+	/**
+	 * Get <em>all</em> ExtendsEdge connecting the given elements,
+	 * contained with the given container element or any of its children.
+	 *
+	 * @return the found ExtendsEdges
+	 * @throws JaxenException
+	 */
+	protected Set<ExtendsEdge> getExtendsEdgesFromTo(EObject container, ExtendsEdgesSource from, ExtendsEdgeDestination to) throws JaxenException {
+		Set<ExtendsEdge> result = new HashSet<ExtendsEdge>();
+		
+		List<?> wires = query(container, "//iaml:extendsEdges");
+		for (Object o : wires) {
+			if (o instanceof ExtendsEdge) {
+				ExtendsEdge w = (ExtendsEdge) o;
 				if (w.getFrom().equals(from) && w.getTo().equals(to))
 					result.add(w);
 			}

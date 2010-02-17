@@ -105,6 +105,7 @@
     <genClasses image="false" ecoreClass="iaml.ecore#//ContainsWires">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ContainsWires/wires"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ContainsWires/parameterEdges"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ContainsWires/extendsEdges"/>
     </genClasses>
     <genClasses image="false" ecoreClass="iaml.ecore#//ShouldntContainWires"/>
     <genClasses image="false" ecoreClass="iaml.ecore#//GeneratedElement">
@@ -200,7 +201,12 @@
       </genClasses>
       <genClasses ecoreClass="iaml.ecore#//wires/ConditionWire"/>
       <genClasses ecoreClass="iaml.ecore#//wires/NewInstanceWire"/>
-      <genClasses ecoreClass="iaml.ecore#//wires/ExtendsWire"/>
+      <genClasses ecoreClass="iaml.ecore#//wires/ExtendsEdge">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference iaml.ecore#//wires/ExtendsEdge/from"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference iaml.ecore#//wires/ExtendsEdge/to"/>
+      </genClasses>
       <genClasses ecoreClass="iaml.ecore#//wires/RequiresWire"/>
       <genClasses ecoreClass="iaml.ecore#//wires/ConstraintWire">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/ConstraintWire/type"/>
@@ -213,6 +219,14 @@
       <genClasses image="false" ecoreClass="iaml.ecore#//wires/ParameterEdgeDestination">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference iaml.ecore#//wires/ParameterEdgeDestination/inParameterEdges"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="iaml.ecore#//wires/ExtendsEdgesSource">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference iaml.ecore#//wires/ExtendsEdgesSource/outExtendsEdges"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="iaml.ecore#//wires/ExtendsEdgeDestination">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference iaml.ecore#//wires/ExtendsEdgeDestination/inExtendsEdges"/>
       </genClasses>
     </nestedGenPackages>
     <nestedGenPackages prefix="Operations" basePackage="org.openiaml.model.model"

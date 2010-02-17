@@ -6,6 +6,9 @@
  */
 package org.openiaml.model.model;
 
+import org.openiaml.model.model.wires.ExtendsEdgeDestination;
+import org.openiaml.model.model.wires.ExtendsEdgesSource;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -27,7 +30,7 @@ package org.openiaml.model.model;
  * @model annotation="http://openiaml.org/comment added='0.3'"
  * @generated
  */
-public interface DomainAttributeInstance extends ApplicationElement {
+public interface DomainAttributeInstance extends ApplicationElement, ExtendsEdgesSource, ExtendsEdgeDestination {
 
 	/**
 	 * Returns the value of the '<em><b>Autosave</b></em>' attribute.

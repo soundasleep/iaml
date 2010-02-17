@@ -21,6 +21,7 @@ import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.RequiresWire;
 import org.openiaml.model.model.wires.WiresPackage;
@@ -34,6 +35,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  * <ul>
  *   <li>{@link org.openiaml.model.model.wires.impl.RequiresWireImpl#getWires <em>Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.RequiresWireImpl#getParameterEdges <em>Parameter Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.wires.impl.RequiresWireImpl#getExtendsEdges <em>Extends Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.RequiresWireImpl#getOutEdges <em>Out Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.RequiresWireImpl#getInEdges <em>In Edges</em>}</li>
  * </ul>
@@ -61,6 +63,16 @@ public class RequiresWireImpl extends SingleWireImpl implements RequiresWire {
 	 * @ordered
 	 */
 	protected EList<ParameterEdge> parameterEdges;
+
+	/**
+	 * The cached value of the '{@link #getExtendsEdges() <em>Extends Edges</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExtendsEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ExtendsEdge> extendsEdges;
 
 	/**
 	 * The cached value of the '{@link #getOutEdges() <em>Out Edges</em>}' reference list.
@@ -130,6 +142,18 @@ public class RequiresWireImpl extends SingleWireImpl implements RequiresWire {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ExtendsEdge> getExtendsEdges() {
+		if (extendsEdges == null) {
+			extendsEdges = new EObjectContainmentEList<ExtendsEdge>(ExtendsEdge.class, this, WiresPackage.REQUIRES_WIRE__EXTENDS_EDGES);
+		}
+		return extendsEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<WireEdge> getOutEdges() {
 		if (outEdges == null) {
 			outEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, WiresPackage.REQUIRES_WIRE__OUT_EDGES, ModelPackage.WIRE_EDGE__FROM);
@@ -178,6 +202,8 @@ public class RequiresWireImpl extends SingleWireImpl implements RequiresWire {
 				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
 			case WiresPackage.REQUIRES_WIRE__PARAMETER_EDGES:
 				return ((InternalEList<?>)getParameterEdges()).basicRemove(otherEnd, msgs);
+			case WiresPackage.REQUIRES_WIRE__EXTENDS_EDGES:
+				return ((InternalEList<?>)getExtendsEdges()).basicRemove(otherEnd, msgs);
 			case WiresPackage.REQUIRES_WIRE__OUT_EDGES:
 				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
 			case WiresPackage.REQUIRES_WIRE__IN_EDGES:
@@ -198,6 +224,8 @@ public class RequiresWireImpl extends SingleWireImpl implements RequiresWire {
 				return getWires();
 			case WiresPackage.REQUIRES_WIRE__PARAMETER_EDGES:
 				return getParameterEdges();
+			case WiresPackage.REQUIRES_WIRE__EXTENDS_EDGES:
+				return getExtendsEdges();
 			case WiresPackage.REQUIRES_WIRE__OUT_EDGES:
 				return getOutEdges();
 			case WiresPackage.REQUIRES_WIRE__IN_EDGES:
@@ -222,6 +250,10 @@ public class RequiresWireImpl extends SingleWireImpl implements RequiresWire {
 			case WiresPackage.REQUIRES_WIRE__PARAMETER_EDGES:
 				getParameterEdges().clear();
 				getParameterEdges().addAll((Collection<? extends ParameterEdge>)newValue);
+				return;
+			case WiresPackage.REQUIRES_WIRE__EXTENDS_EDGES:
+				getExtendsEdges().clear();
+				getExtendsEdges().addAll((Collection<? extends ExtendsEdge>)newValue);
 				return;
 			case WiresPackage.REQUIRES_WIRE__OUT_EDGES:
 				getOutEdges().clear();
@@ -249,6 +281,9 @@ public class RequiresWireImpl extends SingleWireImpl implements RequiresWire {
 			case WiresPackage.REQUIRES_WIRE__PARAMETER_EDGES:
 				getParameterEdges().clear();
 				return;
+			case WiresPackage.REQUIRES_WIRE__EXTENDS_EDGES:
+				getExtendsEdges().clear();
+				return;
 			case WiresPackage.REQUIRES_WIRE__OUT_EDGES:
 				getOutEdges().clear();
 				return;
@@ -271,6 +306,8 @@ public class RequiresWireImpl extends SingleWireImpl implements RequiresWire {
 				return wires != null && !wires.isEmpty();
 			case WiresPackage.REQUIRES_WIRE__PARAMETER_EDGES:
 				return parameterEdges != null && !parameterEdges.isEmpty();
+			case WiresPackage.REQUIRES_WIRE__EXTENDS_EDGES:
+				return extendsEdges != null && !extendsEdges.isEmpty();
 			case WiresPackage.REQUIRES_WIRE__OUT_EDGES:
 				return outEdges != null && !outEdges.isEmpty();
 			case WiresPackage.REQUIRES_WIRE__IN_EDGES:
@@ -290,6 +327,7 @@ public class RequiresWireImpl extends SingleWireImpl implements RequiresWire {
 			switch (derivedFeatureID) {
 				case WiresPackage.REQUIRES_WIRE__WIRES: return ModelPackage.CONTAINS_WIRES__WIRES;
 				case WiresPackage.REQUIRES_WIRE__PARAMETER_EDGES: return ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES;
+				case WiresPackage.REQUIRES_WIRE__EXTENDS_EDGES: return ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES;
 				default: return -1;
 			}
 		}
@@ -324,6 +362,7 @@ public class RequiresWireImpl extends SingleWireImpl implements RequiresWire {
 			switch (baseFeatureID) {
 				case ModelPackage.CONTAINS_WIRES__WIRES: return WiresPackage.REQUIRES_WIRE__WIRES;
 				case ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES: return WiresPackage.REQUIRES_WIRE__PARAMETER_EDGES;
+				case ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES: return WiresPackage.REQUIRES_WIRE__EXTENDS_EDGES;
 				default: return -1;
 			}
 		}

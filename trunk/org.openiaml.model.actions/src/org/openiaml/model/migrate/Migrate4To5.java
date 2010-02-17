@@ -33,6 +33,7 @@ import org.w3c.dom.NodeList;
  *   	<li>SingleWire is now abstract
  *   	<li>Page is now Frame
  *      <li>ParameterWire is now ParamaterEdge, and no longer a WireEdge
+ *      <li>ExtendsWire is now ExtendsEdge, and no longer a WireEdge
  *   </ol></li>
  *   <li><strong>Many other modifications, too many to list... this migrator only implements
  *   	those changed necessary for the model migration test to pass.</strong></li>
@@ -50,6 +51,7 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 	}
 	
 	private List<String> parameterWires = null;
+	private List<String> extendsWires = null;
 	
 	/**
 	 * We will cycle over the document, and find out which edges are
@@ -61,6 +63,7 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 			List<ExpectedMigrationException> errors) {
 		
 		parameterWires = new ArrayList<String>();
+		extendsWires = new ArrayList<String>();
 		prepareDocumentRecurse(documentElement, errors);
 
 	}
@@ -81,6 +84,16 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 				parameterWires.add(id);
 			} else {
 				errors.add(new ExpectedMigrationException(this, e, "Element was a ParameterWire but did not have an id attribute."));
+			}
+		}
+		
+		if ("wires".equals(e.getNodeName()) &&
+				"iaml.wires:ExtendsWire".equals(e.getAttribute("xsi:type"))) {
+			String id = e.getAttribute("id");
+			if (id != null) {
+				extendsWires.add(id);
+			} else {
+				errors.add(new ExpectedMigrationException(this, e, "Element was a ExtendsWire but did not have an id attribute."));
 			}
 		}
 		
@@ -139,6 +152,10 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 			return "iaml.wires:ParameterEdge";
 		}
 
+		if (xsiType.equals("iaml.wires:ExtendsWire")) {
+			return "iaml.wires:ExtendsEdge";
+		}
+
 		return super.replaceType(element, xsiType, errors);
 	}
 
@@ -164,6 +181,12 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 		// --> <parameterEdges>
 		if (nodeName.equals("wires") && "iaml.wires:ParameterWire".equals(xsiType)) {
 			return "parameterEdges";
+		}
+		
+		// <wires xsi:type="iaml.wires:ExtendsWire"> 
+		// --> <extendsEdges>
+		if (nodeName.equals("wires") && "iaml.wires:ExtendsWire".equals(xsiType)) {
+			return "extendsEdges";
 		}
 		
 		// <children xsi:type="iaml.visual:Page"> or <sessions>
@@ -218,6 +241,15 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 
 		if (!old.getAttribute("outEdges").isEmpty()) {
 			splitReferences(old, "outEdges", parameterWires, "outParameterEdges");
+		}
+
+		// any inEdges or outEdges to an old ExtendsWire?
+		if (!old.getAttribute("inEdges").isEmpty()) {
+			splitReferences(old, "inEdges", extendsWires, "inExtendsEdges");
+		}
+
+		if (!old.getAttribute("outEdges").isEmpty()) {
+			splitReferences(old, "outEdges", extendsWires, "outExtendsEdges");
 		}
 
 	}

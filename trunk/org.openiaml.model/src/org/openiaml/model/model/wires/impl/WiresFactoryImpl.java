@@ -19,7 +19,7 @@ import org.openiaml.model.model.wires.CompositeWire;
 import org.openiaml.model.model.wires.ConditionWire;
 import org.openiaml.model.model.wires.ConstraintTypes;
 import org.openiaml.model.model.wires.ConstraintWire;
-import org.openiaml.model.model.wires.ExtendsWire;
+import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.NewInstanceWire;
 import org.openiaml.model.model.wires.ParameterEdge;
@@ -85,7 +85,7 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 			case WiresPackage.SELECT_WIRE: return createSelectWire();
 			case WiresPackage.CONDITION_WIRE: return createConditionWire();
 			case WiresPackage.NEW_INSTANCE_WIRE: return createNewInstanceWire();
-			case WiresPackage.EXTENDS_WIRE: return createExtendsWire();
+			case WiresPackage.EXTENDS_EDGE: return createExtendsEdge();
 			case WiresPackage.REQUIRES_WIRE: return createRequiresWire();
 			case WiresPackage.CONSTRAINT_WIRE: return createConstraintWire();
 			case WiresPackage.PROVIDES_WIRE: return createProvidesWire();
@@ -228,10 +228,10 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public ExtendsWire createExtendsWire() {
-		ExtendsWireImpl extendsWire = new ExtendsWireImpl();
-		generateID(extendsWire);
-		return extendsWire;
+	public ExtendsEdge createExtendsEdge() {
+		ExtendsEdgeImpl extendsEdge = new ExtendsEdgeImpl();
+		generateID(extendsEdge);
+		return extendsEdge;
 	}
 
 	/**

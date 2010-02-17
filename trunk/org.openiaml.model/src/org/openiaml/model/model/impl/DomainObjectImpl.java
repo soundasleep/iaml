@@ -18,6 +18,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.model.wires.ExtendsEdge;
+import org.openiaml.model.model.wires.ExtendsEdgeDestination;
+import org.openiaml.model.model.wires.ExtendsEdgesSource;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.ParameterEdgesSource;
 import org.openiaml.model.model.wires.WiresPackage;
@@ -30,6 +33,8 @@ import org.openiaml.model.model.wires.WiresPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.openiaml.model.model.impl.DomainObjectImpl#getOutParameterEdges <em>Out Parameter Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.DomainObjectImpl#getOutExtendsEdges <em>Out Extends Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.DomainObjectImpl#getInExtendsEdges <em>In Extends Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainObjectImpl#getAttributes <em>Attributes</em>}</li>
  * </ul>
  * </p>
@@ -46,6 +51,24 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 	 * @ordered
 	 */
 	protected EList<ParameterEdge> outParameterEdges;
+	/**
+	 * The cached value of the '{@link #getOutExtendsEdges() <em>Out Extends Edges</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOutExtendsEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ExtendsEdge> outExtendsEdges;
+	/**
+	 * The cached value of the '{@link #getInExtendsEdges() <em>In Extends Edges</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInExtendsEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ExtendsEdge> inExtendsEdges;
 	/**
 	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -92,6 +115,30 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ExtendsEdge> getOutExtendsEdges() {
+		if (outExtendsEdges == null) {
+			outExtendsEdges = new EObjectWithInverseResolvingEList<ExtendsEdge>(ExtendsEdge.class, this, ModelPackage.DOMAIN_OBJECT__OUT_EXTENDS_EDGES, WiresPackage.EXTENDS_EDGE__FROM);
+		}
+		return outExtendsEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ExtendsEdge> getInExtendsEdges() {
+		if (inExtendsEdges == null) {
+			inExtendsEdges = new EObjectWithInverseResolvingEList<ExtendsEdge>(ExtendsEdge.class, this, ModelPackage.DOMAIN_OBJECT__IN_EXTENDS_EDGES, WiresPackage.EXTENDS_EDGE__TO);
+		}
+		return inExtendsEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<DomainAttribute> getAttributes() {
 		if (attributes == null) {
 			attributes = new EObjectContainmentEList<DomainAttribute>(DomainAttribute.class, this, ModelPackage.DOMAIN_OBJECT__ATTRIBUTES);
@@ -110,6 +157,10 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 		switch (featureID) {
 			case ModelPackage.DOMAIN_OBJECT__OUT_PARAMETER_EDGES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutParameterEdges()).basicAdd(otherEnd, msgs);
+			case ModelPackage.DOMAIN_OBJECT__OUT_EXTENDS_EDGES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutExtendsEdges()).basicAdd(otherEnd, msgs);
+			case ModelPackage.DOMAIN_OBJECT__IN_EXTENDS_EDGES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInExtendsEdges()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -124,6 +175,10 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 		switch (featureID) {
 			case ModelPackage.DOMAIN_OBJECT__OUT_PARAMETER_EDGES:
 				return ((InternalEList<?>)getOutParameterEdges()).basicRemove(otherEnd, msgs);
+			case ModelPackage.DOMAIN_OBJECT__OUT_EXTENDS_EDGES:
+				return ((InternalEList<?>)getOutExtendsEdges()).basicRemove(otherEnd, msgs);
+			case ModelPackage.DOMAIN_OBJECT__IN_EXTENDS_EDGES:
+				return ((InternalEList<?>)getInExtendsEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.DOMAIN_OBJECT__ATTRIBUTES:
 				return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
 		}
@@ -140,6 +195,10 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 		switch (featureID) {
 			case ModelPackage.DOMAIN_OBJECT__OUT_PARAMETER_EDGES:
 				return getOutParameterEdges();
+			case ModelPackage.DOMAIN_OBJECT__OUT_EXTENDS_EDGES:
+				return getOutExtendsEdges();
+			case ModelPackage.DOMAIN_OBJECT__IN_EXTENDS_EDGES:
+				return getInExtendsEdges();
 			case ModelPackage.DOMAIN_OBJECT__ATTRIBUTES:
 				return getAttributes();
 		}
@@ -158,6 +217,14 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 			case ModelPackage.DOMAIN_OBJECT__OUT_PARAMETER_EDGES:
 				getOutParameterEdges().clear();
 				getOutParameterEdges().addAll((Collection<? extends ParameterEdge>)newValue);
+				return;
+			case ModelPackage.DOMAIN_OBJECT__OUT_EXTENDS_EDGES:
+				getOutExtendsEdges().clear();
+				getOutExtendsEdges().addAll((Collection<? extends ExtendsEdge>)newValue);
+				return;
+			case ModelPackage.DOMAIN_OBJECT__IN_EXTENDS_EDGES:
+				getInExtendsEdges().clear();
+				getInExtendsEdges().addAll((Collection<? extends ExtendsEdge>)newValue);
 				return;
 			case ModelPackage.DOMAIN_OBJECT__ATTRIBUTES:
 				getAttributes().clear();
@@ -178,6 +245,12 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 			case ModelPackage.DOMAIN_OBJECT__OUT_PARAMETER_EDGES:
 				getOutParameterEdges().clear();
 				return;
+			case ModelPackage.DOMAIN_OBJECT__OUT_EXTENDS_EDGES:
+				getOutExtendsEdges().clear();
+				return;
+			case ModelPackage.DOMAIN_OBJECT__IN_EXTENDS_EDGES:
+				getInExtendsEdges().clear();
+				return;
 			case ModelPackage.DOMAIN_OBJECT__ATTRIBUTES:
 				getAttributes().clear();
 				return;
@@ -195,6 +268,10 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 		switch (featureID) {
 			case ModelPackage.DOMAIN_OBJECT__OUT_PARAMETER_EDGES:
 				return outParameterEdges != null && !outParameterEdges.isEmpty();
+			case ModelPackage.DOMAIN_OBJECT__OUT_EXTENDS_EDGES:
+				return outExtendsEdges != null && !outExtendsEdges.isEmpty();
+			case ModelPackage.DOMAIN_OBJECT__IN_EXTENDS_EDGES:
+				return inExtendsEdges != null && !inExtendsEdges.isEmpty();
 			case ModelPackage.DOMAIN_OBJECT__ATTRIBUTES:
 				return attributes != null && !attributes.isEmpty();
 		}
@@ -214,6 +291,18 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 				default: return -1;
 			}
 		}
+		if (baseClass == ExtendsEdgesSource.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.DOMAIN_OBJECT__OUT_EXTENDS_EDGES: return WiresPackage.EXTENDS_EDGES_SOURCE__OUT_EXTENDS_EDGES;
+				default: return -1;
+			}
+		}
+		if (baseClass == ExtendsEdgeDestination.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.DOMAIN_OBJECT__IN_EXTENDS_EDGES: return WiresPackage.EXTENDS_EDGE_DESTINATION__IN_EXTENDS_EDGES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -227,6 +316,18 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 		if (baseClass == ParameterEdgesSource.class) {
 			switch (baseFeatureID) {
 				case WiresPackage.PARAMETER_EDGES_SOURCE__OUT_PARAMETER_EDGES: return ModelPackage.DOMAIN_OBJECT__OUT_PARAMETER_EDGES;
+				default: return -1;
+			}
+		}
+		if (baseClass == ExtendsEdgesSource.class) {
+			switch (baseFeatureID) {
+				case WiresPackage.EXTENDS_EDGES_SOURCE__OUT_EXTENDS_EDGES: return ModelPackage.DOMAIN_OBJECT__OUT_EXTENDS_EDGES;
+				default: return -1;
+			}
+		}
+		if (baseClass == ExtendsEdgeDestination.class) {
+			switch (baseFeatureID) {
+				case WiresPackage.EXTENDS_EDGE_DESTINATION__IN_EXTENDS_EDGES: return ModelPackage.DOMAIN_OBJECT__IN_EXTENDS_EDGES;
 				default: return -1;
 			}
 		}

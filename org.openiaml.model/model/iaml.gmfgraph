@@ -677,10 +677,10 @@
           figure="//@figures.0/@descriptors.22/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
-        name="ParameterWireFigure">
+        name="ParameterEdgeFigure">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
-          name="ParameterWireFigure"
+          name="ParameterEdgeFigure"
           targetDecoration="//@figures.0/@figures.0"/>
     </descriptors>
     <descriptors
@@ -1862,8 +1862,8 @@
       name="RunInstanceWire"
       figure="RunInstanceWireFigure"/>
   <connections
-      name="ParameterWire"
-      figure="ParameterWireFigure"/>
+      name="ParameterEdge"
+      figure="ParameterEdgeFigure"/>
   <connections
       name="ConditionalEdge"
       figure="ConditionalEdgeFigure"/>

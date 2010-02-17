@@ -315,15 +315,15 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="ParameterWire"
-          description="Create new ParameterWire">
+          title="ParameterEdge"
+          description="Create new ParameterEdge">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/ParameterWire.gif"
+            path="icons/full/obj16/ParameterEdge.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/ParameterWire.gif"
+            path="icons/full/obj32/ParameterEdge.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
       <tools

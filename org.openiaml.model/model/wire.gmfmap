@@ -292,22 +292,20 @@
   </links>
   <links>
     <domainMetaElement
-        href="iaml.ecore#//wires/ParameterWire"/>
-    <domainSpecialization
-        body="self.oclIsTypeOf( ParameterWire )"/>
+        href="iaml.ecore#//wires/ParameterEdge"/>
     <containmentFeature
-        href="iaml.ecore#//ContainsWires/wires"/>
+        href="iaml.ecore#//ContainsWires/parameterEdges"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="wire.gmftool#//@palette/@tools.1/@tools.2"/>
     <diagramLink
-        href="iaml.gmfgraph#ParameterWire"/>
+        href="iaml.gmfgraph#ParameterEdge"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/from"/>
+        href="iaml.ecore#//wires/ParameterEdge/from"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/to"/>
+        href="iaml.ecore#//wires/ParameterEdge/to"/>
   </links>
   <diagram>
     <diagramCanvas

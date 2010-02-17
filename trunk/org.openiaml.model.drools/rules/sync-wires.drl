@@ -383,7 +383,7 @@ rule "Refresh New Instance Object mappings (except for generated primary keys) w
 		
 		originalAttribute : DomainAttribute ( )
 		attribute : DomainAttributeInstance( eContainer == instance )
-		ExtendsWire ( from == attribute, to == originalAttribute )
+		ExtendsEdge ( from == attribute, to == originalAttribute )
 		
 		# at the top of the attribute inheritance heirarchy, not
 		# a generated primary key

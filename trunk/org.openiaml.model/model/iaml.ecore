@@ -598,7 +598,7 @@
         <details key="documentation" value="Creates a new instance of a {@model DomainObjectInstance} or {@model DomainAttributeInstance} from its definition."/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ExtendsEdge" eSuperTypes="#//GeneratedElement">
+    <eClassifiers xsi:type="ecore:EClass" name="ExtendsEdge" eSuperTypes="#//GeneratedElement #//GeneratesElements">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.4"/>
         <details key="changed" value="0.4.3 to no longer be a Wire; added 'from' and 'to' references; renamed to ExtendsEdge"/>

@@ -68,12 +68,8 @@ context model::WireEdge ERROR "A WireEdge must have a 'from'" :
 context model::WireEdge ERROR "A WireEdge must have a 'to'" :
 	to != null;
 
-context model::wires::ExtendsWire ERROR "A Role cannot extend itself" :
+context model::wires::ExtendsEdge ERROR "A Role cannot extend itself" :
 	from != to;
-	
-context model::wires::ExtendsWire ERROR "An ExtendsWire can only connect to a DomainObject, DomainAttribute or DomainAttributeInstance" :
-	(model::DomainObject.isInstance(from) || model::DomainAttribute.isInstance(from) || model::DomainAttributeInstance.isInstance(from))
-	&& (model::DomainObject.isInstance(to) || model::DomainAttribute.isInstance(to) || model::DomainAttributeInstance.isInstance(to));
 
 context model::wires::ProvidesWire ERROR "An ProvidesWire can only connect from a Role" :
 	model::users::Role.isInstance(from);

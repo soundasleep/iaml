@@ -1909,13 +1909,31 @@ public interface WiresPackage extends EPackage {
 	int EXTENDS_EDGE__GENERATED_RULE = ModelPackage.GENERATED_ELEMENT__GENERATED_RULE;
 
 	/**
+	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXTENDS_EDGE__GENERATED_ELEMENTS = ModelPackage.GENERATED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXTENDS_EDGE__OVERRIDDEN = ModelPackage.GENERATED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>From</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXTENDS_EDGE__FROM = ModelPackage.GENERATED_ELEMENT_FEATURE_COUNT + 0;
+	int EXTENDS_EDGE__FROM = ModelPackage.GENERATED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>To</b></em>' reference.
@@ -1924,7 +1942,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXTENDS_EDGE__TO = ModelPackage.GENERATED_ELEMENT_FEATURE_COUNT + 1;
+	int EXTENDS_EDGE__TO = ModelPackage.GENERATED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Extends Edge</em>' class.
@@ -1933,7 +1951,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXTENDS_EDGE_FEATURE_COUNT = ModelPackage.GENERATED_ELEMENT_FEATURE_COUNT + 2;
+	int EXTENDS_EDGE_FEATURE_COUNT = ModelPackage.GENERATED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.wires.impl.RequiresWireImpl <em>Requires Wire</em>}' class.

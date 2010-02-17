@@ -377,10 +377,10 @@ rule "Any role should extend the default User role"
 		
 		another : Role ( this != user )
 		
-		not ( ExtendsWire ( from == another, to == user ))
+		not ( ExtendsEdge ( from == another, to == user ))
 		
 	then
-		ExtendsWire ext = handler.generatedExtendsWire(store, store, another, user);
+		ExtendsEdge ext = handler.generatedExtendsEdge(store, store, another, user);
 		queue.add(ext, drools);
 
 end

@@ -3,6 +3,9 @@
  */
 package org.openiaml.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -83,6 +86,15 @@ public class ModelLoader {
 		
 		return resource.getContents().get(0);
 		
+	}
+
+	/**
+	 * Get the default save options passed to EMF.
+	 * 
+	 * @return
+	 */
+	public static Map<?, ?> getSaveOptions() {
+		return new HashMap<Object, Object>();
 	}
 	
 }

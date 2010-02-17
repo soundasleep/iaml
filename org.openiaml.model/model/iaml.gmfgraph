@@ -1407,14 +1407,14 @@
           figure="//@figures.0/@descriptors.50/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
-        name="ExtendsWireFigure">
+        name="ExtendsEdgeFigure">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
-          name="ExtendsWireFigure"
+          name="ExtendsEdgeFigure"
           targetDecoration="//@figures.0/@figures.0">
         <children
             xsi:type="gmfgraph:Label"
-            name="ExtendsWireNameFigure"
+            name="ExtendsEdgeNameFigure"
             text="extends"/>
       </actualFigure>
       <accessors
@@ -1889,8 +1889,8 @@
       name="NewInstanceWire"
       figure="NewInstanceWireFigure"/>
   <connections
-      name="ExtendsWire"
-      figure="ExtendsWireFigure"/>
+      name="ExtendsEdge"
+      figure="ExtendsEdgeFigure"/>
   <connections
       name="RequiresWire"
       figure="RequiresWireFigure"/>
@@ -2185,8 +2185,8 @@
       elementIcon="false"
       accessor="//@figures.0/@descriptors.50/@accessors.1"/>
   <labels
-      name="ExtendsWireName"
-      figure="ExtendsWireFigure"
+      name="ExtendsEdgeName"
+      figure="ExtendsEdgeFigure"
       accessor="//@figures.0/@descriptors.51/@accessors.0"/>
   <labels
       name="RequiresWireName"

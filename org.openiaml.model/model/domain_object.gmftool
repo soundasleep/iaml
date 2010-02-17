@@ -108,15 +108,15 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="ExtendsWire"
-          description="Create new ExtendsWire">
+          title="ExtendsEdge"
+          description="Create new ExtendsEdge">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/ExtendsWire.gif"
+            path="icons/full/obj16/ExtendsEdge.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/ExtendsWire.gif"
+            path="icons/full/obj32/ExtendsEdge.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
     </tools>

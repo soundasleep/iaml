@@ -56,6 +56,34 @@
                menubarPath="org.openiaml.model.diagram.custom.menu1/group">
          </action>
 
+      </objectContribution> 
+    </extension>                   
+
+	<!-- icontainer extensions -->
+	<extension point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="false"
+            id="org.openiaml.model.codegen.objectContribution2"
+            objectClass="org.eclipse.core.resources.IContainer">
+
+         <menu
+               id="org.openiaml.model.diagram.custom.menu2"
+               path="additions"
+               label="&amp;IAML Tools">
+            <separator
+                  name="group">
+            </separator>
+         </menu>
+
+		<!-- more than one popup extension is displayed in reverse order:
+		     a documented bug of eclipse -->
+         <action
+               class="org.openiaml.model.custom.actions.MigrateAllModelsAction"
+               id="org.openiaml.docs.tools.export1"
+               label="&amp;Migrate and Load all IAML Models in Project"
+               menubarPath="org.openiaml.model.diagram.custom.menu2/group">
+         </action>
+
       </objectContribution>                    
 
 	</extension>

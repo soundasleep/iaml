@@ -66,7 +66,7 @@ rule "Connect ConditionWires to RunInstanceWires created by SyncWires (access/in
 		
 		# and targets' value is being used for source's init
 		fvalue : ApplicationElementProperty ( eContainer == target, name == "fieldValue" )
-		param : ParameterWire ( from == fvalue, to == run ) 
+		param : ParameterEdge ( from == fvalue, to == run ) 
 		
 		# and the sync wire had a condition
 		condition : Condition ( )
@@ -83,8 +83,8 @@ rule "Connect ConditionWires to RunInstanceWires created by SyncWires (access/in
 
 end
 
-# @inference SyncWire,RunInstanceWire,ConditionWire,ParameterWire {@model RunInstanceWire RunInstanceWires} with incoming {@model ConditionWire conditions} with {@model ParameterWire parameters} will be copied to elements created by {@model SyncWire SyncWires}.
-rule "Connect ParameterWires to ConditionWires connected to RunInstanceWires created by SyncWires (edit/update)"
+# @inference SyncWire,RunInstanceWire,ConditionWire,ParameterEdge {@model RunInstanceWire RunInstanceWires} with incoming {@model ConditionWire conditions} with {@model ParameterEdge parameters} will be copied to elements created by {@model SyncWire SyncWires}.
+rule "Connect ParameterEdges to ConditionWires connected to RunInstanceWires created by SyncWires (edit/update)"
 	when
 		# we have a syncwire
 		sw : SyncWire(overridden == false)
@@ -105,21 +105,21 @@ rule "Connect ParameterWires to ConditionWires connected to RunInstanceWires cre
 		targetCw : ConditionWire (from == condition, to == run ) 
 		
 		# and the SyncWire had a parameter
-		param : WireEdgesSource ( )
-		paramWire : ParameterWire( from == param, to == sourceCw )
+		param : ParameterEdgesSource ( )
+		paramWire : ParameterEdge( from == param, to == sourceCw )
 
 		# but this wire does not have it
-		not (ParameterWire (from == param, to == targetCw ))
+		not (ParameterEdge (from == param, to == targetCw ))
 		
 	then
-		ParameterWire pw = handler.generatedParameterWire( sourceCw, sourceCw, param, targetCw );
+		ParameterEdge pw = handler.generatedParameterEdge( sourceCw, sourceCw, param, targetCw );
 		//cw.setName("copied parameter: " + paramWire.getName());
 		handler.setName(pw, "[conditions] sync from: " + paramWire.getId() + " param=" + ((GeneratedElement) param).getId() + " run=" + run.getId() );
 		queue.add(pw, drools);
 
 end
 
-rule "Connect ParameterWires to ConditionWires connected to RunInstanceWires created by SyncWires (access/init)"
+rule "Connect ParameterEdges to ConditionWires connected to RunInstanceWires created by SyncWires (access/init)"
 	when
 		# we have a syncwire
 		sw : SyncWire(overridden == false)
@@ -134,7 +134,7 @@ rule "Connect ParameterWires to ConditionWires connected to RunInstanceWires cre
 
 		# and targets' value is being used for source's init
 		fvalue : ApplicationElementProperty ( eContainer == target, name == "fieldValue" )
-		param2 : ParameterWire ( from == fvalue, to == run ) 
+		param2 : ParameterEdge ( from == fvalue, to == run ) 
 
 		# and this SyncWire has a condition
 		condition : Condition ( )
@@ -144,14 +144,14 @@ rule "Connect ParameterWires to ConditionWires connected to RunInstanceWires cre
 		targetCw : ConditionWire (from == condition, to == run ) 
 		
 		# and the SyncWire had a parameter
-		param : WireEdgesSource ( )
-		paramWire : ParameterWire( from == param, to == sourceCw )
+		param : ParameterEdgesSource ( )
+		paramWire : ParameterEdge( from == param, to == sourceCw )
 
 		# but this wire does not have it
-		not (ParameterWire (from == param, to == targetCw ))
+		not (ParameterEdge (from == param, to == targetCw ))
 		
 	then
-		ParameterWire pw = handler.generatedParameterWire( sourceCw, sourceCw, param, targetCw );
+		ParameterEdge pw = handler.generatedParameterEdge( sourceCw, sourceCw, param, targetCw );
 		//cw.setName("copied parameter: " + paramWire.getName());
 		handler.setName(pw, "[conditions] sync from: " + paramWire.getId() + " param=" + ((GeneratedElement) param).getId() + " run=" + run.getId() );
 		queue.add(pw, drools);

@@ -203,10 +203,10 @@ rule "A LoginHandler of type 'user' should have an incoming Role as a parameter,
 		user : Role ( eContainer == store, name == "User" )
 	
 		# if there is already an incoming parameter wire, don't connect up User
-		not (ParameterWire ( to == login_handler ))
+		not (ParameterEdge ( to == login_handler ))
 	
 	then
-		ParameterWire param = handler.generatedParameterWire(login_handler, session, user, login_handler);
+		ParameterEdge param = handler.generatedParameterEdge(login_handler, session, user, login_handler);
 		queue.add(param, drools);
 
 end
@@ -344,10 +344,10 @@ rule "An AccessControlHandler that creates a LoginHandler should have the create
 		instance : UserInstance ( eContainer == session )
 		setWire : SetWire ( from == login_handler, to == instance )
 		
-		not ( ParameterWire ( from == instance, to == ach )) 
+		not ( ParameterEdge ( from == instance, to == ach )) 
 	
 	then
-		ParameterWire param = handler.generatedParameterWire(ach, ach, instance, ach);
+		ParameterEdge param = handler.generatedParameterEdge(ach, ach, instance, ach);
 		queue.add(param, drools);
 
 end
@@ -362,10 +362,10 @@ rule "A separate AccessControlHandler that creates a LoginHandler should have th
 		instance : UserInstance ( eContainer == session )
 		setWire : SetWire ( from == login_handler, to == instance )
 		
-		not ( ParameterWire ( from == instance, to == ach )) 
+		not ( ParameterEdge ( from == instance, to == ach )) 
 	
 	then
-		ParameterWire param = handler.generatedParameterWire(ach, ach, instance, ach);
+		ParameterEdge param = handler.generatedParameterEdge(ach, ach, instance, ach);
 		queue.add(param, drools);
 
 end

@@ -17,7 +17,7 @@ context model::Operation ERROR "Operation must have a name" :
 	name.length > 0;
 	
 context model::components::LoginHandler ERROR "A login handler must have an incoming parameter to check against" :
-	inEdges.exists ( e | model::wires::ParameterWire.isInstance(e) );
+	!inParameterEdges.isEmpty;
 
 context model::wires::RunInstanceWire ERROR "A run instance wire can only connect to an operation" :
 	model::Operation.isInstance( to );
@@ -111,10 +111,10 @@ context model::QueryParameter ERROR "A QueryParameter cannot be used on a Frame 
 	outEdges.forAll( e | isAccessibleOnFrame(containingFrame(this.eContainer), e.to) );
 
 context model::components::LoginHandler ERROR "A LoginHandler[user] can not have more than one incoming ParameterWire" :
-	(type != model::components::LoginHandlerTypes::USER) || inEdges.typeSelect(model::wires::ParameterWire).size <= 1; 
+	(type != model::components::LoginHandlerTypes::USER) || inParameterEdges.size <= 1; 
 
 context model::wires::SelectWire ERROR "A SelectWire has incoming Parameters, but does not have a query to use them" :
-	inEdges.typeSelect(model::wires::ParameterWire).size == 0 || (query != null && query.length > 0); 
+	inParameterEdges.isEmpty || (query != null && query.length > 0); 
 
 context model::scopes::Session ERROR "A Session can only contain one LoginHandler" :
 	elements.typeSelect(model::components::LoginHandler).size <= 1;

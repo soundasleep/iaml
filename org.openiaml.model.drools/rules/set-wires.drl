@@ -69,10 +69,10 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 		field : ApplicationElementProperty( eContainer == source, name=="fieldValue" )
 		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
 		
-		not (ParameterWire( eContainer == sw, from == field, to == wire )) 
+		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
 		
 	then
-		ParameterWire pw = handler.generatedParameterWire(sw, sw, field, wire); 
+		ParameterEdge pw = handler.generatedParameterEdge(sw, sw, field, wire); 
 		handler.setName(pw, "[sync] run instance parameter (source.edit)"); 
 		queue.add(pw, drools);
 
@@ -111,7 +111,7 @@ rule "Run instance wire from target.access to target.init, adding ConditionWire 
 		field : ApplicationElementProperty( eContainer == source, name=="fieldValue" )
 		
 		run : RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" )
-		param : ParameterWire( from == field, to == run )
+		param : ParameterEdge( from == field, to == run )
 		
 		# condition check
 		condition : CompositeCondition ( eContainer == source, name == "fieldValue is set" )
@@ -137,10 +137,10 @@ rule "Connect parameter wire to: run instance wire from target.access to target.
 		field : ApplicationElementProperty( eContainer == source, name=="fieldValue" )
 		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
 		
-		not (ParameterWire( eContainer == sw, from == field, to == wire )) 
+		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
 		
 	then
-		ParameterWire pw = handler.generatedParameterWire(sw, sw, field, wire); 
+		ParameterEdge pw = handler.generatedParameterEdge(sw, sw, field, wire); 
 		handler.setName(pw, "[sync] run instance parameter (source.access)"); 
 		queue.add(pw, drools);
 
@@ -221,15 +221,15 @@ rule "Cascaded SetWires: Parameters from parent to child [set]"
 		ecw : ConditionWire( from == condition, to == esw )
 		
 		# there is a parameter on the condition wire
-		parameter : WireEdgesSource( )
-		pw : ParameterWire( from == parameter, to == cw )
+		parameter : ParameterEdgesSource( )
+		pw : ParameterEdge( from == parameter, to == cw )
 
 		# and there isn't one on the element sync wire
-		not (epw : ParameterWire( from == parameter, to == ecw )) 
+		not (epw : ParameterEdge( from == parameter, to == ecw )) 
 		
 	then
 		# create it
-		ParameterWire epw = handler.generatedParameterWire( cw, cw, parameter, ecw );
+		ParameterEdge epw = handler.generatedParameterEdge( cw, cw, parameter, ecw );
 		handler.setName(epw, "[copied] from: " + pw.getId());
 		queue.add(epw, drools);
 
@@ -287,12 +287,12 @@ rule "Connect parameter for Session.init to incoming SetWires (contained in Fram
 		initrw : RunInstanceWire( eContainer == sw2, from == inite, to == operation, name == "run" )
 		
 		field : ApplicationElementProperty( eContainer == sourceElement, name=="fieldValue" )
-		pw : ParameterWire( eContainer == sw2, from == field, to == rw ) 
+		pw : ParameterEdge( eContainer == sw2, from == field, to == rw ) 
 
-		not( ParameterWire( eContainer == sw2, from == field, to == initrw ))  
+		not( ParameterEdge( eContainer == sw2, from == field, to == initrw ))  
 		
 	then
-		ParameterWire pw2 = handler.generatedParameterWire(sw, sw, field, initrw);
+		ParameterEdge pw2 = handler.generatedParameterEdge(sw, sw, field, initrw);
 		queue.add(pw2, drools);		
 end
 
@@ -415,7 +415,7 @@ rule "A SetWire between Attributes selected from a NewInstanceWire need to check
 		
 		attributeValue : ApplicationElementProperty ( eContainer == attribute, name == "fieldValue" )
 		
-		param : ParameterWire ( from == attributeValue, to == run )  
+		param : ParameterEdge ( from == attributeValue, to == run )  
 		
 		# exists? condition in the instance
 		existsCondition : Condition ( eContainer == instance, name == "exists?" )

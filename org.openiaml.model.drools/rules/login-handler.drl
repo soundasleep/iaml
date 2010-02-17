@@ -165,10 +165,10 @@ rule "Connect 'login key' parameter to 'check key' operation run wire"
 		mySetWire : SetWire( from == login_handler, to == value, name == "set" )
 		
 		wire : RunInstanceWire( from == access, to == check )
-		not (ParameterWire( from == value, to == wire ))
+		not (ParameterEdge( from == value, to == wire ))
 		
 	then
-		ParameterWire param = handler.generatedParameterWire(scope, page, value, wire);
+		ParameterEdge param = handler.generatedParameterEdge(scope, page, value, wire);
 		handler.setName(param, "[sessions] 'login key' parameter to 'check key'");
 		queue.add(param, drools);
 
@@ -197,7 +197,7 @@ rule "Create contents of 'check key' operation [type=secret_key]"
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
 		
 		expected : StaticValue( ) 
-		expected_param : ParameterWire( from == expected, to == login_handler )
+		expected_param : ParameterEdge( from == expected, to == login_handler )
 		
 		not (StartNode( eContainer == o))
 		# not (FinishNode( eContainer == o)) - not necessary
@@ -325,12 +325,12 @@ rule "Connect expected login key as parameter to check key operation"
 		login_handler : LoginHandler( eContainer == scope )
 		
 		expected : StaticValue( ) 
-		expected_param : ParameterWire( from == expected, to == login_handler )
+		expected_param : ParameterEdge( from == expected, to == login_handler )
 		
-		not (ParameterWire(from == expected, to == check ))	
+		not (ParameterEdge(from == expected, to == check ))	
 	
 	then
-		ParameterWire param = handler.generatedParameterWire(login_handler, page, expected, wire);
+		ParameterEdge param = handler.generatedParameterEdge(login_handler, page, expected, wire);
 		queue.add(param, drools);
 	
 end
@@ -411,7 +411,7 @@ rule "Create contents of 'do login' operation [type=secret_key]"
 		mySetWire : SetWire( from == login_handler, to == value, name == "set" )
 
 		expected : StaticValue( ) 
-		expected_param : ParameterWire( from == expected, to == login_handler )
+		expected_param : ParameterEdge( from == expected, to == login_handler )
 
 		form : InputForm( eContainer == login, name == "login form" )
 		button : Button ( eContainer == form, name == "Login" )
@@ -427,7 +427,7 @@ rule "Create contents of 'do login' operation [type=secret_key]"
 	then
 		
 		# connect field value as parameter
-		ParameterWire clickParam = handler.generatedParameterWire(login_handler, login, fieldValue, runClick);
+		ParameterEdge clickParam = handler.generatedParameterEdge(login_handler, login, fieldValue, runClick);
 		handler.setName(clickParam, "[sessions] field value as param");
 		queue.add(clickParam, drools);
 		
@@ -515,7 +515,7 @@ rule "Create text fields for login form of 'login' pages [type=domain_object]"
 		
 		# from a domain object
 		attribute : DomainAttribute ( )
-		param : ParameterWire ( from == attribute, to == login_handler )
+		param : ParameterEdge ( from == attribute, to == login_handler )
 		
 		not ( InputTextField ( eContainer == form, name == attribute.name ))
 
@@ -543,7 +543,7 @@ rule "Create text fields for login form of 'login' pages [type=user]"
 
 		# from a role		
 		role : Role ( )
-		param : ParameterWire ( from == role, to == login_handler )
+		param : ParameterEdge ( from == role, to == login_handler )
 		
 		# an attribute in that role
 		attribute : DomainAttribute ( eContainer == role, eval(functions.notPrimaryKey(attribute)) )
@@ -571,7 +571,7 @@ rule "Connect text fields for login form of 'login' pages to 'do login' run wire
 		
 		# from a domain object
 		attribute : DomainAttribute ( )
-		param : ParameterWire ( from == attribute, to == login_handler )
+		param : ParameterEdge ( from == attribute, to == login_handler )
 		
 		field : InputTextField ( eContainer == form, name == attribute.name )
 		fieldValue : ApplicationElementProperty ( eContainer == field, name == "fieldValue" )
@@ -579,10 +579,10 @@ rule "Connect text fields for login form of 'login' pages to 'do login' run wire
 		button : Button ( eContainer == form, name == "Login" )
 		run : RunInstanceWire ( from == button, to == operation, name == "onClick" )
 		
-		not ( ParameterWire ( from == fieldValue, to == run, name == attribute.name )) 
+		not ( ParameterEdge ( from == fieldValue, to == run, name == attribute.name )) 
 
 	then
-		ParameterWire param2 = handler.generatedParameterWire(login_handler, fieldValue, fieldValue, run);
+		ParameterEdge param2 = handler.generatedParameterEdge(login_handler, fieldValue, fieldValue, run);
 		handler.setName(param2, attribute.getName());
 		queue.add(param2, drools); 
 		
@@ -602,7 +602,7 @@ rule "Connect text fields for login form of 'login' pages to 'do login' run wire
 		# from a role
 		role : Role ( )
 		attribute : DomainAttribute ( eContainer == role )
-		param : ParameterWire ( from == role, to == login_handler )
+		param : ParameterEdge ( from == role, to == login_handler )
 		
 		field : InputTextField ( eContainer == form, name == attribute.name )
 		fieldValue : ApplicationElementProperty ( eContainer == field, name == "fieldValue" )
@@ -610,10 +610,10 @@ rule "Connect text fields for login form of 'login' pages to 'do login' run wire
 		button : Button ( eContainer == form, name == "Login" )
 		run : RunInstanceWire ( from == button, to == operation, name == "onClick" )
 		
-		not ( ParameterWire ( from == fieldValue, to == run, name == attribute.name )) 
+		not ( ParameterEdge ( from == fieldValue, to == run, name == attribute.name )) 
 
 	then
-		ParameterWire param2 = handler.generatedParameterWire(login_handler, fieldValue, fieldValue, run);
+		ParameterEdge param2 = handler.generatedParameterEdge(login_handler, fieldValue, fieldValue, run);
 		handler.setName(param2, attribute.getName());
 		queue.add(param2, drools); 
 		
@@ -714,7 +714,7 @@ rule "Create parameter for 'do login' operation inside login handler[type=domain
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.DOMAIN_OBJECT )
 		
 		attribute : DomainAttribute ( )
-		paramWire : ParameterWire( from == attribute, to == login_handler )
+		paramWire : ParameterEdge( from == attribute, to == login_handler )
 		
 		instance : DomainObjectInstance ( eContainer == scope )
 		setWire : SetWire ( from == login_handler, to == instance, name == "set" )
@@ -842,7 +842,7 @@ rule "Create parameter for 'do login' operation inside login handler[type=user]"
 		
 		role : Role ( )
 		attribute : DomainAttribute ( eContainer == role )
-		paramWire : ParameterWire( from == role, to == login_handler )
+		paramWire : ParameterEdge( from == role, to == login_handler )
 		
 		operation : CompositeOperation ( eContainer == scope, name == "do login" )
 		split : SplitNode ( eContainer == operation )
@@ -1089,7 +1089,7 @@ rule "Create contents (specific keys) of 'do logout' operation [type=object]"
 		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT )
 
 		attribute : DomainAttribute ( )
-		paramWire : ParameterWire ( from == attribute, to == login_handler )
+		paramWire : ParameterEdge ( from == attribute, to == login_handler )
 		
 		key : ApplicationElementProperty ( eContainer == session, 
 			eval(functions.loginAttributeMatches(key, attribute) ) )
@@ -1137,7 +1137,7 @@ rule "Create contents (specific keys) of 'do logout' operation [type=user]"
 
 		role : Role ( )
 		attribute : DomainAttribute ( eContainer == role, eval(functions.notPrimaryKey(attribute)) )
-		paramWire : ParameterWire ( from == role, to == login_handler )
+		paramWire : ParameterEdge ( from == role, to == login_handler )
 		
 		key : ApplicationElementProperty ( eContainer == session, 
 			eval(functions.loginAttributeMatches(key, attribute) ) )
@@ -1215,11 +1215,11 @@ rule "Create default logout successful page"
 end
 
 /**
- * If we have multiple incoming ParameterWires, we need special logic to
+ * If we have multiple incoming ParameterEdges, we need special logic to
  * only instantiate this rule once (thanks to queued insertions).
  *
  * Essentially, we create only SelectWire for each DomainObject
- * linked by a ParameterWire, and then use Java to generate the
+ * linked by a ParameterEdge, and then use Java to generate the
  * actual query from the Attributes.
  */
 rule "Create Select Wire between Domain Object types [object]"
@@ -1230,7 +1230,7 @@ rule "Create Select Wire between Domain Object types [object]"
 		login_handler : LoginHandler( 
 			eContainer == scope, 
 			type == LoginHandlerTypes.DOMAIN_OBJECT,
-			eval(functions.hasIncomingParameterWiresFrom(login_handler, dobj)) 
+			eval(functions.hasIncomingParameterEdgesFrom(login_handler, dobj)) 
 		)
 		
 		instance : DomainObjectInstance ( )
@@ -1241,20 +1241,7 @@ rule "Create Select Wire between Domain Object types [object]"
 	then
 		// find all the attributes as incoming parameter wires for the
 		// given DomainObject
-		String q = "";
-		for (WireEdge wire : login_handler.getInEdges()) {
-			if (wire.getFrom() instanceof DomainAttribute &&
-					dobj.equals(wire.getFrom().eContainer())) {
-				// add this attribute as a query
-				DomainAttribute attribute = (DomainAttribute) wire.getFrom();
-				if (functions.notPrimaryKey(attribute)) {
-					if (!q.isEmpty()) {
-						q += " and ";
-					}
-					q += attribute.getName() + " = :" + attribute.getName();
-				} 
-			}
-		}
+		String q = functions.getQueryString(login_handler, dobj);
 			
 		SelectWire wire = handler.generatedSelectWire(login_handler, login_handler, dobj, instance);
 		handler.setName(wire, "select");
@@ -1269,7 +1256,7 @@ rule "Create Select Wire between Domain Object types [user]"
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.USER )
 
 		role : Role ( )
-		parameter : ParameterWire( from == role, to == login_handler )
+		parameter : ParameterEdge( from == role, to == login_handler )
 
 		instance : UserInstance ( )
 		setWire : SetWire ( from == login_handler, to == instance )
@@ -1296,7 +1283,7 @@ rule "Update Select Wire between Domain Object types [user]"
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.USER )
 
 		role : Role ( )
-		parameter : ParameterWire( from == role, to == login_handler )
+		parameter : ParameterEdge( from == role, to == login_handler )
 
 		instance : UserInstance ( )
 		setWire : SetWire ( from == login_handler, to == instance )
@@ -1320,7 +1307,7 @@ rule "Create 'key attribute' property for LoginHandler[type = object]s"
 		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT )
 		
 		attribute : DomainAttribute ( )
-		paramWire : ParameterWire ( from == attribute, to == login_handler )
+		paramWire : ParameterEdge ( from == attribute, to == login_handler )
 		
 		not ( p : ApplicationElementProperty ( eContainer == session, 
 			eval(functions.loginAttributeMatches(p, attribute) ) ) )
@@ -1341,7 +1328,7 @@ rule "Create 'key attribute' property for LoginHandler[type = user]s"
 		
 		role : Role ( )
 		attribute : DomainAttribute ( eContainer == role, eval(functions.notPrimaryKey(attribute)) )
-		paramWire : ParameterWire ( from == role, to == login_handler )
+		paramWire : ParameterEdge ( from == role, to == login_handler )
 		
 		not ( p : ApplicationElementProperty ( eContainer == session, 
 			eval(functions.loginAttributeMatches(p, attribute) ) ) )
@@ -1362,7 +1349,7 @@ rule "Connect key properties to LoginHandler for LoginHandler[type = object]"
 		
 		object : DomainObject ( )
 		attribute : DomainAttribute ( eContainer == object )
-		paramWire : ParameterWire ( from == attribute, to == login_handler )
+		paramWire : ParameterEdge ( from == attribute, to == login_handler )
 		
 		instance : DomainObjectInstance ( )
 		setWire : SetWire ( from == login_handler, to == instance )
@@ -1388,7 +1375,7 @@ rule "Connect key properties to SelectWire for LoginHandler[type = object]"
 		
 		object : DomainObject ( )
 		attribute : DomainAttribute ( eContainer == object )
-		paramWire : ParameterWire ( from == attribute, to == login_handler )
+		paramWire : ParameterEdge ( from == attribute, to == login_handler )
 		
 		instance : DomainObjectInstance ( )
 		setWire : SetWire ( from == login_handler, to == instance )
@@ -1398,10 +1385,10 @@ rule "Connect key properties to SelectWire for LoginHandler[type = object]"
 		key : ApplicationElementProperty ( eContainer == session, 
 			eval(functions.loginAttributeMatches(key, attribute) ) )
 			
-		not ( ParameterWire ( from == key, to == select ))
+		not ( ParameterEdge ( from == key, to == select ))
 		
 	then
-		ParameterWire wire = handler.generatedParameterWire(login_handler, session, key, select);
+		ParameterEdge wire = handler.generatedParameterEdge(login_handler, session, key, select);
 		handler.setName(wire, attribute.getName());
 		queue.add(wire, drools); 
 	
@@ -1414,7 +1401,7 @@ rule "Connect key properties to SelectWire for LoginHandler[type = user]"
 		
 		role : Role ( )
 		attribute : DomainAttribute ( eContainer == role )
-		paramWire : ParameterWire ( from == role, to == login_handler )
+		paramWire : ParameterEdge ( from == role, to == login_handler )
 		
 		instance : UserInstance ( )
 		setWire : SetWire ( from == login_handler, to == instance )
@@ -1424,10 +1411,10 @@ rule "Connect key properties to SelectWire for LoginHandler[type = user]"
 		key : ApplicationElementProperty ( eContainer == session, 
 			eval(functions.loginAttributeMatches(key, attribute) ) )
 			
-		not ( ParameterWire ( from == key, to == select ))
+		not ( ParameterEdge ( from == key, to == select ))
 		
 	then
-		ParameterWire wire = handler.generatedParameterWire(login_handler, session, key, select);
+		ParameterEdge wire = handler.generatedParameterEdge(login_handler, session, key, select);
 		handler.setName(wire, attribute.getName());
 		queue.add(wire, drools); 
 	

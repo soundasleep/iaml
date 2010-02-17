@@ -148,7 +148,7 @@ public class MigrateModelAction extends ProgressEnabledUIAction<IFile> {
 	/**
 	 * Migrate a file to another file. 
 	 * 
-	 * We have a couple of options for loading the files for migration:
+	 * <p>We have a couple of options for loading the files for migration:
 	 * <ol>
 	 *   <li>Keep multiple instances of the model files in multiple plugins, and let
 	 *       EMF decide which model implementation to load. Once the model is loaded,
@@ -160,16 +160,16 @@ public class MigrateModelAction extends ProgressEnabledUIAction<IFile> {
 	 *       more error prone.</li> 
 	 * </ol>
 	 * 
-	 * The third option is more accessible but more work in the
+	 * <p>The third option is more accessible but more work in the
 	 * long term, but this is how we are doing it for now.
 	 * 
-	 * We also have some options for doing multiple migrations in a row (say v1, v2, v3, v4):
+	 * <p>We also have some options for doing multiple migrations in a row (say v1, v2, v3, v4):
 	 * <ol>
 	 *   <li>v1 -> v2, v2 -> v3, v3 -> v4</li>
 	 *   <li>v1 -> v4, v2 -> v4, v3 -> v4</li>
 	 * </ol>
 	 * 
-	 * The first option requires less development work but more processing time
+	 * <p>The first option requires less development work but more processing time
 	 * since they chain.
 	 * 
 	 * @param input
@@ -225,6 +225,7 @@ public class MigrateModelAction extends ProgressEnabledUIAction<IFile> {
             Transformer trans = transfac.newTransformer();
             trans.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");	// omit '<?xml version="1.0"?>'
             trans.setOutputProperty(OutputKeys.INDENT, "yes");
+            trans.setOutputProperty(OutputKeys.STANDALONE, "no");	// disable 'standalone='no' in <?xml ?> header
 
             // TODO clean this up into a piped input/output stream setup?
 			File f = File.createTempFile("test", "iaml");
@@ -236,8 +237,40 @@ public class MigrateModelAction extends ProgressEnabledUIAction<IFile> {
             
             // now pipe this new file into the desired target file
             FileInputStream fout = new FileInputStream(f);
-            IndentedStream indent = new IndentedStream(fout);
-            output.create(indent, true, monitor);
+            final IndentedStream indent = new IndentedStream(fout);
+            
+            /**
+             * Remove the "standalone='no'" declaration in generated documents.
+             */
+            InputStream indent2 = new InputStream() {
+            	
+            	// convert into a read-ahead reader
+            	private InlineStringReader internal = new InlineStringReader(new InputStreamReader(indent)) {
+
+					@Override
+					protected void throwWarning(String message, String buffer) {
+						// throw exception
+						throw new RuntimeException(message);
+					}
+            		
+            	};
+
+            	// ignore key
+            	private final String IGNORE = " standalone=\"no\"?>";
+            	
+				@Override
+				public int read() throws IOException {
+					if (IGNORE.equals(internal.readAhead(IGNORE.length()))) {
+						// ignore everything except the last two characters
+						internal.read(IGNORE.length() - 2);
+					}
+
+					// return the next character
+					return internal.read();
+				}
+            	
+            };
+            output.create(indent2, true, monitor);
             
             // delete original file
             f.delete();

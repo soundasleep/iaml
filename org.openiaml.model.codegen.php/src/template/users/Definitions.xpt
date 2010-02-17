@@ -34,7 +34,7 @@
 	function access_control_permissions_check_«safeNameString(id)»() {
 		«REM»find the desired UserInstance to check against«ENDREM»
 		«REM»there should be exactly one incoming parameter wire with a UserInstance«ENDREM»
-		«LET inEdges.typeSelect(model::wires::ParameterWire).from.typeSelect(model::users::UserInstance).first() AS user»
+		«LET inParameterEdges.from.typeSelect(model::users::UserInstance).first() AS user»
 			«IF user==null»
 				«EXPAND exception FOR throwException("No incoming UserInstances for AccessControlHandler " + this)»
 			«ENDIF»

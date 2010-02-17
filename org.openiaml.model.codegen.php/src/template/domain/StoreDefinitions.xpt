@@ -204,7 +204,7 @@
 			SET $attribute_name = ?
 			WHERE " . «EXPAND Select::getQuery FOR this-»;
 		$args = array($arg0);
-		$args2 = array(«EXPAND template::operations::Parameters::callParameter(true, this, false, true, currentFrame) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ","»);
+		$args2 = array(«EXPAND template::operations::Parameters::callParameter(true, this, false, true, currentFrame) FOREACH inParameterEdges SEPARATOR ","»);
 		foreach ($args2 as $k) {
 			$args[] = $k;
 		}

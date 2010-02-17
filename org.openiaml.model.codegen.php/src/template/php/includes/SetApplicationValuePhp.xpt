@@ -99,14 +99,15 @@ echo_necessary_update_callbacks();
 
 «DEFINE potentialContainerUpdates FOR model::visual::InputTextField»
 	«EXPAND potentialUpdates FOREACH outEdges»
+	«EXPAND potentialParameterUpdates FOREACH outParameterEdges»
 «ENDDEFINE»
 
 «DEFINE potentialUpdates FOR model::WireEdge»
 	«EXPAND exception FOR throwException("Unknown potential update wire edge: " + this)»
 «ENDDEFINE»
 
-«DEFINE potentialUpdates FOR model::wires::ParameterWire»
-	/* ParameterWire "«this-»" */
+«DEFINE potentialParameterUpdates FOR model::wires::ParameterEdge»
+	/* ParameterEdge "«this-»" */
 	«EXPAND potentialUpdatesParameter FOR to»
 «ENDDEFINE»
 «DEFINE potentialUpdates FOR model::wires::SyncWire»
@@ -123,6 +124,9 @@ echo_necessary_update_callbacks();
 	/* ignore «this» */
 «ENDDEFINE»
 «DEFINE potentialUpdatesParameter FOR model::WireEdgeDestination»
+	/* ignore «this» */
+«ENDDEFINE»
+«DEFINE potentialUpdatesParameter FOR model::wires::ParameterEdgeDestination»
 	/* ignore «this» */
 «ENDDEFINE»
 

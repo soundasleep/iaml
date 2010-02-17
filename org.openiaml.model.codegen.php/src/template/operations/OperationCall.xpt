@@ -66,11 +66,11 @@
 		«ENDREM»
 		«IF availableInCurrentScript(from, to)-»
 			«REM»// on current frame (wire id = «id»)«ENDREM»
-			do_«operationName(to)»(«EXPAND Parameters::callParameter(php, this, inStoreDb, false, currentFrame) FOREACH inEdges.typeSelect(model::wires::ParameterWire).sortBy(e|e.name) SEPARATOR ", "»);
+			do_«operationName(to)»(«EXPAND Parameters::callParameter(php, this, inStoreDb, false, currentFrame) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»);
 		«ELSE-»
 			«REM»// not on current frame (wire id = «id»)«ENDREM»
 			call_remote_event('«safeNameString(containingFrame(to).id)»', '«operationName(to)-»'
-				«IF inEdges.size>0», «EXPAND Parameters::callParameter(php, this, inStoreDb, false, currentFrame) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»«ENDIF»
+				«IF !inParameterEdges.isEmpty», «EXPAND Parameters::callParameter(php, this, inStoreDb, false, currentFrame) FOREACH inParameterEdges SEPARATOR ", "»«ENDIF»
 			);
 			«REM»				
 			store_event('«containingFrame(to).id»', 'do_«operationName(to)»'
@@ -79,11 +79,11 @@
 	«ELSEIF model::scopes::Session.isInstance(to.eContainer)-»
 		«IF availableInCurrentScript(from, to)-»
 			«REM»// on current frame (wire id = «id»)«ENDREM»
-			do_«operationName(to)»(«EXPAND Parameters::callParameter(php, this, inStoreDb, false, currentFrame) FOREACH inEdges.typeSelect(model::wires::ParameterWire).sortBy(e|e.name) SEPARATOR ", "»);
+			do_«operationName(to)»(«EXPAND Parameters::callParameter(php, this, inStoreDb, false, currentFrame) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»);
 		«ELSE-»
 			«REM»// not on current frame (wire id = «id»)«ENDREM»
 			call_remote_event('«safeNameString(containingFrame(to).id)»', '«operationName(to)-»'
-				«IF inEdges.size>0», «EXPAND Parameters::callParameter(php, this, inStoreDb, false, currentFrame) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»«ENDIF»
+				«IF !inParameterEdges.isEmpty», «EXPAND Parameters::callParameter(php, this, inStoreDb, false, currentFrame) FOREACH inParameterEdges SEPARATOR ", "»«ENDIF»
 			);
 			«REM»				
 			store_event('«containingFrame(to).id»', 'do_«operationName(to)»'
@@ -92,7 +92,7 @@
 	«ELSEIF isDomainAttribute(to.eContainer)-»
 		«REM»direct field --> abstract domain attribute«ENDREM»
 		store_db('«safeNameString(((model::DomainAttribute) to.eContainer).id)»'
-			«IF inEdges.size>0», «EXPAND Parameters::callParameter(php, this, inStoreDb, false, currentFrame) FOREACH inEdges.typeSelect(model::wires::ParameterWire) SEPARATOR ", "»«ENDIF»
+			«IF !inParameterEdges.isEmpty», «EXPAND Parameters::callParameter(php, this, inStoreDb, false, currentFrame) FOREACH inParameterEdges SEPARATOR ", "»«ENDIF»
 		); 
 	«ELSEIF isDomainAttributeInstance(to.eContainer)-»
 		«REM»direct field --> domain attribute instance«ENDREM»
@@ -225,13 +225,13 @@
  * This function will be executed with the response as a parameter.
  */
 «DEFINE callRemoteOperation(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::wires::RunInstanceWire-»
-	«IF inEdges.typeSelect(model::wires::ParameterWire).size > 0» 
-		var arg0 = «EXPAND Parameters::callParameter(php, this, inStoreDb, false, currentFrame) FOR inEdges.typeSelect(model::wires::ParameterWire).get(0)»;
+	«IF inParameterEdges.size > 0» 
+		var arg0 = «EXPAND Parameters::callParameter(php, this, inStoreDb, false, currentFrame) FOR inParameterEdges.get(0)»;
 	«ELSE»
 		var arg0 = null;	/* no parameter */
 	«ENDIF»
-	«IF inEdges.typeSelect(model::wires::ParameterWire).size > 1»
-		var arg1 = «EXPAND Parameters::callParameter(php, this, inStoreDb, false, currentFrame) FOR inEdges.typeSelect(model::wires::ParameterWire).get(1)»;
+	«IF inParameterEdges.size > 1»
+		var arg1 = «EXPAND Parameters::callParameter(php, this, inStoreDb, false, currentFrame) FOR inParameterEdges.get(1)»;
 	«ELSE»
 		var arg1 = null;	/* no parameter */
 	«ENDIF»

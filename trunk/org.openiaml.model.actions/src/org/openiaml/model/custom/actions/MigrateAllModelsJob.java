@@ -3,7 +3,7 @@
  */
 package org.openiaml.model.custom.actions;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -18,6 +18,7 @@ import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.ModelLoader;
 import org.openiaml.model.ModelLoader.ModelLoadException;
 
@@ -119,8 +120,16 @@ public class MigrateAllModelsJob extends AbstractIAMLJob {
 				// then try and load it
 				monitor.subTask("Loading " + model + " with EMF");
 				try {
-					ModelLoader.load(model);
+					EObject obj = ModelLoader.load(model);
 					migrateSuccessful = true;
+					
+					try {
+						// ask EMF to re-save it
+						obj.eResource().save( ModelLoader.getSaveOptions() );
+					} catch (IOException e) {
+						// IO exception during save
+						status.add(errorStatus("Could not save loaded model " + model + ": " + e.getMessage(), e));
+					}
 				} catch (ModelLoadException e) {
 					// loading failed; add error status
 					status.add(errorStatus("Could not load migrated model " + model + ": " + e.getMessage(), e));

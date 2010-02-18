@@ -71,18 +71,6 @@ context model::WireEdge ERROR "A WireEdge must have a 'to'" :
 context model::wires::ExtendsEdge ERROR "A Role cannot extend itself" :
 	from != to;
 
-context model::wires::ProvidesWire ERROR "An ProvidesWire can only connect from a Role" :
-	model::users::Role.isInstance(from);
-
-context model::wires::ProvidesWire ERROR "An ProvidesWire can only connect to a Permission" :
-	model::users::Permission.isInstance(to);
-
-context model::wires::RequiresWire ERROR "A RequiresWire can only be connected to ConstraintWires" :
-	inEdges.forAll( e | model::wires::ConstraintWire.isInstance(e) );
-
-context model::wires::RequiresWire ERROR "A RequireWire must connect to a Permission or a Role" :
-	model::users::Permission.isInstance(to) || model::users::Role.isInstance(to); 
-
 /*
  * isInstance() definitely works in OAW checks for abstract supertypes.
  * if a check isn't working, make sure that you are following the OAW

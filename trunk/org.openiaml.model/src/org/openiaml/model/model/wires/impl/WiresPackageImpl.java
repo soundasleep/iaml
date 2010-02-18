@@ -38,8 +38,8 @@ import org.openiaml.model.model.wires.NewInstanceWire;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.ParameterEdgeDestination;
 import org.openiaml.model.model.wires.ParameterEdgesSource;
-import org.openiaml.model.model.wires.ProvidesWire;
-import org.openiaml.model.model.wires.RequiresWire;
+import org.openiaml.model.model.wires.ProvidesEdge;
+import org.openiaml.model.model.wires.RequiresEdge;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SetWire;
@@ -137,7 +137,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass requiresWireEClass = null;
+	private EClass requiresEdgeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -151,7 +151,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass providesWireEClass = null;
+	private EClass providesEdgeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -502,8 +502,26 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getRequiresWire() {
-		return requiresWireEClass;
+	public EClass getRequiresEdge() {
+		return requiresEdgeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRequiresEdge_From() {
+		return (EReference)requiresEdgeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRequiresEdge_To() {
+		return (EReference)requiresEdgeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -529,8 +547,26 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getProvidesWire() {
-		return providesWireEClass;
+	public EClass getProvidesEdge() {
+		return providesEdgeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getProvidesEdge_From() {
+		return (EReference)providesEdgeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getProvidesEdge_To() {
+		return (EReference)providesEdgeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -678,12 +714,16 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		createEReference(extendsEdgeEClass, EXTENDS_EDGE__FROM);
 		createEReference(extendsEdgeEClass, EXTENDS_EDGE__TO);
 
-		requiresWireEClass = createEClass(REQUIRES_WIRE);
+		requiresEdgeEClass = createEClass(REQUIRES_EDGE);
+		createEReference(requiresEdgeEClass, REQUIRES_EDGE__FROM);
+		createEReference(requiresEdgeEClass, REQUIRES_EDGE__TO);
 
 		constraintWireEClass = createEClass(CONSTRAINT_WIRE);
 		createEAttribute(constraintWireEClass, CONSTRAINT_WIRE__TYPE);
 
-		providesWireEClass = createEClass(PROVIDES_WIRE);
+		providesEdgeEClass = createEClass(PROVIDES_EDGE);
+		createEReference(providesEdgeEClass, PROVIDES_EDGE__FROM);
+		createEReference(providesEdgeEClass, PROVIDES_EDGE__TO);
 
 		parameterEdgesSourceEClass = createEClass(PARAMETER_EDGES_SOURCE);
 		createEReference(parameterEdgesSourceEClass, PARAMETER_EDGES_SOURCE__OUT_PARAMETER_EDGES);
@@ -726,6 +766,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 
 		// Obtain other dependent packages
 		ModelPackage theModelPackage = (ModelPackage)EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI);
+		UsersPackage theUsersPackage = (UsersPackage)EPackage.Registry.INSTANCE.getEPackage(UsersPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -759,11 +800,11 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		newInstanceWireEClass.getESuperTypes().add(this.getCompositeWire());
 		extendsEdgeEClass.getESuperTypes().add(theModelPackage.getGeneratedElement());
 		extendsEdgeEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
-		requiresWireEClass.getESuperTypes().add(this.getSingleWire());
-		requiresWireEClass.getESuperTypes().add(theModelPackage.getWireEdgesSource());
-		requiresWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
+		requiresEdgeEClass.getESuperTypes().add(theModelPackage.getGeneratedElement());
+		requiresEdgeEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
+		requiresEdgeEClass.getESuperTypes().add(theModelPackage.getWireEdgesSource());
 		constraintWireEClass.getESuperTypes().add(this.getSingleWire());
-		providesWireEClass.getESuperTypes().add(this.getSingleWire());
+		providesEdgeEClass.getESuperTypes().add(theModelPackage.getGeneratedElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(singleWireEClass, SingleWire.class, "SingleWire", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -802,12 +843,16 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		initEReference(getExtendsEdge_From(), this.getExtendsEdgesSource(), this.getExtendsEdgesSource_OutExtendsEdges(), "from", null, 1, 1, ExtendsEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExtendsEdge_To(), this.getExtendsEdgeDestination(), this.getExtendsEdgeDestination_InExtendsEdges(), "to", null, 1, 1, ExtendsEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(requiresWireEClass, RequiresWire.class, "RequiresWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(requiresEdgeEClass, RequiresEdge.class, "RequiresEdge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getRequiresEdge_From(), theUsersPackage.getRequiresEdgesSource(), theUsersPackage.getRequiresEdgesSource_OutRequiresEdges(), "from", null, 1, 1, RequiresEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRequiresEdge_To(), theUsersPackage.getRequiresEdgeDestination(), theUsersPackage.getRequiresEdgeDestination_InRequiresEdges(), "to", null, 1, 1, RequiresEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(constraintWireEClass, ConstraintWire.class, "ConstraintWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getConstraintWire_Type(), this.getConstraintTypes(), "type", null, 1, 1, ConstraintWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(providesWireEClass, ProvidesWire.class, "ProvidesWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(providesEdgeEClass, ProvidesEdge.class, "ProvidesEdge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getProvidesEdge_From(), theUsersPackage.getProvidesEdgesSource(), theUsersPackage.getProvidesEdgesSource_OutProvidesEdges(), "from", null, 1, 1, ProvidesEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProvidesEdge_To(), theUsersPackage.getProvidesEdgeDestination(), theUsersPackage.getProvidesEdgeDestination_InProvidesEdges(), "to", null, 1, 1, ProvidesEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(parameterEdgesSourceEClass, ParameterEdgesSource.class, "ParameterEdgesSource", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getParameterEdgesSource_OutParameterEdges(), this.getParameterEdge(), this.getParameterEdge_From(), "outParameterEdges", null, 0, -1, ParameterEdgesSource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -922,10 +967,11 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 			 "changed", "0.4.3 to no longer be a Wire; added \'from\' and \'to\' references; renamed to ExtendsEdge"
 		   });			
 		addAnnotation
-		  (requiresWireEClass, 
+		  (requiresEdgeEClass, 
 		   source, 
 		   new String[] {
-			 "added", "0.4"
+			 "added", "0.4",
+			 "changed", "0.4.3 to no longer be a Wire; added \'from\' and \'to\' references; renamed to RequiresEdge"
 		   });			
 		addAnnotation
 		  (constraintWireEClass, 
@@ -940,10 +986,11 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 			 "added", "0.4"
 		   });		
 		addAnnotation
-		  (providesWireEClass, 
+		  (providesEdgeEClass, 
 		   source, 
 		   new String[] {
-			 "added", "0.4"
+			 "added", "0.4",
+			 "changed", "0.4.3 to no longer be a Wire; added \'from\' and \'to\' references; renamed to ProvidesEdge"
 		   });				
 		addAnnotation
 		  (parameterEdgesSourceEClass, 
@@ -1034,7 +1081,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 			 "documentation", "Represents the inheritance of all target elements by the source element."
 		   });			
 		addAnnotation
-		  (requiresWireEClass, 
+		  (requiresEdgeEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Represents the requirements for a {@link LoginHandler}, such as {@link Role Roles} and {@link Permission Permissions}."
@@ -1046,7 +1093,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 			 "documentation", "Allows for the definition of complex {@link RequiresWire requirements}."
 		   });				
 		addAnnotation
-		  (providesWireEClass, 
+		  (providesEdgeEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Indicates that the source {@link Role} provides the target {@link Permission}."

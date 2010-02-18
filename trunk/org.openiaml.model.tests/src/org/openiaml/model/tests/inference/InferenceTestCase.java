@@ -56,6 +56,8 @@ import org.openiaml.model.model.operations.OperationCallNode;
 import org.openiaml.model.model.operations.SplitNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.Session;
+import org.openiaml.model.model.users.RequiresEdgeDestination;
+import org.openiaml.model.model.users.RequiresEdgesSource;
 import org.openiaml.model.model.users.Role;
 import org.openiaml.model.model.users.UserInstance;
 import org.openiaml.model.model.users.UserStore;
@@ -73,7 +75,7 @@ import org.openiaml.model.model.wires.NewInstanceWire;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.ParameterEdgeDestination;
 import org.openiaml.model.model.wires.ParameterEdgesSource;
-import org.openiaml.model.model.wires.RequiresWire;
+import org.openiaml.model.model.wires.RequiresEdge;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SetWire;
@@ -887,7 +889,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	}
 	
 	/**
-	 * Assert there exists only one unidirectional ExtendsWire between
+	 * Assert there exists only one unidirectional ExtendsEdge between
 	 * the given elements.
 	 *
 	 * @return The element found
@@ -899,14 +901,15 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	}
 	
 	/**
-	 * Assert there exists only one unidirectional RequiresWire between
+	 * Assert there exists only one unidirectional RequiresEdge between
 	 * the given elements.
 	 *
 	 * @return The element found
 	 */
-	public RequiresWire assertHasRequiresWire(EObject container, WireEdgesSource from, WireEdgeDestination to) throws JaxenException {
-		return (RequiresWire) assertHasWireFromTo(container, from, to, 
-				RequiresWire.class);
+	public RequiresEdge assertHasRequiresEdge(EObject container, RequiresEdgesSource from, RequiresEdgeDestination to) throws JaxenException {
+		Set<RequiresEdge> params = getRequiresEdgesFromTo(container, from, to);
+		assertEquals("Should be exactly one requires edge: " + params, 1, params.size());
+		return params.iterator().next();
 	}
 	
 	/**

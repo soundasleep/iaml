@@ -30,6 +30,8 @@ import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.ParameterEdgesSource;
+import org.openiaml.model.model.wires.ProvidesEdge;
+import org.openiaml.model.model.wires.RequiresEdge;
 import org.openiaml.model.model.wires.WiresPackage;
 
 /**
@@ -47,6 +49,8 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.impl.StaticValueImpl#getWires <em>Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.StaticValueImpl#getParameterEdges <em>Parameter Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.StaticValueImpl#getExtendsEdges <em>Extends Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.StaticValueImpl#getRequiresEdges <em>Requires Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.StaticValueImpl#getProvidesEdges <em>Provides Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.StaticValueImpl#getOutEdges <em>Out Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.StaticValueImpl#getOutFlows <em>Out Flows</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.StaticValueImpl#getOutParameterEdges <em>Out Parameter Edges</em>}</li>
@@ -176,6 +180,26 @@ public class StaticValueImpl extends EObjectImpl implements StaticValue {
 	 * @ordered
 	 */
 	protected EList<ExtendsEdge> extendsEdges;
+
+	/**
+	 * The cached value of the '{@link #getRequiresEdges() <em>Requires Edges</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRequiresEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<RequiresEdge> requiresEdges;
+
+	/**
+	 * The cached value of the '{@link #getProvidesEdges() <em>Provides Edges</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProvidesEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ProvidesEdge> providesEdges;
 
 	/**
 	 * The cached value of the '{@link #getOutEdges() <em>Out Edges</em>}' reference list.
@@ -383,6 +407,30 @@ public class StaticValueImpl extends EObjectImpl implements StaticValue {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<RequiresEdge> getRequiresEdges() {
+		if (requiresEdges == null) {
+			requiresEdges = new EObjectContainmentEList<RequiresEdge>(RequiresEdge.class, this, ModelPackage.STATIC_VALUE__REQUIRES_EDGES);
+		}
+		return requiresEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ProvidesEdge> getProvidesEdges() {
+		if (providesEdges == null) {
+			providesEdges = new EObjectContainmentEList<ProvidesEdge>(ProvidesEdge.class, this, ModelPackage.STATIC_VALUE__PROVIDES_EDGES);
+		}
+		return providesEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<WireEdge> getOutEdges() {
 		if (outEdges == null) {
 			outEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, ModelPackage.STATIC_VALUE__OUT_EDGES, ModelPackage.WIRE_EDGE__FROM);
@@ -472,6 +520,10 @@ public class StaticValueImpl extends EObjectImpl implements StaticValue {
 				return ((InternalEList<?>)getParameterEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.STATIC_VALUE__EXTENDS_EDGES:
 				return ((InternalEList<?>)getExtendsEdges()).basicRemove(otherEnd, msgs);
+			case ModelPackage.STATIC_VALUE__REQUIRES_EDGES:
+				return ((InternalEList<?>)getRequiresEdges()).basicRemove(otherEnd, msgs);
+			case ModelPackage.STATIC_VALUE__PROVIDES_EDGES:
+				return ((InternalEList<?>)getProvidesEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.STATIC_VALUE__OUT_EDGES:
 				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.STATIC_VALUE__OUT_FLOWS:
@@ -506,6 +558,10 @@ public class StaticValueImpl extends EObjectImpl implements StaticValue {
 				return getParameterEdges();
 			case ModelPackage.STATIC_VALUE__EXTENDS_EDGES:
 				return getExtendsEdges();
+			case ModelPackage.STATIC_VALUE__REQUIRES_EDGES:
+				return getRequiresEdges();
+			case ModelPackage.STATIC_VALUE__PROVIDES_EDGES:
+				return getProvidesEdges();
 			case ModelPackage.STATIC_VALUE__OUT_EDGES:
 				return getOutEdges();
 			case ModelPackage.STATIC_VALUE__OUT_FLOWS:
@@ -554,6 +610,14 @@ public class StaticValueImpl extends EObjectImpl implements StaticValue {
 			case ModelPackage.STATIC_VALUE__EXTENDS_EDGES:
 				getExtendsEdges().clear();
 				getExtendsEdges().addAll((Collection<? extends ExtendsEdge>)newValue);
+				return;
+			case ModelPackage.STATIC_VALUE__REQUIRES_EDGES:
+				getRequiresEdges().clear();
+				getRequiresEdges().addAll((Collection<? extends RequiresEdge>)newValue);
+				return;
+			case ModelPackage.STATIC_VALUE__PROVIDES_EDGES:
+				getProvidesEdges().clear();
+				getProvidesEdges().addAll((Collection<? extends ProvidesEdge>)newValue);
 				return;
 			case ModelPackage.STATIC_VALUE__OUT_EDGES:
 				getOutEdges().clear();
@@ -606,6 +670,12 @@ public class StaticValueImpl extends EObjectImpl implements StaticValue {
 			case ModelPackage.STATIC_VALUE__EXTENDS_EDGES:
 				getExtendsEdges().clear();
 				return;
+			case ModelPackage.STATIC_VALUE__REQUIRES_EDGES:
+				getRequiresEdges().clear();
+				return;
+			case ModelPackage.STATIC_VALUE__PROVIDES_EDGES:
+				getProvidesEdges().clear();
+				return;
 			case ModelPackage.STATIC_VALUE__OUT_EDGES:
 				getOutEdges().clear();
 				return;
@@ -646,6 +716,10 @@ public class StaticValueImpl extends EObjectImpl implements StaticValue {
 				return parameterEdges != null && !parameterEdges.isEmpty();
 			case ModelPackage.STATIC_VALUE__EXTENDS_EDGES:
 				return extendsEdges != null && !extendsEdges.isEmpty();
+			case ModelPackage.STATIC_VALUE__REQUIRES_EDGES:
+				return requiresEdges != null && !requiresEdges.isEmpty();
+			case ModelPackage.STATIC_VALUE__PROVIDES_EDGES:
+				return providesEdges != null && !providesEdges.isEmpty();
 			case ModelPackage.STATIC_VALUE__OUT_EDGES:
 				return outEdges != null && !outEdges.isEmpty();
 			case ModelPackage.STATIC_VALUE__OUT_FLOWS:
@@ -670,6 +744,8 @@ public class StaticValueImpl extends EObjectImpl implements StaticValue {
 				case ModelPackage.STATIC_VALUE__WIRES: return ModelPackage.CONTAINS_WIRES__WIRES;
 				case ModelPackage.STATIC_VALUE__PARAMETER_EDGES: return ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES;
 				case ModelPackage.STATIC_VALUE__EXTENDS_EDGES: return ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES;
+				case ModelPackage.STATIC_VALUE__REQUIRES_EDGES: return ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES;
+				case ModelPackage.STATIC_VALUE__PROVIDES_EDGES: return ModelPackage.CONTAINS_WIRES__PROVIDES_EDGES;
 				default: return -1;
 			}
 		}
@@ -711,6 +787,8 @@ public class StaticValueImpl extends EObjectImpl implements StaticValue {
 				case ModelPackage.CONTAINS_WIRES__WIRES: return ModelPackage.STATIC_VALUE__WIRES;
 				case ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES: return ModelPackage.STATIC_VALUE__PARAMETER_EDGES;
 				case ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES: return ModelPackage.STATIC_VALUE__EXTENDS_EDGES;
+				case ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES: return ModelPackage.STATIC_VALUE__REQUIRES_EDGES;
+				case ModelPackage.CONTAINS_WIRES__PROVIDES_EDGES: return ModelPackage.STATIC_VALUE__PROVIDES_EDGES;
 				default: return -1;
 			}
 		}

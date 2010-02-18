@@ -37,6 +37,8 @@ import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
+import org.openiaml.model.model.wires.ProvidesEdge;
+import org.openiaml.model.model.wires.RequiresEdge;
 
 /**
  * <!-- begin-user-doc -->
@@ -55,6 +57,8 @@ import org.openiaml.model.model.wires.ParameterEdge;
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getWires <em>Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getParameterEdges <em>Parameter Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getExtendsEdges <em>Extends Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getRequiresEdges <em>Requires Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getProvidesEdges <em>Provides Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getGeneratedElements <em>Generated Elements</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#isOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getConditions <em>Conditions</em>}</li>
@@ -208,6 +212,26 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * @ordered
 	 */
 	protected EList<ExtendsEdge> extendsEdges;
+
+	/**
+	 * The cached value of the '{@link #getRequiresEdges() <em>Requires Edges</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRequiresEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<RequiresEdge> requiresEdges;
+
+	/**
+	 * The cached value of the '{@link #getProvidesEdges() <em>Provides Edges</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProvidesEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ProvidesEdge> providesEdges;
 
 	/**
 	 * The cached value of the '{@link #getGeneratedElements() <em>Generated Elements</em>}' reference list.
@@ -489,6 +513,30 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<RequiresEdge> getRequiresEdges() {
+		if (requiresEdges == null) {
+			requiresEdges = new EObjectContainmentEList<RequiresEdge>(RequiresEdge.class, this, ModelPackage.INTERNET_APPLICATION__REQUIRES_EDGES);
+		}
+		return requiresEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ProvidesEdge> getProvidesEdges() {
+		if (providesEdges == null) {
+			providesEdges = new EObjectContainmentEList<ProvidesEdge>(ProvidesEdge.class, this, ModelPackage.INTERNET_APPLICATION__PROVIDES_EDGES);
+		}
+		return providesEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<GeneratedElement> getGeneratedElements() {
 		if (generatedElements == null) {
 			generatedElements = new EObjectWithInverseResolvingEList.ManyInverse<GeneratedElement>(GeneratedElement.class, this, ModelPackage.INTERNET_APPLICATION__GENERATED_ELEMENTS, ModelPackage.GENERATED_ELEMENT__GENERATED_BY);
@@ -635,6 +683,10 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return ((InternalEList<?>)getParameterEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__EXTENDS_EDGES:
 				return ((InternalEList<?>)getExtendsEdges()).basicRemove(otherEnd, msgs);
+			case ModelPackage.INTERNET_APPLICATION__REQUIRES_EDGES:
+				return ((InternalEList<?>)getRequiresEdges()).basicRemove(otherEnd, msgs);
+			case ModelPackage.INTERNET_APPLICATION__PROVIDES_EDGES:
+				return ((InternalEList<?>)getProvidesEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__GENERATED_ELEMENTS:
 				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__CONDITIONS:
@@ -679,6 +731,10 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return getParameterEdges();
 			case ModelPackage.INTERNET_APPLICATION__EXTENDS_EDGES:
 				return getExtendsEdges();
+			case ModelPackage.INTERNET_APPLICATION__REQUIRES_EDGES:
+				return getRequiresEdges();
+			case ModelPackage.INTERNET_APPLICATION__PROVIDES_EDGES:
+				return getProvidesEdges();
 			case ModelPackage.INTERNET_APPLICATION__GENERATED_ELEMENTS:
 				return getGeneratedElements();
 			case ModelPackage.INTERNET_APPLICATION__OVERRIDDEN:
@@ -743,6 +799,14 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 			case ModelPackage.INTERNET_APPLICATION__EXTENDS_EDGES:
 				getExtendsEdges().clear();
 				getExtendsEdges().addAll((Collection<? extends ExtendsEdge>)newValue);
+				return;
+			case ModelPackage.INTERNET_APPLICATION__REQUIRES_EDGES:
+				getRequiresEdges().clear();
+				getRequiresEdges().addAll((Collection<? extends RequiresEdge>)newValue);
+				return;
+			case ModelPackage.INTERNET_APPLICATION__PROVIDES_EDGES:
+				getProvidesEdges().clear();
+				getProvidesEdges().addAll((Collection<? extends ProvidesEdge>)newValue);
 				return;
 			case ModelPackage.INTERNET_APPLICATION__GENERATED_ELEMENTS:
 				getGeneratedElements().clear();
@@ -816,6 +880,12 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 			case ModelPackage.INTERNET_APPLICATION__EXTENDS_EDGES:
 				getExtendsEdges().clear();
 				return;
+			case ModelPackage.INTERNET_APPLICATION__REQUIRES_EDGES:
+				getRequiresEdges().clear();
+				return;
+			case ModelPackage.INTERNET_APPLICATION__PROVIDES_EDGES:
+				getProvidesEdges().clear();
+				return;
 			case ModelPackage.INTERNET_APPLICATION__GENERATED_ELEMENTS:
 				getGeneratedElements().clear();
 				return;
@@ -872,6 +942,10 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return parameterEdges != null && !parameterEdges.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__EXTENDS_EDGES:
 				return extendsEdges != null && !extendsEdges.isEmpty();
+			case ModelPackage.INTERNET_APPLICATION__REQUIRES_EDGES:
+				return requiresEdges != null && !requiresEdges.isEmpty();
+			case ModelPackage.INTERNET_APPLICATION__PROVIDES_EDGES:
+				return providesEdges != null && !providesEdges.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__GENERATED_ELEMENTS:
 				return generatedElements != null && !generatedElements.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__OVERRIDDEN:
@@ -925,6 +999,8 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				case ModelPackage.INTERNET_APPLICATION__WIRES: return ModelPackage.CONTAINS_WIRES__WIRES;
 				case ModelPackage.INTERNET_APPLICATION__PARAMETER_EDGES: return ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES;
 				case ModelPackage.INTERNET_APPLICATION__EXTENDS_EDGES: return ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES;
+				case ModelPackage.INTERNET_APPLICATION__REQUIRES_EDGES: return ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES;
+				case ModelPackage.INTERNET_APPLICATION__PROVIDES_EDGES: return ModelPackage.CONTAINS_WIRES__PROVIDES_EDGES;
 				default: return -1;
 			}
 		}
@@ -983,6 +1059,8 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				case ModelPackage.CONTAINS_WIRES__WIRES: return ModelPackage.INTERNET_APPLICATION__WIRES;
 				case ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES: return ModelPackage.INTERNET_APPLICATION__PARAMETER_EDGES;
 				case ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES: return ModelPackage.INTERNET_APPLICATION__EXTENDS_EDGES;
+				case ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES: return ModelPackage.INTERNET_APPLICATION__REQUIRES_EDGES;
+				case ModelPackage.CONTAINS_WIRES__PROVIDES_EDGES: return ModelPackage.INTERNET_APPLICATION__PROVIDES_EDGES;
 				default: return -1;
 			}
 		}

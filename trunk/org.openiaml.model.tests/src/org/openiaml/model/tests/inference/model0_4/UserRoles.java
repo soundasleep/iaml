@@ -25,7 +25,7 @@ import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.ParameterEdge;
-import org.openiaml.model.model.wires.RequiresWire;
+import org.openiaml.model.model.wires.RequiresEdge;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SetWire;
@@ -62,7 +62,7 @@ public class UserRoles extends InferenceTestCase {
 		
 		AccessControlHandler ach = assertHasAccessControlHandler(session, "role-based access");
 		assertNotGenerated(ach);
-		RequiresWire requires = assertHasRequiresWire(session, ach, role);
+		RequiresEdge requires = assertHasRequiresEdge(session, ach, role);
 		assertNotGenerated(requires);
 
 		// there shouldn't be a login handler on this page

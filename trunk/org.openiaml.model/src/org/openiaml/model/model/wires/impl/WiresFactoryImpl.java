@@ -23,8 +23,8 @@ import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.NewInstanceWire;
 import org.openiaml.model.model.wires.ParameterEdge;
-import org.openiaml.model.model.wires.ProvidesWire;
-import org.openiaml.model.model.wires.RequiresWire;
+import org.openiaml.model.model.wires.ProvidesEdge;
+import org.openiaml.model.model.wires.RequiresEdge;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SetWire;
@@ -86,9 +86,9 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 			case WiresPackage.CONDITION_WIRE: return createConditionWire();
 			case WiresPackage.NEW_INSTANCE_WIRE: return createNewInstanceWire();
 			case WiresPackage.EXTENDS_EDGE: return createExtendsEdge();
-			case WiresPackage.REQUIRES_WIRE: return createRequiresWire();
+			case WiresPackage.REQUIRES_EDGE: return createRequiresEdge();
 			case WiresPackage.CONSTRAINT_WIRE: return createConstraintWire();
-			case WiresPackage.PROVIDES_WIRE: return createProvidesWire();
+			case WiresPackage.PROVIDES_EDGE: return createProvidesEdge();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -239,10 +239,10 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public RequiresWire createRequiresWire() {
-		RequiresWireImpl requiresWire = new RequiresWireImpl();
-		generateID(requiresWire);
-		return requiresWire;
+	public RequiresEdge createRequiresEdge() {
+		RequiresEdgeImpl requiresEdge = new RequiresEdgeImpl();
+		generateID(requiresEdge);
+		return requiresEdge;
 	}
 
 	/**
@@ -261,10 +261,10 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public ProvidesWire createProvidesWire() {
-		ProvidesWireImpl providesWire = new ProvidesWireImpl();
-		generateID(providesWire);
-		return providesWire;
+	public ProvidesEdge createProvidesEdge() {
+		ProvidesEdgeImpl providesEdge = new ProvidesEdgeImpl();
+		generateID(providesEdge);
+		return providesEdge;
 	}
 
 	/**

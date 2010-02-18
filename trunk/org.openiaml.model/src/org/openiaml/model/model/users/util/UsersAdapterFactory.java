@@ -26,6 +26,10 @@ import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.users.Permission;
+import org.openiaml.model.model.users.ProvidesEdgeDestination;
+import org.openiaml.model.model.users.ProvidesEdgesSource;
+import org.openiaml.model.model.users.RequiresEdgeDestination;
+import org.openiaml.model.model.users.RequiresEdgesSource;
 import org.openiaml.model.model.users.Role;
 import org.openiaml.model.model.users.UserInstance;
 import org.openiaml.model.model.users.UserStore;
@@ -106,6 +110,22 @@ public class UsersAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseUserInstance(UserInstance object) {
 				return createUserInstanceAdapter();
+			}
+			@Override
+			public Adapter caseProvidesEdgesSource(ProvidesEdgesSource object) {
+				return createProvidesEdgesSourceAdapter();
+			}
+			@Override
+			public Adapter caseProvidesEdgeDestination(ProvidesEdgeDestination object) {
+				return createProvidesEdgeDestinationAdapter();
+			}
+			@Override
+			public Adapter caseRequiresEdgesSource(RequiresEdgesSource object) {
+				return createRequiresEdgesSourceAdapter();
+			}
+			@Override
+			public Adapter caseRequiresEdgeDestination(RequiresEdgeDestination object) {
+				return createRequiresEdgeDestinationAdapter();
 			}
 			@Override
 			public Adapter caseContainsOperations(ContainsOperations object) {
@@ -256,6 +276,62 @@ public class UsersAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createUserInstanceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.users.ProvidesEdgesSource <em>Provides Edges Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.users.ProvidesEdgesSource
+	 * @generated
+	 */
+	public Adapter createProvidesEdgesSourceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.users.ProvidesEdgeDestination <em>Provides Edge Destination</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.users.ProvidesEdgeDestination
+	 * @generated
+	 */
+	public Adapter createProvidesEdgeDestinationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.users.RequiresEdgesSource <em>Requires Edges Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.users.RequiresEdgesSource
+	 * @generated
+	 */
+	public Adapter createRequiresEdgesSourceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.users.RequiresEdgeDestination <em>Requires Edge Destination</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.users.RequiresEdgeDestination
+	 * @generated
+	 */
+	public Adapter createRequiresEdgeDestinationAdapter() {
 		return null;
 	}
 

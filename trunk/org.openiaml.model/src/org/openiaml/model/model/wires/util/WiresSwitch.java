@@ -30,8 +30,8 @@ import org.openiaml.model.model.wires.NewInstanceWire;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.ParameterEdgeDestination;
 import org.openiaml.model.model.wires.ParameterEdgesSource;
-import org.openiaml.model.model.wires.ProvidesWire;
-import org.openiaml.model.model.wires.RequiresWire;
+import org.openiaml.model.model.wires.ProvidesEdge;
+import org.openiaml.model.model.wires.RequiresEdge;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SetWire;
@@ -250,16 +250,14 @@ public class WiresSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case WiresPackage.REQUIRES_WIRE: {
-				RequiresWire requiresWire = (RequiresWire)theEObject;
-				T result = caseRequiresWire(requiresWire);
-				if (result == null) result = caseSingleWire(requiresWire);
-				if (result == null) result = caseWireEdgesSource(requiresWire);
-				if (result == null) result = caseWireEdgeDestination(requiresWire);
-				if (result == null) result = caseWireEdge(requiresWire);
-				if (result == null) result = caseShouldntContainWires(requiresWire);
-				if (result == null) result = caseGeneratedElement(requiresWire);
-				if (result == null) result = caseContainsWires(requiresWire);
+			case WiresPackage.REQUIRES_EDGE: {
+				RequiresEdge requiresEdge = (RequiresEdge)theEObject;
+				T result = caseRequiresEdge(requiresEdge);
+				if (result == null) result = caseGeneratedElement(requiresEdge);
+				if (result == null) result = caseWireEdgeDestination(requiresEdge);
+				if (result == null) result = caseWireEdgesSource(requiresEdge);
+				if (result == null) result = caseShouldntContainWires(requiresEdge);
+				if (result == null) result = caseContainsWires(requiresEdge);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -272,12 +270,10 @@ public class WiresSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case WiresPackage.PROVIDES_WIRE: {
-				ProvidesWire providesWire = (ProvidesWire)theEObject;
-				T result = caseProvidesWire(providesWire);
-				if (result == null) result = caseSingleWire(providesWire);
-				if (result == null) result = caseWireEdge(providesWire);
-				if (result == null) result = caseGeneratedElement(providesWire);
+			case WiresPackage.PROVIDES_EDGE: {
+				ProvidesEdge providesEdge = (ProvidesEdge)theEObject;
+				T result = caseProvidesEdge(providesEdge);
+				if (result == null) result = caseGeneratedElement(providesEdge);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -475,17 +471,17 @@ public class WiresSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Requires Wire</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Requires Edge</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Requires Wire</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Requires Edge</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseRequiresWire(RequiresWire object) {
+	public T caseRequiresEdge(RequiresEdge object) {
 		return null;
 	}
 
@@ -505,17 +501,17 @@ public class WiresSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Provides Wire</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Provides Edge</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Provides Wire</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Provides Edge</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseProvidesWire(ProvidesWire object) {
+	public T caseProvidesEdge(ProvidesEdge object) {
 		return null;
 	}
 

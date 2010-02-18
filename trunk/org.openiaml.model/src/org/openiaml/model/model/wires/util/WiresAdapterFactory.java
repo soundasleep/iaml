@@ -30,8 +30,8 @@ import org.openiaml.model.model.wires.NewInstanceWire;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.ParameterEdgeDestination;
 import org.openiaml.model.model.wires.ParameterEdgesSource;
-import org.openiaml.model.model.wires.ProvidesWire;
-import org.openiaml.model.model.wires.RequiresWire;
+import org.openiaml.model.model.wires.ProvidesEdge;
+import org.openiaml.model.model.wires.RequiresEdge;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SetWire;
@@ -140,16 +140,16 @@ public class WiresAdapterFactory extends AdapterFactoryImpl {
 				return createExtendsEdgeAdapter();
 			}
 			@Override
-			public Adapter caseRequiresWire(RequiresWire object) {
-				return createRequiresWireAdapter();
+			public Adapter caseRequiresEdge(RequiresEdge object) {
+				return createRequiresEdgeAdapter();
 			}
 			@Override
 			public Adapter caseConstraintWire(ConstraintWire object) {
 				return createConstraintWireAdapter();
 			}
 			@Override
-			public Adapter caseProvidesWire(ProvidesWire object) {
-				return createProvidesWireAdapter();
+			public Adapter caseProvidesEdge(ProvidesEdge object) {
+				return createProvidesEdgeAdapter();
 			}
 			@Override
 			public Adapter caseParameterEdgesSource(ParameterEdgesSource object) {
@@ -378,16 +378,16 @@ public class WiresAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.RequiresWire <em>Requires Wire</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.RequiresEdge <em>Requires Edge</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.openiaml.model.model.wires.RequiresWire
+	 * @see org.openiaml.model.model.wires.RequiresEdge
 	 * @generated
 	 */
-	public Adapter createRequiresWireAdapter() {
+	public Adapter createRequiresEdgeAdapter() {
 		return null;
 	}
 
@@ -406,16 +406,16 @@ public class WiresAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.ProvidesWire <em>Provides Wire</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.ProvidesEdge <em>Provides Edge</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.openiaml.model.model.wires.ProvidesWire
+	 * @see org.openiaml.model.model.wires.ProvidesEdge
 	 * @generated
 	 */
-	public Adapter createProvidesWireAdapter() {
+	public Adapter createProvidesEdgeAdapter() {
 		return null;
 	}
 

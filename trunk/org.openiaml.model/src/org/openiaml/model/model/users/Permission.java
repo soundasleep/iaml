@@ -10,7 +10,6 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.wires.ParameterEdgesSource;
-import org.openiaml.model.model.wires.ProvidesWire;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,5 +25,5 @@ import org.openiaml.model.model.wires.ProvidesWire;
  * @model
  * @generated
  */
-public interface Permission extends NamedElement, WireEdgesSource, WireEdgeDestination, ParameterEdgesSource {
+public interface Permission extends NamedElement, WireEdgesSource, WireEdgeDestination, ParameterEdgesSource, RequiresEdgeDestination, ProvidesEdgeDestination {
 } // Permission

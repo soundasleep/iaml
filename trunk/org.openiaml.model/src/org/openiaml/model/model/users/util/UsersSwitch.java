@@ -26,6 +26,10 @@ import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.users.Permission;
+import org.openiaml.model.model.users.ProvidesEdgeDestination;
+import org.openiaml.model.model.users.ProvidesEdgesSource;
+import org.openiaml.model.model.users.RequiresEdgeDestination;
+import org.openiaml.model.model.users.RequiresEdgesSource;
 import org.openiaml.model.model.users.Role;
 import org.openiaml.model.model.users.UserInstance;
 import org.openiaml.model.model.users.UserStore;
@@ -127,6 +131,8 @@ public class UsersSwitch<T> {
 				Role role = (Role)theEObject;
 				T result = caseRole(role);
 				if (result == null) result = caseDomainObject(role);
+				if (result == null) result = caseRequiresEdgeDestination(role);
+				if (result == null) result = caseProvidesEdgesSource(role);
 				if (result == null) result = caseApplicationElement(role);
 				if (result == null) result = caseParameterEdgesSource(role);
 				if (result == null) result = caseExtendsEdgesSource(role);
@@ -152,6 +158,8 @@ public class UsersSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(permission);
 				if (result == null) result = caseWireEdgeDestination(permission);
 				if (result == null) result = caseParameterEdgesSource(permission);
+				if (result == null) result = caseRequiresEdgeDestination(permission);
+				if (result == null) result = caseProvidesEdgeDestination(permission);
 				if (result == null) result = caseGeneratedElement(permission);
 				if (result == null) result = caseShouldntContainWires(permission);
 				if (result == null) result = caseContainsWires(permission);
@@ -176,6 +184,30 @@ public class UsersSwitch<T> {
 				if (result == null) result = caseGeneratesElements(userInstance);
 				if (result == null) result = caseContainsConditions(userInstance);
 				if (result == null) result = caseContainsWires(userInstance);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case UsersPackage.PROVIDES_EDGES_SOURCE: {
+				ProvidesEdgesSource providesEdgesSource = (ProvidesEdgesSource)theEObject;
+				T result = caseProvidesEdgesSource(providesEdgesSource);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case UsersPackage.PROVIDES_EDGE_DESTINATION: {
+				ProvidesEdgeDestination providesEdgeDestination = (ProvidesEdgeDestination)theEObject;
+				T result = caseProvidesEdgeDestination(providesEdgeDestination);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case UsersPackage.REQUIRES_EDGES_SOURCE: {
+				RequiresEdgesSource requiresEdgesSource = (RequiresEdgesSource)theEObject;
+				T result = caseRequiresEdgesSource(requiresEdgesSource);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case UsersPackage.REQUIRES_EDGE_DESTINATION: {
+				RequiresEdgeDestination requiresEdgeDestination = (RequiresEdgeDestination)theEObject;
+				T result = caseRequiresEdgeDestination(requiresEdgeDestination);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -240,6 +272,66 @@ public class UsersSwitch<T> {
 	 * @generated
 	 */
 	public T caseUserInstance(UserInstance object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Provides Edges Source</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Provides Edges Source</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseProvidesEdgesSource(ProvidesEdgesSource object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Provides Edge Destination</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Provides Edge Destination</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseProvidesEdgeDestination(ProvidesEdgeDestination object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Requires Edges Source</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Requires Edges Source</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRequiresEdgesSource(RequiresEdgesSource object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Requires Edge Destination</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Requires Edge Destination</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRequiresEdgeDestination(RequiresEdgeDestination object) {
 		return null;
 	}
 

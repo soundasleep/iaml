@@ -106,6 +106,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ContainsWires/wires"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ContainsWires/parameterEdges"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ContainsWires/extendsEdges"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ContainsWires/requiresEdges"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ContainsWires/providesEdges"/>
     </genClasses>
     <genClasses image="false" ecoreClass="iaml.ecore#//ShouldntContainWires"/>
     <genClasses image="false" ecoreClass="iaml.ecore#//GeneratedElement">
@@ -207,11 +209,21 @@
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference iaml.ecore#//wires/ExtendsEdge/to"/>
       </genClasses>
-      <genClasses ecoreClass="iaml.ecore#//wires/RequiresWire"/>
+      <genClasses ecoreClass="iaml.ecore#//wires/RequiresEdge">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference iaml.ecore#//wires/RequiresEdge/from"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference iaml.ecore#//wires/RequiresEdge/to"/>
+      </genClasses>
       <genClasses ecoreClass="iaml.ecore#//wires/ConstraintWire">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/ConstraintWire/type"/>
       </genClasses>
-      <genClasses ecoreClass="iaml.ecore#//wires/ProvidesWire"/>
+      <genClasses ecoreClass="iaml.ecore#//wires/ProvidesEdge">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference iaml.ecore#//wires/ProvidesEdge/from"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference iaml.ecore#//wires/ProvidesEdge/to"/>
+      </genClasses>
       <genClasses image="false" ecoreClass="iaml.ecore#//wires/ParameterEdgesSource">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference iaml.ecore#//wires/ParameterEdgesSource/outParameterEdges"/>
@@ -288,6 +300,22 @@
       <genClasses ecoreClass="iaml.ecore#//users/Role"/>
       <genClasses ecoreClass="iaml.ecore#//users/Permission"/>
       <genClasses ecoreClass="iaml.ecore#//users/UserInstance"/>
+      <genClasses image="false" ecoreClass="iaml.ecore#//users/ProvidesEdgesSource">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference iaml.ecore#//users/ProvidesEdgesSource/outProvidesEdges"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="iaml.ecore#//users/ProvidesEdgeDestination">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference iaml.ecore#//users/ProvidesEdgeDestination/inProvidesEdges"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="iaml.ecore#//users/RequiresEdgesSource">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference iaml.ecore#//users/RequiresEdgesSource/outRequiresEdges"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="iaml.ecore#//users/RequiresEdgeDestination">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference iaml.ecore#//users/RequiresEdgeDestination/inRequiresEdges"/>
+      </genClasses>
     </nestedGenPackages>
   </genPackages>
 </genmodel:GenModel>

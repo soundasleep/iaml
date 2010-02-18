@@ -299,6 +299,7 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 		// Obtain other dependent packages
 		ModelPackage theModelPackage = (ModelPackage)EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI);
 		WiresPackage theWiresPackage = (WiresPackage)EPackage.Registry.INSTANCE.getEPackage(WiresPackage.eNS_URI);
+		UsersPackage theUsersPackage = (UsersPackage)EPackage.Registry.INSTANCE.getEPackage(UsersPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -311,6 +312,8 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 		accessControlHandlerEClass.getESuperTypes().add(theModelPackage.getApplicationElementContainer());
 		accessControlHandlerEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
 		accessControlHandlerEClass.getESuperTypes().add(theWiresPackage.getParameterEdgeDestination());
+		accessControlHandlerEClass.getESuperTypes().add(theUsersPackage.getRequiresEdgesSource());
+		accessControlHandlerEClass.getESuperTypes().add(theUsersPackage.getProvidesEdgesSource());
 		gateEClass.getESuperTypes().add(theModelPackage.getNamedElement());
 		gateEClass.getESuperTypes().add(theModelPackage.getWireEdgesSource());
 		gateEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());

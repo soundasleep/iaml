@@ -95,15 +95,15 @@
         collapsible="true">
       <tools
           xsi:type="gmftool:CreationTool"
-          title="ProvidesWire"
-          description="Create new ProvidesWire">
+          title="ProvidesEdge"
+          description="Create new ProvidesEdge">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/ProvidesWire.gif"
+            path="icons/full/obj16/ProvidesEdge.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/ProvidesWire.gif"
+            path="icons/full/obj32/ProvidesEdge.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
       <tools

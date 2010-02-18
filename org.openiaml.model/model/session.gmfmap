@@ -757,27 +757,25 @@
   </links>
   <links>
     <domainMetaElement
-        href="iaml.ecore#//wires/RequiresWire"/>
-    <domainSpecialization
-        body="self.oclIsTypeOf( RequiresWire )"/>
+        href="iaml.ecore#//wires/RequiresEdge"/>
     <labelMappings
         readOnly="true">
       <diagramLabel
-          href="iaml.gmfgraph#RequiresWireName"/>
+          href="iaml.gmfgraph#RequiresEdgeName"/>
     </labelMappings>
     <containmentFeature
-        href="iaml.ecore#//ContainsWires/wires"/>
+        href="iaml.ecore#//ContainsWires/requiresEdges"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="session.gmftool#//@palette/@tools.4/@tools.1"/>
     <diagramLink
-        href="iaml.gmfgraph#RequiresWire"/>
+        href="iaml.gmfgraph#RequiresEdge"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/from"/>
+        href="iaml.ecore#//wires/RequiresEdge/from"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/to"/>
+        href="iaml.ecore#//wires/RequiresEdge/to"/>
   </links>
   <links>
     <domainMetaElement

@@ -373,15 +373,15 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="RequiresWire"
-          description="Create new RequiresWire">
+          title="RequiresEdge"
+          description="Create new RequiresEdge">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/RequiresWire.gif"
+            path="icons/full/obj16/RequiresEdge.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/RequiresWire.gif"
+            path="icons/full/obj32/RequiresEdge.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
       <tools

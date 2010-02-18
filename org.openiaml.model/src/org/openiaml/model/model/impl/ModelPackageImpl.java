@@ -1143,6 +1143,24 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getContainsWires_RequiresEdges() {
+		return (EReference)containsWiresEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getContainsWires_ProvidesEdges() {
+		return (EReference)containsWiresEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getShouldntContainWires() {
 		return shouldntContainWiresEClass;
 	}
@@ -1604,6 +1622,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(containsWiresEClass, CONTAINS_WIRES__WIRES);
 		createEReference(containsWiresEClass, CONTAINS_WIRES__PARAMETER_EDGES);
 		createEReference(containsWiresEClass, CONTAINS_WIRES__EXTENDS_EDGES);
+		createEReference(containsWiresEClass, CONTAINS_WIRES__REQUIRES_EDGES);
+		createEReference(containsWiresEClass, CONTAINS_WIRES__PROVIDES_EDGES);
 
 		shouldntContainWiresEClass = createEClass(SHOULDNT_CONTAIN_WIRES);
 
@@ -1932,6 +1952,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getContainsWires_Wires(), this.getWireEdge(), null, "wires", null, 0, -1, ContainsWires.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getContainsWires_ParameterEdges(), theWiresPackage.getParameterEdge(), null, "parameterEdges", null, 0, -1, ContainsWires.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getContainsWires_ExtendsEdges(), theWiresPackage.getExtendsEdge(), null, "extendsEdges", null, 0, -1, ContainsWires.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getContainsWires_RequiresEdges(), theWiresPackage.getRequiresEdge(), null, "requiresEdges", null, 0, -1, ContainsWires.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getContainsWires_ProvidesEdges(), theWiresPackage.getProvidesEdge(), null, "providesEdges", null, 0, -1, ContainsWires.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(shouldntContainWiresEClass, ShouldntContainWires.class, "ShouldntContainWires", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

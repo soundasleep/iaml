@@ -10,6 +10,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
+import org.openiaml.model.model.wires.ProvidesEdge;
+import org.openiaml.model.model.wires.RequiresEdge;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,6 +24,8 @@ import org.openiaml.model.model.wires.ParameterEdge;
  *   <li>{@link org.openiaml.model.model.ContainsWires#getWires <em>Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.ContainsWires#getParameterEdges <em>Parameter Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.ContainsWires#getExtendsEdges <em>Extends Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.ContainsWires#getRequiresEdges <em>Requires Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.ContainsWires#getProvidesEdges <em>Provides Edges</em>}</li>
  * </ul>
  * </p>
  *
@@ -78,5 +82,37 @@ public interface ContainsWires extends EObject {
 	 * @generated
 	 */
 	EList<ExtendsEdge> getExtendsEdges();
+
+	/**
+	 * Returns the value of the '<em><b>Requires Edges</b></em>' containment reference list.
+	 * The list contents are of type {@link org.openiaml.model.model.wires.RequiresEdge}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Requires Edges</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Requires Edges</em>' containment reference list.
+	 * @see org.openiaml.model.model.ModelPackage#getContainsWires_RequiresEdges()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<RequiresEdge> getRequiresEdges();
+
+	/**
+	 * Returns the value of the '<em><b>Provides Edges</b></em>' containment reference list.
+	 * The list contents are of type {@link org.openiaml.model.model.wires.ProvidesEdge}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Provides Edges</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Provides Edges</em>' containment reference list.
+	 * @see org.openiaml.model.model.ModelPackage#getContainsWires_ProvidesEdges()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<ProvidesEdge> getProvidesEdges();
 
 } // ContainsWires

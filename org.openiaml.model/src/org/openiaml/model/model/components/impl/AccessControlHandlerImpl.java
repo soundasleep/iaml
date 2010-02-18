@@ -17,8 +17,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.components.AccessControlHandler;
 import org.openiaml.model.model.components.ComponentsPackage;
 import org.openiaml.model.model.impl.ApplicationElementContainerImpl;
+import org.openiaml.model.model.users.ProvidesEdgesSource;
+import org.openiaml.model.model.users.RequiresEdgesSource;
+import org.openiaml.model.model.users.UsersPackage;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.ParameterEdgeDestination;
+import org.openiaml.model.model.wires.ProvidesEdge;
+import org.openiaml.model.model.wires.RequiresEdge;
 import org.openiaml.model.model.wires.WiresPackage;
 
 /**
@@ -29,6 +34,8 @@ import org.openiaml.model.model.wires.WiresPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.openiaml.model.model.components.impl.AccessControlHandlerImpl#getInParameterEdges <em>In Parameter Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.components.impl.AccessControlHandlerImpl#getOutRequiresEdges <em>Out Requires Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.components.impl.AccessControlHandlerImpl#getOutProvidesEdges <em>Out Provides Edges</em>}</li>
  * </ul>
  * </p>
  *
@@ -44,6 +51,25 @@ public class AccessControlHandlerImpl extends ApplicationElementContainerImpl im
 	 * @ordered
 	 */
 	protected EList<ParameterEdge> inParameterEdges;
+
+	/**
+	 * The cached value of the '{@link #getOutRequiresEdges() <em>Out Requires Edges</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOutRequiresEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<RequiresEdge> outRequiresEdges;
+	/**
+	 * The cached value of the '{@link #getOutProvidesEdges() <em>Out Provides Edges</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOutProvidesEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ProvidesEdge> outProvidesEdges;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -81,12 +107,40 @@ public class AccessControlHandlerImpl extends ApplicationElementContainerImpl im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<RequiresEdge> getOutRequiresEdges() {
+		if (outRequiresEdges == null) {
+			outRequiresEdges = new EObjectWithInverseResolvingEList<RequiresEdge>(RequiresEdge.class, this, ComponentsPackage.ACCESS_CONTROL_HANDLER__OUT_REQUIRES_EDGES, WiresPackage.REQUIRES_EDGE__FROM);
+		}
+		return outRequiresEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ProvidesEdge> getOutProvidesEdges() {
+		if (outProvidesEdges == null) {
+			outProvidesEdges = new EObjectWithInverseResolvingEList<ProvidesEdge>(ProvidesEdge.class, this, ComponentsPackage.ACCESS_CONTROL_HANDLER__OUT_PROVIDES_EDGES, WiresPackage.PROVIDES_EDGE__FROM);
+		}
+		return outProvidesEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case ComponentsPackage.ACCESS_CONTROL_HANDLER__IN_PARAMETER_EDGES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInParameterEdges()).basicAdd(otherEnd, msgs);
+			case ComponentsPackage.ACCESS_CONTROL_HANDLER__OUT_REQUIRES_EDGES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutRequiresEdges()).basicAdd(otherEnd, msgs);
+			case ComponentsPackage.ACCESS_CONTROL_HANDLER__OUT_PROVIDES_EDGES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutProvidesEdges()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -101,6 +155,10 @@ public class AccessControlHandlerImpl extends ApplicationElementContainerImpl im
 		switch (featureID) {
 			case ComponentsPackage.ACCESS_CONTROL_HANDLER__IN_PARAMETER_EDGES:
 				return ((InternalEList<?>)getInParameterEdges()).basicRemove(otherEnd, msgs);
+			case ComponentsPackage.ACCESS_CONTROL_HANDLER__OUT_REQUIRES_EDGES:
+				return ((InternalEList<?>)getOutRequiresEdges()).basicRemove(otherEnd, msgs);
+			case ComponentsPackage.ACCESS_CONTROL_HANDLER__OUT_PROVIDES_EDGES:
+				return ((InternalEList<?>)getOutProvidesEdges()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -115,6 +173,10 @@ public class AccessControlHandlerImpl extends ApplicationElementContainerImpl im
 		switch (featureID) {
 			case ComponentsPackage.ACCESS_CONTROL_HANDLER__IN_PARAMETER_EDGES:
 				return getInParameterEdges();
+			case ComponentsPackage.ACCESS_CONTROL_HANDLER__OUT_REQUIRES_EDGES:
+				return getOutRequiresEdges();
+			case ComponentsPackage.ACCESS_CONTROL_HANDLER__OUT_PROVIDES_EDGES:
+				return getOutProvidesEdges();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -132,6 +194,14 @@ public class AccessControlHandlerImpl extends ApplicationElementContainerImpl im
 				getInParameterEdges().clear();
 				getInParameterEdges().addAll((Collection<? extends ParameterEdge>)newValue);
 				return;
+			case ComponentsPackage.ACCESS_CONTROL_HANDLER__OUT_REQUIRES_EDGES:
+				getOutRequiresEdges().clear();
+				getOutRequiresEdges().addAll((Collection<? extends RequiresEdge>)newValue);
+				return;
+			case ComponentsPackage.ACCESS_CONTROL_HANDLER__OUT_PROVIDES_EDGES:
+				getOutProvidesEdges().clear();
+				getOutProvidesEdges().addAll((Collection<? extends ProvidesEdge>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -147,6 +217,12 @@ public class AccessControlHandlerImpl extends ApplicationElementContainerImpl im
 			case ComponentsPackage.ACCESS_CONTROL_HANDLER__IN_PARAMETER_EDGES:
 				getInParameterEdges().clear();
 				return;
+			case ComponentsPackage.ACCESS_CONTROL_HANDLER__OUT_REQUIRES_EDGES:
+				getOutRequiresEdges().clear();
+				return;
+			case ComponentsPackage.ACCESS_CONTROL_HANDLER__OUT_PROVIDES_EDGES:
+				getOutProvidesEdges().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -161,6 +237,10 @@ public class AccessControlHandlerImpl extends ApplicationElementContainerImpl im
 		switch (featureID) {
 			case ComponentsPackage.ACCESS_CONTROL_HANDLER__IN_PARAMETER_EDGES:
 				return inParameterEdges != null && !inParameterEdges.isEmpty();
+			case ComponentsPackage.ACCESS_CONTROL_HANDLER__OUT_REQUIRES_EDGES:
+				return outRequiresEdges != null && !outRequiresEdges.isEmpty();
+			case ComponentsPackage.ACCESS_CONTROL_HANDLER__OUT_PROVIDES_EDGES:
+				return outProvidesEdges != null && !outProvidesEdges.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -178,6 +258,18 @@ public class AccessControlHandlerImpl extends ApplicationElementContainerImpl im
 				default: return -1;
 			}
 		}
+		if (baseClass == RequiresEdgesSource.class) {
+			switch (derivedFeatureID) {
+				case ComponentsPackage.ACCESS_CONTROL_HANDLER__OUT_REQUIRES_EDGES: return UsersPackage.REQUIRES_EDGES_SOURCE__OUT_REQUIRES_EDGES;
+				default: return -1;
+			}
+		}
+		if (baseClass == ProvidesEdgesSource.class) {
+			switch (derivedFeatureID) {
+				case ComponentsPackage.ACCESS_CONTROL_HANDLER__OUT_PROVIDES_EDGES: return UsersPackage.PROVIDES_EDGES_SOURCE__OUT_PROVIDES_EDGES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -191,6 +283,18 @@ public class AccessControlHandlerImpl extends ApplicationElementContainerImpl im
 		if (baseClass == ParameterEdgeDestination.class) {
 			switch (baseFeatureID) {
 				case WiresPackage.PARAMETER_EDGE_DESTINATION__IN_PARAMETER_EDGES: return ComponentsPackage.ACCESS_CONTROL_HANDLER__IN_PARAMETER_EDGES;
+				default: return -1;
+			}
+		}
+		if (baseClass == RequiresEdgesSource.class) {
+			switch (baseFeatureID) {
+				case UsersPackage.REQUIRES_EDGES_SOURCE__OUT_REQUIRES_EDGES: return ComponentsPackage.ACCESS_CONTROL_HANDLER__OUT_REQUIRES_EDGES;
+				default: return -1;
+			}
+		}
+		if (baseClass == ProvidesEdgesSource.class) {
+			switch (baseFeatureID) {
+				case UsersPackage.PROVIDES_EDGES_SOURCE__OUT_PROVIDES_EDGES: return ComponentsPackage.ACCESS_CONTROL_HANDLER__OUT_PROVIDES_EDGES;
 				default: return -1;
 			}
 		}

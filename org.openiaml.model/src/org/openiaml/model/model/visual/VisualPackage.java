@@ -116,6 +116,24 @@ public interface VisualPackage extends EPackage {
 	int FRAME__EXTENDS_EDGES = ModelPackage.SCOPE__EXTENDS_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Requires Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME__REQUIRES_EDGES = ModelPackage.SCOPE__REQUIRES_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Provides Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME__PROVIDES_EDGES = ModelPackage.SCOPE__PROVIDES_EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -369,6 +387,24 @@ public interface VisualPackage extends EPackage {
 	int INPUT_FORM__EXTENDS_EDGES = ModelPackage.VISIBLE_THING__EXTENDS_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Requires Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_FORM__REQUIRES_EDGES = ModelPackage.VISIBLE_THING__REQUIRES_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Provides Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_FORM__PROVIDES_EDGES = ModelPackage.VISIBLE_THING__PROVIDES_EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -557,6 +593,24 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int INPUT_TEXT_FIELD__EXTENDS_EDGES = ModelPackage.VISIBLE_THING__EXTENDS_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Requires Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_TEXT_FIELD__REQUIRES_EDGES = ModelPackage.VISIBLE_THING__REQUIRES_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Provides Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_TEXT_FIELD__PROVIDES_EDGES = ModelPackage.VISIBLE_THING__PROVIDES_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
@@ -750,6 +804,24 @@ public interface VisualPackage extends EPackage {
 	int BUTTON__EXTENDS_EDGES = ModelPackage.VISIBLE_THING__EXTENDS_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Requires Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__REQUIRES_EDGES = ModelPackage.VISIBLE_THING__REQUIRES_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Provides Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__PROVIDES_EDGES = ModelPackage.VISIBLE_THING__PROVIDES_EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -938,6 +1010,24 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int LABEL__EXTENDS_EDGES = ModelPackage.VISIBLE_THING__EXTENDS_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Requires Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LABEL__REQUIRES_EDGES = ModelPackage.VISIBLE_THING__REQUIRES_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Provides Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LABEL__PROVIDES_EDGES = ModelPackage.VISIBLE_THING__PROVIDES_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.

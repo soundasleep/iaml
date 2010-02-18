@@ -52,6 +52,8 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 	
 	private List<String> parameterWires = null;
 	private List<String> extendsWires = null;
+	private List<String> requiresWires = null;
+	private List<String> providesWires = null;
 	
 	/**
 	 * We will cycle over the document, and find out which edges are
@@ -64,6 +66,8 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 		
 		parameterWires = new ArrayList<String>();
 		extendsWires = new ArrayList<String>();
+		requiresWires = new ArrayList<String>();
+		providesWires = new ArrayList<String>();
 		prepareDocumentRecurse(documentElement, errors);
 
 	}
@@ -77,23 +81,41 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 	private void prepareDocumentRecurse(Element e,
 			List<ExpectedMigrationException> errors) {
 		
-		if ("wires".equals(e.getNodeName()) &&
-				"iaml.wires:ParameterWire".equals(e.getAttribute("xsi:type"))) {
-			String id = e.getAttribute("id");
-			if (id != null) {
-				parameterWires.add(id);
-			} else {
-				errors.add(new ExpectedMigrationException(this, e, "Element was a ParameterWire but did not have an id attribute."));
+		if ("wires".equals(e.getNodeName())) {
+			if ("iaml.wires:ParameterWire".equals(e.getAttribute("xsi:type"))) {
+				String id = e.getAttribute("id");
+				if (id != null) {
+					parameterWires.add(id);
+				} else {
+					errors.add(new ExpectedMigrationException(this, e, "Element was a ParameterWire but did not have an id attribute."));
+				}
 			}
-		}
-		
-		if ("wires".equals(e.getNodeName()) &&
-				"iaml.wires:ExtendsWire".equals(e.getAttribute("xsi:type"))) {
-			String id = e.getAttribute("id");
-			if (id != null) {
-				extendsWires.add(id);
-			} else {
-				errors.add(new ExpectedMigrationException(this, e, "Element was a ExtendsWire but did not have an id attribute."));
+			
+			if ("iaml.wires:ExtendsWire".equals(e.getAttribute("xsi:type"))) {
+				String id = e.getAttribute("id");
+				if (id != null) {
+					extendsWires.add(id);
+				} else {
+					errors.add(new ExpectedMigrationException(this, e, "Element was a ExtendsWire but did not have an id attribute."));
+				}
+			}
+
+			if ("iaml.wires:RequiresWire".equals(e.getAttribute("xsi:type"))) {
+				String id = e.getAttribute("id");
+				if (id != null) {
+					requiresWires.add(id);
+				} else {
+					errors.add(new ExpectedMigrationException(this, e, "Element was a RequiresWire but did not have an id attribute."));
+				}
+			}
+
+			if ("iaml.wires:ProvidesWire".equals(e.getAttribute("xsi:type"))) {
+				String id = e.getAttribute("id");
+				if (id != null) {
+					providesWires.add(id);
+				} else {
+					errors.add(new ExpectedMigrationException(this, e, "Element was a ProvidesWire but did not have an id attribute."));
+				}
 			}
 		}
 		
@@ -156,6 +178,14 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 			return "iaml.wires:ExtendsEdge";
 		}
 
+		if (xsiType.equals("iaml.wires:RequiresWire")) {
+			return "iaml.wires:RequiresEdge";
+		}
+
+		if (xsiType.equals("iaml.wires:ProvidesWire")) {
+			return "iaml.wires:ProvidesEdge";
+		}
+
 		return super.replaceType(element, xsiType, errors);
 	}
 
@@ -177,16 +207,30 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 			return "scopes";
 		}
 		
-		// <wires xsi:type="iaml.wires:ParameterWire"> 
-		// --> <parameterEdges>
-		if (nodeName.equals("wires") && "iaml.wires:ParameterWire".equals(xsiType)) {
-			return "parameterEdges";
-		}
-		
-		// <wires xsi:type="iaml.wires:ExtendsWire"> 
-		// --> <extendsEdges>
-		if (nodeName.equals("wires") && "iaml.wires:ExtendsWire".equals(xsiType)) {
-			return "extendsEdges";
+		if (nodeName.equals("wires")) {
+			// <wires xsi:type="iaml.wires:ParameterWire"> 
+			// --> <parameterEdges>
+			if ("iaml.wires:ParameterWire".equals(xsiType)) {
+				return "parameterEdges";
+			}
+			
+			// <wires xsi:type="iaml.wires:ExtendsWire"> 
+			// --> <extendsEdges>
+			if ("iaml.wires:ExtendsWire".equals(xsiType)) {
+				return "extendsEdges";
+			}
+			
+			// <wires xsi:type="iaml.wires:RequiresWire"> 
+			// --> <requiresEdges>
+			if ("iaml.wires:RequiresWire".equals(xsiType)) {
+				return "requiresEdges";
+			}
+			
+			// <wires xsi:type="iaml.wires:ProvidesWire"> 
+			// --> <providesEdges>
+			if ("iaml.wires:ProvidesWire".equals(xsiType)) {
+				return "providesEdges";
+			}
 		}
 		
 		// <children xsi:type="iaml.visual:Page"> or <sessions>
@@ -250,6 +294,24 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 
 		if (!old.getAttribute("outEdges").isEmpty()) {
 			splitReferences(old, "outEdges", extendsWires, "outExtendsEdges");
+		}
+
+		// any inEdges or outEdges to an old RequiresWire?
+		if (!old.getAttribute("inEdges").isEmpty()) {
+			splitReferences(old, "inEdges", requiresWires, "inRequiresEdges");
+		}
+
+		if (!old.getAttribute("outEdges").isEmpty()) {
+			splitReferences(old, "outEdges", requiresWires, "outRequiresEdges");
+		}
+
+		// any inEdges or outEdges to an old ProvidesWire?
+		if (!old.getAttribute("inEdges").isEmpty()) {
+			splitReferences(old, "inEdges", providesWires, "inProvidesEdges");
+		}
+
+		if (!old.getAttribute("outEdges").isEmpty()) {
+			splitReferences(old, "outEdges", providesWires, "outProvidesEdges");
 		}
 
 	}

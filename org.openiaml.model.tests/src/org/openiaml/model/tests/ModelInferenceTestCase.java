@@ -45,6 +45,8 @@ import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.domain.DomainPackage;
 import org.openiaml.model.model.scopes.ScopesPackage;
+import org.openiaml.model.model.users.RequiresEdgeDestination;
+import org.openiaml.model.model.users.RequiresEdgesSource;
 import org.openiaml.model.model.visual.VisualPackage;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ExtendsEdgeDestination;
@@ -52,6 +54,7 @@ import org.openiaml.model.model.wires.ExtendsEdgesSource;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.ParameterEdgeDestination;
 import org.openiaml.model.model.wires.ParameterEdgesSource;
+import org.openiaml.model.model.wires.RequiresEdge;
 
 import ca.ecliptical.emf.xpath.EMFXPath;
 
@@ -648,6 +651,28 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 		for (Object o : wires) {
 			if (o instanceof ExtendsEdge) {
 				ExtendsEdge w = (ExtendsEdge) o;
+				if (w.getFrom().equals(from) && w.getTo().equals(to))
+					result.add(w);
+			}
+		}
+
+		return result;
+	}
+
+	/**
+	 * Get <em>all</em> RequiresEdges connecting the given elements,
+	 * contained with the given container element or any of its children.
+	 *
+	 * @return the found RequiresEdges
+	 * @throws JaxenException
+	 */
+	protected Set<RequiresEdge> getRequiresEdgesFromTo(EObject container, RequiresEdgesSource from, RequiresEdgeDestination to) throws JaxenException {
+		Set<RequiresEdge> result = new HashSet<RequiresEdge>();
+		
+		List<?> wires = query(container, "//iaml:requiresEdges");
+		for (Object o : wires) {
+			if (o instanceof RequiresEdge) {
+				RequiresEdge w = (RequiresEdge) o;
 				if (w.getFrom().equals(from) && w.getTo().equals(to))
 					result.add(w);
 			}

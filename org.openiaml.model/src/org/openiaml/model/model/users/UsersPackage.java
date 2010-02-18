@@ -161,6 +161,24 @@ public interface UsersPackage extends EPackage {
 	int USER_STORE__EXTENDS_EDGES = ModelPackage.DOMAIN_STORE__EXTENDS_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Requires Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_STORE__REQUIRES_EDGES = ModelPackage.DOMAIN_STORE__REQUIRES_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Provides Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_STORE__PROVIDES_EDGES = ModelPackage.DOMAIN_STORE__PROVIDES_EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -351,6 +369,24 @@ public interface UsersPackage extends EPackage {
 	int ROLE__EXTENDS_EDGES = ModelPackage.DOMAIN_OBJECT__EXTENDS_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Requires Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROLE__REQUIRES_EDGES = ModelPackage.DOMAIN_OBJECT__REQUIRES_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Provides Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROLE__PROVIDES_EDGES = ModelPackage.DOMAIN_OBJECT__PROVIDES_EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -450,13 +486,31 @@ public interface UsersPackage extends EPackage {
 	int ROLE__ATTRIBUTES = ModelPackage.DOMAIN_OBJECT__ATTRIBUTES;
 
 	/**
+	 * The feature id for the '<em><b>In Requires Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROLE__IN_REQUIRES_EDGES = ModelPackage.DOMAIN_OBJECT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Out Provides Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROLE__OUT_PROVIDES_EDGES = ModelPackage.DOMAIN_OBJECT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Role</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE_FEATURE_COUNT = ModelPackage.DOMAIN_OBJECT_FEATURE_COUNT + 0;
+	int ROLE_FEATURE_COUNT = ModelPackage.DOMAIN_OBJECT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.users.impl.PermissionImpl <em>Permission</em>}' class.
@@ -541,13 +595,31 @@ public interface UsersPackage extends EPackage {
 	int PERMISSION__EXTENDS_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Requires Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERMISSION__REQUIRES_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Provides Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERMISSION__PROVIDES_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERMISSION__OUT_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int PERMISSION__OUT_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
@@ -556,7 +628,7 @@ public interface UsersPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERMISSION__IN_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int PERMISSION__IN_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Out Parameter Edges</b></em>' reference list.
@@ -565,7 +637,25 @@ public interface UsersPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERMISSION__OUT_PARAMETER_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 5;
+	int PERMISSION__OUT_PARAMETER_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>In Requires Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERMISSION__IN_REQUIRES_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>In Provides Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERMISSION__IN_PROVIDES_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of structural features of the '<em>Permission</em>' class.
@@ -574,7 +664,7 @@ public interface UsersPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERMISSION_FEATURE_COUNT = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 6;
+	int PERMISSION_FEATURE_COUNT = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 10;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.users.impl.UserInstanceImpl <em>User Instance</em>}' class.
@@ -675,6 +765,24 @@ public interface UsersPackage extends EPackage {
 	 * @ordered
 	 */
 	int USER_INSTANCE__EXTENDS_EDGES = ModelPackage.DOMAIN_OBJECT_INSTANCE__EXTENDS_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Requires Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_INSTANCE__REQUIRES_EDGES = ModelPackage.DOMAIN_OBJECT_INSTANCE__REQUIRES_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Provides Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_INSTANCE__PROVIDES_EDGES = ModelPackage.DOMAIN_OBJECT_INSTANCE__PROVIDES_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
@@ -795,6 +903,119 @@ public interface UsersPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.openiaml.model.model.users.ProvidesEdgesSource <em>Provides Edges Source</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.model.model.users.ProvidesEdgesSource
+	 * @see org.openiaml.model.model.users.impl.UsersPackageImpl#getProvidesEdgesSource()
+	 * @generated
+	 */
+	int PROVIDES_EDGES_SOURCE = 4;
+
+	/**
+	 * The feature id for the '<em><b>Out Provides Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROVIDES_EDGES_SOURCE__OUT_PROVIDES_EDGES = 0;
+
+	/**
+	 * The number of structural features of the '<em>Provides Edges Source</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROVIDES_EDGES_SOURCE_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.model.model.users.ProvidesEdgeDestination <em>Provides Edge Destination</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.model.model.users.ProvidesEdgeDestination
+	 * @see org.openiaml.model.model.users.impl.UsersPackageImpl#getProvidesEdgeDestination()
+	 * @generated
+	 */
+	int PROVIDES_EDGE_DESTINATION = 5;
+
+	/**
+	 * The feature id for the '<em><b>In Provides Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROVIDES_EDGE_DESTINATION__IN_PROVIDES_EDGES = 0;
+
+	/**
+	 * The number of structural features of the '<em>Provides Edge Destination</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROVIDES_EDGE_DESTINATION_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.model.model.users.RequiresEdgesSource <em>Requires Edges Source</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.model.model.users.RequiresEdgesSource
+	 * @see org.openiaml.model.model.users.impl.UsersPackageImpl#getRequiresEdgesSource()
+	 * @generated
+	 */
+	int REQUIRES_EDGES_SOURCE = 6;
+
+	/**
+	 * The feature id for the '<em><b>Out Requires Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REQUIRES_EDGES_SOURCE__OUT_REQUIRES_EDGES = 0;
+
+	/**
+	 * The number of structural features of the '<em>Requires Edges Source</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REQUIRES_EDGES_SOURCE_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.model.model.users.RequiresEdgeDestination <em>Requires Edge Destination</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.model.model.users.RequiresEdgeDestination
+	 * @see org.openiaml.model.model.users.impl.UsersPackageImpl#getRequiresEdgeDestination()
+	 * @generated
+	 */
+	int REQUIRES_EDGE_DESTINATION = 7;
+
+	/**
+	 * The feature id for the '<em><b>In Requires Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REQUIRES_EDGE_DESTINATION__IN_REQUIRES_EDGES = 0;
+
+	/**
+	 * The number of structural features of the '<em>Requires Edge Destination</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REQUIRES_EDGE_DESTINATION_FEATURE_COUNT = 1;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.users.UserStore <em>User Store</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -844,6 +1065,90 @@ public interface UsersPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getUserInstance();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.model.model.users.ProvidesEdgesSource <em>Provides Edges Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Provides Edges Source</em>'.
+	 * @see org.openiaml.model.model.users.ProvidesEdgesSource
+	 * @generated
+	 */
+	EClass getProvidesEdgesSource();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.openiaml.model.model.users.ProvidesEdgesSource#getOutProvidesEdges <em>Out Provides Edges</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Out Provides Edges</em>'.
+	 * @see org.openiaml.model.model.users.ProvidesEdgesSource#getOutProvidesEdges()
+	 * @see #getProvidesEdgesSource()
+	 * @generated
+	 */
+	EReference getProvidesEdgesSource_OutProvidesEdges();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.model.model.users.ProvidesEdgeDestination <em>Provides Edge Destination</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Provides Edge Destination</em>'.
+	 * @see org.openiaml.model.model.users.ProvidesEdgeDestination
+	 * @generated
+	 */
+	EClass getProvidesEdgeDestination();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.openiaml.model.model.users.ProvidesEdgeDestination#getInProvidesEdges <em>In Provides Edges</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>In Provides Edges</em>'.
+	 * @see org.openiaml.model.model.users.ProvidesEdgeDestination#getInProvidesEdges()
+	 * @see #getProvidesEdgeDestination()
+	 * @generated
+	 */
+	EReference getProvidesEdgeDestination_InProvidesEdges();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.model.model.users.RequiresEdgesSource <em>Requires Edges Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Requires Edges Source</em>'.
+	 * @see org.openiaml.model.model.users.RequiresEdgesSource
+	 * @generated
+	 */
+	EClass getRequiresEdgesSource();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.openiaml.model.model.users.RequiresEdgesSource#getOutRequiresEdges <em>Out Requires Edges</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Out Requires Edges</em>'.
+	 * @see org.openiaml.model.model.users.RequiresEdgesSource#getOutRequiresEdges()
+	 * @see #getRequiresEdgesSource()
+	 * @generated
+	 */
+	EReference getRequiresEdgesSource_OutRequiresEdges();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.model.model.users.RequiresEdgeDestination <em>Requires Edge Destination</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Requires Edge Destination</em>'.
+	 * @see org.openiaml.model.model.users.RequiresEdgeDestination
+	 * @generated
+	 */
+	EClass getRequiresEdgeDestination();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.openiaml.model.model.users.RequiresEdgeDestination#getInRequiresEdges <em>In Requires Edges</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>In Requires Edges</em>'.
+	 * @see org.openiaml.model.model.users.RequiresEdgeDestination#getInRequiresEdges()
+	 * @see #getRequiresEdgeDestination()
+	 * @generated
+	 */
+	EReference getRequiresEdgeDestination_InRequiresEdges();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -914,6 +1219,78 @@ public interface UsersPackage extends EPackage {
 		 * @generated
 		 */
 		EClass USER_INSTANCE = eINSTANCE.getUserInstance();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.model.model.users.ProvidesEdgesSource <em>Provides Edges Source</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.model.model.users.ProvidesEdgesSource
+		 * @see org.openiaml.model.model.users.impl.UsersPackageImpl#getProvidesEdgesSource()
+		 * @generated
+		 */
+		EClass PROVIDES_EDGES_SOURCE = eINSTANCE.getProvidesEdgesSource();
+
+		/**
+		 * The meta object literal for the '<em><b>Out Provides Edges</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROVIDES_EDGES_SOURCE__OUT_PROVIDES_EDGES = eINSTANCE.getProvidesEdgesSource_OutProvidesEdges();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.model.model.users.ProvidesEdgeDestination <em>Provides Edge Destination</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.model.model.users.ProvidesEdgeDestination
+		 * @see org.openiaml.model.model.users.impl.UsersPackageImpl#getProvidesEdgeDestination()
+		 * @generated
+		 */
+		EClass PROVIDES_EDGE_DESTINATION = eINSTANCE.getProvidesEdgeDestination();
+
+		/**
+		 * The meta object literal for the '<em><b>In Provides Edges</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROVIDES_EDGE_DESTINATION__IN_PROVIDES_EDGES = eINSTANCE.getProvidesEdgeDestination_InProvidesEdges();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.model.model.users.RequiresEdgesSource <em>Requires Edges Source</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.model.model.users.RequiresEdgesSource
+		 * @see org.openiaml.model.model.users.impl.UsersPackageImpl#getRequiresEdgesSource()
+		 * @generated
+		 */
+		EClass REQUIRES_EDGES_SOURCE = eINSTANCE.getRequiresEdgesSource();
+
+		/**
+		 * The meta object literal for the '<em><b>Out Requires Edges</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference REQUIRES_EDGES_SOURCE__OUT_REQUIRES_EDGES = eINSTANCE.getRequiresEdgesSource_OutRequiresEdges();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.model.model.users.RequiresEdgeDestination <em>Requires Edge Destination</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.model.model.users.RequiresEdgeDestination
+		 * @see org.openiaml.model.model.users.impl.UsersPackageImpl#getRequiresEdgeDestination()
+		 * @generated
+		 */
+		EClass REQUIRES_EDGE_DESTINATION = eINSTANCE.getRequiresEdgeDestination();
+
+		/**
+		 * The meta object literal for the '<em><b>In Requires Edges</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference REQUIRES_EDGE_DESTINATION__IN_REQUIRES_EDGES = eINSTANCE.getRequiresEdgeDestination_InRequiresEdges();
 
 	}
 

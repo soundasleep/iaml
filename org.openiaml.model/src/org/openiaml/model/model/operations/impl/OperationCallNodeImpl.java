@@ -34,6 +34,8 @@ import org.openiaml.model.model.operations.OperationCallNode;
 import org.openiaml.model.model.operations.OperationsPackage;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
+import org.openiaml.model.model.wires.ProvidesEdge;
+import org.openiaml.model.model.wires.RequiresEdge;
 
 /**
  * <!-- begin-user-doc -->
@@ -49,6 +51,8 @@ import org.openiaml.model.model.wires.ParameterEdge;
  *   <li>{@link org.openiaml.model.model.operations.impl.OperationCallNodeImpl#getWires <em>Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.operations.impl.OperationCallNodeImpl#getParameterEdges <em>Parameter Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.operations.impl.OperationCallNodeImpl#getExtendsEdges <em>Extends Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.operations.impl.OperationCallNodeImpl#getRequiresEdges <em>Requires Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.operations.impl.OperationCallNodeImpl#getProvidesEdges <em>Provides Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.operations.impl.OperationCallNodeImpl#getOutEdges <em>Out Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.operations.impl.OperationCallNodeImpl#getName <em>Name</em>}</li>
  * </ul>
@@ -126,6 +130,26 @@ public class OperationCallNodeImpl extends ActivityNodeImpl implements Operation
 	 * @ordered
 	 */
 	protected EList<ExtendsEdge> extendsEdges;
+
+	/**
+	 * The cached value of the '{@link #getRequiresEdges() <em>Requires Edges</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRequiresEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<RequiresEdge> requiresEdges;
+
+	/**
+	 * The cached value of the '{@link #getProvidesEdges() <em>Provides Edges</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProvidesEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ProvidesEdge> providesEdges;
 
 	/**
 	 * The cached value of the '{@link #getOutEdges() <em>Out Edges</em>}' reference list.
@@ -265,6 +289,30 @@ public class OperationCallNodeImpl extends ActivityNodeImpl implements Operation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<RequiresEdge> getRequiresEdges() {
+		if (requiresEdges == null) {
+			requiresEdges = new EObjectContainmentEList<RequiresEdge>(RequiresEdge.class, this, OperationsPackage.OPERATION_CALL_NODE__REQUIRES_EDGES);
+		}
+		return requiresEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ProvidesEdge> getProvidesEdges() {
+		if (providesEdges == null) {
+			providesEdges = new EObjectContainmentEList<ProvidesEdge>(ProvidesEdge.class, this, OperationsPackage.OPERATION_CALL_NODE__PROVIDES_EDGES);
+		}
+		return providesEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<WireEdge> getOutEdges() {
 		if (outEdges == null) {
 			outEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, OperationsPackage.OPERATION_CALL_NODE__OUT_EDGES, ModelPackage.WIRE_EDGE__FROM);
@@ -338,6 +386,10 @@ public class OperationCallNodeImpl extends ActivityNodeImpl implements Operation
 				return ((InternalEList<?>)getParameterEdges()).basicRemove(otherEnd, msgs);
 			case OperationsPackage.OPERATION_CALL_NODE__EXTENDS_EDGES:
 				return ((InternalEList<?>)getExtendsEdges()).basicRemove(otherEnd, msgs);
+			case OperationsPackage.OPERATION_CALL_NODE__REQUIRES_EDGES:
+				return ((InternalEList<?>)getRequiresEdges()).basicRemove(otherEnd, msgs);
+			case OperationsPackage.OPERATION_CALL_NODE__PROVIDES_EDGES:
+				return ((InternalEList<?>)getProvidesEdges()).basicRemove(otherEnd, msgs);
 			case OperationsPackage.OPERATION_CALL_NODE__OUT_EDGES:
 				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
 		}
@@ -366,6 +418,10 @@ public class OperationCallNodeImpl extends ActivityNodeImpl implements Operation
 				return getParameterEdges();
 			case OperationsPackage.OPERATION_CALL_NODE__EXTENDS_EDGES:
 				return getExtendsEdges();
+			case OperationsPackage.OPERATION_CALL_NODE__REQUIRES_EDGES:
+				return getRequiresEdges();
+			case OperationsPackage.OPERATION_CALL_NODE__PROVIDES_EDGES:
+				return getProvidesEdges();
 			case OperationsPackage.OPERATION_CALL_NODE__OUT_EDGES:
 				return getOutEdges();
 			case OperationsPackage.OPERATION_CALL_NODE__NAME:
@@ -411,6 +467,14 @@ public class OperationCallNodeImpl extends ActivityNodeImpl implements Operation
 				getExtendsEdges().clear();
 				getExtendsEdges().addAll((Collection<? extends ExtendsEdge>)newValue);
 				return;
+			case OperationsPackage.OPERATION_CALL_NODE__REQUIRES_EDGES:
+				getRequiresEdges().clear();
+				getRequiresEdges().addAll((Collection<? extends RequiresEdge>)newValue);
+				return;
+			case OperationsPackage.OPERATION_CALL_NODE__PROVIDES_EDGES:
+				getProvidesEdges().clear();
+				getProvidesEdges().addAll((Collection<? extends ProvidesEdge>)newValue);
+				return;
 			case OperationsPackage.OPERATION_CALL_NODE__OUT_EDGES:
 				getOutEdges().clear();
 				getOutEdges().addAll((Collection<? extends WireEdge>)newValue);
@@ -451,6 +515,12 @@ public class OperationCallNodeImpl extends ActivityNodeImpl implements Operation
 			case OperationsPackage.OPERATION_CALL_NODE__EXTENDS_EDGES:
 				getExtendsEdges().clear();
 				return;
+			case OperationsPackage.OPERATION_CALL_NODE__REQUIRES_EDGES:
+				getRequiresEdges().clear();
+				return;
+			case OperationsPackage.OPERATION_CALL_NODE__PROVIDES_EDGES:
+				getProvidesEdges().clear();
+				return;
 			case OperationsPackage.OPERATION_CALL_NODE__OUT_EDGES:
 				getOutEdges().clear();
 				return;
@@ -483,6 +553,10 @@ public class OperationCallNodeImpl extends ActivityNodeImpl implements Operation
 				return parameterEdges != null && !parameterEdges.isEmpty();
 			case OperationsPackage.OPERATION_CALL_NODE__EXTENDS_EDGES:
 				return extendsEdges != null && !extendsEdges.isEmpty();
+			case OperationsPackage.OPERATION_CALL_NODE__REQUIRES_EDGES:
+				return requiresEdges != null && !requiresEdges.isEmpty();
+			case OperationsPackage.OPERATION_CALL_NODE__PROVIDES_EDGES:
+				return providesEdges != null && !providesEdges.isEmpty();
 			case OperationsPackage.OPERATION_CALL_NODE__OUT_EDGES:
 				return outEdges != null && !outEdges.isEmpty();
 			case OperationsPackage.OPERATION_CALL_NODE__NAME:
@@ -527,6 +601,8 @@ public class OperationCallNodeImpl extends ActivityNodeImpl implements Operation
 				case OperationsPackage.OPERATION_CALL_NODE__WIRES: return ModelPackage.CONTAINS_WIRES__WIRES;
 				case OperationsPackage.OPERATION_CALL_NODE__PARAMETER_EDGES: return ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES;
 				case OperationsPackage.OPERATION_CALL_NODE__EXTENDS_EDGES: return ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES;
+				case OperationsPackage.OPERATION_CALL_NODE__REQUIRES_EDGES: return ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES;
+				case OperationsPackage.OPERATION_CALL_NODE__PROVIDES_EDGES: return ModelPackage.CONTAINS_WIRES__PROVIDES_EDGES;
 				default: return -1;
 			}
 		}
@@ -586,6 +662,8 @@ public class OperationCallNodeImpl extends ActivityNodeImpl implements Operation
 				case ModelPackage.CONTAINS_WIRES__WIRES: return OperationsPackage.OPERATION_CALL_NODE__WIRES;
 				case ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES: return OperationsPackage.OPERATION_CALL_NODE__PARAMETER_EDGES;
 				case ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES: return OperationsPackage.OPERATION_CALL_NODE__EXTENDS_EDGES;
+				case ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES: return OperationsPackage.OPERATION_CALL_NODE__REQUIRES_EDGES;
+				case ModelPackage.CONTAINS_WIRES__PROVIDES_EDGES: return OperationsPackage.OPERATION_CALL_NODE__PROVIDES_EDGES;
 				default: return -1;
 			}
 		}

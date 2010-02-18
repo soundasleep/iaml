@@ -21,6 +21,10 @@ import org.openiaml.model.model.operations.impl.OperationsPackageImpl;
 import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.scopes.impl.ScopesPackageImpl;
 import org.openiaml.model.model.users.Permission;
+import org.openiaml.model.model.users.ProvidesEdgeDestination;
+import org.openiaml.model.model.users.ProvidesEdgesSource;
+import org.openiaml.model.model.users.RequiresEdgeDestination;
+import org.openiaml.model.model.users.RequiresEdgesSource;
 import org.openiaml.model.model.users.Role;
 import org.openiaml.model.model.users.UserInstance;
 import org.openiaml.model.model.users.UserStore;
@@ -65,6 +69,34 @@ public class UsersPackageImpl extends EPackageImpl implements UsersPackage {
 	 * @generated
 	 */
 	private EClass userInstanceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass providesEdgesSourceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass providesEdgeDestinationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass requiresEdgesSourceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass requiresEdgeDestinationEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -200,6 +232,78 @@ public class UsersPackageImpl extends EPackageImpl implements UsersPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getProvidesEdgesSource() {
+		return providesEdgesSourceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getProvidesEdgesSource_OutProvidesEdges() {
+		return (EReference)providesEdgesSourceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getProvidesEdgeDestination() {
+		return providesEdgeDestinationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getProvidesEdgeDestination_InProvidesEdges() {
+		return (EReference)providesEdgeDestinationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getRequiresEdgesSource() {
+		return requiresEdgesSourceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRequiresEdgesSource_OutRequiresEdges() {
+		return (EReference)requiresEdgesSourceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getRequiresEdgeDestination() {
+		return requiresEdgeDestinationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRequiresEdgeDestination_InRequiresEdges() {
+		return (EReference)requiresEdgeDestinationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public UsersFactory getUsersFactory() {
 		return (UsersFactory)getEFactoryInstance();
 	}
@@ -231,6 +335,18 @@ public class UsersPackageImpl extends EPackageImpl implements UsersPackage {
 		permissionEClass = createEClass(PERMISSION);
 
 		userInstanceEClass = createEClass(USER_INSTANCE);
+
+		providesEdgesSourceEClass = createEClass(PROVIDES_EDGES_SOURCE);
+		createEReference(providesEdgesSourceEClass, PROVIDES_EDGES_SOURCE__OUT_PROVIDES_EDGES);
+
+		providesEdgeDestinationEClass = createEClass(PROVIDES_EDGE_DESTINATION);
+		createEReference(providesEdgeDestinationEClass, PROVIDES_EDGE_DESTINATION__IN_PROVIDES_EDGES);
+
+		requiresEdgesSourceEClass = createEClass(REQUIRES_EDGES_SOURCE);
+		createEReference(requiresEdgesSourceEClass, REQUIRES_EDGES_SOURCE__OUT_REQUIRES_EDGES);
+
+		requiresEdgeDestinationEClass = createEClass(REQUIRES_EDGE_DESTINATION);
+		createEReference(requiresEdgeDestinationEClass, REQUIRES_EDGE_DESTINATION__IN_REQUIRES_EDGES);
 	}
 
 	/**
@@ -267,10 +383,14 @@ public class UsersPackageImpl extends EPackageImpl implements UsersPackage {
 		// Add supertypes to classes
 		userStoreEClass.getESuperTypes().add(theModelPackage.getDomainStore());
 		roleEClass.getESuperTypes().add(theModelPackage.getDomainObject());
+		roleEClass.getESuperTypes().add(this.getRequiresEdgeDestination());
+		roleEClass.getESuperTypes().add(this.getProvidesEdgesSource());
 		permissionEClass.getESuperTypes().add(theModelPackage.getNamedElement());
 		permissionEClass.getESuperTypes().add(theModelPackage.getWireEdgesSource());
 		permissionEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
 		permissionEClass.getESuperTypes().add(theWiresPackage.getParameterEdgesSource());
+		permissionEClass.getESuperTypes().add(this.getRequiresEdgeDestination());
+		permissionEClass.getESuperTypes().add(this.getProvidesEdgeDestination());
 		userInstanceEClass.getESuperTypes().add(theModelPackage.getDomainObjectInstance());
 
 		// Initialize classes and features; add operations and parameters
@@ -282,6 +402,18 @@ public class UsersPackageImpl extends EPackageImpl implements UsersPackage {
 		initEClass(permissionEClass, Permission.class, "Permission", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(userInstanceEClass, UserInstance.class, "UserInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(providesEdgesSourceEClass, ProvidesEdgesSource.class, "ProvidesEdgesSource", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getProvidesEdgesSource_OutProvidesEdges(), theWiresPackage.getProvidesEdge(), theWiresPackage.getProvidesEdge_From(), "outProvidesEdges", null, 0, -1, ProvidesEdgesSource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(providesEdgeDestinationEClass, ProvidesEdgeDestination.class, "ProvidesEdgeDestination", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getProvidesEdgeDestination_InProvidesEdges(), theWiresPackage.getProvidesEdge(), theWiresPackage.getProvidesEdge_To(), "inProvidesEdges", null, 0, -1, ProvidesEdgeDestination.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(requiresEdgesSourceEClass, RequiresEdgesSource.class, "RequiresEdgesSource", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getRequiresEdgesSource_OutRequiresEdges(), theWiresPackage.getRequiresEdge(), theWiresPackage.getRequiresEdge_From(), "outRequiresEdges", null, 0, -1, RequiresEdgesSource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(requiresEdgeDestinationEClass, RequiresEdgeDestination.class, "RequiresEdgeDestination", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getRequiresEdgeDestination_InRequiresEdges(), theWiresPackage.getRequiresEdge(), theWiresPackage.getRequiresEdge_To(), "inRequiresEdges", null, 0, -1, RequiresEdgeDestination.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create annotations
 		// http://openiaml.org/comment
@@ -309,7 +441,31 @@ public class UsersPackageImpl extends EPackageImpl implements UsersPackage {
 		   source, 
 		   new String[] {
 			 "note", "another option is to create \'extends : Role\' and \'extendedBy : Role\' as EOpposites, and remove ExtendsWire. but this means that this relationship cannot be used as the target or source of any wires (parameters? conditions?)"
+		   });						
+		addAnnotation
+		  (providesEdgesSourceEClass, 
+		   source, 
+		   new String[] {
+			 "comment", "added in 0.4.3"
 		   });			
+		addAnnotation
+		  (providesEdgeDestinationEClass, 
+		   source, 
+		   new String[] {
+			 "comment", "added in 0.4.3"
+		   });			
+		addAnnotation
+		  (requiresEdgesSourceEClass, 
+		   source, 
+		   new String[] {
+			 "comment", "added in 0.4.3"
+		   });			
+		addAnnotation
+		  (requiresEdgeDestinationEClass, 
+		   source, 
+		   new String[] {
+			 "comment", "added in 0.4.3"
+		   });
 	}
 
 	/**
@@ -343,7 +499,31 @@ public class UsersPackageImpl extends EPackageImpl implements UsersPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Represents {@link DomainObjectInstance an instance} of a {@link Role user}."
-		   });
+		   });		
+		addAnnotation
+		  (providesEdgesSourceEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Something which may be used as the source of a {@model ProvidesEdge}."
+		   });			
+		addAnnotation
+		  (providesEdgeDestinationEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Something which may be used as the destination of a {@model ProvidesEdge}."
+		   });			
+		addAnnotation
+		  (requiresEdgesSourceEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Something which may be used as the source of a {@model RequiresEdge}."
+		   });			
+		addAnnotation
+		  (requiresEdgeDestinationEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Something which may be used as the destination of a {@model RequiresEdge}."
+		   });	
 	}
 
 } //UsersPackageImpl

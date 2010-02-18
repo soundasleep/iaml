@@ -51,7 +51,7 @@
 	if (!$instance)
 		throw new IamlRuntimeException("Unexpected empty UserInstance '«user.name»'; has the user logged in?");
 
-	«FOREACH outEdges.typeSelect(model::wires::RequiresWire).to.typeSelect(model::users::Role) AS targetRole»
+	«FOREACH outRequiresEdges.to.typeSelect(model::users::Role) AS targetRole»
 		«LET user.inEdges.typeSelect(model::wires::SelectWire).from.typeSelect(model::DomainObject).first() AS initialRole»
 			/* check role '«targetRole.name»' */
 			if (cast_«safeName(initialRole)»_as_«safeName(targetRole)»($instance) == null) {
@@ -65,7 +65,7 @@
 	«ENDFOREACH»
 	
 	/* check permissions */
-	«FOREACH outEdges.typeSelect(model::wires::RequiresWire).to.typeSelect(model::users::Permission) AS targetPermission»
+	«FOREACH outRequiresEdges.to.typeSelect(model::users::Permission) AS targetPermission»
 		/* permission '«targetPermission.name»' */
 		if (
 		«IF user.inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
@@ -87,13 +87,13 @@
 	«ENDFOREACH»
 	
 	/* combine with any constraint wires */
-	«LET outEdges.typeSelect(model::wires::RequiresWire).outEdges.typeSelect(model::wires::ConstraintWire) AS c1»
-	«LET outEdges.typeSelect(model::wires::RequiresWire).inEdges.typeSelect(model::wires::ConstraintWire) AS c2»
+	«LET outRequiresEdges.outEdges.typeSelect(model::wires::ConstraintWire) AS c1»
+	«LET outRequiresEdges.inEdges.typeSelect(model::wires::ConstraintWire) AS c2»
 	«LET c1.toSet().union(c2) AS constraints»
 		«FOREACH constraints AS constraint»
 			// constraint wire '«constraint»'
-			«LET ((model::wires::RequiresWire) constraint.from).to AS constraintFrom»
-			«LET ((model::wires::RequiresWire) constraint.to).to AS constraintTo»
+			«LET ((model::wires::RequiresEdge) constraint.from).to AS constraintFrom»
+			«LET ((model::wires::RequiresEdge) constraint.to).to AS constraintTo»
 			«IF constraint.type==model::wires::ConstraintTypes::OR»
 				if ($failure['«safeName(constraintFrom)»'] == null ||
 						$failure['«safeName(constraintTo)»'] == null) {

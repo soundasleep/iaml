@@ -198,7 +198,7 @@ rule "A LoginHandler of type 'user' should have an incoming Role as a parameter,
 			// referenced by the ACH; we only want one		
 			and			
 			obj : NamedElement ( eContainer == store ) and
-			RequiresWire ( from == ach, to == obj ) )
+			RequiresEdge ( from == ach, to == obj ) )
 		
 		user : Role ( eContainer == store, name == "User" )
 	

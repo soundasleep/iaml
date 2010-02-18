@@ -291,6 +291,10 @@
         eType="#//wires/ParameterEdge" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="extendsEdges" upperBound="-1"
         eType="#//wires/ExtendsEdge" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requiresEdges" upperBound="-1"
+        eType="#//wires/RequiresEdge" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="providesEdges" upperBound="-1"
+        eType="#//wires/ProvidesEdge" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ShouldntContainWires" abstract="true"
       interface="true" eSuperTypes="#//ContainsWires">
@@ -611,13 +615,18 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//wires/ExtendsEdgeDestination"
           eOpposite="#//wires/ExtendsEdgeDestination/inExtendsEdges"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="RequiresWire" eSuperTypes="#//wires/SingleWire #//WireEdgesSource #//WireEdgeDestination">
+    <eClassifiers xsi:type="ecore:EClass" name="RequiresEdge" eSuperTypes="#//GeneratedElement #//WireEdgeDestination #//WireEdgesSource">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.4"/>
+        <details key="changed" value="0.4.3 to no longer be a Wire; added 'from' and 'to' references; renamed to RequiresEdge"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Represents the requirements for a {@link LoginHandler}, such as {@link Role Roles} and {@link Permission Permissions}."/>
       </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1"
+          eType="#//users/RequiresEdgesSource" eOpposite="#//users/RequiresEdgesSource/outRequiresEdges"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//users/RequiresEdgeDestination"
+          eOpposite="#//users/RequiresEdgeDestination/inRequiresEdges"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ConstraintWire" eSuperTypes="#//wires/SingleWire">
       <eAnnotations source="http://openiaml.org/comment">
@@ -637,13 +646,18 @@
       <eLiterals name="OR" value="1"/>
       <eLiterals name="XOR" value="2"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ProvidesWire" eSuperTypes="#//wires/SingleWire">
+    <eClassifiers xsi:type="ecore:EClass" name="ProvidesEdge" eSuperTypes="#//GeneratedElement">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.4"/>
+        <details key="changed" value="0.4.3 to no longer be a Wire; added 'from' and 'to' references; renamed to ProvidesEdge"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Indicates that the source {@link Role} provides the target {@link Permission}."/>
       </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1"
+          eType="#//users/ProvidesEdgesSource" eOpposite="#//users/ProvidesEdgesSource/outProvidesEdges"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//users/ProvidesEdgeDestination"
+          eOpposite="#//users/ProvidesEdgeDestination/inProvidesEdges"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ParameterEdgesSource" abstract="true"
         interface="true">
@@ -792,7 +806,7 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1"
           eType="#//components/LoginHandlerTypes"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="AccessControlHandler" eSuperTypes="#//ApplicationElementContainer #//GeneratesElements #//wires/ParameterEdgeDestination">
+    <eClassifiers xsi:type="ecore:EClass" name="AccessControlHandler" eSuperTypes="#//ApplicationElementContainer #//GeneratesElements #//wires/ParameterEdgeDestination #//users/RequiresEdgesSource #//users/ProvidesEdgesSource">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.4"/>
       </eAnnotations>
@@ -851,7 +865,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="permissions" upperBound="-1"
           eType="#//users/Permission" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Role" eSuperTypes="#//DomainObject">
+    <eClassifiers xsi:type="ecore:EClass" name="Role" eSuperTypes="#//DomainObject #//users/RequiresEdgeDestination #//users/ProvidesEdgesSource">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="note" value="another option is to create 'extends : Role' and 'extendedBy : Role' as EOpposites, and remove ExtendsWire. but this means that this relationship cannot be used as the target or source of any wires (parameters? conditions?)"/>
       </eAnnotations>
@@ -859,7 +873,7 @@
         <details key="documentation" value="A particular Role that a user may have; may be {@link ExtendsWire inherited} from other Roles."/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Permission" eSuperTypes="#//NamedElement #//WireEdgesSource #//WireEdgeDestination #//wires/ParameterEdgesSource">
+    <eClassifiers xsi:type="ecore:EClass" name="Permission" eSuperTypes="#//NamedElement #//WireEdgesSource #//WireEdgeDestination #//wires/ParameterEdgesSource #//users/RequiresEdgeDestination #//users/ProvidesEdgeDestination">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A single Permission that a user may have; may also be {@link ProvidesWire provided} by a {@link Role}."/>
       </eAnnotations>
@@ -868,6 +882,50 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Represents {@link DomainObjectInstance an instance} of a {@link Role user}."/>
       </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ProvidesEdgesSource" abstract="true"
+        interface="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Something which may be used as the source of a {@model ProvidesEdge}."/>
+      </eAnnotations>
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="comment" value="added in 0.4.3"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="outProvidesEdges" upperBound="-1"
+          eType="#//wires/ProvidesEdge" eOpposite="#//wires/ProvidesEdge/from"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ProvidesEdgeDestination" abstract="true"
+        interface="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Something which may be used as the destination of a {@model ProvidesEdge}."/>
+      </eAnnotations>
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="comment" value="added in 0.4.3"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="inProvidesEdges" upperBound="-1"
+          eType="#//wires/ProvidesEdge" eOpposite="#//wires/ProvidesEdge/to"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="RequiresEdgesSource" abstract="true"
+        interface="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Something which may be used as the source of a {@model RequiresEdge}."/>
+      </eAnnotations>
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="comment" value="added in 0.4.3"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="outRequiresEdges" upperBound="-1"
+          eType="#//wires/RequiresEdge" eOpposite="#//wires/RequiresEdge/from"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="RequiresEdgeDestination" abstract="true"
+        interface="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Something which may be used as the destination of a {@model RequiresEdge}."/>
+      </eAnnotations>
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="comment" value="added in 0.4.3"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="inRequiresEdges" upperBound="-1"
+          eType="#//wires/RequiresEdge" eOpposite="#//wires/RequiresEdge/to"/>
     </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

@@ -34,22 +34,22 @@
       </children>
     </scopes>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233b53a313.1ce" name="requires role 1">
-      <elements xsi:type="iaml.components:AccessControlHandler" id="components.1233b53a67e.9a" name="require role 1" outEdges="wires.1233b53a3ce.23a">
-        <wires xsi:type="iaml.wires:RequiresWire" id="wires.1233b53a3ce.23a" from="components.1233b53a67e.9a" to="users.1233b53a814.62"/>
+      <elements xsi:type="iaml.components:AccessControlHandler" id="components.1233b53a67e.9a" name="require role 1" outRequiresEdges="wires.1233b53a3ce.23a">
+        <requiresEdges id="wires.1233b53a3ce.23a" from="components.1233b53a67e.9a" to="users.1233b53a814.62"/>
       </elements>
     </scopes>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233b53a313.361" name="requires permission 1">
-      <elements xsi:type="iaml.components:AccessControlHandler" id="components.1233b53a67e.110" name="requires permission 1" outEdges="wires.1233b53a3ce.453">
-        <wires xsi:type="iaml.wires:RequiresWire" id="wires.1233b53a3ce.453" from="components.1233b53a67e.110" to="users.1233b53a814.6f"/>
+      <elements xsi:type="iaml.components:AccessControlHandler" id="components.1233b53a67e.110" name="requires permission 1" outRequiresEdges="wires.1233b53a3ce.453">
+        <requiresEdges id="wires.1233b53a3ce.453" from="components.1233b53a67e.110" to="users.1233b53a814.6f"/>
       </elements>
     </scopes>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233b53a313.421" name="requires inherited permission">
-      <elements xsi:type="iaml.components:AccessControlHandler" id="components.1233b53a67e.153" name="requires inherited permission" outEdges="wires.1233b53a3ce.544">
-        <wires xsi:type="iaml.wires:RequiresWire" id="wires.1233b53a3ce.544" from="components.1233b53a67e.153" to="users.1233b53a814.70"/>
+      <elements xsi:type="iaml.components:AccessControlHandler" id="components.1233b53a67e.153" name="requires inherited permission" outRequiresEdges="wires.1233b53a3ce.544">
+        <requiresEdges id="wires.1233b53a3ce.544" from="components.1233b53a67e.153" to="users.1233b53a814.70"/>
       </elements>
     </scopes>
-    <elements xsi:type="iaml.components:AccessControlHandler" id="components.1233afe6424.13" name="role-based access" outEdges="wires.1233afe62eb.2d">
-      <wires xsi:type="iaml.wires:RequiresWire" id="wires.1233afe62eb.2d" from="components.1233afe6424.13" to="users.1233afe655c.23"/>
+    <elements xsi:type="iaml.components:AccessControlHandler" id="components.1233afe6424.13" name="role-based access" outRequiresEdges="wires.1233afe62eb.2d">
+      <requiresEdges id="wires.1233afe62eb.2d" from="components.1233afe6424.13" to="users.1233afe655c.23"/>
     </elements>
     <elements xsi:type="iaml.components:LoginHandler" id="components.1233b53a67e.19" name="current user" outEdges="wires.1233b53a3ce.5c" inParameterEdges="wires.1233b53a3ce.5a" type="USER">
       <wires xsi:type="iaml.wires:SetWire" id="wires.1233b53a3ce.5c" from="components.1233b53a67e.19" to="users.1233b53a814.d0" name="set"/>
@@ -62,23 +62,23 @@
     </elements>
   </scopes>
   <domainStores xsi:type="iaml.users:UserStore" id="users.1233afe655c.1c" name="user store">
-    <children xsi:type="iaml.users:Role" id="users.1233afe655c.23" name="default role" outEdges="wires.1233b53a3ce.7" inEdges="wires.1233afe62eb.2d" outParameterEdges="wires.1233b53a3ce.5a">
+    <children xsi:type="iaml.users:Role" id="users.1233afe655c.23" name="default role" outEdges="wires.1233b53a3ce.7" outParameterEdges="wires.1233b53a3ce.5a" inRequiresEdges="wires.1233afe62eb.2d">
       <wires xsi:type="iaml.wires:NewInstanceWire" id="wires.1233b53a3ce.7" from="users.1233afe655c.23" to="users.1233b53a814.a" name="new instance"/>
       <parameterEdges id="wires.1233b53a3ce.5a" from="users.1233afe655c.23" to="components.1233b53a67e.19"/>
     </children>
-    <children xsi:type="iaml.users:Role" id="users.1233b53a814.62" name="additional role 1" inEdges="wires.1233b53a3ce.23a" outParameterEdges="wires.1233b53a3ce.a9 wires.1233b53a3ce.16a">
+    <children xsi:type="iaml.users:Role" id="users.1233b53a814.62" name="additional role 1" outParameterEdges="wires.1233b53a3ce.a9 wires.1233b53a3ce.16a" inRequiresEdges="wires.1233b53a3ce.23a">
       <parameterEdges id="wires.1233b53a3ce.a9" from="users.1233b53a814.62" to="wires.1233b53a3ce.a8"/>
       <parameterEdges id="wires.1233b53a3ce.16a" from="users.1233b53a814.62" to="wires.1233b53a3ce.168"/>
     </children>
-    <children xsi:type="iaml.users:Role" id="users.1233b53a814.63" name="additional role 2" outEdges="wires.1233b53a3ce.36" outParameterEdges="wires.1233b53a3ce.aa wires.1233b53a3ce.16b">
-      <wires xsi:type="iaml.wires:ProvidesWire" id="wires.1233b53a3ce.36" from="users.1233b53a814.63" to="users.1233b53a814.70"/>
+    <children xsi:type="iaml.users:Role" id="users.1233b53a814.63" name="additional role 2" outParameterEdges="wires.1233b53a3ce.aa wires.1233b53a3ce.16b" outProvidesEdges="wires.1233b53a3ce.36">
       <parameterEdges id="wires.1233b53a3ce.aa" from="users.1233b53a814.63" to="wires.1233b53a3ce.a7"/>
       <parameterEdges id="wires.1233b53a3ce.16b" from="users.1233b53a814.63" to="wires.1233b53a3ce.169"/>
+      <providesEdges id="wires.1233b53a3ce.36" from="users.1233b53a814.63" to="users.1233b53a814.70"/>
     </children>
-    <permissions id="users.1233b53a814.6f" name="permission 1" inEdges="wires.1233b53a3ce.453" outParameterEdges="wires.1233b53a3ce.ab wires.1233b53a3ce.16d">
+    <permissions id="users.1233b53a814.6f" name="permission 1" outParameterEdges="wires.1233b53a3ce.ab wires.1233b53a3ce.16d" inRequiresEdges="wires.1233b53a3ce.453">
       <parameterEdges id="wires.1233b53a3ce.ab" from="users.1233b53a814.6f" to="wires.1233b53a3ce.a6"/>
       <parameterEdges id="wires.1233b53a3ce.16d" from="users.1233b53a814.6f" to="wires.1233b53a3ce.16c"/>
     </permissions>
-    <permissions id="users.1233b53a814.70" name="inherited permission with role" inEdges="wires.1233b53a3ce.36 wires.1233b53a3ce.544"/>
+    <permissions id="users.1233b53a814.70" name="inherited permission with role" inRequiresEdges="wires.1233b53a3ce.544" inProvidesEdges="wires.1233b53a3ce.36"/>
   </domainStores>
 </iaml:InternetApplication>

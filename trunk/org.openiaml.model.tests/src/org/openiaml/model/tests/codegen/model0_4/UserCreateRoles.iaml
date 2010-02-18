@@ -14,12 +14,12 @@
   </scopes>
   <scopes xsi:type="iaml.scopes:Session" id="scopes.1233afe6368.3" name="target session">
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233afe628e.7e" name="target"/>
-    <elements xsi:type="iaml.components:AccessControlHandler" id="components.1233afe6424.13" name="role-based access" outEdges="wires.1233afe62eb.2d">
-      <wires xsi:type="iaml.wires:RequiresWire" id="wires.1233afe62eb.2d" from="components.1233afe6424.13" to="users.1233afe655c.23"/>
+    <elements xsi:type="iaml.components:AccessControlHandler" id="components.1233afe6424.13" name="role-based access" outRequiresEdges="wires.1233afe62eb.2d">
+      <requiresEdges id="wires.1233afe62eb.2d" from="components.1233afe6424.13" to="users.1233afe655c.23"/>
     </elements>
   </scopes>
   <domainStores xsi:type="iaml.users:UserStore" id="users.1233afe655c.1c" name="user store">
-    <children xsi:type="iaml.users:Role" id="users.1233afe655c.23" name="default role" outEdges="wires.1233b53a3ce.7" inEdges="wires.1233afe62eb.2d">
+    <children xsi:type="iaml.users:Role" id="users.1233afe655c.23" name="default role" outEdges="wires.1233b53a3ce.7" inRequiresEdges="wires.1233afe62eb.2d">
       <wires xsi:type="iaml.wires:NewInstanceWire" id="wires.1233b53a3ce.7" from="users.1233afe655c.23" to="users.1233b53a814.a" name="new instance"/>
     </children>
   </domainStores>

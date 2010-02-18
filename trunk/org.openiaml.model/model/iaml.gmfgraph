@@ -1421,15 +1421,15 @@
           figure="//@figures.0/@descriptors.51/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
-        name="RequiresWireFigure">
+        name="RequiresEdgeFigure">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
-          name="RequiresWireFigure"
+          name="RequiresEdgeFigure"
           lineKind="LINE_DASH"
           targetDecoration="//@figures.0/@figures.0">
         <children
             xsi:type="gmfgraph:Label"
-            name="RequiresWireNameFigure"
+            name="RequiresEdgeNameFigure"
             text="requires"/>
       </actualFigure>
       <accessors
@@ -1450,15 +1450,15 @@
           figure="//@figures.0/@descriptors.53/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
-        name="ProvidesWireFigure">
+        name="ProvidesEdgeFigure">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
-          name="ProvidesWireFigure"
+          name="ProvidesEdgeFigure"
           lineKind="LINE_DASH"
           targetDecoration="//@figures.0/@figures.0">
         <children
             xsi:type="gmfgraph:Label"
-            name="ProvidesWireNameFigure"
+            name="ProvidesEdgeNameFigure"
             text="provides"/>
       </actualFigure>
       <accessors
@@ -1892,14 +1892,14 @@
       name="ExtendsEdge"
       figure="ExtendsEdgeFigure"/>
   <connections
-      name="RequiresWire"
-      figure="RequiresWireFigure"/>
+      name="RequiresEdge"
+      figure="RequiresEdgeFigure"/>
   <connections
       name="ConstraintWire"
       figure="ConstraintWireFigure"/>
   <connections
-      name="ProvidesWire"
-      figure="ProvidesWireFigure"/>
+      name="ProvidesEdge"
+      figure="ProvidesEdgeFigure"/>
   <labels
       name="EventTriggerName"
       figure="EventTriggerFigure"
@@ -2189,16 +2189,16 @@
       figure="ExtendsEdgeFigure"
       accessor="//@figures.0/@descriptors.51/@accessors.0"/>
   <labels
-      name="RequiresWireName"
-      figure="RequiresWireFigure"
+      name="RequiresEdgeName"
+      figure="RequiresEdgeFigure"
       accessor="//@figures.0/@descriptors.52/@accessors.0"/>
   <labels
       name="ConstraintWireName"
       figure="ConstraintWireFigure"
       accessor="//@figures.0/@descriptors.53/@accessors.0"/>
   <labels
-      name="ProvidesWireName"
-      figure="ProvidesWireFigure"
+      name="ProvidesEdgeName"
+      figure="ProvidesEdgeFigure"
       accessor="//@figures.0/@descriptors.54/@accessors.0"/>
   <labels
       name="AccessControlHandlerName"

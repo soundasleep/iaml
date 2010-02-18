@@ -162,27 +162,25 @@
   </nodes>
   <links>
     <domainMetaElement
-        href="iaml.ecore#//wires/ProvidesWire"/>
-    <domainSpecialization
-        body="self.oclIsTypeOf( ProvidesWire )"/>
+        href="iaml.ecore#//wires/ProvidesEdge"/>
     <labelMappings
         readOnly="true">
       <diagramLabel
-          href="iaml.gmfgraph#ProvidesWireName"/>
+          href="iaml.gmfgraph#ProvidesEdgeName"/>
     </labelMappings>
     <containmentFeature
-        href="iaml.ecore#//ContainsWires/wires"/>
+        href="iaml.ecore#//ContainsWires/providesEdges"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="user_store.gmftool#//@palette/@tools.1/@tools.0"/>
     <diagramLink
-        href="iaml.gmfgraph#ProvidesWire"/>
+        href="iaml.gmfgraph#ProvidesEdge"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/from"/>
+        href="iaml.ecore#//wires/ProvidesEdge/from"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/to"/>
+        href="iaml.ecore#//wires/ProvidesEdge/to"/>
   </links>
   <links>
     <domainMetaElement

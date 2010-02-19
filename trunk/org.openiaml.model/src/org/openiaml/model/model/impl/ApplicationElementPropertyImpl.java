@@ -29,6 +29,7 @@ import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.wires.ConstraintEdge;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.ParameterEdgesSource;
@@ -53,6 +54,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getExtendsEdges <em>Extends Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getRequiresEdges <em>Requires Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getProvidesEdges <em>Provides Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getConstraintEdges <em>Constraint Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getOutEdges <em>Out Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getInEdges <em>In Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementPropertyImpl#getOutFlows <em>Out Flows</em>}</li>
@@ -204,6 +206,16 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 	 * @ordered
 	 */
 	protected EList<ProvidesEdge> providesEdges;
+
+	/**
+	 * The cached value of the '{@link #getConstraintEdges() <em>Constraint Edges</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConstraintEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ConstraintEdge> constraintEdges;
 
 	/**
 	 * The cached value of the '{@link #getOutEdges() <em>Out Edges</em>}' reference list.
@@ -536,6 +548,18 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ConstraintEdge> getConstraintEdges() {
+		if (constraintEdges == null) {
+			constraintEdges = new EObjectContainmentEList<ConstraintEdge>(ConstraintEdge.class, this, ModelPackage.APPLICATION_ELEMENT_PROPERTY__CONSTRAINT_EDGES);
+		}
+		return constraintEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -576,6 +600,8 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				return ((InternalEList<?>)getRequiresEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__PROVIDES_EDGES:
 				return ((InternalEList<?>)getProvidesEdges()).basicRemove(otherEnd, msgs);
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__CONSTRAINT_EDGES:
+				return ((InternalEList<?>)getConstraintEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_EDGES:
 				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_EDGES:
@@ -618,6 +644,8 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				return getRequiresEdges();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__PROVIDES_EDGES:
 				return getProvidesEdges();
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__CONSTRAINT_EDGES:
+				return getConstraintEdges();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_EDGES:
 				return getOutEdges();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_EDGES:
@@ -678,6 +706,10 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__PROVIDES_EDGES:
 				getProvidesEdges().clear();
 				getProvidesEdges().addAll((Collection<? extends ProvidesEdge>)newValue);
+				return;
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__CONSTRAINT_EDGES:
+				getConstraintEdges().clear();
+				getConstraintEdges().addAll((Collection<? extends ConstraintEdge>)newValue);
 				return;
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_EDGES:
 				getOutEdges().clear();
@@ -744,6 +776,9 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__PROVIDES_EDGES:
 				getProvidesEdges().clear();
 				return;
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__CONSTRAINT_EDGES:
+				getConstraintEdges().clear();
+				return;
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_EDGES:
 				getOutEdges().clear();
 				return;
@@ -794,6 +829,8 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				return requiresEdges != null && !requiresEdges.isEmpty();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__PROVIDES_EDGES:
 				return providesEdges != null && !providesEdges.isEmpty();
+			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__CONSTRAINT_EDGES:
+				return constraintEdges != null && !constraintEdges.isEmpty();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__OUT_EDGES:
 				return outEdges != null && !outEdges.isEmpty();
 			case ModelPackage.APPLICATION_ELEMENT_PROPERTY__IN_EDGES:
@@ -824,6 +861,7 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				case ModelPackage.APPLICATION_ELEMENT_PROPERTY__EXTENDS_EDGES: return ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES;
 				case ModelPackage.APPLICATION_ELEMENT_PROPERTY__REQUIRES_EDGES: return ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES;
 				case ModelPackage.APPLICATION_ELEMENT_PROPERTY__PROVIDES_EDGES: return ModelPackage.CONTAINS_WIRES__PROVIDES_EDGES;
+				case ModelPackage.APPLICATION_ELEMENT_PROPERTY__CONSTRAINT_EDGES: return ModelPackage.CONTAINS_WIRES__CONSTRAINT_EDGES;
 				default: return -1;
 			}
 		}
@@ -879,6 +917,7 @@ public class ApplicationElementPropertyImpl extends EObjectImpl implements Appli
 				case ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES: return ModelPackage.APPLICATION_ELEMENT_PROPERTY__EXTENDS_EDGES;
 				case ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES: return ModelPackage.APPLICATION_ELEMENT_PROPERTY__REQUIRES_EDGES;
 				case ModelPackage.CONTAINS_WIRES__PROVIDES_EDGES: return ModelPackage.APPLICATION_ELEMENT_PROPERTY__PROVIDES_EDGES;
+				case ModelPackage.CONTAINS_WIRES__CONSTRAINT_EDGES: return ModelPackage.APPLICATION_ELEMENT_PROPERTY__CONSTRAINT_EDGES;
 				default: return -1;
 			}
 		}

@@ -16,7 +16,7 @@ import org.openiaml.model.model.users.ProvidesEdgesSource;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Indicates that the source {@link Role} provides the target {@link Permission}.
+ * Indicates that the source {@model Role} provides the target {@model Permission}.
  * <!-- end-model-doc -->
  *
  * <p>

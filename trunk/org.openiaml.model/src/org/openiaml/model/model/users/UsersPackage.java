@@ -179,6 +179,15 @@ public interface UsersPackage extends EPackage {
 	int USER_STORE__PROVIDES_EDGES = ModelPackage.DOMAIN_STORE__PROVIDES_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Constraint Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_STORE__CONSTRAINT_EDGES = ModelPackage.DOMAIN_STORE__CONSTRAINT_EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -385,6 +394,15 @@ public interface UsersPackage extends EPackage {
 	 * @ordered
 	 */
 	int ROLE__PROVIDES_EDGES = ModelPackage.DOMAIN_OBJECT__PROVIDES_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Constraint Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROLE__CONSTRAINT_EDGES = ModelPackage.DOMAIN_OBJECT__CONSTRAINT_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
@@ -613,13 +631,22 @@ public interface UsersPackage extends EPackage {
 	int PERMISSION__PROVIDES_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Constraint Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERMISSION__CONSTRAINT_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERMISSION__OUT_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 5;
+	int PERMISSION__OUT_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
@@ -628,7 +655,7 @@ public interface UsersPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERMISSION__IN_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 6;
+	int PERMISSION__IN_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Out Parameter Edges</b></em>' reference list.
@@ -637,7 +664,7 @@ public interface UsersPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERMISSION__OUT_PARAMETER_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 7;
+	int PERMISSION__OUT_PARAMETER_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>In Requires Edges</b></em>' reference list.
@@ -646,7 +673,7 @@ public interface UsersPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERMISSION__IN_REQUIRES_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 8;
+	int PERMISSION__IN_REQUIRES_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>In Provides Edges</b></em>' reference list.
@@ -655,7 +682,7 @@ public interface UsersPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERMISSION__IN_PROVIDES_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 9;
+	int PERMISSION__IN_PROVIDES_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 10;
 
 	/**
 	 * The number of structural features of the '<em>Permission</em>' class.
@@ -664,7 +691,7 @@ public interface UsersPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERMISSION_FEATURE_COUNT = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 10;
+	int PERMISSION_FEATURE_COUNT = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 11;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.users.impl.UserInstanceImpl <em>User Instance</em>}' class.
@@ -783,6 +810,15 @@ public interface UsersPackage extends EPackage {
 	 * @ordered
 	 */
 	int USER_INSTANCE__PROVIDES_EDGES = ModelPackage.DOMAIN_OBJECT_INSTANCE__PROVIDES_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Constraint Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_INSTANCE__CONSTRAINT_EDGES = ModelPackage.DOMAIN_OBJECT_INSTANCE__CONSTRAINT_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.

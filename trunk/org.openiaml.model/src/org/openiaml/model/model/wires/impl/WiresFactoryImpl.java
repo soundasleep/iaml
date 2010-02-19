@@ -17,8 +17,8 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.wires.CompositeWire;
 import org.openiaml.model.model.wires.ConditionWire;
+import org.openiaml.model.model.wires.ConstraintEdge;
 import org.openiaml.model.model.wires.ConstraintTypes;
-import org.openiaml.model.model.wires.ConstraintWire;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.NewInstanceWire;
@@ -87,7 +87,7 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 			case WiresPackage.NEW_INSTANCE_WIRE: return createNewInstanceWire();
 			case WiresPackage.EXTENDS_EDGE: return createExtendsEdge();
 			case WiresPackage.REQUIRES_EDGE: return createRequiresEdge();
-			case WiresPackage.CONSTRAINT_WIRE: return createConstraintWire();
+			case WiresPackage.CONSTRAINT_EDGE: return createConstraintEdge();
 			case WiresPackage.PROVIDES_EDGE: return createProvidesEdge();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -250,10 +250,10 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public ConstraintWire createConstraintWire() {
-		ConstraintWireImpl constraintWire = new ConstraintWireImpl();
-		generateID(constraintWire);
-		return constraintWire;
+	public ConstraintEdge createConstraintEdge() {
+		ConstraintEdgeImpl constraintEdge = new ConstraintEdgeImpl();
+		generateID(constraintEdge);
+		return constraintEdge;
 	}
 
 	/**

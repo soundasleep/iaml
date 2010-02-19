@@ -125,13 +125,13 @@ public interface WiresFactory extends EFactory {
 	RequiresEdge createRequiresEdge();
 
 	/**
-	 * Returns a new object of class '<em>Constraint Wire</em>'.
+	 * Returns a new object of class '<em>Constraint Edge</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Constraint Wire</em>'.
+	 * @return a new object of class '<em>Constraint Edge</em>'.
 	 * @generated
 	 */
-	ConstraintWire createConstraintWire();
+	ConstraintEdge createConstraintEdge();
 
 	/**
 	 * Returns a new object of class '<em>Provides Edge</em>'.

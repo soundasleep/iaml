@@ -134,6 +134,15 @@ public interface VisualPackage extends EPackage {
 	int FRAME__PROVIDES_EDGES = ModelPackage.SCOPE__PROVIDES_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Constraint Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME__CONSTRAINT_EDGES = ModelPackage.SCOPE__CONSTRAINT_EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -405,6 +414,15 @@ public interface VisualPackage extends EPackage {
 	int INPUT_FORM__PROVIDES_EDGES = ModelPackage.VISIBLE_THING__PROVIDES_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Constraint Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_FORM__CONSTRAINT_EDGES = ModelPackage.VISIBLE_THING__CONSTRAINT_EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -611,6 +629,15 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int INPUT_TEXT_FIELD__PROVIDES_EDGES = ModelPackage.VISIBLE_THING__PROVIDES_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Constraint Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_TEXT_FIELD__CONSTRAINT_EDGES = ModelPackage.VISIBLE_THING__CONSTRAINT_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
@@ -822,6 +849,15 @@ public interface VisualPackage extends EPackage {
 	int BUTTON__PROVIDES_EDGES = ModelPackage.VISIBLE_THING__PROVIDES_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Constraint Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__CONSTRAINT_EDGES = ModelPackage.VISIBLE_THING__CONSTRAINT_EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1028,6 +1064,15 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int LABEL__PROVIDES_EDGES = ModelPackage.VISIBLE_THING__PROVIDES_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Constraint Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LABEL__CONSTRAINT_EDGES = ModelPackage.VISIBLE_THING__CONSTRAINT_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.

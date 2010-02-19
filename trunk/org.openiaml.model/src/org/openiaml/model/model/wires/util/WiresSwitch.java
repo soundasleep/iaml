@@ -15,13 +15,13 @@ import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.NamedElement;
-import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
-import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.wires.CompositeWire;
 import org.openiaml.model.model.wires.ConditionWire;
-import org.openiaml.model.model.wires.ConstraintWire;
+import org.openiaml.model.model.wires.ConstraintEdge;
+import org.openiaml.model.model.wires.ConstraintEdgeDestination;
+import org.openiaml.model.model.wires.ConstraintEdgesSource;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ExtendsEdgeDestination;
 import org.openiaml.model.model.wires.ExtendsEdgesSource;
@@ -254,19 +254,16 @@ public class WiresSwitch<T> {
 				RequiresEdge requiresEdge = (RequiresEdge)theEObject;
 				T result = caseRequiresEdge(requiresEdge);
 				if (result == null) result = caseGeneratedElement(requiresEdge);
-				if (result == null) result = caseWireEdgeDestination(requiresEdge);
-				if (result == null) result = caseWireEdgesSource(requiresEdge);
-				if (result == null) result = caseShouldntContainWires(requiresEdge);
+				if (result == null) result = caseConstraintEdgesSource(requiresEdge);
+				if (result == null) result = caseConstraintEdgeDestination(requiresEdge);
 				if (result == null) result = caseContainsWires(requiresEdge);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case WiresPackage.CONSTRAINT_WIRE: {
-				ConstraintWire constraintWire = (ConstraintWire)theEObject;
-				T result = caseConstraintWire(constraintWire);
-				if (result == null) result = caseSingleWire(constraintWire);
-				if (result == null) result = caseWireEdge(constraintWire);
-				if (result == null) result = caseGeneratedElement(constraintWire);
+			case WiresPackage.CONSTRAINT_EDGE: {
+				ConstraintEdge constraintEdge = (ConstraintEdge)theEObject;
+				T result = caseConstraintEdge(constraintEdge);
+				if (result == null) result = caseGeneratedElement(constraintEdge);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -298,6 +295,18 @@ public class WiresSwitch<T> {
 			case WiresPackage.EXTENDS_EDGE_DESTINATION: {
 				ExtendsEdgeDestination extendsEdgeDestination = (ExtendsEdgeDestination)theEObject;
 				T result = caseExtendsEdgeDestination(extendsEdgeDestination);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case WiresPackage.CONSTRAINT_EDGES_SOURCE: {
+				ConstraintEdgesSource constraintEdgesSource = (ConstraintEdgesSource)theEObject;
+				T result = caseConstraintEdgesSource(constraintEdgesSource);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case WiresPackage.CONSTRAINT_EDGE_DESTINATION: {
+				ConstraintEdgeDestination constraintEdgeDestination = (ConstraintEdgeDestination)theEObject;
+				T result = caseConstraintEdgeDestination(constraintEdgeDestination);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -486,17 +495,17 @@ public class WiresSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Constraint Wire</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Constraint Edge</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Constraint Wire</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Constraint Edge</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseConstraintWire(ConstraintWire object) {
+	public T caseConstraintEdge(ConstraintEdge object) {
 		return null;
 	}
 
@@ -572,6 +581,36 @@ public class WiresSwitch<T> {
 	 * @generated
 	 */
 	public T caseExtendsEdgeDestination(ExtendsEdgeDestination object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Constraint Edges Source</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Constraint Edges Source</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConstraintEdgesSource(ConstraintEdgesSource object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Constraint Edge Destination</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Constraint Edge Destination</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConstraintEdgeDestination(ConstraintEdgeDestination object) {
 		return null;
 	}
 
@@ -677,36 +716,6 @@ public class WiresSwitch<T> {
 	 * @generated
 	 */
 	public T caseWireEdgeDestination(WireEdgeDestination object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Shouldnt Contain Wires</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Shouldnt Contain Wires</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseShouldntContainWires(ShouldntContainWires object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Wire Edges Source</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Wire Edges Source</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseWireEdgesSource(WireEdgesSource object) {
 		return null;
 	}
 

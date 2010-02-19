@@ -180,6 +180,15 @@ public interface ComponentsPackage extends EPackage {
 	int LOGIN_HANDLER__PROVIDES_EDGES = ModelPackage.APPLICATION_ELEMENT_CONTAINER__PROVIDES_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Constraint Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOGIN_HANDLER__CONSTRAINT_EDGES = ModelPackage.APPLICATION_ELEMENT_CONTAINER__CONSTRAINT_EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -397,6 +406,15 @@ public interface ComponentsPackage extends EPackage {
 	int ACCESS_CONTROL_HANDLER__PROVIDES_EDGES = ModelPackage.APPLICATION_ELEMENT_CONTAINER__PROVIDES_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Constraint Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACCESS_CONTROL_HANDLER__CONSTRAINT_EDGES = ModelPackage.APPLICATION_ELEMENT_CONTAINER__CONSTRAINT_EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -605,13 +623,22 @@ public interface ComponentsPackage extends EPackage {
 	int GATE__PROVIDES_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Constraint Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GATE__CONSTRAINT_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GATE__OUT_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 5;
+	int GATE__OUT_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
@@ -620,7 +647,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GATE__IN_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 6;
+	int GATE__IN_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
@@ -629,7 +656,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GATE__GENERATED_ELEMENTS = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 7;
+	int GATE__GENERATED_ELEMENTS = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
@@ -638,7 +665,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GATE__OVERRIDDEN = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 8;
+	int GATE__OVERRIDDEN = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of structural features of the '<em>Gate</em>' class.
@@ -647,7 +674,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GATE_FEATURE_COUNT = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 9;
+	int GATE_FEATURE_COUNT = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 10;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.components.impl.EntryGateImpl <em>Entry Gate</em>}' class.
@@ -748,6 +775,15 @@ public interface ComponentsPackage extends EPackage {
 	 * @ordered
 	 */
 	int ENTRY_GATE__PROVIDES_EDGES = GATE__PROVIDES_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Constraint Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTRY_GATE__CONSTRAINT_EDGES = GATE__CONSTRAINT_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
@@ -893,6 +929,15 @@ public interface ComponentsPackage extends EPackage {
 	 * @ordered
 	 */
 	int EXIT_GATE__PROVIDES_EDGES = GATE__PROVIDES_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Constraint Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXIT_GATE__CONSTRAINT_EDGES = GATE__CONSTRAINT_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.

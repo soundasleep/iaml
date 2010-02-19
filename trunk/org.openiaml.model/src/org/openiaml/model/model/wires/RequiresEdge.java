@@ -6,9 +6,8 @@
  */
 package org.openiaml.model.model.wires;
 
+import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.GeneratedElement;
-import org.openiaml.model.model.WireEdgeDestination;
-import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.users.RequiresEdgeDestination;
 import org.openiaml.model.model.users.RequiresEdgesSource;
@@ -34,7 +33,7 @@ import org.openiaml.model.model.users.RequiresEdgesSource;
  * @model annotation="http://openiaml.org/comment added='0.4' changed='0.4.3 to no longer be a Wire; added \'from\' and \'to\' references; renamed to RequiresEdge'"
  * @generated
  */
-public interface RequiresEdge extends GeneratedElement, WireEdgeDestination, WireEdgesSource {
+public interface RequiresEdge extends GeneratedElement, ConstraintEdgesSource, ConstraintEdgeDestination, ContainsWires {
 	/**
 	 * Returns the value of the '<em><b>From</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link org.openiaml.model.model.users.RequiresEdgesSource#getOutRequiresEdges <em>Out Requires Edges</em>}'.

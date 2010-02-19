@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1233afe61d2.26">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.1233afe61d2.26">
   <scopes xsi:type="iaml.visual:Frame" id="visual.1233afe628e.15" name="Home"/>
   <scopes xsi:type="iaml.scopes:Session" id="scopes.1233afe6368.3" name="target session">
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233afe628e.6e" name="target"/>
     <elements xsi:type="iaml.components:AccessControlHandler" id="components.1233afe6424.13" name="role-based access" outRequiresEdges="wires.1233afe62eb.4a wires.1233afe62eb.82">
-      <requiresEdges id="wires.1233afe62eb.4a" outEdges="wires.1233afe62eb.a7" from="components.1233afe6424.13" to="users.1233afe655c.72">
-        <wires xsi:type="iaml.wires:ConstraintWire" id="wires.1233afe62eb.a7" from="wires.1233afe62eb.4a" to="wires.1233afe62eb.82"/>
+      <requiresEdges id="wires.1233afe62eb.4a" outConstraintEdges="wires.1233afe62eb.a7" from="components.1233afe6424.13" to="users.1233afe655c.72">
+        <constraintEdges id="wires.1233afe62eb.a7" from="wires.1233afe62eb.4a" to="wires.1233afe62eb.82"/>
       </requiresEdges>
-      <requiresEdges id="wires.1233afe62eb.82" inEdges="wires.1233afe62eb.a7" from="components.1233afe6424.13" to="users.1233afe655c.23"/>
+      <requiresEdges id="wires.1233afe62eb.82" inConstraintEdges="wires.1233afe62eb.a7" from="components.1233afe6424.13" to="users.1233afe655c.23"/>
     </elements>
   </scopes>
   <domainStores xsi:type="iaml.users:UserStore" id="users.1233afe655c.1c" name="user store">

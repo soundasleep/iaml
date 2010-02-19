@@ -36,6 +36,7 @@ import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.wires.ConstraintEdge;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.ProvidesEdge;
@@ -60,6 +61,7 @@ import org.openiaml.model.model.wires.RequiresEdge;
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getExtendsEdges <em>Extends Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getRequiresEdges <em>Requires Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getProvidesEdges <em>Provides Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getConstraintEdges <em>Constraint Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getOutEdges <em>Out Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getInEdges <em>In Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getGeneratedElements <em>Generated Elements</em>}</li>
@@ -232,6 +234,16 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 	 * @ordered
 	 */
 	protected EList<ProvidesEdge> providesEdges;
+
+	/**
+	 * The cached value of the '{@link #getConstraintEdges() <em>Constraint Edges</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConstraintEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ConstraintEdge> constraintEdges;
 
 	/**
 	 * The cached value of the '{@link #getOutEdges() <em>Out Edges</em>}' reference list.
@@ -517,6 +529,18 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ConstraintEdge> getConstraintEdges() {
+		if (constraintEdges == null) {
+			constraintEdges = new EObjectContainmentEList<ConstraintEdge>(ConstraintEdge.class, this, ModelPackage.APPLICATION_ELEMENT__CONSTRAINT_EDGES);
+		}
+		return constraintEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<WireEdge> getOutEdges() {
 		if (outEdges == null) {
 			outEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, ModelPackage.APPLICATION_ELEMENT__OUT_EDGES, ModelPackage.WIRE_EDGE__FROM);
@@ -650,6 +674,8 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				return ((InternalEList<?>)getRequiresEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT__PROVIDES_EDGES:
 				return ((InternalEList<?>)getProvidesEdges()).basicRemove(otherEnd, msgs);
+			case ModelPackage.APPLICATION_ELEMENT__CONSTRAINT_EDGES:
+				return ((InternalEList<?>)getConstraintEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT__OUT_EDGES:
 				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT__IN_EDGES:
@@ -698,6 +724,8 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				return getRequiresEdges();
 			case ModelPackage.APPLICATION_ELEMENT__PROVIDES_EDGES:
 				return getProvidesEdges();
+			case ModelPackage.APPLICATION_ELEMENT__CONSTRAINT_EDGES:
+				return getConstraintEdges();
 			case ModelPackage.APPLICATION_ELEMENT__OUT_EDGES:
 				return getOutEdges();
 			case ModelPackage.APPLICATION_ELEMENT__IN_EDGES:
@@ -768,6 +796,10 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 			case ModelPackage.APPLICATION_ELEMENT__PROVIDES_EDGES:
 				getProvidesEdges().clear();
 				getProvidesEdges().addAll((Collection<? extends ProvidesEdge>)newValue);
+				return;
+			case ModelPackage.APPLICATION_ELEMENT__CONSTRAINT_EDGES:
+				getConstraintEdges().clear();
+				getConstraintEdges().addAll((Collection<? extends ConstraintEdge>)newValue);
 				return;
 			case ModelPackage.APPLICATION_ELEMENT__OUT_EDGES:
 				getOutEdges().clear();
@@ -844,6 +876,9 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 			case ModelPackage.APPLICATION_ELEMENT__PROVIDES_EDGES:
 				getProvidesEdges().clear();
 				return;
+			case ModelPackage.APPLICATION_ELEMENT__CONSTRAINT_EDGES:
+				getConstraintEdges().clear();
+				return;
 			case ModelPackage.APPLICATION_ELEMENT__OUT_EDGES:
 				getOutEdges().clear();
 				return;
@@ -901,6 +936,8 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				return requiresEdges != null && !requiresEdges.isEmpty();
 			case ModelPackage.APPLICATION_ELEMENT__PROVIDES_EDGES:
 				return providesEdges != null && !providesEdges.isEmpty();
+			case ModelPackage.APPLICATION_ELEMENT__CONSTRAINT_EDGES:
+				return constraintEdges != null && !constraintEdges.isEmpty();
 			case ModelPackage.APPLICATION_ELEMENT__OUT_EDGES:
 				return outEdges != null && !outEdges.isEmpty();
 			case ModelPackage.APPLICATION_ELEMENT__IN_EDGES:
@@ -954,6 +991,7 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				case ModelPackage.APPLICATION_ELEMENT__EXTENDS_EDGES: return ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES;
 				case ModelPackage.APPLICATION_ELEMENT__REQUIRES_EDGES: return ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES;
 				case ModelPackage.APPLICATION_ELEMENT__PROVIDES_EDGES: return ModelPackage.CONTAINS_WIRES__PROVIDES_EDGES;
+				case ModelPackage.APPLICATION_ELEMENT__CONSTRAINT_EDGES: return ModelPackage.CONTAINS_WIRES__CONSTRAINT_EDGES;
 				default: return -1;
 			}
 		}
@@ -1030,6 +1068,7 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				case ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES: return ModelPackage.APPLICATION_ELEMENT__EXTENDS_EDGES;
 				case ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES: return ModelPackage.APPLICATION_ELEMENT__REQUIRES_EDGES;
 				case ModelPackage.CONTAINS_WIRES__PROVIDES_EDGES: return ModelPackage.APPLICATION_ELEMENT__PROVIDES_EDGES;
+				case ModelPackage.CONTAINS_WIRES__CONSTRAINT_EDGES: return ModelPackage.APPLICATION_ELEMENT__CONSTRAINT_EDGES;
 				default: return -1;
 			}
 		}

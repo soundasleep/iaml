@@ -15,13 +15,13 @@ import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.NamedElement;
-import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
-import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.wires.CompositeWire;
 import org.openiaml.model.model.wires.ConditionWire;
-import org.openiaml.model.model.wires.ConstraintWire;
+import org.openiaml.model.model.wires.ConstraintEdge;
+import org.openiaml.model.model.wires.ConstraintEdgeDestination;
+import org.openiaml.model.model.wires.ConstraintEdgesSource;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ExtendsEdgeDestination;
 import org.openiaml.model.model.wires.ExtendsEdgesSource;
@@ -144,8 +144,8 @@ public class WiresAdapterFactory extends AdapterFactoryImpl {
 				return createRequiresEdgeAdapter();
 			}
 			@Override
-			public Adapter caseConstraintWire(ConstraintWire object) {
-				return createConstraintWireAdapter();
+			public Adapter caseConstraintEdge(ConstraintEdge object) {
+				return createConstraintEdgeAdapter();
 			}
 			@Override
 			public Adapter caseProvidesEdge(ProvidesEdge object) {
@@ -166,6 +166,14 @@ public class WiresAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseExtendsEdgeDestination(ExtendsEdgeDestination object) {
 				return createExtendsEdgeDestinationAdapter();
+			}
+			@Override
+			public Adapter caseConstraintEdgesSource(ConstraintEdgesSource object) {
+				return createConstraintEdgesSourceAdapter();
+			}
+			@Override
+			public Adapter caseConstraintEdgeDestination(ConstraintEdgeDestination object) {
+				return createConstraintEdgeDestinationAdapter();
 			}
 			@Override
 			public Adapter caseGeneratedElement(GeneratedElement object) {
@@ -194,14 +202,6 @@ public class WiresAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseWireEdgeDestination(WireEdgeDestination object) {
 				return createWireEdgeDestinationAdapter();
-			}
-			@Override
-			public Adapter caseShouldntContainWires(ShouldntContainWires object) {
-				return createShouldntContainWiresAdapter();
-			}
-			@Override
-			public Adapter caseWireEdgesSource(WireEdgesSource object) {
-				return createWireEdgesSourceAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -392,16 +392,16 @@ public class WiresAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.ConstraintWire <em>Constraint Wire</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.ConstraintEdge <em>Constraint Edge</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.openiaml.model.model.wires.ConstraintWire
+	 * @see org.openiaml.model.model.wires.ConstraintEdge
 	 * @generated
 	 */
-	public Adapter createConstraintWireAdapter() {
+	public Adapter createConstraintEdgeAdapter() {
 		return null;
 	}
 
@@ -472,6 +472,34 @@ public class WiresAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createExtendsEdgeDestinationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.ConstraintEdgesSource <em>Constraint Edges Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.wires.ConstraintEdgesSource
+	 * @generated
+	 */
+	public Adapter createConstraintEdgesSourceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.ConstraintEdgeDestination <em>Constraint Edge Destination</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.wires.ConstraintEdgeDestination
+	 * @generated
+	 */
+	public Adapter createConstraintEdgeDestinationAdapter() {
 		return null;
 	}
 
@@ -570,34 +598,6 @@ public class WiresAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createWireEdgeDestinationAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ShouldntContainWires <em>Shouldnt Contain Wires</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.openiaml.model.model.ShouldntContainWires
-	 * @generated
-	 */
-	public Adapter createShouldntContainWiresAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.WireEdgesSource <em>Wire Edges Source</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.openiaml.model.model.WireEdgesSource
-	 * @generated
-	 */
-	public Adapter createWireEdgesSourceAdapter() {
 		return null;
 	}
 

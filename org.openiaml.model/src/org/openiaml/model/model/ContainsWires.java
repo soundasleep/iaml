@@ -8,6 +8,7 @@ package org.openiaml.model.model;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.openiaml.model.model.wires.ConstraintEdge;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.ProvidesEdge;
@@ -26,6 +27,7 @@ import org.openiaml.model.model.wires.RequiresEdge;
  *   <li>{@link org.openiaml.model.model.ContainsWires#getExtendsEdges <em>Extends Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.ContainsWires#getRequiresEdges <em>Requires Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.ContainsWires#getProvidesEdges <em>Provides Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.ContainsWires#getConstraintEdges <em>Constraint Edges</em>}</li>
  * </ul>
  * </p>
  *
@@ -114,5 +116,21 @@ public interface ContainsWires extends EObject {
 	 * @generated
 	 */
 	EList<ProvidesEdge> getProvidesEdges();
+
+	/**
+	 * Returns the value of the '<em><b>Constraint Edges</b></em>' containment reference list.
+	 * The list contents are of type {@link org.openiaml.model.model.wires.ConstraintEdge}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Constraint Edges</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Constraint Edges</em>' containment reference list.
+	 * @see org.openiaml.model.model.ModelPackage#getContainsWires_ConstraintEdges()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<ConstraintEdge> getConstraintEdges();
 
 } // ContainsWires

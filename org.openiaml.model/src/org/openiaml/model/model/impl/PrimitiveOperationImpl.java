@@ -23,6 +23,7 @@ import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.wires.ConstraintEdge;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.ProvidesEdge;
@@ -41,6 +42,7 @@ import org.openiaml.model.model.wires.RequiresEdge;
  *   <li>{@link org.openiaml.model.model.impl.PrimitiveOperationImpl#getExtendsEdges <em>Extends Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.PrimitiveOperationImpl#getRequiresEdges <em>Requires Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.PrimitiveOperationImpl#getProvidesEdges <em>Provides Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.PrimitiveOperationImpl#getConstraintEdges <em>Constraint Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.PrimitiveOperationImpl#getOutEdges <em>Out Edges</em>}</li>
  * </ul>
  * </p>
@@ -107,6 +109,16 @@ public class PrimitiveOperationImpl extends OperationImpl implements PrimitiveOp
 	 * @ordered
 	 */
 	protected EList<ProvidesEdge> providesEdges;
+
+	/**
+	 * The cached value of the '{@link #getConstraintEdges() <em>Constraint Edges</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConstraintEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ConstraintEdge> constraintEdges;
 
 	/**
 	 * The cached value of the '{@link #getOutEdges() <em>Out Edges</em>}' reference list.
@@ -214,6 +226,18 @@ public class PrimitiveOperationImpl extends OperationImpl implements PrimitiveOp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ConstraintEdge> getConstraintEdges() {
+		if (constraintEdges == null) {
+			constraintEdges = new EObjectContainmentEList<ConstraintEdge>(ConstraintEdge.class, this, ModelPackage.PRIMITIVE_OPERATION__CONSTRAINT_EDGES);
+		}
+		return constraintEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<WireEdge> getOutEdges() {
 		if (outEdges == null) {
 			outEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, ModelPackage.PRIMITIVE_OPERATION__OUT_EDGES, ModelPackage.WIRE_EDGE__FROM);
@@ -258,6 +282,8 @@ public class PrimitiveOperationImpl extends OperationImpl implements PrimitiveOp
 				return ((InternalEList<?>)getRequiresEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.PRIMITIVE_OPERATION__PROVIDES_EDGES:
 				return ((InternalEList<?>)getProvidesEdges()).basicRemove(otherEnd, msgs);
+			case ModelPackage.PRIMITIVE_OPERATION__CONSTRAINT_EDGES:
+				return ((InternalEList<?>)getConstraintEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.PRIMITIVE_OPERATION__OUT_EDGES:
 				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
 		}
@@ -284,6 +310,8 @@ public class PrimitiveOperationImpl extends OperationImpl implements PrimitiveOp
 				return getRequiresEdges();
 			case ModelPackage.PRIMITIVE_OPERATION__PROVIDES_EDGES:
 				return getProvidesEdges();
+			case ModelPackage.PRIMITIVE_OPERATION__CONSTRAINT_EDGES:
+				return getConstraintEdges();
 			case ModelPackage.PRIMITIVE_OPERATION__OUT_EDGES:
 				return getOutEdges();
 		}
@@ -323,6 +351,10 @@ public class PrimitiveOperationImpl extends OperationImpl implements PrimitiveOp
 				getProvidesEdges().clear();
 				getProvidesEdges().addAll((Collection<? extends ProvidesEdge>)newValue);
 				return;
+			case ModelPackage.PRIMITIVE_OPERATION__CONSTRAINT_EDGES:
+				getConstraintEdges().clear();
+				getConstraintEdges().addAll((Collection<? extends ConstraintEdge>)newValue);
+				return;
 			case ModelPackage.PRIMITIVE_OPERATION__OUT_EDGES:
 				getOutEdges().clear();
 				getOutEdges().addAll((Collection<? extends WireEdge>)newValue);
@@ -357,6 +389,9 @@ public class PrimitiveOperationImpl extends OperationImpl implements PrimitiveOp
 			case ModelPackage.PRIMITIVE_OPERATION__PROVIDES_EDGES:
 				getProvidesEdges().clear();
 				return;
+			case ModelPackage.PRIMITIVE_OPERATION__CONSTRAINT_EDGES:
+				getConstraintEdges().clear();
+				return;
 			case ModelPackage.PRIMITIVE_OPERATION__OUT_EDGES:
 				getOutEdges().clear();
 				return;
@@ -384,6 +419,8 @@ public class PrimitiveOperationImpl extends OperationImpl implements PrimitiveOp
 				return requiresEdges != null && !requiresEdges.isEmpty();
 			case ModelPackage.PRIMITIVE_OPERATION__PROVIDES_EDGES:
 				return providesEdges != null && !providesEdges.isEmpty();
+			case ModelPackage.PRIMITIVE_OPERATION__CONSTRAINT_EDGES:
+				return constraintEdges != null && !constraintEdges.isEmpty();
 			case ModelPackage.PRIMITIVE_OPERATION__OUT_EDGES:
 				return outEdges != null && !outEdges.isEmpty();
 		}
@@ -410,6 +447,7 @@ public class PrimitiveOperationImpl extends OperationImpl implements PrimitiveOp
 				case ModelPackage.PRIMITIVE_OPERATION__EXTENDS_EDGES: return ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES;
 				case ModelPackage.PRIMITIVE_OPERATION__REQUIRES_EDGES: return ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES;
 				case ModelPackage.PRIMITIVE_OPERATION__PROVIDES_EDGES: return ModelPackage.CONTAINS_WIRES__PROVIDES_EDGES;
+				case ModelPackage.PRIMITIVE_OPERATION__CONSTRAINT_EDGES: return ModelPackage.CONTAINS_WIRES__CONSTRAINT_EDGES;
 				default: return -1;
 			}
 		}
@@ -447,6 +485,7 @@ public class PrimitiveOperationImpl extends OperationImpl implements PrimitiveOp
 				case ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES: return ModelPackage.PRIMITIVE_OPERATION__EXTENDS_EDGES;
 				case ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES: return ModelPackage.PRIMITIVE_OPERATION__REQUIRES_EDGES;
 				case ModelPackage.CONTAINS_WIRES__PROVIDES_EDGES: return ModelPackage.PRIMITIVE_OPERATION__PROVIDES_EDGES;
+				case ModelPackage.CONTAINS_WIRES__CONSTRAINT_EDGES: return ModelPackage.PRIMITIVE_OPERATION__CONSTRAINT_EDGES;
 				default: return -1;
 			}
 		}

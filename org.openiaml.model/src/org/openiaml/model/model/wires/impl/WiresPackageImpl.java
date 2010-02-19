@@ -28,8 +28,10 @@ import org.openiaml.model.model.visual.VisualPackage;
 import org.openiaml.model.model.visual.impl.VisualPackageImpl;
 import org.openiaml.model.model.wires.CompositeWire;
 import org.openiaml.model.model.wires.ConditionWire;
+import org.openiaml.model.model.wires.ConstraintEdge;
+import org.openiaml.model.model.wires.ConstraintEdgeDestination;
+import org.openiaml.model.model.wires.ConstraintEdgesSource;
 import org.openiaml.model.model.wires.ConstraintTypes;
-import org.openiaml.model.model.wires.ConstraintWire;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ExtendsEdgeDestination;
 import org.openiaml.model.model.wires.ExtendsEdgesSource;
@@ -144,7 +146,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass constraintWireEClass = null;
+	private EClass constraintEdgeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -180,6 +182,20 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * @generated
 	 */
 	private EClass extendsEdgeDestinationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass constraintEdgesSourceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass constraintEdgeDestinationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -529,8 +545,8 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getConstraintWire() {
-		return constraintWireEClass;
+	public EClass getConstraintEdge() {
+		return constraintEdgeEClass;
 	}
 
 	/**
@@ -538,8 +554,26 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getConstraintWire_Type() {
-		return (EAttribute)constraintWireEClass.getEStructuralFeatures().get(0);
+	public EReference getConstraintEdge_From() {
+		return (EReference)constraintEdgeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getConstraintEdge_To() {
+		return (EReference)constraintEdgeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getConstraintEdge_Type() {
+		return (EAttribute)constraintEdgeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -646,6 +680,42 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getConstraintEdgesSource() {
+		return constraintEdgesSourceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getConstraintEdgesSource_OutConstraintEdges() {
+		return (EReference)constraintEdgesSourceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getConstraintEdgeDestination() {
+		return constraintEdgeDestinationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getConstraintEdgeDestination_InConstraintEdges() {
+		return (EReference)constraintEdgeDestinationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getConstraintTypes() {
 		return constraintTypesEEnum;
 	}
@@ -718,8 +788,10 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		createEReference(requiresEdgeEClass, REQUIRES_EDGE__FROM);
 		createEReference(requiresEdgeEClass, REQUIRES_EDGE__TO);
 
-		constraintWireEClass = createEClass(CONSTRAINT_WIRE);
-		createEAttribute(constraintWireEClass, CONSTRAINT_WIRE__TYPE);
+		constraintEdgeEClass = createEClass(CONSTRAINT_EDGE);
+		createEReference(constraintEdgeEClass, CONSTRAINT_EDGE__FROM);
+		createEReference(constraintEdgeEClass, CONSTRAINT_EDGE__TO);
+		createEAttribute(constraintEdgeEClass, CONSTRAINT_EDGE__TYPE);
 
 		providesEdgeEClass = createEClass(PROVIDES_EDGE);
 		createEReference(providesEdgeEClass, PROVIDES_EDGE__FROM);
@@ -736,6 +808,12 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 
 		extendsEdgeDestinationEClass = createEClass(EXTENDS_EDGE_DESTINATION);
 		createEReference(extendsEdgeDestinationEClass, EXTENDS_EDGE_DESTINATION__IN_EXTENDS_EDGES);
+
+		constraintEdgesSourceEClass = createEClass(CONSTRAINT_EDGES_SOURCE);
+		createEReference(constraintEdgesSourceEClass, CONSTRAINT_EDGES_SOURCE__OUT_CONSTRAINT_EDGES);
+
+		constraintEdgeDestinationEClass = createEClass(CONSTRAINT_EDGE_DESTINATION);
+		createEReference(constraintEdgeDestinationEClass, CONSTRAINT_EDGE_DESTINATION__IN_CONSTRAINT_EDGES);
 
 		// Create enums
 		constraintTypesEEnum = createEEnum(CONSTRAINT_TYPES);
@@ -801,9 +879,10 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		extendsEdgeEClass.getESuperTypes().add(theModelPackage.getGeneratedElement());
 		extendsEdgeEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
 		requiresEdgeEClass.getESuperTypes().add(theModelPackage.getGeneratedElement());
-		requiresEdgeEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
-		requiresEdgeEClass.getESuperTypes().add(theModelPackage.getWireEdgesSource());
-		constraintWireEClass.getESuperTypes().add(this.getSingleWire());
+		requiresEdgeEClass.getESuperTypes().add(this.getConstraintEdgesSource());
+		requiresEdgeEClass.getESuperTypes().add(this.getConstraintEdgeDestination());
+		requiresEdgeEClass.getESuperTypes().add(theModelPackage.getContainsWires());
+		constraintEdgeEClass.getESuperTypes().add(theModelPackage.getGeneratedElement());
 		providesEdgeEClass.getESuperTypes().add(theModelPackage.getGeneratedElement());
 
 		// Initialize classes and features; add operations and parameters
@@ -847,8 +926,10 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		initEReference(getRequiresEdge_From(), theUsersPackage.getRequiresEdgesSource(), theUsersPackage.getRequiresEdgesSource_OutRequiresEdges(), "from", null, 1, 1, RequiresEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRequiresEdge_To(), theUsersPackage.getRequiresEdgeDestination(), theUsersPackage.getRequiresEdgeDestination_InRequiresEdges(), "to", null, 1, 1, RequiresEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(constraintWireEClass, ConstraintWire.class, "ConstraintWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getConstraintWire_Type(), this.getConstraintTypes(), "type", null, 1, 1, ConstraintWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(constraintEdgeEClass, ConstraintEdge.class, "ConstraintEdge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getConstraintEdge_From(), this.getConstraintEdgesSource(), this.getConstraintEdgesSource_OutConstraintEdges(), "from", null, 1, 1, ConstraintEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConstraintEdge_To(), this.getConstraintEdgeDestination(), this.getConstraintEdgeDestination_InConstraintEdges(), "to", null, 1, 1, ConstraintEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getConstraintEdge_Type(), this.getConstraintTypes(), "type", null, 1, 1, ConstraintEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(providesEdgeEClass, ProvidesEdge.class, "ProvidesEdge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getProvidesEdge_From(), theUsersPackage.getProvidesEdgesSource(), theUsersPackage.getProvidesEdgesSource_OutProvidesEdges(), "from", null, 1, 1, ProvidesEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -865,6 +946,12 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 
 		initEClass(extendsEdgeDestinationEClass, ExtendsEdgeDestination.class, "ExtendsEdgeDestination", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getExtendsEdgeDestination_InExtendsEdges(), this.getExtendsEdge(), this.getExtendsEdge_To(), "inExtendsEdges", null, 0, -1, ExtendsEdgeDestination.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(constraintEdgesSourceEClass, ConstraintEdgesSource.class, "ConstraintEdgesSource", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getConstraintEdgesSource_OutConstraintEdges(), this.getConstraintEdge(), this.getConstraintEdge_From(), "outConstraintEdges", null, 0, -1, ConstraintEdgesSource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(constraintEdgeDestinationEClass, ConstraintEdgeDestination.class, "ConstraintEdgeDestination", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getConstraintEdgeDestination_InConstraintEdges(), this.getConstraintEdge(), this.getConstraintEdge_To(), "inConstraintEdges", null, 0, -1, ConstraintEdgeDestination.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(constraintTypesEEnum, ConstraintTypes.class, "ConstraintTypes");
@@ -974,10 +1061,11 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 			 "changed", "0.4.3 to no longer be a Wire; added \'from\' and \'to\' references; renamed to RequiresEdge"
 		   });			
 		addAnnotation
-		  (constraintWireEClass, 
+		  (constraintEdgeEClass, 
 		   source, 
 		   new String[] {
-			 "added", "0.4"
+			 "added", "0.4",
+			 "changed", "0.4.3 to no longer be a Wire; added \'from\' and \'to\' references; renamed to ConstraintEdge"
 		   });			
 		addAnnotation
 		  (constraintTypesEEnum, 
@@ -1012,6 +1100,18 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		   });			
 		addAnnotation
 		  (extendsEdgeDestinationEClass, 
+		   source, 
+		   new String[] {
+			 "comment", "added in 0.4.3"
+		   });			
+		addAnnotation
+		  (constraintEdgesSourceEClass, 
+		   source, 
+		   new String[] {
+			 "comment", "added in 0.4.3"
+		   });			
+		addAnnotation
+		  (constraintEdgeDestinationEClass, 
 		   source, 
 		   new String[] {
 			 "comment", "added in 0.4.3"
@@ -1087,16 +1187,16 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 			 "documentation", "Represents the requirements for a {@link LoginHandler}, such as {@link Role Roles} and {@link Permission Permissions}."
 		   });			
 		addAnnotation
-		  (constraintWireEClass, 
+		  (constraintEdgeEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Allows for the definition of complex {@link RequiresWire requirements}."
+			 "documentation", "Allows for the definition of complex {@model RequiresEdge requirements}."
 		   });				
 		addAnnotation
 		  (providesEdgeEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Indicates that the source {@link Role} provides the target {@link Permission}."
+			 "documentation", "Indicates that the source {@model Role} provides the target {@model Permission}."
 		   });		
 		addAnnotation
 		  (parameterEdgesSourceEClass, 
@@ -1121,6 +1221,18 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Something which may be used as the destination of a {@model ExtendsEdge}."
+		   });			
+		addAnnotation
+		  (constraintEdgesSourceEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Something which may be used as the source of a {@model ConstraintEdge}."
+		   });			
+		addAnnotation
+		  (constraintEdgeDestinationEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Something which may be used as the destination of a {@model ConstraintEdge}."
 		   });	
 	}
 

@@ -295,6 +295,8 @@
         eType="#//wires/RequiresEdge" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="providesEdges" upperBound="-1"
         eType="#//wires/ProvidesEdge" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constraintEdges" upperBound="-1"
+        eType="#//wires/ConstraintEdge" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ShouldntContainWires" abstract="true"
       interface="true" eSuperTypes="#//ContainsWires">
@@ -615,7 +617,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//wires/ExtendsEdgeDestination"
           eOpposite="#//wires/ExtendsEdgeDestination/inExtendsEdges"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="RequiresEdge" eSuperTypes="#//GeneratedElement #//WireEdgeDestination #//WireEdgesSource">
+    <eClassifiers xsi:type="ecore:EClass" name="RequiresEdge" eSuperTypes="#//GeneratedElement #//wires/ConstraintEdgesSource #//wires/ConstraintEdgeDestination #//ContainsWires">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.4"/>
         <details key="changed" value="0.4.3 to no longer be a Wire; added 'from' and 'to' references; renamed to RequiresEdge"/>
@@ -628,13 +630,18 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//users/RequiresEdgeDestination"
           eOpposite="#//users/RequiresEdgeDestination/inRequiresEdges"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ConstraintWire" eSuperTypes="#//wires/SingleWire">
+    <eClassifiers xsi:type="ecore:EClass" name="ConstraintEdge" eSuperTypes="#//GeneratedElement">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.4"/>
+        <details key="changed" value="0.4.3 to no longer be a Wire; added 'from' and 'to' references; renamed to ConstraintEdge"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Allows for the definition of complex {@link RequiresWire requirements}."/>
+        <details key="documentation" value="Allows for the definition of complex {@model RequiresEdge requirements}."/>
       </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1"
+          eType="#//wires/ConstraintEdgesSource" eOpposite="#//wires/ConstraintEdgesSource/outConstraintEdges"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//wires/ConstraintEdgeDestination"
+          eOpposite="#//wires/ConstraintEdgeDestination/inConstraintEdges"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1"
           eType="#//wires/ConstraintTypes"/>
     </eClassifiers>
@@ -652,7 +659,7 @@
         <details key="changed" value="0.4.3 to no longer be a Wire; added 'from' and 'to' references; renamed to ProvidesEdge"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Indicates that the source {@link Role} provides the target {@link Permission}."/>
+        <details key="documentation" value="Indicates that the source {@model Role} provides the target {@model Permission}."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1"
           eType="#//users/ProvidesEdgesSource" eOpposite="#//users/ProvidesEdgesSource/outProvidesEdges"/>
@@ -702,6 +709,28 @@
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="inExtendsEdges" upperBound="-1"
           eType="#//wires/ExtendsEdge" eOpposite="#//wires/ExtendsEdge/to"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConstraintEdgesSource" abstract="true"
+        interface="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Something which may be used as the source of a {@model ConstraintEdge}."/>
+      </eAnnotations>
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="comment" value="added in 0.4.3"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="outConstraintEdges" upperBound="-1"
+          eType="#//wires/ConstraintEdge" eOpposite="#//wires/ConstraintEdge/from"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ConstraintEdgeDestination" abstract="true"
+        interface="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Something which may be used as the destination of a {@model ConstraintEdge}."/>
+      </eAnnotations>
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="comment" value="added in 0.4.3"/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="inConstraintEdges" upperBound="-1"
+          eType="#//wires/ConstraintEdge" eOpposite="#//wires/ConstraintEdge/to"/>
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="operations" nsURI="http://openiaml.org/model/operations" nsPrefix="iaml.operations">

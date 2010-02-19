@@ -34,6 +34,9 @@ import org.w3c.dom.NodeList;
  *   	<li>Page is now Frame
  *      <li>ParameterWire is now ParamaterEdge, and no longer a WireEdge
  *      <li>ExtendsWire is now ExtendsEdge, and no longer a WireEdge
+ *      <li>RequiresWire is now RequiresEdge, and no longer a WireEdge
+ *      <li>ProvidesWire is now ProvidesEdge, and no longer a WireEdge
+ *      <li>ConstraintWire is now ConstraintEdge, and no longer a WireEdge
  *   </ol></li>
  *   <li><strong>Many other modifications, too many to list... this migrator only implements
  *   	those changed necessary for the model migration test to pass.</strong></li>
@@ -54,6 +57,7 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 	private List<String> extendsWires = null;
 	private List<String> requiresWires = null;
 	private List<String> providesWires = null;
+	private List<String> constraintWires = null;
 	
 	/**
 	 * We will cycle over the document, and find out which edges are
@@ -68,6 +72,7 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 		extendsWires = new ArrayList<String>();
 		requiresWires = new ArrayList<String>();
 		providesWires = new ArrayList<String>();
+		constraintWires = new ArrayList<String>();
 		prepareDocumentRecurse(documentElement, errors);
 
 	}
@@ -115,6 +120,15 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 					providesWires.add(id);
 				} else {
 					errors.add(new ExpectedMigrationException(this, e, "Element was a ProvidesWire but did not have an id attribute."));
+				}
+			}
+
+			if ("iaml.wires:ConstraintWire".equals(e.getAttribute("xsi:type"))) {
+				String id = e.getAttribute("id");
+				if (id != null) {
+					constraintWires.add(id);
+				} else {
+					errors.add(new ExpectedMigrationException(this, e, "Element was a ConstraintWire but did not have an id attribute."));
 				}
 			}
 		}
@@ -186,6 +200,10 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 			return "iaml.wires:ProvidesEdge";
 		}
 
+		if (xsiType.equals("iaml.wires:ConstraintWire")) {
+			return "iaml.wires:ConstraintEdge";
+		}
+
 		return super.replaceType(element, xsiType, errors);
 	}
 
@@ -230,6 +248,12 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 			// --> <providesEdges>
 			if ("iaml.wires:ProvidesWire".equals(xsiType)) {
 				return "providesEdges";
+			}
+
+			// <wires xsi:type="iaml.wires:ConstraintWire"> 
+			// --> <constraintEdges>
+			if ("iaml.wires:ConstraintWire".equals(xsiType)) {
+				return "constraintEdges";
 			}
 		}
 		
@@ -312,6 +336,40 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 
 		if (!old.getAttribute("outEdges").isEmpty()) {
 			splitReferences(old, "outEdges", providesWires, "outProvidesEdges");
+		}
+
+		// any inEdges or outEdges to an old ConstraintWire?
+		if (!old.getAttribute("inEdges").isEmpty()) {
+			splitReferences(old, "inEdges", constraintWires, "inConstraintEdges");
+		}
+
+		if (!old.getAttribute("outEdges").isEmpty()) {
+			splitReferences(old, "outEdges", constraintWires, "outConstraintEdges");
+		}
+		
+		// remove an attribute?
+		if ("iaml.wires:RequiresWire".equals(old.getAttribute("xsi:type")) || "requiresEdges".equals(old.getNodeName())) {
+			// make sure it's empty
+			if (old.getAttribute("outEdges") != null) {
+				if (old.getAttribute("outEdges").isEmpty()) {
+					// delete it
+					old.removeAttribute("outEdges");
+				} else {
+					// it's not empty; throw a warning
+					errors.add(new ExpectedMigrationException(this, old, "Element needs to lose attribute 'outEdges' but was not empty."));
+				}
+			}
+
+			// make sure it's empty
+			if (old.getAttribute("inEdges") != null) {
+				if (old.getAttribute("inEdges").isEmpty()) {
+					// delete it
+					old.removeAttribute("inEdges");
+				} else {
+					// it's not empty; throw a warning
+					errors.add(new ExpectedMigrationException(this, old, "Element needs to lose attribute 'inEdges' but was not empty."));
+				}
+			}
 		}
 
 	}

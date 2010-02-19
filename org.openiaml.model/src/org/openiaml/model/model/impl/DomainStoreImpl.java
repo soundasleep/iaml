@@ -42,6 +42,7 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.domain.DomainStoreTypes;
+import org.openiaml.model.model.wires.ConstraintEdge;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.ProvidesEdge;
@@ -66,6 +67,7 @@ import org.openiaml.model.model.wires.RequiresEdge;
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getExtendsEdges <em>Extends Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getRequiresEdges <em>Requires Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getProvidesEdges <em>Provides Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getConstraintEdges <em>Constraint Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getConditions <em>Conditions</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getGeneratedElements <em>Generated Elements</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#isOverridden <em>Overridden</em>}</li>
@@ -224,6 +226,15 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 	 * @ordered
 	 */
 	protected EList<ProvidesEdge> providesEdges;
+	/**
+	 * The cached value of the '{@link #getConstraintEdges() <em>Constraint Edges</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConstraintEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ConstraintEdge> constraintEdges;
 	/**
 	 * The cached value of the '{@link #getConditions() <em>Conditions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -528,6 +539,18 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ConstraintEdge> getConstraintEdges() {
+		if (constraintEdges == null) {
+			constraintEdges = new EObjectContainmentEList<ConstraintEdge>(ConstraintEdge.class, this, ModelPackage.DOMAIN_STORE__CONSTRAINT_EDGES);
+		}
+		return constraintEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<Condition> getConditions() {
 		if (conditions == null) {
 			conditions = new EObjectContainmentEList<Condition>(Condition.class, this, ModelPackage.DOMAIN_STORE__CONDITIONS);
@@ -687,6 +710,8 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 				return ((InternalEList<?>)getRequiresEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.DOMAIN_STORE__PROVIDES_EDGES:
 				return ((InternalEList<?>)getProvidesEdges()).basicRemove(otherEnd, msgs);
+			case ModelPackage.DOMAIN_STORE__CONSTRAINT_EDGES:
+				return ((InternalEList<?>)getConstraintEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.DOMAIN_STORE__CONDITIONS:
 				return ((InternalEList<?>)getConditions()).basicRemove(otherEnd, msgs);
 			case ModelPackage.DOMAIN_STORE__GENERATED_ELEMENTS:
@@ -733,6 +758,8 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 				return getRequiresEdges();
 			case ModelPackage.DOMAIN_STORE__PROVIDES_EDGES:
 				return getProvidesEdges();
+			case ModelPackage.DOMAIN_STORE__CONSTRAINT_EDGES:
+				return getConstraintEdges();
 			case ModelPackage.DOMAIN_STORE__CONDITIONS:
 				return getConditions();
 			case ModelPackage.DOMAIN_STORE__GENERATED_ELEMENTS:
@@ -805,6 +832,10 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 			case ModelPackage.DOMAIN_STORE__PROVIDES_EDGES:
 				getProvidesEdges().clear();
 				getProvidesEdges().addAll((Collection<? extends ProvidesEdge>)newValue);
+				return;
+			case ModelPackage.DOMAIN_STORE__CONSTRAINT_EDGES:
+				getConstraintEdges().clear();
+				getConstraintEdges().addAll((Collection<? extends ConstraintEdge>)newValue);
 				return;
 			case ModelPackage.DOMAIN_STORE__CONDITIONS:
 				getConditions().clear();
@@ -883,6 +914,9 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 			case ModelPackage.DOMAIN_STORE__PROVIDES_EDGES:
 				getProvidesEdges().clear();
 				return;
+			case ModelPackage.DOMAIN_STORE__CONSTRAINT_EDGES:
+				getConstraintEdges().clear();
+				return;
 			case ModelPackage.DOMAIN_STORE__CONDITIONS:
 				getConditions().clear();
 				return;
@@ -943,6 +977,8 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 				return requiresEdges != null && !requiresEdges.isEmpty();
 			case ModelPackage.DOMAIN_STORE__PROVIDES_EDGES:
 				return providesEdges != null && !providesEdges.isEmpty();
+			case ModelPackage.DOMAIN_STORE__CONSTRAINT_EDGES:
+				return constraintEdges != null && !constraintEdges.isEmpty();
 			case ModelPackage.DOMAIN_STORE__CONDITIONS:
 				return conditions != null && !conditions.isEmpty();
 			case ModelPackage.DOMAIN_STORE__GENERATED_ELEMENTS:
@@ -998,6 +1034,7 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 				case ModelPackage.DOMAIN_STORE__EXTENDS_EDGES: return ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES;
 				case ModelPackage.DOMAIN_STORE__REQUIRES_EDGES: return ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES;
 				case ModelPackage.DOMAIN_STORE__PROVIDES_EDGES: return ModelPackage.CONTAINS_WIRES__PROVIDES_EDGES;
+				case ModelPackage.DOMAIN_STORE__CONSTRAINT_EDGES: return ModelPackage.CONTAINS_WIRES__CONSTRAINT_EDGES;
 				default: return -1;
 			}
 		}
@@ -1052,6 +1089,7 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 				case ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES: return ModelPackage.DOMAIN_STORE__EXTENDS_EDGES;
 				case ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES: return ModelPackage.DOMAIN_STORE__REQUIRES_EDGES;
 				case ModelPackage.CONTAINS_WIRES__PROVIDES_EDGES: return ModelPackage.DOMAIN_STORE__PROVIDES_EDGES;
+				case ModelPackage.CONTAINS_WIRES__CONSTRAINT_EDGES: return ModelPackage.DOMAIN_STORE__CONSTRAINT_EDGES;
 				default: return -1;
 			}
 		}

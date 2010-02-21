@@ -800,29 +800,27 @@
   </links>
   <links>
     <domainMetaElement
-        href="iaml.ecore#//wires/ConstraintWire"/>
-    <domainSpecialization
-        body="self.oclIsTypeOf( ConstraintWire )"/>
+        href="iaml.ecore#//wires/ConstraintEdge"/>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping"
         viewPattern="'{'{0}'}'"
         editorPattern="{0}"
         editPattern="{0}">
       <diagramLabel
-          href="iaml.gmfgraph#ConstraintWireName"/>
+          href="iaml.gmfgraph#ConstraintEdgeName"/>
       <features
-          href="iaml.ecore#//wires/ConstraintWire/type"/>
+          href="iaml.ecore#//wires/ConstraintEdge/type"/>
     </labelMappings>
     <containmentFeature
-        href="iaml.ecore#//ContainsWires/wires"/>
+        href="iaml.ecore#//ContainsWires/constraintEdges"/>
     <diagramLink
-        href="iaml.gmfgraph#ConstraintWire"/>
+        href="iaml.gmfgraph#ConstraintEdge"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/from"/>
+        href="iaml.ecore#//wires/ConstraintEdge/from"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/to"/>
+        href="iaml.ecore#//wires/ConstraintEdge/to"/>
   </links>
   <diagram>
     <diagramCanvas

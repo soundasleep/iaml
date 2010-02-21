@@ -242,7 +242,7 @@
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_Frame"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4002,4011,4004,4005,4006,4007,4008,4012,4010"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4002,4011,4004,4005,4006,4007,4008,4012,4013"/>
       </viewProvider>
    </extension>
 
@@ -257,7 +257,7 @@
             <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
-            <method name="getType()" value="4001,4002,4011,4004,4005,4006,4007,4008,4012,4010"/>
+            <method name="getType()" value="4001,4002,4011,4004,4005,4006,4007,4008,4012,4013"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
             <method name="getType()" value="5001,5002,5003,5004,5005,5006,5007,5008,5009,5010,5011,5012,5013,5014,5015,5016,5017,5018,5019,5020,5021,5022,5023,5024,5025,5026,5027,5028,5029,5030,5031,5032,5033,5034,5035,5036,5037,5038,5039,5040,5041,5042,5043"/>
@@ -670,12 +670,12 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
-               id="org.openiaml.model.diagram.frame.ConstraintWire_4010"
-               name="%metatype.name.ConstraintWire_4010"
+               id="org.openiaml.model.diagram.frame.ConstraintEdge_4013"
+               name="%metatype.name.ConstraintEdge_4013"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="ConstraintWire"
-               edithelper="org.openiaml.model.diagram.frame.edit.helpers.ConstraintWireEditHelper">
-            <param name="semanticHint" value="4010"/>
+               eclass="ConstraintEdge"
+               edithelper="org.openiaml.model.diagram.frame.edit.helpers.ConstraintEdgeEditHelper">
+            <param name="semanticHint" value="4013"/>
          </metamodelType>
       </metamodel>
    </extension>
@@ -724,7 +724,7 @@
          <elementType ref="org.openiaml.model.diagram.frame.ConditionWire_4007"/>
          <elementType ref="org.openiaml.model.diagram.frame.NewInstanceWire_4008"/>
          <elementType ref="org.openiaml.model.diagram.frame.RequiresEdge_4012"/>
-         <elementType ref="org.openiaml.model.diagram.frame.ConstraintWire_4010"/>
+         <elementType ref="org.openiaml.model.diagram.frame.ConstraintEdge_4013"/>
          <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
       </binding>
    </extension>

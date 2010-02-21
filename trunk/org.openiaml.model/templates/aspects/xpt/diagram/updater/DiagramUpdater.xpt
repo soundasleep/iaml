@@ -133,6 +133,16 @@
 				elements.addAll(getAllShortcutsFromProvidesEdges(doneAlready, edges, view, e,
 						((org.openiaml.model.model.users.ProvidesEdgeDestination) e).getInProvidesEdges()));
 			}
+			if (e instanceof org.openiaml.model.model.wires.ConstraintEdgesSource) {
+				// get all incoming edges
+				elements.addAll(getAllShortcutsFromConstraintEdges(doneAlready, edges, view, e,
+						((org.openiaml.model.model.wires.ConstraintEdgesSource) e).getOutConstraintEdges()));
+			}
+			if (e instanceof org.openiaml.model.model.wires.ConstraintEdgeDestination) {
+				// get all incoming edges
+				elements.addAll(getAllShortcutsFromConstraintEdges(doneAlready, edges, view, e,
+						((org.openiaml.model.model.wires.ConstraintEdgeDestination) e).getInConstraintEdges()));
+			}
 		}
 	}
 
@@ -164,8 +174,7 @@
 				org.openiaml.model.model.WireEdgeDestination run = (org.openiaml.model.model.WireEdgeDestination) wire;
 				java.util.List<org.openiaml.model.model.WireEdge> params = new java.util.ArrayList();
 				for (org.openiaml.model.model.WireEdge e : run.getInEdges()) {
-					if (e instanceof org.openiaml.model.model.wires.ConditionWire ||
-							e instanceof org.openiaml.model.model.wires.ConstraintWire) {
+					if (e instanceof org.openiaml.model.model.wires.ConditionWire) {
 						params.add(e);
 					}
 				}
@@ -290,6 +299,33 @@
 		// that are not the original object source
 		// NOTE: model-specific
 		for (org.openiaml.model.model.wires.ProvidesEdge wire : outEdges) {
+			// only look into these edges if we can actually render them...
+			if («EXPAND xpt::editor::VisualIDRegistry::getLinkWithClassVisualIDMethodCall FOR editorGen.diagram»(wire) != -1) {
+				if (considerElementForShortcut(wire.getFrom(), wire, view, source, doneAlready, result, edges))
+					continue;
+				if (considerElementForShortcut(wire.getTo(), wire, view, source, doneAlready, result, edges))
+					continue;
+			}
+		}
+
+		return result;
+	}
+	
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] For a list of edges, what elements are they all connected to?\n\nNOTE: return type is model-specific")»
+	private static java.util.List<org.openiaml.model.model.wires.ConstraintEdge> getAllShortcutsFromConstraintEdges(
+			java.util.List<org.eclipse.emf.ecore.EObject> doneAlready, 
+			java.util.List<org.eclipse.emf.ecore.EObject> edges, 
+			org.eclipse.gmf.runtime.notation.View view, 
+			org.eclipse.emf.ecore.EObject source,
+			java.util.List<org.openiaml.model.model.wires.ConstraintEdge> outEdges) {
+		java.util.List result = new java.util.LinkedList();
+		
+		edges.addAll(outEdges);
+
+		// get all nodes at the start and end of the edge
+		// that are not the original object source
+		// NOTE: model-specific
+		for (org.openiaml.model.model.wires.ConstraintEdge wire : outEdges) {
 			// only look into these edges if we can actually render them...
 			if («EXPAND xpt::editor::VisualIDRegistry::getLinkWithClassVisualIDMethodCall FOR editorGen.diagram»(wire) != -1) {
 				if (considerElementForShortcut(wire.getFrom(), wire, view, source, doneAlready, result, edges))

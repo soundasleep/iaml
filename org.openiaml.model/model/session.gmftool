@@ -386,15 +386,15 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="ConstraintWire"
-          description="Create new ConstraintWire">
+          title="ConstraintEdge"
+          description="Create new ConstraintEdge">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/ConstraintWire.gif"
+            path="icons/full/obj16/ConstraintEdge.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/ConstraintWire.gif"
+            path="icons/full/obj32/ConstraintEdge.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
       <tools

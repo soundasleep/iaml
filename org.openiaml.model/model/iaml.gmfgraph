@@ -1436,14 +1436,14 @@
           figure="//@figures.0/@descriptors.52/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
-        name="ConstraintWireFigure">
+        name="ConstraintEdgeFigure">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
-          name="ConstraintWireFigure"
+          name="ConstraintEdgeFigure"
           lineKind="LINE_DASH">
         <children
             xsi:type="gmfgraph:Label"
-            name="ConstraintWireNameFigure"
+            name="ConstraintEdgeNameFigure"
             text="&lt;...>"/>
       </actualFigure>
       <accessors
@@ -1895,8 +1895,8 @@
       name="RequiresEdge"
       figure="RequiresEdgeFigure"/>
   <connections
-      name="ConstraintWire"
-      figure="ConstraintWireFigure"/>
+      name="ConstraintEdge"
+      figure="ConstraintEdgeFigure"/>
   <connections
       name="ProvidesEdge"
       figure="ProvidesEdgeFigure"/>
@@ -2193,8 +2193,8 @@
       figure="RequiresEdgeFigure"
       accessor="//@figures.0/@descriptors.52/@accessors.0"/>
   <labels
-      name="ConstraintWireName"
-      figure="ConstraintWireFigure"
+      name="ConstraintEdgeName"
+      figure="ConstraintEdgeFigure"
       accessor="//@figures.0/@descriptors.53/@accessors.0"/>
   <labels
       name="ProvidesEdgeName"

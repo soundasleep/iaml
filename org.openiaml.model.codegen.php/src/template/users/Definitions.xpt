@@ -87,8 +87,8 @@
 	«ENDFOREACH»
 	
 	/* combine with any constraint wires */
-	«LET outRequiresEdges.outEdges.typeSelect(model::wires::ConstraintWire) AS c1»
-	«LET outRequiresEdges.inEdges.typeSelect(model::wires::ConstraintWire) AS c2»
+	«LET outRequiresEdges.outConstraintEdges AS c1»
+	«LET outRequiresEdges.inConstraintEdges AS c2»
 	«LET c1.toSet().union(c2) AS constraints»
 		«FOREACH constraints AS constraint»
 			// constraint wire '«constraint»'

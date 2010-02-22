@@ -16,7 +16,7 @@ import org.openiaml.model.model.WireEdgeDestination;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Represents the execution of an {@link Operation}.
+ * Connects a {@model EventTrigger} to a {@model Operation}, allowing it to be executed. May have incoming {@model ConditionWire}s.
  * <!-- end-model-doc -->
  *
  * <p>

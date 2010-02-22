@@ -869,8 +869,10 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		parameterEdgeEClass.getESuperTypes().add(theModelPackage.getGeneratedElement());
 		setWireEClass.getESuperTypes().add(this.getCompositeWire());
 		setWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
-		navigateWireEClass.getESuperTypes().add(this.getCompositeWire());
 		navigateWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
+		navigateWireEClass.getESuperTypes().add(this.getSingleWire());
+		navigateWireEClass.getESuperTypes().add(theModelPackage.getNamedElement());
+		navigateWireEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
 		selectWireEClass.getESuperTypes().add(this.getCompositeWire());
 		selectWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
 		selectWireEClass.getESuperTypes().add(this.getParameterEdgeDestination());
@@ -1144,7 +1146,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		  (runInstanceWireEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Represents the execution of an {@link Operation}."
+			 "documentation", "Connects a {@model EventTrigger} to a {@model Operation}, allowing it to be executed. May have incoming {@model ConditionWire}s."
 		   });			
 		addAnnotation
 		  (parameterEdgeEClass, 
@@ -1162,7 +1164,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		  (navigateWireEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Executing this wire will navigate the user to the target {@link Page}."
+			 "documentation", "When the {@model EventTrigger source event} executes, the user will be navigated to the target {@model Frame}."
 		   });			
 		addAnnotation
 		  (selectWireEClass, 

@@ -418,8 +418,7 @@
           <metaFeatures href="iaml.genmodel#//model/NamedElement/name"/>
         </modelFacet>
       </labels>
-    <behaviour diagramKind="Iaml_Wire" editPolicyClassName="WireOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.wire.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
-</links>
+    </links>
     <palette>
       <groups description="Model Elements" title="Model Elements">
         <entries description="Create new EventTrigger" genNodes="//@diagram/@topLevelNodes.0" largeIconPath="/org.openiaml.model.edit/icons/full/obj32/EventTrigger.gif" smallIconPath="/org.openiaml.model.edit/icons/full/obj16/EventTrigger.gif" title="EventTrigger" xsi:type="gmfgen:ToolEntry"/>

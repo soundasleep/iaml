@@ -1644,7 +1644,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NEW_INSTANCE_WIRE__GENERATED_BY = COMPOSITE_WIRE__GENERATED_BY;
+	int NEW_INSTANCE_WIRE__GENERATED_BY = SINGLE_WIRE__GENERATED_BY;
 
 	/**
 	 * The feature id for the '<em><b>Is Generated</b></em>' attribute.
@@ -1653,7 +1653,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NEW_INSTANCE_WIRE__IS_GENERATED = COMPOSITE_WIRE__IS_GENERATED;
+	int NEW_INSTANCE_WIRE__IS_GENERATED = SINGLE_WIRE__IS_GENERATED;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1662,7 +1662,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NEW_INSTANCE_WIRE__ID = COMPOSITE_WIRE__ID;
+	int NEW_INSTANCE_WIRE__ID = SINGLE_WIRE__ID;
 
 	/**
 	 * The feature id for the '<em><b>Generated Rule</b></em>' attribute.
@@ -1671,7 +1671,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NEW_INSTANCE_WIRE__GENERATED_RULE = COMPOSITE_WIRE__GENERATED_RULE;
+	int NEW_INSTANCE_WIRE__GENERATED_RULE = SINGLE_WIRE__GENERATED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>From</b></em>' reference.
@@ -1680,7 +1680,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NEW_INSTANCE_WIRE__FROM = COMPOSITE_WIRE__FROM;
+	int NEW_INSTANCE_WIRE__FROM = SINGLE_WIRE__FROM;
 
 	/**
 	 * The feature id for the '<em><b>To</b></em>' reference.
@@ -1689,7 +1689,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NEW_INSTANCE_WIRE__TO = COMPOSITE_WIRE__TO;
+	int NEW_INSTANCE_WIRE__TO = SINGLE_WIRE__TO;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1698,61 +1698,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NEW_INSTANCE_WIRE__NAME = COMPOSITE_WIRE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NEW_INSTANCE_WIRE__WIRES = COMPOSITE_WIRE__WIRES;
-
-	/**
-	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NEW_INSTANCE_WIRE__PARAMETER_EDGES = COMPOSITE_WIRE__PARAMETER_EDGES;
-
-	/**
-	 * The feature id for the '<em><b>Extends Edges</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NEW_INSTANCE_WIRE__EXTENDS_EDGES = COMPOSITE_WIRE__EXTENDS_EDGES;
-
-	/**
-	 * The feature id for the '<em><b>Requires Edges</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NEW_INSTANCE_WIRE__REQUIRES_EDGES = COMPOSITE_WIRE__REQUIRES_EDGES;
-
-	/**
-	 * The feature id for the '<em><b>Provides Edges</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NEW_INSTANCE_WIRE__PROVIDES_EDGES = COMPOSITE_WIRE__PROVIDES_EDGES;
-
-	/**
-	 * The feature id for the '<em><b>Constraint Edges</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NEW_INSTANCE_WIRE__CONSTRAINT_EDGES = COMPOSITE_WIRE__CONSTRAINT_EDGES;
+	int NEW_INSTANCE_WIRE__NAME = SINGLE_WIRE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
@@ -1761,7 +1707,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NEW_INSTANCE_WIRE__GENERATED_ELEMENTS = COMPOSITE_WIRE__GENERATED_ELEMENTS;
+	int NEW_INSTANCE_WIRE__GENERATED_ELEMENTS = SINGLE_WIRE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
@@ -1770,70 +1716,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NEW_INSTANCE_WIRE__OVERRIDDEN = COMPOSITE_WIRE__OVERRIDDEN;
-
-	/**
-	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NEW_INSTANCE_WIRE__CONDITIONS = COMPOSITE_WIRE__CONDITIONS;
-
-	/**
-	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NEW_INSTANCE_WIRE__CHILDREN = COMPOSITE_WIRE__CHILDREN;
-
-	/**
-	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NEW_INSTANCE_WIRE__PROPERTIES = COMPOSITE_WIRE__PROPERTIES;
-
-	/**
-	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NEW_INSTANCE_WIRE__OPERATIONS = COMPOSITE_WIRE__OPERATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Event Triggers</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NEW_INSTANCE_WIRE__EVENT_TRIGGERS = COMPOSITE_WIRE__EVENT_TRIGGERS;
-
-	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NEW_INSTANCE_WIRE__PARAMETERS = COMPOSITE_WIRE__PARAMETERS;
-
-	/**
-	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NEW_INSTANCE_WIRE__VALUES = COMPOSITE_WIRE__VALUES;
+	int NEW_INSTANCE_WIRE__OVERRIDDEN = SINGLE_WIRE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>New Instance Wire</em>' class.
@@ -1842,7 +1725,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NEW_INSTANCE_WIRE_FEATURE_COUNT = COMPOSITE_WIRE_FEATURE_COUNT + 0;
+	int NEW_INSTANCE_WIRE_FEATURE_COUNT = SINGLE_WIRE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.wires.impl.ExtendsEdgeImpl <em>Extends Edge</em>}' class.

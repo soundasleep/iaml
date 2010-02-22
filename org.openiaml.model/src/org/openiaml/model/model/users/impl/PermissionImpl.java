@@ -29,6 +29,7 @@ import org.openiaml.model.model.users.Permission;
 import org.openiaml.model.model.users.ProvidesEdgeDestination;
 import org.openiaml.model.model.users.RequiresEdgeDestination;
 import org.openiaml.model.model.users.UsersPackage;
+import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ConstraintEdge;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
@@ -55,6 +56,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.users.impl.PermissionImpl#getRequiresEdges <em>Requires Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.users.impl.PermissionImpl#getProvidesEdges <em>Provides Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.users.impl.PermissionImpl#getConstraintEdges <em>Constraint Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.users.impl.PermissionImpl#getConditionEdges <em>Condition Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.users.impl.PermissionImpl#getOutEdges <em>Out Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.users.impl.PermissionImpl#getInEdges <em>In Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.users.impl.PermissionImpl#getOutParameterEdges <em>Out Parameter Edges</em>}</li>
@@ -215,6 +217,16 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 	 * @ordered
 	 */
 	protected EList<ConstraintEdge> constraintEdges;
+
+	/**
+	 * The cached value of the '{@link #getConditionEdges() <em>Condition Edges</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConditionEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ConditionEdge> conditionEdges;
 
 	/**
 	 * The cached value of the '{@link #getOutEdges() <em>Out Edges</em>}' reference list.
@@ -458,6 +470,18 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ConditionEdge> getConditionEdges() {
+		if (conditionEdges == null) {
+			conditionEdges = new EObjectContainmentEList<ConditionEdge>(ConditionEdge.class, this, UsersPackage.PERMISSION__CONDITION_EDGES);
+		}
+		return conditionEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<WireEdge> getOutEdges() {
 		if (outEdges == null) {
 			outEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, UsersPackage.PERMISSION__OUT_EDGES, ModelPackage.WIRE_EDGE__FROM);
@@ -560,6 +584,8 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 				return ((InternalEList<?>)getProvidesEdges()).basicRemove(otherEnd, msgs);
 			case UsersPackage.PERMISSION__CONSTRAINT_EDGES:
 				return ((InternalEList<?>)getConstraintEdges()).basicRemove(otherEnd, msgs);
+			case UsersPackage.PERMISSION__CONDITION_EDGES:
+				return ((InternalEList<?>)getConditionEdges()).basicRemove(otherEnd, msgs);
 			case UsersPackage.PERMISSION__OUT_EDGES:
 				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
 			case UsersPackage.PERMISSION__IN_EDGES:
@@ -604,6 +630,8 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 				return getProvidesEdges();
 			case UsersPackage.PERMISSION__CONSTRAINT_EDGES:
 				return getConstraintEdges();
+			case UsersPackage.PERMISSION__CONDITION_EDGES:
+				return getConditionEdges();
 			case UsersPackage.PERMISSION__OUT_EDGES:
 				return getOutEdges();
 			case UsersPackage.PERMISSION__IN_EDGES:
@@ -666,6 +694,10 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 			case UsersPackage.PERMISSION__CONSTRAINT_EDGES:
 				getConstraintEdges().clear();
 				getConstraintEdges().addAll((Collection<? extends ConstraintEdge>)newValue);
+				return;
+			case UsersPackage.PERMISSION__CONDITION_EDGES:
+				getConditionEdges().clear();
+				getConditionEdges().addAll((Collection<? extends ConditionEdge>)newValue);
 				return;
 			case UsersPackage.PERMISSION__OUT_EDGES:
 				getOutEdges().clear();
@@ -732,6 +764,9 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 			case UsersPackage.PERMISSION__CONSTRAINT_EDGES:
 				getConstraintEdges().clear();
 				return;
+			case UsersPackage.PERMISSION__CONDITION_EDGES:
+				getConditionEdges().clear();
+				return;
 			case UsersPackage.PERMISSION__OUT_EDGES:
 				getOutEdges().clear();
 				return;
@@ -781,6 +816,8 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 				return providesEdges != null && !providesEdges.isEmpty();
 			case UsersPackage.PERMISSION__CONSTRAINT_EDGES:
 				return constraintEdges != null && !constraintEdges.isEmpty();
+			case UsersPackage.PERMISSION__CONDITION_EDGES:
+				return conditionEdges != null && !conditionEdges.isEmpty();
 			case UsersPackage.PERMISSION__OUT_EDGES:
 				return outEdges != null && !outEdges.isEmpty();
 			case UsersPackage.PERMISSION__IN_EDGES:
@@ -810,6 +847,7 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 				case UsersPackage.PERMISSION__REQUIRES_EDGES: return ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES;
 				case UsersPackage.PERMISSION__PROVIDES_EDGES: return ModelPackage.CONTAINS_WIRES__PROVIDES_EDGES;
 				case UsersPackage.PERMISSION__CONSTRAINT_EDGES: return ModelPackage.CONTAINS_WIRES__CONSTRAINT_EDGES;
+				case UsersPackage.PERMISSION__CONDITION_EDGES: return ModelPackage.CONTAINS_WIRES__CONDITION_EDGES;
 				default: return -1;
 			}
 		}
@@ -866,6 +904,7 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 				case ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES: return UsersPackage.PERMISSION__REQUIRES_EDGES;
 				case ModelPackage.CONTAINS_WIRES__PROVIDES_EDGES: return UsersPackage.PERMISSION__PROVIDES_EDGES;
 				case ModelPackage.CONTAINS_WIRES__CONSTRAINT_EDGES: return UsersPackage.PERMISSION__CONSTRAINT_EDGES;
+				case ModelPackage.CONTAINS_WIRES__CONDITION_EDGES: return UsersPackage.PERMISSION__CONDITION_EDGES;
 				default: return -1;
 			}
 		}

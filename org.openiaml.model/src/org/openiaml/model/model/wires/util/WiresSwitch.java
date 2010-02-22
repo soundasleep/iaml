@@ -18,7 +18,9 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.wires.CompositeWire;
-import org.openiaml.model.model.wires.ConditionWire;
+import org.openiaml.model.model.wires.ConditionEdge;
+import org.openiaml.model.model.wires.ConditionEdgeDestination;
+import org.openiaml.model.model.wires.ConditionEdgesSource;
 import org.openiaml.model.model.wires.ConstraintEdge;
 import org.openiaml.model.model.wires.ConstraintEdgeDestination;
 import org.openiaml.model.model.wires.ConstraintEdgesSource;
@@ -139,6 +141,7 @@ public class WiresSwitch<T> {
 				if (result == null) result = caseCompositeWire(syncWire);
 				if (result == null) result = caseWireEdgeDestination(syncWire);
 				if (result == null) result = caseParameterEdgeDestination(syncWire);
+				if (result == null) result = caseConditionEdgeDestination(syncWire);
 				if (result == null) result = caseWireEdge(syncWire);
 				if (result == null) result = caseNamedElement(syncWire);
 				if (result == null) result = caseContainsWires(syncWire);
@@ -156,6 +159,7 @@ public class WiresSwitch<T> {
 				if (result == null) result = caseSingleWire(runInstanceWire);
 				if (result == null) result = caseNamedElement(runInstanceWire);
 				if (result == null) result = caseGeneratesElements(runInstanceWire);
+				if (result == null) result = caseConditionEdgeDestination(runInstanceWire);
 				if (result == null) result = caseWireEdge(runInstanceWire);
 				if (result == null) result = caseGeneratedElement(runInstanceWire);
 				if (result == null) result = defaultCase(theEObject);
@@ -174,6 +178,7 @@ public class WiresSwitch<T> {
 				T result = caseSetWire(setWire);
 				if (result == null) result = caseCompositeWire(setWire);
 				if (result == null) result = caseWireEdgeDestination(setWire);
+				if (result == null) result = caseConditionEdgeDestination(setWire);
 				if (result == null) result = caseWireEdge(setWire);
 				if (result == null) result = caseNamedElement(setWire);
 				if (result == null) result = caseContainsWires(setWire);
@@ -190,6 +195,7 @@ public class WiresSwitch<T> {
 				if (result == null) result = caseSingleWire(navigateWire);
 				if (result == null) result = caseNamedElement(navigateWire);
 				if (result == null) result = caseGeneratesElements(navigateWire);
+				if (result == null) result = caseConditionEdgeDestination(navigateWire);
 				if (result == null) result = caseWireEdge(navigateWire);
 				if (result == null) result = caseGeneratedElement(navigateWire);
 				if (result == null) result = defaultCase(theEObject);
@@ -208,18 +214,13 @@ public class WiresSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case WiresPackage.CONDITION_WIRE: {
-				ConditionWire conditionWire = (ConditionWire)theEObject;
-				T result = caseConditionWire(conditionWire);
-				if (result == null) result = caseCompositeWire(conditionWire);
-				if (result == null) result = caseWireEdgeDestination(conditionWire);
-				if (result == null) result = caseParameterEdgeDestination(conditionWire);
-				if (result == null) result = caseWireEdge(conditionWire);
-				if (result == null) result = caseNamedElement(conditionWire);
-				if (result == null) result = caseContainsWires(conditionWire);
-				if (result == null) result = caseGeneratesElements(conditionWire);
-				if (result == null) result = caseContainsConditions(conditionWire);
-				if (result == null) result = caseGeneratedElement(conditionWire);
+			case WiresPackage.CONDITION_EDGE: {
+				ConditionEdge conditionEdge = (ConditionEdge)theEObject;
+				T result = caseConditionEdge(conditionEdge);
+				if (result == null) result = caseParameterEdgeDestination(conditionEdge);
+				if (result == null) result = caseNamedElement(conditionEdge);
+				if (result == null) result = caseGeneratesElements(conditionEdge);
+				if (result == null) result = caseGeneratedElement(conditionEdge);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -255,6 +256,9 @@ public class WiresSwitch<T> {
 			case WiresPackage.CONSTRAINT_EDGE: {
 				ConstraintEdge constraintEdge = (ConstraintEdge)theEObject;
 				T result = caseConstraintEdge(constraintEdge);
+				if (result == null) result = caseParameterEdgeDestination(constraintEdge);
+				if (result == null) result = caseNamedElement(constraintEdge);
+				if (result == null) result = caseGeneratesElements(constraintEdge);
 				if (result == null) result = caseGeneratedElement(constraintEdge);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -299,6 +303,18 @@ public class WiresSwitch<T> {
 			case WiresPackage.CONSTRAINT_EDGE_DESTINATION: {
 				ConstraintEdgeDestination constraintEdgeDestination = (ConstraintEdgeDestination)theEObject;
 				T result = caseConstraintEdgeDestination(constraintEdgeDestination);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case WiresPackage.CONDITION_EDGES_SOURCE: {
+				ConditionEdgesSource conditionEdgesSource = (ConditionEdgesSource)theEObject;
+				T result = caseConditionEdgesSource(conditionEdgesSource);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case WiresPackage.CONDITION_EDGE_DESTINATION: {
+				ConditionEdgeDestination conditionEdgeDestination = (ConditionEdgeDestination)theEObject;
+				T result = caseConditionEdgeDestination(conditionEdgeDestination);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -427,17 +443,17 @@ public class WiresSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Condition Wire</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Condition Edge</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Condition Wire</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Condition Edge</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseConditionWire(ConditionWire object) {
+	public T caseConditionEdge(ConditionEdge object) {
 		return null;
 	}
 
@@ -603,6 +619,36 @@ public class WiresSwitch<T> {
 	 * @generated
 	 */
 	public T caseConstraintEdgeDestination(ConstraintEdgeDestination object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Condition Edges Source</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Condition Edges Source</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConditionEdgesSource(ConditionEdgesSource object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Condition Edge Destination</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Condition Edge Destination</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConditionEdgeDestination(ConditionEdgeDestination object) {
 		return null;
 	}
 

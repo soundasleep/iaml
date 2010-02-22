@@ -24,6 +24,10 @@ import org.openiaml.model.model.WireEdge;
  * A representation of the model object '<em><b>Composite Wire</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A {@model CompositeWire} allows for complex functionality, such as {@model SingleWire}s, to be represented as a single relationship. The decomposition is provided by model completion.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

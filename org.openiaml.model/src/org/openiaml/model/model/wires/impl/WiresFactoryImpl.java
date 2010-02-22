@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.wires.CompositeWire;
-import org.openiaml.model.model.wires.ConditionWire;
+import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ConstraintEdge;
 import org.openiaml.model.model.wires.ConstraintTypes;
 import org.openiaml.model.model.wires.ExtendsEdge;
@@ -83,7 +83,7 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 			case WiresPackage.SET_WIRE: return createSetWire();
 			case WiresPackage.NAVIGATE_WIRE: return createNavigateWire();
 			case WiresPackage.SELECT_WIRE: return createSelectWire();
-			case WiresPackage.CONDITION_WIRE: return createConditionWire();
+			case WiresPackage.CONDITION_EDGE: return createConditionEdge();
 			case WiresPackage.NEW_INSTANCE_WIRE: return createNewInstanceWire();
 			case WiresPackage.EXTENDS_EDGE: return createExtendsEdge();
 			case WiresPackage.REQUIRES_EDGE: return createRequiresEdge();
@@ -206,10 +206,10 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public ConditionWire createConditionWire() {
-		ConditionWireImpl conditionWire = new ConditionWireImpl();
-		generateID(conditionWire);
-		return conditionWire;
+	public ConditionEdge createConditionEdge() {
+		ConditionEdgeImpl conditionEdge = new ConditionEdgeImpl();
+		generateID(conditionEdge);
+		return conditionEdge;
 	}
 
 	/**

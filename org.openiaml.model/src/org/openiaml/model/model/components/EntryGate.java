@@ -7,7 +7,6 @@
 package org.openiaml.model.model.components;
 
 import org.openiaml.model.model.scopes.Session;
-import org.openiaml.model.model.wires.ConditionWire;
 
 
 /**

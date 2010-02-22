@@ -498,6 +498,15 @@ public interface OperationsPackage extends EPackage {
 	int DECISION_OPERATION__CONSTRAINT_EDGES = ModelPackage.PRIMITIVE_OPERATION__CONSTRAINT_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Condition Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECISION_OPERATION__CONDITION_EDGES = ModelPackage.PRIMITIVE_OPERATION__CONDITION_EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -580,6 +589,15 @@ public interface OperationsPackage extends EPackage {
 	int DECISION_CONDITION__CONSTRAINT_EDGES = ModelPackage.CONDITION__CONSTRAINT_EDGES;
 
 	/**
+	 * The feature id for the '<em><b>Condition Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECISION_CONDITION__CONDITION_EDGES = ModelPackage.CONDITION__CONDITION_EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -641,6 +659,15 @@ public interface OperationsPackage extends EPackage {
 	 * @ordered
 	 */
 	int DECISION_CONDITION__NAME = ModelPackage.CONDITION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Out Condition Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECISION_CONDITION__OUT_CONDITION_EDGES = ModelPackage.CONDITION__OUT_CONDITION_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Out Executions</b></em>' reference list.
@@ -961,13 +988,22 @@ public interface OperationsPackage extends EPackage {
 	int OPERATION_CALL_NODE__CONSTRAINT_EDGES = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 9;
 
 	/**
+	 * The feature id for the '<em><b>Condition Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_CALL_NODE__CONDITION_EDGES = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 10;
+
+	/**
 	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_CALL_NODE__OUT_EDGES = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 10;
+	int OPERATION_CALL_NODE__OUT_EDGES = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -976,7 +1012,7 @@ public interface OperationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_CALL_NODE__NAME = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 11;
+	int OPERATION_CALL_NODE__NAME = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 12;
 
 	/**
 	 * The number of structural features of the '<em>Operation Call Node</em>' class.
@@ -985,7 +1021,7 @@ public interface OperationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_CALL_NODE_FEATURE_COUNT = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 12;
+	int OPERATION_CALL_NODE_FEATURE_COUNT = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 13;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.operations.impl.ArithmeticImpl <em>Arithmetic</em>}' class.

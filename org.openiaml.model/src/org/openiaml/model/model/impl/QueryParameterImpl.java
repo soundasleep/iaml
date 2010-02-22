@@ -27,6 +27,7 @@ import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ConstraintEdge;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
@@ -53,6 +54,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.impl.QueryParameterImpl#getRequiresEdges <em>Requires Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.QueryParameterImpl#getProvidesEdges <em>Provides Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.QueryParameterImpl#getConstraintEdges <em>Constraint Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.QueryParameterImpl#getConditionEdges <em>Condition Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.QueryParameterImpl#getOutEdges <em>Out Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.QueryParameterImpl#getOutFlows <em>Out Flows</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.QueryParameterImpl#getOutParameterEdges <em>Out Parameter Edges</em>}</li>
@@ -212,6 +214,16 @@ public class QueryParameterImpl extends EObjectImpl implements QueryParameter {
 	 * @ordered
 	 */
 	protected EList<ConstraintEdge> constraintEdges;
+
+	/**
+	 * The cached value of the '{@link #getConditionEdges() <em>Condition Edges</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConditionEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ConditionEdge> conditionEdges;
 
 	/**
 	 * The cached value of the '{@link #getOutEdges() <em>Out Edges</em>}' reference list.
@@ -455,6 +467,18 @@ public class QueryParameterImpl extends EObjectImpl implements QueryParameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ConditionEdge> getConditionEdges() {
+		if (conditionEdges == null) {
+			conditionEdges = new EObjectContainmentEList<ConditionEdge>(ConditionEdge.class, this, ModelPackage.QUERY_PARAMETER__CONDITION_EDGES);
+		}
+		return conditionEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<WireEdge> getOutEdges() {
 		if (outEdges == null) {
 			outEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, ModelPackage.QUERY_PARAMETER__OUT_EDGES, ModelPackage.WIRE_EDGE__FROM);
@@ -550,6 +574,8 @@ public class QueryParameterImpl extends EObjectImpl implements QueryParameter {
 				return ((InternalEList<?>)getProvidesEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.QUERY_PARAMETER__CONSTRAINT_EDGES:
 				return ((InternalEList<?>)getConstraintEdges()).basicRemove(otherEnd, msgs);
+			case ModelPackage.QUERY_PARAMETER__CONDITION_EDGES:
+				return ((InternalEList<?>)getConditionEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.QUERY_PARAMETER__OUT_EDGES:
 				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.QUERY_PARAMETER__OUT_FLOWS:
@@ -590,6 +616,8 @@ public class QueryParameterImpl extends EObjectImpl implements QueryParameter {
 				return getProvidesEdges();
 			case ModelPackage.QUERY_PARAMETER__CONSTRAINT_EDGES:
 				return getConstraintEdges();
+			case ModelPackage.QUERY_PARAMETER__CONDITION_EDGES:
+				return getConditionEdges();
 			case ModelPackage.QUERY_PARAMETER__OUT_EDGES:
 				return getOutEdges();
 			case ModelPackage.QUERY_PARAMETER__OUT_FLOWS:
@@ -651,6 +679,10 @@ public class QueryParameterImpl extends EObjectImpl implements QueryParameter {
 				getConstraintEdges().clear();
 				getConstraintEdges().addAll((Collection<? extends ConstraintEdge>)newValue);
 				return;
+			case ModelPackage.QUERY_PARAMETER__CONDITION_EDGES:
+				getConditionEdges().clear();
+				getConditionEdges().addAll((Collection<? extends ConditionEdge>)newValue);
+				return;
 			case ModelPackage.QUERY_PARAMETER__OUT_EDGES:
 				getOutEdges().clear();
 				getOutEdges().addAll((Collection<? extends WireEdge>)newValue);
@@ -711,6 +743,9 @@ public class QueryParameterImpl extends EObjectImpl implements QueryParameter {
 			case ModelPackage.QUERY_PARAMETER__CONSTRAINT_EDGES:
 				getConstraintEdges().clear();
 				return;
+			case ModelPackage.QUERY_PARAMETER__CONDITION_EDGES:
+				getConditionEdges().clear();
+				return;
 			case ModelPackage.QUERY_PARAMETER__OUT_EDGES:
 				getOutEdges().clear();
 				return;
@@ -757,6 +792,8 @@ public class QueryParameterImpl extends EObjectImpl implements QueryParameter {
 				return providesEdges != null && !providesEdges.isEmpty();
 			case ModelPackage.QUERY_PARAMETER__CONSTRAINT_EDGES:
 				return constraintEdges != null && !constraintEdges.isEmpty();
+			case ModelPackage.QUERY_PARAMETER__CONDITION_EDGES:
+				return conditionEdges != null && !conditionEdges.isEmpty();
 			case ModelPackage.QUERY_PARAMETER__OUT_EDGES:
 				return outEdges != null && !outEdges.isEmpty();
 			case ModelPackage.QUERY_PARAMETER__OUT_FLOWS:
@@ -784,6 +821,7 @@ public class QueryParameterImpl extends EObjectImpl implements QueryParameter {
 				case ModelPackage.QUERY_PARAMETER__REQUIRES_EDGES: return ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES;
 				case ModelPackage.QUERY_PARAMETER__PROVIDES_EDGES: return ModelPackage.CONTAINS_WIRES__PROVIDES_EDGES;
 				case ModelPackage.QUERY_PARAMETER__CONSTRAINT_EDGES: return ModelPackage.CONTAINS_WIRES__CONSTRAINT_EDGES;
+				case ModelPackage.QUERY_PARAMETER__CONDITION_EDGES: return ModelPackage.CONTAINS_WIRES__CONDITION_EDGES;
 				default: return -1;
 			}
 		}
@@ -828,6 +866,7 @@ public class QueryParameterImpl extends EObjectImpl implements QueryParameter {
 				case ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES: return ModelPackage.QUERY_PARAMETER__REQUIRES_EDGES;
 				case ModelPackage.CONTAINS_WIRES__PROVIDES_EDGES: return ModelPackage.QUERY_PARAMETER__PROVIDES_EDGES;
 				case ModelPackage.CONTAINS_WIRES__CONSTRAINT_EDGES: return ModelPackage.QUERY_PARAMETER__CONSTRAINT_EDGES;
+				case ModelPackage.CONTAINS_WIRES__CONDITION_EDGES: return ModelPackage.QUERY_PARAMETER__CONDITION_EDGES;
 				default: return -1;
 			}
 		}

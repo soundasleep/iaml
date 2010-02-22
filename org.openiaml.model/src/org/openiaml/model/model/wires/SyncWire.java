@@ -23,5 +23,5 @@ import org.openiaml.model.model.WireEdgeDestination;
  * @model
  * @generated
  */
-public interface SyncWire extends CompositeWire, WireEdgeDestination, ParameterEdgeDestination {
+public interface SyncWire extends CompositeWire, WireEdgeDestination, ParameterEdgeDestination, ConditionEdgeDestination {
 } // SyncWire

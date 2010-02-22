@@ -164,10 +164,10 @@ rule "Connect condition 'check (gate)' with gate"
 		
 		cond : Condition ( eContainer == session, eval( name.equals("check " + gate.getName())) )
 		
-		not ( ConditionWire ( from == cond, to == gate ))
+		not ( ConditionEdge ( from == cond, to == gate ))
 	
 	then
-		ConditionWire cw = handler.generatedConditionWire(gate, session, cond, gate);
+		ConditionEdge cw = handler.generatedConditionEdge(gate, session, cond, gate);
 		handler.setName(cw, "condition");
 		queue.add(cw, drools);
 
@@ -181,7 +181,7 @@ rule "Create contents of 'check (gate)' condition"
 		property : ApplicationElementProperty ( eContainer == session, eval( name.equals(gate.getName() + " flag")) )
 		
 		cond : CompositeCondition ( eContainer == session, eval( name.equals("check " + gate.getName())) )
-		cw : ConditionWire ( from == cond, to == gate )
+		cw : ConditionEdge ( from == cond, to == gate )
 		
 		not ( StartNode ( eContainer == cond ))
 	

@@ -31,6 +31,7 @@ import org.openiaml.model.model.components.Gate;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.users.ProvidesEdgesSource;
 import org.openiaml.model.model.users.RequiresEdgesSource;
+import org.openiaml.model.model.wires.ConditionEdgeDestination;
 import org.openiaml.model.model.wires.ParameterEdgeDestination;
 
 /**
@@ -156,6 +157,7 @@ public class ComponentsSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(gate);
 				if (result == null) result = caseWireEdgeDestination(gate);
 				if (result == null) result = caseGeneratesElements(gate);
+				if (result == null) result = caseConditionEdgeDestination(gate);
 				if (result == null) result = caseGeneratedElement(gate);
 				if (result == null) result = caseShouldntContainWires(gate);
 				if (result == null) result = caseContainsWires(gate);
@@ -170,6 +172,7 @@ public class ComponentsSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(entryGate);
 				if (result == null) result = caseWireEdgeDestination(entryGate);
 				if (result == null) result = caseGeneratesElements(entryGate);
+				if (result == null) result = caseConditionEdgeDestination(entryGate);
 				if (result == null) result = caseGeneratedElement(entryGate);
 				if (result == null) result = caseShouldntContainWires(entryGate);
 				if (result == null) result = caseContainsWires(entryGate);
@@ -184,6 +187,7 @@ public class ComponentsSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(exitGate);
 				if (result == null) result = caseWireEdgeDestination(exitGate);
 				if (result == null) result = caseGeneratesElements(exitGate);
+				if (result == null) result = caseConditionEdgeDestination(exitGate);
 				if (result == null) result = caseGeneratedElement(exitGate);
 				if (result == null) result = caseShouldntContainWires(exitGate);
 				if (result == null) result = caseContainsWires(exitGate);
@@ -506,6 +510,21 @@ public class ComponentsSwitch<T> {
 	 * @generated
 	 */
 	public T caseProvidesEdgesSource(ProvidesEdgesSource object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Condition Edge Destination</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Condition Edge Destination</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConditionEdgeDestination(ConditionEdgeDestination object) {
 		return null;
 	}
 

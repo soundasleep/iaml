@@ -1170,6 +1170,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getContainsWires_ConditionEdges() {
+		return (EReference)containsWiresEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getShouldntContainWires() {
 		return shouldntContainWiresEClass;
 	}
@@ -1634,6 +1643,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(containsWiresEClass, CONTAINS_WIRES__REQUIRES_EDGES);
 		createEReference(containsWiresEClass, CONTAINS_WIRES__PROVIDES_EDGES);
 		createEReference(containsWiresEClass, CONTAINS_WIRES__CONSTRAINT_EDGES);
+		createEReference(containsWiresEClass, CONTAINS_WIRES__CONDITION_EDGES);
 
 		shouldntContainWiresEClass = createEClass(SHOULDNT_CONTAIN_WIRES);
 
@@ -1834,6 +1844,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		conditionEClass.getESuperTypes().add(this.getWireEdgesSource());
 		conditionEClass.getESuperTypes().add(this.getDataFlowEdgesSource());
 		conditionEClass.getESuperTypes().add(this.getNamedElement());
+		conditionEClass.getESuperTypes().add(theWiresPackage.getConditionEdgesSource());
 		compositeConditionEClass.getESuperTypes().add(this.getContainsConditions());
 		compositeConditionEClass.getESuperTypes().add(this.getCondition());
 		compositeConditionEClass.getESuperTypes().add(this.getGeneratesElements());
@@ -1965,6 +1976,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getContainsWires_RequiresEdges(), theWiresPackage.getRequiresEdge(), null, "requiresEdges", null, 0, -1, ContainsWires.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getContainsWires_ProvidesEdges(), theWiresPackage.getProvidesEdge(), null, "providesEdges", null, 0, -1, ContainsWires.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getContainsWires_ConstraintEdges(), theWiresPackage.getConstraintEdge(), null, "constraintEdges", null, 0, -1, ContainsWires.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getContainsWires_ConditionEdges(), theWiresPackage.getConditionEdge(), null, "conditionEdges", null, 0, -1, ContainsWires.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(shouldntContainWiresEClass, ShouldntContainWires.class, "ShouldntContainWires", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

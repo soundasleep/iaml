@@ -24,6 +24,8 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.wires.ConditionEdge;
+import org.openiaml.model.model.wires.ConditionEdgeDestination;
 import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.SingleWire;
 import org.openiaml.model.model.wires.WiresPackage;
@@ -45,6 +47,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.wires.impl.NavigateWireImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.NavigateWireImpl#getGeneratedElements <em>Generated Elements</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.NavigateWireImpl#isOverridden <em>Overridden</em>}</li>
+ *   <li>{@link org.openiaml.model.model.wires.impl.NavigateWireImpl#getInConditionEdges <em>In Condition Edges</em>}</li>
  * </ul>
  * </p>
  *
@@ -187,6 +190,16 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 	 * @ordered
 	 */
 	protected boolean overridden = OVERRIDDEN_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getInConditionEdges() <em>In Condition Edges</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInConditionEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ConditionEdge> inConditionEdges;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -473,6 +486,18 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ConditionEdge> getInConditionEdges() {
+		if (inConditionEdges == null) {
+			inConditionEdges = new EObjectWithInverseResolvingEList<ConditionEdge>(ConditionEdge.class, this, WiresPackage.NAVIGATE_WIRE__IN_CONDITION_EDGES, WiresPackage.CONDITION_EDGE__TO);
+		}
+		return inConditionEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -491,6 +516,8 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 				return basicSetTo((WireEdgeDestination)otherEnd, msgs);
 			case WiresPackage.NAVIGATE_WIRE__GENERATED_ELEMENTS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGeneratedElements()).basicAdd(otherEnd, msgs);
+			case WiresPackage.NAVIGATE_WIRE__IN_CONDITION_EDGES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInConditionEdges()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -513,6 +540,8 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 				return basicSetTo(null, msgs);
 			case WiresPackage.NAVIGATE_WIRE__GENERATED_ELEMENTS:
 				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
+			case WiresPackage.NAVIGATE_WIRE__IN_CONDITION_EDGES:
+				return ((InternalEList<?>)getInConditionEdges()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -547,6 +576,8 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 				return getGeneratedElements();
 			case WiresPackage.NAVIGATE_WIRE__OVERRIDDEN:
 				return isOverridden();
+			case WiresPackage.NAVIGATE_WIRE__IN_CONDITION_EDGES:
+				return getInConditionEdges();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -593,6 +624,10 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 			case WiresPackage.NAVIGATE_WIRE__OVERRIDDEN:
 				setOverridden((Boolean)newValue);
 				return;
+			case WiresPackage.NAVIGATE_WIRE__IN_CONDITION_EDGES:
+				getInConditionEdges().clear();
+				getInConditionEdges().addAll((Collection<? extends ConditionEdge>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -635,6 +670,9 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 			case WiresPackage.NAVIGATE_WIRE__OVERRIDDEN:
 				setOverridden(OVERRIDDEN_EDEFAULT);
 				return;
+			case WiresPackage.NAVIGATE_WIRE__IN_CONDITION_EDGES:
+				getInConditionEdges().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -667,6 +705,8 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 				return generatedElements != null && !generatedElements.isEmpty();
 			case WiresPackage.NAVIGATE_WIRE__OVERRIDDEN:
 				return overridden != OVERRIDDEN_EDEFAULT;
+			case WiresPackage.NAVIGATE_WIRE__IN_CONDITION_EDGES:
+				return inConditionEdges != null && !inConditionEdges.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -712,6 +752,12 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 				default: return -1;
 			}
 		}
+		if (baseClass == ConditionEdgeDestination.class) {
+			switch (derivedFeatureID) {
+				case WiresPackage.NAVIGATE_WIRE__IN_CONDITION_EDGES: return WiresPackage.CONDITION_EDGE_DESTINATION__IN_CONDITION_EDGES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -753,6 +799,12 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 			switch (baseFeatureID) {
 				case ModelPackage.GENERATES_ELEMENTS__GENERATED_ELEMENTS: return WiresPackage.NAVIGATE_WIRE__GENERATED_ELEMENTS;
 				case ModelPackage.GENERATES_ELEMENTS__OVERRIDDEN: return WiresPackage.NAVIGATE_WIRE__OVERRIDDEN;
+				default: return -1;
+			}
+		}
+		if (baseClass == ConditionEdgeDestination.class) {
+			switch (baseFeatureID) {
+				case WiresPackage.CONDITION_EDGE_DESTINATION__IN_CONDITION_EDGES: return WiresPackage.NAVIGATE_WIRE__IN_CONDITION_EDGES;
 				default: return -1;
 			}
 		}

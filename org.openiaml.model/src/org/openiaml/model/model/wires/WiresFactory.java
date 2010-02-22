@@ -89,13 +89,13 @@ public interface WiresFactory extends EFactory {
 	SelectWire createSelectWire();
 
 	/**
-	 * Returns a new object of class '<em>Condition Wire</em>'.
+	 * Returns a new object of class '<em>Condition Edge</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Condition Wire</em>'.
+	 * @return a new object of class '<em>Condition Edge</em>'.
 	 * @generated
 	 */
-	ConditionWire createConditionWire();
+	ConditionEdge createConditionEdge();
 
 	/**
 	 * Returns a new object of class '<em>New Instance Wire</em>'.

@@ -28,11 +28,14 @@ import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.components.ComponentsPackage;
 import org.openiaml.model.model.components.Gate;
+import org.openiaml.model.model.wires.ConditionEdge;
+import org.openiaml.model.model.wires.ConditionEdgeDestination;
 import org.openiaml.model.model.wires.ConstraintEdge;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.ProvidesEdge;
 import org.openiaml.model.model.wires.RequiresEdge;
+import org.openiaml.model.model.wires.WiresPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -52,10 +55,12 @@ import org.openiaml.model.model.wires.RequiresEdge;
  *   <li>{@link org.openiaml.model.model.components.impl.GateImpl#getRequiresEdges <em>Requires Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.components.impl.GateImpl#getProvidesEdges <em>Provides Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.components.impl.GateImpl#getConstraintEdges <em>Constraint Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.components.impl.GateImpl#getConditionEdges <em>Condition Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.components.impl.GateImpl#getOutEdges <em>Out Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.components.impl.GateImpl#getInEdges <em>In Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.components.impl.GateImpl#getGeneratedElements <em>Generated Elements</em>}</li>
  *   <li>{@link org.openiaml.model.model.components.impl.GateImpl#isOverridden <em>Overridden</em>}</li>
+ *   <li>{@link org.openiaml.model.model.components.impl.GateImpl#getInConditionEdges <em>In Condition Edges</em>}</li>
  * </ul>
  * </p>
  *
@@ -213,6 +218,16 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 	protected EList<ConstraintEdge> constraintEdges;
 
 	/**
+	 * The cached value of the '{@link #getConditionEdges() <em>Condition Edges</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConditionEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ConditionEdge> conditionEdges;
+
+	/**
 	 * The cached value of the '{@link #getOutEdges() <em>Out Edges</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -261,6 +276,16 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 	 * @ordered
 	 */
 	protected boolean overridden = OVERRIDDEN_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getInConditionEdges() <em>In Condition Edges</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInConditionEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ConditionEdge> inConditionEdges;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -454,6 +479,18 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ConditionEdge> getConditionEdges() {
+		if (conditionEdges == null) {
+			conditionEdges = new EObjectContainmentEList<ConditionEdge>(ConditionEdge.class, this, ComponentsPackage.GATE__CONDITION_EDGES);
+		}
+		return conditionEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<WireEdge> getOutEdges() {
 		if (outEdges == null) {
 			outEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, ComponentsPackage.GATE__OUT_EDGES, ModelPackage.WIRE_EDGE__FROM);
@@ -511,6 +548,18 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ConditionEdge> getInConditionEdges() {
+		if (inConditionEdges == null) {
+			inConditionEdges = new EObjectWithInverseResolvingEList<ConditionEdge>(ConditionEdge.class, this, ComponentsPackage.GATE__IN_CONDITION_EDGES, WiresPackage.CONDITION_EDGE__TO);
+		}
+		return inConditionEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -523,6 +572,8 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInEdges()).basicAdd(otherEnd, msgs);
 			case ComponentsPackage.GATE__GENERATED_ELEMENTS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGeneratedElements()).basicAdd(otherEnd, msgs);
+			case ComponentsPackage.GATE__IN_CONDITION_EDGES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInConditionEdges()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -549,12 +600,16 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 				return ((InternalEList<?>)getProvidesEdges()).basicRemove(otherEnd, msgs);
 			case ComponentsPackage.GATE__CONSTRAINT_EDGES:
 				return ((InternalEList<?>)getConstraintEdges()).basicRemove(otherEnd, msgs);
+			case ComponentsPackage.GATE__CONDITION_EDGES:
+				return ((InternalEList<?>)getConditionEdges()).basicRemove(otherEnd, msgs);
 			case ComponentsPackage.GATE__OUT_EDGES:
 				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
 			case ComponentsPackage.GATE__IN_EDGES:
 				return ((InternalEList<?>)getInEdges()).basicRemove(otherEnd, msgs);
 			case ComponentsPackage.GATE__GENERATED_ELEMENTS:
 				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
+			case ComponentsPackage.GATE__IN_CONDITION_EDGES:
+				return ((InternalEList<?>)getInConditionEdges()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -589,6 +644,8 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 				return getProvidesEdges();
 			case ComponentsPackage.GATE__CONSTRAINT_EDGES:
 				return getConstraintEdges();
+			case ComponentsPackage.GATE__CONDITION_EDGES:
+				return getConditionEdges();
 			case ComponentsPackage.GATE__OUT_EDGES:
 				return getOutEdges();
 			case ComponentsPackage.GATE__IN_EDGES:
@@ -597,6 +654,8 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 				return getGeneratedElements();
 			case ComponentsPackage.GATE__OVERRIDDEN:
 				return isOverridden();
+			case ComponentsPackage.GATE__IN_CONDITION_EDGES:
+				return getInConditionEdges();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -650,6 +709,10 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 				getConstraintEdges().clear();
 				getConstraintEdges().addAll((Collection<? extends ConstraintEdge>)newValue);
 				return;
+			case ComponentsPackage.GATE__CONDITION_EDGES:
+				getConditionEdges().clear();
+				getConditionEdges().addAll((Collection<? extends ConditionEdge>)newValue);
+				return;
 			case ComponentsPackage.GATE__OUT_EDGES:
 				getOutEdges().clear();
 				getOutEdges().addAll((Collection<? extends WireEdge>)newValue);
@@ -664,6 +727,10 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 				return;
 			case ComponentsPackage.GATE__OVERRIDDEN:
 				setOverridden((Boolean)newValue);
+				return;
+			case ComponentsPackage.GATE__IN_CONDITION_EDGES:
+				getInConditionEdges().clear();
+				getInConditionEdges().addAll((Collection<? extends ConditionEdge>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -710,6 +777,9 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 			case ComponentsPackage.GATE__CONSTRAINT_EDGES:
 				getConstraintEdges().clear();
 				return;
+			case ComponentsPackage.GATE__CONDITION_EDGES:
+				getConditionEdges().clear();
+				return;
 			case ComponentsPackage.GATE__OUT_EDGES:
 				getOutEdges().clear();
 				return;
@@ -721,6 +791,9 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 				return;
 			case ComponentsPackage.GATE__OVERRIDDEN:
 				setOverridden(OVERRIDDEN_EDEFAULT);
+				return;
+			case ComponentsPackage.GATE__IN_CONDITION_EDGES:
+				getInConditionEdges().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -756,6 +829,8 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 				return providesEdges != null && !providesEdges.isEmpty();
 			case ComponentsPackage.GATE__CONSTRAINT_EDGES:
 				return constraintEdges != null && !constraintEdges.isEmpty();
+			case ComponentsPackage.GATE__CONDITION_EDGES:
+				return conditionEdges != null && !conditionEdges.isEmpty();
 			case ComponentsPackage.GATE__OUT_EDGES:
 				return outEdges != null && !outEdges.isEmpty();
 			case ComponentsPackage.GATE__IN_EDGES:
@@ -764,6 +839,8 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 				return generatedElements != null && !generatedElements.isEmpty();
 			case ComponentsPackage.GATE__OVERRIDDEN:
 				return overridden != OVERRIDDEN_EDEFAULT;
+			case ComponentsPackage.GATE__IN_CONDITION_EDGES:
+				return inConditionEdges != null && !inConditionEdges.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -783,6 +860,7 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 				case ComponentsPackage.GATE__REQUIRES_EDGES: return ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES;
 				case ComponentsPackage.GATE__PROVIDES_EDGES: return ModelPackage.CONTAINS_WIRES__PROVIDES_EDGES;
 				case ComponentsPackage.GATE__CONSTRAINT_EDGES: return ModelPackage.CONTAINS_WIRES__CONSTRAINT_EDGES;
+				case ComponentsPackage.GATE__CONDITION_EDGES: return ModelPackage.CONTAINS_WIRES__CONDITION_EDGES;
 				default: return -1;
 			}
 		}
@@ -810,6 +888,12 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 				default: return -1;
 			}
 		}
+		if (baseClass == ConditionEdgeDestination.class) {
+			switch (derivedFeatureID) {
+				case ComponentsPackage.GATE__IN_CONDITION_EDGES: return WiresPackage.CONDITION_EDGE_DESTINATION__IN_CONDITION_EDGES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -828,6 +912,7 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 				case ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES: return ComponentsPackage.GATE__REQUIRES_EDGES;
 				case ModelPackage.CONTAINS_WIRES__PROVIDES_EDGES: return ComponentsPackage.GATE__PROVIDES_EDGES;
 				case ModelPackage.CONTAINS_WIRES__CONSTRAINT_EDGES: return ComponentsPackage.GATE__CONSTRAINT_EDGES;
+				case ModelPackage.CONTAINS_WIRES__CONDITION_EDGES: return ComponentsPackage.GATE__CONDITION_EDGES;
 				default: return -1;
 			}
 		}
@@ -852,6 +937,12 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 			switch (baseFeatureID) {
 				case ModelPackage.GENERATES_ELEMENTS__GENERATED_ELEMENTS: return ComponentsPackage.GATE__GENERATED_ELEMENTS;
 				case ModelPackage.GENERATES_ELEMENTS__OVERRIDDEN: return ComponentsPackage.GATE__OVERRIDDEN;
+				default: return -1;
+			}
+		}
+		if (baseClass == ConditionEdgeDestination.class) {
+			switch (baseFeatureID) {
+				case WiresPackage.CONDITION_EDGE_DESTINATION__IN_CONDITION_EDGES: return ComponentsPackage.GATE__IN_CONDITION_EDGES;
 				default: return -1;
 			}
 		}

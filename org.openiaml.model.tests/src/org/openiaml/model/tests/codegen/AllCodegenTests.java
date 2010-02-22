@@ -3,6 +3,7 @@ package org.openiaml.model.tests.codegen;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+import org.openiaml.model.tests.codegen.functions.AllHelperFunctionsTests;
 import org.openiaml.model.tests.codegen.model0_1.AllModel0_1CodegenTests;
 import org.openiaml.model.tests.codegen.model0_2.AllModel0_2CodegenTests;
 import org.openiaml.model.tests.codegen.model0_3.AllModel0_3CodegenTests;
@@ -41,6 +42,9 @@ public class AllCodegenTests {
 
 		// OAW-specific tests
 		suite.addTest(AllOawTests.suite());
+		
+		// issue 123: helper functions tests
+		suite.addTest(AllHelperFunctionsTests.suite());
 
 		// different model versions
 		suite.addTest(AllModel0_1CodegenTests.suite());

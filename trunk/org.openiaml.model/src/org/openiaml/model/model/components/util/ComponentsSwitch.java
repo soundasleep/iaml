@@ -29,7 +29,6 @@ import org.openiaml.model.model.components.EntryGate;
 import org.openiaml.model.model.components.ExitGate;
 import org.openiaml.model.model.components.Gate;
 import org.openiaml.model.model.components.LoginHandler;
-import org.openiaml.model.model.users.ProvidesEdgesSource;
 import org.openiaml.model.model.users.RequiresEdgesSource;
 import org.openiaml.model.model.wires.ConditionEdgeDestination;
 import org.openiaml.model.model.wires.ParameterEdgeDestination;
@@ -134,7 +133,6 @@ public class ComponentsSwitch<T> {
 				if (result == null) result = caseApplicationElementContainer(accessControlHandler);
 				if (result == null) result = caseParameterEdgeDestination(accessControlHandler);
 				if (result == null) result = caseRequiresEdgesSource(accessControlHandler);
-				if (result == null) result = caseProvidesEdgesSource(accessControlHandler);
 				if (result == null) result = caseApplicationElement(accessControlHandler);
 				if (result == null) result = caseCanBeSynced(accessControlHandler);
 				if (result == null) result = caseContainsOperations(accessControlHandler);
@@ -495,21 +493,6 @@ public class ComponentsSwitch<T> {
 	 * @generated
 	 */
 	public T caseRequiresEdgesSource(RequiresEdgesSource object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Provides Edges Source</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Provides Edges Source</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseProvidesEdgesSource(ProvidesEdgesSource object) {
 		return null;
 	}
 

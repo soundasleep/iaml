@@ -523,22 +523,13 @@ public interface ComponentsPackage extends EPackage {
 	int ACCESS_CONTROL_HANDLER__OUT_REQUIRES_EDGES = ModelPackage.APPLICATION_ELEMENT_CONTAINER_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Out Provides Edges</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ACCESS_CONTROL_HANDLER__OUT_PROVIDES_EDGES = ModelPackage.APPLICATION_ELEMENT_CONTAINER_FEATURE_COUNT + 2;
-
-	/**
 	 * The number of structural features of the '<em>Access Control Handler</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACCESS_CONTROL_HANDLER_FEATURE_COUNT = ModelPackage.APPLICATION_ELEMENT_CONTAINER_FEATURE_COUNT + 3;
+	int ACCESS_CONTROL_HANDLER_FEATURE_COUNT = ModelPackage.APPLICATION_ELEMENT_CONTAINER_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.components.impl.GateImpl <em>Gate</em>}' class.

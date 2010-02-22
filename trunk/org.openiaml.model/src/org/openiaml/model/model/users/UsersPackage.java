@@ -839,15 +839,6 @@ public interface UsersPackage extends EPackage {
 	int USER_INSTANCE__VALUES = ModelPackage.DOMAIN_OBJECT_INSTANCE__VALUES;
 
 	/**
-	 * The feature id for the '<em><b>Out Parameter Edges</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int USER_INSTANCE__OUT_PARAMETER_EDGES = ModelPackage.DOMAIN_OBJECT_INSTANCE__OUT_PARAMETER_EDGES;
-
-	/**
 	 * The feature id for the '<em><b>In Parameter Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -855,6 +846,15 @@ public interface UsersPackage extends EPackage {
 	 * @ordered
 	 */
 	int USER_INSTANCE__IN_PARAMETER_EDGES = ModelPackage.DOMAIN_OBJECT_INSTANCE__IN_PARAMETER_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Out Parameter Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_INSTANCE__OUT_PARAMETER_EDGES = ModelPackage.DOMAIN_OBJECT_INSTANCE__OUT_PARAMETER_EDGES;
 
 	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.

@@ -167,8 +167,8 @@ public class UsersSwitch<T> {
 				T result = caseUserInstance(userInstance);
 				if (result == null) result = caseDomainObjectInstance(userInstance);
 				if (result == null) result = caseApplicationElement(userInstance);
-				if (result == null) result = caseParameterEdgesSource(userInstance);
 				if (result == null) result = caseParameterEdgeDestination(userInstance);
+				if (result == null) result = caseParameterEdgesSource(userInstance);
 				if (result == null) result = caseCanBeSynced(userInstance);
 				if (result == null) result = caseContainsOperations(userInstance);
 				if (result == null) result = caseNamedElement(userInstance);

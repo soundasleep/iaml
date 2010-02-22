@@ -1829,8 +1829,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		shouldntContainWiresEClass.getESuperTypes().add(this.getContainsWires());
 		domainObjectInstanceEClass.getESuperTypes().add(this.getApplicationElement());
 		domainObjectInstanceEClass.getESuperTypes().add(this.getContainsWires());
-		domainObjectInstanceEClass.getESuperTypes().add(theWiresPackage.getParameterEdgesSource());
 		domainObjectInstanceEClass.getESuperTypes().add(theWiresPackage.getParameterEdgeDestination());
+		domainObjectInstanceEClass.getESuperTypes().add(theWiresPackage.getParameterEdgesSource());
 		scopeEClass.getESuperTypes().add(this.getGeneratesElements());
 		scopeEClass.getESuperTypes().add(this.getContainsWires());
 		scopeEClass.getESuperTypes().add(this.getContainsScopes());

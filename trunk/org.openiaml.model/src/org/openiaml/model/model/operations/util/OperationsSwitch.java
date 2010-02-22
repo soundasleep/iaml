@@ -209,8 +209,6 @@ public class OperationsSwitch<T> {
 				if (result == null) result = caseActivityNode(operationCallNode);
 				if (result == null) result = caseExecutionEdgesSource(operationCallNode);
 				if (result == null) result = caseExecutionEdgeDestination(operationCallNode);
-				if (result == null) result = caseDataFlowEdgeDestination(operationCallNode);
-				if (result == null) result = caseDataFlowEdgesSource(operationCallNode);
 				if (result == null) result = caseWireEdgesSource(operationCallNode);
 				if (result == null) result = caseNamedElement(operationCallNode);
 				if (result == null) result = caseGeneratedElement(operationCallNode);

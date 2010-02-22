@@ -507,8 +507,8 @@ public class ModelSwitch<T> {
 				DomainObjectInstance domainObjectInstance = (DomainObjectInstance)theEObject;
 				T result = caseDomainObjectInstance(domainObjectInstance);
 				if (result == null) result = caseApplicationElement(domainObjectInstance);
-				if (result == null) result = caseParameterEdgesSource(domainObjectInstance);
 				if (result == null) result = caseParameterEdgeDestination(domainObjectInstance);
+				if (result == null) result = caseParameterEdgesSource(domainObjectInstance);
 				if (result == null) result = caseCanBeSynced(domainObjectInstance);
 				if (result == null) result = caseContainsOperations(domainObjectInstance);
 				if (result == null) result = caseNamedElement(domainObjectInstance);

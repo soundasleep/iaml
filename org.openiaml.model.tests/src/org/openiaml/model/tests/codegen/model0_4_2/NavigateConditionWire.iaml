@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.126aaf83900.45f">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
-    <conditions xsi:type="iaml:CompositeCondition" outEdges="wires.126aaf8398c.11e" id="model.126aaf83900.478" name="is value = 1?">
+    <conditions xsi:type="iaml:CompositeCondition" id="model.126aaf83900.478" name="is value = 1?" outConditionEdges="wires.126aaf8398c.11e">
       <conditions xsi:type="iaml.operations:DecisionCondition" id="operations.126aaf8398c.113" name="equal?" outExecutions="model.126aaf83900.4a4 model.126aaf83900.4a5" inExecutions="model.126aaf83900.4a2" inFlows="model.126aaf83900.4a6 model.126aaf83900.4a8"/>
-      <wires xsi:type="iaml.wires:ConditionWire" id="wires.126aaf8398c.11e" from="model.126aaf83900.478" to="wires.126aaf8398c.11d"/>
+      <conditionEdges id="wires.126aaf8398c.11e" from="model.126aaf83900.478" to="wires.126aaf8398c.11d"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.126aaf8398c.111" outExecutions="model.126aaf83900.4a2"/>
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.126aaf8398c.118" inExecutions="model.126aaf83900.4a4"/>
       <nodes xsi:type="iaml.operations:CancelNode" id="operations.126aaf8398c.119" inExecutions="model.126aaf83900.4a5"/>
@@ -15,7 +15,7 @@
       <values id="model.126aaf83900.49b" name="1" outFlows="model.126aaf83900.4a8" value="1"/>
     </conditions>
     <children xsi:type="iaml.visual:Button" outEdges="wires.126aaf8398c.11d" id="visual.126aaf8397d.1b5" name="Button">
-      <wires xsi:type="iaml.wires:NavigateWire" id="wires.126aaf8398c.11d" from="visual.126aaf8397d.1b5" to="visual.126aaf8397d.1bb" name="click" inEdges="wires.126aaf8398c.11e"/>
+      <wires xsi:type="iaml.wires:NavigateWire" id="wires.126aaf8398c.11d" from="visual.126aaf8397d.1b5" to="visual.126aaf8397d.1bb" name="click" inConditionEdges="wires.126aaf8398c.11e"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.126aaf8397d.1c3" name="value">
       <properties id="model.126aaf83900.46f" name="fieldValue" outFlows="model.126aaf83900.4a6"/>

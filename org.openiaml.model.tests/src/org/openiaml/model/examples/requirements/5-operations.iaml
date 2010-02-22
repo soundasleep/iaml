@@ -3,7 +3,7 @@
   <scopes xsi:type="iaml.visual:Frame" id="migrated1" name="container">
     <children xsi:type="iaml.visual:InputTextField" id="visual.1207ff8316f.fa" name="setToHello">
       <eventTriggers id="model.1207ff82f9b.1ae" name="edit" outEdges="wires.1207ff8322b.4d">
-        <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1207ff8322b.4d" from="model.1207ff82f9b.1ae" to="model.1207ff82f9b.1bf" name="run" inParameterEdges="wires.1207ff8322b.4e"/>
+        <wires xsi:type="iaml.wires:RunInstanceWire" inParameterEdges="wires.1207ff8322b.4e" id="wires.1207ff8322b.4d" from="model.1207ff82f9b.1ae" to="model.1207ff82f9b.1bf" name="run"/>
       </eventTriggers>
       <values id="model.1207ff82f9b.319" name="value" outParameterEdges="wires.1207ff8322b.4e" value="hello">
         <parameterEdges id="wires.1207ff8322b.4e" from="model.1207ff82f9b.319" to="wires.1207ff8322b.4d"/>
@@ -24,7 +24,7 @@
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.1207ff8316f.251" name="setToWorld">
       <eventTriggers id="model.1207ff82f9b.38c" name="edit" outEdges="wires.1207ff8322b.61">
-        <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1207ff8322b.61" from="model.1207ff82f9b.38c" to="model.1207ff82f9b.1bf" name="run2" inParameterEdges="wires.1207ff8322b.62"/>
+        <wires xsi:type="iaml.wires:RunInstanceWire" inParameterEdges="wires.1207ff8322b.62" id="wires.1207ff8322b.61" from="model.1207ff82f9b.38c" to="model.1207ff82f9b.1bf" name="run2"/>
       </eventTriggers>
       <values id="model.1207ff82f9b.38d" name="value" outParameterEdges="wires.1207ff8322b.62" value="world!">
         <parameterEdges id="wires.1207ff8322b.62" from="model.1207ff82f9b.38d" to="wires.1207ff8322b.61"/>

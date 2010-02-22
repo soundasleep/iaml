@@ -24,9 +24,9 @@
         <wires xsi:type="iaml.wires:NavigateWire" id="wires.126b0cb5e5a.10e" from="visual.126b0cb5e5a.2d5" to="components.126b0cb5e69.5" name="onClick"/>
       </children>
     </scopes>
-    <conditions xsi:type="iaml:CompositeCondition" outEdges="wires.126b0cb5e5a.17" id="model.126b0cb5dec.43" name="need to view ad?">
+    <conditions xsi:type="iaml:CompositeCondition" id="model.126b0cb5dec.43" name="need to view ad?" outConditionEdges="wires.126b0cb5e5a.17">
       <conditions xsi:type="iaml.operations:DecisionCondition" id="operations.126b0cb5e69.15" name="true?" outExecutions="model.126b0cb5dec.66 model.126b0cb5dec.68" inExecutions="model.126b0cb5dec.69" inFlows="model.126b0cb5dec.8a"/>
-      <wires xsi:type="iaml.wires:ConditionWire" id="wires.126b0cb5e5a.17" from="model.126b0cb5dec.43" to="components.126b0cb5e69.5"/>
+      <conditionEdges id="wires.126b0cb5e5a.17" from="model.126b0cb5dec.43" to="components.126b0cb5e69.5"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.126b0cb5e69.12" outExecutions="model.126b0cb5dec.69"/>
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.126b0cb5e69.13" inExecutions="model.126b0cb5dec.66"/>
       <nodes xsi:type="iaml.operations:CancelNode" id="operations.126b0cb5e69.14" inExecutions="model.126b0cb5dec.68" exceptionText="ad already viewed"/>
@@ -35,7 +35,7 @@
       <executionEdges id="model.126b0cb5dec.68" name="n" from="operations.126b0cb5e69.15" to="operations.126b0cb5e69.14"/>
       <executionEdges id="model.126b0cb5dec.69" from="operations.126b0cb5e69.12" to="operations.126b0cb5e69.15"/>
     </conditions>
-    <exitGate id="components.126b0cb5e69.5" name="View Ads Exit Gate" outEdges="wires.126b0cb5e5a.e" inEdges="wires.126b0cb5e5a.17 wires.126b0cb5e5a.10e">
+    <exitGate id="components.126b0cb5e69.5" name="View Ads Exit Gate" outEdges="wires.126b0cb5e5a.e" inEdges="wires.126b0cb5e5a.10e" inConditionEdges="wires.126b0cb5e5a.17">
       <wires xsi:type="iaml.wires:NavigateWire" id="wires.126b0cb5e5a.e" from="components.126b0cb5e69.5" to="visual.126b0cb5e5a.4a" name="view ad"/>
     </exitGate>
     <properties id="model.126b0cb5dec.3e" name="ad viewed?" outFlows="model.126b0cb5dec.8a" inFlows="model.126b0cb5dec.182" defaultValue="false"/>

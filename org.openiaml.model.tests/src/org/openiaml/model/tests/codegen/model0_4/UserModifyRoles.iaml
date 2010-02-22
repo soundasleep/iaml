@@ -15,22 +15,22 @@
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233afe628e.7e" name="target"/>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233b53a313.7d" name="add new roles">
       <children xsi:type="iaml.visual:Button" outEdges="wires.1233b53a3ce.a8" id="visual.1233b53a313.ec" name="add role 1">
-        <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1233b53a3ce.a8" from="visual.1233b53a313.ec" to="model.1233b53a1ca.71" name="onClick" inParameterEdges="wires.1233b53a3ce.a9"/>
+        <wires xsi:type="iaml.wires:RunInstanceWire" inParameterEdges="wires.1233b53a3ce.a9" id="wires.1233b53a3ce.a8" from="visual.1233b53a313.ec" to="model.1233b53a1ca.71" name="onClick"/>
       </children>
       <children xsi:type="iaml.visual:Button" outEdges="wires.1233b53a3ce.a7" id="visual.1233b53a313.ed" name="add role 2">
-        <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1233b53a3ce.a7" from="visual.1233b53a313.ed" to="model.1233b53a1ca.71" name="onClick" inParameterEdges="wires.1233b53a3ce.aa"/>
+        <wires xsi:type="iaml.wires:RunInstanceWire" inParameterEdges="wires.1233b53a3ce.aa" id="wires.1233b53a3ce.a7" from="visual.1233b53a313.ed" to="model.1233b53a1ca.71" name="onClick"/>
       </children>
       <children xsi:type="iaml.visual:Button" outEdges="wires.1233b53a3ce.a6" id="visual.1233b53a313.ee" name="add permission 1">
-        <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1233b53a3ce.a6" from="visual.1233b53a313.ee" to="model.1233b53a1ca.73" name="onClick" inParameterEdges="wires.1233b53a3ce.ab"/>
+        <wires xsi:type="iaml.wires:RunInstanceWire" inParameterEdges="wires.1233b53a3ce.ab" id="wires.1233b53a3ce.a6" from="visual.1233b53a313.ee" to="model.1233b53a1ca.73" name="onClick"/>
       </children>
     </scopes>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233b53a313.117" name="remove roles">
       <children xsi:type="iaml.visual:Button" outEdges="wires.1233b53a3ce.168 wires.1233b53a3ce.169" id="visual.1233b53a313.15a" name="remove all roles">
-        <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1233b53a3ce.168" from="visual.1233b53a313.15a" to="model.1233b53a1ca.72" name="onClick" inParameterEdges="wires.1233b53a3ce.16a"/>
-        <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1233b53a3ce.169" from="visual.1233b53a313.15a" to="model.1233b53a1ca.72" name="onClick" inParameterEdges="wires.1233b53a3ce.16b"/>
+        <wires xsi:type="iaml.wires:RunInstanceWire" inParameterEdges="wires.1233b53a3ce.16a" id="wires.1233b53a3ce.168" from="visual.1233b53a313.15a" to="model.1233b53a1ca.72" name="onClick"/>
+        <wires xsi:type="iaml.wires:RunInstanceWire" inParameterEdges="wires.1233b53a3ce.16b" id="wires.1233b53a3ce.169" from="visual.1233b53a313.15a" to="model.1233b53a1ca.72" name="onClick"/>
       </children>
       <children xsi:type="iaml.visual:Button" outEdges="wires.1233b53a3ce.16c" id="visual.1233b53a313.15b" name="remove all permissions">
-        <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1233b53a3ce.16c" from="visual.1233b53a313.15b" to="model.1233b53a1ca.74" name="onClick" inParameterEdges="wires.1233b53a3ce.16d"/>
+        <wires xsi:type="iaml.wires:RunInstanceWire" inParameterEdges="wires.1233b53a3ce.16d" id="wires.1233b53a3ce.16c" from="visual.1233b53a313.15b" to="model.1233b53a1ca.74" name="onClick"/>
       </children>
     </scopes>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233b53a313.1ce" name="requires role 1">

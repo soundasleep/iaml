@@ -11,7 +11,7 @@
   </scopes>
   <domainStores id="model.123172ceeef.32" name="Users">
     <children id="model.123172ceeef.3c" name="User" outEdges="wires.123172cef6c.13">
-      <wires xsi:type="iaml.wires:SelectWire" id="wires.123172cef6c.13" from="model.123172ceeef.3c" to="model.123172ceeef.93" name="select" inParameterEdges="wires.123172cef6c.15" query="id = ?"/>
+      <wires xsi:type="iaml.wires:SelectWire" inParameterEdges="wires.123172cef6c.15" id="wires.123172cef6c.13" from="model.123172ceeef.3c" to="model.123172ceeef.93" name="select" query="id = ?"/>
       <attributes id="model.123172ceeef.57" name="id" primaryKey="true"/>
       <attributes id="model.123172ceeef.59" name="name"/>
       <attributes id="model.123172ceeef.5f" name="email"/>

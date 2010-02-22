@@ -972,9 +972,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		requiresEdgeEClass.getESuperTypes().add(this.getConstraintEdgesSource());
 		requiresEdgeEClass.getESuperTypes().add(this.getConstraintEdgeDestination());
 		requiresEdgeEClass.getESuperTypes().add(theModelPackage.getContainsWires());
-		constraintEdgeEClass.getESuperTypes().add(this.getParameterEdgeDestination());
-		constraintEdgeEClass.getESuperTypes().add(theModelPackage.getNamedElement());
-		constraintEdgeEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
+		constraintEdgeEClass.getESuperTypes().add(theModelPackage.getGeneratedElement());
 		providesEdgeEClass.getESuperTypes().add(theModelPackage.getGeneratedElement());
 
 		// Initialize classes and features; add operations and parameters

@@ -6,8 +6,7 @@
  */
 package org.openiaml.model.model.wires;
 
-import org.openiaml.model.model.GeneratesElements;
-import org.openiaml.model.model.NamedElement;
+import org.openiaml.model.model.GeneratedElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,7 +30,7 @@ import org.openiaml.model.model.NamedElement;
  * @model annotation="http://openiaml.org/comment added='0.4' changed='0.4.3 to no longer be a Wire; added \'from\' and \'to\' references; renamed to ConstraintEdge'"
  * @generated
  */
-public interface ConstraintEdge extends ParameterEdgeDestination, NamedElement, GeneratesElements {
+public interface ConstraintEdge extends GeneratedElement {
 	/**
 	 * Returns the value of the '<em><b>From</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link org.openiaml.model.model.wires.ConstraintEdgesSource#getOutConstraintEdges <em>Out Constraint Edges</em>}'.

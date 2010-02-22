@@ -256,9 +256,6 @@ public class WiresSwitch<T> {
 			case WiresPackage.CONSTRAINT_EDGE: {
 				ConstraintEdge constraintEdge = (ConstraintEdge)theEObject;
 				T result = caseConstraintEdge(constraintEdge);
-				if (result == null) result = caseParameterEdgeDestination(constraintEdge);
-				if (result == null) result = caseNamedElement(constraintEdge);
-				if (result == null) result = caseGeneratesElements(constraintEdge);
 				if (result == null) result = caseGeneratedElement(constraintEdge);
 				if (result == null) result = defaultCase(theEObject);
 				return result;

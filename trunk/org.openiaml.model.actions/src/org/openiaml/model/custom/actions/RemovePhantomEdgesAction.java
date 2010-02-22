@@ -13,11 +13,8 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.openiaml.model.ModelLoader;
 import org.openiaml.model.ModelLoader.ModelLoadException;
@@ -45,6 +42,7 @@ public class RemovePhantomEdgesAction extends IamlFileAction {
 
 	private EObject loadedModel;
 	
+	@Override
 	public EObject getLoadedModel() {
 		return loadedModel;
 	}

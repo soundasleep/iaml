@@ -5,7 +5,6 @@ package org.openiaml.model.custom.actions;
 
 import java.io.IOException;
 import java.util.HashSet;
-import java.util.Random;
 import java.util.Set;
 
 import org.eclipse.core.resources.IContainer;
@@ -28,24 +27,21 @@ import org.openiaml.model.ModelLoader.ModelLoadException;
  * @author jmwright
  *
  */
-public class MigrateAllModelsJob extends AbstractIAMLJob {
+public class MigrateAllModelsLogic {
 	
 	// the container to search
 	private IContainer project;
 
-	public MigrateAllModelsJob(IContainer project) {
-		super("Migrate all contained models");
+	public MigrateAllModelsLogic(IContainer project) {
 		this.project = project;
-		setUser(true);		// we are a user job, so we should get some feedback
 	}
 
 	/**
 	 * Do the actual work.
 	 */
-	@Override
-	protected IStatus runActual(IProgressMonitor monitor) throws CoreException {
+	public IStatus run(IProgressMonitor monitor) throws CoreException {
 		// new task
-		monitor.beginTask(this.getName(), 100);
+		monitor.beginTask("Migrating models in '" + project + "'", 100);
 		
 		// first, find all models in the project
 		Set<IFile> models = findTargetModels(project);
@@ -55,7 +51,7 @@ public class MigrateAllModelsJob extends AbstractIAMLJob {
 			return Status.CANCEL_STATUS;
 		
 		// now, for each of them, migrate and load them
-		MultiStatus status = multiStatus("Could not migrate all models successfully", null);
+		MultiStatus status = AbstractIAMLJob.multiStatus("Could not migrate all models successfully", null);
 		IProgressMonitor m2 = new SubProgressMonitor(monitor, 70);
 		m2.beginTask("Migrating models", models.size());
 		for (IFile model : models) {
@@ -66,7 +62,7 @@ public class MigrateAllModelsJob extends AbstractIAMLJob {
 				migrateAndLoad(status, model, new SubProgressMonitor(m2, 1));
 			} catch (CoreException e) {
 				// save to status
-				status.add(errorStatus("When migrating " + model + ": " + e.getMessage(), e));
+				status.add(AbstractIAMLJob.errorStatus("When migrating " + model + ": " + e.getMessage(), e));
 				// and continue
 			}
 		}
@@ -91,12 +87,12 @@ public class MigrateAllModelsJob extends AbstractIAMLJob {
 		monitor.beginTask("Migrating " + model, 7);
 		
 		// backup original file
-		IFile backup = model.getProject().getFile("backup" + new Random().nextLong() );
+		IFile backup = model.getProject().getFile( model.getName() + ".backup" );
 		monitor.subTask("Backing up to " + backup);
 		model.move(backup.getFullPath(), true, new SubProgressMonitor(monitor, 1));
 		
 		if (!backup.exists()) {
-			status.add(errorStatus("Backup file '" + backup + "' should have been created"));
+			status.add(AbstractIAMLJob.errorStatus("Backup file '" + backup + "' should have been created"));
 			return;
 		}
 		
@@ -111,7 +107,7 @@ public class MigrateAllModelsJob extends AbstractIAMLJob {
 			
 			// was it OK?
 			if (!s.isOK()) {
-				MultiStatus s2 = multiStatus("Could not migrate model " + model + ": " + s.getMessage(), null);
+				MultiStatus s2 = AbstractIAMLJob.multiStatus("Could not migrate model " + model + ": " + s.getMessage(), null);
 				s2.add(s);
 				status.add(s2);
 			}
@@ -128,14 +124,14 @@ public class MigrateAllModelsJob extends AbstractIAMLJob {
 						obj.eResource().save( ModelLoader.getSaveOptions() );
 					} catch (IOException e) {
 						// IO exception during save
-						status.add(errorStatus("Could not save loaded model " + model + ": " + e.getMessage(), e));
+						status.add(AbstractIAMLJob.errorStatus("Could not save loaded model " + model + ": " + e.getMessage(), e));
 					}
 				} catch (ModelLoadException e) {
 					// loading failed; add error status
-					status.add(errorStatus("Could not load migrated model " + model + ": " + e.getMessage(), e));
+					status.add(AbstractIAMLJob.errorStatus("Could not load migrated model " + model + ": " + e.getMessage(), e));
 				} catch (WrappedException e) {			
 					// loading failed; add error status
-					status.add(errorStatus("Could not load migrated model " + model + ": " + e.getMessage(), e));
+					status.add(AbstractIAMLJob.errorStatus("Could not load migrated model " + model + ": " + e.getMessage(), e));
 				}
 			}
 			

@@ -32,7 +32,7 @@ import org.openiaml.model.model.wires.ParameterEdgesSource;
  * @model annotation="http://openiaml.org/comment added='0.2'"
  * @generated
  */
-public interface DomainObjectInstance extends ApplicationElement, ContainsWires, ParameterEdgesSource, ParameterEdgeDestination {
+public interface DomainObjectInstance extends ApplicationElement, ContainsWires, ParameterEdgeDestination, ParameterEdgesSource {
 	/**
 	 * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
 	 * The list contents are of type {@link org.openiaml.model.model.DomainAttributeInstance}.

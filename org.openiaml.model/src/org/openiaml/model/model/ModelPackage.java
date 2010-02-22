@@ -4284,22 +4284,22 @@ public interface ModelPackage extends EPackage {
 	int DOMAIN_OBJECT_INSTANCE__VALUES = APPLICATION_ELEMENT__VALUES;
 
 	/**
-	 * The feature id for the '<em><b>Out Parameter Edges</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN_OBJECT_INSTANCE__OUT_PARAMETER_EDGES = APPLICATION_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>In Parameter Edges</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_OBJECT_INSTANCE__IN_PARAMETER_EDGES = APPLICATION_ELEMENT_FEATURE_COUNT + 1;
+	int DOMAIN_OBJECT_INSTANCE__IN_PARAMETER_EDGES = APPLICATION_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Out Parameter Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE__OUT_PARAMETER_EDGES = APPLICATION_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.

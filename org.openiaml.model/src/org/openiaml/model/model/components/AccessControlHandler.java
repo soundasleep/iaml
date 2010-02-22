@@ -8,7 +8,6 @@ package org.openiaml.model.model.components;
 
 import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.GeneratesElements;
-import org.openiaml.model.model.users.ProvidesEdgesSource;
 import org.openiaml.model.model.users.RequiresEdgesSource;
 import org.openiaml.model.model.wires.ParameterEdgeDestination;
 
@@ -26,5 +25,5 @@ import org.openiaml.model.model.wires.ParameterEdgeDestination;
  * @model annotation="http://openiaml.org/comment added='0.4'"
  * @generated
  */
-public interface AccessControlHandler extends ApplicationElementContainer, GeneratesElements, ParameterEdgeDestination, RequiresEdgesSource, ProvidesEdgesSource {
+public interface AccessControlHandler extends ApplicationElementContainer, GeneratesElements, ParameterEdgeDestination, RequiresEdgesSource {
 } // AccessControlHandler

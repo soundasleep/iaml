@@ -44,7 +44,7 @@ import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.ConditionWire;
+import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SelectWire;
@@ -415,20 +415,20 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	}
 
 	/**
-	 * Assert that a ConditionWire exists between two elements in the editor,
+	 * Assert that a ConditionEdge exists between two elements in the editor,
 	 * with the specific name.
 	 * 
 	 * TODO refactor these methods
 	 */
-	public ConnectionNodeEditPart assertHasConditionWire(DiagramDocumentEditor editor, EditPart source, EditPart target, String name) {
+	public ConnectionNodeEditPart assertHasConditionEdge(DiagramDocumentEditor editor, EditPart source, EditPart target, String name) {
 		String found = "";
 
 		for (Object c : editor.getDiagramEditPart().getConnections()) {
 			if (c instanceof ConnectionNodeEditPart) {
 				ConnectionNodeEditPart connection = (ConnectionNodeEditPart) c;
 				EObject element = connection.resolveSemanticElement();
-				if (element instanceof ConditionWire) {
-					ConditionWire w = (ConditionWire) element;
+				if (element instanceof ConditionEdge) {
+					ConditionEdge w = (ConditionEdge) element;
 					if (connection.getSource().equals(source) &&
 							connection.getTarget().equals(target) && w.getName().equals(name))
 						return connection;	// found it
@@ -442,20 +442,20 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	}
 
 	/**
-	 * Assert that a ConditionWire exists between two elements in the editor,
+	 * Assert that a ConditionEdge exists between two elements in the editor,
 	 * with any name.
 	 * 
 	 * TODO refactor these methods
 	 */
-	public ConnectionNodeEditPart assertHasConditionWire(DiagramDocumentEditor editor, EditPart source, EditPart target) {
+	public ConnectionNodeEditPart assertHasConditionEdge(DiagramDocumentEditor editor, EditPart source, EditPart target) {
 		String found = "";
 
 		for (Object c : editor.getDiagramEditPart().getConnections()) {
 			if (c instanceof ConnectionNodeEditPart) {
 				ConnectionNodeEditPart connection = (ConnectionNodeEditPart) c;
 				EObject element = connection.resolveSemanticElement();
-				if (element instanceof ConditionWire) {
-					ConditionWire w = (ConditionWire) element;
+				if (element instanceof ConditionEdge) {
+					ConditionEdge w = (ConditionEdge) element;
 					if (connection.getSource().equals(source) &&
 							connection.getTarget().equals(target))
 						return connection;	// found it
@@ -464,7 +464,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 			}
 		}
 
-		fail("assertHasRunInstanceWire: no connection found between '" + source + "' and '" + target + "' with any name. found: " + found);
+		fail("assertHasConditionEdge: no connection found between '" + source + "' and '" + target + "' with any name. found: " + found);
 		return null;
 	}
 

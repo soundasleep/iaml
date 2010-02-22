@@ -57,6 +57,12 @@
 		if (relationship instanceof org.openiaml.model.model.wires.RequiresEdge) {
 			return ((org.openiaml.model.model.wires.RequiresEdge) relationship).getFrom();
 		}
+		if (relationship instanceof org.openiaml.model.model.wires.ConstraintEdge) {
+			return ((org.openiaml.model.model.wires.ConstraintEdge) relationship).getFrom();
+		}
+		if (relationship instanceof org.openiaml.model.model.wires.ConditionEdge) {
+			return ((org.openiaml.model.model.wires.ConditionEdge) relationship).getFrom();
+		}
 		
 		// if we get this far, there may be a relationship type that
 		// we're not checking for
@@ -96,6 +102,12 @@
 		}
 		if (relationship instanceof org.openiaml.model.model.wires.RequiresEdge) {
 			return ((org.openiaml.model.model.wires.RequiresEdge) relationship).getTo();
+		}
+		if (relationship instanceof org.openiaml.model.model.wires.ConstraintEdge) {
+			return ((org.openiaml.model.model.wires.ConstraintEdge) relationship).getTo();
+		}
+		if (relationship instanceof org.openiaml.model.model.wires.ConditionEdge) {
+			return ((org.openiaml.model.model.wires.ConditionEdge) relationship).getTo();
 		}
 		
 		// if we get this far, there may be a relationship type that

@@ -192,15 +192,15 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="ConditionWire"
-          description="Create new ConditionWire">
+          title="ConditionEdge"
+          description="Create new ConditionEdge">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/ConditionWire.gif"
+            path="icons/full/obj16/ConditionEdge.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/ConditionWire.gif"
+            path="icons/full/obj32/ConditionEdge.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
       <tools

@@ -10,7 +10,7 @@ import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.ConditionWire;
+import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SyncWire;
@@ -47,8 +47,7 @@ public class ConditionWireXpath extends InferenceTestCase {
 		SyncWire wireGen = (SyncWire) getWireBidirectional(root, page1, page2);
 
 		// this SyncWire should have a ConditionWire connected to this condition
-		ConditionWire cw = (ConditionWire) getWireFromTo(root, cond, wireGen);
-		assertNotNull(cw);
+		assertGenerated(assertHasConditionEdge(root, cond, wireGen));
 
 		// we can now investigate the SyncWires themselves, and make sure
 		// they have the conditions attached too
@@ -64,8 +63,8 @@ public class ConditionWireXpath extends InferenceTestCase {
 		RunInstanceWire targetRw = (RunInstanceWire) getWireFromTo(wire, targetEdit, srcOp);
 
 		// there should be additional ConditionWires to these RunInstanceWires
-		ConditionWire srcCw = (ConditionWire) getWireFromTo(page1, cond, srcRw);
-		ConditionWire targetCw = (ConditionWire) getWireFromTo(page1, cond, targetRw);
+		ConditionEdge srcCw = assertHasConditionEdge(page1, cond, srcRw);
+		ConditionEdge targetCw = assertHasConditionEdge(page1, cond, targetRw);
 
 		// all the ConditionWires need parameters: the XPath source, and the element to evaluate
 		ParameterEdge param1 = getParameterEdgeFromTo(root, dae, srcCw);
@@ -91,15 +90,6 @@ public class ConditionWireXpath extends InferenceTestCase {
 		 * the expression EXCEPT for p1, because this is included already.
 		 * (i.e. p1 will match anyway.)
 		 */
-
-		assertNotNull(srcCw);
-		assertNotNull(targetCw);
-		assertNotNull(param1);
-		assertNotNull(param2);
-		/*
-		assertNotNull(param3);
-		assertNotNull(param4);
-		*/
 
 		// even though param1 and param2 were generated,
 		assertTrue(param1.isIsGenerated());

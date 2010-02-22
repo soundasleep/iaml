@@ -17,7 +17,7 @@ import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
-import org.openiaml.model.model.wires.ConditionWire;
+import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.NavigateWire;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.tests.inference.ValidInferenceTestCase;
@@ -166,7 +166,7 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		CompositeCondition condition = assertHasCompositeCondition(session, "check requires a page is viewed first");
 		assertGenerated(condition);
 		
-		ConditionWire wire = assertHasConditionWire(session, condition, gate, "condition");
+		ConditionEdge wire = assertHasConditionEdge(session, condition, gate, "condition");
 		assertGenerated(wire);
 		
 	}

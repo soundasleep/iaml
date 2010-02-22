@@ -48,6 +48,9 @@ import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.users.RequiresEdgeDestination;
 import org.openiaml.model.model.users.RequiresEdgesSource;
 import org.openiaml.model.model.visual.VisualPackage;
+import org.openiaml.model.model.wires.ConditionEdge;
+import org.openiaml.model.model.wires.ConditionEdgeDestination;
+import org.openiaml.model.model.wires.ConditionEdgesSource;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ExtendsEdgeDestination;
 import org.openiaml.model.model.wires.ExtendsEdgesSource;
@@ -630,6 +633,52 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 			if (o instanceof ParameterEdge) {
 				ParameterEdge w = (ParameterEdge) o;
 				if (w.getFrom().equals(from) && w.getTo().equals(to))
+					result.add(w);
+			}
+		}
+
+		return result;
+	}
+	
+	/**
+	 * Get <em>all</em> ConditionEdge connecting the given elements,
+	 * contained with the given container element or any of its children.
+	 *
+	 * @return the found ConditionEdges
+	 * @throws JaxenException
+	 */
+	protected Set<ConditionEdge> getConditionEdgesFromTo(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to) throws JaxenException {
+		Set<ConditionEdge> result = new HashSet<ConditionEdge>();
+		
+		List<?> wires = query(container, "//iaml:conditionEdges");
+		for (Object o : wires) {
+			if (o instanceof ConditionEdge) {
+				ConditionEdge w = (ConditionEdge) o;
+				if (w.getFrom().equals(from) && w.getTo().equals(to))
+					result.add(w);
+			}
+		}
+
+		return result;
+	}
+	
+	/**
+	 * Get <em>all</em> ConditionEdge connecting the given elements,
+	 * contained with the given container element or any of its children,
+	 * with the given name.
+	 *
+	 * @param name the name to search for
+	 * @return the found ConditionEdges
+	 * @throws JaxenException
+	 */
+	protected Set<ConditionEdge> getConditionEdgesFromTo(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to, String name) throws JaxenException {
+		Set<ConditionEdge> result = new HashSet<ConditionEdge>();
+		
+		List<?> wires = query(container, "//iaml:conditionEdges");
+		for (Object o : wires) {
+			if (o instanceof ConditionEdge) {
+				ConditionEdge w = (ConditionEdge) o;
+				if (w.getFrom().equals(from) && w.getTo().equals(to) && name.equals(w.getName()))
 					result.add(w);
 			}
 		}

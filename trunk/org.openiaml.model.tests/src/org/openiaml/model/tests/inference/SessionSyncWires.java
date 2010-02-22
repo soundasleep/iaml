@@ -14,7 +14,7 @@ import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.ConditionWire;
+import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.tests.inference.model0_4.SetWireClient;
@@ -101,7 +101,7 @@ public class SessionSyncWires extends InferenceTestCase {
 		CompositeCondition cond = assertHasCompositeCondition(field2, "fieldValue is set");
 		assertGenerated(cond);
 		
-		ConditionWire cw = assertHasConditionWire(root, cond, run);
+		ConditionEdge cw = assertHasConditionEdge(root, cond, run);
 		assertGenerated(cw);
 		
 	}

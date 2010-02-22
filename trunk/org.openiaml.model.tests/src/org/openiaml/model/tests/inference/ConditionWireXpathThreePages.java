@@ -10,7 +10,7 @@ import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.ConditionWire;
+import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SyncWire;
 
@@ -62,9 +62,9 @@ public class ConditionWireXpathThreePages extends InferenceTestCaseWithCondition
     assertHasWiresFromTo(1, root, cond, sw2);
 
     // there should only be two parameters into each condition wire
-    ConditionWire cw_sw1 = (ConditionWire) getWireFromTo(root, cond, sw1);
+    ConditionEdge cw_sw1 = assertHasConditionEdge(root, cond, sw1);
     assertEquals(cw_sw1.toString(), 2, cw_sw1.getInParameterEdges().size());
-    ConditionWire cw_sw2 = (ConditionWire) getWireFromTo(root, cond, sw2);
+    ConditionEdge cw_sw2 = assertHasConditionEdge(root, cond, sw2);
     assertEquals(cw_sw2.toString(), 2, cw_sw2.getInParameterEdges().size());
 
     // we can now investigate the SyncWires themselves, and make sure
@@ -87,10 +87,10 @@ public class ConditionWireXpathThreePages extends InferenceTestCaseWithCondition
     RunInstanceWire rw3_1 = (RunInstanceWire) getWireFromTo(wire, f3edit, f1update);
 
     // condition wires all over!
-    ConditionWire cw1_2 = (ConditionWire) getWireFromTo(page1, cond, rw1_2);
-    ConditionWire cw2_1 = (ConditionWire) getWireFromTo(page1, cond, rw2_1);
-    ConditionWire cw1_3 = (ConditionWire) getWireFromTo(page1, cond, rw1_3);
-    ConditionWire cw3_1 = (ConditionWire) getWireFromTo(page1, cond, rw3_1);
+    ConditionEdge cw1_2 = assertHasConditionEdge(page1, cond, rw1_2);
+    ConditionEdge cw2_1 = assertHasConditionEdge(page1, cond, rw2_1);
+    ConditionEdge cw1_3 = assertHasConditionEdge(page1, cond, rw1_3);
+    ConditionEdge cw3_1 = assertHasConditionEdge(page1, cond, rw3_1);
     // these elements will have *two* condition wires
     /*
     ConditionWire cw2_3 = (ConditionWire) getWireFromTo(page1, cond, rw2_3);
@@ -99,10 +99,10 @@ public class ConditionWireXpathThreePages extends InferenceTestCaseWithCondition
 
     // for p1<-->p2 and p1<-->p3, since page1 is connected directly with
     // the DynamicSet, p1 should not be a condition in any sync wire
-    assertNoParamtersToConditionWires(root, cond, rw1_2, page1);
-    assertNoParamtersToConditionWires(root, cond, rw2_1, page1);
-    assertNoParamtersToConditionWires(root, cond, rw1_3, page1);
-    assertNoParamtersToConditionWires(root, cond, rw3_1, page1);
+    assertNoParamtersToConditionEdges(root, cond, rw1_2, page1);
+    assertNoParamtersToConditionEdges(root, cond, rw2_1, page1);
+    assertNoParamtersToConditionEdges(root, cond, rw1_3, page1);
+    assertNoParamtersToConditionEdges(root, cond, rw3_1, page1);
 
     // and parameters connecting up the sets... (only one per dae --> condition wire)
     assertGenerated(getParameterEdgeFromTo(root, dae, cw1_2));

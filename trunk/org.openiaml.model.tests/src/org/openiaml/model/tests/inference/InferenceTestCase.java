@@ -66,7 +66,9 @@ import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Label;
-import org.openiaml.model.model.wires.ConditionWire;
+import org.openiaml.model.model.wires.ConditionEdge;
+import org.openiaml.model.model.wires.ConditionEdgeDestination;
+import org.openiaml.model.model.wires.ConditionEdgesSource;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ExtendsEdgeDestination;
 import org.openiaml.model.model.wires.ExtendsEdgesSource;
@@ -986,25 +988,27 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	}
 	
 	/**
-	 * Assert there exists only one unidirectional ConditionWire between
+	 * Assert there exists only one unidirectional ConditionEdge between
 	 * the given elements.
 	 *
 	 * @return The element found
 	 */
-	public ConditionWire assertHasConditionWire(EObject container, WireEdgesSource from, WireEdgeDestination to, String name) throws JaxenException {
-		return (ConditionWire) assertHasWireFromTo(container, from, to, 
-				ConditionWire.class, name);
+	public ConditionEdge assertHasConditionEdge(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to, String name) throws JaxenException {
+		Set<ConditionEdge> params = getConditionEdgesFromTo(container, from, to, name);
+		assertEquals("Should be exactly one condition edge with the name '" + name + "': " + params, 1, params.size());
+		return params.iterator().next();
 	}
 	
 	/**
-	 * Assert there exists only one unidirectional ConditionWire between
+	 * Assert there exists only one unidirectional ConditionEdge between
 	 * the given elements. Ignores the name.
 	 *
 	 * @return The element found
 	 */
-	public ConditionWire assertHasConditionWire(EObject container, WireEdgesSource from, WireEdgeDestination to) throws JaxenException {
-		return (ConditionWire) assertHasWireFromTo(container, from, to, 
-				ConditionWire.class);
+	public ConditionEdge assertHasConditionEdge(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to) throws JaxenException {
+		Set<ConditionEdge> params = getConditionEdgesFromTo(container, from, to);
+		assertEquals("Should be exactly one condition edge: " + params, 1, params.size());
+		return params.iterator().next();
 	}
 	
 	/**

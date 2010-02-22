@@ -37,6 +37,7 @@ import org.w3c.dom.NodeList;
  *      <li>RequiresWire is now RequiresEdge, and no longer a WireEdge
  *      <li>ProvidesWire is now ProvidesEdge, and no longer a WireEdge
  *      <li>ConstraintWire is now ConstraintEdge, and no longer a WireEdge
+ *      <li>ConditionWire is now ConditionEdge, and no longer a WireEdge
  *      <li>RunInstanceWire is now a SingleWire, and not a CompositeWire; it no longer contains Operations directly.
  *   </ol></li>
  *   <li><strong>Many other modifications, too many to list... this migrator only implements
@@ -59,6 +60,7 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 	private List<String> requiresWires = null;
 	private List<String> providesWires = null;
 	private List<String> constraintWires = null;
+	private List<String> conditionWires = null;
 	
 	/**
 	 * We will cycle over the document, and find out which edges are
@@ -74,6 +76,7 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 		requiresWires = new ArrayList<String>();
 		providesWires = new ArrayList<String>();
 		constraintWires = new ArrayList<String>();
+		conditionWires = new ArrayList<String>();
 		prepareDocumentRecurse(documentElement, errors);
 
 	}
@@ -130,6 +133,16 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 					constraintWires.add(id);
 				} else {
 					errors.add(new ExpectedMigrationException(this, e, "Element was a ConstraintWire but did not have an id attribute."));
+				}
+			}
+
+
+			if ("iaml.wires:ConditionWire".equals(e.getAttribute("xsi:type"))) {
+				String id = e.getAttribute("id");
+				if (id != null) {
+					conditionWires.add(id);
+				} else {
+					errors.add(new ExpectedMigrationException(this, e, "Element was a ConditionWire but did not have an id attribute."));
 				}
 			}
 		}
@@ -205,6 +218,10 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 			return "iaml.wires:ConstraintEdge";
 		}
 
+		if (xsiType.equals("iaml.wires:ConditionWire")) {
+			return "iaml.wires:ConditionEdge";
+		}
+
 		return super.replaceType(element, xsiType, errors);
 	}
 
@@ -255,6 +272,12 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 			// --> <constraintEdges>
 			if ("iaml.wires:ConstraintWire".equals(xsiType)) {
 				return "constraintEdges";
+			}
+
+			// <wires xsi:type="iaml.wires:ConstraintWire"> 
+			// --> <constraintEdges>
+			if ("iaml.wires:ConditionWire".equals(xsiType)) {
+				return "conditionEdges";
 			}
 		}
 		
@@ -346,6 +369,15 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 
 		if (!old.getAttribute("outEdges").isEmpty()) {
 			splitReferences(old, "outEdges", constraintWires, "outConstraintEdges");
+		}
+
+		// any inEdges or outEdges to an old ConditionWire?
+		if (!old.getAttribute("inEdges").isEmpty()) {
+			splitReferences(old, "inEdges", conditionWires, "inConditionEdges");
+		}
+
+		if (!old.getAttribute("outEdges").isEmpty()) {
+			splitReferences(old, "outEdges", conditionWires, "outConditionEdges");
 		}
 		
 		// remove an attribute?

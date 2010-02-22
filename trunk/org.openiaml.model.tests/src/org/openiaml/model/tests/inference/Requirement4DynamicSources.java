@@ -17,7 +17,7 @@ import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.ConditionWire;
+import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SyncWire;
 
@@ -125,7 +125,7 @@ public class Requirement4DynamicSources extends InferenceTestCaseWithConditionWi
 		assertGenerated(sw);
 		
 		// condition on sync wire
-		ConditionWire cond = assertHasConditionWire(page1, c, sw);
+		ConditionEdge cond = assertHasConditionEdge(page1, c, sw);
 		assertGenerated(cond);
 		
 		// page1.target
@@ -149,7 +149,7 @@ public class Requirement4DynamicSources extends InferenceTestCaseWithConditionWi
 		assertNoWireBidirectional(root, page1text1, page3text1);
 		
 		// condition cascaded to text field
-		ConditionWire syncCond = assertHasConditionWire(root, c, swtext);	
+		ConditionEdge syncCond = assertHasConditionEdge(root, c, swtext);	
 		assertGenerated(syncCond);
 		
 		EventTrigger access = assertHasEventTrigger(page1text1, "access");
@@ -162,7 +162,7 @@ public class Requirement4DynamicSources extends InferenceTestCaseWithConditionWi
 		assertGenerated(run);
 		
 		// condition cascaded to run wire
-		ConditionWire initCondition = assertHasConditionWire(root, c, run);  
+		ConditionEdge initCondition = assertHasConditionEdge(root, c, run);  
 		assertGenerated(initCondition);
 		
 		// parameter wires

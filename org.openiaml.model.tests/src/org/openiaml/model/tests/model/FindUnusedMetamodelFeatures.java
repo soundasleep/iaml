@@ -211,6 +211,15 @@ public class FindUnusedMetamodelFeatures extends XmlTestCase {
 				if (u.isInterface() && u.getEReferences().isEmpty() && u.getEAttributes().isEmpty()) {
 					unused.write(" (empty interface)");
 				}
+				// do any of this classes supertypes use the reference?
+				EClass usedBy = subTypeUses(map, cls, u); 
+				if (usedBy != null) {
+					unused.write(" (used by <a href=\"#");
+					unused.write(usedBy.getName());
+					unused.write("\">");
+					unused.write(usedBy.getName());
+					unused.write("</a>)");
+				}
 				unused.write("</li>");
 			}
 			unused.write("</ul>");
@@ -219,6 +228,24 @@ public class FindUnusedMetamodelFeatures extends XmlTestCase {
 		unused.write("\n\n</body></html>");
 		unused.close();
 		
+	}
+
+	/**
+	 * Do any subtypes of this class use the given unused class?
+	 * 
+	 * @return
+	 */
+	private EClass subTypeUses(Map<EClass, Set<EClass>> map, EClass source, EClass unused) {
+		for (EClass cls : map.keySet()) {
+			if (cls.getEAllSuperTypes().contains(source)) {
+				if (!map.get(cls).contains(unused)) {
+					// this class uses it
+					return cls;
+				}
+			}
+		}
+		
+		return null;
 	}
 
 	/**

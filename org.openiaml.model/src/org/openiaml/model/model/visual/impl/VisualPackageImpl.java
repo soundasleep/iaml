@@ -387,7 +387,7 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 		  (inputFormEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Represents a form which may contain {@link InputTextField text fields} and {@link Button buttons}."
+			 "documentation", "Represents a form which may contain {@model InputTextField text fields} and {@model Button buttons}."
 		   });		
 		addAnnotation
 		  (inputTextFieldEClass, 

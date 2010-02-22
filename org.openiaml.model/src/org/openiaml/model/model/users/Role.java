@@ -14,7 +14,7 @@ import org.openiaml.model.model.DomainObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A particular Role that a user may have; may be {@link ExtendsWire inherited} from other Roles.
+ * A particular Role that a user may have; may be {@model ExtendsWire inherited} from other Roles.
  * <!-- end-model-doc -->
  *
  *

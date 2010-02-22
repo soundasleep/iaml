@@ -13,7 +13,7 @@ package org.openiaml.model.model;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Temporary storage of values contained within an {@link Operation} which will be lost once the operation is completed.
+ * Temporary storage of values contained within an {@model Operation} which will be lost once the operation is completed.
  * <!-- end-model-doc -->
  *
  *

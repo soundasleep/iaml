@@ -8,7 +8,6 @@ package org.openiaml.model.model.wires;
 
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.GeneratedElement;
-import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.users.RequiresEdgeDestination;
 import org.openiaml.model.model.users.RequiresEdgesSource;
 
@@ -18,7 +17,7 @@ import org.openiaml.model.model.users.RequiresEdgesSource;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Represents the requirements for a {@link LoginHandler}, such as {@link Role Roles} and {@link Permission Permissions}.
+ * Represents the requirements for a {@model LoginHandler}, such as {@model Role Roles} and {@model Permission Permissions}.
  * <!-- end-model-doc -->
  *
  * <p>

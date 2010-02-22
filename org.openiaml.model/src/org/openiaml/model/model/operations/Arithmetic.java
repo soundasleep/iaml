@@ -9,7 +9,6 @@ package org.openiaml.model.model.operations;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.DataFlowEdgeDestination;
 import org.openiaml.model.model.DataFlowEdgesSource;
-import org.openiaml.model.model.PrimitiveOperation;
 
 /**
  * <!-- begin-user-doc -->
@@ -17,7 +16,7 @@ import org.openiaml.model.model.PrimitiveOperation;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * An inline expression of arithmetic. Can be used as part of a {@link PrimitiveOperation set operation}, for example.
+ * An inline expression of arithmetic. Can be used as part of a {@model PrimitiveOperation set operation}, for example.
  * <!-- end-model-doc -->
  *
  * <p>

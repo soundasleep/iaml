@@ -13,7 +13,6 @@ import org.openiaml.model.model.ExecutionEdgeDestination;
 import org.openiaml.model.model.ExecutionEdgesSource;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.WireEdgesSource;
-import org.openiaml.model.model.wires.RunInstanceWire;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,7 +20,7 @@ import org.openiaml.model.model.wires.RunInstanceWire;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A virtual {@link Operation} call; the outgoing {@link RunInstanceWire} will be executed.
+ * A virtual {@model Operation} call; the outgoing {@model RunInstanceWire} will be executed.
  * <!-- end-model-doc -->
  *
  *

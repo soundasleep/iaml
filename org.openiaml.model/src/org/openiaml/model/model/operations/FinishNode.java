@@ -15,7 +15,7 @@ import org.openiaml.model.model.ExecutionEdgeDestination;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * The successful completion of an {@link Operation}, or the {@link Condition} passed.
+ * The successful completion of an {@model Operation}, or the {@model Condition} passed.
  * <!-- end-model-doc -->
  *
  *

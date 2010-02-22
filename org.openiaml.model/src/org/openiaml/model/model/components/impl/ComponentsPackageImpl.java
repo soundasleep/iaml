@@ -400,25 +400,25 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 		  (loginHandlerEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "When placed into a {@link Page} or {@link Session}, enforces that users need to login via this LoginHandler first. Also supports logout."
+			 "documentation", "When placed into a {@model Page} or {@model Session}, enforces that users need to login via this LoginHandler first. Also supports logout."
 		   });			
 		addAnnotation
 		  (accessControlHandlerEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "When placed into a {@link Page} or {@link Session}, enforces that all access contains the {@link Role roles} and {@link Permission permissions} provided by incoming {@link RequiresWire}."
+			 "documentation", "When placed into a {@model Page} or {@model Session}, enforces that all access contains the {@model Role roles} and {@model Permission permissions} provided by incoming {@model RequiresWire}."
 		   });			
 		addAnnotation
 		  (entryGateEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "When placed into a {@link Scope} (including {@link Session}), all {@link Page} accesses within that Scope must first execute this {@link Gate}. If all incoming {@link ConditionWire}s are true, then access to this {@link Scope} is denied until such time any {@link ConditionWire}s becomes false."
+			 "documentation", "When placed into a {@model Scope} (including {@model Session}), all {@model Page} accesses within that Scope must first execute this {@model Gate}. If all incoming {@model ConditionWire}s are true, then access to this {@model Scope} is denied until such time any {@model ConditionWire}s becomes false."
 		   });			
 		addAnnotation
 		  (exitGateEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "When placed into a {@link Scope} (including {@link Session}), all {@link Page} accesses within that Scope must finally execute this {@link Gate}. If all incoming {@link ConditionWire}s are true, then access to this {@link Scope} is denied until such time any {@link ConditionWire}s becomes false."
+			 "documentation", "When placed into a {@model Scope} (including {@model Session}), all {@model Page} accesses within that Scope must finally execute this {@model Gate}. If all incoming {@model ConditionWire}s are true, then access to this {@model Scope} is denied until such time any {@model ConditionWire}s becomes false."
 		   });	
 	}
 

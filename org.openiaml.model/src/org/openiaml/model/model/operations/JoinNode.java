@@ -16,7 +16,7 @@ import org.openiaml.model.model.ExecutionEdgesSource;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Joins multiple {@link SplitNode split} execution threads back together. Halts until all threads are complete.
+ * Joins multiple {@model SplitNode split} execution threads back together. Halts until all threads are complete.
  * <!-- end-model-doc -->
  *
  *

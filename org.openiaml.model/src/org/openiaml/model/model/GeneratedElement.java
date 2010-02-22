@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A GeneratedElement may have been created manually, or initialised through model completion {@link GeneratesElements by another element}.
+ * A GeneratedElement may have been created manually, or initialised through model completion {@model GeneratesElements by another element}.
  * <!-- end-model-doc -->
  *
  * <p>

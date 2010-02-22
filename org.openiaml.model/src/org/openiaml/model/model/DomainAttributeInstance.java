@@ -16,7 +16,7 @@ import org.openiaml.model.model.wires.ExtendsEdgesSource;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Represents an instance of a {@link DomainAttribute}, which is likely contained within a {@link DomainObjectInstance}.
+ * Represents an instance of a {@model DomainAttribute}, which is likely contained within a {@model DomainObjectInstance}.
  * <!-- end-model-doc -->
  *
  * <p>

@@ -15,7 +15,7 @@ import org.openiaml.model.model.NamedElement;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Provides incoming values for {@link Parameter Parameters} of a {@link RunInstanceWire}.
+ * Provides incoming values for {@model Parameter Parameters} of a {@model RunInstanceWire}.
  * <!-- end-model-doc -->
  *
  * <p>

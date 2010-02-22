@@ -14,7 +14,7 @@ import org.openiaml.model.model.VisibleThing;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Represents a form which may contain {@link InputTextField text fields} and {@link Button buttons}.
+ * Represents a form which may contain {@model InputTextField text fields} and {@model Button buttons}.
  * <!-- end-model-doc -->
  *
  *

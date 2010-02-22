@@ -14,7 +14,7 @@ import org.openiaml.model.model.DomainObjectInstance;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Represents {@link DomainObjectInstance an instance} of a {@link Role user}.
+ * Represents {@model DomainObjectInstance an instance} of a {@model Role user}.
  * <!-- end-model-doc -->
  *
  *

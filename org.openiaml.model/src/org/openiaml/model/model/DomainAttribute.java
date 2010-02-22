@@ -18,7 +18,7 @@ import org.openiaml.model.model.wires.ParameterEdgesSource;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Represents a single attribute contained by a {@link DomainObject}.
+ * Represents a single attribute contained by a {@model DomainObject}.
  * <!-- end-model-doc -->
  *
  * <p>

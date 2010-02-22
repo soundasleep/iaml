@@ -15,7 +15,7 @@ import org.openiaml.model.model.ExecutionEdgeDestination;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Indicates that the current {@link Operation} did not execute successfully, or the {@link Condition} failed.
+ * Indicates that the current {@model Operation} did not execute successfully, or the {@model Condition} failed.
  * <!-- end-model-doc -->
  *
  * <p>

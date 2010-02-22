@@ -18,7 +18,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * and utility methods for working with them.
  * <!-- end-user-doc -->
  * <!-- begin-model-doc -->
- * Represents the range of possible {@link ArithmeticOperation arithmetic operations}.
+ * Represents the range of possible {@model ArithmeticOperation arithmetic operations}.
  * <!-- end-model-doc -->
  * @see org.openiaml.model.model.operations.OperationsPackage#getArithmeticOperationTypes()
  * @model annotation="http://openiaml.org/comment comment='added in 0.4.1'"

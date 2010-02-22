@@ -13,7 +13,7 @@ package org.openiaml.model.model;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Represents the execution flow within an {@link Operation}.
+ * Represents the execution flow within an {@model Operation}.
  * <!-- end-model-doc -->
  *
  * <p>

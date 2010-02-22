@@ -8,7 +8,6 @@ package org.openiaml.model.model.components;
 
 import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.GeneratesElements;
-import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.wires.ParameterEdgeDestination;
 
 /**
@@ -17,7 +16,7 @@ import org.openiaml.model.model.wires.ParameterEdgeDestination;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * When placed into a {@link Page} or {@link Session}, enforces that users need to login via this LoginHandler first. Also supports logout.
+ * When placed into a {@model Page} or {@model Session}, enforces that users need to login via this LoginHandler first. Also supports logout.
  * <!-- end-model-doc -->
  *
  * <p>

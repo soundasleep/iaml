@@ -74,7 +74,7 @@ public class SavedRuleSources extends InferenceTestCase {
 		// this SyncWire should have a ConditionWire connected to this condition
 		ConditionEdge cw = assertHasConditionEdge(root, cond, wireGen);
 		assertTrue(cw.isIsGenerated());
-		assertEquals("Create the XPath ConditionWire for generated SyncWires", cw.getGeneratedRule());
+		assertEquals("Create the XPath ConditionEdge for generated SyncWires", cw.getGeneratedRule());
 
 		// we can now investigate the SyncWires themselves, and make sure
 		// they have the conditions attached too
@@ -109,18 +109,18 @@ public class SavedRuleSources extends InferenceTestCase {
 		// there should be additional ConditionWires to these RunInstanceWires
 		ConditionEdge srcCw = assertHasConditionEdge(root, cond, srcRw);
 		assertTrue(srcCw.isIsGenerated());
-		assertEquals("Connect ConditionWires to RunInstanceWires created by SyncWires (edit/update)", srcCw.getGeneratedRule());
+		assertEquals("Connect ConditionEdges to RunInstanceWires created by SyncWires (edit/update)", srcCw.getGeneratedRule());
 		ConditionEdge targetCw = assertHasConditionEdge(root, cond, targetRw);
 		assertTrue(targetCw.isIsGenerated());
-		assertEquals("Connect ConditionWires to RunInstanceWires created by SyncWires (edit/update)", targetCw.getGeneratedRule());
+		assertEquals("Connect ConditionEdges to RunInstanceWires created by SyncWires (edit/update)", targetCw.getGeneratedRule());
 
 		// all the ConditionWires need parameters: the XPath source, and the element to evaluate
 		ParameterEdge param1 = getParameterEdgeFromTo(root, dae, srcCw);
 		assertTrue(param1.isIsGenerated());
-		assertEquals("Connect ParameterEdges to ConditionWires connected to RunInstanceWires created by SyncWires (edit/update)", param1.getGeneratedRule());
+		assertEquals("Connect ParameterEdges to ConditionEdges connected to RunInstanceWires created by SyncWires (edit/update)", param1.getGeneratedRule());
 		ParameterEdge param2 = getParameterEdgeFromTo(root, dae, targetCw); 
 		assertTrue(param2.isIsGenerated());
-		assertEquals("Connect ParameterEdges to ConditionWires connected to RunInstanceWires created by SyncWires (edit/update)", param2.getGeneratedRule());
+		assertEquals("Connect ParameterEdges to ConditionEdges connected to RunInstanceWires created by SyncWires (edit/update)", param2.getGeneratedRule());
 
 
 	}

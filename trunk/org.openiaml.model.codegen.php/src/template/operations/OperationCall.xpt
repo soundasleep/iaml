@@ -11,9 +11,9 @@
 «ENDDEFINE»
 
 «DEFINE callOperation(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::wires::RunInstanceWire»
-	«IF inEdges.typeSelect(model::wires::ConditionWire).size > 0» 
+	«IF inConditionEdges.size > 0» 
 		/* expand conditions */
-		if («EXPAND template::conditions::Runtime::callCondition(php, this, inStoreDb, currentFrame) FOREACH inEdges.typeSelect(model::wires::ConditionWire) SEPARATOR " && "») {
+		if («EXPAND template::conditions::Runtime::callCondition(php, this, inStoreDb, currentFrame) FOREACH inConditionEdges SEPARATOR " && "») {
 			«EXPAND callOperationContents(php, inStoreDb, currentFrame) FOR this»
 		}
 	«ELSE»
@@ -22,9 +22,9 @@
 «ENDDEFINE»
 
 «DEFINE callOperation(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::wires::NavigateWire»
-	«IF inEdges.typeSelect(model::wires::ConditionWire).size > 0» 
+	«IF inConditionEdges.size > 0» 
 		/* expand conditions */
-		if («EXPAND template::conditions::Runtime::callCondition(php, this, inStoreDb, currentFrame) FOREACH inEdges.typeSelect(model::wires::ConditionWire) SEPARATOR " && "») {
+		if («EXPAND template::conditions::Runtime::callCondition(php, this, inStoreDb, currentFrame) FOREACH inConditionEdges SEPARATOR " && "») {
 			«EXPAND callOperationContents(php, inStoreDb, currentFrame) FOR this»
 		}
 	«ELSE»

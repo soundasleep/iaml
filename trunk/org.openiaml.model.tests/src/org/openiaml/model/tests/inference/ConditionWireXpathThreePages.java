@@ -58,8 +58,8 @@ public class ConditionWireXpathThreePages extends InferenceTestCaseWithCondition
     assertNoWireBidirectional(root, page2, page3);
 
     // there should be a ConditionWire between cond and each sync wire
-    assertHasWiresFromTo(1, root, cond, sw1);
-    assertHasWiresFromTo(1, root, cond, sw2);
+    assertHasConditionEdge(root, cond, sw1);
+    assertHasConditionEdge(root, cond, sw2);
 
     // there should only be two parameters into each condition wire
     ConditionEdge cw_sw1 = assertHasConditionEdge(root, cond, sw1);

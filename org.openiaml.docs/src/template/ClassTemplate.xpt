@@ -97,6 +97,7 @@
 		</div>
 		«ENDIF»
 		
+		«IF !operationalSemantics.union(getInheritedOperationalSemantics(this)).isEmpty»
 		<div id="operational" class="semantic_block">
 			<h2>Operational Semantics</h2>
 			
@@ -109,6 +110,7 @@
 				</ul>
 			«ENDIF»
 		</div>
+		«ENDIF»
 		
 		<div id="inference" class="semantic_block">
 			<h2>Inference Semantics</h2>

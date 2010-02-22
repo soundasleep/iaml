@@ -13,10 +13,10 @@ import org.openiaml.model.tests.CodegenTestCase;
  * @example EntryGate,ExitGate
  * 		Using {@model EntryGate}s and {@model ExitGate}s across
  * 		multiple {@model Scope}s.
- * @operational EntryGate
+ * @implementation EntryGate
  * 		A hierarchy of {@model EntryGate}s are applied in the order from
  * 		the {@model InternetApplication root}.
- * @operational ExitGate
+ * @implementation ExitGate
  * 		A hierarchy of {@model ExitGate}s are applied in the reverse order from
  * 		the {@model InternetApplication root}.
  */

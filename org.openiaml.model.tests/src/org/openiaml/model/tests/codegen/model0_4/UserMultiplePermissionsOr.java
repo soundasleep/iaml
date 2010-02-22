@@ -14,7 +14,7 @@ import org.eclipse.core.resources.IFile;
  * 		An {@model AccessControlHandler} which {@model RequiresWire requires} 
  * 		only one of two {@model Permission permissions}, 
  * 		which are connected by a {@model ConstraintWire}.
- * @operational AccessControlHandler,ConstraintWire 
+ * @implementation AccessControlHandler,ConstraintWire 
  * 		If an {@model AccessControlHandler}'s {@model RequiresWire requirements}
  * 		are connected by a {@model ConstraintWire} of type "OR", only 
  * 		one of the requirements will be necessary to permit access.

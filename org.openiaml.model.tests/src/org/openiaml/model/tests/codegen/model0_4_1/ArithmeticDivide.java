@@ -8,7 +8,7 @@ package org.openiaml.model.tests.codegen.model0_4_1;
  * Try the 'DIVIDE' arithmetic.
  * 
  * @author jmwright
- * @operational Arithmetic
+ * @implementation Arithmetic
  * 		{@model Arithmetic} can be used inline to divide its
  * 		incoming operands, and act as a source of data.
  */
@@ -35,7 +35,7 @@ public class ArithmeticDivide extends AbstractArithmeticTestCase {
 	}
 
 	/**
-	 * @operational Arithmetic
+	 * @implementation Arithmetic
 	 * 		If {@model Arithmetic} is used to divide by zero, <code>NaN</code> will
 	 * 		result.
 	 */

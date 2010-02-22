@@ -23,7 +23,7 @@ import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
  * 		{@model SelectWire Selecting} an {@model DomainObjectInstance instance} of a
  * 		{@model DomainObject} which has been {@model ExtendsWire extended}.
  * 
- * @operational SelectWire,DomainObject
+ * @implementation SelectWire,DomainObject
  * 		If a {@model SelectWire} is selecting from a {@model DomainObject} which extends
  * 		another DomainObject, the {@model DomainObjectInstance} will contain
  * 		the inherited {@model DomainAttributeInstance attribute instances}.
@@ -36,12 +36,12 @@ import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
  * 		{@model SelectWire Selecting} a {@model DomainObjectInstance} with attributes across inherited
  * 		{@model DomainObject DomainObjects}.
  * 
- * @operational SelectWire,ParameterWire
+ * @implementation SelectWire,ParameterWire
  * 		If a {@model SelectWire} is using a query with more than one parameter,
  * 		and the {@model ParameterWire parameter wires} are not named, the {@model NamedElement name} of the 
  * 		data source will be used to match up a query.
  * 
- * @operational SelectWire,DomainObjectInstance
+ * @implementation SelectWire,DomainObjectInstance
  * 		A {@model DomainObject} which inherits another can be {@model DomainObjectInstance instantiated} by
  * 		the combination of all inherited attributes. 
  * 

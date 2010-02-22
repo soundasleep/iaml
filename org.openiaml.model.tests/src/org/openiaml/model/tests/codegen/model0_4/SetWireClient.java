@@ -10,7 +10,7 @@ import org.openiaml.model.tests.CodegenTestCase;
 /**
  * A SetWire operating on a client.
  * 
- * @operational SetWire 
+ * @implementation SetWire 
  * 		If a {@model InputTextField} is connected to another with 
  * 		a {@model SetWire} on the same page, changes in the source
  * 		InputTextField will update the target InputTextField. 

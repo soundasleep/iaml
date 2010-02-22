@@ -8,7 +8,7 @@ import org.openiaml.model.tests.CodegenTestCase;
 /**
  * A JoinNode executing on the client-side.
  * 
- * @operational JoinNode,SplitNode A {@model SplitNode} executing on 
+ * @implementation JoinNode,SplitNode A {@model SplitNode} executing on 
  * 		the client will split execution into separate threads until 
  * 		each thread meets up at a {@model JoinNode}. 
  * @example JoinNode,SplitNode,ExecutionEdge {@model SplitNode Splitting} execution into

@@ -936,7 +936,7 @@
         <details key="documentation" value="A particular Role that a user may have; may be {@model ExtendsWire inherited} from other Roles."/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Permission" eSuperTypes="#//NamedElement #//wires/ParameterEdgesSource #//users/RequiresEdgeDestination #//users/ProvidesEdgeDestination">
+    <eClassifiers xsi:type="ecore:EClass" name="Permission" eSuperTypes="#//NamedElement #//wires/ParameterEdgesSource #//users/RequiresEdgeDestination #//users/ProvidesEdgeDestination #//ContainsWires">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A single Permission that a user may have; may also be {@model ProvidesWire provided} by a {@model Role}."/>
       </eAnnotations>

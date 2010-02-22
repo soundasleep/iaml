@@ -61,414 +61,50 @@
 			java.util.List<org.eclipse.emf.ecore.EObject> edges, 
 			org.eclipse.gmf.runtime.notation.View view,
 			org.eclipse.emf.common.util.EList<? extends org.eclipse.emf.ecore.EObject> list) {
-		for (org.eclipse.emf.ecore.EObject e : list) {
-			// NOTE: model-specific
-			if (e instanceof org.openiaml.model.model.WireEdgesSource) {
-				// get all incoming edges
-				elements.addAll(getAllShortcutsFromWireEdges(doneAlready, edges, view, e,
-						((org.openiaml.model.model.WireEdgesSource) e).getOutEdges()));
-			}
-			if (e instanceof org.openiaml.model.model.WireEdgeDestination) {
-				// get all incoming edges
-				elements.addAll(getAllShortcutsFromWireEdges(doneAlready, edges, view, e,
-						((org.openiaml.model.model.WireEdgeDestination) e).getInEdges()));
-			}
-			if (e instanceof org.openiaml.model.model.ExecutionEdgesSource) {
-				// get all incoming edges
-				elements.addAll(getAllShortcutsFromExecutionEdges(doneAlready, edges, view, e,
-						((org.openiaml.model.model.ExecutionEdgesSource) e).getOutExecutions()));
-			}
-			if (e instanceof org.openiaml.model.model.ExecutionEdgeDestination) {
-				// get all incoming edges
-				elements.addAll(getAllShortcutsFromExecutionEdges(doneAlready, edges, view, e,
-						((org.openiaml.model.model.ExecutionEdgeDestination) e).getInExecutions()));
-			}
-			if (e instanceof org.openiaml.model.model.DataFlowEdgesSource) {
-				// get all incoming edges
-				elements.addAll(getAllShortcutsFromDataFlowEdges(doneAlready, edges, view, e,
-						((org.openiaml.model.model.DataFlowEdgesSource) e).getOutFlows()));
-			}
-			if (e instanceof org.openiaml.model.model.DataFlowEdgeDestination) {
-				// get all incoming edges
-				elements.addAll(getAllShortcutsFromDataFlowEdges(doneAlready, edges, view, e,
-						((org.openiaml.model.model.DataFlowEdgeDestination) e).getInFlows()));
-			}
-			if (e instanceof org.openiaml.model.model.wires.ParameterEdgesSource) {
-				// get all incoming edges
-				elements.addAll(getAllShortcutsFromParameterEdges(doneAlready, edges, view, e,
-						((org.openiaml.model.model.wires.ParameterEdgesSource) e).getOutParameterEdges()));
-			}
-			if (e instanceof org.openiaml.model.model.wires.ParameterEdgeDestination) {
-				// get all incoming edges
-				elements.addAll(getAllShortcutsFromParameterEdges(doneAlready, edges, view, e,
-						((org.openiaml.model.model.wires.ParameterEdgeDestination) e).getInParameterEdges()));
-			}
-			if (e instanceof org.openiaml.model.model.wires.ExtendsEdgesSource) {
-				// get all incoming edges
-				elements.addAll(getAllShortcutsFromExtendsEdges(doneAlready, edges, view, e,
-						((org.openiaml.model.model.wires.ExtendsEdgesSource) e).getOutExtendsEdges()));
-			}
-			if (e instanceof org.openiaml.model.model.wires.ExtendsEdgeDestination) {
-				// get all incoming edges
-				elements.addAll(getAllShortcutsFromExtendsEdges(doneAlready, edges, view, e,
-						((org.openiaml.model.model.wires.ExtendsEdgeDestination) e).getInExtendsEdges()));
-			}
-			if (e instanceof org.openiaml.model.model.users.RequiresEdgesSource) {
-				// get all incoming edges
-				elements.addAll(getAllShortcutsFromRequiresEdges(doneAlready, edges, view, e,
-						((org.openiaml.model.model.users.RequiresEdgesSource) e).getOutRequiresEdges()));
-			}
-			if (e instanceof org.openiaml.model.model.users.RequiresEdgeDestination) {
-				// get all incoming edges
-				elements.addAll(getAllShortcutsFromRequiresEdges(doneAlready, edges, view, e,
-						((org.openiaml.model.model.users.RequiresEdgeDestination) e).getInRequiresEdges()));
-			}
-			if (e instanceof org.openiaml.model.model.users.ProvidesEdgesSource) {
-				// get all incoming edges
-				elements.addAll(getAllShortcutsFromProvidesEdges(doneAlready, edges, view, e,
-						((org.openiaml.model.model.users.ProvidesEdgesSource) e).getOutProvidesEdges()));
-			}
-			if (e instanceof org.openiaml.model.model.users.ProvidesEdgeDestination) {
-				// get all incoming edges
-				elements.addAll(getAllShortcutsFromProvidesEdges(doneAlready, edges, view, e,
-						((org.openiaml.model.model.users.ProvidesEdgeDestination) e).getInProvidesEdges()));
-			}
-			if (e instanceof org.openiaml.model.model.wires.ConstraintEdgesSource) {
-				// get all incoming edges
-				elements.addAll(getAllShortcutsFromConstraintEdges(doneAlready, edges, view, e,
-						((org.openiaml.model.model.wires.ConstraintEdgesSource) e).getOutConstraintEdges()));
-			}
-			if (e instanceof org.openiaml.model.model.wires.ConstraintEdgeDestination) {
-				// get all incoming edges
-				elements.addAll(getAllShortcutsFromConstraintEdges(doneAlready, edges, view, e,
-						((org.openiaml.model.model.wires.ConstraintEdgeDestination) e).getInConstraintEdges()));
-			}
-			if (e instanceof org.openiaml.model.model.wires.ConditionEdgesSource) {
-				// get all incoming edges
-				elements.addAll(getAllShortcutsFromConditionEdges(doneAlready, edges, view, e,
-						((org.openiaml.model.model.wires.ConditionEdgesSource) e).getOutConditionEdges()));
-			}
-			if (e instanceof org.openiaml.model.model.wires.ConditionEdgeDestination) {
-				// get all incoming edges
-				elements.addAll(getAllShortcutsFromConditionEdges(doneAlready, edges, view, e,
-						((org.openiaml.model.model.wires.ConditionEdgeDestination) e).getInConditionEdges()));
-			}
-		}
-	}
-
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] For a list of edges, what elements are they all connected to?\n\nNOTE: return type is model-specific")»
-	private static java.util.List<org.openiaml.model.model.WireEdge> getAllShortcutsFromWireEdges(
-			java.util.List<org.eclipse.emf.ecore.EObject> doneAlready, 
-			java.util.List<org.eclipse.emf.ecore.EObject> edges, 
-			org.eclipse.gmf.runtime.notation.View view, 
-			org.eclipse.emf.ecore.EObject source,
-			java.util.List<org.openiaml.model.model.WireEdge> outEdges) {
-		java.util.List result = new java.util.LinkedList();
-		
-		edges.addAll(outEdges);
-
-		// get all nodes at the start and end of the edge
-		// that are not the original object source
-		// NOTE: model-specific
-		for (org.openiaml.model.model.WireEdge wire : outEdges) {
-			// only look into these edges if we can actually render them...
-			if («EXPAND xpt::editor::VisualIDRegistry::getLinkWithClassVisualIDMethodCall FOR editorGen.diagram»(wire) != -1) {
-				considerElementForShortcut(wire.getFrom(), wire, view, source, doneAlready, result, edges);
-				considerElementForShortcut(wire.getTo(), wire, view, source, doneAlready, result, edges);
-			}
 			
-			// additional special logic: if we have a WireEdgeDestination, get all of the incoming edges
-			// that are RunInstanceWires, and render these as shortcut elements too (i.e. parameters)
-			// (this covers SelectWires, etc...: see Issue 69)
-			if (wire instanceof org.openiaml.model.model.WireEdgeDestination) {
-				org.openiaml.model.model.WireEdgeDestination run = (org.openiaml.model.model.WireEdgeDestination) wire;
-				
-				if (run instanceof org.openiaml.model.model.wires.ParameterEdgesSource) {
-					// specifically, if this wire is also a destination of parameters, follow these up
-					org.openiaml.model.model.wires.ParameterEdgesSource prun =
-						(org.openiaml.model.model.wires.ParameterEdgesSource) run;
-					
-					result.addAll(getAllShortcutsFromParameterEdges(doneAlready, edges, view, wire, prun.getOutParameterEdges())); 
-				}
-
-				if (run instanceof org.openiaml.model.model.wires.ParameterEdgeDestination) {
-					// specifically, if this wire is also a source of parameters, follow these up
-					org.openiaml.model.model.wires.ParameterEdgeDestination prun =
-						(org.openiaml.model.model.wires.ParameterEdgeDestination) run;
-					
-					result.addAll(getAllShortcutsFromParameterEdges(doneAlready, edges, view, wire, prun.getInParameterEdges())); 
-				}
-				
-				org.openiaml.model.model.WireEdgeDestination e = run;
-				if (e instanceof org.openiaml.model.model.wires.ConditionEdgesSource) {
-					// get all incoming edges
-					result.addAll(getAllShortcutsFromConditionEdges(doneAlready, edges, view, e,
-							((org.openiaml.model.model.wires.ConditionEdgesSource) e).getOutConditionEdges()));
-				}
-				if (e instanceof org.openiaml.model.model.wires.ConditionEdgeDestination) {
-					// get all incoming edges
-					result.addAll(getAllShortcutsFromConditionEdges(doneAlready, edges, view, e,
-							((org.openiaml.model.model.wires.ConditionEdgeDestination) e).getInConditionEdges()));
-				}
-			} 
+		// we now pass this to a helper class (issue 151)
+		org.openiaml.model.diagram.helpers.GetShortcuts.getAllImportantRelationships(doneAlready,
+			elements, edges, view, list, «editorGen.diagram.visualIDRegistryClassName».getInstance(), getDiagramUpdaterInstance());
+	}
+	
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 151]")»
+	private static org.openiaml.model.diagram.helpers.IDiagramUpdater diagramUpdater = null;
+	
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 151]")»
+	private static org.openiaml.model.diagram.helpers.IDiagramUpdater getDiagramUpdaterInstance() {
+		if (diagramUpdater == null) {
+			diagramUpdater = new org.openiaml.model.diagram.helpers.IDiagramUpdater() {
+				«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Add descriptors for elements that exist in the current diagram editor registry.")»
+				public boolean considerElementForShortcut(org.eclipse.emf.ecore.EObject childElement, 
+						org.eclipse.emf.ecore.EObject wire,
+						org.eclipse.gmf.runtime.notation.View view, 
+						org.eclipse.emf.ecore.EObject source,
+						java.util.List doneAlready,
+						java.util.List result, 
+						java.util.List edges) {
 			
-			// ParameterEdges are now done in #getAllShortcutsFromParameterEdges()
-		}
-
-		return result;
-	}
-	
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] For a list of edges, what elements are they all connected to?\n\nNOTE: return type is model-specific")»
-	private static java.util.List<org.openiaml.model.model.wires.ParameterEdge> getAllShortcutsFromParameterEdges(
-			java.util.List<org.eclipse.emf.ecore.EObject> doneAlready, 
-			java.util.List<org.eclipse.emf.ecore.EObject> edges, 
-			org.eclipse.gmf.runtime.notation.View view, 
-			org.eclipse.emf.ecore.EObject source,
-			java.util.List<org.openiaml.model.model.wires.ParameterEdge> outEdges) {
-		java.util.List result = new java.util.LinkedList();
-		
-		edges.addAll(outEdges);
-
-		// get all nodes at the start and end of the edge
-		// that are not the original object source
-		// NOTE: model-specific
-		for (org.openiaml.model.model.wires.ParameterEdge wire : outEdges) {
-			// only look into these edges if we can actually render them...
-			if («EXPAND xpt::editor::VisualIDRegistry::getLinkWithClassVisualIDMethodCall FOR editorGen.diagram»(wire) != -1) {
-				considerElementForShortcut(wire.getFrom(), wire, view, source, doneAlready, result, edges);
-				considerElementForShortcut(wire.getTo(), wire, view, source, doneAlready, result, edges);
-			}
-		}
-
-		return result;
-	}
-		
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] For a list of edges, what elements are they all connected to?\n\nNOTE: return type is model-specific")»
-	private static java.util.List<org.openiaml.model.model.wires.ExtendsEdge> getAllShortcutsFromExtendsEdges(
-			java.util.List<org.eclipse.emf.ecore.EObject> doneAlready, 
-			java.util.List<org.eclipse.emf.ecore.EObject> edges, 
-			org.eclipse.gmf.runtime.notation.View view, 
-			org.eclipse.emf.ecore.EObject source,
-			java.util.List<org.openiaml.model.model.wires.ExtendsEdge> outEdges) {
-		java.util.List result = new java.util.LinkedList();
-		
-		edges.addAll(outEdges);
-
-		// get all nodes at the start and end of the edge
-		// that are not the original object source
-		// NOTE: model-specific
-		for (org.openiaml.model.model.wires.ExtendsEdge wire : outEdges) {
-			// only look into these edges if we can actually render them...
-			if («EXPAND xpt::editor::VisualIDRegistry::getLinkWithClassVisualIDMethodCall FOR editorGen.diagram»(wire) != -1) {
-				considerElementForShortcut(wire.getFrom(), wire, view, source, doneAlready, result, edges);
-				considerElementForShortcut(wire.getTo(), wire, view, source, doneAlready, result, edges);
-			}
-		}
-
-		return result;
-	}
-		
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] For a list of edges, what elements are they all connected to?\n\nNOTE: return type is model-specific")»
-	private static java.util.List<org.openiaml.model.model.wires.RequiresEdge> getAllShortcutsFromRequiresEdges(
-			java.util.List<org.eclipse.emf.ecore.EObject> doneAlready, 
-			java.util.List<org.eclipse.emf.ecore.EObject> edges, 
-			org.eclipse.gmf.runtime.notation.View view, 
-			org.eclipse.emf.ecore.EObject source,
-			java.util.List<org.openiaml.model.model.wires.RequiresEdge> outEdges) {
-		java.util.List result = new java.util.LinkedList();
-		
-		edges.addAll(outEdges);
-
-		// get all nodes at the start and end of the edge
-		// that are not the original object source
-		// NOTE: model-specific
-		for (org.openiaml.model.model.wires.RequiresEdge wire : outEdges) {
-			// only look into these edges if we can actually render them...
-			if («EXPAND xpt::editor::VisualIDRegistry::getLinkWithClassVisualIDMethodCall FOR editorGen.diagram»(wire) != -1) {
-				considerElementForShortcut(wire.getFrom(), wire, view, source, doneAlready, result, edges);
-				considerElementForShortcut(wire.getTo(), wire, view, source, doneAlready, result, edges);
-			}
-		}
-
-		return result;
-	}
-		
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] For a list of edges, what elements are they all connected to?\n\nNOTE: return type is model-specific")»
-	private static java.util.List<org.openiaml.model.model.wires.ProvidesEdge> getAllShortcutsFromProvidesEdges(
-			java.util.List<org.eclipse.emf.ecore.EObject> doneAlready, 
-			java.util.List<org.eclipse.emf.ecore.EObject> edges, 
-			org.eclipse.gmf.runtime.notation.View view, 
-			org.eclipse.emf.ecore.EObject source,
-			java.util.List<org.openiaml.model.model.wires.ProvidesEdge> outEdges) {
-		java.util.List result = new java.util.LinkedList();
-		
-		edges.addAll(outEdges);
-
-		// get all nodes at the start and end of the edge
-		// that are not the original object source
-		// NOTE: model-specific
-		for (org.openiaml.model.model.wires.ProvidesEdge wire : outEdges) {
-			// only look into these edges if we can actually render them...
-			if («EXPAND xpt::editor::VisualIDRegistry::getLinkWithClassVisualIDMethodCall FOR editorGen.diagram»(wire) != -1) {
-				considerElementForShortcut(wire.getFrom(), wire, view, source, doneAlready, result, edges);
-				considerElementForShortcut(wire.getTo(), wire, view, source, doneAlready, result, edges);
-			}
-		}
-
-		return result;
-	}
-	
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] For a list of edges, what elements are they all connected to?\n\nNOTE: return type is model-specific")»
-	private static java.util.List<org.openiaml.model.model.wires.ConstraintEdge> getAllShortcutsFromConstraintEdges(
-			java.util.List<org.eclipse.emf.ecore.EObject> doneAlready, 
-			java.util.List<org.eclipse.emf.ecore.EObject> edges, 
-			org.eclipse.gmf.runtime.notation.View view, 
-			org.eclipse.emf.ecore.EObject source,
-			java.util.List<org.openiaml.model.model.wires.ConstraintEdge> outEdges) {
-		java.util.List result = new java.util.LinkedList();
-		
-		edges.addAll(outEdges);
-
-		// get all nodes at the start and end of the edge
-		// that are not the original object source
-		// NOTE: model-specific
-		for (org.openiaml.model.model.wires.ConstraintEdge wire : outEdges) {
-			// only look into these edges if we can actually render them...
-			if («EXPAND xpt::editor::VisualIDRegistry::getLinkWithClassVisualIDMethodCall FOR editorGen.diagram»(wire) != -1) {
-				considerElementForShortcut(wire.getFrom(), wire, view, source, doneAlready, result, edges);
-				considerElementForShortcut(wire.getTo(), wire, view, source, doneAlready, result, edges);
-			}
-		}
-
-		return result;
-	}
-		
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] For a list of edges, what elements are they all connected to?\n\nNOTE: return type is model-specific")»
-	private static java.util.List<org.openiaml.model.model.wires.ConditionEdge> getAllShortcutsFromConditionEdges(
-			java.util.List<org.eclipse.emf.ecore.EObject> doneAlready, 
-			java.util.List<org.eclipse.emf.ecore.EObject> edges, 
-			org.eclipse.gmf.runtime.notation.View view, 
-			org.eclipse.emf.ecore.EObject source,
-			java.util.List<org.openiaml.model.model.wires.ConditionEdge> outEdges) {
-		java.util.List result = new java.util.LinkedList();
-		
-		edges.addAll(outEdges);
-
-		// get all nodes at the start and end of the edge
-		// that are not the original object source
-		// NOTE: model-specific
-		for (org.openiaml.model.model.wires.ConditionEdge wire : outEdges) {
-			// only look into these edges if we can actually render them...
-			if («EXPAND xpt::editor::VisualIDRegistry::getLinkWithClassVisualIDMethodCall FOR editorGen.diagram»(wire) != -1) {
-				considerElementForShortcut(wire.getFrom(), wire, view, source, doneAlready, result, edges);
-				considerElementForShortcut(wire.getTo(), wire, view, source, doneAlready, result, edges);
-
-				// additional special logic: if we have a WireEdgeDestination, get all of the incoming edges
-				// that are RunInstanceWires, and render these as shortcut elements too (i.e. parameters)
-				// (this covers SelectWires, etc...: see Issue 69)
-				if (wire instanceof org.openiaml.model.model.WireEdgeDestination) {
-					org.openiaml.model.model.WireEdgeDestination run = (org.openiaml.model.model.WireEdgeDestination) wire;
+					if (childElement != null && !childElement.equals(source)) {
+						if (doneAlready.contains(childElement))
+							return true;
+						int visualID = «EXPAND xpt::editor::VisualIDRegistry::getNodeVisualIDMethodCall FOR editorGen.diagram»(view,
+								childElement);
+						if (visualID != -1) {
+							result.add(new «getNodeDescriptorQualifiedClassName()»(childElement,
+									visualID));
+							doneAlready.add(childElement);
+							if (!edges.contains(wire))
+								edges.add(wire);
+							return true;
+						}
+					}
 					
-					if (run instanceof org.openiaml.model.model.wires.ParameterEdgesSource) {
-						// specifically, if this wire is also a destination of parameters, follow these up
-						org.openiaml.model.model.wires.ParameterEdgesSource prun =
-							(org.openiaml.model.model.wires.ParameterEdgesSource) run;
-						
-						result.addAll(getAllShortcutsFromParameterEdges(doneAlready, edges, view, wire, prun.getOutParameterEdges())); 
-					}
-	
-					if (run instanceof org.openiaml.model.model.wires.ParameterEdgeDestination) {
-						// specifically, if this wire is also a source of parameters, follow these up
-						org.openiaml.model.model.wires.ParameterEdgeDestination prun =
-							(org.openiaml.model.model.wires.ParameterEdgeDestination) run;
-						
-						result.addAll(getAllShortcutsFromParameterEdges(doneAlready, edges, view, wire, prun.getInParameterEdges())); 
-					}
-				} 
-			}
+					return false;
+				}
+			};
 		}
-
-		return result;
+		return diagramUpdater;
 	}
 	
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] For a list of edges, what elements are they all connected to?\n\nNOTE: return type is model-specific")»
-	private static java.util.List<org.openiaml.model.model.ExecutionEdge> getAllShortcutsFromExecutionEdges(
-			java.util.List<org.eclipse.emf.ecore.EObject> doneAlready, 
-			java.util.List<org.eclipse.emf.ecore.EObject> edges, 
-			org.eclipse.gmf.runtime.notation.View view, 
-			org.eclipse.emf.ecore.EObject source,
-			java.util.List<org.openiaml.model.model.ExecutionEdge> outEdges) {
-		java.util.List result = new java.util.LinkedList();
-		
-		edges.addAll(outEdges);
-
-		// get all nodes at the start and end of the edge
-		// that are not the original object source
-		// NOTE: model-specific
-		for (org.openiaml.model.model.ExecutionEdge wire : outEdges) {
-			// only look into these edges if we can actually render them...
-			if («EXPAND xpt::editor::VisualIDRegistry::getLinkWithClassVisualIDMethodCall FOR editorGen.diagram»(wire) != -1) {
-				if (considerElementForShortcut(wire.getFrom(), wire, view, source, doneAlready, result, edges))
-					continue;
-				if (considerElementForShortcut(wire.getTo(), wire, view, source, doneAlready, result, edges))
-					continue;
-			}
-		}
-
-		return result;
-	}
-	
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] For a list of edges, what elements are they all connected to?\n\nNOTE: return type is model-specific")»
-	private static java.util.List<org.openiaml.model.model.DataFlowEdge> getAllShortcutsFromDataFlowEdges(
-			java.util.List<org.eclipse.emf.ecore.EObject> doneAlready, 
-			java.util.List<org.eclipse.emf.ecore.EObject> edges, 
-			org.eclipse.gmf.runtime.notation.View view, 
-			org.eclipse.emf.ecore.EObject source,
-			java.util.List<org.openiaml.model.model.DataFlowEdge> outEdges) {
-		java.util.List result = new java.util.LinkedList();
-		
-		edges.addAll(outEdges);
-
-		// get all nodes at the start and end of the edge
-		// that are not the original object source
-		// NOTE: model-specific
-		for (org.openiaml.model.model.DataFlowEdge wire : outEdges) {
-			// only look into these edges if we can actually render them...
-			if («EXPAND xpt::editor::VisualIDRegistry::getLinkWithClassVisualIDMethodCall FOR editorGen.diagram»(wire) != -1) {
-				considerElementForShortcut(wire.getFrom(), wire, view, source, doneAlready, result, edges);
-				considerElementForShortcut(wire.getTo(), wire, view, source, doneAlready, result, edges);
-			}
-		}
-
-		return result;
-	}
-	
-	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] Add descriptors for elements that exist in the current diagram editor registry.")»
-	private static boolean considerElementForShortcut(org.eclipse.emf.ecore.EObject childElement, 
-			org.eclipse.emf.ecore.EObject wire,
-			org.eclipse.gmf.runtime.notation.View view, 
-			org.eclipse.emf.ecore.EObject source,
-			java.util.List doneAlready,
-			java.util.List result, 
-			java.util.List edges) {
-
-		if (childElement != null && !childElement.equals(source)) {
-			if (doneAlready.contains(childElement))
-				return true;
-			int visualID = «EXPAND xpt::editor::VisualIDRegistry::getNodeVisualIDMethodCall FOR editorGen.diagram»(view,
-					childElement);
-			if (visualID != -1) {
-				result.add(new «getNodeDescriptorQualifiedClassName()»(childElement,
-						visualID));
-				doneAlready.add(childElement);
-				if (!edges.contains(wire))
-					edges.add(wire);
-				return true;
-			}
-		}
-		
-		return false;
-	}
 «ENDAROUND»
 /**
  * Issue 57: In order to allow creation of shortcut elements that are not

@@ -389,6 +389,7 @@ public class UsersPackageImpl extends EPackageImpl implements UsersPackage {
 		permissionEClass.getESuperTypes().add(theWiresPackage.getParameterEdgesSource());
 		permissionEClass.getESuperTypes().add(this.getRequiresEdgeDestination());
 		permissionEClass.getESuperTypes().add(this.getProvidesEdgeDestination());
+		permissionEClass.getESuperTypes().add(theModelPackage.getContainsWires());
 		userInstanceEClass.getESuperTypes().add(theModelPackage.getDomainObjectInstance());
 
 		// Initialize classes and features; add operations and parameters

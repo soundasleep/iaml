@@ -209,7 +209,10 @@ getFailEdge(model::CompositeOperation this) :
 isFailEdge(model::WireEdge this ) :
 	false;
 	
-isFailEdge(model::wires::CompositeWire this ) :
+isFailEdge(model::wires::NavigateWire this ) :
+	name == "fail" ;
+
+isFailEdge(model::wires::RunInstanceWire this ) :
 	name == "fail" ;
 
 /** get the containing session of the given element, or null if none */

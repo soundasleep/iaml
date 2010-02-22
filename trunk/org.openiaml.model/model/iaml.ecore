@@ -642,7 +642,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//users/RequiresEdgeDestination"
           eOpposite="#//users/RequiresEdgeDestination/inRequiresEdges"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ConstraintEdge" eSuperTypes="#//wires/ParameterEdgeDestination #//NamedElement #//GeneratesElements">
+    <eClassifiers xsi:type="ecore:EClass" name="ConstraintEdge" eSuperTypes="#//GeneratedElement">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.4"/>
         <details key="changed" value="0.4.3 to no longer be a Wire; added 'from' and 'to' references; renamed to ConstraintEdge"/>

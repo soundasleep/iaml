@@ -10,7 +10,7 @@ import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.ConditionWire;
+import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SyncWire;
 
@@ -38,7 +38,7 @@ public class ConditionWireFalseServer extends InferenceTestCase {
 		assertNotSame(field1, field2);
 
 		Condition cond = assertHasCondition(root, "Always False");
-		ConditionWire cw = (ConditionWire) getWireFromTo(root, cond, wire);
+		ConditionEdge cw = assertHasConditionEdge(root, cond, wire);
 
 		// [already in model]
 		// there should be a condition wire from cond to sync
@@ -63,11 +63,11 @@ public class ConditionWireFalseServer extends InferenceTestCase {
 
 		// [new]
 		// there should be a condition wire to the new SyncWire
-		ConditionWire cw2 = assertHasConditionWire(root, cond, sw);
+		assertGenerated(assertHasConditionEdge(root, cond, sw));
 
 		// there should be additional ConditionWires to these RunInstanceWires
-		ConditionWire srcCw = assertHasConditionWire(page1, cond, srcRw);
-		ConditionWire targetCw = assertHasConditionWire(page1, cond, targetRw);
+		assertGenerated(assertHasConditionEdge(page1, cond, srcRw));
+		assertGenerated(assertHasConditionEdge(page1, cond, targetRw));
 
 		// there doesn't need to be any parameters to these ConditionWires
 
@@ -92,12 +92,9 @@ public class ConditionWireFalseServer extends InferenceTestCase {
 		assertHasParameterEdge(root, field1value, targetInitRun);
 		
 		// but they should also have condition wires
-		assertHasConditionWire(page1, cond, srcInitRun);
-		assertHasConditionWire(page1, cond, targetInitRun);
+		assertHasConditionEdge(page1, cond, srcInitRun);
+		assertHasConditionEdge(page1, cond, targetInitRun);
 		
-		assertNotNull(cw2);
-		assertNotNull(srcCw);
-		assertNotNull(targetCw);
 
 	}
 

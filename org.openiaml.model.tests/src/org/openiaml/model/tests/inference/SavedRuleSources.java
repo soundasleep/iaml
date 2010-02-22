@@ -10,7 +10,7 @@ import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.ConditionWire;
+import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SyncWire;
@@ -72,7 +72,7 @@ public class SavedRuleSources extends InferenceTestCase {
 		assertEquals("Connect SyncWires for a dynamic source, referenced by XPath", wireGen.getGeneratedRule());
 
 		// this SyncWire should have a ConditionWire connected to this condition
-		ConditionWire cw = (ConditionWire) getWireFromTo(root, cond, wireGen);
+		ConditionEdge cw = assertHasConditionEdge(root, cond, wireGen);
 		assertTrue(cw.isIsGenerated());
 		assertEquals("Create the XPath ConditionWire for generated SyncWires", cw.getGeneratedRule());
 
@@ -107,10 +107,10 @@ public class SavedRuleSources extends InferenceTestCase {
 		assertEquals("Run instance wire from edit to update", targetRw.getGeneratedRule());
 
 		// there should be additional ConditionWires to these RunInstanceWires
-		ConditionWire srcCw = (ConditionWire) getWireFromTo(root, cond, srcRw);
+		ConditionEdge srcCw = assertHasConditionEdge(root, cond, srcRw);
 		assertTrue(srcCw.isIsGenerated());
 		assertEquals("Connect ConditionWires to RunInstanceWires created by SyncWires (edit/update)", srcCw.getGeneratedRule());
-		ConditionWire targetCw = (ConditionWire) getWireFromTo(root, cond, targetRw);
+		ConditionEdge targetCw = assertHasConditionEdge(root, cond, targetRw);
 		assertTrue(targetCw.isIsGenerated());
 		assertEquals("Connect ConditionWires to RunInstanceWires created by SyncWires (edit/update)", targetCw.getGeneratedRule());
 

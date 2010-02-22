@@ -9,7 +9,7 @@ import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.ConditionWire;
+import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.RunInstanceWire;
 import org.openiaml.model.model.wires.SyncWire;
 
@@ -32,12 +32,7 @@ public class ConditionWireFalse extends InferenceTestCase {
 		InputTextField target = assertHasInputTextField(page, "target");
 		SyncWire wire = (SyncWire) queryOne(page, "//iaml:wires[iaml:name='sync']");
 		Condition cond = (Condition) queryOne(page, "//iaml:conditions[iaml:name='Always False']");
-		ConditionWire cw = (ConditionWire) queryOne(page, "//iaml:wires[iaml:name='condition']");
-
-		// [already in model]
-		// there should be a condition wire from cond to sync
-		assertEquals(cw.getFrom(), cond);
-		assertEquals(cw.getTo(), wire);
+		ConditionEdge cw = assertHasConditionEdge(page, cond, wire, "condition");
 
 		// [inferred]
 		// we should have EventTrigger 'edit' in source
@@ -54,11 +49,9 @@ public class ConditionWireFalse extends InferenceTestCase {
 
 		// [new]
 		// there should be additional ConditionWires to these RunInstanceWires
-		ConditionWire srcCw = (ConditionWire) getWireFromTo(page, cond, srcRw);
-		ConditionWire targetCw = (ConditionWire) getWireFromTo(page, cond, targetRw);
-		assertNotNull(srcCw);
-		assertNotNull(targetCw);
-
+		assertGenerated(assertHasConditionEdge(page, cond, srcRw));
+		assertGenerated(assertHasConditionEdge(page, cond, targetRw));
+		
 		// there doesn't need to be any parameters to these ConditionWires
 
 	}

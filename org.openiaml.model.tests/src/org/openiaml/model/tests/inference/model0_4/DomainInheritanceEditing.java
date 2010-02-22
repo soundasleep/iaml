@@ -3,6 +3,8 @@
  */
 package org.openiaml.model.tests.inference.model0_4;
 
+import java.util.Set;
+
 import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.Condition;
@@ -20,7 +22,7 @@ import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.ConditionWire;
+import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.NewInstanceWire;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.RunInstanceWire;
@@ -101,7 +103,8 @@ public class DomainInheritanceEditing extends InferenceTestCase {
 		assertGenerated(exists);
 		
 		// NOT connected to the run instance wire
-		assertHasNoWiresFromTo(root, exists, run, ConditionWire.class);
+		Set<ConditionEdge> conds = getConditionEdgesFromTo(root, exists, run);
+		assertEquals(conds.toString(), 0, conds.size());
 	}
 	
 	/**
@@ -154,8 +157,8 @@ public class DomainInheritanceEditing extends InferenceTestCase {
 		assertGenerated(exists);
 		
 		// connected to the run instance wire
-		ConditionWire conditionWire = assertHasConditionWire(root, exists, run, "check new instance exists");
-		assertGenerated(conditionWire);
+		ConditionEdge conditionEdge = assertHasConditionEdge(root, exists, run, "check new instance exists");
+		assertGenerated(conditionEdge);
 	}
 	
 	/**

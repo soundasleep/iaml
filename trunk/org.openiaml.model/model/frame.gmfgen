@@ -717,8 +717,7 @@
           <metaFeatures href="iaml.genmodel#//model/wires/SelectWire/query"/>
         </modelFacet>
       </labels>
-    <behaviour diagramKind="Iaml_Wire" editPolicyClassName="WireOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.wire.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
-</links>
+    </links>
     <links createCommandClassName="SetWireCreateCommand" editPartClassName="SetWireEditPart" itemSemanticEditPolicyClassName="SetWireItemSemanticEditPolicy" notationViewFactoryClassName="SetWireViewFactory" reorientCommandClassName="SetWireReorientCommand" visualID="4005">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
       <elementType editHelperClassName="SetWireEditHelper" xsi:type="gmfgen:MetamodelType"/>

@@ -579,7 +579,7 @@
         <details key="documentation" value="When the {@model EventTrigger source event} executes, the user will be navigated to the target {@model Frame}."/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="SelectWire" eSuperTypes="#//wires/CompositeWire #//WireEdgeDestination #//wires/ParameterEdgeDestination">
+    <eClassifiers xsi:type="ecore:EClass" name="SelectWire" eSuperTypes="#//WireEdgeDestination #//wires/ParameterEdgeDestination #//wires/SingleWire #//NamedElement #//GeneratesElements">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.2"/>
         <details key="comment" value="parameters can be provided by ParameterWires"/>

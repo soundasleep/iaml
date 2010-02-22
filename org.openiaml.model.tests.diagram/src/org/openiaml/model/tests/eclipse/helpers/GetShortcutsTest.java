@@ -15,6 +15,7 @@ import org.openiaml.model.diagram.helpers.GetShortcuts;
 import org.openiaml.model.model.ModelFactory;
 import org.openiaml.model.tests.eclipse.EclipseTestCase;
 import org.openiaml.model.tests.model.ContainmentTestCase;
+import org.openiaml.model.tests.release.GmfGenTestCase;
 import org.openiaml.model.tests.release.GmfMapTestCase;
 import org.openiaml.model.xpath.IterableElementList;
 import org.w3c.dom.Document;
@@ -132,15 +133,8 @@ public class GetShortcutsTest extends EclipseTestCase {
 					if (edgeTypes.containsKey(nodeName))
 						continue;
 					
-					// find it in the list of classes
-					EClass found = null;
-					for (EClass cls : ContainmentTestCase.getAllClasses().keySet()) {
-						if (cls.getName().equals(nodeName)) {
-							// found it
-							found = cls;
-							break;
-						}
-					}
+					// resolve it
+					EClass found = GmfGenTestCase.resolveSimpleEClass(nodeName);
 					assertNotNull("Could not find EClass for '" + nodeName + "'", found);
 					
 					// then instantiate it

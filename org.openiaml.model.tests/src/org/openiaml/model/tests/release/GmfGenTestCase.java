@@ -298,7 +298,7 @@ public class GmfGenTestCase extends XmlTestCase {
 		return null;
 	}
 	
-	private Map<String, EClass> resolvedClasses = new HashMap<String, EClass>();
+	private static Map<String, EClass> resolvedClasses = new HashMap<String, EClass>();
 
 	/**
 	 * Resolve a simple meta element. This assumes that the same
@@ -310,7 +310,7 @@ public class GmfGenTestCase extends XmlTestCase {
 	 * @param metaElementName "SingleOperation"
 	 * @return
 	 */
-	private EClass resolveSimpleEClass(String metaElementName) {
+	public static EClass resolveSimpleEClass(String metaElementName) {
 		if (resolvedClasses.containsKey(metaElementName)) {
 			return resolvedClasses.get(metaElementName);
 		}

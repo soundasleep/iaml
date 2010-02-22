@@ -198,14 +198,12 @@ public class WiresSwitch<T> {
 			case WiresPackage.SELECT_WIRE: {
 				SelectWire selectWire = (SelectWire)theEObject;
 				T result = caseSelectWire(selectWire);
-				if (result == null) result = caseCompositeWire(selectWire);
 				if (result == null) result = caseWireEdgeDestination(selectWire);
 				if (result == null) result = caseParameterEdgeDestination(selectWire);
-				if (result == null) result = caseWireEdge(selectWire);
+				if (result == null) result = caseSingleWire(selectWire);
 				if (result == null) result = caseNamedElement(selectWire);
-				if (result == null) result = caseContainsWires(selectWire);
 				if (result == null) result = caseGeneratesElements(selectWire);
-				if (result == null) result = caseContainsConditions(selectWire);
+				if (result == null) result = caseWireEdge(selectWire);
 				if (result == null) result = caseGeneratedElement(selectWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;

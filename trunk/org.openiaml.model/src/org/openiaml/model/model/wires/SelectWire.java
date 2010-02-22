@@ -6,8 +6,6 @@
  */
 package org.openiaml.model.model.wires;
 
-import org.openiaml.model.model.DomainObjectInstance;
-import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.WireEdgeDestination;
@@ -18,7 +16,7 @@ import org.openiaml.model.model.WireEdgeDestination;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Allows for the selection of particular {@link DomainObjectInstance instances} from a {@link DomainStore}.
+ * Allows for the selection of particular {@model DomainObjectInstance instances} from a {@model DomainStore}.
  * <!-- end-model-doc -->
  *
  * <p>

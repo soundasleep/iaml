@@ -13,7 +13,7 @@ package org.openiaml.model.model;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Represents the flow of data from a {@link DataFlowEdgesSource data source} to a {@link DataFlowEdgeDestination data destination}.
+ * Represents the flow of data from a {@model DataFlowEdgesSource data source} to a {@model DataFlowEdgeDestination data destination}.
  * <!-- end-model-doc -->
  *
  * <p>

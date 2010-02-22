@@ -17,7 +17,7 @@ import org.openiaml.model.model.wires.ParameterEdgesSource;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A single Permission that a user may have; may also be {@link ProvidesWire provided} by a {@link Role}.
+ * A single Permission that a user may have; may also be {@model ProvidesWire provided} by a {@model Role}.
  * <!-- end-model-doc -->
  *
  *

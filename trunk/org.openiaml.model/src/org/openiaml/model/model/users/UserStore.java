@@ -15,7 +15,7 @@ import org.openiaml.model.model.DomainStore;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Contains {@link Role Roles} and {@link Permission Permissions}.
+ * Contains {@model Role Roles} and {@model Permission Permissions}.
  * <!-- end-model-doc -->
  *
  * <p>

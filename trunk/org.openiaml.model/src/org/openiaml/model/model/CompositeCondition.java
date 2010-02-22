@@ -14,7 +14,7 @@ import org.eclipse.emf.common.util.EList;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A custom condition, composed in the same way as {@link CompositeOperation operations}.
+ * A custom condition, composed in the same way as {@model CompositeOperation operations}.
  * <!-- end-model-doc -->
  *
  * <p>

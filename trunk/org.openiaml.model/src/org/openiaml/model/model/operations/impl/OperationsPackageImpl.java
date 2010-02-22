@@ -490,49 +490,49 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		  (startNodeEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Start of an {@link CompositeOperation Operation} or {@link CompositeCondition Condition}."
+			 "documentation", "Start of an {@model CompositeOperation Operation} or {@model CompositeCondition Condition}."
 		   });		
 		addAnnotation
 		  (cancelNodeEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Indicates that the current {@link Operation} did not execute successfully, or the {@link Condition} failed."
+			 "documentation", "Indicates that the current {@model Operation} did not execute successfully, or the {@model Condition} failed."
 		   });		
 		addAnnotation
 		  (finishNodeEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "The successful completion of an {@link Operation}, or the {@link Condition} passed."
+			 "documentation", "The successful completion of an {@model Operation}, or the {@model Condition} passed."
 		   });				
 		addAnnotation
 		  (splitNodeEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Execution flow can split off into multiple threads, reconnected with a {@link JoinNode}."
+			 "documentation", "Execution flow can split off into multiple threads, reconnected with a {@model JoinNode}."
 		   });			
 		addAnnotation
 		  (joinNodeEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Joins multiple {@link SplitNode split} execution threads back together. Halts until all threads are complete."
+			 "documentation", "Joins multiple {@model SplitNode split} execution threads back together. Halts until all threads are complete."
 		   });			
 		addAnnotation
 		  (operationCallNodeEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "A virtual {@link Operation} call; the outgoing {@link RunInstanceWire} will be executed."
+			 "documentation", "A virtual {@model Operation} call; the outgoing {@model RunInstanceWire} will be executed."
 		   });			
 		addAnnotation
 		  (arithmeticEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "An inline expression of arithmetic. Can be used as part of a {@link PrimitiveOperation set operation}, for example."
+			 "documentation", "An inline expression of arithmetic. Can be used as part of a {@model PrimitiveOperation set operation}, for example."
 		   });			
 		addAnnotation
 		  (arithmeticOperationTypesEEnum, 
 		   source, 
 		   new String[] {
-			 "documentation", "Represents the range of possible {@link ArithmeticOperation arithmetic operations}."
+			 "documentation", "Represents the range of possible {@model ArithmeticOperation arithmetic operations}."
 		   });
 	}
 

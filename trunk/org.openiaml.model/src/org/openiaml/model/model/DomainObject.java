@@ -17,7 +17,7 @@ import org.openiaml.model.model.wires.ParameterEdgesSource;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Represents a type of {@link DomainObjectInstance}.
+ * Represents a type of {@model DomainObjectInstance}.
  * <!-- end-model-doc -->
  *
  * <p>

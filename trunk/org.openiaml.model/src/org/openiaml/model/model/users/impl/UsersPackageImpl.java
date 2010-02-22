@@ -480,25 +480,25 @@ public class UsersPackageImpl extends EPackageImpl implements UsersPackage {
 		  (userStoreEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Contains {@link Role Roles} and {@link Permission Permissions}."
+			 "documentation", "Contains {@model Role Roles} and {@model Permission Permissions}."
 		   });			
 		addAnnotation
 		  (roleEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "A particular Role that a user may have; may be {@link ExtendsWire inherited} from other Roles."
+			 "documentation", "A particular Role that a user may have; may be {@model ExtendsWire inherited} from other Roles."
 		   });		
 		addAnnotation
 		  (permissionEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "A single Permission that a user may have; may also be {@link ProvidesWire provided} by a {@link Role}."
+			 "documentation", "A single Permission that a user may have; may also be {@model ProvidesWire provided} by a {@model Role}."
 		   });		
 		addAnnotation
 		  (userInstanceEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Represents {@link DomainObjectInstance an instance} of a {@link Role user}."
+			 "documentation", "Represents {@model DomainObjectInstance an instance} of a {@model Role user}."
 		   });		
 		addAnnotation
 		  (providesEdgesSourceEClass, 

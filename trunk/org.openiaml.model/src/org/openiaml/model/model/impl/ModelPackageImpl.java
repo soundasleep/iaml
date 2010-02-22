@@ -2324,13 +2324,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		  (domainObjectEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Represents a type of {@link DomainObjectInstance}."
+			 "documentation", "Represents a type of {@model DomainObjectInstance}."
 		   });			
 		addAnnotation
 		  (domainAttributeEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Represents a single attribute contained by a {@link DomainObject}."
+			 "documentation", "Represents a single attribute contained by a {@model DomainObject}."
 		   });				
 		addAnnotation
 		  (operationEClass, 
@@ -2342,7 +2342,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		  (parameterEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Incoming values to an {@link Operation operation} executed by a {@link RunInstanceWire} can be accessed via Parameters."
+			 "documentation", "Incoming values to an {@model Operation operation} executed by a {@model RunInstanceWire} can be accessed via Parameters."
 		   });			
 		addAnnotation
 		  (primitiveOperationEClass, 
@@ -2384,55 +2384,55 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		  (domainStoreEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Stores many instances of {@link DomainObject DomainObjects} in some storage device."
+			 "documentation", "Stores many instances of {@model DomainObject DomainObjects} in some storage device."
 		   });					
 		addAnnotation
 		  (dataFlowEdgeEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Represents the flow of data from a {@link DataFlowEdgesSource data source} to a {@link DataFlowEdgeDestination data destination}."
+			 "documentation", "Represents the flow of data from a {@model DataFlowEdgesSource data source} to a {@model DataFlowEdgeDestination data destination}."
 		   });		
 		addAnnotation
 		  (temporaryVariableEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Temporary storage of values contained within an {@link Operation} which will be lost once the operation is completed."
+			 "documentation", "Temporary storage of values contained within an {@model Operation} which will be lost once the operation is completed."
 		   });		
 		addAnnotation
 		  (executionEdgeEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Represents the execution flow within an {@link Operation}."
+			 "documentation", "Represents the execution flow within an {@model Operation}."
 		   });					
 		addAnnotation
 		  (generatedElementEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "A GeneratedElement may have been created manually, or initialised through model completion {@link GeneratesElements by another element}."
+			 "documentation", "A GeneratedElement may have been created manually, or initialised through model completion {@model GeneratesElements by another element}."
 		   });					
 		addAnnotation
 		  (domainObjectInstanceEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Represents an instance of a {@link DomainObject}."
+			 "documentation", "Represents an instance of a {@model DomainObject}."
 		   });									
 		addAnnotation
 		  (conditionEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "A Condition allows for conditional execution of {@link WireEdge wires} when {@link ConditionWire connected}."
+			 "documentation", "A Condition allows for conditional execution of {@model WireEdge wires} when {@model ConditionWire connected}."
 		   });			
 		addAnnotation
 		  (compositeConditionEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "A custom condition, composed in the same way as {@link CompositeOperation operations}."
+			 "documentation", "A custom condition, composed in the same way as {@model CompositeOperation operations}."
 		   });				
 		addAnnotation
 		  (domainAttributeInstanceEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Represents an instance of a {@link DomainAttribute}, which is likely contained within a {@link DomainObjectInstance}."
+			 "documentation", "Represents an instance of a {@model DomainAttribute}, which is likely contained within a {@model DomainObjectInstance}."
 		   });				
 		addAnnotation
 		  (queryParameterEClass, 

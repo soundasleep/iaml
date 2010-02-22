@@ -6,7 +6,6 @@
  */
 package org.openiaml.model.model.components;
 
-import org.openiaml.model.model.scopes.Session;
 
 
 /**
@@ -15,7 +14,7 @@ import org.openiaml.model.model.scopes.Session;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * When placed into a {@link Scope} (including {@link Session}), all {@link Page} accesses within that Scope must finally execute this {@link Gate}. If all incoming {@link ConditionWire}s are true, then access to this {@link Scope} is denied until such time any {@link ConditionWire}s becomes false.
+ * When placed into a {@model Scope} (including {@model Session}), all {@model Page} accesses within that Scope must finally execute this {@model Gate}. If all incoming {@model ConditionWire}s are true, then access to this {@model Scope} is denied until such time any {@model ConditionWire}s becomes false.
  * <!-- end-model-doc -->
  *
  *

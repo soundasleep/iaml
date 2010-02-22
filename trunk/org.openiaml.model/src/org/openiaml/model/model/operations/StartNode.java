@@ -7,8 +7,6 @@
 package org.openiaml.model.model.operations;
 
 import org.openiaml.model.model.ActivityNode;
-import org.openiaml.model.model.CompositeCondition;
-import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ExecutionEdgesSource;
 
 /**
@@ -17,7 +15,7 @@ import org.openiaml.model.model.ExecutionEdgesSource;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Start of an {@link CompositeOperation Operation} or {@link CompositeCondition Condition}.
+ * Start of an {@model CompositeOperation Operation} or {@model CompositeCondition Condition}.
  * <!-- end-model-doc -->
  *
  *

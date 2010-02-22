@@ -1266,7 +1266,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		  (parameterEdgeEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Provides incoming values for {@link Parameter Parameters} of a {@link RunInstanceWire}."
+			 "documentation", "Provides incoming values for {@model Parameter Parameters} of a {@model RunInstanceWire}."
 		   });					
 		addAnnotation
 		  (setWireEClass, 
@@ -1284,7 +1284,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		  (selectWireEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Allows for the selection of particular {@link DomainObjectInstance instances} from a {@link DomainStore}."
+			 "documentation", "Allows for the selection of particular {@model DomainObjectInstance instances} from a {@model DomainStore}."
 		   });			
 		addAnnotation
 		  (conditionEdgeEClass, 
@@ -1308,7 +1308,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		  (requiresEdgeEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Represents the requirements for a {@link LoginHandler}, such as {@link Role Roles} and {@link Permission Permissions}."
+			 "documentation", "Represents the requirements for a {@model LoginHandler}, such as {@model Role Roles} and {@model Permission Permissions}."
 		   });			
 		addAnnotation
 		  (constraintEdgeEClass, 

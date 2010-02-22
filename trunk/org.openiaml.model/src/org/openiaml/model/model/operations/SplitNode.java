@@ -16,7 +16,7 @@ import org.openiaml.model.model.ExecutionEdgesSource;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Execution flow can split off into multiple threads, reconnected with a {@link JoinNode}.
+ * Execution flow can split off into multiple threads, reconnected with a {@model JoinNode}.
  * <!-- end-model-doc -->
  *
  *

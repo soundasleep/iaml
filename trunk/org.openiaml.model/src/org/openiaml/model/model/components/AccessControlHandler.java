@@ -8,7 +8,6 @@ package org.openiaml.model.model.components;
 
 import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.GeneratesElements;
-import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.users.ProvidesEdgesSource;
 import org.openiaml.model.model.users.RequiresEdgesSource;
 import org.openiaml.model.model.wires.ParameterEdgeDestination;
@@ -19,7 +18,7 @@ import org.openiaml.model.model.wires.ParameterEdgeDestination;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * When placed into a {@link Page} or {@link Session}, enforces that all access contains the {@link Role roles} and {@link Permission permissions} provided by incoming {@link RequiresWire}.
+ * When placed into a {@model Page} or {@model Session}, enforces that all access contains the {@model Role roles} and {@model Permission permissions} provided by incoming {@model RequiresWire}.
  * <!-- end-model-doc -->
  *
  *

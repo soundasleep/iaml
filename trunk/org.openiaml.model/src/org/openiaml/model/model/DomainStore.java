@@ -21,7 +21,7 @@ import org.openiaml.model.model.domain.DomainStoreTypes;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Stores many instances of {@link DomainObject DomainObjects} in some storage device.
+ * Stores many instances of {@model DomainObject DomainObjects} in some storage device.
  * <!-- end-model-doc -->
  *
  * <p>

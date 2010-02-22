@@ -6,7 +6,6 @@
  */
 package org.openiaml.model.model;
 
-import org.openiaml.model.model.wires.RunInstanceWire;
 
 
 /**
@@ -15,7 +14,7 @@ import org.openiaml.model.model.wires.RunInstanceWire;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Incoming values to an {@link Operation operation} executed by a {@link RunInstanceWire} can be accessed via Parameters.
+ * Incoming values to an {@model Operation operation} executed by a {@model RunInstanceWire} can be accessed via Parameters.
  * <!-- end-model-doc -->
  *
  *

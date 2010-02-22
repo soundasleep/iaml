@@ -9,8 +9,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.notation.View;
 
 /**
+ * Wraps the generated GMF DiagramUpdater with an interface for common
+ * generated methods (issue 151).
+ * 
  * @author jmwright
- *
  */
 public interface IDiagramUpdater {
 	

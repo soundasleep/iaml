@@ -7,7 +7,7 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * Wraps the generated GMF VisualIDRegistry with an interface for common
- * generated methods.
+ * generated methods (issue 151).
  * 
  * @author jmwright
  *

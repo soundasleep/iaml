@@ -21,7 +21,7 @@
 	«EXPAND xpt::Common::generatedMemberComment('[jevon] The local definition of the IVisualIDRegistryInstance.')»
 	public static class «visualIDRegistryClassName»Instance implements org.openiaml.model.diagram.helpers.IVisualIDRegistryInstance {
 		«EXPAND xpt::Common::generatedMemberComment('[jevon]')»
-		public int getLinkWithClassVisualID(EObject domainElement) {
+		public int getLinkWithClassVisualID(org.eclipse.emf.ecore.EObject domainElement) {
 			return «visualIDRegistryClassName».getLinkWithClassVisualID(domainElement);
 		}
 	}

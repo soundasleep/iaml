@@ -924,14 +924,14 @@
           figure="//@figures.0/@descriptors.34/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
-        name="ConditionWireFigure">
+        name="ConditionEdgeFigure">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
-          name="ConditionWireFigure"
+          name="ConditionEdgeFigure"
           targetDecoration="//@figures.0/@figures.0">
         <children
             xsi:type="gmfgraph:Label"
-            name="ConditionWireNameFigure"
+            name="ConditionEdgeNameFigure"
             text="condition"/>
       </actualFigure>
       <accessors
@@ -1883,8 +1883,8 @@
       name="CommitWire"
       figure="CommitWireFigure"/>
   <connections
-      name="ConditionWire"
-      figure="ConditionWireFigure"/>
+      name="ConditionEdge"
+      figure="ConditionEdgeFigure"/>
   <connections
       name="NewInstanceWire"
       figure="NewInstanceWireFigure"/>
@@ -2029,8 +2029,8 @@
       figure="CommitWireFigure"
       accessor="//@figures.0/@descriptors.34/@accessors.0"/>
   <labels
-      name="ConditionWireName"
-      figure="ConditionWireFigure"
+      name="ConditionEdgeName"
+      figure="ConditionEdgeFigure"
       accessor="//@figures.0/@descriptors.35/@accessors.0"/>
   <labels
       name="SessionName"

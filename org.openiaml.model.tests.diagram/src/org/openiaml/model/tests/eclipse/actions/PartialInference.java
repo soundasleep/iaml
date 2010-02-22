@@ -282,7 +282,7 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		assertGenerated(param2);
 		
 		// connected by condition wire
-		ConnectionNodeEditPart condWire = assertHasConditionWire(editor_text, condition2, run);
+		ConnectionNodeEditPart condWire = assertHasConditionEdge(editor_text, condition2, run);
 		assertGenerated(condWire);
 	}
 	

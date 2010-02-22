@@ -705,29 +705,27 @@
   </links>
   <links>
     <domainMetaElement
-        href="iaml.ecore#//wires/ConditionWire"/>
-    <domainSpecialization
-        body="self.oclIsTypeOf( ConditionWire )"/>
+        href="iaml.ecore#//wires/ConditionEdge"/>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping">
       <diagramLabel
-          href="iaml.gmfgraph#ConditionWireName"/>
+          href="iaml.gmfgraph#ConditionEdgeName"/>
       <features
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
     <containmentFeature
-        href="iaml.ecore#//ContainsWires/wires"/>
+        href="iaml.ecore#//ContainsWires/conditionEdges"/>
     <tool
         xsi:type="gmftool:CreationTool"
         href="session.gmftool#//@palette/@tools.3/@tools.3"/>
     <diagramLink
-        href="iaml.gmfgraph#ConditionWire"/>
+        href="iaml.gmfgraph#ConditionEdge"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/from"/>
+        href="iaml.ecore#//wires/ConditionEdge/from"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/to"/>
+        href="iaml.ecore#//wires/ConditionEdge/to"/>
   </links>
   <links>
     <domainMetaElement

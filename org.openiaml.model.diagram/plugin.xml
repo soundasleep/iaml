@@ -242,7 +242,7 @@
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2013,2014,2015,2016,2026,2018,2019,2020,2027,2022,2023,2024"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4002,4003,4004"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4002,4005,4004"/>
       </viewProvider>
    </extension>
 
@@ -257,7 +257,7 @@
             <method name="getType()" value="2013,2014,2015,2016,2026,2018,2019,2020,2027,2022,2023,2024"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
-            <method name="getType()" value="4001,4002,4003,4004"/>
+            <method name="getType()" value="4001,4002,4005,4004"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
             <method name="getType()" value="5022,5023,5024,5025,5026,5027,5028,5029,5045,5031,5032,5033,5034,5035,5036,5046,5038,5039,5040,5041,5042"/>
@@ -469,12 +469,12 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
-               id="org.openiaml.model.diagram.ConditionWire_4003"
-               name="%metatype.name.ConditionWire_4003"
+               id="org.openiaml.model.diagram.ConditionEdge_4005"
+               name="%metatype.name.ConditionEdge_4005"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="ConditionWire"
-               edithelper="org.openiaml.model.diagram.edit.helpers.ConditionWireEditHelper">
-            <param name="semanticHint" value="4003"/>
+               eclass="ConditionEdge"
+               edithelper="org.openiaml.model.diagram.edit.helpers.ConditionEdgeEditHelper">
+            <param name="semanticHint" value="4005"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
@@ -514,7 +514,7 @@
          <elementType ref="org.openiaml.model.diagram.UserStore_2024"/>
          <elementType ref="org.openiaml.model.diagram.SyncWire_4001"/>
          <elementType ref="org.openiaml.model.diagram.RunInstanceWire_4002"/>
-         <elementType ref="org.openiaml.model.diagram.ConditionWire_4003"/>
+         <elementType ref="org.openiaml.model.diagram.ConditionEdge_4005"/>
          <elementType ref="org.openiaml.model.diagram.NavigateWire_4004"/>
          <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
       </binding>

@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.EReference;
  */
 public class ContainmentTestCase extends TestCase {
 	
-	private Map<EClass,EFactory> cachedGetAllClasses = null;
+	private static Map<EClass,EFactory> cachedGetAllClasses = null;
 	
 	/**
 	 * Get all of the classes in this project, linked to their
@@ -38,7 +38,7 @@ public class ContainmentTestCase extends TestCase {
 	 * 
 	 * @return
 	 */
-	public Map<EClass,EFactory> getAllClasses() {
+	public static Map<EClass,EFactory> getAllClasses() {
 		if (cachedGetAllClasses == null) {
 			cachedGetAllClasses = new HashMap<EClass,EFactory>();
 

@@ -458,7 +458,20 @@ public class GetShortcuts {
 	 * @param relationship
 	 * @return the source element of the relationship, or <code>null</code> if none can be found
 	 */
-	public static EObject getSourceElement(EObject relationship) {	
+	public static EObject getSourceElement(EObject relationship) {
+		return getSourceElement(relationship, false);
+	}
+	
+	/**
+	 * Get the source element of the relationship, or <code>null</code> if there is none.
+	 * 
+	 * @param relationship
+	 * @param throwExceptionIfNoneFound throw an IllegalArgumentException if the element could not be found.
+	 * 		used in test cases.
+	 * @return the source element of the relationship, or <code>null</code> if none can be found
+	 * @throws IllegalArgumentException if <code>throwExceptionIfNoneFound</code> is true, and the relationship is not recognized
+	 */
+	public static EObject getSourceElement(EObject relationship, boolean throwExceptionIfNoneFound) throws IllegalArgumentException {
 		// NOTE: model-specific
 		if (relationship instanceof WireEdge) {
 			return ((WireEdge) relationship).getFrom();
@@ -490,6 +503,8 @@ public class GetShortcuts {
 		
 		// if we get this far, there may be a relationship type that
 		// we're not checking for
+		if (throwExceptionIfNoneFound)
+			throw new IllegalArgumentException("EObject '" + relationship + "' is not an edge.");
 		return null;
 	}
 	
@@ -499,7 +514,20 @@ public class GetShortcuts {
 	 * @param relationship
 	 * @return the target element of the relationship, or <code>null</code> if none can be found
 	 */
-	public static EObject getTargetElement(EObject relationship) {	
+	public static EObject getTargetElement(EObject relationship) {
+		return getSourceElement(relationship, false);
+	}
+	
+	/**
+	 * Get the target element of the relationship, or <code>null</code> if there is none.
+	 * 
+	 * @param relationship
+	 * @param throwExceptionIfNoneFound throw an IllegalArgumentException if the element could not be found.
+	 * 		used in test cases.
+	 * @return the target element of the relationship, or <code>null</code> if none can be found
+	 * @throws IllegalArgumentException if <code>throwExceptionIfNoneFound</code> is true, and the relationship is not recognized
+	 */
+	public static EObject getTargetElement(EObject relationship, boolean throwExceptionIfNoneFound) throws IllegalArgumentException {
 		// NOTE: model-specific
 
 		if (relationship instanceof WireEdge) {
@@ -532,6 +560,8 @@ public class GetShortcuts {
 		
 		// if we get this far, there may be a relationship type that
 		// we're not checking for
+		if (throwExceptionIfNoneFound)
+			throw new IllegalArgumentException("EObject '" + relationship + "' is not an edge.");
 		return null;
 	}
 	

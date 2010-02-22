@@ -4,6 +4,7 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 import org.openiaml.model.tests.eclipse.actions.AllActionsTests;
+import org.openiaml.model.tests.eclipse.helpers.AllHelpersTests;
 import org.openiaml.model.tests.eclipse.migration.AllMigrationTests;
 import org.openiaml.model.tests.eclipse.shortcuts.AllShortcutsTests;
 
@@ -33,6 +34,9 @@ public class AllEclipseTests {
         suite.addTestSuite(DerivedPropertyMarker.class);
 		//$JUnit-END$
         
+        // add the helpers tests
+        suite.addTest(AllHelpersTests.suite());
+
         // add the shortcut tests
         suite.addTest(AllShortcutsTests.suite());
 

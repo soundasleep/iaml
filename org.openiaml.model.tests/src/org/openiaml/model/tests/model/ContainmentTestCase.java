@@ -34,7 +34,7 @@ public class ContainmentTestCase extends TestCase {
 	 * Get all of the classes in this project, linked to their
 	 * factories.
 	 * 
-	 * Does not return abstract classes;
+	 * Does not return abstract classes.
 	 * 
 	 * @return
 	 */

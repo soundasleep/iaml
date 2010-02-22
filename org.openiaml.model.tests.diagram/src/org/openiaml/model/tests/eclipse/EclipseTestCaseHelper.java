@@ -365,6 +365,18 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 			boolean checkShortcut, boolean shortcutRequired) {
 		return assertHasRenderedNamedObject(root, PrimitiveOperation.class, operationName, checkShortcut, shortcutRequired);
 	}
+	
+	/**
+	 * Look at the editor's children to see if a PrimitiveOperation is being displayed.
+	 *
+	 * @param root
+	 * @param pageName
+	 * @return
+	 */
+	public ShapeNodeEditPart assertHasPrimitiveOperation(DiagramDocumentEditor root, String operationName,
+			boolean shortcutRequired) {
+		return assertHasRenderedNamedObject(root, PrimitiveOperation.class, operationName, true, shortcutRequired);
+	}
 
 	/**
 	 * Look at the editor's children to see if a CompositeCondition is being displayed.

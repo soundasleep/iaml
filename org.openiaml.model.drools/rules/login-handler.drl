@@ -181,7 +181,7 @@ rule "Connect 'fail' wire from 'check key' or 'check instance' operation to Logi
 		login_handler : LoginHandler( eContainer == scope )
 		login : Frame (eContainer == container, name=="login" )
 		check : CompositeOperation( name == "check key" || name == "check instance", eContainer == scope )
-		not (CompositeWire( from == check, to == login, name == "fail") )
+		not (NavigateWire( from == check, to == login, name == "fail") )
 	
 	then
 		NavigateWire fail = handler.generatedNavigateWire(scope, scope, check, login);
@@ -947,7 +947,7 @@ rule "Connect 'access' operation for logout page to 'do logout' operation"
 		login_handler : LoginHandler( eContainer == scope )
 		
 		logout : Frame ( )
-		wire : CompositeWire ( from == login_handler, to == logout, name == "logout" )
+		wire : NavigateWire ( from == login_handler, to == logout, name == "logout" )
 		
 		logout_operation : Operation ( eContainer == scope, name == "do logout" )
 		access : EventTrigger ( eContainer == logout, name == "access" )
@@ -1182,7 +1182,7 @@ rule "Create default login successful page"
 		scope : Session ( )
 		login_handler : LoginHandler( eContainer == scope )
 		
-		not ( wire : CompositeWire (from == login_handler, name == "login" ))
+		not ( wire : NavigateWire (from == login_handler, name == "login" ))
 
 	then
 		Frame page = handler.generatedFrame(login_handler, scope);
@@ -1201,7 +1201,7 @@ rule "Create default logout successful page"
 		scope : Session ( )
 		login_handler : LoginHandler( eContainer == scope )
 		
-		not ( wire : CompositeWire (from == login_handler, name == "logout" ))
+		not ( wire : NavigateWire (from == login_handler, name == "logout" ))
 
 	then
 		Frame page = handler.generatedFrame(login_handler, container);

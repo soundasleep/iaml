@@ -61,6 +61,11 @@ public class LoginHandlerKey extends CodegenTestCase {
 
 		clickLinkWithText("viewkey");
 		assertProblem();	// who knows where we are?
+		
+		/*
+		 * even though we failed, we should have been redirected to another page,
+		 * and an exception should NOT be thrown. 
+		 */
 
 	}
 

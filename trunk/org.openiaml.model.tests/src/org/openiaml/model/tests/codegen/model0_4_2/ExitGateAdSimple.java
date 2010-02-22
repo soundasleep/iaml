@@ -14,7 +14,7 @@ import org.openiaml.model.tests.CodegenTestCase;
  * @example ExitGate 
  * 		If a {@model ExitGate} is connected by a {@model NavigateWire} called "last", 
  * 		then the target {@model Page} must be viewed at least once before proceeding.
- * @operational ExitGate,NavigateWire
+ * @implementation ExitGate,NavigateWire
  * 		If a {@model ExitGate} is connected by a {@model NavigateWire} called "last", 
  * 		then the target {@model Page} must be viewed at least once before proceeding.
  */

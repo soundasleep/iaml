@@ -16,7 +16,7 @@ import org.openiaml.model.tests.CodegenTestCase;
  * @example EntryGate 
  * 		If a {@model EntryGate} is connected by a {@model NavigateWire} called "first", 
  * 		then the target {@model Page} must be viewed at least once before proceeding.
- * @operational EntryGate,NavigateWire
+ * @implementation EntryGate,NavigateWire
  * 		If a {@model EntryGate} is connected by a {@model NavigateWire} called "first", 
  * 		then the target {@model Page} must be viewed at least once before proceeding.
  */
@@ -74,8 +74,8 @@ public class GateRequiredPage extends CodegenTestCase {
 	 * If we get interrupted, we can resume from where the gate threw us off.
 	 * 
 	 * @inference Gate 
-	 * 		If a {@link Gate} is protected by a "first" {@link NavigateWire},
-	 * 		then the destination {@link Frame} will have a new {@link Button} created
+	 * 		If a {@model Gate} is protected by a "first" {@model NavigateWire},
+	 * 		then the destination {@model Frame} will have a new {@model Button} created
 	 * 		called "Continue"
 	 * @throws Exception
 	 */

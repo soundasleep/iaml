@@ -8,7 +8,7 @@ package org.openiaml.model.tests.codegen.model0_4_1;
  * Try the 'SUBTRACT' arithmetic.
  * 
  * @author jmwright
- * @operational Arithmetic
+ * @implementation Arithmetic
  * 		{@model Arithmetic} can be used inline to subtract its
  * 		incoming operands, and act as a source of data.
  */

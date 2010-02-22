@@ -81,7 +81,7 @@ public class QueryParameterAsParameter extends DatabaseCodegenTestCase {
 	 * with the same parameter, and the database object will not
 	 * have changed (because autosave is false)
 	 * 
-	 * @operational If a {@model InputForm} representing a {@model SelectWire selected}
+	 * @implementation If a {@model InputForm} representing a {@model SelectWire selected}
 	 * 		{@model DomainObjectInstance} changes, the changes will be saved. 
 	 */
 	public void testChangable() throws Exception {

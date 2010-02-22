@@ -273,9 +273,9 @@
 /**
  * An operation call: expand for any parameters.
  *
- * @operational OperationCall The result from a {@model OperationCall} can be used to 
+ * @implementation OperationCall The result from a {@model OperationCall} can be used to 
  *    execute conditional {@model ExecutionEdge execution paths}.
- * @operational OperationCall If a {@model OperationCall} does not have any explicit pass/fail
+ * @implementation OperationCall If a {@model OperationCall} does not have any explicit pass/fail
  *    {@model ExecutionEdge ExecutionEdges} defined, then the result value is ignored.
  */
 «DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::operations::OperationCallNode-»

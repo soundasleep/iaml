@@ -14,11 +14,11 @@ import org.openiaml.model.tests.CodegenTestCase;
  * @example EntryGate 
  * 		Using a {@model EntryGate} to prevent access to a {@model Scope} without
  * 		first viewing a disclaimer {@model Page}.
- * @operational EntryGate
+ * @implementation EntryGate
  * 		If a {@model Page} is contained within a {@model Session} that contains
  * 		a {@model EntryGate}, any incoming {@model Condition Conditions} on that Gate 
  * 		must first be satisfied in order to proceed.
- * @operational EntryGate,NavigateWire
+ * @implementation EntryGate,NavigateWire
  *		A {@model NavigateWire} may be used to resume {@model Page} access
  *		previously limited by a {@model EntryGate}. 		
  */

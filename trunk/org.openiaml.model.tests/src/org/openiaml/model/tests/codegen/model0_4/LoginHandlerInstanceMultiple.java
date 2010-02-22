@@ -19,7 +19,7 @@ import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
  * 		{@model LoginHandler} (based on selecting a {@model DomainObject} instance)
  * 		that requires two valid {@model ParameterWire parameters}.
  * 
- * @operational LoginHandler,DomainObjectInstance
+ * @implementation LoginHandler,DomainObjectInstance
  * 		A LoginHandler (selecting a DomainObject) needs incoming
  * 		{@model DomainAttribute DomainAttributes} as {@model ParameterWire parameters} in order 
  * 		to select the valid {@model DomainObjectInstance instance}.

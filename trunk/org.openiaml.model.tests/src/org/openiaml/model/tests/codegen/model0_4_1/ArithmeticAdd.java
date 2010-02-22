@@ -10,7 +10,7 @@ package org.openiaml.model.tests.codegen.model0_4_1;
  * @author jmwright
  * @example Arithmetic,PrimitiveOperation Using {@model Arithmetic} to add
  * 		two {@model InputTextField input values} together.
- * @operational Arithmetic
+ * @implementation Arithmetic
  * 		{@model Arithmetic} can be used inline to add together its
  * 		incoming operands, and act as a source of data.
  */

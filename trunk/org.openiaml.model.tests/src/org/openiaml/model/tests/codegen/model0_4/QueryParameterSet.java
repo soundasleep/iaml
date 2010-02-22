@@ -11,7 +11,7 @@ import org.openiaml.model.tests.CodegenTestCase;
  * @example QueryParameter,SetWire Setting a {@model InputTextField} to
  * 		the value of a {@model QueryParameter} from the current URI. 
  * 
- * @operational SetWire A {@model SetWire} can be connected directly
+ * @implementation SetWire A {@model SetWire} can be connected directly
  * 		to a {@model InputTextField}.
  * 
  * @author jmwright

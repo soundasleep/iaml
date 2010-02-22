@@ -19,12 +19,12 @@ import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
  * 		{@model LoginHandler} (selecting a
  * 		{@model DomainObject})
  * 
- * @operational LoginHandler
+ * @implementation LoginHandler
  * 		If a {@model LoginHandler} (selecting a {@model DomainObject}) has an outgoing
  * 		{@model NavigateWire navigation} to a {@model Page} named 'logout', the successful
  * 		logout of the current user will be redirected to this page.
  * 
- * @operational LoginHandler
+ * @implementation LoginHandler
  * 		If a {@model LoginHandler} (selecting a {@model DomainObject}) has an outgoing
  * 		{@model NavigateWire navigation} to a {@model Page} named 'login', the successful
  * 		logout of the current user will be redirected to this page.

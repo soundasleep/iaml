@@ -11,7 +11,7 @@ import org.openiaml.model.tests.CodegenTestCase;
  * @author jmwright
  * @example ConditionWire,NavigateWire
  * 		Using a {@model ConditionWire} to control redirection access on a {@model NavigateWire}.
- * @operational NavigateWire
+ * @implementation NavigateWire
  * 		If a {@model NavigateWire} is restricted by an incoming
  * 		{@model ConditionWire}, the redirection will be prevented if the
  * 		source {@model Condition} fails. 

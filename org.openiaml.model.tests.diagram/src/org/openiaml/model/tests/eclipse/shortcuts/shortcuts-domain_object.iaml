@@ -5,9 +5,9 @@
       <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.11d889e3162.14" from="model.11d889e30c6.5e" to="model.11d889e30c6.96" name="runWire"/>
     </eventTriggers>
   </scopes>
-  <domainStores xsi:type="iaml:DomainStore" id="model.11d889e30c6.4f" name="domain store">
-    <children xsi:type="iaml:DomainObject" id="model.11d889e30c6.70" name="domain object">
-      <attributes xsi:type="iaml:DomainAttribute" id="model.11d889e30c6.96" name="domain attribute" inEdges="wires.11d889e3162.14"/>
+  <domainStores id="model.11d889e30c6.4f" name="domain store">
+    <children id="model.11d889e30c6.70" name="domain object">
+      <attributes id="model.11d889e30c6.96" name="domain attribute" inEdges="wires.11d889e3162.14"/>
     </children>
   </domainStores>
 </iaml:InternetApplication>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="model.122e3c3d672.44" xmi:version="2.0">
-  <scopes id="visual.122e3c3d7ab.30" name="container" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
-    <elements id="model.122e3c3d672.7a" inEdges="wires.122e3c3d838.17" name="domain object instance" xsi:type="iaml:DomainObjectInstance"/>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.122e3c3d672.44">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.122e3c3d7ab.30" name="container">
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.122e3c3d672.7a" name="domain object instance" inEdges="wires.122e3c3d838.17"/>
   </scopes>
-  <scopes id="visual.122e3c3d7ab.3a" name="referenced" xsi:type="iaml.visual:Frame" xmlns="http://openiaml.org/model0.4">
-    <properties id="model.122e3c3d672.64" name="property" outEdges="" outParameterEdges="wires.122e3c3d838.19">
-      <parameterEdges from="model.122e3c3d672.64" id="wires.122e3c3d838.19" to="wires.122e3c3d838.17" xsi:type="iaml.wires:ParameterEdge"/>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.122e3c3d7ab.3a" name="referenced">
+    <properties id="model.122e3c3d672.64" name="property" outParameterEdges="wires.122e3c3d838.19">
+      <parameterEdges id="wires.122e3c3d838.19" from="model.122e3c3d672.64" to="wires.122e3c3d838.17"/>
     </properties>
-    <elements id="model.122e3c3d672.6d" name="domain object" outEdges="wires.122e3c3d838.17" xsi:type="iaml:DomainObject">
-      <wires from="model.122e3c3d672.6d" id="wires.122e3c3d838.17" inEdges="" inParameterEdges="wires.122e3c3d838.19" name="select" to="model.122e3c3d672.7a" xsi:type="iaml.wires:SelectWire"/>
+    <elements xsi:type="iaml:DomainObject" id="model.122e3c3d672.6d" name="domain object" outEdges="wires.122e3c3d838.17">
+      <wires xsi:type="iaml.wires:SelectWire" inParameterEdges="wires.122e3c3d838.19" id="wires.122e3c3d838.17" from="model.122e3c3d672.6d" to="model.122e3c3d672.7a" name="select"/>
     </elements>
   </scopes>
 </iaml:InternetApplication>

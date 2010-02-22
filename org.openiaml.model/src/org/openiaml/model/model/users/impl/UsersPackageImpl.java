@@ -386,8 +386,6 @@ public class UsersPackageImpl extends EPackageImpl implements UsersPackage {
 		roleEClass.getESuperTypes().add(this.getRequiresEdgeDestination());
 		roleEClass.getESuperTypes().add(this.getProvidesEdgesSource());
 		permissionEClass.getESuperTypes().add(theModelPackage.getNamedElement());
-		permissionEClass.getESuperTypes().add(theModelPackage.getWireEdgesSource());
-		permissionEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
 		permissionEClass.getESuperTypes().add(theWiresPackage.getParameterEdgesSource());
 		permissionEClass.getESuperTypes().add(this.getRequiresEdgeDestination());
 		permissionEClass.getESuperTypes().add(this.getProvidesEdgeDestination());

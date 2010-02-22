@@ -155,14 +155,10 @@ public class UsersSwitch<T> {
 				Permission permission = (Permission)theEObject;
 				T result = casePermission(permission);
 				if (result == null) result = caseNamedElement(permission);
-				if (result == null) result = caseWireEdgesSource(permission);
-				if (result == null) result = caseWireEdgeDestination(permission);
 				if (result == null) result = caseParameterEdgesSource(permission);
 				if (result == null) result = caseRequiresEdgeDestination(permission);
 				if (result == null) result = caseProvidesEdgeDestination(permission);
 				if (result == null) result = caseGeneratedElement(permission);
-				if (result == null) result = caseShouldntContainWires(permission);
-				if (result == null) result = caseContainsWires(permission);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

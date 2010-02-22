@@ -161,8 +161,7 @@
           <metaFeatures href="iaml.genmodel#//model/NamedElement/name"/>
         </modelFacet>
       </labels>
-    <behaviour diagramKind="Iaml_Wire" editPolicyClassName="WireOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.wire.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
-</links>
+    </links>
     <links createCommandClassName="SyncWireCreateCommand" editPartClassName="SyncWireEditPart" itemSemanticEditPolicyClassName="SyncWireItemSemanticEditPolicy" notationViewFactoryClassName="SyncWireViewFactory" reorientCommandClassName="SyncWireReorientCommand" visualID="4002">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
       <elementType editHelperClassName="SyncWireEditHelper" xsi:type="gmfgen:MetamodelType"/>

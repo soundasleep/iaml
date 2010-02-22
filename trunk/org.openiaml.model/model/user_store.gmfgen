@@ -180,7 +180,7 @@
         </modelFacet>
       </labels>
     </topLevelNodes>
-    <links createCommandClassName="ProvidesEdgeCreateCommand" editPartClassName="ProvidesEdgeEditPart" itemSemanticEditPolicyClassName="ProvidesEdgeItemSemanticEditPolicy" reorientCommandClassName="ProvidesEdgeReorientCommand" visualID="4004">
+    <links createCommandClassName="ProvidesEdgeCreateCommand" editPartClassName="ProvidesEdgeEditPart" itemSemanticEditPolicyClassName="ProvidesEdgeItemSemanticEditPolicy" notationViewFactoryClassName="ProvidesEdgeViewFactory" reorientCommandClassName="ProvidesEdgeReorientCommand" visualID="4004">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
       <elementType editHelperClassName="ProvidesEdgeEditHelper" xsi:type="gmfgen:MetamodelType"/>
       <viewmap classBody="&#10;/**&#10; * @generated&#10; */&#10;public class ProvidesEdgeFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureProvidesEdgeNameFigure; &#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public ProvidesEdgeFigure() {&#10;&#9;&#9;this.setLineWidth(1);&#10;this.setLineStyle(org.eclipse.draw2d.Graphics.LINE_DASH);&#10;&#10;&#9;&#9;createContents();&#10;&#9;&#9;setTargetDecoration(createTargetDecoration());&#10;&#9;}&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private void createContents(){&#10;&#10;&#10;fFigureProvidesEdgeNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureProvidesEdgeNameFigure.setText(&quot;provides&quot;);&#10;&#10;this.add(fFigureProvidesEdgeNameFigure);&#10;&#10;&#10;&#9;}&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#10;&#9;&#9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#10;df.setLineWidth(1);&#10;&#9;&#9;return df;&#10;&#9;}&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureProvidesEdgeNameFigure() {&#10;&#9;&#9;return fFigureProvidesEdgeNameFigure;&#10;&#9;}&#10;&#10;&#10;}&#10;&#10;" className="ProvidesEdgeFigure" xsi:type="gmfgen:InnerClassViewmap"/>
@@ -191,7 +191,7 @@
         <sourceMetaFeature href="iaml.genmodel#//model/wires/ProvidesEdge/from"/>
         <targetMetaFeature href="iaml.genmodel#//model/wires/ProvidesEdge/to"/>
       </modelFacet>
-      <labels editPartClassName="WrappingLabel5EditPart" elementIcon="true" itemSemanticEditPolicyClassName="WrappingLabel5ItemSemanticEditPolicy" readOnly="true" visualID="6004">
+      <labels editPartClassName="WrappingLabel5EditPart" elementIcon="true" itemSemanticEditPolicyClassName="WrappingLabel5ItemSemanticEditPolicy" notationViewFactoryClassName="ProvidesEdgeLabelViewFactory" readOnly="true" visualID="6004">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureProvidesEdgeNameFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes xsi:type="gmfgen:LabelOffsetAttributes" y="40"/>

@@ -595,8 +595,7 @@
           <metaFeatures href="iaml.genmodel#//model/NamedElement/name"/>
         </modelFacet>
       </labels>
-    <behaviour diagramKind="Iaml_Wire" editPolicyClassName="WireOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.wire.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
-</links>
+    </links>
     <links createCommandClassName="ParameterEdgeCreateCommand" editPartClassName="ParameterEdgeEditPart" itemSemanticEditPolicyClassName="ParameterEdgeItemSemanticEditPolicy" notationViewFactoryClassName="ParameterEdgeViewFactory" reorientCommandClassName="ParameterEdgeReorientCommand" visualID="4013">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
       <elementType editHelperClassName="ParameterEdgeEditHelper" xsi:type="gmfgen:MetamodelType"/>
@@ -747,7 +746,7 @@
         <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
     </links>
-    <links createCommandClassName="ConstraintEdgeCreateCommand" editPartClassName="ConstraintEdgeEditPart" itemSemanticEditPolicyClassName="ConstraintEdgeItemSemanticEditPolicy" reorientCommandClassName="ConstraintEdgeReorientCommand" visualID="4015">
+    <links createCommandClassName="ConstraintEdgeCreateCommand" editPartClassName="ConstraintEdgeEditPart" itemSemanticEditPolicyClassName="ConstraintEdgeItemSemanticEditPolicy" notationViewFactoryClassName="ConstraintEdgeViewFactory" reorientCommandClassName="ConstraintEdgeReorientCommand" visualID="4015">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
       <elementType editHelperClassName="ConstraintEdgeEditHelper" xsi:type="gmfgen:MetamodelType"/>
       <viewmap classBody="&#10;/**&#10; * @generated&#10; */&#10;public class ConstraintEdgeFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureConstraintEdgeNameFigure; &#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public ConstraintEdgeFigure() {&#10;&#9;&#9;this.setLineWidth(1);&#10;this.setLineStyle(org.eclipse.draw2d.Graphics.LINE_DASH);&#10;&#10;&#9;&#9;createContents();&#10;&#9;}&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private void createContents(){&#10;&#10;&#10;fFigureConstraintEdgeNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureConstraintEdgeNameFigure.setText(&quot;&lt;...&gt;&quot;);&#10;&#10;this.add(fFigureConstraintEdgeNameFigure);&#10;&#10;&#10;&#9;}&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureConstraintEdgeNameFigure() {&#10;&#9;&#9;return fFigureConstraintEdgeNameFigure;&#10;&#9;}&#10;&#10;&#10;}&#10;&#10;" className="ConstraintEdgeFigure" xsi:type="gmfgen:InnerClassViewmap"/>
@@ -758,7 +757,7 @@
         <sourceMetaFeature href="iaml.genmodel#//model/wires/ConstraintEdge/from"/>
         <targetMetaFeature href="iaml.genmodel#//model/wires/ConstraintEdge/to"/>
       </modelFacet>
-      <labels editPartClassName="ConstraintEdgeTypeEditPart" elementIcon="true" itemSemanticEditPolicyClassName="ConstraintEdgeTypeItemSemanticEditPolicy" visualID="6014">
+      <labels editPartClassName="ConstraintEdgeTypeEditPart" elementIcon="true" itemSemanticEditPolicyClassName="ConstraintEdgeTypeItemSemanticEditPolicy" notationViewFactoryClassName="ConstraintEdgeTypeViewFactory" visualID="6014">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureConstraintEdgeNameFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes xsi:type="gmfgen:LabelOffsetAttributes" y="40"/>

@@ -412,8 +412,7 @@
           <metaFeatures href="iaml.genmodel#//model/NamedElement/name"/>
         </modelFacet>
       </labels>
-    <behaviour diagramKind="Iaml_Wire" editPolicyClassName="WireOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.wire.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
-</links>
+    </links>
     <palette>
       <groups description="Operational Modelling" title="Operational Modelling">
         <entries description="Create new StartNode" genNodes="//@diagram/@topLevelNodes.3" largeIconPath="/org.openiaml.model.edit/icons/full/obj32/StartNode.gif" smallIconPath="/org.openiaml.model.edit/icons/full/obj16/StartNode.gif" title="StartNode" xsi:type="gmfgen:ToolEntry"/>

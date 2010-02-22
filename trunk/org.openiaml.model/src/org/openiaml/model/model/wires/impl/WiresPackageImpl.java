@@ -860,9 +860,11 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		syncWireEClass.getESuperTypes().add(this.getCompositeWire());
 		syncWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
 		syncWireEClass.getESuperTypes().add(this.getParameterEdgeDestination());
-		runInstanceWireEClass.getESuperTypes().add(this.getCompositeWire());
 		runInstanceWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
 		runInstanceWireEClass.getESuperTypes().add(this.getParameterEdgeDestination());
+		runInstanceWireEClass.getESuperTypes().add(this.getSingleWire());
+		runInstanceWireEClass.getESuperTypes().add(theModelPackage.getNamedElement());
+		runInstanceWireEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
 		parameterEdgeEClass.getESuperTypes().add(theModelPackage.getNamedElement());
 		parameterEdgeEClass.getESuperTypes().add(theModelPackage.getGeneratedElement());
 		setWireEClass.getESuperTypes().add(this.getCompositeWire());
@@ -960,10 +962,10 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		addEEnumLiteral(constraintTypesEEnum, ConstraintTypes.XOR);
 
 		// Create annotations
-		// http://openiaml.org/comment
-		createCommentAnnotations();
 		// http://www.eclipse.org/emf/2002/GenModel
 		createGenModelAnnotations();
+		// http://openiaml.org/comment
+		createCommentAnnotations();
 	}
 
 	/**
@@ -973,7 +975,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * @generated
 	 */
 	protected void createCommentAnnotations() {
-		String source = "http://openiaml.org/comment";		
+		String source = "http://openiaml.org/comment";			
 		addAnnotation
 		  (singleWireEClass, 
 		   source, 
@@ -1125,7 +1127,13 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * @generated
 	 */
 	protected void createGenModelAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/GenModel";				
+		String source = "http://www.eclipse.org/emf/2002/GenModel";		
+		addAnnotation
+		  (singleWireEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "A {@model SingleWire} represents a single piece of runtime functionality that cannot be decomposed further. A {@model CompositeWire} may ultimately be composed of many of these."
+		   });				
 		addAnnotation
 		  (syncWireEClass, 
 		   source, 

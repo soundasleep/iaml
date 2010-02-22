@@ -37,7 +37,7 @@
 		
 		/* expand conditions - do any of them fail? */
 		if (!(
-			«EXPAND template::conditions::Runtime::callCondition(true, this, false, currentFrame) FOREACH inEdges.typeSelect(model::wires::ConditionWire) SEPARATOR " && "»
+			«EXPAND template::conditions::Runtime::callCondition(true, this, false, currentFrame) FOREACH inConditionEdges SEPARATOR " && "»
 		)) {
 			// one condition failed
 			log_message("[exitgate] Exit gate «name» failed");

@@ -37,6 +37,7 @@ import org.w3c.dom.NodeList;
  *      <li>RequiresWire is now RequiresEdge, and no longer a WireEdge
  *      <li>ProvidesWire is now ProvidesEdge, and no longer a WireEdge
  *      <li>ConstraintWire is now ConstraintEdge, and no longer a WireEdge
+ *      <li>RunInstanceWire is now a SingleWire, and not a CompositeWire; it no longer contains Operations directly.
  *   </ol></li>
  *   <li><strong>Many other modifications, too many to list... this migrator only implements
  *   	those changed necessary for the model migration test to pass.</strong></li>

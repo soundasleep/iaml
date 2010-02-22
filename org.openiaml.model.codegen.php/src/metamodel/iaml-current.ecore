@@ -12,7 +12,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="WireEdge" abstract="true" eSuperTypes="#//GeneratedElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Represents some higher-level relationship between two components."/>
+      <details key="documentation" value="A {@mode WireEdge} represents some piece of runtime functionality, usually in terms of the {@model EventTrigger Event}-{@model Condition}-{@model Operation Action} paradigm. These are expressed in {@model SingleWire}s."/>
     </eAnnotations>
     <eAnnotations source="http://openiaml.org/comment">
       <details key="changed" value="0.4.2 to abstract"/>
@@ -499,6 +499,9 @@
   </eSubpackages>
   <eSubpackages name="wires" nsURI="http://openiaml.org/model/wires" nsPrefix="iaml.wires">
     <eClassifiers xsi:type="ecore:EClass" name="SingleWire" abstract="true" eSuperTypes="#//WireEdge">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A {@model SingleWire} represents a single piece of runtime functionality that cannot be decomposed further. A {@model CompositeWire} may ultimately be composed of many of these."/>
+      </eAnnotations>
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="why do we have SingleWire at all? (following a design pattern?)"/>
         <details key="changed" value="0.4.2 to abstract"/>
@@ -530,7 +533,7 @@
         <details key="documentation" value="When a connected element changes, a SyncWire will update the other connected element."/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="RunInstanceWire" eSuperTypes="#//wires/CompositeWire #//WireEdgeDestination #//wires/ParameterEdgeDestination">
+    <eClassifiers xsi:type="ecore:EClass" name="RunInstanceWire" eSuperTypes="#//WireEdgeDestination #//wires/ParameterEdgeDestination #//wires/SingleWire #//NamedElement #//GeneratesElements">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="RunWire: a composite wire that contains ExecutionWires/etc"/>
       </eAnnotations>

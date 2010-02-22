@@ -2300,7 +2300,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		  (wireEdgeEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Represents some higher-level relationship between two components."
+			 "documentation", "A {@mode WireEdge} represents some piece of runtime functionality, usually in terms of the {@model EventTrigger Event}-{@model Condition}-{@model Operation Action} paradigm. These are expressed in {@model SingleWire}s."
 		   });				
 		addAnnotation
 		  (eventTriggerEClass, 

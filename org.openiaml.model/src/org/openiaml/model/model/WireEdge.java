@@ -13,7 +13,7 @@ package org.openiaml.model.model;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Represents some higher-level relationship between two components.
+ * A {@mode WireEdge} represents some piece of runtime functionality, usually in terms of the {@model EventTrigger Event}-{@model Condition}-{@model Operation Action} paradigm. These are expressed in {@model SingleWire}s.
  * <!-- end-model-doc -->
  *
  * <p>

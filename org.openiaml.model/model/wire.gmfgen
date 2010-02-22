@@ -308,9 +308,8 @@
           <metaFeatures href="iaml.genmodel#//model/NamedElement/name"/>
         </modelFacet>
       </labels>
-    <behaviour diagramKind="Iaml_Wire" editPolicyClassName="WireOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.wire.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
-</links>
-    <links createCommandClassName="ParameterEdgeCreateCommand" editPartClassName="ParameterEdgeEditPart" itemSemanticEditPolicyClassName="ParameterEdgeItemSemanticEditPolicy" reorientCommandClassName="ParameterEdgeReorientCommand" visualID="4004">
+    </links>
+    <links createCommandClassName="ParameterEdgeCreateCommand" editPartClassName="ParameterEdgeEditPart" itemSemanticEditPolicyClassName="ParameterEdgeItemSemanticEditPolicy" notationViewFactoryClassName="ParameterEdgeViewFactory" reorientCommandClassName="ParameterEdgeReorientCommand" visualID="4004">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
       <elementType editHelperClassName="ParameterEdgeEditHelper" xsi:type="gmfgen:MetamodelType"/>
       <viewmap classBody="&#10;/**&#10; * @generated&#10; */&#10;public class ParameterEdgeFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#10;&#10;&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public ParameterEdgeFigure() {&#10;&#9;&#9;this.setLineWidth(1);&#10;&#10;&#9;&#9;setTargetDecoration(createTargetDecoration());&#10;&#9;}&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#10;&#9;&#9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#10;df.setLineWidth(1);&#10;&#9;&#9;return df;&#10;&#9;}&#10;&#10;&#10;&#10;&#10;}&#10;&#10;" className="ParameterEdgeFigure" xsi:type="gmfgen:InnerClassViewmap"/>

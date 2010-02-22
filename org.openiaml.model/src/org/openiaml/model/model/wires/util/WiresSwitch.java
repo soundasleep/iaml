@@ -151,14 +151,12 @@ public class WiresSwitch<T> {
 			case WiresPackage.RUN_INSTANCE_WIRE: {
 				RunInstanceWire runInstanceWire = (RunInstanceWire)theEObject;
 				T result = caseRunInstanceWire(runInstanceWire);
-				if (result == null) result = caseCompositeWire(runInstanceWire);
 				if (result == null) result = caseWireEdgeDestination(runInstanceWire);
 				if (result == null) result = caseParameterEdgeDestination(runInstanceWire);
-				if (result == null) result = caseWireEdge(runInstanceWire);
+				if (result == null) result = caseSingleWire(runInstanceWire);
 				if (result == null) result = caseNamedElement(runInstanceWire);
-				if (result == null) result = caseContainsWires(runInstanceWire);
 				if (result == null) result = caseGeneratesElements(runInstanceWire);
-				if (result == null) result = caseContainsConditions(runInstanceWire);
+				if (result == null) result = caseWireEdge(runInstanceWire);
 				if (result == null) result = caseGeneratedElement(runInstanceWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;

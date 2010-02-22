@@ -156,7 +156,7 @@ rule "Run instance wire from source.access to source.init, adding ConditionWire 
 		not ( ConditionWire ( from == condition, to == run ))
 	
 	then
-		ConditionWire cw = handler.generatedConditionWire(sw, run, condition, run);
+		ConditionWire cw = handler.generatedConditionWire(sw, sw, condition, run);
 		queue.add(cw, drools);
 		
 end	
@@ -179,7 +179,7 @@ rule "Run instance wire from target.access to target.init, adding ConditionWire 
 		not ( ConditionWire ( from == condition, to == run ))
 	
 	then
-		ConditionWire cw = handler.generatedConditionWire(sw, run, condition, run);
+		ConditionWire cw = handler.generatedConditionWire(sw, sw, condition, run);
 		queue.add(cw, drools);
 		
 end	

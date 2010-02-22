@@ -780,8 +780,7 @@
           <metaFeatures href="iaml.genmodel#//model/NamedElement/name"/>
         </modelFacet>
       </labels>
-    <behaviour diagramKind="Iaml_Wire" editPolicyClassName="WireOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.wire.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
-</links>
+    </links>
     <links createCommandClassName="RequiresEdgeCreateCommand" editPartClassName="RequiresEdgeEditPart" itemSemanticEditPolicyClassName="RequiresEdgeItemSemanticEditPolicy" notationViewFactoryClassName="RequiresEdgeViewFactory" reorientCommandClassName="RequiresEdgeReorientCommand" visualID="4014">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
       <elementType editHelperClassName="RequiresEdgeEditHelper" xsi:type="gmfgen:MetamodelType"/>

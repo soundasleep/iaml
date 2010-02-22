@@ -228,12 +228,10 @@ public class WiresSwitch<T> {
 			case WiresPackage.NEW_INSTANCE_WIRE: {
 				NewInstanceWire newInstanceWire = (NewInstanceWire)theEObject;
 				T result = caseNewInstanceWire(newInstanceWire);
-				if (result == null) result = caseCompositeWire(newInstanceWire);
-				if (result == null) result = caseWireEdge(newInstanceWire);
+				if (result == null) result = caseSingleWire(newInstanceWire);
 				if (result == null) result = caseNamedElement(newInstanceWire);
-				if (result == null) result = caseContainsWires(newInstanceWire);
 				if (result == null) result = caseGeneratesElements(newInstanceWire);
-				if (result == null) result = caseContainsConditions(newInstanceWire);
+				if (result == null) result = caseWireEdge(newInstanceWire);
 				if (result == null) result = caseGeneratedElement(newInstanceWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;

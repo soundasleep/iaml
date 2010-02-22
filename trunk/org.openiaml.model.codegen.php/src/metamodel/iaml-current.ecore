@@ -599,7 +599,7 @@
         <details key="documentation" value="When connected to a {@link RunInstanceWire}, the connected {@link Condition Conditions} will be evaluated before any execution takes place."/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="NewInstanceWire" eSuperTypes="#//wires/CompositeWire">
+    <eClassifiers xsi:type="ecore:EClass" name="NewInstanceWire" eSuperTypes="#//wires/SingleWire #//NamedElement #//GeneratesElements">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.3"/>
       </eAnnotations>

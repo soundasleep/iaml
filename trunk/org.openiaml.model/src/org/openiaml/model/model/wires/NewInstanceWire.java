@@ -6,6 +6,9 @@
  */
 package org.openiaml.model.model.wires;
 
+import org.openiaml.model.model.GeneratesElements;
+import org.openiaml.model.model.NamedElement;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -21,5 +24,5 @@ package org.openiaml.model.model.wires;
  * @model annotation="http://openiaml.org/comment added='0.3'"
  * @generated
  */
-public interface NewInstanceWire extends CompositeWire {
+public interface NewInstanceWire extends SingleWire, NamedElement, GeneratesElements {
 } // NewInstanceWire

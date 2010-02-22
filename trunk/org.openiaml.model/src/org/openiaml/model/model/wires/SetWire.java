@@ -23,5 +23,5 @@ import org.openiaml.model.model.WireEdgeDestination;
  * @model annotation="http://openiaml.org/comment added='0.2'"
  * @generated
  */
-public interface SetWire extends CompositeWire, WireEdgeDestination {
+public interface SetWire extends CompositeWire, WireEdgeDestination, ConditionEdgeDestination {
 } // SetWire

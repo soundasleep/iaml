@@ -25,5 +25,5 @@ import org.openiaml.model.model.WireEdgeDestination;
  * @model annotation="http://openiaml.org/comment added='0.2'"
  * @generated
  */
-public interface NavigateWire extends WireEdgeDestination, SingleWire, NamedElement, GeneratesElements {
+public interface NavigateWire extends WireEdgeDestination, SingleWire, NamedElement, GeneratesElements, ConditionEdgeDestination {
 } // NavigateWire

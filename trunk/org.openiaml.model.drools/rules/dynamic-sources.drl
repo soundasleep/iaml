@@ -55,7 +55,7 @@ rule "Create the contents of the XPath condition when connected to SyncWires"
 		o : CompositeCondition ( eContainer == ds, name == "xpath" )
 		# limit to only creating one contents of the condition
 		exists ( any_sync_wire : SyncWire( )
-			and cw : ConditionWire ( from == o, to == any_sync_wire ) )
+			and cw : ConditionEdge ( from == o, to == any_sync_wire ) )
 		
 		not ( StartNode( eContainer == o ))
 	
@@ -115,7 +115,7 @@ end
  * This rule used to contain the following negative existential:
  *
  * not (
- *   tw_cw : ConditionWire ( from == condition, to == tw ) and 
+ *   tw_cw : ConditionEdge ( from == condition, to == tw ) and 
  *   tw_pw : ParameterEdge ( from == ds, to == tw_cw ) and
  *   tw_pw2 : ParameterEdge ( from == target, to == tw_cw )
  * )
@@ -124,7 +124,7 @@ end
  * one negative existential in each rule [TODO see upcoming paper],
  * we can decompose this into two rules.
  */
-rule "Create the XPath ConditionWire for generated SyncWires"
+rule "Create the XPath ConditionEdge for generated SyncWires"
 	when
 		container : InternetApplication( )
 		ds : DynamicApplicationElementSet( eval(functions.isXPath(query)), overridden == false, eContainer == container )
@@ -134,21 +134,21 @@ rule "Create the XPath ConditionWire for generated SyncWires"
 		tw : SyncWire ( eval(functions.connects(tw, source, target)) )
 		condition : CompositeCondition ( eContainer == ds )
 		not (
-			tw_cw : ConditionWire ( from == condition, to == tw ) 
+			tw_cw : ConditionEdge ( from == condition, to == tw ) 
 		)
 	
 	then
-		ConditionWire cwt = handler.generatedConditionWire( ds, ds, condition, tw );
+		ConditionEdge cwt = handler.generatedConditionEdge( ds, ds, condition, tw );
 		handler.setName(cwt, "xpath condition (target)");
 		queue.add(cwt, drools);
 		
 		# Create the contents like normal
 
-		ParameterEdge pwt = handler.generatedParameterEdge( cwt, cwt, ds, cwt);
+		ParameterEdge pwt = handler.generatedParameterEdge( cwt, ds, ds, cwt);
 		handler.setName(pwt, "[xpath] from ds 2");
 		queue.add(pwt, drools);		 
 
-		ParameterEdge pwt2 = handler.generatedParameterEdge( cwt, cwt, target, cwt);
+		ParameterEdge pwt2 = handler.generatedParameterEdge( cwt, ds, target, cwt);
 		handler.setName(pwt2, "[xpath] from target");
 		queue.add(pwt2, drools);
 
@@ -157,7 +157,7 @@ end
 /**
  * This is a decomposition of the rule above.
  */
-rule "Connect ParameterEdges to empty ConditionWire for XPath"
+rule "Connect ParameterEdges to empty ConditionEdge for XPath"
 	when
 		container : InternetApplication( )
 		ds : DynamicApplicationElementSet( eval(functions.isXPath(query)), overridden == false, eContainer == container )
@@ -166,23 +166,23 @@ rule "Connect ParameterEdges to empty ConditionWire for XPath"
 		target : Frame ( eval(source != target), eval(functions.potentialXPathMatch(container, ds, target)) )
 		tw : SyncWire ( eval(functions.connects(tw, source, target)) )
 		condition : CompositeCondition ( eContainer == ds )
-		cwt : ConditionWire ( from == condition, to == tw )
+		cwt : ConditionEdge ( from == condition, to == tw )
 		not (
-			#tw_cw : ConditionWire ( from == condition, to == tw ) and
+			#tw_cw : ConditionEdge ( from == condition, to == tw ) and
 			tw_pw : ParameterEdge ( from == ds, to == cwt ) 
 			#and
 			#tw_pw2 : ParameterEdge ( from == target, to == tw_cw )
 		)
 	
 	then
-		# We have a ConditionWire that does not have any parameters:
+		# We have a ConditionEdge that does not have any parameters:
 		# connect the parameters up to the wire
 
-		ParameterEdge pwt = handler.generatedParameterEdge( cwt, cwt, ds, cwt);
+		ParameterEdge pwt = handler.generatedParameterEdge( cwt, ds, ds, cwt);
 		handler.setName(pwt, "[xpath] from ds 2");
 		queue.add(pwt, drools);		 
 
-		ParameterEdge pwt2 = handler.generatedParameterEdge( cwt, cwt, target, cwt);
+		ParameterEdge pwt2 = handler.generatedParameterEdge( cwt, ds, target, cwt);
 		handler.setName(pwt2, "[xpath] from target");
 		queue.add(pwt2, drools);
 

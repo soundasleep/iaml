@@ -22,8 +22,8 @@ function boolean connects(WireEdge wire, Object a, Object b) {
 		(wire.getFrom().equals(b) && wire.getTo().equals(a));
 }
 
-# @inference SyncWire,RunInstanceWire,ConditionWire {@model RunInstanceWire RunInstanceWires} with incoming {@model ConditionWire conditions} will be copied to elements created by {@model SyncWire SyncWires}.
-rule "Connect ConditionWires to RunInstanceWires created by SyncWires (edit/update)"
+# @inference SyncWire,RunInstanceWire,ConditionEdge {@model RunInstanceWire RunInstanceWires} with incoming {@model ConditionEdge conditions} will be copied to elements created by {@model SyncWire SyncWires}.
+rule "Connect ConditionEdges to RunInstanceWires created by SyncWires (edit/update)"
 	when
 		# we have a sync wire
 		sw : SyncWire(overridden == false)
@@ -38,20 +38,20 @@ rule "Connect ConditionWires to RunInstanceWires created by SyncWires (edit/upda
 		
 		# and the sync wire had a condition
 		condition : Condition ( )
-		sourceCw : ConditionWire( from == condition, to == sw )
+		sourceCw : ConditionEdge( from == condition, to == sw )
 		
 		# but our run wire doesn't 
-		not (ConditionWire (from == condition, to == run )) 
+		not (ConditionEdge (from == condition, to == run )) 
 		
 	then
 		# copy the condition
-		ConditionWire cw = handler.generatedConditionWire( sourceCw, sourceCw, condition, run );
+		ConditionEdge cw = handler.generatedConditionEdge( sourceCw, sw, condition, run );
 		handler.setName(cw, "copied condition: " + sourceCw.getId());
 		queue.add(cw, drools);
 
 end
 
-rule "Connect ConditionWires to RunInstanceWires created by SyncWires (access/init)"
+rule "Connect ConditionEdges to RunInstanceWires created by SyncWires (access/init)"
 	when
 		# we have a sync wire
 		sw : SyncWire(overridden == false)
@@ -70,21 +70,21 @@ rule "Connect ConditionWires to RunInstanceWires created by SyncWires (access/in
 		
 		# and the sync wire had a condition
 		condition : Condition ( )
-		sourceCw : ConditionWire( from == condition, to == sw )
+		sourceCw : ConditionEdge( from == condition, to == sw )
 		
 		# but our run wire doesn't 
-		not (ConditionWire (from == condition, to == run )) 
+		not (ConditionEdge (from == condition, to == run )) 
 		
 	then
 		# copy the condition
-		ConditionWire cw = handler.generatedConditionWire( sourceCw, sourceCw, condition, run );
+		ConditionEdge cw = handler.generatedConditionEdge( sourceCw, sw, condition, run );
 		handler.setName(cw, "copied condition: " + sourceCw.getId());
 		queue.add(cw, drools);
 
 end
 
-# @inference SyncWire,RunInstanceWire,ConditionWire,ParameterEdge {@model RunInstanceWire RunInstanceWires} with incoming {@model ConditionWire conditions} with {@model ParameterEdge parameters} will be copied to elements created by {@model SyncWire SyncWires}.
-rule "Connect ParameterEdges to ConditionWires connected to RunInstanceWires created by SyncWires (edit/update)"
+# @inference SyncWire,RunInstanceWire,ConditionEdge,ParameterEdge {@model RunInstanceWire RunInstanceWires} with incoming {@model ConditionEdge conditions} with {@model ParameterEdge parameters} will be copied to elements created by {@model SyncWire SyncWires}.
+rule "Connect ParameterEdges to ConditionEdges connected to RunInstanceWires created by SyncWires (edit/update)"
 	when
 		# we have a syncwire
 		sw : SyncWire(overridden == false)
@@ -99,10 +99,10 @@ rule "Connect ParameterEdges to ConditionWires connected to RunInstanceWires cre
 
 		# and this SyncWire has a condition
 		condition : Condition ( )
-		sourceCw : ConditionWire( from == condition, to == sw )
+		sourceCw : ConditionEdge( from == condition, to == sw )
 		
 		# and the RunInstanceWire has the same condition 
-		targetCw : ConditionWire (from == condition, to == run ) 
+		targetCw : ConditionEdge (from == condition, to == run ) 
 		
 		# and the SyncWire had a parameter
 		param : ParameterEdgesSource ( )
@@ -112,14 +112,14 @@ rule "Connect ParameterEdges to ConditionWires connected to RunInstanceWires cre
 		not (ParameterEdge (from == param, to == targetCw ))
 		
 	then
-		ParameterEdge pw = handler.generatedParameterEdge( sourceCw, sourceCw, param, targetCw );
+		ParameterEdge pw = handler.generatedParameterEdge( sourceCw, sw, param, targetCw );
 		//cw.setName("copied parameter: " + paramWire.getName());
 		handler.setName(pw, "[conditions] sync from: " + paramWire.getId() + " param=" + ((GeneratedElement) param).getId() + " run=" + run.getId() );
 		queue.add(pw, drools);
 
 end
 
-rule "Connect ParameterEdges to ConditionWires connected to RunInstanceWires created by SyncWires (access/init)"
+rule "Connect ParameterEdges to ConditionEdges connected to RunInstanceWires created by SyncWires (access/init)"
 	when
 		# we have a syncwire
 		sw : SyncWire(overridden == false)
@@ -138,10 +138,10 @@ rule "Connect ParameterEdges to ConditionWires connected to RunInstanceWires cre
 
 		# and this SyncWire has a condition
 		condition : Condition ( )
-		sourceCw : ConditionWire( from == condition, to == sw )
+		sourceCw : ConditionEdge( from == condition, to == sw )
 		
 		# and the RunInstanceWire has the same condition 
-		targetCw : ConditionWire (from == condition, to == run ) 
+		targetCw : ConditionEdge (from == condition, to == run ) 
 		
 		# and the SyncWire had a parameter
 		param : ParameterEdgesSource ( )
@@ -151,7 +151,7 @@ rule "Connect ParameterEdges to ConditionWires connected to RunInstanceWires cre
 		not (ParameterEdge (from == param, to == targetCw ))
 		
 	then
-		ParameterEdge pw = handler.generatedParameterEdge( sourceCw, sourceCw, param, targetCw );
+		ParameterEdge pw = handler.generatedParameterEdge( sourceCw, sw, param, targetCw );
 		//cw.setName("copied parameter: " + paramWire.getName());
 		handler.setName(pw, "[conditions] sync from: " + paramWire.getId() + " param=" + ((GeneratedElement) param).getId() + " run=" + run.getId() );
 		queue.add(pw, drools);

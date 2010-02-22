@@ -31,6 +31,7 @@ import org.openiaml.model.model.components.Gate;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.users.ProvidesEdgesSource;
 import org.openiaml.model.model.users.RequiresEdgesSource;
+import org.openiaml.model.model.wires.ConditionEdgeDestination;
 import org.openiaml.model.model.wires.ParameterEdgeDestination;
 
 /**
@@ -172,6 +173,10 @@ public class ComponentsAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseProvidesEdgesSource(ProvidesEdgesSource object) {
 				return createProvidesEdgesSourceAdapter();
+			}
+			@Override
+			public Adapter caseConditionEdgeDestination(ConditionEdgeDestination object) {
+				return createConditionEdgeDestinationAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -484,6 +489,20 @@ public class ComponentsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createProvidesEdgesSourceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.ConditionEdgeDestination <em>Condition Edge Destination</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.wires.ConditionEdgeDestination
+	 * @generated
+	 */
+	public Adapter createConditionEdgeDestinationAdapter() {
 		return null;
 	}
 

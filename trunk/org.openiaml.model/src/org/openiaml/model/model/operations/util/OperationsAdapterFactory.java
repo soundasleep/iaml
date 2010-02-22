@@ -35,6 +35,7 @@ import org.openiaml.model.model.operations.OperationCallNode;
 import org.openiaml.model.model.operations.OperationsPackage;
 import org.openiaml.model.model.operations.SplitNode;
 import org.openiaml.model.model.operations.StartNode;
+import org.openiaml.model.model.wires.ConditionEdgesSource;
 
 /**
  * <!-- begin-user-doc -->
@@ -183,6 +184,10 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter casePrimitiveOperation(PrimitiveOperation object) {
 				return createPrimitiveOperationAdapter();
+			}
+			@Override
+			public Adapter caseConditionEdgesSource(ConditionEdgesSource object) {
+				return createConditionEdgesSourceAdapter();
 			}
 			@Override
 			public Adapter caseCondition(Condition object) {
@@ -499,6 +504,20 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPrimitiveOperationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.ConditionEdgesSource <em>Condition Edges Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.wires.ConditionEdgesSource
+	 * @generated
+	 */
+	public Adapter createConditionEdgesSourceAdapter() {
 		return null;
 	}
 

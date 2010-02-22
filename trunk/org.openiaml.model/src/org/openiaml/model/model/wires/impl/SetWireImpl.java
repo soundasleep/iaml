@@ -17,6 +17,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
+import org.openiaml.model.model.wires.ConditionEdge;
+import org.openiaml.model.model.wires.ConditionEdgeDestination;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.model.wires.WiresPackage;
 
@@ -28,6 +30,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.openiaml.model.model.wires.impl.SetWireImpl#getInEdges <em>In Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.wires.impl.SetWireImpl#getInConditionEdges <em>In Condition Edges</em>}</li>
  * </ul>
  * </p>
  *
@@ -43,6 +46,16 @@ public class SetWireImpl extends CompositeWireImpl implements SetWire {
 	 * @ordered
 	 */
 	protected EList<WireEdge> inEdges;
+
+	/**
+	 * The cached value of the '{@link #getInConditionEdges() <em>In Condition Edges</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInConditionEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ConditionEdge> inConditionEdges;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -80,12 +93,26 @@ public class SetWireImpl extends CompositeWireImpl implements SetWire {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ConditionEdge> getInConditionEdges() {
+		if (inConditionEdges == null) {
+			inConditionEdges = new EObjectWithInverseResolvingEList<ConditionEdge>(ConditionEdge.class, this, WiresPackage.SET_WIRE__IN_CONDITION_EDGES, WiresPackage.CONDITION_EDGE__TO);
+		}
+		return inConditionEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case WiresPackage.SET_WIRE__IN_EDGES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInEdges()).basicAdd(otherEnd, msgs);
+			case WiresPackage.SET_WIRE__IN_CONDITION_EDGES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInConditionEdges()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -100,6 +127,8 @@ public class SetWireImpl extends CompositeWireImpl implements SetWire {
 		switch (featureID) {
 			case WiresPackage.SET_WIRE__IN_EDGES:
 				return ((InternalEList<?>)getInEdges()).basicRemove(otherEnd, msgs);
+			case WiresPackage.SET_WIRE__IN_CONDITION_EDGES:
+				return ((InternalEList<?>)getInConditionEdges()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -114,6 +143,8 @@ public class SetWireImpl extends CompositeWireImpl implements SetWire {
 		switch (featureID) {
 			case WiresPackage.SET_WIRE__IN_EDGES:
 				return getInEdges();
+			case WiresPackage.SET_WIRE__IN_CONDITION_EDGES:
+				return getInConditionEdges();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -131,6 +162,10 @@ public class SetWireImpl extends CompositeWireImpl implements SetWire {
 				getInEdges().clear();
 				getInEdges().addAll((Collection<? extends WireEdge>)newValue);
 				return;
+			case WiresPackage.SET_WIRE__IN_CONDITION_EDGES:
+				getInConditionEdges().clear();
+				getInConditionEdges().addAll((Collection<? extends ConditionEdge>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -146,6 +181,9 @@ public class SetWireImpl extends CompositeWireImpl implements SetWire {
 			case WiresPackage.SET_WIRE__IN_EDGES:
 				getInEdges().clear();
 				return;
+			case WiresPackage.SET_WIRE__IN_CONDITION_EDGES:
+				getInConditionEdges().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -160,6 +198,8 @@ public class SetWireImpl extends CompositeWireImpl implements SetWire {
 		switch (featureID) {
 			case WiresPackage.SET_WIRE__IN_EDGES:
 				return inEdges != null && !inEdges.isEmpty();
+			case WiresPackage.SET_WIRE__IN_CONDITION_EDGES:
+				return inConditionEdges != null && !inConditionEdges.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -177,6 +217,12 @@ public class SetWireImpl extends CompositeWireImpl implements SetWire {
 				default: return -1;
 			}
 		}
+		if (baseClass == ConditionEdgeDestination.class) {
+			switch (derivedFeatureID) {
+				case WiresPackage.SET_WIRE__IN_CONDITION_EDGES: return WiresPackage.CONDITION_EDGE_DESTINATION__IN_CONDITION_EDGES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -190,6 +236,12 @@ public class SetWireImpl extends CompositeWireImpl implements SetWire {
 		if (baseClass == WireEdgeDestination.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.WIRE_EDGE_DESTINATION__IN_EDGES: return WiresPackage.SET_WIRE__IN_EDGES;
+				default: return -1;
+			}
+		}
+		if (baseClass == ConditionEdgeDestination.class) {
+			switch (baseFeatureID) {
+				case WiresPackage.CONDITION_EDGE_DESTINATION__IN_CONDITION_EDGES: return WiresPackage.SET_WIRE__IN_CONDITION_EDGES;
 				default: return -1;
 			}
 		}

@@ -43,6 +43,7 @@ import org.openiaml.model.model.components.EntryGate;
 import org.openiaml.model.model.components.ExitGate;
 import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.scopes.Session;
+import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ConstraintEdge;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
@@ -70,6 +71,7 @@ import org.openiaml.model.model.wires.RequiresEdge;
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getRequiresEdges <em>Requires Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getProvidesEdges <em>Provides Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getConstraintEdges <em>Constraint Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getConditionEdges <em>Condition Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getScopes <em>Scopes</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getOutEdges <em>Out Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getInEdges <em>In Edges</em>}</li>
@@ -276,6 +278,16 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 * @ordered
 	 */
 	protected EList<ConstraintEdge> constraintEdges;
+
+	/**
+	 * The cached value of the '{@link #getConditionEdges() <em>Condition Edges</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConditionEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ConditionEdge> conditionEdges;
 
 	/**
 	 * The cached value of the '{@link #getScopes() <em>Scopes</em>}' containment reference list.
@@ -579,6 +591,18 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ConditionEdge> getConditionEdges() {
+		if (conditionEdges == null) {
+			conditionEdges = new EObjectContainmentEList<ConditionEdge>(ConditionEdge.class, this, ScopesPackage.SESSION__CONDITION_EDGES);
+		}
+		return conditionEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EntryGate getEntryGate() {
 		return entryGate;
 	}
@@ -860,6 +884,8 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return ((InternalEList<?>)getProvidesEdges()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__CONSTRAINT_EDGES:
 				return ((InternalEList<?>)getConstraintEdges()).basicRemove(otherEnd, msgs);
+			case ScopesPackage.SESSION__CONDITION_EDGES:
+				return ((InternalEList<?>)getConditionEdges()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__SCOPES:
 				return ((InternalEList<?>)getScopes()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__OUT_EDGES:
@@ -922,6 +948,8 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return getProvidesEdges();
 			case ScopesPackage.SESSION__CONSTRAINT_EDGES:
 				return getConstraintEdges();
+			case ScopesPackage.SESSION__CONDITION_EDGES:
+				return getConditionEdges();
 			case ScopesPackage.SESSION__SCOPES:
 				return getScopes();
 			case ScopesPackage.SESSION__OUT_EDGES:
@@ -1007,6 +1035,10 @@ public class SessionImpl extends EObjectImpl implements Session {
 			case ScopesPackage.SESSION__CONSTRAINT_EDGES:
 				getConstraintEdges().clear();
 				getConstraintEdges().addAll((Collection<? extends ConstraintEdge>)newValue);
+				return;
+			case ScopesPackage.SESSION__CONDITION_EDGES:
+				getConditionEdges().clear();
+				getConditionEdges().addAll((Collection<? extends ConditionEdge>)newValue);
 				return;
 			case ScopesPackage.SESSION__SCOPES:
 				getScopes().clear();
@@ -1104,6 +1136,9 @@ public class SessionImpl extends EObjectImpl implements Session {
 			case ScopesPackage.SESSION__CONSTRAINT_EDGES:
 				getConstraintEdges().clear();
 				return;
+			case ScopesPackage.SESSION__CONDITION_EDGES:
+				getConditionEdges().clear();
+				return;
 			case ScopesPackage.SESSION__SCOPES:
 				getScopes().clear();
 				return;
@@ -1177,6 +1212,8 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return providesEdges != null && !providesEdges.isEmpty();
 			case ScopesPackage.SESSION__CONSTRAINT_EDGES:
 				return constraintEdges != null && !constraintEdges.isEmpty();
+			case ScopesPackage.SESSION__CONDITION_EDGES:
+				return conditionEdges != null && !conditionEdges.isEmpty();
 			case ScopesPackage.SESSION__SCOPES:
 				return scopes != null && !scopes.isEmpty();
 			case ScopesPackage.SESSION__OUT_EDGES:
@@ -1231,6 +1268,7 @@ public class SessionImpl extends EObjectImpl implements Session {
 				case ScopesPackage.SESSION__REQUIRES_EDGES: return ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES;
 				case ScopesPackage.SESSION__PROVIDES_EDGES: return ModelPackage.CONTAINS_WIRES__PROVIDES_EDGES;
 				case ScopesPackage.SESSION__CONSTRAINT_EDGES: return ModelPackage.CONTAINS_WIRES__CONSTRAINT_EDGES;
+				case ScopesPackage.SESSION__CONDITION_EDGES: return ModelPackage.CONTAINS_WIRES__CONDITION_EDGES;
 				default: return -1;
 			}
 		}
@@ -1316,6 +1354,7 @@ public class SessionImpl extends EObjectImpl implements Session {
 				case ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES: return ScopesPackage.SESSION__REQUIRES_EDGES;
 				case ModelPackage.CONTAINS_WIRES__PROVIDES_EDGES: return ScopesPackage.SESSION__PROVIDES_EDGES;
 				case ModelPackage.CONTAINS_WIRES__CONSTRAINT_EDGES: return ScopesPackage.SESSION__CONSTRAINT_EDGES;
+				case ModelPackage.CONTAINS_WIRES__CONDITION_EDGES: return ScopesPackage.SESSION__CONDITION_EDGES;
 				default: return -1;
 			}
 		}

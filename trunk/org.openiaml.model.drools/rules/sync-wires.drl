@@ -138,7 +138,7 @@ rule "Run instance wire from target.access to target.init, when we have a value 
 
 end
 
-rule "Run instance wire from source.access to source.init, adding ConditionWire to check it is set"
+rule "Run instance wire from source.access to source.init, adding ConditionEdge to check it is set"
 	when
 		sw : SyncWire(overridden == false)
 		source : ContainsEventTriggers( ) from sw.from  
@@ -153,15 +153,15 @@ rule "Run instance wire from source.access to source.init, adding ConditionWire 
 		# condition check
 		condition : CompositeCondition ( eContainer == target, name == "fieldValue is set" )
 		
-		not ( ConditionWire ( from == condition, to == run ))
+		not ( ConditionEdge ( from == condition, to == run ))
 	
 	then
-		ConditionWire cw = handler.generatedConditionWire(sw, sw, condition, run);
+		ConditionEdge cw = handler.generatedConditionEdge(sw, sw, condition, run);
 		queue.add(cw, drools);
 		
 end	
 
-rule "Run instance wire from target.access to target.init, adding ConditionWire to check it is set"
+rule "Run instance wire from target.access to target.init, adding ConditionEdge to check it is set"
 	when
 		sw : SyncWire(overridden == false)
 		source : ContainsEventTriggers( ) from sw.from  
@@ -176,10 +176,10 @@ rule "Run instance wire from target.access to target.init, adding ConditionWire 
 		# condition check
 		condition : CompositeCondition ( eContainer == source, name == "fieldValue is set" )
 		
-		not ( ConditionWire ( from == condition, to == run ))
+		not ( ConditionEdge ( from == condition, to == run ))
 	
 	then
-		ConditionWire cw = handler.generatedConditionWire(sw, sw, condition, run);
+		ConditionEdge cw = handler.generatedConditionEdge(sw, sw, condition, run);
 		queue.add(cw, drools);
 		
 end	
@@ -265,13 +265,13 @@ rule "Cascaded SyncWires: Conditions from parent to child"
 		
 		# there is a condition on the containing sync wire
 		condition : Condition ( )
-		cw : ConditionWire( from == condition, to == sw )
+		cw : ConditionEdge( from == condition, to == sw )
 
 		# and there isn't one on the element sync wire
-		not (ecw : ConditionWire( from == condition, to == esw )) 
+		not (ecw : ConditionEdge( from == condition, to == esw )) 
 		
 	then
-		ConditionWire ecw = handler.generatedConditionWire( cw, cw, condition, esw );
+		ConditionEdge ecw = handler.generatedConditionEdge( cw, sw, condition, esw );
 		handler.setName(ecw, "[copied] from: " + cw.getId());
 		queue.add(ecw, drools);
 
@@ -292,10 +292,10 @@ rule "Cascaded SyncWires: Parameters from parent to child"
 		
 		# there is a condition on the containing sync wire
 		condition : Condition ( )
-		cw : ConditionWire( from == condition, to == sw )
+		cw : ConditionEdge( from == condition, to == sw )
 		
 		# the generated condition wire
-		ecw : ConditionWire( from == condition, to == esw )
+		ecw : ConditionEdge( from == condition, to == esw )
 		
 		# there is a parameter on the condition wire
 		parameter : ParameterEdgesSource( )
@@ -306,7 +306,7 @@ rule "Cascaded SyncWires: Parameters from parent to child"
 		
 	then
 		# create it
-		ParameterEdge epw = handler.generatedParameterEdge( cw, cw, parameter, ecw );
+		ParameterEdge epw = handler.generatedParameterEdge( cw, sw, parameter, ecw );
 		handler.setName(epw, "[copied] from: " + pw.getId());
 		queue.add(epw, drools);
 
@@ -455,11 +455,11 @@ rule "A SyncWire between Attributes selected from a NewInstanceWire need to chec
 		existsCondition : Condition ( eContainer == instance, name == "exists?" )
 		
 		# but not connected		
-		not (ConditionWire ( from == existsCondition, to == run ))
+		not (ConditionEdge ( from == existsCondition, to == run ))
 		
 	then
 		# connect it
-		ConditionWire cw = handler.generatedConditionWire(sync2, sync2, existsCondition, run);
+		ConditionEdge cw = handler.generatedConditionEdge(sync2, sync2, existsCondition, run);
 		handler.setName(cw, "check new instance exists");
 		queue.add(cw, drools);
 

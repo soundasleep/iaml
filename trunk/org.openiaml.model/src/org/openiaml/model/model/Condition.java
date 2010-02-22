@@ -6,7 +6,7 @@
  */
 package org.openiaml.model.model;
 
-import org.openiaml.model.model.wires.ConditionWire;
+import org.openiaml.model.model.wires.ConditionEdgesSource;
 
 
 /**
@@ -24,5 +24,5 @@ import org.openiaml.model.model.wires.ConditionWire;
  *        annotation="http://openiaml.org/comment comment='added in 0.2'"
  * @generated
  */
-public interface Condition extends WireEdgesSource, DataFlowEdgesSource, NamedElement {
+public interface Condition extends WireEdgesSource, DataFlowEdgesSource, NamedElement, ConditionEdgesSource {
 } // Condition

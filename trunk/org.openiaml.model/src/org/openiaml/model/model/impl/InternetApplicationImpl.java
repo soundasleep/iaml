@@ -35,6 +35,7 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.WireEdge;
+import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ConstraintEdge;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
@@ -61,6 +62,7 @@ import org.openiaml.model.model.wires.RequiresEdge;
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getRequiresEdges <em>Requires Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getProvidesEdges <em>Provides Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getConstraintEdges <em>Constraint Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getConditionEdges <em>Condition Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getGeneratedElements <em>Generated Elements</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#isOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getConditions <em>Conditions</em>}</li>
@@ -244,6 +246,16 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * @ordered
 	 */
 	protected EList<ConstraintEdge> constraintEdges;
+
+	/**
+	 * The cached value of the '{@link #getConditionEdges() <em>Condition Edges</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConditionEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ConditionEdge> conditionEdges;
 
 	/**
 	 * The cached value of the '{@link #getGeneratedElements() <em>Generated Elements</em>}' reference list.
@@ -561,6 +573,18 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ConditionEdge> getConditionEdges() {
+		if (conditionEdges == null) {
+			conditionEdges = new EObjectContainmentEList<ConditionEdge>(ConditionEdge.class, this, ModelPackage.INTERNET_APPLICATION__CONDITION_EDGES);
+		}
+		return conditionEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<GeneratedElement> getGeneratedElements() {
 		if (generatedElements == null) {
 			generatedElements = new EObjectWithInverseResolvingEList.ManyInverse<GeneratedElement>(GeneratedElement.class, this, ModelPackage.INTERNET_APPLICATION__GENERATED_ELEMENTS, ModelPackage.GENERATED_ELEMENT__GENERATED_BY);
@@ -713,6 +737,8 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return ((InternalEList<?>)getProvidesEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__CONSTRAINT_EDGES:
 				return ((InternalEList<?>)getConstraintEdges()).basicRemove(otherEnd, msgs);
+			case ModelPackage.INTERNET_APPLICATION__CONDITION_EDGES:
+				return ((InternalEList<?>)getConditionEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__GENERATED_ELEMENTS:
 				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__CONDITIONS:
@@ -763,6 +789,8 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return getProvidesEdges();
 			case ModelPackage.INTERNET_APPLICATION__CONSTRAINT_EDGES:
 				return getConstraintEdges();
+			case ModelPackage.INTERNET_APPLICATION__CONDITION_EDGES:
+				return getConditionEdges();
 			case ModelPackage.INTERNET_APPLICATION__GENERATED_ELEMENTS:
 				return getGeneratedElements();
 			case ModelPackage.INTERNET_APPLICATION__OVERRIDDEN:
@@ -839,6 +867,10 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 			case ModelPackage.INTERNET_APPLICATION__CONSTRAINT_EDGES:
 				getConstraintEdges().clear();
 				getConstraintEdges().addAll((Collection<? extends ConstraintEdge>)newValue);
+				return;
+			case ModelPackage.INTERNET_APPLICATION__CONDITION_EDGES:
+				getConditionEdges().clear();
+				getConditionEdges().addAll((Collection<? extends ConditionEdge>)newValue);
 				return;
 			case ModelPackage.INTERNET_APPLICATION__GENERATED_ELEMENTS:
 				getGeneratedElements().clear();
@@ -921,6 +953,9 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 			case ModelPackage.INTERNET_APPLICATION__CONSTRAINT_EDGES:
 				getConstraintEdges().clear();
 				return;
+			case ModelPackage.INTERNET_APPLICATION__CONDITION_EDGES:
+				getConditionEdges().clear();
+				return;
 			case ModelPackage.INTERNET_APPLICATION__GENERATED_ELEMENTS:
 				getGeneratedElements().clear();
 				return;
@@ -983,6 +1018,8 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return providesEdges != null && !providesEdges.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__CONSTRAINT_EDGES:
 				return constraintEdges != null && !constraintEdges.isEmpty();
+			case ModelPackage.INTERNET_APPLICATION__CONDITION_EDGES:
+				return conditionEdges != null && !conditionEdges.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__GENERATED_ELEMENTS:
 				return generatedElements != null && !generatedElements.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__OVERRIDDEN:
@@ -1039,6 +1076,7 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				case ModelPackage.INTERNET_APPLICATION__REQUIRES_EDGES: return ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES;
 				case ModelPackage.INTERNET_APPLICATION__PROVIDES_EDGES: return ModelPackage.CONTAINS_WIRES__PROVIDES_EDGES;
 				case ModelPackage.INTERNET_APPLICATION__CONSTRAINT_EDGES: return ModelPackage.CONTAINS_WIRES__CONSTRAINT_EDGES;
+				case ModelPackage.INTERNET_APPLICATION__CONDITION_EDGES: return ModelPackage.CONTAINS_WIRES__CONDITION_EDGES;
 				default: return -1;
 			}
 		}
@@ -1100,6 +1138,7 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				case ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES: return ModelPackage.INTERNET_APPLICATION__REQUIRES_EDGES;
 				case ModelPackage.CONTAINS_WIRES__PROVIDES_EDGES: return ModelPackage.INTERNET_APPLICATION__PROVIDES_EDGES;
 				case ModelPackage.CONTAINS_WIRES__CONSTRAINT_EDGES: return ModelPackage.INTERNET_APPLICATION__CONSTRAINT_EDGES;
+				case ModelPackage.CONTAINS_WIRES__CONDITION_EDGES: return ModelPackage.INTERNET_APPLICATION__CONDITION_EDGES;
 				default: return -1;
 			}
 		}

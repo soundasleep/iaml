@@ -319,6 +319,7 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 		gateEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
 		gateEClass.getESuperTypes().add(theModelPackage.getGeneratedElement());
 		gateEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
+		gateEClass.getESuperTypes().add(theWiresPackage.getConditionEdgeDestination());
 		entryGateEClass.getESuperTypes().add(this.getGate());
 		exitGateEClass.getESuperTypes().add(this.getGate());
 

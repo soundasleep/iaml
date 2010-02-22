@@ -64,7 +64,9 @@ import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Label;
 import org.openiaml.model.model.visual.VisualPackage;
-import org.openiaml.model.model.wires.ConditionWire;
+import org.openiaml.model.model.wires.ConditionEdge;
+import org.openiaml.model.model.wires.ConditionEdgeDestination;
+import org.openiaml.model.model.wires.ConditionEdgesSource;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ExtendsEdgeDestination;
 import org.openiaml.model.model.wires.ExtendsEdgesSource;
@@ -461,8 +463,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return object;
 	}
 
-	public ConditionWire generatedConditionWire(GeneratesElements by, ContainsWires container, WireEdgesSource source, WireEdgeDestination target) throws InferenceException {
-		ConditionWire wire = (ConditionWire) createRelationship(container, WiresPackage.eINSTANCE.getConditionWire(), source, target, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
+	public ConditionEdge generatedConditionEdge(GeneratesElements by, ContainsWires container, ConditionEdgesSource source, ConditionEdgeDestination target) throws InferenceException {
+		ConditionEdge wire = (ConditionEdge) createRelationship(container, WiresPackage.eINSTANCE.getConditionEdge(), source, target, ModelPackage.eINSTANCE.getContainsWires_ConditionEdges(), WiresPackage.eINSTANCE.getConditionEdge_From(), WiresPackage.eINSTANCE.getConditionEdge_To());
 		setGeneratedBy(wire, by);
 		return wire;
 	}

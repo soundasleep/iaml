@@ -24,6 +24,8 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.wires.ConditionEdge;
+import org.openiaml.model.model.wires.ConditionEdgeDestination;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.ParameterEdgeDestination;
 import org.openiaml.model.model.wires.RunInstanceWire;
@@ -48,6 +50,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.wires.impl.RunInstanceWireImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.RunInstanceWireImpl#getGeneratedElements <em>Generated Elements</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.RunInstanceWireImpl#isOverridden <em>Overridden</em>}</li>
+ *   <li>{@link org.openiaml.model.model.wires.impl.RunInstanceWireImpl#getInConditionEdges <em>In Condition Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.RunInstanceWireImpl#getPriority <em>Priority</em>}</li>
  * </ul>
  * </p>
@@ -214,6 +217,16 @@ public class RunInstanceWireImpl extends EObjectImpl implements RunInstanceWire 
 	 * @ordered
 	 */
 	protected boolean overridden = OVERRIDDEN_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getInConditionEdges() <em>In Condition Edges</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInConditionEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ConditionEdge> inConditionEdges;
 
 	/**
 	 * The default value of the '{@link #getPriority() <em>Priority</em>}' attribute.
@@ -531,6 +544,18 @@ public class RunInstanceWireImpl extends EObjectImpl implements RunInstanceWire 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ConditionEdge> getInConditionEdges() {
+		if (inConditionEdges == null) {
+			inConditionEdges = new EObjectWithInverseResolvingEList<ConditionEdge>(ConditionEdge.class, this, WiresPackage.RUN_INSTANCE_WIRE__IN_CONDITION_EDGES, WiresPackage.CONDITION_EDGE__TO);
+		}
+		return inConditionEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public int getPriority() {
 		return priority;
 	}
@@ -572,6 +597,8 @@ public class RunInstanceWireImpl extends EObjectImpl implements RunInstanceWire 
 				return basicSetTo((WireEdgeDestination)otherEnd, msgs);
 			case WiresPackage.RUN_INSTANCE_WIRE__GENERATED_ELEMENTS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGeneratedElements()).basicAdd(otherEnd, msgs);
+			case WiresPackage.RUN_INSTANCE_WIRE__IN_CONDITION_EDGES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInConditionEdges()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -596,6 +623,8 @@ public class RunInstanceWireImpl extends EObjectImpl implements RunInstanceWire 
 				return basicSetTo(null, msgs);
 			case WiresPackage.RUN_INSTANCE_WIRE__GENERATED_ELEMENTS:
 				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
+			case WiresPackage.RUN_INSTANCE_WIRE__IN_CONDITION_EDGES:
+				return ((InternalEList<?>)getInConditionEdges()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -632,6 +661,8 @@ public class RunInstanceWireImpl extends EObjectImpl implements RunInstanceWire 
 				return getGeneratedElements();
 			case WiresPackage.RUN_INSTANCE_WIRE__OVERRIDDEN:
 				return isOverridden();
+			case WiresPackage.RUN_INSTANCE_WIRE__IN_CONDITION_EDGES:
+				return getInConditionEdges();
 			case WiresPackage.RUN_INSTANCE_WIRE__PRIORITY:
 				return getPriority();
 		}
@@ -684,6 +715,10 @@ public class RunInstanceWireImpl extends EObjectImpl implements RunInstanceWire 
 			case WiresPackage.RUN_INSTANCE_WIRE__OVERRIDDEN:
 				setOverridden((Boolean)newValue);
 				return;
+			case WiresPackage.RUN_INSTANCE_WIRE__IN_CONDITION_EDGES:
+				getInConditionEdges().clear();
+				getInConditionEdges().addAll((Collection<? extends ConditionEdge>)newValue);
+				return;
 			case WiresPackage.RUN_INSTANCE_WIRE__PRIORITY:
 				setPriority((Integer)newValue);
 				return;
@@ -732,6 +767,9 @@ public class RunInstanceWireImpl extends EObjectImpl implements RunInstanceWire 
 			case WiresPackage.RUN_INSTANCE_WIRE__OVERRIDDEN:
 				setOverridden(OVERRIDDEN_EDEFAULT);
 				return;
+			case WiresPackage.RUN_INSTANCE_WIRE__IN_CONDITION_EDGES:
+				getInConditionEdges().clear();
+				return;
 			case WiresPackage.RUN_INSTANCE_WIRE__PRIORITY:
 				setPriority(PRIORITY_EDEFAULT);
 				return;
@@ -769,6 +807,8 @@ public class RunInstanceWireImpl extends EObjectImpl implements RunInstanceWire 
 				return generatedElements != null && !generatedElements.isEmpty();
 			case WiresPackage.RUN_INSTANCE_WIRE__OVERRIDDEN:
 				return overridden != OVERRIDDEN_EDEFAULT;
+			case WiresPackage.RUN_INSTANCE_WIRE__IN_CONDITION_EDGES:
+				return inConditionEdges != null && !inConditionEdges.isEmpty();
 			case WiresPackage.RUN_INSTANCE_WIRE__PRIORITY:
 				return priority != PRIORITY_EDEFAULT;
 		}
@@ -822,6 +862,12 @@ public class RunInstanceWireImpl extends EObjectImpl implements RunInstanceWire 
 				default: return -1;
 			}
 		}
+		if (baseClass == ConditionEdgeDestination.class) {
+			switch (derivedFeatureID) {
+				case WiresPackage.RUN_INSTANCE_WIRE__IN_CONDITION_EDGES: return WiresPackage.CONDITION_EDGE_DESTINATION__IN_CONDITION_EDGES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -869,6 +915,12 @@ public class RunInstanceWireImpl extends EObjectImpl implements RunInstanceWire 
 			switch (baseFeatureID) {
 				case ModelPackage.GENERATES_ELEMENTS__GENERATED_ELEMENTS: return WiresPackage.RUN_INSTANCE_WIRE__GENERATED_ELEMENTS;
 				case ModelPackage.GENERATES_ELEMENTS__OVERRIDDEN: return WiresPackage.RUN_INSTANCE_WIRE__OVERRIDDEN;
+				default: return -1;
+			}
+		}
+		if (baseClass == ConditionEdgeDestination.class) {
+			switch (baseFeatureID) {
+				case WiresPackage.CONDITION_EDGE_DESTINATION__IN_CONDITION_EDGES: return WiresPackage.RUN_INSTANCE_WIRE__IN_CONDITION_EDGES;
 				default: return -1;
 			}
 		}

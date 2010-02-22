@@ -35,6 +35,7 @@ import org.openiaml.model.model.operations.OperationCallNode;
 import org.openiaml.model.model.operations.OperationsPackage;
 import org.openiaml.model.model.operations.SplitNode;
 import org.openiaml.model.model.operations.StartNode;
+import org.openiaml.model.model.wires.ConditionEdgesSource;
 
 /**
  * <!-- begin-user-doc -->
@@ -175,6 +176,7 @@ public class OperationsSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(decisionCondition);
 				if (result == null) result = caseDataFlowEdgesSource(decisionCondition);
 				if (result == null) result = caseNamedElement(decisionCondition);
+				if (result == null) result = caseConditionEdgesSource(decisionCondition);
 				if (result == null) result = caseShouldntContainWires(decisionCondition);
 				if (result == null) result = caseGeneratedElement(decisionCondition);
 				if (result == null) result = caseContainsWires(decisionCondition);
@@ -543,6 +545,21 @@ public class OperationsSwitch<T> {
 	 * @generated
 	 */
 	public T casePrimitiveOperation(PrimitiveOperation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Condition Edges Source</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Condition Edges Source</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConditionEdgesSource(ConditionEdgesSource object) {
 		return null;
 	}
 

@@ -27,7 +27,9 @@ import org.openiaml.model.model.users.impl.UsersPackageImpl;
 import org.openiaml.model.model.visual.VisualPackage;
 import org.openiaml.model.model.visual.impl.VisualPackageImpl;
 import org.openiaml.model.model.wires.CompositeWire;
-import org.openiaml.model.model.wires.ConditionWire;
+import org.openiaml.model.model.wires.ConditionEdge;
+import org.openiaml.model.model.wires.ConditionEdgeDestination;
+import org.openiaml.model.model.wires.ConditionEdgesSource;
 import org.openiaml.model.model.wires.ConstraintEdge;
 import org.openiaml.model.model.wires.ConstraintEdgeDestination;
 import org.openiaml.model.model.wires.ConstraintEdgesSource;
@@ -118,7 +120,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass conditionWireEClass = null;
+	private EClass conditionEdgeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -196,6 +198,20 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * @generated
 	 */
 	private EClass constraintEdgeDestinationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass conditionEdgesSourceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass conditionEdgeDestinationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -473,8 +489,26 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getConditionWire() {
-		return conditionWireEClass;
+	public EClass getConditionEdge() {
+		return conditionEdgeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getConditionEdge_From() {
+		return (EReference)conditionEdgeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getConditionEdge_To() {
+		return (EReference)conditionEdgeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -716,6 +750,42 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getConditionEdgesSource() {
+		return conditionEdgesSourceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getConditionEdgesSource_OutConditionEdges() {
+		return (EReference)conditionEdgesSourceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getConditionEdgeDestination() {
+		return conditionEdgeDestinationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getConditionEdgeDestination_InConditionEdges() {
+		return (EReference)conditionEdgeDestinationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getConstraintTypes() {
 		return constraintTypesEEnum;
 	}
@@ -776,7 +846,9 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		createEAttribute(selectWireEClass, SELECT_WIRE__QUERY);
 		createEAttribute(selectWireEClass, SELECT_WIRE__LIMIT);
 
-		conditionWireEClass = createEClass(CONDITION_WIRE);
+		conditionEdgeEClass = createEClass(CONDITION_EDGE);
+		createEReference(conditionEdgeEClass, CONDITION_EDGE__FROM);
+		createEReference(conditionEdgeEClass, CONDITION_EDGE__TO);
 
 		newInstanceWireEClass = createEClass(NEW_INSTANCE_WIRE);
 
@@ -814,6 +886,12 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 
 		constraintEdgeDestinationEClass = createEClass(CONSTRAINT_EDGE_DESTINATION);
 		createEReference(constraintEdgeDestinationEClass, CONSTRAINT_EDGE_DESTINATION__IN_CONSTRAINT_EDGES);
+
+		conditionEdgesSourceEClass = createEClass(CONDITION_EDGES_SOURCE);
+		createEReference(conditionEdgesSourceEClass, CONDITION_EDGES_SOURCE__OUT_CONDITION_EDGES);
+
+		conditionEdgeDestinationEClass = createEClass(CONDITION_EDGE_DESTINATION);
+		createEReference(conditionEdgeDestinationEClass, CONDITION_EDGE_DESTINATION__IN_CONDITION_EDGES);
 
 		// Create enums
 		constraintTypesEEnum = createEEnum(CONSTRAINT_TYPES);
@@ -860,27 +938,31 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		syncWireEClass.getESuperTypes().add(this.getCompositeWire());
 		syncWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
 		syncWireEClass.getESuperTypes().add(this.getParameterEdgeDestination());
+		syncWireEClass.getESuperTypes().add(this.getConditionEdgeDestination());
 		runInstanceWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
 		runInstanceWireEClass.getESuperTypes().add(this.getParameterEdgeDestination());
 		runInstanceWireEClass.getESuperTypes().add(this.getSingleWire());
 		runInstanceWireEClass.getESuperTypes().add(theModelPackage.getNamedElement());
 		runInstanceWireEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
+		runInstanceWireEClass.getESuperTypes().add(this.getConditionEdgeDestination());
 		parameterEdgeEClass.getESuperTypes().add(theModelPackage.getNamedElement());
 		parameterEdgeEClass.getESuperTypes().add(theModelPackage.getGeneratedElement());
 		setWireEClass.getESuperTypes().add(this.getCompositeWire());
 		setWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
+		setWireEClass.getESuperTypes().add(this.getConditionEdgeDestination());
 		navigateWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
 		navigateWireEClass.getESuperTypes().add(this.getSingleWire());
 		navigateWireEClass.getESuperTypes().add(theModelPackage.getNamedElement());
 		navigateWireEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
+		navigateWireEClass.getESuperTypes().add(this.getConditionEdgeDestination());
 		selectWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
 		selectWireEClass.getESuperTypes().add(this.getParameterEdgeDestination());
 		selectWireEClass.getESuperTypes().add(this.getSingleWire());
 		selectWireEClass.getESuperTypes().add(theModelPackage.getNamedElement());
 		selectWireEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
-		conditionWireEClass.getESuperTypes().add(this.getCompositeWire());
-		conditionWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
-		conditionWireEClass.getESuperTypes().add(this.getParameterEdgeDestination());
+		conditionEdgeEClass.getESuperTypes().add(this.getParameterEdgeDestination());
+		conditionEdgeEClass.getESuperTypes().add(theModelPackage.getNamedElement());
+		conditionEdgeEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
 		newInstanceWireEClass.getESuperTypes().add(this.getSingleWire());
 		newInstanceWireEClass.getESuperTypes().add(theModelPackage.getNamedElement());
 		newInstanceWireEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
@@ -890,7 +972,9 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		requiresEdgeEClass.getESuperTypes().add(this.getConstraintEdgesSource());
 		requiresEdgeEClass.getESuperTypes().add(this.getConstraintEdgeDestination());
 		requiresEdgeEClass.getESuperTypes().add(theModelPackage.getContainsWires());
-		constraintEdgeEClass.getESuperTypes().add(theModelPackage.getGeneratedElement());
+		constraintEdgeEClass.getESuperTypes().add(this.getParameterEdgeDestination());
+		constraintEdgeEClass.getESuperTypes().add(theModelPackage.getNamedElement());
+		constraintEdgeEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
 		providesEdgeEClass.getESuperTypes().add(theModelPackage.getGeneratedElement());
 
 		// Initialize classes and features; add operations and parameters
@@ -922,7 +1006,9 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		initEAttribute(getSelectWire_Query(), ecorePackage.getEString(), "query", null, 0, 1, SelectWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSelectWire_Limit(), ecorePackage.getEInt(), "limit", "1", 0, 1, SelectWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(conditionWireEClass, ConditionWire.class, "ConditionWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(conditionEdgeEClass, ConditionEdge.class, "ConditionEdge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getConditionEdge_From(), this.getConditionEdgesSource(), this.getConditionEdgesSource_OutConditionEdges(), "from", null, 1, 1, ConditionEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConditionEdge_To(), this.getConditionEdgeDestination(), this.getConditionEdgeDestination_InConditionEdges(), "to", null, 1, 1, ConditionEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(newInstanceWireEClass, NewInstanceWire.class, "NewInstanceWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -961,6 +1047,12 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		initEClass(constraintEdgeDestinationEClass, ConstraintEdgeDestination.class, "ConstraintEdgeDestination", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getConstraintEdgeDestination_InConstraintEdges(), this.getConstraintEdge(), this.getConstraintEdge_To(), "inConstraintEdges", null, 0, -1, ConstraintEdgeDestination.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(conditionEdgesSourceEClass, ConditionEdgesSource.class, "ConditionEdgesSource", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getConditionEdgesSource_OutConditionEdges(), this.getConditionEdge(), this.getConditionEdge_From(), "outConditionEdges", null, 0, -1, ConditionEdgesSource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(conditionEdgeDestinationEClass, ConditionEdgeDestination.class, "ConditionEdgeDestination", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getConditionEdgeDestination_InConditionEdges(), this.getConditionEdge(), this.getConditionEdge_To(), "inConditionEdges", null, 0, -1, ConditionEdgeDestination.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Initialize enums and add enum literals
 		initEEnum(constraintTypesEEnum, ConstraintTypes.class, "ConstraintTypes");
 		addEEnumLiteral(constraintTypesEEnum, ConstraintTypes.AND);
@@ -998,7 +1090,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 			 "comment3", "only composite wires have a name now",
 			 "editor", "org.openiaml.model.diagram.wire",
 			 "comment4", "a wire shouldn\'t have parameters; but the operations contained within need them rendered."
-		   });			
+		   });				
 		addAnnotation
 		  (runInstanceWireEClass, 
 		   source, 
@@ -1043,7 +1135,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 			 "comment", "parameters can be provided by ParameterWires"
 		   });			
 		addAnnotation
-		  (conditionWireEClass, 
+		  (conditionEdgeEClass, 
 		   source, 
 		   new String[] {
 			 "added", "0.2"
@@ -1123,6 +1215,18 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		   source, 
 		   new String[] {
 			 "comment", "added in 0.4.3"
+		   });			
+		addAnnotation
+		  (conditionEdgesSourceEClass, 
+		   source, 
+		   new String[] {
+			 "comment", "added in 0.4.3"
+		   });			
+		addAnnotation
+		  (conditionEdgeDestinationEClass, 
+		   source, 
+		   new String[] {
+			 "comment", "added in 0.4.3"
 		   });
 	}
 
@@ -1140,6 +1244,12 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		   new String[] {
 			 "documentation", "A {@model SingleWire} represents a single piece of runtime functionality that cannot be decomposed further. A {@model CompositeWire} may ultimately be composed of many of these."
 		   });				
+		addAnnotation
+		  (compositeWireEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "A {@model CompositeWire} allows for complex functionality, such as {@model SingleWire}s, to be represented as a single relationship. The decomposition is provided by model completion."
+		   });		
 		addAnnotation
 		  (syncWireEClass, 
 		   source, 
@@ -1177,10 +1287,10 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 			 "documentation", "Allows for the selection of particular {@link DomainObjectInstance instances} from a {@link DomainStore}."
 		   });			
 		addAnnotation
-		  (conditionWireEClass, 
+		  (conditionEdgeEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "When connected to a {@link RunInstanceWire}, the connected {@link Condition Conditions} will be evaluated before any execution takes place."
+			 "documentation", "Allows the conditional execution of {@model ConditionEdgeDestination targets} such as {@model WireEdge wires}. Only if the {@model ConditionEdgesSource incoming condition} is true, will the execution be permitted."
 		   });			
 		addAnnotation
 		  (newInstanceWireEClass, 
@@ -1247,6 +1357,18 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Something which may be used as the destination of a {@model ConstraintEdge}."
+		   });			
+		addAnnotation
+		  (conditionEdgesSourceEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Something which may be used as the source of a {@model ConditionEdge}."
+		   });			
+		addAnnotation
+		  (conditionEdgeDestinationEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Something which may be used as the destination of a {@model ConditionEdge}."
 		   });	
 	}
 

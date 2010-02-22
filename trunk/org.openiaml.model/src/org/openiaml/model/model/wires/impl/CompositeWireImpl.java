@@ -33,6 +33,7 @@ import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.impl.WireEdgeImpl;
 import org.openiaml.model.model.wires.CompositeWire;
+import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ConstraintEdge;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
@@ -54,6 +55,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getRequiresEdges <em>Requires Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getProvidesEdges <em>Provides Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getConstraintEdges <em>Constraint Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getConditionEdges <em>Condition Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getGeneratedElements <em>Generated Elements</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#isOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getConditions <em>Conditions</em>}</li>
@@ -148,6 +150,16 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 	 * @ordered
 	 */
 	protected EList<ConstraintEdge> constraintEdges;
+
+	/**
+	 * The cached value of the '{@link #getConditionEdges() <em>Condition Edges</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConditionEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ConditionEdge> conditionEdges;
 
 	/**
 	 * The cached value of the '{@link #getGeneratedElements() <em>Generated Elements</em>}' reference list.
@@ -366,6 +378,18 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ConditionEdge> getConditionEdges() {
+		if (conditionEdges == null) {
+			conditionEdges = new EObjectContainmentEList<ConditionEdge>(ConditionEdge.class, this, WiresPackage.COMPOSITE_WIRE__CONDITION_EDGES);
+		}
+		return conditionEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<GeneratedElement> getGeneratedElements() {
 		if (generatedElements == null) {
 			generatedElements = new EObjectWithInverseResolvingEList.ManyInverse<GeneratedElement>(GeneratedElement.class, this, WiresPackage.COMPOSITE_WIRE__GENERATED_ELEMENTS, ModelPackage.GENERATED_ELEMENT__GENERATED_BY);
@@ -513,6 +537,8 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 				return ((InternalEList<?>)getProvidesEdges()).basicRemove(otherEnd, msgs);
 			case WiresPackage.COMPOSITE_WIRE__CONSTRAINT_EDGES:
 				return ((InternalEList<?>)getConstraintEdges()).basicRemove(otherEnd, msgs);
+			case WiresPackage.COMPOSITE_WIRE__CONDITION_EDGES:
+				return ((InternalEList<?>)getConditionEdges()).basicRemove(otherEnd, msgs);
 			case WiresPackage.COMPOSITE_WIRE__GENERATED_ELEMENTS:
 				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
 			case WiresPackage.COMPOSITE_WIRE__CONDITIONS:
@@ -555,6 +581,8 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 				return getProvidesEdges();
 			case WiresPackage.COMPOSITE_WIRE__CONSTRAINT_EDGES:
 				return getConstraintEdges();
+			case WiresPackage.COMPOSITE_WIRE__CONDITION_EDGES:
+				return getConditionEdges();
 			case WiresPackage.COMPOSITE_WIRE__GENERATED_ELEMENTS:
 				return getGeneratedElements();
 			case WiresPackage.COMPOSITE_WIRE__OVERRIDDEN:
@@ -612,6 +640,10 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 			case WiresPackage.COMPOSITE_WIRE__CONSTRAINT_EDGES:
 				getConstraintEdges().clear();
 				getConstraintEdges().addAll((Collection<? extends ConstraintEdge>)newValue);
+				return;
+			case WiresPackage.COMPOSITE_WIRE__CONDITION_EDGES:
+				getConditionEdges().clear();
+				getConditionEdges().addAll((Collection<? extends ConditionEdge>)newValue);
 				return;
 			case WiresPackage.COMPOSITE_WIRE__GENERATED_ELEMENTS:
 				getGeneratedElements().clear();
@@ -681,6 +713,9 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 			case WiresPackage.COMPOSITE_WIRE__CONSTRAINT_EDGES:
 				getConstraintEdges().clear();
 				return;
+			case WiresPackage.COMPOSITE_WIRE__CONDITION_EDGES:
+				getConditionEdges().clear();
+				return;
 			case WiresPackage.COMPOSITE_WIRE__GENERATED_ELEMENTS:
 				getGeneratedElements().clear();
 				return;
@@ -734,6 +769,8 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 				return providesEdges != null && !providesEdges.isEmpty();
 			case WiresPackage.COMPOSITE_WIRE__CONSTRAINT_EDGES:
 				return constraintEdges != null && !constraintEdges.isEmpty();
+			case WiresPackage.COMPOSITE_WIRE__CONDITION_EDGES:
+				return conditionEdges != null && !conditionEdges.isEmpty();
 			case WiresPackage.COMPOSITE_WIRE__GENERATED_ELEMENTS:
 				return generatedElements != null && !generatedElements.isEmpty();
 			case WiresPackage.COMPOSITE_WIRE__OVERRIDDEN:
@@ -777,6 +814,7 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 				case WiresPackage.COMPOSITE_WIRE__REQUIRES_EDGES: return ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES;
 				case WiresPackage.COMPOSITE_WIRE__PROVIDES_EDGES: return ModelPackage.CONTAINS_WIRES__PROVIDES_EDGES;
 				case WiresPackage.COMPOSITE_WIRE__CONSTRAINT_EDGES: return ModelPackage.CONTAINS_WIRES__CONSTRAINT_EDGES;
+				case WiresPackage.COMPOSITE_WIRE__CONDITION_EDGES: return ModelPackage.CONTAINS_WIRES__CONDITION_EDGES;
 				default: return -1;
 			}
 		}
@@ -817,6 +855,7 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 				case ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES: return WiresPackage.COMPOSITE_WIRE__REQUIRES_EDGES;
 				case ModelPackage.CONTAINS_WIRES__PROVIDES_EDGES: return WiresPackage.COMPOSITE_WIRE__PROVIDES_EDGES;
 				case ModelPackage.CONTAINS_WIRES__CONSTRAINT_EDGES: return WiresPackage.COMPOSITE_WIRE__CONSTRAINT_EDGES;
+				case ModelPackage.CONTAINS_WIRES__CONDITION_EDGES: return WiresPackage.COMPOSITE_WIRE__CONDITION_EDGES;
 				default: return -1;
 			}
 		}

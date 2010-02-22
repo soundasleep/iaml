@@ -54,6 +54,7 @@ import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.WireEdgeDestination;
 import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.wires.ConditionEdgesSource;
 import org.openiaml.model.model.wires.ExtendsEdgeDestination;
 import org.openiaml.model.model.wires.ExtendsEdgesSource;
 import org.openiaml.model.model.wires.ParameterEdgeDestination;
@@ -546,6 +547,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(condition);
 				if (result == null) result = caseDataFlowEdgesSource(condition);
 				if (result == null) result = caseNamedElement(condition);
+				if (result == null) result = caseConditionEdgesSource(condition);
 				if (result == null) result = caseShouldntContainWires(condition);
 				if (result == null) result = caseGeneratedElement(condition);
 				if (result == null) result = caseContainsWires(condition);
@@ -562,6 +564,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(compositeCondition);
 				if (result == null) result = caseDataFlowEdgesSource(compositeCondition);
 				if (result == null) result = caseNamedElement(compositeCondition);
+				if (result == null) result = caseConditionEdgesSource(compositeCondition);
 				if (result == null) result = caseShouldntContainWires(compositeCondition);
 				if (result == null) result = caseGeneratedElement(compositeCondition);
 				if (result == null) result = caseContainsWires(compositeCondition);
@@ -1336,6 +1339,21 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseParameterEdgeDestination(ParameterEdgeDestination object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Condition Edges Source</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Condition Edges Source</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConditionEdgesSource(ConditionEdgesSource object) {
 		return null;
 	}
 

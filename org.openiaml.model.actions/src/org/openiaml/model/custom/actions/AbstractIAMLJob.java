@@ -30,28 +30,28 @@ public abstract class AbstractIAMLJob extends Job {
 	/**
 	 * Construct an error IStatus with the given message.
 	 */
-	protected IStatus errorStatus(String message) {
+	public static IStatus errorStatus(String message) {
 		return new Status(IStatus.ERROR, IamlActionsPlugin.PLUGIN_ID, message);
 	}
 	
 	/**
 	 * Construct an error IStatus with the given throwable.
 	 */
-	protected IStatus errorStatus(Throwable e) {
+	public static  IStatus errorStatus(Throwable e) {
 		return new Status(IStatus.ERROR, IamlActionsPlugin.PLUGIN_ID, e.getMessage(), e);
 	}
 	
 	/**
 	 * Construct an error IStatus with the given message and throwable.
 	 */
-	protected IStatus errorStatus(String message, Throwable e) {
+	public static  IStatus errorStatus(String message, Throwable e) {
 		return new Status(IStatus.ERROR, IamlActionsPlugin.PLUGIN_ID, message, e);
 	}
 	
 	/**
 	 * Construct a new empty MultiStatus with the given message.
 	 */
-	protected MultiStatus multiStatus(String message, Throwable e) {
+	public static  MultiStatus multiStatus(String message, Throwable e) {
 		return new MultiStatus(IamlActionsPlugin.PLUGIN_ID, IStatus.ERROR, message, e);
 	}
 

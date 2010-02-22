@@ -4,55 +4,52 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.resources.IContainer;
-import org.eclipse.jface.action.IAction;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.ui.IObjectActionDelegate;
-import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 
 /**
  * Iterate over all .iaml files in the current project, migrate them,
  * and then make sure they can be loaded using EMF.
  * 
- * <p>TODO make this extend ProgressEnabledAction
- * 
  * @author jmwright
  *
  */
-public class MigrateAllModelsAction implements IObjectActionDelegate {
-	
-	private List<IContainer> selection;
-	
+public class MigrateAllModelsAction extends ProgressEnabledAction<IContainer> {
+
 	/* (non-Javadoc)
-	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
+	 * @see org.openiaml.model.custom.actions.ProgressEnabledAction#execute(java.lang.Object, org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	@Override
-	public void run(final IAction action) {
-
-		for (IContainer project : selection) {
-			MigrateAllModelsJob job = new MigrateAllModelsJob(project);
-			job.schedule();
+	public IStatus execute(IContainer individual, IProgressMonitor monitor) {
+		MigrateAllModelsLogic job = new MigrateAllModelsLogic(individual);
+		try {
+			return job.run(monitor);
+		} catch (CoreException e) {
+			return errorStatus("Core exception: " + e.getMessage(), e);
 		}
-		
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.ui.IActionDelegate#selectionChanged(org.eclipse.jface.action.IAction, org.eclipse.jface.viewers.ISelection)
+	 * @see org.openiaml.model.custom.actions.ProgressEnabledAction#getErrorMessage(java.lang.Object, java.lang.String)
 	 */
 	@Override
-	public void selectionChanged(IAction action, ISelection selection) {
-		this.selection = new ArrayList<IContainer>();
-		if (selection instanceof IStructuredSelection) {
-			this.selection = getSelection(((IStructuredSelection) selection).toArray());
-		}
+	public String getErrorMessage(IContainer individual, String message) {
+		return "Could not migrate models in '" + individual + "': " + message;
 	}
-	
-	/**
-	 * Compose an array of selected objects into a list of IProjects.
-	 * 
-	 * @param selection
-	 * @return
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.custom.actions.ProgressEnabledAction#getProgressMessage()
 	 */
+	@Override
+	public String getProgressMessage() {
+		return "Migrating all contained models";
+	}
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.custom.actions.ProgressEnabledAction#getSelection(java.lang.Object[])
+	 */
+	@Override
 	public List<IContainer> getSelection(Object[] selection) {
 		final List<IContainer> ifiles = new ArrayList<IContainer>();
 		
@@ -65,14 +62,6 @@ public class MigrateAllModelsAction implements IObjectActionDelegate {
 		}
 		
 		return ifiles;
-	}
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.ui.IObjectActionDelegate#setActivePart(org.eclipse.jface.action.IAction, org.eclipse.ui.IWorkbenchPart)
-	 */
-	@Override
-	public void setActivePart(IAction action, IWorkbenchPart targetPart) {
-		// empty
 	}
 
 }

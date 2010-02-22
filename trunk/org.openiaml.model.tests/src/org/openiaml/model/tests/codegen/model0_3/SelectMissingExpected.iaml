@@ -13,7 +13,7 @@
   <scopes xsi:type="iaml.visual:Frame" id="visual.12109dbdd39.7" name="an expected failure" inEdges="wires.12109dbdd39.4"/>
   <domainStores id="model.12109331eea.1083" name="domain store">
     <children id="model.12109331eea.108c" name="User" outEdges="wires.12109c6249b.122">
-      <wires xsi:type="iaml.wires:SelectWire" id="wires.12109c6249b.122" from="model.12109331eea.108c" to="model.12109c6242e.482" name="select" inParameterEdges="wires.12109c6249b.123" query="id = ?"/>
+      <wires xsi:type="iaml.wires:SelectWire" inParameterEdges="wires.12109c6249b.123" id="wires.12109c6249b.122" from="model.12109331eea.108c" to="model.12109c6242e.482" name="select" query="id = ?"/>
       <attributes id="model.12109331eea.10ac" name="name"/>
       <attributes id="model.12109331eea.10ad" name="email"/>
       <attributes id="model.12109331eea.10ae" name="password"/>

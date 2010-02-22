@@ -42,17 +42,17 @@
   </scopes>
   <domainStores id="model.1236407970c.5" name="domain store">
     <children id="model.1236407970c.11" name="Person" outEdges="wires.12364143556.6c6" inExtendsEdges="wires.12364143556.1 wires.12364143556.3">
-      <wires xsi:type="iaml.wires:SelectWire" id="wires.12364143556.6c6" from="model.1236407970c.11" to="model.123641434e9.2abe" name="select" inParameterEdges="wires.12364143556.6c8" query="name = ?"/>
+      <wires xsi:type="iaml.wires:SelectWire" inParameterEdges="wires.12364143556.6c8" id="wires.12364143556.6c6" from="model.1236407970c.11" to="model.123641434e9.2abe" name="select" query="name = ?"/>
       <attributes id="model.123641434e9.8a" name="name"/>
       <attributes id="model.123641434e9.29a8" name="id" primaryKey="true"/>
     </children>
     <children id="model.1236407970c.19" name="Student" outEdges="wires.12364143556.751" outExtendsEdges="wires.12364143556.1" inExtendsEdges="wires.12364143556.5 wires.12364143556.6">
-      <wires xsi:type="iaml.wires:SelectWire" id="wires.12364143556.751" from="model.1236407970c.19" to="model.123641434e9.2c34" name="select" inParameterEdges="wires.12364143556.752" query="enrolled = ?"/>
+      <wires xsi:type="iaml.wires:SelectWire" inParameterEdges="wires.12364143556.752" id="wires.12364143556.751" from="model.1236407970c.19" to="model.123641434e9.2c34" name="select" query="enrolled = ?"/>
       <extendsEdges id="wires.12364143556.1" from="model.1236407970c.19" to="model.1236407970c.11"/>
       <attributes id="model.123641434e9.f3" name="enrolled"/>
     </children>
     <children id="model.1236407970c.1a" name="Teacher" outEdges="wires.12364143556.818" outExtendsEdges="wires.12364143556.3 wires.12364143556.4" inExtendsEdges="wires.12364143556.8">
-      <wires xsi:type="iaml.wires:SelectWire" id="wires.12364143556.818" from="model.1236407970c.1a" to="model.123641434e9.2de8" name="select" inParameterEdges="wires.12364143556.819" query="id = ?"/>
+      <wires xsi:type="iaml.wires:SelectWire" inParameterEdges="wires.12364143556.819" id="wires.12364143556.818" from="model.1236407970c.1a" to="model.123641434e9.2de8" name="select" query="id = ?"/>
       <extendsEdges id="wires.12364143556.3" from="model.1236407970c.1a" to="model.1236407970c.11"/>
       <extendsEdges id="wires.12364143556.4" from="model.1236407970c.1a" to="model.1236407970c.1b"/>
       <attributes id="model.123641434e9.163" name="title"/>
@@ -69,7 +69,7 @@
       <attributes id="model.123641434e9.240" name="degree"/>
     </children>
     <children id="model.1236407970c.1e" name="Doctoral" outEdges="wires.12364143556.93b" outExtendsEdges="wires.12364143556.7 wires.12364143556.8">
-      <wires xsi:type="iaml.wires:SelectWire" id="wires.12364143556.93b" from="model.1236407970c.1e" to="model.123641434e9.2f0e" inParameterEdges="wires.12364143556.93c wires.12364143556.93d" query="qualification = :qualification and degree = :degree"/>
+      <wires xsi:type="iaml.wires:SelectWire" inParameterEdges="wires.12364143556.93c wires.12364143556.93d" id="wires.12364143556.93b" from="model.1236407970c.1e" to="model.123641434e9.2f0e" query="qualification = :qualification and degree = :degree"/>
       <extendsEdges id="wires.12364143556.7" from="model.1236407970c.1e" to="model.1236407970c.1c"/>
       <extendsEdges id="wires.12364143556.8" from="model.1236407970c.1e" to="model.1236407970c.1a"/>
       <attributes id="model.123641434e9.371" name="thesis title"/>

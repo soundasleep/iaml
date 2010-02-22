@@ -22,7 +22,7 @@
   <domainStores id="model.126ceb68565.73" name="Store">
     <children id="model.126ceb68565.7e" name="Product" outEdges="wires.126cf449ab2.2e wires.126cf449ab2.44">
       <wires xsi:type="iaml.wires:NewInstanceWire" id="wires.126cf449ab2.2e" from="model.126ceb68565.7e" to="model.126ceb68565.d4" name="new"/>
-      <wires xsi:type="iaml.wires:SelectWire" id="wires.126cf449ab2.44" from="model.126ceb68565.7e" to="model.126cf449831.f3" name="select" inParameterEdges="wires.126cf449ab2.52" query="id = ?"/>
+      <wires xsi:type="iaml.wires:SelectWire" inParameterEdges="wires.126cf449ab2.52" id="wires.126cf449ab2.44" from="model.126ceb68565.7e" to="model.126cf449831.f3" name="select" query="id = ?"/>
       <attributes id="model.126ceb68565.9a" name="id"/>
       <attributes id="model.126ceb68565.a0" name="name"/>
       <attributes id="model.126ceb68565.a1" name="price"/>

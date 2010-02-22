@@ -12,7 +12,7 @@
   </scopes>
   <domainStores id="model.12109331eea.1083" name="domain store">
     <children id="model.12109331eea.108c" name="User" outEdges="wires.12109c6249b.5f">
-      <wires xsi:type="iaml.wires:SelectWire" id="wires.12109c6249b.5f" from="model.12109331eea.108c" to="model.12109c6242e.1dc" name="select" inParameterEdges="wires.12109c6249b.60" query="email = ?"/>
+      <wires xsi:type="iaml.wires:SelectWire" inParameterEdges="wires.12109c6249b.60" id="wires.12109c6249b.5f" from="model.12109331eea.108c" to="model.12109c6242e.1dc" name="select" query="email = ?"/>
       <attributes id="model.12109331eea.10ac" name="name"/>
       <attributes id="model.12109331eea.10ad" name="email"/>
       <attributes id="model.12109331eea.10ae" name="password"/>

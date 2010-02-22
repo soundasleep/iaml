@@ -35,35 +35,14 @@
 «AROUND getSourceElement FOR gmfgen::GenDiagram-»
 	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] We need to override this method to get the correct EObject.")»
 	protected org.eclipse.emf.ecore.EObject getSourceElement(org.eclipse.emf.ecore.EObject relationship) {
+		// [issue 151] ask the common helper class
 		// NOTE: model-specific
-		if (relationship instanceof org.openiaml.model.model.WireEdge) {
-			return ((org.openiaml.model.model.WireEdge) relationship).getFrom();
+		org.eclipse.emf.ecore.EObject resolved = 
+			org.openiaml.model.diagram.helpers.GetShortcuts.getSourceElement(relationship);
+		if (resolved != null) {
+			return resolved;
 		}
-		if (relationship instanceof org.openiaml.model.model.ExecutionEdge) {
-			return ((org.openiaml.model.model.ExecutionEdge) relationship).getFrom();
-		}
-		if (relationship instanceof org.openiaml.model.model.DataFlowEdge) {
-			return ((org.openiaml.model.model.DataFlowEdge) relationship).getFrom();
-		}
-		if (relationship instanceof org.openiaml.model.model.wires.ParameterEdge) {
-			return ((org.openiaml.model.model.wires.ParameterEdge) relationship).getFrom();
-		}
-		if (relationship instanceof org.openiaml.model.model.wires.ExtendsEdge) {
-			return ((org.openiaml.model.model.wires.ExtendsEdge) relationship).getFrom();
-		}
-		if (relationship instanceof org.openiaml.model.model.wires.ProvidesEdge) {
-			return ((org.openiaml.model.model.wires.ProvidesEdge) relationship).getFrom();
-		}
-		if (relationship instanceof org.openiaml.model.model.wires.RequiresEdge) {
-			return ((org.openiaml.model.model.wires.RequiresEdge) relationship).getFrom();
-		}
-		if (relationship instanceof org.openiaml.model.model.wires.ConstraintEdge) {
-			return ((org.openiaml.model.model.wires.ConstraintEdge) relationship).getFrom();
-		}
-		if (relationship instanceof org.openiaml.model.model.wires.ConditionEdge) {
-			return ((org.openiaml.model.model.wires.ConditionEdge) relationship).getFrom();
-		}
-		
+	
 		// if we get this far, there may be a relationship type that
 		// we're not checking for
 		String errorMessage = "Could not resolve source element for relationship element '" + relationship + "'";
@@ -81,33 +60,12 @@
 «AROUND getTargetElement FOR gmfgen::GenDiagram-»
 	«EXPAND xpt::Common::generatedMemberComment("Jevon: [issue 47] We need to override this method to get the correct EObject.")»
 	protected org.eclipse.emf.ecore.EObject getTargetElement(org.eclipse.emf.ecore.EObject relationship) {
+		// [issue 151] ask the common helper class
 		// NOTE: model-specific
-		if (relationship instanceof org.openiaml.model.model.WireEdge) {
-			return ((org.openiaml.model.model.WireEdge) relationship).getTo();
-		}
-		if (relationship instanceof org.openiaml.model.model.ExecutionEdge) {
-			return ((org.openiaml.model.model.ExecutionEdge) relationship).getTo();
-		}
-		if (relationship instanceof org.openiaml.model.model.DataFlowEdge) {
-			return ((org.openiaml.model.model.DataFlowEdge) relationship).getTo();
-		}
-		if (relationship instanceof org.openiaml.model.model.wires.ParameterEdge) {
-			return ((org.openiaml.model.model.wires.ParameterEdge) relationship).getTo();
-		}
-		if (relationship instanceof org.openiaml.model.model.wires.ExtendsEdge) {
-			return ((org.openiaml.model.model.wires.ExtendsEdge) relationship).getTo();
-		}
-		if (relationship instanceof org.openiaml.model.model.wires.ProvidesEdge) {
-			return ((org.openiaml.model.model.wires.ProvidesEdge) relationship).getTo();
-		}
-		if (relationship instanceof org.openiaml.model.model.wires.RequiresEdge) {
-			return ((org.openiaml.model.model.wires.RequiresEdge) relationship).getTo();
-		}
-		if (relationship instanceof org.openiaml.model.model.wires.ConstraintEdge) {
-			return ((org.openiaml.model.model.wires.ConstraintEdge) relationship).getTo();
-		}
-		if (relationship instanceof org.openiaml.model.model.wires.ConditionEdge) {
-			return ((org.openiaml.model.model.wires.ConditionEdge) relationship).getTo();
+		org.eclipse.emf.ecore.EObject resolved = 
+			org.openiaml.model.diagram.helpers.GetShortcuts.getTargetElement(relationship);
+		if (resolved != null) {
+			return resolved;
 		}
 		
 		// if we get this far, there may be a relationship type that

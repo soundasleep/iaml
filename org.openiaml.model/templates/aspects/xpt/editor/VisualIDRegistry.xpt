@@ -1,0 +1,30 @@
+/**
+ * Provide a common IVisualIDRegistryInstance for a given editor.
+ */
+«IMPORT 'http://www.eclipse.org/gmf/2009/GenModel'»
+«EXTENSION MetaModel»
+«EXTENSION xpt::editor::GenDiagram»
+«EXTENSION xpt::editor::Utils»
+
+«AROUND additions FOR gmfgen::GenDiagram»
+	«EXPAND xpt::Common::generatedMemberComment('[jevon] An instance of the IVisualIDRegistryInstance.')»
+	private static org.openiaml.model.diagram.helpers.IVisualIDRegistryInstance idRegistryInstance = null;
+
+	«EXPAND xpt::Common::generatedMemberComment('[jevon] Get the current instance of the IVisualIDRegistryInstance. Create one if necessary using the Singleton pattern.')»
+	public static org.openiaml.model.diagram.helpers.IVisualIDRegistryInstance getInstance() {
+		if (idRegistryInstance == null) {
+			idRegistryInstance = new «visualIDRegistryClassName»Instance();
+		}
+		return idRegistryInstance;
+	}
+
+	«EXPAND xpt::Common::generatedMemberComment('[jevon] The local definition of the IVisualIDRegistryInstance.')»
+	public static class «visualIDRegistryClassName»Instance implements org.openiaml.model.diagram.helpers.IVisualIDRegistryInstance {
+		«EXPAND xpt::Common::generatedMemberComment('[jevon]')»
+		public int getLinkWithClassVisualID(EObject domainElement) {
+			return «visualIDRegistryClassName».getLinkWithClassVisualID(domainElement);
+		}
+	}
+
+	«targetDef.proceed()»
+«ENDAROUND»

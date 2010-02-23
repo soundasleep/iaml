@@ -104,17 +104,26 @@ function queue_log_messages($on) {
 }
 
 // make sure that the db exists for stored_events
-$db = new PDO('sqlite:stored_events.db') or throw_new_IamlRuntimeException("could not open db");
-$s = $db->prepare("SELECT * FROM stored_events");
-if (!$s) {
-	// create the table
-	$q = $db->query("CREATE TABLE stored_events (
-			id INTEGER PRIMARY KEY AUTOINCREMENT,
-			frame_id VARCHAR(64) NOT NULL,
-			event_name VARCHAR(64) NOT NULL,
-			arg0 BLOB
-		);") or throw_new_IamlRuntimeException("could not create table: " . print_r($db->errorInfo(), true));
-	log_message("table for stored_events created", false);
+try {
+	$db = new PDO('sqlite:stored_events.db') or throw_new_IamlRuntimeException("could not open db");
+	$s = $db->prepare("SELECT * FROM stored_events");
+	if (!$s) {
+		// create the table
+		$q = $db->query("CREATE TABLE stored_events (
+				id INTEGER PRIMARY KEY AUTOINCREMENT,
+				frame_id VARCHAR(64) NOT NULL,
+				event_name VARCHAR(64) NOT NULL,
+				arg0 BLOB
+			);") or throw_new_IamlRuntimeException("could not create table: " . print_r($db->errorInfo(), true));
+		log_message("table for stored_events created", false);
+	}
+	$db = null;
+} catch (PDOException $pe) {
+	// this should never occur, unless PDO has a serious error (e.g. the database file cannot be read)
+	header("HTTP/1.0 500 Fatal error");
+	echo "<b>A fatal error occured:</b> " . $pe->getMessage();
+	echo "<br>While trying to access <code>stored_events.db</code>";
+	die;
 }
 
 function require_session($var, $default = false) {

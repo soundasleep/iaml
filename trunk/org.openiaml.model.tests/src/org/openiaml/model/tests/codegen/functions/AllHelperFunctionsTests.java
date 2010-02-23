@@ -20,7 +20,9 @@ public class AllHelperFunctionsTests {
 	public static Test suite() { 
 		TestSuite suite = new TestSuite("Helper Functions");
 		
-		suite.addTestSuite(xxx.class);
+		suite.addTestSuite(Connects.class);
+		suite.addTestSuite(ContainingSession.class);
+		suite.addTestSuite(GetUserQueryString.class);
 
 		return suite;
 	}

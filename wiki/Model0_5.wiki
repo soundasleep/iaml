@@ -57,7 +57,11 @@ Restricts access outside of a currently-visited [http://openiaml.org/model/Scope
 
 =Model 0.4.3=
 
-  _Currently under development._
+*Released [http://journals.jevon.org/users/jevon-phd/entry/19803 February 2010]*
+
+This minor release adds the [http://openiaml.org/model/Label Label], which allows a static field that cannot be edited by a user, yet can still be changed (for example, on events).
+
+This release also marks the start of some significant metamodel refactoring, which should hopefully be transparent to (any) end users.
 
 ==New Elements==
 
@@ -74,3 +78,16 @@ A [http://openiaml.org/model/SetWire SetWire] connecting from a [http://openiaml
 [http://openiaml.org/model/DomainObjectInstance DomainObjectInstance].autosave and [http://openiaml.org/model/DomainAttributeInstance DomainAttributeInstance].autosave now default to "false".
 
 ParameterWires are now known as [http://openiaml.org/model/ParameterEdge ParameterEdges]. They are no longer [http://openiaml.org/model/Wire Wires].
+
+The modelling language is currently undergoing a major meta-model refactoring, which should hopefully be transparent to end-users. In particular:
+
+  * ParameterWire is now [http://openiaml.org/model/ParameterEdge ParameterEdge]
+  * ExtendsWire is now [http://openiaml.org/model/ExtendsEdge ExtendsEdge]
+  * RequiresWire is now [http://openiaml.org/model/RequiresEdge RequiresEdge]
+  * ProvidesWire is now [http://openiaml.org/model/ProvidesEdge ProvidesEdge]
+  * ConstraintWire is now [http://openiaml.org/model/ConstraintEdge ConstraintEdge]
+  * ConditionWire is now [http://openiaml.org/model/ConditionEdge ConditionEdge]
+
+=Model 0.4.4=
+
+  _Currently under development._

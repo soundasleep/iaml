@@ -115,6 +115,12 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
   # Code generation
     * Conditional modelling is also now implemented using the same call stack in 0.4.1
 
+==Release 0.4.3==
+([http://journals.jevon.org/users/jevon-phd/entry/19803 Released] February 2010)
+  # [http://code.google.com/p/iaml/wiki/Model0_5#Model_0.4.3 Expand IAML model]
+    * Label: a static text field that cannot be edited by the user
+    * Some metamodel refactoring: Not all edges are now wires
+
 =Release 0.5=
 ([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.5 Outstanding issues])
   # [Model0_5 Expand IAML model]

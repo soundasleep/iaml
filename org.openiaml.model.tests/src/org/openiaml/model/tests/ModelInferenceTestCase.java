@@ -166,6 +166,9 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 		assertTrue("Resolved absolute path '" + getAbsolutePathRoot() + "' does not exist", f.exists());
 		assertTrue("Resolved absolute path '" + getAbsolutePathRoot() + "' is not a directory", f.isDirectory());
 
+		if (class1.getPackage().getName().contains("codegen.functions")) {
+			return getAbsolutePathRoot() + ROOT + "codegen/functions/" + class1.getSimpleName() + ".iaml";
+		}
 		if (class1.getPackage().getName().contains("codegen.model0_1")) {
 			return getAbsolutePathRoot() + ROOT + "codegen/model0_1/" + class1.getSimpleName() + ".iaml";
 		}

@@ -23,6 +23,10 @@ public class AllHelperFunctionsTests {
 		suite.addTestSuite(Connects.class);
 		suite.addTestSuite(ContainingSession.class);
 		suite.addTestSuite(GetUserQueryString.class);
+		suite.addTestSuite(HasDomainAttribute.class);
+		suite.addTestSuite(LastChainedOperation.class);
+		suite.addTestSuite(NameMatches.class);
+		suite.addTestSuite(XPathMatch.class);
 
 		return suite;
 	}

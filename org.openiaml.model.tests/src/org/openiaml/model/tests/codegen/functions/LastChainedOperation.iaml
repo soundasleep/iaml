@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.126f8149d3d.68">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
+    <operations xsi:type="iaml:PrimitiveOperation" id="model.126f8149d3d.6e" name="o1" outEdges="wires.126f8149daa.19">
+      <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.126f8149daa.19" from="model.126f8149d3d.6e" to="model.126f8149d3d.73" name="r1"/>
+    </operations>
+    <operations xsi:type="iaml:PrimitiveOperation" inEdges="wires.126f8149daa.19" id="model.126f8149d3d.73" name="o2" outEdges="wires.126f8149daa.1b">
+      <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.126f8149daa.1b" from="model.126f8149d3d.73" to="model.126f8149d3d.74" name="r2"/>
+    </operations>
+    <operations xsi:type="iaml:PrimitiveOperation" inEdges="wires.126f8149daa.1b" id="model.126f8149d3d.74" name="o3"/>
+    <operations xsi:type="iaml:PrimitiveOperation" id="model.126f8149d3d.75" name="o4"/>
+  </scopes>
+</iaml:InternetApplication>

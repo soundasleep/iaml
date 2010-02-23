@@ -76,5 +76,9 @@ public class GmfToolsPlugin extends Plugin {
 				new Status(IStatus.INFO, GmfToolsPlugin.PLUGIN_ID,
 						IStatus.OK, message, throwable));
 	}
+
+	public void logError(Throwable e) {
+		logError(e.getMessage(), e);
+	}
 	
 }

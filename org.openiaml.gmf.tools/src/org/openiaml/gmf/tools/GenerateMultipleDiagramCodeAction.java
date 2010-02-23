@@ -20,6 +20,7 @@ import org.eclipse.ui.IWorkbenchPart;
  * @author jmwright
  *
  */
+@SuppressWarnings("restriction")
 public class GenerateMultipleDiagramCodeAction implements IObjectActionDelegate {
 
 	private List<IFile> selection;
@@ -28,7 +29,6 @@ public class GenerateMultipleDiagramCodeAction implements IObjectActionDelegate 
 	/* (non-Javadoc)
 	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
 	 */
-	@SuppressWarnings("restriction")
 	@Override
 	public void run(final IAction action) {
 		

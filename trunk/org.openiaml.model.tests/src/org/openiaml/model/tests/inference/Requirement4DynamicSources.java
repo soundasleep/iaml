@@ -148,7 +148,7 @@ public class Requirement4DynamicSources extends InferenceTestCaseWithConditionWi
 		ConditionEdge syncCond = assertHasConditionEdge(root, c, swtext);	
 		assertGenerated(syncCond);
 		
-		EventTrigger access = assertHasEventTrigger(page1text1, "access");
+		EventTrigger access = page1text1.getOnAccess();
 		assertGenerated(access);
 		Operation init = assertHasOperation(page1text1, "init");
 		assertGenerated(init);

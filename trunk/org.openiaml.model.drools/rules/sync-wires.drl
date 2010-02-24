@@ -128,7 +128,7 @@ end
 rule "Run instance wire from source.access to source.init, when we have a value to provide as a parameter"
 	when
 		sw : SyncWire(overridden == false)
-		source : ContainsEventTriggers( )  
+		source : ContainsEventTriggers( )
 		target : ContainsOperations( )
 		eval ( functions.connects(sw, source, target ))
 		
@@ -168,7 +168,7 @@ end
 rule "Run instance wire from source.access to source.init, adding ConditionEdge to check it is set"
 	when
 		sw : SyncWire(overridden == false)
-		source : ContainsEventTriggers( )  
+		source : ContainsEventTriggers( )
 		target : ContainsOperations( )
 		eval ( functions.connects(sw, source, target))
 				

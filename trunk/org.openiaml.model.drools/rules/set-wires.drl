@@ -22,7 +22,8 @@ rule "Set wires between objects should create set wires between all elements ins
 		# source : SetWire(overridden == false, eval(functions.connectsSet(source, p1, p2)) )
 		source : SetWire(overridden == false)
 		p1 : CanBeSynced( )
-		p2 : CanBeSynced(this != p1)
+		p2 : CanBeSynced( )
+		eval( p1 != p2 )
 		eval(functions.connectsSet(source, p1, p2))
 		
 		e1 : CanBeSynced( eContainer == p1 )
@@ -122,8 +123,8 @@ end
 rule "Run instance wire from target.access to target.init, when we have a value to provide as a parameter [set]"
 	when
 		sw : SetWire(overridden == false)
-		source : ContainsEventTriggers( )
-		target : ContainsOperations( )
+		source : ContainsOperations( )
+		target : ContainsEventTriggers( )
 		eval(functions.connectsSet(sw, source, target))
 		
 		event : EventTrigger( eContainer == target, name=="access" )
@@ -142,7 +143,7 @@ end
 rule "Run instance wire from target.access to target.init, when we have a value to provide as a parameter [set] (onAccess)"
 	when
 		sw : SetWire(overridden == false)
-		source : ContainsEventTriggers( )
+		source : ContainsOperations( )
 		target : VisibleThing( )
 		eval(functions.connectsSet(sw, source, target))
 		
@@ -162,8 +163,8 @@ end
 rule "Run instance wire from target.access to target.init, adding ConditionEdge to check it is set [set]"
 	when
 		sw : SetWire(overridden == false)
-		source : ContainsEventTriggers( )
-		target : ContainsOperations( )
+		source : ContainsOperations( )
+		target : ContainsEventTriggers( )
 		eval(functions.connectsSet(sw, source, target))
 		
 		event : EventTrigger( eContainer == target, name=="access" )
@@ -187,7 +188,7 @@ end
 rule "Run instance wire from target.access to target.init, adding ConditionEdge to check it is set [set] (onAccess)"
 	when
 		sw : SetWire(overridden == false)
-		source : ContainsEventTriggers( )
+		source : ContainsOperations( )
 		target : VisibleThing( )
 		eval(functions.connectsSet(sw, source, target))
 		
@@ -220,7 +221,7 @@ rule "Connect parameter wire to: run instance wire from target.access to target.
 		event : EventTrigger( eContainer == target, name=="access" )
 		operation : Operation( eContainer == target, name=="init" )
 		field : Property( eContainer == source, name=="fieldValue" )
-		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
+		wire : RunInstanceWire( from == event, to == operation, name == "run" )
 		
 		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
 		
@@ -241,7 +242,7 @@ rule "Connect parameter wire to: run instance wire from target.access to target.
 		event : EventTrigger( target.onAccess == event ) 
 		operation : Operation( eContainer == target, name=="init" )
 		field : Property( eContainer == source, name=="fieldValue" )
-		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
+		wire : RunInstanceWire( from == event, to == operation, name == "run" )
 		
 		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
 		

@@ -85,9 +85,9 @@ public class SyncWiresProperties extends InferenceTestCase {
 
 		// there should be sync wires between each of these elements
 		// (and the directionality does not matter)
-		SyncWire sw1 = (SyncWire) getWireBidirectional(form, f1, a1);
-		SyncWire sw2 = (SyncWire) getWireBidirectional(form, f2, a2);
-		SyncWire sw3 = (SyncWire) getWireBidirectional(form, f3, a3);
+		SyncWire sw1 = assertHasSyncWire(form, f1, a1);
+		SyncWire sw2 = assertHasSyncWire(form, f2, a2);
+		SyncWire sw3 = assertHasSyncWire(form, f3, a3);
 
 		assertTrue(sw1.isIsGenerated());
 		assertTrue(sw2.isIsGenerated());

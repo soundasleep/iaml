@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.ExtendedProperties;
 import org.openiaml.model.FileReference;
 import org.openiaml.model.inference.InferenceException;
+import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsEventTriggers;
@@ -40,7 +41,10 @@ import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Property;
+import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.WireEdge;
+import org.openiaml.model.model.WireEdgeDestination;
+import org.openiaml.model.model.WireEdgesSource;
 import org.openiaml.model.model.domain.DomainStoreTypes;
 import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ConstraintEdge;
@@ -73,6 +77,8 @@ import org.openiaml.model.model.wires.RequiresEdge;
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getConditions <em>Conditions</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getGeneratedElements <em>Generated Elements</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#isOverridden <em>Overridden</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getOutEdges <em>Out Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getInEdges <em>In Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getAttributes <em>Attributes</em>}</li>
@@ -282,6 +288,24 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 	 * @ordered
 	 */
 	protected boolean overridden = OVERRIDDEN_EDEFAULT;
+	/**
+	 * The cached value of the '{@link #getOutEdges() <em>Out Edges</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOutEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<WireEdge> outEdges;
+	/**
+	 * The cached value of the '{@link #getInEdges() <em>In Edges</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<WireEdge> inEdges;
 	/**
 	 * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -619,6 +643,30 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<WireEdge> getOutEdges() {
+		if (outEdges == null) {
+			outEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, ModelPackage.DOMAIN_STORE__OUT_EDGES, ModelPackage.WIRE_EDGE__FROM);
+		}
+		return outEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<WireEdge> getInEdges() {
+		if (inEdges == null) {
+			inEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, ModelPackage.DOMAIN_STORE__IN_EDGES, ModelPackage.WIRE_EDGE__TO);
+		}
+		return inEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<DomainObject> getChildren() {
 		if (children == null) {
 			children = new EObjectContainmentEList<DomainObject>(DomainObject.class, this, ModelPackage.DOMAIN_STORE__CHILDREN);
@@ -705,6 +753,10 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGeneratedBy()).basicAdd(otherEnd, msgs);
 			case ModelPackage.DOMAIN_STORE__GENERATED_ELEMENTS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGeneratedElements()).basicAdd(otherEnd, msgs);
+			case ModelPackage.DOMAIN_STORE__OUT_EDGES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutEdges()).basicAdd(otherEnd, msgs);
+			case ModelPackage.DOMAIN_STORE__IN_EDGES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInEdges()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -741,6 +793,10 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 				return ((InternalEList<?>)getConditions()).basicRemove(otherEnd, msgs);
 			case ModelPackage.DOMAIN_STORE__GENERATED_ELEMENTS:
 				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
+			case ModelPackage.DOMAIN_STORE__OUT_EDGES:
+				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
+			case ModelPackage.DOMAIN_STORE__IN_EDGES:
+				return ((InternalEList<?>)getInEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.DOMAIN_STORE__CHILDREN:
 				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
 			case ModelPackage.DOMAIN_STORE__PROPERTIES:
@@ -793,6 +849,10 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 				return getGeneratedElements();
 			case ModelPackage.DOMAIN_STORE__OVERRIDDEN:
 				return isOverridden();
+			case ModelPackage.DOMAIN_STORE__OUT_EDGES:
+				return getOutEdges();
+			case ModelPackage.DOMAIN_STORE__IN_EDGES:
+				return getInEdges();
 			case ModelPackage.DOMAIN_STORE__CHILDREN:
 				return getChildren();
 			case ModelPackage.DOMAIN_STORE__PROPERTIES:
@@ -879,6 +939,14 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 			case ModelPackage.DOMAIN_STORE__OVERRIDDEN:
 				setOverridden((Boolean)newValue);
 				return;
+			case ModelPackage.DOMAIN_STORE__OUT_EDGES:
+				getOutEdges().clear();
+				getOutEdges().addAll((Collection<? extends WireEdge>)newValue);
+				return;
+			case ModelPackage.DOMAIN_STORE__IN_EDGES:
+				getInEdges().clear();
+				getInEdges().addAll((Collection<? extends WireEdge>)newValue);
+				return;
 			case ModelPackage.DOMAIN_STORE__CHILDREN:
 				getChildren().clear();
 				getChildren().addAll((Collection<? extends DomainObject>)newValue);
@@ -960,6 +1028,12 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 			case ModelPackage.DOMAIN_STORE__OVERRIDDEN:
 				setOverridden(OVERRIDDEN_EDEFAULT);
 				return;
+			case ModelPackage.DOMAIN_STORE__OUT_EDGES:
+				getOutEdges().clear();
+				return;
+			case ModelPackage.DOMAIN_STORE__IN_EDGES:
+				getInEdges().clear();
+				return;
 			case ModelPackage.DOMAIN_STORE__CHILDREN:
 				getChildren().clear();
 				return;
@@ -1021,6 +1095,10 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 				return generatedElements != null && !generatedElements.isEmpty();
 			case ModelPackage.DOMAIN_STORE__OVERRIDDEN:
 				return overridden != OVERRIDDEN_EDEFAULT;
+			case ModelPackage.DOMAIN_STORE__OUT_EDGES:
+				return outEdges != null && !outEdges.isEmpty();
+			case ModelPackage.DOMAIN_STORE__IN_EDGES:
+				return inEdges != null && !inEdges.isEmpty();
 			case ModelPackage.DOMAIN_STORE__CHILDREN:
 				return children != null && !children.isEmpty();
 			case ModelPackage.DOMAIN_STORE__PROPERTIES:
@@ -1088,6 +1166,28 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 				default: return -1;
 			}
 		}
+		if (baseClass == ShouldntContainWires.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == WireEdgesSource.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.DOMAIN_STORE__OUT_EDGES: return ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES;
+				default: return -1;
+			}
+		}
+		if (baseClass == WireEdgeDestination.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.DOMAIN_STORE__IN_EDGES: return ModelPackage.WIRE_EDGE_DESTINATION__IN_EDGES;
+				default: return -1;
+			}
+		}
+		if (baseClass == CanBeSynced.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -1141,6 +1241,28 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 			switch (baseFeatureID) {
 				case ModelPackage.GENERATES_ELEMENTS__GENERATED_ELEMENTS: return ModelPackage.DOMAIN_STORE__GENERATED_ELEMENTS;
 				case ModelPackage.GENERATES_ELEMENTS__OVERRIDDEN: return ModelPackage.DOMAIN_STORE__OVERRIDDEN;
+				default: return -1;
+			}
+		}
+		if (baseClass == ShouldntContainWires.class) {
+			switch (baseFeatureID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == WireEdgesSource.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES: return ModelPackage.DOMAIN_STORE__OUT_EDGES;
+				default: return -1;
+			}
+		}
+		if (baseClass == WireEdgeDestination.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.WIRE_EDGE_DESTINATION__IN_EDGES: return ModelPackage.DOMAIN_STORE__IN_EDGES;
+				default: return -1;
+			}
+		}
+		if (baseClass == CanBeSynced.class) {
+			switch (baseFeatureID) {
 				default: return -1;
 			}
 		}

@@ -117,13 +117,17 @@ public class UsersSwitch<T> {
 				UserStore userStore = (UserStore)theEObject;
 				T result = caseUserStore(userStore);
 				if (result == null) result = caseDomainStore(userStore);
-				if (result == null) result = caseContainsOperations(userStore);
 				if (result == null) result = caseContainsEventTriggers(userStore);
+				if (result == null) result = caseCanBeSynced(userStore);
+				if (result == null) result = caseContainsOperations(userStore);
 				if (result == null) result = caseNamedElement(userStore);
-				if (result == null) result = caseContainsWires(userStore);
+				if (result == null) result = caseGeneratedElement(userStore);
 				if (result == null) result = caseContainsConditions(userStore);
 				if (result == null) result = caseGeneratesElements(userStore);
-				if (result == null) result = caseGeneratedElement(userStore);
+				if (result == null) result = caseWireEdgesSource(userStore);
+				if (result == null) result = caseWireEdgeDestination(userStore);
+				if (result == null) result = caseShouldntContainWires(userStore);
+				if (result == null) result = caseContainsWires(userStore);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

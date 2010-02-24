@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.drools.FactHandle;
 import org.drools.RuleBase;
 import org.drools.RuleBaseFactory;
 import org.drools.StatefulSession;
@@ -166,6 +167,8 @@ public abstract class DroolsInferenceEngine {
         monitor.worked(5);
         monitor.subTask("Inserting initial model");
         
+        final Map<EObject,FactHandle> factMemory = new HashMap<EObject,FactHandle>();
+        
         // automatically insert new objects based on a given object
         workingMemory.addEventListener( new WorkingMemoryEventListener() {
 
@@ -193,7 +196,16 @@ public abstract class DroolsInferenceEngine {
 					// get all objects within 
 					TreeIterator<EObject> it = ((EObject) obj.getObject()).eAllContents();
 					while (it.hasNext()) {
-						workingMemory.insert( it.next() );
+						EObject o = it.next();
+						factMemory.put(o, workingMemory.insert( o ));
+						
+						// this solves problems where inserting something into the containment feature
+						// of a property which then needs to be accessed (e.g. onAccess, onEdit)
+						// does not correctly update the parent object for new results
+						if (o.eContainer() != null && factMemory.containsKey(o.eContainer())) {
+							workingMemory.update(factMemory.get(o.eContainer()), o.eContainer());
+						}
+						
 					}
 				}
 				

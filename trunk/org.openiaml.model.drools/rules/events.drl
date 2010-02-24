@@ -21,7 +21,7 @@ global DroolsHelperFunctions functions;
 rule "Create 'click' event trigger for button"
 	when
 		f : Button( overridden == false )
-		not (EventTrigger( this == f.onClick ))
+		not (event : EventTrigger( f.onClick == event ))
 			
 	then
 
@@ -34,7 +34,7 @@ end
 rule "Create 'edit' event trigger for input text field"
 	when
 		f : InputTextField( overridden == false )
-		not (EventTrigger( this == f.onEdit ))
+		not (event : EventTrigger( f.onEdit == event ))
 			
 	then
 		// debug: System.out.println(drools.getRule().getName() + ": " + f); 
@@ -61,7 +61,7 @@ end
 rule "Create 'access' event trigger for input text field"
 	when
 		f : InputTextField( overridden == false )
-		not (EventTrigger( this == f.onAccess ))
+		not (event : EventTrigger( f.onAccess == event ))
 			
 	then
 		EventTrigger event = handler.generatedEventTriggerOnAccess(f, f);

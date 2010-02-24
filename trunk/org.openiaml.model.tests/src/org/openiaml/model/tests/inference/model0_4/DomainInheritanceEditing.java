@@ -83,7 +83,7 @@ public class DomainInheritanceEditing extends InferenceTestCase {
 		InputTextField field = assertHasInputTextField(form, "name");
 		assertGenerated(field);
 		
-		EventTrigger access = assertHasEventTrigger(field, "access");
+		EventTrigger access = field.getOnAccess();
 		assertGenerated(access);
 		
 		Operation init = assertHasOperation(field, "init");
@@ -137,7 +137,7 @@ public class DomainInheritanceEditing extends InferenceTestCase {
 		InputTextField field = assertHasInputTextField(form, "name");
 		assertGenerated(field);
 		
-		EventTrigger access = assertHasEventTrigger(field, "access");
+		EventTrigger access = field.getOnAccess();
 		assertGenerated(access);
 		
 		Operation init = assertHasOperation(field, "init");

@@ -42,7 +42,7 @@ public class DatabaseWithInputForm extends InferenceTestCase {
 
 		// [inferred]
 		// both text field and attribute should have events/operations
-		EventTrigger srcEdit = assertHasEventTrigger(source, "edit");
+		EventTrigger srcEdit = source.getOnEdit();
 		Operation srcOp = assertHasOperation(source, "update");
 		EventTrigger targetEdit = assertHasEventTrigger(attribute, "edit");
 		Operation targetOp = assertHasOperation(attribute, "update");
@@ -76,7 +76,7 @@ public class DatabaseWithInputForm extends InferenceTestCase {
 
 		// [inferred]
 		// both text field and attribute should have events/operations
-		EventTrigger srcEdit = assertHasEventTrigger(source, "edit");
+		EventTrigger srcEdit = source.getOnEdit();
 		Operation srcOp = assertHasOperation(source, "update");
 		EventTrigger targetEdit = assertHasEventTrigger(attribute, "edit");
 		Operation targetOp = assertHasOperation(attribute, "update");

@@ -45,12 +45,12 @@ public class SyncFormDomainObject extends InferenceTestCase {
 		DomainAttribute attr2 = assertHasDomainAttribute(obj, "field2");
 
 		// there should be a SyncWire from field1 to attr1
-		SyncWire sw1 = (SyncWire) getWireBidirectional(form, field1, attr1);
-		SyncWire sw2 = (SyncWire) getWireBidirectional(form, field2, attr2);
+		SyncWire sw1 = assertHasSyncWire(form, field1, attr1);
+		SyncWire sw2 = assertHasSyncWire(form, field2, attr2);
 
 		// fields should now have an edit event
-		EventTrigger editf1 = assertHasEventTrigger(field1, "edit");
-		EventTrigger editf2 = assertHasEventTrigger(field2, "edit");
+		EventTrigger editf1 = field1.getOnEdit();
+		EventTrigger editf2 = field2.getOnEdit();
 
 		// attrs should now have an edit event
 		EventTrigger edita1 = assertHasEventTrigger(attr1, "edit");

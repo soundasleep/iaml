@@ -390,13 +390,17 @@ public class ModelSwitch<T> {
 			case ModelPackage.DOMAIN_STORE: {
 				DomainStore domainStore = (DomainStore)theEObject;
 				T result = caseDomainStore(domainStore);
-				if (result == null) result = caseContainsOperations(domainStore);
 				if (result == null) result = caseContainsEventTriggers(domainStore);
+				if (result == null) result = caseCanBeSynced(domainStore);
+				if (result == null) result = caseContainsOperations(domainStore);
 				if (result == null) result = caseNamedElement(domainStore);
-				if (result == null) result = caseContainsWires(domainStore);
+				if (result == null) result = caseGeneratedElement(domainStore);
 				if (result == null) result = caseContainsConditions(domainStore);
 				if (result == null) result = caseGeneratesElements(domainStore);
-				if (result == null) result = caseGeneratedElement(domainStore);
+				if (result == null) result = caseWireEdgesSource(domainStore);
+				if (result == null) result = caseWireEdgeDestination(domainStore);
+				if (result == null) result = caseShouldntContainWires(domainStore);
+				if (result == null) result = caseContainsWires(domainStore);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

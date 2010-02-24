@@ -156,10 +156,6 @@ public class UsersAdapterFactory extends AdapterFactoryImpl {
 				return createGeneratesElementsAdapter();
 			}
 			@Override
-			public Adapter caseDomainStore(DomainStore object) {
-				return createDomainStoreAdapter();
-			}
-			@Override
 			public Adapter caseShouldntContainWires(ShouldntContainWires object) {
 				return createShouldntContainWiresAdapter();
 			}
@@ -174,6 +170,10 @@ public class UsersAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseCanBeSynced(CanBeSynced object) {
 				return createCanBeSyncedAdapter();
+			}
+			@Override
+			public Adapter caseDomainStore(DomainStore object) {
+				return createDomainStoreAdapter();
 			}
 			@Override
 			public Adapter caseApplicationElement(ApplicationElement object) {

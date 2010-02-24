@@ -224,6 +224,24 @@ public interface UsersPackage extends EPackage {
 	int USER_STORE__OVERRIDDEN = ModelPackage.DOMAIN_STORE__OVERRIDDEN;
 
 	/**
+	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_STORE__OUT_EDGES = ModelPackage.DOMAIN_STORE__OUT_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_STORE__IN_EDGES = ModelPackage.DOMAIN_STORE__IN_EDGES;
+
+	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -48,7 +48,7 @@ public class SessionSyncWires extends InferenceTestCase {
 
 		// generated events and operations
 		// all part of SyncWire elements generation
-		EventTrigger edit = assertHasEventTrigger(field1, "edit");
+		EventTrigger edit = field1.getOnEdit();
 		Operation update = assertHasOperation(field2, "update");
 		RunInstanceWire rw = (RunInstanceWire) getWireFromTo(root, edit, update);
 
@@ -84,7 +84,7 @@ public class SessionSyncWires extends InferenceTestCase {
 		InputTextField field1 = assertHasInputTextField(outside, "target");
 		InputTextField field2 = assertHasInputTextField(inside, "target");
 		
-		EventTrigger access = assertHasEventTrigger(field1, "access");
+		EventTrigger access = field1.getOnAccess();
 		assertGenerated(access);
 		Operation init = assertHasOperation(field1, "init");
 		assertGenerated(init);

@@ -52,9 +52,9 @@ public class ConditionWireXpath extends InferenceTestCase {
 
 		// we can now investigate the SyncWires themselves, and make sure
 		// they have the conditions attached too
-		EventTrigger srcEdit = assertHasEventTrigger(field1, "edit");
+		EventTrigger srcEdit = field1.getOnEdit();
 		Operation srcOp = assertHasOperation(field1, "update");
-		EventTrigger targetEdit = assertHasEventTrigger(field2, "edit");
+		EventTrigger targetEdit = field2.getOnEdit();
 		Operation targetOp = assertHasOperation(field2, "update");
 		assertNotSame(srcEdit, targetEdit);
 		assertNotSame(srcOp, targetOp);

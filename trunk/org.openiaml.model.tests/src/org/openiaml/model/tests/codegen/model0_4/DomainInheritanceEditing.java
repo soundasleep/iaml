@@ -46,6 +46,7 @@ import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
  */
 public class DomainInheritanceEditing extends CodegenTestCase {
 	
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		root = loadAndCodegen(DomainInheritanceEditing.class);

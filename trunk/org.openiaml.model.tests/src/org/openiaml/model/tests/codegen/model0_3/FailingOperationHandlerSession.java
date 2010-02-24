@@ -14,6 +14,7 @@ import org.openiaml.model.tests.CodegenTestCase;
  */
 public class FailingOperationHandlerSession extends CodegenTestCase {
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		root = loadAndCodegen(FailingOperationHandlerSession.class);

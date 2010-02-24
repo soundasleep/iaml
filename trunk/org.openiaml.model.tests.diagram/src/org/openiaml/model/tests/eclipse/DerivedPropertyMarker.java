@@ -23,6 +23,7 @@ public class DerivedPropertyMarker extends AbstractActionTestCase<IFile> {
 		return "src/org/openiaml/model/tests/eclipse/";
 	}
 
+	@Override
 	public String getModel() {
 		return "DerivedPropertyMarker.iaml";
 	}
@@ -116,6 +117,7 @@ public class DerivedPropertyMarker extends AbstractActionTestCase<IFile> {
 	 * Close loaded editors.
 	 * @throws Exception 
 	 */
+	@Override
 	public void tearDown() throws Exception {
 
 		if (editor_operation != null)

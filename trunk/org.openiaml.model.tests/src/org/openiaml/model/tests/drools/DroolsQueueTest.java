@@ -57,6 +57,7 @@ public class DroolsQueueTest extends XmlTestCase {
 		 * @see #addRuleFile(String)
 		 * @return
 		 */
+		@Override
 		public List<String> getRuleFiles() {
 			return ruleFiles;
 		}

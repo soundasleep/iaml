@@ -23,6 +23,7 @@ import org.openiaml.model.model.wires.SyncWire;
  */
 public class PropertiesFileWithInputForm extends InferenceTestCase {
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		root = loadAndInfer(PropertiesFileWithInputForm.class);

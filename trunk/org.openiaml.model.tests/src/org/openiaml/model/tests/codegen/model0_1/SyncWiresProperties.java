@@ -45,6 +45,7 @@ public class SyncWiresProperties extends CodegenTestCase {
 
 	protected static final String PROPERTIES = "SyncWiresProperties.properties";
 	
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		root = loadAndCodegen(SyncWiresProperties.class);

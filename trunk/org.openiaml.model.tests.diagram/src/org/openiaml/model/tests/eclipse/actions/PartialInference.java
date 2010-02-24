@@ -22,6 +22,7 @@ import org.openiaml.model.diagram.custom.actions.InferContainedElementsAction;
  */
 public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> {
 
+	@Override
 	public String getModel() {
 		return "PartialInference.iaml";
 	}
@@ -290,6 +291,7 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 	 * Close loaded editors.
 	 * @throws Exception 
 	 */
+	@Override
 	public void tearDown() throws Exception {
 
 		if (editor_text != null)

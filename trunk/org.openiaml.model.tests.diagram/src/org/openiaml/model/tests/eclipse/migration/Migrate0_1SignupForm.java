@@ -95,6 +95,7 @@ public class Migrate0_1SignupForm extends AbstractMigrateTestCase {
 	 * Close loaded editors.
 	 * @throws Exception 
 	 */
+	@Override
 	public void tearDown() throws Exception {
 		if (editor_store != null)
 			editor_store.close(false);
@@ -105,6 +106,7 @@ public class Migrate0_1SignupForm extends AbstractMigrateTestCase {
 		super.tearDown();
 	}
 	
+	@Override
 	public String getModel() {
 		return "signup-form-0_1.iaml";
 	}

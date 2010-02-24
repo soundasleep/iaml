@@ -15,6 +15,7 @@ import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocument
  */
 public class ShortcutsElementTestCase extends AbstractShortcutsTestCase {
 
+	@Override
 	public String getModel() {
 		return "shortcuts-element.iaml";
 	}
@@ -75,6 +76,7 @@ public class ShortcutsElementTestCase extends AbstractShortcutsTestCase {
 	 * Close loaded editors.
 	 * @throws Exception 
 	 */
+	@Override
 	public void tearDown() throws Exception {
 		
 		if (editor_form != null)

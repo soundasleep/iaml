@@ -57,6 +57,7 @@ import org.xml.sax.SAXException;
  */
 public class DumpDroolsXml extends InferenceTestCase {
 
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();		// set up project
 
@@ -1028,6 +1029,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 			return body;
 		}
 
+		@Override
 		public String toString() {
 			if (head.isEmpty())
 				if (body.isEmpty())
@@ -1140,6 +1142,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 			return variable;
 		}
 
+		@Override
 		public String toString() {
 			return name + "(" + variable + ")";
 		}
@@ -1186,6 +1189,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 			contents.add(t);
 		}
 
+		@Override
 		public String toString() {
 			return "not(" + DumpDroolsXml.toString(contents) + ")";
 		}
@@ -1221,6 +1225,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 			contents.add(t);
 		}
 
+		@Override
 		public String toString() {
 			return "or(" + DumpDroolsXml.toString(contents) + ")";
 		}
@@ -1245,6 +1250,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 			this.variables = variable;
 		}
 
+		@Override
 		public String toString() {
 			if (variables.size() == 0)
 				return name;
@@ -1286,6 +1292,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 			this.name = string;
 		}
 
+		@Override
 		public String toString() {
 			return name;
 		}
@@ -1351,6 +1358,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		public StringLiteral(String value) {
 			this.value = value;
 		}
+		@Override
 		public String toString() {
 			return "\"" + value + "\"";
 		}
@@ -1374,6 +1382,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 			this.variable = string;
 			this.index = index;
 		}
+		@Override
 		public String toString() {
 			return "f(" + variable + ", " + index + ")";
 		}
@@ -1417,6 +1426,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 			body.add(linked);
 		}
 
+		@Override
 		public String toString() {
 			return "notExists(" + variable + " : " + DumpDroolsXml.toString(body) + ")";
 		}
@@ -1449,6 +1459,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		public FunctionTerm getFunctionTerm1() {
 			return variable;
 		}
+		@Override
 		public String toString() {
 			return name + "(" + variable + ", " + variable2 + ")";
 		}
@@ -2393,6 +2404,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 			return name;
 		}
 
+		@Override
 		public String toString() {
 			// prevent infinite loops
 			String e = "";
@@ -2774,10 +2786,12 @@ public class DumpDroolsXml extends InferenceTestCase {
 			this.name = name;
 		}
 
+		@Override
 		public String toHtml() {
 			return name;
 		}
 
+		@Override
 		public String toString() { return name; }
 
 		@Override
@@ -2800,10 +2814,12 @@ public class DumpDroolsXml extends InferenceTestCase {
 			this.term = term;
 		}
 
+		@Override
 		public String toHtml() {
 			return "not(" + term.toHtml() + ")";
 		}
 
+		@Override
 		public String toString() { return "not(" + term + ")"; }
 
 		@Override

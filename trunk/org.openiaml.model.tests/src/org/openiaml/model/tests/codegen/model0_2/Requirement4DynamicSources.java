@@ -20,6 +20,7 @@ import org.openiaml.model.tests.CodegenTestCase;
  */
 public class Requirement4DynamicSources extends CodegenTestCase {
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		root = loadAndCodegen(Requirement4DynamicSources.class, ROOT + "../examples/requirements/4-dynamic_sources.iaml", true);

@@ -27,6 +27,7 @@ import org.openiaml.model.model.wires.SyncWire;
  */
 public class SavedRuleSources extends InferenceTestCase {
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		// the second parameter makes the inference keep track of rule sources (just names for now)

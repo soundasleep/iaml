@@ -31,6 +31,7 @@ public class SyncFieldApplicationElementProperty extends CodegenTestCase {
 		return SyncFieldApplicationElementProperty.class;
 	}
 	
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		root = loadAndCodegen(getRuntimeClass(), getModelFileForClass(SyncFieldApplicationElementProperty.class));

@@ -17,6 +17,7 @@ import org.openiaml.model.tests.CodegenTestCase;
  */
 public class Requirement6Conditions extends CodegenTestCase {
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		root = loadAndCodegen(Requirement6Conditions.class, ROOT + "../examples/requirements/6-conditions.iaml");

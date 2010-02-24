@@ -34,6 +34,7 @@ public class PropertiesFileWithInputForm extends CodegenTestCase {
 		
 	}
 	
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		root = loadAndCodegen(PropertiesFileWithInputForm.class);

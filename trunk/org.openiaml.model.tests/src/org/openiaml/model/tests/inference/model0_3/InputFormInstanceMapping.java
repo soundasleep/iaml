@@ -32,6 +32,7 @@ public class InputFormInstanceMapping extends EclipseInheritanceInterface {
 	 * @param root
 	 * @throws Exception
 	 */
+	@Override
 	public void checkNotInferredKnowledge(InternetApplication root) throws Exception {
 
 		DomainStore ds = assertHasDomainStore(root, "a domain store");
@@ -65,6 +66,7 @@ public class InputFormInstanceMapping extends EclipseInheritanceInterface {
 	 * @param root
 	 * @throws Exception
 	 */
+	@Override
 	public void checkInferredKnowledge(InternetApplication root) throws Exception {
 
 		DomainStore ds = assertHasDomainStore(root, "a domain store");

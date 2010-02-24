@@ -31,6 +31,7 @@ import org.openiaml.model.model.wires.SyncWire;
  */
 public class Requirement4DynamicSources extends InferenceTestCaseWithConditionWires {
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		root = loadAndInfer(ROOT + "../examples/requirements/4-dynamic_sources.iaml", true);

@@ -31,6 +31,7 @@ import org.openiaml.model.inference.ICreateElements;
  */
 public class PartialInferenceWithinActivations extends AbstractActionTestCase<GraphicalEditPart> {
 
+	@Override
 	public String getModel() {
 		return "PartialInference.iaml";
 	}
@@ -296,6 +297,7 @@ public class PartialInferenceWithinActivations extends AbstractActionTestCase<Gr
 	 * Close loaded editors.
 	 * @throws Exception 
 	 */
+	@Override
 	public void tearDown() throws Exception {
 		
 		if (editor_page != null)

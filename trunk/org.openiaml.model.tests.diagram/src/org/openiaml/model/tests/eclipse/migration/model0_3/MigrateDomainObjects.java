@@ -33,6 +33,7 @@ public class MigrateDomainObjects extends AbstractMigrateTestCase {
 
 	protected DiagramDocumentEditor editor_page = null;
 
+	@Override
 	public String getModel() {
 		return "FileDomainObjects.iaml";
 	}
@@ -41,6 +42,7 @@ public class MigrateDomainObjects extends AbstractMigrateTestCase {
 	 * TODO put this into an abstract method to generate 
 	 * migrated names by default
 	 */
+	@Override
 	public String getModelMigrated() {
 		return "FileDomainObjects-migrated.iaml";
 	}

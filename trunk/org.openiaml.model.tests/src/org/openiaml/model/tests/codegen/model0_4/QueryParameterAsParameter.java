@@ -20,6 +20,7 @@ import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
  */
 public class QueryParameterAsParameter extends DatabaseCodegenTestCase {
 	
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		root = loadAndCodegen(QueryParameterAsParameter.class);

@@ -65,6 +65,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	/**
 	 * Add an error log listener.
 	 */
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -75,6 +76,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	/**
 	 * Close all active editors.
 	 */
+	@Override
 	public void tearDown() throws Exception {
 		// close all editors
 		PlatformUI.getWorkbench()
@@ -724,6 +726,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * Also checks that it is not an ErrorEditorPart.
 	 * @see EclipseTestCase#loadDiagramFile(IFile)
 	 */
+	@Override
 	protected IEditorPart loadDiagramFile(IFile diagramFile) throws Exception {
 		IEditorPart part = super.loadDiagramFile(diagramFile);
 		checkNotErrorPart(part);

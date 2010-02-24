@@ -386,6 +386,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * the client to lose sessions/cookies. If this is undesirable,
 	 * use {@link #gotoSitemapThenPage(IFile, String)}.
 	 */
+	@Override
 	public void beginAt(String url) {
 		try {
 			super.beginAt(url);

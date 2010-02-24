@@ -56,6 +56,7 @@ public class EclipseInputFormInstanceMapping extends InferenceActionTestCase {
 	 *
 	 * @throws JaxenException
 	 */
+	@Override
 	public void testActionInference() throws Exception {
 		root = loadDirectly(InputFormInstanceMapping.class);
 		RefreshFormMappingsWithDrools action =

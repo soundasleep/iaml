@@ -15,6 +15,7 @@ import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocument
  */
 public class Issue69 extends AbstractShortcutsTestCase {
 
+	@Override
 	public String getModel() {
 		return "Issue69.iaml";
 	}
@@ -52,6 +53,7 @@ public class Issue69 extends AbstractShortcutsTestCase {
 	 * Close loaded editors.
 	 * @throws Exception 
 	 */
+	@Override
 	public void tearDown() throws Exception {
 		
 		if (editor_page != null)

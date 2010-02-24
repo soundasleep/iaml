@@ -122,6 +122,7 @@ public abstract class AbstractMigrateTestCase extends EclipseTestCaseHelper {
 	 * Close loaded editors.
 	 * @throws Exception
 	 */
+	@Override
 	public void tearDown() throws Exception {
 		if (editor != null)
 			editor.close(false);

@@ -21,6 +21,7 @@ import org.openiaml.model.model.GeneratedElement;
  */
 public class DeleteGeneratedElements extends AbstractActionTestCase<IFile> {
 
+	@Override
 	public String getModel() {
 		return "DeleteGeneratedElements.iaml";
 	}
@@ -178,6 +179,7 @@ public class DeleteGeneratedElements extends AbstractActionTestCase<IFile> {
 	 * Close loaded editors.
 	 * @throws Exception
 	 */
+	@Override
 	public void tearDown() throws Exception {
 
 		if (editor_target != null)

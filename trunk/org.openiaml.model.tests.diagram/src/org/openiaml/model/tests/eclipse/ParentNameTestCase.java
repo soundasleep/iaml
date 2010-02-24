@@ -277,6 +277,7 @@ public class ParentNameTestCase extends EclipseTestCaseHelper {
 		return URI.createPlatformResourceURI(project.getFile(filename).getFullPath().toString(), true);
 	}
 
+	@Override
 	public void tearDown() throws Exception {
 		if (editor != null) {
 			editor.close(false);

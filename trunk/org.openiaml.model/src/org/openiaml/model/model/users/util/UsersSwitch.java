@@ -137,11 +137,11 @@ public class UsersSwitch<T> {
 				if (result == null) result = caseParameterEdgesSource(role);
 				if (result == null) result = caseExtendsEdgesSource(role);
 				if (result == null) result = caseExtendsEdgeDestination(role);
+				if (result == null) result = caseContainsEventTriggers(role);
 				if (result == null) result = caseCanBeSynced(role);
 				if (result == null) result = caseContainsOperations(role);
 				if (result == null) result = caseNamedElement(role);
 				if (result == null) result = caseGeneratedElement(role);
-				if (result == null) result = caseContainsEventTriggers(role);
 				if (result == null) result = caseWireEdgesSource(role);
 				if (result == null) result = caseShouldntContainWires(role);
 				if (result == null) result = caseWireEdgeDestination(role);
@@ -170,11 +170,11 @@ public class UsersSwitch<T> {
 				if (result == null) result = caseApplicationElement(userInstance);
 				if (result == null) result = caseParameterEdgeDestination(userInstance);
 				if (result == null) result = caseParameterEdgesSource(userInstance);
+				if (result == null) result = caseContainsEventTriggers(userInstance);
 				if (result == null) result = caseCanBeSynced(userInstance);
 				if (result == null) result = caseContainsOperations(userInstance);
 				if (result == null) result = caseNamedElement(userInstance);
 				if (result == null) result = caseGeneratedElement(userInstance);
-				if (result == null) result = caseContainsEventTriggers(userInstance);
 				if (result == null) result = caseWireEdgesSource(userInstance);
 				if (result == null) result = caseShouldntContainWires(userInstance);
 				if (result == null) result = caseWireEdgeDestination(userInstance);

@@ -105,6 +105,7 @@ public class ScopesSwitch<T> {
 				T result = caseSession(session);
 				if (result == null) result = caseScope(session);
 				if (result == null) result = caseContainsScopes(session);
+				if (result == null) result = caseContainsEventTriggers(session);
 				if (result == null) result = caseCanBeSynced(session);
 				if (result == null) result = caseNamedElement(session);
 				if (result == null) result = caseGeneratedElement(session);
@@ -113,7 +114,6 @@ public class ScopesSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(session);
 				if (result == null) result = caseShouldntContainWires(session);
 				if (result == null) result = caseWireEdgeDestination(session);
-				if (result == null) result = caseContainsEventTriggers(session);
 				if (result == null) result = caseContainsConditions(session);
 				if (result == null) result = caseContainsWires(session);
 				if (result == null) result = defaultCase(theEObject);

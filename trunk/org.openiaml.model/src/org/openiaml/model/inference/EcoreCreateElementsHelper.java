@@ -150,6 +150,24 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return event;
 	}
 	
+	public EventTrigger generatedEventTriggerOnAccess(GeneratesElements by, VisibleThing container) throws InferenceException {
+		EventTrigger event = (EventTrigger) createElement( container, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getVisibleThing_OnAccess() );
+		setGeneratedBy(event, by);
+		return event;
+	}
+
+	public EventTrigger generatedEventTriggerOnClick(GeneratesElements by, VisibleThing container) throws InferenceException {
+		EventTrigger event = (EventTrigger) createElement( container, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getVisibleThing_OnClick() );
+		setGeneratedBy(event, by);
+		return event;
+	}
+
+	public EventTrigger generatedEventTriggerOnEdit(GeneratesElements by, VisibleThing container) throws InferenceException {
+		EventTrigger event = (EventTrigger) createElement( container, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getVisibleThing_OnEdit() );
+		setGeneratedBy(event, by);
+		return event;
+	}
+
 	public CompositeOperation generatedCompositeOperation(GeneratesElements by, ContainsOperations container) throws InferenceException {
 		CompositeOperation operation = createCompositeOperation(container);
 		setGeneratedBy(operation, by);

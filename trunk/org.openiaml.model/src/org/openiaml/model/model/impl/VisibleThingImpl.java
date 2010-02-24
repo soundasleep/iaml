@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.Condition;
-import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.EventTrigger;
@@ -53,7 +52,6 @@ import org.openiaml.model.model.wires.WiresPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getConditions <em>Conditions</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getEventTriggers <em>Event Triggers</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getOperations <em>Operations</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getWires <em>Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getParameterEdges <em>Parameter Edges</em>}</li>
@@ -75,6 +73,9 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getValues <em>Values</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getOnClick <em>On Click</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getOnEdit <em>On Edit</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getOnAccess <em>On Access</em>}</li>
  * </ul>
  * </p>
  *
@@ -90,16 +91,6 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 	 * @ordered
 	 */
 	protected EList<Condition> conditions;
-
-	/**
-	 * The cached value of the '{@link #getEventTriggers() <em>Event Triggers</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEventTriggers()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<EventTrigger> eventTriggers;
 
 	/**
 	 * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference list.
@@ -362,6 +353,36 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 	protected EList<StaticValue> values;
 
 	/**
+	 * The cached value of the '{@link #getOnClick() <em>On Click</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOnClick()
+	 * @generated
+	 * @ordered
+	 */
+	protected EventTrigger onClick;
+
+	/**
+	 * The cached value of the '{@link #getOnEdit() <em>On Edit</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOnEdit()
+	 * @generated
+	 * @ordered
+	 */
+	protected EventTrigger onEdit;
+
+	/**
+	 * The cached value of the '{@link #getOnAccess() <em>On Access</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOnAccess()
+	 * @generated
+	 * @ordered
+	 */
+	protected EventTrigger onAccess;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -390,18 +411,6 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 			conditions = new EObjectContainmentEList<Condition>(Condition.class, this, ModelPackage.VISIBLE_THING__CONDITIONS);
 		}
 		return conditions;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<EventTrigger> getEventTriggers() {
-		if (eventTriggers == null) {
-			eventTriggers = new EObjectContainmentEList<EventTrigger>(EventTrigger.class, this, ModelPackage.VISIBLE_THING__EVENT_TRIGGERS);
-		}
-		return eventTriggers;
 	}
 
 	/**
@@ -706,6 +715,135 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EventTrigger getOnClick() {
+		return onClick;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOnClick(EventTrigger newOnClick, NotificationChain msgs) {
+		EventTrigger oldOnClick = onClick;
+		onClick = newOnClick;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.VISIBLE_THING__ON_CLICK, oldOnClick, newOnClick);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOnClick(EventTrigger newOnClick) {
+		if (newOnClick != onClick) {
+			NotificationChain msgs = null;
+			if (onClick != null)
+				msgs = ((InternalEObject)onClick).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.VISIBLE_THING__ON_CLICK, null, msgs);
+			if (newOnClick != null)
+				msgs = ((InternalEObject)newOnClick).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.VISIBLE_THING__ON_CLICK, null, msgs);
+			msgs = basicSetOnClick(newOnClick, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.VISIBLE_THING__ON_CLICK, newOnClick, newOnClick));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EventTrigger getOnEdit() {
+		return onEdit;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOnEdit(EventTrigger newOnEdit, NotificationChain msgs) {
+		EventTrigger oldOnEdit = onEdit;
+		onEdit = newOnEdit;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.VISIBLE_THING__ON_EDIT, oldOnEdit, newOnEdit);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOnEdit(EventTrigger newOnEdit) {
+		if (newOnEdit != onEdit) {
+			NotificationChain msgs = null;
+			if (onEdit != null)
+				msgs = ((InternalEObject)onEdit).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.VISIBLE_THING__ON_EDIT, null, msgs);
+			if (newOnEdit != null)
+				msgs = ((InternalEObject)newOnEdit).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.VISIBLE_THING__ON_EDIT, null, msgs);
+			msgs = basicSetOnEdit(newOnEdit, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.VISIBLE_THING__ON_EDIT, newOnEdit, newOnEdit));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EventTrigger getOnAccess() {
+		return onAccess;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOnAccess(EventTrigger newOnAccess, NotificationChain msgs) {
+		EventTrigger oldOnAccess = onAccess;
+		onAccess = newOnAccess;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.VISIBLE_THING__ON_ACCESS, oldOnAccess, newOnAccess);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOnAccess(EventTrigger newOnAccess) {
+		if (newOnAccess != onAccess) {
+			NotificationChain msgs = null;
+			if (onAccess != null)
+				msgs = ((InternalEObject)onAccess).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.VISIBLE_THING__ON_ACCESS, null, msgs);
+			if (newOnAccess != null)
+				msgs = ((InternalEObject)newOnAccess).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.VISIBLE_THING__ON_ACCESS, null, msgs);
+			msgs = basicSetOnAccess(newOnAccess, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.VISIBLE_THING__ON_ACCESS, newOnAccess, newOnAccess));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -734,8 +872,6 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 		switch (featureID) {
 			case ModelPackage.VISIBLE_THING__CONDITIONS:
 				return ((InternalEList<?>)getConditions()).basicRemove(otherEnd, msgs);
-			case ModelPackage.VISIBLE_THING__EVENT_TRIGGERS:
-				return ((InternalEList<?>)getEventTriggers()).basicRemove(otherEnd, msgs);
 			case ModelPackage.VISIBLE_THING__OPERATIONS:
 				return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
 			case ModelPackage.VISIBLE_THING__WIRES:
@@ -768,6 +904,12 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 				return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
 			case ModelPackage.VISIBLE_THING__VALUES:
 				return ((InternalEList<?>)getValues()).basicRemove(otherEnd, msgs);
+			case ModelPackage.VISIBLE_THING__ON_CLICK:
+				return basicSetOnClick(null, msgs);
+			case ModelPackage.VISIBLE_THING__ON_EDIT:
+				return basicSetOnEdit(null, msgs);
+			case ModelPackage.VISIBLE_THING__ON_ACCESS:
+				return basicSetOnAccess(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -782,8 +924,6 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 		switch (featureID) {
 			case ModelPackage.VISIBLE_THING__CONDITIONS:
 				return getConditions();
-			case ModelPackage.VISIBLE_THING__EVENT_TRIGGERS:
-				return getEventTriggers();
 			case ModelPackage.VISIBLE_THING__OPERATIONS:
 				return getOperations();
 			case ModelPackage.VISIBLE_THING__WIRES:
@@ -826,6 +966,12 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 				return getProperties();
 			case ModelPackage.VISIBLE_THING__VALUES:
 				return getValues();
+			case ModelPackage.VISIBLE_THING__ON_CLICK:
+				return getOnClick();
+			case ModelPackage.VISIBLE_THING__ON_EDIT:
+				return getOnEdit();
+			case ModelPackage.VISIBLE_THING__ON_ACCESS:
+				return getOnAccess();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -842,10 +988,6 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 			case ModelPackage.VISIBLE_THING__CONDITIONS:
 				getConditions().clear();
 				getConditions().addAll((Collection<? extends Condition>)newValue);
-				return;
-			case ModelPackage.VISIBLE_THING__EVENT_TRIGGERS:
-				getEventTriggers().clear();
-				getEventTriggers().addAll((Collection<? extends EventTrigger>)newValue);
 				return;
 			case ModelPackage.VISIBLE_THING__OPERATIONS:
 				getOperations().clear();
@@ -926,6 +1068,15 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 				getValues().clear();
 				getValues().addAll((Collection<? extends StaticValue>)newValue);
 				return;
+			case ModelPackage.VISIBLE_THING__ON_CLICK:
+				setOnClick((EventTrigger)newValue);
+				return;
+			case ModelPackage.VISIBLE_THING__ON_EDIT:
+				setOnEdit((EventTrigger)newValue);
+				return;
+			case ModelPackage.VISIBLE_THING__ON_ACCESS:
+				setOnAccess((EventTrigger)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -940,9 +1091,6 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 		switch (featureID) {
 			case ModelPackage.VISIBLE_THING__CONDITIONS:
 				getConditions().clear();
-				return;
-			case ModelPackage.VISIBLE_THING__EVENT_TRIGGERS:
-				getEventTriggers().clear();
 				return;
 			case ModelPackage.VISIBLE_THING__OPERATIONS:
 				getOperations().clear();
@@ -1007,6 +1155,15 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 			case ModelPackage.VISIBLE_THING__VALUES:
 				getValues().clear();
 				return;
+			case ModelPackage.VISIBLE_THING__ON_CLICK:
+				setOnClick((EventTrigger)null);
+				return;
+			case ModelPackage.VISIBLE_THING__ON_EDIT:
+				setOnEdit((EventTrigger)null);
+				return;
+			case ModelPackage.VISIBLE_THING__ON_ACCESS:
+				setOnAccess((EventTrigger)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1021,8 +1178,6 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 		switch (featureID) {
 			case ModelPackage.VISIBLE_THING__CONDITIONS:
 				return conditions != null && !conditions.isEmpty();
-			case ModelPackage.VISIBLE_THING__EVENT_TRIGGERS:
-				return eventTriggers != null && !eventTriggers.isEmpty();
 			case ModelPackage.VISIBLE_THING__OPERATIONS:
 				return operations != null && !operations.isEmpty();
 			case ModelPackage.VISIBLE_THING__WIRES:
@@ -1065,6 +1220,12 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 				return properties != null && !properties.isEmpty();
 			case ModelPackage.VISIBLE_THING__VALUES:
 				return values != null && !values.isEmpty();
+			case ModelPackage.VISIBLE_THING__ON_CLICK:
+				return onClick != null;
+			case ModelPackage.VISIBLE_THING__ON_EDIT:
+				return onEdit != null;
+			case ModelPackage.VISIBLE_THING__ON_ACCESS:
+				return onAccess != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1076,12 +1237,6 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == ContainsEventTriggers.class) {
-			switch (derivedFeatureID) {
-				case ModelPackage.VISIBLE_THING__EVENT_TRIGGERS: return ModelPackage.CONTAINS_EVENT_TRIGGERS__EVENT_TRIGGERS;
-				default: return -1;
-			}
-		}
 		if (baseClass == ContainsOperations.class) {
 			switch (derivedFeatureID) {
 				case ModelPackage.VISIBLE_THING__OPERATIONS: return ModelPackage.CONTAINS_OPERATIONS__OPERATIONS;
@@ -1160,12 +1315,6 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == ContainsEventTriggers.class) {
-			switch (baseFeatureID) {
-				case ModelPackage.CONTAINS_EVENT_TRIGGERS__EVENT_TRIGGERS: return ModelPackage.VISIBLE_THING__EVENT_TRIGGERS;
-				default: return -1;
-			}
-		}
 		if (baseClass == ContainsOperations.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.CONTAINS_OPERATIONS__OPERATIONS: return ModelPackage.VISIBLE_THING__OPERATIONS;

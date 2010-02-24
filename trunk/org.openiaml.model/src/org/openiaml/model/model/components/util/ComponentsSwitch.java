@@ -113,11 +113,11 @@ public class ComponentsSwitch<T> {
 				if (result == null) result = caseApplicationElementContainer(loginHandler);
 				if (result == null) result = caseParameterEdgeDestination(loginHandler);
 				if (result == null) result = caseApplicationElement(loginHandler);
+				if (result == null) result = caseContainsEventTriggers(loginHandler);
 				if (result == null) result = caseCanBeSynced(loginHandler);
 				if (result == null) result = caseContainsOperations(loginHandler);
 				if (result == null) result = caseNamedElement(loginHandler);
 				if (result == null) result = caseGeneratedElement(loginHandler);
-				if (result == null) result = caseContainsEventTriggers(loginHandler);
 				if (result == null) result = caseWireEdgesSource(loginHandler);
 				if (result == null) result = caseShouldntContainWires(loginHandler);
 				if (result == null) result = caseWireEdgeDestination(loginHandler);
@@ -134,11 +134,11 @@ public class ComponentsSwitch<T> {
 				if (result == null) result = caseParameterEdgeDestination(accessControlHandler);
 				if (result == null) result = caseRequiresEdgesSource(accessControlHandler);
 				if (result == null) result = caseApplicationElement(accessControlHandler);
+				if (result == null) result = caseContainsEventTriggers(accessControlHandler);
 				if (result == null) result = caseCanBeSynced(accessControlHandler);
 				if (result == null) result = caseContainsOperations(accessControlHandler);
 				if (result == null) result = caseNamedElement(accessControlHandler);
 				if (result == null) result = caseGeneratedElement(accessControlHandler);
-				if (result == null) result = caseContainsEventTriggers(accessControlHandler);
 				if (result == null) result = caseWireEdgesSource(accessControlHandler);
 				if (result == null) result = caseShouldntContainWires(accessControlHandler);
 				if (result == null) result = caseWireEdgeDestination(accessControlHandler);

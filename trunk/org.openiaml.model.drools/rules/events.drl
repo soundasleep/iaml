@@ -21,12 +21,11 @@ global DroolsHelperFunctions functions;
 rule "Create 'click' event trigger for button"
 	when
 		f : Button( overridden == false )
-		not (EventTrigger( eContainer == f, name=="click" ))
+		not (EventTrigger( this == f.onClick ))
 			
 	then
 
-		EventTrigger event = handler.generatedEventTrigger(f, f);
-		handler.setName(event, "click");
+		EventTrigger event = handler.generatedEventTriggerOnClick(f, f);
 		queue.add(event, drools);
 		
 end
@@ -35,13 +34,12 @@ end
 rule "Create 'edit' event trigger for input text field"
 	when
 		f : InputTextField( overridden == false )
-		not (EventTrigger( eContainer == f, name=="edit" ))
+		not (EventTrigger( this == f.onEdit ))
 			
 	then
 		// debug: System.out.println(drools.getRule().getName() + ": " + f); 
 
-		EventTrigger event = handler.generatedEventTrigger(f, f);
-		handler.setName(event, "edit");
+		EventTrigger event = handler.generatedEventTriggerOnEdit(f, f);
 		queue.add(event, drools);
 		
 end
@@ -63,11 +61,10 @@ end
 rule "Create 'access' event trigger for input text field"
 	when
 		f : InputTextField( overridden == false )
-		not (EventTrigger( eContainer == f, name=="access" ))
+		not (EventTrigger( this == f.onAccess ))
 			
 	then
-		EventTrigger event = handler.generatedEventTrigger(f, f);
-		handler.setName(event, "access");
+		EventTrigger event = handler.generatedEventTriggerOnAccess(f, f);
 		queue.add(event, drools);
 		
 end

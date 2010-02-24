@@ -2,8 +2,6 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.11f62b78f3d.ea">
   <scopes xsi:type="iaml.visual:Frame" id="visual.11f62b790e2.26" name="Container">
     <children xsi:type="iaml.visual:InputTextField" outEdges="wires.11f631b1795.46" id="visual.11f62b790e2.3c" name="Username Text Field" generatedElements="model.11f631b16ea.425 model.11f631b16ea.426 model.11f631b16ea.427 model.11f631b16ea.428 model.11f631b16ea.429">
-      <eventTriggers generatedBy="visual.11f62b790e2.3c" isGenerated="true" id="model.11f631b16ea.427" name="access" outEdges="wires.11f631b1795.cc"/>
-      <eventTriggers generatedBy="visual.11f62b790e2.3c" isGenerated="true" id="model.11f631b16ea.428" name="edit" outEdges="wires.11f631b1795.ce"/>
       <operations xsi:type="iaml:CompositeOperation" inEdges="wires.11f631b1795.cc" generatedBy="visual.11f62b790e2.3c" isGenerated="true" id="model.11f631b16ea.425" name="init" generatedElements="model.11f631b16ea.430 model.11f631b16ea.431 operations.11f631b1795.35 operations.11f631b1795.36 model.11f631b16ea.432 model.11f631b16ea.433 model.11f631b16ea.434 model.11f631b16ea.435">
         <parameters generatedBy="model.11f631b16ea.425" isGenerated="true" id="model.11f631b16ea.430" name="setValueTo" outFlows="model.11f631b16ea.432"/>
         <operations xsi:type="iaml:PrimitiveOperation" generatedBy="model.11f631b16ea.425" isGenerated="true" id="model.11f631b16ea.431" name="setPropertyToValue" inFlows="model.11f631b16ea.432" inExecutions="model.11f631b16ea.434" outFlows="model.11f631b16ea.433" outExecutions="model.11f631b16ea.435"/>
@@ -33,6 +31,8 @@
         <parameterEdges generatedBy="wires.11f631b1795.46" isGenerated="true" id="wires.11f631b1795.cf" from="model.11f631b16ea.429" to="wires.11f631b1795.ce"/>
       </wires>
       <properties generatedBy="visual.11f62b790e2.3c" isGenerated="true" id="model.11f631b16ea.429" name="fieldValue" inFlows="model.11f631b16ea.42d model.11f631b16ea.433" outParameterEdges="wires.11f631b1795.cf"/>
+      <onEdit generatedBy="visual.11f62b790e2.3c" isGenerated="true" id="model.11f631b16ea.428" name="edit" outEdges="wires.11f631b1795.ce"/>
+      <onAccess generatedBy="visual.11f62b790e2.3c" isGenerated="true" id="model.11f631b16ea.427" name="access" outEdges="wires.11f631b1795.cc"/>
     </children>
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.11f631b1795.149" name="Broken Validation">

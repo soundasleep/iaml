@@ -40,6 +40,7 @@ import org.w3c.dom.NodeList;
  *      <li>ConditionWire is now ConditionEdge, and no longer a WireEdge
  *      <li>RunInstanceWire is now a SingleWire, and not a CompositeWire; it no longer contains Operations directly.
  *   </ol></li>
+ *   <li>VisibleThing no longer ContainsEventTriggers; now separate onAccess, onEdit, onClick events
  *   <li><strong>Many other modifications, too many to list... this migrator only implements
  *   	those changed necessary for the model migration test to pass.</strong></li>
  * </ol>
@@ -278,6 +279,35 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 			// --> <constraintEdges>
 			if ("iaml.wires:ConditionWire".equals(xsiType)) {
 				return "conditionEdges";
+			}
+		}
+		
+		// <eventTriggers name="click">
+		// --> <onClick>
+		if (nodeName.equals("eventTriggers")) {
+			// only for VisibleThings
+			Element parent = (Element) element.getParentNode();
+			String parentType = parent.getAttribute("xsi:type");
+			if ("iaml.visual:Frame".equals(parentType) 
+					|| "iaml.visual:Page".equals(parentType) 
+					|| "iaml.visual:Button".equals(parentType) 
+					|| "iaml.visual:Label".equals(parentType) 
+					|| "iaml.visual:InputForm".equals(parentType) 
+					|| "iaml.visual:InputTextField".equals(parentType)) {
+				
+				// need to change it
+				String eventName = element.getAttribute("name");
+				if ("access".equals(eventName) || "onAccess".equals(eventName)) {
+					return "onAccess";
+				} else if ("click".equals(eventName) || "onClick".equals(eventName)) {
+					return "onClick";
+				} else if ("edit".equals(eventName) || "onEdit".equals(eventName)) {
+					return "onEdit";
+				} else {
+					// not an expected event type; throw a warning
+					errors.add(new ExpectedMigrationException(this, element, "Event '" + eventName + "' was not an expected event type"));
+				}
+				
 			}
 		}
 		

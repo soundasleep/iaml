@@ -1368,4 +1368,27 @@ public class GmfGenTestCase extends XmlTestCase {
 		}
 	}
 	
+	/**
+	 * Test that if we are using Java constraints in the .gmfgen, that we
+	 * always have "Inject Expression Body" set to true.
+	 * 
+	 * @see http://www.jevon.org/wiki/Having_Multiple_Containments_of_the_Same_Domain_Element_in_GMF
+	 * @throws Exception
+	 */
+	public void testJavaExpressionInjection() throws Exception {
+		for (String filename : getGenList()) {
+			Document doc = getCache().get(filename);
+			
+			IterableElementList javaProviders = xpath(doc, "/GenEditorGenerator/expressionProviders/providers");
+			
+			for (Element p : javaProviders) {
+				if ("gmfgen:GenJavaExpressionProvider".equals(p.getAttribute("xsi:type"))) {
+					// found a Java expression provider
+					assertEquals(filename + ": injectExpressionBody should be 'true'", "true", p.getAttribute("injectExpressionBody"));
+				}
+			}
+			
+		}
+	}
+	
 }

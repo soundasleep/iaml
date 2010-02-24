@@ -121,9 +121,9 @@ public class SyncWiresProperties extends InferenceTestCase {
 		}
 
 		// test for 'access' events and 'initialize' operations (new)
-		EventTrigger access1 = assertHasEventTrigger(f1, "access");
-		EventTrigger access2 = assertHasEventTrigger(f2, "access");
-		EventTrigger access3 = assertHasEventTrigger(f3, "access");
+		EventTrigger access1 = f1.getOnAccess();
+		EventTrigger access2 = f2.getOnAccess();
+		EventTrigger access3 = f3.getOnAccess();
 		Operation op1 = assertHasOperation(f1, "init");
 		Operation op2 = assertHasOperation(f2, "init");
 		Operation op3 = assertHasOperation(f3, "init");

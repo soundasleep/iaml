@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
-import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
@@ -45,6 +44,7 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.PrimitiveOperation;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.ShouldntContainWires;
@@ -181,8 +181,8 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createApplicationElementContainerAdapter();
 			}
 			@Override
-			public Adapter caseApplicationElementProperty(ApplicationElementProperty object) {
-				return createApplicationElementPropertyAdapter();
+			public Adapter caseProperty(Property object) {
+				return createPropertyAdapter();
 			}
 			@Override
 			public Adapter caseStaticValue(StaticValue object) {
@@ -553,16 +553,16 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ApplicationElementProperty <em>Application Element Property</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.Property <em>Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.openiaml.model.model.ApplicationElementProperty
+	 * @see org.openiaml.model.model.Property
 	 * @generated
 	 */
-	public Adapter createApplicationElementPropertyAdapter() {
+	public Adapter createPropertyAdapter() {
 		return null;
 	}
 

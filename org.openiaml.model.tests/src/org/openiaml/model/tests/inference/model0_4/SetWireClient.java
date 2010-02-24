@@ -5,10 +5,10 @@ package org.openiaml.model.tests.inference.model0_4;
 
 import java.util.Set;
 
-import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DecisionCondition;
@@ -74,7 +74,7 @@ public class SetWireClient extends InferenceTestCase {
 		EventTrigger edit = assertHasEventTrigger(source, "edit");
 		assertGenerated(edit);
 		
-		ApplicationElementProperty value = assertHasApplicationElementProperty(source, "fieldValue");
+		Property value = assertHasProperty(source, "fieldValue");
 		assertGenerated(value);
 		
 		// and an 'update' event in target
@@ -106,7 +106,7 @@ public class SetWireClient extends InferenceTestCase {
 		EventTrigger edit = assertHasEventTrigger(target, "edit");
 		assertGenerated(edit);
 		
-		ApplicationElementProperty value = assertHasApplicationElementProperty(target, "fieldValue");
+		Property value = assertHasProperty(target, "fieldValue");
 		assertGenerated(value);
 		
 		// and an 'update' event in target
@@ -134,7 +134,7 @@ public class SetWireClient extends InferenceTestCase {
 		EventTrigger access = assertHasEventTrigger(target, "access");
 		assertGenerated(access);
 		
-		ApplicationElementProperty value = assertHasApplicationElementProperty(source, "fieldValue");
+		Property value = assertHasProperty(source, "fieldValue");
 		assertGenerated(value);
 		
 		// and an 'update' event in target
@@ -150,7 +150,7 @@ public class SetWireClient extends InferenceTestCase {
 		assertGenerated(param);
 		
 		// but the parameter of 'target' is not connected to the run wire
-		ApplicationElementProperty value2 = assertHasApplicationElementProperty(target, "fieldValue");
+		Property value2 = assertHasProperty(target, "fieldValue");
 		assertGenerated(value2);
 		
 		assertHasNoWiresFromTo(page, value2, run);
@@ -193,7 +193,7 @@ public class SetWireClient extends InferenceTestCase {
 
 		Frame page = assertHasFrame(root, "Home");
 		InputTextField source = assertHasInputTextField(page, "source");
-		ApplicationElementProperty value = assertHasApplicationElementProperty(source, "fieldValue");
+		Property value = assertHasProperty(source, "fieldValue");
 		CompositeCondition cond = assertHasCompositeCondition(source, "fieldValue is set");
 				
 		// check contents of condition

@@ -6,10 +6,10 @@ package org.openiaml.model.tests.inference.model0_4;
 import java.util.List;
 import java.util.Set;
 
-import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.components.LoginHandler;
@@ -61,7 +61,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		assertEquals(handler.getType(), LoginHandlerTypes.SECRET_KEY);
 
 		// stored key
-		ApplicationElementProperty key = assertHasApplicationElementProperty(session, "my login key");
+		Property key = assertHasProperty(session, "my login key");
 		assertNotGenerated(key);
 		// the key must have a default
 		assertNotNull(key.getDefaultValue());
@@ -176,14 +176,14 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 
 		Session session = assertHasSession(root, "my session");
 
-		ApplicationElementProperty my = assertHasApplicationElementProperty(session, "my login key");
+		Property my = assertHasProperty(session, "my login key");
 		assertNotGenerated(my);
 		
 		// shouldn't be generated
-		assertHasNoApplicationElementProperty(session, "current login key");
+		assertHasNoProperty(session, "current login key");
 		
 		// there should only be one
-		assertHasOne(session, "iaml:properties", ApplicationElementProperty.class);
+		assertHasOne(session, "iaml:properties", Property.class);
 		
 		// there should be a SetWire from the LoginHandler to this
 		LoginHandler loginHandler = assertHasLoginHandler(session, "Login Handler");
@@ -228,7 +228,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		assertEquals("onClick", run.getName());
 
 		// the text field has a parameter
-		ApplicationElementProperty prop = assertHasApplicationElementProperty(field, "fieldValue");
+		Property prop = assertHasProperty(field, "fieldValue");
 		assertGenerated(prop);
 
 		// connecting to the run wire

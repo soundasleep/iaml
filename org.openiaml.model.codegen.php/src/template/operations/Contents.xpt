@@ -125,7 +125,7 @@
 	 */
 «ENDDEFINE»
 
-«DEFINE chainedEventFlow(Boolean php, model::visual::Frame currentFrame) FOR model::ApplicationElementProperty»
+«DEFINE chainedEventFlow(Boolean php, model::visual::Frame currentFrame) FOR model::Property»
 	/* Chained event property: «this» */
 	«IF model::ContainsEventTriggers.isInstance(eContainer)»
 		/* A property has changed - call any event triggers in its parent called "edit" */

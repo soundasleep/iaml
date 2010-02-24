@@ -10,7 +10,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.jaxen.JaxenException;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
-import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Condition;
@@ -36,6 +35,7 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.PrimitiveOperation;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.StaticValue;
@@ -93,55 +93,55 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 
 	/**
 	 * Assert that the given element contains the given
-	 * ApplicationElementProperty.
+	 * Property.
 	 *
 	 * @return The element found
 	 */
-	public ApplicationElementProperty assertHasApplicationElementProperty(
+	public Property assertHasProperty(
 			Scope element, String string) throws JaxenException {
-		return (ApplicationElementProperty) queryOne(element, "iaml:properties[iaml:name='" + string + "']");
+		return (Property) queryOne(element, "iaml:properties[iaml:name='" + string + "']");
 	}
 
 	/**
 	 * Assert that the given element contains the given
-	 * ApplicationElementProperty.
+	 * Property.
 	 *
 	 * @return The element found
 	 */
-	public ApplicationElementProperty assertHasApplicationElementProperty(
+	public Property assertHasProperty(
 			VisibleThing element, String string) throws JaxenException {
-		return (ApplicationElementProperty) queryOne(element, "iaml:properties[iaml:name='" + string + "']");
+		return (Property) queryOne(element, "iaml:properties[iaml:name='" + string + "']");
 	}
 
 	/**
 	 * Assert that the given element contains the given
-	 * ApplicationElementProperty.
+	 * Property.
 	 *
 	 * @return The element found
 	 */
-	public ApplicationElementProperty assertHasApplicationElementProperty(
+	public Property assertHasProperty(
 			ApplicationElement element, String string) throws JaxenException {
-		return (ApplicationElementProperty) queryOne(element, "iaml:properties[iaml:name='" + string + "']");
+		return (Property) queryOne(element, "iaml:properties[iaml:name='" + string + "']");
 	}
 	
 	/**
 	 * Assert that the given element does not contains the given
-	 * ApplicationElementProperty.
+	 * Property.
 	 *
 	 * @return The element found
 	 */
-	public void assertHasNoApplicationElementProperty(
+	public void assertHasNoProperty(
 			ApplicationElement element, String string) throws JaxenException {
 		assertHasNone(element, "iaml:properties[iaml:name='" + string + "']");
 	}
 
 	/**
 	 * Assert that the given element does not contains the given
-	 * ApplicationElementProperty.
+	 * Property.
 	 *
 	 * @return The element found
 	 */
-	public void assertHasNoApplicationElementProperty(
+	public void assertHasNoProperty(
 			Scope element, String string) throws JaxenException {
 		assertHasNone(element, "iaml.scopes:properties[iaml:name='" + string + "']");
 	}

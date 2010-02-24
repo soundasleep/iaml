@@ -12,7 +12,7 @@
 	«EXPAND exception FOR throwException("Unexpected outgoingValue wire: '" + this + "'")»
 «ENDDEFINE»
 
-/* if it connects to a SyncWire that is an ApplicationElementProperty, use this
+/* if it connects to a SyncWire that is an Property, use this
    property as the destination */
 «DEFINE outgoingValues(model::NamedElement container) FOR model::wires::SyncWire»
 	«EXPAND outgoingValue(container) FOR from»
@@ -33,12 +33,12 @@
 «ENDDEFINE»
 
 /* we have a property to set [in Javascript] */
-«DEFINE outgoingValue(model::NamedElement container) FOR model::ApplicationElementProperty»
+«DEFINE outgoingValue(model::NamedElement container) FOR model::Property»
 	var value = «EXPAND Parameters::dataSourceOnFrame FOR container»;
 	«EXPAND outgoingValueTarget(false, "value")»
 «ENDDEFINE»
 
-«DEFINE outgoingValueTarget(Boolean php, String valueName) FOR model::ApplicationElementProperty»
+«DEFINE outgoingValueTarget(Boolean php, String valueName) FOR model::Property»
 	«IF containingSession(this) == null»
 		«REM»contained in a Frame or InternetApplication: a static value«ENDREM»		
 		«IF php»

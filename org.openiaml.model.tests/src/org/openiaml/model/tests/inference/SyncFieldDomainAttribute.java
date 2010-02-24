@@ -4,12 +4,12 @@
 package org.openiaml.model.tests.inference;
 
 import org.jaxen.JaxenException;
-import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.RunInstanceWire;
@@ -54,7 +54,7 @@ public class SyncFieldDomainAttribute extends InferenceTestCase {
 		assertEquals(runWire.getTo(), opUpdate);
 
 		// there should be a parameter on the field
-		ApplicationElementProperty fieldValue = assertHasApplicationElementProperty(field, "fieldValue");
+		Property fieldValue = assertHasProperty(field, "fieldValue");
 
 		// there should be a parameter wire from fieldValue to the operation
 		assertGenerated(getParameterEdgeFromTo(page, fieldValue, runWire));

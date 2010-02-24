@@ -3,7 +3,7 @@
  */
 package org.openiaml.model.tests.codegen.functions;
 
-import org.openiaml.model.model.ApplicationElementProperty;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 
@@ -26,7 +26,7 @@ public class NameMatches extends DroolsHelperFunctionsTestCase {
 		InputTextField text1_1 = (InputTextField) queryOne(p1, "iaml.visual:children[iaml:id='visual.126f8149daa.ba']");
 		InputTextField text1_2 = (InputTextField) queryOne(p1, "iaml.visual:children[iaml:id='visual.126f8149daa.bc']");
 		InputTextField text2 = assertHasInputTextField(p1, "text2");
-		ApplicationElementProperty prop = assertHasApplicationElementProperty(p1, "text2");
+		Property prop = assertHasProperty(p1, "text2");
 		
 		assertNotSame(text1_1, text1_2);
 		assertNotSame(text2, prop);

@@ -75,7 +75,7 @@
 «ENDDEFINE»
 
 /**
- * A data source from an ApplicationElementProperty.
+ * A data source from an Property.
  *
  * Not sure if this implementation completely works; operations should
  * specify incoming data as parameters, and not reference properties directly.
@@ -83,7 +83,7 @@
  * In particular, the <code>null</code> parameter will probably cause
  * problems later...
  */
-«DEFINE dataSource(Boolean php, model::visual::Frame currentFrame) FOR model::ApplicationElementProperty»
+«DEFINE dataSource(Boolean php, model::visual::Frame currentFrame) FOR model::Property»
 	«EXPAND template::operations::Parameters::callParameterValue(php, null, false, currentFrame) FOR this»
 «ENDDEFINE»
 
@@ -94,21 +94,21 @@
 	«EXPAND exception FOR throwException("Unknown data flow edge target for dataTarget: " + this)»
 «ENDDEFINE»
 
-«DEFINE dataTarget(Boolean php) FOR model::ApplicationElementProperty»	
+«DEFINE dataTarget(Boolean php) FOR model::Property»	
 	«EXPAND dataTargetContainer(php, this) FOR eContainer»
 «ENDDEFINE»
 
-«DEFINE dataTargetContainer(Boolean php, model::ApplicationElementProperty property) FOR emf::EObject»
+«DEFINE dataTargetContainer(Boolean php, model::Property property) FOR emf::EObject»
 	«EXPAND exception FOR throwException("Unknown property container: " + this)»
 «ENDDEFINE»
 
-«DEFINE dataTargetContainer(Boolean php, model::ApplicationElementProperty property) FOR model::visual::InputTextField»
+«DEFINE dataTargetContainer(Boolean php, model::Property property) FOR model::visual::InputTextField»
 	document.getElementById('«safeNameString(id)»').value
 «ENDDEFINE»
-«DEFINE dataTargetContainer(Boolean php, model::ApplicationElementProperty property) FOR model::visual::Button»
+«DEFINE dataTargetContainer(Boolean php, model::Property property) FOR model::visual::Button»
 	document.getElementById('«safeNameString(id)»').value
 «ENDDEFINE»
-«DEFINE dataTargetContainer(Boolean php, model::ApplicationElementProperty property) FOR model::visual::Label»
+«DEFINE dataTargetContainer(Boolean php, model::Property property) FOR model::visual::Label»
 	document.getElementById('«safeNameString(id)»').innerHTML
 «ENDDEFINE»
 
@@ -123,17 +123,17 @@
 «ENDDEFINE»
 
 /**
- * Data sources - are the sources set? Only supports ApplicationElementProperty.
+ * Data sources - are the sources set? Only supports Property.
  *
  * @implementation DecisionCondition The 'is set?' {@model DecisionCondition} 
- *	only supports incoming {@model ApplicationElementProperty ApplicationElementProperties}
+ *	only supports incoming {@model Property ApplicationElementProperties}
  *	as {@model DataFlowEdge parameters}.   
  */
 «DEFINE isSet(Boolean php, model::visual::Frame currentFrame) FOR model::DataFlowEdgesSource»
 	«EXPAND exception FOR throwException("Unknown data flow edge source for isSet: " + this)»
 «ENDDEFINE»
 
-«DEFINE isSet(Boolean php, model::visual::Frame currentFrame) FOR model::ApplicationElementProperty»
+«DEFINE isSet(Boolean php, model::visual::Frame currentFrame) FOR model::Property»
 	«EXPAND template::operations::Parameters::isSetParameter(php, currentFrame) FOR this»
 «ENDDEFINE»
 

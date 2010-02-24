@@ -5,12 +5,12 @@ package org.openiaml.model.tests.inference.model0_4;
 
 import java.util.List;
 
-import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.PrimitiveOperation;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.FinishNode;
@@ -79,9 +79,9 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 		assertHasExecutionEdge(doLogin, op, finish);
 		
 		// get the keys in the session
-		ApplicationElementProperty email = assertHasApplicationElementProperty(session, "current email");
+		Property email = assertHasProperty(session, "current email");
 		assertGenerated(email);
-		ApplicationElementProperty password = assertHasApplicationElementProperty(session, "current password");
+		Property password = assertHasProperty(session, "current password");
 		assertGenerated(password);
 
 		// the operation has parameters that are populated
@@ -136,8 +136,8 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 		InputForm form = assertHasInputForm(login, "login form");
 		InputTextField temail = assertHasInputTextField(form, "email");
 		InputTextField tpass = assertHasInputTextField(form, "password");
-		ApplicationElementProperty femail = assertHasApplicationElementProperty(temail, "fieldValue");
-		ApplicationElementProperty fpassword = assertHasApplicationElementProperty(tpass, "fieldValue");
+		Property femail = assertHasProperty(temail, "fieldValue");
+		Property fpassword = assertHasProperty(tpass, "fieldValue");
 		Button button = assertHasButton(form, "Login");
 	
 		// get the operation
@@ -169,8 +169,8 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 		Session session = assertHasSession(root, "target session");
 
 		// get the keys in the session
-		ApplicationElementProperty email = assertHasApplicationElementProperty(session, "current email");
-		ApplicationElementProperty password = assertHasApplicationElementProperty(session, "current password");
+		Property email = assertHasProperty(session, "current email");
+		Property password = assertHasProperty(session, "current password");
 		
 		// get the keys in the input form
 		Frame login = assertHasFrame(root, "login");
@@ -183,8 +183,8 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 		assertHasNoSetWire(root, email, temail);
 		assertHasNoSetWire(root, password, tpass);
 		
-		ApplicationElementProperty femail = assertHasApplicationElementProperty(temail, "fieldValue");
-		ApplicationElementProperty fpassword = assertHasApplicationElementProperty(tpass, "fieldValue");
+		Property femail = assertHasProperty(temail, "fieldValue");
+		Property fpassword = assertHasProperty(tpass, "fieldValue");
 	
 		assertHasNoSetWire(root, femail, email);
 		assertHasNoSetWire(root, fpassword, password);
@@ -212,9 +212,9 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 		assertGenerated(assertHasJoinNode(doLogout));
 		
 		// get the keys in the session
-		ApplicationElementProperty email = assertHasApplicationElementProperty(session, "current email");
+		Property email = assertHasProperty(session, "current email");
 		assertGenerated(email);
-		ApplicationElementProperty password = assertHasApplicationElementProperty(session, "current password");
+		Property password = assertHasProperty(session, "current password");
 		assertGenerated(password);
 		
 		StaticValue myNull = assertHasStaticValue(doLogout, "reset value");

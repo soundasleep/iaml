@@ -3,11 +3,11 @@
  */
 package org.openiaml.model.tests.inference.model0_4_2;
 
-import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.PrimitiveOperation;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.components.EntryGate;
 import org.openiaml.model.model.operations.CancelNode;
@@ -97,7 +97,7 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		Session session = assertHasSession(root, "Session");
 		
 		// generated property
-		ApplicationElementProperty property = assertHasApplicationElementProperty(session, "requires a page is viewed first flag");
+		Property property = assertHasProperty(session, "requires a page is viewed first flag");
 		assertGenerated(property);
 		assertEquals(property.getDefaultValue(), "false");
 
@@ -125,7 +125,7 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		Session session = assertHasSession(root, "Session");
 		
 		// generated property
-		ApplicationElementProperty property = assertHasApplicationElementProperty(session, "requires a page is viewed first flag");
+		Property property = assertHasProperty(session, "requires a page is viewed first flag");
 
 		// required page
 		Frame required = assertHasFrame(root, "Required Page");
@@ -180,7 +180,7 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		Session session = assertHasSession(root, "Session");
 		
 		// generated property
-		ApplicationElementProperty property = assertHasApplicationElementProperty(session, "requires a page is viewed first flag");
+		Property property = assertHasProperty(session, "requires a page is viewed first flag");
 
 		// generated condition
 		CompositeCondition condition = assertHasCompositeCondition(session, "check requires a page is viewed first");

@@ -8,7 +8,7 @@
 /**
  * Called from JS.
  */
-«DEFINE remoteDatabaseValue(boolean require, model::WireEdge wire, model::ApplicationElementProperty property) FOR model::DomainAttribute»
+«DEFINE remoteDatabaseValue(boolean require, model::WireEdge wire, model::Property property) FOR model::DomainAttribute»
 	<?php 
 	{
 		// remote parameter source from a database file
@@ -52,7 +52,7 @@
 	?>
 «ENDDEFINE»
 
-«DEFINE remoteDatabaseValueIsSet(model::ApplicationElementProperty property) FOR model::DomainAttribute»
+«DEFINE remoteDatabaseValueIsSet(model::Property property) FOR model::DomainAttribute»
 	<?php 
 	{
 		// remote parameter source from a database file

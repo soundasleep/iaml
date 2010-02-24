@@ -6,7 +6,6 @@ package org.openiaml.model.tests.inference;
 import java.util.List;
 
 import org.jaxen.JaxenException;
-import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainObject;
@@ -16,6 +15,7 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.PrimitiveOperation;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.visual.Frame;
@@ -96,12 +96,12 @@ public class SyncWiresProperties extends InferenceTestCase {
 		// (following from SyncFormDomainObject)
 
 		// fields should have fieldValues
-		ApplicationElementProperty value1 = assertHasApplicationElementProperty(f1, "fieldValue");
-		ApplicationElementProperty value2 = assertHasApplicationElementProperty(f2, "fieldValue");
-		ApplicationElementProperty value3 = assertHasApplicationElementProperty(f3, "fieldValue");
-		ApplicationElementProperty valuea1 = assertHasApplicationElementProperty(a1, "fieldValue");
-		ApplicationElementProperty valuea2 = assertHasApplicationElementProperty(a2, "fieldValue");
-		ApplicationElementProperty valuea3 = assertHasApplicationElementProperty(a3, "fieldValue");
+		Property value1 = assertHasProperty(f1, "fieldValue");
+		Property value2 = assertHasProperty(f2, "fieldValue");
+		Property value3 = assertHasProperty(f3, "fieldValue");
+		Property valuea1 = assertHasProperty(a1, "fieldValue");
+		Property valuea2 = assertHasProperty(a2, "fieldValue");
+		Property valuea3 = assertHasProperty(a3, "fieldValue");
 
 		// these field values should be parameters to run instance wires
 		{
@@ -187,7 +187,7 @@ public class SyncWiresProperties extends InferenceTestCase {
 
 			// setProperty should flow out to ApplicationElementProperty
 			assertEquals(prelude, setProp.getOutFlows().size(), 1);
-			ApplicationElementProperty outProp = (ApplicationElementProperty) setProp.getOutFlows().get(0).getTo();
+			Property outProp = (Property) setProp.getOutFlows().get(0).getTo();
 			assertEquals(prelude, outProp.getName(), "fieldValue");
 
 			// this property should belong to an application element with a different name

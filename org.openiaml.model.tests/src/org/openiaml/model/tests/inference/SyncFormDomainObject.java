@@ -4,12 +4,12 @@
 package org.openiaml.model.tests.inference;
 
 import org.jaxen.JaxenException;
-import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
@@ -62,10 +62,10 @@ public class SyncFormDomainObject extends InferenceTestCase {
 		Operation updatea2 = assertHasOperation(attr2, "update");
 
 		// fields should have fieldValues
-		ApplicationElementProperty value1 = assertHasApplicationElementProperty(field1, "fieldValue");
-		ApplicationElementProperty value2 = assertHasApplicationElementProperty(field2, "fieldValue");
-		ApplicationElementProperty valuea1 = assertHasApplicationElementProperty(attr1, "fieldValue");
-		ApplicationElementProperty valuea2 = assertHasApplicationElementProperty(attr2, "fieldValue");
+		Property value1 = assertHasProperty(field1, "fieldValue");
+		Property value2 = assertHasProperty(field2, "fieldValue");
+		Property valuea1 = assertHasProperty(attr1, "fieldValue");
+		Property valuea2 = assertHasProperty(attr2, "fieldValue");
 
 		// these field values should be parameters
 		ParameterEdge pw1 = value1.getOutParameterEdges().get(0);

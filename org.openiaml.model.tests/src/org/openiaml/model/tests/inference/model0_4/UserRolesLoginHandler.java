@@ -6,7 +6,7 @@ package org.openiaml.model.tests.inference.model0_4;
 import java.util.List;
 import java.util.Set;
 
-import org.openiaml.model.model.ApplicationElementProperty;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.scopes.Session;
@@ -101,13 +101,13 @@ public class UserRolesLoginHandler extends ValidInferenceTestCase {
 		
 		Session session = assertHasSession(root, "my session");
 		
-		assertGenerated(assertHasApplicationElementProperty(session, "current email"));
-		assertGenerated(assertHasApplicationElementProperty(session, "current password"));
-		assertHasNoApplicationElementProperty(session, "current generated primary key");
-		assertHasNoApplicationElementProperty(session, "current User.generated primary key");
-		assertHasNoApplicationElementProperty(session, "current generated_primary_key");
-		assertHasNoApplicationElementProperty(session, "current User.generated_primary_key");
-		assertHasNoApplicationElementProperty(session, "current User_generated_primary_key");
+		assertGenerated(assertHasProperty(session, "current email"));
+		assertGenerated(assertHasProperty(session, "current password"));
+		assertHasNoProperty(session, "current generated primary key");
+		assertHasNoProperty(session, "current User.generated primary key");
+		assertHasNoProperty(session, "current generated_primary_key");
+		assertHasNoProperty(session, "current User.generated_primary_key");
+		assertHasNoProperty(session, "current User_generated_primary_key");
 		
 	}
 		
@@ -134,14 +134,14 @@ public class UserRolesLoginHandler extends ValidInferenceTestCase {
 		assertEquals(params.toString(), 2, params.size());
 		
 		// one from password
-		ApplicationElementProperty password = assertHasApplicationElementProperty(session, "current password");
+		Property password = assertHasProperty(session, "current password");
 		assertGenerated(password);
 		ParameterEdge pw = getParameterEdgeFromTo(session, password, select);
 		assertGenerated(pw);
 		assertEquals("password", pw.getName());
 
 		// one from email
-		ApplicationElementProperty email = assertHasApplicationElementProperty(session, "current email");
+		Property email = assertHasProperty(session, "current email");
 		assertGenerated(email);
 		ParameterEdge pw2 = getParameterEdgeFromTo(session, email, select);
 		assertGenerated(pw2);

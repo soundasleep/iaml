@@ -5,13 +5,13 @@ package org.openiaml.model.tests.inference.model0_4;
 
 import java.util.Set;
 
-import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Button;
@@ -99,7 +99,7 @@ public class SessionNewDomainInstance extends InferenceTestCase {
 		assertGenerated(edit);
 
 		// and a property
-		ApplicationElementProperty value = assertHasApplicationElementProperty(email, "fieldValue");
+		Property value = assertHasProperty(email, "fieldValue");
 		assertGenerated(value);
 
 		// get the text field

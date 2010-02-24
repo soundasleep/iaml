@@ -66,7 +66,7 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 	
 		event : EventTrigger( eContainer == source, name=="edit" )
 		operation : Operation( eContainer == target, name=="update" )
-		field : ApplicationElementProperty( eContainer == source, name=="fieldValue" )
+		field : Property( eContainer == source, name=="fieldValue" )
 		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
 		
 		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
@@ -88,7 +88,7 @@ rule "Run instance wire from target.access to target.init, when we have a value 
 		
 		event : EventTrigger( eContainer == target, name=="access" )
 		operation : Operation( eContainer == target, name=="init" )
-		field : ApplicationElementProperty( eContainer == source, name=="fieldValue" )
+		field : Property( eContainer == source, name=="fieldValue" )
 		
 		not (RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" ))
 		
@@ -108,7 +108,7 @@ rule "Run instance wire from target.access to target.init, adding ConditionEdge 
 		
 		event : EventTrigger( eContainer == target, name=="access" )
 		operation : Operation( eContainer == target, name=="init" )
-		field : ApplicationElementProperty( eContainer == source, name=="fieldValue" )
+		field : Property( eContainer == source, name=="fieldValue" )
 		
 		run : RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" )
 		param : ParameterEdge( from == field, to == run )
@@ -134,7 +134,7 @@ rule "Connect parameter wire to: run instance wire from target.access to target.
 	
 		event : EventTrigger( eContainer == target, name=="access" )
 		operation : Operation( eContainer == target, name=="init" )
-		field : ApplicationElementProperty( eContainer == source, name=="fieldValue" )
+		field : Property( eContainer == source, name=="fieldValue" )
 		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
 		
 		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
@@ -286,7 +286,7 @@ rule "Connect parameter for Session.init to incoming SetWires (contained in Fram
 
 		initrw : RunInstanceWire( eContainer == sw2, from == inite, to == operation, name == "run" )
 		
-		field : ApplicationElementProperty( eContainer == sourceElement, name=="fieldValue" )
+		field : Property( eContainer == sourceElement, name=="fieldValue" )
 		pw : ParameterEdge( eContainer == sw2, from == field, to == rw ) 
 
 		not( ParameterEdge( eContainer == sw2, from == field, to == initrw ))  
@@ -413,7 +413,7 @@ rule "A SetWire between Attributes selected from a NewInstanceWire need to check
 		initOp : Operation ( eContainer == tf, name == "init" )
 		run : RunInstanceWire ( from == access, to == initOp )
 		
-		attributeValue : ApplicationElementProperty ( eContainer == attribute, name == "fieldValue" )
+		attributeValue : Property ( eContainer == attribute, name == "fieldValue" )
 		
 		param : ParameterEdge ( from == attributeValue, to == run )  
 		

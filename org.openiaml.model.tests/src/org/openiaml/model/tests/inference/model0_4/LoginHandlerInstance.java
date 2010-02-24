@@ -6,7 +6,6 @@ package org.openiaml.model.tests.inference.model0_4;
 import java.util.List;
 import java.util.Set;
 
-import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainAttributeInstance;
@@ -15,6 +14,7 @@ import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.components.LoginHandlerTypes;
@@ -153,7 +153,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		assertGenerated(select);
 
 		// the login handler should have generated a key store
-		ApplicationElementProperty currentPassword = assertHasApplicationElementProperty(session, "current password");
+		Property currentPassword = assertHasProperty(session, "current password");
 		assertGenerated(currentPassword);
 
 		// thuis key must have a default value set
@@ -283,7 +283,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		assertEquals("onClick", run.getName());
 
 		// the text field has a parameter
-		ApplicationElementProperty prop = assertHasApplicationElementProperty(field, "fieldValue");
+		Property prop = assertHasProperty(field, "fieldValue");
 		assertGenerated(prop);
 
 		// connecting to the run wire

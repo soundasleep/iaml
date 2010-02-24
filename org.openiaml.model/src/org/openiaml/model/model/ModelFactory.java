@@ -89,13 +89,13 @@ public interface ModelFactory extends EFactory {
 	ApplicationElement createApplicationElement();
 
 	/**
-	 * Returns a new object of class '<em>Application Element Property</em>'.
+	 * Returns a new object of class '<em>Property</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Application Element Property</em>'.
+	 * @return a new object of class '<em>Property</em>'.
 	 * @generated
 	 */
-	ApplicationElementProperty createApplicationElementProperty();
+	Property createProperty();
 
 	/**
 	 * Returns a new object of class '<em>Static Value</em>'.

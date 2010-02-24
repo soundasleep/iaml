@@ -8,10 +8,9 @@ package org.openiaml.model.model;
 
 import org.openiaml.model.model.wires.ParameterEdgesSource;
 
-
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Application Element Property</b></em>'.
+ * A representation of the model object '<em><b>Property</b></em>'.
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
@@ -21,16 +20,15 @@ import org.openiaml.model.model.wires.ParameterEdgesSource;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.openiaml.model.model.ApplicationElementProperty#getDefaultValue <em>Default Value</em>}</li>
+ *   <li>{@link org.openiaml.model.model.Property#getDefaultValue <em>Default Value</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.openiaml.model.model.ModelPackage#getApplicationElementProperty()
+ * @see org.openiaml.model.model.ModelPackage#getProperty()
  * @model
  * @generated
  */
-public interface ApplicationElementProperty extends NamedElement, WireEdgesSource, WireEdgeDestination, DataFlowEdgesSource, DataFlowEdgeDestination, ParameterEdgesSource {
-
+public interface Property extends NamedElement, WireEdgesSource, WireEdgeDestination, DataFlowEdgesSource, DataFlowEdgeDestination, ParameterEdgesSource {
 	/**
 	 * Returns the value of the '<em><b>Default Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -41,14 +39,14 @@ public interface ApplicationElementProperty extends NamedElement, WireEdgesSourc
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Default Value</em>' attribute.
 	 * @see #setDefaultValue(String)
-	 * @see org.openiaml.model.model.ModelPackage#getApplicationElementProperty_DefaultValue()
+	 * @see org.openiaml.model.model.ModelPackage#getProperty_DefaultValue()
 	 * @model annotation="http://openiaml.org/comment added='0.2'"
 	 * @generated
 	 */
 	String getDefaultValue();
 
 	/**
-	 * Sets the value of the '{@link org.openiaml.model.model.ApplicationElementProperty#getDefaultValue <em>Default Value</em>}' attribute.
+	 * Sets the value of the '{@link org.openiaml.model.model.Property#getDefaultValue <em>Default Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Default Value</em>' attribute.
@@ -56,4 +54,5 @@ public interface ApplicationElementProperty extends NamedElement, WireEdgesSourc
 	 * @generated
 	 */
 	void setDefaultValue(String value);
-} // ApplicationElementProperty
+
+} // Property

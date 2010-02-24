@@ -59,7 +59,7 @@ public interface DomainStore extends ContainsOperations, ContainsEventTriggers, 
 
 	/**
 	 * Returns the value of the '<em><b>Properties</b></em>' containment reference list.
-	 * The list contents are of type {@link org.openiaml.model.model.ApplicationElementProperty}.
+	 * The list contents are of type {@link org.openiaml.model.model.Property}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Properties</em>' containment reference list isn't clear,
@@ -71,7 +71,7 @@ public interface DomainStore extends ContainsOperations, ContainsEventTriggers, 
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<ApplicationElementProperty> getProperties();
+	EList<Property> getProperties();
 
 	/**
 	 * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.

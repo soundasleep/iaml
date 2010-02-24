@@ -4,10 +4,10 @@
 package org.openiaml.model.tests.inference;
 
 import org.jaxen.JaxenException;
-import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ConditionEdge;
@@ -84,8 +84,8 @@ public class ConditionWireFalseServer extends InferenceTestCase {
 		RunInstanceWire targetInitRun = assertHasRunInstanceWire(wire, targetAccess, targetInit, "run");
 		
 		// they should have incoming parameters
-		ApplicationElementProperty field1value = assertHasApplicationElementProperty(field1, "fieldValue");
-		ApplicationElementProperty field2value = assertHasApplicationElementProperty(field2, "fieldValue");
+		Property field1value = assertHasProperty(field1, "fieldValue");
+		Property field2value = assertHasProperty(field2, "fieldValue");
 		assertNotSame(field1value, field2value);
 		
 		assertHasParameterEdge(root, field2value, srcInitRun);

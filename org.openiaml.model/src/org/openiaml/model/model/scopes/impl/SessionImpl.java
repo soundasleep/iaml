@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.ApplicationElement;
-import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsConditions;
@@ -32,6 +31,7 @@ import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.ShouldntContainWires;
@@ -367,7 +367,7 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ApplicationElementProperty> properties;
+	protected EList<Property> properties;
 
 	/**
 	 * The cached value of the '{@link #getValues() <em>Values</em>}' containment reference list.
@@ -770,9 +770,9 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ApplicationElementProperty> getProperties() {
+	public EList<Property> getProperties() {
 		if (properties == null) {
-			properties = new EObjectContainmentEList<ApplicationElementProperty>(ApplicationElementProperty.class, this, ScopesPackage.SESSION__PROPERTIES);
+			properties = new EObjectContainmentEList<Property>(Property.class, this, ScopesPackage.SESSION__PROPERTIES);
 		}
 		return properties;
 	}
@@ -1068,7 +1068,7 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return;
 			case ScopesPackage.SESSION__PROPERTIES:
 				getProperties().clear();
-				getProperties().addAll((Collection<? extends ApplicationElementProperty>)newValue);
+				getProperties().addAll((Collection<? extends Property>)newValue);
 				return;
 			case ScopesPackage.SESSION__VALUES:
 				getValues().clear();

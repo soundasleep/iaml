@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.ApplicationElement;
-import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsWires;
@@ -29,6 +28,7 @@ import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.impl.WireEdgeImpl;
@@ -219,7 +219,7 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ApplicationElementProperty> properties;
+	protected EList<Property> properties;
 
 	/**
 	 * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference list.
@@ -447,9 +447,9 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ApplicationElementProperty> getProperties() {
+	public EList<Property> getProperties() {
 		if (properties == null) {
-			properties = new EObjectContainmentEList<ApplicationElementProperty>(ApplicationElementProperty.class, this, WiresPackage.COMPOSITE_WIRE__PROPERTIES);
+			properties = new EObjectContainmentEList<Property>(Property.class, this, WiresPackage.COMPOSITE_WIRE__PROPERTIES);
 		}
 		return properties;
 	}
@@ -662,7 +662,7 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 				return;
 			case WiresPackage.COMPOSITE_WIRE__PROPERTIES:
 				getProperties().clear();
-				getProperties().addAll((Collection<? extends ApplicationElementProperty>)newValue);
+				getProperties().addAll((Collection<? extends Property>)newValue);
 				return;
 			case WiresPackage.COMPOSITE_WIRE__OPERATIONS:
 				getOperations().clear();

@@ -8,7 +8,6 @@ package org.openiaml.model.model.wires;
 
 import org.eclipse.emf.common.util.EList;
 import org.openiaml.model.model.ApplicationElement;
-import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.EventTrigger;
@@ -16,6 +15,7 @@ import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.WireEdge;
 
@@ -63,7 +63,7 @@ public interface CompositeWire extends WireEdge, NamedElement, ContainsWires, Ge
 
 	/**
 	 * Returns the value of the '<em><b>Properties</b></em>' containment reference list.
-	 * The list contents are of type {@link org.openiaml.model.model.ApplicationElementProperty}.
+	 * The list contents are of type {@link org.openiaml.model.model.Property}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Properties</em>' containment reference list isn't clear,
@@ -75,7 +75,7 @@ public interface CompositeWire extends WireEdge, NamedElement, ContainsWires, Ge
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<ApplicationElementProperty> getProperties();
+	EList<Property> getProperties();
 
 	/**
 	 * Returns the value of the '<em><b>Operations</b></em>' containment reference list.

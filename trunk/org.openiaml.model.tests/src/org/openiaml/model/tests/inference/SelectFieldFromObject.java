@@ -3,13 +3,13 @@
  */
 package org.openiaml.model.tests.inference;
 
-import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.RunInstanceWire;
@@ -41,7 +41,9 @@ public class SelectFieldFromObject extends InferenceTestCase {
 		DomainObjectInstance obj = assertHasDomainObjectInstance(container, "\"my user\"");
 		DomainAttributeInstance attr = assertHasDomainAttributeInstance(obj, "name");
 		SyncWire sw = (SyncWire) getWireBidirectional(root, field, attr);
+		assertNotGenerated(sw);
 		SelectWire select = (SelectWire) getWireFromTo(root, user, obj);
+		assertNotGenerated(select);
 		
 		// should have autosave enabled on both fields
 		assertNotGenerated(obj);
@@ -52,8 +54,9 @@ public class SelectFieldFromObject extends InferenceTestCase {
 		// [inferred elements]
 		// edit events and operations on the text field
 		CompositeOperation update = assertHasCompositeOperation(field, "update");
+		assertGenerated(update);
 		EventTrigger edit = assertHasEventTrigger(field, "edit");
-		ApplicationElementProperty fieldValue = assertHasApplicationElementProperty(field, "fieldValue");
+		Property fieldValue = assertHasProperty(field, "fieldValue");
 
 		// [new elements]
 		// edit operations on the attribute

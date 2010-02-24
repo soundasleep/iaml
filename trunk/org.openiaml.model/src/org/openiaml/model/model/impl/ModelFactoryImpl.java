@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.openiaml.model.model.ApplicationElement;
-import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ConditionalEdge;
@@ -33,6 +32,7 @@ import org.openiaml.model.model.ModelFactory;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.PrimitiveOperation;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.TemporaryVariable;
@@ -89,7 +89,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.PRIMITIVE_OPERATION: return createPrimitiveOperation();
 			case ModelPackage.COMPOSITE_OPERATION: return createCompositeOperation();
 			case ModelPackage.APPLICATION_ELEMENT: return createApplicationElement();
-			case ModelPackage.APPLICATION_ELEMENT_PROPERTY: return createApplicationElementProperty();
+			case ModelPackage.PROPERTY: return createProperty();
 			case ModelPackage.STATIC_VALUE: return createStaticValue();
 			case ModelPackage.VISIBLE_THING: return createVisibleThing();
 			case ModelPackage.INTERNET_APPLICATION: return createInternetApplication();
@@ -190,10 +190,10 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public ApplicationElementProperty createApplicationElementProperty() {
-		ApplicationElementPropertyImpl applicationElementProperty = new ApplicationElementPropertyImpl();
-		generateID(applicationElementProperty);
-		return applicationElementProperty;
+	public Property createProperty() {
+		PropertyImpl property = new PropertyImpl();
+		generateID(property);
+		return property;
 	}
 
 	/**

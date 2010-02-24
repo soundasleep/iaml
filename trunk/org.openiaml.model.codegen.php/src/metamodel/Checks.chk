@@ -41,8 +41,8 @@ context model::wires::SyncWire ERROR "A SyncWire cannot connect to itself":
 	from != to;
 
 context model::wires::SyncWire ERROR "You cannot have a SyncWire connecting two ApplicationElementProperties":
-	!(model::ApplicationElementProperty.isInstance(from) && 
-	model::ApplicationElementProperty.isInstance(to));
+	!(model::Property.isInstance(from) && 
+	model::Property.isInstance(to));
 	
 context model::DomainObject ERROR "You cannot have a DomainObject called single_values (reserved word)" :
 	name != "single_values";
@@ -88,7 +88,7 @@ context model::operations::OperationCallNode ERROR "An OperationCallNode must ha
 context model::wires::RunInstanceWire WARNING "This RunInstanceWire will not do anything: consider naming it 'onClick'" :
 	!(model::VisibleThing.isInstance(from) && !(name == "click" || name == "onClick"));
 
-context model::ApplicationElementProperty WARNING "A session property used as part of a login handler should have a default value set, otherwise secure frames will crash with an exception rather than going to the login frame" :
+context model::Property WARNING "A session property used as part of a login handler should have a default value set, otherwise secure frames will crash with an exception rather than going to the login frame" :
 	!(defaultValue == null && inEdges.typeSelect(model::wires::SetWire).from.typeSelect(model::components::LoginHandler).size > 0); 
 
 context model::QueryParameter ERROR "A QueryParameter cannot be used on a Frame outside of its containing frame (" + containingFrame(this.eContainer) + ", " + containingFrame(outEdges.first().to.eContainer) + ")" :
@@ -128,7 +128,7 @@ context model::operations::Arithmetic ERROR "Arithmetic must have at least one i
 	inFlows.size > 0;
 
 context model::PrimitiveOperation ERROR "A 'set' PrimitiveOperation cannot set an ApplicationElementProperty: use 'setPropertyToValue'" :
-	name != "set" || outFlows.to.typeSelect(model::ApplicationElementProperty).size == 0;
+	name != "set" || outFlows.to.typeSelect(model::Property).size == 0;
 
 context model::PrimitiveOperation ERROR "A 'setPropertyToValue' PrimitiveOperation cannot set a TemporaryVariable: use 'set'" :
 	name != "setPropertyToValue" || outFlows.to.typeSelect(model::TemporaryVariable).size == 0;

@@ -7,13 +7,13 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.jaxen.JaxenException;
-import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DynamicApplicationElementSet;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.PrimitiveOperation;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.domain.DomainPackage;
@@ -94,7 +94,7 @@ public class DroolsHelperFunctions {
 		return false;
 	}
 
-	public boolean loginAttributeMatches(ApplicationElementProperty p, DomainAttribute a) {
+	public boolean loginAttributeMatches(Property p, DomainAttribute a) {
 		return p.getName() != null && p.getName().equals("current " + a.getName());
 	}
 

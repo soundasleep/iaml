@@ -124,11 +124,11 @@ rule "Create 'fieldValue' value for DomainAttributeInstances"
 	when
 		instance : DomainAttributeInstance ( )
 		
-		not ( ApplicationElementProperty( eContainer == instance, name == "fieldValue" ))
+		not ( Property( eContainer == instance, name == "fieldValue" ))
 		
 	then
 		# create a new one
-		ApplicationElementProperty value = handler.generatedApplicationElementProperty(instance, instance);
+		Property value = handler.generatedProperty(instance, instance);
 		handler.setName(value, "fieldValue");
 		queue.add(value, drools);
 

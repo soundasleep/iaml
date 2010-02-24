@@ -301,7 +301,7 @@ log_message("«name».php: User browsing finished");
 	«EXPAND initialiseDefaultValues FOREACH children»
 «ENDDEFINE»
 
-«DEFINE initialiseDefaultValueProperty FOR model::ApplicationElementProperty»
+«DEFINE initialiseDefaultValueProperty FOR model::Property»
 	«IF defaultValue != null && defaultValue.length > 0»
 		initialize_application_value_default("«safeName()-»",
 			"«escapePhpString(defaultValue)-»");		«REM»TODO encode«ENDREM»	

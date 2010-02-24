@@ -6,11 +6,11 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE remoteValue(boolean php, boolean require, model::WireEdge wire, model::ApplicationElementProperty property) FOR emf::EObject»
+«DEFINE remoteValue(boolean php, boolean require, model::WireEdge wire, model::Property property) FOR emf::EObject»
 	«EXPAND exception FOR throwException("Cannot find a remote parameter source for " + this)»
 «ENDDEFINE»
 
-«DEFINE remoteValue(boolean php, boolean require, model::WireEdge wire, model::ApplicationElementProperty property) FOR model::DomainAttribute»
+«DEFINE remoteValue(boolean php, boolean require, model::WireEdge wire, model::Property property) FOR model::DomainAttribute»
 	«IF php»
 		«EXPAND exception FOR throwException("Cannot generate server-side code for remoteValue DomainAttribute: " + this)» 
 	«ELSE»
@@ -22,7 +22,7 @@
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE remoteValue(boolean php, boolean require, model::WireEdge wire, model::ApplicationElementProperty property) FOR model::DomainAttributeInstance»
+«DEFINE remoteValue(boolean php, boolean require, model::WireEdge wire, model::Property property) FOR model::DomainAttributeInstance»
 	«IF php»
 		get_attribute_instance_«safeName()-»()
 	«ELSE»
@@ -33,11 +33,11 @@
 /**
  * Is the current remote value set?
  */
-«DEFINE remoteValueIsSet(boolean php, model::ApplicationElementProperty property) FOR emf::EObject»
+«DEFINE remoteValueIsSet(boolean php, model::Property property) FOR emf::EObject»
 	«EXPAND exception FOR throwException("Cannot find a remote parameter source for " + this)»
 «ENDDEFINE»
 
-«DEFINE remoteValueIsSet(boolean php, model::ApplicationElementProperty property) FOR model::DomainAttribute»
+«DEFINE remoteValueIsSet(boolean php, model::Property property) FOR model::DomainAttribute»
 	«IF php»
 		«EXPAND exception FOR throwException("Cannot generate server-side code for remoteValue DomainAttribute: " + this)» 
 	«ELSE»
@@ -49,7 +49,7 @@
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE remoteValueIsSet(boolean php, model::ApplicationElementProperty property) FOR model::DomainAttributeInstance»
+«DEFINE remoteValueIsSet(boolean php, model::Property property) FOR model::DomainAttributeInstance»
 	«IF php»
 		has_attribute_instance_«safeName()-»()
 	«ELSE»

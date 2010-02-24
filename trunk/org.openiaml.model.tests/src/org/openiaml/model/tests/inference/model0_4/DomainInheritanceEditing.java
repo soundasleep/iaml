@@ -5,7 +5,6 @@ package org.openiaml.model.tests.inference.model0_4;
 
 import java.util.Set;
 
-import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.DomainAttributeInstance;
@@ -14,6 +13,7 @@ import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.FinishNode;
@@ -94,7 +94,7 @@ public class DomainInheritanceEditing extends InferenceTestCase {
 		
 		// a parameter
 		DomainAttributeInstance nameInstance = assertHasDomainAttributeInstance(studentInstance, "name");
-		ApplicationElementProperty instanceValue = assertHasApplicationElementProperty(nameInstance, "fieldValue");
+		Property instanceValue = assertHasProperty(nameInstance, "fieldValue");
 		ParameterEdge param = assertHasParameterEdge(root, instanceValue, run);
 		assertGenerated(param);
 		
@@ -148,7 +148,7 @@ public class DomainInheritanceEditing extends InferenceTestCase {
 		
 		// a parameter
 		DomainAttributeInstance nameInstance = assertHasDomainAttributeInstance(studentInstance, "name");
-		ApplicationElementProperty instanceValue = assertHasApplicationElementProperty(nameInstance, "fieldValue");
+		Property instanceValue = assertHasProperty(nameInstance, "fieldValue");
 		ParameterEdge param = assertHasParameterEdge(root, instanceValue, run);
 		assertGenerated(param);
 		

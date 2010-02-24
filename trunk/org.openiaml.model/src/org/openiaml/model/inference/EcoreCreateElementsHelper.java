@@ -6,7 +6,6 @@ package org.openiaml.model.inference;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
-import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ContainsConditions;
@@ -34,6 +33,7 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.PrimitiveOperation;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.VisibleThing;
@@ -91,29 +91,20 @@ import org.openiaml.model.model.wires.WiresPackage;
  */
 public abstract class EcoreCreateElementsHelper implements ICreateElements {
 
-	public ApplicationElementProperty generatedApplicationElementProperty(GeneratesElements by, ApplicationElement container) throws InferenceException {
-		ApplicationElementProperty fieldValue = (ApplicationElementProperty) createElement( container, ModelPackage.eINSTANCE.getApplicationElementProperty(), ModelPackage.eINSTANCE.getApplicationElement_Properties() );
+	public Property generatedProperty(GeneratesElements by, ApplicationElement container) throws InferenceException {
+		Property fieldValue = (Property) createElement( container, ModelPackage.eINSTANCE.getProperty(), ModelPackage.eINSTANCE.getApplicationElement_Properties() );
 		setGeneratedBy(fieldValue, by);
 		return fieldValue;
 	}
 
-	public ApplicationElementProperty generatedApplicationElementProperty(GeneratesElements by, VisibleThing container) throws InferenceException {
-		ApplicationElementProperty fieldValue = (ApplicationElementProperty) createElement( container, ModelPackage.eINSTANCE.getApplicationElementProperty(), ModelPackage.eINSTANCE.getVisibleThing_Properties() );
+	public Property generatedProperty(GeneratesElements by, VisibleThing container) throws InferenceException {
+		Property fieldValue = (Property) createElement( container, ModelPackage.eINSTANCE.getProperty(), ModelPackage.eINSTANCE.getVisibleThing_Properties() );
 		setGeneratedBy(fieldValue, by);
 		return fieldValue;
 	}
 	
-	public ApplicationElementProperty generatedApplicationElementProperty(GeneratesElements by, Session container) throws InferenceException {
-		ApplicationElementProperty fieldValue = (ApplicationElementProperty) createElement( container, ModelPackage.eINSTANCE.getApplicationElementProperty(), ModelPackage.eINSTANCE.getScope_Properties() );
-		setGeneratedBy(fieldValue, by);
-		return fieldValue;
-	}
-	
-	/**
-	 * TODO remove this method when Scope and Session are refactored in the model.
-	 */
-	public ApplicationElementProperty generatedApplicationElementProperty(GeneratesElements by, Scope container) throws InferenceException {
-		ApplicationElementProperty fieldValue = (ApplicationElementProperty) createElement( container, ModelPackage.eINSTANCE.getApplicationElementProperty(), ModelPackage.eINSTANCE.getScope_Properties() );
+	public Property generatedProperty(GeneratesElements by, Scope container) throws InferenceException {
+		Property fieldValue = (Property) createElement( container, ModelPackage.eINSTANCE.getProperty(), ModelPackage.eINSTANCE.getScope_Properties() );
 		setGeneratedBy(fieldValue, by);
 		return fieldValue;
 	}

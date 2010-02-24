@@ -3,11 +3,11 @@
  */
 package org.openiaml.model.tests.inference.model0_4_2;
 
-import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.PrimitiveOperation;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.components.ExitGate;
 import org.openiaml.model.model.operations.CancelNode;
@@ -105,7 +105,7 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 		Frame ad = assertHasFrame(session, "Advertisement");
 
 		// generated property
-		ApplicationElementProperty property = assertHasApplicationElementProperty(session, "View Ads Exit Gate flag");
+		Property property = assertHasProperty(session, "View Ads Exit Gate flag");
 		assertGenerated(property);
 		assertEquals(property.getDefaultValue(), "false");
 
@@ -133,7 +133,7 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 		Frame ad = assertHasFrame(session, "Advertisement");
 
 		// generated property
-		ApplicationElementProperty property = assertHasApplicationElementProperty(session, "View Ads Exit Gate flag");
+		Property property = assertHasProperty(session, "View Ads Exit Gate flag");
 
 		// set operation
 		CompositeOperation set = assertHasCompositeOperation(ad, "Set gate flag");
@@ -185,7 +185,7 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 		Session session = assertHasSession(root, "Advertising Session");
 
 		// generated property
-		ApplicationElementProperty property = assertHasApplicationElementProperty(session, "View Ads Exit Gate flag");
+		Property property = assertHasProperty(session, "View Ads Exit Gate flag");
 
 		// generated condition
 		CompositeCondition condition = assertHasCompositeCondition(session, "check View Ads Exit Gate");

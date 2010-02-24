@@ -39,7 +39,7 @@ echo "ok";
 /* Is there additional actions we should do on the client-side once this
  * property has changed? */
 try {
-	«EXPAND potentialUpdatesRequired FOREACH allApplicationElementProperties(this)»
+	«EXPAND potentialUpdatesRequired FOREACH allProperties(this)»
 } catch (IamlRuntimeException $e) {
 	// redirect to the exception frame
 	$url = "exception.php?fail=" . urlencode($e->getMessage() . " [from setApplicationValue]");
@@ -57,7 +57,7 @@ echo_necessary_update_callbacks();
 
 «ENDDEFINE»
 
-«DEFINE potentialUpdatesRequired FOR model::ApplicationElementProperty»
+«DEFINE potentialUpdatesRequired FOR model::Property»
 	if ($id == "«safeName()-»") {
 		/* Property "«name-»" («id-») */
 		
@@ -79,21 +79,21 @@ echo_necessary_update_callbacks();
 «ENDDEFINE»
 
 «DEFINE directPropertyUpdatesFrom FOR model::wires::SyncWire»
-	«IF model::ApplicationElementProperty.isInstance(to)»
-		«EXPAND template::operations::OutgoingValues::outgoingValueTarget(true, "arg0") FOR (model::ApplicationElementProperty) to»
+	«IF model::Property.isInstance(to)»
+		«EXPAND template::operations::OutgoingValues::outgoingValueTarget(true, "arg0") FOR (model::Property) to»
 	«ENDIF»
 «ENDDEFINE»
 
 /* bidirectionality */
 «DEFINE directPropertyUpdatesTo FOR model::wires::SyncWire»
-	«IF model::ApplicationElementProperty.isInstance(from)»
-		«EXPAND template::operations::OutgoingValues::outgoingValueTarget(true, "arg0") FOR (model::ApplicationElementProperty) from»
+	«IF model::Property.isInstance(from)»
+		«EXPAND template::operations::OutgoingValues::outgoingValueTarget(true, "arg0") FOR (model::Property) from»
 	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE directPropertyUpdatesFrom FOR model::wires::SetWire»
-	«IF model::ApplicationElementProperty.isInstance(to)»
-		«EXPAND template::operations::OutgoingValues::outgoingValueTarget(true, "arg0") FOR (model::ApplicationElementProperty) to»
+	«IF model::Property.isInstance(to)»
+		«EXPAND template::operations::OutgoingValues::outgoingValueTarget(true, "arg0") FOR (model::Property) to»
 	«ENDIF»
 «ENDDEFINE»
 
@@ -183,7 +183,7 @@ echo_necessary_update_callbacks();
 	«EXPAND outgoingValue FOREACH properties.select(e|e.name=="fieldValue")»
 «ENDDEFINE»
 
-«DEFINE outgoingValue FOR model::ApplicationElementProperty»
+«DEFINE outgoingValue FOR model::Property»
 	if ($frame_id == "«safeNameString(containingFrame(this).id)-»") {
 		/* the property "«this»" needs to be updated on the client */
 		«IF model::visual::InputTextField.isInstance(eContainer)»

@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsEventTriggers;
@@ -30,6 +29,7 @@ import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.VisibleThing;
@@ -349,7 +349,7 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ApplicationElementProperty> properties;
+	protected EList<Property> properties;
 
 	/**
 	 * The cached value of the '{@link #getValues() <em>Values</em>}' containment reference list.
@@ -682,9 +682,9 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ApplicationElementProperty> getProperties() {
+	public EList<Property> getProperties() {
 		if (properties == null) {
-			properties = new EObjectContainmentEList<ApplicationElementProperty>(ApplicationElementProperty.class, this, ModelPackage.VISIBLE_THING__PROPERTIES);
+			properties = new EObjectContainmentEList<Property>(Property.class, this, ModelPackage.VISIBLE_THING__PROPERTIES);
 		}
 		return properties;
 	}
@@ -920,7 +920,7 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 				return;
 			case ModelPackage.VISIBLE_THING__PROPERTIES:
 				getProperties().clear();
-				getProperties().addAll((Collection<? extends ApplicationElementProperty>)newValue);
+				getProperties().addAll((Collection<? extends Property>)newValue);
 				return;
 			case ModelPackage.VISIBLE_THING__VALUES:
 				getValues().clear();

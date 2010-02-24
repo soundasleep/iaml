@@ -65,7 +65,7 @@ rule "Connect ConditionEdges to RunInstanceWires created by SyncWires (access/in
 		run : RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" )
 		
 		# and targets' value is being used for source's init
-		fvalue : ApplicationElementProperty ( eContainer == target, name == "fieldValue" )
+		fvalue : Property ( eContainer == target, name == "fieldValue" )
 		param : ParameterEdge ( from == fvalue, to == run ) 
 		
 		# and the sync wire had a condition
@@ -133,7 +133,7 @@ rule "Connect ParameterEdges to ConditionEdges connected to RunInstanceWires cre
 		run : RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" )
 
 		# and targets' value is being used for source's init
-		fvalue : ApplicationElementProperty ( eContainer == target, name == "fieldValue" )
+		fvalue : Property ( eContainer == target, name == "fieldValue" )
 		param2 : ParameterEdge ( from == fvalue, to == run ) 
 
 		# and this SyncWire has a condition

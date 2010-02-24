@@ -3,11 +3,11 @@
  */
 package org.openiaml.model.tests.inference.model0_4;
 
-import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.components.AccessControlHandler;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.components.LoginHandlerTypes;
@@ -493,13 +493,13 @@ public class UserRoles extends InferenceTestCase {
 		Session session = assertHasSession(root, "target session");
 		assertNotGenerated(session);
 		
-		ApplicationElementProperty email = assertHasApplicationElementProperty(session, "current email");
+		Property email = assertHasProperty(session, "current email");
 		assertGenerated(email);
-		ApplicationElementProperty password = assertHasApplicationElementProperty(session, "current password");
+		Property password = assertHasProperty(session, "current password");
 		assertGenerated(password);
 		
 		// but not an 'generated primary key'
-		assertHasNoApplicationElementProperty(session, "current generated primary key");
+		assertHasNoProperty(session, "current generated primary key");
 		
 	}
 	
@@ -515,8 +515,8 @@ public class UserRoles extends InferenceTestCase {
 		Session session = assertHasSession(root, "target session");
 		assertNotGenerated(session);
 		
-		ApplicationElementProperty email = assertHasApplicationElementProperty(session, "current email");
-		ApplicationElementProperty password = assertHasApplicationElementProperty(session, "current password");
+		Property email = assertHasProperty(session, "current email");
+		Property password = assertHasProperty(session, "current password");
 		
 		// user instance
 		UserInstance instance = assertHasUserInstance(session, "current instance");

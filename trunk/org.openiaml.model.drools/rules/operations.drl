@@ -92,7 +92,7 @@ end
 rule "Create components of 'update', 'refresh', 'init' operations"
 	when
 		o : CompositeOperation(overridden == false, (name == "update" || name == "refresh" || name == "init"))
-		field : ApplicationElementProperty( eContainer == o.eContainer, name == "fieldValue" )
+		field : Property( eContainer == o.eContainer, name == "fieldValue" )
 
 	then
 		Parameter parameter = handler.generatedParameter(o, o);

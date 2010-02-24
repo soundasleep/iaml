@@ -150,13 +150,13 @@ List[model::Operation] allContainerOperations(model::InternetApplication this) :
 	 	.union( children.allContainerOperations() );	 
 		
 /** All of the ApplicationElementProperties stored within this InternetApplication */
-List[model::ApplicationElementProperty] allApplicationElementProperties(model::InternetApplication this) :
-	properties.toSet().union( eAllContents.allApplicationElementProperties() ).reject( e | e == null );
+List[model::Property] allProperties(model::InternetApplication this) :
+	properties.toSet().union( eAllContents.allProperties() ).reject( e | e == null );
 
-List[model::ApplicationElementProperty] allApplicationElementProperties(emf::EObject this) :
+List[model::Property] allProperties(emf::EObject this) :
 	null;
 
-List[model::ApplicationElementProperty] allApplicationElementProperties(model::ApplicationElementProperty this) :
+List[model::Property] allroperties(model::Property this) :
 	this;
 
 /* for a frame that is part of a session/scope */

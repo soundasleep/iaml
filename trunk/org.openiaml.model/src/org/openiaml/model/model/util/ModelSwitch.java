@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
-import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
@@ -45,6 +44,7 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.PrimitiveOperation;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.ShouldntContainWires;
@@ -328,18 +328,18 @@ public class ModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.APPLICATION_ELEMENT_PROPERTY: {
-				ApplicationElementProperty applicationElementProperty = (ApplicationElementProperty)theEObject;
-				T result = caseApplicationElementProperty(applicationElementProperty);
-				if (result == null) result = caseNamedElement(applicationElementProperty);
-				if (result == null) result = caseWireEdgesSource(applicationElementProperty);
-				if (result == null) result = caseWireEdgeDestination(applicationElementProperty);
-				if (result == null) result = caseDataFlowEdgesSource(applicationElementProperty);
-				if (result == null) result = caseDataFlowEdgeDestination(applicationElementProperty);
-				if (result == null) result = caseParameterEdgesSource(applicationElementProperty);
-				if (result == null) result = caseGeneratedElement(applicationElementProperty);
-				if (result == null) result = caseShouldntContainWires(applicationElementProperty);
-				if (result == null) result = caseContainsWires(applicationElementProperty);
+			case ModelPackage.PROPERTY: {
+				Property property = (Property)theEObject;
+				T result = caseProperty(property);
+				if (result == null) result = caseNamedElement(property);
+				if (result == null) result = caseWireEdgesSource(property);
+				if (result == null) result = caseWireEdgeDestination(property);
+				if (result == null) result = caseDataFlowEdgesSource(property);
+				if (result == null) result = caseDataFlowEdgeDestination(property);
+				if (result == null) result = caseParameterEdgesSource(property);
+				if (result == null) result = caseGeneratedElement(property);
+				if (result == null) result = caseShouldntContainWires(property);
+				if (result == null) result = caseContainsWires(property);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -878,17 +878,17 @@ public class ModelSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Application Element Property</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Property</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Application Element Property</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Property</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseApplicationElementProperty(ApplicationElementProperty object) {
+	public T caseProperty(Property object) {
 		return null;
 	}
 

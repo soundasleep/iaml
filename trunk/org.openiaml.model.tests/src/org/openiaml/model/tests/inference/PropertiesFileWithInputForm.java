@@ -4,11 +4,11 @@
 package org.openiaml.model.tests.inference;
 
 import org.jaxen.JaxenException;
-import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
@@ -53,8 +53,8 @@ public class PropertiesFileWithInputForm extends InferenceTestCase {
 		RunInstanceWire targetRw = (RunInstanceWire) getWireFromTo(wire, targetEdit, srcOp);
 
 		// both should have fieldValues
-		ApplicationElementProperty textValue = assertHasApplicationElementProperty(source, "fieldValue");
-		ApplicationElementProperty attrValue = assertHasApplicationElementProperty(attribute, "fieldValue");
+		Property textValue = assertHasProperty(source, "fieldValue");
+		Property attrValue = assertHasProperty(attribute, "fieldValue");
 
 		// they should be parameters
 		assertGenerated(getParameterEdgeFromTo(wire, textValue, srcRw));
@@ -88,8 +88,8 @@ public class PropertiesFileWithInputForm extends InferenceTestCase {
 		RunInstanceWire targetRw = (RunInstanceWire) getWireFromTo(wire, targetEdit, srcOp);
 
 		// both should have fieldValues
-		ApplicationElementProperty textValue = assertHasApplicationElementProperty(source, "fieldValue");
-		ApplicationElementProperty attrValue = assertHasApplicationElementProperty(attribute, "fieldValue");
+		Property textValue = assertHasProperty(source, "fieldValue");
+		Property attrValue = assertHasProperty(attribute, "fieldValue");
 
 		// they should be parameters
 		assertGenerated(getParameterEdgeFromTo(wire, textValue, srcRw));

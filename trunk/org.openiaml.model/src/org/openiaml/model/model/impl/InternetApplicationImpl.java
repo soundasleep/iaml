@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.ApplicationElement;
-import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsEventTriggers;
@@ -33,6 +32,7 @@ import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.wires.ConditionEdge;
@@ -315,7 +315,7 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ApplicationElementProperty> properties;
+	protected EList<Property> properties;
 
 	/**
 	 * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
@@ -630,9 +630,9 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ApplicationElementProperty> getProperties() {
+	public EList<Property> getProperties() {
 		if (properties == null) {
-			properties = new EObjectContainmentEList<ApplicationElementProperty>(ApplicationElementProperty.class, this, ModelPackage.INTERNET_APPLICATION__PROPERTIES);
+			properties = new EObjectContainmentEList<Property>(Property.class, this, ModelPackage.INTERNET_APPLICATION__PROPERTIES);
 		}
 		return properties;
 	}
@@ -889,7 +889,7 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return;
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
 				getProperties().clear();
-				getProperties().addAll((Collection<? extends ApplicationElementProperty>)newValue);
+				getProperties().addAll((Collection<? extends Property>)newValue);
 				return;
 			case ModelPackage.INTERNET_APPLICATION__CHILDREN:
 				getChildren().clear();

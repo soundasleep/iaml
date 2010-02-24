@@ -28,7 +28,7 @@ import org.eclipse.emf.common.util.EList;
 public interface ApplicationElement extends ContainsOperations, NamedElement, ContainsEventTriggers, WireEdgesSource, WireEdgeDestination, GeneratesElements, ContainsConditions, CanBeSynced {
 	/**
 	 * Returns the value of the '<em><b>Properties</b></em>' containment reference list.
-	 * The list contents are of type {@link org.openiaml.model.model.ApplicationElementProperty}.
+	 * The list contents are of type {@link org.openiaml.model.model.Property}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Properties</em>' containment reference list isn't clear,
@@ -40,7 +40,7 @@ public interface ApplicationElement extends ContainsOperations, NamedElement, Co
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<ApplicationElementProperty> getProperties();
+	EList<Property> getProperties();
 
 	/**
 	 * Returns the value of the '<em><b>Values</b></em>' containment reference list.

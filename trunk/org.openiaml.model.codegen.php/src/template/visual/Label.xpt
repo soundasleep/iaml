@@ -7,7 +7,7 @@
 
 /**
  * @implementation Label
- *   The value of {@model ApplicationElementProperty} 'fieldValue' of a {@model Label}
+ *   The value of {@model Property} 'fieldValue' of a {@model Label}
  *   overrides the value of the Label.defaultValue attribute.
  */
 «DEFINE renderLabel(model::visual::Frame currentFrame) FOR model::visual::Label-»
@@ -59,14 +59,14 @@
 «ENDDEFINE»
 
 
-/* if it connects to a SyncWire that is an ApplicationElementProperty, use this
+/* if it connects to a SyncWire that is an Property, use this
    property as the value */
 «DEFINE getInitialValuesSyncWire(model::visual::Frame currentFrame) FOR model::wires::SyncWire»
 	«EXPAND staticInitialValue(currentFrame) FOR from»
 	«EXPAND staticInitialValue(currentFrame) FOR to»
 «ENDDEFINE»
 
-/* if it connects to a SetWire that is an ApplicationElementProperty, use this
+/* if it connects to a SetWire that is an Property, use this
    property as the value */
 «DEFINE getInitialValuesSetWire(model::visual::Frame currentFrame) FOR model::wires::SetWire»
 	«EXPAND staticInitialValue(currentFrame) FOR from»
@@ -79,7 +79,7 @@
 «ENDDEFINE»
 
 /* we have a property to provide [in PHP] */
-«DEFINE staticInitialValue(model::visual::Frame currentFrame) FOR model::ApplicationElementProperty»
+«DEFINE staticInitialValue(model::visual::Frame currentFrame) FOR model::Property»
 	«IF containingSession(this) == null»
 		«REM»contained in a Frame or InternetApplication: a static value«ENDREM»
 		<?php

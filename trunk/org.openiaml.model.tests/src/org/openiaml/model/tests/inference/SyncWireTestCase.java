@@ -6,13 +6,13 @@ package org.openiaml.model.tests.inference;
 import java.util.List;
 
 import org.jaxen.JaxenException;
-import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.PrimitiveOperation;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.WireEdge;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.StartNode;
@@ -90,7 +90,7 @@ public class SyncWireTestCase extends InferenceTestCase {
 
 			// setProperty should flow out to ApplicationElementProperty
 			assertEquals(prelude, setProp.getOutFlows().size(), 1);
-			ApplicationElementProperty outProp = (ApplicationElementProperty) setProp.getOutFlows().get(0).getTo();
+			Property outProp = (Property) setProp.getOutFlows().get(0).getTo();
 			assertEquals(prelude, outProp.getName(), "fieldValue");
 
 			// this property should belong to an application element with a different name
@@ -130,8 +130,8 @@ public class SyncWireTestCase extends InferenceTestCase {
 		Operation name1update = assertHasOperation(name1, "update");
 		Operation name2update = assertHasOperation(name2, "update");
 
-		ApplicationElementProperty name1value = assertHasApplicationElementProperty(name1, "fieldValue");
-		ApplicationElementProperty name2value = assertHasApplicationElementProperty(name2, "fieldValue");
+		Property name1value = assertHasProperty(name1, "fieldValue");
+		Property name2value = assertHasProperty(name2, "fieldValue");
 
 		// none of these can ever be null because queryOne() also calls assert(size>1)
 

@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.ApplicationElement;
-import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsConditions;
@@ -31,6 +30,7 @@ import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.WireEdge;
@@ -325,7 +325,7 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ApplicationElementProperty> properties;
+	protected EList<Property> properties;
 
 	/**
 	 * The cached value of the '{@link #getValues() <em>Values</em>}' containment reference list.
@@ -634,9 +634,9 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ApplicationElementProperty> getProperties() {
+	public EList<Property> getProperties() {
 		if (properties == null) {
-			properties = new EObjectContainmentEList<ApplicationElementProperty>(ApplicationElementProperty.class, this, ModelPackage.APPLICATION_ELEMENT__PROPERTIES);
+			properties = new EObjectContainmentEList<Property>(Property.class, this, ModelPackage.APPLICATION_ELEMENT__PROPERTIES);
 		}
 		return properties;
 	}
@@ -854,7 +854,7 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				return;
 			case ModelPackage.APPLICATION_ELEMENT__PROPERTIES:
 				getProperties().clear();
-				getProperties().addAll((Collection<? extends ApplicationElementProperty>)newValue);
+				getProperties().addAll((Collection<? extends Property>)newValue);
 				return;
 			case ModelPackage.APPLICATION_ELEMENT__VALUES:
 				getValues().clear();

@@ -3,10 +3,10 @@
  */
 package org.openiaml.model.tests.inference;
 
-import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DecisionCondition;
 import org.openiaml.model.model.operations.FinishNode;
@@ -51,7 +51,7 @@ public class SessionSyncWires extends InferenceTestCase {
 		Operation update = assertHasOperation(field2, "update");
 		RunInstanceWire rw = (RunInstanceWire) getWireFromTo(root, edit, update);
 
-		ApplicationElementProperty fieldValue = assertHasApplicationElementProperty(field1, "fieldValue");
+		Property fieldValue = assertHasProperty(field1, "fieldValue");
 		assertGenerated(getParameterEdgeFromTo(root, fieldValue, rw));
 
 		// session should have an 'init' event
@@ -88,7 +88,7 @@ public class SessionSyncWires extends InferenceTestCase {
 		Operation init = assertHasOperation(field1, "init");
 		assertGenerated(init);
 		
-		ApplicationElementProperty value = assertHasApplicationElementProperty(field2, "fieldValue");
+		Property value = assertHasProperty(field2, "fieldValue");
 		assertGenerated(value);
 		
 		RunInstanceWire run = assertHasRunInstanceWire(field1, access, init, "run");
@@ -116,7 +116,7 @@ public class SessionSyncWires extends InferenceTestCase {
 		Frame inside = assertHasFrame(session, "inside");
 		InputTextField field2 = assertHasInputTextField(inside, "target");
 		
-		ApplicationElementProperty value = assertHasApplicationElementProperty(field2, "fieldValue");
+		Property value = assertHasProperty(field2, "fieldValue");
 		CompositeCondition cond = assertHasCompositeCondition(field2, "fieldValue is set");
 		
 		StartNode start = assertHasStartNode(cond);

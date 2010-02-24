@@ -276,10 +276,10 @@
           figure="//@figures.0/@descriptors.7/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
-        name="ApplicationElementPropertyFigure">
+        name="PropertyFigure">
       <actualFigure
           xsi:type="gmfgraph:Rectangle"
-          name="ApplicationElementPropertyFigure">
+          name="PropertyFigure">
         <layout
             xsi:type="gmfgraph:FlowLayout"
             vertical="true"/>
@@ -298,15 +298,15 @@
         </border>
         <children
             xsi:type="gmfgraph:Label"
-            name="ApplicationElementPropertyNameFigure"
+            name="PropertyNameFigure"
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
-            name="ApplicationElementPropertyDefaultValueFigure"
+            name="PropertyDefaultValueFigure"
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
-            name="ApplicationElementPropertyParentNameFigure"
+            name="PropertyParentNameFigure"
             text="[none]">
           <foregroundColor
               xsi:type="gmfgraph:ConstantColor"
@@ -1739,8 +1739,8 @@
       name="ApplicationElement"
       figure="ApplicationElementFigure"/>
   <nodes
-      name="ApplicationElementProperty"
-      figure="ApplicationElementPropertyFigure"/>
+      name="Property"
+      figure="PropertyFigure"/>
   <nodes
       name="StaticValue"
       figure="StaticValueFigure"/>
@@ -1929,8 +1929,8 @@
       figure="ApplicationElementFigure"
       accessor="//@figures.0/@descriptors.7/@accessors.0"/>
   <labels
-      name="ApplicationElementPropertyName"
-      figure="ApplicationElementPropertyFigure"
+      name="PropertyName"
+      figure="PropertyFigure"
       accessor="//@figures.0/@descriptors.8/@accessors.0"/>
   <labels
       name="StaticValueName"
@@ -2095,8 +2095,8 @@
       elementIcon="false"
       accessor="//@figures.0/@descriptors.5/@accessors.1"/>
   <labels
-      name="ApplicationElementPropertyParentName"
-      figure="ApplicationElementPropertyFigure"
+      name="PropertyParentName"
+      figure="PropertyFigure"
       elementIcon="false"
       accessor="//@figures.0/@descriptors.8/@accessors.2"/>
   <labels
@@ -2147,8 +2147,8 @@
       elementIcon="false"
       accessor="//@figures.0/@descriptors.40/@accessors.1"/>
   <labels
-      name="ApplicationElementPropertyDefaultValue"
-      figure="ApplicationElementPropertyFigure"
+      name="PropertyDefaultValue"
+      figure="PropertyFigure"
       elementIcon="false"
       accessor="//@figures.0/@descriptors.8/@accessors.1"/>
   <labels

@@ -30,7 +30,7 @@ public class ParentNamesTestCase extends XmlTestCase {
 		"EventTrigger",
 		"PrimitiveOperation",
 		"CompositeOperation",
-		"ApplicationElementProperty",
+		"Property",
 		"InputForm",
 		"InputTextField",
 		"Label",

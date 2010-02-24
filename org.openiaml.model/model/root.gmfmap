@@ -167,11 +167,11 @@
         href="iaml.ecore#//InternetApplication/properties"/>
     <ownedChild>
       <domainMetaElement
-          href="iaml.ecore#//ApplicationElementProperty"/>
+          href="iaml.ecore#//Property"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
-            href="iaml.gmfgraph#ApplicationElementPropertyName"/>
+            href="iaml.gmfgraph#PropertyName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
@@ -180,20 +180,20 @@
           viewPattern="default: {0}"
           editPattern="{0}">
         <diagramLabel
-            href="iaml.gmfgraph#ApplicationElementPropertyDefaultValue"/>
+            href="iaml.gmfgraph#PropertyDefaultValue"/>
         <features
-            href="iaml.ecore#//ApplicationElementProperty/defaultValue"/>
+            href="iaml.ecore#//Property/defaultValue"/>
       </labelMappings>
       <labelMappings
           readOnly="true">
         <diagramLabel
-            href="iaml.gmfgraph#ApplicationElementPropertyParentName"/>
+            href="iaml.gmfgraph#PropertyParentName"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="root.gmftool#//@palette/@tools.0/@tools.3"/>
       <diagramNode
-          href="iaml.gmfgraph#ApplicationElementProperty"/>
+          href="iaml.gmfgraph#Property"/>
     </ownedChild>
   </nodes>
   <nodes>

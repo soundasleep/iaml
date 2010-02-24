@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -202,17 +201,6 @@ public abstract class ModelTestCaseWithProperties extends CodegenTestCase {
 					);
 				}
 				return result;
-			}
-
-			/**
-			 * Write only one property out.
-			 * @param f
-			 * @param string
-			 * @param value
-			 * @throws IOException 
-			 */
-			private void write(File f, String string, Object value) throws IOException {
-				write(f, string, Collections.singletonList(value));
 			}
 
 			/**

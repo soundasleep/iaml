@@ -13,7 +13,6 @@ import org.openiaml.emf.properties.library.ContainmentsCountIgnoreEmpty;
 import org.openiaml.emf.properties.library.ContainmentsDiameter;
 import org.openiaml.emf.properties.library.ContainmentsRadius;
 import org.openiaml.emf.properties.library.ContainmentsSum;
-import org.openiaml.emf.properties.library.CountTypes;
 import org.openiaml.emf.properties.library.CyclomaticComplexity;
 import org.openiaml.emf.properties.library.DistinctAttributeValueStrings;
 import org.openiaml.emf.properties.library.DistinctAttributeValues;

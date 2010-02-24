@@ -12,8 +12,6 @@ import org.openiaml.model.model.Property;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.RunInstanceWire;
-import org.openiaml.model.model.wires.SelectWire;
-import org.openiaml.model.model.wires.SyncWire;
 
 /**
  * SyncWires connected to DomainAttributeInstances should call
@@ -38,14 +36,17 @@ public class SelectField extends InferenceTestCase {
 		DomainObject user = assertHasDomainObject(store, "User");
 
 		DomainAttributeInstance attr = assertHasDomainAttributeInstance(container, "name");
-		SyncWire sw = (SyncWire) getWireBidirectional(root, field, attr);
-		SelectWire select = (SelectWire) getWireFromTo(root, user, attr);
+		assertNotGenerated(assertHasSyncWire(root, field, attr));
+		assertNotGenerated(assertHasSelectWire(root, user, attr));
 
 		// [inferred elements]
 		// edit events and operations on the text field
 		CompositeOperation update = assertHasCompositeOperation(field, "update");
+		assertGenerated(update);
 		EventTrigger edit = assertHasEventTrigger(field, "edit");
+		assertGenerated(edit);
 		Property fieldValue = assertHasProperty(field, "fieldValue");
+		assertGenerated(fieldValue);
 
 		// [new elements]
 		// edit operations on the attribute

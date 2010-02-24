@@ -119,15 +119,14 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
 ([http://journals.jevon.org/users/jevon-phd/entry/19803 Released] February 2010)
   # [http://code.google.com/p/iaml/wiki/Model0_5#Model_0.4.3 Expand IAML model]
     * Label: a static text field that cannot be edited by the user
+    * An InputForm connected by a SetWire will be rendered with Labels, rather than InputTextFields (r1511)
+    * DomainObjectInstance autosave default should be false (r1512)
     * Some metamodel refactoring: Not all edges are now wires
 
 =Release 0.5=
 ([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.5 Outstanding issues])
   # [Model0_5 Expand IAML model]
-    * Text element
     * Resultset viewer
-    * InputForm which renders SyncWire contents as Text, rather than InputTextFields
-    * DomainObjectInstance autosave default should be false
     * E-mails
     * Server-side operation (e.g. written in PHP)
     * Client-side operation (e.g. written in Javascript)

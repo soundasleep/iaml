@@ -846,6 +846,33 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getVisibleThing_OnClick() {
+		return (EReference)visibleThingEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getVisibleThing_OnEdit() {
+		return (EReference)visibleThingEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getVisibleThing_OnAccess() {
+		return (EReference)visibleThingEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getInternetApplication() {
 		return internetApplicationEClass;
 	}
@@ -1595,6 +1622,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(visibleThingEClass, VISIBLE_THING__CHILDREN);
 		createEReference(visibleThingEClass, VISIBLE_THING__PROPERTIES);
 		createEReference(visibleThingEClass, VISIBLE_THING__VALUES);
+		createEReference(visibleThingEClass, VISIBLE_THING__ON_CLICK);
+		createEReference(visibleThingEClass, VISIBLE_THING__ON_EDIT);
+		createEReference(visibleThingEClass, VISIBLE_THING__ON_ACCESS);
 
 		internetApplicationEClass = createEClass(INTERNET_APPLICATION);
 		createEReference(internetApplicationEClass, INTERNET_APPLICATION__PROPERTIES);
@@ -1793,7 +1823,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		staticValueEClass.getESuperTypes().add(this.getDataFlowEdgesSource());
 		staticValueEClass.getESuperTypes().add(theWiresPackage.getParameterEdgesSource());
 		visibleThingEClass.getESuperTypes().add(this.getContainsConditions());
-		visibleThingEClass.getESuperTypes().add(this.getContainsEventTriggers());
 		visibleThingEClass.getESuperTypes().add(this.getContainsOperations());
 		visibleThingEClass.getESuperTypes().add(this.getContainsWires());
 		visibleThingEClass.getESuperTypes().add(this.getWireEdgesSource());
@@ -1861,7 +1890,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		canBeSyncedEClass.getESuperTypes().add(this.getGeneratedElement());
 		canBeSyncedEClass.getESuperTypes().add(this.getGeneratesElements());
 		canBeSyncedEClass.getESuperTypes().add(this.getContainsWires());
-		canBeSyncedEClass.getESuperTypes().add(this.getContainsEventTriggers());
 		canBeSyncedEClass.getESuperTypes().add(this.getContainsOperations());
 		canBeSyncedEClass.getESuperTypes().add(this.getContainsConditions());
 		canBeSyncedEClass.getESuperTypes().add(this.getWireEdgesSource());
@@ -1928,6 +1956,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getVisibleThing_Children(), this.getVisibleThing(), null, "children", null, 0, -1, VisibleThing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getVisibleThing_Properties(), this.getProperty(), null, "properties", null, 0, -1, VisibleThing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getVisibleThing_Values(), this.getStaticValue(), null, "values", null, 0, -1, VisibleThing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVisibleThing_OnClick(), this.getEventTrigger(), null, "onClick", null, 0, 1, VisibleThing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVisibleThing_OnEdit(), this.getEventTrigger(), null, "onEdit", null, 0, 1, VisibleThing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVisibleThing_OnAccess(), this.getEventTrigger(), null, "onAccess", null, 0, 1, VisibleThing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(internetApplicationEClass, InternetApplication.class, "InternetApplication", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getInternetApplication_Properties(), this.getProperty(), null, "properties", null, 0, -1, InternetApplication.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2112,7 +2143,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   new String[] {
 			 "comment", "this used to mean nothing; now anything that extends VisibleThing (which unforuntately needs to be concrete) has an editor",
 			 "editor", "org.openiaml.model.diagram.visual",
-			 "changed", "0.4.2 to no longer extend ApplicationElementContainer\r\n0.4.2 extends ContainsConditions\r\n0.4.2 extends ContainsOperatons\r\n0.4.2 extends ContainsEventTriggers\r\n0.4.2 extends ContainsWires\r\n0.4.2 extends WireEdgesSource\r\n0.4.2 extends WireEdgeDestination\r\n0.4.2 removed \'sessions\' containment"
+			 "changed", "0.4.2 to no longer extend ApplicationElementContainer\r\n0.4.2 extends ContainsConditions\r\n0.4.2 extends ContainsOperatons\r\n0.4.2 extends ContainsEventTriggers\r\n0.4.2 extends ContainsWires\r\n0.4.2 extends WireEdgesSource\r\n0.4.2 extends WireEdgeDestination\r\n0.4.2 removed \'sessions\' containment\r\n0.4.4 no longer ContainsEventTriggers; events inserted manually"
 		   });			
 		addAnnotation
 		  (getVisibleThing_Children(), 
@@ -2131,6 +2162,24 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "added", "0.4.2"
+		   });		
+		addAnnotation
+		  (getVisibleThing_OnClick(), 
+		   source, 
+		   new String[] {
+			 "changed", "added in 0.4.4"
+		   });		
+		addAnnotation
+		  (getVisibleThing_OnEdit(), 
+		   source, 
+		   new String[] {
+			 "changed", "added in 0.4.4"
+		   });		
+		addAnnotation
+		  (getVisibleThing_OnAccess(), 
+		   source, 
+		   new String[] {
+			 "changed", "added in 0.4.4"
 		   });		
 		addAnnotation
 		  (internetApplicationEClass, 
@@ -2373,7 +2422,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "An abstract type representing application elements which have some sort of visible representation."
-		   });						
+		   });									
 		addAnnotation
 		  (internetApplicationEClass, 
 		   source, 

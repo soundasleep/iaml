@@ -80,6 +80,8 @@
 					// get the parent
 					org.openiaml.model.model.NamedElement parent = (org.openiaml.model.model.NamedElement) resolvedObject.eContainer();
 					String parentName = parent.getName();
+					
+					String containmentName = resolvedObject.eContainingFeature() == null ? "" : resolvedObject.eContainingFeature().getName();
 						
 				«REM»this is pretty fragile, but there is no way to access the contents of the .gmfmap from the generated .gmfgen viewmap.«ENDREM»
 				«REM»also, I can't do EString.substring(EInt, EInt) for some reason, and struggling to add a generator extension.«ENDREM»
@@ -115,6 +117,12 @@
 				«ENDIF»
 				«IF className="EventTriggerFigure"»
 					getFigureEventTriggerParentNameFigure().setText(parentName);
+				«ENDIF»
+				
+				/* containment features */
+				 
+				«IF className="EventTriggerFigure"»
+					getFigureEventTriggerContainmentFeatureFigure().setText(containmentName);
 				«ENDIF»
 				}
 			}

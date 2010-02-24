@@ -52,7 +52,10 @@
 		/* <![CDATA[ */
 			«REM»any on-access events?«ENDREM»
 			addOnloadFunction( function() {
-				«EXPAND template::events::EventCall::callEvent(false, currentFrame) FOREACH eventTriggers.select(e | e.name == "access")-»				
+			«IF onAccess != null»
+				// expand all onAccess
+				«EXPAND template::events::EventCall::callEvent(false, currentFrame) FOR onAccess-»
+			«ENDIF»
 			} );
 		/* ]]> */
 	</script> 

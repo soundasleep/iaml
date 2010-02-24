@@ -112,6 +112,7 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseScope(frame);
 				if (result == null) result = caseParameterEdgesSource(frame);
 				if (result == null) result = caseContainsScopes(frame);
+				if (result == null) result = caseContainsEventTriggers(frame);
 				if (result == null) result = caseCanBeSynced(frame);
 				if (result == null) result = caseGeneratesElements(frame);
 				if (result == null) result = caseContainsOperations(frame);
@@ -120,7 +121,6 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseWireEdgesSource(frame);
 				if (result == null) result = caseShouldntContainWires(frame);
 				if (result == null) result = caseWireEdgeDestination(frame);
-				if (result == null) result = caseContainsEventTriggers(frame);
 				if (result == null) result = caseContainsConditions(frame);
 				if (result == null) result = caseContainsWires(frame);
 				if (result == null) result = defaultCase(theEObject);
@@ -133,7 +133,6 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseCanBeSynced(inputForm);
 				if (result == null) result = caseParameterEdgesSource(inputForm);
 				if (result == null) result = caseContainsConditions(inputForm);
-				if (result == null) result = caseContainsEventTriggers(inputForm);
 				if (result == null) result = caseContainsOperations(inputForm);
 				if (result == null) result = caseWireEdgesSource(inputForm);
 				if (result == null) result = caseShouldntContainWires(inputForm);
@@ -152,7 +151,6 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseCanBeSynced(inputTextField);
 				if (result == null) result = caseParameterEdgesSource(inputTextField);
 				if (result == null) result = caseContainsConditions(inputTextField);
-				if (result == null) result = caseContainsEventTriggers(inputTextField);
 				if (result == null) result = caseContainsOperations(inputTextField);
 				if (result == null) result = caseWireEdgesSource(inputTextField);
 				if (result == null) result = caseShouldntContainWires(inputTextField);
@@ -171,7 +169,6 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseCanBeSynced(button);
 				if (result == null) result = caseParameterEdgesSource(button);
 				if (result == null) result = caseContainsConditions(button);
-				if (result == null) result = caseContainsEventTriggers(button);
 				if (result == null) result = caseContainsOperations(button);
 				if (result == null) result = caseWireEdgesSource(button);
 				if (result == null) result = caseShouldntContainWires(button);
@@ -190,7 +187,6 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseCanBeSynced(label);
 				if (result == null) result = caseParameterEdgesSource(label);
 				if (result == null) result = caseContainsConditions(label);
-				if (result == null) result = caseContainsEventTriggers(label);
 				if (result == null) result = caseContainsOperations(label);
 				if (result == null) result = caseWireEdgesSource(label);
 				if (result == null) result = caseShouldntContainWires(label);

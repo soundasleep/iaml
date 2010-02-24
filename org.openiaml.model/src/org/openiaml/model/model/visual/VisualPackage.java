@@ -360,15 +360,6 @@ public interface VisualPackage extends EPackage {
 	int INPUT_FORM__CONDITIONS = ModelPackage.VISIBLE_THING__CONDITIONS;
 
 	/**
-	 * The feature id for the '<em><b>Event Triggers</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INPUT_FORM__EVENT_TRIGGERS = ModelPackage.VISIBLE_THING__EVENT_TRIGGERS;
-
-	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -558,6 +549,33 @@ public interface VisualPackage extends EPackage {
 	int INPUT_FORM__VALUES = ModelPackage.VISIBLE_THING__VALUES;
 
 	/**
+	 * The feature id for the '<em><b>On Click</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_FORM__ON_CLICK = ModelPackage.VISIBLE_THING__ON_CLICK;
+
+	/**
+	 * The feature id for the '<em><b>On Edit</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_FORM__ON_EDIT = ModelPackage.VISIBLE_THING__ON_EDIT;
+
+	/**
+	 * The feature id for the '<em><b>On Access</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_FORM__ON_ACCESS = ModelPackage.VISIBLE_THING__ON_ACCESS;
+
+	/**
 	 * The number of structural features of the '<em>Input Form</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -584,15 +602,6 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int INPUT_TEXT_FIELD__CONDITIONS = ModelPackage.VISIBLE_THING__CONDITIONS;
-
-	/**
-	 * The feature id for the '<em><b>Event Triggers</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INPUT_TEXT_FIELD__EVENT_TRIGGERS = ModelPackage.VISIBLE_THING__EVENT_TRIGGERS;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -784,6 +793,33 @@ public interface VisualPackage extends EPackage {
 	int INPUT_TEXT_FIELD__VALUES = ModelPackage.VISIBLE_THING__VALUES;
 
 	/**
+	 * The feature id for the '<em><b>On Click</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_TEXT_FIELD__ON_CLICK = ModelPackage.VISIBLE_THING__ON_CLICK;
+
+	/**
+	 * The feature id for the '<em><b>On Edit</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_TEXT_FIELD__ON_EDIT = ModelPackage.VISIBLE_THING__ON_EDIT;
+
+	/**
+	 * The feature id for the '<em><b>On Access</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_TEXT_FIELD__ON_ACCESS = ModelPackage.VISIBLE_THING__ON_ACCESS;
+
+	/**
 	 * The number of structural features of the '<em>Input Text Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -811,15 +847,6 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int BUTTON__CONDITIONS = ModelPackage.VISIBLE_THING__CONDITIONS;
-
-	/**
-	 * The feature id for the '<em><b>Event Triggers</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BUTTON__EVENT_TRIGGERS = ModelPackage.VISIBLE_THING__EVENT_TRIGGERS;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -1011,6 +1038,33 @@ public interface VisualPackage extends EPackage {
 	int BUTTON__VALUES = ModelPackage.VISIBLE_THING__VALUES;
 
 	/**
+	 * The feature id for the '<em><b>On Click</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__ON_CLICK = ModelPackage.VISIBLE_THING__ON_CLICK;
+
+	/**
+	 * The feature id for the '<em><b>On Edit</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__ON_EDIT = ModelPackage.VISIBLE_THING__ON_EDIT;
+
+	/**
+	 * The feature id for the '<em><b>On Access</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__ON_ACCESS = ModelPackage.VISIBLE_THING__ON_ACCESS;
+
+	/**
 	 * The number of structural features of the '<em>Button</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1037,15 +1091,6 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int LABEL__CONDITIONS = ModelPackage.VISIBLE_THING__CONDITIONS;
-
-	/**
-	 * The feature id for the '<em><b>Event Triggers</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LABEL__EVENT_TRIGGERS = ModelPackage.VISIBLE_THING__EVENT_TRIGGERS;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -1235,6 +1280,33 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int LABEL__VALUES = ModelPackage.VISIBLE_THING__VALUES;
+
+	/**
+	 * The feature id for the '<em><b>On Click</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LABEL__ON_CLICK = ModelPackage.VISIBLE_THING__ON_CLICK;
+
+	/**
+	 * The feature id for the '<em><b>On Edit</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LABEL__ON_EDIT = ModelPackage.VISIBLE_THING__ON_EDIT;
+
+	/**
+	 * The feature id for the '<em><b>On Access</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LABEL__ON_ACCESS = ModelPackage.VISIBLE_THING__ON_ACCESS;
 
 	/**
 	 * The feature id for the '<em><b>Default Value</b></em>' attribute.

@@ -14,15 +14,19 @@
 		<script language="Javascript" type="application/javascript">
 		/* <![CDATA[ */
 			function onChange_«safeNameString(id)»(obj) {
-				// expand all onChanges
-				«EXPAND template::events::EventCall::callEvent(false, currentFrame) FOREACH eventTriggers.select(e | e.name == "edit")-»
+				«IF onEdit != null»
+					// expand all onEdits
+					«EXPAND template::events::EventCall::callEvent(false, currentFrame) FOR onEdit-»
+				«ENDIF»
 
 				return false;
 			}
 			
 			function onClick_«safeNameString(id)»(obj) {
-				// expand all onClicks
-				«EXPAND template::events::EventCall::callEvent(false, currentFrame) FOREACH eventTriggers.select(e | e.name == "click" || e.name == "onClick")-»
+				«IF onClick != null»
+					// expand all onClicks
+					«EXPAND template::events::EventCall::callEvent(false, currentFrame) FOR onClick-»
+				«ENDIF»
 			
 				return false;
 			}

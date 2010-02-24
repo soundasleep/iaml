@@ -31,6 +31,17 @@
         </border>
         <children
             xsi:type="gmfgraph:Label"
+            name="EventTriggerContainmentFeatureFigure"
+            text="&lt;...>">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="darkBlue"/>
+          <font
+              xsi:type="gmfgraph:BasicFont"
+              style="BOLD"/>
+        </children>
+        <children
+            xsi:type="gmfgraph:Label"
             name="EventTriggerNameFigure"
             text="&lt;...>"/>
         <children
@@ -46,6 +57,8 @@
           figure="//@figures.0/@descriptors.0/@actualFigure/@children.0"/>
       <accessors
           figure="//@figures.0/@descriptors.0/@actualFigure/@children.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.0/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="DomainObjectFigure">
@@ -1903,7 +1916,8 @@
   <labels
       name="EventTriggerName"
       figure="EventTriggerFigure"
-      accessor="//@figures.0/@descriptors.0/@accessors.0"/>
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.0/@accessors.1"/>
   <labels
       name="DomainObjectName"
       figure="DomainObjectFigure"
@@ -2078,7 +2092,7 @@
       name="EventTriggerParentName"
       figure="EventTriggerFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.0/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.0/@accessors.2"/>
   <labels
       name="DomainObjectParentName"
       figure="DomainObjectFigure"
@@ -2260,4 +2274,8 @@
       figure="LabelFigure"
       elementIcon="false"
       accessor="//@figures.0/@descriptors.61/@accessors.2"/>
+  <labels
+      name="EventTriggerContainmentFeature"
+      figure="EventTriggerFigure"
+      accessor="//@figures.0/@descriptors.0/@accessors.0"/>
 </gmfgraph:Canvas>

@@ -41,7 +41,7 @@ rule "Connect 'click' on 'Continue' button to resume Gate"
 		nav : NavigateWire ( from == gate, to == target, name == "first" || name == "last" ) 
 		button : Button ( eContainer == target, name == "Continue" )
 		
-		click : EventTrigger ( eContainer == button, name == "click" )
+		click : EventTrigger ( button.onClick == click, eContainer == button )
 		
 		not (NavigateWire ( from == click, to == gate ))
 	

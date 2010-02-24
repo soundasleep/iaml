@@ -1845,6 +1845,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		domainStoreEClass.getESuperTypes().add(this.getContainsWires());
 		domainStoreEClass.getESuperTypes().add(this.getContainsConditions());
 		domainStoreEClass.getESuperTypes().add(this.getGeneratesElements());
+		domainStoreEClass.getESuperTypes().add(this.getCanBeSynced());
 		dataFlowEdgeEClass.getESuperTypes().add(this.getGeneratedElement());
 		temporaryVariableEClass.getESuperTypes().add(this.getNamedElement());
 		temporaryVariableEClass.getESuperTypes().add(this.getDataFlowEdgesSource());

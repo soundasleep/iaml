@@ -50,10 +50,8 @@ protected void setUp() throws Exception {
     CompositeCondition cond = assertHasCompositeCondition(dae, "xpath");
 
     // the XPathSet should create SyncWire matches between all pages
-    assertHasWiresBidirectional(1, root, page1, page2);	// only 1 sync wire
-    SyncWire sw1 = (SyncWire) getWireBidirectional(root, page1, page2);
-    assertHasWiresBidirectional(1, root, page1, page3);	// only 1 sync wire
-    SyncWire sw2 = (SyncWire) getWireBidirectional(root, page1, page3);
+    SyncWire sw1 = assertHasSyncWire(root, page1, page2);
+    SyncWire sw2 = assertHasSyncWire(root, page1, page3);
 
     // there should NOT be a SyncWire between page2 and page3
     assertNoWireBidirectional(root, page2, page3);
@@ -70,9 +68,9 @@ protected void setUp() throws Exception {
 
     // we can now investigate the SyncWires themselves, and make sure
     // they have the conditions attached too
-    EventTrigger f1edit = assertHasEventTrigger(field1, "edit");
-    EventTrigger f2edit = assertHasEventTrigger(field2, "edit");
-    EventTrigger f3edit = assertHasEventTrigger(field3, "edit");
+    EventTrigger f1edit = field1.getOnEdit();
+    EventTrigger f2edit = field2.getOnEdit();
+    EventTrigger f3edit = field3.getOnEdit();
     Operation f1update = assertHasOperation(field1, "update");
     Operation f2update = assertHasOperation(field2, "update");
     Operation f3update = assertHasOperation(field3, "update");
@@ -82,10 +80,10 @@ protected void setUp() throws Exception {
     assertNotSame(f3update, f2update);
 
     // there should be a run wire between these
-    RunInstanceWire rw1_2 = (RunInstanceWire) getWireFromTo(wire, f1edit, f2update);
-    RunInstanceWire rw2_1 = (RunInstanceWire) getWireFromTo(wire, f2edit, f1update);
-    RunInstanceWire rw1_3 = (RunInstanceWire) getWireFromTo(wire, f1edit, f3update);
-    RunInstanceWire rw3_1 = (RunInstanceWire) getWireFromTo(wire, f3edit, f1update);
+    RunInstanceWire rw1_2 = assertHasRunInstanceWire(wire, f1edit, f2update);
+    RunInstanceWire rw2_1 = assertHasRunInstanceWire(wire, f2edit, f1update);
+    RunInstanceWire rw1_3 = assertHasRunInstanceWire(wire, f1edit, f3update);
+    RunInstanceWire rw3_1 = assertHasRunInstanceWire(wire, f3edit, f1update);
 
     // condition wires all over!
     ConditionEdge cw1_2 = assertHasConditionEdge(page1, cond, rw1_2);

@@ -77,7 +77,7 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		Session session = assertHasSession(root, "Session");
 		EntryGate gate = assertHasEntryGate(session, "requires a page is viewed first");
 		
-		EventTrigger event = assertHasEventTrigger(button, "click");
+		EventTrigger event = button.getOnClick();
 		assertGenerated(event);
 		
 		NavigateWire nav = assertHasNavigateWire(root, event, gate, "resume");

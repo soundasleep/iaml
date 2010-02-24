@@ -84,7 +84,7 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 		Button button = assertHasButton(ad, "Continue");
 		assertGenerated(button);
 		
-		EventTrigger event = assertHasEventTrigger(button, "click");
+		EventTrigger event = button.getOnClick();
 		assertGenerated(event);
 		
 		NavigateWire nav = assertHasNavigateWire(root, event, gate, "resume");

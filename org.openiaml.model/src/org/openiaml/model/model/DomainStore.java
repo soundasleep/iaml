@@ -39,7 +39,7 @@ import org.openiaml.model.model.domain.DomainStoreTypes;
  * @model annotation="http://openiaml.org/comment editor='org.openiaml.model.diagram.domain_store' changed='0.2 to extend the abstract counterpart\r\n0.3 to remove the abstract extension, and added \"type\" attribute\r\n0.4.2 removed \'views\' reference'"
  * @generated
  */
-public interface DomainStore extends ContainsOperations, ContainsEventTriggers, NamedElement, ContainsWires, ContainsConditions, GeneratesElements {
+public interface DomainStore extends ContainsOperations, ContainsEventTriggers, NamedElement, ContainsWires, ContainsConditions, GeneratesElements, CanBeSynced {
 
 	/**
 	 * Returns the value of the '<em><b>Children</b></em>' containment reference list.

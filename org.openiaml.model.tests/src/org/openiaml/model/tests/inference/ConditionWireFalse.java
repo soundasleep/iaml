@@ -35,9 +35,9 @@ public class ConditionWireFalse extends InferenceTestCase {
 
 		// [inferred]
 		// we should have EventTrigger 'edit' in source
-		EventTrigger srcEdit = assertHasEventTrigger(source, "edit");
+		EventTrigger srcEdit = source.getOnEdit();
 		Operation srcOp = assertHasOperation(source, "update");
-		EventTrigger targetEdit = assertHasEventTrigger(target, "edit");
+		EventTrigger targetEdit = target.getOnEdit();
 		Operation targetOp = assertHasOperation(target, "update");
 		assertNotSame(srcEdit, targetEdit);
 		assertNotSame(srcOp, targetOp);

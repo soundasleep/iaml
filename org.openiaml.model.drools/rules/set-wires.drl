@@ -56,6 +56,25 @@ rule "Run instance wire from source.edit to target.update [set]"
 
 end
 
+rule "Run instance wire from source.edit to target.update [set] (onEdit)"
+	when
+		sw : SetWire(overridden == false)
+		source : VisibleThing( )
+		target : ContainsOperations( )
+		eval(functions.connectsSet(sw, source, target))
+		
+		event : EventTrigger( source.onEdit == event ) 
+		operation : Operation( eContainer == target, name=="update" )
+		
+		not (RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" ))
+		
+	then
+		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
+		handler.setName(rw, "run");
+		queue.add(rw, drools);
+
+end
+
 # Ideally, these two commands would be joined together into one
 rule "Connect parameter wire to: run instance wire from source.edit to target.update [set]"
 	when
@@ -78,6 +97,27 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 
 end
 
+rule "Connect parameter wire to: run instance wire from source.edit to target.update [set] (onEdit)"
+	when
+		sw : SetWire(overridden == false)
+		source : VisibleThing( )
+		target : CanBeSynced( )
+		eval(functions.connectsSet(sw, source, target))
+	
+		event : EventTrigger( source.onEdit == event ) 
+		operation : Operation( eContainer == target, name=="update" )
+		field : Property( eContainer == source, name=="fieldValue" )
+		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
+		
+		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
+		
+	then
+		ParameterEdge pw = handler.generatedParameterEdge(sw, sw, field, wire); 
+		handler.setName(pw, "[sync] run instance parameter (source.edit)"); 
+		queue.add(pw, drools);
+
+end
+
 # Ideally, these two commands would be joined together into one
 rule "Run instance wire from target.access to target.init, when we have a value to provide as a parameter [set]"
 	when
@@ -87,6 +127,26 @@ rule "Run instance wire from target.access to target.init, when we have a value 
 		eval(functions.connectsSet(sw, source, target))
 		
 		event : EventTrigger( eContainer == target, name=="access" )
+		operation : Operation( eContainer == target, name=="init" )
+		field : Property( eContainer == source, name=="fieldValue" )
+		
+		not (RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" ))
+		
+	then
+		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
+		handler.setName(rw, "run");
+		queue.add(rw, drools);
+
+end
+
+rule "Run instance wire from target.access to target.init, when we have a value to provide as a parameter [set] (onAccess)"
+	when
+		sw : SetWire(overridden == false)
+		source : ContainsEventTriggers( )
+		target : VisibleThing( )
+		eval(functions.connectsSet(sw, source, target))
+		
+		event : EventTrigger( target.onAccess == event )
 		operation : Operation( eContainer == target, name=="init" )
 		field : Property( eContainer == source, name=="fieldValue" )
 		
@@ -124,6 +184,31 @@ rule "Run instance wire from target.access to target.init, adding ConditionEdge 
 		
 end	
 
+rule "Run instance wire from target.access to target.init, adding ConditionEdge to check it is set [set] (onAccess)"
+	when
+		sw : SetWire(overridden == false)
+		source : ContainsEventTriggers( )
+		target : VisibleThing( )
+		eval(functions.connectsSet(sw, source, target))
+		
+		event : EventTrigger( target.onAccess == event )
+		operation : Operation( eContainer == target, name=="init" )
+		field : Property( eContainer == source, name=="fieldValue" )
+		
+		run : RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" )
+		param : ParameterEdge( from == field, to == run )
+		
+		# condition check
+		condition : CompositeCondition ( eContainer == source, name == "fieldValue is set" )
+		
+		not ( ConditionEdge ( from == condition, to == run ))
+	
+	then
+		ConditionEdge cw = handler.generatedConditionEdge(sw, sw, condition, run);
+		queue.add(cw, drools);
+		
+end	
+
 # Ideally, these two commands would be joined together into one
 rule "Connect parameter wire to: run instance wire from target.access to target.init [set]"
 	when
@@ -133,6 +218,27 @@ rule "Connect parameter wire to: run instance wire from target.access to target.
 		eval(functions.connectsSet(sw, source, target))
 	
 		event : EventTrigger( eContainer == target, name=="access" )
+		operation : Operation( eContainer == target, name=="init" )
+		field : Property( eContainer == source, name=="fieldValue" )
+		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
+		
+		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
+		
+	then
+		ParameterEdge pw = handler.generatedParameterEdge(sw, sw, field, wire); 
+		handler.setName(pw, "[sync] run instance parameter (source.access)"); 
+		queue.add(pw, drools);
+
+end
+
+rule "Connect parameter wire to: run instance wire from target.access to target.init [set] (onAccess)"
+	when
+		sw : SetWire(overridden == false)
+		source : CanBeSynced( )
+		target : VisibleThing( )
+		eval(functions.connectsSet(sw, source, target))
+	
+		event : EventTrigger( target.onAccess == event ) 
 		operation : Operation( eContainer == target, name=="init" )
 		field : Property( eContainer == source, name=="fieldValue" )
 		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
@@ -265,6 +371,34 @@ rule "Connect Session.init to incoming SetWires (contained in Frames) [set]"
 		
 end
 
+rule "Connect Session.init to incoming SetWires (contained in Frames) [set] (onEdit)"
+	when
+		session : Session ( overridden == false )
+		sw : SetWire( overridden == false )
+		sourceFrame : ContainsEventTriggers( eval(!functions.containingSessionEquals(sourceFrame, session)) )  
+		targetFrame : ContainsOperations( eval(functions.containingSessionEquals(targetFrame, session)) )
+		eval( functions.connectsSet(sw, sourceFrame, targetFrame ))
+
+		sw2 : SetWire ( eContainer == sw, overridden == false)
+		sourceElement : VisibleThing( eContainer == sourceFrame )
+		targetElement : ContainsOperations( eContainer == targetFrame )
+		eval( functions.connectsSet(sw2, sourceElement, targetElement ))
+
+		event : EventTrigger( sourceElement.onEdit == event ) 
+		operation : Operation( eContainer == targetElement, name == "update" )
+
+		rw : RunInstanceWire( eContainer == sw2, from == event, to == operation, name == "run" )
+		inite : EventTrigger (eContainer == session, name == "init" )
+		
+		not (RunInstanceWire( eContainer == sw2, from == inite, to == operation, name == "run" ))
+		
+	then
+		RunInstanceWire rw2 = handler.generatedRunInstanceWire(sw2, sw2, inite, operation);
+		handler.setName(rw2, "run");
+		queue.add(rw2, drools);
+		
+end
+
 rule "Connect parameter for Session.init to incoming SetWires (contained in Frames) [set]"
 	when
 		session : Session ( overridden == false )
@@ -279,6 +413,37 @@ rule "Connect parameter for Session.init to incoming SetWires (contained in Fram
 		eval( functions.connectsSet(sw2, sourceElement, targetElement ))
 
 		event : EventTrigger( eContainer == sourceElement, name == "edit" )
+		operation : Operation( eContainer == targetElement, name == "update" )
+
+		rw : RunInstanceWire( eContainer == sw2, from == event, to == operation, name == "run" )
+		inite : EventTrigger (eContainer == session, name == "init" )
+
+		initrw : RunInstanceWire( eContainer == sw2, from == inite, to == operation, name == "run" )
+		
+		field : Property( eContainer == sourceElement, name=="fieldValue" )
+		pw : ParameterEdge( eContainer == sw2, from == field, to == rw ) 
+
+		not( ParameterEdge( eContainer == sw2, from == field, to == initrw ))  
+		
+	then
+		ParameterEdge pw2 = handler.generatedParameterEdge(sw, sw, field, initrw);
+		queue.add(pw2, drools);		
+end
+
+rule "Connect parameter for Session.init to incoming SetWires (contained in Frames) [set] (onEdit)"
+	when
+		session : Session ( overridden == false )
+		sw : SetWire( overridden == false )
+		sourceFrame : ContainsEventTriggers( eval(!functions.containingSessionEquals(sourceFrame, session)) )  
+		targetFrame : ContainsOperations( eval(functions.containingSessionEquals(targetFrame, session)) )
+		eval( functions.connectsSet(sw, sourceFrame, targetFrame ))
+
+		sw2 : SetWire ( eContainer == sw, overridden == false)
+		sourceElement : VisibleThing( eContainer == sourceFrame )
+		targetElement : ContainsOperations( eContainer == targetFrame )
+		eval( functions.connectsSet(sw2, sourceElement, targetElement ))
+
+		event : EventTrigger( sourceElement.onEdit == event )
 		operation : Operation( eContainer == targetElement, name == "update" )
 
 		rw : RunInstanceWire( eContainer == sw2, from == event, to == operation, name == "run" )
@@ -409,7 +574,7 @@ rule "A SetWire between Attributes selected from a NewInstanceWire need to check
 		eval(functions.connectsSet(sync2, tf, attribute))
 		
 		# text field access/init events
-		access : EventTrigger ( eContainer == tf, name == "access" )
+		access : EventTrigger ( tf.onAccess == access ) 
 		initOp : Operation ( eContainer == tf, name == "init" )
 		run : RunInstanceWire ( from == access, to == initOp )
 		

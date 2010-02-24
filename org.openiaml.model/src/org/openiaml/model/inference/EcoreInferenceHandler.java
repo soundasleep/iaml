@@ -90,8 +90,11 @@ public class EcoreInferenceHandler extends EcoreCreateElementsHelper implements 
 				throw new RuntimeException("Could not insert an element '" + elementType.getName() + "' into feature '" + feature.getName() + "' of " + feature.getEContainingClass().getName() + ": " + e, e);
 			}
 		} else {
-			// TODO what if containerFeature is not many?
-			throw new IllegalArgumentException("Cannot do anything with the structural feature: " + feature);
+			if (container.eGet(feature, false) != null) {
+				// Object.containment already has a value; we should not overwrite it
+				throw new IllegalArgumentException("Could not create '" + elementType.getName() + "' into single-valued feature '" + feature.getName() + "' of " + feature.getEContainingClass().getName() + ": Value has already been set.");
+			}
+			container.eSet(feature, object);
 		}
 
 		return object;

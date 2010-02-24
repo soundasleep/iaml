@@ -51,9 +51,9 @@ public class ConditionWireFalseServer extends InferenceTestCase {
 		SyncWire sw = assertHasSyncWire(root, field1, field2);
 
 		// we should have EventTrigger 'edit' in source
-		EventTrigger srcEdit = assertHasEventTrigger(field1, "edit");
+		EventTrigger srcEdit = field1.getOnEdit();
 		Operation srcOp = assertHasOperation(field1, "update");
-		EventTrigger targetEdit = assertHasEventTrigger(field2, "edit");
+		EventTrigger targetEdit = field2.getOnEdit();
 		Operation targetOp = assertHasOperation(field2, "update");
 		assertNotSame(srcEdit, targetEdit);
 		assertNotSame(srcOp, targetOp);
@@ -73,9 +73,9 @@ public class ConditionWireFalseServer extends InferenceTestCase {
 		// there doesn't need to be any parameters to these ConditionWires
 
 		// we should also have condition wires copied to the 'init' operations
-		EventTrigger srcAccess = assertHasEventTrigger(field1, "access");
+		EventTrigger srcAccess = field1.getOnAccess();
 		Operation srcInit = assertHasOperation(field1, "init");
-		EventTrigger targetAccess = assertHasEventTrigger(field2, "access");
+		EventTrigger targetAccess = field2.getOnAccess();
 		Operation targetInit = assertHasOperation(field2, "init");
 		assertNotSame(srcAccess, targetAccess);
 		assertNotSame(srcInit, targetInit);

@@ -24,7 +24,6 @@ import org.eclipse.gmf.runtime.notation.Style;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
-import org.openiaml.model.model.ApplicationElementProperty;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.DataFlowEdge;
@@ -38,6 +37,7 @@ import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.PrimitiveOperation;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.TemporaryVariable;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.Session;
@@ -825,9 +825,9 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	/**
 	 * @see #assertHasApplicationElementProperty(DiagramDocumentEditor, String, boolean, boolean)
 	 */
-	public ShapeNodeEditPart assertHasApplicationElementProperty(
+	public ShapeNodeEditPart assertHasProperty(
 			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
-		return assertHasRenderedNamedObject(editor, ApplicationElementProperty.class, name, true, shortcutRequired);
+		return assertHasRenderedNamedObject(editor, Property.class, name, true, shortcutRequired);
 	}
 
 	/**
@@ -981,8 +981,8 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 				ShapeNodeEditPart s = (ShapeNodeEditPart) o;
 				if (!checkShortcut || isShortcut(s) == shortcutRequired) {
 					EObject obj = s.resolveSemanticElement();
-					if (obj instanceof ApplicationElementProperty) {
-						ApplicationElementProperty p = (ApplicationElementProperty) obj;
+					if (obj instanceof Property) {
+						Property p = (Property) obj;
 						if (p.getName().equals("fieldValue")) {
 							assertNotNull(s);
 							return s;

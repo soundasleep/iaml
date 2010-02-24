@@ -241,7 +241,7 @@
          </object>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2013,2014,2015,2016,2026,2018,2019,2020,2027,2022,2023,2024"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2013,2014,2015,2016,2026,2018,2028,2020,2027,2022,2023,2024"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4002,4005,4004"/>
       </viewProvider>
    </extension>
@@ -254,13 +254,13 @@
             <method name="getType()" value="Iaml"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
-            <method name="getType()" value="2013,2014,2015,2016,2026,2018,2019,2020,2027,2022,2023,2024"/>
+            <method name="getType()" value="2013,2014,2015,2016,2026,2018,2028,2020,2027,2022,2023,2024"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
             <method name="getType()" value="4001,4002,4005,4004"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5022,5023,5024,5025,5026,5027,5028,5029,5045,5031,5032,5033,5034,5035,5036,5046,5038,5039,5040,5041,5042"/>
+            <method name="getType()" value="5022,5023,5024,5025,5026,5027,5028,5029,5045,5031,5032,5047,5048,5049,5036,5046,5038,5039,5040,5041,5042"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value=""/>
@@ -280,13 +280,13 @@
          <object class="org.openiaml.model.diagram.edit.parts.DomainObjectEditPart" id="DomainObject_2016"/>
          <object class="org.openiaml.model.diagram.edit.parts.FrameEditPart" id="Frame_2026"/>
          <object class="org.openiaml.model.diagram.edit.parts.DynamicApplicationElementSetEditPart" id="DynamicApplicationElementSet_2018"/>
-         <object class="org.openiaml.model.diagram.edit.parts.ApplicationElementPropertyEditPart" id="ApplicationElementProperty_2019"/>
+         <object class="org.openiaml.model.diagram.edit.parts.PropertyEditPart" id="Property_2028"/>
          <object class="org.openiaml.model.diagram.edit.parts.DomainStoreEditPart" id="DomainStore_2020"/>
          <object class="org.openiaml.model.diagram.edit.parts.SessionEditPart" id="Session_2027"/>
          <object class="org.openiaml.model.diagram.edit.parts.LoginHandlerEditPart" id="LoginHandler_2022"/>
          <object class="org.openiaml.model.diagram.edit.parts.CompositeConditionEditPart" id="CompositeCondition_2023"/>
          <object class="org.openiaml.model.diagram.edit.parts.UserStoreEditPart" id="UserStore_2024"/>
-         <context elements="InternetApplication_1000,EventTrigger_2013,CompositeOperation_2014,PrimitiveOperation_2015,DomainObject_2016,Frame_2026,DynamicApplicationElementSet_2018,ApplicationElementProperty_2019,DomainStore_2020,Session_2027,LoginHandler_2022,CompositeCondition_2023,UserStore_2024"/>
+         <context elements="InternetApplication_1000,EventTrigger_2013,CompositeOperation_2014,PrimitiveOperation_2015,DomainObject_2016,Frame_2026,DynamicApplicationElementSet_2018,Property_2028,DomainStore_2020,Session_2027,LoginHandler_2022,CompositeCondition_2023,UserStore_2024"/>
       </modelingAssistantProvider>
    </extension>
 
@@ -309,7 +309,7 @@
       <decoratorProvider class="org.openiaml.model.diagram.providers.IamlShortcutsDecoratorProvider">
          <Priority name="Lowest"/>
          <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
-            <method name="getType()" value="2013,2014,2015,2016,2026,2018,2019,2020,2027,2022,2023,2024"/>
+            <method name="getType()" value="2013,2014,2015,2016,2026,2018,2028,2020,2027,2022,2023,2024"/>
          </object>
          <context decoratorTargets="generated-top-nodes"/>
       </decoratorProvider>
@@ -389,12 +389,12 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
-               id="org.openiaml.model.diagram.ApplicationElementProperty_2019"
-               name="%metatype.name.ApplicationElementProperty_2019"
+               id="org.openiaml.model.diagram.Property_2028"
+               name="%metatype.name.Property_2028"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="ApplicationElementProperty"
-               edithelper="org.openiaml.model.diagram.edit.helpers.ApplicationElementPropertyEditHelper">
-            <param name="semanticHint" value="2019"/>
+               eclass="Property"
+               edithelper="org.openiaml.model.diagram.edit.helpers.PropertyEditHelper">
+            <param name="semanticHint" value="2028"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.4">
@@ -506,7 +506,7 @@
          <elementType ref="org.openiaml.model.diagram.DomainObject_2016"/>
          <elementType ref="org.openiaml.model.diagram.Frame_2026"/>
          <elementType ref="org.openiaml.model.diagram.DynamicApplicationElementSet_2018"/>
-         <elementType ref="org.openiaml.model.diagram.ApplicationElementProperty_2019"/>
+         <elementType ref="org.openiaml.model.diagram.Property_2028"/>
          <elementType ref="org.openiaml.model.diagram.DomainStore_2020"/>
          <elementType ref="org.openiaml.model.diagram.Session_2027"/>
          <elementType ref="org.openiaml.model.diagram.LoginHandler_2022"/>

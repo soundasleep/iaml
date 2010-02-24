@@ -50,15 +50,15 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="ApplicationElementProperty"
-          description="Create new ApplicationElementProperty">
+          title="Property"
+          description="Create new Property">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/ApplicationElementProperty.gif"
+            path="icons/full/obj16/Property.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/ApplicationElementProperty.gif"
+            path="icons/full/obj32/Property.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
     </tools>

@@ -515,7 +515,7 @@ public class GetShortcuts {
 	 * @return the target element of the relationship, or <code>null</code> if none can be found
 	 */
 	public static EObject getTargetElement(EObject relationship) {
-		return getSourceElement(relationship, false);
+		return getTargetElement(relationship, false);
 	}
 	
 	/**

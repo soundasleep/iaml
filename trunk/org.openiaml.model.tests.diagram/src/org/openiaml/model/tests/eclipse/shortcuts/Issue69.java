@@ -39,7 +39,7 @@ public class Issue69 extends AbstractShortcutsTestCase {
 		// the local domain object instance
 		ShapeNodeEditPart instance = assertHasDomainObjectInstance(editor_page, "domain object instance", false);
 		ShapeNodeEditPart object = assertHasDomainObject(editor_page, "domain object", true);
-		ShapeNodeEditPart property = assertHasApplicationElementProperty(editor_page, "property", true);
+		ShapeNodeEditPart property = assertHasProperty(editor_page, "property", true);
 		
 		// these should be connected
 		ConnectionNodeEditPart select = assertHasSelectWire(editor_page, object, instance, "select");

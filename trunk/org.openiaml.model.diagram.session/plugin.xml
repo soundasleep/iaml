@@ -241,7 +241,7 @@
          </object>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_Session"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2001,2002,2003,2040,2041,2042,2043,2044,2045,2046,2047,2013,2048,2049,2050,2051,2019,2020,2052,2053,2054"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2001,2002,2003,2040,2041,2055,2043,2044,2045,2046,2047,2013,2048,2049,2050,2051,2019,2020,2052,2053,2054"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4002,4013,4004,4005,4007,4016,4010,4014,4015"/>
       </viewProvider>
    </extension>
@@ -254,13 +254,13 @@
             <method name="getType()" value="Iaml_Session"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
-            <method name="getType()" value="2001,2002,2003,2040,2041,2042,2043,2044,2045,2046,2047,2013,2048,2049,2050,2051,2019,2020,2052,2053,2054"/>
+            <method name="getType()" value="2001,2002,2003,2040,2041,2055,2043,2044,2045,2046,2047,2013,2048,2049,2050,2051,2019,2020,2052,2053,2054"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
             <method name="getType()" value="4001,4002,4013,4004,4005,4007,4016,4010,4014,4015"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5001,5002,5003,5004,5005,5006,5071,5072,5073,5074,5075,5076,5077,5078,5079,5080,5081,5082,5083,5084,5085,5086,5024,5025,5087,5088,5089,5090,5091,5092,5033,5034,5093,5094,5095,5096,5097,5098"/>
+            <method name="getType()" value="5001,5002,5003,5004,5005,5006,5071,5072,5073,5074,5099,5100,5101,5078,5079,5080,5081,5082,5083,5084,5085,5086,5024,5025,5087,5088,5089,5090,5091,5092,5033,5034,5093,5094,5095,5096,5097,5098"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value=""/>
@@ -279,7 +279,7 @@
          <object class="org.openiaml.model.diagram.session.edit.parts.PrimitiveOperationEditPart" id="PrimitiveOperation_2003"/>
          <object class="org.openiaml.model.diagram.session.edit.parts.DomainObjectEditPart" id="DomainObject_2040"/>
          <object class="org.openiaml.model.diagram.session.edit.parts.DomainAttributeEditPart" id="DomainAttribute_2041"/>
-         <object class="org.openiaml.model.diagram.session.edit.parts.ApplicationElementPropertyEditPart" id="ApplicationElementProperty_2042"/>
+         <object class="org.openiaml.model.diagram.session.edit.parts.PropertyEditPart" id="Property_2055"/>
          <object class="org.openiaml.model.diagram.session.edit.parts.FrameEditPart" id="Frame_2043"/>
          <object class="org.openiaml.model.diagram.session.edit.parts.InputFormEditPart" id="InputForm_2044"/>
          <object class="org.openiaml.model.diagram.session.edit.parts.InputTextFieldEditPart" id="InputTextField_2045"/>
@@ -295,7 +295,7 @@
          <object class="org.openiaml.model.diagram.session.edit.parts.UserInstanceEditPart" id="UserInstance_2052"/>
          <object class="org.openiaml.model.diagram.session.edit.parts.EntryGateEditPart" id="EntryGate_2053"/>
          <object class="org.openiaml.model.diagram.session.edit.parts.ExitGateEditPart" id="ExitGate_2054"/>
-         <context elements="Session_1000,EventTrigger_2001,CompositeOperation_2002,PrimitiveOperation_2003,DomainObject_2040,DomainAttribute_2041,ApplicationElementProperty_2042,Frame_2043,InputForm_2044,InputTextField_2045,StaticValue_2046,LoginHandler_2047,CompositeCondition_2013,DomainObjectInstance_2048,DomainAttributeInstance_2049,Button_2050,AccessControlHandler_2051,Permission_2019,Role_2020,UserInstance_2052,EntryGate_2053,ExitGate_2054"/>
+         <context elements="Session_1000,EventTrigger_2001,CompositeOperation_2002,PrimitiveOperation_2003,DomainObject_2040,DomainAttribute_2041,Property_2055,Frame_2043,InputForm_2044,InputTextField_2045,StaticValue_2046,LoginHandler_2047,CompositeCondition_2013,DomainObjectInstance_2048,DomainAttributeInstance_2049,Button_2050,AccessControlHandler_2051,Permission_2019,Role_2020,UserInstance_2052,EntryGate_2053,ExitGate_2054"/>
       </modelingAssistantProvider>
    </extension>
 
@@ -318,7 +318,7 @@
       <decoratorProvider class="org.openiaml.model.diagram.session.providers.IamlShortcutsDecoratorProvider">
          <Priority name="Lowest"/>
          <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
-            <method name="getType()" value="2001,2002,2003,2040,2041,2042,2043,2044,2045,2046,2047,2013,2048,2049,2050,2051,2019,2020,2052,2053,2054"/>
+            <method name="getType()" value="2001,2002,2003,2040,2041,2055,2043,2044,2045,2046,2047,2013,2048,2049,2050,2051,2019,2020,2052,2053,2054"/>
          </object>
          <context decoratorTargets="generated-top-nodes"/>
       </decoratorProvider>
@@ -388,12 +388,12 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
-               id="org.openiaml.model.diagram.session.ApplicationElementProperty_2042"
-               name="%metatype.name.ApplicationElementProperty_2042"
+               id="org.openiaml.model.diagram.session.Property_2055"
+               name="%metatype.name.Property_2055"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="ApplicationElementProperty"
-               edithelper="org.openiaml.model.diagram.session.edit.helpers.ApplicationElementPropertyEditHelper">
-            <param name="semanticHint" value="2042"/>
+               eclass="Property"
+               edithelper="org.openiaml.model.diagram.session.edit.helpers.PropertyEditHelper">
+            <param name="semanticHint" value="2055"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/visual">
@@ -664,7 +664,7 @@
          <elementType ref="org.openiaml.model.diagram.session.PrimitiveOperation_2003"/>
          <elementType ref="org.openiaml.model.diagram.session.DomainObject_2040"/>
          <elementType ref="org.openiaml.model.diagram.session.DomainAttribute_2041"/>
-         <elementType ref="org.openiaml.model.diagram.session.ApplicationElementProperty_2042"/>
+         <elementType ref="org.openiaml.model.diagram.session.Property_2055"/>
          <elementType ref="org.openiaml.model.diagram.session.Frame_2043"/>
          <elementType ref="org.openiaml.model.diagram.session.InputForm_2044"/>
          <elementType ref="org.openiaml.model.diagram.session.InputTextField_2045"/>

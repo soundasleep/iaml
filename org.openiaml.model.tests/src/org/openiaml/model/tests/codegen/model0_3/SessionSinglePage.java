@@ -16,6 +16,7 @@ import org.openiaml.model.tests.CodegenTestCase;
  */
 public class SessionSinglePage extends CodegenTestCase {
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		root = loadAndCodegen(SessionSinglePage.class);

@@ -19,6 +19,7 @@ import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
  */
 public class LoginHandlerInstance extends DatabaseCodegenTestCase {
 	
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		root = loadAndCodegen(LoginHandlerInstance.class);

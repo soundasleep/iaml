@@ -182,6 +182,7 @@ public class PhpRuntimeExceptionException extends FailingHttpStatusCodeException
 
 		private static final long serialVersionUID = 1L;
 		
+		@Override
 		public String getMessage() {
 			return message;
 		}

@@ -22,6 +22,7 @@ import org.openiaml.model.model.wires.RunInstanceWire;
  */
 public class SelectField extends InferenceTestCase {
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		root = loadAndInfer(SelectField.class, true);

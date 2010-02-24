@@ -35,6 +35,7 @@ import org.openiaml.model.model.wires.SyncWire;
  */
 public class SyncWiresProperties extends InferenceTestCase {
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		root = loadAndInfer(SyncWiresProperties.class);

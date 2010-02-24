@@ -19,6 +19,7 @@ import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocument
 @Deprecated
 public class SeparatedInstances extends AbstractShortcutsTestCase {
 
+	@Override
 	public String getModel() {
 		return "SeparatedInstances.iaml";
 	}
@@ -51,6 +52,7 @@ public class SeparatedInstances extends AbstractShortcutsTestCase {
 	 * Close loaded editors.
 	 * @throws Exception 
 	 */
+	@Override
 	public void tearDown() throws Exception {
 		
 		if (editor_page != null)

@@ -52,6 +52,7 @@ public class InfiniteSubProgressMonitor extends SubProgressMonitor {
 		super(monitor, ticks, style);
 	}
 	
+	@Override
 	public void beginTask(String name, int totalWork) {
 		super.beginTask(name, totalWork);
 		this.totalWork = totalWork;
@@ -61,6 +62,7 @@ public class InfiniteSubProgressMonitor extends SubProgressMonitor {
 		this.worked = 0;
 	}
 	
+	@Override
 	public void worked(int work) {
 		if (worked >= totalWork) return;
 		if (--nextProgress <= 0) {
@@ -83,6 +85,7 @@ public class InfiniteSubProgressMonitor extends SubProgressMonitor {
 	 * 
 	 * @see IProgressMonitor#subTask(String)
 	 */
+	@Override
 	public void subTask(String name) {
 		if(name != null && ! name.equals("")) { //$NON-NLS-1$
 			super.subTask(name);

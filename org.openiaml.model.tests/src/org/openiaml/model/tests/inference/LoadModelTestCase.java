@@ -15,6 +15,7 @@ import org.openiaml.model.model.visual.Frame;
  */
 public class LoadModelTestCase extends InferenceTestCase {
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 

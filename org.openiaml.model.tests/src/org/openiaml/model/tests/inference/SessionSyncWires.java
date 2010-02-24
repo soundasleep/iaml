@@ -30,6 +30,7 @@ import org.openiaml.model.tests.inference.model0_4.SetWireClient;
  */
 public class SessionSyncWires extends InferenceTestCase {
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		root = loadAndInfer(SessionSyncWires.class, true);

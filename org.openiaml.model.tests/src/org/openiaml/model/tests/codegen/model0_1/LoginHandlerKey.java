@@ -25,6 +25,7 @@ import org.openiaml.model.tests.CodegenTestCase;
  */
 public class LoginHandlerKey extends CodegenTestCase {
 	
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		root = loadAndCodegen(LoginHandlerKey.class);

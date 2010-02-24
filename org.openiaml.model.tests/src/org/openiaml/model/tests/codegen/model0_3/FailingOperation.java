@@ -15,6 +15,7 @@ import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
  */
 public class FailingOperation extends CodegenTestCase {
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		root = loadAndCodegen(FailingOperation.class);

@@ -102,6 +102,7 @@ public class Migrate0_2SyncPages extends AbstractMigrateTestCase {
 	 * Close loaded editors.
 	 * @throws Exception 
 	 */
+	@Override
 	public void tearDown() throws Exception {
 		if (editor_page != null)
 			editor_page.close(false);
@@ -109,6 +110,7 @@ public class Migrate0_2SyncPages extends AbstractMigrateTestCase {
 		super.tearDown();
 	}
 	
+	@Override
 	public String getModel() {
 		return "codegen-sync-pages-0_2.iaml";
 	}

@@ -16,6 +16,7 @@ import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocument
  */
 public class ShortcutsWireTestCase extends AbstractShortcutsTestCase {
 
+	@Override
 	public String getModel() {
 		return "shortcuts-wire.iaml";
 	}
@@ -65,6 +66,7 @@ public class ShortcutsWireTestCase extends AbstractShortcutsTestCase {
 	 * Close loaded editors.
 	 * @throws Exception 
 	 */
+	@Override
 	public void tearDown() throws Exception {
 
 		if (editor_wire != null)

@@ -62,6 +62,7 @@ public class Migrate0_4JoinSplitClientSide extends AbstractMigrateTestCase {
 	 * Close loaded editors.
 	 * @throws Exception 
 	 */
+	@Override
 	public void tearDown() throws Exception {
 		if (editor_page != null)
 			editor_page.close(false);
@@ -71,6 +72,7 @@ public class Migrate0_4JoinSplitClientSide extends AbstractMigrateTestCase {
 		super.tearDown();
 	}
 	
+	@Override
 	public String getModel() {
 		return "JoinSplitClientSide-0_4.iaml";
 	}

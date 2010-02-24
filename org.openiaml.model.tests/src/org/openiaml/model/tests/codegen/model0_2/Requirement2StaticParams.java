@@ -15,6 +15,7 @@ import org.openiaml.model.tests.CodegenTestCase;
  */
 public class Requirement2StaticParams extends CodegenTestCase {
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		root = loadAndCodegen(Requirement2StaticParams.class, ROOT + "../examples/requirements/2-static_params.iaml");

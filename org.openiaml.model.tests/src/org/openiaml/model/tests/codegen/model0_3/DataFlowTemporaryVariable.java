@@ -15,6 +15,7 @@ import org.openiaml.model.tests.CodegenTestCase;
  */
 public class DataFlowTemporaryVariable extends CodegenTestCase {
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		root = loadAndCodegen(DataFlowTemporaryVariable.class);

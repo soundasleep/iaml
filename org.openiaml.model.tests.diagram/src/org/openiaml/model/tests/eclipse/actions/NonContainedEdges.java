@@ -22,6 +22,7 @@ import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocument
  */
 public class NonContainedEdges extends AbstractActionTestCase<GraphicalEditPart> {
 
+	@Override
 	public String getModel() {
 		return "NonContainedEdges.iaml";
 	}
@@ -118,6 +119,7 @@ public class NonContainedEdges extends AbstractActionTestCase<GraphicalEditPart>
 	 * Close loaded editors.
 	 * @throws Exception
 	 */
+	@Override
 	public void tearDown() throws Exception {
 
 		if (editor_sub != null)

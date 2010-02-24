@@ -84,6 +84,7 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	/**
 	 * @throws java.lang.Exception
 	 */
+	@Override
 	protected void setUp() throws Exception {
 		// parent setup
 		super.setUp();
@@ -102,6 +103,7 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	/**
 	 * @throws java.lang.Exception
 	 */
+	@Override
 	protected void tearDown() throws Exception {
 		// delete this project automatically
 		// project.delete(false, monitor); -- usually we would want to see the output?

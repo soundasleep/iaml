@@ -205,6 +205,7 @@ public abstract class AbstractModelEclipseTestCase<T> extends EclipseTestCaseHel
 	 * Close loaded editors.
 	 * @throws Exception 
 	 */
+	@Override
 	public void tearDown() throws Exception {
 		if (editor != null)
 			editor.close(false);

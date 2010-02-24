@@ -18,6 +18,7 @@ import org.openiaml.model.diagram.custom.actions.RefreshFormMappingsWithDrools;
  */
 public class FormDomainObjectMapping extends AbstractActionTestCase<GraphicalEditPart> {
 
+	@Override
 	public String getModel() {
 		return "FormDomainObjectMapping.iaml";
 	}
@@ -118,6 +119,7 @@ public class FormDomainObjectMapping extends AbstractActionTestCase<GraphicalEdi
 	 * Close loaded editors.
 	 * @throws Exception 
 	 */
+	@Override
 	public void tearDown() throws Exception {
 
 		if (editor_form != null)

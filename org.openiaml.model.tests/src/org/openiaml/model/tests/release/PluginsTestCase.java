@@ -171,6 +171,7 @@ public class PluginsTestCase extends XmlTestCase {
 	 * Load up all the .gmfgen's and MANIFEST.MFs from all of our plugins.
 	 * 
 	 */
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 	
@@ -197,6 +198,7 @@ public class PluginsTestCase extends XmlTestCase {
 		return cache.get( getAllGmfGens().iterator().next() );
 	}
 
+	@Override
 	public void tearDown() throws Exception {
 		loadedManifests = null;
 		shortcuts = null;

@@ -25,6 +25,7 @@ import org.openiaml.model.model.wires.SyncWire;
  */
 public class SyncFieldDomainAttribute extends InferenceTestCase {
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		root = loadAndInfer(SyncFieldDomainAttribute.class);

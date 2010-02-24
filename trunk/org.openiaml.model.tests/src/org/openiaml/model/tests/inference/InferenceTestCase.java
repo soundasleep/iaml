@@ -977,6 +977,17 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	}	
 	
 	/**
+	 * Assert there exists only one unidirectional SelectWire between
+	 * the given elements.
+	 *
+	 * @return The element found
+	 */
+	public SelectWire assertHasSelectWire(EObject container, WireEdgesSource from, WireEdgeDestination to) throws JaxenException {
+		return (SelectWire) assertHasWireFromTo(container, from, to, 
+				SelectWire.class);
+	}
+	
+	/**
 	 * Assert there exists only one unidirectional NewInstanceWire between
 	 * the given elements.
 	 *

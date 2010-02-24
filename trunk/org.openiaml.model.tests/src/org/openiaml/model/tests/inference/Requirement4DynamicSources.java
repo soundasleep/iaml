@@ -62,15 +62,11 @@ public class Requirement4DynamicSources extends InferenceTestCaseWithConditionWi
 	 *
 	 */
 	public void testUnrelatedSyncWires() throws JaxenException {
-		Frame page1 = assertHasFrame(root, "page a");
-		Frame page2 = assertHasFrame(root, "page b");
 		Frame fieldList = assertHasFrame(root, "FieldList");
 		Frame unrelated = assertHasFrame(root, "unrelated");
 	    DynamicApplicationElementSet dae = assertHasDynamicApplicationElementSet(root, "all pages");
-		SyncWire sync = (SyncWire) getWireBidirectional(root, fieldList, dae);
 
 		// generated
-		SyncWire sync2 = (SyncWire) getWireBidirectional(root, fieldList, page1);
 		SyncWire sync3 = (SyncWire) getWireBidirectional(root, fieldList, unrelated);
 
 	    // generated
@@ -113,7 +109,6 @@ public class Requirement4DynamicSources extends InferenceTestCaseWithConditionWi
 		// initial
 		Frame page1 = assertHasFrame(root, "page a");
 		Frame page2 = assertHasFrame(root, "page b");
-		Frame page3 = assertHasFrame(root, "page c");
 		Frame fieldList = assertHasFrame(root, "FieldList");
 		DynamicApplicationElementSet dae = assertHasDynamicApplicationElementSet(root, "all pages");
 		

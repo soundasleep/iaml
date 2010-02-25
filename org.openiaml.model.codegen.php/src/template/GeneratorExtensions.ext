@@ -151,13 +151,7 @@ List[model::Operation] allContainerOperations(model::InternetApplication this) :
 		
 /** All of the ApplicationElementProperties stored within this InternetApplication */
 List[model::Property] allProperties(model::InternetApplication this) :
-	properties.toSet().union( eAllContents.allProperties() ).reject( e | e == null );
-
-List[model::Property] allProperties(emf::EObject this) :
-	null;
-
-List[model::Property] allroperties(model::Property this) :
-	this;
+	eAllContents.typeSelect(model::Property);
 
 /* for a frame that is part of a session/scope */
 possibleParentOperations(model::scopes::Session this ) :
@@ -523,7 +517,7 @@ exitGateNeedsToRedirectRecurse(model::components::ExitGate gate, model::Internet
 	false;
 exitGateNeedsToRedirectRecurse(model::components::ExitGate gate, emf::EObject obj) :
 	false;
-	
+
 /** 
  * a hack way to create backtrace-able errors
  * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540

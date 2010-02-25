@@ -53,8 +53,11 @@ rule "Run instance wire from edit to update"
 		event : EventTrigger( eContainer == source, name=="edit" )
 		operation : Operation( eContainer == target, name=="update" )
 		
-		not (RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" ))
-		
+		// "eContainer == sw" is important here; otherwise, we will lose track of which
+		// SyncWires created which RunWires (which is important to provide the correct
+		// properties and conditions) 
+		not (RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw ))
+				
 	then
 		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
 		handler.setName(rw, "run");
@@ -73,7 +76,7 @@ rule "Run instance wire from edit to update (onEdit)"
 		event : EventTrigger( source.onEdit == event ) 
 		operation : Operation( eContainer == target, name=="update" )
 		
-		not (RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" ))
+		not (RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw ))
 		
 	then
 		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
@@ -92,7 +95,7 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 		event : EventTrigger( eContainer == source, name == "edit" )
 		operation : Operation( eContainer == target, name=="update" )
 		field : Property( eContainer == source, name=="fieldValue" )
-		wire : RunInstanceWire( from == event, to == operation, name == "run" )
+		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
 		
 		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
 		
@@ -113,7 +116,7 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 		event : EventTrigger( source.onEdit == event )
 		operation : Operation( eContainer == target, name=="update" )
 		field : Property( eContainer == source, name=="fieldValue" )
-		wire : RunInstanceWire( from == event, to == operation, name == "run" )
+		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
 		
 		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
 		
@@ -136,7 +139,7 @@ rule "Run instance wire from source.access to source.init, when we have a value 
 		operation : Operation( eContainer == source, name=="init" )
 		field : Property( eContainer == target, name=="fieldValue" )
 		
-		not (RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" ))
+		not (RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw ))
 		
 	then
 		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
@@ -156,7 +159,7 @@ rule "Run instance wire from source.access to source.init, when we have a value 
 		operation : Operation( eContainer == source, name=="init" )
 		field : Property( eContainer == target, name=="fieldValue" )
 		
-		not (RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" ))
+		not (RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw ))
 		
 	then
 		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
@@ -176,7 +179,7 @@ rule "Run instance wire from source.access to source.init, adding ConditionEdge 
 		operation : Operation( eContainer == source, name=="init" )
 		field : Property( eContainer == target, name=="fieldValue" )
 		
-		run : RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" )
+		run : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
 		
 		# condition check
 		condition : CompositeCondition ( eContainer == target, name == "fieldValue is set" )
@@ -200,7 +203,7 @@ rule "Run instance wire from source.access to source.init, adding ConditionEdge 
 		operation : Operation( eContainer == source, name=="init" )
 		field : Property( eContainer == target, name=="fieldValue" )
 		
-		run : RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" )
+		run : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
 		
 		# condition check
 		condition : CompositeCondition ( eContainer == target, name == "fieldValue is set" )
@@ -224,7 +227,7 @@ rule "Connect parameter wire to: run instance wire from source.access to source.
 		event : EventTrigger( name == "access", eContainer == source )
 		operation : Operation( eContainer == source, name=="init" )
 		field : Property( eContainer == target, name=="fieldValue" )
-		wire : RunInstanceWire( from == event, to == operation, name == "run" )
+		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
 		
 		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
 		
@@ -245,7 +248,7 @@ rule "Connect parameter wire to: run instance wire from source.access to source.
 		event : EventTrigger( source.onAccess == event )
 		operation : Operation( eContainer == source, name=="init" )
 		field : Property( eContainer == target, name=="fieldValue" )
-		wire : RunInstanceWire( from == event, to == operation, name == "run" )
+		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
 		
 		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
 		
@@ -290,7 +293,6 @@ rule "Cascaded SyncWires: Conditions from parent to child"
 		// cannot use 'sw.to == target, target != source'
 		// can NOT use 'sw.to == target, this != source'
 		// can NOT use 'sw.to == this, this != source'
-		// ridiculous!
 		target : CanBeSynced( sw.to == target )
 		eval ( target != source )
 				

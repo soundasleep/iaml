@@ -93,7 +93,7 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 		
 	then
 		ParameterEdge pw = handler.generatedParameterEdge(sw, sw, field, wire); 
-		handler.setName(pw, "[sync] run instance parameter (source.edit)"); 
+		handler.setName(pw, "[set] run instance parameter (source.edit)"); 
 		queue.add(pw, drools);
 
 end
@@ -114,7 +114,7 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 		
 	then
 		ParameterEdge pw = handler.generatedParameterEdge(sw, sw, field, wire); 
-		handler.setName(pw, "[sync] run instance parameter (source.edit)"); 
+		handler.setName(pw, "[set] run instance parameter (source.edit)"); 
 		queue.add(pw, drools);
 
 end
@@ -221,7 +221,7 @@ rule "Connect parameter wire to: run instance wire from target.access to target.
 		event : EventTrigger( eContainer == target, name=="access" )
 		operation : Operation( eContainer == target, name=="init" )
 		field : Property( eContainer == source, name=="fieldValue" )
-		wire : RunInstanceWire( from == event, to == operation, name == "run" )
+		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
 		
 		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
 		
@@ -242,13 +242,13 @@ rule "Connect parameter wire to: run instance wire from target.access to target.
 		event : EventTrigger( target.onAccess == event ) 
 		operation : Operation( eContainer == target, name=="init" )
 		field : Property( eContainer == source, name=="fieldValue" )
-		wire : RunInstanceWire( from == event, to == operation, name == "run" )
+		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
 		
 		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
 		
 	then
 		ParameterEdge pw = handler.generatedParameterEdge(sw, sw, field, wire); 
-		handler.setName(pw, "[sync] run instance parameter (source.access)"); 
+		handler.setName(pw, "[set] run instance parameter (source.access)"); 
 		queue.add(pw, drools);
 
 end

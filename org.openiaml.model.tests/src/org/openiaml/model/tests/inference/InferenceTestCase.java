@@ -92,6 +92,26 @@ import org.openiaml.model.tests.ModelInferenceTestCase;
 public abstract class InferenceTestCase extends ModelInferenceTestCase {
 
 	/**
+	 * A way to selectively filter objects.
+	 * 
+	 * @author jmwright
+	 * @param <T> the inner type to filter
+	 */
+	public static interface Filter<T extends Object> {
+		public boolean accept(T o);
+	}
+	
+	/**
+	 * A filter that accepts everything.
+	 */
+	public static final Filter<WireEdge> ALL = new Filter<WireEdge>() {
+		@Override
+		public boolean accept(WireEdge o) {
+			return true;
+		}
+	};
+	
+	/**
 	 * Assert that the given element contains the given
 	 * Property.
 	 *
@@ -875,7 +895,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public SetWire assertHasSetWire(EObject container, WireEdgesSource from, WireEdgeDestination to) throws JaxenException {
-		return (SetWire) assertHasWireFromTo(container, from, to, SetWire.class);
+		return (SetWire) assertHasWireFromTo(container, from, to, SetWire.class, ALL);
 	}
 	
 	/**
@@ -922,7 +942,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public RunInstanceWire assertHasRunInstanceWire(EObject container, WireEdgesSource from, WireEdgeDestination to, String name) throws JaxenException {
 		return (RunInstanceWire) assertHasWireFromTo(container, from, to, 
-				RunInstanceWire.class, name);
+				RunInstanceWire.class, name, ALL);
 	}
 	
 	/**
@@ -933,7 +953,18 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public RunInstanceWire assertHasRunInstanceWire(EObject container, WireEdgesSource from, WireEdgeDestination to) throws JaxenException {
 		return (RunInstanceWire) assertHasWireFromTo(container, from, to, 
-				RunInstanceWire.class);
+				RunInstanceWire.class, ALL);
+	}
+	
+	/**
+	 * Assert there exists only one unidirectional RunInstanceWire between
+	 * the given elements, with any name.
+	 *
+	 * @return The element found
+	 */
+	public RunInstanceWire assertHasRunInstanceWire(EObject container, WireEdgesSource from, WireEdgeDestination to, Filter<WireEdge> filter) throws JaxenException {
+		return (RunInstanceWire) assertHasWireFromTo(container, from, to, 
+				RunInstanceWire.class, filter);
 	}
 	
 	/**
@@ -944,7 +975,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public SetWire assertHasSetWire(EObject container, WireEdgesSource from, WireEdgeDestination to, String name) throws JaxenException {
 		return (SetWire) assertHasWireFromTo(container, from, to, 
-				SetWire.class, name);
+				SetWire.class, name, ALL);
 	}
 	
 	/**
@@ -973,7 +1004,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public SelectWire assertHasSelectWire(EObject container, WireEdgesSource from, WireEdgeDestination to, String name) throws JaxenException {
 		return (SelectWire) assertHasWireFromTo(container, from, to, 
-				SelectWire.class, name);
+				SelectWire.class, name, ALL);
 	}	
 	
 	/**
@@ -984,7 +1015,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public SelectWire assertHasSelectWire(EObject container, WireEdgesSource from, WireEdgeDestination to) throws JaxenException {
 		return (SelectWire) assertHasWireFromTo(container, from, to, 
-				SelectWire.class);
+				SelectWire.class, ALL);
 	}
 	
 	/**
@@ -995,7 +1026,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public NewInstanceWire assertHasNewInstanceWire(EObject container, WireEdgesSource from, WireEdgeDestination to, String name) throws JaxenException {
 		return (NewInstanceWire) assertHasWireFromTo(container, from, to, 
-				NewInstanceWire.class, name);
+				NewInstanceWire.class, name, ALL);
 	}
 	
 	/**
@@ -1030,7 +1061,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public NavigateWire assertHasNavigateWire(EObject container, WireEdgesSource from, WireEdgeDestination to, String name) throws JaxenException {
 		return (NavigateWire) assertHasWireFromTo(container, from, to, 
-				NavigateWire.class, name);
+				NavigateWire.class, name, ALL);
 	}
 	
 	/**
@@ -1162,15 +1193,17 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return the wire edge found
 	 * @throws JaxenException 
 	 */
-	public WireEdge assertHasWireFromTo(EObject container, WireEdgesSource from, WireEdgeDestination to, Class<? extends EObject> type) throws JaxenException {
+	public WireEdge assertHasWireFromTo(EObject container, WireEdgesSource from, WireEdgeDestination to, Class<? extends EObject> type, Filter<WireEdge> filter) throws JaxenException {
 		Set<WireEdge> wires = getWiresFromTo(container, from, to);
 		WireEdge result = null;
 		for (WireEdge w : wires) {
 			if (type.isInstance(w)) {
-				// found it
-				if (result != null)
-					fail("Found more than 1 wire from '" + from + "' to '" + to + "' class='" + type + "'. First = '" + result + "', second = '" + w + "'");
-				result = w;
+				if (filter == null || filter.accept(w)) {
+					// found it
+					if (result != null)
+						fail("Found more than 1 wire from '" + from + "' to '" + to + "' class='" + type + "'. First = '" + result + "', second = '" + w + "'");
+					result = w;
+				}
 			}
 		}
 		assertNotNull("Did not find any wires connecting '" + from + "' to '" + to + " of type '" + type + "'", result);
@@ -1186,18 +1219,21 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @param to
 	 * @param type
 	 * @param name the name of the NamedElement wire
+	 * @param filter an optional filter; may be null
 	 * @return
 	 * @throws JaxenException 
 	 */
-	public WireEdge assertHasWireFromTo(EObject container, WireEdgesSource from, WireEdgeDestination to, Class<? extends EObject> type, String name) throws JaxenException {
+	public WireEdge assertHasWireFromTo(EObject container, WireEdgesSource from, WireEdgeDestination to, Class<? extends EObject> type, String name, Filter<WireEdge> filter) throws JaxenException {
 		Set<WireEdge> wires = getWiresFromTo(container, from, to);
 		WireEdge result = null;
 		for (WireEdge w : wires) {
 			if (type.isInstance(w) && w instanceof NamedElement && name.equals(((NamedElement) w).getName())) {
-				// found it
-				if (result != null)
-					fail("Found more than 1 wire from '" + from + "' to '" + to + "' class='" + type + "' name='" + name + "'. First = '" + result + "', second = '" + w + "'");
-				result = w;
+				if (filter == null || filter.accept(w)) {
+					// found it
+					if (result != null)
+						fail("Found more than 1 wire from '" + from + "' to '" + to + "' class='" + type + "' name='" + name + "'. First = '" + result + "', second = '" + w + "'");
+					result = w;
+				}
 			}
 		}
 		assertNotNull("Did not find any wires connecting '" + from + "' to '" + to + " of type '" + type + "' with name '" + name + "'", result);

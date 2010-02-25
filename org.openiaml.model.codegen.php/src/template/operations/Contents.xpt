@@ -130,7 +130,15 @@
 	«IF model::ContainsEventTriggers.isInstance(eContainer)»
 		/* A property has changed - call any event triggers in its parent called "edit" */
 		/* We assume the value to pass is stored in 'value' */
-		«EXPAND chainedEvent(php, true, currentFrame) FOREACH ((model::ContainsEventTriggers) eContainer).eventTriggers.select(e | e.name == "edit")»
+		«EXPAND chainedEvent(php, true, currentFrame, "edit") FOREACH ((model::ContainsEventTriggers) eContainer).eventTriggers.select(e | e.name == "edit")»
+	«ELSEIF model::VisibleThing.isInstance(eContainer)»
+		«LET ((model::VisibleThing) eContainer) AS vt»
+		«IF vt.onEdit != null»
+			/* A property has changed - call any event triggers in its parent called "edit" */
+			/* We assume the value to pass is stored in 'value' */
+			«EXPAND chainedEvent(php, true, currentFrame, "edit") FOR vt.onEdit»
+		«ENDIF»
+		«ENDLET»
 	«ELSE»
 		/* A property has changed, but is not contained within something with Event Triggers */
 	«ENDIF»
@@ -138,27 +146,22 @@
 
 /**
  * Chained events?
+ * @param type the type of event, i.e. "edit", "access"
  */
-
-«DEFINE chainedEvent(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::ContainsEventTriggers»
-	«EXPAND chainedEvent(php, inStoreDb, currentFrame) FOREACH eventTriggers»
-«ENDDEFINE»
-
-«DEFINE chainedEvent(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::EventTrigger»
+«DEFINE chainedEvent(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame, String type) FOR model::EventTrigger»
 	// expanding chained event trigger «name»
-	«IF name=="edit"»
+	«IF type=="edit"»
 		«EXPAND OperationCall::callOperation(php, inStoreDb, currentFrame) FOREACH outEdges»
-	«ELSEIF name=="access"»
+	«ELSEIF type=="access"»
 		// we don't expand 'access' events as part of a chain
 	«ELSE»
-		«EXPAND exception FOR throwException("Unknown event trigger: " + this)»
+		«EXPAND exception FOR throwException("Unknown event trigger: " + type + " (" + this + ")")»
 	«ENDIF»
 «ENDDEFINE»
 
 /**
  * Specific operation templates.
  */
- 
 «DEFINE getDataValue(Boolean php, model::visual::Frame container) FOR model::DataFlowEdge-»
 	«EXPAND DataFlow::dataSource(php, container) FOR from-»
 «ENDDEFINE»

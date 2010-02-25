@@ -886,7 +886,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	 * @return the wire found or null
 	 * @throws JaxenException
 	 */
-	protected Set<WireEdge> getWiresFrom(EObject container, WireEdgeDestination fromElement) throws JaxenException {
+	protected Set<WireEdge> getWiresFrom(EObject container, WireEdgesSource fromElement) throws JaxenException {
 		Set<WireEdge> results = new HashSet<WireEdge>();
 		List<?> wires = query(container, "//iaml:wires");
 		for (Object o : wires) {
@@ -903,6 +903,18 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 		}
 
 		return results;
+	}
+
+	protected void assertNoWiresFrom(EObject container, WireEdgesSource fromElement, Class<? extends WireEdge> cls) throws JaxenException {
+		List<?> wires = query(container, "//iaml:wires");
+		for (Object o : wires) {
+			if (o instanceof WireEdge && cls.isInstance(o)) {
+				WireEdge w = (WireEdge) o;
+				if (w.getFrom().equals(fromElement)) {
+					fail("Unexpectedly found wire '" + o + "' of type '" + cls + "' from element '" + fromElement + "'");
+				}
+			}
+		}
 	}
 	
 	/**
@@ -927,7 +939,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 	 * @return
 	 * @throws JaxenException
 	 */
-	protected Set<WireEdge> getWiresFrom(EObject container, WireEdgeDestination fromElement, Class<? extends WireEdge> type) throws JaxenException {
+	protected Set<WireEdge> getWiresFrom(EObject container, WireEdgesSource fromElement, Class<? extends WireEdge> type) throws JaxenException {
 		return typeSelect(getWiresFrom(container, fromElement), type);
 	}
 	

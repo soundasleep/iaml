@@ -38,18 +38,25 @@ public class UserPermissionsRecursive extends AbstractDefaultRoleUserLoginTestCa
 	 * We cannot access the protected page as a User
 	 * because it does not have the appropriate Role.
 	 * 
+	 * <p>In fact, we can't even log in, because the given user permissions
+	 * (user) don't even have the required permission to login.
+	 * As a result, an exception is not thrown; rather, we are taken
+	 * back to the login page.
+	 * 
 	 * @throws Exception
 	 */
 	public void testUser() throws Exception {
 		IFile sitemap = doStandardLoginAs("user@openiaml.org", "user");
 		assertNoProblem();
 		
-		try {
-			gotoSitemapWithProblem(sitemap, "target");
-			fail("Did not expect to get into 'target' page");
-		} catch (FailingHttpStatusCodeException e) {
-			// expected
-		}
+		// this should NOT throw an exception
+		gotoSitemapWithProblem(sitemap, "target");
+		
+		// rather, we should be back on the login page
+		assertTitleEquals("login");
+		
+		// with a problem
+		assertProblem();
 	}
 	
 	/**
@@ -66,9 +73,11 @@ public class UserPermissionsRecursive extends AbstractDefaultRoleUserLoginTestCa
 			fail("Did not expect to get into 'target' page");
 		} catch (FailingHttpStatusCodeException e) {
 			// expected
+			checkExceptionContains(e, "User of type 'current instance' did not have permission 'a different permission'");
 		}
+
 	}
-	
+
 	/**
 	 * Log in as 'default role' allows us to access 'unrelated'
 	 * 

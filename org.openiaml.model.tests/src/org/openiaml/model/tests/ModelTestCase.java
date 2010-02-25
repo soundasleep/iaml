@@ -564,6 +564,20 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	}
 	
 	/**
+	 * Assert that the given exception contains the given message.
+	 * 
+	 * @param e
+	 * @param string
+	 */
+	public void checkExceptionContains(Exception e,
+			String string) {
+		if (!e.getMessage().contains(string)) {
+			// throw another exception, so we can still get the trace
+			throw new RuntimeException("Exception did not contain '" + string + "'", e);
+		}
+	}
+
+	/**
 	 * Assert an instance of a class is in a given list.
 	 * 
 	 * @param class1 class to check

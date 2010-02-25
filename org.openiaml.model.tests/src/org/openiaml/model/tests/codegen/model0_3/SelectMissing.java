@@ -47,6 +47,7 @@ public class SelectMissing extends DatabaseCodegenTestCase {
 		} catch (FailingHttpStatusCodeException e) {
 			// we should instantly have an exception occur
 			// expected
+			checkExceptionContains(e, "Could not find any value instance for attribute");
 			
 			assertTextPresent("Could not find any value instance for attribute");
 			assertProblem();

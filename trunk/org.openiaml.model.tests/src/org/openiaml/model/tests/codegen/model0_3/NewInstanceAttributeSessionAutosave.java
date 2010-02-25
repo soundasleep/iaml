@@ -110,7 +110,6 @@ public class NewInstanceAttributeSessionAutosave extends DatabaseCodegenTestCase
 		
 	}
 
-
 	/**
 	 * Test creating a new instance that is saved when
 	 * we click the button.

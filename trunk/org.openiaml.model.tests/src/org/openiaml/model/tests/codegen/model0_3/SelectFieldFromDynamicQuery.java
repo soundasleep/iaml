@@ -188,6 +188,8 @@ public class SelectFieldFromDynamicQuery extends DatabaseCodegenTestCase {
 		} catch (FailingHttpStatusCodeException e) {
 			// we should instantly have an exception occur
 			// expected
+			checkExceptionContains(e, "Could not find any value instance for attribute");
+			
 			assertTitleEquals("An exception occured");
 			assertTextPresent("Could not find any value instance for attribute");
 			assertProblem();

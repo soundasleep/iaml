@@ -75,6 +75,7 @@ public class DomainInheritanceEditing extends CodegenTestCase {
 			assertNoProblem();
 		} catch (FailingHttpStatusCodeException e) {
 			// expected
+			checkExceptionContains(e, "No results found for query 'name = ?'");
 		}
 	}
 
@@ -91,6 +92,7 @@ public class DomainInheritanceEditing extends CodegenTestCase {
 			fail("Should not have been able to access 'student' page");
 		} catch (FailingHttpStatusCodeException e) {
 			// expected
+			checkExceptionContains(e, "No results found for query 'enrolled = ?'");
 		}
 	}
 	
@@ -150,6 +152,7 @@ public class DomainInheritanceEditing extends CodegenTestCase {
 			fail("Expected to not be able to go to 'person' page");
 		} catch (FailingHttpStatusCodeException e) {
 			// expected
+			checkExceptionContains(e, "No results found for query 'name = ?'");
 		}
 	}
 	
@@ -184,6 +187,7 @@ public class DomainInheritanceEditing extends CodegenTestCase {
 			fail("Expected to not be able to go to 'student' page");
 		} catch (FailingHttpStatusCodeException e) {
 			// expected
+			checkExceptionContains(e, "No results found for query 'enrolled = ?'");
 		}
 		
 		// but we can go back and continue editing
@@ -355,6 +359,7 @@ public class DomainInheritanceEditing extends CodegenTestCase {
 			fail("Going to a page with an invalid session parameter set should fail");
 		} catch (FailingHttpStatusCodeException e) {
 			// expected
+			checkExceptionContains(e, "Could not get new session domain object 'model_12392019209_4d0'");
 		}
 		
 		assertMatch("([iI]nvalid.+session|[sS]ession.+invalid)");

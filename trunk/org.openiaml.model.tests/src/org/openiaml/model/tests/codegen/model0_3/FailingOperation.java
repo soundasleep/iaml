@@ -32,6 +32,7 @@ public class FailingOperation extends CodegenTestCase {
 		} catch (FailingHttpStatusCodeException e) {
 			// we should instantly have an exception occur
 			// expected
+			checkExceptionContains(e, "an expected failure message");
 			
 			assertTextPresent("an expected failure message");
 			assertProblem();

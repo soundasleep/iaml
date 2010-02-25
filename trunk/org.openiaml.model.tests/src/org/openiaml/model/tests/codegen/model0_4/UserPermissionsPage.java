@@ -47,6 +47,7 @@ public class UserPermissionsPage extends AbstractDefaultRoleUserLoginTestCase {
 			fail("Should not be able to access 'target' page");
 		} catch (FailingHttpStatusCodeException e) {
 			// expected
+			checkExceptionContains(e, "User of type 'current instance' did not have permission 'a different permission'");
 		}
 	}
 	
@@ -77,6 +78,7 @@ public class UserPermissionsPage extends AbstractDefaultRoleUserLoginTestCase {
 			fail("Should not be able to access 'target' page");
 		} catch (FailingHttpStatusCodeException e) {
 			// expected
+			checkExceptionContains(e, "User of type 'current instance' did not have permission 'a different permission'");
 		}
 	}
 	

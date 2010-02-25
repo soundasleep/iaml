@@ -29,9 +29,9 @@
       <properties id="model.125437f916e.76" name="fieldValue" outFlows="model.125437f916e.14a"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.1254759bbc9.54" name="make negative">
-      <eventTriggers id="model.1254759b7c1.154" name="click" outEdges="wires.1254759bc84.16">
+      <onClick id="model.1254759b7c1.154" outEdges="wires.1254759bc84.16">
         <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1254759bc84.16" from="model.1254759b7c1.154" to="model.1254759b7c1.155" name="run"/>
-      </eventTriggers>
+      </onClick>
       <operations xsi:type="iaml:CompositeOperation" inEdges="wires.1254759bc84.16" id="model.1254759b7c1.155" name="make negative">
         <operations xsi:type="iaml:PrimitiveOperation" id="model.1254759b7c1.20e" name="setPropertyToValue" inFlows="model.1254759b7c1.216" inExecutions="model.1254759b7c1.210" outFlows="model.1254759b7c1.217" outExecutions="model.1254759b7c1.212"/>
         <nodes xsi:type="iaml.operations:StartNode" id="operations.1254759bd7e.69" outExecutions="model.1254759b7c1.210"/>

@@ -23,7 +23,7 @@
         <executionEdges generatedBy="model.11d6717b064.bf" isGenerated="true" id="model.11d6717b064.c7" from="operations.11d6717b064.2d" to="model.11d6717b064.c4"/>
         <executionEdges generatedBy="model.11d6717b064.bf" isGenerated="true" id="model.11d6717b064.c8" from="model.11d6717b064.c4" to="operations.11d6717b064.2e"/>
       </operations>
-      <eventTriggers generatedBy="visual.11d293c2f82.4c" isGenerated="true" id="model.11d6717b064.c0" name="change"/>
+      <eventTriggers generatedBy="visual.11d293c2f82.4c" isGenerated="true" id="model.11d6717b064.c0" name="click"/>
       <eventTriggers generatedBy="visual.11d293c2f82.4c" isGenerated="true" id="model.11d6717b064.c1" name="edit"/>
       <properties generatedBy="visual.11d293c2f82.4c" isGenerated="true" id="model.11d6717b064.c2" name="fieldValue" inFlows="model.11d6717b064.c6 model.11d6717b064.cc"/>
     </children>
@@ -48,7 +48,7 @@
         <executionEdges generatedBy="model.11d6717b064.ae" isGenerated="true" id="model.11d6717b064.b6" from="operations.11d6717b064.29" to="model.11d6717b064.b3"/>
         <executionEdges generatedBy="model.11d6717b064.ae" isGenerated="true" id="model.11d6717b064.b7" from="model.11d6717b064.b3" to="operations.11d6717b064.2a"/>
       </operations>
-      <eventTriggers generatedBy="visual.11d293c2f82.5a" isGenerated="true" id="model.11d6717b064.af" name="change"/>
+      <eventTriggers generatedBy="visual.11d293c2f82.5a" isGenerated="true" id="model.11d6717b064.af" name="click"/>
       <eventTriggers generatedBy="visual.11d293c2f82.5a" isGenerated="true" id="model.11d6717b064.b0" name="edit"/>
       <properties generatedBy="visual.11d293c2f82.5a" isGenerated="true" id="model.11d6717b064.b1" name="fieldValue" inFlows="model.11d6717b064.b5 model.11d6717b064.bb"/>
     </children>
@@ -97,7 +97,7 @@
         <executionEdges generatedBy="model.11d6717b064.9d" isGenerated="true" id="model.11d6717b064.a5" from="operations.11d6717b064.25" to="model.11d6717b064.a2"/>
         <executionEdges generatedBy="model.11d6717b064.9d" isGenerated="true" id="model.11d6717b064.a6" from="model.11d6717b064.a2" to="operations.11d6717b064.26"/>
       </operations>
-      <eventTriggers generatedBy="visual.11d293c2f82.83" isGenerated="true" id="model.11d6717b064.9e" name="change" outEdges="wires.11d6717b064.38"/>
+      <eventTriggers generatedBy="visual.11d293c2f82.83" isGenerated="true" id="model.11d6717b064.9e" name="click" outEdges="wires.11d6717b064.38"/>
       <eventTriggers generatedBy="visual.11d293c2f82.83" isGenerated="true" id="model.11d6717b064.9f" name="edit" outEdges="wires.11d6717b064.39"/>
       <properties generatedBy="visual.11d293c2f82.83" isGenerated="true" id="model.11d6717b064.a0" name="fieldValue" outEdges="wires.11d6717b064.3a wires.11d6717b064.3b" inFlows="model.11d6717b064.a4 model.11d6717b064.aa"/>
     </children>
@@ -122,7 +122,7 @@
         <executionEdges generatedBy="model.11d6717b064.8c" isGenerated="true" id="model.11d6717b064.94" from="operations.11d6717b064.21" to="model.11d6717b064.91"/>
         <executionEdges generatedBy="model.11d6717b064.8c" isGenerated="true" id="model.11d6717b064.95" from="model.11d6717b064.91" to="operations.11d6717b064.22"/>
       </operations>
-      <eventTriggers generatedBy="visual.11d293c2f82.84" isGenerated="true" id="model.11d6717b064.8d" name="change" outEdges="wires.11d6717b064.2f"/>
+      <eventTriggers generatedBy="visual.11d293c2f82.84" isGenerated="true" id="model.11d6717b064.8d" name="click" outEdges="wires.11d6717b064.2f"/>
       <eventTriggers generatedBy="visual.11d293c2f82.84" isGenerated="true" id="model.11d6717b064.8e" name="edit" outEdges="wires.11d6717b064.30"/>
       <properties generatedBy="visual.11d293c2f82.84" isGenerated="true" id="model.11d6717b064.8f" name="fieldValue" outEdges="wires.11d6717b064.31 wires.11d6717b064.32" inFlows="model.11d6717b064.93 model.11d6717b064.99"/>
     </children>
@@ -161,7 +161,7 @@
         <executionEdges generatedBy="model.11d6717b064.7b" isGenerated="true" id="model.11d6717b064.83" from="operations.11d6717b064.1d" to="model.11d6717b064.80"/>
         <executionEdges generatedBy="model.11d6717b064.7b" isGenerated="true" id="model.11d6717b064.84" from="model.11d6717b064.80" to="operations.11d6717b064.1e"/>
       </operations>
-      <eventTriggers generatedBy="visual.11d293c2f82.ba" isGenerated="true" id="model.11d6717b064.7c" name="change" outEdges="wires.11d6717b064.34"/>
+      <eventTriggers generatedBy="visual.11d293c2f82.ba" isGenerated="true" id="model.11d6717b064.7c" name="click" outEdges="wires.11d6717b064.34"/>
       <eventTriggers generatedBy="visual.11d293c2f82.ba" isGenerated="true" id="model.11d6717b064.7d" name="edit" outEdges="wires.11d6717b064.36"/>
       <properties generatedBy="visual.11d293c2f82.ba" isGenerated="true" id="model.11d6717b064.7e" name="fieldValue" outEdges="wires.11d6717b064.35 wires.11d6717b064.37" inFlows="model.11d6717b064.82 model.11d6717b064.88"/>
     </children>
@@ -186,7 +186,7 @@
         <executionEdges generatedBy="model.11d6717b064.6a" isGenerated="true" id="model.11d6717b064.72" from="operations.11d6717b064.19" to="model.11d6717b064.6f"/>
         <executionEdges generatedBy="model.11d6717b064.6a" isGenerated="true" id="model.11d6717b064.73" from="model.11d6717b064.6f" to="operations.11d6717b064.1a"/>
       </operations>
-      <eventTriggers generatedBy="visual.11d293c2f82.bb" isGenerated="true" id="model.11d6717b064.6b" name="change"/>
+      <eventTriggers generatedBy="visual.11d293c2f82.bb" isGenerated="true" id="model.11d6717b064.6b" name="click"/>
       <eventTriggers generatedBy="visual.11d293c2f82.bb" isGenerated="true" id="model.11d6717b064.6c" name="edit"/>
       <properties generatedBy="visual.11d293c2f82.bb" isGenerated="true" id="model.11d6717b064.6d" name="fieldValue" inFlows="model.11d6717b064.71 model.11d6717b064.77"/>
     </children>
@@ -211,7 +211,7 @@
         <executionEdges generatedBy="model.11d6717b064.59" isGenerated="true" id="model.11d6717b064.61" from="operations.11d6717b064.15" to="model.11d6717b064.5e"/>
         <executionEdges generatedBy="model.11d6717b064.59" isGenerated="true" id="model.11d6717b064.62" from="model.11d6717b064.5e" to="operations.11d6717b064.16"/>
       </operations>
-      <eventTriggers generatedBy="visual.11d293c2f82.bc" isGenerated="true" id="model.11d6717b064.5a" name="change" outEdges="wires.11d6717b064.26 wires.11d6717b064.2b"/>
+      <eventTriggers generatedBy="visual.11d293c2f82.bc" isGenerated="true" id="model.11d6717b064.5a" name="click" outEdges="wires.11d6717b064.26 wires.11d6717b064.2b"/>
       <eventTriggers generatedBy="visual.11d293c2f82.bc" isGenerated="true" id="model.11d6717b064.5b" name="edit" outEdges="wires.11d6717b064.27 wires.11d6717b064.2d"/>
       <wires xsi:type="iaml.wires:SyncWire" id="wires.11d293c2f82.4f" from="visual.11d293c2f82.bc" to="visual.11d293c2f82.d8" name="sync on page" generatedElements="wires.11d6717b064.22 wires.11d6717b064.23 wires.11d6717b064.24 wires.11d6717b064.25 wires.11d6717b064.26 wires.11d6717b064.27 wires.11d6717b064.28 wires.11d6717b064.29">
         <wires xsi:type="iaml.wires:RunInstanceWire" generatedBy="wires.11d293c2f82.4f" isGenerated="true" id="wires.11d6717b064.22" from="model.11d6717b064.49" to="model.11d6717b064.58" name="run" inEdges="wires.11d6717b064.23"/>
@@ -246,7 +246,7 @@
         <executionEdges generatedBy="model.11d6717b064.48" isGenerated="true" id="model.11d6717b064.50" from="operations.11d6717b064.11" to="model.11d6717b064.4d"/>
         <executionEdges generatedBy="model.11d6717b064.48" isGenerated="true" id="model.11d6717b064.51" from="model.11d6717b064.4d" to="operations.11d6717b064.12"/>
       </operations>
-      <eventTriggers generatedBy="visual.11d293c2f82.d8" isGenerated="true" id="model.11d6717b064.49" name="change" outEdges="wires.11d6717b064.1d wires.11d6717b064.22"/>
+      <eventTriggers generatedBy="visual.11d293c2f82.d8" isGenerated="true" id="model.11d6717b064.49" name="click" outEdges="wires.11d6717b064.1d wires.11d6717b064.22"/>
       <eventTriggers generatedBy="visual.11d293c2f82.d8" isGenerated="true" id="model.11d6717b064.4a" name="edit" outEdges="wires.11d6717b064.1e wires.11d6717b064.24"/>
       <properties generatedBy="visual.11d293c2f82.d8" isGenerated="true" id="model.11d6717b064.4b" name="fieldValue" outEdges="wires.11d6717b064.1f wires.11d6717b064.20 wires.11d6717b064.23 wires.11d6717b064.25" inFlows="model.11d6717b064.4f model.11d6717b064.55"/>
     </children>
@@ -285,7 +285,7 @@
         <executionEdges generatedBy="model.11d6717b064.37" isGenerated="true" id="model.11d6717b064.3f" from="operations.11d6717b064.d" to="model.11d6717b064.3c"/>
         <executionEdges generatedBy="model.11d6717b064.37" isGenerated="true" id="model.11d6717b064.40" from="model.11d6717b064.3c" to="operations.11d6717b064.e"/>
       </operations>
-      <eventTriggers generatedBy="visual.11d293c2f82.14f" isGenerated="true" id="model.11d6717b064.38" name="change" outEdges="wires.11d6717b064.15 wires.11d6717b064.19"/>
+      <eventTriggers generatedBy="visual.11d293c2f82.14f" isGenerated="true" id="model.11d6717b064.38" name="click" outEdges="wires.11d6717b064.15 wires.11d6717b064.19"/>
       <eventTriggers generatedBy="visual.11d293c2f82.14f" isGenerated="true" id="model.11d6717b064.39" name="edit" outEdges="wires.11d6717b064.16 wires.11d6717b064.1b"/>
       <wires xsi:type="iaml.wires:SyncWire" id="wires.11d293c2f82.58" from="visual.11d293c2f82.14f" to="visual.11d293c2f82.150" name="sync on page" generatedElements="wires.11d6717b064.11 wires.11d6717b064.12 wires.11d6717b064.13 wires.11d6717b064.14 wires.11d6717b064.15 wires.11d6717b064.16 wires.11d6717b064.17 wires.11d6717b064.18">
         <wires xsi:type="iaml.wires:RunInstanceWire" generatedBy="wires.11d293c2f82.58" isGenerated="true" id="wires.11d6717b064.11" from="model.11d6717b064.27" to="model.11d6717b064.36" name="run" inEdges="wires.11d6717b064.12"/>
@@ -320,7 +320,7 @@
         <executionEdges generatedBy="model.11d6717b064.26" isGenerated="true" id="model.11d6717b064.2e" from="operations.11d6717b064.9" to="model.11d6717b064.2b"/>
         <executionEdges generatedBy="model.11d6717b064.26" isGenerated="true" id="model.11d6717b064.2f" from="model.11d6717b064.2b" to="operations.11d6717b064.a"/>
       </operations>
-      <eventTriggers generatedBy="visual.11d293c2f82.150" isGenerated="true" id="model.11d6717b064.27" name="change" outEdges="wires.11d6717b064.c wires.11d6717b064.11"/>
+      <eventTriggers generatedBy="visual.11d293c2f82.150" isGenerated="true" id="model.11d6717b064.27" name="click" outEdges="wires.11d6717b064.c wires.11d6717b064.11"/>
       <eventTriggers generatedBy="visual.11d293c2f82.150" isGenerated="true" id="model.11d6717b064.28" name="edit" outEdges="wires.11d6717b064.d wires.11d6717b064.13"/>
       <properties generatedBy="visual.11d293c2f82.150" isGenerated="true" id="model.11d6717b064.29" name="fieldValue" outEdges="wires.11d6717b064.e wires.11d6717b064.f wires.11d6717b064.12 wires.11d6717b064.14" inFlows="model.11d6717b064.2d model.11d6717b064.33"/>
     </children>
@@ -347,7 +347,7 @@
         <executionEdges generatedBy="model.11d6717b064.15" isGenerated="true" id="model.11d6717b064.1d" from="operations.11d6717b064.5" to="model.11d6717b064.1a"/>
         <executionEdges generatedBy="model.11d6717b064.15" isGenerated="true" id="model.11d6717b064.1e" from="model.11d6717b064.1a" to="operations.11d6717b064.6"/>
       </operations>
-      <eventTriggers generatedBy="visual.11d293c2f82.1cc" isGenerated="true" id="model.11d6717b064.16" name="change" outEdges="wires.11d6717b064.8"/>
+      <eventTriggers generatedBy="visual.11d293c2f82.1cc" isGenerated="true" id="model.11d6717b064.16" name="click" outEdges="wires.11d6717b064.8"/>
       <eventTriggers generatedBy="visual.11d293c2f82.1cc" isGenerated="true" id="model.11d6717b064.17" name="edit" outEdges="wires.11d6717b064.a"/>
       <properties generatedBy="visual.11d293c2f82.1cc" isGenerated="true" id="model.11d6717b064.18" name="fieldValue" outEdges="wires.11d6717b064.9 wires.11d6717b064.b" inFlows="model.11d6717b064.1c model.11d6717b064.22"/>
     </children>
@@ -372,7 +372,7 @@
         <executionEdges generatedBy="model.11d6717b064.4" isGenerated="true" id="model.11d6717b064.c" from="operations.11d6717b064.1" to="model.11d6717b064.9"/>
         <executionEdges generatedBy="model.11d6717b064.4" isGenerated="true" id="model.11d6717b064.d" from="model.11d6717b064.9" to="operations.11d6717b064.2"/>
       </operations>
-      <eventTriggers generatedBy="visual.11d293c2f82.1cd" isGenerated="true" id="model.11d6717b064.5" name="change"/>
+      <eventTriggers generatedBy="visual.11d293c2f82.1cd" isGenerated="true" id="model.11d6717b064.5" name="click"/>
       <eventTriggers generatedBy="visual.11d293c2f82.1cd" isGenerated="true" id="model.11d6717b064.6" name="edit"/>
       <properties generatedBy="visual.11d293c2f82.1cd" isGenerated="true" id="model.11d6717b064.7" name="fieldValue" inFlows="model.11d6717b064.b model.11d6717b064.11"/>
     </children>

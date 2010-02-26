@@ -212,7 +212,7 @@ public class DomainInheritance extends DatabaseCodegenTestCase {
 		// delete the initialised database created in setUp
 		IFile database = getProject().getFile( getDatabaseName() ); 
 		database.delete(true, new NullProgressMonitor());
-		assertTrue(refreshProject().isOK());
+		assertTrue(getProject().refreshProject().isOK());
 		assertFalse(database.exists());
 		
 		// visit the site; this will create the database

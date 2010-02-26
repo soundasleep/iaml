@@ -1120,7 +1120,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 		assertTrue("File '" + target + "' should now exist", target.exists());
 		
 		CheckModelInstance check = new CheckModelInstance();
-		IStatus result = check.checkModel(root, getProject(), new NullProgressMonitor());
+		IStatus result = check.checkModel(root, getProject().getProject(), new NullProgressMonitor());
 		
 		ModelInferenceTestCase.assertStatusIsOK(result);
 		
@@ -1198,7 +1198,6 @@ public abstract class ModelInferenceTestCase extends ModelTestCase {
 		
 		super.tearDown();
 	}
-
 
 	/**
 	 * Create a new InternetApplication in the given file.

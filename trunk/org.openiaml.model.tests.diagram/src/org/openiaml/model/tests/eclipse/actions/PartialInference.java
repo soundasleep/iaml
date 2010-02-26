@@ -115,30 +115,27 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		}
 		
 		// delete the target diagram
-		IFile model = project.getFile(getModel());
-		IFile modelNew = project.getFile("new-model.iaml");
-		IFile diagramNew = project.getFile("new-model.iaml_diagram");
+		IFile model = getProject().getFile(getModel());
+		IFile modelNew = getProject().getFile("new-model.iaml");
+		IFile diagramNew = getProject().getFile("new-model.iaml_diagram");
 		if (modelNew.exists()) {
-			HaltProgressMonitor m = new HaltProgressMonitor();
-			modelNew.delete(true, m);
-			halt(m);
+			getProject().haltDelete(modelNew);
+			
 		}
 		if (diagramNew.exists()) {
-			HaltProgressMonitor m = new HaltProgressMonitor();
-			diagramNew.delete(true, m);
-			halt(m);
+			getProject().haltDelete(diagramNew);
 		}
 		assertFalse(modelNew.exists());
 		assertFalse(diagramNew.exists());
 		
 		// infer
 		inferSourceModelFile(model);
-		refreshProject();
+		getProject().refreshProject();
 		
 		// try renaming the model file
 		// (otherwise, it seems only the old diagram is stored in memory, and the test case below fails)
 		model.move(modelNew.getFullPath(), true, monitor);
-		refreshProject();
+		getProject().refreshProject();
 		
 		assertTrue("New model file " + modelNew + " exists", modelNew.exists());
 	

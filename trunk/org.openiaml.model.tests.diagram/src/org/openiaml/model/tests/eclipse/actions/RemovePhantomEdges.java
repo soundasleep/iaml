@@ -30,7 +30,7 @@ public class RemovePhantomEdges extends EclipseTestCaseHelper {
 		addLogListener();
 
 		// copy our local file into the project
-		targetModel = project.getFile("RemovePhantomEdges.iaml");
+		targetModel = getProject().getFile("RemovePhantomEdges.iaml");
 		copyFileIntoWorkspace("src/org/openiaml/model/tests/eclipse/actions/RemovePhantomEdges.iaml",
 				targetModel);
 		

@@ -65,7 +65,7 @@ public abstract class DatabaseCodegenTestCase extends CodegenTestCase {
 		
 		// close the connection and make sure the database exists
 		conn.close();
-		refreshProject();
+		getProject().refreshProject();
 		assertTrue("Database should now exist", db.exists());
 		
 		databaseInitialised = true;

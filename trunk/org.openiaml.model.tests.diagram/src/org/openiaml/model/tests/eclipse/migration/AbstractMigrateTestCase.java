@@ -49,11 +49,11 @@ public abstract class AbstractMigrateTestCase extends EclipseTestCaseHelper {
 	 */
 	public List<IamlModelMigrator> migrateModelOnly() throws Exception {
 		// copy our local file into the project
-		sourceModel = project.getFile(getModel());
+		sourceModel = getProject().getFile(getModel());
 		copyFileIntoWorkspace(ROOT + getSourceModel(),
 				sourceModel);
-		targetModel = project.getFile(getModelMigrated());
-		targetDiagram = project.getFile(getDiagram());
+		targetModel = getProject().getFile(getModelMigrated());
+		targetDiagram = getProject().getFile(getDiagram());
 
 		// migrate the model
 		assertFalse("the target model should not exist yet", targetModel.exists());

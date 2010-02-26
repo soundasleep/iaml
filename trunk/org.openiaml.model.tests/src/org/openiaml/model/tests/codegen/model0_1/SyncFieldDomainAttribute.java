@@ -47,7 +47,7 @@ public class SyncFieldDomainAttribute extends CodegenTestCase {
 		assertNoProblem();
 
 		// refresh the workspace
-		assertTrue(refreshProject().isOK());
+		assertTrue(getProject().refreshProject().isOK());
 		
 		// the database should now exist 
 		IFile db = getProject().getFile(dbName);

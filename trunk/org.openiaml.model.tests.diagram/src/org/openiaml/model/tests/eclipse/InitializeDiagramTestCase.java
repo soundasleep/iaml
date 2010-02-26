@@ -22,11 +22,11 @@ public class InitializeDiagramTestCase extends EclipseTestCaseHelper {
 	 */
 	public void testLoadModel() throws Exception {
 		// copy our local file into the project
-		IFile targetModel = project.getFile("shortcuts-root.iaml");
+		IFile targetModel = getProject().getFile("shortcuts-root.iaml");
 		copyFileIntoWorkspace("src/org/openiaml/model/tests/eclipse/shortcuts-root.iaml",
 				targetModel);
 		
-		IFile targetDiagram = project.getFile("shortcuts-root.iaml_diagram");
+		IFile targetDiagram = getProject().getFile("shortcuts-root.iaml_diagram");
 		assertFalse("the target diagram should not exist yet", targetDiagram.exists());
 
 		// initialise the model

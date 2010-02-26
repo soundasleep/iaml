@@ -38,7 +38,7 @@ public class TestIncludeLibraries extends SyncFieldApplicationElementProperty {
 	 * 
 	 */
 	public void testRuntimeWasCopied() {
-		IFile file = project.getFile("output/runtime/web/index.html");
+		IFile file = getProject().getFile("output/runtime/web/index.html");
 		assertTrue("The runtime file '" + file + "' should have been copied over.", file.exists());
 	}
 	

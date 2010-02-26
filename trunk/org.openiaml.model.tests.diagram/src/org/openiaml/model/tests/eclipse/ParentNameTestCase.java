@@ -274,7 +274,7 @@ public class ParentNameTestCase extends EclipseTestCaseHelper {
 	 * @returns an EMF URI of the filename
 	 */
 	protected URI createProjectURI(String filename) {
-		return URI.createPlatformResourceURI(project.getFile(filename).getFullPath().toString(), true);
+		return URI.createPlatformResourceURI(getProject().getFile(filename).getFullPath().toString(), true);
 	}
 
 	@Override

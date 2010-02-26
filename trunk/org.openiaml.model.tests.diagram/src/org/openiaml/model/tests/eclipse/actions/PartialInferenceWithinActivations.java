@@ -178,18 +178,18 @@ public class PartialInferenceWithinActivations extends AbstractActionTestCase<Gr
 		}
 		
 		// delete the target diagram
-		IFile model = project.getFile(getModel());
-		IFile modelNew = project.getFile("new-model.iaml");
-		IFile diagramNew = project.getFile("new-model.iaml_diagram");
+		IFile model = getProject().getFile(getModel());
+		IFile modelNew = getProject().getFile("new-model.iaml");
+		IFile diagramNew = getProject().getFile("new-model.iaml_diagram");
 		
 		// infer entire model
 		inferSourceModelFile(model, getFullAction());
-		refreshProject();
+		getProject().refreshProject();
 		
 		// try renaming the model file
 		// (otherwise, it seems only the old diagram is stored in memory, and the test case below fails)
 		model.move(modelNew.getFullPath(), true, monitor);
-		refreshProject();
+		getProject().refreshProject();
 		
 		assertTrue("New model file " + modelNew + " exists", modelNew.exists());
 	
@@ -224,11 +224,11 @@ public class PartialInferenceWithinActivations extends AbstractActionTestCase<Gr
 		copyLocalFile();
 		
 		// infer
-		inferSourceModelFile(project.getFile(getModel()), getFullAction());
+		inferSourceModelFile(getProject().getFile(getModel()), getFullAction());
 				
 		// initialise and load the diagram file
-		IFile targetModel = project.getFile(getModel());
-		IFile targetDiagram = project.getFile(getDiagram());
+		IFile targetModel = getProject().getFile(getModel());
+		IFile targetDiagram = getProject().getFile(getDiagram());
 		initialiseAndLoadDiagram(targetModel, targetDiagram);
 	
 		// there should now be three children

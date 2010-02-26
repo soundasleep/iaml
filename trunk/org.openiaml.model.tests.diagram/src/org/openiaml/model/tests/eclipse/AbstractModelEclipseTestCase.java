@@ -108,8 +108,8 @@ public abstract class AbstractModelEclipseTestCase<T> extends EclipseTestCaseHel
 	protected void initializeModelFile(boolean inferModel) throws Exception {
 		// copy our local file into the project
 		copyLocalFile();
-		IFile targetModel = project.getFile(getModel());
-		IFile targetDiagram = project.getFile(getDiagram());
+		IFile targetModel = getProject().getFile(getModel());
+		IFile targetDiagram = getProject().getFile(getDiagram());
 		
 		// should we infer the model?
 		if (inferModel) {
@@ -128,7 +128,7 @@ public abstract class AbstractModelEclipseTestCase<T> extends EclipseTestCaseHel
 	 * 
 	 */
 	protected void copyLocalFile() throws Exception {
-		IFile targetModel = project.getFile(getModel());
+		IFile targetModel = getProject().getFile(getModel());
 		copyFileIntoWorkspace(getRoot() + getModel(), targetModel);
 	}
 

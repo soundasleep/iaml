@@ -20,20 +20,20 @@ public class ExportImagesTestCase extends EclipseTestCaseHelper {
 		addLogListener();
 
 		// copy our local file into the project
-		IFile targetModel = project.getFile("generation-sync-multiple.iaml");
+		IFile targetModel = getProject().getFile("generation-sync-multiple.iaml");
 		copyFileIntoWorkspace("src/org/openiaml/model/tests/eclipse/generation-sync-multiple.iaml",
 				targetModel);
-		IFile targetDiagram = project.getFile("generation-sync-multiple.iaml_diagram");
+		IFile targetDiagram = getProject().getFile("generation-sync-multiple.iaml_diagram");
 		copyFileIntoWorkspace("src/org/openiaml/model/tests/eclipse/generation-sync-multiple.iaml_diagram",
 				targetDiagram);
 		
 		// target files
-		IFile target1 = project.getFile("generation-sync-multiple.png");
-		IFile target2 = project.getFile("generation-sync-multiple-2.png");
-		IFile target3 = project.getFile("generation-sync-multiple-3.png");
-		IFile target4 = project.getFile("generation-sync-multiple-4.png");
-		IFile target5 = project.getFile("generation-sync-multiple-5.png");
-		IFile target6 = project.getFile("generation-sync-multiple-6.png");
+		IFile target1 = getProject().getFile("generation-sync-multiple.png");
+		IFile target2 = getProject().getFile("generation-sync-multiple-2.png");
+		IFile target3 = getProject().getFile("generation-sync-multiple-3.png");
+		IFile target4 = getProject().getFile("generation-sync-multiple-4.png");
+		IFile target5 = getProject().getFile("generation-sync-multiple-5.png");
+		IFile target6 = getProject().getFile("generation-sync-multiple-6.png");
 
 		assertNotExists(target1);
 		assertNotExists(target2);

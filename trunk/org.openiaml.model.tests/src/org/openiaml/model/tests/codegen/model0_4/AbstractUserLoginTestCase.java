@@ -154,7 +154,7 @@ public abstract class AbstractUserLoginTestCase extends DatabaseCodegenTestCase 
 		assertTrue("Database name '" + getDatabaseName() + "' should start with 'output/'", getDatabaseName().startsWith("output/"));
 		String databaseName = getDatabaseName().substring(getDatabaseName().lastIndexOf("/") + 1);
 		
-		refreshProject();
+		getProject().refreshProject();
 		IResource[] resources = getProject().getFolder("output").members(false);
 		for (IResource res : resources) {
 			if (res.getName().endsWith(".db")) {

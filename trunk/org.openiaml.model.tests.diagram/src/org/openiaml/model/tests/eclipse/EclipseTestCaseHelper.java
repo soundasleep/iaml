@@ -175,7 +175,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 					EObject obj = s.resolveSemanticElement();
 					if (objectClass.isInstance(obj)) {
 						NamedElement e = (NamedElement) obj;
-						if (e.getName().equals(name)) {
+						if (e.getName() != null && e.getName().equals(name)) {
 							assertNotNull(s);
 							return s;
 						}

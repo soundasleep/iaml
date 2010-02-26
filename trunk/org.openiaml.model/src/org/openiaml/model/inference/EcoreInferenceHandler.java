@@ -198,8 +198,11 @@ public class EcoreInferenceHandler extends EcoreCreateElementsHelper implements 
 			deleteElement(containedElement.get(i), containedContainer.get(i), containedFeature.get(i));
 		}
 		
-		// TODO what if containerFeature is not many?
-		if (containerFeature.isMany()) {
+		if (!containerFeature.isMany()) {
+			// the feature is a single value; unset it (likely set it to null)
+			container.eUnset(containerFeature);
+			
+		} else {
 			// may assume feature is list: http://www.eclipse.org/newsportal/article.php?id=36608&group=eclipse.tools.emf
 			EList<Object> containerList = (EList<Object>) container.eGet(containerFeature, false);
 			
@@ -210,64 +213,62 @@ public class EcoreInferenceHandler extends EcoreCreateElementsHelper implements 
 			}
 			
 			containerList.remove(object);
+		
+		}
 
-			List<EList<Object>> toDeleteLists = new ArrayList<EList<Object>>();
-			Map<EReference,List<EObject>> toDeleteReferences = new HashMap<EReference,List<EObject>>();
+		List<EList<Object>> toDeleteLists = new ArrayList<EList<Object>>();
+		Map<EReference,List<EObject>> toDeleteReferences = new HashMap<EReference,List<EObject>>();
+		
+		// delete all reverse references (untested code)
+		for (EContentsEList.FeatureIterator featureIterator = 
+		     (EContentsEList.FeatureIterator)object.eCrossReferences().iterator();
+		     featureIterator.hasNext(); ) {
+			EObject target = (EObject) featureIterator.next();
 			
-			// delete all reverse references (untested code)
-			for (EContentsEList.FeatureIterator featureIterator = 
-			     (EContentsEList.FeatureIterator)object.eCrossReferences().iterator();
-			     featureIterator.hasNext(); ) {
-				EObject target = (EObject) featureIterator.next();
-				
-				// EReference reference = (EReference) featureIterator.feature();
-				// reference.getEOpposite() seems to return the wrong EReference for target
-				// so we iterate over all references in Target to find, and delete, all references
-				// to object
-				
-				for (EReference ref : target.eClass().getEAllReferences()) {
-					if (ref.isMany()) {
-						// it's a list (assumed)
-						EList<Object> resolved = (EList<Object>) target.eGet(ref);
-						if (resolved.contains(object)) {
-							// delete the reference
-							// resolved.delete(object);
-							toDeleteLists.add(resolved);
+			// EReference reference = (EReference) featureIterator.feature();
+			// reference.getEOpposite() seems to return the wrong EReference for target
+			// so we iterate over all references in Target to find, and delete, all references
+			// to object
+			
+			for (EReference ref : target.eClass().getEAllReferences()) {
+				if (ref.isMany()) {
+					// it's a list (assumed)
+					EList<Object> resolved = (EList<Object>) target.eGet(ref);
+					if (resolved.contains(object)) {
+						// delete the reference
+						// resolved.delete(object);
+						toDeleteLists.add(resolved);
+					}
+				} else {
+					Object resolved = target.eGet(ref);
+					if (object.equals(resolved)) {
+						// unset the reference
+						// target.eUnset(ref);
+						if (toDeleteReferences.get(ref) == null) {
+							toDeleteReferences.put(ref, new ArrayList<EObject>());
 						}
-					} else {
-						Object resolved = target.eGet(ref);
-						if (object.equals(resolved)) {
-							// unset the reference
-							// target.eUnset(ref);
-							if (toDeleteReferences.get(ref) == null) {
-								toDeleteReferences.put(ref, new ArrayList<EObject>());
-							}
-							List<EObject> r = toDeleteReferences.get(ref);
-							r.add(target);
-							toDeleteReferences.put(ref, r);
-						}
+						List<EObject> r = toDeleteReferences.get(ref);
+						r.add(target);
+						toDeleteReferences.put(ref, r);
 					}
 				}
-				
 			}
 			
-			// now do all the deletes
-			// (modifying them above was causing synchronisation issues)
-			for (EList<Object> list : toDeleteLists) {
-				// delete object from list
-				list.remove(object);
-			}
-			for (EReference ref : toDeleteReferences.keySet()) {
-				// unset reference
-				for (EObject obj : toDeleteReferences.get(ref)) {
-					obj.eUnset(ref);
-				}
-			}
-			
-		} else {
-			throw new IllegalArgumentException("Cannot do anything with the structural feature: " + containerFeature);
-		}		
+		}
 		
+		// now do all the deletes
+		// (modifying them above was causing synchronisation issues)
+		for (EList<Object> list : toDeleteLists) {
+			// delete object from list
+			list.remove(object);
+		}
+		for (EReference ref : toDeleteReferences.keySet()) {
+			// unset reference
+			for (EObject obj : toDeleteReferences.get(ref)) {
+				obj.eUnset(ref);
+			}
+		}
+
 	}
 
 

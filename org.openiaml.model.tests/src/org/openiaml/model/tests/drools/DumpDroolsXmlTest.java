@@ -207,7 +207,7 @@ public class DumpDroolsXmlTest extends InferenceTestCase {
 		for (String f : results.keySet()) {
 
 			String name = f.substring(f.lastIndexOf("/"));
-			IFile out = project.getFile(name + ".xml");
+			IFile out = getProject().getFile(name + ".xml");
 
 			// load the created XML and replace the <rhs> with
 			// more XML (specific to our use in IAML)
@@ -218,7 +218,7 @@ public class DumpDroolsXmlTest extends InferenceTestCase {
 			saveDocument(document, out.getLocation().toFile());
 		}
 		
-		refreshProject();
+		getProject().refreshProject();
 	}
 
 	/**

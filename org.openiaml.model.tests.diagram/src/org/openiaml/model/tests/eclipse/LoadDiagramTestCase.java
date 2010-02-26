@@ -20,10 +20,10 @@ public class LoadDiagramTestCase extends EclipseTestCaseHelper {
 		addLogListener();
 
 		// copy our local file into the project
-		IFile targetModel = project.getFile("generation-sync-multiple.iaml");
+		IFile targetModel = getProject().getFile("generation-sync-multiple.iaml");
 		copyFileIntoWorkspace("src/org/openiaml/model/tests/eclipse/generation-sync-multiple.iaml",
 				targetModel);
-		IFile targetDiagram = project.getFile("generation-sync-multiple.iaml_diagram");
+		IFile targetDiagram = getProject().getFile("generation-sync-multiple.iaml_diagram");
 		copyFileIntoWorkspace("src/org/openiaml/model/tests/eclipse/generation-sync-multiple.iaml_diagram",
 				targetDiagram);
 		

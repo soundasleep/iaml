@@ -1011,7 +1011,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 		diagram.delete(true, monitor);
 
 		for (int i = 0; i < 300; i++) {
-			refreshProject();
+			getProject().refreshProject();
 			if (!diagram.exists())
 				return;		// done
 			Thread.sleep(300);	// wait

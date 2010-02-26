@@ -26,16 +26,10 @@ import net.sourceforge.jwebunit.junit.WebTestCase;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.IWorkspaceRoot;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.codegen.ICodeGeneratorInMemory;
 import org.openiaml.model.codegen.php.CustomOAWLog;
@@ -58,10 +52,11 @@ import org.w3c.dom.Node;
  */
 public abstract class ModelTestCase extends WebTestCase implements IXpath {
 
+	private EclipseProject project = new EclipseProject(getProjectName());
+	
 	public static final String PLUGIN_ID = "org.openiaml.model.tests";
 	public static final String ROOT = "src/org/openiaml/model/tests/";
 	
-	protected IProject project;
 	protected IProgressMonitor monitor;
 	
 	public static final String BASE_URL = "http://localhost:8080/junit-workspace/";
@@ -93,11 +88,11 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 		
 		monitor = new NullProgressMonitor();
 		
-		project = createProject();
+		project.createProject();
 		isSetup = true;
 
 		// set test context
-		getTestContext().setBaseUrl(BASE_URL + project.getName() + "/");
+		getTestContext().setBaseUrl(BASE_URL + project.getProjectName() + "/");
 	}
 
 	/**
@@ -105,51 +100,12 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	 */
 	@Override
 	protected void tearDown() throws Exception {
-		// delete this project automatically
-		// project.delete(false, monitor); -- usually we would want to see the output?
-		
-		// remove reference to project
-		if (project != null) {
-			project.close(monitor);
-			project = null;
-		}
+		project.close();
 		
 		monitor = null;
 		transformStatus = null;
 		
 		super.tearDown();
-	}
-	
-	/**
-	 * Create a new project in our testing environment,
-	 * allowing our code generator to output there.
-	 * 
-	 * We can also copy files directly from our testing environment
-	 * to this new project by using
-	 * {@link #copyFileIntoWorkspace(String, IFile)}.
-	 * 
-	 * @see #getProjectName()
-	 * @see #copyFileIntoWorkspace(String, IFile)
-	 * @return the created project
-	 * @throws CoreException
-	 */
-	protected IProject createProject() throws CoreException {
-		// create a new project automatically
-		IWorkspace workspace = ResourcesPlugin.getWorkspace();
-		IWorkspaceRoot root = workspace.getRoot();
-		root.refreshLocal(5, monitor);
-		IProject project = root.getProject(getProjectName());
-		// delete any existing ones
-		if (project.exists()) {
-			project.delete(true, monitor);
-		}
-		
-		// create it
-		project.create(monitor);
-		assertTrue(project.exists());
-		project.open(monitor);
-		
-		return project;
 	}
 
 	/**
@@ -232,7 +188,7 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 		for (String file : codegenCache.get(inputFile)) {
 			// copy this file to the local project
 			File source = new File(root + file);
-			IFile target = getProject().getFile(file);
+			IFile target = getProject().getProject().getFile(file);
 			
 			// check that we can copy OK
 			assertTrue("The source file '" + source + "' should exist from our codegen cache.", source.exists());
@@ -257,12 +213,12 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 		List<String> result = new ArrayList<String>();
 		for (File f : lastTracingCache) {
 			// get the relative path
-			String root = project.getLocation().toOSString();
+			String root = project.getProject().getLocation().toOSString();
 			result.add( f.getAbsolutePath().replace(root, "") );
 		}
 		
 		codegenCache.put(inputFile, result);
-		projectCache.put(inputFile, project.getLocation().toOSString());
+		projectCache.put(inputFile, project.getProject().getLocation().toOSString());
 	}
 
 	/**
@@ -274,7 +230,7 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	 * @throws Throwable if it did not succeed
 	 */
 	protected void doTransformActual(EObject model) throws Exception {
-		transformStatus = doTransform(model, getProject(), monitor);
+		transformStatus = doTransform(model, monitor);
 		if (!transformStatus.isOK()) {
 			String firstMessage = null;
 			for (IStatus s : transformStatus.getChildren()) {
@@ -298,62 +254,10 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	 * Transform a model file into some code generated output. This currently contains the logic on
 	 * which code generation solution to use.
 	 */
-	protected IStatus doTransform(EObject model, IProject project, IProgressMonitor monitor) throws IOException, URISyntaxException, CoreException {
+	protected IStatus doTransform(EObject model, IProgressMonitor monitor) throws IOException, URISyntaxException, CoreException {
 		// which transform to use?
 		// return doTransformJET(filename, outputDir, monitor);
-		return doTransformOAWWorkflow(model, project, monitor);
-	}
-	
-	public class HaltProgressMonitor extends NullProgressMonitor {
-		@Override
-		public void setCanceled(boolean cancelled) {
-			isDone = true;	// bail early
-			super.setCanceled(cancelled);
-		}
-
-		private boolean isDone = false;
-		public synchronized boolean isDone() {
-			return isDone;
-		}
-
-		@Override
-		public void done() {
-			isDone = true;
-			super.done();
-		}
-	}
-	
-	/**
-	 * Force a complete refresh of the entire project, and
-	 * halt execution until it's completed.
-	 * 
-	 * @return
-	 * @throws CoreException
-	 */
-	protected IStatus refreshProject() throws CoreException {
-		
-		HaltProgressMonitor m = new HaltProgressMonitor();
-		project.refreshLocal(IResource.DEPTH_INFINITE, m);
-		try {
-			while (!m.isDone()) {
-				Thread.sleep(300);
-			}
-		} catch (InterruptedException e) {
-			return new Status(Status.ERROR, PLUGIN_ID, "refresh thread was interrupted", e);
-		}
-
-		return Status.OK_STATUS;
-		
-	}
-	
-	protected void halt(HaltProgressMonitor m) {
-		try {
-			while (!m.isDone()) {
-				Thread.sleep(300);
-			}
-		} catch (InterruptedException e) {
-			e.printStackTrace(System.err);
-		}
+		return doTransformOAWWorkflow(model, monitor);
 	}
 
 	/**
@@ -381,7 +285,6 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	 * TODO refactor into CodegenTestCase
 	 */
 	protected IStatus doTransformOAWWorkflow(EObject model, 
-			IProject project,
 			IProgressMonitor monitor) throws CoreException {
 		
 		// enable tracing cache
@@ -395,7 +298,7 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 			Map<String,String> runtimeProperties = getRuntimeProperties();
 			
 			ICodeGeneratorInMemory runner = new OawCodeGeneratorWithRuntime();
-			IStatus status = runner.generateCode(model, project, monitor, runtimeProperties);
+			IStatus status = runner.generateCode(model, project.getProject(), monitor, runtimeProperties);
 			
 			if (!status.isOK()) {
 				// bail early
@@ -409,7 +312,7 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 			// refresh the resources)
 			
 			// we need to *force* refresh the workspace
-			return refreshProject();
+			return project.refreshProject();
 		} finally {
 			// disable tracing cache
 			IACleanerBeautifier.setTracingEnabled(false);
@@ -435,7 +338,7 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	/**
 	 * @return the project
 	 */
-	public IProject getProject() {
+	public EclipseProject getProject() {
 		return project;
 	}
 	

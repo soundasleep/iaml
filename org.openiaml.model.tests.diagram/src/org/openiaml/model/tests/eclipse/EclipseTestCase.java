@@ -42,7 +42,7 @@ public abstract class EclipseTestCase extends ModelTestCase {
 	@Override
 	public void setUp() throws Exception {
 		// create the project
-		project = createProject();
+		getProject().createProject();
 	}
 	
 	/**
@@ -50,7 +50,7 @@ public abstract class EclipseTestCase extends ModelTestCase {
 	 */
 	@Override
 	public void tearDown() throws Exception {
-		project.close(monitor);
+		getProject().close();
 	}
 	
 	/**

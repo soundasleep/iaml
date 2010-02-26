@@ -737,7 +737,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		waitForAjax();
 		
 		// refresh the workspace
-		assertTrue(refreshProject().isOK());
+		assertTrue(getProject().refreshProject().isOK());
 		
 		IFile db = getProject().getFile(dbName);
 		assertTrue("db '" + dbName + "' should exist at: " + db, db.exists());
@@ -763,9 +763,9 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		waitForAjax();
 		
 		// refresh the workspace
-		assertTrue(refreshProject().isOK());
+		assertTrue(getProject().refreshProject().isOK());
 
-		IFile target = project.getFile(filename);
+		IFile target = getProject().getFile(filename);
 		assertTrue("File '" + target + "' exists", target.exists());
 		
 		Properties p = new Properties();

@@ -33,7 +33,7 @@ public class GenerateCodeActionTest extends AbstractActionTestCase<IFile> {
 		addLogListener();
 
 		// copy our local file into the project
-		targetModel = project.getFile("GenerateCodeActionTest.iaml");
+		targetModel = getProject().getFile("GenerateCodeActionTest.iaml");
 		copyFileIntoWorkspace("src/org/openiaml/model/tests/eclipse/actions/GenerateCodeActionTest.iaml",
 				targetModel);
 		
@@ -49,7 +49,7 @@ public class GenerateCodeActionTest extends AbstractActionTestCase<IFile> {
 		// copy model
 		copyFiles();
 		
-		IFolder outputFolder = project.getFolder("output");
+		IFolder outputFolder = getProject().getFolder("output");
 		assertNotExists(outputFolder);
 		
 		// do the action
@@ -73,7 +73,7 @@ public class GenerateCodeActionTest extends AbstractActionTestCase<IFile> {
 		// copy model
 		copyFiles();
 		
-		IFolder outputFolder = project.getFolder("output");
+		IFolder outputFolder = getProject().getFolder("output");
 		assertNotExists(outputFolder);
 		
 		// do the action		

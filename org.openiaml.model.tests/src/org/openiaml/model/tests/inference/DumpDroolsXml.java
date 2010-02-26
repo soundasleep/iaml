@@ -78,12 +78,12 @@ public class DumpDroolsXml extends InferenceTestCase {
 		for (String f : results.keySet()) {
 
 			String name = f.substring(f.lastIndexOf("/"));
-			IFile out = project.getFile(name + ".xml");
+			IFile out = getProject().getFile(name + ".xml");
 
-			IFile outParsed = project.getFile(name + "-parsed.txt");
+			IFile outParsed = getProject().getFile(name + "-parsed.txt");
 			String parsed = "";
 
-			IFile outLatex = project.getFile(name + "-parsed.tex");
+			IFile outLatex = getProject().getFile(name + "-parsed.tex");
 			String latex = "";
 
 			List<InferredTerm> fileProgram = new ArrayList<InferredTerm>();
@@ -200,7 +200,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 			System.out.println(o.getLoopAsString());
 		}
 
-		refreshProject();
+		getProject().refreshProject();
 	}
 
 	/**
@@ -2727,7 +2727,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		}
 
 		// write to file
-		IFile outFile = project.getFile("strat.pl");
+		IFile outFile = getProject().getFile("strat.pl");
 		InputStream stream = new ByteArrayInputStream(pl.toString().getBytes("UTF-8"));
 		System.out.println("Writing " + outFile + "...");
 		outFile.create(stream, true, monitor);
@@ -2965,7 +2965,7 @@ public class DumpDroolsXml extends InferenceTestCase {
 		out.append("\n</ol></html>\n");
 
 		// output to name-logic.html
-		IFile outFile = project.getFile(name + ".logic.html");
+		IFile outFile = getProject().getFile(name + ".logic.html");
 		InputStream source = new ByteArrayInputStream(out.toString().getBytes("UTF-8"));
 		outFile.create(source, true, monitor);
 

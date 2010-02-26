@@ -194,7 +194,7 @@ public class SyncWiresProperties extends CodegenTestCase {
 		InputStream stream = target.getContents();
 		p.load(stream);
 		stream.close();
-		refreshProject();
+		getProject().refreshProject();
 		
 		// check it has changed
 		assertEquals("The property should have changed in the file.", p.getProperty("animal", "[did not exist]"), newAnimal);

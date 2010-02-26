@@ -9,7 +9,10 @@ import java.util.Random;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.openiaml.model.tests.CachedModelLoader;
 import org.openiaml.model.tests.CodegenTestCase;
+import org.openiaml.model.tests.EclipseProject;
+import org.openiaml.model.tests.ModelSourceResolver;
 
 /**
  * Allows for the execution of client-side Javascript from the
@@ -23,7 +26,7 @@ public abstract class JavascriptCodegenTestCase extends CodegenTestCase {
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		root = loadAndCodegen(JavascriptCodegenTestCase.class, getAbsolutePathRoot() + ROOT + "codegen/runtime/client/JavascriptCodegenTestCase.iaml");
+		root = loadAndCodegen(JavascriptCodegenTestCase.class, ModelSourceResolver.getInstance().getAbsolutePathRoot() + ROOT + "codegen/runtime/client/JavascriptCodegenTestCase.iaml");
 		hasStarted = false;
 	}
 	

@@ -13,9 +13,11 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
+import org.openiaml.model.ModelLoader.ModelLoadException;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
+import org.openiaml.model.tests.CachedModelLoader.IModelReloader;
 
 /**
  * <p>Extends {@link ModelTestCase} to also check for EMF properties on the
@@ -64,7 +66,7 @@ public abstract class ModelTestCaseWithProperties extends CodegenTestCase {
 	 * @return
 	 */
 	@Override
-	protected CreateMissingElementsWithDrools getInferenceEngine(ICreateElements handler, boolean trackInsertions, final IModelReloader reloader) {
+	public CreateMissingElementsWithDrools getInferenceEngine(ICreateElements handler, boolean trackInsertions, final IModelReloader reloader) {
 		if (!doPropertiesInvestigation())
 			return super.getInferenceEngine(handler, trackInsertions, reloader);
 		
@@ -103,6 +105,8 @@ public abstract class ModelTestCaseWithProperties extends CodegenTestCase {
 					throw new InferenceException(e1);
 				} catch (IOException e1) {
 					throw new InferenceException(e1);
+				} catch (ModelLoadException e1) {
+					throw new InferenceException(e1);
 				}
 				
 				int MAX_TIMES = 10;
@@ -115,7 +119,11 @@ public abstract class ModelTestCaseWithProperties extends CodegenTestCase {
 					long diff = System.currentTimeMillis() - startTime;
 					timedList.add(diff);
 					// reload
-					model = reloader.reload();
+					try {
+						model = reloader.reload();
+					} catch (ModelLoadException e) {
+						throw new InferenceException(e);
+					}
 				}
 				long diff = timedList.get(0);
 				

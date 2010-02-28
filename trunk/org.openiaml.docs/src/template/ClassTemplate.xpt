@@ -245,7 +245,7 @@
 				<div class="none">(none)</div>
 			«ELSE»
 				<ul>
-				«EXPAND extension(false) FOREACH getInheritedExtensions(this).reject(e|extensions.name.contains(e.name)).sortBy(a|a.name)»
+				«EXPAND extension(false) FOREACH getInheritedExtensions(this).reject(e|extensions.name.contains(e.name)).sortBy(a|a.name + "," + a.containingClass.name + "," + a.reference)»
 				</ul>
 			«ENDIF»
 		</div>

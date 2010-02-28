@@ -56,7 +56,7 @@ public class ShortcutsElementTestCase extends AbstractShortcutsTestCase {
 		
 		// it should have a domain attribute connected to an event trigger
 		assertEditorHasChildren(3, editor_form);
-		ShapeNodeEditPart event = assertHasEventTrigger(editor_form, "event");
+		ShapeNodeEditPart event = assertHasEventTrigger(editor_form, false, "onClick");
 		ShapeNodeEditPart op2 = assertHasOperation(editor_form, "op");
 		ShapeNodeEditPart field2 = assertHasInputTextField(editor_form, "target2");
 		

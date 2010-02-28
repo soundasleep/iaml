@@ -10,6 +10,7 @@
 	«EXPAND ClassTemplate::class(this) FOREACH classes»
 	
 	«EXPAND DefaultCss::getCss»
+	«EXPAND DefaultJs::getJs»
 «ENDDEFINE»
 
 «DEFINE header(String title, String page_id) FOR emf::EObject»
@@ -19,6 +20,7 @@
 <head>
 	<title>«title»</title>
 	<link rel="stylesheet" type="text/css" href="default.css">
+	<script language="Javascript" type="application/javascript" src="default.js"></script>
 </head>
 <body id="«page_id»">
 «ENDDEFINE»

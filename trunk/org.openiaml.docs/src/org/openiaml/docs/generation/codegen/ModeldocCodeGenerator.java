@@ -4,6 +4,8 @@
 package org.openiaml.docs.generation.codegen;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -161,6 +163,10 @@ public class ModeldocCodeGenerator {
 	
 	public static String getName(EClass s) {
 		return s.getName();
+	}
+	
+	public static String timestamp() {
+		return DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG).format(new Date());
 	}
 		
 }

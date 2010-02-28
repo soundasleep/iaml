@@ -19,6 +19,10 @@
 	of all model element types in <a href="http://openiaml.org">the 
 	Internet Application Modelling Language</a> (IAML).
 </p>
+
+<p>
+	Generated at «timestamp()».
+</p>
 </div>
 
 <ul class="class_list">

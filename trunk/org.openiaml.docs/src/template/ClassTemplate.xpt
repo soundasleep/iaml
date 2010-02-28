@@ -58,7 +58,23 @@
 		</div>
 		</p>
 		«ENDIF»
-		
+
+		«IF !allSubtypes().isEmpty»
+		<p>
+		<div id="allsubtypes">
+			All subtypes: <a class="toggle_on" id="toggle_all_subtypes" onClick="toggle_visibility('display_all_subtypes', 'display_all_subtypes', 'toggle_all_subtypes');">Toggle</a>
+			<div id="display_all_subtypes" style="display: none;" class="subtype_list">
+			«EXPAND supertypes FOREACH allSubtypes().sortBy(t|t.name) SEPARATOR ", "»
+			</div>
+			<script language="Javascript" type="application/javascript">
+				/* <![CDATA[ */
+				set_visibility('display_all_subtypes', readCookie('display_all_subtypes') == 'true', 'toggle_all_subtypes');
+				/* ]]> */
+			</script>
+		</div>
+		</p>
+		«ENDIF»
+
 		<div id="intro_end"></div>
 		</div>
 		

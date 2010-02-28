@@ -47,6 +47,12 @@ String getString(modeldoc::JavadocTextElement this) :
 getPackage(String this) :
 	this == "" ? "." : replaceAll("\\.", "/");
 
+/**
+ * Get all direct and inherited subtypes of the given class.
+ */
+Set[modeldoc::EMFClass] allSubtypes(modeldoc::EMFClass this) :
+	subtypes.toSet().union( subtypes.collect(e | allSubtypes(e)).flatten() );
+
 /** 
  * a hack way to create backtrace-able errors
  * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540

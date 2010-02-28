@@ -9,6 +9,7 @@ import java.util.List;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.jaxen.JaxenException;
 import org.openiaml.model.diagram.custom.actions.UpdateWithDroolsAction;
+import org.openiaml.model.tests.CachedModelInferer;
 import org.openiaml.model.tests.inference.EclipseInheritanceInterface;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
@@ -61,7 +62,7 @@ public abstract class InferenceActionTestCase extends InferenceTestCase {
 		root = loadDirectly(getTestClass());
 		
 		for (UpdateWithDroolsAction action : getActionList()) {
-			action.refreshMappings(root, createHandler(root.eResource()), new NullProgressMonitor());
+			action.refreshMappings(root, CachedModelInferer.getInstance().createHandler(root.eResource()), new NullProgressMonitor());
 		}
 
 		getTestInterface().checkInferredKnowledge(root);

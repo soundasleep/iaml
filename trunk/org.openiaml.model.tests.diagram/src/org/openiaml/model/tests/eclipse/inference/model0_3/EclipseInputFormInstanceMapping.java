@@ -11,6 +11,7 @@ import org.jaxen.JaxenException;
 import org.openiaml.model.diagram.custom.actions.RefreshFormMappingsWithDrools;
 import org.openiaml.model.diagram.custom.actions.RefreshObjectInstanceMappingsWithDrools;
 import org.openiaml.model.diagram.custom.actions.UpdateWithDroolsAction;
+import org.openiaml.model.tests.CachedModelInferer;
 import org.openiaml.model.tests.eclipse.inference.InferenceActionTestCase;
 import org.openiaml.model.tests.inference.EclipseInheritanceInterface;
 import org.openiaml.model.tests.inference.model0_3.InputFormInstanceMapping;
@@ -62,7 +63,7 @@ public class EclipseInputFormInstanceMapping extends InferenceActionTestCase {
 		RefreshFormMappingsWithDrools action =
 			new RefreshFormMappingsWithDrools();
 
-		action.refreshMappings(root, createHandler(root.eResource()), new NullProgressMonitor());
+		action.refreshMappings(root, CachedModelInferer.getInstance().createHandler(root.eResource()), new NullProgressMonitor());
 
 		InputFormInstanceMapping parent = new InputFormInstanceMapping();
 		parent.checkNotInferredKnowledge(root);

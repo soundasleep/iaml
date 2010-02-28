@@ -164,6 +164,28 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 			String name,
 			boolean checkShortcut,
 			boolean shortcutRequired) {
+		return assertHasRenderedNamedObject(root, objectClass, name, checkShortcut, shortcutRequired, null);
+	}
+	
+	/**
+	 * An abstract method which checks an editors children to see
+	 * if the editor contains a given model element, with the given
+	 * shortcut parameters, contained with a given containment feature name.
+	 *
+	 * @param root the editor to search
+	 * @param objectClass the EObject class to look for
+	 * @param name the name of the NamedElement, or <code>null</code> to ignore
+	 * @param checkShortcut
+	 * @param shortcutRequired
+	 * @param containingFeatureName the name of the containing feature, or <code>null</code> if this shouldn't be checked
+	 * @return
+	 */
+	protected ShapeNodeEditPart assertHasRenderedNamedObject(DiagramDocumentEditor root,
+			Class<? extends NamedElement> objectClass,
+			String name,
+			boolean checkShortcut,
+			boolean shortcutRequired,
+			String containingFeatureName) {
 		// debug
 		String found = "";
 
@@ -174,20 +196,31 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 				if (!checkShortcut || isShortcut(s) == shortcutRequired) {
 					EObject obj = s.resolveSemanticElement();
 					if (objectClass.isInstance(obj)) {
+						// check containing feature name
 						NamedElement e = (NamedElement) obj;
-						if (e.getName() != null && e.getName().equals(name)) {
+						if (name == null || (e.getName() != null && e.getName().equals(name))) {
+							if (containingFeatureName == null || containingFeatureName.equals(obj.eContainingFeature().getName())) {
 							assertNotNull(s);
 							return s;
+							}
 						}
-						found += e.getName() + ",";
+						found += e.getName() + "[" + obj.eContainingFeature().getName() + "],";
 					}
 				}
 			}
 		}
 
 		// failed
-		fail("No " + objectClass.getSimpleName() + " named '" + name + "' found in editor " + root + ". Found: " + found);
+		fail("No " + objectClass.getSimpleName() + " named '" + name + "' found in editor " + root + " with containing feature name '" + containingFeatureName + "'. Found: " + found);
 		return null;
+	}
+
+	/**
+	 * @see #assertHasEventTrigger(DiagramDocumentEditor, String, boolean, boolean)
+	 */
+	public ShapeNodeEditPart assertHasEventTrigger(
+			DiagramDocumentEditor editor, String name, boolean shortcutRequired, String containingFeatureName) {
+		return assertHasRenderedNamedObject(editor, EventTrigger.class, name, true, shortcutRequired, containingFeatureName);
 	}
 
 	/**
@@ -775,6 +808,14 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	public ShapeNodeEditPart assertHasEventTrigger(
 			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
 		return assertHasRenderedNamedObject(editor, EventTrigger.class, name, true, shortcutRequired);
+	}
+
+	/**
+	 * @see #assertHasEventTrigger(DiagramDocumentEditor, String, boolean, boolean)
+	 */
+	public ShapeNodeEditPart assertHasEventTrigger(
+			DiagramDocumentEditor editor, boolean shortcutRequired, String featureName) {
+		return assertHasRenderedNamedObject(editor, EventTrigger.class, null, true, shortcutRequired, featureName);
 	}
 
 	/**

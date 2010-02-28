@@ -216,8 +216,8 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		
 		assertEditorHasChildren(6, editor_text);
 		
-		ShapeNodeEditPart access = assertHasEventTrigger(editor_text, "access", false);
-		ShapeNodeEditPart edit = assertHasEventTrigger(editor_text, "edit", false);
+		ShapeNodeEditPart access = assertHasEventTrigger(editor_text, false, "onAccess");
+		ShapeNodeEditPart edit = assertHasEventTrigger(editor_text, false, "onEdit");
 		ShapeNodeEditPart update = assertHasOperation(editor_text, "update", false);
 		ShapeNodeEditPart init = assertHasOperation(editor_text, "init", false);
 		ShapeNodeEditPart fieldValue = assertHasFieldValue(editor_text, false);
@@ -244,15 +244,15 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		
 		assertEditorHasChildren(10, editor_text);
 		
-		ShapeNodeEditPart access = assertHasEventTrigger(editor_text, "access", false);
-		ShapeNodeEditPart edit = assertHasEventTrigger(editor_text, "edit", false);
+		ShapeNodeEditPart access = assertHasEventTrigger(editor_text, false, "onAccess");
+		ShapeNodeEditPart edit = assertHasEventTrigger(editor_text, false, "onEdit");
 		ShapeNodeEditPart update = assertHasOperation(editor_text, "update", false);
 		ShapeNodeEditPart init = assertHasOperation(editor_text, "init", false);
 		ShapeNodeEditPart fieldValue = assertHasFieldValue(editor_text, false);
 		ShapeNodeEditPart condition = assertHasCompositeCondition(editor_text, "fieldValue is set", false);
 		ShapeNodeEditPart condition2 = assertHasCompositeCondition(editor_text, "fieldValue is set", true);
 
-		ShapeNodeEditPart edit2 = assertHasEventTrigger(editor_text, "edit", true);
+		ShapeNodeEditPart edit2 = assertHasEventTrigger(editor_text, true, "onEdit");
 		ShapeNodeEditPart update2 = assertHasOperation(editor_text, "update", true);
 		ShapeNodeEditPart fieldValue2 = assertHasFieldValue(editor_text, true);
 

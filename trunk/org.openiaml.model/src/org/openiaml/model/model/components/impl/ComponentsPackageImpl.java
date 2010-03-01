@@ -306,13 +306,15 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		loginHandlerEClass.getESuperTypes().add(theModelPackage.getApplicationElementContainer());
 		loginHandlerEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
 		loginHandlerEClass.getESuperTypes().add(theWiresPackage.getParameterEdgeDestination());
-		accessControlHandlerEClass.getESuperTypes().add(theModelPackage.getApplicationElementContainer());
+		loginHandlerEClass.getESuperTypes().add(theModelPackage.getApplicationElement());
+		loginHandlerEClass.getESuperTypes().add(theModelPackage.getContainsWires());
 		accessControlHandlerEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
 		accessControlHandlerEClass.getESuperTypes().add(theWiresPackage.getParameterEdgeDestination());
 		accessControlHandlerEClass.getESuperTypes().add(theUsersPackage.getRequiresEdgesSource());
+		accessControlHandlerEClass.getESuperTypes().add(theModelPackage.getApplicationElement());
+		accessControlHandlerEClass.getESuperTypes().add(theModelPackage.getContainsWires());
 		gateEClass.getESuperTypes().add(theModelPackage.getNamedElement());
 		gateEClass.getESuperTypes().add(theModelPackage.getWireEdgesSource());
 		gateEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());

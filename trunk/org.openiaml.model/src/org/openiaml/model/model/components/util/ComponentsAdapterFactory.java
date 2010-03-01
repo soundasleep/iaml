@@ -11,7 +11,6 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.ApplicationElement;
-import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsEventTriggers;
@@ -110,6 +109,14 @@ public class ComponentsAdapterFactory extends AdapterFactoryImpl {
 				return createExitGateAdapter();
 			}
 			@Override
+			public Adapter caseGeneratesElements(GeneratesElements object) {
+				return createGeneratesElementsAdapter();
+			}
+			@Override
+			public Adapter caseParameterEdgeDestination(ParameterEdgeDestination object) {
+				return createParameterEdgeDestinationAdapter();
+			}
+			@Override
 			public Adapter caseContainsOperations(ContainsOperations object) {
 				return createContainsOperationsAdapter();
 			}
@@ -142,10 +149,6 @@ public class ComponentsAdapterFactory extends AdapterFactoryImpl {
 				return createWireEdgeDestinationAdapter();
 			}
 			@Override
-			public Adapter caseGeneratesElements(GeneratesElements object) {
-				return createGeneratesElementsAdapter();
-			}
-			@Override
 			public Adapter caseContainsConditions(ContainsConditions object) {
 				return createContainsConditionsAdapter();
 			}
@@ -156,14 +159,6 @@ public class ComponentsAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseApplicationElement(ApplicationElement object) {
 				return createApplicationElementAdapter();
-			}
-			@Override
-			public Adapter caseApplicationElementContainer(ApplicationElementContainer object) {
-				return createApplicationElementContainerAdapter();
-			}
-			@Override
-			public Adapter caseParameterEdgeDestination(ParameterEdgeDestination object) {
-				return createParameterEdgeDestinationAdapter();
 			}
 			@Override
 			public Adapter caseRequiresEdgesSource(RequiresEdgesSource object) {
@@ -428,20 +423,6 @@ public class ComponentsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createApplicationElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ApplicationElementContainer <em>Application Element Container</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.openiaml.model.model.ApplicationElementContainer
-	 * @generated
-	 */
-	public Adapter createApplicationElementContainerAdapter() {
 		return null;
 	}
 

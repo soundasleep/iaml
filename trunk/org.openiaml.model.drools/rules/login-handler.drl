@@ -73,7 +73,7 @@ rule "Instruct 'logout' page to follow to the actual logout destination if set"
 		destination : Frame ( this != logout )
 		navigate : NavigateWire ( from == login_handler, to == destination, name == "logout")
 
-		access : EventTrigger ( eContainer == logout, name == "access" )
+		access : EventTrigger ( eContainer == logout, logout.onAccess == access )
 		not (NavigateWire ( from == access, to == destination ))
 	
 	then
@@ -141,7 +141,7 @@ rule "Connect 'access' event to 'check' operations"
 	when
 		scope : Session( )
 		page : Frame( eContainer == scope )
-		access : EventTrigger( name == "access", eContainer == page )
+		access : EventTrigger( page.onAccess == access, eContainer == page )
 		check : CompositeOperation( name == "check key" || name == "check instance", eContainer == scope )
 		not (RunInstanceWire( from == access, to == check ))
 		
@@ -157,7 +157,7 @@ rule "Connect 'login key' parameter to 'check key' operation run wire"
 	when
 		scope : Session( )
 		page : Frame( eContainer == scope )
-		access : EventTrigger( name == "access", eContainer == page )
+		access : EventTrigger( page.onAccess == access, eContainer == page )
 		check : CompositeOperation( name == "check key", eContainer == scope )
 		
 		login_handler : LoginHandler( eContainer == scope )
@@ -950,7 +950,7 @@ rule "Connect 'access' operation for logout page to 'do logout' operation"
 		wire : NavigateWire ( from == login_handler, to == logout, name == "logout" )
 		
 		logout_operation : Operation ( eContainer == scope, name == "do logout" )
-		access : EventTrigger ( eContainer == logout, name == "access" )
+		access : EventTrigger ( eContainer == logout, logout.onAccess == access )
 		# we can't add it to the end of the 'check key' operation, because then
 		# all operations will have to run it as well.
 		# add it to the end of the access operation chain

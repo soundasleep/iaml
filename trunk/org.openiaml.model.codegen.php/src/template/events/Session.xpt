@@ -5,9 +5,9 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE runSessionEvents(model::visual::Frame currentFrame) FOR model::EventTrigger-»
-	// Session EventTrigger «this»
-	«IF name == "init" || name == "access"-»
+«DEFINE runSessionEvents(model::visual::Frame currentFrame, String eventName) FOR model::EventTrigger-»
+	// Session EventTrigger «this» '«eventName»'
+	«IF eventName == "init" || eventName == "access"-»
 		// RunInstanceWires sorted by priority
 		«EXPAND template::operations::OperationCall::callOperation(true, false, currentFrame) FOREACH outEdges.typeSelect(model::wires::RunInstanceWire).sortBy(e|-e.priority)-»
 	«ELSE-»

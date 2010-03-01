@@ -29,7 +29,7 @@ if (class_exists($type)) {
 <html>
 <head>
 	<title>An exception occured</title>
-	<link rel="stylesheet" type="text/css" href="<?php echo IAML_RUNTIME_WEB; ?>default.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo IAML_RUNTIME_WEB; ?>css/default.css">
 </head>
 		
 <body>

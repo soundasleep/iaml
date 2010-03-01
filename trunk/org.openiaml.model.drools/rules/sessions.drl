@@ -18,26 +18,32 @@ global EcoreCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
+/**
+ * @inference Scope
+ *    A {@model Scope} contains an 'onInit' {@model EventTrigger}.
+ */
 rule "Create 'init' event for Sessions"
 	when
-		session : Session( overridden == false )
-		not (EventTrigger( eContainer == session, name == "init" ))
+		session : Scope( overridden == false )
+		not (event : EventTrigger( eContainer == session, session.onInit == event ))
 		
 	then
-		EventTrigger event = handler.generatedEventTrigger(session, session);
-		handler.setName(event, "init");
+		EventTrigger event = handler.generatedEventTriggerOnInit(session, session);
 		queue.add(event, drools);
 	
 end
 
+/**
+ * @inference Scope
+ *    A {@model Scope} contains an 'onAccess' {@model EventTrigger}.
+ */
 rule "Create 'access' event for Sessions"
 	when
-		session : Session( overridden == false )
-		not (EventTrigger( eContainer == session, name == "access" ))
+		session : Scope( overridden == false )
+		not (event : EventTrigger( eContainer == session, session.onAccess == event ))
 		
 	then
-		EventTrigger event = handler.generatedEventTrigger(session, session);
-		handler.setName(event, "access");
+		EventTrigger event = handler.generatedEventTriggerOnAccess(session, session);
 		queue.add(event, drools);
 	
 end

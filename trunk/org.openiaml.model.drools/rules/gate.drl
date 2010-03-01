@@ -92,7 +92,7 @@ rule "Connect 'access' event with 'set flag' operation"
 		nav : NavigateWire ( from == gate, to == target, name == "first" || name == "last" )
 		button : Button ( eContainer == target, name == "Continue" )
 		op : CompositeOperation ( eContainer == target, name == "Set gate flag" )
-		access : EventTrigger ( eContainer == target, name == "access" )
+		access : EventTrigger ( eContainer == target, target.onAccess == access )
 		
 		not (RunInstanceWire ( from == access, to == op ))
 		

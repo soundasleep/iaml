@@ -230,7 +230,7 @@
          </object>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_Visual"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2023,2024,2044,2045,2060,2047,2048,2049,2050,2051,2052,2034,2053,2054,2055,2056,2057,2019,2020,2058,2042,2043,2059,2061,2063,2064"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2023,2024,2044,2045,2060,2047,2048,2049,2050,2051,2052,2034,2053,2054,2055,2056,2057,2019,2020,2058,2042,2043,2059,2061,2063,2064,2065"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4002,4013,4004,4005,4007,4016,4010,4014,4015"/>
       </viewProvider>
    </extension>
@@ -243,13 +243,13 @@
             <method name="getType()" value="Iaml_Visual"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
-            <method name="getType()" value="2023,2024,2044,2045,2060,2047,2048,2049,2050,2051,2052,2034,2053,2054,2055,2056,2057,2019,2020,2058,2042,2043,2059,2061,2063,2064"/>
+            <method name="getType()" value="2023,2024,2044,2045,2060,2047,2048,2049,2050,2051,2052,2034,2053,2054,2055,2056,2057,2019,2020,2058,2042,2043,2059,2061,2063,2064,2065"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
             <method name="getType()" value="4001,4002,4013,4004,4005,4007,4016,4010,4014,4015"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5039,5040,5041,5042,5077,5078,5079,5080,5106,5107,5108,5084,5085,5086,5087,5088,5089,5090,5091,5092,5093,5060,5061,5094,5095,5096,5097,5098,5099,5100,5033,5034,5101,5102,5073,5074,5075,5076,5103,5104,5105,5109,5110,5117,5113,5114,5118,5115,5116,5119"/>
+            <method name="getType()" value="5039,5040,5041,5042,5077,5078,5079,5080,5106,5107,5108,5084,5085,5086,5087,5088,5089,5090,5091,5092,5093,5060,5061,5094,5095,5096,5097,5098,5099,5100,5033,5034,5101,5102,5073,5074,5075,5076,5103,5104,5105,5109,5110,5117,5113,5114,5118,5115,5116,5119,5120,5121,5122"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value=""/>
@@ -289,7 +289,8 @@
          <object class="org.openiaml.model.diagram.visual.edit.parts.EventTriggerEditPart" id="EventTrigger_2061"/>
          <object class="org.openiaml.model.diagram.visual.edit.parts.EventTrigger3EditPart" id="EventTrigger_2063"/>
          <object class="org.openiaml.model.diagram.visual.edit.parts.EventTrigger4EditPart" id="EventTrigger_2064"/>
-         <context elements="VisibleThing_1000,CompositeOperation_2023,PrimitiveOperation_2024,DomainObject_2044,DomainAttribute_2045,Property_2060,Frame_2047,InputForm_2048,InputTextField_2049,StaticValue_2050,Session_2051,LoginHandler_2052,CompositeCondition_2034,DomainObjectInstance_2053,DomainAttributeInstance_2054,Button_2055,QueryParameter_2056,AccessControlHandler_2057,Permission_2019,Role_2020,UserInstance_2058,EntryGate_2042,ExitGate_2043,Label_2059,EventTrigger_2061,EventTrigger_2063,EventTrigger_2064"/>
+         <object class="org.openiaml.model.diagram.visual.edit.parts.EventTrigger2EditPart" id="EventTrigger_2065"/>
+         <context elements="VisibleThing_1000,CompositeOperation_2023,PrimitiveOperation_2024,DomainObject_2044,DomainAttribute_2045,Property_2060,Frame_2047,InputForm_2048,InputTextField_2049,StaticValue_2050,Session_2051,LoginHandler_2052,CompositeCondition_2034,DomainObjectInstance_2053,DomainAttributeInstance_2054,Button_2055,QueryParameter_2056,AccessControlHandler_2057,Permission_2019,Role_2020,UserInstance_2058,EntryGate_2042,ExitGate_2043,Label_2059,EventTrigger_2061,EventTrigger_2063,EventTrigger_2064,EventTrigger_2065"/>
       </modelingAssistantProvider>
    </extension>
 
@@ -312,7 +313,7 @@
       <decoratorProvider class="org.openiaml.model.diagram.visual.providers.IamlShortcutsDecoratorProvider">
          <Priority name="Lowest"/>
          <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
-            <method name="getType()" value="2023,2024,2044,2045,2060,2047,2048,2049,2050,2051,2052,2034,2053,2054,2055,2056,2057,2019,2020,2058,2042,2043,2059,2061,2063,2064"/>
+            <method name="getType()" value="2023,2024,2044,2045,2060,2047,2048,2049,2050,2051,2052,2034,2053,2054,2055,2056,2057,2019,2020,2058,2042,2043,2059,2061,2063,2064,2065"/>
          </object>
          <context decoratorTargets="generated-top-nodes"/>
       </decoratorProvider>
@@ -588,6 +589,15 @@
             <param name="semanticHint" value="2064"/>
          </specializationType>
       </metamodel>
+      <metamodel nsURI="http://openiaml.org/model0.4">
+         <specializationType
+               id="org.openiaml.model.diagram.visual.EventTrigger_2065"
+               name="%metatype.name.EventTrigger_2065"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.openiaml.model.diagram.visual.EventTrigger_2061"/>
+            <param name="semanticHint" value="2065"/>
+         </specializationType>
+      </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
                id="org.openiaml.model.diagram.visual.SyncWire_4001"
@@ -727,6 +737,7 @@
          <elementType ref="org.openiaml.model.diagram.visual.EventTrigger_2061"/>
          <elementType ref="org.openiaml.model.diagram.visual.EventTrigger_2063"/>
          <elementType ref="org.openiaml.model.diagram.visual.EventTrigger_2064"/>
+         <elementType ref="org.openiaml.model.diagram.visual.EventTrigger_2065"/>
          <elementType ref="org.openiaml.model.diagram.visual.SyncWire_4001"/>
          <elementType ref="org.openiaml.model.diagram.visual.RunInstanceWire_4002"/>
          <elementType ref="org.openiaml.model.diagram.visual.ParameterEdge_4013"/>

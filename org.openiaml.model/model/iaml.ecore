@@ -880,14 +880,14 @@
       <eLiterals name="DOMAIN_OBJECT" value="1"/>
       <eLiterals name="USER" value="2"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="LoginHandler" eSuperTypes="#//ApplicationElementContainer #//GeneratesElements #//wires/ParameterEdgeDestination">
+    <eClassifiers xsi:type="ecore:EClass" name="LoginHandler" eSuperTypes="#//GeneratesElements #//wires/ParameterEdgeDestination #//ApplicationElement #//ContainsWires">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="When placed into a {@model Page} or {@model Session}, enforces that users need to login via this LoginHandler first. Also supports logout."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1"
           eType="#//components/LoginHandlerTypes"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="AccessControlHandler" eSuperTypes="#//ApplicationElementContainer #//GeneratesElements #//wires/ParameterEdgeDestination #//users/RequiresEdgesSource">
+    <eClassifiers xsi:type="ecore:EClass" name="AccessControlHandler" eSuperTypes="#//GeneratesElements #//wires/ParameterEdgeDestination #//users/RequiresEdgesSource #//ApplicationElement #//ContainsWires">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.4"/>
       </eAnnotations>

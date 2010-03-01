@@ -41,8 +41,8 @@ public class ShortcutsDomainStoreTestCase extends AbstractShortcutsTestCase {
 		// it should have a domain attribute connected to an event trigger
 		assertEditorHasChildren(3, editor_store);
 		ShapeNodeEditPart child = assertHasDomainObject(editor_store, "child");
-		ShapeNodeEditPart event1 = assertHasEventTrigger(editor_store, "et1");
-		ShapeNodeEditPart event2 = assertHasEventTrigger(editor_store, "et2");
+		ShapeNodeEditPart event1 = assertHasEventTrigger(editor_store, true, "onAccess");
+		ShapeNodeEditPart event2 = assertHasEventTrigger(editor_store, "et2", false);
 		
 		// they should be connected
 		assertHasSyncWire(editor_store, event1, child, "syncWire");
@@ -60,7 +60,7 @@ public class ShortcutsDomainStoreTestCase extends AbstractShortcutsTestCase {
 		
 		// it should have a domain attribute connected to an event trigger
 		assertEditorHasChildren(2, editor_page);
-		ShapeNodeEditPart et1 = assertHasEventTrigger(editor_page, "et1");
+		ShapeNodeEditPart et1 = assertHasEventTrigger(editor_page, false, "onAccess");
 		ShapeNodeEditPart obj = assertHasDomainObject(editor_page, "child");
 
 		// they should be connected

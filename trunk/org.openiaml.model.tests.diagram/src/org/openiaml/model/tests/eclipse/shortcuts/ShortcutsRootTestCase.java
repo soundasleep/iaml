@@ -31,8 +31,8 @@ public class ShortcutsRootTestCase extends AbstractShortcutsTestCase {
 		// check the contents
 		ShapeNodeEditPart page = assertHasFrame(editor, "page");
 		ShapeNodeEditPart op = assertHasOperation(editor, "op");
-		ShapeNodeEditPart et = assertHasEventTrigger(editor, "et");
-		ShapeNodeEditPart chained = assertHasEventTrigger(editor, "chained");
+		ShapeNodeEditPart et = assertHasEventTrigger(editor, "init");
+		ShapeNodeEditPart chained = assertHasEventTrigger(editor, false, "onInit");
 
 		// they should be connected
 		assertHasRunInstanceWire(editor, et, op, "run1");
@@ -49,7 +49,7 @@ public class ShortcutsRootTestCase extends AbstractShortcutsTestCase {
 
 		// it should have a domain object
 		assertEditorHasChildren(2, editor_page);
-		ShapeNodeEditPart chained2 = assertHasEventTrigger(editor_page, "chained");
+		ShapeNodeEditPart chained2 = assertHasEventTrigger(editor_page, false, "onInit");
 		ShapeNodeEditPart op2 = assertHasOperation(editor_page, "op");
 
 		// they should be connected

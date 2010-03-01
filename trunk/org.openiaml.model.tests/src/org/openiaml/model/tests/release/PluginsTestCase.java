@@ -61,7 +61,8 @@ public class PluginsTestCase extends XmlTestCase {
 				@Override
 				public boolean accept(File dir, String name) {
 					return name.startsWith("org.openiaml") &&
-						!name.startsWith("org.openiaml.iacleaner") &&
+					!name.startsWith("org.openiaml.iacleaner") &&
+						!name.startsWith("org.openiaml.history") &&
 						!name.startsWith("org.openiaml.gmf");
 				}
 			});

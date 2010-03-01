@@ -51,7 +51,7 @@ public class ShortcutsDomainObjectTestCase extends AbstractShortcutsTestCase {
 		// it should have a domain attribute connected to an event trigger
 		assertEditorHasChildren(2, editor_object);
 		ShapeNodeEditPart attribute = assertHasDomainAttribute(editor_object, "domain attribute");
-		ShapeNodeEditPart event = assertHasEventTrigger(editor_object, "event trigger");
+		ShapeNodeEditPart event = assertHasEventTrigger(editor_object, false, "onAccess");
 		
 		// they should be connected
 		assertHasRunInstanceWire(editor_object, event, attribute, "runWire");

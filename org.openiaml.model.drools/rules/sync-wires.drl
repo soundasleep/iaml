@@ -168,6 +168,26 @@ rule "Run instance wire from source.access to source.init, when we have a value 
 
 end
 
+rule "Run instance wire from source.access to source.init, when we have a value to provide as a parameter (onAccess 2)"
+	when
+		sw : SyncWire(overridden == false)
+		source : Scope( )  
+		target : ContainsOperations( )
+		eval ( functions.connects(sw, source, target ))
+		
+		event : EventTrigger( source.onAccess == event ) 
+		operation : Operation( eContainer == source, name=="init" )
+		field : Property( eContainer == target, name=="fieldValue" )
+		
+		not (RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw ))
+		
+	then
+		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
+		handler.setName(rw, "run");
+		queue.add(rw, drools);
+
+end
+
 rule "Run instance wire from source.access to source.init, adding ConditionEdge to check it is set"
 	when
 		sw : SyncWire(overridden == false)
@@ -216,6 +236,30 @@ rule "Run instance wire from source.access to source.init, adding ConditionEdge 
 		
 end	
 
+rule "Run instance wire from source.access to source.init, adding ConditionEdge to check it is set (onAccess 2)"
+	when
+		sw : SyncWire(overridden == false)
+		source : Scope( )  
+		target : ContainsOperations( )
+		eval ( functions.connects(sw, source, target))
+		
+		event : EventTrigger( source.onAccess == event ) 
+		operation : Operation( eContainer == source, name=="init" )
+		field : Property( eContainer == target, name=="fieldValue" )
+		
+		run : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
+		
+		# condition check
+		condition : CompositeCondition ( eContainer == target, name == "fieldValue is set" )
+		
+		not ( ConditionEdge ( from == condition, to == run ))
+	
+	then
+		ConditionEdge cw = handler.generatedConditionEdge(sw, sw, condition, run);
+		queue.add(cw, drools);
+		
+end	
+
 # Ideally, these two commands would be joined together into one
 rule "Connect parameter wire to: run instance wire from source.access to source.init (2)"
 	when
@@ -242,6 +286,27 @@ rule "Connect parameter wire to: run instance wire from source.access to source.
 	when
 		sw : SyncWire(overridden == false)
 		source : VisibleThing( )
+		target : ContainsOperations( )
+		eval ( functions.connects(sw, source, target))
+	
+		event : EventTrigger( source.onAccess == event )
+		operation : Operation( eContainer == source, name=="init" )
+		field : Property( eContainer == target, name=="fieldValue" )
+		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
+		
+		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
+		
+	then
+		ParameterEdge pw = handler.generatedParameterEdge(sw, sw, field, wire); 
+		handler.setName(pw, "[sync] run instance parameter (source.access)"); 
+		queue.add(pw, drools);
+
+end
+
+rule "Connect parameter wire to: run instance wire from source.access to source.init (3)"
+	when
+		sw : SyncWire(overridden == false)
+		source : Scope( )
 		target : ContainsOperations( )
 		eval ( functions.connects(sw, source, target))
 	
@@ -370,7 +435,7 @@ rule "Connect Session.init to incoming SyncWires (contained in Frames)"
 		operation : Operation( eContainer == targetElement, name == "update" )
 
 		rw : RunInstanceWire( eContainer == sw2, from == event, to == operation, name == "run" )
-		inite : EventTrigger (eContainer == session, name == "init" )
+		inite : EventTrigger (eContainer == session, session.onInit == inite )
 		
 		not (RunInstanceWire( eContainer == sw2, from == inite, to == operation, name == "run" ))
 		
@@ -398,7 +463,63 @@ rule "Connect Session.init to incoming SyncWires (contained in Frames) (onEdit)"
 		operation : Operation( eContainer == targetElement, name == "update" )
 
 		rw : RunInstanceWire( eContainer == sw2, from == event, to == operation, name == "run" )
-		inite : EventTrigger (eContainer == session, name == "init" )
+		inite : EventTrigger (eContainer == session, session.onInit == inite )
+		
+		not (RunInstanceWire( eContainer == sw2, from == inite, to == operation, name == "run" ))
+		
+	then
+		RunInstanceWire rw2 = handler.generatedRunInstanceWire(sw2, sw2, inite, operation);
+		handler.setName(rw2, "run");
+		queue.add(rw2, drools);
+		
+end
+
+rule "Connect Session.init to incoming SyncWires (contained in Frames) (onEdit 2)"
+	when
+		session : Session ( overridden == false )
+		sw : SyncWire( overridden == false )
+		sourceFrame : VisibleThing( eval(!functions.containingSessionEquals(sourceFrame, session)) )  
+		targetFrame : ContainsOperations( eval(functions.containingSessionEquals(targetFrame, session)) )
+		eval( functions.connects(sw, sourceFrame, targetFrame ))
+
+		sw2 : SyncWire ( eContainer == sw, overridden == false)
+		sourceElement : VisibleThing( eContainer == sourceFrame )
+		targetElement : ContainsOperations( eContainer == targetFrame )
+		eval( functions.connects(sw2, sourceElement, targetElement ))
+
+		event : EventTrigger( sourceElement.onEdit == event ) 
+		operation : Operation( eContainer == targetElement, name == "update" )
+
+		rw : RunInstanceWire( eContainer == sw2, from == event, to == operation, name == "run" )
+		inite : EventTrigger (eContainer == session, session.onInit == inite )
+		
+		not (RunInstanceWire( eContainer == sw2, from == inite, to == operation, name == "run" ))
+		
+	then
+		RunInstanceWire rw2 = handler.generatedRunInstanceWire(sw2, sw2, inite, operation);
+		handler.setName(rw2, "run");
+		queue.add(rw2, drools);
+		
+end
+
+rule "Connect Session.init to incoming SyncWires (contained in Frames) (onEdit 3)"
+	when
+		session : Session ( overridden == false )
+		sw : SyncWire( overridden == false )
+		sourceFrame : Frame( eval(!functions.containingSessionEquals(sourceFrame, session)) )  
+		targetFrame : ContainsOperations( eval(functions.containingSessionEquals(targetFrame, session)) )
+		eval( functions.connects(sw, sourceFrame, targetFrame ))
+
+		sw2 : SyncWire ( eContainer == sw, overridden == false)
+		sourceElement : VisibleThing( eContainer == sourceFrame )
+		targetElement : ContainsOperations( eContainer == targetFrame )
+		eval( functions.connects(sw2, sourceElement, targetElement ))
+
+		event : EventTrigger( sourceElement.onEdit == event ) 
+		operation : Operation( eContainer == targetElement, name == "update" )
+
+		rw : RunInstanceWire( eContainer == sw2, from == event, to == operation, name == "run" )
+		inite : EventTrigger (eContainer == session, session.onInit == inite )
 		
 		not (RunInstanceWire( eContainer == sw2, from == inite, to == operation, name == "run" ))
 		
@@ -426,7 +547,7 @@ rule "Connect parameter for Session.init to incoming SyncWires (contained in Fra
 		operation : Operation( eContainer == targetElement, name == "update" )
 
 		rw : RunInstanceWire( eContainer == sw2, from == event, to == operation, name == "run" )
-		inite : EventTrigger (eContainer == session, name == "init" )
+		inite : EventTrigger (eContainer == session, session.onInit == inite )
 
 		initrw : RunInstanceWire( eContainer == sw2, from == inite, to == operation, name == "run" )
 		
@@ -457,7 +578,69 @@ rule "Connect parameter for Session.init to incoming SyncWires (contained in Fra
 		operation : Operation( eContainer == targetElement, name == "update" )
 
 		rw : RunInstanceWire( eContainer == sw2, from == event, to == operation, name == "run" )
-		inite : EventTrigger (eContainer == session, name == "init" )
+		inite : EventTrigger (eContainer == session, session.onInit == inite )
+
+		initrw : RunInstanceWire( eContainer == sw2, from == inite, to == operation, name == "run" )
+		
+		field : Property( eContainer == sourceElement, name=="fieldValue" )
+		pw : ParameterEdge( eContainer == sw2, from == field, to == rw ) 
+
+		not( ParameterEdge( eContainer == sw2, from == field, to == initrw ))  
+		
+	then
+		ParameterEdge pw2 = handler.generatedParameterEdge(sw, sw, field, initrw);
+		queue.add(pw2, drools);		
+end
+
+rule "Connect parameter for Session.init to incoming SyncWires (contained in Frames) (onEdit) (2)"
+	when
+		session : Session ( overridden == false )
+		sw : SyncWire( overridden == false )
+		sourceFrame : VisibleThing( eval(!functions.containingSessionEquals(sourceFrame, session)) )  
+		targetFrame : ContainsOperations( eval(functions.containingSessionEquals(targetFrame, session)) )
+		eval( functions.connects(sw, sourceFrame, targetFrame ))
+
+		sw2 : SyncWire ( eContainer == sw, overridden == false)
+		sourceElement : VisibleThing( eContainer == sourceFrame )
+		targetElement : ContainsOperations( eContainer == targetFrame )
+		eval( functions.connects(sw2, sourceElement, targetElement ))
+
+		event : EventTrigger( sourceElement.onEdit == event ) 
+		operation : Operation( eContainer == targetElement, name == "update" )
+
+		rw : RunInstanceWire( eContainer == sw2, from == event, to == operation, name == "run" )
+		inite : EventTrigger (eContainer == session, session.onInit == inite )
+
+		initrw : RunInstanceWire( eContainer == sw2, from == inite, to == operation, name == "run" )
+		
+		field : Property( eContainer == sourceElement, name=="fieldValue" )
+		pw : ParameterEdge( eContainer == sw2, from == field, to == rw ) 
+
+		not( ParameterEdge( eContainer == sw2, from == field, to == initrw ))  
+		
+	then
+		ParameterEdge pw2 = handler.generatedParameterEdge(sw, sw, field, initrw);
+		queue.add(pw2, drools);		
+end
+
+rule "Connect parameter for Session.init to incoming SyncWires (contained in Frames) (onEdit) (3)"
+	when
+		session : Session ( overridden == false )
+		sw : SyncWire( overridden == false )
+		sourceFrame : Frame( eval(!functions.containingSessionEquals(sourceFrame, session)) )  
+		targetFrame : ContainsOperations( eval(functions.containingSessionEquals(targetFrame, session)) )
+		eval( functions.connects(sw, sourceFrame, targetFrame ))
+
+		sw2 : SyncWire ( eContainer == sw, overridden == false)
+		sourceElement : VisibleThing( eContainer == sourceFrame )
+		targetElement : ContainsOperations( eContainer == targetFrame )
+		eval( functions.connects(sw2, sourceElement, targetElement ))
+
+		event : EventTrigger( sourceElement.onEdit == event ) 
+		operation : Operation( eContainer == targetElement, name == "update" )
+
+		rw : RunInstanceWire( eContainer == sw2, from == event, to == operation, name == "run" )
+		inite : EventTrigger (eContainer == session, session.onInit == inite )
 
 		initrw : RunInstanceWire( eContainer == sw2, from == inite, to == operation, name == "run" )
 		

@@ -5,16 +5,16 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE runFrameEvents(model::visual::Frame currentFrame) FOR model::EventTrigger-»
+«DEFINE runFrameEvents(model::visual::Frame currentFrame, String eventName) FOR model::EventTrigger-»
 	// Frame EventTrigger «this»
-	«IF name == "init" || name == "access"-»
+	«IF eventName == "init" || eventName == "access"-»
 		// RunInstanceWires sorted by priority
 		«EXPAND template::operations::OperationCall::callOperation(true, false, currentFrame) FOREACH outEdges.typeSelect(model::wires::RunInstanceWire).sortBy(e|-e.priority)-»
 		
 		// NavigateWires in any order
 		«EXPAND template::operations::OperationCall::callOperation(true, false, currentFrame) FOREACH outEdges.typeSelect(model::wires::NavigateWire)-»
 	«ELSE-»
-		// I don't know what to do with frame event "«name»"
+		«throwException("I don't know what to do with frame event " + name)»
 	«ENDIF-»
 «ENDDEFINE»
 

@@ -59,7 +59,8 @@ define("CURRENT_PAGE", "«id»");
 	«IF getFailHandler(containingSession()) != null»
 		try {
 	«ENDIF»
-	«EXPAND template::events::Session::runSessionEvents(this) FOREACH containingSession().eventTriggers-»
+	«EXPAND template::events::Session::runSessionEvents(this, 'init') FOREACH {containingSession().onInit}-»
+	«EXPAND template::events::Session::runSessionEvents(this, 'access') FOREACH {containingSession().onAccess}-»
 	«IF getFailHandler(containingSession()) != null»
 		} catch (IamlRuntimeException $e) {
 			// only expand the first fail handler
@@ -71,7 +72,8 @@ define("CURRENT_PAGE", "«id»");
 
 // run any event triggers for this frame
 // exceptions are now covered by the exception handlers above
-«EXPAND template::events::Frame::runFrameEvents(this) FOREACH eventTriggers-»
+«EXPAND template::events::Frame::runFrameEvents(this, 'init') FOREACH {onInit}-»
+«EXPAND template::events::Frame::runFrameEvents(this, 'access') FOREACH {onAccess}-»
 
 // run any entry gates connected to the containing scope(s)
 «EXPAND template::scopes::EntryGate::runEntryGate(this) FOREACH getFrameEntryGates(this)-»

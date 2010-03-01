@@ -87,7 +87,7 @@ rule "Connect 'permissions check' up to the 'access' event of the session (ACH i
 		session : Session ( )
 		page : Frame ( eContainer == session )
 		ach : AccessControlHandler ( eContainer == session )
-		access : EventTrigger ( eContainer == page, name == 'access' )
+		access : EventTrigger ( eContainer == page, page.onAccess == access ) 
 		check : Operation ( eContainer == page, name == "permissions check" )
 		
 		not ( RunInstanceWire ( from == access, to == check ))
@@ -103,7 +103,7 @@ rule "Connect 'permissions check' up to the 'access' event of the page (ACH in p
 	when
 		page : Frame ( )
 		ach : AccessControlHandler ( eContainer == page )
-		access : EventTrigger ( eContainer == page, name == 'access' )
+		access : EventTrigger ( eContainer == page, page.onAccess == access )
 		check : Operation ( eContainer == page, name == "page permissions check" )
 		
 		not ( RunInstanceWire ( from == access, to == check ))
@@ -121,7 +121,7 @@ rule "Connect fail wire from 'permissions check' to 'login page'"
 		session : Session ( eContainer == root )
 		page : Frame ( eContainer == session )
 		ach : AccessControlHandler ( eContainer == session )
-		access : EventTrigger ( eContainer == page, name == 'access' )
+		access : EventTrigger ( eContainer == page, page.onAccess == access )
 		check : CompositeOperation ( eContainer == page, name == "permissions check" )
 		lh : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
 		login : Frame ( name == "login", eContainer == root ) 

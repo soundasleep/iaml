@@ -68,19 +68,3 @@ rule "Create 'access' event trigger for input text field"
 		queue.add(event, drools);
 		
 end
-
-/**
- * @inference Frame
- *    A {@model Frame} contains an {@model EventTrigger} named 'access'.
- */
-rule "Create 'access' event for all pages"
-	when
-		page : Frame( )
-		not (EventTrigger (eContainer == page, name=="access" ))
-					
-	then
-		EventTrigger access = handler.generatedEventTrigger(page, page);
-		handler.setName(access, "access");
-		queue.add(access, drools);
-		
-end

@@ -168,6 +168,18 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return event;
 	}
 
+	public EventTrigger generatedEventTriggerOnAccess(GeneratesElements by, Scope container) throws InferenceException {
+		EventTrigger event = (EventTrigger) createElement( container, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getScope_OnAccess() );
+		setGeneratedBy(event, by);
+		return event;
+	}
+
+	public EventTrigger generatedEventTriggerOnInit(GeneratesElements by, Scope container) throws InferenceException {
+		EventTrigger event = (EventTrigger) createElement( container, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getScope_OnInit() );
+		setGeneratedBy(event, by);
+		return event;
+	}
+
 	public CompositeOperation generatedCompositeOperation(GeneratesElements by, ContainsOperations container) throws InferenceException {
 		CompositeOperation operation = createCompositeOperation(container);
 		setGeneratedBy(operation, by);

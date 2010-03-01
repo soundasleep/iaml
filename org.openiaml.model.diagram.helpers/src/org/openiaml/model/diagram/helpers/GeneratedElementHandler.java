@@ -26,6 +26,7 @@ import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DataFlowEdgeDestination;
 import org.openiaml.model.model.DataFlowEdgesSource;
+import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.ExecutionEdgeDestination;
 import org.openiaml.model.model.ExecutionEdgesSource;
@@ -397,7 +398,12 @@ public class GeneratedElementHandler {
 	 */
 	public String formatElement(EObject element) {
 		if (element instanceof NamedElement) {
-			return element.eClass().getName() + " '" + ((NamedElement) element).getName() + "'";
+			NamedElement ne = (NamedElement) element;
+			if (ne instanceof EventTrigger && ne.getName() == null) {
+				return ne.eClass().getName() + " " + ne.eContainingFeature().getName();
+			} else {
+				return ne.eClass().getName() + " '" + ne.getName() + "'";
+			}
 		}
 		return element.toString();
 	}

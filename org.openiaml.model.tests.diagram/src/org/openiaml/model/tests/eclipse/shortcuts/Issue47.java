@@ -64,8 +64,8 @@ public class Issue47 extends AbstractShortcutsTestCase {
 		
 		// editor should contain both "edit" and "update" operations for
 		// text1 and text2
-		ShapeNodeEditPart text1_edit = assertHasEventTrigger(editor_text, "edit", false);
-		ShapeNodeEditPart text2_edit = assertHasEventTrigger(editor_text, "edit", true);
+		ShapeNodeEditPart text1_edit = assertHasEventTrigger(editor_text, false, "onEdit");
+		ShapeNodeEditPart text2_edit = assertHasEventTrigger(editor_text, true, "onEdit");
 		assertNotSame(text1_edit, text2_edit);
 		assertGenerated(text1_edit);
 		assertGenerated(text2_edit);

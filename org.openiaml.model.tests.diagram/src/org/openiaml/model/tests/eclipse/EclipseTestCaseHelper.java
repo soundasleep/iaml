@@ -171,6 +171,8 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * An abstract method which checks an editors children to see
 	 * if the editor contains a given model element, with the given
 	 * shortcut parameters, contained with a given containment feature name.
+	 * 
+	 * <p>TODO remove containingFeatureName(String), and replace with containingFeature(EStructuralFeature).
 	 *
 	 * @param root the editor to search
 	 * @param objectClass the EObject class to look for

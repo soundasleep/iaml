@@ -43,7 +43,7 @@ public class InitializeDiagramTestCase extends EclipseTestCaseHelper {
 
 		// check the contents
 		ShapeNodeEditPart page = assertHasFrame(editor, "page");
-		assertHasEventTrigger(editor, "et");
+		assertHasEventTrigger(editor, "init");
 		assertHasOperation(editor, "op");
 
 		// open the domain store

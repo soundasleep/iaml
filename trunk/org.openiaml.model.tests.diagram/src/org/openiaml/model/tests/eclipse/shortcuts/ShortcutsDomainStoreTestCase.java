@@ -5,6 +5,7 @@ package org.openiaml.model.tests.eclipse.shortcuts;
 
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
+import org.openiaml.model.model.ModelPackage;
 
 /**
  * Tests domain object shortcuts.
@@ -41,7 +42,7 @@ public class ShortcutsDomainStoreTestCase extends AbstractShortcutsTestCase {
 		// it should have a domain attribute connected to an event trigger
 		assertEditorHasChildren(3, editor_store);
 		ShapeNodeEditPart child = assertHasDomainObject(editor_store, "child");
-		ShapeNodeEditPart event1 = assertHasEventTrigger(editor_store, true, "onAccess");
+		ShapeNodeEditPart event1 = assertHasEventTrigger(editor_store, true, ModelPackage.eINSTANCE.getScope_OnAccess());
 		ShapeNodeEditPart event2 = assertHasEventTrigger(editor_store, "et2", false);
 		
 		// they should be connected
@@ -60,7 +61,7 @@ public class ShortcutsDomainStoreTestCase extends AbstractShortcutsTestCase {
 		
 		// it should have a domain attribute connected to an event trigger
 		assertEditorHasChildren(2, editor_page);
-		ShapeNodeEditPart et1 = assertHasEventTrigger(editor_page, false, "onAccess");
+		ShapeNodeEditPart et1 = assertHasEventTrigger(editor_page, false, ModelPackage.eINSTANCE.getScope_OnAccess());
 		ShapeNodeEditPart obj = assertHasDomainObject(editor_page, "child");
 
 		// they should be connected

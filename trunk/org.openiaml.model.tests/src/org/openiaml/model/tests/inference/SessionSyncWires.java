@@ -56,7 +56,7 @@ public class SessionSyncWires extends InferenceTestCase {
 		assertGenerated(getParameterEdgeFromTo(root, fieldValue, rw));
 
 		// session should have an 'init' event
-		EventTrigger init = assertHasEventTrigger(session, "init");
+		EventTrigger init = session.getOnInit();
 
 		// it should be connected to 'update'
 		RunInstanceWire rw2 = (RunInstanceWire) getWireFromTo(root, init, update);

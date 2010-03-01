@@ -1386,6 +1386,24 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getScope_OnAccess() {
+		return (EReference)scopeEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getScope_OnInit() {
+		return (EReference)scopeEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getCondition() {
 		return conditionEClass;
 	}
@@ -1699,6 +1717,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(scopeEClass, SCOPE__VALUES);
 		createEReference(scopeEClass, SCOPE__PARAMETERS);
 		createEReference(scopeEClass, SCOPE__ELEMENTS);
+		createEReference(scopeEClass, SCOPE__ON_ACCESS);
+		createEReference(scopeEClass, SCOPE__ON_INIT);
 
 		conditionEClass = createEClass(CONDITION);
 
@@ -1868,7 +1888,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		scopeEClass.getESuperTypes().add(this.getGeneratedElement());
 		scopeEClass.getESuperTypes().add(this.getWireEdgesSource());
 		scopeEClass.getESuperTypes().add(this.getWireEdgeDestination());
-		scopeEClass.getESuperTypes().add(this.getContainsEventTriggers());
 		scopeEClass.getESuperTypes().add(this.getContainsConditions());
 		scopeEClass.getESuperTypes().add(this.getCanBeSynced());
 		conditionEClass.getESuperTypes().add(this.getWireEdgesSource());
@@ -2034,6 +2053,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getScope_Values(), this.getStaticValue(), null, "values", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getScope_Parameters(), this.getQueryParameter(), null, "parameters", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getScope_Elements(), this.getApplicationElement(), null, "elements", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getScope_OnAccess(), this.getEventTrigger(), null, "onAccess", null, 0, 1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getScope_OnInit(), this.getEventTrigger(), null, "onInit", null, 0, 1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(conditionEClass, Condition.class, "Condition", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2300,6 +2321,18 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 			 "about", "ideally this might only be placed in Page and Session, but allowing it within VisibleThing allows us to (1) reuse our visual editor, and (2) increases modularity of components perhaps?"
 		   });		
 		addAnnotation
+		  (getScope_OnAccess(), 
+		   source, 
+		   new String[] {
+			 "changed", "added in 0.4.4"
+		   });		
+		addAnnotation
+		  (getScope_OnInit(), 
+		   source, 
+		   new String[] {
+			 "changed", "added in 0.4.4"
+		   });		
+		addAnnotation
 		  (conditionEClass, 
 		   source, 
 		   new String[] {
@@ -2465,7 +2498,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Represents an instance of a {@model DomainObject}."
-		   });									
+		   });											
 		addAnnotation
 		  (conditionEClass, 
 		   source, 

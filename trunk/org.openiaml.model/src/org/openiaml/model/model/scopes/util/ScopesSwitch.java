@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.ContainsConditions;
-import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsScopes;
 import org.openiaml.model.model.ContainsWires;
@@ -105,7 +104,6 @@ public class ScopesSwitch<T> {
 				T result = caseSession(session);
 				if (result == null) result = caseScope(session);
 				if (result == null) result = caseContainsScopes(session);
-				if (result == null) result = caseContainsEventTriggers(session);
 				if (result == null) result = caseCanBeSynced(session);
 				if (result == null) result = caseNamedElement(session);
 				if (result == null) result = caseGeneratedElement(session);
@@ -165,21 +163,6 @@ public class ScopesSwitch<T> {
 	 * @generated
 	 */
 	public T caseContainsScopes(ContainsScopes object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Contains Event Triggers</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Contains Event Triggers</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseContainsEventTriggers(ContainsEventTriggers object) {
 		return null;
 	}
 

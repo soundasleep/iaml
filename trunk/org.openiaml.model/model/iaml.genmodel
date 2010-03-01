@@ -137,6 +137,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/values"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/parameters"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/elements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/onAccess"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/onInit"/>
     </genClasses>
     <genClasses image="false" ecoreClass="iaml.ecore#//Condition"/>
     <genClasses ecoreClass="iaml.ecore#//CompositeCondition">

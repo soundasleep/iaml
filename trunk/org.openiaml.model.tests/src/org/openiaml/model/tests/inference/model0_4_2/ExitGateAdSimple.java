@@ -110,7 +110,7 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 		assertEquals(property.getDefaultValue(), "false");
 
 		// required page
-		EventTrigger access = assertHasEventTrigger(ad, "access");
+		EventTrigger access = ad.getOnAccess();
 		assertGenerated(access);
 		
 		// set operation

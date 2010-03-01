@@ -24,6 +24,8 @@ import org.openiaml.model.model.components.ExitGate;
  *   <li>{@link org.openiaml.model.model.Scope#getValues <em>Values</em>}</li>
  *   <li>{@link org.openiaml.model.model.Scope#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.openiaml.model.model.Scope#getElements <em>Elements</em>}</li>
+ *   <li>{@link org.openiaml.model.model.Scope#getOnAccess <em>On Access</em>}</li>
+ *   <li>{@link org.openiaml.model.model.Scope#getOnInit <em>On Init</em>}</li>
  * </ul>
  * </p>
  *
@@ -32,7 +34,7 @@ import org.openiaml.model.model.components.ExitGate;
  *        annotation="http://openiaml.org/comment changed='0.4: \'domainObjects\', \'domainViews\', \'domainInstances\' references removed\r\n0.4.2: renamed from \'Scope\' to \'AbstractScope\'; added \'gate\' reference'"
  * @generated
  */
-public interface Scope extends GeneratesElements, ContainsWires, ContainsScopes, NamedElement, GeneratedElement, WireEdgesSource, WireEdgeDestination, ContainsEventTriggers, ContainsConditions, CanBeSynced {
+public interface Scope extends GeneratesElements, ContainsWires, ContainsScopes, NamedElement, GeneratedElement, WireEdgesSource, WireEdgeDestination, ContainsConditions, CanBeSynced {
 	/**
 	 * Returns the value of the '<em><b>Entry Gate</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -151,5 +153,59 @@ public interface Scope extends GeneratesElements, ContainsWires, ContainsScopes,
 	 * @generated
 	 */
 	EList<ApplicationElement> getElements();
+
+	/**
+	 * Returns the value of the '<em><b>On Access</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>On Access</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>On Access</em>' containment reference.
+	 * @see #setOnAccess(EventTrigger)
+	 * @see org.openiaml.model.model.ModelPackage#getScope_OnAccess()
+	 * @model containment="true"
+	 *        annotation="http://openiaml.org/comment changed='added in 0.4.4'"
+	 * @generated
+	 */
+	EventTrigger getOnAccess();
+
+	/**
+	 * Sets the value of the '{@link org.openiaml.model.model.Scope#getOnAccess <em>On Access</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>On Access</em>' containment reference.
+	 * @see #getOnAccess()
+	 * @generated
+	 */
+	void setOnAccess(EventTrigger value);
+
+	/**
+	 * Returns the value of the '<em><b>On Init</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>On Init</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>On Init</em>' containment reference.
+	 * @see #setOnInit(EventTrigger)
+	 * @see org.openiaml.model.model.ModelPackage#getScope_OnInit()
+	 * @model containment="true"
+	 *        annotation="http://openiaml.org/comment changed='added in 0.4.4'"
+	 * @generated
+	 */
+	EventTrigger getOnInit();
+
+	/**
+	 * Sets the value of the '{@link org.openiaml.model.model.Scope#getOnInit <em>On Init</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>On Init</em>' containment reference.
+	 * @see #getOnInit()
+	 * @generated
+	 */
+	void setOnInit(EventTrigger value);
 
 } // Scope

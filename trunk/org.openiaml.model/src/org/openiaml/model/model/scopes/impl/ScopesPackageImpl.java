@@ -200,7 +200,6 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 		sessionEClass.getESuperTypes().add(theModelPackage.getContainsOperations());
 		sessionEClass.getESuperTypes().add(theModelPackage.getScope());
 		sessionEClass.getESuperTypes().add(theModelPackage.getContainsWires());
-		sessionEClass.getESuperTypes().add(theModelPackage.getContainsEventTriggers());
 		sessionEClass.getESuperTypes().add(theModelPackage.getWireEdgesSource());
 		sessionEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
 		sessionEClass.getESuperTypes().add(theModelPackage.getContainsConditions());

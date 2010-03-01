@@ -212,7 +212,7 @@ public class UserRoles extends InferenceTestCase {
 		Frame target = assertHasFrame(session, "target");
 		
 		// access event in the session
-		EventTrigger event = assertHasEventTrigger(target, "access");
+		EventTrigger event = target.getOnAccess();
 		assertGenerated(event);
 		
 		// check permissions operation contained in the session, not the page
@@ -243,7 +243,7 @@ public class UserRoles extends InferenceTestCase {
 		Frame target = assertHasFrame(session, "target");
 		
 		// access event in the page
-		EventTrigger event = assertHasEventTrigger(session, "access");
+		EventTrigger event = session.getOnAccess();
 		assertGenerated(event);
 		
 		// check permissions operation contained in the session, not the page
@@ -275,7 +275,7 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(check);
 		
 		// access event
-		EventTrigger event = assertHasEventTrigger(target, "access");
+		EventTrigger event = target.getOnAccess();
 		assertGenerated(event);
 		
 		// connected
@@ -307,7 +307,7 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(targetOp);
 		
 		// access event
-		EventTrigger event = assertHasEventTrigger(session, "access");
+		EventTrigger event = session.getOnAccess();
 		assertGenerated(event);
 		
 		// check permissions operation contained in the page

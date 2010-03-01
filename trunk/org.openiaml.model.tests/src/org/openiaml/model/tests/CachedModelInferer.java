@@ -75,12 +75,33 @@ public class CachedModelInferer {
 	 * not, it loads and infers it, then saves the inferred model
 	 * location to the cache.
 	 *
-	 * @see CreateMissingElementsWithDrools#create(EObject, boolean)
+	 * @see #loadAndInfer(IProvidesInferenceEngine, Class, boolean, IProgressMonitor)
 	 * @param logRuleSource Log the rule source of inserted elements.
 	 * @return
 	 * @throws Exception
 	 */
-	public InternetApplication loadAndInfer(IProvidesInferenceEngine provider, final Class<?> loadClass, final boolean logRuleSource) throws Exception {
+	public InternetApplication loadAndInfer(IProvidesInferenceEngine provider, 
+			final Class<?> loadClass, 
+			final boolean logRuleSource) throws Exception {
+		return loadAndInfer(provider, loadClass, logRuleSource, createMonitor());
+	}
+	
+	/**
+	 * Load a model file and perform inference on it.
+	 * This method also sees if we have got a cached model; if
+	 * not, it loads and infers it, then saves the inferred model
+	 * location to the cache.
+	 *
+	 * @see CreateMissingElementsWithDrools#create(EObject, boolean)
+	 * @param logRuleSource Log the rule source of inserted elements.
+	 * @param monitor the monitor to pass to the inference engine
+	 * @return
+	 * @throws Exception
+	 */
+	public InternetApplication loadAndInfer(IProvidesInferenceEngine provider, 
+			final Class<?> loadClass, 
+			final boolean logRuleSource,
+			IProgressMonitor monitor) throws Exception {
 		if (!inferCache.containsKey(loadClass)) {
 			logTimed("infer: loading model");
 			
@@ -108,7 +129,7 @@ public class CachedModelInferer {
 			});
 
 			logTimed("infer: performing inference");
-			ce.create(root, logRuleSource, createMonitor());
+			ce.create(root, logRuleSource, monitor);
 	
 			// write out this inferred model for reference
 			logTimed("infer: writing out inferred model");

@@ -15,6 +15,7 @@ import java.util.Set;
 import junit.framework.AssertionFailedError;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -85,7 +86,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 			Class<?> class1) throws Exception {
 		return loadAndInfer(class1, false);
 	}
-
+	
 	/**
 	 * Load the model file (.iaml) for this given
 	 * test class, and do inference.
@@ -186,6 +187,21 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 */
 	protected InternetApplication loadAndInfer(final Class<?> loadClass, final boolean logRuleSource) throws Exception {
 		return inferer.loadAndInfer(this, loadClass, logRuleSource);
+	}
+
+	/**
+	 * Load a model file and perform inference on it.
+	 * This method also sees if we have got a cached model; if
+	 * not, it loads and infers it, then saves the inferred model
+	 * location to the cache.
+	 *
+	 * @see CreateMissingElementsWithDrools#create(EObject, boolean)
+	 * @param logRuleSource Log the rule source of inserted elements.
+	 * @return
+	 * @throws Exception
+	 */
+	protected InternetApplication loadAndInfer(final Class<?> loadClass, final boolean logRuleSource, IProgressMonitor monitor) throws Exception {
+		return inferer.loadAndInfer(this, loadClass, logRuleSource, monitor);
 	}
 
 	/**

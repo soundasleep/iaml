@@ -57,6 +57,7 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	public static final String PLUGIN_ID = "org.openiaml.model.tests";
 	public static final String ROOT = "src/org/openiaml/model/tests/";
 	
+	// TODO issue 149: remove this field
 	protected IProgressMonitor monitor;
 	
 	public static final String BASE_URL = "http://localhost:8080/junit-workspace/";

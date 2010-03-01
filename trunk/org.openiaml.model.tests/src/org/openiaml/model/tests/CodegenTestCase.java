@@ -15,6 +15,7 @@ import net.sourceforge.jwebunit.junit.WebTestCase;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.InternetApplication;
 
@@ -63,6 +64,21 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 */
 	protected InternetApplication loadAndCodegen(Class<?> modelFile, boolean logRuleSource) throws Exception {
 		InternetApplication root = loadAndInfer(modelFile, logRuleSource);
+		doCodegen(modelFile, root);
+		return root;
+	}
+	
+	/**
+	 * Load a model and perform code generation.
+	 * 
+	 * @see #loadAndInfer(String)
+	 * @param modelFile
+	 * @param logRuleSource should the source of rules be logged?
+	 * @return The loaded InternetApplication
+	 * @throws Exception
+	 */
+	protected InternetApplication loadAndCodegen(Class<?> modelFile, IProgressMonitor monitor) throws Exception {
+		InternetApplication root = loadAndInfer(modelFile, false, monitor);
 		doCodegen(modelFile, root);
 		return root;
 	}

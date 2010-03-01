@@ -16,12 +16,12 @@
         <nodes xsi:type="iaml.operations:CancelNode" id="operations.121370d7b50.5c" inExecutions="model.121370d7af2.1cc" exceptionText="this failure occured in the page"/>
         <executionEdges id="model.121370d7af2.1cc" from="operations.121370d7b50.5a" to="operations.121370d7b50.5c"/>
       </operations>
-      <eventTriggers id="model.121370d7af2.f5" name="access" outEdges="wires.121370d7b40.73">
+      <onAccess id="model.121370d7af2.f5" outEdges="wires.121370d7b40.73">
         <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.121370d7b40.73" from="model.121370d7af2.f5" to="model.121370d7af2.117" name="run"/>
-      </eventTriggers>
+      </onAccess>
     </scopes>
-    <eventTriggers id="model.121370d7af2.29" name="access" outEdges="wires.121370d7b40.11">
+    <onAccess id="model.121370d7af2.29" outEdges="wires.121370d7b40.11">
       <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.121370d7b40.11" from="model.121370d7af2.29" to="model.121370d7af2.33" name="run"/>
-    </eventTriggers>
+    </onAccess>
   </scopes>
 </iaml:InternetApplication>

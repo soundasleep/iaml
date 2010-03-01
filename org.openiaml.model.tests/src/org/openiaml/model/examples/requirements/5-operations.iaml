@@ -5,7 +5,7 @@
       <values id="model.1207ff82f9b.319" name="value" outParameterEdges="wires.1207ff8322b.4e" value="hello">
         <parameterEdges id="wires.1207ff8322b.4e" from="model.1207ff82f9b.319" to="wires.1207ff8322b.4d"/>
       </values>
-      <onEdit id="model.1207ff82f9b.1ae" name="edit" outEdges="wires.1207ff8322b.4d">
+      <onEdit id="model.1207ff82f9b.1ae" outEdges="wires.1207ff8322b.4d">
         <wires xsi:type="iaml.wires:RunInstanceWire" inParameterEdges="wires.1207ff8322b.4e" id="wires.1207ff8322b.4d" from="model.1207ff82f9b.1ae" to="model.1207ff82f9b.1bf" name="run"/>
       </onEdit>
     </children>
@@ -26,7 +26,7 @@
       <values id="model.1207ff82f9b.38d" name="value" outParameterEdges="wires.1207ff8322b.62" value="world!">
         <parameterEdges id="wires.1207ff8322b.62" from="model.1207ff82f9b.38d" to="wires.1207ff8322b.61"/>
       </values>
-      <onEdit id="model.1207ff82f9b.38c" name="edit" outEdges="wires.1207ff8322b.61">
+      <onEdit id="model.1207ff82f9b.38c" outEdges="wires.1207ff8322b.61">
         <wires xsi:type="iaml.wires:RunInstanceWire" inParameterEdges="wires.1207ff8322b.62" id="wires.1207ff8322b.61" from="model.1207ff82f9b.38c" to="model.1207ff82f9b.1bf" name="run2"/>
       </onEdit>
     </children>

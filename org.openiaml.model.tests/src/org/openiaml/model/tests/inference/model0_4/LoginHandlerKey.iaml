@@ -11,7 +11,7 @@
     <values id="model.11e37b8d89c.16" name="login key" outParameterEdges="wires.11e37b8d957.6" value="key42">
       <parameterEdges id="wires.11e37b8d957.6" from="model.11e37b8d89c.16" to="components.11e37b8d957.3"/>
     </values>
-    <elements xsi:type="iaml.components:LoginHandler" id="components.11e37b8d957.3" name="Login Handler" outEdges="wires.11e3802c67f.8 wires.11e3802c67f.9 wires.11e3802c67f.a" inParameterEdges="wires.11e37b8d957.6">
+    <elements xsi:type="iaml.components:LoginHandler" inParameterEdges="wires.11e37b8d957.6" id="components.11e37b8d957.3" name="Login Handler" outEdges="wires.11e3802c67f.8 wires.11e3802c67f.9 wires.11e3802c67f.a">
       <wires xsi:type="iaml.wires:NavigateWire" id="wires.11e3802c67f.8" from="components.11e37b8d957.3" to="visual.11e37b8d948.d" name="login"/>
       <wires xsi:type="iaml.wires:SetWire" id="wires.11e3802c67f.9" from="components.11e37b8d957.3" to="model.11e37b8d89c.17" name="set"/>
       <wires xsi:type="iaml.wires:NavigateWire" id="wires.11e3802c67f.a" from="components.11e37b8d957.3" to="visual.11e19f1b1ea.2" name="logout"/>

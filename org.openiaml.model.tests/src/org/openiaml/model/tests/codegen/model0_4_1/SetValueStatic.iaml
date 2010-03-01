@@ -15,7 +15,7 @@
         <executionEdges id="model.12542c563bb.22f" from="model.12542c563bb.22d" to="operations.12542c56428.27"/>
         <values id="model.12542c563bb.19c" name="static value" outFlows="model.12542c563bb.230" value="hello42"/>
       </operations>
-      <onClick id="model.12542c563bb.16f" name="click" outEdges="wires.12542c56428.1b">
+      <onClick id="model.12542c563bb.16f" outEdges="wires.12542c56428.1b">
         <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.12542c56428.1b" from="model.12542c563bb.16f" to="model.12542c563bb.170" name="run"/>
       </onClick>
     </children>

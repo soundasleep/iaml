@@ -20,7 +20,7 @@
         <executionEdges id="model.12542c563bb.e6" from="operations.12542c56428.5" to="model.12542c563bb.dc"/>
         <executionEdges id="model.12542c563bb.e8" from="model.12542c563bb.dc" to="operations.12542c56428.7"/>
       </operations>
-      <onClick id="model.12542c563bb.80" name="click" outEdges="wires.12542c56428.3">
+      <onClick id="model.12542c563bb.80" outEdges="wires.12542c56428.3">
         <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.12542c56428.3" from="model.12542c563bb.80" to="model.12542c563bb.81" name="run"/>
       </onClick>
     </children>

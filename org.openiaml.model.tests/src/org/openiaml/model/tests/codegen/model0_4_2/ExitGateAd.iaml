@@ -17,9 +17,9 @@
         <executionEdges id="model.126b0cb5dec.17f" from="model.126b0cb5dec.176" to="operations.126b0cb5e69.8c"/>
         <values id="model.126b0cb5dec.178" name="true" outFlows="model.126b0cb5dec.180" value="true"/>
       </operations>
-      <eventTriggers id="model.126b0cb5dec.c4" name="access" outEdges="wires.126b0cb5e5a.4b">
+      <onAccess id="model.126b0cb5dec.c4" outEdges="wires.126b0cb5e5a.4b">
         <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.126b0cb5e5a.4b" from="model.126b0cb5dec.c4" to="model.126b0cb5dec.d8" name="run"/>
-      </eventTriggers>
+      </onAccess>
       <children xsi:type="iaml.visual:Button" outEdges="wires.126b0cb5e5a.10e" id="visual.126b0cb5e5a.2d5" name="Resume">
         <wires xsi:type="iaml.wires:NavigateWire" id="wires.126b0cb5e5a.10e" from="visual.126b0cb5e5a.2d5" to="components.126b0cb5e69.5" name="onClick"/>
       </children>

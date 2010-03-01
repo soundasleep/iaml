@@ -34,24 +34,24 @@
       </children>
     </scopes>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233b53a313.1ce" name="requires role 1">
-      <elements xsi:type="iaml.components:AccessControlHandler" id="components.1233b53a67e.9a" name="require role 1" outRequiresEdges="wires.1233b53a3ce.23a">
+      <elements xsi:type="iaml.components:AccessControlHandler" outRequiresEdges="wires.1233b53a3ce.23a" id="components.1233b53a67e.9a" name="require role 1">
         <requiresEdges id="wires.1233b53a3ce.23a" from="components.1233b53a67e.9a" to="users.1233b53a814.62"/>
       </elements>
     </scopes>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233b53a313.361" name="requires permission 1">
-      <elements xsi:type="iaml.components:AccessControlHandler" id="components.1233b53a67e.110" name="requires permission 1" outRequiresEdges="wires.1233b53a3ce.453">
+      <elements xsi:type="iaml.components:AccessControlHandler" outRequiresEdges="wires.1233b53a3ce.453" id="components.1233b53a67e.110" name="requires permission 1">
         <requiresEdges id="wires.1233b53a3ce.453" from="components.1233b53a67e.110" to="users.1233b53a814.6f"/>
       </elements>
     </scopes>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233b53a313.421" name="requires inherited permission">
-      <elements xsi:type="iaml.components:AccessControlHandler" id="components.1233b53a67e.153" name="requires inherited permission" outRequiresEdges="wires.1233b53a3ce.544">
+      <elements xsi:type="iaml.components:AccessControlHandler" outRequiresEdges="wires.1233b53a3ce.544" id="components.1233b53a67e.153" name="requires inherited permission">
         <requiresEdges id="wires.1233b53a3ce.544" from="components.1233b53a67e.153" to="users.1233b53a814.70"/>
       </elements>
     </scopes>
-    <elements xsi:type="iaml.components:AccessControlHandler" id="components.1233afe6424.13" name="role-based access" outRequiresEdges="wires.1233afe62eb.2d">
+    <elements xsi:type="iaml.components:AccessControlHandler" outRequiresEdges="wires.1233afe62eb.2d" id="components.1233afe6424.13" name="role-based access">
       <requiresEdges id="wires.1233afe62eb.2d" from="components.1233afe6424.13" to="users.1233afe655c.23"/>
     </elements>
-    <elements xsi:type="iaml.components:LoginHandler" id="components.1233b53a67e.19" name="current user" outEdges="wires.1233b53a3ce.5c" inParameterEdges="wires.1233b53a3ce.5a" type="USER">
+    <elements xsi:type="iaml.components:LoginHandler" inParameterEdges="wires.1233b53a3ce.5a" id="components.1233b53a67e.19" name="current user" outEdges="wires.1233b53a3ce.5c" type="USER">
       <wires xsi:type="iaml.wires:SetWire" id="wires.1233b53a3ce.5c" from="components.1233b53a67e.19" to="users.1233b53a814.d0" name="set"/>
     </elements>
     <elements xsi:type="iaml.users:UserInstance" id="users.1233b53a814.d0" name="logged in user" inEdges="wires.1233b53a3ce.5c" autosave="true">

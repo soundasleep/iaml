@@ -20,7 +20,7 @@
       <properties id="model.120ac60dcea.1d9" name="fieldValue" outParameterEdges="wires.120ac60dd48.cc">
         <parameterEdges id="wires.120ac60dd48.cc" from="model.120ac60dcea.1d9" to="wires.120ac60dd48.b8"/>
       </properties>
-      <onEdit id="model.120ac60dcea.133" name="edit" outEdges="wires.120ac60dd48.b8">
+      <onEdit id="model.120ac60dcea.133" outEdges="wires.120ac60dd48.b8">
         <wires xsi:type="iaml.wires:RunInstanceWire" inParameterEdges="wires.120ac60dd48.cc" id="wires.120ac60dd48.b8" from="model.120ac60dcea.133" to="model.120ac60dcea.198" name="run"/>
       </onEdit>
     </children>

@@ -38,11 +38,11 @@
       <values id="model.1254759b7c1.797" name="init" outFlows="model.1254759b7c1.798 model.1254759b7c1.799" value="1"/>
       <values id="model.1254759b7c1.7a0" name="one" outFlows="model.1254759b7c1.7a8" value="1"/>
     </operations>
-    <eventTriggers id="model.1254759b7c1.72a" name="access" outEdges="wires.1254759bc84.8f">
-      <wires xsi:type="iaml.wires:RunInstanceWire" inParameterEdges="wires.1254759bc84.94" id="wires.1254759bc84.8f" from="model.1254759b7c1.72a" to="model.1254759b7c1.72b" name="run"/>
-    </eventTriggers>
     <values id="model.1254759b7c1.741" name="fib value" outParameterEdges="wires.1254759bc84.94" value="5">
       <parameterEdges id="wires.1254759bc84.94" from="model.1254759b7c1.741" to="wires.1254759bc84.8f"/>
     </values>
+    <onAccess id="model.1254759b7c1.72a" outEdges="wires.1254759bc84.8f">
+      <wires xsi:type="iaml.wires:RunInstanceWire" inParameterEdges="wires.1254759bc84.94" id="wires.1254759bc84.8f" from="model.1254759b7c1.72a" to="model.1254759b7c1.72b" name="run"/>
+    </onAccess>
   </scopes>
 </iaml:InternetApplication>

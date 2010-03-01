@@ -6,8 +6,8 @@
       <nodes xsi:type="iaml.operations:CancelNode" id="operations.12109dbdd49.3" inExecutions="model.12109dbdceb.66" exceptionText="an expected failure message"/>
       <executionEdges id="model.12109dbdceb.66" from="operations.12109dbdd49.1" to="operations.12109dbdd49.3"/>
     </operations>
-    <eventTriggers id="model.12109dbdceb.21" name="access" outEdges="wires.12109dbdd39.6">
+    <onAccess id="model.12109dbdceb.21" outEdges="wires.12109dbdd39.6">
       <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.12109dbdd39.6" from="model.12109dbdceb.21" to="model.12109dbdceb.2d" name="run"/>
-    </eventTriggers>
+    </onAccess>
   </scopes>
 </iaml:InternetApplication>

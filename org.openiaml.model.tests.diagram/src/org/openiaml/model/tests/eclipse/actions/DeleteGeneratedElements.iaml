@@ -2,9 +2,9 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1227e0889db.38">
   <scopes xsi:type="iaml.visual:Frame" id="visual.1227e088ab6.15" name="container">
     <operations xsi:type="iaml:CompositeOperation" inEdges="wires.1227e088ab6.1a" id="model.1227e0889db.4e" name="incoming"/>
-    <eventTriggers id="model.1227e0889db.4f" name="outgoing" outEdges="wires.1227e088ab6.1b">
+    <onAccess id="model.1227e0889db.4f" outEdges="wires.1227e088ab6.1b">
       <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1227e088ab6.1b" from="model.1227e0889db.4f" to="model.1227e0889db.5c" name="run in"/>
-    </eventTriggers>
+    </onAccess>
     <children xsi:type="iaml.visual:InputTextField" isGenerated="true" id="visual.1227e088ab6.1c" name="target" generatedElements="model.1227e0889db.5b model.1227e0889db.5c model.1227e0889db.5d model.1227e0889db.5e model.1227e0889db.5f">
       <operations xsi:type="iaml:CompositeOperation" generatedBy="visual.1227e088ab6.1c" isGenerated="true" id="model.1227e0889db.5b" name="init" generatedElements="model.1227e0889db.66 model.1227e0889db.67 operations.1227e088ac6.b operations.1227e088ac6.c model.1227e0889db.68 model.1227e0889db.69 model.1227e0889db.6a model.1227e0889db.6b">
         <parameters generatedBy="model.1227e0889db.5b" isGenerated="true" id="model.1227e0889db.66" name="setValueTo" outFlows="model.1227e0889db.68"/>
@@ -27,10 +27,10 @@
         <executionEdges generatedBy="model.1227e0889db.5c" isGenerated="true" id="model.1227e0889db.65" from="model.1227e0889db.61" to="operations.1227e088ac6.a"/>
       </operations>
       <properties generatedBy="visual.1227e088ab6.1c" isGenerated="true" id="model.1227e0889db.5f" name="fieldValue" inFlows="model.1227e0889db.63 model.1227e0889db.69"/>
-      <onEdit generatedBy="visual.1227e088ab6.1c" isGenerated="true" id="model.1227e0889db.5e" name="edit" outEdges="wires.1227e088ab6.1a">
+      <onEdit generatedBy="visual.1227e088ab6.1c" isGenerated="true" id="model.1227e0889db.5e" outEdges="wires.1227e088ab6.1a">
         <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1227e088ab6.1a" from="model.1227e0889db.5e" to="model.1227e0889db.4e" name="run out"/>
       </onEdit>
-      <onAccess generatedBy="visual.1227e088ab6.1c" isGenerated="true" id="model.1227e0889db.5d" name="access"/>
+      <onAccess generatedBy="visual.1227e088ab6.1c" isGenerated="true" id="model.1227e0889db.5d"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" isGenerated="true" id="visual.1227e088ab6.25" name="unrelated" generatedElements="model.1227e0889db.78 model.1227e0889db.79 model.1227e0889db.7a model.1227e0889db.7b model.1227e0889db.7c">
       <operations xsi:type="iaml:CompositeOperation" generatedBy="visual.1227e088ab6.25" isGenerated="true" id="model.1227e0889db.78" name="init" generatedElements="model.1227e0889db.8f model.1227e0889db.90 operations.1227e088ac6.17 operations.1227e088ac6.18 model.1227e0889db.91 model.1227e0889db.92 model.1227e0889db.93 model.1227e0889db.94">
@@ -54,8 +54,8 @@
         <executionEdges generatedBy="model.1227e0889db.79" isGenerated="true" id="model.1227e0889db.8e" from="model.1227e0889db.8a" to="operations.1227e088ac6.16"/>
       </operations>
       <properties generatedBy="visual.1227e088ab6.25" isGenerated="true" id="model.1227e0889db.7c" name="fieldValue" inFlows="model.1227e0889db.8c model.1227e0889db.92"/>
-      <onEdit generatedBy="visual.1227e088ab6.25" isGenerated="true" id="model.1227e0889db.7b" name="edit"/>
-      <onAccess generatedBy="visual.1227e088ab6.25" isGenerated="true" id="model.1227e0889db.7a" name="access"/>
+      <onEdit generatedBy="visual.1227e088ab6.25" isGenerated="true" id="model.1227e0889db.7b"/>
+      <onAccess generatedBy="visual.1227e088ab6.25" isGenerated="true" id="model.1227e0889db.7a"/>
     </children>
   </scopes>
 </iaml:InternetApplication>

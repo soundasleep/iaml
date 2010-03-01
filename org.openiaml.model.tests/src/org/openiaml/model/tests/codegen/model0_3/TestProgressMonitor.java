@@ -36,7 +36,7 @@ public class TestProgressMonitor extends CodegenTestCase {
 		};
 		
 		// do codegen
-		root = loadAndCodegen(TestProgressMonitor.class);
+		root = loadAndCodegen(TestProgressMonitor.class, monitor);
 		
 		// check for all these subtasks
 		String[] wanted = {
@@ -58,5 +58,5 @@ public class TestProgressMonitor extends CodegenTestCase {
 		}
 		
 	}
-
+	
 }

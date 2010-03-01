@@ -6,11 +6,11 @@
         <operations xsi:type="iaml:CompositeOperation" inEdges="wires.120a748ec72.9b" id="model.120a748ea9e.ec" name="update"/>
       </children>
     </scopes>
-    <eventTriggers id="model.120a748ea9e.d9" name="init" outEdges="wires.120a748ec72.9b">
-      <wires xsi:type="iaml.wires:RunInstanceWire" inParameterEdges="wires.120a748ec72.9d" id="wires.120a748ec72.9b" from="model.120a748ea9e.d9" to="model.120a748ea9e.ec" name="run on init"/>
-    </eventTriggers>
     <values id="model.120a748ea9e.103" name="initial value" outParameterEdges="wires.120a748ec72.9d" value="initialised by init">
       <parameterEdges id="wires.120a748ec72.9d" from="model.120a748ea9e.103" to="wires.120a748ec72.9b"/>
     </values>
+    <onInit id="model.120a748ea9e.d9" outEdges="wires.120a748ec72.9b">
+      <wires xsi:type="iaml.wires:RunInstanceWire" inParameterEdges="wires.120a748ec72.9d" id="wires.120a748ec72.9b" from="model.120a748ea9e.d9" to="model.120a748ea9e.ec" name="run on init"/>
+    </onInit>
   </scopes>
 </iaml:InternetApplication>

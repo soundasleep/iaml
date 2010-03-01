@@ -14,9 +14,9 @@
       <executionEdges id="model.125437f916e.149" from="model.125437f916e.145" to="operations.125437f91eb.f"/>
       <values id="model.125437f916e.146" name="static value" outFlows="model.125437f916e.14c" value="42"/>
     </operations>
-    <eventTriggers id="model.125437f916e.5a" name="access" outEdges="wires.125437f91eb.5">
+    <onAccess id="model.125437f916e.5a" outEdges="wires.125437f91eb.5">
       <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.125437f91eb.5" from="model.125437f916e.5a" to="model.125437f916e.a1" name="run"/>
-    </eventTriggers>
+    </onAccess>
     <children xsi:type="iaml.visual:InputTextField" id="visual.125437f91db.33" name="result">
       <properties id="model.125437f916e.11b" name="fieldValue" outFlows="model.1254759b7c1.213" inFlows="model.125437f916e.14e"/>
     </children>
@@ -29,9 +29,6 @@
       <properties id="model.125437f916e.76" name="fieldValue" outFlows="model.125437f916e.14a"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.1254759bbc9.54" name="make negative">
-      <onClick id="model.1254759b7c1.154" outEdges="wires.1254759bc84.16">
-        <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1254759bc84.16" from="model.1254759b7c1.154" to="model.1254759b7c1.155" name="run"/>
-      </onClick>
       <operations xsi:type="iaml:CompositeOperation" inEdges="wires.1254759bc84.16" id="model.1254759b7c1.155" name="make negative">
         <operations xsi:type="iaml:PrimitiveOperation" id="model.1254759b7c1.20e" name="setPropertyToValue" inFlows="model.1254759b7c1.216" inExecutions="model.1254759b7c1.210" outFlows="model.1254759b7c1.217" outExecutions="model.1254759b7c1.212"/>
         <nodes xsi:type="iaml.operations:StartNode" id="operations.1254759bd7e.69" outExecutions="model.1254759b7c1.210"/>
@@ -45,6 +42,9 @@
         <executionEdges id="model.1254759b7c1.212" from="model.1254759b7c1.20e" to="operations.1254759bd7e.6a"/>
         <values id="model.1254759b7c1.20f" name="negative 1" outFlows="model.1254759b7c1.215" value="-1"/>
       </operations>
+      <onClick id="model.1254759b7c1.154" outEdges="wires.1254759bc84.16">
+        <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1254759bc84.16" from="model.1254759b7c1.154" to="model.1254759b7c1.155" name="run"/>
+      </onClick>
     </children>
   </scopes>
 </iaml:InternetApplication>

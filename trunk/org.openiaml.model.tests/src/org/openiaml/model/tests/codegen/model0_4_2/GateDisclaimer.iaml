@@ -12,9 +12,9 @@
       <executionEdges id="model.1268c991b90.6f" from="model.1268c991b90.6b" to="operations.1268c991bfe.3"/>
       <values id="model.1268c991b90.6c" name="true" outFlows="model.1268c991b90.75" value="true"/>
     </operations>
-    <eventTriggers id="model.1268c991b90.33" name="access" outEdges="wires.1268c991bee.33">
+    <onAccess id="model.1268c991b90.33" outEdges="wires.1268c991bee.33">
       <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1268c991bee.33" from="model.1268c991b90.33" to="model.1268c991b90.3f" name="run"/>
-    </eventTriggers>
+    </onAccess>
     <children xsi:type="iaml.visual:Button" outEdges="wires.1268c991bee.4a" id="visual.1268c991bee.74" name="continue">
       <wires xsi:type="iaml.wires:NavigateWire" id="wires.1268c991bee.4a" from="visual.1268c991bee.74" to="gate" name="onClick"/>
     </children>

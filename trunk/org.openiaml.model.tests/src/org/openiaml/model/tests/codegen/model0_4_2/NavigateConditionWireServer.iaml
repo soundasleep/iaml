@@ -6,9 +6,6 @@
     </children>
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.126aaf8397d.26e" name="Page 1">
-    <eventTriggers id="model.126aaf83900.4f5" name="access" outEdges="wires.126aaf8398c.137">
-      <wires xsi:type="iaml.wires:NavigateWire" id="wires.126aaf8398c.137" from="model.126aaf83900.4f5" to="visual.126aaf8397d.270" name="navigate" inConditionEdges="wires.126aaf8398c.13d"/>
-    </eventTriggers>
     <conditions xsi:type="iaml:CompositeCondition" id="model.126aaf83900.4f8" name="redirect to page 2?" outConditionEdges="wires.126aaf8398c.13d">
       <conditions xsi:type="iaml.operations:DecisionCondition" id="operations.126aaf8398c.139" name="true?" outExecutions="model.126aaf83900.536 model.126aaf83900.537" inExecutions="model.126aaf83900.538" inFlows="model.126aaf83900.539"/>
       <conditionEdges id="wires.126aaf8398c.13d" from="model.126aaf83900.4f8" to="wires.126aaf8398c.137"/>
@@ -20,6 +17,9 @@
       <executionEdges id="model.126aaf83900.537" name="n" from="operations.126aaf8398c.139" to="operations.126aaf8398c.138"/>
       <executionEdges id="model.126aaf83900.538" from="operations.126aaf8398c.136" to="operations.126aaf8398c.139"/>
     </conditions>
+    <onAccess id="model.126aaf83900.4f5" outEdges="wires.126aaf8398c.137">
+      <wires xsi:type="iaml.wires:NavigateWire" id="wires.126aaf8398c.137" from="model.126aaf83900.4f5" to="visual.126aaf8397d.270" name="navigate" inConditionEdges="wires.126aaf8398c.13d"/>
+    </onAccess>
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.126aaf8397d.270" name="Page 2" inEdges="wires.126aaf8398c.137"/>
 </iaml:InternetApplication>

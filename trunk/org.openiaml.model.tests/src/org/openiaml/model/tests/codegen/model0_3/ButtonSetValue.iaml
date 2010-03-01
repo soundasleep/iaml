@@ -11,7 +11,7 @@
       <properties id="model.12109331eea.70" name="fieldValue"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.12109331f38.f0" name="copy value over to target">
-      <onClick id="model.12109331eea.89" name="onClick" outEdges="wires.12109331f38.1c">
+      <onClick id="model.12109331eea.89" outEdges="wires.12109331f38.1c">
         <wires xsi:type="iaml.wires:RunInstanceWire" inParameterEdges="wires.12109331f38.1e" id="wires.12109331f38.1c" from="model.12109331eea.89" to="model.12109331eea.b2" name="run"/>
       </onClick>
     </children>
@@ -19,7 +19,7 @@
       <values id="model.12109331eea.121" name="empty value" outParameterEdges="wires.12109331f38.3d" value="empty">
         <parameterEdges id="wires.12109331f38.3d" from="model.12109331eea.121" to="wires.12109331f38.3c"/>
       </values>
-      <onClick id="model.12109331eea.146" name="onClick" outEdges="wires.12109331f38.3c">
+      <onClick id="model.12109331eea.146" outEdges="wires.12109331f38.3c">
         <wires xsi:type="iaml.wires:RunInstanceWire" inParameterEdges="wires.12109331f38.3d" id="wires.12109331f38.3c" from="model.12109331eea.146" to="model.12109331eea.b2" name="run"/>
       </onClick>
     </children>

@@ -6,7 +6,7 @@
       <properties id="model.1203bbadb5b.834" name="fieldValue" outParameterEdges="wires.1203bbadbb8.208">
         <parameterEdges id="wires.1203bbadbb8.208" from="model.1203bbadb5b.834" to="wires.1203bbadbb8.207"/>
       </properties>
-      <onEdit id="model.1203bbadb5b.832" name="edit" outEdges="wires.1203bbadbb8.207">
+      <onEdit id="model.1203bbadb5b.832" outEdges="wires.1203bbadbb8.207">
         <wires xsi:type="iaml.wires:RunInstanceWire" inParameterEdges="wires.1203bbadbb8.208" id="wires.1203bbadbb8.207" from="model.1203bbadb5b.832" to="model.1203bbadb5b.833" name="run"/>
       </onEdit>
     </children>

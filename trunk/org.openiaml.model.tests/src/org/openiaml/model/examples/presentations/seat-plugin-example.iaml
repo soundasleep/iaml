@@ -13,7 +13,7 @@
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.121a45a2653.24" name="does nothing"/>
     <children xsi:type="iaml.visual:Button" id="visual.121a45a2653.ca" name="do manual sync">
-      <onClick id="model.121a45a251b.7f" name="onClick" outEdges="wires.121a45a270f.70">
+      <onClick id="model.121a45a251b.7f" outEdges="wires.121a45a270f.70">
         <wires xsi:type="iaml.wires:RunInstanceWire" inParameterEdges="wires.121a45a270f.71" id="wires.121a45a270f.70" from="model.121a45a251b.7f" to="model.121a45a251b.b3" name="run"/>
       </onClick>
     </children>

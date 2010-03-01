@@ -3,7 +3,7 @@
   <scopes xsi:type="iaml.visual:Frame" id="visual.1233afe628e.15" name="Home"/>
   <scopes xsi:type="iaml.scopes:Session" id="scopes.1233afe6368.3" name="target session">
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233afe628e.7e" name="target"/>
-    <elements xsi:type="iaml.components:AccessControlHandler" id="components.1233afe6424.13" name="role-based access" outRequiresEdges="wires.1233afe62eb.2d">
+    <elements xsi:type="iaml.components:AccessControlHandler" outRequiresEdges="wires.1233afe62eb.2d" id="components.1233afe6424.13" name="role-based access">
       <requiresEdges id="wires.1233afe62eb.2d" from="components.1233afe6424.13" to="users.1233afe655c.23"/>
     </elements>
   </scopes>

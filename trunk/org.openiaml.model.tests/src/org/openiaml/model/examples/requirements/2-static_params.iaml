@@ -6,7 +6,7 @@
       <values id="model.1203bbadb5b.53e" name="a static value" outParameterEdges="wires.1203bbadbb8.153" value="value goes here">
         <parameterEdges id="wires.1203bbadbb8.153" from="model.1203bbadb5b.53e" to="wires.1203bbadbb8.152"/>
       </values>
-      <onAccess id="model.1203bbadb5b.53c" name="access" outEdges="wires.1203bbadbb8.152">
+      <onAccess id="model.1203bbadb5b.53c" outEdges="wires.1203bbadbb8.152">
         <wires xsi:type="iaml.wires:RunInstanceWire" inParameterEdges="wires.1203bbadbb8.153" id="wires.1203bbadbb8.152" from="model.1203bbadb5b.53c" to="model.1203bbadb5b.53d" name="run"/>
       </onAccess>
     </children>

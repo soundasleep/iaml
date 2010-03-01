@@ -5,6 +5,7 @@ package org.openiaml.model.tests.eclipse.shortcuts;
 
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
+import org.openiaml.model.model.ModelPackage;
 
 /**
  * Tests element shortcuts.
@@ -56,7 +57,7 @@ public class ShortcutsElementTestCase extends AbstractShortcutsTestCase {
 		
 		// it should have a domain attribute connected to an event trigger
 		assertEditorHasChildren(3, editor_form);
-		ShapeNodeEditPart event = assertHasEventTrigger(editor_form, false, "onClick");
+		ShapeNodeEditPart event = assertHasEventTrigger(editor_form, false, ModelPackage.eINSTANCE.getVisibleThing_OnClick());
 		ShapeNodeEditPart op2 = assertHasOperation(editor_form, "op");
 		ShapeNodeEditPart field2 = assertHasInputTextField(editor_form, "target2");
 		

@@ -6,6 +6,7 @@ package org.openiaml.model.tests.eclipse.shortcuts;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
+import org.openiaml.model.model.ModelPackage;
 
 /**
  * Issue 47: InputTextField editor does not render shortcutted elements
@@ -64,8 +65,8 @@ public class Issue47 extends AbstractShortcutsTestCase {
 		
 		// editor should contain both "edit" and "update" operations for
 		// text1 and text2
-		ShapeNodeEditPart text1_edit = assertHasEventTrigger(editor_text, false, "onEdit");
-		ShapeNodeEditPart text2_edit = assertHasEventTrigger(editor_text, true, "onEdit");
+		ShapeNodeEditPart text1_edit = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getVisibleThing_OnEdit() );
+		ShapeNodeEditPart text2_edit = assertHasEventTrigger(editor_text, true,  ModelPackage.eINSTANCE.getVisibleThing_OnEdit());
 		assertNotSame(text1_edit, text2_edit);
 		assertGenerated(text1_edit);
 		assertGenerated(text2_edit);

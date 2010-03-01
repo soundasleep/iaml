@@ -12,6 +12,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.openiaml.model.diagram.custom.actions.InferContainedElementsAction;
+import org.openiaml.model.model.ModelPackage;
 
 /**
  * Test partial inference.
@@ -161,9 +162,9 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 			assertNotGenerated(text2);
 			ConnectionNodeEditPart sync = assertHasSyncWire(editor_page, text1, text2, "sync");
 			assertNotGenerated(sync);
-			ShapeNodeEditPart access = assertHasEventTrigger(editor_page, false, "onAccess");
+			ShapeNodeEditPart access = assertHasEventTrigger(editor_page, false, ModelPackage.eINSTANCE.getScope_OnAccess());
 			assertGenerated(access);
-			ShapeNodeEditPart init = assertHasEventTrigger(editor_page, false, "onInit");
+			ShapeNodeEditPart init = assertHasEventTrigger(editor_page, false, ModelPackage.eINSTANCE.getScope_OnInit());
 			assertGenerated(init);
 			
 			// in the fully inferred file, there should be lots of children
@@ -200,9 +201,9 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		assertNotGenerated(text2);
 		ConnectionNodeEditPart sync = assertHasSyncWire(editor_page, text1, text2, "sync");
 		assertNotGenerated(sync);
-		ShapeNodeEditPart access = assertHasEventTrigger(editor_page, false, "onAccess");
+		ShapeNodeEditPart access = assertHasEventTrigger(editor_page, false, ModelPackage.eINSTANCE.getScope_OnAccess());
 		assertGenerated(access);
-		ShapeNodeEditPart init = assertHasEventTrigger(editor_page, false, "onInit");
+		ShapeNodeEditPart init = assertHasEventTrigger(editor_page, false,ModelPackage.eINSTANCE.getScope_OnInit());
 		assertGenerated(init);
 		
 		// in the fully inferred file, there should be lots of children
@@ -220,8 +221,8 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		
 		assertEditorHasChildren(6, editor_text);
 		
-		ShapeNodeEditPart access = assertHasEventTrigger(editor_text, false, "onAccess");
-		ShapeNodeEditPart edit = assertHasEventTrigger(editor_text, false, "onEdit");
+		ShapeNodeEditPart access = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getVisibleThing_OnAccess());
+		ShapeNodeEditPart edit = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getVisibleThing_OnEdit());
 		ShapeNodeEditPart update = assertHasOperation(editor_text, "update", false);
 		ShapeNodeEditPart init = assertHasOperation(editor_text, "init", false);
 		ShapeNodeEditPart fieldValue = assertHasFieldValue(editor_text, false);
@@ -248,15 +249,15 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		
 		assertEditorHasChildren(10, editor_text);
 		
-		ShapeNodeEditPart access = assertHasEventTrigger(editor_text, false, "onAccess");
-		ShapeNodeEditPart edit = assertHasEventTrigger(editor_text, false, "onEdit");
+		ShapeNodeEditPart access = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getVisibleThing_OnAccess());
+		ShapeNodeEditPart edit = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getVisibleThing_OnEdit());
 		ShapeNodeEditPart update = assertHasOperation(editor_text, "update", false);
 		ShapeNodeEditPart init = assertHasOperation(editor_text, "init", false);
 		ShapeNodeEditPart fieldValue = assertHasFieldValue(editor_text, false);
 		ShapeNodeEditPart condition = assertHasCompositeCondition(editor_text, "fieldValue is set", false);
 		ShapeNodeEditPart condition2 = assertHasCompositeCondition(editor_text, "fieldValue is set", true);
 
-		ShapeNodeEditPart edit2 = assertHasEventTrigger(editor_text, true, "onEdit");
+		ShapeNodeEditPart edit2 = assertHasEventTrigger(editor_text, true, ModelPackage.eINSTANCE.getVisibleThing_OnEdit());
 		ShapeNodeEditPart update2 = assertHasOperation(editor_text, "update", true);
 		ShapeNodeEditPart fieldValue2 = assertHasFieldValue(editor_text, true);
 

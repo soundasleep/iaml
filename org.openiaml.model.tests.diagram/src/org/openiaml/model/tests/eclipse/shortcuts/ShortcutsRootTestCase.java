@@ -5,6 +5,7 @@ package org.openiaml.model.tests.eclipse.shortcuts;
 
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
+import org.openiaml.model.model.ModelPackage;
 
 /**
  * Tests root shortcuts.
@@ -32,7 +33,7 @@ public class ShortcutsRootTestCase extends AbstractShortcutsTestCase {
 		ShapeNodeEditPart page = assertHasFrame(editor, "page");
 		ShapeNodeEditPart op = assertHasOperation(editor, "op");
 		ShapeNodeEditPart et = assertHasEventTrigger(editor, "init");
-		ShapeNodeEditPart chained = assertHasEventTrigger(editor, false, "onInit");
+		ShapeNodeEditPart chained = assertHasEventTrigger(editor, false, ModelPackage.eINSTANCE.getScope_OnInit());
 
 		// they should be connected
 		assertHasRunInstanceWire(editor, et, op, "run1");
@@ -49,7 +50,7 @@ public class ShortcutsRootTestCase extends AbstractShortcutsTestCase {
 
 		// it should have a domain object
 		assertEditorHasChildren(2, editor_page);
-		ShapeNodeEditPart chained2 = assertHasEventTrigger(editor_page, false, "onInit");
+		ShapeNodeEditPart chained2 = assertHasEventTrigger(editor_page, false, ModelPackage.eINSTANCE.getScope_OnInit());
 		ShapeNodeEditPart op2 = assertHasOperation(editor_page, "op");
 
 		// they should be connected

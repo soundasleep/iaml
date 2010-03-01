@@ -7,10 +7,18 @@
     xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition">
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//ContainsEventTriggers/eventTriggers"/>
+        href="iaml.ecore#//Scope/onAccess"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//EventTrigger"/>
+      <domainSpecialization
+          body="return domainElement.eContainingFeature().getName().equals(&quot;onAccess&quot;);"
+          language="java"/>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerContainmentFeature"/>
+      </labelMappings>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
@@ -25,7 +33,40 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="frame.gmftool#//@palette/@tools.0/@tools.0"/>
+          href="frame.gmftool#//@palette/@tools.5/@tools.0"/>
+      <diagramNode
+          href="iaml.gmfgraph#EventTrigger"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//Scope/onInit"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//EventTrigger"/>
+      <domainSpecialization
+          body="return domainElement.eContainingFeature().getName().equals(&quot;onInit&quot;);"
+          language="java"/>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerContainmentFeature"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerParentName"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="frame.gmftool#//@palette/@tools.5/@tools.1"/>
       <diagramNode
           href="iaml.gmfgraph#EventTrigger"/>
     </ownedChild>
@@ -52,7 +93,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="frame.gmftool#//@palette/@tools.0/@tools.2"/>
+          href="frame.gmftool#//@palette/@tools.0/@tools.1"/>
       <diagramNode
           href="iaml.gmfgraph#CompositeOperation"/>
     </ownedChild>
@@ -79,7 +120,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="frame.gmftool#//@palette/@tools.0/@tools.1"/>
+          href="frame.gmftool#//@palette/@tools.0/@tools.0"/>
       <diagramNode
           href="iaml.gmfgraph#PrimitiveOperation"/>
     </ownedChild>
@@ -168,7 +209,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="frame.gmftool#//@palette/@tools.0/@tools.3"/>
+          href="frame.gmftool#//@palette/@tools.0/@tools.2"/>
       <diagramNode
           href="iaml.gmfgraph#Property"/>
     </ownedChild>
@@ -273,7 +314,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="frame.gmftool#//@palette/@tools.0/@tools.5"/>
+          href="frame.gmftool#//@palette/@tools.0/@tools.4"/>
       <diagramNode
           href="iaml.gmfgraph#StaticValue"/>
     </ownedChild>
@@ -328,7 +369,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="frame.gmftool#//@palette/@tools.0/@tools.6"/>
+          href="frame.gmftool#//@palette/@tools.0/@tools.5"/>
       <diagramNode
           href="iaml.gmfgraph#LoginHandler"/>
     </ownedChild>
@@ -356,7 +397,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="frame.gmftool#//@palette/@tools.0/@tools.4"/>
+          href="frame.gmftool#//@palette/@tools.0/@tools.3"/>
       <diagramNode
           href="iaml.gmfgraph#CompositeCondition"/>
     </ownedChild>
@@ -458,7 +499,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="frame.gmftool#//@palette/@tools.0/@tools.7"/>
+          href="frame.gmftool#//@palette/@tools.0/@tools.6"/>
       <diagramNode
           href="iaml.gmfgraph#QueryParameter"/>
     </ownedChild>
@@ -627,6 +668,31 @@
           href="frame.gmftool#//@palette/@tools.2/@tools.5"/>
       <diagramNode
           href="iaml.gmfgraph#Label"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//EventTrigger"/>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerContainmentFeature"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerParentName"/>
+      </labelMappings>
+      <diagramNode
+          href="iaml.gmfgraph#EventTrigger"/>
     </ownedChild>
   </nodes>
   <links>

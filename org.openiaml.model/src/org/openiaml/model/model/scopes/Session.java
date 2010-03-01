@@ -7,7 +7,6 @@
 package org.openiaml.model.model.scopes;
 
 import org.openiaml.model.model.ContainsConditions;
-import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.NamedElement;
@@ -29,6 +28,6 @@ import org.openiaml.model.model.WireEdgesSource;
  * @model annotation="http://openiaml.org/comment changed='0.4: no longer extends VisibleThing; now extends ContainsEventTriggers, ContainsConditions, WireEdgesSource and WireEdgeDestination\r\n0.4.2 removed \'agents\' reference'"
  * @generated
  */
-public interface Session extends NamedElement, ContainsOperations, Scope, ContainsWires, ContainsEventTriggers, WireEdgesSource, WireEdgeDestination, ContainsConditions {
+public interface Session extends NamedElement, ContainsOperations, Scope, ContainsWires, WireEdgesSource, WireEdgeDestination, ContainsConditions {
 
 } // Session

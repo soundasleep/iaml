@@ -530,7 +530,6 @@ public class ModelSwitch<T> {
 				Scope scope = (Scope)theEObject;
 				T result = caseScope(scope);
 				if (result == null) result = caseContainsScopes(scope);
-				if (result == null) result = caseContainsEventTriggers(scope);
 				if (result == null) result = caseCanBeSynced(scope);
 				if (result == null) result = caseGeneratesElements(scope);
 				if (result == null) result = caseContainsOperations(scope);

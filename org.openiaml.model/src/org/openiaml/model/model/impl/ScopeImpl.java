@@ -22,7 +22,6 @@ import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsConditions;
-import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsScopes;
 import org.openiaml.model.model.ContainsWires;
@@ -74,7 +73,6 @@ import org.openiaml.model.model.wires.RequiresEdge;
  *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getOutEdges <em>Out Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getInEdges <em>In Edges</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getEventTriggers <em>Event Triggers</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getConditions <em>Conditions</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getEntryGate <em>Entry Gate</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getExitGate <em>Exit Gate</em>}</li>
@@ -82,6 +80,8 @@ import org.openiaml.model.model.wires.RequiresEdge;
  *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getValues <em>Values</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getElements <em>Elements</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getOnAccess <em>On Access</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getOnInit <em>On Init</em>}</li>
  * </ul>
  * </p>
  *
@@ -319,16 +319,6 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 	protected EList<WireEdge> inEdges;
 
 	/**
-	 * The cached value of the '{@link #getEventTriggers() <em>Event Triggers</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEventTriggers()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<EventTrigger> eventTriggers;
-
-	/**
 	 * The cached value of the '{@link #getConditions() <em>Conditions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -397,6 +387,26 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 	 * @ordered
 	 */
 	protected EList<ApplicationElement> elements;
+
+	/**
+	 * The cached value of the '{@link #getOnAccess() <em>On Access</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOnAccess()
+	 * @generated
+	 * @ordered
+	 */
+	protected EventTrigger onAccess;
+
+	/**
+	 * The cached value of the '{@link #getOnInit() <em>On Init</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOnInit()
+	 * @generated
+	 * @ordered
+	 */
+	protected EventTrigger onInit;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -683,18 +693,6 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<EventTrigger> getEventTriggers() {
-		if (eventTriggers == null) {
-			eventTriggers = new EObjectContainmentEList<EventTrigger>(EventTrigger.class, this, ModelPackage.SCOPE__EVENT_TRIGGERS);
-		}
-		return eventTriggers;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<Condition> getConditions() {
 		if (conditions == null) {
 			conditions = new EObjectContainmentEList<Condition>(Condition.class, this, ModelPackage.SCOPE__CONDITIONS);
@@ -841,6 +839,92 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EventTrigger getOnAccess() {
+		return onAccess;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOnAccess(EventTrigger newOnAccess, NotificationChain msgs) {
+		EventTrigger oldOnAccess = onAccess;
+		onAccess = newOnAccess;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.SCOPE__ON_ACCESS, oldOnAccess, newOnAccess);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOnAccess(EventTrigger newOnAccess) {
+		if (newOnAccess != onAccess) {
+			NotificationChain msgs = null;
+			if (onAccess != null)
+				msgs = ((InternalEObject)onAccess).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.SCOPE__ON_ACCESS, null, msgs);
+			if (newOnAccess != null)
+				msgs = ((InternalEObject)newOnAccess).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.SCOPE__ON_ACCESS, null, msgs);
+			msgs = basicSetOnAccess(newOnAccess, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.SCOPE__ON_ACCESS, newOnAccess, newOnAccess));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EventTrigger getOnInit() {
+		return onInit;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOnInit(EventTrigger newOnInit, NotificationChain msgs) {
+		EventTrigger oldOnInit = onInit;
+		onInit = newOnInit;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.SCOPE__ON_INIT, oldOnInit, newOnInit);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOnInit(EventTrigger newOnInit) {
+		if (newOnInit != onInit) {
+			NotificationChain msgs = null;
+			if (onInit != null)
+				msgs = ((InternalEObject)onInit).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.SCOPE__ON_INIT, null, msgs);
+			if (newOnInit != null)
+				msgs = ((InternalEObject)newOnInit).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.SCOPE__ON_INIT, null, msgs);
+			msgs = basicSetOnInit(newOnInit, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.SCOPE__ON_INIT, newOnInit, newOnInit));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -891,8 +975,6 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.SCOPE__IN_EDGES:
 				return ((InternalEList<?>)getInEdges()).basicRemove(otherEnd, msgs);
-			case ModelPackage.SCOPE__EVENT_TRIGGERS:
-				return ((InternalEList<?>)getEventTriggers()).basicRemove(otherEnd, msgs);
 			case ModelPackage.SCOPE__CONDITIONS:
 				return ((InternalEList<?>)getConditions()).basicRemove(otherEnd, msgs);
 			case ModelPackage.SCOPE__ENTRY_GATE:
@@ -907,6 +989,10 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
 			case ModelPackage.SCOPE__ELEMENTS:
 				return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
+			case ModelPackage.SCOPE__ON_ACCESS:
+				return basicSetOnAccess(null, msgs);
+			case ModelPackage.SCOPE__ON_INIT:
+				return basicSetOnInit(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -955,8 +1041,6 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 				return getOutEdges();
 			case ModelPackage.SCOPE__IN_EDGES:
 				return getInEdges();
-			case ModelPackage.SCOPE__EVENT_TRIGGERS:
-				return getEventTriggers();
 			case ModelPackage.SCOPE__CONDITIONS:
 				return getConditions();
 			case ModelPackage.SCOPE__ENTRY_GATE:
@@ -971,6 +1055,10 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 				return getParameters();
 			case ModelPackage.SCOPE__ELEMENTS:
 				return getElements();
+			case ModelPackage.SCOPE__ON_ACCESS:
+				return getOnAccess();
+			case ModelPackage.SCOPE__ON_INIT:
+				return getOnInit();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1051,10 +1139,6 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 				getInEdges().clear();
 				getInEdges().addAll((Collection<? extends WireEdge>)newValue);
 				return;
-			case ModelPackage.SCOPE__EVENT_TRIGGERS:
-				getEventTriggers().clear();
-				getEventTriggers().addAll((Collection<? extends EventTrigger>)newValue);
-				return;
 			case ModelPackage.SCOPE__CONDITIONS:
 				getConditions().clear();
 				getConditions().addAll((Collection<? extends Condition>)newValue);
@@ -1080,6 +1164,12 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 			case ModelPackage.SCOPE__ELEMENTS:
 				getElements().clear();
 				getElements().addAll((Collection<? extends ApplicationElement>)newValue);
+				return;
+			case ModelPackage.SCOPE__ON_ACCESS:
+				setOnAccess((EventTrigger)newValue);
+				return;
+			case ModelPackage.SCOPE__ON_INIT:
+				setOnInit((EventTrigger)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -1147,9 +1237,6 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 			case ModelPackage.SCOPE__IN_EDGES:
 				getInEdges().clear();
 				return;
-			case ModelPackage.SCOPE__EVENT_TRIGGERS:
-				getEventTriggers().clear();
-				return;
 			case ModelPackage.SCOPE__CONDITIONS:
 				getConditions().clear();
 				return;
@@ -1170,6 +1257,12 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 				return;
 			case ModelPackage.SCOPE__ELEMENTS:
 				getElements().clear();
+				return;
+			case ModelPackage.SCOPE__ON_ACCESS:
+				setOnAccess((EventTrigger)null);
+				return;
+			case ModelPackage.SCOPE__ON_INIT:
+				setOnInit((EventTrigger)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -1219,8 +1312,6 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 				return outEdges != null && !outEdges.isEmpty();
 			case ModelPackage.SCOPE__IN_EDGES:
 				return inEdges != null && !inEdges.isEmpty();
-			case ModelPackage.SCOPE__EVENT_TRIGGERS:
-				return eventTriggers != null && !eventTriggers.isEmpty();
 			case ModelPackage.SCOPE__CONDITIONS:
 				return conditions != null && !conditions.isEmpty();
 			case ModelPackage.SCOPE__ENTRY_GATE:
@@ -1235,6 +1326,10 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 				return parameters != null && !parameters.isEmpty();
 			case ModelPackage.SCOPE__ELEMENTS:
 				return elements != null && !elements.isEmpty();
+			case ModelPackage.SCOPE__ON_ACCESS:
+				return onAccess != null;
+			case ModelPackage.SCOPE__ON_INIT:
+				return onInit != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1299,12 +1394,6 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 		if (baseClass == WireEdgeDestination.class) {
 			switch (derivedFeatureID) {
 				case ModelPackage.SCOPE__IN_EDGES: return ModelPackage.WIRE_EDGE_DESTINATION__IN_EDGES;
-				default: return -1;
-			}
-		}
-		if (baseClass == ContainsEventTriggers.class) {
-			switch (derivedFeatureID) {
-				case ModelPackage.SCOPE__EVENT_TRIGGERS: return ModelPackage.CONTAINS_EVENT_TRIGGERS__EVENT_TRIGGERS;
 				default: return -1;
 			}
 		}
@@ -1382,12 +1471,6 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 		if (baseClass == WireEdgeDestination.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.WIRE_EDGE_DESTINATION__IN_EDGES: return ModelPackage.SCOPE__IN_EDGES;
-				default: return -1;
-			}
-		}
-		if (baseClass == ContainsEventTriggers.class) {
-			switch (baseFeatureID) {
-				case ModelPackage.CONTAINS_EVENT_TRIGGERS__EVENT_TRIGGERS: return ModelPackage.SCOPE__EVENT_TRIGGERS;
 				default: return -1;
 			}
 		}

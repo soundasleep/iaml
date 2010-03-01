@@ -41,6 +41,7 @@ import org.w3c.dom.NodeList;
  *      <li>RunInstanceWire is now a SingleWire, and not a CompositeWire; it no longer contains Operations directly.
  *   </ol></li>
  *   <li>VisibleThing no longer ContainsEventTriggers; now separate onAccess, onEdit, onClick events
+ *   <li>Scope no longer ContainsEventTriggers; now separate onAccess, onInit events
  *   <li><strong>Many other modifications, too many to list... this migrator only implements
  *   	those changed necessary for the model migration test to pass.</strong></li>
  * </ol>
@@ -288,11 +289,12 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 			// only for VisibleThings
 			Element parent = (Element) element.getParentNode();
 			String parentType = parent.getAttribute("xsi:type");
-			if ("iaml.visual:Frame".equals(parentType) 
-					|| "iaml.visual:Page".equals(parentType) 
-					|| "iaml.visual:Button".equals(parentType) 
-					|| "iaml.visual:Label".equals(parentType) 
-					|| "iaml.visual:InputForm".equals(parentType) 
+			if ("iaml.visual:Frame".equals(parentType) // Scope
+					|| "iaml.scopes:Session".equals(parentType) // Scope
+					|| "iaml.visual:Page".equals(parentType) // Scope
+					|| "iaml.visual:Button".equals(parentType) // VisibleThing
+					|| "iaml.visual:Label".equals(parentType) // VisibleThing
+					|| "iaml.visual:InputForm".equals(parentType) // VisibleThing
 					|| "iaml.visual:InputTextField".equals(parentType)) {
 				
 				// need to change it
@@ -303,6 +305,8 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 					return "onClick";
 				} else if ("edit".equals(eventName) || "onEdit".equals(eventName)) {
 					return "onEdit";
+				} else if ("init".equals(eventName) || "onInit".equals(eventName)) {
+					return "onInit";
 				} else {
 					// not an expected event type; throw a warning
 					errors.add(new ExpectedMigrationException(this, element, "Event '" + eventName + "' was not an expected event type"));
@@ -434,7 +438,33 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 				}
 			}
 		}
+		
+		String nodeName = element.getNodeName();
+		if ("onAccess".equals(nodeName) || "onInit".equals(nodeName) ||
+				"onEdit".equals(nodeName) || "onClick".equals(nodeName)) {
+			// remove the 'name' attribute
+			if (element.getAttribute("name") != null) {
+				element.removeAttribute("name");
+			}
+		}
 
+	}
+	
+	@Override
+	public boolean shouldDeleteAttribute(Element element, Element target,
+			String name, String value, List<ExpectedMigrationException> errors) {
+		
+		// remove names from old EventTriggers
+		if (name.equals("name")) {
+			String nodeName = target.getNodeName();
+			if ("onAccess".equals(nodeName) || "onInit".equals(nodeName) ||
+					"onEdit".equals(nodeName) || "onClick".equals(nodeName)) {
+				// remove the 'name' attribute
+				return true;
+			}
+		}
+		
+		return super.shouldDeleteAttribute(element, target, name, value, errors);
 	}
 
 	/**

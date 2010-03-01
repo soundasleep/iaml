@@ -233,15 +233,6 @@ public interface VisualPackage extends EPackage {
 	int FRAME__IN_EDGES = ModelPackage.SCOPE__IN_EDGES;
 
 	/**
-	 * The feature id for the '<em><b>Event Triggers</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FRAME__EVENT_TRIGGERS = ModelPackage.SCOPE__EVENT_TRIGGERS;
-
-	/**
 	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -303,6 +294,24 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int FRAME__ELEMENTS = ModelPackage.SCOPE__ELEMENTS;
+
+	/**
+	 * The feature id for the '<em><b>On Access</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME__ON_ACCESS = ModelPackage.SCOPE__ON_ACCESS;
+
+	/**
+	 * The feature id for the '<em><b>On Init</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME__ON_INIT = ModelPackage.SCOPE__ON_INIT;
 
 	/**
 	 * The feature id for the '<em><b>Out Parameter Edges</b></em>' reference list.

@@ -4536,22 +4536,13 @@ public interface ModelPackage extends EPackage {
 	int SCOPE__IN_EDGES = GENERATES_ELEMENTS_FEATURE_COUNT + 15;
 
 	/**
-	 * The feature id for the '<em><b>Event Triggers</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCOPE__EVENT_TRIGGERS = GENERATES_ELEMENTS_FEATURE_COUNT + 16;
-
-	/**
 	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__CONDITIONS = GENERATES_ELEMENTS_FEATURE_COUNT + 17;
+	int SCOPE__CONDITIONS = GENERATES_ELEMENTS_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Entry Gate</b></em>' containment reference.
@@ -4560,7 +4551,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__ENTRY_GATE = GENERATES_ELEMENTS_FEATURE_COUNT + 18;
+	int SCOPE__ENTRY_GATE = GENERATES_ELEMENTS_FEATURE_COUNT + 17;
 
 	/**
 	 * The feature id for the '<em><b>Exit Gate</b></em>' containment reference.
@@ -4569,7 +4560,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__EXIT_GATE = GENERATES_ELEMENTS_FEATURE_COUNT + 19;
+	int SCOPE__EXIT_GATE = GENERATES_ELEMENTS_FEATURE_COUNT + 18;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -4578,7 +4569,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__PROPERTIES = GENERATES_ELEMENTS_FEATURE_COUNT + 20;
+	int SCOPE__PROPERTIES = GENERATES_ELEMENTS_FEATURE_COUNT + 19;
 
 	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
@@ -4587,7 +4578,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__VALUES = GENERATES_ELEMENTS_FEATURE_COUNT + 21;
+	int SCOPE__VALUES = GENERATES_ELEMENTS_FEATURE_COUNT + 20;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -4596,7 +4587,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__PARAMETERS = GENERATES_ELEMENTS_FEATURE_COUNT + 22;
+	int SCOPE__PARAMETERS = GENERATES_ELEMENTS_FEATURE_COUNT + 21;
 
 	/**
 	 * The feature id for the '<em><b>Elements</b></em>' containment reference list.
@@ -4605,7 +4596,25 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__ELEMENTS = GENERATES_ELEMENTS_FEATURE_COUNT + 23;
+	int SCOPE__ELEMENTS = GENERATES_ELEMENTS_FEATURE_COUNT + 22;
+
+	/**
+	 * The feature id for the '<em><b>On Access</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCOPE__ON_ACCESS = GENERATES_ELEMENTS_FEATURE_COUNT + 23;
+
+	/**
+	 * The feature id for the '<em><b>On Init</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCOPE__ON_INIT = GENERATES_ELEMENTS_FEATURE_COUNT + 24;
 
 	/**
 	 * The number of structural features of the '<em>Scope</em>' class.
@@ -4614,7 +4623,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE_FEATURE_COUNT = GENERATES_ELEMENTS_FEATURE_COUNT + 24;
+	int SCOPE_FEATURE_COUNT = GENERATES_ELEMENTS_FEATURE_COUNT + 25;
 
 	/**
 	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
@@ -6712,6 +6721,28 @@ public interface ModelPackage extends EPackage {
 	EReference getScope_Elements();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.openiaml.model.model.Scope#getOnAccess <em>On Access</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>On Access</em>'.
+	 * @see org.openiaml.model.model.Scope#getOnAccess()
+	 * @see #getScope()
+	 * @generated
+	 */
+	EReference getScope_OnAccess();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.openiaml.model.model.Scope#getOnInit <em>On Init</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>On Init</em>'.
+	 * @see org.openiaml.model.model.Scope#getOnInit()
+	 * @see #getScope()
+	 * @generated
+	 */
+	EReference getScope_OnInit();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.Condition <em>Condition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7800,6 +7831,22 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SCOPE__ELEMENTS = eINSTANCE.getScope_Elements();
+
+		/**
+		 * The meta object literal for the '<em><b>On Access</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SCOPE__ON_ACCESS = eINSTANCE.getScope_OnAccess();
+
+		/**
+		 * The meta object literal for the '<em><b>On Init</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SCOPE__ON_INIT = eINSTANCE.getScope_OnInit();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.impl.ConditionImpl <em>Condition</em>}' class.

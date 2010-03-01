@@ -103,7 +103,7 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 
 		// required page
 		Frame required = assertHasFrame(root, "Required Page");
-		EventTrigger access = assertHasEventTrigger(required, "access");
+		EventTrigger access = required.getOnAccess();
 		assertGenerated(access);
 		
 		// set operation

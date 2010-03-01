@@ -192,7 +192,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		Frame target = assertHasFrame(root, "Logout Successful");
 		assertGenerated(target);
 
-		EventTrigger access = assertHasEventTrigger(page, "access");
+		EventTrigger access = page.getOnAccess();
 		Set<WireEdge> w = assertHasWiresFromTo(1, session, access, target);
 		{
 			NavigateWire nav = (NavigateWire) w.iterator().next();
@@ -214,7 +214,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		assertNotGenerated(dest);
 
 		Operation check = assertHasOperation(session, "check instance");
-		EventTrigger access = assertHasEventTrigger(dest, "access");
+		EventTrigger access = dest.getOnAccess();
 		Set<WireEdge> w = assertHasWiresFromTo(1, session, access, check);
 		{
 			RunInstanceWire run = (RunInstanceWire) w.iterator().next();
@@ -238,7 +238,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		assertGenerated(logout);
 
 		Operation op = assertHasOperation(session, "do logout");
-		EventTrigger access = assertHasEventTrigger(logout, "access");
+		EventTrigger access = logout.getOnAccess();
 		Set<WireEdge> w = assertHasWiresFromTo(1, session, access, op);
 		{
 			RunInstanceWire run = (RunInstanceWire) w.iterator().next();

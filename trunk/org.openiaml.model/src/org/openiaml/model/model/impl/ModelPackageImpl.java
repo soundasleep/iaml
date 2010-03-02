@@ -1883,7 +1883,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		visibleThingEClass.getESuperTypes().add(this.getEditable());
 		visibleThingEClass.getESuperTypes().add(this.getAccessible());
 		internetApplicationEClass.getESuperTypes().add(this.getContainsOperations());
-		internetApplicationEClass.getESuperTypes().add(this.getContainsEventTriggers());
 		internetApplicationEClass.getESuperTypes().add(this.getNamedElement());
 		internetApplicationEClass.getESuperTypes().add(this.getContainsWires());
 		internetApplicationEClass.getESuperTypes().add(this.getGeneratesElements());

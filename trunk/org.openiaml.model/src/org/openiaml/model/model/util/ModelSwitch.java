@@ -380,7 +380,6 @@ public class ModelSwitch<T> {
 			case ModelPackage.INTERNET_APPLICATION: {
 				InternetApplication internetApplication = (InternetApplication)theEObject;
 				T result = caseInternetApplication(internetApplication);
-				if (result == null) result = caseContainsEventTriggers(internetApplication);
 				if (result == null) result = caseNamedElement(internetApplication);
 				if (result == null) result = caseContainsWires(internetApplication);
 				if (result == null) result = caseGeneratesElements(internetApplication);

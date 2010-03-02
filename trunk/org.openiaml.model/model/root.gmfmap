@@ -6,11 +6,14 @@
     xmlns:gmfmap="http://www.eclipse.org/gmf/2008/mappings"
     xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition">
   <nodes>
-    <containmentFeature
-        href="iaml.ecore#//ContainsEventTriggers/eventTriggers"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//EventTrigger"/>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerContainmentFeature"/>
+      </labelMappings>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
@@ -23,9 +26,6 @@
         <diagramLabel
             href="iaml.gmfgraph#EventTriggerParentName"/>
       </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="root.gmftool#//@palette/@tools.0/@tools.0"/>
       <diagramNode
           href="iaml.gmfgraph#EventTrigger"/>
     </ownedChild>
@@ -52,7 +52,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="root.gmftool#//@palette/@tools.0/@tools.2"/>
+          href="root.gmftool#//@palette/@tools.0/@tools.1"/>
       <diagramNode
           href="iaml.gmfgraph#CompositeOperation"/>
     </ownedChild>
@@ -79,7 +79,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="root.gmftool#//@palette/@tools.0/@tools.1"/>
+          href="root.gmftool#//@palette/@tools.0/@tools.0"/>
       <diagramNode
           href="iaml.gmfgraph#PrimitiveOperation"/>
     </ownedChild>
@@ -106,7 +106,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="root.gmftool#//@palette/@tools.0/@tools.5"/>
+          href="root.gmftool#//@palette/@tools.0/@tools.4"/>
       <diagramNode
           href="iaml.gmfgraph#DomainObject"/>
     </ownedChild>
@@ -191,7 +191,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="root.gmftool#//@palette/@tools.0/@tools.3"/>
+          href="root.gmftool#//@palette/@tools.0/@tools.2"/>
       <diagramNode
           href="iaml.gmfgraph#Property"/>
     </ownedChild>
@@ -213,7 +213,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="root.gmftool#//@palette/@tools.0/@tools.6"/>
+          href="root.gmftool#//@palette/@tools.0/@tools.5"/>
       <diagramNode
           href="iaml.gmfgraph#DomainStore"/>
     </ownedChild>
@@ -294,7 +294,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="root.gmftool#//@palette/@tools.0/@tools.4"/>
+          href="root.gmftool#//@palette/@tools.0/@tools.3"/>
       <diagramNode
           href="iaml.gmfgraph#CompositeCondition"/>
     </ownedChild>
@@ -316,7 +316,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="root.gmftool#//@palette/@tools.0/@tools.7"/>
+          href="root.gmftool#//@palette/@tools.0/@tools.6"/>
       <diagramNode
           href="iaml.gmfgraph#UserStore"/>
     </ownedChild>

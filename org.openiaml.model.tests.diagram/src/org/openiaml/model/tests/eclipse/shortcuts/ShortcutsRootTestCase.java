@@ -26,22 +26,19 @@ public class ShortcutsRootTestCase extends AbstractShortcutsTestCase {
 	public void testLoadModel() throws Exception {
 		initializeModelFile();
 
-		// there should be four children
-		assertEditorHasChildren(4, editor);
+		// there should be three children (one of them is a shortcut)
+		assertEditorHasChildren(3, editor);
 		
 		// check the contents
 		ShapeNodeEditPart page = assertHasFrame(editor, "page");
 		ShapeNodeEditPart op = assertHasOperation(editor, "op");
-		ShapeNodeEditPart et = assertHasEventTrigger(editor, "init");
-		ShapeNodeEditPart chained = assertHasEventTrigger(editor, false, ModelPackage.eINSTANCE.getScope_OnInit());
+		ShapeNodeEditPart chained = assertHasEventTrigger(editor, true, ModelPackage.eINSTANCE.getScope_OnInit());
 
 		// they should be connected
-		assertHasRunInstanceWire(editor, et, op, "run1");
 		assertHasRunInstanceWire(editor, chained, op, "run2");
 		assertShortcut(chained);
 		assertNotShortcut(page);
 		assertNotShortcut(op);
-		assertNotShortcut(et);
 
 		// open the page
 		editor_page = openDiagram(page);

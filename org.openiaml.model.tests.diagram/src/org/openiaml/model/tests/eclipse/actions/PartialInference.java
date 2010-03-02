@@ -162,7 +162,7 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 			assertNotGenerated(text2);
 			ConnectionNodeEditPart sync = assertHasSyncWire(editor_page, text1, text2, "sync");
 			assertNotGenerated(sync);
-			ShapeNodeEditPart access = assertHasEventTrigger(editor_page, false, ModelPackage.eINSTANCE.getScope_OnAccess());
+			ShapeNodeEditPart access = assertHasEventTrigger(editor_page, false, ModelPackage.eINSTANCE.getAccessible_OnAccess());
 			assertGenerated(access);
 			ShapeNodeEditPart init = assertHasEventTrigger(editor_page, false, ModelPackage.eINSTANCE.getScope_OnInit());
 			assertGenerated(init);
@@ -201,7 +201,7 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		assertNotGenerated(text2);
 		ConnectionNodeEditPart sync = assertHasSyncWire(editor_page, text1, text2, "sync");
 		assertNotGenerated(sync);
-		ShapeNodeEditPart access = assertHasEventTrigger(editor_page, false, ModelPackage.eINSTANCE.getScope_OnAccess());
+		ShapeNodeEditPart access = assertHasEventTrigger(editor_page, false, ModelPackage.eINSTANCE.getAccessible_OnAccess());
 		assertGenerated(access);
 		ShapeNodeEditPart init = assertHasEventTrigger(editor_page, false,ModelPackage.eINSTANCE.getScope_OnInit());
 		assertGenerated(init);
@@ -221,8 +221,8 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		
 		assertEditorHasChildren(6, editor_text);
 		
-		ShapeNodeEditPart access = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getVisibleThing_OnAccess());
-		ShapeNodeEditPart edit = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getVisibleThing_OnEdit());
+		ShapeNodeEditPart access = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getAccessible_OnAccess());
+		ShapeNodeEditPart edit = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getEditable_OnEdit());
 		ShapeNodeEditPart update = assertHasOperation(editor_text, "update", false);
 		ShapeNodeEditPart init = assertHasOperation(editor_text, "init", false);
 		ShapeNodeEditPart fieldValue = assertHasFieldValue(editor_text, false);
@@ -249,15 +249,15 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		
 		assertEditorHasChildren(10, editor_text);
 		
-		ShapeNodeEditPart access = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getVisibleThing_OnAccess());
-		ShapeNodeEditPart edit = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getVisibleThing_OnEdit());
+		ShapeNodeEditPart access = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getAccessible_OnAccess());
+		ShapeNodeEditPart edit = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getEditable_OnEdit());
 		ShapeNodeEditPart update = assertHasOperation(editor_text, "update", false);
 		ShapeNodeEditPart init = assertHasOperation(editor_text, "init", false);
 		ShapeNodeEditPart fieldValue = assertHasFieldValue(editor_text, false);
 		ShapeNodeEditPart condition = assertHasCompositeCondition(editor_text, "fieldValue is set", false);
 		ShapeNodeEditPart condition2 = assertHasCompositeCondition(editor_text, "fieldValue is set", true);
 
-		ShapeNodeEditPart edit2 = assertHasEventTrigger(editor_text, true, ModelPackage.eINSTANCE.getVisibleThing_OnEdit());
+		ShapeNodeEditPart edit2 = assertHasEventTrigger(editor_text, true, ModelPackage.eINSTANCE.getEditable_OnEdit());
 		ShapeNodeEditPart update2 = assertHasOperation(editor_text, "update", true);
 		ShapeNodeEditPart fieldValue2 = assertHasFieldValue(editor_text, true);
 

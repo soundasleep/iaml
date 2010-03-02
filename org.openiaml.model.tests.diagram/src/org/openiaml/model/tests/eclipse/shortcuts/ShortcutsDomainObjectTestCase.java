@@ -5,6 +5,7 @@ package org.openiaml.model.tests.eclipse.shortcuts;
 
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
+import org.openiaml.model.model.ModelPackage;
 
 /**
  * Tests domain object shortcuts.
@@ -48,10 +49,10 @@ public class ShortcutsDomainObjectTestCase extends AbstractShortcutsTestCase {
 
 		assertEditorDomainObject(editor_object);
 		
-		// it should have a domain attribute connected to an event trigger
+		// it should have a domain attribute connected to an event trigger (shortcut)
 		assertEditorHasChildren(2, editor_object);
 		ShapeNodeEditPart attribute = assertHasDomainAttribute(editor_object, "domain attribute");
-		ShapeNodeEditPart event = assertHasEventTrigger(editor_object, "access", false);
+		ShapeNodeEditPart event = assertHasEventTrigger(editor_object, true, ModelPackage.eINSTANCE.getAccessible_OnAccess());
 		
 		// they should be connected
 		assertHasRunInstanceWire(editor_object, event, attribute, "runWire");
@@ -63,10 +64,10 @@ public class ShortcutsDomainObjectTestCase extends AbstractShortcutsTestCase {
 		
 		assertEditorFrame(editor_page);
 		
-		// it should have a domain attribute connected to an event trigger
+		// it should have a domain attribute (shortcut) connected to an event trigger
 		assertEditorHasChildren(2, editor_page);
 		ShapeNodeEditPart attribute2 = assertHasDomainAttribute(editor_page, "domain attribute");
-		ShapeNodeEditPart event2 = assertHasEventTrigger(editor_page, "event trigger");
+		ShapeNodeEditPart event2 = assertHasEventTrigger(editor_page, false, ModelPackage.eINSTANCE.getAccessible_OnAccess());
 
 		// they should be connected
 		assertHasRunInstanceWire(editor_page, event2, attribute2, "runWire");

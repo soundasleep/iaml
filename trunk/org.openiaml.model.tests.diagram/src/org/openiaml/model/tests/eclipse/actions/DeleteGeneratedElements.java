@@ -50,13 +50,13 @@ public class DeleteGeneratedElements extends AbstractActionTestCase<IFile> {
 		ShapeNodeEditPart unrelated = assertHasInputTextField(editor_page, "unrelated", false);
 		assertGenerated(unrelated);
 
-		ShapeNodeEditPart edit = assertHasEventTrigger(editor_page, true, ModelPackage.eINSTANCE.getVisibleThing_OnEdit());
+		ShapeNodeEditPart edit = assertHasEventTrigger(editor_page, true, ModelPackage.eINSTANCE.getEditable_OnEdit());
 		assertGenerated(edit);
 		ShapeNodeEditPart incoming = assertHasOperation(editor_page, "incoming", false);
 		assertNotGenerated(incoming);
 		assertHasRunInstanceWire(editor_page, edit, incoming, "run out");
 
-		ShapeNodeEditPart outgoing = assertHasEventTrigger(editor_page, false, ModelPackage.eINSTANCE.getScope_OnAccess());
+		ShapeNodeEditPart outgoing = assertHasEventTrigger(editor_page, false, ModelPackage.eINSTANCE.getAccessible_OnAccess());
 		assertNotGenerated(outgoing);
 		ShapeNodeEditPart update = assertHasOperation(editor_page, "update", true);
 		assertGenerated(update);
@@ -174,7 +174,7 @@ public class DeleteGeneratedElements extends AbstractActionTestCase<IFile> {
 		// there should be two other elements that are important to delete
 		assertEquals(2, toDelete.size());
 
-		ShapeNodeEditPart edit = assertHasEventTrigger(editor_page, true, ModelPackage.eINSTANCE.getVisibleThing_OnEdit());
+		ShapeNodeEditPart edit = assertHasEventTrigger(editor_page, true, ModelPackage.eINSTANCE.getEditable_OnEdit());
 		assertGenerated(edit);
 		ShapeNodeEditPart update = assertHasOperation(editor_page, "update", true);
 		assertGenerated(update);

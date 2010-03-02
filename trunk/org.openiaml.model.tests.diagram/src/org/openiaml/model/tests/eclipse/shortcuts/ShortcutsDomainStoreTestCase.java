@@ -40,16 +40,14 @@ public class ShortcutsDomainStoreTestCase extends AbstractShortcutsTestCase {
 		assertEditorDomainStore(editor_store);
 		
 		// it should have a domain attribute connected to an event trigger
-		assertEditorHasChildren(3, editor_store);
+		assertEditorHasChildren(2, editor_store);
 		ShapeNodeEditPart child = assertHasDomainObject(editor_store, "child");
-		ShapeNodeEditPart event1 = assertHasEventTrigger(editor_store, true, ModelPackage.eINSTANCE.getScope_OnAccess());
-		ShapeNodeEditPart event2 = assertHasEventTrigger(editor_store, "et2", false);
+		ShapeNodeEditPart event1 = assertHasEventTrigger(editor_store, true, ModelPackage.eINSTANCE.getAccessible_OnAccess());
 		
 		// they should be connected
 		assertHasSyncWire(editor_store, event1, child, "syncWire");
 		assertNotShortcut(child);
 		assertShortcut(event1);
-		assertNotShortcut(event2);
 		
 		editor_store.close(false);
 		editor_store = null;
@@ -61,7 +59,7 @@ public class ShortcutsDomainStoreTestCase extends AbstractShortcutsTestCase {
 		
 		// it should have a domain attribute connected to an event trigger
 		assertEditorHasChildren(2, editor_page);
-		ShapeNodeEditPart et1 = assertHasEventTrigger(editor_page, false, ModelPackage.eINSTANCE.getScope_OnAccess());
+		ShapeNodeEditPart et1 = assertHasEventTrigger(editor_page, false, ModelPackage.eINSTANCE.getAccessible_OnAccess());
 		ShapeNodeEditPart obj = assertHasDomainObject(editor_page, "child");
 
 		// they should be connected

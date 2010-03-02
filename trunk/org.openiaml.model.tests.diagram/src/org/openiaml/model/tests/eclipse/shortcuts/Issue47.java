@@ -65,8 +65,8 @@ public class Issue47 extends AbstractShortcutsTestCase {
 		
 		// editor should contain both "edit" and "update" operations for
 		// text1 and text2
-		ShapeNodeEditPart text1_edit = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getVisibleThing_OnEdit() );
-		ShapeNodeEditPart text2_edit = assertHasEventTrigger(editor_text, true,  ModelPackage.eINSTANCE.getVisibleThing_OnEdit());
+		ShapeNodeEditPart text1_edit = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getEditable_OnEdit() );
+		ShapeNodeEditPart text2_edit = assertHasEventTrigger(editor_text, true,  ModelPackage.eINSTANCE.getEditable_OnEdit());
 		assertNotSame(text1_edit, text2_edit);
 		assertGenerated(text1_edit);
 		assertGenerated(text2_edit);

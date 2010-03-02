@@ -6,6 +6,7 @@ package org.openiaml.model.tests.eclipse;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
+import org.openiaml.model.model.ModelPackage;
 
 /**
  * Emulate right click > initialise diagram.
@@ -38,13 +39,13 @@ public class InitializeDiagramTestCase extends EclipseTestCaseHelper {
 		DiagramDocumentEditor editor = (DiagramDocumentEditor) loadDiagramFile(targetDiagram);
 		assertEditorRoot(editor);
 
-		// there should be four children
-		assertEditorHasChildren(4, editor);
+		// there should be three children
+		assertEditorHasChildren(3, editor);
 
-		// check the contents
-		ShapeNodeEditPart page = assertHasFrame(editor, "page");
-		assertHasEventTrigger(editor, "init");
-		assertHasOperation(editor, "op");
+		// a primitive operation, a frame, and a shortcutted EventTrigger
+		assertHasPrimitiveOperation(editor, "op", false);
+		ShapeNodeEditPart page = assertHasFrame(editor, "page", false);
+		assertHasEventTrigger(editor, true, ModelPackage.eINSTANCE.getScope_OnInit());
 
 		// open the domain store
 		DiagramDocumentEditor editor_page = openDiagram(page);

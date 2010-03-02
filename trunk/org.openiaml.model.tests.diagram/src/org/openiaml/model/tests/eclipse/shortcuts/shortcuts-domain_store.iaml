@@ -6,7 +6,6 @@
     </onAccess>
   </scopes>
   <domainStores id="model.11d889e30c6.124" name="domain store">
-    <eventTriggers id="model.11d889e30c6.147" name="et2"/>
     <children id="model.11d889e30c6.13d" name="child" inEdges="wires.11d889e3162.24"/>
   </domainStores>
 </iaml:InternetApplication>

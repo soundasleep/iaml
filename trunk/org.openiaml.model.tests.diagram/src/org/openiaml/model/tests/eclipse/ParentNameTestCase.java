@@ -14,13 +14,11 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
 import org.openiaml.model.diagram.custom.commands.GmfInferenceHandler;
 import org.openiaml.model.diagram.edit.parts.CompositeOperationEditPart.ExtendedCompositeOperationFigure;
-import org.openiaml.model.diagram.edit.parts.EventTriggerEditPart.ExtendedEventTriggerFigure;
 import org.openiaml.model.diagram.part.IamlDiagramEditor;
 import org.openiaml.model.diagram.part.IamlDiagramEditorPlugin;
 import org.openiaml.model.diagram.part.IamlDiagramEditorUtil;
 import org.openiaml.model.inference.EcoreCreateElementsHelper;
 import org.openiaml.model.model.CompositeOperation;
-import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.visual.Frame;
 
@@ -158,27 +156,9 @@ public class ParentNameTestCase extends EclipseTestCaseHelper {
 		gmf.setName(cop, "my operation");
 		assertEquals(cop.getName(), "my operation");
 
-		// create some EventTriggers
-		EventTrigger event1 = gmf.createEventTrigger(root);
-		assertNotNull(event1);
-		gmf.setName(event1, "event");
-		assertEquals(event1.getName(), "event");
-
-		EventTrigger event2 = gmf.createEventTrigger(root);
-		assertNotNull(event2);
-		gmf.setName(event2, "event 2");
-		assertEquals(event2.getName(), "event 2");
-
-		assertNotSame(event1, event2);
-
 		// find the edit part for this element
 		ShapeNodeEditPart partOp = assertHasOperation(editor, "my operation");
-		ShapeNodeEditPart event1Op = assertHasEventTrigger(editor, "event");
-		ShapeNodeEditPart event2Op = assertHasEventTrigger(editor, "event 2");
 		assertNotNull(partOp);
-		assertNotNull(event1Op);
-		assertNotNull(event2Op);
-
 		// what is the content pane?
 		IFigure fig_o = partOp.getContentPane();
 		assertTrue("CompositeOperation should be extended: " + fig_o.getClass(),
@@ -188,30 +168,12 @@ public class ParentNameTestCase extends EclipseTestCaseHelper {
 		// check to see it has the correct initial parent value
 		assertEquals(ext_o.getFigureCompositeOperationParentNameFigure().getText(), "root element");
 
-		IFigure fig_e1 = event1Op.getContentPane();
-		assertTrue("EventTrigger 1 should be extended: " + fig_e1.getClass(),
-				fig_e1 instanceof org.openiaml.model.diagram.edit.parts.EventTriggerEditPart.ExtendedEventTriggerFigure);
-
-		ExtendedEventTriggerFigure ext_e1 = (ExtendedEventTriggerFigure) fig_e1;
-		// check to see it has the correct initial parent value
-		assertEquals(ext_e1.getFigureEventTriggerParentNameFigure().getText(), "root element");
-
-		IFigure fig_e2 = event2Op.getContentPane();
-		assertTrue("EventTrigger 2 should be extended: " + fig_e2.getClass(),
-				fig_e2 instanceof org.openiaml.model.diagram.edit.parts.EventTriggerEditPart.ExtendedEventTriggerFigure);
-
-		ExtendedEventTriggerFigure ext_e2 = (ExtendedEventTriggerFigure) fig_e2;
-		// check to see it has the correct initial parent value
-		assertEquals(ext_e2.getFigureEventTriggerParentNameFigure().getText(), "root element");
-
 		// change the root name
 		gmf.setName(root, "a new parent name");
 		assertEquals(root.getName(), "a new parent name");
 
 		// the parent labels should have changed
 		assertEquals(ext_o.getFigureCompositeOperationParentNameFigure().getText(), "a new parent name");
-		assertEquals(ext_e1.getFigureEventTriggerParentNameFigure().getText(), "a new parent name");
-		assertEquals(ext_e2.getFigureEventTriggerParentNameFigure().getText(), "a new parent name");
 	}
 
 	/**

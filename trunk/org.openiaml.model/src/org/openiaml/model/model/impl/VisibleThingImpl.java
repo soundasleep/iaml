@@ -18,10 +18,12 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.openiaml.model.model.Accessible;
 import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
+import org.openiaml.model.model.Editable;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
@@ -70,12 +72,12 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getGeneratedElements <em>Generated Elements</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#isOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getOutParameterEdges <em>Out Parameter Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getOnEdit <em>On Edit</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getOnAccess <em>On Access</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getValues <em>Values</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getOnClick <em>On Click</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getOnEdit <em>On Edit</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getOnAccess <em>On Access</em>}</li>
  * </ul>
  * </p>
  *
@@ -323,6 +325,26 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 	protected EList<ParameterEdge> outParameterEdges;
 
 	/**
+	 * The cached value of the '{@link #getOnEdit() <em>On Edit</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOnEdit()
+	 * @generated
+	 * @ordered
+	 */
+	protected EventTrigger onEdit;
+
+	/**
+	 * The cached value of the '{@link #getOnAccess() <em>On Access</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOnAccess()
+	 * @generated
+	 * @ordered
+	 */
+	protected EventTrigger onAccess;
+
+	/**
 	 * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -361,26 +383,6 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 	 * @ordered
 	 */
 	protected EventTrigger onClick;
-
-	/**
-	 * The cached value of the '{@link #getOnEdit() <em>On Edit</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOnEdit()
-	 * @generated
-	 * @ordered
-	 */
-	protected EventTrigger onEdit;
-
-	/**
-	 * The cached value of the '{@link #getOnAccess() <em>On Access</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOnAccess()
-	 * @generated
-	 * @ordered
-	 */
-	protected EventTrigger onAccess;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -898,6 +900,10 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
 			case ModelPackage.VISIBLE_THING__OUT_PARAMETER_EDGES:
 				return ((InternalEList<?>)getOutParameterEdges()).basicRemove(otherEnd, msgs);
+			case ModelPackage.VISIBLE_THING__ON_EDIT:
+				return basicSetOnEdit(null, msgs);
+			case ModelPackage.VISIBLE_THING__ON_ACCESS:
+				return basicSetOnAccess(null, msgs);
 			case ModelPackage.VISIBLE_THING__CHILDREN:
 				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
 			case ModelPackage.VISIBLE_THING__PROPERTIES:
@@ -906,10 +912,6 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 				return ((InternalEList<?>)getValues()).basicRemove(otherEnd, msgs);
 			case ModelPackage.VISIBLE_THING__ON_CLICK:
 				return basicSetOnClick(null, msgs);
-			case ModelPackage.VISIBLE_THING__ON_EDIT:
-				return basicSetOnEdit(null, msgs);
-			case ModelPackage.VISIBLE_THING__ON_ACCESS:
-				return basicSetOnAccess(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -960,6 +962,10 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 				return isOverridden();
 			case ModelPackage.VISIBLE_THING__OUT_PARAMETER_EDGES:
 				return getOutParameterEdges();
+			case ModelPackage.VISIBLE_THING__ON_EDIT:
+				return getOnEdit();
+			case ModelPackage.VISIBLE_THING__ON_ACCESS:
+				return getOnAccess();
 			case ModelPackage.VISIBLE_THING__CHILDREN:
 				return getChildren();
 			case ModelPackage.VISIBLE_THING__PROPERTIES:
@@ -968,10 +974,6 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 				return getValues();
 			case ModelPackage.VISIBLE_THING__ON_CLICK:
 				return getOnClick();
-			case ModelPackage.VISIBLE_THING__ON_EDIT:
-				return getOnEdit();
-			case ModelPackage.VISIBLE_THING__ON_ACCESS:
-				return getOnAccess();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1056,6 +1058,12 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 				getOutParameterEdges().clear();
 				getOutParameterEdges().addAll((Collection<? extends ParameterEdge>)newValue);
 				return;
+			case ModelPackage.VISIBLE_THING__ON_EDIT:
+				setOnEdit((EventTrigger)newValue);
+				return;
+			case ModelPackage.VISIBLE_THING__ON_ACCESS:
+				setOnAccess((EventTrigger)newValue);
+				return;
 			case ModelPackage.VISIBLE_THING__CHILDREN:
 				getChildren().clear();
 				getChildren().addAll((Collection<? extends VisibleThing>)newValue);
@@ -1070,12 +1078,6 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 				return;
 			case ModelPackage.VISIBLE_THING__ON_CLICK:
 				setOnClick((EventTrigger)newValue);
-				return;
-			case ModelPackage.VISIBLE_THING__ON_EDIT:
-				setOnEdit((EventTrigger)newValue);
-				return;
-			case ModelPackage.VISIBLE_THING__ON_ACCESS:
-				setOnAccess((EventTrigger)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -1146,6 +1148,12 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 			case ModelPackage.VISIBLE_THING__OUT_PARAMETER_EDGES:
 				getOutParameterEdges().clear();
 				return;
+			case ModelPackage.VISIBLE_THING__ON_EDIT:
+				setOnEdit((EventTrigger)null);
+				return;
+			case ModelPackage.VISIBLE_THING__ON_ACCESS:
+				setOnAccess((EventTrigger)null);
+				return;
 			case ModelPackage.VISIBLE_THING__CHILDREN:
 				getChildren().clear();
 				return;
@@ -1157,12 +1165,6 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 				return;
 			case ModelPackage.VISIBLE_THING__ON_CLICK:
 				setOnClick((EventTrigger)null);
-				return;
-			case ModelPackage.VISIBLE_THING__ON_EDIT:
-				setOnEdit((EventTrigger)null);
-				return;
-			case ModelPackage.VISIBLE_THING__ON_ACCESS:
-				setOnAccess((EventTrigger)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -1214,6 +1216,10 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 				return overridden != OVERRIDDEN_EDEFAULT;
 			case ModelPackage.VISIBLE_THING__OUT_PARAMETER_EDGES:
 				return outParameterEdges != null && !outParameterEdges.isEmpty();
+			case ModelPackage.VISIBLE_THING__ON_EDIT:
+				return onEdit != null;
+			case ModelPackage.VISIBLE_THING__ON_ACCESS:
+				return onAccess != null;
 			case ModelPackage.VISIBLE_THING__CHILDREN:
 				return children != null && !children.isEmpty();
 			case ModelPackage.VISIBLE_THING__PROPERTIES:
@@ -1222,10 +1228,6 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 				return values != null && !values.isEmpty();
 			case ModelPackage.VISIBLE_THING__ON_CLICK:
 				return onClick != null;
-			case ModelPackage.VISIBLE_THING__ON_EDIT:
-				return onEdit != null;
-			case ModelPackage.VISIBLE_THING__ON_ACCESS:
-				return onAccess != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1305,6 +1307,18 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 				default: return -1;
 			}
 		}
+		if (baseClass == Editable.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.VISIBLE_THING__ON_EDIT: return ModelPackage.EDITABLE__ON_EDIT;
+				default: return -1;
+			}
+		}
+		if (baseClass == Accessible.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.VISIBLE_THING__ON_ACCESS: return ModelPackage.ACCESSIBLE__ON_ACCESS;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -1380,6 +1394,18 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 		if (baseClass == ParameterEdgesSource.class) {
 			switch (baseFeatureID) {
 				case WiresPackage.PARAMETER_EDGES_SOURCE__OUT_PARAMETER_EDGES: return ModelPackage.VISIBLE_THING__OUT_PARAMETER_EDGES;
+				default: return -1;
+			}
+		}
+		if (baseClass == Editable.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.EDITABLE__ON_EDIT: return ModelPackage.VISIBLE_THING__ON_EDIT;
+				default: return -1;
+			}
+		}
+		if (baseClass == Accessible.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.ACCESSIBLE__ON_ACCESS: return ModelPackage.VISIBLE_THING__ON_ACCESS;
 				default: return -1;
 			}
 		}

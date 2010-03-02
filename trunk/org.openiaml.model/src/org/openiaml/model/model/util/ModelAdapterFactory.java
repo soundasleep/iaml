@@ -10,6 +10,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.openiaml.model.model.Accessible;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
@@ -32,6 +33,7 @@ import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.DynamicApplicationElementSet;
+import org.openiaml.model.model.Editable;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.ExecutionEdgeDestination;
@@ -287,6 +289,14 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseCanBeSynced(CanBeSynced object) {
 				return createCanBeSyncedAdapter();
+			}
+			@Override
+			public Adapter caseEditable(Editable object) {
+				return createEditableAdapter();
+			}
+			@Override
+			public Adapter caseAccessible(Accessible object) {
+				return createAccessibleAdapter();
 			}
 			@Override
 			public Adapter caseParameterEdgesSource(ParameterEdgesSource object) {
@@ -927,6 +937,34 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCanBeSyncedAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.Editable <em>Editable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.Editable
+	 * @generated
+	 */
+	public Adapter createEditableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.Accessible <em>Accessible</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.Accessible
+	 * @generated
+	 */
+	public Adapter createAccessibleAdapter() {
 		return null;
 	}
 

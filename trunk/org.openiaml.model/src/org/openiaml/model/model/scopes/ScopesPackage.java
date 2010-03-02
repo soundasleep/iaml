@@ -241,13 +241,22 @@ public interface ScopesPackage extends EPackage {
 	int SESSION__CONDITIONS = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 13;
 
 	/**
+	 * The feature id for the '<em><b>On Access</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SESSION__ON_ACCESS = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 14;
+
+	/**
 	 * The feature id for the '<em><b>Entry Gate</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SESSION__ENTRY_GATE = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 14;
+	int SESSION__ENTRY_GATE = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Exit Gate</b></em>' containment reference.
@@ -256,7 +265,7 @@ public interface ScopesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SESSION__EXIT_GATE = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 15;
+	int SESSION__EXIT_GATE = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -265,7 +274,7 @@ public interface ScopesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SESSION__PROPERTIES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 16;
+	int SESSION__PROPERTIES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 17;
 
 	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
@@ -274,7 +283,7 @@ public interface ScopesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SESSION__VALUES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 17;
+	int SESSION__VALUES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 18;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -283,7 +292,7 @@ public interface ScopesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SESSION__PARAMETERS = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 18;
+	int SESSION__PARAMETERS = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 19;
 
 	/**
 	 * The feature id for the '<em><b>Elements</b></em>' containment reference list.
@@ -292,16 +301,7 @@ public interface ScopesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SESSION__ELEMENTS = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 19;
-
-	/**
-	 * The feature id for the '<em><b>On Access</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SESSION__ON_ACCESS = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 20;
+	int SESSION__ELEMENTS = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 20;
 
 	/**
 	 * The feature id for the '<em><b>On Init</b></em>' containment reference.

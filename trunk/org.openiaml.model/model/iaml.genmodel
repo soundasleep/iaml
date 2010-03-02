@@ -64,8 +64,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//VisibleThing/properties"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//VisibleThing/values"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//VisibleThing/onClick"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//VisibleThing/onEdit"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//VisibleThing/onAccess"/>
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//InternetApplication">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/properties"/>
@@ -137,7 +135,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/values"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/parameters"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/elements"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/onAccess"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/onInit"/>
     </genClasses>
     <genClasses image="false" ecoreClass="iaml.ecore#//Condition"/>
@@ -162,6 +159,12 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ContainsScopes/scopes"/>
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//CanBeSynced"/>
+    <genClasses image="false" ecoreClass="iaml.ecore#//Editable">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Editable/onEdit"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="iaml.ecore#//Accessible">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Accessible/onAccess"/>
+    </genClasses>
     <nestedGenPackages prefix="Visual" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//visual">
       <genClasses ecoreClass="iaml.ecore#//visual/Frame">

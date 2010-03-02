@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.openiaml.model.model.Accessible;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
@@ -32,6 +33,7 @@ import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.DynamicApplicationElementSet;
+import org.openiaml.model.model.Editable;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.ExecutionEdgeDestination;
@@ -361,6 +363,8 @@ public class ModelSwitch<T> {
 				T result = caseVisibleThing(visibleThing);
 				if (result == null) result = caseCanBeSynced(visibleThing);
 				if (result == null) result = caseParameterEdgesSource(visibleThing);
+				if (result == null) result = caseEditable(visibleThing);
+				if (result == null) result = caseAccessible(visibleThing);
 				if (result == null) result = caseContainsConditions(visibleThing);
 				if (result == null) result = caseContainsOperations(visibleThing);
 				if (result == null) result = caseWireEdgesSource(visibleThing);
@@ -531,6 +535,7 @@ public class ModelSwitch<T> {
 				T result = caseScope(scope);
 				if (result == null) result = caseContainsScopes(scope);
 				if (result == null) result = caseCanBeSynced(scope);
+				if (result == null) result = caseAccessible(scope);
 				if (result == null) result = caseGeneratesElements(scope);
 				if (result == null) result = caseContainsOperations(scope);
 				if (result == null) result = caseNamedElement(scope);
@@ -631,6 +636,18 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseGeneratedElement(canBeSynced);
 				if (result == null) result = caseShouldntContainWires(canBeSynced);
 				if (result == null) result = caseContainsWires(canBeSynced);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.EDITABLE: {
+				Editable editable = (Editable)theEObject;
+				T result = caseEditable(editable);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.ACCESSIBLE: {
+				Accessible accessible = (Accessible)theEObject;
+				T result = caseAccessible(accessible);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1280,6 +1297,36 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseCanBeSynced(CanBeSynced object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Editable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Editable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEditable(Editable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Accessible</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Accessible</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAccessible(Accessible object) {
 		return null;
 	}
 

@@ -3042,49 +3042,13 @@ public interface ModelPackage extends EPackage {
 	int VISIBLE_THING__OUT_PARAMETER_EDGES = CONTAINS_CONDITIONS_FEATURE_COUNT + 17;
 
 	/**
-	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VISIBLE_THING__CHILDREN = CONTAINS_CONDITIONS_FEATURE_COUNT + 18;
-
-	/**
-	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VISIBLE_THING__PROPERTIES = CONTAINS_CONDITIONS_FEATURE_COUNT + 19;
-
-	/**
-	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VISIBLE_THING__VALUES = CONTAINS_CONDITIONS_FEATURE_COUNT + 20;
-
-	/**
-	 * The feature id for the '<em><b>On Click</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VISIBLE_THING__ON_CLICK = CONTAINS_CONDITIONS_FEATURE_COUNT + 21;
-
-	/**
 	 * The feature id for the '<em><b>On Edit</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VISIBLE_THING__ON_EDIT = CONTAINS_CONDITIONS_FEATURE_COUNT + 22;
+	int VISIBLE_THING__ON_EDIT = CONTAINS_CONDITIONS_FEATURE_COUNT + 18;
 
 	/**
 	 * The feature id for the '<em><b>On Access</b></em>' containment reference.
@@ -3093,7 +3057,43 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VISIBLE_THING__ON_ACCESS = CONTAINS_CONDITIONS_FEATURE_COUNT + 23;
+	int VISIBLE_THING__ON_ACCESS = CONTAINS_CONDITIONS_FEATURE_COUNT + 19;
+
+	/**
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VISIBLE_THING__CHILDREN = CONTAINS_CONDITIONS_FEATURE_COUNT + 20;
+
+	/**
+	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VISIBLE_THING__PROPERTIES = CONTAINS_CONDITIONS_FEATURE_COUNT + 21;
+
+	/**
+	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VISIBLE_THING__VALUES = CONTAINS_CONDITIONS_FEATURE_COUNT + 22;
+
+	/**
+	 * The feature id for the '<em><b>On Click</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VISIBLE_THING__ON_CLICK = CONTAINS_CONDITIONS_FEATURE_COUNT + 23;
 
 	/**
 	 * The number of structural features of the '<em>Visible Thing</em>' class.
@@ -4545,13 +4545,22 @@ public interface ModelPackage extends EPackage {
 	int SCOPE__CONDITIONS = GENERATES_ELEMENTS_FEATURE_COUNT + 16;
 
 	/**
+	 * The feature id for the '<em><b>On Access</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCOPE__ON_ACCESS = GENERATES_ELEMENTS_FEATURE_COUNT + 17;
+
+	/**
 	 * The feature id for the '<em><b>Entry Gate</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__ENTRY_GATE = GENERATES_ELEMENTS_FEATURE_COUNT + 17;
+	int SCOPE__ENTRY_GATE = GENERATES_ELEMENTS_FEATURE_COUNT + 18;
 
 	/**
 	 * The feature id for the '<em><b>Exit Gate</b></em>' containment reference.
@@ -4560,7 +4569,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__EXIT_GATE = GENERATES_ELEMENTS_FEATURE_COUNT + 18;
+	int SCOPE__EXIT_GATE = GENERATES_ELEMENTS_FEATURE_COUNT + 19;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -4569,7 +4578,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__PROPERTIES = GENERATES_ELEMENTS_FEATURE_COUNT + 19;
+	int SCOPE__PROPERTIES = GENERATES_ELEMENTS_FEATURE_COUNT + 20;
 
 	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
@@ -4578,7 +4587,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__VALUES = GENERATES_ELEMENTS_FEATURE_COUNT + 20;
+	int SCOPE__VALUES = GENERATES_ELEMENTS_FEATURE_COUNT + 21;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -4587,7 +4596,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__PARAMETERS = GENERATES_ELEMENTS_FEATURE_COUNT + 21;
+	int SCOPE__PARAMETERS = GENERATES_ELEMENTS_FEATURE_COUNT + 22;
 
 	/**
 	 * The feature id for the '<em><b>Elements</b></em>' containment reference list.
@@ -4596,16 +4605,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__ELEMENTS = GENERATES_ELEMENTS_FEATURE_COUNT + 22;
-
-	/**
-	 * The feature id for the '<em><b>On Access</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCOPE__ON_ACCESS = GENERATES_ELEMENTS_FEATURE_COUNT + 23;
+	int SCOPE__ELEMENTS = GENERATES_ELEMENTS_FEATURE_COUNT + 23;
 
 	/**
 	 * The feature id for the '<em><b>On Init</b></em>' containment reference.
@@ -5635,6 +5635,63 @@ public interface ModelPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.openiaml.model.model.Editable <em>Editable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.model.model.Editable
+	 * @see org.openiaml.model.model.impl.ModelPackageImpl#getEditable()
+	 * @generated
+	 */
+	int EDITABLE = 43;
+
+	/**
+	 * The feature id for the '<em><b>On Edit</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDITABLE__ON_EDIT = 0;
+
+	/**
+	 * The number of structural features of the '<em>Editable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDITABLE_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link org.openiaml.model.model.Accessible <em>Accessible</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.model.model.Accessible
+	 * @see org.openiaml.model.model.impl.ModelPackageImpl#getAccessible()
+	 * @generated
+	 */
+	int ACCESSIBLE = 44;
+
+	/**
+	 * The feature id for the '<em><b>On Access</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACCESSIBLE__ON_ACCESS = 0;
+
+	/**
+	 * The number of structural features of the '<em>Accessible</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACCESSIBLE_FEATURE_COUNT = 1;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.NamedElement <em>Named Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6087,28 +6144,6 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getVisibleThing_OnClick();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.openiaml.model.model.VisibleThing#getOnEdit <em>On Edit</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>On Edit</em>'.
-	 * @see org.openiaml.model.model.VisibleThing#getOnEdit()
-	 * @see #getVisibleThing()
-	 * @generated
-	 */
-	EReference getVisibleThing_OnEdit();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.openiaml.model.model.VisibleThing#getOnAccess <em>On Access</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>On Access</em>'.
-	 * @see org.openiaml.model.model.VisibleThing#getOnAccess()
-	 * @see #getVisibleThing()
-	 * @generated
-	 */
-	EReference getVisibleThing_OnAccess();
 
 	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.InternetApplication <em>Internet Application</em>}'.
@@ -6721,17 +6756,6 @@ public interface ModelPackage extends EPackage {
 	EReference getScope_Elements();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.openiaml.model.model.Scope#getOnAccess <em>On Access</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>On Access</em>'.
-	 * @see org.openiaml.model.model.Scope#getOnAccess()
-	 * @see #getScope()
-	 * @generated
-	 */
-	EReference getScope_OnAccess();
-
-	/**
 	 * Returns the meta object for the containment reference '{@link org.openiaml.model.model.Scope#getOnInit <em>On Init</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6921,6 +6945,48 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getCanBeSynced();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.model.model.Editable <em>Editable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Editable</em>'.
+	 * @see org.openiaml.model.model.Editable
+	 * @generated
+	 */
+	EClass getEditable();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.openiaml.model.model.Editable#getOnEdit <em>On Edit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>On Edit</em>'.
+	 * @see org.openiaml.model.model.Editable#getOnEdit()
+	 * @see #getEditable()
+	 * @generated
+	 */
+	EReference getEditable_OnEdit();
+
+	/**
+	 * Returns the meta object for class '{@link org.openiaml.model.model.Accessible <em>Accessible</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Accessible</em>'.
+	 * @see org.openiaml.model.model.Accessible
+	 * @generated
+	 */
+	EClass getAccessible();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.openiaml.model.model.Accessible#getOnAccess <em>On Access</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>On Access</em>'.
+	 * @see org.openiaml.model.model.Accessible#getOnAccess()
+	 * @see #getAccessible()
+	 * @generated
+	 */
+	EReference getAccessible_OnAccess();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -7325,22 +7391,6 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference VISIBLE_THING__ON_CLICK = eINSTANCE.getVisibleThing_OnClick();
-
-		/**
-		 * The meta object literal for the '<em><b>On Edit</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference VISIBLE_THING__ON_EDIT = eINSTANCE.getVisibleThing_OnEdit();
-
-		/**
-		 * The meta object literal for the '<em><b>On Access</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference VISIBLE_THING__ON_ACCESS = eINSTANCE.getVisibleThing_OnAccess();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.impl.InternetApplicationImpl <em>Internet Application</em>}' class.
@@ -7833,14 +7883,6 @@ public interface ModelPackage extends EPackage {
 		EReference SCOPE__ELEMENTS = eINSTANCE.getScope_Elements();
 
 		/**
-		 * The meta object literal for the '<em><b>On Access</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SCOPE__ON_ACCESS = eINSTANCE.getScope_OnAccess();
-
-		/**
 		 * The meta object literal for the '<em><b>On Init</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -7997,6 +8039,42 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EClass CAN_BE_SYNCED = eINSTANCE.getCanBeSynced();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.model.model.Editable <em>Editable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.model.model.Editable
+		 * @see org.openiaml.model.model.impl.ModelPackageImpl#getEditable()
+		 * @generated
+		 */
+		EClass EDITABLE = eINSTANCE.getEditable();
+
+		/**
+		 * The meta object literal for the '<em><b>On Edit</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EDITABLE__ON_EDIT = eINSTANCE.getEditable_OnEdit();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.model.model.Accessible <em>Accessible</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.model.model.Accessible
+		 * @see org.openiaml.model.model.impl.ModelPackageImpl#getAccessible()
+		 * @generated
+		 */
+		EClass ACCESSIBLE = eINSTANCE.getAccessible();
+
+		/**
+		 * The meta object literal for the '<em><b>On Access</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ACCESSIBLE__ON_ACCESS = eINSTANCE.getAccessible_OnAccess();
 
 	}
 

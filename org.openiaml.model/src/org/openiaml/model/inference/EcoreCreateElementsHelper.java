@@ -4,6 +4,7 @@
 package org.openiaml.model.inference;
 
 import org.eclipse.emf.ecore.EObject;
+import org.openiaml.model.model.Accessible;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.CompositeCondition;
@@ -21,6 +22,7 @@ import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
+import org.openiaml.model.model.Editable;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.ExecutionEdgeDestination;
@@ -150,8 +152,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return event;
 	}
 	
-	public EventTrigger generatedEventTriggerOnAccess(GeneratesElements by, VisibleThing container) throws InferenceException {
-		EventTrigger event = (EventTrigger) createElement( container, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getVisibleThing_OnAccess() );
+	public EventTrigger generatedEventTriggerOnAccess(GeneratesElements by, Accessible container) throws InferenceException {
+		EventTrigger event = (EventTrigger) createElement( container, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getAccessible_OnAccess() );
 		setGeneratedBy(event, by);
 		return event;
 	}
@@ -162,14 +164,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return event;
 	}
 
-	public EventTrigger generatedEventTriggerOnEdit(GeneratesElements by, VisibleThing container) throws InferenceException {
-		EventTrigger event = (EventTrigger) createElement( container, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getVisibleThing_OnEdit() );
-		setGeneratedBy(event, by);
-		return event;
-	}
-
-	public EventTrigger generatedEventTriggerOnAccess(GeneratesElements by, Scope container) throws InferenceException {
-		EventTrigger event = (EventTrigger) createElement( container, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getScope_OnAccess() );
+	public EventTrigger generatedEventTriggerOnEdit(GeneratesElements by, Editable container) throws InferenceException {
+		EventTrigger event = (EventTrigger) createElement( container, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getEditable_OnEdit() );
 		setGeneratedBy(event, by);
 		return event;
 	}

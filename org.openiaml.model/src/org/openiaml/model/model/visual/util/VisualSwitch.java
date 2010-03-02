@@ -10,11 +10,13 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.openiaml.model.model.Accessible;
 import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsScopes;
 import org.openiaml.model.model.ContainsWires;
+import org.openiaml.model.model.Editable;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.NamedElement;
@@ -112,6 +114,7 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseParameterEdgesSource(frame);
 				if (result == null) result = caseContainsScopes(frame);
 				if (result == null) result = caseCanBeSynced(frame);
+				if (result == null) result = caseAccessible(frame);
 				if (result == null) result = caseGeneratesElements(frame);
 				if (result == null) result = caseContainsOperations(frame);
 				if (result == null) result = caseNamedElement(frame);
@@ -130,6 +133,8 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseVisibleThing(inputForm);
 				if (result == null) result = caseCanBeSynced(inputForm);
 				if (result == null) result = caseParameterEdgesSource(inputForm);
+				if (result == null) result = caseEditable(inputForm);
+				if (result == null) result = caseAccessible(inputForm);
 				if (result == null) result = caseContainsConditions(inputForm);
 				if (result == null) result = caseContainsOperations(inputForm);
 				if (result == null) result = caseWireEdgesSource(inputForm);
@@ -148,6 +153,8 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseVisibleThing(inputTextField);
 				if (result == null) result = caseCanBeSynced(inputTextField);
 				if (result == null) result = caseParameterEdgesSource(inputTextField);
+				if (result == null) result = caseEditable(inputTextField);
+				if (result == null) result = caseAccessible(inputTextField);
 				if (result == null) result = caseContainsConditions(inputTextField);
 				if (result == null) result = caseContainsOperations(inputTextField);
 				if (result == null) result = caseWireEdgesSource(inputTextField);
@@ -166,6 +173,8 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseVisibleThing(button);
 				if (result == null) result = caseCanBeSynced(button);
 				if (result == null) result = caseParameterEdgesSource(button);
+				if (result == null) result = caseEditable(button);
+				if (result == null) result = caseAccessible(button);
 				if (result == null) result = caseContainsConditions(button);
 				if (result == null) result = caseContainsOperations(button);
 				if (result == null) result = caseWireEdgesSource(button);
@@ -184,6 +193,8 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseVisibleThing(label);
 				if (result == null) result = caseCanBeSynced(label);
 				if (result == null) result = caseParameterEdgesSource(label);
+				if (result == null) result = caseEditable(label);
+				if (result == null) result = caseAccessible(label);
 				if (result == null) result = caseContainsConditions(label);
 				if (result == null) result = caseContainsOperations(label);
 				if (result == null) result = caseWireEdgesSource(label);
@@ -332,6 +343,36 @@ public class VisualSwitch<T> {
 	 * @generated
 	 */
 	public T caseParameterEdgesSource(ParameterEdgesSource object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Editable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Editable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEditable(Editable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Accessible</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Accessible</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAccessible(Accessible object) {
 		return null;
 	}
 

@@ -148,7 +148,7 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VisibleThing" eSuperTypes="#//ContainsConditions #//ContainsOperations #//ContainsWires #//WireEdgesSource #//WireEdgeDestination #//NamedElement #//GeneratedElement #//GeneratesElements #//CanBeSynced #//wires/ParameterEdgesSource">
+  <eClassifiers xsi:type="ecore:EClass" name="VisibleThing" eSuperTypes="#//ContainsConditions #//ContainsOperations #//ContainsWires #//WireEdgesSource #//WireEdgeDestination #//NamedElement #//GeneratedElement #//GeneratesElements #//CanBeSynced #//wires/ParameterEdgesSource #//Editable #//Accessible">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="comment" value="this used to mean nothing; now anything that extends VisibleThing (which unforuntately needs to be concrete) has an editor"/>
       <details key="editor" value="org.openiaml.model.diagram.visual"/>
@@ -176,18 +176,6 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="onClick" eType="#//EventTrigger"
-        containment="true">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="changed" value="added in 0.4.4"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="onEdit" eType="#//EventTrigger"
-        containment="true">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="changed" value="added in 0.4.4"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="onAccess" eType="#//EventTrigger"
         containment="true">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="changed" value="added in 0.4.4"/>
@@ -370,7 +358,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Scope" abstract="true" eSuperTypes="#//GeneratesElements #//ContainsWires #//ContainsScopes #//NamedElement #//GeneratedElement #//WireEdgesSource #//WireEdgeDestination #//ContainsConditions #//CanBeSynced">
+  <eClassifiers xsi:type="ecore:EClass" name="Scope" abstract="true" eSuperTypes="#//GeneratesElements #//ContainsWires #//ContainsScopes #//NamedElement #//GeneratedElement #//WireEdgesSource #//WireEdgeDestination #//ContainsConditions #//CanBeSynced #//Accessible">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="changed" value="0.4: 'domainObjects', 'domainViews', 'domainInstances' references removed&#xD;&#xA;0.4.2: renamed from 'Scope' to 'AbstractScope'; added 'gate' reference"/>
     </eAnnotations>
@@ -399,12 +387,6 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
         eType="#//ApplicationElement" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="onAccess" eType="#//EventTrigger"
-        containment="true">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="changed" value="added in 0.4.4"/>
-      </eAnnotations>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="onInit" eType="#//EventTrigger"
         containment="true">
       <eAnnotations source="http://openiaml.org/comment">
@@ -482,6 +464,22 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CanBeSynced" abstract="true" interface="true"
       eSuperTypes="#//NamedElement #//GeneratedElement #//GeneratesElements #//ContainsWires #//ContainsOperations #//ContainsConditions #//WireEdgesSource #//WireEdgeDestination"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Editable" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="onEdit" eType="#//EventTrigger"
+        containment="true">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="changed" value="added in 0.4.4"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Accessible" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="onAccess" eType="#//EventTrigger"
+        containment="true">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="changed" value="added in 0.4.4"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
   <eSubpackages name="visual" nsURI="http://openiaml.org/model/visual" nsPrefix="iaml.visual">
     <eClassifiers xsi:type="ecore:EClass" name="Frame" eSuperTypes="#//Scope #//wires/ParameterEdgesSource">
       <eAnnotations source="http://openiaml.org/comment">

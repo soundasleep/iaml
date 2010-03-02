@@ -11,19 +11,6 @@
         description="Model Elements">
       <tools
           xsi:type="gmftool:CreationTool"
-          title="EventTrigger"
-          description="Create new EventTrigger">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/EventTrigger.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/EventTrigger.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
           title="PrimitiveOperation"
           description="Create new PrimitiveOperation">
         <smallIcon

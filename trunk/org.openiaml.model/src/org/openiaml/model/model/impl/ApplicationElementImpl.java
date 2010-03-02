@@ -33,9 +33,9 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.StaticValue;
-import org.openiaml.model.model.WireEdge;
-import org.openiaml.model.model.WireEdgeDestination;
-import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.Wire;
+import org.openiaml.model.model.WireDestination;
+import org.openiaml.model.model.WireSource;
 import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ConstraintEdge;
 import org.openiaml.model.model.wires.ExtendsEdge;
@@ -64,8 +64,8 @@ import org.openiaml.model.model.wires.RequiresEdge;
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getProvidesEdges <em>Provides Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getConstraintEdges <em>Constraint Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getConditionEdges <em>Condition Edges</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getOutEdges <em>Out Edges</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getInEdges <em>In Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getOutWires <em>Out Wires</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getInWires <em>In Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getGeneratedElements <em>Generated Elements</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#isOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getConditions <em>Conditions</em>}</li>
@@ -195,7 +195,7 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<WireEdge> wires;
+	protected EList<Wire> wires;
 
 	/**
 	 * The cached value of the '{@link #getParameterEdges() <em>Parameter Edges</em>}' containment reference list.
@@ -258,24 +258,24 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 	protected EList<ConditionEdge> conditionEdges;
 
 	/**
-	 * The cached value of the '{@link #getOutEdges() <em>Out Edges</em>}' reference list.
+	 * The cached value of the '{@link #getOutWires() <em>Out Wires</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOutEdges()
+	 * @see #getOutWires()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<WireEdge> outEdges;
+	protected EList<Wire> outWires;
 
 	/**
-	 * The cached value of the '{@link #getInEdges() <em>In Edges</em>}' reference list.
+	 * The cached value of the '{@link #getInWires() <em>In Wires</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getInEdges()
+	 * @see #getInWires()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<WireEdge> inEdges;
+	protected EList<Wire> inWires;
 
 	/**
 	 * The cached value of the '{@link #getGeneratedElements() <em>Generated Elements</em>}' reference list.
@@ -481,9 +481,9 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<WireEdge> getWires() {
+	public EList<Wire> getWires() {
 		if (wires == null) {
-			wires = new EObjectContainmentEList<WireEdge>(WireEdge.class, this, ModelPackage.APPLICATION_ELEMENT__WIRES);
+			wires = new EObjectContainmentEList<Wire>(Wire.class, this, ModelPackage.APPLICATION_ELEMENT__WIRES);
 		}
 		return wires;
 	}
@@ -565,11 +565,11 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<WireEdge> getOutEdges() {
-		if (outEdges == null) {
-			outEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, ModelPackage.APPLICATION_ELEMENT__OUT_EDGES, ModelPackage.WIRE_EDGE__FROM);
+	public EList<Wire> getOutWires() {
+		if (outWires == null) {
+			outWires = new EObjectWithInverseResolvingEList<Wire>(Wire.class, this, ModelPackage.APPLICATION_ELEMENT__OUT_WIRES, ModelPackage.WIRE__FROM);
 		}
-		return outEdges;
+		return outWires;
 	}
 
 	/**
@@ -577,11 +577,11 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<WireEdge> getInEdges() {
-		if (inEdges == null) {
-			inEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, ModelPackage.APPLICATION_ELEMENT__IN_EDGES, ModelPackage.WIRE_EDGE__TO);
+	public EList<Wire> getInWires() {
+		if (inWires == null) {
+			inWires = new EObjectWithInverseResolvingEList<Wire>(Wire.class, this, ModelPackage.APPLICATION_ELEMENT__IN_WIRES, ModelPackage.WIRE__TO);
 		}
-		return inEdges;
+		return inWires;
 	}
 
 	/**
@@ -664,10 +664,10 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 		switch (featureID) {
 			case ModelPackage.APPLICATION_ELEMENT__GENERATED_BY:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGeneratedBy()).basicAdd(otherEnd, msgs);
-			case ModelPackage.APPLICATION_ELEMENT__OUT_EDGES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutEdges()).basicAdd(otherEnd, msgs);
-			case ModelPackage.APPLICATION_ELEMENT__IN_EDGES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInEdges()).basicAdd(otherEnd, msgs);
+			case ModelPackage.APPLICATION_ELEMENT__OUT_WIRES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutWires()).basicAdd(otherEnd, msgs);
+			case ModelPackage.APPLICATION_ELEMENT__IN_WIRES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInWires()).basicAdd(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT__GENERATED_ELEMENTS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGeneratedElements()).basicAdd(otherEnd, msgs);
 		}
@@ -702,10 +702,10 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				return ((InternalEList<?>)getConstraintEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT__CONDITION_EDGES:
 				return ((InternalEList<?>)getConditionEdges()).basicRemove(otherEnd, msgs);
-			case ModelPackage.APPLICATION_ELEMENT__OUT_EDGES:
-				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
-			case ModelPackage.APPLICATION_ELEMENT__IN_EDGES:
-				return ((InternalEList<?>)getInEdges()).basicRemove(otherEnd, msgs);
+			case ModelPackage.APPLICATION_ELEMENT__OUT_WIRES:
+				return ((InternalEList<?>)getOutWires()).basicRemove(otherEnd, msgs);
+			case ModelPackage.APPLICATION_ELEMENT__IN_WIRES:
+				return ((InternalEList<?>)getInWires()).basicRemove(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT__GENERATED_ELEMENTS:
 				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT__CONDITIONS:
@@ -754,10 +754,10 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				return getConstraintEdges();
 			case ModelPackage.APPLICATION_ELEMENT__CONDITION_EDGES:
 				return getConditionEdges();
-			case ModelPackage.APPLICATION_ELEMENT__OUT_EDGES:
-				return getOutEdges();
-			case ModelPackage.APPLICATION_ELEMENT__IN_EDGES:
-				return getInEdges();
+			case ModelPackage.APPLICATION_ELEMENT__OUT_WIRES:
+				return getOutWires();
+			case ModelPackage.APPLICATION_ELEMENT__IN_WIRES:
+				return getInWires();
 			case ModelPackage.APPLICATION_ELEMENT__GENERATED_ELEMENTS:
 				return getGeneratedElements();
 			case ModelPackage.APPLICATION_ELEMENT__OVERRIDDEN:
@@ -807,7 +807,7 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				return;
 			case ModelPackage.APPLICATION_ELEMENT__WIRES:
 				getWires().clear();
-				getWires().addAll((Collection<? extends WireEdge>)newValue);
+				getWires().addAll((Collection<? extends Wire>)newValue);
 				return;
 			case ModelPackage.APPLICATION_ELEMENT__PARAMETER_EDGES:
 				getParameterEdges().clear();
@@ -833,13 +833,13 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				getConditionEdges().clear();
 				getConditionEdges().addAll((Collection<? extends ConditionEdge>)newValue);
 				return;
-			case ModelPackage.APPLICATION_ELEMENT__OUT_EDGES:
-				getOutEdges().clear();
-				getOutEdges().addAll((Collection<? extends WireEdge>)newValue);
+			case ModelPackage.APPLICATION_ELEMENT__OUT_WIRES:
+				getOutWires().clear();
+				getOutWires().addAll((Collection<? extends Wire>)newValue);
 				return;
-			case ModelPackage.APPLICATION_ELEMENT__IN_EDGES:
-				getInEdges().clear();
-				getInEdges().addAll((Collection<? extends WireEdge>)newValue);
+			case ModelPackage.APPLICATION_ELEMENT__IN_WIRES:
+				getInWires().clear();
+				getInWires().addAll((Collection<? extends Wire>)newValue);
 				return;
 			case ModelPackage.APPLICATION_ELEMENT__GENERATED_ELEMENTS:
 				getGeneratedElements().clear();
@@ -914,11 +914,11 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 			case ModelPackage.APPLICATION_ELEMENT__CONDITION_EDGES:
 				getConditionEdges().clear();
 				return;
-			case ModelPackage.APPLICATION_ELEMENT__OUT_EDGES:
-				getOutEdges().clear();
+			case ModelPackage.APPLICATION_ELEMENT__OUT_WIRES:
+				getOutWires().clear();
 				return;
-			case ModelPackage.APPLICATION_ELEMENT__IN_EDGES:
-				getInEdges().clear();
+			case ModelPackage.APPLICATION_ELEMENT__IN_WIRES:
+				getInWires().clear();
 				return;
 			case ModelPackage.APPLICATION_ELEMENT__GENERATED_ELEMENTS:
 				getGeneratedElements().clear();
@@ -975,10 +975,10 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				return constraintEdges != null && !constraintEdges.isEmpty();
 			case ModelPackage.APPLICATION_ELEMENT__CONDITION_EDGES:
 				return conditionEdges != null && !conditionEdges.isEmpty();
-			case ModelPackage.APPLICATION_ELEMENT__OUT_EDGES:
-				return outEdges != null && !outEdges.isEmpty();
-			case ModelPackage.APPLICATION_ELEMENT__IN_EDGES:
-				return inEdges != null && !inEdges.isEmpty();
+			case ModelPackage.APPLICATION_ELEMENT__OUT_WIRES:
+				return outWires != null && !outWires.isEmpty();
+			case ModelPackage.APPLICATION_ELEMENT__IN_WIRES:
+				return inWires != null && !inWires.isEmpty();
 			case ModelPackage.APPLICATION_ELEMENT__GENERATED_ELEMENTS:
 				return generatedElements != null && !generatedElements.isEmpty();
 			case ModelPackage.APPLICATION_ELEMENT__OVERRIDDEN:
@@ -1038,15 +1038,15 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				default: return -1;
 			}
 		}
-		if (baseClass == WireEdgesSource.class) {
+		if (baseClass == WireSource.class) {
 			switch (derivedFeatureID) {
-				case ModelPackage.APPLICATION_ELEMENT__OUT_EDGES: return ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES;
+				case ModelPackage.APPLICATION_ELEMENT__OUT_WIRES: return ModelPackage.WIRE_SOURCE__OUT_WIRES;
 				default: return -1;
 			}
 		}
-		if (baseClass == WireEdgeDestination.class) {
+		if (baseClass == WireDestination.class) {
 			switch (derivedFeatureID) {
-				case ModelPackage.APPLICATION_ELEMENT__IN_EDGES: return ModelPackage.WIRE_EDGE_DESTINATION__IN_EDGES;
+				case ModelPackage.APPLICATION_ELEMENT__IN_WIRES: return ModelPackage.WIRE_DESTINATION__IN_WIRES;
 				default: return -1;
 			}
 		}
@@ -1116,15 +1116,15 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				default: return -1;
 			}
 		}
-		if (baseClass == WireEdgesSource.class) {
+		if (baseClass == WireSource.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES: return ModelPackage.APPLICATION_ELEMENT__OUT_EDGES;
+				case ModelPackage.WIRE_SOURCE__OUT_WIRES: return ModelPackage.APPLICATION_ELEMENT__OUT_WIRES;
 				default: return -1;
 			}
 		}
-		if (baseClass == WireEdgeDestination.class) {
+		if (baseClass == WireDestination.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.WIRE_EDGE_DESTINATION__IN_EDGES: return ModelPackage.APPLICATION_ELEMENT__IN_EDGES;
+				case ModelPackage.WIRE_DESTINATION__IN_WIRES: return ModelPackage.APPLICATION_ELEMENT__IN_WIRES;
 				default: return -1;
 			}
 		}

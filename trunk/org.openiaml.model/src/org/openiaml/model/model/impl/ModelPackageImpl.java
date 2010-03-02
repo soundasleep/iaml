@@ -55,9 +55,9 @@ import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.TemporaryVariable;
 import org.openiaml.model.model.VisibleThing;
-import org.openiaml.model.model.WireEdge;
-import org.openiaml.model.model.WireEdgeDestination;
-import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.Wire;
+import org.openiaml.model.model.WireDestination;
+import org.openiaml.model.model.WireSource;
 import org.openiaml.model.model.components.ComponentsPackage;
 import org.openiaml.model.model.components.impl.ComponentsPackageImpl;
 import org.openiaml.model.model.domain.DomainPackage;
@@ -92,21 +92,21 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass wireEdgeEClass = null;
+	private EClass wireEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass wireEdgeDestinationEClass = null;
+	private EClass wireDestinationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass wireEdgesSourceEClass = null;
+	private EClass wireSourceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -502,8 +502,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getWireEdge() {
-		return wireEdgeEClass;
+	public EClass getWire() {
+		return wireEClass;
 	}
 
 	/**
@@ -511,8 +511,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getWireEdge_From() {
-		return (EReference)wireEdgeEClass.getEStructuralFeatures().get(0);
+	public EReference getWire_From() {
+		return (EReference)wireEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -520,8 +520,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getWireEdge_To() {
-		return (EReference)wireEdgeEClass.getEStructuralFeatures().get(1);
+	public EReference getWire_To() {
+		return (EReference)wireEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -529,8 +529,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getWireEdgeDestination() {
-		return wireEdgeDestinationEClass;
+	public EClass getWireDestination() {
+		return wireDestinationEClass;
 	}
 
 	/**
@@ -538,8 +538,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getWireEdgeDestination_InEdges() {
-		return (EReference)wireEdgeDestinationEClass.getEStructuralFeatures().get(0);
+	public EReference getWireDestination_InWires() {
+		return (EReference)wireDestinationEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -547,8 +547,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getWireEdgesSource() {
-		return wireEdgesSourceEClass;
+	public EClass getWireSource() {
+		return wireSourceEClass;
 	}
 
 	/**
@@ -556,8 +556,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getWireEdgesSource_OutEdges() {
-		return (EReference)wireEdgesSourceEClass.getEStructuralFeatures().get(0);
+	public EReference getWireSource_OutWires() {
+		return (EReference)wireSourceEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1608,15 +1608,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		namedElementEClass = createEClass(NAMED_ELEMENT);
 		createEAttribute(namedElementEClass, NAMED_ELEMENT__NAME);
 
-		wireEdgeEClass = createEClass(WIRE_EDGE);
-		createEReference(wireEdgeEClass, WIRE_EDGE__FROM);
-		createEReference(wireEdgeEClass, WIRE_EDGE__TO);
+		wireEClass = createEClass(WIRE);
+		createEReference(wireEClass, WIRE__FROM);
+		createEReference(wireEClass, WIRE__TO);
 
-		wireEdgeDestinationEClass = createEClass(WIRE_EDGE_DESTINATION);
-		createEReference(wireEdgeDestinationEClass, WIRE_EDGE_DESTINATION__IN_EDGES);
+		wireDestinationEClass = createEClass(WIRE_DESTINATION);
+		createEReference(wireDestinationEClass, WIRE_DESTINATION__IN_WIRES);
 
-		wireEdgesSourceEClass = createEClass(WIRE_EDGES_SOURCE);
-		createEReference(wireEdgesSourceEClass, WIRE_EDGES_SOURCE__OUT_EDGES);
+		wireSourceEClass = createEClass(WIRE_SOURCE);
+		createEReference(wireSourceEClass, WIRE_SOURCE__OUT_WIRES);
 
 		eventTriggerEClass = createEClass(EVENT_TRIGGER);
 
@@ -1820,10 +1820,10 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		// Add supertypes to classes
 		namedElementEClass.getESuperTypes().add(this.getGeneratedElement());
-		wireEdgeEClass.getESuperTypes().add(this.getGeneratedElement());
-		wireEdgesSourceEClass.getESuperTypes().add(this.getShouldntContainWires());
+		wireEClass.getESuperTypes().add(this.getGeneratedElement());
+		wireSourceEClass.getESuperTypes().add(this.getShouldntContainWires());
 		eventTriggerEClass.getESuperTypes().add(this.getNamedElement());
-		eventTriggerEClass.getESuperTypes().add(this.getWireEdgesSource());
+		eventTriggerEClass.getESuperTypes().add(this.getWireSource());
 		domainObjectEClass.getESuperTypes().add(this.getApplicationElement());
 		domainObjectEClass.getESuperTypes().add(this.getContainsWires());
 		domainObjectEClass.getESuperTypes().add(theWiresPackage.getParameterEdgesSource());
@@ -1835,7 +1835,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		domainAttributeEClass.getESuperTypes().add(theWiresPackage.getExtendsEdgesSource());
 		domainAttributeEClass.getESuperTypes().add(theWiresPackage.getExtendsEdgeDestination());
 		activityNodeEClass.getESuperTypes().add(this.getGeneratedElement());
-		operationEClass.getESuperTypes().add(this.getWireEdgeDestination());
+		operationEClass.getESuperTypes().add(this.getWireDestination());
 		operationEClass.getESuperTypes().add(this.getNamedElement());
 		operationEClass.getESuperTypes().add(this.getDataFlowEdgeDestination());
 		operationEClass.getESuperTypes().add(this.getExecutionEdgeDestination());
@@ -1844,7 +1844,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		parameterEClass.getESuperTypes().add(this.getDataFlowEdgesSource());
 		primitiveOperationEClass.getESuperTypes().add(this.getOperation());
 		primitiveOperationEClass.getESuperTypes().add(this.getExecutionEdgesSource());
-		primitiveOperationEClass.getESuperTypes().add(this.getWireEdgesSource());
+		primitiveOperationEClass.getESuperTypes().add(this.getWireSource());
 		compositeOperationEClass.getESuperTypes().add(this.getPrimitiveOperation());
 		compositeOperationEClass.getESuperTypes().add(this.getContainsOperations());
 		compositeOperationEClass.getESuperTypes().add(this.getContainsWires());
@@ -1853,28 +1853,28 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		applicationElementEClass.getESuperTypes().add(this.getContainsOperations());
 		applicationElementEClass.getESuperTypes().add(this.getNamedElement());
 		applicationElementEClass.getESuperTypes().add(this.getContainsEventTriggers());
-		applicationElementEClass.getESuperTypes().add(this.getWireEdgesSource());
-		applicationElementEClass.getESuperTypes().add(this.getWireEdgeDestination());
+		applicationElementEClass.getESuperTypes().add(this.getWireSource());
+		applicationElementEClass.getESuperTypes().add(this.getWireDestination());
 		applicationElementEClass.getESuperTypes().add(this.getGeneratesElements());
 		applicationElementEClass.getESuperTypes().add(this.getContainsConditions());
 		applicationElementEClass.getESuperTypes().add(this.getCanBeSynced());
 		applicationElementContainerEClass.getESuperTypes().add(this.getApplicationElement());
 		applicationElementContainerEClass.getESuperTypes().add(this.getContainsWires());
 		propertyEClass.getESuperTypes().add(this.getNamedElement());
-		propertyEClass.getESuperTypes().add(this.getWireEdgesSource());
-		propertyEClass.getESuperTypes().add(this.getWireEdgeDestination());
+		propertyEClass.getESuperTypes().add(this.getWireSource());
+		propertyEClass.getESuperTypes().add(this.getWireDestination());
 		propertyEClass.getESuperTypes().add(this.getDataFlowEdgesSource());
 		propertyEClass.getESuperTypes().add(this.getDataFlowEdgeDestination());
 		propertyEClass.getESuperTypes().add(theWiresPackage.getParameterEdgesSource());
 		staticValueEClass.getESuperTypes().add(this.getNamedElement());
-		staticValueEClass.getESuperTypes().add(this.getWireEdgesSource());
+		staticValueEClass.getESuperTypes().add(this.getWireSource());
 		staticValueEClass.getESuperTypes().add(this.getDataFlowEdgesSource());
 		staticValueEClass.getESuperTypes().add(theWiresPackage.getParameterEdgesSource());
 		visibleThingEClass.getESuperTypes().add(this.getContainsConditions());
 		visibleThingEClass.getESuperTypes().add(this.getContainsOperations());
 		visibleThingEClass.getESuperTypes().add(this.getContainsWires());
-		visibleThingEClass.getESuperTypes().add(this.getWireEdgesSource());
-		visibleThingEClass.getESuperTypes().add(this.getWireEdgeDestination());
+		visibleThingEClass.getESuperTypes().add(this.getWireSource());
+		visibleThingEClass.getESuperTypes().add(this.getWireDestination());
 		visibleThingEClass.getESuperTypes().add(this.getNamedElement());
 		visibleThingEClass.getESuperTypes().add(this.getGeneratedElement());
 		visibleThingEClass.getESuperTypes().add(this.getGeneratesElements());
@@ -1914,12 +1914,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		scopeEClass.getESuperTypes().add(this.getContainsScopes());
 		scopeEClass.getESuperTypes().add(this.getNamedElement());
 		scopeEClass.getESuperTypes().add(this.getGeneratedElement());
-		scopeEClass.getESuperTypes().add(this.getWireEdgesSource());
-		scopeEClass.getESuperTypes().add(this.getWireEdgeDestination());
+		scopeEClass.getESuperTypes().add(this.getWireSource());
+		scopeEClass.getESuperTypes().add(this.getWireDestination());
 		scopeEClass.getESuperTypes().add(this.getContainsConditions());
 		scopeEClass.getESuperTypes().add(this.getCanBeSynced());
 		scopeEClass.getESuperTypes().add(this.getAccessible());
-		conditionEClass.getESuperTypes().add(this.getWireEdgesSource());
+		conditionEClass.getESuperTypes().add(this.getWireSource());
 		conditionEClass.getESuperTypes().add(this.getDataFlowEdgesSource());
 		conditionEClass.getESuperTypes().add(this.getNamedElement());
 		conditionEClass.getESuperTypes().add(theWiresPackage.getConditionEdgesSource());
@@ -1931,7 +1931,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		domainAttributeInstanceEClass.getESuperTypes().add(theWiresPackage.getExtendsEdgesSource());
 		domainAttributeInstanceEClass.getESuperTypes().add(theWiresPackage.getExtendsEdgeDestination());
 		queryParameterEClass.getESuperTypes().add(this.getNamedElement());
-		queryParameterEClass.getESuperTypes().add(this.getWireEdgesSource());
+		queryParameterEClass.getESuperTypes().add(this.getWireSource());
 		queryParameterEClass.getESuperTypes().add(this.getDataFlowEdgesSource());
 		queryParameterEClass.getESuperTypes().add(theWiresPackage.getParameterEdgesSource());
 		containsScopesEClass.getESuperTypes().add(this.getContainsOperations());
@@ -1941,22 +1941,22 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		canBeSyncedEClass.getESuperTypes().add(this.getContainsWires());
 		canBeSyncedEClass.getESuperTypes().add(this.getContainsOperations());
 		canBeSyncedEClass.getESuperTypes().add(this.getContainsConditions());
-		canBeSyncedEClass.getESuperTypes().add(this.getWireEdgesSource());
-		canBeSyncedEClass.getESuperTypes().add(this.getWireEdgeDestination());
+		canBeSyncedEClass.getESuperTypes().add(this.getWireSource());
+		canBeSyncedEClass.getESuperTypes().add(this.getWireDestination());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(namedElementEClass, NamedElement.class, "NamedElement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getNamedElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, NamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(wireEdgeEClass, WireEdge.class, "WireEdge", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getWireEdge_From(), this.getWireEdgesSource(), this.getWireEdgesSource_OutEdges(), "from", null, 1, 1, WireEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getWireEdge_To(), this.getWireEdgeDestination(), this.getWireEdgeDestination_InEdges(), "to", null, 1, 1, WireEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(wireEClass, Wire.class, "Wire", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getWire_From(), this.getWireSource(), this.getWireSource_OutWires(), "from", null, 1, 1, Wire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getWire_To(), this.getWireDestination(), this.getWireDestination_InWires(), "to", null, 1, 1, Wire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(wireEdgeDestinationEClass, WireEdgeDestination.class, "WireEdgeDestination", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getWireEdgeDestination_InEdges(), this.getWireEdge(), this.getWireEdge_To(), "inEdges", null, 0, -1, WireEdgeDestination.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(wireDestinationEClass, WireDestination.class, "WireDestination", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getWireDestination_InWires(), this.getWire(), this.getWire_To(), "inWires", null, 0, -1, WireDestination.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(wireEdgesSourceEClass, WireEdgesSource.class, "WireEdgesSource", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getWireEdgesSource_OutEdges(), this.getWireEdge(), this.getWireEdge_From(), "outEdges", null, 0, -1, WireEdgesSource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(wireSourceEClass, WireSource.class, "WireSource", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getWireSource_OutWires(), this.getWire(), this.getWire_From(), "outWires", null, 0, -1, WireSource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(eventTriggerEClass, EventTrigger.class, "EventTrigger", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2048,7 +2048,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEAttribute(getDynamicApplicationElementSet_Query(), ecorePackage.getEString(), "query", null, 0, 1, DynamicApplicationElementSet.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(containsWiresEClass, ContainsWires.class, "ContainsWires", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getContainsWires_Wires(), this.getWireEdge(), null, "wires", null, 0, -1, ContainsWires.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getContainsWires_Wires(), this.getWire(), null, "wires", null, 0, -1, ContainsWires.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getContainsWires_ParameterEdges(), theWiresPackage.getParameterEdge(), null, "parameterEdges", null, 0, -1, ContainsWires.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getContainsWires_ExtendsEdges(), theWiresPackage.getExtendsEdge(), null, "extendsEdges", null, 0, -1, ContainsWires.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getContainsWires_RequiresEdges(), theWiresPackage.getRequiresEdge(), null, "requiresEdges", null, 0, -1, ContainsWires.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2131,13 +2131,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	protected void createCommentAnnotations() {
 		String source = "http://openiaml.org/comment";				
 		addAnnotation
-		  (wireEdgeEClass, 
+		  (wireEClass, 
 		   source, 
 		   new String[] {
 			 "changed", "0.4.2 to abstract"
 		   });		
 		addAnnotation
-		  (wireEdgesSourceEClass, 
+		  (wireSourceEClass, 
 		   source, 
 		   new String[] {
 			 "comment", "temporarily contains wires until GMF bug is fixed "
@@ -2418,10 +2418,10 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 			 "documentation", "An element with a name."
 		   });		
 		addAnnotation
-		  (wireEdgeEClass, 
+		  (wireEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "A {@mode WireEdge} represents some piece of runtime functionality, usually in terms of the {@model EventTrigger Event}-{@model Condition}-{@model Operation Action} paradigm. These are expressed in {@model SingleWire}s."
+			 "documentation", "A {@mode Wire} represents some piece of runtime functionality, usually in terms of the {@model EventTrigger Event}-{@model Condition}-{@model Operation Action} paradigm. These are expressed in {@model SingleWire}s."
 		   });				
 		addAnnotation
 		  (eventTriggerEClass, 

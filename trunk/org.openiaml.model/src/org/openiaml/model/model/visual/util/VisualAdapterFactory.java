@@ -23,8 +23,8 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.VisibleThing;
-import org.openiaml.model.model.WireEdgeDestination;
-import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.WireDestination;
+import org.openiaml.model.model.WireSource;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
@@ -138,12 +138,12 @@ public class VisualAdapterFactory extends AdapterFactoryImpl {
 				return createShouldntContainWiresAdapter();
 			}
 			@Override
-			public Adapter caseWireEdgesSource(WireEdgesSource object) {
-				return createWireEdgesSourceAdapter();
+			public Adapter caseWireSource(WireSource object) {
+				return createWireSourceAdapter();
 			}
 			@Override
-			public Adapter caseWireEdgeDestination(WireEdgeDestination object) {
-				return createWireEdgeDestinationAdapter();
+			public Adapter caseWireDestination(WireDestination object) {
+				return createWireDestinationAdapter();
 			}
 			@Override
 			public Adapter caseContainsConditions(ContainsConditions object) {
@@ -348,34 +348,6 @@ public class VisualAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.WireEdgesSource <em>Wire Edges Source</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.openiaml.model.model.WireEdgesSource
-	 * @generated
-	 */
-	public Adapter createWireEdgesSourceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.WireEdgeDestination <em>Wire Edge Destination</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.openiaml.model.model.WireEdgeDestination
-	 * @generated
-	 */
-	public Adapter createWireEdgeDestinationAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.GeneratedElement <em>Generated Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -470,6 +442,34 @@ public class VisualAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createShouldntContainWiresAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.WireSource <em>Wire Source</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.WireSource
+	 * @generated
+	 */
+	public Adapter createWireSourceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.WireDestination <em>Wire Destination</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.WireDestination
+	 * @generated
+	 */
+	public Adapter createWireDestinationAdapter() {
 		return null;
 	}
 

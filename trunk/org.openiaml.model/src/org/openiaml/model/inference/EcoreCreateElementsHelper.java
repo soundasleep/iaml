@@ -39,8 +39,8 @@ import org.openiaml.model.model.Property;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.VisibleThing;
-import org.openiaml.model.model.WireEdgeDestination;
-import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.WireDestination;
+import org.openiaml.model.model.WireSource;
 import org.openiaml.model.model.components.ComponentsPackage;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.operations.CancelNode;
@@ -336,8 +336,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return edge;
 	}
 	
-	public RunInstanceWire generatedRunInstanceWire(GeneratesElements by, ContainsWires container, WireEdgesSource source, WireEdgeDestination target) throws InferenceException {
-		RunInstanceWire wire = (RunInstanceWire) createRelationship(container, WiresPackage.eINSTANCE.getRunInstanceWire(), source, target, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
+	public RunInstanceWire generatedRunInstanceWire(GeneratesElements by, ContainsWires container, WireSource source, WireDestination target) throws InferenceException {
+		RunInstanceWire wire = (RunInstanceWire) createRelationship(container, WiresPackage.eINSTANCE.getRunInstanceWire(), source, target, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWire_From(), ModelPackage.eINSTANCE.getWire_To());
 		setGeneratedBy(wire, by);
 		return wire;
 	}
@@ -360,26 +360,26 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return wire;
 	}
 	
-	public SyncWire generatedSyncWire(GeneratesElements by, ContainsWires container, WireEdgesSource source, WireEdgeDestination target) throws InferenceException {
+	public SyncWire generatedSyncWire(GeneratesElements by, ContainsWires container, WireSource source, WireDestination target) throws InferenceException {
 		SyncWire wire = createSyncWire(container, source, target);
 		setGeneratedBy(wire, by);
 		return wire;
 	}
 
-	public SetWire generatedSetWire(GeneratesElements by, ContainsWires container, WireEdgesSource source, WireEdgeDestination target) throws InferenceException {
-		SetWire wire = (SetWire) createRelationship(container, WiresPackage.eINSTANCE.getSetWire(), source, target, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
+	public SetWire generatedSetWire(GeneratesElements by, ContainsWires container, WireSource source, WireDestination target) throws InferenceException {
+		SetWire wire = (SetWire) createRelationship(container, WiresPackage.eINSTANCE.getSetWire(), source, target, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWire_From(), ModelPackage.eINSTANCE.getWire_To());
 		setGeneratedBy(wire, by);
 		return wire;
 	}
 
-	public SelectWire generatedSelectWire(GeneratesElements by, ContainsWires container, WireEdgesSource source, WireEdgeDestination target) throws InferenceException {
-		SelectWire wire = (SelectWire) createRelationship(container, WiresPackage.eINSTANCE.getSelectWire(), source, target, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
+	public SelectWire generatedSelectWire(GeneratesElements by, ContainsWires container, WireSource source, WireDestination target) throws InferenceException {
+		SelectWire wire = (SelectWire) createRelationship(container, WiresPackage.eINSTANCE.getSelectWire(), source, target, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWire_From(), ModelPackage.eINSTANCE.getWire_To());
 		setGeneratedBy(wire, by);
 		return wire;
 	}
 	
-	public NavigateWire generatedNavigateWire(GeneratesElements by, ContainsWires container, WireEdgesSource source, WireEdgeDestination target) throws InferenceException {
-		NavigateWire wire = (NavigateWire) createRelationship(container, WiresPackage.eINSTANCE.getNavigateWire(), source, target, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
+	public NavigateWire generatedNavigateWire(GeneratesElements by, ContainsWires container, WireSource source, WireDestination target) throws InferenceException {
+		NavigateWire wire = (NavigateWire) createRelationship(container, WiresPackage.eINSTANCE.getNavigateWire(), source, target, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWire_From(), ModelPackage.eINSTANCE.getWire_To());
 		setGeneratedBy(wire, by);
 		return wire;
 	}
@@ -501,9 +501,9 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return page;
 	}
 	
-	public SyncWire createSyncWire(ContainsWires container, WireEdgesSource source,
-			WireEdgeDestination target) throws InferenceException {
-		SyncWire wire = (SyncWire) createRelationship(container, WiresPackage.eINSTANCE.getSyncWire(), source, target, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWireEdge_From(), ModelPackage.eINSTANCE.getWireEdge_To());
+	public SyncWire createSyncWire(ContainsWires container, WireSource source,
+			WireDestination target) throws InferenceException {
+		SyncWire wire = (SyncWire) createRelationship(container, WiresPackage.eINSTANCE.getSyncWire(), source, target, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWire_From(), ModelPackage.eINSTANCE.getWire_To());
 		return wire;
 	}
 

@@ -8,7 +8,7 @@ package org.openiaml.model.model.wires;
 
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.NamedElement;
-import org.openiaml.model.model.WireEdgeDestination;
+import org.openiaml.model.model.WireDestination;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,7 +31,7 @@ import org.openiaml.model.model.WireEdgeDestination;
  * @model annotation="http://openiaml.org/comment added='0.2' comment='parameters can be provided by ParameterWires'"
  * @generated
  */
-public interface SelectWire extends WireEdgeDestination, ParameterEdgeDestination, SingleWire, NamedElement, GeneratesElements {
+public interface SelectWire extends WireDestination, ParameterEdgeDestination, SingleWire, NamedElement, GeneratesElements {
 	/**
 	 * Returns the value of the '<em><b>Query</b></em>' attribute.
 	 * <!-- begin-user-doc -->

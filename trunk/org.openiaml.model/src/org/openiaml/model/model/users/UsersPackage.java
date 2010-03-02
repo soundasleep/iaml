@@ -215,22 +215,22 @@ public interface UsersPackage extends EPackage {
 	int USER_STORE__OVERRIDDEN = ModelPackage.DOMAIN_STORE__OVERRIDDEN;
 
 	/**
-	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
+	 * The feature id for the '<em><b>Out Wires</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int USER_STORE__OUT_EDGES = ModelPackage.DOMAIN_STORE__OUT_EDGES;
+	int USER_STORE__OUT_WIRES = ModelPackage.DOMAIN_STORE__OUT_WIRES;
 
 	/**
-	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
+	 * The feature id for the '<em><b>In Wires</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int USER_STORE__IN_EDGES = ModelPackage.DOMAIN_STORE__IN_EDGES;
+	int USER_STORE__IN_WIRES = ModelPackage.DOMAIN_STORE__IN_WIRES;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -432,22 +432,22 @@ public interface UsersPackage extends EPackage {
 	int ROLE__CONDITION_EDGES = ModelPackage.DOMAIN_OBJECT__CONDITION_EDGES;
 
 	/**
-	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
+	 * The feature id for the '<em><b>Out Wires</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE__OUT_EDGES = ModelPackage.DOMAIN_OBJECT__OUT_EDGES;
+	int ROLE__OUT_WIRES = ModelPackage.DOMAIN_OBJECT__OUT_WIRES;
 
 	/**
-	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
+	 * The feature id for the '<em><b>In Wires</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE__IN_EDGES = ModelPackage.DOMAIN_OBJECT__IN_EDGES;
+	int ROLE__IN_WIRES = ModelPackage.DOMAIN_OBJECT__IN_WIRES;
 
 	/**
 	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
@@ -848,22 +848,22 @@ public interface UsersPackage extends EPackage {
 	int USER_INSTANCE__CONDITION_EDGES = ModelPackage.DOMAIN_OBJECT_INSTANCE__CONDITION_EDGES;
 
 	/**
-	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
+	 * The feature id for the '<em><b>Out Wires</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int USER_INSTANCE__OUT_EDGES = ModelPackage.DOMAIN_OBJECT_INSTANCE__OUT_EDGES;
+	int USER_INSTANCE__OUT_WIRES = ModelPackage.DOMAIN_OBJECT_INSTANCE__OUT_WIRES;
 
 	/**
-	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
+	 * The feature id for the '<em><b>In Wires</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int USER_INSTANCE__IN_EDGES = ModelPackage.DOMAIN_OBJECT_INSTANCE__IN_EDGES;
+	int USER_INSTANCE__IN_WIRES = ModelPackage.DOMAIN_OBJECT_INSTANCE__IN_WIRES;
 
 	/**
 	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.

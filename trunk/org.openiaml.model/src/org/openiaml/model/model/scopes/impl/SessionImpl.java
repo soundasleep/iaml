@@ -36,9 +36,9 @@ import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.StaticValue;
-import org.openiaml.model.model.WireEdge;
-import org.openiaml.model.model.WireEdgeDestination;
-import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.Wire;
+import org.openiaml.model.model.WireDestination;
+import org.openiaml.model.model.WireSource;
 import org.openiaml.model.model.components.EntryGate;
 import org.openiaml.model.model.components.ExitGate;
 import org.openiaml.model.model.scopes.ScopesPackage;
@@ -73,8 +73,8 @@ import org.openiaml.model.model.wires.RequiresEdge;
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getConstraintEdges <em>Constraint Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getConditionEdges <em>Condition Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getScopes <em>Scopes</em>}</li>
- *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getOutEdges <em>Out Edges</em>}</li>
- *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getInEdges <em>In Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getOutWires <em>Out Wires</em>}</li>
+ *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getInWires <em>In Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getConditions <em>Conditions</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getOnAccess <em>On Access</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getEntryGate <em>Entry Gate</em>}</li>
@@ -228,7 +228,7 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<WireEdge> wires;
+	protected EList<Wire> wires;
 
 	/**
 	 * The cached value of the '{@link #getParameterEdges() <em>Parameter Edges</em>}' containment reference list.
@@ -301,24 +301,24 @@ public class SessionImpl extends EObjectImpl implements Session {
 	protected EList<Scope> scopes;
 
 	/**
-	 * The cached value of the '{@link #getOutEdges() <em>Out Edges</em>}' reference list.
+	 * The cached value of the '{@link #getOutWires() <em>Out Wires</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOutEdges()
+	 * @see #getOutWires()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<WireEdge> outEdges;
+	protected EList<Wire> outWires;
 
 	/**
-	 * The cached value of the '{@link #getInEdges() <em>In Edges</em>}' reference list.
+	 * The cached value of the '{@link #getInWires() <em>In Wires</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getInEdges()
+	 * @see #getInWires()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<WireEdge> inEdges;
+	protected EList<Wire> inWires;
 
 	/**
 	 * The cached value of the '{@link #getConditions() <em>Conditions</em>}' containment reference list.
@@ -530,9 +530,9 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<WireEdge> getWires() {
+	public EList<Wire> getWires() {
 		if (wires == null) {
-			wires = new EObjectContainmentEList<WireEdge>(WireEdge.class, this, ScopesPackage.SESSION__WIRES);
+			wires = new EObjectContainmentEList<Wire>(Wire.class, this, ScopesPackage.SESSION__WIRES);
 		}
 		return wires;
 	}
@@ -693,30 +693,6 @@ public class SessionImpl extends EObjectImpl implements Session {
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ScopesPackage.SESSION__EXIT_GATE, newExitGate, newExitGate));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<WireEdge> getOutEdges() {
-		if (outEdges == null) {
-			outEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, ScopesPackage.SESSION__OUT_EDGES, ModelPackage.WIRE_EDGE__FROM);
-		}
-		return outEdges;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<WireEdge> getInEdges() {
-		if (inEdges == null) {
-			inEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, ScopesPackage.SESSION__IN_EDGES, ModelPackage.WIRE_EDGE__TO);
-		}
-		return inEdges;
 	}
 
 	/**
@@ -915,6 +891,30 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Wire> getOutWires() {
+		if (outWires == null) {
+			outWires = new EObjectWithInverseResolvingEList<Wire>(Wire.class, this, ScopesPackage.SESSION__OUT_WIRES, ModelPackage.WIRE__FROM);
+		}
+		return outWires;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Wire> getInWires() {
+		if (inWires == null) {
+			inWires = new EObjectWithInverseResolvingEList<Wire>(Wire.class, this, ScopesPackage.SESSION__IN_WIRES, ModelPackage.WIRE__TO);
+		}
+		return inWires;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<Operation> getOperations() {
 		if (operations == null) {
 			operations = new EObjectContainmentEList<Operation>(Operation.class, this, ScopesPackage.SESSION__OPERATIONS);
@@ -935,10 +935,10 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGeneratedBy()).basicAdd(otherEnd, msgs);
 			case ScopesPackage.SESSION__GENERATED_ELEMENTS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGeneratedElements()).basicAdd(otherEnd, msgs);
-			case ScopesPackage.SESSION__OUT_EDGES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutEdges()).basicAdd(otherEnd, msgs);
-			case ScopesPackage.SESSION__IN_EDGES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInEdges()).basicAdd(otherEnd, msgs);
+			case ScopesPackage.SESSION__OUT_WIRES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutWires()).basicAdd(otherEnd, msgs);
+			case ScopesPackage.SESSION__IN_WIRES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInWires()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -973,10 +973,10 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return ((InternalEList<?>)getConditionEdges()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__SCOPES:
 				return ((InternalEList<?>)getScopes()).basicRemove(otherEnd, msgs);
-			case ScopesPackage.SESSION__OUT_EDGES:
-				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
-			case ScopesPackage.SESSION__IN_EDGES:
-				return ((InternalEList<?>)getInEdges()).basicRemove(otherEnd, msgs);
+			case ScopesPackage.SESSION__OUT_WIRES:
+				return ((InternalEList<?>)getOutWires()).basicRemove(otherEnd, msgs);
+			case ScopesPackage.SESSION__IN_WIRES:
+				return ((InternalEList<?>)getInWires()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__CONDITIONS:
 				return ((InternalEList<?>)getConditions()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__ON_ACCESS:
@@ -1039,10 +1039,10 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return getConditionEdges();
 			case ScopesPackage.SESSION__SCOPES:
 				return getScopes();
-			case ScopesPackage.SESSION__OUT_EDGES:
-				return getOutEdges();
-			case ScopesPackage.SESSION__IN_EDGES:
-				return getInEdges();
+			case ScopesPackage.SESSION__OUT_WIRES:
+				return getOutWires();
+			case ScopesPackage.SESSION__IN_WIRES:
+				return getInWires();
 			case ScopesPackage.SESSION__CONDITIONS:
 				return getConditions();
 			case ScopesPackage.SESSION__ON_ACCESS:
@@ -1103,7 +1103,7 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return;
 			case ScopesPackage.SESSION__WIRES:
 				getWires().clear();
-				getWires().addAll((Collection<? extends WireEdge>)newValue);
+				getWires().addAll((Collection<? extends Wire>)newValue);
 				return;
 			case ScopesPackage.SESSION__PARAMETER_EDGES:
 				getParameterEdges().clear();
@@ -1133,13 +1133,13 @@ public class SessionImpl extends EObjectImpl implements Session {
 				getScopes().clear();
 				getScopes().addAll((Collection<? extends Scope>)newValue);
 				return;
-			case ScopesPackage.SESSION__OUT_EDGES:
-				getOutEdges().clear();
-				getOutEdges().addAll((Collection<? extends WireEdge>)newValue);
+			case ScopesPackage.SESSION__OUT_WIRES:
+				getOutWires().clear();
+				getOutWires().addAll((Collection<? extends Wire>)newValue);
 				return;
-			case ScopesPackage.SESSION__IN_EDGES:
-				getInEdges().clear();
-				getInEdges().addAll((Collection<? extends WireEdge>)newValue);
+			case ScopesPackage.SESSION__IN_WIRES:
+				getInWires().clear();
+				getInWires().addAll((Collection<? extends Wire>)newValue);
 				return;
 			case ScopesPackage.SESSION__CONDITIONS:
 				getConditions().clear();
@@ -1233,11 +1233,11 @@ public class SessionImpl extends EObjectImpl implements Session {
 			case ScopesPackage.SESSION__SCOPES:
 				getScopes().clear();
 				return;
-			case ScopesPackage.SESSION__OUT_EDGES:
-				getOutEdges().clear();
+			case ScopesPackage.SESSION__OUT_WIRES:
+				getOutWires().clear();
 				return;
-			case ScopesPackage.SESSION__IN_EDGES:
-				getInEdges().clear();
+			case ScopesPackage.SESSION__IN_WIRES:
+				getInWires().clear();
 				return;
 			case ScopesPackage.SESSION__CONDITIONS:
 				getConditions().clear();
@@ -1310,10 +1310,10 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return conditionEdges != null && !conditionEdges.isEmpty();
 			case ScopesPackage.SESSION__SCOPES:
 				return scopes != null && !scopes.isEmpty();
-			case ScopesPackage.SESSION__OUT_EDGES:
-				return outEdges != null && !outEdges.isEmpty();
-			case ScopesPackage.SESSION__IN_EDGES:
-				return inEdges != null && !inEdges.isEmpty();
+			case ScopesPackage.SESSION__OUT_WIRES:
+				return outWires != null && !outWires.isEmpty();
+			case ScopesPackage.SESSION__IN_WIRES:
+				return inWires != null && !inWires.isEmpty();
 			case ScopesPackage.SESSION__CONDITIONS:
 				return conditions != null && !conditions.isEmpty();
 			case ScopesPackage.SESSION__ON_ACCESS:
@@ -1379,15 +1379,15 @@ public class SessionImpl extends EObjectImpl implements Session {
 				default: return -1;
 			}
 		}
-		if (baseClass == WireEdgesSource.class) {
+		if (baseClass == WireSource.class) {
 			switch (derivedFeatureID) {
-				case ScopesPackage.SESSION__OUT_EDGES: return ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES;
+				case ScopesPackage.SESSION__OUT_WIRES: return ModelPackage.WIRE_SOURCE__OUT_WIRES;
 				default: return -1;
 			}
 		}
-		if (baseClass == WireEdgeDestination.class) {
+		if (baseClass == WireDestination.class) {
 			switch (derivedFeatureID) {
-				case ScopesPackage.SESSION__IN_EDGES: return ModelPackage.WIRE_EDGE_DESTINATION__IN_EDGES;
+				case ScopesPackage.SESSION__IN_WIRES: return ModelPackage.WIRE_DESTINATION__IN_WIRES;
 				default: return -1;
 			}
 		}
@@ -1466,15 +1466,15 @@ public class SessionImpl extends EObjectImpl implements Session {
 				default: return -1;
 			}
 		}
-		if (baseClass == WireEdgesSource.class) {
+		if (baseClass == WireSource.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES: return ScopesPackage.SESSION__OUT_EDGES;
+				case ModelPackage.WIRE_SOURCE__OUT_WIRES: return ScopesPackage.SESSION__OUT_WIRES;
 				default: return -1;
 			}
 		}
-		if (baseClass == WireEdgeDestination.class) {
+		if (baseClass == WireDestination.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.WIRE_EDGE_DESTINATION__IN_EDGES: return ScopesPackage.SESSION__IN_EDGES;
+				case ModelPackage.WIRE_DESTINATION__IN_WIRES: return ScopesPackage.SESSION__IN_WIRES;
 				default: return -1;
 			}
 		}

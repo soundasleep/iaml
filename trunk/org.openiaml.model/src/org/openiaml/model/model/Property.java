@@ -28,7 +28,7 @@ import org.openiaml.model.model.wires.ParameterEdgesSource;
  * @model
  * @generated
  */
-public interface Property extends NamedElement, WireEdgesSource, WireEdgeDestination, DataFlowEdgesSource, DataFlowEdgeDestination, ParameterEdgesSource {
+public interface Property extends NamedElement, WireSource, WireDestination, DataFlowEdgesSource, DataFlowEdgeDestination, ParameterEdgesSource {
 	/**
 	 * Returns the value of the '<em><b>Default Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->

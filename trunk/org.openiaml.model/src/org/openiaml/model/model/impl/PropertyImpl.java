@@ -26,9 +26,9 @@ import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.ShouldntContainWires;
-import org.openiaml.model.model.WireEdge;
-import org.openiaml.model.model.WireEdgeDestination;
-import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.Wire;
+import org.openiaml.model.model.WireDestination;
+import org.openiaml.model.model.WireSource;
 import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ConstraintEdge;
 import org.openiaml.model.model.wires.ExtendsEdge;
@@ -57,8 +57,8 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.impl.PropertyImpl#getProvidesEdges <em>Provides Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.PropertyImpl#getConstraintEdges <em>Constraint Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.PropertyImpl#getConditionEdges <em>Condition Edges</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.PropertyImpl#getOutEdges <em>Out Edges</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.PropertyImpl#getInEdges <em>In Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.PropertyImpl#getOutWires <em>Out Wires</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.PropertyImpl#getInWires <em>In Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.PropertyImpl#getOutFlows <em>Out Flows</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.PropertyImpl#getInFlows <em>In Flows</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.PropertyImpl#getOutParameterEdges <em>Out Parameter Edges</em>}</li>
@@ -167,7 +167,7 @@ public class PropertyImpl extends EObjectImpl implements Property {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<WireEdge> wires;
+	protected EList<Wire> wires;
 
 	/**
 	 * The cached value of the '{@link #getParameterEdges() <em>Parameter Edges</em>}' containment reference list.
@@ -230,24 +230,24 @@ public class PropertyImpl extends EObjectImpl implements Property {
 	protected EList<ConditionEdge> conditionEdges;
 
 	/**
-	 * The cached value of the '{@link #getOutEdges() <em>Out Edges</em>}' reference list.
+	 * The cached value of the '{@link #getOutWires() <em>Out Wires</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOutEdges()
+	 * @see #getOutWires()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<WireEdge> outEdges;
+	protected EList<Wire> outWires;
 
 	/**
-	 * The cached value of the '{@link #getInEdges() <em>In Edges</em>}' reference list.
+	 * The cached value of the '{@link #getInWires() <em>In Wires</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getInEdges()
+	 * @see #getInWires()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<WireEdge> inEdges;
+	protected EList<Wire> inWires;
 
 	/**
 	 * The cached value of the '{@link #getOutFlows() <em>Out Flows</em>}' reference list.
@@ -419,9 +419,9 @@ public class PropertyImpl extends EObjectImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<WireEdge> getWires() {
+	public EList<Wire> getWires() {
 		if (wires == null) {
-			wires = new EObjectContainmentEList<WireEdge>(WireEdge.class, this, ModelPackage.PROPERTY__WIRES);
+			wires = new EObjectContainmentEList<Wire>(Wire.class, this, ModelPackage.PROPERTY__WIRES);
 		}
 		return wires;
 	}
@@ -503,11 +503,11 @@ public class PropertyImpl extends EObjectImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<WireEdge> getOutEdges() {
-		if (outEdges == null) {
-			outEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, ModelPackage.PROPERTY__OUT_EDGES, ModelPackage.WIRE_EDGE__FROM);
+	public EList<Wire> getOutWires() {
+		if (outWires == null) {
+			outWires = new EObjectWithInverseResolvingEList<Wire>(Wire.class, this, ModelPackage.PROPERTY__OUT_WIRES, ModelPackage.WIRE__FROM);
 		}
-		return outEdges;
+		return outWires;
 	}
 
 	/**
@@ -515,11 +515,11 @@ public class PropertyImpl extends EObjectImpl implements Property {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<WireEdge> getInEdges() {
-		if (inEdges == null) {
-			inEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, ModelPackage.PROPERTY__IN_EDGES, ModelPackage.WIRE_EDGE__TO);
+	public EList<Wire> getInWires() {
+		if (inWires == null) {
+			inWires = new EObjectWithInverseResolvingEList<Wire>(Wire.class, this, ModelPackage.PROPERTY__IN_WIRES, ModelPackage.WIRE__TO);
 		}
-		return inEdges;
+		return inWires;
 	}
 
 	/**
@@ -590,10 +590,10 @@ public class PropertyImpl extends EObjectImpl implements Property {
 		switch (featureID) {
 			case ModelPackage.PROPERTY__GENERATED_BY:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGeneratedBy()).basicAdd(otherEnd, msgs);
-			case ModelPackage.PROPERTY__OUT_EDGES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutEdges()).basicAdd(otherEnd, msgs);
-			case ModelPackage.PROPERTY__IN_EDGES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInEdges()).basicAdd(otherEnd, msgs);
+			case ModelPackage.PROPERTY__OUT_WIRES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutWires()).basicAdd(otherEnd, msgs);
+			case ModelPackage.PROPERTY__IN_WIRES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInWires()).basicAdd(otherEnd, msgs);
 			case ModelPackage.PROPERTY__OUT_FLOWS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutFlows()).basicAdd(otherEnd, msgs);
 			case ModelPackage.PROPERTY__IN_FLOWS:
@@ -628,10 +628,10 @@ public class PropertyImpl extends EObjectImpl implements Property {
 				return ((InternalEList<?>)getConstraintEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.PROPERTY__CONDITION_EDGES:
 				return ((InternalEList<?>)getConditionEdges()).basicRemove(otherEnd, msgs);
-			case ModelPackage.PROPERTY__OUT_EDGES:
-				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
-			case ModelPackage.PROPERTY__IN_EDGES:
-				return ((InternalEList<?>)getInEdges()).basicRemove(otherEnd, msgs);
+			case ModelPackage.PROPERTY__OUT_WIRES:
+				return ((InternalEList<?>)getOutWires()).basicRemove(otherEnd, msgs);
+			case ModelPackage.PROPERTY__IN_WIRES:
+				return ((InternalEList<?>)getInWires()).basicRemove(otherEnd, msgs);
 			case ModelPackage.PROPERTY__OUT_FLOWS:
 				return ((InternalEList<?>)getOutFlows()).basicRemove(otherEnd, msgs);
 			case ModelPackage.PROPERTY__IN_FLOWS:
@@ -674,10 +674,10 @@ public class PropertyImpl extends EObjectImpl implements Property {
 				return getConstraintEdges();
 			case ModelPackage.PROPERTY__CONDITION_EDGES:
 				return getConditionEdges();
-			case ModelPackage.PROPERTY__OUT_EDGES:
-				return getOutEdges();
-			case ModelPackage.PROPERTY__IN_EDGES:
-				return getInEdges();
+			case ModelPackage.PROPERTY__OUT_WIRES:
+				return getOutWires();
+			case ModelPackage.PROPERTY__IN_WIRES:
+				return getInWires();
 			case ModelPackage.PROPERTY__OUT_FLOWS:
 				return getOutFlows();
 			case ModelPackage.PROPERTY__IN_FLOWS:
@@ -717,7 +717,7 @@ public class PropertyImpl extends EObjectImpl implements Property {
 				return;
 			case ModelPackage.PROPERTY__WIRES:
 				getWires().clear();
-				getWires().addAll((Collection<? extends WireEdge>)newValue);
+				getWires().addAll((Collection<? extends Wire>)newValue);
 				return;
 			case ModelPackage.PROPERTY__PARAMETER_EDGES:
 				getParameterEdges().clear();
@@ -743,13 +743,13 @@ public class PropertyImpl extends EObjectImpl implements Property {
 				getConditionEdges().clear();
 				getConditionEdges().addAll((Collection<? extends ConditionEdge>)newValue);
 				return;
-			case ModelPackage.PROPERTY__OUT_EDGES:
-				getOutEdges().clear();
-				getOutEdges().addAll((Collection<? extends WireEdge>)newValue);
+			case ModelPackage.PROPERTY__OUT_WIRES:
+				getOutWires().clear();
+				getOutWires().addAll((Collection<? extends Wire>)newValue);
 				return;
-			case ModelPackage.PROPERTY__IN_EDGES:
-				getInEdges().clear();
-				getInEdges().addAll((Collection<? extends WireEdge>)newValue);
+			case ModelPackage.PROPERTY__IN_WIRES:
+				getInWires().clear();
+				getInWires().addAll((Collection<? extends Wire>)newValue);
 				return;
 			case ModelPackage.PROPERTY__OUT_FLOWS:
 				getOutFlows().clear();
@@ -814,11 +814,11 @@ public class PropertyImpl extends EObjectImpl implements Property {
 			case ModelPackage.PROPERTY__CONDITION_EDGES:
 				getConditionEdges().clear();
 				return;
-			case ModelPackage.PROPERTY__OUT_EDGES:
-				getOutEdges().clear();
+			case ModelPackage.PROPERTY__OUT_WIRES:
+				getOutWires().clear();
 				return;
-			case ModelPackage.PROPERTY__IN_EDGES:
-				getInEdges().clear();
+			case ModelPackage.PROPERTY__IN_WIRES:
+				getInWires().clear();
 				return;
 			case ModelPackage.PROPERTY__OUT_FLOWS:
 				getOutFlows().clear();
@@ -868,10 +868,10 @@ public class PropertyImpl extends EObjectImpl implements Property {
 				return constraintEdges != null && !constraintEdges.isEmpty();
 			case ModelPackage.PROPERTY__CONDITION_EDGES:
 				return conditionEdges != null && !conditionEdges.isEmpty();
-			case ModelPackage.PROPERTY__OUT_EDGES:
-				return outEdges != null && !outEdges.isEmpty();
-			case ModelPackage.PROPERTY__IN_EDGES:
-				return inEdges != null && !inEdges.isEmpty();
+			case ModelPackage.PROPERTY__OUT_WIRES:
+				return outWires != null && !outWires.isEmpty();
+			case ModelPackage.PROPERTY__IN_WIRES:
+				return inWires != null && !inWires.isEmpty();
 			case ModelPackage.PROPERTY__OUT_FLOWS:
 				return outFlows != null && !outFlows.isEmpty();
 			case ModelPackage.PROPERTY__IN_FLOWS:
@@ -908,15 +908,15 @@ public class PropertyImpl extends EObjectImpl implements Property {
 				default: return -1;
 			}
 		}
-		if (baseClass == WireEdgesSource.class) {
+		if (baseClass == WireSource.class) {
 			switch (derivedFeatureID) {
-				case ModelPackage.PROPERTY__OUT_EDGES: return ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES;
+				case ModelPackage.PROPERTY__OUT_WIRES: return ModelPackage.WIRE_SOURCE__OUT_WIRES;
 				default: return -1;
 			}
 		}
-		if (baseClass == WireEdgeDestination.class) {
+		if (baseClass == WireDestination.class) {
 			switch (derivedFeatureID) {
-				case ModelPackage.PROPERTY__IN_EDGES: return ModelPackage.WIRE_EDGE_DESTINATION__IN_EDGES;
+				case ModelPackage.PROPERTY__IN_WIRES: return ModelPackage.WIRE_DESTINATION__IN_WIRES;
 				default: return -1;
 			}
 		}
@@ -965,15 +965,15 @@ public class PropertyImpl extends EObjectImpl implements Property {
 				default: return -1;
 			}
 		}
-		if (baseClass == WireEdgesSource.class) {
+		if (baseClass == WireSource.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES: return ModelPackage.PROPERTY__OUT_EDGES;
+				case ModelPackage.WIRE_SOURCE__OUT_WIRES: return ModelPackage.PROPERTY__OUT_WIRES;
 				default: return -1;
 			}
 		}
-		if (baseClass == WireEdgeDestination.class) {
+		if (baseClass == WireDestination.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.WIRE_EDGE_DESTINATION__IN_EDGES: return ModelPackage.PROPERTY__IN_EDGES;
+				case ModelPackage.WIRE_DESTINATION__IN_WIRES: return ModelPackage.PROPERTY__IN_WIRES;
 				default: return -1;
 			}
 		}

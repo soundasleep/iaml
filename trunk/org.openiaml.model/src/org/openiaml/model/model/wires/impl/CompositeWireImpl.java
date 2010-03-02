@@ -30,8 +30,8 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.StaticValue;
-import org.openiaml.model.model.WireEdge;
-import org.openiaml.model.model.impl.WireEdgeImpl;
+import org.openiaml.model.model.Wire;
+import org.openiaml.model.model.impl.WireImpl;
 import org.openiaml.model.model.wires.CompositeWire;
 import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ConstraintEdge;
@@ -70,7 +70,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  *
  * @generated
  */
-public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
+public class CompositeWireImpl extends WireImpl implements CompositeWire {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -99,7 +99,7 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<WireEdge> wires;
+	protected EList<Wire> wires;
 
 	/**
 	 * The cached value of the '{@link #getParameterEdges() <em>Parameter Edges</em>}' containment reference list.
@@ -306,9 +306,9 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<WireEdge> getWires() {
+	public EList<Wire> getWires() {
 		if (wires == null) {
-			wires = new EObjectContainmentEList<WireEdge>(WireEdge.class, this, WiresPackage.COMPOSITE_WIRE__WIRES);
+			wires = new EObjectContainmentEList<Wire>(Wire.class, this, WiresPackage.COMPOSITE_WIRE__WIRES);
 		}
 		return wires;
 	}
@@ -619,7 +619,7 @@ public class CompositeWireImpl extends WireEdgeImpl implements CompositeWire {
 				return;
 			case WiresPackage.COMPOSITE_WIRE__WIRES:
 				getWires().clear();
-				getWires().addAll((Collection<? extends WireEdge>)newValue);
+				getWires().addAll((Collection<? extends Wire>)newValue);
 				return;
 			case WiresPackage.COMPOSITE_WIRE__PARAMETER_EDGES:
 				getParameterEdges().clear();

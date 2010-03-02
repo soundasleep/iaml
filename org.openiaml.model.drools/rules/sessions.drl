@@ -32,19 +32,3 @@ rule "Create 'init' event for Sessions"
 		queue.add(event, drools);
 	
 end
-
-/**
- * @inference Scope
- *    A {@model Scope} contains an 'onAccess' {@model EventTrigger}.
- */
-rule "Create 'access' event for Sessions"
-	when
-		session : Scope( overridden == false )
-		not (event : EventTrigger( eContainer == session, session.onAccess == event ))
-		
-	then
-		EventTrigger event = handler.generatedEventTriggerOnAccess(session, session);
-		queue.add(event, drools);
-	
-end
-

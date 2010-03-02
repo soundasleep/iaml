@@ -639,7 +639,7 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	/**
 	 * Should we log the results to TIMED_LOG_FILE?
 	 */
-	private static final boolean ENABLE_TIMED_LOG = true;
+	private static final boolean ENABLE_TIMED_LOG = false;
 	private static final String TIMED_LOG_FILE = "timed.log";
 	
 	/**

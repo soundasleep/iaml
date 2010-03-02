@@ -11,7 +11,11 @@ import java.util.Set;
 
 import javax.xml.xpath.XPathExpressionException;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EPackage;
 import org.openiaml.emf.SoftCache;
+import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.tests.XmlTestCase;
 import org.openiaml.model.xpath.IterableElementList;
 import org.w3c.dom.Document;
@@ -119,7 +123,7 @@ public class GmfToolTestCase extends XmlTestCase {
 
 		return result;
 	}
-
+	
 	/**
 	 * Check .gmftools for icons. If the .gmftool does not
 	 * specify an icon, one is specified automatically, and the
@@ -320,6 +324,74 @@ public class GmfToolTestCase extends XmlTestCase {
 			
 			assertNotNull("No static tool groups found in " + filename, previousStatic);
 		}
+	}
+	
+	/**
+	 * Search the icon folders, and find out if there are any images that
+	 * do <em>not</em> match a model type.
+	 * 
+	 * @throws Exception
+	 */
+	public void testFindAllUnusedIcons() throws Exception {
+		Set<String> classes = getAllEClassesNames(ModelPackage.eINSTANCE);
+		List<String> extras = new ArrayList<String>();
+		
+		// first check /obj16
+		{
+			String[] files = new File("../org.openiaml.model.edit/icons/full/obj16").list();
+			for (String f : files) {
+				if (!f.endsWith(".gif"))
+					continue;
+				
+				String name = f.substring(0, f.indexOf('.'));
+				if (classes.contains(name)) 
+					continue;	// found it
+				
+				extras.add("obj16/" + f);	// found extra
+			}
+		}
+
+		// then check /obj32		
+		{
+			String[] files = new File("../org.openiaml.model.edit/icons/full/obj32").list();
+			for (String f : files) {
+				if (!f.endsWith(".gif"))
+					continue;
+				
+				String name = f.substring(0, f.indexOf('.'));
+				if (classes.contains(name)) 
+					continue;	// found it
+				
+				extras.add("obj32/" + f);	// found extra
+			}
+		}
+
+		for (String f : extras) {
+			System.err.println(f);
+		}
+		assertEquals("Found some icons that do not represent any class in the model: " + extras, 0, extras.size());
+	}
+
+	
+	/**
+	 * Get all EClasses in the given package and sub-packages.
+	 * 
+	 * @param pkg
+	 * @return
+	 */
+	private Set<String> getAllEClassesNames(EPackage pkg) {
+		Set<String> r = new HashSet<String>();
+		for (EClassifier cf : pkg.getEClassifiers()) {
+			if (cf instanceof EClass) {
+				r.add(((EClass) cf).getName());
+			}
+		}
+		
+		for (EPackage sub : pkg.getESubpackages()) {
+			r.addAll(getAllEClassesNames(sub));
+		}
+		
+		return r;
 	}
 	
 }

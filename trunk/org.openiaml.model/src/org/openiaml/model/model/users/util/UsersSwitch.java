@@ -117,7 +117,6 @@ public class UsersSwitch<T> {
 				UserStore userStore = (UserStore)theEObject;
 				T result = caseUserStore(userStore);
 				if (result == null) result = caseDomainStore(userStore);
-				if (result == null) result = caseContainsEventTriggers(userStore);
 				if (result == null) result = caseCanBeSynced(userStore);
 				if (result == null) result = caseContainsOperations(userStore);
 				if (result == null) result = caseNamedElement(userStore);

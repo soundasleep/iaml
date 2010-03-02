@@ -206,7 +206,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="runtimeUrl" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="http://localhost:8080/output/"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DomainStore" eSuperTypes="#//ContainsOperations #//ContainsEventTriggers #//NamedElement #//ContainsWires #//ContainsConditions #//GeneratesElements #//CanBeSynced">
+  <eClassifiers xsi:type="ecore:EClass" name="DomainStore" eSuperTypes="#//ContainsOperations #//NamedElement #//ContainsWires #//ContainsConditions #//GeneratesElements #//CanBeSynced">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="editor" value="org.openiaml.model.diagram.domain_store"/>
       <details key="changed" value="0.2 to extend the abstract counterpart&#xD;&#xA;0.3 to remove the abstract extension, and added &quot;type&quot; attribute&#xD;&#xA;0.4.2 removed 'views' reference"/>

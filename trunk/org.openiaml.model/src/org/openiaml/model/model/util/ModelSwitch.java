@@ -394,7 +394,6 @@ public class ModelSwitch<T> {
 			case ModelPackage.DOMAIN_STORE: {
 				DomainStore domainStore = (DomainStore)theEObject;
 				T result = caseDomainStore(domainStore);
-				if (result == null) result = caseContainsEventTriggers(domainStore);
 				if (result == null) result = caseCanBeSynced(domainStore);
 				if (result == null) result = caseContainsOperations(domainStore);
 				if (result == null) result = caseNamedElement(domainStore);

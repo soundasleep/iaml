@@ -132,10 +132,6 @@ public class UsersAdapterFactory extends AdapterFactoryImpl {
 				return createContainsOperationsAdapter();
 			}
 			@Override
-			public Adapter caseContainsEventTriggers(ContainsEventTriggers object) {
-				return createContainsEventTriggersAdapter();
-			}
-			@Override
 			public Adapter caseGeneratedElement(GeneratedElement object) {
 				return createGeneratedElementAdapter();
 			}
@@ -174,6 +170,10 @@ public class UsersAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseDomainStore(DomainStore object) {
 				return createDomainStoreAdapter();
+			}
+			@Override
+			public Adapter caseContainsEventTriggers(ContainsEventTriggers object) {
+				return createContainsEventTriggersAdapter();
 			}
 			@Override
 			public Adapter caseApplicationElement(ApplicationElement object) {

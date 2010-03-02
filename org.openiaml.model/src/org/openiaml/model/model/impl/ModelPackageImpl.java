@@ -1890,7 +1890,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		internetApplicationEClass.getESuperTypes().add(this.getContainsConditions());
 		internetApplicationEClass.getESuperTypes().add(this.getContainsScopes());
 		domainStoreEClass.getESuperTypes().add(this.getContainsOperations());
-		domainStoreEClass.getESuperTypes().add(this.getContainsEventTriggers());
 		domainStoreEClass.getESuperTypes().add(this.getNamedElement());
 		domainStoreEClass.getESuperTypes().add(this.getContainsWires());
 		domainStoreEClass.getESuperTypes().add(this.getContainsConditions());

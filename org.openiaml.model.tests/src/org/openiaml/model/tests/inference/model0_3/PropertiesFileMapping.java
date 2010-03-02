@@ -34,7 +34,6 @@ public class PropertiesFileMapping extends EclipseInheritanceInterface {
 		assertEquals(0, ds.getChildren().size());
 		assertEquals(0, ds.getAttributes().size());
 		assertEquals(0, ds.getOperations().size());
-		assertEquals(0, ds.getEventTriggers().size());
 		
 	}
 	
@@ -49,7 +48,6 @@ public class PropertiesFileMapping extends EclipseInheritanceInterface {
 		assertEquals(1, ds.getChildren().size());	// one domain object called 'properties'
 		assertEquals(0, ds.getAttributes().size());
 		assertEquals(0, ds.getOperations().size());
-		assertEquals(0, ds.getEventTriggers().size());
 
 		DomainObject dobj = assertHasDomainObject(ds, "properties");
 		System.out.println(dobj);

@@ -30,16 +30,15 @@ rule "Create 'click' event trigger for button"
 		
 end
 
-# @inference InputTextField A {@model InputTextField} contains an {@model EventTrigger} named 'edit'. 
-rule "Create 'edit' event trigger for input text field"
+# @inference Editable,InputTextField An {@model Editable} thing contains an {@model EventTrigger} named 'edit'. 
+rule "Create 'edit' event trigger for Editable things"
 	when
-		f : InputTextField( overridden == false )
+		f : Editable( )
+		g : GeneratesElements ( eval(f == g) )
 		not (event : EventTrigger( f.onEdit == event ))
 			
 	then
-		// debug: System.out.println(drools.getRule().getName() + ": " + f); 
-
-		EventTrigger event = handler.generatedEventTriggerOnEdit(f, f);
+		EventTrigger event = handler.generatedEventTriggerOnEdit(g, f);
 		queue.add(event, drools);
 		
 end
@@ -57,14 +56,15 @@ rule "Create 'edit' event trigger for domain attribute"
 		
 end
 
-# @inference InputTextField A {@model InputTextField} contains an {@model EventTrigger} named 'access'.
-rule "Create 'access' event trigger for input text field"
+# @inference Accessible,InputTextField An {@model Accessible} thing contains an {@model EventTrigger} named 'access'.
+rule "Create 'access' event trigger for Accessible things"
 	when
-		f : InputTextField( overridden == false )
+		f : Accessible( )
+		g : GeneratesElements ( eval(f == g) )
 		not (event : EventTrigger( f.onAccess == event ))
 			
 	then
-		EventTrigger event = handler.generatedEventTriggerOnAccess(f, f);
+		EventTrigger event = handler.generatedEventTriggerOnAccess(g, f);
 		queue.add(event, drools);
 		
 end

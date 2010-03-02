@@ -55,7 +55,7 @@ rule "Connect ConditionEdges to RunInstanceWires created by SyncWires (edit/upda
 	when
 		# we have a sync wire
 		sw : SyncWire(overridden == false)
-		source : VisibleThing( )
+		source : Editable( )
 		target : ContainsOperations( )
 		eval(functions.connects(sw, source, target))  
 		
@@ -115,39 +115,7 @@ rule "Connect ConditionEdges to RunInstanceWires created by SyncWires (access/in
 	when
 		# we have a sync wire
 		sw : SyncWire(overridden == false)
-		source : VisibleThing( )
-		target : ContainsOperations( )
-		eval(functions.connects(sw, source, target))  
-		
-		# which has a run wire between event and operation (generated)
-		event : EventTrigger( source.onAccess == event )
-		operation : Operation( eContainer == source, name=="init" )		
-		run : RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" )
-		
-		# and targets' value is being used for source's init
-		fvalue : Property ( eContainer == target, name == "fieldValue" )
-		param : ParameterEdge ( from == fvalue, to == run ) 
-		
-		# and the sync wire had a condition
-		condition : Condition ( )
-		sourceCw : ConditionEdge( from == condition, to == sw )
-		
-		# but our run wire doesn't 
-		not (ConditionEdge (from == condition, to == run )) 
-		
-	then
-		# copy the condition
-		ConditionEdge cw = handler.generatedConditionEdge( sourceCw, sw, condition, run );
-		handler.setName(cw, "copied condition: " + sourceCw.getId());
-		queue.add(cw, drools);
-
-end
-
-rule "Connect ConditionEdges to RunInstanceWires created by SyncWires (access/init) (onAccess 2)"
-	when
-		# we have a sync wire
-		sw : SyncWire(overridden == false)
-		source : Scope( )
+		source : Accessible( )
 		target : ContainsOperations( )
 		eval(functions.connects(sw, source, target))  
 		
@@ -215,7 +183,7 @@ rule "Connect ParameterEdges to ConditionEdges connected to RunInstanceWires cre
 	when
 		# we have a syncwire
 		sw : SyncWire(overridden == false)
-		source : VisibleThing( )
+		source : Editable( )
 		target : ContainsOperations( )
 		eval(functions.connects(sw, source, target))  
 		
@@ -289,46 +257,7 @@ rule "Connect ParameterEdges to ConditionEdges connected to RunInstanceWires cre
 	when
 		# we have a syncwire
 		sw : SyncWire(overridden == false)
-		source : VisibleThing( )
-		target : ContainsOperations( )
-		eval(functions.connects(sw, source, target))  
-		
-		# that has created a RunInstanceWire
-		event : EventTrigger( source.onAccess == event )
-		operation : Operation( eContainer == source, name=="init" )
-		run : RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" )
-
-		# and targets' value is being used for source's init
-		fvalue : Property ( eContainer == target, name == "fieldValue" )
-		param2 : ParameterEdge ( from == fvalue, to == run ) 
-
-		# and this SyncWire has a condition
-		condition : Condition ( )
-		sourceCw : ConditionEdge( from == condition, to == sw )
-		
-		# and the RunInstanceWire has the same condition 
-		targetCw : ConditionEdge (from == condition, to == run ) 
-		
-		# and the SyncWire had a parameter
-		param : ParameterEdgesSource ( )
-		paramWire : ParameterEdge( from == param, to == sourceCw )
-
-		# but this wire does not have it
-		not (ParameterEdge (from == param, to == targetCw ))
-		
-	then
-		ParameterEdge pw = handler.generatedParameterEdge( sourceCw, sw, param, targetCw );
-		//cw.setName("copied parameter: " + paramWire.getName());
-		handler.setName(pw, "[conditions] sync from: " + paramWire.getId() + " param=" + ((GeneratedElement) param).getId() + " run=" + run.getId() );
-		queue.add(pw, drools);
-
-end
-
-rule "Connect ParameterEdges to ConditionEdges connected to RunInstanceWires created by SyncWires (access/init) (onAccess 2)"
-	when
-		# we have a syncwire
-		sw : SyncWire(overridden == false)
-		source : Scope( )
+		source : Accessible( )
 		target : ContainsOperations( )
 		eval(functions.connects(sw, source, target))  
 		

@@ -101,7 +101,7 @@ end
 rule "Connect parameter wire to: run instance wire from source.edit to target.update [set] (onEdit)"
 	when
 		sw : SetWire(overridden == false)
-		source : VisibleThing( )
+		source : Editable( )
 		target : CanBeSynced( )
 		eval(functions.connectsSet(sw, source, target))
 	
@@ -144,27 +144,7 @@ rule "Run instance wire from target.access to target.init, when we have a value 
 	when
 		sw : SetWire(overridden == false)
 		source : ContainsOperations( )
-		target : VisibleThing( )
-		eval(functions.connectsSet(sw, source, target))
-		
-		event : EventTrigger( target.onAccess == event )
-		operation : Operation( eContainer == target, name=="init" )
-		field : Property( eContainer == source, name=="fieldValue" )
-		
-		not (RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" ))
-		
-	then
-		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
-		handler.setName(rw, "run");
-		queue.add(rw, drools);
-
-end
-
-rule "Run instance wire from target.access to target.init, when we have a value to provide as a parameter [set] (onAccess 2)"
-	when
-		sw : SetWire(overridden == false)
-		source : ContainsOperations( )
-		target : Scope( )
+		target : Accessible( )
 		eval(functions.connectsSet(sw, source, target))
 		
 		event : EventTrigger( target.onAccess == event )
@@ -209,32 +189,7 @@ rule "Run instance wire from target.access to target.init, adding ConditionEdge 
 	when
 		sw : SetWire(overridden == false)
 		source : ContainsOperations( )
-		target : VisibleThing( )
-		eval(functions.connectsSet(sw, source, target))
-		
-		event : EventTrigger( target.onAccess == event )
-		operation : Operation( eContainer == target, name=="init" )
-		field : Property( eContainer == source, name=="fieldValue" )
-		
-		run : RunInstanceWire( eContainer == sw, from == event, to == operation, name == "run" )
-		param : ParameterEdge( from == field, to == run )
-		
-		# condition check
-		condition : CompositeCondition ( eContainer == source, name == "fieldValue is set" )
-		
-		not ( ConditionEdge ( from == condition, to == run ))
-	
-	then
-		ConditionEdge cw = handler.generatedConditionEdge(sw, sw, condition, run);
-		queue.add(cw, drools);
-		
-end	
-
-rule "Run instance wire from target.access to target.init, adding ConditionEdge to check it is set [set] (onAccess 2)"
-	when
-		sw : SetWire(overridden == false)
-		source : ContainsOperations( )
-		target : Scope( )
+		target : Accessible( )
 		eval(functions.connectsSet(sw, source, target))
 		
 		event : EventTrigger( target.onAccess == event )
@@ -281,28 +236,7 @@ rule "Connect parameter wire to: run instance wire from target.access to target.
 	when
 		sw : SetWire(overridden == false)
 		source : CanBeSynced( )
-		target : VisibleThing( )
-		eval(functions.connectsSet(sw, source, target))
-	
-		event : EventTrigger( target.onAccess == event ) 
-		operation : Operation( eContainer == target, name=="init" )
-		field : Property( eContainer == source, name=="fieldValue" )
-		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
-		
-		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
-		
-	then
-		ParameterEdge pw = handler.generatedParameterEdge(sw, sw, field, wire); 
-		handler.setName(pw, "[set] run instance parameter (source.access)"); 
-		queue.add(pw, drools);
-
-end
-
-rule "Connect parameter wire to: run instance wire from target.access to target.init [set] (onAccess 2)"
-	when
-		sw : SetWire(overridden == false)
-		source : CanBeSynced( )
-		target : Scope( )
+		target : Accessible( )
 		eval(functions.connectsSet(sw, source, target))
 	
 		event : EventTrigger( target.onAccess == event ) 
@@ -447,7 +381,7 @@ rule "Connect Session.init to incoming SetWires (contained in Frames) [set] (onE
 		eval( functions.connectsSet(sw, sourceFrame, targetFrame ))
 
 		sw2 : SetWire ( eContainer == sw, overridden == false)
-		sourceElement : VisibleThing( eContainer == sourceFrame )
+		sourceElement : Editable( eContainer == sourceFrame )
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connectsSet(sw2, sourceElement, targetElement ))
 
@@ -475,7 +409,7 @@ rule "Connect Session.init to incoming SetWires (contained in Frames) [set] (onE
 		eval( functions.connectsSet(sw, sourceFrame, targetFrame ))
 
 		sw2 : SetWire ( eContainer == sw, overridden == false)
-		sourceElement : VisibleThing( eContainer == sourceFrame )
+		sourceElement : Editable( eContainer == sourceFrame )
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connectsSet(sw2, sourceElement, targetElement ))
 
@@ -503,7 +437,7 @@ rule "Connect Session.init to incoming SetWires (contained in Frames) [set] (onE
 		eval( functions.connectsSet(sw, sourceFrame, targetFrame ))
 
 		sw2 : SetWire ( eContainer == sw, overridden == false)
-		sourceElement : VisibleThing( eContainer == sourceFrame )
+		sourceElement : Editable( eContainer == sourceFrame )
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connectsSet(sw2, sourceElement, targetElement ))
 
@@ -562,7 +496,7 @@ rule "Connect parameter for Session.init to incoming SetWires (contained in Fram
 		eval( functions.connectsSet(sw, sourceFrame, targetFrame ))
 
 		sw2 : SetWire ( eContainer == sw, overridden == false)
-		sourceElement : VisibleThing( eContainer == sourceFrame )
+		sourceElement : Editable( eContainer == sourceFrame )
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connectsSet(sw2, sourceElement, targetElement ))
 
@@ -593,7 +527,7 @@ rule "Connect parameter for Session.init to incoming SetWires (contained in Fram
 		eval( functions.connectsSet(sw, sourceFrame, targetFrame ))
 
 		sw2 : SetWire ( eContainer == sw, overridden == false)
-		sourceElement : VisibleThing( eContainer == sourceFrame )
+		sourceElement : Editable( eContainer == sourceFrame )
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connectsSet(sw2, sourceElement, targetElement ))
 
@@ -624,7 +558,7 @@ rule "Connect parameter for Session.init to incoming SetWires (contained in Fram
 		eval( functions.connectsSet(sw, sourceFrame, targetFrame ))
 
 		sw2 : SetWire ( eContainer == sw, overridden == false)
-		sourceElement : VisibleThing( eContainer == sourceFrame )
+		sourceElement : Editable( eContainer == sourceFrame )
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connectsSet(sw2, sourceElement, targetElement ))
 

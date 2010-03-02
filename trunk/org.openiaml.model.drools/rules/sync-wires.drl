@@ -69,7 +69,7 @@ end
 rule "Run instance wire from edit to update (onEdit)"
 	when
 		sw : SyncWire(overridden == false)
-		source : VisibleThing( )
+		source : Editable( )
 		target : ContainsOperations( )
 		eval(functions.connects(sw, source, target))
 		
@@ -109,7 +109,7 @@ end
 rule "Connect parameter wire to: run instance wire from source.edit to target.update (onEdit)"
 	when
 		sw : SyncWire(overridden == false)
-		source : VisibleThing( )
+		source : Editable( )
 		target : ContainsOperations( )
 		eval( functions.connects(sw, source, target))
 	
@@ -151,27 +151,7 @@ end
 rule "Run instance wire from source.access to source.init, when we have a value to provide as a parameter (onAccess)"
 	when
 		sw : SyncWire(overridden == false)
-		source : VisibleThing( )  
-		target : ContainsOperations( )
-		eval ( functions.connects(sw, source, target ))
-		
-		event : EventTrigger( source.onAccess == event ) 
-		operation : Operation( eContainer == source, name=="init" )
-		field : Property( eContainer == target, name=="fieldValue" )
-		
-		not (RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw ))
-		
-	then
-		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
-		handler.setName(rw, "run");
-		queue.add(rw, drools);
-
-end
-
-rule "Run instance wire from source.access to source.init, when we have a value to provide as a parameter (onAccess 2)"
-	when
-		sw : SyncWire(overridden == false)
-		source : Scope( )  
+		source : Accessible( )  
 		target : ContainsOperations( )
 		eval ( functions.connects(sw, source, target ))
 		
@@ -215,31 +195,7 @@ end
 rule "Run instance wire from source.access to source.init, adding ConditionEdge to check it is set (onAccess)"
 	when
 		sw : SyncWire(overridden == false)
-		source : VisibleThing( )  
-		target : ContainsOperations( )
-		eval ( functions.connects(sw, source, target))
-		
-		event : EventTrigger( source.onAccess == event ) 
-		operation : Operation( eContainer == source, name=="init" )
-		field : Property( eContainer == target, name=="fieldValue" )
-		
-		run : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
-		
-		# condition check
-		condition : CompositeCondition ( eContainer == target, name == "fieldValue is set" )
-		
-		not ( ConditionEdge ( from == condition, to == run ))
-	
-	then
-		ConditionEdge cw = handler.generatedConditionEdge(sw, sw, condition, run);
-		queue.add(cw, drools);
-		
-end	
-
-rule "Run instance wire from source.access to source.init, adding ConditionEdge to check it is set (onAccess 2)"
-	when
-		sw : SyncWire(overridden == false)
-		source : Scope( )  
+		source : Accessible( )  
 		target : ContainsOperations( )
 		eval ( functions.connects(sw, source, target))
 		
@@ -285,28 +241,7 @@ end
 rule "Connect parameter wire to: run instance wire from source.access to source.init"
 	when
 		sw : SyncWire(overridden == false)
-		source : VisibleThing( )
-		target : ContainsOperations( )
-		eval ( functions.connects(sw, source, target))
-	
-		event : EventTrigger( source.onAccess == event )
-		operation : Operation( eContainer == source, name=="init" )
-		field : Property( eContainer == target, name=="fieldValue" )
-		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
-		
-		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
-		
-	then
-		ParameterEdge pw = handler.generatedParameterEdge(sw, sw, field, wire); 
-		handler.setName(pw, "[sync] run instance parameter (source.access)"); 
-		queue.add(pw, drools);
-
-end
-
-rule "Connect parameter wire to: run instance wire from source.access to source.init (3)"
-	when
-		sw : SyncWire(overridden == false)
-		source : Scope( )
+		source : Accessible( )
 		target : ContainsOperations( )
 		eval ( functions.connects(sw, source, target))
 	
@@ -455,7 +390,7 @@ rule "Connect Session.init to incoming SyncWires (contained in Frames) (onEdit)"
 		eval( functions.connects(sw, sourceFrame, targetFrame ))
 
 		sw2 : SyncWire ( eContainer == sw, overridden == false)
-		sourceElement : VisibleThing( eContainer == sourceFrame )
+		sourceElement : Editable( eContainer == sourceFrame )
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connects(sw2, sourceElement, targetElement ))
 
@@ -483,7 +418,7 @@ rule "Connect Session.init to incoming SyncWires (contained in Frames) (onEdit 2
 		eval( functions.connects(sw, sourceFrame, targetFrame ))
 
 		sw2 : SyncWire ( eContainer == sw, overridden == false)
-		sourceElement : VisibleThing( eContainer == sourceFrame )
+		sourceElement : Editable( eContainer == sourceFrame )
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connects(sw2, sourceElement, targetElement ))
 
@@ -511,7 +446,7 @@ rule "Connect Session.init to incoming SyncWires (contained in Frames) (onEdit 3
 		eval( functions.connects(sw, sourceFrame, targetFrame ))
 
 		sw2 : SyncWire ( eContainer == sw, overridden == false)
-		sourceElement : VisibleThing( eContainer == sourceFrame )
+		sourceElement : Editable( eContainer == sourceFrame )
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connects(sw2, sourceElement, targetElement ))
 
@@ -570,7 +505,7 @@ rule "Connect parameter for Session.init to incoming SyncWires (contained in Fra
 		eval( functions.connects(sw, sourceFrame, targetFrame ))
 
 		sw2 : SyncWire ( eContainer == sw, overridden == false)
-		sourceElement : VisibleThing( eContainer == sourceFrame )
+		sourceElement : Editable( eContainer == sourceFrame )
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connects(sw2, sourceElement, targetElement ))
 
@@ -601,7 +536,7 @@ rule "Connect parameter for Session.init to incoming SyncWires (contained in Fra
 		eval( functions.connects(sw, sourceFrame, targetFrame ))
 
 		sw2 : SyncWire ( eContainer == sw, overridden == false)
-		sourceElement : VisibleThing( eContainer == sourceFrame )
+		sourceElement : Editable( eContainer == sourceFrame )
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connects(sw2, sourceElement, targetElement ))
 
@@ -632,7 +567,7 @@ rule "Connect parameter for Session.init to incoming SyncWires (contained in Fra
 		eval( functions.connects(sw, sourceFrame, targetFrame ))
 
 		sw2 : SyncWire ( eContainer == sw, overridden == false)
-		sourceElement : VisibleThing( eContainer == sourceFrame )
+		sourceElement : Editable( eContainer == sourceFrame )
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connects(sw2, sourceElement, targetElement ))
 

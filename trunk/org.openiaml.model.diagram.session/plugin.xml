@@ -241,7 +241,7 @@
          </object>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_Session"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2056,2057,2002,2003,2040,2041,2055,2043,2044,2045,2046,2047,2013,2048,2049,2050,2051,2019,2020,2052,2053,2054,2058"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2058,2057,2002,2003,2040,2041,2055,2043,2044,2045,2046,2047,2013,2048,2049,2050,2051,2019,2020,2052,2053,2054,2059"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4002,4013,4004,4005,4007,4016,4010,4014,4015"/>
       </viewProvider>
    </extension>
@@ -254,13 +254,13 @@
             <method name="getType()" value="Iaml_Session"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
-            <method name="getType()" value="2056,2057,2002,2003,2040,2041,2055,2043,2044,2045,2046,2047,2013,2048,2049,2050,2051,2019,2020,2052,2053,2054,2058"/>
+            <method name="getType()" value="2058,2057,2002,2003,2040,2041,2055,2043,2044,2045,2046,2047,2013,2048,2049,2050,2051,2019,2020,2052,2053,2054,2059"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
             <method name="getType()" value="4001,4002,4013,4004,4005,4007,4016,4010,4014,4015"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5102,5103,5104,5105,5106,5107,5003,5004,5005,5006,5071,5072,5073,5074,5099,5100,5101,5078,5079,5080,5081,5082,5083,5084,5085,5086,5024,5025,5087,5088,5089,5090,5091,5092,5033,5034,5093,5094,5095,5096,5097,5098,5108,5109,5110"/>
+            <method name="getType()" value="5108,5109,5110,5105,5106,5107,5003,5004,5005,5006,5071,5072,5073,5074,5099,5100,5101,5078,5079,5080,5081,5082,5083,5084,5085,5086,5024,5025,5087,5088,5089,5090,5091,5092,5033,5034,5093,5094,5095,5096,5097,5098,5111,5112,5113"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value=""/>
@@ -274,7 +274,7 @@
       <modelingAssistantProvider class="org.openiaml.model.diagram.session.providers.IamlModelingAssistantProvider">
          <Priority name="Lowest"/>
          <object class="org.openiaml.model.diagram.session.edit.parts.SessionEditPart" id="Session_1000"/>
-         <object class="org.openiaml.model.diagram.session.edit.parts.EventTriggerEditPart" id="EventTrigger_2056"/>
+         <object class="org.openiaml.model.diagram.session.edit.parts.EventTrigger3EditPart" id="EventTrigger_2058"/>
          <object class="org.openiaml.model.diagram.session.edit.parts.EventTrigger2EditPart" id="EventTrigger_2057"/>
          <object class="org.openiaml.model.diagram.session.edit.parts.CompositeOperationEditPart" id="CompositeOperation_2002"/>
          <object class="org.openiaml.model.diagram.session.edit.parts.PrimitiveOperationEditPart" id="PrimitiveOperation_2003"/>
@@ -296,8 +296,8 @@
          <object class="org.openiaml.model.diagram.session.edit.parts.UserInstanceEditPart" id="UserInstance_2052"/>
          <object class="org.openiaml.model.diagram.session.edit.parts.EntryGateEditPart" id="EntryGate_2053"/>
          <object class="org.openiaml.model.diagram.session.edit.parts.ExitGateEditPart" id="ExitGate_2054"/>
-         <object class="org.openiaml.model.diagram.session.edit.parts.EventTrigger3EditPart" id="EventTrigger_2058"/>
-         <context elements="Session_1000,EventTrigger_2056,EventTrigger_2057,CompositeOperation_2002,PrimitiveOperation_2003,DomainObject_2040,DomainAttribute_2041,Property_2055,Frame_2043,InputForm_2044,InputTextField_2045,StaticValue_2046,LoginHandler_2047,CompositeCondition_2013,DomainObjectInstance_2048,DomainAttributeInstance_2049,Button_2050,AccessControlHandler_2051,Permission_2019,Role_2020,UserInstance_2052,EntryGate_2053,ExitGate_2054,EventTrigger_2058"/>
+         <object class="org.openiaml.model.diagram.session.edit.parts.EventTriggerEditPart" id="EventTrigger_2059"/>
+         <context elements="Session_1000,EventTrigger_2058,EventTrigger_2057,CompositeOperation_2002,PrimitiveOperation_2003,DomainObject_2040,DomainAttribute_2041,Property_2055,Frame_2043,InputForm_2044,InputTextField_2045,StaticValue_2046,LoginHandler_2047,CompositeCondition_2013,DomainObjectInstance_2048,DomainAttributeInstance_2049,Button_2050,AccessControlHandler_2051,Permission_2019,Role_2020,UserInstance_2052,EntryGate_2053,ExitGate_2054,EventTrigger_2059"/>
       </modelingAssistantProvider>
    </extension>
 
@@ -320,7 +320,7 @@
       <decoratorProvider class="org.openiaml.model.diagram.session.providers.IamlShortcutsDecoratorProvider">
          <Priority name="Lowest"/>
          <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
-            <method name="getType()" value="2056,2057,2002,2003,2040,2041,2055,2043,2044,2045,2046,2047,2013,2048,2049,2050,2051,2019,2020,2052,2053,2054,2058"/>
+            <method name="getType()" value="2058,2057,2002,2003,2040,2041,2055,2043,2044,2045,2046,2047,2013,2048,2049,2050,2051,2019,2020,2052,2053,2054,2059"/>
          </object>
          <context decoratorTargets="generated-top-nodes"/>
       </decoratorProvider>
@@ -340,12 +340,12 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
-               id="org.openiaml.model.diagram.session.EventTrigger_2056"
-               name="%metatype.name.EventTrigger_2056"
+               id="org.openiaml.model.diagram.session.EventTrigger_2058"
+               name="%metatype.name.EventTrigger_2058"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="EventTrigger"
                edithelper="org.openiaml.model.diagram.session.edit.helpers.EventTriggerEditHelper">
-            <param name="semanticHint" value="2056"/>
+            <param name="semanticHint" value="2058"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.4">
@@ -353,7 +353,7 @@
                id="org.openiaml.model.diagram.session.EventTrigger_2057"
                name="%metatype.name.EventTrigger_2057"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
-            <specializes id="org.openiaml.model.diagram.session.EventTrigger_2056"/>
+            <specializes id="org.openiaml.model.diagram.session.EventTrigger_2058"/>
             <param name="semanticHint" value="2057"/>
          </specializationType>
       </metamodel>
@@ -559,11 +559,11 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.4">
          <specializationType
-               id="org.openiaml.model.diagram.session.EventTrigger_2058"
-               name="%metatype.name.EventTrigger_2058"
+               id="org.openiaml.model.diagram.session.EventTrigger_2059"
+               name="%metatype.name.EventTrigger_2059"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
-            <specializes id="org.openiaml.model.diagram.session.EventTrigger_2056"/>
-            <param name="semanticHint" value="2058"/>
+            <specializes id="org.openiaml.model.diagram.session.EventTrigger_2058"/>
+            <param name="semanticHint" value="2059"/>
          </specializationType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
@@ -679,7 +679,7 @@
       </clientContext> 
       <binding context="org.openiaml.model.diagram.session.TypeContext">
          <elementType ref="org.openiaml.model.diagram.session.Session_1000"/>
-         <elementType ref="org.openiaml.model.diagram.session.EventTrigger_2056"/>
+         <elementType ref="org.openiaml.model.diagram.session.EventTrigger_2058"/>
          <elementType ref="org.openiaml.model.diagram.session.EventTrigger_2057"/>
          <elementType ref="org.openiaml.model.diagram.session.CompositeOperation_2002"/>
          <elementType ref="org.openiaml.model.diagram.session.PrimitiveOperation_2003"/>
@@ -701,7 +701,7 @@
          <elementType ref="org.openiaml.model.diagram.session.UserInstance_2052"/>
          <elementType ref="org.openiaml.model.diagram.session.EntryGate_2053"/>
          <elementType ref="org.openiaml.model.diagram.session.ExitGate_2054"/>
-         <elementType ref="org.openiaml.model.diagram.session.EventTrigger_2058"/>
+         <elementType ref="org.openiaml.model.diagram.session.EventTrigger_2059"/>
          <elementType ref="org.openiaml.model.diagram.session.SyncWire_4001"/>
          <elementType ref="org.openiaml.model.diagram.session.RunInstanceWire_4002"/>
          <elementType ref="org.openiaml.model.diagram.session.ParameterEdge_4013"/>

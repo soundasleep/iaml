@@ -27,7 +27,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="user_store.gmftool#//@palette/@tools.0/@tools.2"/>
+          href="user_store.gmftool#//@palette/@tools.0/@tools.1"/>
       <diagramNode
           href="iaml.gmfgraph#CompositeOperation"/>
     </ownedChild>
@@ -49,17 +49,19 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="user_store.gmftool#//@palette/@tools.0/@tools.4"/>
+          href="user_store.gmftool#//@palette/@tools.0/@tools.3"/>
       <diagramNode
           href="iaml.gmfgraph#Role"/>
     </ownedChild>
   </nodes>
   <nodes>
-    <containmentFeature
-        href="iaml.ecore#//ContainsEventTriggers/eventTriggers"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//EventTrigger"/>
+      <labelMappings>
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerContainmentFeature"/>
+      </labelMappings>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
@@ -72,9 +74,6 @@
         <diagramLabel
             href="iaml.gmfgraph#EventTriggerParentName"/>
       </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="user_store.gmftool#//@palette/@tools.0/@tools.0"/>
       <diagramNode
           href="iaml.gmfgraph#EventTrigger"/>
     </ownedChild>
@@ -108,7 +107,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="user_store.gmftool#//@palette/@tools.0/@tools.3"/>
+          href="user_store.gmftool#//@palette/@tools.0/@tools.2"/>
       <diagramNode
           href="iaml.gmfgraph#Property"/>
     </ownedChild>
@@ -135,7 +134,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="user_store.gmftool#//@palette/@tools.0/@tools.1"/>
+          href="user_store.gmftool#//@palette/@tools.0/@tools.0"/>
       <diagramNode
           href="iaml.gmfgraph#PrimitiveOperation"/>
     </ownedChild>
@@ -155,7 +154,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="user_store.gmftool#//@palette/@tools.0/@tools.5"/>
+          href="user_store.gmftool#//@palette/@tools.0/@tools.4"/>
       <diagramNode
           href="iaml.gmfgraph#Permission"/>
     </ownedChild>

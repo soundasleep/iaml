@@ -241,7 +241,7 @@
          </object>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_UserStore"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2007,2008,2009,2012,2011,2006"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2007,2008,2013,2012,2011,2006"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4004,4003"/>
       </viewProvider>
    </extension>
@@ -254,13 +254,13 @@
             <method name="getType()" value="Iaml_UserStore"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
-            <method name="getType()" value="2007,2008,2009,2012,2011,2006"/>
+            <method name="getType()" value="2007,2008,2013,2012,2011,2006"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
             <method name="getType()" value="4004,4003"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5012,5013,5014,5015,5016,5022,5023,5024,5020,5021,5011"/>
+            <method name="getType()" value="5012,5013,5014,5025,5026,5027,5022,5023,5024,5020,5021,5011"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value=""/>
@@ -276,11 +276,11 @@
          <object class="org.openiaml.model.diagram.user_store.edit.parts.UserStoreEditPart" id="UserStore_1000"/>
          <object class="org.openiaml.model.diagram.user_store.edit.parts.CompositeOperationEditPart" id="CompositeOperation_2007"/>
          <object class="org.openiaml.model.diagram.user_store.edit.parts.RoleEditPart" id="Role_2008"/>
-         <object class="org.openiaml.model.diagram.user_store.edit.parts.EventTriggerEditPart" id="EventTrigger_2009"/>
+         <object class="org.openiaml.model.diagram.user_store.edit.parts.EventTriggerEditPart" id="EventTrigger_2013"/>
          <object class="org.openiaml.model.diagram.user_store.edit.parts.PropertyEditPart" id="Property_2012"/>
          <object class="org.openiaml.model.diagram.user_store.edit.parts.PrimitiveOperationEditPart" id="PrimitiveOperation_2011"/>
          <object class="org.openiaml.model.diagram.user_store.edit.parts.PermissionEditPart" id="Permission_2006"/>
-         <context elements="UserStore_1000,CompositeOperation_2007,Role_2008,EventTrigger_2009,Property_2012,PrimitiveOperation_2011,Permission_2006"/>
+         <context elements="UserStore_1000,CompositeOperation_2007,Role_2008,EventTrigger_2013,Property_2012,PrimitiveOperation_2011,Permission_2006"/>
       </modelingAssistantProvider>
    </extension>
 
@@ -332,12 +332,12 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
-               id="org.openiaml.model.diagram.user_store.EventTrigger_2009"
-               name="%metatype.name.EventTrigger_2009"
+               id="org.openiaml.model.diagram.user_store.EventTrigger_2013"
+               name="%metatype.name.EventTrigger_2013"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="EventTrigger"
                edithelper="org.openiaml.model.diagram.user_store.edit.helpers.EventTriggerEditHelper">
-            <param name="semanticHint" value="2009"/>
+            <param name="semanticHint" value="2013"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.4">
@@ -405,7 +405,7 @@
          <elementType ref="org.openiaml.model.diagram.user_store.UserStore_1000"/>
          <elementType ref="org.openiaml.model.diagram.user_store.CompositeOperation_2007"/>
          <elementType ref="org.openiaml.model.diagram.user_store.Role_2008"/>
-         <elementType ref="org.openiaml.model.diagram.user_store.EventTrigger_2009"/>
+         <elementType ref="org.openiaml.model.diagram.user_store.EventTrigger_2013"/>
          <elementType ref="org.openiaml.model.diagram.user_store.Property_2012"/>
          <elementType ref="org.openiaml.model.diagram.user_store.PrimitiveOperation_2011"/>
          <elementType ref="org.openiaml.model.diagram.user_store.Permission_2006"/>
@@ -592,7 +592,7 @@
       <decoratorProvider class="org.openiaml.model.diagram.user_store.providers.IamlShortcutsDecoratorProvider">
          <Priority name="Lowest"/>
          <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
-            <method name="getType()" value="2007,2008,2009,2012,2011,2006"/>
+            <method name="getType()" value="2007,2008,2013,2012,2011,2006"/>
          </object>
          <context decoratorTargets="generated-top-nodes"/>
       </decoratorProvider>

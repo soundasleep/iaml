@@ -22,8 +22,8 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.ShouldntContainWires;
-import org.openiaml.model.model.WireEdgeDestination;
-import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.WireDestination;
+import org.openiaml.model.model.WireSource;
 import org.openiaml.model.model.operations.Arithmetic;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DecisionCondition;
@@ -154,8 +154,8 @@ public class OperationsSwitch<T> {
 				if (result == null) result = casePrimitiveOperation(decisionOperation);
 				if (result == null) result = caseOperation(decisionOperation);
 				if (result == null) result = caseExecutionEdgesSource(decisionOperation);
-				if (result == null) result = caseWireEdgesSource(decisionOperation);
-				if (result == null) result = caseWireEdgeDestination(decisionOperation);
+				if (result == null) result = caseWireSource(decisionOperation);
+				if (result == null) result = caseWireDestination(decisionOperation);
 				if (result == null) result = caseNamedElement(decisionOperation);
 				if (result == null) result = caseDataFlowEdgeDestination(decisionOperation);
 				if (result == null) result = caseExecutionEdgeDestination(decisionOperation);
@@ -173,7 +173,7 @@ public class OperationsSwitch<T> {
 				if (result == null) result = caseExecutionEdgesSource(decisionCondition);
 				if (result == null) result = caseExecutionEdgeDestination(decisionCondition);
 				if (result == null) result = caseDataFlowEdgeDestination(decisionCondition);
-				if (result == null) result = caseWireEdgesSource(decisionCondition);
+				if (result == null) result = caseWireSource(decisionCondition);
 				if (result == null) result = caseDataFlowEdgesSource(decisionCondition);
 				if (result == null) result = caseNamedElement(decisionCondition);
 				if (result == null) result = caseConditionEdgesSource(decisionCondition);
@@ -209,7 +209,7 @@ public class OperationsSwitch<T> {
 				if (result == null) result = caseActivityNode(operationCallNode);
 				if (result == null) result = caseExecutionEdgesSource(operationCallNode);
 				if (result == null) result = caseExecutionEdgeDestination(operationCallNode);
-				if (result == null) result = caseWireEdgesSource(operationCallNode);
+				if (result == null) result = caseWireSource(operationCallNode);
 				if (result == null) result = caseNamedElement(operationCallNode);
 				if (result == null) result = caseGeneratedElement(operationCallNode);
 				if (result == null) result = caseShouldntContainWires(operationCallNode);
@@ -382,21 +382,6 @@ public class OperationsSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Wire Edge Destination</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Wire Edge Destination</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseWireEdgeDestination(WireEdgeDestination object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Generated Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -453,6 +438,21 @@ public class OperationsSwitch<T> {
 	 * @generated
 	 */
 	public T caseExecutionEdgeDestination(ExecutionEdgeDestination object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Wire Destination</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Wire Destination</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseWireDestination(WireDestination object) {
 		return null;
 	}
 
@@ -517,17 +517,17 @@ public class OperationsSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Wire Edges Source</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Wire Source</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Wire Edges Source</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Wire Source</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseWireEdgesSource(WireEdgesSource object) {
+	public T caseWireSource(WireSource object) {
 		return null;
 	}
 

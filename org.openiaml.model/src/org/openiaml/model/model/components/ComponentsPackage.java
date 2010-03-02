@@ -225,22 +225,22 @@ public interface ComponentsPackage extends EPackage {
 	int LOGIN_HANDLER__CONDITION_EDGES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 14;
 
 	/**
-	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
+	 * The feature id for the '<em><b>Out Wires</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOGIN_HANDLER__OUT_EDGES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 15;
+	int LOGIN_HANDLER__OUT_WIRES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 15;
 
 	/**
-	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
+	 * The feature id for the '<em><b>In Wires</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOGIN_HANDLER__IN_EDGES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 16;
+	int LOGIN_HANDLER__IN_WIRES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
@@ -460,22 +460,22 @@ public interface ComponentsPackage extends EPackage {
 	int ACCESS_CONTROL_HANDLER__CONDITION_EDGES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 15;
 
 	/**
-	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
+	 * The feature id for the '<em><b>Out Wires</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACCESS_CONTROL_HANDLER__OUT_EDGES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 16;
+	int ACCESS_CONTROL_HANDLER__OUT_WIRES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 16;
 
 	/**
-	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
+	 * The feature id for the '<em><b>In Wires</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACCESS_CONTROL_HANDLER__IN_EDGES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 17;
+	int ACCESS_CONTROL_HANDLER__IN_WIRES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 17;
 
 	/**
 	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
@@ -632,22 +632,22 @@ public interface ComponentsPackage extends EPackage {
 	int GATE__CONDITION_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
-	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
+	 * The feature id for the '<em><b>Out Wires</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GATE__OUT_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 7;
+	int GATE__OUT_WIRES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
-	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
+	 * The feature id for the '<em><b>In Wires</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GATE__IN_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 8;
+	int GATE__IN_WIRES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
@@ -804,22 +804,22 @@ public interface ComponentsPackage extends EPackage {
 	int ENTRY_GATE__CONDITION_EDGES = GATE__CONDITION_EDGES;
 
 	/**
-	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
+	 * The feature id for the '<em><b>Out Wires</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENTRY_GATE__OUT_EDGES = GATE__OUT_EDGES;
+	int ENTRY_GATE__OUT_WIRES = GATE__OUT_WIRES;
 
 	/**
-	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
+	 * The feature id for the '<em><b>In Wires</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENTRY_GATE__IN_EDGES = GATE__IN_EDGES;
+	int ENTRY_GATE__IN_WIRES = GATE__IN_WIRES;
 
 	/**
 	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
@@ -976,22 +976,22 @@ public interface ComponentsPackage extends EPackage {
 	int EXIT_GATE__CONDITION_EDGES = GATE__CONDITION_EDGES;
 
 	/**
-	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
+	 * The feature id for the '<em><b>Out Wires</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXIT_GATE__OUT_EDGES = GATE__OUT_EDGES;
+	int EXIT_GATE__OUT_WIRES = GATE__OUT_WIRES;
 
 	/**
-	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
+	 * The feature id for the '<em><b>In Wires</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXIT_GATE__IN_EDGES = GATE__IN_EDGES;
+	int EXIT_GATE__IN_WIRES = GATE__IN_WIRES;
 
 	/**
 	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.

@@ -15,8 +15,8 @@ import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.NamedElement;
-import org.openiaml.model.model.WireEdge;
-import org.openiaml.model.model.WireEdgeDestination;
+import org.openiaml.model.model.Wire;
+import org.openiaml.model.model.WireDestination;
 import org.openiaml.model.model.wires.CompositeWire;
 import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ConditionEdgeDestination;
@@ -118,7 +118,7 @@ public class WiresSwitch<T> {
 			case WiresPackage.SINGLE_WIRE: {
 				SingleWire singleWire = (SingleWire)theEObject;
 				T result = caseSingleWire(singleWire);
-				if (result == null) result = caseWireEdge(singleWire);
+				if (result == null) result = caseWire(singleWire);
 				if (result == null) result = caseGeneratedElement(singleWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -126,7 +126,7 @@ public class WiresSwitch<T> {
 			case WiresPackage.COMPOSITE_WIRE: {
 				CompositeWire compositeWire = (CompositeWire)theEObject;
 				T result = caseCompositeWire(compositeWire);
-				if (result == null) result = caseWireEdge(compositeWire);
+				if (result == null) result = caseWire(compositeWire);
 				if (result == null) result = caseNamedElement(compositeWire);
 				if (result == null) result = caseContainsWires(compositeWire);
 				if (result == null) result = caseGeneratesElements(compositeWire);
@@ -139,10 +139,10 @@ public class WiresSwitch<T> {
 				SyncWire syncWire = (SyncWire)theEObject;
 				T result = caseSyncWire(syncWire);
 				if (result == null) result = caseCompositeWire(syncWire);
-				if (result == null) result = caseWireEdgeDestination(syncWire);
+				if (result == null) result = caseWireDestination(syncWire);
 				if (result == null) result = caseParameterEdgeDestination(syncWire);
 				if (result == null) result = caseConditionEdgeDestination(syncWire);
-				if (result == null) result = caseWireEdge(syncWire);
+				if (result == null) result = caseWire(syncWire);
 				if (result == null) result = caseNamedElement(syncWire);
 				if (result == null) result = caseContainsWires(syncWire);
 				if (result == null) result = caseGeneratesElements(syncWire);
@@ -154,13 +154,13 @@ public class WiresSwitch<T> {
 			case WiresPackage.RUN_INSTANCE_WIRE: {
 				RunInstanceWire runInstanceWire = (RunInstanceWire)theEObject;
 				T result = caseRunInstanceWire(runInstanceWire);
-				if (result == null) result = caseWireEdgeDestination(runInstanceWire);
+				if (result == null) result = caseWireDestination(runInstanceWire);
 				if (result == null) result = caseParameterEdgeDestination(runInstanceWire);
 				if (result == null) result = caseSingleWire(runInstanceWire);
 				if (result == null) result = caseNamedElement(runInstanceWire);
 				if (result == null) result = caseGeneratesElements(runInstanceWire);
 				if (result == null) result = caseConditionEdgeDestination(runInstanceWire);
-				if (result == null) result = caseWireEdge(runInstanceWire);
+				if (result == null) result = caseWire(runInstanceWire);
 				if (result == null) result = caseGeneratedElement(runInstanceWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -177,9 +177,9 @@ public class WiresSwitch<T> {
 				SetWire setWire = (SetWire)theEObject;
 				T result = caseSetWire(setWire);
 				if (result == null) result = caseCompositeWire(setWire);
-				if (result == null) result = caseWireEdgeDestination(setWire);
+				if (result == null) result = caseWireDestination(setWire);
 				if (result == null) result = caseConditionEdgeDestination(setWire);
-				if (result == null) result = caseWireEdge(setWire);
+				if (result == null) result = caseWire(setWire);
 				if (result == null) result = caseNamedElement(setWire);
 				if (result == null) result = caseContainsWires(setWire);
 				if (result == null) result = caseGeneratesElements(setWire);
@@ -191,12 +191,12 @@ public class WiresSwitch<T> {
 			case WiresPackage.NAVIGATE_WIRE: {
 				NavigateWire navigateWire = (NavigateWire)theEObject;
 				T result = caseNavigateWire(navigateWire);
-				if (result == null) result = caseWireEdgeDestination(navigateWire);
+				if (result == null) result = caseWireDestination(navigateWire);
 				if (result == null) result = caseSingleWire(navigateWire);
 				if (result == null) result = caseNamedElement(navigateWire);
 				if (result == null) result = caseGeneratesElements(navigateWire);
 				if (result == null) result = caseConditionEdgeDestination(navigateWire);
-				if (result == null) result = caseWireEdge(navigateWire);
+				if (result == null) result = caseWire(navigateWire);
 				if (result == null) result = caseGeneratedElement(navigateWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -204,12 +204,12 @@ public class WiresSwitch<T> {
 			case WiresPackage.SELECT_WIRE: {
 				SelectWire selectWire = (SelectWire)theEObject;
 				T result = caseSelectWire(selectWire);
-				if (result == null) result = caseWireEdgeDestination(selectWire);
+				if (result == null) result = caseWireDestination(selectWire);
 				if (result == null) result = caseParameterEdgeDestination(selectWire);
 				if (result == null) result = caseSingleWire(selectWire);
 				if (result == null) result = caseNamedElement(selectWire);
 				if (result == null) result = caseGeneratesElements(selectWire);
-				if (result == null) result = caseWireEdge(selectWire);
+				if (result == null) result = caseWire(selectWire);
 				if (result == null) result = caseGeneratedElement(selectWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -230,7 +230,7 @@ public class WiresSwitch<T> {
 				if (result == null) result = caseSingleWire(newInstanceWire);
 				if (result == null) result = caseNamedElement(newInstanceWire);
 				if (result == null) result = caseGeneratesElements(newInstanceWire);
-				if (result == null) result = caseWireEdge(newInstanceWire);
+				if (result == null) result = caseWire(newInstanceWire);
 				if (result == null) result = caseGeneratedElement(newInstanceWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -665,17 +665,17 @@ public class WiresSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Wire Edge</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Wire</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Wire Edge</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Wire</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseWireEdge(WireEdge object) {
+	public T caseWire(Wire object) {
 		return null;
 	}
 
@@ -740,17 +740,17 @@ public class WiresSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Wire Edge Destination</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Wire Destination</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Wire Edge Destination</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Wire Destination</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseWireEdgeDestination(WireEdgeDestination object) {
+	public T caseWireDestination(WireDestination object) {
 		return null;
 	}
 

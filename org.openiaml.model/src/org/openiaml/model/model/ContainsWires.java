@@ -41,7 +41,7 @@ import org.openiaml.model.model.wires.RequiresEdge;
 public interface ContainsWires extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Wires</b></em>' containment reference list.
-	 * The list contents are of type {@link org.openiaml.model.model.WireEdge}.
+	 * The list contents are of type {@link org.openiaml.model.model.Wire}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Wires</em>' containment reference list isn't clear,
@@ -53,7 +53,7 @@ public interface ContainsWires extends EObject {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<WireEdge> getWires();
+	EList<Wire> getWires();
 
 	/**
 	 * Returns the value of the '<em><b>Parameter Edges</b></em>' containment reference list.

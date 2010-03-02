@@ -28,7 +28,7 @@ import org.eclipse.emf.common.util.EList;
  * @model abstract="true"
  * @generated
  */
-public interface Operation extends WireEdgeDestination, NamedElement, DataFlowEdgeDestination, ExecutionEdgeDestination, DataFlowEdgesSource {
+public interface Operation extends WireDestination, NamedElement, DataFlowEdgeDestination, ExecutionEdgeDestination, DataFlowEdgesSource {
 	/**
 	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
 	 * The list contents are of type {@link org.openiaml.model.model.Parameter}.

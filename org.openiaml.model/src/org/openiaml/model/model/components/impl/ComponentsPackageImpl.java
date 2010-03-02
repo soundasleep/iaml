@@ -316,8 +316,8 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 		accessControlHandlerEClass.getESuperTypes().add(theModelPackage.getApplicationElement());
 		accessControlHandlerEClass.getESuperTypes().add(theModelPackage.getContainsWires());
 		gateEClass.getESuperTypes().add(theModelPackage.getNamedElement());
-		gateEClass.getESuperTypes().add(theModelPackage.getWireEdgesSource());
-		gateEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
+		gateEClass.getESuperTypes().add(theModelPackage.getWireSource());
+		gateEClass.getESuperTypes().add(theModelPackage.getWireDestination());
 		gateEClass.getESuperTypes().add(theModelPackage.getGeneratedElement());
 		gateEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
 		gateEClass.getESuperTypes().add(theWiresPackage.getConditionEdgeDestination());

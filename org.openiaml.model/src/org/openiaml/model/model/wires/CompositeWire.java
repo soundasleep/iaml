@@ -17,7 +17,7 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.StaticValue;
-import org.openiaml.model.model.WireEdge;
+import org.openiaml.model.model.Wire;
 
 /**
  * <!-- begin-user-doc -->
@@ -44,7 +44,7 @@ import org.openiaml.model.model.WireEdge;
  * @model annotation="http://openiaml.org/comment comment='ideally this would be abstract; but we want to have a \"wire\" diagram editor, and the root element needs to be concrete. the other option is to have multiple diagram editors per concrete wire...' comment2='easy visualisation: all composite wires are dashed' comment3='only composite wires have a name now' editor='org.openiaml.model.diagram.wire' comment4='a wire shouldn\'t have parameters; but the operations contained within need them rendered.'"
  * @generated
  */
-public interface CompositeWire extends WireEdge, NamedElement, ContainsWires, GeneratesElements, ContainsConditions {
+public interface CompositeWire extends Wire, NamedElement, ContainsWires, GeneratesElements, ContainsConditions {
 	/**
 	 * Returns the value of the '<em><b>Children</b></em>' containment reference list.
 	 * The list contents are of type {@link org.openiaml.model.model.ApplicationElement}.

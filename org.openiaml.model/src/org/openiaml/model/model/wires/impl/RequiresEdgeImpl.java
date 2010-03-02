@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.ModelPackage;
-import org.openiaml.model.model.WireEdge;
+import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.users.RequiresEdgeDestination;
 import org.openiaml.model.model.users.RequiresEdgesSource;
 import org.openiaml.model.model.users.UsersPackage;
@@ -161,7 +161,7 @@ public class RequiresEdgeImpl extends EObjectImpl implements RequiresEdge {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<WireEdge> wires;
+	protected EList<Wire> wires;
 
 	/**
 	 * The cached value of the '{@link #getParameterEdges() <em>Parameter Edges</em>}' containment reference list.
@@ -366,9 +366,9 @@ public class RequiresEdgeImpl extends EObjectImpl implements RequiresEdge {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<WireEdge> getWires() {
+	public EList<Wire> getWires() {
 		if (wires == null) {
-			wires = new EObjectContainmentEList<WireEdge>(WireEdge.class, this, WiresPackage.REQUIRES_EDGE__WIRES);
+			wires = new EObjectContainmentEList<Wire>(Wire.class, this, WiresPackage.REQUIRES_EDGE__WIRES);
 		}
 		return wires;
 	}
@@ -704,7 +704,7 @@ public class RequiresEdgeImpl extends EObjectImpl implements RequiresEdge {
 				return;
 			case WiresPackage.REQUIRES_EDGE__WIRES:
 				getWires().clear();
-				getWires().addAll((Collection<? extends WireEdge>)newValue);
+				getWires().addAll((Collection<? extends Wire>)newValue);
 				return;
 			case WiresPackage.REQUIRES_EDGE__PARAMETER_EDGES:
 				getParameterEdges().clear();

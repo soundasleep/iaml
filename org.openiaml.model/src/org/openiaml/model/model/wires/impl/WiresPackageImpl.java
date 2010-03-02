@@ -929,17 +929,17 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		singleWireEClass.getESuperTypes().add(theModelPackage.getWireEdge());
-		compositeWireEClass.getESuperTypes().add(theModelPackage.getWireEdge());
+		singleWireEClass.getESuperTypes().add(theModelPackage.getWire());
+		compositeWireEClass.getESuperTypes().add(theModelPackage.getWire());
 		compositeWireEClass.getESuperTypes().add(theModelPackage.getNamedElement());
 		compositeWireEClass.getESuperTypes().add(theModelPackage.getContainsWires());
 		compositeWireEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
 		compositeWireEClass.getESuperTypes().add(theModelPackage.getContainsConditions());
 		syncWireEClass.getESuperTypes().add(this.getCompositeWire());
-		syncWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
+		syncWireEClass.getESuperTypes().add(theModelPackage.getWireDestination());
 		syncWireEClass.getESuperTypes().add(this.getParameterEdgeDestination());
 		syncWireEClass.getESuperTypes().add(this.getConditionEdgeDestination());
-		runInstanceWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
+		runInstanceWireEClass.getESuperTypes().add(theModelPackage.getWireDestination());
 		runInstanceWireEClass.getESuperTypes().add(this.getParameterEdgeDestination());
 		runInstanceWireEClass.getESuperTypes().add(this.getSingleWire());
 		runInstanceWireEClass.getESuperTypes().add(theModelPackage.getNamedElement());
@@ -948,14 +948,14 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		parameterEdgeEClass.getESuperTypes().add(theModelPackage.getNamedElement());
 		parameterEdgeEClass.getESuperTypes().add(theModelPackage.getGeneratedElement());
 		setWireEClass.getESuperTypes().add(this.getCompositeWire());
-		setWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
+		setWireEClass.getESuperTypes().add(theModelPackage.getWireDestination());
 		setWireEClass.getESuperTypes().add(this.getConditionEdgeDestination());
-		navigateWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
+		navigateWireEClass.getESuperTypes().add(theModelPackage.getWireDestination());
 		navigateWireEClass.getESuperTypes().add(this.getSingleWire());
 		navigateWireEClass.getESuperTypes().add(theModelPackage.getNamedElement());
 		navigateWireEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
 		navigateWireEClass.getESuperTypes().add(this.getConditionEdgeDestination());
-		selectWireEClass.getESuperTypes().add(theModelPackage.getWireEdgeDestination());
+		selectWireEClass.getESuperTypes().add(theModelPackage.getWireDestination());
 		selectWireEClass.getESuperTypes().add(this.getParameterEdgeDestination());
 		selectWireEClass.getESuperTypes().add(this.getSingleWire());
 		selectWireEClass.getESuperTypes().add(theModelPackage.getNamedElement());

@@ -29,7 +29,7 @@ import org.openiaml.model.model.wires.ParameterEdgesSource;
  * @model annotation="http://openiaml.org/comment added='0.4'"
  * @generated
  */
-public interface QueryParameter extends NamedElement, WireEdgesSource, DataFlowEdgesSource, ParameterEdgesSource {
+public interface QueryParameter extends NamedElement, WireSource, DataFlowEdgesSource, ParameterEdgesSource {
 	/**
 	 * Returns the value of the '<em><b>Default Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->

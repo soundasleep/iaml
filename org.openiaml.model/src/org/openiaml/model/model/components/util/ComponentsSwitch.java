@@ -20,8 +20,8 @@ import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.ShouldntContainWires;
-import org.openiaml.model.model.WireEdgeDestination;
-import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.WireDestination;
+import org.openiaml.model.model.WireSource;
 import org.openiaml.model.model.components.AccessControlHandler;
 import org.openiaml.model.model.components.ComponentsPackage;
 import org.openiaml.model.model.components.EntryGate;
@@ -117,9 +117,9 @@ public class ComponentsSwitch<T> {
 				if (result == null) result = caseContainsOperations(loginHandler);
 				if (result == null) result = caseNamedElement(loginHandler);
 				if (result == null) result = caseGeneratedElement(loginHandler);
-				if (result == null) result = caseWireEdgesSource(loginHandler);
+				if (result == null) result = caseWireSource(loginHandler);
 				if (result == null) result = caseShouldntContainWires(loginHandler);
-				if (result == null) result = caseWireEdgeDestination(loginHandler);
+				if (result == null) result = caseWireDestination(loginHandler);
 				if (result == null) result = caseContainsConditions(loginHandler);
 				if (result == null) result = caseContainsWires(loginHandler);
 				if (result == null) result = defaultCase(theEObject);
@@ -137,9 +137,9 @@ public class ComponentsSwitch<T> {
 				if (result == null) result = caseContainsOperations(accessControlHandler);
 				if (result == null) result = caseNamedElement(accessControlHandler);
 				if (result == null) result = caseGeneratedElement(accessControlHandler);
-				if (result == null) result = caseWireEdgesSource(accessControlHandler);
+				if (result == null) result = caseWireSource(accessControlHandler);
 				if (result == null) result = caseShouldntContainWires(accessControlHandler);
-				if (result == null) result = caseWireEdgeDestination(accessControlHandler);
+				if (result == null) result = caseWireDestination(accessControlHandler);
 				if (result == null) result = caseContainsConditions(accessControlHandler);
 				if (result == null) result = caseContainsWires(accessControlHandler);
 				if (result == null) result = defaultCase(theEObject);
@@ -149,8 +149,8 @@ public class ComponentsSwitch<T> {
 				Gate gate = (Gate)theEObject;
 				T result = caseGate(gate);
 				if (result == null) result = caseNamedElement(gate);
-				if (result == null) result = caseWireEdgesSource(gate);
-				if (result == null) result = caseWireEdgeDestination(gate);
+				if (result == null) result = caseWireSource(gate);
+				if (result == null) result = caseWireDestination(gate);
 				if (result == null) result = caseGeneratesElements(gate);
 				if (result == null) result = caseConditionEdgeDestination(gate);
 				if (result == null) result = caseGeneratedElement(gate);
@@ -164,8 +164,8 @@ public class ComponentsSwitch<T> {
 				T result = caseEntryGate(entryGate);
 				if (result == null) result = caseGate(entryGate);
 				if (result == null) result = caseNamedElement(entryGate);
-				if (result == null) result = caseWireEdgesSource(entryGate);
-				if (result == null) result = caseWireEdgeDestination(entryGate);
+				if (result == null) result = caseWireSource(entryGate);
+				if (result == null) result = caseWireDestination(entryGate);
 				if (result == null) result = caseGeneratesElements(entryGate);
 				if (result == null) result = caseConditionEdgeDestination(entryGate);
 				if (result == null) result = caseGeneratedElement(entryGate);
@@ -179,8 +179,8 @@ public class ComponentsSwitch<T> {
 				T result = caseExitGate(exitGate);
 				if (result == null) result = caseGate(exitGate);
 				if (result == null) result = caseNamedElement(exitGate);
-				if (result == null) result = caseWireEdgesSource(exitGate);
-				if (result == null) result = caseWireEdgeDestination(exitGate);
+				if (result == null) result = caseWireSource(exitGate);
+				if (result == null) result = caseWireDestination(exitGate);
 				if (result == null) result = caseGeneratesElements(exitGate);
 				if (result == null) result = caseConditionEdgeDestination(exitGate);
 				if (result == null) result = caseGeneratedElement(exitGate);
@@ -359,32 +359,32 @@ public class ComponentsSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Wire Edges Source</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Wire Source</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Wire Edges Source</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Wire Source</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseWireEdgesSource(WireEdgesSource object) {
+	public T caseWireSource(WireSource object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Wire Edge Destination</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Wire Destination</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Wire Edge Destination</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Wire Destination</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseWireEdgeDestination(WireEdgeDestination object) {
+	public T caseWireDestination(WireDestination object) {
 		return null;
 	}
 

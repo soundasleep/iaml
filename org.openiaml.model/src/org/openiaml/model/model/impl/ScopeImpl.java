@@ -37,9 +37,9 @@ import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.StaticValue;
-import org.openiaml.model.model.WireEdge;
-import org.openiaml.model.model.WireEdgeDestination;
-import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.Wire;
+import org.openiaml.model.model.WireDestination;
+import org.openiaml.model.model.WireSource;
 import org.openiaml.model.model.components.EntryGate;
 import org.openiaml.model.model.components.ExitGate;
 import org.openiaml.model.model.wires.ConditionEdge;
@@ -72,8 +72,8 @@ import org.openiaml.model.model.wires.RequiresEdge;
  *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getGeneratedRule <em>Generated Rule</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getOutEdges <em>Out Edges</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getInEdges <em>In Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getOutWires <em>Out Wires</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getInWires <em>In Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getConditions <em>Conditions</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getOnAccess <em>On Access</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getEntryGate <em>Entry Gate</em>}</li>
@@ -127,7 +127,7 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<WireEdge> wires;
+	protected EList<Wire> wires;
 
 	/**
 	 * The cached value of the '{@link #getParameterEdges() <em>Parameter Edges</em>}' containment reference list.
@@ -300,24 +300,24 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getOutEdges() <em>Out Edges</em>}' reference list.
+	 * The cached value of the '{@link #getOutWires() <em>Out Wires</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOutEdges()
+	 * @see #getOutWires()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<WireEdge> outEdges;
+	protected EList<Wire> outWires;
 
 	/**
-	 * The cached value of the '{@link #getInEdges() <em>In Edges</em>}' reference list.
+	 * The cached value of the '{@link #getInWires() <em>In Wires</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getInEdges()
+	 * @see #getInWires()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<WireEdge> inEdges;
+	protected EList<Wire> inWires;
 
 	/**
 	 * The cached value of the '{@link #getConditions() <em>Conditions</em>}' containment reference list.
@@ -466,9 +466,9 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<WireEdge> getWires() {
+	public EList<Wire> getWires() {
 		if (wires == null) {
-			wires = new EObjectContainmentEList<WireEdge>(WireEdge.class, this, ModelPackage.SCOPE__WIRES);
+			wires = new EObjectContainmentEList<Wire>(Wire.class, this, ModelPackage.SCOPE__WIRES);
 		}
 		return wires;
 	}
@@ -670,11 +670,11 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<WireEdge> getOutEdges() {
-		if (outEdges == null) {
-			outEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, ModelPackage.SCOPE__OUT_EDGES, ModelPackage.WIRE_EDGE__FROM);
+	public EList<Wire> getOutWires() {
+		if (outWires == null) {
+			outWires = new EObjectWithInverseResolvingEList<Wire>(Wire.class, this, ModelPackage.SCOPE__OUT_WIRES, ModelPackage.WIRE__FROM);
 		}
-		return outEdges;
+		return outWires;
 	}
 
 	/**
@@ -682,11 +682,11 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<WireEdge> getInEdges() {
-		if (inEdges == null) {
-			inEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, ModelPackage.SCOPE__IN_EDGES, ModelPackage.WIRE_EDGE__TO);
+	public EList<Wire> getInWires() {
+		if (inWires == null) {
+			inWires = new EObjectWithInverseResolvingEList<Wire>(Wire.class, this, ModelPackage.SCOPE__IN_WIRES, ModelPackage.WIRE__TO);
 		}
-		return inEdges;
+		return inWires;
 	}
 
 	/**
@@ -934,10 +934,10 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGeneratedElements()).basicAdd(otherEnd, msgs);
 			case ModelPackage.SCOPE__GENERATED_BY:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGeneratedBy()).basicAdd(otherEnd, msgs);
-			case ModelPackage.SCOPE__OUT_EDGES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutEdges()).basicAdd(otherEnd, msgs);
-			case ModelPackage.SCOPE__IN_EDGES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInEdges()).basicAdd(otherEnd, msgs);
+			case ModelPackage.SCOPE__OUT_WIRES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutWires()).basicAdd(otherEnd, msgs);
+			case ModelPackage.SCOPE__IN_WIRES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInWires()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -972,10 +972,10 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 				return ((InternalEList<?>)getScopes()).basicRemove(otherEnd, msgs);
 			case ModelPackage.SCOPE__GENERATED_BY:
 				return ((InternalEList<?>)getGeneratedBy()).basicRemove(otherEnd, msgs);
-			case ModelPackage.SCOPE__OUT_EDGES:
-				return ((InternalEList<?>)getOutEdges()).basicRemove(otherEnd, msgs);
-			case ModelPackage.SCOPE__IN_EDGES:
-				return ((InternalEList<?>)getInEdges()).basicRemove(otherEnd, msgs);
+			case ModelPackage.SCOPE__OUT_WIRES:
+				return ((InternalEList<?>)getOutWires()).basicRemove(otherEnd, msgs);
+			case ModelPackage.SCOPE__IN_WIRES:
+				return ((InternalEList<?>)getInWires()).basicRemove(otherEnd, msgs);
 			case ModelPackage.SCOPE__CONDITIONS:
 				return ((InternalEList<?>)getConditions()).basicRemove(otherEnd, msgs);
 			case ModelPackage.SCOPE__ON_ACCESS:
@@ -1038,10 +1038,10 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 				return getGeneratedRule();
 			case ModelPackage.SCOPE__NAME:
 				return getName();
-			case ModelPackage.SCOPE__OUT_EDGES:
-				return getOutEdges();
-			case ModelPackage.SCOPE__IN_EDGES:
-				return getInEdges();
+			case ModelPackage.SCOPE__OUT_WIRES:
+				return getOutWires();
+			case ModelPackage.SCOPE__IN_WIRES:
+				return getInWires();
 			case ModelPackage.SCOPE__CONDITIONS:
 				return getConditions();
 			case ModelPackage.SCOPE__ON_ACCESS:
@@ -1082,7 +1082,7 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 				return;
 			case ModelPackage.SCOPE__WIRES:
 				getWires().clear();
-				getWires().addAll((Collection<? extends WireEdge>)newValue);
+				getWires().addAll((Collection<? extends Wire>)newValue);
 				return;
 			case ModelPackage.SCOPE__PARAMETER_EDGES:
 				getParameterEdges().clear();
@@ -1132,13 +1132,13 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 			case ModelPackage.SCOPE__NAME:
 				setName((String)newValue);
 				return;
-			case ModelPackage.SCOPE__OUT_EDGES:
-				getOutEdges().clear();
-				getOutEdges().addAll((Collection<? extends WireEdge>)newValue);
+			case ModelPackage.SCOPE__OUT_WIRES:
+				getOutWires().clear();
+				getOutWires().addAll((Collection<? extends Wire>)newValue);
 				return;
-			case ModelPackage.SCOPE__IN_EDGES:
-				getInEdges().clear();
-				getInEdges().addAll((Collection<? extends WireEdge>)newValue);
+			case ModelPackage.SCOPE__IN_WIRES:
+				getInWires().clear();
+				getInWires().addAll((Collection<? extends Wire>)newValue);
 				return;
 			case ModelPackage.SCOPE__CONDITIONS:
 				getConditions().clear();
@@ -1232,11 +1232,11 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 			case ModelPackage.SCOPE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case ModelPackage.SCOPE__OUT_EDGES:
-				getOutEdges().clear();
+			case ModelPackage.SCOPE__OUT_WIRES:
+				getOutWires().clear();
 				return;
-			case ModelPackage.SCOPE__IN_EDGES:
-				getInEdges().clear();
+			case ModelPackage.SCOPE__IN_WIRES:
+				getInWires().clear();
 				return;
 			case ModelPackage.SCOPE__CONDITIONS:
 				getConditions().clear();
@@ -1309,10 +1309,10 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 				return GENERATED_RULE_EDEFAULT == null ? generatedRule != null : !GENERATED_RULE_EDEFAULT.equals(generatedRule);
 			case ModelPackage.SCOPE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case ModelPackage.SCOPE__OUT_EDGES:
-				return outEdges != null && !outEdges.isEmpty();
-			case ModelPackage.SCOPE__IN_EDGES:
-				return inEdges != null && !inEdges.isEmpty();
+			case ModelPackage.SCOPE__OUT_WIRES:
+				return outWires != null && !outWires.isEmpty();
+			case ModelPackage.SCOPE__IN_WIRES:
+				return inWires != null && !inWires.isEmpty();
 			case ModelPackage.SCOPE__CONDITIONS:
 				return conditions != null && !conditions.isEmpty();
 			case ModelPackage.SCOPE__ON_ACCESS:
@@ -1386,15 +1386,15 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 				default: return -1;
 			}
 		}
-		if (baseClass == WireEdgesSource.class) {
+		if (baseClass == WireSource.class) {
 			switch (derivedFeatureID) {
-				case ModelPackage.SCOPE__OUT_EDGES: return ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES;
+				case ModelPackage.SCOPE__OUT_WIRES: return ModelPackage.WIRE_SOURCE__OUT_WIRES;
 				default: return -1;
 			}
 		}
-		if (baseClass == WireEdgeDestination.class) {
+		if (baseClass == WireDestination.class) {
 			switch (derivedFeatureID) {
-				case ModelPackage.SCOPE__IN_EDGES: return ModelPackage.WIRE_EDGE_DESTINATION__IN_EDGES;
+				case ModelPackage.SCOPE__IN_WIRES: return ModelPackage.WIRE_DESTINATION__IN_WIRES;
 				default: return -1;
 			}
 		}
@@ -1469,15 +1469,15 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 				default: return -1;
 			}
 		}
-		if (baseClass == WireEdgesSource.class) {
+		if (baseClass == WireSource.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.WIRE_EDGES_SOURCE__OUT_EDGES: return ModelPackage.SCOPE__OUT_EDGES;
+				case ModelPackage.WIRE_SOURCE__OUT_WIRES: return ModelPackage.SCOPE__OUT_WIRES;
 				default: return -1;
 			}
 		}
-		if (baseClass == WireEdgeDestination.class) {
+		if (baseClass == WireDestination.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.WIRE_EDGE_DESTINATION__IN_EDGES: return ModelPackage.SCOPE__IN_EDGES;
+				case ModelPackage.WIRE_DESTINATION__IN_WIRES: return ModelPackage.SCOPE__IN_WIRES;
 				default: return -1;
 			}
 		}

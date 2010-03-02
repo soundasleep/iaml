@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.ModelPackage;
-import org.openiaml.model.model.WireEdge;
+import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.users.Permission;
 import org.openiaml.model.model.users.ProvidesEdgeDestination;
 import org.openiaml.model.model.users.RequiresEdgeDestination;
@@ -191,7 +191,7 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<WireEdge> wires;
+	protected EList<Wire> wires;
 
 	/**
 	 * The cached value of the '{@link #getParameterEdges() <em>Parameter Edges</em>}' containment reference list.
@@ -409,9 +409,9 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<WireEdge> getWires() {
+	public EList<Wire> getWires() {
 		if (wires == null) {
-			wires = new EObjectContainmentEList<WireEdge>(WireEdge.class, this, UsersPackage.PERMISSION__WIRES);
+			wires = new EObjectContainmentEList<Wire>(Wire.class, this, UsersPackage.PERMISSION__WIRES);
 		}
 		return wires;
 	}
@@ -624,7 +624,7 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 				return;
 			case UsersPackage.PERMISSION__WIRES:
 				getWires().clear();
-				getWires().addAll((Collection<? extends WireEdge>)newValue);
+				getWires().addAll((Collection<? extends Wire>)newValue);
 				return;
 			case UsersPackage.PERMISSION__PARAMETER_EDGES:
 				getParameterEdges().clear();

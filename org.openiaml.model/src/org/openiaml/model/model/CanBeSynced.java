@@ -17,5 +17,5 @@ package org.openiaml.model.model;
  * @model interface="true" abstract="true"
  * @generated
  */
-public interface CanBeSynced extends NamedElement, GeneratedElement, GeneratesElements, ContainsWires, ContainsOperations, ContainsConditions, WireEdgesSource, WireEdgeDestination {
+public interface CanBeSynced extends NamedElement, GeneratedElement, GeneratesElements, ContainsWires, ContainsOperations, ContainsConditions, WireSource, WireDestination {
 } // CanBeSynced

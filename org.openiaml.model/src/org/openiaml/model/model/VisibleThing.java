@@ -33,7 +33,7 @@ import org.openiaml.model.model.wires.ParameterEdgesSource;
  * @model annotation="http://openiaml.org/comment comment='this used to mean nothing; now anything that extends VisibleThing (which unforuntately needs to be concrete) has an editor' editor='org.openiaml.model.diagram.visual' changed='0.4.2 to no longer extend ApplicationElementContainer\r\n0.4.2 extends ContainsConditions\r\n0.4.2 extends ContainsOperatons\r\n0.4.2 extends ContainsEventTriggers\r\n0.4.2 extends ContainsWires\r\n0.4.2 extends WireEdgesSource\r\n0.4.2 extends WireEdgeDestination\r\n0.4.2 removed \'sessions\' containment\r\n0.4.4 no longer ContainsEventTriggers; events inserted manually'"
  * @generated
  */
-public interface VisibleThing extends ContainsConditions, ContainsOperations, ContainsWires, WireEdgesSource, WireEdgeDestination, NamedElement, GeneratedElement, GeneratesElements, CanBeSynced, ParameterEdgesSource, Editable, Accessible {
+public interface VisibleThing extends ContainsConditions, ContainsOperations, ContainsWires, WireSource, WireDestination, NamedElement, GeneratedElement, GeneratesElements, CanBeSynced, ParameterEdgesSource, Editable, Accessible {
 
 	/**
 	 * Returns the value of the '<em><b>Children</b></em>' containment reference list.

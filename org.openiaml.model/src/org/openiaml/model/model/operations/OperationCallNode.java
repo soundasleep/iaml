@@ -10,7 +10,7 @@ import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ExecutionEdgeDestination;
 import org.openiaml.model.model.ExecutionEdgesSource;
 import org.openiaml.model.model.NamedElement;
-import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.WireSource;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,5 +26,5 @@ import org.openiaml.model.model.WireEdgesSource;
  * @model annotation="http://openiaml.org/comment comment='added in 0.4'"
  * @generated
  */
-public interface OperationCallNode extends ActivityNode, ExecutionEdgesSource, ExecutionEdgeDestination, WireEdgesSource, NamedElement {
+public interface OperationCallNode extends ActivityNode, ExecutionEdgesSource, ExecutionEdgeDestination, WireSource, NamedElement {
 } // OperationCallNode

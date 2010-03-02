@@ -21,6 +21,6 @@ package org.openiaml.model.model;
  * @model
  * @generated
  */
-public interface EventTrigger extends NamedElement, WireEdgesSource {
+public interface EventTrigger extends NamedElement, WireSource {
 	
 } // EventTrigger

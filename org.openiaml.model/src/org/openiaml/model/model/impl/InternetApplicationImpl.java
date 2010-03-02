@@ -32,7 +32,7 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.Scope;
-import org.openiaml.model.model.WireEdge;
+import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ConstraintEdge;
 import org.openiaml.model.model.wires.ExtendsEdge;
@@ -182,7 +182,7 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<WireEdge> wires;
+	protected EList<Wire> wires;
 
 	/**
 	 * The cached value of the '{@link #getParameterEdges() <em>Parameter Edges</em>}' containment reference list.
@@ -476,9 +476,9 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<WireEdge> getWires() {
+	public EList<Wire> getWires() {
 		if (wires == null) {
-			wires = new EObjectContainmentEList<WireEdge>(WireEdge.class, this, ModelPackage.INTERNET_APPLICATION__WIRES);
+			wires = new EObjectContainmentEList<Wire>(Wire.class, this, ModelPackage.INTERNET_APPLICATION__WIRES);
 		}
 		return wires;
 	}
@@ -813,7 +813,7 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return;
 			case ModelPackage.INTERNET_APPLICATION__WIRES:
 				getWires().clear();
-				getWires().addAll((Collection<? extends WireEdge>)newValue);
+				getWires().addAll((Collection<? extends Wire>)newValue);
 				return;
 			case ModelPackage.INTERNET_APPLICATION__PARAMETER_EDGES:
 				getParameterEdges().clear();

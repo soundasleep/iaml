@@ -6,7 +6,7 @@
  */
 package org.openiaml.model.model.wires;
 
-import org.openiaml.model.model.WireEdge;
+import org.openiaml.model.model.Wire;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,5 +23,5 @@ import org.openiaml.model.model.WireEdge;
  *        annotation="http://openiaml.org/comment comment='why do we have SingleWire at all? (following a design pattern?)' changed='0.4.2 to abstract'"
  * @generated
  */
-public interface SingleWire extends WireEdge {
+public interface SingleWire extends Wire {
 } // SingleWire

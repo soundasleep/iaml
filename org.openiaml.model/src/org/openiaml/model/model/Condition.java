@@ -24,5 +24,5 @@ import org.openiaml.model.model.wires.ConditionEdgesSource;
  *        annotation="http://openiaml.org/comment comment='added in 0.2'"
  * @generated
  */
-public interface Condition extends WireEdgesSource, DataFlowEdgesSource, NamedElement, ConditionEdgesSource {
+public interface Condition extends WireSource, DataFlowEdgesSource, NamedElement, ConditionEdgesSource {
 } // Condition

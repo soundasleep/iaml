@@ -10,15 +10,15 @@
     <genClasses image="false" ecoreClass="iaml.ecore#//NamedElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//NamedElement/name"/>
     </genClasses>
-    <genClasses ecoreClass="iaml.ecore#//WireEdge">
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference iaml.ecore#//WireEdge/from"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//WireEdge/to"/>
+    <genClasses image="false" ecoreClass="iaml.ecore#//Wire">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//Wire/from"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//Wire/to"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="iaml.ecore#//WireEdgeDestination">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//WireEdgeDestination/inEdges"/>
+    <genClasses image="false" ecoreClass="iaml.ecore#//WireDestination">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//WireDestination/inWires"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="iaml.ecore#//WireEdgesSource">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//WireEdgesSource/outEdges"/>
+    <genClasses image="false" ecoreClass="iaml.ecore#//WireSource">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//WireSource/outWires"/>
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//EventTrigger"/>
     <genClasses image="false" ecoreClass="iaml.ecore#//ContainsEventTriggers">

@@ -7,7 +7,7 @@
 package org.openiaml.model.model.wires.impl;
 
 import org.eclipse.emf.ecore.EClass;
-import org.openiaml.model.model.impl.WireEdgeImpl;
+import org.openiaml.model.model.impl.WireImpl;
 import org.openiaml.model.model.wires.SingleWire;
 import org.openiaml.model.model.wires.WiresPackage;
 
@@ -20,7 +20,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  *
  * @generated
  */
-public abstract class SingleWireImpl extends WireEdgeImpl implements SingleWire {
+public abstract class SingleWireImpl extends WireImpl implements SingleWire {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -11,8 +11,8 @@ import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Scope;
-import org.openiaml.model.model.WireEdgeDestination;
-import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.WireDestination;
+import org.openiaml.model.model.WireSource;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,6 +28,6 @@ import org.openiaml.model.model.WireEdgesSource;
  * @model annotation="http://openiaml.org/comment changed='0.4: no longer extends VisibleThing; now extends ContainsEventTriggers, ContainsConditions, WireEdgesSource and WireEdgeDestination\r\n0.4.2 removed \'agents\' reference'"
  * @generated
  */
-public interface Session extends NamedElement, ContainsOperations, Scope, ContainsWires, WireEdgesSource, WireEdgeDestination, ContainsConditions {
+public interface Session extends NamedElement, ContainsOperations, Scope, ContainsWires, WireSource, WireDestination, ContainsConditions {
 
 } // Session

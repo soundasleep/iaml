@@ -214,22 +214,22 @@ public interface ScopesPackage extends EPackage {
 	int SESSION__SCOPES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 10;
 
 	/**
-	 * The feature id for the '<em><b>Out Edges</b></em>' reference list.
+	 * The feature id for the '<em><b>Out Wires</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SESSION__OUT_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 11;
+	int SESSION__OUT_WIRES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 11;
 
 	/**
-	 * The feature id for the '<em><b>In Edges</b></em>' reference list.
+	 * The feature id for the '<em><b>In Wires</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SESSION__IN_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 12;
+	int SESSION__IN_WIRES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.

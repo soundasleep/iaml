@@ -15,8 +15,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.ModelPackage;
-import org.openiaml.model.model.WireEdge;
-import org.openiaml.model.model.WireEdgeDestination;
+import org.openiaml.model.model.Wire;
+import org.openiaml.model.model.WireDestination;
 import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ConditionEdgeDestination;
 import org.openiaml.model.model.wires.ParameterEdge;
@@ -31,7 +31,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.openiaml.model.model.wires.impl.SyncWireImpl#getInEdges <em>In Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.wires.impl.SyncWireImpl#getInWires <em>In Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.SyncWireImpl#getInParameterEdges <em>In Parameter Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.SyncWireImpl#getInConditionEdges <em>In Condition Edges</em>}</li>
  * </ul>
@@ -41,14 +41,14 @@ import org.openiaml.model.model.wires.WiresPackage;
  */
 public class SyncWireImpl extends CompositeWireImpl implements SyncWire {
 	/**
-	 * The cached value of the '{@link #getInEdges() <em>In Edges</em>}' reference list.
+	 * The cached value of the '{@link #getInWires() <em>In Wires</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getInEdges()
+	 * @see #getInWires()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<WireEdge> inEdges;
+	protected EList<Wire> inWires;
 
 	/**
 	 * The cached value of the '{@link #getInParameterEdges() <em>In Parameter Edges</em>}' reference list.
@@ -94,11 +94,11 @@ public class SyncWireImpl extends CompositeWireImpl implements SyncWire {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<WireEdge> getInEdges() {
-		if (inEdges == null) {
-			inEdges = new EObjectWithInverseResolvingEList<WireEdge>(WireEdge.class, this, WiresPackage.SYNC_WIRE__IN_EDGES, ModelPackage.WIRE_EDGE__TO);
+	public EList<Wire> getInWires() {
+		if (inWires == null) {
+			inWires = new EObjectWithInverseResolvingEList<Wire>(Wire.class, this, WiresPackage.SYNC_WIRE__IN_WIRES, ModelPackage.WIRE__TO);
 		}
-		return inEdges;
+		return inWires;
 	}
 
 	/**
@@ -134,8 +134,8 @@ public class SyncWireImpl extends CompositeWireImpl implements SyncWire {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case WiresPackage.SYNC_WIRE__IN_EDGES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInEdges()).basicAdd(otherEnd, msgs);
+			case WiresPackage.SYNC_WIRE__IN_WIRES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInWires()).basicAdd(otherEnd, msgs);
 			case WiresPackage.SYNC_WIRE__IN_PARAMETER_EDGES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInParameterEdges()).basicAdd(otherEnd, msgs);
 			case WiresPackage.SYNC_WIRE__IN_CONDITION_EDGES:
@@ -152,8 +152,8 @@ public class SyncWireImpl extends CompositeWireImpl implements SyncWire {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case WiresPackage.SYNC_WIRE__IN_EDGES:
-				return ((InternalEList<?>)getInEdges()).basicRemove(otherEnd, msgs);
+			case WiresPackage.SYNC_WIRE__IN_WIRES:
+				return ((InternalEList<?>)getInWires()).basicRemove(otherEnd, msgs);
 			case WiresPackage.SYNC_WIRE__IN_PARAMETER_EDGES:
 				return ((InternalEList<?>)getInParameterEdges()).basicRemove(otherEnd, msgs);
 			case WiresPackage.SYNC_WIRE__IN_CONDITION_EDGES:
@@ -170,8 +170,8 @@ public class SyncWireImpl extends CompositeWireImpl implements SyncWire {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case WiresPackage.SYNC_WIRE__IN_EDGES:
-				return getInEdges();
+			case WiresPackage.SYNC_WIRE__IN_WIRES:
+				return getInWires();
 			case WiresPackage.SYNC_WIRE__IN_PARAMETER_EDGES:
 				return getInParameterEdges();
 			case WiresPackage.SYNC_WIRE__IN_CONDITION_EDGES:
@@ -189,9 +189,9 @@ public class SyncWireImpl extends CompositeWireImpl implements SyncWire {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case WiresPackage.SYNC_WIRE__IN_EDGES:
-				getInEdges().clear();
-				getInEdges().addAll((Collection<? extends WireEdge>)newValue);
+			case WiresPackage.SYNC_WIRE__IN_WIRES:
+				getInWires().clear();
+				getInWires().addAll((Collection<? extends Wire>)newValue);
 				return;
 			case WiresPackage.SYNC_WIRE__IN_PARAMETER_EDGES:
 				getInParameterEdges().clear();
@@ -213,8 +213,8 @@ public class SyncWireImpl extends CompositeWireImpl implements SyncWire {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case WiresPackage.SYNC_WIRE__IN_EDGES:
-				getInEdges().clear();
+			case WiresPackage.SYNC_WIRE__IN_WIRES:
+				getInWires().clear();
 				return;
 			case WiresPackage.SYNC_WIRE__IN_PARAMETER_EDGES:
 				getInParameterEdges().clear();
@@ -234,8 +234,8 @@ public class SyncWireImpl extends CompositeWireImpl implements SyncWire {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case WiresPackage.SYNC_WIRE__IN_EDGES:
-				return inEdges != null && !inEdges.isEmpty();
+			case WiresPackage.SYNC_WIRE__IN_WIRES:
+				return inWires != null && !inWires.isEmpty();
 			case WiresPackage.SYNC_WIRE__IN_PARAMETER_EDGES:
 				return inParameterEdges != null && !inParameterEdges.isEmpty();
 			case WiresPackage.SYNC_WIRE__IN_CONDITION_EDGES:
@@ -251,9 +251,9 @@ public class SyncWireImpl extends CompositeWireImpl implements SyncWire {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == WireEdgeDestination.class) {
+		if (baseClass == WireDestination.class) {
 			switch (derivedFeatureID) {
-				case WiresPackage.SYNC_WIRE__IN_EDGES: return ModelPackage.WIRE_EDGE_DESTINATION__IN_EDGES;
+				case WiresPackage.SYNC_WIRE__IN_WIRES: return ModelPackage.WIRE_DESTINATION__IN_WIRES;
 				default: return -1;
 			}
 		}
@@ -279,9 +279,9 @@ public class SyncWireImpl extends CompositeWireImpl implements SyncWire {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == WireEdgeDestination.class) {
+		if (baseClass == WireDestination.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.WIRE_EDGE_DESTINATION__IN_EDGES: return WiresPackage.SYNC_WIRE__IN_EDGES;
+				case ModelPackage.WIRE_DESTINATION__IN_WIRES: return WiresPackage.SYNC_WIRE__IN_WIRES;
 				default: return -1;
 			}
 		}

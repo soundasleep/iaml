@@ -241,7 +241,7 @@
          </object>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_Frame"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2026,2028,2002,2003,2004,2005,2025,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2029"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2029,2028,2002,2003,2004,2005,2025,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2030"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4002,4011,4004,4005,4006,4014,4008,4012,4013"/>
       </viewProvider>
    </extension>
@@ -254,13 +254,13 @@
             <method name="getType()" value="Iaml_Frame"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
-            <method name="getType()" value="2026,2028,2002,2003,2004,2005,2025,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2029"/>
+            <method name="getType()" value="2029,2028,2002,2003,2004,2005,2025,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2030"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
             <method name="getType()" value="4001,4002,4011,4004,4005,4006,4014,4008,4012,4013"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5047,5048,5049,5053,5054,5055,5003,5004,5005,5006,5007,5008,5009,5010,5044,5045,5046,5014,5015,5016,5017,5018,5019,5020,5021,5022,5023,5024,5025,5026,5027,5028,5029,5030,5031,5032,5033,5034,5035,5036,5037,5038,5039,5040,5041,5042,5043,5056,5057,5058"/>
+            <method name="getType()" value="5056,5057,5058,5053,5054,5055,5003,5004,5005,5006,5007,5008,5009,5010,5044,5045,5046,5014,5015,5016,5017,5018,5019,5020,5021,5022,5023,5024,5025,5026,5027,5028,5029,5030,5031,5032,5033,5034,5035,5036,5037,5038,5039,5040,5041,5042,5043,5059,5060,5061"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value=""/>
@@ -274,7 +274,7 @@
       <modelingAssistantProvider class="org.openiaml.model.diagram.frame.providers.IamlModelingAssistantProvider">
          <Priority name="Lowest"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.FrameEditPart" id="Frame_1000"/>
-         <object class="org.openiaml.model.diagram.frame.edit.parts.EventTriggerEditPart" id="EventTrigger_2026"/>
+         <object class="org.openiaml.model.diagram.frame.edit.parts.EventTrigger3EditPart" id="EventTrigger_2029"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.EventTrigger2EditPart" id="EventTrigger_2028"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.CompositeOperationEditPart" id="CompositeOperation_2002"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.PrimitiveOperationEditPart" id="PrimitiveOperation_2003"/>
@@ -299,8 +299,8 @@
          <object class="org.openiaml.model.diagram.frame.edit.parts.EntryGateEditPart" id="EntryGate_2022"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.ExitGateEditPart" id="ExitGate_2023"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.LabelEditPart" id="Label_2024"/>
-         <object class="org.openiaml.model.diagram.frame.edit.parts.EventTrigger3EditPart" id="EventTrigger_2029"/>
-         <context elements="Frame_1000,EventTrigger_2026,EventTrigger_2028,CompositeOperation_2002,PrimitiveOperation_2003,DomainObject_2004,DomainAttribute_2005,Property_2025,Frame_2007,InputForm_2008,InputTextField_2009,StaticValue_2010,Session_2011,LoginHandler_2012,CompositeCondition_2013,DomainObjectInstance_2014,DomainAttributeInstance_2015,Button_2016,QueryParameter_2017,AccessControlHandler_2018,Permission_2019,Role_2020,UserInstance_2021,EntryGate_2022,ExitGate_2023,Label_2024,EventTrigger_2029"/>
+         <object class="org.openiaml.model.diagram.frame.edit.parts.EventTriggerEditPart" id="EventTrigger_2030"/>
+         <context elements="Frame_1000,EventTrigger_2029,EventTrigger_2028,CompositeOperation_2002,PrimitiveOperation_2003,DomainObject_2004,DomainAttribute_2005,Property_2025,Frame_2007,InputForm_2008,InputTextField_2009,StaticValue_2010,Session_2011,LoginHandler_2012,CompositeCondition_2013,DomainObjectInstance_2014,DomainAttributeInstance_2015,Button_2016,QueryParameter_2017,AccessControlHandler_2018,Permission_2019,Role_2020,UserInstance_2021,EntryGate_2022,ExitGate_2023,Label_2024,EventTrigger_2030"/>
       </modelingAssistantProvider>
    </extension>
 
@@ -323,7 +323,7 @@
       <decoratorProvider class="org.openiaml.model.diagram.frame.providers.IamlShortcutsDecoratorProvider">
          <Priority name="Lowest"/>
          <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
-            <method name="getType()" value="2026,2028,2002,2003,2004,2005,2025,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2029"/>
+            <method name="getType()" value="2029,2028,2002,2003,2004,2005,2025,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2030"/>
          </object>
          <context decoratorTargets="generated-top-nodes"/>
       </decoratorProvider>
@@ -343,12 +343,12 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
-               id="org.openiaml.model.diagram.frame.EventTrigger_2026"
-               name="%metatype.name.EventTrigger_2026"
+               id="org.openiaml.model.diagram.frame.EventTrigger_2029"
+               name="%metatype.name.EventTrigger_2029"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="EventTrigger"
                edithelper="org.openiaml.model.diagram.frame.edit.helpers.EventTriggerEditHelper">
-            <param name="semanticHint" value="2026"/>
+            <param name="semanticHint" value="2029"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.4">
@@ -356,7 +356,7 @@
                id="org.openiaml.model.diagram.frame.EventTrigger_2028"
                name="%metatype.name.EventTrigger_2028"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
-            <specializes id="org.openiaml.model.diagram.frame.EventTrigger_2026"/>
+            <specializes id="org.openiaml.model.diagram.frame.EventTrigger_2029"/>
             <param name="semanticHint" value="2028"/>
          </specializationType>
       </metamodel>
@@ -591,11 +591,11 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.4">
          <specializationType
-               id="org.openiaml.model.diagram.frame.EventTrigger_2029"
-               name="%metatype.name.EventTrigger_2029"
+               id="org.openiaml.model.diagram.frame.EventTrigger_2030"
+               name="%metatype.name.EventTrigger_2030"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
-            <specializes id="org.openiaml.model.diagram.frame.EventTrigger_2026"/>
-            <param name="semanticHint" value="2029"/>
+            <specializes id="org.openiaml.model.diagram.frame.EventTrigger_2029"/>
+            <param name="semanticHint" value="2030"/>
          </specializationType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
@@ -711,7 +711,7 @@
       </clientContext> 
       <binding context="org.openiaml.model.diagram.frame.TypeContext">
          <elementType ref="org.openiaml.model.diagram.frame.Frame_1000"/>
-         <elementType ref="org.openiaml.model.diagram.frame.EventTrigger_2026"/>
+         <elementType ref="org.openiaml.model.diagram.frame.EventTrigger_2029"/>
          <elementType ref="org.openiaml.model.diagram.frame.EventTrigger_2028"/>
          <elementType ref="org.openiaml.model.diagram.frame.CompositeOperation_2002"/>
          <elementType ref="org.openiaml.model.diagram.frame.PrimitiveOperation_2003"/>
@@ -736,7 +736,7 @@
          <elementType ref="org.openiaml.model.diagram.frame.EntryGate_2022"/>
          <elementType ref="org.openiaml.model.diagram.frame.ExitGate_2023"/>
          <elementType ref="org.openiaml.model.diagram.frame.Label_2024"/>
-         <elementType ref="org.openiaml.model.diagram.frame.EventTrigger_2029"/>
+         <elementType ref="org.openiaml.model.diagram.frame.EventTrigger_2030"/>
          <elementType ref="org.openiaml.model.diagram.frame.SyncWire_4001"/>
          <elementType ref="org.openiaml.model.diagram.frame.RunInstanceWire_4002"/>
          <elementType ref="org.openiaml.model.diagram.frame.ParameterEdge_4011"/>

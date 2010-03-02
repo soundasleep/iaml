@@ -550,7 +550,7 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//VisibleThing/onAccess"/>
+        href="iaml.ecore#//Accessible/onAccess"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//EventTrigger"/>
@@ -616,7 +616,7 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//VisibleThing/onEdit"/>
+        href="iaml.ecore#//Editable/onEdit"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//EventTrigger"/>

@@ -12,7 +12,7 @@ import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Property;
-import org.openiaml.model.model.WireEdge;
+import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
@@ -111,7 +111,7 @@ public class SessionNewDomainInstance extends InferenceTestCase {
 		assertGenerated(targetUpdate);
 
 		// email.edit --> target.update
-		Set<WireEdge> wires = assertHasWiresFromTo(1, session, edit, targetUpdate);
+		Set<Wire> wires = assertHasWiresFromTo(1, session, edit, targetUpdate);
 		RunInstanceWire targetRun = (RunInstanceWire) wires.iterator().next();
 		assertGenerated(targetRun);
 

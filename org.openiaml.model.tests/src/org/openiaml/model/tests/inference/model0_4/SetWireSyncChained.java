@@ -7,7 +7,7 @@ import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Property;
-import org.openiaml.model.model.WireEdge;
+import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ParameterEdgesSource;
@@ -72,9 +72,9 @@ public class SetWireSyncChained extends InferenceTestCase {
 		Operation init = assertHasOperation(target, "init");
 		assertGenerated(init);
 		
-		RunInstanceWire run = assertHasRunInstanceWire(root, onAccess, init, new Filter<WireEdge>() {
+		RunInstanceWire run = assertHasRunInstanceWire(root, onAccess, init, new Filter<Wire>() {
 			@Override
-			public boolean accept(WireEdge o) {
+			public boolean accept(Wire o) {
 				RunInstanceWire r = (RunInstanceWire) o;
 				if (r.getInParameterEdges().size() != 1)
 					return false;
@@ -121,9 +121,9 @@ public class SetWireSyncChained extends InferenceTestCase {
 		Operation init = assertHasOperation(target, "init");
 		assertGenerated(init);
 		
-		RunInstanceWire run = assertHasRunInstanceWire(root, onAccess, init, new Filter<WireEdge>() {
+		RunInstanceWire run = assertHasRunInstanceWire(root, onAccess, init, new Filter<Wire>() {
 			@Override
-			public boolean accept(WireEdge o) {
+			public boolean accept(Wire o) {
 				RunInstanceWire r = (RunInstanceWire) o;
 				if (r.getInParameterEdges().size() != 1)
 					return false;

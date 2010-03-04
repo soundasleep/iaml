@@ -11,7 +11,7 @@ import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
-import org.openiaml.model.model.WireEdge;
+import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.components.LoginHandlerTypes;
 import org.openiaml.model.model.scopes.Session;
@@ -84,10 +84,10 @@ public class LoginHandlerInstanceMultiple extends InferenceTestCase {
 		SelectWire select = null;
 		int selectWireCount = 0;
 		{
-			Set<WireEdge> wires2 = assertHasWiresFromTo(1, session, object, instance);
-			Iterator<WireEdge> it = wires2.iterator();
+			Set<Wire> wires2 = assertHasWiresFromTo(1, session, object, instance);
+			Iterator<Wire> it = wires2.iterator();
 			while (it.hasNext()) {
-				WireEdge w = it.next();
+				Wire w = it.next();
 				if (w instanceof SelectWire) {
 					selectWireCount++;
 					select = (SelectWire) w;

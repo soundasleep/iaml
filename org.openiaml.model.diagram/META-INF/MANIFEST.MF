@@ -5,7 +5,7 @@ Bundle-SymbolicName: org.openiaml.model.diagram; singleton:=true
 Bundle-Version: 0.4.3.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.openiaml.model.diagram.part.IamlDiagramEditorPlugin
-Bundle-Vendor: %providerName
+Bundle-Vendor: www.openiaml.org
 Bundle-Localization: plugin
 Export-Package: org.openiaml.model.diagram.edit.commands,
  org.openiaml.model.diagram.edit.helpers,

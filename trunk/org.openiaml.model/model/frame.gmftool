@@ -418,7 +418,7 @@
         collapsible="true">
       <tools
           xsi:type="gmftool:CreationTool"
-          title="onAccess"
+          title="EventTrigger [onAccess]"
           description="Create new EventTrigger">
         <smallIcon
             xsi:type="gmftool:BundleImage"
@@ -431,7 +431,7 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="onInit"
+          title="EventTrigger [onInit]"
           description="Create new EventTrigger">
         <smallIcon
             xsi:type="gmftool:BundleImage"

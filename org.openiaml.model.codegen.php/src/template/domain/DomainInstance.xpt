@@ -11,7 +11,7 @@
 /**
  * Domain instance methods. (Copied from Javascript. TODO refactor with code above)
  */
-«DEFINE domainInstanceCall(Boolean php, model::wires::RunInstanceWire wire, model::DomainObjectInstance object, model::visual::Frame currentFrame) FOR model::WireEdgeDestination»
+«DEFINE domainInstanceCall(Boolean php, model::wires::RunInstanceWire wire, model::DomainObjectInstance object, model::visual::Frame currentFrame) FOR model::WireDestination»
 	«EXPAND exception FOR throwException("Unexpected domain attribute run instance wire destination: " + this)»
 «ENDDEFINE»
 

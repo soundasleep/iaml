@@ -24,11 +24,11 @@ log_message("add_role.php: adding role_id=$role_id, instance_id=$instance_id");
 // need to resolve a user instance type from a given instance ID
 «FOREACH eAllContents.typeSelect(model::users::UserInstance) AS user»
 	if ($instance_id == '«safeNameString(user.id)-»') {
-	«IF !user.inEdges.typeSelect(model::wires::SelectWire).from.typeSelect(model::users::Role).isEmpty»
-		$user_instance_type = '«safeName(user.inEdges.typeSelect(model::wires::SelectWire).from.typeSelect(model::users::Role).first())»';
+	«IF !user.inWires.typeSelect(model::wires::SelectWire).from.typeSelect(model::users::Role).isEmpty»
+		$user_instance_type = '«safeName(user.inWires.typeSelect(model::wires::SelectWire).from.typeSelect(model::users::Role).first())»';
 	«ELSE»
-		«IF !user.inEdges.typeSelect(model::wires::NewInstanceWire).from.typeSelect(model::users::Role).isEmpty»
-			$user_instance_type = '«safeName(user.inEdges.typeSelect(model::wires::NewInstanceWire).from.typeSelect(model::users::Role).first())»';
+		«IF !user.inWires.typeSelect(model::wires::NewInstanceWire).from.typeSelect(model::users::Role).isEmpty»
+			$user_instance_type = '«safeName(user.inWires.typeSelect(model::wires::NewInstanceWire).from.typeSelect(model::users::Role).first())»';
 		«ELSE»
 			// no DomainObject source for '«safeNameString(user.id)»'
 		«ENDIF»

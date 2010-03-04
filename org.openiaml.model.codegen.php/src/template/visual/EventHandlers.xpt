@@ -22,7 +22,7 @@
 			«ENDIF»
 
 			// implicit operations
-			«EXPAND implicitButtonClickEvents(currentFrame) FOREACH outEdges-»
+			«EXPAND implicitButtonClickEvents(currentFrame) FOREACH outWires-»
 
 			return false;
 		}
@@ -48,7 +48,7 @@
  * If buttons have a NavigateWire or RunInstanceWire called onClick,
  * execute them as if there was an EventTrigger that existed.
  */
-«DEFINE implicitButtonClickEvents(model::visual::Frame currentFrame) FOR model::WireEdge»
+«DEFINE implicitButtonClickEvents(model::visual::Frame currentFrame) FOR model::Wire»
 «ENDDEFINE»
 
 «DEFINE implicitButtonClickEvents(model::visual::Frame currentFrame) FOR model::wires::NavigateWire»

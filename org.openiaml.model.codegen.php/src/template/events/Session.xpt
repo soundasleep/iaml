@@ -9,7 +9,7 @@
 	// Session EventTrigger «this» '«eventName»'
 	«IF eventName == "init" || eventName == "access"-»
 		// RunInstanceWires sorted by priority
-		«EXPAND template::operations::OperationCall::callOperation(true, false, currentFrame) FOREACH outEdges.typeSelect(model::wires::RunInstanceWire).sortBy(e|-e.priority)-»
+		«EXPAND template::operations::OperationCall::callOperation(true, false, currentFrame) FOREACH outWires.typeSelect(model::wires::RunInstanceWire).sortBy(e|-e.priority)-»
 	«ELSE-»
 		// I don't know what to do with frame event "«name»"
 	«ENDIF-»

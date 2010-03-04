@@ -66,16 +66,16 @@
 				store_object_instance_«safeName(eContainer)»("«safeNameString(name)-»", $arg0);
 			«ELSE»
 				/* not contained in an object instance; select it manually */
-				«IF inEdges.typeSelect(model::wires::SelectWire).isEmpty»
-					«IF inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
+				«IF inWires.typeSelect(model::wires::SelectWire).isEmpty»
+					«IF inWires.typeSelect(model::wires::NewInstanceWire).isEmpty»
 					throw new IamlRuntimeException("No selection wires exist for setting attribute instance '«safeNameString(id)-»'");
 					«ELSE»
 						// set the current "new" object
-						«EXPAND setNewDomainAttribute(inEdges.typeSelect(model::wires::NewInstanceWire).first()) FOR this»
+						«EXPAND setNewDomainAttribute(inWires.typeSelect(model::wires::NewInstanceWire).first()) FOR this»
 					«ENDIF»
 				«ELSE»
 					$attribute_name = "«safeNameString(name)-»";
-					«EXPAND evaluateSelectWireStore(currentFrame) FOR inEdges.typeSelect(model::wires::SelectWire).first()»
+					«EXPAND evaluateSelectWireStore(currentFrame) FOR inWires.typeSelect(model::wires::SelectWire).first()»
 				«ENDIF»
 			«ENDIF»
 		}
@@ -125,15 +125,15 @@
 «DEFINE storeDomainObject(model::visual::Frame currentFrame) FOR model::DomainObjectInstance-»
 	function store_object_instance_«safeName()»($attribute_name, $arg0) {
 		/* store a value into object id '«id»' */
-		«IF inEdges.typeSelect(model::wires::SelectWire).isEmpty»
-			«IF inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
+		«IF inWires.typeSelect(model::wires::SelectWire).isEmpty»
+			«IF inWires.typeSelect(model::wires::NewInstanceWire).isEmpty»
 				throw new IamlRuntimeException("No selection wires exist for setting object instance '«id»'");
 			«ELSE»
 				// set the current "new" object
-				«EXPAND setNewDomainObject(inEdges.typeSelect(model::wires::NewInstanceWire).first()) FOR this»
+				«EXPAND setNewDomainObject(inWires.typeSelect(model::wires::NewInstanceWire).first()) FOR this»
 			«ENDIF»
 		«ELSE»
-			«EXPAND evaluateSelectWireStore(currentFrame) FOR inEdges.typeSelect(model::wires::SelectWire).first()»
+			«EXPAND evaluateSelectWireStore(currentFrame) FOR inWires.typeSelect(model::wires::SelectWire).first()»
 		«ENDIF»
 	}
 	

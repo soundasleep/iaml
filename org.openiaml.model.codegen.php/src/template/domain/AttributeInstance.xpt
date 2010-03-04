@@ -5,7 +5,7 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE attributeInstanceCall(Boolean php, Boolean inStoreDb, model::wires::RunInstanceWire wire, model::DomainAttributeInstance attribute, model::visual::Frame currentFrame) FOR model::WireEdgeDestination»
+«DEFINE attributeInstanceCall(Boolean php, Boolean inStoreDb, model::wires::RunInstanceWire wire, model::DomainAttributeInstance attribute, model::visual::Frame currentFrame) FOR model::WireDestination»
 	«EXPAND exception FOR throwException("Unexpected domain attribute run instance wire destination: " + this)»
 «ENDDEFINE»
 

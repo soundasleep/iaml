@@ -62,8 +62,8 @@ echo_necessary_update_callbacks();
 		/* Property "«name-»" («id-») */
 		
 		«REM»expand the direct wires from the property«ENDREM»
-		«EXPAND directPropertyUpdatesFrom FOREACH outEdges»
-		«EXPAND directPropertyUpdatesTo FOREACH inEdges»
+		«EXPAND directPropertyUpdatesFrom FOREACH outWires»
+		«EXPAND directPropertyUpdatesTo FOREACH inWires»
 		
 		«REM»is this property used as the input for a SelectWire?«ENDREM»
 		«REM»is this property's parent used as the input for a SelectWire?«ENDREM»
@@ -73,9 +73,9 @@ echo_necessary_update_callbacks();
 	}
 «ENDDEFINE»
 
-«DEFINE directPropertyUpdatesFrom FOR model::WireEdge»
+«DEFINE directPropertyUpdatesFrom FOR model::Wire»
 «ENDDEFINE»
-«DEFINE directPropertyUpdatesTo FOR model::WireEdge»
+«DEFINE directPropertyUpdatesTo FOR model::Wire»
 «ENDDEFINE»
 
 «DEFINE directPropertyUpdatesFrom FOR model::wires::SyncWire»
@@ -98,11 +98,11 @@ echo_necessary_update_callbacks();
 «ENDDEFINE»
 
 «DEFINE potentialContainerUpdates FOR model::visual::InputTextField»
-	«EXPAND potentialUpdates FOREACH outEdges»
+	«EXPAND potentialUpdates FOREACH outWires»
 	«EXPAND potentialParameterUpdates FOREACH outParameterEdges»
 «ENDDEFINE»
 
-«DEFINE potentialUpdates FOR model::WireEdge»
+«DEFINE potentialUpdates FOR model::Wire»
 	«EXPAND exception FOR throwException("Unknown potential update wire edge: " + this)»
 «ENDDEFINE»
 
@@ -120,10 +120,10 @@ echo_necessary_update_callbacks();
 	«EXPAND potentialUpdatesParameter FOR to»
 «ENDDEFINE»
 
-«DEFINE potentialUpdatesParameter FOR model::WireEdgesSource»
+«DEFINE potentialUpdatesParameter FOR model::WireSource»
 	/* ignore «this» */
 «ENDDEFINE»
-«DEFINE potentialUpdatesParameter FOR model::WireEdgeDestination»
+«DEFINE potentialUpdatesParameter FOR model::WireDestination»
 	/* ignore «this» */
 «ENDDEFINE»
 «DEFINE potentialUpdatesParameter FOR model::wires::ParameterEdgeDestination»
@@ -135,7 +135,7 @@ echo_necessary_update_callbacks();
 	«EXPAND potentialUpdateDestination FOR to»
 «ENDDEFINE»
 
-«DEFINE potentialUpdateDestination FOR model::WireEdgeDestination»
+«DEFINE potentialUpdateDestination FOR model::WireDestination»
 	«EXPAND exception FOR throwException("Unknown update wire edge destination: " + this)»
 «ENDDEFINE»
 
@@ -144,25 +144,25 @@ echo_necessary_update_callbacks();
 	$object = get_object_instance_«safeName()»(); // parameters are from server-side
 	«EXPAND potentialUpdateDestinationAttributes FOREACH attributes»
 	
-	«EXPAND potentialUpdateDesinationWires FOREACH inEdges.typeSelect(model::wires::SyncWire)»
-	«EXPAND potentialUpdateDesinationWires FOREACH outEdges.typeSelect(model::wires::SyncWire)»
-	«EXPAND potentialUpdateDesinationWires FOREACH outEdges.typeSelect(model::wires::SetWire)»
+	«EXPAND potentialUpdateDesinationWires FOREACH inWires.typeSelect(model::wires::SyncWire)»
+	«EXPAND potentialUpdateDesinationWires FOREACH outWires.typeSelect(model::wires::SyncWire)»
+	«EXPAND potentialUpdateDesinationWires FOREACH outWires.typeSelect(model::wires::SetWire)»
 «ENDDEFINE»
 
 «DEFINE potentialUpdateDestination FOR model::DomainAttributeInstance»
 	/* DomainAttributeInstance "«this-»" */
 	$value = get_attribute_instance_«safeName()»(); // parameters are from server-side
-	«EXPAND potentialUpdateDesinationWires FOREACH inEdges.typeSelect(model::wires::SyncWire)»
-	«EXPAND potentialUpdateDesinationWires FOREACH outEdges.typeSelect(model::wires::SyncWire)»
-	«EXPAND potentialUpdateDesinationWires FOREACH outEdges.typeSelect(model::wires::SetWire)»
+	«EXPAND potentialUpdateDesinationWires FOREACH inWires.typeSelect(model::wires::SyncWire)»
+	«EXPAND potentialUpdateDesinationWires FOREACH outWires.typeSelect(model::wires::SyncWire)»
+	«EXPAND potentialUpdateDesinationWires FOREACH outWires.typeSelect(model::wires::SetWire)»
 «ENDDEFINE»
 
 «DEFINE potentialUpdateDestinationAttributes FOR model::DomainAttributeInstance»
 	/* attribute "«name»" («this») */
 	$value = $object["«safeNameString(name)-»"];
-	«EXPAND potentialUpdateDesinationWires FOREACH inEdges.typeSelect(model::wires::SyncWire)»
-	«EXPAND potentialUpdateDesinationWires FOREACH outEdges.typeSelect(model::wires::SyncWire)»
-	«EXPAND potentialUpdateDesinationWires FOREACH outEdges.typeSelect(model::wires::SetWire)»
+	«EXPAND potentialUpdateDesinationWires FOREACH inWires.typeSelect(model::wires::SyncWire)»
+	«EXPAND potentialUpdateDesinationWires FOREACH outWires.typeSelect(model::wires::SyncWire)»
+	«EXPAND potentialUpdateDesinationWires FOREACH outWires.typeSelect(model::wires::SetWire)»
 «ENDDEFINE»
 
 «DEFINE potentialUpdateDesinationWires FOR model::wires::SyncWire»
@@ -175,9 +175,9 @@ echo_necessary_update_callbacks();
 	«EXPAND outgoingValue FOR to»
 «ENDDEFINE»
 
-«DEFINE outgoingValue FOR model::WireEdgesSource»
+«DEFINE outgoingValue FOR model::WireSource»
 «ENDDEFINE»
-«DEFINE outgoingValue FOR model::WireEdgeDestination»
+«DEFINE outgoingValue FOR model::WireDestination»
 «ENDDEFINE»
 «DEFINE outgoingValue FOR model::visual::InputTextField»
 	«EXPAND outgoingValue FOREACH properties.select(e|e.name=="fieldValue")»

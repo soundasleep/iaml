@@ -52,7 +52,7 @@
 		throw new IamlRuntimeException("Unexpected empty UserInstance '«user.name»'; has the user logged in?");
 
 	«FOREACH outRequiresEdges.to.typeSelect(model::users::Role) AS targetRole»
-		«LET user.inEdges.typeSelect(model::wires::SelectWire).from.typeSelect(model::DomainObject).first() AS initialRole»
+		«LET user.inWires.typeSelect(model::wires::SelectWire).from.typeSelect(model::DomainObject).first() AS initialRole»
 			/* check role '«targetRole.name»' */
 			if (cast_«safeName(initialRole)»_as_«safeName(targetRole)»($instance) == null) {
 				// user cannot be cast as this role
@@ -68,14 +68,14 @@
 	«FOREACH outRequiresEdges.to.typeSelect(model::users::Permission) AS targetPermission»
 		/* permission '«targetPermission.name»' */
 		if (
-		«IF user.inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
-			«IF user.inEdges.typeSelect(model::wires::SelectWire).isEmpty»
+		«IF user.inWires.typeSelect(model::wires::NewInstanceWire).isEmpty»
+			«IF user.inWires.typeSelect(model::wires::SelectWire).isEmpty»
 				«EXPAND exception FOR throwException("Cannot deduce the instance type of UserInstance: " + user)»
 			«ELSE»
-				user_instance_«safeName(user.inEdges.typeSelect(model::wires::SelectWire).from.first())»_has_permission_«safeName(targetPermission)»
+				user_instance_«safeName(user.inWires.typeSelect(model::wires::SelectWire).from.first())»_has_permission_«safeName(targetPermission)»
 			«ENDIF»
 		«ELSE»
-			user_instance_«safeName(user.inEdges.typeSelect(model::wires::NewInstanceWire).from.first())»_has_permission_«safeName(targetPermission)»
+			user_instance_«safeName(user.inWires.typeSelect(model::wires::NewInstanceWire).from.first())»_has_permission_«safeName(targetPermission)»
 		«ENDIF»
 		($instance)) {
 			// user has permission

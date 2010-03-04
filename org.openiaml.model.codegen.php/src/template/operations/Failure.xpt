@@ -5,7 +5,7 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE failWire(Boolean php) FOR model::WireEdge-»
+«DEFINE failWire(Boolean php) FOR model::Wire-»
 	«EXPAND exception FOR throwException("Cannot expand the fail edge '" + this + "'")»
 «ENDDEFINE»
 

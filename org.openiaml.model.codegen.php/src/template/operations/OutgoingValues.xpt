@@ -8,7 +8,7 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE outgoingValues(model::NamedElement container) FOR model::WireEdge»
+«DEFINE outgoingValues(model::NamedElement container) FOR model::Wire»
 	«EXPAND exception FOR throwException("Unexpected outgoingValue wire: '" + this + "'")»
 «ENDDEFINE»
 
@@ -23,9 +23,9 @@
 «ENDDEFINE»
 
 /* ignore: todo refactor */
-«DEFINE outgoingValue(model::NamedElement container) FOR model::WireEdgesSource»
+«DEFINE outgoingValue(model::NamedElement container) FOR model::WireSource»
 «ENDDEFINE»
-«DEFINE outgoingValue(model::NamedElement container) FOR model::WireEdgeDestination»
+«DEFINE outgoingValue(model::NamedElement container) FOR model::WireDestination»
 «ENDDEFINE»
 «DEFINE outgoingValue(model::NamedElement container) FOR model::DataFlowEdgesSource»
 «ENDDEFINE»

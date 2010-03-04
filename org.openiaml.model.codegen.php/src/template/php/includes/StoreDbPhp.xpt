@@ -250,7 +250,7 @@ echo_necessary_update_callbacks();
  */
 «DEFINE expandDomainAttributeEvents FOR model::EventTrigger»
 	«IF name=="edit"»
-		«EXPAND template::operations::OperationCall::callOperation(true, true, null) FOREACH outEdges»
+		«EXPAND template::operations::OperationCall::callOperation(true, true, null) FOREACH outWires»
 	«ENDIF»
 «ENDDEFINE»
 

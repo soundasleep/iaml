@@ -8,7 +8,7 @@
 /**
  * Called from JS.
  */
-«DEFINE remotePropertiesValue(boolean require, model::WireEdge wire, model::Property property) FOR model::DomainAttribute»
+«DEFINE remotePropertiesValue(boolean require, model::Wire wire, model::Property property) FOR model::DomainAttribute»
 	<?php 
 		// remote parameter source from a .properties file
 		$db_type = "FileDomainObject";

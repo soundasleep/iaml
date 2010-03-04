@@ -6,7 +6,7 @@
 «EXTENSION template::GeneratorExtensions»
 
 /* default: don't know what to do */
-«DEFINE callOperation(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::WireEdge»
+«DEFINE callOperation(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::Wire»
 	«EXPAND exception FOR throwException("Unknown wire to expand: " + this)»
 «ENDDEFINE»
 
@@ -118,7 +118,7 @@
 	«EXPAND navigateTo(php, inStoreDb, currentFrame, this) FOR to» 
 «ENDDEFINE»
 
-«DEFINE navigateTo(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame, model::wires::NavigateWire wire) FOR model::WireEdgeDestination»
+«DEFINE navigateTo(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame, model::wires::NavigateWire wire) FOR model::WireDestination»
 	«EXPAND exception FOR throwException("Unknown NavigateWire destination: " + this)»
 «ENDDEFINE»
 

@@ -11,7 +11,7 @@ import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.StaticValue;
-import org.openiaml.model.model.WireEdge;
+import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.components.LoginHandlerTypes;
 import org.openiaml.model.model.scopes.Session;
@@ -69,7 +69,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 
 		// handler logout--> home
 		{
-			Set<WireEdge> wires = assertHasWiresFromTo(1, handler, handler, page);
+			Set<Wire> wires = assertHasWiresFromTo(1, handler, handler, page);
 			NavigateWire nav = (NavigateWire) wires.iterator().next();
 			assertNotGenerated(nav);
 			assertEquals("logout", nav.getName());
@@ -77,7 +77,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 
 		// handler login--> viewkey
 		{
-			Set<WireEdge> wires = assertHasWiresFromTo(1, handler, handler, viewkey);
+			Set<Wire> wires = assertHasWiresFromTo(1, handler, handler, viewkey);
 			NavigateWire nav = (NavigateWire) wires.iterator().next();
 			assertNotGenerated(nav);
 			assertEquals("login", nav.getName());
@@ -85,7 +85,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 
 		// handler set--> key
 		{
-			Set<WireEdge> wires = assertHasWiresFromTo(1, handler, handler, key);
+			Set<Wire> wires = assertHasWiresFromTo(1, handler, handler, key);
 			SetWire nav = (SetWire) wires.iterator().next();
 			assertNotGenerated(nav);
 			assertEquals("set", nav.getName());
@@ -108,7 +108,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 
 		Operation check = assertHasOperation(session, "check key");
 		EventTrigger access = viewkey.getOnAccess();
-		Set<WireEdge> w = assertHasWiresFromTo(1, session, access, check);
+		Set<Wire> w = assertHasWiresFromTo(1, session, access, check);
 		{
 			RunInstanceWire run = (RunInstanceWire) w.iterator().next();
 			assertGenerated(run);
@@ -132,7 +132,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 
 		Operation op = assertHasOperation(session, "do logout");
 		EventTrigger access = page.getOnAccess();
-		Set<WireEdge> w = assertHasWiresFromTo(1, session, access, op);
+		Set<Wire> w = assertHasWiresFromTo(1, session, access, op);
 		{
 			RunInstanceWire run = (RunInstanceWire) w.iterator().next();
 			assertGenerated(run);
@@ -159,7 +159,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		assertNotGenerated(target);
 
 		EventTrigger access = page.getOnAccess();
-		Set<WireEdge> w = assertHasWiresFromTo(1, session, access, target);
+		Set<Wire> w = assertHasWiresFromTo(1, session, access, target);
 		{
 			NavigateWire nav = (NavigateWire) w.iterator().next();
 			assertGenerated(nav);
@@ -222,7 +222,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		assertGenerated(op);
 
 		// button has an 'onClick' run wire
-		Set<WireEdge> w = assertHasWiresFromTo(1, root, button, op);
+		Set<Wire> w = assertHasWiresFromTo(1, root, button, op);
 		RunInstanceWire run = (RunInstanceWire) w.iterator().next();
 		assertGenerated(run);
 		assertEquals("onClick", run.getName());
@@ -253,7 +253,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		// destination page
 		Frame login = assertHasFrame(root, "login");
 		{
-			Set<WireEdge> wires = assertHasWiresFromTo(1, root, check, login);
+			Set<Wire> wires = assertHasWiresFromTo(1, root, check, login);
 			NavigateWire wire = (NavigateWire) wires.iterator().next();
 			assertEquals("fail", wire.getName());
 			assertGenerated(wire);

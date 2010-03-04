@@ -40,9 +40,9 @@ import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.VisibleThing;
-import org.openiaml.model.model.WireEdge;
-import org.openiaml.model.model.WireEdgeDestination;
-import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.Wire;
+import org.openiaml.model.model.WireDestination;
+import org.openiaml.model.model.WireSource;
 import org.openiaml.model.model.components.AccessControlHandler;
 import org.openiaml.model.model.components.EntryGate;
 import org.openiaml.model.model.components.ExitGate;
@@ -104,9 +104,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	/**
 	 * A filter that accepts everything.
 	 */
-	public static final Filter<WireEdge> ALL = new Filter<WireEdge>() {
+	public static final Filter<Wire> ALL = new Filter<Wire>() {
 		@Override
-		public boolean accept(WireEdge o) {
+		public boolean accept(Wire o) {
 			return true;
 		}
 	};
@@ -867,8 +867,8 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public SyncWire assertHasSyncWire(EObject container, WireEdgesSource element1, WireEdgeDestination element2, String name) throws JaxenException {
-		Set<WireEdge> x = assertHasWiresBidirectional(1, container, element1, element2, SyncWire.class);
+	public SyncWire assertHasSyncWire(EObject container, WireSource element1, WireDestination element2, String name) throws JaxenException {
+		Set<Wire> x = assertHasWiresBidirectional(1, container, element1, element2, SyncWire.class);
 		assertEquals(1, x.size());
 		SyncWire sw = (SyncWire) x.iterator().next();
 		assertEquals(name, sw.getName());
@@ -881,8 +881,8 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public SyncWire assertHasSyncWire(EObject container, WireEdgesSource element1, WireEdgeDestination element2) throws JaxenException {
-		Set<WireEdge> x = assertHasWiresBidirectional(1, container, element1, element2, SyncWire.class);
+	public SyncWire assertHasSyncWire(EObject container, WireSource element1, WireDestination element2) throws JaxenException {
+		Set<Wire> x = assertHasWiresBidirectional(1, container, element1, element2, SyncWire.class);
 		assertEquals(1, x.size());
 		SyncWire sw = (SyncWire) x.iterator().next();
 		return sw;
@@ -894,7 +894,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public SetWire assertHasSetWire(EObject container, WireEdgesSource from, WireEdgeDestination to) throws JaxenException {
+	public SetWire assertHasSetWire(EObject container, WireSource from, WireDestination to) throws JaxenException {
 		return (SetWire) assertHasWireFromTo(container, from, to, SetWire.class, ALL);
 	}
 	
@@ -940,7 +940,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public RunInstanceWire assertHasRunInstanceWire(EObject container, WireEdgesSource from, WireEdgeDestination to, String name) throws JaxenException {
+	public RunInstanceWire assertHasRunInstanceWire(EObject container, WireSource from, WireDestination to, String name) throws JaxenException {
 		return (RunInstanceWire) assertHasWireFromTo(container, from, to, 
 				RunInstanceWire.class, name, ALL);
 	}
@@ -951,7 +951,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public RunInstanceWire assertHasRunInstanceWire(EObject container, WireEdgesSource from, WireEdgeDestination to) throws JaxenException {
+	public RunInstanceWire assertHasRunInstanceWire(EObject container, WireSource from, WireDestination to) throws JaxenException {
 		return (RunInstanceWire) assertHasWireFromTo(container, from, to, 
 				RunInstanceWire.class, ALL);
 	}
@@ -962,7 +962,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public RunInstanceWire assertHasRunInstanceWire(EObject container, WireEdgesSource from, WireEdgeDestination to, Filter<WireEdge> filter) throws JaxenException {
+	public RunInstanceWire assertHasRunInstanceWire(EObject container, WireSource from, WireDestination to, Filter<Wire> filter) throws JaxenException {
 		return (RunInstanceWire) assertHasWireFromTo(container, from, to, 
 				RunInstanceWire.class, filter);
 	}
@@ -973,7 +973,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public SetWire assertHasSetWire(EObject container, WireEdgesSource from, WireEdgeDestination to, String name) throws JaxenException {
+	public SetWire assertHasSetWire(EObject container, WireSource from, WireDestination to, String name) throws JaxenException {
 		return (SetWire) assertHasWireFromTo(container, from, to, 
 				SetWire.class, name, ALL);
 	}
@@ -982,7 +982,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * Assert <em>no</em> unidirectional SetWire exists between
 	 * the given elements.
 	 */
-	public void assertHasNoSetWire(EObject container, WireEdgesSource from, WireEdgeDestination to) throws JaxenException {
+	public void assertHasNoSetWire(EObject container, WireSource from, WireDestination to) throws JaxenException {
 		assertHasNoWiresFromTo(container, from, to, SetWire.class);
 	}
 	
@@ -991,8 +991,8 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * Assert <em>no</em> bidirectional SyncWire exists between
 	 * the given elements.
 	 */
-	public void assertHasNoSyncWire(EObject container, WireEdgesSource from, WireEdgeDestination to) throws JaxenException {
-		Set<WireEdge> wires = getWiresBidirectional(container, from, to, SyncWire.class);
+	public void assertHasNoSyncWire(EObject container, WireSource from, WireDestination to) throws JaxenException {
+		Set<Wire> wires = getWiresBidirectional(container, from, to, SyncWire.class);
 		assertEquals("Unexpected SyncWires found: " + wires, 0, wires.size());
 	}
 	
@@ -1002,7 +1002,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public SelectWire assertHasSelectWire(EObject container, WireEdgesSource from, WireEdgeDestination to, String name) throws JaxenException {
+	public SelectWire assertHasSelectWire(EObject container, WireSource from, WireDestination to, String name) throws JaxenException {
 		return (SelectWire) assertHasWireFromTo(container, from, to, 
 				SelectWire.class, name, ALL);
 	}	
@@ -1013,7 +1013,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public SelectWire assertHasSelectWire(EObject container, WireEdgesSource from, WireEdgeDestination to) throws JaxenException {
+	public SelectWire assertHasSelectWire(EObject container, WireSource from, WireDestination to) throws JaxenException {
 		return (SelectWire) assertHasWireFromTo(container, from, to, 
 				SelectWire.class, ALL);
 	}
@@ -1024,7 +1024,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public NewInstanceWire assertHasNewInstanceWire(EObject container, WireEdgesSource from, WireEdgeDestination to, String name) throws JaxenException {
+	public NewInstanceWire assertHasNewInstanceWire(EObject container, WireSource from, WireDestination to, String name) throws JaxenException {
 		return (NewInstanceWire) assertHasWireFromTo(container, from, to, 
 				NewInstanceWire.class, name, ALL);
 	}
@@ -1059,7 +1059,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public NavigateWire assertHasNavigateWire(EObject container, WireEdgesSource from, WireEdgeDestination to, String name) throws JaxenException {
+	public NavigateWire assertHasNavigateWire(EObject container, WireSource from, WireDestination to, String name) throws JaxenException {
 		return (NavigateWire) assertHasWireFromTo(container, from, to, 
 				NavigateWire.class, name, ALL);
 	}
@@ -1185,7 +1185,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * Assert that there exists <em>only one</em> wire of the given type from the 'from' element
 	 * to the 'to' element.
 	 * 
-	 * @see #assertHasWireFromTo(EObject, WireEdgesSource, WireEdgeDestination, String, Class)
+	 * @see #assertHasWireFromTo(EObject, WireSource, WireDestination, String, Class)
 	 * @param container
 	 * @param from
 	 * @param to
@@ -1193,10 +1193,10 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return the wire edge found
 	 * @throws JaxenException 
 	 */
-	public WireEdge assertHasWireFromTo(EObject container, WireEdgesSource from, WireEdgeDestination to, Class<? extends EObject> type, Filter<WireEdge> filter) throws JaxenException {
-		Set<WireEdge> wires = getWiresFromTo(container, from, to);
-		WireEdge result = null;
-		for (WireEdge w : wires) {
+	public Wire assertHasWireFromTo(EObject container, WireSource from, WireDestination to, Class<? extends EObject> type, Filter<Wire> filter) throws JaxenException {
+		Set<Wire> wires = getWiresFromTo(container, from, to);
+		Wire result = null;
+		for (Wire w : wires) {
 			if (type.isInstance(w)) {
 				if (filter == null || filter.accept(w)) {
 					// found it
@@ -1223,10 +1223,10 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return
 	 * @throws JaxenException 
 	 */
-	public WireEdge assertHasWireFromTo(EObject container, WireEdgesSource from, WireEdgeDestination to, Class<? extends EObject> type, String name, Filter<WireEdge> filter) throws JaxenException {
-		Set<WireEdge> wires = getWiresFromTo(container, from, to);
-		WireEdge result = null;
-		for (WireEdge w : wires) {
+	public Wire assertHasWireFromTo(EObject container, WireSource from, WireDestination to, Class<? extends EObject> type, String name, Filter<Wire> filter) throws JaxenException {
+		Set<Wire> wires = getWiresFromTo(container, from, to);
+		Wire result = null;
+		for (Wire w : wires) {
 			if (type.isInstance(w) && w instanceof NamedElement && name.equals(((NamedElement) w).getName())) {
 				if (filter == null || filter.accept(w)) {
 					// found it

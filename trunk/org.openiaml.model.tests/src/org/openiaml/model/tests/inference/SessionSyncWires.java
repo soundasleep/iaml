@@ -62,7 +62,7 @@ public class SessionSyncWires extends InferenceTestCase {
 		RunInstanceWire rw2 = (RunInstanceWire) getWireFromTo(root, init, update);
 
 		// there should only be one RunWire out of 'init'
-		assertEquals("There should only be one out edge from init", 1, init.getOutEdges().size());
+		assertEquals("There should only be one out wire from init", 1, init.getOutWires().size());
 
 		// with the source fieldvalue as a parameter
 		assertGenerated(getParameterEdgeFromTo(session, fieldValue, rw2));

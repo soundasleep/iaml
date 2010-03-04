@@ -14,7 +14,7 @@ import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
-import org.openiaml.model.model.WireEdge;
+import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.domain.DomainPackage;
 import org.openiaml.model.model.scopes.Session;
@@ -41,7 +41,7 @@ import ca.ecliptical.emf.xpath.EMFXPath;
  */
 public class DroolsHelperFunctions {
 
-	public boolean connects(WireEdge wire, Object a, Object b) {
+	public boolean connects(Wire wire, Object a, Object b) {
 		if (wire == null) 
 			throw new NullPointerException("Wire '" + wire + "' = null");
 		if (wire.getFrom() == null)
@@ -143,7 +143,7 @@ public class DroolsHelperFunctions {
 	 * What is the last chained operation for the given PrimitiveOperation?
 	 */
 	public PrimitiveOperation lastChainedOperation(PrimitiveOperation op) {
-		for (WireEdge wire : op.getOutEdges()) {
+		for (Wire wire : op.getOutWires()) {
 			if (wire.getTo() instanceof PrimitiveOperation) {
 				return lastChainedOperation((PrimitiveOperation) wire.getTo());
 			}

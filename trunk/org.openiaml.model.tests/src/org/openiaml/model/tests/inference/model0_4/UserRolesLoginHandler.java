@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.openiaml.model.model.Property;
-import org.openiaml.model.model.WireEdge;
+import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.users.UserInstance;
@@ -64,7 +64,7 @@ public class UserRolesLoginHandler extends ValidInferenceTestCase {
 		assertGenerated(ui);
 		
 		// there should only be one incoming select wire
-		Set<WireEdge> wires = getWiresTo(session, ui, SelectWire.class);
+		Set<Wire> wires = getWiresTo(session, ui, SelectWire.class);
 		assertEquals(wires.toString(), 1, wires.size());		
 
 	}

@@ -9,7 +9,7 @@ import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Property;
-import org.openiaml.model.model.WireEdge;
+import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DecisionCondition;
 import org.openiaml.model.model.operations.FinishNode;
@@ -47,7 +47,7 @@ public class SetWireClient extends InferenceTestCase {
 		InputTextField target = assertHasInputTextField(page, "target");
 		assertNotGenerated(target);
 		
-		Set<WireEdge> wires = assertHasWiresFromTo(1, root, source, target);
+		Set<Wire> wires = assertHasWiresFromTo(1, root, source, target);
 		SetWire set = (SetWire) wires.iterator().next();
 		assertNotGenerated(set);
 		

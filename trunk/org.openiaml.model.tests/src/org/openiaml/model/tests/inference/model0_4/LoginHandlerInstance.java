@@ -15,7 +15,7 @@ import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Property;
-import org.openiaml.model.model.WireEdge;
+import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.components.LoginHandlerTypes;
 import org.openiaml.model.model.operations.OperationCallNode;
@@ -90,7 +90,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		// there should be new pages created
 		Frame login = assertHasFrame(session, "Login Successful");
 		{
-			Set<WireEdge> wires = assertHasWiresFromTo(1, root, handler, login);
+			Set<Wire> wires = assertHasWiresFromTo(1, root, handler, login);
 			NavigateWire wire = (NavigateWire) wires.iterator().next();
 			assertEquals("login", wire.getName());
 			assertGenerated(wire);
@@ -98,7 +98,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 
 		Frame logout = assertHasFrame(root, "Logout Successful");
 		{
-			Set<WireEdge> wires = assertHasWiresFromTo(1, root, handler, logout);
+			Set<Wire> wires = assertHasWiresFromTo(1, root, handler, logout);
 			NavigateWire wire = (NavigateWire) wires.iterator().next();
 			assertEquals("logout", wire.getName());
 			assertGenerated(wire);
@@ -147,7 +147,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		DomainObjectInstance instance = assertHasDomainObjectInstance(session, "logged in user");
 
 		// there should be a select wire from the object to the instance
-		Set<WireEdge> wires = assertHasWiresFromTo(1, root, obj, instance);
+		Set<Wire> wires = assertHasWiresFromTo(1, root, obj, instance);
 		SelectWire select = (SelectWire) wires.iterator().next();
 		assertEquals("password = :password", select.getQuery());
 		assertGenerated(select);
@@ -165,7 +165,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		
 		// there should be a set wire connecting to the generated property
 		{
-			Set<WireEdge> wires2 = assertHasWiresFromTo(1, handler, handler, currentPassword);
+			Set<Wire> wires2 = assertHasWiresFromTo(1, handler, handler, currentPassword);
 			SetWire set = (SetWire) wires2.iterator().next();
 			assertGenerated(set);
 		}
@@ -193,7 +193,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		assertGenerated(target);
 
 		EventTrigger access = page.getOnAccess();
-		Set<WireEdge> w = assertHasWiresFromTo(1, session, access, target);
+		Set<Wire> w = assertHasWiresFromTo(1, session, access, target);
 		{
 			NavigateWire nav = (NavigateWire) w.iterator().next();
 			assertGenerated(nav);
@@ -215,7 +215,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 
 		Operation check = assertHasOperation(session, "check instance");
 		EventTrigger access = dest.getOnAccess();
-		Set<WireEdge> w = assertHasWiresFromTo(1, session, access, check);
+		Set<Wire> w = assertHasWiresFromTo(1, session, access, check);
 		{
 			RunInstanceWire run = (RunInstanceWire) w.iterator().next();
 			assertGenerated(run);
@@ -239,7 +239,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 
 		Operation op = assertHasOperation(session, "do logout");
 		EventTrigger access = logout.getOnAccess();
-		Set<WireEdge> w = assertHasWiresFromTo(1, session, access, op);
+		Set<Wire> w = assertHasWiresFromTo(1, session, access, op);
 		{
 			RunInstanceWire run = (RunInstanceWire) w.iterator().next();
 			assertGenerated(run);
@@ -277,7 +277,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		assertGenerated(op);
 
 		// button has an 'onClick' run wire
-		Set<WireEdge> w = assertHasWiresFromTo(1, root, button, op);
+		Set<Wire> w = assertHasWiresFromTo(1, root, button, op);
 		RunInstanceWire run = (RunInstanceWire) w.iterator().next();
 		assertGenerated(run);
 		assertEquals("onClick", run.getName());
@@ -338,7 +338,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		assertGenerated(call);
 
 		// should have a RunInstanceWire to the 'exists?' operation
-		Set<WireEdge> w = assertHasWiresFromTo(1, session, call, exists);
+		Set<Wire> w = assertHasWiresFromTo(1, session, call, exists);
 		{
 			RunInstanceWire run = (RunInstanceWire) w.iterator().next();
 			assertGenerated(run);
@@ -400,7 +400,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		// destination page
 		Frame login = assertHasFrame(root, "login");
 		{
-			Set<WireEdge> wires = assertHasWiresFromTo(1, root, check, login);
+			Set<Wire> wires = assertHasWiresFromTo(1, root, check, login);
 			NavigateWire wire = (NavigateWire) wires.iterator().next();
 			assertEquals("fail", wire.getName());
 			assertGenerated(wire);

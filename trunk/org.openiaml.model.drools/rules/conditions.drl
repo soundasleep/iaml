@@ -17,7 +17,7 @@ global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
 # TODO can we put this function into something global?
-function boolean connects(WireEdge wire, Object a, Object b) {
+function boolean connects(Wire wire, Object a, Object b) {
 	return (wire.getFrom().equals(a) && wire.getTo().equals(b)) ||
 		(wire.getFrom().equals(b) && wire.getTo().equals(a));
 }

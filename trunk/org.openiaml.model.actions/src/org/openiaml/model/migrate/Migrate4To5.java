@@ -27,6 +27,10 @@ import org.w3c.dom.NodeList;
  *     <li>ShowWire</li>
  *     <li>CommitWire</li>
  *   </ol></li>
+ *   <li>Renamed elements:
+ *   <ol>
+ *     <li>WireEdge is now Wire
+ *   </ol></li>
  *   <li>Changed elements:
  *   <ol>
  *   	<li>WireEdge is now abstract
@@ -465,6 +469,22 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 		}
 		
 		return super.shouldDeleteAttribute(element, target, name, value, errors);
+	}
+	
+	/**
+	 * inEdges has become inWires; outEdges has become outWires.
+	 */
+	@Override
+	public String getRenamedAttribute(Element oldElement, Element newElement,
+			String name, String value) {
+		if ("inEdges".equals(name))
+			return "inWires";
+		
+		if ("outEdges".equals(name))
+			return "outWires";
+
+		// otherwise, just return the same name
+		return super.getRenamedAttribute(oldElement, newElement, name, value);
 	}
 
 	/**

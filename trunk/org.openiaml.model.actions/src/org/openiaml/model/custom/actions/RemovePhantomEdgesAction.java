@@ -26,7 +26,7 @@ import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.inference.InfiniteSubProgressMonitor;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.ExecutionEdge;
-import org.openiaml.model.model.WireEdge;
+import org.openiaml.model.model.Wire;
 
 /**
  * Looks through the model and finds edges which either have no 'from'
@@ -111,7 +111,7 @@ public class RemovePhantomEdgesAction extends IamlFileAction {
 		Iterator<EObject> it = loadedModel.eAllContents();
 		while (it.hasNext()) {
 			EObject obj = it.next();
-			if (obj instanceof WireEdge && (((WireEdge) obj).getFrom() == null || ((WireEdge) obj).getTo() == null)) {
+			if (obj instanceof Wire && (((Wire) obj).getFrom() == null || ((Wire) obj).getTo() == null)) {
 				// remove this one
 				elementsToDelete.add(obj);
 			} else if (obj instanceof ExecutionEdge && (((ExecutionEdge) obj).getFrom() == null || ((ExecutionEdge) obj).getTo() == null)) {
@@ -121,6 +121,7 @@ public class RemovePhantomEdgesAction extends IamlFileAction {
 				// remove this one
 				elementsToDelete.add(obj);
 			}
+			// TODO issue 156: does not check all types of Edge
 		}
 		monitor.worked(30);
 		if (monitor.isCanceled())

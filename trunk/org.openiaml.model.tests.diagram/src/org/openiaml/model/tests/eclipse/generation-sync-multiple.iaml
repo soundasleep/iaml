@@ -7,7 +7,7 @@
       <children xsi:type="iaml.visual:InputTextField" id="visual.11d83490a0f.1a0" name="email"/>
     </children>
   </scopes>
-  <scopes xsi:type="iaml.visual:Frame" id="visual.11d83490a0f.120" name="page2" inEdges="wires.11d83490a7c.92">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.11d83490a0f.120" name="page2" inWires="wires.11d83490a7c.92">
     <children xsi:type="iaml.visual:InputForm" id="visual.11d83490a0f.147" name="form">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.11d83490a7c.109" name="sync"/>
       <children xsi:type="iaml.visual:InputTextField" id="visual.11d83490a0f.1fc" name="name"/>

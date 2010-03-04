@@ -218,6 +218,9 @@ public abstract class DomBasedMigrator implements IamlModelMigrator {
 				if (value == null)
 					return;		// element has been deleted; don't add it
 				
+				// change the name of the attribute?
+				name = getRenamedAttribute(element, e, name, value);
+				
 				e.setAttribute( name, value );
 			}
 		}
@@ -257,6 +260,21 @@ public abstract class DomBasedMigrator implements IamlModelMigrator {
 		output.appendChild(e);
 	}
 	
+	/**
+	 * Should the given attribute be renamed? By default, this implementation
+	 * just returns the same name.
+	 * 
+	 * @param oldElement the original element
+ 	 * @param newElement the new element
+	 * @param name the old name of the attribute
+	 * @param value the value of the attribute
+	 * @return
+	 */
+	public String getRenamedAttribute(Element oldElement, Element newElement, String name,
+			String value) {
+		return name;
+	}
+
 	/**
 	 * Create a new element. By default, just creates an element
 	 * with the default namespace.

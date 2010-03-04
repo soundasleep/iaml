@@ -307,7 +307,7 @@ public class GmfMapTestCase extends XmlTestCase {
 		String toolName = toolNode.getAttribute("title");
 		
 		// these should be the same
-		assertEquals(filename + ": tool mapping did not match", element, toolName);
+		assertTrue(filename + ": tool mapping did not match: '" + element + "', '" + toolName + "'", toolMatches(toolName, element) );
 		
 		return toolNode;
 	}
@@ -335,7 +335,7 @@ public class GmfMapTestCase extends XmlTestCase {
 		
 		for (Element tool : xpath(doc, "//tools")) {
 			
-			if (tool.hasAttribute("title") && tool.getAttribute("title").equals(element)) {
+			if (tool.hasAttribute("title") && toolMatches(tool.getAttribute("title"), element)) {
 				// we found the target tool
 				String ref = compileEmfReference( filename.substring(filename.lastIndexOf("/") + 1), tool );
 				
@@ -350,6 +350,27 @@ public class GmfMapTestCase extends XmlTestCase {
 		// couldn't find anything
 		fail("Could not find tool mapping for '" + elementName + "' in filename '" + filename + "'");
 		return null;
+	}
+	
+	/**
+	 * Does the given tool title match the given element name title?
+	 * 
+	 * @param title 'EventTrigger' or 'EventTrigger [onClick]'
+	 * @param elementName 'EventTrigger' 
+	 */
+	private boolean toolMatches(String title, String elementName) {
+		if (title.equals(elementName))
+			return true;
+		
+		if (title.contains("[")) {
+			// remove the square bracket
+			title = title.substring(0, title.indexOf('[') - 1);
+			
+			if (title.equals(elementName))
+				return true;
+		}
+		
+		return false;
 	}
 
 	/**

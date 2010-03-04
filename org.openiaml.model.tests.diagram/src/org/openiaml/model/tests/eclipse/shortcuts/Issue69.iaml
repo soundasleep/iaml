@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.122e3c3d672.44">
   <scopes xsi:type="iaml.visual:Frame" id="visual.122e3c3d7ab.30" name="container">
-    <elements xsi:type="iaml:DomainObjectInstance" id="model.122e3c3d672.7a" name="domain object instance" inEdges="wires.122e3c3d838.17"/>
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.122e3c3d672.7a" name="domain object instance" inWires="wires.122e3c3d838.17"/>
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.122e3c3d7ab.3a" name="referenced">
     <properties id="model.122e3c3d672.64" name="property" outParameterEdges="wires.122e3c3d838.19">
       <parameterEdges id="wires.122e3c3d838.19" from="model.122e3c3d672.64" to="wires.122e3c3d838.17"/>
     </properties>
-    <elements xsi:type="iaml:DomainObject" id="model.122e3c3d672.6d" name="domain object" outEdges="wires.122e3c3d838.17">
+    <elements xsi:type="iaml:DomainObject" id="model.122e3c3d672.6d" name="domain object" outWires="wires.122e3c3d838.17">
       <wires xsi:type="iaml.wires:SelectWire" inParameterEdges="wires.122e3c3d838.19" id="wires.122e3c3d838.17" from="model.122e3c3d672.6d" to="model.122e3c3d672.7a" name="select"/>
     </elements>
   </scopes>

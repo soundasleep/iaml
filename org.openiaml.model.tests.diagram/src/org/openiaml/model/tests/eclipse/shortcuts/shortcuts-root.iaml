@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.11d889e30c6.2ca">
-  <operations xsi:type="iaml:PrimitiveOperation" inEdges="wires.11d889e3162.6a" id="model.11d889e30c6.2cf" name="op"/>
+  <operations xsi:type="iaml:PrimitiveOperation" inWires="wires.11d889e3162.6a" id="model.11d889e30c6.2cf" name="op"/>
   <scopes xsi:type="iaml.visual:Frame" id="visual.11d889e3114.251" name="page">
-    <onInit id="model.11d889e30c6.2da" outEdges="wires.11d889e3162.6a">
+    <onInit id="model.11d889e30c6.2da" outWires="wires.11d889e3162.6a">
       <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.11d889e3162.6a" from="model.11d889e30c6.2da" to="model.11d889e30c6.2cf" name="run2"/>
     </onInit>
   </scopes>

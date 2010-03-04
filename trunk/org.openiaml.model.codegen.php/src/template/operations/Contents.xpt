@@ -151,7 +151,7 @@
 «DEFINE chainedEvent(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame, String type) FOR model::EventTrigger»
 	// expanding chained event trigger «name»
 	«IF type=="edit"»
-		«EXPAND OperationCall::callOperation(php, inStoreDb, currentFrame) FOREACH outEdges»
+		«EXPAND OperationCall::callOperation(php, inStoreDb, currentFrame) FOREACH outWires»
 	«ELSEIF type=="access"»
 		// we don't expand 'access' events as part of a chain
 	«ELSE»

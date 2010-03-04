@@ -19,15 +19,15 @@
 			/* contained in an object instance '«eContainer»': get it from the instance */
 			$obj = get_object_instance_«safeName(eContainer)»();
 			return $obj["«attributeName(this)-»"];
-		«ELSEIF !inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
+		«ELSEIF !inWires.typeSelect(model::wires::NewInstanceWire).isEmpty»
 			/* sourced from a new instance wire */
 			return get_new_attribute_instance_«safeName()-»();
 		«ELSE»
 			/* not contained in an object instance; select it manually */
-			«IF inEdges.typeSelect(model::wires::SelectWire).isEmpty»
+			«IF inWires.typeSelect(model::wires::SelectWire).isEmpty»
 				throw new IamlRuntimeException("No selection wires exist for getting attribute instance '«this»'");
 			«ELSE»
-				«EXPAND Select::evaluateSelectWire(currentFrame, true) FOR inEdges.typeSelect(model::wires::SelectWire).first()»
+				«EXPAND Select::evaluateSelectWire(currentFrame, true) FOR inWires.typeSelect(model::wires::SelectWire).first()»
 				if ($row === null) {
 					if ($default === false)					
 						throw new IamlRuntimeException("Could not find any value instance for attribute '«id»'");
@@ -53,15 +53,15 @@
 			} else {
 				return false;
 			}
-		«ELSEIF !inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
+		«ELSEIF !inWires.typeSelect(model::wires::NewInstanceWire).isEmpty»
 			/* sourced from a new instance wire */
 			return has_new_attribute_instance_«safeName()-»();
 		«ELSE»
 			/* not contained in an object instance; select it manually */
-			«IF inEdges.typeSelect(model::wires::SelectWire).isEmpty»
+			«IF inWires.typeSelect(model::wires::SelectWire).isEmpty»
 				throw new IamlRuntimeException("No selection wires exist for trying to find attribute instance '«this»'");
 			«ELSE»
-				«EXPAND Select::evaluateSelectWire(currentFrame, false) FOR inEdges.typeSelect(model::wires::SelectWire).first()»
+				«EXPAND Select::evaluateSelectWire(currentFrame, false) FOR inWires.typeSelect(model::wires::SelectWire).first()»
 				if ($row === null) {
 					// not found
 					return false;
@@ -71,8 +71,8 @@
 		«ENDIF»
 	}
 	
-	«IF !inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
-		«EXPAND getNewAttributeInstance(inEdges.typeSelect(model::wires::NewInstanceWire).first()) FOR this»
+	«IF !inWires.typeSelect(model::wires::NewInstanceWire).isEmpty»
+		«EXPAND getNewAttributeInstance(inWires.typeSelect(model::wires::NewInstanceWire).first()) FOR this»
 	«ENDIF»
 «ENDDEFINE»
 
@@ -176,15 +176,15 @@
 	 * Get the domain object instance '«id»'.
 	 */
 	function get_object_instance_«safeName()»($default = false) {
-		«IF inEdges.typeSelect(model::wires::SelectWire).isEmpty»
-			«IF inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
+		«IF inWires.typeSelect(model::wires::SelectWire).isEmpty»
+			«IF inWires.typeSelect(model::wires::NewInstanceWire).isEmpty»
 				throw new IamlRuntimeException("No selection or new instance wires exist for object instance '«id»'");
 			«ELSE»
 				// return a "new" object
 				return get_new_domain_object_«safeName()-»(«IF isAutosaveOff()»false«ENDIF»);
 			«ENDIF»
 		«ELSE»
-			«EXPAND Select::evaluateSelectWire(currentFrame, true) FOR inEdges.typeSelect(model::wires::SelectWire).first()»
+			«EXPAND Select::evaluateSelectWire(currentFrame, true) FOR inWires.typeSelect(model::wires::SelectWire).first()»
 			if ($row === null) {
 				if ($default !== false) {
 					return $default;
@@ -202,14 +202,14 @@
 	 * Returns true or false.
 	 */
 	function has_object_instance_«safeName()»($default = false) {
-		«IF inEdges.typeSelect(model::wires::SelectWire).isEmpty»
-			«IF inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
+		«IF inWires.typeSelect(model::wires::SelectWire).isEmpty»
+			«IF inWires.typeSelect(model::wires::NewInstanceWire).isEmpty»
 				throw new IamlRuntimeException("No selection or new instance wires exist for checking object instance '«id»'");
 			«ELSE»
 				return has_new_domain_object_«safeName()-»();
 			«ENDIF»
 		«ELSE»
-			«EXPAND Select::evaluateSelectWire(currentFrame, false) FOR inEdges.typeSelect(model::wires::SelectWire).first()»
+			«EXPAND Select::evaluateSelectWire(currentFrame, false) FOR inWires.typeSelect(model::wires::SelectWire).first()»
 			if ($row === null) {
 				return false;
 			}
@@ -222,7 +222,7 @@
 	 * a new one.
 	 */
 	function new_domain_instance_«safeName()»($default = false) {
-		«IF inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
+		«IF inWires.typeSelect(model::wires::NewInstanceWire).isEmpty»
 			throw new IamlRuntimeException("No new instance wires exist for object instance '«id»'");
 		«ELSE»
 			// reset the current session instance
@@ -242,8 +242,8 @@
 		return has_object_instance_«safeName()»();
 	}
 
-	«IF !inEdges.typeSelect(model::wires::NewInstanceWire).isEmpty»
-		«EXPAND getNewDomainObject(inEdges.typeSelect(model::wires::NewInstanceWire).first()) FOR this»
+	«IF !inWires.typeSelect(model::wires::NewInstanceWire).isEmpty»
+		«EXPAND getNewDomainObject(inWires.typeSelect(model::wires::NewInstanceWire).first()) FOR this»
 	«ENDIF»
 «ENDDEFINE»
 
@@ -422,7 +422,7 @@
 	«ENDLET»
 «ENDDEFINE»
 
-«DEFINE newDomainObjectTemplate FOR model::WireEdgesSource»
+«DEFINE newDomainObjectTemplate FOR model::WireSource»
 	«EXPAND exception FOR throwException("Cannot get domain object template for object: " + this)»
 «ENDDEFINE»
 

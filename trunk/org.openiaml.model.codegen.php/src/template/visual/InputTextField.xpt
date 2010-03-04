@@ -15,9 +15,9 @@
 			«EXPAND EventHandlers::getInlineClickJavascript(currentFrame)»
 
 			«REM»any initial values?«ENDREM»
-			«EXPAND getInitialValuesSetWire(currentFrame) FOREACH inEdges.typeSelect(model::wires::SetWire)» 			 
-			«EXPAND getInitialValuesSyncWire(currentFrame) FOREACH inEdges.typeSelect(model::wires::SyncWire)» 
-			«EXPAND getInitialValuesSyncWire(currentFrame) FOREACH outEdges.typeSelect(model::wires::SyncWire)» 			 
+			«EXPAND getInitialValuesSetWire(currentFrame) FOREACH inWires.typeSelect(model::wires::SetWire)» 			 
+			«EXPAND getInitialValuesSyncWire(currentFrame) FOREACH inWires.typeSelect(model::wires::SyncWire)» 
+			«EXPAND getInitialValuesSyncWire(currentFrame) FOREACH outWires.typeSelect(model::wires::SyncWire)» 			 
 
 			«REM»
 				an initial value?
@@ -39,9 +39,9 @@
 				// outgoing values
 				«REM»any application element properties to change? (both on client and server)«ENDREM»
 				«REM»this doesn't cover fieldValues connected by Set/SyncWires; these are covered by server code (below)«ENDREM»
-				«EXPAND template::operations::OutgoingValues::outgoingValues(this) FOREACH outEdges»
-				«EXPAND template::operations::OutgoingValues::outgoingValues(this) FOREACH inEdges»
-				«REM»it may be required to outgoingValues(this) FOREACH properties.outEdges«ENDREM»
+				«EXPAND template::operations::OutgoingValues::outgoingValues(this) FOREACH outWires»
+				«EXPAND template::operations::OutgoingValues::outgoingValues(this) FOREACH inWires»
+				«REM»it may be required to outgoingValues(this) FOREACH properties.outWires«ENDREM»
 				
 				// server values
 				«REM»save a value for myself (which is not covered by an outEdge/inEdge) to the server/session?«ENDREM»
@@ -79,9 +79,9 @@
 «ENDDEFINE»
 
 /* ignore these sources */
-«DEFINE staticInitialValue(model::visual::Frame currentFrame) FOR model::WireEdgesSource»
+«DEFINE staticInitialValue(model::visual::Frame currentFrame) FOR model::WireSource»
 «ENDDEFINE»
-«DEFINE staticInitialValue(model::visual::Frame currentFrame) FOR model::WireEdgeDestination»
+«DEFINE staticInitialValue(model::visual::Frame currentFrame) FOR model::WireDestination»
 «ENDDEFINE»
 
 /* we have a property to provide [in PHP] */

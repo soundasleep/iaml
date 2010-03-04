@@ -75,7 +75,7 @@ echo_necessary_update_callbacks();
 
 «DEFINE potentialEditEvent FOR model::EventTrigger»
 	«IF name=="edit"»
-		«EXPAND editEvent FOREACH outEdges.typeSelect(model::wires::RunInstanceWire)»
+		«EXPAND editEvent FOREACH outWires.typeSelect(model::wires::RunInstanceWire)»
 	«ELSE»
 		// ignoring event trigger '«this»'
 	«ENDIF»
@@ -85,7 +85,7 @@ echo_necessary_update_callbacks();
 	«EXPAND editEventTarget(this) FOR to»
 «ENDDEFINE»
 
-«DEFINE editEventTarget(model::wires::RunInstanceWire wire) FOR model::WireEdgeDestination»
+«DEFINE editEventTarget(model::wires::RunInstanceWire wire) FOR model::WireDestination»
 	// unknown RunInstanceWire target: «this»
 «ENDDEFINE»
 

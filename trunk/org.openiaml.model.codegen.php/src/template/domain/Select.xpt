@@ -47,7 +47,7 @@
 «ENDDEFINE»
 
 /* select a database source */
-«DEFINE selectDatabase FOR model::WireEdgesSource»
+«DEFINE selectDatabase FOR model::WireSource»
 	«EXPAND exception FOR throwException("Cannot connect to a database source from " + this)»
 «ENDDEFINE»
 

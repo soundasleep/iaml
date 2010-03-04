@@ -9,7 +9,7 @@
 /**
  * Domain instance methods.
  */
-«DEFINE accessControlHandlerOperationCall(Boolean php, model::wires::RunInstanceWire wire, model::components::AccessControlHandler object) FOR model::WireEdgeDestination»
+«DEFINE accessControlHandlerOperationCall(Boolean php, model::wires::RunInstanceWire wire, model::components::AccessControlHandler object) FOR model::WireDestination»
 	«EXPAND exception FOR throwException("Unexpected accessControlHandlerOperationCall run instance wire destination: " + this)»
 «ENDDEFINE»
 

@@ -21,7 +21,7 @@
  *
  * @param addKeys add associative array keys to PHP parameters
  */
-«DEFINE callParameter(Boolean php, model::WireEdge wire, Boolean inStoreDb, Boolean addKeys, model::visual::Frame currentFrame) FOR model::wires::ParameterEdge»
+«DEFINE callParameter(Boolean php, model::Wire wire, Boolean inStoreDb, Boolean addKeys, model::visual::Frame currentFrame) FOR model::wires::ParameterEdge»
 	«IF addKeys && php»
 		«REM»add associative keys for named parameter wires«ENDREM»
 		«IF name != null && name.length > 0»
@@ -42,14 +42,14 @@
  * The sources of parameters for parameter calls, i.e.
  * fetch the runtime value of the parameter.
  */
-«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::wires::ParameterEdgesSource»
+«DEFINE callParameterValue(Boolean php, model::Wire wire, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::wires::ParameterEdgesSource»
 	«EXPAND exception FOR throwException("Unknown parameter wire source: " + this)»
 «ENDDEFINE»
 
 /**
  * TODO can we remove 'wire' parameter and replace it with 'currentFrame'?
  */
-«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::Property»
+«DEFINE callParameterValue(Boolean php, model::Wire wire, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::Property»
 	«IF php»
 		«IF inStoreDb»
 			$arg0 /* we assume the value is already in $arg0; see store_db.php::expandDomainAttributeEvents */
@@ -133,7 +133,7 @@
 /**
  * If we have a Parameter from a TextField, we should use its 'fieldValue' property instead.
  */
-«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::visual::InputTextField»
+«DEFINE callParameterValue(Boolean php, model::Wire wire, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::visual::InputTextField»
 	«IF php»
 		/* implicitly from InputTextField */
 		«EXPAND callParameterValue(php, wire, inStoreDb, currentFrame) FOR properties.select( e | e.name == "fieldValue" ).first()-»
@@ -146,28 +146,28 @@
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::StaticValue»
+«DEFINE callParameterValue(Boolean php, model::Wire wire, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::StaticValue»
 	"«value-»" /* static value "«name-»" */
 «ENDDEFINE»
 
-«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::DynamicApplicationElementSet»
+«DEFINE callParameterValue(Boolean php, model::Wire wire, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::DynamicApplicationElementSet»
 	/* dynamic element set "«name-»" */
 	get_dynamic_elements_«safeName()-»()
 «ENDDEFINE»
 
-«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::visual::Frame»
+«DEFINE callParameterValue(Boolean php, model::Wire wire, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::visual::Frame»
 	/* Frame "«name-»" */
 	new Visual_Frame("«id-»", "«name-»")
 «ENDDEFINE»
 
 «REM»new Users_Role("«id-»", "«name-»")«ENDREM»
-«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::users::Role»
+«DEFINE callParameterValue(Boolean php, model::Wire wire, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::users::Role»
 	/* Role "«name-»" */
 	'«safeName()-»'
 «ENDDEFINE»
 
 «REM»new Users_Permission("«id-»", "«name-»")«ENDREM»
-«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::users::Permission»
+«DEFINE callParameterValue(Boolean php, model::Wire wire, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::users::Permission»
 	/* Permission "«name-»" */
 	'«safeName()-»'
 «ENDDEFINE»
@@ -175,7 +175,7 @@
 /**
  * A value specified as part of the URI, e.g. ?key=value
  */
-«DEFINE callParameterValue(Boolean php, model::WireEdge wire, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::QueryParameter»
+«DEFINE callParameterValue(Boolean php, model::Wire wire, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::QueryParameter»
 	«IF php»
 		require_get("«name»"«IF defaultValue != null», "«defaultValue»"«ENDIF»)
 	«ELSE»

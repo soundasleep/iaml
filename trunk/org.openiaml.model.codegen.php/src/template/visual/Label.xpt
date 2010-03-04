@@ -41,9 +41,9 @@
 		?>
 	«ENDIF»
 	
-	«EXPAND getInitialValuesSyncWire(currentFrame) FOREACH outEdges.typeSelect(model::wires::SyncWire)» 			 
-	«EXPAND getInitialValuesSyncWire(currentFrame) FOREACH inEdges.typeSelect(model::wires::SyncWire)» 
-	«EXPAND getInitialValuesSetWire(currentFrame) FOREACH inEdges.typeSelect(model::wires::SetWire)» 			 
+	«EXPAND getInitialValuesSyncWire(currentFrame) FOREACH outWires.typeSelect(model::wires::SyncWire)» 			 
+	«EXPAND getInitialValuesSyncWire(currentFrame) FOREACH inWires.typeSelect(model::wires::SyncWire)» 
+	«EXPAND getInitialValuesSetWire(currentFrame) FOREACH inWires.typeSelect(model::wires::SetWire)» 			 
 	</label>
 	
 	«EXPAND EventHandlers::getScriptClickDefinition(currentFrame)»
@@ -76,9 +76,9 @@
 «ENDDEFINE»
 
 /* ignore these sources */
-«DEFINE staticInitialValue(model::visual::Frame currentFrame) FOR model::WireEdgesSource»
+«DEFINE staticInitialValue(model::visual::Frame currentFrame) FOR model::WireSource»
 «ENDDEFINE»
-«DEFINE staticInitialValue(model::visual::Frame currentFrame) FOR model::WireEdgeDestination»
+«DEFINE staticInitialValue(model::visual::Frame currentFrame) FOR model::WireDestination»
 «ENDDEFINE»
 
 /* we have a property to provide [in PHP] */

@@ -48,10 +48,10 @@ context model::DomainObject ERROR "You cannot have a DomainObject called single_
 	name != "single_values";
 
 context model::DomainAttributeInstance ERROR "A DomainAttributeInstance cannot have more than one Select or NewInstance wire" :
-	inEdges.typeSelect(model::wires::SelectWire).toSet().union(inEdges.typeSelect(model::wires::NewInstanceWire)).size <= 1;
+	inWires.typeSelect(model::wires::SelectWire).toSet().union(inWires.typeSelect(model::wires::NewInstanceWire)).size <= 1;
 	
 context model::DomainObjectInstance ERROR "A DomainObjectInstance cannot have more than one Select or NewInstance wire" :
-	inEdges.typeSelect(model::wires::SelectWire).toSet().union(inEdges.typeSelect(model::wires::NewInstanceWire)).size <= 1;
+	inWires.typeSelect(model::wires::SelectWire).toSet().union(inWires.typeSelect(model::wires::NewInstanceWire)).size <= 1;
 	
 context model::wires::SelectWire ERROR "A SelectWire must come from a valid DomainObject":
 	model::DomainObject.isInstance(from);	
@@ -59,13 +59,13 @@ context model::wires::SelectWire ERROR "A SelectWire must come from a valid Doma
 /**
  * Important: If this message changes, it must also be updated in org.openiaml.model.custom.actions.GenerateCodeAction#couldBePhantomEdges()
  */	
-context model::WireEdge ERROR "A WireEdge must have a 'from'" :
+context model::Wire ERROR "A Wire must have a 'from'" :
 	from != null;
 
 /**
  * Important: If this message changes, it must also be updated in org.openiaml.model.custom.actions.GenerateCodeAction#couldBePhantomEdges()
  */	
-context model::WireEdge ERROR "A WireEdge must have a 'to'" :
+context model::Wire ERROR "A Wire must have a 'to'" :
 	to != null;
 
 context model::wires::ExtendsEdge ERROR "A Role cannot extend itself" :
@@ -81,18 +81,18 @@ context model::wires::ExtendsEdge ERROR "A Role cannot extend itself" :
  */
 
 context model::operations::OperationCallNode ERROR "An OperationCallNode must have exactly one RunInstanceWire connecting it to an Operation" :
-	outEdges.size == 1
-		&& model::wires::RunInstanceWire.isInstance(outEdges.first())
-		&& model::Operation.isInstance(outEdges.first().to);
+	outWires.size == 1
+		&& model::wires::RunInstanceWire.isInstance(outWires.first())
+		&& model::Operation.isInstance(outWires.first().to);
 
 context model::wires::RunInstanceWire WARNING "This RunInstanceWire will not do anything: consider naming it 'onClick'" :
 	!(model::VisibleThing.isInstance(from) && !(name == "click" || name == "onClick"));
 
 context model::Property WARNING "A session property used as part of a login handler should have a default value set, otherwise secure frames will crash with an exception rather than going to the login frame" :
-	!(defaultValue == null && inEdges.typeSelect(model::wires::SetWire).from.typeSelect(model::components::LoginHandler).size > 0); 
+	!(defaultValue == null && inWires.typeSelect(model::wires::SetWire).from.typeSelect(model::components::LoginHandler).size > 0); 
 
-context model::QueryParameter ERROR "A QueryParameter cannot be used on a Frame outside of its containing frame (" + containingFrame(this.eContainer) + ", " + containingFrame(outEdges.first().to.eContainer) + ")" :
-	outEdges.forAll( e | isAccessibleOnFrame(containingFrame(this.eContainer), e.to) );
+context model::QueryParameter ERROR "A QueryParameter cannot be used on a Frame outside of its containing frame (" + containingFrame(this.eContainer) + ", " + containingFrame(outWires.first().to.eContainer) + ")" :
+	outWires.forAll( e | isAccessibleOnFrame(containingFrame(this.eContainer), e.to) );
 
 context model::components::LoginHandler ERROR "A LoginHandler[user] can not have more than one incoming ParameterWire" :
 	(type != model::components::LoginHandlerTypes::USER) || inParameterEdges.size <= 1; 
@@ -135,9 +135,9 @@ context model::PrimitiveOperation ERROR "A 'setPropertyToValue' PrimitiveOperati
 	
 context model::components::EntryGate ERROR "An EntryGate needs to have at least one incoming Condition, or one outgoing 'first' wire, or it will never permit access" :
 	inConditionEdges.size >= 1
-	|| outEdges.typeSelect(model::NamedElement).exists(w | w.name == "first");
+	|| outWires.typeSelect(model::NamedElement).exists(w | w.name == "first");
 
 context model::components::ExitGate ERROR "An ExitGate needs to have at least one incoming Condition, or one outgoing 'last' wire, or it will never permit access" :
 	inConditionEdges.size >= 1
-	|| outEdges.typeSelect(model::NamedElement).exists(w | w.name == "last");
+	|| outWires.typeSelect(model::NamedElement).exists(w | w.name == "last");
 	

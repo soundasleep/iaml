@@ -20,13 +20,21 @@ import org.openiaml.model.ModelLoader;
 import org.openiaml.model.ModelLoader.ModelLoadException;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.drools.DroolsInferenceEngine;
+import org.openiaml.model.helpers.EdgeTypes;
 import org.openiaml.model.inference.EcoreInferenceHandler;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.inference.InfiniteSubProgressMonitor;
+import org.openiaml.model.model.ConditionalEdge;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.Wire;
+import org.openiaml.model.model.wires.ConditionEdge;
+import org.openiaml.model.model.wires.ConstraintEdge;
+import org.openiaml.model.model.wires.ExtendsEdge;
+import org.openiaml.model.model.wires.ParameterEdge;
+import org.openiaml.model.model.wires.ProvidesEdge;
+import org.openiaml.model.model.wires.RequiresEdge;
 
 /**
  * Looks through the model and finds edges which either have no 'from'
@@ -111,16 +119,10 @@ public class RemovePhantomEdgesAction extends IamlFileAction {
 		Iterator<EObject> it = loadedModel.eAllContents();
 		while (it.hasNext()) {
 			EObject obj = it.next();
-			if (obj instanceof Wire && (((Wire) obj).getFrom() == null || ((Wire) obj).getTo() == null)) {
-				// remove this one
-				elementsToDelete.add(obj);
-			} else if (obj instanceof ExecutionEdge && (((ExecutionEdge) obj).getFrom() == null || ((ExecutionEdge) obj).getTo() == null)) {
-				// remove this one
-				elementsToDelete.add(obj);
-			} else if (obj instanceof DataFlowEdge && (((DataFlowEdge) obj).getFrom() == null || ((DataFlowEdge) obj).getTo() == null)) {
-				// remove this one
-				elementsToDelete.add(obj);
+			if (shouldRemove(obj)) {
+				
 			}
+			
 			// TODO issue 156: does not check all types of Edge
 		}
 		monitor.worked(30);
@@ -159,6 +161,52 @@ public class RemovePhantomEdgesAction extends IamlFileAction {
 		saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED,
 				Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
 		return saveOptions;
+	}
+
+	/**
+	 * Should the given object be removed, i.e. does it contain a phantom edge?
+	 * 
+	 * @see EdgeTypes#getEdgeTypes() 
+	 * @param obj
+	 * @return
+	 */
+	public static boolean shouldRemove(EObject obj) {
+		if (obj instanceof Wire && (((Wire) obj).getFrom() == null 
+				|| ((Wire) obj).getTo() == null)) {
+			return true;
+		} else if (obj instanceof ExecutionEdge && (((ExecutionEdge) obj).getFrom() == null 
+				|| ((ExecutionEdge) obj).getTo() == null)) {
+			return true;
+		} else if (obj instanceof DataFlowEdge && (((DataFlowEdge) obj).getFrom() == null 
+				|| ((DataFlowEdge) obj).getTo() == null)) {
+			return true;
+		} else if (obj instanceof ConditionEdge && (((ConditionEdge) obj).getFrom() == null 
+				|| ((ConditionEdge) obj).getTo() == null)) {
+			return true;
+		} else if (obj instanceof ConstraintEdge && (((ConstraintEdge) obj).getFrom() == null 
+				|| ((ConstraintEdge) obj).getTo() == null)) {
+			return true;
+		} else if (obj instanceof ConditionalEdge && (((ConditionalEdge) obj).getFrom() == null 
+				|| ((ConditionalEdge) obj).getTo() == null)) {
+			return true;
+		} else if (obj instanceof ExecutionEdge && (((ExecutionEdge) obj).getFrom() == null 
+				|| ((ExecutionEdge) obj).getTo() == null)) {
+			return true;
+		} else if (obj instanceof ExtendsEdge && (((ExtendsEdge) obj).getFrom() == null 
+				|| ((ExtendsEdge) obj).getTo() == null)) {
+			return true;
+		} else if (obj instanceof ParameterEdge && (((ParameterEdge) obj).getFrom() == null 
+				|| ((ParameterEdge) obj).getTo() == null)) {
+			return true;
+		} else if (obj instanceof ProvidesEdge && (((ProvidesEdge) obj).getFrom() == null 
+				|| ((ProvidesEdge) obj).getTo() == null)) {
+			return true;
+		} else if (obj instanceof RequiresEdge && (((RequiresEdge) obj).getFrom() == null 
+				|| ((RequiresEdge) obj).getTo() == null)) {
+			return true;
+		}
+		
+		return false;
 	}
 
 

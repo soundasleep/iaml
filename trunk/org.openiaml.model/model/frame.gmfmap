@@ -716,10 +716,10 @@
         href="iaml.gmfgraph#SyncWire"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/from"/>
+        href="iaml.ecore#//Wire/from"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/to"/>
+        href="iaml.ecore#//Wire/to"/>
   </links>
   <links>
     <domainMetaElement
@@ -742,10 +742,10 @@
         href="iaml.gmfgraph#RunInstanceWire"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/from"/>
+        href="iaml.ecore#//Wire/from"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/to"/>
+        href="iaml.ecore#//Wire/to"/>
   </links>
   <links>
     <domainMetaElement
@@ -792,10 +792,10 @@
         href="iaml.gmfgraph#SelectWire"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/from"/>
+        href="iaml.ecore#//Wire/from"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/to"/>
+        href="iaml.ecore#//Wire/to"/>
   </links>
   <links>
     <domainMetaElement
@@ -818,10 +818,10 @@
         href="iaml.gmfgraph#SetWire"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/from"/>
+        href="iaml.ecore#//Wire/from"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/to"/>
+        href="iaml.ecore#//Wire/to"/>
   </links>
   <links>
     <domainMetaElement
@@ -844,10 +844,10 @@
         href="iaml.gmfgraph#NavigateWire"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/from"/>
+        href="iaml.ecore#//Wire/from"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/to"/>
+        href="iaml.ecore#//Wire/to"/>
   </links>
   <links>
     <domainMetaElement
@@ -894,10 +894,10 @@
         href="iaml.gmfgraph#NewInstanceWire"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/from"/>
+        href="iaml.ecore#//Wire/from"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//WireEdge/to"/>
+        href="iaml.ecore#//Wire/to"/>
   </links>
   <links>
     <domainMetaElement

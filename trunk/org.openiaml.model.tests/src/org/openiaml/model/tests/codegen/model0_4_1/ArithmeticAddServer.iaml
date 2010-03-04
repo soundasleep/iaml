@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.125437f916e.4a">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
-    <operations xsi:type="iaml:CompositeOperation" inEdges="wires.125437f91eb.5" id="model.125437f916e.a1" name="update result">
+    <operations xsi:type="iaml:CompositeOperation" inWires="wires.125437f91eb.5" id="model.125437f916e.a1" name="update result">
       <operations xsi:type="iaml:PrimitiveOperation" id="model.125437f916e.145" name="setPropertyToValue" inFlows="model.125437f916e.14d" inExecutions="model.125437f916e.147" outFlows="model.125437f916e.14e" outExecutions="model.125437f916e.149"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.125437f91eb.d" outExecutions="model.125437f916e.147"/>
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.125437f91eb.f" inExecutions="model.125437f916e.149"/>
@@ -14,7 +14,7 @@
       <executionEdges id="model.125437f916e.149" from="model.125437f916e.145" to="operations.125437f91eb.f"/>
       <values id="model.125437f916e.146" name="static value" outFlows="model.125437f916e.14c" value="42"/>
     </operations>
-    <onAccess id="model.125437f916e.5a" outEdges="wires.125437f91eb.5">
+    <onAccess id="model.125437f916e.5a" outWires="wires.125437f91eb.5">
       <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.125437f91eb.5" from="model.125437f916e.5a" to="model.125437f916e.a1" name="run"/>
     </onAccess>
     <children xsi:type="iaml.visual:InputTextField" id="visual.125437f91db.33" name="result">
@@ -29,7 +29,7 @@
       <properties id="model.125437f916e.76" name="fieldValue" outFlows="model.125437f916e.14a"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.1254759bbc9.54" name="make negative">
-      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.1254759bc84.16" id="model.1254759b7c1.155" name="make negative">
+      <operations xsi:type="iaml:CompositeOperation" inWires="wires.1254759bc84.16" id="model.1254759b7c1.155" name="make negative">
         <operations xsi:type="iaml:PrimitiveOperation" id="model.1254759b7c1.20e" name="setPropertyToValue" inFlows="model.1254759b7c1.216" inExecutions="model.1254759b7c1.210" outFlows="model.1254759b7c1.217" outExecutions="model.1254759b7c1.212"/>
         <nodes xsi:type="iaml.operations:StartNode" id="operations.1254759bd7e.69" outExecutions="model.1254759b7c1.210"/>
         <nodes xsi:type="iaml.operations:FinishNode" id="operations.1254759bd7e.6a" inExecutions="model.1254759b7c1.212"/>
@@ -42,7 +42,7 @@
         <executionEdges id="model.1254759b7c1.212" from="model.1254759b7c1.20e" to="operations.1254759bd7e.6a"/>
         <values id="model.1254759b7c1.20f" name="negative 1" outFlows="model.1254759b7c1.215" value="-1"/>
       </operations>
-      <onClick id="model.1254759b7c1.154" outEdges="wires.1254759bc84.16">
+      <onClick id="model.1254759b7c1.154" outWires="wires.1254759bc84.16">
         <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1254759bc84.16" from="model.1254759b7c1.154" to="model.1254759b7c1.155" name="run"/>
       </onClick>
     </children>

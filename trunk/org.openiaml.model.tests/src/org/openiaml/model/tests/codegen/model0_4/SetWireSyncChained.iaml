@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12311ff1569.286">
   <scopes xsi:type="iaml.visual:Frame" id="visual.12311ff15c6.1d2" name="Home">
-    <children xsi:type="iaml.visual:InputTextField" outEdges="wires.12311ff15e6.5e" id="visual.12311ff15c6.1d9" name="source">
+    <children xsi:type="iaml.visual:InputTextField" outWires="wires.12311ff15e6.5e" id="visual.12311ff15c6.1d9" name="source">
       <wires xsi:type="iaml.wires:SetWire" id="wires.12311ff15e6.5e" from="visual.12311ff15c6.1d9" to="visual.12311ff15c6.1ed" name="set"/>
     </children>
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.12311ff15c6.1df" name="page2">
-    <children xsi:type="iaml.visual:InputTextField" outEdges="wires.12311ff15e6.65" inEdges="wires.12311ff15e6.5e" id="visual.12311ff15c6.1ed" name="target">
+    <children xsi:type="iaml.visual:InputTextField" outWires="wires.12311ff15e6.65" inWires="wires.12311ff15e6.5e" id="visual.12311ff15c6.1ed" name="target">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.12311ff15e6.65" from="visual.12311ff15c6.1ed" to="visual.12311ff15c6.20e" name="sync"/>
     </children>
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.12311ff15c6.1f8" name="page3">
-    <children xsi:type="iaml.visual:InputTextField" inEdges="wires.12311ff15e6.65" id="visual.12311ff15c6.20e" name="changed"/>
+    <children xsi:type="iaml.visual:InputTextField" inWires="wires.12311ff15e6.65" id="visual.12311ff15c6.20e" name="changed"/>
   </scopes>
 </iaml:InternetApplication>

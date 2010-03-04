@@ -2,15 +2,15 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="migrated0">
   <scopes xsi:type="iaml.visual:Frame" id="migrated1" name="container">
     <children xsi:type="iaml.visual:InputTextField" id="visual.1207ff8316f.fa" name="setToHello">
+      <onEdit id="model.1207ff82f9b.1ae" outWires="wires.1207ff8322b.4d">
+        <wires xsi:type="iaml.wires:RunInstanceWire" inParameterEdges="wires.1207ff8322b.4e" id="wires.1207ff8322b.4d" from="model.1207ff82f9b.1ae" to="model.1207ff82f9b.1bf" name="run"/>
+      </onEdit>
       <values id="model.1207ff82f9b.319" name="value" outParameterEdges="wires.1207ff8322b.4e" value="hello">
         <parameterEdges id="wires.1207ff8322b.4e" from="model.1207ff82f9b.319" to="wires.1207ff8322b.4d"/>
       </values>
-      <onEdit id="model.1207ff82f9b.1ae" outEdges="wires.1207ff8322b.4d">
-        <wires xsi:type="iaml.wires:RunInstanceWire" inParameterEdges="wires.1207ff8322b.4e" id="wires.1207ff8322b.4d" from="model.1207ff82f9b.1ae" to="model.1207ff82f9b.1bf" name="run"/>
-      </onEdit>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.1207ff8316f.fb" name="target">
-      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.1207ff8322b.4d wires.1207ff8322b.61" id="model.1207ff82f9b.1bf" name="set to a static value">
+      <operations xsi:type="iaml:CompositeOperation" inWires="wires.1207ff8322b.4d wires.1207ff8322b.61" id="model.1207ff82f9b.1bf" name="set to a static value">
         <parameters id="model.1207ff82f9b.1f8" name="value" outFlows="model.1207ff82f9b.269"/>
         <operations xsi:type="iaml:PrimitiveOperation" id="model.1207ff82f9b.1fd" name="setPropertyToValue" inFlows="model.1207ff82f9b.269" inExecutions="model.1207ff82f9b.1fe" outFlows="model.1207ff82f9b.26a" outExecutions="model.1207ff82f9b.1ff"/>
         <nodes xsi:type="iaml.operations:StartNode" id="operations.1207ff832b7.63" outExecutions="model.1207ff82f9b.1fe"/>
@@ -23,12 +23,12 @@
       <properties id="model.1207ff82f9b.22d" name="fieldValue" inFlows="model.1207ff82f9b.26a"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.1207ff8316f.251" name="setToWorld">
+      <onEdit id="model.1207ff82f9b.38c" outWires="wires.1207ff8322b.61">
+        <wires xsi:type="iaml.wires:RunInstanceWire" inParameterEdges="wires.1207ff8322b.62" id="wires.1207ff8322b.61" from="model.1207ff82f9b.38c" to="model.1207ff82f9b.1bf" name="run2"/>
+      </onEdit>
       <values id="model.1207ff82f9b.38d" name="value" outParameterEdges="wires.1207ff8322b.62" value="world!">
         <parameterEdges id="wires.1207ff8322b.62" from="model.1207ff82f9b.38d" to="wires.1207ff8322b.61"/>
       </values>
-      <onEdit id="model.1207ff82f9b.38c" outEdges="wires.1207ff8322b.61">
-        <wires xsi:type="iaml.wires:RunInstanceWire" inParameterEdges="wires.1207ff8322b.62" id="wires.1207ff8322b.61" from="model.1207ff82f9b.38c" to="model.1207ff82f9b.1bf" name="run2"/>
-      </onEdit>
     </children>
   </scopes>
 </iaml:InternetApplication>

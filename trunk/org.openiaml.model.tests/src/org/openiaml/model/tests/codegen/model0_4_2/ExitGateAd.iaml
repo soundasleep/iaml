@@ -6,8 +6,8 @@
     <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.27" name="Page 1"/>
     <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.29" name="Page 2"/>
     <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.32" name="Page 3"/>
-    <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.4a" name="Advertisement" inEdges="wires.126b0cb5e5a.e">
-      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.126b0cb5e5a.4b" id="model.126b0cb5dec.d8" name="set flag to true">
+    <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.4a" name="Advertisement" inWires="wires.126b0cb5e5a.e">
+      <operations xsi:type="iaml:CompositeOperation" inWires="wires.126b0cb5e5a.4b" id="model.126b0cb5dec.d8" name="set flag to true">
         <operations xsi:type="iaml:PrimitiveOperation" id="model.126b0cb5dec.176" name="setPropertyToValue" inFlows="model.126b0cb5dec.180" inExecutions="model.126b0cb5dec.17d" outFlows="model.126b0cb5dec.182" outExecutions="model.126b0cb5dec.17f"/>
         <nodes xsi:type="iaml.operations:StartNode" id="operations.126b0cb5e69.8a" outExecutions="model.126b0cb5dec.17d"/>
         <nodes xsi:type="iaml.operations:FinishNode" id="operations.126b0cb5e69.8c" inExecutions="model.126b0cb5dec.17f"/>
@@ -17,10 +17,10 @@
         <executionEdges id="model.126b0cb5dec.17f" from="model.126b0cb5dec.176" to="operations.126b0cb5e69.8c"/>
         <values id="model.126b0cb5dec.178" name="true" outFlows="model.126b0cb5dec.180" value="true"/>
       </operations>
-      <onAccess id="model.126b0cb5dec.c4" outEdges="wires.126b0cb5e5a.4b">
+      <onAccess id="model.126b0cb5dec.c4" outWires="wires.126b0cb5e5a.4b">
         <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.126b0cb5e5a.4b" from="model.126b0cb5dec.c4" to="model.126b0cb5dec.d8" name="run"/>
       </onAccess>
-      <children xsi:type="iaml.visual:Button" outEdges="wires.126b0cb5e5a.10e" id="visual.126b0cb5e5a.2d5" name="Resume">
+      <children xsi:type="iaml.visual:Button" outWires="wires.126b0cb5e5a.10e" id="visual.126b0cb5e5a.2d5" name="Resume">
         <wires xsi:type="iaml.wires:NavigateWire" id="wires.126b0cb5e5a.10e" from="visual.126b0cb5e5a.2d5" to="components.126b0cb5e69.5" name="onClick"/>
       </children>
     </scopes>
@@ -35,7 +35,7 @@
       <executionEdges id="model.126b0cb5dec.68" name="n" from="operations.126b0cb5e69.15" to="operations.126b0cb5e69.14"/>
       <executionEdges id="model.126b0cb5dec.69" from="operations.126b0cb5e69.12" to="operations.126b0cb5e69.15"/>
     </conditions>
-    <exitGate id="components.126b0cb5e69.5" name="View Ads Exit Gate" outEdges="wires.126b0cb5e5a.e" inEdges="wires.126b0cb5e5a.10e" inConditionEdges="wires.126b0cb5e5a.17">
+    <exitGate id="components.126b0cb5e69.5" name="View Ads Exit Gate" outWires="wires.126b0cb5e5a.e" inWires="wires.126b0cb5e5a.10e" inConditionEdges="wires.126b0cb5e5a.17">
       <wires xsi:type="iaml.wires:NavigateWire" id="wires.126b0cb5e5a.e" from="components.126b0cb5e69.5" to="visual.126b0cb5e5a.4a" name="view ad"/>
     </exitGate>
     <properties id="model.126b0cb5dec.3e" name="ad viewed?" outFlows="model.126b0cb5dec.8a" inFlows="model.126b0cb5dec.182" defaultValue="false"/>

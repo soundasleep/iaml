@@ -2,8 +2,8 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1268cdc3de1.11a">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
   <scopes xsi:type="iaml.visual:Frame" id="visual.1268cdc3e5e.138" name="New User">
-    <elements xsi:type="iaml:DomainObjectInstance" id="model.1268cdc3de1.1cb" name="New Student" inEdges="wires.1268cdc3e5e.97 wires.1268cdc3e5e.99"/>
-    <children xsi:type="iaml.visual:InputForm" outEdges="wires.1268cdc3e5e.99" id="visual.1268cdc3e5e.149" name="edit new student">
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.1268cdc3de1.1cb" name="New Student" inWires="wires.1268cdc3e5e.97 wires.1268cdc3e5e.99"/>
+    <children xsi:type="iaml.visual:InputForm" outWires="wires.1268cdc3e5e.99" id="visual.1268cdc3e5e.149" name="edit new student">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.1268cdc3e5e.99" from="visual.1268cdc3e5e.149" to="model.1268cdc3de1.1cb" name="sync"/>
     </children>
   </scopes>
@@ -11,7 +11,7 @@
     <children id="model.1268cdc3de1.127" name="Person" inExtendsEdges="wires.1268cdc3e5e.7e">
       <attributes id="model.1268cdc3de1.14f" name="name"/>
     </children>
-    <children id="model.1268cdc3de1.129" name="Student" outEdges="wires.1268cdc3e5e.97" outExtendsEdges="wires.1268cdc3e5e.7e">
+    <children id="model.1268cdc3de1.129" name="Student" outWires="wires.1268cdc3e5e.97" outExtendsEdges="wires.1268cdc3e5e.7e">
       <wires xsi:type="iaml.wires:NewInstanceWire" id="wires.1268cdc3e5e.97" from="model.1268cdc3de1.129" to="model.1268cdc3de1.1cb" name="new"/>
       <extendsEdges id="wires.1268cdc3e5e.7e" from="model.1268cdc3de1.129" to="model.1268cdc3de1.127"/>
       <attributes id="model.1268cdc3de1.186" name="id"/>

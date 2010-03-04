@@ -8,13 +8,13 @@
   <scopes xsi:type="iaml.visual:Frame" id="migrated3" name="page c">
     <children xsi:type="iaml.visual:InputTextField" id="visual.1203bbadbb8.49b" name="target"/>
   </scopes>
-  <scopes xsi:type="iaml.visual:Frame" id="fieldlist" name="FieldList" inEdges="migrated4">
+  <scopes xsi:type="iaml.visual:Frame" id="fieldlist" name="FieldList" inWires="migrated4">
     <children xsi:type="iaml.visual:InputTextField" id="visual.1203bbadbb8.458" name="target"/>
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="unrelated" name="unrelated">
     <children xsi:type="iaml.visual:InputTextField" id="visual.1204501d03b.8a" name="target"/>
   </scopes>
-  <children xsi:type="iaml:DynamicApplicationElementSet" id="migrated5" name="all pages" outEdges="migrated4" query="xpath:iaml:scopes[starts-with(iaml:name, 'page')]">
+  <children xsi:type="iaml:DynamicApplicationElementSet" id="migrated5" name="all pages" outWires="migrated4" query="xpath:iaml:scopes[starts-with(iaml:name, 'page')]">
     <wires xsi:type="iaml.wires:SyncWire" id="migrated4" from="migrated5" to="fieldlist" name="sync"/>
   </children>
 </iaml:InternetApplication>

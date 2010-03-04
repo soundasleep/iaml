@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12109331eea.107e">
   <scopes xsi:type="iaml.visual:Frame" id="visual.12109331f38.e3f" name="container">
-    <elements xsi:type="iaml:DomainAttributeInstance" id="model.12109c6242e.1dc" name="name" outEdges="wires.12109c6249b.5e" inEdges="wires.12109c6249b.5f">
-      <operations xsi:type="iaml:PrimitiveOperation" inEdges="wires.1213cee9bad.f4" id="model.1213cee9b4f.415" name="save"/>
+    <elements xsi:type="iaml:DomainAttributeInstance" id="model.12109c6242e.1dc" name="name" outWires="wires.12109c6249b.5e" inWires="wires.12109c6249b.5f">
+      <operations xsi:type="iaml:PrimitiveOperation" inWires="wires.1213cee9bad.f4" id="model.1213cee9b4f.415" name="save"/>
       <wires xsi:type="iaml.wires:SyncWire" id="wires.12109c6249b.5e" from="model.12109c6242e.1dc" to="visual.12109c6248b.ac" name="sync"/>
     </elements>
     <children xsi:type="iaml.visual:InputTextField" id="visual.12109c6248b.ab" name="select email" outParameterEdges="wires.12109c6249b.60">
       <parameterEdges id="wires.12109c6249b.60" from="visual.12109c6248b.ab" to="wires.12109c6249b.5f"/>
       <properties id="model.12109c6242e.21d" name="fieldValue" defaultValue="default@jevon.org"/>
     </children>
-    <children xsi:type="iaml.visual:InputTextField" inEdges="wires.12109c6249b.5e" id="visual.12109c6248b.ac" name="edit name"/>
-    <children xsi:type="iaml.visual:Button" outEdges="wires.1213cee9bad.f4" id="visual.1213cee9bad.158" name="manually save">
+    <children xsi:type="iaml.visual:InputTextField" inWires="wires.12109c6249b.5e" id="visual.12109c6248b.ac" name="edit name"/>
+    <children xsi:type="iaml.visual:Button" outWires="wires.1213cee9bad.f4" id="visual.1213cee9bad.158" name="manually save">
       <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1213cee9bad.f4" from="visual.1213cee9bad.158" to="model.1213cee9b4f.415" name="click"/>
     </children>
   </scopes>
   <domainStores id="model.12109331eea.1083" name="domain store">
-    <children id="model.12109331eea.108c" name="User" outEdges="wires.12109c6249b.5f">
+    <children id="model.12109331eea.108c" name="User" outWires="wires.12109c6249b.5f">
       <wires xsi:type="iaml.wires:SelectWire" inParameterEdges="wires.12109c6249b.60" id="wires.12109c6249b.5f" from="model.12109331eea.108c" to="model.12109c6242e.1dc" name="select" query="email = ?"/>
       <attributes id="model.12109331eea.10ac" name="name"/>
       <attributes id="model.12109331eea.10ad" name="email"/>

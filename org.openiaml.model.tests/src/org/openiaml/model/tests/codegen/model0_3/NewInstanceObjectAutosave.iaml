@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1213cee9b4f.f">
   <scopes xsi:type="iaml.visual:Frame" id="visual.1213cee9bad.9" name="container">
-    <elements xsi:type="iaml:DomainObjectInstance" id="model.1213cee9b4f.99" name="&quot;My User&quot;" inEdges="wires.1213cee9bad.7">
-      <operations xsi:type="iaml:PrimitiveOperation" inEdges="wires.1213cee9bad.31" id="model.1213cee9b4f.1b4" name="save"/>
-      <attributes id="model.1213cee9b4f.e1" name="name" inEdges="wires.1213cee9bad.18"/>
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.1213cee9b4f.99" name="&quot;My User&quot;" inWires="wires.1213cee9bad.7">
+      <operations xsi:type="iaml:PrimitiveOperation" inWires="wires.1213cee9bad.31" id="model.1213cee9b4f.1b4" name="save"/>
+      <attributes id="model.1213cee9b4f.e1" name="name" inWires="wires.1213cee9bad.18"/>
     </elements>
-    <children xsi:type="iaml.visual:InputTextField" outEdges="wires.1213cee9bad.18" id="visual.1213cee9bad.48" name="edit new instance name">
+    <children xsi:type="iaml.visual:InputTextField" outWires="wires.1213cee9bad.18" id="visual.1213cee9bad.48" name="edit new instance name">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.1213cee9bad.18" from="visual.1213cee9bad.48" to="model.1213cee9b4f.e1" name="sync"/>
     </children>
-    <children xsi:type="iaml.visual:Button" outEdges="wires.1213cee9bad.31" id="visual.1213cee9bad.81" name="manually save">
+    <children xsi:type="iaml.visual:Button" outWires="wires.1213cee9bad.31" id="visual.1213cee9bad.81" name="manually save">
       <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1213cee9bad.31" from="visual.1213cee9bad.81" to="model.1213cee9b4f.1b4" name="click"/>
     </children>
   </scopes>
   <domainStores id="model.1213cee9b4f.18" name="domain store">
-    <children id="model.1213cee9b4f.29" name="User" outEdges="wires.1213cee9bad.7">
+    <children id="model.1213cee9b4f.29" name="User" outWires="wires.1213cee9bad.7">
       <wires xsi:type="iaml.wires:NewInstanceWire" id="wires.1213cee9bad.7" from="model.1213cee9b4f.29" to="model.1213cee9b4f.99"/>
       <attributes id="model.1213cee9b4f.50" name="id" primaryKey="true"/>
       <attributes id="model.1213cee9b4f.57" name="name"/>

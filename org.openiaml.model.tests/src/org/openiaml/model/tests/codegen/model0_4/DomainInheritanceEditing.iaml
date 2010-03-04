@@ -5,8 +5,8 @@
     <values id="model.123641434e9.2ad3" name="person name" outParameterEdges="wires.12364143556.6c8" value="Test Name">
       <parameterEdges id="wires.12364143556.6c8" from="model.123641434e9.2ad3" to="wires.12364143556.6c6"/>
     </values>
-    <elements xsi:type="iaml:DomainObjectInstance" id="model.123641434e9.2abe" name="selected person" inEdges="wires.12364143556.6c6 wires.12364143556.6ca" autosave="true"/>
-    <children xsi:type="iaml.visual:InputForm" outEdges="wires.12364143556.6ca" id="visual.12364143556.d2" name="view person">
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.123641434e9.2abe" name="selected person" inWires="wires.12364143556.6c6 wires.12364143556.6ca" autosave="true"/>
+    <children xsi:type="iaml.visual:InputForm" outWires="wires.12364143556.6ca" id="visual.12364143556.d2" name="view person">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.12364143556.6ca" from="visual.12364143556.d2" to="model.123641434e9.2abe" name="sync"/>
     </children>
   </scopes>
@@ -14,8 +14,8 @@
     <values id="model.123641434e9.2c35" name="enrolled param" outParameterEdges="wires.12364143556.752" value="yesterday">
       <parameterEdges id="wires.12364143556.752" from="model.123641434e9.2c35" to="wires.12364143556.751"/>
     </values>
-    <elements xsi:type="iaml:DomainObjectInstance" id="model.123641434e9.2c34" name="current student" inEdges="wires.12364143556.750 wires.12364143556.751" autosave="true"/>
-    <children xsi:type="iaml.visual:InputForm" outEdges="wires.12364143556.750" id="visual.12364143556.108" name="view student">
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.123641434e9.2c34" name="current student" inWires="wires.12364143556.750 wires.12364143556.751" autosave="true"/>
+    <children xsi:type="iaml.visual:InputForm" outWires="wires.12364143556.750" id="visual.12364143556.108" name="view student">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.12364143556.750" from="visual.12364143556.108" to="model.123641434e9.2c34" name="sync"/>
     </children>
   </scopes>
@@ -23,8 +23,8 @@
     <values id="model.123641434e9.2de9" name="teacher id" outParameterEdges="wires.12364143556.819" value="24">
       <parameterEdges id="wires.12364143556.819" from="model.123641434e9.2de9" to="wires.12364143556.818"/>
     </values>
-    <elements xsi:type="iaml:DomainObjectInstance" id="model.123641434e9.2de8" name="selected teacher" inEdges="wires.12364143556.817 wires.12364143556.818" autosave="true"/>
-    <children xsi:type="iaml.visual:InputForm" outEdges="wires.12364143556.817" id="visual.12364143556.168" name="view teacher">
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.123641434e9.2de8" name="selected teacher" inWires="wires.12364143556.817 wires.12364143556.818" autosave="true"/>
+    <children xsi:type="iaml.visual:InputForm" outWires="wires.12364143556.817" id="visual.12364143556.168" name="view teacher">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.12364143556.817" from="visual.12364143556.168" to="model.123641434e9.2de8" name="sync"/>
     </children>
   </scopes>
@@ -35,50 +35,50 @@
     <values id="model.123641434e9.2f10" name="degree" outParameterEdges="wires.12364143556.93d" value="science">
       <parameterEdges id="wires.12364143556.93d" from="model.123641434e9.2f10" to="wires.12364143556.93b"/>
     </values>
-    <elements xsi:type="iaml:DomainObjectInstance" id="model.123641434e9.2f0e" name="current doctoral" inEdges="wires.12364143556.93b wires.12364143556.a92" autosave="true"/>
-    <children xsi:type="iaml.visual:InputForm" outEdges="wires.12364143556.a92" id="visual.12364143556.2a7" name="current doctoral">
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.123641434e9.2f0e" name="current doctoral" inWires="wires.12364143556.93b wires.12364143556.a92" autosave="true"/>
+    <children xsi:type="iaml.visual:InputForm" outWires="wires.12364143556.a92" id="visual.12364143556.2a7" name="current doctoral">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.12364143556.a92" from="visual.12364143556.2a7" to="model.123641434e9.2f0e" name="sync"/>
     </children>
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.12392019277.68" name="create a new person">
-    <elements xsi:type="iaml:DomainObjectInstance" id="model.12392019209.19e" name="new person" inEdges="wires.12392019286.fe wires.12392019286.100" autosave="true"/>
-    <children xsi:type="iaml.visual:InputForm" outEdges="wires.12392019286.100" id="visual.12392019277.8b" name="editing form">
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.12392019209.19e" name="new person" inWires="wires.12392019286.fe wires.12392019286.100" autosave="true"/>
+    <children xsi:type="iaml.visual:InputForm" outWires="wires.12392019286.100" id="visual.12392019277.8b" name="editing form">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.12392019286.100" from="visual.12392019277.8b" to="model.12392019209.19e" name="sync"/>
     </children>
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.12392019277.ae" name="create a new student without autosave">
-    <elements xsi:type="iaml:DomainObjectInstance" id="model.12392019209.237" name="new student" inEdges="wires.12392019286.17b wires.12392019286.17c">
-      <operations xsi:type="iaml:PrimitiveOperation" inEdges="wires.12392019286.22b" id="model.12392019209.2aa" name="save"/>
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.12392019209.237" name="new student" inWires="wires.12392019286.17b wires.12392019286.17c">
+      <operations xsi:type="iaml:PrimitiveOperation" inWires="wires.12392019286.22b" id="model.12392019209.2aa" name="save"/>
     </elements>
-    <children xsi:type="iaml.visual:InputForm" outEdges="wires.12392019286.17c" id="visual.12392019277.e7" name="new student form">
+    <children xsi:type="iaml.visual:InputForm" outWires="wires.12392019286.17c" id="visual.12392019277.e7" name="new student form">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.12392019286.17c" from="visual.12392019277.e7" to="model.12392019209.237" name="sync"/>
     </children>
-    <children xsi:type="iaml.visual:Button" outEdges="wires.12392019286.22b" id="visual.12392019277.178" name="save student">
+    <children xsi:type="iaml.visual:Button" outWires="wires.12392019286.22b" id="visual.12392019277.178" name="save student">
       <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.12392019286.22b" from="visual.12392019277.178" to="model.12392019209.2aa" name="onClick"/>
     </children>
   </scopes>
   <scopes xsi:type="iaml.scopes:Session" id="scopes.12392019286.4" name="a session">
     <scopes xsi:type="iaml.visual:Frame" id="visual.12392019277.239" name="create a new doctoral">
-      <elements xsi:type="iaml:DomainObjectInstance" id="model.12392019209.4d0" name="new doctoral" inEdges="wires.12392019286.392 wires.12392019286.393" autosave="true"/>
-      <children xsi:type="iaml.visual:InputForm" outEdges="wires.12392019286.392" id="visual.12392019277.2a0" name="edit form">
+      <elements xsi:type="iaml:DomainObjectInstance" id="model.12392019209.4d0" name="new doctoral" inWires="wires.12392019286.392 wires.12392019286.393" autosave="true"/>
+      <children xsi:type="iaml.visual:InputForm" outWires="wires.12392019286.392" id="visual.12392019277.2a0" name="edit form">
         <wires xsi:type="iaml.wires:SyncWire" id="wires.12392019286.392" from="visual.12392019277.2a0" to="model.12392019209.4d0" name="sync"/>
       </children>
     </scopes>
   </scopes>
   <domainStores id="model.1236407970c.5" name="domain store">
-    <children id="model.1236407970c.11" name="Person" outEdges="wires.12364143556.6c6 wires.12392019286.fe" inExtendsEdges="wires.12364143556.1 wires.12364143556.3">
+    <children id="model.1236407970c.11" name="Person" outWires="wires.12364143556.6c6 wires.12392019286.fe" inExtendsEdges="wires.12364143556.1 wires.12364143556.3">
       <wires xsi:type="iaml.wires:SelectWire" inParameterEdges="wires.12364143556.6c8" id="wires.12364143556.6c6" from="model.1236407970c.11" to="model.123641434e9.2abe" name="select" query="name = ?"/>
       <wires xsi:type="iaml.wires:NewInstanceWire" id="wires.12392019286.fe" from="model.1236407970c.11" to="model.12392019209.19e" name="new"/>
       <attributes id="model.123641434e9.8a" name="name"/>
       <attributes id="model.123641434e9.29a8" name="id" primaryKey="true"/>
     </children>
-    <children id="model.1236407970c.19" name="Student" outEdges="wires.12364143556.751 wires.12392019286.17b" outExtendsEdges="wires.12364143556.1" inExtendsEdges="wires.12364143556.5 wires.12364143556.6">
+    <children id="model.1236407970c.19" name="Student" outWires="wires.12364143556.751 wires.12392019286.17b" outExtendsEdges="wires.12364143556.1" inExtendsEdges="wires.12364143556.5 wires.12364143556.6">
       <wires xsi:type="iaml.wires:SelectWire" inParameterEdges="wires.12364143556.752" id="wires.12364143556.751" from="model.1236407970c.19" to="model.123641434e9.2c34" name="select" query="enrolled = ?"/>
       <wires xsi:type="iaml.wires:NewInstanceWire" id="wires.12392019286.17b" from="model.1236407970c.19" to="model.12392019209.237" name="new"/>
       <extendsEdges id="wires.12364143556.1" from="model.1236407970c.19" to="model.1236407970c.11"/>
       <attributes id="model.123641434e9.f3" name="enrolled"/>
     </children>
-    <children id="model.1236407970c.1a" name="Teacher" outEdges="wires.12364143556.818" outExtendsEdges="wires.12364143556.3 wires.12364143556.4" inExtendsEdges="wires.12364143556.8">
+    <children id="model.1236407970c.1a" name="Teacher" outWires="wires.12364143556.818" outExtendsEdges="wires.12364143556.3 wires.12364143556.4" inExtendsEdges="wires.12364143556.8">
       <wires xsi:type="iaml.wires:SelectWire" inParameterEdges="wires.12364143556.819" id="wires.12364143556.818" from="model.1236407970c.1a" to="model.123641434e9.2de8" name="select" query="id = ?"/>
       <extendsEdges id="wires.12364143556.3" from="model.1236407970c.1a" to="model.1236407970c.11"/>
       <extendsEdges id="wires.12364143556.4" from="model.1236407970c.1a" to="model.1236407970c.1b"/>
@@ -95,7 +95,7 @@
       <extendsEdges id="wires.12364143556.6" from="model.1236407970c.1d" to="model.1236407970c.19"/>
       <attributes id="model.123641434e9.240" name="degree"/>
     </children>
-    <children id="model.1236407970c.1e" name="Doctoral" outEdges="wires.12364143556.93b wires.12392019286.393" outExtendsEdges="wires.12364143556.7 wires.12364143556.8">
+    <children id="model.1236407970c.1e" name="Doctoral" outWires="wires.12364143556.93b wires.12392019286.393" outExtendsEdges="wires.12364143556.7 wires.12364143556.8">
       <wires xsi:type="iaml.wires:SelectWire" inParameterEdges="wires.12364143556.93c wires.12364143556.93d" id="wires.12364143556.93b" from="model.1236407970c.1e" to="model.123641434e9.2f0e" query="qualification = :qualification and degree = :degree"/>
       <wires xsi:type="iaml.wires:NewInstanceWire" id="wires.12392019286.393" from="model.1236407970c.1e" to="model.12392019209.4d0" name="new"/>
       <extendsEdges id="wires.12364143556.7" from="model.1236407970c.1e" to="model.1236407970c.1c"/>

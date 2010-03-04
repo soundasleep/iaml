@@ -13,7 +13,9 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.common.core.command.ICommand;
@@ -21,20 +23,13 @@ import org.eclipse.gmf.runtime.diagram.core.commands.DeleteCommand;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.openiaml.model.diagram.helpers.inference.EmfInferenceHandler;
+import org.openiaml.model.helpers.EdgeTypes;
+import org.openiaml.model.helpers.EdgeTypes.EdgeType;
 import org.openiaml.model.inference.EcoreCreateElementsHelper;
 import org.openiaml.model.inference.InferenceException;
-import org.openiaml.model.model.DataFlowEdge;
-import org.openiaml.model.model.DataFlowEdgeDestination;
-import org.openiaml.model.model.DataFlowEdgesSource;
 import org.openiaml.model.model.EventTrigger;
-import org.openiaml.model.model.ExecutionEdge;
-import org.openiaml.model.model.ExecutionEdgeDestination;
-import org.openiaml.model.model.ExecutionEdgesSource;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.NamedElement;
-import org.openiaml.model.model.WireEdge;
-import org.openiaml.model.model.WireEdgeDestination;
-import org.openiaml.model.model.WireEdgesSource;
 
 /**
  * <p>
@@ -193,7 +188,7 @@ public class GeneratedElementHandler {
 		}
 		this.editingDomain = domain;
 	}
-
+	
 	/**
 	 * Find all the relationships and target objects from this
 	 * generated element.
@@ -206,95 +201,83 @@ public class GeneratedElementHandler {
 		
 		Map<EObject,EObject> result = new HashMap<EObject,EObject>();
 
-		// NOTE model-specific
-		if (g instanceof WireEdgeDestination) {
-			checkAllWireEdges((WireEdgeDestination) g, result);
+		for (EdgeType typ : EdgeTypes.getAllEdgeTypes()) {
+			// WireSource
+			if (typ.getEdgeSource().isInstance(g)) {
+				// find the EOpposite (outWires)
+				EReference opposite = typ.getFromOpposite();
+				
+				// get results as a list
+				List<Object> edges = new ArrayList<Object>();
+				if (opposite.isMany()) {
+					List<?> e2 = (List<?>) g.eGet(opposite);
+					for (Object e : e2)
+						edges.add(e);
+				} else {
+					edges.add(g.eGet(opposite));
+				}
+								
+				for (Object edge : edges) {
+					// if it's a NON-generated element that has been generated, add it to the list
+					if (edge instanceof GeneratedElement) { 
+						GeneratedElement edge2 = (GeneratedElement) edge;
+						
+						if (!edge2.isIsGenerated()) {
+							EReference target = typ.getToRef();
+							
+							Object reverse = edge2.eGet(target);
+							if (reverse == null)
+								continue;
+							
+							if (!(reverse instanceof EObject)) {
+								throw new IllegalArgumentException("Object '" + reverse + "' is not an EObject, resolved reference = '" + target + "' of edgeType " + typ);
+							}
+							result.put(edge2, (EObject) reverse);
+						}
+					}
+				}
+			}
+			
+			// WireDestination
+			if (typ.getEdgeDestination().isInstance(g)) {
+				// find the EOpposite (inWires)
+				EReference opposite = typ.getToOpposite();
+				
+				// get results as a list
+				List<Object> edges = new ArrayList<Object>();
+				if (opposite.isMany()) {
+					List<?> e2 = (List<?>) g.eGet(opposite);
+					for (Object e : e2)
+						edges.add(e);
+				} else {
+					edges.add(g.eGet(opposite));
+				}
+								
+				for (Object edge : edges) {
+					// if it's a NON-generated element that has been generated, add it to the list
+					if (edge instanceof GeneratedElement) { 
+						GeneratedElement edge2 = (GeneratedElement) edge;
+						
+						if (!edge2.isIsGenerated()) {
+							EReference target = typ.getFromRef();
+							
+							Object reverse = edge2.eGet(target);
+							if (reverse == null)
+								continue;
+							
+							if (!(reverse instanceof EObject)) {
+								throw new IllegalArgumentException("Object '" + reverse + "' is not an EObject, resolved reference = '" + target + "' of edgeType " + typ);
+							}
+							result.put(edge2, (EObject) reverse);
+						}
+					}
+				}
+			}
 		}
-		if (g instanceof WireEdgesSource) {
-			checkAllWireEdges((WireEdgesSource) g, result);
-		}
-		if (g instanceof ExecutionEdgesSource) {
-			checkAllExecutionEdges((ExecutionEdgesSource) g, result);
-		}
-		if (g instanceof ExecutionEdgeDestination) {
-			checkAllExecutionEdges((ExecutionEdgeDestination) g, result);
-		}
-		if (g instanceof DataFlowEdgesSource) {
-			checkAllDataFlowEdges((DataFlowEdgesSource) g, result);
-		}
-		if (g instanceof DataFlowEdgeDestination) {
-			checkAllDataFlowEdges((DataFlowEdgeDestination) g, result);
-		}
-
+		
 		return result;
 	}
 
-	/**
-	 * Check all incoming edges to the given wire destination.
-	 */
-	private void checkAllWireEdges(WireEdgeDestination g,
-			Map<EObject, EObject> result) {
-		for (WireEdge edge : g.getInEdges()) {
-			if (!edge.isIsGenerated()) {
-				// edge isn't generated; mark it
-				result.put(edge, edge.getFrom());
-			}
-		}
-	}
-	
-	/**
-	 * Check all outgoing edges from the given wire source.
-	 */
-	private void checkAllWireEdges(WireEdgesSource g,
-			Map<EObject, EObject> result) {
-		for (WireEdge edge : g.getOutEdges()) {
-			if (!edge.isIsGenerated()) {
-				// edge isn't generated; mark it
-				result.put(edge, edge.getTo());
-			}
-		}
-	}
-
-	private void checkAllExecutionEdges(ExecutionEdgeDestination g,
-			Map<EObject, EObject> result) {
-		for (ExecutionEdge edge : g.getInExecutions()) {
-			if (!edge.isIsGenerated()) {
-				// edge isn't generated; mark it
-				result.put(edge, edge.getFrom());
-			}
-		}
-	}
-	
-	private void checkAllExecutionEdges(ExecutionEdgesSource g,
-			Map<EObject, EObject> result) {
-		for (ExecutionEdge edge : g.getOutExecutions()) {
-			if (!edge.isIsGenerated()) {
-				// edge isn't generated; mark it
-				result.put(edge, edge.getTo());
-			}
-		}
-	}
-	
-	private void checkAllDataFlowEdges(DataFlowEdgeDestination g,
-			Map<EObject, EObject> result) {
-		for (DataFlowEdge edge : g.getInFlows()) {
-			if (!edge.isIsGenerated()) {
-				// edge isn't generated; mark it
-				result.put(edge, edge.getFrom());
-			}
-		}
-	}
-	
-	private void checkAllDataFlowEdges(DataFlowEdgesSource g,
-			Map<EObject, EObject> result) {
-		for (DataFlowEdge edge : g.getOutFlows()) {
-			if (!edge.isIsGenerated()) {
-				// edge isn't generated; mark it
-				result.put(edge, edge.getTo());
-			}
-		}
-	}
-	
 	/**
 	 * @return
 	 */

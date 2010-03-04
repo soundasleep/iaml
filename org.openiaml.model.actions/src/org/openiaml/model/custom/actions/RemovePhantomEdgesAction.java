@@ -120,10 +120,8 @@ public class RemovePhantomEdgesAction extends IamlFileAction {
 		while (it.hasNext()) {
 			EObject obj = it.next();
 			if (shouldRemove(obj)) {
-				
+				elementsToDelete.add(obj);
 			}
-			
-			// TODO issue 156: does not check all types of Edge
 		}
 		monitor.worked(30);
 		if (monitor.isCanceled())

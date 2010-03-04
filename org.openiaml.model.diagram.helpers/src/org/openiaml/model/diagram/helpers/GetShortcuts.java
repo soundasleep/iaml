@@ -15,9 +15,9 @@ import org.openiaml.model.model.DataFlowEdgesSource;
 import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.ExecutionEdgeDestination;
 import org.openiaml.model.model.ExecutionEdgesSource;
-import org.openiaml.model.model.WireEdge;
-import org.openiaml.model.model.WireEdgeDestination;
-import org.openiaml.model.model.WireEdgesSource;
+import org.openiaml.model.model.Wire;
+import org.openiaml.model.model.WireDestination;
+import org.openiaml.model.model.WireSource;
 import org.openiaml.model.model.users.ProvidesEdgeDestination;
 import org.openiaml.model.model.users.ProvidesEdgesSource;
 import org.openiaml.model.model.users.RequiresEdgeDestination;
@@ -55,15 +55,15 @@ public class GetShortcuts {
 			IDiagramUpdater updater) {
 		for (EObject e : list) {
 			// NOTE: model-specific
-			if (e instanceof WireEdgesSource) {
+			if (e instanceof WireSource) {
 				// get all incoming edges
-				elements.addAll(getAllShortcutsFromWireEdges(doneAlready, edges, view, e,
-						((WireEdgesSource) e).getOutEdges(), registry, updater));
+				elements.addAll(getAllShortcutsFromWires(doneAlready, edges, view, e,
+						((WireSource) e).getOutWires(), registry, updater));
 			}
-			if (e instanceof WireEdgeDestination) {
+			if (e instanceof WireDestination) {
 				// get all incoming edges
-				elements.addAll(getAllShortcutsFromWireEdges(doneAlready, edges, view, e,
-						((WireEdgeDestination) e).getInEdges(), registry, updater));
+				elements.addAll(getAllShortcutsFromWires(doneAlready, edges, view, e,
+						((WireDestination) e).getInWires(), registry, updater));
 			}
 			if (e instanceof ExecutionEdgesSource) {
 				// get all incoming edges
@@ -148,12 +148,12 @@ public class GetShortcuts {
 		}
 	}
 	
-	private static List<WireEdge> getAllShortcutsFromWireEdges(
+	private static List<Wire> getAllShortcutsFromWires(
 			List<EObject> doneAlready, 
 			List<EObject> edges, 
 			View view, 
 			EObject source,
-			List<WireEdge> outEdges,
+			List<Wire> outEdges,
 			IVisualIDRegistryInstance registry,
 			IDiagramUpdater updater) {
 		List result = new LinkedList();
@@ -163,18 +163,18 @@ public class GetShortcuts {
 		// get all nodes at the start and end of the edge
 		// that are not the original object source
 		// NOTE: model-specific
-		for (WireEdge wire : outEdges) {
+		for (Wire wire : outEdges) {
 			// only look into these edges if we can actually render them...
 			if (registry.getLinkWithClassVisualID(wire) != -1) {
 				updater.considerElementForShortcut(wire.getFrom(), wire, view, source, doneAlready, result, edges);
 				updater.considerElementForShortcut(wire.getTo(), wire, view, source, doneAlready, result, edges);
 			}
 			
-			// additional special logic: if we have a WireEdgeDestination, get all of the incoming edges
+			// additional special logic: if we have a WireDestination, get all of the incoming edges
 			// that are RunInstanceWires, and render these as shortcut elements too (i.e. parameters)
 			// (this covers SelectWires, etc...: see Issue 69)
-			if (wire instanceof WireEdgeDestination) {
-				WireEdgeDestination run = (WireEdgeDestination) wire;
+			if (wire instanceof WireDestination) {
+				WireDestination run = (WireDestination) wire;
 				
 				if (run instanceof ParameterEdgesSource) {
 					// specifically, if this wire is also a destination of parameters, follow these up
@@ -192,7 +192,7 @@ public class GetShortcuts {
 					result.addAll(getAllShortcutsFromParameterEdges(doneAlready, edges, view, wire, prun.getInParameterEdges(), registry, updater)); 
 				}
 				
-				WireEdgeDestination e = run;
+				WireDestination e = run;
 				if (e instanceof ConditionEdgesSource) {
 					// get all incoming edges
 					result.addAll(getAllShortcutsFromConditionEdges(doneAlready, edges, view, e,
@@ -362,11 +362,11 @@ public class GetShortcuts {
 				updater.considerElementForShortcut(wire.getFrom(), wire, view, source, doneAlready, result, edges);
 				updater.considerElementForShortcut(wire.getTo(), wire, view, source, doneAlready, result, edges);
 	
-				// additional special logic: if we have a WireEdgeDestination, get all of the incoming edges
+				// additional special logic: if we have a WireDestination, get all of the incoming edges
 				// that are RunInstanceWires, and render these as shortcut elements too (i.e. parameters)
 				// (this covers SelectWires, etc...: see Issue 69)
-				if (wire instanceof WireEdgeDestination) {
-					WireEdgeDestination run = (WireEdgeDestination) wire;
+				if (wire instanceof WireDestination) {
+					WireDestination run = (WireDestination) wire;
 					
 					if (run instanceof ParameterEdgesSource) {
 						// specifically, if this wire is also a destination of parameters, follow these up
@@ -473,8 +473,8 @@ public class GetShortcuts {
 	 */
 	public static EObject getSourceElement(EObject relationship, boolean throwExceptionIfNoneFound) throws IllegalArgumentException {
 		// NOTE: model-specific
-		if (relationship instanceof WireEdge) {
-			return ((WireEdge) relationship).getFrom();
+		if (relationship instanceof Wire) {
+			return ((Wire) relationship).getFrom();
 		}
 		if (relationship instanceof ExecutionEdge) {
 			return ((ExecutionEdge) relationship).getFrom();
@@ -530,8 +530,8 @@ public class GetShortcuts {
 	public static EObject getTargetElement(EObject relationship, boolean throwExceptionIfNoneFound) throws IllegalArgumentException {
 		// NOTE: model-specific
 
-		if (relationship instanceof WireEdge) {
-			return ((WireEdge) relationship).getTo();
+		if (relationship instanceof Wire) {
+			return ((Wire) relationship).getTo();
 		}
 		if (relationship instanceof ExecutionEdge) {
 			return ((ExecutionEdge) relationship).getTo();

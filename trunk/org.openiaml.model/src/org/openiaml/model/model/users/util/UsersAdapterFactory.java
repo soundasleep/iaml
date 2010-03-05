@@ -13,12 +13,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.ContainsConditions;
-import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
+import org.openiaml.model.model.Editable;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.NamedElement;
@@ -172,10 +172,6 @@ public class UsersAdapterFactory extends AdapterFactoryImpl {
 				return createDomainStoreAdapter();
 			}
 			@Override
-			public Adapter caseContainsEventTriggers(ContainsEventTriggers object) {
-				return createContainsEventTriggersAdapter();
-			}
-			@Override
 			public Adapter caseApplicationElement(ApplicationElement object) {
 				return createApplicationElementAdapter();
 			}
@@ -190,6 +186,10 @@ public class UsersAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseExtendsEdgeDestination(ExtendsEdgeDestination object) {
 				return createExtendsEdgeDestinationAdapter();
+			}
+			@Override
+			public Adapter caseEditable(Editable object) {
+				return createEditableAdapter();
 			}
 			@Override
 			public Adapter caseDomainObject(DomainObject object) {
@@ -346,20 +346,6 @@ public class UsersAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createContainsOperationsAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ContainsEventTriggers <em>Contains Event Triggers</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.openiaml.model.model.ContainsEventTriggers
-	 * @generated
-	 */
-	public Adapter createContainsEventTriggersAdapter() {
 		return null;
 	}
 
@@ -556,6 +542,20 @@ public class UsersAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createExtendsEdgeDestinationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.Editable <em>Editable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.Editable
+	 * @generated
+	 */
+	public Adapter createEditableAdapter() {
 		return null;
 	}
 

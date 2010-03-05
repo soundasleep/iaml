@@ -22,10 +22,8 @@ import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsConditions;
-import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
-import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.ModelPackage;
@@ -67,7 +65,6 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.components.impl.AccessControlHandlerImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.openiaml.model.model.components.impl.AccessControlHandlerImpl#getGeneratedRule <em>Generated Rule</em>}</li>
  *   <li>{@link org.openiaml.model.model.components.impl.AccessControlHandlerImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.openiaml.model.model.components.impl.AccessControlHandlerImpl#getEventTriggers <em>Event Triggers</em>}</li>
  *   <li>{@link org.openiaml.model.model.components.impl.AccessControlHandlerImpl#getWires <em>Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.components.impl.AccessControlHandlerImpl#getParameterEdges <em>Parameter Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.components.impl.AccessControlHandlerImpl#getExtendsEdges <em>Extends Edges</em>}</li>
@@ -234,16 +231,6 @@ public class AccessControlHandlerImpl extends EObjectImpl implements AccessContr
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getEventTriggers() <em>Event Triggers</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEventTriggers()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<EventTrigger> eventTriggers;
 
 	/**
 	 * The cached value of the '{@link #getWires() <em>Wires</em>}' containment reference list.
@@ -553,18 +540,6 @@ public class AccessControlHandlerImpl extends EObjectImpl implements AccessContr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<EventTrigger> getEventTriggers() {
-		if (eventTriggers == null) {
-			eventTriggers = new EObjectContainmentEList<EventTrigger>(EventTrigger.class, this, ComponentsPackage.ACCESS_CONTROL_HANDLER__EVENT_TRIGGERS);
-		}
-		return eventTriggers;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<Wire> getWires() {
 		if (wires == null) {
 			wires = new EObjectContainmentEList<Wire>(Wire.class, this, ComponentsPackage.ACCESS_CONTROL_HANDLER__WIRES);
@@ -747,8 +722,6 @@ public class AccessControlHandlerImpl extends EObjectImpl implements AccessContr
 				return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
 			case ComponentsPackage.ACCESS_CONTROL_HANDLER__GENERATED_BY:
 				return ((InternalEList<?>)getGeneratedBy()).basicRemove(otherEnd, msgs);
-			case ComponentsPackage.ACCESS_CONTROL_HANDLER__EVENT_TRIGGERS:
-				return ((InternalEList<?>)getEventTriggers()).basicRemove(otherEnd, msgs);
 			case ComponentsPackage.ACCESS_CONTROL_HANDLER__WIRES:
 				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
 			case ComponentsPackage.ACCESS_CONTROL_HANDLER__PARAMETER_EDGES:
@@ -805,8 +778,6 @@ public class AccessControlHandlerImpl extends EObjectImpl implements AccessContr
 				return getGeneratedRule();
 			case ComponentsPackage.ACCESS_CONTROL_HANDLER__NAME:
 				return getName();
-			case ComponentsPackage.ACCESS_CONTROL_HANDLER__EVENT_TRIGGERS:
-				return getEventTriggers();
 			case ComponentsPackage.ACCESS_CONTROL_HANDLER__WIRES:
 				return getWires();
 			case ComponentsPackage.ACCESS_CONTROL_HANDLER__PARAMETER_EDGES:
@@ -878,10 +849,6 @@ public class AccessControlHandlerImpl extends EObjectImpl implements AccessContr
 				return;
 			case ComponentsPackage.ACCESS_CONTROL_HANDLER__NAME:
 				setName((String)newValue);
-				return;
-			case ComponentsPackage.ACCESS_CONTROL_HANDLER__EVENT_TRIGGERS:
-				getEventTriggers().clear();
-				getEventTriggers().addAll((Collection<? extends EventTrigger>)newValue);
 				return;
 			case ComponentsPackage.ACCESS_CONTROL_HANDLER__WIRES:
 				getWires().clear();
@@ -973,9 +940,6 @@ public class AccessControlHandlerImpl extends EObjectImpl implements AccessContr
 			case ComponentsPackage.ACCESS_CONTROL_HANDLER__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case ComponentsPackage.ACCESS_CONTROL_HANDLER__EVENT_TRIGGERS:
-				getEventTriggers().clear();
-				return;
 			case ComponentsPackage.ACCESS_CONTROL_HANDLER__WIRES:
 				getWires().clear();
 				return;
@@ -1044,8 +1008,6 @@ public class AccessControlHandlerImpl extends EObjectImpl implements AccessContr
 				return GENERATED_RULE_EDEFAULT == null ? generatedRule != null : !GENERATED_RULE_EDEFAULT.equals(generatedRule);
 			case ComponentsPackage.ACCESS_CONTROL_HANDLER__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case ComponentsPackage.ACCESS_CONTROL_HANDLER__EVENT_TRIGGERS:
-				return eventTriggers != null && !eventTriggers.isEmpty();
 			case ComponentsPackage.ACCESS_CONTROL_HANDLER__WIRES:
 				return wires != null && !wires.isEmpty();
 			case ComponentsPackage.ACCESS_CONTROL_HANDLER__PARAMETER_EDGES:
@@ -1111,12 +1073,6 @@ public class AccessControlHandlerImpl extends EObjectImpl implements AccessContr
 		if (baseClass == NamedElement.class) {
 			switch (derivedFeatureID) {
 				case ComponentsPackage.ACCESS_CONTROL_HANDLER__NAME: return ModelPackage.NAMED_ELEMENT__NAME;
-				default: return -1;
-			}
-		}
-		if (baseClass == ContainsEventTriggers.class) {
-			switch (derivedFeatureID) {
-				case ComponentsPackage.ACCESS_CONTROL_HANDLER__EVENT_TRIGGERS: return ModelPackage.CONTAINS_EVENT_TRIGGERS__EVENT_TRIGGERS;
 				default: return -1;
 			}
 		}
@@ -1207,12 +1163,6 @@ public class AccessControlHandlerImpl extends EObjectImpl implements AccessContr
 		if (baseClass == NamedElement.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.NAMED_ELEMENT__NAME: return ComponentsPackage.ACCESS_CONTROL_HANDLER__NAME;
-				default: return -1;
-			}
-		}
-		if (baseClass == ContainsEventTriggers.class) {
-			switch (baseFeatureID) {
-				case ModelPackage.CONTAINS_EVENT_TRIGGERS__EVENT_TRIGGERS: return ComponentsPackage.ACCESS_CONTROL_HANDLER__EVENT_TRIGGERS;
 				default: return -1;
 			}
 		}

@@ -17,6 +17,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.DomainAttributeInstance;
+import org.openiaml.model.model.Editable;
+import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ExtendsEdgeDestination;
@@ -32,6 +34,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  * <ul>
  *   <li>{@link org.openiaml.model.model.impl.DomainAttributeInstanceImpl#getOutExtendsEdges <em>Out Extends Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainAttributeInstanceImpl#getInExtendsEdges <em>In Extends Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.DomainAttributeInstanceImpl#getOnEdit <em>On Edit</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainAttributeInstanceImpl#isAutosave <em>Autosave</em>}</li>
  * </ul>
  * </p>
@@ -57,6 +60,15 @@ public class DomainAttributeInstanceImpl extends ApplicationElementImpl implemen
 	 * @ordered
 	 */
 	protected EList<ExtendsEdge> inExtendsEdges;
+	/**
+	 * The cached value of the '{@link #getOnEdit() <em>On Edit</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOnEdit()
+	 * @generated
+	 * @ordered
+	 */
+	protected EventTrigger onEdit;
 	/**
 	 * The default value of the '{@link #isAutosave() <em>Autosave</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -124,6 +136,49 @@ public class DomainAttributeInstanceImpl extends ApplicationElementImpl implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EventTrigger getOnEdit() {
+		return onEdit;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOnEdit(EventTrigger newOnEdit, NotificationChain msgs) {
+		EventTrigger oldOnEdit = onEdit;
+		onEdit = newOnEdit;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE__ON_EDIT, oldOnEdit, newOnEdit);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOnEdit(EventTrigger newOnEdit) {
+		if (newOnEdit != onEdit) {
+			NotificationChain msgs = null;
+			if (onEdit != null)
+				msgs = ((InternalEObject)onEdit).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE__ON_EDIT, null, msgs);
+			if (newOnEdit != null)
+				msgs = ((InternalEObject)newOnEdit).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE__ON_EDIT, null, msgs);
+			msgs = basicSetOnEdit(newOnEdit, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE__ON_EDIT, newOnEdit, newOnEdit));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean isAutosave() {
 		return autosave;
 	}
@@ -169,6 +224,8 @@ public class DomainAttributeInstanceImpl extends ApplicationElementImpl implemen
 				return ((InternalEList<?>)getOutExtendsEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE__IN_EXTENDS_EDGES:
 				return ((InternalEList<?>)getInExtendsEdges()).basicRemove(otherEnd, msgs);
+			case ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE__ON_EDIT:
+				return basicSetOnEdit(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -185,6 +242,8 @@ public class DomainAttributeInstanceImpl extends ApplicationElementImpl implemen
 				return getOutExtendsEdges();
 			case ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE__IN_EXTENDS_EDGES:
 				return getInExtendsEdges();
+			case ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE__ON_EDIT:
+				return getOnEdit();
 			case ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE__AUTOSAVE:
 				return isAutosave();
 		}
@@ -208,6 +267,9 @@ public class DomainAttributeInstanceImpl extends ApplicationElementImpl implemen
 				getInExtendsEdges().clear();
 				getInExtendsEdges().addAll((Collection<? extends ExtendsEdge>)newValue);
 				return;
+			case ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE__ON_EDIT:
+				setOnEdit((EventTrigger)newValue);
+				return;
 			case ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE__AUTOSAVE:
 				setAutosave((Boolean)newValue);
 				return;
@@ -229,6 +291,9 @@ public class DomainAttributeInstanceImpl extends ApplicationElementImpl implemen
 			case ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE__IN_EXTENDS_EDGES:
 				getInExtendsEdges().clear();
 				return;
+			case ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE__ON_EDIT:
+				setOnEdit((EventTrigger)null);
+				return;
 			case ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE__AUTOSAVE:
 				setAutosave(AUTOSAVE_EDEFAULT);
 				return;
@@ -248,6 +313,8 @@ public class DomainAttributeInstanceImpl extends ApplicationElementImpl implemen
 				return outExtendsEdges != null && !outExtendsEdges.isEmpty();
 			case ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE__IN_EXTENDS_EDGES:
 				return inExtendsEdges != null && !inExtendsEdges.isEmpty();
+			case ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE__ON_EDIT:
+				return onEdit != null;
 			case ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE__AUTOSAVE:
 				return autosave != AUTOSAVE_EDEFAULT;
 		}
@@ -273,6 +340,12 @@ public class DomainAttributeInstanceImpl extends ApplicationElementImpl implemen
 				default: return -1;
 			}
 		}
+		if (baseClass == Editable.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE__ON_EDIT: return ModelPackage.EDITABLE__ON_EDIT;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -292,6 +365,12 @@ public class DomainAttributeInstanceImpl extends ApplicationElementImpl implemen
 		if (baseClass == ExtendsEdgeDestination.class) {
 			switch (baseFeatureID) {
 				case WiresPackage.EXTENDS_EDGE_DESTINATION__IN_EXTENDS_EDGES: return ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE__IN_EXTENDS_EDGES;
+				default: return -1;
+			}
+		}
+		if (baseClass == Editable.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.EDITABLE__ON_EDIT: return ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE__ON_EDIT;
 				default: return -1;
 			}
 		}

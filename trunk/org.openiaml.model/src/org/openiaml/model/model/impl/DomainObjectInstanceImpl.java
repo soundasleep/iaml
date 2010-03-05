@@ -19,6 +19,8 @@ import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.DomainObjectInstance;
+import org.openiaml.model.model.Editable;
+import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.ParameterEdgeDestination;
@@ -34,6 +36,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  * <ul>
  *   <li>{@link org.openiaml.model.model.impl.DomainObjectInstanceImpl#getInParameterEdges <em>In Parameter Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainObjectInstanceImpl#getOutParameterEdges <em>Out Parameter Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.DomainObjectInstanceImpl#getOnEdit <em>On Edit</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainObjectInstanceImpl#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainObjectInstanceImpl#getStrQuery <em>Str Query</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainObjectInstanceImpl#isAutosave <em>Autosave</em>}</li>
@@ -62,6 +65,16 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 	 * @ordered
 	 */
 	protected EList<ParameterEdge> outParameterEdges;
+
+	/**
+	 * The cached value of the '{@link #getOnEdit() <em>On Edit</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOnEdit()
+	 * @generated
+	 * @ordered
+	 */
+	protected EventTrigger onEdit;
 
 	/**
 	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
@@ -161,6 +174,49 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EventTrigger getOnEdit() {
+		return onEdit;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOnEdit(EventTrigger newOnEdit, NotificationChain msgs) {
+		EventTrigger oldOnEdit = onEdit;
+		onEdit = newOnEdit;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_OBJECT_INSTANCE__ON_EDIT, oldOnEdit, newOnEdit);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOnEdit(EventTrigger newOnEdit) {
+		if (newOnEdit != onEdit) {
+			NotificationChain msgs = null;
+			if (onEdit != null)
+				msgs = ((InternalEObject)onEdit).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOMAIN_OBJECT_INSTANCE__ON_EDIT, null, msgs);
+			if (newOnEdit != null)
+				msgs = ((InternalEObject)newOnEdit).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOMAIN_OBJECT_INSTANCE__ON_EDIT, null, msgs);
+			msgs = basicSetOnEdit(newOnEdit, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_OBJECT_INSTANCE__ON_EDIT, newOnEdit, newOnEdit));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<DomainAttributeInstance> getAttributes() {
 		if (attributes == null) {
 			attributes = new EObjectContainmentEList<DomainAttributeInstance>(DomainAttributeInstance.class, this, ModelPackage.DOMAIN_OBJECT_INSTANCE__ATTRIBUTES);
@@ -239,6 +295,8 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 				return ((InternalEList<?>)getInParameterEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE__OUT_PARAMETER_EDGES:
 				return ((InternalEList<?>)getOutParameterEdges()).basicRemove(otherEnd, msgs);
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__ON_EDIT:
+				return basicSetOnEdit(null, msgs);
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE__ATTRIBUTES:
 				return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
 		}
@@ -257,6 +315,8 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 				return getInParameterEdges();
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE__OUT_PARAMETER_EDGES:
 				return getOutParameterEdges();
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__ON_EDIT:
+				return getOnEdit();
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE__ATTRIBUTES:
 				return getAttributes();
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE__STR_QUERY:
@@ -283,6 +343,9 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE__OUT_PARAMETER_EDGES:
 				getOutParameterEdges().clear();
 				getOutParameterEdges().addAll((Collection<? extends ParameterEdge>)newValue);
+				return;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__ON_EDIT:
+				setOnEdit((EventTrigger)newValue);
 				return;
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE__ATTRIBUTES:
 				getAttributes().clear();
@@ -312,6 +375,9 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE__OUT_PARAMETER_EDGES:
 				getOutParameterEdges().clear();
 				return;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__ON_EDIT:
+				setOnEdit((EventTrigger)null);
+				return;
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE__ATTRIBUTES:
 				getAttributes().clear();
 				return;
@@ -337,6 +403,8 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 				return inParameterEdges != null && !inParameterEdges.isEmpty();
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE__OUT_PARAMETER_EDGES:
 				return outParameterEdges != null && !outParameterEdges.isEmpty();
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__ON_EDIT:
+				return onEdit != null;
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE__ATTRIBUTES:
 				return attributes != null && !attributes.isEmpty();
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE__STR_QUERY:
@@ -366,6 +434,12 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 				default: return -1;
 			}
 		}
+		if (baseClass == Editable.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.DOMAIN_OBJECT_INSTANCE__ON_EDIT: return ModelPackage.EDITABLE__ON_EDIT;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -385,6 +459,12 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 		if (baseClass == ParameterEdgesSource.class) {
 			switch (baseFeatureID) {
 				case WiresPackage.PARAMETER_EDGES_SOURCE__OUT_PARAMETER_EDGES: return ModelPackage.DOMAIN_OBJECT_INSTANCE__OUT_PARAMETER_EDGES;
+				default: return -1;
+			}
+		}
+		if (baseClass == Editable.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.EDITABLE__ON_EDIT: return ModelPackage.DOMAIN_OBJECT_INSTANCE__ON_EDIT;
 				default: return -1;
 			}
 		}

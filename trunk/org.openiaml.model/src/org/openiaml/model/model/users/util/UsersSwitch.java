@@ -13,12 +13,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.ContainsConditions;
-import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
+import org.openiaml.model.model.Editable;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.NamedElement;
@@ -140,7 +140,7 @@ public class UsersSwitch<T> {
 				if (result == null) result = caseParameterEdgesSource(role);
 				if (result == null) result = caseExtendsEdgesSource(role);
 				if (result == null) result = caseExtendsEdgeDestination(role);
-				if (result == null) result = caseContainsEventTriggers(role);
+				if (result == null) result = caseEditable(role);
 				if (result == null) result = caseCanBeSynced(role);
 				if (result == null) result = caseContainsOperations(role);
 				if (result == null) result = caseNamedElement(role);
@@ -173,7 +173,7 @@ public class UsersSwitch<T> {
 				if (result == null) result = caseApplicationElement(userInstance);
 				if (result == null) result = caseParameterEdgeDestination(userInstance);
 				if (result == null) result = caseParameterEdgesSource(userInstance);
-				if (result == null) result = caseContainsEventTriggers(userInstance);
+				if (result == null) result = caseEditable(userInstance);
 				if (result == null) result = caseCanBeSynced(userInstance);
 				if (result == null) result = caseContainsOperations(userInstance);
 				if (result == null) result = caseNamedElement(userInstance);
@@ -347,21 +347,6 @@ public class UsersSwitch<T> {
 	 * @generated
 	 */
 	public T caseContainsOperations(ContainsOperations object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Contains Event Triggers</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Contains Event Triggers</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseContainsEventTriggers(ContainsEventTriggers object) {
 		return null;
 	}
 
@@ -572,6 +557,21 @@ public class UsersSwitch<T> {
 	 * @generated
 	 */
 	public T caseExtendsEdgeDestination(ExtendsEdgeDestination object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Editable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Editable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEditable(Editable object) {
 		return null;
 	}
 

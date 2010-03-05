@@ -982,22 +982,13 @@ public interface ModelPackage extends EPackage {
 	int APPLICATION_ELEMENT__NAME = CONTAINS_OPERATIONS_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Event Triggers</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int APPLICATION_ELEMENT__EVENT_TRIGGERS = CONTAINS_OPERATIONS_FEATURE_COUNT + 5;
-
-	/**
 	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT__WIRES = CONTAINS_OPERATIONS_FEATURE_COUNT + 6;
+	int APPLICATION_ELEMENT__WIRES = CONTAINS_OPERATIONS_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
@@ -1006,7 +997,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT__PARAMETER_EDGES = CONTAINS_OPERATIONS_FEATURE_COUNT + 7;
+	int APPLICATION_ELEMENT__PARAMETER_EDGES = CONTAINS_OPERATIONS_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Extends Edges</b></em>' containment reference list.
@@ -1015,7 +1006,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT__EXTENDS_EDGES = CONTAINS_OPERATIONS_FEATURE_COUNT + 8;
+	int APPLICATION_ELEMENT__EXTENDS_EDGES = CONTAINS_OPERATIONS_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Requires Edges</b></em>' containment reference list.
@@ -1024,7 +1015,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT__REQUIRES_EDGES = CONTAINS_OPERATIONS_FEATURE_COUNT + 9;
+	int APPLICATION_ELEMENT__REQUIRES_EDGES = CONTAINS_OPERATIONS_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Provides Edges</b></em>' containment reference list.
@@ -1033,7 +1024,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT__PROVIDES_EDGES = CONTAINS_OPERATIONS_FEATURE_COUNT + 10;
+	int APPLICATION_ELEMENT__PROVIDES_EDGES = CONTAINS_OPERATIONS_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Constraint Edges</b></em>' containment reference list.
@@ -1042,7 +1033,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT__CONSTRAINT_EDGES = CONTAINS_OPERATIONS_FEATURE_COUNT + 11;
+	int APPLICATION_ELEMENT__CONSTRAINT_EDGES = CONTAINS_OPERATIONS_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Condition Edges</b></em>' containment reference list.
@@ -1051,7 +1042,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT__CONDITION_EDGES = CONTAINS_OPERATIONS_FEATURE_COUNT + 12;
+	int APPLICATION_ELEMENT__CONDITION_EDGES = CONTAINS_OPERATIONS_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Out Wires</b></em>' reference list.
@@ -1060,7 +1051,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT__OUT_WIRES = CONTAINS_OPERATIONS_FEATURE_COUNT + 13;
+	int APPLICATION_ELEMENT__OUT_WIRES = CONTAINS_OPERATIONS_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>In Wires</b></em>' reference list.
@@ -1069,7 +1060,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT__IN_WIRES = CONTAINS_OPERATIONS_FEATURE_COUNT + 14;
+	int APPLICATION_ELEMENT__IN_WIRES = CONTAINS_OPERATIONS_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
@@ -1078,7 +1069,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT__GENERATED_ELEMENTS = CONTAINS_OPERATIONS_FEATURE_COUNT + 15;
+	int APPLICATION_ELEMENT__GENERATED_ELEMENTS = CONTAINS_OPERATIONS_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
@@ -1087,7 +1078,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT__OVERRIDDEN = CONTAINS_OPERATIONS_FEATURE_COUNT + 16;
+	int APPLICATION_ELEMENT__OVERRIDDEN = CONTAINS_OPERATIONS_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
@@ -1096,7 +1087,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT__CONDITIONS = CONTAINS_OPERATIONS_FEATURE_COUNT + 17;
+	int APPLICATION_ELEMENT__CONDITIONS = CONTAINS_OPERATIONS_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -1105,7 +1096,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT__PROPERTIES = CONTAINS_OPERATIONS_FEATURE_COUNT + 18;
+	int APPLICATION_ELEMENT__PROPERTIES = CONTAINS_OPERATIONS_FEATURE_COUNT + 17;
 
 	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
@@ -1114,7 +1105,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT__VALUES = CONTAINS_OPERATIONS_FEATURE_COUNT + 19;
+	int APPLICATION_ELEMENT__VALUES = CONTAINS_OPERATIONS_FEATURE_COUNT + 18;
 
 	/**
 	 * The number of structural features of the '<em>Application Element</em>' class.
@@ -1123,7 +1114,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICATION_ELEMENT_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 20;
+	int APPLICATION_ELEMENT_FEATURE_COUNT = CONTAINS_OPERATIONS_FEATURE_COUNT + 19;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -1178,15 +1169,6 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int DOMAIN_OBJECT__NAME = APPLICATION_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Event Triggers</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN_OBJECT__EVENT_TRIGGERS = APPLICATION_ELEMENT__EVENT_TRIGGERS;
 
 	/**
 	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
@@ -1342,13 +1324,22 @@ public interface ModelPackage extends EPackage {
 	int DOMAIN_OBJECT__IN_EXTENDS_EDGES = APPLICATION_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>On Edit</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT__ON_EDIT = APPLICATION_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_OBJECT__ATTRIBUTES = APPLICATION_ELEMENT_FEATURE_COUNT + 3;
+	int DOMAIN_OBJECT__ATTRIBUTES = APPLICATION_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Domain Object</em>' class.
@@ -1357,7 +1348,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_OBJECT_FEATURE_COUNT = APPLICATION_ELEMENT_FEATURE_COUNT + 4;
+	int DOMAIN_OBJECT_FEATURE_COUNT = APPLICATION_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -1412,15 +1403,6 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int DOMAIN_ATTRIBUTE__NAME = APPLICATION_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Event Triggers</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN_ATTRIBUTE__EVENT_TRIGGERS = APPLICATION_ELEMENT__EVENT_TRIGGERS;
 
 	/**
 	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
@@ -1576,13 +1558,22 @@ public interface ModelPackage extends EPackage {
 	int DOMAIN_ATTRIBUTE__IN_EXTENDS_EDGES = APPLICATION_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>On Edit</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_ATTRIBUTE__ON_EDIT = APPLICATION_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Primary Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_ATTRIBUTE__PRIMARY_KEY = APPLICATION_ELEMENT_FEATURE_COUNT + 3;
+	int DOMAIN_ATTRIBUTE__PRIMARY_KEY = APPLICATION_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Domain Attribute</em>' class.
@@ -1591,7 +1582,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_ATTRIBUTE_FEATURE_COUNT = APPLICATION_ELEMENT_FEATURE_COUNT + 4;
+	int DOMAIN_ATTRIBUTE_FEATURE_COUNT = APPLICATION_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Generated By</b></em>' reference list.
@@ -2304,15 +2295,6 @@ public interface ModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int APPLICATION_ELEMENT_CONTAINER__NAME = APPLICATION_ELEMENT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Event Triggers</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int APPLICATION_ELEMENT_CONTAINER__EVENT_TRIGGERS = APPLICATION_ELEMENT__EVENT_TRIGGERS;
 
 	/**
 	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
@@ -3924,15 +3906,6 @@ public interface ModelPackage extends EPackage {
 	int DYNAMIC_APPLICATION_ELEMENT_SET__NAME = APPLICATION_ELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Event Triggers</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DYNAMIC_APPLICATION_ELEMENT_SET__EVENT_TRIGGERS = APPLICATION_ELEMENT__EVENT_TRIGGERS;
-
-	/**
 	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4167,15 +4140,6 @@ public interface ModelPackage extends EPackage {
 	int DOMAIN_OBJECT_INSTANCE__NAME = APPLICATION_ELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Event Triggers</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN_OBJECT_INSTANCE__EVENT_TRIGGERS = APPLICATION_ELEMENT__EVENT_TRIGGERS;
-
-	/**
 	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4320,13 +4284,22 @@ public interface ModelPackage extends EPackage {
 	int DOMAIN_OBJECT_INSTANCE__OUT_PARAMETER_EDGES = APPLICATION_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>On Edit</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE__ON_EDIT = APPLICATION_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_OBJECT_INSTANCE__ATTRIBUTES = APPLICATION_ELEMENT_FEATURE_COUNT + 2;
+	int DOMAIN_OBJECT_INSTANCE__ATTRIBUTES = APPLICATION_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Str Query</b></em>' attribute.
@@ -4335,7 +4308,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_OBJECT_INSTANCE__STR_QUERY = APPLICATION_ELEMENT_FEATURE_COUNT + 3;
+	int DOMAIN_OBJECT_INSTANCE__STR_QUERY = APPLICATION_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Autosave</b></em>' attribute.
@@ -4344,7 +4317,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_OBJECT_INSTANCE__AUTOSAVE = APPLICATION_ELEMENT_FEATURE_COUNT + 4;
+	int DOMAIN_OBJECT_INSTANCE__AUTOSAVE = APPLICATION_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Domain Object Instance</em>' class.
@@ -4353,7 +4326,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_OBJECT_INSTANCE_FEATURE_COUNT = APPLICATION_ELEMENT_FEATURE_COUNT + 5;
+	int DOMAIN_OBJECT_INSTANCE_FEATURE_COUNT = APPLICATION_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
@@ -5061,15 +5034,6 @@ public interface ModelPackage extends EPackage {
 	int DOMAIN_ATTRIBUTE_INSTANCE__NAME = APPLICATION_ELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Event Triggers</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN_ATTRIBUTE_INSTANCE__EVENT_TRIGGERS = APPLICATION_ELEMENT__EVENT_TRIGGERS;
-
-	/**
 	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5214,13 +5178,22 @@ public interface ModelPackage extends EPackage {
 	int DOMAIN_ATTRIBUTE_INSTANCE__IN_EXTENDS_EDGES = APPLICATION_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>On Edit</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_ATTRIBUTE_INSTANCE__ON_EDIT = APPLICATION_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Autosave</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_ATTRIBUTE_INSTANCE__AUTOSAVE = APPLICATION_ELEMENT_FEATURE_COUNT + 2;
+	int DOMAIN_ATTRIBUTE_INSTANCE__AUTOSAVE = APPLICATION_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Domain Attribute Instance</em>' class.
@@ -5229,7 +5202,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_ATTRIBUTE_INSTANCE_FEATURE_COUNT = APPLICATION_ELEMENT_FEATURE_COUNT + 3;
+	int DOMAIN_ATTRIBUTE_INSTANCE_FEATURE_COUNT = APPLICATION_ELEMENT_FEATURE_COUNT + 4;
 
 
 	/**

@@ -31,7 +31,7 @@ import org.openiaml.model.model.wires.ParameterEdgesSource;
  * @model annotation="http://openiaml.org/comment changed='0.2 to extend the abstract counterpart\r\n0.3 to remove the abstract extension, and added \"type\" attribute'"
  * @generated
  */
-public interface DomainObject extends ApplicationElement, ContainsWires, ParameterEdgesSource, ExtendsEdgesSource, ExtendsEdgeDestination {
+public interface DomainObject extends ApplicationElement, ContainsWires, ParameterEdgesSource, ExtendsEdgesSource, ExtendsEdgeDestination, Editable {
 
 	/**
 	 * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.

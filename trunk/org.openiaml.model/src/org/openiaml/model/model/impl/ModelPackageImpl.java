@@ -1829,11 +1829,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		domainObjectEClass.getESuperTypes().add(theWiresPackage.getParameterEdgesSource());
 		domainObjectEClass.getESuperTypes().add(theWiresPackage.getExtendsEdgesSource());
 		domainObjectEClass.getESuperTypes().add(theWiresPackage.getExtendsEdgeDestination());
+		domainObjectEClass.getESuperTypes().add(this.getEditable());
 		domainAttributeEClass.getESuperTypes().add(this.getApplicationElement());
 		domainAttributeEClass.getESuperTypes().add(this.getContainsWires());
 		domainAttributeEClass.getESuperTypes().add(theWiresPackage.getParameterEdgesSource());
 		domainAttributeEClass.getESuperTypes().add(theWiresPackage.getExtendsEdgesSource());
 		domainAttributeEClass.getESuperTypes().add(theWiresPackage.getExtendsEdgeDestination());
+		domainAttributeEClass.getESuperTypes().add(this.getEditable());
 		activityNodeEClass.getESuperTypes().add(this.getGeneratedElement());
 		operationEClass.getESuperTypes().add(this.getWireDestination());
 		operationEClass.getESuperTypes().add(this.getNamedElement());
@@ -1852,7 +1854,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		compositeOperationEClass.getESuperTypes().add(this.getContainsConditions());
 		applicationElementEClass.getESuperTypes().add(this.getContainsOperations());
 		applicationElementEClass.getESuperTypes().add(this.getNamedElement());
-		applicationElementEClass.getESuperTypes().add(this.getContainsEventTriggers());
 		applicationElementEClass.getESuperTypes().add(this.getWireSource());
 		applicationElementEClass.getESuperTypes().add(this.getWireDestination());
 		applicationElementEClass.getESuperTypes().add(this.getGeneratesElements());
@@ -1909,6 +1910,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		domainObjectInstanceEClass.getESuperTypes().add(this.getContainsWires());
 		domainObjectInstanceEClass.getESuperTypes().add(theWiresPackage.getParameterEdgeDestination());
 		domainObjectInstanceEClass.getESuperTypes().add(theWiresPackage.getParameterEdgesSource());
+		domainObjectInstanceEClass.getESuperTypes().add(this.getEditable());
 		scopeEClass.getESuperTypes().add(this.getGeneratesElements());
 		scopeEClass.getESuperTypes().add(this.getContainsWires());
 		scopeEClass.getESuperTypes().add(this.getContainsScopes());
@@ -1930,6 +1932,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		domainAttributeInstanceEClass.getESuperTypes().add(this.getApplicationElement());
 		domainAttributeInstanceEClass.getESuperTypes().add(theWiresPackage.getExtendsEdgesSource());
 		domainAttributeInstanceEClass.getESuperTypes().add(theWiresPackage.getExtendsEdgeDestination());
+		domainAttributeInstanceEClass.getESuperTypes().add(this.getEditable());
 		queryParameterEClass.getESuperTypes().add(this.getNamedElement());
 		queryParameterEClass.getESuperTypes().add(this.getWireSource());
 		queryParameterEClass.getESuperTypes().add(this.getDataFlowEdgesSource());

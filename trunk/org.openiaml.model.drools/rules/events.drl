@@ -30,7 +30,7 @@ rule "Create 'click' event trigger for button"
 		
 end
 
-# @inference Editable,InputTextField An {@model Editable} thing contains an {@model EventTrigger} named 'edit'. 
+# @inference Editable,InputTextField,DomainAttribute An {@model Editable} thing contains an {@model EventTrigger} named 'edit'. 
 rule "Create 'edit' event trigger for Editable things"
 	when
 		f : Editable( )
@@ -39,19 +39,6 @@ rule "Create 'edit' event trigger for Editable things"
 			
 	then
 		EventTrigger event = handler.generatedEventTriggerOnEdit(g, f);
-		queue.add(event, drools);
-		
-end
-
-# @inference DomainAttribute A {@model DomainAttribute} contains an {@model EventTrigger} named 'edit'.
-rule "Create 'edit' event trigger for domain attribute"
-	when
-		f : DomainAttribute( overridden == false )
-		not (EventTrigger( eContainer == f, name=="edit" ))
-			
-	then
-		EventTrigger event = handler.generatedEventTrigger(f, f);
-		handler.setName(event, "edit");
 		queue.add(event, drools);
 		
 end

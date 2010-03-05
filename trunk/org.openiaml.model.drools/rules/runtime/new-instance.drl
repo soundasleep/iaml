@@ -106,20 +106,6 @@ rule "Create 'exists?' condition for DomainObjectInstances"
 
 end
 
-rule "Create 'edit' event for DomainAttributeInstances"
-	when
-		instance : DomainAttributeInstance ( )
-		
-		not ( EventTrigger( eContainer == instance, name == "edit" ))
-		
-	then
-		# create a new one
-		EventTrigger event = handler.generatedEventTrigger(instance, instance);
-		handler.setName(event, "edit");
-		queue.add(event, drools);
-
-end
-
 rule "Create 'fieldValue' value for DomainAttributeInstances"
 	when
 		instance : DomainAttributeInstance ( )

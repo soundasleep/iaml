@@ -70,14 +70,14 @@ echo_necessary_update_callbacks();
 «DEFINE potentialDomainAttributeInstanceUpdatesRequired FOR model::DomainAttributeInstance»
 	/* attribute «this» */
 	/* expand all 'edit' events */
-	«EXPAND potentialEditEvent FOREACH eventTriggers»
+	«EXPAND potentialEditEvent("edit") FOREACH {onEdit}»
 «ENDDEFINE»
 
-«DEFINE potentialEditEvent FOR model::EventTrigger»
-	«IF name=="edit"»
+«DEFINE potentialEditEvent(String eventName) FOR model::EventTrigger»
+	«IF eventName=="edit"»
 		«EXPAND editEvent FOREACH outWires.typeSelect(model::wires::RunInstanceWire)»
 	«ELSE»
-		// ignoring event trigger '«this»'
+		«EXPAND exception FOR throwException("Invalid event name '" + eventName + "'")»
 	«ENDIF»
 «ENDDEFINE»
 

@@ -147,7 +147,7 @@ echo_necessary_update_callbacks();
 		
 		// are there any onEdit operations for this attribute that we
 		// have to then call?
-		«EXPAND expandDomainAttributeEvents FOREACH eventTriggers»
+		«EXPAND expandDomainAttributeEvents("edit") FOREACH {onEdit}»
 	}
 «ENDDEFINE»
 
@@ -160,7 +160,7 @@ echo_necessary_update_callbacks();
 		
 		// are there any onEdit operations for this attribute that we
 		// have to then call?
-		«EXPAND expandDomainAttributeEvents FOREACH eventTriggers»
+		«EXPAND expandDomainAttributeEvents("edit") FOREACH {onEdit}»
 	}
 «ENDDEFINE»
 
@@ -184,7 +184,7 @@ echo_necessary_update_callbacks();
 		
 		// are there any onEdit operations for this attribute that we
 		// have to then call?
-		«EXPAND expandDomainAttributeEvents FOREACH eventTriggers»
+		«EXPAND expandDomainAttributeEvents("edit") FOREACH {onEdit}»
 	}
 «ENDDEFINE»
 
@@ -197,7 +197,7 @@ echo_necessary_update_callbacks();
 		
 		// are there any onEdit operations for this attribute that we
 		// have to then call?
-		«EXPAND expandDomainAttributeEvents FOREACH eventTriggers»
+		«EXPAND expandDomainAttributeEvents("edit") FOREACH {onEdit}»
 	}
 «ENDDEFINE»
 
@@ -228,7 +228,7 @@ echo_necessary_update_callbacks();
 		
 		// are there any onEdit operations for this attribute that we
 		// have to then call?
-		«EXPAND expandDomainAttributeEvents FOREACH eventTriggers»
+		«EXPAND expandDomainAttributeEvents("edit") FOREACH {onEdit}»
 	}
 «ENDDEFINE»
 
@@ -241,16 +241,18 @@ echo_necessary_update_callbacks();
 		
 		// are there any onEdit operations for this attribute that we
 		// have to then call?
-		«EXPAND expandDomainAttributeEvents FOREACH eventTriggers»
+		«EXPAND expandDomainAttributeEvents("edit") FOREACH {onEdit}»
 	}
 «ENDDEFINE»
 
 /**
  * Expand out any event triggers.
  */
-«DEFINE expandDomainAttributeEvents FOR model::EventTrigger»
-	«IF name=="edit"»
+«DEFINE expandDomainAttributeEvents(String eventName) FOR model::EventTrigger»
+	«IF eventName=="edit"»
 		«EXPAND template::operations::OperationCall::callOperation(true, true, null) FOREACH outWires»
+	«ELSE»
+		«EXPAND exception FOR throwException("Unknown event name '" + eventName + "'")»
 	«ENDIF»
 «ENDDEFINE»
 

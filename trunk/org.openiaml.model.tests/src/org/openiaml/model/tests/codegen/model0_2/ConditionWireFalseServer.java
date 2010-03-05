@@ -39,7 +39,6 @@ public class ConditionWireFalseServer extends CodegenTestCase {
 		String testString = "value " + new Date().toString();
 		{
 			String fieldId = getLabelIDForText("field");
-			assertNotNull(fieldId);
 			assertLabeledFieldNotEquals(fieldId, testString);
 			setLabeledFormElementField(fieldId, testString);
 		}
@@ -57,7 +56,6 @@ public class ConditionWireFalseServer extends CodegenTestCase {
 		
 		{
 			String fieldId = getLabelIDForText("field");
-			assertNotNull(fieldId);
 			assertLabeledFieldNotEquals(fieldId, testString);
 			assertLabeledFieldEquals(fieldId, "");		// it should actually be empty
 		}

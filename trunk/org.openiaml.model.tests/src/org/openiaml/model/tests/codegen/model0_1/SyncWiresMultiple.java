@@ -35,10 +35,8 @@ public class SyncWiresMultiple extends CodegenTestCase {
 		String testPassword = "password " + new Date().toString();
 		{
 			String nameId = getLabelIDForText("name");
-			assertNotNull(nameId);
 			setLabeledFormElementField(nameId, testName);
 			String emailId = getLabelIDForText("email");
-			assertNotNull(emailId);
 			setLabeledFormElementField(emailId, testEmail);
 		}
 		

@@ -28,7 +28,6 @@ public class Requirement2StaticParams extends CodegenTestCase {
 		{
 			// there should be an element called value
 			String valueID = getLabelIDForText("value");
-			assertNotNull(valueID);
 			
 			// it should be set to a static value as a parameter
 			// value.onAccess -> setValue(static_value)
@@ -42,7 +41,6 @@ public class Requirement2StaticParams extends CodegenTestCase {
 		{
 			// there should be an element called value
 			String valueID = getLabelIDForText("value");
-			assertNotNull(valueID);
 			
 			// it should be set to a static value as a parameter
 			// value.onAccess -> setValue(static_value)

@@ -56,7 +56,7 @@ public class SessionNewDomainInstance extends InferenceTestCase {
 
 		// the domain object instance has no attributes or events
 		assertEquals("Instance has no attributes", 0, inst.getAttributes().size());
-		assertEquals("Instance has no events", 0, inst.getEventTriggers().size());
+		assertNull("Instance has no events", inst.getOnEdit());
 
 		DomainStore store = assertHasDomainStore(root, "my store");
 		assertNotGenerated(store);
@@ -95,7 +95,7 @@ public class SessionNewDomainInstance extends InferenceTestCase {
 		assertGenerated(email);
 
 		// it should have an 'edit' event
-		EventTrigger edit = assertHasEventTrigger(email, "edit");
+		EventTrigger edit = email.getOnEdit();
 		assertGenerated(edit);
 
 		// and a property

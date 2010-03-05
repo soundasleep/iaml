@@ -39,7 +39,6 @@ public class NewInstanceWithoutId extends CodegenTestCase {
 		
 		// there should be a 'name' attribute generated
 		String name = getLabelIDForText("name");
-		assertNotNull(name);
 		assertLabeledFieldEquals(name, "");
 		
 		// lets change it
@@ -52,7 +51,6 @@ public class NewInstanceWithoutId extends CodegenTestCase {
 		
 		// it should have remained
 		name = getLabelIDForText("name");
-		assertNotNull(name);
 		assertLabeledFieldEquals(name, testValue);
 	}
 

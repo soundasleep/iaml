@@ -32,7 +32,6 @@ public class Requirement3DynamicParams extends CodegenTestCase {
 		{
 			// there should be an element called value
 			String valueID = getLabelIDForText("field to edit");
-			assertNotNull(valueID);
 			
 			// set the field
 			// expect a Javascript alert
@@ -49,7 +48,6 @@ public class Requirement3DynamicParams extends CodegenTestCase {
 		{
 			// there should be an element called value
 			String valueID = getLabelIDForText("field to edit");
-			assertNotNull(valueID);
 			
 			// set the field
 			// expect a Javascript alert

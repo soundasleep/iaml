@@ -32,7 +32,6 @@ public class Requirement6Conditions extends CodegenTestCase {
 		{
 			// there should be an element called value
 			String field1 = getLabelIDForText("field1");
-			assertNotNull(field1);
 			assertLabeledFieldEquals(field1, "");
 			
 			// set the field
@@ -40,7 +39,6 @@ public class Requirement6Conditions extends CodegenTestCase {
 			
 			// it should consult the condition and not change field2
 			String field2 = getLabelIDForText("field2");
-			assertNotNull(field2);
 			assertLabeledFieldNotEquals(field2, test1);
 			assertLabeledFieldEquals(field2, "");	// initially empty
 			

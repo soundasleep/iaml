@@ -53,8 +53,8 @@ public class SyncFormDomainObject extends InferenceTestCase {
 		EventTrigger editf2 = field2.getOnEdit();
 
 		// attrs should now have an edit event
-		EventTrigger edita1 = assertHasEventTrigger(attr1, "edit");
-		EventTrigger edita2 = assertHasEventTrigger(attr2, "edit");
+		EventTrigger edita1 = attr1.getOnEdit();
+		EventTrigger edita2 = attr2.getOnEdit();
 
 		// fields should now have update operations
 		Operation update1 = assertHasOperation(field1, "update");

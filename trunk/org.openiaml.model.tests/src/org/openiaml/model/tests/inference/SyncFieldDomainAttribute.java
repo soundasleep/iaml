@@ -34,13 +34,14 @@ public class SyncFieldDomainAttribute extends InferenceTestCase {
 	public void testInference() throws JaxenException {
 		Frame page = assertHasFrame(root, "page");
 		InputTextField field = assertHasInputTextField(page, "single-text-field");
-		SyncWire wire = (SyncWire) queryOne(page, "//iaml:wires[iaml:name='syncField']");
-		assertNotNull(wire);
-		DomainStore store = assertHasDomainStore(root, "store");
 
+		DomainStore store = assertHasDomainStore(root, "store");
 		DomainObject obj = assertHasDomainObject(store, "domain");
 		DomainAttribute attribute = assertHasDomainAttribute(obj, "attribute");
 
+		// sync wire from text field to attribute
+		assertHasSyncWire(page, field, attribute, "syncField");
+		
 		// field should now have an edit event
 		EventTrigger editEvent = field.getOnEdit();
 

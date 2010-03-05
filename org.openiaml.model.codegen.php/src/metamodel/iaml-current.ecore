@@ -44,7 +44,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="eventTriggers" upperBound="-1"
         eType="#//EventTrigger" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DomainObject" eSuperTypes="#//ApplicationElement #//ContainsWires #//wires/ParameterEdgesSource #//wires/ExtendsEdgesSource #//wires/ExtendsEdgeDestination">
+  <eClassifiers xsi:type="ecore:EClass" name="DomainObject" eSuperTypes="#//ApplicationElement #//ContainsWires #//wires/ParameterEdgesSource #//wires/ExtendsEdgesSource #//wires/ExtendsEdgeDestination #//Editable">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="changed" value="0.2 to extend the abstract counterpart&#xD;&#xA;0.3 to remove the abstract extension, and added &quot;type&quot; attribute"/>
     </eAnnotations>
@@ -54,7 +54,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
         eType="#//DomainAttribute" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DomainAttribute" eSuperTypes="#//ApplicationElement #//ContainsWires #//wires/ParameterEdgesSource #//wires/ExtendsEdgesSource #//wires/ExtendsEdgeDestination">
+  <eClassifiers xsi:type="ecore:EClass" name="DomainAttribute" eSuperTypes="#//ApplicationElement #//ContainsWires #//wires/ParameterEdgesSource #//wires/ExtendsEdgesSource #//wires/ExtendsEdgeDestination #//Editable">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="changed" value="0.2 to extend the abstract counterpart&#xD;&#xA;0.3 to remove the abstract extension, and added &quot;type&quot; attribute"/>
     </eAnnotations>
@@ -116,7 +116,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
         eType="#//Operation" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ApplicationElement" eSuperTypes="#//ContainsOperations #//NamedElement #//ContainsEventTriggers #//WireSource #//WireDestination #//GeneratesElements #//ContainsConditions #//CanBeSynced">
+  <eClassifiers xsi:type="ecore:EClass" name="ApplicationElement" eSuperTypes="#//ContainsOperations #//NamedElement #//WireSource #//WireDestination #//GeneratesElements #//ContainsConditions #//CanBeSynced">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="editor" value="org.openiaml.model.diagram.element"/>
       <details key="comment" value="Scope supertype added in 0.2"/>
@@ -335,7 +335,7 @@
         eType="#//GeneratedElement" eOpposite="#//GeneratedElement/generatedBy"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="overridden" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DomainObjectInstance" eSuperTypes="#//ApplicationElement #//ContainsWires #//wires/ParameterEdgeDestination #//wires/ParameterEdgesSource">
+  <eClassifiers xsi:type="ecore:EClass" name="DomainObjectInstance" eSuperTypes="#//ApplicationElement #//ContainsWires #//wires/ParameterEdgeDestination #//wires/ParameterEdgesSource #//Editable">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="added" value="0.2"/>
     </eAnnotations>
@@ -429,7 +429,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="conditions" upperBound="-1"
         eType="#//Condition" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DomainAttributeInstance" eSuperTypes="#//ApplicationElement #//wires/ExtendsEdgesSource #//wires/ExtendsEdgeDestination">
+  <eClassifiers xsi:type="ecore:EClass" name="DomainAttributeInstance" eSuperTypes="#//ApplicationElement #//wires/ExtendsEdgesSource #//wires/ExtendsEdgeDestination #//Editable">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="added" value="0.3"/>
     </eAnnotations>

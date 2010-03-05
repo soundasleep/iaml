@@ -188,7 +188,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseParameterEdgesSource(domainObject);
 				if (result == null) result = caseExtendsEdgesSource(domainObject);
 				if (result == null) result = caseExtendsEdgeDestination(domainObject);
-				if (result == null) result = caseContainsEventTriggers(domainObject);
+				if (result == null) result = caseEditable(domainObject);
 				if (result == null) result = caseCanBeSynced(domainObject);
 				if (result == null) result = caseContainsOperations(domainObject);
 				if (result == null) result = caseNamedElement(domainObject);
@@ -209,7 +209,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseParameterEdgesSource(domainAttribute);
 				if (result == null) result = caseExtendsEdgesSource(domainAttribute);
 				if (result == null) result = caseExtendsEdgeDestination(domainAttribute);
-				if (result == null) result = caseContainsEventTriggers(domainAttribute);
+				if (result == null) result = caseEditable(domainAttribute);
 				if (result == null) result = caseCanBeSynced(domainAttribute);
 				if (result == null) result = caseContainsOperations(domainAttribute);
 				if (result == null) result = caseNamedElement(domainAttribute);
@@ -298,7 +298,6 @@ public class ModelSwitch<T> {
 			case ModelPackage.APPLICATION_ELEMENT: {
 				ApplicationElement applicationElement = (ApplicationElement)theEObject;
 				T result = caseApplicationElement(applicationElement);
-				if (result == null) result = caseContainsEventTriggers(applicationElement);
 				if (result == null) result = caseCanBeSynced(applicationElement);
 				if (result == null) result = caseContainsOperations(applicationElement);
 				if (result == null) result = caseNamedElement(applicationElement);
@@ -316,7 +315,6 @@ public class ModelSwitch<T> {
 				ApplicationElementContainer applicationElementContainer = (ApplicationElementContainer)theEObject;
 				T result = caseApplicationElementContainer(applicationElementContainer);
 				if (result == null) result = caseApplicationElement(applicationElementContainer);
-				if (result == null) result = caseContainsEventTriggers(applicationElementContainer);
 				if (result == null) result = caseCanBeSynced(applicationElementContainer);
 				if (result == null) result = caseContainsOperations(applicationElementContainer);
 				if (result == null) result = caseNamedElement(applicationElementContainer);
@@ -469,7 +467,6 @@ public class ModelSwitch<T> {
 				T result = caseDynamicApplicationElementSet(dynamicApplicationElementSet);
 				if (result == null) result = caseApplicationElement(dynamicApplicationElementSet);
 				if (result == null) result = caseParameterEdgesSource(dynamicApplicationElementSet);
-				if (result == null) result = caseContainsEventTriggers(dynamicApplicationElementSet);
 				if (result == null) result = caseCanBeSynced(dynamicApplicationElementSet);
 				if (result == null) result = caseContainsOperations(dynamicApplicationElementSet);
 				if (result == null) result = caseNamedElement(dynamicApplicationElementSet);
@@ -514,7 +511,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseApplicationElement(domainObjectInstance);
 				if (result == null) result = caseParameterEdgeDestination(domainObjectInstance);
 				if (result == null) result = caseParameterEdgesSource(domainObjectInstance);
-				if (result == null) result = caseContainsEventTriggers(domainObjectInstance);
+				if (result == null) result = caseEditable(domainObjectInstance);
 				if (result == null) result = caseCanBeSynced(domainObjectInstance);
 				if (result == null) result = caseContainsOperations(domainObjectInstance);
 				if (result == null) result = caseNamedElement(domainObjectInstance);
@@ -588,7 +585,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseApplicationElement(domainAttributeInstance);
 				if (result == null) result = caseExtendsEdgesSource(domainAttributeInstance);
 				if (result == null) result = caseExtendsEdgeDestination(domainAttributeInstance);
-				if (result == null) result = caseContainsEventTriggers(domainAttributeInstance);
+				if (result == null) result = caseEditable(domainAttributeInstance);
 				if (result == null) result = caseCanBeSynced(domainAttributeInstance);
 				if (result == null) result = caseContainsOperations(domainAttributeInstance);
 				if (result == null) result = caseNamedElement(domainAttributeInstance);

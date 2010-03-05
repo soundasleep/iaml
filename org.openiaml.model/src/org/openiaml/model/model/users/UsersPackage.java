@@ -360,15 +360,6 @@ public interface UsersPackage extends EPackage {
 	int ROLE__NAME = ModelPackage.DOMAIN_OBJECT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Event Triggers</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ROLE__EVENT_TRIGGERS = ModelPackage.DOMAIN_OBJECT__EVENT_TRIGGERS;
-
-	/**
 	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -520,6 +511,15 @@ public interface UsersPackage extends EPackage {
 	 * @ordered
 	 */
 	int ROLE__IN_EXTENDS_EDGES = ModelPackage.DOMAIN_OBJECT__IN_EXTENDS_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>On Edit</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROLE__ON_EDIT = ModelPackage.DOMAIN_OBJECT__ON_EDIT;
 
 	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
@@ -776,15 +776,6 @@ public interface UsersPackage extends EPackage {
 	int USER_INSTANCE__NAME = ModelPackage.DOMAIN_OBJECT_INSTANCE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Event Triggers</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int USER_INSTANCE__EVENT_TRIGGERS = ModelPackage.DOMAIN_OBJECT_INSTANCE__EVENT_TRIGGERS;
-
-	/**
 	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -927,6 +918,15 @@ public interface UsersPackage extends EPackage {
 	 * @ordered
 	 */
 	int USER_INSTANCE__OUT_PARAMETER_EDGES = ModelPackage.DOMAIN_OBJECT_INSTANCE__OUT_PARAMETER_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>On Edit</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_INSTANCE__ON_EDIT = ModelPackage.DOMAIN_OBJECT_INSTANCE__ON_EDIT;
 
 	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.

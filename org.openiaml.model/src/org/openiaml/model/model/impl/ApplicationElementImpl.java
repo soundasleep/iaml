@@ -22,9 +22,7 @@ import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsConditions;
-import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsWires;
-import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.ModelPackage;
@@ -56,7 +54,6 @@ import org.openiaml.model.model.wires.RequiresEdge;
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getGeneratedRule <em>Generated Rule</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getEventTriggers <em>Event Triggers</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getWires <em>Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getParameterEdges <em>Parameter Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ApplicationElementImpl#getExtendsEdges <em>Extends Edges</em>}</li>
@@ -176,16 +173,6 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getEventTriggers() <em>Event Triggers</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getEventTriggers()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<EventTrigger> eventTriggers;
 
 	/**
 	 * The cached value of the '{@link #getWires() <em>Wires</em>}' containment reference list.
@@ -469,18 +456,6 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<EventTrigger> getEventTriggers() {
-		if (eventTriggers == null) {
-			eventTriggers = new EObjectContainmentEList<EventTrigger>(EventTrigger.class, this, ModelPackage.APPLICATION_ELEMENT__EVENT_TRIGGERS);
-		}
-		return eventTriggers;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<Wire> getWires() {
 		if (wires == null) {
 			wires = new EObjectContainmentEList<Wire>(Wire.class, this, ModelPackage.APPLICATION_ELEMENT__WIRES);
@@ -686,8 +661,6 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT__GENERATED_BY:
 				return ((InternalEList<?>)getGeneratedBy()).basicRemove(otherEnd, msgs);
-			case ModelPackage.APPLICATION_ELEMENT__EVENT_TRIGGERS:
-				return ((InternalEList<?>)getEventTriggers()).basicRemove(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT__WIRES:
 				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
 			case ModelPackage.APPLICATION_ELEMENT__PARAMETER_EDGES:
@@ -738,8 +711,6 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				return getGeneratedRule();
 			case ModelPackage.APPLICATION_ELEMENT__NAME:
 				return getName();
-			case ModelPackage.APPLICATION_ELEMENT__EVENT_TRIGGERS:
-				return getEventTriggers();
 			case ModelPackage.APPLICATION_ELEMENT__WIRES:
 				return getWires();
 			case ModelPackage.APPLICATION_ELEMENT__PARAMETER_EDGES:
@@ -800,10 +771,6 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				return;
 			case ModelPackage.APPLICATION_ELEMENT__NAME:
 				setName((String)newValue);
-				return;
-			case ModelPackage.APPLICATION_ELEMENT__EVENT_TRIGGERS:
-				getEventTriggers().clear();
-				getEventTriggers().addAll((Collection<? extends EventTrigger>)newValue);
 				return;
 			case ModelPackage.APPLICATION_ELEMENT__WIRES:
 				getWires().clear();
@@ -890,9 +857,6 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 			case ModelPackage.APPLICATION_ELEMENT__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case ModelPackage.APPLICATION_ELEMENT__EVENT_TRIGGERS:
-				getEventTriggers().clear();
-				return;
 			case ModelPackage.APPLICATION_ELEMENT__WIRES:
 				getWires().clear();
 				return;
@@ -959,8 +923,6 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 				return GENERATED_RULE_EDEFAULT == null ? generatedRule != null : !GENERATED_RULE_EDEFAULT.equals(generatedRule);
 			case ModelPackage.APPLICATION_ELEMENT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case ModelPackage.APPLICATION_ELEMENT__EVENT_TRIGGERS:
-				return eventTriggers != null && !eventTriggers.isEmpty();
 			case ModelPackage.APPLICATION_ELEMENT__WIRES:
 				return wires != null && !wires.isEmpty();
 			case ModelPackage.APPLICATION_ELEMENT__PARAMETER_EDGES:
@@ -1012,12 +974,6 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 		if (baseClass == NamedElement.class) {
 			switch (derivedFeatureID) {
 				case ModelPackage.APPLICATION_ELEMENT__NAME: return ModelPackage.NAMED_ELEMENT__NAME;
-				default: return -1;
-			}
-		}
-		if (baseClass == ContainsEventTriggers.class) {
-			switch (derivedFeatureID) {
-				case ModelPackage.APPLICATION_ELEMENT__EVENT_TRIGGERS: return ModelPackage.CONTAINS_EVENT_TRIGGERS__EVENT_TRIGGERS;
 				default: return -1;
 			}
 		}
@@ -1090,12 +1046,6 @@ public class ApplicationElementImpl extends EObjectImpl implements ApplicationEl
 		if (baseClass == NamedElement.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.NAMED_ELEMENT__NAME: return ModelPackage.APPLICATION_ELEMENT__NAME;
-				default: return -1;
-			}
-		}
-		if (baseClass == ContainsEventTriggers.class) {
-			switch (baseFeatureID) {
-				case ModelPackage.CONTAINS_EVENT_TRIGGERS__EVENT_TRIGGERS: return ModelPackage.APPLICATION_ELEMENT__EVENT_TRIGGERS;
 				default: return -1;
 			}
 		}

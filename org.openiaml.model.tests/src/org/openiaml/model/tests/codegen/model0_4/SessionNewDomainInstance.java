@@ -41,7 +41,6 @@ public class SessionNewDomainInstance extends DatabaseCodegenTestCase {
 		
 		// we should have an 'email' text field that is empty
 		String email = getLabelIDForText("email");
-		assertNotNull(email);
 		assertLabeledFieldEquals(email, "");
 		
 		// and a button called 'make a new user'
@@ -61,7 +60,6 @@ public class SessionNewDomainInstance extends DatabaseCodegenTestCase {
 		String test = new Date() + "@openiaml.org";
 		{
 			String email = getLabelIDForText("email");
-			assertNotNull(email);
 			assertLabeledFieldEquals(email, "");
 			
 			// set email
@@ -77,7 +75,6 @@ public class SessionNewDomainInstance extends DatabaseCodegenTestCase {
 		// it should remain
 		{
 			String email = getLabelIDForText("email");
-			assertNotNull(email);
 			assertLabeledFieldEquals(email, test);
 		}
 		
@@ -86,7 +83,6 @@ public class SessionNewDomainInstance extends DatabaseCodegenTestCase {
 		{
 			// the email field should have been reset
 			String email = getLabelIDForText("email");
-			assertNotNull(email);
 			assertLabeledFieldEquals(email, "");
 		}
 	}
@@ -104,7 +100,6 @@ public class SessionNewDomainInstance extends DatabaseCodegenTestCase {
 			
 			// we should have an 'email' text field that is empty
 			String email = getLabelIDForText("email");
-			assertNotNull(email);
 			assertLabeledFieldEquals(email, "");
 			
 			// set email
@@ -146,7 +141,6 @@ public class SessionNewDomainInstance extends DatabaseCodegenTestCase {
 		
 		// we should have an 'email' text field that is empty
 		String email = getLabelIDForText("email");
-		assertNotNull(email);
 		assertLabeledFieldEquals(email, "");
 		
 		// set email
@@ -179,7 +173,6 @@ public class SessionNewDomainInstance extends DatabaseCodegenTestCase {
 		
 		for (String test : emails) {
 			String email = getLabelIDForText("email");
-			assertNotNull(email);
 			assertLabeledFieldEquals(email, "");
 			
 			// set email

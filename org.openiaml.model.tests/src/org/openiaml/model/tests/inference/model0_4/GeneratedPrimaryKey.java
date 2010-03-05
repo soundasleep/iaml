@@ -27,7 +27,7 @@ public class GeneratedPrimaryKey extends EclipseInheritanceInterface {
 		DomainObject ds = assertHasDomainObject(root, "domain object");
 		assertEquals(0, ds.getAttributes().size());
 		assertEquals(0, ds.getOperations().size());
-		assertEquals(0, ds.getEventTriggers().size());
+		assertNull(ds.getOnEdit());
 
 	}
 
@@ -41,7 +41,7 @@ public class GeneratedPrimaryKey extends EclipseInheritanceInterface {
 		assertTrue(generated.isIsGenerated());
 		assertTrue(generated.isPrimaryKey());
 		assertEquals(0, ds.getOperations().size());
-		assertEquals(0, ds.getEventTriggers().size());
+		assertNotNull(ds.getOnEdit());
 		
 	}
 

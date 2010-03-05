@@ -30,7 +30,6 @@ public class ReloadPage extends CodegenTestCase {
 		String testString = "value " + new Date().toString();
 		{
 			String targetId = getLabelIDForText("target");
-			assertNotNull(targetId);
 			assertLabeledFieldNotEquals(targetId, testString);
 			setLabeledFormElementField(targetId, testString);
 		}
@@ -42,7 +41,6 @@ public class ReloadPage extends CodegenTestCase {
 		// the value should remain there
 		{
 			String targetId = getLabelIDForText("target");
-			assertNotNull(targetId);
 			assertLabeledFieldEquals(targetId, testString);
 		}
 
@@ -53,7 +51,6 @@ public class ReloadPage extends CodegenTestCase {
 		// the value should remain there
 		{
 			String targetId = getLabelIDForText("target");
-			assertNotNull(targetId);
 			assertLabeledFieldEquals(targetId, testString);
 		}
 

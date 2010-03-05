@@ -78,11 +78,12 @@ public class SyncWiresProperties extends CodegenTestCase {
 		
 		// there should be some fields inferred automatically
 		String fruitId = getLabelIDForText("fruit");
-		assertNotNull(fruitId);
 		String animalId = getLabelIDForText("animal");
-		assertNotNull(animalId);
 		String countryId = getLabelIDForText("country");
-		assertNotNull(countryId);
+		
+		assertNotEqual(fruitId, animalId);
+		assertNotEqual(countryId, animalId);
+		assertNotEqual(animalId, countryId);
 	}
 	
 	/**
@@ -108,11 +109,8 @@ public class SyncWiresProperties extends CodegenTestCase {
 		
 		// there should be some fields inferred automatically
 		String fruitId = getLabelIDForText("fruit");
-		assertNotNull(fruitId);
 		String animalId = getLabelIDForText("animal");
-		assertNotNull(animalId);
 		String countryId = getLabelIDForText("country");
-		assertNotNull(countryId);
 		
 		// check that they are as expected
 		assertLabeledFieldEquals(fruitId, "apple");
@@ -144,7 +142,6 @@ public class SyncWiresProperties extends CodegenTestCase {
 		String oldFruit = "apple";
 		{
 			String fruitId = getLabelIDForText("fruit");
-			assertNotNull(fruitId);
 			
 			// lets set it
 			setLabeledFormElementField(fruitId, newFruit);
@@ -158,7 +155,6 @@ public class SyncWiresProperties extends CodegenTestCase {
 		// check it
 		{
 			String fruitId = getLabelIDForText("fruit");
-			assertNotNull(fruitId);
 			assertLabeledFieldEquals(fruitId, newFruit);
 			
 			// then go back and reset it
@@ -180,7 +176,6 @@ public class SyncWiresProperties extends CodegenTestCase {
 		String oldAnimal = "cat";
 		{
 			String fruitId = getLabelIDForText("animal");
-			assertNotNull(fruitId);
 			
 			// lets set it
 			setLabeledFormElementField(fruitId, newAnimal);
@@ -205,7 +200,6 @@ public class SyncWiresProperties extends CodegenTestCase {
 		// go back and reset it
 		{
 			String fruitId = getLabelIDForText("animal");
-			assertNotNull(fruitId);
 			setLabeledFormElementField(fruitId, oldAnimal);
 			assertLabeledFieldEquals(fruitId, oldAnimal);
 		}

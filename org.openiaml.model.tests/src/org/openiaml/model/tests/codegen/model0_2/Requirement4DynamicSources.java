@@ -35,7 +35,6 @@ public class Requirement4DynamicSources extends CodegenTestCase {
 		{
 			// there should be an element called value
 			String target = getLabelIDForText("target");
-			assertNotNull(target);
 			assertLabeledFieldEquals(target, "");
 			
 			// set the field
@@ -43,7 +42,6 @@ public class Requirement4DynamicSources extends CodegenTestCase {
 			
 			// set another field
 			String unrelated = getLabelIDForText("unrelated1");
-			assertNotNull(unrelated);
 			assertLabeledFieldEquals(unrelated, "");
 			setLabeledFormElementField(unrelated, test2);
 			
@@ -60,7 +58,6 @@ public class Requirement4DynamicSources extends CodegenTestCase {
 		{
 			// there should be an element called value
 			String target = getLabelIDForText("target");
-			assertNotNull(target);
 			assertLabeledFieldEquals(target, test1);
 		}
 		
@@ -71,7 +68,6 @@ public class Requirement4DynamicSources extends CodegenTestCase {
 		{
 			// there should be an element called value
 			String target = getLabelIDForText("target");
-			assertNotNull(target);
 			assertLabeledFieldEquals(target, test1);
 		}
 		
@@ -83,7 +79,6 @@ public class Requirement4DynamicSources extends CodegenTestCase {
 		{
 			// set target to another string
 			String target = getLabelIDForText("target");
-			assertNotNull(target);
 			setLabeledFormElementField(target, test3);
 			assertLabeledFieldEquals(target, test3);
 		}
@@ -95,7 +90,6 @@ public class Requirement4DynamicSources extends CodegenTestCase {
 		{
 			// there should be an element called value
 			String target = getLabelIDForText("target");
-			assertNotNull(target);
 			assertLabeledFieldEquals(target, test3);
 		}
 		
@@ -108,7 +102,6 @@ public class Requirement4DynamicSources extends CodegenTestCase {
 		{
 			// set target to another string
 			String target = getLabelIDForText("target");
-			assertNotNull(target);
 			assertLabeledFieldNotEquals(target, test1);
 			assertLabeledFieldNotEquals(target, test2);
 			assertLabeledFieldNotEquals(target, test3);
@@ -123,7 +116,6 @@ public class Requirement4DynamicSources extends CodegenTestCase {
 		{
 			// there should be an element called value
 			String target = getLabelIDForText("target");
-			assertNotNull(target);
 			assertLabeledFieldNotEquals(target, test4);
 			assertLabeledFieldEquals(target, test3);
 		}

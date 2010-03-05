@@ -32,11 +32,9 @@ public class Requirement1SyncWires extends CodegenTestCase {
 		String testPassword = "password " + new Date().toString();
 		{
 			String nameId = getLabelIDForText("firstName");
-			assertNotNull(nameId);
 			assertLabeledFieldNotEquals(nameId, testName);
 			setLabeledFormElementField(nameId, testName);
 			String passId = getLabelIDForText("password");
-			assertNotNull(passId);
 			assertLabeledFieldNotEquals(passId, testPassword);
 			setLabeledFormElementField(passId, testPassword);
 		}

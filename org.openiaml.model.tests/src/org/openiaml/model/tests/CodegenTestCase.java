@@ -608,8 +608,10 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	protected String getLabelIDForText(String text) {
 		logTimed("internal: get label ID for text");
 		IElement element = getElementByXPath("//label[" + getContainsTextXPath(text) + "]");
+		String id = element.getAttribute("id");
+		assertNotNull("Label ID for text '" + text + "' was null", id);
 		logTimed("internal: get label ID for text complete");
-		return element.getAttribute("id");
+		return id;
 	}
 
 	/**

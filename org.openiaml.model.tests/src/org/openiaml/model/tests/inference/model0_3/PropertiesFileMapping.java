@@ -54,7 +54,7 @@ public class PropertiesFileMapping extends EclipseInheritanceInterface {
 		System.out.println(dobj.getAttributes());
 		assertEquals(4, dobj.getAttributes().size());	// four attributes (one is a generated primary key)
 		assertEquals(0, dobj.getOperations().size());
-		assertEquals(0, dobj.getEventTriggers().size());
+		assertNotNull(dobj.getOnEdit());
 
 		{
 			DomainAttribute attribute = assertHasDomainAttribute(dobj, "fruit");

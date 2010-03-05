@@ -28,7 +28,6 @@ public class ConditionWireFalse extends CodegenTestCase {
 		String testString = "value " + new Date().toString();
 		{
 			String sourceId = getLabelIDForText("source");
-			assertNotNull(sourceId);
 			assertLabeledFieldNotEquals(sourceId, testString);
 			setLabeledFormElementField(sourceId, testString);
 			
@@ -36,7 +35,6 @@ public class ConditionWireFalse extends CodegenTestCase {
 			// should stop the Sync'ing from happening.
 			
 			String targetId = getLabelIDForText("target");
-			assertNotNull(targetId);
 			assertLabeledFieldNotEquals(targetId, testString);
 		}
 		
@@ -49,7 +47,6 @@ public class ConditionWireFalse extends CodegenTestCase {
 			// the page source between each page does not change either.
 			// plus, it is retrieved successfully above.
 			String targetId = getLabelIDForText("target");
-			assertNotNull(targetId);
 			assertLabeledFieldNotEquals(targetId, testString2);
 			setLabeledFormElementField(targetId, testString2);
 			
@@ -57,7 +54,6 @@ public class ConditionWireFalse extends CodegenTestCase {
 			// should stop the Sync'ing from happening.
 			
 			String sourceId = getLabelIDForText("source");
-			assertNotNull(sourceId);
 			assertLabeledFieldNotEquals(sourceId, testString2);
 			// it should still be the first text
 			assertLabeledFieldEquals(sourceId, testString);

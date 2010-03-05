@@ -62,10 +62,7 @@ public class SyncWiresProperties extends InferenceTestCase {
 		assertTrue(f3.isIsGenerated());
 
 		// find the sync wire
-		SyncWire wire = (SyncWire) queryOne(page, "//iaml:wires[iaml:name='sync properties']");
-		assertNotNull(wire);
-		assertEquals(wire.getFrom(), form);
-		assertEquals(wire.getTo(), properties);
+		SyncWire wire = assertHasSyncWire(page, form, properties, "sync properties");
 
 		// there should be 4 attributes; one of these will be a primary key
 		List<?> nodes2 = query(properties, "iaml:attributes");
@@ -134,13 +131,9 @@ public class SyncWiresProperties extends InferenceTestCase {
 			RunInstanceWire rw2 = (RunInstanceWire) getWireFromTo(root, access2, op2);
 			RunInstanceWire rw3 = (RunInstanceWire) getWireFromTo(root, access3, op3);
 
-			ParameterEdge pw1 = getParameterEdgeFromTo(root, valuea1, rw1);
-			ParameterEdge pw2 = getParameterEdgeFromTo(root, valuea2, rw2);
-			ParameterEdge pw3 = getParameterEdgeFromTo(root, valuea3, rw3);
-
-			assertNotNull(pw1);
-			assertNotNull(pw2);
-			assertNotNull(pw3);
+			getParameterEdgeFromTo(root, valuea1, rw1);
+			getParameterEdgeFromTo(root, valuea2, rw2);
+			getParameterEdgeFromTo(root, valuea3, rw3);
 		}
 
 	}

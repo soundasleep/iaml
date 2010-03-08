@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml.visual:Frame xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:iaml.visual="http://openiaml.org/model/visual" id="visual.1273c6bf5a4.8b">
+  <properties id="model.1273c6bf4aa.1ee" name="Property Name" defaultValue="Default"/>
+</iaml.visual:Frame>

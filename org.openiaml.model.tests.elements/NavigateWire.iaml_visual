@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<iaml:VisibleThing xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1263fd37982.c0f">
-  <children xsi:type="iaml.visual:Button" id="visual.1263fd379ff.7e3" name="Button" outEdges="wires.1263fd37a0f.5f0">
-    <wires xsi:type="iaml.wires:NavigateWire" id="wires.1263fd37a0f.5f0" from="visual.1263fd379ff.7e3" to="visual.12640c2a1ae.2f" name="Wire name"/>
-  </children>
-  <scopes xsi:type="iaml.visual:Frame" id="visual.12640c2a1ae.2f" name="Frame name" inEdges="wires.1263fd37a0f.5f0"/>
-</iaml:VisibleThing>

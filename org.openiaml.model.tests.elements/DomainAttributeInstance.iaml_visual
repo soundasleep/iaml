@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<iaml:VisibleThing xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" id="model.1263fd37982.be5">
-  <elements xsi:type="iaml:DomainAttributeInstance" id="model.1263fd37982.be8" name="attribute instance name"/>
-</iaml:VisibleThing>

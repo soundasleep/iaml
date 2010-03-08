@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<iaml:VisibleThing xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1263fd37982.c28">
-  <elements xsi:type="iaml.components:AccessControlHandler" id="components.1263fd37a1e.c7" name="Handler">
-    <inEdges xsi:type="iaml.wires:RequiresWire" href="Permission.iaml_user_store#wires.12640c2a1be.101"/>
-  </elements>
-</iaml:VisibleThing>

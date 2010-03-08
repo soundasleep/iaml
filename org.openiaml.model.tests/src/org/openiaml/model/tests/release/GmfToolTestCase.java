@@ -219,8 +219,23 @@ public class GmfToolTestCase extends XmlTestCase {
 				// EventTrigger
 				String toolName = tool.getAttribute("title");
 				
+				// remove any selectors
+				String selector = getSelector(toolName);
+				toolName = removeSelectors(toolName);
+				
+				String nodeXpath, linkXpath;
+				
+				if (selector == null) {
+					// a normal node
+					nodeXpath = "/Mapping/nodes/ownedChild/domainMetaElement[contains(@href, '" + toolName + "')]";
+					linkXpath = "/Mapping/links/domainMetaElement[contains(@href, '" + toolName + "')]";
+				} else {
+					nodeXpath = "/Mapping/nodes/ownedChild/domainMetaElement[contains(@href, '" + toolName + "') and contains(../../containmentFeature/@href, '" + selector + "')]";
+					linkXpath = "/Mapping/links/domainMetaElement[contains(@href, '" + toolName + "')]";					
+				}
+				
 				// should match either a node..
-				IterableElementList matches = xpath(gmfmap, "/Mapping/nodes/ownedChild/domainMetaElement[contains(@href, '" + toolName + "')]");
+				IterableElementList matches = xpath(gmfmap, nodeXpath);
 				boolean matched = false;
 				for (Element match : matches) {
 					String href = match.getAttribute("href");
@@ -231,7 +246,7 @@ public class GmfToolTestCase extends XmlTestCase {
 				}
 
 				// or a link
-				IterableElementList matches2 = xpath(gmfmap, "/Mapping/links/domainMetaElement[contains(@href, '" + toolName + "')]");
+				IterableElementList matches2 = xpath(gmfmap, linkXpath);
 				for (Element match : matches2) {
 					String href = match.getAttribute("href");
 					if (href.endsWith(toolName)) {
@@ -244,6 +259,46 @@ public class GmfToolTestCase extends XmlTestCase {
 				
 			}
 		}
+	}
+
+	/**
+	 * Change 'Foo [bar]' into 'bar'. If there is no selector, returns null.
+	 * 
+	 * @param toolName
+	 * @return
+	 */
+	private String getSelector(String toolName) {
+		if (toolName.contains("[")) {
+			String s = toolName.substring(toolName.indexOf("[") + 1);
+			s = s.substring(0, s.indexOf("]"));
+			return s;
+		}
+		
+		return null;
+	}
+
+	/**
+	 * Change 'Foo [bar]' into 'Foo'.
+	 * 
+	 * @param toolName
+	 * @return
+	 */
+	private String removeSelectors(String toolName) {
+		if (toolName.contains("[")) {
+			return toolName.substring(0, toolName.indexOf("[")).trim();
+		}
+		
+		return toolName;
+	}
+	
+	public void testGetSelector() {
+		assertNull(getSelector("Hello"));
+		assertEquals("bar", getSelector("Hello [bar]"));
+	}
+	
+	public void testRemoveSelectors() {
+		assertEquals("Hello", removeSelectors("Hello"));
+		assertEquals("Hello", removeSelectors("Hello [bar]"));
 	}
 
 	/**
@@ -279,7 +334,10 @@ public class GmfToolTestCase extends XmlTestCase {
 				// EventTrigger
 				String toolName = tool.getAttribute("title");
 				String message = "[" + filename + "] " + toolName + ": ";
-				
+
+				// remove selectors
+				toolName = removeSelectors(toolName);				
+
 				// should have a smallIcon
 				Element smallIcon = xpathFirst(tool, "smallIcon");
 				assertEndsWith(message, "/" + toolName + ".gif", smallIcon.getAttribute("path"));

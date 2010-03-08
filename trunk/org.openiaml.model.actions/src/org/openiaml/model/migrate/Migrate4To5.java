@@ -296,6 +296,10 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 			if ("iaml.visual:Frame".equals(parentType) // Scope
 					|| "iaml.scopes:Session".equals(parentType) // Scope
 					|| "iaml.visual:Page".equals(parentType) // Scope
+					|| "iaml:DomainObject".equals(parentType) // ApplicationElement
+					|| "iaml:DomainAttribute".equals(parentType) // ApplicationElement
+					|| "iaml:DomainObjectInstance".equals(parentType) // ApplicationElement
+					|| "iaml:DomainAttributeInstance".equals(parentType) // ApplicationElement
 					|| "iaml.visual:Button".equals(parentType) // VisibleThing
 					|| "iaml.visual:Label".equals(parentType) // VisibleThing
 					|| "iaml.visual:InputForm".equals(parentType) // VisibleThing
@@ -307,7 +311,8 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 					return "onAccess";
 				} else if ("click".equals(eventName) || "onClick".equals(eventName)) {
 					return "onClick";
-				} else if ("edit".equals(eventName) || "onEdit".equals(eventName)) {
+				} else if ("edit".equals(eventName) || "onEdit".equals(eventName)
+						|| "change".equals(eventName) || "onChange".equals(eventName)) {
 					return "onEdit";
 				} else if ("init".equals(eventName) || "onInit".equals(eventName)) {
 					return "onInit";

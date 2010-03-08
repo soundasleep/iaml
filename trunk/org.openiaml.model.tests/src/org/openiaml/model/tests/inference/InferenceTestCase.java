@@ -13,7 +13,6 @@ import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsConditions;
-import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsScopes;
 import org.openiaml.model.model.DataFlowEdge;
@@ -25,7 +24,6 @@ import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.DynamicApplicationElementSet;
-import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.ExecutionEdgeDestination;
 import org.openiaml.model.model.ExecutionEdgesSource;
@@ -223,17 +221,6 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public DecisionCondition assertHasDecisionCondition(ContainsConditions element, String string) throws JaxenException {
 		return (DecisionCondition) assertHasCondition(element, string);
-	}
-
-	/**
-	 * Assert that the given element contains the given
-	 * EventTrigger.
-	 *
-	 * @return The element found
-	 */
-	public EventTrigger assertHasEventTrigger(ContainsEventTriggers element,
-			String string) throws JaxenException {
-		return (EventTrigger) queryOne(element, "iaml:eventTriggers[iaml:name='" + string + "']");
 	}
 
 	/**

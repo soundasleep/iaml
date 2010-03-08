@@ -574,17 +574,6 @@
    <extension point="org.eclipse.ui.handlers" id="menu-handlers">
       <?gmfgen generated="true"?>
    </extension>
-<extension point="org.eclipse.ui.newWizards" id="creation-wizard">
-      <?gmfgen generated="true"?>
-  	  <wizard
-  	     name="%newWizardName"
-  	     icon="icons/obj16/ModelDiagramFile.gif"
-  	     category="org.eclipse.ui.Examples"
-  	     class="org.openiaml.model.diagram.element.part.IamlCreationWizard"
-  	     id="org.openiaml.model.diagram.element.part.IamlCreationWizardID">
-  	  	 <description>%newWizardDesc</description>  
-      </wizard>
-   </extension>
 
 
    <!-- optionally, specify keybindings -->

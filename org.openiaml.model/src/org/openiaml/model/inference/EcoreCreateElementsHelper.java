@@ -9,7 +9,6 @@ import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ContainsConditions;
-import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsScopes;
 import org.openiaml.model.model.ContainsWires;
@@ -144,13 +143,7 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		DomainStore ds = (DomainStore) createElement( container, ModelPackage.eINSTANCE.getDomainStore(), ModelPackage.eINSTANCE.getInternetApplication_DomainStores() );
 		return ds;
 	}
-	
-	public EventTrigger generatedEventTrigger(GeneratesElements by, ContainsEventTriggers container) throws InferenceException {
-		EventTrigger event = createEventTrigger(container);
-		setGeneratedBy(event, by);
-		return event;
-	}
-	
+		
 	public EventTrigger generatedEventTriggerOnAccess(GeneratesElements by, Accessible container) throws InferenceException {
 		EventTrigger event = (EventTrigger) createElement( container, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getAccessible_OnAccess() );
 		setGeneratedBy(event, by);
@@ -486,11 +479,6 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	public CompositeOperation createCompositeOperation(ContainsOperations container) throws InferenceException {
 		CompositeOperation operation = (CompositeOperation) createElement( container, ModelPackage.eINSTANCE.getCompositeOperation(), ModelPackage.eINSTANCE.getContainsOperations_Operations() );
 		return operation;
-	}
-
-	public EventTrigger createEventTrigger(ContainsEventTriggers container) throws InferenceException {
-		EventTrigger event = (EventTrigger) createElement( container, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getContainsEventTriggers_EventTriggers() );
-		return event;
 	}
 
 	public DomainObject generatedDomainObject(GeneratesElements by, DomainStore container) throws InferenceException {

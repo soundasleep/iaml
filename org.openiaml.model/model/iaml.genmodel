@@ -21,9 +21,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//WireSource/outWires"/>
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//EventTrigger"/>
-    <genClasses image="false" ecoreClass="iaml.ecore#//ContainsEventTriggers">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ContainsEventTriggers/eventTriggers"/>
-    </genClasses>
     <genClasses ecoreClass="iaml.ecore#//DomainObject">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainObject/attributes"/>
     </genClasses>

@@ -369,8 +369,8 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	protected void generateID(EObject obj) {
 		if (obj instanceof GeneratedElement) {
 			GeneratedElement ge = (GeneratedElement) obj;			
-			generate_id_counter++;			
-			ge.setId( this.getEPackage().getName() + "." + packageDate + "." + Long.toHexString(generate_id_counter) );
+			generate_id_counter++;
+			ge.setId( (getEPackage() == null ? "null" : getEPackage().getName()) + "." + packageDate + "." + Long.toHexString(generate_id_counter) );
 		}
 	}
 

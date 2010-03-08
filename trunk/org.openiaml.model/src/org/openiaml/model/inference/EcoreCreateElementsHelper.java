@@ -387,6 +387,12 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return page;
 	}
 
+	public Session generatedSession(GeneratesElements by, InternetApplication container) throws InferenceException {
+		Session session = (Session) createElement( container, ScopesPackage.eINSTANCE.getSession(), ModelPackage.eINSTANCE.getInternetApplication_Scopes() );
+		setGeneratedBy(session, by);
+		return session;
+	}
+
 	public Session generatedSession(GeneratesElements by, Scope container) throws InferenceException {
 		Session session = (Session) createElement( container, ScopesPackage.eINSTANCE.getSession(), ModelPackage.eINSTANCE.getScope_Scopes() );
 		setGeneratedBy(session, by);

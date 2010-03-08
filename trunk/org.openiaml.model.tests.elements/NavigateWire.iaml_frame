@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml.visual:Frame xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="visual.1273c6bf5a4.47">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.1273c6bf5a4.4b" name="Frame" inWires="wires.1273c6bf67f.f"/>
+  <children xsi:type="iaml.visual:Button" outWires="wires.1273c6bf67f.f" id="visual.1273c6bf5a4.4a" name="Button">
+    <wires xsi:type="iaml.wires:NavigateWire" id="wires.1273c6bf67f.f" from="visual.1273c6bf5a4.4a" to="visual.1273c6bf5a4.4b" name="Wire Name"/>
+  </children>
+</iaml.visual:Frame>

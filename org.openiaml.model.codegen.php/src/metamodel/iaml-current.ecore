@@ -39,11 +39,6 @@
       <details key="documentation" value="Represents the source of events."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ContainsEventTriggers" abstract="true"
-      interface="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="eventTriggers" upperBound="-1"
-        eType="#//EventTrigger" containment="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DomainObject" eSuperTypes="#//ApplicationElement #//ContainsWires #//wires/ParameterEdgesSource #//wires/ExtendsEdgesSource #//wires/ExtendsEdgeDestination #//Editable">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="changed" value="0.2 to extend the abstract counterpart&#xD;&#xA;0.3 to remove the abstract extension, and added &quot;type&quot; attribute"/>

@@ -15,11 +15,6 @@
 	«EXPAND operationDefinition(container, php) FOREACH allContainerOperations()-»
 «ENDDEFINE»
 
-«DEFINE operationDefinitions(model::visual::Frame container, Boolean php) FOR model::ApplicationElementContainer-»
-	// expanding operations for «this»
-	«EXPAND operationDefinition(container, php) FOREACH allContainerOperations()-»
-«ENDDEFINE»
-
 /* operation definitions */
 «DEFINE operationDefinition(model::visual::Frame container, Boolean php) FOR model::Operation-»
 	/* simple operation */

@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.Accessible;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
-import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
@@ -177,10 +176,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseApplicationElement(ApplicationElement object) {
 				return createApplicationElementAdapter();
-			}
-			@Override
-			public Adapter caseApplicationElementContainer(ApplicationElementContainer object) {
-				return createApplicationElementContainerAdapter();
 			}
 			@Override
 			public Adapter caseProperty(Property object) {
@@ -545,20 +540,6 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createApplicationElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ApplicationElementContainer <em>Application Element Container</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.openiaml.model.model.ApplicationElementContainer
-	 * @generated
-	 */
-	public Adapter createApplicationElementContainerAdapter() {
 		return null;
 	}
 

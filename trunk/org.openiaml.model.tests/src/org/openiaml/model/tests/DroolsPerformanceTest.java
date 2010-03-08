@@ -68,7 +68,7 @@ public class DroolsPerformanceTest extends ModelInferenceTestCase implements IMo
 							button.setName("test button " + j);
 							*/
 							
-							InputTextField text = (InputTextField) handler.createElement(page, VisualPackage.eINSTANCE.getInputTextField(), ModelPackage.eINSTANCE.getApplicationElementContainer_Children());
+							InputTextField text = (InputTextField) handler.createElement(page, VisualPackage.eINSTANCE.getInputTextField(), VisualPackage.eINSTANCE.getFrame_Children());
 							text.setName("test field " + j);
 							
 						}

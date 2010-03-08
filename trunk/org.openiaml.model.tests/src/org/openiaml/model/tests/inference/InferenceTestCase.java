@@ -9,7 +9,6 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.jaxen.JaxenException;
 import org.openiaml.model.model.ApplicationElement;
-import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Condition;
@@ -368,26 +367,6 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 
 	/**
 	 * Assert that the given element contains the given
-	 * DomainObject.
-	 *
-	 * @return The element found
-	 */
-	public DomainObject assertHasDomainObject(ApplicationElementContainer root, String string) throws JaxenException {
-		return (DomainObject) queryOne(root, "iaml:children[iaml:name='" + string + "']");
-	}
-
-	/**
-	 * Assert that the given element contains the given
-	 * UserInstance.
-	 *
-	 * @return The element found
-	 */
-	public UserInstance assertHasUserInstance(ApplicationElementContainer root, String string) throws JaxenException {
-		return (UserInstance) queryOne(root, "iaml:children[iaml:name='" + string + "']");
-	}
-
-	/**
-	 * Assert that the given element contains the given
 	 * UserInstance.
 	 *
 	 * @return The element found
@@ -395,16 +374,6 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public UserInstance assertHasUserInstance(Scope root, String string) throws JaxenException {
 		return (UserInstance) queryOne(root, "iaml:elements[iaml:name='" + string + "']");
 	}
-
-	/**
-	 * Assert that the given element contains the given
-	 * DomainObjectInstance.
-	 *
-	 * @return The element found
-	 */
-	public DomainObjectInstance assertHasDomainObjectInstance(ApplicationElementContainer root, String string) throws JaxenException {
-		return (DomainObjectInstance) queryOne(root, "iaml:children[iaml:name='" + string + "']");
-	}	
 
 	/**
 	 * Assert that the given element contains the given
@@ -426,16 +395,6 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		return (DomainObjectInstance) queryOne(root, "iaml:children[iaml:name='" + string + "']");
 	}
 
-	/**
-	 * Assert that the given element does not contain the given
-	 * DomainObjectInstance.
-	 *
-	 * @return The element found
-	 */
-	public void assertHasNoDomainObjectInstance(ApplicationElementContainer root, String string) throws JaxenException {
-		assertHasNone(root, "iaml:children[iaml:name='" + string + "']");
-	}
-	
 	/**
 	 * Assert that the given element does not contain the given
 	 * DomainObjectInstance.

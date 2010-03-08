@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.openiaml.model.model.Accessible;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
-import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
@@ -184,13 +183,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EClass applicationElementEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass applicationElementContainerEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -765,24 +757,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 */
 	public EReference getApplicationElement_Values() {
 		return (EReference)applicationElementEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getApplicationElementContainer() {
-		return applicationElementContainerEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getApplicationElementContainer_Children() {
-		return (EReference)applicationElementContainerEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1652,9 +1626,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(applicationElementEClass, APPLICATION_ELEMENT__PROPERTIES);
 		createEReference(applicationElementEClass, APPLICATION_ELEMENT__VALUES);
 
-		applicationElementContainerEClass = createEClass(APPLICATION_ELEMENT_CONTAINER);
-		createEReference(applicationElementContainerEClass, APPLICATION_ELEMENT_CONTAINER__CHILDREN);
-
 		propertyEClass = createEClass(PROPERTY);
 		createEAttribute(propertyEClass, PROPERTY__DEFAULT_VALUE);
 
@@ -1859,8 +1830,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		applicationElementEClass.getESuperTypes().add(this.getGeneratesElements());
 		applicationElementEClass.getESuperTypes().add(this.getContainsConditions());
 		applicationElementEClass.getESuperTypes().add(this.getCanBeSynced());
-		applicationElementContainerEClass.getESuperTypes().add(this.getApplicationElement());
-		applicationElementContainerEClass.getESuperTypes().add(this.getContainsWires());
 		propertyEClass.getESuperTypes().add(this.getNamedElement());
 		propertyEClass.getESuperTypes().add(this.getWireSource());
 		propertyEClass.getESuperTypes().add(this.getWireDestination());
@@ -1994,9 +1963,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEClass(applicationElementEClass, ApplicationElement.class, "ApplicationElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getApplicationElement_Properties(), this.getProperty(), null, "properties", null, 0, -1, ApplicationElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getApplicationElement_Values(), this.getStaticValue(), null, "values", null, 0, -1, ApplicationElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(applicationElementContainerEClass, ApplicationElementContainer.class, "ApplicationElementContainer", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getApplicationElementContainer_Children(), this.getApplicationElement(), null, "children", null, 0, -1, ApplicationElementContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(propertyEClass, Property.class, "Property", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getProperty_DefaultValue(), ecorePackage.getEString(), "defaultValue", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2187,7 +2153,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   new String[] {
 			 "editor", "org.openiaml.model.diagram.element",
 			 "comment", "Scope supertype added in 0.2"
-		   });			
+		   });				
 		addAnnotation
 		  (getProperty_DefaultValue(), 
 		   source, 
@@ -2468,6 +2434,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   new String[] {
 			 "documentation", "Operations which are composed of logic flows, data flows, and other operations."
 		   });			
+		addAnnotation
+		  (applicationElementEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "An abstract type representing model elements that {@model ContainsConditions}, {@model ContainsOperations} and {@model ContainsProperties}. This is used primarily to reduce the number of diagram editors in the IAML environment."
+		   });		
 		addAnnotation
 		  (propertyEClass, 
 		   source, 

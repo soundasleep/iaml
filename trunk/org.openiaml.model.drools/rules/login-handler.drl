@@ -19,21 +19,6 @@ global EcoreCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
-rule "Create 'login' page for LoginHandlers [ApplicationElementContainer]"
-	when
-		container : ApplicationElementContainer( )
-		scope : Scope( eContainer == container ) 
-		login_handler : LoginHandler( eContainer == scope )
-		not (Frame (eContainer == container, name=="login" ))
-			
-	then
-
-		Frame login = handler.generatedFrame(login_handler, container);
-		handler.setName(login, "login");
-		queue.add(login, drools);
-		
-end
-
 rule "Create 'login' page for LoginHandlers [InternetApplication]"
 	when
 		container : InternetApplication( )

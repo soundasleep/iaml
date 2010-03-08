@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.Accessible;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
-import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
@@ -308,23 +307,6 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseGeneratesElements(applicationElement);
 				if (result == null) result = caseContainsConditions(applicationElement);
 				if (result == null) result = caseContainsWires(applicationElement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ModelPackage.APPLICATION_ELEMENT_CONTAINER: {
-				ApplicationElementContainer applicationElementContainer = (ApplicationElementContainer)theEObject;
-				T result = caseApplicationElementContainer(applicationElementContainer);
-				if (result == null) result = caseApplicationElement(applicationElementContainer);
-				if (result == null) result = caseCanBeSynced(applicationElementContainer);
-				if (result == null) result = caseContainsOperations(applicationElementContainer);
-				if (result == null) result = caseNamedElement(applicationElementContainer);
-				if (result == null) result = caseGeneratedElement(applicationElementContainer);
-				if (result == null) result = caseWireSource(applicationElementContainer);
-				if (result == null) result = caseShouldntContainWires(applicationElementContainer);
-				if (result == null) result = caseWireDestination(applicationElementContainer);
-				if (result == null) result = caseGeneratesElements(applicationElementContainer);
-				if (result == null) result = caseContainsConditions(applicationElementContainer);
-				if (result == null) result = caseContainsWires(applicationElementContainer);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -872,21 +854,6 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseApplicationElement(ApplicationElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Application Element Container</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Application Element Container</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseApplicationElementContainer(ApplicationElementContainer object) {
 		return null;
 	}
 

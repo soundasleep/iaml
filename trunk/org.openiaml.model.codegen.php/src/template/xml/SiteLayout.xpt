@@ -26,11 +26,5 @@
 </children>
 «ENDDEFINE»
 
-«DEFINE siteLayoutChildren FOR model::ApplicationElementContainer»
-<children id="«id-»" name="«name-»">
-	«EXPAND siteLayoutChildren FOREACH children»
-</children>
-«ENDDEFINE»
-
 «DEFINE exception FOR Object»
 «ENDDEFINE»

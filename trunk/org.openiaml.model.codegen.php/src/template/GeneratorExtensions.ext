@@ -119,12 +119,6 @@ availableInCurrentScript(model::WireSource source, model::WireDestination target
  * - Any operations in the elements contained in this frame/container
  * - Any operations contained in the direct parent scope (if any)
  */
-List[model::Operation] allContainerOperations(model::ApplicationElementContainer this) :
-	// we have to toSet() it so that we *clone* the list of operations, and not
-	// add operations to the list directly
-	// see http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=11142
-	operations.toSet().union( children.allContainerOperations() ).union( possibleParentOperations(eContainer) );
-
 List[model::Operation] allContainerOperations(model::Scope this) :
 	operations.toSet().union( scopes.allContainerOperations() )
 		.union( possibleParentOperations(eContainer) );

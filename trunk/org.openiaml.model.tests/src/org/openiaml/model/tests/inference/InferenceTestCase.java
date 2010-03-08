@@ -14,7 +14,6 @@ import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsOperations;
-import org.openiaml.model.model.ContainsScopes;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DataFlowEdgeDestination;
 import org.openiaml.model.model.DataFlowEdgesSource;
@@ -577,7 +576,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * Assert that the given element contains the given
 	 * Frame.
 	 */
-	public Frame assertHasFrame(ContainsScopes scope, String string) throws JaxenException {
+	public Frame assertHasFrame(Scope scope, String string) throws JaxenException {
 		return (Frame) queryOne(scope, "iaml:scopes[iaml:name='" + string + "']");
 	}
 
@@ -585,7 +584,23 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * Assert that the given element does not contain the given
 	 * Frame.
 	 */
-	public void assertHasNoFrame(ContainsScopes scope, String string) throws JaxenException {
+	public void assertHasNoFrame(Scope scope, String string) throws JaxenException {
+		assertHasNone(scope, "iaml:scopes[iaml:name='" + string + "']");
+	}
+
+	/**
+	 * Assert that the given element contains the given
+	 * Frame.
+	 */
+	public Frame assertHasFrame(InternetApplication scope, String string) throws JaxenException {
+		return (Frame) queryOne(scope, "iaml:scopes[iaml:name='" + string + "']");
+	}
+
+	/**
+	 * Assert that the given element does not contain the given
+	 * Frame.
+	 */
+	public void assertHasNoFrame(InternetApplication scope, String string) throws JaxenException {
 		assertHasNone(scope, "iaml:scopes[iaml:name='" + string + "']");
 	}
 

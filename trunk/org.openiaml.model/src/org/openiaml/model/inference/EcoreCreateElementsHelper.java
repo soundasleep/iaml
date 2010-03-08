@@ -10,7 +10,6 @@ import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsOperations;
-import org.openiaml.model.model.ContainsScopes;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DataFlowEdgeDestination;
@@ -388,8 +387,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return page;
 	}
 
-	public Session generatedSession(GeneratesElements by, ContainsScopes container) throws InferenceException {
-		Session session = (Session) createElement( container, ScopesPackage.eINSTANCE.getSession(), ModelPackage.eINSTANCE.getContainsScopes_Scopes() );
+	public Session generatedSession(GeneratesElements by, Scope container) throws InferenceException {
+		Session session = (Session) createElement( container, ScopesPackage.eINSTANCE.getSession(), ModelPackage.eINSTANCE.getScope_Scopes() );
 		setGeneratedBy(session, by);
 		return session;
 	}
@@ -461,12 +460,12 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	}
 
 	public Frame createFrame(InternetApplication container) throws InferenceException {
-		Frame page = (Frame) createElement( container, VisualPackage.eINSTANCE.getFrame(), ModelPackage.eINSTANCE.getContainsScopes_Scopes() );
+		Frame page = (Frame) createElement( container, VisualPackage.eINSTANCE.getFrame(), ModelPackage.eINSTANCE.getInternetApplication_Scopes() );
 		return page;
 	}
 
-	public Frame createFrame(ContainsScopes container) throws InferenceException {
-		Frame page = (Frame) createElement( container, VisualPackage.eINSTANCE.getFrame(), ModelPackage.eINSTANCE.getContainsScopes_Scopes() );
+	public Frame createFrame(Scope container) throws InferenceException {
+		Frame page = (Frame) createElement( container, VisualPackage.eINSTANCE.getFrame(), ModelPackage.eINSTANCE.getScope_Scopes() );
 		return page;
 	}
 	

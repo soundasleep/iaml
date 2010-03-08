@@ -26,7 +26,6 @@ import org.openiaml.model.model.wires.SyncWire;
  * Tests inference of sync wires.
  * The model test case is of name1<-->name2<-->name3<-->name4.
  *
- * @model models/test-sync.iaml
  * @author jmwright
  *
  */

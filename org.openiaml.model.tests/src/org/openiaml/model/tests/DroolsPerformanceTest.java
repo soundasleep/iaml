@@ -22,7 +22,7 @@ import org.openiaml.model.tests.CachedModelLoader.IModelReloader;
 /**
  * <p>In order for this test to execute and keep track of model properties
  * (e.g. number of source/target elements), you <em>must</em> make 
- * {@link ModelInferenceTestCase} extend {@model ModelTestCaseWithProperties}.</p>
+ * {@link ModelInferenceTestCase} extend {@link ModelTestCaseWithProperties}.</p>
  * 
  * @author jmwright
  *

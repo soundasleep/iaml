@@ -12,7 +12,6 @@ import org.openiaml.model.tests.CodegenTestCase;
 /**
  * Tests requirement 3: dynamic value parameters
  * 
- * @model ../examples/requirements/3-dynamic_params.iaml
  * @author jmwright
  *
  */

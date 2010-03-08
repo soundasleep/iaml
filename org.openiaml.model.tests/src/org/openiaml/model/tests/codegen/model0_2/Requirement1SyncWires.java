@@ -11,7 +11,6 @@ import org.openiaml.model.tests.CodegenTestCase;
 /**
  * Tests requirement 1: sync wires.
  * 
- * @model ../examples/requirements/1-sync_wires.iaml 
  * @author jmwright
  *
  */

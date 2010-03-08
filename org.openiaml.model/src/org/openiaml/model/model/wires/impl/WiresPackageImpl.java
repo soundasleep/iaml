@@ -1258,7 +1258,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		  (runInstanceWireEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Connects a {@model EventTrigger} to a {@model Operation}, allowing it to be executed. May have incoming {@model ConditionWire}s."
+			 "documentation", "Connects a {@model EventTrigger} to a {@model Operation}, allowing it to be executed. May have incoming {@model ConditionEdge}s."
 		   });			
 		addAnnotation
 		  (parameterEdgeEClass, 
@@ -1288,7 +1288,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		  (conditionEdgeEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Allows the conditional execution of {@model ConditionEdgeDestination targets} such as {@model WireEdge wires}. Only if the {@model ConditionEdgesSource incoming condition} is true, will the execution be permitted."
+			 "documentation", "Allows the conditional execution of {@model ConditionEdgeDestination targets} such as {@model Wire wires}. Only if the {@model ConditionEdgesSource incoming condition} is true, will the execution be permitted."
 		   });			
 		addAnnotation
 		  (newInstanceWireEClass, 

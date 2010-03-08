@@ -485,13 +485,13 @@ public class UsersPackageImpl extends EPackageImpl implements UsersPackage {
 		  (roleEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "A particular Role that a user may have; may be {@model ExtendsWire inherited} from other Roles."
+			 "documentation", "A particular Role that a user may have; may be {@model ExtendsEdge inherited} from other Roles."
 		   });		
 		addAnnotation
 		  (permissionEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "A single Permission that a user may have; may also be {@model ProvidesWire provided} by a {@model Role}."
+			 "documentation", "A single Permission that a user may have; may also be {@model ProvidesEdge provided} by a {@model Role}."
 		   });		
 		addAnnotation
 		  (userInstanceEClass, 

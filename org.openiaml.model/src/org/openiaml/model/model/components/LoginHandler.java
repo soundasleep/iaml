@@ -17,7 +17,7 @@ import org.openiaml.model.model.wires.ParameterEdgeDestination;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * When placed into a {@model Page} or {@model Session}, enforces that users need to login via this LoginHandler first. Also supports logout.
+ * When placed into a {@model Frame} or {@model Session}, enforces that users need to login via this LoginHandler first. Also supports logout.
  * <!-- end-model-doc -->
  *
  * <p>

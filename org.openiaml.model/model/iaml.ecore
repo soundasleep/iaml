@@ -392,7 +392,7 @@
       <details key="comment" value="added in 0.2"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="A Condition allows for conditional execution of {@model WireEdge wires} when {@model ConditionWire connected}."/>
+      <details key="documentation" value="A Condition allows for conditional execution of {@model Wire wires} when {@model ConditionEdge connected}."/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CompositeCondition" eSuperTypes="#//ContainsConditions #//Condition #//GeneratesElements #//ContainsOperations">
@@ -564,7 +564,7 @@
         <details key="comment" value="RunWire: a composite wire that contains ExecutionWires/etc"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Connects a {@model EventTrigger} to a {@model Operation}, allowing it to be executed. May have incoming {@model ConditionWire}s."/>
+        <details key="documentation" value="Connects a {@model EventTrigger} to a {@model Operation}, allowing it to be executed. May have incoming {@model ConditionEdge}s."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="priority" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
         <eAnnotations source="http://openiaml.org/comment">
@@ -622,7 +622,7 @@
         <details key="added" value="0.2"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Allows the conditional execution of {@model ConditionEdgeDestination targets} such as {@model WireEdge wires}. Only if the {@model ConditionEdgesSource incoming condition} is true, will the execution be permitted."/>
+        <details key="documentation" value="Allows the conditional execution of {@model ConditionEdgeDestination targets} such as {@model Wire wires}. Only if the {@model ConditionEdgesSource incoming condition} is true, will the execution be permitted."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1"
           eType="#//wires/ConditionEdgesSource" eOpposite="#//wires/ConditionEdgesSource/outConditionEdges"/>
@@ -885,7 +885,7 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="LoginHandler" eSuperTypes="#//GeneratesElements #//wires/ParameterEdgeDestination #//ApplicationElement #//ContainsWires">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="When placed into a {@model Page} or {@model Session}, enforces that users need to login via this LoginHandler first. Also supports logout."/>
+        <details key="documentation" value="When placed into a {@model Frame} or {@model Session}, enforces that users need to login via this LoginHandler first. Also supports logout."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1"
           eType="#//components/LoginHandlerTypes"/>
@@ -895,7 +895,7 @@
         <details key="added" value="0.4"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="When placed into a {@model Page} or {@model Session}, enforces that all access contains the {@model Role roles} and {@model Permission permissions} provided by incoming {@model RequiresWire}."/>
+        <details key="documentation" value="When placed into a {@model Frame} or {@model Session}, enforces that all access contains the {@model Role roles} and {@model Permission permissions} provided by incoming {@model RequiresEdge}."/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Gate" abstract="true" eSuperTypes="#//NamedElement #//WireSource #//WireDestination #//GeneratedElement #//GeneratesElements #//wires/ConditionEdgeDestination">
@@ -905,7 +905,7 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="EntryGate" eSuperTypes="#//components/Gate">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="When placed into a {@model Scope} (including {@model Session}), all {@model Page} accesses within that Scope must first execute this {@model Gate}. If all incoming {@model ConditionWire}s are true, then access to this {@model Scope} is denied until such time any {@model ConditionWire}s becomes false."/>
+        <details key="documentation" value="When placed into a {@model Scope} (including {@model Session}), all {@model Frame} accesses within that Scope must first execute this {@model Gate}. If all incoming {@model ConditionEdge}s are true, then access to this {@model Scope} is denied until such time any {@model ConditionEdge}s becomes false."/>
       </eAnnotations>
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.4.2"/>
@@ -913,7 +913,7 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ExitGate" eSuperTypes="#//components/Gate">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="When placed into a {@model Scope} (including {@model Session}), all {@model Page} accesses within that Scope must finally execute this {@model Gate}. If all incoming {@model ConditionWire}s are true, then access to this {@model Scope} is denied until such time any {@model ConditionWire}s becomes false."/>
+        <details key="documentation" value="When placed into a {@model Scope} (including {@model Session}), all {@model Frame} accesses within that Scope must finally execute this {@model Gate}. If all incoming {@model ConditionEdge}s are true, then access to this {@model Scope} is denied until such time any {@model ConditionEdge}s becomes false."/>
       </eAnnotations>
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.4.2"/>
@@ -954,12 +954,12 @@
         <details key="note" value="another option is to create 'extends : Role' and 'extendedBy : Role' as EOpposites, and remove ExtendsWire. but this means that this relationship cannot be used as the target or source of any wires (parameters? conditions?)"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="A particular Role that a user may have; may be {@model ExtendsWire inherited} from other Roles."/>
+        <details key="documentation" value="A particular Role that a user may have; may be {@model ExtendsEdge inherited} from other Roles."/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Permission" eSuperTypes="#//NamedElement #//wires/ParameterEdgesSource #//users/RequiresEdgeDestination #//users/ProvidesEdgeDestination #//ContainsWires">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="A single Permission that a user may have; may also be {@model ProvidesWire provided} by a {@model Role}."/>
+        <details key="documentation" value="A single Permission that a user may have; may also be {@model ProvidesEdge provided} by a {@model Role}."/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="UserInstance" eSuperTypes="#//DomainObjectInstance">

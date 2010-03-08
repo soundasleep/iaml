@@ -17,15 +17,15 @@ import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
  * 		Creating a {@model NewInstanceWire new instance} of an inherited {@model DomainObject}.
  * 
  * @implementation NewInstanceWire,DomainObjectInstance,DomainAttribute  
- * 		{@model NewInstanceWire New instances} of {@model DomainObject DomainObjects} which {@model ExtendsWire inherit others} can be created;
+ * 		{@model NewInstanceWire New instances} of {@model DomainObject DomainObjects} which {@model ExtendsEdge inherit others} can be created;
  * 		all of their {@model DomainAttribute attributes} are accessible.
  * 
  * @implementation NewInstanceWire,DomainObjectInstance
- * 		A {@model NewInstanceWire new instance} of an {@model ExtendsWire inherited} {@model DomainObject} with autosave=false
+ * 		A {@model NewInstanceWire new instance} of an {@model ExtendsEdge inherited} {@model DomainObject} with autosave=false
  * 		can have its {@model DomainAttribute attributes} modified before being saved.
  * 
- * @implementation SyncWire,InputForm,ExtendsWire
- * 		A {@model NewInstanceWire new} {@model DomainObject} with {@model ExtendsWire inheritance} 
+ * @implementation SyncWire,InputForm,ExtendsEdge
+ * 		A {@model NewInstanceWire new} {@model DomainObject} with {@model ExtendsEdge inheritance} 
  * 		connected to an {@model InputForm} with
  * 		a {@model SyncWire} will populate the InputForm with an 
  * 		{@model InputTextField}
@@ -36,7 +36,7 @@ import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
  * 		accessible only within a {@model Session}.
  * 
  * @implementation Session,NewInstanceWire
- * 		If a {@model NewInstanceWire new instance} of an {@model ExtendsWire inherited}
+ * 		If a {@model NewInstanceWire new instance} of an {@model ExtendsEdge inherited}
  * 		{@model DomainObject} is created within
  * 		a {@model Session}, then the modification of this instance is limited to
  * 		within the Session.

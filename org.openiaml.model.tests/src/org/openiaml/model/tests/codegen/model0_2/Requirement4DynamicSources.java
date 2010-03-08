@@ -14,7 +14,6 @@ import org.openiaml.model.tests.CodegenTestCase;
 /**
  * Tests requirement 4: dynamic sources of elements
  * 
- * @model ../examples/requirements/4-dynamic_sources.iaml
  * @author jmwright
  *
  */

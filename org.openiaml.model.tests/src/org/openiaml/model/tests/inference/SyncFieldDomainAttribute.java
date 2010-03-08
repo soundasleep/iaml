@@ -13,13 +13,11 @@ import org.openiaml.model.model.Property;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.RunInstanceWire;
-import org.openiaml.model.model.wires.SyncWire;
 
 /**
  * Tests inference of sync wires between a domain attribute
  * and a single text field.
  *
- * @model SyncFieldDomainAttribute.iaml
  * @author jmwright
  *
  */

@@ -20,7 +20,6 @@ import org.openiaml.model.model.wires.SyncWire;
 /**
  * Tests inference of an InputForm with a DomainObject.
  *
- * @model SyncFormDomainObject.iaml
  * @author jmwright
  *
  */

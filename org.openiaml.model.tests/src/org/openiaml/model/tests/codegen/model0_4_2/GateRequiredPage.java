@@ -13,10 +13,10 @@ import org.openiaml.model.tests.CodegenTestCase;
  * @author jmwright
  * @example EntryGate 
  * 		If a {@model EntryGate} is connected by a {@model NavigateWire} called "first", 
- * 		then the target {@model Page} must be viewed at least once before proceeding.
+ * 		then the target {@model Frame} must be viewed at least once before proceeding.
  * @implementation EntryGate,NavigateWire
  * 		If a {@model EntryGate} is connected by a {@model NavigateWire} called "first", 
- * 		then the target {@model Page} must be viewed at least once before proceeding.
+ * 		then the target {@model Frame} must be viewed at least once before proceeding.
  */
 public class GateRequiredPage extends CodegenTestCase {
 	

@@ -13,10 +13,10 @@ import org.openiaml.model.tests.CodegenTestCase;
  * @author jmwright
  * @example ExitGate 
  * 		If a {@model ExitGate} is connected by a {@model NavigateWire} called "last", 
- * 		then the target {@model Page} must be viewed at least once before proceeding.
+ * 		then the target {@model Frame} must be viewed at least once before proceeding.
  * @implementation ExitGate,NavigateWire
  * 		If a {@model ExitGate} is connected by a {@model NavigateWire} called "last", 
- * 		then the target {@model Page} must be viewed at least once before proceeding.
+ * 		then the target {@model Frame} must be viewed at least once before proceeding.
  */
 public class ExitGateAdSimple extends CodegenTestCase {
 	

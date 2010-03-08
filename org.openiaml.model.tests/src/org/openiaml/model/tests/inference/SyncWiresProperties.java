@@ -29,7 +29,6 @@ import org.openiaml.model.model.wires.SyncWire;
  * Tests inference of sync wires between a .properties
  * FileDomainStore and an InputForm.
  *
- * @model SyncWireProperties.iaml
  * @author jmwright
  *
  */
@@ -63,6 +62,7 @@ public class SyncWiresProperties extends InferenceTestCase {
 
 		// find the sync wire
 		SyncWire wire = assertHasSyncWire(page, form, properties, "sync properties");
+		assertNotGenerated(wire);
 
 		// there should be 4 attributes; one of these will be a primary key
 		List<?> nodes2 = query(properties, "iaml:attributes");

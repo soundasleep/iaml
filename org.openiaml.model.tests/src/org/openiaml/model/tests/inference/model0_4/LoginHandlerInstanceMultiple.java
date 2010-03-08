@@ -22,7 +22,7 @@ import org.openiaml.model.tests.inference.InferenceTestCase;
 /**
  * Test case for inference of login handler[type=domain object] when
  * we have multiple parameters. Most of the logic is handled sufficiently
- * in {@model LoginHandlerInstance}, so this test case is checking
+ * in {@link LoginHandlerInstance}, so this test case is checking
  * special cases for multiple parameters.
  *
  * @author jmwright

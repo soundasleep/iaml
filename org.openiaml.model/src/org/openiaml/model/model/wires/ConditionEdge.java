@@ -15,7 +15,7 @@ import org.openiaml.model.model.NamedElement;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Allows the conditional execution of {@model ConditionEdgeDestination targets} such as {@model WireEdge wires}. Only if the {@model ConditionEdgesSource incoming condition} is true, will the execution be permitted.
+ * Allows the conditional execution of {@model ConditionEdgeDestination targets} such as {@model Wire wires}. Only if the {@model ConditionEdgesSource incoming condition} is true, will the execution be permitted.
  * <!-- end-model-doc -->
  *
  * <p>

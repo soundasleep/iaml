@@ -14,7 +14,7 @@ package org.openiaml.model.model.components;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * When placed into a {@model Scope} (including {@model Session}), all {@model Page} accesses within that Scope must finally execute this {@model Gate}. If all incoming {@model ConditionWire}s are true, then access to this {@model Scope} is denied until such time any {@model ConditionWire}s becomes false.
+ * When placed into a {@model Scope} (including {@model Session}), all {@model Frame} accesses within that Scope must finally execute this {@model Gate}. If all incoming {@model ConditionEdge}s are true, then access to this {@model Scope} is denied until such time any {@model ConditionEdge}s becomes false.
  * <!-- end-model-doc -->
  *
  *

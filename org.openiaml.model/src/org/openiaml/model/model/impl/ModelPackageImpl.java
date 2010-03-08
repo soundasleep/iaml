@@ -2472,7 +2472,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		  (conditionEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "A Condition allows for conditional execution of {@model WireEdge wires} when {@model ConditionWire connected}."
+			 "documentation", "A Condition allows for conditional execution of {@model Wire wires} when {@model ConditionEdge connected}."
 		   });			
 		addAnnotation
 		  (compositeConditionEClass, 

@@ -13,7 +13,7 @@ import org.openiaml.model.tests.codegen.model0_1.SyncFieldApplicationElementProp
  * Issue 81: Test that if we ask to include the runtime libraries
  * explicitly, that they are included as normal. 
  * 
- * Otherwise tests everything in {@link SyncFieldApplicationElementProperty}.
+ * <p>Otherwise tests everything in {@link SyncFieldApplicationElementProperty}.
  * 
  * @author jmwright
  *

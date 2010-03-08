@@ -63,6 +63,36 @@ public class ContainmentTestCase extends TestCase {
 		return cachedGetAllClasses;
 	}
 	
+	private static Map<EClass,EFactory> cachedGetAllClassesIncludingAbstract = null;
+	
+	/**
+	 * Get all of the classes in this project, linked to their
+	 * factories.
+	 * 
+	 * @return
+	 */
+	public static Map<EClass,EFactory> getAllClassesIncludingAbstract() {
+		if (cachedGetAllClassesIncludingAbstract == null) {
+			cachedGetAllClassesIncludingAbstract = new HashMap<EClass,EFactory>();
+
+			// for every element in every package,
+			Map<EPackage,EFactory> factories = ModelTestCase.getFactoryMap();
+			for (EPackage pkg : factories.keySet()) {
+				// for every class in this package
+				for (EClassifier classifier : pkg.getEClassifiers()) {
+					if (classifier instanceof EClass) {
+						EClass cls = (EClass) classifier;
+						
+						// put this into the list
+						cachedGetAllClassesIncludingAbstract.put(cls, factories.get(pkg));
+					}
+				}
+			}
+		}
+		
+		return cachedGetAllClassesIncludingAbstract;
+	}
+	
 	/**
 	 * Iterate over all elements twice, checking to see they
 	 * can only belong to one containment feature.

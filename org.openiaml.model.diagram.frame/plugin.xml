@@ -241,7 +241,7 @@
          </object>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_Frame"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2029,2028,2002,2003,2004,2005,2025,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2030"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2029,2028,2002,2003,2004,2005,2025,2031,2008,2009,2010,2032,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2030"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4002,4011,4004,4005,4006,4014,4008,4012,4013"/>
       </viewProvider>
    </extension>
@@ -254,13 +254,13 @@
             <method name="getType()" value="Iaml_Frame"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
-            <method name="getType()" value="2029,2028,2002,2003,2004,2005,2025,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2030"/>
+            <method name="getType()" value="2029,2028,2002,2003,2004,2005,2025,2031,2008,2009,2010,2032,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2030"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
             <method name="getType()" value="4001,4002,4011,4004,4005,4006,4014,4008,4012,4013"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5056,5057,5058,5053,5054,5055,5003,5004,5005,5006,5007,5008,5009,5010,5044,5045,5046,5014,5015,5016,5017,5018,5019,5020,5021,5022,5023,5024,5025,5026,5027,5028,5029,5030,5031,5032,5033,5034,5035,5036,5037,5038,5039,5040,5041,5042,5043,5059,5060,5061"/>
+            <method name="getType()" value="5056,5057,5058,5053,5054,5055,5003,5004,5005,5006,5007,5008,5009,5010,5044,5045,5046,5062,5015,5016,5017,5018,5019,5020,5063,5022,5023,5024,5025,5026,5027,5028,5029,5030,5031,5032,5033,5034,5035,5036,5037,5038,5039,5040,5041,5042,5043,5059,5060,5061"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value=""/>
@@ -281,11 +281,11 @@
          <object class="org.openiaml.model.diagram.frame.edit.parts.DomainObjectEditPart" id="DomainObject_2004"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.DomainAttributeEditPart" id="DomainAttribute_2005"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.PropertyEditPart" id="Property_2025"/>
-         <object class="org.openiaml.model.diagram.frame.edit.parts.Frame2EditPart" id="Frame_2007"/>
+         <object class="org.openiaml.model.diagram.frame.edit.parts.Frame2EditPart" id="Frame_2031"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.InputFormEditPart" id="InputForm_2008"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.InputTextFieldEditPart" id="InputTextField_2009"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.StaticValueEditPart" id="StaticValue_2010"/>
-         <object class="org.openiaml.model.diagram.frame.edit.parts.SessionEditPart" id="Session_2011"/>
+         <object class="org.openiaml.model.diagram.frame.edit.parts.SessionEditPart" id="Session_2032"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.LoginHandlerEditPart" id="LoginHandler_2012"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.CompositeConditionEditPart" id="CompositeCondition_2013"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.DomainObjectInstanceEditPart" id="DomainObjectInstance_2014"/>
@@ -300,7 +300,7 @@
          <object class="org.openiaml.model.diagram.frame.edit.parts.ExitGateEditPart" id="ExitGate_2023"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.LabelEditPart" id="Label_2024"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.EventTriggerEditPart" id="EventTrigger_2030"/>
-         <context elements="Frame_1000,EventTrigger_2029,EventTrigger_2028,CompositeOperation_2002,PrimitiveOperation_2003,DomainObject_2004,DomainAttribute_2005,Property_2025,Frame_2007,InputForm_2008,InputTextField_2009,StaticValue_2010,Session_2011,LoginHandler_2012,CompositeCondition_2013,DomainObjectInstance_2014,DomainAttributeInstance_2015,Button_2016,QueryParameter_2017,AccessControlHandler_2018,Permission_2019,Role_2020,UserInstance_2021,EntryGate_2022,ExitGate_2023,Label_2024,EventTrigger_2030"/>
+         <context elements="Frame_1000,EventTrigger_2029,EventTrigger_2028,CompositeOperation_2002,PrimitiveOperation_2003,DomainObject_2004,DomainAttribute_2005,Property_2025,Frame_2031,InputForm_2008,InputTextField_2009,StaticValue_2010,Session_2032,LoginHandler_2012,CompositeCondition_2013,DomainObjectInstance_2014,DomainAttributeInstance_2015,Button_2016,QueryParameter_2017,AccessControlHandler_2018,Permission_2019,Role_2020,UserInstance_2021,EntryGate_2022,ExitGate_2023,Label_2024,EventTrigger_2030"/>
       </modelingAssistantProvider>
    </extension>
 
@@ -323,7 +323,7 @@
       <decoratorProvider class="org.openiaml.model.diagram.frame.providers.IamlShortcutsDecoratorProvider">
          <Priority name="Lowest"/>
          <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
-            <method name="getType()" value="2029,2028,2002,2003,2004,2005,2025,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2030"/>
+            <method name="getType()" value="2029,2028,2002,2003,2004,2005,2025,2031,2008,2009,2010,2032,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2030"/>
          </object>
          <context decoratorTargets="generated-top-nodes"/>
       </decoratorProvider>
@@ -412,11 +412,11 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/visual">
          <specializationType
-               id="org.openiaml.model.diagram.frame.Frame_2007"
-               name="%metatype.name.Frame_2007"
+               id="org.openiaml.model.diagram.frame.Frame_2031"
+               name="%metatype.name.Frame_2031"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
             <specializes id="org.openiaml.model.diagram.frame.Frame_1000"/>
-            <param name="semanticHint" value="2007"/>
+            <param name="semanticHint" value="2031"/>
          </specializationType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/visual">
@@ -451,12 +451,12 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/scopes">
          <metamodelType
-               id="org.openiaml.model.diagram.frame.Session_2011"
-               name="%metatype.name.Session_2011"
+               id="org.openiaml.model.diagram.frame.Session_2032"
+               name="%metatype.name.Session_2032"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="Session"
                edithelper="org.openiaml.model.diagram.frame.edit.helpers.SessionEditHelper">
-            <param name="semanticHint" value="2011"/>
+            <param name="semanticHint" value="2032"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/components">
@@ -718,11 +718,11 @@
          <elementType ref="org.openiaml.model.diagram.frame.DomainObject_2004"/>
          <elementType ref="org.openiaml.model.diagram.frame.DomainAttribute_2005"/>
          <elementType ref="org.openiaml.model.diagram.frame.Property_2025"/>
-         <elementType ref="org.openiaml.model.diagram.frame.Frame_2007"/>
+         <elementType ref="org.openiaml.model.diagram.frame.Frame_2031"/>
          <elementType ref="org.openiaml.model.diagram.frame.InputForm_2008"/>
          <elementType ref="org.openiaml.model.diagram.frame.InputTextField_2009"/>
          <elementType ref="org.openiaml.model.diagram.frame.StaticValue_2010"/>
-         <elementType ref="org.openiaml.model.diagram.frame.Session_2011"/>
+         <elementType ref="org.openiaml.model.diagram.frame.Session_2032"/>
          <elementType ref="org.openiaml.model.diagram.frame.LoginHandler_2012"/>
          <elementType ref="org.openiaml.model.diagram.frame.CompositeCondition_2013"/>
          <elementType ref="org.openiaml.model.diagram.frame.DomainObjectInstance_2014"/>

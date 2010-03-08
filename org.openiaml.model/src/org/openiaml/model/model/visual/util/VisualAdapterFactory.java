@@ -14,7 +14,6 @@ import org.openiaml.model.model.Accessible;
 import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsOperations;
-import org.openiaml.model.model.ContainsScopes;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.Editable;
 import org.openiaml.model.model.GeneratedElement;
@@ -118,14 +117,6 @@ public class VisualAdapterFactory extends AdapterFactoryImpl {
 				return createContainsWiresAdapter();
 			}
 			@Override
-			public Adapter caseContainsOperations(ContainsOperations object) {
-				return createContainsOperationsAdapter();
-			}
-			@Override
-			public Adapter caseContainsScopes(ContainsScopes object) {
-				return createContainsScopesAdapter();
-			}
-			@Override
 			public Adapter caseGeneratedElement(GeneratedElement object) {
 				return createGeneratedElementAdapter();
 			}
@@ -148,6 +139,10 @@ public class VisualAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseContainsConditions(ContainsConditions object) {
 				return createContainsConditionsAdapter();
+			}
+			@Override
+			public Adapter caseContainsOperations(ContainsOperations object) {
+				return createContainsOperationsAdapter();
 			}
 			@Override
 			public Adapter caseCanBeSynced(CanBeSynced object) {
@@ -274,20 +269,6 @@ public class VisualAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createContainsOperationsAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ContainsScopes <em>Contains Scopes</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.openiaml.model.model.ContainsScopes
-	 * @generated
-	 */
-	public Adapter createContainsScopesAdapter() {
 		return null;
 	}
 

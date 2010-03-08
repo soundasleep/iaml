@@ -14,7 +14,6 @@ import org.openiaml.model.model.Accessible;
 import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsOperations;
-import org.openiaml.model.model.ContainsScopes;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.Editable;
 import org.openiaml.model.model.GeneratedElement;
@@ -112,17 +111,16 @@ public class VisualSwitch<T> {
 				T result = caseFrame(frame);
 				if (result == null) result = caseScope(frame);
 				if (result == null) result = caseParameterEdgesSource(frame);
-				if (result == null) result = caseContainsScopes(frame);
 				if (result == null) result = caseCanBeSynced(frame);
 				if (result == null) result = caseAccessible(frame);
 				if (result == null) result = caseGeneratesElements(frame);
-				if (result == null) result = caseContainsOperations(frame);
 				if (result == null) result = caseNamedElement(frame);
 				if (result == null) result = caseGeneratedElement(frame);
 				if (result == null) result = caseWireSource(frame);
 				if (result == null) result = caseShouldntContainWires(frame);
 				if (result == null) result = caseWireDestination(frame);
 				if (result == null) result = caseContainsConditions(frame);
+				if (result == null) result = caseContainsOperations(frame);
 				if (result == null) result = caseContainsWires(frame);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -298,21 +296,6 @@ public class VisualSwitch<T> {
 	 * @generated
 	 */
 	public T caseContainsOperations(ContainsOperations object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Contains Scopes</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Contains Scopes</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseContainsScopes(ContainsScopes object) {
 		return null;
 	}
 

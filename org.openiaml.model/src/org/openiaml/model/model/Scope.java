@@ -25,6 +25,7 @@ import org.openiaml.model.model.components.ExitGate;
  *   <li>{@link org.openiaml.model.model.Scope#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.openiaml.model.model.Scope#getElements <em>Elements</em>}</li>
  *   <li>{@link org.openiaml.model.model.Scope#getOnInit <em>On Init</em>}</li>
+ *   <li>{@link org.openiaml.model.model.Scope#getScopes <em>Scopes</em>}</li>
  * </ul>
  * </p>
  *
@@ -33,7 +34,7 @@ import org.openiaml.model.model.components.ExitGate;
  *        annotation="http://openiaml.org/comment changed='0.4: \'domainObjects\', \'domainViews\', \'domainInstances\' references removed\r\n0.4.2: renamed from \'Scope\' to \'AbstractScope\'; added \'gate\' reference'"
  * @generated
  */
-public interface Scope extends GeneratesElements, ContainsWires, ContainsScopes, NamedElement, GeneratedElement, WireSource, WireDestination, ContainsConditions, CanBeSynced, Accessible {
+public interface Scope extends GeneratesElements, ContainsWires, NamedElement, GeneratedElement, WireSource, WireDestination, ContainsConditions, CanBeSynced, Accessible, ContainsOperations {
 	/**
 	 * Returns the value of the '<em><b>Entry Gate</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -179,5 +180,21 @@ public interface Scope extends GeneratesElements, ContainsWires, ContainsScopes,
 	 * @generated
 	 */
 	void setOnInit(EventTrigger value);
+
+	/**
+	 * Returns the value of the '<em><b>Scopes</b></em>' containment reference list.
+	 * The list contents are of type {@link org.openiaml.model.model.Scope}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Scopes</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Scopes</em>' containment reference list.
+	 * @see org.openiaml.model.model.ModelPackage#getScope_Scopes()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Scope> getScopes();
 
 } // Scope

@@ -113,7 +113,7 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//ContainsScopes/scopes"/>
+        href="iaml.ecore#//InternetApplication/scopes"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//visual/Frame"/>
@@ -220,7 +220,7 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//ContainsScopes/scopes"/>
+        href="iaml.ecore#//InternetApplication/scopes"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//scopes/Session"/>

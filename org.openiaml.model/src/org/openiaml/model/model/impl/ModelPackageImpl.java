@@ -21,7 +21,6 @@ import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ConditionalEdge;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsOperations;
-import org.openiaml.model.model.ContainsScopes;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DataFlowEdgeDestination;
@@ -350,13 +349,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EClass queryParameterEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass containsScopesEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -864,6 +856,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getInternetApplication_Scopes() {
+		return (EReference)internetApplicationEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getDomainStore() {
 		return domainStoreEClass;
 	}
@@ -1341,6 +1342,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getScope_Scopes() {
+		return (EReference)scopeEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getCondition() {
 		return conditionEClass;
 	}
@@ -1460,24 +1470,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 */
 	public EAttribute getQueryParameter_DefaultValue() {
 		return (EAttribute)queryParameterEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getContainsScopes() {
-		return containsScopesEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getContainsScopes_Scopes() {
-		return (EReference)containsScopesEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1614,6 +1606,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(internetApplicationEClass, INTERNET_APPLICATION__CHILDREN);
 		createEReference(internetApplicationEClass, INTERNET_APPLICATION__DOMAIN_STORES);
 		createEAttribute(internetApplicationEClass, INTERNET_APPLICATION__RUNTIME_URL);
+		createEReference(internetApplicationEClass, INTERNET_APPLICATION__SCOPES);
 
 		domainStoreEClass = createEClass(DOMAIN_STORE);
 		createEReference(domainStoreEClass, DOMAIN_STORE__CHILDREN);
@@ -1683,6 +1676,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(scopeEClass, SCOPE__PARAMETERS);
 		createEReference(scopeEClass, SCOPE__ELEMENTS);
 		createEReference(scopeEClass, SCOPE__ON_INIT);
+		createEReference(scopeEClass, SCOPE__SCOPES);
 
 		conditionEClass = createEClass(CONDITION);
 
@@ -1702,9 +1696,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		queryParameterEClass = createEClass(QUERY_PARAMETER);
 		createEAttribute(queryParameterEClass, QUERY_PARAMETER__DEFAULT_VALUE);
-
-		containsScopesEClass = createEClass(CONTAINS_SCOPES);
-		createEReference(containsScopesEClass, CONTAINS_SCOPES__SCOPES);
 
 		canBeSyncedEClass = createEClass(CAN_BE_SYNCED);
 
@@ -1828,7 +1819,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		internetApplicationEClass.getESuperTypes().add(this.getContainsWires());
 		internetApplicationEClass.getESuperTypes().add(this.getGeneratesElements());
 		internetApplicationEClass.getESuperTypes().add(this.getContainsConditions());
-		internetApplicationEClass.getESuperTypes().add(this.getContainsScopes());
 		domainStoreEClass.getESuperTypes().add(this.getContainsOperations());
 		domainStoreEClass.getESuperTypes().add(this.getNamedElement());
 		domainStoreEClass.getESuperTypes().add(this.getContainsWires());
@@ -1853,7 +1843,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		domainObjectInstanceEClass.getESuperTypes().add(this.getEditable());
 		scopeEClass.getESuperTypes().add(this.getGeneratesElements());
 		scopeEClass.getESuperTypes().add(this.getContainsWires());
-		scopeEClass.getESuperTypes().add(this.getContainsScopes());
 		scopeEClass.getESuperTypes().add(this.getNamedElement());
 		scopeEClass.getESuperTypes().add(this.getGeneratedElement());
 		scopeEClass.getESuperTypes().add(this.getWireSource());
@@ -1861,6 +1850,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		scopeEClass.getESuperTypes().add(this.getContainsConditions());
 		scopeEClass.getESuperTypes().add(this.getCanBeSynced());
 		scopeEClass.getESuperTypes().add(this.getAccessible());
+		scopeEClass.getESuperTypes().add(this.getContainsOperations());
 		conditionEClass.getESuperTypes().add(this.getWireSource());
 		conditionEClass.getESuperTypes().add(this.getDataFlowEdgesSource());
 		conditionEClass.getESuperTypes().add(this.getNamedElement());
@@ -1877,7 +1867,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		queryParameterEClass.getESuperTypes().add(this.getWireSource());
 		queryParameterEClass.getESuperTypes().add(this.getDataFlowEdgesSource());
 		queryParameterEClass.getESuperTypes().add(theWiresPackage.getParameterEdgesSource());
-		containsScopesEClass.getESuperTypes().add(this.getContainsOperations());
 		canBeSyncedEClass.getESuperTypes().add(this.getNamedElement());
 		canBeSyncedEClass.getESuperTypes().add(this.getGeneratedElement());
 		canBeSyncedEClass.getESuperTypes().add(this.getGeneratesElements());
@@ -1949,6 +1938,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getInternetApplication_Children(), this.getApplicationElement(), null, "children", null, 0, -1, InternetApplication.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getInternetApplication_DomainStores(), this.getDomainStore(), null, "domainStores", null, 0, -1, InternetApplication.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getInternetApplication_RuntimeUrl(), ecorePackage.getEString(), "runtimeUrl", "http://localhost:8080/output/", 0, 1, InternetApplication.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInternetApplication_Scopes(), this.getScope(), null, "scopes", null, 0, -1, InternetApplication.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(domainStoreEClass, DomainStore.class, "DomainStore", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDomainStore_Children(), this.getDomainObject(), null, "children", null, 0, -1, DomainStore.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2018,6 +2008,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getScope_Parameters(), this.getQueryParameter(), null, "parameters", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getScope_Elements(), this.getApplicationElement(), null, "elements", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getScope_OnInit(), this.getEventTrigger(), null, "onInit", null, 0, 1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getScope_Scopes(), this.getScope(), null, "scopes", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(conditionEClass, Condition.class, "Condition", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2037,9 +2028,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(queryParameterEClass, QueryParameter.class, "QueryParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getQueryParameter_DefaultValue(), ecorePackage.getEString(), "defaultValue", null, 0, 1, QueryParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(containsScopesEClass, ContainsScopes.class, "ContainsScopes", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getContainsScopes_Scopes(), this.getScope(), null, "scopes", null, 0, -1, ContainsScopes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(canBeSyncedEClass, CanBeSynced.class, "CanBeSynced", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2321,12 +2309,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 			 "added", "0.4"
 		   });			
 		addAnnotation
-		  (containsScopesEClass, 
-		   source, 
-		   new String[] {
-			 "comment", "added in 0.4.2"
-		   });		
-		addAnnotation
 		  (getEditable_OnEdit(), 
 		   source, 
 		   new String[] {
@@ -2491,7 +2473,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Represents a query parameter from the browser\'s URI string."
-		   });			
+		   });		
 	}
 
 } //ModelPackageImpl

@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsConditions;
-import org.openiaml.model.model.ContainsScopes;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.GeneratedElement;
@@ -63,11 +62,11 @@ import org.openiaml.model.model.wires.RequiresEdge;
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getGeneratedElements <em>Generated Elements</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#isOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getConditions <em>Conditions</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getScopes <em>Scopes</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getDomainStores <em>Domain Stores</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getRuntimeUrl <em>Runtime Url</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getScopes <em>Scopes</em>}</li>
  * </ul>
  * </p>
  *
@@ -285,16 +284,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	protected EList<Condition> conditions;
 
 	/**
-	 * The cached value of the '{@link #getScopes() <em>Scopes</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getScopes()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Scope> scopes;
-
-	/**
 	 * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -343,6 +332,16 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * @ordered
 	 */
 	protected String runtimeUrl = RUNTIME_URL_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getScopes() <em>Scopes</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getScopes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Scope> scopes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -716,14 +715,14 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__CONDITIONS:
 				return ((InternalEList<?>)getConditions()).basicRemove(otherEnd, msgs);
-			case ModelPackage.INTERNET_APPLICATION__SCOPES:
-				return ((InternalEList<?>)getScopes()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
 				return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__CHILDREN:
 				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__DOMAIN_STORES:
 				return ((InternalEList<?>)getDomainStores()).basicRemove(otherEnd, msgs);
+			case ModelPackage.INTERNET_APPLICATION__SCOPES:
+				return ((InternalEList<?>)getScopes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -768,8 +767,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return isOverridden();
 			case ModelPackage.INTERNET_APPLICATION__CONDITIONS:
 				return getConditions();
-			case ModelPackage.INTERNET_APPLICATION__SCOPES:
-				return getScopes();
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
 				return getProperties();
 			case ModelPackage.INTERNET_APPLICATION__CHILDREN:
@@ -778,6 +775,8 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return getDomainStores();
 			case ModelPackage.INTERNET_APPLICATION__RUNTIME_URL:
 				return getRuntimeUrl();
+			case ModelPackage.INTERNET_APPLICATION__SCOPES:
+				return getScopes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -850,10 +849,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				getConditions().clear();
 				getConditions().addAll((Collection<? extends Condition>)newValue);
 				return;
-			case ModelPackage.INTERNET_APPLICATION__SCOPES:
-				getScopes().clear();
-				getScopes().addAll((Collection<? extends Scope>)newValue);
-				return;
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
 				getProperties().clear();
 				getProperties().addAll((Collection<? extends Property>)newValue);
@@ -868,6 +863,10 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return;
 			case ModelPackage.INTERNET_APPLICATION__RUNTIME_URL:
 				setRuntimeUrl((String)newValue);
+				return;
+			case ModelPackage.INTERNET_APPLICATION__SCOPES:
+				getScopes().clear();
+				getScopes().addAll((Collection<? extends Scope>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -929,9 +928,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 			case ModelPackage.INTERNET_APPLICATION__CONDITIONS:
 				getConditions().clear();
 				return;
-			case ModelPackage.INTERNET_APPLICATION__SCOPES:
-				getScopes().clear();
-				return;
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
 				getProperties().clear();
 				return;
@@ -943,6 +939,9 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return;
 			case ModelPackage.INTERNET_APPLICATION__RUNTIME_URL:
 				setRuntimeUrl(RUNTIME_URL_EDEFAULT);
+				return;
+			case ModelPackage.INTERNET_APPLICATION__SCOPES:
+				getScopes().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -988,8 +987,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return overridden != OVERRIDDEN_EDEFAULT;
 			case ModelPackage.INTERNET_APPLICATION__CONDITIONS:
 				return conditions != null && !conditions.isEmpty();
-			case ModelPackage.INTERNET_APPLICATION__SCOPES:
-				return scopes != null && !scopes.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__PROPERTIES:
 				return properties != null && !properties.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__CHILDREN:
@@ -998,6 +995,8 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return domainStores != null && !domainStores.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__RUNTIME_URL:
 				return RUNTIME_URL_EDEFAULT == null ? runtimeUrl != null : !RUNTIME_URL_EDEFAULT.equals(runtimeUrl);
+			case ModelPackage.INTERNET_APPLICATION__SCOPES:
+				return scopes != null && !scopes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1049,12 +1048,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				default: return -1;
 			}
 		}
-		if (baseClass == ContainsScopes.class) {
-			switch (derivedFeatureID) {
-				case ModelPackage.INTERNET_APPLICATION__SCOPES: return ModelPackage.CONTAINS_SCOPES__SCOPES;
-				default: return -1;
-			}
-		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -1102,12 +1095,6 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 		if (baseClass == ContainsConditions.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.CONTAINS_CONDITIONS__CONDITIONS: return ModelPackage.INTERNET_APPLICATION__CONDITIONS;
-				default: return -1;
-			}
-		}
-		if (baseClass == ContainsScopes.class) {
-			switch (baseFeatureID) {
-				case ModelPackage.CONTAINS_SCOPES__SCOPES: return ModelPackage.INTERNET_APPLICATION__SCOPES;
 				default: return -1;
 			}
 		}

@@ -20,7 +20,6 @@ import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ConditionalEdge;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsOperations;
-import org.openiaml.model.model.ContainsScopes;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DataFlowEdgeDestination;
@@ -353,12 +352,11 @@ public class ModelSwitch<T> {
 			case ModelPackage.INTERNET_APPLICATION: {
 				InternetApplication internetApplication = (InternetApplication)theEObject;
 				T result = caseInternetApplication(internetApplication);
+				if (result == null) result = caseContainsOperations(internetApplication);
 				if (result == null) result = caseNamedElement(internetApplication);
 				if (result == null) result = caseContainsWires(internetApplication);
 				if (result == null) result = caseGeneratesElements(internetApplication);
 				if (result == null) result = caseContainsConditions(internetApplication);
-				if (result == null) result = caseContainsScopes(internetApplication);
-				if (result == null) result = caseContainsOperations(internetApplication);
 				if (result == null) result = caseGeneratedElement(internetApplication);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -503,17 +501,16 @@ public class ModelSwitch<T> {
 			case ModelPackage.SCOPE: {
 				Scope scope = (Scope)theEObject;
 				T result = caseScope(scope);
-				if (result == null) result = caseContainsScopes(scope);
 				if (result == null) result = caseCanBeSynced(scope);
 				if (result == null) result = caseAccessible(scope);
 				if (result == null) result = caseGeneratesElements(scope);
-				if (result == null) result = caseContainsOperations(scope);
 				if (result == null) result = caseNamedElement(scope);
 				if (result == null) result = caseGeneratedElement(scope);
 				if (result == null) result = caseWireSource(scope);
 				if (result == null) result = caseShouldntContainWires(scope);
 				if (result == null) result = caseWireDestination(scope);
 				if (result == null) result = caseContainsConditions(scope);
+				if (result == null) result = caseContainsOperations(scope);
 				if (result == null) result = caseContainsWires(scope);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -584,13 +581,6 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseGeneratedElement(queryParameter);
 				if (result == null) result = caseShouldntContainWires(queryParameter);
 				if (result == null) result = caseContainsWires(queryParameter);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ModelPackage.CONTAINS_SCOPES: {
-				ContainsScopes containsScopes = (ContainsScopes)theEObject;
-				T result = caseContainsScopes(containsScopes);
-				if (result == null) result = caseContainsOperations(containsScopes);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1207,21 +1197,6 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseQueryParameter(QueryParameter object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Contains Scopes</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Contains Scopes</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseContainsScopes(ContainsScopes object) {
 		return null;
 	}
 

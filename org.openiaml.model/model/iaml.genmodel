@@ -50,9 +50,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ApplicationElement/properties"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ApplicationElement/values"/>
     </genClasses>
-    <genClasses ecoreClass="iaml.ecore#//ApplicationElementContainer">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ApplicationElementContainer/children"/>
-    </genClasses>
     <genClasses ecoreClass="iaml.ecore#//Property">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//Property/defaultValue"/>
     </genClasses>

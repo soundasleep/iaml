@@ -6,7 +6,6 @@ package org.openiaml.model.inference;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.Accessible;
 import org.openiaml.model.model.ApplicationElement;
-import org.openiaml.model.model.ApplicationElementContainer;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ContainsConditions;
@@ -384,12 +383,6 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return wire;
 	}
 
-	public Frame generatedFrame(GeneratesElements by, ApplicationElementContainer container) throws InferenceException {
-		Frame page = createFrame(container);
-		setGeneratedBy(page, by);
-		return page;
-	}
-
 	public Frame generatedFrame(GeneratesElements by, InternetApplication container) throws InferenceException {
 		Frame page = createFrame(container);
 		setGeneratedBy(page, by);
@@ -420,12 +413,6 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return form;
 	}
 
-	public InputTextField generatedInputTextField(GeneratesElements by, ApplicationElementContainer container) throws InferenceException {
-		InputTextField field = (InputTextField) createElement( container, VisualPackage.eINSTANCE.getInputTextField(), ModelPackage.eINSTANCE.getApplicationElementContainer_Children() );
-		setGeneratedBy(field, by);
-		return field;
-	}
-
 	public InputTextField generatedInputTextField(GeneratesElements by, VisibleThing container) throws InferenceException {
 		InputTextField field = (InputTextField) createElement( container, VisualPackage.eINSTANCE.getInputTextField(), ModelPackage.eINSTANCE.getVisibleThing_Children() );
 		setGeneratedBy(field, by);
@@ -438,12 +425,6 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return field;
 	}
 	
-	public Label generatedLabel(GeneratesElements by, ApplicationElementContainer container) throws InferenceException {
-		Label field = (Label) createElement( container, VisualPackage.eINSTANCE.getLabel(), ModelPackage.eINSTANCE.getApplicationElementContainer_Children() );
-		setGeneratedBy(field, by);
-		return field;
-	}
-
 	public Label generatedLabel(GeneratesElements by, VisibleThing container) throws InferenceException {
 		Label field = (Label) createElement( container, VisualPackage.eINSTANCE.getLabel(), ModelPackage.eINSTANCE.getVisibleThing_Children() );
 		setGeneratedBy(field, by);
@@ -490,11 +471,6 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		Frame page = (Frame) createElement( container, VisualPackage.eINSTANCE.getFrame(), ModelPackage.eINSTANCE.getContainsScopes_Scopes() );
 		return page;
 	}
-	
-	public Frame createFrame(ApplicationElementContainer container) throws InferenceException {
-		Frame page = (Frame) createElement( container, VisualPackage.eINSTANCE.getFrame(), ModelPackage.eINSTANCE.getApplicationElementContainer_Children() );
-		return page;
-	}
 
 	public Frame createFrame(ContainsScopes container) throws InferenceException {
 		Frame page = (Frame) createElement( container, VisualPackage.eINSTANCE.getFrame(), ModelPackage.eINSTANCE.getContainsScopes_Scopes() );
@@ -535,32 +511,14 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return object;
 	}
 
-	public DomainObjectInstance generatedDomainObjectInstance(GeneratesElements by, ApplicationElementContainer container) throws InferenceException {
-		DomainObjectInstance object = (DomainObjectInstance) createElement( container, ModelPackage.eINSTANCE.getDomainObjectInstance(), ModelPackage.eINSTANCE.getApplicationElementContainer_Children() );
-		setGeneratedBy(object, by);
-		return object;
-	}
-
 	public DomainObjectInstance generatedDomainObjectInstance(GeneratesElements by, Session container) throws InferenceException {
 		DomainObjectInstance object = (DomainObjectInstance) createElement( container, ModelPackage.eINSTANCE.getDomainObjectInstance(), ModelPackage.eINSTANCE.getScope_Elements() );
-		setGeneratedBy(object, by);
-		return object;
-	}
-
-	public UserInstance generatedUserInstance(GeneratesElements by, ApplicationElementContainer container) throws InferenceException {
-		UserInstance object = (UserInstance) createElement( container, UsersPackage.eINSTANCE.getUserInstance(), ModelPackage.eINSTANCE.getApplicationElementContainer_Children() );
 		setGeneratedBy(object, by);
 		return object;
 	}
 	
 	public UserInstance generatedUserInstance(GeneratesElements by, Session container) throws InferenceException {
 		UserInstance object = (UserInstance) createElement( container, UsersPackage.eINSTANCE.getUserInstance(), ModelPackage.eINSTANCE.getScope_Elements() );
-		setGeneratedBy(object, by);
-		return object;
-	}
-	
-	public LoginHandler generatedLoginHandler(GeneratesElements by, ApplicationElementContainer container) throws InferenceException {
-		LoginHandler object = (LoginHandler) createElement( container, ComponentsPackage.eINSTANCE.getLoginHandler(), ModelPackage.eINSTANCE.getApplicationElementContainer_Children() );
 		setGeneratedBy(object, by);
 		return object;
 	}

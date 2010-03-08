@@ -11,7 +11,7 @@
         description="Model Elements">
       <tools
           xsi:type="gmftool:CreationTool"
-          title="EventTrigger"
+          title="EventTrigger [onEdit]"
           description="Create new EventTrigger">
         <smallIcon
             xsi:type="gmftool:BundleImage"

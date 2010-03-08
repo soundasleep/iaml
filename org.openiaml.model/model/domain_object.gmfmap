@@ -7,10 +7,18 @@
     xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition">
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//ContainsEventTriggers/eventTriggers"/>
+        href="iaml.ecore#//Editable/onEdit"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//EventTrigger"/>
+      <domainSpecialization
+          body="return domainElement.eContainingFeature().getName().equals(&quot;onEdit&quot;);"
+          language="java"/>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerContainmentFeature"/>
+      </labelMappings>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
@@ -141,6 +149,31 @@
           href="domain_object.gmftool#//@palette/@tools.0/@tools.4"/>
       <diagramNode
           href="iaml.gmfgraph#DomainAttribute"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//EventTrigger"/>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerContainmentFeature"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerParentName"/>
+      </labelMappings>
+      <diagramNode
+          href="iaml.gmfgraph#EventTrigger"/>
     </ownedChild>
   </nodes>
   <links>

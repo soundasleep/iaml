@@ -14,7 +14,7 @@ import org.openiaml.model.tests.CodegenTestCase;
  * 
  * @example SetWire,SyncWire
  * 		Chaining {@model SetWire SetWires} and {@model SyncWire SyncWires}
- * 		together across multiple {@model Page Pages}.
+ * 		together across multiple {@model Frame Frames}.
  * 
  * @author jmwright
  *

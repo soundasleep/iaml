@@ -13,7 +13,7 @@ import org.openiaml.model.tests.CodegenTestCase;
  * @author jmwright
  * @example ExitGate 
  * 		Using an {@model ExitGate} to prevent access outside of a {@model Scope}
- * 		without first viewing an advertisement {@model Page}.
+ * 		without first viewing an advertisement {@model Frame}.
  * @implementation ExitGate
  * 		If a {@model Session} contains a {@model ExitGate}, all incoming
  * 		{@model Condition Conditions} must be false before the 

@@ -9,12 +9,12 @@ import org.openiaml.model.tests.CodegenTestCase;
  * Testing the 'set' PrimitiveOperation with a StaticValue.
  * 
  * @author jmwright
- * @example PrimitiveOperation,StaticValue,CompositeOperation,ApplicationElementProperty
- * 		Setting a {@model InputTextField text field} {@model ApplicationElementProperty value}
+ * @example PrimitiveOperation,StaticValue,CompositeOperation,Property
+ * 		Setting a {@model InputTextField text field} {@model Property value}
  * 		to a {@model StaticValue static value}. 
  * @implementation PrimitiveOperation
  * 		If a {@model PrimitiveOperation} is named 'setPropertyToValue', it will
- * 		set the {@model ApplicationElementProperty target destination} to the value
+ * 		set the {@model Property target destination} to the value
  * 		of its {@model DataFlowEdge incoming edge}.
  */
 public class SetValueStatic extends CodegenTestCase {

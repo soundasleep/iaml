@@ -6,14 +6,14 @@ package org.openiaml.model.tests.codegen.model0_4_2;
 import org.openiaml.model.tests.CodegenTestCase;
 
 /**
- * Check that NavigateWires can be controlled by incoming ConditionWires.
+ * Check that NavigateWires can be controlled by incoming ConditionEdges.
  * 
  * @author jmwright
- * @example ConditionWire,NavigateWire
- * 		Using a {@model ConditionWire} to control redirection access on a {@model NavigateWire}.
+ * @example ConditionEdge,NavigateWire
+ * 		Using a {@model ConditionEdge} to control redirection access on a {@model NavigateWire}.
  * @implementation NavigateWire
  * 		If a {@model NavigateWire} is restricted by an incoming
- * 		{@model ConditionWire}, the redirection will be prevented if the
+ * 		{@model ConditionEdge}, the redirection will be prevented if the
  * 		source {@model Condition} fails. 
  */
 public class NavigateConditionWire extends CodegenTestCase {

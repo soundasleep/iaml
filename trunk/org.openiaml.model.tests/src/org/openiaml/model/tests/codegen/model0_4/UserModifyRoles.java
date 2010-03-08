@@ -20,8 +20,8 @@ import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
  * 		A {@model UserStore} can contain many different types of
  * 		{@model Role Roles} and {@model Permission Permissions}.
  * 
- * @example ProvidesWire,Role,Permission 
- * 		A {@model Role} can {@model Permission provide}
+ * @example ProvidesEdge,Role,Permission 
+ * 		A {@model Role} can {@model ProvidesEdge provide}
  * 		a given	{@model Permission}.
  * 
  * @author jmwright

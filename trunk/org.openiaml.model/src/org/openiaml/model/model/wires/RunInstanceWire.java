@@ -16,7 +16,7 @@ import org.openiaml.model.model.WireDestination;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Connects a {@model EventTrigger} to a {@model Operation}, allowing it to be executed. May have incoming {@model ConditionWire}s.
+ * Connects a {@model EventTrigger} to a {@model Operation}, allowing it to be executed. May have incoming {@model ConditionEdge}s.
  * <!-- end-model-doc -->
  *
  * <p>

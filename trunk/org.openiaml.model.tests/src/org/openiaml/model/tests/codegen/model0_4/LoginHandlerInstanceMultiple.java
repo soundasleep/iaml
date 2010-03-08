@@ -17,11 +17,11 @@ import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
  * @example Session,LoginHandler
  * 		Restricting access to a {@model Session} with a
  * 		{@model LoginHandler} (based on selecting a {@model DomainObject} instance)
- * 		that requires two valid {@model ParameterWire parameters}.
+ * 		that requires two valid {@model ParameterEdge parameters}.
  * 
  * @implementation LoginHandler,DomainObjectInstance
  * 		A LoginHandler (selecting a DomainObject) needs incoming
- * 		{@model DomainAttribute DomainAttributes} as {@model ParameterWire parameters} in order 
+ * 		{@model DomainAttribute DomainAttributes} as {@model ParameterEdge parameters} in order 
  * 		to select the valid {@model DomainObjectInstance instance}.
  * 
  * @author jmwright

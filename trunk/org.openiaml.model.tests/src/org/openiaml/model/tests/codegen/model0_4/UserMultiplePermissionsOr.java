@@ -10,13 +10,13 @@ import org.eclipse.core.resources.IFile;
  * of the required permissions.
  * 
  * @author jmwright
- * @example AccessControlHandler,ConstraintWire,RequiresWire 
- * 		An {@model AccessControlHandler} which {@model RequiresWire requires} 
+ * @example AccessControlHandler,ConstraintEdge,RequiresEdge 
+ * 		An {@model AccessControlHandler} which {@model RequiresEdge requires} 
  * 		only one of two {@model Permission permissions}, 
- * 		which are connected by a {@model ConstraintWire}.
- * @implementation AccessControlHandler,ConstraintWire 
- * 		If an {@model AccessControlHandler}'s {@model RequiresWire requirements}
- * 		are connected by a {@model ConstraintWire} of type "OR", only 
+ * 		which are connected by a {@model ConstraintEdge}.
+ * @implementation AccessControlHandler,ConstraintEdge 
+ * 		If an {@model AccessControlHandler}'s {@model RequiresEdge requirements}
+ * 		are connected by a {@model ConstraintEdge} of type "OR", only 
  * 		one of the requirements will be necessary to permit access.
  *
  */

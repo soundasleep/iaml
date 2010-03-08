@@ -15,7 +15,7 @@ import org.openiaml.model.model.wires.ConditionEdgesSource;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A Condition allows for conditional execution of {@model WireEdge wires} when {@model ConditionWire connected}.
+ * A Condition allows for conditional execution of {@model Wire wires} when {@model ConditionEdge connected}.
  * <!-- end-model-doc -->
  *
  *

@@ -9,7 +9,6 @@ import org.openiaml.model.tests.CodegenTestCase;
 /**
  * Tests requirement 2: static value parameters
  * 
- * @model ../examples/requirements/2-static_params.iaml
  * @author jmwright
  *
  */

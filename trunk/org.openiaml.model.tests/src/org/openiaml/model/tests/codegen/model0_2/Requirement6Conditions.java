@@ -11,7 +11,6 @@ import org.openiaml.model.tests.CodegenTestCase;
 /**
  * Tests requirement 6: simple conditions
  * 
- * @model ../examples/requirements/4-dynamic_sources.iaml
  * @author jmwright
  *
  */

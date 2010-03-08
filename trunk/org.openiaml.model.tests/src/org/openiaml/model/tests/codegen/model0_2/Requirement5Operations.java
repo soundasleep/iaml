@@ -10,7 +10,6 @@ import org.openiaml.model.tests.CodegenTestCase;
 /**
  * Tests requirement 5: operation composition
  * 
- * @model ../examples/requirements/5-operations.iaml
  * @author jmwright
  *
  */

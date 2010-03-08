@@ -10,8 +10,8 @@ import org.eclipse.core.resources.IFile;
  * of their extended permissions. 'target' requires
  * 'inherited permission'.
  * 
- * @example ExtendsWire,Role
- * 		Using an {@model ExtendsWire} to inherit {@model Role Roles}
+ * @example ExtendsEdge,Role
+ * 		Using an {@model ExtendsEdge} to inherit {@model Role Roles}
  * 		and {@model Permission Permissions}.
  * 
  * @author jmwright

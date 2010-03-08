@@ -18,7 +18,7 @@ import org.openiaml.model.model.wires.ParameterEdgeDestination;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * When placed into a {@model Page} or {@model Session}, enforces that all access contains the {@model Role roles} and {@model Permission permissions} provided by incoming {@model RequiresWire}.
+ * When placed into a {@model Frame} or {@model Session}, enforces that all access contains the {@model Role roles} and {@model Permission permissions} provided by incoming {@model RequiresEdge}.
  * <!-- end-model-doc -->
  *
  *

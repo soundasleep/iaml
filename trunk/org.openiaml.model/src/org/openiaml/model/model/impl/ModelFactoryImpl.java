@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ConditionalEdge;
@@ -88,7 +87,6 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.PARAMETER: return createParameter();
 			case ModelPackage.PRIMITIVE_OPERATION: return createPrimitiveOperation();
 			case ModelPackage.COMPOSITE_OPERATION: return createCompositeOperation();
-			case ModelPackage.APPLICATION_ELEMENT: return createApplicationElement();
 			case ModelPackage.PROPERTY: return createProperty();
 			case ModelPackage.STATIC_VALUE: return createStaticValue();
 			case ModelPackage.VISIBLE_THING: return createVisibleThing();
@@ -172,17 +170,6 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 		CompositeOperationImpl compositeOperation = new CompositeOperationImpl();
 		generateID(compositeOperation);
 		return compositeOperation;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public ApplicationElement createApplicationElement() {
-		ApplicationElementImpl applicationElement = new ApplicationElementImpl();
-		generateID(applicationElement);
-		return applicationElement;
 	}
 
 	/**

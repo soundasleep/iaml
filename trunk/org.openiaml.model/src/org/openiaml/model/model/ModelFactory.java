@@ -80,15 +80,6 @@ public interface ModelFactory extends EFactory {
 	CompositeOperation createCompositeOperation();
 
 	/**
-	 * Returns a new object of class '<em>Application Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Application Element</em>'.
-	 * @generated
-	 */
-	ApplicationElement createApplicationElement();
-
-	/**
 	 * Returns a new object of class '<em>Property</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

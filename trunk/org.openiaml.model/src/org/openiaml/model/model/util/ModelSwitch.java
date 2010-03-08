@@ -19,7 +19,6 @@ import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ConditionalEdge;
 import org.openiaml.model.model.ContainsConditions;
-import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsScopes;
 import org.openiaml.model.model.ContainsWires;
@@ -171,12 +170,6 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseGeneratedElement(eventTrigger);
 				if (result == null) result = caseShouldntContainWires(eventTrigger);
 				if (result == null) result = caseContainsWires(eventTrigger);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ModelPackage.CONTAINS_EVENT_TRIGGERS: {
-				ContainsEventTriggers containsEventTriggers = (ContainsEventTriggers)theEObject;
-				T result = caseContainsEventTriggers(containsEventTriggers);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -704,21 +697,6 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseEventTrigger(EventTrigger object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Contains Event Triggers</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Contains Event Triggers</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseContainsEventTriggers(ContainsEventTriggers object) {
 		return null;
 	}
 

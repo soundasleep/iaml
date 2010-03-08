@@ -20,7 +20,6 @@ import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ConditionalEdge;
 import org.openiaml.model.model.ContainsConditions;
-import org.openiaml.model.model.ContainsEventTriggers;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsScopes;
 import org.openiaml.model.model.ContainsWires;
@@ -113,13 +112,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EClass eventTriggerEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass containsEventTriggersEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -559,24 +551,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 */
 	public EClass getEventTrigger() {
 		return eventTriggerEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getContainsEventTriggers() {
-		return containsEventTriggersEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getContainsEventTriggers_EventTriggers() {
-		return (EReference)containsEventTriggersEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1594,9 +1568,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		eventTriggerEClass = createEClass(EVENT_TRIGGER);
 
-		containsEventTriggersEClass = createEClass(CONTAINS_EVENT_TRIGGERS);
-		createEReference(containsEventTriggersEClass, CONTAINS_EVENT_TRIGGERS__EVENT_TRIGGERS);
-
 		domainObjectEClass = createEClass(DOMAIN_OBJECT);
 		createEReference(domainObjectEClass, DOMAIN_OBJECT__ATTRIBUTES);
 
@@ -1931,9 +1902,6 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getWireSource_OutWires(), this.getWire(), this.getWire_From(), "outWires", null, 0, -1, WireSource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(eventTriggerEClass, EventTrigger.class, "EventTrigger", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(containsEventTriggersEClass, ContainsEventTriggers.class, "ContainsEventTriggers", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getContainsEventTriggers_EventTriggers(), this.getEventTrigger(), null, "eventTriggers", null, 0, -1, ContainsEventTriggers.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(domainObjectEClass, DomainObject.class, "DomainObject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDomainObject_Attributes(), this.getDomainAttribute(), null, "attributes", null, 0, -1, DomainObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

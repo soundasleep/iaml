@@ -29,6 +29,9 @@ import org.openiaml.model.ModelLoader.ModelLoadException;
 import org.openiaml.model.codegen.php.CheckModelInstance;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.inference.ICreateElements;
+import org.openiaml.model.model.Action;
+import org.openiaml.model.model.ActionDestination;
+import org.openiaml.model.model.ActionSource;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelFactory;
@@ -526,6 +529,21 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	}
 	
 	/**
+	 * Get all of the wires connecting the two elements together of any
+	 * class. Does not throw an error if there are no wires.
+	 * 
+	 * @param container
+	 * @param fromElement
+	 * @param toElement
+	 * @return the wire found or throws an exception
+	 * @throws JaxenException
+	 * @see #getWiresFromTo(EObject, WireSource, WireDestination, Class)
+	 */
+	protected Set<Action> getActionsFromTo(EObject container, ActionSource fromElement, ActionDestination toElement) throws JaxenException {
+		return getActionsFromTo(container, fromElement, toElement, Action.class);
+	}
+	
+	/**
 	 * Get all of the wires connecting the two elements together of the
 	 * given class. Does not throw an error if there are no wires.
 	 *
@@ -536,19 +554,31 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @throws JaxenException
 	 */
 	protected Set<Wire> getWiresFromTo(EObject container, WireSource fromElement, WireDestination toElement, Class<? extends Wire> type) throws JaxenException {
-		/*
-		 * It's not possible to do something like //iaml:wire[iaml:from='id']
-		 * so we need to parse them manually.
-		 */
-		
 		Set<Wire> results = new HashSet<Wire>();
-		List<?> wires = query(container, "//iaml:wires");
-		for (Object o : wires) {
-			if (o instanceof Wire) {
-				Wire w = (Wire) o;
-				if (type.isInstance(w) && w.getFrom().equals(fromElement) && w.getTo().equals(toElement)) {
-					results.add(w);
-				}
+		for (Wire w : fromElement.getOutWires()) {
+			if (type.isInstance(w) && w.getTo().equals(toElement)) {
+				results.add(w);
+			}
+		}
+
+		return results;
+	}
+	
+	/**
+	 * Get all of the actions connecting the two elements together of the
+	 * given class. Does not throw an error if there are no wires.
+	 *
+	 * @param container
+	 * @param fromElement
+	 * @param toElement
+	 * @return the wire found or throws an exception
+	 * @throws JaxenException
+	 */
+	protected Set<Action> getActionsFromTo(EObject container, ActionSource fromElement, ActionDestination toElement, Class<? extends Action> type) throws JaxenException {
+		Set<Action> results = new HashSet<Action>();
+		for (Action w : fromElement.getOutActions()) {
+			if (type.isInstance(w) && w.getTo().equals(toElement)) {
+				results.add(w);
 			}
 		}
 
@@ -683,13 +713,17 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	}
 
 	protected void assertNoWiresFrom(EObject container, WireSource fromElement, Class<? extends Wire> cls) throws JaxenException {
-		List<?> wires = query(container, "//iaml:wires");
-		for (Object o : wires) {
-			if (o instanceof Wire && cls.isInstance(o)) {
-				Wire w = (Wire) o;
-				if (w.getFrom().equals(fromElement)) {
-					fail("Unexpectedly found wire '" + o + "' of type '" + cls + "' from element '" + fromElement + "'");
-				}
+		for (Wire w : fromElement.getOutWires()) {
+			if (cls.isInstance(w)) {
+				fail("Unexpectedly found wire '" + w + "' of type '" + cls + "' from element '" + fromElement + "'");
+			}
+		}
+	}
+
+	protected void assertNoActionsFrom(EObject container, ActionSource fromElement, Class<? extends Action> cls) throws JaxenException {
+		for (Action w : fromElement.getOutActions()) {
+			if (cls.isInstance(w)) {
+				fail("Unexpectedly found action '" + w + "' of type '" + cls + "' from element '" + fromElement + "'");
 			}
 		}
 	}

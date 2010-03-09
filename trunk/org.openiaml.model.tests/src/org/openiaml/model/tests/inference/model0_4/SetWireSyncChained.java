@@ -3,11 +3,11 @@
  */
 package org.openiaml.model.tests.inference.model0_4;
 
+import org.openiaml.model.model.Action;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Property;
-import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ParameterEdgesSource;
@@ -72,9 +72,9 @@ public class SetWireSyncChained extends InferenceTestCase {
 		Operation init = assertHasOperation(target, "init");
 		assertGenerated(init);
 		
-		RunInstanceWire run = assertHasRunInstanceWire(root, onAccess, init, new Filter<Wire>() {
+		RunInstanceWire run = assertHasRunInstanceWire(root, onAccess, init, new Filter<Action>() {
 			@Override
-			public boolean accept(Wire o) {
+			public boolean accept(Action o) {
 				RunInstanceWire r = (RunInstanceWire) o;
 				if (r.getInParameterEdges().size() != 1)
 					return false;
@@ -121,9 +121,9 @@ public class SetWireSyncChained extends InferenceTestCase {
 		Operation init = assertHasOperation(target, "init");
 		assertGenerated(init);
 		
-		RunInstanceWire run = assertHasRunInstanceWire(root, onAccess, init, new Filter<Wire>() {
+		RunInstanceWire run = assertHasRunInstanceWire(root, onAccess, init, new Filter<Action>() {
 			@Override
-			public boolean accept(Wire o) {
+			public boolean accept(Action o) {
 				RunInstanceWire r = (RunInstanceWire) o;
 				if (r.getInParameterEdges().size() != 1)
 					return false;
@@ -166,7 +166,7 @@ public class SetWireSyncChained extends InferenceTestCase {
 		assertGenerated(onAccess);
 		
 		// onAccess should do nothing!
-		assertNoWiresFrom(root, onAccess, RunInstanceWire.class);
+		assertNoActionsFrom(root, onAccess, RunInstanceWire.class);
 		
 	}
 

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="root">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
+    <children xsi:type="iaml.visual:InputTextField" outEdges="sync" id="t1" name="Hello">
+      <wires xsi:type="iaml.wires:SyncWire" id="sync" from="t1" to="t2" name="sync"/>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" inEdges="sync" id="t2" name="World"/>
+  </scopes>
+</iaml:InternetApplication>

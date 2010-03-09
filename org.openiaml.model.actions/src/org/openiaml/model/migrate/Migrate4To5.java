@@ -43,6 +43,7 @@ import org.w3c.dom.NodeList;
  *      <li>ConstraintWire is now ConstraintEdge, and no longer a WireEdge
  *      <li>ConditionWire is now ConditionEdge, and no longer a WireEdge
  *      <li>RunInstanceWire is now a SingleWire, and not a CompositeWire; it no longer contains Operations directly.
+ *      <li>RunInstanceWire is now an Action, rather than a Wire
  *   </ol></li>
  *   <li>VisibleThing no longer ContainsEventTriggers; now separate onAccess, onEdit, onClick events
  *   <li>Scope no longer ContainsEventTriggers; now separate onAccess, onInit events
@@ -67,6 +68,7 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 	private List<String> providesWires = null;
 	private List<String> constraintWires = null;
 	private List<String> conditionWires = null;
+	private List<String> runInstanceWires = null;
 	
 	/**
 	 * We will cycle over the document, and find out which edges are
@@ -83,6 +85,7 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 		providesWires = new ArrayList<String>();
 		constraintWires = new ArrayList<String>();
 		conditionWires = new ArrayList<String>();
+		runInstanceWires = new ArrayList<String>();
 		prepareDocumentRecurse(documentElement, errors);
 
 	}
@@ -149,6 +152,15 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 					conditionWires.add(id);
 				} else {
 					errors.add(new ExpectedMigrationException(this, e, "Element was a ConditionWire but did not have an id attribute."));
+				}
+			}
+			
+			if ("iaml.wires:RunInstanceWire".equals(e.getAttribute("xsi:type"))) {
+				String id = e.getAttribute("id");
+				if (id != null) {
+					runInstanceWires.add(id);
+				} else {
+					errors.add(new ExpectedMigrationException(this, e, "Element was a RunInstanceWire but did not have an id attribute."));
 				}
 			}
 		}
@@ -284,6 +296,12 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 			// --> <constraintEdges>
 			if ("iaml.wires:ConditionWire".equals(xsiType)) {
 				return "conditionEdges";
+			}
+			
+			// <wires xsi:type="iaml.wires:ConstraintWire"> 
+			// --> <actions>
+			if ("iaml.wires:RunInstanceWire".equals(xsiType)) {
+				return "actions";
 			}
 		}
 		
@@ -421,6 +439,24 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 
 		if (!old.getAttribute("outEdges").isEmpty()) {
 			splitReferences(old, "outEdges", conditionWires, "outConditionEdges");
+		}
+
+		// any inEdges or outEdges to an old RunInstanceWire?
+		if (!old.getAttribute("inEdges").isEmpty()) {
+			splitReferences(old, "inEdges", runInstanceWires, "inActions");
+		}
+
+		if (!old.getAttribute("outEdges").isEmpty()) {
+			splitReferences(old, "outEdges", runInstanceWires, "outActions");
+		}
+		
+		// any inWires or outWires to an old RunInstanceWire?
+		if (!old.getAttribute("inWires").isEmpty()) {
+			splitReferences(old, "inWires", runInstanceWires, "inActions");
+		}
+
+		if (!old.getAttribute("outWires").isEmpty()) {
+			splitReferences(old, "outWires", runInstanceWires, "outActions");
 		}
 		
 		// remove an attribute?

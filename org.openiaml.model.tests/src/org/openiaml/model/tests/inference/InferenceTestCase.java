@@ -8,6 +8,9 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.jaxen.JaxenException;
+import org.openiaml.model.model.Action;
+import org.openiaml.model.model.ActionDestination;
+import org.openiaml.model.model.ActionSource;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
@@ -103,6 +106,16 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public static final Filter<Wire> ALL = new Filter<Wire>() {
 		@Override
 		public boolean accept(Wire o) {
+			return true;
+		}
+	};
+	
+	/**
+	 * A filter that accepts everything.
+	 */
+	public static final Filter<Action> ALL_ACTIONS = new Filter<Action>() {
+		@Override
+		public boolean accept(Action o) {
 			return true;
 		}
 	};
@@ -901,9 +914,21 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public RunInstanceWire assertHasRunInstanceWire(EObject container, WireSource from, WireDestination to, String name) throws JaxenException {
-		return (RunInstanceWire) assertHasWireFromTo(container, from, to, 
-				RunInstanceWire.class, name, ALL);
+	public RunInstanceWire assertHasRunInstanceWire(EObject container, ActionSource from, ActionDestination to, String name) throws JaxenException {
+		return (RunInstanceWire) assertHasActionFromTo(container, from, to, 
+				RunInstanceWire.class, getNameFilter(name));
+	}
+	
+	private Filter<Action> getNameFilter(final String name) {
+		return new Filter<Action>() {
+			@Override
+			public boolean accept(Action o) {
+				if (o instanceof NamedElement) {
+					return name.equals(((NamedElement) o).getName());
+				}						
+				return false;
+			}
+		};		
 	}
 	
 	/**
@@ -912,9 +937,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public RunInstanceWire assertHasRunInstanceWire(EObject container, WireSource from, WireDestination to) throws JaxenException {
-		return (RunInstanceWire) assertHasWireFromTo(container, from, to, 
-				RunInstanceWire.class, ALL);
+	public RunInstanceWire assertHasRunInstanceWire(EObject container, ActionSource from, ActionDestination to) throws JaxenException {
+		return (RunInstanceWire) assertHasActionFromTo(container, from, to, 
+				RunInstanceWire.class, ALL_ACTIONS);
 	}
 	
 	/**
@@ -923,8 +948,8 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public RunInstanceWire assertHasRunInstanceWire(EObject container, WireSource from, WireDestination to, Filter<Wire> filter) throws JaxenException {
-		return (RunInstanceWire) assertHasWireFromTo(container, from, to, 
+	public RunInstanceWire assertHasRunInstanceWire(EObject container, ActionSource from, ActionDestination to, Filter<Action> filter) throws JaxenException {
+		return (RunInstanceWire) assertHasActionFromTo(container, from, to, 
 				RunInstanceWire.class, filter);
 	}
 	
@@ -1168,6 +1193,35 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 			}
 		}
 		assertNotNull("Did not find any wires connecting '" + from + "' to '" + to + " of type '" + type + "'", result);
+		return result;
+	}
+	
+	/**
+	 * Assert that there exists <em>only one</em> wire of the given type from the 'from' element
+	 * to the 'to' element.
+	 * 
+	 * @see #assertHasWireFromTo(EObject, WireSource, WireDestination, String, Class)
+	 * @param container
+	 * @param from
+	 * @param to
+	 * @param type
+	 * @return the wire edge found
+	 * @throws JaxenException 
+	 */
+	public Action assertHasActionFromTo(EObject container, ActionSource from, ActionDestination to, Class<? extends EObject> type, Filter<Action> filter) throws JaxenException {
+		Set<Action> wires = getActionsFromTo(container, from, to);
+		Action result = null;
+		for (Action w : wires) {
+			if (type.isInstance(w)) {
+				if (filter == null || filter.accept(w)) {
+					// found it
+					if (result != null)
+						fail("Found more than 1 Action from '" + from + "' to '" + to + "' class='" + type + "'. First = '" + result + "', second = '" + w + "'");
+					result = w;
+				}
+			}
+		}
+		assertNotNull("Did not find any Actions connecting '" + from + "' to '" + to + " of type '" + type + "'", result);
 		return result;
 	}
 	

@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12109331eea.107e">
+  <domainStores id="model.12109331eea.1083" name="domain store">
+    <children id="model.12109331eea.108c" name="User" outWires="wires.12109c6249b.ee">
+      <wires xsi:type="iaml.wires:SelectWire" inParameterEdges="wires.12109c6249b.ef" id="wires.12109c6249b.ee" from="model.12109331eea.108c" to="model.12109c6242e.3bb" name="select" query="name = ?"/>
+      <attributes id="model.12109331eea.10ac" name="name"/>
+      <attributes id="model.12109331eea.10ad" name="email"/>
+      <attributes id="model.12109331eea.10ae" name="password"/>
+      <attributes id="model.12109331eea.10d3" name="id"/>
+    </children>
+  </domainStores>
   <scopes xsi:type="iaml.visual:Frame" id="visual.12109c6248b.18e" name="default page"/>
   <scopes xsi:type="iaml.scopes:Session" id="scopes.12109c6249b.35" name="my session">
     <scopes xsi:type="iaml.visual:Frame" id="visual.12109c6248b.192" name="sessioned container">
@@ -14,13 +23,4 @@
       <children xsi:type="iaml.visual:InputTextField" inWires="wires.12109c6249b.112" id="visual.12109c6248b.1a3" name="edit email"/>
     </scopes>
   </scopes>
-  <domainStores id="model.12109331eea.1083" name="domain store">
-    <children id="model.12109331eea.108c" name="User" outWires="wires.12109c6249b.ee">
-      <wires xsi:type="iaml.wires:SelectWire" inParameterEdges="wires.12109c6249b.ef" id="wires.12109c6249b.ee" from="model.12109331eea.108c" to="model.12109c6242e.3bb" name="select" query="name = ?"/>
-      <attributes id="model.12109331eea.10ac" name="name"/>
-      <attributes id="model.12109331eea.10ad" name="email"/>
-      <attributes id="model.12109331eea.10ae" name="password"/>
-      <attributes id="model.12109331eea.10d3" name="id"/>
-    </children>
-  </domainStores>
 </iaml:InternetApplication>

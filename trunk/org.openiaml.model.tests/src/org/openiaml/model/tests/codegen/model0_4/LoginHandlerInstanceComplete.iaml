@@ -1,22 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.122f7c69efd.9">
-  <scopes xsi:type="iaml.visual:Frame" id="visual.122f7c6a006.6" name="Home"/>
-  <scopes xsi:type="iaml.visual:Frame" id="visual.122f7c6a006.a8" name="logout destination" inWires="wires.122f7c6a100.8f"/>
-  <scopes xsi:type="iaml.scopes:Session" id="scopes.122f7c6a297.1" name="my session">
-    <scopes xsi:type="iaml.visual:Frame" id="visual.122f7c6a006.24" name="current user" inWires="wires.122f7c6a100.7f">
-      <children xsi:type="iaml.visual:InputTextField" inWires="wires.122f7c6a100.3a" id="visual.122f7c6a006.56" name="current user name"/>
-    </scopes>
-    <elements xsi:type="iaml.components:LoginHandler" inParameterEdges="wires.122f7c6a100.1 wires.122f7c6a100.63" id="components.122f7c6a40e.1" name="login handler" outWires="wires.122f7c6a100.e wires.122f7c6a100.7f wires.122f7c6a100.8f" type="DOMAIN_OBJECT">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.122f7c6a100.e" from="components.122f7c6a40e.1" to="model.122f7c69efd.ad" name="set"/>
-      <wires xsi:type="iaml.wires:NavigateWire" id="wires.122f7c6a100.7f" from="components.122f7c6a40e.1" to="visual.122f7c6a006.24" name="login"/>
-      <wires xsi:type="iaml.wires:NavigateWire" id="wires.122f7c6a100.8f" from="components.122f7c6a40e.1" to="visual.122f7c6a006.a8" name="logout"/>
-    </elements>
-    <elements xsi:type="iaml:DomainObjectInstance" id="model.122f7c69efd.ad" name="logged in user" inWires="wires.122f7c6a100.e" autosave="true">
-      <attributes id="model.122f7c69efd.106" name="name" outWires="wires.122f7c6a100.3a" autosave="true">
-        <wires xsi:type="iaml.wires:SyncWire" id="wires.122f7c6a100.3a" from="model.122f7c69efd.106" to="visual.122f7c6a006.56" name="sync"/>
-      </attributes>
-    </elements>
-  </scopes>
   <domainStores id="model.122f7c69efd.d" name="Users">
     <children id="model.122f7c69efd.19" name="User">
       <attributes id="model.122f7c69efd.37" name="password" outParameterEdges="wires.122f7c6a100.1">
@@ -28,4 +11,21 @@
       </attributes>
     </children>
   </domainStores>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.122f7c6a006.6" name="Home"/>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.122f7c6a006.a8" name="logout destination" inWires="wires.122f7c6a100.8f"/>
+  <scopes xsi:type="iaml.scopes:Session" id="scopes.122f7c6a297.1" name="my session">
+    <elements xsi:type="iaml.components:LoginHandler" inParameterEdges="wires.122f7c6a100.1 wires.122f7c6a100.63" id="components.122f7c6a40e.1" name="login handler" outWires="wires.122f7c6a100.e wires.122f7c6a100.7f wires.122f7c6a100.8f" type="DOMAIN_OBJECT">
+      <wires xsi:type="iaml.wires:SetWire" id="wires.122f7c6a100.e" from="components.122f7c6a40e.1" to="model.122f7c69efd.ad" name="set"/>
+      <wires xsi:type="iaml.wires:NavigateWire" id="wires.122f7c6a100.7f" from="components.122f7c6a40e.1" to="visual.122f7c6a006.24" name="login"/>
+      <wires xsi:type="iaml.wires:NavigateWire" id="wires.122f7c6a100.8f" from="components.122f7c6a40e.1" to="visual.122f7c6a006.a8" name="logout"/>
+    </elements>
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.122f7c69efd.ad" name="logged in user" inWires="wires.122f7c6a100.e" autosave="true">
+      <attributes id="model.122f7c69efd.106" name="name" outWires="wires.122f7c6a100.3a" autosave="true">
+        <wires xsi:type="iaml.wires:SyncWire" id="wires.122f7c6a100.3a" from="model.122f7c69efd.106" to="visual.122f7c6a006.56" name="sync"/>
+      </attributes>
+    </elements>
+    <scopes xsi:type="iaml.visual:Frame" id="visual.122f7c6a006.24" name="current user" inWires="wires.122f7c6a100.7f">
+      <children xsi:type="iaml.visual:InputTextField" inWires="wires.122f7c6a100.3a" id="visual.122f7c6a006.56" name="current user name"/>
+    </scopes>
+  </scopes>
 </iaml:InternetApplication>

@@ -1,17 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1213cee9b4f.f">
-  <scopes xsi:type="iaml.scopes:Session" id="scopes.1213cee9bbc.2" name="my session">
-    <scopes xsi:type="iaml.visual:Frame" id="visual.1213cee9bad.90" name="session page">
-      <elements xsi:type="iaml:DomainAttributeInstance" id="model.1213cee9b4f.265" name="name" outWires="wires.1213cee9bad.52" inWires="wires.1213cee9bad.51">
-        <operations xsi:type="iaml:PrimitiveOperation" inWires="wires.1213cee9bad.8d" id="model.1213cee9b4f.337" name="save"/>
-        <wires xsi:type="iaml.wires:SyncWire" id="wires.1213cee9bad.52" from="model.1213cee9b4f.265" to="visual.1213cee9bad.ad" name="sync"/>
-      </elements>
-      <children xsi:type="iaml.visual:InputTextField" inWires="wires.1213cee9bad.52" id="visual.1213cee9bad.ad" name="edit new name"/>
-      <children xsi:type="iaml.visual:Button" outWires="wires.1213cee9bad.8d" id="visual.1213cee9bad.f9" name="manually save">
-        <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1213cee9bad.8d" from="visual.1213cee9bad.f9" to="model.1213cee9b4f.337" name="click"/>
-      </children>
-    </scopes>
-  </scopes>
   <domainStores id="model.1213cee9b4f.18" name="domain store">
     <children id="model.1213cee9b4f.29" name="User" outWires="wires.1213cee9bad.51">
       <wires xsi:type="iaml.wires:NewInstanceWire" id="wires.1213cee9bad.51" from="model.1213cee9b4f.29" to="model.1213cee9b4f.265"/>
@@ -21,4 +9,16 @@
       <attributes id="model.1213cee9b4f.59" name="password"/>
     </children>
   </domainStores>
+  <scopes xsi:type="iaml.scopes:Session" id="scopes.1213cee9bbc.2" name="my session">
+    <scopes xsi:type="iaml.visual:Frame" id="visual.1213cee9bad.90" name="session page">
+      <elements xsi:type="iaml:DomainAttributeInstance" id="model.1213cee9b4f.265" name="name" outWires="wires.1213cee9bad.52" inWires="wires.1213cee9bad.51">
+        <operations xsi:type="iaml:PrimitiveOperation" id="model.1213cee9b4f.337" name="save" inActions="wires.1213cee9bad.8d"/>
+        <wires xsi:type="iaml.wires:SyncWire" id="wires.1213cee9bad.52" from="model.1213cee9b4f.265" to="visual.1213cee9bad.ad" name="sync"/>
+      </elements>
+      <children xsi:type="iaml.visual:InputTextField" inWires="wires.1213cee9bad.52" id="visual.1213cee9bad.ad" name="edit new name"/>
+      <children xsi:type="iaml.visual:Button" id="visual.1213cee9bad.f9" name="manually save" outActions="wires.1213cee9bad.8d">
+        <actions xsi:type="iaml.wires:RunInstanceWire" id="wires.1213cee9bad.8d" name="click" from="visual.1213cee9bad.f9" to="model.1213cee9b4f.337"/>
+      </children>
+    </scopes>
+  </scopes>
 </iaml:InternetApplication>

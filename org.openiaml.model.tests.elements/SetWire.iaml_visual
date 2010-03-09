@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<iaml:VisibleThing xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1263fd37982.c44">
-  <children xsi:type="iaml.visual:InputTextField" id="visual.1263fd379ff.7ea" name="Field1" outEdges="wires.1263fd37a0f.60e">
-    <wires xsi:type="iaml.wires:SetWire" id="wires.1263fd37a0f.60e" from="visual.1263fd379ff.7ea" to="visual.1263fd379ff.7eb" name="Set Wire Name"/>
-  </children>
-  <children xsi:type="iaml.visual:InputTextField" id="visual.1263fd379ff.7eb" name="Field2" inEdges="wires.1263fd37a0f.60e"/>
-</iaml:VisibleThing>

@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<iaml:CompositeOperation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" id="model.1264083ad15.1">
-  <operations xsi:type="iaml.operations:DecisionOperation" id="operations.1264083ad82.1" name="Decision name"/>
-</iaml:CompositeOperation>

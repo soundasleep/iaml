@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xsi:schemaLocation="http://openiaml.org/model/visual http://openiaml.org/model0.4#//visual http://openiaml.org/model/wires http://openiaml.org/model0.4#//wires">
+  <notation:Diagram xmi:id="_CkYNICsIEd-OhdxNRwDO0g" type="Iaml" name="hello_world.iaml_diagram" measurementUnit="Pixel">
+    <children xmi:type="notation:Node" xmi:id="_CzbVwCsIEd-OhdxNRwDO0g" type="2026">
+      <children xmi:type="notation:DecorationNode" xmi:id="_CzbVxisIEd-OhdxNRwDO0g" type="5045"/>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_CzbVwSsIEd-OhdxNRwDO0g"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_CzbVwisIEd-OhdxNRwDO0g"/>
+      <styles xmi:type="notation:LineStyle" xmi:id="_CzbVwysIEd-OhdxNRwDO0g"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_CzbVxCsIEd-OhdxNRwDO0g" diagramLink="_VGOXsCsIEd-OhdxNRwDO0g" hint="Iaml_Frame"/>
+      <element xmi:type="iaml.visual:Frame" href="hello_world.iaml#index"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_CzbVxSsIEd-OhdxNRwDO0g" x="35" y="40"/>
+    </children>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_CkYNISsIEd-OhdxNRwDO0g"/>
+    <element xmi:type="iaml:InternetApplication" href="hello_world.iaml#model.127400c4ec8.3"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_VGOXsCsIEd-OhdxNRwDO0g" type="Iaml_Frame" measurementUnit="Pixel">
+    <children xmi:type="notation:Node" xmi:id="_WdP1ACsIEd-OhdxNRwDO0g" type="2009">
+      <children xmi:type="notation:DecorationNode" xmi:id="_WdP1BisIEd-OhdxNRwDO0g" type="5017"/>
+      <children xmi:type="notation:DecorationNode" xmi:id="_WdP1BysIEd-OhdxNRwDO0g" type="5018"/>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_WdP1ASsIEd-OhdxNRwDO0g"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_WdP1AisIEd-OhdxNRwDO0g"/>
+      <styles xmi:type="notation:LineStyle" xmi:id="_WdP1AysIEd-OhdxNRwDO0g"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_WdP1BCsIEd-OhdxNRwDO0g" hint="Iaml_Visual"/>
+      <element xmi:type="iaml.visual:InputTextField" href="hello_world.iaml#t1"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WdP1BSsIEd-OhdxNRwDO0g" x="85" y="80"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_W81UACsIEd-OhdxNRwDO0g" type="2009">
+      <children xmi:type="notation:DecorationNode" xmi:id="_W81UBisIEd-OhdxNRwDO0g" type="5017"/>
+      <children xmi:type="notation:DecorationNode" xmi:id="_W81UBysIEd-OhdxNRwDO0g" type="5018"/>
+      <styles xmi:type="notation:DescriptionStyle" xmi:id="_W81UASsIEd-OhdxNRwDO0g"/>
+      <styles xmi:type="notation:FontStyle" xmi:id="_W81UAisIEd-OhdxNRwDO0g"/>
+      <styles xmi:type="notation:LineStyle" xmi:id="_W81UAysIEd-OhdxNRwDO0g"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_W81UBCsIEd-OhdxNRwDO0g" hint="Iaml_Visual"/>
+      <element xmi:type="iaml.visual:InputTextField" href="hello_world.iaml#t2"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_W81UBSsIEd-OhdxNRwDO0g" x="245" y="80"/>
+    </children>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_VGOXsSsIEd-OhdxNRwDO0g"/>
+    <element xmi:type="iaml.visual:Frame" href="hello_world.iaml#index"/>
+    <edges xmi:type="notation:Connector" xmi:id="_bG0oMCsIEd-OhdxNRwDO0g" type="4001" source="_WdP1ACsIEd-OhdxNRwDO0g" target="_W81UACsIEd-OhdxNRwDO0g">
+      <children xmi:type="notation:DecorationNode" xmi:id="_bG0oNCsIEd-OhdxNRwDO0g" type="6001">
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_bG0oNSsIEd-OhdxNRwDO0g" y="40"/>
+      </children>
+      <styles xmi:type="notation:FontStyle" xmi:id="_bG0oMSsIEd-OhdxNRwDO0g"/>
+      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_bG0oMisIEd-OhdxNRwDO0g" hint="Iaml_Wire"/>
+      <element xmi:type="iaml.wires:SyncWire" href="hello_world.iaml#sync"/>
+      <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_bG0oMysIEd-OhdxNRwDO0g" points="[26, -1, -137, -1]$[188, -20, 25, -20]"/>
+    </edges>
+  </notation:Diagram>
+</xmi:XMI>

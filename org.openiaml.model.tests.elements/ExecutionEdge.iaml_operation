@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<iaml:CompositeOperation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" id="model.1263fd37982.bd0">
-  <nodes xsi:type="iaml.operations:StartNode" id="operations.1263fd37a0f.a1" outExecutions="model.1263fd37982.bd3"/>
-  <nodes xsi:type="iaml.operations:FinishNode" id="operations.1263fd37a0f.a2" inExecutions="model.1263fd37982.bd3"/>
-  <executionEdges id="model.1263fd37982.bd3" name="optional edge name" from="operations.1263fd37a0f.a1" to="operations.1263fd37a0f.a2"/>
-</iaml:CompositeOperation>

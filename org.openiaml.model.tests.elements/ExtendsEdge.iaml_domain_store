@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<iaml:DomainStore xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:iaml="http://openiaml.org/model0.4" id="model.1273c6bf4aa.1e1">
-  <children id="model.1273c6bf4aa.1e5" name="Person" inExtendsEdges="wires.1273c6bf67f.2b"/>
-  <children id="model.1273c6bf4aa.1e6" name="Student" outExtendsEdges="wires.1273c6bf67f.2b">
-    <extendsEdges id="wires.1273c6bf67f.2b" from="model.1273c6bf4aa.1e6" to="model.1273c6bf4aa.1e5"/>
-  </children>
-</iaml:DomainStore>

@@ -1,7 +1,0 @@
-# Tracing options for the org.openiaml.model.diagram.condition plug-in
-
-# Common issues
-org.openiaml.model.diagram.condition/debug=false
-
-# Visual IDs
-org.openiaml.model.diagram.condition/debug/visualID=false

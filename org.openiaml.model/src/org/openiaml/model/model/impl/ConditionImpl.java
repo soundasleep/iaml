@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.openiaml.model.model.Action;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DataFlowEdgesSource;
@@ -43,6 +44,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.openiaml.model.model.impl.ConditionImpl#getWires <em>Wires</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.ConditionImpl#getActions <em>Actions</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ConditionImpl#getParameterEdges <em>Parameter Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ConditionImpl#getExtendsEdges <em>Extends Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ConditionImpl#getRequiresEdges <em>Requires Edges</em>}</li>
@@ -72,6 +74,16 @@ public abstract class ConditionImpl extends EObjectImpl implements Condition {
 	 * @ordered
 	 */
 	protected EList<Wire> wires;
+
+	/**
+	 * The cached value of the '{@link #getActions() <em>Actions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getActions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Action> actions;
 
 	/**
 	 * The cached value of the '{@link #getParameterEdges() <em>Parameter Edges</em>}' containment reference list.
@@ -282,6 +294,18 @@ public abstract class ConditionImpl extends EObjectImpl implements Condition {
 			wires = new EObjectContainmentEList<Wire>(Wire.class, this, ModelPackage.CONDITION__WIRES);
 		}
 		return wires;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Action> getActions() {
+		if (actions == null) {
+			actions = new EObjectContainmentEList<Action>(Action.class, this, ModelPackage.CONDITION__ACTIONS);
+		}
+		return actions;
 	}
 
 	/**
@@ -519,6 +543,8 @@ public abstract class ConditionImpl extends EObjectImpl implements Condition {
 		switch (featureID) {
 			case ModelPackage.CONDITION__WIRES:
 				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
+			case ModelPackage.CONDITION__ACTIONS:
+				return ((InternalEList<?>)getActions()).basicRemove(otherEnd, msgs);
 			case ModelPackage.CONDITION__PARAMETER_EDGES:
 				return ((InternalEList<?>)getParameterEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.CONDITION__EXTENDS_EDGES:
@@ -553,6 +579,8 @@ public abstract class ConditionImpl extends EObjectImpl implements Condition {
 		switch (featureID) {
 			case ModelPackage.CONDITION__WIRES:
 				return getWires();
+			case ModelPackage.CONDITION__ACTIONS:
+				return getActions();
 			case ModelPackage.CONDITION__PARAMETER_EDGES:
 				return getParameterEdges();
 			case ModelPackage.CONDITION__EXTENDS_EDGES:
@@ -597,6 +625,10 @@ public abstract class ConditionImpl extends EObjectImpl implements Condition {
 			case ModelPackage.CONDITION__WIRES:
 				getWires().clear();
 				getWires().addAll((Collection<? extends Wire>)newValue);
+				return;
+			case ModelPackage.CONDITION__ACTIONS:
+				getActions().clear();
+				getActions().addAll((Collection<? extends Action>)newValue);
 				return;
 			case ModelPackage.CONDITION__PARAMETER_EDGES:
 				getParameterEdges().clear();
@@ -665,6 +697,9 @@ public abstract class ConditionImpl extends EObjectImpl implements Condition {
 			case ModelPackage.CONDITION__WIRES:
 				getWires().clear();
 				return;
+			case ModelPackage.CONDITION__ACTIONS:
+				getActions().clear();
+				return;
 			case ModelPackage.CONDITION__PARAMETER_EDGES:
 				getParameterEdges().clear();
 				return;
@@ -721,6 +756,8 @@ public abstract class ConditionImpl extends EObjectImpl implements Condition {
 		switch (featureID) {
 			case ModelPackage.CONDITION__WIRES:
 				return wires != null && !wires.isEmpty();
+			case ModelPackage.CONDITION__ACTIONS:
+				return actions != null && !actions.isEmpty();
 			case ModelPackage.CONDITION__PARAMETER_EDGES:
 				return parameterEdges != null && !parameterEdges.isEmpty();
 			case ModelPackage.CONDITION__EXTENDS_EDGES:

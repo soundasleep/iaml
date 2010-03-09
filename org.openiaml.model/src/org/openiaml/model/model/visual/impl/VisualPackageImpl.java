@@ -307,9 +307,11 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 		// Add supertypes to classes
 		frameEClass.getESuperTypes().add(theModelPackage.getScope());
 		frameEClass.getESuperTypes().add(theWiresPackage.getParameterEdgesSource());
+		frameEClass.getESuperTypes().add(theModelPackage.getActionDestination());
 		inputFormEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
 		inputTextFieldEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
 		buttonEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
+		buttonEClass.getESuperTypes().add(theModelPackage.getActionSource());
 		labelEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
 
 		// Initialize classes and features; add operations and parameters

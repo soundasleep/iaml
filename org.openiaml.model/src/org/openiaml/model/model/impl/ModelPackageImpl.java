@@ -12,6 +12,9 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.openiaml.model.model.Accessible;
+import org.openiaml.model.model.Action;
+import org.openiaml.model.model.ActionDestination;
+import org.openiaml.model.model.ActionSource;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.CanBeSynced;
@@ -370,6 +373,27 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EClass accessibleEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass actionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass actionDestinationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass actionSourceEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -1099,7 +1123,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getContainsWires_ParameterEdges() {
+	public EReference getContainsWires_Actions() {
 		return (EReference)containsWiresEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -1108,7 +1132,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getContainsWires_ExtendsEdges() {
+	public EReference getContainsWires_ParameterEdges() {
 		return (EReference)containsWiresEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -1117,7 +1141,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getContainsWires_RequiresEdges() {
+	public EReference getContainsWires_ExtendsEdges() {
 		return (EReference)containsWiresEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -1126,7 +1150,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getContainsWires_ProvidesEdges() {
+	public EReference getContainsWires_RequiresEdges() {
 		return (EReference)containsWiresEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -1135,7 +1159,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getContainsWires_ConstraintEdges() {
+	public EReference getContainsWires_ProvidesEdges() {
 		return (EReference)containsWiresEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -1144,8 +1168,17 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getContainsWires_ConditionEdges() {
+	public EReference getContainsWires_ConstraintEdges() {
 		return (EReference)containsWiresEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getContainsWires_ConditionEdges() {
+		return (EReference)containsWiresEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -1522,6 +1555,69 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getAction() {
+		return actionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAction_From() {
+		return (EReference)actionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAction_To() {
+		return (EReference)actionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getActionDestination() {
+		return actionDestinationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getActionDestination_InActions() {
+		return (EReference)actionDestinationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getActionSource() {
+		return actionSourceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getActionSource_OutActions() {
+		return (EReference)actionSourceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ModelFactory getModelFactory() {
 		return (ModelFactory)getEFactoryInstance();
 	}
@@ -1644,6 +1740,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		containsWiresEClass = createEClass(CONTAINS_WIRES);
 		createEReference(containsWiresEClass, CONTAINS_WIRES__WIRES);
+		createEReference(containsWiresEClass, CONTAINS_WIRES__ACTIONS);
 		createEReference(containsWiresEClass, CONTAINS_WIRES__PARAMETER_EDGES);
 		createEReference(containsWiresEClass, CONTAINS_WIRES__EXTENDS_EDGES);
 		createEReference(containsWiresEClass, CONTAINS_WIRES__REQUIRES_EDGES);
@@ -1704,6 +1801,16 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		accessibleEClass = createEClass(ACCESSIBLE);
 		createEReference(accessibleEClass, ACCESSIBLE__ON_ACCESS);
+
+		actionEClass = createEClass(ACTION);
+		createEReference(actionEClass, ACTION__FROM);
+		createEReference(actionEClass, ACTION__TO);
+
+		actionDestinationEClass = createEClass(ACTION_DESTINATION);
+		createEReference(actionDestinationEClass, ACTION_DESTINATION__IN_ACTIONS);
+
+		actionSourceEClass = createEClass(ACTION_SOURCE);
+		createEReference(actionSourceEClass, ACTION_SOURCE__OUT_ACTIONS);
 	}
 
 	/**
@@ -1757,6 +1864,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		wireSourceEClass.getESuperTypes().add(this.getShouldntContainWires());
 		eventTriggerEClass.getESuperTypes().add(this.getNamedElement());
 		eventTriggerEClass.getESuperTypes().add(this.getWireSource());
+		eventTriggerEClass.getESuperTypes().add(this.getActionSource());
 		domainObjectEClass.getESuperTypes().add(this.getApplicationElement());
 		domainObjectEClass.getESuperTypes().add(this.getContainsWires());
 		domainObjectEClass.getESuperTypes().add(theWiresPackage.getParameterEdgesSource());
@@ -1775,11 +1883,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		operationEClass.getESuperTypes().add(this.getDataFlowEdgeDestination());
 		operationEClass.getESuperTypes().add(this.getExecutionEdgeDestination());
 		operationEClass.getESuperTypes().add(this.getDataFlowEdgesSource());
+		operationEClass.getESuperTypes().add(this.getActionDestination());
 		parameterEClass.getESuperTypes().add(this.getNamedElement());
 		parameterEClass.getESuperTypes().add(this.getDataFlowEdgesSource());
 		primitiveOperationEClass.getESuperTypes().add(this.getOperation());
 		primitiveOperationEClass.getESuperTypes().add(this.getExecutionEdgesSource());
 		primitiveOperationEClass.getESuperTypes().add(this.getWireSource());
+		primitiveOperationEClass.getESuperTypes().add(this.getActionSource());
 		compositeOperationEClass.getESuperTypes().add(this.getPrimitiveOperation());
 		compositeOperationEClass.getESuperTypes().add(this.getContainsOperations());
 		compositeOperationEClass.getESuperTypes().add(this.getContainsWires());
@@ -1875,6 +1985,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		canBeSyncedEClass.getESuperTypes().add(this.getContainsConditions());
 		canBeSyncedEClass.getESuperTypes().add(this.getWireSource());
 		canBeSyncedEClass.getESuperTypes().add(this.getWireDestination());
+		actionEClass.getESuperTypes().add(this.getGeneratedElement());
+		actionSourceEClass.getESuperTypes().add(this.getShouldntContainWires());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(namedElementEClass, NamedElement.class, "NamedElement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1976,6 +2088,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(containsWiresEClass, ContainsWires.class, "ContainsWires", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getContainsWires_Wires(), this.getWire(), null, "wires", null, 0, -1, ContainsWires.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getContainsWires_Actions(), this.getAction(), null, "actions", null, 0, -1, ContainsWires.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getContainsWires_ParameterEdges(), theWiresPackage.getParameterEdge(), null, "parameterEdges", null, 0, -1, ContainsWires.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getContainsWires_ExtendsEdges(), theWiresPackage.getExtendsEdge(), null, "extendsEdges", null, 0, -1, ContainsWires.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getContainsWires_RequiresEdges(), theWiresPackage.getRequiresEdge(), null, "requiresEdges", null, 0, -1, ContainsWires.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2036,6 +2149,16 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(accessibleEClass, Accessible.class, "Accessible", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAccessible_OnAccess(), this.getEventTrigger(), null, "onAccess", null, 0, 1, Accessible.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(actionEClass, Action.class, "Action", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAction_From(), this.getActionSource(), this.getActionSource_OutActions(), "from", null, 1, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAction_To(), this.getActionDestination(), this.getActionDestination_InActions(), "to", null, 1, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(actionDestinationEClass, ActionDestination.class, "ActionDestination", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getActionDestination_InActions(), this.getAction(), this.getAction_To(), "inActions", null, 0, -1, ActionDestination.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(actionSourceEClass, ActionSource.class, "ActionSource", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getActionSource_OutActions(), this.getAction(), this.getAction_From(), "outActions", null, 0, -1, ActionSource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -2319,6 +2442,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "changed", "added in 0.4.4"
+		   });			
+		addAnnotation
+		  (actionSourceEClass, 
+		   source, 
+		   new String[] {
+			 "comment", "temporarily contains wires until GMF bug is fixed "
 		   });
 	}
 
@@ -2473,7 +2602,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Represents a query parameter from the browser\'s URI string."
-		   });		
+		   });				
+		addAnnotation
+		  (actionEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "An {@mode Action} represents the runtime feature of the {@model EventTrigger Event}-{@model Condition}-{@model Action} paradigm. Also see: {@model Wire}"
+		   });	
 	}
 
 } //ModelPackageImpl

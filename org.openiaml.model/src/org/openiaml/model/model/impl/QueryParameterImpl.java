@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.openiaml.model.model.Action;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DataFlowEdgesSource;
@@ -49,6 +50,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.impl.QueryParameterImpl#getGeneratedRule <em>Generated Rule</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.QueryParameterImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.QueryParameterImpl#getWires <em>Wires</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.QueryParameterImpl#getActions <em>Actions</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.QueryParameterImpl#getParameterEdges <em>Parameter Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.QueryParameterImpl#getExtendsEdges <em>Extends Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.QueryParameterImpl#getRequiresEdges <em>Requires Edges</em>}</li>
@@ -164,6 +166,16 @@ public class QueryParameterImpl extends EObjectImpl implements QueryParameter {
 	 * @ordered
 	 */
 	protected EList<Wire> wires;
+
+	/**
+	 * The cached value of the '{@link #getActions() <em>Actions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getActions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Action> actions;
 
 	/**
 	 * The cached value of the '{@link #getParameterEdges() <em>Parameter Edges</em>}' containment reference list.
@@ -407,6 +419,18 @@ public class QueryParameterImpl extends EObjectImpl implements QueryParameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Action> getActions() {
+		if (actions == null) {
+			actions = new EObjectContainmentEList<Action>(Action.class, this, ModelPackage.QUERY_PARAMETER__ACTIONS);
+		}
+		return actions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<ParameterEdge> getParameterEdges() {
 		if (parameterEdges == null) {
 			parameterEdges = new EObjectContainmentEList<ParameterEdge>(ParameterEdge.class, this, ModelPackage.QUERY_PARAMETER__PARAMETER_EDGES);
@@ -564,6 +588,8 @@ public class QueryParameterImpl extends EObjectImpl implements QueryParameter {
 				return ((InternalEList<?>)getGeneratedBy()).basicRemove(otherEnd, msgs);
 			case ModelPackage.QUERY_PARAMETER__WIRES:
 				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
+			case ModelPackage.QUERY_PARAMETER__ACTIONS:
+				return ((InternalEList<?>)getActions()).basicRemove(otherEnd, msgs);
 			case ModelPackage.QUERY_PARAMETER__PARAMETER_EDGES:
 				return ((InternalEList<?>)getParameterEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.QUERY_PARAMETER__EXTENDS_EDGES:
@@ -606,6 +632,8 @@ public class QueryParameterImpl extends EObjectImpl implements QueryParameter {
 				return getName();
 			case ModelPackage.QUERY_PARAMETER__WIRES:
 				return getWires();
+			case ModelPackage.QUERY_PARAMETER__ACTIONS:
+				return getActions();
 			case ModelPackage.QUERY_PARAMETER__PARAMETER_EDGES:
 				return getParameterEdges();
 			case ModelPackage.QUERY_PARAMETER__EXTENDS_EDGES:
@@ -658,6 +686,10 @@ public class QueryParameterImpl extends EObjectImpl implements QueryParameter {
 			case ModelPackage.QUERY_PARAMETER__WIRES:
 				getWires().clear();
 				getWires().addAll((Collection<? extends Wire>)newValue);
+				return;
+			case ModelPackage.QUERY_PARAMETER__ACTIONS:
+				getActions().clear();
+				getActions().addAll((Collection<? extends Action>)newValue);
 				return;
 			case ModelPackage.QUERY_PARAMETER__PARAMETER_EDGES:
 				getParameterEdges().clear();
@@ -728,6 +760,9 @@ public class QueryParameterImpl extends EObjectImpl implements QueryParameter {
 			case ModelPackage.QUERY_PARAMETER__WIRES:
 				getWires().clear();
 				return;
+			case ModelPackage.QUERY_PARAMETER__ACTIONS:
+				getActions().clear();
+				return;
 			case ModelPackage.QUERY_PARAMETER__PARAMETER_EDGES:
 				getParameterEdges().clear();
 				return;
@@ -782,6 +817,8 @@ public class QueryParameterImpl extends EObjectImpl implements QueryParameter {
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case ModelPackage.QUERY_PARAMETER__WIRES:
 				return wires != null && !wires.isEmpty();
+			case ModelPackage.QUERY_PARAMETER__ACTIONS:
+				return actions != null && !actions.isEmpty();
 			case ModelPackage.QUERY_PARAMETER__PARAMETER_EDGES:
 				return parameterEdges != null && !parameterEdges.isEmpty();
 			case ModelPackage.QUERY_PARAMETER__EXTENDS_EDGES:
@@ -816,6 +853,7 @@ public class QueryParameterImpl extends EObjectImpl implements QueryParameter {
 		if (baseClass == ContainsWires.class) {
 			switch (derivedFeatureID) {
 				case ModelPackage.QUERY_PARAMETER__WIRES: return ModelPackage.CONTAINS_WIRES__WIRES;
+				case ModelPackage.QUERY_PARAMETER__ACTIONS: return ModelPackage.CONTAINS_WIRES__ACTIONS;
 				case ModelPackage.QUERY_PARAMETER__PARAMETER_EDGES: return ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES;
 				case ModelPackage.QUERY_PARAMETER__EXTENDS_EDGES: return ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES;
 				case ModelPackage.QUERY_PARAMETER__REQUIRES_EDGES: return ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES;
@@ -861,6 +899,7 @@ public class QueryParameterImpl extends EObjectImpl implements QueryParameter {
 		if (baseClass == ContainsWires.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.CONTAINS_WIRES__WIRES: return ModelPackage.QUERY_PARAMETER__WIRES;
+				case ModelPackage.CONTAINS_WIRES__ACTIONS: return ModelPackage.QUERY_PARAMETER__ACTIONS;
 				case ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES: return ModelPackage.QUERY_PARAMETER__PARAMETER_EDGES;
 				case ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES: return ModelPackage.QUERY_PARAMETER__EXTENDS_EDGES;
 				case ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES: return ModelPackage.QUERY_PARAMETER__REQUIRES_EDGES;

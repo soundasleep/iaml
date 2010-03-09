@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.Accessible;
+import org.openiaml.model.model.Action;
 import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsOperations;
@@ -56,6 +57,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getConditions <em>Conditions</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getOperations <em>Operations</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getWires <em>Wires</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getActions <em>Actions</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getParameterEdges <em>Parameter Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getExtendsEdges <em>Extends Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getRequiresEdges <em>Requires Edges</em>}</li>
@@ -113,6 +115,16 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 	 * @ordered
 	 */
 	protected EList<Wire> wires;
+
+	/**
+	 * The cached value of the '{@link #getActions() <em>Actions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getActions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Action> actions;
 
 	/**
 	 * The cached value of the '{@link #getParameterEdges() <em>Parameter Edges</em>}' containment reference list.
@@ -437,6 +449,18 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 			wires = new EObjectContainmentEList<Wire>(Wire.class, this, ModelPackage.VISIBLE_THING__WIRES);
 		}
 		return wires;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Action> getActions() {
+		if (actions == null) {
+			actions = new EObjectContainmentEList<Action>(Action.class, this, ModelPackage.VISIBLE_THING__ACTIONS);
+		}
+		return actions;
 	}
 
 	/**
@@ -878,6 +902,8 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 				return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
 			case ModelPackage.VISIBLE_THING__WIRES:
 				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
+			case ModelPackage.VISIBLE_THING__ACTIONS:
+				return ((InternalEList<?>)getActions()).basicRemove(otherEnd, msgs);
 			case ModelPackage.VISIBLE_THING__PARAMETER_EDGES:
 				return ((InternalEList<?>)getParameterEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.VISIBLE_THING__EXTENDS_EDGES:
@@ -930,6 +956,8 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 				return getOperations();
 			case ModelPackage.VISIBLE_THING__WIRES:
 				return getWires();
+			case ModelPackage.VISIBLE_THING__ACTIONS:
+				return getActions();
 			case ModelPackage.VISIBLE_THING__PARAMETER_EDGES:
 				return getParameterEdges();
 			case ModelPackage.VISIBLE_THING__EXTENDS_EDGES:
@@ -998,6 +1026,10 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 			case ModelPackage.VISIBLE_THING__WIRES:
 				getWires().clear();
 				getWires().addAll((Collection<? extends Wire>)newValue);
+				return;
+			case ModelPackage.VISIBLE_THING__ACTIONS:
+				getActions().clear();
+				getActions().addAll((Collection<? extends Action>)newValue);
 				return;
 			case ModelPackage.VISIBLE_THING__PARAMETER_EDGES:
 				getParameterEdges().clear();
@@ -1100,6 +1132,9 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 			case ModelPackage.VISIBLE_THING__WIRES:
 				getWires().clear();
 				return;
+			case ModelPackage.VISIBLE_THING__ACTIONS:
+				getActions().clear();
+				return;
 			case ModelPackage.VISIBLE_THING__PARAMETER_EDGES:
 				getParameterEdges().clear();
 				return;
@@ -1184,6 +1219,8 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 				return operations != null && !operations.isEmpty();
 			case ModelPackage.VISIBLE_THING__WIRES:
 				return wires != null && !wires.isEmpty();
+			case ModelPackage.VISIBLE_THING__ACTIONS:
+				return actions != null && !actions.isEmpty();
 			case ModelPackage.VISIBLE_THING__PARAMETER_EDGES:
 				return parameterEdges != null && !parameterEdges.isEmpty();
 			case ModelPackage.VISIBLE_THING__EXTENDS_EDGES:
@@ -1248,6 +1285,7 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 		if (baseClass == ContainsWires.class) {
 			switch (derivedFeatureID) {
 				case ModelPackage.VISIBLE_THING__WIRES: return ModelPackage.CONTAINS_WIRES__WIRES;
+				case ModelPackage.VISIBLE_THING__ACTIONS: return ModelPackage.CONTAINS_WIRES__ACTIONS;
 				case ModelPackage.VISIBLE_THING__PARAMETER_EDGES: return ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES;
 				case ModelPackage.VISIBLE_THING__EXTENDS_EDGES: return ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES;
 				case ModelPackage.VISIBLE_THING__REQUIRES_EDGES: return ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES;
@@ -1338,6 +1376,7 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 		if (baseClass == ContainsWires.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.CONTAINS_WIRES__WIRES: return ModelPackage.VISIBLE_THING__WIRES;
+				case ModelPackage.CONTAINS_WIRES__ACTIONS: return ModelPackage.VISIBLE_THING__ACTIONS;
 				case ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES: return ModelPackage.VISIBLE_THING__PARAMETER_EDGES;
 				case ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES: return ModelPackage.VISIBLE_THING__EXTENDS_EDGES;
 				case ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES: return ModelPackage.VISIBLE_THING__REQUIRES_EDGES;

@@ -98,6 +98,15 @@ public interface VisualPackage extends EPackage {
 	int FRAME__WIRES = ModelPackage.SCOPE__WIRES;
 
 	/**
+	 * The feature id for the '<em><b>Actions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME__ACTIONS = ModelPackage.SCOPE__ACTIONS;
+
+	/**
 	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -323,13 +332,22 @@ public interface VisualPackage extends EPackage {
 	int FRAME__OUT_PARAMETER_EDGES = ModelPackage.SCOPE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>In Actions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME__IN_ACTIONS = ModelPackage.SCOPE_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Url</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FRAME__URL = ModelPackage.SCOPE_FEATURE_COUNT + 1;
+	int FRAME__URL = ModelPackage.SCOPE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -338,7 +356,7 @@ public interface VisualPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FRAME__CHILDREN = ModelPackage.SCOPE_FEATURE_COUNT + 2;
+	int FRAME__CHILDREN = ModelPackage.SCOPE_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Frame</em>' class.
@@ -347,7 +365,7 @@ public interface VisualPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FRAME_FEATURE_COUNT = ModelPackage.SCOPE_FEATURE_COUNT + 3;
+	int FRAME_FEATURE_COUNT = ModelPackage.SCOPE_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.visual.impl.InputFormImpl <em>Input Form</em>}' class.
@@ -385,6 +403,15 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int INPUT_FORM__WIRES = ModelPackage.VISIBLE_THING__WIRES;
+
+	/**
+	 * The feature id for the '<em><b>Actions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_FORM__ACTIONS = ModelPackage.VISIBLE_THING__ACTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
@@ -629,6 +656,15 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int INPUT_TEXT_FIELD__WIRES = ModelPackage.VISIBLE_THING__WIRES;
+
+	/**
+	 * The feature id for the '<em><b>Actions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_TEXT_FIELD__ACTIONS = ModelPackage.VISIBLE_THING__ACTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
@@ -876,6 +912,15 @@ public interface VisualPackage extends EPackage {
 	int BUTTON__WIRES = ModelPackage.VISIBLE_THING__WIRES;
 
 	/**
+	 * The feature id for the '<em><b>Actions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__ACTIONS = ModelPackage.VISIBLE_THING__ACTIONS;
+
+	/**
 	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1074,13 +1119,22 @@ public interface VisualPackage extends EPackage {
 	int BUTTON__ON_CLICK = ModelPackage.VISIBLE_THING__ON_CLICK;
 
 	/**
+	 * The feature id for the '<em><b>Out Actions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__OUT_ACTIONS = ModelPackage.VISIBLE_THING_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Button</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BUTTON_FEATURE_COUNT = ModelPackage.VISIBLE_THING_FEATURE_COUNT + 0;
+	int BUTTON_FEATURE_COUNT = ModelPackage.VISIBLE_THING_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.visual.impl.LabelImpl <em>Label</em>}' class.
@@ -1118,6 +1172,15 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int LABEL__WIRES = ModelPackage.VISIBLE_THING__WIRES;
+
+	/**
+	 * The feature id for the '<em><b>Actions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LABEL__ACTIONS = ModelPackage.VISIBLE_THING__ACTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.

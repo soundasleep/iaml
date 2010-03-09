@@ -10,6 +10,8 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.openiaml.model.model.ActionDestination;
+import org.openiaml.model.model.ActionSource;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsWires;
@@ -155,11 +157,13 @@ public class OperationsSwitch<T> {
 				if (result == null) result = caseOperation(decisionOperation);
 				if (result == null) result = caseExecutionEdgesSource(decisionOperation);
 				if (result == null) result = caseWireSource(decisionOperation);
+				if (result == null) result = caseActionSource(decisionOperation);
 				if (result == null) result = caseWireDestination(decisionOperation);
 				if (result == null) result = caseNamedElement(decisionOperation);
 				if (result == null) result = caseDataFlowEdgeDestination(decisionOperation);
 				if (result == null) result = caseExecutionEdgeDestination(decisionOperation);
 				if (result == null) result = caseDataFlowEdgesSource(decisionOperation);
+				if (result == null) result = caseActionDestination(decisionOperation);
 				if (result == null) result = caseShouldntContainWires(decisionOperation);
 				if (result == null) result = caseGeneratedElement(decisionOperation);
 				if (result == null) result = caseContainsWires(decisionOperation);
@@ -211,6 +215,7 @@ public class OperationsSwitch<T> {
 				if (result == null) result = caseExecutionEdgeDestination(operationCallNode);
 				if (result == null) result = caseWireSource(operationCallNode);
 				if (result == null) result = caseNamedElement(operationCallNode);
+				if (result == null) result = caseActionSource(operationCallNode);
 				if (result == null) result = caseGeneratedElement(operationCallNode);
 				if (result == null) result = caseShouldntContainWires(operationCallNode);
 				if (result == null) result = caseContainsWires(operationCallNode);
@@ -472,6 +477,21 @@ public class OperationsSwitch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Action Destination</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Action Destination</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseActionDestination(ActionDestination object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -588,6 +608,21 @@ public class OperationsSwitch<T> {
 	 * @generated
 	 */
 	public T caseCondition(Condition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Action Source</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Action Source</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseActionSource(ActionSource object) {
 		return null;
 	}
 

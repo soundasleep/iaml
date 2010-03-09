@@ -6,6 +6,7 @@
  */
 package org.openiaml.model.model.wires;
 
+import org.openiaml.model.model.Action;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.WireDestination;
@@ -30,7 +31,7 @@ import org.openiaml.model.model.WireDestination;
  * @model annotation="http://openiaml.org/comment comment='RunWire: a composite wire that contains ExecutionWires/etc'"
  * @generated
  */
-public interface RunInstanceWire extends WireDestination, ParameterEdgeDestination, SingleWire, NamedElement, GeneratesElements, ConditionEdgeDestination {
+public interface RunInstanceWire extends WireDestination, ParameterEdgeDestination, NamedElement, GeneratesElements, ConditionEdgeDestination, Action {
 
 	/**
 	 * Returns the value of the '<em><b>Priority</b></em>' attribute.

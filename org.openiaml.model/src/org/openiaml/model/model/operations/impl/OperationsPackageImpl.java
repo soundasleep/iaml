@@ -435,6 +435,7 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		operationCallNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgeDestination());
 		operationCallNodeEClass.getESuperTypes().add(theModelPackage.getWireSource());
 		operationCallNodeEClass.getESuperTypes().add(theModelPackage.getNamedElement());
+		operationCallNodeEClass.getESuperTypes().add(theModelPackage.getActionSource());
 		arithmeticEClass.getESuperTypes().add(theModelPackage.getActivityNode());
 		arithmeticEClass.getESuperTypes().add(theModelPackage.getDataFlowEdgeDestination());
 		arithmeticEClass.getESuperTypes().add(theModelPackage.getDataFlowEdgesSource());

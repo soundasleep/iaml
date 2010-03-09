@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.openiaml.model.model.Action;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsConditions;
@@ -53,6 +54,7 @@ import org.openiaml.model.model.wires.RequiresEdge;
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getGeneratedRule <em>Generated Rule</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getWires <em>Wires</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getActions <em>Actions</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getParameterEdges <em>Parameter Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getExtendsEdges <em>Extends Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.InternetApplicationImpl#getRequiresEdges <em>Requires Edges</em>}</li>
@@ -182,6 +184,16 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * @ordered
 	 */
 	protected EList<Wire> wires;
+
+	/**
+	 * The cached value of the '{@link #getActions() <em>Actions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getActions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Action> actions;
 
 	/**
 	 * The cached value of the '{@link #getParameterEdges() <em>Parameter Edges</em>}' containment reference list.
@@ -487,6 +499,18 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Action> getActions() {
+		if (actions == null) {
+			actions = new EObjectContainmentEList<Action>(Action.class, this, ModelPackage.INTERNET_APPLICATION__ACTIONS);
+		}
+		return actions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<ParameterEdge> getParameterEdges() {
 		if (parameterEdges == null) {
 			parameterEdges = new EObjectContainmentEList<ParameterEdge>(ParameterEdge.class, this, ModelPackage.INTERNET_APPLICATION__PARAMETER_EDGES);
@@ -699,6 +723,8 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return ((InternalEList<?>)getGeneratedBy()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__WIRES:
 				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
+			case ModelPackage.INTERNET_APPLICATION__ACTIONS:
+				return ((InternalEList<?>)getActions()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__PARAMETER_EDGES:
 				return ((InternalEList<?>)getParameterEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.INTERNET_APPLICATION__EXTENDS_EDGES:
@@ -749,6 +775,8 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return getName();
 			case ModelPackage.INTERNET_APPLICATION__WIRES:
 				return getWires();
+			case ModelPackage.INTERNET_APPLICATION__ACTIONS:
+				return getActions();
 			case ModelPackage.INTERNET_APPLICATION__PARAMETER_EDGES:
 				return getParameterEdges();
 			case ModelPackage.INTERNET_APPLICATION__EXTENDS_EDGES:
@@ -813,6 +841,10 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 			case ModelPackage.INTERNET_APPLICATION__WIRES:
 				getWires().clear();
 				getWires().addAll((Collection<? extends Wire>)newValue);
+				return;
+			case ModelPackage.INTERNET_APPLICATION__ACTIONS:
+				getActions().clear();
+				getActions().addAll((Collection<? extends Action>)newValue);
 				return;
 			case ModelPackage.INTERNET_APPLICATION__PARAMETER_EDGES:
 				getParameterEdges().clear();
@@ -901,6 +933,9 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 			case ModelPackage.INTERNET_APPLICATION__WIRES:
 				getWires().clear();
 				return;
+			case ModelPackage.INTERNET_APPLICATION__ACTIONS:
+				getActions().clear();
+				return;
 			case ModelPackage.INTERNET_APPLICATION__PARAMETER_EDGES:
 				getParameterEdges().clear();
 				return;
@@ -969,6 +1004,8 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case ModelPackage.INTERNET_APPLICATION__WIRES:
 				return wires != null && !wires.isEmpty();
+			case ModelPackage.INTERNET_APPLICATION__ACTIONS:
+				return actions != null && !actions.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__PARAMETER_EDGES:
 				return parameterEdges != null && !parameterEdges.isEmpty();
 			case ModelPackage.INTERNET_APPLICATION__EXTENDS_EDGES:
@@ -1026,6 +1063,7 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 		if (baseClass == ContainsWires.class) {
 			switch (derivedFeatureID) {
 				case ModelPackage.INTERNET_APPLICATION__WIRES: return ModelPackage.CONTAINS_WIRES__WIRES;
+				case ModelPackage.INTERNET_APPLICATION__ACTIONS: return ModelPackage.CONTAINS_WIRES__ACTIONS;
 				case ModelPackage.INTERNET_APPLICATION__PARAMETER_EDGES: return ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES;
 				case ModelPackage.INTERNET_APPLICATION__EXTENDS_EDGES: return ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES;
 				case ModelPackage.INTERNET_APPLICATION__REQUIRES_EDGES: return ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES;
@@ -1076,6 +1114,7 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 		if (baseClass == ContainsWires.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.CONTAINS_WIRES__WIRES: return ModelPackage.INTERNET_APPLICATION__WIRES;
+				case ModelPackage.CONTAINS_WIRES__ACTIONS: return ModelPackage.INTERNET_APPLICATION__ACTIONS;
 				case ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES: return ModelPackage.INTERNET_APPLICATION__PARAMETER_EDGES;
 				case ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES: return ModelPackage.INTERNET_APPLICATION__EXTENDS_EDGES;
 				case ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES: return ModelPackage.INTERNET_APPLICATION__REQUIRES_EDGES;

@@ -217,13 +217,22 @@ public interface WiresPackage extends EPackage {
 	int COMPOSITE_WIRE__WIRES = ModelPackage.WIRE_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Actions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_WIRE__ACTIONS = ModelPackage.WIRE_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE__PARAMETER_EDGES = ModelPackage.WIRE_FEATURE_COUNT + 2;
+	int COMPOSITE_WIRE__PARAMETER_EDGES = ModelPackage.WIRE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Extends Edges</b></em>' containment reference list.
@@ -232,7 +241,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE__EXTENDS_EDGES = ModelPackage.WIRE_FEATURE_COUNT + 3;
+	int COMPOSITE_WIRE__EXTENDS_EDGES = ModelPackage.WIRE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Requires Edges</b></em>' containment reference list.
@@ -241,7 +250,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE__REQUIRES_EDGES = ModelPackage.WIRE_FEATURE_COUNT + 4;
+	int COMPOSITE_WIRE__REQUIRES_EDGES = ModelPackage.WIRE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Provides Edges</b></em>' containment reference list.
@@ -250,7 +259,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE__PROVIDES_EDGES = ModelPackage.WIRE_FEATURE_COUNT + 5;
+	int COMPOSITE_WIRE__PROVIDES_EDGES = ModelPackage.WIRE_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Constraint Edges</b></em>' containment reference list.
@@ -259,7 +268,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE__CONSTRAINT_EDGES = ModelPackage.WIRE_FEATURE_COUNT + 6;
+	int COMPOSITE_WIRE__CONSTRAINT_EDGES = ModelPackage.WIRE_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Condition Edges</b></em>' containment reference list.
@@ -268,7 +277,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE__CONDITION_EDGES = ModelPackage.WIRE_FEATURE_COUNT + 7;
+	int COMPOSITE_WIRE__CONDITION_EDGES = ModelPackage.WIRE_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
@@ -277,7 +286,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE__GENERATED_ELEMENTS = ModelPackage.WIRE_FEATURE_COUNT + 8;
+	int COMPOSITE_WIRE__GENERATED_ELEMENTS = ModelPackage.WIRE_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
@@ -286,7 +295,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE__OVERRIDDEN = ModelPackage.WIRE_FEATURE_COUNT + 9;
+	int COMPOSITE_WIRE__OVERRIDDEN = ModelPackage.WIRE_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
@@ -295,7 +304,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE__CONDITIONS = ModelPackage.WIRE_FEATURE_COUNT + 10;
+	int COMPOSITE_WIRE__CONDITIONS = ModelPackage.WIRE_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -304,7 +313,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE__CHILDREN = ModelPackage.WIRE_FEATURE_COUNT + 11;
+	int COMPOSITE_WIRE__CHILDREN = ModelPackage.WIRE_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -313,7 +322,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE__PROPERTIES = ModelPackage.WIRE_FEATURE_COUNT + 12;
+	int COMPOSITE_WIRE__PROPERTIES = ModelPackage.WIRE_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -322,7 +331,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE__OPERATIONS = ModelPackage.WIRE_FEATURE_COUNT + 13;
+	int COMPOSITE_WIRE__OPERATIONS = ModelPackage.WIRE_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Event Triggers</b></em>' containment reference list.
@@ -331,7 +340,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE__EVENT_TRIGGERS = ModelPackage.WIRE_FEATURE_COUNT + 14;
+	int COMPOSITE_WIRE__EVENT_TRIGGERS = ModelPackage.WIRE_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -340,7 +349,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE__PARAMETERS = ModelPackage.WIRE_FEATURE_COUNT + 15;
+	int COMPOSITE_WIRE__PARAMETERS = ModelPackage.WIRE_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
@@ -349,7 +358,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE__VALUES = ModelPackage.WIRE_FEATURE_COUNT + 16;
+	int COMPOSITE_WIRE__VALUES = ModelPackage.WIRE_FEATURE_COUNT + 17;
 
 	/**
 	 * The number of structural features of the '<em>Composite Wire</em>' class.
@@ -358,7 +367,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE_FEATURE_COUNT = ModelPackage.WIRE_FEATURE_COUNT + 17;
+	int COMPOSITE_WIRE_FEATURE_COUNT = ModelPackage.WIRE_FEATURE_COUNT + 18;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.wires.impl.SyncWireImpl <em>Sync Wire</em>}' class.
@@ -441,6 +450,15 @@ public interface WiresPackage extends EPackage {
 	 * @ordered
 	 */
 	int SYNC_WIRE__WIRES = COMPOSITE_WIRE__WIRES;
+
+	/**
+	 * The feature id for the '<em><b>Actions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SYNC_WIRE__ACTIONS = COMPOSITE_WIRE__ACTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
@@ -678,31 +696,13 @@ public interface WiresPackage extends EPackage {
 	int RUN_INSTANCE_WIRE__GENERATED_RULE = ModelPackage.WIRE_DESTINATION_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>From</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RUN_INSTANCE_WIRE__FROM = ModelPackage.WIRE_DESTINATION_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>To</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RUN_INSTANCE_WIRE__TO = ModelPackage.WIRE_DESTINATION_FEATURE_COUNT + 6;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RUN_INSTANCE_WIRE__NAME = ModelPackage.WIRE_DESTINATION_FEATURE_COUNT + 7;
+	int RUN_INSTANCE_WIRE__NAME = ModelPackage.WIRE_DESTINATION_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
@@ -711,7 +711,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RUN_INSTANCE_WIRE__GENERATED_ELEMENTS = ModelPackage.WIRE_DESTINATION_FEATURE_COUNT + 8;
+	int RUN_INSTANCE_WIRE__GENERATED_ELEMENTS = ModelPackage.WIRE_DESTINATION_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
@@ -720,7 +720,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RUN_INSTANCE_WIRE__OVERRIDDEN = ModelPackage.WIRE_DESTINATION_FEATURE_COUNT + 9;
+	int RUN_INSTANCE_WIRE__OVERRIDDEN = ModelPackage.WIRE_DESTINATION_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>In Condition Edges</b></em>' reference list.
@@ -729,7 +729,25 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RUN_INSTANCE_WIRE__IN_CONDITION_EDGES = ModelPackage.WIRE_DESTINATION_FEATURE_COUNT + 10;
+	int RUN_INSTANCE_WIRE__IN_CONDITION_EDGES = ModelPackage.WIRE_DESTINATION_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>From</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RUN_INSTANCE_WIRE__FROM = ModelPackage.WIRE_DESTINATION_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RUN_INSTANCE_WIRE__TO = ModelPackage.WIRE_DESTINATION_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Priority</b></em>' attribute.
@@ -921,6 +939,15 @@ public interface WiresPackage extends EPackage {
 	 * @ordered
 	 */
 	int SET_WIRE__WIRES = COMPOSITE_WIRE__WIRES;
+
+	/**
+	 * The feature id for the '<em><b>Actions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SET_WIRE__ACTIONS = COMPOSITE_WIRE__ACTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
@@ -1770,13 +1797,22 @@ public interface WiresPackage extends EPackage {
 	int REQUIRES_EDGE__WIRES = ModelPackage.GENERATED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Actions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REQUIRES_EDGE__ACTIONS = ModelPackage.GENERATED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REQUIRES_EDGE__PARAMETER_EDGES = ModelPackage.GENERATED_ELEMENT_FEATURE_COUNT + 3;
+	int REQUIRES_EDGE__PARAMETER_EDGES = ModelPackage.GENERATED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Extends Edges</b></em>' containment reference list.
@@ -1785,7 +1821,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REQUIRES_EDGE__EXTENDS_EDGES = ModelPackage.GENERATED_ELEMENT_FEATURE_COUNT + 4;
+	int REQUIRES_EDGE__EXTENDS_EDGES = ModelPackage.GENERATED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Requires Edges</b></em>' containment reference list.
@@ -1794,7 +1830,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REQUIRES_EDGE__REQUIRES_EDGES = ModelPackage.GENERATED_ELEMENT_FEATURE_COUNT + 5;
+	int REQUIRES_EDGE__REQUIRES_EDGES = ModelPackage.GENERATED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Provides Edges</b></em>' containment reference list.
@@ -1803,7 +1839,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REQUIRES_EDGE__PROVIDES_EDGES = ModelPackage.GENERATED_ELEMENT_FEATURE_COUNT + 6;
+	int REQUIRES_EDGE__PROVIDES_EDGES = ModelPackage.GENERATED_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Constraint Edges</b></em>' containment reference list.
@@ -1812,7 +1848,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REQUIRES_EDGE__CONSTRAINT_EDGES = ModelPackage.GENERATED_ELEMENT_FEATURE_COUNT + 7;
+	int REQUIRES_EDGE__CONSTRAINT_EDGES = ModelPackage.GENERATED_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Condition Edges</b></em>' containment reference list.
@@ -1821,7 +1857,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REQUIRES_EDGE__CONDITION_EDGES = ModelPackage.GENERATED_ELEMENT_FEATURE_COUNT + 8;
+	int REQUIRES_EDGE__CONDITION_EDGES = ModelPackage.GENERATED_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>From</b></em>' reference.
@@ -1830,7 +1866,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REQUIRES_EDGE__FROM = ModelPackage.GENERATED_ELEMENT_FEATURE_COUNT + 9;
+	int REQUIRES_EDGE__FROM = ModelPackage.GENERATED_ELEMENT_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>To</b></em>' reference.
@@ -1839,7 +1875,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REQUIRES_EDGE__TO = ModelPackage.GENERATED_ELEMENT_FEATURE_COUNT + 10;
+	int REQUIRES_EDGE__TO = ModelPackage.GENERATED_ELEMENT_FEATURE_COUNT + 11;
 
 	/**
 	 * The number of structural features of the '<em>Requires Edge</em>' class.
@@ -1848,7 +1884,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REQUIRES_EDGE_FEATURE_COUNT = ModelPackage.GENERATED_ELEMENT_FEATURE_COUNT + 11;
+	int REQUIRES_EDGE_FEATURE_COUNT = ModelPackage.GENERATED_ELEMENT_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Generated By</b></em>' reference list.

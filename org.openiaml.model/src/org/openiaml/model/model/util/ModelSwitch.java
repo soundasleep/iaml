@@ -11,6 +11,9 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.Accessible;
+import org.openiaml.model.model.Action;
+import org.openiaml.model.model.ActionDestination;
+import org.openiaml.model.model.ActionSource;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.CanBeSynced;
@@ -166,6 +169,7 @@ public class ModelSwitch<T> {
 				T result = caseEventTrigger(eventTrigger);
 				if (result == null) result = caseNamedElement(eventTrigger);
 				if (result == null) result = caseWireSource(eventTrigger);
+				if (result == null) result = caseActionSource(eventTrigger);
 				if (result == null) result = caseGeneratedElement(eventTrigger);
 				if (result == null) result = caseShouldntContainWires(eventTrigger);
 				if (result == null) result = caseContainsWires(eventTrigger);
@@ -229,6 +233,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseDataFlowEdgeDestination(operation);
 				if (result == null) result = caseExecutionEdgeDestination(operation);
 				if (result == null) result = caseDataFlowEdgesSource(operation);
+				if (result == null) result = caseActionDestination(operation);
 				if (result == null) result = caseGeneratedElement(operation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -248,11 +253,13 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseOperation(primitiveOperation);
 				if (result == null) result = caseExecutionEdgesSource(primitiveOperation);
 				if (result == null) result = caseWireSource(primitiveOperation);
+				if (result == null) result = caseActionSource(primitiveOperation);
 				if (result == null) result = caseWireDestination(primitiveOperation);
 				if (result == null) result = caseNamedElement(primitiveOperation);
 				if (result == null) result = caseDataFlowEdgeDestination(primitiveOperation);
 				if (result == null) result = caseExecutionEdgeDestination(primitiveOperation);
 				if (result == null) result = caseDataFlowEdgesSource(primitiveOperation);
+				if (result == null) result = caseActionDestination(primitiveOperation);
 				if (result == null) result = caseShouldntContainWires(primitiveOperation);
 				if (result == null) result = caseGeneratedElement(primitiveOperation);
 				if (result == null) result = caseContainsWires(primitiveOperation);
@@ -269,11 +276,13 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseOperation(compositeOperation);
 				if (result == null) result = caseExecutionEdgesSource(compositeOperation);
 				if (result == null) result = caseWireSource(compositeOperation);
+				if (result == null) result = caseActionSource(compositeOperation);
 				if (result == null) result = caseWireDestination(compositeOperation);
 				if (result == null) result = caseNamedElement(compositeOperation);
 				if (result == null) result = caseDataFlowEdgeDestination(compositeOperation);
 				if (result == null) result = caseExecutionEdgeDestination(compositeOperation);
 				if (result == null) result = caseDataFlowEdgesSource(compositeOperation);
+				if (result == null) result = caseActionDestination(compositeOperation);
 				if (result == null) result = caseShouldntContainWires(compositeOperation);
 				if (result == null) result = caseGeneratedElement(compositeOperation);
 				if (result == null) result = caseContainsWires(compositeOperation);
@@ -608,6 +617,27 @@ public class ModelSwitch<T> {
 			case ModelPackage.ACCESSIBLE: {
 				Accessible accessible = (Accessible)theEObject;
 				T result = caseAccessible(accessible);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.ACTION: {
+				Action action = (Action)theEObject;
+				T result = caseAction(action);
+				if (result == null) result = caseGeneratedElement(action);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.ACTION_DESTINATION: {
+				ActionDestination actionDestination = (ActionDestination)theEObject;
+				T result = caseActionDestination(actionDestination);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.ACTION_SOURCE: {
+				ActionSource actionSource = (ActionSource)theEObject;
+				T result = caseActionSource(actionSource);
+				if (result == null) result = caseShouldntContainWires(actionSource);
+				if (result == null) result = caseContainsWires(actionSource);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1242,6 +1272,51 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseAccessible(Accessible object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Action</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Action</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAction(Action object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Action Destination</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Action Destination</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseActionDestination(ActionDestination object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Action Source</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Action Source</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseActionSource(ActionSource object) {
 		return null;
 	}
 

@@ -426,6 +426,15 @@ public interface OperationsPackage extends EPackage {
 	int DECISION_OPERATION__OUT_FLOWS = ModelPackage.PRIMITIVE_OPERATION__OUT_FLOWS;
 
 	/**
+	 * The feature id for the '<em><b>In Actions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECISION_OPERATION__IN_ACTIONS = ModelPackage.PRIMITIVE_OPERATION__IN_ACTIONS;
+
+	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -451,6 +460,15 @@ public interface OperationsPackage extends EPackage {
 	 * @ordered
 	 */
 	int DECISION_OPERATION__WIRES = ModelPackage.PRIMITIVE_OPERATION__WIRES;
+
+	/**
+	 * The feature id for the '<em><b>Actions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECISION_OPERATION__ACTIONS = ModelPackage.PRIMITIVE_OPERATION__ACTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
@@ -516,6 +534,15 @@ public interface OperationsPackage extends EPackage {
 	int DECISION_OPERATION__OUT_WIRES = ModelPackage.PRIMITIVE_OPERATION__OUT_WIRES;
 
 	/**
+	 * The feature id for the '<em><b>Out Actions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECISION_OPERATION__OUT_ACTIONS = ModelPackage.PRIMITIVE_OPERATION__OUT_ACTIONS;
+
+	/**
 	 * The number of structural features of the '<em>Decision Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -542,6 +569,15 @@ public interface OperationsPackage extends EPackage {
 	 * @ordered
 	 */
 	int DECISION_CONDITION__WIRES = ModelPackage.CONDITION__WIRES;
+
+	/**
+	 * The feature id for the '<em><b>Actions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECISION_CONDITION__ACTIONS = ModelPackage.CONDITION__ACTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
@@ -925,13 +961,22 @@ public interface OperationsPackage extends EPackage {
 	int OPERATION_CALL_NODE__WIRES = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Actions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_CALL_NODE__ACTIONS = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_CALL_NODE__PARAMETER_EDGES = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 3;
+	int OPERATION_CALL_NODE__PARAMETER_EDGES = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Extends Edges</b></em>' containment reference list.
@@ -940,7 +985,7 @@ public interface OperationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_CALL_NODE__EXTENDS_EDGES = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 4;
+	int OPERATION_CALL_NODE__EXTENDS_EDGES = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Requires Edges</b></em>' containment reference list.
@@ -949,7 +994,7 @@ public interface OperationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_CALL_NODE__REQUIRES_EDGES = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 5;
+	int OPERATION_CALL_NODE__REQUIRES_EDGES = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Provides Edges</b></em>' containment reference list.
@@ -958,7 +1003,7 @@ public interface OperationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_CALL_NODE__PROVIDES_EDGES = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 6;
+	int OPERATION_CALL_NODE__PROVIDES_EDGES = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Constraint Edges</b></em>' containment reference list.
@@ -967,7 +1012,7 @@ public interface OperationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_CALL_NODE__CONSTRAINT_EDGES = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 7;
+	int OPERATION_CALL_NODE__CONSTRAINT_EDGES = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Condition Edges</b></em>' containment reference list.
@@ -976,7 +1021,7 @@ public interface OperationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_CALL_NODE__CONDITION_EDGES = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 8;
+	int OPERATION_CALL_NODE__CONDITION_EDGES = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Out Wires</b></em>' reference list.
@@ -985,7 +1030,7 @@ public interface OperationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_CALL_NODE__OUT_WIRES = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 9;
+	int OPERATION_CALL_NODE__OUT_WIRES = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -994,7 +1039,16 @@ public interface OperationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_CALL_NODE__NAME = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 10;
+	int OPERATION_CALL_NODE__NAME = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 11;
+
+	/**
+	 * The feature id for the '<em><b>Out Actions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_CALL_NODE__OUT_ACTIONS = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 12;
 
 	/**
 	 * The number of structural features of the '<em>Operation Call Node</em>' class.
@@ -1003,7 +1057,7 @@ public interface OperationsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_CALL_NODE_FEATURE_COUNT = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 11;
+	int OPERATION_CALL_NODE_FEATURE_COUNT = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 13;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.operations.impl.ArithmeticImpl <em>Arithmetic</em>}' class.

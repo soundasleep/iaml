@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.Accessible;
+import org.openiaml.model.model.Action;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.Condition;
@@ -58,6 +59,7 @@ import org.openiaml.model.model.wires.RequiresEdge;
  *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getGeneratedElements <em>Generated Elements</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#isOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getWires <em>Wires</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getActions <em>Actions</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getParameterEdges <em>Parameter Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getExtendsEdges <em>Extends Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getRequiresEdges <em>Requires Edges</em>}</li>
@@ -127,6 +129,16 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 	 * @ordered
 	 */
 	protected EList<Wire> wires;
+
+	/**
+	 * The cached value of the '{@link #getActions() <em>Actions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getActions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Action> actions;
 
 	/**
 	 * The cached value of the '{@link #getParameterEdges() <em>Parameter Edges</em>}' containment reference list.
@@ -470,6 +482,18 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 			wires = new EObjectContainmentEList<Wire>(Wire.class, this, ModelPackage.SCOPE__WIRES);
 		}
 		return wires;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Action> getActions() {
+		if (actions == null) {
+			actions = new EObjectContainmentEList<Action>(Action.class, this, ModelPackage.SCOPE__ACTIONS);
+		}
+		return actions;
 	}
 
 	/**
@@ -953,6 +977,8 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
 			case ModelPackage.SCOPE__WIRES:
 				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
+			case ModelPackage.SCOPE__ACTIONS:
+				return ((InternalEList<?>)getActions()).basicRemove(otherEnd, msgs);
 			case ModelPackage.SCOPE__PARAMETER_EDGES:
 				return ((InternalEList<?>)getParameterEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.SCOPE__EXTENDS_EDGES:
@@ -1011,6 +1037,8 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 				return isOverridden();
 			case ModelPackage.SCOPE__WIRES:
 				return getWires();
+			case ModelPackage.SCOPE__ACTIONS:
+				return getActions();
 			case ModelPackage.SCOPE__PARAMETER_EDGES:
 				return getParameterEdges();
 			case ModelPackage.SCOPE__EXTENDS_EDGES:
@@ -1082,6 +1110,10 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 			case ModelPackage.SCOPE__WIRES:
 				getWires().clear();
 				getWires().addAll((Collection<? extends Wire>)newValue);
+				return;
+			case ModelPackage.SCOPE__ACTIONS:
+				getActions().clear();
+				getActions().addAll((Collection<? extends Action>)newValue);
 				return;
 			case ModelPackage.SCOPE__PARAMETER_EDGES:
 				getParameterEdges().clear();
@@ -1192,6 +1224,9 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 			case ModelPackage.SCOPE__WIRES:
 				getWires().clear();
 				return;
+			case ModelPackage.SCOPE__ACTIONS:
+				getActions().clear();
+				return;
 			case ModelPackage.SCOPE__PARAMETER_EDGES:
 				getParameterEdges().clear();
 				return;
@@ -1282,6 +1317,8 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 				return overridden != OVERRIDDEN_EDEFAULT;
 			case ModelPackage.SCOPE__WIRES:
 				return wires != null && !wires.isEmpty();
+			case ModelPackage.SCOPE__ACTIONS:
+				return actions != null && !actions.isEmpty();
 			case ModelPackage.SCOPE__PARAMETER_EDGES:
 				return parameterEdges != null && !parameterEdges.isEmpty();
 			case ModelPackage.SCOPE__EXTENDS_EDGES:
@@ -1344,6 +1381,7 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 		if (baseClass == ContainsWires.class) {
 			switch (derivedFeatureID) {
 				case ModelPackage.SCOPE__WIRES: return ModelPackage.CONTAINS_WIRES__WIRES;
+				case ModelPackage.SCOPE__ACTIONS: return ModelPackage.CONTAINS_WIRES__ACTIONS;
 				case ModelPackage.SCOPE__PARAMETER_EDGES: return ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES;
 				case ModelPackage.SCOPE__EXTENDS_EDGES: return ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES;
 				case ModelPackage.SCOPE__REQUIRES_EDGES: return ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES;
@@ -1421,6 +1459,7 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 		if (baseClass == ContainsWires.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.CONTAINS_WIRES__WIRES: return ModelPackage.SCOPE__WIRES;
+				case ModelPackage.CONTAINS_WIRES__ACTIONS: return ModelPackage.SCOPE__ACTIONS;
 				case ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES: return ModelPackage.SCOPE__PARAMETER_EDGES;
 				case ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES: return ModelPackage.SCOPE__EXTENDS_EDGES;
 				case ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES: return ModelPackage.SCOPE__REQUIRES_EDGES;

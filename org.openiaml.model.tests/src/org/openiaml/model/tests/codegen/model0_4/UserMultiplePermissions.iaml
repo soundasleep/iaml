@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.1233afe61d2.26">
-  <scopes xsi:type="iaml.visual:Frame" id="visual.1233afe628e.15" name="Home"/>
-  <scopes xsi:type="iaml.scopes:Session" id="scopes.1233afe6368.3" name="target session">
-    <scopes xsi:type="iaml.visual:Frame" id="visual.1233afe628e.73" name="target"/>
-    <elements xsi:type="iaml.components:AccessControlHandler" outRequiresEdges="wires.1233afe62eb.4a wires.1233afe62eb.82" id="components.1233afe6424.13" name="role-based access">
-      <requiresEdges id="wires.1233afe62eb.4a" from="components.1233afe6424.13" to="users.1233afe655c.72"/>
-      <requiresEdges id="wires.1233afe62eb.82" from="components.1233afe6424.13" to="users.1233afe655c.74"/>
-    </elements>
-  </scopes>
   <domainStores xsi:type="iaml.users:UserStore" id="users.1233afe655c.1c" name="user store">
     <children xsi:type="iaml.users:Role" id="users.1233afe655c.23" name="default role" outProvidesEdges="wires.1233afe62eb.36">
       <providesEdges id="wires.1233afe62eb.36" from="users.1233afe655c.23" to="users.1233afe655c.72"/>
@@ -22,4 +14,12 @@
     <permissions id="users.1233afe655c.72" name="a permission" inRequiresEdges="wires.1233afe62eb.4a" inProvidesEdges="wires.1233afe62eb.36 wires.1233afe62eb.66"/>
     <permissions id="users.1233afe655c.74" name="a different permission" inRequiresEdges="wires.1233afe62eb.82" inProvidesEdges="wires.1233afe62eb.38 wires.1233afe62eb.65"/>
   </domainStores>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.1233afe628e.15" name="Home"/>
+  <scopes xsi:type="iaml.scopes:Session" id="scopes.1233afe6368.3" name="target session">
+    <elements xsi:type="iaml.components:AccessControlHandler" outRequiresEdges="wires.1233afe62eb.4a wires.1233afe62eb.82" id="components.1233afe6424.13" name="role-based access">
+      <requiresEdges id="wires.1233afe62eb.4a" from="components.1233afe6424.13" to="users.1233afe655c.72"/>
+      <requiresEdges id="wires.1233afe62eb.82" from="components.1233afe6424.13" to="users.1233afe655c.74"/>
+    </elements>
+    <scopes xsi:type="iaml.visual:Frame" id="visual.1233afe628e.73" name="target"/>
+  </scopes>
 </iaml:InternetApplication>

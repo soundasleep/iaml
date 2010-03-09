@@ -5,7 +5,7 @@
       <properties id="model.12542c563bb.1f0" name="fieldValue" inFlows="model.12542c563bb.231"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.12542c56418.1bb" name="execute">
-      <operations xsi:type="iaml:CompositeOperation" inWires="wires.12542c56428.1b" id="model.12542c563bb.170" name="do operation">
+      <operations xsi:type="iaml:CompositeOperation" id="model.12542c563bb.170" name="do operation" inActions="wires.12542c56428.1b">
         <operations xsi:type="iaml:PrimitiveOperation" id="model.12542c563bb.22d" name="setPropertyToValue" inFlows="model.12542c563bb.230" inExecutions="model.12542c563bb.22e" outFlows="model.12542c563bb.231" outExecutions="model.12542c563bb.22f"/>
         <nodes xsi:type="iaml.operations:StartNode" id="operations.12542c56428.26" outExecutions="model.12542c563bb.22e"/>
         <nodes xsi:type="iaml.operations:FinishNode" id="operations.12542c56428.27" inExecutions="model.12542c563bb.22f"/>
@@ -15,8 +15,8 @@
         <executionEdges id="model.12542c563bb.22f" from="model.12542c563bb.22d" to="operations.12542c56428.27"/>
         <values id="model.12542c563bb.19c" name="static value" outFlows="model.12542c563bb.230" value="hello42"/>
       </operations>
-      <onClick id="model.12542c563bb.16f" outWires="wires.12542c56428.1b">
-        <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.12542c56428.1b" from="model.12542c563bb.16f" to="model.12542c563bb.170" name="run"/>
+      <onClick id="model.12542c563bb.16f" outActions="wires.12542c56428.1b">
+        <actions xsi:type="iaml.wires:RunInstanceWire" id="wires.12542c56428.1b" name="run" from="model.12542c563bb.16f" to="model.12542c563bb.170"/>
       </onClick>
     </children>
   </scopes>

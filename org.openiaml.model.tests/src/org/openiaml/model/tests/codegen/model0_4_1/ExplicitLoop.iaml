@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1254759b7c1.724">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
-    <operations xsi:type="iaml:CompositeOperation" inWires="wires.1254759bc84.8f" id="model.1254759b7c1.72b" name="fibonacci">
+    <operations xsi:type="iaml:CompositeOperation" id="model.1254759b7c1.72b" name="fibonacci" inActions="wires.1254759bc84.8f">
       <parameters id="model.1254759b7c1.75d" name="max" outFlows="model.1254759b7c1.79e"/>
       <operations xsi:type="iaml:PrimitiveOperation" id="model.1254759b7c1.760" name="setPropertyToValue" inFlows="model.1254759b7c1.798" inExecutions="model.1254759b7c1.761" outFlows="model.1254759b7c1.763" outExecutions="model.1254759b7c1.79a"/>
       <operations xsi:type="iaml:PrimitiveOperation" id="model.1254759b7c1.764" name="setPropertyToValue" inFlows="model.1254759b7c1.799" inExecutions="model.1254759b7c1.79a" outFlows="model.1254759b7c1.79b" outExecutions="model.1254759b7c1.79c"/>
@@ -38,8 +38,8 @@
       <values id="model.1254759b7c1.797" name="init" outFlows="model.1254759b7c1.798 model.1254759b7c1.799" value="1"/>
       <values id="model.1254759b7c1.7a0" name="one" outFlows="model.1254759b7c1.7a8" value="1"/>
     </operations>
-    <onAccess id="model.1254759b7c1.72a" outWires="wires.1254759bc84.8f">
-      <wires xsi:type="iaml.wires:RunInstanceWire" inParameterEdges="wires.1254759bc84.94" id="wires.1254759bc84.8f" from="model.1254759b7c1.72a" to="model.1254759b7c1.72b" name="run"/>
+    <onAccess id="model.1254759b7c1.72a" outActions="wires.1254759bc84.8f">
+      <actions xsi:type="iaml.wires:RunInstanceWire" inParameterEdges="wires.1254759bc84.94" id="wires.1254759bc84.8f" name="run" from="model.1254759b7c1.72a" to="model.1254759b7c1.72b"/>
     </onAccess>
     <values id="model.1254759b7c1.741" name="fib value" outParameterEdges="wires.1254759bc84.94" value="5">
       <parameterEdges id="wires.1254759bc84.94" from="model.1254759b7c1.741" to="wires.1254759bc84.8f"/>

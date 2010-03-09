@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12311dd5ff7.1">
   <scopes xsi:type="iaml.visual:Frame" id="visual.12311dd6084.1" name="Home">
-    <operations xsi:type="iaml:CompositeOperation" inWires="wires.12311ff15e6.4" id="model.12311dd5ff7.c" name="target operation">
+    <operations xsi:type="iaml:CompositeOperation" id="model.12311dd5ff7.c" name="target operation" inActions="wires.12311ff15e6.4">
       <operations xsi:type="iaml:PrimitiveOperation" id="model.12311e69386.13" name="setPropertyToValue" inFlows="model.12311eb1e33.36" inExecutions="model.12311e69386.21" outFlows="model.12311e69386.28" outExecutions="model.12311e69386.24"/>
       <operations xsi:type="iaml:PrimitiveOperation" id="model.12311e69386.14" name="setPropertyToValue" inFlows="model.12311eb1e33.38" inExecutions="model.12311e69386.22" outFlows="model.12311e69386.2a" outExecutions="model.12311e69386.25"/>
       <operations xsi:type="iaml:PrimitiveOperation" id="model.12311e69386.15" name="setPropertyToValue" inFlows="model.12311eb1e33.39" inExecutions="model.12311e69386.23" outFlows="model.12311e69386.2b" outExecutions="model.12311e69386.26"/>
@@ -27,8 +27,8 @@
       <values id="model.12311eb1e33.33" name="value2" outFlows="model.12311eb1e33.38" value="bar"/>
       <values id="model.12311eb1e33.34" name="value3" outFlows="model.12311eb1e33.39" value="baz"/>
     </operations>
-    <onAccess id="model.12311eb1e33.140" outWires="wires.12311ff15e6.4">
-      <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.12311ff15e6.4" from="model.12311eb1e33.140" to="model.12311dd5ff7.c" name="run"/>
+    <onAccess id="model.12311eb1e33.140" outActions="wires.12311ff15e6.4">
+      <actions xsi:type="iaml.wires:RunInstanceWire" id="wires.12311ff15e6.4" name="run" from="model.12311eb1e33.140" to="model.12311dd5ff7.c"/>
     </onAccess>
     <children xsi:type="iaml.visual:InputTextField" id="visual.12311dd6084.8a" name="field1">
       <properties id="model.12311dd5ff7.167" name="fieldValue" inFlows="model.12311e69386.28"/>

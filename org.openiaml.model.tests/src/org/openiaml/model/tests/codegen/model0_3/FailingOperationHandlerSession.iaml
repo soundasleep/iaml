@@ -3,15 +3,15 @@
   <scopes xsi:type="iaml.visual:Frame" id="visual.12109dbdd39.37" name="expected failure page" inWires="wires.121370d7b40.23"/>
   <scopes xsi:type="iaml.visual:Frame" id="visual.121370d7b40.6" name="normal page"/>
   <scopes xsi:type="iaml.scopes:Session" id="scopes.121370d7b50.1" name="containing session" outWires="wires.121370d7b40.23">
-    <operations xsi:type="iaml:CompositeOperation" inWires="wires.121370d7b40.11" id="model.121370d7af2.33" name="instant failure">
+    <operations xsi:type="iaml:CompositeOperation" id="model.121370d7af2.33" name="instant failure" inActions="wires.121370d7b40.11">
       <nodes xsi:type="iaml.operations:StartNode" id="operations.121370d7b50.19" outExecutions="model.121370d7af2.82"/>
       <nodes xsi:type="iaml.operations:CancelNode" id="operations.121370d7b50.1b" inExecutions="model.121370d7af2.82" exceptionText="an expected failure message"/>
       <executionEdges id="model.121370d7af2.82" from="operations.121370d7b50.19" to="operations.121370d7b50.1b"/>
     </operations>
     <wires xsi:type="iaml.wires:NavigateWire" id="wires.121370d7b40.23" from="scopes.121370d7b50.1" to="visual.12109dbdd39.37" name="fail"/>
-    <scopes xsi:type="iaml.visual:Frame" id="visual.121370d7b40.18" name="session page"/>
-    <onAccess id="model.121370d7af2.29" outWires="wires.121370d7b40.11">
-      <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.121370d7b40.11" from="model.121370d7af2.29" to="model.121370d7af2.33" name="run"/>
+    <onAccess id="model.121370d7af2.29" outActions="wires.121370d7b40.11">
+      <actions xsi:type="iaml.wires:RunInstanceWire" id="wires.121370d7b40.11" name="run" from="model.121370d7af2.29" to="model.121370d7af2.33"/>
     </onAccess>
+    <scopes xsi:type="iaml.visual:Frame" id="visual.121370d7b40.18" name="session page"/>
   </scopes>
 </iaml:InternetApplication>

@@ -17,6 +17,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.openiaml.model.model.Action;
+import org.openiaml.model.model.ActionDestination;
+import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.impl.ScopeImpl;
 import org.openiaml.model.model.visual.Frame;
@@ -33,6 +36,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.openiaml.model.model.visual.impl.FrameImpl#getOutParameterEdges <em>Out Parameter Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.visual.impl.FrameImpl#getInActions <em>In Actions</em>}</li>
  *   <li>{@link org.openiaml.model.model.visual.impl.FrameImpl#getUrl <em>Url</em>}</li>
  *   <li>{@link org.openiaml.model.model.visual.impl.FrameImpl#getChildren <em>Children</em>}</li>
  * </ul>
@@ -50,6 +54,16 @@ public class FrameImpl extends ScopeImpl implements Frame {
 	 * @ordered
 	 */
 	protected EList<ParameterEdge> outParameterEdges;
+
+	/**
+	 * The cached value of the '{@link #getInActions() <em>In Actions</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInActions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Action> inActions;
 
 	/**
 	 * The default value of the '{@link #getUrl() <em>Url</em>}' attribute.
@@ -117,6 +131,18 @@ public class FrameImpl extends ScopeImpl implements Frame {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Action> getInActions() {
+		if (inActions == null) {
+			inActions = new EObjectWithInverseResolvingEList<Action>(Action.class, this, VisualPackage.FRAME__IN_ACTIONS, ModelPackage.ACTION__TO);
+		}
+		return inActions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getUrl() {
 		return url;
 	}
@@ -156,6 +182,8 @@ public class FrameImpl extends ScopeImpl implements Frame {
 		switch (featureID) {
 			case VisualPackage.FRAME__OUT_PARAMETER_EDGES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutParameterEdges()).basicAdd(otherEnd, msgs);
+			case VisualPackage.FRAME__IN_ACTIONS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInActions()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -170,6 +198,8 @@ public class FrameImpl extends ScopeImpl implements Frame {
 		switch (featureID) {
 			case VisualPackage.FRAME__OUT_PARAMETER_EDGES:
 				return ((InternalEList<?>)getOutParameterEdges()).basicRemove(otherEnd, msgs);
+			case VisualPackage.FRAME__IN_ACTIONS:
+				return ((InternalEList<?>)getInActions()).basicRemove(otherEnd, msgs);
 			case VisualPackage.FRAME__CHILDREN:
 				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
 		}
@@ -186,6 +216,8 @@ public class FrameImpl extends ScopeImpl implements Frame {
 		switch (featureID) {
 			case VisualPackage.FRAME__OUT_PARAMETER_EDGES:
 				return getOutParameterEdges();
+			case VisualPackage.FRAME__IN_ACTIONS:
+				return getInActions();
 			case VisualPackage.FRAME__URL:
 				return getUrl();
 			case VisualPackage.FRAME__CHILDREN:
@@ -206,6 +238,10 @@ public class FrameImpl extends ScopeImpl implements Frame {
 			case VisualPackage.FRAME__OUT_PARAMETER_EDGES:
 				getOutParameterEdges().clear();
 				getOutParameterEdges().addAll((Collection<? extends ParameterEdge>)newValue);
+				return;
+			case VisualPackage.FRAME__IN_ACTIONS:
+				getInActions().clear();
+				getInActions().addAll((Collection<? extends Action>)newValue);
 				return;
 			case VisualPackage.FRAME__URL:
 				setUrl((String)newValue);
@@ -229,6 +265,9 @@ public class FrameImpl extends ScopeImpl implements Frame {
 			case VisualPackage.FRAME__OUT_PARAMETER_EDGES:
 				getOutParameterEdges().clear();
 				return;
+			case VisualPackage.FRAME__IN_ACTIONS:
+				getInActions().clear();
+				return;
 			case VisualPackage.FRAME__URL:
 				setUrl(URL_EDEFAULT);
 				return;
@@ -249,6 +288,8 @@ public class FrameImpl extends ScopeImpl implements Frame {
 		switch (featureID) {
 			case VisualPackage.FRAME__OUT_PARAMETER_EDGES:
 				return outParameterEdges != null && !outParameterEdges.isEmpty();
+			case VisualPackage.FRAME__IN_ACTIONS:
+				return inActions != null && !inActions.isEmpty();
 			case VisualPackage.FRAME__URL:
 				return URL_EDEFAULT == null ? url != null : !URL_EDEFAULT.equals(url);
 			case VisualPackage.FRAME__CHILDREN:
@@ -270,6 +311,12 @@ public class FrameImpl extends ScopeImpl implements Frame {
 				default: return -1;
 			}
 		}
+		if (baseClass == ActionDestination.class) {
+			switch (derivedFeatureID) {
+				case VisualPackage.FRAME__IN_ACTIONS: return ModelPackage.ACTION_DESTINATION__IN_ACTIONS;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -283,6 +330,12 @@ public class FrameImpl extends ScopeImpl implements Frame {
 		if (baseClass == ParameterEdgesSource.class) {
 			switch (baseFeatureID) {
 				case WiresPackage.PARAMETER_EDGES_SOURCE__OUT_PARAMETER_EDGES: return VisualPackage.FRAME__OUT_PARAMETER_EDGES;
+				default: return -1;
+			}
+		}
+		if (baseClass == ActionDestination.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.ACTION_DESTINATION__IN_ACTIONS: return VisualPackage.FRAME__IN_ACTIONS;
 				default: return -1;
 			}
 		}

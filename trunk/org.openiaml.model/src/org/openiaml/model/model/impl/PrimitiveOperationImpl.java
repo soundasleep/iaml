@@ -15,6 +15,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.openiaml.model.model.Action;
+import org.openiaml.model.model.ActionSource;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.ExecutionEdgesSource;
@@ -39,6 +41,7 @@ import org.openiaml.model.model.wires.RequiresEdge;
  * <ul>
  *   <li>{@link org.openiaml.model.model.impl.PrimitiveOperationImpl#getOutExecutions <em>Out Executions</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.PrimitiveOperationImpl#getWires <em>Wires</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.PrimitiveOperationImpl#getActions <em>Actions</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.PrimitiveOperationImpl#getParameterEdges <em>Parameter Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.PrimitiveOperationImpl#getExtendsEdges <em>Extends Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.PrimitiveOperationImpl#getRequiresEdges <em>Requires Edges</em>}</li>
@@ -46,6 +49,7 @@ import org.openiaml.model.model.wires.RequiresEdge;
  *   <li>{@link org.openiaml.model.model.impl.PrimitiveOperationImpl#getConstraintEdges <em>Constraint Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.PrimitiveOperationImpl#getConditionEdges <em>Condition Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.PrimitiveOperationImpl#getOutWires <em>Out Wires</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.PrimitiveOperationImpl#getOutActions <em>Out Actions</em>}</li>
  * </ul>
  * </p>
  *
@@ -71,6 +75,16 @@ public class PrimitiveOperationImpl extends OperationImpl implements PrimitiveOp
 	 * @ordered
 	 */
 	protected EList<Wire> wires;
+
+	/**
+	 * The cached value of the '{@link #getActions() <em>Actions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getActions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Action> actions;
 
 	/**
 	 * The cached value of the '{@link #getParameterEdges() <em>Parameter Edges</em>}' containment reference list.
@@ -143,6 +157,16 @@ public class PrimitiveOperationImpl extends OperationImpl implements PrimitiveOp
 	protected EList<Wire> outWires;
 
 	/**
+	 * The cached value of the '{@link #getOutActions() <em>Out Actions</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOutActions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Action> outActions;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -183,6 +207,18 @@ public class PrimitiveOperationImpl extends OperationImpl implements PrimitiveOp
 			wires = new EObjectContainmentEList<Wire>(Wire.class, this, ModelPackage.PRIMITIVE_OPERATION__WIRES);
 		}
 		return wires;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Action> getActions() {
+		if (actions == null) {
+			actions = new EObjectContainmentEList<Action>(Action.class, this, ModelPackage.PRIMITIVE_OPERATION__ACTIONS);
+		}
+		return actions;
 	}
 
 	/**
@@ -274,6 +310,18 @@ public class PrimitiveOperationImpl extends OperationImpl implements PrimitiveOp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Action> getOutActions() {
+		if (outActions == null) {
+			outActions = new EObjectWithInverseResolvingEList<Action>(Action.class, this, ModelPackage.PRIMITIVE_OPERATION__OUT_ACTIONS, ModelPackage.ACTION__FROM);
+		}
+		return outActions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -282,6 +330,8 @@ public class PrimitiveOperationImpl extends OperationImpl implements PrimitiveOp
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutExecutions()).basicAdd(otherEnd, msgs);
 			case ModelPackage.PRIMITIVE_OPERATION__OUT_WIRES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutWires()).basicAdd(otherEnd, msgs);
+			case ModelPackage.PRIMITIVE_OPERATION__OUT_ACTIONS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutActions()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -298,6 +348,8 @@ public class PrimitiveOperationImpl extends OperationImpl implements PrimitiveOp
 				return ((InternalEList<?>)getOutExecutions()).basicRemove(otherEnd, msgs);
 			case ModelPackage.PRIMITIVE_OPERATION__WIRES:
 				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
+			case ModelPackage.PRIMITIVE_OPERATION__ACTIONS:
+				return ((InternalEList<?>)getActions()).basicRemove(otherEnd, msgs);
 			case ModelPackage.PRIMITIVE_OPERATION__PARAMETER_EDGES:
 				return ((InternalEList<?>)getParameterEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.PRIMITIVE_OPERATION__EXTENDS_EDGES:
@@ -312,6 +364,8 @@ public class PrimitiveOperationImpl extends OperationImpl implements PrimitiveOp
 				return ((InternalEList<?>)getConditionEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.PRIMITIVE_OPERATION__OUT_WIRES:
 				return ((InternalEList<?>)getOutWires()).basicRemove(otherEnd, msgs);
+			case ModelPackage.PRIMITIVE_OPERATION__OUT_ACTIONS:
+				return ((InternalEList<?>)getOutActions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -328,6 +382,8 @@ public class PrimitiveOperationImpl extends OperationImpl implements PrimitiveOp
 				return getOutExecutions();
 			case ModelPackage.PRIMITIVE_OPERATION__WIRES:
 				return getWires();
+			case ModelPackage.PRIMITIVE_OPERATION__ACTIONS:
+				return getActions();
 			case ModelPackage.PRIMITIVE_OPERATION__PARAMETER_EDGES:
 				return getParameterEdges();
 			case ModelPackage.PRIMITIVE_OPERATION__EXTENDS_EDGES:
@@ -342,6 +398,8 @@ public class PrimitiveOperationImpl extends OperationImpl implements PrimitiveOp
 				return getConditionEdges();
 			case ModelPackage.PRIMITIVE_OPERATION__OUT_WIRES:
 				return getOutWires();
+			case ModelPackage.PRIMITIVE_OPERATION__OUT_ACTIONS:
+				return getOutActions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -362,6 +420,10 @@ public class PrimitiveOperationImpl extends OperationImpl implements PrimitiveOp
 			case ModelPackage.PRIMITIVE_OPERATION__WIRES:
 				getWires().clear();
 				getWires().addAll((Collection<? extends Wire>)newValue);
+				return;
+			case ModelPackage.PRIMITIVE_OPERATION__ACTIONS:
+				getActions().clear();
+				getActions().addAll((Collection<? extends Action>)newValue);
 				return;
 			case ModelPackage.PRIMITIVE_OPERATION__PARAMETER_EDGES:
 				getParameterEdges().clear();
@@ -391,6 +453,10 @@ public class PrimitiveOperationImpl extends OperationImpl implements PrimitiveOp
 				getOutWires().clear();
 				getOutWires().addAll((Collection<? extends Wire>)newValue);
 				return;
+			case ModelPackage.PRIMITIVE_OPERATION__OUT_ACTIONS:
+				getOutActions().clear();
+				getOutActions().addAll((Collection<? extends Action>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -408,6 +474,9 @@ public class PrimitiveOperationImpl extends OperationImpl implements PrimitiveOp
 				return;
 			case ModelPackage.PRIMITIVE_OPERATION__WIRES:
 				getWires().clear();
+				return;
+			case ModelPackage.PRIMITIVE_OPERATION__ACTIONS:
+				getActions().clear();
 				return;
 			case ModelPackage.PRIMITIVE_OPERATION__PARAMETER_EDGES:
 				getParameterEdges().clear();
@@ -430,6 +499,9 @@ public class PrimitiveOperationImpl extends OperationImpl implements PrimitiveOp
 			case ModelPackage.PRIMITIVE_OPERATION__OUT_WIRES:
 				getOutWires().clear();
 				return;
+			case ModelPackage.PRIMITIVE_OPERATION__OUT_ACTIONS:
+				getOutActions().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -446,6 +518,8 @@ public class PrimitiveOperationImpl extends OperationImpl implements PrimitiveOp
 				return outExecutions != null && !outExecutions.isEmpty();
 			case ModelPackage.PRIMITIVE_OPERATION__WIRES:
 				return wires != null && !wires.isEmpty();
+			case ModelPackage.PRIMITIVE_OPERATION__ACTIONS:
+				return actions != null && !actions.isEmpty();
 			case ModelPackage.PRIMITIVE_OPERATION__PARAMETER_EDGES:
 				return parameterEdges != null && !parameterEdges.isEmpty();
 			case ModelPackage.PRIMITIVE_OPERATION__EXTENDS_EDGES:
@@ -460,6 +534,8 @@ public class PrimitiveOperationImpl extends OperationImpl implements PrimitiveOp
 				return conditionEdges != null && !conditionEdges.isEmpty();
 			case ModelPackage.PRIMITIVE_OPERATION__OUT_WIRES:
 				return outWires != null && !outWires.isEmpty();
+			case ModelPackage.PRIMITIVE_OPERATION__OUT_ACTIONS:
+				return outActions != null && !outActions.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -480,6 +556,7 @@ public class PrimitiveOperationImpl extends OperationImpl implements PrimitiveOp
 		if (baseClass == ContainsWires.class) {
 			switch (derivedFeatureID) {
 				case ModelPackage.PRIMITIVE_OPERATION__WIRES: return ModelPackage.CONTAINS_WIRES__WIRES;
+				case ModelPackage.PRIMITIVE_OPERATION__ACTIONS: return ModelPackage.CONTAINS_WIRES__ACTIONS;
 				case ModelPackage.PRIMITIVE_OPERATION__PARAMETER_EDGES: return ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES;
 				case ModelPackage.PRIMITIVE_OPERATION__EXTENDS_EDGES: return ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES;
 				case ModelPackage.PRIMITIVE_OPERATION__REQUIRES_EDGES: return ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES;
@@ -497,6 +574,12 @@ public class PrimitiveOperationImpl extends OperationImpl implements PrimitiveOp
 		if (baseClass == WireSource.class) {
 			switch (derivedFeatureID) {
 				case ModelPackage.PRIMITIVE_OPERATION__OUT_WIRES: return ModelPackage.WIRE_SOURCE__OUT_WIRES;
+				default: return -1;
+			}
+		}
+		if (baseClass == ActionSource.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.PRIMITIVE_OPERATION__OUT_ACTIONS: return ModelPackage.ACTION_SOURCE__OUT_ACTIONS;
 				default: return -1;
 			}
 		}
@@ -519,6 +602,7 @@ public class PrimitiveOperationImpl extends OperationImpl implements PrimitiveOp
 		if (baseClass == ContainsWires.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.CONTAINS_WIRES__WIRES: return ModelPackage.PRIMITIVE_OPERATION__WIRES;
+				case ModelPackage.CONTAINS_WIRES__ACTIONS: return ModelPackage.PRIMITIVE_OPERATION__ACTIONS;
 				case ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES: return ModelPackage.PRIMITIVE_OPERATION__PARAMETER_EDGES;
 				case ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES: return ModelPackage.PRIMITIVE_OPERATION__EXTENDS_EDGES;
 				case ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES: return ModelPackage.PRIMITIVE_OPERATION__REQUIRES_EDGES;
@@ -536,6 +620,12 @@ public class PrimitiveOperationImpl extends OperationImpl implements PrimitiveOp
 		if (baseClass == WireSource.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.WIRE_SOURCE__OUT_WIRES: return ModelPackage.PRIMITIVE_OPERATION__OUT_WIRES;
+				default: return -1;
+			}
+		}
+		if (baseClass == ActionSource.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.ACTION_SOURCE__OUT_ACTIONS: return ModelPackage.PRIMITIVE_OPERATION__OUT_ACTIONS;
 				default: return -1;
 			}
 		}

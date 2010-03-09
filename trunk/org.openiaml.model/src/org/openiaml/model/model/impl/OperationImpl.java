@@ -18,6 +18,8 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.openiaml.model.model.Action;
+import org.openiaml.model.model.ActionDestination;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DataFlowEdgeDestination;
 import org.openiaml.model.model.DataFlowEdgesSource;
@@ -47,6 +49,7 @@ import org.openiaml.model.model.Wire;
  *   <li>{@link org.openiaml.model.model.impl.OperationImpl#getInFlows <em>In Flows</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.OperationImpl#getInExecutions <em>In Executions</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.OperationImpl#getOutFlows <em>Out Flows</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.OperationImpl#getInActions <em>In Actions</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.OperationImpl#getParameters <em>Parameters</em>}</li>
  * </ul>
  * </p>
@@ -183,6 +186,16 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 	 * @ordered
 	 */
 	protected EList<DataFlowEdge> outFlows;
+
+	/**
+	 * The cached value of the '{@link #getInActions() <em>In Actions</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInActions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Action> inActions;
 
 	/**
 	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
@@ -362,6 +375,18 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Action> getInActions() {
+		if (inActions == null) {
+			inActions = new EObjectWithInverseResolvingEList<Action>(Action.class, this, ModelPackage.OPERATION__IN_ACTIONS, ModelPackage.ACTION__TO);
+		}
+		return inActions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<Parameter> getParameters() {
 		if (parameters == null) {
 			parameters = new EObjectContainmentEList<Parameter>(Parameter.class, this, ModelPackage.OPERATION__PARAMETERS);
@@ -388,6 +413,8 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInExecutions()).basicAdd(otherEnd, msgs);
 			case ModelPackage.OPERATION__OUT_FLOWS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutFlows()).basicAdd(otherEnd, msgs);
+			case ModelPackage.OPERATION__IN_ACTIONS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInActions()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -410,6 +437,8 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 				return ((InternalEList<?>)getInExecutions()).basicRemove(otherEnd, msgs);
 			case ModelPackage.OPERATION__OUT_FLOWS:
 				return ((InternalEList<?>)getOutFlows()).basicRemove(otherEnd, msgs);
+			case ModelPackage.OPERATION__IN_ACTIONS:
+				return ((InternalEList<?>)getInActions()).basicRemove(otherEnd, msgs);
 			case ModelPackage.OPERATION__PARAMETERS:
 				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
 		}
@@ -442,6 +471,8 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 				return getInExecutions();
 			case ModelPackage.OPERATION__OUT_FLOWS:
 				return getOutFlows();
+			case ModelPackage.OPERATION__IN_ACTIONS:
+				return getInActions();
 			case ModelPackage.OPERATION__PARAMETERS:
 				return getParameters();
 		}
@@ -489,6 +520,10 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 				getOutFlows().clear();
 				getOutFlows().addAll((Collection<? extends DataFlowEdge>)newValue);
 				return;
+			case ModelPackage.OPERATION__IN_ACTIONS:
+				getInActions().clear();
+				getInActions().addAll((Collection<? extends Action>)newValue);
+				return;
 			case ModelPackage.OPERATION__PARAMETERS:
 				getParameters().clear();
 				getParameters().addAll((Collection<? extends Parameter>)newValue);
@@ -532,6 +567,9 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 			case ModelPackage.OPERATION__OUT_FLOWS:
 				getOutFlows().clear();
 				return;
+			case ModelPackage.OPERATION__IN_ACTIONS:
+				getInActions().clear();
+				return;
 			case ModelPackage.OPERATION__PARAMETERS:
 				getParameters().clear();
 				return;
@@ -565,6 +603,8 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 				return inExecutions != null && !inExecutions.isEmpty();
 			case ModelPackage.OPERATION__OUT_FLOWS:
 				return outFlows != null && !outFlows.isEmpty();
+			case ModelPackage.OPERATION__IN_ACTIONS:
+				return inActions != null && !inActions.isEmpty();
 			case ModelPackage.OPERATION__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
 		}
@@ -611,6 +651,12 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 				default: return -1;
 			}
 		}
+		if (baseClass == ActionDestination.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.OPERATION__IN_ACTIONS: return ModelPackage.ACTION_DESTINATION__IN_ACTIONS;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -651,6 +697,12 @@ public abstract class OperationImpl extends EObjectImpl implements Operation {
 		if (baseClass == DataFlowEdgesSource.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.DATA_FLOW_EDGES_SOURCE__OUT_FLOWS: return ModelPackage.OPERATION__OUT_FLOWS;
+				default: return -1;
+			}
+		}
+		if (baseClass == ActionDestination.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.ACTION_DESTINATION__IN_ACTIONS: return ModelPackage.OPERATION__IN_ACTIONS;
 				default: return -1;
 			}
 		}

@@ -941,10 +941,10 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		syncWireEClass.getESuperTypes().add(this.getConditionEdgeDestination());
 		runInstanceWireEClass.getESuperTypes().add(theModelPackage.getWireDestination());
 		runInstanceWireEClass.getESuperTypes().add(this.getParameterEdgeDestination());
-		runInstanceWireEClass.getESuperTypes().add(this.getSingleWire());
 		runInstanceWireEClass.getESuperTypes().add(theModelPackage.getNamedElement());
 		runInstanceWireEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
 		runInstanceWireEClass.getESuperTypes().add(this.getConditionEdgeDestination());
+		runInstanceWireEClass.getESuperTypes().add(theModelPackage.getAction());
 		parameterEdgeEClass.getESuperTypes().add(theModelPackage.getNamedElement());
 		parameterEdgeEClass.getESuperTypes().add(theModelPackage.getGeneratedElement());
 		setWireEClass.getESuperTypes().add(this.getCompositeWire());

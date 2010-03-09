@@ -11,6 +11,8 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.Accessible;
+import org.openiaml.model.model.ActionDestination;
+import org.openiaml.model.model.ActionSource;
 import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsOperations;
@@ -111,6 +113,7 @@ public class VisualSwitch<T> {
 				T result = caseFrame(frame);
 				if (result == null) result = caseScope(frame);
 				if (result == null) result = caseParameterEdgesSource(frame);
+				if (result == null) result = caseActionDestination(frame);
 				if (result == null) result = caseCanBeSynced(frame);
 				if (result == null) result = caseAccessible(frame);
 				if (result == null) result = caseGeneratesElements(frame);
@@ -169,6 +172,7 @@ public class VisualSwitch<T> {
 				Button button = (Button)theEObject;
 				T result = caseButton(button);
 				if (result == null) result = caseVisibleThing(button);
+				if (result == null) result = caseActionSource(button);
 				if (result == null) result = caseCanBeSynced(button);
 				if (result == null) result = caseParameterEdgesSource(button);
 				if (result == null) result = caseEditable(button);
@@ -326,6 +330,21 @@ public class VisualSwitch<T> {
 	 * @generated
 	 */
 	public T caseParameterEdgesSource(ParameterEdgesSource object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Action Destination</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Action Destination</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseActionDestination(ActionDestination object) {
 		return null;
 	}
 
@@ -506,6 +525,21 @@ public class VisualSwitch<T> {
 	 * @generated
 	 */
 	public T caseVisibleThing(VisibleThing object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Action Source</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Action Source</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseActionSource(ActionSource object) {
 		return null;
 	}
 

@@ -6,6 +6,7 @@
  */
 package org.openiaml.model.model.visual;
 
+import org.openiaml.model.model.ActionSource;
 import org.openiaml.model.model.VisibleThing;
 
 /**
@@ -22,5 +23,5 @@ import org.openiaml.model.model.VisibleThing;
  * @model annotation="http://openiaml.org/comment added='0.2'"
  * @generated
  */
-public interface Button extends VisibleThing {
+public interface Button extends VisibleThing, ActionSource {
 } // Button

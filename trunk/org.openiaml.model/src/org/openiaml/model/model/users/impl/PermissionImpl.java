@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.openiaml.model.model.Action;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.ModelPackage;
@@ -51,6 +52,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.users.impl.PermissionImpl#getInRequiresEdges <em>In Requires Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.users.impl.PermissionImpl#getInProvidesEdges <em>In Provides Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.users.impl.PermissionImpl#getWires <em>Wires</em>}</li>
+ *   <li>{@link org.openiaml.model.model.users.impl.PermissionImpl#getActions <em>Actions</em>}</li>
  *   <li>{@link org.openiaml.model.model.users.impl.PermissionImpl#getParameterEdges <em>Parameter Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.users.impl.PermissionImpl#getExtendsEdges <em>Extends Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.users.impl.PermissionImpl#getRequiresEdges <em>Requires Edges</em>}</li>
@@ -192,6 +194,16 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 	 * @ordered
 	 */
 	protected EList<Wire> wires;
+
+	/**
+	 * The cached value of the '{@link #getActions() <em>Actions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getActions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Action> actions;
 
 	/**
 	 * The cached value of the '{@link #getParameterEdges() <em>Parameter Edges</em>}' containment reference list.
@@ -421,6 +433,18 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Action> getActions() {
+		if (actions == null) {
+			actions = new EObjectContainmentEList<Action>(Action.class, this, UsersPackage.PERMISSION__ACTIONS);
+		}
+		return actions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<ParameterEdge> getParameterEdges() {
 		if (parameterEdges == null) {
 			parameterEdges = new EObjectContainmentEList<ParameterEdge>(ParameterEdge.class, this, UsersPackage.PERMISSION__PARAMETER_EDGES);
@@ -527,6 +551,8 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 				return ((InternalEList<?>)getInProvidesEdges()).basicRemove(otherEnd, msgs);
 			case UsersPackage.PERMISSION__WIRES:
 				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
+			case UsersPackage.PERMISSION__ACTIONS:
+				return ((InternalEList<?>)getActions()).basicRemove(otherEnd, msgs);
 			case UsersPackage.PERMISSION__PARAMETER_EDGES:
 				return ((InternalEList<?>)getParameterEdges()).basicRemove(otherEnd, msgs);
 			case UsersPackage.PERMISSION__EXTENDS_EDGES:
@@ -569,6 +595,8 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 				return getInProvidesEdges();
 			case UsersPackage.PERMISSION__WIRES:
 				return getWires();
+			case UsersPackage.PERMISSION__ACTIONS:
+				return getActions();
 			case UsersPackage.PERMISSION__PARAMETER_EDGES:
 				return getParameterEdges();
 			case UsersPackage.PERMISSION__EXTENDS_EDGES:
@@ -625,6 +653,10 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 			case UsersPackage.PERMISSION__WIRES:
 				getWires().clear();
 				getWires().addAll((Collection<? extends Wire>)newValue);
+				return;
+			case UsersPackage.PERMISSION__ACTIONS:
+				getActions().clear();
+				getActions().addAll((Collection<? extends Action>)newValue);
 				return;
 			case UsersPackage.PERMISSION__PARAMETER_EDGES:
 				getParameterEdges().clear();
@@ -689,6 +721,9 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 			case UsersPackage.PERMISSION__WIRES:
 				getWires().clear();
 				return;
+			case UsersPackage.PERMISSION__ACTIONS:
+				getActions().clear();
+				return;
 			case UsersPackage.PERMISSION__PARAMETER_EDGES:
 				getParameterEdges().clear();
 				return;
@@ -737,6 +772,8 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 				return inProvidesEdges != null && !inProvidesEdges.isEmpty();
 			case UsersPackage.PERMISSION__WIRES:
 				return wires != null && !wires.isEmpty();
+			case UsersPackage.PERMISSION__ACTIONS:
+				return actions != null && !actions.isEmpty();
 			case UsersPackage.PERMISSION__PARAMETER_EDGES:
 				return parameterEdges != null && !parameterEdges.isEmpty();
 			case UsersPackage.PERMISSION__EXTENDS_EDGES:
@@ -781,6 +818,7 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 		if (baseClass == ContainsWires.class) {
 			switch (derivedFeatureID) {
 				case UsersPackage.PERMISSION__WIRES: return ModelPackage.CONTAINS_WIRES__WIRES;
+				case UsersPackage.PERMISSION__ACTIONS: return ModelPackage.CONTAINS_WIRES__ACTIONS;
 				case UsersPackage.PERMISSION__PARAMETER_EDGES: return ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES;
 				case UsersPackage.PERMISSION__EXTENDS_EDGES: return ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES;
 				case UsersPackage.PERMISSION__REQUIRES_EDGES: return ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES;
@@ -821,6 +859,7 @@ public class PermissionImpl extends EObjectImpl implements Permission {
 		if (baseClass == ContainsWires.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.CONTAINS_WIRES__WIRES: return UsersPackage.PERMISSION__WIRES;
+				case ModelPackage.CONTAINS_WIRES__ACTIONS: return UsersPackage.PERMISSION__ACTIONS;
 				case ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES: return UsersPackage.PERMISSION__PARAMETER_EDGES;
 				case ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES: return UsersPackage.PERMISSION__EXTENDS_EDGES;
 				case ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES: return UsersPackage.PERMISSION__REQUIRES_EDGES;

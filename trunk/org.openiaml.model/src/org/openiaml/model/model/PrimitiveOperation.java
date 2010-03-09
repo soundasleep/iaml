@@ -21,6 +21,6 @@ package org.openiaml.model.model;
  * @model annotation="http://openiaml.org/comment comment='renamed from ChainedOperation -> PrimitiveOperation in 0.4'"
  * @generated
  */
-public interface PrimitiveOperation extends Operation, ExecutionEdgesSource, WireSource {
+public interface PrimitiveOperation extends Operation, ExecutionEdgesSource, WireSource, ActionSource {
 	
 } // ChainedOperation

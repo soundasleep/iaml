@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.openiaml.model.model.Action;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.GeneratedElement;
@@ -156,11 +157,10 @@ public class WiresSwitch<T> {
 				T result = caseRunInstanceWire(runInstanceWire);
 				if (result == null) result = caseWireDestination(runInstanceWire);
 				if (result == null) result = caseParameterEdgeDestination(runInstanceWire);
-				if (result == null) result = caseSingleWire(runInstanceWire);
 				if (result == null) result = caseNamedElement(runInstanceWire);
 				if (result == null) result = caseGeneratesElements(runInstanceWire);
 				if (result == null) result = caseConditionEdgeDestination(runInstanceWire);
-				if (result == null) result = caseWire(runInstanceWire);
+				if (result == null) result = caseAction(runInstanceWire);
 				if (result == null) result = caseGeneratedElement(runInstanceWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -751,6 +751,21 @@ public class WiresSwitch<T> {
 	 * @generated
 	 */
 	public T caseWireDestination(WireDestination object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Action</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Action</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAction(Action object) {
 		return null;
 	}
 

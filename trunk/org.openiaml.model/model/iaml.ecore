@@ -34,7 +34,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="outWires" upperBound="-1"
         eType="#//Wire" eOpposite="#//Wire/from"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EventTrigger" eSuperTypes="#//NamedElement #//WireSource">
+  <eClassifiers xsi:type="ecore:EClass" name="EventTrigger" eSuperTypes="#//NamedElement #//WireSource #//ActionSource">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Represents the source of events."/>
     </eAnnotations>
@@ -68,7 +68,7 @@
       <details key="changed" value="0.4.2 to abstract"/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Operation" abstract="true" eSuperTypes="#//WireDestination #//NamedElement #//DataFlowEdgeDestination #//ExecutionEdgeDestination #//DataFlowEdgesSource">
+  <eClassifiers xsi:type="ecore:EClass" name="Operation" abstract="true" eSuperTypes="#//WireDestination #//NamedElement #//DataFlowEdgeDestination #//ExecutionEdgeDestination #//DataFlowEdgesSource #//ActionDestination">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Represents some type of executable step, which may contain logic flows, data flows or other operations."/>
     </eAnnotations>
@@ -80,7 +80,7 @@
       <details key="documentation" value="Incoming values to an {@model Operation operation} executed by a {@model RunInstanceWire} can be accessed via Parameters."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveOperation" eSuperTypes="#//Operation #//ExecutionEdgesSource #//WireSource">
+  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveOperation" eSuperTypes="#//Operation #//ExecutionEdgesSource #//WireSource #//ActionSource">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="comment" value="renamed from ChainedOperation -> PrimitiveOperation in 0.4"/>
     </eAnnotations>
@@ -288,6 +288,8 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="wires" upperBound="-1"
         eType="#//Wire" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
+        eType="#//Action" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameterEdges" upperBound="-1"
         eType="#//wires/ParameterEdge" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="extendsEdges" upperBound="-1"
@@ -469,8 +471,29 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Action" abstract="true" eSuperTypes="#//GeneratedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="An {@mode Action} represents the runtime feature of the {@model EventTrigger Event}-{@model Condition}-{@model Action} paradigm. Also see: {@model Wire}"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//ActionSource"
+        eOpposite="#//ActionSource/outActions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//ActionDestination"
+        eOpposite="#//ActionDestination/inActions"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ActionDestination" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inActions" upperBound="-1"
+        eType="#//Action" eOpposite="#//Action/to"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ActionSource" abstract="true" interface="true"
+      eSuperTypes="#//ShouldntContainWires">
+    <eAnnotations source="http://openiaml.org/comment">
+      <details key="comment" value="temporarily contains wires until GMF bug is fixed "/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outActions" upperBound="-1"
+        eType="#//Action" eOpposite="#//Action/from"/>
+  </eClassifiers>
   <eSubpackages name="visual" nsURI="http://openiaml.org/model/visual" nsPrefix="iaml.visual">
-    <eClassifiers xsi:type="ecore:EClass" name="Frame" eSuperTypes="#//Scope #//wires/ParameterEdgesSource">
+    <eClassifiers xsi:type="ecore:EClass" name="Frame" eSuperTypes="#//Scope #//wires/ParameterEdgesSource #//ActionDestination">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="Scope supertype added in 0.2"/>
         <details key="comment2" value="represents the scope Window"/>
@@ -497,7 +520,7 @@
         <details key="documentation" value="A single text field, storing a single text value, which may be edited by the user."/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Button" eSuperTypes="#//VisibleThing">
+    <eClassifiers xsi:type="ecore:EClass" name="Button" eSuperTypes="#//VisibleThing #//ActionSource">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.2"/>
       </eAnnotations>
@@ -555,7 +578,7 @@
         <details key="documentation" value="When a connected element changes, a SyncWire will update the other connected element."/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="RunInstanceWire" eSuperTypes="#//WireDestination #//wires/ParameterEdgeDestination #//wires/SingleWire #//NamedElement #//GeneratesElements #//wires/ConditionEdgeDestination">
+    <eClassifiers xsi:type="ecore:EClass" name="RunInstanceWire" eSuperTypes="#//WireDestination #//wires/ParameterEdgeDestination #//NamedElement #//GeneratesElements #//wires/ConditionEdgeDestination #//Action">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="RunWire: a composite wire that contains ExecutionWires/etc"/>
       </eAnnotations>
@@ -824,7 +847,7 @@
         <details key="documentation" value="Joins multiple {@model SplitNode split} execution threads back together. Halts until all threads are complete."/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="OperationCallNode" eSuperTypes="#//ActivityNode #//ExecutionEdgesSource #//ExecutionEdgeDestination #//WireSource #//NamedElement">
+    <eClassifiers xsi:type="ecore:EClass" name="OperationCallNode" eSuperTypes="#//ActivityNode #//ExecutionEdgesSource #//ExecutionEdgeDestination #//WireSource #//NamedElement #//ActionSource">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="added in 0.4"/>
       </eAnnotations>

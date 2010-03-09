@@ -134,6 +134,15 @@ public interface UsersPackage extends EPackage {
 	int USER_STORE__WIRES = ModelPackage.DOMAIN_STORE__WIRES;
 
 	/**
+	 * The feature id for the '<em><b>Actions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_STORE__ACTIONS = ModelPackage.DOMAIN_STORE__ACTIONS;
+
+	/**
 	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -367,6 +376,15 @@ public interface UsersPackage extends EPackage {
 	 * @ordered
 	 */
 	int ROLE__WIRES = ModelPackage.DOMAIN_OBJECT__WIRES;
+
+	/**
+	 * The feature id for the '<em><b>Actions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROLE__ACTIONS = ModelPackage.DOMAIN_OBJECT__ACTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
@@ -649,13 +667,22 @@ public interface UsersPackage extends EPackage {
 	int PERMISSION__WIRES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Actions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PERMISSION__ACTIONS = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
 	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PERMISSION__PARAMETER_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int PERMISSION__PARAMETER_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Extends Edges</b></em>' containment reference list.
@@ -664,7 +691,7 @@ public interface UsersPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERMISSION__EXTENDS_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 5;
+	int PERMISSION__EXTENDS_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Requires Edges</b></em>' containment reference list.
@@ -673,7 +700,7 @@ public interface UsersPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERMISSION__REQUIRES_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 6;
+	int PERMISSION__REQUIRES_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Provides Edges</b></em>' containment reference list.
@@ -682,7 +709,7 @@ public interface UsersPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERMISSION__PROVIDES_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 7;
+	int PERMISSION__PROVIDES_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Constraint Edges</b></em>' containment reference list.
@@ -691,7 +718,7 @@ public interface UsersPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERMISSION__CONSTRAINT_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 8;
+	int PERMISSION__CONSTRAINT_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Condition Edges</b></em>' containment reference list.
@@ -700,7 +727,7 @@ public interface UsersPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERMISSION__CONDITION_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 9;
+	int PERMISSION__CONDITION_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 10;
 
 	/**
 	 * The number of structural features of the '<em>Permission</em>' class.
@@ -709,7 +736,7 @@ public interface UsersPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PERMISSION_FEATURE_COUNT = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 10;
+	int PERMISSION_FEATURE_COUNT = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 11;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.users.impl.UserInstanceImpl <em>User Instance</em>}' class.
@@ -783,6 +810,15 @@ public interface UsersPackage extends EPackage {
 	 * @ordered
 	 */
 	int USER_INSTANCE__WIRES = ModelPackage.DOMAIN_OBJECT_INSTANCE__WIRES;
+
+	/**
+	 * The feature id for the '<em><b>Actions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_INSTANCE__ACTIONS = ModelPackage.DOMAIN_OBJECT_INSTANCE__ACTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.

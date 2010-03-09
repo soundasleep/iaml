@@ -162,13 +162,22 @@ public interface ComponentsPackage extends EPackage {
 	int LOGIN_HANDLER__WIRES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 7;
 
 	/**
+	 * The feature id for the '<em><b>Actions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOGIN_HANDLER__ACTIONS = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 8;
+
+	/**
 	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOGIN_HANDLER__PARAMETER_EDGES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 8;
+	int LOGIN_HANDLER__PARAMETER_EDGES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Extends Edges</b></em>' containment reference list.
@@ -177,7 +186,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOGIN_HANDLER__EXTENDS_EDGES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 9;
+	int LOGIN_HANDLER__EXTENDS_EDGES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Requires Edges</b></em>' containment reference list.
@@ -186,7 +195,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOGIN_HANDLER__REQUIRES_EDGES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 10;
+	int LOGIN_HANDLER__REQUIRES_EDGES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Provides Edges</b></em>' containment reference list.
@@ -195,7 +204,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOGIN_HANDLER__PROVIDES_EDGES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 11;
+	int LOGIN_HANDLER__PROVIDES_EDGES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Constraint Edges</b></em>' containment reference list.
@@ -204,7 +213,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOGIN_HANDLER__CONSTRAINT_EDGES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 12;
+	int LOGIN_HANDLER__CONSTRAINT_EDGES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Condition Edges</b></em>' containment reference list.
@@ -213,7 +222,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOGIN_HANDLER__CONDITION_EDGES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 13;
+	int LOGIN_HANDLER__CONDITION_EDGES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Out Wires</b></em>' reference list.
@@ -222,7 +231,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOGIN_HANDLER__OUT_WIRES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 14;
+	int LOGIN_HANDLER__OUT_WIRES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>In Wires</b></em>' reference list.
@@ -231,7 +240,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOGIN_HANDLER__IN_WIRES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 15;
+	int LOGIN_HANDLER__IN_WIRES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
@@ -240,7 +249,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOGIN_HANDLER__CONDITIONS = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 16;
+	int LOGIN_HANDLER__CONDITIONS = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 17;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -249,7 +258,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOGIN_HANDLER__PROPERTIES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 17;
+	int LOGIN_HANDLER__PROPERTIES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 18;
 
 	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
@@ -258,7 +267,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOGIN_HANDLER__VALUES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 18;
+	int LOGIN_HANDLER__VALUES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 19;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -267,7 +276,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOGIN_HANDLER__TYPE = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 19;
+	int LOGIN_HANDLER__TYPE = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 20;
 
 	/**
 	 * The number of structural features of the '<em>Login Handler</em>' class.
@@ -276,7 +285,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOGIN_HANDLER_FEATURE_COUNT = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 20;
+	int LOGIN_HANDLER_FEATURE_COUNT = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 21;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.components.impl.AccessControlHandlerImpl <em>Access Control Handler</em>}' class.
@@ -388,13 +397,22 @@ public interface ComponentsPackage extends EPackage {
 	int ACCESS_CONTROL_HANDLER__WIRES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 8;
 
 	/**
+	 * The feature id for the '<em><b>Actions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACCESS_CONTROL_HANDLER__ACTIONS = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 9;
+
+	/**
 	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACCESS_CONTROL_HANDLER__PARAMETER_EDGES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 9;
+	int ACCESS_CONTROL_HANDLER__PARAMETER_EDGES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Extends Edges</b></em>' containment reference list.
@@ -403,7 +421,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACCESS_CONTROL_HANDLER__EXTENDS_EDGES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 10;
+	int ACCESS_CONTROL_HANDLER__EXTENDS_EDGES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Requires Edges</b></em>' containment reference list.
@@ -412,7 +430,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACCESS_CONTROL_HANDLER__REQUIRES_EDGES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 11;
+	int ACCESS_CONTROL_HANDLER__REQUIRES_EDGES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Provides Edges</b></em>' containment reference list.
@@ -421,7 +439,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACCESS_CONTROL_HANDLER__PROVIDES_EDGES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 12;
+	int ACCESS_CONTROL_HANDLER__PROVIDES_EDGES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Constraint Edges</b></em>' containment reference list.
@@ -430,7 +448,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACCESS_CONTROL_HANDLER__CONSTRAINT_EDGES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 13;
+	int ACCESS_CONTROL_HANDLER__CONSTRAINT_EDGES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Condition Edges</b></em>' containment reference list.
@@ -439,7 +457,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACCESS_CONTROL_HANDLER__CONDITION_EDGES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 14;
+	int ACCESS_CONTROL_HANDLER__CONDITION_EDGES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Out Wires</b></em>' reference list.
@@ -448,7 +466,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACCESS_CONTROL_HANDLER__OUT_WIRES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 15;
+	int ACCESS_CONTROL_HANDLER__OUT_WIRES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>In Wires</b></em>' reference list.
@@ -457,7 +475,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACCESS_CONTROL_HANDLER__IN_WIRES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 16;
+	int ACCESS_CONTROL_HANDLER__IN_WIRES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 17;
 
 	/**
 	 * The feature id for the '<em><b>Conditions</b></em>' containment reference list.
@@ -466,7 +484,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACCESS_CONTROL_HANDLER__CONDITIONS = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 17;
+	int ACCESS_CONTROL_HANDLER__CONDITIONS = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 18;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -475,7 +493,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACCESS_CONTROL_HANDLER__PROPERTIES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 18;
+	int ACCESS_CONTROL_HANDLER__PROPERTIES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 19;
 
 	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
@@ -484,7 +502,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACCESS_CONTROL_HANDLER__VALUES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 19;
+	int ACCESS_CONTROL_HANDLER__VALUES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 20;
 
 	/**
 	 * The number of structural features of the '<em>Access Control Handler</em>' class.
@@ -493,7 +511,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ACCESS_CONTROL_HANDLER_FEATURE_COUNT = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 20;
+	int ACCESS_CONTROL_HANDLER_FEATURE_COUNT = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 21;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.components.impl.GateImpl <em>Gate</em>}' class.
@@ -560,13 +578,22 @@ public interface ComponentsPackage extends EPackage {
 	int GATE__WIRES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Actions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GATE__ACTIONS = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GATE__PARAMETER_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int GATE__PARAMETER_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Extends Edges</b></em>' containment reference list.
@@ -575,7 +602,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GATE__EXTENDS_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int GATE__EXTENDS_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Requires Edges</b></em>' containment reference list.
@@ -584,7 +611,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GATE__REQUIRES_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int GATE__REQUIRES_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Provides Edges</b></em>' containment reference list.
@@ -593,7 +620,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GATE__PROVIDES_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int GATE__PROVIDES_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Constraint Edges</b></em>' containment reference list.
@@ -602,7 +629,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GATE__CONSTRAINT_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 5;
+	int GATE__CONSTRAINT_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Condition Edges</b></em>' containment reference list.
@@ -611,7 +638,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GATE__CONDITION_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 6;
+	int GATE__CONDITION_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Out Wires</b></em>' reference list.
@@ -620,7 +647,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GATE__OUT_WIRES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 7;
+	int GATE__OUT_WIRES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>In Wires</b></em>' reference list.
@@ -629,7 +656,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GATE__IN_WIRES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 8;
+	int GATE__IN_WIRES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
@@ -638,7 +665,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GATE__GENERATED_ELEMENTS = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 9;
+	int GATE__GENERATED_ELEMENTS = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
@@ -647,7 +674,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GATE__OVERRIDDEN = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 10;
+	int GATE__OVERRIDDEN = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>In Condition Edges</b></em>' reference list.
@@ -656,7 +683,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GATE__IN_CONDITION_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 11;
+	int GATE__IN_CONDITION_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 12;
 
 	/**
 	 * The number of structural features of the '<em>Gate</em>' class.
@@ -665,7 +692,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GATE_FEATURE_COUNT = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 12;
+	int GATE_FEATURE_COUNT = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 13;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.components.impl.EntryGateImpl <em>Entry Gate</em>}' class.
@@ -730,6 +757,15 @@ public interface ComponentsPackage extends EPackage {
 	 * @ordered
 	 */
 	int ENTRY_GATE__WIRES = GATE__WIRES;
+
+	/**
+	 * The feature id for the '<em><b>Actions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTRY_GATE__ACTIONS = GATE__ACTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.
@@ -902,6 +938,15 @@ public interface ComponentsPackage extends EPackage {
 	 * @ordered
 	 */
 	int EXIT_GATE__WIRES = GATE__WIRES;
+
+	/**
+	 * The feature id for the '<em><b>Actions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXIT_GATE__ACTIONS = GATE__ACTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Parameter Edges</b></em>' containment reference list.

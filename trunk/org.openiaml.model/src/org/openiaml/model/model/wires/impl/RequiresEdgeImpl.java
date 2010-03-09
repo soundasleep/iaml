@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.openiaml.model.model.Action;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.ModelPackage;
@@ -49,6 +50,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.wires.impl.RequiresEdgeImpl#getOutConstraintEdges <em>Out Constraint Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.RequiresEdgeImpl#getInConstraintEdges <em>In Constraint Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.RequiresEdgeImpl#getWires <em>Wires</em>}</li>
+ *   <li>{@link org.openiaml.model.model.wires.impl.RequiresEdgeImpl#getActions <em>Actions</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.RequiresEdgeImpl#getParameterEdges <em>Parameter Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.RequiresEdgeImpl#getExtendsEdges <em>Extends Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.RequiresEdgeImpl#getRequiresEdges <em>Requires Edges</em>}</li>
@@ -162,6 +164,16 @@ public class RequiresEdgeImpl extends EObjectImpl implements RequiresEdge {
 	 * @ordered
 	 */
 	protected EList<Wire> wires;
+
+	/**
+	 * The cached value of the '{@link #getActions() <em>Actions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getActions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Action> actions;
 
 	/**
 	 * The cached value of the '{@link #getParameterEdges() <em>Parameter Edges</em>}' containment reference list.
@@ -371,6 +383,18 @@ public class RequiresEdgeImpl extends EObjectImpl implements RequiresEdge {
 			wires = new EObjectContainmentEList<Wire>(Wire.class, this, WiresPackage.REQUIRES_EDGE__WIRES);
 		}
 		return wires;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Action> getActions() {
+		if (actions == null) {
+			actions = new EObjectContainmentEList<Action>(Action.class, this, WiresPackage.REQUIRES_EDGE__ACTIONS);
+		}
+		return actions;
 	}
 
 	/**
@@ -608,6 +632,8 @@ public class RequiresEdgeImpl extends EObjectImpl implements RequiresEdge {
 				return ((InternalEList<?>)getInConstraintEdges()).basicRemove(otherEnd, msgs);
 			case WiresPackage.REQUIRES_EDGE__WIRES:
 				return ((InternalEList<?>)getWires()).basicRemove(otherEnd, msgs);
+			case WiresPackage.REQUIRES_EDGE__ACTIONS:
+				return ((InternalEList<?>)getActions()).basicRemove(otherEnd, msgs);
 			case WiresPackage.REQUIRES_EDGE__PARAMETER_EDGES:
 				return ((InternalEList<?>)getParameterEdges()).basicRemove(otherEnd, msgs);
 			case WiresPackage.REQUIRES_EDGE__EXTENDS_EDGES:
@@ -650,6 +676,8 @@ public class RequiresEdgeImpl extends EObjectImpl implements RequiresEdge {
 				return getInConstraintEdges();
 			case WiresPackage.REQUIRES_EDGE__WIRES:
 				return getWires();
+			case WiresPackage.REQUIRES_EDGE__ACTIONS:
+				return getActions();
 			case WiresPackage.REQUIRES_EDGE__PARAMETER_EDGES:
 				return getParameterEdges();
 			case WiresPackage.REQUIRES_EDGE__EXTENDS_EDGES:
@@ -705,6 +733,10 @@ public class RequiresEdgeImpl extends EObjectImpl implements RequiresEdge {
 			case WiresPackage.REQUIRES_EDGE__WIRES:
 				getWires().clear();
 				getWires().addAll((Collection<? extends Wire>)newValue);
+				return;
+			case WiresPackage.REQUIRES_EDGE__ACTIONS:
+				getActions().clear();
+				getActions().addAll((Collection<? extends Action>)newValue);
 				return;
 			case WiresPackage.REQUIRES_EDGE__PARAMETER_EDGES:
 				getParameterEdges().clear();
@@ -769,6 +801,9 @@ public class RequiresEdgeImpl extends EObjectImpl implements RequiresEdge {
 			case WiresPackage.REQUIRES_EDGE__WIRES:
 				getWires().clear();
 				return;
+			case WiresPackage.REQUIRES_EDGE__ACTIONS:
+				getActions().clear();
+				return;
 			case WiresPackage.REQUIRES_EDGE__PARAMETER_EDGES:
 				getParameterEdges().clear();
 				return;
@@ -819,6 +854,8 @@ public class RequiresEdgeImpl extends EObjectImpl implements RequiresEdge {
 				return inConstraintEdges != null && !inConstraintEdges.isEmpty();
 			case WiresPackage.REQUIRES_EDGE__WIRES:
 				return wires != null && !wires.isEmpty();
+			case WiresPackage.REQUIRES_EDGE__ACTIONS:
+				return actions != null && !actions.isEmpty();
 			case WiresPackage.REQUIRES_EDGE__PARAMETER_EDGES:
 				return parameterEdges != null && !parameterEdges.isEmpty();
 			case WiresPackage.REQUIRES_EDGE__EXTENDS_EDGES:
@@ -861,6 +898,7 @@ public class RequiresEdgeImpl extends EObjectImpl implements RequiresEdge {
 		if (baseClass == ContainsWires.class) {
 			switch (derivedFeatureID) {
 				case WiresPackage.REQUIRES_EDGE__WIRES: return ModelPackage.CONTAINS_WIRES__WIRES;
+				case WiresPackage.REQUIRES_EDGE__ACTIONS: return ModelPackage.CONTAINS_WIRES__ACTIONS;
 				case WiresPackage.REQUIRES_EDGE__PARAMETER_EDGES: return ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES;
 				case WiresPackage.REQUIRES_EDGE__EXTENDS_EDGES: return ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES;
 				case WiresPackage.REQUIRES_EDGE__REQUIRES_EDGES: return ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES;
@@ -895,6 +933,7 @@ public class RequiresEdgeImpl extends EObjectImpl implements RequiresEdge {
 		if (baseClass == ContainsWires.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.CONTAINS_WIRES__WIRES: return WiresPackage.REQUIRES_EDGE__WIRES;
+				case ModelPackage.CONTAINS_WIRES__ACTIONS: return WiresPackage.REQUIRES_EDGE__ACTIONS;
 				case ModelPackage.CONTAINS_WIRES__PARAMETER_EDGES: return WiresPackage.REQUIRES_EDGE__PARAMETER_EDGES;
 				case ModelPackage.CONTAINS_WIRES__EXTENDS_EDGES: return WiresPackage.REQUIRES_EDGE__EXTENDS_EDGES;
 				case ModelPackage.CONTAINS_WIRES__REQUIRES_EDGES: return WiresPackage.REQUIRES_EDGE__REQUIRES_EDGES;

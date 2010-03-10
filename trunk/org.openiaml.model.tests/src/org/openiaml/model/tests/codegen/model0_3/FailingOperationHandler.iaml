@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12109dbdceb.19">
-  <scopes xsi:type="iaml.visual:Frame" id="visual.12109dbdd39.8" name="target page" outWires="wires.12109dbdd39.1a">
-    <wires xsi:type="iaml.wires:NavigateWire" id="wires.12109dbdd39.1a" from="visual.12109dbdd39.8" to="visual.12109dbdd39.37" name="fail"/>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12109dbdd39.8" name="target page" outActions="wires.12109dbdd39.1a">
+    <actions xsi:type="iaml.wires:NavigateWire" id="wires.12109dbdd39.1a" name="fail" from="visual.12109dbdd39.8" to="visual.12109dbdd39.37"/>
     <operations xsi:type="iaml:CompositeOperation" id="model.12109dbdceb.2d" name="an instant failure" inActions="wires.12109dbdd39.6">
       <nodes xsi:type="iaml.operations:StartNode" id="operations.12109dbdd49.1" outExecutions="model.12109dbdceb.66"/>
       <nodes xsi:type="iaml.operations:CancelNode" id="operations.12109dbdd49.3" inExecutions="model.12109dbdceb.66" exceptionText="an expected failure message"/>
@@ -11,5 +11,5 @@
       <actions xsi:type="iaml.wires:RunInstanceWire" id="wires.12109dbdd39.6" name="run" from="model.12109dbdceb.21" to="model.12109dbdceb.2d"/>
     </onAccess>
   </scopes>
-  <scopes xsi:type="iaml.visual:Frame" id="visual.12109dbdd39.37" name="expected failure page" inWires="wires.12109dbdd39.1a"/>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12109dbdd39.37" name="expected failure page" inActions="wires.12109dbdd39.1a"/>
 </iaml:InternetApplication>

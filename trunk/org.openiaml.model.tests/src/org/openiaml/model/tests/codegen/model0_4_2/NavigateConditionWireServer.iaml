@@ -17,9 +17,9 @@
       <executionEdges id="model.126aaf83900.537" name="n" from="operations.126aaf8398c.139" to="operations.126aaf8398c.138"/>
       <executionEdges id="model.126aaf83900.538" from="operations.126aaf8398c.136" to="operations.126aaf8398c.139"/>
     </conditions>
-    <onAccess id="model.126aaf83900.4f5" outWires="wires.126aaf8398c.137">
-      <wires xsi:type="iaml.wires:NavigateWire" id="wires.126aaf8398c.137" from="model.126aaf83900.4f5" to="visual.126aaf8397d.270" name="navigate" inConditionEdges="wires.126aaf8398c.13d"/>
+    <onAccess id="model.126aaf83900.4f5" outActions="wires.126aaf8398c.137">
+      <actions xsi:type="iaml.wires:NavigateWire" id="wires.126aaf8398c.137" name="navigate" inConditionEdges="wires.126aaf8398c.13d" from="model.126aaf83900.4f5" to="visual.126aaf8397d.270"/>
     </onAccess>
   </scopes>
-  <scopes xsi:type="iaml.visual:Frame" id="visual.126aaf8397d.270" name="Page 2" inWires="wires.126aaf8398c.137"/>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.126aaf8397d.270" name="Page 2" inActions="wires.126aaf8398c.137"/>
 </iaml:InternetApplication>

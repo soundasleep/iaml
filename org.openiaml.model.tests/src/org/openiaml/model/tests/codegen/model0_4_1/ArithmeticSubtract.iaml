@@ -21,7 +21,7 @@
         <executionEdges id="model.12542c563bb.e8" from="model.12542c563bb.dc" to="operations.12542c56428.7"/>
       </operations>
       <onClick id="model.12542c563bb.80" outActions="wires.12542c56428.3">
-        <actions xsi:type="iaml.wires:RunInstanceWire" id="wires.12542c56428.3" name="run" from="model.12542c563bb.80" to="model.12542c563bb.81"/>
+        <actions xsi:type="iaml.wires:RunAction" id="wires.12542c56428.3" name="run" from="model.12542c563bb.80" to="model.12542c563bb.81"/>
       </onClick>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.12542c56418.1f" name="result">

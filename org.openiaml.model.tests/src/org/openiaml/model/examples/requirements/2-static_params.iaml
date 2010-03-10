@@ -4,7 +4,7 @@
     <children xsi:type="iaml.visual:InputTextField" id="visual.1203bbadbb8.879" name="value">
       <operations xsi:type="iaml:CompositeOperation" id="model.1203bbadb5b.53d" name="init" inActions="wires.1203bbadbb8.152"/>
       <onAccess id="model.1203bbadb5b.53c" outActions="wires.1203bbadbb8.152">
-        <actions xsi:type="iaml.wires:RunInstanceWire" inParameterEdges="wires.1203bbadbb8.153" id="wires.1203bbadbb8.152" name="run" from="model.1203bbadb5b.53c" to="model.1203bbadb5b.53d"/>
+        <actions xsi:type="iaml.wires:RunAction" inParameterEdges="wires.1203bbadbb8.153" id="wires.1203bbadbb8.152" name="run" from="model.1203bbadb5b.53c" to="model.1203bbadb5b.53d"/>
       </onAccess>
       <values id="model.1203bbadb5b.53e" name="a static value" outParameterEdges="wires.1203bbadbb8.153" value="value goes here">
         <parameterEdges id="wires.1203bbadbb8.153" from="model.1203bbadb5b.53e" to="wires.1203bbadbb8.152"/>

@@ -8,9 +8,9 @@
       <nodes xsi:type="iaml.operations:CancelNode" id="operations.121370d7b50.1b" inExecutions="model.121370d7af2.82" exceptionText="an expected failure message"/>
       <executionEdges id="model.121370d7af2.82" from="operations.121370d7b50.19" to="operations.121370d7b50.1b"/>
     </operations>
-    <actions xsi:type="iaml.wires:NavigateWire" id="wires.121370d7b40.23" name="fail" from="scopes.121370d7b50.1" to="visual.12109dbdd39.37"/>
+    <actions xsi:type="iaml.wires:NavigateAction" id="wires.121370d7b40.23" name="fail" from="scopes.121370d7b50.1" to="visual.12109dbdd39.37"/>
     <onAccess id="model.121370d7af2.29" outActions="wires.121370d7b40.11">
-      <actions xsi:type="iaml.wires:RunInstanceWire" id="wires.121370d7b40.11" name="run" from="model.121370d7af2.29" to="model.121370d7af2.33"/>
+      <actions xsi:type="iaml.wires:RunAction" id="wires.121370d7b40.11" name="run" from="model.121370d7af2.29" to="model.121370d7af2.33"/>
     </onAccess>
     <scopes xsi:type="iaml.visual:Frame" id="visual.121370d7b40.18" name="session page"/>
   </scopes>

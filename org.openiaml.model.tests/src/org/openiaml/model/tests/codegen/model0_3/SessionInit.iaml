@@ -5,7 +5,7 @@
       <parameterEdges id="wires.120a748ec72.9d" from="model.120a748ea9e.103" to="wires.120a748ec72.9b"/>
     </values>
     <onInit id="model.120a748ea9e.d9" outActions="wires.120a748ec72.9b">
-      <actions xsi:type="iaml.wires:RunInstanceWire" inParameterEdges="wires.120a748ec72.9d" id="wires.120a748ec72.9b" name="run on init" from="model.120a748ea9e.d9" to="model.120a748ea9e.ec"/>
+      <actions xsi:type="iaml.wires:RunAction" inParameterEdges="wires.120a748ec72.9d" id="wires.120a748ec72.9b" name="run on init" from="model.120a748ea9e.d9" to="model.120a748ea9e.ec"/>
     </onInit>
     <scopes xsi:type="iaml.visual:Frame" id="visual.120a748ebb7.3bb" name="container">
       <children xsi:type="iaml.visual:InputTextField" id="visual.120a748ebb7.3c5" name="value">

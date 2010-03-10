@@ -28,7 +28,7 @@
       <values id="model.12311eb1e33.34" name="value3" outFlows="model.12311eb1e33.39" value="baz"/>
     </operations>
     <onAccess id="model.12311eb1e33.140" outActions="wires.12311ff15e6.4">
-      <actions xsi:type="iaml.wires:RunInstanceWire" id="wires.12311ff15e6.4" name="run" from="model.12311eb1e33.140" to="model.12311dd5ff7.c"/>
+      <actions xsi:type="iaml.wires:RunAction" id="wires.12311ff15e6.4" name="run" from="model.12311eb1e33.140" to="model.12311dd5ff7.c"/>
     </onAccess>
     <children xsi:type="iaml.visual:InputTextField" id="visual.12311dd6084.8a" name="field1">
       <properties id="model.12311dd5ff7.167" name="fieldValue" inFlows="model.12311e69386.28"/>

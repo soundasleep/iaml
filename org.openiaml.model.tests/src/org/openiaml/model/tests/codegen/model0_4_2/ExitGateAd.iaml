@@ -15,7 +15,7 @@
       <executionEdges id="model.126b0cb5dec.69" from="operations.126b0cb5e69.12" to="operations.126b0cb5e69.15"/>
     </conditions>
     <exitGate id="components.126b0cb5e69.5" name="View Ads Exit Gate" inConditionEdges="wires.126b0cb5e5a.17" outActions="wires.126b0cb5e5a.e" inActions="wires.126b0cb5e5a.10e">
-      <actions xsi:type="iaml.wires:NavigateWire" id="wires.126b0cb5e5a.e" name="view ad" from="components.126b0cb5e69.5" to="visual.126b0cb5e5a.4a"/>
+      <actions xsi:type="iaml.wires:NavigateAction" id="wires.126b0cb5e5a.e" name="view ad" from="components.126b0cb5e69.5" to="visual.126b0cb5e5a.4a"/>
     </exitGate>
     <properties id="model.126b0cb5dec.3e" name="ad viewed?" outFlows="model.126b0cb5dec.8a" inFlows="model.126b0cb5dec.182" defaultValue="false"/>
     <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.27" name="Page 1"/>
@@ -33,10 +33,10 @@
         <values id="model.126b0cb5dec.178" name="true" outFlows="model.126b0cb5dec.180" value="true"/>
       </operations>
       <onAccess id="model.126b0cb5dec.c4" outActions="wires.126b0cb5e5a.4b">
-        <actions xsi:type="iaml.wires:RunInstanceWire" id="wires.126b0cb5e5a.4b" name="run" from="model.126b0cb5dec.c4" to="model.126b0cb5dec.d8"/>
+        <actions xsi:type="iaml.wires:RunAction" id="wires.126b0cb5e5a.4b" name="run" from="model.126b0cb5dec.c4" to="model.126b0cb5dec.d8"/>
       </onAccess>
       <children xsi:type="iaml.visual:Button" id="visual.126b0cb5e5a.2d5" name="Resume" outActions="wires.126b0cb5e5a.10e">
-        <actions xsi:type="iaml.wires:NavigateWire" id="wires.126b0cb5e5a.10e" name="onClick" from="visual.126b0cb5e5a.2d5" to="components.126b0cb5e69.5"/>
+        <actions xsi:type="iaml.wires:NavigateAction" id="wires.126b0cb5e5a.10e" name="onClick" from="visual.126b0cb5e5a.2d5" to="components.126b0cb5e69.5"/>
       </children>
     </scopes>
   </scopes>

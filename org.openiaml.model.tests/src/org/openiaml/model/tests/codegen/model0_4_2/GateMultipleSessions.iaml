@@ -4,20 +4,20 @@
   <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.40c" name="To Enter the Outer Scope" inActions="wires.126b0cb5e5a.15c"/>
   <scopes xsi:type="iaml.scopes:Session" id="scopes.1268cdc3e6e.17" name="Session 1">
     <entryGate id="components.126b0cb5e69.e4" name="Entry Gate" outActions="wires.126b0cb5e5a.15c">
-      <actions xsi:type="iaml.wires:NavigateWire" id="wires.126b0cb5e5a.15c" name="first" from="components.126b0cb5e69.e4" to="visual.126b0cb5e5a.40c"/>
+      <actions xsi:type="iaml.wires:NavigateAction" id="wires.126b0cb5e5a.15c" name="first" from="components.126b0cb5e69.e4" to="visual.126b0cb5e5a.40c"/>
     </entryGate>
     <exitGate id="components.126b0cb5e69.bb" name="Exit Gate" outActions="wires.126b0cb5e5a.147">
-      <actions xsi:type="iaml.wires:NavigateWire" id="wires.126b0cb5e5a.147" name="last" from="components.126b0cb5e69.bb" to="visual.126b0cb5e5a.3eb"/>
+      <actions xsi:type="iaml.wires:NavigateAction" id="wires.126b0cb5e5a.147" name="last" from="components.126b0cb5e69.bb" to="visual.126b0cb5e5a.3eb"/>
     </exitGate>
     <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.3b3" name="To Enter the Inner Scope" inActions="wires.126b0cb5e5a.130"/>
     <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.3eb" name="To Exit the Outer Scope" inActions="wires.126b0cb5e5a.147"/>
     <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.434" name="Unrelated Outer Page"/>
     <scopes xsi:type="iaml.scopes:Session" id="scopes.126b0cb5e69.db" name="Inner Scope">
       <entryGate id="components.126b0cb5e69.8d" name="Entry Gate" outActions="wires.126b0cb5e5a.130">
-        <actions xsi:type="iaml.wires:NavigateWire" id="wires.126b0cb5e5a.130" name="first" from="components.126b0cb5e69.8d" to="visual.126b0cb5e5a.3b3"/>
+        <actions xsi:type="iaml.wires:NavigateAction" id="wires.126b0cb5e5a.130" name="first" from="components.126b0cb5e69.8d" to="visual.126b0cb5e5a.3b3"/>
       </entryGate>
       <exitGate id="components.126b0cb5e69.8e" name="Exit Gate" outActions="wires.126b0cb5e5a.125">
-        <actions xsi:type="iaml.wires:NavigateWire" id="wires.126b0cb5e5a.125" name="last" from="components.126b0cb5e69.8e" to="visual.126b0cb5e5a.39a"/>
+        <actions xsi:type="iaml.wires:NavigateAction" id="wires.126b0cb5e5a.125" name="last" from="components.126b0cb5e69.8e" to="visual.126b0cb5e5a.39a"/>
       </exitGate>
       <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.388" name="Inner Page"/>
       <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.39a" name="Out Page" inActions="wires.126b0cb5e5a.125"/>

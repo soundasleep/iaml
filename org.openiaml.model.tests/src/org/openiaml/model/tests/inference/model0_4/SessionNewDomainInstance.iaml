@@ -15,7 +15,7 @@
     <scopes xsi:type="iaml.visual:Frame" id="visual.1230bdbafce.1bb" name="container">
       <children xsi:type="iaml.visual:InputForm" inWires="wires.1230bdbb01c.1d4" id="visual.1230bdbafce.203" name="edit current user"/>
       <children xsi:type="iaml.visual:Button" id="visual.1230bdbafce.226" name="make a new user" outActions="wires.1230bdbb01c.1f7">
-        <actions xsi:type="iaml.wires:RunInstanceWire" id="wires.1230bdbb01c.1f7" name="onClick" from="visual.1230bdbafce.226" to="model.1230bdbae76.2d4"/>
+        <actions xsi:type="iaml.wires:RunAction" id="wires.1230bdbb01c.1f7" name="onClick" from="visual.1230bdbafce.226" to="model.1230bdbae76.2d4"/>
       </children>
     </scopes>
   </scopes>

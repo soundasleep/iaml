@@ -3,7 +3,7 @@
   <scopes xsi:type="iaml.visual:Frame" id="visual.1227e088ab6.15" name="container">
     <operations xsi:type="iaml:CompositeOperation" id="model.1227e0889db.4e" name="incoming" inActions="wires.1227e088ab6.1a"/>
     <onAccess id="model.1227e0889db.4f" outActions="wires.1227e088ab6.1b">
-      <actions xsi:type="iaml.wires:RunInstanceWire" id="wires.1227e088ab6.1b" name="run in" from="model.1227e0889db.4f" to="model.1227e0889db.5c"/>
+      <actions xsi:type="iaml.wires:RunAction" id="wires.1227e088ab6.1b" name="run in" from="model.1227e0889db.4f" to="model.1227e0889db.5c"/>
     </onAccess>
     <children xsi:type="iaml.visual:InputTextField" isGenerated="true" id="visual.1227e088ab6.1c" name="target" generatedElements="model.1227e0889db.5b model.1227e0889db.5c model.1227e0889db.5d model.1227e0889db.5e model.1227e0889db.5f">
       <operations xsi:type="iaml:CompositeOperation" generatedBy="visual.1227e088ab6.1c" isGenerated="true" id="model.1227e0889db.5b" name="init" generatedElements="model.1227e0889db.66 model.1227e0889db.67 operations.1227e088ac6.b operations.1227e088ac6.c model.1227e0889db.68 model.1227e0889db.69 model.1227e0889db.6a model.1227e0889db.6b">
@@ -27,7 +27,7 @@
         <executionEdges generatedBy="model.1227e0889db.5c" isGenerated="true" id="model.1227e0889db.65" from="model.1227e0889db.61" to="operations.1227e088ac6.a"/>
       </operations>
       <onEdit generatedBy="visual.1227e088ab6.1c" isGenerated="true" id="model.1227e0889db.5e" outActions="wires.1227e088ab6.1a">
-        <actions xsi:type="iaml.wires:RunInstanceWire" id="wires.1227e088ab6.1a" name="run out" from="model.1227e0889db.5e" to="model.1227e0889db.4e"/>
+        <actions xsi:type="iaml.wires:RunAction" id="wires.1227e088ab6.1a" name="run out" from="model.1227e0889db.5e" to="model.1227e0889db.4e"/>
       </onEdit>
       <onAccess generatedBy="visual.1227e088ab6.1c" isGenerated="true" id="model.1227e0889db.5d"/>
       <properties generatedBy="visual.1227e088ab6.1c" isGenerated="true" id="model.1227e0889db.5f" name="fieldValue" inFlows="model.1227e0889db.63 model.1227e0889db.69"/>

@@ -5,7 +5,7 @@
   </operations>
   <scopes xsi:type="iaml.visual:Frame" id="visual.123314d169a.30" name="Home">
     <onAccess id="model.123314d162d.7d" outActions="wires.123314d16aa.17">
-      <actions xsi:type="iaml.wires:RunInstanceWire" id="wires.123314d16aa.17" name="run" from="model.123314d162d.7d">
+      <actions xsi:type="iaml.wires:RunAction" id="wires.123314d16aa.17" name="run" from="model.123314d162d.7d">
         <to xsi:type="iaml:CompositeOperation" href="SeparatedInstances.iaml_operation#model.123314d162d.77"/>
       </actions>
     </onAccess>

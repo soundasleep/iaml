@@ -3,7 +3,7 @@
   <operations xsi:type="iaml:PrimitiveOperation" id="model.11d889e30c6.2cf" name="op" inActions="wires.11d889e3162.6a"/>
   <scopes xsi:type="iaml.visual:Frame" id="visual.11d889e3114.251" name="page">
     <onInit id="model.11d889e30c6.2da" outActions="wires.11d889e3162.6a">
-      <actions xsi:type="iaml.wires:RunInstanceWire" id="wires.11d889e3162.6a" name="run2" from="model.11d889e30c6.2da" to="model.11d889e30c6.2cf"/>
+      <actions xsi:type="iaml.wires:RunAction" id="wires.11d889e3162.6a" name="run2" from="model.11d889e30c6.2da" to="model.11d889e30c6.2cf"/>
     </onInit>
   </scopes>
 </iaml:InternetApplication>

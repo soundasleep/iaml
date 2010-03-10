@@ -21,7 +21,10 @@ import java.util.Map;
 import javax.xml.xpath.XPathExpressionException;
 
 import junit.framework.AssertionFailedError;
+import net.sourceforge.jwebunit.api.ITestingEngine;
+import net.sourceforge.jwebunit.htmlunit.HtmlUnitTestingEngineImpl;
 import net.sourceforge.jwebunit.junit.WebTestCase;
+import net.sourceforge.jwebunit.junit.WebTester;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
@@ -42,6 +45,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
+import com.gargoylesoftware.htmlunit.WebClient;
+
 /**
  * The JET/Junit test framework now manages everything for you. It will
  * automatically create empty projects to be compiled to.
@@ -51,6 +57,40 @@ import org.w3c.dom.Node;
  *
  */
 public abstract class ModelTestCase extends WebTestCase implements IXpath {
+
+	public ModelTestCase() {
+		// call super with a custom tester
+		super(getCustomTester());
+	}
+
+	/**
+	 * @return
+	 */
+	private static WebTester getCustomTester() {
+		return new WebTester() {
+
+			/* (non-Javadoc)
+			 * @see net.sourceforge.jwebunit.junit.WebTester#initializeDialog()
+			 */
+			@Override
+			protected ITestingEngine initializeDialog() {
+				HtmlUnitTestingEngineImpl engine = new HtmlUnitTestingEngineImpl() {
+					/* (non-Javadoc)
+					 * @see net.sourceforge.jwebunit.htmlunit.HtmlUnitTestingEngineImpl#createWebClient()
+					 */
+					@Override
+					protected WebClient createWebClient() {
+						WebClient wc = super.createWebClient();
+						wc.setAjaxController(new NicelyResynchronizingAjaxController());
+						return wc;
+					}
+					
+				};
+				return engine;
+			}
+			
+		};
+	}
 
 	private EclipseProject project = new EclipseProject(getProjectName());
 	

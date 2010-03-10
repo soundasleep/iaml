@@ -9,6 +9,9 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.notation.View;
+import org.openiaml.model.model.Action;
+import org.openiaml.model.model.ActionDestination;
+import org.openiaml.model.model.ActionSource;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DataFlowEdgeDestination;
 import org.openiaml.model.model.DataFlowEdgesSource;
@@ -64,6 +67,16 @@ public class GetShortcuts {
 				// get all incoming edges
 				elements.addAll(getAllShortcutsFromWires(doneAlready, edges, view, e,
 						((WireDestination) e).getInWires(), registry, updater));
+			}
+			if (e instanceof ActionSource) {
+				// get all incoming edges
+				elements.addAll(getAllShortcutsFromActions(doneAlready, edges, view, e,
+						((ActionSource) e).getOutActions(), registry, updater));
+			}
+			if (e instanceof ActionDestination) {
+				// get all incoming edges
+				elements.addAll(getAllShortcutsFromActions(doneAlready, edges, view, e,
+						((ActionDestination) e).getInActions(), registry, updater));
 			}
 			if (e instanceof ExecutionEdgesSource) {
 				// get all incoming edges
@@ -206,6 +219,67 @@ public class GetShortcuts {
 			} 
 			
 			// ParameterEdges are now done in #getAllShortcutsFromParameterEdges()
+		}
+	
+		return result;
+	}
+	
+	private static List<Action> getAllShortcutsFromActions(
+			List<EObject> doneAlready, 
+			List<EObject> edges, 
+			View view, 
+			EObject source,
+			List<Action> outEdges,
+			IVisualIDRegistryInstance registry,
+			IDiagramUpdater updater) {
+		List result = new LinkedList();
+		
+		edges.addAll(outEdges);
+	
+		// get all nodes at the start and end of the edge
+		// that are not the original object source
+		// NOTE: model-specific
+		for (Action wire : outEdges) {
+			// only look into these edges if we can actually render them...
+			if (registry.getLinkWithClassVisualID(wire) != -1) {
+				updater.considerElementForShortcut(wire.getFrom(), wire, view, source, doneAlready, result, edges);
+				updater.considerElementForShortcut(wire.getTo(), wire, view, source, doneAlready, result, edges);
+			}
+			
+			// additional special logic: if we have a WireDestination, get all of the incoming edges
+			// that are RunInstanceWires, and render these as shortcut elements too (i.e. parameters)
+			// (this covers SelectWires, etc...: see Issue 69)
+			if (wire instanceof WireDestination) {
+				WireDestination run = (WireDestination) wire;
+				
+				if (run instanceof ParameterEdgesSource) {
+					// specifically, if this wire is also a destination of parameters, follow these up
+					ParameterEdgesSource prun =
+						(ParameterEdgesSource) run;
+					
+					result.addAll(getAllShortcutsFromParameterEdges(doneAlready, edges, view, wire, prun.getOutParameterEdges(), registry, updater)); 
+				}
+	
+				if (run instanceof ParameterEdgeDestination) {
+					// specifically, if this wire is also a source of parameters, follow these up
+					ParameterEdgeDestination prun =
+						(ParameterEdgeDestination) run;
+					
+					result.addAll(getAllShortcutsFromParameterEdges(doneAlready, edges, view, wire, prun.getInParameterEdges(), registry, updater)); 
+				}
+				
+				WireDestination e = run;
+				if (e instanceof ConditionEdgesSource) {
+					// get all incoming edges
+					result.addAll(getAllShortcutsFromConditionEdges(doneAlready, edges, view, e,
+							((ConditionEdgesSource) e).getOutConditionEdges(), registry, updater));
+				}
+				if (e instanceof ConditionEdgeDestination) {
+					// get all incoming edges
+					result.addAll(getAllShortcutsFromConditionEdges(doneAlready, edges, view, e,
+							((ConditionEdgeDestination) e).getInConditionEdges(), registry, updater));
+				}
+			} 
 		}
 	
 		return result;
@@ -476,6 +550,9 @@ public class GetShortcuts {
 		if (relationship instanceof Wire) {
 			return ((Wire) relationship).getFrom();
 		}
+		if (relationship instanceof Action) {
+			return ((Action) relationship).getFrom();
+		}
 		if (relationship instanceof ExecutionEdge) {
 			return ((ExecutionEdge) relationship).getFrom();
 		}
@@ -532,6 +609,9 @@ public class GetShortcuts {
 
 		if (relationship instanceof Wire) {
 			return ((Wire) relationship).getTo();
+		}
+		if (relationship instanceof Action) {
+			return ((Action) relationship).getTo();
 		}
 		if (relationship instanceof ExecutionEdge) {
 			return ((ExecutionEdge) relationship).getTo();

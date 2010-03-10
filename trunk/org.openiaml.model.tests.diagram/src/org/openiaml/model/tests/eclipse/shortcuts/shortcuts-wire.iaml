@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.126f3455fc3.1">
-  <operations xsi:type="iaml:PrimitiveOperation" inWires="wires.126f3456040.9" id="model.126f3455fc3.d" name="target"/>
+  <operations xsi:type="iaml:PrimitiveOperation" id="model.126f3455fc3.d" name="target" inActions="wires.126f3456040.9"/>
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home" outWires="wires.126f3456040.1">
     <wires xsi:type="iaml.wires:SyncWire" id="wires.126f3456040.1" from="index" to="visual.126f3456040.4" name="sync">
-      <operations xsi:type="iaml:PrimitiveOperation" id="model.126f3455fc3.14" name="random" outWires="wires.126f3456040.9">
-        <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.126f3456040.9" from="model.126f3455fc3.14" to="model.126f3455fc3.d" name="run"/>
+      <operations xsi:type="iaml:PrimitiveOperation" id="model.126f3455fc3.14" name="random" outActions="wires.126f3456040.9">
+        <actions xsi:type="iaml.wires:RunInstanceWire" id="wires.126f3456040.9" name="run" from="model.126f3455fc3.14" to="model.126f3455fc3.d"/>
       </operations>
     </wires>
   </scopes>

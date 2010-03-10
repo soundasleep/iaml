@@ -54,10 +54,10 @@ rule "Run instance wire from edit to update (onEdit)"
 		event : EventTrigger( source.onEdit == event ) 
 		operation : Operation( eContainer == target, name=="update" )
 		
-		not (RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw ))
+		not (RunAction( from == event, to == operation, name == "run", eContainer == sw ))
 		
 	then
-		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
+		RunAction rw = handler.generatedRunAction(sw, sw, event, operation);
 		handler.setName(rw, "run");
 		queue.add(rw, drools);
 
@@ -73,7 +73,7 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 		event : EventTrigger( source.onEdit == event )
 		operation : Operation( eContainer == target, name=="update" )
 		field : Property( eContainer == source, name=="fieldValue" )
-		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
+		wire : RunAction( from == event, to == operation, name == "run", eContainer == sw )
 		
 		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
 		
@@ -96,10 +96,10 @@ rule "Run instance wire from source.access to source.init, when we have a value 
 		operation : Operation( eContainer == source, name=="init" )
 		field : Property( eContainer == target, name=="fieldValue" )
 		
-		not (RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw ))
+		not (RunAction( from == event, to == operation, name == "run", eContainer == sw ))
 		
 	then
-		RunInstanceWire rw = handler.generatedRunInstanceWire(sw, sw, event, operation);
+		RunAction rw = handler.generatedRunAction(sw, sw, event, operation);
 		handler.setName(rw, "run");
 		queue.add(rw, drools);
 
@@ -116,7 +116,7 @@ rule "Run instance wire from source.access to source.init, adding ConditionEdge 
 		operation : Operation( eContainer == source, name=="init" )
 		field : Property( eContainer == target, name=="fieldValue" )
 		
-		run : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
+		run : RunAction( from == event, to == operation, name == "run", eContainer == sw )
 		
 		# condition check
 		condition : CompositeCondition ( eContainer == target, name == "fieldValue is set" )
@@ -140,7 +140,7 @@ rule "Connect parameter wire to: run instance wire from source.access to source.
 		event : EventTrigger( source.onAccess == event )
 		operation : Operation( eContainer == source, name=="init" )
 		field : Property( eContainer == target, name=="fieldValue" )
-		wire : RunInstanceWire( from == event, to == operation, name == "run", eContainer == sw )
+		wire : RunAction( from == event, to == operation, name == "run", eContainer == sw )
 		
 		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
 		
@@ -261,13 +261,13 @@ rule "Connect Session.init to incoming SyncWires (contained in Frames) (onEdit 2
 		event : EventTrigger( sourceElement.onEdit == event ) 
 		operation : Operation( eContainer == targetElement, name == "update" )
 
-		rw : RunInstanceWire( eContainer == sw2, from == event, to == operation, name == "run" )
+		rw : RunAction( eContainer == sw2, from == event, to == operation, name == "run" )
 		inite : EventTrigger (eContainer == session, session.onInit == inite )
 		
-		not (RunInstanceWire( eContainer == sw2, from == inite, to == operation, name == "run" ))
+		not (RunAction( eContainer == sw2, from == inite, to == operation, name == "run" ))
 		
 	then
-		RunInstanceWire rw2 = handler.generatedRunInstanceWire(sw2, sw2, inite, operation);
+		RunAction rw2 = handler.generatedRunAction(sw2, sw2, inite, operation);
 		handler.setName(rw2, "run");
 		queue.add(rw2, drools);
 		
@@ -289,13 +289,13 @@ rule "Connect Session.init to incoming SyncWires (contained in Frames) (onEdit 3
 		event : EventTrigger( sourceElement.onEdit == event ) 
 		operation : Operation( eContainer == targetElement, name == "update" )
 
-		rw : RunInstanceWire( eContainer == sw2, from == event, to == operation, name == "run" )
+		rw : RunAction( eContainer == sw2, from == event, to == operation, name == "run" )
 		inite : EventTrigger (eContainer == session, session.onInit == inite )
 		
-		not (RunInstanceWire( eContainer == sw2, from == inite, to == operation, name == "run" ))
+		not (RunAction( eContainer == sw2, from == inite, to == operation, name == "run" ))
 		
 	then
-		RunInstanceWire rw2 = handler.generatedRunInstanceWire(sw2, sw2, inite, operation);
+		RunAction rw2 = handler.generatedRunAction(sw2, sw2, inite, operation);
 		handler.setName(rw2, "run");
 		queue.add(rw2, drools);
 		
@@ -317,10 +317,10 @@ rule "Connect parameter for Session.init to incoming SyncWires (contained in Fra
 		event : EventTrigger( sourceElement.onEdit == event ) 
 		operation : Operation( eContainer == targetElement, name == "update" )
 
-		rw : RunInstanceWire( eContainer == sw2, from == event, to == operation, name == "run" )
+		rw : RunAction( eContainer == sw2, from == event, to == operation, name == "run" )
 		inite : EventTrigger (eContainer == session, session.onInit == inite )
 
-		initrw : RunInstanceWire( eContainer == sw2, from == inite, to == operation, name == "run" )
+		initrw : RunAction( eContainer == sw2, from == inite, to == operation, name == "run" )
 		
 		field : Property( eContainer == sourceElement, name=="fieldValue" )
 		pw : ParameterEdge( eContainer == sw2, from == field, to == rw ) 
@@ -348,10 +348,10 @@ rule "Connect parameter for Session.init to incoming SyncWires (contained in Fra
 		event : EventTrigger( sourceElement.onEdit == event ) 
 		operation : Operation( eContainer == targetElement, name == "update" )
 
-		rw : RunInstanceWire( eContainer == sw2, from == event, to == operation, name == "run" )
+		rw : RunAction( eContainer == sw2, from == event, to == operation, name == "run" )
 		inite : EventTrigger (eContainer == session, session.onInit == inite )
 
-		initrw : RunInstanceWire( eContainer == sw2, from == inite, to == operation, name == "run" )
+		initrw : RunAction( eContainer == sw2, from == inite, to == operation, name == "run" )
 		
 		field : Property( eContainer == sourceElement, name=="fieldValue" )
 		pw : ParameterEdge( eContainer == sw2, from == field, to == rw ) 
@@ -435,7 +435,7 @@ rule "A SyncWire between Attributes selected from a NewInstanceWire need to chec
 		# text field access/init events
 		access : EventTrigger ( tf.onAccess == access ) 
 		initOp : Operation ( eContainer == tf, name == "init" )
-		run : RunInstanceWire ( from == access, to == initOp )
+		run : RunAction ( from == access, to == initOp )
 		
 		attributeValue : Property ( eContainer == attribute, name == "fieldValue" )
 		

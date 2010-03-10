@@ -57,7 +57,7 @@
 «ENDDEFINE»
 
 /**
- * If buttons have a NavigateWire or RunInstanceWire called onClick,
+ * If buttons have a NavigateAction or RunAction called onClick,
  * execute them as if there was an EventTrigger that existed.
  */
 «DEFINE implicitButtonClickEvents(model::visual::Frame currentFrame) FOR model::Wire»
@@ -67,13 +67,13 @@
 	// unknown action '«this»'
 «ENDDEFINE»
 
-«DEFINE implicitButtonClickEvents(model::visual::Frame currentFrame) FOR model::wires::NavigateWire»
+«DEFINE implicitButtonClickEvents(model::visual::Frame currentFrame) FOR model::wires::NavigateAction»
 	«IF (name == "click" || name == "onClick")»
 		/* expanding implicit trigger (navigate) */
 		«EXPAND template::operations::OperationCall::callOperation(false, false, currentFrame) FOR this»
 	«ENDIF» 
 «ENDDEFINE»
-«DEFINE implicitButtonClickEvents(model::visual::Frame currentFrame) FOR model::wires::RunInstanceWire»
+«DEFINE implicitButtonClickEvents(model::visual::Frame currentFrame) FOR model::wires::RunAction»
 	«IF (name == "click" || name == "onClick")»
 		/* expanding implicit trigger (run) */
 		«EXPAND template::operations::OperationCall::callOperation(false, false, currentFrame) FOR this»

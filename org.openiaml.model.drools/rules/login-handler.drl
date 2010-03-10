@@ -56,13 +56,13 @@ rule "Instruct 'logout' page to follow to the actual logout destination if set"
 		logout : Frame (eContainer == scope, name=="logout" )
 		
 		destination : Frame ( this != logout )
-		navigate : NavigateWire ( from == login_handler, to == destination, name == "logout")
+		navigate : NavigateAction ( from == login_handler, to == destination, name == "logout")
 
 		access : EventTrigger ( eContainer == logout, logout.onAccess == access )
-		not (NavigateWire ( from == access, to == destination ))
+		not (NavigateAction ( from == access, to == destination ))
 	
 	then
-		NavigateWire wire = handler.generatedNavigateWire(login_handler, logout, access, destination);
+		NavigateAction wire = handler.generatedNavigateAction(login_handler, logout, access, destination);
 		handler.setName(wire, "redirect to intended logout page");
 		queue.add(wire, drools);
 
@@ -128,12 +128,12 @@ rule "Connect 'access' event to 'check' operations"
 		page : Frame( eContainer == scope )
 		access : EventTrigger( page.onAccess == access, eContainer == page )
 		check : CompositeOperation( name == "check key" || name == "check instance", eContainer == scope )
-		not (RunInstanceWire( from == access, to == check ))
+		not (RunAction( from == access, to == check ))
 		
 	then
-		RunInstanceWire wire = handler.generatedRunInstanceWire(scope, page, access, check);
+		RunAction wire = handler.generatedRunAction(scope, page, access, check);
 		handler.setName(wire, "run");
-		handler.setValue(wire, WiresPackage.eINSTANCE.getRunInstanceWire_Priority(), 100); // high priority
+		handler.setValue(wire, WiresPackage.eINSTANCE.getRunAction_Priority(), 100); // high priority
 		queue.add(wire, drools);	
 	
 end
@@ -149,7 +149,7 @@ rule "Connect 'login key' parameter to 'check key' operation run wire"
 		value : Property( )
 		mySetWire : SetWire( from == login_handler, to == value, name == "set" )
 		
-		wire : RunInstanceWire( from == access, to == check )
+		wire : RunAction( from == access, to == check )
 		not (ParameterEdge( from == value, to == wire ))
 		
 	then
@@ -166,10 +166,10 @@ rule "Connect 'fail' wire from 'check key' or 'check instance' operation to Logi
 		login_handler : LoginHandler( eContainer == scope )
 		login : Frame (eContainer == container, name=="login" )
 		check : CompositeOperation( name == "check key" || name == "check instance", eContainer == scope )
-		not (NavigateWire( from == check, to == login, name == "fail") )
+		not (NavigateAction( from == check, to == login, name == "fail") )
 	
 	then
-		NavigateWire fail = handler.generatedNavigateWire(scope, scope, check, login);
+		NavigateAction fail = handler.generatedNavigateAction(scope, scope, check, login);
 		handler.setName(fail, "fail");
 		queue.add(fail, drools);
 		
@@ -273,8 +273,8 @@ rule "Create contents of 'check instance' operation [type=domain_object or user]
 		handler.setName(call, "call exists?");
 		queue.add(call, drools);
 		
-		# connect with a RunInstanceWire
-		RunInstanceWire run = handler.generatedRunInstanceWire(checkOperation, checkOperation, call, ex);
+		# connect with a RunAction
+		RunAction run = handler.generatedRunAction(checkOperation, checkOperation, call, ex);
 		handler.setName(run, "virtual operation call");
 		queue.add(run, drools);
 		
@@ -306,7 +306,7 @@ rule "Connect expected login key as parameter to check key operation"
 		page : Frame( eContainer == scope )
 		access : EventTrigger( name == "access", eContainer == page )
 		check : CompositeOperation( name == "check key", eContainer == scope )
-		wire : RunInstanceWire( from == access, to == check )
+		wire : RunAction( from == access, to == check )
 		login_handler : LoginHandler( eContainer == scope )
 		
 		expected : StaticValue( ) 
@@ -353,10 +353,10 @@ rule "Connect 'Login' button to 'do login' operation"
 		
 		operation : Operation ( eContainer == scope, name == "do login" )
 		
-		not (RunInstanceWire ( from == button, to == operation, name == "onClick"))
+		not (RunAction ( from == button, to == operation, name == "onClick"))
 
 	then
-		RunInstanceWire run = handler.generatedRunInstanceWire(login_handler, login, button, operation);
+		RunAction run = handler.generatedRunAction(login_handler, login, button, operation);
 		handler.setName(run, "onClick");
 		queue.add(run, drools);
 
@@ -405,7 +405,7 @@ rule "Create contents of 'do login' operation [type=secret_key]"
 		fieldValue : Property( eContainer == field, name == "fieldValue" )
 		
 		loginOperation : CompositeOperation ( eContainer == scope, name == "do login" )
-		runClick : RunInstanceWire ( from == button, to == loginOperation, name == "onClick" )
+		runClick : RunAction ( from == button, to == loginOperation, name == "onClick" )
 		
 		not ( StartNode ( eContainer == loginOperation ))
 			
@@ -562,7 +562,7 @@ rule "Connect text fields for login form of 'login' pages to 'do login' run wire
 		fieldValue : Property ( eContainer == field, name == "fieldValue" )
 		
 		button : Button ( eContainer == form, name == "Login" )
-		run : RunInstanceWire ( from == button, to == operation, name == "onClick" )
+		run : RunAction ( from == button, to == operation, name == "onClick" )
 		
 		not ( ParameterEdge ( from == fieldValue, to == run, name == attribute.name )) 
 
@@ -593,7 +593,7 @@ rule "Connect text fields for login form of 'login' pages to 'do login' run wire
 		fieldValue : Property ( eContainer == field, name == "fieldValue" )
 		
 		button : Button ( eContainer == form, name == "Login" )
-		run : RunInstanceWire ( from == button, to == operation, name == "onClick" )
+		run : RunAction ( from == button, to == operation, name == "onClick" )
 		
 		not ( ParameterEdge ( from == fieldValue, to == run, name == attribute.name )) 
 
@@ -666,8 +666,8 @@ rule "Create contents of 'do login' operation [type=domain_object]"
 		handler.setName(call, "call exists?");
 		queue.add(call, drools);
 		
-		# connect with a RunInstanceWire
-		RunInstanceWire run = handler.generatedRunInstanceWire(loginOperation, loginOperation, call, ex);
+		# connect with a RunAction
+		RunAction run = handler.generatedRunAction(loginOperation, loginOperation, call, ex);
 		handler.setName(run, "virtual operation call");
 		queue.add(run, drools);
 		
@@ -793,8 +793,8 @@ rule "Create contents of 'do login' operation [type=user]"
 		handler.setName(call, "call exists?");
 		queue.add(call, drools);
 		
-		# connect with a RunInstanceWire
-		RunInstanceWire run = handler.generatedRunInstanceWire(loginOperation, loginOperation, call, ex);
+		# connect with a RunAction
+		RunAction run = handler.generatedRunAction(loginOperation, loginOperation, call, ex);
 		handler.setName(run, "virtual operation call");
 		queue.add(run, drools);
 		
@@ -881,12 +881,12 @@ rule "Connect successful 'login' operation to navigate to final 'login' page"
 		
 		login_operation : CompositeOperation( eContainer == scope, name == "do login" )		
 		login_target : Frame ( ) 
-		login_wire : NavigateWire( from == login_handler, to == login_target, name == "login" )
+		login_wire : NavigateAction( from == login_handler, to == login_target, name == "login" )
 
-		not (NavigateWire(from == login_operation, to == login_target))
+		not (NavigateAction(from == login_operation, to == login_target))
 			
 	then
-		NavigateWire wire = handler.generatedNavigateWire(login_handler, scope, login_operation, login_target);
+		NavigateAction wire = handler.generatedNavigateAction(login_handler, scope, login_operation, login_target);
 		handler.setName(wire, "navigate on successful login");
 		queue.add(wire, drools);
 				
@@ -900,10 +900,10 @@ rule "Connect failed 'login' operation to navigate back to 'login'"
 		login : Frame (eContainer == container, name=="login" )
 		login_operation : CompositeOperation( eContainer == scope, name == "do login" )		
 
-		not (NavigateWire(from == login_operation, to == login, name == "fail"))
+		not (NavigateAction(from == login_operation, to == login, name == "fail"))
 			
 	then
-		NavigateWire wire = handler.generatedNavigateWire(login_handler, scope, login_operation, login);
+		NavigateAction wire = handler.generatedNavigateAction(login_handler, scope, login_operation, login);
 		handler.setName(wire, "fail");
 		queue.add(wire, drools);
 		
@@ -932,7 +932,7 @@ rule "Connect 'access' operation for logout page to 'do logout' operation"
 		login_handler : LoginHandler( eContainer == scope )
 		
 		logout : Frame ( )
-		wire : NavigateWire ( from == login_handler, to == logout, name == "logout" )
+		wire : NavigateAction ( from == login_handler, to == logout, name == "logout" )
 		
 		logout_operation : Operation ( eContainer == scope, name == "do logout" )
 		access : EventTrigger ( eContainer == logout, logout.onAccess == access )
@@ -940,10 +940,10 @@ rule "Connect 'access' operation for logout page to 'do logout' operation"
 		# all operations will have to run it as well.
 		# add it to the end of the access operation chain
 		
-		not (RunInstanceWire( from == access, to == logout_operation ))
+		not (RunAction( from == access, to == logout_operation ))
 	
 	then 
-		RunInstanceWire run = handler.generatedRunInstanceWire(login_handler, logout, access, logout_operation);
+		RunAction run = handler.generatedRunAction(login_handler, logout, access, logout_operation);
 		handler.setName(run, "run logout operation");
 		queue.add(run, drools);
 
@@ -960,12 +960,12 @@ rule "Connect new navigate wire from logout to logout destination"
 		# in this case, we want all accesses to "do logout" to always redirect to "home" (for example)
 		final_operation : CompositeOperation ( eval(final_operation.equals(functions.lastChainedOperation(logout_operation))) )
 		destination : Frame ( )
-		logout_wire : NavigateWire( from == login_handler, to == destination, name == "logout" )
+		logout_wire : NavigateAction( from == login_handler, to == destination, name == "logout" )
 		
-		not (NavigateWire( from == final_operation, to == destination ))
+		not (NavigateAction( from == final_operation, to == destination ))
 	
 	then
-		NavigateWire wire = handler.generatedNavigateWire(login_handler, scope, final_operation, destination);
+		NavigateAction wire = handler.generatedNavigateAction(login_handler, scope, final_operation, destination);
 		handler.setName(wire, "navigate on successful logout");
 		queue.add(wire, drools);
 		
@@ -1167,14 +1167,14 @@ rule "Create default login successful page"
 		scope : Session ( )
 		login_handler : LoginHandler( eContainer == scope )
 		
-		not ( wire : NavigateWire (from == login_handler, name == "login" ))
+		not ( wire : NavigateAction (from == login_handler, name == "login" ))
 
 	then
 		Frame page = handler.generatedFrame(login_handler, scope);
 		handler.setName(page, "Login Successful");
 		queue.add(page, drools);
 		
-		NavigateWire wire = handler.generatedNavigateWire(login_handler, login_handler, login_handler, page);
+		NavigateAction wire = handler.generatedNavigateAction(login_handler, login_handler, login_handler, page);
 		handler.setName(wire, "login");
 		queue.add(wire, drools);
 
@@ -1186,14 +1186,14 @@ rule "Create default logout successful page"
 		scope : Session ( )
 		login_handler : LoginHandler( eContainer == scope )
 		
-		not ( wire : NavigateWire (from == login_handler, name == "logout" ))
+		not ( wire : NavigateAction (from == login_handler, name == "logout" ))
 
 	then
 		Frame page = handler.generatedFrame(login_handler, container);
 		handler.setName(page, "Logout Successful");
 		queue.add(page, drools);
 		
-		NavigateWire wire = handler.generatedNavigateWire(login_handler, login_handler, login_handler, page);
+		NavigateAction wire = handler.generatedNavigateAction(login_handler, login_handler, login_handler, page);
 		handler.setName(wire, "logout");
 		queue.add(wire, drools);
 

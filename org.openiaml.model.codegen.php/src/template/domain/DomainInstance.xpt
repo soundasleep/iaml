@@ -11,15 +11,15 @@
 /**
  * Domain instance methods. (Copied from Javascript. TODO refactor with code above)
  */
-«DEFINE domainInstanceCall(Boolean php, model::wires::RunInstanceWire wire, model::DomainObjectInstance object, model::visual::Frame currentFrame) FOR model::WireDestination»
+«DEFINE domainInstanceCall(Boolean php, model::wires::RunAction wire, model::DomainObjectInstance object, model::visual::Frame currentFrame) FOR model::WireDestination»
 	«throwException("Unexpected domain attribute run instance wire destination: " + this)»
 «ENDDEFINE»
 
-«DEFINE domainInstanceCall(Boolean php, model::wires::RunInstanceWire wire, model::DomainObjectInstance object, model::visual::Frame currentFrame) FOR model::ActionDestination»
+«DEFINE domainInstanceCall(Boolean php, model::wires::RunAction wire, model::DomainObjectInstance object, model::visual::Frame currentFrame) FOR model::ActionDestination»
 	«throwException("Unexpected domain attribute run instance action destination: " + this)»
 «ENDDEFINE»
 
-«DEFINE domainInstanceCall(Boolean php, model::wires::RunInstanceWire wire, model::DomainObjectInstance object, model::visual::Frame currentFrame) FOR model::Operation»
+«DEFINE domainInstanceCall(Boolean php, model::wires::RunAction wire, model::DomainObjectInstance object, model::visual::Frame currentFrame) FOR model::Operation»
 	«IF php»
 		«IF name=="exists?"»
 			exists_object_instance_«safeNameString(object.id)»()

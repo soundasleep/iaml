@@ -9,7 +9,7 @@
 	«throwException("Cannot expand the fail edge '" + this + "'")»
 «ENDDEFINE»
 
-«DEFINE failWire(Boolean php) FOR model::wires::NavigateWire-»
+«DEFINE failWire(Boolean php) FOR model::wires::NavigateAction-»
 	«IF php»
 		// we need to navigate to the fail frame
 		$url = "«safeName(to)».php?fail=" . urlencode($e->getMessage()) . "&trace=" . urlencode($e->getTraceAsString());

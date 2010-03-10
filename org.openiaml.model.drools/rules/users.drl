@@ -90,10 +90,10 @@ rule "Connect 'permissions check' up to the 'access' event of the session (ACH i
 		access : EventTrigger ( eContainer == page, page.onAccess == access ) 
 		check : Operation ( eContainer == page, name == "permissions check" )
 		
-		not ( RunInstanceWire ( from == access, to == check ))
+		not ( RunAction ( from == access, to == check ))
 	
 	then
-		RunInstanceWire run = handler.generatedRunInstanceWire(ach, page, access, check);
+		RunAction run = handler.generatedRunAction(ach, page, access, check);
 		handler.setName(run, "run");
 		queue.add(run, drools); 	
 
@@ -106,10 +106,10 @@ rule "Connect 'permissions check' up to the 'access' event of the page (ACH in p
 		access : EventTrigger ( eContainer == page, page.onAccess == access )
 		check : Operation ( eContainer == page, name == "page permissions check" )
 		
-		not ( RunInstanceWire ( from == access, to == check ))
+		not ( RunAction ( from == access, to == check ))
 	
 	then
-		RunInstanceWire run = handler.generatedRunInstanceWire(ach, page, access, check);
+		RunAction run = handler.generatedRunAction(ach, page, access, check);
 		handler.setName(run, "run");
 		queue.add(run, drools); 	
 
@@ -126,10 +126,10 @@ rule "Connect fail wire from 'permissions check' to 'login page'"
 		lh : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
 		login : Frame ( name == "login", eContainer == root ) 
 		
-		not ( NavigateWire ( from == check, to == login, name == "fail" ))
+		not ( NavigateAction ( from == check, to == login, name == "fail" ))
 	
 	then
-		NavigateWire nav = handler.generatedNavigateWire(ach, page, check, login);
+		NavigateAction nav = handler.generatedNavigateAction(ach, page, check, login);
 		handler.setName(nav, "fail");
 		queue.add(nav, drools);
 
@@ -255,7 +255,7 @@ rule "Create contents of 'permissions check' operation in a Frame (session)"
 		queue.add(opCall, drools);
 		
 		# run wire to this call
-		RunInstanceWire run = handler.generatedRunInstanceWire(check, check, opCall, ach_check);
+		RunAction run = handler.generatedRunAction(check, check, opCall, ach_check);
 		handler.setName(run, "run");
 		queue.add(run, drools); 
 	
@@ -310,7 +310,7 @@ rule "Create contents of 'permissions check' operation in a Frame (page)"
 		queue.add(opCall, drools);
 		
 		# run wire to this call
-		RunInstanceWire run = handler.generatedRunInstanceWire(check, check, opCall, ach_check);
+		RunAction run = handler.generatedRunAction(check, check, opCall, ach_check);
 		handler.setName(run, "run");
 		queue.add(run, drools); 
 	

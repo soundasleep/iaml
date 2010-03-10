@@ -2,6 +2,6 @@
 <iaml.visual:Frame xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="visual.1273c6bf5a4.4f">
   <operations xsi:type="iaml:CompositeOperation" inWires="wires.1273c6bf67f.13" id="model.1273c6bf4aa.14f" name="Operation"/>
   <children xsi:type="iaml.visual:Button" outWires="wires.1273c6bf67f.13" id="visual.1273c6bf5a4.52" name="Button">
-    <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1273c6bf67f.13" from="visual.1273c6bf5a4.52" to="model.1273c6bf4aa.14f" name="Wire name"/>
+    <wires xsi:type="iaml.wires:RunAction" id="wires.1273c6bf67f.13" from="visual.1273c6bf5a4.52" to="model.1273c6bf4aa.14f" name="Wire name"/>
   </children>
 </iaml.visual:Frame>

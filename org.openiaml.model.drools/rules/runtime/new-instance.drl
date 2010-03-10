@@ -146,7 +146,7 @@ rule "Create the contents of the 'exists?' condition"
 		handler.setName(opCall, "exists?");
 		queue.add(opCall, drools);
 		
-		RunInstanceWire runWire = handler.generatedRunInstanceWire(condition, condition, opCall, existsOp);
+		RunAction runWire = handler.generatedRunAction(condition, condition, opCall, existsOp);
 		handler.setName(runWire, "run");
 		queue.add(runWire, drools);
 				

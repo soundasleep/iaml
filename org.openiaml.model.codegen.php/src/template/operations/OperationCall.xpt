@@ -14,7 +14,7 @@
 	«throwException("Unknown action to expand: " + this)»
 «ENDDEFINE»
 
-«DEFINE callOperation(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::wires::RunInstanceWire»
+«DEFINE callOperation(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::wires::RunAction»
 	«IF inConditionEdges.size > 0» 
 		/* expand conditions */
 		if («EXPAND template::conditions::Runtime::callCondition(php, inStoreDb, currentFrame) FOREACH inConditionEdges SEPARATOR " && "») {
@@ -25,7 +25,7 @@
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE callOperation(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::wires::NavigateWire»
+«DEFINE callOperation(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::wires::NavigateAction»
 	«IF inConditionEdges.size > 0» 
 		/* expand conditions */
 		if («EXPAND template::conditions::Runtime::callCondition(php, inStoreDb, currentFrame) FOREACH inConditionEdges SEPARATOR " && "») {
@@ -38,7 +38,7 @@
 
 /* 
  * Run a command with some parameters.
- * RunInstanceWire: event --> operation 
+ * RunAction: event --> operation 
  *
  * @param inStoreDb is set if we are calling operations as a result of storing a value
  * in the database. instead of defining a new function 'get_db_param(...)' and
@@ -46,7 +46,7 @@
  * we instead use '$arg0', which we expect will be set already.
  * @see callOperationsParameterSource() and StoreDbPhp::expandDomainAttributeEvents()
  */
-«DEFINE callOperationContents(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::wires::RunInstanceWire-»
+«DEFINE callOperationContents(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::wires::RunAction-»
 	/* eContainer == «to.eContainer» */
 	
 	«IF php»
@@ -114,22 +114,22 @@
 «ENDDEFINE»
 
 /**
- * NavigateWire: browse to a new destination.
+ * NavigateAction: browse to a new destination.
  * We need to switch on the target, because we could navigate to many different types
  * of new destinations?
  */
-«DEFINE callOperationContents(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::wires::NavigateWire»
+«DEFINE callOperationContents(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::wires::NavigateAction»
 	«EXPAND navigateTo(php, inStoreDb, currentFrame, this) FOR to» 
 «ENDDEFINE»
 
-«DEFINE navigateTo(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame, model::wires::NavigateWire wire) FOR model::ActionDestination»
-	«throwException("Unknown NavigateWire destination: " + this)»
+«DEFINE navigateTo(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame, model::wires::NavigateAction wire) FOR model::ActionDestination»
+	«throwException("Unknown NavigateAction destination: " + this)»
 «ENDDEFINE»
 
 /**
  * Resuming navigation to a EntryGate.
  */
-«DEFINE navigateTo(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame, model::wires::NavigateWire wire) FOR model::components::EntryGate»
+«DEFINE navigateTo(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame, model::wires::NavigateAction wire) FOR model::components::EntryGate»
 	«IF php»
 		/* navigating back to resume a gate */
 		// get the resume ID
@@ -167,7 +167,7 @@
 /**
  * Resuming navigation to an ExitGate.
  */
-«DEFINE navigateTo(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame, model::wires::NavigateWire wire) FOR model::components::ExitGate»
+«DEFINE navigateTo(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame, model::wires::NavigateAction wire) FOR model::components::ExitGate»
 	«IF php»
 		/* navigating back to resume a gate */
 		// get the resume ID
@@ -205,7 +205,7 @@
 /**
  * Navigate to a frame.
  */
-«DEFINE navigateTo(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame, model::wires::NavigateWire wire) FOR model::visual::Frame»
+«DEFINE navigateTo(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame, model::wires::NavigateAction wire) FOR model::visual::Frame»
 	«IF php»
 		/* prevent infinite loops on the current frame */
 		if ("«id-»" != CURRENT_PAGE) {
@@ -228,7 +228,7 @@
  * Assumes that there is a function call waiting in 'function_queue'.
  * This function will be executed with the response as a parameter.
  */
-«DEFINE callRemoteOperation(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::wires::RunInstanceWire-»
+«DEFINE callRemoteOperation(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::wires::RunAction-»
 	«IF inParameterEdges.size > 0» 
 		var arg0 = «EXPAND Parameters::callParameter(php, inStoreDb, false, currentFrame) FOR inParameterEdges.get(0)»;
 	«ELSE»

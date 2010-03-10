@@ -9,15 +9,15 @@
 /**
  * Domain instance methods.
  */
-«DEFINE accessControlHandlerOperationCall(Boolean php, model::wires::RunInstanceWire wire, model::components::AccessControlHandler object) FOR model::WireDestination»
+«DEFINE accessControlHandlerOperationCall(Boolean php, model::wires::RunAction wire, model::components::AccessControlHandler object) FOR model::WireDestination»
 	«throwException("Unexpected accessControlHandlerOperationCall run instance wire destination: " + this)»
 «ENDDEFINE»
 
-«DEFINE accessControlHandlerOperationCall(Boolean php, model::wires::RunInstanceWire wire, model::components::AccessControlHandler object) FOR model::ActionDestination»
+«DEFINE accessControlHandlerOperationCall(Boolean php, model::wires::RunAction wire, model::components::AccessControlHandler object) FOR model::ActionDestination»
 	«throwException("Unexpected accessControlHandlerOperationCall run instance action destination: " + this)»
 «ENDDEFINE»
 
-«DEFINE accessControlHandlerOperationCall(Boolean php, model::wires::RunInstanceWire wire, model::components::AccessControlHandler object) FOR model::Operation»
+«DEFINE accessControlHandlerOperationCall(Boolean php, model::wires::RunAction wire, model::components::AccessControlHandler object) FOR model::Operation»
 	«IF php»
 		«IF name=="check permissions"»
 			«REM»

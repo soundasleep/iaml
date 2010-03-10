@@ -309,7 +309,7 @@
 		7. the cached value is used 
 		
 	«ENDREM»
-	«IF !php && model::DomainObjectInstance.isInstance(outActions.typeSelect(model::wires::RunInstanceWire).first().to.eContainer)»
+	«IF !php && model::DomainObjectInstance.isInstance(outActions.typeSelect(model::wires::RunAction).first().to.eContainer)»
 
 		var function_queue = function(response) {
 		 	if (response == "ok") {
@@ -325,7 +325,7 @@
 			}
 		};
 		
-		«FOREACH outActions.typeSelect(model::wires::RunInstanceWire) AS run»
+		«FOREACH outActions.typeSelect(model::wires::RunAction) AS run»
 			«IF model::PrimitiveOperation.isInstance(run.to) && ((model::PrimitiveOperation) run.to).name == "exists?"»
 				/**
 				 * If we are in Javascript and we are trying to get an operation on a DomainObjectInstance (usually 'exists?') 
@@ -339,12 +339,12 @@
 					function_queue("not ok");
 				}
 			«ELSE»
-				«EXPAND OperationCall::callRemoteOperation(php, false, container) FOREACH outActions.typeSelect(model::wires::RunInstanceWire)-»
+				«EXPAND OperationCall::callRemoteOperation(php, false, container) FOREACH outActions.typeSelect(model::wires::RunAction)-»
 			«ENDIF»
 		«ENDFOREACH»
 	«ELSE»
 		«REM»We assume '$result' will be set as the result of this operation call.«ENDREM»
-		«EXPAND OperationCall::callOperation(php, false, container) FOREACH outActions.typeSelect(model::wires::RunInstanceWire)-»
+		«EXPAND OperationCall::callOperation(php, false, container) FOREACH outActions.typeSelect(model::wires::RunAction)-»
 		
 		«IF getFailFlows().isEmpty || getPassFlows().isEmpty»
 			/* No conditional flows; it was just an operation call */
@@ -392,7 +392,7 @@
 	«throwException("Cannot continue a chained operation for Action " + this)»
 «ENDDEFINE»
 
-«DEFINE continueChainedOperations(Boolean php) FOR model::wires::NavigateWire»
+«DEFINE continueChainedOperations(Boolean php) FOR model::wires::NavigateAction»
 	«IF name != "fail"»
 		«IF php»
 			«IF model::visual::Frame.isInstance(to)»

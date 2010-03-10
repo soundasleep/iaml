@@ -6,6 +6,7 @@
  */
 package org.openiaml.model.model.components;
 
+import org.openiaml.model.model.ActionSource;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.NamedElement;
@@ -24,5 +25,5 @@ import org.openiaml.model.model.wires.ConditionEdgeDestination;
  *        annotation="http://openiaml.org/comment added='0.4.2'"
  * @generated
  */
-public interface Gate extends NamedElement, WireSource, WireDestination, GeneratedElement, GeneratesElements, ConditionEdgeDestination {
+public interface Gate extends NamedElement, WireSource, WireDestination, GeneratedElement, GeneratesElements, ConditionEdgeDestination, ActionSource {
 } // Gate

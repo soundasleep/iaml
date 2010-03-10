@@ -90,17 +90,15 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		// there should be new pages created
 		Frame login = assertHasFrame(session, "Login Successful");
 		{
-			Set<Wire> wires = assertHasWiresFromTo(1, root, handler, login);
-			NavigateWire wire = (NavigateWire) wires.iterator().next();
-			assertEquals("login", wire.getName());
+			assertHasNoWiresFromTo(root, handler, login);
+			NavigateWire wire = assertHasNavigateWire(root, handler, login, "login");
 			assertGenerated(wire);
 		}
 
 		Frame logout = assertHasFrame(root, "Logout Successful");
 		{
-			Set<Wire> wires = assertHasWiresFromTo(1, root, handler, logout);
-			NavigateWire wire = (NavigateWire) wires.iterator().next();
-			assertEquals("logout", wire.getName());
+			assertHasNoWiresFromTo(root, handler, logout);
+			NavigateWire wire = assertHasNavigateWire(root, handler, logout, "logout");
 			assertGenerated(wire);
 		}
 
@@ -193,11 +191,9 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		assertGenerated(target);
 
 		EventTrigger access = page.getOnAccess();
-		Set<Wire> w = assertHasWiresFromTo(1, session, access, target);
-		{
-			NavigateWire nav = (NavigateWire) w.iterator().next();
-			assertGenerated(nav);
-		}
+		assertHasNoWiresFromTo(session, access, target);
+		NavigateWire nav = assertHasNavigateWire(session, access, target);
+		assertGenerated(nav);
 	}
 
 	/**
@@ -403,9 +399,8 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		// destination page
 		Frame login = assertHasFrame(root, "login");
 		{
-			Set<Wire> wires = assertHasWiresFromTo(1, root, check, login);
-			NavigateWire wire = (NavigateWire) wires.iterator().next();
-			assertEquals("fail", wire.getName());
+			assertHasNoWiresFromTo(root, check, login);
+			NavigateWire wire = assertHasNavigateWire(root, check, login, "fail");
 			assertGenerated(wire);
 		}
 

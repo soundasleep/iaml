@@ -69,18 +69,16 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 
 		// handler logout--> home
 		{
-			Set<Wire> wires = assertHasWiresFromTo(1, handler, handler, page);
-			NavigateWire nav = (NavigateWire) wires.iterator().next();
+			assertHasNoWiresFromTo(handler, handler, page);
+			NavigateWire nav = assertHasNavigateWire(handler, handler, page, "logout");
 			assertNotGenerated(nav);
-			assertEquals("logout", nav.getName());
 		}
 
 		// handler login--> viewkey
 		{
-			Set<Wire> wires = assertHasWiresFromTo(1, handler, handler, viewkey);
-			NavigateWire nav = (NavigateWire) wires.iterator().next();
+			assertHasNoWiresFromTo(handler, handler, viewkey);
+			NavigateWire nav = assertHasNavigateWire(handler, handler, viewkey, "login");
 			assertNotGenerated(nav);
-			assertEquals("login", nav.getName());
 		}
 
 		// handler set--> key
@@ -159,9 +157,9 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		assertNotGenerated(target);
 
 		EventTrigger access = page.getOnAccess();
-		Set<Wire> w = assertHasWiresFromTo(1, session, access, target);
+		assertHasNoWiresFromTo(session, access, target);
 		{
-			NavigateWire nav = (NavigateWire) w.iterator().next();
+			NavigateWire nav = assertHasNavigateWire(session, access, target);
 			assertGenerated(nav);
 		}
 	}
@@ -253,9 +251,8 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		// destination page
 		Frame login = assertHasFrame(root, "login");
 		{
-			Set<Wire> wires = assertHasWiresFromTo(1, root, check, login);
-			NavigateWire wire = (NavigateWire) wires.iterator().next();
-			assertEquals("fail", wire.getName());
+			assertHasNoWiresFromTo(root, check, login);
+			NavigateWire wire = assertHasNavigateWire(root, check, login, "fail");
 			assertGenerated(wire);
 		}
 

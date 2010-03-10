@@ -124,7 +124,7 @@
 «DEFINE staticInitialValue(model::visual::Frame currentFrame) FOR model::QueryParameter»
 	«REM»from the query«ENDREM»
 	<?php
-	$value = «EXPAND template::operations::Parameters::callParameterValue(true, null, false, currentFrame)»;
+	$value = «EXPAND template::operations::Parameters::callParameterValue(true, false, currentFrame)»;
 	if (!$label_set) {
 		echo htmlspecialchars($value);
 		$label_set = true;

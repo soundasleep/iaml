@@ -13,6 +13,10 @@
 	«EXPAND exception FOR throwException("Unexpected accessControlHandlerOperationCall run instance wire destination: " + this)»
 «ENDDEFINE»
 
+«DEFINE accessControlHandlerOperationCall(Boolean php, model::wires::RunInstanceWire wire, model::components::AccessControlHandler object) FOR model::ActionDestination»
+	«EXPAND exception FOR throwException("Unexpected accessControlHandlerOperationCall run instance action destination: " + this)»
+«ENDDEFINE»
+
 «DEFINE accessControlHandlerOperationCall(Boolean php, model::wires::RunInstanceWire wire, model::components::AccessControlHandler object) FOR model::Operation»
 	«IF php»
 		«IF name=="check permissions"»

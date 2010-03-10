@@ -10,10 +10,14 @@
 	«EXPAND exception FOR throwException("Unknown wire to expand: " + this)»
 «ENDDEFINE»
 
+«DEFINE callOperation(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::Action»
+	«EXPAND exception FOR throwException("Unknown action to expand: " + this)»
+«ENDDEFINE»
+
 «DEFINE callOperation(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::wires::RunInstanceWire»
 	«IF inConditionEdges.size > 0» 
 		/* expand conditions */
-		if («EXPAND template::conditions::Runtime::callCondition(php, this, inStoreDb, currentFrame) FOREACH inConditionEdges SEPARATOR " && "») {
+		if («EXPAND template::conditions::Runtime::callCondition(php, inStoreDb, currentFrame) FOREACH inConditionEdges SEPARATOR " && "») {
 			«EXPAND callOperationContents(php, inStoreDb, currentFrame) FOR this»
 		}
 	«ELSE»
@@ -24,7 +28,7 @@
 «DEFINE callOperation(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::wires::NavigateWire»
 	«IF inConditionEdges.size > 0» 
 		/* expand conditions */
-		if («EXPAND template::conditions::Runtime::callCondition(php, this, inStoreDb, currentFrame) FOREACH inConditionEdges SEPARATOR " && "») {
+		if («EXPAND template::conditions::Runtime::callCondition(php, inStoreDb, currentFrame) FOREACH inConditionEdges SEPARATOR " && "») {
 			«EXPAND callOperationContents(php, inStoreDb, currentFrame) FOR this»
 		}
 	«ELSE»
@@ -64,26 +68,26 @@
 			will also return true for Event-->Operation if they are
 			both on the same frame.
 		«ENDREM»
-		«IF availableInCurrentScript(from, to)-»
+		«IF availableInCurrentScriptAction(from, to)-»
 			«REM»// on current frame (wire id = «id»)«ENDREM»
-			do_«operationName(to)»(«EXPAND Parameters::callParameter(php, this, inStoreDb, false, currentFrame) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»);
+			do_«operationName(to)»(«EXPAND Parameters::callParameter(php, inStoreDb, false, currentFrame) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»);
 		«ELSE-»
 			«REM»// not on current frame (wire id = «id»)«ENDREM»
 			call_remote_event('«safeNameString(containingFrame(to).id)»', '«operationName(to)-»'
-				«IF !inParameterEdges.isEmpty», «EXPAND Parameters::callParameter(php, this, inStoreDb, false, currentFrame) FOREACH inParameterEdges SEPARATOR ", "»«ENDIF»
+				«IF !inParameterEdges.isEmpty», «EXPAND Parameters::callParameter(php, inStoreDb, false, currentFrame) FOREACH inParameterEdges SEPARATOR ", "»«ENDIF»
 			);
 			«REM»				
 			store_event('«containingFrame(to).id»', 'do_«operationName(to)»'
 			«ENDREM»
 		«ENDIF-»
 	«ELSEIF model::scopes::Session.isInstance(to.eContainer)-»
-		«IF availableInCurrentScript(from, to)-»
+		«IF availableInCurrentScriptAction(from, to)-»
 			«REM»// on current frame (wire id = «id»)«ENDREM»
-			do_«operationName(to)»(«EXPAND Parameters::callParameter(php, this, inStoreDb, false, currentFrame) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»);
+			do_«operationName(to)»(«EXPAND Parameters::callParameter(php, inStoreDb, false, currentFrame) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»);
 		«ELSE-»
 			«REM»// not on current frame (wire id = «id»)«ENDREM»
 			call_remote_event('«safeNameString(containingFrame(to).id)»', '«operationName(to)-»'
-				«IF !inParameterEdges.isEmpty», «EXPAND Parameters::callParameter(php, this, inStoreDb, false, currentFrame) FOREACH inParameterEdges SEPARATOR ", "»«ENDIF»
+				«IF !inParameterEdges.isEmpty», «EXPAND Parameters::callParameter(php, inStoreDb, false, currentFrame) FOREACH inParameterEdges SEPARATOR ", "»«ENDIF»
 			);
 			«REM»				
 			store_event('«containingFrame(to).id»', 'do_«operationName(to)»'
@@ -92,11 +96,11 @@
 	«ELSEIF isDomainAttribute(to.eContainer)-»
 		«REM»direct field --> abstract domain attribute«ENDREM»
 		store_db('«safeNameString(((model::DomainAttribute) to.eContainer).id)»'
-			«IF !inParameterEdges.isEmpty», «EXPAND Parameters::callParameter(php, this, inStoreDb, false, currentFrame) FOREACH inParameterEdges SEPARATOR ", "»«ENDIF»
+			«IF !inParameterEdges.isEmpty», «EXPAND Parameters::callParameter(php, inStoreDb, false, currentFrame) FOREACH inParameterEdges SEPARATOR ", "»«ENDIF»
 		); 
 	«ELSEIF isDomainAttributeInstance(to.eContainer)-»
 		«REM»direct field --> domain attribute instance«ENDREM»
-		«EXPAND template::domain::AttributeInstance::attributeInstanceCall(php, inStoreDb, this, (model::DomainAttributeInstance) to.eContainer, currentFrame) FOR to»;
+		«EXPAND template::domain::AttributeInstance::attributeInstanceCall(php, this, inStoreDb, (model::DomainAttributeInstance) to.eContainer, currentFrame) FOR to»;
 	«ELSEIF isDomainObjectInstance(to.eContainer)-»
 		«REM»direct field --> domain object instance«ENDREM»
 		«EXPAND template::domain::DomainInstance::domainInstanceCall(php, this, (model::DomainObjectInstance) to.eContainer, currentFrame) FOR to»;
@@ -226,12 +230,12 @@
  */
 «DEFINE callRemoteOperation(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::wires::RunInstanceWire-»
 	«IF inParameterEdges.size > 0» 
-		var arg0 = «EXPAND Parameters::callParameter(php, this, inStoreDb, false, currentFrame) FOR inParameterEdges.get(0)»;
+		var arg0 = «EXPAND Parameters::callParameter(php, inStoreDb, false, currentFrame) FOR inParameterEdges.get(0)»;
 	«ELSE»
 		var arg0 = null;	/* no parameter */
 	«ENDIF»
 	«IF inParameterEdges.size > 1»
-		var arg1 = «EXPAND Parameters::callParameter(php, this, inStoreDb, false, currentFrame) FOR inParameterEdges.get(1)»;
+		var arg1 = «EXPAND Parameters::callParameter(php, inStoreDb, false, currentFrame) FOR inParameterEdges.get(1)»;
 	«ELSE»
 		var arg1 = null;	/* no parameter */
 	«ENDIF»

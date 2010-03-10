@@ -23,12 +23,24 @@
 
 			// implicit operations
 			«EXPAND implicitButtonClickEvents(currentFrame) FOREACH outWires-»
+			«EXPAND anyActionImplicitButtonClickEvents(currentFrame) FOR this»
 
 			return false;
 		}
 	/* ]]> */
 	</script>
 «ENDDEFINE»
+
+/**
+ * We cannot cast VisibleThing to ActionSource, so we have to do it at runtime.
+ */
+«DEFINE anyActionImplicitButtonClickEvents(model::visual::Frame currentFrame) FOR emf::EObject»	
+	// this VisibleThing is not an ActionSource
+«ENDDEFINE»
+«DEFINE anyActionImplicitButtonClickEvents(model::visual::Frame currentFrame) FOR model::ActionSource»
+	«EXPAND implicitButtonClickEvents(currentFrame) FOREACH outActions-»
+«ENDDEFINE»
+
 «DEFINE getScriptChangeDefinition(model::visual::Frame currentFrame) FOR model::VisibleThing-»
 	<script language="Javascript" type="application/javascript">
 	/* <![CDATA[ */
@@ -49,6 +61,10 @@
  * execute them as if there was an EventTrigger that existed.
  */
 «DEFINE implicitButtonClickEvents(model::visual::Frame currentFrame) FOR model::Wire»
+«ENDDEFINE»
+
+«DEFINE implicitButtonClickEvents(model::visual::Frame currentFrame) FOR model::Action»
+	// unknown action '«this»'
 «ENDDEFINE»
 
 «DEFINE implicitButtonClickEvents(model::visual::Frame currentFrame) FOR model::wires::NavigateWire»

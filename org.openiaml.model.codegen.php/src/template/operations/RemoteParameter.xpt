@@ -6,23 +6,23 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE remoteValue(boolean php, boolean require, model::Wire wire, model::Property property) FOR emf::EObject»
+«DEFINE remoteValue(boolean php, boolean require, model::Property property) FOR emf::EObject»
 	«EXPAND exception FOR throwException("Cannot find a remote parameter source for " + this)»
 «ENDDEFINE»
 
-«DEFINE remoteValue(boolean php, boolean require, model::Wire wire, model::Property property) FOR model::DomainAttribute»
+«DEFINE remoteValue(boolean php, boolean require, model::Property property) FOR model::DomainAttribute»
 	«IF php»
 		«EXPAND exception FOR throwException("Cannot generate server-side code for remoteValue DomainAttribute: " + this)» 
 	«ELSE»
 		«IF isPropertiesFile(getDomainStore(this))»
-			«EXPAND template::domain::properties::PropertiesSource::remotePropertiesValue(require, wire, property) FOR this»
+			«EXPAND template::domain::properties::PropertiesSource::remotePropertiesValue(require, property) FOR this»
 		«ELSE»
-			«EXPAND template::domain::database::DatabaseSource::remoteDatabaseValue(require, wire, property) FOR this»
+			«EXPAND template::domain::database::DatabaseSource::remoteDatabaseValue(require, property) FOR this»
 		«ENDIF»
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE remoteValue(boolean php, boolean require, model::Wire wire, model::Property property) FOR model::DomainAttributeInstance»
+«DEFINE remoteValue(boolean php, boolean require, model::Property property) FOR model::DomainAttributeInstance»
 	«IF php»
 		get_attribute_instance_«safeName()-»()
 	«ELSE»

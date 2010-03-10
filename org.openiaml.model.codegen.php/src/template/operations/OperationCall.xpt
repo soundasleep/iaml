@@ -7,11 +7,11 @@
 
 /* default: don't know what to do */
 «DEFINE callOperation(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::Wire»
-	«EXPAND exception FOR throwException("Unknown wire to expand: " + this)»
+	«throwException("Unknown wire to expand: " + this)»
 «ENDDEFINE»
 
 «DEFINE callOperation(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::Action»
-	«EXPAND exception FOR throwException("Unknown action to expand: " + this)»
+	«throwException("Unknown action to expand: " + this)»
 «ENDDEFINE»
 
 «DEFINE callOperation(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::wires::RunInstanceWire»
@@ -108,7 +108,7 @@
 		«EXPAND template::users::AccessControlHandler::accessControlHandlerOperationCall(php, this, (model::components::AccessControlHandler) to.eContainer) FOR to»;
 	«ELSE-»
 		alert('unknown target operation type in «to.eContainer.metaType.name»');
-		«EXPAND exception FOR throwException("Unknown target operation type in '" + to.eContainer.metaType.name + "' (this=" + this + ")")»
+		«throwException("Unknown target operation type in '" + to.eContainer.metaType.name + "' (this=" + this + ")")»
 	«ENDIF-»
 
 «ENDDEFINE»
@@ -123,7 +123,7 @@
 «ENDDEFINE»
 
 «DEFINE navigateTo(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame, model::wires::NavigateWire wire) FOR model::WireDestination»
-	«EXPAND exception FOR throwException("Unknown NavigateWire destination: " + this)»
+	«throwException("Unknown NavigateWire destination: " + this)»
 «ENDDEFINE»
 
 /**
@@ -246,7 +246,4 @@
 		arg1,
 		function_queue
 	);
-«ENDDEFINE»
-
-«DEFINE exception FOR Object»
 «ENDDEFINE»

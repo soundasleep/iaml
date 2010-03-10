@@ -48,7 +48,7 @@
 
 /* select a database source */
 «DEFINE selectDatabase FOR model::WireSource»
-	«EXPAND exception FOR throwException("Cannot connect to a database source from " + this)»
+	«throwException("Cannot connect to a database source from " + this)»
 «ENDDEFINE»
 
 «DEFINE selectDatabase FOR model::DomainObject»
@@ -71,7 +71,7 @@
 «ENDDEFINE»
 
 «DEFINE getDatabaseStoreString FOR emf::EObject»
-	«EXPAND exception FOR throwException("Unknown DomainObject container " + this)»
+	«throwException("Unknown DomainObject container " + this)»
 «ENDDEFINE»
 
 «DEFINE getDatabaseStoreString FOR model::DomainStore»
@@ -80,7 +80,4 @@
 
 «DEFINE getDatabaseStoreString FOR model::InternetApplication»
 	'sqlite:internet_application.db' /* default database, for attributes without stores */
-«ENDDEFINE»
-
-«DEFINE exception FOR Object»
 «ENDDEFINE»

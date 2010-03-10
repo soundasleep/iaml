@@ -6,7 +6,7 @@
 «EXTENSION template::GeneratorExtensions»
 
 «DEFINE operationContents(model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::Operation-»
-	«EXPAND exception FOR throwException("Unknown primitive operation to expand: " + this)»
+	«throwException("Unknown primitive operation to expand: " + this)»
 «ENDDEFINE»
 
 /**
@@ -22,7 +22,7 @@
 	«ELSEIF name == "javascriptAlert"»
 		«EXPAND javascriptAlert(start, container, php) FOR this»
 	«ELSE»
-		«EXPAND exception FOR throwException("Unknown function to expand '" + name + "': " + this)»
+		«throwException("Unknown function to expand '" + name + "': " + this)»
 	«ENDIF»
 «ENDDEFINE»
 
@@ -46,7 +46,7 @@
 		«ENDIF»
 	«ELSE»
 		«REM»??? who knows«ENDREM»
-		«EXPAND exception FOR throwException("Unknown decision operation to expand '" + name + ": " + this)»
+		«throwException("Unknown decision operation to expand '" + name + ": " + this)»
 	«ENDIF»
 	) {
 		// passes
@@ -95,7 +95,7 @@
 			«ENDIF»
 		«ELSE»
 			«REM»unknown condition«ENDREM»
-			«EXPAND exception FOR throwException("Unknown DecisionCondition '" + name + "': " + this)»
+			«throwException("Unknown DecisionCondition '" + name + "': " + this)»
 		«ENDIF»
 	) {
 		// passes
@@ -152,7 +152,7 @@
 	«ELSEIF type=="access"»
 		// we don't expand 'access' events as part of a chain
 	«ELSE»
-		«EXPAND exception FOR throwException("Unknown event trigger: " + type + " (" + this + ")")»
+		«throwException("Unknown event trigger: " + type + " (" + this + ")")»
 	«ENDIF»
 «ENDDEFINE»
 
@@ -302,7 +302,4 @@
 	«FOREACH outExecutions AS e-»
 		«EXPAND ExecutionFlow::addStack(start, php) FOR e»	
 	«ENDFOREACH»
-«ENDDEFINE»
-
-«DEFINE exception FOR Object»
 «ENDDEFINE»

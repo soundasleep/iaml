@@ -98,15 +98,7 @@
  */
 «DEFINE getExitAnyTarget(String arg) FOR model::components::ExitGate»
 	«IF getExitResumeTargets(this).isEmpty»
-		«EXPAND exception FOR throwException("Gate '" + this + "' did not have any possible resume targets")»
+		«throwException("Gate '" + this + "' did not have any possible resume targets")»
 	«ENDIF»
 	$«arg-» = "«safeName(getExitResumeTargets(this).first())»"; 
 «ENDDEFINE»
-
-/** 
- * a hack way to create backtrace-able errors
- * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540  
- */
-«DEFINE exception FOR Object»
-«ENDDEFINE»
-

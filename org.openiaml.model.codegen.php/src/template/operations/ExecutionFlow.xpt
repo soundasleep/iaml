@@ -97,7 +97,7 @@
  * The individual steps within a flow.
  */
 «DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::ExecutionEdgeDestination-»
-	«EXPAND exception FOR throwException("Unknown operation contents node: " + this)»
+	«throwException("Unknown operation contents node: " + this)»
 «ENDDEFINE»
 
 «DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::operations::CancelNode-»
@@ -119,7 +119,7 @@
 «ENDDEFINE»
 
 «DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::operations::StartNode-»
-	«EXPAND exception FOR throwException("Should never have the executionFlowStep start at a StartNode: use executionFlow.")»
+	«throwException("Should never have the executionFlowStep start at a StartNode: use executionFlow.")»
 «ENDDEFINE»
 
 «DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::operations::FinishNode-»
@@ -216,7 +216,7 @@
 	«IF findFinalJoinNode(this) != null»
 		«EXPAND executionFlowStep(operation, start, container, php) FOR findFinalJoinNode(this)»
 	«ELSE»
-		«EXPAND exception FOR throwException("No join node found for split node '" + this + "'")»
+		«throwException("No join node found for split node '" + this + "'")»
 	«ENDIF»
 	
 	«REM»
@@ -385,11 +385,11 @@
 «ENDDEFINE»
 
 «DEFINE continueChainedOperations(Boolean php) FOR model::Wire»
-	«EXPAND exception FOR throwException("Cannot continue a chained operation for Wire " + this)»
+	«throwException("Cannot continue a chained operation for Wire " + this)»
 «ENDDEFINE»
 
 «DEFINE continueChainedOperations(Boolean php) FOR model::Action»
-	«EXPAND exception FOR throwException("Cannot continue a chained operation for Action " + this)»
+	«throwException("Cannot continue a chained operation for Action " + this)»
 «ENDDEFINE»
 
 «DEFINE continueChainedOperations(Boolean php) FOR model::wires::NavigateWire»
@@ -417,7 +417,4 @@
 	«ELSE»
 		// ignoring fail wire
 	«ENDIF»
-«ENDDEFINE»
-
-«DEFINE exception FOR Object»
 «ENDDEFINE»

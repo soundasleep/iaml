@@ -36,7 +36,7 @@
 		«REM»there should be exactly one incoming parameter wire with a UserInstance«ENDREM»
 		«LET inParameterEdges.from.typeSelect(model::users::UserInstance).first() AS user»
 			«IF user==null»
-				«EXPAND exception FOR throwException("No incoming UserInstances for AccessControlHandler " + this)»
+				«throwException("No incoming UserInstances for AccessControlHandler " + this)»
 			«ENDIF»
 			«EXPAND checkAccessDefinitionUser(user) FOR this»
 		«ENDLET»
@@ -70,7 +70,7 @@
 		if (
 		«IF user.inWires.typeSelect(model::wires::NewInstanceWire).isEmpty»
 			«IF user.inWires.typeSelect(model::wires::SelectWire).isEmpty»
-				«EXPAND exception FOR throwException("Cannot deduce the instance type of UserInstance: " + user)»
+				«throwException("Cannot deduce the instance type of UserInstance: " + user)»
 			«ELSE»
 				user_instance_«safeName(user.inWires.typeSelect(model::wires::SelectWire).from.first())»_has_permission_«safeName(targetPermission)»
 			«ENDIF»
@@ -128,7 +128,4 @@
 	
 	/* check is successful */
 	return true;
-«ENDDEFINE»
-
-«DEFINE exception FOR Object»
 «ENDDEFINE»

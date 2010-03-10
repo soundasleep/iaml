@@ -9,7 +9,7 @@
 «EXTENSION template::GeneratorExtensions»
 
 «DEFINE outgoingValues(model::NamedElement container) FOR model::Wire»
-	«EXPAND exception FOR throwException("Unexpected outgoingValue wire: '" + this + "'")»
+	«throwException("Unexpected outgoingValue wire: '" + this + "'")»
 «ENDDEFINE»
 
 /* if it connects to a SyncWire that is an Property, use this
@@ -55,7 +55,4 @@
 		«ENDIF»
 	«ENDIF»
 
-«ENDDEFINE»
-
-«DEFINE exception FOR Object»
 «ENDDEFINE»

@@ -253,9 +253,6 @@ echo_necessary_update_callbacks();
 		«EXPAND template::operations::OperationCall::callOperation(true, true, null) FOREACH outWires»
 		«EXPAND template::operations::OperationCall::callOperation(true, true, null) FOREACH outActions»
 	«ELSE»
-		«EXPAND exception FOR throwException("Unknown event name '" + eventName + "'")»
+		«throwException("Unknown event name '" + eventName + "'")»
 	«ENDIF»
-«ENDDEFINE»
-
-«DEFINE exception FOR Object»
 «ENDDEFINE»

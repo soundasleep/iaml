@@ -7,12 +7,12 @@
 «EXTENSION template::GeneratorExtensions»
 
 «DEFINE remoteValue(boolean php, boolean require, model::Property property) FOR emf::EObject»
-	«EXPAND exception FOR throwException("Cannot find a remote parameter source for " + this)»
+	«throwException("Cannot find a remote parameter source for " + this)»
 «ENDDEFINE»
 
 «DEFINE remoteValue(boolean php, boolean require, model::Property property) FOR model::DomainAttribute»
 	«IF php»
-		«EXPAND exception FOR throwException("Cannot generate server-side code for remoteValue DomainAttribute: " + this)» 
+		«throwException("Cannot generate server-side code for remoteValue DomainAttribute: " + this)» 
 	«ELSE»
 		«IF isPropertiesFile(getDomainStore(this))»
 			«EXPAND template::domain::properties::PropertiesSource::remotePropertiesValue(require, property) FOR this»
@@ -34,12 +34,12 @@
  * Is the current remote value set?
  */
 «DEFINE remoteValueIsSet(boolean php, model::Property property) FOR emf::EObject»
-	«EXPAND exception FOR throwException("Cannot find a remote parameter source for " + this)»
+	«throwException("Cannot find a remote parameter source for " + this)»
 «ENDDEFINE»
 
 «DEFINE remoteValueIsSet(boolean php, model::Property property) FOR model::DomainAttribute»
 	«IF php»
-		«EXPAND exception FOR throwException("Cannot generate server-side code for remoteValue DomainAttribute: " + this)» 
+		«throwException("Cannot generate server-side code for remoteValue DomainAttribute: " + this)» 
 	«ELSE»
 		«IF isPropertiesFile(getDomainStore(this))»
 			«EXPAND template::domain::properties::PropertiesSource::remotePropertiesValueIsSet(property) FOR this»
@@ -55,7 +55,4 @@
 	«ELSE»
 		"<?php echo htmlspecialchars(has_attribute_instance_«safeName()-»() ? "true" : "false"); ?>"
 	«ENDIF»
-«ENDDEFINE»
-
-«DEFINE exception FOR Object»
 «ENDDEFINE»

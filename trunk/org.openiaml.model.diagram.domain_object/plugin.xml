@@ -371,11 +371,11 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
-               id="org.openiaml.model.diagram.domain_object.RunInstanceWire_4001"
-               name="%metatype.name.RunInstanceWire_4001"
+               id="org.openiaml.model.diagram.domain_object.RunAction_4001"
+               name="%metatype.name.RunAction_4001"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="RunInstanceWire"
-               edithelper="org.openiaml.model.diagram.domain_object.edit.helpers.RunInstanceWireEditHelper">
+               eclass="RunAction"
+               edithelper="org.openiaml.model.diagram.domain_object.edit.helpers.RunActionEditHelper">
             <param name="semanticHint" value="4001"/>
          </metamodelType>
       </metamodel>
@@ -418,7 +418,7 @@
          <elementType ref="org.openiaml.model.diagram.domain_object.Property_2011"/>
          <elementType ref="org.openiaml.model.diagram.domain_object.DomainAttribute_2010"/>
          <elementType ref="org.openiaml.model.diagram.domain_object.EventTrigger_2013"/>
-         <elementType ref="org.openiaml.model.diagram.domain_object.RunInstanceWire_4001"/>
+         <elementType ref="org.openiaml.model.diagram.domain_object.RunAction_4001"/>
          <elementType ref="org.openiaml.model.diagram.domain_object.SyncWire_4002"/>
          <elementType ref="org.openiaml.model.diagram.domain_object.ExtendsEdge_4004"/>
          <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>

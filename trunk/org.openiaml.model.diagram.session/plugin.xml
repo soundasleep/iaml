@@ -578,11 +578,11 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
-               id="org.openiaml.model.diagram.session.RunInstanceWire_4002"
-               name="%metatype.name.RunInstanceWire_4002"
+               id="org.openiaml.model.diagram.session.RunAction_4002"
+               name="%metatype.name.RunAction_4002"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="RunInstanceWire"
-               edithelper="org.openiaml.model.diagram.session.edit.helpers.RunInstanceWireEditHelper">
+               eclass="RunAction"
+               edithelper="org.openiaml.model.diagram.session.edit.helpers.RunActionEditHelper">
             <param name="semanticHint" value="4002"/>
          </metamodelType>
       </metamodel>
@@ -618,11 +618,11 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
-               id="org.openiaml.model.diagram.session.NavigateWire_4007"
-               name="%metatype.name.NavigateWire_4007"
+               id="org.openiaml.model.diagram.session.NavigateAction_4007"
+               name="%metatype.name.NavigateAction_4007"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="NavigateWire"
-               edithelper="org.openiaml.model.diagram.session.edit.helpers.NavigateWireEditHelper">
+               eclass="NavigateAction"
+               edithelper="org.openiaml.model.diagram.session.edit.helpers.NavigateActionEditHelper">
             <param name="semanticHint" value="4007"/>
          </metamodelType>
       </metamodel>
@@ -703,11 +703,11 @@
          <elementType ref="org.openiaml.model.diagram.session.ExitGate_2054"/>
          <elementType ref="org.openiaml.model.diagram.session.EventTrigger_2059"/>
          <elementType ref="org.openiaml.model.diagram.session.SyncWire_4001"/>
-         <elementType ref="org.openiaml.model.diagram.session.RunInstanceWire_4002"/>
+         <elementType ref="org.openiaml.model.diagram.session.RunAction_4002"/>
          <elementType ref="org.openiaml.model.diagram.session.ParameterEdge_4013"/>
          <elementType ref="org.openiaml.model.diagram.session.SelectWire_4004"/>
          <elementType ref="org.openiaml.model.diagram.session.SetWire_4005"/>
-         <elementType ref="org.openiaml.model.diagram.session.NavigateWire_4007"/>
+         <elementType ref="org.openiaml.model.diagram.session.NavigateAction_4007"/>
          <elementType ref="org.openiaml.model.diagram.session.ConditionEdge_4016"/>
          <elementType ref="org.openiaml.model.diagram.session.NewInstanceWire_4010"/>
          <elementType ref="org.openiaml.model.diagram.session.RequiresEdge_4014"/>

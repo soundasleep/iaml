@@ -500,11 +500,11 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
-               id="org.openiaml.model.diagram.operation.RunInstanceWire_4007"
-               name="%metatype.name.RunInstanceWire_4007"
+               id="org.openiaml.model.diagram.operation.RunAction_4007"
+               name="%metatype.name.RunAction_4007"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="RunInstanceWire"
-               edithelper="org.openiaml.model.diagram.operation.edit.helpers.RunInstanceWireEditHelper">
+               eclass="RunAction"
+               edithelper="org.openiaml.model.diagram.operation.edit.helpers.RunActionEditHelper">
             <param name="semanticHint" value="4007"/>
          </metamodelType>
       </metamodel>
@@ -539,7 +539,7 @@
          <elementType ref="org.openiaml.model.diagram.operation.DataFlowEdge_4004"/>
          <elementType ref="org.openiaml.model.diagram.operation.ExecutionEdge_4005"/>
          <elementType ref="org.openiaml.model.diagram.operation.ConditionalEdge_4006"/>
-         <elementType ref="org.openiaml.model.diagram.operation.RunInstanceWire_4007"/>
+         <elementType ref="org.openiaml.model.diagram.operation.RunAction_4007"/>
          <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
       </binding>
    </extension>

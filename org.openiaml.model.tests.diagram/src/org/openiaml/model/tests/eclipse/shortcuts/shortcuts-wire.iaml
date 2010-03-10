@@ -4,7 +4,7 @@
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home" outWires="wires.126f3456040.1">
     <wires xsi:type="iaml.wires:SyncWire" id="wires.126f3456040.1" from="index" to="visual.126f3456040.4" name="sync">
       <operations xsi:type="iaml:PrimitiveOperation" id="model.126f3455fc3.14" name="random" outActions="wires.126f3456040.9">
-        <actions xsi:type="iaml.wires:RunInstanceWire" id="wires.126f3456040.9" name="run" from="model.126f3455fc3.14" to="model.126f3455fc3.d"/>
+        <actions xsi:type="iaml.wires:RunAction" id="wires.126f3456040.9" name="run" from="model.126f3455fc3.14" to="model.126f3455fc3.d"/>
       </operations>
     </wires>
   </scopes>

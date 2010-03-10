@@ -6,7 +6,7 @@
 /* entry gate '«safeName()»' */
 
 /* expand conditions - do any of them fail? */
-if (!(«EXPAND template::conditions::Runtime::callCondition(true, this, false, currentFrame) FOREACH inConditionEdges SEPARATOR " && "»)) {
+if (!(«EXPAND template::conditions::Runtime::callCondition(true, false, currentFrame) FOREACH inConditionEdges SEPARATOR " && "»)) {
 	// condition failed
 	
 	// save the current frame, for resuming

@@ -84,7 +84,7 @@
  * problems later...
  */
 «DEFINE dataSource(Boolean php, model::visual::Frame currentFrame) FOR model::Property»
-	«EXPAND template::operations::Parameters::callParameterValue(php, null, false, currentFrame) FOR this»
+	«EXPAND template::operations::Parameters::callParameterValue(php, false, currentFrame) FOR this»
 «ENDDEFINE»
 
 /**

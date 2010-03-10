@@ -9,6 +9,7 @@
 	// Event «this»
 	// expand out all outgoing edges
 	«EXPAND template::operations::OperationCall::callOperation(php, false, currentFrame) FOREACH outWires»
+	«EXPAND template::operations::OperationCall::callOperation(php, false, currentFrame) FOREACH outActions»
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

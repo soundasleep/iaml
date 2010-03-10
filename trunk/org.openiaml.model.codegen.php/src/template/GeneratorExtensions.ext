@@ -46,6 +46,9 @@ escapeHtmlString(String s) :
 operationName(model::WireDestination this) : 
 	throwException("Invalid operation: " + this);
 
+operationName(model::ActionDestination this) : 
+	throwException("Invalid operation: " + this);
+
 operationName(model::Operation this) :
 	safeName(this);
 
@@ -94,6 +97,10 @@ onCurrentFrame(emf::EObject source, model::WireDestination target) :
 	containingFrame(source) != null && 
 	containingFrame(source) == containingFrame(target);
 
+onCurrentFrameAction(emf::EObject source, model::ActionDestination target) :
+	containingFrame(source) != null && 
+	containingFrame(source) == containingFrame(target);
+
 /* is [target] in the same session as [source]? */ 
 onCurrentSession(model::WireSource source, model::WireDestination target) :
 	containingSession(source) != null && 
@@ -111,6 +118,10 @@ onCurrentSession(model::WireSource source, model::WireDestination target) :
  */
 availableInCurrentScript(model::WireSource source, model::WireDestination target) :
 	onCurrentFrame(source, target) ||
+		containingSession(target) != null;
+		
+availableInCurrentScriptAction(model::ActionSource source, model::ActionDestination target) :
+	onCurrentFrameAction(source, target) ||
 		containingSession(target) != null;
 
 /**

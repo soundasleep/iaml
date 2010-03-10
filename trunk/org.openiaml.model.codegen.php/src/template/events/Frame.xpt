@@ -9,7 +9,7 @@
 	// Frame EventTrigger «this»
 	«IF eventName == "init" || eventName == "access"-»
 		// RunInstanceWires sorted by priority
-		«EXPAND template::operations::OperationCall::callOperation(true, false, currentFrame) FOREACH outWires.typeSelect(model::wires::RunInstanceWire).sortBy(e|-e.priority)-»
+		«EXPAND template::operations::OperationCall::callOperation(true, false, currentFrame) FOREACH outActions.typeSelect(model::wires::RunInstanceWire).sortBy(e|-e.priority)-»
 		
 		// NavigateWires in any order
 		«EXPAND template::operations::OperationCall::callOperation(true, false, currentFrame) FOREACH outWires.typeSelect(model::wires::NavigateWire)-»
@@ -20,7 +20,7 @@
 
 «DEFINE runGateWires(model::visual::Frame currentFrame) FOR model::components::Gate-»
 	// RunInstanceWires sorted by priority
-	«EXPAND template::operations::OperationCall::callOperation(true, false, currentFrame) FOREACH outWires.typeSelect(model::wires::RunInstanceWire).sortBy(e|-e.priority)-»
+	«EXPAND template::operations::OperationCall::callOperation(true, false, currentFrame) FOREACH outActions.typeSelect(model::wires::RunInstanceWire).sortBy(e|-e.priority)-»
 	
 	// NavigateWires in any order
 	«EXPAND template::operations::OperationCall::callOperation(true, false, currentFrame) FOREACH outWires.typeSelect(model::wires::NavigateWire)-»

@@ -309,7 +309,7 @@
 		7. the cached value is used 
 		
 	«ENDREM»
-	«IF !php && model::DomainObjectInstance.isInstance(outWires.typeSelect(model::wires::RunInstanceWire).first().to.eContainer)»
+	«IF !php && model::DomainObjectInstance.isInstance(outActions.typeSelect(model::wires::RunInstanceWire).first().to.eContainer)»
 
 		var function_queue = function(response) {
 		 	if (response == "ok") {
@@ -325,7 +325,7 @@
 			}
 		};
 		
-		«FOREACH outWires.typeSelect(model::wires::RunInstanceWire) AS run»
+		«FOREACH outActions.typeSelect(model::wires::RunInstanceWire) AS run»
 			«IF model::PrimitiveOperation.isInstance(run.to) && ((model::PrimitiveOperation) run.to).name == "exists?"»
 				/**
 				 * If we are in Javascript and we are trying to get an operation on a DomainObjectInstance (usually 'exists?') 
@@ -339,12 +339,12 @@
 					function_queue("not ok");
 				}
 			«ELSE»
-				«EXPAND OperationCall::callRemoteOperation(php, false, container) FOREACH outWires.typeSelect(model::wires::RunInstanceWire)-»
+				«EXPAND OperationCall::callRemoteOperation(php, false, container) FOREACH outActions.typeSelect(model::wires::RunInstanceWire)-»
 			«ENDIF»
 		«ENDFOREACH»
 	«ELSE»
 		«REM»We assume '$result' will be set as the result of this operation call.«ENDREM»
-		«EXPAND OperationCall::callOperation(php, false, container) FOREACH outWires.typeSelect(model::wires::RunInstanceWire)-»
+		«EXPAND OperationCall::callOperation(php, false, container) FOREACH outActions.typeSelect(model::wires::RunInstanceWire)-»
 		
 		«IF getFailFlows().isEmpty || getPassFlows().isEmpty»
 			/* No conditional flows; it was just an operation call */
@@ -374,14 +374,22 @@
 /**
  * Continue operations chained onto the current one.
  * TODO more documentation required. When are chained conditions used?
+ *
+ * @implementation PrimitiveOperation,ExecutionEdge 
+ * 		After a {@model PrimitiveOperation}, all outgoing {@model Wire}s and {@model Action}s 
+ *		are executed sequentially.
  */
-# @implementation PrimitiveOperation,ExecutionEdge After a {@model PrimitiveOperation}, all outgoing {@model ExecutionEdge ExecutionEdges} are executed sequentially.
 «DEFINE continueChainedOperations(Boolean php) FOR model::PrimitiveOperation-»
 	«EXPAND continueChainedOperations(php) FOREACH outWires»
+	«EXPAND continueChainedOperations(php) FOREACH outActions»
 «ENDDEFINE»
 
 «DEFINE continueChainedOperations(Boolean php) FOR model::Wire»
-	«EXPAND exception FOR throwException("Cannot continue a chained operation for " + this)»
+	«EXPAND exception FOR throwException("Cannot continue a chained operation for Wire " + this)»
+«ENDDEFINE»
+
+«DEFINE continueChainedOperations(Boolean php) FOR model::Action»
+	«EXPAND exception FOR throwException("Cannot continue a chained operation for Action " + this)»
 «ENDDEFINE»
 
 «DEFINE continueChainedOperations(Boolean php) FOR model::wires::NavigateWire»

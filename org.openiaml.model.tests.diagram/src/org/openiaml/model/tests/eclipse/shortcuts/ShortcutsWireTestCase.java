@@ -39,7 +39,7 @@ public class ShortcutsWireTestCase extends AbstractShortcutsTestCase {
 		ConnectionNodeEditPart wire = assertHasSyncWire(editor, p1, p2, "sync");
 		
 		// the run wire, displayed from the shortcut
-		ConnectionNodeEditPart run2 = assertHasRunInstanceWire(editor, random, target, "run");
+		ConnectionNodeEditPart run2 = assertHasRunAction(editor, random, target, "run");
 		
 		// open the wire editor
 		editor_wire = openDiagram(wire);
@@ -53,7 +53,7 @@ public class ShortcutsWireTestCase extends AbstractShortcutsTestCase {
 		ShapeNodeEditPart random2 = assertHasPrimitiveOperation(editor_wire, "random", false);
 		
 		// connected by a Run wire
-		ConnectionNodeEditPart run = assertHasRunInstanceWire(editor_wire, random2, target2, "run");
+		ConnectionNodeEditPart run = assertHasRunAction(editor_wire, random2, target2, "run");
 		
 		// the same elements
 		assertSameReferencedElement(target, target2);

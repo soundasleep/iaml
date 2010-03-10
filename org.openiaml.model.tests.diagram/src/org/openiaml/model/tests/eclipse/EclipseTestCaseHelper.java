@@ -47,7 +47,7 @@ import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
-import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SyncWire;
 
@@ -429,17 +429,17 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	}
 
 	/**
-	 * Assert that a RunInstanceWire exists between two elements in the editor.
+	 * Assert that a RunAction exists between two elements in the editor.
 	 */
-	public ConnectionNodeEditPart assertHasRunInstanceWire(DiagramDocumentEditor editor, EditPart source, EditPart target, String name) {
+	public ConnectionNodeEditPart assertHasRunAction(DiagramDocumentEditor editor, EditPart source, EditPart target, String name) {
 		String found = "";
 
 		for (Object c : editor.getDiagramEditPart().getConnections()) {
 			if (c instanceof ConnectionNodeEditPart) {
 				ConnectionNodeEditPart connection = (ConnectionNodeEditPart) c;
 				EObject element = connection.resolveSemanticElement();
-				if (element instanceof RunInstanceWire) {
-					RunInstanceWire w = (RunInstanceWire) element;
+				if (element instanceof RunAction) {
+					RunAction w = (RunAction) element;
 					if (connection.getSource().equals(source) &&
 							connection.getTarget().equals(target) && w.getName().equals(name))
 						return connection;	// found it
@@ -448,7 +448,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 			}
 		}
 
-		fail("assertHasRunInstanceWire: no connection found between '" + source + "' and '" + target + "' with name '" + name + "'. found: " + found);
+		fail("assertHasRunAction: no connection found between '" + source + "' and '" + target + "' with name '" + name + "'. found: " + found);
 		return null;
 	}
 

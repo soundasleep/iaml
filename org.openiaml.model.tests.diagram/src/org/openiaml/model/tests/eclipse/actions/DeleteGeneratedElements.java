@@ -54,13 +54,13 @@ public class DeleteGeneratedElements extends AbstractActionTestCase<IFile> {
 		assertGenerated(edit);
 		ShapeNodeEditPart incoming = assertHasOperation(editor_page, "incoming", false);
 		assertNotGenerated(incoming);
-		assertHasRunInstanceWire(editor_page, edit, incoming, "run out");
+		assertHasRunAction(editor_page, edit, incoming, "run out");
 
 		ShapeNodeEditPart outgoing = assertHasEventTrigger(editor_page, false, ModelPackage.eINSTANCE.getAccessible_OnAccess());
 		assertNotGenerated(outgoing);
 		ShapeNodeEditPart update = assertHasOperation(editor_page, "update", true);
 		assertGenerated(update);
-		assertHasRunInstanceWire(editor_page, outgoing, update, "run in");
+		assertHasRunAction(editor_page, outgoing, update, "run in");
 
 		// open the target
 		//editor_target = openDiagram(target);

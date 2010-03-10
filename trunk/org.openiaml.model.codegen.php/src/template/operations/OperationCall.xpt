@@ -122,7 +122,7 @@
 	«EXPAND navigateTo(php, inStoreDb, currentFrame, this) FOR to» 
 «ENDDEFINE»
 
-«DEFINE navigateTo(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame, model::wires::NavigateWire wire) FOR model::WireDestination»
+«DEFINE navigateTo(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame, model::wires::NavigateWire wire) FOR model::ActionDestination»
 	«throwException("Unknown NavigateWire destination: " + this)»
 «ENDDEFINE»
 

@@ -203,9 +203,9 @@ getPassFlows(model::ExecutionEdgesSource this):
 
 /** does this operation have a "fail" edge? */
 getFailEdge(model::CompositeOperation this) :
-	outWires.selectFirst( e | e.isFailEdge() ) ;
+	outActions.selectFirst( e | e.isFailEdge() ) ;
 
-isFailEdge(model::Wire this ) :
+isFailEdge(model::Action this ) :
 	false;
 	
 isFailEdge(model::wires::NavigateWire this ) :
@@ -360,8 +360,8 @@ List[emf::EObject] resolveDynamicSet(model::InternetApplication root, model::Dyn
 getFieldValue(model::visual::InputTextField this) :
 	properties.selectFirst( e | e.name == "fieldValue" );
 
-getFailHandler(model::WireSource this) :
-	outWires.select( w | w.isFailEdge()).first();
+getFailHandler(model::ActionSource this) :
+	outActions.select( w | w.isFailEdge()).first();
 
 isAutosaveOff(model::DomainAttributeInstance this) :
 	autosave == false || isAutosaveOff(eContainer);

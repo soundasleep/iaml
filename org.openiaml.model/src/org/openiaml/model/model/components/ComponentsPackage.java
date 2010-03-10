@@ -686,13 +686,22 @@ public interface ComponentsPackage extends EPackage {
 	int GATE__IN_CONDITION_EDGES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 12;
 
 	/**
+	 * The feature id for the '<em><b>Out Actions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GATE__OUT_ACTIONS = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 13;
+
+	/**
 	 * The number of structural features of the '<em>Gate</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GATE_FEATURE_COUNT = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 13;
+	int GATE_FEATURE_COUNT = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 14;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.components.impl.EntryGateImpl <em>Entry Gate</em>}' class.
@@ -865,6 +874,15 @@ public interface ComponentsPackage extends EPackage {
 	 * @ordered
 	 */
 	int ENTRY_GATE__IN_CONDITION_EDGES = GATE__IN_CONDITION_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Out Actions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTRY_GATE__OUT_ACTIONS = GATE__OUT_ACTIONS;
 
 	/**
 	 * The number of structural features of the '<em>Entry Gate</em>' class.
@@ -1046,6 +1064,15 @@ public interface ComponentsPackage extends EPackage {
 	 * @ordered
 	 */
 	int EXIT_GATE__IN_CONDITION_EDGES = GATE__IN_CONDITION_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Out Actions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXIT_GATE__OUT_ACTIONS = GATE__OUT_ACTIONS;
 
 	/**
 	 * The number of structural features of the '<em>Exit Gate</em>' class.

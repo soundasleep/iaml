@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.Action;
+import org.openiaml.model.model.ActionSource;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
@@ -63,6 +64,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.components.impl.GateImpl#getGeneratedElements <em>Generated Elements</em>}</li>
  *   <li>{@link org.openiaml.model.model.components.impl.GateImpl#isOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.openiaml.model.model.components.impl.GateImpl#getInConditionEdges <em>In Condition Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.components.impl.GateImpl#getOutActions <em>Out Actions</em>}</li>
  * </ul>
  * </p>
  *
@@ -298,6 +300,16 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 	 * @ordered
 	 */
 	protected EList<ConditionEdge> inConditionEdges;
+
+	/**
+	 * The cached value of the '{@link #getOutActions() <em>Out Actions</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOutActions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Action> outActions;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -584,6 +596,18 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Action> getOutActions() {
+		if (outActions == null) {
+			outActions = new EObjectWithInverseResolvingEList<Action>(Action.class, this, ComponentsPackage.GATE__OUT_ACTIONS, ModelPackage.ACTION__FROM);
+		}
+		return outActions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -598,6 +622,8 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGeneratedElements()).basicAdd(otherEnd, msgs);
 			case ComponentsPackage.GATE__IN_CONDITION_EDGES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInConditionEdges()).basicAdd(otherEnd, msgs);
+			case ComponentsPackage.GATE__OUT_ACTIONS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutActions()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -636,6 +662,8 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
 			case ComponentsPackage.GATE__IN_CONDITION_EDGES:
 				return ((InternalEList<?>)getInConditionEdges()).basicRemove(otherEnd, msgs);
+			case ComponentsPackage.GATE__OUT_ACTIONS:
+				return ((InternalEList<?>)getOutActions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -684,6 +712,8 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 				return isOverridden();
 			case ComponentsPackage.GATE__IN_CONDITION_EDGES:
 				return getInConditionEdges();
+			case ComponentsPackage.GATE__OUT_ACTIONS:
+				return getOutActions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -764,6 +794,10 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 				getInConditionEdges().clear();
 				getInConditionEdges().addAll((Collection<? extends ConditionEdge>)newValue);
 				return;
+			case ComponentsPackage.GATE__OUT_ACTIONS:
+				getOutActions().clear();
+				getOutActions().addAll((Collection<? extends Action>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -830,6 +864,9 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 			case ComponentsPackage.GATE__IN_CONDITION_EDGES:
 				getInConditionEdges().clear();
 				return;
+			case ComponentsPackage.GATE__OUT_ACTIONS:
+				getOutActions().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -878,6 +915,8 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 				return overridden != OVERRIDDEN_EDEFAULT;
 			case ComponentsPackage.GATE__IN_CONDITION_EDGES:
 				return inConditionEdges != null && !inConditionEdges.isEmpty();
+			case ComponentsPackage.GATE__OUT_ACTIONS:
+				return outActions != null && !outActions.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -932,6 +971,12 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 				default: return -1;
 			}
 		}
+		if (baseClass == ActionSource.class) {
+			switch (derivedFeatureID) {
+				case ComponentsPackage.GATE__OUT_ACTIONS: return ModelPackage.ACTION_SOURCE__OUT_ACTIONS;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -982,6 +1027,12 @@ public abstract class GateImpl extends EObjectImpl implements Gate {
 		if (baseClass == ConditionEdgeDestination.class) {
 			switch (baseFeatureID) {
 				case WiresPackage.CONDITION_EDGE_DESTINATION__IN_CONDITION_EDGES: return ComponentsPackage.GATE__IN_CONDITION_EDGES;
+				default: return -1;
+			}
+		}
+		if (baseClass == ActionSource.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.ACTION_SOURCE__OUT_ACTIONS: return ComponentsPackage.GATE__OUT_ACTIONS;
 				default: return -1;
 			}
 		}

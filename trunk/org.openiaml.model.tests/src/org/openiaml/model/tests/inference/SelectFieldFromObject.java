@@ -64,7 +64,7 @@ public class SelectFieldFromObject extends InferenceTestCase {
 		CompositeOperation updateAttr = assertHasCompositeOperation(attr, "update");
 
 		// when the text field is edited, the attr update operation should be called
-		RunInstanceWire runEdit = (RunInstanceWire) getWireFromTo(root, edit, updateAttr);
+		RunInstanceWire runEdit = assertHasRunInstanceWire(root, edit, updateAttr);
 		
 		// with a parameter
 		assertGenerated(getParameterEdgeFromTo(root, fieldValue, runEdit));

@@ -108,9 +108,9 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 
 		Operation check = assertHasOperation(session, "check key");
 		EventTrigger access = viewkey.getOnAccess();
-		Set<Wire> w = assertHasWiresFromTo(1, session, access, check);
+		assertHasWiresFromTo(0, session, access, check);
 		{
-			RunInstanceWire run = (RunInstanceWire) w.iterator().next();
+			RunInstanceWire run = assertHasRunInstanceWire(session, access, check);
 			assertGenerated(run);
 			assertEquals("run", run.getName());
 		}
@@ -132,9 +132,9 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 
 		Operation op = assertHasOperation(session, "do logout");
 		EventTrigger access = page.getOnAccess();
-		Set<Wire> w = assertHasWiresFromTo(1, session, access, op);
+		assertHasWiresFromTo(0, session, access, op);
 		{
-			RunInstanceWire run = (RunInstanceWire) w.iterator().next();
+			RunInstanceWire run = assertHasRunInstanceWire(session, access, op);
 			assertGenerated(run);
 		}
 
@@ -222,8 +222,8 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		assertGenerated(op);
 
 		// button has an 'onClick' run wire
-		Set<Wire> w = assertHasWiresFromTo(1, root, button, op);
-		RunInstanceWire run = (RunInstanceWire) w.iterator().next();
+		assertHasWiresFromTo(0, root, button, op);
+		RunInstanceWire run = assertHasRunInstanceWire(root, button, op);
 		assertGenerated(run);
 		assertEquals("onClick", run.getName());
 

@@ -50,7 +50,7 @@ public class SessionSyncWires extends InferenceTestCase {
 		// all part of SyncWire elements generation
 		EventTrigger edit = field1.getOnEdit();
 		Operation update = assertHasOperation(field2, "update");
-		RunInstanceWire rw = (RunInstanceWire) getWireFromTo(root, edit, update);
+		RunInstanceWire rw = assertHasRunInstanceWire(root, edit, update);
 
 		Property fieldValue = assertHasProperty(field1, "fieldValue");
 		assertGenerated(getParameterEdgeFromTo(root, fieldValue, rw));
@@ -59,10 +59,10 @@ public class SessionSyncWires extends InferenceTestCase {
 		EventTrigger init = session.getOnInit();
 
 		// it should be connected to 'update'
-		RunInstanceWire rw2 = (RunInstanceWire) getWireFromTo(root, init, update);
+		RunInstanceWire rw2 = assertHasRunInstanceWire(root, init, update);
 
 		// there should only be one RunWire out of 'init'
-		assertEquals("There should only be one out wire from init", 1, init.getOutWires().size());
+		assertEquals("There should only be one out action from init", 1, init.getOutActions().size());
 
 		// with the source fieldvalue as a parameter
 		assertGenerated(getParameterEdgeFromTo(session, fieldValue, rw2));

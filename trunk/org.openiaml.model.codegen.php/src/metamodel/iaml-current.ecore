@@ -80,7 +80,7 @@
       <details key="documentation" value="Incoming values to an {@model Operation operation} executed by a {@model RunInstanceWire} can be accessed via Parameters."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveOperation" eSuperTypes="#//Operation #//ExecutionEdgesSource #//WireSource">
+  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveOperation" eSuperTypes="#//Operation #//ExecutionEdgesSource #//WireSource #//ActionSource">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="comment" value="renamed from ChainedOperation -> PrimitiveOperation in 0.4"/>
     </eAnnotations>
@@ -288,6 +288,8 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="wires" upperBound="-1"
         eType="#//Wire" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
+        eType="#//Action" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameterEdges" upperBound="-1"
         eType="#//wires/ParameterEdge" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="extendsEdges" upperBound="-1"
@@ -518,7 +520,7 @@
         <details key="documentation" value="A single text field, storing a single text value, which may be edited by the user."/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Button" eSuperTypes="#//VisibleThing">
+    <eClassifiers xsi:type="ecore:EClass" name="Button" eSuperTypes="#//VisibleThing #//ActionSource">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.2"/>
       </eAnnotations>
@@ -845,7 +847,7 @@
         <details key="documentation" value="Joins multiple {@model SplitNode split} execution threads back together. Halts until all threads are complete."/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="OperationCallNode" eSuperTypes="#//ActivityNode #//ExecutionEdgesSource #//ExecutionEdgeDestination #//WireSource #//NamedElement">
+    <eClassifiers xsi:type="ecore:EClass" name="OperationCallNode" eSuperTypes="#//ActivityNode #//ExecutionEdgesSource #//ExecutionEdgeDestination #//WireSource #//NamedElement #//ActionSource">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="added in 0.4"/>
       </eAnnotations>

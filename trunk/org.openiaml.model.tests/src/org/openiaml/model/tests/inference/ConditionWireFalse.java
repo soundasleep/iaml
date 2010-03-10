@@ -43,8 +43,8 @@ public class ConditionWireFalse extends InferenceTestCase {
 		assertNotSame(srcOp, targetOp);
 
 		// there should be a run wire between these two
-		RunInstanceWire srcRw = (RunInstanceWire) getWireFromTo(wire, srcEdit, targetOp);
-		RunInstanceWire targetRw = (RunInstanceWire) getWireFromTo(wire, targetEdit, srcOp);
+		RunInstanceWire srcRw = assertHasRunInstanceWire(wire, srcEdit, targetOp);
+		RunInstanceWire targetRw = assertHasRunInstanceWire(wire, targetEdit, srcOp);
 
 		// [new]
 		// there should be additional ConditionWires to these RunInstanceWires

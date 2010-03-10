@@ -50,8 +50,8 @@ public class PropertiesFileWithInputForm extends InferenceTestCase {
 		assertNotSame(srcOp, targetOp);
 
 		// there should be a run wire between these two
-		RunInstanceWire srcRw = (RunInstanceWire) getWireFromTo(wire, srcEdit, targetOp);
-		RunInstanceWire targetRw = (RunInstanceWire) getWireFromTo(wire, targetEdit, srcOp);
+		RunInstanceWire srcRw = assertHasRunInstanceWire(wire, srcEdit, targetOp);
+		RunInstanceWire targetRw = assertHasRunInstanceWire(wire, targetEdit, srcOp);
 
 		// both should have fieldValues
 		Property textValue = assertHasProperty(source, "fieldValue");
@@ -85,8 +85,8 @@ public class PropertiesFileWithInputForm extends InferenceTestCase {
 		assertNotSame(srcOp, targetOp);
 
 		// there should be a run wire between these two
-		RunInstanceWire srcRw = (RunInstanceWire) getWireFromTo(wire, srcEdit, targetOp);
-		RunInstanceWire targetRw = (RunInstanceWire) getWireFromTo(wire, targetEdit, srcOp);
+		RunInstanceWire srcRw = assertHasRunInstanceWire(wire, srcEdit, targetOp);
+		RunInstanceWire targetRw = assertHasRunInstanceWire(wire, targetEdit, srcOp);
 
 		// both should have fieldValues
 		Property textValue = assertHasProperty(source, "fieldValue");

@@ -51,7 +51,6 @@ public class Requirement4DynamicSources extends CodegenTestCase {
 		
 		// now if we go to FieldList, the target on this page
 		// should also have changed
-		waitForAjax();
 		gotoSitemapThenPage(sitemap, "FieldList");
 		
 		{
@@ -61,7 +60,6 @@ public class Requirement4DynamicSources extends CodegenTestCase {
 		}
 		
 		// 'page c' should also have been set
-		waitForAjax();
 		gotoSitemapThenPage(sitemap, "page c");
 		
 		{
@@ -71,7 +69,6 @@ public class Requirement4DynamicSources extends CodegenTestCase {
 		}
 		
 		// go back to FieldList
-		waitForAjax();
 		gotoSitemapThenPage(sitemap, "FieldList");
 		
 		String test3 = "a third field change " + new Random().nextDouble();
@@ -83,7 +80,6 @@ public class Requirement4DynamicSources extends CodegenTestCase {
 		}
 
 		// 'page c' should have been set
-		waitForAjax();
 		gotoSitemapThenPage(sitemap, "page c");
 		
 		{
@@ -94,7 +90,6 @@ public class Requirement4DynamicSources extends CodegenTestCase {
 		
 		// going to the 'unrelated' page
 		// it shouldn't be sync'd since it doesn't match the xpath
-		waitForAjax();
 		gotoSitemapThenPage(sitemap, "unrelated");
 		
 		String test4 = "an unrelated change " + new Random().nextDouble();
@@ -108,7 +103,6 @@ public class Requirement4DynamicSources extends CodegenTestCase {
 		}
 
 		// 'page c' should not have changed
-		waitForAjax();
 		gotoSitemapThenPage(sitemap, "page c");
 
 		try

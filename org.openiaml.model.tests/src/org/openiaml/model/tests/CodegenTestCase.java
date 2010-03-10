@@ -146,15 +146,6 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * We can't goto the sitemap if we haven't begun the session yet.
 	 */
 	private boolean hasBegun;
-
-	/**
-	 * Wait for all of the Ajax monitors to return.
-	 * 
-	 * @throws Exception
-	 */
-	protected void waitForAjax() throws Exception {
-		// does nothing
-	}
 	
 	/**
 	 * <p>
@@ -332,7 +323,6 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 */ 
 	public void beginAtSitemapThenPage(IFile sitemap, String pageTitle, String expectedPageTitle, String query) throws Exception {
 		logTimed("web: beginAtSitemapThenPage");
-		waitForAjax();
 
 		beginAt(sitemap.getProjectRelativePath().toString());
 		assertTitleMatch("sitemap");
@@ -396,8 +386,6 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		// (sanity check)
 		if (!hasBegun)
 			throw new RuntimeException("You cannot gotoSitemap() for a session that hasn't started yet. Use beginAt or beginAtSitemapThenPage instead.");
-	
-		waitForAjax();
 
 		gotoPage(sitemap.getProjectRelativePath().toString());
 		assertTitleMatch("sitemap");
@@ -452,8 +440,6 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		// (sanity check)
 		if (!hasBegun)
 			throw new RuntimeException("You cannot gotoSitemap() for a session that hasn't started yet. Use beginAt or beginAtSitemapThenPage instead.");
-
-		waitForAjax();
 	
 		gotoPage(sitemap.getProjectRelativePath().toString());
 		assertTitleMatch("sitemap");
@@ -497,8 +483,6 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		// (sanity check)
 		if (!hasBegun)
 			throw new RuntimeException("You cannot gotoSitemap() for a session that hasn't started yet. Use beginAt or beginAtSitemapThenPage instead.");
-	
-		waitForAjax();
 
 		gotoPage(sitemap.getProjectRelativePath().toString());
 		assertTitleMatch("sitemap");
@@ -648,7 +632,6 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * @throws Exception 
 	 */
 	protected void assertNoRemoteCalls() throws Exception {
-		waitForAjax();
 		assertEmpty(getElementById("counter_store_db"));
 		assertEmpty(getElementById("counter_store_event"));
 		assertEmpty(getElementById("counter_set_session"));
@@ -714,9 +697,6 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * @throws Exception
 	 */
 	protected ResultSet loadDatabaseQuery(String dbName, String query) throws Exception {
-		// wait for ajax calls if necessary
-		waitForAjax();
-		
 		// refresh the workspace
 		assertTrue(getProject().refreshProject().isOK());
 		
@@ -740,9 +720,6 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * @throws Exception
 	 */
 	protected Properties loadProperties(String filename) throws Exception {
-		// wait for ajax calls if necessary
-		waitForAjax();
-		
 		// refresh the workspace
 		assertTrue(getProject().refreshProject().isOK());
 
@@ -765,7 +742,6 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * @throws Exception
 	 */
 	protected void reloadPage(IFile sitemap, String pageText) throws Exception {
-		waitForAjax();	// TODO remove this check; we shouldn't have to wait for ajax
 		gotoSitemapThenPage(sitemap, pageText);
 	}
 	
@@ -779,7 +755,6 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * @throws Exception
 	 */
 	protected void restartSession(IFile sitemap, String pageText) throws Exception {
-		waitForAjax();	// TODO remove this check; we shouldn't have to wait for ajax
 		beginAtSitemapThenPage(sitemap, pageText, pageText);
 	}
 	

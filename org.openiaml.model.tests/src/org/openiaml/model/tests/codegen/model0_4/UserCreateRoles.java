@@ -89,7 +89,6 @@ public class UserCreateRoles extends AbstractUserLoginTestCase {
 		
 		// click the button
 		clickButtonWithText("create new user");
-		waitForAjax();
 		assertNoProblem();
 	
 		// lets try and login now!

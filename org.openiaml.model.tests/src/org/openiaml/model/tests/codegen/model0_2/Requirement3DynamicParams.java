@@ -41,8 +41,7 @@ public class Requirement3DynamicParams extends CodegenTestCase {
 
 		// reload, it should still work the same
 		gotoSitemapThenPage(sitemap, "new container");
-		waitForAjax();
-		
+
 		String testText2 = "some more text " + new Random().nextDouble();
 		{
 			// there should be an element called value

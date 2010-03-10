@@ -166,7 +166,6 @@ public class LoginHandlerInstance extends DatabaseCodegenTestCase {
 		String loginId = getLabelIDForText("password");
 		setLabeledFormElementField(loginId, "test2");
 		submit();		// submit the form
-		waitForAjax();	// wait for ajax forms
 		
 		// we should now be on the viewkey page
 		assertEquals("Login Successful", getPageTitle());
@@ -202,7 +201,6 @@ public class LoginHandlerInstance extends DatabaseCodegenTestCase {
 		String loginId = getLabelIDForText("password");
 		setLabeledFormElementField(loginId, "test2");
 		submit();		// submit the form
-		waitForAjax();	// wait for ajax forms
 		
 		// we should now be on the Login Successful page
 		assertEquals("Login Successful", getPageTitle());
@@ -247,7 +245,6 @@ public class LoginHandlerInstance extends DatabaseCodegenTestCase {
 		String loginId = getLabelIDForText("password");
 		setLabeledFormElementField(loginId, "test3");
 		submit();		// submit the form
-		waitForAjax();	// wait for ajax forms
 		
 		// we should now be on the Login Successful page
 		assertEquals("Login Successful", getPageTitle());
@@ -284,7 +281,6 @@ public class LoginHandlerInstance extends DatabaseCodegenTestCase {
 		String loginId = getLabelIDForText("password");
 		setLabeledFormElementField(loginId, "test4");
 		submit();		// submit the form
-		waitForAjax();	// wait for ajax forms
 		
 		// we should now be on the Login Successful page
 		assertEquals("Login Successful", getPageTitle());
@@ -299,7 +295,6 @@ public class LoginHandlerInstance extends DatabaseCodegenTestCase {
 			
 			// lets set it
 			setLabeledFormElementField(username, newUsername);
-			waitForAjax();
 		}
 		
 		// reload the page, it should remain
@@ -317,7 +312,6 @@ public class LoginHandlerInstance extends DatabaseCodegenTestCase {
 		String loginId2 = getLabelIDForText("password");
 		setLabeledFormElementField(loginId2, "test4");
 		submit();		// submit the form
-		waitForAjax();	// wait for ajax forms
 		
 		// we should now be on the Login Successful page
 		assertEquals("Login Successful", getPageTitle());
@@ -345,7 +339,6 @@ public class LoginHandlerInstance extends DatabaseCodegenTestCase {
 		String loginId = getLabelIDForText("password");
 		setLabeledFormElementField(loginId, "test6"); // INVALID password
 		submit();		// submit the form
-		waitForAjax();	// wait for ajax forms
 		
 		// we should now be on the Login Successful page
 		assertNotEquals("Login Successful", getPageTitle());

@@ -118,7 +118,6 @@ public class SelectFieldFromDynamicQuery extends DatabaseCodegenTestCase {
 		
 		// change the select field
 		setLabeledFormElementField(select, "target@jevon.org");
-		waitForAjax();
 		
 		// the name should change
 		assertLabeledFieldEquals(field, "User Two");
@@ -174,7 +173,6 @@ public class SelectFieldFromDynamicQuery extends DatabaseCodegenTestCase {
 		
 		// set it to something that doesnt exist
 		setLabeledFormElementField(select, "missing@jevon.org");
-		waitForAjax();
 		
 		// we should now be on an exception page (redirected)
 		assertTitleEquals("An exception occured");

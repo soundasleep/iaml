@@ -35,7 +35,6 @@ public class ReloadPage extends CodegenTestCase {
 		}
 		
 		// reload
-		waitForAjax();
 		gotoSitemapThenPage(sitemap, "container");
 		
 		// the value should remain there
@@ -45,7 +44,6 @@ public class ReloadPage extends CodegenTestCase {
 		}
 
 		// reload
-		waitForAjax();
 		gotoSitemapThenPage(sitemap, "container");
 		
 		// the value should remain there

@@ -13,7 +13,6 @@ import org.openiaml.model.ModelLoader.ModelLoadException;
 import org.openiaml.model.inference.EcoreInferenceHandler;
 import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.model.InternetApplication;
-import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.VisualPackage;

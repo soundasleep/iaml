@@ -106,7 +106,6 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 		
 		// click the button
 		clickButtonWithText("create new user");
-		waitForAjax();
 		
 		// lets try and login now!
 		doStandardLoginAs(sitemap, NEW_EMAIL, NEW_PASSWORD);

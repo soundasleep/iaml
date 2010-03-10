@@ -21,7 +21,6 @@ public class AllShortcutsTests {
 
         suite.addTestSuite(ShortcutsDomainObjectTestCase.class);
         suite.addTestSuite(ShortcutsDomainStoreTestCase.class);
-        suite.addTestSuite(ShortcutsElementTestCase.class);
         suite.addTestSuite(ShortcutsManyTestCase.class);
         suite.addTestSuite(ShortcutsOperationTestCase.class);
         suite.addTestSuite(ShortcutsRootTestCase.class);

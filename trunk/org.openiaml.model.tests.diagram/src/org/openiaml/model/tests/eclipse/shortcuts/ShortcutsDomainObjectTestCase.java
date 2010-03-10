@@ -51,13 +51,13 @@ public class ShortcutsDomainObjectTestCase extends AbstractShortcutsTestCase {
 		
 		// it should have a domain attribute connected to an event trigger (shortcut)
 		assertEditorHasChildren(2, editor_object);
-		ShapeNodeEditPart attribute = assertHasDomainAttribute(editor_object, "domain attribute");
+		ShapeNodeEditPart operation = assertHasPrimitiveOperation(editor_object, "primitive operation", false);
 		ShapeNodeEditPart event = assertHasEventTrigger(editor_object, true, ModelPackage.eINSTANCE.getAccessible_OnAccess());
 		
 		// they should be connected
-		assertHasRunInstanceWire(editor_object, event, attribute, "runWire");
+		assertHasRunInstanceWire(editor_object, event, operation, "runWire");
 		assertShortcut(event);
-		assertNotShortcut(attribute);
+		assertNotShortcut(operation);
 		
 		// open 'page' editor
 		editor_page = openDiagram(page);
@@ -66,16 +66,16 @@ public class ShortcutsDomainObjectTestCase extends AbstractShortcutsTestCase {
 		
 		// it should have a domain attribute (shortcut) connected to an event trigger
 		assertEditorHasChildren(2, editor_page);
-		ShapeNodeEditPart attribute2 = assertHasDomainAttribute(editor_page, "domain attribute");
+		ShapeNodeEditPart operation2 = assertHasPrimitiveOperation(editor_page, "primitive operation", true);
 		ShapeNodeEditPart event2 = assertHasEventTrigger(editor_page, false, ModelPackage.eINSTANCE.getAccessible_OnAccess());
 
 		// they should be connected
-		assertHasRunInstanceWire(editor_page, event2, attribute2, "runWire");
+		assertHasRunInstanceWire(editor_page, event2, operation2, "runWire");
 		assertNotShortcut(event2);
-		assertShortcut(attribute2);
+		assertShortcut(operation2);
 
 		assertSameReferencedElement(event, event2);
-		assertSameReferencedElement(attribute, attribute2);
+		assertSameReferencedElement(operation, operation2);
 
 	}
 	

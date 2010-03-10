@@ -919,6 +919,12 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 				RunInstanceWire.class, getNameFilter(name));
 	}
 	
+	/**
+	 * Construct a new filter for only selecting {@link Action}s with a given name.
+	 * 
+	 * @param name the name to search for
+	 * @return a new name filter for {@link Action}s.
+	 */
 	private Filter<Action> getNameFilter(final String name) {
 		return new Filter<Action>() {
 			@Override
@@ -1045,9 +1051,20 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public NavigateWire assertHasNavigateWire(EObject container, WireSource from, WireDestination to, String name) throws JaxenException {
-		return (NavigateWire) assertHasWireFromTo(container, from, to, 
-				NavigateWire.class, name, ALL);
+	public NavigateWire assertHasNavigateWire(EObject container, ActionSource from, ActionDestination to, String name) throws JaxenException {
+		return (NavigateWire) assertHasActionFromTo(container, from, to, 
+				NavigateWire.class, getNameFilter(name) );
+	}
+	
+	/**
+	 * Assert there exists only one unidirectional NavigateWire between
+	 * the given elements.
+	 *
+	 * @return The element found
+	 */
+	public NavigateWire assertHasNavigateWire(EObject container, ActionSource from, ActionDestination to) throws JaxenException {
+		return (NavigateWire) assertHasActionFromTo(container, from, to, 
+				NavigateWire.class, ALL_ACTIONS);
 	}
 	
 	/**
@@ -1179,7 +1196,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return the wire edge found
 	 * @throws JaxenException 
 	 */
-	public Wire assertHasWireFromTo(EObject container, WireSource from, WireDestination to, Class<? extends EObject> type, Filter<Wire> filter) throws JaxenException {
+	public Wire assertHasWireFromTo(EObject container, WireSource from, WireDestination to, Class<? extends Wire> type, Filter<Wire> filter) throws JaxenException {
 		Set<Wire> wires = getWiresFromTo(container, from, to);
 		Wire result = null;
 		for (Wire w : wires) {
@@ -1208,7 +1225,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return the wire edge found
 	 * @throws JaxenException 
 	 */
-	public Action assertHasActionFromTo(EObject container, ActionSource from, ActionDestination to, Class<? extends EObject> type, Filter<Action> filter) throws JaxenException {
+	public Action assertHasActionFromTo(EObject container, ActionSource from, ActionDestination to, Class<? extends Action> type, Filter<Action> filter) throws JaxenException {
 		Set<Action> wires = getActionsFromTo(container, from, to);
 		Action result = null;
 		for (Action w : wires) {
@@ -1238,7 +1255,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return
 	 * @throws JaxenException 
 	 */
-	public Wire assertHasWireFromTo(EObject container, WireSource from, WireDestination to, Class<? extends EObject> type, String name, Filter<Wire> filter) throws JaxenException {
+	public Wire assertHasWireFromTo(EObject container, WireSource from, WireDestination to, Class<? extends Wire> type, String name, Filter<Wire> filter) throws JaxenException {
 		Set<Wire> wires = getWiresFromTo(container, from, to);
 		Wire result = null;
 		for (Wire w : wires) {

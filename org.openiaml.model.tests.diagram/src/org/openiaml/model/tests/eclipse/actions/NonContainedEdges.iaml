@@ -8,6 +8,6 @@
     <dataEdges id="model.122a0a9692e.44" from="model.122a0a9692e.30" to="model.122a0a9692e.43"/>
     <variables id="model.122a0a9692e.43" name="target" inFlows="model.122a0a9692e.44"/>
   </conditions>
-  <scopes xsi:type="iaml.visual:Frame" id="visual.122a0a9698b.2" name="ignored page"/>
   <properties id="model.122a0a9692e.30" name="target property" outFlows="model.122a0a9692e.44 model.122a0a9692e.78"/>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.122a0a9698b.2" name="ignored page"/>
 </iaml:InternetApplication>

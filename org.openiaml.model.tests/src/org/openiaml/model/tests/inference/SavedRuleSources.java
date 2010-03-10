@@ -12,7 +12,7 @@ import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
-import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SyncWire;
 
 /**
@@ -78,7 +78,7 @@ public class SavedRuleSources extends InferenceTestCase {
 		assertEquals("Create the XPath ConditionEdge for generated SyncWires", cw.getGeneratedRule());
 
 		// we can now investigate the SyncWires themselves, and make sure
-		// they have the conditions attached too		
+		// they have the conditions attached too
 		EventTrigger srcEdit = field1.getOnEdit();
 		Operation srcOp = assertHasOperation(field1, "update");
 		EventTrigger targetEdit = field2.getOnEdit();
@@ -100,28 +100,28 @@ public class SavedRuleSources extends InferenceTestCase {
 		assertHasWiresFromTo(0, wire, targetEdit, srcOp);
 
 		// there should be a run wire between these two
-		RunInstanceWire srcRw = assertHasRunInstanceWire(wire, srcEdit, targetOp);
-		RunInstanceWire targetRw = assertHasRunInstanceWire(wire, targetEdit, srcOp);
+		RunAction srcRw = assertHasRunAction(wire, srcEdit, targetOp);
+		RunAction targetRw = assertHasRunAction(wire, targetEdit, srcOp);
 		assertTrue(srcRw.isIsGenerated());
 		assertEquals("Run instance wire from edit to update (onEdit)", srcRw.getGeneratedRule());
 		assertTrue(targetRw.isIsGenerated());
 		assertEquals("Run instance wire from edit to update (onEdit)", targetRw.getGeneratedRule());
 
-		// there should be additional ConditionWires to these RunInstanceWires
+		// there should be additional ConditionWires to these RunActions
 		ConditionEdge srcCw = assertHasConditionEdge(root, cond, srcRw);
 		assertTrue(srcCw.isIsGenerated());
-		assertEquals("Connect ConditionEdges to RunInstanceWires created by SyncWires (edit/update) (onEdit)", srcCw.getGeneratedRule());
+		assertEquals("Connect ConditionEdges to RunActions created by SyncWires (edit/update) (onEdit)", srcCw.getGeneratedRule());
 		ConditionEdge targetCw = assertHasConditionEdge(root, cond, targetRw);
 		assertTrue(targetCw.isIsGenerated());
-		assertEquals("Connect ConditionEdges to RunInstanceWires created by SyncWires (edit/update) (onEdit)", targetCw.getGeneratedRule());
+		assertEquals("Connect ConditionEdges to RunActions created by SyncWires (edit/update) (onEdit)", targetCw.getGeneratedRule());
 
 		// all the ConditionWires need parameters: the XPath source, and the element to evaluate
 		ParameterEdge param1 = getParameterEdgeFromTo(root, dae, srcCw);
 		assertTrue(param1.isIsGenerated());
-		assertEquals("Connect ParameterEdges to ConditionEdges connected to RunInstanceWires created by SyncWires (edit/update) (onEdit)", param1.getGeneratedRule());
-		ParameterEdge param2 = getParameterEdgeFromTo(root, dae, targetCw); 
+		assertEquals("Connect ParameterEdges to ConditionEdges connected to RunActions created by SyncWires (edit/update) (onEdit)", param1.getGeneratedRule());
+		ParameterEdge param2 = getParameterEdgeFromTo(root, dae, targetCw);
 		assertTrue(param2.isIsGenerated());
-		assertEquals("Connect ParameterEdges to ConditionEdges connected to RunInstanceWires created by SyncWires (edit/update) (onEdit)", param2.getGeneratedRule());
+		assertEquals("Connect ParameterEdges to ConditionEdges connected to RunActions created by SyncWires (edit/update) (onEdit)", param2.getGeneratedRule());
 
 
 	}

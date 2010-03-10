@@ -22,7 +22,7 @@ import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ParameterEdge;
-import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SyncWire;
 
 /**
@@ -90,7 +90,7 @@ public class SyncWiresProperties extends InferenceTestCase {
 		assertTrue(sw2.isIsGenerated());
 		assertTrue(sw3.isIsGenerated());
 
-		// there should be RunInstanceWires on each of these attributes
+		// there should be RunActions on each of these attributes
 		// (following from SyncFormDomainObject)
 
 		// fields should have fieldValues
@@ -104,17 +104,17 @@ public class SyncWiresProperties extends InferenceTestCase {
 		// these field values should be parameters to run instance wires
 		{
 			ParameterEdge pw1 = value1.getOutParameterEdges().get(0);
-			assertTrue(pw1.toString(), pw1.getTo() instanceof RunInstanceWire);
+			assertTrue(pw1.toString(), pw1.getTo() instanceof RunAction);
 			ParameterEdge pw2 = value2.getOutParameterEdges().get(0);
-			assertTrue(pw2.toString(), pw2.getTo() instanceof RunInstanceWire);
+			assertTrue(pw2.toString(), pw2.getTo() instanceof RunAction);
 			ParameterEdge pw3 = value3.getOutParameterEdges().get(0);
-			assertTrue(pw3.toString(), pw3.getTo() instanceof RunInstanceWire);
+			assertTrue(pw3.toString(), pw3.getTo() instanceof RunAction);
 			ParameterEdge pwa1 = valuea1.getOutParameterEdges().get(0);
-			assertTrue(pwa1.toString(), pwa1.getTo() instanceof RunInstanceWire);
+			assertTrue(pwa1.toString(), pwa1.getTo() instanceof RunAction);
 			ParameterEdge pwa2 = valuea2.getOutParameterEdges().get(0);
-			assertTrue(pwa2.toString(), pwa2.getTo() instanceof RunInstanceWire);
+			assertTrue(pwa2.toString(), pwa2.getTo() instanceof RunAction);
 			ParameterEdge pwa3 = valuea3.getOutParameterEdges().get(0);
-			assertTrue(pwa3.toString(), pwa3.getTo() instanceof RunInstanceWire);
+			assertTrue(pwa3.toString(), pwa3.getTo() instanceof RunAction);
 		}
 
 		// test for 'access' events and 'initialize' operations (new)
@@ -127,9 +127,9 @@ public class SyncWiresProperties extends InferenceTestCase {
 
 		// these field values should be parameters to run instance wires
 		{
-			RunInstanceWire rw1 = assertHasRunInstanceWire(root, access1, op1);
-			RunInstanceWire rw2 = assertHasRunInstanceWire(root, access2, op2);
-			RunInstanceWire rw3 = assertHasRunInstanceWire(root, access3, op3);
+			RunAction rw1 = assertHasRunAction(root, access1, op1);
+			RunAction rw2 = assertHasRunAction(root, access2, op2);
+			RunAction rw3 = assertHasRunAction(root, access3, op3);
 
 			getParameterEdgeFromTo(root, valuea1, rw1);
 			getParameterEdgeFromTo(root, valuea2, rw2);

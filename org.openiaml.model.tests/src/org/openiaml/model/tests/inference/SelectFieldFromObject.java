@@ -12,7 +12,7 @@ import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SyncWire;
 
@@ -45,7 +45,7 @@ public class SelectFieldFromObject extends InferenceTestCase {
 		assertNotGenerated(sw);
 		SelectWire select = (SelectWire) getWireFromTo(root, user, obj);
 		assertNotGenerated(select);
-		
+
 		// should have autosave enabled on both fields
 		assertNotGenerated(obj);
 		assertTrue(obj.isAutosave());
@@ -64,8 +64,8 @@ public class SelectFieldFromObject extends InferenceTestCase {
 		CompositeOperation updateAttr = assertHasCompositeOperation(attr, "update");
 
 		// when the text field is edited, the attr update operation should be called
-		RunInstanceWire runEdit = assertHasRunInstanceWire(root, edit, updateAttr);
-		
+		RunAction runEdit = assertHasRunAction(root, edit, updateAttr);
+
 		// with a parameter
 		assertGenerated(getParameterEdgeFromTo(root, fieldValue, runEdit));
 

@@ -24,8 +24,8 @@ import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.NavigateWire;
-import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.NavigateAction;
+import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
@@ -91,14 +91,14 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		Frame login = assertHasFrame(session, "Login Successful");
 		{
 			assertHasNoWiresFromTo(root, handler, login);
-			NavigateWire wire = assertHasNavigateWire(root, handler, login, "login");
+			NavigateAction wire = assertHasNavigateAction(root, handler, login, "login");
 			assertGenerated(wire);
 		}
 
 		Frame logout = assertHasFrame(root, "Logout Successful");
 		{
 			assertHasNoWiresFromTo(root, handler, logout);
-			NavigateWire wire = assertHasNavigateWire(root, handler, logout, "logout");
+			NavigateAction wire = assertHasNavigateAction(root, handler, logout, "logout");
 			assertGenerated(wire);
 		}
 
@@ -160,7 +160,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 
 		// each key should be connected to the select
 		assertGenerated(getParameterEdgeFromTo(handler, currentPassword, select));
-		
+
 		// there should be a set wire connecting to the generated property
 		{
 			Set<Wire> wires2 = assertHasWiresFromTo(1, handler, handler, currentPassword);
@@ -192,7 +192,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 
 		EventTrigger access = page.getOnAccess();
 		assertHasNoWiresFromTo(session, access, target);
-		NavigateWire nav = assertHasNavigateWire(session, access, target);
+		NavigateAction nav = assertHasNavigateAction(session, access, target);
 		assertGenerated(nav);
 	}
 
@@ -215,7 +215,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		assertHasWiresFromTo(0, session, access, check);
 		{
 			// but a run action
-			RunInstanceWire run = assertHasRunInstanceWire(session, access, check);
+			RunAction run = assertHasRunAction(session, access, check);
 			assertGenerated(run);
 			assertEquals("run", run.getName());
 		}
@@ -240,7 +240,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		// no wires
 		assertHasWiresFromTo(0, session, access, op);
 		{
-			RunInstanceWire run = assertHasRunInstanceWire(session, access, op);
+			RunAction run = assertHasRunAction(session, access, op);
 			assertGenerated(run);
 		}
 
@@ -277,7 +277,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 
 		// button has an 'onClick' run wire
 		assertHasWiresFromTo(0, root, button, op);
-		RunInstanceWire run = assertHasRunInstanceWire(root, button, op);
+		RunAction run = assertHasRunAction(root, button, op);
 		assertGenerated(run);
 		assertEquals("onClick", run.getName());
 
@@ -336,10 +336,10 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		assertNotNull(call);
 		assertGenerated(call);
 
-		// should have a RunInstanceWire to the 'exists?' operation
+		// should have a RunAction to the 'exists?' operation
 		assertHasWiresFromTo(0, session, call, exists);
 		{
-			RunInstanceWire run = assertHasRunInstanceWire(session, call, exists);
+			RunAction run = assertHasRunAction(session, call, exists);
 			assertGenerated(run);
 		}
 	}
@@ -400,7 +400,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		Frame login = assertHasFrame(root, "login");
 		{
 			assertHasNoWiresFromTo(root, check, login);
-			NavigateWire wire = assertHasNavigateWire(root, check, login, "fail");
+			NavigateAction wire = assertHasNavigateAction(root, check, login, "fail");
 			assertGenerated(wire);
 		}
 

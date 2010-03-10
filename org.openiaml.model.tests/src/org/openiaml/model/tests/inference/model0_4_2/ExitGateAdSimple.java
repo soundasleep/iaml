@@ -18,8 +18,8 @@ import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.wires.ConditionEdge;
-import org.openiaml.model.model.wires.NavigateWire;
-import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.NavigateAction;
+import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.tests.inference.ValidInferenceTestCase;
 
 /**
@@ -42,36 +42,36 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 	 */
 	public void testInitial() throws Exception {
 		root = loadDirectly(ExitGateAdSimple.class);
-		
+
 		Frame page = assertHasFrame(root, "Home");
 		assertNotGenerated(page);
-		
+
 		Session session = assertHasSession(root, "Advertising Session");
 		assertNotGenerated(session);
-		
+
 		Frame external = assertHasFrame(root, "External Page");
 		assertNotGenerated(external);
-		
+
 		Frame page1 = assertHasFrame(session, "Page 1");
 		assertNotGenerated(page1);
 		Frame page2 = assertHasFrame(session, "Page 2");
 		assertNotGenerated(page2);
-		
+
 		Frame ad = assertHasFrame(session, "Advertisement");
 		assertNotGenerated(ad);
-		
+
 		ExitGate gate = assertHasExitGate(session, "View Ads Exit Gate");
 		assertNotGenerated(gate);
-		
-		NavigateWire nav = assertHasNavigateWire(session, gate, ad, "last");
+
+		NavigateAction nav = assertHasNavigateAction(session, gate, ad, "last");
 		assertNotGenerated(nav);
 
 	}
-	
+
 	/**
 	 * A button "Continue" will be created in the Advertisement.
 	 * This will navigate back to the Gate.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void testAdPageHasContinueButton() throws Exception {
@@ -83,24 +83,24 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 
 		Button button = assertHasButton(ad, "Continue");
 		assertGenerated(button);
-		
+
 		EventTrigger event = button.getOnClick();
 		assertGenerated(event);
-		
-		NavigateWire nav = assertHasNavigateWire(root, event, gate, "resume");
-		assertGenerated(nav);		
-		
+
+		NavigateAction nav = assertHasNavigateAction(root, event, gate, "resume");
+		assertGenerated(nav);
+
 	}
-	
+
 	/**
-	 * A property is generated which will store the 
-	 * value of the visited. 
-	 * 
+	 * A property is generated which will store the
+	 * value of the visited.
+	 *
 	 * @throws Exception
 	 */
 	public void testAdPageSetsProperty() throws Exception {
 		root = loadAndInfer(ExitGateAdSimple.class);
-		
+
 		Session session = assertHasSession(root, "Advertising Session");
 		Frame ad = assertHasFrame(session, "Advertisement");
 
@@ -112,23 +112,23 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 		// required page
 		EventTrigger access = ad.getOnAccess();
 		assertGenerated(access);
-		
+
 		// set operation
 		CompositeOperation set = assertHasCompositeOperation(ad, "Set gate flag");
 		assertGenerated(set);
-		
+
 		// run wire
-		RunInstanceWire run = assertHasRunInstanceWire(ad, access, set);
+		RunAction run = assertHasRunAction(ad, access, set);
 		assertGenerated(run);
-		
+
 	}
-	
+
 	/**
 	 * Check the contents of the generated 'Set gate flag' operation.
 	 */
 	public void testSetOperationContents() throws Exception {
 		root = loadAndInfer(ExitGateAdSimple.class);
-		
+
 		Session session = assertHasSession(root, "Advertising Session");
 		Frame ad = assertHasFrame(session, "Advertisement");
 
@@ -137,7 +137,7 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 
 		// set operation
 		CompositeOperation set = assertHasCompositeOperation(ad, "Set gate flag");
-		
+
 		// start node
 		StartNode start = assertHasStartNode(set);
 		assertGenerated(start);
@@ -148,15 +148,15 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 		StaticValue value = assertHasStaticValue(set, "true");
 		assertGenerated(value);
 		assertEquals(value.getValue(), "true");
-		
+
 		// flow
 		assertGenerated(assertHasExecutionEdge(set, start, s));
 		assertGenerated(assertHasExecutionEdge(set, s, finish));
 		assertGenerated(assertHasDataFlowEdge(set, value, s));
 		assertGenerated(assertHasDataFlowEdge(set, s, property));
-		
+
 	}
-	
+
 	/**
 	 * A condition will be created in the Session to check the
 	 * given property.
@@ -166,16 +166,16 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 
 		Session session = assertHasSession(root, "Advertising Session");
 		ExitGate gate = assertHasExitGate(session, "View Ads Exit Gate");
-		
+
 		// generated condition
 		CompositeCondition condition = assertHasCompositeCondition(session, "check View Ads Exit Gate");
 		assertGenerated(condition);
-		
+
 		ConditionEdge wire = assertHasConditionEdge(session, condition, gate, "condition");
 		assertGenerated(wire);
-		
+
 	}
-	
+
 	/**
 	 * Check the contents of the generated condition.
 	 */
@@ -189,7 +189,7 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 
 		// generated condition
 		CompositeCondition condition = assertHasCompositeCondition(session, "check View Ads Exit Gate");
-		
+
 		// start node
 		StartNode start = assertHasStartNode(condition);
 		assertGenerated(start);
@@ -199,13 +199,13 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 		assertGenerated(cancel);
 		DecisionOperation check = assertHasDecisionOperation(condition, "true?");
 		assertGenerated(check);
-		
+
 		// flow
 		assertGenerated(assertHasExecutionEdge(condition, start, check));
 		assertGenerated(assertHasExecutionEdge(condition, check, finish, "y"));
 		assertGenerated(assertHasExecutionEdge(condition, check, cancel, "n"));
-		assertGenerated(assertHasDataFlowEdge(condition, property, check));		
-		
+		assertGenerated(assertHasDataFlowEdge(condition, property, check));
+
 	}
-	
+
 }

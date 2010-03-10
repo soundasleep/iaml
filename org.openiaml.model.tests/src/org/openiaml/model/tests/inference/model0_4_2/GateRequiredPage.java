@@ -18,8 +18,8 @@ import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.wires.ConditionEdge;
-import org.openiaml.model.model.wires.NavigateWire;
-import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.NavigateAction;
+import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.tests.inference.ValidInferenceTestCase;
 
 /**
@@ -42,60 +42,60 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 	 */
 	public void testInitial() throws Exception {
 		root = loadDirectly(GateRequiredPage.class);
-		
+
 		Frame page = assertHasFrame(root, "Home");
 		assertNotGenerated(page);
-		
+
 		Session session = assertHasSession(root, "Session");
 		assertNotGenerated(session);
-		
+
 		Frame required = assertHasFrame(root, "Required Page");
 		assertNotGenerated(required);
-		
+
 		EntryGate gate = assertHasEntryGate(session, "requires a page is viewed first");
 		assertNotGenerated(gate);
-		
-		NavigateWire nav = assertHasNavigateWire(session, gate, required, "first");
+
+		NavigateAction nav = assertHasNavigateAction(session, gate, required, "first");
 		assertNotGenerated(nav);
 
 	}
-	
+
 	/**
 	 * A button "Continue" will be created in the Required Page.
 	 * This will navigate back to the Gate.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void testRequiredPageHasContinueButton() throws Exception {
 		root = loadAndInfer(GateRequiredPage.class);
-		
+
 		Frame required = assertHasFrame(root, "Required Page");
-		
+
 		Button button = assertHasButton(required, "Continue");
 		assertGenerated(button);
-		
+
 		Session session = assertHasSession(root, "Session");
 		EntryGate gate = assertHasEntryGate(session, "requires a page is viewed first");
-		
+
 		EventTrigger event = button.getOnClick();
 		assertGenerated(event);
-		
-		NavigateWire nav = assertHasNavigateWire(root, event, gate, "resume");
-		assertGenerated(nav);		
-		
+
+		NavigateAction nav = assertHasNavigateAction(root, event, gate, "resume");
+		assertGenerated(nav);
+
 	}
-	
+
 	/**
-	 * A property is generated which will store the 
-	 * value of the visited. 
-	 * 
+	 * A property is generated which will store the
+	 * value of the visited.
+	 *
 	 * @throws Exception
 	 */
 	public void testRequiredPageSetsProperty() throws Exception {
 		root = loadAndInfer(GateRequiredPage.class);
-		
+
 		Session session = assertHasSession(root, "Session");
-		
+
 		// generated property
 		Property property = assertHasProperty(session, "requires a page is viewed first flag");
 		assertGenerated(property);
@@ -105,25 +105,25 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		Frame required = assertHasFrame(root, "Required Page");
 		EventTrigger access = required.getOnAccess();
 		assertGenerated(access);
-		
+
 		// set operation
 		CompositeOperation set = assertHasCompositeOperation(required, "Set gate flag");
 		assertGenerated(set);
-		
+
 		// run wire
-		RunInstanceWire run = assertHasRunInstanceWire(required, access, set);
+		RunAction run = assertHasRunAction(required, access, set);
 		assertGenerated(run);
-		
+
 	}
-	
+
 	/**
 	 * Check the contents of the generated 'Set gate flag' operation.
 	 */
 	public void testSetOperationContents() throws Exception {
 		root = loadAndInfer(GateRequiredPage.class);
-		
+
 		Session session = assertHasSession(root, "Session");
-		
+
 		// generated property
 		Property property = assertHasProperty(session, "requires a page is viewed first flag");
 
@@ -132,7 +132,7 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 
 		// set operation
 		CompositeOperation set = assertHasCompositeOperation(required, "Set gate flag");
-		
+
 		// start node
 		StartNode start = assertHasStartNode(set);
 		assertGenerated(start);
@@ -143,15 +143,15 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		StaticValue value = assertHasStaticValue(set, "true");
 		assertGenerated(value);
 		assertEquals(value.getValue(), "true");
-		
+
 		// flow
 		assertGenerated(assertHasExecutionEdge(set, start, s));
 		assertGenerated(assertHasExecutionEdge(set, s, finish));
 		assertGenerated(assertHasDataFlowEdge(set, value, s));
 		assertGenerated(assertHasDataFlowEdge(set, s, property));
-		
+
 	}
-	
+
 	/**
 	 * A condition will be created in the Session to check the
 	 * given property.
@@ -161,16 +161,16 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 
 		Session session = assertHasSession(root, "Session");
 		EntryGate gate = assertHasEntryGate(session, "requires a page is viewed first");
-		
+
 		// generated condition
 		CompositeCondition condition = assertHasCompositeCondition(session, "check requires a page is viewed first");
 		assertGenerated(condition);
-		
+
 		ConditionEdge wire = assertHasConditionEdge(session, condition, gate, "condition");
 		assertGenerated(wire);
-		
+
 	}
-	
+
 	/**
 	 * Check the contents of the generated condition.
 	 */
@@ -178,13 +178,13 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		root = loadAndInfer(GateRequiredPage.class);
 
 		Session session = assertHasSession(root, "Session");
-		
+
 		// generated property
 		Property property = assertHasProperty(session, "requires a page is viewed first flag");
 
 		// generated condition
 		CompositeCondition condition = assertHasCompositeCondition(session, "check requires a page is viewed first");
-		
+
 		// start node
 		StartNode start = assertHasStartNode(condition);
 		assertGenerated(start);
@@ -194,13 +194,13 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		assertGenerated(cancel);
 		DecisionOperation check = assertHasDecisionOperation(condition, "true?");
 		assertGenerated(check);
-		
+
 		// flow
 		assertGenerated(assertHasExecutionEdge(condition, start, check));
 		assertGenerated(assertHasExecutionEdge(condition, check, finish, "y"));
 		assertGenerated(assertHasExecutionEdge(condition, check, cancel, "n"));
-		assertGenerated(assertHasDataFlowEdge(condition, property, check));		
-		
+		assertGenerated(assertHasDataFlowEdge(condition, property, check));
+
 	}
-	
+
 }

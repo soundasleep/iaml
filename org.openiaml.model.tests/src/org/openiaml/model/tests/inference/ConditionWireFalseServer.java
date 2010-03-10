@@ -11,7 +11,7 @@ import org.openiaml.model.model.Property;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ConditionEdge;
-import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SyncWire;
 
 /**
@@ -47,7 +47,7 @@ public class ConditionWireFalseServer extends InferenceTestCase {
 		assertEquals(cw.getTo(), wire);
 
 		// [inferred]
-		// field1 and field2 should be connected by SyncWires		
+		// field1 and field2 should be connected by SyncWires
 		SyncWire sw = assertHasSyncWire(root, field1, field2);
 
 		// we should have EventTrigger 'edit' in source
@@ -59,14 +59,14 @@ public class ConditionWireFalseServer extends InferenceTestCase {
 		assertNotSame(srcOp, targetOp);
 
 		// there should be a run wire between these two
-		RunInstanceWire srcRw = assertHasRunInstanceWire(wire, srcEdit, targetOp, "run");
-		RunInstanceWire targetRw = assertHasRunInstanceWire(wire, targetEdit, srcOp, "run");
+		RunAction srcRw = assertHasRunAction(wire, srcEdit, targetOp, "run");
+		RunAction targetRw = assertHasRunAction(wire, targetEdit, srcOp, "run");
 
 		// [new]
 		// there should be a condition wire to the new SyncWire
 		assertGenerated(assertHasConditionEdge(root, cond, sw));
 
-		// there should be additional ConditionWires to these RunInstanceWires
+		// there should be additional ConditionWires to these RunActions
 		assertGenerated(assertHasConditionEdge(page1, cond, srcRw));
 		assertGenerated(assertHasConditionEdge(page1, cond, targetRw));
 
@@ -79,23 +79,23 @@ public class ConditionWireFalseServer extends InferenceTestCase {
 		Operation targetInit = assertHasOperation(field2, "init");
 		assertNotSame(srcAccess, targetAccess);
 		assertNotSame(srcInit, targetInit);
-		
+
 		// execution wires
-		RunInstanceWire srcInitRun = assertHasRunInstanceWire(wire, srcAccess, srcInit, "run");
-		RunInstanceWire targetInitRun = assertHasRunInstanceWire(wire, targetAccess, targetInit, "run");
-		
+		RunAction srcInitRun = assertHasRunAction(wire, srcAccess, srcInit, "run");
+		RunAction targetInitRun = assertHasRunAction(wire, targetAccess, targetInit, "run");
+
 		// they should have incoming parameters
 		Property field1value = assertHasProperty(field1, "fieldValue");
 		Property field2value = assertHasProperty(field2, "fieldValue");
 		assertNotSame(field1value, field2value);
-		
+
 		assertHasParameterEdge(root, field2value, srcInitRun);
 		assertHasParameterEdge(root, field1value, targetInitRun);
-		
+
 		// but they should also have condition wires
 		assertHasConditionEdge(page1, cond, srcInitRun);
 		assertHasConditionEdge(page1, cond, targetInitRun);
-		
+
 
 	}
 

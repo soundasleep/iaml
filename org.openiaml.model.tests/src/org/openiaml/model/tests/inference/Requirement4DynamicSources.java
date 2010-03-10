@@ -18,7 +18,7 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ConditionEdge;
-import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SyncWire;
 
 /**
@@ -79,31 +79,31 @@ public class Requirement4DynamicSources extends InferenceTestCaseWithConditionWi
 	    getConditionWireFromToWithParameters(root, cond, sync3, dae, unrelated);
 
 	}
-	
+
 	/**
 	 * The CompositeCondition 'xpath' (generated) should only have two parameters.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void testOnly2Parameters() throws Exception {
 	    DynamicApplicationElementSet dae = assertHasDynamicApplicationElementSet(root, "all pages");
 	    assertNotGenerated(dae);
-	    
+
 	    // generated
 	    CompositeCondition cond = assertHasCompositeCondition(dae, "xpath");
 	    assertGenerated(cond);
-	    
+
 	    // parameters
 	    List<?> parameters = query(cond, "iaml:parameters");
 	    assertEquals(2, parameters.size());
-	    
+
 	}
-	
+
 	/**
 	 * Since we are using Xpath which adds a condition to all sync wires,
 	 * the condition that restricts the init/access wire should also copy
 	 * over the appropriate parameters (exactly two - element, xpath).
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void testTextFieldInitConditionParameters() throws Exception {
@@ -112,18 +112,18 @@ public class Requirement4DynamicSources extends InferenceTestCaseWithConditionWi
 		Frame page2 = assertHasFrame(root, "page b");
 		Frame fieldList = assertHasFrame(root, "FieldList");
 		DynamicApplicationElementSet dae = assertHasDynamicApplicationElementSet(root, "all pages");
-		
+
 		// 'xpath' condition
 		CompositeCondition c = assertHasCompositeCondition(dae, "xpath");
 		assertGenerated(c);
-		
+
 		SyncWire sw = assertHasSyncWire(root, fieldList, page1, "dynamic sync");
 		assertGenerated(sw);
-		
+
 		// condition on sync wire
 		ConditionEdge cond = assertHasConditionEdge(page1, c, sw);
 		assertGenerated(cond);
-		
+
 		// page1.target
 		InputTextField page1text1 = assertHasInputTextField(page1, "target");
 		assertNotGenerated(page1text1);
@@ -135,7 +135,7 @@ public class Requirement4DynamicSources extends InferenceTestCaseWithConditionWi
 		// fieldlist.target
 		InputTextField fltext1 = assertHasInputTextField(fieldList, "target");
 		assertNotGenerated(fltext1);
-		
+
 		// sync wire cascaded to text field
 		SyncWire swtext = assertHasSyncWire(root, page1text1, fltext1);
 		assertGenerated(swtext);
@@ -143,27 +143,27 @@ public class Requirement4DynamicSources extends InferenceTestCaseWithConditionWi
 		// sync wires go page1 <--> fieldlist <--> page3, not
 		// sync wires going page1 <--> page3
 		assertNoWireBidirectional(root, page1text1, page3text1);
-		
+
 		// condition cascaded to text field
-		ConditionEdge syncCond = assertHasConditionEdge(root, c, swtext);	
+		ConditionEdge syncCond = assertHasConditionEdge(root, c, swtext);
 		assertGenerated(syncCond);
-		
+
 		EventTrigger access = page1text1.getOnAccess();
 		assertGenerated(access);
 		Operation init = assertHasOperation(page1text1, "init");
 		assertGenerated(init);
-		
+
 		// run instance wire from 'access' to 'init'
-		RunInstanceWire run = assertHasRunInstanceWire(root, access, init);
+		RunAction run = assertHasRunAction(root, access, init);
 		assertGenerated(run);
-		
+
 		// condition cascaded to run wire
-		ConditionEdge initCondition = assertHasConditionEdge(root, c, run);  
+		ConditionEdge initCondition = assertHasConditionEdge(root, c, run);
 		assertGenerated(initCondition);
-		
+
 		// parameter wires
 		assertEquals(2, initCondition.getInParameterEdges().size());
-		
+
 	}
 
 }

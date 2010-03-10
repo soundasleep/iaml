@@ -19,7 +19,7 @@ import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ParameterEdge;
-import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SyncWire;
 
 /**
@@ -144,15 +144,15 @@ public class SyncWireTestCase extends InferenceTestCase {
 		 * + parameter wires for both
 		 */
 		//assertGreaterEq(4, wire.getWires().size());
- 
+
 		// run instance wires
 		Action name1editRun = null;
 		Action name2editRun = null;
 		ParameterEdge name1editParam = null;
 		ParameterEdge name2editParam = null;
-		// get RunInstanceWires first
+		// get RunActions first
 		for (Action w : wire.getActions()) {
-			if (w instanceof RunInstanceWire) {
+			if (w instanceof RunAction) {
 				if (w.getFrom().equals(name1edit) && w.getTo().equals(name2update) )
 					name1editRun = w;
 				if (w.getFrom().equals(name2edit) && w.getTo().equals(name1update) )

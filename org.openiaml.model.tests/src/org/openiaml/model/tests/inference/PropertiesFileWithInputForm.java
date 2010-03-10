@@ -12,7 +12,7 @@ import org.openiaml.model.model.Property;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SyncWire;
 
 /**
@@ -50,8 +50,8 @@ public class PropertiesFileWithInputForm extends InferenceTestCase {
 		assertNotSame(srcOp, targetOp);
 
 		// there should be a run wire between these two
-		RunInstanceWire srcRw = assertHasRunInstanceWire(wire, srcEdit, targetOp);
-		RunInstanceWire targetRw = assertHasRunInstanceWire(wire, targetEdit, srcOp);
+		RunAction srcRw = assertHasRunAction(wire, srcEdit, targetOp);
+		RunAction targetRw = assertHasRunAction(wire, targetEdit, srcOp);
 
 		// both should have fieldValues
 		Property textValue = assertHasProperty(source, "fieldValue");
@@ -85,8 +85,8 @@ public class PropertiesFileWithInputForm extends InferenceTestCase {
 		assertNotSame(srcOp, targetOp);
 
 		// there should be a run wire between these two
-		RunInstanceWire srcRw = assertHasRunInstanceWire(wire, srcEdit, targetOp);
-		RunInstanceWire targetRw = assertHasRunInstanceWire(wire, targetEdit, srcOp);
+		RunAction srcRw = assertHasRunAction(wire, srcEdit, targetOp);
+		RunAction targetRw = assertHasRunAction(wire, targetEdit, srcOp);
 
 		// both should have fieldValues
 		Property textValue = assertHasProperty(source, "fieldValue");

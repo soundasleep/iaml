@@ -44,6 +44,7 @@ import org.w3c.dom.NodeList;
  *      <li>ConditionWire is now ConditionEdge, and no longer a WireEdge
  *      <li>RunInstanceWire is now a SingleWire, and not a CompositeWire; it no longer contains Operations directly.
  *      <li>RunInstanceWire is now an Action, rather than a Wire
+ *      <li>NavigateWire is now an Action, rather than a Wire
  *   </ol></li>
  *   <li>VisibleThing no longer ContainsEventTriggers; now separate onAccess, onEdit, onClick events
  *   <li>Scope no longer ContainsEventTriggers; now separate onAccess, onInit events
@@ -69,6 +70,7 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 	private List<String> constraintWires = null;
 	private List<String> conditionWires = null;
 	private List<String> runInstanceWires = null;
+	private List<String> navigateWires = null;
 	
 	/**
 	 * We will cycle over the document, and find out which edges are
@@ -86,6 +88,7 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 		constraintWires = new ArrayList<String>();
 		conditionWires = new ArrayList<String>();
 		runInstanceWires = new ArrayList<String>();
+		navigateWires = new ArrayList<String>();
 		prepareDocumentRecurse(documentElement, errors);
 
 	}
@@ -161,6 +164,15 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 					runInstanceWires.add(id);
 				} else {
 					errors.add(new ExpectedMigrationException(this, e, "Element was a RunInstanceWire but did not have an id attribute."));
+				}
+			}
+			
+			if ("iaml.wires:NavigateWire".equals(e.getAttribute("xsi:type"))) {
+				String id = e.getAttribute("id");
+				if (id != null) {
+					navigateWires.add(id);
+				} else {
+					errors.add(new ExpectedMigrationException(this, e, "Element was a NavigateWire but did not have an id attribute."));
 				}
 			}
 		}
@@ -298,9 +310,15 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 				return "conditionEdges";
 			}
 			
-			// <wires xsi:type="iaml.wires:ConstraintWire"> 
+			// <wires xsi:type="iaml.wires:RunInstanceWire"> 
 			// --> <actions>
 			if ("iaml.wires:RunInstanceWire".equals(xsiType)) {
+				return "actions";
+			}
+
+			// <wires xsi:type="iaml.wires:NavigateWire"> 
+			// --> <actions>
+			if ("iaml.wires:NavigateWire".equals(xsiType)) {
 				return "actions";
 			}
 		}
@@ -458,6 +476,24 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 		if (!old.getAttribute("outWires").isEmpty()) {
 			splitReferences(old, "outWires", runInstanceWires, "outActions");
 		}
+
+		// any inEdges or outEdges to an old NavigateWire?
+		if (!old.getAttribute("inEdges").isEmpty()) {
+			splitReferences(old, "inEdges", navigateWires, "inActions");
+		}
+
+		if (!old.getAttribute("outEdges").isEmpty()) {
+			splitReferences(old, "outEdges", navigateWires, "outActions");
+		}
+		
+		// any inWires or outWires to an old NavigateWire?
+		if (!old.getAttribute("inWires").isEmpty()) {
+			splitReferences(old, "inWires", navigateWires, "inActions");
+		}
+
+		if (!old.getAttribute("outWires").isEmpty()) {
+			splitReferences(old, "outWires", navigateWires, "outActions");
+		}
 		
 		// remove an attribute?
 		if ("iaml.wires:RequiresWire".equals(old.getAttribute("xsi:type")) || "requiresEdges".equals(old.getNodeName())) {
@@ -537,25 +573,42 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 			List<String> refs, String newAttribute) {
 		
 		List<String> newRefs = new ArrayList<String>();
+		// any new references that already exist
+		if (!e.getAttribute(newAttribute).isEmpty()) {
+			String[] allRefs2 = e.getAttribute(newAttribute).split(" ");
+			for (String s : allRefs2) {
+				if (!s.isEmpty())
+					newRefs.add(s);
+			}
+		}
+		
 		List<String> oldRefs = new ArrayList<String>();
 		String[] allRefs = e.getAttribute(oldAttribute).split(" ");
 		for (String s : allRefs) {
-			if (refs.contains(s)) {
-				newRefs.add(s);
-			} else {
-				oldRefs.add(s);
+			if (!s.isEmpty()) {
+				if (refs.contains(s)) {
+					newRefs.add(s);
+				} else {
+					oldRefs.add(s);
+				}
 			}
 		}
 		
 		// join it back together
-		if (!newRefs.isEmpty()) {
+		if (newRefs.isEmpty()) {
+			e.removeAttribute(newAttribute);
+		} else {
 			StringBuffer newRef = new StringBuffer();
 			for (String s : newRefs) {
 				newRef.append(s).append(' ');
 			}
 			e.setAttribute(newAttribute, newRef.toString().trim());
 		}
-			{
+		
+		// and the old attributes (and remove it if the attribute is empty)
+		if (oldRefs.isEmpty()) {
+			e.removeAttribute(oldAttribute);
+		} else {
 			StringBuffer oldRef = new StringBuffer();
 			for (String s : oldRefs) {
 				oldRef.append(s).append(' ');

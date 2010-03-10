@@ -77,7 +77,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//NamedElement #//DataFlowEdgesSource">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Incoming values to an {@model Operation operation} executed by a {@model RunInstanceWire} can be accessed via Parameters."/>
+      <details key="documentation" value="Incoming values to an {@model Operation operation} executed by a {@model RunAction} can be accessed via Parameters."/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PrimitiveOperation" eSuperTypes="#//Operation #//ExecutionEdgesSource #//WireSource #//ActionSource">
@@ -578,7 +578,7 @@
         <details key="documentation" value="When a connected element changes, a SyncWire will update the other connected element."/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="RunInstanceWire" eSuperTypes="#//WireDestination #//wires/ParameterEdgeDestination #//NamedElement #//GeneratesElements #//wires/ConditionEdgeDestination #//Action">
+    <eClassifiers xsi:type="ecore:EClass" name="RunAction" eSuperTypes="#//WireDestination #//wires/ParameterEdgeDestination #//NamedElement #//GeneratesElements #//wires/ConditionEdgeDestination #//Action">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="RunWire: a composite wire that contains ExecutionWires/etc"/>
       </eAnnotations>
@@ -593,7 +593,7 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ParameterEdge" eSuperTypes="#//NamedElement #//GeneratedElement">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Provides incoming values for {@model Parameter Parameters} of a {@model RunInstanceWire}."/>
+        <details key="documentation" value="Provides incoming values for {@model Parameter Parameters} of a {@model RunAction}."/>
       </eAnnotations>
       <eAnnotations source="http://openiaml.org/comment">
         <details key="changed" value="0.4.3 to no longer be a Wire; added 'from' and 'to' references; renamed to ParameterEdge"/>
@@ -616,7 +616,7 @@
         <details key="documentation" value="When the source element changes, the target element will be updated (but not vice versa)."/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="NavigateWire" eSuperTypes="#//WireDestination #//NamedElement #//GeneratesElements #//wires/ConditionEdgeDestination #//Action">
+    <eClassifiers xsi:type="ecore:EClass" name="NavigateAction" eSuperTypes="#//WireDestination #//NamedElement #//GeneratesElements #//wires/ConditionEdgeDestination #//Action">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.2"/>
       </eAnnotations>
@@ -852,7 +852,7 @@
         <details key="comment" value="added in 0.4"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="A virtual {@model Operation} call; the outgoing {@model RunInstanceWire} will be executed."/>
+        <details key="documentation" value="A virtual {@model Operation} call; the outgoing {@model RunAction} will be executed."/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Arithmetic" eSuperTypes="#//ActivityNode #//DataFlowEdgeDestination #//DataFlowEdgesSource">

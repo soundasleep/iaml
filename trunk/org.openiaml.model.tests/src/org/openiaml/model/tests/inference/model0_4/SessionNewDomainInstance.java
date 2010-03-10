@@ -18,7 +18,7 @@ import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
 /**
@@ -112,7 +112,7 @@ public class SessionNewDomainInstance extends InferenceTestCase {
 
 		// email.edit --> target.update
 		Set<Wire> wires = assertHasWiresFromTo(1, session, edit, targetUpdate);
-		RunInstanceWire targetRun = (RunInstanceWire) wires.iterator().next();
+		RunAction targetRun = (RunAction) wires.iterator().next();
 		assertGenerated(targetRun);
 
 		// email.value --> targetRun wire

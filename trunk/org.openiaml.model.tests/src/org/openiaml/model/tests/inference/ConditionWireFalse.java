@@ -9,7 +9,7 @@ import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SyncWire;
 
 /**
@@ -43,14 +43,14 @@ public class ConditionWireFalse extends InferenceTestCase {
 		assertNotSame(srcOp, targetOp);
 
 		// there should be a run wire between these two
-		RunInstanceWire srcRw = assertHasRunInstanceWire(wire, srcEdit, targetOp);
-		RunInstanceWire targetRw = assertHasRunInstanceWire(wire, targetEdit, srcOp);
+		RunAction srcRw = assertHasRunAction(wire, srcEdit, targetOp);
+		RunAction targetRw = assertHasRunAction(wire, targetEdit, srcOp);
 
 		// [new]
-		// there should be additional ConditionWires to these RunInstanceWires
+		// there should be additional ConditionWires to these RunActions
 		assertGenerated(assertHasConditionEdge(page, cond, srcRw));
 		assertGenerated(assertHasConditionEdge(page, cond, targetRw));
-		
+
 		// there doesn't need to be any parameters to these ConditionWires
 
 	}

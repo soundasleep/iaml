@@ -11,7 +11,7 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ConditionEdge;
-import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SyncWire;
 
 /**
@@ -80,10 +80,10 @@ protected void setUp() throws Exception {
     assertNotSame(f3update, f2update);
 
     // there should be a run wire between these
-    RunInstanceWire rw1_2 = assertHasRunInstanceWire(wire, f1edit, f2update);
-    RunInstanceWire rw2_1 = assertHasRunInstanceWire(wire, f2edit, f1update);
-    RunInstanceWire rw1_3 = assertHasRunInstanceWire(wire, f1edit, f3update);
-    RunInstanceWire rw3_1 = assertHasRunInstanceWire(wire, f3edit, f1update);
+    RunAction rw1_2 = assertHasRunAction(wire, f1edit, f2update);
+    RunAction rw2_1 = assertHasRunAction(wire, f2edit, f1update);
+    RunAction rw1_3 = assertHasRunAction(wire, f1edit, f3update);
+    RunAction rw3_1 = assertHasRunAction(wire, f3edit, f1update);
 
     // condition wires all over!
     ConditionEdge cw1_2 = assertHasConditionEdge(page1, cond, rw1_2);

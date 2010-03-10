@@ -12,7 +12,7 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.RunAction;
 
 /**
  * Tests inference of sync wires between a domain attribute
@@ -39,12 +39,12 @@ public class SyncFieldDomainAttribute extends InferenceTestCase {
 
 		// sync wire from text field to attribute
 		assertHasSyncWire(page, field, attribute, "syncField");
-		
+
 		// field should now have an edit event
 		EventTrigger editEvent = field.getOnEdit();
 
 		// this event should have a run wire
-		RunInstanceWire runWire = (RunInstanceWire) getActionFrom(editEvent, "run");
+		RunAction runWire = (RunAction) getActionFrom(editEvent, "run");
 
 		// the attribute should have an operation 'update'
 		Operation opUpdate = assertHasOperation(attribute, "update");

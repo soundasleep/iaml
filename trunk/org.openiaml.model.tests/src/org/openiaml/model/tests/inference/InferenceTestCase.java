@@ -71,13 +71,13 @@ import org.openiaml.model.model.wires.ConditionEdgesSource;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ExtendsEdgeDestination;
 import org.openiaml.model.model.wires.ExtendsEdgesSource;
-import org.openiaml.model.model.wires.NavigateWire;
+import org.openiaml.model.model.wires.NavigateAction;
 import org.openiaml.model.model.wires.NewInstanceWire;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.ParameterEdgeDestination;
 import org.openiaml.model.model.wires.ParameterEdgesSource;
 import org.openiaml.model.model.wires.RequiresEdge;
-import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.model.wires.SyncWire;
@@ -909,14 +909,14 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	}
 	
 	/**
-	 * Assert there exists only one unidirectional RunInstanceWire between
-	 * the given elements.
+	 * Assert there exists only one unidirectional RunAction between
+	 * the given elements, with the given name.
 	 *
 	 * @return The element found
 	 */
-	public RunInstanceWire assertHasRunInstanceWire(EObject container, ActionSource from, ActionDestination to, String name) throws JaxenException {
-		return (RunInstanceWire) assertHasActionFromTo(container, from, to, 
-				RunInstanceWire.class, getNameFilter(name));
+	public RunAction assertHasRunAction(EObject container, ActionSource from, ActionDestination to, String name) throws JaxenException {
+		return (RunAction) assertHasActionFromTo(container, from, to, 
+				RunAction.class, getNameFilter(name));
 	}
 	
 	/**
@@ -938,25 +938,25 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	}
 	
 	/**
-	 * Assert there exists only one unidirectional RunInstanceWire between
-	 * the given elements, with any name.
+	 * Assert there exists only one unidirectional RunAction between
+	 * the given elements.
 	 *
 	 * @return The element found
 	 */
-	public RunInstanceWire assertHasRunInstanceWire(EObject container, ActionSource from, ActionDestination to) throws JaxenException {
-		return (RunInstanceWire) assertHasActionFromTo(container, from, to, 
-				RunInstanceWire.class, ALL_ACTIONS);
+	public RunAction assertHasRunAction(EObject container, ActionSource from, ActionDestination to) throws JaxenException {
+		return (RunAction) assertHasActionFromTo(container, from, to, 
+				RunAction.class, ALL_ACTIONS);
 	}
 	
 	/**
-	 * Assert there exists only one unidirectional RunInstanceWire between
-	 * the given elements, with any name.
+	 * Assert there exists only one unidirectional RunAction between
+	 * the given elements.
 	 *
 	 * @return The element found
 	 */
-	public RunInstanceWire assertHasRunInstanceWire(EObject container, ActionSource from, ActionDestination to, Filter<Action> filter) throws JaxenException {
-		return (RunInstanceWire) assertHasActionFromTo(container, from, to, 
-				RunInstanceWire.class, filter);
+	public RunAction assertHasRunAction(EObject container, ActionSource from, ActionDestination to, Filter<Action> filter) throws JaxenException {
+		return (RunAction) assertHasActionFromTo(container, from, to, 
+				RunAction.class, filter);
 	}
 	
 	/**
@@ -1046,25 +1046,25 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	}
 	
 	/**
-	 * Assert there exists only one unidirectional NavigateWire between
+	 * Assert there exists only one unidirectional NavigateAction between
 	 * the given elements.
 	 *
 	 * @return The element found
 	 */
-	public NavigateWire assertHasNavigateWire(EObject container, ActionSource from, ActionDestination to, String name) throws JaxenException {
-		return (NavigateWire) assertHasActionFromTo(container, from, to, 
-				NavigateWire.class, getNameFilter(name) );
+	public NavigateAction assertHasNavigateAction(EObject container, ActionSource from, ActionDestination to, String name) throws JaxenException {
+		return (NavigateAction) assertHasActionFromTo(container, from, to, 
+				NavigateAction.class, getNameFilter(name) );
 	}
 	
 	/**
-	 * Assert there exists only one unidirectional NavigateWire between
+	 * Assert there exists only one unidirectional NavigateAction between
 	 * the given elements.
 	 *
 	 * @return The element found
 	 */
-	public NavigateWire assertHasNavigateWire(EObject container, ActionSource from, ActionDestination to) throws JaxenException {
-		return (NavigateWire) assertHasActionFromTo(container, from, to, 
-				NavigateWire.class, ALL_ACTIONS);
+	public NavigateAction assertHasNavigateAction(EObject container, ActionSource from, ActionDestination to) throws JaxenException {
+		return (NavigateAction) assertHasActionFromTo(container, from, to, 
+				NavigateAction.class, ALL_ACTIONS);
 	}
 	
 	/**

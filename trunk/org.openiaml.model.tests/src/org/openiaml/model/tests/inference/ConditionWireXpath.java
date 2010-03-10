@@ -12,7 +12,7 @@ import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
-import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SyncWire;
 
 /**
@@ -60,10 +60,10 @@ public class ConditionWireXpath extends InferenceTestCase {
 		assertNotSame(srcOp, targetOp);
 
 		// there should be a run wire between these two
-		RunInstanceWire srcRw = assertHasRunInstanceWire(wire, srcEdit, targetOp);
-		RunInstanceWire targetRw = assertHasRunInstanceWire(wire, targetEdit, srcOp);
+		RunAction srcRw = assertHasRunAction(wire, srcEdit, targetOp);
+		RunAction targetRw = assertHasRunAction(wire, targetEdit, srcOp);
 
-		// there should be additional ConditionWires to these RunInstanceWires
+		// there should be additional ConditionWires to these RunActions
 		ConditionEdge srcCw = assertHasConditionEdge(page1, cond, srcRw);
 		ConditionEdge targetCw = assertHasConditionEdge(page1, cond, targetRw);
 

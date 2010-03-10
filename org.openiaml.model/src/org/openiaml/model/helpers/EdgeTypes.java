@@ -101,6 +101,16 @@ public class EdgeTypes {
 				ModelPackage.eINSTANCE.getWireSource_OutWires(), /* from opposite */
 				ModelPackage.eINSTANCE.getWireDestination_InWires() /* to opposite */
 		) );
+		
+		edgeTypes.add( new EdgeType(
+				ModelPackage.eINSTANCE.getAction(), /* type */
+				ModelPackage.eINSTANCE.getActionSource(), /* source */
+				ModelPackage.eINSTANCE.getActionDestination(), /* destination */
+				ModelPackage.eINSTANCE.getAction_From(), /* from ref */
+				ModelPackage.eINSTANCE.getAction_To(), /* to ref */
+				ModelPackage.eINSTANCE.getActionSource_OutActions(), /* from opposite */
+				ModelPackage.eINSTANCE.getActionDestination_InActions() /* to opposite */
+		) );
 
 		edgeTypes.add( new EdgeType(
 				ModelPackage.eINSTANCE.getDataFlowEdge(), /* type */

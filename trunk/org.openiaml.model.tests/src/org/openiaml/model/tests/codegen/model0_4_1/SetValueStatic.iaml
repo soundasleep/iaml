@@ -16,7 +16,7 @@
         <values id="model.12542c563bb.19c" name="static value" outFlows="model.12542c563bb.230" value="hello42"/>
       </operations>
       <onClick id="model.12542c563bb.16f" outActions="wires.12542c56428.1b">
-        <actions xsi:type="iaml.wires:RunInstanceWire" id="wires.12542c56428.1b" name="run" from="model.12542c563bb.16f" to="model.12542c563bb.170"/>
+        <actions xsi:type="iaml.wires:RunAction" id="wires.12542c56428.1b" name="run" from="model.12542c563bb.16f" to="model.12542c563bb.170"/>
       </onClick>
     </children>
   </scopes>

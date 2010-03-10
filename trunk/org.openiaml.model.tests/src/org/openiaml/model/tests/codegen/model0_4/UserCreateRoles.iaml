@@ -11,7 +11,7 @@
       <operations xsi:type="iaml:PrimitiveOperation" id="model.1233b53a1ca.14" name="save" inActions="wires.1233b53a3ce.a"/>
     </elements>
     <children xsi:type="iaml.visual:Button" id="visual.1233b53a313.1a" name="create new user" outActions="wires.1233b53a3ce.a">
-      <actions xsi:type="iaml.wires:RunInstanceWire" id="wires.1233b53a3ce.a" name="onClick" from="visual.1233b53a313.1a" to="model.1233b53a1ca.14"/>
+      <actions xsi:type="iaml.wires:RunAction" id="wires.1233b53a3ce.a" name="onClick" from="visual.1233b53a313.1a" to="model.1233b53a1ca.14"/>
     </children>
     <children xsi:type="iaml.visual:InputForm" outWires="wires.1233b53a3ce.5e8" id="visual.1233b53a313.555" name="edit user properties form">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.1233b53a3ce.5e8" from="visual.1233b53a313.555" to="users.1233b53a814.a" name="sync"/>

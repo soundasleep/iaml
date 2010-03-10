@@ -10,7 +10,7 @@
     </children>
   </domainStores>
   <scopes xsi:type="iaml.visual:Frame" id="visual.12109331f38.e3f" name="container" outActions="wires.12109dbdd39.4">
-    <actions xsi:type="iaml.wires:NavigateWire" id="wires.12109dbdd39.4" name="fail" from="visual.12109331f38.e3f" to="visual.12109dbdd39.7"/>
+    <actions xsi:type="iaml.wires:NavigateAction" id="wires.12109dbdd39.4" name="fail" from="visual.12109331f38.e3f" to="visual.12109dbdd39.7"/>
     <values id="model.12109c6242e.483" name="a missing id" outParameterEdges="wires.12109c6249b.123" value="impossible">
       <parameterEdges id="wires.12109c6249b.123" from="model.12109c6242e.483" to="wires.12109c6249b.122"/>
     </values>

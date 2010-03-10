@@ -16,8 +16,8 @@
   <scopes xsi:type="iaml.scopes:Session" id="scopes.122f7c6a297.1" name="my session">
     <elements xsi:type="iaml.components:LoginHandler" inParameterEdges="wires.122f7c6a100.1 wires.122f7c6a100.63" id="components.122f7c6a40e.1" name="login handler" outWires="wires.122f7c6a100.e" outActions="wires.122f7c6a100.7f wires.122f7c6a100.8f" type="DOMAIN_OBJECT">
       <wires xsi:type="iaml.wires:SetWire" id="wires.122f7c6a100.e" from="components.122f7c6a40e.1" to="model.122f7c69efd.ad" name="set"/>
-      <actions xsi:type="iaml.wires:NavigateWire" id="wires.122f7c6a100.7f" name="login" from="components.122f7c6a40e.1" to="visual.122f7c6a006.24"/>
-      <actions xsi:type="iaml.wires:NavigateWire" id="wires.122f7c6a100.8f" name="logout" from="components.122f7c6a40e.1" to="visual.122f7c6a006.a8"/>
+      <actions xsi:type="iaml.wires:NavigateAction" id="wires.122f7c6a100.7f" name="login" from="components.122f7c6a40e.1" to="visual.122f7c6a006.24"/>
+      <actions xsi:type="iaml.wires:NavigateAction" id="wires.122f7c6a100.8f" name="logout" from="components.122f7c6a40e.1" to="visual.122f7c6a006.a8"/>
     </elements>
     <elements xsi:type="iaml:DomainObjectInstance" id="model.122f7c69efd.ad" name="logged in user" inWires="wires.122f7c6a100.e" autosave="true">
       <attributes id="model.122f7c69efd.106" name="name" outWires="wires.122f7c6a100.3a" autosave="true">

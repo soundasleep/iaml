@@ -67,6 +67,12 @@
             path="icons/full/obj32/SyncWire.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
+    </tools>
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="Actions"
+        description="Actions"
+        collapsible="true">
       <tools
           xsi:type="gmftool:CreationTool"
           title="RunInstanceWire"

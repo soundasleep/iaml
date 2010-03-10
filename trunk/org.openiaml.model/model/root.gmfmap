@@ -360,18 +360,18 @@
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
     <containmentFeature
-        href="iaml.ecore#//ContainsWires/wires"/>
+        href="iaml.ecore#//ContainsWires/actions"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="root.gmftool#//@palette/@tools.2/@tools.1"/>
+        href="root.gmftool#//@palette/@tools.4/@tools.0"/>
     <diagramLink
         href="iaml.gmfgraph#RunInstanceWire"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//Wire/from"/>
+        href="iaml.ecore#//Action/from"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//Wire/to"/>
+        href="iaml.ecore#//Action/to"/>
   </links>
   <links>
     <domainMetaElement
@@ -387,7 +387,7 @@
         href="iaml.ecore#//ContainsWires/conditionEdges"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="root.gmftool#//@palette/@tools.2/@tools.3"/>
+        href="root.gmftool#//@palette/@tools.2/@tools.1"/>
     <diagramLink
         href="iaml.gmfgraph#ConditionEdge"/>
     <sourceMetaFeature
@@ -410,18 +410,18 @@
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
     <containmentFeature
-        href="iaml.ecore#//ContainsWires/wires"/>
+        href="iaml.ecore#//ContainsWires/actions"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="root.gmftool#//@palette/@tools.2/@tools.2"/>
+        href="root.gmftool#//@palette/@tools.4/@tools.1"/>
     <diagramLink
         href="iaml.gmfgraph#NavigateWire"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//Wire/from"/>
+        href="iaml.ecore#//Action/from"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//Wire/to"/>
+        href="iaml.ecore#//Action/to"/>
   </links>
   <diagram>
     <diagramCanvas

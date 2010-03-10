@@ -199,8 +199,8 @@
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//wires/CompositeWire/values"/>
       </genClasses>
       <genClasses ecoreClass="iaml.ecore#//wires/SyncWire"/>
-      <genClasses ecoreClass="iaml.ecore#//wires/RunInstanceWire">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/RunInstanceWire/priority"/>
+      <genClasses ecoreClass="iaml.ecore#//wires/RunAction">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/RunAction/priority"/>
       </genClasses>
       <genClasses ecoreClass="iaml.ecore#//wires/ParameterEdge">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/ParameterEdge/parameterName"/>
@@ -210,7 +210,7 @@
             ecoreFeature="ecore:EReference iaml.ecore#//wires/ParameterEdge/to"/>
       </genClasses>
       <genClasses ecoreClass="iaml.ecore#//wires/SetWire"/>
-      <genClasses ecoreClass="iaml.ecore#//wires/NavigateWire"/>
+      <genClasses ecoreClass="iaml.ecore#//wires/NavigateAction"/>
       <genClasses ecoreClass="iaml.ecore#//wires/SelectWire">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/SelectWire/query"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/SelectWire/limit"/>

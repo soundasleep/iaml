@@ -17,17 +17,17 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.openiaml.model.model.Action;
+import org.openiaml.model.model.ActionDestination;
+import org.openiaml.model.model.ActionSource;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Wire;
-import org.openiaml.model.model.WireDestination;
-import org.openiaml.model.model.WireSource;
 import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ConditionEdgeDestination;
 import org.openiaml.model.model.wires.NavigateWire;
-import org.openiaml.model.model.wires.SingleWire;
 import org.openiaml.model.model.wires.WiresPackage;
 
 /**
@@ -42,12 +42,12 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.wires.impl.NavigateWireImpl#isIsGenerated <em>Is Generated</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.NavigateWireImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.NavigateWireImpl#getGeneratedRule <em>Generated Rule</em>}</li>
- *   <li>{@link org.openiaml.model.model.wires.impl.NavigateWireImpl#getFrom <em>From</em>}</li>
- *   <li>{@link org.openiaml.model.model.wires.impl.NavigateWireImpl#getTo <em>To</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.NavigateWireImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.NavigateWireImpl#getGeneratedElements <em>Generated Elements</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.NavigateWireImpl#isOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.NavigateWireImpl#getInConditionEdges <em>In Condition Edges</em>}</li>
+ *   <li>{@link org.openiaml.model.model.wires.impl.NavigateWireImpl#getFrom <em>From</em>}</li>
+ *   <li>{@link org.openiaml.model.model.wires.impl.NavigateWireImpl#getTo <em>To</em>}</li>
  * </ul>
  * </p>
  *
@@ -128,24 +128,6 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 	 */
 	protected String generatedRule = GENERATED_RULE_EDEFAULT;
 	/**
-	 * The cached value of the '{@link #getFrom() <em>From</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFrom()
-	 * @generated
-	 * @ordered
-	 */
-	protected WireSource from;
-	/**
-	 * The cached value of the '{@link #getTo() <em>To</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTo()
-	 * @generated
-	 * @ordered
-	 */
-	protected WireDestination to;
-	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -200,6 +182,26 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 	 * @ordered
 	 */
 	protected EList<ConditionEdge> inConditionEdges;
+
+	/**
+	 * The cached value of the '{@link #getFrom() <em>From</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFrom()
+	 * @generated
+	 * @ordered
+	 */
+	protected ActionSource from;
+
+	/**
+	 * The cached value of the '{@link #getTo() <em>To</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTo()
+	 * @generated
+	 * @ordered
+	 */
+	protected ActionDestination to;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -312,10 +314,10 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public WireSource getFrom() {
+	public ActionSource getFrom() {
 		if (from != null && from.eIsProxy()) {
 			InternalEObject oldFrom = (InternalEObject)from;
-			from = (WireSource)eResolveProxy(oldFrom);
+			from = (ActionSource)eResolveProxy(oldFrom);
 			if (from != oldFrom) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, WiresPackage.NAVIGATE_WIRE__FROM, oldFrom, from));
@@ -329,7 +331,7 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public WireSource basicGetFrom() {
+	public ActionSource basicGetFrom() {
 		return from;
 	}
 
@@ -338,8 +340,8 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetFrom(WireSource newFrom, NotificationChain msgs) {
-		WireSource oldFrom = from;
+	public NotificationChain basicSetFrom(ActionSource newFrom, NotificationChain msgs) {
+		ActionSource oldFrom = from;
 		from = newFrom;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WiresPackage.NAVIGATE_WIRE__FROM, oldFrom, newFrom);
@@ -353,13 +355,13 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setFrom(WireSource newFrom) {
+	public void setFrom(ActionSource newFrom) {
 		if (newFrom != from) {
 			NotificationChain msgs = null;
 			if (from != null)
-				msgs = ((InternalEObject)from).eInverseRemove(this, ModelPackage.WIRE_SOURCE__OUT_WIRES, WireSource.class, msgs);
+				msgs = ((InternalEObject)from).eInverseRemove(this, ModelPackage.ACTION_SOURCE__OUT_ACTIONS, ActionSource.class, msgs);
 			if (newFrom != null)
-				msgs = ((InternalEObject)newFrom).eInverseAdd(this, ModelPackage.WIRE_SOURCE__OUT_WIRES, WireSource.class, msgs);
+				msgs = ((InternalEObject)newFrom).eInverseAdd(this, ModelPackage.ACTION_SOURCE__OUT_ACTIONS, ActionSource.class, msgs);
 			msgs = basicSetFrom(newFrom, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -372,10 +374,10 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public WireDestination getTo() {
+	public ActionDestination getTo() {
 		if (to != null && to.eIsProxy()) {
 			InternalEObject oldTo = (InternalEObject)to;
-			to = (WireDestination)eResolveProxy(oldTo);
+			to = (ActionDestination)eResolveProxy(oldTo);
 			if (to != oldTo) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, WiresPackage.NAVIGATE_WIRE__TO, oldTo, to));
@@ -389,7 +391,7 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public WireDestination basicGetTo() {
+	public ActionDestination basicGetTo() {
 		return to;
 	}
 
@@ -398,8 +400,8 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetTo(WireDestination newTo, NotificationChain msgs) {
-		WireDestination oldTo = to;
+	public NotificationChain basicSetTo(ActionDestination newTo, NotificationChain msgs) {
+		ActionDestination oldTo = to;
 		to = newTo;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, WiresPackage.NAVIGATE_WIRE__TO, oldTo, newTo);
@@ -413,13 +415,13 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTo(WireDestination newTo) {
+	public void setTo(ActionDestination newTo) {
 		if (newTo != to) {
 			NotificationChain msgs = null;
 			if (to != null)
-				msgs = ((InternalEObject)to).eInverseRemove(this, ModelPackage.WIRE_DESTINATION__IN_WIRES, WireDestination.class, msgs);
+				msgs = ((InternalEObject)to).eInverseRemove(this, ModelPackage.ACTION_DESTINATION__IN_ACTIONS, ActionDestination.class, msgs);
 			if (newTo != null)
-				msgs = ((InternalEObject)newTo).eInverseAdd(this, ModelPackage.WIRE_DESTINATION__IN_WIRES, WireDestination.class, msgs);
+				msgs = ((InternalEObject)newTo).eInverseAdd(this, ModelPackage.ACTION_DESTINATION__IN_ACTIONS, ActionDestination.class, msgs);
 			msgs = basicSetTo(newTo, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -506,18 +508,18 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInWires()).basicAdd(otherEnd, msgs);
 			case WiresPackage.NAVIGATE_WIRE__GENERATED_BY:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGeneratedBy()).basicAdd(otherEnd, msgs);
-			case WiresPackage.NAVIGATE_WIRE__FROM:
-				if (from != null)
-					msgs = ((InternalEObject)from).eInverseRemove(this, ModelPackage.WIRE_SOURCE__OUT_WIRES, WireSource.class, msgs);
-				return basicSetFrom((WireSource)otherEnd, msgs);
-			case WiresPackage.NAVIGATE_WIRE__TO:
-				if (to != null)
-					msgs = ((InternalEObject)to).eInverseRemove(this, ModelPackage.WIRE_DESTINATION__IN_WIRES, WireDestination.class, msgs);
-				return basicSetTo((WireDestination)otherEnd, msgs);
 			case WiresPackage.NAVIGATE_WIRE__GENERATED_ELEMENTS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getGeneratedElements()).basicAdd(otherEnd, msgs);
 			case WiresPackage.NAVIGATE_WIRE__IN_CONDITION_EDGES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInConditionEdges()).basicAdd(otherEnd, msgs);
+			case WiresPackage.NAVIGATE_WIRE__FROM:
+				if (from != null)
+					msgs = ((InternalEObject)from).eInverseRemove(this, ModelPackage.ACTION_SOURCE__OUT_ACTIONS, ActionSource.class, msgs);
+				return basicSetFrom((ActionSource)otherEnd, msgs);
+			case WiresPackage.NAVIGATE_WIRE__TO:
+				if (to != null)
+					msgs = ((InternalEObject)to).eInverseRemove(this, ModelPackage.ACTION_DESTINATION__IN_ACTIONS, ActionDestination.class, msgs);
+				return basicSetTo((ActionDestination)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -534,14 +536,14 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 				return ((InternalEList<?>)getInWires()).basicRemove(otherEnd, msgs);
 			case WiresPackage.NAVIGATE_WIRE__GENERATED_BY:
 				return ((InternalEList<?>)getGeneratedBy()).basicRemove(otherEnd, msgs);
-			case WiresPackage.NAVIGATE_WIRE__FROM:
-				return basicSetFrom(null, msgs);
-			case WiresPackage.NAVIGATE_WIRE__TO:
-				return basicSetTo(null, msgs);
 			case WiresPackage.NAVIGATE_WIRE__GENERATED_ELEMENTS:
 				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
 			case WiresPackage.NAVIGATE_WIRE__IN_CONDITION_EDGES:
 				return ((InternalEList<?>)getInConditionEdges()).basicRemove(otherEnd, msgs);
+			case WiresPackage.NAVIGATE_WIRE__FROM:
+				return basicSetFrom(null, msgs);
+			case WiresPackage.NAVIGATE_WIRE__TO:
+				return basicSetTo(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -564,12 +566,6 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 				return getId();
 			case WiresPackage.NAVIGATE_WIRE__GENERATED_RULE:
 				return getGeneratedRule();
-			case WiresPackage.NAVIGATE_WIRE__FROM:
-				if (resolve) return getFrom();
-				return basicGetFrom();
-			case WiresPackage.NAVIGATE_WIRE__TO:
-				if (resolve) return getTo();
-				return basicGetTo();
 			case WiresPackage.NAVIGATE_WIRE__NAME:
 				return getName();
 			case WiresPackage.NAVIGATE_WIRE__GENERATED_ELEMENTS:
@@ -578,6 +574,12 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 				return isOverridden();
 			case WiresPackage.NAVIGATE_WIRE__IN_CONDITION_EDGES:
 				return getInConditionEdges();
+			case WiresPackage.NAVIGATE_WIRE__FROM:
+				if (resolve) return getFrom();
+				return basicGetFrom();
+			case WiresPackage.NAVIGATE_WIRE__TO:
+				if (resolve) return getTo();
+				return basicGetTo();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -608,12 +610,6 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 			case WiresPackage.NAVIGATE_WIRE__GENERATED_RULE:
 				setGeneratedRule((String)newValue);
 				return;
-			case WiresPackage.NAVIGATE_WIRE__FROM:
-				setFrom((WireSource)newValue);
-				return;
-			case WiresPackage.NAVIGATE_WIRE__TO:
-				setTo((WireDestination)newValue);
-				return;
 			case WiresPackage.NAVIGATE_WIRE__NAME:
 				setName((String)newValue);
 				return;
@@ -627,6 +623,12 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 			case WiresPackage.NAVIGATE_WIRE__IN_CONDITION_EDGES:
 				getInConditionEdges().clear();
 				getInConditionEdges().addAll((Collection<? extends ConditionEdge>)newValue);
+				return;
+			case WiresPackage.NAVIGATE_WIRE__FROM:
+				setFrom((ActionSource)newValue);
+				return;
+			case WiresPackage.NAVIGATE_WIRE__TO:
+				setTo((ActionDestination)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -655,12 +657,6 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 			case WiresPackage.NAVIGATE_WIRE__GENERATED_RULE:
 				setGeneratedRule(GENERATED_RULE_EDEFAULT);
 				return;
-			case WiresPackage.NAVIGATE_WIRE__FROM:
-				setFrom((WireSource)null);
-				return;
-			case WiresPackage.NAVIGATE_WIRE__TO:
-				setTo((WireDestination)null);
-				return;
 			case WiresPackage.NAVIGATE_WIRE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -672,6 +668,12 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 				return;
 			case WiresPackage.NAVIGATE_WIRE__IN_CONDITION_EDGES:
 				getInConditionEdges().clear();
+				return;
+			case WiresPackage.NAVIGATE_WIRE__FROM:
+				setFrom((ActionSource)null);
+				return;
+			case WiresPackage.NAVIGATE_WIRE__TO:
+				setTo((ActionDestination)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -695,10 +697,6 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case WiresPackage.NAVIGATE_WIRE__GENERATED_RULE:
 				return GENERATED_RULE_EDEFAULT == null ? generatedRule != null : !GENERATED_RULE_EDEFAULT.equals(generatedRule);
-			case WiresPackage.NAVIGATE_WIRE__FROM:
-				return from != null;
-			case WiresPackage.NAVIGATE_WIRE__TO:
-				return to != null;
 			case WiresPackage.NAVIGATE_WIRE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case WiresPackage.NAVIGATE_WIRE__GENERATED_ELEMENTS:
@@ -707,6 +705,10 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 				return overridden != OVERRIDDEN_EDEFAULT;
 			case WiresPackage.NAVIGATE_WIRE__IN_CONDITION_EDGES:
 				return inConditionEdges != null && !inConditionEdges.isEmpty();
+			case WiresPackage.NAVIGATE_WIRE__FROM:
+				return from != null;
+			case WiresPackage.NAVIGATE_WIRE__TO:
+				return to != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -724,18 +726,6 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 				case WiresPackage.NAVIGATE_WIRE__IS_GENERATED: return ModelPackage.GENERATED_ELEMENT__IS_GENERATED;
 				case WiresPackage.NAVIGATE_WIRE__ID: return ModelPackage.GENERATED_ELEMENT__ID;
 				case WiresPackage.NAVIGATE_WIRE__GENERATED_RULE: return ModelPackage.GENERATED_ELEMENT__GENERATED_RULE;
-				default: return -1;
-			}
-		}
-		if (baseClass == Wire.class) {
-			switch (derivedFeatureID) {
-				case WiresPackage.NAVIGATE_WIRE__FROM: return ModelPackage.WIRE__FROM;
-				case WiresPackage.NAVIGATE_WIRE__TO: return ModelPackage.WIRE__TO;
-				default: return -1;
-			}
-		}
-		if (baseClass == SingleWire.class) {
-			switch (derivedFeatureID) {
 				default: return -1;
 			}
 		}
@@ -758,6 +748,13 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 				default: return -1;
 			}
 		}
+		if (baseClass == Action.class) {
+			switch (derivedFeatureID) {
+				case WiresPackage.NAVIGATE_WIRE__FROM: return ModelPackage.ACTION__FROM;
+				case WiresPackage.NAVIGATE_WIRE__TO: return ModelPackage.ACTION__TO;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -777,18 +774,6 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 				default: return -1;
 			}
 		}
-		if (baseClass == Wire.class) {
-			switch (baseFeatureID) {
-				case ModelPackage.WIRE__FROM: return WiresPackage.NAVIGATE_WIRE__FROM;
-				case ModelPackage.WIRE__TO: return WiresPackage.NAVIGATE_WIRE__TO;
-				default: return -1;
-			}
-		}
-		if (baseClass == SingleWire.class) {
-			switch (baseFeatureID) {
-				default: return -1;
-			}
-		}
 		if (baseClass == NamedElement.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.NAMED_ELEMENT__NAME: return WiresPackage.NAVIGATE_WIRE__NAME;
@@ -805,6 +790,13 @@ public class NavigateWireImpl extends EObjectImpl implements NavigateWire {
 		if (baseClass == ConditionEdgeDestination.class) {
 			switch (baseFeatureID) {
 				case WiresPackage.CONDITION_EDGE_DESTINATION__IN_CONDITION_EDGES: return WiresPackage.NAVIGATE_WIRE__IN_CONDITION_EDGES;
+				default: return -1;
+			}
+		}
+		if (baseClass == Action.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.ACTION__FROM: return WiresPackage.NAVIGATE_WIRE__FROM;
+				case ModelPackage.ACTION__TO: return WiresPackage.NAVIGATE_WIRE__TO;
 				default: return -1;
 			}
 		}

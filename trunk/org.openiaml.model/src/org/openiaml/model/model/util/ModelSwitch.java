@@ -512,6 +512,7 @@ public class ModelSwitch<T> {
 				T result = caseScope(scope);
 				if (result == null) result = caseCanBeSynced(scope);
 				if (result == null) result = caseAccessible(scope);
+				if (result == null) result = caseActionSource(scope);
 				if (result == null) result = caseGeneratesElements(scope);
 				if (result == null) result = caseNamedElement(scope);
 				if (result == null) result = caseGeneratedElement(scope);

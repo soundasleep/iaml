@@ -1167,31 +1167,13 @@ public interface WiresPackage extends EPackage {
 	int NAVIGATE_WIRE__GENERATED_RULE = ModelPackage.WIRE_DESTINATION_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>From</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAVIGATE_WIRE__FROM = ModelPackage.WIRE_DESTINATION_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>To</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAVIGATE_WIRE__TO = ModelPackage.WIRE_DESTINATION_FEATURE_COUNT + 5;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NAVIGATE_WIRE__NAME = ModelPackage.WIRE_DESTINATION_FEATURE_COUNT + 6;
+	int NAVIGATE_WIRE__NAME = ModelPackage.WIRE_DESTINATION_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
@@ -1200,7 +1182,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAVIGATE_WIRE__GENERATED_ELEMENTS = ModelPackage.WIRE_DESTINATION_FEATURE_COUNT + 7;
+	int NAVIGATE_WIRE__GENERATED_ELEMENTS = ModelPackage.WIRE_DESTINATION_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Overridden</b></em>' attribute.
@@ -1209,7 +1191,7 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAVIGATE_WIRE__OVERRIDDEN = ModelPackage.WIRE_DESTINATION_FEATURE_COUNT + 8;
+	int NAVIGATE_WIRE__OVERRIDDEN = ModelPackage.WIRE_DESTINATION_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>In Condition Edges</b></em>' reference list.
@@ -1218,7 +1200,25 @@ public interface WiresPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAVIGATE_WIRE__IN_CONDITION_EDGES = ModelPackage.WIRE_DESTINATION_FEATURE_COUNT + 9;
+	int NAVIGATE_WIRE__IN_CONDITION_EDGES = ModelPackage.WIRE_DESTINATION_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>From</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAVIGATE_WIRE__FROM = ModelPackage.WIRE_DESTINATION_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>To</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAVIGATE_WIRE__TO = ModelPackage.WIRE_DESTINATION_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of structural features of the '<em>Navigate Wire</em>' class.

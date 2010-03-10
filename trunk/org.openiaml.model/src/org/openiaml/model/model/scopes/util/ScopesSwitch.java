@@ -11,6 +11,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.Accessible;
+import org.openiaml.model.model.ActionSource;
 import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsOperations;
@@ -105,6 +106,7 @@ public class ScopesSwitch<T> {
 				if (result == null) result = caseScope(session);
 				if (result == null) result = caseCanBeSynced(session);
 				if (result == null) result = caseAccessible(session);
+				if (result == null) result = caseActionSource(session);
 				if (result == null) result = caseNamedElement(session);
 				if (result == null) result = caseGeneratedElement(session);
 				if (result == null) result = caseContainsOperations(session);
@@ -238,6 +240,21 @@ public class ScopesSwitch<T> {
 	 * @generated
 	 */
 	public T caseAccessible(Accessible object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Action Source</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Action Source</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseActionSource(ActionSource object) {
 		return null;
 	}
 

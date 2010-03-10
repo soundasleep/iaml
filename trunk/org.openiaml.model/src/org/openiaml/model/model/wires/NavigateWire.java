@@ -6,6 +6,7 @@
  */
 package org.openiaml.model.model.wires;
 
+import org.openiaml.model.model.Action;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.WireDestination;
@@ -25,5 +26,5 @@ import org.openiaml.model.model.WireDestination;
  * @model annotation="http://openiaml.org/comment added='0.2'"
  * @generated
  */
-public interface NavigateWire extends WireDestination, SingleWire, NamedElement, GeneratesElements, ConditionEdgeDestination {
+public interface NavigateWire extends WireDestination, NamedElement, GeneratesElements, ConditionEdgeDestination, Action {
 } // NavigateWire

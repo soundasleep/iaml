@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.Action;
+import org.openiaml.model.model.ActionSource;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.Condition;
@@ -77,6 +78,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.components.impl.LoginHandlerImpl#getConditions <em>Conditions</em>}</li>
  *   <li>{@link org.openiaml.model.model.components.impl.LoginHandlerImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.components.impl.LoginHandlerImpl#getValues <em>Values</em>}</li>
+ *   <li>{@link org.openiaml.model.model.components.impl.LoginHandlerImpl#getOutActions <em>Out Actions</em>}</li>
  *   <li>{@link org.openiaml.model.model.components.impl.LoginHandlerImpl#getType <em>Type</em>}</li>
  * </ul>
  * </p>
@@ -327,6 +329,15 @@ public class LoginHandlerImpl extends EObjectImpl implements LoginHandler {
 	 * @ordered
 	 */
 	protected EList<StaticValue> values;
+	/**
+	 * The cached value of the '{@link #getOutActions() <em>Out Actions</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOutActions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Action> outActions;
 	/**
 	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -679,6 +690,18 @@ public class LoginHandlerImpl extends EObjectImpl implements LoginHandler {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Action> getOutActions() {
+		if (outActions == null) {
+			outActions = new EObjectWithInverseResolvingEList<Action>(Action.class, this, ComponentsPackage.LOGIN_HANDLER__OUT_ACTIONS, ModelPackage.ACTION__FROM);
+		}
+		return outActions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public LoginHandlerTypes getType() {
 		return type;
 	}
@@ -714,6 +737,8 @@ public class LoginHandlerImpl extends EObjectImpl implements LoginHandler {
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutWires()).basicAdd(otherEnd, msgs);
 			case ComponentsPackage.LOGIN_HANDLER__IN_WIRES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInWires()).basicAdd(otherEnd, msgs);
+			case ComponentsPackage.LOGIN_HANDLER__OUT_ACTIONS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutActions()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -760,6 +785,8 @@ public class LoginHandlerImpl extends EObjectImpl implements LoginHandler {
 				return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
 			case ComponentsPackage.LOGIN_HANDLER__VALUES:
 				return ((InternalEList<?>)getValues()).basicRemove(otherEnd, msgs);
+			case ComponentsPackage.LOGIN_HANDLER__OUT_ACTIONS:
+				return ((InternalEList<?>)getOutActions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -816,6 +843,8 @@ public class LoginHandlerImpl extends EObjectImpl implements LoginHandler {
 				return getProperties();
 			case ComponentsPackage.LOGIN_HANDLER__VALUES:
 				return getValues();
+			case ComponentsPackage.LOGIN_HANDLER__OUT_ACTIONS:
+				return getOutActions();
 			case ComponentsPackage.LOGIN_HANDLER__TYPE:
 				return getType();
 		}
@@ -914,6 +943,10 @@ public class LoginHandlerImpl extends EObjectImpl implements LoginHandler {
 				getValues().clear();
 				getValues().addAll((Collection<? extends StaticValue>)newValue);
 				return;
+			case ComponentsPackage.LOGIN_HANDLER__OUT_ACTIONS:
+				getOutActions().clear();
+				getOutActions().addAll((Collection<? extends Action>)newValue);
+				return;
 			case ComponentsPackage.LOGIN_HANDLER__TYPE:
 				setType((LoginHandlerTypes)newValue);
 				return;
@@ -995,6 +1028,9 @@ public class LoginHandlerImpl extends EObjectImpl implements LoginHandler {
 			case ComponentsPackage.LOGIN_HANDLER__VALUES:
 				getValues().clear();
 				return;
+			case ComponentsPackage.LOGIN_HANDLER__OUT_ACTIONS:
+				getOutActions().clear();
+				return;
 			case ComponentsPackage.LOGIN_HANDLER__TYPE:
 				setType(TYPE_EDEFAULT);
 				return;
@@ -1054,6 +1090,8 @@ public class LoginHandlerImpl extends EObjectImpl implements LoginHandler {
 				return properties != null && !properties.isEmpty();
 			case ComponentsPackage.LOGIN_HANDLER__VALUES:
 				return values != null && !values.isEmpty();
+			case ComponentsPackage.LOGIN_HANDLER__OUT_ACTIONS:
+				return outActions != null && !outActions.isEmpty();
 			case ComponentsPackage.LOGIN_HANDLER__TYPE:
 				return type != TYPE_EDEFAULT;
 		}
@@ -1142,6 +1180,12 @@ public class LoginHandlerImpl extends EObjectImpl implements LoginHandler {
 				default: return -1;
 			}
 		}
+		if (baseClass == ActionSource.class) {
+			switch (derivedFeatureID) {
+				case ComponentsPackage.LOGIN_HANDLER__OUT_ACTIONS: return ModelPackage.ACTION_SOURCE__OUT_ACTIONS;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -1224,6 +1268,12 @@ public class LoginHandlerImpl extends EObjectImpl implements LoginHandler {
 			switch (baseFeatureID) {
 				case ModelPackage.APPLICATION_ELEMENT__PROPERTIES: return ComponentsPackage.LOGIN_HANDLER__PROPERTIES;
 				case ModelPackage.APPLICATION_ELEMENT__VALUES: return ComponentsPackage.LOGIN_HANDLER__VALUES;
+				default: return -1;
+			}
+		}
+		if (baseClass == ActionSource.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.ACTION_SOURCE__OUT_ACTIONS: return ComponentsPackage.LOGIN_HANDLER__OUT_ACTIONS;
 				default: return -1;
 			}
 		}

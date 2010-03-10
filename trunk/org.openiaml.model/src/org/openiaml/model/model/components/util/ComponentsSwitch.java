@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.openiaml.model.model.ActionDestination;
 import org.openiaml.model.model.ActionSource;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.CanBeSynced;
@@ -111,6 +112,7 @@ public class ComponentsSwitch<T> {
 				T result = caseLoginHandler(loginHandler);
 				if (result == null) result = caseParameterEdgeDestination(loginHandler);
 				if (result == null) result = caseApplicationElement(loginHandler);
+				if (result == null) result = caseActionSource(loginHandler);
 				if (result == null) result = caseCanBeSynced(loginHandler);
 				if (result == null) result = caseGeneratesElements(loginHandler);
 				if (result == null) result = caseContainsOperations(loginHandler);
@@ -152,6 +154,7 @@ public class ComponentsSwitch<T> {
 				if (result == null) result = caseGeneratesElements(gate);
 				if (result == null) result = caseConditionEdgeDestination(gate);
 				if (result == null) result = caseActionSource(gate);
+				if (result == null) result = caseActionDestination(gate);
 				if (result == null) result = caseGeneratedElement(gate);
 				if (result == null) result = caseShouldntContainWires(gate);
 				if (result == null) result = caseContainsWires(gate);
@@ -168,6 +171,7 @@ public class ComponentsSwitch<T> {
 				if (result == null) result = caseGeneratesElements(entryGate);
 				if (result == null) result = caseConditionEdgeDestination(entryGate);
 				if (result == null) result = caseActionSource(entryGate);
+				if (result == null) result = caseActionDestination(entryGate);
 				if (result == null) result = caseGeneratedElement(entryGate);
 				if (result == null) result = caseShouldntContainWires(entryGate);
 				if (result == null) result = caseContainsWires(entryGate);
@@ -184,6 +188,7 @@ public class ComponentsSwitch<T> {
 				if (result == null) result = caseGeneratesElements(exitGate);
 				if (result == null) result = caseConditionEdgeDestination(exitGate);
 				if (result == null) result = caseActionSource(exitGate);
+				if (result == null) result = caseActionDestination(exitGate);
 				if (result == null) result = caseGeneratedElement(exitGate);
 				if (result == null) result = caseShouldntContainWires(exitGate);
 				if (result == null) result = caseContainsWires(exitGate);
@@ -491,6 +496,21 @@ public class ComponentsSwitch<T> {
 	 * @generated
 	 */
 	public T caseActionSource(ActionSource object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Action Destination</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Action Destination</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseActionDestination(ActionDestination object) {
 		return null;
 	}
 

@@ -192,11 +192,10 @@ public class WiresSwitch<T> {
 				NavigateWire navigateWire = (NavigateWire)theEObject;
 				T result = caseNavigateWire(navigateWire);
 				if (result == null) result = caseWireDestination(navigateWire);
-				if (result == null) result = caseSingleWire(navigateWire);
 				if (result == null) result = caseNamedElement(navigateWire);
 				if (result == null) result = caseGeneratesElements(navigateWire);
 				if (result == null) result = caseConditionEdgeDestination(navigateWire);
-				if (result == null) result = caseWire(navigateWire);
+				if (result == null) result = caseAction(navigateWire);
 				if (result == null) result = caseGeneratedElement(navigateWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;

@@ -310,6 +310,7 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 		loginHandlerEClass.getESuperTypes().add(theWiresPackage.getParameterEdgeDestination());
 		loginHandlerEClass.getESuperTypes().add(theModelPackage.getApplicationElement());
 		loginHandlerEClass.getESuperTypes().add(theModelPackage.getContainsWires());
+		loginHandlerEClass.getESuperTypes().add(theModelPackage.getActionSource());
 		accessControlHandlerEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
 		accessControlHandlerEClass.getESuperTypes().add(theWiresPackage.getParameterEdgeDestination());
 		accessControlHandlerEClass.getESuperTypes().add(theUsersPackage.getRequiresEdgesSource());
@@ -322,6 +323,7 @@ public class ComponentsPackageImpl extends EPackageImpl implements ComponentsPac
 		gateEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
 		gateEClass.getESuperTypes().add(theWiresPackage.getConditionEdgeDestination());
 		gateEClass.getESuperTypes().add(theModelPackage.getActionSource());
+		gateEClass.getESuperTypes().add(theModelPackage.getActionDestination());
 		entryGateEClass.getESuperTypes().add(this.getGate());
 		exitGateEClass.getESuperTypes().add(this.getGate());
 

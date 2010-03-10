@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.model.model.Accessible;
 import org.openiaml.model.model.Action;
+import org.openiaml.model.model.ActionSource;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.Condition;
@@ -77,6 +78,7 @@ import org.openiaml.model.model.wires.RequiresEdge;
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getInWires <em>In Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getConditions <em>Conditions</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getOnAccess <em>On Access</em>}</li>
+ *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getOutActions <em>Out Actions</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getEntryGate <em>Entry Gate</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getExitGate <em>Exit Gate</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getProperties <em>Properties</em>}</li>
@@ -340,6 +342,16 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 * @ordered
 	 */
 	protected EventTrigger onAccess;
+
+	/**
+	 * The cached value of the '{@link #getOutActions() <em>Out Actions</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOutActions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Action> outActions;
 
 	/**
 	 * The cached value of the '{@link #getEntryGate() <em>Entry Gate</em>}' containment reference.
@@ -859,6 +871,18 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Action> getOutActions() {
+		if (outActions == null) {
+			outActions = new EObjectWithInverseResolvingEList<Action>(Action.class, this, ScopesPackage.SESSION__OUT_ACTIONS, ModelPackage.ACTION__FROM);
+		}
+		return outActions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EventTrigger getOnInit() {
 		return onInit;
 	}
@@ -962,6 +986,8 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutWires()).basicAdd(otherEnd, msgs);
 			case ScopesPackage.SESSION__IN_WIRES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInWires()).basicAdd(otherEnd, msgs);
+			case ScopesPackage.SESSION__OUT_ACTIONS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutActions()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -1004,6 +1030,8 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return ((InternalEList<?>)getConditions()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__ON_ACCESS:
 				return basicSetOnAccess(null, msgs);
+			case ScopesPackage.SESSION__OUT_ACTIONS:
+				return ((InternalEList<?>)getOutActions()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__ENTRY_GATE:
 				return basicSetEntryGate(null, msgs);
 			case ScopesPackage.SESSION__EXIT_GATE:
@@ -1072,6 +1100,8 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return getConditions();
 			case ScopesPackage.SESSION__ON_ACCESS:
 				return getOnAccess();
+			case ScopesPackage.SESSION__OUT_ACTIONS:
+				return getOutActions();
 			case ScopesPackage.SESSION__ENTRY_GATE:
 				return getEntryGate();
 			case ScopesPackage.SESSION__EXIT_GATE:
@@ -1175,6 +1205,10 @@ public class SessionImpl extends EObjectImpl implements Session {
 			case ScopesPackage.SESSION__ON_ACCESS:
 				setOnAccess((EventTrigger)newValue);
 				return;
+			case ScopesPackage.SESSION__OUT_ACTIONS:
+				getOutActions().clear();
+				getOutActions().addAll((Collection<? extends Action>)newValue);
+				return;
 			case ScopesPackage.SESSION__ENTRY_GATE:
 				setEntryGate((EntryGate)newValue);
 				return;
@@ -1276,6 +1310,9 @@ public class SessionImpl extends EObjectImpl implements Session {
 			case ScopesPackage.SESSION__ON_ACCESS:
 				setOnAccess((EventTrigger)null);
 				return;
+			case ScopesPackage.SESSION__OUT_ACTIONS:
+				getOutActions().clear();
+				return;
 			case ScopesPackage.SESSION__ENTRY_GATE:
 				setEntryGate((EntryGate)null);
 				return;
@@ -1352,6 +1389,8 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return conditions != null && !conditions.isEmpty();
 			case ScopesPackage.SESSION__ON_ACCESS:
 				return onAccess != null;
+			case ScopesPackage.SESSION__OUT_ACTIONS:
+				return outActions != null && !outActions.isEmpty();
 			case ScopesPackage.SESSION__ENTRY_GATE:
 				return entryGate != null;
 			case ScopesPackage.SESSION__EXIT_GATE:
@@ -1439,6 +1478,12 @@ public class SessionImpl extends EObjectImpl implements Session {
 				default: return -1;
 			}
 		}
+		if (baseClass == ActionSource.class) {
+			switch (derivedFeatureID) {
+				case ScopesPackage.SESSION__OUT_ACTIONS: return ModelPackage.ACTION_SOURCE__OUT_ACTIONS;
+				default: return -1;
+			}
+		}
 		if (baseClass == Scope.class) {
 			switch (derivedFeatureID) {
 				case ScopesPackage.SESSION__ENTRY_GATE: return ModelPackage.SCOPE__ENTRY_GATE;
@@ -1519,6 +1564,12 @@ public class SessionImpl extends EObjectImpl implements Session {
 		if (baseClass == Accessible.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.ACCESSIBLE__ON_ACCESS: return ScopesPackage.SESSION__ON_ACCESS;
+				default: return -1;
+			}
+		}
+		if (baseClass == ActionSource.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.ACTION_SOURCE__OUT_ACTIONS: return ScopesPackage.SESSION__OUT_ACTIONS;
 				default: return -1;
 			}
 		}

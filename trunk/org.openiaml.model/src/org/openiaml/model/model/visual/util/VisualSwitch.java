@@ -116,6 +116,7 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseActionDestination(frame);
 				if (result == null) result = caseCanBeSynced(frame);
 				if (result == null) result = caseAccessible(frame);
+				if (result == null) result = caseActionSource(frame);
 				if (result == null) result = caseGeneratesElements(frame);
 				if (result == null) result = caseNamedElement(frame);
 				if (result == null) result = caseGeneratedElement(frame);

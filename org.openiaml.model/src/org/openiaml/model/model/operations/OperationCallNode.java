@@ -19,7 +19,7 @@ import org.openiaml.model.model.WireSource;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A virtual {@model Operation} call; the outgoing {@model RunInstanceWire} will be executed.
+ * A virtual {@model Operation} call; the outgoing {@model RunAction} will be executed.
  * <!-- end-model-doc -->
  *
  *

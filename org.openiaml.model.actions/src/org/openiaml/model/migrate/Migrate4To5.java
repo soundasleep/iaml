@@ -30,6 +30,8 @@ import org.w3c.dom.NodeList;
  *   <li>Renamed elements:
  *   <ol>
  *     <li>WireEdge is now Wire
+ *     <li>RunInstanceWire is now RunAction
+ *     <li>NavigateWire is now NavigateAction
  *   </ol></li>
  *   <li>Changed elements:
  *   <ol>
@@ -252,6 +254,14 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 			return "iaml.wires:ConditionEdge";
 		}
 
+		if (xsiType.equals("iaml.wires:RunInstanceWire")) {
+			return "iaml.wires:RunAction";
+		}
+
+		if (xsiType.equals("iaml.wires:NavigateWire")) {
+			return "iaml.wires:NavigateAction";
+		}
+
 		return super.replaceType(element, xsiType, errors);
 	}
 
@@ -312,13 +322,13 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 			
 			// <wires xsi:type="iaml.wires:RunInstanceWire"> 
 			// --> <actions>
-			if ("iaml.wires:RunInstanceWire".equals(xsiType)) {
+			if ("iaml.wires:RunInstanceWire".equals(xsiType) || "iaml.wires:RunAction".equals(xsiType)) {
 				return "actions";
 			}
 
 			// <wires xsi:type="iaml.wires:NavigateWire"> 
 			// --> <actions>
-			if ("iaml.wires:NavigateWire".equals(xsiType)) {
+			if ("iaml.wires:NavigateWire".equals(xsiType) || "iaml.wires:NavigateAction".equals(xsiType)) {
 				return "actions";
 			}
 		}

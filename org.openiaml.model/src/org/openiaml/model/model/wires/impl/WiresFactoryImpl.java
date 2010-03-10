@@ -20,12 +20,12 @@ import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ConstraintEdge;
 import org.openiaml.model.model.wires.ConstraintTypes;
 import org.openiaml.model.model.wires.ExtendsEdge;
-import org.openiaml.model.model.wires.NavigateWire;
+import org.openiaml.model.model.wires.NavigateAction;
 import org.openiaml.model.model.wires.NewInstanceWire;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.ProvidesEdge;
 import org.openiaml.model.model.wires.RequiresEdge;
-import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.model.wires.SyncWire;
@@ -78,10 +78,10 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 		switch (eClass.getClassifierID()) {
 			case WiresPackage.COMPOSITE_WIRE: return createCompositeWire();
 			case WiresPackage.SYNC_WIRE: return createSyncWire();
-			case WiresPackage.RUN_INSTANCE_WIRE: return createRunInstanceWire();
+			case WiresPackage.RUN_ACTION: return createRunAction();
 			case WiresPackage.PARAMETER_EDGE: return createParameterEdge();
 			case WiresPackage.SET_WIRE: return createSetWire();
-			case WiresPackage.NAVIGATE_WIRE: return createNavigateWire();
+			case WiresPackage.NAVIGATE_ACTION: return createNavigateAction();
 			case WiresPackage.SELECT_WIRE: return createSelectWire();
 			case WiresPackage.CONDITION_EDGE: return createConditionEdge();
 			case WiresPackage.NEW_INSTANCE_WIRE: return createNewInstanceWire();
@@ -151,10 +151,10 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public RunInstanceWire createRunInstanceWire() {
-		RunInstanceWireImpl runInstanceWire = new RunInstanceWireImpl();
-		generateID(runInstanceWire);
-		return runInstanceWire;
+	public RunAction createRunAction() {
+		RunActionImpl runAction = new RunActionImpl();
+		generateID(runAction);
+		return runAction;
 	}
 
 	/**
@@ -184,10 +184,10 @@ public class WiresFactoryImpl extends EFactoryImpl implements WiresFactory {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public NavigateWire createNavigateWire() {
-		NavigateWireImpl navigateWire = new NavigateWireImpl();
-		generateID(navigateWire);
-		return navigateWire;
+	public NavigateAction createNavigateAction() {
+		NavigateActionImpl navigateAction = new NavigateActionImpl();
+		generateID(navigateAction);
+		return navigateAction;
 	}
 
 	/**

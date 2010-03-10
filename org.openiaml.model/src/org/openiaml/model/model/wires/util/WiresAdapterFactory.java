@@ -28,14 +28,14 @@ import org.openiaml.model.model.wires.ConstraintEdgesSource;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ExtendsEdgeDestination;
 import org.openiaml.model.model.wires.ExtendsEdgesSource;
-import org.openiaml.model.model.wires.NavigateWire;
+import org.openiaml.model.model.wires.NavigateAction;
 import org.openiaml.model.model.wires.NewInstanceWire;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.ParameterEdgeDestination;
 import org.openiaml.model.model.wires.ParameterEdgesSource;
 import org.openiaml.model.model.wires.ProvidesEdge;
 import org.openiaml.model.model.wires.RequiresEdge;
-import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.model.wires.SingleWire;
@@ -111,8 +111,8 @@ public class WiresAdapterFactory extends AdapterFactoryImpl {
 				return createSyncWireAdapter();
 			}
 			@Override
-			public Adapter caseRunInstanceWire(RunInstanceWire object) {
-				return createRunInstanceWireAdapter();
+			public Adapter caseRunAction(RunAction object) {
+				return createRunActionAdapter();
 			}
 			@Override
 			public Adapter caseParameterEdge(ParameterEdge object) {
@@ -123,8 +123,8 @@ public class WiresAdapterFactory extends AdapterFactoryImpl {
 				return createSetWireAdapter();
 			}
 			@Override
-			public Adapter caseNavigateWire(NavigateWire object) {
-				return createNavigateWireAdapter();
+			public Adapter caseNavigateAction(NavigateAction object) {
+				return createNavigateActionAdapter();
 			}
 			@Override
 			public Adapter caseSelectWire(SelectWire object) {
@@ -281,16 +281,16 @@ public class WiresAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.RunInstanceWire <em>Run Instance Wire</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.RunAction <em>Run Action</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.openiaml.model.model.wires.RunInstanceWire
+	 * @see org.openiaml.model.model.wires.RunAction
 	 * @generated
 	 */
-	public Adapter createRunInstanceWireAdapter() {
+	public Adapter createRunActionAdapter() {
 		return null;
 	}
 
@@ -323,16 +323,16 @@ public class WiresAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.NavigateWire <em>Navigate Wire</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.NavigateAction <em>Navigate Action</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.openiaml.model.model.wires.NavigateWire
+	 * @see org.openiaml.model.model.wires.NavigateAction
 	 * @generated
 	 */
-	public Adapter createNavigateWireAdapter() {
+	public Adapter createNavigateActionAdapter() {
 		return null;
 	}
 

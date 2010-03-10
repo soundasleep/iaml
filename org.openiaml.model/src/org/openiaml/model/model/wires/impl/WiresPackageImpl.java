@@ -37,14 +37,14 @@ import org.openiaml.model.model.wires.ConstraintTypes;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ExtendsEdgeDestination;
 import org.openiaml.model.model.wires.ExtendsEdgesSource;
-import org.openiaml.model.model.wires.NavigateWire;
+import org.openiaml.model.model.wires.NavigateAction;
 import org.openiaml.model.model.wires.NewInstanceWire;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.ParameterEdgeDestination;
 import org.openiaml.model.model.wires.ParameterEdgesSource;
 import org.openiaml.model.model.wires.ProvidesEdge;
 import org.openiaml.model.model.wires.RequiresEdge;
-import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.model.wires.SingleWire;
@@ -85,7 +85,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass runInstanceWireEClass = null;
+	private EClass runActionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -106,7 +106,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass navigateWireEClass = null;
+	private EClass navigateActionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -390,8 +390,8 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getRunInstanceWire() {
-		return runInstanceWireEClass;
+	public EClass getRunAction() {
+		return runActionEClass;
 	}
 
 	/**
@@ -399,8 +399,8 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRunInstanceWire_Priority() {
-		return (EAttribute)runInstanceWireEClass.getEStructuralFeatures().get(0);
+	public EAttribute getRunAction_Priority() {
+		return (EAttribute)runActionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -453,8 +453,8 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getNavigateWire() {
-		return navigateWireEClass;
+	public EClass getNavigateAction() {
+		return navigateActionEClass;
 	}
 
 	/**
@@ -830,8 +830,8 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 
 		syncWireEClass = createEClass(SYNC_WIRE);
 
-		runInstanceWireEClass = createEClass(RUN_INSTANCE_WIRE);
-		createEAttribute(runInstanceWireEClass, RUN_INSTANCE_WIRE__PRIORITY);
+		runActionEClass = createEClass(RUN_ACTION);
+		createEAttribute(runActionEClass, RUN_ACTION__PRIORITY);
 
 		parameterEdgeEClass = createEClass(PARAMETER_EDGE);
 		createEAttribute(parameterEdgeEClass, PARAMETER_EDGE__PARAMETER_NAME);
@@ -840,7 +840,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 
 		setWireEClass = createEClass(SET_WIRE);
 
-		navigateWireEClass = createEClass(NAVIGATE_WIRE);
+		navigateActionEClass = createEClass(NAVIGATE_ACTION);
 
 		selectWireEClass = createEClass(SELECT_WIRE);
 		createEAttribute(selectWireEClass, SELECT_WIRE__QUERY);
@@ -939,22 +939,22 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		syncWireEClass.getESuperTypes().add(theModelPackage.getWireDestination());
 		syncWireEClass.getESuperTypes().add(this.getParameterEdgeDestination());
 		syncWireEClass.getESuperTypes().add(this.getConditionEdgeDestination());
-		runInstanceWireEClass.getESuperTypes().add(theModelPackage.getWireDestination());
-		runInstanceWireEClass.getESuperTypes().add(this.getParameterEdgeDestination());
-		runInstanceWireEClass.getESuperTypes().add(theModelPackage.getNamedElement());
-		runInstanceWireEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
-		runInstanceWireEClass.getESuperTypes().add(this.getConditionEdgeDestination());
-		runInstanceWireEClass.getESuperTypes().add(theModelPackage.getAction());
+		runActionEClass.getESuperTypes().add(theModelPackage.getWireDestination());
+		runActionEClass.getESuperTypes().add(this.getParameterEdgeDestination());
+		runActionEClass.getESuperTypes().add(theModelPackage.getNamedElement());
+		runActionEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
+		runActionEClass.getESuperTypes().add(this.getConditionEdgeDestination());
+		runActionEClass.getESuperTypes().add(theModelPackage.getAction());
 		parameterEdgeEClass.getESuperTypes().add(theModelPackage.getNamedElement());
 		parameterEdgeEClass.getESuperTypes().add(theModelPackage.getGeneratedElement());
 		setWireEClass.getESuperTypes().add(this.getCompositeWire());
 		setWireEClass.getESuperTypes().add(theModelPackage.getWireDestination());
 		setWireEClass.getESuperTypes().add(this.getConditionEdgeDestination());
-		navigateWireEClass.getESuperTypes().add(theModelPackage.getWireDestination());
-		navigateWireEClass.getESuperTypes().add(theModelPackage.getNamedElement());
-		navigateWireEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
-		navigateWireEClass.getESuperTypes().add(this.getConditionEdgeDestination());
-		navigateWireEClass.getESuperTypes().add(theModelPackage.getAction());
+		navigateActionEClass.getESuperTypes().add(theModelPackage.getWireDestination());
+		navigateActionEClass.getESuperTypes().add(theModelPackage.getNamedElement());
+		navigateActionEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
+		navigateActionEClass.getESuperTypes().add(this.getConditionEdgeDestination());
+		navigateActionEClass.getESuperTypes().add(theModelPackage.getAction());
 		selectWireEClass.getESuperTypes().add(theModelPackage.getWireDestination());
 		selectWireEClass.getESuperTypes().add(this.getParameterEdgeDestination());
 		selectWireEClass.getESuperTypes().add(this.getSingleWire());
@@ -988,8 +988,8 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 
 		initEClass(syncWireEClass, SyncWire.class, "SyncWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(runInstanceWireEClass, RunInstanceWire.class, "RunInstanceWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getRunInstanceWire_Priority(), ecorePackage.getEInt(), "priority", null, 0, 1, RunInstanceWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(runActionEClass, RunAction.class, "RunAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getRunAction_Priority(), ecorePackage.getEInt(), "priority", null, 0, 1, RunAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(parameterEdgeEClass, ParameterEdge.class, "ParameterEdge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getParameterEdge_ParameterName(), ecorePackage.getEString(), "parameterName", null, 0, 1, ParameterEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -998,7 +998,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 
 		initEClass(setWireEClass, SetWire.class, "SetWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(navigateWireEClass, NavigateWire.class, "NavigateWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(navigateActionEClass, NavigateAction.class, "NavigateAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(selectWireEClass, SelectWire.class, "SelectWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSelectWire_Query(), ecorePackage.getEString(), "query", null, 0, 1, SelectWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1090,13 +1090,13 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 			 "comment4", "a wire shouldn\'t have parameters; but the operations contained within need them rendered."
 		   });				
 		addAnnotation
-		  (runInstanceWireEClass, 
+		  (runActionEClass, 
 		   source, 
 		   new String[] {
 			 "comment", "RunWire: a composite wire that contains ExecutionWires/etc"
 		   });			
 		addAnnotation
-		  (getRunInstanceWire_Priority(), 
+		  (getRunAction_Priority(), 
 		   source, 
 		   new String[] {
 			 "added", "0.2"
@@ -1120,7 +1120,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 			 "added", "0.2"
 		   });			
 		addAnnotation
-		  (navigateWireEClass, 
+		  (navigateActionEClass, 
 		   source, 
 		   new String[] {
 			 "added", "0.2"
@@ -1255,7 +1255,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 			 "documentation", "When a connected element changes, a SyncWire will update the other connected element."
 		   });			
 		addAnnotation
-		  (runInstanceWireEClass, 
+		  (runActionEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "Connects a {@model EventTrigger} to a {@model Operation}, allowing it to be executed. May have incoming {@model ConditionEdge}s."
@@ -1264,7 +1264,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		  (parameterEdgeEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Provides incoming values for {@model Parameter Parameters} of a {@model RunInstanceWire}."
+			 "documentation", "Provides incoming values for {@model Parameter Parameters} of a {@model RunAction}."
 		   });					
 		addAnnotation
 		  (setWireEClass, 
@@ -1273,7 +1273,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 			 "documentation", "When the source element changes, the target element will be updated (but not vice versa)."
 		   });			
 		addAnnotation
-		  (navigateWireEClass, 
+		  (navigateActionEClass, 
 		   source, 
 		   new String[] {
 			 "documentation", "When the {@model EventTrigger source event} executes, the user will be navigated to the target {@model Frame}."

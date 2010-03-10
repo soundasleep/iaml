@@ -44,13 +44,13 @@ public interface WiresFactory extends EFactory {
 	SyncWire createSyncWire();
 
 	/**
-	 * Returns a new object of class '<em>Run Instance Wire</em>'.
+	 * Returns a new object of class '<em>Run Action</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Run Instance Wire</em>'.
+	 * @return a new object of class '<em>Run Action</em>'.
 	 * @generated
 	 */
-	RunInstanceWire createRunInstanceWire();
+	RunAction createRunAction();
 
 	/**
 	 * Returns a new object of class '<em>Parameter Edge</em>'.
@@ -71,13 +71,13 @@ public interface WiresFactory extends EFactory {
 	SetWire createSetWire();
 
 	/**
-	 * Returns a new object of class '<em>Navigate Wire</em>'.
+	 * Returns a new object of class '<em>Navigate Action</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Navigate Wire</em>'.
+	 * @return a new object of class '<em>Navigate Action</em>'.
 	 * @generated
 	 */
-	NavigateWire createNavigateWire();
+	NavigateAction createNavigateAction();
 
 	/**
 	 * Returns a new object of class '<em>Select Wire</em>'.

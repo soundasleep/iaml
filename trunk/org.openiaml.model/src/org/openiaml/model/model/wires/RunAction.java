@@ -13,7 +13,7 @@ import org.openiaml.model.model.WireDestination;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Run Instance Wire</b></em>'.
+ * A representation of the model object '<em><b>Run Action</b></em>'.
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
@@ -23,16 +23,15 @@ import org.openiaml.model.model.WireDestination;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.openiaml.model.model.wires.RunInstanceWire#getPriority <em>Priority</em>}</li>
+ *   <li>{@link org.openiaml.model.model.wires.RunAction#getPriority <em>Priority</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.openiaml.model.model.wires.WiresPackage#getRunInstanceWire()
+ * @see org.openiaml.model.model.wires.WiresPackage#getRunAction()
  * @model annotation="http://openiaml.org/comment comment='RunWire: a composite wire that contains ExecutionWires/etc'"
  * @generated
  */
-public interface RunInstanceWire extends WireDestination, ParameterEdgeDestination, NamedElement, GeneratesElements, ConditionEdgeDestination, Action {
-
+public interface RunAction extends WireDestination, ParameterEdgeDestination, NamedElement, GeneratesElements, ConditionEdgeDestination, Action {
 	/**
 	 * Returns the value of the '<em><b>Priority</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -43,14 +42,14 @@ public interface RunInstanceWire extends WireDestination, ParameterEdgeDestinati
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Priority</em>' attribute.
 	 * @see #setPriority(int)
-	 * @see org.openiaml.model.model.wires.WiresPackage#getRunInstanceWire_Priority()
+	 * @see org.openiaml.model.model.wires.WiresPackage#getRunAction_Priority()
 	 * @model annotation="http://openiaml.org/comment added='0.2'"
 	 * @generated
 	 */
 	int getPriority();
 
 	/**
-	 * Sets the value of the '{@link org.openiaml.model.model.wires.RunInstanceWire#getPriority <em>Priority</em>}' attribute.
+	 * Sets the value of the '{@link org.openiaml.model.model.wires.RunAction#getPriority <em>Priority</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Priority</em>' attribute.
@@ -58,4 +57,5 @@ public interface RunInstanceWire extends WireDestination, ParameterEdgeDestinati
 	 * @generated
 	 */
 	void setPriority(int value);
-} // RunInstanceWire
+
+} // RunAction

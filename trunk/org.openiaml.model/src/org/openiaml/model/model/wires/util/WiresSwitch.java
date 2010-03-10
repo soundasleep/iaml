@@ -28,14 +28,14 @@ import org.openiaml.model.model.wires.ConstraintEdgesSource;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ExtendsEdgeDestination;
 import org.openiaml.model.model.wires.ExtendsEdgesSource;
-import org.openiaml.model.model.wires.NavigateWire;
+import org.openiaml.model.model.wires.NavigateAction;
 import org.openiaml.model.model.wires.NewInstanceWire;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.ParameterEdgeDestination;
 import org.openiaml.model.model.wires.ParameterEdgesSource;
 import org.openiaml.model.model.wires.ProvidesEdge;
 import org.openiaml.model.model.wires.RequiresEdge;
-import org.openiaml.model.model.wires.RunInstanceWire;
+import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.model.wires.SingleWire;
@@ -152,16 +152,16 @@ public class WiresSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case WiresPackage.RUN_INSTANCE_WIRE: {
-				RunInstanceWire runInstanceWire = (RunInstanceWire)theEObject;
-				T result = caseRunInstanceWire(runInstanceWire);
-				if (result == null) result = caseWireDestination(runInstanceWire);
-				if (result == null) result = caseParameterEdgeDestination(runInstanceWire);
-				if (result == null) result = caseNamedElement(runInstanceWire);
-				if (result == null) result = caseGeneratesElements(runInstanceWire);
-				if (result == null) result = caseConditionEdgeDestination(runInstanceWire);
-				if (result == null) result = caseAction(runInstanceWire);
-				if (result == null) result = caseGeneratedElement(runInstanceWire);
+			case WiresPackage.RUN_ACTION: {
+				RunAction runAction = (RunAction)theEObject;
+				T result = caseRunAction(runAction);
+				if (result == null) result = caseWireDestination(runAction);
+				if (result == null) result = caseParameterEdgeDestination(runAction);
+				if (result == null) result = caseNamedElement(runAction);
+				if (result == null) result = caseGeneratesElements(runAction);
+				if (result == null) result = caseConditionEdgeDestination(runAction);
+				if (result == null) result = caseAction(runAction);
+				if (result == null) result = caseGeneratedElement(runAction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -188,15 +188,15 @@ public class WiresSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case WiresPackage.NAVIGATE_WIRE: {
-				NavigateWire navigateWire = (NavigateWire)theEObject;
-				T result = caseNavigateWire(navigateWire);
-				if (result == null) result = caseWireDestination(navigateWire);
-				if (result == null) result = caseNamedElement(navigateWire);
-				if (result == null) result = caseGeneratesElements(navigateWire);
-				if (result == null) result = caseConditionEdgeDestination(navigateWire);
-				if (result == null) result = caseAction(navigateWire);
-				if (result == null) result = caseGeneratedElement(navigateWire);
+			case WiresPackage.NAVIGATE_ACTION: {
+				NavigateAction navigateAction = (NavigateAction)theEObject;
+				T result = caseNavigateAction(navigateAction);
+				if (result == null) result = caseWireDestination(navigateAction);
+				if (result == null) result = caseNamedElement(navigateAction);
+				if (result == null) result = caseGeneratesElements(navigateAction);
+				if (result == null) result = caseConditionEdgeDestination(navigateAction);
+				if (result == null) result = caseAction(navigateAction);
+				if (result == null) result = caseGeneratedElement(navigateAction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -364,17 +364,17 @@ public class WiresSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Run Instance Wire</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Run Action</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Run Instance Wire</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Run Action</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseRunInstanceWire(RunInstanceWire object) {
+	public T caseRunAction(RunAction object) {
 		return null;
 	}
 
@@ -409,17 +409,17 @@ public class WiresSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Navigate Wire</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Navigate Action</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Navigate Wire</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Navigate Action</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseNavigateWire(NavigateWire object) {
+	public T caseNavigateAction(NavigateAction object) {
 		return null;
 	}
 

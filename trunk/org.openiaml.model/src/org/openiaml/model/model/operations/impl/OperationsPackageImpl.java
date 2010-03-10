@@ -519,7 +519,7 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		  (operationCallNodeEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "A virtual {@model Operation} call; the outgoing {@model RunInstanceWire} will be executed."
+			 "documentation", "A virtual {@model Operation} call; the outgoing {@model RunAction} will be executed."
 		   });			
 		addAnnotation
 		  (arithmeticEClass, 

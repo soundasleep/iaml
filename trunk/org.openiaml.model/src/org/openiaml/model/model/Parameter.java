@@ -14,7 +14,7 @@ package org.openiaml.model.model;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Incoming values to an {@model Operation operation} executed by a {@model RunInstanceWire} can be accessed via Parameters.
+ * Incoming values to an {@model Operation operation} executed by a {@model RunAction} can be accessed via Parameters.
  * <!-- end-model-doc -->
  *
  *

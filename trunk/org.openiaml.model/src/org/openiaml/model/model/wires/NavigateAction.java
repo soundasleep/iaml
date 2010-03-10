@@ -11,10 +11,9 @@ import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.WireDestination;
 
-
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Navigate Wire</b></em>'.
+ * A representation of the model object '<em><b>Navigate Action</b></em>'.
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
@@ -22,9 +21,9 @@ import org.openiaml.model.model.WireDestination;
  * <!-- end-model-doc -->
  *
  *
- * @see org.openiaml.model.model.wires.WiresPackage#getNavigateWire()
+ * @see org.openiaml.model.model.wires.WiresPackage#getNavigateAction()
  * @model annotation="http://openiaml.org/comment added='0.2'"
  * @generated
  */
-public interface NavigateWire extends WireDestination, NamedElement, GeneratesElements, ConditionEdgeDestination, Action {
-} // NavigateWire
+public interface NavigateAction extends WireDestination, NamedElement, GeneratesElements, ConditionEdgeDestination, Action {
+} // NavigateAction

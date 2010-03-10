@@ -277,18 +277,18 @@
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
     <containmentFeature
-        href="iaml.ecore#//ContainsWires/wires"/>
+        href="iaml.ecore#//ContainsWires/actions"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="wire.gmftool#//@palette/@tools.1/@tools.1"/>
+        href="wire.gmftool#//@palette/@tools.2/@tools.0"/>
     <diagramLink
         href="iaml.gmfgraph#RunInstanceWire"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//Wire/from"/>
+        href="iaml.ecore#//Action/from"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//Wire/to"/>
+        href="iaml.ecore#//Action/to"/>
   </links>
   <links>
     <domainMetaElement
@@ -297,7 +297,7 @@
         href="iaml.ecore#//ContainsWires/parameterEdges"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="wire.gmftool#//@palette/@tools.1/@tools.2"/>
+        href="wire.gmftool#//@palette/@tools.1/@tools.1"/>
     <diagramLink
         href="iaml.gmfgraph#ParameterEdge"/>
     <sourceMetaFeature

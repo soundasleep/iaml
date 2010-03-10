@@ -95,19 +95,6 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="RunInstanceWire"
-          description="Create new RunInstanceWire">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/RunInstanceWire.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/RunInstanceWire.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
           title="ExtendsEdge"
           description="Create new ExtendsEdge">
         <smallIcon
@@ -117,6 +104,25 @@
         <largeIcon
             xsi:type="gmftool:BundleImage"
             path="icons/full/obj32/ExtendsEdge.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+    </tools>
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="Actions"
+        description="Actions"
+        collapsible="true">
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="RunInstanceWire"
+          description="Create new RunInstanceWire">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/RunInstanceWire.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/RunInstanceWire.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
     </tools>

@@ -132,18 +132,18 @@
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
     <containmentFeature
-        href="iaml.ecore#//ContainsWires/wires"/>
+        href="iaml.ecore#//ContainsWires/actions"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="element.gmftool#//@palette/@tools.1/@tools.1"/>
+        href="element.gmftool#//@palette/@tools.2/@tools.0"/>
     <diagramLink
         href="iaml.gmfgraph#RunInstanceWire"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//Wire/from"/>
+        href="iaml.ecore#//Action/from"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//Wire/to"/>
+        href="iaml.ecore#//Action/to"/>
   </links>
   <links>
     <domainMetaElement

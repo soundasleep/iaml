@@ -142,51 +142,18 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	}
 
 	/** 
-	 * Have we loaded at least one page (so we can find an ajax_monitor if necessary)?
+	 * Have we loaded at least one page?
+	 * We can't goto the sitemap if we haven't begun the session yet.
 	 */
-	private boolean hasLoaded = false;
 	private boolean hasBegun;
-	
+
 	/**
 	 * Wait for all of the Ajax monitors to return.
 	 * 
 	 * @throws Exception
 	 */
 	protected void waitForAjax() throws Exception {
-		logTimed("web: waiting for ajax");
-		
-		// sleep a little bit first, so ajax calls can continue
-		if (hasLoaded) {
-			if (!hasElementById("ajax_monitor")) {
-				// can't find it (perhaps it wasn't generated on this page); bail
-				logTimed("web: ajax monitor wasn't loaded");
-				return;
-			} else {
-				int cycles = 0;
-				while (cycles < 500) {		// max 15 seconds
-					try {
-						IElement monitor = getElementById("ajax_monitor");
-						String text = monitor.getTextContent();
-						if (text != null && (text.isEmpty() || new Integer(text) == 0))		// all ajax calls have finished
-							break;		// completed; we can carry on the test case
-						
-						if (text.length() > 6 && text.substring(0, 6).equals("failed"))
-							throw new RuntimeException("Ajax loading failed: " + monitor.getTextContent());
-					
-						// carry on sleeping
-						Thread.sleep(30);
-					} catch (AssertionFailedError e) {
-						// the monitor was not found
-						Thread.sleep(30);
-					}
-					cycles++;
-				}
-				
-			}
-		}
-		
-		logTimed("web: ajax wait complete");
-		
+		// does nothing
 	}
 	
 	/**
@@ -409,7 +376,6 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		} catch (RuntimeException e) {
 			throw new RuntimeException("Cannot connect to '" + url + "' relative to '" + BASE_URL + "'", e);	// for debugging
 		}
-		hasLoaded = true;		// we have now loaded a page
 		hasBegun = true;		// we have begun somewhere
 	}
 	
@@ -434,7 +400,6 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		waitForAjax();
 
 		gotoPage(sitemap.getProjectRelativePath().toString());
-		hasLoaded = true;		// we have now loaded a page
 		assertTitleMatch("sitemap");
 		
 		assertLinkPresentWithText(pageText);
@@ -491,7 +456,6 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		waitForAjax();
 	
 		gotoPage(sitemap.getProjectRelativePath().toString());
-		hasLoaded = true;		// we have now loaded a page
 		assertTitleMatch("sitemap");
 		
 		// make sure the link exists, first
@@ -537,7 +501,6 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		waitForAjax();
 
 		gotoPage(sitemap.getProjectRelativePath().toString());
-		hasLoaded = true;		// we have now loaded a page
 		assertTitleMatch("sitemap");
 		
 		assertLinkPresentWithText(pageText);
@@ -900,26 +863,6 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		logTimed("internal: throwing debug information complete");
 		throw new RuntimeException("Response = '" + getElementById("response").getTextContent() + "' Debug='" + getElementById("debug").getTextContent() + "'", e);
 		
-	}
-	
-	/**
-	 * Extend submit() to also wait for Ajax.
-	 */
-	@Override
-	public void submit() {
-		logTimed("web: submitting form");
-		try {
-			waitForAjax(); // TODO remove this check; we shouldn't have to wait for ajax
-		} catch (Exception e) {
-			throw new RuntimeException(e.getMessage(), e);
-		}
-		super.submit();
-		try {
-			waitForAjax(); // TODO remove this check; we shouldn't have to wait for ajax
-		} catch (Exception e) {
-			throw new RuntimeException(e.getMessage(), e);
-		}
-		logTimed("web: submit complete");
 	}
 	
 	@Override

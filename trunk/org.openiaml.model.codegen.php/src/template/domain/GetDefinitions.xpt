@@ -131,7 +131,7 @@
 			
 			return $row["«safeNameString(name)»"];
 		«ELSE»
-			«EXPAND exception FOR throwException("TODO not completed yet")»
+			«throwException("TODO not completed yet")»
 		«ENDIF»	
 	}
 
@@ -166,7 +166,7 @@
 			
 			return true;		// exists
 		«ELSE»
-			«EXPAND exception FOR throwException("TODO not completed yet")»
+			«throwException("TODO not completed yet")»
 		«ENDIF»	
 	}
 «ENDDEFINE»
@@ -423,7 +423,7 @@
 «ENDDEFINE»
 
 «DEFINE newDomainObjectTemplate FOR model::WireSource»
-	«EXPAND exception FOR throwException("Cannot get domain object template for object: " + this)»
+	«throwException("Cannot get domain object template for object: " + this)»
 «ENDDEFINE»
 
 «DEFINE newDomainObjectTemplate FOR model::DomainObject»
@@ -435,7 +435,4 @@
 
 «DEFINE newDomainAttributeTemplate FOR model::DomainAttribute»
 	"«safeNameString(name)-»" => "" /* TODO eventually put the default value in here */
-«ENDDEFINE»
-
-«DEFINE exception FOR Object»
 «ENDDEFINE»

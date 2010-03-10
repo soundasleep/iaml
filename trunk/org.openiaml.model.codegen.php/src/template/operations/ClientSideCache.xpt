@@ -15,7 +15,7 @@
 «ENDDEFINE»
 
 «DEFINE cachedPrimitiveOperations(model::visual::Frame frame) FOR model::Operation»
-	«EXPAND exception FOR throwException("Cannot expand client-side cached operation '" + this + "'")»
+	«throwException("Cannot expand client-side cached operation '" + this + "'")»
 «ENDDEFINE»
 
 «DEFINE cachedPrimitiveOperations(model::visual::Frame frame) FOR model::PrimitiveOperation»
@@ -38,7 +38,4 @@
 			cached_result_«safeName()»_value = result;
 		}
 	«ENDLET»
-«ENDDEFINE»
-
-«DEFINE exception FOR Object»
 «ENDDEFINE»

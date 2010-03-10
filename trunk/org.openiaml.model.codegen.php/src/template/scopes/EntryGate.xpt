@@ -53,15 +53,7 @@ if (!(«EXPAND template::conditions::Runtime::callCondition(true, false, currentF
  */
 «DEFINE getEntryAnyTarget(String arg) FOR model::components::EntryGate»
 	«IF getEntryResumeTargets(this).isEmpty»
-		«EXPAND exception FOR throwException("Gate '" + this + "' did not have any possible resume targets")»
+		«throwException("Gate '" + this + "' did not have any possible resume targets")»
 	«ENDIF»
 	$«arg-» = "«safeName(getEntryResumeTargets(this).first())»"; 
 «ENDDEFINE»
-
-/** 
- * a hack way to create backtrace-able errors
- * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540  
- */
-«DEFINE exception FOR Object»
-«ENDDEFINE»
-

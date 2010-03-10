@@ -12,11 +12,11 @@
  * Domain instance methods. (Copied from Javascript. TODO refactor with code above)
  */
 «DEFINE domainInstanceCall(Boolean php, model::wires::RunInstanceWire wire, model::DomainObjectInstance object, model::visual::Frame currentFrame) FOR model::WireDestination»
-	«EXPAND exception FOR throwException("Unexpected domain attribute run instance wire destination: " + this)»
+	«throwException("Unexpected domain attribute run instance wire destination: " + this)»
 «ENDDEFINE»
 
 «DEFINE domainInstanceCall(Boolean php, model::wires::RunInstanceWire wire, model::DomainObjectInstance object, model::visual::Frame currentFrame) FOR model::ActionDestination»
-	«EXPAND exception FOR throwException("Unexpected domain attribute run instance action destination: " + this)»
+	«throwException("Unexpected domain attribute run instance action destination: " + this)»
 «ENDDEFINE»
 
 «DEFINE domainInstanceCall(Boolean php, model::wires::RunInstanceWire wire, model::DomainObjectInstance object, model::visual::Frame currentFrame) FOR model::Operation»
@@ -24,7 +24,7 @@
 		«IF name=="exists?"»
 			exists_object_instance_«safeNameString(object.id)»()
 		«ELSE»
-			«EXPAND exception FOR throwException("No server-side code for domainInstanceCall operation '" + name + "'")»
+			«throwException("No server-side code for domainInstanceCall operation '" + name + "'")»
 		«ENDIF»
 	«ELSE»
 		/* domain object instance: wire = «wire», object = «object», this = «this» */
@@ -40,7 +40,7 @@
 		«ELSEIF name=="add role"»
 			«LET wire.inParameterEdges AS paramWires»
 				«IF paramWires.size != 1»
-					«EXPAND exception FOR throwException("Expected exactly one incoming ParameterEdge for add_role, got: " + paramWires.size)»
+					«throwException("Expected exactly one incoming ParameterEdge for add_role, got: " + paramWires.size)»
 				«ELSE»
 					queued_add_role(«EXPAND template::operations::Parameters::callParameter(php, false, false, currentFrame) FOR paramWires.first()», '«safeNameString(object.id)-»')
 				«ENDIF»
@@ -48,7 +48,7 @@
 		«ELSEIF name=="add permission"»
 			«LET wire.inParameterEdges AS paramWires»
 				«IF paramWires.size != 1»
-					«EXPAND exception FOR throwException("Expected exactly one incoming ParameterEdge for add_permission, got: " + paramWires.size)»
+					«throwException("Expected exactly one incoming ParameterEdge for add_permission, got: " + paramWires.size)»
 				«ELSE»
 					queued_add_permission(«EXPAND template::operations::Parameters::callParameter(php, false, false, currentFrame) FOR paramWires.first()», '«safeNameString(object.id)-»')
 				«ENDIF»
@@ -56,7 +56,7 @@
 		«ELSEIF name=="remove role"»
 			«LET wire.inParameterEdges AS paramWires»
 				«IF paramWires.size != 1»
-					«EXPAND exception FOR throwException("Expected exactly one incoming ParameterEdge for remove_role, got: " + paramWires.size)»
+					«throwException("Expected exactly one incoming ParameterEdge for remove_role, got: " + paramWires.size)»
 				«ELSE»
 					queued_remove_role(«EXPAND template::operations::Parameters::callParameter(php, false, false, currentFrame) FOR paramWires.first()», '«safeNameString(object.id)-»')
 				«ENDIF»
@@ -64,17 +64,13 @@
 		«ELSEIF name=="remove permission"»
 			«LET wire.inParameterEdges AS paramWires»
 				«IF paramWires.size != 1»
-					«EXPAND exception FOR throwException("Expected exactly one incoming ParameterEdge for remove_permission, got: " + paramWires.size)»
+					«throwException("Expected exactly one incoming ParameterEdge for remove_permission, got: " + paramWires.size)»
 				«ELSE»
 					queued_remove_permission(«EXPAND template::operations::Parameters::callParameter(php, false, false, currentFrame) FOR paramWires.first()», '«safeNameString(object.id)-»')
 				«ENDIF»
 			«ENDLET»
 		«ELSE»
-			«EXPAND exception FOR throwException("No client-side code for domainInstanceCall operation " + this)»
+			«throwException("No client-side code for domainInstanceCall operation " + this)»
 		«ENDIF»
 	«ENDIF» 
-«ENDDEFINE»
-
-
-«DEFINE exception FOR Object»
 «ENDDEFINE»

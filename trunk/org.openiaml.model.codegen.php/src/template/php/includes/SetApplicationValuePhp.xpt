@@ -103,7 +103,7 @@ echo_necessary_update_callbacks();
 «ENDDEFINE»
 
 «DEFINE potentialUpdates FOR model::Wire»
-	«EXPAND exception FOR throwException("Unknown potential update wire edge: " + this)»
+	«throwException("Unknown potential update wire edge: " + this)»
 «ENDDEFINE»
 
 «DEFINE potentialParameterUpdates FOR model::wires::ParameterEdge»
@@ -136,7 +136,7 @@ echo_necessary_update_callbacks();
 «ENDDEFINE»
 
 «DEFINE potentialUpdateDestination FOR model::WireDestination»
-	«EXPAND exception FOR throwException("Unknown update wire edge destination: " + this)»
+	«throwException("Unknown update wire edge destination: " + this)»
 «ENDDEFINE»
 
 «DEFINE potentialUpdateDestination FOR model::DomainObjectInstance»
@@ -198,7 +198,4 @@ echo_necessary_update_callbacks();
 				. escape_parameter_string($value);				
 		«ENDIF»
 	}
-«ENDDEFINE»
-
-«DEFINE exception FOR Object»
 «ENDDEFINE»

@@ -26,8 +26,5 @@
 «ENDDEFINE»
 
 «DEFINE getElementID(Boolean php) FOR emf::EObject-»
-	«EXPAND exception FOR throwException("Cannot expand DynamicElement for EObject: " + this)»
-«ENDDEFINE»
-
-«DEFINE exception FOR Object»
+	«throwException("Cannot expand DynamicElement for EObject: " + this)»
 «ENDDEFINE»

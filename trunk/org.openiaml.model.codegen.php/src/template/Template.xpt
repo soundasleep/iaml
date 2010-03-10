@@ -5,7 +5,7 @@
 «DEFINE main(String config_runtime, String config_web, String debug) FOR model::InternetApplication»
 	«REM»to test that when we throw exceptions, we can actually catch them«ENDREM»
 	«IF name=="__test throw exception"»
-		«EXPAND exception FOR throwException("We should be able to catch this exception.")» 
+		«throwException("We should be able to catch this exception.")» 
 	«ENDIF»
 
 	«EXPAND Frame::expandFrame FOREACH children»
@@ -83,7 +83,7 @@
 «ENDDEFINE»
 
 «DEFINE expandSession FOR model::Scope»
-	«EXPAND exception FOR throwException("Unknown scope: " + this)»
+	«throwException("Unknown scope: " + this)»
 «ENDDEFINE»
 
 «DEFINE expandSession FOR model::visual::Frame»
@@ -111,12 +111,5 @@
 «ENDDEFINE»
 
 «DEFINE expandSitemapFrame FOR model::Scope»
-	«EXPAND exception FOR throwException("Unknown scope: " + this)»
-«ENDDEFINE»
-
-/** 
- * a hack way to create backtrace-able errors
- * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540  
- */
-«DEFINE exception FOR Object»
+	«throwException("Unknown scope: " + this)»
 «ENDDEFINE»

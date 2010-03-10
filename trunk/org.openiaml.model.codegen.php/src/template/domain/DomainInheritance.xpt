@@ -98,7 +98,7 @@ function cast_«safeName()»_as_«safeName(target)»($instance) {
  */
 function cast_«safeName()»_as_«safeName(target)»($instance) {
 	«IF this == target»
-		«EXPAND exception FOR throwException("Cannot castSourceAsTargetOther with the same instances")»
+		«throwException("Cannot castSourceAsTargetOther with the same instances")»
 	«ELSE»
 		«IF allSubtypes().contains(target)»
 			// '«target.name»' is a direct subtype of '«name»'
@@ -328,7 +328,4 @@ function create_new_instance_«safeName()»() {
 	
 	return $new_instance;	
 }
-«ENDDEFINE»
-
-«DEFINE exception FOR Object»
 «ENDDEFINE»

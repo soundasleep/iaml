@@ -73,7 +73,7 @@
 			
 			// execute the operation
 			«IF startNode() == null»
-				«EXPAND exception FOR throwException("Operation " + this + " had no start node")»
+				«throwException("Operation " + this + " had no start node")»
 			«ELSE»
 				«EXPAND ExecutionFlow::executionFlow(true, container, php) FOR startNode()-»
 			«ENDIF»
@@ -152,7 +152,4 @@
 		}
 		«ENDIF»
 	}
-«ENDDEFINE»
-
-«DEFINE exception FOR Object»
 «ENDDEFINE»

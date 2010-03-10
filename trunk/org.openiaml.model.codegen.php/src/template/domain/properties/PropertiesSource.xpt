@@ -17,7 +17,7 @@
 		«ELSEIF model::InternetApplication.isInstance(getDomainStore(this))»
 			$db_name = "internet_application.properties";
 		«ELSE»
-			«EXPAND exception FOR throwException("Remote parameter source '" + getDomainStore(this) + "' was not a DomainStore or InternetApplication.")»
+			«throwException("Remote parameter source '" + getDomainStore(this) + "' was not a DomainStore or InternetApplication.")»
 		«ENDIF»
 		$row_name = "«safeNameString(this.name)-»";
 		$properties = load_properties($db_name);
@@ -48,7 +48,7 @@
 		«ELSEIF model::InternetApplication.isInstance(getDomainStore(this))»
 			$db_name = "internet_application.properties";
 		«ELSE»
-			«EXPAND exception FOR throwException("Remote parameter source '" + getDomainStore(this) + "' was not a DomainStore or InternetApplication.")»
+			«throwException("Remote parameter source '" + getDomainStore(this) + "' was not a DomainStore or InternetApplication.")»
 		«ENDIF»
 		$row_name = "«safeNameString(this.name)-»";
 		$properties = load_properties($db_name);
@@ -59,7 +59,4 @@
 			echo "false";
 		} 
 	?>
-«ENDDEFINE»
-
-«DEFINE exception FOR Object»
 «ENDDEFINE»

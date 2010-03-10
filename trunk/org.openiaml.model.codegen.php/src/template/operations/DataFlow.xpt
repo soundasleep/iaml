@@ -9,7 +9,7 @@
  * Data sources
  */
 «DEFINE dataSource(Boolean php, model::visual::Frame currentFrame) FOR model::DataFlowEdgesSource»
-	«EXPAND exception FOR throwException("Unknown data flow edge source for dataSource: " + this)»
+	«throwException("Unknown data flow edge source for dataSource: " + this)»
 «ENDDEFINE»
 
 /**
@@ -49,7 +49,7 @@
 			convert_to_nan(«EXPAND convertToFloat(currentFrame) FOREACH inFlows.from SEPARATOR " / "»)
 		«ENDIF»
 	«ELSE»
-		«EXPAND exception FOR throwException("Unknown arithmetic: " + this)»
+		«throwException("Unknown arithmetic: " + this)»
 	«ENDIF»
 «ENDDEFINE»
 
@@ -91,7 +91,7 @@
  * Data targets
  */
 «DEFINE dataTarget(Boolean php) FOR model::DataFlowEdgeDestination»
-	«EXPAND exception FOR throwException("Unknown data flow edge target for dataTarget: " + this)»
+	«throwException("Unknown data flow edge target for dataTarget: " + this)»
 «ENDDEFINE»
 
 «DEFINE dataTarget(Boolean php) FOR model::Property»	
@@ -99,7 +99,7 @@
 «ENDDEFINE»
 
 «DEFINE dataTargetContainer(Boolean php, model::Property property) FOR emf::EObject»
-	«EXPAND exception FOR throwException("Unknown property container: " + this)»
+	«throwException("Unknown property container: " + this)»
 «ENDDEFINE»
 
 «DEFINE dataTargetContainer(Boolean php, model::Property property) FOR model::visual::InputTextField»
@@ -130,12 +130,9 @@
  *	as {@model DataFlowEdge parameters}.   
  */
 «DEFINE isSet(Boolean php, model::visual::Frame currentFrame) FOR model::DataFlowEdgesSource»
-	«EXPAND exception FOR throwException("Unknown data flow edge source for isSet: " + this)»
+	«throwException("Unknown data flow edge source for isSet: " + this)»
 «ENDDEFINE»
 
 «DEFINE isSet(Boolean php, model::visual::Frame currentFrame) FOR model::Property»
 	«EXPAND template::operations::Parameters::isSetParameter(php, currentFrame) FOR this»
-«ENDDEFINE»
-
-«DEFINE exception FOR Object»
 «ENDDEFINE»

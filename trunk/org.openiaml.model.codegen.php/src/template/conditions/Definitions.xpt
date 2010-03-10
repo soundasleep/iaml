@@ -8,7 +8,7 @@
 /* expand out the conditions for the frame */
 /* this includes Frame and Session */
 «DEFINE conditionDefinition(Boolean php, model::visual::Frame currentFrame) FOR model::Condition-»
-	«EXPAND exception FOR throwException("Cannot expand an abstract Condition: " + this)»
+	«throwException("Cannot expand an abstract Condition: " + this)»
 «ENDDEFINE»
 
 «DEFINE conditionDefinition(Boolean php, model::visual::Frame currentFrame) FOR model::operations::DecisionCondition»
@@ -27,7 +27,4 @@
 
 		return false;
 	}
-«ENDDEFINE»
-
-«DEFINE exception FOR Object»
 «ENDDEFINE»

@@ -38,7 +38,7 @@
 «ENDDEFINE»
 
 «DEFINE updateCachedPrimitiveOperations FOR model::Operation»
-	«EXPAND exception FOR throwException("Cannot expand client-side cached operation '" + this + "'")»
+	«throwException("Cannot expand client-side cached operation '" + this + "'")»
 «ENDDEFINE»
 
 «DEFINE updateCachedPrimitiveOperations FOR model::PrimitiveOperation»
@@ -57,7 +57,4 @@
 		}
 		
 	«ENDLET»
-«ENDDEFINE»
-
-«DEFINE exception FOR Object»
 «ENDDEFINE»

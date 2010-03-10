@@ -43,7 +43,7 @@
  * fetch the runtime value of the parameter.
  */
 «DEFINE callParameterValue(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::wires::ParameterEdgesSource»
-	«EXPAND exception FOR throwException("Unknown parameter wire source: " + this)»
+	«throwException("Unknown parameter wire source: " + this)»
 «ENDDEFINE»
 
 /**
@@ -115,7 +115,7 @@
 
 /** Loading a current value from the currently loaded frame (i.e. client-side) */
 «DEFINE dataSourceOnFrame FOR emf::EObject»
-	«EXPAND exception FOR throwException("Unknown data source on current frame: " + this)»
+	«throwException("Unknown data source on current frame: " + this)»
 «ENDDEFINE»
 «DEFINE dataSourceOnFrame FOR model::visual::InputTextField»
 	document.getElementById('«safeName()»').value
@@ -138,7 +138,7 @@
 		«IF getFieldValue(this) != null»
 			«EXPAND callParameterValue(php, false, currentFrame) FOR getFieldValue(this)»
 		«ELSE»
-			«EXPAND exception FOR throwException("No 'fieldValue' property found in the InputTextField '" + this + "', which is being used as a Parameter source.")»
+			«throwException("No 'fieldValue' property found in the InputTextField '" + this + "', which is being used as a Parameter source.")»
 		«ENDIF» 
 	«ENDIF»
 «ENDDEFINE»
@@ -222,7 +222,7 @@
  */
 
 «DEFINE callParameterValueExists(model::visual::Frame currentFrame) FOR model::wires::ParameterEdgesSource»
-	«EXPAND exception FOR throwException("Unknown parameter wire source: " + this)»
+	«throwException("Unknown parameter wire source: " + this)»
 «ENDDEFINE»
 
 «DEFINE callParameterValueExists(model::visual::Frame currentFrame) FOR model::Property»
@@ -262,8 +262,4 @@
 	«ELSE»
 		true
 	«ENDIF»
-«ENDDEFINE»
-
-
-«DEFINE exception FOR Object»
 «ENDDEFINE»

@@ -675,15 +675,15 @@
           figure="//@figures.0/@descriptors.21/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
-        name="RunInstanceWireFigure">
+        name="RunActionFigure">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
-          name="RunInstanceWireFigure"
+          name="RunActionFigure"
           lineKind="LINE_DASH"
           targetDecoration="//@figures.0/@figures.0">
         <children
             xsi:type="gmfgraph:Label"
-            name="RunInstanceWireNameFigure"
+            name="RunActionNameFigure"
             text="&lt;...>"/>
       </actualFigure>
       <accessors
@@ -907,15 +907,15 @@
           figure="//@figures.0/@descriptors.32/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
-        name="NavigateWireFigure">
+        name="NavigateActionFigure">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
-          name="NavigateWireFigure"
+          name="NavigateActionFigure"
           lineKind="LINE_DASH"
           targetDecoration="//@figures.0/@figures.0">
         <children
             xsi:type="gmfgraph:Label"
-            name="NavigateWireNameFigure"
+            name="NavigateActionNameFigure"
             text="navigate"/>
       </actualFigure>
       <accessors
@@ -1872,8 +1872,8 @@
       name="SyncWire"
       figure="SyncWireFigure"/>
   <connections
-      name="RunInstanceWire"
-      figure="RunInstanceWireFigure"/>
+      name="RunAction"
+      figure="RunActionFigure"/>
   <connections
       name="ParameterEdge"
       figure="ParameterEdgeFigure"/>
@@ -1890,8 +1890,8 @@
       name="ShowWire"
       figure="ShowWireFigure"/>
   <connections
-      name="NavigateWire"
-      figure="NavigateWireFigure"/>
+      name="NavigateAction"
+      figure="NavigateActionFigure"/>
   <connections
       name="CommitWire"
       figure="CommitWireFigure"/>
@@ -2002,8 +2002,8 @@
       figure="SyncWireFigure"
       accessor="//@figures.0/@descriptors.21/@accessors.0"/>
   <labels
-      name="RunInstanceWireName"
-      figure="RunInstanceWireFigure"
+      name="RunActionName"
+      figure="RunActionFigure"
       accessor="//@figures.0/@descriptors.22/@accessors.0"/>
   <labels
       name="DecisionOperationName"
@@ -2035,8 +2035,8 @@
       figure="ShowWireFigure"
       accessor="//@figures.0/@descriptors.32/@accessors.0"/>
   <labels
-      name="NavigateWireName"
-      figure="NavigateWireFigure"
+      name="NavigateActionName"
+      figure="NavigateActionFigure"
       accessor="//@figures.0/@descriptors.33/@accessors.0"/>
   <labels
       name="CommitWireName"

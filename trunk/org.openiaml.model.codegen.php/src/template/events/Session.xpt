@@ -8,8 +8,8 @@
 «DEFINE runSessionEvents(model::visual::Frame currentFrame, String eventName) FOR model::EventTrigger-»
 	// Session EventTrigger «this» '«eventName»'
 	«IF eventName == "init" || eventName == "access"-»
-		// RunInstanceWires sorted by priority
-		«EXPAND template::operations::OperationCall::callOperation(true, false, currentFrame) FOREACH outActions.typeSelect(model::wires::RunInstanceWire).sortBy(e|-e.priority)-»
+		// RunActions sorted by priority
+		«EXPAND template::operations::OperationCall::callOperation(true, false, currentFrame) FOREACH outActions.typeSelect(model::wires::RunAction).sortBy(e|-e.priority)-»
 	«ELSE-»
 		// I don't know what to do with frame event "«name»"
 	«ENDIF-»

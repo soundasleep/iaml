@@ -700,13 +700,13 @@
   </links>
   <links>
     <domainMetaElement
-        href="iaml.ecore#//wires/RunInstanceWire"/>
+        href="iaml.ecore#//wires/RunAction"/>
     <domainSpecialization
-        body="self.oclIsTypeOf( RunInstanceWire )"/>
+        body="self.oclIsTypeOf( RunAction )"/>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping">
       <diagramLabel
-          href="iaml.gmfgraph#RunInstanceWireName"/>
+          href="iaml.gmfgraph#RunActionName"/>
       <features
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
@@ -716,7 +716,7 @@
         xsi:type="gmftool:CreationTool"
         href="visual.gmftool#//@palette/@tools.4/@tools.0"/>
     <diagramLink
-        href="iaml.gmfgraph#RunInstanceWire"/>
+        href="iaml.gmfgraph#RunAction"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
         href="iaml.ecore#//Action/from"/>
@@ -802,13 +802,13 @@
   </links>
   <links>
     <domainMetaElement
-        href="iaml.ecore#//wires/NavigateWire"/>
+        href="iaml.ecore#//wires/NavigateAction"/>
     <domainSpecialization
-        body="self.oclIsTypeOf( NavigateWire )"/>
+        body="self.oclIsTypeOf( NavigateAction )"/>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping">
       <diagramLabel
-          href="iaml.gmfgraph#NavigateWireName"/>
+          href="iaml.gmfgraph#NavigateActionName"/>
       <features
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
@@ -818,7 +818,7 @@
         xsi:type="gmftool:CreationTool"
         href="visual.gmftool#//@palette/@tools.4/@tools.1"/>
     <diagramLink
-        href="iaml.gmfgraph#NavigateWire"/>
+        href="iaml.gmfgraph#NavigateAction"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
         href="iaml.ecore#//Action/from"/>

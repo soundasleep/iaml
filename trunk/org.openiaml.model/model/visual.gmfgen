@@ -739,20 +739,20 @@
       </labels>
     <behaviour diagramKind="Iaml_Wire" editPolicyClassName="WireOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.wire.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
 </links>
-    <links createCommandClassName="RunInstanceWireCreateCommand" editPartClassName="RunInstanceWireEditPart" itemSemanticEditPolicyClassName="RunInstanceWireItemSemanticEditPolicy" notationViewFactoryClassName="RunInstanceWireViewFactory" reorientCommandClassName="RunInstanceWireReorientCommand" visualID="4002">
+    <links createCommandClassName="RunActionCreateCommand" editPartClassName="RunActionEditPart" itemSemanticEditPolicyClassName="RunActionItemSemanticEditPolicy" notationViewFactoryClassName="RunActionViewFactory" reorientCommandClassName="RunActionReorientCommand" visualID="4002">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
-      <elementType editHelperClassName="RunInstanceWireEditHelper" xsi:type="gmfgen:MetamodelType"/>
-      <viewmap classBody="&#10;/**&#10; * @generated&#10; */&#10;public class RunInstanceWireFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureRunInstanceWireNameFigure; &#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public RunInstanceWireFigure() {&#10;&#9;&#9;this.setLineWidth(1);&#10;this.setLineStyle(org.eclipse.draw2d.Graphics.LINE_DASH);&#10;&#10;&#9;&#9;createContents();&#10;&#9;&#9;setTargetDecoration(createTargetDecoration());&#10;&#9;}&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private void createContents(){&#10;&#10;&#10;fFigureRunInstanceWireNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureRunInstanceWireNameFigure.setText(&quot;&lt;...&gt;&quot;);&#10;&#10;this.add(fFigureRunInstanceWireNameFigure);&#10;&#10;&#10;&#9;}&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#10;&#9;&#9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#10;df.setLineWidth(1);&#10;&#9;&#9;return df;&#10;&#9;}&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureRunInstanceWireNameFigure() {&#10;&#9;&#9;return fFigureRunInstanceWireNameFigure;&#10;&#9;}&#10;&#10;&#10;}&#10;&#10;" className="RunInstanceWireFigure" xsi:type="gmfgen:InnerClassViewmap"/>
+      <elementType editHelperClassName="RunActionEditHelper" xsi:type="gmfgen:MetamodelType"/>
+      <viewmap classBody="&#10;/**&#10; * @generated&#10; */&#10;public class RunActionFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureRunActionNameFigure; &#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public RunActionFigure() {&#10;&#9;&#9;this.setLineWidth(1);&#10;this.setLineStyle(org.eclipse.draw2d.Graphics.LINE_DASH);&#10;&#10;&#9;&#9;createContents();&#10;&#9;&#9;setTargetDecoration(createTargetDecoration());&#10;&#9;}&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private void createContents(){&#10;&#10;&#10;fFigureRunActionNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureRunActionNameFigure.setText(&quot;&lt;...&gt;&quot;);&#10;&#10;this.add(fFigureRunActionNameFigure);&#10;&#10;&#10;&#9;}&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#10;&#9;&#9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#10;df.setLineWidth(1);&#10;&#9;&#9;return df;&#10;&#9;}&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureRunActionNameFigure() {&#10;&#9;&#9;return fFigureRunActionNameFigure;&#10;&#9;}&#10;&#10;&#10;}&#10;&#10;" className="RunActionFigure" xsi:type="gmfgen:InnerClassViewmap"/>
       <modelFacet modelElementSelector="//@expressionProviders/@providers.0/@expressions.16" xsi:type="gmfgen:TypeLinkModelFacet">
-        <metaClass href="iaml.genmodel#//model/wires/RunInstanceWire"/>
+        <metaClass href="iaml.genmodel#//model/wires/RunAction"/>
         <containmentMetaFeature href="iaml.genmodel#//model/ContainsWires/actions"/>
         <childMetaFeature href="iaml.genmodel#//model/ContainsWires/actions"/>
         <sourceMetaFeature href="iaml.genmodel#//model/Action/from"/>
         <targetMetaFeature href="iaml.genmodel#//model/Action/to"/>
       </modelFacet>
-      <labels editPartClassName="RunInstanceWireNameEditPart" elementIcon="true" itemSemanticEditPolicyClassName="RunInstanceWireNameItemSemanticEditPolicy" notationViewFactoryClassName="RunInstanceWireNameViewFactory" visualID="6002">
+      <labels editPartClassName="RunActionNameEditPart" elementIcon="true" itemSemanticEditPolicyClassName="RunActionNameItemSemanticEditPolicy" notationViewFactoryClassName="RunActionNameViewFactory" visualID="6002">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
-        <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureRunInstanceWireNameFigure" xsi:type="gmfgen:ParentAssignedViewmap">
+        <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureRunActionNameFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes xsi:type="gmfgen:LabelOffsetAttributes" y="40"/>
         </viewmap>
         <modelFacet parser="//@labelParsers/@implementations.0" xsi:type="gmfgen:FeatureLabelModelFacet">
@@ -824,20 +824,20 @@
       </labels>
     <behaviour diagramKind="Iaml_Wire" editPolicyClassName="WireOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.wire.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
 </links>
-    <links createCommandClassName="NavigateWireCreateCommand" editPartClassName="NavigateWireEditPart" itemSemanticEditPolicyClassName="NavigateWireItemSemanticEditPolicy" notationViewFactoryClassName="NavigateWireViewFactory" reorientCommandClassName="NavigateWireReorientCommand" visualID="4007">
+    <links createCommandClassName="NavigateActionCreateCommand" editPartClassName="NavigateActionEditPart" itemSemanticEditPolicyClassName="NavigateActionItemSemanticEditPolicy" notationViewFactoryClassName="NavigateActionViewFactory" reorientCommandClassName="NavigateActionReorientCommand" visualID="4007">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
-      <elementType editHelperClassName="NavigateWireEditHelper" xsi:type="gmfgen:MetamodelType"/>
-      <viewmap classBody="&#10;/**&#10; * @generated&#10; */&#10;public class NavigateWireFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureNavigateWireNameFigure; &#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public NavigateWireFigure() {&#10;&#9;&#9;this.setLineWidth(1);&#10;this.setLineStyle(org.eclipse.draw2d.Graphics.LINE_DASH);&#10;&#10;&#9;&#9;createContents();&#10;&#9;&#9;setTargetDecoration(createTargetDecoration());&#10;&#9;}&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private void createContents(){&#10;&#10;&#10;fFigureNavigateWireNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureNavigateWireNameFigure.setText(&quot;navigate&quot;);&#10;&#10;this.add(fFigureNavigateWireNameFigure);&#10;&#10;&#10;&#9;}&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#10;&#9;&#9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#10;df.setLineWidth(1);&#10;&#9;&#9;return df;&#10;&#9;}&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureNavigateWireNameFigure() {&#10;&#9;&#9;return fFigureNavigateWireNameFigure;&#10;&#9;}&#10;&#10;&#10;}&#10;&#10;" className="NavigateWireFigure" xsi:type="gmfgen:InnerClassViewmap"/>
+      <elementType editHelperClassName="NavigateActionEditHelper" xsi:type="gmfgen:MetamodelType"/>
+      <viewmap classBody="&#10;/**&#10; * @generated&#10; */&#10;public class NavigateActionFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureNavigateActionNameFigure; &#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public NavigateActionFigure() {&#10;&#9;&#9;this.setLineWidth(1);&#10;this.setLineStyle(org.eclipse.draw2d.Graphics.LINE_DASH);&#10;&#10;&#9;&#9;createContents();&#10;&#9;&#9;setTargetDecoration(createTargetDecoration());&#10;&#9;}&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private void createContents(){&#10;&#10;&#10;fFigureNavigateActionNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureNavigateActionNameFigure.setText(&quot;navigate&quot;);&#10;&#10;this.add(fFigureNavigateActionNameFigure);&#10;&#10;&#10;&#9;}&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#10;&#9;&#9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#10;df.setLineWidth(1);&#10;&#9;&#9;return df;&#10;&#9;}&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureNavigateActionNameFigure() {&#10;&#9;&#9;return fFigureNavigateActionNameFigure;&#10;&#9;}&#10;&#10;&#10;}&#10;&#10;" className="NavigateActionFigure" xsi:type="gmfgen:InnerClassViewmap"/>
       <modelFacet modelElementSelector="//@expressionProviders/@providers.0/@expressions.19" xsi:type="gmfgen:TypeLinkModelFacet">
-        <metaClass href="iaml.genmodel#//model/wires/NavigateWire"/>
+        <metaClass href="iaml.genmodel#//model/wires/NavigateAction"/>
         <containmentMetaFeature href="iaml.genmodel#//model/ContainsWires/actions"/>
         <childMetaFeature href="iaml.genmodel#//model/ContainsWires/actions"/>
         <sourceMetaFeature href="iaml.genmodel#//model/Action/from"/>
         <targetMetaFeature href="iaml.genmodel#//model/Action/to"/>
       </modelFacet>
-      <labels editPartClassName="NavigateWireNameEditPart" elementIcon="true" itemSemanticEditPolicyClassName="NavigateWireNameItemSemanticEditPolicy" notationViewFactoryClassName="NavigateWireNameViewFactory" visualID="6007">
+      <labels editPartClassName="NavigateActionNameEditPart" elementIcon="true" itemSemanticEditPolicyClassName="NavigateActionNameItemSemanticEditPolicy" notationViewFactoryClassName="NavigateActionNameViewFactory" visualID="6007">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
-        <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureNavigateWireNameFigure" xsi:type="gmfgen:ParentAssignedViewmap">
+        <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureNavigateActionNameFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes xsi:type="gmfgen:LabelOffsetAttributes" y="40"/>
         </viewmap>
         <modelFacet parser="//@labelParsers/@implementations.0" xsi:type="gmfgen:FeatureLabelModelFacet">
@@ -955,8 +955,8 @@
         <entries description="Create new EventTrigger" largeIconPath="/org.openiaml.model.edit/icons/full/obj32/EventTrigger.gif" smallIconPath="/org.openiaml.model.edit/icons/full/obj16/EventTrigger.gif" title="EventTrigger [onAccess]" xsi:type="gmfgen:ToolEntry"/>
       </groups>
       <groups collapse="true" description="Actions" title="Actions">
-        <entries description="Create new RunInstanceWire" genLinks="//@diagram/@links.1" largeIconPath="/org.openiaml.model.edit/icons/full/obj32/RunInstanceWire.gif" smallIconPath="/org.openiaml.model.edit/icons/full/obj16/RunInstanceWire.gif" title="RunInstanceWire" xsi:type="gmfgen:ToolEntry"/>
-        <entries description="Create new NavigateWire" genLinks="//@diagram/@links.5" largeIconPath="/org.openiaml.model.edit/icons/full/obj32/NavigateWire.gif" smallIconPath="/org.openiaml.model.edit/icons/full/obj16/NavigateWire.gif" title="NavigateWire" xsi:type="gmfgen:ToolEntry"/>
+        <entries description="Create new RunAction" genLinks="//@diagram/@links.1" largeIconPath="/org.openiaml.model.edit/icons/full/obj32/RunAction.gif" smallIconPath="/org.openiaml.model.edit/icons/full/obj16/RunAction.gif" title="RunAction" xsi:type="gmfgen:ToolEntry"/>
+        <entries description="Create new NavigateAction" genLinks="//@diagram/@links.5" largeIconPath="/org.openiaml.model.edit/icons/full/obj32/NavigateAction.gif" smallIconPath="/org.openiaml.model.edit/icons/full/obj16/NavigateAction.gif" title="NavigateAction" xsi:type="gmfgen:ToolEntry"/>
       </groups>
     </palette>
     <preferencePages iD="org.openiaml.model.diagram.general" name="Iaml Diagram" xsi:type="gmfgen:GenStandardPreferencePage">
@@ -1518,10 +1518,10 @@
       <expressions body="self.oclIsTypeOf( UserInstance )" xsi:type="gmfgen:GenConstraint"/>
       <expressions body="self.oclIsTypeOf( Label )" xsi:type="gmfgen:GenConstraint"/>
       <expressions body="self.oclIsTypeOf( SyncWire )" xsi:type="gmfgen:GenConstraint"/>
-      <expressions body="self.oclIsTypeOf( RunInstanceWire )" xsi:type="gmfgen:GenConstraint"/>
+      <expressions body="self.oclIsTypeOf( RunAction )" xsi:type="gmfgen:GenConstraint"/>
       <expressions body="self.oclIsTypeOf( SelectWire )" xsi:type="gmfgen:GenConstraint"/>
       <expressions body="self.oclIsTypeOf( SetWire )" xsi:type="gmfgen:GenConstraint"/>
-      <expressions body="self.oclIsTypeOf( NavigateWire )" xsi:type="gmfgen:GenConstraint"/>
+      <expressions body="self.oclIsTypeOf( NavigateAction )" xsi:type="gmfgen:GenConstraint"/>
       <expressions body="self.oclIsTypeOf( NewInstanceWire )" xsi:type="gmfgen:GenConstraint"/>
     </providers>
     <providers injectExpressionBody="true" xsi:type="gmfgen:GenJavaExpressionProvider">

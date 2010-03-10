@@ -9,10 +9,10 @@ isOperation(emf::EObject this) :
 isOperation(model::Operation this) :
 	true;
 	
-isRunInstanceWire(emf::EObject this) :
+isRunAction(emf::EObject this) :
 	false;
 	
-isRunInstanceWire(model::wires::RunInstanceWire this) :
+isRunAction(model::wires::RunAction this) :
 	true;
 	
 model::visual::Frame containingFrame(model::visual::Frame element) :

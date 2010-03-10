@@ -8,22 +8,22 @@
 «DEFINE runFrameEvents(model::visual::Frame currentFrame, String eventName) FOR model::EventTrigger-»
 	// Frame EventTrigger «this»
 	«IF eventName == "init" || eventName == "access"-»
-		// RunInstanceWires sorted by priority
-		«EXPAND template::operations::OperationCall::callOperation(true, false, currentFrame) FOREACH outActions.typeSelect(model::wires::RunInstanceWire).sortBy(e|-e.priority)-»
+		// RunActions sorted by priority
+		«EXPAND template::operations::OperationCall::callOperation(true, false, currentFrame) FOREACH outActions.typeSelect(model::wires::RunAction).sortBy(e|-e.priority)-»
 		
-		// NavigateWires in any order
-		«EXPAND template::operations::OperationCall::callOperation(true, false, currentFrame) FOREACH outActions.typeSelect(model::wires::NavigateWire)-»
+		// NavigateActions in any order
+		«EXPAND template::operations::OperationCall::callOperation(true, false, currentFrame) FOREACH outActions.typeSelect(model::wires::NavigateAction)-»
 	«ELSE-»
 		«throwException("I don't know what to do with frame event " + name)»
 	«ENDIF-»
 «ENDDEFINE»
 
 «DEFINE runGateWires(model::visual::Frame currentFrame) FOR model::components::Gate-»
-	// RunInstanceWires sorted by priority
-	«EXPAND template::operations::OperationCall::callOperation(true, false, currentFrame) FOREACH outActions.typeSelect(model::wires::RunInstanceWire).sortBy(e|-e.priority)-»
+	// RunActions sorted by priority
+	«EXPAND template::operations::OperationCall::callOperation(true, false, currentFrame) FOREACH outActions.typeSelect(model::wires::RunAction).sortBy(e|-e.priority)-»
 	
-	// NavigateWires in any order
-	«EXPAND template::operations::OperationCall::callOperation(true, false, currentFrame) FOREACH outActions.typeSelect(model::wires::NavigateWire)-»
+	// NavigateActions in any order
+	«EXPAND template::operations::OperationCall::callOperation(true, false, currentFrame) FOREACH outActions.typeSelect(model::wires::NavigateAction)-»
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

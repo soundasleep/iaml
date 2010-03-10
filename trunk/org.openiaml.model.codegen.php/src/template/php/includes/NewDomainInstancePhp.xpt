@@ -75,25 +75,25 @@ echo_necessary_update_callbacks();
 
 «DEFINE potentialEditEvent(String eventName) FOR model::EventTrigger»
 	«IF eventName=="edit"»
-		«EXPAND editEvent FOREACH outActions.typeSelect(model::wires::RunInstanceWire)»
+		«EXPAND editEvent FOREACH outActions.typeSelect(model::wires::RunAction)»
 	«ELSE»
 		«throwException("Invalid event name '" + eventName + "'")»
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE editEvent FOR model::wires::RunInstanceWire»
+«DEFINE editEvent FOR model::wires::RunAction»
 	«EXPAND editEventTarget(this) FOR to»
 «ENDDEFINE»
 
-«DEFINE editEventTarget(model::wires::RunInstanceWire wire) FOR model::WireDestination»
-	// unknown RunInstanceWire target: «this»
+«DEFINE editEventTarget(model::wires::RunAction wire) FOR model::WireDestination»
+	// unknown RunAction target: «this»
 «ENDDEFINE»
 
-«DEFINE editEventTarget(model::wires::RunInstanceWire wire) FOR model::ActionDestination»
-	// unknown RunInstanceWire target: «this»
+«DEFINE editEventTarget(model::wires::RunAction wire) FOR model::ActionDestination»
+	// unknown RunAction target: «this»
 «ENDDEFINE»
 
-«DEFINE editEventTarget(model::wires::RunInstanceWire wire) FOR model::Operation»
+«DEFINE editEventTarget(model::wires::RunAction wire) FOR model::Operation»
 	/* we have an operation that we should call on edit */
 	/* is it on the current frame? */
 	if ($frame_id == '«containingFrame(this).safeName()»') {
@@ -117,6 +117,6 @@ echo_necessary_update_callbacks();
 /**
  * The parameter to pass to the client.
  */
-«DEFINE clientSideOperationCallParamater(model::wires::RunInstanceWire wire) FOR model::wires::ParameterEdge»
+«DEFINE clientSideOperationCallParamater(model::wires::RunAction wire) FOR model::wires::ParameterEdge»
 	. " " . escape_parameter_string(«EXPAND template::operations::Parameters::callParameterValue(true, false, null) FOR from»)
 «ENDDEFINE»

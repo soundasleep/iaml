@@ -5,6 +5,6 @@
     <parameterEdges id="wires.1273c6bf67f.26" from="model.1273c6bf4aa.1de" to="wires.1273c6bf67f.25"/>
   </properties>
   <children xsi:type="iaml.visual:Button" outWires="wires.1273c6bf67f.25" id="visual.1273c6bf5a4.86" name="Button">
-    <wires xsi:type="iaml.wires:RunInstanceWire" inParameterEdges="wires.1273c6bf67f.26" id="wires.1273c6bf67f.25" from="visual.1273c6bf5a4.86" to="model.1273c6bf4aa.1dd" name="Run"/>
+    <wires xsi:type="iaml.wires:RunAction" inParameterEdges="wires.1273c6bf67f.26" id="wires.1273c6bf67f.25" from="visual.1273c6bf5a4.86" to="model.1273c6bf4aa.1dd" name="Run"/>
   </children>
 </iaml.visual:Frame>

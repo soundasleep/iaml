@@ -208,10 +208,10 @@ getFailEdge(model::CompositeOperation this) :
 isFailEdge(model::Action this ) :
 	false;
 	
-isFailEdge(model::wires::NavigateWire this ) :
+isFailEdge(model::wires::NavigateAction this ) :
 	name == "fail" ;
 
-isFailEdge(model::wires::RunInstanceWire this ) :
+isFailEdge(model::wires::RunAction this ) :
 	name == "fail" ;
 
 /** get the containing session of the given element, or null if none */

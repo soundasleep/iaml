@@ -19,13 +19,13 @@ global EcoreCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
-rule "Create 'Continue' button for Frames connected with 'first' or 'last' NavigateWire"
+rule "Create 'Continue' button for Frames connected with 'first' or 'last' NavigateAction"
 	when
 		gate : Gate ( )
 		target : Frame ( )
-		nav : NavigateWire ( from == gate, to == target, name == "first" || name == "last" )
+		nav : NavigateAction ( from == gate, to == target, name == "first" || name == "last" )
 		not (Button ( eContainer == target, name == "Continue" ))
-		not (NavigateWire ( to == gate ))
+		not (NavigateAction ( to == gate ))
 	
 	then
 		Button button = handler.generatedButton(gate, target);
@@ -38,15 +38,15 @@ rule "Connect 'click' on 'Continue' button to resume Gate"
 	when
 		gate : Gate ( )
 		target : Frame ( )
-		nav : NavigateWire ( from == gate, to == target, name == "first" || name == "last" ) 
+		nav : NavigateAction ( from == gate, to == target, name == "first" || name == "last" ) 
 		button : Button ( eContainer == target, name == "Continue" )
 		
 		click : EventTrigger ( button.onClick == click, eContainer == button )
 		
-		not (NavigateWire ( from == click, to == gate ))
+		not (NavigateAction ( from == click, to == gate ))
 	
 	then
-		NavigateWire wire = handler.generatedNavigateWire(gate, target, click, gate);
+		NavigateAction wire = handler.generatedNavigateAction(gate, target, click, gate);
 		handler.setName(wire, "resume");
 		queue.add(wire, drools);
 
@@ -57,7 +57,7 @@ rule "Create '(gate) flag' property when Gate is connected by 'first' or 'last'"
 		session : Scope ( )
 		gate : Gate ( eContainer == session )
 		
-		wire : NavigateWire ( from == gate, name == "first" || name == "last" )
+		wire : NavigateAction ( from == gate, name == "first" || name == "last" )
 		
 		not (Property ( eContainer == session, eval( name.equals(gate.getName() + " flag")) ))
 	
@@ -69,11 +69,11 @@ rule "Create '(gate) flag' property when Gate is connected by 'first' or 'last'"
 	
 end
 
-rule "Create 'set flag' operation for Frames connected with 'first' or 'last' NavigateWire"
+rule "Create 'set flag' operation for Frames connected with 'first' or 'last' NavigateAction"
 	when
 		gate : Gate ( )
 		target : Frame ( )
-		nav : NavigateWire ( from == gate, to == target, name == "first" || name == "last" )
+		nav : NavigateAction ( from == gate, to == target, name == "first" || name == "last" )
 		button : Button ( eContainer == target, name == "Continue" )
 		
 		not (CompositeOperation ( eContainer == target, name == "Set gate flag" ))
@@ -89,15 +89,15 @@ rule "Connect 'access' event with 'set flag' operation"
 	when
 		gate : Gate ( )
 		target : Frame ( )
-		nav : NavigateWire ( from == gate, to == target, name == "first" || name == "last" )
+		nav : NavigateAction ( from == gate, to == target, name == "first" || name == "last" )
 		button : Button ( eContainer == target, name == "Continue" )
 		op : CompositeOperation ( eContainer == target, name == "Set gate flag" )
 		access : EventTrigger ( eContainer == target, target.onAccess == access )
 		
-		not (RunInstanceWire ( from == access, to == op ))
+		not (RunAction ( from == access, to == op ))
 		
 	then
-		RunInstanceWire run = handler.generatedRunInstanceWire(gate, target, access, op);
+		RunAction run = handler.generatedRunAction(gate, target, access, op);
 		handler.setName(run, "run");
 		queue.add(run, drools);
 
@@ -108,7 +108,7 @@ rule "Create contents of 'set flag' operation"
 		session : Scope ( )
 		gate : Gate ( eContainer == session )
 		target : Frame ( )
-		nav : NavigateWire ( from == gate, to == target, name == "first" || name == "last" )
+		nav : NavigateAction ( from == gate, to == target, name == "first" || name == "last" )
 		button : Button ( eContainer == target, name == "Continue" )
 		property : Property ( eContainer == session, eval( name.equals(gate.getName() + " flag")) )
 		
@@ -145,7 +145,7 @@ rule "Create condition 'check (gate)'"
 	when
 		session : Scope ( )
 		gate : Gate ( eContainer == session )
-		wire : NavigateWire ( from == gate, name == "first" || name == "last" )
+		wire : NavigateAction ( from == gate, name == "first" || name == "last" )
 		
 		not ( Condition ( eContainer == session, eval( name.equals("check " + gate.getName())) ))
 	
@@ -160,7 +160,7 @@ rule "Connect condition 'check (gate)' with gate"
 	when
 		session : Scope ( )
 		gate : Gate ( eContainer == session )
-		wire : NavigateWire ( from == gate, name == "first" || name == "last" )
+		wire : NavigateAction ( from == gate, name == "first" || name == "last" )
 		
 		cond : Condition ( eContainer == session, eval( name.equals("check " + gate.getName())) )
 		
@@ -177,7 +177,7 @@ rule "Create contents of 'check (gate)' condition"
 	when
 		session : Scope ( )
 		gate : Gate ( eContainer == session )
-		wire : NavigateWire ( from == gate, name == "first" || name == "last" )
+		wire : NavigateAction ( from == gate, name == "first" || name == "last" )
 		property : Property ( eContainer == session, eval( name.equals(gate.getName() + " flag")) )
 		
 		cond : CompositeCondition ( eContainer == session, eval( name.equals("check " + gate.getName())) )

@@ -204,28 +204,28 @@
         collapsible="true">
       <tools
           xsi:type="gmftool:CreationTool"
-          title="RunInstanceWire"
-          description="Create new RunInstanceWire">
+          title="RunAction"
+          description="Create new RunAction">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/RunInstanceWire.gif"
+            path="icons/full/obj16/RunAction.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/RunInstanceWire.gif"
+            path="icons/full/obj32/RunAction.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="NavigateWire"
-          description="Create new NavigateWire">
+          title="NavigateAction"
+          description="Create new NavigateAction">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/NavigateWire.gif"
+            path="icons/full/obj16/NavigateAction.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/NavigateWire.gif"
+            path="icons/full/obj32/NavigateAction.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
     </tools>

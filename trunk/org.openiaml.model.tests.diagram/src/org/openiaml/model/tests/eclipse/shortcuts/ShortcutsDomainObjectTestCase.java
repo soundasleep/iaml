@@ -55,7 +55,7 @@ public class ShortcutsDomainObjectTestCase extends AbstractShortcutsTestCase {
 		ShapeNodeEditPart event = assertHasEventTrigger(editor_object, true, ModelPackage.eINSTANCE.getAccessible_OnAccess());
 		
 		// they should be connected
-		assertHasRunInstanceWire(editor_object, event, operation, "runWire");
+		assertHasRunAction(editor_object, event, operation, "runWire");
 		assertShortcut(event);
 		assertNotShortcut(operation);
 		
@@ -70,7 +70,7 @@ public class ShortcutsDomainObjectTestCase extends AbstractShortcutsTestCase {
 		ShapeNodeEditPart event2 = assertHasEventTrigger(editor_page, false, ModelPackage.eINSTANCE.getAccessible_OnAccess());
 
 		// they should be connected
-		assertHasRunInstanceWire(editor_page, event2, operation2, "runWire");
+		assertHasRunAction(editor_page, event2, operation2, "runWire");
 		assertNotShortcut(event2);
 		assertShortcut(operation2);
 

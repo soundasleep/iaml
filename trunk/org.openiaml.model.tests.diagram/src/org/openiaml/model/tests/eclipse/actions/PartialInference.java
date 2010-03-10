@@ -237,7 +237,7 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		assertGenerated(condition);
 		
 		// connected by run wire
-		ConnectionNodeEditPart run = assertHasRunInstanceWire(editor_text, access, init, "run");
+		ConnectionNodeEditPart run = assertHasRunAction(editor_text, access, init, "run");
 		assertGenerated(run);
 	}
 	
@@ -273,13 +273,13 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		assertGenerated(fieldValue2);
 		
 		// connected by run wire
-		ConnectionNodeEditPart run = assertHasRunInstanceWire(editor_text, access, init, "run");
+		ConnectionNodeEditPart run = assertHasRunAction(editor_text, access, init, "run");
 		assertGenerated(run);
 		ConnectionNodeEditPart param = assertHasParameterEdge(editor_text, fieldValue2, run);
 		assertGenerated(param);
 		
 		// connected by run wire
-		ConnectionNodeEditPart run2 = assertHasRunInstanceWire(editor_text, edit, update2, "run");
+		ConnectionNodeEditPart run2 = assertHasRunAction(editor_text, edit, update2, "run");
 		assertGenerated(run2);
 		ConnectionNodeEditPart param2 = assertHasParameterEdge(editor_text, fieldValue, run2);
 		assertGenerated(param2);

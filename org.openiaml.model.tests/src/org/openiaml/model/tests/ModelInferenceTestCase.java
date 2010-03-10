@@ -325,29 +325,44 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 		assertFalse("Element '" + e + "' should not be generated", e.isIsGenerated());
 	}
 
-
 	/**
-	 * It's not possible to do something like //iaml:wire[iaml:from='id']
-	 * so we need to parse them manually?
 	 *
-	 * @param container
-	 * @param fromElement
-	 * @param wireName
+	 * @param container TODO we don't need this parameter
+	 * @param from
+	 * @param wire
 	 * @return the wire found or null
 	 * @throws JaxenException
 	 */
-	protected Wire getWireFrom(EObject container, EObject fromElement,
-			String wireName) throws JaxenException {
-		List<?> wires = query(container, "//iaml:wires[iaml:name='" + wireName + "']");
-		for (Object o : wires) {
-			if (o instanceof Wire && ((Wire) o).getFrom().equals(fromElement))
-				return (Wire) o;
+	protected Wire getWireFrom(EObject container, WireSource from,
+			String wire) throws JaxenException {
+		for (Wire w : from.getOutWires()) {
+			if (w instanceof NamedElement && wire.equals(((NamedElement) w).getName())) {
+				return w;
+			}
 		}
-
-		fail("no wire found");
+		
+		fail("No wire found with name '" + wire + "'");
 		return null;
 	}
-
+	
+	/**
+	 *
+	 * @param from
+	 * @param name
+	 * @return the wire found or null
+	 * @throws JaxenException
+	 */
+	protected Action getActionFrom(ActionSource from, String name) throws JaxenException {
+		for (Action w : from.getOutActions()) {
+			if (w instanceof NamedElement && name.equals(((NamedElement) w).getName())) {
+				return w;
+			}
+		}
+		
+		fail("No action found with name '" + name + "'");
+		return null;
+	}	
+	
 	/**
 	 * Get <em>any</em> Wire connecting the given elements,
 	 * contained with the given container element or any of its children.

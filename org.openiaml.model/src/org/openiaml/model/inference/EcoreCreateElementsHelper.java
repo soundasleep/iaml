@@ -5,6 +5,8 @@ package org.openiaml.model.inference;
 
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.Accessible;
+import org.openiaml.model.model.ActionDestination;
+import org.openiaml.model.model.ActionSource;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
@@ -327,8 +329,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return edge;
 	}
 	
-	public RunInstanceWire generatedRunInstanceWire(GeneratesElements by, ContainsWires container, WireSource source, WireDestination target) throws InferenceException {
-		RunInstanceWire wire = (RunInstanceWire) createRelationship(container, WiresPackage.eINSTANCE.getRunInstanceWire(), source, target, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWire_From(), ModelPackage.eINSTANCE.getWire_To());
+	public RunInstanceWire generatedRunInstanceWire(GeneratesElements by, ContainsWires container, ActionSource source, ActionDestination target) throws InferenceException {
+		RunInstanceWire wire = (RunInstanceWire) createRelationship(container, WiresPackage.eINSTANCE.getRunInstanceWire(), source, target, ModelPackage.eINSTANCE.getContainsWires_Actions(), ModelPackage.eINSTANCE.getAction_From(), ModelPackage.eINSTANCE.getAction_To());
 		setGeneratedBy(wire, by);
 		return wire;
 	}

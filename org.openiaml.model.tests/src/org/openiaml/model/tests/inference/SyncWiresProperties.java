@@ -127,9 +127,9 @@ public class SyncWiresProperties extends InferenceTestCase {
 
 		// these field values should be parameters to run instance wires
 		{
-			RunInstanceWire rw1 = (RunInstanceWire) getWireFromTo(root, access1, op1);
-			RunInstanceWire rw2 = (RunInstanceWire) getWireFromTo(root, access2, op2);
-			RunInstanceWire rw3 = (RunInstanceWire) getWireFromTo(root, access3, op3);
+			RunInstanceWire rw1 = assertHasRunInstanceWire(root, access1, op1);
+			RunInstanceWire rw2 = assertHasRunInstanceWire(root, access2, op2);
+			RunInstanceWire rw3 = assertHasRunInstanceWire(root, access3, op3);
 
 			getParameterEdgeFromTo(root, valuea1, rw1);
 			getParameterEdgeFromTo(root, valuea2, rw2);

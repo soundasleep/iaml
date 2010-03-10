@@ -215,9 +215,11 @@ public class LoginHandlerInstance extends InferenceTestCase {
 
 		Operation check = assertHasOperation(session, "check instance");
 		EventTrigger access = dest.getOnAccess();
-		Set<Wire> w = assertHasWiresFromTo(1, session, access, check);
+		// no wires
+		assertHasWiresFromTo(0, session, access, check);
 		{
-			RunInstanceWire run = (RunInstanceWire) w.iterator().next();
+			// but a run action
+			RunInstanceWire run = assertHasRunInstanceWire(session, access, check);
 			assertGenerated(run);
 			assertEquals("run", run.getName());
 		}
@@ -239,9 +241,10 @@ public class LoginHandlerInstance extends InferenceTestCase {
 
 		Operation op = assertHasOperation(session, "do logout");
 		EventTrigger access = logout.getOnAccess();
-		Set<Wire> w = assertHasWiresFromTo(1, session, access, op);
+		// no wires
+		assertHasWiresFromTo(0, session, access, op);
 		{
-			RunInstanceWire run = (RunInstanceWire) w.iterator().next();
+			RunInstanceWire run = assertHasRunInstanceWire(session, access, op);
 			assertGenerated(run);
 		}
 
@@ -277,8 +280,8 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		assertGenerated(op);
 
 		// button has an 'onClick' run wire
-		Set<Wire> w = assertHasWiresFromTo(1, root, button, op);
-		RunInstanceWire run = (RunInstanceWire) w.iterator().next();
+		assertHasWiresFromTo(0, root, button, op);
+		RunInstanceWire run = assertHasRunInstanceWire(root, button, op);
 		assertGenerated(run);
 		assertEquals("onClick", run.getName());
 
@@ -338,9 +341,9 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		assertGenerated(call);
 
 		// should have a RunInstanceWire to the 'exists?' operation
-		Set<Wire> w = assertHasWiresFromTo(1, session, call, exists);
+		assertHasWiresFromTo(0, session, call, exists);
 		{
-			RunInstanceWire run = (RunInstanceWire) w.iterator().next();
+			RunInstanceWire run = assertHasRunInstanceWire(session, call, exists);
 			assertGenerated(run);
 		}
 	}

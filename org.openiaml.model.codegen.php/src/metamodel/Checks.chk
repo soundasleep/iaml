@@ -68,6 +68,11 @@ context model::Wire ERROR "A Wire must have a 'from'" :
 context model::Wire ERROR "A Wire must have a 'to'" :
 	to != null;
 
+context model::Action ERROR "An Action must have a 'from'" :
+	from != null;
+context model::Action ERROR "An Action must have a 'to'" :
+	to != null;
+
 context model::wires::ExtendsEdge ERROR "A Role cannot extend itself" :
 	from != to;
 
@@ -81,9 +86,9 @@ context model::wires::ExtendsEdge ERROR "A Role cannot extend itself" :
  */
 
 context model::operations::OperationCallNode ERROR "An OperationCallNode must have exactly one RunInstanceWire connecting it to an Operation" :
-	outWires.size == 1
-		&& model::wires::RunInstanceWire.isInstance(outWires.first())
-		&& model::Operation.isInstance(outWires.first().to);
+	outActions.size == 1
+		&& model::wires::RunInstanceWire.isInstance(outActions.first())
+		&& model::Operation.isInstance(outActions.first().to);
 
 context model::wires::RunInstanceWire WARNING "This RunInstanceWire will not do anything: consider naming it 'onClick'" :
 	!(model::VisibleThing.isInstance(from) && !(name == "click" || name == "onClick"));

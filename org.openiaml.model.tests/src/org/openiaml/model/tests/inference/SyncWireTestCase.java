@@ -6,6 +6,7 @@ package org.openiaml.model.tests.inference;
 import java.util.List;
 
 import org.jaxen.JaxenException;
+import org.openiaml.model.model.Action;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.NamedElement;
@@ -146,12 +147,12 @@ public class SyncWireTestCase extends InferenceTestCase {
 		//assertGreaterEq(4, wire.getWires().size());
  
 		// run instance wires
-		Wire name1editRun = null;
-		Wire name2editRun = null;
+		Action name1editRun = null;
+		Action name2editRun = null;
 		ParameterEdge name1editParam = null;
 		ParameterEdge name2editParam = null;
 		// get RunInstanceWires first
-		for (Wire w : wire.getWires()) {
+		for (Action w : wire.getActions()) {
 			if (w instanceof RunInstanceWire) {
 				if (w.getFrom().equals(name1edit) && w.getTo().equals(name2update) )
 					name1editRun = w;

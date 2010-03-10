@@ -44,7 +44,7 @@ public class SyncFieldDomainAttribute extends InferenceTestCase {
 		EventTrigger editEvent = field.getOnEdit();
 
 		// this event should have a run wire
-		RunInstanceWire runWire = (RunInstanceWire) getWireFrom(page, editEvent, "run");
+		RunInstanceWire runWire = (RunInstanceWire) getActionFrom(editEvent, "run");
 
 		// the attribute should have an operation 'update'
 		Operation opUpdate = assertHasOperation(attribute, "update");

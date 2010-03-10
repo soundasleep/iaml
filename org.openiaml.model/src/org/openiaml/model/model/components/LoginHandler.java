@@ -6,6 +6,7 @@
  */
 package org.openiaml.model.model.components;
 
+import org.openiaml.model.model.ActionSource;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.GeneratesElements;
@@ -31,7 +32,7 @@ import org.openiaml.model.model.wires.ParameterEdgeDestination;
  * @model
  * @generated
  */
-public interface LoginHandler extends GeneratesElements, ParameterEdgeDestination, ApplicationElement, ContainsWires {
+public interface LoginHandler extends GeneratesElements, ParameterEdgeDestination, ApplicationElement, ContainsWires, ActionSource {
 
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' attribute.

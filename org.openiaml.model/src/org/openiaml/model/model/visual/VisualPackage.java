@@ -251,6 +251,15 @@ public interface VisualPackage extends EPackage {
 	int FRAME__ON_ACCESS = ModelPackage.SCOPE__ON_ACCESS;
 
 	/**
+	 * The feature id for the '<em><b>Out Actions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FRAME__OUT_ACTIONS = ModelPackage.SCOPE__OUT_ACTIONS;
+
+	/**
 	 * The feature id for the '<em><b>Entry Gate</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

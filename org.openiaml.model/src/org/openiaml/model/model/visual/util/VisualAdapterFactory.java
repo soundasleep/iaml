@@ -155,6 +155,10 @@ public class VisualAdapterFactory extends AdapterFactoryImpl {
 				return createAccessibleAdapter();
 			}
 			@Override
+			public Adapter caseActionSource(ActionSource object) {
+				return createActionSourceAdapter();
+			}
+			@Override
 			public Adapter caseScope(Scope object) {
 				return createScopeAdapter();
 			}
@@ -173,10 +177,6 @@ public class VisualAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseVisibleThing(VisibleThing object) {
 				return createVisibleThingAdapter();
-			}
-			@Override
-			public Adapter caseActionSource(ActionSource object) {
-				return createActionSourceAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {

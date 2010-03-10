@@ -371,8 +371,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return wire;
 	}
 	
-	public NavigateWire generatedNavigateWire(GeneratesElements by, ContainsWires container, WireSource source, WireDestination target) throws InferenceException {
-		NavigateWire wire = (NavigateWire) createRelationship(container, WiresPackage.eINSTANCE.getNavigateWire(), source, target, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWire_From(), ModelPackage.eINSTANCE.getWire_To());
+	public NavigateWire generatedNavigateWire(GeneratesElements by, ContainsWires container, ActionSource source, ActionDestination target) throws InferenceException {
+		NavigateWire wire = (NavigateWire) createRelationship(container, WiresPackage.eINSTANCE.getNavigateWire(), source, target, ModelPackage.eINSTANCE.getContainsWires_Actions(), ModelPackage.eINSTANCE.getAction_From(), ModelPackage.eINSTANCE.getAction_To());
 		setGeneratedBy(wire, by);
 		return wire;
 	}

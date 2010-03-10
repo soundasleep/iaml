@@ -34,7 +34,7 @@ import org.openiaml.model.model.components.ExitGate;
  *        annotation="http://openiaml.org/comment changed='0.4: \'domainObjects\', \'domainViews\', \'domainInstances\' references removed\r\n0.4.2: renamed from \'Scope\' to \'AbstractScope\'; added \'gate\' reference'"
  * @generated
  */
-public interface Scope extends GeneratesElements, ContainsWires, NamedElement, GeneratedElement, WireSource, WireDestination, ContainsConditions, CanBeSynced, Accessible, ContainsOperations {
+public interface Scope extends GeneratesElements, ContainsWires, NamedElement, GeneratedElement, WireSource, WireDestination, ContainsConditions, CanBeSynced, Accessible, ContainsOperations, ActionSource {
 	/**
 	 * Returns the value of the '<em><b>Entry Gate</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

@@ -270,13 +270,22 @@ public interface ComponentsPackage extends EPackage {
 	int LOGIN_HANDLER__VALUES = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 19;
 
 	/**
+	 * The feature id for the '<em><b>Out Actions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOGIN_HANDLER__OUT_ACTIONS = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 20;
+
+	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOGIN_HANDLER__TYPE = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 20;
+	int LOGIN_HANDLER__TYPE = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 21;
 
 	/**
 	 * The number of structural features of the '<em>Login Handler</em>' class.
@@ -285,7 +294,7 @@ public interface ComponentsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOGIN_HANDLER_FEATURE_COUNT = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 21;
+	int LOGIN_HANDLER_FEATURE_COUNT = ModelPackage.GENERATES_ELEMENTS_FEATURE_COUNT + 22;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.components.impl.AccessControlHandlerImpl <em>Access Control Handler</em>}' class.
@@ -695,13 +704,22 @@ public interface ComponentsPackage extends EPackage {
 	int GATE__OUT_ACTIONS = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 13;
 
 	/**
+	 * The feature id for the '<em><b>In Actions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GATE__IN_ACTIONS = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 14;
+
+	/**
 	 * The number of structural features of the '<em>Gate</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GATE_FEATURE_COUNT = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 14;
+	int GATE_FEATURE_COUNT = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 15;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.components.impl.EntryGateImpl <em>Entry Gate</em>}' class.
@@ -883,6 +901,15 @@ public interface ComponentsPackage extends EPackage {
 	 * @ordered
 	 */
 	int ENTRY_GATE__OUT_ACTIONS = GATE__OUT_ACTIONS;
+
+	/**
+	 * The feature id for the '<em><b>In Actions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTRY_GATE__IN_ACTIONS = GATE__IN_ACTIONS;
 
 	/**
 	 * The number of structural features of the '<em>Entry Gate</em>' class.
@@ -1073,6 +1100,15 @@ public interface ComponentsPackage extends EPackage {
 	 * @ordered
 	 */
 	int EXIT_GATE__OUT_ACTIONS = GATE__OUT_ACTIONS;
+
+	/**
+	 * The feature id for the '<em><b>In Actions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXIT_GATE__IN_ACTIONS = GATE__IN_ACTIONS;
 
 	/**
 	 * The number of structural features of the '<em>Exit Gate</em>' class.

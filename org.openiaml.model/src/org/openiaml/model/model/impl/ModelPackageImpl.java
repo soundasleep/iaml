@@ -1961,6 +1961,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		scopeEClass.getESuperTypes().add(this.getCanBeSynced());
 		scopeEClass.getESuperTypes().add(this.getAccessible());
 		scopeEClass.getESuperTypes().add(this.getContainsOperations());
+		scopeEClass.getESuperTypes().add(this.getActionSource());
 		conditionEClass.getESuperTypes().add(this.getWireSource());
 		conditionEClass.getESuperTypes().add(this.getDataFlowEdgesSource());
 		conditionEClass.getESuperTypes().add(this.getNamedElement());

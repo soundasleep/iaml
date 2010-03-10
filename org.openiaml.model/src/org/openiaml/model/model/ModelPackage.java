@@ -4471,13 +4471,22 @@ public interface ModelPackage extends EPackage {
 	int SCOPE__ON_ACCESS = GENERATES_ELEMENTS_FEATURE_COUNT + 17;
 
 	/**
+	 * The feature id for the '<em><b>Out Actions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCOPE__OUT_ACTIONS = GENERATES_ELEMENTS_FEATURE_COUNT + 18;
+
+	/**
 	 * The feature id for the '<em><b>Entry Gate</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__ENTRY_GATE = GENERATES_ELEMENTS_FEATURE_COUNT + 18;
+	int SCOPE__ENTRY_GATE = GENERATES_ELEMENTS_FEATURE_COUNT + 19;
 
 	/**
 	 * The feature id for the '<em><b>Exit Gate</b></em>' containment reference.
@@ -4486,7 +4495,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__EXIT_GATE = GENERATES_ELEMENTS_FEATURE_COUNT + 19;
+	int SCOPE__EXIT_GATE = GENERATES_ELEMENTS_FEATURE_COUNT + 20;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -4495,7 +4504,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__PROPERTIES = GENERATES_ELEMENTS_FEATURE_COUNT + 20;
+	int SCOPE__PROPERTIES = GENERATES_ELEMENTS_FEATURE_COUNT + 21;
 
 	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
@@ -4504,7 +4513,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__VALUES = GENERATES_ELEMENTS_FEATURE_COUNT + 21;
+	int SCOPE__VALUES = GENERATES_ELEMENTS_FEATURE_COUNT + 22;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -4513,7 +4522,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__PARAMETERS = GENERATES_ELEMENTS_FEATURE_COUNT + 22;
+	int SCOPE__PARAMETERS = GENERATES_ELEMENTS_FEATURE_COUNT + 23;
 
 	/**
 	 * The feature id for the '<em><b>Elements</b></em>' containment reference list.
@@ -4522,7 +4531,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__ELEMENTS = GENERATES_ELEMENTS_FEATURE_COUNT + 23;
+	int SCOPE__ELEMENTS = GENERATES_ELEMENTS_FEATURE_COUNT + 24;
 
 	/**
 	 * The feature id for the '<em><b>On Init</b></em>' containment reference.
@@ -4531,7 +4540,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__ON_INIT = GENERATES_ELEMENTS_FEATURE_COUNT + 24;
+	int SCOPE__ON_INIT = GENERATES_ELEMENTS_FEATURE_COUNT + 25;
 
 	/**
 	 * The feature id for the '<em><b>Scopes</b></em>' containment reference list.
@@ -4540,7 +4549,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE__SCOPES = GENERATES_ELEMENTS_FEATURE_COUNT + 25;
+	int SCOPE__SCOPES = GENERATES_ELEMENTS_FEATURE_COUNT + 26;
 
 	/**
 	 * The number of structural features of the '<em>Scope</em>' class.
@@ -4549,7 +4558,7 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCOPE_FEATURE_COUNT = GENERATES_ELEMENTS_FEATURE_COUNT + 26;
+	int SCOPE_FEATURE_COUNT = GENERATES_ELEMENTS_FEATURE_COUNT + 27;
 
 	/**
 	 * The feature id for the '<em><b>Wires</b></em>' containment reference list.

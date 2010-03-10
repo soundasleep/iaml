@@ -12,7 +12,7 @@
 		«EXPAND template::operations::OperationCall::callOperation(true, false, currentFrame) FOREACH outActions.typeSelect(model::wires::RunInstanceWire).sortBy(e|-e.priority)-»
 		
 		// NavigateWires in any order
-		«EXPAND template::operations::OperationCall::callOperation(true, false, currentFrame) FOREACH outWires.typeSelect(model::wires::NavigateWire)-»
+		«EXPAND template::operations::OperationCall::callOperation(true, false, currentFrame) FOREACH outActions.typeSelect(model::wires::NavigateWire)-»
 	«ELSE-»
 		«throwException("I don't know what to do with frame event " + name)»
 	«ENDIF-»
@@ -23,7 +23,7 @@
 	«EXPAND template::operations::OperationCall::callOperation(true, false, currentFrame) FOREACH outActions.typeSelect(model::wires::RunInstanceWire).sortBy(e|-e.priority)-»
 	
 	// NavigateWires in any order
-	«EXPAND template::operations::OperationCall::callOperation(true, false, currentFrame) FOREACH outWires.typeSelect(model::wires::NavigateWire)-»
+	«EXPAND template::operations::OperationCall::callOperation(true, false, currentFrame) FOREACH outActions.typeSelect(model::wires::NavigateWire)-»
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

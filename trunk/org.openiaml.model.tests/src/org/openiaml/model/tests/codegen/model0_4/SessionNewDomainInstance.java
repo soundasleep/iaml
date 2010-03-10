@@ -111,7 +111,6 @@ public class SessionNewDomainInstance extends DatabaseCodegenTestCase {
 			
 			// press the button
 			clickButtonWithText("make a new user");
-			waitForAjax();
 			
 			// no problems
 			assertNoProblem();
@@ -183,7 +182,6 @@ public class SessionNewDomainInstance extends DatabaseCodegenTestCase {
 			
 			// press the button
 			clickButtonWithText("make a new user");
-			waitForAjax();
 		}
 
 		// they should have all been inserted into the database

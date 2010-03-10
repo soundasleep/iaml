@@ -44,7 +44,6 @@ public class ConditionWireFalseServer extends CodegenTestCase {
 		}
 		
 		// page 2; the SyncWire should not continue since it has a false condition
-		waitForAjax();
 		gotoSitemapThenPage(sitemap, "page2");
 
 		// print out the page

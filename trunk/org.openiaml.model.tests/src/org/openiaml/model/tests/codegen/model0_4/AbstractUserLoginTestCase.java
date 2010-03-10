@@ -102,7 +102,6 @@ public abstract class AbstractUserLoginTestCase extends DatabaseCodegenTestCase 
 		
 		// submit form
 		submit();
-		waitForAjax(); // TODO remove this call; we shouldn't have to wait
 	}
 	
 	/**
@@ -122,7 +121,6 @@ public abstract class AbstractUserLoginTestCase extends DatabaseCodegenTestCase 
 		
 		// submit form
 		submit();
-		waitForAjax(); // TODO remove this call; we shouldn't have to wait
 	}
 	
 	@Override

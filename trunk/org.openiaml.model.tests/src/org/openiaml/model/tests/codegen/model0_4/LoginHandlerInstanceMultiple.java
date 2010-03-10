@@ -180,7 +180,6 @@ public class LoginHandlerInstanceMultiple extends DatabaseCodegenTestCase {
 		setLabeledFormElementField(emailId, "target@jevon.org");
 		
 		submit();		// submit the form
-		waitForAjax();	// wait for ajax forms
 		
 		// we should now be on the viewkey page
 		assertEquals("Login Successful", getPageTitle());
@@ -220,7 +219,6 @@ public class LoginHandlerInstanceMultiple extends DatabaseCodegenTestCase {
 		setLabeledFormElementField(emailId, "target@jevon.org");
 
 		submit();		// submit the form
-		waitForAjax();	// wait for ajax forms
 		
 		// we should now be on the Login Successful page
 		assertEquals("Login Successful", getPageTitle());
@@ -268,7 +266,6 @@ public class LoginHandlerInstanceMultiple extends DatabaseCodegenTestCase {
 		setLabeledFormElementField(emailId, "test3@jevon.org");
 
 		submit();		// submit the form
-		waitForAjax();	// wait for ajax forms
 		
 		// we should now be on the Login Successful page
 		assertEquals("Login Successful", getPageTitle());
@@ -313,7 +310,6 @@ public class LoginHandlerInstanceMultiple extends DatabaseCodegenTestCase {
 		setLabeledFormElementField(emailId, "test4@jevon.org");
 
 		submit();		// submit the form
-		waitForAjax();	// wait for ajax forms
 		
 		// we should now be on the Login Successful page
 		assertEquals("Login Successful", getPageTitle());
@@ -328,7 +324,6 @@ public class LoginHandlerInstanceMultiple extends DatabaseCodegenTestCase {
 			
 			// lets set it
 			setLabeledFormElementField(username, newUsername);
-			waitForAjax();
 		}
 		
 		// reload the page, it should remain
@@ -350,7 +345,6 @@ public class LoginHandlerInstanceMultiple extends DatabaseCodegenTestCase {
 		setLabeledFormElementField(emailId2, "test4@jevon.org");
 
 		submit();		// submit the form
-		waitForAjax();	// wait for ajax forms
 		
 		// we should now be on the Login Successful page
 		assertEquals("Login Successful", getPageTitle());
@@ -382,7 +376,6 @@ public class LoginHandlerInstanceMultiple extends DatabaseCodegenTestCase {
 		setLabeledFormElementField(emailId, "target@jevon.org");
 		
 		submit();		// submit the form
-		waitForAjax();	// wait for ajax forms
 		
 		// we should now be on the Login Successful page
 		assertNotEquals("Login Successful", getPageTitle());
@@ -406,7 +399,6 @@ public class LoginHandlerInstanceMultiple extends DatabaseCodegenTestCase {
 		setLabeledFormElementField(loginId, "test2");
 
 		submit();		// submit the form
-		waitForAjax();	// wait for ajax forms
 		
 		// we should now be on the Login Successful page
 		assertNotEquals("Login Successful", getPageTitle());
@@ -430,7 +422,6 @@ public class LoginHandlerInstanceMultiple extends DatabaseCodegenTestCase {
 		setLabeledFormElementField(emailId, "target@jevon.org");
 		
 		submit();		// submit the form
-		waitForAjax();	// wait for ajax forms
 		
 		// we should now be on the Login Successful page
 		assertNotEquals("Login Successful", getPageTitle());
@@ -459,7 +450,6 @@ public class LoginHandlerInstanceMultiple extends DatabaseCodegenTestCase {
 		setLabeledFormElementField(emailId, "target@jevon.org");
 		
 		submit();		// submit the form
-		waitForAjax();	// wait for ajax forms
 		
 		// we should not be on the Login Successful page
 		assertNotEquals("Login Successful", getPageTitle());
@@ -489,7 +479,6 @@ public class LoginHandlerInstanceMultiple extends DatabaseCodegenTestCase {
 		setLabeledFormElementField(emailId, "test2");
 		
 		submit();		// submit the form
-		waitForAjax();	// wait for ajax forms
 		
 		// we should now be on the Login Successful page
 		assertNotEquals("Login Successful", getPageTitle());

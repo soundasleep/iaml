@@ -125,7 +125,6 @@ public class LoginHandlerKey extends CodegenTestCase {
 			String loginId = getLabelIDForText("login key");
 			setLabeledFormElementField(loginId, "key42");
 			submit();		// submit the form
-			waitForAjax();	// wait for ajax forms
 			
 			// we should now be on the viewkey page
 			assertEquals("viewkey", getPageTitle());
@@ -159,8 +158,7 @@ public class LoginHandlerKey extends CodegenTestCase {
 		String loginId = getLabelIDForText("login key");
 		setLabeledFormElementField(loginId, "key42");
 		submit();		// submit the form
-		waitForAjax();	// wait for ajax forms
-		
+
 		// we should now be on the viewkey page
 		try {
 			assertEquals("viewkey", getPageTitle());
@@ -198,7 +196,6 @@ public class LoginHandlerKey extends CodegenTestCase {
 		String loginId = getLabelIDForText("login key");
 		setLabeledFormElementField(loginId, "key42");
 		submit();		// submit the form
-		waitForAjax();	// wait for ajax forms
 
 		// we should now be on the viewkey page
 		assertEquals("viewkey", getPageTitle());
@@ -232,7 +229,6 @@ public class LoginHandlerKey extends CodegenTestCase {
 		String loginId = getLabelIDForText("login key");
 		setLabeledFormElementField(loginId, "key44");	// INVALID
 		submit();		// submit the form
-		waitForAjax();	// wait for ajax forms
 
 		// we should now be on the login page again
 		assertTitleMatch("login");
@@ -242,7 +238,6 @@ public class LoginHandlerKey extends CodegenTestCase {
 		// lets set the fields again
 		setLabeledFormElementField(loginId, "key42");	// VALID
 		submit();		// submit the form
-		waitForAjax();	// wait for ajax forms
 
 		// we should now be on the right page
 		assertTitleMatch("viewkey");

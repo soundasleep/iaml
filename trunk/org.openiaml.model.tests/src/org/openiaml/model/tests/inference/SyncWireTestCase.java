@@ -14,7 +14,6 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
-import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.visual.Frame;

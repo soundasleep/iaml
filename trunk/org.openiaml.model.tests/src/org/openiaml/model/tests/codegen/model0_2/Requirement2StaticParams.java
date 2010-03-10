@@ -35,8 +35,7 @@ public class Requirement2StaticParams extends CodegenTestCase {
 
 		// reload, it should still be there
 		gotoSitemapThenPage(sitemap, "new");
-		waitForAjax();
-		
+
 		{
 			// there should be an element called value
 			String valueID = getLabelIDForText("value");

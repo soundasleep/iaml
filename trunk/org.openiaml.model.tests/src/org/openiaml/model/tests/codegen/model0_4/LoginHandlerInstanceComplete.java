@@ -185,7 +185,6 @@ public class LoginHandlerInstanceComplete extends DatabaseCodegenTestCase {
 		setLabeledFormElementField(emailId, "target@jevon.org");
 		
 		submit();		// submit the form
-		waitForAjax();	// wait for ajax forms
 		
 		// we should now be on the viewkey page
 		assertEquals("current user", getPageTitle());
@@ -221,7 +220,6 @@ public class LoginHandlerInstanceComplete extends DatabaseCodegenTestCase {
 		setLabeledFormElementField(emailId, "target@jevon.org");
 		
 		submit();		// submit the form
-		waitForAjax();	// wait for ajax forms
 		
 		// we should now be on the "current user" page
 		assertEquals("current user", getPageTitle());
@@ -264,7 +262,6 @@ public class LoginHandlerInstanceComplete extends DatabaseCodegenTestCase {
 		setLabeledFormElementField(emailId, "test3@jevon.org");
 		
 		submit();		// submit the form
-		waitForAjax();	// wait for ajax forms
 		
 		// we should now be on the "current user" page
 		assertEquals("current user", getPageTitle());
@@ -302,7 +299,6 @@ public class LoginHandlerInstanceComplete extends DatabaseCodegenTestCase {
 		setLabeledFormElementField(emailId, "test4@jevon.org");
 		
 		submit();		// submit the form
-		waitForAjax();	// wait for ajax forms
 
 		// we should now be on the "current user" page
 		assertEquals("current user", getPageTitle());
@@ -314,7 +310,6 @@ public class LoginHandlerInstanceComplete extends DatabaseCodegenTestCase {
 			
 			// lets set it
 			setLabeledFormElementField(username, newUsername);
-			waitForAjax();
 		}
 		
 		// reload the page, it should remain
@@ -332,7 +327,6 @@ public class LoginHandlerInstanceComplete extends DatabaseCodegenTestCase {
 		String loginId2 = getLabelIDForText("password");
 		setLabeledFormElementField(loginId2, "test4");
 		submit();		// submit the form
-		waitForAjax();	// wait for ajax forms
 		
 		// we should now be on the "current user" page
 		assertEquals("current user", getPageTitle());
@@ -360,7 +354,6 @@ public class LoginHandlerInstanceComplete extends DatabaseCodegenTestCase {
 		String loginId = getLabelIDForText("password");
 		setLabeledFormElementField(loginId, "test6"); // INVALID password
 		submit();		// submit the form
-		waitForAjax();	// wait for ajax forms
 		
 		// we should not be on the "current user" page
 		assertNotEquals("current user", getPageTitle());

@@ -219,7 +219,6 @@ public class SelectFieldFromDynamicQueryAutosave extends DatabaseCodegenTestCase
 		
 		// change the select field
 		setLabeledFormElementField(select, "target@jevon.org");
-		waitForAjax();
 		
 		// the name should change
 		assertLabeledFieldEquals(field, "User Two");
@@ -284,7 +283,6 @@ public class SelectFieldFromDynamicQueryAutosave extends DatabaseCodegenTestCase
 		
 		// change the select field
 		setLabeledFormElementField(select, "target@jevon.org");
-		waitForAjax();
 		
 		// the name should change
 		assertLabeledFieldEquals(field, "User Two");

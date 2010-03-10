@@ -135,8 +135,7 @@ public class SyncWiresProperties extends CodegenTestCase {
 
 		// go to sitemap
 		IFile sitemap = beginAtSitemapThenPage("container");
-		waitForAjax();
-		
+
 		// there should be some fields inferred automatically
 		String newFruit = "fruit " + new Date().toString();
 		String oldFruit = "apple";
@@ -150,8 +149,7 @@ public class SyncWiresProperties extends CodegenTestCase {
 		
 		// reload the page
 		gotoSitemapThenPage(sitemap, "container");
-		waitForAjax();
-		
+
 		// check it
 		{
 			String fruitId = getLabelIDForText("fruit");
@@ -183,7 +181,6 @@ public class SyncWiresProperties extends CodegenTestCase {
 		}
 		
 		// open up the properties file
-		waitForAjax();
 		Properties p = new Properties();
 		target.refreshLocal(IResource.DEPTH_INFINITE, monitor);	// refresh
 		InputStream stream = target.getContents();

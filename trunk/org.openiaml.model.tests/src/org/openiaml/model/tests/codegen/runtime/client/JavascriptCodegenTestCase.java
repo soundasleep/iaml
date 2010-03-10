@@ -9,9 +9,7 @@ import java.util.Random;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.openiaml.model.tests.CachedModelLoader;
 import org.openiaml.model.tests.CodegenTestCase;
-import org.openiaml.model.tests.EclipseProject;
 import org.openiaml.model.tests.ModelSourceResolver;
 
 /**

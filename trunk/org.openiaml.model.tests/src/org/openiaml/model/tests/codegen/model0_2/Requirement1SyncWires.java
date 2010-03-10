@@ -40,8 +40,7 @@ public class Requirement1SyncWires extends CodegenTestCase {
 		
 		// reload page
 		gotoSitemapThenPage(sitemap, "container");
-		waitForAjax();
-		
+
 		// should have changed
 		{
 			String nameId = getLabelIDForText("firstName");

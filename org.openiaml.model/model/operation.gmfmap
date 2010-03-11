@@ -363,6 +363,26 @@
           href="iaml.gmfgraph#Arithmetic"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//CompositeOperation/nodes"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//operations/CastNode"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( CastNode )"/>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#CastNodeLabel"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="operation.gmftool#//@palette/@tools.0/@tools.8"/>
+      <diagramNode
+          href="iaml.gmfgraph#CastNode"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//DataFlowEdge"/>

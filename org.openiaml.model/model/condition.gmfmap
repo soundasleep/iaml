@@ -283,6 +283,26 @@
           href="iaml.gmfgraph#StaticValue"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//CompositeCondition/nodes"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//operations/CastNode"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( CastNode )"/>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#CastNodeLabel"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="condition.gmftool#//@palette/@tools.0/@tools.7"/>
+      <diagramNode
+          href="iaml.gmfgraph#CastNode"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//DataFlowEdge"/>

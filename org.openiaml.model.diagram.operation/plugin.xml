@@ -230,7 +230,7 @@
          </object>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_Operation"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2014,2015,2016,2017,2018,2019,2020,2021,2022,2030,2024,2025,2026,2027,2029"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2014,2015,2016,2017,2018,2019,2020,2021,2022,2030,2024,2025,2026,2027,2029,2031"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4004,4005,4006,4008"/>
       </viewProvider>
    </extension>
@@ -243,13 +243,13 @@
             <method name="getType()" value="Iaml_Operation"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
-            <method name="getType()" value="2014,2015,2016,2017,2018,2019,2020,2021,2022,2030,2024,2025,2026,2027,2029"/>
+            <method name="getType()" value="2014,2015,2016,2017,2018,2019,2020,2021,2022,2030,2024,2025,2026,2027,2029,2031"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
             <method name="getType()" value="4004,4005,4006,4008"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5020,5021,5022,5023,5024,5025,5026,5027,5028,5029,5030,5031,5044,5041,5042,5043,5045,5035,5036,5037,5038,5046,5039,5040"/>
+            <method name="getType()" value="5020,5021,5022,5023,5024,5025,5026,5027,5028,5029,5030,5031,5044,5041,5042,5043,5045,5035,5036,5037,5038,5046,5039,5040,5047"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value=""/>
@@ -278,7 +278,8 @@
          <object class="org.openiaml.model.diagram.operation.edit.parts.StaticValueEditPart" id="StaticValue_2026"/>
          <object class="org.openiaml.model.diagram.operation.edit.parts.OperationCallNodeEditPart" id="OperationCallNode_2027"/>
          <object class="org.openiaml.model.diagram.operation.edit.parts.ArithmeticEditPart" id="Arithmetic_2029"/>
-         <context elements="CompositeOperation_1000,CompositeOperation_2014,PrimitiveOperation_2015,Parameter_2016,StartNode_2017,CancelNode_2018,FinishNode_2019,DecisionNode_2020,DecisionOperation_2021,TemporaryVariable_2022,Property_2030,SplitNode_2024,JoinNode_2025,StaticValue_2026,OperationCallNode_2027,Arithmetic_2029"/>
+         <object class="org.openiaml.model.diagram.operation.edit.parts.CastNodeEditPart" id="CastNode_2031"/>
+         <context elements="CompositeOperation_1000,CompositeOperation_2014,PrimitiveOperation_2015,Parameter_2016,StartNode_2017,CancelNode_2018,FinishNode_2019,DecisionNode_2020,DecisionOperation_2021,TemporaryVariable_2022,Property_2030,SplitNode_2024,JoinNode_2025,StaticValue_2026,OperationCallNode_2027,Arithmetic_2029,CastNode_2031"/>
       </modelingAssistantProvider>
    </extension>
 
@@ -301,7 +302,7 @@
       <decoratorProvider class="org.openiaml.model.diagram.operation.providers.IamlShortcutsDecoratorProvider">
          <Priority name="Lowest"/>
          <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
-            <method name="getType()" value="2014,2015,2016,2017,2018,2019,2020,2021,2022,2030,2024,2025,2026,2027,2029"/>
+            <method name="getType()" value="2014,2015,2016,2017,2018,2019,2020,2021,2022,2030,2024,2025,2026,2027,2029,2031"/>
          </object>
          <context decoratorTargets="generated-top-nodes"/>
       </decoratorProvider>
@@ -468,6 +469,16 @@
             <param name="semanticHint" value="2029"/>
          </metamodelType>
       </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/operations">
+         <metamodelType
+               id="org.openiaml.model.diagram.operation.CastNode_2031"
+               name="%metatype.name.CastNode_2031"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="CastNode"
+               edithelper="org.openiaml.model.diagram.operation.edit.helpers.CastNodeEditHelper">
+            <param name="semanticHint" value="2031"/>
+         </metamodelType>
+      </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
                id="org.openiaml.model.diagram.operation.DataFlowEdge_4004"
@@ -536,6 +547,7 @@
          <elementType ref="org.openiaml.model.diagram.operation.StaticValue_2026"/>
          <elementType ref="org.openiaml.model.diagram.operation.OperationCallNode_2027"/>
          <elementType ref="org.openiaml.model.diagram.operation.Arithmetic_2029"/>
+         <elementType ref="org.openiaml.model.diagram.operation.CastNode_2031"/>
          <elementType ref="org.openiaml.model.diagram.operation.DataFlowEdge_4004"/>
          <elementType ref="org.openiaml.model.diagram.operation.ExecutionEdge_4005"/>
          <elementType ref="org.openiaml.model.diagram.operation.ConditionalEdge_4006"/>

@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.eclipse.xsd.XSDPackage;
 import org.openiaml.model.model.Accessible;
 import org.openiaml.model.model.Action;
 import org.openiaml.model.model.ActionDestination;
@@ -441,6 +442,9 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		isInited = true;
 
+		// Initialize simple dependencies
+		XSDPackage.eINSTANCE.eClass();
+
 		// Obtain or create and register interdependencies
 		VisualPackageImpl theVisualPackage = (VisualPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(VisualPackage.eNS_URI) instanceof VisualPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(VisualPackage.eNS_URI) : VisualPackage.eINSTANCE);
 		WiresPackageImpl theWiresPackage = (WiresPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(WiresPackage.eNS_URI) instanceof WiresPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(WiresPackage.eNS_URI) : WiresPackage.eINSTANCE);
@@ -610,6 +614,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getDomainAttribute_Type() {
+		return (EReference)domainAttributeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getActivityNode() {
 		return activityNodeEClass;
 	}
@@ -772,6 +785,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getProperty_Type() {
+		return (EReference)propertyEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getStaticValue() {
 		return staticValueEClass;
 	}
@@ -783,6 +805,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 */
 	public EAttribute getStaticValue_Value() {
 		return (EAttribute)staticValueEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStaticValue_Type() {
+		return (EReference)staticValueEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1008,6 +1039,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 */
 	public EClass getTemporaryVariable() {
 		return temporaryVariableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTemporaryVariable_Type() {
+		return (EReference)temporaryVariableEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1492,6 +1532,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getDomainAttributeInstance_Type() {
+		return (EReference)domainAttributeInstanceEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getQueryParameter() {
 		return queryParameterEClass;
 	}
@@ -1661,6 +1710,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		domainAttributeEClass = createEClass(DOMAIN_ATTRIBUTE);
 		createEAttribute(domainAttributeEClass, DOMAIN_ATTRIBUTE__PRIMARY_KEY);
+		createEReference(domainAttributeEClass, DOMAIN_ATTRIBUTE__TYPE);
 
 		activityNodeEClass = createEClass(ACTIVITY_NODE);
 
@@ -1687,9 +1737,11 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		propertyEClass = createEClass(PROPERTY);
 		createEAttribute(propertyEClass, PROPERTY__DEFAULT_VALUE);
+		createEReference(propertyEClass, PROPERTY__TYPE);
 
 		staticValueEClass = createEClass(STATIC_VALUE);
 		createEAttribute(staticValueEClass, STATIC_VALUE__VALUE);
+		createEReference(staticValueEClass, STATIC_VALUE__TYPE);
 
 		visibleThingEClass = createEClass(VISIBLE_THING);
 		createEReference(visibleThingEClass, VISIBLE_THING__CHILDREN);
@@ -1722,6 +1774,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(dataFlowEdgesSourceEClass, DATA_FLOW_EDGES_SOURCE__OUT_FLOWS);
 
 		temporaryVariableEClass = createEClass(TEMPORARY_VARIABLE);
+		createEReference(temporaryVariableEClass, TEMPORARY_VARIABLE__TYPE);
 
 		executionEdgeEClass = createEClass(EXECUTION_EDGE);
 		createEReference(executionEdgeEClass, EXECUTION_EDGE__FROM);
@@ -1790,6 +1843,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		domainAttributeInstanceEClass = createEClass(DOMAIN_ATTRIBUTE_INSTANCE);
 		createEAttribute(domainAttributeInstanceEClass, DOMAIN_ATTRIBUTE_INSTANCE__AUTOSAVE);
+		createEReference(domainAttributeInstanceEClass, DOMAIN_ATTRIBUTE_INSTANCE__TYPE);
 
 		queryParameterEClass = createEClass(QUERY_PARAMETER);
 		createEAttribute(queryParameterEClass, QUERY_PARAMETER__DEFAULT_VALUE);
@@ -1844,6 +1898,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		ComponentsPackage theComponentsPackage = (ComponentsPackage)EPackage.Registry.INSTANCE.getEPackage(ComponentsPackage.eNS_URI);
 		DomainPackage theDomainPackage = (DomainPackage)EPackage.Registry.INSTANCE.getEPackage(DomainPackage.eNS_URI);
 		UsersPackage theUsersPackage = (UsersPackage)EPackage.Registry.INSTANCE.getEPackage(UsersPackage.eNS_URI);
+		XSDPackage theXSDPackage = (XSDPackage)EPackage.Registry.INSTANCE.getEPackage(XSDPackage.eNS_URI);
 
 		// Add subpackages
 		getESubpackages().add(theVisualPackage);
@@ -2010,6 +2065,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(domainAttributeEClass, DomainAttribute.class, "DomainAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDomainAttribute_PrimaryKey(), ecorePackage.getEBoolean(), "primaryKey", "false", 0, 1, DomainAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDomainAttribute_Type(), theXSDPackage.getXSDSimpleTypeDefinition(), null, "type", null, 0, 1, DomainAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(activityNodeEClass, ActivityNode.class, "ActivityNode", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2036,9 +2092,11 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(propertyEClass, Property.class, "Property", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getProperty_DefaultValue(), ecorePackage.getEString(), "defaultValue", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProperty_Type(), theXSDPackage.getXSDSimpleTypeDefinition(), null, "type", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(staticValueEClass, StaticValue.class, "StaticValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getStaticValue_Value(), ecorePackage.getEString(), "value", null, 0, 1, StaticValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStaticValue_Type(), theXSDPackage.getXSDSimpleTypeDefinition(), null, "type", null, 0, 1, StaticValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(visibleThingEClass, VisibleThing.class, "VisibleThing", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVisibleThing_Children(), this.getVisibleThing(), null, "children", null, 0, -1, VisibleThing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2071,6 +2129,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getDataFlowEdgesSource_OutFlows(), this.getDataFlowEdge(), this.getDataFlowEdge_From(), "outFlows", null, 0, -1, DataFlowEdgesSource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(temporaryVariableEClass, TemporaryVariable.class, "TemporaryVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTemporaryVariable_Type(), theXSDPackage.getXSDSimpleTypeDefinition(), null, "type", null, 0, 1, TemporaryVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(executionEdgeEClass, ExecutionEdge.class, "ExecutionEdge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getExecutionEdge_From(), this.getExecutionEdgesSource(), this.getExecutionEdgesSource_OutExecutions(), "from", null, 1, 1, ExecutionEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2139,6 +2198,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(domainAttributeInstanceEClass, DomainAttributeInstance.class, "DomainAttributeInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDomainAttributeInstance_Autosave(), ecorePackage.getEBoolean(), "autosave", "false", 0, 1, DomainAttributeInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDomainAttributeInstance_Type(), theXSDPackage.getXSDSimpleTypeDefinition(), null, "type", null, 0, 1, DomainAttributeInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(queryParameterEClass, QueryParameter.class, "QueryParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getQueryParameter_DefaultValue(), ecorePackage.getEString(), "defaultValue", null, 0, 1, QueryParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.xsd.XSDSimpleTypeDefinition;
 import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.Editable;
 import org.openiaml.model.model.EventTrigger;
@@ -36,6 +37,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.impl.DomainAttributeInstanceImpl#getInExtendsEdges <em>In Extends Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainAttributeInstanceImpl#getOnEdit <em>On Edit</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainAttributeInstanceImpl#isAutosave <em>Autosave</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.DomainAttributeInstanceImpl#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -87,6 +89,16 @@ public class DomainAttributeInstanceImpl extends ApplicationElementImpl implemen
 	 * @ordered
 	 */
 	protected boolean autosave = AUTOSAVE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected XSDSimpleTypeDefinition type;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -200,6 +212,44 @@ public class DomainAttributeInstanceImpl extends ApplicationElementImpl implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public XSDSimpleTypeDefinition getType() {
+		if (type != null && type.eIsProxy()) {
+			InternalEObject oldType = (InternalEObject)type;
+			type = (XSDSimpleTypeDefinition)eResolveProxy(oldType);
+			if (type != oldType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE__TYPE, oldType, type));
+			}
+		}
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public XSDSimpleTypeDefinition basicGetType() {
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setType(XSDSimpleTypeDefinition newType) {
+		XSDSimpleTypeDefinition oldType = type;
+		type = newType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE__TYPE, oldType, type));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -246,6 +296,9 @@ public class DomainAttributeInstanceImpl extends ApplicationElementImpl implemen
 				return getOnEdit();
 			case ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE__AUTOSAVE:
 				return isAutosave();
+			case ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE__TYPE:
+				if (resolve) return getType();
+				return basicGetType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -273,6 +326,9 @@ public class DomainAttributeInstanceImpl extends ApplicationElementImpl implemen
 			case ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE__AUTOSAVE:
 				setAutosave((Boolean)newValue);
 				return;
+			case ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE__TYPE:
+				setType((XSDSimpleTypeDefinition)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -297,6 +353,9 @@ public class DomainAttributeInstanceImpl extends ApplicationElementImpl implemen
 			case ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE__AUTOSAVE:
 				setAutosave(AUTOSAVE_EDEFAULT);
 				return;
+			case ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE__TYPE:
+				setType((XSDSimpleTypeDefinition)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -317,6 +376,8 @@ public class DomainAttributeInstanceImpl extends ApplicationElementImpl implemen
 				return onEdit != null;
 			case ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE__AUTOSAVE:
 				return autosave != AUTOSAVE_EDEFAULT;
+			case ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE__TYPE:
+				return type != null;
 		}
 		return super.eIsSet(featureID);
 	}

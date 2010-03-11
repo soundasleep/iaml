@@ -874,13 +874,22 @@ public interface VisualPackage extends EPackage {
 	int INPUT_TEXT_FIELD__ON_CLICK = ModelPackage.VISIBLE_THING__ON_CLICK;
 
 	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_TEXT_FIELD__TYPE = ModelPackage.VISIBLE_THING_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Input Text Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INPUT_TEXT_FIELD_FEATURE_COUNT = ModelPackage.VISIBLE_THING_FEATURE_COUNT + 0;
+	int INPUT_TEXT_FIELD_FEATURE_COUNT = ModelPackage.VISIBLE_THING_FEATURE_COUNT + 1;
 
 
 	/**
@@ -1460,6 +1469,17 @@ public interface VisualPackage extends EPackage {
 	EClass getInputTextField();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.openiaml.model.model.visual.InputTextField#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Type</em>'.
+	 * @see org.openiaml.model.model.visual.InputTextField#getType()
+	 * @see #getInputTextField()
+	 * @generated
+	 */
+	EReference getInputTextField_Type();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.visual.Button <em>Button</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1557,6 +1577,14 @@ public interface VisualPackage extends EPackage {
 		 * @generated
 		 */
 		EClass INPUT_TEXT_FIELD = eINSTANCE.getInputTextField();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INPUT_TEXT_FIELD__TYPE = eINSTANCE.getInputTextField_Type();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.visual.impl.ButtonImpl <em>Button</em>}' class.

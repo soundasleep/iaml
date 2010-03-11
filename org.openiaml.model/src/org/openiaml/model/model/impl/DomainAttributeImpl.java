@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.xsd.XSDSimpleTypeDefinition;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.Editable;
 import org.openiaml.model.model.EventTrigger;
@@ -39,6 +40,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.impl.DomainAttributeImpl#getInExtendsEdges <em>In Extends Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainAttributeImpl#getOnEdit <em>On Edit</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainAttributeImpl#isPrimaryKey <em>Primary Key</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.DomainAttributeImpl#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -99,6 +101,16 @@ public class DomainAttributeImpl extends ApplicationElementImpl implements Domai
 	 * @ordered
 	 */
 	protected boolean primaryKey = PRIMARY_KEY_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected XSDSimpleTypeDefinition type;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -224,6 +236,44 @@ public class DomainAttributeImpl extends ApplicationElementImpl implements Domai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public XSDSimpleTypeDefinition getType() {
+		if (type != null && type.eIsProxy()) {
+			InternalEObject oldType = (InternalEObject)type;
+			type = (XSDSimpleTypeDefinition)eResolveProxy(oldType);
+			if (type != oldType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.DOMAIN_ATTRIBUTE__TYPE, oldType, type));
+			}
+		}
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public XSDSimpleTypeDefinition basicGetType() {
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setType(XSDSimpleTypeDefinition newType) {
+		XSDSimpleTypeDefinition oldType = type;
+		type = newType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_ATTRIBUTE__TYPE, oldType, type));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -276,6 +326,9 @@ public class DomainAttributeImpl extends ApplicationElementImpl implements Domai
 				return getOnEdit();
 			case ModelPackage.DOMAIN_ATTRIBUTE__PRIMARY_KEY:
 				return isPrimaryKey();
+			case ModelPackage.DOMAIN_ATTRIBUTE__TYPE:
+				if (resolve) return getType();
+				return basicGetType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -307,6 +360,9 @@ public class DomainAttributeImpl extends ApplicationElementImpl implements Domai
 			case ModelPackage.DOMAIN_ATTRIBUTE__PRIMARY_KEY:
 				setPrimaryKey((Boolean)newValue);
 				return;
+			case ModelPackage.DOMAIN_ATTRIBUTE__TYPE:
+				setType((XSDSimpleTypeDefinition)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -334,6 +390,9 @@ public class DomainAttributeImpl extends ApplicationElementImpl implements Domai
 			case ModelPackage.DOMAIN_ATTRIBUTE__PRIMARY_KEY:
 				setPrimaryKey(PRIMARY_KEY_EDEFAULT);
 				return;
+			case ModelPackage.DOMAIN_ATTRIBUTE__TYPE:
+				setType((XSDSimpleTypeDefinition)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -356,6 +415,8 @@ public class DomainAttributeImpl extends ApplicationElementImpl implements Domai
 				return onEdit != null;
 			case ModelPackage.DOMAIN_ATTRIBUTE__PRIMARY_KEY:
 				return primaryKey != PRIMARY_KEY_EDEFAULT;
+			case ModelPackage.DOMAIN_ATTRIBUTE__TYPE:
+				return type != null;
 		}
 		return super.eIsSet(featureID);
 	}

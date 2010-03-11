@@ -18,6 +18,7 @@ import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.operations.Arithmetic;
 import org.openiaml.model.model.operations.ArithmeticOperationTypes;
 import org.openiaml.model.model.operations.CancelNode;
+import org.openiaml.model.model.operations.CastNode;
 import org.openiaml.model.model.operations.DecisionCondition;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.DecisionOperation;
@@ -83,6 +84,7 @@ public class OperationsFactoryImpl extends EFactoryImpl implements OperationsFac
 			case OperationsPackage.JOIN_NODE: return createJoinNode();
 			case OperationsPackage.OPERATION_CALL_NODE: return createOperationCallNode();
 			case OperationsPackage.ARITHMETIC: return createArithmetic();
+			case OperationsPackage.CAST_NODE: return createCastNode();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -226,6 +228,16 @@ public class OperationsFactoryImpl extends EFactoryImpl implements OperationsFac
 		ArithmeticImpl arithmetic = new ArithmeticImpl();
 		generateID(arithmetic);
 		return arithmetic;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CastNode createCastNode() {
+		CastNodeImpl castNode = new CastNodeImpl();
+		return castNode;
 	}
 
 	/**

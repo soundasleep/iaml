@@ -133,11 +133,21 @@
               xsi:type="gmfgraph:ConstantColor"
               value="gray"/>
         </children>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="DomainAttributeTypeFigure"
+            text="&lt;...>">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="black"/>
+        </children>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.2/@actualFigure/@children.0"/>
       <accessors
           figure="//@figures.0/@descriptors.2/@actualFigure/@children.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.2/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="ActivityNodeFigure">
@@ -325,6 +335,14 @@
               xsi:type="gmfgraph:ConstantColor"
               value="gray"/>
         </children>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="PropertyTypeFigure"
+            text="&lt;...>">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="black"/>
+        </children>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.8/@actualFigure/@children.0"/>
@@ -332,6 +350,8 @@
           figure="//@figures.0/@descriptors.8/@actualFigure/@children.1"/>
       <accessors
           figure="//@figures.0/@descriptors.8/@actualFigure/@children.2"/>
+      <accessors
+          figure="//@figures.0/@descriptors.8/@actualFigure/@children.3"/>
     </descriptors>
     <descriptors
         name="StaticValueFigure">
@@ -362,11 +382,21 @@
             xsi:type="gmfgraph:Label"
             name="StaticValueValueFigure"
             text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="StaticValueTypeFigure"
+            text="&lt;...>">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="black"/>
+        </children>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.9/@actualFigure/@children.0"/>
       <accessors
           figure="//@figures.0/@descriptors.9/@actualFigure/@children.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.9/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="VisibleThingFigure">
@@ -463,9 +493,19 @@
             xsi:type="gmfgraph:Label"
             name="TemporaryVariableNameFigure"
             text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="TemporaryVariableTypeFigure"
+            text="&lt;...>">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="black"/>
+        </children>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.13/@actualFigure/@children.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.13/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="ExecutionEdgeFigure">
@@ -629,11 +669,21 @@
               xsi:type="gmfgraph:ConstantColor"
               value="gray"/>
         </children>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="InputTextFieldTypeFigure"
+            text="&lt;...>">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="black"/>
+        </children>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.18/@actualFigure/@children.0"/>
       <accessors
           figure="//@figures.0/@descriptors.18/@actualFigure/@children.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.18/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="SingleWireFigure">
@@ -1142,9 +1192,19 @@
             xsi:type="gmfgraph:Label"
             name="DomainAttributeInstanceNameFigure"
             text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="DomainAttributeInstanceTypeFigure"
+            text="&lt;...>">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="black"/>
+        </children>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.41/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.41/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="ButtonFigure">
@@ -1726,6 +1786,36 @@
       <accessors
           figure="//@figures.0/@descriptors.61/@actualFigure/@children.2"/>
     </descriptors>
+    <descriptors
+        name="CastNodeFigure">
+      <actualFigure
+          xsi:type="gmfgraph:RoundedRectangle"
+          name="CastNodeFigure"
+          lineKind="LINE_DASH">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="240"
+            green="240"
+            blue="128"/>
+        <border
+            xsi:type="gmfgraph:MarginBorder">
+          <insets
+              top="3"
+              left="3"
+              bottom="3"
+              right="3"/>
+        </border>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="CastNodeLabelFigure"
+            text="Cast"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.62/@actualFigure/@children.0"/>
+    </descriptors>
   </figures>
   <nodes
       name="EventTrigger"
@@ -1856,6 +1946,9 @@
   <nodes
       name="Label"
       figure="LabelFigure"/>
+  <nodes
+      name="CastNode"
+      figure="CastNodeFigure"/>
   <connections
       name="DataFlowEdge"
       figure="DataFlowEdgeFigure"/>
@@ -2278,4 +2371,38 @@
       name="EventTriggerContainmentFeature"
       figure="EventTriggerFigure"
       accessor="//@figures.0/@descriptors.0/@accessors.0"/>
+  <labels
+      name="CastNodeLabel"
+      figure="CastNodeFigure"
+      accessor="//@figures.0/@descriptors.62/@accessors.0"/>
+  <labels
+      name="TemporaryVariableType"
+      figure="TemporaryVariableFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.13/@accessors.1"/>
+  <labels
+      name="PropertyType"
+      figure="PropertyFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.8/@accessors.3"/>
+  <labels
+      name="DomainAttributeType"
+      figure="DomainAttributeFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.2/@accessors.2"/>
+  <labels
+      name="DomainAttributeInstanceType"
+      figure="DomainAttributeInstanceFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.41/@accessors.1"/>
+  <labels
+      name="InputTextFieldType"
+      figure="InputTextFieldFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.18/@accessors.2"/>
+  <labels
+      name="StaticValueType"
+      figure="StaticValueFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.9/@accessors.2"/>
 </gmfgraph:Canvas>

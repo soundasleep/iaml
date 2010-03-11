@@ -105,6 +105,11 @@
         <diagramLabel
             href="iaml.gmfgraph#PropertyParentName"/>
       </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PropertyType"/>
+      </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="user_store.gmftool#//@palette/@tools.0/@tools.2"/>

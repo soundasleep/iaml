@@ -109,6 +109,11 @@
         <diagramLabel
             href="iaml.gmfgraph#PropertyParentName"/>
       </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PropertyType"/>
+      </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="domain_store.gmftool#//@palette/@tools.0/@tools.2"/>
@@ -160,6 +165,11 @@
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#DomainAttributeParentName"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#DomainAttributeType"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"

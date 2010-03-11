@@ -172,6 +172,11 @@
         <diagramLabel
             href="iaml.gmfgraph#DomainAttributeParentName"/>
       </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#DomainAttributeType"/>
+      </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="session.gmftool#//@palette/@tools.1/@tools.1"/>
@@ -206,6 +211,11 @@
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#PropertyParentName"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PropertyType"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
@@ -279,6 +289,11 @@
         <diagramLabel
             href="iaml.gmfgraph#InputTextFieldParentName"/>
       </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#InputTextFieldType"/>
+      </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="session.gmftool#//@palette/@tools.2/@tools.2"/>
@@ -307,6 +322,11 @@
             href="iaml.gmfgraph#StaticValueValue"/>
         <features
             href="iaml.ecore#//StaticValue/value"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#StaticValueType"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
@@ -421,6 +441,11 @@
             href="iaml.gmfgraph#DomainAttributeInstanceName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#DomainAttributeInstanceType"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"

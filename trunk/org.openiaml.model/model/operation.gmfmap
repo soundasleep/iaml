@@ -201,6 +201,11 @@
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#TemporaryVariableType"/>
+      </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="operation.gmftool#//@palette/@tools.1/@tools.3"/>
@@ -232,6 +237,11 @@
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#PropertyParentName"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PropertyType"/>
       </labelMappings>
       <diagramNode
           href="iaml.gmfgraph#Property"/>
@@ -296,6 +306,11 @@
             href="iaml.gmfgraph#StaticValueValue"/>
         <features
             href="iaml.ecore#//StaticValue/value"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#StaticValueType"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"

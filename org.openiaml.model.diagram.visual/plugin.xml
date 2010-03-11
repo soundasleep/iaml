@@ -231,7 +231,7 @@
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_Visual"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2023,2024,2044,2045,2060,2047,2048,2049,2050,2051,2052,2034,2053,2054,2055,2056,2057,2019,2020,2058,2042,2043,2059,2061,2063,2065,2066"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4002,4013,4004,4005,4007,4016,4010,4014,4015"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4017,4013,4004,4005,4018,4016,4010,4014,4015"/>
       </viewProvider>
    </extension>
 
@@ -246,10 +246,10 @@
             <method name="getType()" value="2023,2024,2044,2045,2060,2047,2048,2049,2050,2051,2052,2034,2053,2054,2055,2056,2057,2019,2020,2058,2042,2043,2059,2061,2063,2065,2066"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
-            <method name="getType()" value="4001,4002,4013,4004,4005,4007,4016,4010,4014,4015"/>
+            <method name="getType()" value="4001,4017,4013,4004,4005,4018,4016,4010,4014,4015"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5039,5040,5041,5042,5077,5078,5079,5080,5106,5107,5108,5084,5085,5086,5087,5088,5089,5090,5091,5092,5093,5060,5061,5094,5095,5096,5097,5098,5099,5100,5033,5034,5101,5102,5073,5074,5075,5076,5103,5104,5105,5109,5110,5117,5113,5114,5118,5120,5121,5122,5123,5124,5125"/>
+            <method name="getType()" value="5039,5040,5041,5042,5077,5078,5079,5080,5126,5106,5107,5108,5127,5084,5085,5086,5087,5088,5128,5089,5090,5129,5091,5092,5093,5060,5061,5094,5095,5096,5130,5097,5098,5099,5100,5033,5034,5101,5102,5073,5074,5075,5076,5103,5104,5105,5109,5110,5117,5113,5114,5118,5120,5121,5122,5123,5124,5125"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value=""/>
@@ -610,12 +610,12 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
-               id="org.openiaml.model.diagram.visual.RunAction_4002"
-               name="%metatype.name.RunAction_4002"
+               id="org.openiaml.model.diagram.visual.RunAction_4017"
+               name="%metatype.name.RunAction_4017"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="RunAction"
                edithelper="org.openiaml.model.diagram.visual.edit.helpers.RunActionEditHelper">
-            <param name="semanticHint" value="4002"/>
+            <param name="semanticHint" value="4017"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
@@ -650,12 +650,12 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
-               id="org.openiaml.model.diagram.visual.NavigateAction_4007"
-               name="%metatype.name.NavigateAction_4007"
+               id="org.openiaml.model.diagram.visual.NavigateAction_4018"
+               name="%metatype.name.NavigateAction_4018"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="NavigateAction"
                edithelper="org.openiaml.model.diagram.visual.edit.helpers.NavigateActionEditHelper">
-            <param name="semanticHint" value="4007"/>
+            <param name="semanticHint" value="4018"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
@@ -739,11 +739,11 @@
          <elementType ref="org.openiaml.model.diagram.visual.EventTrigger_2065"/>
          <elementType ref="org.openiaml.model.diagram.visual.EventTrigger_2066"/>
          <elementType ref="org.openiaml.model.diagram.visual.SyncWire_4001"/>
-         <elementType ref="org.openiaml.model.diagram.visual.RunAction_4002"/>
+         <elementType ref="org.openiaml.model.diagram.visual.RunAction_4017"/>
          <elementType ref="org.openiaml.model.diagram.visual.ParameterEdge_4013"/>
          <elementType ref="org.openiaml.model.diagram.visual.SelectWire_4004"/>
          <elementType ref="org.openiaml.model.diagram.visual.SetWire_4005"/>
-         <elementType ref="org.openiaml.model.diagram.visual.NavigateAction_4007"/>
+         <elementType ref="org.openiaml.model.diagram.visual.NavigateAction_4018"/>
          <elementType ref="org.openiaml.model.diagram.visual.ConditionEdge_4016"/>
          <elementType ref="org.openiaml.model.diagram.visual.NewInstanceWire_4010"/>
          <elementType ref="org.openiaml.model.diagram.visual.RequiresEdge_4014"/>

@@ -231,7 +231,7 @@
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_Operation"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2014,2015,2016,2017,2018,2019,2020,2021,2022,2030,2024,2025,2026,2027,2029"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4004,4005,4006,4007"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4004,4005,4006,4008"/>
       </viewProvider>
    </extension>
 
@@ -246,10 +246,10 @@
             <method name="getType()" value="2014,2015,2016,2017,2018,2019,2020,2021,2022,2030,2024,2025,2026,2027,2029"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
-            <method name="getType()" value="4004,4005,4006,4007"/>
+            <method name="getType()" value="4004,4005,4006,4008"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5020,5021,5022,5023,5024,5025,5026,5027,5028,5029,5030,5031,5041,5042,5043,5035,5036,5037,5038,5039,5040"/>
+            <method name="getType()" value="5020,5021,5022,5023,5024,5025,5026,5027,5028,5029,5030,5031,5044,5041,5042,5043,5045,5035,5036,5037,5038,5046,5039,5040"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value=""/>
@@ -500,12 +500,12 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
-               id="org.openiaml.model.diagram.operation.RunAction_4007"
-               name="%metatype.name.RunAction_4007"
+               id="org.openiaml.model.diagram.operation.RunAction_4008"
+               name="%metatype.name.RunAction_4008"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="RunAction"
                edithelper="org.openiaml.model.diagram.operation.edit.helpers.RunActionEditHelper">
-            <param name="semanticHint" value="4007"/>
+            <param name="semanticHint" value="4008"/>
          </metamodelType>
       </metamodel>
    </extension>
@@ -539,7 +539,7 @@
          <elementType ref="org.openiaml.model.diagram.operation.DataFlowEdge_4004"/>
          <elementType ref="org.openiaml.model.diagram.operation.ExecutionEdge_4005"/>
          <elementType ref="org.openiaml.model.diagram.operation.ConditionalEdge_4006"/>
-         <elementType ref="org.openiaml.model.diagram.operation.RunAction_4007"/>
+         <elementType ref="org.openiaml.model.diagram.operation.RunAction_4008"/>
          <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
       </binding>
    </extension>

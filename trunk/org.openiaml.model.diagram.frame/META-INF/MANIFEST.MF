@@ -38,5 +38,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ocl.ecore;visibility:=reexport,
  org.eclipse.emf.validation;visibility:=reexport,
  org.eclipse.gef;visibility:=reexport,
- org.openiaml.model.diagram.helpers;bundle-version="0.4.1"
+ org.openiaml.model.diagram.helpers;bundle-version="0.4.1",
+ org.eclipse.xsd;bundle-version="2.5.0"
 Eclipse-LazyStart: true

@@ -231,7 +231,7 @@
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_Element"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2005,2006,2009,2010"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4002"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4003,4002"/>
       </viewProvider>
    </extension>
 
@@ -246,10 +246,10 @@
             <method name="getType()" value="2005,2006,2009,2010"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
-            <method name="getType()" value="4001,4002"/>
+            <method name="getType()" value="4003,4002"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5010,5011,5012,5013,5019,5020,5021,5022,5023,5024"/>
+            <method name="getType()" value="5010,5011,5012,5013,5019,5020,5021,5025,5022,5023,5024"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value=""/>
@@ -350,12 +350,12 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
-               id="org.openiaml.model.diagram.element.RunAction_4001"
-               name="%metatype.name.RunAction_4001"
+               id="org.openiaml.model.diagram.element.RunAction_4003"
+               name="%metatype.name.RunAction_4003"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="RunAction"
                edithelper="org.openiaml.model.diagram.element.edit.helpers.RunActionEditHelper">
-            <param name="semanticHint" value="4001"/>
+            <param name="semanticHint" value="4003"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
@@ -385,7 +385,7 @@
          <elementType ref="org.openiaml.model.diagram.element.PrimitiveOperation_2006"/>
          <elementType ref="org.openiaml.model.diagram.element.Property_2009"/>
          <elementType ref="org.openiaml.model.diagram.element.EventTrigger_2010"/>
-         <elementType ref="org.openiaml.model.diagram.element.RunAction_4001"/>
+         <elementType ref="org.openiaml.model.diagram.element.RunAction_4003"/>
          <elementType ref="org.openiaml.model.diagram.element.SyncWire_4002"/>
          <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
       </binding>

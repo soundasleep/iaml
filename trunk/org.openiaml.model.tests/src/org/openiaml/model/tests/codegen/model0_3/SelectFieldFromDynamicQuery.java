@@ -12,6 +12,7 @@ import org.eclipse.core.resources.IFile;
 import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
 
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+import com.gargoylesoftware.htmlunit.ScriptException;
 
 /**
  * Tests instances: Selecting only one field from any property.
@@ -171,13 +172,18 @@ public class SelectFieldFromDynamicQuery extends DatabaseCodegenTestCase {
 		beginAtSitemapThenPage("container");	
 		String select = getLabelIDForText("select email");
 		
-		// set it to something that doesnt exist
-		setLabeledFormElementField(select, "missing@jevon.org");
-		
-		// we should now be on an exception page (redirected)
-		assertTitleEquals("An exception occured");
-		assertTextPresent("Could not find any value instance for attribute");
-		assertProblem();
+		try {
+			// set it to something that doesnt exist
+			setLabeledFormElementField(select, "missing@jevon.org");
+			fail("The page should have thrown a ScriptException");
+		} catch (ScriptException e) {
+			// expected
+
+			// we should now be on an exception page (redirected)
+			assertTitleEquals("An exception occured");
+			assertTextPresent("Could not find any value instance for attribute");
+			assertProblem();
+		}
 		
 		// if we reload the page, we will get back to the same error page
 		try {

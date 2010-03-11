@@ -26,3 +26,23 @@
 		«targetDef.proceed()»
 	«ENDIF»
 «ENDAROUND»
+
+/**
+ * There's no way to add additional save options, so we have to
+ * redefine the entire command.
+ */
+«AROUND saveOptions FOR gmfgen::GenDiagram-»
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: overridden to keep platform:/plugin/ references absolute")»
+	public static java.util.Map getSaveOptions() {
+		java.util.Map saveOptions = new java.util.HashMap();
+		
+		// keep track of platform:/plugin URIs, but have resource files
+		// stay relative.
+		saveOptions.put(org.eclipse.emf.ecore.xmi.XMLResource.OPTION_URI_HANDLER, new org.eclipse.emf.ecore.xmi.impl.URIHandlerImpl.PlatformSchemeAware());
+		// end additions
+		
+		saveOptions.put(org.eclipse.emf.ecore.xmi.XMLResource.OPTION_ENCODING, "UTF-8"); «EXPAND xpt::Common::nonNLS»
+		saveOptions.put(org.eclipse.emf.ecore.resource.Resource.OPTION_SAVE_ONLY_IF_CHANGED, org.eclipse.emf.ecore.resource.Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
+		return saveOptions;
+	}
+«ENDAROUND»

@@ -50,6 +50,7 @@ digraph {
 "org.eclipse.ui.navigator";
 "org.eclipse.ui.navigator.resources";
 "org.eclipse.ui.views";
+"org.eclipse.xsd";
   node [style=filled, fillcolor="#cc6677"];
 "org.eclipse.emf.ecore";
 "org.eclipse.emf.ecore.xmi";
@@ -105,6 +106,7 @@ digraph {
   "org.openiaml.emf.properties.tests" -> "org.openiaml.model";
   "org.openiaml.model" -> "org.eclipse.core.resources";
   "org.openiaml.model" -> "org.eclipse.core.runtime";
+  "org.openiaml.model" -> "org.eclipse.emf.ecore";
   "org.openiaml.model.actions" -> "org.eclipse.core.resources";
   "org.openiaml.model.actions" -> "org.eclipse.core.runtime";
   "org.openiaml.model.actions" -> "org.eclipse.emf.ecore";
@@ -155,6 +157,7 @@ digraph {
   "org.openiaml.model.diagram" -> "org.eclipse.ui.navigator.resources";
   "org.openiaml.model.diagram" -> "org.eclipse.ui.views";
   "org.openiaml.model.diagram" -> "org.openiaml.model";
+  "org.openiaml.model.diagram" -> "org.openiaml.model.diagram.helpers";
   "org.openiaml.model.diagram" -> "org.openiaml.model.edit";
   "org.openiaml.model.diagram.condition" -> "org.eclipse.core.expressions";
   "org.openiaml.model.diagram.condition" -> "org.eclipse.core.resources";
@@ -183,12 +186,14 @@ digraph {
   "org.openiaml.model.diagram.condition" -> "org.eclipse.ui.navigator.resources";
   "org.openiaml.model.diagram.condition" -> "org.eclipse.ui.views";
   "org.openiaml.model.diagram.condition" -> "org.openiaml.model";
+  "org.openiaml.model.diagram.condition" -> "org.openiaml.model.diagram.helpers";
   "org.openiaml.model.diagram.condition" -> "org.openiaml.model.edit";
   "org.openiaml.model.diagram.custom" -> "org.eclipse.gmf";
   "org.openiaml.model.diagram.custom" -> "org.eclipse.gmf.runtime.diagram.ui";
   "org.openiaml.model.diagram.custom" -> "org.eclipse.gmf.runtime.diagram.ui.render";
   "org.openiaml.model.diagram.custom" -> "org.eclipse.gmf.runtime.diagram.ui.resources.editor";
   "org.openiaml.model.diagram.custom" -> "org.eclipse.ui.ide";
+  "org.openiaml.model.diagram.custom" -> "org.eclipse.xsd";
   "org.openiaml.model.diagram.custom" -> "org.openiaml.model.actions";
   "org.openiaml.model.diagram.custom" -> "org.openiaml.model.codegen.php";
   "org.openiaml.model.diagram.custom" -> "org.openiaml.model.diagram";
@@ -199,6 +204,7 @@ digraph {
   "org.openiaml.model.diagram.custom" -> "org.openiaml.model.diagram.frame";
   "org.openiaml.model.diagram.custom" -> "org.openiaml.model.diagram.helpers";
   "org.openiaml.model.diagram.custom" -> "org.openiaml.model.diagram.operation";
+  "org.openiaml.model.diagram.custom" -> "org.openiaml.model.diagram.session";
   "org.openiaml.model.diagram.custom" -> "org.openiaml.model.diagram.user_store";
   "org.openiaml.model.diagram.custom" -> "org.openiaml.model.diagram.visual";
   "org.openiaml.model.diagram.custom" -> "org.openiaml.model.diagram.wire";
@@ -231,6 +237,7 @@ digraph {
   "org.openiaml.model.diagram.domain_object" -> "org.eclipse.ui.navigator.resources";
   "org.openiaml.model.diagram.domain_object" -> "org.eclipse.ui.views";
   "org.openiaml.model.diagram.domain_object" -> "org.openiaml.model";
+  "org.openiaml.model.diagram.domain_object" -> "org.openiaml.model.diagram.helpers";
   "org.openiaml.model.diagram.domain_object" -> "org.openiaml.model.edit";
   "org.openiaml.model.diagram.domain_object_instance" -> "org.eclipse.core.expressions";
   "org.openiaml.model.diagram.domain_object_instance" -> "org.eclipse.core.resources";
@@ -259,6 +266,7 @@ digraph {
   "org.openiaml.model.diagram.domain_object_instance" -> "org.eclipse.ui.navigator.resources";
   "org.openiaml.model.diagram.domain_object_instance" -> "org.eclipse.ui.views";
   "org.openiaml.model.diagram.domain_object_instance" -> "org.openiaml.model";
+  "org.openiaml.model.diagram.domain_object_instance" -> "org.openiaml.model.diagram.helpers";
   "org.openiaml.model.diagram.domain_object_instance" -> "org.openiaml.model.edit";
   "org.openiaml.model.diagram.domain_store" -> "org.eclipse.core.expressions";
   "org.openiaml.model.diagram.domain_store" -> "org.eclipse.core.resources";
@@ -287,6 +295,7 @@ digraph {
   "org.openiaml.model.diagram.domain_store" -> "org.eclipse.ui.navigator.resources";
   "org.openiaml.model.diagram.domain_store" -> "org.eclipse.ui.views";
   "org.openiaml.model.diagram.domain_store" -> "org.openiaml.model";
+  "org.openiaml.model.diagram.domain_store" -> "org.openiaml.model.diagram.helpers";
   "org.openiaml.model.diagram.domain_store" -> "org.openiaml.model.edit";
   "org.openiaml.model.diagram.element" -> "org.eclipse.core.expressions";
   "org.openiaml.model.diagram.element" -> "org.eclipse.core.resources";
@@ -315,6 +324,7 @@ digraph {
   "org.openiaml.model.diagram.element" -> "org.eclipse.ui.navigator.resources";
   "org.openiaml.model.diagram.element" -> "org.eclipse.ui.views";
   "org.openiaml.model.diagram.element" -> "org.openiaml.model";
+  "org.openiaml.model.diagram.element" -> "org.openiaml.model.diagram.helpers";
   "org.openiaml.model.diagram.element" -> "org.openiaml.model.edit";
   "org.openiaml.model.diagram.frame" -> "org.eclipse.core.expressions";
   "org.openiaml.model.diagram.frame" -> "org.eclipse.core.resources";
@@ -343,6 +353,7 @@ digraph {
   "org.openiaml.model.diagram.frame" -> "org.eclipse.ui.navigator.resources";
   "org.openiaml.model.diagram.frame" -> "org.eclipse.ui.views";
   "org.openiaml.model.diagram.frame" -> "org.openiaml.model";
+  "org.openiaml.model.diagram.frame" -> "org.openiaml.model.diagram.helpers";
   "org.openiaml.model.diagram.frame" -> "org.openiaml.model.edit";
   "org.openiaml.model.diagram.helpers" -> "org.eclipse.core.commands";
   "org.openiaml.model.diagram.helpers" -> "org.eclipse.core.runtime";
@@ -377,6 +388,7 @@ digraph {
   "org.openiaml.model.diagram.operation" -> "org.eclipse.ui.navigator.resources";
   "org.openiaml.model.diagram.operation" -> "org.eclipse.ui.views";
   "org.openiaml.model.diagram.operation" -> "org.openiaml.model";
+  "org.openiaml.model.diagram.operation" -> "org.openiaml.model.diagram.helpers";
   "org.openiaml.model.diagram.operation" -> "org.openiaml.model.edit";
   "org.openiaml.model.diagram.session" -> "org.eclipse.core.expressions";
   "org.openiaml.model.diagram.session" -> "org.eclipse.core.resources";
@@ -405,6 +417,7 @@ digraph {
   "org.openiaml.model.diagram.session" -> "org.eclipse.ui.navigator.resources";
   "org.openiaml.model.diagram.session" -> "org.eclipse.ui.views";
   "org.openiaml.model.diagram.session" -> "org.openiaml.model";
+  "org.openiaml.model.diagram.session" -> "org.openiaml.model.diagram.helpers";
   "org.openiaml.model.diagram.session" -> "org.openiaml.model.edit";
   "org.openiaml.model.diagram.user_store" -> "org.eclipse.core.expressions";
   "org.openiaml.model.diagram.user_store" -> "org.eclipse.core.resources";
@@ -433,6 +446,7 @@ digraph {
   "org.openiaml.model.diagram.user_store" -> "org.eclipse.ui.navigator.resources";
   "org.openiaml.model.diagram.user_store" -> "org.eclipse.ui.views";
   "org.openiaml.model.diagram.user_store" -> "org.openiaml.model";
+  "org.openiaml.model.diagram.user_store" -> "org.openiaml.model.diagram.helpers";
   "org.openiaml.model.diagram.user_store" -> "org.openiaml.model.edit";
   "org.openiaml.model.diagram.visual" -> "org.eclipse.core.expressions";
   "org.openiaml.model.diagram.visual" -> "org.eclipse.core.resources";
@@ -461,6 +475,7 @@ digraph {
   "org.openiaml.model.diagram.visual" -> "org.eclipse.ui.navigator.resources";
   "org.openiaml.model.diagram.visual" -> "org.eclipse.ui.views";
   "org.openiaml.model.diagram.visual" -> "org.openiaml.model";
+  "org.openiaml.model.diagram.visual" -> "org.openiaml.model.diagram.helpers";
   "org.openiaml.model.diagram.visual" -> "org.openiaml.model.edit";
   "org.openiaml.model.diagram.wire" -> "org.eclipse.core.expressions";
   "org.openiaml.model.diagram.wire" -> "org.eclipse.core.resources";
@@ -489,6 +504,7 @@ digraph {
   "org.openiaml.model.diagram.wire" -> "org.eclipse.ui.navigator.resources";
   "org.openiaml.model.diagram.wire" -> "org.eclipse.ui.views";
   "org.openiaml.model.diagram.wire" -> "org.openiaml.model";
+  "org.openiaml.model.diagram.wire" -> "org.openiaml.model.diagram.helpers";
   "org.openiaml.model.diagram.wire" -> "org.openiaml.model.edit";
   "org.openiaml.model.drools" -> "ca.ecliptical.emf.xpath";
   "org.openiaml.model.drools" -> "org.apache.xerces";

@@ -1,0 +1,24 @@
+«IMPORT 'http://www.eclipse.org/gmf/2009/GenModel'»
+
+«EXTENSION xpt::diagram::Utils»
+
+/**
+ * We extend the XXXCreateCommand for references that need an
+ * XSDSimpleTypeDefinition, to automatically load the runtime resource from
+ * the 'org.openiaml.model' plugin.
+ *
+ * See: http://www.jevon.org/wiki/Using_Platform_Resources_as_EReferences_in_GMF
+ */
+
+«AROUND initialize(node : gmfgen::GenNode, newElementVar : String) FOR gmfgen::TypeModelFacet»
+	/*
+	 * Add the built-in datatypes to every new element. 
+	 * TODO currently we add the XSD directly on every new element created. 
+	 * We should only add it once (on load or on create). 
+	 */ 
+	org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createPlatformPluginURI("/org.openiaml.model/model/datatypes.xsd", false);
+	org.eclipse.emf.ecore.resource.ResourceSet set = getElementToEdit().eResource().getResourceSet();
+	set.getResource(uri, true);
+
+	«targetDef.proceed()»
+«ENDAROUND»

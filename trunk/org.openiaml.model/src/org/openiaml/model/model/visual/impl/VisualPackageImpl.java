@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.eclipse.xsd.XSDPackage;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.components.ComponentsPackage;
 import org.openiaml.model.model.components.impl.ComponentsPackageImpl;
@@ -121,6 +122,9 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 
 		isInited = true;
 
+		// Initialize simple dependencies
+		XSDPackage.eINSTANCE.eClass();
+
 		// Obtain or create and register interdependencies
 		ModelPackageImpl theModelPackage = (ModelPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) : ModelPackage.eINSTANCE);
 		WiresPackageImpl theWiresPackage = (WiresPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(WiresPackage.eNS_URI) instanceof WiresPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(WiresPackage.eNS_URI) : WiresPackage.eINSTANCE);
@@ -209,6 +213,15 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getInputTextField_Type() {
+		return (EReference)inputTextFieldEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getButton() {
 		return buttonEClass;
 	}
@@ -266,6 +279,7 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 		inputFormEClass = createEClass(INPUT_FORM);
 
 		inputTextFieldEClass = createEClass(INPUT_TEXT_FIELD);
+		createEReference(inputTextFieldEClass, INPUT_TEXT_FIELD__TYPE);
 
 		buttonEClass = createEClass(BUTTON);
 
@@ -299,6 +313,7 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 		// Obtain other dependent packages
 		ModelPackage theModelPackage = (ModelPackage)EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI);
 		WiresPackage theWiresPackage = (WiresPackage)EPackage.Registry.INSTANCE.getEPackage(WiresPackage.eNS_URI);
+		XSDPackage theXSDPackage = (XSDPackage)EPackage.Registry.INSTANCE.getEPackage(XSDPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -322,6 +337,7 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 		initEClass(inputFormEClass, InputForm.class, "InputForm", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(inputTextFieldEClass, InputTextField.class, "InputTextField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getInputTextField_Type(), theXSDPackage.getXSDSimpleTypeDefinition(), null, "type", null, 0, 1, InputTextField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(buttonEClass, Button.class, "Button", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

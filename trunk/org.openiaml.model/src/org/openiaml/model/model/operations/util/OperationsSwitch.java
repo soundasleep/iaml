@@ -28,6 +28,7 @@ import org.openiaml.model.model.WireDestination;
 import org.openiaml.model.model.WireSource;
 import org.openiaml.model.model.operations.Arithmetic;
 import org.openiaml.model.model.operations.CancelNode;
+import org.openiaml.model.model.operations.CastNode;
 import org.openiaml.model.model.operations.DecisionCondition;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.DecisionOperation;
@@ -232,6 +233,16 @@ public class OperationsSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case OperationsPackage.CAST_NODE: {
+				CastNode castNode = (CastNode)theEObject;
+				T result = caseCastNode(castNode);
+				if (result == null) result = caseActivityNode(castNode);
+				if (result == null) result = caseDataFlowEdgesSource(castNode);
+				if (result == null) result = caseDataFlowEdgeDestination(castNode);
+				if (result == null) result = caseGeneratedElement(castNode);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -383,6 +394,21 @@ public class OperationsSwitch<T> {
 	 * @generated
 	 */
 	public T caseArithmetic(Arithmetic object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Cast Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Cast Node</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCastNode(CastNode object) {
 		return null;
 	}
 

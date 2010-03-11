@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.eclipse.xsd.XSDPackage;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.components.ComponentsPackage;
 import org.openiaml.model.model.components.impl.ComponentsPackageImpl;
@@ -20,6 +21,7 @@ import org.openiaml.model.model.impl.ModelPackageImpl;
 import org.openiaml.model.model.operations.Arithmetic;
 import org.openiaml.model.model.operations.ArithmeticOperationTypes;
 import org.openiaml.model.model.operations.CancelNode;
+import org.openiaml.model.model.operations.CastNode;
 import org.openiaml.model.model.operations.DecisionCondition;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.DecisionOperation;
@@ -121,6 +123,13 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass castNodeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum arithmeticOperationTypesEEnum = null;
 
 	/**
@@ -168,6 +177,9 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		OperationsPackageImpl theOperationsPackage = (OperationsPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof OperationsPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new OperationsPackageImpl());
 
 		isInited = true;
+
+		// Initialize simple dependencies
+		XSDPackage.eINSTANCE.eClass();
 
 		// Obtain or create and register interdependencies
 		ModelPackageImpl theModelPackage = (ModelPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) : ModelPackage.eINSTANCE);
@@ -320,6 +332,15 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getCastNode() {
+		return castNodeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getArithmeticOperationTypes() {
 		return arithmeticOperationTypesEEnum;
 	}
@@ -373,6 +394,8 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 
 		arithmeticEClass = createEClass(ARITHMETIC);
 		createEAttribute(arithmeticEClass, ARITHMETIC__OPERATION_TYPE);
+
+		castNodeEClass = createEClass(CAST_NODE);
 
 		// Create enums
 		arithmeticOperationTypesEEnum = createEEnum(ARITHMETIC_OPERATION_TYPES);
@@ -439,6 +462,9 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		arithmeticEClass.getESuperTypes().add(theModelPackage.getActivityNode());
 		arithmeticEClass.getESuperTypes().add(theModelPackage.getDataFlowEdgeDestination());
 		arithmeticEClass.getESuperTypes().add(theModelPackage.getDataFlowEdgesSource());
+		castNodeEClass.getESuperTypes().add(theModelPackage.getActivityNode());
+		castNodeEClass.getESuperTypes().add(theModelPackage.getDataFlowEdgesSource());
+		castNodeEClass.getESuperTypes().add(theModelPackage.getDataFlowEdgeDestination());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(startNodeEClass, StartNode.class, "StartNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -462,6 +488,8 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 
 		initEClass(arithmeticEClass, Arithmetic.class, "Arithmetic", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getArithmetic_OperationType(), this.getArithmeticOperationTypes(), "operationType", null, 0, 1, Arithmetic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(castNodeEClass, CastNode.class, "CastNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(arithmeticOperationTypesEEnum, ArithmeticOperationTypes.class, "ArithmeticOperationTypes");
@@ -532,6 +560,12 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		   source, 
 		   new String[] {
 			 "documentation", "Represents the range of possible {@model ArithmeticOperation arithmetic operations}."
+		   });		
+		addAnnotation
+		  (castNodeEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Allows one {@model DataEdgeSource data type} to be cast to another {@model DataEdgeDestination data type}. Has an outgoing \"failure\" {@model DataEdge} which can be used to check for invalid casts (otherwise a failing conversion is silent)."
 		   });
 	}
 
@@ -578,7 +612,7 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		   source, 
 		   new String[] {
 			 "comment", "added in 0.4.1"
-		   });	
+		   });		
 	}
 
 } //OperationsPackageImpl

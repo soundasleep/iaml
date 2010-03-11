@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.eclipse.xsd.XSDPackage;
 import org.openiaml.model.FileReference;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.components.ComponentsPackage;
@@ -104,6 +105,9 @@ public class DomainPackageImpl extends EPackageImpl implements DomainPackage {
 		DomainPackageImpl theDomainPackage = (DomainPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof DomainPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new DomainPackageImpl());
 
 		isInited = true;
+
+		// Initialize simple dependencies
+		XSDPackage.eINSTANCE.eClass();
 
 		// Obtain or create and register interdependencies
 		ModelPackageImpl theModelPackage = (ModelPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) : ModelPackage.eINSTANCE);

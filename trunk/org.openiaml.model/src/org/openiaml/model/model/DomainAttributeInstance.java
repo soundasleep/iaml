@@ -6,6 +6,7 @@
  */
 package org.openiaml.model.model;
 
+import org.eclipse.xsd.XSDSimpleTypeDefinition;
 import org.openiaml.model.model.wires.ExtendsEdgeDestination;
 import org.openiaml.model.model.wires.ExtendsEdgesSource;
 
@@ -23,6 +24,7 @@ import org.openiaml.model.model.wires.ExtendsEdgesSource;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.openiaml.model.model.DomainAttributeInstance#isAutosave <em>Autosave</em>}</li>
+ *   <li>{@link org.openiaml.model.model.DomainAttributeInstance#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -59,4 +61,30 @@ public interface DomainAttributeInstance extends ApplicationElement, ExtendsEdge
 	 * @generated
 	 */
 	void setAutosave(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Type</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Type</em>' reference.
+	 * @see #setType(XSDSimpleTypeDefinition)
+	 * @see org.openiaml.model.model.ModelPackage#getDomainAttributeInstance_Type()
+	 * @model
+	 * @generated
+	 */
+	XSDSimpleTypeDefinition getType();
+
+	/**
+	 * Sets the value of the '{@link org.openiaml.model.model.DomainAttributeInstance#getType <em>Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Type</em>' reference.
+	 * @see #getType()
+	 * @generated
+	 */
+	void setType(XSDSimpleTypeDefinition value);
 } // DomainAttributeInstance

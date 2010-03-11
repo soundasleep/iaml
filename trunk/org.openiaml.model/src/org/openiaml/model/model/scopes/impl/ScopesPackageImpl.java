@@ -9,6 +9,7 @@ package org.openiaml.model.model.scopes.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.eclipse.xsd.XSDPackage;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.components.ComponentsPackage;
 import org.openiaml.model.model.components.impl.ComponentsPackageImpl;
@@ -86,6 +87,9 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 		ScopesPackageImpl theScopesPackage = (ScopesPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ScopesPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ScopesPackageImpl());
 
 		isInited = true;
+
+		// Initialize simple dependencies
+		XSDPackage.eINSTANCE.eClass();
 
 		// Obtain or create and register interdependencies
 		ModelPackageImpl theModelPackage = (ModelPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) instanceof ModelPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI) : ModelPackage.eINSTANCE);

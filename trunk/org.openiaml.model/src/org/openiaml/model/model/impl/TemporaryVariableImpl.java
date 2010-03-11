@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.xsd.XSDSimpleTypeDefinition;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DataFlowEdgeDestination;
 import org.openiaml.model.model.DataFlowEdgesSource;
@@ -38,6 +39,7 @@ import org.openiaml.model.model.TemporaryVariable;
  *   <li>{@link org.openiaml.model.model.impl.TemporaryVariableImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.TemporaryVariableImpl#getOutFlows <em>Out Flows</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.TemporaryVariableImpl#getInFlows <em>In Flows</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.TemporaryVariableImpl#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -153,6 +155,16 @@ public class TemporaryVariableImpl extends EObjectImpl implements TemporaryVaria
 	 * @ordered
 	 */
 	protected EList<DataFlowEdge> inFlows;
+
+	/**
+	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected XSDSimpleTypeDefinition type;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -298,6 +310,44 @@ public class TemporaryVariableImpl extends EObjectImpl implements TemporaryVaria
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public XSDSimpleTypeDefinition getType() {
+		if (type != null && type.eIsProxy()) {
+			InternalEObject oldType = (InternalEObject)type;
+			type = (XSDSimpleTypeDefinition)eResolveProxy(oldType);
+			if (type != oldType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelPackage.TEMPORARY_VARIABLE__TYPE, oldType, type));
+			}
+		}
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public XSDSimpleTypeDefinition basicGetType() {
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setType(XSDSimpleTypeDefinition newType) {
+		XSDSimpleTypeDefinition oldType = type;
+		type = newType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.TEMPORARY_VARIABLE__TYPE, oldType, type));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -352,6 +402,9 @@ public class TemporaryVariableImpl extends EObjectImpl implements TemporaryVaria
 				return getOutFlows();
 			case ModelPackage.TEMPORARY_VARIABLE__IN_FLOWS:
 				return getInFlows();
+			case ModelPackage.TEMPORARY_VARIABLE__TYPE:
+				if (resolve) return getType();
+				return basicGetType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -389,6 +442,9 @@ public class TemporaryVariableImpl extends EObjectImpl implements TemporaryVaria
 				getInFlows().clear();
 				getInFlows().addAll((Collection<? extends DataFlowEdge>)newValue);
 				return;
+			case ModelPackage.TEMPORARY_VARIABLE__TYPE:
+				setType((XSDSimpleTypeDefinition)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -422,6 +478,9 @@ public class TemporaryVariableImpl extends EObjectImpl implements TemporaryVaria
 			case ModelPackage.TEMPORARY_VARIABLE__IN_FLOWS:
 				getInFlows().clear();
 				return;
+			case ModelPackage.TEMPORARY_VARIABLE__TYPE:
+				setType((XSDSimpleTypeDefinition)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -448,6 +507,8 @@ public class TemporaryVariableImpl extends EObjectImpl implements TemporaryVaria
 				return outFlows != null && !outFlows.isEmpty();
 			case ModelPackage.TEMPORARY_VARIABLE__IN_FLOWS:
 				return inFlows != null && !inFlows.isEmpty();
+			case ModelPackage.TEMPORARY_VARIABLE__TYPE:
+				return type != null;
 		}
 		return super.eIsSet(featureID);
 	}

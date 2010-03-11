@@ -247,7 +247,7 @@
         </viewmap>
         <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
-      <labels editPartClassName="WrappingLabel12EditPart" itemSemanticEditPolicyClassName="WrappingLabel12ItemSemanticEditPolicy" readOnly="true" visualID="5045">
+      <labels editPartClassName="WrappingLabel12EditPart" itemSemanticEditPolicyClassName="WrappingLabel12ItemSemanticEditPolicy" notationViewFactoryClassName="PropertyLabelViewFactory" readOnly="true" visualID="5045">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigurePropertyTypeFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
@@ -314,7 +314,7 @@
           <metaFeatures href="iaml.genmodel#//model/StaticValue/value"/>
         </modelFacet>
       </labels>
-      <labels editPartClassName="WrappingLabel13EditPart" itemSemanticEditPolicyClassName="WrappingLabel13ItemSemanticEditPolicy" readOnly="true" visualID="5046">
+      <labels editPartClassName="WrappingLabel13EditPart" itemSemanticEditPolicyClassName="WrappingLabel13ItemSemanticEditPolicy" notationViewFactoryClassName="StaticValueLabelViewFactory" readOnly="true" visualID="5046">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureStaticValueTypeFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
@@ -359,6 +359,23 @@
         </modelFacet>
       </labels>
     </topLevelNodes>
+    <topLevelNodes canonicalEditPolicyClassName="CastNodeCanonicalEditPolicy" createCommandClassName="CastNodeCreateCommand" editPartClassName="CastNodeEditPart" graphicalNodeEditPolicyClassName="CastNodeGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="CastNodeItemSemanticEditPolicy" visualID="2031">
+      <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <elementType editHelperClassName="CastNodeEditHelper" xsi:type="gmfgen:MetamodelType"/>
+      <viewmap classBody="&#10;/**&#10; * @generated&#10; */&#10;public class CastNodeFigure extends org.eclipse.draw2d.RoundedRectangle {&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureCastNodeLabelFigure; &#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public CastNodeFigure() {&#10;&#9;&#9;&#10;&#9;org.eclipse.draw2d.FlowLayout layoutThis = new org.eclipse.draw2d.FlowLayout();&#10;&#9;layoutThis.setStretchMinorAxis(false);&#10;&#9;layoutThis.setMinorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#10;);&#10;&#10;&#9;layoutThis.setMajorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#10;);&#10;&#9;layoutThis.setMajorSpacing(5);&#10;&#9;layoutThis.setMinorSpacing(5);&#10;&#9;layoutThis.setHorizontal(false);&#10;&#10;&#9;this.setLayoutManager(layoutThis);&#10;&#10;&#9;&#9;this.setCornerDimensions(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(8)&#10;, getMapMode().DPtoLP(8)&#10;));&#10;this.setLineWidth(1);&#10;this.setLineStyle(org.eclipse.draw2d.Graphics.LINE_DASH);&#10;&#9;this.setBackgroundColor(THIS_BACK&#10;);&#10;this.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(3)&#10;, getMapMode().DPtoLP(3)&#10;, getMapMode().DPtoLP(3)&#10;, getMapMode().DPtoLP(3)&#10;));&#10;&#9;&#9;createContents();&#10;&#9;}&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private void createContents(){&#10;&#10;&#10;fFigureCastNodeLabelFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureCastNodeLabelFigure.setText(&quot;Cast&quot;);&#10;&#10;this.add(fFigureCastNodeLabelFigure);&#10;&#10;&#10;&#9;}&#10;&#10;&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private boolean myUseLocalCoordinates = false;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;protected boolean useLocalCoordinates() {&#10;&#9;&#9;return myUseLocalCoordinates;&#10;&#9;}&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#10;&#9;&#9;myUseLocalCoordinates = useLocalCoordinates;&#10;&#9;}&#10;&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureCastNodeLabelFigure() {&#10;&#9;&#9;return fFigureCastNodeLabelFigure;&#10;&#9;}&#10;&#10;&#10;}&#10;&#10;/**&#10; * @generated&#10; */&#10;static final org.eclipse.swt.graphics.Color THIS_BACK = new org.eclipse.swt.graphics.Color(null, 240, 240, 128);&#10;&#10;" className="CastNodeFigure" layoutType="FLOW_LAYOUT" xsi:type="gmfgen:InnerClassViewmap">
+        <attributes fixedBackground="true" xsi:type="gmfgen:StyleAttributes"/>
+      </viewmap>
+      <modelFacet modelElementSelector="//@expressionProviders/@providers.0/@expressions.11">
+        <metaClass href="iaml.genmodel#//model/operations/CastNode"/>
+        <containmentMetaFeature href="iaml.genmodel#//model/CompositeOperation/nodes"/>
+        <childMetaFeature href="iaml.genmodel#//model/CompositeOperation/nodes"/>
+      </modelFacet>
+      <labels editPartClassName="WrappingLabel14EditPart" elementIcon="true" itemSemanticEditPolicyClassName="WrappingLabel14ItemSemanticEditPolicy" readOnly="true" visualID="5047">
+        <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureCastNodeLabelFigure" xsi:type="gmfgen:ParentAssignedViewmap"/>
+        <modelFacet parser="//@labelParsers/@implementations.1"/>
+      </labels>
+    </topLevelNodes>
     <links createCommandClassName="DataFlowEdgeCreateCommand" editPartClassName="DataFlowEdgeEditPart" itemSemanticEditPolicyClassName="DataFlowEdgeItemSemanticEditPolicy" notationViewFactoryClassName="DataFlowEdgeViewFactory" reorientCommandClassName="DataFlowEdgeReorientCommand" visualID="4004">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
       <elementType editHelperClassName="DataFlowEdgeEditHelper" xsi:type="gmfgen:MetamodelType"/>
@@ -375,7 +392,7 @@
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
       <elementType editHelperClassName="ExecutionEdgeEditHelper" xsi:type="gmfgen:MetamodelType"/>
       <viewmap classBody="&#10;/**&#10; * @generated&#10; */&#10;public class ExecutionEdgeFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureExecutionEdgeNameFigure; &#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public ExecutionEdgeFigure() {&#10;&#9;&#9;this.setLineWidth(1);&#10;&#10;&#9;&#9;createContents();&#10;&#9;&#9;setTargetDecoration(createTargetDecoration());&#10;&#9;}&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private void createContents(){&#10;&#10;&#10;fFigureExecutionEdgeNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureExecutionEdgeNameFigure.setText(&quot;&quot;);&#10;&#10;this.add(fFigureExecutionEdgeNameFigure);&#10;&#10;&#10;&#9;}&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#10;&#9;&#9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#10;df.setLineWidth(1);&#10;&#9;&#9;return df;&#10;&#9;}&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureExecutionEdgeNameFigure() {&#10;&#9;&#9;return fFigureExecutionEdgeNameFigure;&#10;&#9;}&#10;&#10;&#10;}&#10;&#10;" className="ExecutionEdgeFigure" xsi:type="gmfgen:InnerClassViewmap"/>
-      <modelFacet modelElementSelector="//@expressionProviders/@providers.0/@expressions.11" xsi:type="gmfgen:TypeLinkModelFacet">
+      <modelFacet modelElementSelector="//@expressionProviders/@providers.0/@expressions.12" xsi:type="gmfgen:TypeLinkModelFacet">
         <metaClass href="iaml.genmodel#//model/ExecutionEdge"/>
         <containmentMetaFeature href="iaml.genmodel#//model/CompositeOperation/executionEdges"/>
         <childMetaFeature href="iaml.genmodel#//model/CompositeOperation/executionEdges"/>
@@ -396,7 +413,7 @@
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
       <elementType editHelperClassName="ConditionalEdgeEditHelper" xsi:type="gmfgen:MetamodelType"/>
       <viewmap classBody="&#10;/**&#10; * @generated&#10; */&#10;public class ConditionalEdgeFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureConditionalEdgeNameFigure; &#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public ConditionalEdgeFigure() {&#10;&#9;&#9;this.setLineWidth(1);&#10;&#10;&#9;&#9;createContents();&#10;&#9;&#9;setTargetDecoration(createTargetDecoration());&#10;&#9;}&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private void createContents(){&#10;&#10;&#10;fFigureConditionalEdgeNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureConditionalEdgeNameFigure.setText(&quot;&lt;...&gt;&quot;);&#10;&#10;this.add(fFigureConditionalEdgeNameFigure);&#10;&#10;&#10;&#9;}&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#10;&#9;&#9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#10;df.setLineWidth(1);&#10;&#9;&#9;return df;&#10;&#9;}&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureConditionalEdgeNameFigure() {&#10;&#9;&#9;return fFigureConditionalEdgeNameFigure;&#10;&#9;}&#10;&#10;&#10;}&#10;&#10;" className="ConditionalEdgeFigure" xsi:type="gmfgen:InnerClassViewmap"/>
-      <modelFacet modelElementSelector="//@expressionProviders/@providers.0/@expressions.12" xsi:type="gmfgen:TypeLinkModelFacet">
+      <modelFacet modelElementSelector="//@expressionProviders/@providers.0/@expressions.13" xsi:type="gmfgen:TypeLinkModelFacet">
         <metaClass href="iaml.genmodel#//model/ConditionalEdge"/>
         <containmentMetaFeature href="iaml.genmodel#//model/CompositeOperation/executionEdges"/>
         <childMetaFeature href="iaml.genmodel#//model/CompositeOperation/executionEdges"/>
@@ -417,7 +434,7 @@
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
       <elementType editHelperClassName="RunActionEditHelper" xsi:type="gmfgen:MetamodelType"/>
       <viewmap classBody="&#10;/**&#10; * @generated&#10; */&#10;public class RunActionFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureRunActionNameFigure; &#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public RunActionFigure() {&#10;&#9;&#9;this.setLineWidth(1);&#10;this.setLineStyle(org.eclipse.draw2d.Graphics.LINE_DASH);&#10;&#10;&#9;&#9;createContents();&#10;&#9;&#9;setTargetDecoration(createTargetDecoration());&#10;&#9;}&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private void createContents(){&#10;&#10;&#10;fFigureRunActionNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureRunActionNameFigure.setText(&quot;&lt;...&gt;&quot;);&#10;&#10;this.add(fFigureRunActionNameFigure);&#10;&#10;&#10;&#9;}&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#10;&#9;&#9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#10;df.setLineWidth(1);&#10;&#9;&#9;return df;&#10;&#9;}&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureRunActionNameFigure() {&#10;&#9;&#9;return fFigureRunActionNameFigure;&#10;&#9;}&#10;&#10;&#10;}&#10;&#10;" className="RunActionFigure" xsi:type="gmfgen:InnerClassViewmap"/>
-      <modelFacet modelElementSelector="//@expressionProviders/@providers.0/@expressions.13" xsi:type="gmfgen:TypeLinkModelFacet">
+      <modelFacet modelElementSelector="//@expressionProviders/@providers.0/@expressions.14" xsi:type="gmfgen:TypeLinkModelFacet">
         <metaClass href="iaml.genmodel#//model/wires/RunAction"/>
         <containmentMetaFeature href="iaml.genmodel#//model/ContainsWires/actions"/>
         <childMetaFeature href="iaml.genmodel#//model/ContainsWires/actions"/>
@@ -444,6 +461,7 @@
         <entries description="Create new JoinNode" genNodes="//@diagram/@topLevelNodes.11" largeIconPath="/org.openiaml.model.edit/icons/full/obj32/JoinNode.gif" smallIconPath="/org.openiaml.model.edit/icons/full/obj16/JoinNode.gif" title="JoinNode" xsi:type="gmfgen:ToolEntry"/>
         <entries description="Create new OperationCallNode" genNodes="//@diagram/@topLevelNodes.13" largeIconPath="/org.openiaml.model.edit/icons/full/obj32/OperationCallNode.gif" smallIconPath="/org.openiaml.model.edit/icons/full/obj16/OperationCallNode.gif" title="OperationCallNode" xsi:type="gmfgen:ToolEntry"/>
         <entries description="Create new Arithmetic" genNodes="//@diagram/@topLevelNodes.14" largeIconPath="/org.openiaml.model.edit/icons/full/obj32/Arithmetic.gif" smallIconPath="/org.openiaml.model.edit/icons/full/obj16/Arithmetic.gif" title="Arithmetic" xsi:type="gmfgen:ToolEntry"/>
+        <entries description="Create new CastNode" genNodes="//@diagram/@topLevelNodes.15" largeIconPath="/org.openiaml.model.edit/icons/full/obj32/CastNode.gif" smallIconPath="/org.openiaml.model.edit/icons/full/obj16/CastNode.gif" title="CastNode" xsi:type="gmfgen:ToolEntry"/>
       </groups>
       <groups collapse="true" description="Model Elements" title="Model Elements">
         <entries description="Create new PrimitiveOperation" genNodes="//@diagram/@topLevelNodes.1" largeIconPath="/org.openiaml.model.edit/icons/full/obj32/PrimitiveOperation.gif" smallIconPath="/org.openiaml.model.edit/icons/full/obj16/PrimitiveOperation.gif" title="PrimitiveOperation" xsi:type="gmfgen:ToolEntry"/>
@@ -491,6 +509,7 @@
     <childReferences child="//@diagram/@topLevelNodes.12" parent="//@diagram"/>
     <childReferences child="//@diagram/@topLevelNodes.13" parent="//@diagram"/>
     <childReferences child="//@diagram/@topLevelNodes.14" parent="//@diagram"/>
+    <childReferences child="//@diagram/@topLevelNodes.15" parent="//@diagram"/>
     <childReferences child="//@diagram/@links.0" groupIcon="icons/linksNavigatorGroup.gif" groupName="links" parent="//@diagram"/>
     <childReferences child="//@diagram/@topLevelNodes.0" groupIcon="icons/linkTargetNavigatorGroup.gif" groupName="target" parent="//@diagram/@links.0" referenceType="out_target"/>
     <childReferences child="//@diagram/@links.0" groupIcon="icons/incomingLinksNavigatorGroup.gif" groupName="incoming links" parent="//@diagram/@topLevelNodes.0" referenceType="in_source"/>
@@ -504,6 +523,8 @@
     <childReferences child="//@diagram/@links.0" groupIcon="icons/incomingLinksNavigatorGroup.gif" groupName="incoming links" parent="//@diagram/@topLevelNodes.9" referenceType="in_source"/>
     <childReferences child="//@diagram/@topLevelNodes.14" groupIcon="icons/linkTargetNavigatorGroup.gif" groupName="target" parent="//@diagram/@links.0" referenceType="out_target"/>
     <childReferences child="//@diagram/@links.0" groupIcon="icons/incomingLinksNavigatorGroup.gif" groupName="incoming links" parent="//@diagram/@topLevelNodes.14" referenceType="in_source"/>
+    <childReferences child="//@diagram/@topLevelNodes.15" groupIcon="icons/linkTargetNavigatorGroup.gif" groupName="target" parent="//@diagram/@links.0" referenceType="out_target"/>
+    <childReferences child="//@diagram/@links.0" groupIcon="icons/incomingLinksNavigatorGroup.gif" groupName="incoming links" parent="//@diagram/@topLevelNodes.15" referenceType="in_source"/>
     <childReferences child="//@diagram/@topLevelNodes.0" groupIcon="icons/linkSourceNavigatorGroup.gif" groupName="source" parent="//@diagram/@links.0" referenceType="in_source"/>
     <childReferences child="//@diagram/@links.0" groupIcon="icons/outgoingLinksNavigatorGroup.gif" groupName="outgoing links" parent="//@diagram/@topLevelNodes.0" referenceType="out_target"/>
     <childReferences child="//@diagram/@topLevelNodes.1" groupIcon="icons/linkSourceNavigatorGroup.gif" groupName="source" parent="//@diagram/@links.0" referenceType="in_source"/>
@@ -520,6 +541,8 @@
     <childReferences child="//@diagram/@links.0" groupIcon="icons/outgoingLinksNavigatorGroup.gif" groupName="outgoing links" parent="//@diagram/@topLevelNodes.12" referenceType="out_target"/>
     <childReferences child="//@diagram/@topLevelNodes.14" groupIcon="icons/linkSourceNavigatorGroup.gif" groupName="source" parent="//@diagram/@links.0" referenceType="in_source"/>
     <childReferences child="//@diagram/@links.0" groupIcon="icons/outgoingLinksNavigatorGroup.gif" groupName="outgoing links" parent="//@diagram/@topLevelNodes.14" referenceType="out_target"/>
+    <childReferences child="//@diagram/@topLevelNodes.15" groupIcon="icons/linkSourceNavigatorGroup.gif" groupName="source" parent="//@diagram/@links.0" referenceType="in_source"/>
+    <childReferences child="//@diagram/@links.0" groupIcon="icons/outgoingLinksNavigatorGroup.gif" groupName="outgoing links" parent="//@diagram/@topLevelNodes.15" referenceType="out_target"/>
     <childReferences child="//@diagram/@links.1" groupIcon="icons/linksNavigatorGroup.gif" groupName="links" parent="//@diagram"/>
     <childReferences child="//@diagram/@topLevelNodes.0" groupIcon="icons/linkTargetNavigatorGroup.gif" groupName="target" parent="//@diagram/@links.1" referenceType="out_target"/>
     <childReferences child="//@diagram/@links.1" groupIcon="icons/incomingLinksNavigatorGroup.gif" groupName="incoming links" parent="//@diagram/@topLevelNodes.0" referenceType="in_source"/>
@@ -632,6 +655,7 @@
       <expressions body="self.oclIsTypeOf( JoinNode )" xsi:type="gmfgen:GenConstraint"/>
       <expressions body="self.oclIsTypeOf( OperationCallNode )" xsi:type="gmfgen:GenConstraint"/>
       <expressions body="self.oclIsTypeOf( Arithmetic )" xsi:type="gmfgen:GenConstraint"/>
+      <expressions body="self.oclIsTypeOf( CastNode )" xsi:type="gmfgen:GenConstraint"/>
       <expressions body="self.oclIsTypeOf( ExecutionEdge )" xsi:type="gmfgen:GenConstraint"/>
       <expressions body="self.oclIsTypeOf( ConditionalEdge )" xsi:type="gmfgen:GenConstraint"/>
       <expressions body="self.oclIsTypeOf( RunAction )" xsi:type="gmfgen:GenConstraint"/>
@@ -639,7 +663,7 @@
   </expressionProviders>
   <labelParsers extensibleViaService="true">
     <implementations uses="//@diagram/@topLevelNodes.0/@labels.0/@modelFacet //@diagram/@topLevelNodes.1/@labels.0/@modelFacet //@diagram/@topLevelNodes.2/@labels.0/@modelFacet //@diagram/@topLevelNodes.4/@labels.1/@modelFacet //@diagram/@topLevelNodes.7/@labels.0/@modelFacet //@diagram/@topLevelNodes.8/@labels.0/@modelFacet //@diagram/@topLevelNodes.9/@labels.0/@modelFacet //@diagram/@topLevelNodes.9/@labels.1/@modelFacet //@diagram/@topLevelNodes.12/@labels.0/@modelFacet //@diagram/@topLevelNodes.12/@labels.1/@modelFacet //@diagram/@topLevelNodes.14/@labels.0/@modelFacet //@diagram/@links.1/@labels.0/@modelFacet //@diagram/@links.2/@labels.0/@modelFacet //@diagram/@links.3/@labels.0/@modelFacet" xsi:type="gmfgen:PredefinedParser"/>
-    <implementations uses="//@diagram/@topLevelNodes.0/@labels.1/@modelFacet //@diagram/@topLevelNodes.1/@labels.1/@modelFacet //@diagram/@topLevelNodes.3/@labels.0/@modelFacet //@diagram/@topLevelNodes.4/@labels.0/@modelFacet //@diagram/@topLevelNodes.5/@labels.0/@modelFacet //@diagram/@topLevelNodes.6/@labels.0/@modelFacet //@diagram/@topLevelNodes.8/@labels.1/@modelFacet //@diagram/@topLevelNodes.9/@labels.2/@modelFacet //@diagram/@topLevelNodes.9/@labels.3/@modelFacet //@diagram/@topLevelNodes.10/@labels.0/@modelFacet //@diagram/@topLevelNodes.11/@labels.0/@modelFacet //@diagram/@topLevelNodes.12/@labels.2/@modelFacet //@diagram/@topLevelNodes.13/@labels.0/@modelFacet" xsi:type="gmfgen:ExternalParser"/>
+    <implementations uses="//@diagram/@topLevelNodes.0/@labels.1/@modelFacet //@diagram/@topLevelNodes.1/@labels.1/@modelFacet //@diagram/@topLevelNodes.3/@labels.0/@modelFacet //@diagram/@topLevelNodes.4/@labels.0/@modelFacet //@diagram/@topLevelNodes.5/@labels.0/@modelFacet //@diagram/@topLevelNodes.6/@labels.0/@modelFacet //@diagram/@topLevelNodes.8/@labels.1/@modelFacet //@diagram/@topLevelNodes.9/@labels.2/@modelFacet //@diagram/@topLevelNodes.9/@labels.3/@modelFacet //@diagram/@topLevelNodes.10/@labels.0/@modelFacet //@diagram/@topLevelNodes.11/@labels.0/@modelFacet //@diagram/@topLevelNodes.12/@labels.2/@modelFacet //@diagram/@topLevelNodes.13/@labels.0/@modelFacet //@diagram/@topLevelNodes.15/@labels.0/@modelFacet" xsi:type="gmfgen:ExternalParser"/>
   </labelParsers>
   <contextMenus context="//@diagram">
     <items xsi:type="gmfgen:LoadResourceAction"/>

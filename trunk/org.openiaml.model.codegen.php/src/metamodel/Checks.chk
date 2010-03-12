@@ -127,7 +127,7 @@ context model::PrimitiveOperation WARNING "Unknown primitive operation name '" +
 		name == "equal?" || name == "add role" ||
 		name == "add permission" || name == "remove role" ||
 		name == "remove permission" || name == "check permissions" ||
-		name == "true?");
+		name == "true?" || name == "can cast?");
 
 context model::operations::Arithmetic ERROR "Arithmetic must have at least one incoming data source edge" :
 	inFlows.size > 0;
@@ -145,4 +145,15 @@ context model::components::EntryGate ERROR "An EntryGate needs to have at least 
 context model::components::ExitGate ERROR "An ExitGate needs to have at least one incoming Condition, or one outgoing 'last' wire, or it will never permit access" :
 	inConditionEdges.size >= 1
 	|| outWires.typeSelect(model::NamedElement).exists(w | w.name == "last");
+	
+context model::operations::DecisionCondition ERROR "A 'can cast?' decision needs to have an incoming DataFlowEdge from a CastNode" :
+	name != "can cast?" || 
+	(inFlows.size == 1 && model::operations::CastNode.isInstance(inFlows.first().from));
+
+context model::operations::DecisionOperation ERROR "A 'can cast?' decision needs to have an incoming DataFlowEdge from a CastNode" :
+	name != "can cast?" || 
+	(inFlows.size == 1 && model::operations::CastNode.isInstance(inFlows.first().from));
+
+context model::operations::CastNode ERROR "A CastNode needs exactly one incoming data flow edge, had: " + inFlows.size :
+	inFlows.size == 1;
 	

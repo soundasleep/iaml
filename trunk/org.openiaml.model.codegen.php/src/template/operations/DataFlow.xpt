@@ -75,6 +75,25 @@
 «ENDDEFINE»
 
 /**
+ * A cast value.
+ */
+«DEFINE dataSource(Boolean php, model::visual::Frame currentFrame) FOR model::operations::CastNode»
+	do_cast(
+		«IF inFlows.size != 1»
+			«throwException("Incorrect number of arguments for cast source:" + inFlows.size)»
+		«ENDIF»
+		«EXPAND DataFlow::dataSource(php, currentFrame) FOREACH inFlows.from-»,
+		
+		«LET outFlows.select(o | isCastDestination(o.to)) AS targets»
+			«IF targets.size != 1»
+				«throwException("Too many cast targets for castNode " + this + ": " + targets.size)»
+			«ENDIF»
+			«EXPAND DataTypes::getDataType(php, currentFrame) FOREACH targets.to-»
+		«ENDLET»
+	)
+«ENDDEFINE»
+
+/**
  * A data source from an Property.
  *
  * Not sure if this implementation completely works; operations should

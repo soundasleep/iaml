@@ -40,14 +40,14 @@ for example, "123.4" forcibly cast to an Integer will return "123".
 <tr>
 	<td><abbr title="http://openiaml.org/model/datatypes#iamlString">iamlString</abbr></td>
 	<td><abbr title="http://openiaml.org/model/datatypes#iamlEmail">iamlEmail</abbr></td>
-	<td><a href="#string2email">If string matches an e-mail regexp</a>.</td>
+	<td><a href="#string2email">If string matches an e-mail regexp</a>. or is empty "".</td>
 	<td>Will be converted at best as it can into an e-mail address, or "" if it cannot be converted.</td>
 </tr>
 <tr>
 	<td><abbr title="http://openiaml.org/model/datatypes#iamlString">iamlString</abbr></td>
 	<td><abbr title="http://openiaml.org/model/datatypes#iamlDateTime">iamlDateTime</abbr></td>
 	<td>If PHP's <a href="http://php.net/strtotime">strtotime()</a> method does not return <code>false</code>.</td>
-	<td>The result of PHP's <a href="http://php.net/strtotime">strtotime()</a> method. [<a href="#string2date">note</a>]</td>
+	<td>The result of PHP's <a href="http://php.net/strtotime">strtotime()</a> method, or the UNIX epoch otherwise. [<a href="#string2date">note</a>]</td>
 </tr>
 <tr>
 	<td><abbr title="http://openiaml.org/model/datatypes#iamlString">iamlString</abbr></td>

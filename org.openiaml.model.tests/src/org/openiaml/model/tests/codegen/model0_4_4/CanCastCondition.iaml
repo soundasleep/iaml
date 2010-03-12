@@ -2,41 +2,38 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1274f76bcd9.36">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <conditions xsi:type="iaml:CompositeCondition" id="model.1274f76bcd9.50" name="can cast?" outConditionEdges="wires.1274f76c1da.6a">
-      <conditions xsi:type="iaml.operations:DecisionCondition" id="operations.1274f877c61.62" name="failed?" outExecutions="model.1274f8f028d.33 model.1274f8f028d.35" inExecutions="model.1274f8f028d.36" inFlows="model.1274f8f028d.2e"/>
+      <conditions xsi:type="iaml.operations:DecisionCondition" id="operations.1274f877c61.62" name="can cast?" outExecutions="model.1274f8f028d.33 model.1274f8f028d.35" inExecutions="model.1274f8f028d.36" inFlows="model.1274f8f028d.2e"/>
       <conditionEdges id="wires.1274f76c1da.6a" name="bar" from="model.1274f76bcd9.50" to="wires.1274f76c1da.64"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.1274f877c61.31" outExecutions="model.1274f8f028d.36"/>
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.1274f877c61.3b" inExecutions="model.1274f8f028d.33"/>
       <nodes xsi:type="iaml.operations:CancelNode" id="operations.1274f877c61.3c" inExecutions="model.1274f8f028d.35"/>
-      <nodes xsi:type="iaml.operations:CastNode" outFlows="model.1274f8f028d.2d model.1274f8f028d.2e" inFlows="model.1274f8f028d.2b"/>
-      <dataEdges id="model.1274f8f028d.2b" from="model.1274f76bcd9.69" to="//@scopes.0/@conditions.0/@nodes.3"/>
-      <dataEdges id="model.1274f8f028d.2d" from="//@scopes.0/@conditions.0/@nodes.3" to="model.1274f877ba5.c9"/>
-      <dataEdges id="model.1274f8f028d.2e" from="//@scopes.0/@conditions.0/@nodes.3" to="operations.1274f877c61.62"/>
-      <executionEdges id="model.1274f8f028d.33" name="n" from="operations.1274f877c61.62" to="operations.1274f877c61.3b"/>
-      <executionEdges id="model.1274f8f028d.35" name="y" from="operations.1274f877c61.62" to="operations.1274f877c61.3c"/>
+      <nodes xsi:type="iaml.operations:CastNode" id="operations.127503c4bc5.4b" outFlows="model.1274f8f028d.2d model.1274f8f028d.2e" inFlows="model.1274f8f028d.2b"/>
+      <dataEdges id="model.1274f8f028d.2b" from="model.1274f76bcd9.69" to="operations.127503c4bc5.4b"/>
+      <dataEdges id="model.1274f8f028d.2d" from="operations.127503c4bc5.4b" to="model.1274f877ba5.c9"/>
+      <dataEdges id="model.1274f8f028d.2e" from="operations.127503c4bc5.4b" to="operations.1274f877c61.62"/>
+      <executionEdges id="model.1274f8f028d.33" name="y" from="operations.1274f877c61.62" to="operations.1274f877c61.3b"/>
+      <executionEdges id="model.1274f8f028d.35" name="n" from="operations.1274f877c61.62" to="operations.1274f877c61.3c"/>
       <executionEdges id="model.1274f8f028d.36" from="operations.1274f877c61.31" to="operations.1274f877c61.62"/>
       <variables id="model.1274f877ba5.c9" name="target" inFlows="model.1274f8f028d.2d">
         <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
       </variables>
     </conditions>
     <operations xsi:type="iaml:CompositeOperation" id="model.1274f76bcd9.47" name="convert and insert" inActions="wires.1274f76c1da.64">
-      <operations xsi:type="iaml:PrimitiveOperation" id="model.1274f8533f5.28" name="setPropertyToValue" inFlows="model.1274f8533f5.29" inExecutions="model.1274f877ba5.27" outFlows="model.1274f8533f5.2a" outExecutions="model.1274f8533f5.2b"/>
-      <operations xsi:type="iaml.operations:DecisionOperation" id="operations.1274f877c61.10" name="failed?" inFlows="model.1274f877ba5.22" inExecutions="model.1274f877ba5.24" outExecutions="model.1274f877ba5.26 model.1274f877ba5.27"/>
-      <nodes xsi:type="iaml.operations:StartNode" id="operations.1274f8534e0.1" outExecutions="model.1274f877ba5.24"/>
-      <nodes xsi:type="iaml.operations:CastNode" outFlows="model.1274f8533f5.27 model.1274f877ba5.22" inFlows="model.1274f8533f5.25"/>
+      <operations xsi:type="iaml:PrimitiveOperation" id="model.1274f8533f5.28" name="setPropertyToValue" inFlows="model.1274f8f028d.3a4" inExecutions="model.1274f877ba5.27" outFlows="model.1274f8533f5.2a" outExecutions="model.1274f8533f5.2b"/>
+      <operations xsi:type="iaml.operations:DecisionOperation" id="operations.1274f877c61.10" name="can cast?" inFlows="model.1274f8f028d.3a3" inExecutions="model.1274f8f028d.25a" outExecutions="model.1274f877ba5.26 model.1274f877ba5.27"/>
+      <nodes xsi:type="iaml.operations:StartNode" id="operations.1274f8534e0.1" outExecutions="model.1274f8f028d.25a"/>
+      <nodes xsi:type="iaml.operations:CastNode" id="operations.127503c4bc5.4e" outFlows="model.1274f8f028d.3a3 model.1274f8f028d.3a4 model.1274f8f028d.3a7" inFlows="model.1274f8533f5.25"/>
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.1274f8534e0.3" inExecutions="model.1274f8533f5.2b"/>
       <nodes xsi:type="iaml.operations:CancelNode" id="operations.1274f877c61.7" inExecutions="model.1274f877ba5.26" exceptionText="unexpectedly had a conversion failure"/>
-      <dataEdges id="model.1274f8533f5.25" from="model.1274f76bcd9.69" to="//@scopes.0/@operations.0/@nodes.1"/>
-      <dataEdges id="model.1274f8533f5.27" from="//@scopes.0/@operations.0/@nodes.1" to="model.1274f8533f5.24"/>
-      <dataEdges id="model.1274f8533f5.29" from="model.1274f8533f5.24" to="model.1274f8533f5.28"/>
+      <dataEdges id="model.1274f8533f5.25" from="model.1274f76bcd9.69" to="operations.127503c4bc5.4e"/>
       <dataEdges id="model.1274f8533f5.2a" from="model.1274f8533f5.28" to="model.1274f76bcd9.95"/>
-      <dataEdges id="model.1274f877ba5.22" from="//@scopes.0/@operations.0/@nodes.1" to="operations.1274f877c61.10"/>
+      <dataEdges id="model.1274f8f028d.3a3" from="operations.127503c4bc5.4e" to="operations.1274f877c61.10"/>
+      <dataEdges id="model.1274f8f028d.3a4" from="operations.127503c4bc5.4e" to="model.1274f8533f5.28"/>
+      <dataEdges id="model.1274f8f028d.3a7" from="operations.127503c4bc5.4e" to="model.1274f76bcd9.95"/>
       <executionEdges id="model.1274f8533f5.2b" from="model.1274f8533f5.28" to="operations.1274f8534e0.3"/>
-      <executionEdges id="model.1274f877ba5.24" from="operations.1274f8534e0.1" to="operations.1274f877c61.10"/>
-      <executionEdges id="model.1274f877ba5.26" name="y" from="operations.1274f877c61.10" to="operations.1274f877c61.7"/>
-      <executionEdges id="model.1274f877ba5.27" name="n" from="operations.1274f877c61.10" to="model.1274f8533f5.28"/>
-      <variables id="model.1274f8533f5.24" name="as integer" outFlows="model.1274f8533f5.29" inFlows="model.1274f8533f5.27">
-        <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
-      </variables>
+      <executionEdges id="model.1274f877ba5.26" name="n" from="operations.1274f877c61.10" to="operations.1274f877c61.7"/>
+      <executionEdges id="model.1274f877ba5.27" name="y" from="operations.1274f877c61.10" to="model.1274f8533f5.28"/>
+      <executionEdges id="model.1274f8f028d.25a" from="operations.1274f8534e0.1" to="operations.1274f877c61.10"/>
     </operations>
     <children xsi:type="iaml.visual:InputTextField" id="visual.1274f76c0e0.123" name="String">
       <properties id="model.1274f76bcd9.69" name="fieldValue" outFlows="model.1274f8533f5.25 model.1274f8f028d.2b">
@@ -45,7 +42,7 @@
       <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlString;XSDSimpleTypeDefinition=1"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.1274f76c0e0.129" name="Target">
-      <properties id="model.1274f76bcd9.95" name="fieldValue" inFlows="model.1274f8533f5.2a">
+      <properties id="model.1274f76bcd9.95" name="fieldValue" inFlows="model.1274f8533f5.2a model.1274f8f028d.3a7">
         <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
       </properties>
       <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>

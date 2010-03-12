@@ -590,6 +590,231 @@ function Users_Permission(id, name) {
 // ---------
 
 /**
+ * Get the regexp to check e-mail types for.
+ * TODO this should be synchronised with the XSD type.
+ */
+function get_email_datatype_regexp() {
+	return "^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$";
+}
+
+/**
+ * Returns true if the given value (any type) can be successfully cast into the given
+ * XSD type.
+ *
+ * <p>See also the documentation for {@model CastNode}. 
+ */
+function can_cast(value, type) {
+	debug("can_cast('" + value + "', '" + type + "')");
+	switch (type) {
+		// casting to string
+		case "http://openiaml.org/model/datatypes#iamlString":
+			// can always convert anything to a String
+			return true;
+		
+		// casting to email
+		case "http://openiaml.org/model/datatypes#iamlEmail":
+			// can only convert strings
+			if (typeof(value) == "string") {
+				if (value == "")
+					return true;	// can match empty string
+			
+				return new RegExp(get_email_datatype_regexp()).test(value);
+			}
+			
+			// everything else fails
+			return false;
+		
+		// casting to dateTime
+		case "http://openiaml.org/model/datatypes#iamlDateTime":
+			if (value instanceof Date) {
+				// already a datetime
+				return true;
+			}
+		
+			if (typeof(value) == "number") {
+				// numbers are both int's and float's; make sure it's
+				// not one of the maximums on int
+				return value >= -2147483648 &&
+					value <= 2147483647;
+			}
+		
+			// a string
+			if (typeof(value) == "string") {
+				// check it can be converted
+				if (isNaN(Date.parse(value))) {
+					// failed
+					return false;
+				}
+				return true;
+			}
+			
+			// everything else fails
+			return false;
+		
+		// casting to integer
+		case "http://openiaml.org/model/datatypes#iamlInteger":
+			if (typeof(value) == "number") {
+				// numbers are both int's and float's; make sure it's
+				// not one of the maximums on int
+				return value >= -2147483648 &&
+					value <= 2147483647;
+			}
+		
+			// a string		
+			if (typeof(value) == "string") {
+				var int = parseInt(value);
+				
+				// conversion failed?
+				if (isNaN(int)) {
+					return false;
+				}
+	
+				// numbers are both int's and float's; make sure it's
+				// not one of the maximums on int
+				return int >= -2147483648 &&
+					int <= 2147483647;
+				
+			}
+			
+			// a date/time (PHP class)
+			if (value instanceof Date) {
+				var int = value.getTime();
+			
+				// numbers are both int's and float's; make sure it's
+				// not one of the maximums on int
+				return int >= -2147483648 &&
+					int <= 2147483647;
+				
+			}
+			
+			// don't know how to deal with this otherwise
+			return false;
+	
+		default:
+			throw new IamlJavascriptException("Unknown cast type '" + type + "'");
+	}
+
+	throw new IamlJavascriptException("Unexpectedly fell out of can_cast check");
+
+}
+
+/**
+ * Get the given date in RFC 2822 format.
+ *
+ * <p>Example: <code>Tue, 19 Jan 2038 03:14:07 +0000</code>
+ */
+function rfc2822(date) {
+	function pad(n) { return n < 10 ? '0'+n : n}
+	function pad4(n) {
+		return n < 10 ? '000' + n :
+			(n < 100 ? '00' + n :
+				(n < 1000 ? '0' + n : n)); 
+	}
+	
+	var days = new Array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
+	var months = new Array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
+	
+	return days[date.getDay()] + ", " + date.getDate()
+		+ " " + months[date.getMonth()] + " " + date.getFullYear()
+		+ " " + pad(date.getHours()) + ":" + pad(date.getMinutes())
+		+ " " + pad(date.getSeconds()) + " +"
+		+ pad4(date.getTimezoneOffset());
+	
+}
+
+/**
+ * Cast the given value to the given type, as best as possible.
+ *
+ * <p>See also the documentation for {@model CastNode}. 
+ */
+function do_cast(value, type) {
+	debug("do_cast('" + value + "', '" + type + "')");
+	switch (type) {
+		// casting to string
+		case "http://openiaml.org/model/datatypes#iamlString":
+			// a date?
+			if (value instanceof Date) {
+				// format as RFC 2822
+				return rfc2822($value);
+			}
+			
+			return "" + value;
+		
+		// casting to email
+		case "http://openiaml.org/model/datatypes#iamlEmail":
+			// can only convert strings
+			if (is_string(value)) {
+				// a successful e-mail?
+				if (can_cast(value, type)) {
+					return value;
+				}
+
+				// otherwise, fails
+				return "";			
+			}
+			
+			// everything else fails
+			return "";
+		
+		// casting to dateTime
+		case "http://openiaml.org/model/datatypes#iamlDateTime":
+			if (value instanceof Date) {
+				// same thing
+				return value;
+			}
+			
+			if (typeof(value) == "number") {
+				// if it can't be returned, just return the unix epoch
+				if (!can_cast(value, type))
+					return new Date(0);
+					
+				// convert timestamp to date
+				return new Date(parseInt(value));
+			}
+			
+			// a string
+			if (typeof(value) == "string") {
+				// if it can't be returned, just return the unix epoch
+				if (!can_cast(value, type))
+					return new Date(0);
+			
+				// use DateTime to create object
+				return new Date(value);
+			}
+			
+			// everything else fails
+			return new Date("0");
+		
+		// casting to integer
+		case "http://openiaml.org/model/datatypes#iamlInteger":
+			if (typeof(value) == "number")
+				return Math.floor(value);	// return copy
+		
+			// a string		
+			if (typeof(value) == "string") {
+				// return best guess
+				return parseInt(value);
+			}
+			
+			// a date/time (PHP class)
+			if (value instanceof Date) {
+				// return timestamp
+				return value.getTime();
+			}
+			
+			// don't know how to deal with this otherwise
+			return 0;
+	
+		default:
+			throw new IamlJavascriptException("Unknown cast type '" + type + "'");
+	}
+
+	throw new IamlJavascriptException("Unexpectedly fell out of do_cast");
+}
+
+// ---------
+
+/**
  * Copied from http://www.quirksmode.org/js/cookies.html
  */
 function createCookie(name,value,days) {

@@ -233,10 +233,11 @@ public class OperationsFactoryImpl extends EFactoryImpl implements OperationsFac
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public CastNode createCastNode() {
 		CastNodeImpl castNode = new CastNodeImpl();
+		generateID(castNode);
 		return castNode;
 	}
 

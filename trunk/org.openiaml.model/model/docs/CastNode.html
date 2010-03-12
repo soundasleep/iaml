@@ -1,0 +1,112 @@
+<p>
+A "successful" cast is one where the source can be converted successfully
+<em>with no loss of information</em>. So, for example, the String "123" can
+be successfully cast to an Integer, but "123.4" cannot.
+</p>
+
+<p>
+However, this failure can be discarded if loss of information <em>is</em> acceptable;
+for example, "123.4" forcibly cast to an Integer will return "123".
+</p>
+
+<p>
+<h3>List of possible casts, ignoring identical types:</h3>
+
+<table>
+<tr>
+	<th>Source type</th>
+	<th>Target type</th>
+	<th>Successful</th>
+	<th>Cast</th>
+</tr>
+<tr>
+	<td><abbr title="http://openiaml.org/model/datatypes#iamlInteger">iamlInteger</abbr></td>
+	<td><abbr title="http://openiaml.org/model/datatypes#iamlString">iamlString</abbr></td>
+	<td>Yes</td>
+	<td><code>123</code> is converted into <code>"123"</code>.</td>
+</tr>
+<tr>
+	<td><abbr title="http://openiaml.org/model/datatypes#iamlDateTime">iamlDateTime</abbr></td>
+	<td><abbr title="http://openiaml.org/model/datatypes#iamlString">iamlString</abbr></td>
+	<td>Yes</td>
+	<td>Date is converted into <a href="http://www.faqs.org/rfcs/rfc2822">RFC 2822</a>, for example <code>Thu, 21 Dec 2000 16:01:07 +0200</code>.</td>
+</tr>
+<tr>
+	<td><abbr title="http://openiaml.org/model/datatypes#iamlEmail">iamlEmail</abbr></td>
+	<td><abbr title="http://openiaml.org/model/datatypes#iamlString">iamlString</abbr></td>
+	<td>Yes</td>
+	<td><code>test@openiaml.org</code> is converted into <code>"test@openiaml.org"</code>.</td>
+</tr>
+<tr>
+	<td><abbr title="http://openiaml.org/model/datatypes#iamlString">iamlString</abbr></td>
+	<td><abbr title="http://openiaml.org/model/datatypes#iamlEmail">iamlEmail</abbr></td>
+	<td><a href="#string2email">If string matches an e-mail regexp</a>.</td>
+	<td>Will be converted at best as it can into an e-mail address, or "" if it cannot be converted.</td>
+</tr>
+<tr>
+	<td><abbr title="http://openiaml.org/model/datatypes#iamlString">iamlString</abbr></td>
+	<td><abbr title="http://openiaml.org/model/datatypes#iamlDateTime">iamlDateTime</abbr></td>
+	<td>If PHP's <a href="http://php.net/strtotime">strtotime()</a> method does not return <code>false</code>.</td>
+	<td>The result of PHP's <a href="http://php.net/strtotime">strtotime()</a> method. [<a href="#string2date">note</a>]</td>
+</tr>
+<tr>
+	<td><abbr title="http://openiaml.org/model/datatypes#iamlString">iamlString</abbr></td>
+	<td><abbr title="http://openiaml.org/model/datatypes#iamlInteger">iamlInteger</abbr></td>
+	<td>
+		Only successful if the source string matches the regular expression
+		<code>^[0-9]*$</code> [<a href="#string2integer">note</a>]. An empty string is cast to 0.
+	</td>
+	<td>
+		Follows the semantics of PHP's <a href="http://php.net/intval">intval()</a> function.
+	</td>
+</tr>
+<tr>
+	<td><abbr title="http://openiaml.org/model/datatypes#iamlInteger">iamlInteger</abbr></td>
+	<td><abbr title="http://openiaml.org/model/datatypes#iamlDateTime">iamlDateTime</abbr></td>
+	<td>
+		Yes.
+	</td>
+	<td>
+		The integer represents the time measured in the number of seconds
+		since the Unix Epoch (i.e. a timestamp) [<a href="#integer2date">note</a>].
+		Can be negative.
+	</td>
+</tr>
+<tr>
+	<td><abbr title="http://openiaml.org/model/datatypes#iamlDateTime">iamlDateTime</abbr></td>
+	<td><abbr title="http://openiaml.org/model/datatypes#iamlInteger">iamlInteger</abbr></td>
+	<td>
+		Only successful if the date is between
+		<code>December 13, 1901 20:45:52 GMT</code> and
+		<code>January 19, 2038 03:14:07 GMT</code>, inclusive.
+	</td>
+	<td>
+		The integer represents the time measured in the number of seconds
+		since the Unix Epoch (i.e. a timestamp) [<a href="#integer2date">note</a>].
+	</td>
+</tr>
+</table>
+</p>
+
+<p>
+<h3>Notes</h3>
+
+<ul>
+<li><a name="string2email">iamlString to iamlEmail</a>: 
+	Only successful if the source string matches the regular expression
+	<code>^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$</code>.
+</li>
+<li><a name="string2integer">iamlString to iamlInteger</a>: 
+	The size of the integer is limited from <code>-2147483648</code> to
+	<code>2147483647</code>.
+</li>
+<li><a name="integer2date">iamlInteger to iamlDateTime</a>:
+	Unix Epoch is <em>January 1 1970 00:00:00 GMT</em>.</li>
+<li><a name="string2date">iamlString to iamlDateTime</a>:
+	Server-side uses <a href="http://php.net/strtotime">PHP's strtotime()</a> method, whereas
+	client-side uses <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Date/parse">Javascript's parse()</a> method. 
+	See <a href="http://code.google.com/p/iaml/issues/detail?id=161">issue 161</a>.
+</li>
+<li>Dates are stored as 64-bit integers, so all imaginable dates (including negative years) are supported.</li>
+</ul>
+</p>

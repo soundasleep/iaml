@@ -401,6 +401,7 @@ function make_into_boolean(value) {
 
 /**
  * Trim whitespace.
+ * trim() is part of ECMAScript 5, but only implemented in Firefox 3.6 (not HtmlUnit 4.7).
  */
 function trim(str) {
 	return str.replace(/^\s\s*/, "").replace(/\s\s*$/, "");
@@ -662,10 +663,20 @@ function can_cast(value, type) {
 		
 			// a string		
 			if (typeof(value) == "string") {
+				// "" = 0
+				if (value == "") {
+					return true;
+				}
+			
 				var int = parseInt(value);
 				
 				// conversion failed?
 				if (isNaN(int)) {
+					return false;
+				}
+				
+				// integer is represented the same in string as in int?
+				if (value != ("" + int)) {
 					return false;
 				}
 	
@@ -678,7 +689,7 @@ function can_cast(value, type) {
 			
 			// a date/time (PHP class)
 			if (value instanceof Date) {
-				var int = value.getTime();
+				var int = value.getTime() / 1000;	// convert from msec to sec
 			
 				// numbers are both int's and float's; make sure it's
 				// not one of the maximums on int
@@ -699,7 +710,8 @@ function can_cast(value, type) {
 }
 
 /**
- * Get the given date in RFC 2822 format.
+ * Get the given date in RFC 2822 format. This actually converts it to 
+ * UTC format for consistency (i.e. +0000 timezone).
  *
  * <p>Example: <code>Tue, 19 Jan 2038 03:14:07 +0000</code>
  */
@@ -714,11 +726,10 @@ function rfc2822(date) {
 	var days = new Array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
 	var months = new Array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
 	
-	return days[date.getDay()] + ", " + date.getDate()
-		+ " " + months[date.getMonth()] + " " + date.getFullYear()
-		+ " " + pad(date.getHours()) + ":" + pad(date.getMinutes())
-		+ " " + pad(date.getSeconds()) + " +"
-		+ pad4(date.getTimezoneOffset());
+	return days[date.getUTCDay()] + ", " + date.getUTCDate()
+		+ " " + months[date.getUTCMonth()] + " " + date.getUTCFullYear()
+		+ " " + pad(date.getUTCHours()) + ":" + pad(date.getUTCMinutes())
+		+ ":" + pad(date.getUTCSeconds()) + " +0000";
 	
 }
 
@@ -735,7 +746,7 @@ function do_cast(value, type) {
 			// a date?
 			if (value instanceof Date) {
 				// format as RFC 2822
-				return rfc2822($value);
+				return rfc2822(value);
 			}
 			
 			return "" + value;
@@ -743,7 +754,7 @@ function do_cast(value, type) {
 		// casting to email
 		case "http://openiaml.org/model/datatypes#iamlEmail":
 			// can only convert strings
-			if (is_string(value)) {
+			if (typeof(value) == "string") {
 				// a successful e-mail?
 				if (can_cast(value, type)) {
 					return value;
@@ -769,7 +780,7 @@ function do_cast(value, type) {
 					return new Date(0);
 					
 				// convert timestamp to date
-				return new Date(parseInt(value));
+				return new Date(parseInt(value) * 1000);	// convert s to msec
 			}
 			
 			// a string
@@ -792,14 +803,33 @@ function do_cast(value, type) {
 		
 			// a string		
 			if (typeof(value) == "string") {
+				// remove all alphanumeric characters
+				value = trim(value.replace(new RegExp("[^0-9\.]", "g"), " "));
+
+				// "" = 0
+				if (value == "")
+					return 0;
+
+				// and select the first non-whitespace, if any
+				var splits = value.split(" ", 2);
+				if (splits.length > 0) {
+					value = splits[0];
+				}
+				
 				// return best guess
-				return parseInt(value);
+				var int = parseInt(value);
+				if (isNaN(int)) {
+					// if it's not an integer, return 0
+					return 0;
+				}
+			
+				return int;
 			}
 			
 			// a date/time (PHP class)
 			if (value instanceof Date) {
 				// return timestamp
-				return value.getTime();
+				return Math.floor(value.getTime() / 1000);		// convert msec to sec
 			}
 			
 			// don't know how to deal with this otherwise

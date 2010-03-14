@@ -519,6 +519,11 @@ function can_cast($value, $type) {
 				// is it one of the maximums? if so, we have an overflow
 				if ($int == -2147483648 || $int == 2147483647)
 					return false;
+					
+				// "" = 0
+				if ($int == 0 && $value == "") {
+					return true;
+				}
 				
 				// is the string representation of this intval equal
 				// to the original string?

@@ -726,7 +726,7 @@ function rfc2822(date) {
 	var days = new Array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
 	var months = new Array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
 	
-	return days[date.getUTCDay()] + ", " + date.getUTCDate()
+	return days[date.getUTCDay()] + ", " + pad(date.getUTCDate())
 		+ " " + months[date.getUTCMonth()] + " " + date.getUTCFullYear()
 		+ " " + pad(date.getUTCHours()) + ":" + pad(date.getUTCMinutes())
 		+ ":" + pad(date.getUTCSeconds()) + " +0000";
@@ -798,8 +798,15 @@ function do_cast(value, type) {
 		
 		// casting to integer
 		case "http://openiaml.org/model/datatypes#iamlInteger":
-			if (typeof(value) == "number")
+			if (typeof(value) == "number") {
+				// too big?
+				if (!(value >= -2147483648 &&
+						value <= 2147483647)) {
+					return 0;
+				}
+			
 				return Math.floor(value);	// return copy
+			}
 		
 			// a string		
 			if (typeof(value) == "string") {
@@ -820,6 +827,12 @@ function do_cast(value, type) {
 				var int = parseInt(value);
 				if (isNaN(int)) {
 					// if it's not an integer, return 0
+					return 0;
+				}
+				
+				// too big?
+				if (!(int >= -2147483648 &&
+						int <= 2147483647)) {
 					return 0;
 				}
 			

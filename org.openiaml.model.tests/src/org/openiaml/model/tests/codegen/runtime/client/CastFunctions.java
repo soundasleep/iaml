@@ -3,11 +3,8 @@
  */
 package org.openiaml.model.tests.codegen.runtime.client;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
 
 /**
  * Checks casting functions.
@@ -21,11 +18,6 @@ public class CastFunctions extends JavascriptCodegenTestCase {
 	public static final String TYPE_EMAIL = "http://openiaml.org/model/datatypes#iamlEmail";
 	public static final String TYPE_DATETIME = "http://openiaml.org/model/datatypes#iamlDateTime";
 	public static final String TYPE_INTEGER = "http://openiaml.org/model/datatypes#iamlInteger";
-	
-	/**
-	 * Example: <code>Fri, 13 Dec 1901 20:45:52 +0000</code>
-	 */
-	private static final String RFC_2822 = "EEE', 'd' 'MMM' 'yyyy' 'HH:mm:ss' 'Z";
 	
 	private String canCastToString(String value) {
 		return "can_cast('" + value + "', '" + TYPE_STRING + "')";
@@ -148,15 +140,6 @@ public class CastFunctions extends JavascriptCodegenTestCase {
 		assertJavascriptResult(true, canCastToInteger(TODAY));
 	}
 	
-	/**
-	 * Convert the given date to RFC 2822 format, represented in UTC.
-	 */
-	private String rfc2822(Date date) {
-		SimpleDateFormat fmt = new SimpleDateFormat(RFC_2822, Locale.US);
-		fmt.setTimeZone(TimeZone.getTimeZone("UTC"));
-		return fmt.format(date);
-	}
-	
 	public void testDoCastToString() throws Exception {
 		assertJavascriptResult("Hello, world!", doCastToString("Hello, world!"));
 		assertJavascriptResult("", doCastToString(""));
@@ -196,7 +179,7 @@ public class CastFunctions extends JavascriptCodegenTestCase {
 		assertJavascriptResult(42, doCastToInteger("42.1"));
 		assertJavascriptResult(0, doCastToInteger(0));
 		assertJavascriptResult(0, doCastToInteger("0"));
-		assertJavascriptResult((long) 2147483647 + 1024, doCastToInteger((long) 2147483647 + 1024));
+		assertJavascriptResult(0, doCastToInteger((long) 2147483647 + 1024));
 		assertJavascriptResult(TODAY.getTime() / 1000, doCastToInteger(TODAY));
 	}
 	

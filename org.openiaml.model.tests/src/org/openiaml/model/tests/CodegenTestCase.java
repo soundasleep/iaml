@@ -7,7 +7,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Properties;
+import java.util.TimeZone;
 
 import junit.framework.AssertionFailedError;
 import net.sourceforge.jwebunit.api.IElement;
@@ -896,6 +900,20 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		// normalise
 		textContent = textContent.replaceAll("[\\s]+", " ").trim();
 		assertEquals(text, textContent);
+	}
+	
+	/**
+	 * Example: <code>Fri, 03 Dec 1901 20:45:52 +0000</code>
+	 */
+	private static final String RFC_2822 = "EEE', 'dd' 'MMM' 'yyyy' 'HH:mm:ss' 'Z";
+	
+	/**
+	 * Convert the given date to RFC 2822 format, represented in UTC.
+	 */
+	public String rfc2822(Date date) {
+		SimpleDateFormat fmt = new SimpleDateFormat(RFC_2822, Locale.US);
+		fmt.setTimeZone(TimeZone.getTimeZone("UTC"));
+		return fmt.format(date);
 	}
 	
 }

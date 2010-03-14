@@ -25,6 +25,7 @@ public class AllServerRuntimeTests {
 		suite.addTestSuite(PhpMethodsTest.class);
 		suite.addTestSuite(ComparisonFunctions.class);
 		suite.addTestSuite(HelperFunctions.class);
+		suite.addTestSuite(CastFunctions.class);
 
 		return suite;
 	}

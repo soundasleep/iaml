@@ -455,7 +455,7 @@ function get_email_datatype_regexp() {
  * <p>See also the documentation for {@model CastNode}. 
  */
 function can_cast($value, $type) {
-	log_message("can_cast('$value', '$type')");
+	log_message("can_cast('" . print_r($value, true) . "', '$type')");
 	switch ($type) {
 		// casting to string
 		case "http://openiaml.org/model/datatypes#iamlString":
@@ -574,17 +574,20 @@ function can_cast($value, $type) {
  * <p>See also the documentation for {@model CastNode}. 
  */
 function do_cast($value, $type) {
-	log_message("do_cast('$value', '$type')");
+	log_message("do_cast('" . print_r($value, true) . "', '$type')");
 	switch ($type) {
 		// casting to string
 		case "http://openiaml.org/model/datatypes#iamlString":
 			// a date?
 			if ($value instanceof DateTime) {
+				// change to UTC first
+				$value->setTimezone(new DateTimeZone("UTC"));
+				
 				// format as RFC 2822
 				return $value->format(DateTime::RFC2822);
 			}
 			
-			return "" + $value;
+			return (string) $value;
 		
 		// casting to email
 		case "http://openiaml.org/model/datatypes#iamlEmail":
@@ -646,6 +649,9 @@ function do_cast($value, $type) {
 			
 			// a date/time (PHP class)
 			if ($value instanceof DateTime) {
+				// change to UTC first
+				$value->setTimezone(new DateTimeZone("UTC"));
+			
 				// return timestamp
 				return $value->getTimestamp();
 			}

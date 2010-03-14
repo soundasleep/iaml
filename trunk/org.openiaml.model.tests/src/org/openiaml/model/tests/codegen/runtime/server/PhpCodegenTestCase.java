@@ -39,6 +39,18 @@ public abstract class PhpCodegenTestCase extends CodegenTestCase {
 		
 	}
 	
+	
+	/**
+	 * Evaluate the given script and assert that it returns the given
+	 * result.
+	 * 
+	 * @throws Exception 
+	 */
+	public void assertPhpResult(long expected, String script) throws Exception {
+		assertPhpResult(Long.toString(expected), "", script);
+		
+	}
+	
 	/**
 	 * 
 	 * @param init pre-init code

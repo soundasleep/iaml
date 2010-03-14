@@ -42,6 +42,19 @@ public abstract class JavascriptCodegenTestCase extends CodegenTestCase {
 	}
 	
 	/**
+	 * Evaluate the given script and assert that it returns the given
+	 * result.
+	 * 
+	 * @param expected the expected integer result
+	 * @param script the Javascript code to execute
+	 * @throws Exception 
+	 */
+	public void assertJavascriptResult(long expected, String script) throws Exception {
+		assertJavascriptResult(Long.toString(expected), "", script);
+		
+	}
+	
+	/**
 	 * 
 	 * @param init pre-init code
 	 * @throws Exception 
@@ -50,7 +63,7 @@ public abstract class JavascriptCodegenTestCase extends CodegenTestCase {
 		setExpectedJavaScriptAlert(expected);
 		executeJavascript(init + "alert(" + script + ");");		
 	}
-	
+
 	/**
 	 * Evaluate the given script and assert that it returns the given
 	 * boolean value. This is converted into a string.
@@ -73,6 +86,14 @@ public abstract class JavascriptCodegenTestCase extends CodegenTestCase {
 
 	private boolean hasStarted = false;
 	
+	private String expectedAlert = null;
+	
+	@Override
+	public void setExpectedJavaScriptAlert(String message) {
+		super.setExpectedJavaScriptAlert(message);
+		this.expectedAlert = message;
+	}
+	
 	/**
 	 * Execute the given Javascript. Each call to this method
 	 * executes in a separate instance; so, if passing variables, 
@@ -91,7 +112,9 @@ public abstract class JavascriptCodegenTestCase extends CodegenTestCase {
 			}
 			InputStream content = new ByteArrayInputStream(("<html><script src=\"" + CONFIG_WEB + "js/default.js\"></script><script>" + string + "</script></html>").getBytes());
 			
+			// write output to HTML
 			runtime.create(content, true, new NullProgressMonitor());
+			
 			if (hasStarted) {
 				gotoPage(filename);	
 			} else {
@@ -100,6 +123,10 @@ public abstract class JavascriptCodegenTestCase extends CodegenTestCase {
 			}
 			
 		} catch (RuntimeException e) {
+			// display the expected message along with the stack trace
+			if (expectedAlert != null) {
+				throw new RuntimeException("Expected '" + expectedAlert + "': " + e.getMessage(), e);
+			}
 			throw new RuntimeException("Could not execute '" + string + ": " + e.getMessage(), e);
 		}
 		

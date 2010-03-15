@@ -659,6 +659,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getParameter_Type() {
+		return (EReference)parameterEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPrimitiveOperation() {
 		return primitiveOperationEClass;
 	}
@@ -1718,6 +1727,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(operationEClass, OPERATION__PARAMETERS);
 
 		parameterEClass = createEClass(PARAMETER);
+		createEReference(parameterEClass, PARAMETER__TYPE);
 
 		primitiveOperationEClass = createEClass(PRIMITIVE_OPERATION);
 
@@ -2073,6 +2083,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getOperation_Parameters(), this.getParameter(), null, "parameters", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getParameter_Type(), theXSDPackage.getXSDSimpleTypeDefinition(), null, "type", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(primitiveOperationEClass, PrimitiveOperation.class, "PrimitiveOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

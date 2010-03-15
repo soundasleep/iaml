@@ -1835,13 +1835,22 @@ public interface ModelPackage extends EPackage {
 	int PARAMETER__OUT_FLOWS = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER__TYPE = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Parameter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETER_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int PARAMETER_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.impl.PrimitiveOperationImpl <em>Primitive Operation</em>}' class.
@@ -6080,6 +6089,17 @@ public interface ModelPackage extends EPackage {
 	EClass getParameter();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.openiaml.model.model.Parameter#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Type</em>'.
+	 * @see org.openiaml.model.model.Parameter#getType()
+	 * @see #getParameter()
+	 * @generated
+	 */
+	EReference getParameter_Type();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.PrimitiveOperation <em>Primitive Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7469,6 +7489,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EClass PARAMETER = eINSTANCE.getParameter();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PARAMETER__TYPE = eINSTANCE.getParameter_Type();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.impl.PrimitiveOperationImpl <em>Primitive Operation</em>}' class.

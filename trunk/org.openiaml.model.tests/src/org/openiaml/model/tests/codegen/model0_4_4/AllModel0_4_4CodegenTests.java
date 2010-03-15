@@ -23,6 +23,8 @@ public class AllModel0_4_4CodegenTests {
 		suite.addTestSuite(CanCastCondition.class);
 		suite.addTestSuite(InputTextFieldDataType.class);
 		suite.addTestSuite(IncompatibleTypesInputTextField.class);
+		suite.addTestSuite(LabelHideShow.class);
+		suite.addTestSuite(LabelHideShowSession.class);
 
 		return suite;
 	}

@@ -585,4 +585,12 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setValue(element, ModelPackage.eINSTANCE.getProperty_Type(), value);
 	}
 	
+	public void setPriority(RunAction element, int value) throws InferenceException {
+		setValue(element, WiresPackage.eINSTANCE.getRunAction_Priority(), value);
+	}
+	
+	public void setExceptionText(CancelNode element, String value) throws InferenceException {
+		setValue(element, OperationsPackage.eINSTANCE.getCancelNode_ExceptionText(), value);
+	}
+	
 }

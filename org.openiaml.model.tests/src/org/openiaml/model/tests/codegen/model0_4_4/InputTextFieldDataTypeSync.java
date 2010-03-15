@@ -32,6 +32,25 @@ public class InputTextFieldDataTypeSync extends CodegenTestCase {
 	}
 	
 	/**
+	 * If we just load the page, and then just reload it, no warnings
+	 * should show.
+	 * 
+	 * @throws Exception
+	 */
+	public void testReloadingPageDoesntShowErrors() throws Exception {
+		IFile sitemap = beginAtSitemapThenPage("Home");
+		assertNoProblem();
+		
+		// reload
+		reloadPage(sitemap, "Home");
+		assertNoProblem();
+		
+		// restart session
+		restartSession(sitemap, "Home");
+		assertNoProblem();
+	}
+
+	/**
 	 * Default to String shouldn't have any problems.
 	 */
 	public void testDefaultToString() throws Exception {
@@ -171,6 +190,7 @@ public class InputTextFieldDataTypeSync extends CodegenTestCase {
 	 */
 	@Override
 	protected void assertProblem() {
+		resetDebug();
 		assertMatch("(Error|error|Exception|exception|Warning|warning)");
 	}
 
@@ -179,9 +199,10 @@ public class InputTextFieldDataTypeSync extends CodegenTestCase {
 	 */
 	@Override
 	protected void assertNoProblem() {
+		resetDebug();
 		assertNoMatch("(Error|error|Exception|exception|Warning|warning)");
 	}
-	
+
 	/**
 	 * Enter in 'input' into 'fieldName'. No warnings should 
 	 * occur, and the target 'targetName' should be updated to the
@@ -196,6 +217,7 @@ public class InputTextFieldDataTypeSync extends CodegenTestCase {
 	protected void doInputWithNoWarnings(String fieldName, String targetName, String input, String expected) throws Exception {
 		
 		beginAtSitemapThenPage("Home");
+		assertNoProblem();
 		{
 			String target = getLabelIDForText(fieldName);
 			assertLabeledFieldEquals(target, "");	// empty
@@ -243,6 +265,7 @@ public class InputTextFieldDataTypeSync extends CodegenTestCase {
 	 */
 	protected IFile doInputWithWarnings(String fieldName, String targetName, String input, String expectedInput) throws Exception {
 		IFile sitemap = beginAtSitemapThenPage("Home");
+		assertNoProblem();
 		{
 			String target = getLabelIDForText(fieldName);
 			assertLabeledFieldEquals(target, "");	// empty

@@ -121,3 +121,91 @@ rule "Add 'can cast?' condition check for onEdit connecting to Update"
 		queue.add(param, drools);		
 	
 end
+
+/**
+ * @inference SyncWire
+ *		For elements connected by a {@model SyncWire}, the 'onAccess' {@model EventTrigger} executing the 'init' {@model Operation}
+ *		will {@model ConditionEdge only execute} if the source {@model Property fieldValue} can be {@model CastNode cast successfully}.  
+ */
+rule "Add 'can cast?' condition check for onAccess connecting to Init"
+	when
+		source : Accessible ( )
+		target : CanBeSynced ( )
+		
+		sw : SyncWire ( )
+		eval ( functions.connects(sw, source, target) )
+		
+		fieldValue : Property ( eContainer == target, name == "fieldValue" )		
+
+		event : EventTrigger ( source.onAccess == event )
+		upd : Operation ( name == "init", eContainer == source )
+		
+		run : RunAction ( from == event, to == upd )
+		p2 : ParameterEdge ( from == fieldValue, to == run )
+		
+		condition : Condition ( name == "can cast?", eContainer == source )
+		
+		not ( ce : ConditionEdge ( from == condition, to == run )) 
+	
+	then
+		ConditionEdge ce = handler.generatedConditionEdge(sw, sw, condition, run);
+		handler.setName(ce, "prevent incompatible types");
+		queue.add(ce, drools);
+		
+		ParameterEdge param = handler.generatedParameterEdge(ce, sw, fieldValue, ce);
+		queue.add(param, drools);		
+	
+end
+
+/**
+ * @inference SyncWire
+ *		For elements connected by a {@model SyncWire}, the 'onAccess' {@model EventTrigger} executing the 'init' {@model Operation}
+ *		will {@model ConditionEdge only execute} if the source {@model Property fieldValue} can be {@model CastNode cast successfully}.  
+ */
+rule "After 'init' has been called on a typed element, call 'validate'"
+	when
+		source : CanBeSynced ( )
+		
+		event : EventTrigger ( source.onAccess == event )
+		upd : Operation ( name == "init", eContainer == source )
+		
+		run : RunAction ( from == event, to == upd )
+		
+		validate : Operation ( name == "validate", eContainer == source )
+		
+		not ( runValidate : RunAction ( from == event, to == validate ))
+	
+	then
+		RunAction runValidate = handler.generatedRunAction(source, source, event, validate);
+		handler.setName(runValidate, "call validate after init");
+		// must be a lower priority 		
+		handler.setPriority(runValidate, run.getPriority() - 10);
+		queue.add(runValidate, drools);
+
+end
+
+/**
+ * onInit->Validate() is only called if the fieldValue has been set.
+ */
+rule "Only call 'validate' operation onAccess if fieldValue has been set"
+	when
+		source : CanBeSynced ( )
+		
+		event : EventTrigger ( source.onAccess == event )
+		upd : Operation ( name == "init", eContainer == source )
+		
+		run : RunAction ( from == event, to == upd )
+		
+		validate : Operation ( name == "validate", eContainer == source )
+		runValidate : RunAction ( from == event, to == validate )
+		
+		isSet : Condition ( name == "fieldValue is set", eContainer == source )
+		
+		not ( edge : ConditionEdge ( from == isSet, to == runValidate) )
+	
+	then
+		ConditionEdge edge = handler.generatedConditionEdge(runValidate, source, isSet, runValidate);
+		handler.setName(edge, "only validate if set");
+		queue.add(edge, drools);
+
+end

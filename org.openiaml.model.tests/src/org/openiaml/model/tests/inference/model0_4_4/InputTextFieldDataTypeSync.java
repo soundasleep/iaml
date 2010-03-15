@@ -6,6 +6,7 @@ package org.openiaml.model.tests.inference.model0_4_4;
 import org.openiaml.model.datatypes.BuiltinDataTypes;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
+import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.ExecutionEdgesSource;
 import org.openiaml.model.model.Operation;
@@ -472,6 +473,30 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 	}
 	
 	/**
+	 * {@link #testOnAccessCallsValidate()} should only execute if
+	 * the fieldValue is set. 
+	 *  
+	 * @throws Exception
+	 */
+	public void testOnAccessCallsValidateIfFieldValueIsSet() throws Exception {
+		
+		root = loadAndInfer(InputTextFieldDataTypeSync.class);
+		Frame home = assertHasFrame(root, "Home");
+		
+		InputTextField integer = assertHasInputTextField(home, "Integer");
+		EventTrigger onAccess = integer.getOnAccess();
+		
+		// validate operation is also called
+		CompositeOperation validate = assertHasCompositeOperation(integer, "validate");
+		RunAction runValidate = assertHasRunAction(root, onAccess, validate);
+
+		// the 'fieldValue is set' condition
+		Condition isSet = assertHasCondition(integer, "fieldValue is set");
+		assertHasConditionEdge(root, isSet, runValidate);
+			
+	}
+	
+	/**
 	 * There should be a cast node within the 'update' operation.
 	 * We will leave other inference test methods to check that the operation is
 	 * constructed correctly.
@@ -487,6 +512,25 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 		CompositeOperation update = assertHasCompositeOperation(integer, "update");	
 		
 		assertGenerated(assertHasCastNode(update));
+
+	}
+	
+	/**
+	 * There should be a cast node within the 'init' operation.
+	 * We will leave other inference test methods to check that the operation is
+	 * constructed correctly.
+	 * 
+	 * @throws Exception
+	 */
+	public void testInputsAreCastInInit() throws Exception {
+		
+		root = loadAndInfer(InputTextFieldDataTypeSync.class);
+		Frame home = assertHasFrame(root, "Home");
+		
+		InputTextField integer = assertHasInputTextField(home, "Integer");
+		CompositeOperation init = assertHasCompositeOperation(integer, "init");	
+		
+		assertGenerated(assertHasCastNode(init));
 
 	}
 	

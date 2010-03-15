@@ -26,6 +26,7 @@ public class AllModel0_4_4CodegenTests {
 		suite.addTestSuite(LabelHideShow.class);
 		suite.addTestSuite(LabelHideShowSession.class);
 		suite.addTestSuite(TextFieldAnnotation.class);
+		suite.addTestSuite(InputTextFieldDataTypeSync.class);
 
 		return suite;
 	}

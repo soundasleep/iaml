@@ -608,6 +608,7 @@ function can_cast(value, type) {
 	debug("can_cast('" + value + "', '" + type + "')");
 	switch (type) {
 		// casting to string
+		case "":
 		case "http://openiaml.org/model/datatypes#iamlString":
 			// can always convert anything to a String
 			return true;
@@ -744,6 +745,7 @@ function do_cast(value, type) {
 	debug("do_cast('" + value + "', '" + type + "')");
 	switch (type) {
 		// casting to string
+		case "":
 		case "http://openiaml.org/model/datatypes#iamlString":
 			// a date?
 			if (value instanceof Date) {

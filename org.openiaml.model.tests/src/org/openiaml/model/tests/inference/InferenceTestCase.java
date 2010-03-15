@@ -904,6 +904,16 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	
 	/**
 	 * Assert that the given element contains the given
+	 * Parameter.
+	 *
+	 * @return The element found
+	 */
+	public Parameter assertHasParameter(CompositeCondition element, String string) throws JaxenException {
+		return (Parameter) queryOne(element, "iaml:parameters[iaml:name='" + string + "']");	
+	}
+	
+	/**
+	 * Assert that the given element contains the given
 	 * QueryParameter.
 	 *
 	 * @return The element found

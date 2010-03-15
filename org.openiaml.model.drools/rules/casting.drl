@@ -1,0 +1,123 @@
+/**
+ * Rules related to casting (can_cast).
+ */
+package org.openiaml.model.drools.rules.validate
+
+#list any import classes here.
+import org.openiaml.model.drools.*;
+
+import org.openiaml.model.inference.*;
+import org.openiaml.model.model.*;
+import org.openiaml.model.model.impl.*;
+import org.openiaml.model.model.wires.*;
+import org.openiaml.model.model.visual.*;
+import org.openiaml.model.model.operations.*;
+import org.openiaml.model.model.scopes.*;
+import org.openiaml.model.model.components.*;
+import org.openiaml.model.model.users.*;
+
+#declare any global variables here
+global EcoreCreateElementsHelper handler;
+global DroolsInsertionQueue queue;
+global DroolsHelperFunctions functions;
+
+/**
+ * @inference InputTextField
+ *		{@model InputTextField}s will contain a {@model Condition} named 'can cast?'.
+ */
+rule "Create 'can cast?' condition for InputTextFields"
+	when
+		tf : InputTextField( )
+		not ( condition : Condition ( name == "can cast?", eContainer == tf ))
+	
+	then
+		CompositeCondition condition = handler.generatedCompositeCondition(tf, tf);
+		handler.setName(condition, "can cast?");
+		queue.add(condition, drools);
+
+end
+
+rule "Create contents of 'can cast?' condition"
+	when
+		tf : InputTextField( )
+		fieldValue : Property ( name == "fieldValue", eContainer == tf )
+		c : CompositeCondition ( name == "can cast?", eContainer == tf )
+		
+		not ( start : StartNode ( eContainer == c ))
+	
+	then
+		StartNode start = handler.generatedStartNode(c, c);		
+		queue.add(start, drools);
+		
+		Parameter param = handler.generatedParameter(c, c);
+		handler.setName(param, "value");
+		queue.add(param, drools);
+		
+		CastNode cast = handler.generatedCastNode(c, c);
+		queue.add(cast, drools);
+		
+		DecisionCondition check = handler.generatedDecisionCondition(c, c);
+		handler.setName(check, "can cast?");
+		queue.add(check, drools);
+		
+		CancelNode cancel = handler.generatedCancelNode(c, c);
+		queue.add(cancel, drools);
+		
+		FinishNode finish = handler.generatedFinishNode(c, c);
+		queue.add(finish, drools);
+		
+		DataFlowEdge castIn = handler.generatedDataFlowEdge(c, c, param, cast);
+		queue.add(castIn, drools);
+
+		DataFlowEdge castOut = handler.generatedDataFlowEdge(c, c, cast, fieldValue);
+		queue.add(castOut, drools);
+
+		DataFlowEdge castCheck = handler.generatedDataFlowEdge(c, c, cast, check);
+		queue.add(castCheck, drools);
+		
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(c, c, start, check);
+		queue.add(edge1, drools);
+
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(c, c, check, cancel);
+		handler.setName(edge2, "no");
+		queue.add(edge2, drools);
+
+		ExecutionEdge edge3 = handler.generatedExecutionEdge(c, c, check, finish);
+		handler.setName(edge3, "yes");
+		queue.add(edge3, drools);
+
+end
+
+/**
+ * @inference InputTextField,SyncWire
+ *		A {@model SyncWire} connecting two elements with a {@model Condition} 'can sync?'
+ *		will only {@model ConditionEdge permit} synchronisation if the value can be {@model CastNode cast successfully}.
+ */
+rule "Add 'can cast?' condition check for onEdit connecting to Update"
+	when
+		source : Editable ( )
+		target : ContainsOperations ( )
+		
+		sw : SyncWire ( )
+		eval ( functions.connects(sw, source, target) )
+		
+		fieldValue : Property ( eContainer == source, name == "fieldValue" )		
+
+		event : EventTrigger ( source.onEdit == event )
+		upd : Operation ( name == "update", eContainer == target )
+		
+		run : RunAction ( from == event, to == upd )
+		
+		condition : Condition ( name == "can cast?", eContainer == target )
+		
+		not ( ce : ConditionEdge ( from == condition, to == run )) 
+	
+	then
+		ConditionEdge ce = handler.generatedConditionEdge(sw, sw, condition, run);
+		handler.setName(ce, "prevent incompatible types");
+		queue.add(ce, drools);
+		
+		ParameterEdge param = handler.generatedParameterEdge(ce, sw, fieldValue, ce);
+		queue.add(param, drools);		
+	
+end

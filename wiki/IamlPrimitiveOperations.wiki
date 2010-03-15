@@ -111,12 +111,12 @@ Part of an AccessControlHandler. Checks that the current User Instance incoming 
 
 ==hide==
 
-|| *Added in* || [Model0_5#Model0.4.4 Model 0.4.4] ||
+|| *Added in* || [http://code.google.com/p/iaml/wiki/Model0_5#Model_0.4.4 Model 0.4.4] ||
 
 Hides the containing visible thing, if it is visible. The visibility state either persists across the containing Session, or the InternetApplication.
 
 ==show==
 
-|| *Added in* || [Model0_5#Model0.4.4 Model 0.4.4] ||
+|| *Added in* || [http://code.google.com/p/iaml/wiki/Model0_5#Model_0.4.4 Model 0.4.4] ||
 
 Shows the containing visible thing, if it is hidden. The visibility state either persists across the containing Session, or the InternetApplication.

@@ -168,11 +168,10 @@ public class InputTextFieldDataType extends CodegenTestCase {
 	}
 
 	public void testDateTimeDateTime() throws Exception {
-		Calendar c = Calendar.getInstance();
+		Calendar c = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
 		c.clear();
-		c.setTimeZone(TimeZone.getTimeZone("UTC"));
 		c.set(1998, 11, 25);
-		doTypeTest("Date/Time", "25 dec 1998", rfc2822( c.getTime() ));
+		doTypeTest("Date/Time", "25 dec 1998 +0000", rfc2822( c.getTime() ));
 	}
 
 	public void testDateTimeInvalid() throws Exception {

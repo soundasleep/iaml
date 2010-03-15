@@ -9,6 +9,9 @@
  * @implementation Label
  *   The value of {@model Property} 'fieldValue' of a {@model Label}
  *   overrides the value of the Label.defaultValue attribute.
+ * @implementation Label
+ *		Any {@model VisibleThing children} of a {@model Label} are also rendered
+ *		as part of that Label.
  */
 «DEFINE renderLabel(model::visual::Frame currentFrame) FOR model::visual::Label-»
 	<label
@@ -59,6 +62,9 @@
 	«EXPAND getInitialValuesSyncWire(currentFrame) FOREACH outWires.typeSelect(model::wires::SyncWire)» 			 
 	«EXPAND getInitialValuesSyncWire(currentFrame) FOREACH inWires.typeSelect(model::wires::SyncWire)» 
 	«EXPAND getInitialValuesSetWire(currentFrame) FOREACH inWires.typeSelect(model::wires::SetWire)» 			 
+	
+		«REM»expand all children«ENDREM»
+		«EXPAND Render::renderVisual(currentFrame) FOREACH children-»
 	</label>
 	
 	«EXPAND EventHandlers::getScriptClickDefinition(currentFrame)»

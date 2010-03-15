@@ -5,6 +5,11 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
+/**
+ * @implementation InputForm
+ *		Any {@model VisibleThing children} of a {@model InputForm} are also rendered
+ *		as part of that InputForm.
+ */
 «DEFINE renderForm(model::visual::Frame currentFrame) FOR model::visual::InputForm-»
 	<form id="«safeNameString(id)»" 
 			onChange="return onChange_«safeNameString(id)»(this);"
@@ -34,7 +39,8 @@
 		</script>
 		<h2>«formName()»</h2>
 		
-		«EXPAND Render::renderVisual(currentFrame) FOREACH children.typeSelect(model::VisibleThing)-»
+		«REM»expand all children«ENDREM»
+		«EXPAND Render::renderVisual(currentFrame) FOREACH children-»
 	</form>
 «ENDDEFINE»
 

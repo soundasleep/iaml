@@ -108,3 +108,15 @@ Part of a UserInstance. Removes the given Permission (parameter) from the given 
   _TODO: Incomplete documentation._
 
 Part of an AccessControlHandler. Checks that the current User Instance incoming to the AccessControlHandler has the correct permissions.
+
+==hide==
+
+|| *Added in* || [Model0_5#Model0.4.4 Model 0.4.4] ||
+
+Hides the containing visible thing, if it is visible. The visibility state either persists across the containing Session, or the InternetApplication.
+
+==show==
+
+|| *Added in* || [Model0_5#Model0.4.4 Model 0.4.4] ||
+
+Shows the containing visible thing, if it is hidden. The visibility state either persists across the containing Session, or the InternetApplication.

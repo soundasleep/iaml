@@ -33,7 +33,9 @@
     <genClasses image="false" ecoreClass="iaml.ecore#//Operation">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Operation/parameters"/>
     </genClasses>
-    <genClasses ecoreClass="iaml.ecore#//Parameter"/>
+    <genClasses ecoreClass="iaml.ecore#//Parameter">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//Parameter/type"/>
+    </genClasses>
     <genClasses ecoreClass="iaml.ecore#//PrimitiveOperation"/>
     <genClasses ecoreClass="iaml.ecore#//CompositeOperation">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeOperation/nodes"/>

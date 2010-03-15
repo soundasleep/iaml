@@ -99,6 +99,28 @@ rule "Create components of 'update', 'refresh', 'init' operations"
 		handler.setName(parameter, "setValueTo");
 		queue.add(parameter, drools);
 		
+		// need to add 'cast' node
+		CastNode cast = handler.generatedCastNode(o, o);
+		queue.add(cast, drools);
+		
+		DecisionOperation check = handler.generatedDecisionOperation(o, o);
+		handler.setName(check, "can cast?");
+		queue.add(check, drools);
+		
+		DataFlowEdge castIn = handler.generatedDataFlowEdge(o, o, parameter, cast);
+		queue.add(castIn, drools);
+
+		DataFlowEdge castOut = handler.generatedDataFlowEdge(o, o, cast, field);
+		queue.add(castOut, drools);
+
+		DataFlowEdge castCheck = handler.generatedDataFlowEdge(o, o, cast, check);
+		queue.add(castCheck, drools);
+		
+		CancelNode cancel = handler.generatedCancelNode(o, o);
+		handler.setExceptionText(cancel, "Could not cast successfully.");
+		queue.add(cancel, drools);
+		// end add 'cast' node
+		
 		PrimitiveOperation op = handler.generatedPrimitiveOperation(o, o);
 		handler.setName(op, "setPropertyToValue");
 		queue.add(op, drools);
@@ -110,7 +132,7 @@ rule "Create components of 'update', 'refresh', 'init' operations"
 		queue.add(finish, drools);
 		
 		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);
-		handler.setFrom(data1, parameter);
+		handler.setFrom(data1, cast);
 		handler.setTo(data1, op);
 		queue.add(data1, drools);
 
@@ -119,14 +141,18 @@ rule "Create components of 'update', 'refresh', 'init' operations"
 		handler.setTo(data2, field);
 		queue.add(data2, drools);
 		
-		ExecutionEdge edge1 = handler.generatedExecutionEdge(o, o);
-		handler.setFrom(edge1, start);
-		handler.setTo(edge1, op);
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(o, o, start, check);
 		queue.add(edge1, drools);
+		
+		ExecutionEdge checkFail = handler.generatedExecutionEdge(o, o, check, cancel);
+		handler.setName(checkFail, "no");
+		queue.add(checkFail, drools);
 
-		ExecutionEdge edge2 = handler.generatedExecutionEdge(o, o);
-		handler.setFrom(edge2, op);
-		handler.setTo(edge2, finish);
+		ExecutionEdge checkPass = handler.generatedExecutionEdge(o, o, check, op);
+		handler.setName(checkPass, "yes");
+		queue.add(checkPass, drools);
+		
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(o, o, op, finish);
 		queue.add(edge2, drools);
 
 end

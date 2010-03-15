@@ -21,6 +21,7 @@ public class AllModel0_4_4CodegenTests {
 		TestSuite suite = new TestSuite("Model 0.4.4");
 		
 		suite.addTestSuite(CanCastCondition.class);
+		suite.addTestSuite(InputTextFieldDataType.class);
 
 		return suite;
 	}

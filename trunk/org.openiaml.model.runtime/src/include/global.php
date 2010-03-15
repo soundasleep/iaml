@@ -458,6 +458,7 @@ function can_cast($value, $type) {
 	log_message("can_cast('" . print_r($value, true) . "', '$type')");
 	switch ($type) {
 		// casting to string
+		case "":
 		case "http://openiaml.org/model/datatypes#iamlString":
 			// can always convert anything to a String
 			return true;
@@ -577,6 +578,7 @@ function do_cast($value, $type) {
 	log_message("do_cast('" . print_r($value, true) . "', '$type')");
 	switch ($type) {
 		// casting to string
+		case "":
 		case "http://openiaml.org/model/datatypes#iamlString":
 			// a date?
 			if ($value instanceof DateTime) {

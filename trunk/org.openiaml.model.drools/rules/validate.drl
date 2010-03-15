@@ -48,6 +48,7 @@ rule "When two TextFields of different types are under a SyncWire, add a 'valida
 		eval ( functions.connects(sw, e1, e2) )
 		
 		eval ( e1.getType() != e2.getType() )
+		eval ( e2.getType() != null )
 		
 		not ( op : Operation ( name == "validate", eContainer == e1 ))
 		
@@ -115,6 +116,9 @@ rule "Create contents of 'validate' operation"
 		handler.setName(check, "can cast?");
 		queue.add(check, drools);
 		
+		ExecutionEdge step1 = handler.generatedExecutionEdge(o, o, start, check);
+		queue.add(step1, drools);
+		
 		CastNode cast = handler.generatedCastNode(o, o);
 		queue.add(cast, drools);
 		
@@ -154,7 +158,7 @@ rule "Create contents of 'validate' operation"
 		// parameter for update
 		StaticValue message = handler.generatedStaticValue(o, o);
 		handler.setName(message, "failure message");
-		handler.setValue(message, "Invalid input.");
+		handler.setValue(message, "Warning: Invalid input.");
 		queue.add(message, drools);
 		
 		ParameterEdge param = handler.generatedParameterEdge(o, o, message, runUpdate);

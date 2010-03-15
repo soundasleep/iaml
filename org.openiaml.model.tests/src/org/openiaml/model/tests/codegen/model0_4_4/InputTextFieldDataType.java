@@ -3,8 +3,9 @@
  */
 package org.openiaml.model.tests.codegen.model0_4_4;
 
-import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 import org.eclipse.core.resources.IFile;
 import org.openiaml.model.tests.CodegenTestCase;
@@ -12,7 +13,7 @@ import org.openiaml.model.tests.CodegenTestCase;
 /**
  * Tests the representation of the different data types for
  * InputTextFields; for example, we cannot enter in strings
- * into a number field.
+ * into a number field. The fields are cleared if it fails.
  */
 public class InputTextFieldDataType extends CodegenTestCase {
 	
@@ -139,21 +140,21 @@ public class InputTextFieldDataType extends CodegenTestCase {
 	 * Test setting 'Integer' type to a String that contains Integers.
 	 */
 	public void testIntegerStringWithNumbers() throws Exception {
-		doTypeTest("Integer", "Hello, world! 456", "456");
+		doTypeTest("Integer", "Hello, world! 456", "");
 	}
 	
 	/**
 	 * Test setting 'Integer' type to a String that contains Integers.
 	 */
 	public void testIntegerStringWithNumbers2() throws Exception {
-		long date = 12345678;		// sec since epoch
-		doTypeTest("Integer", rfc2822( new Date(date * 1000) ), Long.toString(date));
-	}
-	
-	public void testIntegerDate() throws Exception {
-		doTypeTest("Integer", "Hello, world! 789 Goodbye, world", "789");
+		doTypeTest("Integer", "Hello, world! 789 Goodbye, world", "");
 	}
 
+	public void testIntegerDate() throws Exception {
+		long date = 12345678;		// sec since epoch
+		doTypeTest("Integer", rfc2822( new Date(date * 1000) ), "");
+	}
+	
 	public void testEmailEmail() throws Exception {
 		doTypeTest("Email", "hello@openiaml.org", "hello@openiaml.org");
 	}
@@ -167,7 +168,11 @@ public class InputTextFieldDataType extends CodegenTestCase {
 	}
 
 	public void testDateTimeDateTime() throws Exception {
-		doTypeTest("Date/Time", "25 dec 1998", rfc2822( new SimpleDateFormat().parse("25 dec 1998") ));
+		Calendar c = Calendar.getInstance();
+		c.clear();
+		c.setTimeZone(TimeZone.getTimeZone("UTC"));
+		c.set(1998, 11, 25);
+		doTypeTest("Date/Time", "25 dec 1998", rfc2822( c.getTime() ));
 	}
 
 	public void testDateTimeInvalid() throws Exception {

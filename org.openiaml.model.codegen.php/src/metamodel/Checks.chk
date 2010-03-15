@@ -127,6 +127,8 @@ context model::PrimitiveOperation WARNING "Unknown primitive operation name '" +
 		name == "equal?" || name == "add role" ||
 		name == "add permission" || name == "remove role" ||
 		name == "remove permission" || name == "check permissions" ||
+		(model::VisibleThing.isInstance(eContainer) &&
+			(name == "hide" || name == "show")) || 
 		name == "true?" || name == "can cast?");
 
 context model::operations::Arithmetic ERROR "Arithmetic must have at least one incoming data source edge" :

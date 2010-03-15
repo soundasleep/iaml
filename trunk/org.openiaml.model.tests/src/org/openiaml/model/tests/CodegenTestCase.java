@@ -767,6 +767,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * Helper method: Assert that there has been a problem.
 	 */
 	protected void assertProblem() {
+		resetDebug();
 		assertMatch("(Error|error|Exception|exception)");
 	}
 	
@@ -774,9 +775,21 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * Helper method: Assert that there has not been a problem.
 	 */
 	protected void assertNoProblem() {
+		resetDebug();
 		assertNoMatch("(Error|error|Exception|exception)");
 	}
 
+	/**
+	 * Reset the debug dialog text, improving the accuracy of methods
+	 * like {@link #assertNoProblem()}.
+	 */
+	public void resetDebug() {
+		if (hasElementById("debug")) {
+			IElement debug = getElementById("debug");
+			debug.setTextContent("");
+		}
+	}
+	
 	/**
 	 * We wrap the method to try and catch runtime exceptions
 	 * from the PHP server-side code.

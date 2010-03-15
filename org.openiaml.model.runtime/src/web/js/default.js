@@ -73,7 +73,7 @@ var store_event_queued = false;
 /* approach #2: use event queues stored on the server, if the function is
    not available on the current frame */
 function store_event(frame_id, event_name, arg0) {
-	var url = 'store_event.php?frame_id=' + escape(frame_id) + '&event_name=' + escape(event_name) + "&arg0=" + escape(arg0);
+	var url = 'store_event.php?frame_id=' + encodeURIComponent(frame_id) + '&event_name=' + encodeURIComponent(event_name) + "&arg0=" + encodeURIComponent(arg0);
 	execute_queued_url(url, 'store_event', false);
 }
 
@@ -251,70 +251,70 @@ function next_store_event() {
 
 /* save directly to database (only one attribute) */
 function store_db(attribute_id, arg0) {
-	var url = 'store_db.php?attribute_id=' + escape(attribute_id) + '&frame=' + escape(frame_id) + '&arg0=' + escape(arg0);
+	var url = 'store_db.php?attribute_id=' + encodeURIComponent(attribute_id) + '&frame=' + encodeURIComponent(frame_id) + '&arg0=' + encodeURIComponent(arg0);
 	execute_queued_url(url, 'store_db', false);
 }
 
 /* save a session variable (only one attribute) */
 function set_session(id, arg0, function_queue) {
-	var url = 'set_session.php?id=' + escape(id) + '&frame=' + escape(frame_id) + '&arg0=' + escape(arg0);
+	var url = 'set_session.php?id=' + encodeURIComponent(id) + '&frame=' + encodeURIComponent(frame_id) + '&arg0=' + encodeURIComponent(arg0);
 	execute_queued_url(url, 'set_session', function_queue);
 }
 
 /* save a server variable (only one attribute) */
 function set_application_value(id, arg0, function_queue) {
-	var url = 'set_application_value.php?id=' + escape(id) + '&frame=' + escape(frame_id) + '&arg0=' + escape(arg0);
+	var url = 'set_application_value.php?id=' + encodeURIComponent(id) + '&frame=' + encodeURIComponent(frame_id) + '&arg0=' + encodeURIComponent(arg0);
 	execute_queued_url(url, 'set_application_value', function_queue);
 }
 
 /* save a domain instance variable */
 function set_domain_attribute(id, arg0, function_queue) {
-	var url = 'set_domain_attribute.php?id=' + escape(id) + '&frame=' + escape(frame_id) + '&arg0=' + escape(arg0);
+	var url = 'set_domain_attribute.php?id=' + encodeURIComponent(id) + '&frame=' + encodeURIComponent(frame_id) + '&arg0=' + encodeURIComponent(arg0);
 	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
 function queued_new_domain_instance(id, function_queue) {
-	var url = 'new_domain_instance.php?id=' + escape(id) + '&frame=' + escape(frame_id);
+	var url = 'new_domain_instance.php?id=' + encodeURIComponent(id) + '&frame=' + encodeURIComponent(frame_id);
 	execute_queued_url(url, 'new_domain_instance', function_queue);
 }
 
 function save_queued_store_domain_attribute(id, function_queue) {
-	var url = 'save_queued_attribute.php?id=' + escape(id) + '&frame=' + escape(frame_id);
+	var url = 'save_queued_attribute.php?id=' + encodeURIComponent(id) + '&frame=' + encodeURIComponent(frame_id);
 	execute_queued_url(url, 'queued_store_attribute', function_queue);
 }
 
 function save_queued_store_domain_object(id, function_queue) {
-	var url = 'save_queued_store_domain_object.php?id=' + escape(id) + '&frame=' + escape(frame_id);
+	var url = 'save_queued_store_domain_object.php?id=' + encodeURIComponent(id) + '&frame=' + encodeURIComponent(frame_id);
 	execute_queued_url(url, 'queued_store_object', function_queue);
 }
 
 function queued_add_role(role_id, instance_id, function_queue) {
-	var url = 'add_role.php?role_id=' + escape(role_id) + '&instance_id=' + escape(instance_id) + '&frame=' + escape(frame_id);
+	var url = 'add_role.php?role_id=' + encodeURIComponent(role_id) + '&instance_id=' + encodeURIComponent(instance_id) + '&frame=' + encodeURIComponent(frame_id);
 	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
 function queued_add_permission(permission_id, instance_id, function_queue) {
-	var url = 'add_permission.php?permission_id=' + escape(permission_id) + '&instance_id=' + escape(instance_id) + '&frame=' + escape(frame_id);
+	var url = 'add_permission.php?permission_id=' + encodeURIComponent(permission_id) + '&instance_id=' + encodeURIComponent(instance_id) + '&frame=' + encodeURIComponent(frame_id);
 	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
 function queued_remove_role(role_id, instance_id, function_queue) {
-	var url = 'remove_role.php?role_id=' + escape(role_id) + '&instance_id=' + escape(instance_id) + '&frame=' + escape(frame_id);
+	var url = 'remove_role.php?role_id=' + encodeURIComponent(role_id) + '&instance_id=' + encodeURIComponent(instance_id) + '&frame=' + encodeURIComponent(frame_id);
 	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
 function queued_remove_permission(permission_id, instance_id, function_queue) {
-	var url = 'remove_permission.php?permission_id=' + escape(permission_id) + '&instance_id=' + escape(instance_id) + '&frame=' + escape(frame_id);
+	var url = 'remove_permission.php?permission_id=' + encodeURIComponent(permission_id) + '&instance_id=' + encodeURIComponent(instance_id) + '&frame=' + encodeURIComponent(frame_id);
 	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
 /* call a remote operation (only one attribute) */
 function call_remote_event(container, operation_name, arg0, arg1, function_queue) {
-	var url = 'call_remote_event.php?container=' + escape(container)
-		+ '&frame=' + escape(frame_id)
-		+ '&operation_name=' + escape(operation_name)
-		+ '&arg0=' + escape(arg0)
-		+ '&arg1=' + escape(arg1);
+	var url = 'call_remote_event.php?container=' + encodeURIComponent(container)
+		+ '&frame=' + encodeURIComponent(frame_id)
+		+ '&operation_name=' + encodeURIComponent(operation_name)
+		+ '&arg0=' + encodeURIComponent(arg0)
+		+ '&arg1=' + encodeURIComponent(arg1);
 	execute_queued_url(url, 'remote_event', function_queue);
 }
 
@@ -716,7 +716,9 @@ function can_cast(value, type) {
  * <p>Example: <code>Tue, 19 Jan 2038 03:14:07 +0000</code>
  */
 function rfc2822(date) {
-	function pad(n) { return n < 10 ? '0'+n : n}
+	function pad(n) { 
+		return n < 10 ? '0' + n : n; 
+	}
 	function pad4(n) {
 		return n < 10 ? '000' + n :
 			(n < 100 ? '00' + n :

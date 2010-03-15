@@ -14,6 +14,21 @@
 	<label
 		id="«safeNameString(id)-»" 
 		«EXPAND EventHandlers::getInlineClickJavascript(currentFrame)»
+		«REM»has it been hidden by anything?«ENDREM»
+		<?php
+		/* has this label been hidden by anything? */
+		if (
+		«IF containingSession() != null»
+			(require_session("«safeName(containingSession())»_«safeName()»_hidden", null) !== null)
+			&& require_session("«safeName(containingSession())»_«safeName()»_hidden") 
+		«ELSE»
+			(get_application_value("«safeName()»_hidden", null) !== null)
+			&& get_application_value("«safeName()»_hidden") 
+		«ENDIF»
+		) {
+			echo 'style="display: none;"';
+		}
+		?>
 		> 
 
 	<?php $label_set = false; ?>

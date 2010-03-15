@@ -20,11 +20,11 @@
 	/* simple operation */
 	«IF php»
 	function do_«safeName()»(«EXPAND Parameters::signatures(php) FOREACH parameters.sortBy(p|p.name) SEPARATOR ", "-») {
-		log_message("simple operation: «name»");
+		«EXPAND template::operations::Contents::operationContents(null, container, php) FOR this»
 	}
 	«ELSE»
 	function do_«safeName()»(«EXPAND Parameters::signatures(php) FOREACH parameters.sortBy(p|p.name) SEPARATOR ", "-») {
-		alert("simple operation: «name»");
+		«EXPAND template::operations::Contents::operationContents(null, container, php) FOR this»
 	}
 	«ENDIF»
 «ENDDEFINE»

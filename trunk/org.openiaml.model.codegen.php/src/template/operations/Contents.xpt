@@ -21,6 +21,10 @@
 		«EXPAND setOperation(start, container, php) FOR this»
 	«ELSEIF name == "javascriptAlert"»
 		«EXPAND javascriptAlert(start, container, php) FOR this»
+	«ELSEIF name == "hide"»
+		«EXPAND hideOperation(start, container, php) FOR this»
+	«ELSEIF name == "show"»
+		«EXPAND showOperation(start, container, php) FOR this»
 	«ELSE»
 		«throwException("Unknown function to expand '" + name + "': " + this)»
 	«ENDIF»
@@ -302,6 +306,76 @@
 		$temp_«safeName(outFlows.first().to)» = «EXPAND DataFlow::dataSource(php, container) FOR inFlows.first().from-»;
 	«ELSE»
 		temp_«safeName(outFlows.first().to)» = «EXPAND DataFlow::dataSource(php, container) FOR inFlows.first().from-»;
+	«ENDIF»
+
+	«REM»continue«ENDREM»
+	«FOREACH outExecutions AS e-»
+		«EXPAND ExecutionFlow::addStack(start, php) FOR e»
+	«ENDFOREACH»
+«ENDDEFINE»
+
+/**
+ * Hide a visible thing.
+ */
+«DEFINE hideOperation(model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::PrimitiveOperation-»
+	/* hide a visible thing: «this» */
+	«IF php»
+		// server-side: set property for later
+		«IF containingSession(eContainer) != null»
+			$_SESSION["«safeName(containingSession(eContainer))»_«safeName(eContainer)»_hidden"] = true;
+		«ELSE»
+			set_application_value("«safeName(eContainer)»_hidden", true);
+		«ENDIF»
+	«ELSE»
+		// client-side
+		«IF containingFrame(eContainer) == container»
+			// it exists on this page
+			document.getElementById('«safeName(eContainer)»').style.display = "none";
+		«ELSE»
+			// it doesn't exist on this page
+		«ENDIF»
+		
+		// persist properties
+		«IF containingSession(eContainer) != null»
+			set_session("«safeName(containingSession(eContainer))»_«safeName(eContainer)»_hidden", true);
+		«ELSE»
+			set_application_value("«safeName(eContainer)»_hidden", true);
+		«ENDIF»
+	«ENDIF»
+
+	«REM»continue«ENDREM»
+	«FOREACH outExecutions AS e-»
+		«EXPAND ExecutionFlow::addStack(start, php) FOR e»
+	«ENDFOREACH»
+«ENDDEFINE»
+
+/**
+ * Show a visible thing.
+ */
+«DEFINE showOperation(model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::PrimitiveOperation-»
+	/* show a visible thing: «this» */
+	«IF php»
+		// server-side: set property for later
+		«IF containingSession(eContainer) != null»
+			$_SESSION["«safeName(containingSession(eContainer))»_«safeName(eContainer)»_hidden"] = false;
+		«ELSE»
+			set_application_value("«safeName(eContainer)»_hidden", false);
+		«ENDIF»
+	«ELSE»
+		// client-side
+		«IF containingFrame(eContainer) == container»
+			// it exists on this page
+			document.getElementById('«safeName(eContainer)»').style.display = "";
+		«ELSE»
+			// it doesn't exist on this page
+		«ENDIF»
+		
+		// persist properties
+		«IF containingSession(eContainer) != null»
+			set_session("«safeName(containingSession(eContainer))»_«safeName(eContainer)»_hidden", false);
+		«ELSE»
+			set_application_value("«safeName(eContainer)»_hidden", false);
+		«ENDIF»
 	«ENDIF»
 
 	«REM»continue«ENDREM»

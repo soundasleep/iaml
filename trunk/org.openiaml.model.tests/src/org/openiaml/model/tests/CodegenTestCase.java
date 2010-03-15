@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.TimeZone;
@@ -869,18 +870,20 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	
 	/**
 	 * Assert that a label <em>does not</em> exist with the given text.
+	 * A label is also defined to not exist if it does exist, but it has
+	 * a <code>style</code> property containing "<code>display: none;</code>".
 	 * 
 	 * @param text
 	 */
 	public void assertLabelTextNotPresent(String text) {
-		boolean failed = false;
-		try {
-			getElementByXPath("//label[" + getContainsTextXPath(text) + "]");
-			failed = true;
-		} catch (AssertionFailedError e) {
-			// expected
+		List<IElement> results = getElementsByXPath("//label[" + getContainsTextXPath(text) + "]");
+		for (IElement e : results) {
+			if (e.getAttribute("style") != null && e.getAttribute("style").contains("display: none;")) {
+				// this element essentially is invisible
+			} else {
+				fail("Unexpectedly found a label with text '" + text + "': " + e);
+			}			
 		}
-		assertFalse("Unexpectedly found a label with text '" + text + "'", failed);
 	}
 	
 	/**

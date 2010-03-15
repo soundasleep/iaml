@@ -412,6 +412,82 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 		
 	}
 	
-	// TODO check that inputs are correctly cast in 'update'
+	/**
+	 * onAccess should only call 'init' if the source value can be
+	 * cast correctly.
+	 * 
+	 * @throws Exception
+	 */
+	public void testOnAccessCallsCanCastCondition() throws Exception {
+		
+		root = loadAndInfer(InputTextFieldDataTypeSync.class);
+		Frame home = assertHasFrame(root, "Home");
+		
+		InputTextField integer = assertHasInputTextField(home, "Integer");
+		InputTextField email = assertHasInputTextField(home, "Email 2");
+		
+		EventTrigger onAccess = integer.getOnAccess();
+		Operation init = assertHasOperation(integer, "init");		
+		Property emailValue = assertHasFieldValue(email);
+		
+		// Integer.onInit should call Integer.update(Email.fieldValue)
+		RunAction run = assertHasRunAction(root, onAccess, init);
+		assertHasParameterEdge(root, emailValue, run);
+		
+		// now make sure that the condition is connected
+		CompositeCondition canCast = assertHasCompositeCondition(integer, "can cast?");
+		
+		ConditionEdge edge = assertHasConditionEdge(root, canCast, run);
+		assertHasParameterEdge(root, emailValue, edge);
+		
+	}
+	
+	/**
+	 * onAccess should call 'validate', but only <em>after</em>
+	 * the other onInit calls have executed (i.e. a lower priority). 
+	 *  
+	 * @throws Exception
+	 */
+	public void testOnAccessCallsValidate() throws Exception {
+		
+		root = loadAndInfer(InputTextFieldDataTypeSync.class);
+		Frame home = assertHasFrame(root, "Home");
+		
+		InputTextField integer = assertHasInputTextField(home, "Integer");
+		
+		EventTrigger onAccess = integer.getOnAccess();
+		Operation init = assertHasOperation(integer, "init");		
+		
+		// Integer.onInit should call Integer.update(Email.fieldValue)
+		RunAction runInit = assertHasRunAction(root, onAccess, init);
+		
+		// validate operation is also called
+		CompositeOperation validate = assertHasCompositeOperation(integer, "validate");
+		RunAction runValidate = assertHasRunAction(root, onAccess, validate);
+		
+		// it should be a lower priority
+		assertTrue("Run priority '" + runValidate.getPriority() + "' should be lower than '" + runInit.getPriority() + "'", 
+				runValidate.getPriority() < runInit.getPriority());
+			
+	}
+	
+	/**
+	 * There should be a cast node within the 'update' operation.
+	 * We will leave other inference test methods to check that the operation is
+	 * constructed correctly.
+	 * 
+	 * @throws Exception
+	 */
+	public void testInputsAreCastInUpdate() throws Exception {
+		
+		root = loadAndInfer(InputTextFieldDataTypeSync.class);
+		Frame home = assertHasFrame(root, "Home");
+		
+		InputTextField integer = assertHasInputTextField(home, "Integer");
+		CompositeOperation update = assertHasCompositeOperation(integer, "update");	
+		
+		assertGenerated(assertHasCastNode(update));
+
+	}
 	
 }

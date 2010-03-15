@@ -3,6 +3,7 @@
  */
 package org.openiaml.model.tests.codegen.model0_4_4;
 
+import org.eclipse.core.resources.IFile;
 import org.openiaml.model.tests.CodegenTestCase;
 
 /**
@@ -52,12 +53,119 @@ public class InputTextFieldDataTypeSync extends CodegenTestCase {
 	}
 	
 	/**
-	 * String 2 to Email, with an invalid input, should have any problems.
+	 * String 2 to Email, with an invalid input, should have a problem.
 	 */
-	public void testStringToEmailInalid() throws Exception {
-		doInputWithWarnings("String 2", "Email", "invalid e-mail address", "test@openiaml.org");
+	public void testStringToEmailInvalid() throws Exception {
+		doInputWithWarnings("String 2", "Email", "invalid e-mail address");
 	}
 	
+	/**
+	 * Email 2 to Integer, with an invalid input, should have a problem.
+	 */
+	public void testEmailToIntegerInvalid() throws Exception {
+		doInputWithWarnings("Email 2", "Integer", "test@openiaml.org");
+	}
+	
+	/**
+	 * Email 2 to Integer, with an invalid input, should revert back
+	 * before it can even be passed along.
+	 */
+	public void testEmailToIntegerInvalid2() throws Exception {
+		beginAtSitemapThenPage("Home");
+		{
+			String target = getLabelIDForText("Email 2");
+			assertLabeledFieldEquals(target, "");	// empty
+			
+			// we can set it to a string
+			setLabeledFormElementField(target, "123");
+			
+			// it will revert back
+			assertLabeledFieldEquals(target, "");
+		}
+		
+		// but no warning will be displayed
+		assertNoProblem();
+		
+		// and the target value should be as expected
+		{
+			String target = getLabelIDForText("Integer");
+			assertLabeledFieldEquals(target, "");	// should not change
+		}
+	}
+	
+	/**
+	 * If we insert an invalid input, a warning will display.
+	 * If we however then set it to a valid input, the warning will disappear.
+	 */
+	public void testStringToEmailInvalidThenValid() throws Exception {
+		IFile sitemap = doInputWithWarnings("String 2", "Email", "invalid e-mail address");
+		
+		// now insert in a valid e-mail address
+		{
+			String target = getLabelIDForText("String 2");
+			assertLabeledFieldEquals(target, "invalid e-mail address");	// from previous call
+			
+			// we can set it to a string
+			setLabeledFormElementField(target, "test@openiaml.org");
+			assertLabeledFieldEquals(target, "test@openiaml.org");
+		}
+		
+		// there should NOT be any warnings
+		assertNoProblem();
+		
+		// and the target value should be as expected
+		{
+			String target = getLabelIDForText("Email");
+			assertLabeledFieldEquals(target, "test@openiaml.org");
+		}
+		
+		// even if we reload the page
+		reloadPage(sitemap, "Home");
+		assertNoProblem();
+		{
+			String target = getLabelIDForText("String 2");
+			assertLabeledFieldEquals(target, "test@openiaml.org");
+		}
+		{
+			String target = getLabelIDForText("Email");
+			assertLabeledFieldEquals(target, "test@openiaml.org");
+		}
+		
+	}
+	
+	/**
+	 * If we enter in an invalid input, and refresh the page, the invalid
+	 * input should not automatically be loaded into a field that cannot
+	 * support it.
+	 * 
+	 * @throws Exception
+	 */
+	public void testInvalidInputDoesNotShowOnInit() throws Exception {
+		
+		// set the Integer to a field
+		// 'Email 2' will remain blank
+		IFile sitemap = doInputWithWarnings("Integer", "Email 2", "12345");
+		
+		// reload the page
+		reloadPage(sitemap, "Home");
+		
+		{
+			String target = getLabelIDForText("Integer");
+			assertLabeledFieldEquals(target, "12345");
+		}
+		
+		// e-mail should still be blank
+		{
+			String target = getLabelIDForText("Email 2");
+			assertLabeledFieldEquals(target, "");
+		}
+		
+		// and there should be a problem
+		assertProblem();
+		assertMatch("Invalid input.");
+		
+	}
+
 	/**
 	 * Override to check also for warnings.
 	 */
@@ -110,24 +218,40 @@ public class InputTextFieldDataTypeSync extends CodegenTestCase {
 	
 	/**
 	 * Enter in 'input' into 'fieldName'. A warning should occur, and the
-	 * target 'targetName' should NOT be changed.
+	 * target 'targetName' should NOT be changed (i.e. remain empty).
 	 * 
 	 * @param fieldName
 	 * @param targetName
 	 * @param input
-	 * @param expected
 	 * @throws Exception
+	 * @returns the sitemap
 	 */
-	protected void doInputWithWarnings(String fieldName, String targetName, String input, String expected) throws Exception {
-		
-		beginAtSitemapThenPage("Home");
+	protected IFile doInputWithWarnings(String fieldName, String targetName, String input) throws Exception {
+		return doInputWithWarnings(fieldName, targetName, input, input);
+	}
+	
+	/**
+	 * Enter in 'input' into 'fieldName'. A warning should occur, and the
+	 * target 'targetName' should NOT be changed (i.e. remain empty).
+	 * Expect that 'fieldName' will revert back to 'expected'.
+	 * 
+	 * @param fieldName
+	 * @param targetName
+	 * @param input
+	 * @throws Exception
+	 * @returns the sitemap
+	 */
+	protected IFile doInputWithWarnings(String fieldName, String targetName, String input, String expectedInput) throws Exception {
+		IFile sitemap = beginAtSitemapThenPage("Home");
 		{
 			String target = getLabelIDForText(fieldName);
 			assertLabeledFieldEquals(target, "");	// empty
 			
 			// we can set it to a string
 			setLabeledFormElementField(target, input);
-			assertLabeledFieldEquals(target, input);
+			
+			// it may be reverted
+			assertLabeledFieldEquals(target, expectedInput);
 		}
 		
 		// there should be a warning
@@ -139,6 +263,8 @@ public class InputTextFieldDataTypeSync extends CodegenTestCase {
 			String target = getLabelIDForText(targetName);
 			assertLabeledFieldEquals(target, "");	// should not change
 		}
+		
+		return sitemap;
 		
 	}
 	

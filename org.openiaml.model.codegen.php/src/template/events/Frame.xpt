@@ -5,6 +5,11 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
+/**
+ * @implementation RunAction
+ *		{@model RunAction}s are run in order of descending priority; that is,
+ *		a higher priority {@model RunAction} will execute first.
+ */
 «DEFINE runFrameEvents(model::visual::Frame currentFrame, String eventName) FOR model::EventTrigger-»
 	// Frame EventTrigger «this»
 	«IF eventName == "init" || eventName == "access"-»

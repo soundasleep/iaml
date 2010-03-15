@@ -4,6 +4,7 @@
 package org.openiaml.model.inference;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xsd.XSDSimpleTypeDefinition;
 import org.openiaml.model.model.Accessible;
 import org.openiaml.model.model.ActionDestination;
 import org.openiaml.model.model.ActionSource;
@@ -561,6 +562,14 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	
 	public void setAutosave(DomainAttributeInstance element, boolean value) throws InferenceException {
 		setValue(element, ModelPackage.eINSTANCE.getDomainAttributeInstance_Autosave(), value);
+	}
+	
+	public void setType(InputTextField element, XSDSimpleTypeDefinition value) throws InferenceException {
+		setValue(element, VisualPackage.eINSTANCE.getInputTextField_Type(), value);
+	}
+	
+	public void setType(Property element, XSDSimpleTypeDefinition value) throws InferenceException {
+		setValue(element, ModelPackage.eINSTANCE.getProperty_Type(), value);
 	}
 	
 }

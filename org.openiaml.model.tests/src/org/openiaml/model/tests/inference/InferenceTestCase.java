@@ -176,6 +176,61 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	}
 
 	/**
+	 * Assert that the given element does not contains the given
+	 * Property.
+	 *
+	 * @return The element found
+	 */
+	public void assertHasNoProperty(
+			VisibleThing element, String string) throws JaxenException {
+		assertHasNone(element, "iaml:properties[iaml:name='" + string + "']");
+	}
+
+	/**
+	 * Assert that the given element does not contains the given
+	 * Property called 'fieldValue'.
+	 *
+	 * @return The element found
+	 */
+	public void assertHasNoFieldValue(
+			ApplicationElement element) throws JaxenException {
+		assertHasNoProperty(element, "fieldValue");
+	}
+	
+	/**
+	 * Assert that the given element does not contains the given
+	 * Property called 'fieldValue'.
+	 *
+	 * @return The element found
+	 */
+	public void assertHasNoFieldValue(
+			Scope element) throws JaxenException {
+		assertHasNoProperty(element, "fieldValue");
+	}
+	
+	/**
+	 * Assert that the given element does not contains the given
+	 * Property called 'fieldValue'.
+	 *
+	 * @return The element found
+	 */
+	public void assertHasNoFieldValue(
+			VisibleThing element) throws JaxenException {
+		assertHasNoProperty(element, "fieldValue");
+	}
+	
+	/**
+	 * Assert that the given element contains the given
+	 * Property called 'fieldValue'.
+	 *
+	 * @return The element found
+	 */
+	public Property assertHasFieldValue(
+			VisibleThing element) throws JaxenException {
+		return assertHasProperty(element, "fieldValue");
+	}
+	
+	/**
 	 * Assert that the given element contains the given
 	 * Operation.
 	 *

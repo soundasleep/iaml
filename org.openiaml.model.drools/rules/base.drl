@@ -39,17 +39,38 @@ rule "Create empty domain store"
 end
 
 /**
- * @inference InputTextField,Property A {@model InputTextField} 
- * 		contains a {@model Property property} named 'fieldValue'.
+ * @inference InputTextField,Property An untyped {@model InputTextField} 
+ * 		contains an untyped {@model Property property} named 'fieldValue'.
  */
-rule "Create field value for input text field"
+rule "Create field value for input text field (untyped)"
 	when
-		f : InputTextField( overridden == false )
+		f : InputTextField( overridden == false, type == null )
 		not (Property( eContainer == f, name=="fieldValue" ))
 			
 	then
 		Property fieldValue = handler.generatedProperty(f, f);
 		handler.setName(fieldValue, "fieldValue");
+		handler.setType(fieldValue, null);
+		// set default to "" - disabled for now, as we should get an error
+		// before we access an undefined variable
+		// handler.setValue(fieldValue, ModelPackage.eINSTANCE.getProperty_DefaultValue(), "");
+		queue.add(fieldValue, drools);
+		
+end
+
+/**
+ * @inference InputTextField,Property A typed {@model InputTextField} 
+ * 		contains a typed {@model Property property} named 'fieldValue'.
+ */
+rule "Create field value for input text field (typed)"
+	when
+		f : InputTextField( overridden == false, type != null )
+		not (Property( eContainer == f, name=="fieldValue" ))
+			
+	then
+		Property fieldValue = handler.generatedProperty(f, f);
+		handler.setName(fieldValue, "fieldValue");
+		handler.setType(fieldValue, f.getType());
 		// set default to "" - disabled for now, as we should get an error
 		// before we access an undefined variable
 		// handler.setValue(fieldValue, ModelPackage.eINSTANCE.getProperty_DefaultValue(), "");

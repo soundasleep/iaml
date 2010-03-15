@@ -156,4 +156,13 @@ context model::operations::DecisionOperation ERROR "A 'can cast?' decision needs
 
 context model::operations::CastNode ERROR "A CastNode needs exactly one incoming data flow edge, had: " + inFlows.size :
 	inFlows.size == 1;
+
+/**
+ * Two types are specified to be incompatible if they are different.
+ * TODO this should be changed, because e.g. email is compatible with string in one direction. 
+ */
+context model::visual::InputTextField ERROR "InputTextField type '" + type.uRI + "' is incompatible with fieldValue type '" + properties.selectFirst(e|e.name == "fieldValue").type.uRI  + "'" :
+	type == null ||
+	properties.select(e | e.name == "fieldValue").isEmpty ||
+	properties.select(e | e.name == "fieldValue").select(e | e.type.uRI != type.uRI).isEmpty;
 	

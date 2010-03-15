@@ -22,6 +22,7 @@ public class AllModel0_4_4CodegenTests {
 		
 		suite.addTestSuite(CanCastCondition.class);
 		suite.addTestSuite(InputTextFieldDataType.class);
+		suite.addTestSuite(IncompatibleTypesInputTextField.class);
 
 		return suite;
 	}

@@ -287,7 +287,7 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 				throw new TransformationException("Transformation failed: " + transformStatus.getException().getMessage(), transformStatus.getException());	// force an exception
 			}
 			// force a fail
-			throw new TransformationException("Transformation did not pass successfully: " + transformStatus.getMessage() + (firstMessage == null ? "" : ", first message: " + firstMessage));
+			throw new TransformationException("Transformation did not pass successfully: " + transformStatus.getMessage() + (firstMessage == null ? "" : ", first message: " + firstMessage), transformStatus.getChildren());
 		}
 	}
 	
@@ -598,6 +598,17 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 		}
 		public TransformationException(String message) {
 			super(message);
+		}
+		
+		private IStatus[] children; 
+		
+		public TransformationException(String message, IStatus[] children) {
+			this(message);
+			this.children = children;
+		}
+		
+		public IStatus[] getChildren() {
+			return children;
 		}
 		
 	}

@@ -6,6 +6,8 @@ package org.openiaml.model.tests.codegen.runtime.server;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.openiaml.model.datatypes.BuiltinDataTypes;
+
 /**
  * Checks casting functions.
  * 
@@ -14,10 +16,10 @@ import java.util.Date;
  */
 public class CastFunctions extends PhpCodegenTestCase {
 	
-	public static final String TYPE_STRING = "http://openiaml.org/model/datatypes#iamlString";
-	public static final String TYPE_EMAIL = "http://openiaml.org/model/datatypes#iamlEmail";
-	public static final String TYPE_DATETIME = "http://openiaml.org/model/datatypes#iamlDateTime";
-	public static final String TYPE_INTEGER = "http://openiaml.org/model/datatypes#iamlInteger";
+	public static final String TYPE_STRING = BuiltinDataTypes.TYPE_STRING;
+	public static final String TYPE_EMAIL = BuiltinDataTypes.TYPE_EMAIL;
+	public static final String TYPE_DATETIME = BuiltinDataTypes.TYPE_DATETIME;
+	public static final String TYPE_INTEGER = BuiltinDataTypes.TYPE_INTEGER;
 	
 	private String canCastToString(String value) {
 		return "can_cast('" + value + "', '" + TYPE_STRING + "')";

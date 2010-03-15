@@ -1,0 +1,55 @@
+/**
+ * Rules related to labels.
+ */
+package org.openiaml.model.drools.rules.labels
+
+#list any import classes here.
+import org.openiaml.model.drools.*;
+
+import org.openiaml.model.inference.*;
+import org.openiaml.model.model.*;
+import org.openiaml.model.model.impl.*;
+import org.openiaml.model.model.wires.*;
+import org.openiaml.model.model.visual.*;
+import org.openiaml.model.model.operations.*;
+import org.openiaml.model.model.scopes.*;
+import org.openiaml.model.model.components.*;
+import org.openiaml.model.model.users.*;
+
+#declare any global variables here
+global EcoreCreateElementsHelper handler;
+global DroolsInsertionQueue queue;
+global DroolsHelperFunctions functions;
+
+/**
+ * @inference Label
+ *		A {@model Label} has a {@model PrimitiveOperation} called 'hide'.
+ */
+rule "Create 'hide' PrimitiveOperation for Label"
+	when
+		tf : Label( )
+		not ( op : PrimitiveOperation ( name == "hide", eContainer == tf ))
+	
+	then
+		PrimitiveOperation warning = handler.generatedPrimitiveOperation(tf, tf);
+		handler.setName(warning, "hide");
+		queue.add(warning, drools);
+	
+end
+
+/**
+ * @inference Label
+ *		A {@model Label} has a {@model PrimitiveOperation} called 'show'.
+ */
+rule "Create 'show' PrimitiveOperation for Label"
+	when
+		tf : Label( )
+		not ( op : PrimitiveOperation ( name == "show", eContainer == tf ))
+	
+	then
+		PrimitiveOperation warning = handler.generatedPrimitiveOperation(tf, tf);
+		handler.setName(warning, "show");
+		queue.add(warning, drools);
+	
+end
+

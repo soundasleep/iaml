@@ -44,6 +44,7 @@ import org.openiaml.model.model.WireSource;
 import org.openiaml.model.model.components.ComponentsPackage;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.operations.CancelNode;
+import org.openiaml.model.model.operations.CastNode;
 import org.openiaml.model.model.operations.DecisionCondition;
 import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.FinishNode;
@@ -232,6 +233,18 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 
 	public JoinNode generatedJoinNode(GeneratesElements by, CompositeOperation container) throws InferenceException {
 		JoinNode node = (JoinNode) createElement( container, OperationsPackage.eINSTANCE.getJoinNode(), ModelPackage.eINSTANCE.getCompositeOperation_Nodes() );
+		setGeneratedBy(node, by);
+		return node;
+	}
+
+	public CastNode generatedCastNode(GeneratesElements by, CompositeOperation container) throws InferenceException {
+		CastNode node = (CastNode) createElement( container, OperationsPackage.eINSTANCE.getCastNode(), ModelPackage.eINSTANCE.getCompositeOperation_Nodes() );
+		setGeneratedBy(node, by);
+		return node;
+	}
+	
+	public CastNode generatedCastNode(GeneratesElements by, CompositeCondition container) throws InferenceException {
+		CastNode node = (CastNode) createElement( container, OperationsPackage.eINSTANCE.getCastNode(), ModelPackage.eINSTANCE.getCompositeCondition_Nodes() );
 		setGeneratedBy(node, by);
 		return node;
 	}

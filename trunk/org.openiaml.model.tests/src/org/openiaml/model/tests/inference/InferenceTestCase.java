@@ -47,6 +47,7 @@ import org.openiaml.model.model.components.EntryGate;
 import org.openiaml.model.model.components.ExitGate;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.operations.CancelNode;
+import org.openiaml.model.model.operations.CastNode;
 import org.openiaml.model.model.operations.DecisionCondition;
 import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.FinishNode;
@@ -849,6 +850,27 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public void assertHasNoCancelNode(CompositeOperation element) throws JaxenException {
 		assertHasNone(element, "iaml:nodes", CancelNode.class);
 	}
+	
+	/**
+	 * Assert that the given element contains the given
+	 * CastNode.
+	 *
+	 * @return The element found
+	 */
+	public CastNode assertHasCastNode(CompositeOperation element) throws JaxenException {
+		return (CastNode) assertHasOne(element, "iaml:nodes", CastNode.class);
+	}
+	
+	/**
+	 * Assert that the given element contains the given
+	 * CastNode.
+	 *
+	 * @return The element found
+	 */
+	public CastNode assertHasCastNode(CompositeCondition element) throws JaxenException {
+		return (CastNode) assertHasOne(element, "iaml:nodes", CastNode.class);
+	}
+	
 	
 	/**
 	 * Assert that the given element contains the given

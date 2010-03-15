@@ -1,0 +1,188 @@
+/**
+ * Rules related to validation.
+ */
+package org.openiaml.model.drools.rules.validate
+
+#list any import classes here.
+import org.openiaml.model.drools.*;
+
+import org.openiaml.model.inference.*;
+import org.openiaml.model.model.*;
+import org.openiaml.model.model.impl.*;
+import org.openiaml.model.model.wires.*;
+import org.openiaml.model.model.visual.*;
+import org.openiaml.model.model.operations.*;
+import org.openiaml.model.model.scopes.*;
+import org.openiaml.model.model.components.*;
+import org.openiaml.model.model.users.*;
+
+#declare any global variables here
+global EcoreCreateElementsHelper handler;
+global DroolsInsertionQueue queue;
+global DroolsHelperFunctions functions;
+
+/**
+ * @inference InputTextField,Label
+ *		{@model InputTextField}s will contain a {@model Label} named 'Warning'.
+ */
+rule "Create 'Warning' Label for InputTextFields"
+	when
+		tf : InputTextField( )
+		not ( warning : Label ( name == "Warning", eContainer == tf ))
+	
+	then
+		Label warning = handler.generatedLabel(tf, tf);
+		handler.setName(warning, "Warning");
+		queue.add(warning, drools);
+	
+end
+
+rule "When two TextFields of different types are under a SyncWire, add a 'validate' operation"
+	when
+		e1 : InputTextField( )
+		e1_property : Property ( name == "fieldValue", eContainer == e1 )
+		e2 : InputTextField( )
+		e2_property : Property ( name == "fieldValue", eContainer == e2 )
+		eval ( e1 != e2 )
+		sw : SyncWire ( )
+		eval ( functions.connects(sw, e1, e2) )
+		
+		eval ( e1.getType() != e2.getType() )
+		
+		not ( op : Operation ( name == "validate", eContainer == e1 ))
+		
+	then
+		CompositeOperation op = handler.generatedCompositeOperation(sw, e1);
+		handler.setName(op, "validate");
+		queue.add(op, drools);
+
+end
+
+rule "When two TextFields of different types are under a SyncWire, call the 'validate' operation onEdit"
+	when
+		e1 : InputTextField( )
+		e1_property : Property ( name == "fieldValue", eContainer == e1 )
+		e2 : InputTextField( )
+		e2_property : Property ( name == "fieldValue", eContainer == e2 )
+		eval ( e1 != e2 )
+		sw : SyncWire ( )
+		eval ( functions.connects(sw, e1, e2) )
+		
+		eval ( e1.getType() != e2.getType() )
+		
+		event : EventTrigger ( e1.onEdit == event )
+		
+		op : Operation ( name == "validate", eContainer == e1 )
+		
+		not ( run : RunAction ( from == event, to == op ) )
+		
+	then
+		RunAction run = handler.generatedRunAction(sw, e1, event, op);
+		handler.setName(run, "run");
+		queue.add(run, drools);
+
+end
+
+rule "Create contents of 'validate' operation"
+	when
+		e1 : InputTextField( )
+		e1_property : Property ( name == "fieldValue", eContainer == e1 )
+		e2 : InputTextField( )
+		e2_property : Property ( name == "fieldValue", eContainer == e2 )
+		eval ( e1 != e2 )
+		sw : SyncWire ( )
+		eval ( functions.connects(sw, e1, e2) )
+		
+		eval ( e1.getType() != e2.getType() )
+		
+		o : CompositeOperation ( name == "validate", eContainer == e1 )
+		
+		warning : Label ( name == "Warning", eContainer == e1 )
+		
+		show : Operation ( name == "show", eContainer == warning )
+		hide : Operation ( name == "hide", eContainer == warning )
+		
+		upd : Operation ( name == "update", eContainer == warning )
+		
+		not ( start : StartNode ( eContainer == o ))
+		
+	then
+	
+		StartNode start = handler.generatedStartNode(o, o);
+		queue.add(start, drools);
+		
+		DecisionOperation check = handler.generatedDecisionOperation(o, o);
+		handler.setName(check, "can cast?");
+		queue.add(check, drools);
+		
+		CastNode cast = handler.generatedCastNode(o, o);
+		queue.add(cast, drools);
+		
+		DataFlowEdge castIn = handler.generatedDataFlowEdge(o, o, e1_property, cast);
+		queue.add(castIn, drools); 
+
+		DataFlowEdge castOut = handler.generatedDataFlowEdge(o, o, cast, e2_property);
+		queue.add(castOut, drools); 
+		
+		DataFlowEdge castCheck = handler.generatedDataFlowEdge(o, o, cast, check);
+		queue.add(castCheck, drools);
+		
+		OperationCallNode callHide = handler.generatedOperationCallNode(o, o);
+		handler.setName(callHide, "call hide");
+		queue.add(callHide, drools);
+		
+		RunAction runHide = handler.generatedRunAction(o, o, callHide, hide);
+		handler.setName(runHide, "run");
+		queue.add(runHide, drools);
+		 
+		OperationCallNode callShow = handler.generatedOperationCallNode(o, o);
+		handler.setName(callShow, "call show");
+		queue.add(callShow, drools);
+		
+		RunAction runShow = handler.generatedRunAction(o, o, callShow, show);
+		handler.setName(runShow, "run");
+		queue.add(runShow, drools);
+		
+		OperationCallNode callUpdate = handler.generatedOperationCallNode(o, o);
+		handler.setName(callUpdate, "update label");
+		queue.add(callUpdate, drools);
+		
+		RunAction runUpdate = handler.generatedRunAction(o, o, callUpdate, upd);
+		handler.setName(runUpdate, "run");
+		queue.add(runUpdate, drools);
+		
+		// parameter for update
+		StaticValue message = handler.generatedStaticValue(o, o);
+		handler.setName(message, "failure message");
+		handler.setValue(message, "Invalid input.");
+		queue.add(message, drools);
+		
+		ParameterEdge param = handler.generatedParameterEdge(o, o, message, runUpdate);
+		queue.add(param, drools);
+		
+		// check (pass) -> finish
+		ExecutionEdge castPass = handler.generatedExecutionEdge(o, o, check, callHide);
+		handler.setName(castPass, "yes");
+		queue.add(castPass, drools);
+		
+		FinishNode finish1 = handler.generatedFinishNode(o, o);
+		queue.add(finish1, drools);
+		
+		ExecutionEdge passFinish = handler.generatedExecutionEdge(o, o, callHide, finish1);
+		queue.add(passFinish, drools);
+		
+		// check (fail) -> finish
+		ExecutionEdge castFail = handler.generatedExecutionEdge(o, o, check, callUpdate);
+		handler.setName(castFail, "no");
+		queue.add(castPass, drools);
+		
+		ExecutionEdge castFail2 = handler.generatedExecutionEdge(o, o, callUpdate, callShow);
+		queue.add(castFail2, drools);
+		
+		FinishNode finish2 = handler.generatedFinishNode(o, o);
+		queue.add(finish2, drools);
+		
+		ExecutionEdge failFinish = handler.generatedExecutionEdge(o, o, callShow, finish2);
+		queue.add(failFinish, drools);
+		
+end

@@ -20,6 +20,7 @@ public class AllModel0_4_4InferenceTests {
 		TestSuite suite = new TestSuite("Model 0.4.4");
 		
 		suite.addTestSuite(InputTextFieldDataType.class);
+		suite.addTestSuite(InputTextFieldDataTypeSync.class);
 		
 		return suite;
 	}

@@ -60,12 +60,7 @@ public class SessionSyncWires extends InferenceTestCase {
 
 		// it should be connected to 'update'
 		RunAction rw2 = assertHasRunAction(root, init, update);
-
-		// there should only be one RunWire out of 'init'
-		assertEquals("There should only be one out action from init", 1, init.getOutActions().size());
-
-		// with the source fieldvalue as a parameter
-		assertGenerated(getParameterEdgeFromTo(session, fieldValue, rw2));
+		assertGenerated(rw2);
 
 	}
 

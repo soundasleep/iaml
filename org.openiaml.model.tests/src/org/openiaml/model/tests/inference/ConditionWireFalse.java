@@ -30,8 +30,8 @@ public class ConditionWireFalse extends InferenceTestCase {
 		Frame page = assertHasFrame(root, "container");
 		InputTextField source = assertHasInputTextField(page, "source");
 		InputTextField target = assertHasInputTextField(page, "target");
-		SyncWire wire = (SyncWire) queryOne(page, "//iaml:wires[iaml:name='sync']");
-		Condition cond = (Condition) queryOne(page, "//iaml:conditions[iaml:name='Always False']");
+		SyncWire wire = assertHasSyncWire(page, source, target);
+		Condition cond = assertHasCondition(page, "Always False");
 
 		// [inferred]
 		// we should have EventTrigger 'edit' in source

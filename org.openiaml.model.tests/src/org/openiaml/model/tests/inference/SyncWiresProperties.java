@@ -16,6 +16,9 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
+import org.openiaml.model.model.operations.CancelNode;
+import org.openiaml.model.model.operations.CastNode;
+import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.visual.Frame;
@@ -146,7 +149,7 @@ public class SyncWiresProperties extends InferenceTestCase {
 	 *
 	 * @throws JaxenException
 	 */
-	public void testAllInitialises() throws JaxenException {
+	public void testInitContents() throws JaxenException {
 		// get all 'initialise' operations
 		List<?> inits = query(root, "//iaml:operations[iaml:name='init']");
 
@@ -156,42 +159,34 @@ public class SyncWiresProperties extends InferenceTestCase {
 		int i = 0;
 		for (Object obj : inits) {
 			i++;
-			String prelude = "'initialise' operation #" + i;
-			CompositeOperation init = (CompositeOperation) obj;	// should be a composite operation
-			assertEquals(prelude, init.getName(), "init");
-
-			// has a start node
-			List<?> nodes = query(init, "iaml:nodes");
-			assertEquals(prelude, 2, nodes.size());
-			assertTrue(prelude, nodes.get(0) instanceof StartNode);
-			assertTrue(prelude, nodes.get(1) instanceof FinishNode);
+			String prelude = "'init' operation #" + i;
+			CompositeOperation update = (CompositeOperation) obj;	// should be a composite operation
+			assertEquals(prelude, update.getName(), "init");
 
 			// -- traverse from start node --
-			StartNode start = (StartNode) nodes.get(0);
-			FinishNode stop = (FinishNode) nodes.get(1);
+			StartNode start = assertHasStartNode(update);
+			FinishNode finish = assertHasFinishNode(update);
+			CancelNode cancel = assertHasCancelNode(update);
+			
+			DecisionOperation check = assertHasDecisionOperation(update, "can cast?");
+			CastNode cast = assertHasCastNode(update);
+			
+			PrimitiveOperation set = assertHasPrimitiveOperation(update, "setPropertyToValue");
+			
+			assertHasExecutionEdge(update, start, check);
+			assertHasExecutionEdge(update, check, cancel, "no");
+			assertHasExecutionEdge(update, check, set, "yes");
+			assertHasExecutionEdge(update, set, finish);
+			
+			// data flow edges
+			Parameter param = assertHasParameter(update, "setValueTo");
+			assertHasDataFlowEdge(update, param, cast);
+			assertHasDataFlowEdge(update, cast, check);
+			assertHasDataFlowEdge(update, cast, set);
 
-			// start node should go to 'setPropertyToValue'
-			assertEquals(prelude, start.getOutExecutions().size(), 1);
-			PrimitiveOperation setProp = (PrimitiveOperation) start.getOutExecutions().get(0).getTo();
-			assertEquals(prelude, setProp.getName(), "setPropertyToValue");
-
-			// setProperty should have one node: a parameter
-			assertEquals(prelude, setProp.getInFlows().size(), 1);
-			assertTrue(prelude, setProp.getInFlows().get(0).getFrom() instanceof Parameter);
-
-			// setProperty should flow out to ApplicationElementProperty
-			assertEquals(prelude, setProp.getOutFlows().size(), 1);
-			Property outProp = (Property) setProp.getOutFlows().get(0).getTo();
-			assertEquals(prelude, outProp.getName(), "fieldValue");
-
-			// this property should belong to an application element with a different name
-			assertNotSame(prelude, ((NamedElement) outProp.eContainer()).getName(), "name" + i);
-
-			// finally, the op should go to the stop node above
-			assertEquals(prelude, setProp.getOutExecutions().size(), 1);
-			FinishNode finalNode = (FinishNode) setProp.getOutExecutions().get(0).getTo();
-
-			assertEquals(prelude, stop, finalNode);
+			assertEquals(1, set.getOutFlows().size());
+			Property f2 = (Property) set.getOutFlows().get(0).getTo();
+			assertEquals("fieldValue", f2.getName());
 		}
 	}
 

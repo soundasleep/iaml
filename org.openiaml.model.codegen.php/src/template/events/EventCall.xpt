@@ -5,11 +5,11 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE callEvent(Boolean php, model::visual::Frame currentFrame) FOR model::EventTrigger»
+«DEFINE callEvent(Boolean php) FOR model::EventTrigger»
 	// Event «this»
 	// expand out all outgoing edges
-	«EXPAND template::operations::OperationCall::callOperation(php, false, currentFrame) FOREACH outWires»
-	«EXPAND template::operations::OperationCall::callOperation(php, false, currentFrame) FOREACH outActions»
+	«EXPAND template::operations::OperationCall::callOperation(php, false) FOREACH outWires»
+	«EXPAND template::operations::OperationCall::callOperation(php, false) FOREACH outActions»
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

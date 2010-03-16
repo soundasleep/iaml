@@ -118,5 +118,5 @@ echo_necessary_update_callbacks();
  * The parameter to pass to the client.
  */
 «DEFINE clientSideOperationCallParamater(model::wires::RunAction wire) FOR model::wires::ParameterEdge»
-	. " " . escape_parameter_string(«EXPAND template::operations::Parameters::callParameterValue(true, false, null) FOR from»)
+	. " " . escape_parameter_string(«EXPAND template::operations::Parameters::callParameterValue(true, false) FOR from»)
 «ENDDEFINE»

@@ -39,6 +39,7 @@
 		define("IAML_RUNTIME_ROOT", "«config_runtime»");
 		define("IAML_RUNTIME_WEB", "«config_web»");
 		define("DEBUG", strtolower("«debug»") == "false" ? false : ("«debug»" ? true : false));
+		define("IAML_RUNTIME", 1);
 		?>
 	«ENDFILE»
 	
@@ -47,7 +48,14 @@
 
 	«REM»user objects«ENDREM»
 	«EXPAND template::users::Includes::userIncludes»
+	
+	«REM»operations«ENDREM»
+	«EXPAND template::operations::Definitions::operationDefinitionFiles(true)»
+	«EXPAND template::operations::Definitions::operationDefinitionFiles(false)»
 
+	«REM»containing_frame() runtime checks (javascript)«ENDREM»
+	«EXPAND template::js::OnCurrentFrame::onCurrentFrame»
+	
 	«REM»create other files manually«ENDREM»	
 	«FILE "output/site_layout.xml"-»«EXPAND xml::SiteLayout::siteLayout-»«ENDFILE-»
 
@@ -75,6 +83,26 @@
 	«FILE "output/view_log.php"»«EXPAND php::includes::ViewLog::viewLog»«ENDFILE»
 
 	«FILE "output/create_database.php"»«EXPAND php::includes::CreateDatabasePhp::createDatabasePhp»«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE phpCheck FOR model::InternetApplication»
+	// security check
+	if (!defined("IAML_RUNTIME"))
+		die("Required IAML_RUNTIME is not defined.");
+«ENDDEFINE»
+
+«DEFINE typeJavascript FOR model::InternetApplication»
+	// this page should appear as javascript
+	header("Content-Type: application/javascript");
+«ENDDEFINE»
+
+«DEFINE commonHeader(String path) FOR model::InternetApplication»
+// include header code
+require("«path»config.php");		// runtime library configuration
+require("«path»".IAML_RUNTIME_ROOT."global.php");	// runtime library import
+require("«path»create_database.php");		// ensure DB exists
+require("«path»properties_file.php");
+require("«path»update_client_cache.php");
 «ENDDEFINE»
 
 /* expand sessions as if they weren't there */

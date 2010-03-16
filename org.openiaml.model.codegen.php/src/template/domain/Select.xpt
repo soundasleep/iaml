@@ -9,13 +9,13 @@
  * Must set $row with the result.
  * @param force if the source of a query parameter does not exist, should we crash?
  */
-«DEFINE evaluateSelectWire(model::visual::Frame currentFrame, boolean force) FOR model::wires::SelectWire»
+«DEFINE evaluateSelectWire(boolean force) FOR model::wires::SelectWire»
 	/* selection wire «this» */
 	
 	«IF !force && inParameterEdges.size > 0»
 		/* we try not to crash if a query parameter does not exist */
 		/* check all parameter sources */
-		if («EXPAND template::operations::Parameters::callParameterExists(currentFrame) FOREACH inParameterEdges SEPARATOR " && "») {		
+		if («EXPAND template::operations::Parameters::callParameterExists FOREACH inParameterEdges SEPARATOR " && "») {		
 	«ENDIF»
 	
 	// where are we loading it from? sets $db_name
@@ -24,7 +24,7 @@
 	$source_class = "«safeNameString(((model::DomainObject) from).name)»";
 	$source_id = "«safeNameString(((model::DomainObject) from).id)»";
 	$query = «EXPAND getQuery FOR this-»;
-	$args = array(«EXPAND template::operations::Parameters::callParameter(true, false, true, currentFrame) FOREACH inParameterEdges SEPARATOR ","»); 
+	$args = array(«EXPAND template::operations::Parameters::callParameter(true, false, true) FOREACH inParameterEdges SEPARATOR ","»); 
 	
 	// get the result or return null
 	$row = evaluate_select_wire($db_name, $source_id, $source_class, $query, $args);

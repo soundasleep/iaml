@@ -8,14 +8,14 @@
 /**
  * Get the representation of the data type of the given data destination.
  */
-«DEFINE getDataType(Boolean php, model::visual::Frame container) FOR model::DataFlowEdgeDestination-»
+«DEFINE getDataType(Boolean php) FOR model::DataFlowEdgeDestination-»
 	«throwException("Unknown data type container '" + this + "'")»
 «ENDDEFINE»
 
-«DEFINE getDataType(Boolean php, model::visual::Frame container) FOR model::Property-»
+«DEFINE getDataType(Boolean php) FOR model::Property-»
 	/* xsd type '«type.name»' */ "«type.uRI»"
 «ENDDEFINE»
 
-«DEFINE getDataType(Boolean php, model::visual::Frame container) FOR model::TemporaryVariable-»
+«DEFINE getDataType(Boolean php) FOR model::TemporaryVariable-»
 	/* xsd type '«type.name»' */ "«type.uRI»"
 «ENDDEFINE»

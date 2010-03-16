@@ -18,7 +18,7 @@
 		function onClick_«safeNameString(id)»(obj) {
 			«IF onClick != null»
 				// expand all onClicks
-				«EXPAND template::events::EventCall::callEvent(false, currentFrame) FOR onClick-»
+				«EXPAND template::events::EventCall::callEvent(false) FOR onClick-»
 			«ENDIF»
 
 			// implicit operations
@@ -47,7 +47,7 @@
 		function onChange_«safeNameString(id)»(obj) {
 			«IF onEdit != null»
 				// expand all onEdits
-				«EXPAND template::events::EventCall::callEvent(false, currentFrame) FOR onEdit-»
+				«EXPAND template::events::EventCall::callEvent(false) FOR onEdit-»
 			«ENDIF»
 		
 			return false;
@@ -70,13 +70,13 @@
 «DEFINE implicitButtonClickEvents(model::visual::Frame currentFrame) FOR model::wires::NavigateAction»
 	«IF (name == "click" || name == "onClick")»
 		/* expanding implicit trigger (navigate) */
-		«EXPAND template::operations::OperationCall::callOperation(false, false, currentFrame) FOR this»
+		«EXPAND template::operations::OperationCall::callOperation(false, false) FOR this»
 	«ENDIF» 
 «ENDDEFINE»
 «DEFINE implicitButtonClickEvents(model::visual::Frame currentFrame) FOR model::wires::RunAction»
 	«IF (name == "click" || name == "onClick")»
 		/* expanding implicit trigger (run) */
-		«EXPAND template::operations::OperationCall::callOperation(false, false, currentFrame) FOR this»
+		«EXPAND template::operations::OperationCall::callOperation(false, false) FOR this»
 	«ENDIF» 
 «ENDDEFINE»
 

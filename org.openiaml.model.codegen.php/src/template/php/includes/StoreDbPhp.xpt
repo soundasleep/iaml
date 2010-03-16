@@ -15,6 +15,9 @@ require("update_client_cache.php");
 require("create_database.php");	// init db if necessary
 require("properties_file.php");	// properties loading code
 
+// condition definitions
+«EXPAND template::conditions::Definitions::conditionDefinition(true) FOREACH getRoot().getAllConditions()-»
+
 /**
  * Recursive functions in PHP. See default.js for Javascript implementations of these.
  * TODO add test cases to make sure these are both identical.
@@ -250,8 +253,8 @@ echo_necessary_update_callbacks();
  */
 «DEFINE expandDomainAttributeEvents(String eventName) FOR model::EventTrigger»
 	«IF eventName=="edit"»
-		«EXPAND template::operations::OperationCall::callOperation(true, true, null) FOREACH outWires»
-		«EXPAND template::operations::OperationCall::callOperation(true, true, null) FOREACH outActions»
+		«EXPAND template::operations::OperationCall::callOperation(true, true) FOREACH outWires»
+		«EXPAND template::operations::OperationCall::callOperation(true, true) FOREACH outActions»
 	«ELSE»
 		«throwException("Unknown event name '" + eventName + "'")»
 	«ENDIF»

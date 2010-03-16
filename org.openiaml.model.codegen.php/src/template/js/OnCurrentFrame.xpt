@@ -1,0 +1,36 @@
+«IMPORT iaml»
+
+/**
+ * Allows the runtime to know when we can get data from the current frame.
+ */
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE onCurrentFrame FOR model::InternetApplication»
+	«FILE "output/onCurrentFrame.js"-»
+function containing_frame(element_id) {
+	switch (element_id) {
+	
+	«FOREACH eAllContents.typeSelect(model::NamedElement) AS e»
+		case "«safeName(e)»":
+			«IF containingFrame(e) == null»
+			return null;
+			«ELSE»
+			return "«safeName(containingFrame(e))»";
+			«ENDIF»
+	«ENDFOREACH»
+	
+		default:
+			throw new IamlJavascriptException("Unknown named element ID: " + element_id);
+	}
+}
+
+/** 
+ * Copied from GeneratorExtensions.ext
+ */
+function on_current_frame(source, target) {
+	return containing_frame(source) != null &&
+		containing_frame(source) == containing_frame(target);
+}
+
+	«ENDFILE»
+«ENDDEFINE»

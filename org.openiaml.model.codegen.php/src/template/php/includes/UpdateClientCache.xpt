@@ -46,7 +46,7 @@
 		
 		{
 			// primitive operation '«this»'
-			$new_value = «EXPAND template::domain::DomainInstance::domainInstanceCall(true, null, object, null) FOR this»;
+			$new_value = «EXPAND template::domain::DomainInstance::domainInstanceCall(true, null, object) FOR this»;
 			$old_value = $_SESSION["cached_result_«safeName()»_value"];
 			if ($new_value != $old_value) {
 				// cache needs to be updated

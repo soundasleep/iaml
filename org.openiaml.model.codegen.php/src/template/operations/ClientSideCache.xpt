@@ -10,15 +10,15 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE cachedPrimitiveOperations(model::visual::Frame frame) FOR model::InternetApplication»
-	«EXPAND cachedPrimitiveOperations(frame) FOREACH getClientSideCacheOperations()»
+«DEFINE cachedPrimitiveOperations FOR model::InternetApplication»
+	«EXPAND cachedPrimitiveOperations FOREACH getClientSideCacheOperations()»
 «ENDDEFINE»
 
-«DEFINE cachedPrimitiveOperations(model::visual::Frame frame) FOR model::Operation»
+«DEFINE cachedPrimitiveOperations FOR model::Operation»
 	«throwException("Cannot expand client-side cached operation '" + this + "'")»
 «ENDDEFINE»
 
-«DEFINE cachedPrimitiveOperations(model::visual::Frame frame) FOR model::PrimitiveOperation»
+«DEFINE cachedPrimitiveOperations FOR model::PrimitiveOperation»
 	«LET ((model::DomainObjectInstance) eContainer) AS object»
 		// primitive operation '«this»'
 		
@@ -26,7 +26,7 @@
 		var cached_result_«safeName()»_value = 
 		<?php
 		/* save the current cached result, so we know when to update it on the client */
-		$_SESSION["cached_result_«safeName()»_value"] = «EXPAND template::domain::DomainInstance::domainInstanceCall(true, null, object, frame) FOR this»;
+		$_SESSION["cached_result_«safeName()»_value"] = «EXPAND template::domain::DomainInstance::domainInstanceCall(true, null, object) FOR this»;
 		echo $_SESSION["cached_result_«safeName()»_value"] ? "true" : "false";
 		?>;
 

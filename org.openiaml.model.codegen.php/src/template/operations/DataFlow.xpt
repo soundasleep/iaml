@@ -8,45 +8,45 @@
 /**
  * Data sources
  */
-«DEFINE dataSource(Boolean php, model::visual::Frame currentFrame) FOR model::DataFlowEdgesSource»
+«DEFINE dataSource(Boolean php) FOR model::DataFlowEdgesSource»
 	«throwException("Unknown data flow edge source for dataSource: " + this)»
 «ENDDEFINE»
 
 /**
  * Inline arithmetic.
  */
-«DEFINE dataSource(Boolean php, model::visual::Frame currentFrame) FOR model::operations::Arithmetic»
+«DEFINE dataSource(Boolean php) FOR model::operations::Arithmetic»
 	«IF operationType.toString() == "ADD"»
 		«IF php»
 			«REM»we can just use PHP's operators; they force + to work only on numbers«ENDREM»
-			«EXPAND dataSource(php, currentFrame) FOREACH inFlows.from SEPARATOR " + "»
+			«EXPAND dataSource(php) FOREACH inFlows.from SEPARATOR " + "»
 		«ELSE»
 			«REM»in Javascript, we have to translate them all into floats directly«ENDREM»
-			«EXPAND convertToFloat(currentFrame) FOREACH inFlows.from SEPARATOR " + "»
+			«EXPAND convertToFloat FOREACH inFlows.from SEPARATOR " + "»
 		«ENDIF»
 	«ELSEIF operationType.toString() == "SUBTRACT"»
 		«IF php»
 			«REM»we can just use PHP's operators; they force + to work only on numbers«ENDREM»
-			«EXPAND dataSource(php, currentFrame) FOREACH inFlows.from SEPARATOR " - "»
+			«EXPAND dataSource(php) FOREACH inFlows.from SEPARATOR " - "»
 		«ELSE»
 			«REM»in Javascript, we have to translate them all into floats directly«ENDREM»
-			«EXPAND convertToFloat(currentFrame) FOREACH inFlows.from SEPARATOR " - "»
+			«EXPAND convertToFloat FOREACH inFlows.from SEPARATOR " - "»
 		«ENDIF»
 	«ELSEIF operationType.toString() == "MULTIPLY"»
 		«IF php»
 			«REM»we can just use PHP's operators; they force + to work only on numbers«ENDREM»
-			«EXPAND dataSource(php, currentFrame) FOREACH inFlows.from SEPARATOR " * "»
+			«EXPAND dataSource(php) FOREACH inFlows.from SEPARATOR " * "»
 		«ELSE»
 			«REM»in Javascript, we have to translate them all into floats directly«ENDREM»
-			«EXPAND convertToFloat(currentFrame) FOREACH inFlows.from SEPARATOR " * "»
+			«EXPAND convertToFloat FOREACH inFlows.from SEPARATOR " * "»
 		«ENDIF»
 	«ELSEIF operationType.toString() == "DIVIDE"»
 		«IF php»
 			«REM»we can just use PHP's operators; they force + to work only on numbers«ENDREM»
-			«EXPAND dataSource(php, currentFrame) FOREACH inFlows.from SEPARATOR " / "»
+			«EXPAND dataSource(php) FOREACH inFlows.from SEPARATOR " / "»
 		«ELSE»
 			«REM»in Javascript, we have to translate them all into floats directly«ENDREM»
-			convert_to_nan(«EXPAND convertToFloat(currentFrame) FOREACH inFlows.from SEPARATOR " / "»)
+			convert_to_nan(«EXPAND convertToFloat FOREACH inFlows.from SEPARATOR " / "»)
 		«ENDIF»
 	«ELSE»
 		«throwException("Unknown arithmetic: " + this)»
@@ -54,11 +54,11 @@
 «ENDDEFINE»
 
 // TODO need to wrap value in some sort of encoding algorithm
-«DEFINE dataSource(Boolean php, model::visual::Frame currentFrame) FOR model::StaticValue»
+«DEFINE dataSource(Boolean php) FOR model::StaticValue»
 	"«value-»" /* static value "«safeName()-»" */ 
 «ENDDEFINE»
 
-«DEFINE dataSource(Boolean php, model::visual::Frame currentFrame) FOR model::Parameter»
+«DEFINE dataSource(Boolean php) FOR model::Parameter»
 	«IF php»
 	$«safeName()»
 	«ELSE»
@@ -66,7 +66,7 @@
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE dataSource(Boolean php, model::visual::Frame currentFrame) FOR model::TemporaryVariable»
+«DEFINE dataSource(Boolean php) FOR model::TemporaryVariable»
 	«IF php»
 	$temp_«safeName()»
 	«ELSE»
@@ -77,18 +77,18 @@
 /**
  * A cast value.
  */
-«DEFINE dataSource(Boolean php, model::visual::Frame currentFrame) FOR model::operations::CastNode»
+«DEFINE dataSource(Boolean php) FOR model::operations::CastNode»
 	do_cast(
 		«IF inFlows.size != 1»
 			«throwException("Incorrect number of arguments for cast source:" + inFlows.size)»
 		«ENDIF»
-		«EXPAND DataFlow::dataSource(php, currentFrame) FOREACH inFlows.from-»,
+		«EXPAND DataFlow::dataSource(php) FOREACH inFlows.from-»,
 		
 		«LET outFlows.select(o | isCastDestination(o.to)) AS targets»
 			«IF targets.size != 1»
 				«throwException("Too many cast targets for castNode " + this + ": " + targets.size)»
 			«ENDIF»
-			«EXPAND DataTypes::getDataType(php, currentFrame) FOREACH targets.to-»
+			«EXPAND DataTypes::getDataType(php) FOREACH targets.to-»
 		«ENDLET»
 	)
 «ENDDEFINE»
@@ -102,8 +102,8 @@
  * In particular, the <code>null</code> parameter will probably cause
  * problems later...
  */
-«DEFINE dataSource(Boolean php, model::visual::Frame currentFrame) FOR model::Property»
-	«EXPAND template::operations::Parameters::callParameterValue(php, false, currentFrame) FOR this»
+«DEFINE dataSource(Boolean php) FOR model::Property»
+	«EXPAND template::operations::Parameters::callParameterValue(php, false) FOR this»
 «ENDDEFINE»
 
 /**
@@ -137,8 +137,8 @@
  *
  * Uses JS parseFloatOrZero() from Runtime JS.
  */
-«DEFINE convertToFloat(model::visual::Frame currentFrame) FOR model::DataFlowEdgesSource»
-	parse_float_or_zero(«EXPAND dataSource(false, currentFrame) FOR this»)
+«DEFINE convertToFloat FOR model::DataFlowEdgesSource»
+	parse_float_or_zero(«EXPAND dataSource(false) FOR this»)
 «ENDDEFINE»
 
 /**
@@ -148,10 +148,10 @@
  *	only supports incoming {@model Property ApplicationElementProperties}
  *	as {@model DataFlowEdge parameters}.   
  */
-«DEFINE isSet(Boolean php, model::visual::Frame currentFrame) FOR model::DataFlowEdgesSource»
+«DEFINE isSet(Boolean php) FOR model::DataFlowEdgesSource»
 	«throwException("Unknown data flow edge source for isSet: " + this)»
 «ENDDEFINE»
 
-«DEFINE isSet(Boolean php, model::visual::Frame currentFrame) FOR model::Property»
-	«EXPAND template::operations::Parameters::isSetParameter(php, currentFrame) FOR this»
+«DEFINE isSet(Boolean php) FOR model::Property»
+	«EXPAND template::operations::Parameters::isSetParameter(php) FOR this»
 «ENDDEFINE»

@@ -45,6 +45,8 @@
 	
 	«REM»database objects«ENDREM»
 	«EXPAND template::domain::Includes::domainIncludes»
+	«EXPAND template::domain::Definitions::allDomainObjectDefinitions»
+	«EXPAND template::domain::Definitions::allDomainAttributeDefinitions»
 
 	«REM»user objects«ENDREM»
 	«EXPAND template::users::Includes::userIncludes»
@@ -95,6 +97,10 @@
 		die("Required IAML_RUNTIME is not defined.");
 «ENDDEFINE»
 
+«DEFINE setPath(String path) FOR model::InternetApplication»
+define("ROOT_PATH", "«path»");
+«ENDDEFINE»
+
 «DEFINE typeJavascript FOR model::InternetApplication»
 	// this page should appear as javascript
 	header("Content-Type: application/javascript");
@@ -102,11 +108,12 @@
 
 «DEFINE commonHeader(String path) FOR model::InternetApplication»
 // include header code
-require("«path»config.php");		// runtime library configuration
-require("«path»".IAML_RUNTIME_ROOT."global.php");	// runtime library import
-require("«path»create_database.php");		// ensure DB exists
-require("«path»properties_file.php");
-require("«path»update_client_cache.php");
+«EXPAND setPath(path)»
+require(ROOT_PATH . "config.php");		// runtime library configuration
+require(ROOT_PATH . IAML_RUNTIME_ROOT . "global.php");	// runtime library import
+require(ROOT_PATH . "create_database.php");		// ensure DB exists
+require(ROOT_PATH . "properties_file.php");
+require(ROOT_PATH . "update_client_cache.php");
 «ENDDEFINE»
 
 /* expand sessions as if they weren't there */

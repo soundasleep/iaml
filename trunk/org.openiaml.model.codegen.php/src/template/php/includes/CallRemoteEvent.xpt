@@ -8,8 +8,7 @@
  * Call a remote event.
  */
  
-require("config.php");		// runtime library configuration
-require(IAML_RUNTIME_ROOT."global.php");	// runtime library import
+«EXPAND template::Template::commonHeader("")»
 
 log_message("call_remote_event.php? " . print_r($_GET, true));
 $container = require_get("container");

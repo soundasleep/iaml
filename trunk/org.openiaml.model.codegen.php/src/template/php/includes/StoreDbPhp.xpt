@@ -8,12 +8,7 @@
  * For storing a single value into the database (attribute id).
  */
  
-require("config.php");		// runtime library configuration
-require(IAML_RUNTIME_ROOT."global.php");	// runtime library import
-require("update_client_cache.php");
-
-require("create_database.php");	// init db if necessary
-require("properties_file.php");	// properties loading code
+«EXPAND template::Template::commonHeader("")»
 
 // condition definitions
 «EXPAND template::conditions::Definitions::conditionDefinition(true) FOREACH getRoot().getAllConditions()-»

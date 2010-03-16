@@ -56,10 +56,10 @@
  * Get the include file for the given domain object.
  */
 «DEFINE getInclude FOR model::DomainObject»
-	require("domain/«safeName()».php");
+	require(ROOT_PATH . "domain/«safeName()».php");
 «ENDDEFINE»
 «DEFINE getInclude FOR model::DomainAttributeInstance»
-	require("domain/attribute/«safeName()».php");
+	require(ROOT_PATH . "domain/attribute/«safeName()».php");
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

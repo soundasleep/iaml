@@ -8,9 +8,7 @@
  * Saving queued stored attributes.
  */
  
-require("config.php");		// runtime library configuration
-require(IAML_RUNTIME_ROOT."global.php");	// runtime library import
-require("update_client_cache.php");
+«EXPAND template::Template::commonHeader("")»
 
 «EXPAND template::domain::Definitions::domainDefinitions»
 

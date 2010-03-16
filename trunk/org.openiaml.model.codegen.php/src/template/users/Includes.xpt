@@ -34,7 +34,7 @@
  * Get the include file for the given role.
  */
 «DEFINE getInclude FOR model::users::Role»
-	require("users/«safeName()».php");
+	require_once(ROOT_PATH . "users/«safeName()».php");
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

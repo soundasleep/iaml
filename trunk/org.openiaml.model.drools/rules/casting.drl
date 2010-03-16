@@ -165,6 +165,8 @@ end
 rule "After 'init' has been called on a typed element, call 'validate'"
 	when
 		source : CanBeSynced ( )
+		accessible : Accessible ( )
+		eval ( source == accessible )
 		
 		event : EventTrigger ( source.onAccess == event )
 		upd : Operation ( name == "init", eContainer == source )
@@ -190,6 +192,8 @@ end
 rule "Only call 'validate' operation onAccess if fieldValue has been set"
 	when
 		source : CanBeSynced ( )
+		accessible : Accessible ( )
+		eval ( source == accessible )
 		
 		event : EventTrigger ( source.onAccess == event )
 		upd : Operation ( name == "init", eContainer == source )

@@ -94,7 +94,18 @@ public class IACleanerBeautifier implements org.openarchitectureware.xpand2.outp
 			}
 			
 			IACleaner cleaner = new IAInlineCleaner();
-			String out = cleaner.cleanScript( file.getTargetFile() );
+			/*
+			 * Particular file types are executed as PHP, but actually contain
+			 * other file types (e.g. Javascript)
+			 */
+			String extension = IAInlineCleaner.getExtension(file.getTargetFile());
+			if (file.getTargetFile().getName().toLowerCase().endsWith("_js.php")) {
+				extension = "js";
+			} else if (file.getTargetFile().getName().toLowerCase().endsWith("_css.php")) {
+				extension = "css";
+			}
+			
+			String out = cleaner.cleanScript( file.getTargetFile(), extension );
 			
 			// rewrite the file
 			FileWriter fw2 = new FileWriter(file.getTargetFile());

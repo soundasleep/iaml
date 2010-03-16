@@ -11,11 +11,11 @@
 /**
  * TODO unresolved: Can a condition have multiple outExecutions?
  */
-«DEFINE conditionFlow(Boolean php, model::visual::Frame currentFrame) FOR model::operations::StartNode-»
+«DEFINE conditionFlow(Boolean php) FOR model::operations::StartNode-»
 	«REM»
 		We re-use the execution flow from operations::ExecutionFlow
 	«ENDREM»
-	«EXPAND template::operations::ExecutionFlow::executionFlow(false, currentFrame, php)»
+	«EXPAND template::operations::ExecutionFlow::executionFlow(false, php)»
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

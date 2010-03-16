@@ -21,35 +21,35 @@
  *
  * @param addKeys add associative array keys to PHP parameters
  */
-«DEFINE callParameter(Boolean php, Boolean inStoreDb, Boolean addKeys, model::visual::Frame currentFrame) FOR model::wires::ParameterEdge»
+«DEFINE callParameter(Boolean php, Boolean inStoreDb, Boolean addKeys) FOR model::wires::ParameterEdge»
 	«IF addKeys && php»
 		«REM»add associative keys for named parameter wires«ENDREM»
 		«IF name != null && name.length > 0»
 			"«safeNameString(name)»" =>
 		«ENDIF» 
 	«ENDIF»
-	«EXPAND callParameterValue(php, inStoreDb, currentFrame) FOR from»
+	«EXPAND callParameterValue(php, inStoreDb) FOR from»
 «ENDDEFINE»
 
 /**
  * Does the given parameter exist? Return 'true' or 'false'. Expected to be in PHP mode.
  */
-«DEFINE callParameterExists(model::visual::Frame currentFrame) FOR model::wires::ParameterEdge»
-	«EXPAND callParameterValueExists(currentFrame) FOR from»
+«DEFINE callParameterExists FOR model::wires::ParameterEdge»
+	«EXPAND callParameterValueExists FOR from»
 «ENDDEFINE»
 
 /**
  * The sources of parameters for parameter calls, i.e.
  * fetch the runtime value of the parameter.
  */
-«DEFINE callParameterValue(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::wires::ParameterEdgesSource»
+«DEFINE callParameterValue(Boolean php, Boolean inStoreDb) FOR model::wires::ParameterEdgesSource»
 	«throwException("Unknown parameter wire source: " + this)»
 «ENDDEFINE»
 
 /**
  * TODO can we remove 'wire' parameter and replace it with 'currentFrame'?
  */
-«DEFINE callParameterValue(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::Property»
+«DEFINE callParameterValue(Boolean php, Boolean inStoreDb) FOR model::Property»
 	«IF php»
 		«IF inStoreDb»
 			$arg0 /* we assume the value is already in $arg0; see store_db.php::expandDomainAttributeEvents */
@@ -87,24 +87,29 @@
 				«IF model::DomainAttributeInstance.isInstance(eContainer)»
 					«REM»from a DomainAttributeInstance«ENDREM»
 					«EXPAND RemoteParameter::remoteValue(php, false, this) FOR this.eContainer-»
-				«ELSEIF onCurrentFrame(currentFrame, this)» 
-					«EXPAND dataSourceOnFrame FOR eContainer»
-				«ELSEIF model::visual::InputTextField.isInstance(eContainer) || model::visual::Label.isInstance(eContainer)»
-					«REM»this is a text field stored outside of the current frame«ENDREM»
-					/* if you _don't_ want an operation to use a cached value of a remote Input Text Field, place the operation _outside_ of its containing frame. */
-					<?php if («EXPAND isSetParameter(true, currentFrame) FOR this») { ?>
-						"<?php echo «EXPAND callParameterValue(true, inStoreDb, currentFrame) FOR this»; ?>"
-					<?php } else { ?>
-						/* throw exception */
-						throwJavascriptException("Cached server-side variable '«name»' did not exist")
-					<?php } ?>
 				«ELSE»
-					«REM»
-						it's not on the current frame. it could be anywhere!
-						but we want it NOW, so we can't just ask the 
-						server. we have to find out where it is.
-					«ENDREM»			
-					«EXPAND RemoteParameter::remoteValue(php, false, this) FOR this.eContainer-»
+					«REM»this is an inline call, thus the ternary operator«ENDREM»
+					(on_current_frame(get_frame_id(), "«safeName()»") ?
+						«EXPAND dataSourceOnFrame FOR eContainer»
+					: (
+						«IF model::visual::InputTextField.isInstance(eContainer) || model::visual::Label.isInstance(eContainer)»
+							«REM»this is a text field stored outside of the current frame«ENDREM»
+							/* if you _don't_ want an operation to use a cached value of a remote Input Text Field, place the operation _outside_ of its containing frame. */
+							<?php if («EXPAND isSetParameter(true) FOR this») { ?>
+								"<?php echo «EXPAND callParameterValue(true, inStoreDb) FOR this»; ?>"
+							<?php } else { ?>
+								/* throw exception */
+								throwJavascriptException("Cached server-side variable '«name»' did not exist")
+							<?php } ?>
+						«ELSE»
+							«REM»
+								it's not on the current frame. it could be anywhere!
+								but we want it NOW, so we can't just ask the 
+								server. we have to find out where it is.
+							«ENDREM»			
+							«EXPAND RemoteParameter::remoteValue(php, false, this) FOR this.eContainer-»
+						«ENDIF»
+					))
 				«ENDIF»
 			«ELSE»
 				get_application_element_property("«safeName()-»")
@@ -115,7 +120,7 @@
 
 /** Loading a current value from the currently loaded frame (i.e. client-side) */
 «DEFINE dataSourceOnFrame FOR emf::EObject»
-	«throwException("Unknown data source on current frame: " + this)»
+	throw_new_IamlJavascriptException("Unknown data source: «this»")
 «ENDDEFINE»
 «DEFINE dataSourceOnFrame FOR model::visual::InputTextField»
 	document.getElementById('«safeName()»').value
@@ -130,41 +135,41 @@
 /**
  * If we have a Parameter from a TextField, we should use its 'fieldValue' property instead.
  */
-«DEFINE callParameterValue(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::visual::InputTextField»
+«DEFINE callParameterValue(Boolean php, Boolean inStoreDb) FOR model::visual::InputTextField»
 	«IF php»
 		/* implicitly from InputTextField */
-		«EXPAND callParameterValue(php, inStoreDb, currentFrame) FOR properties.select( e | e.name == "fieldValue" ).first()-»
+		«EXPAND callParameterValue(php, inStoreDb) FOR properties.select( e | e.name == "fieldValue" ).first()-»
 	«ELSE»
 		«IF getFieldValue(this) != null»
-			«EXPAND callParameterValue(php, false, currentFrame) FOR getFieldValue(this)»
+			«EXPAND callParameterValue(php, false) FOR getFieldValue(this)»
 		«ELSE»
 			«throwException("No 'fieldValue' property found in the InputTextField '" + this + "', which is being used as a Parameter source.")»
 		«ENDIF» 
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE callParameterValue(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::StaticValue»
+«DEFINE callParameterValue(Boolean php, Boolean inStoreDb) FOR model::StaticValue»
 	"«value-»" /* static value "«name-»" */
 «ENDDEFINE»
 
-«DEFINE callParameterValue(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::DynamicApplicationElementSet»
+«DEFINE callParameterValue(Boolean php, Boolean inStoreDb) FOR model::DynamicApplicationElementSet»
 	/* dynamic element set "«name-»" */
 	get_dynamic_elements_«safeName()-»()
 «ENDDEFINE»
 
-«DEFINE callParameterValue(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::visual::Frame»
+«DEFINE callParameterValue(Boolean php, Boolean inStoreDb) FOR model::visual::Frame»
 	/* Frame "«name-»" */
 	new Visual_Frame("«id-»", "«name-»")
 «ENDDEFINE»
 
 «REM»new Users_Role("«id-»", "«name-»")«ENDREM»
-«DEFINE callParameterValue(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::users::Role»
+«DEFINE callParameterValue(Boolean php, Boolean inStoreDb) FOR model::users::Role»
 	/* Role "«name-»" */
 	'«safeName()-»'
 «ENDDEFINE»
 
 «REM»new Users_Permission("«id-»", "«name-»")«ENDREM»
-«DEFINE callParameterValue(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::users::Permission»
+«DEFINE callParameterValue(Boolean php, Boolean inStoreDb) FOR model::users::Permission»
 	/* Permission "«name-»" */
 	'«safeName()-»'
 «ENDDEFINE»
@@ -172,18 +177,18 @@
 /**
  * A value specified as part of the URI, e.g. ?key=value
  */
-«DEFINE callParameterValue(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame) FOR model::QueryParameter»
+«DEFINE callParameterValue(Boolean php, Boolean inStoreDb) FOR model::QueryParameter»
 	«IF php»
 		require_get("«name»"«IF defaultValue != null», "«defaultValue»"«ENDIF»)
 	«ELSE»
-		"<?php echo «EXPAND callParameterValue(true, inStoreDb, currentFrame) FOR this»; ?>"
+		"<?php echo «EXPAND callParameterValue(true, inStoreDb) FOR this»; ?>"
 	«ENDIF»
 «ENDDEFINE»
 
 /**
  * Is the given property set?
  */
-«DEFINE isSetParameter(Boolean php, model::visual::Frame currentFrame) FOR model::Property»
+«DEFINE isSetParameter(Boolean php) FOR model::Property»
 	«IF php»
 		«REM»
 			values stored in sessions will not always be called 'fieldValue';
@@ -207,7 +212,7 @@
 			«ELSEIF model::visual::InputTextField.isInstance(eContainer) || model::visual::Label.isInstance(eContainer)»
 				«REM»this is a text field stored outside of the current frame«ENDREM»
 				/* if you _don't_ want an operation to use a cached value of a remote Input Text Field/Label, place the operation _outside_ of its containing frame. */
-				<?php echo («EXPAND isSetParameter(true, currentFrame) FOR this») ? "true" : "false"; ?>
+				<?php echo («EXPAND isSetParameter(true) FOR this») ? "true" : "false"; ?>
 			«ELSE»
 				«EXPAND RemoteParameter::remoteValueIsSet(php, this) FOR this.eContainer-»
 			«ENDIF»
@@ -221,42 +226,42 @@
  * Exists calls.
  */
 
-«DEFINE callParameterValueExists(model::visual::Frame currentFrame) FOR model::wires::ParameterEdgesSource»
+«DEFINE callParameterValueExists FOR model::wires::ParameterEdgesSource»
 	«throwException("Unknown parameter wire source: " + this)»
 «ENDDEFINE»
 
-«DEFINE callParameterValueExists(model::visual::Frame currentFrame) FOR model::Property»
+«DEFINE callParameterValueExists FOR model::Property»
 	true
 «ENDDEFINE»
 
-«DEFINE callParameterValueExists(model::visual::Frame currentFrame) FOR model::visual::InputTextField»
+«DEFINE callParameterValueExists FOR model::visual::InputTextField»
 	true
 «ENDDEFINE»
 
-«DEFINE callParameterValueExists(model::visual::Frame currentFrame) FOR model::StaticValue»
+«DEFINE callParameterValueExists FOR model::StaticValue»
 	true
 «ENDDEFINE»
 
-«DEFINE callParameterValueExists(model::visual::Frame currentFrame) FOR model::DynamicApplicationElementSet»
+«DEFINE callParameterValueExists FOR model::DynamicApplicationElementSet»
 	true
 «ENDDEFINE»
 
-«DEFINE callParameterValueExists(model::visual::Frame currentFrame) FOR model::visual::Frame»
+«DEFINE callParameterValueExists FOR model::visual::Frame»
 	true
 «ENDDEFINE»
 
-«DEFINE callParameterValueExists(model::visual::Frame currentFrame) FOR model::users::Role»
+«DEFINE callParameterValueExists FOR model::users::Role»
 	true
 «ENDDEFINE»
 
-«DEFINE callParameterValueExists(model::visual::Frame currentFrame) FOR model::users::Permission»
+«DEFINE callParameterValueExists FOR model::users::Permission»
 	true
 «ENDDEFINE»
 
 /**
  * A value specified as part of the URI, e.g. ?key=value
  */
-«DEFINE callParameterValueExists(model::visual::Frame currentFrame) FOR model::QueryParameter»
+«DEFINE callParameterValueExists FOR model::QueryParameter»
 	«IF defaultValue == null»
 		(require_get("«name»", null) !== null)
 	«ELSE»

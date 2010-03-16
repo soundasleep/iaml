@@ -5,7 +5,7 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE operationContents(model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::Operation-»
+«DEFINE operationContents(model::ExecutionEdgesSource start, Boolean php) FOR model::Operation-»
 	«throwException("Unknown primitive operation to expand: " + this)»
 «ENDDEFINE»
 
@@ -13,47 +13,47 @@
  * Expand the definition of an operation, assumed to be called 
  * as part of an existing function call.
  */
-«DEFINE operationContents(model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::PrimitiveOperation-»
+«DEFINE operationContents(model::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
 	«REM»special primitive operation names«ENDREM»
 	«IF name == "setPropertyToValue"-»
-		«EXPAND setPropertyToValueOperation(start, container, php) FOR this»
+		«EXPAND setPropertyToValueOperation(start, php) FOR this»
 	«ELSEIF name == "set"»
-		«EXPAND setOperation(start, container, php) FOR this»
+		«EXPAND setOperation(start, php) FOR this»
 	«ELSEIF name == "javascriptAlert"»
-		«EXPAND javascriptAlert(start, container, php) FOR this»
+		«EXPAND javascriptAlert(start, php) FOR this»
 	«ELSEIF name == "hide"»
-		«EXPAND hideOperation(start, container, php) FOR this»
+		«EXPAND hideOperation(start, php) FOR this»
 	«ELSEIF name == "show"»
-		«EXPAND showOperation(start, container, php) FOR this»
+		«EXPAND showOperation(start, php) FOR this»
 	«ELSE»
 		«throwException("Unknown function to expand '" + name + "': " + this)»
 	«ENDIF»
 «ENDDEFINE»
 
 /* expand the definition of an operation, assumed to be called as part of an existing function call */
-«DEFINE operationContents(model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::operations::DecisionOperation-»
+«DEFINE operationContents(model::ExecutionEdgesSource start, Boolean php) FOR model::operations::DecisionOperation-»
 	«REM»compare operations«ENDREM»
 	if (
 	«IF name == "equal?"-»
 		«REM»check all inflow targets are identical«ENDREM»
 		«IF php»
-			«EXPAND getDataValue(php, container) FOREACH inFlows SEPARATOR " == "»
+			«EXPAND getDataValue(php) FOREACH inFlows SEPARATOR " == "»
 		«ELSE»
-			is_array_equal(new Array(«EXPAND getDataValue(php, container) FOREACH inFlows SEPARATOR ", "»))
+			is_array_equal(new Array(«EXPAND getDataValue(php) FOREACH inFlows SEPARATOR ", "»))
 		«ENDIF»
 	«ELSEIF name == "true?"-»
 		«REM»check all inflow targets are identical«ENDREM»
 		«IF php»
-			«EXPAND trueDecisionOperationSource(php, container) FOREACH inFlows SEPARATOR " == "»
+			«EXPAND trueDecisionOperationSource(php) FOREACH inFlows SEPARATOR " == "»
 		«ELSE»
-			is_array_true(new Array(«EXPAND trueDecisionOperationSource(php, container) FOREACH inFlows SEPARATOR ", "»))
+			is_array_true(new Array(«EXPAND trueDecisionOperationSource(php) FOREACH inFlows SEPARATOR ", "»))
 		«ENDIF»
 	«ELSEIF name == "can cast?"-»
 		«REM»inflow should be a CastNode; ask the CastNode about the success of the cast.«ENDREM»
 		«IF inFlows.from.typeSelect(model::operations::CastNode).isEmpty»
 			«throwException("'can cast?' check needs to have at least one incoming CastNode")»
 		«ENDIF»
-		«EXPAND getCastCanCast(php, container) FOREACH inFlows.from.typeSelect(model::operations::CastNode) SEPARATOR " && "»
+		«EXPAND getCastCanCast(php) FOREACH inFlows.from.typeSelect(model::operations::CastNode) SEPARATOR " && "»
 	«ELSE»
 		«REM»??? who knows«ENDREM»
 		«throwException("Unknown decision operation to expand '" + name + ": " + this)»
@@ -80,35 +80,35 @@
 «ENDDEFINE»
 
 /* primitive DecisionConditions */
-«DEFINE operationContents(model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::operations::DecisionCondition-»
+«DEFINE operationContents(model::ExecutionEdgesSource start, Boolean php) FOR model::operations::DecisionCondition-»
 	«REM»compare operations«ENDREM»
 	if (
 		«IF name=="xpathMatch"»
-			xpathMatch(«EXPAND getDataValue(php, container) FOREACH inFlows SEPARATOR ","»)
+			xpathMatch(«EXPAND getDataValue(php) FOREACH inFlows SEPARATOR ","»)
 		«ELSEIF name=="emailAddress"»
-			emailAddressMatch(«EXPAND getDataValue(php, container) FOREACH inFlows SEPARATOR ","»)
+			emailAddressMatch(«EXPAND getDataValue(php) FOREACH inFlows SEPARATOR ","»)
 		«ELSEIF name=="is set?"»
-			«EXPAND DataFlow::isSet(php, container) FOREACH inFlows.from SEPARATOR " && "»
+			«EXPAND DataFlow::isSet(php) FOREACH inFlows.from SEPARATOR " && "»
 		«ELSEIF name == "equal?"-»
 			«REM»check all inflow targets are identical«ENDREM»
 			«IF php»
-				«EXPAND getDataValue(php, container) FOREACH inFlows SEPARATOR " == "»
+				«EXPAND getDataValue(php) FOREACH inFlows SEPARATOR " == "»
 			«ELSE»
-				is_array_equal(new Array(«EXPAND getDataValue(php, container) FOREACH inFlows SEPARATOR ", "»))
+				is_array_equal(new Array(«EXPAND getDataValue(php) FOREACH inFlows SEPARATOR ", "»))
 			«ENDIF»
 		«ELSEIF name == "true?"-»
 			«REM»check all inflow targets are identical«ENDREM»
 			«IF php»
-				«EXPAND trueDecisionOperationSource(php, container) FOREACH inFlows SEPARATOR " == "»
+				«EXPAND trueDecisionOperationSource(php) FOREACH inFlows SEPARATOR " == "»
 			«ELSE»
-				is_array_true(new Array(«EXPAND trueDecisionOperationSource(php, container) FOREACH inFlows SEPARATOR ", "»))
+				is_array_true(new Array(«EXPAND trueDecisionOperationSource(php) FOREACH inFlows SEPARATOR ", "»))
 			«ENDIF»
 		«ELSEIF name == "can cast?"-»
 			«REM»inflow should be a CastNode; ask the CastNode about the success of the cast.«ENDREM»
 			«IF inFlows.from.typeSelect(model::operations::CastNode).isEmpty»
 				«throwException("'can cast?' check needs to have at least one incoming CastNode")»
 			«ENDIF»
-			«EXPAND getCastCanCast(php, container) FOREACH inFlows.from.typeSelect(model::operations::CastNode) SEPARATOR " && "»
+			«EXPAND getCastCanCast(php) FOREACH inFlows.from.typeSelect(model::operations::CastNode) SEPARATOR " && "»
 		«ELSE»
 			«REM»unknown condition«ENDREM»
 			«throwException("Unknown DecisionCondition '" + name + "': " + this)»
@@ -134,21 +134,21 @@
 	}
 «ENDDEFINE»
 
-«DEFINE chainedEventFlow(Boolean php, model::visual::Frame currentFrame) FOR model::DataFlowEdgeDestination»
+«DEFINE chainedEventFlow(Boolean php) FOR model::DataFlowEdgeDestination»
 	/**
 	 * Unexpected data flow edge destination: «this».
 	 * Will not continue chained event trigger expansion. 
 	 */
 «ENDDEFINE»
 
-«DEFINE chainedEventFlow(Boolean php, model::visual::Frame currentFrame) FOR model::Property»
+«DEFINE chainedEventFlow(Boolean php) FOR model::Property»
 	/* Chained event property: «this» */
 	«IF model::VisibleThing.isInstance(eContainer)»
 		«LET ((model::VisibleThing) eContainer) AS vt»
 		«IF vt.onEdit != null»
 			/* A property has changed - call any event triggers in its parent called "edit" */
 			/* We assume the value to pass is stored in 'value' */
-			«EXPAND chainedEvent(php, true, currentFrame, "edit") FOR vt.onEdit»
+			«EXPAND chainedEvent(php, true, "edit") FOR vt.onEdit»
 		«ENDIF»
 		«ENDLET»
 	«ELSE»
@@ -160,11 +160,11 @@
  * Chained events?
  * @param type the type of event, i.e. "edit", "access"
  */
-«DEFINE chainedEvent(Boolean php, Boolean inStoreDb, model::visual::Frame currentFrame, String type) FOR model::EventTrigger»
+«DEFINE chainedEvent(Boolean php, Boolean inStoreDb, String type) FOR model::EventTrigger»
 	// expanding chained event trigger «name»
 	«IF type=="edit"»
-		«EXPAND OperationCall::callOperation(php, inStoreDb, currentFrame) FOREACH outWires»
-		«EXPAND OperationCall::callOperation(php, inStoreDb, currentFrame) FOREACH outActions»
+		«EXPAND OperationCall::callOperation(php, inStoreDb) FOREACH outWires»
+		«EXPAND OperationCall::callOperation(php, inStoreDb) FOREACH outActions»
 	«ELSEIF type=="access"»
 		// we don't expand 'access' events as part of a chain
 	«ELSE»
@@ -175,8 +175,8 @@
 /**
  * Specific operation templates.
  */
-«DEFINE getDataValue(Boolean php, model::visual::Frame container) FOR model::DataFlowEdge-»
-	«EXPAND DataFlow::dataSource(php, container) FOR from-»
+«DEFINE getDataValue(Boolean php) FOR model::DataFlowEdge-»
+	«EXPAND DataFlow::dataSource(php) FOR from-»
 «ENDDEFINE»
 
 
@@ -184,25 +184,25 @@
  * Get all the inflows for a DecisionOperation[equal], which are
  * then compared for equality.
  */
-«DEFINE trueDecisionOperationSource(Boolean php, model::visual::Frame container) FOR model::DataFlowEdge-»
-	make_into_boolean(«EXPAND DataFlow::dataSource(php, container) FOR from-»)
+«DEFINE trueDecisionOperationSource(Boolean php) FOR model::DataFlowEdge-»
+	make_into_boolean(«EXPAND DataFlow::dataSource(php) FOR from-»)
 «ENDDEFINE»
 
 /**
  * Can the given cast node cast successfully? 
  */
-«DEFINE getCastCanCast(Boolean php, model::visual::Frame container) FOR model::operations::CastNode-»
+«DEFINE getCastCanCast(Boolean php) FOR model::operations::CastNode-»
 	can_cast(
 		«IF inFlows.size != 1»
 			«throwException("Incorrect number of arguments for cast source:" + inFlows.size)»
 		«ENDIF»
-		«EXPAND DataFlow::dataSource(php, container) FOREACH inFlows.from-»,
+		«EXPAND DataFlow::dataSource(php) FOREACH inFlows.from-»,
 
 		«LET outFlows.select(o | isCastDestination(o.to)) AS targets»
 			«IF targets.size != 1»
 				«throwException("Too many cast targets for castNode " + this + ": " + targets.size)»
 			«ENDIF»
-			«EXPAND DataTypes::getDataType(php, container) FOREACH targets.to-»
+			«EXPAND DataTypes::getDataType(php) FOREACH targets.to-»
 		«ENDLET»
 	)
 «ENDDEFINE»
@@ -210,10 +210,10 @@
 /**
  * outflowTarget <-- inflowTarget
  */
-«DEFINE setPropertyToValueOperation(model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::PrimitiveOperation-»
+«DEFINE setPropertyToValueOperation(model::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
 	// outFlows first to = «outFlows.first().to»
 	«IF php»
-		$arg0 = «EXPAND DataFlow::dataSource(php, container) FOR inFlows.first().from-»; 
+		$arg0 = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»; 
 		«IF containingSession(outFlows.first().to) != null»
 			$_SESSION["«safeName(containingSession(outFlows.first().to))»_«safeName(outFlows.first().to)-»"] = $arg0;
 		«ELSE»
@@ -221,7 +221,7 @@
 		«ENDIF»
 		if (true) {
 	«ELSE»
-		var value = «EXPAND DataFlow::dataSource(php, container) FOR inFlows.first().from-»;
+		var value = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
 		if (value !== null) {
 			// ignore null parameters
 			// a null parameter may occur if the remote parameter source is unavailable, or we will have a stored_event that
@@ -229,27 +229,29 @@
 			«IF canBeSet(outFlows.first().to.eContainer)»
 				// inflow container = «containingFrame(inFlows.first().from)»
 				// outflow container = «containingFrame(outFlows.first().to)»
-				«IF container == containingFrame(outFlows.first().to)»
+				if (containing_frame("«safeName(outFlows.first().to)»") == get_frame_id()) {
 					// set a variable in the current frame
 					«EXPAND DataFlow::dataTarget(php) FOR outFlows.first().to» = value;
 					
 					// set server/session variables too
 					«EXPAND OutgoingValues::outgoingValue((model::visual::InputTextField) outFlows.first().to.eContainer) FOR outFlows.first().to»
-				«ELSEIF containingSession(outFlows.first().to) != null»
-					// the target is a session variable
-					set_session("«safeName(containingSession(outFlows.first().to))»_«safeName(outFlows.first().to)»", 
-						value, 
-						function_queue);
-					function_queue_queued = true;		// we are waiting for it to return to execute the function queue
-					
-				«ELSE»
-					// the target is a remote variable
-
-					set_application_value("«outFlows.first().to.safeName()»", 
-						value, 
-						function_queue);
-					function_queue_queued = true;		// we are waiting for it to return to execute the function queue
-				«ENDIF»
+				} else {
+					«IF containingSession(outFlows.first().to) != null»
+						// the target is a session variable
+						set_session("«safeName(containingSession(outFlows.first().to))»_«safeName(outFlows.first().to)»", 
+							value, 
+							function_queue);
+						function_queue_queued = true;		// we are waiting for it to return to execute the function queue
+						
+					«ELSE»
+						// the target is a remote variable
+	
+						set_application_value("«outFlows.first().to.safeName()»", 
+							value, 
+							function_queue);
+						function_queue_queued = true;		// we are waiting for it to return to execute the function queue
+					«ENDIF»
+				}
 			«ELSEIF isDomainAttribute(outFlows.first().to.eContainer)-»
 				«REM»direct field --> domain attribute«ENDREM»
 				store_db('«safeNameString(((model::DomainAttribute) outFlows.first().to.eContainer).id)»',
@@ -285,7 +287,7 @@
 	«ENDREM»
 	«IF shouldExpandEventTriggers(this)»
 		// call outgoing event triggers (if any) 
-		«EXPAND chainedEventFlow(php, container) FOREACH outFlows.to-»
+		«EXPAND chainedEventFlow(php) FOREACH outFlows.to-»
 	«ELSE»
 		// we don't call additional events for «eContainer» 
 	«ENDIF»
@@ -300,12 +302,12 @@
 /**
  * Set temporary variable <-- inFlow
  */
-«DEFINE setOperation(model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::PrimitiveOperation-»
+«DEFINE setOperation(model::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
 	«REM»set a temporary variable«ENDREM»
 	«IF php»
-		$temp_«safeName(outFlows.first().to)» = «EXPAND DataFlow::dataSource(php, container) FOR inFlows.first().from-»;
+		$temp_«safeName(outFlows.first().to)» = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
 	«ELSE»
-		temp_«safeName(outFlows.first().to)» = «EXPAND DataFlow::dataSource(php, container) FOR inFlows.first().from-»;
+		temp_«safeName(outFlows.first().to)» = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
 	«ENDIF»
 
 	«REM»continue«ENDREM»
@@ -317,7 +319,7 @@
 /**
  * Hide a visible thing.
  */
-«DEFINE hideOperation(model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::PrimitiveOperation-»
+«DEFINE hideOperation(model::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
 	/* hide a visible thing: «this» */
 	«IF php»
 		// server-side: set property for later
@@ -328,12 +330,12 @@
 		«ENDIF»
 	«ELSE»
 		// client-side
-		«IF containingFrame(eContainer) == container»
+		if (containing_frame("«safeName(eContainer)»") == get_frame_id()) {
 			// it exists on this page
 			document.getElementById('«safeName(eContainer)»').style.display = "none";
-		«ELSE»
+		} else {
 			// it doesn't exist on this page
-		«ENDIF»
+		}
 		
 		// persist properties
 		«IF containingSession(eContainer) != null»
@@ -352,7 +354,7 @@
 /**
  * Show a visible thing.
  */
-«DEFINE showOperation(model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::PrimitiveOperation-»
+«DEFINE showOperation(model::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
 	/* show a visible thing: «this» */
 	«IF php»
 		// server-side: set property for later
@@ -363,12 +365,12 @@
 		«ENDIF»
 	«ELSE»
 		// client-side
-		«IF containingFrame(eContainer) == container»
+		if (containing_frame("«safeName(eContainer)»") == get_frame_id()) {
 			// it exists on this page
 			document.getElementById('«safeName(eContainer)»').style.display = "";
-		«ELSE»
+		} else {
 			// it doesn't exist on this page
-		«ENDIF»
+		}
 		
 		// persist properties
 		«IF containingSession(eContainer) != null»
@@ -390,17 +392,17 @@
  *
  * TODO remove this and replace with a generic 'alert()' method.
  */
-«DEFINE javascriptAlert(model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::PrimitiveOperation-»
+«DEFINE javascriptAlert(model::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
 	«IF php»
 		«REM»how are we supposed to throw an alert on the client from the server?«ENDREM»
-		throw new IamlRuntimeException("Cannot call a Javascript alert from server-side: " . «EXPAND DataFlow::dataSource(php, container) FOR inFlows.first().from-»);
+		throw new IamlRuntimeException("Cannot call a Javascript alert from server-side: " . «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»);
 	«ELSE»
 		// throw an alert box
 		// NOTE: alert boxes currently aren't owned by any element; they are a direct
 		// hack to display something immediately. eventually, this should be replaced
 		// with a generic alert(), that will render an alert box in the most appropriate
 		// way for the alert container. 
-		alert(«EXPAND DataFlow::dataSource(php, container) FOR inFlows.first().from-»);
+		alert(«EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»);
 	«ENDIF»
 
 	«REM»continue«ENDREM»

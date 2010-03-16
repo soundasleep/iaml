@@ -2,15 +2,15 @@
 
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE runEntryGate(model::visual::Frame currentFrame) FOR model::components::EntryGate-»
+«DEFINE runEntryGate FOR model::components::EntryGate-»
 /* entry gate '«safeName()»' */
 
 /* expand conditions - do any of them fail? */
-if (!(«EXPAND template::conditions::Runtime::callCondition(true, false, currentFrame) FOREACH inConditionEdges SEPARATOR " && "»)) {
+if (!(«EXPAND template::conditions::Runtime::callCondition(true, false) FOREACH inConditionEdges SEPARATOR " && "»)) {
 	// condition failed
 	
 	// save the current frame, for resuming
-	$resume = "«safeName(currentFrame)»";
+	$resume = get_frame_id();
 	«IF containingSession(this) != null»
 		$_SESSION["«safeName(containingSession(this))»_«safeNameString(id)»"] = $resume;
 	«ELSE»
@@ -18,7 +18,7 @@ if (!(«EXPAND template::conditions::Runtime::callCondition(true, false, currentF
 	«ENDIF»
 	
 	// execute any wires
-	«EXPAND template::events::Frame::runGateWires(currentFrame) FOR this»
+	«EXPAND template::events::Frame::runGateWires FOR this»
 }
 
 «ENDDEFINE»

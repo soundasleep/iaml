@@ -60,7 +60,7 @@
 			
 				«IF onEdit != null»
 					// expand all onEdits
-					«EXPAND template::events::EventCall::callEvent(false, currentFrame) FOR onEdit-»
+					«EXPAND template::events::EventCall::callEvent(false) FOR onEdit-»
 				«ENDIF»
 
 				// outgoing values
@@ -81,7 +81,7 @@
 			addOnloadFunction( function() {
 			«IF onAccess != null»
 				// expand all onAccess
-				«EXPAND template::events::EventCall::callEvent(false, currentFrame) FOR onAccess-»
+				«EXPAND template::events::EventCall::callEvent(false) FOR onAccess-»
 			«ENDIF»
 			} );
 		/* ]]> */
@@ -134,7 +134,7 @@
 
 «DEFINE staticInitialValue(model::visual::Frame currentFrame) FOR model::QueryParameter»
 	«REM»from the query«ENDREM»
-	value="<?php echo «EXPAND template::operations::Parameters::callParameterValue(true, false, currentFrame)»; ?>"
+	value="<?php echo «EXPAND template::operations::Parameters::callParameterValue(true, false)»; ?>"
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

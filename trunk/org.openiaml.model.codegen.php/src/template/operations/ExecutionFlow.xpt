@@ -14,11 +14,11 @@
  * @param operation is the current operation flow from an operation? if false, it is from a condition.  
  */
 # @implementation StartNode If a {@model StartNode} has more than one {@model ExecutionEdge} coming out of it, they will be executed sequentially. 
-«DEFINE executionFlow(Boolean operation, model::visual::Frame container, Boolean php) FOR model::operations::StartNode-»
-	«EXPAND executionFlowInternal(operation, container, php, outExecutions) FOR this»
+«DEFINE executionFlow(Boolean operation, Boolean php) FOR model::operations::StartNode-»
+	«EXPAND executionFlowInternal(operation, php, outExecutions) FOR this»
 «ENDDEFINE»
 
-«DEFINE executionFlowInternal(Boolean operation, model::visual::Frame container, Boolean php, List[model::ExecutionEdge] edges) FOR model::ExecutionEdgesSource-»
+«DEFINE executionFlowInternal(Boolean operation, Boolean php, List[model::ExecutionEdge] edges) FOR model::ExecutionEdgesSource-»
 	// flow starts here
 	/**
 	 * Since Javascript does not support GOTO, we must emulate this manually.
@@ -55,7 +55,7 @@
 	
 			«FOREACH allDestinations(this, {}) AS dest»
 				case "«safeName(dest)»":
-					«EXPAND executionFlowStep(operation, this, container, php) FOR dest»
+					«EXPAND executionFlowStep(operation, this, php) FOR dest»
 					break;
 			«ENDFOREACH»
 			
@@ -73,7 +73,7 @@
 	 */
 «ENDDEFINE»
 
-«DEFINE executionFlow(Boolean operation, model::visual::Frame container, Boolean php) FOR model::ActivityNode-»
+«DEFINE executionFlow(Boolean operation, Boolean php) FOR model::ActivityNode-»
 	// nothing for an activity node
 «ENDDEFINE»
 
@@ -85,7 +85,7 @@
 	("«safeName(to)-»");
 «ENDDEFINE»
 
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR emf::EObject-»
+«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, Boolean php) FOR emf::EObject-»
 	/* disabled */
 	// all destinations 1:
 	/*
@@ -96,11 +96,11 @@
 /**
  * The individual steps within a flow.
  */
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::ExecutionEdgeDestination-»
+«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, Boolean php) FOR model::ExecutionEdgeDestination-»
 	«throwException("Unknown operation contents node: " + this)»
 «ENDDEFINE»
 
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::operations::CancelNode-»
+«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, Boolean php) FOR model::operations::CancelNode-»
 	«IF operation»
 		«REM»operations will throw exceptions at CancelNodes«ENDREM»
 		«IF exceptionText.length > 0»
@@ -118,11 +118,11 @@
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::operations::StartNode-»
+«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, Boolean php) FOR model::operations::StartNode-»
 	«throwException("Should never have the executionFlowStep start at a StartNode: use executionFlow.")»
 «ENDDEFINE»
 
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::operations::FinishNode-»
+«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, Boolean php) FOR model::operations::FinishNode-»
 	// operation finished successfully
 	«IF operation»
 		«REM»operations will continue at FinishNodes (to let threads finish)«ENDREM»
@@ -156,7 +156,7 @@
  *       |-> d ----> e ->|
  */ 
 # @implementation SplitNode,JoinNode Currently execution split is implemented in a single threaded way; each {@model ExecutionEdge execution flow} is executed sequentially until all flows are complete. 
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::operations::SplitNode-»
+«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, Boolean php) FOR model::operations::SplitNode-»
 	/* a split node */
 	
 	«REM»
@@ -204,7 +204,7 @@
 		outgoing edge
 	«ENDREM»
 	«FOREACH outExecutions AS e-»
-		«EXPAND executionFlowInternal(operation, container, php, {e}) FOR this» 
+		«EXPAND executionFlowInternal(operation, php, {e}) FOR this» 
 	«ENDFOREACH»
 	
 	«REM»
@@ -214,7 +214,7 @@
 	«ENDREM»
 	// final join node = «findFinalJoinNode(this)»
 	«IF findFinalJoinNode(this) != null»
-		«EXPAND executionFlowStep(operation, start, container, php) FOR findFinalJoinNode(this)»
+		«EXPAND executionFlowStep(operation, start, php) FOR findFinalJoinNode(this)»
 	«ELSE»
 		«throwException("No join node found for split node '" + this + "'")»
 	«ENDIF»
@@ -229,7 +229,7 @@
 
 «ENDDEFINE»
 
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::operations::JoinNode-»
+«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, Boolean php) FOR model::operations::JoinNode-»
 	// split finished successfully
 	«IF php»
 		$completed_«safeName(start)» = true;
@@ -239,9 +239,9 @@
 «ENDDEFINE»
 
 /* a primitive operation: carry on */
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::PrimitiveOperation-»
+«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
 	// primitive operation "«name-»"
-	«EXPAND Contents::operationContents(start, container, php) FOR this-»
+	«EXPAND Contents::operationContents(start, php) FOR this-»
 	
 	«REM»Contents::operationContents() will expand outgoing executions as necessary«ENDREM»
 	
@@ -250,9 +250,9 @@
 «ENDDEFINE»
 
 /* a decision operation: expandOperationContents will continue the execution flow */
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::operations::DecisionOperation-»
+«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, Boolean php) FOR model::operations::DecisionOperation-»
 	// decision operation "«name-»"
-	«EXPAND Contents::operationContents(start, container, php) FOR this-»
+	«EXPAND Contents::operationContents(start, php) FOR this-»
 
 	«REM»Contents::operationContents() will expand outgoing executions as necessary«ENDREM»
 
@@ -263,9 +263,9 @@
 /**
  * A decision condition.
  */
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::operations::DecisionCondition-»
+«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, Boolean php) FOR model::operations::DecisionCondition-»
 	// decision condition "«name-»"
-	«EXPAND Contents::operationContents(start, container, php) FOR this-»
+	«EXPAND Contents::operationContents(start, php) FOR this-»
 
 	«REM»Contents::operationContents() will expand outgoing executions as necessary«ENDREM»
 «ENDDEFINE»
@@ -278,7 +278,7 @@
  * @implementation OperationCall If a {@model OperationCall} does not have any explicit pass/fail
  *    {@model ExecutionEdge ExecutionEdges} defined, then the result value is ignored.
  */
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, model::visual::Frame container, Boolean php) FOR model::operations::OperationCallNode-»
+«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, Boolean php) FOR model::operations::OperationCallNode-»
 	// virtual operation call "«name-»"
 
 	«REM»
@@ -339,12 +339,12 @@
 					function_queue("not ok");
 				}
 			«ELSE»
-				«EXPAND OperationCall::callRemoteOperation(php, false, container) FOREACH outActions.typeSelect(model::wires::RunAction)-»
+				«EXPAND OperationCall::callRemoteOperation(php, false) FOREACH outActions.typeSelect(model::wires::RunAction)-»
 			«ENDIF»
 		«ENDFOREACH»
 	«ELSE»
 		«REM»We assume '$result' will be set as the result of this operation call.«ENDREM»
-		«EXPAND OperationCall::callOperation(php, false, container) FOREACH outActions.typeSelect(model::wires::RunAction)-»
+		«EXPAND OperationCall::callOperation(php, false) FOREACH outActions.typeSelect(model::wires::RunAction)-»
 		
 		«IF getFailFlows().isEmpty || getPassFlows().isEmpty»
 			/* No conditional flows; it was just an operation call */

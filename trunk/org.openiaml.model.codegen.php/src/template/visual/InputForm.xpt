@@ -21,7 +21,7 @@
 			function onChange_«safeNameString(id)»(obj) {
 				«IF onEdit != null»
 					// expand all onEdits
-					«EXPAND template::events::EventCall::callEvent(false, currentFrame) FOR onEdit-»
+					«EXPAND template::events::EventCall::callEvent(false) FOR onEdit-»
 				«ENDIF»
 
 				return false;
@@ -30,7 +30,7 @@
 			function onClick_«safeNameString(id)»(obj) {
 				«IF onClick != null»
 					// expand all onClicks
-					«EXPAND template::events::EventCall::callEvent(false, currentFrame) FOR onClick-»
+					«EXPAND template::events::EventCall::callEvent(false) FOR onClick-»
 				«ENDIF»
 			
 				return false;

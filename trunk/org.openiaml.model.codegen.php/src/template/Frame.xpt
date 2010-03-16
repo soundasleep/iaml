@@ -13,14 +13,12 @@
 	«FILE "output/"+safeNameString(id)+".php"-»
 <?php
 /* generated frame "«name-»" */
-// include header code
-require("config.php");		// runtime library configuration
-require(IAML_RUNTIME_ROOT."global.php");	// runtime library import
-require("create_database.php");		// ensure DB exists
-require("properties_file.php");
-require("update_client_cache.php");
+«EXPAND template::Template::commonHeader("") FOR getRoot()»
 
 define("CURRENT_PAGE", "«id»");
+function get_frame_id() {
+	return CURRENT_PAGE;
+}
 
 // a default fail handler for this frame?
 «IF getFailHandler(this) != null»
@@ -41,8 +39,8 @@ define("CURRENT_PAGE", "«id»");
 «ENDIF»
 
 // expand any domain instances
-«EXPAND template::domain::Definitions::domainObjectDefinitions(true, this) FOR this-»
-«EXPAND template::domain::Definitions::domainAttributeDefinitions(true, this) FOR this-»
+«EXPAND template::domain::Definitions::domainObjectDefinitions(true) FOR this-»
+«EXPAND template::domain::Definitions::domainAttributeDefinitions(true) FOR this-»
 
 // expand any users
 «EXPAND template::users::Includes::getInclude FOREACH getRoot().eAllContents.typeSelect(model::users::Role)-»
@@ -59,8 +57,8 @@ define("CURRENT_PAGE", "«id»");
 	«IF getFailHandler(containingSession()) != null»
 		try {
 	«ENDIF»
-	«EXPAND template::events::Session::runSessionEvents(this, 'init') FOREACH {containingSession().onInit}-»
-	«EXPAND template::events::Session::runSessionEvents(this, 'access') FOREACH {containingSession().onAccess}-»
+	«EXPAND template::events::Session::runSessionEvents('init') FOREACH {containingSession().onInit}-»
+	«EXPAND template::events::Session::runSessionEvents('access') FOREACH {containingSession().onAccess}-»
 	«IF getFailHandler(containingSession()) != null»
 		} catch (IamlRuntimeException $e) {
 			// only expand the first fail handler
@@ -72,20 +70,20 @@ define("CURRENT_PAGE", "«id»");
 
 // run any event triggers for this frame
 // exceptions are now covered by the exception handlers above
-«EXPAND template::events::Frame::runFrameEvents(this, 'init') FOREACH {onInit}-»
-«EXPAND template::events::Frame::runFrameEvents(this, 'access') FOREACH {onAccess}-»
+«EXPAND template::events::Frame::runFrameEvents('init') FOREACH {onInit}-»
+«EXPAND template::events::Frame::runFrameEvents('access') FOREACH {onAccess}-»
 
 // run any entry gates connected to the containing scope(s)
-«EXPAND template::scopes::EntryGate::runEntryGate(this) FOREACH getFrameEntryGates(this)-»
+«EXPAND template::scopes::EntryGate::runEntryGate FOREACH getFrameEntryGates(this)-»
 
 // is access to this frame prevented by any other exit gate?
-«EXPAND template::scopes::ExitGate::runExitGate(this) FOREACH getAllExitGates(this)-»
+«EXPAND template::scopes::ExitGate::runExitGate FOREACH getAllExitGates(this)-»
 
 // expand any operations (both in this frame and in any surrounding scopes)
-«EXPAND template::operations::Definitions::operationDefinitions(this, true) FOR getRoot()-»		
+«EXPAND template::operations::Definitions::operationIncludes(true) FOR getRoot()-»		
 
 // expand all conditions
-«EXPAND template::conditions::Definitions::conditionDefinition(true, this) FOREACH getRoot().getAllConditions()-»
+«EXPAND template::conditions::Definitions::conditionDefinition(true) FOREACH getRoot().getAllConditions()-»
 
 // expand any dynamic element sources
 «EXPAND template::dynamic::DynamicElements::dynamicElements(true) FOR this-»
@@ -130,10 +128,18 @@ log_message("«id».php: Session data: " . print_r($_SESSION, true));
 	<script language="Javascript" type="application/javascript">
 	/* <![CDATA[ */
 		var frame_id = "«safeNameString(id)-»";
+		
+		/**
+		 * Get the current frame ID.
+		 */
+		function get_frame_id() {
+			return frame_id;
+		}
 	/* ]]> */
 	</script>
 	<script language="Javascript" type="application/javascript" src="<?php echo IAML_RUNTIME_WEB; ?>js/prototype.js"></script>
 	<script language="Javascript" type="application/javascript" src="<?php echo IAML_RUNTIME_WEB; ?>js/default.js"></script>
+	<script language="Javascript" type="application/javascript" src="onCurrentFrame.js"></script>
 	<script language="Javascript" type="application/javascript">
 	/* <![CDATA[ */
 		«EXPAND template::js::DefaultJs::defaultJs FOR this-»
@@ -151,12 +157,13 @@ log_message("«id».php: Session data: " . print_r($_SESSION, true));
 		
 	/* ]]> */
 	</script>
+	<!-- operation definitions -->
+	«EXPAND template::operations::Definitions::operationIncludes(false) FOR getRoot()-»
+	
+	<!-- other content -->
 	<script language="Javascript" type="application/javascript">
 	/* <![CDATA[ */
 		var try_catch_depth = 0;
-	
-		// operation definitions
-		«EXPAND template::operations::Definitions::operationDefinitions(this, false) FOR getRoot()-»
 
 		// register a operation handler
 		function operation_handler_«safeName()»() {
@@ -195,17 +202,17 @@ log_message("«id».php: Session data: " . print_r($_SESSION, true));
 		set_operation_handler(new operation_handler_«safeName()»());
 
 		// condition definitions
-		«EXPAND template::conditions::Definitions::conditionDefinition(false, this) FOREACH getRoot().getAllConditions()-»
+		«EXPAND template::conditions::Definitions::conditionDefinition(false) FOREACH getRoot().getAllConditions()-»
 
 		// dynamic elements
 		«EXPAND template::dynamic::DynamicElements::dynamicElements(false) FOR this-»
 
 		// domain instances
-		«EXPAND template::domain::Definitions::domainObjectDefinitions(false, this) FOR this-»
-		«EXPAND template::domain::Definitions::domainAttributeDefinitions(false, this) FOR this-»
+		«EXPAND template::domain::Definitions::domainObjectDefinitions(false) FOR this-»
+		«EXPAND template::domain::Definitions::domainAttributeDefinitions(false) FOR this-»
 
 		// cached primitive operation values
-		«EXPAND template::operations::ClientSideCache::cachedPrimitiveOperations(this) FOR getRoot()»
+		«EXPAND template::operations::ClientSideCache::cachedPrimitiveOperations FOR getRoot()»
 
 		/* actual frame onload functions (called ONCE the frame is fully loaded) */
 		var stored_onload_functions = new Array();

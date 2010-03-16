@@ -5,15 +5,15 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE attributeInstanceCall(Boolean php, model::wires::ParameterEdgeDestination wire, Boolean inStoreDb, model::DomainAttributeInstance attribute, model::visual::Frame currentFrame) FOR model::WireDestination»
+«DEFINE attributeInstanceCall(Boolean php, model::wires::ParameterEdgeDestination wire, Boolean inStoreDb, model::DomainAttributeInstance attribute) FOR model::WireDestination»
 	«throwException("Unexpected domain attribute run instance wire destination: " + this)»
 «ENDDEFINE»
 
-«DEFINE attributeInstanceCall(Boolean php, model::wires::ParameterEdgeDestination wire, Boolean inStoreDb, model::DomainAttributeInstance attribute, model::visual::Frame currentFrame) FOR model::ActionDestination»
+«DEFINE attributeInstanceCall(Boolean php, model::wires::ParameterEdgeDestination wire, Boolean inStoreDb, model::DomainAttributeInstance attribute) FOR model::ActionDestination»
 	«throwException("Unexpected domain attribute run instance action destination: " + this)»
 «ENDDEFINE»
 
-«DEFINE attributeInstanceCall(Boolean php, model::wires::ParameterEdgeDestination wire, Boolean inStoreDb, model::DomainAttributeInstance attribute, model::visual::Frame currentFrame) FOR model::Operation»
+«DEFINE attributeInstanceCall(Boolean php, model::wires::ParameterEdgeDestination wire, Boolean inStoreDb, model::DomainAttributeInstance attribute) FOR model::Operation»
 	/* domain attribute instance: attribute = «attribute», this = «this» */
 	«IF name=="save"»
 		«REM»"save" operation for DomainAttribute«ENDREM»
@@ -27,7 +27,7 @@
 		«IF isAutosaveOff(attribute)»
 			«REM»queue it up for hopefully saving it later«ENDREM»
 			queue_store_domain_attribute_«safeNameString(attribute.id)»(
-				«EXPAND template::operations::Parameters::callParameter(php, inStoreDb, false, currentFrame) FOREACH wire.inParameterEdges SEPARATOR ", "»
+				«EXPAND template::operations::Parameters::callParameter(php, inStoreDb, false) FOREACH wire.inParameterEdges SEPARATOR ", "»
 				«IF wire.inParameterEdges.size > 1»
 					«throwException("Cannot have more than one incoming parameter for a DomainAttributeInstance: " + this)»
 				«ENDIF»
@@ -35,7 +35,7 @@
 		«ELSE»
 			«REM»set it right now«ENDREM»
 			store_domain_attribute_«safeNameString(attribute.id)»(
-				«EXPAND template::operations::Parameters::callParameter(php, inStoreDb, false, currentFrame) FOREACH wire.inParameterEdges SEPARATOR ", "»
+				«EXPAND template::operations::Parameters::callParameter(php, inStoreDb, false) FOREACH wire.inParameterEdges SEPARATOR ", "»
 				«IF wire.inParameterEdges.size > 1»
 					«throwException("Cannot have more than one incoming parameter for a DomainAttributeInstance: " + this)»
 				«ENDIF»

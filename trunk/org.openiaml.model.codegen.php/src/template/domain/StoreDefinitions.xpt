@@ -7,8 +7,8 @@
 «EXTENSION template::GeneratorExtensions»
 
 /* code to _save_ attributes */
-«DEFINE storeDomainAttribute(Boolean php, model::visual::Frame currentFrame) FOR model::DomainAttributeInstance-»
-	«EXPAND storeDomainAttributeDefinition(php, currentFrame) FOR this»
+«DEFINE storeDomainAttribute(Boolean php) FOR model::DomainAttributeInstance-»
+	«EXPAND storeDomainAttributeDefinition(php) FOR this»
 
 	«IF php»
 		«IF isAutosaveOff(this)»
@@ -57,7 +57,7 @@
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE storeDomainAttributeDefinition(Boolean php, model::visual::Frame currentFrame) FOR model::DomainAttributeInstance-»
+«DEFINE storeDomainAttributeDefinition(Boolean php) FOR model::DomainAttributeInstance-»
 	«IF php»
 		function store_domain_attribute_«safeName()»($arg0) {
 			/* store a value into attribute id '«id»' */
@@ -75,7 +75,7 @@
 					«ENDIF»
 				«ELSE»
 					$attribute_name = "«safeNameString(name)-»";
-					«EXPAND evaluateSelectWireStore(currentFrame) FOR inWires.typeSelect(model::wires::SelectWire).first()»
+					«EXPAND evaluateSelectWireStore FOR inWires.typeSelect(model::wires::SelectWire).first()»
 				«ENDIF»
 			«ENDIF»
 		}
@@ -122,7 +122,7 @@
 	log_message("attribute '$attribute_name' set to '$arg0'");
 «ENDDEFINE»
 
-«DEFINE storeDomainObject(model::visual::Frame currentFrame) FOR model::DomainObjectInstance-»
+«DEFINE storeDomainObject FOR model::DomainObjectInstance-»
 	function store_object_instance_«safeName()»($attribute_name, $arg0) {
 		/* store a value into object id '«id»' */
 		«IF inWires.typeSelect(model::wires::SelectWire).isEmpty»
@@ -133,7 +133,7 @@
 				«EXPAND setNewDomainObject(inWires.typeSelect(model::wires::NewInstanceWire).first()) FOR this»
 			«ENDIF»
 		«ELSE»
-			«EXPAND evaluateSelectWireStore(currentFrame) FOR inWires.typeSelect(model::wires::SelectWire).first()»
+			«EXPAND evaluateSelectWireStore FOR inWires.typeSelect(model::wires::SelectWire).first()»
 		«ENDIF»
 	}
 	
@@ -171,7 +171,7 @@
 	«ENDLET»
 «ENDDEFINE»
 
-«DEFINE evaluateSelectWireStore(model::visual::Frame currentFrame) FOR model::wires::SelectWire»
+«DEFINE evaluateSelectWireStore FOR model::wires::SelectWire»
 	/* selection wire «this» (for storing values), assumes $arg0 exists */
 	
 	«IF model::DomainObjectInstance.isInstance(to.eContainer)»
@@ -204,7 +204,7 @@
 			SET $attribute_name = ?
 			WHERE " . «EXPAND Select::getQuery FOR this-»;
 		$args = array($arg0);
-		$args2 = array(«EXPAND template::operations::Parameters::callParameter(true, false, true, currentFrame) FOREACH inParameterEdges SEPARATOR ","»);
+		$args2 = array(«EXPAND template::operations::Parameters::callParameter(true, false, true) FOREACH inParameterEdges SEPARATOR ","»);
 		foreach ($args2 as $k) {
 			$args[] = $k;
 		}

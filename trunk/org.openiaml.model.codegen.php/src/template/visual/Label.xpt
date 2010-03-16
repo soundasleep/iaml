@@ -75,7 +75,7 @@
 			addOnloadFunction( function() {
 			«IF onAccess != null»
 				// expand all onAccess
-				«EXPAND template::events::EventCall::callEvent(false, currentFrame) FOR onAccess-»
+				«EXPAND template::events::EventCall::callEvent(false) FOR onAccess-»
 			«ENDIF»
 			} );
 		/* ]]> */
@@ -145,7 +145,7 @@
 «DEFINE staticInitialValue(model::visual::Frame currentFrame) FOR model::QueryParameter»
 	«REM»from the query«ENDREM»
 	<?php
-	$value = «EXPAND template::operations::Parameters::callParameterValue(true, false, currentFrame)»;
+	$value = «EXPAND template::operations::Parameters::callParameterValue(true, false)»;
 	if (!$label_set) {
 		echo htmlspecialchars($value);
 		$label_set = true;

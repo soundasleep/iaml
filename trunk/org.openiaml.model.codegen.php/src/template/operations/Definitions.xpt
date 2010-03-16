@@ -5,37 +5,68 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
-/* expand out the operations for the frame */
-/* this includes Frame and Session */
-«DEFINE operationDefinitions(model::visual::Frame container, Boolean php) FOR model::ContainsOperations-»
-	«EXPAND operationDefinition(container, php) FOREACH operations-»
+«DEFINE operationDefinitionFiles(Boolean php) FOR model::InternetApplication»
+	«FOREACH allContainerOperations() AS o»
+		«IF php»
+			«FILE "output/operations/" + safeName(o) + ".php"»
+			<?php				
+				«EXPAND template::Template::phpCheck»
+				
+				«EXPAND operationDefinition(php) FOR o» 
+			«ENDFILE»
+		«ELSE»
+			«FILE "output/operations/" + safeName(o) + "_js.php"»
+			<?php
+				/**
+				 * This operation needs to be executed by PHP first, to allow
+				 * server-side variables (such as values from databases) to be included.
+				 */
+
+				«EXPAND template::Template::commonHeader("../")»
+				«EXPAND template::Template::typeJavascript»
+			?>
+				«EXPAND operationDefinition(php) FOR o» 
+			«ENDFILE»
+		«ENDIF»
+	«ENDFOREACH» 
 «ENDDEFINE»
 
-«DEFINE operationDefinitions(model::visual::Frame container, Boolean php) FOR model::InternetApplication-»
-	«EXPAND operationDefinition(container, php) FOREACH allContainerOperations()-»
+/* expand out the operations for the frame */
+/* this includes Frame and Session */
+«DEFINE operationIncludes(Boolean php) FOR model::InternetApplication-»
+	«EXPAND operationInclude(php) FOREACH allContainerOperations()-»
+«ENDDEFINE»
+
+/* operation includes */
+«DEFINE operationInclude(Boolean php) FOR model::Operation-»
+	«IF php»
+		require("operations/«safeName()».php");
+	«ELSE»
+		<script language="Javascript" type="application/javascript" src="operations/«safeName()»_js.php"></script>
+	«ENDIF»
 «ENDDEFINE»
 
 /* operation definitions */
-«DEFINE operationDefinition(model::visual::Frame container, Boolean php) FOR model::Operation-»
+«DEFINE operationDefinition(Boolean php) FOR model::Operation-»
 	/* simple operation */
 	«IF php»
 	function do_«safeName()»(«EXPAND Parameters::signatures(php) FOREACH parameters.sortBy(p|p.name) SEPARATOR ", "-») {
-		«EXPAND template::operations::Contents::operationContents(null, container, php) FOR this»
+		«EXPAND template::operations::Contents::operationContents(null, php) FOR this»
 	}
 	«ELSE»
 	function do_«safeName()»(«EXPAND Parameters::signatures(php) FOREACH parameters.sortBy(p|p.name) SEPARATOR ", "-») {
-		«EXPAND template::operations::Contents::operationContents(null, container, php) FOR this»
+		«EXPAND template::operations::Contents::operationContents(null, php) FOR this»
 	}
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE operationDefinition(model::visual::Frame container, Boolean php) FOR model::operations::DecisionOperation-»
+«DEFINE operationDefinition(Boolean php) FOR model::operations::DecisionOperation-»
 	/* simple operation */
 	function do_«safeName()»(«EXPAND Parameters::signatures(php) FOREACH parameters.sortBy(p|p.name) SEPARATOR ", "-») {
 		«IF isDomainAttributeInstance(eContainer)-»
-			return «EXPAND template::domain::AttributeInstance::attributeInstanceCall(php, /* not sure about these parameters */ null, false, (model::DomainAttributeInstance) eContainer, container) FOR this»;
+			return «EXPAND template::domain::AttributeInstance::attributeInstanceCall(php, /* not sure about these parameters */ null, false, (model::DomainAttributeInstance) eContainer) FOR this»;
 		«ELSEIF isDomainObjectInstance(eContainer)-»
-			return «EXPAND template::domain::DomainInstance::domainInstanceCall(php, null, (model::DomainObjectInstance) eContainer, container) FOR this»;
+			return «EXPAND template::domain::DomainInstance::domainInstanceCall(php, null, (model::DomainObjectInstance) eContainer) FOR this»;
 		«ELSE»
 			«IF php»
 				throw new IamlRuntimeException("Unknown simple operation '«this»'");
@@ -46,7 +77,7 @@
 	}
 «ENDDEFINE»
 
-«DEFINE operationDefinition(model::visual::Frame container, Boolean php) FOR model::CompositeOperation»
+«DEFINE operationDefinition(Boolean php) FOR model::CompositeOperation»
 	/** composite operation "«name»" */
 	«IF php»
 	$running_«safeName()» = false;
@@ -75,7 +106,7 @@
 			«IF startNode() == null»
 				«throwException("Operation " + this + " had no start node")»
 			«ELSE»
-				«EXPAND ExecutionFlow::executionFlow(true, container, php) FOR startNode()-»
+				«EXPAND ExecutionFlow::executionFlow(true, php) FOR startNode()-»
 			«ENDIF»
 
 			// continue chained operations
@@ -116,7 +147,7 @@
 					}
 					var function_queue_queued = false;
 				
-					«EXPAND ExecutionFlow::executionFlow(true, container, php) FOR startNode()-»
+					«EXPAND ExecutionFlow::executionFlow(true, php) FOR startNode()-»
 					
 					// should we still run the chained functions?
 					if (!function_queue_queued)
@@ -133,7 +164,7 @@
 				}
 				var function_queue_queued = false;
 			
-				«EXPAND ExecutionFlow::executionFlow(true, container, php) FOR startNode()-»
+				«EXPAND ExecutionFlow::executionFlow(true, php) FOR startNode()-»
 				
 				// should we still run the chained functions?
 				if (!function_queue_queued)

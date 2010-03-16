@@ -53,6 +53,10 @@
 	«EXPAND template::operations::Definitions::operationDefinitionFiles(true)»
 	«EXPAND template::operations::Definitions::operationDefinitionFiles(false)»
 
+	«REM»conditions«ENDREM»
+	«EXPAND template::conditions::Definitions::conditionDefinitionFiles(true)»
+	«EXPAND template::conditions::Definitions::conditionDefinitionFiles(false)»
+
 	«REM»containing_frame() runtime checks (javascript)«ENDREM»
 	«EXPAND template::js::OnCurrentFrame::onCurrentFrame»
 	

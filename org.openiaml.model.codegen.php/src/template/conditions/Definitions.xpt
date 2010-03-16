@@ -5,6 +5,45 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
+«DEFINE conditionDefinitionFiles(Boolean php) FOR model::InternetApplication»
+	«FOREACH getAllConditions() AS c»
+		«IF php»
+			«FILE "output/conditions/" + safeName(c) + ".php"»
+			<?php				
+				«EXPAND template::Template::phpCheck»
+				
+				«EXPAND conditionDefinition(php) FOR c» 
+			«ENDFILE»
+		«ELSE»
+			«FILE "output/conditions/" + safeName(c) + "_js.php"»
+			<?php
+				/**
+				 * This condition needs to be executed by PHP first, to allow
+				 * server-side variables (such as values from databases) to be included.
+				 */
+
+				«EXPAND template::Template::commonHeader("../")»
+				«EXPAND template::Template::typeJavascript»
+			?>
+				«EXPAND conditionDefinition(php) FOR c» 
+			«ENDFILE»
+		«ENDIF»
+	«ENDFOREACH» 
+«ENDDEFINE»
+
+«DEFINE conditionIncludes(Boolean php) FOR model::InternetApplication-»
+	«EXPAND conditionInclude(php) FOREACH getAllConditions()-»
+«ENDDEFINE»
+
+/* operation includes */
+«DEFINE conditionInclude(Boolean php) FOR model::Condition-»
+	«IF php»
+		require("conditions/«safeName()».php");
+	«ELSE»
+		<script language="Javascript" type="application/javascript" src="conditions/«safeName()»_js.php"></script>
+	«ENDIF»
+«ENDDEFINE»
+
 /* expand out the conditions for the frame */
 /* this includes Frame and Session */
 «DEFINE conditionDefinition(Boolean php) FOR model::Condition-»

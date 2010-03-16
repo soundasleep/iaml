@@ -83,7 +83,7 @@ function get_frame_id() {
 «EXPAND template::operations::Definitions::operationIncludes(true) FOR getRoot()-»		
 
 // expand all conditions
-«EXPAND template::conditions::Definitions::conditionDefinition(true) FOREACH getRoot().getAllConditions()-»
+«EXPAND template::conditions::Definitions::conditionIncludes(true) FOR getRoot()-»
 
 // expand any dynamic element sources
 «EXPAND template::dynamic::DynamicElements::dynamicElements(true) FOR this-»
@@ -159,6 +159,9 @@ log_message("«id».php: Session data: " . print_r($_SESSION, true));
 	</script>
 	<!-- operation definitions -->
 	«EXPAND template::operations::Definitions::operationIncludes(false) FOR getRoot()-»
+
+	<!-- condition definitions -->
+	«EXPAND template::conditions::Definitions::conditionIncludes(false) FOR getRoot()-»
 	
 	<!-- other content -->
 	<script language="Javascript" type="application/javascript">
@@ -200,9 +203,6 @@ log_message("«id».php: Session data: " . print_r($_SESSION, true));
 			};
 		}
 		set_operation_handler(new operation_handler_«safeName()»());
-
-		// condition definitions
-		«EXPAND template::conditions::Definitions::conditionDefinition(false) FOREACH getRoot().getAllConditions()-»
 
 		// dynamic elements
 		«EXPAND template::dynamic::DynamicElements::dynamicElements(false) FOR this-»

@@ -9,11 +9,13 @@ import org.jaxen.JaxenException;
 import org.openiaml.model.model.Action;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.EventTrigger;
-import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
+import org.openiaml.model.model.operations.CancelNode;
+import org.openiaml.model.model.operations.CastNode;
+import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.visual.Frame;
@@ -48,14 +50,10 @@ public class SyncWireTestCase extends InferenceTestCase {
 
 		// these elements should now have generated elements that match
 		// the semantics specified in our .vsd file
-		Operation update = assertHasOperation(name1, "update");
-		List<?> nodes = query(update, "iaml:nodes");
-		assertEquals(nodes.size(), 2);
-		assertTrue(nodes.get(0) instanceof StartNode);
-		assertTrue(nodes.get(1) instanceof FinishNode);
+		assertHasOperation(name1, "update");
 	}
 
-	public void testAllUpdates() throws JaxenException {
+	public void testUpdateContents() throws JaxenException {
 		// get all 'update' operations
 		List<?> updates = query(root, "//iaml:operations[iaml:name='update']");
 
@@ -69,48 +67,31 @@ public class SyncWireTestCase extends InferenceTestCase {
 			CompositeOperation update = (CompositeOperation) obj;	// should be a composite operation
 			assertEquals(prelude, update.getName(), "update");
 
-			// has a start node
-			List<?> nodes = query(update, "iaml:nodes");
-			assertEquals(prelude, nodes.size(), 2);
-			assertTrue(prelude, nodes.get(0) instanceof StartNode);
-			assertTrue(prelude, nodes.get(1) instanceof FinishNode);
-
 			// -- traverse from start node --
-			StartNode start = (StartNode) nodes.get(0);
-			FinishNode stop = (FinishNode) nodes.get(1);
+			StartNode start = assertHasStartNode(update);
+			FinishNode finish = assertHasFinishNode(update);
+			CancelNode cancel = assertHasCancelNode(update);
+			
+			DecisionOperation check = assertHasDecisionOperation(update, "can cast?");
+			CastNode cast = assertHasCastNode(update);
+			
+			PrimitiveOperation set = assertHasPrimitiveOperation(update, "setPropertyToValue");
+			
+			assertHasExecutionEdge(update, start, check);
+			assertHasExecutionEdge(update, check, cancel, "no");
+			assertHasExecutionEdge(update, check, set, "yes");
+			assertHasExecutionEdge(update, set, finish);
+			
+			// data flow edges
+			Parameter param = assertHasParameter(update, "setValueTo");
+			assertHasDataFlowEdge(update, param, cast);
+			assertHasDataFlowEdge(update, cast, check);
+			assertHasDataFlowEdge(update, cast, set);
 
-			// start node should go to 'setPropertyToValue'
-			assertEquals(prelude, start.getOutExecutions().size(), 1);
-			PrimitiveOperation setProp = (PrimitiveOperation) start.getOutExecutions().get(0).getTo();
-			assertEquals(prelude, setProp.getName(), "setPropertyToValue");
-
-			// setProperty should have one node: a parameter
-			assertEquals(prelude, setProp.getInFlows().size(), 1);
-			assertTrue(prelude, setProp.getInFlows().get(0).getFrom() instanceof Parameter);
-
-			// setProperty should flow out to ApplicationElementProperty
-			assertEquals(prelude, setProp.getOutFlows().size(), 1);
-			Property outProp = (Property) setProp.getOutFlows().get(0).getTo();
-			assertEquals(prelude, outProp.getName(), "fieldValue");
-
-			// this property should belong to an application element with a different name
-			assertNotSame(prelude, ((NamedElement) outProp.eContainer()).getName(), "name" + i);
-
-			// finally, the op should go to the stop node above
-			assertEquals(prelude, setProp.getOutExecutions().size(), 1);
-			FinishNode finalNode = (FinishNode) setProp.getOutExecutions().get(0).getTo();
-
-			assertEquals(prelude, stop, finalNode);
+			assertEquals(1, set.getOutFlows().size());
+			Property f2 = (Property) set.getOutFlows().get(0).getTo();
+			assertEquals("fieldValue", f2.getName());
 		}
-	}
-
-	public void testWires() throws JaxenException {
-		// get all 'update' operations
-		//List<Object> syncWires = query(root, "//iaml:wires[xsi:type='iaml.wires:SyncWire']");
-		List<?> syncWires = query(root, "//iaml:wires[contains(iaml:name, 'sync') and contains(eClass(), 'SyncWire')]");
-
-		// there are exactly three sync wires
-		assertEquals(3, syncWires.size());
 	}
 
 	public void testSyncWire1() throws JaxenException {

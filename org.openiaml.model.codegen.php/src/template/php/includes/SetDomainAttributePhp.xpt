@@ -8,9 +8,7 @@
  * For setting a domain attribute instance.
  */
  
-require("config.php");		// runtime library configuration
-require(IAML_RUNTIME_ROOT."global.php");	// runtime library import
-require("update_client_cache.php");
+«EXPAND template::Template::commonHeader("")»
 
 «EXPAND template::domain::Definitions::domainDefinitions»
 

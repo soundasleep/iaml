@@ -20,6 +20,8 @@ function get_frame_id() {
 	return CURRENT_PAGE;
 }
 
+«EXPAND Common::commonPHPIncludes FOR getRoot()-»
+
 // a default fail handler for this frame?
 «IF getFailHandler(this) != null»
 	function frame_fail_handler($e) {
@@ -37,13 +39,6 @@ function get_frame_id() {
 	}
 	set_exception_handler('session_fail_handler');
 «ENDIF»
-
-// expand any domain instances
-«EXPAND template::domain::Definitions::domainObjectDefinitions(true) FOR this-»
-«EXPAND template::domain::Definitions::domainAttributeDefinitions(true) FOR this-»
-
-// expand any users
-«EXPAND template::users::Includes::getInclude FOREACH getRoot().eAllContents.typeSelect(model::users::Role)-»
 
 // initialise default values for any fields
 «EXPAND initialiseDefaultValues FOREACH children»
@@ -78,12 +73,6 @@ function get_frame_id() {
 
 // is access to this frame prevented by any other exit gate?
 «EXPAND template::scopes::ExitGate::runExitGate FOREACH getAllExitGates(this)-»
-
-// expand any operations (both in this frame and in any surrounding scopes)
-«EXPAND template::operations::Definitions::operationIncludes(true) FOR getRoot()-»		
-
-// expand all conditions
-«EXPAND template::conditions::Definitions::conditionIncludes(true) FOR getRoot()-»
 
 // expand any dynamic element sources
 «EXPAND template::dynamic::DynamicElements::dynamicElements(true) FOR this-»
@@ -162,6 +151,10 @@ log_message("«id».php: Session data: " . print_r($_SESSION, true));
 
 	<!-- condition definitions -->
 	«EXPAND template::conditions::Definitions::conditionIncludes(false) FOR getRoot()-»
+
+	<!-- domain instances -->
+	«EXPAND template::domain::Definitions::domainObjectDefinitions(false) FOR getRoot()-»
+	«EXPAND template::domain::Definitions::domainAttributeDefinitions(false) FOR getRoot()-»
 	
 	<!-- other content -->
 	<script language="Javascript" type="application/javascript">
@@ -206,10 +199,6 @@ log_message("«id».php: Session data: " . print_r($_SESSION, true));
 
 		// dynamic elements
 		«EXPAND template::dynamic::DynamicElements::dynamicElements(false) FOR this-»
-
-		// domain instances
-		«EXPAND template::domain::Definitions::domainObjectDefinitions(false) FOR this-»
-		«EXPAND template::domain::Definitions::domainAttributeDefinitions(false) FOR this-»
 
 		// cached primitive operation values
 		«EXPAND template::operations::ClientSideCache::cachedPrimitiveOperations FOR getRoot()»

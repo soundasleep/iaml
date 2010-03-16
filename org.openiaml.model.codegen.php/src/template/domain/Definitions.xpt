@@ -19,16 +19,19 @@
 /**
  * Expand out all domain object instances.
  */
-«DEFINE domainObjectDefinitions(Boolean php) FOR model::visual::Frame»
-	«IF php»
-		«REM»call parent definition (immediately below)«ENDREM»
-		«EXPAND domainObjectDefinitions(php) FOR getRoot()»
-	«ELSE»
-		/* empty */
-	«ENDIF»
-«ENDDEFINE»
 «DEFINE domainObjectDefinitions(Boolean php) FOR model::InternetApplication»
 	«IF php»
+		require_once(ROOT_PATH . "domain/all_domain_objects.php");
+	«ELSE»
+		<!-- empty -->
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE allDomainObjectDefinitions FOR model::InternetApplication»
+	«FILE "output/domain/all_domain_objects.php"»
+		<?php
+		«EXPAND template::Template::phpCheck»
+		
 		«EXPAND template::domain::Includes::getInclude FOREACH getRoot().getAllDomainObjects()» 
 
 		«EXPAND GetDefinitions::getDomainObject FOREACH getRoot().getAllDomainObjectInstances()»
@@ -48,9 +51,7 @@
 			
 			return $direct_joins;
 		}
-	«ELSE»
-		/* empty */
-	«ENDIF»
+	«ENDFILE»
 «ENDDEFINE»
 
 /**
@@ -58,17 +59,33 @@
  */
 «DEFINE domainAttributeDefinitions(Boolean php) FOR model::InternetApplication»
 	«IF php»
-		«EXPAND Includes::getInclude FOREACH getAllDomainAttributeInstances()»
+		require_once(ROOT_PATH . "domain/all_domain_attributes.php");
 	«ELSE»
-		«EXPAND StoreDefinitions::storeDomainAttribute(php) FOREACH getAllDomainAttributeInstances()»
+		<script language="Javascript" type="application/javascript" src="domain/all_domain_attributes_js.php"></script>
 	«ENDIF»
 «ENDDEFINE»
-«DEFINE domainAttributeDefinitions(Boolean php) FOR model::visual::Frame»
-	«IF php»
-		«EXPAND domainAttributeDefinitions(php) FOR getRoot()»
-	«ELSE»
-		«EXPAND StoreDefinitions::storeDomainAttribute(php) FOREACH getRoot().getAllDomainAttributeInstances()»
-	«ENDIF»
+
+«DEFINE allDomainAttributeDefinitions FOR model::InternetApplication»
+	«FILE "output/domain/all_domain_attributes.php"»
+		<?php
+		«EXPAND template::Template::phpCheck»
+		
+		«EXPAND Includes::getInclude FOREACH getAllDomainAttributeInstances()»
+	«ENDFILE»
+
+	«FILE "output/domain/all_domain_attributes_js.php"»
+		<?php
+			/**
+			 * This operation needs to be executed by PHP first, to allow
+			 * server-side variables (such as values from databases) to be included.
+			 */
+
+			«EXPAND template::Template::commonHeader("../")»
+			«EXPAND template::Template::typeJavascript»
+		?>
+		
+		«EXPAND StoreDefinitions::storeDomainAttribute(false) FOREACH getAllDomainAttributeInstances()»
+	«ENDFILE»
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

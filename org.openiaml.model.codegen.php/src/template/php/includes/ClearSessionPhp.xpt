@@ -8,8 +8,7 @@
  * Clear the existing session.
  */
  
-require("config.php");		// runtime library configuration
-require(IAML_RUNTIME_ROOT."global.php");	// runtime library import
+«EXPAND template::Template::commonHeader("")»
 
 log_message("clear_session.php? " . print_r($_GET, true));
 

@@ -23,6 +23,10 @@
 				 */
 
 				«EXPAND template::Template::commonHeader("../")»
+				
+				// references to other conditions, operations
+				«EXPAND template::Common::commonPHPIncludes FOR getRoot()-»
+				
 				«EXPAND template::Template::typeJavascript»
 			?>
 				«EXPAND conditionDefinition(php) FOR c» 
@@ -38,7 +42,7 @@
 /* operation includes */
 «DEFINE conditionInclude(Boolean php) FOR model::Condition-»
 	«IF php»
-		require("conditions/«safeName()».php");
+		require_once(ROOT_PATH . "conditions/«safeName()».php");
 	«ELSE»
 		<script language="Javascript" type="application/javascript" src="conditions/«safeName()»_js.php"></script>
 	«ENDIF»

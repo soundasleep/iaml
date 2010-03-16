@@ -10,8 +10,7 @@
 
 header('HTTP/1.1 503 Service Unavailable');
 
-require("config.php");		// runtime library configuration
-require(IAML_RUNTIME_ROOT."global.php");	// runtime library import
+«EXPAND template::Template::commonHeader("")»
 
 log_message("exception.php? " . print_r($_GET, true));
 $fail = require_get("fail", "No exception specified"); 

@@ -4,14 +4,13 @@
 package org.openiaml.model.tests.codegen.model0_4_4;
 
 import org.eclipse.core.resources.IFile;
-import org.openiaml.model.tests.CodegenTestCase;
 
 /**
  * @example SyncWire,InputTextField
  * 		{@model SyncWire}s connected between {@model InputTextField}s of
  * 		different types.
  */
-public class InputTextFieldDataTypeSync extends CodegenTestCase {
+public class InputTextFieldDataTypeSync extends WarningEnabledCodegenTestCase {
 	
 	@Override
 	protected void setUp() throws Exception {
@@ -183,24 +182,6 @@ public class InputTextFieldDataTypeSync extends CodegenTestCase {
 		assertProblem();
 		assertMatch("Invalid input.");
 		
-	}
-
-	/**
-	 * Override to check also for warnings.
-	 */
-	@Override
-	protected void assertProblem() {
-		resetDebug();
-		assertMatch("(Error|error|Exception|exception|Warning|warning)");
-	}
-
-	/**
-	 * Override to check also for warnings.
-	 */
-	@Override
-	protected void assertNoProblem() {
-		resetDebug();
-		assertNoMatch("(Error|error|Exception|exception|Warning|warning)");
 	}
 
 	/**

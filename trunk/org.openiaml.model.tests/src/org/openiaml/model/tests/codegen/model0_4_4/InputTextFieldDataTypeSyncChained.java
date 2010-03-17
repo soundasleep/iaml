@@ -6,37 +6,17 @@ package org.openiaml.model.tests.codegen.model0_4_4;
 import java.util.Calendar;
 import java.util.TimeZone;
 
-import org.openiaml.model.tests.CodegenTestCase;
-
 /**
  * Chained SyncWires.
  */
-public class InputTextFieldDataTypeSyncChained extends CodegenTestCase {
+public class InputTextFieldDataTypeSyncChained extends WarningEnabledCodegenTestCase {
 	
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		root = loadAndCodegen(InputTextFieldDataTypeSyncChained.class);
 	}
-	
-	/**
-	 * Override to check also for warnings.
-	 */
-	@Override
-	protected void assertProblem() {
-		resetDebug();
-		assertMatch("(Error|error|Exception|exception|Warning|warning)");
-	}
 
-	/**
-	 * Override to check also for warnings.
-	 */
-	@Override
-	protected void assertNoProblem() {
-		resetDebug();
-		assertNoMatch("(Error|error|Exception|exception|Warning|warning)");
-	}
-	
 	/**
 	 * The home page can be accessed.
 	 * 

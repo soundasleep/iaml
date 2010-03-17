@@ -28,6 +28,7 @@ public class AllModel0_4_4CodegenTests {
 		suite.addTestSuite(TextFieldAnnotation.class);
 		suite.addTestSuite(InputTextFieldDataTypeSync.class);
 		suite.addTestSuite(InputTextFieldDataTypeSyncChained.class);
+		suite.addTestSuite(InputTextFieldDataTypeSyncDirect.class);
 
 		return suite;
 	}

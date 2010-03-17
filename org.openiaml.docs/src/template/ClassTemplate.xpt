@@ -256,6 +256,9 @@
 
 «DEFINE supertypes FOR modeldoc::EMFClass-»<span class="class_link"><a href="«fileName()»" class="«IF abstract»abstract «ENDIF»«IF interface»interface «ENDIF»">«EXPAND ModeldocTemplate::getIcon»</a> <a href="«fileName()»" class="«IF abstract»abstract «ENDIF»«IF interface»interface «ENDIF»">«name»</a></span>«ENDDEFINE»
 
+«REM»if an EReference.type is not an EMFClass (in this project), we have typeName as a string instead«ENDREM»
+«DEFINE typeName(String name) FOR emf::EObject-»<span class="class_link">«name»</span>«ENDDEFINE»
+
 «DEFINE example(Boolean local) FOR modeldoc::Example»
 	<li>
 		«EXPAND javadocElement FOR description»
@@ -351,7 +354,11 @@
 		[«lowerBound»...«IF upperBound==-1»*«ELSE»«upperBound»«ENDIF»]
 		«ENDIF»
 
-		«EXPAND supertypes FOR type»
+		«IF type != null»
+			«EXPAND supertypes FOR type»
+		«ELSE»
+			«EXPAND typeName(typeName)»
+		«ENDIF»
 	</li>
 «ENDDEFINE»
 

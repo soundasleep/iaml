@@ -17,6 +17,7 @@ import org.openiaml.model.custom.actions.ProgressEnabledAction;
 import org.openiaml.model.diagram.helpers.inference.EmfInferenceHandler;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.drools.DroolsInferenceEngine;
+import org.openiaml.model.drools.ICreateElementsFactory;
 import org.openiaml.model.inference.EcoreCreateElementsHelper;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
@@ -79,9 +80,9 @@ public class InferContainedElementsAction extends ProgressEnabledAction<Graphica
 	 * 
 	 * @return The engine to use
 	 */
-	public DroolsInferenceEngine getEngine(ICreateElements handler) {
+	public DroolsInferenceEngine getEngine(ICreateElementsFactory factory) {
 		// we add trackInsertions=true so we can actually get tracked insertions
-		return new CreateMissingElementsWithDrools(handler, true);
+		return new CreateMissingElementsWithDrools(factory, true);
 	}
 	
 	/**
@@ -91,7 +92,8 @@ public class InferContainedElementsAction extends ProgressEnabledAction<Graphica
 	 * @author jmwright
 	 *
 	 */
-	public class CreateElementsWithinContainer extends EcoreCreateElementsHelper {
+	public class CreateElementsWithinContainer extends EcoreCreateElementsHelper
+		implements ICreateElementsFactory {
 
 		private EObject container;
 		private ICreateElements parent;
@@ -234,6 +236,14 @@ public class InferContainedElementsAction extends ProgressEnabledAction<Graphica
 		public void addReference(EObject element, EStructuralFeature reference,
 				Object value) throws InferenceException {
 			parent.addReference(element, reference, value);
+		}
+
+		/* (non-Javadoc)
+		 * @see org.openiaml.model.drools.ICreateElementsFactory#createHandler(org.eclipse.emf.ecore.EObject)
+		 */
+		@Override
+		public ICreateElements createHandler(EObject model) {
+			return this;
 		}		
 		
 	}

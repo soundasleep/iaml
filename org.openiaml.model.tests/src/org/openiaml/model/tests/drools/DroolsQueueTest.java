@@ -16,9 +16,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.openiaml.model.drools.DroolsInferenceEngine;
+import org.openiaml.model.drools.EcoreInferenceHandlerFactory;
+import org.openiaml.model.drools.ICreateElementsFactory;
 import org.openiaml.model.inference.EcoreCreateElementsHelper;
 import org.openiaml.model.inference.EcoreInferenceHandler;
-import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelFactory;
@@ -43,8 +44,8 @@ public class DroolsQueueTest extends XmlTestCase {
 	
 	public class DroolsQueueEngine extends DroolsInferenceEngine {
 
-		public DroolsQueueEngine(ICreateElements handler) {
-			super(handler, false);
+		public DroolsQueueEngine(ICreateElementsFactory factory) {
+			super(factory, false);
 		}
 
 		private List<String> ruleFiles = Arrays.asList(
@@ -89,10 +90,6 @@ public class DroolsQueueTest extends XmlTestCase {
 	 * @throws Exception
 	 */
 	public void testDroolsQueue() throws Exception {
-		// obtain a new resource set
-		ResourceSet resSet = new ResourceSetImpl();
-		Resource resource = resSet.createResource(URI.createURI("drools-queue.iaml"));
-		
 		// create the model
 		InternetApplication root = ModelFactory.eINSTANCE.createInternetApplication();
 		assertNotNull(root);
@@ -103,8 +100,7 @@ public class DroolsQueueTest extends XmlTestCase {
 		assertEquals(0, root.getScopes().size());
 
 		// infer new elements
-		EcoreCreateElementsHelper helper = new EcoreInferenceHandler(resource);
-		DroolsQueueEngine engine = new DroolsQueueEngine(helper);
+		DroolsQueueEngine engine = new DroolsQueueEngine( new EcoreInferenceHandlerFactory() );
 		
 		engine.create(root, new NullProgressMonitor());
 		
@@ -124,17 +120,12 @@ public class DroolsQueueTest extends XmlTestCase {
 	 * @throws Exception
 	 */
 	public void testDroolsQueueCount() throws Exception {
-		// obtain a new resource set
-		ResourceSet resSet = new ResourceSetImpl();
-		Resource resource = resSet.createResource(URI.createURI("drools-queue.iaml"));
-		
 		// create the model
 		InternetApplication root = ModelFactory.eINSTANCE.createInternetApplication();
 		assertNotNull(root);
 
 		// infer new elements
-		EcoreCreateElementsHelper helper = new EcoreInferenceHandler(resource);
-		DroolsQueueEngine engine = new DroolsQueueEngine(helper);
+		DroolsQueueEngine engine = new DroolsQueueEngine(new EcoreInferenceHandlerFactory());
 		
 		engine.create(root, new NullProgressMonitor());
 

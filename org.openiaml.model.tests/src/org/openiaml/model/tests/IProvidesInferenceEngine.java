@@ -9,7 +9,7 @@ import java.io.IOException;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
-import org.openiaml.model.inference.ICreateElements;
+import org.openiaml.model.drools.ICreateElementsFactory;
 import org.openiaml.model.tests.CachedModelLoader.IModelReloader;
 
 /**
@@ -23,7 +23,7 @@ public interface IProvidesInferenceEngine {
 	 * 
 	 * @return
 	 */
-	public CreateMissingElementsWithDrools getInferenceEngine(ICreateElements handler, boolean trackInsertions, final IModelReloader reloader);
+	public CreateMissingElementsWithDrools getInferenceEngine(ICreateElementsFactory handler, boolean trackInsertions, final IModelReloader reloader);
 
 	/**
 	 * Save the changed, inferred model to a file for later reference.

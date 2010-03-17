@@ -6,8 +6,6 @@ package org.openiaml.model.drools;
 import java.util.Arrays;
 import java.util.List;
 
-import org.openiaml.model.inference.ICreateElements;
-
 /**
  * Uses Drools to infer new elements.
  * 
@@ -16,8 +14,8 @@ import org.openiaml.model.inference.ICreateElements;
  */
 public class CreateMissingElementsWithDrools extends DroolsInferenceEngine {
 
-	public CreateMissingElementsWithDrools(ICreateElements handler, boolean trackInsertions) {
-		super(handler, trackInsertions);
+	public CreateMissingElementsWithDrools(ICreateElementsFactory factory, boolean trackInsertions) {
+		super(factory, trackInsertions);
 	}
 
 	private List<String> ruleFiles = Arrays.asList(

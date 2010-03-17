@@ -16,6 +16,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.openiaml.emf.SoftCache;
 import org.openiaml.model.ModelLoader.ModelLoadException;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
+import org.openiaml.model.drools.EcoreInferenceHandlerFactory;
+import org.openiaml.model.drools.ICreateElementsFactory;
 import org.openiaml.model.inference.EcoreInferenceHandler;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
@@ -57,7 +59,7 @@ public class CachedModelInferer {
 			throw new IllegalArgumentException("EObject '" + root + "' has a null resource.");
 		}
 		
-		ICreateElements handler = createHandler(resource);
+		ICreateElementsFactory handler = createCreateElementsFactory();
 		CreateMissingElementsWithDrools ce = provider.getInferenceEngine(handler, false, reloader);
 		ce.create(root, logRuleSource, createMonitor());
 
@@ -114,7 +116,7 @@ public class CachedModelInferer {
 				throw new IllegalArgumentException("EObject '" + root + "' has a null resource.");
 			}
 			
-			ICreateElements handler = createHandler(resource);
+			ICreateElementsFactory handler = createCreateElementsFactory();
 			CreateMissingElementsWithDrools ce = provider.getInferenceEngine(handler, false, new IModelReloader() {
 
 				@Override
@@ -248,13 +250,13 @@ public class CachedModelInferer {
 	}
 
 	/**
-	 * Create an {@link ICreateElements} handler that can be used
+	 * Create an {@link ICreateElementsFactory} handler that can be used
 	 * to modify the model.
 	 * 
 	 * @return
 	 */
-	public EcoreInferenceHandler createHandler(Resource resource) {
-		EcoreInferenceHandler handler = new EcoreInferenceHandler(resource);
+	public ICreateElementsFactory createCreateElementsFactory() {
+		EcoreInferenceHandlerFactory handler = new EcoreInferenceHandlerFactory();
 		return handler;
 	}
 

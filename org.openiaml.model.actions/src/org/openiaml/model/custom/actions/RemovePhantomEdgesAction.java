@@ -20,9 +20,9 @@ import org.openiaml.model.ModelLoader;
 import org.openiaml.model.ModelLoader.ModelLoadException;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.drools.DroolsInferenceEngine;
+import org.openiaml.model.drools.ICreateElementsFactory;
 import org.openiaml.model.helpers.EdgeTypes;
 import org.openiaml.model.inference.EcoreInferenceHandler;
-import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.inference.InfiniteSubProgressMonitor;
 import org.openiaml.model.model.Action;
@@ -80,7 +80,7 @@ public class RemovePhantomEdgesAction extends IamlFileAction {
 	 * 
 	 * @return The engine to use
 	 */
-	public DroolsInferenceEngine getEngine(ICreateElements handler) {
+	public DroolsInferenceEngine getEngine(ICreateElementsFactory handler) {
 		return new CreateMissingElementsWithDrools(handler, false);
 	}
 	

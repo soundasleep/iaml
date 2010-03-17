@@ -80,6 +80,7 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Incoming values to an {@model Operation operation} executed by a {@model RunAction} can be accessed via Parameters."/>
     </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/plugin/org.eclipse.xsd/model/XSD.ecore#//XSDSimpleTypeDefinition"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PrimitiveOperation" eSuperTypes="#//Operation #//ExecutionEdgesSource #//WireSource #//ActionSource">
     <eAnnotations source="http://openiaml.org/comment">

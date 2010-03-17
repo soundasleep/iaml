@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.openiaml.model.diagram.edit.parts.DomainStoreEditPart;
 import org.openiaml.model.drools.DroolsInferenceEngine;
+import org.openiaml.model.drools.ICreateElementsFactory;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.model.DomainStore;
@@ -54,7 +55,7 @@ public class RefreshDomainStoreMappingsWithDrools extends UpdateWithDroolsAction
 	 * @see org.openiaml.model.diagram.custom.actions.UpdateWithDroolsAction#getEngine(org.openiaml.model.inference.ICreateElements)
 	 */
 	@Override
-	public DroolsInferenceEngine getEngine(ICreateElements handler) {
+	public DroolsInferenceEngine getEngine(ICreateElementsFactory handler) {
 		return new RefreshDataStores(handler);
 	}
 
@@ -82,9 +83,9 @@ public class RefreshDomainStoreMappingsWithDrools extends UpdateWithDroolsAction
 	 */
 	public class RefreshDataStores extends DroolsInferenceEngine {
 
-		ICreateElements handler;
+		ICreateElementsFactory handler;
 
-		public RefreshDataStores(ICreateElements handler) {
+		public RefreshDataStores(ICreateElementsFactory handler) {
 			super(handler, false);
 			this.handler = handler;
 		}
@@ -100,6 +101,7 @@ public class RefreshDomainStoreMappingsWithDrools extends UpdateWithDroolsAction
 		 * @see #addRuleFile(String)
 		 * @return
 		 */
+		@Override
 		public List<String> getRuleFiles() {
 			return ruleFiles;
 		}

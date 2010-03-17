@@ -15,6 +15,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.openiaml.model.custom.actions.ProgressEnabledAction;
 import org.openiaml.model.diagram.helpers.inference.EmfInferenceHandler;
 import org.openiaml.model.drools.DroolsInferenceEngine;
+import org.openiaml.model.drools.ICreateElementsFactory;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.model.wires.SyncWire;
@@ -118,14 +119,14 @@ public abstract class UpdateWithDroolsAction extends ProgressEnabledAction<Graph
 	 * 
 	 * @return The engine to use
 	 */
-	public abstract DroolsInferenceEngine getEngine(ICreateElements handler);
+	public abstract DroolsInferenceEngine getEngine(ICreateElementsFactory handler);
 	
 	/**
 	 * Refresh the mappings manually. Also useful for test cases.
 	 * 
 	 * @throws InferenceException 
 	 */
-	public void refreshMappings(EObject resolved, ICreateElements handler, IProgressMonitor monitor) throws InferenceException {
+	public void refreshMappings(EObject resolved, ICreateElementsFactory handler, IProgressMonitor monitor) throws InferenceException {
 		DroolsInferenceEngine engine = getEngine(handler);
 		engine.create(resolved, new SubProgressMonitor(monitor, 100));
 	}
@@ -138,7 +139,8 @@ public abstract class UpdateWithDroolsAction extends ProgressEnabledAction<Graph
 	 * @param monitor 
 	 * @return 
 	 */
-	public IStatus execute(GraphicalEditPart part, IProgressMonitor monitor) {
+	@Override
+	public IStatus execute(final GraphicalEditPart part, final IProgressMonitor monitor) {
 		try {
 			monitor.beginTask("Refreshing " + getTitle() + " mappings", 100);
 			
@@ -148,15 +150,23 @@ public abstract class UpdateWithDroolsAction extends ProgressEnabledAction<Graph
 			}
 			
 			// select the actual target
-			obj = selectRootElement(obj);
+			final EObject target = selectRootElement(obj);
+			
+			ICreateElementsFactory factory = new ICreateElementsFactory() {
+
+				@Override
+				public ICreateElements createHandler(EObject model) {
+					return new EmfInferenceHandler(
+						part.getEditingDomain(), 
+						new ArrayList<Object>(), /* affected files */
+						new SubProgressMonitor(monitor, 100), 
+						null /* IAdapter == null */,
+						target.eResource()	/* eResource */);
+				}
+				
+			};
 						
-			refreshMappings(obj, new EmfInferenceHandler(
-					part.getEditingDomain(), 
-					new ArrayList<Object>(), /* affected files */
-					new SubProgressMonitor(monitor, 100), 
-					null /* IAdapter == null */,
-					obj.eResource()	/* eResource */
-			), monitor);
+			refreshMappings(target, factory, monitor);
 			
 			monitor.done();
 				

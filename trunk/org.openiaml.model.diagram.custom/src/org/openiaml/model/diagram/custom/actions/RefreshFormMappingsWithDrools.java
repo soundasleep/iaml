@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.openiaml.model.diagram.visual.edit.parts.InputFormEditPart;
 import org.openiaml.model.drools.DroolsInferenceEngine;
+import org.openiaml.model.drools.ICreateElementsFactory;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.model.visual.InputForm;
 
@@ -20,7 +21,7 @@ public class RefreshFormMappingsWithDrools extends UpdateWithDroolsAction {
 
 	public class RefreshFormMappings extends DroolsInferenceEngine {
 
-		public RefreshFormMappings(ICreateElements handler) {
+		public RefreshFormMappings(ICreateElementsFactory handler) {
 			super(handler, false);
 		}
 
@@ -60,7 +61,7 @@ public class RefreshFormMappingsWithDrools extends UpdateWithDroolsAction {
 	 * @see org.openiaml.model.diagram.custom.actions.UpdateWithDroolsAction#getEngine(org.openiaml.model.inference.ICreateElements)
 	 */
 	@Override
-	public DroolsInferenceEngine getEngine(ICreateElements handler) {
+	public DroolsInferenceEngine getEngine(ICreateElementsFactory handler) {
 		return new RefreshFormMappings(handler);
 	}
 

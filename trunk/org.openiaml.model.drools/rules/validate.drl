@@ -48,9 +48,8 @@ rule "When two TextFields of different types are under a SyncWire, add a 'valida
 		eval ( functions.connects(sw, e1, e2) )
 		
 		eval ( e1.getType() != e2.getType() )
-		eval ( e2.getType() != null )
 		
-		not ( op : Operation ( name == "validate", eContainer == e1 ))
+		not ( op : Operation ( name == "validate", eContainer == e1, eval(functions.generatedBy(sw, op)) ))
 		
 	then
 		CompositeOperation op = handler.generatedCompositeOperation(sw, e1);
@@ -73,7 +72,7 @@ rule "When two TextFields of different types are under a SyncWire, call the 'val
 		
 		event : EventTrigger ( e1.onEdit == event )
 		
-		op : Operation ( name == "validate", eContainer == e1 )
+		op : Operation ( name == "validate", eContainer == e1, eval(functions.generatedBy(sw, op)) )
 		
 		not ( run : RunAction ( from == event, to == op ) )
 		
@@ -96,17 +95,17 @@ rule "Create contents of 'validate' operation"
 		
 		eval ( e1.getType() != e2.getType() )
 		
-		o : CompositeOperation ( name == "validate", eContainer == e1 )
-		
+		o : CompositeOperation ( name == "validate", eContainer == e1, eval(functions.generatedBy(sw, o)) )
+
 		warning : Label ( name == "Warning", eContainer == e1 )
-		
+
 		show : Operation ( name == "show", eContainer == warning )
 		hide : Operation ( name == "hide", eContainer == warning )
-		
+
 		upd : Operation ( name == "update", eContainer == warning )
 		
 		not ( start : StartNode ( eContainer == o ))
-		
+
 	then
 	
 		StartNode start = handler.generatedStartNode(o, o);

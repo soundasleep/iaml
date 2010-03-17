@@ -46,8 +46,10 @@ public class UserMultiplePermissionsOr extends AbstractDefaultRoleUserLoginTestC
 	 */
 	public void testUser() throws Exception {
 		IFile sitemap = doStandardLoginAs("user@openiaml.org", "user");
-		assertNoProblem();
+		// we actually expect a problem, because user does not have 'default role' permissions 
+		assertProblem();
 		
+		// if we then try to go to 'target', we likewise will also be prevented		
 		gotoSitemapWithProblem(sitemap, "target");
 		assertTitleNotSame("target");
 		assertProblem();		// who knows where we are?

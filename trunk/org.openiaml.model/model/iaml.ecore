@@ -885,7 +885,7 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="CastNode" eSuperTypes="#//ActivityNode #//DataFlowEdgesSource #//DataFlowEdgeDestination">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Allows one {@model DataEdgeSource data type} to be cast to another {@model DataEdgeDestination data type}. Has an outgoing &quot;failure&quot; {@model DataEdge} which can be used to check for invalid casts (otherwise a failing conversion is silent)."/>
+        <details key="documentation" value="Allows one {@model DataFlowEdgeSource data type} to be cast to another {@model DataFlowEdgeDestination data type}. Has an outgoing &quot;check&quot; {@model DataFlowEdge} which can be used to check for invalid casts (otherwise a failing conversion is silent)."/>
       </eAnnotations>
     </eClassifiers>
   </eSubpackages>

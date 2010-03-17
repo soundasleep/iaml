@@ -344,8 +344,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		} catch (AssertionFailedError e) {
 			// something went wrong in the page execution, or
 			// the output is mangled HTML: output page source for debug purposes
-			System.out.println(this.getPageSource());
-			throw e;	// carry on throwing
+			throw new RuntimeException("Did not match title '" + expectedPageTitle + "' in title '" + getTestingEngine().getPageTitle() + "'", e);
 		}
 		
 		// check to make sure we didn't run out of execution time

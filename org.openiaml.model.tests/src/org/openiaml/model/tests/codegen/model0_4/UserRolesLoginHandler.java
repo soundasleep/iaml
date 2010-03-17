@@ -48,8 +48,10 @@ public class UserRolesLoginHandler extends AbstractUserLoginTestCase {
 	 */
 	public void testUser() throws Exception {
 		IFile sitemap = doStandardLoginAs("user@openiaml.org", "user");
-		assertNoProblem();
+		// we actually expect a problem, because user does not have 'default role' permissions 
+		assertProblem();
 		
+		// if we then try to go to 'target', we likewise will also be prevented		
 		gotoSitemapWithProblem(sitemap, "target page");
 		assertTitleNotSame("target page");
 		assertProblem();		// who knows where we are?

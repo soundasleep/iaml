@@ -91,7 +91,7 @@ if ($db_type == "pdo") {
 		throw new IamlRuntimeException("no $db_type row found (table=$table_name)");
 	
 	$properties = load_properties($db_name);
-	$properties = set_property($db_name, $properties, $row_name, $arg0); 
+	$properties = set_property(ROOT_PATH . $db_name, $properties, $row_name, $arg0); 
 	
 } else {
 	throw new IamlRuntimeException("Unknown domain store type: $db_type");

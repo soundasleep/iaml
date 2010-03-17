@@ -45,6 +45,7 @@ import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
+import org.openiaml.model.model.visual.Label;
 import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.RunAction;
@@ -827,6 +828,14 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	public ShapeNodeEditPart assertHasInputTextField(
 			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
 		return assertHasRenderedNamedObject(editor, InputTextField.class, name, true, shortcutRequired);
+	}
+	
+	/**
+	 * @see #assertHasInputTextField(DiagramDocumentEditor, String, boolean, boolean)
+	 */
+	public ShapeNodeEditPart assertHasLabel(
+			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
+		return assertHasRenderedNamedObject(editor, Label.class, name, true, shortcutRequired);
 	}
 
 	/**

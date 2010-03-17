@@ -62,7 +62,7 @@ public abstract class InferenceActionTestCase extends InferenceTestCase {
 		root = loadDirectly(getTestClass());
 		
 		for (UpdateWithDroolsAction action : getActionList()) {
-			action.refreshMappings(root, CachedModelInferer.getInstance().createHandler(root.eResource()), new NullProgressMonitor());
+			action.refreshMappings(root, CachedModelInferer.getInstance().createCreateElementsFactory(), new NullProgressMonitor());
 		}
 
 		getTestInterface().checkInferredKnowledge(root);

@@ -219,7 +219,7 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 	protected void checkPartialInferenceEditor() {
 		assertEditorVisual(editor_text);
 		
-		assertEditorHasChildren(6, editor_text);
+		assertEditorHasChildren(8, editor_text);
 		
 		ShapeNodeEditPart access = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getAccessible_OnAccess());
 		ShapeNodeEditPart edit = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getEditable_OnEdit());
@@ -228,6 +228,10 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		ShapeNodeEditPart fieldValue = assertHasFieldValue(editor_text, false);
 		ShapeNodeEditPart condition = assertHasCompositeCondition(editor_text, "fieldValue is set", false);
 		
+		// model 0.4.4
+		ShapeNodeEditPart label = assertHasLabel(editor_text, "Warning", false);
+		ShapeNodeEditPart canCast = assertHasCompositeCondition(editor_text, "can cast?", false);
+		
 		// all generated
 		assertGenerated(access);
 		assertGenerated(edit);
@@ -235,6 +239,10 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		assertGenerated(init);
 		assertGenerated(fieldValue);
 		assertGenerated(condition);
+		
+		// model 0.4.4
+		assertGenerated(label);
+		assertGenerated(canCast);
 		
 		// connected by run wire
 		ConnectionNodeEditPart run = assertHasRunAction(editor_text, access, init, "run");
@@ -247,7 +255,7 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 	protected void checkFullInferenceEditor() {
 		assertEditorVisual(editor_text);
 		
-		assertEditorHasChildren(10, editor_text);
+		assertEditorHasChildren(14, editor_text);
 		
 		ShapeNodeEditPart access = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getAccessible_OnAccess());
 		ShapeNodeEditPart edit = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getEditable_OnEdit());
@@ -261,6 +269,12 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		ShapeNodeEditPart update2 = assertHasOperation(editor_text, "update", true);
 		ShapeNodeEditPart fieldValue2 = assertHasFieldValue(editor_text, true);
 
+		// model 0.4.4
+		ShapeNodeEditPart label = assertHasLabel(editor_text, "Warning", false);
+		ShapeNodeEditPart canCast = assertHasCompositeCondition(editor_text, "can cast?", false);
+		ShapeNodeEditPart label2 = assertHasLabel(editor_text, "Warning", true);
+		ShapeNodeEditPart canCast2 = assertHasCompositeCondition(editor_text, "can cast?", true);
+
 		// all generated
 		assertGenerated(access);
 		assertGenerated(edit);
@@ -271,6 +285,12 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		assertGenerated(edit2);
 		assertGenerated(update2);
 		assertGenerated(fieldValue2);
+		
+		// model 0.4.4
+		assertGenerated(label);
+		assertGenerated(canCast);
+		assertGenerated(label2);
+		assertGenerated(canCast2);
 		
 		// connected by run wire
 		ConnectionNodeEditPart run = assertHasRunAction(editor_text, access, init, "run");
@@ -314,8 +334,11 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		try {
 			super.assertEditorHasChildren(i, sub);
 		} catch (AssertionFailedError e) {
-			String children = "" + sub.getDiagramEditPart().getChildren();
-			throw new RuntimeException(children, e);
+			StringBuffer buf = new StringBuffer();
+			for (Object o : sub.getDiagramEditPart().getChildren()) {
+				buf.append(o).append('\n');
+			}
+			throw new RuntimeException(buf.toString(), e);
 		}
 	}
 	

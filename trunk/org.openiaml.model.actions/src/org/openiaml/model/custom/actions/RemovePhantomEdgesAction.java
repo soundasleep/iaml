@@ -13,6 +13,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
@@ -23,6 +24,7 @@ import org.openiaml.model.drools.DroolsInferenceEngine;
 import org.openiaml.model.drools.ICreateElementsFactory;
 import org.openiaml.model.helpers.EdgeTypes;
 import org.openiaml.model.inference.EcoreInferenceHandler;
+import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.inference.InfiniteSubProgressMonitor;
 import org.openiaml.model.model.Action;
@@ -85,6 +87,52 @@ public class RemovePhantomEdgesAction extends IamlFileAction {
 	}
 	
 	/**
+	 * Actually removes phantom edges from the given model. Does not save
+	 * the model to disk once complete.
+	 * 
+	 * @param model
+	 * @param monitor2
+	 * @throws InferenceException 
+	 */
+	public IStatus doRemovePhantomEdges(EObject model, ICreateElements handler, IProgressMonitor monitor) throws InferenceException {
+		monitor.beginTask("Removing phantom edges", 60);
+		
+		// we need to store elements to delete in a buffer, or else
+		// deleting elements will affect the iterator and cause exceptions
+		List<EObject> elementsToDelete = new ArrayList<EObject>();
+
+		if (monitor.isCanceled())
+			return Status.CANCEL_STATUS;
+
+		monitor.subTask("Identifying phantom edges");
+		Iterator<EObject> it = model.eAllContents();
+		while (it.hasNext()) {
+			EObject obj = it.next();
+			if (shouldRemove(obj)) {
+				elementsToDelete.add(obj);
+			}
+		}
+		monitor.worked(30);
+		if (monitor.isCanceled())
+			return Status.CANCEL_STATUS;
+		
+		monitor.subTask("Removing phantom edges");
+		for (EObject obj : elementsToDelete) {
+			if (obj.eContainer() != null) {
+				handler.deleteElement(obj, obj.eContainer(), obj.eContainingFeature());
+			}
+		}
+		monitor.worked(30);
+
+		if (monitor.isCanceled())
+			return Status.CANCEL_STATUS;
+		
+		monitor.done();
+		
+		return Status.OK_STATUS;
+	}
+	
+	/**
 	 * @param o
 	 * @param monitor 
 	 * @return 
@@ -109,36 +157,15 @@ public class RemovePhantomEdgesAction extends IamlFileAction {
 		// load the handler to remove elements
 		EcoreInferenceHandler handler = new EcoreInferenceHandler(loadedModel.eResource());
 		
-		// we need to store elements to delete in a buffer, or else
-		// deleting elements will affect the iterator and cause exceptions
-		List<EObject> elementsToDelete = new ArrayList<EObject>();
-
-		if (monitor.isCanceled())
-			return Status.CANCEL_STATUS;
-
-		monitor.subTask("Identifying phantom edges");
-		Iterator<EObject> it = loadedModel.eAllContents();
-		while (it.hasNext()) {
-			EObject obj = it.next();
-			if (shouldRemove(obj)) {
-				elementsToDelete.add(obj);
-			}
+		// actually remove the edges
+		IStatus status = doRemovePhantomEdges(loadedModel, handler, new SubProgressMonitor(monitor, 50));
+		if (!status.isOK()) {
+			return status;
 		}
-		monitor.worked(30);
+		
 		if (monitor.isCanceled())
 			return Status.CANCEL_STATUS;
 		
-		monitor.subTask("Removing phantom edges");
-		for (EObject obj : elementsToDelete) {
-			if (obj.eContainer() != null) {
-				handler.deleteElement(obj, obj.eContainer(), obj.eContainingFeature());
-			}
-		}
-		monitor.worked(10);
-
-		if (monitor.isCanceled())
-			return Status.CANCEL_STATUS;
-
 		// save it
 		monitor.subTask("Saving");
 		loadedModel.eResource().save(getSaveOptions());

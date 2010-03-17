@@ -61,7 +61,7 @@ public class EclipseDomainInstanceSaveOperation extends InferenceActionTestCase 
 		Frame page = assertHasFrame(root, "container");
 		DomainObjectInstance di = assertHasDomainObjectInstance(page, "domain object instance");
 
-		return action.new CreateElementsWithinContainer(di, CachedModelInferer.getInstance().createHandler(root.eResource()));
+		return action.new CreateElementsWithinContainer(di, CachedModelInferer.getInstance().createCreateElementsFactory().createHandler(root));
 	}
 
 }

@@ -17,7 +17,7 @@ import org.openiaml.model.custom.actions.ProgressEnabledAction;
 import org.openiaml.model.diagram.custom.actions.InferContainedElementsAction;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.drools.DroolsInferenceEngine;
-import org.openiaml.model.inference.ICreateElements;
+import org.openiaml.model.drools.ICreateElementsFactory;
 
 /**
  * Test partial inference, but makes sure that if we infer an element
@@ -48,7 +48,7 @@ public class PartialInferenceWithinActivations extends AbstractActionTestCase<Gr
 		return new InferContainedElementsAction() {
 
 			@Override
-			public DroolsInferenceEngine getEngine(ICreateElements handler) {
+			public DroolsInferenceEngine getEngine(ICreateElementsFactory handler) {
 				return new CreateMissingElementsWithDrools(handler, true) {
 
 					/**
@@ -81,7 +81,7 @@ public class PartialInferenceWithinActivations extends AbstractActionTestCase<Gr
 		return new InferEntireModelAction() {
 
 			@Override
-			public DroolsInferenceEngine getEngine(ICreateElements handler) {
+			public DroolsInferenceEngine getEngine(ICreateElementsFactory handler) {
 				return new CreateMissingElementsWithDrools(handler, true) {
 
 					/**

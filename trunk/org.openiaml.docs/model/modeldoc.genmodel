@@ -153,6 +153,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//EMFReference/containment"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFReference/type"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFReference/containingType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//EMFReference/typeName"/>
     </genClasses>
     <genClasses ecoreClass="modeldoc.ecore#//TemplateFile">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//TemplateFile/plugin"/>

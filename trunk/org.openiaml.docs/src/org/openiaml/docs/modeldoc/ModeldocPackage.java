@@ -1583,13 +1583,22 @@ public interface ModeldocPackage extends EPackage {
 	int EMF_REFERENCE__CONTAINING_TYPE = 5;
 
 	/**
+	 * The feature id for the '<em><b>Type Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_REFERENCE__TYPE_NAME = 6;
+
+	/**
 	 * The number of structural features of the '<em>EMF Reference</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_REFERENCE_FEATURE_COUNT = 6;
+	int EMF_REFERENCE_FEATURE_COUNT = 7;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.TemplateFileImpl <em>Template File</em>}' class.
@@ -3000,6 +3009,17 @@ public interface ModeldocPackage extends EPackage {
 	EReference getEMFReference_ContainingType();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.openiaml.docs.modeldoc.EMFReference#getTypeName <em>Type Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type Name</em>'.
+	 * @see org.openiaml.docs.modeldoc.EMFReference#getTypeName()
+	 * @see #getEMFReference()
+	 * @generated
+	 */
+	EAttribute getEMFReference_TypeName();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.docs.modeldoc.TemplateFile <em>Template File</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4128,6 +4148,14 @@ public interface ModeldocPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EMF_REFERENCE__CONTAINING_TYPE = eINSTANCE.getEMFReference_ContainingType();
+
+		/**
+		 * The meta object literal for the '<em><b>Type Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMF_REFERENCE__TYPE_NAME = eINSTANCE.getEMFReference_TypeName();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.impl.TemplateFileImpl <em>Template File</em>}' class.

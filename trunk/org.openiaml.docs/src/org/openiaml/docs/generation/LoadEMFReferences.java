@@ -43,6 +43,7 @@ public class LoadEMFReferences extends DocumentationHelper implements ILoader {
 				if (refDestEMF != null) {
 					newRef.setType(refDestEMF);
 				}
+				newRef.setTypeName(refDest.getName());
 				
 				source.getReferences().add(newRef);
 				

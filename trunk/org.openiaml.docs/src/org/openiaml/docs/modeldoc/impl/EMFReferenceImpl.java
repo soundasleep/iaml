@@ -30,6 +30,7 @@ import org.openiaml.docs.modeldoc.ModeldocPackage;
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFReferenceImpl#isContainment <em>Containment</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFReferenceImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFReferenceImpl#getContainingType <em>Containing Type</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFReferenceImpl#getTypeName <em>Type Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -125,6 +126,26 @@ public class EMFReferenceImpl extends EObjectImpl implements EMFReference {
 	 * @ordered
 	 */
 	protected EMFClass type;
+
+	/**
+	 * The default value of the '{@link #getTypeName() <em>Type Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypeName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String TYPE_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getTypeName() <em>Type Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypeName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String typeName = TYPE_NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -313,6 +334,27 @@ public class EMFReferenceImpl extends EObjectImpl implements EMFReference {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getTypeName() {
+		return typeName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTypeName(String newTypeName) {
+		String oldTypeName = typeName;
+		typeName = newTypeName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModeldocPackage.EMF_REFERENCE__TYPE_NAME, oldTypeName, typeName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -373,6 +415,8 @@ public class EMFReferenceImpl extends EObjectImpl implements EMFReference {
 				return basicGetType();
 			case ModeldocPackage.EMF_REFERENCE__CONTAINING_TYPE:
 				return getContainingType();
+			case ModeldocPackage.EMF_REFERENCE__TYPE_NAME:
+				return getTypeName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -402,6 +446,9 @@ public class EMFReferenceImpl extends EObjectImpl implements EMFReference {
 				return;
 			case ModeldocPackage.EMF_REFERENCE__CONTAINING_TYPE:
 				setContainingType((EMFClass)newValue);
+				return;
+			case ModeldocPackage.EMF_REFERENCE__TYPE_NAME:
+				setTypeName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -433,6 +480,9 @@ public class EMFReferenceImpl extends EObjectImpl implements EMFReference {
 			case ModeldocPackage.EMF_REFERENCE__CONTAINING_TYPE:
 				setContainingType((EMFClass)null);
 				return;
+			case ModeldocPackage.EMF_REFERENCE__TYPE_NAME:
+				setTypeName(TYPE_NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -457,6 +507,8 @@ public class EMFReferenceImpl extends EObjectImpl implements EMFReference {
 				return type != null;
 			case ModeldocPackage.EMF_REFERENCE__CONTAINING_TYPE:
 				return getContainingType() != null;
+			case ModeldocPackage.EMF_REFERENCE__TYPE_NAME:
+				return TYPE_NAME_EDEFAULT == null ? typeName != null : !TYPE_NAME_EDEFAULT.equals(typeName);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -479,6 +531,8 @@ public class EMFReferenceImpl extends EObjectImpl implements EMFReference {
 		result.append(upperBound);
 		result.append(", containment: ");
 		result.append(containment);
+		result.append(", typeName: ");
+		result.append(typeName);
 		result.append(')');
 		return result.toString();
 	}

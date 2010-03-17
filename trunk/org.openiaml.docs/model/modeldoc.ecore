@@ -191,6 +191,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//EMFClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="containingType" eType="#//EMFClass"
         eOpposite="#//EMFClass/references"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TemplateFile" eSuperTypes="#//Reference">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="plugin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

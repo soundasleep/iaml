@@ -16,7 +16,7 @@
  */
 «DEFINE createDomainStoreDatabase FOR model::DomainStore»
 	// first, make sure the table exists
-	$db = new PDO('sqlite:«safeName()».db') or throw_new_IamlRuntimeException("could not open db '«safeName()».db'");
+	$db = new PDO('sqlite:' . ROOT_PATH . '«safeName()».db') or throw_new_IamlRuntimeException("could not open db '«safeName()».db'");
 	
 	// now cycle through all DomainObjects in this DomainStore to create each of them
 	«EXPAND createDomainObjectDatabase FOREACH children»
@@ -62,7 +62,7 @@
 
 «DEFINE createDomainObjectPhp_Root FOR model::DomainObject»
 	// first, make sure the table exists
-	$db = new PDO('sqlite:internet_application.db') or throw_new_IamlRuntimeException("could not open db '«safeName()».db'");
+	$db = new PDO('sqlite:' . ROOT_PATH . 'internet_application.db') or throw_new_IamlRuntimeException("could not open db '«safeName()».db'");
 	
 	// now cycle through this DomainObject
 	«EXPAND createDomainObjectDatabase FOR this»

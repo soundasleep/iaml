@@ -6,7 +6,7 @@
 <?php
 
 function log_message($msg) {
-	$fp = fopen("php.log", "a");
+	$fp = fopen(ROOT_PATH . "php.log", "a");
 	fwrite($fp, date("Y-m-d H:i:s") . " store_events.php: $msg\n");
 	fclose($fp);
 }
@@ -17,7 +17,7 @@ $event_name = require_get("event_name");
 $arg0 = require_get("arg0");
 
 // first, make sure the table exists
-$db = new PDO('sqlite:stored_events.db') or die("could not open db");
+$db = new PDO('sqlite:' . ROOT_PATH . 'stored_events.db') or die("could not open db");
 $s = $db->prepare("SELECT * FROM stored_events");
 if (!$s) {
 	// create the table

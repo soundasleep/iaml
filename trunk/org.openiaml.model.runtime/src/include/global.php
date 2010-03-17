@@ -50,7 +50,7 @@ function log_message($msg, $also_debug = true) {
 	global $log_unique_id;
 	$msg = "[$log_unique_id] $msg";		// append a unique ID to help us track requests
 
-	$fp = fopen("php.log", "a");
+	$fp = fopen(ROOT_PATH . "php.log", "a");
 	$msg_indent = str_replace("\n", "\n\t", $msg);
 	fwrite($fp, date("Y-m-d H:i:s") . " $msg_indent\n");
 	fclose($fp);
@@ -105,7 +105,7 @@ function queue_log_messages($on) {
 
 // make sure that the db exists for stored_events
 try {
-	$db = new PDO('sqlite:stored_events.db') or throw_new_IamlRuntimeException("could not open db");
+	$db = new PDO('sqlite:' . ROOT_PATH . 'stored_events.db') or throw_new_IamlRuntimeException("could not open db");
 	$s = $db->prepare("SELECT * FROM stored_events");
 	if (!$s) {
 		// create the table
@@ -188,7 +188,7 @@ class IamlInvalidSessionException extends IamlRuntimeException {
  */
 function get_application_value($id, $default) {
 	global $db;
-	$db = new PDO('sqlite:stored_events.db') or throw_new_IamlRuntimeException("could not open db");
+	$db = new PDO('sqlite:' . ROOT_PATH . 'stored_events.db') or throw_new_IamlRuntimeException("could not open db");
 
 	// make sure the table is there
 	$s = $db->prepare("SELECT * FROM global_values WHERE value_id=?");
@@ -221,7 +221,7 @@ function get_application_value($id, $default) {
  */
 function set_application_value($id, $value) {
 	global $db;
-	$db = new PDO('sqlite:stored_events.db') or throw_new_IamlRuntimeException("could not open db");
+	$db = new PDO('sqlite:' . ROOT_PATH . 'stored_events.db') or throw_new_IamlRuntimeException("could not open db");
 
 	// make sure the table is there
 	$s = $db->prepare("SELECT * FROM global_values WHERE value_id=?");

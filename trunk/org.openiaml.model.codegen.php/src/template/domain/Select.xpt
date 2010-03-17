@@ -75,9 +75,9 @@
 «ENDDEFINE»
 
 «DEFINE getDatabaseStoreString FOR model::DomainStore»
-	'sqlite:«safeNameString(id)».db'
+	'sqlite:' . ROOT_PATH . '«safeNameString(id)».db'
 «ENDDEFINE»
 
 «DEFINE getDatabaseStoreString FOR model::InternetApplication»
-	'sqlite:internet_application.db' /* default database, for attributes without stores */
+	'sqlite:' . ROOT_PATH . 'internet_application.db' /* default database, for attributes without stores */
 «ENDDEFINE»

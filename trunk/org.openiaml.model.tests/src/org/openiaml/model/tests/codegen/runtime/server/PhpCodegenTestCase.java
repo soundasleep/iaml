@@ -94,7 +94,7 @@ public abstract class PhpCodegenTestCase extends CodegenTestCase {
 			if (runtime.exists()) {
 				runtime.delete(true, new NullProgressMonitor());
 			}
-			InputStream content = new ByteArrayInputStream(("<?php require(\"" + CONFIG_RUNTIME + "/global.php\"); " + string + "").getBytes());
+			InputStream content = new ByteArrayInputStream(("<?php define('ROOT_PATH', ''); require(\"" + CONFIG_RUNTIME + "/global.php\"); " + string + "").getBytes());
 			
 			runtime.create(content, true, new NullProgressMonitor());
 			if (hasStarted) {

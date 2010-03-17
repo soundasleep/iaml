@@ -10,7 +10,8 @@ import java.io.IOException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.openiaml.model.ModelLoader.ModelLoadException;
-import org.openiaml.model.inference.EcoreInferenceHandler;
+import org.openiaml.model.drools.ICreateElementsFactory;
+import org.openiaml.model.inference.EcoreCreateElementsHelper;
 import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.visual.Frame;
@@ -55,7 +56,8 @@ public class DroolsPerformanceTest extends ModelInferenceTestCase implements IMo
 				public EObject reload() throws InferenceException {
 					try {
 						InternetApplication root = (InternetApplication) DroolsPerformanceTest.this.reload();
-						EcoreInferenceHandler handler = CachedModelInferer.getInstance().createHandler(root.eResource());
+						ICreateElementsFactory factory = CachedModelInferer.getInstance().createCreateElementsFactory();
+						EcoreCreateElementsHelper handler = (EcoreCreateElementsHelper) factory.createHandler(root);
 						
 						// add the pages etc
 						for (int j = 0; j < i_copy; j++) {

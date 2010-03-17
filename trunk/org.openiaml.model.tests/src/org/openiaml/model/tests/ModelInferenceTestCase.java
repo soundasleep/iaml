@@ -28,7 +28,7 @@ import org.jaxen.JaxenException;
 import org.openiaml.model.ModelLoader.ModelLoadException;
 import org.openiaml.model.codegen.php.CheckModelInstance;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
-import org.openiaml.model.inference.ICreateElements;
+import org.openiaml.model.drools.ICreateElementsFactory;
 import org.openiaml.model.model.Action;
 import org.openiaml.model.model.ActionDestination;
 import org.openiaml.model.model.ActionSource;
@@ -171,7 +171,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * 
 	 * @return
 	 */
-	public CreateMissingElementsWithDrools getInferenceEngine(ICreateElements handler, boolean trackInsertions, final IModelReloader reloader) {
+	public CreateMissingElementsWithDrools getInferenceEngine(ICreateElementsFactory handler, boolean trackInsertions, final IModelReloader reloader) {
 		return new CreateMissingElementsWithDrools(handler, trackInsertions);
 	}
 	

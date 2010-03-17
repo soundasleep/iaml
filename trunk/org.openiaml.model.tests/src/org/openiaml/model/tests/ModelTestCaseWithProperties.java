@@ -15,7 +15,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.ModelLoader.ModelLoadException;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
-import org.openiaml.model.inference.ICreateElements;
+import org.openiaml.model.drools.ICreateElementsFactory;
 import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.tests.CachedModelLoader.IModelReloader;
 
@@ -66,7 +66,7 @@ public abstract class ModelTestCaseWithProperties extends CodegenTestCase {
 	 * @return
 	 */
 	@Override
-	public CreateMissingElementsWithDrools getInferenceEngine(ICreateElements handler, boolean trackInsertions, final IModelReloader reloader) {
+	public CreateMissingElementsWithDrools getInferenceEngine(ICreateElementsFactory handler, boolean trackInsertions, final IModelReloader reloader) {
 		if (!doPropertiesInvestigation())
 			return super.getInferenceEngine(handler, trackInsertions, reloader);
 		

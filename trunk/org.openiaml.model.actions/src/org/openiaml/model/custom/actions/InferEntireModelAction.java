@@ -18,8 +18,8 @@ import org.openiaml.model.ModelLoader;
 import org.openiaml.model.ModelLoader.ModelLoadException;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.drools.DroolsInferenceEngine;
-import org.openiaml.model.inference.EcoreInferenceHandler;
-import org.openiaml.model.inference.ICreateElements;
+import org.openiaml.model.drools.EcoreInferenceHandlerFactory;
+import org.openiaml.model.drools.ICreateElementsFactory;
 import org.openiaml.model.inference.InferenceException;
 
 /**
@@ -61,8 +61,8 @@ public class InferEntireModelAction extends IamlFileAction {
 	 * 
 	 * @return The engine to use
 	 */
-	public DroolsInferenceEngine getEngine(ICreateElements handler) {
-		return new CreateMissingElementsWithDrools(handler, false);
+	public DroolsInferenceEngine getEngine(ICreateElementsFactory factory) {
+		return new CreateMissingElementsWithDrools(factory, false);
 	}
 	
 	/**
@@ -85,13 +85,10 @@ public class InferEntireModelAction extends IamlFileAction {
 			return errorStatus(e);
 		}
 		monitor.worked(10);
-		
-		// load the inference elements manager
-		EcoreInferenceHandler handler = new EcoreInferenceHandler(model.eResource());
 
 		// do inference on the model
 		monitor.subTask("Perfoming inference");
-		DroolsInferenceEngine ce = getEngine(handler);
+		DroolsInferenceEngine ce = getEngine(new EcoreInferenceHandlerFactory());
 		ce.create(model, new SubProgressMonitor(monitor, 45));
 
 		if (monitor.isCanceled())

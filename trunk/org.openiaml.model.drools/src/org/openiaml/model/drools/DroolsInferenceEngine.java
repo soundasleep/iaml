@@ -56,7 +56,7 @@ public abstract class DroolsInferenceEngine {
 	 */
 	public static int INSERTION_ITERATION_LIMIT = 20;
 	
-	protected ICreateElements handler;
+	protected ICreateElementsFactory handlerFactory;
 	
 	/**
 	 * Stores a summary of queue elements added.
@@ -66,13 +66,13 @@ public abstract class DroolsInferenceEngine {
 
 	/**
 	 * 
-	 * @param handler The handler to create elements
+	 * @param factory The factory to create handlers to create elements
 	 * @param trackInsertions Should the DroolsInsertionQueue track the activations/elements inserted?
 	 * @see DroolsInsertionQueue#DroolsInsertionQueue(boolean)
 	 * @see DroolsInsertionQueue#getActivationFor(EObject)
 	 */
-	public DroolsInferenceEngine(ICreateElements handler, boolean trackInsertions) {
-		this.handler = handler;
+	public DroolsInferenceEngine(ICreateElementsFactory factory, boolean trackInsertions) {
+		this.handlerFactory = factory;
 		this.trackInsertions = trackInsertions;
 	}
 
@@ -227,6 +227,9 @@ public abstract class DroolsInferenceEngine {
         
         // set up the sub progress monitor
         subProgressMonitor = new InfiniteSubProgressMonitor(monitor, 45);
+        
+        // to save memory, we only create the handler here, in this scope
+        final ICreateElements handler = handlerFactory.createHandler(model);
 
         // need to set up these variables before we insert the model,
         // otherwise the agenda cannot be built (as the rule heads use

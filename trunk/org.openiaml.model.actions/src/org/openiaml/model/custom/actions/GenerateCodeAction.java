@@ -24,7 +24,10 @@ import org.openiaml.model.codegen.ICodeGenerator;
 import org.openiaml.model.codegen.php.CheckModelInstance;
 import org.openiaml.model.codegen.php.OawCodeGeneratorWithRuntime;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
+import org.openiaml.model.drools.EcoreInferenceHandlerFactory;
+import org.openiaml.model.drools.ICreateElementsFactory;
 import org.openiaml.model.inference.EcoreInferenceHandler;
+import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
 
 /**
@@ -142,11 +145,8 @@ public class GenerateCodeAction extends IamlFileAction {
 		if (monitor.isCanceled())
 			return Status.CANCEL_STATUS;
 
-		// load the inference elements manager
-		EcoreInferenceHandler handler = new EcoreInferenceHandler(model.eResource());
-
 		// do inference on the model
-		CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(handler, false);
+		CreateMissingElementsWithDrools ce = new CreateMissingElementsWithDrools(new EcoreInferenceHandlerFactory(), false);
 		ce.create(model, new SubProgressMonitor(monitor, 45));
 		
 		if (monitor.isCanceled())

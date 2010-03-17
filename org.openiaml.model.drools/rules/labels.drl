@@ -28,7 +28,7 @@ global DroolsHelperFunctions functions;
 rule "Create 'hide' PrimitiveOperation for Label"
 	when
 		tf : Label( )
-		not ( op : PrimitiveOperation ( name == "hide", eContainer == tf ))
+		not ( op : Operation ( name == "hide", eContainer == tf ))
 	
 	then
 		PrimitiveOperation warning = handler.generatedPrimitiveOperation(tf, tf);
@@ -44,7 +44,7 @@ end
 rule "Create 'show' PrimitiveOperation for Label"
 	when
 		tf : Label( )
-		not ( op : PrimitiveOperation ( name == "show", eContainer == tf ))
+		not ( op : Operation ( name == "show", eContainer == tf ))
 	
 	then
 		PrimitiveOperation warning = handler.generatedPrimitiveOperation(tf, tf);

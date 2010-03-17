@@ -214,6 +214,11 @@
 	// outFlows first to = «outFlows.first().to»
 	«IF php»
 		$arg0 = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»; 
+
+		// cast it to something we can actually represent it as first
+		// this make sure we don't accidentally call Javascript's toString() method
+		$arg0 = do_cast($arg0, 'http://openiaml.org/model/datatypes#iamlString');
+
 		«IF containingSession(outFlows.first().to) != null»
 			$_SESSION["«safeName(containingSession(outFlows.first().to))»_«safeName(outFlows.first().to)-»"] = $arg0;
 		«ELSE»
@@ -223,6 +228,10 @@
 	«ELSE»
 		var value = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
 		if (value !== null) {
+			// cast it to something we can actually represent it as first
+			// this make sure we don't accidentally call Javascript's toString() method
+			value = do_cast(value, 'http://openiaml.org/model/datatypes#iamlString');
+		
 			// ignore null parameters
 			// a null parameter may occur if the remote parameter source is unavailable, or we will have a stored_event that
 			// will populate this field

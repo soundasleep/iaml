@@ -63,7 +63,7 @@ public class EclipseInputFormInstanceMapping extends InferenceActionTestCase {
 		RefreshFormMappingsWithDrools action =
 			new RefreshFormMappingsWithDrools();
 
-		action.refreshMappings(root, CachedModelInferer.getInstance().createHandler(root.eResource()), new NullProgressMonitor());
+		action.refreshMappings(root, CachedModelInferer.getInstance().createCreateElementsFactory(), new NullProgressMonitor());
 
 		InputFormInstanceMapping parent = new InputFormInstanceMapping();
 		parent.checkNotInferredKnowledge(root);

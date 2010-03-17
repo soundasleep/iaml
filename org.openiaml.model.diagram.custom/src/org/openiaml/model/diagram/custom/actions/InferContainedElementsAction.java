@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.openiaml.model.custom.actions.ProgressEnabledAction;
+import org.openiaml.model.custom.actions.RemovePhantomEdgesAction;
 import org.openiaml.model.diagram.helpers.inference.EmfInferenceHandler;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.drools.DroolsInferenceEngine;
@@ -276,24 +277,47 @@ public class InferContainedElementsAction extends ProgressEnabledAction<Graphica
 	 * @param monitor 
 	 * @return 
 	 */
+	@Override
 	public IStatus execute(GraphicalEditPart part, IProgressMonitor monitor) {
 		try {
+			monitor.beginTask("Inferring contained elements", 20);
 			EObject container = part.resolveSemanticElement();
 
 			// select the actual target (the absolute root)
+			monitor.subTask("Finding root");
 			EObject root = getRoot(container);
+			monitor.worked(1);
+			if (monitor.isCanceled())
+				return Status.CANCEL_STATUS;
 			
+			monitor.subTask("Inferring contained elements");
+			
+			// we need a runtime handler to prevent 'cannot access transaction' errors
+			ICreateElements handler = new EmfInferenceHandler(
+					part.getEditingDomain(), 
+					new ArrayList<Object>(), /* affected files */
+					new SubProgressMonitor(monitor, 14), 
+					null /* IAdapter == null */,
+					container.eResource()	/* eResource */
+				);
+			
+			// do the inference
 			refreshContainedMappings(root, new CreateElementsWithinContainer(
-					container,
-					new EmfInferenceHandler(
-						part.getEditingDomain(), 
-						new ArrayList<Object>(), /* affected files */
-						new SubProgressMonitor(monitor, 100), 
-						null /* IAdapter == null */,
-						container.eResource()	/* eResource */
-					)
-			), monitor);
-				
+					container, handler), monitor);
+			if (monitor.isCanceled())
+				return Status.CANCEL_STATUS;
+			
+			// and then remove any phantom edges
+			monitor.subTask("Removing phantom edges");
+			RemovePhantomEdgesAction phantoms = new RemovePhantomEdgesAction();
+			IStatus status = phantoms.doRemovePhantomEdges(root, handler, new SubProgressMonitor(monitor, 5));
+			if (!status.isOK()) {
+				return status;
+			}
+			if (monitor.isCanceled())
+				return Status.CANCEL_STATUS;
+			
+			monitor.done();
 			return Status.OK_STATUS;
 	
 		} catch (InferenceException e) {

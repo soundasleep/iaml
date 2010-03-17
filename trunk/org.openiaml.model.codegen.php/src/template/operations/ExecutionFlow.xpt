@@ -20,6 +20,7 @@
 
 «DEFINE executionFlowInternal(Boolean operation, Boolean php, List[model::ExecutionEdge] edges) FOR model::ExecutionEdgesSource-»
 	// flow starts here
+	«REM»
 	/**
 	 * Since Javascript does not support GOTO, we must emulate this manually.
 	 * We also implement this in PHP to unify the approach.
@@ -28,6 +29,7 @@
 	 * into a correct structure of blocks, but this remains future work.
 	 */
 	// we emulate goto using an infinite loop of switch(pos)
+	«ENDREM»
 	«REM»initialise stack«ENDREM»
 	«IF php»
 		$call_stack_«safeName()» = new CallStack();
@@ -67,10 +69,12 @@
 					«ENDIF»
 				}
 			}
+	«REM»
 	// all destinations 2:
 	/*
 	 * «allDestinations(this, {})»
 	 */
+	«ENDREM»
 «ENDDEFINE»
 
 «DEFINE executionFlow(Boolean operation, Boolean php) FOR model::ActivityNode-»
@@ -87,10 +91,12 @@
 
 «DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, Boolean php) FOR emf::EObject-»
 	/* disabled */
+	«REM»
 	// all destinations 1:
 	/*
 	 * «allDestinations(this, {})»
 	 */
+	«ENDREM»
 «ENDDEFINE»
 
 /**
@@ -327,12 +333,14 @@
 		
 		«FOREACH outActions.typeSelect(model::wires::RunAction) AS run»
 			«IF model::PrimitiveOperation.isInstance(run.to) && ((model::PrimitiveOperation) run.to).name == "exists?"»
+				«REM»
 				/**
 				 * If we are in Javascript and we are trying to get an operation on a DomainObjectInstance (usually 'exists?') 
 				 * and we are in a condition, we can't wait for an async result. In this case, we use
 				 * cached operation results (stored in Javascript) which can be updated through
 				 * callbacks, etc.
 				 */
+				«ENDREM»
 				if (cached_result_«safeName(run.to)»()) {
 					function_queue("ok");
 				} else {

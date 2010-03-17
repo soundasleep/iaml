@@ -11,7 +11,7 @@
 «EXPAND template::Template::commonHeader("")»
 
 // condition definitions
-«EXPAND template::conditions::Definitions::conditionDefinition(true) FOREACH getRoot().getAllConditions()-»
+«EXPAND template::conditions::Definitions::conditionIncludes(true)»
 
 /**
  * Recursive functions in PHP. See default.js for Javascript implementations of these.
@@ -137,6 +137,7 @@ echo_necessary_update_callbacks();
 «ENDDEFINE»
 
 «DEFINE expandDomainAttributeDatabase(model::DomainStore store, model::DomainObject object) FOR model::DomainAttribute»
+	«IF !{onEdit}.isEmpty»
 	if ($attribute_id == "«safeNameString(id)»") {
 		$db_type = "pdo";
 		«EXPAND template::domain::Select::selectDatabase» 
@@ -147,9 +148,11 @@ echo_necessary_update_callbacks();
 		// have to then call?
 		«EXPAND expandDomainAttributeEvents("edit") FOREACH {onEdit}»
 	}
+	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE expandDomainAttributeProperties(model::DomainStore store, model::DomainObject object) FOR model::DomainAttribute»
+	«IF !{onEdit}.isEmpty»
 	if ($attribute_id == "«safeNameString(id)»") {
 		$db_type = "properties";
 		$db_name = "«store.file»";
@@ -160,6 +163,7 @@ echo_necessary_update_callbacks();
 		// have to then call?
 		«EXPAND expandDomainAttributeEvents("edit") FOREACH {onEdit}»
 	}
+	«ENDIF»
 «ENDDEFINE»
 
 /**
@@ -174,6 +178,7 @@ echo_necessary_update_callbacks();
 «ENDDEFINE»
 
 «DEFINE soleAttributeDatabase(model::DomainStore store) FOR model::DomainAttribute»
+	«IF !{onEdit}.isEmpty»
 	if ($attribute_id == "«safeNameString(id)»") {
 		$db_type = "pdo";
 		«EXPAND template::domain::Select::selectDatabase» 
@@ -184,9 +189,11 @@ echo_necessary_update_callbacks();
 		// have to then call?
 		«EXPAND expandDomainAttributeEvents("edit") FOREACH {onEdit}»
 	}
+	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE soleAttributeProperties(model::DomainStore store) FOR model::DomainAttribute»
+	«IF !{onEdit}.isEmpty»
 	if ($attribute_id == "«safeNameString(id)»") {
 		$db_type = "properties";
 		$db_name = "«store.file»";
@@ -197,6 +204,7 @@ echo_necessary_update_callbacks();
 		// have to then call?
 		«EXPAND expandDomainAttributeEvents("edit") FOREACH {onEdit}»
 	}
+	«ENDIF»
 «ENDDEFINE»
 
 /* if an InternetApplication directly contains an AbstractObject,
@@ -218,6 +226,7 @@ echo_necessary_update_callbacks();
 «ENDDEFINE»
 
 «DEFINE expandDomainAttributeRootDatabase(model::DomainObject object) FOR model::DomainAttribute»
+	«IF !{onEdit}.isEmpty»
 	if ($attribute_id == "«safeNameString(id)»") {
 		$db_type = "pdo";
 		«EXPAND template::domain::Select::selectDatabase» 
@@ -228,9 +237,11 @@ echo_necessary_update_callbacks();
 		// have to then call?
 		«EXPAND expandDomainAttributeEvents("edit") FOREACH {onEdit}»
 	}
+	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE expandDomainAttributeRootProperties(model::DomainObject object) FOR model::DomainAttribute»
+	«IF !{onEdit}.isEmpty»
 	if ($attribute_id == "«safeNameString(id)»") {
 		$db_type = "properties";
 		$db_name = "internet_application.properties";
@@ -241,6 +252,7 @@ echo_necessary_update_callbacks();
 		// have to then call?
 		«EXPAND expandDomainAttributeEvents("edit") FOREACH {onEdit}»
 	}
+	«ENDIF»
 «ENDDEFINE»
 
 /**

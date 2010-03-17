@@ -6,6 +6,16 @@
 «EXTENSION template::GeneratorExtensions»
 
 «DEFINE operationDefinitionFiles(Boolean php) FOR model::InternetApplication»
+	«FILE "output/all_operations.php"»
+		<?php				
+			«EXPAND template::Template::phpCheck»
+			
+			// a list of all operations required
+			«FOREACH allContainerOperations() AS o»
+				require_once(ROOT_PATH . "operations/«safeName(o)».php");
+			«ENDFOREACH»
+	«ENDFILE»
+
 	«FOREACH allContainerOperations() AS o»
 		«IF php»
 			«FILE "output/operations/" + safeName(o) + ".php"»
@@ -38,7 +48,11 @@
 /* expand out the operations for the frame */
 /* this includes Frame and Session */
 «DEFINE operationIncludes(Boolean php) FOR model::InternetApplication-»
-	«EXPAND operationInclude(php) FOREACH allContainerOperations()-»
+	«IF php»
+		require_once(ROOT_PATH . "all_operations.php");
+	«ELSE»
+		«EXPAND operationInclude(php) FOREACH allContainerOperations()-»
+	«ENDIF»
 «ENDDEFINE»
 
 /* operation includes */

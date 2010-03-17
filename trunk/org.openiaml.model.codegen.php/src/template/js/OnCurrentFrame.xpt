@@ -10,7 +10,25 @@
 function containing_frame(element_id) {
 	switch (element_id) {
 	
-	«FOREACH eAllContents.typeSelect(model::NamedElement) AS e»
+	«REM»
+		to reduce the size of the generated file, we are only interested
+		in particular destinations:
+		
+		1. scopes
+		2. visible things
+		3. things that can contain operations
+		4. data flow destinations that are contained by
+		   things that canBeSet()
+		   
+		everything else can return null.
+	«ENDREM»
+	«LET
+		eAllContents.select( e | model::Scope.isInstance(e) )
+			.union( eAllContents.select( e | model::VisibleThing.isInstance(e) ))
+			.union( eAllContents.select( e | model::ContainsOperations.isInstance(e) ))
+			.union( eAllContents.select( e | e.eContainer != null && canBeSet(e.eContainer) ))
+				AS targets»
+	«FOREACH targets AS e»
 		case "«safeName(e)»":
 			«IF containingFrame(e) == null»
 			return null;
@@ -18,9 +36,10 @@ function containing_frame(element_id) {
 			return "«safeName(containingFrame(e))»";
 			«ENDIF»
 	«ENDFOREACH»
+	«ENDLET»
 	
 		default:
-			throw new IamlJavascriptException("Unknown named element ID: " + element_id);
+			return null;
 	}
 }
 

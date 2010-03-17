@@ -16,7 +16,7 @@ import org.openiaml.model.model.DataFlowEdgesSource;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Allows one {@model DataEdgeSource data type} to be cast to another {@model DataEdgeDestination data type}. Has an outgoing "failure" {@model DataEdge} which can be used to check for invalid casts (otherwise a failing conversion is silent).
+ * Allows one {@model DataFlowEdgeSource data type} to be cast to another {@model DataFlowEdgeDestination data type}. Has an outgoing "check" {@model DataFlowEdge} which can be used to check for invalid casts (otherwise a failing conversion is silent).
  * <!-- end-model-doc -->
  *
  *

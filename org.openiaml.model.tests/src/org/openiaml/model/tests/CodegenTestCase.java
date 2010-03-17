@@ -767,16 +767,24 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * Helper method: Assert that there has been a problem.
 	 */
 	protected void assertProblem() {
-		resetDebug();
-		assertMatch("(Error|error|Exception|exception)");
+		try {
+			resetDebug();
+			assertMatch("(Error|error|Exception|exception)");
+		} catch (AssertionFailedError e) {
+			throw new RuntimeException("Problem not encountered: " + getTestingEngine().getPageText(), e); 
+		}
 	}
 	
 	/**
 	 * Helper method: Assert that there has not been a problem.
 	 */
 	protected void assertNoProblem() {
-		resetDebug();
-		assertNoMatch("(Error|error|Exception|exception)");
+		try {
+			resetDebug();
+			assertNoMatch("(Error|error|Exception|exception)");
+		} catch (AssertionFailedError e) {
+			throw new RuntimeException("Problem encountered: " + getTestingEngine().getPageText(), e); 
+		}
 	}
 
 	/**

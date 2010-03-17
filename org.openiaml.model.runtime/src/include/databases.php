@@ -34,7 +34,7 @@ class DatabaseQuery {
 	 * Returns back either 'null' if there were no results, or
 	 * the first result found from the query in an associative array.
 	 */
-	public function fetchFirst($query, $args) {
+	public function fetchFirst($query, $args = array()) {
 		
 		log_message("[database query] $query");
 		log_message("[database args] " . $this->debugString($args));
@@ -65,7 +65,7 @@ class DatabaseQuery {
 	 * Returns back all arguments into an array. The array
 	 * may be empty if there were no results.
 	 */
-	public function fetch($query, $args) {
+	public function fetch($query, $args = array()) {
 		
 		log_message("[database query] $query");
 		log_message("[database args] " . $this->debugString($args));
@@ -92,7 +92,7 @@ class DatabaseQuery {
 	 * Execute the given query with the given arguments.
 	 * Returns a handle to the database.
 	 */
-	public function execute($query, $args) {
+	public function execute($query, $args = array()) {
 		
 		log_message("[database query] $query");
 		log_message("[database args] " . $this->debugString($args));
@@ -142,7 +142,7 @@ class DatabaseQuery {
  * none can be found.
  */
 function evaluate_select_wire($db_name, $source_id, $source_class, $query, $args) {
-	log_message("[select wire] Evaluate select wire: source_id = $source_id, source_class = $source_class, query = $query"); 
+	log_message("[select wire] Evaluate: db = $db_name, source_id = $source_id, source_class = $source_class, query = $query"); 
 
 	// get all joins
 	global $compose_domain_joins_done_already;
@@ -153,7 +153,7 @@ function evaluate_select_wire($db_name, $source_id, $source_class, $query, $args
 		. implode(" ", $joins)
 		. " WHERE $query";
 	
-	log_message("[select wire] Evaluate select wire: Composed query: " . preg_replace("/[ \r\n\t]+/im", " ", $joined_query));
+	log_message("[select wire] Evaluate: Composed query: " . preg_replace("/[ \r\n\t]+/im", " ", $joined_query));
 		
 	$db_query = new DatabaseQuery($db_name);
 	$row = $db_query->fetchFirst($joined_query, $args);

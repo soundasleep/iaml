@@ -6,6 +6,7 @@
 «EXTENSION template::GeneratorExtensions»
 
 «DEFINE conditionDefinitionFiles(Boolean php) FOR model::InternetApplication»
+	«IF php»
 	«FILE "output/all_conditions.php"»
 		<?php				
 			«EXPAND template::Template::phpCheck»
@@ -15,6 +16,7 @@
 				require_once(ROOT_PATH . "conditions/«safeName(o)».php");
 			«ENDFOREACH»
 	«ENDFILE»
+	«ENDIF»
 
 	«FOREACH getAllConditions() AS c»
 		«IF php»
@@ -47,7 +49,7 @@
 
 «DEFINE conditionIncludes(Boolean php) FOR model::InternetApplication-»
 	«IF php»
-		require_once(ROOT_PATH . "all_operations.php");
+		require_once(ROOT_PATH . "all_conditions.php");
 	«ELSE»
 		«EXPAND conditionInclude(php) FOREACH getAllConditions()-»
 	«ENDIF»

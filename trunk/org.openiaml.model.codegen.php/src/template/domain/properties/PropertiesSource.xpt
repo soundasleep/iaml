@@ -20,7 +20,7 @@
 			«throwException("Remote parameter source '" + getDomainStore(this) + "' was not a DomainStore or InternetApplication.")»
 		«ENDIF»
 		$row_name = "«safeNameString(this.name)-»";
-		$properties = load_properties($db_name);
+		$properties = load_properties(ROOT_PATH . $db_name);
 		$value = get_property($properties, $row_name, null);
 		«IF require»
 			// the value is required
@@ -51,7 +51,7 @@
 			«throwException("Remote parameter source '" + getDomainStore(this) + "' was not a DomainStore or InternetApplication.")»
 		«ENDIF»
 		$row_name = "«safeNameString(this.name)-»";
-		$properties = load_properties($db_name);
+		$properties = load_properties(ROOT_PATH . $db_name);
 		$value = get_property($properties, $row_name, null);
 		if ($value !== null) {
 			echo "true";

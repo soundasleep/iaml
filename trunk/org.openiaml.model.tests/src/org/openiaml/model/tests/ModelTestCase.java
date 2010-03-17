@@ -232,10 +232,10 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 			IFile target = getProject().getProject().getFile(file);
 			
 			// check that we can copy OK
+			System.out.println("Copying cache file '" + file + "'...");
 			assertTrue("The source file '" + source + "' should exist from our codegen cache.", source.exists());
 			assertFalse("The target file '" + target + "' should not exist yet.", target.exists());
 
-			System.out.println("Copying cache file '" + file + "'...");
 			copyFileIntoWorkspace(source, target);
 		}
 	}

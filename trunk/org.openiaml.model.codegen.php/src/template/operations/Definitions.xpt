@@ -6,6 +6,7 @@
 «EXTENSION template::GeneratorExtensions»
 
 «DEFINE operationDefinitionFiles(Boolean php) FOR model::InternetApplication»
+	«IF php»
 	«FILE "output/all_operations.php"»
 		<?php				
 			«EXPAND template::Template::phpCheck»
@@ -15,6 +16,7 @@
 				require_once(ROOT_PATH . "operations/«safeName(o)».php");
 			«ENDFOREACH»
 	«ENDFILE»
+	«ENDIF»
 
 	«FOREACH allContainerOperations() AS o»
 		«IF php»

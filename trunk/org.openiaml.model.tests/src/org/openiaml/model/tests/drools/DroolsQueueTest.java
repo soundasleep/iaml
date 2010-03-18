@@ -18,8 +18,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.openiaml.model.drools.DroolsInferenceEngine;
 import org.openiaml.model.drools.EcoreInferenceHandlerFactory;
 import org.openiaml.model.drools.ICreateElementsFactory;
-import org.openiaml.model.inference.EcoreCreateElementsHelper;
-import org.openiaml.model.inference.EcoreInferenceHandler;
 import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelFactory;
@@ -85,15 +83,34 @@ public class DroolsQueueTest extends XmlTestCase {
 	}
 	
 	/**
+	 * Create an InternetApplication, and make sure it is contained within
+	 * some {@link ResourceSet}.
+	 * 
+	 * @return a new, empty InternetApplication
+	 */
+	private InternetApplication createInternetApplication() {
+		ResourceSet set = new ResourceSetImpl();
+		URI uri = URI.createFileURI("queue.iaml");
+		Resource resource = set.createResource(uri);
+		
+		// create the model
+		InternetApplication root = ModelFactory.eINSTANCE.createInternetApplication();
+		assertNotNull(root);
+		assertNotEqual(root.getName(), "created successfully");
+		resource.getContents().add(root);
+		
+		assertNotNull(root.eResource());
+		
+		return root;
+	}
+	
+	/**
 	 * Test that the order doesn't matter.
 	 * 
 	 * @throws Exception
 	 */
 	public void testDroolsQueue() throws Exception {
-		// create the model
-		InternetApplication root = ModelFactory.eINSTANCE.createInternetApplication();
-		assertNotNull(root);
-		assertNotEqual(root.getName(), "created successfully");
+		InternetApplication root = createInternetApplication();
 		
 		// initially empty
 		assertEquals(0, root.getDomainStores().size());
@@ -120,10 +137,8 @@ public class DroolsQueueTest extends XmlTestCase {
 	 * @throws Exception
 	 */
 	public void testDroolsQueueCount() throws Exception {
-		// create the model
-		InternetApplication root = ModelFactory.eINSTANCE.createInternetApplication();
-		assertNotNull(root);
-
+		InternetApplication root = createInternetApplication();
+		
 		// infer new elements
 		DroolsQueueEngine engine = new DroolsQueueEngine(new EcoreInferenceHandlerFactory());
 		

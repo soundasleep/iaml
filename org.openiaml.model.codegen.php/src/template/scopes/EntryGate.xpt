@@ -44,8 +44,10 @@ if (!(«EXPAND template::conditions::Runtime::callCondition(true, false) FOREACH 
 		if ($«arg-» == "«safeName(target)»")
 			$is_valid = true;  
 	«ENDFOREACH»
-	if (!$is_valid)
+	if (!$is_valid) {
+		log_message("[gate] resume target '$resume' is not valid");
 		$«arg-» = "";	// reset
+	}
 «ENDDEFINE»
 
 /**

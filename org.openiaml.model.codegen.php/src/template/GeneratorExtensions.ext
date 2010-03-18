@@ -512,16 +512,21 @@ exitGateNeedsActivatingRecurse(model::components::ExitGate gate, emf::EObject ob
  * of the frame, or likewise.
  */
 exitGateNeedsToRedirect(model::components::ExitGate gate, model::visual::Frame frame) :
-	exitGateNeedsToRedirectRecurse(gate, frame.eContainer);
+	exitGateNeedsToRedirectRecurse(gate, frame);
 		
 exitGateNeedsToRedirectRecurse(model::components::ExitGate gate, model::Scope scope) :
-	scope.eContents.contains(gate) || 
-		(scope.eContainer != null && exitGateNeedsToRedirectRecurse(gate, scope.eContainer)); 
+	if scope.eContents.contains(gate) 
+		then false		// we're in the same scope; don't need to redirect
+		else 
+			if scope.eContainer == null 
+				then true		// we're not within any possible scope
+				else exitGateNeedsToRedirectRecurse(gate, scope.eContainer);
+					// otherwise check the scope's container 
 
 exitGateNeedsToRedirectRecurse(model::components::ExitGate gate, model::InternetApplication root) :
-	false;
+	true;
 exitGateNeedsToRedirectRecurse(model::components::ExitGate gate, emf::EObject obj) :
-	false;
+	true;
 
 /** 
  * a hack way to create backtrace-able errors

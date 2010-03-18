@@ -405,7 +405,7 @@
 		«IF php»
 			«IF model::visual::Frame.isInstance(to)»
 			/* prevent infinite loops on the current frame */
-			if ("«((model::visual::Frame) to).id»" != CURRENT_PAGE) {
+			if ("«safeName((model::visual::Frame) to)»" != CURRENT_PAGE) {
 			«ELSE»
 			if (true) {
 			«ENDIF»

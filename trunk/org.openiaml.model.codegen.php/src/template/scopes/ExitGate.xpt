@@ -11,9 +11,9 @@
 /* exit gate '«safeName()»' */
 
 // TODO move into include
-function exit_gate_needs_activating_«safeName()»(frame_id) {
+function exit_gate_needs_activating_«safeName()»($frame_id) {
 	«FOREACH getRoot().eAllContents.typeSelect(model::visual::Frame) AS frame»
-		if (frame_id == "«safeName(frame)»") {
+		if ($frame_id == "«safeName(frame)»") {
 			return «IF exitGateNeedsActivating(this, frame)»true«ELSE»false«ENDIF»;
 		}
 	«ENDFOREACH»
@@ -22,7 +22,7 @@ function exit_gate_needs_activating_«safeName()»(frame_id) {
 
 /* firstly, if we are in the scope that this gate is contained in,
    we need to activate it. */
-if (exit_gate_needs_activating_«safeName()»(get_frame_id()) {
+if (exit_gate_needs_activating_«safeName()»(get_frame_id())) {
 	«IF containingSession(this) != null»
 		$_SESSION["«safeName(containingSession(this))»_«safeNameString(id)»_active"] = true;
 	«ELSE»
@@ -32,9 +32,9 @@ if (exit_gate_needs_activating_«safeName()»(get_frame_id()) {
 	// not activated by this frame
 }
 
-function exit_gate_needs_to_redirect_«safeName()»(frame_id) {
+function exit_gate_needs_to_redirect_«safeName()»($frame_id) {
 	«FOREACH getRoot().eAllContents.typeSelect(model::visual::Frame) AS frame»
-		if (frame_id == "«safeName(frame)»") {
+		if ($frame_id == "«safeName(frame)»") {
 			return «IF exitGateNeedsToRedirect(this, frame)»true«ELSE»false«ENDIF»;
 		}
 	«ENDFOREACH»
@@ -42,7 +42,7 @@ function exit_gate_needs_to_redirect_«safeName()»(frame_id) {
 }
 
 «REM»ignore gates which are inside the current scope«ENDREM»
-if (exit_gate_needs_to_redirect_«safeName()»(get_frame_id()) {
+if (exit_gate_needs_to_redirect_«safeName()»(get_frame_id())) {
 	/* secondly, is this gate activated? (may have been activated just before) */
 	if (
 	«IF containingSession(this) != null»
@@ -106,10 +106,12 @@ if (exit_gate_needs_to_redirect_«safeName()»(get_frame_id()) {
 	$is_valid = false;
 	«FOREACH getExitResumeTargets(this) AS target»
 		if ($«arg-» == "«safeName(target)»")
-			$is_valid = true;  
+			$is_valid = true;
 	«ENDFOREACH»
-	if (!$is_valid)
+	if (!$is_valid) {
+		log_message("[gate] resume target '$resume' is not valid");
 		$«arg-» = "";	// reset
+	}
 «ENDDEFINE»
 
 /**

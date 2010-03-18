@@ -1,7 +1,7 @@
 /**
  * Rules related to casting (can_cast).
  */
-package org.openiaml.model.drools.rules.validate
+package org.openiaml.model.drools.rules.casting
 
 #list any import classes here.
 import org.openiaml.model.drools.*;

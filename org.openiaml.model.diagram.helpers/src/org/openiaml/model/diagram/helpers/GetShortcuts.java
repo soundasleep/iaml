@@ -358,6 +358,17 @@ public class GetShortcuts {
 				updater.considerElementForShortcut(wire.getFrom(), wire, view, source, doneAlready, result, edges);
 				updater.considerElementForShortcut(wire.getTo(), wire, view, source, doneAlready, result, edges);
 			}
+			
+			if (wire instanceof ConstraintEdgesSource) {
+				// get all incoming edges
+				result.addAll(getAllShortcutsFromConstraintEdges(doneAlready, edges, view, wire,
+						((ConstraintEdgesSource) wire).getOutConstraintEdges(), registry, updater));
+			}
+			if (wire instanceof ConstraintEdgeDestination) {
+				// get all incoming edges
+				result.addAll(getAllShortcutsFromConstraintEdges(doneAlready, edges, view, wire,
+						((ConstraintEdgeDestination) wire).getInConstraintEdges(), registry, updater));
+			}
 		}
 
 		return result;

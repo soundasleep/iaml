@@ -106,6 +106,15 @@ public class ExportDependencyGraph extends XmlTestCase {
 			
 			System.out.println("Wrote out dot to " + outFile);
 		}
+		
+		{
+			File outFile = new File("dot/local-dependencies-notests-onediagram.dot.txt");
+			Writer out = new FileWriter(outFile);
+			exportLocalDependenciesNoTestsOneDiagram(dependencies, out);
+			out.close();
+			
+			System.out.println("Wrote out dot to " + outFile);
+		}
 	}
 
 	/**
@@ -221,8 +230,8 @@ public class ExportDependencyGraph extends XmlTestCase {
 
 	public void exportLocalDependenciesNoTests(Map<String, List<String>> dependencies, Writer out) throws IOException {
 		out.write("digraph {\n");
-		out.write("  size=\"32,32\";\n");
-		out.write("  ratio=expand;\n");
+		out.write("  size=\"48,48\";\n");
+		//out.write("  ratio=expand;\n");
 		
 		// print out all nodes that we are using
 		out.write("  node [style=filled, fillcolor=\"#6677cc\"];\n");
@@ -262,8 +271,89 @@ public class ExportDependencyGraph extends XmlTestCase {
 			
 			for (String requires : dependencies.get(bundleName)) {
 				// skip tests
-				if (isTest(bundleName)) continue;
+				if (isTest(requires)) continue;
 
+				// only print out a link if it exists locally
+				if (dependencies.containsKey(requires)) {
+					out.write("  \"" + bundleName + "\" -> \"" + requires + "\";\n");
+				}
+			}
+		}
+		out.write("}");
+	}
+	
+	public void exportLocalDependenciesNoTestsOneDiagram(Map<String, List<String>> dependencies, Writer out) throws IOException {
+		Set<String> skips = new HashSet<String>();
+		skips.add("org.openiaml.model.owl.pellet");
+			
+		out.write("digraph {\n");
+		out.write("  size=\"16,16\";\n");
+		//out.write("  ratio=expand;\n");
+		
+		// print out all nodes that we are using
+		out.write("  node [style=filled, fillcolor=\"#6677cc\"];\n");
+		{
+			// sort out the key set
+			List<String> bundleSorted = new ArrayList<String>(dependencies.keySet());
+			Collections.sort(bundleSorted);
+			for (String bundleName : bundleSorted) {
+				// other skips
+				if (skips.contains(bundleName))
+					continue;
+				
+				// skip tests
+				if (isTest(bundleName)) continue;
+				if (!isDiagram(bundleName))
+					out.write("\"" + bundleName + "\";\n");
+			}
+		}
+		out.write("  node [style=filled, fillcolor=\"#cc7766\"];\n");
+		{
+			// sort out the key set
+			List<String> bundleSorted = new ArrayList<String>(dependencies.keySet());
+			Collections.sort(bundleSorted);
+			for (String bundleName : bundleSorted) {
+				// other skips
+				if (skips.contains(bundleName))
+					continue;
+
+				// skip tests
+				if (isTest(bundleName)) continue;
+				if (isDiagram(bundleName) && bundleName.equals("org.openiaml.model.diagram"))
+					out.write("\"" + bundleName + "\";\n");
+			}
+		}
+		
+		// normal nodes
+		out.write("  node [style=filled, fillcolor=\"#ffffff\"];\n");
+		
+		// sort out the key set
+		List<String> bundleSorted = new ArrayList<String>(dependencies.keySet());
+		Collections.sort(bundleSorted);
+		for (String bundleName : bundleSorted) {			
+			// other skips
+			if (skips.contains(bundleName))
+				continue;
+
+			// skip tests
+			if (isTest(bundleName)) continue;
+			
+			// skip other diagrams
+			if (isDiagram(bundleName) && !bundleName.equals("org.openiaml.model.diagram"))
+				continue;
+			
+			for (String requires : dependencies.get(bundleName)) {
+				// other skips
+				if (skips.contains(requires))
+					continue;
+
+				// skip tests
+				if (isTest(requires)) continue;
+
+				// skip other diagrams
+				if (isDiagram(requires) && !requires.equals("org.openiaml.model.diagram"))
+					continue;
+				
 				// only print out a link if it exists locally
 				if (dependencies.containsKey(requires)) {
 					out.write("  \"" + bundleName + "\" -> \"" + requires + "\";\n");

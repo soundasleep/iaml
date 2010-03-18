@@ -1,6 +1,5 @@
 digraph {
-  size="32,32";
-  ratio=expand;
+  size="48,48";
   node [style=filled, fillcolor="#6677cc"];
 "org.openiaml.docs";
 "org.openiaml.docs.tools";
@@ -30,7 +29,6 @@ digraph {
   node [style=filled, fillcolor="#ffffff"];
   "org.openiaml.docs" -> "org.openiaml.model";
   "org.openiaml.docs" -> "org.openiaml.model.drools";
-  "org.openiaml.docs" -> "org.openiaml.model.tests";
   "org.openiaml.docs.tools" -> "org.openiaml.model";
   "org.openiaml.docs.tools" -> "org.openiaml.model.diagram";
   "org.openiaml.docs.tools" -> "org.openiaml.model.diagram.custom";

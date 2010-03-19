@@ -90,4 +90,32 @@ The modelling language is currently undergoing a major meta-model refactoring, w
 
 =Model 0.4.4=
 
+*Released [http://journals.jevon.org/users/jevon-phd/entry/19812 March 2010]*
+
+This adds the significant modelling concept of data types, and allows values to be cast between different types (although not completely extensible at this point in time).
+
+==New Elements==
+
+===CastNode===
+
+A [http://openiaml.org/model/CastNode CastNode] allows one data value to be cast to a different type. The potential result of the cast can be checked by a [http://openiaml.org/model/DecisionOperation DecisionOperation] called 'can cast?', allowing for input validation to occur.
+
+==Changes==
+
+Data types are implemented using XSD data types, which in the future allowing for user-defined data types to be defined by third parties. Different values can be [http://openiaml.org/model/CastNode cast to different types].
+
+[http://openiaml.org/model/InputTextField InputTextFields] now automatically create an internal [http://openiaml.org/model/Label Label] called "Warning", which allows for validation to occur. Labels can also be shown and hidden using the 'show' and 'hide' [http://openiaml.org/model/PrimitiveOperation PrimitiveOperations].
+
+Internally, I finally fixed a bug where [http://code.google.com/p/iaml/issues/detail?id=43 AJAX calls were not being synchronised correctly]. As a result, the test cases are much more reliable and faster to run.
+
+Operations and conditions are [http://code.google.com/p/iaml/source/detail?r=1714 no longer generated on every page]; rather, they are generated into separate include files. As a result, code generation and testing is faster, but actually loading the generated pages using a browser is much slower. This should be fixed in the future.
+
+The [Milestones] have also been updated, and after a weeks worth of research writing, the focus will be on implementing [http://code.google.com/p/iaml/wiki/Milestones#Release_0.5 RIA-specific modelling features].
+
+The meta-model refactoring has continued; for example:
+
+  * RunInstanceWire and NavigateWire are now [http://openiaml.org/model/Action Actions]
+
+=Model 0.4.5=
+
   _Currently under development._

@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
-import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.openiaml.model.inference.EcoreCreateElementsHelper;
 import org.openiaml.model.inference.EcoreInferenceHandler;
@@ -38,182 +37,6 @@ public class EmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 	
 	final protected Resource resource;
 
-	/**
-	 * Wraps {@link EmfInferenceHandler#createElement(EObject, EClass, EStructuralFeature)} with
-	 * an {@link AbstractTransactionalCommand}. 
-	 * 
-	 * @author jmwright
-	 */
-	protected class CreateElementCommand extends AbstractTransactionalCommand {
-
-		public CreateElementCommand(TransactionalEditingDomain domain,
-				List<?> affectedFiles,
-				EObject container, EClass elementType, EStructuralFeature containerFeature) {
-			super(domain, "Create element command", affectedFiles);
-			this.container = container;
-			this.elementType = elementType;
-			this.containerFeature = containerFeature;
-		}
-
-		private EObject created;
-		private EObject container;
-		private EClass elementType;
-		private EStructuralFeature containerFeature;
-		
-		@Override
-		protected CommandResult doExecuteWithResult(
-				IProgressMonitor monitor, IAdaptable info)
-				throws ExecutionException {
-			
-			// just pass it along
-			EcoreInferenceHandler eih = new EcoreInferenceHandler(container.eResource());
-			try {
-				created = eih.createElement(container, elementType, containerFeature);
-			} catch (InferenceException e) {
-				throw new ExecutionException(e.getMessage(), e);
-			}
-			return CommandResult.newOKCommandResult(created);
-			
-		}
-
-		public EObject getCreatedObject() {
-			return created;
-		}
-			
-	}
-	
-	/**
-	 * Wraps {@link EmfInferenceHandler#createRelationship(EObject, EClass, EObject, EObject, EStructuralFeature, EStructuralFeature, EStructuralFeature)} with
-	 * an {@link AbstractTransactionalCommand}. 
-	 * 
-	 * @author jmwright
-	 */
-	protected class CreateRelationshipCommand extends AbstractTransactionalCommand {
-
-		public CreateRelationshipCommand(TransactionalEditingDomain domain,
-				List<?> affectedFiles,
-				EObject container, EClass elementType, EStructuralFeature containerFeature,
-				EObject source, EObject target, 
-				EStructuralFeature sourceFeature, EStructuralFeature targetFeature) {
-			super(domain, "Create relationship command", affectedFiles);
-			this.container = container;
-			this.elementType = elementType;
-			this.containerFeature = containerFeature;
-			this.source = source;
-			this.target = target;
-			this.sourceFeature = sourceFeature;
-			this.targetFeature = targetFeature;
-		}
-
-		private EObject created;
-		private EObject container;
-		private EClass elementType;
-		private EStructuralFeature containerFeature;
-		private EObject source;
-		private EObject target;
-		private EStructuralFeature sourceFeature;
-		private EStructuralFeature targetFeature;
-		
-		@Override
-		protected CommandResult doExecuteWithResult(
-				IProgressMonitor monitor, IAdaptable info)
-				throws ExecutionException {
-			
-			// just pass it along
-			EcoreInferenceHandler eih = new EcoreInferenceHandler(resource);
-			try {
-				created = eih.createRelationship(container, elementType, source, target, containerFeature, sourceFeature, targetFeature);
-			} catch (InferenceException e) {
-				throw new ExecutionException(e.getMessage(), e);
-			}
-			return CommandResult.newOKCommandResult(created);
-			
-		}
-
-		public EObject getCreatedObject() {
-			return created;
-		}
-			
-	}
-
-	/**
-	 * Wraps {@link EmfInferenceHandler#setValue(EObject, EStructuralFeature, Object)} with
-	 * an {@link AbstractTransactionalCommand}. 
-	 * 
-	 * @author jmwright
-	 */
-	protected class SetValueCommand extends AbstractTransactionalCommand {
-
-		public SetValueCommand(TransactionalEditingDomain domain,
-				List<?> affectedFiles,
-				EObject element, EStructuralFeature reference, Object value) {
-			super(domain, "Create element command", affectedFiles);
-			this.element = element;
-			this.reference = reference;
-			this.value = value;
-		}
-
-		private EObject element;
-		private EStructuralFeature reference;
-		private Object value;
-		
-		@Override
-		protected CommandResult doExecuteWithResult(
-				IProgressMonitor monitor, IAdaptable info)
-				throws ExecutionException {
-			
-			// just pass it along
-			EcoreInferenceHandler eih = new EcoreInferenceHandler(resource);
-			try {
-				eih.setValue(element, reference, value);
-			} catch (InferenceException e) {
-				throw new ExecutionException(e.getMessage(), e);
-			}
-			return CommandResult.newOKCommandResult();
-			
-		}
-			
-	}
-
-	/**
-	 * Wraps {@link EmfInferenceHandler#addReference(EObject, EStructuralFeature, Object)} with
-	 * an {@link AbstractTransactionalCommand}. 
-	 * 
-	 * @author jmwright
-	 */
-	protected class AddReferenceCommand extends AbstractTransactionalCommand {
-
-		public AddReferenceCommand(TransactionalEditingDomain domain,
-				List<?> affectedFiles,
-				EObject element, EStructuralFeature reference, Object value) {
-			super(domain, "Create element command", affectedFiles);
-			this.element = element;
-			this.reference = reference;
-			this.value = value;
-		}
-
-		private EObject element;
-		private EStructuralFeature reference;
-		private Object value;
-		
-		@Override
-		protected CommandResult doExecuteWithResult(
-				IProgressMonitor monitor, IAdaptable info)
-				throws ExecutionException {
-			
-			// just pass it along
-			EcoreInferenceHandler eih = new EcoreInferenceHandler(resource);
-			try {
-				eih.addReference(element, reference, value);
-			} catch (InferenceException e) {
-				throw new ExecutionException(e.getMessage(), e);
-			}
-			return CommandResult.newOKCommandResult();
-			
-		}
-			
-	}
-	
 	private TransactionalEditingDomain editingDomain;
 	private List<?> affectedFiles;
 	private IProgressMonitor monitor;
@@ -240,7 +63,7 @@ public class EmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 		this.info = info;
 		this.resource = resource;
 	}
-
+	
 	/* (non-Javadoc)
 	 * @see org.openiaml.model.inference.ICreateElements#createElement(org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EClass, org.eclipse.emf.ecore.EStructuralFeature)
 	 */
@@ -273,7 +96,7 @@ public class EmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 			EStructuralFeature sourceFeature, EStructuralFeature targetFeature)
 			throws InferenceException {
 		
-		CreateRelationshipCommand command = new CreateRelationshipCommand(editingDomain, affectedFiles, container, elementType, containerFeature, source, target, sourceFeature, targetFeature);
+		CreateRelationshipCommand command = new CreateRelationshipCommand(this, editingDomain, affectedFiles, container, elementType, containerFeature, source, target, sourceFeature, targetFeature);
 		
 		try {
 			IStatus r = command.execute(monitor, info);
@@ -295,7 +118,7 @@ public class EmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 	public void setValue(EObject element, EStructuralFeature reference,
 			Object value) throws InferenceException {
 		
-		SetValueCommand command = new SetValueCommand(editingDomain, affectedFiles, element, reference, value);
+		SetValueCommand command = new SetValueCommand(this, editingDomain, affectedFiles, element, reference, value);
 		
 		try {
 			IStatus r = command.execute(monitor, info);
@@ -310,47 +133,6 @@ public class EmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 		
 	}
 
-	/**
-	 * Wraps {@link EmfInferenceHandler#deleteElement(EObject, EObject, EClass, EStructuralFeature)} with
-	 * an {@link AbstractTransactionalCommand}. 
-	 * 
-	 * @author jmwright
-	 */
-	protected class DeleteElementCommand extends AbstractTransactionalCommand {
-
-		private EObject object;
-		private EObject container;
-		private EStructuralFeature containerFeature;
-
-		public DeleteElementCommand(TransactionalEditingDomain domain,
-				List<?> affectedFiles,
-				EObject object, EObject container,
-				EStructuralFeature containerFeature) {
-			super(domain, "Delete element command", affectedFiles);
-			
-			this.object = object;
-			this.container = container;
-			this.containerFeature = containerFeature;
-		}
-
-		@Override
-		protected CommandResult doExecuteWithResult(
-				IProgressMonitor monitor, IAdaptable info)
-				throws ExecutionException {
-			
-			// just pass it along
-			EcoreInferenceHandler eih = new EcoreInferenceHandler(resource);
-			try {
-				eih.deleteElement(object, container, containerFeature);
-			} catch (InferenceException e) {
-				throw new ExecutionException(e.getMessage(), e);
-			}
-			return CommandResult.newOKCommandResult();
-			
-		}
-			
-	}
-	
 	/* (non-Javadoc)
 	 * @see org.openiaml.model.inference.ICreateElements#deleteElement(org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EClass, org.eclipse.emf.ecore.EStructuralFeature)
 	 */
@@ -358,7 +140,7 @@ public class EmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 	public void deleteElement(EObject object, EObject container,
 			EStructuralFeature containerFeature) throws InferenceException {
 
-		DeleteElementCommand command = new DeleteElementCommand(editingDomain, affectedFiles, object, container, containerFeature);
+		DeleteElementCommand command = new DeleteElementCommand(this, editingDomain, affectedFiles, object, container, containerFeature);
 		
 		try {
 			IStatus r = command.execute(monitor, info);
@@ -380,7 +162,7 @@ public class EmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 	public void addReference(EObject element, EStructuralFeature reference,
 			Object value) throws InferenceException {
 		
-		AddReferenceCommand command = new AddReferenceCommand(editingDomain, affectedFiles, element, reference, value);
+		AddReferenceCommand command = new AddReferenceCommand(this, editingDomain, affectedFiles, element, reference, value);
 		
 		try {
 			IStatus r = command.execute(monitor, info);
@@ -394,4 +176,12 @@ public class EmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 		return;
 	}
 
+	public void setMonitor(IProgressMonitor monitor) {
+		this.monitor = monitor;
+	}
+
+	public void setInfo(IAdaptable info) {
+		this.info = info;
+	}
+	
 }

@@ -23,32 +23,12 @@
 		label.setBounds( new org.eclipse.draw2d.geometry.Rectangle( 4, 4, label.getPreferredSize().width, label.getPreferredSize().height ) );	// resize to actual prefered size
 		fig.add(label);
 
-		fig.addLayoutListener(new org.eclipse.draw2d.LayoutListener.Stub() {
-
-			«EXPAND xpt::Common::generatedMemberComment»
-			@Override
-			public void invalidate(org.eclipse.draw2d.IFigure container) {
-				String text = getBreadcrumb();
-				if (!text.equals(label.getText())) {
-					label.setText( getBreadcrumb() );
-					label.setBounds( new org.eclipse.draw2d.geometry.Rectangle( 0, 0, 1024, 20 ));	// maximum size for calculating size
-					label.setBounds( new org.eclipse.draw2d.geometry.Rectangle( 4, 4, label.getPreferredSize().width, label.getPreferredSize().height ) );	// resize to actual prefered size
-				}
-			}
-
-			«EXPAND xpt::Common::generatedMemberComment»
-			@Override
-			public void postLayout(org.eclipse.draw2d.IFigure container) {
-				String text = getBreadcrumb();
-				if (!text.equals(label.getText())) {
-					label.setText( getBreadcrumb() );
-					label.setBounds( new org.eclipse.draw2d.geometry.Rectangle( 0, 0, 1024, 20 ));	// maximum size for calculating size
-					label.setBounds( new org.eclipse.draw2d.geometry.Rectangle( 4, 4, label.getPreferredSize().width, label.getPreferredSize().height ) );	// resize to actual prefered size
-				}
-			}
-			
-			
-		});
+		// fix for GMF 2.2.2: need to add a Constraint to the LayoutManager
+		// to prevent NPEs
+		fig.getLayoutManager().setConstraint(label, new org.eclipse.draw2d.geometry.Rectangle(4, 4, 
+			label.getPreferredSize().width, 
+			label.getPreferredSize().height)); 
+		
 		return fig;	
 	}
 

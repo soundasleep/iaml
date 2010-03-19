@@ -123,17 +123,41 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
     * DomainObjectInstance autosave default should be false (r1512)
     * Some metamodel refactoring: Not all edges are now wires
 
-=Release 0.5=
-([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.5 Outstanding issues])
-  # [Model0_5 Expand IAML model]
-    * Resultset viewer
-    * E-mails
-    * Server-side operation (e.g. written in PHP)
-    * Client-side operation (e.g. written in Javascript)
-    * Deleting domain objects
+==Release 0.4.4==
+([http://journals.jevon.org/users/jevon-phd/entry/19812 Released] March 2010)
+  # [http://code.google.com/p/iaml/wiki/Model0_5#Model_0.4.4 Expand IAML model]
+    * Data types using XML Schema (XSD)
+    * CastNode: an operational modelling node that allows one data value to be cast to another type
+  # Inference
+    * InputTextFields now automatically have a Label called "Warning"
+  # Code generation
+    * Operations and conditions are now generated as individual include files
+    * Test cases are now correctly synchronised with AJAX calls (issue 43)
 
-=Release 0.6+=
+==Release 0.5==
+([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.5 Outstanding issues])
+  # Inference
+    * Resolve issue 130: automatically mark containers as overridden
+    * Resolve issue 131: overridden flag is ignored
+  # Code generation
+    * Improve performance of multiple include files on client-side
+
+=Release 0.6=
 ([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.6 Outstanding issues])
+  # [Model0_6 Expand IAML model]
+    * E-mails
+    * Google Maps
+    * RSS Feeds (Produce, Consume)
+    * OpenID
+    * Autocomplete
+
+=Release 0.7+=
+([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.7 Outstanding issues])
+  # [Model0_7 Expand IAML model]
+    * Captchas
+    * Rich Text
+    * Use Web Services
+    * Delete Domain Object
 
 =Release 0.9=
   # Can implement [http://openiaml.org Ticket 2.0]

@@ -3,7 +3,6 @@
  */
 package org.openiaml.model.tests.eclipse;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.openiaml.model.model.ModelPackage;
@@ -22,21 +21,10 @@ public class InitializeDiagramTestCase extends EclipseTestCaseHelper {
 	 * @throws Exception
 	 */
 	public void testLoadModel() throws Exception {
-		// copy our local file into the project
-		IFile targetModel = getProject().getFile("shortcuts-root.iaml");
-		copyFileIntoWorkspace("src/org/openiaml/model/tests/eclipse/shortcuts-root.iaml",
-				targetModel);
-		
-		IFile targetDiagram = getProject().getFile("shortcuts-root.iaml_diagram");
-		assertFalse("the target diagram should not exist yet", targetDiagram.exists());
-
-		// initialise the model
-		initializeModelFile(targetModel, targetDiagram);
-		
-		assertTrue("the target diagram should have been created", targetDiagram.exists());
-		
-		// load up the editor
-		DiagramDocumentEditor editor = (DiagramDocumentEditor) loadDiagramFile(targetDiagram);
+		DiagramDocumentEditor editor = initializeAndLoad(
+				"shortcuts-root.iaml",
+				"src/org/openiaml/model/tests/eclipse/",
+				"shortcuts-root.iaml_diagram");
 		assertEditorRoot(editor);
 
 		// there should be three children

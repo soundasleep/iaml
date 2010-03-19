@@ -1,0 +1,92 @@
+«IMPORT iaml»
+
+/**
+ * Method definitions for accessing Domain objects and attributes.
+ */
+«EXTENSION template::GeneratorExtensions»
+
+/**
+ * Expand out all domain object, instance and attribute
+ * information for this InternetApplication.
+ * 
+ * Expected to be in PHP mode.
+ */
+«DEFINE domainDefinitions FOR model::InternetApplication»
+	«EXPAND domainObjectDefinitions(true)»
+	«EXPAND domainAttributeDefinitions(true)»
+«ENDDEFINE»
+
+/**
+ * Expand out all domain object instances.
+ */
+«DEFINE domainObjectDefinitions(Boolean php) FOR model::InternetApplication»
+	«IF php»
+		require_once(ROOT_PATH . "domain/all_domain_objects.php");
+	«ELSE»
+		<!-- empty -->
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE allDomainObjectDefinitions FOR model::InternetApplication»
+	«FILE "output/domain/all_domain_objects.php"»
+		<?php
+		«EXPAND template::Template::phpCheck»
+		
+		«EXPAND template::domain::Includes::getInclude FOREACH getRoot().getAllDomainObjects()» 
+
+		«EXPAND GetDefinitions::getDomainObject FOREACH getRoot().getAllDomainObjectInstances()»
+		«EXPAND StoreDefinitions::storeDomainObject FOREACH getRoot().getAllDomainObjectInstances()»
+
+		/**
+		 * Get all of the domain joins required in this generated
+		 * application. This is used to properly compose
+		 * select wires, etc.
+		 *
+		 * TODO put this into a separate include file 
+		 */
+		function get_all_domain_joins() {
+			$direct_joins = array();
+			
+			«EXPAND DomainInheritance::defineInheritanceJoins FOREACH getRoot().getAllDomainObjects()»
+			
+			return $direct_joins;
+		}
+	«ENDFILE»
+«ENDDEFINE»
+
+/**
+ * Expand out all domain attribute instances.
+ */
+«DEFINE domainAttributeDefinitions(Boolean php) FOR model::InternetApplication»
+	«IF php»
+		require_once(ROOT_PATH . "domain/all_domain_attributes.php");
+	«ELSE»
+		<script language="Javascript" type="application/javascript" src="domain/all_domain_attributes_js.php"></script>
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE allDomainAttributeDefinitions FOR model::InternetApplication»
+	«FILE "output/domain/all_domain_attributes.php"»
+		<?php
+		«EXPAND template::Template::phpCheck»
+		
+		«EXPAND Includes::getInclude FOREACH getAllDomainAttributeInstances()»
+	«ENDFILE»
+
+	«FILE "output/domain/all_domain_attributes_js.php"»
+		<?php
+			/**
+			 * This operation needs to be executed by PHP first, to allow
+			 * server-side variables (such as values from databases) to be included.
+			 */
+
+			«EXPAND template::Template::commonHeader("../")»
+			«EXPAND template::Template::typeJavascript»
+		?>
+		
+		«EXPAND StoreDefinitions::storeDomainAttribute(false) FOREACH getAllDomainAttributeInstances()»
+	«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE exception FOR Object»
+«ENDDEFINE»

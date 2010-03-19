@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml.scopes:Session xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.users="http://openiaml.org/model/users" id="scopes.1273c6bf769.23">
+  <elements xsi:type="iaml.components:AccessControlHandler" outRequiresEdges="wires.1273c6bf67f.2d" id="components.1273c6bf7c7.24" name="Handler">
+    <requiresEdges id="wires.1273c6bf67f.2d" from="components.1273c6bf7c7.24">
+      <to xsi:type="iaml.users:Role" href="Role.iaml_user_store#users.1273c6bf863.1f"/>
+    </requiresEdges>
+  </elements>
+</iaml.scopes:Session>

@@ -1,0 +1,48 @@
+«IMPORT iaml»
+
+/**
+ * Visually rendering a form.
+ */
+«EXTENSION template::GeneratorExtensions»
+
+/**
+ * @implementation InputForm
+ *		Any {@model VisibleThing children} of a {@model InputForm} are also rendered
+ *		as part of that InputForm.
+ */
+«DEFINE renderForm(model::visual::Frame currentFrame) FOR model::visual::InputForm-»
+	<form id="«safeNameString(id)»" 
+			onChange="return onChange_«safeNameString(id)»(this);"
+			onClick="return onClick_«safeNameString(id)»(this);"
+		>
+		
+		<script language="Javascript" type="application/javascript">
+		/* <![CDATA[ */
+			function onChange_«safeNameString(id)»(obj) {
+				«IF onEdit != null»
+					// expand all onEdits
+					«EXPAND template::events::EventCall::callEvent(false) FOR onEdit-»
+				«ENDIF»
+
+				return false;
+			}
+			
+			function onClick_«safeNameString(id)»(obj) {
+				«IF onClick != null»
+					// expand all onClicks
+					«EXPAND template::events::EventCall::callEvent(false) FOR onClick-»
+				«ENDIF»
+			
+				return false;
+			}
+		/* ]]> */
+		</script>
+		<h2>«formName()»</h2>
+		
+		«REM»expand all children«ENDREM»
+		«EXPAND Render::renderVisual(currentFrame) FOREACH children-»
+	</form>
+«ENDDEFINE»
+
+«DEFINE exception FOR Object»
+«ENDDEFINE»

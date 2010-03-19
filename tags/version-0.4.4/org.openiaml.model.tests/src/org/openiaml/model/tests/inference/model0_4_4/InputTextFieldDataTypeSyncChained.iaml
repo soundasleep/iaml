@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1274f76bcd9.16">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
+    <children xsi:type="iaml.visual:InputTextField" inWires="wires.1274f76c1da.1c wires.1274f76c1da.53" id="visual.1274f76c0e0.27" name="Default">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.1274f76c1da.1e" from="visual.1274f76c0e0.29" to="visual.1274f76c0e0.2b" name="sync"/>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" outWires="wires.1274f76c1da.44" id="visual.1274f76c0e0.28" name="Default 2">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.1274f76c1da.44" from="visual.1274f76c0e0.28" to="visual.1274f76c0e0.30" name="sync"/>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" outWires="wires.1274f76c1da.1c wires.1274f76c1da.1e wires.1274f76c1da.1d" id="visual.1274f76c0e0.29" name="String">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.1274f76c1da.1c" from="visual.1274f76c0e0.29" to="visual.1274f76c0e0.27" name="sync"/>
+      <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlString;XSDSimpleTypeDefinition=1"/>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" inWires="wires.1274f76c1da.1b" id="visual.1274f76c0e0.2a" name="String 2">
+      <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlString;XSDSimpleTypeDefinition=1"/>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" inWires="wires.1274f76c1da.1e" id="visual.1274f76c0e0.2b" name="Email">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.1274f76c1da.1d" from="visual.1274f76c0e0.29" to="visual.1274f76c0e0.2d" name="sync"/>
+      <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlEmail;XSDSimpleTypeDefinition=2"/>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" outWires="wires.1274f76c1da.43" id="visual.1274f76c0e0.2c" name="Email 2">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.1274f76c1da.43" from="visual.1274f76c0e0.2c" to="visual.1274f76c0e0.30" name="sync"/>
+      <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlEmail;XSDSimpleTypeDefinition=2"/>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" outWires="wires.1274f76c1da.1a" inWires="wires.1274f76c1da.1d" id="visual.1274f76c0e0.2d" name="Date">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.1274f76c1da.1a" from="visual.1274f76c0e0.2d" to="visual.1274f76c0e0.2e" name="sync"/>
+      <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlDateTime;XSDSimpleTypeDefinition=3"/>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" inWires="wires.1274f76c1da.1a" id="visual.1274f76c0e0.2e" name="Date 2">
+      <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlDateTime;XSDSimpleTypeDefinition=3"/>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" outWires="wires.1274f76c1da.53" id="visual.1274f76c0e0.2f" name="Integer">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.1274f76c1da.53" from="visual.1274f76c0e0.2f" to="visual.1274f76c0e0.27" name="sync"/>
+      <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" outWires="wires.1274f76c1da.1b" inWires="wires.1274f76c1da.43 wires.1274f76c1da.44" id="visual.1274f76c0e0.30" name="Integer 2">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.1274f76c1da.1b" from="visual.1274f76c0e0.30" to="visual.1274f76c0e0.2a" name="sync"/>
+      <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
+    </children>
+  </scopes>
+</iaml:InternetApplication>

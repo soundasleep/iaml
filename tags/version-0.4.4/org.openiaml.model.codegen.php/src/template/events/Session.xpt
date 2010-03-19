@@ -1,0 +1,19 @@
+«IMPORT iaml»
+
+/**
+ * Events that run on a Session.
+ */
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE runSessionEvents(String eventName) FOR model::EventTrigger-»
+	// Session EventTrigger «this» '«eventName»'
+	«IF eventName == "init" || eventName == "access"-»
+		// RunActions sorted by priority
+		«EXPAND template::operations::OperationCall::callOperation(true, false) FOREACH outActions.typeSelect(model::wires::RunAction).sortBy(e|-e.priority)-»
+	«ELSE-»
+		// I don't know what to do with frame event "«name»"
+	«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE exception FOR Object»
+«ENDDEFINE»

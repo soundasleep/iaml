@@ -1,0 +1,20 @@
+«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE commonPHPIncludes FOR model::InternetApplication-»
+
+// operation definitions
+«EXPAND template::operations::Definitions::operationIncludes(true) FOR getRoot()-»		
+
+// condition definitions
+«EXPAND template::conditions::Definitions::conditionIncludes(true) FOR getRoot()-»
+
+// expand any domain instances
+«EXPAND template::domain::Definitions::domainObjectDefinitions(true) FOR getRoot()-»
+«EXPAND template::domain::Definitions::domainAttributeDefinitions(true) FOR getRoot()-»
+
+// expand any users
+«EXPAND template::users::Includes::getInclude FOREACH getRoot().eAllContents.typeSelect(model::users::Role)-»
+
+«ENDDEFINE»

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.12783dfce93.72">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
+    <operations xsi:type="iaml:CompositeOperation" id="model.12783dfce93.7e" name="Normal Operation"/>
+    <operations xsi:type="iaml:CompositeOperation" id="model.12783dfce93.7f" name="Overridden Operation" overridden="true"/>
+  </scopes>
+  <scopes xsi:type="iaml.visual:Frame" overridden="true" id="visual.12783dfcf20.67" name="Overridden Frame"/>
+</iaml:InternetApplication>

@@ -33,6 +33,7 @@ public class AllEclipseTests {
         suite.addTestSuite(ParentNameTestCase.class);
         suite.addTestSuite(DerivedPropertyMarker.class);
         suite.addTestSuite(MarkContainersAsOverridden.class);
+        suite.addTestSuite(OverriddenPropertyMarker.class);
 		//$JUnit-END$
         
         // add the helpers tests

@@ -1065,7 +1065,6 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		assertHasNoWiresFromTo(container, from, to, SetWire.class);
 	}
 	
-	
 	/**
 	 * Assert <em>no</em> bidirectional SyncWire exists between
 	 * the given elements.
@@ -1073,6 +1072,15 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public void assertHasNoSyncWire(EObject container, WireSource from, WireDestination to) throws JaxenException {
 		Set<Wire> wires = getWiresBidirectional(container, from, to, SyncWire.class);
 		assertEquals("Unexpected SyncWires found: " + wires, 0, wires.size());
+	}
+	
+	/**
+	 * Assert <em>no</em> unidirectional RunAction exists between
+	 * the given elements.
+	 */
+	public void assertHasNoRunAction(EObject container, ActionSource from, ActionDestination to) throws JaxenException {
+		Set<Action> actions = getActionsFromTo(container, from, to, RunAction.class);
+		assertEquals("Unexpected actions found: " + actions, 0, actions.size());
 	}
 	
 	/**

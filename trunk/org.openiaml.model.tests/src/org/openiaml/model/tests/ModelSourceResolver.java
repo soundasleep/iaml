@@ -68,6 +68,9 @@ public class ModelSourceResolver {
 		if (class1.getPackage().getName().contains("codegen.model0_4")) {
 			return getAbsolutePathRoot() + ModelTestCase.ROOT + "codegen/model0_4/" + class1.getSimpleName() + ".iaml";
 		}
+		if (class1.getPackage().getName().contains("codegen.model0_5")) {
+			return getAbsolutePathRoot() + ModelTestCase.ROOT + "codegen/model0_5/" + class1.getSimpleName() + ".iaml";
+		}
 		if (class1.getPackage().getName().contains("codegen.runtime")) {
 			return getAbsolutePathRoot() + ModelTestCase.ROOT + "codegen/runtime/" + class1.getSimpleName() + ".iaml";
 		}
@@ -90,6 +93,9 @@ public class ModelSourceResolver {
 		}
 		if (class1.getPackage().getName().contains("inference.model0_4")) {
 			return getAbsolutePathRoot() + ModelTestCase.ROOT + "inference/model0_4/" + class1.getSimpleName() + ".iaml";
+		}
+		if (class1.getPackage().getName().contains("inference.model0_5")) {
+			return getAbsolutePathRoot() + ModelTestCase.ROOT + "inference/model0_5/" + class1.getSimpleName() + ".iaml";
 		}
 		
 		return getAbsolutePathRoot() + ModelTestCase.ROOT + "inference/" + class1.getSimpleName() + ".iaml";

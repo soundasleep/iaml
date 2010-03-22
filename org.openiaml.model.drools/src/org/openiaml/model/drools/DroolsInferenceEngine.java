@@ -231,11 +231,15 @@ public abstract class DroolsInferenceEngine {
         // to save memory, we only create the handler here, in this scope
         final ICreateElements handler = handlerFactory.createHandler(model);
 
+        // allow for rules to override execution
+        final OverridableCreateElementsHelper overridableHandler = 
+        	new OverridableCreateElementsHelper(handler);
+        
         // need to set up these variables before we insert the model,
         // otherwise the agenda cannot be built (as the rule heads use
         // {@link #getHelperFunctions()}).
         queue = new DroolsInsertionQueue(trackInsertions);
-	    workingMemory.setGlobal("handler", handler);
+	    workingMemory.setGlobal("handler", overridableHandler);
 		workingMemory.setGlobal("queue", queue);
 		workingMemory.setGlobal("functions", getHelperFunctions());		
 
@@ -467,39 +471,48 @@ public abstract class DroolsInferenceEngine {
 
 			monitor.beginTask("Parsing and loading rule files", input.getRuleFiles().size());
 			for (String ruleFile : input.getRuleFiles()) {
-				monitor.subTask("Loading " + ruleFile + "...");
-		
-				// load the stream
-				InputStream stream = input.loadResourceAsStream(ruleFile);
-				if (stream == null) {
-					throw new InferenceException("Could not load the resource '" + ruleFile + "' as a stream."); 
+				try {
+					monitor.subTask("Loading " + ruleFile + "...");
+			
+					// load the stream
+					InputStream stream = input.loadResourceAsStream(ruleFile);
+					if (stream == null) {
+						throw new InferenceException("Could not load the resource '" + ruleFile + "' as a stream."); 
+					}
+					
+					//read in the source
+					Reader source = new InputStreamReader( stream );
+					
+					//optionally read in the DSL (if you are using it).
+					//Reader dsl = new InputStreamReader( DroolsTest.class.getResourceAsStream( "/mylang.dsl" ) );
+			
+					//Use package builder to build up a rule package.
+					//An alternative lower level class called "DrlParser" can also be used...
+	
+					PackageBuilder builder = new PackageBuilder();
+			
+					//this wil parse and compile in one step
+					//NOTE: There are 2 methods here, the one argument one is for normal DRL.
+					builder.addPackageFromDrl( source );
+			
+					//Use the following instead of above if you are using a DSL:
+					//builder.addPackageFromDrl( source, dsl );
+					
+					//get the compiled package (which is serializable)
+					Package pkg = builder.getPackage();
+					
+					if (!pkg.isValid()) {
+						throw new InferenceException("Package '" + ruleFile + "' is not valid.");
+					}
+					
+					//add the package to a rulebase (deploy the rule package).
+					ruleBase.addPackage( pkg );
+			
+					monitor.worked(1);
+				} catch (Exception e) {
+					// add rule file name
+					throw new RuntimeException("Could not load rule file '" + ruleFile + "': " + e.getMessage(), e);
 				}
-				
-				//read in the source
-				Reader source = new InputStreamReader( stream );
-				
-				//optionally read in the DSL (if you are using it).
-				//Reader dsl = new InputStreamReader( DroolsTest.class.getResourceAsStream( "/mylang.dsl" ) );
-		
-				//Use package builder to build up a rule package.
-				//An alternative lower level class called "DrlParser" can also be used...
-
-				PackageBuilder builder = new PackageBuilder();
-		
-				//this wil parse and compile in one step
-				//NOTE: There are 2 methods here, the one argument one is for normal DRL.
-				builder.addPackageFromDrl( source );
-		
-				//Use the following instead of above if you are using a DSL:
-				//builder.addPackageFromDrl( source, dsl );
-				
-				//get the compiled package (which is serializable)
-				Package pkg = builder.getPackage();
-				
-				//add the package to a rulebase (deploy the rule package).
-				ruleBase.addPackage( pkg );
-		
-				monitor.worked(1);
 			}
 			
 			monitor.done();

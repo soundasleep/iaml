@@ -17,7 +17,7 @@ import org.openiaml.model.model.components.*;
 import org.openiaml.model.model.users.*;
 
 #declare any global variables here
-global EcoreCreateElementsHelper handler;
+global OverridableCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
@@ -29,6 +29,8 @@ rule "Create 'hide' PrimitiveOperation for Label"
 	when
 		tf : Label( )
 		not ( op : Operation ( name == "hide", eContainer == tf ))
+		
+		eval ( handler.veto( tf ))
 	
 	then
 		PrimitiveOperation warning = handler.generatedPrimitiveOperation(tf, tf);
@@ -45,6 +47,8 @@ rule "Create 'show' PrimitiveOperation for Label"
 	when
 		tf : Label( )
 		not ( op : Operation ( name == "show", eContainer == tf ))
+		
+		eval ( handler.veto( tf ))
 	
 	then
 		PrimitiveOperation warning = handler.generatedPrimitiveOperation(tf, tf);

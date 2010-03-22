@@ -15,7 +15,7 @@ import org.openiaml.model.model.components.*;
 import org.openiaml.model.model.users.*;
 
 #declare any global variables here
-global EcoreCreateElementsHelper handler;
+global OverridableCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
@@ -25,6 +25,8 @@ rule "When a session is protected by an AccessControlHandler with no login handl
 		ach : AccessControlHandler ( eContainer == session )
 		
 		not (LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session ))
+				
+		eval ( handler.veto( ach ))
 
 	then
 		LoginHandler lh = handler.generatedLoginHandler(ach, session);
@@ -44,6 +46,8 @@ rule "When a page is protected by an AccessControlHandler with no login handler[
 		
 		# no AccessControlHandler within the session too (the above rule will create one)
 		not (AccessControlHandler ( eContainer == session ))
+				
+		eval ( handler.veto( ach ))
 
 	then
 		LoginHandler lh = handler.generatedLoginHandler(ach, session);
@@ -60,6 +64,8 @@ rule "A page within a session protected by an ACH should have a 'permissions che
 		ach : AccessControlHandler ( eContainer == session )
 
 		not ( Operation ( eContainer == page, name == "permissions check" ))
+					
+		eval ( handler.veto( ach ))
 	
 	then
 		CompositeOperation check = handler.generatedCompositeOperation(ach, page);
@@ -74,6 +80,8 @@ rule "A page protected by an ACH should have a 'permissions check' operation"
 		ach : AccessControlHandler ( eContainer == page )
 
 		not ( Operation ( eContainer == page, name == "page permissions check" ))
+					
+		eval ( handler.veto( ach ))
 	
 	then
 		CompositeOperation check = handler.generatedCompositeOperation(ach, page);
@@ -91,6 +99,8 @@ rule "Connect 'permissions check' up to the 'access' event of the session (ACH i
 		check : Operation ( eContainer == page, name == "permissions check" )
 		
 		not ( RunAction ( from == access, to == check ))
+					
+		eval ( handler.veto( ach ))
 	
 	then
 		RunAction run = handler.generatedRunAction(ach, page, access, check);
@@ -107,6 +117,8 @@ rule "Connect 'permissions check' up to the 'access' event of the page (ACH in p
 		check : Operation ( eContainer == page, name == "page permissions check" )
 		
 		not ( RunAction ( from == access, to == check ))
+					
+		eval ( handler.veto( ach ))
 	
 	then
 		RunAction run = handler.generatedRunAction(ach, page, access, check);
@@ -127,6 +139,8 @@ rule "Connect fail wire from 'permissions check' to 'login page'"
 		login : Frame ( name == "login", eContainer == root ) 
 		
 		not ( NavigateAction ( from == check, to == login, name == "fail" ))
+					
+		eval ( handler.veto( ach ))
 	
 	then
 		NavigateAction nav = handler.generatedNavigateAction(ach, page, check, login);
@@ -140,6 +154,8 @@ rule "User Stores contain a default role 'User'"
 		store : UserStore ( )
 		
 		not ( Role ( name == "User", eContainer == store ))
+					
+		eval ( handler.veto( store ))
 	
 	then
 		Role user = handler.generatedRole(store, store);
@@ -154,6 +170,8 @@ rule "'User' role contains a default attribute 'email'"
 		user : Role ( eContainer == store, name == "User" )
 		
 		not ( DomainAttribute ( name == "email", eContainer == user ))
+					
+		eval ( handler.veto( user ))
 	
 	then
 		DomainAttribute attr = handler.generatedDomainAttribute(user, user);
@@ -168,6 +186,8 @@ rule "'User' role contains a default attribute 'password'"
 		user : Role ( eContainer == store, name == "User" )
 		
 		not ( DomainAttribute ( name == "password", eContainer == user ))
+					
+		eval ( handler.veto( user ))
 	
 	then
 		DomainAttribute attr = handler.generatedDomainAttribute(user, user);
@@ -204,6 +224,8 @@ rule "A LoginHandler of type 'user' should have an incoming Role as a parameter,
 	
 		# if there is already an incoming parameter wire, don't connect up User
 		not (ParameterEdge ( to == login_handler ))
+					
+		eval ( handler.veto( login_handler ))
 	
 	then
 		ParameterEdge param = handler.generatedParameterEdge(login_handler, session, user, login_handler);
@@ -216,6 +238,8 @@ rule "Create 'check permissions' operation in AccessControlHandler"
 		ach : AccessControlHandler( )
 		
 		not ( Operation ( name == "check permissions", eContainer == ach ))
+					
+		eval ( handler.veto( ach ))
 	
 	then
 		PrimitiveOperation op = handler.generatedPrimitiveOperation(ach, ach);
@@ -234,6 +258,8 @@ rule "Create contents of 'permissions check' operation in a Frame (session)"
 		ach_check : Operation ( eContainer == ach, name == "check permissions" )
 		
 		not ( StartNode( eContainer == check ))	
+				
+		eval ( handler.veto( check ))
 
 	then
 			
@@ -289,6 +315,8 @@ rule "Create contents of 'permissions check' operation in a Frame (page)"
 		ach_check : Operation ( eContainer == ach, name == "check permissions" )
 		
 		not ( StartNode( eContainer == check ))	
+				
+		eval ( handler.veto( check ))
 
 	then
 			
@@ -345,6 +373,8 @@ rule "An AccessControlHandler that creates a LoginHandler should have the create
 		setWire : SetWire ( from == login_handler, to == instance )
 		
 		not ( ParameterEdge ( from == instance, to == ach )) 
+					
+		eval ( handler.veto( ach ))
 	
 	then
 		ParameterEdge param = handler.generatedParameterEdge(ach, ach, instance, ach);
@@ -363,6 +393,8 @@ rule "A separate AccessControlHandler that creates a LoginHandler should have th
 		setWire : SetWire ( from == login_handler, to == instance )
 		
 		not ( ParameterEdge ( from == instance, to == ach )) 
+					
+		eval ( handler.veto( ach ))
 	
 	then
 		ParameterEdge param = handler.generatedParameterEdge(ach, ach, instance, ach);
@@ -378,6 +410,8 @@ rule "Any role should extend the default User role"
 		another : Role ( this != user )
 		
 		not ( ExtendsEdge ( from == another, to == user ))
+						
+		eval ( handler.veto( store ))
 		
 	then
 		ExtendsEdge ext = handler.generatedExtendsEdge(store, store, another, user);

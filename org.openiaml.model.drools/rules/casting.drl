@@ -17,7 +17,7 @@ import org.openiaml.model.model.components.*;
 import org.openiaml.model.model.users.*;
 
 #declare any global variables here
-global EcoreCreateElementsHelper handler;
+global OverridableCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
@@ -29,6 +29,8 @@ rule "Create 'can cast?' condition for InputTextFields"
 	when
 		tf : InputTextField( )
 		not ( condition : Condition ( name == "can cast?", eContainer == tf ))
+		
+		eval ( handler.veto( tf ))
 	
 	then
 		CompositeCondition condition = handler.generatedCompositeCondition(tf, tf);
@@ -44,6 +46,8 @@ rule "Create contents of 'can cast?' condition"
 		c : CompositeCondition ( name == "can cast?", eContainer == tf )
 		
 		not ( start : StartNode ( eContainer == c ))
+		
+		eval ( handler.veto( c ))
 	
 	then
 		StartNode start = handler.generatedStartNode(c, c);		
@@ -111,13 +115,15 @@ rule "Add 'can cast?' condition check for onEdit connecting to Update"
 		condition : Condition ( name == "can cast?", eContainer == target )
 		
 		not ( ce : ConditionEdge ( from == condition, to == run )) 
+		
+		eval ( handler.veto( sw ))
 	
 	then
 		ConditionEdge ce = handler.generatedConditionEdge(sw, sw, condition, run);
 		handler.setName(ce, "prevent incompatible types");
 		queue.add(ce, drools);
 		
-		ParameterEdge param = handler.generatedParameterEdge(ce, sw, fieldValue, ce);
+		ParameterEdge param = handler.generatedParameterEdge(sw, sw, fieldValue, ce);
 		queue.add(param, drools);		
 	
 end
@@ -146,13 +152,15 @@ rule "Add 'can cast?' condition check for onAccess connecting to Init"
 		condition : Condition ( name == "can cast?", eContainer == source )
 		
 		not ( ce : ConditionEdge ( from == condition, to == run )) 
+		
+		eval ( handler.veto( sw ))
 	
 	then
 		ConditionEdge ce = handler.generatedConditionEdge(sw, sw, condition, run);
 		handler.setName(ce, "prevent incompatible types");
 		queue.add(ce, drools);
 		
-		ParameterEdge param = handler.generatedParameterEdge(ce, sw, fieldValue, ce);
+		ParameterEdge param = handler.generatedParameterEdge(sw, sw, fieldValue, ce);
 		queue.add(param, drools);		
 	
 end
@@ -176,6 +184,8 @@ rule "After 'init' has been called on a typed element, call 'validate'"
 		validate : Operation ( name == "validate", eContainer == source )
 		
 		not ( runValidate : RunAction ( from == event, to == validate ))
+		
+		eval ( handler.veto( source ))
 	
 	then
 		RunAction runValidate = handler.generatedRunAction(source, source, event, validate);
@@ -206,6 +216,8 @@ rule "Only call 'validate' operation onAccess if fieldValue has been set"
 		isSet : Condition ( name == "fieldValue is set", eContainer == source )
 		
 		not ( edge : ConditionEdge ( from == isSet, to == runValidate) )
+		
+		eval ( handler.veto( runValidate ))
 	
 	then
 		ConditionEdge edge = handler.generatedConditionEdge(runValidate, source, isSet, runValidate);

@@ -13,7 +13,7 @@ import org.openiaml.model.model.operations.*;
 import org.openiaml.model.model.domain.*;
 
 #declare any global variables here
-global EcoreCreateElementsHelper handler;
+global OverridableCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
@@ -23,7 +23,9 @@ rule "Create a default primary key for DomainObjects which do not have one"
 		object : DomainObject ( )
 		not (da : DomainAttribute ( eContainer == object, primaryKey == true ) )
 	
-	then
+		eval ( handler.veto( object ))
+	
+	then	
 		// create a new one
 		DomainAttribute da2 = handler.generatedDomainAttribute(object, object);
 		handler.setName(da2, "generated primary key");
@@ -43,6 +45,8 @@ rule "Domain objects that extend each other will also copy over attributes, conn
 		ext : ExtendsEdge ( from == targetObject, to == sourceObject )
 		
 		not ( DomainAttribute ( eContainer == targetObject, name == sourceAttribute.name )) 
+
+		eval ( handler.veto( ext ))
 	
 	then
 		DomainAttribute copy = handler.generatedDomainAttribute(ext, targetObject);
@@ -70,6 +74,8 @@ rule "Domain objects that extend each other should include an indexable referenc
 		da : DomainAttribute ( eContainer == targetObject, primaryKey == false )
 		and 
 		ExtendsEdge ( from == da, to == sourceId ) ) 
+
+		eval ( handler.veto( ext ))
 
 	then
 		# create the target ID attribute

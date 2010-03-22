@@ -15,7 +15,7 @@ import org.openiaml.model.model.components.*;
 import org.openiaml.model.model.users.*;
 
 #declare any global variables here
-global EcoreCreateElementsHelper handler;
+global OverridableCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
@@ -26,6 +26,8 @@ rule "Create 'Continue' button for Frames connected with 'first' or 'last' Navig
 		nav : NavigateAction ( from == gate, to == target, name == "first" || name == "last" )
 		not (Button ( eContainer == target, name == "Continue" ))
 		not (NavigateAction ( to == gate ))
+		
+		eval ( handler.veto( gate ))
 	
 	then
 		Button button = handler.generatedButton(gate, target);
@@ -44,6 +46,8 @@ rule "Connect 'click' on 'Continue' button to resume Gate"
 		click : EventTrigger ( button.onClick == click, eContainer == button )
 		
 		not (NavigateAction ( from == click, to == gate ))
+		
+		eval ( handler.veto( gate ))
 	
 	then
 		NavigateAction wire = handler.generatedNavigateAction(gate, target, click, gate);
@@ -60,6 +64,8 @@ rule "Create '(gate) flag' property when Gate is connected by 'first' or 'last'"
 		wire : NavigateAction ( from == gate, name == "first" || name == "last" )
 		
 		not (Property ( eContainer == session, eval( name.equals(gate.getName() + " flag")) ))
+		
+		eval ( handler.veto( gate ))
 	
 	then
 		Property prop = handler.generatedProperty(gate, session);
@@ -77,6 +83,8 @@ rule "Create 'set flag' operation for Frames connected with 'first' or 'last' Na
 		button : Button ( eContainer == target, name == "Continue" )
 		
 		not (CompositeOperation ( eContainer == target, name == "Set gate flag" ))
+			
+		eval ( handler.veto( gate ))
 		
 	then
 		CompositeOperation op = handler.generatedCompositeOperation(gate, target);
@@ -95,6 +103,8 @@ rule "Connect 'access' event with 'set flag' operation"
 		access : EventTrigger ( eContainer == target, target.onAccess == access )
 		
 		not (RunAction ( from == access, to == op ))
+			
+		eval ( handler.veto( gate ))
 		
 	then
 		RunAction run = handler.generatedRunAction(gate, target, access, op);
@@ -115,6 +125,8 @@ rule "Create contents of 'set flag' operation"
 		op : CompositeOperation ( eContainer == target, name == "Set gate flag" )
 		
 		not (StartNode ( eContainer == op ))
+			
+		eval ( handler.veto( gate ))
 		
 	then
 		StartNode start = handler.generatedStartNode(gate, op);
@@ -148,6 +160,8 @@ rule "Create condition 'check (gate)'"
 		wire : NavigateAction ( from == gate, name == "first" || name == "last" )
 		
 		not ( Condition ( eContainer == session, eval( name.equals("check " + gate.getName())) ))
+		
+		eval ( handler.veto( gate ))
 	
 	then
 		CompositeCondition cond = handler.generatedCompositeCondition(gate, session);
@@ -165,6 +179,8 @@ rule "Connect condition 'check (gate)' with gate"
 		cond : Condition ( eContainer == session, eval( name.equals("check " + gate.getName())) )
 		
 		not ( ConditionEdge ( from == cond, to == gate ))
+		
+		eval ( handler.veto( gate ))
 	
 	then
 		ConditionEdge cw = handler.generatedConditionEdge(gate, session, cond, gate);
@@ -184,6 +200,8 @@ rule "Create contents of 'check (gate)' condition"
 		cw : ConditionEdge ( from == cond, to == gate )
 		
 		not ( StartNode ( eContainer == cond ))
+		
+		eval ( handler.veto( gate ))
 	
 	then
 		StartNode start = handler.generatedStartNode(gate, cond);

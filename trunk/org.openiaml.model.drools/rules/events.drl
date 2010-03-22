@@ -13,15 +13,17 @@ import org.openiaml.model.model.operations.*;
 import org.openiaml.model.model.domain.*;
 
 #declare any global variables here
-global EcoreCreateElementsHelper handler;
+global OverridableCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
 # @inference Button A {@model Button} contains an {@model EventTrigger} named 'click'. 
 rule "Create 'click' event trigger for button"
 	when
-		f : Button( overridden == false )
+		f : Button( )
 		not (event : EventTrigger( f.onClick == event ))
+				
+		eval ( handler.veto( f ))
 			
 	then
 
@@ -36,6 +38,8 @@ rule "Create 'edit' event trigger for Editable things"
 		f : Editable( )
 		g : GeneratesElements ( eval(f == g) )
 		not (event : EventTrigger( f.onEdit == event ))
+				
+		eval ( handler.veto( g ))
 			
 	then
 		EventTrigger event = handler.generatedEventTriggerOnEdit(g, f);
@@ -49,8 +53,11 @@ rule "Create 'access' event trigger for Accessible things"
 		f : Accessible( )
 		g : GeneratesElements ( eval(f == g) )
 		not (event : EventTrigger( f.onAccess == event ))
+				
+		eval ( handler.veto( g ))
 			
 	then
+		handler.veto(g);
 		EventTrigger event = handler.generatedEventTriggerOnAccess(g, f);
 		queue.add(event, drools);
 		

@@ -10,7 +10,7 @@ import org.openiaml.model.model.domain.*;
 import org.openiaml.model.inference.*;		// for handler
 
 #declare any global variables here
-global EcoreCreateElementsHelper handler;
+global OverridableCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
@@ -19,7 +19,7 @@ rule "Refresh FileDomainStore mappings"
 		
 	when
 		p : Properties ( )
-		fds : FileDomainStore ( overridden == false, propertiesFile == p )
+		fds : FileDomainStore ( propertiesFile == p )
 		not ( FileDomainObject ( eContainer == fds, name == "properties" ))
 
 	then
@@ -33,9 +33,11 @@ end
 rule "Refresh FileDomainStore mappings (2)"
 		
 	when
-		$fds : DomainStore ( overridden == false, type == DomainStoreTypes.PROPERTIES_FILE )
+		$fds : DomainStore ( type == DomainStoreTypes.PROPERTIES_FILE )
 		p : ExtendedProperties ( ) from $fds.propertiesFile
 		not ( DomainObject ( eContainer == $fds, name == "properties" ))
+
+		eval ( handler.veto( $fds ))
 
 	then
 		DomainObject fdo = handler.generatedDomainObject($fds, $fds);
@@ -53,7 +55,7 @@ rule "Refresh FileDomainObject mappings"
 	when
 		$p : Properties ( )
 		$key : String ( ) from $p.stringPropertyNames 
-		fds : FileDomainStore ( overridden == false, propertiesFile == $p )
+		fds : FileDomainStore ( propertiesFile == $p )
 		fdo : FileDomainObject ( eContainer == fds, name == "properties" )
 		not ( FileDomainAttribute ( eContainer == fdo, name == $key ))
 
@@ -71,11 +73,13 @@ end
 rule "Refresh FileDomainObject mappings (2)"
 		
 	when
-		$fds : DomainStore ( overridden == false, type == DomainStoreTypes.PROPERTIES_FILE )
+		$fds : DomainStore ( type == DomainStoreTypes.PROPERTIES_FILE )
 		$p : ExtendedProperties ( ) from $fds.propertiesFile
 		$key : String ( ) from $p.propertyNames
 		fdo : DomainObject ( eContainer == $fds, name == "properties" )
 		not ( DomainAttribute ( eContainer == fdo, name == $key ))
+
+		eval ( handler.veto( fdo ))
 
 	then
 		DomainAttribute fda = handler.generatedDomainAttribute(fdo, fdo);

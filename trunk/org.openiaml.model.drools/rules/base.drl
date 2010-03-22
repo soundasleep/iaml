@@ -14,17 +14,17 @@ import org.openiaml.model.model.scopes.*;
 import org.openiaml.model.model.domain.*;
 
 #declare any global variables here
-global EcoreCreateElementsHelper handler;
+global OverridableCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
 rule "Create empty domain store"
-		
 	when
-		#conditions
 		a : InternetApplication ( name == "test" )
 		not (DomainStore( name=="test domain store") from a.domainStores)
-		// how do we know when not to create the domainstore?
+
+		eval ( handler.veto( a ))
+
 	then 
 		#actions
 		// DomainStore ds = (DomainStore) handler.createElement( a, ModelPackage.eINSTANCE.getDomainStore(), ModelPackage.eINSTANCE.getInternetApplication_DomainStores() );
@@ -44,9 +44,11 @@ end
  */
 rule "Create field value for input text field (untyped)"
 	when
-		f : InputTextField( overridden == false, type == null )
+		f : InputTextField( type == null )
 		not (Property( eContainer == f, name=="fieldValue" ))
 			
+		eval ( handler.veto( f ))
+		
 	then
 		Property fieldValue = handler.generatedProperty(f, f);
 		handler.setName(fieldValue, "fieldValue");
@@ -64,8 +66,10 @@ end
  */
 rule "Create field value for input text field (typed)"
 	when
-		f : InputTextField( overridden == false, type != null )
+		f : InputTextField( type != null )
 		not (Property( eContainer == f, name=="fieldValue" ))
+		
+		eval ( handler.veto( f ))
 			
 	then
 		Property fieldValue = handler.generatedProperty(f, f);
@@ -84,8 +88,10 @@ end
  */
 rule "Create field value for label"
 	when
-		f : Label( overridden == false )
+		f : Label( )
 		not (Property( eContainer == f, name=="fieldValue" ))
+		
+		eval ( handler.veto( f ))
 			
 	then
 		Property fieldValue = handler.generatedProperty(f, f);
@@ -101,8 +107,10 @@ end
  */
 rule "Create field value for domain attribute"
 	when
-		f : DomainAttribute( overridden == false )
+		f : DomainAttribute( )
 		not (Property( eContainer == f, name=="fieldValue" ))
+		
+		eval ( handler.veto( f ))
 			
 	then
 		Property fieldValue = handler.generatedProperty(f, f);
@@ -118,12 +126,15 @@ end
 rule "ApplicationElementProperties will also have a related 'is set' condition"
 	when
 		container : ContainsConditions ( )
+		containerGe : GeneratesElements ( eval(containerGe == container) )
 		value : Property ( eContainer == container )
 		
 		not ( Condition( eval(name.equals(value.getName() + " is set")), eContainer == container ))
 	
+		eval ( handler.veto( containerGe ))
+	
 	then
-		CompositeCondition cond = handler.generatedCompositeCondition((GeneratesElements) container, container);
+		CompositeCondition cond = handler.generatedCompositeCondition(containerGe, container);
 		handler.setName(cond, value.getName() + " is set");
 		queue.add(cond, drools);
 
@@ -137,6 +148,8 @@ rule "Create contents of 'X is set' operation"
 		o : CompositeCondition( eval(name.equals(value.getName() + " is set")), eContainer == container )
 		
 		not ( StartNode ( eContainer == o ))
+		
+		eval ( handler.veto( o ))
 	
 	then
 		

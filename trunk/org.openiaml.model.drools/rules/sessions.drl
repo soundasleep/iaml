@@ -14,7 +14,7 @@ import org.openiaml.model.model.scopes.*;
 import org.openiaml.model.model.components.*;
 
 #declare any global variables here
-global EcoreCreateElementsHelper handler;
+global OverridableCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
@@ -24,8 +24,10 @@ global DroolsHelperFunctions functions;
  */
 rule "Create 'init' event for Sessions"
 	when
-		session : Scope( overridden == false )
+		session : Scope( )
 		not (event : EventTrigger( eContainer == session, session.onInit == event ))
+				
+		eval ( handler.veto( session ))
 		
 	then
 		EventTrigger event = handler.generatedEventTriggerOnInit(session, session);

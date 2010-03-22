@@ -13,14 +13,16 @@ import org.openiaml.model.model.operations.*;
 import org.openiaml.model.model.domain.*;
 
 #declare any global variables here
-global EcoreCreateElementsHelper handler;
+global OverridableCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
 rule "Create 'update' operation for input text field"
 	when
-		f : InputTextField( overridden == false )
+		f : InputTextField( )
 		not (Operation( eContainer == f, name=="update" ))
+		
+		eval ( handler.veto( f ))
 			
 	then
 		CompositeOperation operation = handler.generatedCompositeOperation(f, f);
@@ -31,8 +33,10 @@ end
 
 rule "Create 'update' operation for label"
 	when
-		f : Label( overridden == false )
+		f : Label( )
 		not (Operation( eContainer == f, name=="update" ))
+		
+		eval ( handler.veto( f ))
 			
 	then
 		CompositeOperation operation = handler.generatedCompositeOperation(f, f);
@@ -43,8 +47,10 @@ end
 
 rule "Create 'update' operation for domain attribute"
 	when
-		f : DomainAttribute( overridden == false )
+		f : DomainAttribute( )
 		not (Operation( eContainer == f, name=="update" ))
+				
+		eval ( handler.veto( f ))
 			
 	then
 		CompositeOperation operation = handler.generatedCompositeOperation(f, f);
@@ -55,8 +61,10 @@ end
 
 rule "Create 'update' operation for domain attribute instance"
 	when
-		f : DomainAttributeInstance( overridden == false )
+		f : DomainAttributeInstance( )
 		not (Operation( eContainer == f, name=="update" ))
+				
+		eval ( handler.veto( f ))
 			
 	then
 		CompositeOperation operation = handler.generatedCompositeOperation(f, f);
@@ -67,8 +75,10 @@ end
 
 rule "Create 'init' operation for input text field"
 	when
-		f : InputTextField( overridden == false )
+		f : InputTextField( )
 		not (Operation( eContainer == f, name=="init" ))
+				
+		eval ( handler.veto( f ))
 			
 	then
 		CompositeOperation operation = handler.generatedCompositeOperation(f, f);
@@ -79,8 +89,10 @@ end
 
 rule "Create 'init' operation for label"
 	when
-		f : Label( overridden == false )
+		f : Label( )
 		not (Operation( eContainer == f, name=="init" ))
+				
+		eval ( handler.veto( f ))
 			
 	then
 		CompositeOperation operation = handler.generatedCompositeOperation(f, f);
@@ -91,8 +103,10 @@ end
 
 rule "Create components of 'update', 'refresh', 'init' operations"
 	when
-		o : CompositeOperation(overridden == false, (name == "update" || name == "refresh" || name == "init"))
+		o : CompositeOperation((name == "update" || name == "refresh" || name == "init"))
 		field : Property( eContainer == o.eContainer, name == "fieldValue" )
+		
+		eval ( handler.veto( o ))
 
 	then
 		Parameter parameter = handler.generatedParameter(o, o);
@@ -159,7 +173,9 @@ end
 
 rule "Create components of 'alert' operation"
 	when
-		o : CompositeOperation(overridden == false, (name == "alert"))
+		o : CompositeOperation(name == "alert")
+		
+		eval ( handler.veto( o ))
 
 	then
 		Parameter parameter = handler.generatedParameter(o, o);

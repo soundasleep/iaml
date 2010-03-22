@@ -14,7 +14,7 @@ import org.openiaml.model.model.operations.*;
 import org.openiaml.model.inference.*;		// for handler
 
 #declare any global variables here
-global EcoreCreateElementsHelper handler;
+global OverridableCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
@@ -22,11 +22,13 @@ rule "Refresh NewInstanceWire Instance Object mappings"
 	when
 		object : DomainObject ( )
 		instance : DomainObjectInstance ( )
-		wire : NewInstanceWire( overridden == false, from == object, to == instance )
+		wire : NewInstanceWire( from == object, to == instance )
 
 		attribute : DomainAttribute ( eContainer == object )
 		
 		not ( DomainAttributeInstance( eContainer == instance, name == attribute.name ))
+
+		eval ( handler.veto( wire ))
 		
 	then
 		# create a new one
@@ -45,11 +47,13 @@ rule "Refresh SelectWire Instance Object mappings"
 	when
 		object : DomainObject ( )
 		instance : DomainObjectInstance ( )
-		wire : SelectWire( overridden == false, from == object, to == instance )
+		wire : SelectWire( from == object, to == instance )
 
 		attribute : DomainAttribute ( eContainer == object )
 		
 		not ( DomainAttributeInstance( eContainer == instance, name == attribute.name ))
+		
+		eval ( handler.veto( wire ))
 		
 	then
 		# create a new one
@@ -70,6 +74,8 @@ rule "Create 'save' operation for DomainObjectInstances"
 		
 		not ( Operation( eContainer == instance, name == "save" ))
 		
+		eval ( handler.veto( instance ))
+		
 	then
 		# create a new one
 		PrimitiveOperation op = handler.generatedPrimitiveOperation(instance, instance);
@@ -83,6 +89,8 @@ rule "Create 'exists?' operation for DomainObjectInstances"
 		instance : DomainObjectInstance ( )
 		
 		not ( DecisionOperation( eContainer == instance, name == "exists?" ))
+		
+		eval ( handler.veto( instance ))
 		
 	then
 		# create a new one
@@ -98,6 +106,8 @@ rule "Create 'exists?' condition for DomainObjectInstances"
 		
 		not ( CompositeCondition( eContainer == instance, name == "exists?" ))
 		
+		eval ( handler.veto( instance ))
+		
 	then
 		# create a new one
 		CompositeCondition condition = handler.generatedCompositeCondition(instance, instance);
@@ -112,6 +122,8 @@ rule "Create 'fieldValue' value for DomainAttributeInstances"
 		
 		not ( Property( eContainer == instance, name == "fieldValue" ))
 		
+		eval ( handler.veto( instance ))
+		
 	then
 		# create a new one
 		Property value = handler.generatedProperty(instance, instance);
@@ -121,7 +133,6 @@ rule "Create 'fieldValue' value for DomainAttributeInstances"
 end
 
 rule "Create the contents of the 'exists?' condition"
-	
 	when
 		instance : DomainObjectInstance ( )
 		
@@ -129,6 +140,8 @@ rule "Create the contents of the 'exists?' condition"
 		existsOp : DecisionOperation( eContainer == instance, name == "exists?" )
 		
 		not ( StartNode( eContainer == condition ))
+	
+		eval ( handler.veto( condition ))
 	
 	then
 		# create contents

@@ -13,14 +13,14 @@ import org.openiaml.model.model.operations.*;
 import org.openiaml.model.model.scopes.*;
 
 #declare any global variables here
-global EcoreCreateElementsHelper handler;
+global OverridableCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
 rule "Sync wires between objects should create sync wires between all elements inside each object that matches"
 	when
-		# source : SyncWire(overridden == false, eval(connects(source, p1, p2)) )
-		source : SyncWire(overridden == false)
+		# source : SyncWire(, eval(connects(source, p1, p2)) )
+		source : SyncWire()
 		# we put in these to prevent multiple wires being generated for two connects
 
 		p1 : CanBeSynced( source.from == p1 )
@@ -36,6 +36,10 @@ rule "Sync wires between objects should create sync wires between all elements i
 	
 		not (sw : SyncWire( name == "sync", eContainer == source, eval(functions.connects( sw, e1, e2)) ))
 		
+		eval( handler.veto( source ))
+						
+		eval ( handler.veto( source ))
+		
 	then
 		SyncWire sw = handler.generatedSyncWire(source, source, e1, e2);
 		handler.setName(sw, "sync");
@@ -46,7 +50,7 @@ end
 // TODO should these be Editable => has an onEdit event?
 rule "Run instance wire from edit to update (onEdit)"
 	when
-		sw : SyncWire(overridden == false)
+		sw : SyncWire()
 		source : Editable( )
 		target : ContainsOperations( )
 		eval(functions.connects(sw, source, target))
@@ -55,6 +59,8 @@ rule "Run instance wire from edit to update (onEdit)"
 		operation : Operation( eContainer == target, name=="update" )
 		
 		not (RunAction( from == event, to == operation, name == "run", eContainer == sw ))
+						
+		eval ( handler.veto( sw ))
 		
 	then
 		RunAction rw = handler.generatedRunAction(sw, sw, event, operation);
@@ -65,7 +71,7 @@ end
 
 rule "Connect parameter wire to: run instance wire from source.edit to target.update (onEdit)"
 	when
-		sw : SyncWire(overridden == false)
+		sw : SyncWire()
 		source : Editable( )
 		target : ContainsOperations( )
 		eval( functions.connects(sw, source, target))
@@ -76,6 +82,8 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 		wire : RunAction( from == event, to == operation, name == "run", eContainer == sw )
 		
 		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
+						
+		eval ( handler.veto( sw ))
 		
 	then
 		ParameterEdge pw = handler.generatedParameterEdge(sw, sw, field, wire); 
@@ -87,7 +95,7 @@ end
 # Ideally, these two commands would be joined together into one
 rule "Run instance wire from source.access to source.init, when we have a value to provide as a parameter (onAccess)"
 	when
-		sw : SyncWire(overridden == false)
+		sw : SyncWire()
 		source : Accessible( )  
 		target : ContainsOperations( )
 		eval ( functions.connects(sw, source, target ))
@@ -97,6 +105,8 @@ rule "Run instance wire from source.access to source.init, when we have a value 
 		field : Property( eContainer == target, name=="fieldValue" )
 		
 		not (RunAction( from == event, to == operation, name == "run", eContainer == sw ))
+						
+		eval ( handler.veto( sw ))
 		
 	then
 		RunAction rw = handler.generatedRunAction(sw, sw, event, operation);
@@ -107,7 +117,7 @@ end
 
 rule "Run instance wire from source.access to source.init, adding ConditionEdge to check it is set (onAccess)"
 	when
-		sw : SyncWire(overridden == false)
+		sw : SyncWire()
 		source : Accessible( )  
 		target : ContainsOperations( )
 		eval ( functions.connects(sw, source, target))
@@ -122,6 +132,8 @@ rule "Run instance wire from source.access to source.init, adding ConditionEdge 
 		condition : CompositeCondition ( eContainer == target, name == "fieldValue is set" )
 		
 		not ( ConditionEdge ( from == condition, to == run ))
+					
+		eval ( handler.veto( sw ))
 	
 	then
 		ConditionEdge cw = handler.generatedConditionEdge(sw, sw, condition, run);
@@ -132,7 +144,7 @@ end
 # Ideally, these two commands would be joined together into one
 rule "Connect parameter wire to: run instance wire from source.access to source.init"
 	when
-		sw : SyncWire(overridden == false)
+		sw : SyncWire()
 		source : Accessible( )
 		target : ContainsOperations( )
 		eval ( functions.connects(sw, source, target))
@@ -143,6 +155,8 @@ rule "Connect parameter wire to: run instance wire from source.access to source.
 		wire : RunAction( from == event, to == operation, name == "run", eContainer == sw )
 		
 		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
+						
+		eval ( handler.veto( sw ))
 		
 	then
 		ParameterEdge pw = handler.generatedParameterEdge(sw, sw, field, wire); 
@@ -180,7 +194,7 @@ rule "Cascaded SyncWires: Conditions from parent to child"
 	when
 
 		# the containing elements	
-		sw : SyncWire ( overridden == false )
+		sw : SyncWire (  )
 		source : CanBeSynced( sw.from == source )  
 		// cannot use 'sw.to == target, target != source'
 		// can NOT use 'sw.to == target, this != source'
@@ -191,7 +205,7 @@ rule "Cascaded SyncWires: Conditions from parent to child"
 		# the elements contained
 		e1 : CanBeSynced( eContainer == source )
 		e2 : CanBeSynced( eContainer == target, eval(functions.nameMatches(e1, e2)) )
-		esw : SyncWire( name == "sync", eval(functions.connects(esw, e1, e2)), overridden == false )
+		esw : SyncWire( name == "sync", eval(functions.connects(esw, e1, e2)) )
 		
 		# there is a condition on the containing sync wire
 		condition : Condition ( )
@@ -199,6 +213,8 @@ rule "Cascaded SyncWires: Conditions from parent to child"
 
 		# and there isn't one on the element sync wire
 		not (ecw : ConditionEdge( from == condition, to == esw )) 
+						
+		eval ( handler.veto( cw ))
 		
 	then
 		ConditionEdge ecw = handler.generatedConditionEdge( cw, sw, condition, esw );
@@ -211,7 +227,7 @@ rule "Cascaded SyncWires: Parameters from parent to child"
 	when
 
 		# the containing elements
-		sw : SyncWire ( overridden == false )
+		sw : SyncWire (  )
 		source : CanBeSynced( sw.from == source )  
 		target : CanBeSynced( sw.to == target )
 		eval ( target != source )
@@ -219,7 +235,7 @@ rule "Cascaded SyncWires: Parameters from parent to child"
 		# the elements contained
 		e1 : CanBeSynced( eContainer == source )
 		e2 : CanBeSynced( eContainer == target, eval(functions.nameMatches(e1, e2)) )
-		esw : SyncWire( name == "sync", eval(functions.connects(esw, e1, e2)), overridden == false )
+		esw : SyncWire( name == "sync", eval(functions.connects(esw, e1, e2)) )
 		
 		# there is a condition on the containing sync wire
 		condition : Condition ( )
@@ -234,6 +250,8 @@ rule "Cascaded SyncWires: Parameters from parent to child"
 
 		# and there isn't one on the element sync wire
 		not (epw : ParameterEdge( from == parameter, to == ecw )) 
+						
+		eval ( handler.veto( cw ))
 		
 	then
 		# create it
@@ -247,13 +265,13 @@ end
 # connect the Frames together.
 rule "Connect Session.init to incoming SyncWires (contained in Frames) (onEdit 2)"
 	when
-		session : Session ( overridden == false )
-		sw : SyncWire( overridden == false )
+		session : Session (  )
+		sw : SyncWire(  )
 		sourceFrame : VisibleThing( eval(!functions.containingSessionEquals(sourceFrame, session)) )  
 		targetFrame : ContainsOperations( eval(functions.containingSessionEquals(targetFrame, session)) )
 		eval( functions.connects(sw, sourceFrame, targetFrame ))
 
-		sw2 : SyncWire ( eContainer == sw, overridden == false)
+		sw2 : SyncWire ( eContainer == sw)
 		sourceElement : Editable( eContainer == sourceFrame )
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connects(sw2, sourceElement, targetElement ))
@@ -265,6 +283,8 @@ rule "Connect Session.init to incoming SyncWires (contained in Frames) (onEdit 2
 		inite : EventTrigger (eContainer == session, session.onInit == inite )
 		
 		not (RunAction( eContainer == sw2, from == inite, to == operation, name == "run" ))
+						
+		eval ( handler.veto( sw2 ))
 		
 	then
 		RunAction rw2 = handler.generatedRunAction(sw2, sw2, inite, operation);
@@ -275,13 +295,13 @@ end
 
 rule "Connect Session.init to incoming SyncWires (contained in Frames) (onEdit 3)"
 	when
-		session : Session ( overridden == false )
-		sw : SyncWire( overridden == false )
+		session : Session (  )
+		sw : SyncWire(  )
 		sourceFrame : Frame( eval(!functions.containingSessionEquals(sourceFrame, session)) )  
 		targetFrame : ContainsOperations( eval(functions.containingSessionEquals(targetFrame, session)) )
 		eval( functions.connects(sw, sourceFrame, targetFrame ))
 
-		sw2 : SyncWire ( eContainer == sw, overridden == false)
+		sw2 : SyncWire ( eContainer == sw)
 		sourceElement : Editable( eContainer == sourceFrame )
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connects(sw2, sourceElement, targetElement ))
@@ -293,6 +313,8 @@ rule "Connect Session.init to incoming SyncWires (contained in Frames) (onEdit 3
 		inite : EventTrigger (eContainer == session, session.onInit == inite )
 		
 		not (RunAction( eContainer == sw2, from == inite, to == operation, name == "run" ))
+						
+		eval ( handler.veto( sw2 ))
 		
 	then
 		RunAction rw2 = handler.generatedRunAction(sw2, sw2, inite, operation);
@@ -303,13 +325,13 @@ end
 
 rule "Connect parameter for Session.init to incoming SyncWires (contained in Frames) (onEdit) (2)"
 	when
-		session : Session ( overridden == false )
-		sw : SyncWire( overridden == false )
+		session : Session (  )
+		sw : SyncWire(  )
 		sourceFrame : VisibleThing( eval(!functions.containingSessionEquals(sourceFrame, session)) )  
 		targetFrame : ContainsOperations( eval(functions.containingSessionEquals(targetFrame, session)) )
 		eval( functions.connects(sw, sourceFrame, targetFrame ))
 
-		sw2 : SyncWire ( eContainer == sw, overridden == false)
+		sw2 : SyncWire ( eContainer == sw)
 		sourceElement : Editable( eContainer == sourceFrame )
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connects(sw2, sourceElement, targetElement ))
@@ -326,6 +348,8 @@ rule "Connect parameter for Session.init to incoming SyncWires (contained in Fra
 		pw : ParameterEdge( eContainer == sw2, from == field, to == rw ) 
 
 		not( ParameterEdge( eContainer == sw2, from == field, to == initrw ))  
+						
+		eval ( handler.veto( sw ))
 		
 	then
 		ParameterEdge pw2 = handler.generatedParameterEdge(sw, sw, field, initrw);
@@ -334,13 +358,13 @@ end
 
 rule "Connect parameter for Session.init to incoming SyncWires (contained in Frames) (onEdit) (3)"
 	when
-		session : Session ( overridden == false )
-		sw : SyncWire( overridden == false )
+		session : Session (  )
+		sw : SyncWire(  )
 		sourceFrame : Frame( eval(!functions.containingSessionEquals(sourceFrame, session)) )  
 		targetFrame : ContainsOperations( eval(functions.containingSessionEquals(targetFrame, session)) )
 		eval( functions.connects(sw, sourceFrame, targetFrame ))
 
-		sw2 : SyncWire ( eContainer == sw, overridden == false)
+		sw2 : SyncWire ( eContainer == sw)
 		sourceElement : Editable( eContainer == sourceFrame )
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connects(sw2, sourceElement, targetElement ))
@@ -357,6 +381,8 @@ rule "Connect parameter for Session.init to incoming SyncWires (contained in Fra
 		pw : ParameterEdge( eContainer == sw2, from == field, to == rw ) 
 
 		not( ParameterEdge( eContainer == sw2, from == field, to == initrw ))  
+						
+		eval ( handler.veto( sw ))
 		
 	then
 		ParameterEdge pw2 = handler.generatedParameterEdge(sw, sw, field, initrw);
@@ -365,9 +391,9 @@ end
 
 rule "Refresh New Instance Object mappings (except for generated primary keys) when sync connected to Forms: create text fields"
 	when
-		sync : SyncWire( overridden == false )
-		form : InputForm ( overridden == false )
-		instance : DomainObjectInstance ( overridden == false )
+		sync : SyncWire(  )
+		form : InputForm (  )
+		instance : DomainObjectInstance (  )
 		
 		eval(functions.connects(sync, form, instance))
 		
@@ -380,6 +406,8 @@ rule "Refresh New Instance Object mappings (except for generated primary keys) w
 		eval( functions.notExtendingGeneratedPrimaryKey( originalAttribute ) )
 		
 		not ( tf : InputTextField( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
+						
+		eval ( handler.veto( sync ))
 		
 	then
 		# create a new one
@@ -391,9 +419,9 @@ end
 
 rule "Refresh Domain Object mappings (except for generated primary keys) when sync connected to Forms: create text fields"
 	when
-		sync : SyncWire( overridden == false )
-		form : InputForm ( overridden == false )
-		object : DomainObject ( overridden == false )
+		sync : SyncWire(  )
+		form : InputForm (  )
+		object : DomainObject (  )
 		
 		eval(functions.connects(sync, form, object))
 		
@@ -404,6 +432,8 @@ rule "Refresh Domain Object mappings (except for generated primary keys) when sy
 		eval( functions.notExtendingGeneratedPrimaryKey( attribute ) )
 		
 		not ( tf : InputTextField( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
+						
+		eval ( handler.veto( sync ))
 		
 	then
 		# create a new one
@@ -415,9 +445,9 @@ end
 
 rule "A SyncWire between Attributes selected from a NewInstanceWire need to check that the attribute exists before initialising"
 	when
-		sync : SyncWire( overridden == false )
-		form : InputForm ( overridden == false )
-		instance : DomainObjectInstance ( overridden == false )
+		sync : SyncWire(  )
+		form : InputForm (  )
+		instance : DomainObjectInstance (  )
 		
 		eval(functions.connects(sync, form, instance))
 		
@@ -446,6 +476,8 @@ rule "A SyncWire between Attributes selected from a NewInstanceWire need to chec
 		
 		# but not connected		
 		not (ConditionEdge ( from == existsCondition, to == run ))
+						
+		eval ( handler.veto( sync2 ))
 		
 	then
 		# connect it

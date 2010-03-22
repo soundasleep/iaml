@@ -49,3 +49,34 @@
 	}
 «ENDAROUND»
 
+/**
+ * Issue 162: display overridden elements in bold.
+ *
+ * We replace refreshFont() directly and add additional logic.
+ */
+«AROUND refreshFont FOR gmfgen::GenCommonBase-»
+	«EXPAND xpt::Common::generatedMemberComment("[jevon] issue 162: display {@link GeneratesElements#isOverridden() overridden elements} as bold.")»
+	protected void refreshFont() {
+		org.eclipse.gmf.runtime.notation.FontStyle style =
+			(org.eclipse.gmf.runtime.notation.FontStyle) getFontStyleOwnerView().getStyle(
+				org.eclipse.gmf.runtime.notation.NotationPackage.eINSTANCE.getFontStyle());
+		if (style != null) {
+			// [jevon] issue 162: check isOverridden
+			boolean forceBold = false;
+			org.eclipse.emf.ecore.EObject obj = resolveSemanticElement();
+			// NOTE: model-specific
+			if (obj != null && obj instanceof org.openiaml.model.model.GeneratesElements) {
+				if (((org.openiaml.model.model.GeneratesElements) obj).isOverridden()) {
+					forceBold = true;
+				}
+			}
+
+			org.eclipse.swt.graphics.FontData fontData = new org.eclipse.swt.graphics.FontData(
+				style.getFontName(), style.getFontHeight(),
+				/* force bold? */ forceBold ? org.eclipse.swt.SWT.BOLD : (style.isBold() ? org.eclipse.swt.SWT.BOLD : org.eclipse.swt.SWT.NORMAL) |
+				(style.isItalic() ? org.eclipse.swt.SWT.ITALIC : org.eclipse.swt.SWT.NORMAL));
+			setFont(fontData);
+		}
+	}
+«ENDAROUND»
+

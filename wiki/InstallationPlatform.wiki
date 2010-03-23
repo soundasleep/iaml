@@ -24,6 +24,8 @@ This installation process will cover the installation of Apache and PHP on Windo
 
   _Download the latest version of the [http://www.php.net/downloads.php PHP 5.x installer], and follow the [http://www.php.net/manual/en/install.windows.installer.msi.php installation tutorial] on the PHP website._
 
+IAML currently requires [http://php.net/manual/en/function.error-get-last.php PHP 5.2 or higher].
+
 When installing PHP, make sure that you have the following extensions enabled:
 
   * PDO

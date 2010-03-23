@@ -25,9 +25,6 @@ import org.openiaml.model.codegen.php.CheckModelInstance;
 import org.openiaml.model.codegen.php.OawCodeGeneratorWithRuntime;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.drools.EcoreInferenceHandlerFactory;
-import org.openiaml.model.drools.ICreateElementsFactory;
-import org.openiaml.model.inference.EcoreInferenceHandler;
-import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
 
 /**

@@ -22,6 +22,20 @@
 		<!-- more than one popup extension is displayed in reverse order:
 		     a documented bug of eclipse -->
          <action
+               class="org.openiaml.model.custom.actions.ExportInferredDotGraphAction"
+               id="org.openiaml.model.diagram.custom.action7"
+               label="E&amp;xport completed model to DOT"
+               menubarPath="org.openiaml.model.diagram.custom.menu1/group">
+         </action>
+
+         <action
+               class="org.openiaml.model.custom.actions.ExportDotGraphAction"
+               id="org.openiaml.model.diagram.custom.action6"
+               label="&amp;Export model to DOT"
+               menubarPath="org.openiaml.model.diagram.custom.menu1/group">
+         </action>
+                  
+         <action
                class="org.openiaml.model.custom.actions.InferEntireModelAction"
                id="org.openiaml.model.diagram.custom.action4"
                label="&amp;Infer all elements in-place"

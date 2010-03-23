@@ -8,8 +8,8 @@ import java.util.Properties;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.EObject;
+import org.openiaml.model.EmfToDot;
 import org.openiaml.model.tests.CodegenTestCase;
-import org.openiaml.model.tests.EmfToDot;
 
 /**
  * Test properties files that are wrapped with inputforms (or not)

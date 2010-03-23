@@ -15,6 +15,7 @@ import org.openiaml.emf.properties.IEMFElementSelector;
 import org.openiaml.emf.properties.IPropertyInvestigator;
 import org.openiaml.emf.properties.library.Increase;
 import org.openiaml.emf.properties.library.IncreaseAbsolute;
+import org.openiaml.model.EmfToDot;
 import org.openiaml.model.model.ModelPackage;
 
 /**
@@ -74,8 +75,7 @@ public class ModelPropertiesInvestigator implements IEMFElementSelector {
 	 * @return
 	 */
 	public static boolean isGeneratedReference(EReference ref) {
-		return ref.equals(ModelPackage.eINSTANCE.getGeneratedElement_GeneratedBy()) ||
-			ref.equals(ModelPackage.eINSTANCE.getGeneratesElements_GeneratedElements());
+		return EmfToDot.isGeneratedReference(ref);
 	}
 
 	/**

@@ -80,20 +80,18 @@ public class MigrateModelAction extends ProgressEnabledUIAction<IFile> {
 		
 		return ifiles;
 	}
-
+	
 	/**
-	 * Get a new filename for the migrated model (cannot be
-	 * the same filename) and do the actual migration.
+	 * Ask the user for a target IFile to save to, based on a unique name of
+	 * the source IFile, and a given file extension. Returns <code>null</code>
+	 * if cancel was selected.
 	 * 
-	 * @see #migrateModel(IFile, IFile, IProgressMonitor)
-	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
+	 * @return the provided IFile, or <code>null</code> if the dialog was cancelled. 
 	 */
-	@Override
-	public IStatus execute(IFile source, IProgressMonitor monitor) {
+	public static IFile askForFilename(IFile source, String fileExtension) {
 		// we need to get a new file
 		IPath containerPath = source.getFullPath().removeLastSegments(1);
 		String fileName = source.getName();
-		String fileExtension = source.getFileExtension();
 		// generate unique name
 		String uniqueName = getUniqueFileName( containerPath, fileName, fileExtension);
 
@@ -111,13 +109,37 @@ public class MigrateModelAction extends ProgressEnabledUIAction<IFile> {
 		String destination = dialog.getValue();
 		if (destination == null) {
 			// cancelled
-			return Status.CANCEL_STATUS;
+			return null;
 		}
 		
 		// get the file
 		IFile target = source.getProject().getFile(
 				source.getProjectRelativePath().removeLastSegments(1).append(destination)
 			);
+		
+		return target;
+	}
+	
+	/**
+	 * Ask the user for a target IFile to save to, based on the filename
+	 * and file extension of the given source IFile.
+	 * 
+	 * @return the provided IFile, or <code>null</code> if the dialog was cancelled. 
+	 */
+	public static IFile askForFilename(IFile source) {
+		return askForFilename(source, source.getFileExtension());
+	}
+
+	/**
+	 * Get a new filename for the migrated model (cannot be
+	 * the same filename) and do the actual migration.
+	 * 
+	 * @see #migrateModel(IFile, IFile, IProgressMonitor)
+	 * @see org.eclipse.ui.IActionDelegate#run(org.eclipse.jface.action.IAction)
+	 */
+	@Override
+	public IStatus execute(IFile source, IProgressMonitor monitor) {
+		IFile target = askForFilename(source);	// uses the same file extension
 		
 		if (target.exists()) {
 			return errorStatus("The target model file already exists.");

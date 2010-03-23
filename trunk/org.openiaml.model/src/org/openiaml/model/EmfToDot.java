@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.tests;
+package org.openiaml.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,6 +11,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.openiaml.emf.properties.IEMFElementSelector.DefaultElementSelector;
+import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 
 /**
@@ -150,7 +151,20 @@ public class EmfToDot extends DefaultElementSelector {
 	
 	@Override
 	public boolean ignoreReference(EReference ref) {
-		return ModelPropertiesInvestigator.isGeneratedReference(ref);
+		return isGeneratedReference(ref);
 	}
-
+	
+	/**
+	 * Is the given reference a 'generated' reference?
+	 * 
+	 * @see #investigate(EObject, boolean)
+	 * @see #ignoreReference(EReference)
+	 * @param ref
+	 * @return
+	 */
+	public static boolean isGeneratedReference(EReference ref) {
+		return ref.equals(ModelPackage.eINSTANCE.getGeneratedElement_GeneratedBy()) ||
+			ref.equals(ModelPackage.eINSTANCE.getGeneratesElements_GeneratedElements());
+	}
+	
 }

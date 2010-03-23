@@ -119,3 +119,6 @@ The meta-model refactoring has continued; for example:
 =Model 0.4.5=
 
   _Currently under development._
+
+  * Added [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.actions/src/org/openiaml/model/custom/actions/ExportDotGraphAction.java?spec=svn1756&r=1756 an action] to export a given IAML model to DOT format.
+  * Added [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.actions/src/org/openiaml/model/custom/actions/ExportInferredDotGraphAction.java?spec=svn1756&r=1756 an action] to export the initial, and completed, model to DOT format.

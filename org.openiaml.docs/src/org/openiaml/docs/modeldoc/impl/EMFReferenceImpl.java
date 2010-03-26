@@ -31,6 +31,7 @@ import org.openiaml.docs.modeldoc.ModeldocPackage;
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFReferenceImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFReferenceImpl#getContainingType <em>Containing Type</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFReferenceImpl#getTypeName <em>Type Name</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFReferenceImpl#getOpposite <em>Opposite</em>}</li>
  * </ul>
  * </p>
  *
@@ -146,6 +147,16 @@ public class EMFReferenceImpl extends EObjectImpl implements EMFReference {
 	 * @ordered
 	 */
 	protected String typeName = TYPE_NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getOpposite() <em>Opposite</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOpposite()
+	 * @generated
+	 * @ordered
+	 */
+	protected EMFReference opposite;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -355,6 +366,44 @@ public class EMFReferenceImpl extends EObjectImpl implements EMFReference {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EMFReference getOpposite() {
+		if (opposite != null && opposite.eIsProxy()) {
+			InternalEObject oldOpposite = (InternalEObject)opposite;
+			opposite = (EMFReference)eResolveProxy(oldOpposite);
+			if (opposite != oldOpposite) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModeldocPackage.EMF_REFERENCE__OPPOSITE, oldOpposite, opposite));
+			}
+		}
+		return opposite;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EMFReference basicGetOpposite() {
+		return opposite;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOpposite(EMFReference newOpposite) {
+		EMFReference oldOpposite = opposite;
+		opposite = newOpposite;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModeldocPackage.EMF_REFERENCE__OPPOSITE, oldOpposite, opposite));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -417,6 +466,9 @@ public class EMFReferenceImpl extends EObjectImpl implements EMFReference {
 				return getContainingType();
 			case ModeldocPackage.EMF_REFERENCE__TYPE_NAME:
 				return getTypeName();
+			case ModeldocPackage.EMF_REFERENCE__OPPOSITE:
+				if (resolve) return getOpposite();
+				return basicGetOpposite();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -449,6 +501,9 @@ public class EMFReferenceImpl extends EObjectImpl implements EMFReference {
 				return;
 			case ModeldocPackage.EMF_REFERENCE__TYPE_NAME:
 				setTypeName((String)newValue);
+				return;
+			case ModeldocPackage.EMF_REFERENCE__OPPOSITE:
+				setOpposite((EMFReference)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -483,6 +538,9 @@ public class EMFReferenceImpl extends EObjectImpl implements EMFReference {
 			case ModeldocPackage.EMF_REFERENCE__TYPE_NAME:
 				setTypeName(TYPE_NAME_EDEFAULT);
 				return;
+			case ModeldocPackage.EMF_REFERENCE__OPPOSITE:
+				setOpposite((EMFReference)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -509,6 +567,8 @@ public class EMFReferenceImpl extends EObjectImpl implements EMFReference {
 				return getContainingType() != null;
 			case ModeldocPackage.EMF_REFERENCE__TYPE_NAME:
 				return TYPE_NAME_EDEFAULT == null ? typeName != null : !TYPE_NAME_EDEFAULT.equals(typeName);
+			case ModeldocPackage.EMF_REFERENCE__OPPOSITE:
+				return opposite != null;
 		}
 		return super.eIsSet(featureID);
 	}

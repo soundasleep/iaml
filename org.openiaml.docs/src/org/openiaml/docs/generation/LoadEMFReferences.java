@@ -3,6 +3,9 @@
  */
 package org.openiaml.docs.generation;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
 import org.openiaml.docs.modeldoc.EMFClass;
@@ -25,6 +28,7 @@ public class LoadEMFReferences extends DocumentationHelper implements ILoader {
 	 */
 	public void load(ModeldocFactory factory, ModelDocumentation root) {
 		
+		Map<EReference,EMFReference> allRefs = new HashMap<EReference,EMFReference>();
 		for (EMFClass source : root.getClasses()) {
 			
 			for (EReference ref : source.getTargetClass().getEReferences()) {
@@ -47,8 +51,23 @@ public class LoadEMFReferences extends DocumentationHelper implements ILoader {
 				
 				source.getReferences().add(newRef);
 				
+				// save copy
+				allRefs.put(ref, newRef);
+				
 			}
 			
+		}
+		
+		// once all references have been loaded, create opposite references
+		for (EReference ref : allRefs.keySet()) {
+			EMFReference target = allRefs.get(ref);
+			
+			if (ref.getEOpposite() != null) {
+				if (allRefs.containsKey(ref.getEOpposite())) {
+					// found it
+					target.setOpposite( allRefs.get(ref.getEOpposite()) );
+				}
+			}
 		}
 		
 	}

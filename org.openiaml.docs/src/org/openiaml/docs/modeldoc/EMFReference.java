@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.openiaml.docs.modeldoc.EMFReference#getType <em>Type</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFReference#getContainingType <em>Containing Type</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFReference#getTypeName <em>Type Name</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.EMFReference#getOpposite <em>Opposite</em>}</li>
  * </ul>
  * </p>
  *
@@ -216,5 +217,31 @@ public interface EMFReference extends EObject {
 	 * @generated
 	 */
 	void setTypeName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Opposite</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Opposite</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Opposite</em>' reference.
+	 * @see #setOpposite(EMFReference)
+	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getEMFReference_Opposite()
+	 * @model
+	 * @generated
+	 */
+	EMFReference getOpposite();
+
+	/**
+	 * Sets the value of the '{@link org.openiaml.docs.modeldoc.EMFReference#getOpposite <em>Opposite</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Opposite</em>' reference.
+	 * @see #getOpposite()
+	 * @generated
+	 */
+	void setOpposite(EMFReference value);
 
 } // EMFReference

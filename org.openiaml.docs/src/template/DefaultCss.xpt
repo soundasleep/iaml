@@ -48,6 +48,11 @@ body#summary div.intro + .semantic_block { margin-top: .6em; }
 .inherited_block a:hover { color: #789; }
 .inherited_block a img { opacity: .7; }
 
+.opposite_block { color: #999; font-size: 0.9em; }
+.opposite_block a { color: #999; }
+.opposite_block a:hover { color: #789; }
+.opposite_block a img { opacity: .7; }
+
 .javadoc_reference { float: right; margin-left: .5em; }
 
 table { border: 1px solid #aab; border-collapse: collapse; }

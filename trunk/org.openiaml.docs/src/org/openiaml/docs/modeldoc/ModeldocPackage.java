@@ -1592,13 +1592,22 @@ public interface ModeldocPackage extends EPackage {
 	int EMF_REFERENCE__TYPE_NAME = 6;
 
 	/**
+	 * The feature id for the '<em><b>Opposite</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_REFERENCE__OPPOSITE = 7;
+
+	/**
 	 * The number of structural features of the '<em>EMF Reference</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_REFERENCE_FEATURE_COUNT = 7;
+	int EMF_REFERENCE_FEATURE_COUNT = 8;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.TemplateFileImpl <em>Template File</em>}' class.
@@ -3020,6 +3029,17 @@ public interface ModeldocPackage extends EPackage {
 	EAttribute getEMFReference_TypeName();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.openiaml.docs.modeldoc.EMFReference#getOpposite <em>Opposite</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Opposite</em>'.
+	 * @see org.openiaml.docs.modeldoc.EMFReference#getOpposite()
+	 * @see #getEMFReference()
+	 * @generated
+	 */
+	EReference getEMFReference_Opposite();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.docs.modeldoc.TemplateFile <em>Template File</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4156,6 +4176,14 @@ public interface ModeldocPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute EMF_REFERENCE__TYPE_NAME = eINSTANCE.getEMFReference_TypeName();
+
+		/**
+		 * The meta object literal for the '<em><b>Opposite</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EMF_REFERENCE__OPPOSITE = eINSTANCE.getEMFReference_Opposite();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.impl.TemplateFileImpl <em>Template File</em>}' class.

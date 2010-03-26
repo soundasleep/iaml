@@ -359,6 +359,12 @@
 		«ELSE»
 			«EXPAND typeName(typeName)»
 		«ENDIF»
+		
+		«IF opposite != null»
+		<span class="opposite_block">
+		[opposite: <a href="«fileName(opposite.containingType)»">«opposite.name»</a>]
+		</span>
+		«ENDIF»
 	</li>
 «ENDDEFINE»
 

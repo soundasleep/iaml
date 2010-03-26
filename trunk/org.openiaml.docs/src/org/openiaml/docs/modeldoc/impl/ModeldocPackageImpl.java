@@ -1362,6 +1362,15 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getEMFReference_Opposite() {
+		return (EReference)emfReferenceEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTemplateFile() {
 		return templateFileEClass;
 	}
@@ -1628,6 +1637,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		createEReference(emfReferenceEClass, EMF_REFERENCE__TYPE);
 		createEReference(emfReferenceEClass, EMF_REFERENCE__CONTAINING_TYPE);
 		createEAttribute(emfReferenceEClass, EMF_REFERENCE__TYPE_NAME);
+		createEReference(emfReferenceEClass, EMF_REFERENCE__OPPOSITE);
 
 		templateFileEClass = createEClass(TEMPLATE_FILE);
 		createEAttribute(templateFileEClass, TEMPLATE_FILE__PLUGIN);
@@ -1845,6 +1855,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		initEReference(getEMFReference_Type(), this.getEMFClass(), null, "type", null, 0, 1, EMFReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEMFReference_ContainingType(), this.getEMFClass(), this.getEMFClass_References(), "containingType", null, 0, 1, EMFReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEMFReference_TypeName(), ecorePackage.getEString(), "typeName", null, 0, 1, EMFReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEMFReference_Opposite(), this.getEMFReference(), null, "opposite", null, 0, 1, EMFReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(templateFileEClass, TemplateFile.class, "TemplateFile", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTemplateFile_Plugin(), ecorePackage.getEString(), "plugin", null, 0, 1, TemplateFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

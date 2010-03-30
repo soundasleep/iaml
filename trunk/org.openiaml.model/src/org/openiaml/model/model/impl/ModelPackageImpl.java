@@ -865,6 +865,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getVisibleThing_FieldValue() {
+		return (EAttribute)visibleThingEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getContainsProperties() {
 		return containsPropertiesEClass;
 	}
@@ -1737,6 +1746,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(visibleThingEClass, VISIBLE_THING__CHILDREN);
 		createEReference(visibleThingEClass, VISIBLE_THING__VALUES);
 		createEReference(visibleThingEClass, VISIBLE_THING__ON_CLICK);
+		createEAttribute(visibleThingEClass, VISIBLE_THING__FIELD_VALUE);
 
 		containsPropertiesEClass = createEClass(CONTAINS_PROPERTIES);
 		createEReference(containsPropertiesEClass, CONTAINS_PROPERTIES__PROPERTIES);
@@ -2096,6 +2106,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getVisibleThing_Children(), this.getVisibleThing(), null, "children", null, 0, -1, VisibleThing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getVisibleThing_Values(), this.getStaticValue(), null, "values", null, 0, -1, VisibleThing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getVisibleThing_OnClick(), this.getEventTrigger(), null, "onClick", null, 0, 1, VisibleThing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getVisibleThing_FieldValue(), ecorePackage.getEString(), "fieldValue", null, 0, 1, VisibleThing.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(containsPropertiesEClass, ContainsProperties.class, "ContainsProperties", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getContainsProperties_Properties(), this.getProperty(), null, "properties", null, 0, -1, ContainsProperties.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

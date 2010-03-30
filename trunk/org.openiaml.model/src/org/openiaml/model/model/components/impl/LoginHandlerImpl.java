@@ -25,6 +25,7 @@ import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsOperations;
+import org.openiaml.model.model.ContainsProperties;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
@@ -1173,9 +1174,14 @@ public class LoginHandlerImpl extends EObjectImpl implements LoginHandler {
 				default: return -1;
 			}
 		}
+		if (baseClass == ContainsProperties.class) {
+			switch (derivedFeatureID) {
+				case ComponentsPackage.LOGIN_HANDLER__PROPERTIES: return ModelPackage.CONTAINS_PROPERTIES__PROPERTIES;
+				default: return -1;
+			}
+		}
 		if (baseClass == ApplicationElement.class) {
 			switch (derivedFeatureID) {
-				case ComponentsPackage.LOGIN_HANDLER__PROPERTIES: return ModelPackage.APPLICATION_ELEMENT__PROPERTIES;
 				case ComponentsPackage.LOGIN_HANDLER__VALUES: return ModelPackage.APPLICATION_ELEMENT__VALUES;
 				default: return -1;
 			}
@@ -1264,9 +1270,14 @@ public class LoginHandlerImpl extends EObjectImpl implements LoginHandler {
 				default: return -1;
 			}
 		}
+		if (baseClass == ContainsProperties.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.CONTAINS_PROPERTIES__PROPERTIES: return ComponentsPackage.LOGIN_HANDLER__PROPERTIES;
+				default: return -1;
+			}
+		}
 		if (baseClass == ApplicationElement.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.APPLICATION_ELEMENT__PROPERTIES: return ComponentsPackage.LOGIN_HANDLER__PROPERTIES;
 				case ModelPackage.APPLICATION_ELEMENT__VALUES: return ComponentsPackage.LOGIN_HANDLER__VALUES;
 				default: return -1;
 			}

@@ -107,12 +107,14 @@ digraph {
   "org.openiaml.model" -> "org.eclipse.core.resources";
   "org.openiaml.model" -> "org.eclipse.core.runtime";
   "org.openiaml.model" -> "org.eclipse.emf.ecore";
+  "org.openiaml.model" -> "org.eclipse.xsd";
   "org.openiaml.model.actions" -> "org.eclipse.core.resources";
   "org.openiaml.model.actions" -> "org.eclipse.core.runtime";
   "org.openiaml.model.actions" -> "org.eclipse.emf.ecore";
   "org.openiaml.model.actions" -> "org.eclipse.emf.ecore.xmi";
   "org.openiaml.model.actions" -> "org.eclipse.jface";
   "org.openiaml.model.actions" -> "org.eclipse.ui";
+  "org.openiaml.model.actions" -> "org.openiaml.iacleaner";
   "org.openiaml.model.actions" -> "org.openiaml.model";
   "org.openiaml.model.actions" -> "org.openiaml.model.codegen.php";
   "org.openiaml.model.actions" -> "org.openiaml.model.drools";

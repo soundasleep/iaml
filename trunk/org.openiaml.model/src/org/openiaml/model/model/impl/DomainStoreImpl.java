@@ -30,6 +30,7 @@ import org.openiaml.model.model.Action;
 import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsConditions;
+import org.openiaml.model.model.ContainsProperties;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainObject;
@@ -78,8 +79,8 @@ import org.openiaml.model.model.wires.RequiresEdge;
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#isOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getOutWires <em>Out Wires</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getInWires <em>In Wires</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getProperties <em>Properties</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getFile <em>File</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainStoreImpl#getType <em>Type</em>}</li>
@@ -306,15 +307,6 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 	 */
 	protected EList<Wire> inWires;
 	/**
-	 * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getChildren()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<DomainObject> children;
-	/**
 	 * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -323,6 +315,15 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 	 * @ordered
 	 */
 	protected EList<Property> properties;
+	/**
+	 * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getChildren()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<DomainObject> children;
 	/**
 	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -796,10 +797,10 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 				return ((InternalEList<?>)getOutWires()).basicRemove(otherEnd, msgs);
 			case ModelPackage.DOMAIN_STORE__IN_WIRES:
 				return ((InternalEList<?>)getInWires()).basicRemove(otherEnd, msgs);
-			case ModelPackage.DOMAIN_STORE__CHILDREN:
-				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
 			case ModelPackage.DOMAIN_STORE__PROPERTIES:
 				return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
+			case ModelPackage.DOMAIN_STORE__CHILDREN:
+				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
 			case ModelPackage.DOMAIN_STORE__ATTRIBUTES:
 				return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
 		}
@@ -852,10 +853,10 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 				return getOutWires();
 			case ModelPackage.DOMAIN_STORE__IN_WIRES:
 				return getInWires();
-			case ModelPackage.DOMAIN_STORE__CHILDREN:
-				return getChildren();
 			case ModelPackage.DOMAIN_STORE__PROPERTIES:
 				return getProperties();
+			case ModelPackage.DOMAIN_STORE__CHILDREN:
+				return getChildren();
 			case ModelPackage.DOMAIN_STORE__ATTRIBUTES:
 				return getAttributes();
 			case ModelPackage.DOMAIN_STORE__FILE:
@@ -946,13 +947,13 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 				getInWires().clear();
 				getInWires().addAll((Collection<? extends Wire>)newValue);
 				return;
-			case ModelPackage.DOMAIN_STORE__CHILDREN:
-				getChildren().clear();
-				getChildren().addAll((Collection<? extends DomainObject>)newValue);
-				return;
 			case ModelPackage.DOMAIN_STORE__PROPERTIES:
 				getProperties().clear();
 				getProperties().addAll((Collection<? extends Property>)newValue);
+				return;
+			case ModelPackage.DOMAIN_STORE__CHILDREN:
+				getChildren().clear();
+				getChildren().addAll((Collection<? extends DomainObject>)newValue);
 				return;
 			case ModelPackage.DOMAIN_STORE__ATTRIBUTES:
 				getAttributes().clear();
@@ -1033,11 +1034,11 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 			case ModelPackage.DOMAIN_STORE__IN_WIRES:
 				getInWires().clear();
 				return;
-			case ModelPackage.DOMAIN_STORE__CHILDREN:
-				getChildren().clear();
-				return;
 			case ModelPackage.DOMAIN_STORE__PROPERTIES:
 				getProperties().clear();
+				return;
+			case ModelPackage.DOMAIN_STORE__CHILDREN:
+				getChildren().clear();
 				return;
 			case ModelPackage.DOMAIN_STORE__ATTRIBUTES:
 				getAttributes().clear();
@@ -1098,10 +1099,10 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 				return outWires != null && !outWires.isEmpty();
 			case ModelPackage.DOMAIN_STORE__IN_WIRES:
 				return inWires != null && !inWires.isEmpty();
-			case ModelPackage.DOMAIN_STORE__CHILDREN:
-				return children != null && !children.isEmpty();
 			case ModelPackage.DOMAIN_STORE__PROPERTIES:
 				return properties != null && !properties.isEmpty();
+			case ModelPackage.DOMAIN_STORE__CHILDREN:
+				return children != null && !children.isEmpty();
 			case ModelPackage.DOMAIN_STORE__ATTRIBUTES:
 				return attributes != null && !attributes.isEmpty();
 			case ModelPackage.DOMAIN_STORE__FILE:
@@ -1182,6 +1183,12 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 				default: return -1;
 			}
 		}
+		if (baseClass == ContainsProperties.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.DOMAIN_STORE__PROPERTIES: return ModelPackage.CONTAINS_PROPERTIES__PROPERTIES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -1252,6 +1259,12 @@ public class DomainStoreImpl extends EObjectImpl implements DomainStore {
 		}
 		if (baseClass == CanBeSynced.class) {
 			switch (baseFeatureID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == ContainsProperties.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.CONTAINS_PROPERTIES__PROPERTIES: return ModelPackage.DOMAIN_STORE__PROPERTIES;
 				default: return -1;
 			}
 		}

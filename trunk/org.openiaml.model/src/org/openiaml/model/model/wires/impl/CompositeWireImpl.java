@@ -21,6 +21,7 @@ import org.openiaml.model.model.Action;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsConditions;
+import org.openiaml.model.model.ContainsProperties;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.GeneratedElement;
@@ -61,8 +62,8 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getGeneratedElements <em>Generated Elements</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#isOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getConditions <em>Conditions</em>}</li>
- *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getProperties <em>Properties</em>}</li>
+ *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getOperations <em>Operations</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getEventTriggers <em>Event Triggers</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.CompositeWireImpl#getParameters <em>Parameters</em>}</li>
@@ -214,16 +215,6 @@ public class CompositeWireImpl extends WireImpl implements CompositeWire {
 	protected EList<Condition> conditions;
 
 	/**
-	 * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getChildren()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<ApplicationElement> children;
-
-	/**
 	 * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -232,6 +223,16 @@ public class CompositeWireImpl extends WireImpl implements CompositeWire {
 	 * @ordered
 	 */
 	protected EList<Property> properties;
+
+	/**
+	 * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getChildren()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ApplicationElement> children;
 
 	/**
 	 * The cached value of the '{@link #getOperations() <em>Operations</em>}' containment reference list.
@@ -569,10 +570,10 @@ public class CompositeWireImpl extends WireImpl implements CompositeWire {
 				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
 			case WiresPackage.COMPOSITE_WIRE__CONDITIONS:
 				return ((InternalEList<?>)getConditions()).basicRemove(otherEnd, msgs);
-			case WiresPackage.COMPOSITE_WIRE__CHILDREN:
-				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
 			case WiresPackage.COMPOSITE_WIRE__PROPERTIES:
 				return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
+			case WiresPackage.COMPOSITE_WIRE__CHILDREN:
+				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
 			case WiresPackage.COMPOSITE_WIRE__OPERATIONS:
 				return ((InternalEList<?>)getOperations()).basicRemove(otherEnd, msgs);
 			case WiresPackage.COMPOSITE_WIRE__EVENT_TRIGGERS:
@@ -617,10 +618,10 @@ public class CompositeWireImpl extends WireImpl implements CompositeWire {
 				return isOverridden();
 			case WiresPackage.COMPOSITE_WIRE__CONDITIONS:
 				return getConditions();
-			case WiresPackage.COMPOSITE_WIRE__CHILDREN:
-				return getChildren();
 			case WiresPackage.COMPOSITE_WIRE__PROPERTIES:
 				return getProperties();
+			case WiresPackage.COMPOSITE_WIRE__CHILDREN:
+				return getChildren();
 			case WiresPackage.COMPOSITE_WIRE__OPERATIONS:
 				return getOperations();
 			case WiresPackage.COMPOSITE_WIRE__EVENT_TRIGGERS:
@@ -688,13 +689,13 @@ public class CompositeWireImpl extends WireImpl implements CompositeWire {
 				getConditions().clear();
 				getConditions().addAll((Collection<? extends Condition>)newValue);
 				return;
-			case WiresPackage.COMPOSITE_WIRE__CHILDREN:
-				getChildren().clear();
-				getChildren().addAll((Collection<? extends ApplicationElement>)newValue);
-				return;
 			case WiresPackage.COMPOSITE_WIRE__PROPERTIES:
 				getProperties().clear();
 				getProperties().addAll((Collection<? extends Property>)newValue);
+				return;
+			case WiresPackage.COMPOSITE_WIRE__CHILDREN:
+				getChildren().clear();
+				getChildren().addAll((Collection<? extends ApplicationElement>)newValue);
 				return;
 			case WiresPackage.COMPOSITE_WIRE__OPERATIONS:
 				getOperations().clear();
@@ -760,11 +761,11 @@ public class CompositeWireImpl extends WireImpl implements CompositeWire {
 			case WiresPackage.COMPOSITE_WIRE__CONDITIONS:
 				getConditions().clear();
 				return;
-			case WiresPackage.COMPOSITE_WIRE__CHILDREN:
-				getChildren().clear();
-				return;
 			case WiresPackage.COMPOSITE_WIRE__PROPERTIES:
 				getProperties().clear();
+				return;
+			case WiresPackage.COMPOSITE_WIRE__CHILDREN:
+				getChildren().clear();
 				return;
 			case WiresPackage.COMPOSITE_WIRE__OPERATIONS:
 				getOperations().clear();
@@ -814,10 +815,10 @@ public class CompositeWireImpl extends WireImpl implements CompositeWire {
 				return overridden != OVERRIDDEN_EDEFAULT;
 			case WiresPackage.COMPOSITE_WIRE__CONDITIONS:
 				return conditions != null && !conditions.isEmpty();
-			case WiresPackage.COMPOSITE_WIRE__CHILDREN:
-				return children != null && !children.isEmpty();
 			case WiresPackage.COMPOSITE_WIRE__PROPERTIES:
 				return properties != null && !properties.isEmpty();
+			case WiresPackage.COMPOSITE_WIRE__CHILDREN:
+				return children != null && !children.isEmpty();
 			case WiresPackage.COMPOSITE_WIRE__OPERATIONS:
 				return operations != null && !operations.isEmpty();
 			case WiresPackage.COMPOSITE_WIRE__EVENT_TRIGGERS:
@@ -869,6 +870,12 @@ public class CompositeWireImpl extends WireImpl implements CompositeWire {
 				default: return -1;
 			}
 		}
+		if (baseClass == ContainsProperties.class) {
+			switch (derivedFeatureID) {
+				case WiresPackage.COMPOSITE_WIRE__PROPERTIES: return ModelPackage.CONTAINS_PROPERTIES__PROPERTIES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -908,6 +915,12 @@ public class CompositeWireImpl extends WireImpl implements CompositeWire {
 		if (baseClass == ContainsConditions.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.CONTAINS_CONDITIONS__CONDITIONS: return WiresPackage.COMPOSITE_WIRE__CONDITIONS;
+				default: return -1;
+			}
+		}
+		if (baseClass == ContainsProperties.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.CONTAINS_PROPERTIES__PROPERTIES: return WiresPackage.COMPOSITE_WIRE__PROPERTIES;
 				default: return -1;
 			}
 		}

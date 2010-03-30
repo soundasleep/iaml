@@ -14,6 +14,7 @@ import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsOperations;
+import org.openiaml.model.model.ContainsProperties;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainObjectInstance;
@@ -118,6 +119,7 @@ public class UsersSwitch<T> {
 				T result = caseUserStore(userStore);
 				if (result == null) result = caseDomainStore(userStore);
 				if (result == null) result = caseCanBeSynced(userStore);
+				if (result == null) result = caseContainsProperties(userStore);
 				if (result == null) result = caseContainsOperations(userStore);
 				if (result == null) result = caseNamedElement(userStore);
 				if (result == null) result = caseGeneratedElement(userStore);
@@ -142,6 +144,7 @@ public class UsersSwitch<T> {
 				if (result == null) result = caseExtendsEdgeDestination(role);
 				if (result == null) result = caseEditable(role);
 				if (result == null) result = caseCanBeSynced(role);
+				if (result == null) result = caseContainsProperties(role);
 				if (result == null) result = caseContainsOperations(role);
 				if (result == null) result = caseNamedElement(role);
 				if (result == null) result = caseGeneratedElement(role);
@@ -175,6 +178,7 @@ public class UsersSwitch<T> {
 				if (result == null) result = caseParameterEdgesSource(userInstance);
 				if (result == null) result = caseEditable(userInstance);
 				if (result == null) result = caseCanBeSynced(userInstance);
+				if (result == null) result = caseContainsProperties(userInstance);
 				if (result == null) result = caseContainsOperations(userInstance);
 				if (result == null) result = caseNamedElement(userInstance);
 				if (result == null) result = caseGeneratedElement(userInstance);
@@ -497,6 +501,21 @@ public class UsersSwitch<T> {
 	 * @generated
 	 */
 	public T caseCanBeSynced(CanBeSynced object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Contains Properties</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Contains Properties</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseContainsProperties(ContainsProperties object) {
 		return null;
 	}
 

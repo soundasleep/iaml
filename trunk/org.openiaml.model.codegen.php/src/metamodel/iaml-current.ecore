@@ -114,7 +114,7 @@
         eType="#//Operation" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ApplicationElement" abstract="true"
-      eSuperTypes="#//ContainsOperations #//NamedElement #//WireSource #//WireDestination #//GeneratesElements #//ContainsConditions #//CanBeSynced">
+      eSuperTypes="#//ContainsOperations #//NamedElement #//WireSource #//WireDestination #//GeneratesElements #//ContainsConditions #//CanBeSynced #//ContainsProperties">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="editor" value="org.openiaml.model.diagram.element"/>
       <details key="comment" value="Scope supertype added in 0.2"/>
@@ -122,8 +122,6 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An abstract type representing model elements that {@model ContainsConditions}, {@model ContainsOperations} and {@model ContainsProperties}. This is used primarily to reduce the number of diagram editors in the IAML environment."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
-        eType="#//Property" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
         eType="#//StaticValue" containment="true"/>
   </eClassifiers>
@@ -145,7 +143,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/plugin/org.eclipse.xsd/model/XSD.ecore#//XSDSimpleTypeDefinition"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VisibleThing" eSuperTypes="#//ContainsConditions #//ContainsOperations #//ContainsWires #//WireSource #//WireDestination #//NamedElement #//GeneratedElement #//GeneratesElements #//CanBeSynced #//wires/ParameterEdgesSource #//Editable #//Accessible">
+  <eClassifiers xsi:type="ecore:EClass" name="VisibleThing" eSuperTypes="#//ContainsConditions #//ContainsOperations #//ContainsWires #//WireSource #//WireDestination #//NamedElement #//GeneratedElement #//GeneratesElements #//CanBeSynced #//wires/ParameterEdgesSource #//Editable #//Accessible #//ContainsProperties">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="comment" value="this used to mean nothing; now anything that extends VisibleThing (which unforuntately needs to be concrete) has an editor"/>
       <details key="editor" value="org.openiaml.model.diagram.visual"/>
@@ -156,12 +154,6 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
         eType="#//VisibleThing" containment="true">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="added" value="0.4.2"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
-        eType="#//Property" containment="true">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.4.2"/>
       </eAnnotations>
@@ -179,7 +171,12 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="InternetApplication" eSuperTypes="#//ContainsOperations #//NamedElement #//ContainsWires #//GeneratesElements #//ContainsConditions">
+  <eClassifiers xsi:type="ecore:EClass" name="ContainsProperties" abstract="true"
+      interface="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+        eType="#//Property" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InternetApplication" eSuperTypes="#//ContainsOperations #//NamedElement #//ContainsWires #//GeneratesElements #//ContainsConditions #//ContainsProperties">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="comment" value="we cannot have InternetApplications inside of other ElementContainers, thus we don't define it as an ApplicationElement"/>
       <details key="comment2" value="but why can we have it as an ActivityEdgeSource? I don't think there are any examples of InternetApplication wire --> something else; all the wires are from objects INSIDE the IA"/>
@@ -189,8 +186,6 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="The top-level type of a model instance, representing all of the information required to define an Internet application."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
-        eType="#//Property" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
         eType="#//ApplicationElement" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="domainStores" upperBound="-1"
@@ -205,7 +200,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="scopes" upperBound="-1"
         eType="#//Scope" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DomainStore" eSuperTypes="#//ContainsOperations #//NamedElement #//ContainsWires #//ContainsConditions #//GeneratesElements #//CanBeSynced">
+  <eClassifiers xsi:type="ecore:EClass" name="DomainStore" eSuperTypes="#//ContainsOperations #//NamedElement #//ContainsWires #//ContainsConditions #//GeneratesElements #//CanBeSynced #//ContainsProperties">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="editor" value="org.openiaml.model.diagram.domain_store"/>
       <details key="changed" value="0.2 to extend the abstract counterpart&#xD;&#xA;0.3 to remove the abstract extension, and added &quot;type&quot; attribute&#xD;&#xA;0.4.2 removed 'views' reference"/>
@@ -215,8 +210,6 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
         eType="#//DomainObject" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
-        eType="#//Property" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
         eType="#//DomainAttribute" containment="true">
       <eAnnotations source="http://openiaml.org/comment">
@@ -360,7 +353,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Scope" abstract="true" eSuperTypes="#//GeneratesElements #//ContainsWires #//NamedElement #//GeneratedElement #//WireSource #//WireDestination #//ContainsConditions #//CanBeSynced #//Accessible #//ContainsOperations #//ActionSource">
+  <eClassifiers xsi:type="ecore:EClass" name="Scope" abstract="true" eSuperTypes="#//GeneratesElements #//ContainsWires #//NamedElement #//GeneratedElement #//WireSource #//WireDestination #//ContainsConditions #//CanBeSynced #//Accessible #//ContainsOperations #//ActionSource #//ContainsProperties">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="changed" value="0.4: 'domainObjects', 'domainViews', 'domainInstances' references removed&#xD;&#xA;0.4.2: renamed from 'Scope' to 'AbstractScope'; added 'gate' reference"/>
     </eAnnotations>
@@ -368,12 +361,6 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="exitGate" eType="#//components/ExitGate"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
-        eType="#//Property" containment="true">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="added" value="0.4.2"/>
-      </eAnnotations>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
         eType="#//StaticValue" containment="true">
       <eAnnotations source="http://openiaml.org/comment">
@@ -556,7 +543,7 @@
         <details key="changed" value="0.4.2 to abstract"/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="CompositeWire" eSuperTypes="#//Wire #//NamedElement #//ContainsWires #//GeneratesElements #//ContainsConditions">
+    <eClassifiers xsi:type="ecore:EClass" name="CompositeWire" eSuperTypes="#//Wire #//NamedElement #//ContainsWires #//GeneratesElements #//ContainsConditions #//ContainsProperties">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="ideally this would be abstract; but we want to have a &quot;wire&quot; diagram editor, and the root element needs to be concrete. the other option is to have multiple diagram editors per concrete wire..."/>
         <details key="comment2" value="easy visualisation: all composite wires are dashed"/>
@@ -569,8 +556,6 @@
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
           eType="#//ApplicationElement" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
-          eType="#//Property" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
           eType="#//Operation" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="eventTriggers" upperBound="-1"

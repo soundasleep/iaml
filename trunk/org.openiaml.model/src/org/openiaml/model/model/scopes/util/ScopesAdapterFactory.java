@@ -15,6 +15,7 @@ import org.openiaml.model.model.ActionSource;
 import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsOperations;
+import org.openiaml.model.model.ContainsProperties;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
@@ -133,6 +134,10 @@ public class ScopesAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseActionSource(ActionSource object) {
 				return createActionSourceAdapter();
+			}
+			@Override
+			public Adapter caseContainsProperties(ContainsProperties object) {
+				return createContainsPropertiesAdapter();
 			}
 			@Override
 			public Adapter caseScope(Scope object) {
@@ -281,6 +286,20 @@ public class ScopesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createActionSourceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ContainsProperties <em>Contains Properties</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.ContainsProperties
+	 * @generated
+	 */
+	public Adapter createContainsPropertiesAdapter() {
 		return null;
 	}
 

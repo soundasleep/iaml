@@ -307,22 +307,22 @@ public interface WiresPackage extends EPackage {
 	int COMPOSITE_WIRE__CONDITIONS = ModelPackage.WIRE_FEATURE_COUNT + 11;
 
 	/**
-	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_WIRE__CHILDREN = ModelPackage.WIRE_FEATURE_COUNT + 12;
-
-	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_WIRE__PROPERTIES = ModelPackage.WIRE_FEATURE_COUNT + 13;
+	int COMPOSITE_WIRE__PROPERTIES = ModelPackage.WIRE_FEATURE_COUNT + 12;
+
+	/**
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_WIRE__CHILDREN = ModelPackage.WIRE_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -542,15 +542,6 @@ public interface WiresPackage extends EPackage {
 	int SYNC_WIRE__CONDITIONS = COMPOSITE_WIRE__CONDITIONS;
 
 	/**
-	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SYNC_WIRE__CHILDREN = COMPOSITE_WIRE__CHILDREN;
-
-	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -558,6 +549,15 @@ public interface WiresPackage extends EPackage {
 	 * @ordered
 	 */
 	int SYNC_WIRE__PROPERTIES = COMPOSITE_WIRE__PROPERTIES;
+
+	/**
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SYNC_WIRE__CHILDREN = COMPOSITE_WIRE__CHILDREN;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -1031,15 +1031,6 @@ public interface WiresPackage extends EPackage {
 	int SET_WIRE__CONDITIONS = COMPOSITE_WIRE__CONDITIONS;
 
 	/**
-	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SET_WIRE__CHILDREN = COMPOSITE_WIRE__CHILDREN;
-
-	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1047,6 +1038,15 @@ public interface WiresPackage extends EPackage {
 	 * @ordered
 	 */
 	int SET_WIRE__PROPERTIES = COMPOSITE_WIRE__PROPERTIES;
+
+	/**
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SET_WIRE__CHILDREN = COMPOSITE_WIRE__CHILDREN;
 
 	/**
 	 * The feature id for the '<em><b>Operations</b></em>' containment reference list.
@@ -2249,17 +2249,6 @@ public interface WiresPackage extends EPackage {
 	EReference getCompositeWire_Children();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.wires.CompositeWire#getProperties <em>Properties</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Properties</em>'.
-	 * @see org.openiaml.model.model.wires.CompositeWire#getProperties()
-	 * @see #getCompositeWire()
-	 * @generated
-	 */
-	EReference getCompositeWire_Properties();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.openiaml.model.model.wires.CompositeWire#getOperations <em>Operations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2837,14 +2826,6 @@ public interface WiresPackage extends EPackage {
 		 * @generated
 		 */
 		EReference COMPOSITE_WIRE__CHILDREN = eINSTANCE.getCompositeWire_Children();
-
-		/**
-		 * The meta object literal for the '<em><b>Properties</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference COMPOSITE_WIRE__PROPERTIES = eINSTANCE.getCompositeWire_Properties();
 
 		/**
 		 * The meta object literal for the '<em><b>Operations</b></em>' containment reference list feature.

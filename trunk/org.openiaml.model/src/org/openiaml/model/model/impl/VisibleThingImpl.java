@@ -23,6 +23,7 @@ import org.openiaml.model.model.Action;
 import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsOperations;
+import org.openiaml.model.model.ContainsProperties;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.Editable;
 import org.openiaml.model.model.EventTrigger;
@@ -76,8 +77,8 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getOutParameterEdges <em>Out Parameter Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getOnEdit <em>On Edit</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getOnAccess <em>On Access</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getProperties <em>Properties</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getValues <em>Values</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getOnClick <em>On Click</em>}</li>
  * </ul>
@@ -357,16 +358,6 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 	protected EventTrigger onAccess;
 
 	/**
-	 * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getChildren()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<VisibleThing> children;
-
-	/**
 	 * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -375,6 +366,16 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 	 * @ordered
 	 */
 	protected EList<Property> properties;
+
+	/**
+	 * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getChildren()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<VisibleThing> children;
 
 	/**
 	 * The cached value of the '{@link #getValues() <em>Values</em>}' containment reference list.
@@ -930,10 +931,10 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 				return basicSetOnEdit(null, msgs);
 			case ModelPackage.VISIBLE_THING__ON_ACCESS:
 				return basicSetOnAccess(null, msgs);
-			case ModelPackage.VISIBLE_THING__CHILDREN:
-				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
 			case ModelPackage.VISIBLE_THING__PROPERTIES:
 				return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
+			case ModelPackage.VISIBLE_THING__CHILDREN:
+				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
 			case ModelPackage.VISIBLE_THING__VALUES:
 				return ((InternalEList<?>)getValues()).basicRemove(otherEnd, msgs);
 			case ModelPackage.VISIBLE_THING__ON_CLICK:
@@ -994,10 +995,10 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 				return getOnEdit();
 			case ModelPackage.VISIBLE_THING__ON_ACCESS:
 				return getOnAccess();
-			case ModelPackage.VISIBLE_THING__CHILDREN:
-				return getChildren();
 			case ModelPackage.VISIBLE_THING__PROPERTIES:
 				return getProperties();
+			case ModelPackage.VISIBLE_THING__CHILDREN:
+				return getChildren();
 			case ModelPackage.VISIBLE_THING__VALUES:
 				return getValues();
 			case ModelPackage.VISIBLE_THING__ON_CLICK:
@@ -1096,13 +1097,13 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 			case ModelPackage.VISIBLE_THING__ON_ACCESS:
 				setOnAccess((EventTrigger)newValue);
 				return;
-			case ModelPackage.VISIBLE_THING__CHILDREN:
-				getChildren().clear();
-				getChildren().addAll((Collection<? extends VisibleThing>)newValue);
-				return;
 			case ModelPackage.VISIBLE_THING__PROPERTIES:
 				getProperties().clear();
 				getProperties().addAll((Collection<? extends Property>)newValue);
+				return;
+			case ModelPackage.VISIBLE_THING__CHILDREN:
+				getChildren().clear();
+				getChildren().addAll((Collection<? extends VisibleThing>)newValue);
 				return;
 			case ModelPackage.VISIBLE_THING__VALUES:
 				getValues().clear();
@@ -1189,11 +1190,11 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 			case ModelPackage.VISIBLE_THING__ON_ACCESS:
 				setOnAccess((EventTrigger)null);
 				return;
-			case ModelPackage.VISIBLE_THING__CHILDREN:
-				getChildren().clear();
-				return;
 			case ModelPackage.VISIBLE_THING__PROPERTIES:
 				getProperties().clear();
+				return;
+			case ModelPackage.VISIBLE_THING__CHILDREN:
+				getChildren().clear();
 				return;
 			case ModelPackage.VISIBLE_THING__VALUES:
 				getValues().clear();
@@ -1257,10 +1258,10 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 				return onEdit != null;
 			case ModelPackage.VISIBLE_THING__ON_ACCESS:
 				return onAccess != null;
-			case ModelPackage.VISIBLE_THING__CHILDREN:
-				return children != null && !children.isEmpty();
 			case ModelPackage.VISIBLE_THING__PROPERTIES:
 				return properties != null && !properties.isEmpty();
+			case ModelPackage.VISIBLE_THING__CHILDREN:
+				return children != null && !children.isEmpty();
 			case ModelPackage.VISIBLE_THING__VALUES:
 				return values != null && !values.isEmpty();
 			case ModelPackage.VISIBLE_THING__ON_CLICK:
@@ -1357,6 +1358,12 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 				default: return -1;
 			}
 		}
+		if (baseClass == ContainsProperties.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.VISIBLE_THING__PROPERTIES: return ModelPackage.CONTAINS_PROPERTIES__PROPERTIES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -1445,6 +1452,12 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 		if (baseClass == Accessible.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.ACCESSIBLE__ON_ACCESS: return ModelPackage.VISIBLE_THING__ON_ACCESS;
+				default: return -1;
+			}
+		}
+		if (baseClass == ContainsProperties.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.CONTAINS_PROPERTIES__PROPERTIES: return ModelPackage.VISIBLE_THING__PROPERTIES;
 				default: return -1;
 			}
 		}

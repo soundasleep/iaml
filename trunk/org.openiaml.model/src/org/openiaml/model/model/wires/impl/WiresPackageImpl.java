@@ -340,7 +340,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCompositeWire_Properties() {
+	public EReference getCompositeWire_Operations() {
 		return (EReference)compositeWireEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -349,7 +349,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCompositeWire_Operations() {
+	public EReference getCompositeWire_EventTriggers() {
 		return (EReference)compositeWireEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -358,7 +358,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCompositeWire_EventTriggers() {
+	public EReference getCompositeWire_Parameters() {
 		return (EReference)compositeWireEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -367,17 +367,8 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getCompositeWire_Parameters() {
-		return (EReference)compositeWireEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getCompositeWire_Values() {
-		return (EReference)compositeWireEClass.getEStructuralFeatures().get(5);
+		return (EReference)compositeWireEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -826,7 +817,6 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 
 		compositeWireEClass = createEClass(COMPOSITE_WIRE);
 		createEReference(compositeWireEClass, COMPOSITE_WIRE__CHILDREN);
-		createEReference(compositeWireEClass, COMPOSITE_WIRE__PROPERTIES);
 		createEReference(compositeWireEClass, COMPOSITE_WIRE__OPERATIONS);
 		createEReference(compositeWireEClass, COMPOSITE_WIRE__EVENT_TRIGGERS);
 		createEReference(compositeWireEClass, COMPOSITE_WIRE__PARAMETERS);
@@ -939,6 +929,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		compositeWireEClass.getESuperTypes().add(theModelPackage.getContainsWires());
 		compositeWireEClass.getESuperTypes().add(theModelPackage.getGeneratesElements());
 		compositeWireEClass.getESuperTypes().add(theModelPackage.getContainsConditions());
+		compositeWireEClass.getESuperTypes().add(theModelPackage.getContainsProperties());
 		syncWireEClass.getESuperTypes().add(this.getCompositeWire());
 		syncWireEClass.getESuperTypes().add(theModelPackage.getWireDestination());
 		syncWireEClass.getESuperTypes().add(this.getParameterEdgeDestination());
@@ -984,7 +975,6 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 
 		initEClass(compositeWireEClass, CompositeWire.class, "CompositeWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCompositeWire_Children(), theModelPackage.getApplicationElement(), null, "children", null, 0, -1, CompositeWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCompositeWire_Properties(), theModelPackage.getProperty(), null, "properties", null, 0, -1, CompositeWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompositeWire_Operations(), theModelPackage.getOperation(), null, "operations", null, 0, -1, CompositeWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompositeWire_EventTriggers(), theModelPackage.getEventTrigger(), null, "eventTriggers", null, 0, -1, CompositeWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCompositeWire_Parameters(), theModelPackage.getParameter(), null, "parameters", null, 0, -1, CompositeWire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

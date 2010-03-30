@@ -26,6 +26,7 @@ import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsOperations;
+import org.openiaml.model.model.ContainsProperties;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.GeneratedElement;
@@ -79,9 +80,9 @@ import org.openiaml.model.model.wires.RequiresEdge;
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getConditions <em>Conditions</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getOnAccess <em>On Access</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getOutActions <em>Out Actions</em>}</li>
+ *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getEntryGate <em>Entry Gate</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getExitGate <em>Exit Gate</em>}</li>
- *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getValues <em>Values</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.openiaml.model.model.scopes.impl.SessionImpl#getElements <em>Elements</em>}</li>
@@ -354,6 +355,16 @@ public class SessionImpl extends EObjectImpl implements Session {
 	protected EList<Action> outActions;
 
 	/**
+	 * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProperties()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Property> properties;
+
+	/**
 	 * The cached value of the '{@link #getEntryGate() <em>Entry Gate</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -372,16 +383,6 @@ public class SessionImpl extends EObjectImpl implements Session {
 	 * @ordered
 	 */
 	protected ExitGate exitGate;
-
-	/**
-	 * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getProperties()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Property> properties;
 
 	/**
 	 * The cached value of the '{@link #getValues() <em>Values</em>}' containment reference list.
@@ -1032,12 +1033,12 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return basicSetOnAccess(null, msgs);
 			case ScopesPackage.SESSION__OUT_ACTIONS:
 				return ((InternalEList<?>)getOutActions()).basicRemove(otherEnd, msgs);
+			case ScopesPackage.SESSION__PROPERTIES:
+				return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__ENTRY_GATE:
 				return basicSetEntryGate(null, msgs);
 			case ScopesPackage.SESSION__EXIT_GATE:
 				return basicSetExitGate(null, msgs);
-			case ScopesPackage.SESSION__PROPERTIES:
-				return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__VALUES:
 				return ((InternalEList<?>)getValues()).basicRemove(otherEnd, msgs);
 			case ScopesPackage.SESSION__PARAMETERS:
@@ -1102,12 +1103,12 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return getOnAccess();
 			case ScopesPackage.SESSION__OUT_ACTIONS:
 				return getOutActions();
+			case ScopesPackage.SESSION__PROPERTIES:
+				return getProperties();
 			case ScopesPackage.SESSION__ENTRY_GATE:
 				return getEntryGate();
 			case ScopesPackage.SESSION__EXIT_GATE:
 				return getExitGate();
-			case ScopesPackage.SESSION__PROPERTIES:
-				return getProperties();
 			case ScopesPackage.SESSION__VALUES:
 				return getValues();
 			case ScopesPackage.SESSION__PARAMETERS:
@@ -1209,15 +1210,15 @@ public class SessionImpl extends EObjectImpl implements Session {
 				getOutActions().clear();
 				getOutActions().addAll((Collection<? extends Action>)newValue);
 				return;
+			case ScopesPackage.SESSION__PROPERTIES:
+				getProperties().clear();
+				getProperties().addAll((Collection<? extends Property>)newValue);
+				return;
 			case ScopesPackage.SESSION__ENTRY_GATE:
 				setEntryGate((EntryGate)newValue);
 				return;
 			case ScopesPackage.SESSION__EXIT_GATE:
 				setExitGate((ExitGate)newValue);
-				return;
-			case ScopesPackage.SESSION__PROPERTIES:
-				getProperties().clear();
-				getProperties().addAll((Collection<? extends Property>)newValue);
 				return;
 			case ScopesPackage.SESSION__VALUES:
 				getValues().clear();
@@ -1313,14 +1314,14 @@ public class SessionImpl extends EObjectImpl implements Session {
 			case ScopesPackage.SESSION__OUT_ACTIONS:
 				getOutActions().clear();
 				return;
+			case ScopesPackage.SESSION__PROPERTIES:
+				getProperties().clear();
+				return;
 			case ScopesPackage.SESSION__ENTRY_GATE:
 				setEntryGate((EntryGate)null);
 				return;
 			case ScopesPackage.SESSION__EXIT_GATE:
 				setExitGate((ExitGate)null);
-				return;
-			case ScopesPackage.SESSION__PROPERTIES:
-				getProperties().clear();
 				return;
 			case ScopesPackage.SESSION__VALUES:
 				getValues().clear();
@@ -1391,12 +1392,12 @@ public class SessionImpl extends EObjectImpl implements Session {
 				return onAccess != null;
 			case ScopesPackage.SESSION__OUT_ACTIONS:
 				return outActions != null && !outActions.isEmpty();
+			case ScopesPackage.SESSION__PROPERTIES:
+				return properties != null && !properties.isEmpty();
 			case ScopesPackage.SESSION__ENTRY_GATE:
 				return entryGate != null;
 			case ScopesPackage.SESSION__EXIT_GATE:
 				return exitGate != null;
-			case ScopesPackage.SESSION__PROPERTIES:
-				return properties != null && !properties.isEmpty();
 			case ScopesPackage.SESSION__VALUES:
 				return values != null && !values.isEmpty();
 			case ScopesPackage.SESSION__PARAMETERS:
@@ -1484,11 +1485,16 @@ public class SessionImpl extends EObjectImpl implements Session {
 				default: return -1;
 			}
 		}
+		if (baseClass == ContainsProperties.class) {
+			switch (derivedFeatureID) {
+				case ScopesPackage.SESSION__PROPERTIES: return ModelPackage.CONTAINS_PROPERTIES__PROPERTIES;
+				default: return -1;
+			}
+		}
 		if (baseClass == Scope.class) {
 			switch (derivedFeatureID) {
 				case ScopesPackage.SESSION__ENTRY_GATE: return ModelPackage.SCOPE__ENTRY_GATE;
 				case ScopesPackage.SESSION__EXIT_GATE: return ModelPackage.SCOPE__EXIT_GATE;
-				case ScopesPackage.SESSION__PROPERTIES: return ModelPackage.SCOPE__PROPERTIES;
 				case ScopesPackage.SESSION__VALUES: return ModelPackage.SCOPE__VALUES;
 				case ScopesPackage.SESSION__PARAMETERS: return ModelPackage.SCOPE__PARAMETERS;
 				case ScopesPackage.SESSION__ELEMENTS: return ModelPackage.SCOPE__ELEMENTS;
@@ -1573,11 +1579,16 @@ public class SessionImpl extends EObjectImpl implements Session {
 				default: return -1;
 			}
 		}
+		if (baseClass == ContainsProperties.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.CONTAINS_PROPERTIES__PROPERTIES: return ScopesPackage.SESSION__PROPERTIES;
+				default: return -1;
+			}
+		}
 		if (baseClass == Scope.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.SCOPE__ENTRY_GATE: return ScopesPackage.SESSION__ENTRY_GATE;
 				case ModelPackage.SCOPE__EXIT_GATE: return ScopesPackage.SESSION__EXIT_GATE;
-				case ModelPackage.SCOPE__PROPERTIES: return ScopesPackage.SESSION__PROPERTIES;
 				case ModelPackage.SCOPE__VALUES: return ScopesPackage.SESSION__VALUES;
 				case ModelPackage.SCOPE__PARAMETERS: return ScopesPackage.SESSION__PARAMETERS;
 				case ModelPackage.SCOPE__ELEMENTS: return ScopesPackage.SESSION__ELEMENTS;

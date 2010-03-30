@@ -28,7 +28,6 @@ import org.openiaml.model.model.domain.DomainStoreTypes;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.openiaml.model.model.DomainStore#getChildren <em>Children</em>}</li>
- *   <li>{@link org.openiaml.model.model.DomainStore#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.DomainStore#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link org.openiaml.model.model.DomainStore#getFile <em>File</em>}</li>
  *   <li>{@link org.openiaml.model.model.DomainStore#getType <em>Type</em>}</li>
@@ -39,7 +38,7 @@ import org.openiaml.model.model.domain.DomainStoreTypes;
  * @model annotation="http://openiaml.org/comment editor='org.openiaml.model.diagram.domain_store' changed='0.2 to extend the abstract counterpart\r\n0.3 to remove the abstract extension, and added \"type\" attribute\r\n0.4.2 removed \'views\' reference'"
  * @generated
  */
-public interface DomainStore extends ContainsOperations, NamedElement, ContainsWires, ContainsConditions, GeneratesElements, CanBeSynced {
+public interface DomainStore extends ContainsOperations, NamedElement, ContainsWires, ContainsConditions, GeneratesElements, CanBeSynced, ContainsProperties {
 
 	/**
 	 * Returns the value of the '<em><b>Children</b></em>' containment reference list.
@@ -56,22 +55,6 @@ public interface DomainStore extends ContainsOperations, NamedElement, ContainsW
 	 * @generated
 	 */
 	EList<DomainObject> getChildren();
-
-	/**
-	 * Returns the value of the '<em><b>Properties</b></em>' containment reference list.
-	 * The list contents are of type {@link org.openiaml.model.model.Property}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Properties</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Properties</em>' containment reference list.
-	 * @see org.openiaml.model.model.ModelPackage#getDomainStore_Properties()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Property> getProperties();
 
 	/**
 	 * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.

@@ -62,6 +62,21 @@ public class BasicJavadocParser {
 				if (tag.startsWith("@")) {
 					String tagName = tag.substring(0, tag.indexOf(" "));
 					String tagText = tag.substring(tag.indexOf(" ") + 1);
+					
+					// if the next two characters are 's ' (i.e. making it
+					// a plural) then modify appropriately
+					// e.g. {@model Foo}s -> {@model Foo Foos}
+					// but not if there is a space within the tag
+					if (line.length() > next2 + 2) {
+						if (!tagText.contains(" ")) {
+							String s2 = line.substring( next2 + 1, next2 + 3 );
+							if (s2 != null && s2.length() == 2 && s2.charAt(0) == 's' && Character.isWhitespace(s2.charAt(1))) {
+								next2++;	// keep whitespace
+								tagText += " " + tagText + "s";
+							}
+						}
+					}
+					
 					inline.handleTag(tagName, tagText);
 				} else {
 					inline.handleText("{" + tag + "}"); 

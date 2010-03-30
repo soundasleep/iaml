@@ -183,5 +183,5 @@ public abstract class DocumentationHelper implements ILoader {
 		return f.endsWith(".png") || f.endsWith(".gif") || f.endsWith(".jpg")
 			|| f.endsWith(".ico");
 	}
-	
+
 }

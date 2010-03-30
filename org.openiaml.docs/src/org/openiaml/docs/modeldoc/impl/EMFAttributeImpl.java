@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.openiaml.docs.modeldoc.EMFAttribute;
 import org.openiaml.docs.modeldoc.EMFClass;
+import org.openiaml.docs.modeldoc.JavadocTagElement;
 import org.openiaml.docs.modeldoc.ModeldocPackage;
 
 /**
@@ -31,6 +32,7 @@ import org.openiaml.docs.modeldoc.ModeldocPackage;
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFAttributeImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFAttributeImpl#getContainingType <em>Containing Type</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFAttributeImpl#getDefaultLiteral <em>Default Literal</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFAttributeImpl#getTagline <em>Tagline</em>}</li>
  * </ul>
  * </p>
  *
@@ -156,6 +158,16 @@ public class EMFAttributeImpl extends EObjectImpl implements EMFAttribute {
 	 * @ordered
 	 */
 	protected String defaultLiteral = DEFAULT_LITERAL_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getTagline() <em>Tagline</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTagline()
+	 * @generated
+	 * @ordered
+	 */
+	protected JavadocTagElement tagline;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -348,6 +360,49 @@ public class EMFAttributeImpl extends EObjectImpl implements EMFAttribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public JavadocTagElement getTagline() {
+		return tagline;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetTagline(JavadocTagElement newTagline, NotificationChain msgs) {
+		JavadocTagElement oldTagline = tagline;
+		tagline = newTagline;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModeldocPackage.EMF_ATTRIBUTE__TAGLINE, oldTagline, newTagline);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTagline(JavadocTagElement newTagline) {
+		if (newTagline != tagline) {
+			NotificationChain msgs = null;
+			if (tagline != null)
+				msgs = ((InternalEObject)tagline).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModeldocPackage.EMF_ATTRIBUTE__TAGLINE, null, msgs);
+			if (newTagline != null)
+				msgs = ((InternalEObject)newTagline).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModeldocPackage.EMF_ATTRIBUTE__TAGLINE, null, msgs);
+			msgs = basicSetTagline(newTagline, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModeldocPackage.EMF_ATTRIBUTE__TAGLINE, newTagline, newTagline));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -369,6 +424,8 @@ public class EMFAttributeImpl extends EObjectImpl implements EMFAttribute {
 		switch (featureID) {
 			case ModeldocPackage.EMF_ATTRIBUTE__CONTAINING_TYPE:
 				return basicSetContainingType(null, msgs);
+			case ModeldocPackage.EMF_ATTRIBUTE__TAGLINE:
+				return basicSetTagline(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -409,6 +466,8 @@ public class EMFAttributeImpl extends EObjectImpl implements EMFAttribute {
 				return getContainingType();
 			case ModeldocPackage.EMF_ATTRIBUTE__DEFAULT_LITERAL:
 				return getDefaultLiteral();
+			case ModeldocPackage.EMF_ATTRIBUTE__TAGLINE:
+				return getTagline();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -441,6 +500,9 @@ public class EMFAttributeImpl extends EObjectImpl implements EMFAttribute {
 				return;
 			case ModeldocPackage.EMF_ATTRIBUTE__DEFAULT_LITERAL:
 				setDefaultLiteral((String)newValue);
+				return;
+			case ModeldocPackage.EMF_ATTRIBUTE__TAGLINE:
+				setTagline((JavadocTagElement)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -475,6 +537,9 @@ public class EMFAttributeImpl extends EObjectImpl implements EMFAttribute {
 			case ModeldocPackage.EMF_ATTRIBUTE__DEFAULT_LITERAL:
 				setDefaultLiteral(DEFAULT_LITERAL_EDEFAULT);
 				return;
+			case ModeldocPackage.EMF_ATTRIBUTE__TAGLINE:
+				setTagline((JavadocTagElement)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -501,6 +566,8 @@ public class EMFAttributeImpl extends EObjectImpl implements EMFAttribute {
 				return getContainingType() != null;
 			case ModeldocPackage.EMF_ATTRIBUTE__DEFAULT_LITERAL:
 				return DEFAULT_LITERAL_EDEFAULT == null ? defaultLiteral != null : !DEFAULT_LITERAL_EDEFAULT.equals(defaultLiteral);
+			case ModeldocPackage.EMF_ATTRIBUTE__TAGLINE:
+				return tagline != null;
 		}
 		return super.eIsSet(featureID);
 	}

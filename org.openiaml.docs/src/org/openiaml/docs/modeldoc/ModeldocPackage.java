@@ -1510,13 +1510,22 @@ public interface ModeldocPackage extends EPackage {
 	int EMF_ATTRIBUTE__DEFAULT_LITERAL = 6;
 
 	/**
+	 * The feature id for the '<em><b>Tagline</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_ATTRIBUTE__TAGLINE = 7;
+
+	/**
 	 * The number of structural features of the '<em>EMF Attribute</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_ATTRIBUTE_FEATURE_COUNT = 7;
+	int EMF_ATTRIBUTE_FEATURE_COUNT = 8;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.EMFReferenceImpl <em>EMF Reference</em>}' class.
@@ -1601,13 +1610,22 @@ public interface ModeldocPackage extends EPackage {
 	int EMF_REFERENCE__OPPOSITE = 7;
 
 	/**
+	 * The feature id for the '<em><b>Tagline</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_REFERENCE__TAGLINE = 8;
+
+	/**
 	 * The number of structural features of the '<em>EMF Reference</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_REFERENCE_FEATURE_COUNT = 8;
+	int EMF_REFERENCE_FEATURE_COUNT = 9;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.TemplateFileImpl <em>Template File</em>}' class.
@@ -2942,6 +2960,17 @@ public interface ModeldocPackage extends EPackage {
 	EAttribute getEMFAttribute_DefaultLiteral();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.openiaml.docs.modeldoc.EMFAttribute#getTagline <em>Tagline</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Tagline</em>'.
+	 * @see org.openiaml.docs.modeldoc.EMFAttribute#getTagline()
+	 * @see #getEMFAttribute()
+	 * @generated
+	 */
+	EReference getEMFAttribute_Tagline();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.docs.modeldoc.EMFReference <em>EMF Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3038,6 +3067,17 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getEMFReference_Opposite();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.openiaml.docs.modeldoc.EMFReference#getTagline <em>Tagline</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Tagline</em>'.
+	 * @see org.openiaml.docs.modeldoc.EMFReference#getTagline()
+	 * @see #getEMFReference()
+	 * @generated
+	 */
+	EReference getEMFReference_Tagline();
 
 	/**
 	 * Returns the meta object for class '{@link org.openiaml.docs.modeldoc.TemplateFile <em>Template File</em>}'.
@@ -4112,6 +4152,14 @@ public interface ModeldocPackage extends EPackage {
 		EAttribute EMF_ATTRIBUTE__DEFAULT_LITERAL = eINSTANCE.getEMFAttribute_DefaultLiteral();
 
 		/**
+		 * The meta object literal for the '<em><b>Tagline</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EMF_ATTRIBUTE__TAGLINE = eINSTANCE.getEMFAttribute_Tagline();
+
+		/**
 		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.impl.EMFReferenceImpl <em>EMF Reference</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4184,6 +4232,14 @@ public interface ModeldocPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EMF_REFERENCE__OPPOSITE = eINSTANCE.getEMFReference_Opposite();
+
+		/**
+		 * The meta object literal for the '<em><b>Tagline</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EMF_REFERENCE__TAGLINE = eINSTANCE.getEMFReference_Tagline();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.impl.TemplateFileImpl <em>Template File</em>}' class.

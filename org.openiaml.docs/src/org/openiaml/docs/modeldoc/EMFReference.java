@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.openiaml.docs.modeldoc.EMFReference#getContainingType <em>Containing Type</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFReference#getTypeName <em>Type Name</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFReference#getOpposite <em>Opposite</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.EMFReference#getTagline <em>Tagline</em>}</li>
  * </ul>
  * </p>
  *
@@ -243,5 +244,31 @@ public interface EMFReference extends EObject {
 	 * @generated
 	 */
 	void setOpposite(EMFReference value);
+
+	/**
+	 * Returns the value of the '<em><b>Tagline</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Tagline</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Tagline</em>' containment reference.
+	 * @see #setTagline(JavadocTagElement)
+	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getEMFReference_Tagline()
+	 * @model containment="true"
+	 * @generated
+	 */
+	JavadocTagElement getTagline();
+
+	/**
+	 * Sets the value of the '{@link org.openiaml.docs.modeldoc.EMFReference#getTagline <em>Tagline</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Tagline</em>' containment reference.
+	 * @see #getTagline()
+	 * @generated
+	 */
+	void setTagline(JavadocTagElement value);
 
 } // EMFReference

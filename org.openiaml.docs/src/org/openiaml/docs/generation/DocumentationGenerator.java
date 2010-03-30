@@ -75,7 +75,7 @@ public class DocumentationGenerator {
 
 		// set up references
 		{
-			ILoader loader = new LoadEMFReferences();
+			ILoader loader = new LoadEMFReferences(this);
 			loader.load(factory, root);
 		}
 

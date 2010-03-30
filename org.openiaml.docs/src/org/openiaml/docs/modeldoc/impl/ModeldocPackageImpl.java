@@ -1290,6 +1290,15 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getEMFAttribute_Tagline() {
+		return (EReference)emfAttributeEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getEMFReference() {
 		return emfReferenceEClass;
 	}
@@ -1364,6 +1373,15 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 */
 	public EReference getEMFReference_Opposite() {
 		return (EReference)emfReferenceEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEMFReference_Tagline() {
+		return (EReference)emfReferenceEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -1628,6 +1646,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		createEAttribute(emfAttributeEClass, EMF_ATTRIBUTE__TYPE);
 		createEReference(emfAttributeEClass, EMF_ATTRIBUTE__CONTAINING_TYPE);
 		createEAttribute(emfAttributeEClass, EMF_ATTRIBUTE__DEFAULT_LITERAL);
+		createEReference(emfAttributeEClass, EMF_ATTRIBUTE__TAGLINE);
 
 		emfReferenceEClass = createEClass(EMF_REFERENCE);
 		createEAttribute(emfReferenceEClass, EMF_REFERENCE__NAME);
@@ -1638,6 +1657,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		createEReference(emfReferenceEClass, EMF_REFERENCE__CONTAINING_TYPE);
 		createEAttribute(emfReferenceEClass, EMF_REFERENCE__TYPE_NAME);
 		createEReference(emfReferenceEClass, EMF_REFERENCE__OPPOSITE);
+		createEReference(emfReferenceEClass, EMF_REFERENCE__TAGLINE);
 
 		templateFileEClass = createEClass(TEMPLATE_FILE);
 		createEAttribute(templateFileEClass, TEMPLATE_FILE__PLUGIN);
@@ -1846,6 +1866,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		initEAttribute(getEMFAttribute_Type(), ecorePackage.getEString(), "type", null, 0, 1, EMFAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEMFAttribute_ContainingType(), this.getEMFClass(), this.getEMFClass_Attributes(), "containingType", null, 0, 1, EMFAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEMFAttribute_DefaultLiteral(), ecorePackage.getEString(), "defaultLiteral", null, 0, 1, EMFAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEMFAttribute_Tagline(), this.getJavadocTagElement(), null, "tagline", null, 0, 1, EMFAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(emfReferenceEClass, EMFReference.class, "EMFReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getEMFReference_Name(), ecorePackage.getEString(), "name", null, 0, 1, EMFReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1856,6 +1877,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		initEReference(getEMFReference_ContainingType(), this.getEMFClass(), this.getEMFClass_References(), "containingType", null, 0, 1, EMFReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEMFReference_TypeName(), ecorePackage.getEString(), "typeName", null, 0, 1, EMFReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEMFReference_Opposite(), this.getEMFReference(), null, "opposite", null, 0, 1, EMFReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEMFReference_Tagline(), this.getJavadocTagElement(), null, "tagline", null, 0, 1, EMFReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(templateFileEClass, TemplateFile.class, "TemplateFile", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTemplateFile_Plugin(), ecorePackage.getEString(), "plugin", null, 0, 1, TemplateFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.openiaml.docs.modeldoc.EMFClass;
 import org.openiaml.docs.modeldoc.EMFReference;
+import org.openiaml.docs.modeldoc.JavadocTagElement;
 import org.openiaml.docs.modeldoc.ModeldocPackage;
 
 /**
@@ -32,6 +33,7 @@ import org.openiaml.docs.modeldoc.ModeldocPackage;
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFReferenceImpl#getContainingType <em>Containing Type</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFReferenceImpl#getTypeName <em>Type Name</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFReferenceImpl#getOpposite <em>Opposite</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFReferenceImpl#getTagline <em>Tagline</em>}</li>
  * </ul>
  * </p>
  *
@@ -157,6 +159,16 @@ public class EMFReferenceImpl extends EObjectImpl implements EMFReference {
 	 * @ordered
 	 */
 	protected EMFReference opposite;
+
+	/**
+	 * The cached value of the '{@link #getTagline() <em>Tagline</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTagline()
+	 * @generated
+	 * @ordered
+	 */
+	protected JavadocTagElement tagline;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -404,6 +416,49 @@ public class EMFReferenceImpl extends EObjectImpl implements EMFReference {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public JavadocTagElement getTagline() {
+		return tagline;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetTagline(JavadocTagElement newTagline, NotificationChain msgs) {
+		JavadocTagElement oldTagline = tagline;
+		tagline = newTagline;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModeldocPackage.EMF_REFERENCE__TAGLINE, oldTagline, newTagline);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTagline(JavadocTagElement newTagline) {
+		if (newTagline != tagline) {
+			NotificationChain msgs = null;
+			if (tagline != null)
+				msgs = ((InternalEObject)tagline).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModeldocPackage.EMF_REFERENCE__TAGLINE, null, msgs);
+			if (newTagline != null)
+				msgs = ((InternalEObject)newTagline).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModeldocPackage.EMF_REFERENCE__TAGLINE, null, msgs);
+			msgs = basicSetTagline(newTagline, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModeldocPackage.EMF_REFERENCE__TAGLINE, newTagline, newTagline));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -425,6 +480,8 @@ public class EMFReferenceImpl extends EObjectImpl implements EMFReference {
 		switch (featureID) {
 			case ModeldocPackage.EMF_REFERENCE__CONTAINING_TYPE:
 				return basicSetContainingType(null, msgs);
+			case ModeldocPackage.EMF_REFERENCE__TAGLINE:
+				return basicSetTagline(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -469,6 +526,8 @@ public class EMFReferenceImpl extends EObjectImpl implements EMFReference {
 			case ModeldocPackage.EMF_REFERENCE__OPPOSITE:
 				if (resolve) return getOpposite();
 				return basicGetOpposite();
+			case ModeldocPackage.EMF_REFERENCE__TAGLINE:
+				return getTagline();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -504,6 +563,9 @@ public class EMFReferenceImpl extends EObjectImpl implements EMFReference {
 				return;
 			case ModeldocPackage.EMF_REFERENCE__OPPOSITE:
 				setOpposite((EMFReference)newValue);
+				return;
+			case ModeldocPackage.EMF_REFERENCE__TAGLINE:
+				setTagline((JavadocTagElement)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -541,6 +603,9 @@ public class EMFReferenceImpl extends EObjectImpl implements EMFReference {
 			case ModeldocPackage.EMF_REFERENCE__OPPOSITE:
 				setOpposite((EMFReference)null);
 				return;
+			case ModeldocPackage.EMF_REFERENCE__TAGLINE:
+				setTagline((JavadocTagElement)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -569,6 +634,8 @@ public class EMFReferenceImpl extends EObjectImpl implements EMFReference {
 				return TYPE_NAME_EDEFAULT == null ? typeName != null : !TYPE_NAME_EDEFAULT.equals(typeName);
 			case ModeldocPackage.EMF_REFERENCE__OPPOSITE:
 				return opposite != null;
+			case ModeldocPackage.EMF_REFERENCE__TAGLINE:
+				return tagline != null;
 		}
 		return super.eIsSet(featureID);
 	}

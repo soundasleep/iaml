@@ -385,7 +385,7 @@
 		«IF local»
 		<a name="«name»">«name»</a>
 		«ELSE»
-		<a name="«name»" href="«fileName(containingClass)»#«value»">«value»</a>
+		<a name="«name»" href="«fileName(containingClass)»#«name»">«value»</a>
 		«ENDIF»
 		
 		<span class="javadoc_reference">«EXPAND linkReference FOR reference»</span>

@@ -17,6 +17,7 @@ import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsOperations;
+import org.openiaml.model.model.ContainsProperties;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DataFlowEdgeDestination;
 import org.openiaml.model.model.DataFlowEdgesSource;
@@ -128,32 +129,10 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public Property assertHasProperty(
-			Scope element, String string) throws JaxenException {
+			ContainsProperties element, String string) throws JaxenException {
 		return (Property) queryOne(element, "iaml:properties[iaml:name='" + string + "']");
 	}
 
-	/**
-	 * Assert that the given element contains the given
-	 * Property.
-	 *
-	 * @return The element found
-	 */
-	public Property assertHasProperty(
-			VisibleThing element, String string) throws JaxenException {
-		return (Property) queryOne(element, "iaml:properties[iaml:name='" + string + "']");
-	}
-
-	/**
-	 * Assert that the given element contains the given
-	 * Property.
-	 *
-	 * @return The element found
-	 */
-	public Property assertHasProperty(
-			ApplicationElement element, String string) throws JaxenException {
-		return (Property) queryOne(element, "iaml:properties[iaml:name='" + string + "']");
-	}
-	
 	/**
 	 * Assert that the given element does not contains the given
 	 * Property.

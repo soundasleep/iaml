@@ -16,7 +16,18 @@ textFieldName(model::visual::InputTextField this) :
 
 buttonName(model::visual::Button this) :
 	if (name == null || name == "") then "Submit Query" else name;
-	
+
+/**
+ * Get a safe string name of the given element; that is, one that only consists
+ * of alpha-numeric characters, and the underscore character.
+ *
+ * @pseudocode
+ *   if id = null then
+ *     throw exception
+ *   else
+ *     return element.id.replace('[^A-Za-z0-9]', '_')
+ *   endif
+ */	
 safeName(model::GeneratedElement this) :
 	if (id == null) then
 		throwException("Cannot get the safeName of an element with no ID: " + this)
@@ -214,16 +225,39 @@ isFailEdge(model::wires::NavigateAction this ) :
 isFailEdge(model::wires::RunAction this ) :
 	name == "fail" ;
 
-/** get the containing session of the given element, or null if none */
+/**
+ * Get the containing session of the given element, or null if none.
+ *
+ * @pseudocode
+ *   return null
+ */	
 model::scopes::Session containingSession(emf::EObject this) :
 	null;
 
+/**
+ * Get the containing session of the given element, or null if none.
+ *
+ * @pseudocode
+ *   return containingSession(eContainer)
+ */	
 model::scopes::Session containingSession(model::NamedElement this) :
 	containingSession(eContainer);
-	
+
+/**
+ * Get the containing session of the given element, or null if none.
+ *
+ * @pseudocode
+ *   return self
+ */		
 model::scopes::Session containingSession(model::scopes::Session this) :
 	this;
-
+	
+/**
+ * Get the containing session of the given element, or null if none.
+ *
+ * @pseudocode
+ *   return null
+ */	
 model::scopes::Session containingSession(model::InternetApplication this) :
 	null;
 

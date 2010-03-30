@@ -337,6 +337,12 @@
 		«ELSE»
 		(<b>required</b>)
 		«ENDIF»
+		
+		«IF tagline != null»
+		<div class="tagline">
+		«EXPAND ClassTemplate::javadocElement FOR tagline»
+		</div>
+		«ENDIF»
 	</li>
 «ENDDEFINE»
 
@@ -364,6 +370,12 @@
 		<span class="opposite_block">
 		[opposite: <a href="«fileName(opposite.containingType)»">«opposite.name»</a>]
 		</span>
+		«ENDIF»
+		
+		«IF tagline != null»
+		<div class="tagline">
+		«EXPAND ClassTemplate::javadocElement FOR tagline»
+		</div>
 		«ENDIF»
 	</li>
 «ENDDEFINE»

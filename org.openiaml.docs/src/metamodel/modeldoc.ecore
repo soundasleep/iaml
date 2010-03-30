@@ -180,6 +180,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="containingType" eType="#//EMFClass"
         eOpposite="#//EMFClass/attributes"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultLiteral" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tagline" eType="#//JavadocTagElement"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EMFReference">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -193,6 +195,8 @@
         eOpposite="#//EMFClass/references"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="opposite" eType="#//EMFReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tagline" eType="#//JavadocTagElement"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TemplateFile" eSuperTypes="#//Reference">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="plugin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

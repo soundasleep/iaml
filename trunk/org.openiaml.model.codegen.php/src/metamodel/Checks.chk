@@ -167,3 +167,9 @@ context model::visual::InputTextField ERROR "InputTextField type '" + type.uRI +
 	type == null ||
 	properties.select(e | e.name == "fieldValue").isEmpty ||
 	properties.select(e | e.name == "fieldValue").select(e | e.type.uRI != type.uRI).isEmpty;
+
+context model::VisibleThing ERROR "Mismatch between default fieldValue attribute and created fieldValue Property default" :
+	fieldValue == null || /* no fieldValue set */
+	properties.select(e | e.name == "fieldValue").isEmpty || /* no property set */
+	properties.select(e | e.name == "fieldValue").select(e | e.defaultValue != fieldValue).isEmpty /* they're all identical */;
+	

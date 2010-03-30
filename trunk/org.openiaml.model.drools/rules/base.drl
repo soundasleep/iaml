@@ -41,6 +41,8 @@ end
 /**
  * @inference InputTextField,Property An untyped {@model InputTextField} 
  * 		contains an untyped {@model Property property} named 'fieldValue'.
+ * @inference InputTextField,Property If set, the {@model VisibleThing#fieldValue fieldValue}
+ *		is used as the default value of the created {@model Property property} named 'fieldValue'.   
  */
 rule "Create field value for input text field (untyped)"
 	when
@@ -53,9 +55,12 @@ rule "Create field value for input text field (untyped)"
 		Property fieldValue = handler.generatedProperty(f, f);
 		handler.setName(fieldValue, "fieldValue");
 		handler.setType(fieldValue, null);
-		// set default to "" - disabled for now, as we should get an error
-		// before we access an undefined variable
-		// handler.setValue(fieldValue, ModelPackage.eINSTANCE.getProperty_DefaultValue(), "");
+		// set default to fieldValue ONLY if fieldValue is set
+		// (we want to get an error if we try to access an undefined variable)
+		if (f.getFieldValue() != null) {
+			handler.setDefault(fieldValue, f.getFieldValue());
+		}
+		
 		queue.add(fieldValue, drools);
 		
 end
@@ -75,9 +80,11 @@ rule "Create field value for input text field (typed)"
 		Property fieldValue = handler.generatedProperty(f, f);
 		handler.setName(fieldValue, "fieldValue");
 		handler.setType(fieldValue, f.getType());
-		// set default to "" - disabled for now, as we should get an error
-		// before we access an undefined variable
-		// handler.setValue(fieldValue, ModelPackage.eINSTANCE.getProperty_DefaultValue(), "");
+		// set default to fieldValue ONLY if fieldValue is set
+		// (we want to get an error if we try to access an undefined variable)
+		if (f.getFieldValue() != null) {
+			handler.setDefault(fieldValue, f.getFieldValue());
+		}
 		queue.add(fieldValue, drools);
 		
 end
@@ -96,7 +103,13 @@ rule "Create field value for label"
 	then
 		Property fieldValue = handler.generatedProperty(f, f);
 		handler.setName(fieldValue, "fieldValue");
-		// TODO do we need to set default to Label.defaultValue?
+
+		// set default to fieldValue ONLY if fieldValue is set
+		// (we want to get an error if we try to access an undefined variable)
+		if (f.getFieldValue() != null) {
+			handler.setDefault(fieldValue, f.getFieldValue());
+		}
+		
 		queue.add(fieldValue, drools);
 		
 end

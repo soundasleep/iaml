@@ -581,4 +581,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setValue(element, OperationsPackage.eINSTANCE.getCancelNode_ExceptionText(), value);
 	}
 	
+	public void setDefault(Property element, String value) throws InferenceException {
+		setValue(element, ModelPackage.eINSTANCE.getProperty_DefaultValue(), value);
+	}
+	
 }

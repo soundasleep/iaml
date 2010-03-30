@@ -230,7 +230,7 @@
          </object>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_Element"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2005,2006,2009,2010"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2005,2006,2011,2010"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4003,4002"/>
       </viewProvider>
    </extension>
@@ -243,13 +243,13 @@
             <method name="getType()" value="Iaml_Element"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
-            <method name="getType()" value="2005,2006,2009,2010"/>
+            <method name="getType()" value="2005,2006,2011,2010"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
             <method name="getType()" value="4003,4002"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5010,5011,5012,5013,5019,5020,5021,5025,5022,5023,5024"/>
+            <method name="getType()" value="5010,5011,5012,5013,5026,5027,5028,5029,5022,5023,5024"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value=""/>
@@ -265,9 +265,9 @@
          <object class="org.openiaml.model.diagram.element.edit.parts.ApplicationElementEditPart" id="ApplicationElement_1000"/>
          <object class="org.openiaml.model.diagram.element.edit.parts.CompositeOperationEditPart" id="CompositeOperation_2005"/>
          <object class="org.openiaml.model.diagram.element.edit.parts.PrimitiveOperationEditPart" id="PrimitiveOperation_2006"/>
-         <object class="org.openiaml.model.diagram.element.edit.parts.PropertyEditPart" id="Property_2009"/>
+         <object class="org.openiaml.model.diagram.element.edit.parts.PropertyEditPart" id="Property_2011"/>
          <object class="org.openiaml.model.diagram.element.edit.parts.EventTriggerEditPart" id="EventTrigger_2010"/>
-         <context elements="ApplicationElement_1000,CompositeOperation_2005,PrimitiveOperation_2006,Property_2009,EventTrigger_2010"/>
+         <context elements="ApplicationElement_1000,CompositeOperation_2005,PrimitiveOperation_2006,Property_2011,EventTrigger_2010"/>
       </modelingAssistantProvider>
    </extension>
 
@@ -290,7 +290,7 @@
       <decoratorProvider class="org.openiaml.model.diagram.element.providers.IamlShortcutsDecoratorProvider">
          <Priority name="Lowest"/>
          <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
-            <method name="getType()" value="2005,2006,2009,2010"/>
+            <method name="getType()" value="2005,2006,2011,2010"/>
          </object>
          <context decoratorTargets="generated-top-nodes"/>
       </decoratorProvider>
@@ -330,12 +330,12 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
-               id="org.openiaml.model.diagram.element.Property_2009"
-               name="%metatype.name.Property_2009"
+               id="org.openiaml.model.diagram.element.Property_2011"
+               name="%metatype.name.Property_2011"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="Property"
                edithelper="org.openiaml.model.diagram.element.edit.helpers.PropertyEditHelper">
-            <param name="semanticHint" value="2009"/>
+            <param name="semanticHint" value="2011"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.4">
@@ -383,7 +383,7 @@
          <elementType ref="org.openiaml.model.diagram.element.ApplicationElement_1000"/>
          <elementType ref="org.openiaml.model.diagram.element.CompositeOperation_2005"/>
          <elementType ref="org.openiaml.model.diagram.element.PrimitiveOperation_2006"/>
-         <elementType ref="org.openiaml.model.diagram.element.Property_2009"/>
+         <elementType ref="org.openiaml.model.diagram.element.Property_2011"/>
          <elementType ref="org.openiaml.model.diagram.element.EventTrigger_2010"/>
          <elementType ref="org.openiaml.model.diagram.element.RunAction_4003"/>
          <elementType ref="org.openiaml.model.diagram.element.SyncWire_4002"/>

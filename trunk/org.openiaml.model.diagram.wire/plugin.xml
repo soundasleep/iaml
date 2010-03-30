@@ -230,7 +230,7 @@
          </object>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_Wire"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2010,2011,2012,2018,2013,2019,2015,2016,2017"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2010,2011,2012,2018,2013,2020,2015,2016,2017"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4005,4004"/>
       </viewProvider>
    </extension>
@@ -243,13 +243,13 @@
             <method name="getType()" value="Iaml_Wire"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
-            <method name="getType()" value="2010,2011,2012,2018,2013,2019,2015,2016,2017"/>
+            <method name="getType()" value="2010,2011,2012,2018,2013,2020,2015,2016,2017"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
             <method name="getType()" value="4001,4005,4004"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5019,5020,5021,5022,5023,5024,5040,5035,5036,5041,5025,5026,5037,5038,5039,5042,5030,5031,5032,5043,5033,5034"/>
+            <method name="getType()" value="5019,5020,5021,5022,5023,5024,5040,5035,5036,5041,5025,5026,5044,5045,5046,5047,5030,5031,5032,5043,5033,5034"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value=""/>
@@ -268,11 +268,11 @@
          <object class="org.openiaml.model.diagram.wire.edit.parts.DomainAttributeEditPart" id="DomainAttribute_2012"/>
          <object class="org.openiaml.model.diagram.wire.edit.parts.InputTextFieldEditPart" id="InputTextField_2018"/>
          <object class="org.openiaml.model.diagram.wire.edit.parts.EventTriggerEditPart" id="EventTrigger_2013"/>
-         <object class="org.openiaml.model.diagram.wire.edit.parts.PropertyEditPart" id="Property_2019"/>
+         <object class="org.openiaml.model.diagram.wire.edit.parts.PropertyEditPart" id="Property_2020"/>
          <object class="org.openiaml.model.diagram.wire.edit.parts.ParameterEditPart" id="Parameter_2015"/>
          <object class="org.openiaml.model.diagram.wire.edit.parts.StaticValueEditPart" id="StaticValue_2016"/>
          <object class="org.openiaml.model.diagram.wire.edit.parts.CompositeConditionEditPart" id="CompositeCondition_2017"/>
-         <context elements="CompositeWire_1000,CompositeOperation_2010,PrimitiveOperation_2011,DomainAttribute_2012,InputTextField_2018,EventTrigger_2013,Property_2019,Parameter_2015,StaticValue_2016,CompositeCondition_2017"/>
+         <context elements="CompositeWire_1000,CompositeOperation_2010,PrimitiveOperation_2011,DomainAttribute_2012,InputTextField_2018,EventTrigger_2013,Property_2020,Parameter_2015,StaticValue_2016,CompositeCondition_2017"/>
       </modelingAssistantProvider>
    </extension>
 
@@ -295,7 +295,7 @@
       <decoratorProvider class="org.openiaml.model.diagram.wire.providers.IamlShortcutsDecoratorProvider">
          <Priority name="Lowest"/>
          <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
-            <method name="getType()" value="2010,2011,2012,2018,2013,2019,2015,2016,2017"/>
+            <method name="getType()" value="2010,2011,2012,2018,2013,2020,2015,2016,2017"/>
          </object>
          <context decoratorTargets="generated-top-nodes"/>
       </decoratorProvider>
@@ -365,12 +365,12 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
-               id="org.openiaml.model.diagram.wire.Property_2019"
-               name="%metatype.name.Property_2019"
+               id="org.openiaml.model.diagram.wire.Property_2020"
+               name="%metatype.name.Property_2020"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="Property"
                edithelper="org.openiaml.model.diagram.wire.edit.helpers.PropertyEditHelper">
-            <param name="semanticHint" value="2019"/>
+            <param name="semanticHint" value="2020"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.4">
@@ -451,7 +451,7 @@
          <elementType ref="org.openiaml.model.diagram.wire.DomainAttribute_2012"/>
          <elementType ref="org.openiaml.model.diagram.wire.InputTextField_2018"/>
          <elementType ref="org.openiaml.model.diagram.wire.EventTrigger_2013"/>
-         <elementType ref="org.openiaml.model.diagram.wire.Property_2019"/>
+         <elementType ref="org.openiaml.model.diagram.wire.Property_2020"/>
          <elementType ref="org.openiaml.model.diagram.wire.Parameter_2015"/>
          <elementType ref="org.openiaml.model.diagram.wire.StaticValue_2016"/>
          <elementType ref="org.openiaml.model.diagram.wire.CompositeCondition_2017"/>

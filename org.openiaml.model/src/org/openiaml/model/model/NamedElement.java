@@ -36,6 +36,9 @@ public interface NamedElement extends GeneratedElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * A non-unique string that names a given object. {@model Property Properties}, {@model Operation}s and {@model Condition}s add special semantic meaning to names.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see org.openiaml.model.model.ModelPackage#getNamedElement_Name()

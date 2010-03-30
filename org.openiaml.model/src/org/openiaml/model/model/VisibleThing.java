@@ -25,6 +25,7 @@ import org.openiaml.model.model.wires.ParameterEdgesSource;
  *   <li>{@link org.openiaml.model.model.VisibleThing#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.VisibleThing#getValues <em>Values</em>}</li>
  *   <li>{@link org.openiaml.model.model.VisibleThing#getOnClick <em>On Click</em>}</li>
+ *   <li>{@link org.openiaml.model.model.VisibleThing#getFieldValue <em>Field Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -94,4 +95,30 @@ public interface VisibleThing extends ContainsConditions, ContainsOperations, Co
 	 * @generated
 	 */
 	void setOnClick(EventTrigger value);
+
+	/**
+	 * Returns the value of the '<em><b>Field Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Field Value</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Field Value</em>' attribute.
+	 * @see #setFieldValue(String)
+	 * @see org.openiaml.model.model.ModelPackage#getVisibleThing_FieldValue()
+	 * @model
+	 * @generated
+	 */
+	String getFieldValue();
+
+	/**
+	 * Sets the value of the '{@link org.openiaml.model.model.VisibleThing#getFieldValue <em>Field Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Field Value</em>' attribute.
+	 * @see #getFieldValue()
+	 * @generated
+	 */
+	void setFieldValue(String value);
 } // VisibleThing

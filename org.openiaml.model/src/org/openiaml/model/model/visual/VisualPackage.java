@@ -621,6 +621,15 @@ public interface VisualPackage extends EPackage {
 	int INPUT_FORM__ON_CLICK = ModelPackage.VISIBLE_THING__ON_CLICK;
 
 	/**
+	 * The feature id for the '<em><b>Field Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_FORM__FIELD_VALUE = ModelPackage.VISIBLE_THING__FIELD_VALUE;
+
+	/**
 	 * The number of structural features of the '<em>Input Form</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -872,6 +881,15 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int INPUT_TEXT_FIELD__ON_CLICK = ModelPackage.VISIBLE_THING__ON_CLICK;
+
+	/**
+	 * The feature id for the '<em><b>Field Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_TEXT_FIELD__FIELD_VALUE = ModelPackage.VISIBLE_THING__FIELD_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1137,6 +1155,15 @@ public interface VisualPackage extends EPackage {
 	int BUTTON__ON_CLICK = ModelPackage.VISIBLE_THING__ON_CLICK;
 
 	/**
+	 * The feature id for the '<em><b>Field Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUTTON__FIELD_VALUE = ModelPackage.VISIBLE_THING__FIELD_VALUE;
+
+	/**
 	 * The feature id for the '<em><b>Out Actions</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1397,6 +1424,15 @@ public interface VisualPackage extends EPackage {
 	 * @ordered
 	 */
 	int LABEL__ON_CLICK = ModelPackage.VISIBLE_THING__ON_CLICK;
+
+	/**
+	 * The feature id for the '<em><b>Field Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LABEL__FIELD_VALUE = ModelPackage.VISIBLE_THING__FIELD_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Default Value</b></em>' attribute.

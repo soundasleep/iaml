@@ -81,6 +81,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getValues <em>Values</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getOnClick <em>On Click</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getFieldValue <em>Field Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -396,6 +397,26 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 	 * @ordered
 	 */
 	protected EventTrigger onClick;
+
+	/**
+	 * The default value of the '{@link #getFieldValue() <em>Field Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFieldValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String FIELD_VALUE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getFieldValue() <em>Field Value</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFieldValue()
+	 * @generated
+	 * @ordered
+	 */
+	protected String fieldValue = FIELD_VALUE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -785,6 +806,27 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getFieldValue() {
+		return fieldValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFieldValue(String newFieldValue) {
+		String oldFieldValue = fieldValue;
+		fieldValue = newFieldValue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.VISIBLE_THING__FIELD_VALUE, oldFieldValue, fieldValue));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EventTrigger getOnEdit() {
 		return onEdit;
 	}
@@ -1003,6 +1045,8 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 				return getValues();
 			case ModelPackage.VISIBLE_THING__ON_CLICK:
 				return getOnClick();
+			case ModelPackage.VISIBLE_THING__FIELD_VALUE:
+				return getFieldValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1112,6 +1156,9 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 			case ModelPackage.VISIBLE_THING__ON_CLICK:
 				setOnClick((EventTrigger)newValue);
 				return;
+			case ModelPackage.VISIBLE_THING__FIELD_VALUE:
+				setFieldValue((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -1202,6 +1249,9 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 			case ModelPackage.VISIBLE_THING__ON_CLICK:
 				setOnClick((EventTrigger)null);
 				return;
+			case ModelPackage.VISIBLE_THING__FIELD_VALUE:
+				setFieldValue(FIELD_VALUE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1266,6 +1316,8 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 				return values != null && !values.isEmpty();
 			case ModelPackage.VISIBLE_THING__ON_CLICK:
 				return onClick != null;
+			case ModelPackage.VISIBLE_THING__FIELD_VALUE:
+				return FIELD_VALUE_EDEFAULT == null ? fieldValue != null : !FIELD_VALUE_EDEFAULT.equals(fieldValue);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1484,6 +1536,8 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 		result.append(name);
 		result.append(", overridden: ");
 		result.append(overridden);
+		result.append(", fieldValue: ");
+		result.append(fieldValue);
 		result.append(')');
 		return result.toString();
 	}

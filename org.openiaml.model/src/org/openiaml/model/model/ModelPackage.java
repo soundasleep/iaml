@@ -3040,13 +3040,22 @@ public interface ModelPackage extends EPackage {
 	int VISIBLE_THING__ON_CLICK = CONTAINS_CONDITIONS_FEATURE_COUNT + 24;
 
 	/**
+	 * The feature id for the '<em><b>Field Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VISIBLE_THING__FIELD_VALUE = CONTAINS_CONDITIONS_FEATURE_COUNT + 25;
+
+	/**
 	 * The number of structural features of the '<em>Visible Thing</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VISIBLE_THING_FEATURE_COUNT = CONTAINS_CONDITIONS_FEATURE_COUNT + 25;
+	int VISIBLE_THING_FEATURE_COUNT = CONTAINS_CONDITIONS_FEATURE_COUNT + 26;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.ContainsProperties <em>Contains Properties</em>}' class.
@@ -6352,6 +6361,17 @@ public interface ModelPackage extends EPackage {
 	EReference getVisibleThing_OnClick();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.openiaml.model.model.VisibleThing#getFieldValue <em>Field Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Field Value</em>'.
+	 * @see org.openiaml.model.model.VisibleThing#getFieldValue()
+	 * @see #getVisibleThing()
+	 * @generated
+	 */
+	EAttribute getVisibleThing_FieldValue();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.ContainsProperties <em>Contains Properties</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7673,6 +7693,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference VISIBLE_THING__ON_CLICK = eINSTANCE.getVisibleThing_OnClick();
+
+		/**
+		 * The meta object literal for the '<em><b>Field Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute VISIBLE_THING__FIELD_VALUE = eINSTANCE.getVisibleThing_FieldValue();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.ContainsProperties <em>Contains Properties</em>}' class.

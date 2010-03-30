@@ -43,6 +43,13 @@ body#summary div.intro + .semantic_block { margin-top: .6em; }
 	{ margin-bottom: 0.3em; }
 .none { margin-bottom: 1em; }
 
+.semantic_block div.tagline {
+	margin-left: 1em;
+	margin-bottom: 0.5em;
+	font-size: 90%;
+	color: #666;
+}
+
 .inherited_block { color: #999; font-size: 0.9em; }
 .inherited_block a { color: #999; }
 .inherited_block a:hover { color: #789; }

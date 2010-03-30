@@ -167,4 +167,3 @@ context model::visual::InputTextField ERROR "InputTextField type '" + type.uRI +
 	type == null ||
 	properties.select(e | e.name == "fieldValue").isEmpty ||
 	properties.select(e | e.name == "fieldValue").select(e | e.type.uRI != type.uRI).isEmpty;
-	

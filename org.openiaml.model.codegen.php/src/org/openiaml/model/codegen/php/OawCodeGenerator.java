@@ -17,7 +17,9 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.jaxen.JaxenException;
 import org.openarchitectureware.workflow.WorkflowRunner;
 import org.openarchitectureware.workflow.util.ProgressMonitorAdapter;
@@ -147,6 +149,23 @@ public class OawCodeGenerator implements ICodeGenerator, ICodeGeneratorInMemory 
 			key = key.substring(0, key.indexOf("\t"));
 		}
 		return keyToExceptionMap.get(key);
+	}
+	
+	/**
+	 * Does the given EObject have an {@link EAttribute} 'name' that can be
+	 * overridden with a new {@link Property}?
+	 * 
+	 * @param object the EObject to check (checks the {@link EObject#eClass() EClass})
+	 * @param name the property name to check
+	 * @return true only if the given property name exists, and is an {@link EAttribute}
+	 */
+	public static boolean isValidPropertyName(EObject object, String name) {
+		EStructuralFeature f = object.eClass().getEStructuralFeature(name);
+		if (f == null)
+			return false;
+		
+		// only EAttributes can be overridden as properties
+		return f instanceof EAttribute;
 	}
 	
 	/**

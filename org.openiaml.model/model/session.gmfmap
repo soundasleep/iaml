@@ -186,7 +186,7 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//Scope/properties"/>
+        href="iaml.ecore#//ContainsProperties/properties"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//Property"/>

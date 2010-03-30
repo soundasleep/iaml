@@ -84,7 +84,7 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//DomainStore/properties"/>
+        href="iaml.ecore#//ContainsProperties/properties"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//Property"/>

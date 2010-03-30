@@ -324,9 +324,9 @@
 «DEFINE attribute(Boolean local) FOR modeldoc::EMFAttribute»
 	<li>
 		«IF local»
-		«name»
+		<a name="«name»">«name»</a>
 		«ELSE»
-		<a href="«fileName(containingType)»">«name»</a>
+		<a name="«name»" href="«fileName(containingType)»#«name»">«name»</a>
 		«ENDIF»
 		:
 		«type»
@@ -349,9 +349,9 @@
 «DEFINE reference(Boolean local) FOR modeldoc::EMFReference»
 	<li>
 		«IF local»
-		«name»
+		<a name="«name»">«name»</a>
 		«ELSE»
-		<a href="«fileName(containingType)»">«name»</a>
+		<a name="«name»" href="«fileName(containingType)»#«name»">«name»</a>
 		«ENDIF»
 		:
 		«IF lowerBound == upperBound»
@@ -368,7 +368,7 @@
 		
 		«IF opposite != null»
 		<span class="opposite_block">
-		[opposite: <a href="«fileName(opposite.containingType)»">«opposite.name»</a>]
+		[opposite: <a href="«fileName(opposite.containingType)»#«opposite.name»">«opposite.name»</a>]
 		</span>
 		«ENDIF»
 		
@@ -383,9 +383,9 @@
 «DEFINE extension(Boolean local) FOR modeldoc::ModelExtension»
 	<li class="extension">
 		«IF local»
-		«value»
+		<a name="«name»">«name»</a>
 		«ELSE»
-		<a href="«fileName(containingClass)»">«value»</a>
+		<a name="«name»" href="«fileName(containingClass)»#«value»">«value»</a>
 		«ENDIF»
 		
 		<span class="javadoc_reference">«EXPAND linkReference FOR reference»</span>
@@ -410,13 +410,30 @@
 «IF !(value.startsWith(",") || value.startsWith(".") || value.startsWith("?"))»«" "»«ENDIF»«value-»
 «ENDDEFINE»
 
+«REM»the formatting is ugly, but we sadly can't have _any_ whitespace«ENDREM»
 «DEFINE javadocModelElement FOR modeldoc::JavadocTextElement-»
-«" "»«IF value.contains(".") || value.contains("#")-»
+«" "»«IF value.contains(".")-»
 «value-»«REM»the value contains an illegal character; it can't link to a model element«ENDREM»
 «ELSE-»
 «IF value.trim().contains(" ")-»
-«LET value.trim().split(" ") AS bits-»<a href="«bits.first()».html">«FOREACH bits.withoutFirst().withoutLast() AS s»«s» «ENDFOREACH»«bits.last()»</a>«ENDLET-»
-«ELSE-»<a href="«value».html">«value»</a>«ENDIF-»
+«LET value.trim().split(" ") AS bits-»
+«IF bits.first().contains("#")-»
+«LET bits.first().trim().split("#") AS hashBits-»
+<a href="«hashBits.first()».html#«hashBits.withoutFirst().first()»">
+«ENDLET-»
+«ELSE-»
+<a href="«bits.first()».html">
+«ENDIF-»
+«FOREACH bits.withoutFirst().withoutLast() AS s»«s» «ENDFOREACH»«bits.last()»</a>«ENDLET-»
+«ELSE-»
+«IF value.trim().contains("#")-»
+«LET value.trim().split("#") AS hashBits-»
+<a href="«hashBits.first()».html#«hashBits.withoutFirst().first()»">«hashBits.withoutFirst().first()»</a>
+«ENDLET-» 
+«ELSE-»
+<a href="«value».html">«value»</a>
+«ENDIF-»
+«ENDIF-»
 «ENDIF-»
 «ENDDEFINE»
 

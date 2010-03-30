@@ -28,8 +28,16 @@ form {
 	background: #eee;
 }
 
-a { color: #369; text-decoration: underline; }
-a:hover { color: #036; text-decoration: underline; }
+a { text-decoration: none; cursor: auto; color: auto; }
+a[href] {
+	cursor: pointer;
+	color: #369;
+	text-decoration: underline;
+}
+a[href]:hover {
+	color: #036;
+	text-decoration: underline;
+}
 
 h2 { margin-top: 0em; margin-bottom: .2em; padding: .2em .4em .2em .4em; background: #eee; }
 body#summary div.intro + .semantic_block { margin-top: .6em; }

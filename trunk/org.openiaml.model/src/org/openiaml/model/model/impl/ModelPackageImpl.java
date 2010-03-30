@@ -2242,7 +2242,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	protected void createCommentAnnotations() {
-		String source = "http://openiaml.org/comment";				
+		String source = "http://openiaml.org/comment";					
 		addAnnotation
 		  (wireEClass, 
 		   source, 
@@ -2396,7 +2396,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "changed", "0.4 from 0..1 to 0..*"
-		   });		
+		   });				
 		addAnnotation
 		  (getGeneratedElement_GeneratedRule(), 
 		   source, 
@@ -2519,6 +2519,12 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 			 "documentation", "An element with a name."
 		   });		
 		addAnnotation
+		  (getNamedElement_Name(), 
+		   source, 
+		   new String[] {
+			 "documentation", "A non-unique string that names a given object. {@model Property Properties}, {@model Operation}s and {@model Condition}s add special semantic meaning to names."
+		   });		
+		addAnnotation
 		  (wireEClass, 
 		   source, 
 		   new String[] {
@@ -2625,7 +2631,19 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "A GeneratedElement may have been created manually, or initialised through model completion {@model GeneratesElements by another element}."
-		   });					
+		   });			
+		addAnnotation
+		  (getGeneratedElement_GeneratedBy(), 
+		   source, 
+		   new String[] {
+			 "documentation", "A list of {@model GeneratesElements elements} that generated this element; conversely, {@model GeneratesElements#overridden overriding} the source will prevent {@model GeneratedElement this element} from being created."
+		   });		
+		addAnnotation
+		  (getGeneratedElement_Id(), 
+		   source, 
+		   new String[] {
+			 "documentation", "A unique identifier for this model element. Should be globally unique."
+		   });				
 		addAnnotation
 		  (domainObjectInstanceEClass, 
 		   source, 

@@ -259,13 +259,22 @@ public interface ScopesPackage extends EPackage {
 	int SESSION__OUT_ACTIONS = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 15;
 
 	/**
+	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SESSION__PROPERTIES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 16;
+
+	/**
 	 * The feature id for the '<em><b>Entry Gate</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SESSION__ENTRY_GATE = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 16;
+	int SESSION__ENTRY_GATE = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 17;
 
 	/**
 	 * The feature id for the '<em><b>Exit Gate</b></em>' containment reference.
@@ -274,16 +283,7 @@ public interface ScopesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SESSION__EXIT_GATE = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 17;
-
-	/**
-	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SESSION__PROPERTIES = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 18;
+	int SESSION__EXIT_GATE = ModelPackage.NAMED_ELEMENT_FEATURE_COUNT + 18;
 
 	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.

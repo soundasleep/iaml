@@ -22,6 +22,7 @@ import org.openiaml.model.model.Action;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsConditions;
+import org.openiaml.model.model.ContainsProperties;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.GeneratedElement;
@@ -1086,6 +1087,12 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 				default: return -1;
 			}
 		}
+		if (baseClass == ContainsProperties.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.INTERNET_APPLICATION__PROPERTIES: return ModelPackage.CONTAINS_PROPERTIES__PROPERTIES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -1134,6 +1141,12 @@ public class InternetApplicationImpl extends EObjectImpl implements InternetAppl
 		if (baseClass == ContainsConditions.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.CONTAINS_CONDITIONS__CONDITIONS: return ModelPackage.INTERNET_APPLICATION__CONDITIONS;
+				default: return -1;
+			}
+		}
+		if (baseClass == ContainsProperties.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.CONTAINS_PROPERTIES__PROPERTIES: return ModelPackage.INTERNET_APPLICATION__PROPERTIES;
 				default: return -1;
 			}
 		}

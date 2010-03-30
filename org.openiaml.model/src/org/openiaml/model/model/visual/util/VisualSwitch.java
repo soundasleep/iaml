@@ -16,6 +16,7 @@ import org.openiaml.model.model.ActionSource;
 import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsOperations;
+import org.openiaml.model.model.ContainsProperties;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.Editable;
 import org.openiaml.model.model.GeneratedElement;
@@ -117,6 +118,7 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseCanBeSynced(frame);
 				if (result == null) result = caseAccessible(frame);
 				if (result == null) result = caseActionSource(frame);
+				if (result == null) result = caseContainsProperties(frame);
 				if (result == null) result = caseGeneratesElements(frame);
 				if (result == null) result = caseNamedElement(frame);
 				if (result == null) result = caseGeneratedElement(frame);
@@ -137,6 +139,7 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseParameterEdgesSource(inputForm);
 				if (result == null) result = caseEditable(inputForm);
 				if (result == null) result = caseAccessible(inputForm);
+				if (result == null) result = caseContainsProperties(inputForm);
 				if (result == null) result = caseContainsConditions(inputForm);
 				if (result == null) result = caseContainsOperations(inputForm);
 				if (result == null) result = caseWireSource(inputForm);
@@ -157,6 +160,7 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseParameterEdgesSource(inputTextField);
 				if (result == null) result = caseEditable(inputTextField);
 				if (result == null) result = caseAccessible(inputTextField);
+				if (result == null) result = caseContainsProperties(inputTextField);
 				if (result == null) result = caseContainsConditions(inputTextField);
 				if (result == null) result = caseContainsOperations(inputTextField);
 				if (result == null) result = caseWireSource(inputTextField);
@@ -178,6 +182,7 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseParameterEdgesSource(button);
 				if (result == null) result = caseEditable(button);
 				if (result == null) result = caseAccessible(button);
+				if (result == null) result = caseContainsProperties(button);
 				if (result == null) result = caseContainsConditions(button);
 				if (result == null) result = caseContainsOperations(button);
 				if (result == null) result = caseWireSource(button);
@@ -198,6 +203,7 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseParameterEdgesSource(label);
 				if (result == null) result = caseEditable(label);
 				if (result == null) result = caseAccessible(label);
+				if (result == null) result = caseContainsProperties(label);
 				if (result == null) result = caseContainsConditions(label);
 				if (result == null) result = caseContainsOperations(label);
 				if (result == null) result = caseWireSource(label);
@@ -541,6 +547,21 @@ public class VisualSwitch<T> {
 	 * @generated
 	 */
 	public T caseActionSource(ActionSource object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Contains Properties</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Contains Properties</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseContainsProperties(ContainsProperties object) {
 		return null;
 	}
 

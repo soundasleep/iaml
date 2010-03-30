@@ -242,15 +242,6 @@ public interface UsersPackage extends EPackage {
 	int USER_STORE__IN_WIRES = ModelPackage.DOMAIN_STORE__IN_WIRES;
 
 	/**
-	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int USER_STORE__CHILDREN = ModelPackage.DOMAIN_STORE__CHILDREN;
-
-	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -258,6 +249,15 @@ public interface UsersPackage extends EPackage {
 	 * @ordered
 	 */
 	int USER_STORE__PROPERTIES = ModelPackage.DOMAIN_STORE__PROPERTIES;
+
+	/**
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_STORE__CHILDREN = ModelPackage.DOMAIN_STORE__CHILDREN;
 
 	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.

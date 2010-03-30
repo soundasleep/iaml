@@ -8,11 +8,11 @@ import org.eclipse.xsd.XSDSimpleTypeDefinition;
 import org.openiaml.model.model.Accessible;
 import org.openiaml.model.model.ActionDestination;
 import org.openiaml.model.model.ActionSource;
-import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsOperations;
+import org.openiaml.model.model.ContainsProperties;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DataFlowEdgeDestination;
@@ -94,20 +94,8 @@ import org.openiaml.model.model.wires.WiresPackage;
  */
 public abstract class EcoreCreateElementsHelper implements ICreateElements {
 
-	public Property generatedProperty(GeneratesElements by, ApplicationElement container) throws InferenceException {
-		Property fieldValue = (Property) createElement( container, ModelPackage.eINSTANCE.getProperty(), ModelPackage.eINSTANCE.getApplicationElement_Properties() );
-		setGeneratedBy(fieldValue, by);
-		return fieldValue;
-	}
-
-	public Property generatedProperty(GeneratesElements by, VisibleThing container) throws InferenceException {
-		Property fieldValue = (Property) createElement( container, ModelPackage.eINSTANCE.getProperty(), ModelPackage.eINSTANCE.getVisibleThing_Properties() );
-		setGeneratedBy(fieldValue, by);
-		return fieldValue;
-	}
-	
-	public Property generatedProperty(GeneratesElements by, Scope container) throws InferenceException {
-		Property fieldValue = (Property) createElement( container, ModelPackage.eINSTANCE.getProperty(), ModelPackage.eINSTANCE.getScope_Properties() );
+	public Property generatedProperty(GeneratesElements by, ContainsProperties container) throws InferenceException {
+		Property fieldValue = (Property) createElement( container, ModelPackage.eINSTANCE.getProperty(), ModelPackage.eINSTANCE.getContainsProperties_Properties() );
 		setGeneratedBy(fieldValue, by);
 		return fieldValue;
 	}

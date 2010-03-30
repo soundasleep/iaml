@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.Action;
 import org.openiaml.model.model.ContainsConditions;
+import org.openiaml.model.model.ContainsProperties;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
@@ -132,6 +133,7 @@ public class WiresSwitch<T> {
 				if (result == null) result = caseContainsWires(compositeWire);
 				if (result == null) result = caseGeneratesElements(compositeWire);
 				if (result == null) result = caseContainsConditions(compositeWire);
+				if (result == null) result = caseContainsProperties(compositeWire);
 				if (result == null) result = caseGeneratedElement(compositeWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -148,6 +150,7 @@ public class WiresSwitch<T> {
 				if (result == null) result = caseContainsWires(syncWire);
 				if (result == null) result = caseGeneratesElements(syncWire);
 				if (result == null) result = caseContainsConditions(syncWire);
+				if (result == null) result = caseContainsProperties(syncWire);
 				if (result == null) result = caseGeneratedElement(syncWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -184,6 +187,7 @@ public class WiresSwitch<T> {
 				if (result == null) result = caseContainsWires(setWire);
 				if (result == null) result = caseGeneratesElements(setWire);
 				if (result == null) result = caseContainsConditions(setWire);
+				if (result == null) result = caseContainsProperties(setWire);
 				if (result == null) result = caseGeneratedElement(setWire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -735,6 +739,21 @@ public class WiresSwitch<T> {
 	 * @generated
 	 */
 	public T caseContainsConditions(ContainsConditions object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Contains Properties</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Contains Properties</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseContainsProperties(ContainsProperties object) {
 		return null;
 	}
 

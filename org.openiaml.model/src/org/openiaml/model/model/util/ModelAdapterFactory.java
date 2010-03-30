@@ -23,6 +23,7 @@ import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ConditionalEdge;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsOperations;
+import org.openiaml.model.model.ContainsProperties;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DataFlowEdgeDestination;
@@ -185,6 +186,10 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseVisibleThing(VisibleThing object) {
 				return createVisibleThingAdapter();
+			}
+			@Override
+			public Adapter caseContainsProperties(ContainsProperties object) {
+				return createContainsPropertiesAdapter();
 			}
 			@Override
 			public Adapter caseInternetApplication(InternetApplication object) {
@@ -573,6 +578,20 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createVisibleThingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.ContainsProperties <em>Contains Properties</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.ContainsProperties
+	 * @generated
+	 */
+	public Adapter createContainsPropertiesAdapter() {
 		return null;
 	}
 

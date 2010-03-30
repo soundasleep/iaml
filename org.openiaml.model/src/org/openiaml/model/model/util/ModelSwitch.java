@@ -23,6 +23,7 @@ import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ConditionalEdge;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsOperations;
+import org.openiaml.model.model.ContainsProperties;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DataFlowEdgeDestination;
@@ -185,6 +186,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseExtendsEdgeDestination(domainObject);
 				if (result == null) result = caseEditable(domainObject);
 				if (result == null) result = caseCanBeSynced(domainObject);
+				if (result == null) result = caseContainsProperties(domainObject);
 				if (result == null) result = caseContainsOperations(domainObject);
 				if (result == null) result = caseNamedElement(domainObject);
 				if (result == null) result = caseGeneratedElement(domainObject);
@@ -206,6 +208,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseExtendsEdgeDestination(domainAttribute);
 				if (result == null) result = caseEditable(domainAttribute);
 				if (result == null) result = caseCanBeSynced(domainAttribute);
+				if (result == null) result = caseContainsProperties(domainAttribute);
 				if (result == null) result = caseContainsOperations(domainAttribute);
 				if (result == null) result = caseNamedElement(domainAttribute);
 				if (result == null) result = caseGeneratedElement(domainAttribute);
@@ -299,6 +302,7 @@ public class ModelSwitch<T> {
 				ApplicationElement applicationElement = (ApplicationElement)theEObject;
 				T result = caseApplicationElement(applicationElement);
 				if (result == null) result = caseCanBeSynced(applicationElement);
+				if (result == null) result = caseContainsProperties(applicationElement);
 				if (result == null) result = caseContainsOperations(applicationElement);
 				if (result == null) result = caseNamedElement(applicationElement);
 				if (result == null) result = caseGeneratedElement(applicationElement);
@@ -346,6 +350,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseParameterEdgesSource(visibleThing);
 				if (result == null) result = caseEditable(visibleThing);
 				if (result == null) result = caseAccessible(visibleThing);
+				if (result == null) result = caseContainsProperties(visibleThing);
 				if (result == null) result = caseContainsConditions(visibleThing);
 				if (result == null) result = caseContainsOperations(visibleThing);
 				if (result == null) result = caseWireSource(visibleThing);
@@ -358,6 +363,12 @@ public class ModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ModelPackage.CONTAINS_PROPERTIES: {
+				ContainsProperties containsProperties = (ContainsProperties)theEObject;
+				T result = caseContainsProperties(containsProperties);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case ModelPackage.INTERNET_APPLICATION: {
 				InternetApplication internetApplication = (InternetApplication)theEObject;
 				T result = caseInternetApplication(internetApplication);
@@ -366,6 +377,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseContainsWires(internetApplication);
 				if (result == null) result = caseGeneratesElements(internetApplication);
 				if (result == null) result = caseContainsConditions(internetApplication);
+				if (result == null) result = caseContainsProperties(internetApplication);
 				if (result == null) result = caseGeneratedElement(internetApplication);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -374,6 +386,7 @@ public class ModelSwitch<T> {
 				DomainStore domainStore = (DomainStore)theEObject;
 				T result = caseDomainStore(domainStore);
 				if (result == null) result = caseCanBeSynced(domainStore);
+				if (result == null) result = caseContainsProperties(domainStore);
 				if (result == null) result = caseContainsOperations(domainStore);
 				if (result == null) result = caseNamedElement(domainStore);
 				if (result == null) result = caseGeneratedElement(domainStore);
@@ -450,6 +463,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseApplicationElement(dynamicApplicationElementSet);
 				if (result == null) result = caseParameterEdgesSource(dynamicApplicationElementSet);
 				if (result == null) result = caseCanBeSynced(dynamicApplicationElementSet);
+				if (result == null) result = caseContainsProperties(dynamicApplicationElementSet);
 				if (result == null) result = caseContainsOperations(dynamicApplicationElementSet);
 				if (result == null) result = caseNamedElement(dynamicApplicationElementSet);
 				if (result == null) result = caseGeneratedElement(dynamicApplicationElementSet);
@@ -495,6 +509,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseParameterEdgesSource(domainObjectInstance);
 				if (result == null) result = caseEditable(domainObjectInstance);
 				if (result == null) result = caseCanBeSynced(domainObjectInstance);
+				if (result == null) result = caseContainsProperties(domainObjectInstance);
 				if (result == null) result = caseContainsOperations(domainObjectInstance);
 				if (result == null) result = caseNamedElement(domainObjectInstance);
 				if (result == null) result = caseGeneratedElement(domainObjectInstance);
@@ -513,6 +528,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseCanBeSynced(scope);
 				if (result == null) result = caseAccessible(scope);
 				if (result == null) result = caseActionSource(scope);
+				if (result == null) result = caseContainsProperties(scope);
 				if (result == null) result = caseGeneratesElements(scope);
 				if (result == null) result = caseNamedElement(scope);
 				if (result == null) result = caseGeneratedElement(scope);
@@ -569,6 +585,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseExtendsEdgeDestination(domainAttributeInstance);
 				if (result == null) result = caseEditable(domainAttributeInstance);
 				if (result == null) result = caseCanBeSynced(domainAttributeInstance);
+				if (result == null) result = caseContainsProperties(domainAttributeInstance);
 				if (result == null) result = caseContainsOperations(domainAttributeInstance);
 				if (result == null) result = caseNamedElement(domainAttributeInstance);
 				if (result == null) result = caseGeneratedElement(domainAttributeInstance);
@@ -898,6 +915,21 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseVisibleThing(VisibleThing object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Contains Properties</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Contains Properties</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseContainsProperties(ContainsProperties object) {
 		return null;
 	}
 

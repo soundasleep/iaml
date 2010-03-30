@@ -16,6 +16,7 @@ import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsOperations;
+import org.openiaml.model.model.ContainsProperties;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
@@ -114,6 +115,7 @@ public class ComponentsSwitch<T> {
 				if (result == null) result = caseApplicationElement(loginHandler);
 				if (result == null) result = caseActionSource(loginHandler);
 				if (result == null) result = caseCanBeSynced(loginHandler);
+				if (result == null) result = caseContainsProperties(loginHandler);
 				if (result == null) result = caseGeneratesElements(loginHandler);
 				if (result == null) result = caseContainsOperations(loginHandler);
 				if (result == null) result = caseNamedElement(loginHandler);
@@ -133,6 +135,7 @@ public class ComponentsSwitch<T> {
 				if (result == null) result = caseRequiresEdgesSource(accessControlHandler);
 				if (result == null) result = caseApplicationElement(accessControlHandler);
 				if (result == null) result = caseCanBeSynced(accessControlHandler);
+				if (result == null) result = caseContainsProperties(accessControlHandler);
 				if (result == null) result = caseGeneratesElements(accessControlHandler);
 				if (result == null) result = caseContainsOperations(accessControlHandler);
 				if (result == null) result = caseNamedElement(accessControlHandler);
@@ -421,6 +424,21 @@ public class ComponentsSwitch<T> {
 	 * @generated
 	 */
 	public T caseCanBeSynced(CanBeSynced object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Contains Properties</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Contains Properties</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseContainsProperties(ContainsProperties object) {
 		return null;
 	}
 

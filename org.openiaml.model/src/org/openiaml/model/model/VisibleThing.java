@@ -23,7 +23,6 @@ import org.openiaml.model.model.wires.ParameterEdgesSource;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.openiaml.model.model.VisibleThing#getChildren <em>Children</em>}</li>
- *   <li>{@link org.openiaml.model.model.VisibleThing#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.VisibleThing#getValues <em>Values</em>}</li>
  *   <li>{@link org.openiaml.model.model.VisibleThing#getOnClick <em>On Click</em>}</li>
  * </ul>
@@ -33,7 +32,7 @@ import org.openiaml.model.model.wires.ParameterEdgesSource;
  * @model annotation="http://openiaml.org/comment comment='this used to mean nothing; now anything that extends VisibleThing (which unforuntately needs to be concrete) has an editor' editor='org.openiaml.model.diagram.visual' changed='0.4.2 to no longer extend ApplicationElementContainer\r\n0.4.2 extends ContainsConditions\r\n0.4.2 extends ContainsOperatons\r\n0.4.2 extends ContainsEventTriggers\r\n0.4.2 extends ContainsWires\r\n0.4.2 extends WireEdgesSource\r\n0.4.2 extends WireEdgeDestination\r\n0.4.2 removed \'sessions\' containment\r\n0.4.4 no longer ContainsEventTriggers; events inserted manually'"
  * @generated
  */
-public interface VisibleThing extends ContainsConditions, ContainsOperations, ContainsWires, WireSource, WireDestination, NamedElement, GeneratedElement, GeneratesElements, CanBeSynced, ParameterEdgesSource, Editable, Accessible {
+public interface VisibleThing extends ContainsConditions, ContainsOperations, ContainsWires, WireSource, WireDestination, NamedElement, GeneratedElement, GeneratesElements, CanBeSynced, ParameterEdgesSource, Editable, Accessible, ContainsProperties {
 
 	/**
 	 * Returns the value of the '<em><b>Children</b></em>' containment reference list.
@@ -51,23 +50,6 @@ public interface VisibleThing extends ContainsConditions, ContainsOperations, Co
 	 * @generated
 	 */
 	EList<VisibleThing> getChildren();
-
-	/**
-	 * Returns the value of the '<em><b>Properties</b></em>' containment reference list.
-	 * The list contents are of type {@link org.openiaml.model.model.Property}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Properties</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Properties</em>' containment reference list.
-	 * @see org.openiaml.model.model.ModelPackage#getVisibleThing_Properties()
-	 * @model containment="true"
-	 *        annotation="http://openiaml.org/comment added='0.4.2'"
-	 * @generated
-	 */
-	EList<Property> getProperties();
 
 	/**
 	 * Returns the value of the '<em><b>Values</b></em>' containment reference list.

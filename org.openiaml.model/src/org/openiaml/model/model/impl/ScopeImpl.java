@@ -26,6 +26,7 @@ import org.openiaml.model.model.CanBeSynced;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsOperations;
+import org.openiaml.model.model.ContainsProperties;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.GeneratedElement;
@@ -78,9 +79,9 @@ import org.openiaml.model.model.wires.RequiresEdge;
  *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getOperations <em>Operations</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getOnAccess <em>On Access</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getOutActions <em>Out Actions</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getEntryGate <em>Entry Gate</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getExitGate <em>Exit Gate</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getValues <em>Values</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ScopeImpl#getElements <em>Elements</em>}</li>
@@ -353,6 +354,16 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 	protected EList<Action> outActions;
 
 	/**
+	 * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProperties()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Property> properties;
+
+	/**
 	 * The cached value of the '{@link #getEntryGate() <em>Entry Gate</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -371,16 +382,6 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 	 * @ordered
 	 */
 	protected ExitGate exitGate;
-
-	/**
-	 * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getProperties()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Property> properties;
 
 	/**
 	 * The cached value of the '{@link #getValues() <em>Values</em>}' containment reference list.
@@ -1031,12 +1032,12 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 				return basicSetOnAccess(null, msgs);
 			case ModelPackage.SCOPE__OUT_ACTIONS:
 				return ((InternalEList<?>)getOutActions()).basicRemove(otherEnd, msgs);
+			case ModelPackage.SCOPE__PROPERTIES:
+				return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
 			case ModelPackage.SCOPE__ENTRY_GATE:
 				return basicSetEntryGate(null, msgs);
 			case ModelPackage.SCOPE__EXIT_GATE:
 				return basicSetExitGate(null, msgs);
-			case ModelPackage.SCOPE__PROPERTIES:
-				return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
 			case ModelPackage.SCOPE__VALUES:
 				return ((InternalEList<?>)getValues()).basicRemove(otherEnd, msgs);
 			case ModelPackage.SCOPE__PARAMETERS:
@@ -1101,12 +1102,12 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 				return getOnAccess();
 			case ModelPackage.SCOPE__OUT_ACTIONS:
 				return getOutActions();
+			case ModelPackage.SCOPE__PROPERTIES:
+				return getProperties();
 			case ModelPackage.SCOPE__ENTRY_GATE:
 				return getEntryGate();
 			case ModelPackage.SCOPE__EXIT_GATE:
 				return getExitGate();
-			case ModelPackage.SCOPE__PROPERTIES:
-				return getProperties();
 			case ModelPackage.SCOPE__VALUES:
 				return getValues();
 			case ModelPackage.SCOPE__PARAMETERS:
@@ -1208,15 +1209,15 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 				getOutActions().clear();
 				getOutActions().addAll((Collection<? extends Action>)newValue);
 				return;
+			case ModelPackage.SCOPE__PROPERTIES:
+				getProperties().clear();
+				getProperties().addAll((Collection<? extends Property>)newValue);
+				return;
 			case ModelPackage.SCOPE__ENTRY_GATE:
 				setEntryGate((EntryGate)newValue);
 				return;
 			case ModelPackage.SCOPE__EXIT_GATE:
 				setExitGate((ExitGate)newValue);
-				return;
-			case ModelPackage.SCOPE__PROPERTIES:
-				getProperties().clear();
-				getProperties().addAll((Collection<? extends Property>)newValue);
 				return;
 			case ModelPackage.SCOPE__VALUES:
 				getValues().clear();
@@ -1312,14 +1313,14 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 			case ModelPackage.SCOPE__OUT_ACTIONS:
 				getOutActions().clear();
 				return;
+			case ModelPackage.SCOPE__PROPERTIES:
+				getProperties().clear();
+				return;
 			case ModelPackage.SCOPE__ENTRY_GATE:
 				setEntryGate((EntryGate)null);
 				return;
 			case ModelPackage.SCOPE__EXIT_GATE:
 				setExitGate((ExitGate)null);
-				return;
-			case ModelPackage.SCOPE__PROPERTIES:
-				getProperties().clear();
 				return;
 			case ModelPackage.SCOPE__VALUES:
 				getValues().clear();
@@ -1390,12 +1391,12 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 				return onAccess != null;
 			case ModelPackage.SCOPE__OUT_ACTIONS:
 				return outActions != null && !outActions.isEmpty();
+			case ModelPackage.SCOPE__PROPERTIES:
+				return properties != null && !properties.isEmpty();
 			case ModelPackage.SCOPE__ENTRY_GATE:
 				return entryGate != null;
 			case ModelPackage.SCOPE__EXIT_GATE:
 				return exitGate != null;
-			case ModelPackage.SCOPE__PROPERTIES:
-				return properties != null && !properties.isEmpty();
 			case ModelPackage.SCOPE__VALUES:
 				return values != null && !values.isEmpty();
 			case ModelPackage.SCOPE__PARAMETERS:
@@ -1491,6 +1492,12 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 				default: return -1;
 			}
 		}
+		if (baseClass == ContainsProperties.class) {
+			switch (derivedFeatureID) {
+				case ModelPackage.SCOPE__PROPERTIES: return ModelPackage.CONTAINS_PROPERTIES__PROPERTIES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -1572,6 +1579,12 @@ public abstract class ScopeImpl extends EObjectImpl implements Scope {
 		if (baseClass == ActionSource.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.ACTION_SOURCE__OUT_ACTIONS: return ModelPackage.SCOPE__OUT_ACTIONS;
+				default: return -1;
+			}
+		}
+		if (baseClass == ContainsProperties.class) {
+			switch (baseFeatureID) {
+				case ModelPackage.CONTAINS_PROPERTIES__PROPERTIES: return ModelPackage.SCOPE__PROPERTIES;
 				default: return -1;
 			}
 		}

@@ -20,7 +20,6 @@ import org.openiaml.model.model.components.ExitGate;
  * <ul>
  *   <li>{@link org.openiaml.model.model.Scope#getEntryGate <em>Entry Gate</em>}</li>
  *   <li>{@link org.openiaml.model.model.Scope#getExitGate <em>Exit Gate</em>}</li>
- *   <li>{@link org.openiaml.model.model.Scope#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.Scope#getValues <em>Values</em>}</li>
  *   <li>{@link org.openiaml.model.model.Scope#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.openiaml.model.model.Scope#getElements <em>Elements</em>}</li>
@@ -34,7 +33,7 @@ import org.openiaml.model.model.components.ExitGate;
  *        annotation="http://openiaml.org/comment changed='0.4: \'domainObjects\', \'domainViews\', \'domainInstances\' references removed\r\n0.4.2: renamed from \'Scope\' to \'AbstractScope\'; added \'gate\' reference'"
  * @generated
  */
-public interface Scope extends GeneratesElements, ContainsWires, NamedElement, GeneratedElement, WireSource, WireDestination, ContainsConditions, CanBeSynced, Accessible, ContainsOperations, ActionSource {
+public interface Scope extends GeneratesElements, ContainsWires, NamedElement, GeneratedElement, WireSource, WireDestination, ContainsConditions, CanBeSynced, Accessible, ContainsOperations, ActionSource, ContainsProperties {
 	/**
 	 * Returns the value of the '<em><b>Entry Gate</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -86,23 +85,6 @@ public interface Scope extends GeneratesElements, ContainsWires, NamedElement, G
 	 * @generated
 	 */
 	void setExitGate(ExitGate value);
-
-	/**
-	 * Returns the value of the '<em><b>Properties</b></em>' containment reference list.
-	 * The list contents are of type {@link org.openiaml.model.model.Property}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Properties</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Properties</em>' containment reference list.
-	 * @see org.openiaml.model.model.ModelPackage#getScope_Properties()
-	 * @model containment="true"
-	 *        annotation="http://openiaml.org/comment added='0.4.2'"
-	 * @generated
-	 */
-	EList<Property> getProperties();
 
 	/**
 	 * Returns the value of the '<em><b>Values</b></em>' containment reference list.

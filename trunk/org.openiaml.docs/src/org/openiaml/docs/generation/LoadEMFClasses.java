@@ -5,8 +5,6 @@ package org.openiaml.docs.generation;
 
 import java.util.List;
 
-import org.eclipse.emf.common.util.EMap;
-import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -23,7 +21,7 @@ import org.openiaml.docs.modeldoc.ModeldocFactory;
  * @author jmwright
  *
  */
-public class LoadEMFClasses implements ILoader {
+public class LoadEMFClasses extends EMFLoaderHelper implements ILoader {
 	
 	/**
 	 * The root EMF package to load from.
@@ -56,6 +54,7 @@ public class LoadEMFClasses implements ILoader {
 		this.generator = generator;
 	}
 
+	@Override
 	public List<ITagHandler> getSemanticTagHandlers() {
 		return generator.getSemanticTagHandlers();
 	}
@@ -84,7 +83,11 @@ public class LoadEMFClasses implements ILoader {
 				c.setAbstract(cls.isAbstract());
 				c.setInterface(cls.isInterface());
 
-				getTaglineForEMFClass(factory, cls, c);		// add tagline
+				// add tagline
+				JavadocTagElement e = getTaglineForEMFElement(factory, cls);
+				if (e != null) {
+					c.setTagline(e);
+				}
 				
 				c.setParent(root);
 				
@@ -115,41 +118,18 @@ public class LoadEMFClasses implements ILoader {
 			created.setUpperBound(a.getUpperBound());
 			created.setType(a.getEAttributeType().getName());
 			created.setDefaultLiteral(a.getDefaultValueLiteral());
+			
+			// add tagline
+			JavadocTagElement e = getTaglineForEMFElement(factory, a);
+			if (e != null) {
+				created.setTagline(e);
+			}
+			
 			target.getAttributes().add(created);
 		}
 		
 	}
 
-	/**
-	 * Get the tagline information for the given class.
-	 * Following EMF's documentation approach, we get the appropriate
-	 * EAnnotation if it exists. 
-	 * Modifies the provided EMFClass as necessary.
-	 * 
-	 * @param source
-	 * @param target
-	 */
-	protected void getTaglineForEMFClass(ModeldocFactory factory, EClass source, EMFClass target) {
-		EAnnotation ann = source.getEAnnotation("http://www.eclipse.org/emf/2002/GenModel");
-		if (ann != null) {
-			EMap<String, String> details = ann.getDetails();
-			for (String key : details.keySet()) {
-				if (key.equals("documentation")) {
-					// found a tag line
-					// parse for JavaDoc
-					JavadocTagElement e = factory.createJavadocTagElement();
-					
-					// parse the line into javadoc elements
-					// (the line needs to be parsed into fragments before we can find semantic references)
-					new BasicJavadocParser(getSemanticTagHandlers()).parseSemanticLineIntoFragments(details.get(key), factory, e);
-					
-					// save this parsed detail as a tagline
-					target.setTagline(e);
-				}
-			}
-		}
-	}
-	
 	/**
 	 * Link up a Java reference for the given EMFClass.
 	 * 

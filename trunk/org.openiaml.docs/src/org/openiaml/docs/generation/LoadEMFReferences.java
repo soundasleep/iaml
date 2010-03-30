@@ -4,12 +4,15 @@
 package org.openiaml.docs.generation;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
+import org.openiaml.docs.generation.semantics.ITagHandler;
 import org.openiaml.docs.modeldoc.EMFClass;
 import org.openiaml.docs.modeldoc.EMFReference;
+import org.openiaml.docs.modeldoc.JavadocTagElement;
 import org.openiaml.docs.modeldoc.ModelDocumentation;
 import org.openiaml.docs.modeldoc.ModeldocFactory;
 
@@ -19,6 +22,13 @@ import org.openiaml.docs.modeldoc.ModeldocFactory;
  */
 public class LoadEMFReferences extends DocumentationHelper implements ILoader {
 	
+	private DocumentationGenerator generator;
+	
+	public LoadEMFReferences(DocumentationGenerator generator) {
+		super();
+		this.generator = generator;
+	}
+
 	/**
 	 * Set up references.
 	 * 
@@ -48,6 +58,18 @@ public class LoadEMFReferences extends DocumentationHelper implements ILoader {
 					newRef.setType(refDestEMF);
 				}
 				newRef.setTypeName(refDest.getName());
+				
+				// add tagline
+				EMFLoaderHelper helper = new EMFLoaderHelper() {
+					@Override
+					public List<ITagHandler> getSemanticTagHandlers() {
+						return generator.getSemanticTagHandlers();
+					}
+				};
+				JavadocTagElement e = helper.getTaglineForEMFElement(factory, ref);
+				if (e != null) {
+					newRef.setTagline(e);
+				}
 				
 				source.getReferences().add(newRef);
 				

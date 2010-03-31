@@ -6,8 +6,10 @@
  */
 package org.openiaml.model.model.scopes.impl;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.xsd.XSDPackage;
 import org.openiaml.model.model.ModelPackage;
@@ -18,6 +20,7 @@ import org.openiaml.model.model.domain.impl.DomainPackageImpl;
 import org.openiaml.model.model.impl.ModelPackageImpl;
 import org.openiaml.model.model.operations.OperationsPackage;
 import org.openiaml.model.model.operations.impl.OperationsPackageImpl;
+import org.openiaml.model.model.scopes.Email;
 import org.openiaml.model.model.scopes.ScopesFactory;
 import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.scopes.Session;
@@ -41,6 +44,13 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 	 * @generated
 	 */
 	private EClass sessionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass emailEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -143,6 +153,96 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getEmail() {
+		return emailEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEmail_To() {
+		return (EAttribute)emailEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEmail_Subject() {
+		return (EAttribute)emailEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEmail_ToName() {
+		return (EAttribute)emailEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEmail_From() {
+		return (EAttribute)emailEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEmail_FromName() {
+		return (EAttribute)emailEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEmail_OnSent() {
+		return (EReference)emailEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEmail_OnFailure() {
+		return (EReference)emailEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEmail_Buttons() {
+		return (EReference)emailEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEmail_Labels() {
+		return (EReference)emailEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ScopesFactory getScopesFactory() {
 		return (ScopesFactory)getEFactoryInstance();
 	}
@@ -167,6 +267,17 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 
 		// Create classes and their features
 		sessionEClass = createEClass(SESSION);
+
+		emailEClass = createEClass(EMAIL);
+		createEAttribute(emailEClass, EMAIL__TO);
+		createEAttribute(emailEClass, EMAIL__SUBJECT);
+		createEAttribute(emailEClass, EMAIL__TO_NAME);
+		createEAttribute(emailEClass, EMAIL__FROM);
+		createEAttribute(emailEClass, EMAIL__FROM_NAME);
+		createEReference(emailEClass, EMAIL__ON_SENT);
+		createEReference(emailEClass, EMAIL__ON_FAILURE);
+		createEReference(emailEClass, EMAIL__BUTTONS);
+		createEReference(emailEClass, EMAIL__LABELS);
 	}
 
 	/**
@@ -194,6 +305,7 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 
 		// Obtain other dependent packages
 		ModelPackage theModelPackage = (ModelPackage)EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI);
+		VisualPackage theVisualPackage = (VisualPackage)EPackage.Registry.INSTANCE.getEPackage(VisualPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -207,9 +319,29 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 		sessionEClass.getESuperTypes().add(theModelPackage.getWireSource());
 		sessionEClass.getESuperTypes().add(theModelPackage.getWireDestination());
 		sessionEClass.getESuperTypes().add(theModelPackage.getContainsConditions());
+		emailEClass.getESuperTypes().add(theModelPackage.getNamedElement());
+		emailEClass.getESuperTypes().add(theModelPackage.getContainsOperations());
+		emailEClass.getESuperTypes().add(theModelPackage.getScope());
+		emailEClass.getESuperTypes().add(theModelPackage.getContainsWires());
+		emailEClass.getESuperTypes().add(theModelPackage.getWireSource());
+		emailEClass.getESuperTypes().add(theModelPackage.getWireDestination());
+		emailEClass.getESuperTypes().add(theModelPackage.getContainsConditions());
+		emailEClass.getESuperTypes().add(theModelPackage.getContainsProperties());
+		emailEClass.getESuperTypes().add(theModelPackage.getCanBeSynced());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(sessionEClass, Session.class, "Session", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(emailEClass, Email.class, "Email", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getEmail_To(), ecorePackage.getEString(), "to", null, 0, 1, Email.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEmail_Subject(), ecorePackage.getEString(), "subject", null, 0, 1, Email.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEmail_ToName(), ecorePackage.getEString(), "toName", null, 0, 1, Email.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEmail_From(), ecorePackage.getEString(), "from", null, 0, 1, Email.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEmail_FromName(), ecorePackage.getEString(), "fromName", null, 0, 1, Email.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEmail_OnSent(), theModelPackage.getEventTrigger(), null, "onSent", null, 0, 1, Email.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEmail_OnFailure(), theModelPackage.getEventTrigger(), null, "onFailure", null, 0, 1, Email.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEmail_Buttons(), theVisualPackage.getButton(), null, "buttons", null, 0, -1, Email.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEmail_Labels(), theVisualPackage.getLabel(), null, "labels", null, 0, -1, Email.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create annotations
 		// http://openiaml.org/comment
@@ -240,7 +372,7 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 		   source, 
 		   new String[] {
 			 "changed", "0.4: no longer extends VisibleThing; now extends ContainsEventTriggers, ContainsConditions, WireEdgesSource and WireEdgeDestination\r\n0.4.2 removed \'agents\' reference"
-		   });	
+		   });		
 	}
 
 	/**
@@ -256,6 +388,12 @@ public class ScopesPackageImpl extends EPackageImpl implements ScopesPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Represents a user session; contained data is normally not accessible by other users."
+		   });		
+		addAnnotation
+		  (emailEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Represents an e-mail. The lifecycle is as follows: {@model PrimitiveOperation send} -> {@model EventTrigger sent} or {@model EventTrigger failed}."
 		   });
 	}
 

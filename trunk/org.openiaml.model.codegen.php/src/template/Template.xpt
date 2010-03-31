@@ -129,6 +129,11 @@ require(ROOT_PATH . "email_definitions.php");
 	«EXPAND expandSession FOREACH scopes»
 «ENDDEFINE»
 
+«DEFINE expandSession FOR model::scopes::Email»
+	«REM»E-mails do not have any special expansion; expand as Session«ENDREM»
+	«EXPAND expandSession FOREACH scopes»
+«ENDDEFINE»
+
 «DEFINE expandSession FOR model::Scope»
 	«throwException("Unknown scope: " + this)»
 «ENDDEFINE»

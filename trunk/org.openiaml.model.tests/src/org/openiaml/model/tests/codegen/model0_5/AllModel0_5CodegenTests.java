@@ -24,6 +24,7 @@ public class AllModel0_5CodegenTests {
 		suite.addTestSuite(EmailExplicit.class);
 		suite.addTestSuite(EmailEvents.class);
 		suite.addTestSuite(EmailChangeProperties.class);
+		suite.addTestSuite(EmailInSession.class);
 
 		return suite;
 	}

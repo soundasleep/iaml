@@ -84,10 +84,11 @@ public class ScopesFactoryImpl extends EFactoryImpl implements ScopesFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public Email createEmail() {
 		EmailImpl email = new EmailImpl();
+		generateID(email);
 		return email;
 	}
 

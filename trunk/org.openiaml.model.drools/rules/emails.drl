@@ -24,7 +24,7 @@ global DroolsHelperFunctions functions;
  */
 rule "Create 'to' property for Email"
 	when
-		f : Email ( )
+		f : Email ( to != null )
 		not ( Property ( eContainer == f, name == "to" ))
 		not ( StaticValue ( eContainer == f, name == "to" ))
 		
@@ -46,7 +46,7 @@ end
  */
 rule "Create 'toName' property for Email"
 	when
-		f : Email ( )
+		f : Email ( toName != null )
 		not ( Property ( eContainer == f, name == "toName" ))
 		not ( StaticValue ( eContainer == f, name == "toName" ))
 		
@@ -68,7 +68,7 @@ end
  */
 rule "Create 'from' property for Email"
 	when
-		f : Email ( )
+		f : Email ( from != null )
 		not ( Property ( eContainer == f, name == "from" ))
 		not ( StaticValue ( eContainer == f, name == "from" ))
 		
@@ -90,7 +90,7 @@ end
  */
 rule "Create 'fromName' property for Email"
 	when
-		f : Email ( )
+		f : Email ( fromName != null )
 		not ( Property ( eContainer == f, name == "fromName" ))
 		not ( StaticValue ( eContainer == f, name == "fromName" ))
 		
@@ -112,7 +112,7 @@ end
  */
 rule "Create 'subject' property for Email"
 	when
-		f : Email ( )
+		f : Email ( subject != null )
 		not ( Property ( eContainer == f, name == "subject" ))
 		not ( StaticValue ( eContainer == f, name == "subject" ))
 		

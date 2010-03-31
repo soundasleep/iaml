@@ -23,6 +23,7 @@ public class AllModel0_5CodegenTests {
 		suite.addTestSuite(ExplicitFieldValue.class);
 		suite.addTestSuite(EmailExplicit.class);
 		suite.addTestSuite(EmailEvents.class);
+		suite.addTestSuite(EmailChangeProperties.class);
 
 		return suite;
 	}

@@ -80,7 +80,12 @@
 		
 		// use library function to send
 		$result = send_email($args);
-		if (!$result) {
+		if ($result) {
+			// process any onSent events
+			«IF onSent != null»
+				«EXPAND template::events::EventCall::callEvent(true) FOR onSent-»
+			«ENDIF»
+		} else {
 			// process any onFailure events
 			«IF onFailure != null»
 				«EXPAND template::events::EventCall::callEvent(true) FOR onFailure-»

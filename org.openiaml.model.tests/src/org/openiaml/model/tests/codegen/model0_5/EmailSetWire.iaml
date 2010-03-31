@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.127b1fff682.4be">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
+    <scopes xsi:type="iaml.scopes:Email" name="Email" inWires="wires.127b1fff8c4.17b" to="target@openiaml.org" from="source@openiaml.org">
+      <operations xsi:type="iaml:PrimitiveOperation" id="model.127b1fff682.4ca" name="send" inActions="wires.127b1fff8c4.183"/>
+    </scopes>
+    <children xsi:type="iaml.visual:InputForm" outWires="wires.127b1fff8c4.17b" id="visual.127b1fff818.3a9" name="form">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.127b1fff8c4.17b" from="visual.127b1fff818.3a9" to="//@scopes.0/@scopes.0" name="sync"/>
+      <children xsi:type="iaml.visual:InputTextField" id="visual.127b1fff818.3bd" name="field 1"/>
+      <children xsi:type="iaml.visual:InputTextField" id="visual.127b1fff818.3bf" name="field 2"/>
+      <children xsi:type="iaml.visual:InputTextField" id="visual.127b1fff818.3c0" name="field 3"/>
+    </children>
+    <children xsi:type="iaml.visual:Button" id="visual.127b1fff818.3f1" name="send email" outActions="wires.127b1fff8c4.183">
+      <actions xsi:type="iaml.wires:RunAction" id="wires.127b1fff8c4.183" name="onClick" from="visual.127b1fff818.3f1" to="model.127b1fff682.4ca"/>
+    </children>
+  </scopes>
+</iaml:InternetApplication>

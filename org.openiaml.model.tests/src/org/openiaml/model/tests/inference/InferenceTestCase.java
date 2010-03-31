@@ -56,6 +56,7 @@ import org.openiaml.model.model.operations.JoinNode;
 import org.openiaml.model.model.operations.OperationCallNode;
 import org.openiaml.model.model.operations.SplitNode;
 import org.openiaml.model.model.operations.StartNode;
+import org.openiaml.model.model.scopes.Email;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.users.RequiresEdgeDestination;
 import org.openiaml.model.model.users.RequiresEdgesSource;
@@ -653,11 +654,19 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	}
 
 	/**
-	 * Assert that the given element does not contain the given
-	 * Page.
+	 * Assert that the given element contains the given
+	 * Email.
 	 */
-	public void assertHasNoPage(InternetApplication root, String string) throws JaxenException {
-		assertHasNone(root, "iaml:children[iaml:name='" + string + "']");
+	public Email assertHasEmail(InternetApplication scope, String string) throws JaxenException {
+		return (Email) queryOne(scope, "iaml:scopes[iaml:name='" + string + "']");
+	}
+
+	/**
+	 * Assert that the given element contains the given
+	 * Email.
+	 */
+	public Email assertHasEmail(Scope scope, String string) throws JaxenException {
+		return (Email) queryOne(scope, "iaml:scopes[iaml:name='" + string + "']");
 	}
 
 	/**

@@ -2,6 +2,12 @@
 
 «EXTENSION template::GeneratorExtensions»
 
+/**
+ * @implementation Email
+ *		Currently, {@model Email#onSent success} and {@model Email#onFailure failure}
+ *		events are only considered when they occur directly after the {@model Email}
+ *		is sent.
+ */
 «DEFINE emailCallbackSend FOR model::InternetApplication-»
 <?php
 /**

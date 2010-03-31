@@ -72,7 +72,7 @@ public class UserRoles extends InferenceTestCase {
 		assertHasNoFrame(session, "logout");
 
 		// or a login page in the root
-		assertHasNoPage(root, "login");
+		assertHasNoFrame(root, "login");
 
 		// no operations in the ach or session
 		assertHasNone(ach, "iaml:operations");

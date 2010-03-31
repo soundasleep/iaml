@@ -12,6 +12,7 @@ digraph {
 "org.openiaml.model.drools";
 "org.openiaml.model.edit";
 "org.openiaml.model.runtime";
+"org.openiaml.model.runtime.phpmailer";
   node [style=filled, fillcolor="#cc7766"];
 "org.openiaml.model.diagram";
   node [style=filled, fillcolor="#ffffff"];

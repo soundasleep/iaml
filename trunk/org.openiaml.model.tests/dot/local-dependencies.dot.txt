@@ -15,6 +15,7 @@ digraph {
 "org.openiaml.model.edit";
 "org.openiaml.model.owl.pellet";
 "org.openiaml.model.runtime";
+"org.openiaml.model.runtime.phpmailer";
 "org.openiaml.model.tests";
 "org.openiaml.verification.tests";
   node [style=filled, fillcolor="#cc7766"];

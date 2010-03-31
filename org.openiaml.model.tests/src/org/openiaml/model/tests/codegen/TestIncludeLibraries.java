@@ -3,10 +3,10 @@
  */
 package org.openiaml.model.tests.codegen;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
+import org.openiaml.model.codegen.DefaultRuntimeProperties;
 import org.openiaml.model.tests.codegen.model0_1.SyncFieldApplicationElementProperty;
 
 /**
@@ -27,8 +27,10 @@ public class TestIncludeLibraries extends SyncFieldApplicationElementProperty {
 
 	@Override
 	protected Map<String, String> getRuntimeProperties() {
-		Map<String, String> result = new HashMap<String,String>();
-		// note that no other properties are included
+		// get default properties (NOT from super.getRuntimeProperties())
+		Map<String, String> result = new DefaultRuntimeProperties().getDefaultProperties();
+		
+		// we don't let the codegen test case use the settings from the super method
 		result.put("include_runtime", "true");
 		return result;
 	}

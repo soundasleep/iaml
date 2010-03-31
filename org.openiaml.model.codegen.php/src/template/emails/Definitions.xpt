@@ -23,14 +23,132 @@
 			
 			«EXPAND emailDefinition FOR e» 
 		«ENDFILE»
-	«ENDFOREACH» 
+	
+		«REM»
+			all emails have a default generated template, if a custom template
+			does not exist
+		«ENDREM»
+		«FILE "output/templates/" + safeName(e) + ".php"»		
+			«EXPAND emailTemplateDefinition FOR e» 
+		«ENDFILE»
+	«ENDFOREACH»
+
 «ENDDEFINE»
 
+/**
+ * @implementation Email
+ *		To construct the content of an {@model Email}, a custom template may be specified
+ *		in <code>templates/ID.php</code>; otherwise, a default builtin template is generated. 
+ */
 «DEFINE emailDefinition FOR model::scopes::Email»
 	/**
 	 * Send the given e-mail.
+	 *
+	 * @return true if the email was sent, or false if it failed
 	 */
 	function email_«safeName()»_send() {
-		throw new IamlRuntimeException("Operation '«name».send' has not been implemented");		
+		$args = array(
+			"to" => «EXPAND getEmailProperty("to")»,
+			"to_name" => «EXPAND getEmailProperty("toName")»,
+			"from" => «EXPAND getEmailProperty("from")»,
+			"from_name" => «EXPAND getEmailProperty("fromName")»,
+			"subject" => «EXPAND getEmailProperty("subject")»,
+		);
+		
+		// get content
+		$args["content"] = get_email_«safeName()»_content();
+		
+		// should we fail?
+		$should_fail = false;
+		if ($to == null || trim($to) == "" || $to == "fail@example") {
+			$should_fail = true;
+		}
+		
+		if ($should_fail) {
+			// process any onFailure events
+			«IF onFailure != null»
+				«EXPAND template::events::EventCall::callEvent(true) FOR onFailure-»
+			«ENDIF»
+			
+			// stop
+			return false;
+		}
+		
+		// use library function to send
+		return send_email($args);
 	}
+	
+	/**
+	 * Get the content of the e-mail.
+	 *
+	 * @return the content in text form, or <code>null</code> if none could be found
+	 */
+	function get_email_«safeName()»_content() {
+		// try a property 'content'
+		$content = «EXPAND getEmailProperty("content")»;
+		
+		// if null, try and construct it from a template on the server
+		if ($content == null) {
+			// first, a custom template
+			$template_file = CUSTOM_PATH . "templates/«safeName()».php";
+			if (!file_exists($template_file)) {
+				// otherwise, our template generated at codegen
+				log_message("[email] get template: custom template '$template_file' does not exist; using manual template");
+				$template_file = ROOT_PATH . "templates/«safeName()».php";
+			}
+			
+			if (file_exists($template_file)) {
+				// use PHP's output buffering to provide PHP templates
+				// (similar to Symfony's approach)
+				if (!ob_start())
+					throw new IamlRuntimeException("Could not start output buffering");
+				require($template_file);
+				$content = ob_get_contents();
+				ob_end_clean();
+			} else {
+				log_message("[email] get template: file '$template_file' does not exist");
+			}
+			
+		}
+		
+		return $content;		
+	}
+«ENDDEFINE»
+
+/**
+ * The default template definition for an email.
+ * Just lists all of the contained properties and static values. 
+ * As a result, may have security problems.
+ */
+«DEFINE emailTemplateDefinition FOR model::scopes::Email»
+<?php 
+/**
+ * The default generated e-mail template for email '«name»'.
+ * Simply lists out all properties and values contained within it.
+ */
+?>
+	«FOREACH properties.sortBy(e|e.name) AS p»
+		«p.name»: <?php echo «EXPAND template::operations::Parameters::callParameterValue(true, false) FOR p»; ?>
+	«ENDFOREACH»
+	«FOREACH values.sortBy(e|e.name) AS p»
+		«p.name»: <?php echo «EXPAND template::operations::Parameters::callParameterValue(true, false) FOR p»; ?>
+	«ENDFOREACH»
+«ENDDEFINE»
+
+/**
+ * Get the runtime value of the given e-mail property, or <code>null</code>
+ * if it is not set.
+ *
+ * @implementation Email
+ *		When selecting a {@model Property} or {@model StaticValue} for an e-mail template, the
+ *		{@model Property} has a higher priority.
+ */
+«DEFINE getEmailProperty(String name) FOR model::scopes::Email»
+	«IF !properties.select(e|e.name == name).isEmpty»
+		«EXPAND template::operations::Parameters::callParameterValue(true, false) FOR properties.selectFirst(e|e.name == name)»
+	«ELSEIF !values.select(e|e.name == name).isEmpty»
+		«EXPAND template::operations::Parameters::callParameterValue(true, false) FOR values.selectFirst(e|e.name == name)»
+	«ELSE»
+	  	null
+	«ENDIF» 
 «ENDDEFINE»

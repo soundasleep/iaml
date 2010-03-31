@@ -2,7 +2,7 @@
 
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE main(String config_runtime, String config_web, String debug) FOR model::InternetApplication»
+«DEFINE main(String config_runtime, String config_web, String debug, String email_handler, String email_handler_phpmailer_include, String email_handler_file_destination) FOR model::InternetApplication»
 	«REM»to test that when we throw exceptions, we can actually catch them«ENDREM»
 	«IF name=="__test throw exception"»
 		«throwException("We should be able to catch this exception.")» 
@@ -40,6 +40,9 @@
 		define("IAML_RUNTIME_WEB", "«config_web»");
 		define("DEBUG", strtolower("«debug»") == "false" ? false : ("«debug»" ? true : false));
 		define("IAML_RUNTIME", 1);
+		define("EMAIL_HANDLER", "«email_handler»");
+		define("EMAIL_HANDLER_PHPMAILER_INCLUDE", "«email_handler_phpmailer_include»");
+		define("EMAIL_HANDLER_FILE_DESTINATION", "«email_handler_file_destination»");
 		?>
 	«ENDFILE»
 	
@@ -104,6 +107,7 @@
 
 «DEFINE setPath(String path) FOR model::InternetApplication»
 define("ROOT_PATH", "«path»");
+define("CUSTOM_PATH", ROOT_PATH . "../");
 «ENDDEFINE»
 
 «DEFINE typeJavascript FOR model::InternetApplication»

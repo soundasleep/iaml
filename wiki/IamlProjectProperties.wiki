@@ -3,19 +3,21 @@
 
 =Introduction=
 
-Platform-specific project properties can be specified in an IAML project; a detailed editor will be provided with [http://code.google.com/p/iaml/issues/detail?id=87 issue 87].
+Platform-specific project properties can be specified in an IAML project; a detailed editor will be provided with issue 87.
 
-The creation of these properties will be detailed later, but essentially an "iaml.properties" file in the same folder as the "model.iaml" model will be read at generation time.
+The creation of these properties will be detailed later, but essentially an `iaml.properties` file, that is in the same folder as the `.iaml` model, will be read at generation time.
+
+For properties that are not specified, the default properties are specified in [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model/src/org/openiaml/model/codegen/DefaultRuntimeProperties.java DefaultRuntimeProperties.java].
 
 ==include_runtime==
 
 If this is set to *true* (the default), the runtime libraries will be included directly in the generated code output. It will also modify _config_runtime_ and _config_web_ properties to reflect these new properties.
 
-This was added in [http://code.google.com/p/iaml/issues/detail?id=81 issue 81] and implemented in the extension [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.codegen.oaw/src/org/openiaml/model/codegen/oaw/OawCodeGeneratorWithRuntime.java?spec=svn889&r=889 OawCodeGeneratorWithRuntime.java].
+This was added in issue 81 and implemented in the extension [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.codegen.oaw/src/org/openiaml/model/codegen/oaw/OawCodeGeneratorWithRuntime.java?spec=svn889&r=889 OawCodeGeneratorWithRuntime.java].
 
 ==config_runtime==
 
-A string pointing to the server-side runtime libraries: [http://code.google.com/p/iaml/issues/detail?id=75 issue 75]. This is implemented at runtime by creating a _config.php_ configuration file at runtime, and referencing it as follows ([http://code.google.com/p/iaml/source/detail?r=894 example]):
+A string pointing to the server-side runtime libraries: issue 75. This is implemented at runtime by creating a _config.php_ configuration file at runtime, and referencing it as follows ([http://code.google.com/p/iaml/source/detail?r=894 example]):
 
 {{{
 <?php require(IAML_RUNTIME_ROOT."global.php"); ?>
@@ -23,7 +25,7 @@ A string pointing to the server-side runtime libraries: [http://code.google.com/
 
 ==config_web==
 
-A string pointing to the client-side runtime libraries: [http://code.google.com/p/iaml/issues/detail?id=76 issue 76]. This is implemented at runtime through:
+A string pointing to the client-side runtime libraries: issue 76. This is implemented at runtime through:
 
 {{{
 <script language="Javascript" type="text/javascript" src="<?php echo IAML_RUNTIME_WEB; ?>js/default.js"></script>

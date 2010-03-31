@@ -38,7 +38,11 @@
 /**
  * @implementation Email
  *		To construct the content of an {@model Email}, a custom template may be specified
- *		in <code>templates/ID.php</code>; otherwise, a default builtin template is generated. 
+ *		in <code>templates/ID.php</code>; otherwise, a default builtin template is generated.
+ * @implementation Email
+ *		An {@model Email} with any 'to' address ending in <code>@example</code> will instantly 
+ *		{@model Email#onFailure fail};
+ *		it will not even attempt to be sent. 
  */
 «DEFINE emailDefinition FOR model::scopes::Email»
 	/**
@@ -60,7 +64,7 @@
 		
 		// should we fail?
 		$should_fail = false;
-		if ($to == null || trim($to) == "" || $to == "fail@example") {
+		if ($args["to"] == null || trim($args["to"]) == "" || strtolower(substr($args["to"], -8)) == "@example") {
 			$should_fail = true;
 		}
 		
@@ -75,7 +79,15 @@
 		}
 		
 		// use library function to send
-		return send_email($args);
+		$result = send_email($args);
+		if (!$result) {
+			// process any onFailure events
+			«IF onFailure != null»
+				«EXPAND template::events::EventCall::callEvent(true) FOR onFailure-»
+			«ENDIF»
+		}
+		
+		return $result;
 	}
 	
 	/**

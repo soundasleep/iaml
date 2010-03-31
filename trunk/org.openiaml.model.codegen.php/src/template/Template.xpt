@@ -82,7 +82,6 @@
 	«FILE "output/save_queued_attribute.php"»«EXPAND php::includes::SaveQueuedAttributePhp::saveQueuedAttribute»«ENDFILE»
 	«FILE "output/save_queued_store_domain_object.php"»«EXPAND php::includes::SaveQueuedStoreDomainObjectPhp::saveQueuedStoreDomainObject»«ENDFILE»
 	«FILE "output/clear_session.php"»«EXPAND php::includes::ClearSessionPhp::clearSessionPhp»«ENDFILE»
-	«FILE "output/properties_file.php"»«EXPAND php::includes::PropertiesFilePhp::propertiesFilePhp»«ENDFILE»
 	«FILE "output/call_remote_event.php"»«EXPAND php::includes::CallRemoteEvent::callRemoteEvent»«ENDFILE»
 	«FILE "output/add_role.php"»«EXPAND php::includes::AddRolePhp::addRolePhp»«ENDFILE»
 	«FILE "output/add_permission.php"»«EXPAND php::includes::AddPermissionPhp::addPermissionPhp»«ENDFILE»
@@ -121,7 +120,6 @@ define("CUSTOM_PATH", ROOT_PATH . "../");
 require(ROOT_PATH . "config.php");		// runtime library configuration
 require(ROOT_PATH . IAML_RUNTIME_ROOT . "global.php");	// runtime library import
 require(ROOT_PATH . "create_database.php");		// ensure DB exists
-require(ROOT_PATH . "properties_file.php");
 require(ROOT_PATH . "update_client_cache.php");
 require(ROOT_PATH . "email_definitions.php");
 «ENDDEFINE»

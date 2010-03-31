@@ -21,6 +21,7 @@ public class AllModel0_5CodegenTests {
 		TestSuite suite = new TestSuite("Model 0.5");
 
 		suite.addTestSuite(ExplicitFieldValue.class);
+		suite.addTestSuite(EmailExplicit.class);
 
 		return suite;
 	}

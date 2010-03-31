@@ -12,7 +12,12 @@ try {
 	 * then we specify the client to update it (we don't care if it hasn't
 	 * changed). TODO this can probably do with a lot more optimisation!
 	 */
-	«EXPAND outgoingEmailValue FOREACH allProperties(this)»
+	«REM»group by containingFrame: optimization«ENDREM»
+	«FOREACH allProperties().collect(e|containingFrame(e)).toSet() AS frame»
+	if ($frame_id == "«safeNameString(frame.id)-»") {
+		«EXPAND outgoingEmailValue FOREACH allProperties(this).select(p|containingFrame(p)==frame)»
+	}
+	«ENDFOREACH»
 } catch (IamlRuntimeException $e) {
 	// redirect to the exception frame
 	$url = "exception.php?fail=" . urlencode($e->getMessage() . " [from setApplicationValue]");
@@ -28,9 +33,10 @@ try {
 «ENDDEFINE»
 
 «DEFINE outgoingEmailValue FOR model::Property»
-	if ($frame_id == "«safeNameString(containingFrame(this).id)-»") {
+	«IF model::visual::InputTextField.isInstance(eContainer)»
 		/* the property "«this»" needs to be updated on the client */
-		«IF model::visual::InputTextField.isInstance(eContainer)»
+		if («EXPAND template::operations::Parameters::isSetParameter(true)») {
+			// but only if it's actually set
 			// get the current value
 			$value = «EXPAND template::operations::Parameters::callParameterValue(true, false)»;
 			
@@ -43,7 +49,7 @@ try {
 			echo "\nset_value " 
 				. escape_parameter_string("«safeNameString(((model::visual::InputTextField) eContainer).id)»")
 				. " "
-				. escape_parameter_string($value);				
-		«ENDIF»
-	}
+				. escape_parameter_string($value);
+		}				
+	«ENDIF»
 «ENDDEFINE»

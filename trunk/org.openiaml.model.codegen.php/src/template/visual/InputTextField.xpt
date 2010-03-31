@@ -63,16 +63,22 @@
 					«EXPAND template::events::EventCall::callEvent(false) FOR onEdit-»
 				«ENDIF»
 
+				«REM»
+					if 'server values' is after 'outgoing values', then the value of the field
+					is temporarily changed to the old one, until 'server values' is then executed.
+					see: r1795
+				«ENDREM»
+
+				// server values
+				«REM»save a value for myself (which is not covered by an outEdge/inEdge) to the server/session?«ENDREM»
+				«EXPAND template::operations::OutgoingValues::outgoingValue(this) FOREACH properties.select( e | e.name == "fieldValue")»
+
 				// outgoing values
 				«REM»any application element properties to change? (both on client and server)«ENDREM»
 				«REM»this doesn't cover fieldValues connected by Set/SyncWires; these are covered by server code (below)«ENDREM»
 				«EXPAND template::operations::OutgoingValues::outgoingValues(this) FOREACH outWires»
 				«EXPAND template::operations::OutgoingValues::outgoingValues(this) FOREACH inWires»
 				«REM»it may be required to outgoingValues(this) FOREACH properties.outWires«ENDREM»
-				
-				// server values
-				«REM»save a value for myself (which is not covered by an outEdge/inEdge) to the server/session?«ENDREM»
-				«EXPAND template::operations::OutgoingValues::outgoingValue(this) FOREACH properties.select( e | e.name == "fieldValue")»
 				
 				return false;
 			}

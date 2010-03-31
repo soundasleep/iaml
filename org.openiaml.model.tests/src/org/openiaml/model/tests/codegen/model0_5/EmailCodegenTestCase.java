@@ -56,6 +56,8 @@ public abstract class EmailCodegenTestCase extends CodegenTestCase {
 		return emails;
 	}
 	
+	public static final String PHPMAILER_INCLUDE = "../../../workspace-iaml/org.openiaml.model.runtime.phpmailer/phpmailer/";
+	
 	/**
 	 * Add a hook to send e-mails to a file, rather than actually sending e-mails.
 	 */
@@ -66,6 +68,7 @@ public abstract class EmailCodegenTestCase extends CodegenTestCase {
 		// add these properties
 		properties.put("email_handler", "file");
 		properties.put("email_handler_file_destination", "emails.txt");
+		properties.put("email_handler_phpmailer_include", PHPMAILER_INCLUDE);
 
 		return properties;
 	}

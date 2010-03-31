@@ -32,7 +32,7 @@ public abstract class EmailCodegenTestCase extends CodegenTestCase {
 	}
 
 	public void assertEmailNotEmpty() {
-		if (emails.size() != 0) {
+		if (emails.size() == 0) {
 			fail("Expected an e-mail, but got none");
 		}
 	}
@@ -81,9 +81,10 @@ public abstract class EmailCodegenTestCase extends CodegenTestCase {
 	 */
 	public void readEmails() throws IOException, CoreException {
 		// reset
-		emails = new ArrayList<InterceptedEmail>(); 
+		emails = new ArrayList<InterceptedEmail>();
 		
-		IFile file = getProject().getFile("emails.txt");
+		getProject().refreshProject();
+		IFile file = getProject().getFile("output/emails.txt");
 		if (!file.exists()) {
 			// empty
 			return;
@@ -95,7 +96,7 @@ public abstract class EmailCodegenTestCase extends CodegenTestCase {
 		
 		// parse into e-mails
 		// a "size" property will define how many emails there are
-		int size = (int) (Integer) prop.get("size");
+		int size = Integer.parseInt(prop.get("size").toString());
 		for (int i = 0; i < size; i++) {
 			InterceptedEmail ie = new InterceptedEmail();
 			

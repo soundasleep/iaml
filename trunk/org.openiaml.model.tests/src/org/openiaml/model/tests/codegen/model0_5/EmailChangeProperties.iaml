@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.127b1fff682.55">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
+    <scopes xsi:type="iaml.scopes:Email" name="Email">
+      <operations xsi:type="iaml:PrimitiveOperation" id="model.127b1fff682.65" name="send" inActions="wires.127b1fff8c4.12"/>
+      <properties id="model.127b1fff682.61" name="to" inWires="wires.127b1fff8c4.23" defaultValue="to@openiaml.org"/>
+      <properties id="model.127b1fff682.62" name="toName" outWires="wires.127b1fff8c4.1e" defaultValue="To name">
+        <wires xsi:type="iaml.wires:SetWire" id="wires.127b1fff8c4.1e" from="model.127b1fff682.62" to="visual.127b1fff818.61" name="set"/>
+      </properties>
+      <properties id="model.127b1fff682.63" name="from" outWires="wires.127b1fff8c4.1f" defaultValue="from@openiaml.org">
+        <wires xsi:type="iaml.wires:SetWire" id="wires.127b1fff8c4.1f" from="model.127b1fff682.63" to="visual.127b1fff818.63" name="set"/>
+      </properties>
+      <properties id="model.127b1fff682.64" name="fromName" inWires="wires.127b1fff8c4.22" defaultValue="From name"/>
+      <properties id="model.127b1fff682.b5" name="subject" inWires="wires.127b1fff8c4.20" defaultValue="Subject"/>
+      <properties id="model.127b1fff682.e1" name="content" inWires="wires.127b1fff8c4.21" defaultValue="Content"/>
+    </scopes>
+    <children xsi:type="iaml.visual:Button" id="visual.127b1fff818.5f" name="send email" outActions="wires.127b1fff8c4.12">
+      <actions xsi:type="iaml.wires:RunAction" id="wires.127b1fff8c4.12" name="onClick" from="visual.127b1fff818.5f" to="model.127b1fff682.65"/>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" outWires="wires.127b1fff8c4.23" id="visual.127b1fff818.60" name="to">
+      <wires xsi:type="iaml.wires:SetWire" id="wires.127b1fff8c4.23" from="visual.127b1fff818.60" to="model.127b1fff682.61" name="set"/>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" inWires="wires.127b1fff8c4.1e" id="visual.127b1fff818.61" name="to name"/>
+    <children xsi:type="iaml.visual:InputTextField" outWires="wires.127b1fff8c4.22" id="visual.127b1fff818.62" name="from name">
+      <wires xsi:type="iaml.wires:SetWire" id="wires.127b1fff8c4.22" from="visual.127b1fff818.62" to="model.127b1fff682.64" name="set"/>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" inWires="wires.127b1fff8c4.1f" id="visual.127b1fff818.63" name="from"/>
+    <children xsi:type="iaml.visual:InputTextField" outWires="wires.127b1fff8c4.20" id="visual.127b1fff818.112" name="subject">
+      <wires xsi:type="iaml.wires:SetWire" id="wires.127b1fff8c4.20" from="visual.127b1fff818.112" to="model.127b1fff682.b5" name="set"/>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" outWires="wires.127b1fff8c4.21" id="visual.127b1fff818.113" name="content">
+      <wires xsi:type="iaml.wires:SetWire" id="wires.127b1fff8c4.21" from="visual.127b1fff818.113" to="model.127b1fff682.e1" name="set"/>
+    </children>
+  </scopes>
+</iaml:InternetApplication>

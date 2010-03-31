@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.127b1fff682.6">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
+    <scopes xsi:type="iaml.scopes:Email" name="Email" to="test@openiaml.org" subject="A test e-mail" toName="Test User" from="source@openiaml.org" fromName="Source">
+      <operations xsi:type="iaml:PrimitiveOperation" id="model.127b1fff682.35" name="send" inActions="wires.127b1fff8c4.6"/>
+      <values id="model.127b1fff682.1e" name="content" value="hello, world!"/>
+    </scopes>
+    <children xsi:type="iaml.visual:Button" id="visual.127b1fff818.1c" name="send an email" outActions="wires.127b1fff8c4.6">
+      <actions xsi:type="iaml.wires:RunAction" id="wires.127b1fff8c4.6" name="onClick" from="visual.127b1fff818.1c" to="model.127b1fff682.35"/>
+    </children>
+  </scopes>
+</iaml:InternetApplication>

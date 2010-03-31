@@ -303,6 +303,7 @@ public class ExportDroolsJavaXml extends ExportDroolsXml {
 		for (String filename : source.keySet()) {
 
 			if (filename.toLowerCase().contains("dynamic-sources") ||
+					filename.toLowerCase().contains("base") ||
 					filename.toLowerCase().contains("login-handler")) {
 				// TODO we need to allow for if (a...) { b... } syntax
 				// OR we need to modify the rule source to not use this

@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
@@ -207,6 +208,26 @@ public class PluginsTestCase extends XmlTestCase {
 		super.tearDown();
 	}
 	
+	protected List<String> IGNORE_VERSIONS = Arrays.asList(
+			"org.openiaml.model.runtime.phpmailer"
+	);
+	
+	/**
+	 * Test that all plugins listed in {@link #IGNORE_VERSIONS} is also
+	 * tested in {@link #getAllManifests()}.
+	 */
+	public void testIgnoreVersionsInManifestList() {
+		for (String p : IGNORE_VERSIONS) {
+			boolean passed = false;
+			for (String m : getAllManifests()) {
+				if (m.contains(p))
+					passed = true;
+			}
+			
+			assertTrue("Plugin '" + p + "' was not found in list of manifests", passed);
+		}
+	}
+	
 	/**
 	 * Test the version tags of each of these files.
 	 * 
@@ -229,6 +250,14 @@ public class PluginsTestCase extends XmlTestCase {
 		// now lets test each manifest.mf
 		// r1492: if the version is incorrect, set it manually  
 		for (String file : getAllManifests()) {
+			// skip those inside IGNORE_VERSIONS
+			boolean skip = false;
+			for (String ignore : IGNORE_VERSIONS) {
+				if (file.contains(ignore)) 
+					skip = true;
+			}
+			if (skip) continue;
+			
 			Properties properties = getManifestCache().get(file);
 			
 			if (!properties.containsKey("Bundle-Version")) {

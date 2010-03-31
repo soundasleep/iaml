@@ -17,6 +17,7 @@ digraph {
 "org.openiaml.model.owl";
 "org.openiaml.model.owl.pellet";
 "org.openiaml.model.runtime";
+"org.openiaml.model.runtime.phpmailer";
 "org.openiaml.model.tests";
 "org.openiaml.verification.drools";
 "org.openiaml.verification.model";
@@ -124,6 +125,7 @@ digraph {
   "org.openiaml.model.codegen.php" -> "org.apache.commons.logging";
   "org.openiaml.model.codegen.php" -> "org.eclipse.core.resources";
   "org.openiaml.model.codegen.php" -> "org.eclipse.core.runtime";
+  "org.openiaml.model.codegen.php" -> "org.eclipse.emf.ecore";
   "org.openiaml.model.codegen.php" -> "org.junit";
   "org.openiaml.model.codegen.php" -> "org.openarchitectureware.core.emftools";
   "org.openiaml.model.codegen.php" -> "org.openarchitectureware.core.expressions";
@@ -555,6 +557,8 @@ digraph {
   "org.openiaml.model.owl.pellet" -> "org.openiaml.model";
   "org.openiaml.model.owl.pellet" -> "org.openiaml.model.actions";
   "org.openiaml.model.runtime" -> "org.eclipse.core.runtime";
+  "org.openiaml.model.runtime.phpmailer" -> "org.eclipse.core.resources";
+  "org.openiaml.model.runtime.phpmailer" -> "org.eclipse.core.runtime";
   "org.openiaml.model.tests" -> "ca.ecliptical.emf.xpath";
   "org.openiaml.model.tests" -> "org.apache.xerces";
   "org.openiaml.model.tests" -> "org.eclipse.core.resources";

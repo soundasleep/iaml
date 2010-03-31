@@ -44,6 +44,8 @@ function ob_error_handler($output) {
 
 require("databases.php");
 require("first_class_types.php");
+require("emails.php");
+require("properties.php");
 
 $log_unique_id = sprintf("%04x", rand(0,0xffff)) . "-" . session_id();
 function log_message($msg, $also_debug = true) {

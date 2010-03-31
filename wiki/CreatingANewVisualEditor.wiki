@@ -31,5 +31,7 @@ In this example, consider we are making a new editor "user_store", for UserStore
       * _Name_ to "Iaml Diagram Plugin (User Store)"
       * _Provider_ to "www.openiaml.org"
       * _Version_ to the latest version (e.g. "0.3.1.qualified") (automatically replaced)
+    * _Gen Expression Provider_ > _Gen Java Expression Provider_
+      * _Inject Expression Body_ to *true* (until issue 164 is resolved)
     * You will still need to add _OpenDiagramBehaviors_ to any elements that require it (checked with [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/release/GmfGenTestCase.java?r=1006#329 GmfGenTestCase]) (automatically replaced)
   # Generate the plug-in code and execute the Release test cases twice (once to replace broken values; a second time to test)

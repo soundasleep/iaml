@@ -36,3 +36,30 @@ If set to "true", debug information will be rendered as part of the generate cod
 {{{
 <?php if (DEBUG) { ... } ?>
 }}}
+
+==email_handler==
+
+The handler used to send [http://openiaml.org/model/Email e-mail]. In the future, this will include configuration for `mail()`, PHPMailer, direct SMTP, etc. Currently, the following e-mail handlers are supported:
+
+  * `phpmailer`: Use [PHPMailer]
+  * `file`: Send to a text file
+
+==email_handler_phpmailer_include==
+
+Location of the [PHPMailer] include files.
+
+==email_handler_file_destination==
+
+If `email_handler` is set to `file`, this is the destination text file that [http://openiaml.org/model/Email e-mails] will be written to.
+
+The target file will be a Java Properties file, in the following format:
+
+{{{
+size=5
+email.0.from=source@openiaml.org
+email.0.to=to@openiaml.org.
+email.0.subject=subject
+email.0.content=e-mail content
+email.1.from=source@openiaml.org
+...
+}}}

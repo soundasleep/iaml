@@ -59,13 +59,15 @@
 	«EXPAND template::conditions::Definitions::conditionDefinitionFiles(true)»
 	«EXPAND template::conditions::Definitions::conditionDefinitionFiles(false)»
 
+	«REM»emails«ENDREM»
+	«EXPAND template::emails::Definitions::emailDefinitions»
+
 	«REM»containing_frame() runtime checks (javascript)«ENDREM»
 	«EXPAND template::js::OnCurrentFrame::onCurrentFrame»
 	
 	«REM»create other files manually«ENDREM»	
 	«FILE "output/site_layout.xml"-»«EXPAND xml::SiteLayout::siteLayout-»«ENDFILE-»
 
-	«REM»«FILE "output/default.js"»«EXPAND js::includes::DefaultJs::defaultJs»«ENDFILE»«ENDREM»
 	«FILE "output/exception.php"»«EXPAND php::includes::Exception::exceptionPhp»«ENDFILE»
 
 	«FILE "output/store_event.php"»«EXPAND php::includes::StoreEventsPhp::storeEventsPhp»«ENDFILE»
@@ -84,6 +86,9 @@
 	«FILE "output/remove_role.php"»«EXPAND php::includes::RemoveRolePhp::removeRolePhp»«ENDFILE»
 	«FILE "output/remove_permission.php"»«EXPAND php::includes::RemovePermissionPhp::removePermissionPhp»«ENDFILE»
 	«FILE "output/update_client_cache.php"»«EXPAND php::includes::UpdateClientCache::updateClientCache»«ENDFILE»
+	
+	«REM»callbacks. TODO all the actual callbacks above should be moved into here«ENDREM»
+	«FILE "output/email_callback_send.php"»«EXPAND php::callbacks::EmailCallbackSend::emailCallbackSend»«ENDFILE»
 	
 	«FILE "output/database_dump.php"»«EXPAND template::php::DatabaseDump::databaseDump»«ENDFILE»
 	«FILE "output/view_log.php"»«EXPAND php::includes::ViewLog::viewLog»«ENDFILE»
@@ -114,6 +119,7 @@ require(ROOT_PATH . IAML_RUNTIME_ROOT . "global.php");	// runtime library import
 require(ROOT_PATH . "create_database.php");		// ensure DB exists
 require(ROOT_PATH . "properties_file.php");
 require(ROOT_PATH . "update_client_cache.php");
+require(ROOT_PATH . "email_definitions.php");
 «ENDDEFINE»
 
 /* expand sessions as if they weren't there */
@@ -146,6 +152,12 @@ require(ROOT_PATH . "update_client_cache.php");
 	<ol>
 		«EXPAND expandSitemapFrame FOREACH scopes»
 	</ol>
+</li>
+«ENDDEFINE»
+
+«DEFINE expandSitemapFrame FOR model::scopes::Email»
+<li>
+	[Email «name»]
 </li>
 «ENDDEFINE»
 

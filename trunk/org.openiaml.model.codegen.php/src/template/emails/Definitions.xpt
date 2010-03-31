@@ -1,0 +1,36 @@
+«IMPORT iaml»
+
+/**
+ * Method definitions for emails.
+ */
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE emailDefinitions FOR model::InternetApplication»
+	«FILE "output/email_definitions.php"»
+		<?php				
+			«EXPAND template::Template::phpCheck»
+			
+			// a list of all email operations required
+			«FOREACH getAllEmails() AS e»
+				require_once(ROOT_PATH . "emails/«safeName(e)».php");
+			«ENDFOREACH»
+	«ENDFILE»
+	
+	«FOREACH getAllEmails() AS e»
+		«FILE "output/emails/" + safeName(e) + ".php"»
+		<?php				
+			«EXPAND template::Template::phpCheck»
+			
+			«EXPAND emailDefinition FOR e» 
+		«ENDFILE»
+	«ENDFOREACH» 
+«ENDDEFINE»
+
+«DEFINE emailDefinition FOR model::scopes::Email»
+	/**
+	 * Send the given e-mail.
+	 */
+	function email_«safeName()»_send() {
+		throw new IamlRuntimeException("Operation '«name».send' has not been implemented");		
+	}
+«ENDDEFINE»

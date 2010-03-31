@@ -24,6 +24,3 @@
 	«REM»expand all children«ENDREM»
 	«EXPAND Render::renderVisual(currentFrame) FOREACH children-»
 «ENDDEFINE»
-
-«DEFINE exception FOR Object»
-«ENDDEFINE»

@@ -21,6 +21,9 @@ buttonName(model::visual::Button this) :
  * Get a safe string name of the given element; that is, one that only consists
  * of alpha-numeric characters, and the underscore character.
  *
+ * <p>NOTE: if you are getting this with a newly created model element, the ID
+ * may not be getting generated automatically in XXXFactoryImpl. See issue 165.
+ *
  * @pseudocode
  *   if id = null then
  *     throw exception
@@ -351,6 +354,10 @@ cached List[model::visual::Frame] getAllFrames(emf::EObject this) :
 
 cached List[model::visual::Frame] getAllFrames(model::visual::Frame this) :
 	this;
+
+/** get all Emails in the InternetApplication */
+cached List[model::scopes::Email] getAllEmails(model::InternetApplication this) :
+	eAllContents.typeSelect(model::scopes::Email);
 	
 /** get all Dynamic Element Sets in the InternetApplication */
 List[model::DynamicApplicationElementSet] getAllDynamicElements(model::InternetApplication this) :

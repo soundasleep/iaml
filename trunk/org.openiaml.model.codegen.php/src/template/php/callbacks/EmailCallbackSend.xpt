@@ -1,0 +1,36 @@
+«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE emailCallbackSend FOR model::InternetApplication-»
+<?php
+/**
+ * The 'send' method for an e-mail as a callback.
+ */
+ 
+«EXPAND template::Template::commonHeader("")»
+
+«EXPAND template::domain::Definitions::domainDefinitions»
+
+log_message("email_callback_send.php? " . print_r($_GET, true));
+
+// the e-mail instance to send
+$id = require_get("email_id");
+
+// the current frame ID we are on
+// (used to select which elements to inform the client to update)
+$frame_id = require_get("frame");
+
+// create a function name
+// TODO this is probably insecure
+$function = "email_" . $id . "_send";
+
+// execute
+$function();
+log_message("email_callback_send.php: $function called from frame $frame_id");
+
+echo "ok";
+
+/* for now, since Email does not have an onChange, we will assume we can't update
+ * the client frame with anything. */
+«ENDDEFINE»

@@ -25,6 +25,8 @@
 		«EXPAND hideOperation(start, php) FOR this»
 	«ELSEIF name == "show"»
 		«EXPAND showOperation(start, php) FOR this»
+	«ELSEIF name == "send"»
+		«EXPAND sendOperation(start, php) FOR this» 
 	«ELSE»
 		«throwException("Unknown function to expand '" + name + "': " + this)»
 	«ENDIF»
@@ -417,5 +419,24 @@
 	«REM»continue«ENDREM»
 	«FOREACH outExecutions AS e-»
 		«EXPAND ExecutionFlow::addStack(start, php) FOR e»	
+	«ENDFOREACH»
+«ENDDEFINE»
+
+/**
+ * Send an e-mail.
+ */
+«DEFINE sendOperation(model::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
+	«IF model::scopes::Email.isInstance(eContainer)»
+		/* send an e-mail: «this» */
+		«LET (model::scopes::Email) eContainer AS email»
+			«EXPAND template::emails::Email::actualEmailOperationCall(php, email)»;
+		«ENDLET»
+	«ELSE»
+		«throwException("Send operation " + this + " is not contained within an expected type: " + eContainer)»
+	«ENDIF»
+
+	«REM»continue«ENDREM»
+	«FOREACH outExecutions AS e-»
+		«EXPAND ExecutionFlow::addStack(start, php) FOR e»
 	«ENDFOREACH»
 «ENDDEFINE»

@@ -106,6 +106,8 @@
 		«EXPAND template::domain::DomainInstance::domainInstanceCall(php, this, (model::DomainObjectInstance) to.eContainer) FOR to»;
 	«ELSEIF model::components::AccessControlHandler.isInstance(to.eContainer)-»
 		«EXPAND template::users::AccessControlHandler::accessControlHandlerOperationCall(php, this, (model::components::AccessControlHandler) to.eContainer) FOR to»;
+	«ELSEIF model::scopes::Email.isInstance(to.eContainer)-»
+		«EXPAND template::emails::Email::emailOperationCall(php, this, (model::scopes::Email) to.eContainer) FOR to»;
 	«ELSE-»
 		alert('unknown target operation type in «to.eContainer.metaType.name»');
 		«throwException("Unknown target operation type in '" + to.eContainer.metaType.name + "' (this=" + this + ")")»

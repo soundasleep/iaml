@@ -10,6 +10,9 @@
  
 «EXPAND template::Template::commonHeader("")»
 
+// include operations, condition definitions
+«EXPAND template::Common::commonPHPIncludes»
+
 «EXPAND template::domain::Definitions::domainDefinitions»
 
 log_message("email_callback_send.php? " . print_r($_GET, true));
@@ -31,6 +34,8 @@ log_message("email_callback_send.php: $function called from frame $frame_id");
 
 echo "ok";
 
-/* for now, since Email does not have an onChange, we will assume we can't update
- * the client frame with anything. */
+// update any values on the client-side?
+«EXPAND template::php::callbacks::UpdateFrameProperties::updateAllFrameProperties»
+
+echo_necessary_update_callbacks();
 «ENDDEFINE»

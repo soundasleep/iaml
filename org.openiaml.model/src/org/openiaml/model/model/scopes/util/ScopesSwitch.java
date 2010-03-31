@@ -24,6 +24,7 @@ import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.WireDestination;
 import org.openiaml.model.model.WireSource;
+import org.openiaml.model.model.scopes.Email;
 import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.scopes.Session;
 
@@ -118,6 +119,26 @@ public class ScopesSwitch<T> {
 				if (result == null) result = caseWireDestination(session);
 				if (result == null) result = caseContainsConditions(session);
 				if (result == null) result = caseContainsWires(session);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ScopesPackage.EMAIL: {
+				Email email = (Email)theEObject;
+				T result = caseEmail(email);
+				if (result == null) result = caseScope(email);
+				if (result == null) result = caseCanBeSynced(email);
+				if (result == null) result = caseAccessible(email);
+				if (result == null) result = caseActionSource(email);
+				if (result == null) result = caseContainsProperties(email);
+				if (result == null) result = caseNamedElement(email);
+				if (result == null) result = caseGeneratedElement(email);
+				if (result == null) result = caseContainsOperations(email);
+				if (result == null) result = caseGeneratesElements(email);
+				if (result == null) result = caseWireSource(email);
+				if (result == null) result = caseShouldntContainWires(email);
+				if (result == null) result = caseWireDestination(email);
+				if (result == null) result = caseContainsConditions(email);
+				if (result == null) result = caseContainsWires(email);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -302,6 +323,21 @@ public class ScopesSwitch<T> {
 	 * @generated
 	 */
 	public T caseSession(Session object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Email</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Email</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEmail(Email object) {
 		return null;
 	}
 

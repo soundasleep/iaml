@@ -901,6 +901,24 @@
         <details key="documentation" value="Represents a user session; contained data is normally not accessible by other users."/>
       </eAnnotations>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Email" eSuperTypes="#//NamedElement #//ContainsOperations #//Scope #//ContainsWires #//WireSource #//WireDestination #//ContainsConditions #//ContainsProperties #//CanBeSynced">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Represents an e-mail. The lifecycle is as follows: {@model PrimitiveOperation send} -> {@model EventTrigger sent} or {@model EventTrigger failed}."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="to" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="subject" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="toName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="from" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="fromName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="onSent" eType="#//EventTrigger"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="onFailure" eType="#//EventTrigger"
+          containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="buttons" upperBound="-1"
+          eType="#//visual/Button" containment="true"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="labels" upperBound="-1"
+          eType="#//visual/Label" containment="true"/>
+    </eClassifiers>
   </eSubpackages>
   <eSubpackages name="components" nsURI="http://openiaml.org/model/components" nsPrefix="iaml.components">
     <eAnnotations source="http://openiaml.org/comment">

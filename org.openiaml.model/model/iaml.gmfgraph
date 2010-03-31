@@ -1816,6 +1816,35 @@
       <accessors
           figure="//@figures.0/@descriptors.62/@actualFigure/@children.0"/>
     </descriptors>
+    <descriptors
+        name="EmailFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="EmailFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="255"
+            green="240"
+            blue="255"/>
+        <border
+            xsi:type="gmfgraph:MarginBorder">
+          <insets
+              top="3"
+              left="3"
+              bottom="3"
+              right="3"/>
+        </border>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="EmailNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.63/@actualFigure/@children.0"/>
+    </descriptors>
   </figures>
   <nodes
       name="EventTrigger"
@@ -1949,6 +1978,9 @@
   <nodes
       name="CastNode"
       figure="CastNodeFigure"/>
+  <nodes
+      name="Email"
+      figure="EmailFigure"/>
   <connections
       name="DataFlowEdge"
       figure="DataFlowEdgeFigure"/>
@@ -2405,4 +2437,8 @@
       figure="StaticValueFigure"
       elementIcon="false"
       accessor="//@figures.0/@descriptors.9/@accessors.2"/>
+  <labels
+      name="EmailName"
+      figure="EmailFigure"
+      accessor="//@figures.0/@descriptors.63/@accessors.0"/>
 </gmfgraph:Canvas>

@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.openiaml.model.model.GeneratedElement;
+import org.openiaml.model.model.scopes.Email;
 import org.openiaml.model.model.scopes.ScopesFactory;
 import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.scopes.Session;
@@ -63,6 +64,7 @@ public class ScopesFactoryImpl extends EFactoryImpl implements ScopesFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case ScopesPackage.SESSION: return createSession();
+			case ScopesPackage.EMAIL: return createEmail();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -77,6 +79,16 @@ public class ScopesFactoryImpl extends EFactoryImpl implements ScopesFactory {
 		SessionImpl session = new SessionImpl();
 		generateID(session);
 		return session;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Email createEmail() {
+		EmailImpl email = new EmailImpl();
+		return email;
 	}
 
 	/**

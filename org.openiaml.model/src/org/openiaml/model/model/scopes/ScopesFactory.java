@@ -35,6 +35,15 @@ public interface ScopesFactory extends EFactory {
 	Session createSession();
 
 	/**
+	 * Returns a new object of class '<em>Email</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Email</em>'.
+	 * @generated
+	 */
+	Email createEmail();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

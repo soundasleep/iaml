@@ -317,6 +317,19 @@
     <nestedGenPackages prefix="Scopes" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//scopes">
       <genClasses ecoreClass="iaml.ecore#//scopes/Session"/>
+      <genClasses ecoreClass="iaml.ecore#//scopes/Email">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//scopes/Email/to"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//scopes/Email/subject"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//scopes/Email/toName"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//scopes/Email/from"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//scopes/Email/fromName"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference iaml.ecore#//scopes/Email/onSent"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference iaml.ecore#//scopes/Email/onFailure"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//scopes/Email/buttons"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//scopes/Email/labels"/>
+      </genClasses>
     </nestedGenPackages>
     <nestedGenPackages prefix="Components" basePackage="org.openiaml.model.model"
         disposableProviderFactory="true" ecorePackage="iaml.ecore#//components">

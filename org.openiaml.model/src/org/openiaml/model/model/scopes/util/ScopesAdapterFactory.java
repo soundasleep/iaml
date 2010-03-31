@@ -24,6 +24,7 @@ import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.ShouldntContainWires;
 import org.openiaml.model.model.WireDestination;
 import org.openiaml.model.model.WireSource;
+import org.openiaml.model.model.scopes.Email;
 import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.scopes.Session;
 
@@ -86,6 +87,10 @@ public class ScopesAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseSession(Session object) {
 				return createSessionAdapter();
+			}
+			@Override
+			public Adapter caseEmail(Email object) {
+				return createEmailAdapter();
 			}
 			@Override
 			public Adapter caseGeneratedElement(GeneratedElement object) {
@@ -328,6 +333,20 @@ public class ScopesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSessionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.scopes.Email <em>Email</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.scopes.Email
+	 * @generated
+	 */
+	public Adapter createEmailAdapter() {
 		return null;
 	}
 

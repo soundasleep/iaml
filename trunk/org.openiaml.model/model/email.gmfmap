@@ -7,72 +7,6 @@
     xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition">
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//Accessible/onAccess"/>
-    <ownedChild>
-      <domainMetaElement
-          href="iaml.ecore#//EventTrigger"/>
-      <domainSpecialization
-          body="return domainElement.eContainingFeature().getName().equals(&quot;onAccess&quot;);"
-          language="java"/>
-      <labelMappings
-          readOnly="true">
-        <diagramLabel
-            href="iaml.gmfgraph#EventTriggerContainmentFeature"/>
-      </labelMappings>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="iaml.gmfgraph#EventTriggerName"/>
-        <features
-            href="iaml.ecore#//NamedElement/name"/>
-      </labelMappings>
-      <labelMappings
-          readOnly="true">
-        <diagramLabel
-            href="iaml.gmfgraph#EventTriggerParentName"/>
-      </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="frame.gmftool#//@palette/@tools.5/@tools.0"/>
-      <diagramNode
-          href="iaml.gmfgraph#EventTrigger"/>
-    </ownedChild>
-  </nodes>
-  <nodes>
-    <containmentFeature
-        href="iaml.ecore#//Scope/onInit"/>
-    <ownedChild>
-      <domainMetaElement
-          href="iaml.ecore#//EventTrigger"/>
-      <domainSpecialization
-          body="return domainElement.eContainingFeature().getName().equals(&quot;onInit&quot;);"
-          language="java"/>
-      <labelMappings
-          readOnly="true">
-        <diagramLabel
-            href="iaml.gmfgraph#EventTriggerContainmentFeature"/>
-      </labelMappings>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="iaml.gmfgraph#EventTriggerName"/>
-        <features
-            href="iaml.ecore#//NamedElement/name"/>
-      </labelMappings>
-      <labelMappings
-          readOnly="true">
-        <diagramLabel
-            href="iaml.gmfgraph#EventTriggerParentName"/>
-      </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="frame.gmftool#//@palette/@tools.5/@tools.1"/>
-      <diagramNode
-          href="iaml.gmfgraph#EventTrigger"/>
-    </ownedChild>
-  </nodes>
-  <nodes>
-    <containmentFeature
         href="iaml.ecore#//ContainsOperations/operations"/>
     <ownedChild>
       <domainMetaElement
@@ -93,7 +27,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="frame.gmftool#//@palette/@tools.0/@tools.1"/>
+          href="email.gmftool#//@palette/@tools.0/@tools.1"/>
       <diagramNode
           href="iaml.gmfgraph#CompositeOperation"/>
     </ownedChild>
@@ -120,14 +54,12 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="frame.gmftool#//@palette/@tools.0/@tools.0"/>
+          href="email.gmftool#//@palette/@tools.0/@tools.0"/>
       <diagramNode
           href="iaml.gmfgraph#PrimitiveOperation"/>
     </ownedChild>
   </nodes>
   <nodes>
-    <containmentFeature
-        href="iaml.ecore#//Scope/elements"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//DomainObject"/>
@@ -145,16 +77,11 @@
         <diagramLabel
             href="iaml.gmfgraph#DomainObjectParentName"/>
       </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="frame.gmftool#//@palette/@tools.1/@tools.0"/>
       <diagramNode
           href="iaml.gmfgraph#DomainObject"/>
     </ownedChild>
   </nodes>
   <nodes>
-    <containmentFeature
-        href="iaml.ecore#//Scope/elements"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//DomainAttribute"/>
@@ -177,9 +104,6 @@
         <diagramLabel
             href="iaml.gmfgraph#DomainAttributeType"/>
       </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="frame.gmftool#//@palette/@tools.1/@tools.1"/>
       <diagramNode
           href="iaml.gmfgraph#DomainAttribute"/>
     </ownedChild>
@@ -219,14 +143,12 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="frame.gmftool#//@palette/@tools.0/@tools.2"/>
+          href="email.gmftool#//@palette/@tools.0/@tools.2"/>
       <diagramNode
           href="iaml.gmfgraph#Property"/>
     </ownedChild>
   </nodes>
   <nodes>
-    <containmentFeature
-        href="iaml.ecore#//Scope/scopes"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//visual/Frame"/>
@@ -239,16 +161,11 @@
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="frame.gmftool#//@palette/@tools.2/@tools.0"/>
       <diagramNode
           href="iaml.gmfgraph#Frame"/>
     </ownedChild>
   </nodes>
   <nodes>
-    <containmentFeature
-        href="iaml.ecore#//visual/Frame/children"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//visual/InputForm"/>
@@ -266,16 +183,11 @@
         <diagramLabel
             href="iaml.gmfgraph#InputFormParentName"/>
       </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="frame.gmftool#//@palette/@tools.2/@tools.1"/>
       <diagramNode
           href="iaml.gmfgraph#InputForm"/>
     </ownedChild>
   </nodes>
   <nodes>
-    <containmentFeature
-        href="iaml.ecore#//visual/Frame/children"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//visual/InputTextField"/>
@@ -298,9 +210,6 @@
         <diagramLabel
             href="iaml.gmfgraph#InputTextFieldType"/>
       </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="frame.gmftool#//@palette/@tools.2/@tools.2"/>
       <diagramNode
           href="iaml.gmfgraph#InputTextField"/>
     </ownedChild>
@@ -334,19 +243,15 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="frame.gmftool#//@palette/@tools.0/@tools.4"/>
+          href="email.gmftool#//@palette/@tools.0/@tools.4"/>
       <diagramNode
           href="iaml.gmfgraph#StaticValue"/>
     </ownedChild>
   </nodes>
   <nodes>
-    <containmentFeature
-        href="iaml.ecore#//Scope/scopes"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//scopes/Session"/>
-      <domainSpecialization
-          body="self.oclIsTypeOf( Session )"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping"
           editPattern="">
@@ -355,16 +260,11 @@
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="frame.gmftool#//@palette/@tools.2/@tools.4"/>
       <diagramNode
           href="iaml.gmfgraph#Session"/>
     </ownedChild>
   </nodes>
   <nodes>
-    <containmentFeature
-        href="iaml.ecore#//Scope/elements"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//components/LoginHandler"/>
@@ -387,9 +287,6 @@
         <features
             href="iaml.ecore#//components/LoginHandler/type"/>
       </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="frame.gmftool#//@palette/@tools.0/@tools.5"/>
       <diagramNode
           href="iaml.gmfgraph#LoginHandler"/>
     </ownedChild>
@@ -417,14 +314,12 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="frame.gmftool#//@palette/@tools.0/@tools.3"/>
+          href="email.gmftool#//@palette/@tools.0/@tools.3"/>
       <diagramNode
           href="iaml.gmfgraph#CompositeCondition"/>
     </ownedChild>
   </nodes>
   <nodes>
-    <containmentFeature
-        href="iaml.ecore#//Scope/elements"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//DomainObjectInstance"/>
@@ -447,16 +342,11 @@
         <features
             href="iaml.ecore#//DomainObjectInstance/autosave"/>
       </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="frame.gmftool#//@palette/@tools.1/@tools.2"/>
       <diagramNode
           href="iaml.gmfgraph#DomainObjectInstance"/>
     </ownedChild>
   </nodes>
   <nodes>
-    <containmentFeature
-        href="iaml.ecore#//Scope/elements"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//DomainAttributeInstance"/>
@@ -474,16 +364,13 @@
         <diagramLabel
             href="iaml.gmfgraph#DomainAttributeInstanceType"/>
       </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="frame.gmftool#//@palette/@tools.1/@tools.3"/>
       <diagramNode
           href="iaml.gmfgraph#DomainAttributeInstance"/>
     </ownedChild>
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//visual/Frame/children"/>
+        href="iaml.ecore#//scopes/Email/buttons"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//visual/Button"/>
@@ -503,116 +390,9 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="frame.gmftool#//@palette/@tools.2/@tools.3"/>
+          href="email.gmftool#//@palette/@tools.1/@tools.0"/>
       <diagramNode
           href="iaml.gmfgraph#Button"/>
-    </ownedChild>
-  </nodes>
-  <nodes>
-    <containmentFeature
-        href="iaml.ecore#//Scope/parameters"/>
-    <ownedChild>
-      <domainMetaElement
-          href="iaml.ecore#//QueryParameter"/>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping"
-          editPattern="">
-        <diagramLabel
-            href="iaml.gmfgraph#QueryParameterName"/>
-        <features
-            href="iaml.ecore#//NamedElement/name"/>
-      </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="frame.gmftool#//@palette/@tools.0/@tools.6"/>
-      <diagramNode
-          href="iaml.gmfgraph#QueryParameter"/>
-    </ownedChild>
-  </nodes>
-  <nodes>
-    <containmentFeature
-        href="iaml.ecore#//Scope/elements"/>
-    <ownedChild>
-      <domainMetaElement
-          href="iaml.ecore#//components/AccessControlHandler"/>
-      <domainSpecialization
-          body="self.oclIsTypeOf( AccessControlHandler )"/>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="iaml.gmfgraph#AccessControlHandlerName"/>
-        <features
-            href="iaml.ecore#//NamedElement/name"/>
-      </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="frame.gmftool#//@palette/@tools.4/@tools.0"/>
-      <diagramNode
-          href="iaml.gmfgraph#AccessControlHandler"/>
-    </ownedChild>
-  </nodes>
-  <nodes>
-    <ownedChild>
-      <domainMetaElement
-          href="iaml.ecore#//users/Permission"/>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping"
-          editPattern="">
-        <diagramLabel
-            href="iaml.gmfgraph#PermissionName"/>
-        <features
-            href="iaml.ecore#//NamedElement/name"/>
-      </labelMappings>
-      <diagramNode
-          href="iaml.gmfgraph#Permission"/>
-    </ownedChild>
-  </nodes>
-  <nodes>
-    <ownedChild>
-      <domainMetaElement
-          href="iaml.ecore#//users/Role"/>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping"
-          editPattern="">
-        <diagramLabel
-            href="iaml.gmfgraph#RoleName"/>
-        <features
-            href="iaml.ecore#//NamedElement/name"/>
-      </labelMappings>
-      <diagramNode
-          href="iaml.gmfgraph#Role"/>
-    </ownedChild>
-  </nodes>
-  <nodes>
-    <containmentFeature
-        href="iaml.ecore#//Scope/elements"/>
-    <ownedChild>
-      <domainMetaElement
-          href="iaml.ecore#//users/UserInstance"/>
-      <domainSpecialization
-          body="self.oclIsTypeOf( UserInstance )"/>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="iaml.gmfgraph#UserInstanceName"/>
-        <features
-            href="iaml.ecore#//NamedElement/name"/>
-      </labelMappings>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping"
-          viewPattern="autosave: {0}"
-          editorPattern=""
-          editPattern="{0}">
-        <diagramLabel
-            href="iaml.gmfgraph#UserInstanceAutosave"/>
-        <features
-            href="iaml.ecore#//DomainObjectInstance/autosave"/>
-      </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="frame.gmftool#//@palette/@tools.4/@tools.3"/>
-      <diagramNode
-          href="iaml.gmfgraph#UserInstance"/>
     </ownedChild>
   </nodes>
   <nodes>
@@ -634,6 +414,9 @@
         <diagramLabel
             href="iaml.gmfgraph#EntryGateParentName"/>
       </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="email.gmftool#//@palette/@tools.0/@tools.5"/>
       <diagramNode
           href="iaml.gmfgraph#EntryGate"/>
     </ownedChild>
@@ -657,13 +440,16 @@
         <diagramLabel
             href="iaml.gmfgraph#ExitGateParentName"/>
       </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="email.gmftool#//@palette/@tools.0/@tools.6"/>
       <diagramNode
           href="iaml.gmfgraph#ExitGate"/>
     </ownedChild>
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//visual/Frame/children"/>
+        href="iaml.ecore#//scopes/Email/labels"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//visual/Label"/>
@@ -690,9 +476,108 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="frame.gmftool#//@palette/@tools.2/@tools.5"/>
+          href="email.gmftool#//@palette/@tools.1/@tools.1"/>
       <diagramNode
           href="iaml.gmfgraph#Label"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//Accessible/onAccess"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//EventTrigger"/>
+      <domainSpecialization
+          body="return domainElement.eContainingFeature().getName().equals(&quot;onAccess&quot;);"
+          language="java"/>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerContainmentFeature"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerParentName"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="email.gmftool#//@palette/@tools.3/@tools.0"/>
+      <diagramNode
+          href="iaml.gmfgraph#EventTrigger"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//scopes/Email/onSent"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//EventTrigger"/>
+      <domainSpecialization
+          body="return domainElement.eContainingFeature().getName().equals(&quot;onSent&quot;);"
+          language="java"/>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerContainmentFeature"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerParentName"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="email.gmftool#//@palette/@tools.3/@tools.1"/>
+      <diagramNode
+          href="iaml.gmfgraph#EventTrigger"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//scopes/Email/onFailure"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//EventTrigger"/>
+      <domainSpecialization
+          body="return domainElement.eContainingFeature().getName().equals(&quot;onFailure&quot;);"
+          language="java"/>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerContainmentFeature"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerParentName"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="email.gmftool#//@palette/@tools.3/@tools.2"/>
+      <diagramNode
+          href="iaml.gmfgraph#EventTrigger"/>
     </ownedChild>
   </nodes>
   <nodes>
@@ -720,28 +605,6 @@
           href="iaml.gmfgraph#EventTrigger"/>
     </ownedChild>
   </nodes>
-  <nodes>
-    <containmentFeature
-        href="iaml.ecore#//Scope/scopes"/>
-    <ownedChild>
-      <domainMetaElement
-          href="iaml.ecore#//scopes/Email"/>
-      <domainSpecialization
-          body="self.oclIsTypeOf( Email )"/>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="iaml.gmfgraph#EmailName"/>
-        <features
-            href="iaml.ecore#//NamedElement/name"/>
-      </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="frame.gmftool#//@palette/@tools.2/@tools.6"/>
-      <diagramNode
-          href="iaml.gmfgraph#Email"/>
-    </ownedChild>
-  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/SyncWire"/>
@@ -758,7 +621,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="frame.gmftool#//@palette/@tools.3/@tools.0"/>
+        href="email.gmftool#//@palette/@tools.2/@tools.0"/>
     <diagramLink
         href="iaml.gmfgraph#SyncWire"/>
     <sourceMetaFeature
@@ -784,7 +647,7 @@
         href="iaml.ecore#//ContainsWires/actions"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="frame.gmftool#//@palette/@tools.6/@tools.0"/>
+        href="email.gmftool#//@palette/@tools.4/@tools.0"/>
     <diagramLink
         href="iaml.gmfgraph#RunAction"/>
     <sourceMetaFeature
@@ -801,7 +664,7 @@
         href="iaml.ecore#//ContainsWires/parameterEdges"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="frame.gmftool#//@palette/@tools.3/@tools.2"/>
+        href="email.gmftool#//@palette/@tools.2/@tools.3"/>
     <diagramLink
         href="iaml.gmfgraph#ParameterEdge"/>
     <sourceMetaFeature
@@ -810,39 +673,6 @@
     <linkMetaFeature
         xsi:type="ecore:EReference"
         href="iaml.ecore#//wires/ParameterEdge/to"/>
-  </links>
-  <links>
-    <domainMetaElement
-        href="iaml.ecore#//wires/SelectWire"/>
-    <domainSpecialization
-        body="self.oclIsTypeOf( SelectWire )"/>
-    <labelMappings
-        xsi:type="gmfmap:FeatureLabelMapping">
-      <diagramLabel
-          href="iaml.gmfgraph#SelectWireName"/>
-      <features
-          href="iaml.ecore#//NamedElement/name"/>
-    </labelMappings>
-    <labelMappings
-        xsi:type="gmfmap:FeatureLabelMapping">
-      <diagramLabel
-          href="iaml.gmfgraph#SelectWireQuery"/>
-      <features
-          href="iaml.ecore#//wires/SelectWire/query"/>
-    </labelMappings>
-    <containmentFeature
-        href="iaml.ecore#//ContainsWires/wires"/>
-    <tool
-        xsi:type="gmftool:CreationTool"
-        href="frame.gmftool#//@palette/@tools.3/@tools.3"/>
-    <diagramLink
-        href="iaml.gmfgraph#SelectWire"/>
-    <sourceMetaFeature
-        xsi:type="ecore:EReference"
-        href="iaml.ecore#//Wire/from"/>
-    <linkMetaFeature
-        xsi:type="ecore:EReference"
-        href="iaml.ecore#//Wire/to"/>
   </links>
   <links>
     <domainMetaElement
@@ -860,7 +690,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="frame.gmftool#//@palette/@tools.3/@tools.4"/>
+        href="email.gmftool#//@palette/@tools.2/@tools.1"/>
     <diagramLink
         href="iaml.gmfgraph#SetWire"/>
     <sourceMetaFeature
@@ -886,7 +716,7 @@
         href="iaml.ecore#//ContainsWires/actions"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="frame.gmftool#//@palette/@tools.6/@tools.1"/>
+        href="email.gmftool#//@palette/@tools.4/@tools.1"/>
     <diagramLink
         href="iaml.gmfgraph#NavigateAction"/>
     <sourceMetaFeature
@@ -910,7 +740,7 @@
         href="iaml.ecore#//ContainsWires/conditionEdges"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="frame.gmftool#//@palette/@tools.3/@tools.1"/>
+        href="email.gmftool#//@palette/@tools.2/@tools.2"/>
     <diagramLink
         href="iaml.gmfgraph#ConditionEdge"/>
     <sourceMetaFeature
@@ -919,54 +749,6 @@
     <linkMetaFeature
         xsi:type="ecore:EReference"
         href="iaml.ecore#//wires/ConditionEdge/to"/>
-  </links>
-  <links>
-    <domainMetaElement
-        href="iaml.ecore#//wires/NewInstanceWire"/>
-    <domainSpecialization
-        body="self.oclIsTypeOf( NewInstanceWire )"/>
-    <labelMappings
-        xsi:type="gmfmap:FeatureLabelMapping">
-      <diagramLabel
-          href="iaml.gmfgraph#NewInstanceWireName"/>
-      <features
-          href="iaml.ecore#//NamedElement/name"/>
-    </labelMappings>
-    <containmentFeature
-        href="iaml.ecore#//ContainsWires/wires"/>
-    <tool
-        xsi:type="gmftool:CreationTool"
-        href="frame.gmftool#//@palette/@tools.3/@tools.5"/>
-    <diagramLink
-        href="iaml.gmfgraph#NewInstanceWire"/>
-    <sourceMetaFeature
-        xsi:type="ecore:EReference"
-        href="iaml.ecore#//Wire/from"/>
-    <linkMetaFeature
-        xsi:type="ecore:EReference"
-        href="iaml.ecore#//Wire/to"/>
-  </links>
-  <links>
-    <domainMetaElement
-        href="iaml.ecore#//wires/RequiresEdge"/>
-    <labelMappings
-        readOnly="true">
-      <diagramLabel
-          href="iaml.gmfgraph#RequiresEdgeName"/>
-    </labelMappings>
-    <containmentFeature
-        href="iaml.ecore#//ContainsWires/requiresEdges"/>
-    <tool
-        xsi:type="gmftool:CreationTool"
-        href="frame.gmftool#//@palette/@tools.4/@tools.1"/>
-    <diagramLink
-        href="iaml.gmfgraph#RequiresEdge"/>
-    <sourceMetaFeature
-        xsi:type="ecore:EReference"
-        href="iaml.ecore#//wires/RequiresEdge/from"/>
-    <linkMetaFeature
-        xsi:type="ecore:EReference"
-        href="iaml.ecore#//wires/RequiresEdge/to"/>
   </links>
   <links>
     <domainMetaElement
@@ -983,9 +765,6 @@
     </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/constraintEdges"/>
-    <tool
-        xsi:type="gmftool:CreationTool"
-        href="frame.gmftool#//@palette/@tools.4/@tools.2"/>
     <diagramLink
         href="iaml.gmfgraph#ConstraintEdge"/>
     <sourceMetaFeature
@@ -1001,8 +780,8 @@
     <domainModel
         href="iaml.ecore#/"/>
     <domainMetaElement
-        href="iaml.ecore#//visual/Frame"/>
+        href="iaml.ecore#//scopes/Email"/>
     <palette
-        href="frame.gmftool#//@palette"/>
+        href="email.gmftool#//@palette"/>
   </diagram>
 </gmfmap:Mapping>

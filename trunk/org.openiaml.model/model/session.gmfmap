@@ -66,7 +66,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="session.gmftool#//@palette/@tools.5/@tools.0"/>
+          href="session.gmftool#//@palette/@tools.5/@tools.1"/>
       <diagramNode
           href="iaml.gmfgraph#EventTrigger"/>
     </ownedChild>
@@ -638,6 +638,28 @@
       </labelMappings>
       <diagramNode
           href="iaml.gmfgraph#EventTrigger"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//Scope/scopes"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//scopes/Email"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( Email )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#EmailName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="session.gmftool#//@palette/@tools.2/@tools.4"/>
+      <diagramNode
+          href="iaml.gmfgraph#Email"/>
     </ownedChild>
   </nodes>
   <links>

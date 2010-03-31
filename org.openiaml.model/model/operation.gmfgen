@@ -486,7 +486,9 @@
       <children iD="org.openiaml.model.diagram.printing" kind="Printing" name="Printing" xsi:type="gmfgen:GenStandardPreferencePage"/>
       <children iD="org.openiaml.model.diagram.rulersAndGrid" kind="RulersAndGrid" name="Rulers And Grid" xsi:type="gmfgen:GenStandardPreferencePage"/>
     </preferencePages>
-  </diagram>
+  <containsShortcutsTo>iaml_email</containsShortcutsTo>
+<shortcutsProvidedFor>iaml_email</shortcutsProvidedFor>
+</diagram>
   <plugin iD="org.openiaml.model.diagram.operation" name="Iaml Diagram Plugin (Operation)" provider="www.openiaml.org" version="0.4.4.qualifier">
     <requiredPlugins>org.eclipse.draw2d</requiredPlugins>
     <requiredPlugins>org.eclipse.gmf.runtime.draw2d.ui</requiredPlugins>

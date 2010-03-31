@@ -308,6 +308,11 @@ function queued_remove_permission(permission_id, instance_id, function_queue) {
 	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
+function queued_email_send(email_id, function_queue) {
+	var url = 'email_callback_send.php?email_id=' + encodeURIComponent(email_id) + '&frame=' + encodeURIComponent(frame_id);
+	execute_queued_url(url, 'set_domain_attribute', function_queue);
+}
+
 /* call a remote operation (only one attribute) */
 function call_remote_event(container, operation_name, arg0, arg1, function_queue) {
 	var url = 'call_remote_event.php?container=' + encodeURIComponent(container)

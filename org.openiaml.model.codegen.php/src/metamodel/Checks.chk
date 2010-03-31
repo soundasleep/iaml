@@ -129,6 +129,8 @@ context model::PrimitiveOperation WARNING "Unknown primitive operation name '" +
 		name == "remove permission" || name == "check permissions" ||
 		(model::VisibleThing.isInstance(eContainer) &&
 			(name == "hide" || name == "show")) || 
+		(model::scopes::Email.isInstance(eContainer) &&
+			(name == "send")) ||
 		name == "true?" || name == "can cast?");
 
 context model::operations::Arithmetic ERROR "Arithmetic must have at least one incoming data source edge" :

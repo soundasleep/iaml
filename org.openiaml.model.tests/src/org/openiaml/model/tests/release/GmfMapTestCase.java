@@ -175,6 +175,9 @@ public class GmfMapTestCase extends XmlTestCase {
 				// all nodes must be contained somewhere
 				Element domainMetaElement = (Element) xpathFirst(node, "ownedChild/domainMetaElement");
 				
+				// can it be contained?
+				String containmentName = getContainmentName(filename, node);
+				
 				// iaml.ecore#//EventTrigger
 				String elementName = domainMetaElement.getAttribute("href");
 				
@@ -205,7 +208,7 @@ public class GmfMapTestCase extends XmlTestCase {
 					String tool = toolNode.getAttribute("href");
 					
 					// find out which tool it should be
-					String expected = getDesiredToolMappingMatch(filename, elementName);
+					String expected = getDesiredToolMappingMatch(filename, elementName, containmentName);
 					
 					// set it if different
 					if (!tool.equals(expected)) {
@@ -214,7 +217,7 @@ public class GmfMapTestCase extends XmlTestCase {
 						changed = true;
 					}
 					
-					assertToolMappingMatches(filename, elementName, expected);
+					assertToolMappingMatches(filename, elementName, expected, containmentName);
 				}
 			}
 			
@@ -223,6 +226,8 @@ public class GmfMapTestCase extends XmlTestCase {
 				// all nodes must be contained somewhere
 				Element domainMetaElement = (Element) xpathFirst(link, "domainMetaElement");
 				
+				String containmentName = getContainmentName(filename, link);
+
 				// iaml.ecore#//EventTrigger
 				String elementName = domainMetaElement.getAttribute("href");
 				
@@ -253,7 +258,7 @@ public class GmfMapTestCase extends XmlTestCase {
 					String tool = toolNode.getAttribute("href");
 					
 					// find out which tool it should be
-					String expected = getDesiredToolMappingMatch(filename, elementName);
+					String expected = getDesiredToolMappingMatch(filename, elementName, containmentName);
 					
 					// set it if different
 					if (!tool.equals(expected)) {
@@ -262,7 +267,7 @@ public class GmfMapTestCase extends XmlTestCase {
 						changed = true;
 					}
 					
-					assertToolMappingMatches(filename, elementName, expected);
+					assertToolMappingMatches(filename, elementName, expected, containmentName);
 				}
 			}
 			
@@ -274,6 +279,29 @@ public class GmfMapTestCase extends XmlTestCase {
 	}
 
 	/**
+	 * Does the given node or link have a containment feature?
+	 * 
+	 * @param node the element to search from, either node or link
+	 * @return the name of the containment feature, or <code>null</code>
+	 * @throws XPathExpressionException 
+	 */
+	private String getContainmentName(String filename, Element node) throws XPathExpressionException {
+		Element containmentFeature = hasXpathFirst(node, "containmentFeature");
+		String containmentName = null;	// default = empty
+		if (containmentFeature != null) {
+			// "iaml.ecore#//VisibleThing/onClick"
+			containmentName = containmentFeature.getAttribute("href");
+			assertNotNull(filename + ": containment feature for '" + node + "' should not have been null: " + containmentFeature, containmentName);
+		
+			// "onClick"
+			assertTrue(containmentName.contains("/"));
+			containmentName = containmentName.substring(containmentName.lastIndexOf("/") + 1);
+		}
+		
+		return containmentName;
+	}
+
+	/**
 	 * Assert that the given tool mapping matches the given element.
 	 * 
 	 * Maps the tool mapping to a loaded .gmftool document through {@link #findGmftoolFor(String)}. 
@@ -282,10 +310,11 @@ public class GmfMapTestCase extends XmlTestCase {
 	 * @param filename
 	 * @param elementName "iaml.ecore#//EventTrigger"
 	 * @param tool "visual.gmftool#//@palette/@tools.0/@tools.22"
+	 * @param containmentFeature containment feature of the element, e.g. "onEdit"
 	 * @returns the resolved tool mapping node from the gmftool
 	 */
 	private Element assertToolMappingMatches(String filename, String elementName,
-			String tool) throws Exception {
+			String tool, String containmentFeature) throws Exception {
 		
 		// get the last name (ignore sub-packages)
 		String element = elementName.substring(elementName.lastIndexOf("/") + 1);
@@ -307,7 +336,7 @@ public class GmfMapTestCase extends XmlTestCase {
 		String toolName = toolNode.getAttribute("title");
 		
 		// these should be the same
-		assertTrue(filename + ": tool mapping did not match: '" + element + "', '" + toolName + "'", toolMatches(toolName, element) );
+		assertTrue(filename + ": tool mapping did not match: '" + element + "', '" + toolName + "'", toolMatches(toolName, element, containmentFeature) );
 		
 		return toolNode;
 	}
@@ -318,11 +347,12 @@ public class GmfMapTestCase extends XmlTestCase {
 	 * 
 	 * @param the current gmfmap filename, "visual.gmfmap"
 	 * @param elementName "iaml.ecore#//EventTrigger"
+	 * @param containmentFeature the containment feature, e.g. "onEdit"
 	 * @return "visual.gmftool#//@palette/@tools.0/@tools.22"
 	 * @throws XPathExpressionException 
 	 */
 	private String getDesiredToolMappingMatch(String filename, 
-			String elementName) throws XPathExpressionException {
+			String elementName, String containmentFeature) throws XPathExpressionException {
 		
 		// get the last name (ignore sub-packages)
 		String element = elementName.substring(elementName.lastIndexOf("/") + 1);
@@ -335,7 +365,7 @@ public class GmfMapTestCase extends XmlTestCase {
 		
 		for (Element tool : xpath(doc, "//tools")) {
 			
-			if (tool.hasAttribute("title") && toolMatches(tool.getAttribute("title"), element)) {
+			if (tool.hasAttribute("title") && toolMatches(tool.getAttribute("title"), element, containmentFeature)) {
 				// we found the target tool
 				String ref = compileEmfReference( filename.substring(filename.lastIndexOf("/") + 1), tool );
 				
@@ -348,7 +378,7 @@ public class GmfMapTestCase extends XmlTestCase {
 		}
 		
 		// couldn't find anything
-		fail("Could not find tool mapping for '" + elementName + "' in filename '" + filename + "'");
+		fail("Could not find tool mapping for '" + elementName + "' in filename '" + filename + "' for containment '" + containmentFeature + "'");
 		return null;
 	}
 	
@@ -358,13 +388,13 @@ public class GmfMapTestCase extends XmlTestCase {
 	 * @param title 'EventTrigger' or 'EventTrigger [onClick]'
 	 * @param elementName 'EventTrigger' 
 	 */
-	private boolean toolMatches(String title, String elementName) {
+	private boolean toolMatches(String title, String elementName, String containmentFeature) {
 		if (title.equals(elementName))
 			return true;
 		
 		if (title.contains("[")) {
-			// remove the square bracket
-			title = title.substring(0, title.indexOf('[') - 1);
+			// remove [containmentFeature] so we only match this containment feature
+			title = title.replace(" [" + containmentFeature + "]", "");
 			
 			if (title.equals(elementName))
 				return true;

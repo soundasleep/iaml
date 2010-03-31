@@ -34,6 +34,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
+import org.openiaml.model.codegen.DefaultRuntimeProperties;
 import org.openiaml.model.codegen.ICodeGeneratorInMemory;
 import org.openiaml.model.codegen.php.CustomOAWLog;
 import org.openiaml.model.codegen.php.IACleanerBeautifier;
@@ -367,8 +368,11 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	 * @return
 	 */
 	protected Map<String, String> getRuntimeProperties() {
-		Map<String,String> properties = new HashMap<String,String>();
-
+		// first, get the default properties
+		Map<String,String> properties = new DefaultRuntimeProperties().getDefaultProperties();
+		
+		// then overwrite
+		properties.put("include_runtime", "false");
 		properties.put("config_runtime", CONFIG_RUNTIME);
 		properties.put("config_web", CONFIG_WEB);
 		properties.put("debug", "true");

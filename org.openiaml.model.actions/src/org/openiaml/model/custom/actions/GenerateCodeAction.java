@@ -20,6 +20,7 @@ import org.eclipse.swt.widgets.Display;
 import org.openiaml.model.ModelLoader;
 import org.openiaml.model.ModelLoader.ModelLoadException;
 import org.openiaml.model.actions.QuestionDialogResult;
+import org.openiaml.model.codegen.DefaultRuntimeProperties;
 import org.openiaml.model.codegen.ICodeGenerator;
 import org.openiaml.model.codegen.php.CheckModelInstance;
 import org.openiaml.model.codegen.php.OawCodeGeneratorWithRuntime;
@@ -229,15 +230,11 @@ public class GenerateCodeAction extends IamlFileAction {
 	/**
 	 * Get the default runtime properties.
 	 * 
-	 * @see ICodeGenerator#generateCode(IFile, IProgressMonitor, Map)
+	 * @see DefaultRuntimeProperties#getDefaultProperties()
 	 * @return
 	 */
 	protected Map<String, String> getDefaultProperties() {
-		Map<String, String> properties = new HashMap<String,String>();
-		
-		properties.put("include_runtime", "true");
-		
-		return properties;
+		return new DefaultRuntimeProperties().getDefaultProperties();
 	}
 
 	/* (non-Javadoc)

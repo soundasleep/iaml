@@ -244,6 +244,9 @@ public class OawCodeGenerator implements ICodeGenerator, ICodeGeneratorInMemory 
 			properties.put("config_runtime", runtimeProperties.get("config_runtime"));
 			properties.put("config_web", runtimeProperties.get("config_web"));
 			properties.put("debug", Boolean.toString(Boolean.parseBoolean(runtimeProperties.get("debug"))));
+			properties.put("email_handler", runtimeProperties.get("email_handler"));
+			properties.put("email_handler_phpmailer_include", runtimeProperties.get("email_handler_phpmailer_include"));
+			properties.put("email_handler_file_destination", runtimeProperties.get("email_handler_file_destination"));
 			
 			Map<String,Object> slotContents = new HashMap<String,Object>();
 

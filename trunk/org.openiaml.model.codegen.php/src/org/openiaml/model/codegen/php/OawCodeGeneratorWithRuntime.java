@@ -16,6 +16,7 @@ import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.runtime.IFileCopyListener;
 import org.openiaml.model.runtime.IamlRuntimeLibrariesPlugin;
+import org.openiaml.model.runtime.phpmailer.IamlRuntimePhpmailerPlugin;
 
 /**
  * Extends the OawCodeGenerator to also include runtime files
@@ -41,6 +42,9 @@ public class OawCodeGeneratorWithRuntime extends OawCodeGenerator implements IFi
 			// need to copy it over
 			runtimeProperties.put("config_runtime", "runtime/include/");
 			runtimeProperties.put("config_web", "runtime/web/");
+			
+			// copy over phpmailer
+			runtimeProperties.put("email_handler_phpmailer_include", "runtime/phpmailer/");
 		}
 
 	}
@@ -57,17 +61,39 @@ public class OawCodeGeneratorWithRuntime extends OawCodeGenerator implements IFi
 		// we copy over ALL files from the org.openiaml.model.runtime folder
 		// into a runtime/ folder
 		if (needToCopy(runtimeProperties)) {
-			IamlRuntimeLibrariesPlugin runtime = IamlRuntimeLibrariesPlugin.getInstance();
+			/*
+			 * TODO Currently this is implemented fairly inefficiently; every additional
+			 * runtime source has a copy/pasted implementation. It should be refactored.
+			 */
 			
-			// add a listener
-			runtime.addFileCopyListener(this);
+			{
+				IamlRuntimeLibrariesPlugin runtime = IamlRuntimeLibrariesPlugin.getInstance();
+				
+				// add a listener
+				runtime.addFileCopyListener(this);
+	
+				try {
+					runtime.copyRuntimeFiles(project, new SubProgressMonitor(monitor, 10));
+				} catch (IOException e) {
+					return new Status(Status.ERROR, PLUGIN_ID, "Cannot yet copy over runtime files: " + e.getMessage(), e);
+				} catch (CoreException e) {
+					return new Status(Status.ERROR, PLUGIN_ID, "Cannot yet copy over runtime files: " + e.getMessage(), e);
+				}
+			}
 
-			try {
-				runtime.copyRuntimeFiles(project, new SubProgressMonitor(monitor, 10));
-			} catch (IOException e) {
-				return new Status(Status.ERROR, PLUGIN_ID, "Cannot yet copy over runtime files: " + e.getMessage(), e);
-			} catch (CoreException e) {
-				return new Status(Status.ERROR, PLUGIN_ID, "Cannot yet copy over runtime files: " + e.getMessage(), e);
+			{
+				IamlRuntimePhpmailerPlugin runtime = IamlRuntimePhpmailerPlugin.getInstance();
+				
+				// add a listener
+				runtime.addFileCopyListener(this);
+	
+				try {
+					runtime.copyRuntimeFiles(project, new SubProgressMonitor(monitor, 10));
+				} catch (IOException e) {
+					return new Status(Status.ERROR, PLUGIN_ID, "Cannot yet copy over runtime files: " + e.getMessage(), e);
+				} catch (CoreException e) {
+					return new Status(Status.ERROR, PLUGIN_ID, "Cannot yet copy over runtime files: " + e.getMessage(), e);
+				}
 			}
 		}
 		

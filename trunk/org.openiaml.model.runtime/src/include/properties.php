@@ -1,6 +1,9 @@
 <?php
 /**
  * Wrapper to access .properties files.
+ *
+ * Tries to have the same semantics as Java's properties: 
+ * http://java.sun.com/j2se/1.4.2/docs/api/java/util/Properties.html#load%28java.io.InputStream%29
  */
  
 function load_properties($db_name) {
@@ -12,6 +15,15 @@ function load_properties($db_name) {
 
 	// load the properties file
 	$f = file($db_name);
+	
+	// escape out \ escape characters temporarily
+	foreach ($f as $i => $line) {
+		$line = str_replace("\\\\", "&p", $line);
+		$line = str_replace("\\ ", "&s", $line);
+		$line = str_replace("&", "&&", $line);
+		$f[$i] = $line;
+	}
+	
 	$properties = array();
 	for ($i = 0; $i < count($f); $i++) {
 		// strip comments
@@ -31,7 +43,10 @@ function load_properties($db_name) {
 		
 		$key = trim($split[0]);
 		$value = trim($split[1]);
-		if (substr(trim($split[1]), -1) == ",") {
+		if (substr(trim($split[1]), -1) == "\\") {
+			// remove end \
+			$value = substr($value, 0, strlen($value) - 1);
+		
 			// continues on the next couple of lines
 			while ($i < count($f)) {
 				$i++;
@@ -41,22 +56,43 @@ function load_properties($db_name) {
 				}
 				
 				// skip blank lines
-				if (trim($f[$i]) != "") {
-					$value .= "\n" . trim($f[$i]);
+				if (ltrim($f[$i]) != "") {
+					$trimmed = trim($f[$i]);
+					// remove end \
+					if (substr(trim($f[$i]), -1) == "\\") {
+						$trimmed = substr($trimmed, 0, strlen($trimmed) - 1);
+					}
+					$value .= "\n" . $trimmed;
 				}
 				
 				// break out of continuation
-				if (substr(trim($f[$i]), -1) != ",") {
+				if (substr(trim($f[$i]), -1) != "\\") {
 					break;
 				}
 			}
 		}
-		
+
 		// save to properties array
 		$properties[$key] = $value;
 	}
 	
-	return $properties;
+	$new_prop = array();
+	// now unescape everything
+	foreach ($properties as $key => $value) {
+		// in reverse order
+		$key = str_replace("&&", "&", $key);
+		$key = str_replace("&s", " ", $key);
+		$key = str_replace("&p", "\\", $key);
+
+		// in reverse order
+		$value = str_replace("&&", "&", $value);
+		$value = str_replace("&s", " ", $value);
+		$value = str_replace("&p", "\\", $value);
+	
+		$new_prop[$key] = $value;
+	} 
+	
+	return $new_prop;
 }
 
 function get_property($properties, $row_name, $default = false) {
@@ -74,6 +110,12 @@ function set_property($db_name, $properties, $key, $value) {
 	// write new properties file
 	$s = array();
 	foreach ($properties as $key => $value) {
+		// escape out the value
+		$value = str_replace("\\", "\\\\", $value);
+		$value = str_replace("\n ", "\n\\ ", $value);
+		$value = str_replace("\n", "\\\n ", $value);
+		$value = str_replace(" \n", "\\ \n", $value);
+	
 		$s[] = "$key=$value";
 	}
 	file_put_contents($db_name, implode("\n", $s));

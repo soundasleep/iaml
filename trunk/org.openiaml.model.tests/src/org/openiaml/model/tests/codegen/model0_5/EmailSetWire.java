@@ -3,6 +3,10 @@
  */
 package org.openiaml.model.tests.codegen.model0_5;
 
+import java.io.File;
+
+import org.eclipse.core.resources.IFile;
+
 
 
 /**
@@ -28,12 +32,15 @@ public class EmailSetWire extends EmailCodegenTestCase {
 	
 	/**
 	 * We can edit the form, and then send the e-mail, which has
-	 * all of the details required.
+	 * all of the details required. Returns the intercepted email, which can
+	 * then be tested.
+	 * @return 
 	 * 
+	 * @return the intercepted email
 	 * @throws Exception
 	 */
-	public void testEditForm() throws Exception {
-	
+	private InterceptedEmail fillOutForm() throws Exception {
+		
 		// email log is empty
 		waitForEmails();
 		assertEmailEmpty();
@@ -72,6 +79,20 @@ public class EmailSetWire extends EmailCodegenTestCase {
 		assertEquals(1, getEmailSize());
 		InterceptedEmail email = getEmailFirst();
 		
+		return email;
+		
+	}
+	
+	/**
+	 * We can edit the form, and then send the e-mail, which has
+	 * all of the details required.
+	 * 
+	 * @throws Exception
+	 */
+	public void testEditForm() throws Exception {
+	
+		InterceptedEmail email = fillOutForm();
+
 		assertEquals("source@openiaml.org", email.getFrom());
 		assertEquals("target@openiaml.org", email.getTo());
 		
@@ -110,6 +131,37 @@ public class EmailSetWire extends EmailCodegenTestCase {
 		// no custom template is provided, so we get the default content
 		assertEquals("from: source@openiaml.org\nto: target@openiaml.org\nfield 1: \nfield 2: \nfield 3: \n", email.getContent());
 	
+	}
+	
+	/**
+	 * Tests adding a custom template for the {@model Email}.
+	 * 
+	 * @example Email
+	 * 		Using a custom PHP template for rendering {@model Email}s.
+	 * 
+	 * @implementation Email
+	 * 		If a PHP file called <code><strong>CUSTOM_ROOT</strong>/templates/{@model Email#id}.php</code> is
+	 * 		readable at runtime, this template file will be used to render the {@model Email} instead
+	 * 		of the default template.
+	 * 
+	 * @throws Exception
+	 */
+	public void testCustomTemplate() throws Exception {
+		
+		// copy over a custom template first
+		File sourceFile = new File( ROOT + "codegen/model0_5/email.php" );
+		IFile targetFile = getProject().getFile("templates/email.php");
+		copyFileIntoWorkspace(sourceFile, targetFile);
+		
+		// proceed as normal
+		InterceptedEmail email = fillOutForm();
+
+		assertEquals("source@openiaml.org", email.getFrom());
+		assertEquals("target@openiaml.org", email.getTo());
+		
+		// our custom template should have been used
+		assertEquals("This e-mail, from source@openiaml.org to target@openiaml.org, has these field values: value 1, value 2, value 3.", email.getContent());
+		
 	}
 	
 }

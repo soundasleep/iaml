@@ -177,4 +177,8 @@ context model::VisibleThing ERROR "Mismatch between default fieldValue attribute
 
 context model::scopes::Email ERROR "An e-mail cannot contain a Property and a StaticValue with the same name" :
 	properties.collect(e|e.name).intersect(values.collect(e|e.name)).isEmpty;
+
+context model::wires::SyncWire ERROR "A SyncWire cannot connect to an Email" :
+	!model::scopes::Email.isInstance(to) &&
+	!model::scopes::Email.isInstance(from);
 	

@@ -53,6 +53,7 @@ import org.openiaml.model.model.operations.OperationCallNode;
 import org.openiaml.model.model.operations.OperationsPackage;
 import org.openiaml.model.model.operations.SplitNode;
 import org.openiaml.model.model.operations.StartNode;
+import org.openiaml.model.model.scopes.Email;
 import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.users.RequiresEdgeDestination;
@@ -438,7 +439,13 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setGeneratedBy(field, by);
 		return field;
 	}
-	
+
+	public Label generatedLabel(GeneratesElements by, Email container) throws InferenceException {
+		Label field = (Label) createElement( container, VisualPackage.eINSTANCE.getLabel(), ScopesPackage.eINSTANCE.getEmail_Labels() );
+		setGeneratedBy(field, by);
+		return field;
+	}
+
 	public Button generatedButton(GeneratesElements by, VisibleThing container) throws InferenceException {
 		Button button = (Button) createElement( container, VisualPackage.eINSTANCE.getButton(), ModelPackage.eINSTANCE.getVisibleThing_Children() );
 		setGeneratedBy(button, by);

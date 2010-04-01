@@ -722,5 +722,25 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 		}
 	}
 	
+	/**
+	 * @see XmlTestCase#readFile(File)
+	 */
+	public static String readFile(File sourceFile) throws IOException {
+		return XmlTestCase.readFile(sourceFile);
+	}
+	
+	/**
+	 * @see XmlTestCase#copyFile(File, File)
+	 */
+	public static void copyFile(File source, File target) throws IOException {
+		XmlTestCase.copyFile(source, target);
+	}
+	
+	/**
+	 * @see XmlTestCase#writeFile(File, String)
+	 */
+	public static void writeFile(File sourceFile, String data) throws IOException {
+		XmlTestCase.writeFile(sourceFile, data);
+	}
 	
 }

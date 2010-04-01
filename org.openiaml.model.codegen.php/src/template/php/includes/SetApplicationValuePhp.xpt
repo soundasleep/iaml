@@ -15,6 +15,9 @@
  
 «EXPAND template::Template::commonHeader("")»
 
+// include operations, condition definitions
+«EXPAND template::Common::commonPHPIncludes»
+
 «EXPAND template::domain::Definitions::domainDefinitions»
 
 log_message("set_application_value.php? " . print_r($_GET, true));
@@ -32,12 +35,190 @@ $arg0 = require_get("arg0");
 set_application_value($id, $arg0);
 log_message("set_application_value.php: setting id=$id, arg0=$arg0");
 
+// do we need to run any onChange/onEdit events?
+«EXPAND onChangeEvents FOREACH eAllContents.typeSelect(model::ContainsProperties)»
+
 echo "ok";
 
-// update any values on the client-side?
-// NOTE if this fails, then this file should be reverted (from r1794)
+/* Is there additional actions we should do on the client-side once this
+ * property has changed? */
+«REM»
+this is different from 'updateAllFrameProperties', because this allows
+incoming parameters for SelectWires, etc, to be propogated correctly.
+TODO this should be refactored and made cleaner in the future. 
+«ENDREM»
+try {
+	«EXPAND potentialUpdatesRequired FOREACH allProperties(this)»
+} catch (IamlRuntimeException $e) {
+	// redirect to the exception frame
+	$url = "exception.php?fail=" . urlencode($e->getMessage() . " [from setApplicationValue]");
+	log_message("[exception] " . print_r($e, true));
+	log_message("[update exception handler] Redirecting to '$url' (fail)");
+
+	log_message("redirect " 
+		. escape_parameter_string($url));
+	echo "\nredirect " 
+		. escape_parameter_string($url);				
+	die;
+}
+
+// update any (other) values on the client-side?
 «EXPAND template::php::callbacks::UpdateFrameProperties::updateAllFrameProperties»
 
 echo_necessary_update_callbacks();
 
+«ENDDEFINE»
+
+«DEFINE onChangeEvents FOR model::ContainsProperties»
+	«FOREACH properties.select(p|p.name == "fieldValue") AS property»
+		«IF model::Editable.isInstance(this)»
+		«REM»select all Editable ContainsProperties«ENDREM»
+		«FOREACH getRoot().eAllContents.typeSelect(model::Editable).select(e|e==this) AS editable» 
+			«IF editable.onEdit != null»
+			if ($id == '«safeName(property)»') {
+				«EXPAND template::events::EventCall::callEvent(true) FOR editable.onEdit»
+			}
+			«ENDIF» 
+		«ENDFOREACH»
+		«ENDIF»
+	«ENDFOREACH»
+«ENDDEFINE»
+
+«DEFINE potentialUpdatesRequired FOR model::Property»
+	if ($id == "«safeName()-»") {
+		/* Property "«name-»" («id-») */
+		
+		«REM»expand the direct wires from the property«ENDREM»
+		«EXPAND directPropertyUpdatesFrom FOREACH outWires»
+		«EXPAND directPropertyUpdatesTo FOREACH inWires»
+		
+		«REM»is this property used as the input for a SelectWire?«ENDREM»
+		«REM»is this property's parent used as the input for a SelectWire?«ENDREM»
+		«IF model::visual::InputTextField.isInstance(eContainer)»
+			«EXPAND potentialContainerUpdates FOR (model::visual::InputTextField) eContainer»
+		«ENDIF»
+	}
+«ENDDEFINE»
+
+«DEFINE directPropertyUpdatesFrom FOR model::Wire»
+«ENDDEFINE»
+«DEFINE directPropertyUpdatesTo FOR model::Wire»
+«ENDDEFINE»
+
+«DEFINE directPropertyUpdatesFrom FOR model::wires::SyncWire»
+	«IF model::Property.isInstance(to)»
+		«EXPAND template::operations::OutgoingValues::outgoingValueTarget(true, "arg0") FOR (model::Property) to»
+	«ENDIF»
+«ENDDEFINE»
+
+/* bidirectionality */
+«DEFINE directPropertyUpdatesTo FOR model::wires::SyncWire»
+	«IF model::Property.isInstance(from)»
+		«EXPAND template::operations::OutgoingValues::outgoingValueTarget(true, "arg0") FOR (model::Property) from»
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE directPropertyUpdatesFrom FOR model::wires::SetWire»
+	«IF model::Property.isInstance(to)»
+		«EXPAND template::operations::OutgoingValues::outgoingValueTarget(true, "arg0") FOR (model::Property) to»
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE potentialContainerUpdates FOR model::visual::InputTextField»
+	«EXPAND potentialUpdates FOREACH outWires»
+	«EXPAND potentialParameterUpdates FOREACH outParameterEdges»
+«ENDDEFINE»
+
+«DEFINE potentialUpdates FOR model::Wire»
+	«throwException("Unknown potential update wire edge: " + this)»
+«ENDDEFINE»
+
+«DEFINE potentialParameterUpdates FOR model::wires::ParameterEdge»
+	/* ParameterEdge "«this-»" */
+	«EXPAND potentialUpdatesParameter FOR to»
+«ENDDEFINE»
+«DEFINE potentialUpdates FOR model::wires::SyncWire»
+	/* SyncWire "«this-»" */
+	«EXPAND potentialUpdatesParameter FOR from»
+	«EXPAND potentialUpdatesParameter FOR to»
+«ENDDEFINE»
+«DEFINE potentialUpdates FOR model::wires::SetWire»
+	/* SetWire "«this-»" */
+	«EXPAND potentialUpdatesParameter FOR to»
+«ENDDEFINE»
+
+«DEFINE potentialUpdatesParameter FOR model::WireSource»
+	/* ignore «this» */
+«ENDDEFINE»
+«DEFINE potentialUpdatesParameter FOR model::WireDestination»
+	/* ignore «this» */
+«ENDDEFINE»
+«DEFINE potentialUpdatesParameter FOR model::wires::ParameterEdgeDestination»
+	/* ignore «this» */
+«ENDDEFINE»
+
+«DEFINE potentialUpdatesParameter FOR model::wires::SelectWire»
+	/* SelectWire "«this-»" */
+	«EXPAND potentialUpdateDestination FOR to»
+«ENDDEFINE»
+
+«DEFINE potentialUpdateDestination FOR model::WireDestination»
+	«throwException("Unknown update wire edge destination: " + this)»
+«ENDDEFINE»
+
+«DEFINE potentialUpdateDestination FOR model::DomainObjectInstance»
+	/* DomainObjectInstance "«this-»" */
+	$object = get_object_instance_«safeName()»(); // parameters are from server-side
+	«EXPAND potentialUpdateDestinationAttributes FOREACH attributes»
+	
+	«EXPAND potentialUpdateDesinationWires FOREACH inWires.typeSelect(model::wires::SyncWire)»
+	«EXPAND potentialUpdateDesinationWires FOREACH outWires.typeSelect(model::wires::SyncWire)»
+	«EXPAND potentialUpdateDesinationWires FOREACH outWires.typeSelect(model::wires::SetWire)»
+«ENDDEFINE»
+
+«DEFINE potentialUpdateDestination FOR model::DomainAttributeInstance»
+	/* DomainAttributeInstance "«this-»" */
+	$value = get_attribute_instance_«safeName()»(); // parameters are from server-side
+	«EXPAND potentialUpdateDesinationWires FOREACH inWires.typeSelect(model::wires::SyncWire)»
+	«EXPAND potentialUpdateDesinationWires FOREACH outWires.typeSelect(model::wires::SyncWire)»
+	«EXPAND potentialUpdateDesinationWires FOREACH outWires.typeSelect(model::wires::SetWire)»
+«ENDDEFINE»
+
+«DEFINE potentialUpdateDestinationAttributes FOR model::DomainAttributeInstance»
+	/* attribute "«name»" («this») */
+	$value = $object["«safeNameString(name)-»"];
+	«EXPAND potentialUpdateDesinationWires FOREACH inWires.typeSelect(model::wires::SyncWire)»
+	«EXPAND potentialUpdateDesinationWires FOREACH outWires.typeSelect(model::wires::SyncWire)»
+	«EXPAND potentialUpdateDesinationWires FOREACH outWires.typeSelect(model::wires::SetWire)»
+«ENDDEFINE»
+
+«DEFINE potentialUpdateDesinationWires FOR model::wires::SyncWire»
+	/* SyncWire "«this-»" */
+	«EXPAND outgoingValue FOR from»
+	«EXPAND outgoingValue FOR to»
+«ENDDEFINE»
+«DEFINE potentialUpdateDesinationWires FOR model::wires::SetWire»
+	/* SetWire "«this-»" */
+	«EXPAND outgoingValue FOR to»
+«ENDDEFINE»
+
+«DEFINE outgoingValue FOR model::WireSource»
+«ENDDEFINE»
+«DEFINE outgoingValue FOR model::WireDestination»
+«ENDDEFINE»
+«DEFINE outgoingValue FOR model::visual::InputTextField»
+	«EXPAND outgoingValue FOREACH properties.select(e|e.name=="fieldValue")»
+«ENDDEFINE»
+
+«DEFINE outgoingValue FOR model::Property»
+	if ($frame_id == "«safeNameString(containingFrame(this).id)-»") {
+		/* the property "«this»" needs to be updated on the client */
+		«IF model::visual::InputTextField.isInstance(eContainer)»
+		
+			// set the property directly; we will let 'updateAllFrameProperties' deal with
+			// updating the client
+			log_message("[set application value callback] setting property '«id»' to '$value'");
+			«EXPAND template::operations::OutgoingValues::outgoingValueTarget(true, "value")» 
+		«ENDIF»
+	}
 «ENDDEFINE»

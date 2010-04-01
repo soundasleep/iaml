@@ -32,6 +32,8 @@ import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Label;
+import org.openiaml.model.model.visual.Map;
+import org.openiaml.model.model.visual.MapPoint;
 import org.openiaml.model.model.visual.VisualPackage;
 import org.openiaml.model.model.wires.ParameterEdgesSource;
 
@@ -110,6 +112,14 @@ public class VisualAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseLabel(Label object) {
 				return createLabelAdapter();
+			}
+			@Override
+			public Adapter caseMap(Map object) {
+				return createMapAdapter();
+			}
+			@Override
+			public Adapter caseMapPoint(MapPoint object) {
+				return createMapPointAdapter();
 			}
 			@Override
 			public Adapter caseGeneratesElements(GeneratesElements object) {
@@ -270,6 +280,34 @@ public class VisualAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createLabelAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.visual.Map <em>Map</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.visual.Map
+	 * @generated
+	 */
+	public Adapter createMapAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.visual.MapPoint <em>Map Point</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.visual.MapPoint
+	 * @generated
+	 */
+	public Adapter createMapPointAdapter() {
 		return null;
 	}
 

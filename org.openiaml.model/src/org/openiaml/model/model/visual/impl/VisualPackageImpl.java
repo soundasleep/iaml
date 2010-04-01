@@ -29,6 +29,8 @@ import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Label;
+import org.openiaml.model.model.visual.Map;
+import org.openiaml.model.model.visual.MapPoint;
 import org.openiaml.model.model.visual.VisualFactory;
 import org.openiaml.model.model.visual.VisualPackage;
 import org.openiaml.model.model.wires.WiresPackage;
@@ -75,6 +77,20 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 	 * @generated
 	 */
 	private EClass labelEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass mapEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass mapPointEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -249,6 +265,24 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getMap() {
+		return mapEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getMapPoint() {
+		return mapPointEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public VisualFactory getVisualFactory() {
 		return (VisualFactory)getEFactoryInstance();
 	}
@@ -285,6 +319,10 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 
 		labelEClass = createEClass(LABEL);
 		createEAttribute(labelEClass, LABEL__DEFAULT_VALUE);
+
+		mapEClass = createEClass(MAP);
+
+		mapPointEClass = createEClass(MAP_POINT);
 	}
 
 	/**
@@ -328,6 +366,8 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 		buttonEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
 		buttonEClass.getESuperTypes().add(theModelPackage.getActionSource());
 		labelEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
+		mapEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
+		mapPointEClass.getESuperTypes().add(theModelPackage.getVisibleThing());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(frameEClass, Frame.class, "Frame", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -343,6 +383,10 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 
 		initEClass(labelEClass, Label.class, "Label", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLabel_DefaultValue(), ecorePackage.getEString(), "defaultValue", "", 0, 1, Label.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(mapEClass, Map.class, "Map", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(mapPointEClass, MapPoint.class, "MapPoint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create annotations
 		// http://openiaml.org/comment
@@ -384,7 +428,7 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 		   source, 
 		   new String[] {
 			 "added", "0.4.3"
-		   });	
+		   });			
 	}
 
 	/**
@@ -424,6 +468,18 @@ public class VisualPackageImpl extends EPackageImpl implements VisualPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Represents a static block of text that is not user-editable."
+		   });		
+		addAnnotation
+		  (mapEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Represents a mapping component, that can be interacted with. This may contain {@model MapPoint}s which are also rendered on the {@model Map}."
+		   });		
+		addAnnotation
+		  (mapPointEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Represents a single mapped address. This may be contained with many other {@model MapPoint points} in a {@model Map}."
 		   });
 	}
 

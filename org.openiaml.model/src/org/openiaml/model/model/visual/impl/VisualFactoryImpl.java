@@ -19,6 +19,8 @@ import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Label;
+import org.openiaml.model.model.visual.Map;
+import org.openiaml.model.model.visual.MapPoint;
 import org.openiaml.model.model.visual.VisualFactory;
 import org.openiaml.model.model.visual.VisualPackage;
 
@@ -71,6 +73,8 @@ public class VisualFactoryImpl extends EFactoryImpl implements VisualFactory {
 			case VisualPackage.INPUT_TEXT_FIELD: return createInputTextField();
 			case VisualPackage.BUTTON: return createButton();
 			case VisualPackage.LABEL: return createLabel();
+			case VisualPackage.MAP: return createMap();
+			case VisualPackage.MAP_POINT: return createMapPoint();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -129,6 +133,26 @@ public class VisualFactoryImpl extends EFactoryImpl implements VisualFactory {
 		LabelImpl label = new LabelImpl();
 		generateID(label);
 		return label;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Map createMap() {
+		MapImpl map = new MapImpl();
+		return map;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MapPoint createMapPoint() {
+		MapPointImpl mapPoint = new MapPointImpl();
+		return mapPoint;
 	}
 
 	/**

@@ -192,6 +192,8 @@
       <genClasses ecoreClass="iaml.ecore#//visual/Label">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//visual/Label/defaultValue"/>
       </genClasses>
+      <genClasses ecoreClass="iaml.ecore#//visual/Map"/>
+      <genClasses ecoreClass="iaml.ecore#//visual/MapPoint"/>
     </nestedGenPackages>
     <nestedGenPackages prefix="Wires" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//wires">

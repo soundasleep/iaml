@@ -32,6 +32,8 @@ import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Label;
+import org.openiaml.model.model.visual.Map;
+import org.openiaml.model.model.visual.MapPoint;
 import org.openiaml.model.model.visual.VisualPackage;
 import org.openiaml.model.model.wires.ParameterEdgesSource;
 
@@ -216,6 +218,48 @@ public class VisualSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case VisualPackage.MAP: {
+				Map map = (Map)theEObject;
+				T result = caseMap(map);
+				if (result == null) result = caseVisibleThing(map);
+				if (result == null) result = caseCanBeSynced(map);
+				if (result == null) result = caseParameterEdgesSource(map);
+				if (result == null) result = caseEditable(map);
+				if (result == null) result = caseAccessible(map);
+				if (result == null) result = caseContainsProperties(map);
+				if (result == null) result = caseContainsConditions(map);
+				if (result == null) result = caseContainsOperations(map);
+				if (result == null) result = caseWireSource(map);
+				if (result == null) result = caseShouldntContainWires(map);
+				if (result == null) result = caseWireDestination(map);
+				if (result == null) result = caseNamedElement(map);
+				if (result == null) result = caseGeneratedElement(map);
+				if (result == null) result = caseGeneratesElements(map);
+				if (result == null) result = caseContainsWires(map);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case VisualPackage.MAP_POINT: {
+				MapPoint mapPoint = (MapPoint)theEObject;
+				T result = caseMapPoint(mapPoint);
+				if (result == null) result = caseVisibleThing(mapPoint);
+				if (result == null) result = caseCanBeSynced(mapPoint);
+				if (result == null) result = caseParameterEdgesSource(mapPoint);
+				if (result == null) result = caseEditable(mapPoint);
+				if (result == null) result = caseAccessible(mapPoint);
+				if (result == null) result = caseContainsProperties(mapPoint);
+				if (result == null) result = caseContainsConditions(mapPoint);
+				if (result == null) result = caseContainsOperations(mapPoint);
+				if (result == null) result = caseWireSource(mapPoint);
+				if (result == null) result = caseShouldntContainWires(mapPoint);
+				if (result == null) result = caseWireDestination(mapPoint);
+				if (result == null) result = caseNamedElement(mapPoint);
+				if (result == null) result = caseGeneratedElement(mapPoint);
+				if (result == null) result = caseGeneratesElements(mapPoint);
+				if (result == null) result = caseContainsWires(mapPoint);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -292,6 +336,36 @@ public class VisualSwitch<T> {
 	 * @generated
 	 */
 	public T caseLabel(Label object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Map</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Map</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMap(Map object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Map Point</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Map Point</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMapPoint(MapPoint object) {
 		return null;
 	}
 

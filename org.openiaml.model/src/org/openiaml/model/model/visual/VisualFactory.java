@@ -71,6 +71,24 @@ public interface VisualFactory extends EFactory {
 	Label createLabel();
 
 	/**
+	 * Returns a new object of class '<em>Map</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Map</em>'.
+	 * @generated
+	 */
+	Map createMap();
+
+	/**
+	 * Returns a new object of class '<em>Map Point</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Map Point</em>'.
+	 * @generated
+	 */
+	MapPoint createMapPoint();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

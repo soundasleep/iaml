@@ -26,6 +26,7 @@ public class AllServerRuntimeTests {
 		suite.addTestSuite(ComparisonFunctions.class);
 		suite.addTestSuite(HelperFunctions.class);
 		suite.addTestSuite(CastFunctions.class);
+		suite.addTestSuite(PropertiesFileFunctions.class);
 
 		return suite;
 	}

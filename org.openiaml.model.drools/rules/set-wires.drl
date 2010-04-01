@@ -473,6 +473,60 @@ rule "Refresh Domain Object mappings (except for generated primary keys) when Fo
 end
 
 /**
+ * @inference InputForm,SetWire
+ *		When two {@model InputForm}s are connected by a {@model SetWire} and the
+ *		source {@model InputForm} contains a {@model InputTextField}, a <em>{@model Label}</em>
+ *		with the same name is created in the target {@model InputForm}.
+ */
+rule "Refresh mappings between InputForms connected to InputForms containing InputTextFields"
+	when
+		sync : SetWire(  )
+		source : InputForm (  )
+		target : InputForm (  )
+		
+		eval(functions.connectsSet(sync, source, target))
+		
+		sf : InputTextField ( eContainer == source )
+		not ( tf : VisibleThing ( eContainer == target, eval(functions.nameMatches( sf, tf ))) )
+						
+		eval ( handler.veto( sync ))
+		
+	then
+		# create a new one
+		Label tf = handler.generatedLabel(sync, target);
+		handler.setName(tf, sf.getName());
+		queue.add(tf, drools);
+
+end
+
+/**
+ * @inference InputForm,SetWire
+ *		When two {@model InputForm}s are connected by a {@model SetWire} and the
+ *		source {@model InputForm} contains a {@model Label}, another label
+ *		with the same name is created in the target {@model InputForm}.
+ */
+rule "Refresh mappings between InputForms connected to InputForms containing Labels"
+	when
+		sync : SetWire(  )
+		source : InputForm (  )
+		target : InputForm (  )
+		
+		eval(functions.connectsSet(sync, source, target))
+		
+		sf : Label ( eContainer == source )
+		not ( tf : VisibleThing ( eContainer == target, eval(functions.nameMatches( sf, tf ))) )
+						
+		eval ( handler.veto( sync ))
+		
+	then
+		# create a new one
+		Label tf = handler.generatedLabel(sync, target);
+		handler.setName(tf, sf.getName());
+		queue.add(tf, drools);
+
+end
+
+/**
  * <strong>Depending on the orientation of a SetWire</strong>,
  * SyncWires create InputTextFields; SetWires should create Labels, because they cannot
  * be edited.

@@ -470,6 +470,33 @@ rule "Refresh mappings between InputForms connected to InputForms containing Inp
 
 end
 
+/**
+ * @inference InputForm,SyncWire
+ *		When two {@model InputForm}s are connected by a {@model SyncWire} and the
+ *		source {@model InputForm} contains a {@model Label}, another label
+ *		with the same name is created in the target {@model InputForm}.
+ */
+rule "Refresh mappings between InputForms connected to InputForms containing Labels"
+	when
+		sync : SyncWire(  )
+		source : InputForm (  )
+		target : InputForm (  )
+		
+		eval(functions.connects(sync, source, target))
+		
+		sf : Label ( eContainer == source )
+		not ( tf : VisibleThing ( eContainer == target, eval(functions.nameMatches( sf, tf ))) )
+						
+		eval ( handler.veto( sync ))
+		
+	then
+		# create a new one
+		Label tf = handler.generatedLabel(sync, target);
+		handler.setName(tf, sf.getName());
+		queue.add(tf, drools);
+
+end
+
 rule "A SyncWire between Attributes selected from a NewInstanceWire need to check that the attribute exists before initialising"
 	when
 		sync : SyncWire(  )

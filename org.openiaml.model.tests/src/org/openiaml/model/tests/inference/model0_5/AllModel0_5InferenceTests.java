@@ -23,6 +23,7 @@ public class AllModel0_5InferenceTests {
 		suite.addTestSuite(SyncWireTestCaseOverridden.class);
 		suite.addTestSuite(EmailExplicit.class);
 		suite.addTestSuite(FormSynchroniseSyncWire.class);
+		suite.addTestSuite(FormSynchroniseSetWire.class);
 		suite.addTestSuite(EmailSetWire.class);
 		
 		return suite;

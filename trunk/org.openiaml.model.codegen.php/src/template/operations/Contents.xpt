@@ -240,7 +240,8 @@
 			«IF canBeSet(outFlows.first().to.eContainer)»
 				// inflow container = «containingFrame(inFlows.first().from)»
 				// outflow container = «containingFrame(outFlows.first().to)»
-				if (containing_frame("«safeName(outFlows.first().to)»") == get_frame_id()) {
+				if (containing_frame("«safeName(outFlows.first().to)»") == get_frame_id() &&
+						containing_email("«safeName(outFlows.first().to)»") == null) {
 					// set a variable in the current frame
 					«EXPAND DataFlow::dataTarget(php) FOR outFlows.first().to» = value;
 					
@@ -341,7 +342,8 @@
 		«ENDIF»
 	«ELSE»
 		// client-side
-		if (containing_frame("«safeName(eContainer)»") == get_frame_id()) {
+		if (containing_frame("«safeName(eContainer)»") == get_frame_id() &&
+				containing_email("«safeName(eContainer)»") == null) {
 			// it exists on this page
 			document.getElementById('«safeName(eContainer)»').style.display = "none";
 		} else {
@@ -376,7 +378,8 @@
 		«ENDIF»
 	«ELSE»
 		// client-side
-		if (containing_frame("«safeName(eContainer)»") == get_frame_id()) {
+		if (containing_frame("«safeName(eContainer)»") == get_frame_id() &&
+				containing_email("«safeName(eContainer)»") == null) {
 			// it exists on this page
 			document.getElementById('«safeName(eContainer)»').style.display = "";
 		} else {

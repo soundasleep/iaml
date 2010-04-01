@@ -43,6 +43,45 @@ function containing_frame(element_id) {
 	}
 }
 
+function containing_email(element_id) {
+	switch (element_id) {
+	
+	«REM»
+		to reduce the size of the generated file, we are only interested
+		in particular destinations:
+		
+		(1. scopes
+		2. visible things
+		3. things that can contain operations
+		4. data flow destinations that are contained by
+		   things that canBeSet())
+		   
+		that are actually contained by emails.
+		   
+		everything else can return null.
+	«ENDREM»
+	«LET
+		eAllContents.select( e | model::Scope.isInstance(e) )
+			.union( eAllContents.select( e | model::VisibleThing.isInstance(e) ))
+			.union( eAllContents.select( e | model::ContainsOperations.isInstance(e) ))
+			.union( eAllContents.select( e | e.eContainer != null && canBeSet(e.eContainer) ))
+			.select( t | containingEmail(t) != null )
+				AS targets»
+	«FOREACH targets AS e»
+		case "«safeName(e)»":
+			«IF containingEmail(e) == null»
+			return null;
+			«ELSE»
+			return "«safeName(containingEmail(e))»";
+			«ENDIF»
+	«ENDFOREACH»
+	«ENDLET»
+	
+		default:
+			return null;
+	}
+}
+
 /** 
  * Copied from GeneratorExtensions.ext
  */

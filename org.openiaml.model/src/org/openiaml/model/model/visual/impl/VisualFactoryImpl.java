@@ -138,20 +138,22 @@ public class VisualFactoryImpl extends EFactoryImpl implements VisualFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public Map createMap() {
 		MapImpl map = new MapImpl();
+		generateID(map);
 		return map;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public MapPoint createMapPoint() {
 		MapPointImpl mapPoint = new MapPointImpl();
+		generateID(mapPoint);
 		return mapPoint;
 	}
 

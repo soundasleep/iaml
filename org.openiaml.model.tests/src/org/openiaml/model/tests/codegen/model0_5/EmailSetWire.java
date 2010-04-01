@@ -76,7 +76,7 @@ public class EmailSetWire extends EmailCodegenTestCase {
 		assertEquals("target@openiaml.org", email.getTo());
 		
 		// no custom template is provided, so we get the default content
-		assertEquals("TODO", email.getContent());
+		assertEquals("from: source@openiaml.org\nto: target@openiaml.org\nfield 1: value 1\nfield 2: value 2\nfield 3: value 3\n", email.getContent());
 	
 	}
 	
@@ -108,7 +108,7 @@ public class EmailSetWire extends EmailCodegenTestCase {
 		assertEquals("target@openiaml.org", email.getTo());
 		
 		// no custom template is provided, so we get the default content
-		assertEquals("TODO", email.getContent());
+		assertEquals("from: source@openiaml.org\nto: target@openiaml.org\nfield 1: \nfield 2: \nfield 3: \n", email.getContent());
 	
 	}
 	

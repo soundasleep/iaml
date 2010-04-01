@@ -136,6 +136,11 @@
  * The default template definition for an email.
  * Just lists all of the contained properties and static values. 
  * As a result, may have security problems.
+ *
+ * @implementation Email
+ *		The default template for a sent {@model Email} contains a list of all of its
+ *		contained {@model Property Properties}, {@model StaticValue}s and
+ *		{@model Label} values.
  */
 «DEFINE emailTemplateDefinition FOR model::scopes::Email»
 <?php 
@@ -145,10 +150,15 @@
  */
 ?>
 	«FOREACH properties.sortBy(e|e.name) AS p»
-		«p.name»: <?php echo «EXPAND template::operations::Parameters::callParameterValue(true, false) FOR p»; ?>
+		«p.name»: <?php echo «EXPAND template::operations::Parameters::callParameterValue(true, false) FOR p»; echo "\n"; ?>
 	«ENDFOREACH»
 	«FOREACH values.sortBy(e|e.name) AS p»
-		«p.name»: <?php echo «EXPAND template::operations::Parameters::callParameterValue(true, false) FOR p»; ?>
+		«p.name»: <?php echo «EXPAND template::operations::Parameters::callParameterValue(true, false) FOR p»; echo "\n"; ?>
+	«ENDFOREACH»
+	«FOREACH labels.sortBy(e|e.name) AS label»
+		«FOREACH label.properties.select(p|p.name == "fieldValue") AS p»
+			«label.name»: <?php echo «EXPAND template::operations::Parameters::callParameterValue(true, false) FOR p»; echo "\n"; ?>
+		«ENDFOREACH»
 	«ENDFOREACH»
 «ENDDEFINE»
 

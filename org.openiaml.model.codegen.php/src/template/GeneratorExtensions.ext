@@ -128,15 +128,20 @@ onCurrentSession(model::WireSource source, model::WireDestination target) :
  * all operations contained within a session are also available to all
  * elements outside that session.
  *
+ * all operations and properties that are contained with an Email
+ * are NOT available for the current script.
+ *
  * this is based on allContainerOperations() and possibleParentOperations(). 
  */
 availableInCurrentScript(model::WireSource source, model::WireDestination target) :
-	onCurrentFrame(source, target) ||
-		containingSession(target) != null;
+	containingEmail(target) != null && 
+	(onCurrentFrame(source, target) ||
+		containingSession(target) != null);
 		
 availableInCurrentScriptAction(model::ActionSource source, model::ActionDestination target) :
-	onCurrentFrameAction(source, target) ||
-		containingSession(target) != null;
+	containingEmail(target) != null &&
+	(onCurrentFrameAction(source, target) ||
+		containingSession(target) != null);
 
 /**
  * Get all the operations that may be referenced in a container. In particular:
@@ -146,6 +151,12 @@ availableInCurrentScriptAction(model::ActionSource source, model::ActionDestinat
  */
 List[model::Operation] allContainerOperations(model::Scope this) :
 	operations.toSet().union( scopes.allContainerOperations() )
+		.union( possibleParentOperations(eContainer) );
+
+List[model::Operation] allContainerOperations(model::scopes::Email this) :
+	operations.toSet().union( scopes.allContainerOperations() )
+		.union( labels.allContainerOperations() )
+		.union( buttons.allContainerOperations() )
 		.union( possibleParentOperations(eContainer) );
 
 List[model::Operation] allContainerOperations(model::visual::Frame this) :
@@ -263,6 +274,15 @@ model::scopes::Session containingSession(model::scopes::Session this) :
  */	
 model::scopes::Session containingSession(model::InternetApplication this) :
 	null;
+
+model::scopes::Email containingEmail(model::scopes::Email this) :
+	this;
+
+model::scopes::Email containingEmail(emf::EObject this) :
+	if (eContainer == null) then
+		null
+	else
+		containingEmail(eContainer);
 
 /** get the containing Scope of the given element, or null if none */
 model::Scope containingScope(emf::EObject this) :

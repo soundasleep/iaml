@@ -443,6 +443,33 @@ rule "Refresh Domain Object mappings (except for generated primary keys) when sy
 
 end
 
+/**
+ * @inference InputForm,SyncWire
+ *		When two {@model InputForm}s are connected by a {@model SyncWire} and the
+ *		source {@model InputForm} contains a {@model InputTextField}, another text field
+ *		with the same name is created in the target {@model InputForm}.
+ */
+rule "Refresh mappings between InputForms connected to InputForms containing InputTextFields"
+	when
+		sync : SyncWire(  )
+		source : InputForm (  )
+		target : InputForm (  )
+		
+		eval(functions.connects(sync, source, target))
+		
+		sf : InputTextField ( eContainer == source )
+		not ( tf : VisibleThing ( eContainer == target, eval(functions.nameMatches( sf, tf ))) )
+						
+		eval ( handler.veto( sync ))
+		
+	then
+		# create a new one
+		InputTextField tf = handler.generatedInputTextField(sync, target);
+		handler.setName(tf, sf.getName());
+		queue.add(tf, drools);
+
+end
+
 rule "A SyncWire between Attributes selected from a NewInstanceWire need to check that the attribute exists before initialising"
 	when
 		sync : SyncWire(  )
@@ -486,3 +513,4 @@ rule "A SyncWire between Attributes selected from a NewInstanceWire need to chec
 		queue.add(cw, drools);
 
 end
+

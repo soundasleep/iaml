@@ -20,6 +20,7 @@ function load_properties($db_name) {
 	foreach ($f as $i => $line) {
 		$line = str_replace("\\\\", "&p", $line);
 		$line = str_replace("\\ ", "&s", $line);
+		$line = str_replace("\\n", "&n", $line);
 		$line = str_replace("&", "&&", $line);
 		$f[$i] = $line;
 	}
@@ -62,7 +63,7 @@ function load_properties($db_name) {
 					if (substr(trim($f[$i]), -1) == "\\") {
 						$trimmed = substr($trimmed, 0, strlen($trimmed) - 1);
 					}
-					$value .= "\n" . $trimmed;
+					$value .= $trimmed;
 				}
 				
 				// break out of continuation
@@ -81,11 +82,13 @@ function load_properties($db_name) {
 	foreach ($properties as $key => $value) {
 		// in reverse order
 		$key = str_replace("&&", "&", $key);
+		$key = str_replace("&n", "\n", $key);
 		$key = str_replace("&s", " ", $key);
 		$key = str_replace("&p", "\\", $key);
 
 		// in reverse order
 		$value = str_replace("&&", "&", $value);
+		$value = str_replace("&n", "\n", $value);
 		$value = str_replace("&s", " ", $value);
 		$value = str_replace("&p", "\\", $value);
 	
@@ -110,11 +113,18 @@ function set_property($db_name, $properties, $key, $value) {
 	// write new properties file
 	$s = array();
 	foreach ($properties as $key => $value) {
-		// escape out the value
+		// escape out special characters
+		// we don't need to split out the value line into multiple lines, as we had to deal with when reading
 		$value = str_replace("\\", "\\\\", $value);
-		$value = str_replace("\n ", "\n\\ ", $value);
-		$value = str_replace("\n", "\\\n ", $value);
-		$value = str_replace(" \n", "\\ \n", $value);
+		$value = str_replace("\n", "\\n", $value);
+		if (substr($value, 0, 1) == " ") {
+			// need to prefix with '\ '
+			$value = "\\ " . substr($value, 1);
+		}
+		if (substr($value, -1) == " ") {
+			// need to suffix with '\ '
+			$value = substr($value, 0, strlen($value) - 1) . "\\ ";
+		}
 	
 		$s[] = "$key=$value";
 	}

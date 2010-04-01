@@ -478,7 +478,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public void assertHasNoInputTextField(Frame element, String string) throws JaxenException {
-		assertHasNone(element, "iaml.visual:children[iaml:name='" + string + "']");
+		assertHasNone(element, "iaml.visual:children[iaml:name='" + string + "']", InputTextField.class);
 	}
 
 	/**
@@ -488,7 +488,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public void assertHasNoInputTextField(VisibleThing element, String string) throws JaxenException {
-		assertHasNone(element, "iaml:children[iaml:name='" + string + "']");
+		assertHasNone(element, "iaml:children[iaml:name='" + string + "']", InputTextField.class);
 	}
 
 	/**
@@ -499,6 +499,16 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public Label assertHasLabel(Frame element, String string) throws JaxenException {
 		return (Label) queryOne(element, "iaml.visual:children[iaml:name='" + string + "']");
+	}
+
+	/**
+	 * Assert that the given element contains the given
+	 * Label.
+	 *
+	 * @return The element found
+	 */
+	public Label assertHasLabel(Email element, String string) throws JaxenException {
+		return (Label) queryOne(element, "iaml.scopes:labels[iaml:name='" + string + "']");
 	}
 
 	/**
@@ -518,7 +528,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public void assertHasNoLabel(Frame element, String string) throws JaxenException {
-		assertHasNone(element, "iaml.visual:children[iaml:name='" + string + "']");
+		assertHasNone(element, "iaml.visual:children[iaml:name='" + string + "']", Label.class);
 	}
 
 	/**
@@ -528,7 +538,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public void assertHasNoLabel(VisibleThing element, String string) throws JaxenException {
-		assertHasNone(element, "iaml:children[iaml:name='" + string + "']");
+		assertHasNone(element, "iaml:children[iaml:name='" + string + "']", Label.class);
 	}
 
 	/**

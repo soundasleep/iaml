@@ -1845,6 +1845,84 @@
       <accessors
           figure="//@figures.0/@descriptors.63/@actualFigure/@children.0"/>
     </descriptors>
+    <descriptors
+        name="MapFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="MapFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="185"
+            green="243"
+            blue="192"/>
+        <border
+            xsi:type="gmfgraph:MarginBorder">
+          <insets
+              top="3"
+              left="3"
+              bottom="3"
+              right="3"/>
+        </border>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="MapNameFigure"
+            text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="MapParentNameFigure"
+            text="[none]">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="gray"/>
+        </children>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.64/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.64/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors
+        name="MapPointFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="MapPointFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="195"
+            green="253"
+            blue="202"/>
+        <border
+            xsi:type="gmfgraph:MarginBorder">
+          <insets
+              top="3"
+              left="3"
+              bottom="3"
+              right="3"/>
+        </border>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="MapPointNameFigure"
+            text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="MapPointParentNameFigure"
+            text="[none]">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="gray"/>
+        </children>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.65/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.65/@actualFigure/@children.1"/>
+    </descriptors>
   </figures>
   <nodes
       name="EventTrigger"
@@ -1981,6 +2059,12 @@
   <nodes
       name="Email"
       figure="EmailFigure"/>
+  <nodes
+      name="Map"
+      figure="MapFigure"/>
+  <nodes
+      name="MapPoint"
+      figure="MapPointFigure"/>
   <connections
       name="DataFlowEdge"
       figure="DataFlowEdgeFigure"/>
@@ -2441,4 +2525,22 @@
       name="EmailName"
       figure="EmailFigure"
       accessor="//@figures.0/@descriptors.63/@accessors.0"/>
+  <labels
+      name="MapName"
+      figure="MapFigure"
+      accessor="//@figures.0/@descriptors.64/@accessors.0"/>
+  <labels
+      name="MapParentName"
+      figure="MapFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.64/@accessors.1"/>
+  <labels
+      name="MapPointName"
+      figure="MapPointFigure"
+      accessor="//@figures.0/@descriptors.65/@accessors.0"/>
+  <labels
+      name="MapPointParentName"
+      figure="MapPointFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.65/@accessors.1"/>
 </gmfgraph:Canvas>

@@ -3,15 +3,18 @@
   <xsd:simpleType name="iamlInteger">
     <xsd:restriction base="xsd:int"/>
   </xsd:simpleType>
-    <xsd:simpleType name="iamlString">
+  <xsd:simpleType name="iamlString">
     <xsd:restriction base="xsd:string"/>
   </xsd:simpleType>
-    <xsd:simpleType name="iamlEmail">
-    <xsd:restriction base="this:iamlString">
-       <xsd:pattern value="^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$"/>
-        </xsd:restriction>
+  <xsd:simpleType name="iamlAddress">
+    <xsd:restriction base="this:iamlString"/>
   </xsd:simpleType>
-    <xsd:simpleType name="iamlDateTime">
+  <xsd:simpleType name="iamlEmail">
+    <xsd:restriction base="this:iamlString">
+      <xsd:pattern value="^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="iamlDateTime">
     <xsd:restriction base="xsd:dateTime"/>
   </xsd:simpleType>
 </xsd:schema>

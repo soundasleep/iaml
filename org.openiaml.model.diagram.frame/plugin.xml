@@ -241,7 +241,7 @@
          </object>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_Frame"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2029,2028,2002,2003,2004,2005,2033,2031,2008,2009,2010,2032,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2030,2034"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2029,2028,2002,2003,2004,2005,2033,2031,2008,2009,2010,2032,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2030,2034,2035,2036"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4015,4011,4004,4005,4016,4014,4008,4012,4013"/>
       </viewProvider>
    </extension>
@@ -254,13 +254,13 @@
             <method name="getType()" value="Iaml_Frame"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
-            <method name="getType()" value="2029,2028,2002,2003,2004,2005,2033,2031,2008,2009,2010,2032,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2030,2034"/>
+            <method name="getType()" value="2029,2028,2002,2003,2004,2005,2033,2031,2008,2009,2010,2032,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2030,2034,2035,2036"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
             <method name="getType()" value="4001,4015,4011,4004,4005,4016,4014,4008,4012,4013"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5056,5057,5058,5053,5054,5055,5003,5004,5005,5006,5007,5008,5009,5010,5064,5069,5070,5071,5072,5062,5015,5016,5017,5018,5066,5019,5020,5067,5063,5022,5023,5024,5025,5026,5027,5028,5068,5029,5030,5031,5032,5033,5034,5035,5036,5037,5038,5039,5040,5041,5042,5043,5059,5060,5061,5073"/>
+            <method name="getType()" value="5056,5057,5058,5053,5054,5055,5003,5004,5005,5006,5007,5008,5009,5010,5064,5069,5070,5071,5072,5062,5015,5016,5017,5018,5066,5019,5020,5067,5063,5022,5023,5024,5025,5026,5027,5028,5068,5029,5030,5031,5032,5033,5034,5035,5036,5037,5038,5039,5040,5041,5042,5043,5059,5060,5061,5073,5074,5075,5076,5077"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value=""/>
@@ -301,7 +301,9 @@
          <object class="org.openiaml.model.diagram.frame.edit.parts.LabelEditPart" id="Label_2024"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.EventTriggerEditPart" id="EventTrigger_2030"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.EmailEditPart" id="Email_2034"/>
-         <context elements="Frame_1000,EventTrigger_2029,EventTrigger_2028,CompositeOperation_2002,PrimitiveOperation_2003,DomainObject_2004,DomainAttribute_2005,Property_2033,Frame_2031,InputForm_2008,InputTextField_2009,StaticValue_2010,Session_2032,LoginHandler_2012,CompositeCondition_2013,DomainObjectInstance_2014,DomainAttributeInstance_2015,Button_2016,QueryParameter_2017,AccessControlHandler_2018,Permission_2019,Role_2020,UserInstance_2021,EntryGate_2022,ExitGate_2023,Label_2024,EventTrigger_2030,Email_2034"/>
+         <object class="org.openiaml.model.diagram.frame.edit.parts.MapEditPart" id="Map_2035"/>
+         <object class="org.openiaml.model.diagram.frame.edit.parts.MapPointEditPart" id="MapPoint_2036"/>
+         <context elements="Frame_1000,EventTrigger_2029,EventTrigger_2028,CompositeOperation_2002,PrimitiveOperation_2003,DomainObject_2004,DomainAttribute_2005,Property_2033,Frame_2031,InputForm_2008,InputTextField_2009,StaticValue_2010,Session_2032,LoginHandler_2012,CompositeCondition_2013,DomainObjectInstance_2014,DomainAttributeInstance_2015,Button_2016,QueryParameter_2017,AccessControlHandler_2018,Permission_2019,Role_2020,UserInstance_2021,EntryGate_2022,ExitGate_2023,Label_2024,EventTrigger_2030,Email_2034,Map_2035,MapPoint_2036"/>
       </modelingAssistantProvider>
    </extension>
 
@@ -324,7 +326,7 @@
       <decoratorProvider class="org.openiaml.model.diagram.frame.providers.IamlShortcutsDecoratorProvider">
          <Priority name="Lowest"/>
          <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
-            <method name="getType()" value="2029,2028,2002,2003,2004,2005,2033,2031,2008,2009,2010,2032,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2030,2034"/>
+            <method name="getType()" value="2029,2028,2002,2003,2004,2005,2033,2031,2008,2009,2010,2032,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2030,2034,2035,2036"/>
          </object>
          <context decoratorTargets="generated-top-nodes"/>
       </decoratorProvider>
@@ -609,6 +611,26 @@
             <param name="semanticHint" value="2034"/>
          </metamodelType>
       </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/visual">
+         <metamodelType
+               id="org.openiaml.model.diagram.frame.Map_2035"
+               name="%metatype.name.Map_2035"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Map"
+               edithelper="org.openiaml.model.diagram.frame.edit.helpers.MapEditHelper">
+            <param name="semanticHint" value="2035"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/visual">
+         <metamodelType
+               id="org.openiaml.model.diagram.frame.MapPoint_2036"
+               name="%metatype.name.MapPoint_2036"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="MapPoint"
+               edithelper="org.openiaml.model.diagram.frame.edit.helpers.MapPointEditHelper">
+            <param name="semanticHint" value="2036"/>
+         </metamodelType>
+      </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
                id="org.openiaml.model.diagram.frame.SyncWire_4001"
@@ -749,6 +771,8 @@
          <elementType ref="org.openiaml.model.diagram.frame.Label_2024"/>
          <elementType ref="org.openiaml.model.diagram.frame.EventTrigger_2030"/>
          <elementType ref="org.openiaml.model.diagram.frame.Email_2034"/>
+         <elementType ref="org.openiaml.model.diagram.frame.Map_2035"/>
+         <elementType ref="org.openiaml.model.diagram.frame.MapPoint_2036"/>
          <elementType ref="org.openiaml.model.diagram.frame.SyncWire_4001"/>
          <elementType ref="org.openiaml.model.diagram.frame.RunAction_4015"/>
          <elementType ref="org.openiaml.model.diagram.frame.ParameterEdge_4011"/>

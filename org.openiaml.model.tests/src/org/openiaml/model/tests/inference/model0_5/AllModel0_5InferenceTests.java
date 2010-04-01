@@ -22,6 +22,8 @@ public class AllModel0_5InferenceTests {
 		suite.addTestSuite(InputTextFieldDataTypeOverridden.class);
 		suite.addTestSuite(SyncWireTestCaseOverridden.class);
 		suite.addTestSuite(EmailExplicit.class);
+		suite.addTestSuite(FormSynchroniseSyncWire.class);
+		suite.addTestSuite(EmailSetWire.class);
 		
 		return suite;
 	}

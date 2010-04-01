@@ -742,6 +742,60 @@
           href="iaml.gmfgraph#Email"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//visual/Frame/children"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//visual/Map"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( Map )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#MapName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#MapParentName"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="frame.gmftool#//@palette/@tools.2/@tools.7"/>
+      <diagramNode
+          href="iaml.gmfgraph#Map"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//visual/Frame/children"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//visual/MapPoint"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( MapPoint )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#MapPointName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#MapPointParentName"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="frame.gmftool#//@palette/@tools.2/@tools.8"/>
+      <diagramNode
+          href="iaml.gmfgraph#MapPoint"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/SyncWire"/>

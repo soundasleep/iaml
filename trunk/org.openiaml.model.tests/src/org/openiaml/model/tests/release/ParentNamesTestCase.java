@@ -39,6 +39,8 @@ public class ParentNamesTestCase extends XmlTestCase {
 		"EntryGate",
 		"ExitGate",
 		"Scope",
+		"Map",
+		"MapPoint",
 	};
 	
 	/**

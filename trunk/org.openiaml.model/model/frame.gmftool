@@ -255,6 +255,32 @@
             path="icons/full/obj32/Email.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Map"
+          description="Create new Map">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/Map.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/Map.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="MapPoint"
+          description="Create new MapPoint">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/MapPoint.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/MapPoint.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
     </tools>
     <tools
         xsi:type="gmftool:ToolGroup"

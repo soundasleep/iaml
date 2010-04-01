@@ -34,7 +34,7 @@ public class PropertiesFileFunctions extends PhpCodegenTestCase {
 		String init = "$p = load_properties('sample.properties');";
 
 		// we can read this one
-		assertPhpResult(5, init, "count($p)");
+		assertPhpResult(6, init, "count($p)");
 		
 		// we can read the keys OK
 		assertPhpResult("default", init, "get_property($p, 'not here', 'default')");
@@ -43,7 +43,8 @@ public class PropertiesFileFunctions extends PhpCodegenTestCase {
 		assertPhpResult("apple", init, "get_property($p, 'fruit')");
 		assertPhpResult("cat", init, "get_property($p, 'animal')");
 		assertPhpResult("another line with white space", init, "get_property($p, 'line.with.white.space')");
-		assertPhpResult("one \ntwo \nthree\nfour \nfive", init, "get_property($p, 'line.with.newlines')");
+		assertPhpResult("one two threefour five", init, "get_property($p, 'line.with.newlines')");
+		assertPhpResult("one \ntwo ", init, "get_property($p, 'actual.newlines')");
 		assertPhpResult("ok", init, "get_property($p, 'comment')");
 
 	}
@@ -97,7 +98,7 @@ public class PropertiesFileFunctions extends PhpCodegenTestCase {
 
 		// add a key that doesn't exist yet
 		{
-			String init = "$p = load_properties('sample.properties'); $p = set_property('sample.properties', $p, 'new', 'one \n two \n three');";
+			String init = "$p = load_properties('sample.properties'); $p = set_property('sample.properties', $p, 'new', \"one \n two \n three\");";
 	
 			// read it
 			assertPhpResult("one \n two \n three", init, "get_property($p, 'new')");
@@ -114,10 +115,10 @@ public class PropertiesFileFunctions extends PhpCodegenTestCase {
 
 		// add a key that doesn't exist yet
 		{
-			String init = "$p = load_properties('sample.properties'); $p = set_property('sample.properties', $p, 'new', 'one\\\n\\three');";
+			String init = "$p = load_properties('sample.properties'); $p = set_property('sample.properties', $p, 'new', \"one\\\n\\\\four\");";
 	
 			// read it
-			assertPhpResult("one\\\n\\three", init, "get_property($p, 'new')");
+			assertPhpResult("one\\\n\\four", init, "get_property($p, 'new')");
 		}
 
 		// make sure that the set above was stored correctly
@@ -125,7 +126,7 @@ public class PropertiesFileFunctions extends PhpCodegenTestCase {
 			String init = "$p = load_properties('sample.properties');";
 	
 			// read it
-			assertPhpResult("one\\\n\\three", init, "get_property($p, 'new')");
+			assertPhpResult("one\\\n\\four", init, "get_property($p, 'new')");
 		}
 		
 	}

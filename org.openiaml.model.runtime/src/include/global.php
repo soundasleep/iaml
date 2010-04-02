@@ -311,7 +311,8 @@ function call_remote_event($container, $id, $arg0 = "", $arg1 = "") {
 	$url = get_request_base() . "/" . 'call_remote_event.php?container=' . urlencode($container)
 		. '&operation_name=' . urlencode($id)
 		. '&arg0=' . urlencode($arg0)
-		. '&arg1=' . urlencode($arg1);
+		. '&arg1=' . urlencode($arg1)
+		. '&frame=' . urlencode(get_frame_id());
 
 	return call_remote_url($url);
 }

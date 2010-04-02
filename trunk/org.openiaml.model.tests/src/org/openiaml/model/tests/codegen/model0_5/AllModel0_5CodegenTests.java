@@ -27,6 +27,7 @@ public class AllModel0_5CodegenTests {
 		suite.addTestSuite(EmailInSession.class);
 		suite.addTestSuite(EmailSetWire.class);
 		suite.addTestSuite(ActuallySendingEmail.class);
+		suite.addTestSuite(MapPointUpdateExplicitly.class);
 
 		return suite;
 	}

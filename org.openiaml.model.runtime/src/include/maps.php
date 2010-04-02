@@ -5,9 +5,29 @@
  *
  */
 
-function echo_google_map() {
+function echo_google_map($id) {
+	if (!defined('GOOGLE_MAPS_API_KEY')) {
+		throw new IamlRuntimeException("GOOGLE_MAPS_API_KEY not defined");
+	}
+
 ?>
-	google map
+	<?php /* TODO we should have a runtime property for sensor=true|false */ ?>
+	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=<?php echo urlencode(GOOGLE_MAPS_API_KEY); ?>&sensor=false"
+            type="text/javascript"></script>
+	<div id="map_canvas_<?php echo $id; ?>" style="width: 500px; height: 300px"></div>
+	
+	<script language="Javascript" type="application/javascript">
+	/* <![CDATA[ */
+		function initialise_map_<?php echo $id; ?>() {
+			if (GBrowserIsCompatible()) {
+				var map = new GMap2(document.getElementById("map_canvas_<?php echo $id; ?>"));
+				// default location: google HQ
+				map.setCenter(new GLatLng(37.4419, -122.1419), 13);
+				map.setUIToDefault();
+			}
+		}
+	/* ]]> */
+	</script>
 <?php
 }
 
@@ -17,9 +37,17 @@ function echo_google_map_point($id) {
 <?php
 }
 
-function echo_mock_map() {
+function echo_mock_map($id) {
 ?>
 	<div>mock map</div>
+
+	<script language="Javascript" type="application/javascript">
+	/* <![CDATA[ */
+		function initialise_map_<?php echo $id; ?>() {
+			// empty
+		}
+	/* ]]> */
+	</script>
 <?php
 }
 

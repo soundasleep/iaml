@@ -21,11 +21,11 @@
 		<?php
 		switch (MAP_HANDLER) {
 			case "googlemaps":
-				echo_google_map();
+				echo_google_map("«safeNameString(id)-»");
 				break;
 			
 			case "mock":
-				echo_mock_map();
+				echo_mock_map("«safeNameString(id)-»");
 				break;
 			
 			default:
@@ -43,6 +43,9 @@
 		/* <![CDATA[ */
 			«REM»any on-access events?«ENDREM»
 			addOnloadFunction( function() {
+				// initialise the map
+				initialise_map_«safeName()-»();
+			
 			«IF onAccess != null»
 				// expand all onAccess
 				«EXPAND template::events::EventCall::callEvent(false) FOR onAccess-»

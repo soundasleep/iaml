@@ -27,7 +27,8 @@ public class DefaultRuntimeProperties {
 		properties.put("email_handler_phpmailer_include", "include/phpmailer/");
 		properties.put("email_handler_file_destination", "email-output.properties");
 		properties.put("map_handler", "googlemaps");
-		
+		properties.put("google_maps_api_key", "empty");
+
 		return properties;
 	}
 	

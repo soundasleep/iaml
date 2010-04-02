@@ -25,6 +25,14 @@ public class ActuallySendingEmail extends EmailSetWire {
 		super.setUp();
 	}
 	
+	/**
+	 * We don't want to check intercepted e-mails, since we can't get them.
+	 */
+	@Override
+	protected boolean doEmailChecks() {
+		return false;
+	}
+	
 	/* (non-Javadoc)
 	 * @see org.openiaml.model.tests.codegen.model0_5.EmailCodegenTestCase#getRuntimeProperties()
 	 */

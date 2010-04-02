@@ -74,3 +74,7 @@ The handler used to render [http://openiaml.org/model/Map Maps]. Currently, the 
 
   * `googlemaps`: Use [http://code.google.com/apis/maps/ Google Maps API] *(default)*
   * `mock`: Generate a mocked-up map
+
+==google_maps_api_key==
+
+If using the `googlemaps` `map_handler` option, you need to provide an API key for your application. No default key is provided with IAML, you will have to [http://code.google.com/apis/maps/signup.html generate your own] (which is tied to your Google account), and agree with the terms and conditions provided.

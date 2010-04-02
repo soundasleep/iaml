@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.127b1fff682.4be">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
-    <scopes xsi:type="iaml.scopes:Email" id="email" name="Email" inWires="wires.127b254e207.ce" to="target@openiaml.org" from="source@openiaml.org">
+    <scopes xsi:type="iaml.scopes:Email" id="email" name="Email" inWires="wires.127b254e207.ce" to="target@openiaml.org" from="source@openiaml.org" subject="[automated] EmailSetWire test case">
       <operations xsi:type="iaml:PrimitiveOperation" id="model.127b1fff682.4ca" name="send" inActions="wires.127b1fff8c4.183"/>
     </scopes>
     <children xsi:type="iaml.visual:InputForm" outWires="wires.127b254e207.ce" id="visual.127b1fff818.3a9" name="form">

@@ -7,8 +7,6 @@ import java.io.File;
 
 import org.eclipse.core.resources.IFile;
 
-
-
 /**
  * 
  */
@@ -28,6 +26,15 @@ public class EmailSetWire extends EmailCodegenTestCase {
 	public void testHome() throws Exception {
 		beginAtSitemapThenPage("Home");
 		assertNoProblem();
+	}
+	
+	/**
+	 * Should this test case check for intercepted emails?
+	 * 
+	 * @return true by default
+	 */
+	protected boolean doEmailChecks() {
+		return true;
 	}
 	
 	/**
@@ -75,11 +82,15 @@ public class EmailSetWire extends EmailCodegenTestCase {
 		
 		// we should now have received an email
 		waitForEmails();
-		assertEmailNotEmpty();
-		assertEquals(1, getEmailSize());
-		InterceptedEmail email = getEmailFirst();
-		
-		return email;
+		if (doEmailChecks()) { 
+			assertEmailNotEmpty();
+			assertEquals(1, getEmailSize());
+			InterceptedEmail email = getEmailFirst();
+			
+			return email;
+		} else {
+			return null;
+		}
 		
 	}
 	
@@ -92,12 +103,13 @@ public class EmailSetWire extends EmailCodegenTestCase {
 	public void testEditForm() throws Exception {
 	
 		InterceptedEmail email = fillOutForm();
+		if (!doEmailChecks()) return;
 
 		assertEquals("source@openiaml.org", email.getFrom());
 		assertEquals("target@openiaml.org", email.getTo());
 		
 		// no custom template is provided, so we get the default content
-		assertEquals("from: source@openiaml.org\nto: target@openiaml.org\nfield 1: value 1\nfield 2: value 2\nfield 3: value 3\n", email.getContent());
+		assertEquals("from: source@openiaml.org\nsubject: [automated] EmailSetWire test case\nto: target@openiaml.org\nfield 1: value 1\nfield 2: value 2\nfield 3: value 3\n", email.getContent());
 	
 	}
 	
@@ -121,6 +133,8 @@ public class EmailSetWire extends EmailCodegenTestCase {
 
 		// we should now have received an email
 		waitForEmails();
+
+		if (!doEmailChecks()) return;
 		assertEmailNotEmpty();
 		assertEquals(1, getEmailSize());
 		InterceptedEmail email = getEmailFirst();
@@ -129,7 +143,7 @@ public class EmailSetWire extends EmailCodegenTestCase {
 		assertEquals("target@openiaml.org", email.getTo());
 		
 		// no custom template is provided, so we get the default content
-		assertEquals("from: source@openiaml.org\nto: target@openiaml.org\nfield 1: \nfield 2: \nfield 3: \n", email.getContent());
+		assertEquals("from: source@openiaml.org\nsubject: [automated] EmailSetWire test case\nto: target@openiaml.org\nfield 1: \nfield 2: \nfield 3: \n", email.getContent());
 	
 	}
 	
@@ -155,6 +169,7 @@ public class EmailSetWire extends EmailCodegenTestCase {
 		
 		// proceed as normal
 		InterceptedEmail email = fillOutForm();
+		if (!doEmailChecks()) return;
 
 		assertEquals("source@openiaml.org", email.getFrom());
 		assertEquals("target@openiaml.org", email.getTo());

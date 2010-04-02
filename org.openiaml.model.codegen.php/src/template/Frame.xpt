@@ -128,6 +128,7 @@ log_message("«id».php: Session data: " . print_r($_SESSION, true));
 	</script>
 	<script language="Javascript" type="application/javascript" src="<?php echo IAML_RUNTIME_WEB; ?>js/prototype.js"></script>
 	<script language="Javascript" type="application/javascript" src="<?php echo IAML_RUNTIME_WEB; ?>js/default.js"></script>
+	<script language="Javascript" type="application/javascript" src="<?php echo IAML_RUNTIME_WEB; ?>js/maps.js"></script>
 	<script language="Javascript" type="application/javascript" src="onCurrentFrame.js"></script>
 	<script language="Javascript" type="application/javascript">
 	/* <![CDATA[ */

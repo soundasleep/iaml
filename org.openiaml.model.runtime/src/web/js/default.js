@@ -131,6 +131,21 @@ function execute_queued_url(url, counter, function_queue) {
 		      						document.getElementById(element_id).value = value;
 		      						break;
 
+		      					case "set_map_point":
+		      						if (bits.length != 3) {
+		      							throw new IamlJavascriptException("'set_map_point' instruction called with incorrect number of arguments: expected 3, found " + bits.length);
+		      						}
+		      						var element_id = decodeURIComponent(bits[1]);
+		      						var value = decodeURIComponent(bits[2]);
+		      						debug("[instruction] set_map_point(" + element_id + ")");
+
+									if (!set_map_point_handler) {
+		      							throw new IamlJavascriptException("No set_map_point_handler registered");
+		      						}
+
+		      						set_map_point_handler(element_id, value);
+		      						break;
+
 		      					case "redirect":
 		      						if (bits.length != 2) {
 		      							throw new IamlJavascriptException("'redirect' instruction called with incorrect number of arguments: expected 2, found " + bits.length);
@@ -156,6 +171,7 @@ function execute_queued_url(url, counter, function_queue) {
 
 		      						// any arguments (up to 10)
 		      						for (var j = 0; j < 10; j++) {
+		      							// TODO should the bits downloaded into 'args' be cleaned through decodeURIComponent?
 		      							args.push(bits.length > (j + 2) ? bits[j + 2] : null);
 		      						}
 
@@ -615,6 +631,7 @@ function can_cast(value, type) {
 		// casting to string
 		case "":
 		case "http://openiaml.org/model/datatypes#iamlString":
+		case "http://openiaml.org/model/datatypes#iamlAddress":
 			// can always convert anything to a String
 			return true;
 		
@@ -752,6 +769,7 @@ function do_cast(value, type) {
 		// casting to string
 		case "":
 		case "http://openiaml.org/model/datatypes#iamlString":
+		case "http://openiaml.org/model/datatypes#iamlAddress":
 			// a date?
 			if (value instanceof Date) {
 				// format as RFC 2822

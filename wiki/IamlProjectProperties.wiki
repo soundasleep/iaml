@@ -43,8 +43,10 @@ If set to "true", debug information will be rendered as part of the generate cod
 
 The handler used to send [http://openiaml.org/model/Email e-mail]. In the future, this will include configuration for `mail()`, PHPMailer, direct SMTP, etc. Currently, the following e-mail handlers are supported:
 
-  * `phpmailer`: Use [PHPMailer]
+  * `phpmailer`: Use [PHPMailer] *(default)*
   * `file`: Send to a text file
+
+If using [PHPMailer], then the default `mail` implementation is used (usually `mail()`).
 
 ==email_handler_phpmailer_include==
 
@@ -65,3 +67,10 @@ email.0.content=e-mail content
 email.1.from=source@openiaml.org
 ...
 }}}
+
+==map_handler==
+
+The handler used to render [http://openiaml.org/model/Map Maps]. Currently, the following map handlers are supported:
+
+  * `googlemaps`: Use [http://code.google.com/apis/maps/ Google Maps API] *(default)*
+  * `mock`: Generate a mocked-up map

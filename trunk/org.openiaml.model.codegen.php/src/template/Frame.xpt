@@ -15,6 +15,7 @@
 /* generated frame "«name-»" */
 «EXPAND template::Template::commonHeader("") FOR getRoot()»
 
+«REM»TODO should this be safeNameString(id), as per JS below?«ENDREM»
 define("CURRENT_PAGE", "«safeName()»");
 function get_frame_id() {
 	return CURRENT_PAGE;

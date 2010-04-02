@@ -27,7 +27,6 @@ public class AllServerRuntimeTests {
 		suite.addTestSuite(HelperFunctions.class);
 		suite.addTestSuite(CastFunctions.class);
 		suite.addTestSuite(PropertiesFileFunctions.class);
-		suite.addTestSuite(ConvertHtmlToText.class);
 
 		return suite;
 	}

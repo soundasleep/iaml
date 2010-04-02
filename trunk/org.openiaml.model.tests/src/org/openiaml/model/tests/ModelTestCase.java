@@ -179,13 +179,20 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	}
 	
 	/**
+	 * Reset the codegen cache.
+	 */
+	public void resetCodegenCache() {
+		codegenCache.clear();
+	}
+	
+	/**
 	 * This cache attempts to store the results of previous code generations, allowing us
 	 * to perform multiple tests faster.
 	 * 
 	 * It stores a map of (input class, list of relative paths) of generated files.
 	 */
 	private static Map<Class<?>, List<String>> codegenCache = new HashMap<Class<?>, List<String>>();
-	
+
 	/**
 	 * A map of project classes to generated project paths.
 	 */

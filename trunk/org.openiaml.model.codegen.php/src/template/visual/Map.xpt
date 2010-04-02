@@ -1,0 +1,56 @@
+«IMPORT iaml»
+
+/**
+ * Visually rendering a map.
+ */
+«EXTENSION template::GeneratorExtensions»
+
+«DEFINE renderMap(model::visual::Frame currentFrame) FOR model::visual::Map-»
+	<label
+		id="«safeNameString(id)-»_label"
+		for="«safeNameString(id)-»" 
+		«EXPAND EventHandlers::getInlineClickJavascript(currentFrame)»
+		>
+
+		«REM»output name«ENDREM»
+		«escapeHtmlString(name)»
+			
+	</label>
+	
+	<div id="«safeNameString(id)-»" class="iaml_map">
+		<?php
+		switch (MAP_HANDLER) {
+			case "googlemaps":
+				echo_google_map();
+				break;
+			
+			case "mock":
+				echo_mock_map();
+				break;
+			
+			default:
+				throw new IamlRuntimeException("Map handler '" + MAP_HANDLER + "' unexpected");
+		}
+		?>
+		
+		«REM»expand all children«ENDREM»
+		«EXPAND Render::renderVisual(currentFrame) FOREACH children-»
+	</label>
+	
+	«EXPAND EventHandlers::getScriptClickDefinition(currentFrame)»
+	
+	<script language="Javascript" type="application/javascript">
+		/* <![CDATA[ */
+			«REM»any on-access events?«ENDREM»
+			addOnloadFunction( function() {
+			«IF onAccess != null»
+				// expand all onAccess
+				«EXPAND template::events::EventCall::callEvent(false) FOR onAccess-»
+			«ENDIF»
+			} );
+		/* ]]> */
+	</script> 
+«ENDDEFINE»
+
+«DEFINE exception FOR Object»
+«ENDDEFINE»

@@ -10,12 +10,19 @@
  
 «EXPAND template::Template::commonHeader("")»
 
+// include operations, condition definitions
+«EXPAND template::Common::commonPHPIncludes»
+
 log_message("call_remote_event.php? " . print_r($_GET, true));
 $container = require_get("container");
 $operation_name = require_get("operation_name");
 $arg0 = require_get("arg0");
 $arg1 = require_get("arg1");
 $running = require_get("running", "");	// optional stacktrace
+
+// the current frame ID we are on
+// (used to select which elements to inform the client to update)
+$frame_id = require_get("frame");
 
 /* check to make sure it's in an existing frame */
 $existing_frames = array(
@@ -56,6 +63,9 @@ if (strpos(strtolower($result), "Warning") !== false) {
 	throw new IamlRuntimeException("Remote call to '$url' failed: Warning.", $result);
 } 
 echo $result;
+
+// update any values on the client-side?
+«EXPAND template::php::callbacks::UpdateFrameProperties::updateAllFrameProperties»
 
 log_message("call_remote_event.php complete");
 

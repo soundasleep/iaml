@@ -201,7 +201,7 @@
 			/* a property from our session */
 			has_session("«safeName(containingSession(this))»_«safeName()-»")
 		«ELSE»
-			(get_application_value("«safeName()-»", null) != null)
+			(get_application_value("«safeName()-»", null) !== null)
 		«ENDIF»
 	«ELSE»
 		«IF name == "fieldValue"»
@@ -209,7 +209,9 @@
 			«IF model::DomainAttributeInstance.isInstance(eContainer)»
 				«REM»from a DomainAttributeInstance«ENDREM»
 				«EXPAND RemoteParameter::remoteValueIsSet(php, this) FOR this.eContainer-»
-			«ELSEIF model::visual::InputTextField.isInstance(eContainer) || model::visual::Label.isInstance(eContainer)»
+			«ELSEIF model::visual::InputTextField.isInstance(eContainer) || 
+				model::visual::Label.isInstance(eContainer) ||
+				model::visual::MapPoint.isInstance(eContainer)»
 				«REM»this is a text field stored outside of the current frame«ENDREM»
 				/* if you _don't_ want an operation to use a cached value of a remote Input Text Field/Label, place the operation _outside_ of its containing frame. */
 				<?php echo («EXPAND isSetParameter(true) FOR this») ? "true" : "false"; ?>

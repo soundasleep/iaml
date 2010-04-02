@@ -45,6 +45,7 @@ function ob_error_handler($output) {
 require("databases.php");
 require("first_class_types.php");
 require("emails.php");
+require("maps.php");
 require("properties.php");
 
 $log_unique_id = sprintf("%04x", rand(0,0xffff)) . "-" . session_id();
@@ -222,6 +223,7 @@ function get_application_value($id, $default) {
  * Set a global application value stored in the database.
  */
 function set_application_value($id, $value) {
+	
 	global $db;
 	$db = new PDO('sqlite:' . ROOT_PATH . 'stored_events.db') or throw_new_IamlRuntimeException("could not open db");
 
@@ -464,6 +466,10 @@ function can_cast($value, $type) {
 		case "http://openiaml.org/model/datatypes#iamlString":
 			// can always convert anything to a String
 			return true;
+
+		case "http://openiaml.org/model/datatypes#iamlAddress":
+			// can always convert anything to an Address
+			return true;
 		
 		// casting to email
 		case "http://openiaml.org/model/datatypes#iamlEmail":
@@ -582,6 +588,7 @@ function do_cast($value, $type) {
 		// casting to string
 		case "":
 		case "http://openiaml.org/model/datatypes#iamlString":
+		case "http://openiaml.org/model/datatypes#iamlAddress":
 			// a date?
 			if ($value instanceof DateTime) {
 				// change to UTC first

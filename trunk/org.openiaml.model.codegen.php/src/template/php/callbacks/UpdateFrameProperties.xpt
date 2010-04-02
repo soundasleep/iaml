@@ -34,7 +34,7 @@ try {
 
 «DEFINE outgoingEmailValue FOR model::Property»
 	«IF model::visual::InputTextField.isInstance(eContainer)»
-		/* the property "«this»" needs to be updated on the client */
+		/* container: InputTextField */
 		if («EXPAND template::operations::Parameters::isSetParameter(true)») {
 			// but only if it's actually set
 			// get the current value
@@ -52,4 +52,24 @@ try {
 				. escape_parameter_string($value);
 		}				
 	«ENDIF»
+
+	«IF model::visual::MapPoint.isInstance(eContainer)»
+		/* container: MapPoint */
+		if («EXPAND template::operations::Parameters::isSetParameter(true)») {
+			// but only if it's actually set
+			// get the current value
+			$value = «EXPAND template::operations::Parameters::callParameterValue(true, false)»;
+			
+			// pass it to the client 
+			log_message("outgoing value to '«eContainer»' («safeNameString(((model::visual::MapPoint) eContainer).id)»): '$value'");
+			log_message("set_map_point " 
+				. escape_parameter_string("«safeNameString(((model::visual::MapPoint) eContainer).id)»")
+				. " "
+				. escape_parameter_string($value));
+			echo "\nset_map_point " 
+				. escape_parameter_string("«safeNameString(((model::visual::MapPoint) eContainer).id)»")
+				. " "
+				. escape_parameter_string($value);
+		}				
+	«ENDIF»	
 «ENDDEFINE»

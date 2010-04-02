@@ -40,7 +40,7 @@ public class MapPointUpdateExplicitly extends CodegenTestCase {
 	 * @throws Exception
 	 */
 	public void testHasMap() throws Exception {
-		
+
 		beginAtSitemapThenPage("Home");
 		
 		IElement map = assertHasMap("containing map");
@@ -153,7 +153,7 @@ public class MapPointUpdateExplicitly extends CodegenTestCase {
 	 * Assert a map with the given name exists, and return the
 	 * found map.
 	 */
-	private IElement assertHasMap(String label) {
+	public IElement assertHasMap(String label) {
 		// find a label with the given string
 		String id = getLabelIDForText(label);
 		
@@ -174,7 +174,7 @@ public class MapPointUpdateExplicitly extends CodegenTestCase {
 	 * Assert that the given map point exists in the given map, and
 	 * returns the foind point.
 	 */
-	private IElement assertHasMapPoint(IElement map, String label) {
+	public IElement assertHasMapPoint(IElement map, String label) {
 		// find a point with the given string
 		String id = getLabelIDForText(label);
 		IElement point = getElementById(id);
@@ -191,7 +191,7 @@ public class MapPointUpdateExplicitly extends CodegenTestCase {
 	 * @param map
 	 * @param string
 	 */
-	private void assertHasNoMapPoint(IElement map, String string) {
+	public void assertHasNoMapPoint(IElement map, String string) {
 		try {
 			assertHasMapPoint(map, string);
 

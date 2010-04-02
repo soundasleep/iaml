@@ -135,6 +135,11 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 
 		// set test context
 		getTestContext().setBaseUrl(BASE_URL + project.getProjectName() + "/");
+		
+		// do we need to set a proxy?
+		if (System.getenv("http.proxyHost") != null) {
+			getTestContext().setProxyAuthorization(null, null, System.getenv("http.proxyHost"), Integer.parseInt(System.getenv("http.proxyPort")));
+		}
 	}
 
 	/**

@@ -2,7 +2,7 @@
 
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE main(String config_runtime, String config_web, String debug, String email_handler, String email_handler_phpmailer_include, String email_handler_file_destination, String map_handler) FOR model::InternetApplication»
+«DEFINE main(String config_runtime, String config_web, String debug, String email_handler, String email_handler_phpmailer_include, String email_handler_file_destination, String map_handler, String google_maps_api_key) FOR model::InternetApplication»
 	«REM»to test that when we throw exceptions, we can actually catch them«ENDREM»
 	«IF name=="__test throw exception"»
 		«throwException("We should be able to catch this exception.")» 
@@ -44,6 +44,7 @@
 		define("EMAIL_HANDLER_PHPMAILER_INCLUDE", "«email_handler_phpmailer_include»");
 		define("EMAIL_HANDLER_FILE_DESTINATION", "«email_handler_file_destination»");
 		define("MAP_HANDLER", "«map_handler»");
+		define("GOOGLE_MAPS_API_KEY", "«google_maps_api_key»");
 		?>
 	«ENDFILE»
 	

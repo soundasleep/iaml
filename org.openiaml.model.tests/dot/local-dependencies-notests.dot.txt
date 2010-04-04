@@ -11,7 +11,6 @@ digraph {
 "org.openiaml.model.diagram.helpers";
 "org.openiaml.model.drools";
 "org.openiaml.model.edit";
-"org.openiaml.model.owl.pellet";
 "org.openiaml.model.runtime";
 "org.openiaml.model.runtime.phpmailer";
   node [style=filled, fillcolor="#cc7766"];
@@ -98,6 +97,4 @@ digraph {
   "org.openiaml.model.drools" -> "org.openiaml.emf.properties";
   "org.openiaml.model.drools" -> "org.openiaml.model";
   "org.openiaml.model.edit" -> "org.openiaml.model";
-  "org.openiaml.model.owl.pellet" -> "org.openiaml.model";
-  "org.openiaml.model.owl.pellet" -> "org.openiaml.model.actions";
 }

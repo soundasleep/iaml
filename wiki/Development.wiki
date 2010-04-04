@@ -37,6 +37,7 @@ URL: http://download.eclipse.org/releases/galileo
   * EMF - Eclipse Modeling Framework SDK (2.5.0)
   * UML2 Extender SDK (3.0.0)
   * UML2 Tools SDK (Incubation) (0.9.0)
+  * XSD - XML Schema Definition SDK (2.5.0)
 
 You may also install the _TPTP Testing and Profiling tools_ if you wish to profile the application, but this is not necessary.
 

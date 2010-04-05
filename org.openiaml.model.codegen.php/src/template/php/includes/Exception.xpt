@@ -10,7 +10,7 @@
 
 header('HTTP/1.1 503 Service Unavailable');
 
-«EXPAND template::Template::commonHeader("")»
+«EXPAND template::Template::commonHeader("", "Exception")»
 
 log_message("exception.php? " . print_r($_GET, true));
 $fail = require_get("fail", "No exception specified"); 

@@ -50,8 +50,10 @@ require("properties.php");
 
 $log_unique_id = sprintf("%04x", rand(0,0xffff)) . "-" . session_id();
 function log_message($msg, $also_debug = true) {
+	$script_name = defined('SCRIPT_NAME') ? SCRIPT_NAME : "(no script)";
+
 	global $log_unique_id;
-	$msg = "[$log_unique_id] $msg";		// append a unique ID to help us track requests
+	$msg = "[$log_unique_id] [$script_name] $msg";		// append a unique ID to help us track requests
 
 	$fp = fopen(ROOT_PATH . "php.log", "a");
 	$msg_indent = str_replace("\n", "\n\t", $msg);

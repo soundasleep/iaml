@@ -34,7 +34,7 @@
 				 * server-side variables (such as values from databases) to be included.
 				 */
 
-				«EXPAND template::Template::commonHeader("../")»
+				«EXPAND template::Template::commonHeader("../", "Condition: " + c.id + " (js)")»
 				
 				// references to other conditions, operations
 				«EXPAND template::Common::commonPHPIncludes FOR getRoot()-»

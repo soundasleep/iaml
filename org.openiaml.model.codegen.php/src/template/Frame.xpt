@@ -13,7 +13,7 @@
 	«FILE "output/"+safeNameString(id)+".php"-»
 <?php
 /* generated frame "«name-»" */
-«EXPAND template::Template::commonHeader("") FOR getRoot()»
+«EXPAND template::Template::commonHeader("", "Frame: " + id) FOR getRoot()»
 
 «REM»TODO should this be safeNameString(id), as per JS below?«ENDREM»
 define("CURRENT_PAGE", "«safeName()»");

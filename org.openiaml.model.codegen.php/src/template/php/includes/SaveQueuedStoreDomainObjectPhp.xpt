@@ -8,7 +8,7 @@
  * Saving queued stored objects.
  */
  
-«EXPAND template::Template::commonHeader("")»
+«EXPAND template::Template::commonHeader("", "Save Queued Store Domain Object")»
 
 «EXPAND template::domain::Definitions::domainDefinitions»
 

@@ -8,7 +8,7 @@
  * Call a remote event.
  */
  
-«EXPAND template::Template::commonHeader("")»
+«EXPAND template::Template::commonHeader("", "Call Remote Event")»
 
 // include operations, condition definitions
 «EXPAND template::Common::commonPHPIncludes»

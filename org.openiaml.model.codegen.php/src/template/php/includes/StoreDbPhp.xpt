@@ -8,7 +8,7 @@
  * For storing a single value into the database (attribute id).
  */
  
-«EXPAND template::Template::commonHeader("")»
+«EXPAND template::Template::commonHeader("", "Store DB")»
 
 // condition definitions
 «EXPAND template::conditions::Definitions::conditionIncludes(true)»

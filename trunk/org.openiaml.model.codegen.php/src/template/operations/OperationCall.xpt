@@ -68,7 +68,7 @@
 			will also return true for Event-->Operation if they are
 			both on the same frame.
 		«ENDREM»
-		«IF availableInCurrentScriptAction(from, to)-»
+		«IF php || availableInCurrentScriptAction(from, to)-»
 			«REM»// on current frame (wire id = «id»)«ENDREM»
 			do_«operationName(to)»(«EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»);
 		«ELSE-»
@@ -81,7 +81,7 @@
 			«ENDREM»
 		«ENDIF-»
 	«ELSEIF model::scopes::Session.isInstance(to.eContainer)-»
-		«IF availableInCurrentScriptAction(from, to)-»
+		«IF php || availableInCurrentScriptAction(from, to)-»
 			«REM»// on current frame (wire id = «id»)«ENDREM»
 			do_«operationName(to)»(«EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»);
 		«ELSE-»

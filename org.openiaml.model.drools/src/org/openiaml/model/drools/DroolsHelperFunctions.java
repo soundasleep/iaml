@@ -17,6 +17,7 @@ import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
+import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.domain.DomainPackage;
@@ -110,6 +111,10 @@ public class DroolsHelperFunctions {
 
 	public boolean loginAttributeMatches(Property p, DomainAttribute a) {
 		return p.getName() != null && p.getName().equals("current " + a.getName());
+	}
+
+	public boolean loginHandlerScopeMatches(Scope target, LoginHandler handler) {
+		return target.getName() != null && target.getName().equals(handler.getName() + " login");
 	}
 
 	/**

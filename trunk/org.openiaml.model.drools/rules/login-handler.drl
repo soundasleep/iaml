@@ -19,18 +19,44 @@ global OverridableCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
+// issue 118
+/**
+ * @inference LoginHandler
+ *		A {@model LoginHandler} contained within a {@model InternetApplication} will
+ *		generate a {@model Session new login session} for the new {@model Frame login page}.
+ */
+rule "Create separate 'login' scope for LoginHandlers [InternetApplication]"
+	when
+		container : InternetApplication( )
+		scope : Scope( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope )
+		
+		not ( login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) ))
+			
+		eval ( handler.veto( login_handler ))
+	
+	then
+		Session login_session = handler.generatedSession(login_handler, container);
+		handler.setName(login_session, login_handler.getName() + " login");
+		queue.add(login_session, drools);	
+	
+end
+
 rule "Create 'login' page for LoginHandlers [InternetApplication]"
 	when
 		container : InternetApplication( )
 		scope : Scope( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope )
-		not (Frame (eContainer == container, name=="login" ))
+		
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
+		
+		not (Frame (eContainer == login_session, name=="login" ))
 			
 		eval ( handler.veto( login_handler ))
 		
 	then
 
-		Frame login = handler.generatedFrame(login_handler, container);
+		Frame login = handler.generatedFrame(login_handler, login_session);
 		handler.setName(login, "login");
 		queue.add(login, drools);
 		
@@ -348,7 +374,8 @@ rule "Create login form for 'login' pages"
 		container : InternetApplication( )
 		scope : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope )
-		login : Frame (eContainer == container, name=="login" )
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
+		login : Frame (eContainer == login_session, name=="login" )
 
 		not (InputForm( eContainer == login ))
 				
@@ -370,12 +397,13 @@ rule "Connect 'Login' button to 'do login' operation"
 		container : InternetApplication( )
 		scope : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope )
-		login : Frame (eContainer == container, name=="login" )
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
+		login : Frame (eContainer == login_session, name=="login" )
 
 		form : InputForm ( eContainer == login, name == "login form" )
 		button : Button ( eContainer == form, name == "Login" )
 		
-		operation : Operation ( eContainer == scope, name == "do login" )
+		operation : Operation ( eContainer == login_session, name == "do login" )
 		
 		not (RunAction ( from == button, to == operation, name == "onClick"))
 		
@@ -393,7 +421,8 @@ rule "Create text fields for login form of 'login' pages [type=secret_key]"
 		container : InternetApplication( )
 		scope : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
-		login : Frame (eContainer == container, name=="login" )
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
+		login : Frame (eContainer == login_session, name=="login" )
 
 		form : InputForm( eContainer == login, name == "login form" )
 		
@@ -418,7 +447,8 @@ rule "Create contents of 'do login' operation [type=secret_key]"
 		container : InternetApplication( )
 		scope : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
-		login : Frame (eContainer == container, name=="login" )
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
+		login : Frame (eContainer == login_session, name=="login" )
 
 		value : Property( )
 		mySetWire : SetWire( from == login_handler, to == value, name == "set" )
@@ -432,7 +462,7 @@ rule "Create contents of 'do login' operation [type=secret_key]"
 		field : InputTextField ( eContainer == form, name == "login key" )
 		fieldValue : Property( eContainer == field, name == "fieldValue" )
 		
-		loginOperation : CompositeOperation ( eContainer == scope, name == "do login" )
+		loginOperation : CompositeOperation ( eContainer == login_session, name == "do login" )
 		runClick : RunAction ( from == button, to == loginOperation, name == "onClick" )
 		
 		not ( StartNode ( eContainer == loginOperation ))
@@ -524,7 +554,8 @@ rule "Create text fields for login form of 'login' pages [type=domain_object]"
 		container : InternetApplication( )
 		scope : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.DOMAIN_OBJECT )
-		login : Frame (eContainer == container, name=="login" )
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
+		login : Frame (eContainer == login_session, name=="login" )
 
 		form : InputForm( eContainer == login, name == "login form" )
 		
@@ -554,7 +585,8 @@ rule "Create text fields for login form of 'login' pages [type=user]"
 		container : InternetApplication( )
 		scope : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.USER )
-		login : Frame (eContainer == container, name=="login" )
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
+		login : Frame (eContainer == login_session, name=="login" )
 
 		form : InputForm( eContainer == login, name == "login form" )
 
@@ -582,9 +614,10 @@ rule "Connect text fields for login form of 'login' pages to 'do login' run wire
 		container : InternetApplication( )
 		scope : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.DOMAIN_OBJECT )
-		login : Frame (eContainer == container, name=="login" )
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
+		login : Frame (eContainer == login_session, name=="login" )
 		
-		operation : Operation( eContainer == scope, name == "do login" )
+		operation : Operation( eContainer == login_session, name == "do login" )
 
 		form : InputForm( eContainer == login, name == "login form" )
 		
@@ -614,9 +647,10 @@ rule "Connect text fields for login form of 'login' pages to 'do login' run wire
 		container : InternetApplication( )
 		scope : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.USER )
-		login : Frame (eContainer == container, name=="login" )
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
+		login : Frame (eContainer == login_session, name=="login" )
 		
-		operation : Operation( eContainer == scope, name == "do login" )
+		operation : Operation( eContainer == login_session, name == "do login" )
 
 		form : InputForm( eContainer == login, name == "login form" )
 		
@@ -642,18 +676,35 @@ rule "Connect text fields for login form of 'login' pages to 'do login' run wire
 		
 end
 
+/**
+ * The 'do login' page must be OUTSIDE the Scope, otherwise it might
+ * not be possible to actually call it from outside (since Session.onAccess
+ * may require a valid domain instance, for example - even though it hasn't been
+ * set yet).
+ *
+ * @implementation Operation,Scope
+ *		All {@model OperationCall operation calls} to {@model Operation}s contained
+ *		within {@model Scope}s are first evaluated for any
+ * 		{@model Scope#onAccess} {@model EventTrigger events}.
+ * @implementation LoginHandler
+ *		The generated {@model Property} containing the current password
+ *		for a {@model LoginHandler} is set before it is evaluated whether
+ *		the instance actually exists, thus the Property may not be
+ *		valid.
+ */
 rule "Create 'do login' operation within all login_handlers"
 	when
 		container : InternetApplication( )
 		session : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == session )
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		
-		not ( Operation ( eContainer == session, name == "do login" ))
+		not ( Operation ( eContainer == login_session, name == "do login" ))
 		
 		eval ( handler.veto( login_handler ))
 
 	then
-		CompositeOperation loginOperation = handler.generatedCompositeOperation(login_handler, session);
+		CompositeOperation loginOperation = handler.generatedCompositeOperation(login_handler, login_session);
 		handler.setName(loginOperation, "do login");
 		queue.add(loginOperation, drools);
 		
@@ -664,13 +715,14 @@ rule "Create contents of 'do login' operation [type=domain_object]"
 		container : InternetApplication( )
 		scope : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.DOMAIN_OBJECT )
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		
 		instance : DomainObjectInstance ( eContainer == scope )
 		setWire : SetWire ( from == login_handler, to == instance, name == "set" )
 		
 		ex : Operation ( eContainer == instance, name == "exists?" )
 				
-		loginOperation : CompositeOperation ( eContainer == scope, name == "do login" )
+		loginOperation : CompositeOperation ( eContainer == login_session, name == "do login" )
 
 		not ( StartNode ( eContainer == loginOperation ))
 		
@@ -739,6 +791,7 @@ rule "Create parameter for 'do login' operation inside login handler[type=domain
 		container : InternetApplication( )
 		scope : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.DOMAIN_OBJECT )
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		
 		attribute : DomainAttribute ( )
 		paramWire : ParameterEdge( from == attribute, to == login_handler )
@@ -746,7 +799,7 @@ rule "Create parameter for 'do login' operation inside login handler[type=domain
 		instance : DomainObjectInstance ( eContainer == scope )
 		setWire : SetWire ( from == login_handler, to == instance, name == "set" )
 
-		operation : CompositeOperation ( eContainer == scope, name == "do login" )
+		operation : CompositeOperation ( eContainer == login_session, name == "do login" )
 		split : SplitNode ( eContainer == operation )
 		join : JoinNode ( eContainer == operation )
 		
@@ -795,13 +848,14 @@ rule "Create contents of 'do login' operation [type=user]"
 		container : InternetApplication( )
 		scope : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.USER )
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		
 		instance : DomainObjectInstance ( eContainer == scope )
 		setWire : SetWire ( from == login_handler, to == instance, name == "set" )
 		
 		ex : Operation ( eContainer == instance, name == "exists?" )
 				
-		loginOperation : CompositeOperation ( eContainer == scope, name == "do login" )
+		loginOperation : CompositeOperation ( eContainer == login_session, name == "do login" )
 
 		not ( StartNode ( eContainer == loginOperation ))
 		
@@ -870,12 +924,13 @@ rule "Create parameter for 'do login' operation inside login handler[type=user]"
 		container : InternetApplication( )
 		scope : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.USER )
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		
 		role : Role ( )
 		attribute : DomainAttribute ( eContainer == role )
 		paramWire : ParameterEdge( from == role, to == login_handler )
 		
-		operation : CompositeOperation ( eContainer == scope, name == "do login" )
+		operation : CompositeOperation ( eContainer == login_session, name == "do login" )
 		split : SplitNode ( eContainer == operation )
 		join : JoinNode ( eContainer == operation )
 		
@@ -925,9 +980,10 @@ rule "Connect successful 'login' operation to navigate to final 'login' page"
 		container : InternetApplication( )
 		scope : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope )
-		login : Frame (eContainer == container, name=="login" )
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
+		login : Frame (eContainer == login_session, name=="login" )
 		
-		login_operation : CompositeOperation( eContainer == scope, name == "do login" )		
+		login_operation : CompositeOperation( eContainer == login_session, name == "do login" )		
 		login_target : Frame ( ) 
 		login_wire : NavigateAction( from == login_handler, to == login_target, name == "login" )
 
@@ -947,8 +1003,9 @@ rule "Connect failed 'login' operation to navigate back to 'login'"
 		container : InternetApplication( )
 		scope : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope )
-		login : Frame (eContainer == container, name=="login" )
-		login_operation : CompositeOperation( eContainer == scope, name == "do login" )		
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
+		login : Frame (eContainer == login_session, name=="login" )
+		login_operation : CompositeOperation( eContainer == login_session, name == "do login" )		
 
 		not (NavigateAction(from == login_operation, to == login, name == "fail"))
 		

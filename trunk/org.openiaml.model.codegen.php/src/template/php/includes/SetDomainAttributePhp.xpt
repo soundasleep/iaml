@@ -8,7 +8,7 @@
  * For setting a domain attribute instance.
  */
  
-«EXPAND template::Template::commonHeader("")»
+«EXPAND template::Template::commonHeader("", "Set Domain Attribute")»
 
 «EXPAND template::domain::Definitions::domainDefinitions»
 

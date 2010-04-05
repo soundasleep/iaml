@@ -8,7 +8,7 @@
  * Remove a role from a given user instance.
  */
  
-«EXPAND template::Template::commonHeader("")»
+«EXPAND template::Template::commonHeader("", "Remove Role")»
 
 «EXPAND template::domain::Definitions::domainDefinitions»
 «EXPAND template::users::Includes::getInclude FOREACH eAllContents.typeSelect(model::users::Role)-»

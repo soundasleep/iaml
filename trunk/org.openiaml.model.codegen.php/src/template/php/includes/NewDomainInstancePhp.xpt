@@ -13,7 +13,7 @@
  * frame $frame_id) need to update.
  */
  
-«EXPAND template::Template::commonHeader("")»
+«EXPAND template::Template::commonHeader("", "New Domain Instance")»
 
 «EXPAND template::domain::Definitions::domainDefinitions»
 

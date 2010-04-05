@@ -8,7 +8,7 @@
  * For setting a session variable.
  */
  
-«EXPAND template::Template::commonHeader("")»
+«EXPAND template::Template::commonHeader("", "Set Session")»
 
 log_message("set_session.php? " . print_r($_GET, true));
 $id = require_get("id");

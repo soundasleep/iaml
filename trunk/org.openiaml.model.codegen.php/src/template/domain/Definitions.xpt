@@ -80,7 +80,7 @@
 			 * server-side variables (such as values from databases) to be included.
 			 */
 
-			«EXPAND template::Template::commonHeader("../")»
+			«EXPAND template::Template::commonHeader("../", "all_domain_attributes (js)")»
 			«EXPAND template::Template::typeJavascript»
 		?>
 		

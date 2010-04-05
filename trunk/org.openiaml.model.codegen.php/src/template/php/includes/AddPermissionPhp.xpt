@@ -8,7 +8,7 @@
  * Add a permission to a given user instance.
  */
  
-«EXPAND template::Template::commonHeader("")»
+«EXPAND template::Template::commonHeader("", "Add Permission")»
 
 «EXPAND template::domain::Definitions::domainDefinitions»
 «EXPAND template::users::Includes::getInclude FOREACH eAllContents.typeSelect(model::users::Role)-»

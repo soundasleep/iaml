@@ -8,7 +8,7 @@
  * Saving queued stored attributes.
  */
  
-«EXPAND template::Template::commonHeader("")»
+«EXPAND template::Template::commonHeader("", "Save Queued Attribute")»
 
 «EXPAND template::domain::Definitions::domainDefinitions»
 

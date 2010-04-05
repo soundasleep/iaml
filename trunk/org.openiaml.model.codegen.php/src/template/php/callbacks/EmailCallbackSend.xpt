@@ -14,7 +14,7 @@
  * The 'send' method for an e-mail as a callback.
  */
  
-«EXPAND template::Template::commonHeader("")»
+«EXPAND template::Template::commonHeader("", "Email Callback")»
 
 // include operations, condition definitions
 «EXPAND template::Common::commonPHPIncludes»

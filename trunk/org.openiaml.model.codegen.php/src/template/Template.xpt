@@ -70,7 +70,7 @@
 	«REM»containing_frame() runtime checks (javascript)«ENDREM»
 	«EXPAND template::js::OnCurrentFrame::onCurrentFrame»
 	
-	«REM»create other files manually«ENDREM»	
+	«REM»create other files manually«ENDREM»
 	«FILE "output/site_layout.xml"-»«EXPAND xml::SiteLayout::siteLayout-»«ENDFILE-»
 
 	«FILE "output/exception.php"»«EXPAND php::includes::Exception::exceptionPhp»«ENDFILE»
@@ -116,9 +116,10 @@ define("CUSTOM_PATH", ROOT_PATH . "../");
 	header("Content-Type: application/javascript");
 «ENDDEFINE»
 
-«DEFINE commonHeader(String path) FOR model::InternetApplication»
+«DEFINE commonHeader(String path, String script_name) FOR model::InternetApplication»
 // include header code
 «EXPAND setPath(path)»
+define('SCRIPT_NAME', '«script_name»');
 require(ROOT_PATH . "config.php");		// runtime library configuration
 require(ROOT_PATH . IAML_RUNTIME_ROOT . "global.php");	// runtime library import
 require(ROOT_PATH . "create_database.php");		// ensure DB exists

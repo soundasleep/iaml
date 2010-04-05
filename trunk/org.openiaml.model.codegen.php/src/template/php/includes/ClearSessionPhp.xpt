@@ -8,7 +8,7 @@
  * Clear the existing session.
  */
  
-«EXPAND template::Template::commonHeader("")»
+«EXPAND template::Template::commonHeader("", "Clear Session")»
 
 log_message("clear_session.php? " . print_r($_GET, true));
 

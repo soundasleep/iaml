@@ -10,6 +10,8 @@
  
 «EXPAND template::Template::commonHeader("", "Call Remote Event")»
 
+define('REDIRECT_ON_CLIENT', true);
+
 // include operations, condition definitions
 «EXPAND template::Common::commonPHPIncludes»
 
@@ -41,6 +43,9 @@ $url .= "?" . get_sid();		// directly from PHP, so we don't need to set session_
 
 // rest of url
 $url .= "&operation=" . urlencode($operation_name) . "&arg0=" . urlencode($arg0) . "&arg1=" . urlencode($arg1) . "&running=" . urlencode($running);
+
+// redirect on client, not on server
+$url .= "&redirect_on_client=true";
 
 log_message("Remote call to: $url");
 

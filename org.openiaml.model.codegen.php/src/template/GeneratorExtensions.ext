@@ -243,19 +243,14 @@ isFailEdge(model::wires::RunAction this ) :
  * Get the containing session of the given element, or null if none.
  *
  * @pseudocode
- *   return null
+ *   if container == null
+ *		then return null 
+ *		else return containingSession(container)
  */	
 model::scopes::Session containingSession(emf::EObject this) :
-	null;
-
-/**
- * Get the containing session of the given element, or null if none.
- *
- * @pseudocode
- *   return containingSession(eContainer)
- */	
-model::scopes::Session containingSession(model::NamedElement this) :
-	containingSession(eContainer);
+	if (eContainer == null)
+		then null
+		else containingSession(eContainer);
 
 /**
  * Get the containing session of the given element, or null if none.

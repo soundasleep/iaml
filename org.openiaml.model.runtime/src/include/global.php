@@ -74,6 +74,29 @@ function log_message($msg, $also_debug = true) {
 }
 
 /**
+ * Redirect to the given URL.
+ *
+ * However, if this is a remote operation call, then this needs to instead
+ * print out 'redirect <url>', and die; this way, the client can be
+ * correctly redirected.
+ */
+function server_redirect($url) {
+	log_message("[redirect] Redirecting to $url");
+	if (defined('REDIRECT_ON_CLIENT') && REDIRECT_ON_CLIENT) {
+		log_message("[redirect] caught client-side redirect");
+		log_message("[instruction] redirect " 
+			. escape_parameter_string($url));
+		echo "\nredirect " 
+			. escape_parameter_string($url);
+		die;			
+	}
+
+	// otherwise, redirect as normal	
+	header("Location: $url");
+	die;
+}
+
+/**
  * For some reason, we can't have '$x = $a or throw new Ex()'
  * so we need to wrap it in a function.
  */
@@ -431,7 +454,7 @@ function default_exception_handler($e) {
 	$url = "exception.php?fail=" . urlencode($e->getMessage()) . "&type=" . urlencode(get_class($e)) . "&trace=" . urlencode($e->getTraceAsString());
 	log_message("[exception] " . print_r($e, true));
 	log_message("[default exception handler] Redirecting to '$url' (fail)");
-	header("Location: $url");
+	server_redirect($url);
 	die;
 }
 

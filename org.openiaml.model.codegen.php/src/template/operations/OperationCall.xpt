@@ -143,9 +143,9 @@
 		
 		if ($resume != CURRENT_PAGE) {
 			// navigate to another frame
-			$url = "$resume.php";
+			$url = "$resume.php?" . get_sid();	// need to pass session on server-side
 			log_message("[resume] Resuming to '$url'");
-			header("Location: $url");
+			server_redirect($url);
 			die;
 		}
 	«ELSE»
@@ -181,9 +181,9 @@
 		
 		if ($resume != CURRENT_PAGE) {
 			// navigate to another frame
-			$url = "$resume.php";
+			$url = "$resume.php?" . get_sid();	// need to pass session on server-side
 			log_message("[resume] Resuming to '$url'");
-			header("Location: $url");
+			server_redirect($url);
 			die;
 		}
 	«ELSE»
@@ -212,9 +212,9 @@
 		/* prevent infinite loops on the current frame */
 		if ("«id-»" != CURRENT_PAGE) {
 			// navigate to another frame
-			$url = "«safeName()».php";
+			$url = "«safeName()».php?" . get_sid();	// need to pass session on server-side
 			log_message("[redirect] Redirecting to '$url'");
-			header("Location: $url");
+			server_redirect($url);
 			die;
 		}
 	«ELSE»

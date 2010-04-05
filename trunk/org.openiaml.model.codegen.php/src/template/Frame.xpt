@@ -23,6 +23,12 @@ function get_frame_id() {
 
 «EXPAND Common::commonPHPIncludes FOR getRoot()-»
 
+// is this frame the result of a remote operation call; i.e. do we need
+// to catch redirects to pass along to the client?
+if (require_get("redirect_on_client", "")) {
+	define('REDIRECT_ON_CLIENT', true);
+}
+
 // a default fail handler for this frame?
 «IF getFailHandler(this) != null»
 	function frame_fail_handler($e) {

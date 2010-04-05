@@ -410,9 +410,9 @@
 			if (true) {
 			«ENDIF»
 				// navigate to another frame
-				$url = "«safeName(to)».php";
+				$url = "«safeName(to)».php?" . get_sid();	// need to pass session on server-side
 				log_message("[redirect] Redirecting to '$url'");
-				header("Location: $url");
+				server_redirect($url);
 				die;
 			}
 		«ELSE»

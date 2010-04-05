@@ -39,6 +39,7 @@
 «ENDDEFINE»
 
 «DEFINE outgoingValueTarget(Boolean php, String valueName) FOR model::Property»
+	/* containingSession = «containingSession(this)» */
 	«IF containingSession(this) == null»
 		«REM»contained in a Frame or InternetApplication: a static value«ENDREM»		
 		«IF php»

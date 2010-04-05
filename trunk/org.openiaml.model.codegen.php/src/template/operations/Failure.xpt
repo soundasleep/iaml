@@ -12,9 +12,9 @@
 «DEFINE failWire(Boolean php) FOR model::wires::NavigateAction-»
 	«IF php»
 		// we need to navigate to the fail frame
-		$url = "«safeName(to)».php?fail=" . urlencode($e->getMessage()) . "&trace=" . urlencode($e->getTraceAsString());
+		$url = "«safeName(to)».php?fail=" . urlencode($e->getMessage()) . "&trace=" . urlencode($e->getTraceAsString()) . "&" . get_sid();	// need to pass session on server-side;
 		log_message("[redirect] Redirecting to '$url' (fail)");
-		header("Location: $url");
+		server_redirect($url);
 		die;
 	«ELSE»
 		// we need to navigate to the fail frame

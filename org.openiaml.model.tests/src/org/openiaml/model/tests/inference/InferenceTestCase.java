@@ -68,6 +68,8 @@ import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Label;
+import org.openiaml.model.model.visual.Map;
+import org.openiaml.model.model.visual.MapPoint;
 import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ConditionEdgeDestination;
 import org.openiaml.model.model.wires.ConditionEdgesSource;
@@ -579,6 +581,46 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public Button assertHasButton(Frame element, String string) throws JaxenException {
 		return (Button) queryOne(element, "iaml.visual:children[iaml:name='" + string + "']");
+	}
+	
+	/**
+	 * Assert that the given element contains the given
+	 * MapPoint.
+	 *
+	 * @return The element found
+	 */
+	public MapPoint assertHasMapPoint(VisibleThing element, String string) throws JaxenException {
+		return (MapPoint) queryOne(element, "iaml:children[iaml:name='" + string + "']");
+	}
+	
+	/**
+	 * Assert that the given element contains the given
+	 * MapPoint.
+	 *
+	 * @return The element found
+	 */
+	public MapPoint assertHasMapPoint(Frame element, String string) throws JaxenException {
+		return (MapPoint) queryOne(element, "iaml.visual:children[iaml:name='" + string + "']");
+	}
+	
+	/**
+	 * Assert that the given element contains the given
+	 * Map.
+	 *
+	 * @return The element found
+	 */
+	public Map assertHasMap(VisibleThing element, String string) throws JaxenException {
+		return (Map) queryOne(element, "iaml:children[iaml:name='" + string + "']");
+	}
+	
+	/**
+	 * Assert that the given element contains the given
+	 * Map.
+	 *
+	 * @return The element found
+	 */
+	public Map assertHasMap(Frame element, String string) throws JaxenException {
+		return (Map) queryOne(element, "iaml.visual:children[iaml:name='" + string + "']");
 	}
 
 	/**

@@ -115,6 +115,56 @@ rule "Create field value for label"
 end
 
 /**
+ * @inference Map,Property A {@model Map} 
+ * 		contains a {@model Property property} named 'fieldValue'.
+ */
+rule "Create field value for map"
+	when
+		f : Map( )
+		not (Property( eContainer == f, name=="fieldValue" ))
+		
+		eval ( handler.veto( f ))
+			
+	then
+		Property fieldValue = handler.generatedProperty(f, f);
+		handler.setName(fieldValue, "fieldValue");
+
+		// set default to fieldValue ONLY if fieldValue is set
+		// (we want to get an error if we try to access an undefined variable)
+		if (f.getFieldValue() != null) {
+			handler.setDefault(fieldValue, f.getFieldValue());
+		}
+		
+		queue.add(fieldValue, drools);
+		
+end
+
+/**
+ * @inference MapPoint,Property A {@model MapPoint} 
+ * 		contains a {@model Property property} named 'fieldValue'.
+ */
+rule "Create field value for map point"
+	when
+		f : MapPoint( )
+		not (Property( eContainer == f, name=="fieldValue" ))
+		
+		eval ( handler.veto( f ))
+			
+	then
+		Property fieldValue = handler.generatedProperty(f, f);
+		handler.setName(fieldValue, "fieldValue");
+
+		// set default to fieldValue ONLY if fieldValue is set
+		// (we want to get an error if we try to access an undefined variable)
+		if (f.getFieldValue() != null) {
+			handler.setDefault(fieldValue, f.getFieldValue());
+		}
+		
+		queue.add(fieldValue, drools);
+		
+end
+
+/**
  * @inference DomainAttribute,Property A {@model DomainAttribute} 
  *		contains a {@model Property property} named 'fieldValue'.
  */

@@ -7,6 +7,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
+import net.sourceforge.jwebunit.htmlunit.HtmlUnitTestingEngineImpl;
+
 import org.openiaml.model.codegen.DefaultRuntimeProperties;
 
 /**
@@ -29,7 +31,14 @@ public class MapPointUpdateExplicitlyGoogleMaps extends MapPointUpdateExplicitly
 		// since we are extending, we don't want the cache to persist
 		if (!hasResetCodegenCache)
 			resetCodegenCache();
-		hasResetCodegenCache = true;		
+		hasResetCodegenCache = true;
+		
+		/*
+		 * The Google Maps API does not return correct JS (it has
+		 * syntax errors) so we need to turn the exception throwing off.
+		 */
+		HtmlUnitTestingEngineImpl engine = (HtmlUnitTestingEngineImpl) getTestingEngine();
+		engine.setThrowExceptionOnScriptError(false);
 
 		super.setUp();
 	}

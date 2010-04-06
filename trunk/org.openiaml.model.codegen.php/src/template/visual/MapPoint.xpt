@@ -6,6 +6,22 @@
 «EXTENSION template::GeneratorExtensions»
 
 «DEFINE renderMapPoint(model::visual::Frame currentFrame) FOR model::visual::MapPoint-»
+	«REM»print out any required scripting for the point«ENDREM»
+	<?php
+		switch (MAP_HANDLER) {
+			case "googlemaps":
+				echo_google_map_point_script("«safeNameString(id)-»", "«safeNameString(getParentMap().id)-»");
+				break;
+			
+			case "mock":
+				echo_mock_map_point_script("«safeNameString(id)-»", "«safeNameString(getParentMap().id)-»");
+				break;
+			
+			default:
+				throw new IamlRuntimeException("Map handler '" + MAP_HANDLER + "' unexpected");
+		}
+		?>
+
 	«REM»output name«ENDREM»
 	<label
 		id="«safeNameString(id)-»_label" 
@@ -13,17 +29,18 @@
 
 	<div
 		id="«safeNameString(id)-»" 
+		style="display: none;"
 		«EXPAND EventHandlers::getInlineClickJavascript(currentFrame)»	
 		> 
 		
 		<?php
 		switch (MAP_HANDLER) {
 			case "googlemaps":
-				echo_google_map_point("«safeNameString(id)-»");
+				echo_google_map_point("«safeNameString(id)-»", "«safeNameString(getParentMap().id)-»");
 				break;
 			
 			case "mock":
-				echo_mock_map_point("«safeNameString(id)-»");
+				echo_mock_map_point("«safeNameString(id)-»", "«safeNameString(getParentMap().id)-»");
 				break;
 			
 			default:

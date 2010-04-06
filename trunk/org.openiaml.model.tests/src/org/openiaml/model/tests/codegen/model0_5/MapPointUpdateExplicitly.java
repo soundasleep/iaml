@@ -193,9 +193,9 @@ public class MapPointUpdateExplicitly extends CodegenTestCase {
 	 */
 	public void assertHasNoMapPoint(IElement map, String string) {
 		try {
-			assertHasMapPoint(map, string);
+			IElement point = assertHasMapPoint(map, string);
 
-			throw new RuntimeException("Map point '" + string + "' was unexpectedly found in map '" + map + "'");
+			throw new RuntimeException("Map point '" + string + "' was unexpectedly found in map '" + map + "': " + point);
 		} catch (AssertionFailedError e) {
 			// expected
 		}

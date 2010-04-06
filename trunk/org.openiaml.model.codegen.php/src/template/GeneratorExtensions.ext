@@ -584,6 +584,18 @@ exitGateNeedsToRedirectRecurse(model::components::ExitGate gate, model::Internet
 exitGateNeedsToRedirectRecurse(model::components::ExitGate gate, emf::EObject obj) :
 	true;
 
+/**
+ * Get the containing parent Map of the given point, or <code>null</code>
+ * if there is none.
+ */
+model::visual::Map getParentMap(emf::EObject this) :
+	if eContainer == null 
+		then null
+		else getParentMap(eContainer);
+
+model::visual::Map getParentMap(model::visual::Map this) :
+	this;
+
 /** 
  * a hack way to create backtrace-able errors
  * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540

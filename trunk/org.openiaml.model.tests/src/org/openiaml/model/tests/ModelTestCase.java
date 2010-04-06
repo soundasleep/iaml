@@ -21,6 +21,7 @@ import java.util.Map;
 import javax.xml.xpath.XPathExpressionException;
 
 import junit.framework.AssertionFailedError;
+import net.sourceforge.jwebunit.api.IElement;
 import net.sourceforge.jwebunit.api.ITestingEngine;
 import net.sourceforge.jwebunit.htmlunit.HtmlUnitTestingEngineImpl;
 import net.sourceforge.jwebunit.junit.WebTestCase;
@@ -103,7 +104,7 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	
 	public static final String BASE_URL = "http://localhost:8080/junit-workspace/";
 	// from ./junit-workspace/project_name/output/ to target
-	public static final String CONFIG_RUNTIME = "../../../workspace-iaml/org.openiaml.model.runtime/src/include/";
+	public static final String CONFIG_RUNTIME = "../../../iaml/org.openiaml.model.runtime/src/include/";
 	public static final String BASE_URL_RUNTIME = "http://localhost:8080/iaml-runtime/"; 
 	public static final String CONFIG_WEB = "/iaml-runtime/";
 	
@@ -535,6 +536,31 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 			// throw another exception, so we can still get the trace
 			throw new RuntimeException("Exception did not contain '" + string + "'", e);
 		}
+	}
+	
+	/**
+	 * Override the method to provide more information.
+	 * TODO move this implementation into JWebUnit
+	 */
+	@Override
+	public void assertTitleMatch(String s) {
+		try {
+			super.assertTitleMatch(s);
+		} catch (AssertionFailedError e) {
+			throw new RuntimeException("Could not match '" + s + "' in title '" + getPageTitle() + "'");
+		}
+	}
+
+	/**
+	 * TODO move this implementation into JWebUnit
+	 * 
+	 * @return the page title
+	 */
+	public String getPageTitle() {
+		IElement title = getElementByXPath("//title");
+		if (title == null)
+			return "null";
+		return title.getTextContent();
 	}
 
 	/**

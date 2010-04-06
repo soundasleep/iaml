@@ -612,13 +612,6 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	}
 	
 	/**
-	 * Helper method: Get the current page title.
-	 */
-	protected String getPageTitle() {
-		return getElementByXPath("//title").getTextContent(); 
-	}
-	
-	/**
 	 * Assert that the value in a given element is null/empty/zero.
 	 * 
 	 * @param e the element

@@ -12,8 +12,11 @@ function echo_google_map($id) {
 
 ?>
 	<?php /* TODO we should have a runtime property for sensor=true|false */ ?>
+	<?php if (!defined('GOOGLE_MAPS_INCLUDED')) { ?>
 	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=<?php echo urlencode(GOOGLE_MAPS_API_KEY); ?>&sensor=false"
             type="text/javascript"></script>
+    	<?php define('GOOGLE_MAPS_INCLUDED', true); ?>
+    <?php } ?>
 	<div id="map_canvas_<?php echo $id; ?>" style="width: 500px; height: 300px"></div>
 	
 	<script language="Javascript" type="application/javascript">

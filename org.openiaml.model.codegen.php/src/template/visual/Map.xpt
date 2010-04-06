@@ -44,12 +44,50 @@
 			«REM»any on-access events?«ENDREM»
 			addOnloadFunction( function() {
 				// initialise the map
-				initialise_map_«safeName()-»();
+				initialise_map_«safeNameString(id)-»();
 			
 			«IF onAccess != null»
 				// expand all onAccess
 				«EXPAND template::events::EventCall::callEvent(false) FOR onAccess-»
 			«ENDIF»
+			} );
+		/* ]]> */
+	</script> 
+«ENDDEFINE»
+
+«DEFINE renderMapSolo(model::visual::Frame currentFrame) FOR model::visual::MapPoint-»
+	<!-- a MapPoint defined entirely by itself -->
+	<label
+		id="point_«safeNameString(id)-»_label"
+		for="point_«safeNameString(id)-»" 
+		>
+	</label>
+	
+	<div id="point_«safeNameString(id)-»" class="iaml_map">
+		<?php
+		switch (MAP_HANDLER) {
+			case "googlemaps":
+				echo_google_map("point_«safeNameString(id)-»");
+				break;
+			
+			case "mock":
+				echo_mock_map("point_«safeNameString(id)-»");
+				break;
+			
+			default:
+				throw new IamlRuntimeException("Map handler '" + MAP_HANDLER + "' unexpected");
+		}
+		?>
+		
+		«EXPAND MapPoint::continueMapPointRender(currentFrame) FOR this-»
+	</label>
+	
+	<script language="Javascript" type="application/javascript">
+		/* <![CDATA[ */
+			«REM»any on-access events?«ENDREM»
+			addOnloadFunction( function() {
+				// initialise the map
+				initialise_map_point_«safeNameString(id)-»();
 			} );
 		/* ]]> */
 	</script> 

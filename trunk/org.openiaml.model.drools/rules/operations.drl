@@ -45,6 +45,34 @@ rule "Create 'update' operation for label"
 		
 end
 
+rule "Create 'update' operation for map"
+	when
+		f : Map( )
+		not (Operation( eContainer == f, name=="update" ))
+		
+		eval ( handler.veto( f ))
+			
+	then
+		CompositeOperation operation = handler.generatedCompositeOperation(f, f);
+		handler.setName(operation, "update");
+		queue.add(operation, drools);
+		
+end
+
+rule "Create 'update' operation for map point"
+	when
+		f : MapPoint( )
+		not (Operation( eContainer == f, name=="update" ))
+		
+		eval ( handler.veto( f ))
+			
+	then
+		CompositeOperation operation = handler.generatedCompositeOperation(f, f);
+		handler.setName(operation, "update");
+		queue.add(operation, drools);
+		
+end
+
 rule "Create 'update' operation for domain attribute"
 	when
 		f : DomainAttribute( )

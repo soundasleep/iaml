@@ -97,6 +97,9 @@ public class MapPointUpdateExplicitly extends CodegenTestCase {
 		clickButtonWithText("update address");
 		assertNoProblem();
 
+		// if using google maps, we can't go any further
+		if (!doCheckPoints()) return;
+
 		// we now have a map point
 		IElement point = assertHasMapPoint(map, "target point");
 		
@@ -129,6 +132,9 @@ public class MapPointUpdateExplicitly extends CodegenTestCase {
 		clickButtonWithText("update address");
 		assertNoProblem();
 		
+		// if using google maps, we can't go any further
+		if (!doCheckPoints()) return;
+
 		// we now have a map point
 		assertHasMapPoint(map, "target point");
 
@@ -147,6 +153,21 @@ public class MapPointUpdateExplicitly extends CodegenTestCase {
 		assertHasNoMapPoint(map, "target point");
 		assertNoProblem();
 		
+	}
+
+	/**
+	 * Because the Google Maps Javascript has syntax errors, we can't apply XPath
+	 * over the resulting tree, and thus we can't get //labels for points.
+	 * As a result, we can no longer use {@link #assertHasMapPoint(IElement, String)}
+	 * if we are using Google Maps.
+	 * 
+	 * <p>This method returns false if we should not try and check for map points
+	 * due to this problem; by default, it returns true.
+	 * 
+	 * @return true by default
+	 */
+	protected boolean doCheckPoints() {
+		return true;
 	}
 
 	/**

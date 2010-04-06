@@ -43,6 +43,11 @@ public class MapPointUpdateExplicitlyGoogleMaps extends MapPointUpdateExplicitly
 		super.setUp();
 	}
 	
+	@Override
+	protected boolean doCheckPoints() {
+		return false;
+	}
+	
 	/**
 	 * Use the default <code>map_handler</code>.
 	 */

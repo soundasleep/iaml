@@ -29,6 +29,8 @@ public class AllModel0_5CodegenTests {
 		suite.addTestSuite(ActuallySendingEmail.class);
 		suite.addTestSuite(MapPointUpdateExplicitly.class);
 		suite.addTestSuite(MapPointUpdateExplicitlyGoogleMaps.class);
+		suite.addTestSuite(MapPointTextFieldInput.class);
+		suite.addTestSuite(MapPointTextFieldInputGoogleMaps.class);
 
 		return suite;
 	}

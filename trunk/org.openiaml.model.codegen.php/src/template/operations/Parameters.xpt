@@ -211,6 +211,7 @@
 				«EXPAND RemoteParameter::remoteValueIsSet(php, this) FOR this.eContainer-»
 			«ELSEIF model::visual::InputTextField.isInstance(eContainer) || 
 				model::visual::Label.isInstance(eContainer) ||
+				model::visual::Map.isInstance(eContainer) ||
 				model::visual::MapPoint.isInstance(eContainer)»
 				«REM»this is a text field stored outside of the current frame«ENDREM»
 				/* if you _don't_ want an operation to use a cached value of a remote Input Text Field/Label, place the operation _outside_ of its containing frame. */

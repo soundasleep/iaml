@@ -5,16 +5,40 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
+/**
+ * @implementation MapPoint
+ *		If a {@model MapPoint} is not contained within a {@model Map}, then
+ *		a single temporary Map implementation will still be generated to contain
+ *		the map point.
+ */
 «DEFINE renderMapPoint(model::visual::Frame currentFrame) FOR model::visual::MapPoint-»
+	«IF eContainer == null || !model::visual::Map.isInstance(eContainer)»
+		«REM»since this MapPoint isn't contained within a Map, we output
+		a single map to wrap around it«ENDREM»
+		«EXPAND Map::renderMapSolo(currentFrame)»
+	«ELSE»
+		«EXPAND continueMapPointRender(currentFrame)»
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE continueMapPointRender(model::visual::Frame currentFrame) FOR model::visual::MapPoint-»
 	«REM»print out any required scripting for the point«ENDREM»
 	<?php
+		$id = "«safeNameString(id)-»";
+		$parent_id = «IF getParentMap() == null»
+			"point_«safeNameString(id)-»"
+		«ELSE»
+			"«safeNameString(getParentMap().id)-»"
+		«ENDIF»
+		;
+	
 		switch (MAP_HANDLER) {
 			case "googlemaps":
-				echo_google_map_point_script("«safeNameString(id)-»", "«safeNameString(getParentMap().id)-»");
+				echo_google_map_point_script($id, $parent_id);
 				break;
 			
 			case "mock":
-				echo_mock_map_point_script("«safeNameString(id)-»", "«safeNameString(getParentMap().id)-»");
+				echo_mock_map_point_script($id, $parent_id);
 				break;
 			
 			default:
@@ -34,13 +58,14 @@
 		> 
 		
 		<?php
+		
 		switch (MAP_HANDLER) {
 			case "googlemaps":
-				echo_google_map_point("«safeNameString(id)-»", "«safeNameString(getParentMap().id)-»");
+				echo_google_map_point($id, $parent_id);
 				break;
 			
 			case "mock":
-				echo_mock_map_point("«safeNameString(id)-»", "«safeNameString(getParentMap().id)-»");
+				echo_mock_map_point($id, $parent_id);
 				break;
 			
 			default:

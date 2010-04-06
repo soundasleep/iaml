@@ -3,19 +3,13 @@
  */
 package org.openiaml.model.tests.codegen.model0_5;
 
-import java.util.List;
-import java.util.Map;
-
-import junit.framework.AssertionFailedError;
 import net.sourceforge.jwebunit.api.IElement;
-
-import org.openiaml.model.tests.CodegenTestCase;
 
 /**
  * 		
  *
  */
-public class MapPointUpdateExplicitly extends CodegenTestCase {
+public class MapPointUpdateExplicitly extends MapsCodegenTestCase {
 	
 	@Override
 	protected void setUp() throws Exception {
@@ -169,71 +163,5 @@ public class MapPointUpdateExplicitly extends CodegenTestCase {
 	protected boolean doCheckPoints() {
 		return true;
 	}
-
-	/**
-	 * Assert a map with the given name exists, and return the
-	 * found map.
-	 */
-	public IElement assertHasMap(String label) {
-		// find a label with the given string
-		String id = getLabelIDForText(label);
-		
-		// this should contain a 'map' <div>
-		IElement wrapper = getElementById(id);
-		assertNotNull(wrapper);
-		
-		// through label.for
-		assertNotNull(wrapper.getAttribute("for"));
-		IElement map = getElementById(wrapper.getAttribute("for"));
-		assertNotNull(map);
-
-		return map;
-	}
-
-	
-	/**
-	 * Assert that the given map point exists in the given map, and
-	 * returns the foind point.
-	 */
-	public IElement assertHasMapPoint(IElement map, String label) {
-		// find a point with the given string
-		String id = getLabelIDForText(label);
-		IElement point = getElementById(id);
-		
-		// this should be contained within the given map
-		List<IElement> elements = map.getElements("//*");
-		assertTrue(elements + " did not contain " + point,
-				elements.contains(point));
-		
-		return point;
-	}
-
-	/**
-	 * @param map
-	 * @param string
-	 */
-	public void assertHasNoMapPoint(IElement map, String string) {
-		try {
-			IElement point = assertHasMapPoint(map, string);
-
-			throw new RuntimeException("Map point '" + string + "' was unexpectedly found in map '" + map + "': " + point);
-		} catch (AssertionFailedError e) {
-			// expected
-		}
-	}
-
-	/**
-	 * Add a hook to send e-mails to a file, rather than actually sending e-mails.
-	 */
-	@Override
-	protected Map<String, String> getRuntimeProperties() {
-		Map<String,String> properties = super.getRuntimeProperties();
-
-		// add these properties
-		properties.put("map_handler", "mock");
-
-		return properties;
-	}
-
 	
 }

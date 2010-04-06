@@ -219,6 +219,25 @@ rule "Connect 'fail' wire from 'check key' or 'check instance' operation to Logi
 		
 end
 
+rule "Connect 'fail' wire from 'check key' or 'check instance' operation to Login Frame (login page in separate session)"
+	when
+		container : ContainsWires( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope )
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
+		login : Frame (eContainer == login_session, name=="login" )
+		check : CompositeOperation( name == "check key" || name == "check instance", eContainer == scope )
+		not (NavigateAction( from == check, to == login, name == "fail") )
+			
+		eval ( handler.veto( scope ))
+	
+	then
+		NavigateAction fail = handler.generatedNavigateAction(scope, scope, check, login);
+		handler.setName(fail, "fail");
+		queue.add(fail, drools);
+		
+end
+
 rule "Create contents of 'check key' operation [type=secret_key]"
 	when
 		scope : Session( )

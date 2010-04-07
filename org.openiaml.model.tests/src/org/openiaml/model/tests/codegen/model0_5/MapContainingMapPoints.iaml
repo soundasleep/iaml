@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.127d10a77a5.175">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
+    <children xsi:type="iaml.visual:Map" id="visual.127d10a7860.42" name="Target Map">
+      <children xsi:type="iaml.visual:MapPoint" id="visual.127d10a7860.58" name="point 1" fieldValue="Wellington, New Zealand"/>
+      <children xsi:type="iaml.visual:MapPoint" id="visual.127d10a7860.5a" name="point 2" fieldValue="Auckland, New Zealand"/>
+      <children xsi:type="iaml.visual:MapPoint" id="visual.127d10a7860.5b" name="point 3" fieldValue="Christchurch, New Zealand"/>
+      <children xsi:type="iaml.visual:MapPoint" id="visual.127d10a7860.5c" name="point 4" fieldValue="Palmerston North, New Zealand"/>
+      <children xsi:type="iaml.visual:MapPoint" id="visual.127d10a7860.5d" name="point 5" fieldValue="Tauranga, New Zealand"/>
+    </children>
+  </scopes>
+</iaml:InternetApplication>

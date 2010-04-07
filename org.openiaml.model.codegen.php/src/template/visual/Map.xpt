@@ -9,6 +9,7 @@
 	<label
 		id="«safeNameString(id)-»_label"
 		for="«safeNameString(id)-»" 
+		class="iaml_map_label"
 		«EXPAND EventHandlers::getInlineClickJavascript(currentFrame)»
 		>
 
@@ -59,7 +60,8 @@
 	<!-- a MapPoint defined entirely by itself -->
 	<label
 		id="point_«safeNameString(id)-»_label"
-		for="point_«safeNameString(id)-»" 
+		for="point_«safeNameString(id)-»"
+		class="iaml_map_label"
 		>
 	</label>
 	

@@ -67,6 +67,7 @@ import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Label;
+import org.openiaml.model.model.visual.MapPoint;
 import org.openiaml.model.model.visual.VisualPackage;
 import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ConditionEdgeDestination;
@@ -456,6 +457,12 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		Button button = (Button) createElement( container, VisualPackage.eINSTANCE.getButton(), VisualPackage.eINSTANCE.getFrame_Children() );
 		setGeneratedBy(button, by);
 		return button;
+	}
+	
+	public MapPoint generatedMapPoint(GeneratesElements by, VisibleThing container) throws InferenceException {
+		MapPoint field = (MapPoint) createElement( container, VisualPackage.eINSTANCE.getMapPoint(), ModelPackage.eINSTANCE.getVisibleThing_Children() );
+		setGeneratedBy(field, by);
+		return field;
 	}
 	
 	public CompositeCondition generatedCompositeCondition(GeneratesElements by, ContainsConditions container) throws InferenceException {

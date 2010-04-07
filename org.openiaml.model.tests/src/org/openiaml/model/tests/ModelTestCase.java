@@ -670,6 +670,24 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	}
 
 	/**
+	 * Select all of the elements of the given list that are
+	 * instances of the given class.
+	 * 
+	 * @param children
+	 * @param class1
+	 * @return
+	 */
+	public List<?> typeSelect(List<?> children,
+			Class<?> class1) {
+		List<Object> result = new ArrayList<Object>();
+		for (Object o : children) {
+			if (class1.isInstance(o))
+				result.add(o);
+		}
+		return result;
+	}
+	
+	/**
 	 * XPath helper methods.
 	 * @see org.openiaml.model.tests.xpath.IXpath
 	 */

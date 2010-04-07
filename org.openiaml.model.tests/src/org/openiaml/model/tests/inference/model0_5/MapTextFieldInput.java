@@ -3,9 +3,6 @@
  */
 package org.openiaml.model.tests.inference.model0_5;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Property;
@@ -76,24 +73,6 @@ public class MapTextFieldInput extends InferenceTestCase {
 
 		// no children
 		assertEquals(0, typeSelect(map.getChildren(), MapPoint.class).size());
-	}
-
-	/**
-	 * Select all of the elements of the given list that are
-	 * instances of the given class.
-	 * 
-	 * @param children
-	 * @param class1
-	 * @return
-	 */
-	public List<?> typeSelect(List<?> children,
-			Class<?> class1) {
-		List<Object> result = new ArrayList<Object>();
-		for (Object o : children) {
-			if (class1.isInstance(o))
-				result.add(o);
-		}
-		return result;
 	}
 
 }

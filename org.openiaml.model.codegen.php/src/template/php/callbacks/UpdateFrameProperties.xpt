@@ -76,6 +76,8 @@ try {
 	«REM»Maps can be updated manually, but if the Map contains at least one MapPoint, this method may fail, since Maps only generate
 	singleton MapPoints if they are empty of MapPoints at codegen time«ENDREM»
 	«IF model::visual::Map.isInstance(eContainer)»
+		«LET (model::visual::Map) eContainer AS map»
+		«IF map.children.typeSelect(model::visual::MapPoint).isEmpty»
 		/* container: Map */
 		if («EXPAND template::operations::Parameters::isSetParameter(true)») {
 			// but only if it's actually set
@@ -92,6 +94,8 @@ try {
 				. escape_parameter_string("map_«safeNameString(((model::visual::Map) eContainer).id)»")
 				. " "
 				. escape_parameter_string($value);
-		}				
+		}
+		«ENDIF»		
+		«ENDLET»
 	«ENDIF»	
 «ENDDEFINE»

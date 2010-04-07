@@ -6,6 +6,8 @@
 «EXTENSION template::GeneratorExtensions»
 
 /**
+ * TODO Should InputForms have fieldValues? Should they have 'onChange'?
+ *
  * @implementation InputForm
  *		Any {@model VisibleThing children} of a {@model InputForm} are also rendered
  *		as part of that InputForm.

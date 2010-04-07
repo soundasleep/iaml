@@ -34,6 +34,7 @@ public class AllModel0_5CodegenTests {
 		suite.addTestSuite(MapContainingMapPoints.class);
 		suite.addTestSuite(MapContainingMapPointsGoogleMaps.class);
 		suite.addTestSuite(MapTextFieldInput.class);
+		suite.addTestSuite(MapFormInput.class);
 
 		return suite;
 	}

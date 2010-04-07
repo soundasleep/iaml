@@ -80,6 +80,7 @@ public class MapFormInput extends MapsCodegenTestCase {
 		assertHasNoMapPoint(map, "address 3");
 		
 		// but we do have an address 2
+		if (!doCheckPoints()) return;
 		IElement point1 = assertHasMapPoint("address 2");
 		IElement point2 = assertHasMapPoint(map, "address 2");
 		assertEquals(point1, point2);
@@ -108,6 +109,7 @@ public class MapFormInput extends MapsCodegenTestCase {
 		assertNoProblem();
 		IElement map = assertHasMap("target map");
 		
+		if (!doCheckPoints()) return;
 		{
 			IElement point1 = assertHasMapPoint("address 1");
 			IElement point2 = assertHasMapPoint(map, "address 1");
@@ -163,6 +165,7 @@ public class MapFormInput extends MapsCodegenTestCase {
 		assertNoProblem();
 		IElement map = assertHasMap("target map");
 		
+		if (!doCheckPoints()) return;
 		{
 			IElement point1 = assertHasMapPoint("address 1");
 			IElement point2 = assertHasMapPoint(map, "address 1");

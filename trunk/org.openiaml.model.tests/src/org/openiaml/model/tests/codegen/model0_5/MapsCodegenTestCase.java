@@ -58,9 +58,17 @@ public abstract class MapsCodegenTestCase extends CodegenTestCase {
 	 * returns the found point.
 	 */
 	public IElement assertHasMapPoint(IElement map, String label) {
-		// find a point with the given string
+		// find a label with the given string
 		String id = getLabelIDForText(label, "NOT_MAP_TEXT", "contains(@class, 'point')");
-		IElement point = getElementById(id);
+		
+		// this should contain a 'map' <div>
+		IElement wrapper = getElementById(id);
+		assertNotNull(wrapper);
+		
+		// through label.for
+		assertNotNull(wrapper.getAttribute("for"));
+		IElement point = getElementById(wrapper.getAttribute("for"));
+		assertNotNull(point);
 		
 		// this should be contained within the given map
 		List<IElement> elements = map.getElements("//*");
@@ -74,9 +82,17 @@ public abstract class MapsCodegenTestCase extends CodegenTestCase {
 	 * Assert that the given map point exists anywhere.
 	 */
 	public IElement assertHasMapPoint(String label) {
-		// find a point with the given string
+		// find a label with the given string
 		String id = getLabelIDForText(label, "NOT_MAP_TEXT", "contains(@class, 'point')");
-		IElement point = getElementById(id);
+		
+		// this should contain a 'map' <div>
+		IElement wrapper = getElementById(id);
+		assertNotNull(wrapper);
+		
+		// through label.for
+		assertNotNull(wrapper.getAttribute("for"));
+		IElement point = getElementById(wrapper.getAttribute("for"));
+		assertNotNull(point);
 		
 		return point;
 	}

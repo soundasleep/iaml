@@ -36,7 +36,12 @@
 		
 		«REM»expand all children«ENDREM»
 		«EXPAND Render::renderVisual(currentFrame) FOREACH children-»
-	</label>
+		
+		«REM»if there are no children MapPoints, render one anyway that is hidden, for the fieldValue of the Map«ENDREM»
+		«IF children.typeSelect(model::visual::MapPoint).isEmpty»
+			«EXPAND MapPoint::renderMapFieldValue(currentFrame)»
+		«ENDIF»
+	</div>
 	
 	«EXPAND EventHandlers::getScriptClickDefinition(currentFrame)»
 	
@@ -82,7 +87,7 @@
 		?>
 		
 		«EXPAND MapPoint::continueMapPointRender(currentFrame) FOR this-»
-	</label>
+	</div>
 	
 	<script language="Javascript" type="application/javascript">
 		/* <![CDATA[ */

@@ -72,4 +72,26 @@ try {
 				. escape_parameter_string($value);
 		}				
 	«ENDIF»	
+
+	«REM»Maps can be updated manually, but if the Map contains at least one MapPoint, this method may fail, since Maps only generate
+	singleton MapPoints if they are empty of MapPoints at codegen time«ENDREM»
+	«IF model::visual::Map.isInstance(eContainer)»
+		/* container: Map */
+		if («EXPAND template::operations::Parameters::isSetParameter(true)») {
+			// but only if it's actually set
+			// get the current value
+			$value = «EXPAND template::operations::Parameters::callParameterValue(true, false)»;
+			
+			// pass it to the client 
+			log_message("outgoing value to '«eContainer»' («safeNameString(((model::visual::Map) eContainer).id)»): '$value'");
+			log_message("set_map_point " 
+				. escape_parameter_string("map_«safeNameString(((model::visual::Map) eContainer).id)»")
+				. " "
+				. escape_parameter_string($value));
+			echo "\nset_map_point " 
+				. escape_parameter_string("map_«safeNameString(((model::visual::Map) eContainer).id)»")
+				. " "
+				. escape_parameter_string($value);
+		}				
+	«ENDIF»	
 «ENDDEFINE»

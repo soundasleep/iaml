@@ -48,12 +48,12 @@
 
 	«REM»output name«ENDREM»
 	<label
-		id="«safeNameString(id)-»_label" 
-		for="«safeNameString(id)-»"
+		id="<?php echo $id; ?>_label" 
+		for="<?php echo $id; ?>"
 		class="iaml_point_label">«escapeHtmlString(name)»</label>
 
 	<div
-		id="«safeNameString(id)-»" 
+		id="<?php echo $id; ?>" 
 		style="display: none;"
 		«EXPAND EventHandlers::getInlineClickJavascript(currentFrame)»	
 		> 
@@ -103,10 +103,10 @@
 		/* <![CDATA[ */
 			addOnloadFunction( function() {
 				<?php if ($point_visible) { ?>
-					show_map_point_«safeNameString(id)-»();
-					set_map_point_«safeNameString(id)-»("<?php echo htmlspecialchars($point_address); ?>");
+					show_map_point_<?php echo $id; ?>();
+					set_map_point_<?php echo $id; ?>("<?php echo htmlspecialchars($point_address); ?>");
 				<?php } else { ?>
-					hide_map_point_«safeNameString(id)-»();
+					hide_map_point_<?php echo $id; ?>();
 				<?php } ?>
 			} );
 		/* ]]> */
@@ -129,6 +129,97 @@
 			} );
 		/* ]]> */
 	</script> 
+«ENDDEFINE»
+
+/**
+ * For rendering a Map that only has a fieldValue, and no contained MapPoints.
+ * TODO refactor into continueMapPointRender somehow.
+ */
+«DEFINE renderMapFieldValue(model::visual::Frame currentFrame) FOR model::visual::Map»
+	«REM»print out any required scripting for the point«ENDREM»
+	<?php
+		$id = "map_«safeNameString(id)-»";
+		$parent_id = "«safeNameString(id)-»";
+	
+		switch (MAP_HANDLER) {
+			case "googlemaps":
+				echo_google_map_point_script($id, $parent_id);
+				break;
+			
+			case "mock":
+				echo_mock_map_point_script($id, $parent_id);
+				break;
+			
+			default:
+				throw new IamlRuntimeException("Map handler '" + MAP_HANDLER + "' unexpected");
+		}
+		?>
+
+	«REM»output name«ENDREM»
+	<label
+		id="<?php echo $id; ?>_label" 
+		for="<?php echo $id; ?>"
+		class="iaml_point_label">«escapeHtmlString(name)»</label>
+
+	<div
+		id="<?php echo $id; ?>" 
+		style="display: none;"
+		> 
+		
+		<?php
+		
+		switch (MAP_HANDLER) {
+			case "googlemaps":
+				echo_google_map_point($id, $parent_id);
+				break;
+			
+			case "mock":
+				echo_mock_map_point($id, $parent_id);
+				break;
+			
+			default:
+				throw new IamlRuntimeException("Map handler '" + MAP_HANDLER + "' unexpected");
+		}
+		?>
+		
+		<?php 
+		
+		$point_visible = false;
+		$point_address = null; 
+	
+		// cycle over fieldValue properties		
+		«FOREACH properties.select(e|e.name == "fieldValue") AS fieldValue»
+		if (!$point_visible) {
+			«EXPAND staticInitialMapPointValue(currentFrame) FOR fieldValue»
+		}
+		«ENDFOREACH» 
+
+		«IF fieldValue != null && fieldValue.length > 0»
+			// default fieldValue
+			if (!$point_visible) {
+				$point_address = "«escapePhpString(fieldValue)»";
+				$point_visible = true; 
+			} 
+		«ENDIF»
+
+		?>
+
+		«REM»
+			show/hide the map point at runtime (client-side)
+		«ENDREM»
+		<script language="Javascript" type="application/javascript">
+		/* <![CDATA[ */
+			addOnloadFunction( function() {
+				<?php if ($point_visible) { ?>
+					show_map_point_<?php echo $id; ?>();
+					set_map_point_<?php echo $id; ?>("<?php echo htmlspecialchars($point_address); ?>");
+				<?php } else { ?>
+					hide_map_point_<?php echo $id; ?>();
+				<?php } ?>
+			} );
+		/* ]]> */
+		</script> 
+	</div>
 «ENDDEFINE»
 
 /* we have a property to provide [in PHP] */

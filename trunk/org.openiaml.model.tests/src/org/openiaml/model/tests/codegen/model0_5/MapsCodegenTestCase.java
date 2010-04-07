@@ -27,7 +27,7 @@ public abstract class MapsCodegenTestCase extends CodegenTestCase {
 	 */
 	public IElement assertHasMap(String label) {
 		// find a label with the given string
-		String id = getLabelIDForText(label);
+		String id = getLabelIDForText(label, "NOT_MAP_TEXT", "contains(@class, 'map')");
 		
 		// this should contain a 'map' <div>
 		IElement wrapper = getElementById(id);
@@ -59,7 +59,7 @@ public abstract class MapsCodegenTestCase extends CodegenTestCase {
 	 */
 	public IElement assertHasMapPoint(IElement map, String label) {
 		// find a point with the given string
-		String id = getLabelIDForText(label);
+		String id = getLabelIDForText(label, "NOT_MAP_TEXT", "contains(@class, 'point')");
 		IElement point = getElementById(id);
 		
 		// this should be contained within the given map
@@ -75,7 +75,7 @@ public abstract class MapsCodegenTestCase extends CodegenTestCase {
 	 */
 	public IElement assertHasMapPoint(String label) {
 		// find a point with the given string
-		String id = getLabelIDForText(label);
+		String id = getLabelIDForText(label, "NOT_MAP_TEXT", "contains(@class, 'point')");
 		IElement point = getElementById(id);
 		
 		return point;

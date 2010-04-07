@@ -87,73 +87,114 @@ function echo_google_map_point_script($id, $parent_id) {
 						
 						if (map_marker_<?php echo $id; ?> == null) {
 							map_marker_<?php echo $id; ?> = new GMarker(point);
+							
+							map_marker_<?php echo $id; ?>.set_address = "Loading...";
+
+							// add a listener to populate the info window on open
+							var is_open = false;
+							GEvent.addListener(map_marker_<?php echo $id; ?>, "infowindowopen", function() {
+								if (is_open)
+									return;
+									
+								is_open = true;
+							
+								// get the div node from HTML that we want to display
+								var info_node = document.getElementById('<?php echo $id; ?>');
+								if (info_node == null) {
+									throw new IamlJavascriptException("Could not find info node to display: <?php echo $id; ?>");
+								}
+		
+								document.getElementById("mock_map_point_<?php echo $id; ?>_address")
+									.innerHTML = map_marker_<?php echo $id; ?>.set_address;
+									
+								// have we already extracted all of the HTML from the node?
+								if (info_node.innerHTML == "") {
+									// we need to re-open the info window, since the point has moved
+									var info_spy = document.getElementById("map_point_<?php echo $id; ?>_spy");
+									if (info_spy == null) {
+										throw new IamlJavascriptException("Cannot spy on the info window for map point <?php echo $id; ?>");
+									}
+									if (info_spy.parentNode == null) {
+										throw new IamlJavascriptException("Info window spy parent node was null");
+									}
+						
+									info_node.innerHTML = info_spy.parentNode.innerHTML;
+								} 
+										
+								// refresh the contents
+								map_marker_<?php echo $id; ?>.openInfoWindowHtml(info_node.innerHTML);
+								
+								// and remove the node, to make sure that only one element of
+								// each ID exists
+								info_node.innerHTML = "";
+							});
+							
+							// add a listener to put the content back into HTML on close
+							GEvent.addListener(map_marker_<?php echo $id; ?>, "infowindowbeforeclose", function() {
+								if (!is_open)
+									return;
+
+								is_open = false;
+							
+								// get the div node from HTML that we want to display
+								var info_node = document.getElementById('<?php echo $id; ?>');
+								if (info_node == null) {
+									throw new IamlJavascriptException("Could not find info node to display: <?php echo $id; ?>");
+								}
+								
+								// have we already extracted the HTML back out of the info node div?
+								if (info_node.innerHTML == "") {
+									// it is not possible to get the innerHTML of the info_node window
+									// from google maps; so if the inner DOM changes, it is not possible for
+									// us to retrieve the new content directly.
+									// HOWEVER, we can just create a new known node that we can access; we
+									// can then navigate through the DOM (parent) to get the current innerHTML.
+									
+									var info_spy = document.getElementById("map_point_<?php echo $id; ?>_spy");
+									if (info_spy == null) {
+										throw new IamlJavascriptException("Cannot spy on the info window for map point <?php echo $id; ?>");
+									}
+									if (info_spy.parentNode == null) {
+										throw new IamlJavascriptException("Info window spy parent node was null");
+									}
+						
+									info_node.innerHTML = info_spy.parentNode.innerHTML;
+								}
+							
+							});
+							
+							// when we click the marker, we want to open the info window
+							map_marker_<?php echo $id; ?>.click_function = function() {
+								if (!is_open) {
+									map_marker_<?php echo $id; ?>.openInfoWindowHtml("Loading..."); // event handler above will deal with the content
+								}
+							};
+							GEvent.addListener(map_marker_<?php echo $id; ?>, "click", map_marker_<?php echo $id; ?>.click_function);							
+
 							map_<?php echo $parent_id; ?>.addOverlay(map_marker_<?php echo $id; ?>);
+
 						} else {
 							map_marker_<?php echo $id; ?>.setLatLng(point);
 						}
+						
+						// update the contained address
+						map_marker_<?php echo $id; ?>.set_address = address;
+						
+						// close any existing info window
+						// this ensures that re-opening the window will have the info window open at the new location, rather than
+						// the old point
+						map_marker_<?php echo $id; ?>.closeInfoWindow();
 			
 						// show it
 						show_map_point_<?php echo $id; ?>();
-
-						// get the div node from HTML that we want to display
-						var info_node = document.getElementById('<?php echo $id; ?>');
-						if (info_node == null) {
-							throw new IamlJavascriptException("Could not find info node to display: <?php echo $id; ?>");
-						}
-
-						document.getElementById("mock_map_point_<?php echo $id; ?>_address")
-							.innerHTML = address;
-							
-						// have we already extracted all of the HTML from the node?
-						if (info_node.innerHTML == "") {
-							// we need to re-open the info window, since the point has moved
-							var info_spy = document.getElementById("map_point_<?php echo $id; ?>_spy");
-							if (info_spy == null) {
-								throw new IamlJavascriptException("Cannot spy on the info window for map point <?php echo $id; ?>");
-							}
-							if (info_spy.parentNode == null) {
-								throw new IamlJavascriptException("Info window spy parent node was null");
-							}
-				
-							info_node.innerHTML = info_spy.parentNode.innerHTML;
-						} 
-								
-						// refresh the contents
-						map_marker_<?php echo $id; ?>.openInfoWindowHtml(info_node.innerHTML);
 						
-						// and remove the node, to make sure that only one element of
-						// each ID exists
-						info_node.innerHTML = "";
+						// and show the info window
+						map_marker_<?php echo $id; ?>.click_function();
 
 					}
 				}
 			);
 		} else {
-			// get the div node from HTML that we want to display
-			var info_node = document.getElementById('<?php echo $id; ?>');
-			if (info_node == null) {
-				throw new IamlJavascriptException("Could not find info node to display: <?php echo $id; ?>");
-			}
-			
-			// have we already extracted the HTML back out of the info node div?
-			if (info_node.innerHTML == "") {
-				// it is not possible to get the innerHTML of the info_node window
-				// from google maps; so if the inner DOM changes, it is not possible for
-				// us to retrieve the new content directly.
-				// HOWEVER, we can just create a new known node that we can access; we
-				// can then navigate through the DOM (parent) to get the current innerHTML.
-				
-				var info_spy = document.getElementById("map_point_<?php echo $id; ?>_spy");
-				if (info_spy == null) {
-					throw new IamlJavascriptException("Cannot spy on the info window for map point <?php echo $id; ?>");
-				}
-				if (info_spy.parentNode == null) {
-					throw new IamlJavascriptException("Info window spy parent node was null");
-				}
-	
-				info_node.innerHTML = info_spy.parentNode.innerHTML;
-			}
-
 			// TODO does this ensure that only one copy of [id=XXX_address] is now
 			// available to the DOM?
 			hide_map_point_<?php echo $id; ?>();

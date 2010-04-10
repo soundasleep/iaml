@@ -1923,6 +1923,45 @@
       <accessors
           figure="//@figures.0/@descriptors.65/@actualFigure/@children.1"/>
     </descriptors>
+    <descriptors
+        name="PrimitiveConditionFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Ellipse"
+          name="PrimitiveConditionFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
+        <foregroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="255"
+            green="200"
+            blue="135"/>
+        <border
+            xsi:type="gmfgraph:MarginBorder">
+          <insets
+              top="3"
+              left="3"
+              bottom="3"
+              right="3"/>
+        </border>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="PrimitiveConditionNameFigure"
+            text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="PrimitiveConditionParentNameFigure"
+            text="[none]">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="gray"/>
+        </children>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.66/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.66/@actualFigure/@children.1"/>
+    </descriptors>
   </figures>
   <nodes
       name="EventTrigger"
@@ -2065,6 +2104,9 @@
   <nodes
       name="MapPoint"
       figure="MapPointFigure"/>
+  <nodes
+      name="PrimitiveCondition"
+      figure="PrimitiveConditionFigure"/>
   <connections
       name="DataFlowEdge"
       figure="DataFlowEdgeFigure"/>
@@ -2543,4 +2585,13 @@
       figure="MapPointFigure"
       elementIcon="false"
       accessor="//@figures.0/@descriptors.65/@accessors.1"/>
+  <labels
+      name="PrimitiveConditionName"
+      figure="PrimitiveConditionFigure"
+      accessor="//@figures.0/@descriptors.66/@accessors.0"/>
+  <labels
+      name="PrimitiveConditionParentName"
+      figure="PrimitiveConditionFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.66/@accessors.1"/>
 </gmfgraph:Canvas>

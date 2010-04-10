@@ -230,7 +230,7 @@
          </object>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_DomainObjectInstance"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2014,2016,2009,2010,2011,2012,2015,2018,2019,2020,2021,2022,2023,2024,2025,2026"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2014,2016,2009,2010,2011,2012,2015,2018,2019,2020,2021,2027,2028,2029,2025,2026"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4003"/>
       </viewProvider>
    </extension>
@@ -243,13 +243,13 @@
             <method name="getType()" value="Iaml_DomainObjectInstance"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
-            <method name="getType()" value="2014,2016,2009,2010,2011,2012,2015,2018,2019,2020,2021,2022,2023,2024,2025,2026"/>
+            <method name="getType()" value="2014,2016,2009,2010,2011,2012,2015,2018,2019,2020,2021,2027,2028,2029,2025,2026"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
             <method name="getType()" value="4001,4003"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5026,5027,5028,5034,5035,5036,5037,5017,5018,5019,5020,5021,5033,5022,5029,5030,5031,5041,5042,5043,5044,5045,5046,5047,5048,5049,5050,5051,5052,5053,5054,5055,5056,5057,5058"/>
+            <method name="getType()" value="5026,5027,5028,5034,5035,5036,5037,5017,5018,5019,5020,5021,5033,5022,5029,5030,5031,5041,5042,5043,5044,5045,5046,5047,5048,5059,5060,5061,5062,5064,5065,5052,5053,5054,5055,5056,5057,5058"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value=""/>
@@ -274,12 +274,12 @@
          <object class="org.openiaml.model.diagram.domain_object_instance.edit.parts.PrimitiveOperation3EditPart" id="PrimitiveOperation_2019"/>
          <object class="org.openiaml.model.diagram.domain_object_instance.edit.parts.PrimitiveOperation4EditPart" id="PrimitiveOperation_2020"/>
          <object class="org.openiaml.model.diagram.domain_object_instance.edit.parts.PrimitiveOperation5EditPart" id="PrimitiveOperation_2021"/>
-         <object class="org.openiaml.model.diagram.domain_object_instance.edit.parts.DecisionConditionEditPart" id="DecisionCondition_2022"/>
-         <object class="org.openiaml.model.diagram.domain_object_instance.edit.parts.DecisionCondition2EditPart" id="DecisionCondition_2023"/>
-         <object class="org.openiaml.model.diagram.domain_object_instance.edit.parts.DecisionCondition3EditPart" id="DecisionCondition_2024"/>
+         <object class="org.openiaml.model.diagram.domain_object_instance.edit.parts.PrimitiveConditionEditPart" id="PrimitiveCondition_2027"/>
+         <object class="org.openiaml.model.diagram.domain_object_instance.edit.parts.PrimitiveCondition2EditPart" id="PrimitiveCondition_2028"/>
+         <object class="org.openiaml.model.diagram.domain_object_instance.edit.parts.PrimitiveCondition3EditPart" id="PrimitiveCondition_2029"/>
          <object class="org.openiaml.model.diagram.domain_object_instance.edit.parts.Property2EditPart" id="Property_2025"/>
          <object class="org.openiaml.model.diagram.domain_object_instance.edit.parts.EventTrigger3EditPart" id="EventTrigger_2026"/>
-         <context elements="DomainObjectInstance_1000,EventTrigger_2014,Property_2016,CompositeOperation_2009,PrimitiveOperation_2010,DomainAttributeInstance_2011,DecisionOperation_2012,EventTrigger_2015,PrimitiveOperation_2018,PrimitiveOperation_2019,PrimitiveOperation_2020,PrimitiveOperation_2021,DecisionCondition_2022,DecisionCondition_2023,DecisionCondition_2024,Property_2025,EventTrigger_2026"/>
+         <context elements="DomainObjectInstance_1000,EventTrigger_2014,Property_2016,CompositeOperation_2009,PrimitiveOperation_2010,DomainAttributeInstance_2011,DecisionOperation_2012,EventTrigger_2015,PrimitiveOperation_2018,PrimitiveOperation_2019,PrimitiveOperation_2020,PrimitiveOperation_2021,PrimitiveCondition_2027,PrimitiveCondition_2028,PrimitiveCondition_2029,Property_2025,EventTrigger_2026"/>
       </modelingAssistantProvider>
    </extension>
 
@@ -302,7 +302,7 @@
       <decoratorProvider class="org.openiaml.model.diagram.domain_object_instance.providers.IamlShortcutsDecoratorProvider">
          <Priority name="Lowest"/>
          <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
-            <method name="getType()" value="2014,2016,2009,2010,2011,2012,2015,2018,2019,2020,2021,2022,2023,2024,2025,2026"/>
+            <method name="getType()" value="2014,2016,2009,2010,2011,2012,2015,2018,2019,2020,2021,2027,2028,2029,2025,2026"/>
          </object>
          <context decoratorTargets="generated-top-nodes"/>
       </decoratorProvider>
@@ -425,32 +425,32 @@
             <param name="semanticHint" value="2021"/>
          </specializationType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model/operations">
+      <metamodel nsURI="http://openiaml.org/model0.4">
          <metamodelType
-               id="org.openiaml.model.diagram.domain_object_instance.DecisionCondition_2022"
-               name="%metatype.name.DecisionCondition_2022"
+               id="org.openiaml.model.diagram.domain_object_instance.PrimitiveCondition_2027"
+               name="%metatype.name.PrimitiveCondition_2027"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="DecisionCondition"
-               edithelper="org.openiaml.model.diagram.domain_object_instance.edit.helpers.DecisionConditionEditHelper">
-            <param name="semanticHint" value="2022"/>
+               eclass="PrimitiveCondition"
+               edithelper="org.openiaml.model.diagram.domain_object_instance.edit.helpers.PrimitiveConditionEditHelper">
+            <param name="semanticHint" value="2027"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model/operations">
+      <metamodel nsURI="http://openiaml.org/model0.4">
          <specializationType
-               id="org.openiaml.model.diagram.domain_object_instance.DecisionCondition_2023"
-               name="%metatype.name.DecisionCondition_2023"
+               id="org.openiaml.model.diagram.domain_object_instance.PrimitiveCondition_2028"
+               name="%metatype.name.PrimitiveCondition_2028"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
-            <specializes id="org.openiaml.model.diagram.domain_object_instance.DecisionCondition_2022"/>
-            <param name="semanticHint" value="2023"/>
+            <specializes id="org.openiaml.model.diagram.domain_object_instance.PrimitiveCondition_2027"/>
+            <param name="semanticHint" value="2028"/>
          </specializationType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model/operations">
+      <metamodel nsURI="http://openiaml.org/model0.4">
          <specializationType
-               id="org.openiaml.model.diagram.domain_object_instance.DecisionCondition_2024"
-               name="%metatype.name.DecisionCondition_2024"
+               id="org.openiaml.model.diagram.domain_object_instance.PrimitiveCondition_2029"
+               name="%metatype.name.PrimitiveCondition_2029"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
-            <specializes id="org.openiaml.model.diagram.domain_object_instance.DecisionCondition_2022"/>
-            <param name="semanticHint" value="2024"/>
+            <specializes id="org.openiaml.model.diagram.domain_object_instance.PrimitiveCondition_2027"/>
+            <param name="semanticHint" value="2029"/>
          </specializationType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.4">
@@ -515,9 +515,9 @@
          <elementType ref="org.openiaml.model.diagram.domain_object_instance.PrimitiveOperation_2019"/>
          <elementType ref="org.openiaml.model.diagram.domain_object_instance.PrimitiveOperation_2020"/>
          <elementType ref="org.openiaml.model.diagram.domain_object_instance.PrimitiveOperation_2021"/>
-         <elementType ref="org.openiaml.model.diagram.domain_object_instance.DecisionCondition_2022"/>
-         <elementType ref="org.openiaml.model.diagram.domain_object_instance.DecisionCondition_2023"/>
-         <elementType ref="org.openiaml.model.diagram.domain_object_instance.DecisionCondition_2024"/>
+         <elementType ref="org.openiaml.model.diagram.domain_object_instance.PrimitiveCondition_2027"/>
+         <elementType ref="org.openiaml.model.diagram.domain_object_instance.PrimitiveCondition_2028"/>
+         <elementType ref="org.openiaml.model.diagram.domain_object_instance.PrimitiveCondition_2029"/>
          <elementType ref="org.openiaml.model.diagram.domain_object_instance.Property_2025"/>
          <elementType ref="org.openiaml.model.diagram.domain_object_instance.EventTrigger_2026"/>
          <elementType ref="org.openiaml.model.diagram.domain_object_instance.SyncWire_4001"/>

@@ -29,6 +29,7 @@ public class ParentNamesTestCase extends XmlTestCase {
 		"DomainAttribute",
 		"EventTrigger",
 		"PrimitiveOperation",
+		"PrimitiveCondition",
 		"CompositeOperation",
 		"Property",
 		"InputForm",

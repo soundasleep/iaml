@@ -23,6 +23,7 @@
 		$result = array();
 		
 		«EXPAND updateCachedPrimitiveOperations FOREACH getClientSideCacheOperations()»
+		«EXPAND updateCachedPrimitiveConditions FOREACH getClientSideCacheConditions()»
 			
 		return implode("\n", $result);
 	}
@@ -47,6 +48,28 @@
 		{
 			// primitive operation '«this»'
 			$new_value = «EXPAND template::domain::DomainInstance::domainInstanceCall(true, null, object) FOR this»;
+			$old_value = $_SESSION["cached_result_«safeName()»_value"];
+			if ($new_value != $old_value) {
+				// cache needs to be updated
+				log_message("Updating cache value [server] 'cached_result_«safeName()»_value' from '$old_value' to '$new_value'");
+				$result[] = "call_operation update_cached_result_«safeName()» $new_value";
+				$_SESSION["cached_result_«safeName()»_value"] = $new_value;
+			}		
+		}
+		
+	«ENDLET»
+«ENDDEFINE»
+
+«DEFINE updateCachedPrimitiveConditions FOR model::Condition»
+	«throwException("Cannot expand client-side cached operation '" + this + "'")»
+«ENDDEFINE»
+
+«DEFINE updateCachedPrimitiveConditions FOR model::PrimitiveCondition»
+	«LET ((model::DomainObjectInstance) eContainer) AS object»
+		
+		{
+			// primitive condition '«this»'
+			$new_value = «EXPAND template::domain::DomainInstance::domainInstanceCondition(true, object) FOR this»;
 			$old_value = $_SESSION["cached_result_«safeName()»_value"];
 			if ($new_value != $old_value) {
 				// cache needs to be updated

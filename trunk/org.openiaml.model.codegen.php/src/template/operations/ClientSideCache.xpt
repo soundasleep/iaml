@@ -39,3 +39,33 @@
 		}
 	«ENDLET»
 «ENDDEFINE»
+
+«DEFINE cachedPrimitiveConditions FOR model::InternetApplication»
+	«EXPAND cachedPrimitiveConditions FOREACH getClientSideCacheConditions()»
+«ENDDEFINE»
+
+«DEFINE cachedPrimitiveConditions FOR model::Condition»
+	«throwException("Cannot expand client-side cached condition '" + this + "'")»
+«ENDDEFINE»
+
+«DEFINE cachedPrimitiveConditions FOR model::PrimitiveCondition»
+	«LET ((model::DomainObjectInstance) eContainer) AS object»
+		// primitive condition '«this»'
+		
+		// initial value (i.e. at execution time)
+		var cached_result_«safeName()»_value = 
+		<?php
+		/* save the current cached result, so we know when to update it on the client */
+		$_SESSION["cached_result_«safeName()»_value"] = «EXPAND template::domain::DomainInstance::domainInstanceCondition(true, object) FOR this»;
+		echo $_SESSION["cached_result_«safeName()»_value"] ? "true" : "false";
+		?>;
+
+		function cached_result_«safeName()»() {
+			return cached_result_«safeName()»_value;
+		}
+		
+		function update_cached_result_«safeName()»(result) {
+			cached_result_«safeName()»_value = result;
+		}
+	«ENDLET»
+«ENDDEFINE»

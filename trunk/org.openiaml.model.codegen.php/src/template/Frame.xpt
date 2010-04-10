@@ -190,6 +190,12 @@ log_message("«id».php: Session data: " . print_r($_SESSION, true));
 						resolved = "update_cached_result_«safeName(operation)»";
 						break;
 					«ENDFOREACH»
+					«FOREACH getClientSideCacheConditions(getRoot()) AS condition»
+					/* client-side cache conditions */
+					case "update_cached_result_«safeName(condition)»": 
+						resolved = "update_cached_result_«safeName(condition)»";
+						break;
+					«ENDFOREACH»
 					default:
 						throw new IamlJavascriptException("Could not resolve function '" + name + "'");
 				}
@@ -210,6 +216,9 @@ log_message("«id».php: Session data: " . print_r($_SESSION, true));
 
 		// cached primitive operation values
 		«EXPAND template::operations::ClientSideCache::cachedPrimitiveOperations FOR getRoot()»
+
+		// cached primitive condition values
+		«EXPAND template::operations::ClientSideCache::cachedPrimitiveConditions FOR getRoot()»
 
 		/* actual frame onload functions (called ONCE the frame is fully loaded) */
 		var stored_onload_functions = new Array();

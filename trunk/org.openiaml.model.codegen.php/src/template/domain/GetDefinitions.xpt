@@ -198,6 +198,24 @@
 			return $row;
 		«ENDIF»
 	}
+		
+	/**
+	 * Get the number of results for the current query.
+	 */
+	function get_instance_count_«safeName()»() {
+		«IF inWires.typeSelect(model::wires::SelectWire).isEmpty»
+			«IF inWires.typeSelect(model::wires::NewInstanceWire).isEmpty»
+				throw new IamlRuntimeException("No selection or new instance wires exist for object instance '«id»'");
+			«ELSE»
+				// 'new' means there is always one available
+				return 1;
+			«ENDIF»
+		«ELSE»
+			// will select count nudirectly into $row	
+			«EXPAND Select::evaluateSelectWireCount(true) FOR inWires.typeSelect(model::wires::SelectWire).first()»
+			return $row;
+		«ENDIF»
+	}
 	
 	/**
 	 * Does the domain object instance '«id»' exist yet in the database?

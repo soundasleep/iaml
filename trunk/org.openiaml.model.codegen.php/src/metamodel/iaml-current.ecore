@@ -348,7 +348,7 @@
       <details key="added" value="0.2"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Represents an instance of a {@model DomainObject}."/>
+      <details key="documentation" value="Represents an iterator over instances of a {@model DomainObject}. Can be {@model #next navigated}."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
         eType="#//DomainAttributeInstance" containment="true">
@@ -364,6 +364,28 @@
         <details key="changed" value="0.4.3 to default 'false' instead of 'true'"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="onIterate" eType="#//EventTrigger"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This {@model EventTrigger event} is called whenever the {@model #current current instance} changes."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="previous" eType="#//Operation"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="next" eType="#//Operation"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reset" eType="#//Operation"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="skip" eType="#//Operation"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasPrevious" eType="#//Condition"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasNext" eType="#//Condition"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="empty" eType="#//Condition"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="results" eType="#//Property"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Scope" abstract="true" eSuperTypes="#//GeneratesElements #//ContainsWires #//NamedElement #//GeneratedElement #//WireSource #//WireDestination #//ContainsConditions #//CanBeSynced #//Accessible #//ContainsOperations #//ActionSource #//ContainsProperties">
     <eAnnotations source="http://openiaml.org/comment">

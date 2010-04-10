@@ -199,7 +199,7 @@
       <tools
           xsi:type="gmftool:CreationTool"
           title="EventTrigger [onAccess]"
-          description="Create new EventTrigger">
+          description="Create new EventTrigger [onAccess]">
         <smallIcon
             xsi:type="gmftool:BundleImage"
             path="icons/full/obj16/EventTrigger.gif"
@@ -212,7 +212,7 @@
       <tools
           xsi:type="gmftool:CreationTool"
           title="EventTrigger [onSent]"
-          description="Create new EventTrigger">
+          description="Create new EventTrigger [onSent]">
         <smallIcon
             xsi:type="gmftool:BundleImage"
             path="icons/full/obj16/EventTrigger.gif"
@@ -225,7 +225,7 @@
       <tools
           xsi:type="gmftool:CreationTool"
           title="EventTrigger [onFailure]"
-          description="Create new EventTrigger">
+          description="Create new EventTrigger [onFailure]">
         <smallIcon
             xsi:type="gmftool:BundleImage"
             path="icons/full/obj16/EventTrigger.gif"

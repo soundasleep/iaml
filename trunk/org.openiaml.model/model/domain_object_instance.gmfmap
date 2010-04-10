@@ -44,6 +44,9 @@
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//Property"/>
+      <domainSpecialization
+          body="return domainElement.eContainingFeature().getName().equals(&quot;properties&quot;);"
+          language="java"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
@@ -111,7 +114,8 @@
       <domainMetaElement
           href="iaml.ecore#//PrimitiveOperation"/>
       <domainSpecialization
-          body="self.oclIsTypeOf( PrimitiveOperation )"/>
+          body="return domainElement instanceof org.openiaml.model.model.PrimitiveOperation &amp;&amp; domainElement.eContainingFeature().getName().equals(&quot;operations&quot;);"
+          language="java"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
@@ -178,6 +182,262 @@
           href="domain_object_instance.gmftool#//@palette/@tools.0/@tools.3"/>
       <diagramNode
           href="iaml.gmfgraph#DecisionOperation"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//DomainObjectInstance/onIterate"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//EventTrigger"/>
+      <domainSpecialization
+          body="return domainElement.eContainingFeature().getName().equals(&quot;onIterate&quot;);"
+          language="java"/>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerContainmentFeature"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerParentName"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="domain_object_instance.gmftool#//@palette/@tools.3/@tools.0"/>
+      <diagramNode
+          href="iaml.gmfgraph#EventTrigger"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//DomainObjectInstance/previous"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//PrimitiveOperation"/>
+      <domainSpecialization
+          body="return domainElement instanceof org.openiaml.model.model.PrimitiveOperation &#xD;&#xA;&amp;&amp; domainElement.eContainingFeature().getName()&#xD;&#xA;.equals(&quot;previous&quot;);"
+          language="java"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveOperationName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveOperationParentName"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="domain_object_instance.gmftool#//@palette/@tools.3/@tools.1"/>
+      <diagramNode
+          href="iaml.gmfgraph#PrimitiveOperation"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//DomainObjectInstance/next"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//PrimitiveOperation"/>
+      <domainSpecialization
+          body="return domainElement instanceof org.openiaml.model.model.PrimitiveOperation &#xD;&#xA;&amp;&amp; domainElement.eContainingFeature().getName()&#xD;&#xA;.equals(&quot;next&quot;);"
+          language="java"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveOperationName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveOperationParentName"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="domain_object_instance.gmftool#//@palette/@tools.3/@tools.2"/>
+      <diagramNode
+          href="iaml.gmfgraph#PrimitiveOperation"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//DomainObjectInstance/reset"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//PrimitiveOperation"/>
+      <domainSpecialization
+          body="return domainElement instanceof org.openiaml.model.model.PrimitiveOperation &#xD;&#xA;&amp;&amp; domainElement.eContainingFeature().getName()&#xD;&#xA;.equals(&quot;reset&quot;);"
+          language="java"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveOperationName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveOperationParentName"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="domain_object_instance.gmftool#//@palette/@tools.3/@tools.3"/>
+      <diagramNode
+          href="iaml.gmfgraph#PrimitiveOperation"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//DomainObjectInstance/skip"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//PrimitiveOperation"/>
+      <domainSpecialization
+          body="return domainElement instanceof org.openiaml.model.model.PrimitiveOperation &#xD;&#xA;&amp;&amp; domainElement.eContainingFeature().getName()&#xD;&#xA;.equals(&quot;skip&quot;);"
+          language="java"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveOperationName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveOperationParentName"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="domain_object_instance.gmftool#//@palette/@tools.3/@tools.4"/>
+      <diagramNode
+          href="iaml.gmfgraph#PrimitiveOperation"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//DomainObjectInstance/hasPrevious"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//operations/DecisionCondition"/>
+      <domainSpecialization
+          body="return domainElement instanceof org.openiaml.model.model.operations.DecisionCondition &#xD;&#xA;&amp;&amp; domainElement.eContainingFeature().getName()&#xD;&#xA;.equals(&quot;hasPrevious&quot;);"
+          language="java"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#DecisionConditionName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="domain_object_instance.gmftool#//@palette/@tools.3/@tools.5"/>
+      <diagramNode
+          href="iaml.gmfgraph#DecisionCondition"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//DomainObjectInstance/hasNext"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//operations/DecisionCondition"/>
+      <domainSpecialization
+          body="return domainElement instanceof org.openiaml.model.model.operations.DecisionCondition &#xD;&#xA;&amp;&amp; domainElement.eContainingFeature().getName()&#xD;&#xA;.equals(&quot;hasNext&quot;);"
+          language="java"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#DecisionConditionName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="domain_object_instance.gmftool#//@palette/@tools.3/@tools.6"/>
+      <diagramNode
+          href="iaml.gmfgraph#DecisionCondition"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//DomainObjectInstance/empty"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//operations/DecisionCondition"/>
+      <domainSpecialization
+          body="return domainElement instanceof org.openiaml.model.model.operations.DecisionCondition &#xD;&#xA;&amp;&amp; domainElement.eContainingFeature().getName()&#xD;&#xA;.equals(&quot;empty&quot;);"
+          language="java"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#DecisionConditionName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="domain_object_instance.gmftool#//@palette/@tools.3/@tools.7"/>
+      <diagramNode
+          href="iaml.gmfgraph#DecisionCondition"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//DomainObjectInstance/results"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//Property"/>
+      <domainSpecialization
+          body="return domainElement.eContainingFeature().getName().equals(&quot;results&quot;);"
+          language="java"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#PropertyName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          viewPattern="default: {0}"
+          editPattern="{0}">
+        <diagramLabel
+            href="iaml.gmfgraph#PropertyDefaultValue"/>
+        <features
+            href="iaml.ecore#//Property/defaultValue"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PropertyParentName"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PropertyType"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="domain_object_instance.gmftool#//@palette/@tools.3/@tools.8"/>
+      <diagramNode
+          href="iaml.gmfgraph#Property"/>
     </ownedChild>
   </nodes>
   <nodes>

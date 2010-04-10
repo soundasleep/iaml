@@ -5,6 +5,8 @@ package org.openiaml.model.tests.codegen.model0_4;
 
 import org.eclipse.core.resources.IFile;
 
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+
 /**
  * The access control requires 'a permission'.
  * 
@@ -41,8 +43,13 @@ public class UserPermissions extends AbstractDefaultRoleUserLoginTestCase {
 		assertProblem();
 		
 		// if we then try to go to 'target', we likewise will also be prevented		
-		gotoSitemapWithProblem(sitemap, "target");
-		assertTitleNotSame("target");
+		try {
+			gotoSitemapWithProblem(sitemap, "target");
+			fail("Expected to not be able to go to 'target' page");
+		} catch (FailingHttpStatusCodeException e) {
+			// expected
+			checkExceptionContains(e, "User of type 'current instance' did not have permission 'a permission'");
+		}
 		assertProblem();		// who knows where we are?
 	}
 	
@@ -70,8 +77,14 @@ public class UserPermissions extends AbstractDefaultRoleUserLoginTestCase {
 		assertProblem();
 		
 		// if we then try to go to 'target', we likewise will also be prevented		
-		gotoSitemapWithProblem(sitemap, "target");
-		assertProblem();
+		try {
+			gotoSitemapWithProblem(sitemap, "target");
+			fail("Expected to not be able to go to 'target' page");
+		} catch (FailingHttpStatusCodeException e) {
+			// expected
+			checkExceptionContains(e, "User of type 'current instance' did not have permission 'a permission'");
+		}
+		assertProblem();		// who knows where we are?
 	}
 	
 }

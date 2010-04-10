@@ -16,6 +16,7 @@ import java.util.TimeZone;
 
 import junit.framework.AssertionFailedError;
 import net.sourceforge.jwebunit.api.IElement;
+import net.sourceforge.jwebunit.exception.TestingEngineResponseException;
 import net.sourceforge.jwebunit.junit.WebTestCase;
 
 import org.eclipse.core.resources.IFile;
@@ -873,6 +874,29 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		try {
 			super.clickButtonWithText(buttonValueText);
 		} catch (RuntimeException f) {
+			if (f.getCause() instanceof FailingHttpStatusCodeException) {
+				FailingHttpStatusCodeException f2 = (FailingHttpStatusCodeException) f.getCause();
+				// if we failed at exception.php, we can try and read out the error
+				if (PhpRuntimeExceptionException.canHandle(f2)) {
+					throw new PhpRuntimeExceptionException(f2);
+				}
+			}
+			throw f;
+		}
+	}
+	
+	/**
+	 * We wrap the method to try and catch runtime exceptions
+	 * from the PHP server-side code.
+	 * 
+	 * <p>{@inheritDoc}
+	 * @throws PhpRuntimeExceptionException
+	 */
+	@Override
+	public void submit() {
+		try {
+			super.submit();
+		} catch (TestingEngineResponseException f) {
 			if (f.getCause() instanceof FailingHttpStatusCodeException) {
 				FailingHttpStatusCodeException f2 = (FailingHttpStatusCodeException) f.getCause();
 				// if we failed at exception.php, we can try and read out the error

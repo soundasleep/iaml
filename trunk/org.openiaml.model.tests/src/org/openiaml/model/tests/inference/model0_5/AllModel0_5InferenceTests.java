@@ -28,6 +28,7 @@ public class AllModel0_5InferenceTests {
 		suite.addTestSuite(MapPointTextFieldInput.class);
 		suite.addTestSuite(MapTextFieldInput.class);
 		suite.addTestSuite(MapFormInput.class);
+		suite.addTestSuite(IteratedSyncWires.class);
 		
 		return suite;
 	}

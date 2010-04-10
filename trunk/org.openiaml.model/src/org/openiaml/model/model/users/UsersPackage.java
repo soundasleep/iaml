@@ -992,6 +992,87 @@ public interface UsersPackage extends EPackage {
 	int USER_INSTANCE__AUTOSAVE = ModelPackage.DOMAIN_OBJECT_INSTANCE__AUTOSAVE;
 
 	/**
+	 * The feature id for the '<em><b>On Iterate</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_INSTANCE__ON_ITERATE = ModelPackage.DOMAIN_OBJECT_INSTANCE__ON_ITERATE;
+
+	/**
+	 * The feature id for the '<em><b>Previous</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_INSTANCE__PREVIOUS = ModelPackage.DOMAIN_OBJECT_INSTANCE__PREVIOUS;
+
+	/**
+	 * The feature id for the '<em><b>Next</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_INSTANCE__NEXT = ModelPackage.DOMAIN_OBJECT_INSTANCE__NEXT;
+
+	/**
+	 * The feature id for the '<em><b>Reset</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_INSTANCE__RESET = ModelPackage.DOMAIN_OBJECT_INSTANCE__RESET;
+
+	/**
+	 * The feature id for the '<em><b>Skip</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_INSTANCE__SKIP = ModelPackage.DOMAIN_OBJECT_INSTANCE__SKIP;
+
+	/**
+	 * The feature id for the '<em><b>Has Previous</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_INSTANCE__HAS_PREVIOUS = ModelPackage.DOMAIN_OBJECT_INSTANCE__HAS_PREVIOUS;
+
+	/**
+	 * The feature id for the '<em><b>Has Next</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_INSTANCE__HAS_NEXT = ModelPackage.DOMAIN_OBJECT_INSTANCE__HAS_NEXT;
+
+	/**
+	 * The feature id for the '<em><b>Empty</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_INSTANCE__EMPTY = ModelPackage.DOMAIN_OBJECT_INSTANCE__EMPTY;
+
+	/**
+	 * The feature id for the '<em><b>Results</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_INSTANCE__RESULTS = ModelPackage.DOMAIN_OBJECT_INSTANCE__RESULTS;
+
+	/**
 	 * The number of structural features of the '<em>User Instance</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

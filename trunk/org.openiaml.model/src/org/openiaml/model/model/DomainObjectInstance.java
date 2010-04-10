@@ -16,7 +16,7 @@ import org.openiaml.model.model.wires.ParameterEdgesSource;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * Represents an instance of a {@model DomainObject}.
+ * Represents an iterator over instances of a {@model DomainObject}. Can be {@model #next navigated}.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -25,6 +25,15 @@ import org.openiaml.model.model.wires.ParameterEdgesSource;
  *   <li>{@link org.openiaml.model.model.DomainObjectInstance#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link org.openiaml.model.model.DomainObjectInstance#getStrQuery <em>Str Query</em>}</li>
  *   <li>{@link org.openiaml.model.model.DomainObjectInstance#isAutosave <em>Autosave</em>}</li>
+ *   <li>{@link org.openiaml.model.model.DomainObjectInstance#getOnIterate <em>On Iterate</em>}</li>
+ *   <li>{@link org.openiaml.model.model.DomainObjectInstance#getPrevious <em>Previous</em>}</li>
+ *   <li>{@link org.openiaml.model.model.DomainObjectInstance#getNext <em>Next</em>}</li>
+ *   <li>{@link org.openiaml.model.model.DomainObjectInstance#getReset <em>Reset</em>}</li>
+ *   <li>{@link org.openiaml.model.model.DomainObjectInstance#getSkip <em>Skip</em>}</li>
+ *   <li>{@link org.openiaml.model.model.DomainObjectInstance#getHasPrevious <em>Has Previous</em>}</li>
+ *   <li>{@link org.openiaml.model.model.DomainObjectInstance#getHasNext <em>Has Next</em>}</li>
+ *   <li>{@link org.openiaml.model.model.DomainObjectInstance#getEmpty <em>Empty</em>}</li>
+ *   <li>{@link org.openiaml.model.model.DomainObjectInstance#getResults <em>Results</em>}</li>
  * </ul>
  * </p>
  *
@@ -103,5 +112,238 @@ public interface DomainObjectInstance extends ApplicationElement, ContainsWires,
 	 * @generated
 	 */
 	void setAutosave(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>On Iterate</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * This {@model EventTrigger event} is called whenever the {@model #current current instance} changes.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>On Iterate</em>' containment reference.
+	 * @see #setOnIterate(EventTrigger)
+	 * @see org.openiaml.model.model.ModelPackage#getDomainObjectInstance_OnIterate()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EventTrigger getOnIterate();
+
+	/**
+	 * Sets the value of the '{@link org.openiaml.model.model.DomainObjectInstance#getOnIterate <em>On Iterate</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>On Iterate</em>' containment reference.
+	 * @see #getOnIterate()
+	 * @generated
+	 */
+	void setOnIterate(EventTrigger value);
+
+	/**
+	 * Returns the value of the '<em><b>Previous</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Previous</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Previous</em>' containment reference.
+	 * @see #setPrevious(Operation)
+	 * @see org.openiaml.model.model.ModelPackage#getDomainObjectInstance_Previous()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Operation getPrevious();
+
+	/**
+	 * Sets the value of the '{@link org.openiaml.model.model.DomainObjectInstance#getPrevious <em>Previous</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Previous</em>' containment reference.
+	 * @see #getPrevious()
+	 * @generated
+	 */
+	void setPrevious(Operation value);
+
+	/**
+	 * Returns the value of the '<em><b>Next</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Next</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Next</em>' containment reference.
+	 * @see #setNext(Operation)
+	 * @see org.openiaml.model.model.ModelPackage#getDomainObjectInstance_Next()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Operation getNext();
+
+	/**
+	 * Sets the value of the '{@link org.openiaml.model.model.DomainObjectInstance#getNext <em>Next</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Next</em>' containment reference.
+	 * @see #getNext()
+	 * @generated
+	 */
+	void setNext(Operation value);
+
+	/**
+	 * Returns the value of the '<em><b>Reset</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Reset</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Reset</em>' containment reference.
+	 * @see #setReset(Operation)
+	 * @see org.openiaml.model.model.ModelPackage#getDomainObjectInstance_Reset()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Operation getReset();
+
+	/**
+	 * Sets the value of the '{@link org.openiaml.model.model.DomainObjectInstance#getReset <em>Reset</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Reset</em>' containment reference.
+	 * @see #getReset()
+	 * @generated
+	 */
+	void setReset(Operation value);
+
+	/**
+	 * Returns the value of the '<em><b>Skip</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Skip</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Skip</em>' containment reference.
+	 * @see #setSkip(Operation)
+	 * @see org.openiaml.model.model.ModelPackage#getDomainObjectInstance_Skip()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Operation getSkip();
+
+	/**
+	 * Sets the value of the '{@link org.openiaml.model.model.DomainObjectInstance#getSkip <em>Skip</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Skip</em>' containment reference.
+	 * @see #getSkip()
+	 * @generated
+	 */
+	void setSkip(Operation value);
+
+	/**
+	 * Returns the value of the '<em><b>Has Previous</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Has Previous</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Has Previous</em>' containment reference.
+	 * @see #setHasPrevious(Condition)
+	 * @see org.openiaml.model.model.ModelPackage#getDomainObjectInstance_HasPrevious()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Condition getHasPrevious();
+
+	/**
+	 * Sets the value of the '{@link org.openiaml.model.model.DomainObjectInstance#getHasPrevious <em>Has Previous</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Has Previous</em>' containment reference.
+	 * @see #getHasPrevious()
+	 * @generated
+	 */
+	void setHasPrevious(Condition value);
+
+	/**
+	 * Returns the value of the '<em><b>Has Next</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Has Next</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Has Next</em>' containment reference.
+	 * @see #setHasNext(Condition)
+	 * @see org.openiaml.model.model.ModelPackage#getDomainObjectInstance_HasNext()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Condition getHasNext();
+
+	/**
+	 * Sets the value of the '{@link org.openiaml.model.model.DomainObjectInstance#getHasNext <em>Has Next</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Has Next</em>' containment reference.
+	 * @see #getHasNext()
+	 * @generated
+	 */
+	void setHasNext(Condition value);
+
+	/**
+	 * Returns the value of the '<em><b>Empty</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Empty</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Empty</em>' containment reference.
+	 * @see #setEmpty(Condition)
+	 * @see org.openiaml.model.model.ModelPackage#getDomainObjectInstance_Empty()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Condition getEmpty();
+
+	/**
+	 * Sets the value of the '{@link org.openiaml.model.model.DomainObjectInstance#getEmpty <em>Empty</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Empty</em>' containment reference.
+	 * @see #getEmpty()
+	 * @generated
+	 */
+	void setEmpty(Condition value);
+
+	/**
+	 * Returns the value of the '<em><b>Results</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Results</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Results</em>' containment reference.
+	 * @see #setResults(Property)
+	 * @see org.openiaml.model.model.ModelPackage#getDomainObjectInstance_Results()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Property getResults();
+
+	/**
+	 * Sets the value of the '{@link org.openiaml.model.model.DomainObjectInstance#getResults <em>Results</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Results</em>' containment reference.
+	 * @see #getResults()
+	 * @generated
+	 */
+	void setResults(Property value);
 
 } // DomainObjectInstance

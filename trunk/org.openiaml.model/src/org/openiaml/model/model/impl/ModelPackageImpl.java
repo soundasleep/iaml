@@ -1351,6 +1351,87 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getDomainObjectInstance_OnIterate() {
+		return (EReference)domainObjectInstanceEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDomainObjectInstance_Previous() {
+		return (EReference)domainObjectInstanceEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDomainObjectInstance_Next() {
+		return (EReference)domainObjectInstanceEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDomainObjectInstance_Reset() {
+		return (EReference)domainObjectInstanceEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDomainObjectInstance_Skip() {
+		return (EReference)domainObjectInstanceEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDomainObjectInstance_HasPrevious() {
+		return (EReference)domainObjectInstanceEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDomainObjectInstance_HasNext() {
+		return (EReference)domainObjectInstanceEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDomainObjectInstance_Empty() {
+		return (EReference)domainObjectInstanceEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDomainObjectInstance_Results() {
+		return (EReference)domainObjectInstanceEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getScope() {
 		return scopeEClass;
 	}
@@ -1817,6 +1898,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(domainObjectInstanceEClass, DOMAIN_OBJECT_INSTANCE__ATTRIBUTES);
 		createEAttribute(domainObjectInstanceEClass, DOMAIN_OBJECT_INSTANCE__STR_QUERY);
 		createEAttribute(domainObjectInstanceEClass, DOMAIN_OBJECT_INSTANCE__AUTOSAVE);
+		createEReference(domainObjectInstanceEClass, DOMAIN_OBJECT_INSTANCE__ON_ITERATE);
+		createEReference(domainObjectInstanceEClass, DOMAIN_OBJECT_INSTANCE__PREVIOUS);
+		createEReference(domainObjectInstanceEClass, DOMAIN_OBJECT_INSTANCE__NEXT);
+		createEReference(domainObjectInstanceEClass, DOMAIN_OBJECT_INSTANCE__RESET);
+		createEReference(domainObjectInstanceEClass, DOMAIN_OBJECT_INSTANCE__SKIP);
+		createEReference(domainObjectInstanceEClass, DOMAIN_OBJECT_INSTANCE__HAS_PREVIOUS);
+		createEReference(domainObjectInstanceEClass, DOMAIN_OBJECT_INSTANCE__HAS_NEXT);
+		createEReference(domainObjectInstanceEClass, DOMAIN_OBJECT_INSTANCE__EMPTY);
+		createEReference(domainObjectInstanceEClass, DOMAIN_OBJECT_INSTANCE__RESULTS);
 
 		scopeEClass = createEClass(SCOPE);
 		createEReference(scopeEClass, SCOPE__ENTRY_GATE);
@@ -2177,6 +2267,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getDomainObjectInstance_Attributes(), this.getDomainAttributeInstance(), null, "attributes", null, 0, -1, DomainObjectInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDomainObjectInstance_StrQuery(), ecorePackage.getEString(), "strQuery", null, 0, 1, DomainObjectInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDomainObjectInstance_Autosave(), ecorePackage.getEBoolean(), "autosave", "false", 0, 1, DomainObjectInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDomainObjectInstance_OnIterate(), this.getEventTrigger(), null, "onIterate", null, 0, 1, DomainObjectInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDomainObjectInstance_Previous(), this.getOperation(), null, "previous", null, 0, 1, DomainObjectInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDomainObjectInstance_Next(), this.getOperation(), null, "next", null, 0, 1, DomainObjectInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDomainObjectInstance_Reset(), this.getOperation(), null, "reset", null, 0, 1, DomainObjectInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDomainObjectInstance_Skip(), this.getOperation(), null, "skip", null, 0, 1, DomainObjectInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDomainObjectInstance_HasPrevious(), this.getCondition(), null, "hasPrevious", null, 0, 1, DomainObjectInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDomainObjectInstance_HasNext(), this.getCondition(), null, "hasNext", null, 0, 1, DomainObjectInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDomainObjectInstance_Empty(), this.getCondition(), null, "empty", null, 0, 1, DomainObjectInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDomainObjectInstance_Results(), this.getProperty(), null, "results", null, 0, 1, DomainObjectInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(scopeEClass, Scope.class, "Scope", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getScope_EntryGate(), theComponentsPackage.getEntryGate(), null, "entryGate", null, 0, 1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2421,7 +2520,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   new String[] {
 			 "added", "0.3",
 			 "changed", "0.4.3 to default \'false\' instead of \'true\'"
-		   });		
+		   });			
 		addAnnotation
 		  (scopeEClass, 
 		   source, 
@@ -2648,8 +2747,14 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		  (domainObjectInstanceEClass, 
 		   source, 
 		   new String[] {
-			 "documentation", "Represents an instance of a {@model DomainObject}."
-		   });									
+			 "documentation", "Represents an iterator over instances of a {@model DomainObject}. Can be {@model #next navigated}."
+		   });				
+		addAnnotation
+		  (getDomainObjectInstance_OnIterate(), 
+		   source, 
+		   new String[] {
+			 "documentation", "This {@model EventTrigger event} is called whenever the {@model #current current instance} changes."
+		   });							
 		addAnnotation
 		  (conditionEClass, 
 		   source, 

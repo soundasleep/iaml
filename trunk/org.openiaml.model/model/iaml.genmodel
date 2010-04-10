@@ -131,6 +131,15 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainObjectInstance/attributes"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//DomainObjectInstance/strQuery"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//DomainObjectInstance/autosave"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainObjectInstance/onIterate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainObjectInstance/previous"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainObjectInstance/next"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainObjectInstance/reset"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainObjectInstance/skip"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainObjectInstance/hasPrevious"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainObjectInstance/hasNext"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainObjectInstance/empty"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainObjectInstance/results"/>
     </genClasses>
     <genClasses image="false" ecoreClass="iaml.ecore#//Scope">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/entryGate"/>

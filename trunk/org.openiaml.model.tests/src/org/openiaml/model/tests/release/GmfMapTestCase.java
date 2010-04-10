@@ -363,23 +363,30 @@ public class GmfMapTestCase extends XmlTestCase {
 		filename = filename.replace(".gmfmap", ".gmftool");
 		Document doc = GmfToolTestCase.getToolCache().get(filename);
 		
+		String best = null;
+		
 		for (Element tool : xpath(doc, "//tools")) {
 			
 			if (tool.hasAttribute("title") && toolMatches(tool.getAttribute("title"), element, containmentFeature)) {
-				// we found the target tool
-				String ref = compileEmfReference( filename.substring(filename.lastIndexOf("/") + 1), tool );
+
+				// if we haven't got a match yet, or this is a better match
+				if (best == null || 
+						(!hasContainmentFeatureSelector(best) && hasContainmentFeatureSelector(tool.getAttribute("title")))) {
+					
+					// we found the target tool
+					String ref = compileEmfReference( filename.substring(filename.lastIndexOf("/") + 1), tool );
+					
+					// replace '@palette.0' with '@palette'
+					best = ref.replace("/@palette.0/", "/@palette/");
+					
+				}
 				
-				// replace '@palette.0' with '@palette'
-				ref = ref.replace("/@palette.0/", "/@palette/");
-				
-				return ref;
 			}
 			
 		}
 		
-		// couldn't find anything
-		fail("Could not find tool mapping for '" + elementName + "' in filename '" + filename + "' for containment '" + containmentFeature + "'");
-		return null;
+		assertNotNull("Could not find tool mapping for '" + elementName + "' in filename '" + filename + "' for containment '" + containmentFeature + "'", best);
+		return best;
 	}
 	
 	/**
@@ -401,6 +408,10 @@ public class GmfMapTestCase extends XmlTestCase {
 		}
 		
 		return false;
+	}
+	
+	private boolean hasContainmentFeatureSelector(String title) {
+		return title.contains("[");
 	}
 
 	/**

@@ -30,6 +30,7 @@ import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelFactory;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.PrimitiveCondition;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.QueryParameter;
@@ -101,6 +102,7 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 			case ModelPackage.COMPOSITE_CONDITION: return createCompositeCondition();
 			case ModelPackage.DOMAIN_ATTRIBUTE_INSTANCE: return createDomainAttributeInstance();
 			case ModelPackage.QUERY_PARAMETER: return createQueryParameter();
+			case ModelPackage.PRIMITIVE_CONDITION: return createPrimitiveCondition();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -324,6 +326,16 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 		QueryParameterImpl queryParameter = new QueryParameterImpl();
 		generateID(queryParameter);
 		return queryParameter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PrimitiveCondition createPrimitiveCondition() {
+		PrimitiveConditionImpl primitiveCondition = new PrimitiveConditionImpl();
+		return primitiveCondition;
 	}
 
 	/**

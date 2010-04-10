@@ -46,6 +46,7 @@ import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.PrimitiveCondition;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.QueryParameter;
@@ -302,6 +303,10 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseActionSource(ActionSource object) {
 				return createActionSourceAdapter();
+			}
+			@Override
+			public Adapter casePrimitiveCondition(PrimitiveCondition object) {
+				return createPrimitiveConditionAdapter();
 			}
 			@Override
 			public Adapter caseParameterEdgesSource(ParameterEdgesSource object) {
@@ -984,6 +989,20 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createActionSourceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.PrimitiveCondition <em>Primitive Condition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.PrimitiveCondition
+	 * @generated
+	 */
+	public Adapter createPrimitiveConditionAdapter() {
 		return null;
 	}
 

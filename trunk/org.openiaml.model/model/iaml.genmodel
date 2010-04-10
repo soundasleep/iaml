@@ -186,6 +186,7 @@
     <genClasses image="false" ecoreClass="iaml.ecore#//ActionSource">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//ActionSource/outActions"/>
     </genClasses>
+    <genClasses ecoreClass="iaml.ecore#//PrimitiveCondition"/>
     <nestedGenPackages prefix="Visual" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//visual">
       <genClasses ecoreClass="iaml.ecore#//visual/Frame">

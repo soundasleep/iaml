@@ -12,7 +12,7 @@
       <tools
           xsi:type="gmftool:CreationTool"
           title="EventTrigger [onEdit]"
-          description="Create new EventTrigger">
+          description="Create new EventTrigger [onEdit]">
         <smallIcon
             xsi:type="gmftool:BundleImage"
             path="icons/full/obj16/EventTrigger.gif"
@@ -123,6 +123,129 @@
         <largeIcon
             xsi:type="gmftool:BundleImage"
             path="icons/full/obj32/RunAction.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+    </tools>
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="Domain Iterating"
+        description="Domain Iterating"
+        collapsible="true">
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="EventTrigger [onIterate]"
+          description="Create new EventTrigger [onIterate]">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/EventTrigger.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/EventTrigger.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="PrimitiveOperation [previous]"
+          description="Create new PrimitiveOperation [previous]">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/PrimitiveOperation.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/PrimitiveOperation.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="PrimitiveOperation [next]"
+          description="Create new PrimitiveOperation [next]">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/PrimitiveOperation.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/PrimitiveOperation.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="PrimitiveOperation [reset]"
+          description="Create new PrimitiveOperation [reset]">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/PrimitiveOperation.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/PrimitiveOperation.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="PrimitiveOperation [skip]"
+          description="Create new PrimitiveOperation [skip]">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/PrimitiveOperation.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/PrimitiveOperation.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="DecisionCondition [hasPrevious]"
+          description="Create new DecisionCondition [hasPrevious]">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/DecisionCondition.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/DecisionCondition.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="DecisionCondition [hasNext]"
+          description="Create new DecisionCondition [hasNext]">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/DecisionCondition.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/DecisionCondition.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="DecisionCondition [empty]"
+          description="Create new DecisionCondition [empty]">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/DecisionCondition.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/DecisionCondition.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Property [results]"
+          description="Create new Property [results]">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/Property.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/Property.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
     </tools>

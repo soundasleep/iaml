@@ -12,7 +12,7 @@
       <tools
           xsi:type="gmftool:CreationTool"
           title="EventTrigger [onEdit]"
-          description="Create new EventTrigger">
+          description="Create new EventTrigger [onEdit]">
         <smallIcon
             xsi:type="gmftool:BundleImage"
             path="icons/full/obj16/EventTrigger.gif"

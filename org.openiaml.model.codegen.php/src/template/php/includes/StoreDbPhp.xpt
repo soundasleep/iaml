@@ -10,8 +10,10 @@
  
 «EXPAND template::Template::commonHeader("", "Store DB")»
 
-// condition definitions
-«EXPAND template::conditions::Definitions::conditionIncludes(true)»
+define('REDIRECT_ON_CLIENT', true);
+
+// include operations, condition definitions
+«EXPAND template::Common::commonPHPIncludes»
 
 /**
  * Recursive functions in PHP. See default.js for Javascript implementations of these.

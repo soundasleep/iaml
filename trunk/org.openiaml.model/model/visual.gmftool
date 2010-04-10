@@ -1,101 +1,323 @@
-<?xml version="1.0" encoding="UTF-8"?><gmftool:ToolRegistry xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmi:version="2.0">
-  <palette title="modelPalette">
-    <tools description="Model Elements" title="Model Elements" xsi:type="gmftool:ToolGroup">
-      <tools description="Create new PrimitiveOperation" title="PrimitiveOperation" xsi:type="gmftool:CreationTool">
-        <smallIcon bundle="org.openiaml.model.edit" path="icons/full/obj16/PrimitiveOperation.gif" xsi:type="gmftool:BundleImage"/>
-        <largeIcon bundle="org.openiaml.model.edit" path="icons/full/obj32/PrimitiveOperation.gif" xsi:type="gmftool:BundleImage"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<gmftool:ToolRegistry xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition">
+  <palette
+      title="modelPalette">
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="Model Elements"
+        description="Model Elements">
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="PrimitiveOperation"
+          description="Create new PrimitiveOperation">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/PrimitiveOperation.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/PrimitiveOperation.gif"
+            bundle="org.openiaml.model.edit"/>
       </tools>
-      <tools description="Create new CompositeOperation" title="CompositeOperation" xsi:type="gmftool:CreationTool">
-        <smallIcon bundle="org.openiaml.model.edit" path="icons/full/obj16/CompositeOperation.gif" xsi:type="gmftool:BundleImage"/>
-        <largeIcon bundle="org.openiaml.model.edit" path="icons/full/obj32/CompositeOperation.gif" xsi:type="gmftool:BundleImage"/>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="CompositeOperation"
+          description="Create new CompositeOperation">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/CompositeOperation.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/CompositeOperation.gif"
+            bundle="org.openiaml.model.edit"/>
       </tools>
-      <tools description="Create new Property" title="Property" xsi:type="gmftool:CreationTool">
-        <smallIcon bundle="org.openiaml.model.edit" path="icons/full/obj16/Property.gif" xsi:type="gmftool:BundleImage"/>
-        <largeIcon bundle="org.openiaml.model.edit" path="icons/full/obj32/Property.gif" xsi:type="gmftool:BundleImage"/>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Property"
+          description="Create new Property">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/Property.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/Property.gif"
+            bundle="org.openiaml.model.edit"/>
       </tools>
-      <tools description="Create new CompositeCondition" title="CompositeCondition" xsi:type="gmftool:CreationTool">
-        <smallIcon bundle="org.openiaml.model.edit" path="icons/full/obj16/CompositeCondition.gif" xsi:type="gmftool:BundleImage"/>
-        <largeIcon bundle="org.openiaml.model.edit" path="icons/full/obj32/CompositeCondition.gif" xsi:type="gmftool:BundleImage"/>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="CompositeCondition"
+          description="Create new CompositeCondition">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/CompositeCondition.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/CompositeCondition.gif"
+            bundle="org.openiaml.model.edit"/>
       </tools>
-      <tools description="Create new StaticValue" title="StaticValue" xsi:type="gmftool:CreationTool">
-        <smallIcon bundle="org.openiaml.model.edit" path="icons/full/obj16/StaticValue.gif" xsi:type="gmftool:BundleImage"/>
-        <largeIcon bundle="org.openiaml.model.edit" path="icons/full/obj32/StaticValue.gif" xsi:type="gmftool:BundleImage"/>
-      </tools>
-    </tools>
-    <tools collapsible="true" description="Visual Elements" title="Visual Elements" xsi:type="gmftool:ToolGroup">
-      <tools description="Create new InputForm" title="InputForm" xsi:type="gmftool:CreationTool">
-        <smallIcon bundle="org.openiaml.model.edit" path="icons/full/obj16/InputForm.gif" xsi:type="gmftool:BundleImage"/>
-        <largeIcon bundle="org.openiaml.model.edit" path="icons/full/obj32/InputForm.gif" xsi:type="gmftool:BundleImage"/>
-      </tools>
-      <tools description="Create new InputTextField" title="InputTextField" xsi:type="gmftool:CreationTool">
-        <smallIcon bundle="org.openiaml.model.edit" path="icons/full/obj16/InputTextField.gif" xsi:type="gmftool:BundleImage"/>
-        <largeIcon bundle="org.openiaml.model.edit" path="icons/full/obj32/InputTextField.gif" xsi:type="gmftool:BundleImage"/>
-      </tools>
-      <tools description="Create new Button" title="Button" xsi:type="gmftool:CreationTool">
-        <smallIcon bundle="org.openiaml.model.edit" path="icons/full/obj16/Button.gif" xsi:type="gmftool:BundleImage"/>
-        <largeIcon bundle="org.openiaml.model.edit" path="icons/full/obj32/Button.gif" xsi:type="gmftool:BundleImage"/>
-      </tools>
-      <tools description="Create new Label" title="Label" xsi:type="gmftool:CreationTool">
-        <smallIcon bundle="org.openiaml.model.edit" path="icons/full/obj16/Label.gif" xsi:type="gmftool:BundleImage"/>
-        <largeIcon bundle="org.openiaml.model.edit" path="icons/full/obj32/Label.gif" xsi:type="gmftool:BundleImage"/>
-      </tools>
-      <tools description="Create new Map" title="Map" xsi:type="gmftool:CreationTool">
-        <smallIcon bundle="org.openiaml.model.edit" path="icons/full/obj16/Map.gif" xsi:type="gmftool:BundleImage"/>
-        <largeIcon bundle="org.openiaml.model.edit" path="icons/full/obj32/Map.gif" xsi:type="gmftool:BundleImage"/>
-      </tools>
-      <tools description="Create new MapPoint" title="MapPoint" xsi:type="gmftool:CreationTool">
-        <smallIcon bundle="org.openiaml.model.edit" path="icons/full/obj16/MapPoint.gif" xsi:type="gmftool:BundleImage"/>
-        <largeIcon bundle="org.openiaml.model.edit" path="icons/full/obj32/MapPoint.gif" xsi:type="gmftool:BundleImage"/>
-      </tools>
-    </tools>
-    <tools collapsible="true" description="Wires" title="Wires" xsi:type="gmftool:ToolGroup">
-      <tools description="Create new SyncWire" title="SyncWire" xsi:type="gmftool:CreationTool">
-        <smallIcon bundle="org.openiaml.model.edit" path="icons/full/obj16/SyncWire.gif" xsi:type="gmftool:BundleImage"/>
-        <largeIcon bundle="org.openiaml.model.edit" path="icons/full/obj32/SyncWire.gif" xsi:type="gmftool:BundleImage"/>
-      </tools>
-      <tools description="Create new ConditionEdge" title="ConditionEdge" xsi:type="gmftool:CreationTool">
-        <smallIcon bundle="org.openiaml.model.edit" path="icons/full/obj16/ConditionEdge.gif" xsi:type="gmftool:BundleImage"/>
-        <largeIcon bundle="org.openiaml.model.edit" path="icons/full/obj32/ConditionEdge.gif" xsi:type="gmftool:BundleImage"/>
-      </tools>
-      <tools description="Create new ParameterEdge" title="ParameterEdge" xsi:type="gmftool:CreationTool">
-        <smallIcon bundle="org.openiaml.model.edit" path="icons/full/obj16/ParameterEdge.gif" xsi:type="gmftool:BundleImage"/>
-        <largeIcon bundle="org.openiaml.model.edit" path="icons/full/obj32/ParameterEdge.gif" xsi:type="gmftool:BundleImage"/>
-      </tools>
-      <tools description="Create new SelectWire" title="SelectWire" xsi:type="gmftool:CreationTool">
-        <smallIcon bundle="org.openiaml.model.edit" path="icons/full/obj16/SelectWire.gif" xsi:type="gmftool:BundleImage"/>
-        <largeIcon bundle="org.openiaml.model.edit" path="icons/full/obj32/SelectWire.gif" xsi:type="gmftool:BundleImage"/>
-      </tools>
-      <tools description="Create new SetWire" title="SetWire" xsi:type="gmftool:CreationTool">
-        <smallIcon bundle="org.openiaml.model.edit" path="icons/full/obj16/SetWire.gif" xsi:type="gmftool:BundleImage"/>
-        <largeIcon bundle="org.openiaml.model.edit" path="icons/full/obj32/SetWire.gif" xsi:type="gmftool:BundleImage"/>
-      </tools>
-      <tools description="Create new NewInstanceWire" title="NewInstanceWire" xsi:type="gmftool:CreationTool">
-        <smallIcon bundle="org.openiaml.model.edit" path="icons/full/obj16/NewInstanceWire.gif" xsi:type="gmftool:BundleImage"/>
-        <largeIcon bundle="org.openiaml.model.edit" path="icons/full/obj32/NewInstanceWire.gif" xsi:type="gmftool:BundleImage"/>
-      </tools>
-    </tools>
-    <tools collapsible="true" description="Event Triggers" title="Event Triggers" xsi:type="gmftool:ToolGroup">
-      <tools description="Create new EventTrigger [onClick]" title="EventTrigger [onClick]" xsi:type="gmftool:CreationTool">
-        <smallIcon bundle="org.openiaml.model.edit" path="icons/full/obj16/EventTrigger.gif" xsi:type="gmftool:BundleImage"/>
-        <largeIcon bundle="org.openiaml.model.edit" path="icons/full/obj32/EventTrigger.gif" xsi:type="gmftool:BundleImage"/>
-      </tools>
-      <tools description="Create new EventTrigger [onEdit]" title="EventTrigger [onEdit]" xsi:type="gmftool:CreationTool">
-        <smallIcon bundle="org.openiaml.model.edit" path="icons/full/obj16/EventTrigger.gif" xsi:type="gmftool:BundleImage"/>
-        <largeIcon bundle="org.openiaml.model.edit" path="icons/full/obj32/EventTrigger.gif" xsi:type="gmftool:BundleImage"/>
-      </tools>
-      <tools description="Create new EventTrigger [onAccess]" title="EventTrigger [onAccess]" xsi:type="gmftool:CreationTool">
-        <smallIcon bundle="org.openiaml.model.edit" path="icons/full/obj16/EventTrigger.gif" xsi:type="gmftool:BundleImage"/>
-        <largeIcon bundle="org.openiaml.model.edit" path="icons/full/obj32/EventTrigger.gif" xsi:type="gmftool:BundleImage"/>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="StaticValue"
+          description="Create new StaticValue">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/StaticValue.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/StaticValue.gif"
+            bundle="org.openiaml.model.edit"/>
       </tools>
     </tools>
-    <tools collapsible="true" description="Actions" title="Actions" xsi:type="gmftool:ToolGroup">
-      <tools description="Create new RunAction" title="RunAction" xsi:type="gmftool:CreationTool">
-        <smallIcon bundle="org.openiaml.model.edit" path="icons/full/obj16/RunAction.gif" xsi:type="gmftool:BundleImage"/>
-        <largeIcon bundle="org.openiaml.model.edit" path="icons/full/obj32/RunAction.gif" xsi:type="gmftool:BundleImage"/>
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="Visual Elements"
+        description="Visual Elements"
+        collapsible="true">
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="InputForm"
+          description="Create new InputForm">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/InputForm.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/InputForm.gif"
+            bundle="org.openiaml.model.edit"/>
       </tools>
-      <tools description="Create new NavigateAction" title="NavigateAction" xsi:type="gmftool:CreationTool">
-        <smallIcon bundle="org.openiaml.model.edit" path="icons/full/obj16/NavigateAction.gif" xsi:type="gmftool:BundleImage"/>
-        <largeIcon bundle="org.openiaml.model.edit" path="icons/full/obj32/NavigateAction.gif" xsi:type="gmftool:BundleImage"/>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="InputTextField"
+          description="Create new InputTextField">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/InputTextField.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/InputTextField.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Button"
+          description="Create new Button">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/Button.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/Button.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Label"
+          description="Create new Label">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/Label.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/Label.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Map"
+          description="Create new Map">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/Map.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/Map.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="MapPoint"
+          description="Create new MapPoint">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/MapPoint.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/MapPoint.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+    </tools>
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="Wires"
+        description="Wires"
+        collapsible="true">
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="SyncWire"
+          description="Create new SyncWire">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/SyncWire.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/SyncWire.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="ConditionEdge"
+          description="Create new ConditionEdge">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/ConditionEdge.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/ConditionEdge.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="ParameterEdge"
+          description="Create new ParameterEdge">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/ParameterEdge.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/ParameterEdge.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="SelectWire"
+          description="Create new SelectWire">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/SelectWire.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/SelectWire.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="SetWire"
+          description="Create new SetWire">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/SetWire.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/SetWire.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="NewInstanceWire"
+          description="Create new NewInstanceWire">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/NewInstanceWire.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/NewInstanceWire.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+    </tools>
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="Event Triggers"
+        description="Event Triggers"
+        collapsible="true">
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="EventTrigger [onClick]"
+          description="Create new EventTrigger [onClick]">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/EventTrigger.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/EventTrigger.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="EventTrigger [onEdit]"
+          description="Create new EventTrigger [onEdit]">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/EventTrigger.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/EventTrigger.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="EventTrigger [onAccess]"
+          description="Create new EventTrigger [onAccess]">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/EventTrigger.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/EventTrigger.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+    </tools>
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="Actions"
+        description="Actions"
+        collapsible="true">
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="RunAction"
+          description="Create new RunAction">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/RunAction.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/RunAction.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="NavigateAction"
+          description="Create new NavigateAction">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/NavigateAction.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/NavigateAction.gif"
+            bundle="org.openiaml.model.edit"/>
       </tools>
     </tools>
   </palette>

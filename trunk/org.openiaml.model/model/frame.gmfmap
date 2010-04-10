@@ -796,6 +796,26 @@
           href="iaml.gmfgraph#MapPoint"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//ContainsConditions/conditions"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//operations/DecisionCondition"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( DecisionCondition )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          editPattern="">
+        <diagramLabel
+            href="iaml.gmfgraph#DecisionConditionName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <diagramNode
+          href="iaml.gmfgraph#DecisionCondition"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/SyncWire"/>

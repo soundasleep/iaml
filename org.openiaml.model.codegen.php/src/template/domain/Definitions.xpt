@@ -36,6 +36,7 @@
 
 		«EXPAND GetDefinitions::getDomainObject FOREACH getRoot().getAllDomainObjectInstances()»
 		«EXPAND StoreDefinitions::storeDomainObject FOREACH getRoot().getAllDomainObjectInstances()»
+		«EXPAND IterateDefinitions::iterateDefinitions FOREACH getRoot().getAllDomainObjectInstances()»
 
 		/**
 		 * Get all of the domain joins required in this generated

@@ -170,6 +170,30 @@ function evaluate_select_wire($db_name, $source_id, $source_class, $query, $args
 	return $row;
 }
 
+/**
+ * Return the number of results currently possible for evaluate_select_wire with the
+ * given arguments.
+ */
+function evaluate_select_wire_count($db_name, $source_id, $source_class, $query, $args) {
+	log_message("[select wire] Count: db = $db_name, source_id = $source_id, source_class = $source_class, query = $query");
+
+	// get all joins
+	global $compose_domain_joins_done_already;
+	$compose_domain_joins_done_already = array(); 
+	$joins = compose_domain_joins($source_id);
+	
+	$joined_query = "SELECT Count(*) AS c FROM $source_class " 
+		. implode(" ", $joins)
+		. " WHERE $query";
+
+	log_message("[select wire] Count: Composed query: " . preg_replace("/[ \r\n\t]+/im", " ", $joined_query));
+		
+	$db_query = new DatabaseQuery($db_name);
+	$row = $db_query->fetchFirst($joined_query, $args);
+	
+	return $row["c"];
+}
+
 $compose_domain_joins_done_already = null;
 
 /**

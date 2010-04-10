@@ -113,3 +113,22 @@
 		«ENDIF»
 	«ENDIF» 
 «ENDDEFINE»
+
+/**
+ * A condition defined by containing feature.
+ */
+«DEFINE domainInstanceCondition(Boolean php, model::DomainObjectInstance instance) FOR model::PrimitiveCondition»
+	«IF php»
+		«IF instance.hasNext == this»
+			can_object_instance_next_«safeName(instance)»()
+		«ELSEIF instance.hasPrevious == this»
+			can_object_instance_previous_«safeName(instance)»()
+		«ELSEIF instance.empty == this»
+			is_object_instance_empty_«safeName(instance)»()
+		«ELSE»
+			«throwException("Unknown primitive condition for DomainObjectInstance: " + this)»
+		«ENDIF»
+	«ELSE»
+		<?php echo «EXPAND domainInstanceCondition(php, instance)» ? " true " : " false "; ?>
+	«ENDIF»
+«ENDDEFINE»

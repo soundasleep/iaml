@@ -38,6 +38,33 @@
 	«ENDIF»
 «ENDDEFINE»
 
+«DEFINE evaluateSelectWireCount(boolean force) FOR model::wires::SelectWire»
+	/* count selection wire «this» */
+	
+	«IF !force && inParameterEdges.size > 0»
+		/* we try not to crash if a query parameter does not exist */
+		/* check all parameter sources */
+		if («EXPAND template::operations::Parameters::callParameterExists FOREACH inParameterEdges SEPARATOR " && "») {		
+	«ENDIF»
+	
+	// where are we loading it from? sets $db_name
+	«EXPAND selectDatabase FOR from»
+	
+	$source_class = "«safeNameString(((model::DomainObject) from).name)»";
+	$source_id = "«safeNameString(((model::DomainObject) from).id)»";
+	$query = «EXPAND getQuery FOR this-»;
+	$args = array(«EXPAND template::operations::Parameters::callParameter(true, false, true) FOREACH inParameterEdges SEPARATOR ","»); 
+	
+	// get the result or return null
+	$row = evaluate_select_wire_count($db_name, $source_id, $source_class, $query, $args);
+	
+	«IF !force && inParameterEdges.size > 0»
+		} else {
+			$row = 0;
+		}
+	«ENDIF»
+«ENDDEFINE»
+
 /* create a SQL query to select a particular value */
 «DEFINE getQuery FOR model::wires::SelectWire»
 	«IF query == null || query.trim().length == 0»

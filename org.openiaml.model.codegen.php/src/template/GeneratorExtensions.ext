@@ -540,12 +540,21 @@ getExitResumeTargets(model::components::ExitGate this) :
  * Get all operations which the server needs to keep track of, and 
  * the client needs to be updated.
  * <strong>All of these operations need to be consequence-free.</strong>
+ * TODO all of these should probably be PrimitiveConditions, not PrimitiveOperations.
  */
 List[model::Operation] getClientSideCacheOperations(model::InternetApplication this) :
 	eAllContents.typeSelect(model::PrimitiveOperation)
 		.select(o | model::DomainObjectInstance.isInstance(o.eContainer))
 		.select(o | o.name == "exists?");
 
+/**
+ * Get all conditions which the server needs to keep track of, and 
+ * the client needs to be updated.
+ * <strong>All of these operations need to be consequence-free.</strong>
+ */
+List[model::Condition] getClientSideCacheConditions(model::InternetApplication this) :
+	eAllContents.typeSelect(model::PrimitiveCondition)
+		.select(o | model::DomainObjectInstance.isInstance(o.eContainer));
 /**
  * Should the given exit gate be activated/enabled on the given frame?
  */

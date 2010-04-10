@@ -137,6 +137,11 @@ context model::PrimitiveOperation WARNING "Unknown primitive operation name '" +
 			(name == "send")) ||
 		name == "true?" || name == "can cast?");
 
+context model::PrimitiveCondition WARNING "Unknown primitive condition name '" + name + "'" :
+	(eContainer != null && model::DomainObjectInstance.isInstance(eContainer) && ((model::DomainObjectInstance) eContainer).hasNext == this) || 
+	(eContainer != null && model::DomainObjectInstance.isInstance(eContainer) && ((model::DomainObjectInstance) eContainer).hasPrevious == this) || 
+	(eContainer != null && model::DomainObjectInstance.isInstance(eContainer) && ((model::DomainObjectInstance) eContainer).empty == this);		
+
 context model::operations::Arithmetic ERROR "Arithmetic must have at least one incoming data source edge" :
 	inFlows.size > 0;
 

@@ -188,7 +188,7 @@ public class IteratedSyncWires extends DatabaseCodegenTestCase {
 			fail("Should have thrown an exception");
 		} catch (PhpRuntimeExceptionException e) {
 			// expected
-			assertContains("No results found for query", e.getMessage());
+			assertContains("Offset cannot be negative", e.getMessage());
 		}
 		assertProblem();
 
@@ -312,7 +312,7 @@ public class IteratedSyncWires extends DatabaseCodegenTestCase {
 			setLabeledFormElementField(id, "New Title 1");
 		}
 		
-		clickButtonWithText("save");
+		clickButtonWithText("save current");
 		assertNoProblem();
 		
 		assertNewContent1();
@@ -349,7 +349,7 @@ public class IteratedSyncWires extends DatabaseCodegenTestCase {
 			setLabeledFormElementField(id, "New Content 3");
 		}
 		
-		clickButtonWithText("save");
+		clickButtonWithText("save current");
 		assertNoProblem();
 		
 		assertNewContent3();

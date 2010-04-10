@@ -89,6 +89,12 @@
 	«FILE "output/add_permission.php"»«EXPAND php::includes::AddPermissionPhp::addPermissionPhp»«ENDFILE»
 	«FILE "output/remove_role.php"»«EXPAND php::includes::RemoveRolePhp::removeRolePhp»«ENDFILE»
 	«FILE "output/remove_permission.php"»«EXPAND php::includes::RemovePermissionPhp::removePermissionPhp»«ENDFILE»
+	«IF !eAllContents.typeSelect(model::DomainObjectInstance).isEmpty»
+		«FILE "output/instance_next.php"»«EXPAND php::includes::InstanceNextPhp::instanceNextPhp»«ENDFILE»
+		«FILE "output/instance_previous.php"»«EXPAND php::includes::InstancePreviousPhp::instancePreviousPhp»«ENDFILE»
+		«FILE "output/instance_reset.php"»«EXPAND php::includes::InstanceResetPhp::instanceResetPhp»«ENDFILE»
+		«FILE "output/instance_skip.php"»«EXPAND php::includes::InstanceSkipPhp::instanceSkipPhp»«ENDFILE»
+	«ENDIF»
 	«FILE "output/update_client_cache.php"»«EXPAND php::includes::UpdateClientCache::updateClientCache»«ENDFILE»
 	
 	«REM»callbacks. TODO all the actual callbacks above should be moved into here«ENDREM»

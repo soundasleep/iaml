@@ -6,6 +6,10 @@
 /* Is there additional actions we should do on the client-side once this
  * property has changed? */
 try {
+	if (!isset($frame_id) || !$frame_id) {
+		throw new IamlRuntimeException("Invalid frame ID: frame ID not set");
+	}
+
 	/**
 	 * We cheat; we just iterate over ALL properties in the application.
 	 * If the property is contained in a text field and on the current frame,

@@ -837,6 +837,9 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	/**
 	 * We wrap the method to try and catch runtime exceptions
 	 * from the PHP server-side code.
+	 * 
+	 * <p>{@inheritDoc}
+	 * @throws PhpRuntimeExceptionException
 	 */
 	@Override
 	public void gotoPage(String url) {
@@ -858,6 +861,29 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		}
 	}
 	
+	/**
+	 * We wrap the method to try and catch runtime exceptions
+	 * from the PHP server-side code.
+	 * 
+	 * <p>{@inheritDoc}
+	 * @throws PhpRuntimeExceptionException
+	 */
+	@Override
+	public void clickButtonWithText(String buttonValueText) {
+		try {
+			super.clickButtonWithText(buttonValueText);
+		} catch (RuntimeException f) {
+			if (f.getCause() instanceof FailingHttpStatusCodeException) {
+				FailingHttpStatusCodeException f2 = (FailingHttpStatusCodeException) f.getCause();
+				// if we failed at exception.php, we can try and read out the error
+				if (PhpRuntimeExceptionException.canHandle(f2)) {
+					throw new PhpRuntimeExceptionException(f2);
+				}
+			}
+			throw f;
+		}
+	}
+
 	/**
 	 * Throw a RuntimeException with the various information from the
 	 * debug box (<code>&lt;div id="debug"&gt;...&lt;/div&gt;</code>)

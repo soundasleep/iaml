@@ -201,6 +201,16 @@ class IamlRuntimeException extends Exception {
 }
 
 /**
+ * Similar to a Java's IllegalArgumentException.
+ * We can also pass along additional information.
+ */
+class IamlIllegalArgumentException extends IamlRuntimeException {
+	public function __construct($message = "", $more_info = "") {
+		parent::__construct($message, $more_info);
+	}
+}
+
+/**
  * A specific runtime exception to say that data from the current
  * session seems invalid. Perhaps the user needs to reset their
  * session?

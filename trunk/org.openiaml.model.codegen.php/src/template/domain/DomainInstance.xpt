@@ -19,10 +19,49 @@
 	«throwException("Unexpected domain attribute run instance action destination: " + this)»
 «ENDDEFINE»
 
+/**
+ * An operation defined by containing feature.
+ */
 «DEFINE domainInstanceCall(Boolean php, model::wires::RunAction wire, model::DomainObjectInstance object) FOR model::Operation»
+	«IF php»
+		«IF object.previous == this»
+			object_instance_previous_«safeNameString(object.id)»()
+		«ELSEIF object.next == this»
+			object_instance_next_«safeNameString(object.id)»()
+		«ELSEIF object.reset == this»
+			object_instance_reset_«safeNameString(object.id)»()
+		«ELSEIF object.skip == this»
+			«REM»TODO skip needs to have a parameter«ENDREM»
+			object_instance_skip_«safeNameString(object.id)»(1)
+		«ELSE»
+			«REM»not a contained feature; define it by name«ENDREM»
+			«EXPAND namedDomainInstanceCall(php, wire, object)» 
+		«ENDIF»
+	«ELSE»
+		«IF object.previous == this»
+			queued_instance_previous('«safeNameString(object.id)»')
+		«ELSEIF object.next == this»
+			queued_instance_next('«safeNameString(object.id)»')
+		«ELSEIF object.reset == this»
+			queued_instance_reset('«safeNameString(object.id)»')
+		«ELSEIF object.skip == this»
+			«REM»TODO skip needs to have a parameter«ENDREM»
+			queued_instance_skip('«safeNameString(object.id)»', -1)
+		«ELSE»
+			«REM»not a contained feature; define it by name«ENDREM»
+			«EXPAND namedDomainInstanceCall(php, wire, object)» 
+		«ENDIF»
+	«ENDIF»
+«ENDDEFINE»
+
+/**
+ * An operation defined by name.
+ */
+«DEFINE namedDomainInstanceCall(Boolean php, model::wires::RunAction wire, model::DomainObjectInstance object) FOR model::Operation»
 	«IF php»
 		«IF name=="exists?"»
 			exists_object_instance_«safeNameString(object.id)»()
+			«REM»TODO shouldn't the other domain instance operations be listed here? probably a major bug«ENDREM»
 		«ELSE»
 			«throwException("No server-side code for domainInstanceCall operation '" + name + "'")»
 		«ENDIF»

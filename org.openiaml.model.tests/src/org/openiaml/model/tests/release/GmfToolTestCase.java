@@ -237,11 +237,27 @@ public class GmfToolTestCase extends XmlTestCase {
 				// should match either a node..
 				IterableElementList matches = xpath(gmfmap, nodeXpath);
 				boolean matched = false;
+
+				if (selector == null) {
+					// TODO not sure how to test this yet
+					continue;
+				}
+				
 				for (Element match : matches) {
 					String href = match.getAttribute("href");
 					if (href.endsWith(toolName)) {
-						assertFalse(filename + ": More than one mapping for tool '" + toolName + "'", matched);
-						matched = true;
+						if (selector != null) {
+							assertFalse(filename + ": More than one mapping for tool '" + toolName + "': " + selector, matched);
+							matched = true;
+						}
+						
+						if (selector == null) {
+							// TODO not sure how to test this yet
+							/*
+							assertEquals(filename + ": More than one non-selector mapping for tool '" + toolName + "': " + selector, 0, nullCount);
+							nullCount++;
+							*/
+						}
 					}
 				}
 
@@ -250,8 +266,18 @@ public class GmfToolTestCase extends XmlTestCase {
 				for (Element match : matches2) {
 					String href = match.getAttribute("href");
 					if (href.endsWith(toolName)) {
-						assertFalse(filename + ": More than one mapping for tool '" + toolName + "'", matched);
-						matched = true;
+						if (selector != null) {
+							assertFalse(filename + ": More than one mapping for tool '" + toolName + "': " + selector, matched);
+							matched = true;
+						}
+
+						if (selector == null) {
+							// TODO not sure how to test this yet
+							/*
+							assertEquals(filename + ": More than one non-selector mapping for tool '" + toolName + "': " + selector, 0, nullCount);
+							nullCount++;
+							*/
+						}
 					}
 				}
 				

@@ -255,7 +255,7 @@ public class GmfToolTestCase extends XmlTestCase {
 					}
 				}
 				
-				assertTrue(filename + ": Tool '" + toolName + "' did not match any mappings.", matched);
+				assertTrue(filename + ": Tool '" + toolName + "' [" + selector + "] did not match any mappings.", matched);
 				
 			}
 		}
@@ -450,6 +450,102 @@ public class GmfToolTestCase extends XmlTestCase {
 		}
 		
 		return r;
+	}
+	
+	/**
+	 * Test all of the tool descriptions; they should match
+	 * the titles. If they do not, set them manually.
+	 * @throws Exception 
+	 * 
+	 */
+	public void testAndSetToolDescriptions() throws Exception {
+		
+		for (String filename : getToolList()) {
+			String f = new File(filename).getName();
+			Document gmftool = getToolCache().get(filename);
+			
+			// get all tools in subgroups
+			IterableElementList roots = xpath(gmftool, "/ToolRegistry/palette/tools/tools");
+			
+			boolean saveDocument = false;
+			for (Element tool : roots) {
+				// bar [baz]
+				String title = tool.getAttribute("title");
+				
+				// check the description
+				String desc = tool.getAttribute("description");
+				String expected = "Create new " + title;
+				if (desc == null || !desc.equals(expected)) {
+					tool.setAttribute("description", expected);
+					saveDocument = true;
+					System.err.println(f + ": " + desc + " -> " + expected);
+				}
+				
+			}
+			
+			if (saveDocument) {
+				System.err.println("Writing " + f + "...");
+				saveDocument(gmftool, filename);
+			}
+		}
+	}
+	
+	/**
+	 * Test all of the tool icons; they should match
+	 * the titles. If they do not, set them manually.
+	 * @throws Exception 
+	 * 
+	 */
+	public void testAndSetToolIcons() throws Exception {
+		
+		for (String filename : getToolList()) {
+			String f = new File(filename).getName();
+			Document gmftool = getToolCache().get(filename);
+			
+			// get all tools in subgroups
+			IterableElementList roots = xpath(gmftool, "/ToolRegistry/palette/tools/tools");
+			
+			boolean saveDocument = false;
+			for (Element tool : roots) {
+				// bar [baz]
+				String title = tool.getAttribute("title");
+				
+				// bar
+				title = removeSelectors(title);
+				
+				// get the LargeIcon
+				{
+					String key = "largeIcon";
+					String expected = "icons/full/obj32/" + title + ".gif";
+					Element icon = xpathFirst(tool, key);
+					String actual = icon.getAttribute("path");
+					if (actual == null || !actual.equals(expected)) {
+						icon.setAttribute("path", expected);
+						saveDocument = true;
+						System.err.println(f + ": " + actual + " -> " + expected);
+					}
+				}
+
+				// get the LargeIcon
+				{
+					String key = "smallIcon";
+					String expected = "icons/full/obj16/" + title + ".gif";
+					Element icon = xpathFirst(tool, key);
+					String actual = icon.getAttribute("path");
+					if (actual == null || !actual.equals(expected)) {
+						icon.setAttribute("path", expected);
+						saveDocument = true;
+						System.err.println(f + ": " + actual + " -> " + expected);
+					}
+				}
+
+			}
+			
+			if (saveDocument) {
+				System.err.println("Writing " + f + "...");
+				saveDocument(gmftool, filename);
+			}
+		}
 	}
 	
 }

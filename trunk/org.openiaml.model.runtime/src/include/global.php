@@ -390,7 +390,7 @@ function get_running_functions() {
 	return $running_functions;
 }
 function register_running_functions() {
-	$running = require_get("running");
+	$running = require_get("running", "");
 	if ($running) {
 		$r = explode(",", $running);
 		foreach ($r as $fun) {

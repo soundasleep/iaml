@@ -801,19 +801,24 @@
         href="iaml.ecore#//ContainsConditions/conditions"/>
     <ownedChild>
       <domainMetaElement
-          href="iaml.ecore#//operations/DecisionCondition"/>
+          href="iaml.ecore#//PrimitiveCondition"/>
       <domainSpecialization
-          body="self.oclIsTypeOf( DecisionCondition )"/>
+          body="self.oclIsTypeOf( PrimitiveCondition )"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping"
           editPattern="">
         <diagramLabel
-            href="iaml.gmfgraph#DecisionConditionName"/>
+            href="iaml.gmfgraph#PrimitiveConditionName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveConditionParentName"/>
+      </labelMappings>
       <diagramNode
-          href="iaml.gmfgraph#DecisionCondition"/>
+          href="iaml.gmfgraph#PrimitiveCondition"/>
     </ownedChild>
   </nodes>
   <links>

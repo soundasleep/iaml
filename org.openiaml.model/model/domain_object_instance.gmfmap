@@ -334,22 +334,27 @@
         href="iaml.ecore#//DomainObjectInstance/hasPrevious"/>
     <ownedChild>
       <domainMetaElement
-          href="iaml.ecore#//operations/DecisionCondition"/>
+          href="iaml.ecore#//PrimitiveCondition"/>
       <domainSpecialization
-          body="return domainElement instanceof org.openiaml.model.model.operations.DecisionCondition &#xD;&#xA;&amp;&amp; domainElement.eContainingFeature().getName()&#xD;&#xA;.equals(&quot;hasPrevious&quot;);"
+          body="return domainElement instanceof org.openiaml.model.model.PrimitiveCondition &#xD;&#xA;&amp;&amp; domainElement.eContainingFeature().getName()&#xD;&#xA;.equals(&quot;hasPrevious&quot;);"
           language="java"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
-            href="iaml.gmfgraph#DecisionConditionName"/>
+            href="iaml.gmfgraph#PrimitiveConditionName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveConditionParentName"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="domain_object_instance.gmftool#//@palette/@tools.3/@tools.5"/>
       <diagramNode
-          href="iaml.gmfgraph#DecisionCondition"/>
+          href="iaml.gmfgraph#PrimitiveCondition"/>
     </ownedChild>
   </nodes>
   <nodes>
@@ -357,22 +362,27 @@
         href="iaml.ecore#//DomainObjectInstance/hasNext"/>
     <ownedChild>
       <domainMetaElement
-          href="iaml.ecore#//operations/DecisionCondition"/>
+          href="iaml.ecore#//PrimitiveCondition"/>
       <domainSpecialization
-          body="return domainElement instanceof org.openiaml.model.model.operations.DecisionCondition &#xD;&#xA;&amp;&amp; domainElement.eContainingFeature().getName()&#xD;&#xA;.equals(&quot;hasNext&quot;);"
+          body="return domainElement instanceof org.openiaml.model.model.PrimitiveCondition &#xD;&#xA;&amp;&amp; domainElement.eContainingFeature().getName()&#xD;&#xA;.equals(&quot;hasNext&quot;);"
           language="java"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
-            href="iaml.gmfgraph#DecisionConditionName"/>
+            href="iaml.gmfgraph#PrimitiveConditionName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveConditionParentName"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="domain_object_instance.gmftool#//@palette/@tools.3/@tools.6"/>
       <diagramNode
-          href="iaml.gmfgraph#DecisionCondition"/>
+          href="iaml.gmfgraph#PrimitiveCondition"/>
     </ownedChild>
   </nodes>
   <nodes>
@@ -380,22 +390,27 @@
         href="iaml.ecore#//DomainObjectInstance/empty"/>
     <ownedChild>
       <domainMetaElement
-          href="iaml.ecore#//operations/DecisionCondition"/>
+          href="iaml.ecore#//PrimitiveCondition"/>
       <domainSpecialization
-          body="return domainElement instanceof org.openiaml.model.model.operations.DecisionCondition &#xD;&#xA;&amp;&amp; domainElement.eContainingFeature().getName()&#xD;&#xA;.equals(&quot;empty&quot;);"
+          body="return domainElement instanceof org.openiaml.model.model.PrimitiveCondition &#xD;&#xA;&amp;&amp; domainElement.eContainingFeature().getName()&#xD;&#xA;.equals(&quot;empty&quot;);"
           language="java"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
-            href="iaml.gmfgraph#DecisionConditionName"/>
+            href="iaml.gmfgraph#PrimitiveConditionName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveConditionParentName"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="domain_object_instance.gmftool#//@palette/@tools.3/@tools.7"/>
       <diagramNode
-          href="iaml.gmfgraph#DecisionCondition"/>
+          href="iaml.gmfgraph#PrimitiveCondition"/>
     </ownedChild>
   </nodes>
   <nodes>

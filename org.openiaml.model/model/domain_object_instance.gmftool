@@ -198,41 +198,41 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="DecisionCondition [hasPrevious]"
-          description="Create new DecisionCondition [hasPrevious]">
+          title="PrimitiveCondition [hasPrevious]"
+          description="Create new PrimitiveCondition [hasPrevious]">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/DecisionCondition.gif"
+            path="icons/full/obj16/PrimitiveCondition.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/DecisionCondition.gif"
+            path="icons/full/obj32/PrimitiveCondition.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="DecisionCondition [hasNext]"
-          description="Create new DecisionCondition [hasNext]">
+          title="PrimitiveCondition [hasNext]"
+          description="Create new PrimitiveCondition [hasNext]">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/DecisionCondition.gif"
+            path="icons/full/obj16/PrimitiveCondition.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/DecisionCondition.gif"
+            path="icons/full/obj32/PrimitiveCondition.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="DecisionCondition [empty]"
-          description="Create new DecisionCondition [empty]">
+          title="PrimitiveCondition [empty]"
+          description="Create new PrimitiveCondition [empty]">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/DecisionCondition.gif"
+            path="icons/full/obj16/PrimitiveCondition.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/DecisionCondition.gif"
+            path="icons/full/obj32/PrimitiveCondition.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
       <tools

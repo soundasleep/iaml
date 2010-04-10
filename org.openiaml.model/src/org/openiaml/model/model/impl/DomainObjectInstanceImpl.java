@@ -17,11 +17,14 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.Editable;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.ParameterEdgeDestination;
 import org.openiaml.model.model.wires.ParameterEdgesSource;
@@ -40,6 +43,15 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.impl.DomainObjectInstanceImpl#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainObjectInstanceImpl#getStrQuery <em>Str Query</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainObjectInstanceImpl#isAutosave <em>Autosave</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.DomainObjectInstanceImpl#getOnIterate <em>On Iterate</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.DomainObjectInstanceImpl#getPrevious <em>Previous</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.DomainObjectInstanceImpl#getNext <em>Next</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.DomainObjectInstanceImpl#getReset <em>Reset</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.DomainObjectInstanceImpl#getSkip <em>Skip</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.DomainObjectInstanceImpl#getHasPrevious <em>Has Previous</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.DomainObjectInstanceImpl#getHasNext <em>Has Next</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.DomainObjectInstanceImpl#getEmpty <em>Empty</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.DomainObjectInstanceImpl#getResults <em>Results</em>}</li>
  * </ul>
  * </p>
  *
@@ -125,6 +137,96 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 	 * @ordered
 	 */
 	protected boolean autosave = AUTOSAVE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getOnIterate() <em>On Iterate</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOnIterate()
+	 * @generated
+	 * @ordered
+	 */
+	protected EventTrigger onIterate;
+
+	/**
+	 * The cached value of the '{@link #getPrevious() <em>Previous</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPrevious()
+	 * @generated
+	 * @ordered
+	 */
+	protected Operation previous;
+
+	/**
+	 * The cached value of the '{@link #getNext() <em>Next</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNext()
+	 * @generated
+	 * @ordered
+	 */
+	protected Operation next;
+
+	/**
+	 * The cached value of the '{@link #getReset() <em>Reset</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReset()
+	 * @generated
+	 * @ordered
+	 */
+	protected Operation reset;
+
+	/**
+	 * The cached value of the '{@link #getSkip() <em>Skip</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSkip()
+	 * @generated
+	 * @ordered
+	 */
+	protected Operation skip;
+
+	/**
+	 * The cached value of the '{@link #getHasPrevious() <em>Has Previous</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHasPrevious()
+	 * @generated
+	 * @ordered
+	 */
+	protected Condition hasPrevious;
+
+	/**
+	 * The cached value of the '{@link #getHasNext() <em>Has Next</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHasNext()
+	 * @generated
+	 * @ordered
+	 */
+	protected Condition hasNext;
+
+	/**
+	 * The cached value of the '{@link #getEmpty() <em>Empty</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEmpty()
+	 * @generated
+	 * @ordered
+	 */
+	protected Condition empty;
+
+	/**
+	 * The cached value of the '{@link #getResults() <em>Results</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getResults()
+	 * @generated
+	 * @ordered
+	 */
+	protected Property results;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -271,6 +373,393 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EventTrigger getOnIterate() {
+		return onIterate;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOnIterate(EventTrigger newOnIterate, NotificationChain msgs) {
+		EventTrigger oldOnIterate = onIterate;
+		onIterate = newOnIterate;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_OBJECT_INSTANCE__ON_ITERATE, oldOnIterate, newOnIterate);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOnIterate(EventTrigger newOnIterate) {
+		if (newOnIterate != onIterate) {
+			NotificationChain msgs = null;
+			if (onIterate != null)
+				msgs = ((InternalEObject)onIterate).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOMAIN_OBJECT_INSTANCE__ON_ITERATE, null, msgs);
+			if (newOnIterate != null)
+				msgs = ((InternalEObject)newOnIterate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOMAIN_OBJECT_INSTANCE__ON_ITERATE, null, msgs);
+			msgs = basicSetOnIterate(newOnIterate, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_OBJECT_INSTANCE__ON_ITERATE, newOnIterate, newOnIterate));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Operation getPrevious() {
+		return previous;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetPrevious(Operation newPrevious, NotificationChain msgs) {
+		Operation oldPrevious = previous;
+		previous = newPrevious;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_OBJECT_INSTANCE__PREVIOUS, oldPrevious, newPrevious);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPrevious(Operation newPrevious) {
+		if (newPrevious != previous) {
+			NotificationChain msgs = null;
+			if (previous != null)
+				msgs = ((InternalEObject)previous).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOMAIN_OBJECT_INSTANCE__PREVIOUS, null, msgs);
+			if (newPrevious != null)
+				msgs = ((InternalEObject)newPrevious).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOMAIN_OBJECT_INSTANCE__PREVIOUS, null, msgs);
+			msgs = basicSetPrevious(newPrevious, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_OBJECT_INSTANCE__PREVIOUS, newPrevious, newPrevious));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Operation getNext() {
+		return next;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetNext(Operation newNext, NotificationChain msgs) {
+		Operation oldNext = next;
+		next = newNext;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_OBJECT_INSTANCE__NEXT, oldNext, newNext);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNext(Operation newNext) {
+		if (newNext != next) {
+			NotificationChain msgs = null;
+			if (next != null)
+				msgs = ((InternalEObject)next).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOMAIN_OBJECT_INSTANCE__NEXT, null, msgs);
+			if (newNext != null)
+				msgs = ((InternalEObject)newNext).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOMAIN_OBJECT_INSTANCE__NEXT, null, msgs);
+			msgs = basicSetNext(newNext, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_OBJECT_INSTANCE__NEXT, newNext, newNext));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Operation getReset() {
+		return reset;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetReset(Operation newReset, NotificationChain msgs) {
+		Operation oldReset = reset;
+		reset = newReset;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_OBJECT_INSTANCE__RESET, oldReset, newReset);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setReset(Operation newReset) {
+		if (newReset != reset) {
+			NotificationChain msgs = null;
+			if (reset != null)
+				msgs = ((InternalEObject)reset).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOMAIN_OBJECT_INSTANCE__RESET, null, msgs);
+			if (newReset != null)
+				msgs = ((InternalEObject)newReset).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOMAIN_OBJECT_INSTANCE__RESET, null, msgs);
+			msgs = basicSetReset(newReset, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_OBJECT_INSTANCE__RESET, newReset, newReset));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Operation getSkip() {
+		return skip;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetSkip(Operation newSkip, NotificationChain msgs) {
+		Operation oldSkip = skip;
+		skip = newSkip;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_OBJECT_INSTANCE__SKIP, oldSkip, newSkip);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSkip(Operation newSkip) {
+		if (newSkip != skip) {
+			NotificationChain msgs = null;
+			if (skip != null)
+				msgs = ((InternalEObject)skip).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOMAIN_OBJECT_INSTANCE__SKIP, null, msgs);
+			if (newSkip != null)
+				msgs = ((InternalEObject)newSkip).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOMAIN_OBJECT_INSTANCE__SKIP, null, msgs);
+			msgs = basicSetSkip(newSkip, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_OBJECT_INSTANCE__SKIP, newSkip, newSkip));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Condition getHasPrevious() {
+		return hasPrevious;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetHasPrevious(Condition newHasPrevious, NotificationChain msgs) {
+		Condition oldHasPrevious = hasPrevious;
+		hasPrevious = newHasPrevious;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_OBJECT_INSTANCE__HAS_PREVIOUS, oldHasPrevious, newHasPrevious);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setHasPrevious(Condition newHasPrevious) {
+		if (newHasPrevious != hasPrevious) {
+			NotificationChain msgs = null;
+			if (hasPrevious != null)
+				msgs = ((InternalEObject)hasPrevious).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOMAIN_OBJECT_INSTANCE__HAS_PREVIOUS, null, msgs);
+			if (newHasPrevious != null)
+				msgs = ((InternalEObject)newHasPrevious).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOMAIN_OBJECT_INSTANCE__HAS_PREVIOUS, null, msgs);
+			msgs = basicSetHasPrevious(newHasPrevious, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_OBJECT_INSTANCE__HAS_PREVIOUS, newHasPrevious, newHasPrevious));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Condition getHasNext() {
+		return hasNext;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetHasNext(Condition newHasNext, NotificationChain msgs) {
+		Condition oldHasNext = hasNext;
+		hasNext = newHasNext;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_OBJECT_INSTANCE__HAS_NEXT, oldHasNext, newHasNext);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setHasNext(Condition newHasNext) {
+		if (newHasNext != hasNext) {
+			NotificationChain msgs = null;
+			if (hasNext != null)
+				msgs = ((InternalEObject)hasNext).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOMAIN_OBJECT_INSTANCE__HAS_NEXT, null, msgs);
+			if (newHasNext != null)
+				msgs = ((InternalEObject)newHasNext).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOMAIN_OBJECT_INSTANCE__HAS_NEXT, null, msgs);
+			msgs = basicSetHasNext(newHasNext, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_OBJECT_INSTANCE__HAS_NEXT, newHasNext, newHasNext));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Condition getEmpty() {
+		return empty;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetEmpty(Condition newEmpty, NotificationChain msgs) {
+		Condition oldEmpty = empty;
+		empty = newEmpty;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_OBJECT_INSTANCE__EMPTY, oldEmpty, newEmpty);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEmpty(Condition newEmpty) {
+		if (newEmpty != empty) {
+			NotificationChain msgs = null;
+			if (empty != null)
+				msgs = ((InternalEObject)empty).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOMAIN_OBJECT_INSTANCE__EMPTY, null, msgs);
+			if (newEmpty != null)
+				msgs = ((InternalEObject)newEmpty).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOMAIN_OBJECT_INSTANCE__EMPTY, null, msgs);
+			msgs = basicSetEmpty(newEmpty, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_OBJECT_INSTANCE__EMPTY, newEmpty, newEmpty));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Property getResults() {
+		return results;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetResults(Property newResults, NotificationChain msgs) {
+		Property oldResults = results;
+		results = newResults;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_OBJECT_INSTANCE__RESULTS, oldResults, newResults);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setResults(Property newResults) {
+		if (newResults != results) {
+			NotificationChain msgs = null;
+			if (results != null)
+				msgs = ((InternalEObject)results).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOMAIN_OBJECT_INSTANCE__RESULTS, null, msgs);
+			if (newResults != null)
+				msgs = ((InternalEObject)newResults).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOMAIN_OBJECT_INSTANCE__RESULTS, null, msgs);
+			msgs = basicSetResults(newResults, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_OBJECT_INSTANCE__RESULTS, newResults, newResults));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -299,6 +788,24 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 				return basicSetOnEdit(null, msgs);
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE__ATTRIBUTES:
 				return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__ON_ITERATE:
+				return basicSetOnIterate(null, msgs);
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__PREVIOUS:
+				return basicSetPrevious(null, msgs);
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__NEXT:
+				return basicSetNext(null, msgs);
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__RESET:
+				return basicSetReset(null, msgs);
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__SKIP:
+				return basicSetSkip(null, msgs);
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__HAS_PREVIOUS:
+				return basicSetHasPrevious(null, msgs);
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__HAS_NEXT:
+				return basicSetHasNext(null, msgs);
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__EMPTY:
+				return basicSetEmpty(null, msgs);
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__RESULTS:
+				return basicSetResults(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -323,6 +830,24 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 				return getStrQuery();
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE__AUTOSAVE:
 				return isAutosave();
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__ON_ITERATE:
+				return getOnIterate();
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__PREVIOUS:
+				return getPrevious();
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__NEXT:
+				return getNext();
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__RESET:
+				return getReset();
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__SKIP:
+				return getSkip();
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__HAS_PREVIOUS:
+				return getHasPrevious();
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__HAS_NEXT:
+				return getHasNext();
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__EMPTY:
+				return getEmpty();
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__RESULTS:
+				return getResults();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -357,6 +882,33 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE__AUTOSAVE:
 				setAutosave((Boolean)newValue);
 				return;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__ON_ITERATE:
+				setOnIterate((EventTrigger)newValue);
+				return;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__PREVIOUS:
+				setPrevious((Operation)newValue);
+				return;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__NEXT:
+				setNext((Operation)newValue);
+				return;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__RESET:
+				setReset((Operation)newValue);
+				return;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__SKIP:
+				setSkip((Operation)newValue);
+				return;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__HAS_PREVIOUS:
+				setHasPrevious((Condition)newValue);
+				return;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__HAS_NEXT:
+				setHasNext((Condition)newValue);
+				return;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__EMPTY:
+				setEmpty((Condition)newValue);
+				return;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__RESULTS:
+				setResults((Property)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -387,6 +939,33 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE__AUTOSAVE:
 				setAutosave(AUTOSAVE_EDEFAULT);
 				return;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__ON_ITERATE:
+				setOnIterate((EventTrigger)null);
+				return;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__PREVIOUS:
+				setPrevious((Operation)null);
+				return;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__NEXT:
+				setNext((Operation)null);
+				return;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__RESET:
+				setReset((Operation)null);
+				return;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__SKIP:
+				setSkip((Operation)null);
+				return;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__HAS_PREVIOUS:
+				setHasPrevious((Condition)null);
+				return;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__HAS_NEXT:
+				setHasNext((Condition)null);
+				return;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__EMPTY:
+				setEmpty((Condition)null);
+				return;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__RESULTS:
+				setResults((Property)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -411,6 +990,24 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 				return STR_QUERY_EDEFAULT == null ? strQuery != null : !STR_QUERY_EDEFAULT.equals(strQuery);
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE__AUTOSAVE:
 				return autosave != AUTOSAVE_EDEFAULT;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__ON_ITERATE:
+				return onIterate != null;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__PREVIOUS:
+				return previous != null;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__NEXT:
+				return next != null;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__RESET:
+				return reset != null;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__SKIP:
+				return skip != null;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__HAS_PREVIOUS:
+				return hasPrevious != null;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__HAS_NEXT:
+				return hasNext != null;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__EMPTY:
+				return empty != null;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__RESULTS:
+				return results != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -4364,13 +4364,94 @@ public interface ModelPackage extends EPackage {
 	int DOMAIN_OBJECT_INSTANCE__AUTOSAVE = APPLICATION_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>On Iterate</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE__ON_ITERATE = APPLICATION_ELEMENT_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Previous</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE__PREVIOUS = APPLICATION_ELEMENT_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Next</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE__NEXT = APPLICATION_ELEMENT_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Reset</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE__RESET = APPLICATION_ELEMENT_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>Skip</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE__SKIP = APPLICATION_ELEMENT_FEATURE_COUNT + 10;
+
+	/**
+	 * The feature id for the '<em><b>Has Previous</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE__HAS_PREVIOUS = APPLICATION_ELEMENT_FEATURE_COUNT + 11;
+
+	/**
+	 * The feature id for the '<em><b>Has Next</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE__HAS_NEXT = APPLICATION_ELEMENT_FEATURE_COUNT + 12;
+
+	/**
+	 * The feature id for the '<em><b>Empty</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE__EMPTY = APPLICATION_ELEMENT_FEATURE_COUNT + 13;
+
+	/**
+	 * The feature id for the '<em><b>Results</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE__RESULTS = APPLICATION_ELEMENT_FEATURE_COUNT + 14;
+
+	/**
 	 * The number of structural features of the '<em>Domain Object Instance</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_OBJECT_INSTANCE_FEATURE_COUNT = APPLICATION_ELEMENT_FEATURE_COUNT + 6;
+	int DOMAIN_OBJECT_INSTANCE_FEATURE_COUNT = APPLICATION_ELEMENT_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
@@ -6938,6 +7019,105 @@ public interface ModelPackage extends EPackage {
 	EAttribute getDomainObjectInstance_Autosave();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.openiaml.model.model.DomainObjectInstance#getOnIterate <em>On Iterate</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>On Iterate</em>'.
+	 * @see org.openiaml.model.model.DomainObjectInstance#getOnIterate()
+	 * @see #getDomainObjectInstance()
+	 * @generated
+	 */
+	EReference getDomainObjectInstance_OnIterate();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.openiaml.model.model.DomainObjectInstance#getPrevious <em>Previous</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Previous</em>'.
+	 * @see org.openiaml.model.model.DomainObjectInstance#getPrevious()
+	 * @see #getDomainObjectInstance()
+	 * @generated
+	 */
+	EReference getDomainObjectInstance_Previous();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.openiaml.model.model.DomainObjectInstance#getNext <em>Next</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Next</em>'.
+	 * @see org.openiaml.model.model.DomainObjectInstance#getNext()
+	 * @see #getDomainObjectInstance()
+	 * @generated
+	 */
+	EReference getDomainObjectInstance_Next();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.openiaml.model.model.DomainObjectInstance#getReset <em>Reset</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Reset</em>'.
+	 * @see org.openiaml.model.model.DomainObjectInstance#getReset()
+	 * @see #getDomainObjectInstance()
+	 * @generated
+	 */
+	EReference getDomainObjectInstance_Reset();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.openiaml.model.model.DomainObjectInstance#getSkip <em>Skip</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Skip</em>'.
+	 * @see org.openiaml.model.model.DomainObjectInstance#getSkip()
+	 * @see #getDomainObjectInstance()
+	 * @generated
+	 */
+	EReference getDomainObjectInstance_Skip();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.openiaml.model.model.DomainObjectInstance#getHasPrevious <em>Has Previous</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Has Previous</em>'.
+	 * @see org.openiaml.model.model.DomainObjectInstance#getHasPrevious()
+	 * @see #getDomainObjectInstance()
+	 * @generated
+	 */
+	EReference getDomainObjectInstance_HasPrevious();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.openiaml.model.model.DomainObjectInstance#getHasNext <em>Has Next</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Has Next</em>'.
+	 * @see org.openiaml.model.model.DomainObjectInstance#getHasNext()
+	 * @see #getDomainObjectInstance()
+	 * @generated
+	 */
+	EReference getDomainObjectInstance_HasNext();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.openiaml.model.model.DomainObjectInstance#getEmpty <em>Empty</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Empty</em>'.
+	 * @see org.openiaml.model.model.DomainObjectInstance#getEmpty()
+	 * @see #getDomainObjectInstance()
+	 * @generated
+	 */
+	EReference getDomainObjectInstance_Empty();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.openiaml.model.model.DomainObjectInstance#getResults <em>Results</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Results</em>'.
+	 * @see org.openiaml.model.model.DomainObjectInstance#getResults()
+	 * @see #getDomainObjectInstance()
+	 * @generated
+	 */
+	EReference getDomainObjectInstance_Results();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.Scope <em>Scope</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8159,6 +8339,78 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DOMAIN_OBJECT_INSTANCE__AUTOSAVE = eINSTANCE.getDomainObjectInstance_Autosave();
+
+		/**
+		 * The meta object literal for the '<em><b>On Iterate</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOMAIN_OBJECT_INSTANCE__ON_ITERATE = eINSTANCE.getDomainObjectInstance_OnIterate();
+
+		/**
+		 * The meta object literal for the '<em><b>Previous</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOMAIN_OBJECT_INSTANCE__PREVIOUS = eINSTANCE.getDomainObjectInstance_Previous();
+
+		/**
+		 * The meta object literal for the '<em><b>Next</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOMAIN_OBJECT_INSTANCE__NEXT = eINSTANCE.getDomainObjectInstance_Next();
+
+		/**
+		 * The meta object literal for the '<em><b>Reset</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOMAIN_OBJECT_INSTANCE__RESET = eINSTANCE.getDomainObjectInstance_Reset();
+
+		/**
+		 * The meta object literal for the '<em><b>Skip</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOMAIN_OBJECT_INSTANCE__SKIP = eINSTANCE.getDomainObjectInstance_Skip();
+
+		/**
+		 * The meta object literal for the '<em><b>Has Previous</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOMAIN_OBJECT_INSTANCE__HAS_PREVIOUS = eINSTANCE.getDomainObjectInstance_HasPrevious();
+
+		/**
+		 * The meta object literal for the '<em><b>Has Next</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOMAIN_OBJECT_INSTANCE__HAS_NEXT = eINSTANCE.getDomainObjectInstance_HasNext();
+
+		/**
+		 * The meta object literal for the '<em><b>Empty</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOMAIN_OBJECT_INSTANCE__EMPTY = eINSTANCE.getDomainObjectInstance_Empty();
+
+		/**
+		 * The meta object literal for the '<em><b>Results</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOMAIN_OBJECT_INSTANCE__RESULTS = eINSTANCE.getDomainObjectInstance_Results();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.impl.ScopeImpl <em>Scope</em>}' class.

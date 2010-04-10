@@ -36,6 +36,7 @@ public class AllModel0_5CodegenTests {
 		suite.addTestSuite(MapTextFieldInput.class);
 		suite.addTestSuite(MapFormInput.class);
 		suite.addTestSuite(MapFormInputGoogleMaps.class);
+		suite.addTestSuite(IteratedSyncWires.class);
 
 		return suite;
 	}

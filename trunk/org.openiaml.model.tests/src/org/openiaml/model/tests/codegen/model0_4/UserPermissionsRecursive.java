@@ -52,9 +52,16 @@ public class UserPermissionsRecursive extends AbstractDefaultRoleUserLoginTestCa
 		
 		// if we then try to go to 'target', we likewise will also be prevented		
 		// this should NOT throw an exception
-		gotoSitemapWithProblem(sitemap, "target");
+		try {
+			gotoSitemapWithProblem(sitemap, "target");
+			fail("Expected to not be able to go to 'target' page");
+		} catch (FailingHttpStatusCodeException e) {
+			// expected
+			checkExceptionContains(e, "User of type 'current instance' did not have permission 'a permission'");
+		}
+		assertProblem();
 		
-		// rather, we should be back on the login page
+		// we should be back on the login page
 		assertTitleEquals("login");
 		
 		// with a problem

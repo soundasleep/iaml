@@ -329,6 +329,31 @@ function queued_email_send(email_id, function_queue) {
 	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
+function queued_instance_next(instance_id, function_queue) {
+	var url = 'instance_next.php?instance_id=' + encodeURIComponent(instance_id) 
+		+ '&frame_id=' + encodeURIComponent(frame_id);
+	execute_queued_url(url, 'set_domain_attribute', function_queue);
+}
+
+function queued_instance_previous(instance_id, function_queue) {
+	var url = 'instance_previous.php?instance_id=' + encodeURIComponent(instance_id) 
+		+ '&frame_id=' + encodeURIComponent(frame_id);
+	execute_queued_url(url, 'set_domain_attribute', function_queue);
+}
+
+function queued_instance_reset(instance_id, function_queue) {
+	var url = 'instance_reset.php?instance_id=' + encodeURIComponent(instance_id) 
+		+ '&frame_id=' + encodeURIComponent(frame_id);
+	execute_queued_url(url, 'set_domain_attribute', function_queue);
+}
+
+function queued_instance_skip(instance_id, arg0, function_queue) {
+	var url = 'instance_skip.php?instance_id=' + encodeURIComponent(instance_id) 
+		+ '&arg0=' + encodeURIComponent(arg0);
+		+ '&frame_id=' + encodeURIComponent(frame_id);
+	execute_queued_url(url, 'set_domain_attribute', function_queue);
+}
+
 /* call a remote operation (only one attribute) */
 function call_remote_event(container, operation_name, arg0, arg1, function_queue) {
 	var url = 'call_remote_event.php?container=' + encodeURIComponent(container)

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.openiaml.model.tests.PhpRuntimeExceptionException;
 import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
 
 /**
@@ -23,6 +24,7 @@ public class IteratedSyncWires extends DatabaseCodegenTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		root = loadAndCodegen(IteratedSyncWires.class);
+		initialiseDatabase();
 	}
 
 	/**
@@ -114,8 +116,14 @@ public class IteratedSyncWires extends DatabaseCodegenTestCase {
 		assertContent3();
 		
 		// but if we click it again, we get an error
-		clickButtonWithText("next");
-		assertProblem();	// shouldn't an exception be thrown?
+		try {
+			clickButtonWithText("next");
+			fail("Should have thrown an exception");
+		} catch (PhpRuntimeExceptionException e) {
+			// expected
+			assertContains("No results found for query", e.getMessage());
+		}
+		assertProblem();
 
 	}
 	
@@ -125,7 +133,7 @@ public class IteratedSyncWires extends DatabaseCodegenTestCase {
 	 * 
 	 * @throws Exception
 	 */
-	public void testNavigatPossiblyNext() throws Exception {
+	public void testNavigatePossiblyNext() throws Exception {
 		beginAtSitemapThenPage("Home");
 		
 		clickButtonWithText("possibly next");
@@ -174,8 +182,15 @@ public class IteratedSyncWires extends DatabaseCodegenTestCase {
 	public void testPreviousFails() throws Exception {
 		beginAtSitemapThenPage("Home");
 		
-		clickButtonWithText("previous");
-		assertProblem(); // TODO shouldnt we throw an exception?
+		// but if we click it again, we get an error
+		try {
+			clickButtonWithText("previous");
+			fail("Should have thrown an exception");
+		} catch (PhpRuntimeExceptionException e) {
+			// expected
+			assertContains("No results found for query", e.getMessage());
+		}
+		assertProblem();
 
 	}
 	
@@ -363,10 +378,10 @@ public class IteratedSyncWires extends DatabaseCodegenTestCase {
 	@Override
 	protected List<String> getDatabaseInitialisers() {
 		List<String> s = new ArrayList<String>();
-		s.add("CREATE TABLE User (generated_primary_key INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(64) NOT NULL, content VARCHAR(64) NOT NULL, posted VARCHAR(64) NOT NULL)");
-		s.add("INSERT INTO User (generated_primary_key, title, content, posted) VALUES (1, 'Title 1', 'Content 1', '2010-01-01 11:11:00')");
-		s.add("INSERT INTO User (generated_primary_key, title, content, posted) VALUES (2, 'Title 2', 'Content 2', '2010-02-01 12:11:00')");
-		s.add("INSERT INTO User (generated_primary_key, title, content, posted) VALUES (3, 'Title 3', 'Content 3', '2010-01-03 11:13:00')");
+		s.add("CREATE TABLE News (generated_primary_key INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(64) NOT NULL, content VARCHAR(64) NOT NULL, posted VARCHAR(64) NOT NULL)");
+		s.add("INSERT INTO News (generated_primary_key, title, content, posted) VALUES (1, 'Title 1', 'Content 1', '2010-01-01 11:11:00')");
+		s.add("INSERT INTO News (generated_primary_key, title, content, posted) VALUES (2, 'Title 2', 'Content 2', '2010-02-01 12:11:00')");
+		s.add("INSERT INTO News (generated_primary_key, title, content, posted) VALUES (3, 'Title 3', 'Content 3', '2010-01-03 11:13:00')");
 		return s;
 	}
 

@@ -686,6 +686,16 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 		}
 		return result;
 	}
+
+	/**
+	 * Assert that the given haystack String contains the given needle String.
+	 * 
+	 * @param needle
+	 * @param haystack
+	 */
+	public void assertContains(String needle, String haystack) {
+		assertTrue("String '" + haystack + "' does not contain needle '" + needle + "'", haystack.contains(needle));
+	}
 	
 	/**
 	 * XPath helper methods.

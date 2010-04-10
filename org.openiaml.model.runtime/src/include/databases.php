@@ -140,9 +140,15 @@ class DatabaseQuery {
  *
  * Return the final composed result, or null if
  * none can be found.
+ *
+ * @param offset the offset, or 0 if there is none
  */
-function evaluate_select_wire($db_name, $source_id, $source_class, $query, $args) {
-	log_message("[select wire] Evaluate: db = $db_name, source_id = $source_id, source_class = $source_class, query = $query"); 
+function evaluate_select_wire($db_name, $source_id, $source_class, $query, $args, $offset = 0) {
+	log_message("[select wire] Evaluate: db = $db_name, source_id = $source_id, source_class = $source_class, query = $query, offset = $offset");
+	
+	if ($offset < 0) {
+		throw new IamlIllegalArgumentException("Offset cannot be negative: $offset");
+	} 
 
 	// get all joins
 	global $compose_domain_joins_done_already;
@@ -151,7 +157,10 @@ function evaluate_select_wire($db_name, $source_id, $source_class, $query, $args
 	
 	$joined_query = "SELECT * FROM $source_class " 
 		. implode(" ", $joins)
-		. " WHERE $query";
+		. " WHERE $query LIMIT 1"; /* we only ever select one row at a time with a select wire */
+	if ($offset !== 0) {
+		$joined_query .= " OFFSET " . (int) $offset;
+	}
 	
 	log_message("[select wire] Evaluate: Composed query: " . preg_replace("/[ \r\n\t]+/im", " ", $joined_query));
 		

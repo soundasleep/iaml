@@ -268,14 +268,7 @@ public class DomainInheritance extends DatabaseCodegenTestCase {
 	private String trimWhitespace(String s) {
 		return s.replaceAll("\\s+", " ");
 	}
-	
-	/**
-	 * Assert that the given text contains the given needle.
-	 */
-	private void assertContains(String needle, String text) {
-		assertTrue("Needle '" + needle + "' not found in text '" + text + "'", text.contains(needle));
-	}
-	
+
 	/**
 	 * Assert that the given text does not contains the given needle.
 	 */

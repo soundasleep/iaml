@@ -9,6 +9,7 @@
 «DEFINE databaseDump FOR model::InternetApplication»
 <?php
 
+«EXPAND template::Template::setPath("")»
 require("config.php"); // runtime library configuration
 require(IAML_RUNTIME_ROOT . "global.php"); // runtime library import
 
@@ -22,7 +23,11 @@ require(IAML_RUNTIME_ROOT . "global.php"); // runtime library import
 </head>
 		
 <body id="database_dump">
-	<div style="font-size:small; text-align: right;"><a href="clear_session.php">clear session</a> - <a href="sitemap.html">sitemap</a></div>
+	<div style="font-size:small; text-align: right;">
+		<a href="clear_session.php">clear session</a> - 
+		<a href="view_log.php">view log</a> - 
+		<a href="sitemap.html">sitemap</a>
+	</div>
 
 <?php
 $databases = array(

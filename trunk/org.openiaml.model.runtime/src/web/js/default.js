@@ -82,6 +82,7 @@ function store_event(frame_id, event_name, arg0) {
  * will be queued up properly.
  *
  * Update 0.4.2: will <em>always</em> execute instructions
+ * @param ignore_updates if true, will ignore on-screen updates
  */
 function execute_queued_url(url, counter, function_queue) {
 	store_event_function = function() {
@@ -272,14 +273,20 @@ function store_db(attribute_id, arg0) {
 }
 
 /* save a session variable (only one attribute) */
-function set_session(id, arg0, function_queue) {
+function set_session(id, arg0, function_queue, ignore_updates) {
 	var url = 'set_session.php?id=' + encodeURIComponent(id) + '&frame=' + encodeURIComponent(frame_id) + '&arg0=' + encodeURIComponent(arg0);
+	if (ignore_updates) {
+		url += '&ignore_updates=true';
+	}
 	execute_queued_url(url, 'set_session', function_queue);
 }
 
 /* save a server variable (only one attribute) */
-function set_application_value(id, arg0, function_queue) {
+function set_application_value(id, arg0, function_queue, ignore_updates) {
 	var url = 'set_application_value.php?id=' + encodeURIComponent(id) + '&frame=' + encodeURIComponent(frame_id) + '&arg0=' + encodeURIComponent(arg0);
+	if (ignore_updates) {
+		url += '&ignore_updates=true';
+	}
 	execute_queued_url(url, 'set_application_value', function_queue);
 }
 

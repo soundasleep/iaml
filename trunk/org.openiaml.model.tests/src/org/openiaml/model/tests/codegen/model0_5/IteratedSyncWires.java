@@ -310,6 +310,7 @@ public class IteratedSyncWires extends DatabaseCodegenTestCase {
 		{
 			String id = getLabelIDForText("title");
 			setLabeledFormElementField(id, "New Title 1");
+			assertLabeledFieldEquals(id, "New Title 1");
 		}
 		
 		clickButtonWithText("save current");

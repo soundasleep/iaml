@@ -190,6 +190,14 @@ function update_«safeName()»_attribute_instance($instance, $attribute_name, $arg
 		
 		// have we resolved the attribute?
 		if ($attribute_name_resolved !== null) {
+			«REM»
+				ideally we would use a query "UPDATE .. LIMIT 1 OFFSET (int) $offset"
+				but PHP's SQlite does not define SQLITE_ENABLE_UPDATE_DELETE_LIMIT.
+				as a result, this query is not available.
+				
+				TODO when migrating to a different database, this approach should
+				be used instead.
+			«ENDREM»
 			$query = "UPDATE «safeNameString(name)»
 				SET $attribute_name_resolved = ?
 				WHERE «safeNameString(pk.name)» = ?";

@@ -254,9 +254,10 @@ public class LoginHandlerInstance extends InferenceTestCase {
 	public void testLoginPage() throws Exception {
 		root = loadAndInfer(LoginHandlerInstance.class);
 
-		Session session = assertHasSession(root, "my session");
+		Session loginSession = assertHasSession(root, "login handler login");
+		assertGenerated(loginSession);
 
-		Frame login = assertHasFrame(root, "login");
+		Frame login = assertHasFrame(loginSession, "login");
 		assertGenerated(login);
 
 		// it should contain a form
@@ -272,7 +273,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		assertGenerated(button);
 
 		// a generated operation will handle the login
-		Operation op = assertHasOperation(session, "do login");
+		Operation op = assertHasOperation(loginSession, "do login");
 		assertGenerated(op);
 
 		// button has an 'onClick' run wire
@@ -375,7 +376,8 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		Session session = assertHasSession(root, "my session");
 
 		// find 'do login'
-		Operation op = assertHasOperation(session, "do login");
+		Session loginSession = assertHasSession(root, "login handler login");
+		Operation op = assertHasOperation(loginSession, "do login");
 		assertGenerated(op);
 
 		// check
@@ -397,7 +399,8 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		assertGenerated(check);
 
 		// destination page
-		Frame login = assertHasFrame(root, "login");
+		Session loginSession = assertHasSession(root, "login handler login");
+		Frame login = assertHasFrame(loginSession, "login");
 		{
 			assertHasNoWiresFromTo(root, check, login);
 			NavigateAction wire = assertHasNavigateAction(root, check, login, "fail");

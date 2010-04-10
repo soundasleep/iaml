@@ -5,6 +5,7 @@
 «DEFINE updateAllFrameProperties FOR model::InternetApplication-»
 /* Is there additional actions we should do on the client-side once this
  * property has changed? */
+if (!require_get("ignore_updates", 0)) { 
 try {
 	if (!isset($frame_id) || !$frame_id) {
 		throw new IamlRuntimeException("Invalid frame ID: frame ID not set");
@@ -33,6 +34,7 @@ try {
 	echo "\nredirect " 
 		. escape_parameter_string($url);				
 	die;
+}
 }
 «ENDDEFINE»
 

@@ -45,9 +45,9 @@
 		/* for attributes with 'autosave' set to false */
 		function queue_store_domain_attribute_«safeName()»(arg0) {
 			«IF containingSession() != null»
-				set_session("instance_queue_«safeName(containingSession())-»_«safeNameString(id)-»", arg0);
+				set_session("instance_queue_«safeName(containingSession())-»_«safeNameString(id)-»", arg0, null, true);
 			«ELSE»
-				set_application_value("instance_queue_«safeNameString(id)-»", arg0);
+				set_application_value("instance_queue_«safeNameString(id)-»", arg0, null, true);
 			«ENDIF» 
 		}
 		
@@ -179,11 +179,11 @@
 «DEFINE evaluateSelectWireStore FOR model::wires::SelectWire»
 	/* selection wire «this» (for storing values), assumes $arg0 exists */
 	
-	«IF model::DomainObjectInstance.isInstance(to.eContainer)»
+	«IF model::DomainObjectInstance.isInstance(to.eContainer) || model::DomainObjectInstance.isInstance(to)»
 		// get the current instance (complete subclass) as an associative
 		// array (also deals with incoming values from superclasses, etc)
 		$instance = get_object_instance_«safeName(to)»();
-
+		
 		// recurse through the tree to find the attribute, and save it
 		«LET (model::DomainObject) from AS fromObject»
 			$db_query = update_«safeName(fromObject)»_attribute_instance(

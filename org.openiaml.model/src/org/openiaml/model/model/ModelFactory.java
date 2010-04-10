@@ -206,6 +206,15 @@ public interface ModelFactory extends EFactory {
 	QueryParameter createQueryParameter();
 
 	/**
+	 * Returns a new object of class '<em>Primitive Condition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Primitive Condition</em>'.
+	 * @generated
+	 */
+	PrimitiveCondition createPrimitiveCondition();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -46,6 +46,7 @@ import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.PrimitiveCondition;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.QueryParameter;
@@ -656,6 +657,20 @@ public class ModelSwitch<T> {
 				T result = caseActionSource(actionSource);
 				if (result == null) result = caseShouldntContainWires(actionSource);
 				if (result == null) result = caseContainsWires(actionSource);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModelPackage.PRIMITIVE_CONDITION: {
+				PrimitiveCondition primitiveCondition = (PrimitiveCondition)theEObject;
+				T result = casePrimitiveCondition(primitiveCondition);
+				if (result == null) result = caseCondition(primitiveCondition);
+				if (result == null) result = caseWireSource(primitiveCondition);
+				if (result == null) result = caseDataFlowEdgesSource(primitiveCondition);
+				if (result == null) result = caseNamedElement(primitiveCondition);
+				if (result == null) result = caseConditionEdgesSource(primitiveCondition);
+				if (result == null) result = caseShouldntContainWires(primitiveCondition);
+				if (result == null) result = caseGeneratedElement(primitiveCondition);
+				if (result == null) result = caseContainsWires(primitiveCondition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1350,6 +1365,21 @@ public class ModelSwitch<T> {
 	 * @generated
 	 */
 	public T caseActionSource(ActionSource object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Primitive Condition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Primitive Condition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePrimitiveCondition(PrimitiveCondition object) {
 		return null;
 	}
 

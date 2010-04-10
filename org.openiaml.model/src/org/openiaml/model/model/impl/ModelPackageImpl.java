@@ -49,6 +49,7 @@ import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.PrimitiveCondition;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.QueryParameter;
@@ -403,6 +404,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * @generated
 	 */
 	private EClass actionSourceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass primitiveConditionEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -1747,6 +1755,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getPrimitiveCondition() {
+		return primitiveConditionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ModelFactory getModelFactory() {
 		return (ModelFactory)getEFactoryInstance();
 	}
@@ -1954,6 +1971,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		actionSourceEClass = createEClass(ACTION_SOURCE);
 		createEReference(actionSourceEClass, ACTION_SOURCE__OUT_ACTIONS);
+
+		primitiveConditionEClass = createEClass(PRIMITIVE_CONDITION);
 	}
 
 	/**
@@ -2137,6 +2156,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		canBeSyncedEClass.getESuperTypes().add(this.getWireDestination());
 		actionEClass.getESuperTypes().add(this.getGeneratedElement());
 		actionSourceEClass.getESuperTypes().add(this.getShouldntContainWires());
+		primitiveConditionEClass.getESuperTypes().add(this.getCondition());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(namedElementEClass, NamedElement.class, "NamedElement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2323,6 +2343,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(actionSourceEClass, ActionSource.class, "ActionSource", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getActionSource_OutActions(), this.getAction(), this.getAction_From(), "outActions", null, 0, -1, ActionSource.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(primitiveConditionEClass, PrimitiveCondition.class, "PrimitiveCondition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -2600,7 +2622,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "comment", "temporarily contains wires until GMF bug is fixed "
-		   });
+		   });		
+		addAnnotation
+		  (primitiveConditionEClass, 
+		   source, 
+		   new String[] {
+			 "comment", "added in 0.2\r\n_shouldnt_properties removed in 0.4\r\nContainsOperations added in 0.4.1"
+		   });	
 	}
 
 	/**
@@ -2784,7 +2812,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "An {@mode Action} represents the runtime feature of the {@model EventTrigger Event}-{@model Condition}-{@model Action} paradigm. Also see: {@model Wire}"
-		   });	
+		   });				
+		addAnnotation
+		  (primitiveConditionEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "A primitive condition, similar to how {@model PrimitiveOperation}s are primitive {@model Operation}."
+		   });
 	}
 
 } //ModelPackageImpl

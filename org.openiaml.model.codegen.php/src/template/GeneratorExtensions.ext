@@ -389,21 +389,9 @@ List[model::DynamicApplicationElementSet] getAllDynamicElements(model::DynamicAp
 List[model::DomainAttributeInstance] getAllDomainAttributeInstances(model::InternetApplication this) :
 	eAllContents.typeSelect( model::DomainAttributeInstance );
 
-List[model::DomainAttributeInstance] getAllDomainAttributeInstances(emf::EObject this) :
-	eAllContents.typeSelect( model::DomainAttributeInstance );
-
-List[model::DomainAttributeInstance] getAllDomainAttributeInstances(model::DomainAttributeInstance this) :
-	eAllContents.typeSelect( model::DomainAttributeInstance ).add(this);
-
 /** get all Domain Object Instances in the InternetApplication */
 List[model::DomainObjectInstance] getAllDomainObjectInstances(model::InternetApplication this) :
 	eAllContents.typeSelect(model::DomainObjectInstance);
-
-List[model::DomainObjectInstance] getAllDomainObjectInstances(emf::EObject this) :
-	eAllContents.typeSelect(model::DomainObjectInstance);
-
-List[model::DomainObjectInstance] getAllDomainObjectInstances(model::DomainObjectInstance this) :
-	eAllContents.typeSelect(model::DomainObjectInstance).add(this);
 
 getAllDomainObjects(emf::EObject e) :
 	e.eAllContents.typeSelect(model::DomainObject);

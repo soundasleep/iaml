@@ -27,8 +27,12 @@
 			«IF inWires.typeSelect(model::wires::SelectWire).isEmpty»
 				throw new IamlRuntimeException("No selection wires exist for getting attribute instance '«this»'");
 			«ELSE»
-				$offset = get_current_offset_«safeName()»();
-				«EXPAND Select::evaluateSelectWire(true, true) FOR inWires.typeSelect(model::wires::SelectWire).first()»
+				«IF model::DomainObjectInstance.isInstance(eContainer)»
+					$offset = get_current_offset_«safeName()»();
+					«EXPAND Select::evaluateSelectWire(true, true) FOR inWires.typeSelect(model::wires::SelectWire).first()»
+				«ELSE»
+					«EXPAND Select::evaluateSelectWire(true, false) FOR inWires.typeSelect(model::wires::SelectWire).first()»
+				«ENDIF»
 				if ($row === null) {
 					if ($default === false)					
 						throw new IamlRuntimeException("Could not find any value instance for attribute '«id»'");
@@ -62,8 +66,12 @@
 			«IF inWires.typeSelect(model::wires::SelectWire).isEmpty»
 				throw new IamlRuntimeException("No selection wires exist for trying to find attribute instance '«this»'");
 			«ELSE»
-				$offset = get_current_offset_«safeName()»();
-				«EXPAND Select::evaluateSelectWire(false, true) FOR inWires.typeSelect(model::wires::SelectWire).first()»
+				«IF model::DomainObjectInstance.isInstance(eContainer)»
+					$offset = get_current_offset_«safeName()»();
+					«EXPAND Select::evaluateSelectWire(false, true) FOR inWires.typeSelect(model::wires::SelectWire).first()»
+				«ELSE»
+					«EXPAND Select::evaluateSelectWire(false, false) FOR inWires.typeSelect(model::wires::SelectWire).first()»
+				«ENDIF»
 				if ($row === null) {
 					// not found
 					return false;

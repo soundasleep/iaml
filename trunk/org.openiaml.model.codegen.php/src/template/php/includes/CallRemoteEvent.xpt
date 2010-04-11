@@ -59,15 +59,18 @@ $result = file_get_contents($url);
 session_id($old_id);
 session_start();
 
-if (strpos(strtolower($result), "Fatal error") !== false) {
+if (strpos(strtolower($result), "fatal error") !== false) {
 	// TODO add test case to make sure we will catch this exception
 	throw new IamlRuntimeException("Remote call to '$url' failed: Fatal error.", $result);
 } 
-if (strpos(strtolower($result), "Warning") !== false) {
+if (strpos(strtolower($result), "warning") !== false) {
 	// TODO add test case to make sure we will catch this exception
 	throw new IamlRuntimeException("Remote call to '$url' failed: Warning.", $result);
 } 
 echo $result;
+
+// output any instructions
+echo_necessary_update_callbacks();
 
 // update any values on the client-side?
 «EXPAND template::php::callbacks::UpdateFrameProperties::updateAllFrameProperties»

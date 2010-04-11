@@ -54,6 +54,7 @@ public class SelectWireManyPaginate extends DatabaseCodegenTestCase {
 		assertButtonPresentWithText("First");
 		assertButtonPresentWithText("Last");
 		
+		assertNoResults("10");	// we do not get the full 10 results
 		assertResults("5");
 		
 	}
@@ -83,7 +84,7 @@ public class SelectWireManyPaginate extends DatabaseCodegenTestCase {
 		assertContent("Title 5", "Content 5");
 
 		// we can cycle backwards
-		for (int i = 4; i >= 1; i++) {
+		for (int i = 4; i >= 1; i--) {
 			clickButtonWithText("Previous");
 			assertContent("Title " + i, "Content " + i);
 		}
@@ -202,6 +203,9 @@ public class SelectWireManyPaginate extends DatabaseCodegenTestCase {
 	
 	private void assertResults(String results) {
 		assertLabelTextPresent(results);
+	}
+	private void assertNoResults(String results) {
+		assertLabelTextNotPresent(results);
 	}
 	
 	/**

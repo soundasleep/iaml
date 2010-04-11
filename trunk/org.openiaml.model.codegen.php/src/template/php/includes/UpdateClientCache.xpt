@@ -24,6 +24,7 @@
 		
 		«EXPAND updateCachedPrimitiveOperations FOREACH getClientSideCacheOperations()»
 		«EXPAND updateCachedPrimitiveConditions FOREACH getClientSideCacheConditions()»
+		«EXPAND updateCachedProperties FOREACH getClientSideCacheProperties()»
 			
 		return implode("\n", $result);
 	}
@@ -46,14 +47,14 @@
 	«LET ((model::DomainObjectInstance) eContainer) AS object»
 		
 		{
-			// primitive operation '«this»'
+			// primitive operation '«name»'
 			$new_value = «EXPAND template::domain::DomainInstance::domainInstanceCall(true, null, object) FOR this»;
 			$old_value = $_SESSION["cached_result_«safeName()»_value"];
 			if ($new_value != $old_value) {
 				// cache needs to be updated
-				$new_value = $new_value ? "true" : "false";
+				$new_value = $new_value ? "true" : "false";		// force to boolean
 				log_message("Updating cache value [server] 'cached_result_«safeName()»_value' from '$old_value' to '$new_value'");
-				$result[] = "call_operation update_cached_result_«safeName()» $new_value";
+				$result[] = "call_operation update_cached_result_«safeName()» " . escape_parameter_string($new_value);
 				$_SESSION["cached_result_«safeName()»_value"] = $new_value;
 			}		
 		}
@@ -69,17 +70,34 @@
 	«LET ((model::DomainObjectInstance) eContainer) AS object»
 		
 		{
-			// primitive condition '«this»'
+			// primitive condition '«name»'
 			$new_value = «EXPAND template::domain::DomainInstance::domainInstanceCondition(true, object) FOR this»;
 			$old_value = $_SESSION["cached_result_«safeName()»_value"];
 			if ($new_value != $old_value) {
 				// cache needs to be updated
-				$new_value = $new_value ? "true" : "false";
+				$new_value = $new_value ? "true" : "false";		// force to boolean
 				log_message("Updating cache value [server] 'cached_result_«safeName()»_value' from '$old_value' to '$new_value'");
-				$result[] = "call_operation update_cached_result_«safeName()» $new_value";
+				$result[] = "call_operation update_cached_result_«safeName()» " . escape_parameter_string($new_value);
 				$_SESSION["cached_result_«safeName()»_value"] = $new_value;
 			}		
 		}
 		
 	«ENDLET»
+«ENDDEFINE»
+
+/**
+ * Cached properties can be stored anywhere.
+ */
+«DEFINE updateCachedProperties FOR model::Property»
+	{
+		// property '«name»'
+		$new_value = «EXPAND template::operations::Parameters::callParameterValue(true, false) FOR this»; 
+		$old_value = isset($_SESSION["cached_property_«safeName()»_value"]) ? $_SESSION["cached_property_«safeName()»_value"] : null;
+		if ($new_value != $old_value) {
+			// cache needs to be updated
+			log_message("Updating cache value [server] 'cached_property_«safeName()»_value' from '$old_value' to '$new_value'");
+			$result[] = "call_operation update_instance_property_«safeName()» " . escape_parameter_string($new_value);
+			$_SESSION["cached_property_«safeName()»_value"] = $new_value;
+		}
+	}
 «ENDDEFINE»

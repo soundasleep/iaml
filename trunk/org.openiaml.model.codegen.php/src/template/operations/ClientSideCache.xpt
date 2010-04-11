@@ -20,7 +20,7 @@
 
 «DEFINE cachedPrimitiveOperations FOR model::PrimitiveOperation»
 	«LET ((model::DomainObjectInstance) eContainer) AS object»
-		// primitive operation '«this»'
+		// primitive operation '«name»'
 		
 		// initial value (i.e. at execution time)
 		var cached_result_«safeName()»_value = 
@@ -35,6 +35,10 @@
 		}
 		
 		function update_cached_result_«safeName()»(result) {
+			if (result === "true")
+				result = true;
+			if (result === "false")
+				result = false;
 			cached_result_«safeName()»_value = result;
 		}
 	«ENDLET»
@@ -50,7 +54,7 @@
 
 «DEFINE cachedPrimitiveConditions FOR model::PrimitiveCondition»
 	«LET ((model::DomainObjectInstance) eContainer) AS object»
-		// primitive condition '«this»'
+		// primitive condition '«name»'
 		
 		// initial value (i.e. at execution time)
 		var cached_result_«safeName()»_value = 
@@ -65,7 +69,48 @@
 		}
 		
 		function update_cached_result_«safeName()»(result) {
+			if (result === "true")
+				result = true;
+			if (result === "false")
+				result = false;
 			cached_result_«safeName()»_value = result;
 		}
 	«ENDLET»
+«ENDDEFINE»
+
+«DEFINE cachedProperties FOR model::InternetApplication»
+	«EXPAND cachedProperties FOREACH getClientSideCacheProperties()»
+«ENDDEFINE»
+
+/**
+ * Cached properties can be stored anywhere.
+ */
+«DEFINE cachedProperties FOR model::Property»
+	// property '«name»'
+	
+	// initial value (i.e. at execution time)
+	var cached_instance_property_«safeName()»_value = 
+	<?php
+		/* save the current cached result, so we know when to update it on the client */
+		$_SESSION["cached_property_«safeName()»_value"] = «EXPAND template::operations::Parameters::callParameterValue(true, false) FOR this»;
+		«IF isNumeric(type)»
+			// numeric type
+			if ($_SESSION["cached_property_«safeName()»_value"] == 0) {
+				echo "0";
+			} else {
+				echo $_SESSION["cached_property_«safeName()»_value"];
+			}
+		«ELSE»
+			// string type
+			echo '"' . $_SESSION["cached_property_«safeName()»_value"] . '"';
+		«ENDIF»
+		?>;
+
+		function get_instance_property_«safeName()»() {
+		return cached_instance_property_«safeName()»_value;
+	}
+	
+	function update_instance_property_«safeName()»(result) {
+		cached_instance_property_«safeName()»_value = result;
+	}
 «ENDDEFINE»

@@ -370,14 +370,14 @@ function queued_instance_reset(instance_id, function_queue) {
 
 function queued_instance_skip(instance_id, arg0, function_queue) {
 	var url = 'instance_skip.php?instance_id=' + encodeURIComponent(instance_id) 
-		+ '&arg0=' + encodeURIComponent(arg0);
+		+ '&arg0=' + encodeURIComponent(arg0)
 		+ '&frame_id=' + encodeURIComponent(frame_id);
 	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
 function queued_instance_jump(instance_id, arg0, function_queue) {
 	var url = 'instance_jump.php?instance_id=' + encodeURIComponent(instance_id) 
-		+ '&arg0=' + encodeURIComponent(arg0);
+		+ '&arg0=' + encodeURIComponent(arg0)
 		+ '&frame_id=' + encodeURIComponent(frame_id);
 	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }

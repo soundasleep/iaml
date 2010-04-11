@@ -543,6 +543,17 @@ List[model::Operation] getClientSideCacheOperations(model::InternetApplication t
 List[model::Condition] getClientSideCacheConditions(model::InternetApplication this) :
 	eAllContents.typeSelect(model::PrimitiveCondition)
 		.select(o | model::DomainObjectInstance.isInstance(o.eContainer));
+
+/**
+ * Get all properties which the server needs to keep track of, and 
+ * the client needs to be updated.
+ */
+List[model::Property] getClientSideCacheProperties(model::InternetApplication this) :
+	eAllContents.typeSelect(model::DomainObjectInstance)
+		.select(o | o.results != null)
+		.results.toSet().
+	addAll(eAllContents.typeSelect(model::VisibleThing).properties.select(p | p.name != "fieldValue").toSet());
+
 /**
  * Should the given exit gate be activated/enabled on the given frame?
  */
@@ -596,6 +607,15 @@ model::visual::Map getParentMap(model::visual::Map this) :
 isDomainObjectInstanceResults(model::Property this) :
 	model::DomainObjectInstance.isInstance(eContainer) 
 		&& ((model::DomainObjectInstance) eContainer).results == this;
+
+/**
+ * Is the given type numeric?
+ * This returns true if this type is, or is recursively restricted, from
+ * 		<code>http://www.w3.org/2001/XMLSchema#decimal</code>.
+ */
+boolean isNumeric(xsd::XSDSimpleTypeDefinition this) :
+	uRI == "http://www.w3.org/2001/XMLSchema#decimal"
+	|| (baseTypeDefinition != null && isNumeric(baseTypeDefinition));
 
 /** 
  * a hack way to create backtrace-able errors

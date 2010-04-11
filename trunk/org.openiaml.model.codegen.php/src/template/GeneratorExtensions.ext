@@ -592,6 +592,10 @@ model::visual::Map getParentMap(emf::EObject this) :
 
 model::visual::Map getParentMap(model::visual::Map this) :
 	this;
+	
+isDomainObjectInstanceResults(model::Property this) :
+	model::DomainObjectInstance.isInstance(eContainer) 
+		&& ((model::DomainObjectInstance) eContainer).results == this;
 
 /** 
  * a hack way to create backtrace-able errors

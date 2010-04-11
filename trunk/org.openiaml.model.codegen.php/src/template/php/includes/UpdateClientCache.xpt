@@ -51,6 +51,7 @@
 			$old_value = $_SESSION["cached_result_«safeName()»_value"];
 			if ($new_value != $old_value) {
 				// cache needs to be updated
+				$new_value = $new_value ? "true" : "false";
 				log_message("Updating cache value [server] 'cached_result_«safeName()»_value' from '$old_value' to '$new_value'");
 				$result[] = "call_operation update_cached_result_«safeName()» $new_value";
 				$_SESSION["cached_result_«safeName()»_value"] = $new_value;
@@ -73,6 +74,7 @@
 			$old_value = $_SESSION["cached_result_«safeName()»_value"];
 			if ($new_value != $old_value) {
 				// cache needs to be updated
+				$new_value = $new_value ? "true" : "false";
 				log_message("Updating cache value [server] 'cached_result_«safeName()»_value' from '$old_value' to '$new_value'");
 				$result[] = "call_operation update_cached_result_«safeName()» $new_value";
 				$_SESSION["cached_result_«safeName()»_value"] = $new_value;

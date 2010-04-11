@@ -64,6 +64,7 @@
 			«IF model::DomainObjectInstance.isInstance(eContainer)»
 				/* contained in an object instance '«eContainer»': get it from the instance */
 				store_object_instance_«safeName(eContainer)»("«safeNameString(name)-»", $arg0);
+				object_instance_onChange_«safeName(eContainer)»();
 			«ELSE»
 				/* not contained in an object instance; select it manually */
 				«IF inWires.typeSelect(model::wires::SelectWire).isEmpty»
@@ -140,6 +141,7 @@
 		«ELSE»
 			«EXPAND evaluateSelectWireStore FOR inWires.typeSelect(model::wires::SelectWire).first()»
 		«ENDIF»
+		object_instance_onChange_«safeName()»();		
 	}
 	
 	function save_queued_store_domain_object_«safeName()-»() {

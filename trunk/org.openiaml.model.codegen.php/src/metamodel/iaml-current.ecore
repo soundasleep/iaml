@@ -371,21 +371,59 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="previous" eType="#//Operation"
-        containment="true"/>
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Go to the previous result. Will throw an error if {@model #hasPrevious} would be false."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="next" eType="#//Operation"
-        containment="true"/>
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Go to the next result. Will throw an error if {@model #hasNext} would be false."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="reset" eType="#//Operation"
-        containment="true"/>
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Start at result number 0."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="skip" eType="#//Operation"
-        containment="true"/>
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Skip the given number of results. Can be negative to go backwards."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="hasPrevious" eType="#//Condition"
-        containment="true"/>
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="True if navigating to the {@model #previous} result will not be out-of-bounds."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="hasNext" eType="#//Condition"
-        containment="true"/>
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="True if navigating to the {@model #next} result will not be out-of-bounds."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="empty" eType="#//Condition"
-        containment="true"/>
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="True if the current result set is empty."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="results" eType="#//Property"
-        containment="true"/>
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The number of results in the current result set."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="jump" eType="#//Operation"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Jump to the specific result number, starting from 0."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Scope" abstract="true" eSuperTypes="#//GeneratesElements #//ContainsWires #//NamedElement #//GeneratedElement #//WireSource #//WireDestination #//ContainsConditions #//CanBeSynced #//Accessible #//ContainsOperations #//ActionSource #//ContainsProperties">
     <eAnnotations source="http://openiaml.org/comment">
@@ -630,6 +668,9 @@
         <details key="documentation" value="Connects a {@model EventTrigger} to a {@model Operation}, allowing it to be executed. May have incoming {@model ConditionEdge}s."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="priority" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="{@model RunAction}s are run in order of descending priority; that is, a higher priority {@model RunAction} will execute first."/>
+        </eAnnotations>
         <eAnnotations source="http://openiaml.org/comment">
           <details key="added" value="0.2"/>
         </eAnnotations>
@@ -677,8 +718,8 @@
         <details key="documentation" value="Allows for the selection of particular {@model DomainObjectInstance instances} from a {@model DomainStore}."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="query" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="limit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
-          defaultValueLiteral="1"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="limit" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="1"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ConditionEdge" eSuperTypes="#//wires/ParameterEdgeDestination #//NamedElement #//GeneratesElements">
       <eAnnotations source="http://openiaml.org/comment">
@@ -868,7 +909,11 @@
         <details key="documentation" value="The successful completion of an {@model Operation}, or the {@model Condition} passed."/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="DecisionNode" eSuperTypes="#//ActivityNode #//ExecutionEdgesSource #//ExecutionEdgeDestination"/>
+    <eClassifiers xsi:type="ecore:EClass" name="DecisionNode" eSuperTypes="#//ActivityNode #//ExecutionEdgesSource #//ExecutionEdgeDestination #//wires/ConditionEdgeDestination">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Considers the {@model ConditionEdgeDestination incoming} {@model Condition}, and follows either the passing or failing {@model ExecutionEdge} as appropriate."/>
+      </eAnnotations>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="DecisionOperation" eSuperTypes="#//PrimitiveOperation #//DataFlowEdgeDestination"/>
     <eClassifiers xsi:type="ecore:EClass" name="DecisionCondition" eSuperTypes="#//Condition #//ExecutionEdgesSource #//ExecutionEdgeDestination #//DataFlowEdgeDestination">
       <eAnnotations source="http://openiaml.org/comment">

@@ -59,6 +59,22 @@ public class IteratedSyncWires extends DatabaseCodegenTestCase {
 		beginAtSitemapThenPage("Home");
 		assertContent1();
 	}
+	
+	/**
+	 * Because we are only selecting one result, we should not
+	 * have any navigation results.
+	 * 
+	 * @see SelectWireManyPaginate
+	 * @throws Exception
+	 */
+	public void testNoPaginationButtons() throws Exception {
+		beginAtSitemapThenPage("Home");
+		
+		assertButtonNotPresentWithText("Next");
+		assertButtonNotPresentWithText("Previous");
+		assertButtonNotPresentWithText("First");
+		assertButtonNotPresentWithText("Last");
+	}
 
 	/**
 	 * Check the given content on the page.

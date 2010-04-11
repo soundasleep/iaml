@@ -125,6 +125,7 @@ context model::PrimitiveOperation WARNING "Unknown primitive operation name '" +
 	(eContainer != null && model::DomainObjectInstance.isInstance(eContainer) && ((model::DomainObjectInstance) eContainer).previous == this) || 
 	(eContainer != null && model::DomainObjectInstance.isInstance(eContainer) && ((model::DomainObjectInstance) eContainer).reset == this) || 
 	(eContainer != null && model::DomainObjectInstance.isInstance(eContainer) && ((model::DomainObjectInstance) eContainer).skip == this) || 
+	(eContainer != null && model::DomainObjectInstance.isInstance(eContainer) && ((model::DomainObjectInstance) eContainer).jump == this) || 
 	(name == "setPropertyToValue" || name == "set" ||
 		name == "javascriptAlert" || name == "save" ||
 		name == "new" || name == "exists?" ||

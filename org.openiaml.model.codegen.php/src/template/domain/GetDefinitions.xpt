@@ -28,7 +28,8 @@
 				throw new IamlRuntimeException("No selection wires exist for getting attribute instance '«this»'");
 			«ELSE»
 				«IF model::DomainObjectInstance.isInstance(eContainer)»
-					$offset = get_current_offset_«safeName()»();
+					$offset = get_current_offset_«safeName(eContainer)»();
+					object_instance_onChange_«safeName(eContainer)»()
 					«EXPAND Select::evaluateSelectWire(true, true) FOR inWires.typeSelect(model::wires::SelectWire).first()»
 				«ELSE»
 					«EXPAND Select::evaluateSelectWire(true, false) FOR inWires.typeSelect(model::wires::SelectWire).first()»
@@ -67,7 +68,8 @@
 				throw new IamlRuntimeException("No selection wires exist for trying to find attribute instance '«this»'");
 			«ELSE»
 				«IF model::DomainObjectInstance.isInstance(eContainer)»
-					$offset = get_current_offset_«safeName()»();
+					$offset = get_current_offset_«safeName(eContainer)»();
+					object_instance_onChange_«safeName(eContainer)»();
 					«EXPAND Select::evaluateSelectWire(false, true) FOR inWires.typeSelect(model::wires::SelectWire).first()»
 				«ELSE»
 					«EXPAND Select::evaluateSelectWire(false, false) FOR inWires.typeSelect(model::wires::SelectWire).first()»
@@ -183,6 +185,16 @@
 
 «DEFINE getDomainObject FOR model::DomainObjectInstance-»
 	/**
+	 * Contains all of the Events that need to occur when 'onChange'
+	 * is called, if any.
+	 */
+	function object_instance_onChange_«safeName()»() {
+		«IF onEdit != null»
+			«EXPAND template::events::EventCall::callEvent(true) FOR onEdit»
+		«ENDIF» 
+	}
+
+	/**
 	 * Get the domain object instance '«id»'.
 	 */
 	function get_object_instance_«safeName()»($default = false) {
@@ -196,6 +208,7 @@
 		«ELSE»
 			$offset = get_current_offset_«safeName()»();
 			«EXPAND Select::evaluateSelectWire(true, true) FOR inWires.typeSelect(model::wires::SelectWire).first()»
+			object_instance_onChange_«safeName()»();
 			if ($row === null) {
 				if ($default !== false) {
 					return $default;
@@ -219,7 +232,7 @@
 				return 1;
 			«ENDIF»
 		«ELSE»
-			// will select count nudirectly into $row	
+			// will select count directly into $row	
 			«EXPAND Select::evaluateSelectWireCount(true) FOR inWires.typeSelect(model::wires::SelectWire).first()»
 			return $row;
 		«ENDIF»

@@ -331,10 +331,11 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public PrimitiveCondition createPrimitiveCondition() {
 		PrimitiveConditionImpl primitiveCondition = new PrimitiveConditionImpl();
+		generateID(primitiveCondition);
 		return primitiveCondition;
 	}
 

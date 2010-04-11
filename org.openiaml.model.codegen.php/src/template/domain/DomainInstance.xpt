@@ -108,6 +108,28 @@
 					queued_remove_permission(«EXPAND template::operations::Parameters::callParameter(php, false, false) FOR paramWires.first()», '«safeNameString(object.id)-»')
 				«ENDIF»
 			«ENDLET»
+		«ELSEIF name=="next"»
+			queued_instance_next('«safeNameString(object.id)-»')
+		«ELSEIF name=="previous"»
+			queued_instance_previous('«safeNameString(object.id)-»')
+		«ELSEIF name=="reset"»
+			queued_instance_reset('«safeNameString(object.id)-»')
+		«ELSEIF name=="skip"»
+			«LET wire.inParameterEdges AS paramWires»
+				«IF paramWires.size != 1»
+					«throwException("Expected exactly one incoming ParameterEdge for skip, got: " + paramWires.size)»
+				«ELSE»
+					queued_instance_skip('«safeNameString(object.id)-»', «EXPAND template::operations::Parameters::callParameter(php, false, false) FOR paramWires.first()»)
+				«ENDIF»
+			«ENDLET»
+		«ELSEIF name=="jump"»
+			«LET wire.inParameterEdges AS paramWires»
+				«IF paramWires.size != 1»
+					«throwException("Expected exactly one incoming ParameterEdge for jump, got: " + paramWires.size)»
+				«ELSE»
+					queued_instance_jump('«safeNameString(object.id)-»', «EXPAND template::operations::Parameters::callParameter(php, false, false) FOR paramWires.first()»)
+				«ENDIF»
+			«ENDLET»
 		«ELSE»
 			«throwException("No client-side code for domainInstanceCall operation " + this)»
 		«ENDIF»

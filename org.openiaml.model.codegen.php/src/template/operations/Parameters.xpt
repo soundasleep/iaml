@@ -61,6 +61,9 @@
 			«IF model::DomainAttributeInstance.isInstance(eContainer)»
 				«REM»from a DomainAttributeInstance«ENDREM»
 				«EXPAND RemoteParameter::remoteValue(php, false, this) FOR this.eContainer-»
+			«ELSEIF isDomainObjectInstanceResults()»
+				/* from the DomainObjectInstance */
+				get_instance_count_«safeName(eContainer)»()
 			«ELSEIF containingSession(this) != null»
 				/* a property from our session */
 				require_session("«safeName(containingSession(this))»_«safeName()-»"
@@ -197,6 +200,9 @@
 		«IF model::DomainAttributeInstance.isInstance(eContainer)»
 			«REM»from a DomainAttributeInstance«ENDREM»
 			«EXPAND RemoteParameter::remoteValueIsSet(php, this) FOR this.eContainer-»
+		«ELSEIF isDomainObjectInstanceResults()»
+			/* DomainObjectInstance count is always available */
+			true			
 		«ELSEIF containingSession(this) != null»
 			/* a property from our session */
 			has_session("«safeName(containingSession(this))»_«safeName()-»")

@@ -4,6 +4,7 @@
 package org.openiaml.model.inference;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xsd.XSDSimpleTypeDefinition;
 import org.openiaml.model.model.Accessible;
 import org.openiaml.model.model.ActionDestination;
@@ -34,6 +35,7 @@ import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.PrimitiveCondition;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.Scope;
@@ -43,9 +45,12 @@ import org.openiaml.model.model.WireDestination;
 import org.openiaml.model.model.WireSource;
 import org.openiaml.model.model.components.ComponentsPackage;
 import org.openiaml.model.model.components.LoginHandler;
+import org.openiaml.model.model.operations.Arithmetic;
+import org.openiaml.model.model.operations.ArithmeticOperationTypes;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.CastNode;
 import org.openiaml.model.model.operations.DecisionCondition;
+import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.JoinNode;
@@ -97,7 +102,11 @@ import org.openiaml.model.model.wires.WiresPackage;
 public abstract class EcoreCreateElementsHelper implements ICreateElements {
 
 	public Property generatedProperty(GeneratesElements by, ContainsProperties container) throws InferenceException {
-		Property fieldValue = (Property) createElement( container, ModelPackage.eINSTANCE.getProperty(), ModelPackage.eINSTANCE.getContainsProperties_Properties() );
+		return generatedProperty(by, container, ModelPackage.eINSTANCE.getContainsProperties_Properties() );
+	}
+	
+	public Property generatedProperty(GeneratesElements by, ContainsProperties container, EReference reference) throws InferenceException {
+		Property fieldValue = (Property) createElement( container, ModelPackage.eINSTANCE.getProperty(), reference );
 		setGeneratedBy(fieldValue, by);
 		return fieldValue;
 	}
@@ -161,6 +170,12 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return event;
 	}
 
+	public EventTrigger generatedEventTrigger(GeneratesElements by, EObject container, EReference reference) throws InferenceException {
+		EventTrigger event = (EventTrigger) createElement( container, ModelPackage.eINSTANCE.getEventTrigger(), reference);
+		setGeneratedBy(event, by);
+		return event;
+	}
+
 	public CompositeOperation generatedCompositeOperation(GeneratesElements by, ContainsOperations container) throws InferenceException {
 		CompositeOperation operation = createCompositeOperation(container);
 		setGeneratedBy(operation, by);
@@ -180,7 +195,21 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	}
 
 	public PrimitiveOperation generatedPrimitiveOperation(GeneratesElements by, ContainsOperations container) throws InferenceException {
-		PrimitiveOperation operation = (PrimitiveOperation) createElement( container, ModelPackage.eINSTANCE.getPrimitiveOperation(), ModelPackage.eINSTANCE.getContainsOperations_Operations() );
+		return generatedPrimitiveOperation(by, container, ModelPackage.eINSTANCE.getContainsOperations_Operations() );
+	}
+	
+	public PrimitiveOperation generatedPrimitiveOperation(GeneratesElements by, ContainsOperations container, EReference reference) throws InferenceException {
+		PrimitiveOperation operation = (PrimitiveOperation) createElement( container, ModelPackage.eINSTANCE.getPrimitiveOperation(), reference );
+		setGeneratedBy(operation, by);
+		return operation;
+	}
+
+	public PrimitiveCondition generatedPrimitiveCondition(GeneratesElements by, ContainsConditions container) throws InferenceException {
+		return generatedPrimitiveCondition(by, container, ModelPackage.eINSTANCE.getContainsConditions_Conditions() );
+	}
+	
+	public PrimitiveCondition generatedPrimitiveCondition(GeneratesElements by, ContainsConditions container, EReference reference) throws InferenceException {
+		PrimitiveCondition operation = (PrimitiveCondition) createElement( container, ModelPackage.eINSTANCE.getPrimitiveCondition(), reference );
 		setGeneratedBy(operation, by);
 		return operation;
 	}
@@ -191,6 +220,18 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return operation;
 	}
 	
+	public DecisionNode generatedDecisionNode(GeneratesElements by, CompositeOperation container) throws InferenceException {
+		DecisionNode operation = (DecisionNode) createElement( container, OperationsPackage.eINSTANCE.getDecisionNode(), ModelPackage.eINSTANCE.getCompositeOperation_Nodes() );
+		setGeneratedBy(operation, by);
+		return operation;
+	}
+
+	public DecisionNode generatedDecisionNode(GeneratesElements by, CompositeCondition container) throws InferenceException {
+		DecisionNode operation = (DecisionNode) createElement( container, OperationsPackage.eINSTANCE.getDecisionNode(), ModelPackage.eINSTANCE.getCompositeCondition_Nodes() );
+		setGeneratedBy(operation, by);
+		return operation;
+	}
+
 	public StaticValue generatedStaticValue(GeneratesElements by, CompositeOperation container) throws InferenceException {
 		StaticValue value = (StaticValue) createElement( container, ModelPackage.eINSTANCE.getStaticValue(), ModelPackage.eINSTANCE.getCompositeOperation_Values() );
 		setGeneratedBy(value, by);
@@ -277,6 +318,18 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 
 	public JoinNode generatedJoinNode(GeneratesElements by, CompositeCondition container) throws InferenceException {
 		JoinNode node = (JoinNode) createElement( container, OperationsPackage.eINSTANCE.getJoinNode(), ModelPackage.eINSTANCE.getCompositeCondition_Nodes() );
+		setGeneratedBy(node, by);
+		return node;
+	}
+
+	public Arithmetic generatedArithmetic(GeneratesElements by, CompositeOperation container) throws InferenceException {
+		Arithmetic node = (Arithmetic) createElement( container, OperationsPackage.eINSTANCE.getArithmetic(), ModelPackage.eINSTANCE.getCompositeOperation_Nodes() );
+		setGeneratedBy(node, by);
+		return node;
+	}
+	
+	public Arithmetic generatedArithmetic(GeneratesElements by, CompositeCondition container) throws InferenceException {
+		Arithmetic node = (Arithmetic) createElement( container, OperationsPackage.eINSTANCE.getArithmetic(), ModelPackage.eINSTANCE.getCompositeCondition_Nodes() );
 		setGeneratedBy(node, by);
 		return node;
 	}
@@ -586,7 +639,15 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	public void setType(Property element, XSDSimpleTypeDefinition value) throws InferenceException {
 		setValue(element, ModelPackage.eINSTANCE.getProperty_Type(), value);
 	}
-	
+
+	public void setType(StaticValue element, XSDSimpleTypeDefinition value) throws InferenceException {
+		setValue(element, ModelPackage.eINSTANCE.getStaticValue_Type(), value);
+	}
+
+	public void setType(Arithmetic element, ArithmeticOperationTypes value) throws InferenceException {
+		setValue(element, OperationsPackage.eINSTANCE.getArithmetic_OperationType(), value);
+	}
+
 	public void setPriority(RunAction element, int value) throws InferenceException {
 		setValue(element, WiresPackage.eINSTANCE.getRunAction_Priority(), value);
 	}

@@ -26,6 +26,7 @@ import org.openiaml.model.model.users.Role;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
+import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SetWire;
 
 import ca.ecliptical.emf.xpath.EMFXPath;
@@ -45,15 +46,25 @@ import ca.ecliptical.emf.xpath.EMFXPath;
  */
 public class DroolsHelperFunctions {
 
-	public boolean connects(Wire wire, Object a, Object b) {
+	/**
+	 * True if the given bidirectional {@model Wire} connects
+	 * the source object to the target object, or the target
+	 * object to the source object.
+	 * 
+	 * @param wire the wire to investigate
+	 * @param source the source object
+	 * @param target the target object
+	 * @return true only if the wire connects the two objects bidirectionally
+	 */
+	public boolean connects(Wire wire, Object source, Object target) {
 		if (wire == null) 
 			throw new NullPointerException("Wire '" + wire + "' = null");
 		if (wire.getFrom() == null)
 			throw new NullPointerException("Wire '" + wire + "'.from = null");
 		if (wire.getTo() == null)
 			throw new NullPointerException("Wire '" + wire + "'.to = null");
-		return (wire.getFrom().equals(a) && wire.getTo().equals(b)) ||
-			(wire.getFrom().equals(b) && wire.getTo().equals(a));
+		return (wire.getFrom().equals(source) && wire.getTo().equals(target)) ||
+			(wire.getFrom().equals(target) && wire.getTo().equals(source));
 	}
 
 	public boolean isXPath(String query) {
@@ -74,11 +85,11 @@ public class DroolsHelperFunctions {
 	/**
 	 * Could this potentially be an XPath match?
 	 * 
-	 * In particular, we take a query /a/b[c]/d[e] and
+	 * <p>In particular, we take a query /a/b[c]/d[e] and
 	 * consider /a/b/d as potential matches. /a/b[c]/d[e] will become
 	 * the ConditionWire.
 	 *
-	 * Note we have to use the same XPath expressions as test
+	 * <p>Note we have to use the same XPath expressions as test
 	 * cases, i.e. //iaml:children[@name], not //Page
 	 * @throws JaxenException 
 	 */
@@ -236,14 +247,40 @@ public class DroolsHelperFunctions {
 		return e1.getName().toLowerCase().equals(e2.getName().toLowerCase());
 	}
 
-	public boolean connectsSet(SetWire wire, Object a, Object b) {
+	/**
+	 * True if the given uni-directional {@model SetWire} connects
+	 * the source object to the target object. 
+	 * 
+	 * @param wire the wire to investigate
+	 * @param source the source object
+	 * @param target the target object
+	 * @return true only if the wire connects the two objects
+	 */
+	public boolean connectsSet(SetWire wire, Object source, Object target) {
 		if (wire.getFrom() == null)
 			throw new NullPointerException("Wire '" + wire + "'.from = null");
 		if (wire.getTo() == null)
 			throw new NullPointerException("Wire '" + wire + "'.to = null");
-		return wire.getFrom().equals(a) && wire.getTo().equals(b);
+		return wire.getFrom().equals(source) && wire.getTo().equals(target);
 	}
-
+	
+	/**
+	 * True if the given uni-directional {@model SelectWire} connects
+	 * the source object to the target object. 
+	 * 
+	 * @param wire the wire to investigate
+	 * @param source the source object
+	 * @param target the target object
+	 * @return true only if the wire connects the two objects
+	 */
+	public boolean connectsSelect(SelectWire wire, Object source, Object target) {
+		if (wire.getFrom() == null)
+			throw new NullPointerException("Wire '" + wire + "'.from = null");
+		if (wire.getTo() == null)
+			throw new NullPointerException("Wire '" + wire + "'.to = null");
+		return wire.getFrom().equals(source) && wire.getTo().equals(target);
+	}
+	
 	public Session containingSession(EObject e) {
 		if (e.eContainer() == null) {
 			return null;

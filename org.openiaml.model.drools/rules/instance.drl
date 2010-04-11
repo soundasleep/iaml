@@ -1,0 +1,277 @@
+/**
+ * Rules related to DomainObjectInstances.
+ */
+package org.openiaml.model.drools.rules.instance
+
+#list any import classes here.
+import org.openiaml.model.drools.*;
+
+import org.openiaml.model.inference.*;
+import org.openiaml.model.model.*;
+import org.openiaml.model.model.impl.*;
+import org.openiaml.model.model.wires.*;
+import org.openiaml.model.model.visual.*;
+import org.openiaml.model.model.operations.*;
+import org.openiaml.model.model.scopes.*;
+import org.openiaml.model.model.components.*;
+import org.openiaml.model.model.users.*;
+
+#declare any global variables here
+global OverridableCreateElementsHelper handler;
+global DroolsInsertionQueue queue;
+global DroolsHelperFunctions functions;
+
+/**
+ * @inference DomainObjectInstance
+ *		A {@model DomainObjectInstance} has a {@model PrimitiveOperation} 
+ *		called '{@model DomainObjectInstance#previous}'.
+ */
+rule "Create 'previous' PrimitiveOperation"
+	when
+		instance : DomainObjectInstance( )
+		not ( op : Operation ( instance.previous == op ) )
+
+		eval ( handler.veto( instance ))
+	
+	then
+		PrimitiveOperation op = handler.generatedPrimitiveOperation(instance, instance, 
+			ModelPackage.eINSTANCE.getDomainObjectInstance_Previous());
+		handler.setName(op, "previous");
+		queue.add(op, drools);
+	
+end
+
+/**
+ * @inference DomainObjectInstance
+ *		A {@model DomainObjectInstance} has a {@model PrimitiveOperation} 
+ *		called '{@model DomainObjectInstance#next}'.
+ */
+rule "Create 'next' PrimitiveOperation"
+	when
+		instance : DomainObjectInstance( )
+		not ( op : Operation ( instance.next == op ) )
+
+		eval ( handler.veto( instance ))
+	
+	then
+		PrimitiveOperation op = handler.generatedPrimitiveOperation(instance, instance, 
+			ModelPackage.eINSTANCE.getDomainObjectInstance_Next());
+		handler.setName(op, "next");
+		queue.add(op, drools);
+	
+end
+
+/**
+ * @inference DomainObjectInstance
+ *		A {@model DomainObjectInstance} has a {@model PrimitiveOperation} 
+ *		called '{@model DomainObjectInstance#reset}'.
+ */
+rule "Create 'reset' PrimitiveOperation"
+	when
+		instance : DomainObjectInstance( )
+		not ( op : Operation ( instance.reset == op ) )
+
+		eval ( handler.veto( instance ))
+	
+	then
+		PrimitiveOperation op = handler.generatedPrimitiveOperation(instance, instance, 
+			ModelPackage.eINSTANCE.getDomainObjectInstance_Reset());
+		handler.setName(op, "reset");
+		queue.add(op, drools);
+	
+end
+
+/**
+ * @inference DomainObjectInstance
+ *		A {@model DomainObjectInstance} has a {@model PrimitiveOperation} 
+ *		called '{@model DomainObjectInstance#skip}'.
+ */
+rule "Create 'skip' PrimitiveOperation"
+	when
+		instance : DomainObjectInstance( )
+		not ( op : Operation ( instance.skip == op ) )
+
+		eval ( handler.veto( instance ))
+	
+	then
+		PrimitiveOperation op = handler.generatedPrimitiveOperation(instance, instance, 
+			ModelPackage.eINSTANCE.getDomainObjectInstance_Skip());
+		handler.setName(op, "skip");
+		queue.add(op, drools);
+	
+end
+
+/**
+ * @inference DomainObjectInstance
+ *		A {@model DomainObjectInstance} has a {@model PrimitiveOperation} 
+ *		called '{@model DomainObjectInstance#jump}'.
+ */
+rule "Create 'jump' PrimitiveOperation"
+	when
+		instance : DomainObjectInstance( )
+		not ( op : Operation ( instance.jump == op ) )
+
+		eval ( handler.veto( instance ))
+	
+	then
+		PrimitiveOperation op = handler.generatedPrimitiveOperation(instance, instance, 
+			ModelPackage.eINSTANCE.getDomainObjectInstance_Jump());
+		handler.setName(op, "jump");
+		queue.add(op, drools);
+	
+end
+
+/**
+ * @inference DomainObjectInstance
+ *		A {@model DomainObjectInstance} has a {@model PrimitiveCondition} 
+ *		called '{@model DomainObjectInstance#hasNext}'.
+ */
+rule "Create 'hasNext' PrimitiveCondition"
+	when
+		instance : DomainObjectInstance( )
+		not ( cond : Condition ( instance.hasNext == cond ) )
+
+		eval ( handler.veto( instance ))
+	
+	then
+		PrimitiveCondition cond = handler.generatedPrimitiveCondition(instance, instance, 
+			ModelPackage.eINSTANCE.getDomainObjectInstance_HasNext());
+		handler.setName(cond, "has next");
+		queue.add(cond, drools);
+	
+end
+
+/**
+ * @inference DomainObjectInstance
+ *		A {@model DomainObjectInstance} has a {@model PrimitiveCondition} 
+ *		called '{@model DomainObjectInstance#hasPrevious}'.
+ */
+rule "Create 'hasPrevious' PrimitiveCondition"
+	when
+		instance : DomainObjectInstance( )
+		not ( cond : Condition ( instance.hasPrevious == cond ) )
+
+		eval ( handler.veto( instance ))
+	
+	then
+		PrimitiveCondition cond = handler.generatedPrimitiveCondition(instance, instance, 
+			ModelPackage.eINSTANCE.getDomainObjectInstance_HasPrevious());
+		handler.setName(cond, "has previous");
+		queue.add(cond, drools);
+	
+end
+
+/**
+ * @inference DomainObjectInstance
+ *		A {@model DomainObjectInstance} has a {@model PrimitiveCondition} 
+ *		called '{@model DomainObjectInstance#hasNext}'.
+ */
+rule "Create 'empty' PrimitiveCondition"
+	when
+		instance : DomainObjectInstance( )
+		not ( cond : Condition ( instance.empty == cond ) )
+
+		eval ( handler.veto( instance ))
+	
+	then
+		PrimitiveCondition cond = handler.generatedPrimitiveCondition(instance, instance, 
+			ModelPackage.eINSTANCE.getDomainObjectInstance_Empty());
+		handler.setName(cond, "empty");
+		queue.add(cond, drools);
+	
+end
+
+/**
+ * @inference DomainObjectInstance
+ *		A {@model DomainObjectInstance} has a {@model Property} 
+ *		called '{@model DomainObjectInstance#results}'.
+ */
+rule "Create 'results' Property"
+	when
+		instance : DomainObjectInstance( )
+		not ( property : Property ( instance.results == property ) )
+
+		eval ( handler.veto( instance ))
+	
+	then
+		Property property = handler.generatedProperty(instance, instance, 
+			ModelPackage.eINSTANCE.getDomainObjectInstance_Results());
+		handler.setName(property, "results count");
+		queue.add(property, drools);
+	
+end
+
+/**
+ * @inference DomainObjectInstance
+ *		A {@model DomainObjectInstance} has a {@model EventTrigger} 
+ *		called '{@model DomainObjectInstance#onIterate}'.
+ */
+rule "Create 'onIterate' EventTrigger"
+	when
+		instance : DomainObjectInstance( )
+		not ( event : EventTrigger ( instance.onIterate == event ) )
+
+		eval ( handler.veto( instance ))
+	
+	then
+		EventTrigger event = handler.generatedEventTrigger(instance, instance, 
+			ModelPackage.eINSTANCE.getDomainObjectInstance_OnIterate());
+		handler.setName(event, "on iterate");
+		queue.add(event, drools);
+	
+end
+
+/**
+ * @inference DomainObjectInstance
+ *		A {@model DomainObjectInstance} will contain a generated {@model CompositeCondition}
+ *		named 'not empty' - the inverse of the '{@model Condition#empty}' condition.
+ */
+rule "Create 'not empty' composite condition"
+	when
+		instance : DomainObjectInstance( )
+		not ( condition : Condition ( eContainer == instance, name == "not empty" ) )
+
+		eval ( handler.veto( instance ))
+	
+	then
+		CompositeCondition condition = handler.generatedCompositeCondition(instance, instance);
+		handler.setName(condition, "not empty");
+		queue.add(condition, drools);
+	
+end
+
+rule "Create contents of 'not empty' condition"
+	when
+		instance : DomainObjectInstance( )
+		isEmpty : Condition ( instance.empty == isEmpty )
+		condition : CompositeCondition ( eContainer == instance, name == "not empty" )
+		
+		not ( StartNode ( eContainer == condition ))
+
+		eval ( handler.veto( condition ))
+	
+	then
+		StartNode start = handler.generatedStartNode(condition, condition);
+		FinishNode finish = handler.generatedFinishNode(condition, condition);
+		CancelNode cancel = handler.generatedCancelNode(condition, condition);
+		queue.add(start, drools);
+		queue.add(finish, drools);
+		queue.add(cancel, drools);
+		
+		DecisionNode decision = handler.generatedDecisionNode(condition, condition);
+		queue.add(decision, drools);
+		
+		ConditionEdge edge = handler.generatedConditionEdge(condition, condition, isEmpty, decision);
+		queue.add(edge, drools);
+		
+		ExecutionEdge e1 = handler.generatedExecutionEdge(condition, condition, start, decision);
+		ExecutionEdge e2 = handler.generatedExecutionEdge(condition, condition, decision, finish);
+		handler.setName(e2, "n");
+		ExecutionEdge e3 = handler.generatedExecutionEdge(condition, condition, decision, cancel);
+		handler.setName(e3, "y");
+		
+		queue.add(e1, drools);
+		queue.add(e2, drools);
+		queue.add(e3, drools);
+	
+end

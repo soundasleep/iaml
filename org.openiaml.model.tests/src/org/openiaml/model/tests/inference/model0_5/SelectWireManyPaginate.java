@@ -197,7 +197,10 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		
 		DomainObjectInstance instance = assertHasDomainObjectInstance(home, "view news");
 		Operation ireset = instance.getReset();
-		Condition empty = instance.getEmpty();
+		
+		// we need to reverse 'empty' into condition 'not empty'
+		CompositeCondition notEmpty = assertHasCompositeCondition(instance, "not empty");
+		assertGenerated(notEmpty);
 		
 		Button first = assertHasButton(form, "First");
 		
@@ -207,7 +210,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		RunAction run = assertHasRunAction(root, onClick, ireset);
 		assertGenerated(run);
 		
-		assertGenerated(assertHasConditionEdge(root, empty, run));
+		assertGenerated(assertHasConditionEdge(root, notEmpty, run));
 		
 	}
 	
@@ -275,7 +278,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		
 		// it must have a higher priority than the action to the instance
 		RunAction run = assertHasRunAction(root, onClick, ijump);
-		assertGreater(update.getPriority(), run.getPriority());
+		assertGreater(run.getPriority(), update.getPriority());
 
 	}
 	
@@ -302,7 +305,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		assertGenerated(assertHasExecutionEdge(op, set, finish));
 		
 		Arithmetic arith = assertHasArithmetic(op);
-		StaticValue one = assertHasStaticValue(op, "1");
+		StaticValue one = assertHasStaticValue(op, "one");
 		assertGenerated(assertHasDataFlowEdge(op, one, arith));
 		assertEquals(arith.getOperationType(), ArithmeticOperationTypes.SUBTRACT);
 		
@@ -357,11 +360,11 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		Property results = instance.getResults();
 		Label labelResults = assertHasLabel(form, "Results");
 		
-		// instance.onIterate updates the Label
-		EventTrigger onIterate = instance.getOnIterate();		
+		// onChange updates the Label
+		EventTrigger onChange = instance.getOnEdit();
 		Operation update = assertHasOperation(labelResults, "update");
 		
-		RunAction run = assertHasRunAction(root, onIterate, update);
+		RunAction run = assertHasRunAction(root, onChange, update);
 		
 		// with the given parameter
 		assertGenerated(assertHasParameterEdge(root, results, run));

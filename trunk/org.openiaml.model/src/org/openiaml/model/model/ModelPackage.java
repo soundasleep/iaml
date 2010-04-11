@@ -4445,13 +4445,22 @@ public interface ModelPackage extends EPackage {
 	int DOMAIN_OBJECT_INSTANCE__RESULTS = APPLICATION_ELEMENT_FEATURE_COUNT + 14;
 
 	/**
+	 * The feature id for the '<em><b>Jump</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_OBJECT_INSTANCE__JUMP = APPLICATION_ELEMENT_FEATURE_COUNT + 15;
+
+	/**
 	 * The number of structural features of the '<em>Domain Object Instance</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_OBJECT_INSTANCE_FEATURE_COUNT = APPLICATION_ELEMENT_FEATURE_COUNT + 15;
+	int DOMAIN_OBJECT_INSTANCE_FEATURE_COUNT = APPLICATION_ELEMENT_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Generated Elements</b></em>' reference list.
@@ -7282,6 +7291,17 @@ public interface ModelPackage extends EPackage {
 	EReference getDomainObjectInstance_Results();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.openiaml.model.model.DomainObjectInstance#getJump <em>Jump</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Jump</em>'.
+	 * @see org.openiaml.model.model.DomainObjectInstance#getJump()
+	 * @see #getDomainObjectInstance()
+	 * @generated
+	 */
+	EReference getDomainObjectInstance_Jump();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.Scope <em>Scope</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8585,6 +8605,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DOMAIN_OBJECT_INSTANCE__RESULTS = eINSTANCE.getDomainObjectInstance_Results();
+
+		/**
+		 * The meta object literal for the '<em><b>Jump</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOMAIN_OBJECT_INSTANCE__JUMP = eINSTANCE.getDomainObjectInstance_Jump();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.impl.ScopeImpl <em>Scope</em>}' class.

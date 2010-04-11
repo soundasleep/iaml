@@ -38,6 +38,7 @@ import org.openiaml.model.model.operations.OperationCallNode;
 import org.openiaml.model.model.operations.OperationsPackage;
 import org.openiaml.model.model.operations.SplitNode;
 import org.openiaml.model.model.operations.StartNode;
+import org.openiaml.model.model.wires.ConditionEdgeDestination;
 import org.openiaml.model.model.wires.ConditionEdgesSource;
 
 /**
@@ -155,6 +156,10 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseExecutionEdgeDestination(ExecutionEdgeDestination object) {
 				return createExecutionEdgeDestinationAdapter();
+			}
+			@Override
+			public Adapter caseConditionEdgeDestination(ConditionEdgeDestination object) {
+				return createConditionEdgeDestinationAdapter();
 			}
 			@Override
 			public Adapter caseWireDestination(WireDestination object) {
@@ -435,6 +440,20 @@ public class OperationsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createExecutionEdgeDestinationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.wires.ConditionEdgeDestination <em>Condition Edge Destination</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.model.model.wires.ConditionEdgeDestination
+	 * @generated
+	 */
+	public Adapter createConditionEdgeDestinationAdapter() {
 		return null;
 	}
 

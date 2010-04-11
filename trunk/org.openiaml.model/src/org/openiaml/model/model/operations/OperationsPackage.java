@@ -326,13 +326,22 @@ public interface OperationsPackage extends EPackage {
 	int DECISION_NODE__IN_EXECUTIONS = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>In Condition Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECISION_NODE__IN_CONDITION_EDGES = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Decision Node</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DECISION_NODE_FEATURE_COUNT = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 2;
+	int DECISION_NODE_FEATURE_COUNT = ModelPackage.ACTIVITY_NODE_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.operations.impl.DecisionOperationImpl <em>Decision Operation</em>}' class.

@@ -198,9 +198,8 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 	public void testLoginPage() throws Exception {
 		root = loadAndInfer(LoginHandlerKey.class);
 
-		Session session = assertHasSession(root, "my session");
-
-		Frame login = assertHasFrame(root, "login");
+		Session loginSession = assertHasSession(root, "Login Handler login");
+		Frame login = assertHasFrame(loginSession, "login");
 		assertGenerated(login);
 
 		// it should contain a form
@@ -216,7 +215,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		assertGenerated(button);
 
 		// a generated operation will handle the login
-		Operation op = assertHasOperation(session, "do login");
+		Operation op = assertHasOperation(loginSession, "do login");
 		assertGenerated(op);
 
 		// button has an 'onClick' run wire
@@ -248,8 +247,11 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		CompositeOperation check = assertHasCompositeOperation(session, "check key");
 		assertGenerated(check);
 
+		Session loginSession = assertHasSession(root, "Login Handler login");
+		assertGenerated(loginSession);
+
 		// destination page
-		Frame login = assertHasFrame(root, "login");
+		Frame login = assertHasFrame(loginSession, "login");
 		{
 			assertHasNoWiresFromTo(root, check, login);
 			NavigateAction wire = assertHasNavigateAction(root, check, login, "fail");

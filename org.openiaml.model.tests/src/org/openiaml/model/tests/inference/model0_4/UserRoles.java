@@ -117,7 +117,9 @@ public class UserRoles extends InferenceTestCase {
 		assertEquals(handler.getType(), LoginHandlerTypes.USER);
 
 		// so there should be a login page
-		Frame login = assertHasFrame(root, "login");
+		Session loginSession = assertHasSession(root, "role-based login handler login");
+		assertGenerated(loginSession);
+		Frame login = assertHasFrame(loginSession, "login");
 		assertGenerated(login);
 
 		// and a logout page
@@ -224,7 +226,8 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(run);
 
 		// a failure wire connecting the op to the login page
-		Frame login = assertHasFrame(root, "login");
+		Session loginSession = assertHasSession(root, "role-based login handler login");
+		Frame login = assertHasFrame(loginSession, "login");
 		NavigateAction fail = assertHasNavigateAction(root, pageOp, login, "fail");
 		assertGenerated(fail);
 
@@ -283,7 +286,8 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(run);
 
 		// a failure wire connecting the op to the login page
-		Frame login = assertHasFrame(root, "login");
+		Session loginSession = assertHasSession(root, "role-based login handler login");
+		Frame login = assertHasFrame(loginSession, "login");
 		NavigateAction fail = assertHasNavigateAction(root, check, login, "fail");
 		assertGenerated(fail);
 
@@ -466,7 +470,8 @@ public class UserRoles extends InferenceTestCase {
 	public void testLoginFormAttributes() throws Exception {
 		root = loadAndInfer(UserRoles.class);
 
-		Frame login = assertHasFrame(root, "login");
+		Session loginSession = assertHasSession(root, "role-based login handler login");
+		Frame login = assertHasFrame(loginSession, "login");
 		assertGenerated(login);
 
 		InputForm form = assertHasInputForm(login, "login form");

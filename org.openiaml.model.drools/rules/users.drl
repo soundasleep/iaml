@@ -149,6 +149,29 @@ rule "Connect fail wire from 'permissions check' to 'login page'"
 
 end
 
+rule "Connect fail wire from 'permissions check' to 'login page' (in separate login session)"
+	when
+		root : InternetApplication ( )
+		session : Session ( eContainer == root )
+		page : Frame ( eContainer == session )
+		ach : AccessControlHandler ( eContainer == session )
+		access : EventTrigger ( eContainer == page, page.onAccess == access )
+		check : CompositeOperation ( eContainer == page, name == "permissions check" )
+		lh : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
+		login_session : Session ( eContainer == root, eval(functions.loginHandlerScopeMatches( login_session, lh )) )
+		login : Frame ( name == "login", eContainer == login_session ) 
+		
+		not ( NavigateAction ( from == check, to == login, name == "fail" ))
+					
+		eval ( handler.veto( ach ))
+	
+	then
+		NavigateAction nav = handler.generatedNavigateAction(ach, page, check, login);
+		handler.setName(nav, "fail");
+		queue.add(nav, drools);
+
+end
+
 rule "User Stores contain a default role 'User'"
 	when
 		store : UserStore ( )

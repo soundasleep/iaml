@@ -78,7 +78,8 @@ public class UserRolesLoginHandler extends ValidInferenceTestCase {
 	public void testPrimaryKeyNotInputField() throws Exception {
 		root = loadAndInfer(UserRolesLoginHandler.class);
 		
-		Frame login = assertHasFrame(root, "login");
+		Session loginSession = assertHasSession(root, "user login handler login");
+		Frame login = assertHasFrame(loginSession, "login");
 		InputForm form = assertHasInputForm(login, "login form");
 		
 		InputTextField email = assertHasInputTextField(form, "email");

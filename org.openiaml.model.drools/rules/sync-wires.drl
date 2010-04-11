@@ -47,7 +47,6 @@ rule "Sync wires between objects should create sync wires between all elements i
 		
 end
 
-// TODO should these be Editable => has an onEdit event?
 rule "Run instance wire from edit to update (onEdit)"
 	when
 		sw : SyncWire()

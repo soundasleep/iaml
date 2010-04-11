@@ -40,10 +40,10 @@ rule "Set wires between objects should create set wires between all elements ins
 		
 end
 
-rule "Run instance wire from source.edit to target.update [set] (onEdit)"
+rule "Run instance wire from edit to update (onEdit)"
 	when
 		sw : SetWire()
-		source : VisibleThing( )
+		source : Editable( )
 		target : ContainsOperations( )
 		eval(functions.connectsSet(sw, source, target))
 		

@@ -6,6 +6,7 @@ package org.openiaml.model.tests.inference.model0_5;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Condition;
+import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
@@ -369,6 +370,41 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		// with the given parameter
 		assertGenerated(assertHasParameterEdge(root, results, run));
 
+	}
+	
+	/**
+	 * Attribute.onChange needs to call Label.update().
+	 * 
+	 * @throws Exception
+	 */
+	public void testAttributeCallsLabelUpdate() throws Exception {
+		Frame home = assertHasFrame(root, "Home");
+		InputForm form = assertHasInputForm(home, "view news");
+		DomainObjectInstance instance = assertHasDomainObjectInstance(home, "view news");
+
+		DomainAttributeInstance a1 = assertHasDomainAttributeInstance(instance, "title");
+		assertGenerated(a1);
+		
+		Label t1 = assertHasLabel(form, "title");
+		assertGenerated(t1);
+		
+		// connected by SetWire
+		assertGenerated(assertHasSetWire(root, a1, t1));
+		
+		EventTrigger onChange = a1.getOnEdit();
+		assertGenerated(onChange);
+		
+		Operation update = assertHasOperation(t1, "update");
+		assertGenerated(update);
+		
+		RunAction run = assertHasRunAction(root, onChange, update);
+		assertGenerated(run);
+		
+		Property a1value = assertHasFieldValue(a1);
+		assertGenerated(a1value);
+		
+		assertGenerated(assertHasParameterEdge(root, a1value, run));
+		
 	}
 
 }

@@ -217,6 +217,17 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	
 	/**
 	 * Assert that the given element contains the given
+	 * Property called 'fieldValue'.
+	 *
+	 * @return The element found
+	 */
+	public Property assertHasFieldValue(
+			DomainAttributeInstance element) throws JaxenException {
+		return assertHasProperty(element, "fieldValue");
+	}
+		
+	/**
+	 * Assert that the given element contains the given
 	 * Operation.
 	 *
 	 * @return The element found

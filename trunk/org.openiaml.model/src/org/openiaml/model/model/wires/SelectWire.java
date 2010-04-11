@@ -70,7 +70,7 @@ public interface SelectWire extends WireDestination, ParameterEdgeDestination, S
 	 * @return the value of the '<em>Limit</em>' attribute.
 	 * @see #setLimit(int)
 	 * @see org.openiaml.model.model.wires.WiresPackage#getSelectWire_Limit()
-	 * @model default="1"
+	 * @model default="1" required="true"
 	 * @generated
 	 */
 	int getLimit();

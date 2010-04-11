@@ -668,6 +668,9 @@
         <details key="documentation" value="Connects a {@model EventTrigger} to a {@model Operation}, allowing it to be executed. May have incoming {@model ConditionEdge}s."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="priority" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="{@model RunAction}s are run in order of descending priority; that is, a higher priority {@model RunAction} will execute first."/>
+        </eAnnotations>
         <eAnnotations source="http://openiaml.org/comment">
           <details key="added" value="0.2"/>
         </eAnnotations>
@@ -715,8 +718,8 @@
         <details key="documentation" value="Allows for the selection of particular {@model DomainObjectInstance instances} from a {@model DomainStore}."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="query" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="limit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
-          defaultValueLiteral="1"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="limit" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="1"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ConditionEdge" eSuperTypes="#//wires/ParameterEdgeDestination #//NamedElement #//GeneratesElements">
       <eAnnotations source="http://openiaml.org/comment">

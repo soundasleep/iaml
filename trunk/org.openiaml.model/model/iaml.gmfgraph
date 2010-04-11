@@ -919,12 +919,18 @@
             xsi:type="gmfgraph:Label"
             name="SelectWireQueryFigure"
             text="any"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="SelectWireLimitFigure"
+            text="limit 1"/>
       </actualFigure>
       <accessors
           accessor="getFigureSelectWireNameFigure"
           figure="//@figures.0/@descriptors.30/@actualFigure/@children.0"/>
       <accessors
           figure="//@figures.0/@descriptors.30/@actualFigure/@children.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.30/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="SetWireFigure">
@@ -2594,4 +2600,9 @@
       figure="PrimitiveConditionFigure"
       elementIcon="false"
       accessor="//@figures.0/@descriptors.66/@accessors.1"/>
+  <labels
+      name="SelectWireLimit"
+      figure="SelectWireFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.30/@accessors.2"/>
 </gmfgraph:Canvas>

@@ -114,7 +114,11 @@
 						«ENDIF»
 					))
 				«ENDIF»
+			«ELSEIF getClientSideCacheProperties(getRoot()).contains(this)»
+				/* a cached property value */
+				get_instance_property_«safeName()»()
 			«ELSE»
+				/* this will probably fail: how are we supposed to get arbitrarily defined Properties on the client-side? */ 
 				get_application_element_property("«safeName()-»")
 			«ENDIF»
 		«ENDIF»

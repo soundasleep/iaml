@@ -184,16 +184,22 @@ log_message("«id».php: Session data: " . print_r($_SESSION, true));
 						resolved = "do_«safeName(operation)»";
 						break;
 					«ENDFOREACH»
+					/* client-side cached operations */
 					«FOREACH getClientSideCacheOperations(getRoot()) AS operation»
-					/* client-side cache operations */
 					case "update_cached_result_«safeName(operation)»": 
 						resolved = "update_cached_result_«safeName(operation)»";
 						break;
 					«ENDFOREACH»
+					/* client-side cached conditions */
 					«FOREACH getClientSideCacheConditions(getRoot()) AS condition»
-					/* client-side cache conditions */
 					case "update_cached_result_«safeName(condition)»": 
 						resolved = "update_cached_result_«safeName(condition)»";
+						break;
+					«ENDFOREACH»
+					/* client-side cached properties */
+					«FOREACH getClientSideCacheProperties(getRoot()) AS property»
+					case "update_instance_property_«safeName(property)»": 
+						resolved = "update_instance_property_«safeName(property)»";
 						break;
 					«ENDFOREACH»
 					default:
@@ -201,6 +207,9 @@ log_message("«id».php: Session data: " . print_r($_SESSION, true));
 				}
 				
 				debug("[operation handler] resolved function: " + resolved);
+				if (!resolved) {
+					throw new IamlJavascriptException("Resolved operation '" + resolved + "' does not exist.");
+				}
 				
 				// call the function virtually
 				var virtual = new Function("args", "return " + resolved + "(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9]);");
@@ -219,6 +228,9 @@ log_message("«id».php: Session data: " . print_r($_SESSION, true));
 
 		// cached primitive condition values
 		«EXPAND template::operations::ClientSideCache::cachedPrimitiveConditions FOR getRoot()»
+
+		// cached property values
+		«EXPAND template::operations::ClientSideCache::cachedProperties FOR getRoot()»
 
 		/* actual frame onload functions (called ONCE the frame is fully loaded) */
 		var stored_onload_functions = new Array();

@@ -286,7 +286,7 @@
 			«EXPAND addStack(start, php) FOR e»
 		«ENDFOREACH»
 	«ELSE»
-		«IF php»$result«ELSE»result«ENDIF»result = «EXPAND template::conditions::Runtime::callCondition(php, false) FOREACH inConditionEdges SEPARATOR " && "»;
+		«IF php»$result«ELSE»result«ENDIF» = «EXPAND template::conditions::Runtime::callCondition(php, false) FOREACH inConditionEdges SEPARATOR " && "»;
 		if (!«IF php»$result«ELSE»result«ENDIF») {
 			«REM»continue expanding following conditions (if any)«ENDREM»
 			«FOREACH getFailFlows() AS e-»

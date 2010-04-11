@@ -27,6 +27,14 @@
 	$query = «EXPAND getQuery FOR this-»;
 	$args = array(«EXPAND template::operations::Parameters::callParameter(true, false, true) FOREACH inParameterEdges SEPARATOR ","»); 
 	
+	«IF hasOffset && limit > 1»
+		// make sure we are not offsetting past our limit
+		$limit = «limit»;
+		if ($offset >= $limit) {
+			throw new IamlIllegalArgumentException("Illegal offset $offset: Cannot select past limit $limit");
+		} 
+	«ENDIF»
+	
 	// get the result or return null
 	$row = evaluate_select_wire($db_name, $source_id, $source_class, $query, $args
 		, «IF hasOffset»$offset«ELSE»0«ENDIF»);
@@ -57,6 +65,14 @@
 	
 	// get the result or return null
 	$row = evaluate_select_wire_count($db_name, $source_id, $source_class, $query, $args);
+	
+	«IF limit > 1»
+		// this select wire has a limit
+		$limit = «limit»;
+		if ($row > $limit) {
+			$row = $limit;
+		} 
+	«ENDIF»
 	
 	«IF !force && inParameterEdges.size > 0»
 		} else {

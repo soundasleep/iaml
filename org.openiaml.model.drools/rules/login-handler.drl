@@ -173,7 +173,7 @@ rule "Connect 'access' event to 'check' operations"
 	then
 		RunAction wire = handler.generatedRunAction(scope, page, access, check);
 		handler.setName(wire, "run");
-		handler.setValue(wire, WiresPackage.eINSTANCE.getRunAction_Priority(), 100); // high priority
+		handler.setPriority(wire, 100); // high priority
 		queue.add(wire, drools);	
 	
 end

@@ -94,6 +94,7 @@
 		«FILE "output/instance_previous.php"»«EXPAND php::includes::InstancePreviousPhp::instancePreviousPhp»«ENDFILE»
 		«FILE "output/instance_reset.php"»«EXPAND php::includes::InstanceResetPhp::instanceResetPhp»«ENDFILE»
 		«FILE "output/instance_skip.php"»«EXPAND php::includes::InstanceSkipPhp::instanceSkipPhp»«ENDFILE»
+		«FILE "output/instance_jump.php"»«EXPAND php::includes::InstanceJumpPhp::instanceJumpPhp»«ENDFILE»
 	«ENDIF»
 	«FILE "output/update_client_cache.php"»«EXPAND php::includes::UpdateClientCache::updateClientCache»«ENDFILE»
 	

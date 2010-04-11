@@ -85,8 +85,16 @@
 	 * Increment the current instance cursor offset by the given
 	 * number of results. Will fail if it is out of bounds.
 	 */
-	function object_instance_skip_«safeName()»($n = 1) {
+	function object_instance_skip_«safeName()»($n) {
 		set_current_offset_«safeName()»(get_current_offset_«safeName()»() + $n);
+		call_all_attribute_change_events_«safeName()-»();
+	} 
+	
+	/**
+	 * Set the cursor to the given value. Will fail if it is out of bounds.
+	 */
+	function object_instance_jump_«safeName()»($n) {
+		set_current_offset_«safeName()»($n);
 		call_all_attribute_change_events_«safeName()-»();
 	} 
 	

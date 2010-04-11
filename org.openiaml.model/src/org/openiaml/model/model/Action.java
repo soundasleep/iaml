@@ -21,6 +21,7 @@ package org.openiaml.model.model;
  * <ul>
  *   <li>{@link org.openiaml.model.model.Action#getFrom <em>From</em>}</li>
  *   <li>{@link org.openiaml.model.model.Action#getTo <em>To</em>}</li>
+ *   <li>{@link org.openiaml.model.model.Action#getPriority <em>Priority</em>}</li>
  * </ul>
  * </p>
  *
@@ -84,5 +85,30 @@ public interface Action extends GeneratedElement {
 	 * @generated
 	 */
 	void setTo(ActionDestination value);
+
+	/**
+	 * Returns the value of the '<em><b>Priority</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * {@model RunAction}s are run in order of descending priority; that is, a higher priority {@model RunAction} will execute first.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Priority</em>' attribute.
+	 * @see #setPriority(int)
+	 * @see org.openiaml.model.model.ModelPackage#getAction_Priority()
+	 * @model annotation="http://openiaml.org/comment added='0.2'"
+	 * @generated
+	 */
+	int getPriority();
+
+	/**
+	 * Sets the value of the '{@link org.openiaml.model.model.Action#getPriority <em>Priority</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Priority</em>' attribute.
+	 * @see #getPriority()
+	 * @generated
+	 */
+	void setPriority(int value);
 
 } // Action

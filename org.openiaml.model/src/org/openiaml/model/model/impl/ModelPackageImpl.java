@@ -1728,6 +1728,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getAction_Priority() {
+		return (EAttribute)actionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getActionDestination() {
 		return actionDestinationEClass;
 	}
@@ -1975,6 +1984,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		actionEClass = createEClass(ACTION);
 		createEReference(actionEClass, ACTION__FROM);
 		createEReference(actionEClass, ACTION__TO);
+		createEAttribute(actionEClass, ACTION__PRIORITY);
 
 		actionDestinationEClass = createEClass(ACTION_DESTINATION);
 		createEReference(actionDestinationEClass, ACTION_DESTINATION__IN_ACTIONS);
@@ -2348,6 +2358,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEClass(actionEClass, Action.class, "Action", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAction_From(), this.getActionSource(), this.getActionSource_OutActions(), "from", null, 1, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAction_To(), this.getActionDestination(), this.getActionDestination_InActions(), "to", null, 1, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAction_Priority(), ecorePackage.getEInt(), "priority", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(actionDestinationEClass, ActionDestination.class, "ActionDestination", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getActionDestination_InActions(), this.getAction(), this.getAction_To(), "inActions", null, 0, -1, ActionDestination.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2627,7 +2638,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "changed", "added in 0.4.4"
-		   });			
+		   });				
+		addAnnotation
+		  (getAction_Priority(), 
+		   source, 
+		   new String[] {
+			 "added", "0.2"
+		   });		
 		addAnnotation
 		  (actionSourceEClass, 
 		   source, 
@@ -2877,7 +2894,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "An {@mode Action} represents the runtime feature of the {@model EventTrigger Event}-{@model Condition}-{@model Action} paradigm. Also see: {@model Wire}"
-		   });				
+		   });		
+		addAnnotation
+		  (getAction_Priority(), 
+		   source, 
+		   new String[] {
+			 "documentation", "{@model RunAction}s are run in order of descending priority; that is, a higher priority {@model RunAction} will execute first."
+		   });					
 		addAnnotation
 		  (primitiveConditionEClass, 
 		   source, 

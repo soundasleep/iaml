@@ -544,6 +544,14 @@
         eOpposite="#//ActionSource/outActions"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//ActionDestination"
         eOpposite="#//ActionDestination/inActions"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="priority" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="{@model RunAction}s are run in order of descending priority; that is, a higher priority {@model RunAction} will execute first."/>
+      </eAnnotations>
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="added" value="0.2"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActionDestination" abstract="true" interface="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="inActions" upperBound="-1"
@@ -667,14 +675,6 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Connects a {@model EventTrigger} to a {@model Operation}, allowing it to be executed. May have incoming {@model ConditionEdge}s."/>
       </eAnnotations>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="priority" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="{@model RunAction}s are run in order of descending priority; that is, a higher priority {@model RunAction} will execute first."/>
-        </eAnnotations>
-        <eAnnotations source="http://openiaml.org/comment">
-          <details key="added" value="0.2"/>
-        </eAnnotations>
-      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ParameterEdge" eSuperTypes="#//NamedElement #//GeneratedElement">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

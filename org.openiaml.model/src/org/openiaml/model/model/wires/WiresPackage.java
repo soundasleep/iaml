@@ -1221,13 +1221,22 @@ public interface WiresPackage extends EPackage {
 	int NAVIGATE_ACTION__TO = ModelPackage.WIRE_DESTINATION_FEATURE_COUNT + 9;
 
 	/**
+	 * The feature id for the '<em><b>Priority</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAVIGATE_ACTION__PRIORITY = ModelPackage.WIRE_DESTINATION_FEATURE_COUNT + 10;
+
+	/**
 	 * The number of structural features of the '<em>Navigate Action</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NAVIGATE_ACTION_FEATURE_COUNT = ModelPackage.WIRE_DESTINATION_FEATURE_COUNT + 10;
+	int NAVIGATE_ACTION_FEATURE_COUNT = ModelPackage.WIRE_DESTINATION_FEATURE_COUNT + 11;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.wires.impl.SelectWireImpl <em>Select Wire</em>}' class.
@@ -2313,17 +2322,6 @@ public interface WiresPackage extends EPackage {
 	EClass getRunAction();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.openiaml.model.model.wires.RunAction#getPriority <em>Priority</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Priority</em>'.
-	 * @see org.openiaml.model.model.wires.RunAction#getPriority()
-	 * @see #getRunAction()
-	 * @generated
-	 */
-	EAttribute getRunAction_Priority();
-
-	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.wires.ParameterEdge <em>Parameter Edge</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2878,14 +2876,6 @@ public interface WiresPackage extends EPackage {
 		 * @generated
 		 */
 		EClass RUN_ACTION = eINSTANCE.getRunAction();
-
-		/**
-		 * The meta object literal for the '<em><b>Priority</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute RUN_ACTION__PRIORITY = eINSTANCE.getRunAction_Priority();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.wires.impl.ParameterEdgeImpl <em>Parameter Edge</em>}' class.

@@ -20,7 +20,7 @@ try {
 	«REM»group by containingFrame: optimization«ENDREM»
 	«FOREACH allProperties().collect(e|containingFrame(e)).toSet() AS frame»
 	if ($frame_id == "«safeNameString(frame.id)-»") {
-		«EXPAND outgoingEmailValue FOREACH allProperties(this).select(p|containingFrame(p)==frame)»
+		«EXPAND outgoingEmailValue FOREACH allProperties(this).select(p|containingFrame(p)==frame && containingEmail(p) == null)»
 	}
 	«ENDFOREACH»
 } catch (IamlRuntimeException $e) {
@@ -59,6 +59,26 @@ try {
 		}				
 	«ENDIF»
 
+	«IF model::visual::Label.isInstance(eContainer)»
+		/* container: Label */
+		if («EXPAND template::operations::Parameters::isSetParameter(true)») {
+			// but only if it's actually set
+			// get the current value
+			$value = «EXPAND template::operations::Parameters::callParameterValue(true, false)»;
+			
+			// pass it to the client 
+			log_message("outgoing value to '«eContainer»' («safeNameString(((model::visual::Label) eContainer).id)»): '$value'");
+			log_message("set_html " 
+				. escape_parameter_string("«safeNameString(((model::visual::Label) eContainer).id)»")
+				. " "
+				. escape_parameter_string($value));
+			echo "\nset_html " 
+				. escape_parameter_string("«safeNameString(((model::visual::Label) eContainer).id)»")
+				. " "
+				. escape_parameter_string($value);
+		}				
+	«ENDIF»
+	
 	«IF model::visual::MapPoint.isInstance(eContainer)»
 		/* container: MapPoint */
 		if («EXPAND template::operations::Parameters::isSetParameter(true)») {

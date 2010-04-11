@@ -129,7 +129,21 @@ function execute_queued_url(url, counter, function_queue) {
 		      						var element_id = decodeURIComponent(bits[1]);
 		      						var value = decodeURIComponent(bits[2]);
 		      						debug("[instruction] set value(" + element_id + ")");
+		      						if (!document.getElementById(element_id))
+		      							throw new IamlJavascriptException("No such element '" + element_id + "'");
 		      						document.getElementById(element_id).value = value;
+		      						break;
+
+		      					case "set_html":
+		      						if (bits.length != 3) {
+		      							throw new IamlJavascriptException("'set_html' instruction called with incorrect number of arguments: expected 3, found " + bits.length);
+		      						}
+		      						var element_id = decodeURIComponent(bits[1]);
+		      						var value = decodeURIComponent(bits[2]);
+		      						debug("[instruction] set html(" + element_id + ")");
+		      						if (!document.getElementById(element_id))
+		      							throw new IamlJavascriptException("No such element '" + element_id + "'");
+		      						document.getElementById(element_id).innerHTML = value;
 		      						break;
 
 		      					case "set_map_point":

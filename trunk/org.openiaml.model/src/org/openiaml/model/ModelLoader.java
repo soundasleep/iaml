@@ -87,6 +87,28 @@ public class ModelLoader {
 		return resource.getContents().get(0);
 		
 	}
+	
+	/**
+	 * Load the EMF model in the given URI.
+	 * 
+	 * @param uri
+	 * @return
+	 * @throws ModelLoadException if the resource is null, or the resource contains too many elements
+	 */
+	public static EObject load(URI uri) throws ModelLoadException {
+		ResourceSet resourceSet = new ResourceSetImpl();
+		Resource resource = resourceSet.getResource(uri, true);
+		
+		if (resource == null)
+			throw new ModelLoadException(new NullPointerException("Unexpected null resource in '" + uri + "'"));
+		
+		if (resource.getContents().size() != 1) {
+			throw new ModelLoadException(new RuntimeException("Unexpected number of contents in the file '" + uri + "': " + resource.getContents().size())); 
+		}
+		
+		return resource.getContents().get(0);
+		
+	}
 
 	/**
 	 * Get the default save options passed to EMF.

@@ -22,6 +22,7 @@ public class AllModelTests {
         suite.addTestSuite(ModelTestCase.class);
         suite.addTestSuite(ContainmentTestCase.class);
         suite.addTestSuite(EdgeTypesTest.class);
+        suite.addTestSuite(BuiltinDataTypesTests.class);
         
         return suite; 
    }

@@ -136,5 +136,23 @@ public class IteratedSyncWires extends InferenceTestCase {
 		assertGenerated(run);
 		
 	}
+	
+	/**
+	 * Compared to {@link SelectWireManyPaginate}, the navigation
+	 * buttons should <strong>NOT</strong> be created (since we are
+	 * only selecting one).
+	 * 
+	 * @throws Exception
+	 */
+	public void testNavigationButtonsNotCreated() throws Exception {
+		Frame home = assertHasFrame(root, "Home");	
+		InputForm form = assertHasInputForm(home, "View News");
+		
+		assertHasNoButton(form, "Next");
+		assertHasNoButton(form, "Previous");
+		assertHasNoButton(form, "First");
+		assertHasNoButton(form, "Last");
+		assertHasNoLabel(form, "Results");
+	}
 
 }

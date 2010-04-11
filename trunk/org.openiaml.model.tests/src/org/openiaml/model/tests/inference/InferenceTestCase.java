@@ -586,6 +586,26 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	}
 	
 	/**
+	 * Assert that the given element does not contains the given
+	 * Button.
+	 *
+	 * @return The element found
+	 */
+	public void assertHasNoButton(VisibleThing element, String string) throws JaxenException {
+		assertHasNone(element, "iaml:children[iaml:name='" + string + "']", Button.class);
+	}
+
+	/**
+	 * Assert that the given element does not contains the given
+	 * Button.
+	 *
+	 * @return The element found
+	 */
+	public void assertHasNoButton(Frame element, String string) throws JaxenException {
+		assertHasNone(element, "iaml.visual:children[iaml:name='" + string + "']", Button.class);
+	}
+
+	/**
 	 * Assert that the given element contains the given
 	 * MapPoint.
 	 *

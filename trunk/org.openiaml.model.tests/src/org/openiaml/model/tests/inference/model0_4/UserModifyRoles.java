@@ -63,7 +63,9 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 		root = loadAndInfer(UserModifyRoles.class);
 
 		Session session = assertHasSession(root, "target session");
-		CompositeOperation doLogin = assertHasCompositeOperation(session, "do login");
+		Session loginSession = assertHasSession(root, "current user login");
+		assertGenerated(loginSession);
+		CompositeOperation doLogin = assertHasCompositeOperation(loginSession, "do login");
 
 		StartNode start = assertHasStartNode(doLogin);
 		FinishNode finish = assertHasFinishNode(doLogin);
@@ -129,10 +131,10 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 	public void testDoLoginRunIncomingParameters() throws Exception {
 		root = loadAndInfer(UserModifyRoles.class);
 
-		Session session = assertHasSession(root, "target session");
+		Session loginSession = assertHasSession(root, "current user login");
 
 		// get the keys in the input form
-		Frame login = assertHasFrame(root, "login");
+		Frame login = assertHasFrame(loginSession, "login");
 		InputForm form = assertHasInputForm(login, "login form");
 		InputTextField temail = assertHasInputTextField(form, "email");
 		InputTextField tpass = assertHasInputTextField(form, "password");
@@ -141,7 +143,7 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 		Button button = assertHasButton(form, "Login");
 
 		// get the operation
-		Operation doLogin = assertHasOperation(session, "do login");
+		Operation doLogin = assertHasOperation(loginSession, "do login");
 
 		// get the run instance wire
 		RunAction run = assertHasRunAction(login, button, doLogin, "onClick");
@@ -173,7 +175,8 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 		Property password = assertHasProperty(session, "current password");
 
 		// get the keys in the input form
-		Frame login = assertHasFrame(root, "login");
+		Session loginSession = assertHasSession(root, "current user login");
+		Frame login = assertHasFrame(loginSession, "login");
 		InputForm form = assertHasInputForm(login, "login form");
 		InputTextField temail = assertHasInputTextField(form, "email");
 		InputTextField tpass = assertHasInputTextField(form, "password");

@@ -47,9 +47,11 @@ import org.openiaml.model.model.components.AccessControlHandler;
 import org.openiaml.model.model.components.EntryGate;
 import org.openiaml.model.model.components.ExitGate;
 import org.openiaml.model.model.components.LoginHandler;
+import org.openiaml.model.model.operations.Arithmetic;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.CastNode;
 import org.openiaml.model.model.operations.DecisionCondition;
+import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.JoinNode;
@@ -792,6 +794,26 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	}
 	
 	/**
+	 * Assert that the given element contains only one
+	 * DecisionNode.
+	 *
+	 * @return The element found
+	 */
+	public DecisionNode assertHasDecisionNode(CompositeOperation element) throws JaxenException {
+		return (DecisionNode) typeSelect(element.getNodes(), DecisionNode.class).get(0);	
+	}
+	
+	/**
+	 * Assert that the given element contains only one
+	 * DecisionNode.
+	 *
+	 * @return The element found
+	 */
+	public DecisionNode assertHasDecisionNode(CompositeCondition element) throws JaxenException {
+		return (DecisionNode) typeSelect(element.getNodes(), DecisionNode.class).get(0);	
+	}
+	
+	/**
 	 * Assert that the given element contains the given
 	 * SplitNode.
 	 *
@@ -911,6 +933,15 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		return (CastNode) assertHasOne(element, "iaml:nodes", CastNode.class);
 	}
 	
+	/**
+	 * Assert that the given element contains only one
+	 * Arithmetic.
+	 *
+	 * @return The element found
+	 */
+	public Arithmetic assertHasArithmetic(CompositeOperation element) throws JaxenException {
+		return (Arithmetic) typeSelect(element.getNodes(), Arithmetic.class).get(0);
+	}
 	
 	/**
 	 * Assert that the given element contains the given

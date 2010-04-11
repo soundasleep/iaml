@@ -477,6 +477,16 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	}
 	
 	/**
+	 * Helper method: assert A > B.
+	 * 
+	 * @param expected expected value (B)
+	 * @param actual actual value (A)
+	 */
+	public void assertGreater(int expected, int actual) {
+		assertTrue("expected > than " + expected + ", but actually had " + actual, actual > expected);
+	}
+	
+	/**
 	 * Helper method: assert A != B
 	 * 
 	 * @param expected expected value (B)

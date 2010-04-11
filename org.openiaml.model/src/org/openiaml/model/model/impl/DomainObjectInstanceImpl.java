@@ -52,6 +52,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.impl.DomainObjectInstanceImpl#getHasNext <em>Has Next</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainObjectInstanceImpl#getEmpty <em>Empty</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainObjectInstanceImpl#getResults <em>Results</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.DomainObjectInstanceImpl#getJump <em>Jump</em>}</li>
  * </ul>
  * </p>
  *
@@ -227,6 +228,16 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 	 * @ordered
 	 */
 	protected Property results;
+
+	/**
+	 * The cached value of the '{@link #getJump() <em>Jump</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getJump()
+	 * @generated
+	 * @ordered
+	 */
+	protected Operation jump;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -760,6 +771,49 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Operation getJump() {
+		return jump;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetJump(Operation newJump, NotificationChain msgs) {
+		Operation oldJump = jump;
+		jump = newJump;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_OBJECT_INSTANCE__JUMP, oldJump, newJump);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setJump(Operation newJump) {
+		if (newJump != jump) {
+			NotificationChain msgs = null;
+			if (jump != null)
+				msgs = ((InternalEObject)jump).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOMAIN_OBJECT_INSTANCE__JUMP, null, msgs);
+			if (newJump != null)
+				msgs = ((InternalEObject)newJump).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOMAIN_OBJECT_INSTANCE__JUMP, null, msgs);
+			msgs = basicSetJump(newJump, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_OBJECT_INSTANCE__JUMP, newJump, newJump));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -806,6 +860,8 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 				return basicSetEmpty(null, msgs);
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE__RESULTS:
 				return basicSetResults(null, msgs);
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__JUMP:
+				return basicSetJump(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -848,6 +904,8 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 				return getEmpty();
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE__RESULTS:
 				return getResults();
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__JUMP:
+				return getJump();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -909,6 +967,9 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE__RESULTS:
 				setResults((Property)newValue);
 				return;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__JUMP:
+				setJump((Operation)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -966,6 +1027,9 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE__RESULTS:
 				setResults((Property)null);
 				return;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__JUMP:
+				setJump((Operation)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1008,6 +1072,8 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 				return empty != null;
 			case ModelPackage.DOMAIN_OBJECT_INSTANCE__RESULTS:
 				return results != null;
+			case ModelPackage.DOMAIN_OBJECT_INSTANCE__JUMP:
+				return jump != null;
 		}
 		return super.eIsSet(featureID);
 	}

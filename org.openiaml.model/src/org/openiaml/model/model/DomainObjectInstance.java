@@ -34,6 +34,7 @@ import org.openiaml.model.model.wires.ParameterEdgesSource;
  *   <li>{@link org.openiaml.model.model.DomainObjectInstance#getHasNext <em>Has Next</em>}</li>
  *   <li>{@link org.openiaml.model.model.DomainObjectInstance#getEmpty <em>Empty</em>}</li>
  *   <li>{@link org.openiaml.model.model.DomainObjectInstance#getResults <em>Results</em>}</li>
+ *   <li>{@link org.openiaml.model.model.DomainObjectInstance#getJump <em>Jump</em>}</li>
  * </ul>
  * </p>
  *
@@ -146,6 +147,9 @@ public interface DomainObjectInstance extends ApplicationElement, ContainsWires,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Go to the previous result. Will throw an error if {@model #hasPrevious} would be false.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Previous</em>' containment reference.
 	 * @see #setPrevious(Operation)
 	 * @see org.openiaml.model.model.ModelPackage#getDomainObjectInstance_Previous()
@@ -172,6 +176,9 @@ public interface DomainObjectInstance extends ApplicationElement, ContainsWires,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Go to the next result. Will throw an error if {@model #hasNext} would be false.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Next</em>' containment reference.
 	 * @see #setNext(Operation)
 	 * @see org.openiaml.model.model.ModelPackage#getDomainObjectInstance_Next()
@@ -198,6 +205,9 @@ public interface DomainObjectInstance extends ApplicationElement, ContainsWires,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Start at result number 0.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Reset</em>' containment reference.
 	 * @see #setReset(Operation)
 	 * @see org.openiaml.model.model.ModelPackage#getDomainObjectInstance_Reset()
@@ -224,6 +234,9 @@ public interface DomainObjectInstance extends ApplicationElement, ContainsWires,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Skip the given number of results. Can be negative to go backwards.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Skip</em>' containment reference.
 	 * @see #setSkip(Operation)
 	 * @see org.openiaml.model.model.ModelPackage#getDomainObjectInstance_Skip()
@@ -250,6 +263,9 @@ public interface DomainObjectInstance extends ApplicationElement, ContainsWires,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * True if navigating to the {@model #previous} result will not be out-of-bounds.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Has Previous</em>' containment reference.
 	 * @see #setHasPrevious(Condition)
 	 * @see org.openiaml.model.model.ModelPackage#getDomainObjectInstance_HasPrevious()
@@ -276,6 +292,9 @@ public interface DomainObjectInstance extends ApplicationElement, ContainsWires,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * True if navigating to the {@model #next} result will not be out-of-bounds.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Has Next</em>' containment reference.
 	 * @see #setHasNext(Condition)
 	 * @see org.openiaml.model.model.ModelPackage#getDomainObjectInstance_HasNext()
@@ -302,6 +321,9 @@ public interface DomainObjectInstance extends ApplicationElement, ContainsWires,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * True if the current result set is empty.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Empty</em>' containment reference.
 	 * @see #setEmpty(Condition)
 	 * @see org.openiaml.model.model.ModelPackage#getDomainObjectInstance_Empty()
@@ -328,6 +350,9 @@ public interface DomainObjectInstance extends ApplicationElement, ContainsWires,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The number of results in the current result set.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Results</em>' containment reference.
 	 * @see #setResults(Property)
 	 * @see org.openiaml.model.model.ModelPackage#getDomainObjectInstance_Results()
@@ -345,5 +370,30 @@ public interface DomainObjectInstance extends ApplicationElement, ContainsWires,
 	 * @generated
 	 */
 	void setResults(Property value);
+
+	/**
+	 * Returns the value of the '<em><b>Jump</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Jump to the specific result number, starting from 0.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Jump</em>' containment reference.
+	 * @see #setJump(Operation)
+	 * @see org.openiaml.model.model.ModelPackage#getDomainObjectInstance_Jump()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Operation getJump();
+
+	/**
+	 * Sets the value of the '{@link org.openiaml.model.model.DomainObjectInstance#getJump <em>Jump</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Jump</em>' containment reference.
+	 * @see #getJump()
+	 * @generated
+	 */
+	void setJump(Operation value);
 
 } // DomainObjectInstance

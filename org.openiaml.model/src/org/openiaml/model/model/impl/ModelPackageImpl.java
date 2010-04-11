@@ -1440,6 +1440,15 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getDomainObjectInstance_Jump() {
+		return (EReference)domainObjectInstanceEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getScope() {
 		return scopeEClass;
 	}
@@ -1924,6 +1933,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		createEReference(domainObjectInstanceEClass, DOMAIN_OBJECT_INSTANCE__HAS_NEXT);
 		createEReference(domainObjectInstanceEClass, DOMAIN_OBJECT_INSTANCE__EMPTY);
 		createEReference(domainObjectInstanceEClass, DOMAIN_OBJECT_INSTANCE__RESULTS);
+		createEReference(domainObjectInstanceEClass, DOMAIN_OBJECT_INSTANCE__JUMP);
 
 		scopeEClass = createEClass(SCOPE);
 		createEReference(scopeEClass, SCOPE__ENTRY_GATE);
@@ -2296,6 +2306,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEReference(getDomainObjectInstance_HasNext(), this.getCondition(), null, "hasNext", null, 0, 1, DomainObjectInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDomainObjectInstance_Empty(), this.getCondition(), null, "empty", null, 0, 1, DomainObjectInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDomainObjectInstance_Results(), this.getProperty(), null, "results", null, 0, 1, DomainObjectInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDomainObjectInstance_Jump(), this.getOperation(), null, "jump", null, 0, 1, DomainObjectInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(scopeEClass, Scope.class, "Scope", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getScope_EntryGate(), theComponentsPackage.getEntryGate(), null, "entryGate", null, 0, 1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2542,7 +2553,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   new String[] {
 			 "added", "0.3",
 			 "changed", "0.4.3 to default \'false\' instead of \'true\'"
-		   });			
+		   });												
 		addAnnotation
 		  (scopeEClass, 
 		   source, 
@@ -2782,6 +2793,60 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "This {@model EventTrigger event} is called whenever the {@model #current current instance} changes."
+		   });		
+		addAnnotation
+		  (getDomainObjectInstance_Previous(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Go to the previous result. Will throw an error if {@model #hasPrevious} would be false."
+		   });		
+		addAnnotation
+		  (getDomainObjectInstance_Next(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Go to the next result. Will throw an error if {@model #hasNext} would be false."
+		   });		
+		addAnnotation
+		  (getDomainObjectInstance_Reset(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Start at result number 0."
+		   });		
+		addAnnotation
+		  (getDomainObjectInstance_Skip(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Skip the given number of results. Can be negative to go backwards."
+		   });		
+		addAnnotation
+		  (getDomainObjectInstance_HasPrevious(), 
+		   source, 
+		   new String[] {
+			 "documentation", "True if navigating to the {@model #previous} result will not be out-of-bounds."
+		   });		
+		addAnnotation
+		  (getDomainObjectInstance_HasNext(), 
+		   source, 
+		   new String[] {
+			 "documentation", "True if navigating to the {@model #next} result will not be out-of-bounds."
+		   });		
+		addAnnotation
+		  (getDomainObjectInstance_Empty(), 
+		   source, 
+		   new String[] {
+			 "documentation", "True if the current result set is empty."
+		   });		
+		addAnnotation
+		  (getDomainObjectInstance_Results(), 
+		   source, 
+		   new String[] {
+			 "documentation", "The number of results in the current result set."
+		   });		
+		addAnnotation
+		  (getDomainObjectInstance_Jump(), 
+		   source, 
+		   new String[] {
+			 "documentation", "Jump to the specific result number, starting from 0."
 		   });							
 		addAnnotation
 		  (conditionEClass, 

@@ -21,6 +21,9 @@ import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.impl.ActivityNodeImpl;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.OperationsPackage;
+import org.openiaml.model.model.wires.ConditionEdge;
+import org.openiaml.model.model.wires.ConditionEdgeDestination;
+import org.openiaml.model.model.wires.WiresPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,6 +34,7 @@ import org.openiaml.model.model.operations.OperationsPackage;
  * <ul>
  *   <li>{@link org.openiaml.model.model.operations.impl.DecisionNodeImpl#getOutExecutions <em>Out Executions</em>}</li>
  *   <li>{@link org.openiaml.model.model.operations.impl.DecisionNodeImpl#getInExecutions <em>In Executions</em>}</li>
+ *   <li>{@link org.openiaml.model.model.operations.impl.DecisionNodeImpl#getInConditionEdges <em>In Condition Edges</em>}</li>
  * </ul>
  * </p>
  *
@@ -56,6 +60,16 @@ public class DecisionNodeImpl extends ActivityNodeImpl implements DecisionNode {
 	 * @ordered
 	 */
 	protected EList<ExecutionEdge> inExecutions;
+
+	/**
+	 * The cached value of the '{@link #getInConditionEdges() <em>In Condition Edges</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInConditionEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ConditionEdge> inConditionEdges;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -105,6 +119,18 @@ public class DecisionNodeImpl extends ActivityNodeImpl implements DecisionNode {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ConditionEdge> getInConditionEdges() {
+		if (inConditionEdges == null) {
+			inConditionEdges = new EObjectWithInverseResolvingEList<ConditionEdge>(ConditionEdge.class, this, OperationsPackage.DECISION_NODE__IN_CONDITION_EDGES, WiresPackage.CONDITION_EDGE__TO);
+		}
+		return inConditionEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -113,6 +139,8 @@ public class DecisionNodeImpl extends ActivityNodeImpl implements DecisionNode {
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutExecutions()).basicAdd(otherEnd, msgs);
 			case OperationsPackage.DECISION_NODE__IN_EXECUTIONS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInExecutions()).basicAdd(otherEnd, msgs);
+			case OperationsPackage.DECISION_NODE__IN_CONDITION_EDGES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getInConditionEdges()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -129,6 +157,8 @@ public class DecisionNodeImpl extends ActivityNodeImpl implements DecisionNode {
 				return ((InternalEList<?>)getOutExecutions()).basicRemove(otherEnd, msgs);
 			case OperationsPackage.DECISION_NODE__IN_EXECUTIONS:
 				return ((InternalEList<?>)getInExecutions()).basicRemove(otherEnd, msgs);
+			case OperationsPackage.DECISION_NODE__IN_CONDITION_EDGES:
+				return ((InternalEList<?>)getInConditionEdges()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -145,6 +175,8 @@ public class DecisionNodeImpl extends ActivityNodeImpl implements DecisionNode {
 				return getOutExecutions();
 			case OperationsPackage.DECISION_NODE__IN_EXECUTIONS:
 				return getInExecutions();
+			case OperationsPackage.DECISION_NODE__IN_CONDITION_EDGES:
+				return getInConditionEdges();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -166,6 +198,10 @@ public class DecisionNodeImpl extends ActivityNodeImpl implements DecisionNode {
 				getInExecutions().clear();
 				getInExecutions().addAll((Collection<? extends ExecutionEdge>)newValue);
 				return;
+			case OperationsPackage.DECISION_NODE__IN_CONDITION_EDGES:
+				getInConditionEdges().clear();
+				getInConditionEdges().addAll((Collection<? extends ConditionEdge>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -184,6 +220,9 @@ public class DecisionNodeImpl extends ActivityNodeImpl implements DecisionNode {
 			case OperationsPackage.DECISION_NODE__IN_EXECUTIONS:
 				getInExecutions().clear();
 				return;
+			case OperationsPackage.DECISION_NODE__IN_CONDITION_EDGES:
+				getInConditionEdges().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -200,6 +239,8 @@ public class DecisionNodeImpl extends ActivityNodeImpl implements DecisionNode {
 				return outExecutions != null && !outExecutions.isEmpty();
 			case OperationsPackage.DECISION_NODE__IN_EXECUTIONS:
 				return inExecutions != null && !inExecutions.isEmpty();
+			case OperationsPackage.DECISION_NODE__IN_CONDITION_EDGES:
+				return inConditionEdges != null && !inConditionEdges.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -223,6 +264,12 @@ public class DecisionNodeImpl extends ActivityNodeImpl implements DecisionNode {
 				default: return -1;
 			}
 		}
+		if (baseClass == ConditionEdgeDestination.class) {
+			switch (derivedFeatureID) {
+				case OperationsPackage.DECISION_NODE__IN_CONDITION_EDGES: return WiresPackage.CONDITION_EDGE_DESTINATION__IN_CONDITION_EDGES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -242,6 +289,12 @@ public class DecisionNodeImpl extends ActivityNodeImpl implements DecisionNode {
 		if (baseClass == ExecutionEdgeDestination.class) {
 			switch (baseFeatureID) {
 				case ModelPackage.EXECUTION_EDGE_DESTINATION__IN_EXECUTIONS: return OperationsPackage.DECISION_NODE__IN_EXECUTIONS;
+				default: return -1;
+			}
+		}
+		if (baseClass == ConditionEdgeDestination.class) {
+			switch (baseFeatureID) {
+				case WiresPackage.CONDITION_EDGE_DESTINATION__IN_CONDITION_EDGES: return OperationsPackage.DECISION_NODE__IN_CONDITION_EDGES;
 				default: return -1;
 			}
 		}

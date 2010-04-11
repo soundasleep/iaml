@@ -426,6 +426,7 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 
 		// Obtain other dependent packages
 		ModelPackage theModelPackage = (ModelPackage)EPackage.Registry.INSTANCE.getEPackage(ModelPackage.eNS_URI);
+		WiresPackage theWiresPackage = (WiresPackage)EPackage.Registry.INSTANCE.getEPackage(WiresPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -441,6 +442,7 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		decisionNodeEClass.getESuperTypes().add(theModelPackage.getActivityNode());
 		decisionNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgesSource());
 		decisionNodeEClass.getESuperTypes().add(theModelPackage.getExecutionEdgeDestination());
+		decisionNodeEClass.getESuperTypes().add(theWiresPackage.getConditionEdgeDestination());
 		decisionOperationEClass.getESuperTypes().add(theModelPackage.getPrimitiveOperation());
 		decisionOperationEClass.getESuperTypes().add(theModelPackage.getDataFlowEdgeDestination());
 		decisionConditionEClass.getESuperTypes().add(theModelPackage.getCondition());
@@ -530,6 +532,12 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 		   source, 
 		   new String[] {
 			 "documentation", "The successful completion of an {@model Operation}, or the {@model Condition} passed."
+		   });		
+		addAnnotation
+		  (decisionNodeEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Considers the {@model ConditionEdgeDestination incoming} {@model Condition}, and follows either the passing or failing {@model ExecutionEdge} as appropriate."
 		   });				
 		addAnnotation
 		  (splitNodeEClass, 
@@ -576,7 +584,7 @@ public class OperationsPackageImpl extends EPackageImpl implements OperationsPac
 	 * @generated
 	 */
 	protected void createCommentAnnotations() {
-		String source = "http://openiaml.org/comment";					
+		String source = "http://openiaml.org/comment";						
 		addAnnotation
 		  (decisionConditionEClass, 
 		   source, 

@@ -1073,6 +1073,15 @@ public interface UsersPackage extends EPackage {
 	int USER_INSTANCE__RESULTS = ModelPackage.DOMAIN_OBJECT_INSTANCE__RESULTS;
 
 	/**
+	 * The feature id for the '<em><b>Jump</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int USER_INSTANCE__JUMP = ModelPackage.DOMAIN_OBJECT_INSTANCE__JUMP;
+
+	/**
 	 * The number of structural features of the '<em>User Instance</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

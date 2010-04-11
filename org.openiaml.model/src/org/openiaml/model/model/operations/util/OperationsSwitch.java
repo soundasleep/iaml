@@ -38,6 +38,7 @@ import org.openiaml.model.model.operations.OperationCallNode;
 import org.openiaml.model.model.operations.OperationsPackage;
 import org.openiaml.model.model.operations.SplitNode;
 import org.openiaml.model.model.operations.StartNode;
+import org.openiaml.model.model.wires.ConditionEdgeDestination;
 import org.openiaml.model.model.wires.ConditionEdgesSource;
 
 /**
@@ -147,6 +148,7 @@ public class OperationsSwitch<T> {
 				if (result == null) result = caseActivityNode(decisionNode);
 				if (result == null) result = caseExecutionEdgesSource(decisionNode);
 				if (result == null) result = caseExecutionEdgeDestination(decisionNode);
+				if (result == null) result = caseConditionEdgeDestination(decisionNode);
 				if (result == null) result = caseGeneratedElement(decisionNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -469,6 +471,21 @@ public class OperationsSwitch<T> {
 	 * @generated
 	 */
 	public T caseExecutionEdgeDestination(ExecutionEdgeDestination object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Condition Edge Destination</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Condition Edge Destination</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConditionEdgeDestination(ConditionEdgeDestination object) {
 		return null;
 	}
 

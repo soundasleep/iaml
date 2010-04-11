@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xsd.XSDSimpleTypeDefinition;
 import org.openiaml.model.model.Accessible;
+import org.openiaml.model.model.Action;
 import org.openiaml.model.model.ActionDestination;
 import org.openiaml.model.model.ActionSource;
 import org.openiaml.model.model.CompositeCondition;
@@ -648,8 +649,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setValue(element, OperationsPackage.eINSTANCE.getArithmetic_OperationType(), value);
 	}
 
-	public void setPriority(RunAction element, int value) throws InferenceException {
-		setValue(element, WiresPackage.eINSTANCE.getRunAction_Priority(), value);
+	public void setPriority(Action element, int value) throws InferenceException {
+		setValue(element, ModelPackage.eINSTANCE.getAction_Priority(), value);
 	}
 	
 	public void setExceptionText(CancelNode element, String value) throws InferenceException {

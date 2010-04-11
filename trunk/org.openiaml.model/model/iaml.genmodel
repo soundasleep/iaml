@@ -180,6 +180,7 @@
     <genClasses image="false" ecoreClass="iaml.ecore#//Action">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//Action/from"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//Action/to"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//Action/priority"/>
     </genClasses>
     <genClasses image="false" ecoreClass="iaml.ecore#//ActionDestination">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//ActionDestination/inActions"/>
@@ -222,9 +223,7 @@
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//wires/CompositeWire/values"/>
       </genClasses>
       <genClasses ecoreClass="iaml.ecore#//wires/SyncWire"/>
-      <genClasses ecoreClass="iaml.ecore#//wires/RunAction">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/RunAction/priority"/>
-      </genClasses>
+      <genClasses ecoreClass="iaml.ecore#//wires/RunAction"/>
       <genClasses ecoreClass="iaml.ecore#//wires/ParameterEdge">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/ParameterEdge/parameterName"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"

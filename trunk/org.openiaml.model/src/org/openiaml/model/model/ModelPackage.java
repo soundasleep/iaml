@@ -5879,13 +5879,22 @@ public interface ModelPackage extends EPackage {
 	int ACTION__TO = GENERATED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Priority</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTION__PRIORITY = GENERATED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Action</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACTION_FEATURE_COUNT = GENERATED_ELEMENT_FEATURE_COUNT + 2;
+	int ACTION_FEATURE_COUNT = GENERATED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.ActionDestination <em>Action Destination</em>}' class.
@@ -7633,6 +7642,17 @@ public interface ModelPackage extends EPackage {
 	EReference getAction_To();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.openiaml.model.model.Action#getPriority <em>Priority</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Priority</em>'.
+	 * @see org.openiaml.model.model.Action#getPriority()
+	 * @see #getAction()
+	 * @generated
+	 */
+	EAttribute getAction_Priority();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.ActionDestination <em>Action Destination</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8881,6 +8901,14 @@ public interface ModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ACTION__TO = eINSTANCE.getAction_To();
+
+		/**
+		 * The meta object literal for the '<em><b>Priority</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ACTION__PRIORITY = eINSTANCE.getAction_Priority();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.ActionDestination <em>Action Destination</em>}' class.

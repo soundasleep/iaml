@@ -394,15 +394,6 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRunAction_Priority() {
-		return (EAttribute)runActionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getParameterEdge() {
 		return parameterEdgeEClass;
 	}
@@ -825,7 +816,6 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		syncWireEClass = createEClass(SYNC_WIRE);
 
 		runActionEClass = createEClass(RUN_ACTION);
-		createEAttribute(runActionEClass, RUN_ACTION__PRIORITY);
 
 		parameterEdgeEClass = createEClass(PARAMETER_EDGE);
 		createEAttribute(parameterEdgeEClass, PARAMETER_EDGE__PARAMETER_NAME);
@@ -983,7 +973,6 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		initEClass(syncWireEClass, SyncWire.class, "SyncWire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(runActionEClass, RunAction.class, "RunAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getRunAction_Priority(), ecorePackage.getEInt(), "priority", null, 0, 1, RunAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(parameterEdgeEClass, ParameterEdge.class, "ParameterEdge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getParameterEdge_ParameterName(), ecorePackage.getEString(), "parameterName", null, 0, 1, ParameterEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1088,13 +1077,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		   source, 
 		   new String[] {
 			 "comment", "RunWire: a composite wire that contains ExecutionWires/etc"
-		   });			
-		addAnnotation
-		  (getRunAction_Priority(), 
-		   source, 
-		   new String[] {
-			 "added", "0.2"
-		   });			
+		   });				
 		addAnnotation
 		  (parameterEdgeEClass, 
 		   source, 
@@ -1253,7 +1236,7 @@ public class WiresPackageImpl extends EPackageImpl implements WiresPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Connects a {@model EventTrigger} to a {@model Operation}, allowing it to be executed. May have incoming {@model ConditionEdge}s."
-		   });			
+		   });		
 		addAnnotation
 		  (parameterEdgeEClass, 
 		   source, 

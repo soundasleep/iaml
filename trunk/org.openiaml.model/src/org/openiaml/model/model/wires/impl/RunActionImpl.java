@@ -861,6 +861,7 @@ public class RunActionImpl extends EObjectImpl implements RunAction {
 			switch (derivedFeatureID) {
 				case WiresPackage.RUN_ACTION__FROM: return ModelPackage.ACTION__FROM;
 				case WiresPackage.RUN_ACTION__TO: return ModelPackage.ACTION__TO;
+				case WiresPackage.RUN_ACTION__PRIORITY: return ModelPackage.ACTION__PRIORITY;
 				default: return -1;
 			}
 		}
@@ -912,6 +913,7 @@ public class RunActionImpl extends EObjectImpl implements RunAction {
 			switch (baseFeatureID) {
 				case ModelPackage.ACTION__FROM: return WiresPackage.RUN_ACTION__FROM;
 				case ModelPackage.ACTION__TO: return WiresPackage.RUN_ACTION__TO;
+				case ModelPackage.ACTION__PRIORITY: return WiresPackage.RUN_ACTION__PRIORITY;
 				default: return -1;
 			}
 		}

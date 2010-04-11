@@ -48,6 +48,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.wires.impl.NavigateActionImpl#getInConditionEdges <em>In Condition Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.NavigateActionImpl#getFrom <em>From</em>}</li>
  *   <li>{@link org.openiaml.model.model.wires.impl.NavigateActionImpl#getTo <em>To</em>}</li>
+ *   <li>{@link org.openiaml.model.model.wires.impl.NavigateActionImpl#getPriority <em>Priority</em>}</li>
  * </ul>
  * </p>
  *
@@ -213,6 +214,26 @@ public class NavigateActionImpl extends EObjectImpl implements NavigateAction {
 	 * @ordered
 	 */
 	protected ActionDestination to;
+
+	/**
+	 * The default value of the '{@link #getPriority() <em>Priority</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPriority()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int PRIORITY_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getPriority() <em>Priority</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPriority()
+	 * @generated
+	 * @ordered
+	 */
+	protected int priority = PRIORITY_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -511,6 +532,27 @@ public class NavigateActionImpl extends EObjectImpl implements NavigateAction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public int getPriority() {
+		return priority;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPriority(int newPriority) {
+		int oldPriority = priority;
+		priority = newPriority;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, WiresPackage.NAVIGATE_ACTION__PRIORITY, oldPriority, priority));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -591,6 +633,8 @@ public class NavigateActionImpl extends EObjectImpl implements NavigateAction {
 			case WiresPackage.NAVIGATE_ACTION__TO:
 				if (resolve) return getTo();
 				return basicGetTo();
+			case WiresPackage.NAVIGATE_ACTION__PRIORITY:
+				return getPriority();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -641,6 +685,9 @@ public class NavigateActionImpl extends EObjectImpl implements NavigateAction {
 			case WiresPackage.NAVIGATE_ACTION__TO:
 				setTo((ActionDestination)newValue);
 				return;
+			case WiresPackage.NAVIGATE_ACTION__PRIORITY:
+				setPriority((Integer)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -686,6 +733,9 @@ public class NavigateActionImpl extends EObjectImpl implements NavigateAction {
 			case WiresPackage.NAVIGATE_ACTION__TO:
 				setTo((ActionDestination)null);
 				return;
+			case WiresPackage.NAVIGATE_ACTION__PRIORITY:
+				setPriority(PRIORITY_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -720,6 +770,8 @@ public class NavigateActionImpl extends EObjectImpl implements NavigateAction {
 				return from != null;
 			case WiresPackage.NAVIGATE_ACTION__TO:
 				return to != null;
+			case WiresPackage.NAVIGATE_ACTION__PRIORITY:
+				return priority != PRIORITY_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -763,6 +815,7 @@ public class NavigateActionImpl extends EObjectImpl implements NavigateAction {
 			switch (derivedFeatureID) {
 				case WiresPackage.NAVIGATE_ACTION__FROM: return ModelPackage.ACTION__FROM;
 				case WiresPackage.NAVIGATE_ACTION__TO: return ModelPackage.ACTION__TO;
+				case WiresPackage.NAVIGATE_ACTION__PRIORITY: return ModelPackage.ACTION__PRIORITY;
 				default: return -1;
 			}
 		}
@@ -808,6 +861,7 @@ public class NavigateActionImpl extends EObjectImpl implements NavigateAction {
 			switch (baseFeatureID) {
 				case ModelPackage.ACTION__FROM: return WiresPackage.NAVIGATE_ACTION__FROM;
 				case ModelPackage.ACTION__TO: return WiresPackage.NAVIGATE_ACTION__TO;
+				case ModelPackage.ACTION__PRIORITY: return WiresPackage.NAVIGATE_ACTION__PRIORITY;
 				default: return -1;
 			}
 		}
@@ -834,6 +888,8 @@ public class NavigateActionImpl extends EObjectImpl implements NavigateAction {
 		result.append(name);
 		result.append(", overridden: ");
 		result.append(overridden);
+		result.append(", priority: ");
+		result.append(priority);
 		result.append(')');
 		return result.toString();
 	}

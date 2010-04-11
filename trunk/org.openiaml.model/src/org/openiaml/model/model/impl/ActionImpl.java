@@ -36,6 +36,7 @@ import org.openiaml.model.model.ModelPackage;
  *   <li>{@link org.openiaml.model.model.impl.ActionImpl#getGeneratedRule <em>Generated Rule</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ActionImpl#getFrom <em>From</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.ActionImpl#getTo <em>To</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.ActionImpl#getPriority <em>Priority</em>}</li>
  * </ul>
  * </p>
  *
@@ -131,6 +132,26 @@ public abstract class ActionImpl extends EObjectImpl implements Action {
 	 * @ordered
 	 */
 	protected ActionDestination to;
+
+	/**
+	 * The default value of the '{@link #getPriority() <em>Priority</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPriority()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int PRIORITY_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getPriority() <em>Priority</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPriority()
+	 * @generated
+	 * @ordered
+	 */
+	protected int priority = PRIORITY_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -351,6 +372,27 @@ public abstract class ActionImpl extends EObjectImpl implements Action {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public int getPriority() {
+		return priority;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPriority(int newPriority) {
+		int oldPriority = priority;
+		priority = newPriority;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.ACTION__PRIORITY, oldPriority, priority));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -409,6 +451,8 @@ public abstract class ActionImpl extends EObjectImpl implements Action {
 			case ModelPackage.ACTION__TO:
 				if (resolve) return getTo();
 				return basicGetTo();
+			case ModelPackage.ACTION__PRIORITY:
+				return getPriority();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -441,6 +485,9 @@ public abstract class ActionImpl extends EObjectImpl implements Action {
 			case ModelPackage.ACTION__TO:
 				setTo((ActionDestination)newValue);
 				return;
+			case ModelPackage.ACTION__PRIORITY:
+				setPriority((Integer)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -471,6 +518,9 @@ public abstract class ActionImpl extends EObjectImpl implements Action {
 			case ModelPackage.ACTION__TO:
 				setTo((ActionDestination)null);
 				return;
+			case ModelPackage.ACTION__PRIORITY:
+				setPriority(PRIORITY_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -495,6 +545,8 @@ public abstract class ActionImpl extends EObjectImpl implements Action {
 				return from != null;
 			case ModelPackage.ACTION__TO:
 				return to != null;
+			case ModelPackage.ACTION__PRIORITY:
+				return priority != PRIORITY_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -515,6 +567,8 @@ public abstract class ActionImpl extends EObjectImpl implements Action {
 		result.append(id);
 		result.append(", generatedRule: ");
 		result.append(generatedRule);
+		result.append(", priority: ");
+		result.append(priority);
 		result.append(')');
 		return result.toString();
 	}

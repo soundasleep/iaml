@@ -6,29 +6,23 @@
 «EXTENSION template::GeneratorExtensions»
 
 /**
- * @implementation RunAction
- *		{@model RunAction}s are run in order of descending priority; that is,
- *		a higher priority {@model RunAction} will execute first.
+ * @implementation Action
+ *		{@model Action}s are run in order of descending priority; that is,
+ *		a higher priority {@model Action} will execute first.
  */
 «DEFINE runFrameEvents(String eventName) FOR model::EventTrigger-»
 	// Frame EventTrigger «this»
 	«IF eventName == "init" || eventName == "access"-»
-		// RunActions sorted by priority
-		«EXPAND template::operations::OperationCall::callOperation(true, false) FOREACH outActions.typeSelect(model::wires::RunAction).sortBy(e|-e.priority)-»
-		
-		// NavigateActions in any order
-		«EXPAND template::operations::OperationCall::callOperation(true, false) FOREACH outActions.typeSelect(model::wires::NavigateAction)-»
+		// Actions sorted by priority
+		«EXPAND template::operations::OperationCall::callOperation(true, false) FOREACH outActions.sortBy(e|-e.priority)-»		
 	«ELSE-»
 		«throwException("I don't know what to do with frame event " + name)»
 	«ENDIF-»
 «ENDDEFINE»
 
 «DEFINE runGateWires FOR model::components::Gate-»
-	// RunActions sorted by priority
-	«EXPAND template::operations::OperationCall::callOperation(true, false) FOREACH outActions.typeSelect(model::wires::RunAction).sortBy(e|-e.priority)-»
-	
-	// NavigateActions in any order
-	«EXPAND template::operations::OperationCall::callOperation(true, false) FOREACH outActions.typeSelect(model::wires::NavigateAction)-»
+	// Actions sorted by priority
+	«EXPAND template::operations::OperationCall::callOperation(true, false) FOREACH outActions.sortBy(e|-e.priority)-»
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

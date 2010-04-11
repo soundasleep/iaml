@@ -5,11 +5,16 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
+/**
+ * @implementation Action
+ *		{@model Action}s are run in order of descending priority; that is,
+ *		a higher priority {@model Action} will execute first.
+ */
 «DEFINE callEvent(Boolean php) FOR model::EventTrigger»
 	// Event «this»
 	// expand out all outgoing edges
 	«EXPAND template::operations::OperationCall::callOperation(php, false) FOREACH outWires»
-	«EXPAND template::operations::OperationCall::callOperation(php, false) FOREACH outActions»
+	«EXPAND template::operations::OperationCall::callOperation(php, false) FOREACH outActions.sortBy(e|-e.priority)»
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

@@ -909,6 +909,16 @@
       <features
           href="iaml.ecore#//wires/SelectWire/query"/>
     </labelMappings>
+    <labelMappings
+        xsi:type="gmfmap:FeatureLabelMapping"
+        viewPattern="limit {0}"
+        editorPattern="{0}"
+        editPattern="{0}">
+      <diagramLabel
+          href="iaml.gmfgraph#SelectWireLimit"/>
+      <features
+          href="iaml.ecore#//wires/SelectWire/limit"/>
+    </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool

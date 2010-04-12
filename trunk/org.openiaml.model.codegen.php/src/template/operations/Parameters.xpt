@@ -9,6 +9,7 @@
  * Parameter definitions within the signature of an operation/method.
  */
 «DEFINE signatures(Boolean php) FOR model::Parameter-»
+	/* «name» */
 	«IF php»
 		$«safeName()-»
 	«ELSE»
@@ -26,7 +27,9 @@
 		«REM»add associative keys for named parameter wires«ENDREM»
 		«IF name != null && name.length > 0»
 			"«safeNameString(name)»" =>
-		«ENDIF» 
+		«ENDIF»
+	«ELSE»
+		/* «name» */
 	«ENDIF»
 	«EXPAND callParameterValue(php, inStoreDb) FOR from»
 «ENDDEFINE»

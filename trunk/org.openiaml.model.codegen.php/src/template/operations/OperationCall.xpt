@@ -45,6 +45,9 @@
  * using this as a parameter source,
  * we instead use '$arg0', which we expect will be set already.
  * @see callOperationsParameterSource() and StoreDbPhp::expandDomainAttributeEvents()
+ * @implementation RunAction
+ *		When {@model RunAction running} an {@model Operation}, the {@model ParameterEdge}s are
+ *		provided in alphabetical order according to their {@model ParameterEdge#name}.
  */
 «DEFINE callOperationContents(Boolean php, Boolean inStoreDb) FOR model::wires::RunAction-»
 	/* eContainer == «to.eContainer» */
@@ -74,7 +77,7 @@
 		«ELSE-»
 			«REM»// not on current frame (wire id = «id»)«ENDREM»
 			call_remote_event('«safeNameString(containingFrame(to).id)»', '«operationName(to)-»'
-				«IF !inParameterEdges.isEmpty», «EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges SEPARATOR ", "»«ENDIF»
+				«IF !inParameterEdges.isEmpty», «EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»«ENDIF»
 			);
 			«REM»				
 			store_event('«containingFrame(to).id»', 'do_«operationName(to)»'
@@ -87,7 +90,7 @@
 		«ELSE-»
 			«REM»// not on current frame (wire id = «id»)«ENDREM»
 			call_remote_event('«safeNameString(containingFrame(to).id)»', '«operationName(to)-»'
-				«IF !inParameterEdges.isEmpty», «EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges SEPARATOR ", "»«ENDIF»
+				«IF !inParameterEdges.isEmpty», «EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»«ENDIF»
 			);
 			«REM»				
 			store_event('«containingFrame(to).id»', 'do_«operationName(to)»'
@@ -96,7 +99,7 @@
 	«ELSEIF isDomainAttribute(to.eContainer)-»
 		«REM»direct field --> abstract domain attribute«ENDREM»
 		store_db('«safeNameString(((model::DomainAttribute) to.eContainer).id)»'
-			«IF !inParameterEdges.isEmpty», «EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges SEPARATOR ", "»«ENDIF»
+			«IF !inParameterEdges.isEmpty», «EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»«ENDIF»
 		); 
 	«ELSEIF isDomainAttributeInstance(to.eContainer)-»
 		«REM»direct field --> domain attribute instance«ENDREM»

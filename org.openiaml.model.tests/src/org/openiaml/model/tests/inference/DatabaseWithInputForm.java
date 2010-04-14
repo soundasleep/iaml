@@ -42,9 +42,9 @@ public class DatabaseWithInputForm extends InferenceTestCase {
 
 		// [inferred]
 		// both text field and attribute should have events/operations
-		EventTrigger srcEdit = source.getOnEdit();
+		EventTrigger srcEdit = source.getOnChange();
 		Operation srcOp = assertHasOperation(source, "update");
-		EventTrigger targetEdit = attribute.getOnEdit();
+		EventTrigger targetEdit = attribute.getOnChange();
 		Operation targetOp = assertHasOperation(attribute, "update");
 		assertNotSame(srcEdit, targetEdit);
 		assertNotSame(srcOp, targetOp);
@@ -76,9 +76,9 @@ public class DatabaseWithInputForm extends InferenceTestCase {
 
 		// [inferred]
 		// both text field and attribute should have events/operations
-		EventTrigger srcEdit = source.getOnEdit();
+		EventTrigger srcEdit = source.getOnChange();
 		Operation srcOp = assertHasOperation(source, "update");
-		EventTrigger targetEdit = attribute.getOnEdit();
+		EventTrigger targetEdit = attribute.getOnChange();
 		Operation targetOp = assertHasOperation(attribute, "update");
 		assertNotSame(srcEdit, targetEdit);
 		assertNotSame(srcOp, targetOp);

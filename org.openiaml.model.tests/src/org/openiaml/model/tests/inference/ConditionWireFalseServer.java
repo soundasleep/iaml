@@ -51,9 +51,9 @@ public class ConditionWireFalseServer extends InferenceTestCase {
 		SyncWire sw = assertHasSyncWire(root, field1, field2);
 
 		// we should have EventTrigger 'edit' in source
-		EventTrigger srcEdit = field1.getOnEdit();
+		EventTrigger srcEdit = field1.getOnChange();
 		Operation srcOp = assertHasOperation(field1, "update");
-		EventTrigger targetEdit = field2.getOnEdit();
+		EventTrigger targetEdit = field2.getOnChange();
 		Operation targetOp = assertHasOperation(field2, "update");
 		assertNotSame(srcEdit, targetEdit);
 		assertNotSame(srcOp, targetOp);

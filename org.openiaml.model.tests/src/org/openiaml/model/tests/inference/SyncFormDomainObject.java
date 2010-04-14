@@ -46,12 +46,12 @@ public class SyncFormDomainObject extends InferenceTestCase {
 		SyncWire sw2 = assertHasSyncWire(form, field2, attr2);
 
 		// fields should now have an edit event
-		EventTrigger editf1 = field1.getOnEdit();
-		EventTrigger editf2 = field2.getOnEdit();
+		EventTrigger editf1 = field1.getOnChange();
+		EventTrigger editf2 = field2.getOnChange();
 
 		// attrs should now have an edit event
-		EventTrigger edita1 = attr1.getOnEdit();
-		EventTrigger edita2 = attr2.getOnEdit();
+		EventTrigger edita1 = attr1.getOnChange();
+		EventTrigger edita2 = attr2.getOnChange();
 
 		// fields should now have update operations
 		Operation update1 = assertHasOperation(field1, "update");

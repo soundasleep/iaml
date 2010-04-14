@@ -48,7 +48,7 @@ public class SessionSyncWires extends InferenceTestCase {
 
 		// generated events and operations
 		// all part of SyncWire elements generation
-		EventTrigger edit = field1.getOnEdit();
+		EventTrigger edit = field1.getOnChange();
 		Operation update = assertHasOperation(field2, "update");
 		RunAction rw = assertHasRunAction(root, edit, update);
 

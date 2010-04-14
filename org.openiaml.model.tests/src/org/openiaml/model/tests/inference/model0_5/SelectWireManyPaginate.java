@@ -42,56 +42,56 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		super.setUp();
 		root = loadAndInfer(SelectWireManyPaginate.class);
 	}
-	
+
 	public void testInitial() throws Exception {
 		Frame home = assertHasFrame(root, "Home");
 		assertNotGenerated(home);
-		
+
 		DomainObjectInstance instance = assertHasDomainObjectInstance(home, "view news");
 		assertNotGenerated(instance);
-		
+
 		InputForm form = assertHasInputForm(home, "view news");
 		assertNotGenerated(form);
-		
+
 		DomainStore store = assertHasDomainStore(root, "News");
 		assertNotGenerated(store);
-		
+
 		DomainObject object = assertHasDomainObject(store, "News Item");
 		assertNotGenerated(object);
-		
+
 		SelectWire select = assertHasSelectWire(root, object, instance, "select");
 		assertNotGenerated(select);
 		assertEquals(5, select.getLimit());
-		
+
 		SetWire wire = assertHasSetWire(root, instance, form);
 		assertNotGenerated(wire);
-		
+
 	}
-	
+
 	/**
 	 * The Form is populated with labels.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void testLabelsCreated() throws Exception {
 		Frame home = assertHasFrame(root, "Home");
 		InputForm form = assertHasInputForm(home, "view news");
-		
+
 		Label t1 = assertHasLabel(form, "title");
 		Label t2 = assertHasLabel(form, "content");
-		
+
 		assertGenerated(t1);
 		assertGenerated(t2);
-		
+
 		// no text fields
 		assertHasNoInputTextField(form, "title");
 		assertHasNoInputTextField(form, "content");
-		
+
 	}
-	
+
 	/**
 	 * Test that all of the elements in the DomainObjectInstance are generated.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void testInstanceCreated() throws Exception {
@@ -108,153 +108,153 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		assertNotNull(instance.getHasNext());
 		assertNotNull(instance.getEmpty());
 		assertNotNull(instance.getResults());
-		
+
 	}
-	
+
 	/**
 	 * The InputForm should have navigation buttons created.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void testFormHasNavigationButtons() throws Exception {
 		Frame home = assertHasFrame(root, "Home");
 		InputForm form = assertHasInputForm(home, "view news");
-		
+
 		Button next = assertHasButton(form, "Next");
 		Button previous = assertHasButton(form, "Previous");
 		Button first = assertHasButton(form, "First");
 		Button last = assertHasButton(form, "Last");
-		
+
 		assertGenerated(next);
 		assertGenerated(previous);
 		assertGenerated(first);
 		assertGenerated(last);
-		
+
 		// and a Label called 'Results'
 		Label labelResults = assertHasLabel(form, "Results");
 		assertGenerated(labelResults);
-		
+
 	}
-	
+
 	/**
 	 * Test the Next button.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void testButtonNext() throws Exception {
 		Frame home = assertHasFrame(root, "Home");
 		InputForm form = assertHasInputForm(home, "view news");
-		
+
 		DomainObjectInstance instance = assertHasDomainObjectInstance(home, "view news");
 
 		Operation inext = instance.getNext();
 		Condition hasNext = instance.getHasNext();
-		
+
 		Button next = assertHasButton(form, "Next");
-		
+
 		EventTrigger onClick = next.getOnClick();
 		assertGenerated(onClick);
-		
+
 		RunAction run = assertHasRunAction(root, onClick, inext);
 		assertGenerated(run);
-		
+
 		assertGenerated(assertHasConditionEdge(root, hasNext, run));
-		
+
 	}
-	
+
 	/**
 	 * Test the Previous button.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void testButtonPrevious() throws Exception {
 		Frame home = assertHasFrame(root, "Home");
 		InputForm form = assertHasInputForm(home, "view news");
-		
+
 		DomainObjectInstance instance = assertHasDomainObjectInstance(home, "view news");
 		Operation iprevious = instance.getPrevious();
 		Condition hasPrevious = instance.getHasPrevious();
-		
+
 		Button previous = assertHasButton(form, "Previous");
-		
+
 		EventTrigger onClick = previous.getOnClick();
 		assertGenerated(onClick);
-		
+
 		RunAction run = assertHasRunAction(root, onClick, iprevious);
 		assertGenerated(run);
-		
+
 		assertGenerated(assertHasConditionEdge(root, hasPrevious, run));
-		
+
 	}
-	
+
 	/**
 	 * Test the First button.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void testButtonFirst() throws Exception {
 		Frame home = assertHasFrame(root, "Home");
 		InputForm form = assertHasInputForm(home, "view news");
-		
+
 		DomainObjectInstance instance = assertHasDomainObjectInstance(home, "view news");
 		Operation ireset = instance.getReset();
-		
+
 		// we need to reverse 'empty' into condition 'not empty'
 		CompositeCondition notEmpty = assertHasCompositeCondition(instance, "not empty");
 		assertGenerated(notEmpty);
-		
+
 		Button first = assertHasButton(form, "First");
-		
+
 		EventTrigger onClick = first.getOnClick();
 		assertGenerated(onClick);
-		
+
 		RunAction run = assertHasRunAction(root, onClick, ireset);
 		assertGenerated(run);
-		
+
 		assertGenerated(assertHasConditionEdge(root, notEmpty, run));
-		
+
 	}
-	
+
 	/**
 	 * Test the Last button.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void testButtonLast() throws Exception {
 		Frame home = assertHasFrame(root, "Home");
 		InputForm form = assertHasInputForm(home, "view news");
-		
+
 		DomainObjectInstance instance = assertHasDomainObjectInstance(home, "view news");
 		Operation ijump = instance.getJump();
-		
+
 		// we need to reverse 'empty' into condition 'not empty'
 		CompositeCondition notEmpty = assertHasCompositeCondition(instance, "not empty");
 		assertGenerated(notEmpty);
-		
+
 		// we need to convert 'results' into a jump target (results-1)
 		Button last = assertHasButton(form, "Last");
-		
+
 		EventTrigger onClick = last.getOnClick();
 		assertGenerated(onClick);
-		
+
 		RunAction run = assertHasRunAction(root, onClick, ijump);
 		assertGenerated(run);
-		
+
 		assertGenerated(assertHasConditionEdge(root, notEmpty, run));
 
 		// has a parameter: the position to jump to
 		Property target = assertHasProperty(last, "target");
 		assertGenerated(target);
-		
+
 		ParameterEdge param = assertHasParameterEdge(root, target, run);
 		assertGenerated(param);
-		
+
 	}
-	
+
 	/**
 	 * When the 'Last' button is pressed, it must first update the
 	 * target property 'target'.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void testLastButtonUpdatesTargetProperty() throws Exception {
@@ -262,27 +262,27 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		InputForm form = assertHasInputForm(home, "view news");
 		DomainObjectInstance instance = assertHasDomainObjectInstance(home, "view news");
 		Operation ijump = instance.getJump();
-		
+
 		// we need to reverse 'empty' into condition 'not empty'
 		CompositeCondition notEmpty = assertHasCompositeCondition(instance, "not empty");
 		assertGenerated(notEmpty);
-		
+
 		// we need to convert 'results' into a jump target (results-1)
 		Button last = assertHasButton(form, "Last");
-		
+
 		EventTrigger onClick = last.getOnClick();
 
 		CompositeOperation op = assertHasCompositeOperation(last, "update target");
 		assertGenerated(op);
-		
+
 		RunAction update = assertHasRunAction(root, onClick, op);
-		
+
 		// it must have a higher priority than the action to the instance
 		RunAction run = assertHasRunAction(root, onClick, ijump);
 		assertGreater(run.getPriority(), update.getPriority());
 
 	}
-	
+
 	/**
 	 * Test the contents of 'update target' operation.
 	 * @throws Exception
@@ -296,62 +296,62 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		Button last = assertHasButton(form, "Last");
 		CompositeOperation op = assertHasCompositeOperation(last, "update target");
 		Property target = assertHasProperty(last, "target");
-		
+
 		StartNode start = assertHasStartNode(op);
 		FinishNode finish = assertHasFinishNode(op);
-		
+
 		PrimitiveOperation set = assertHasPrimitiveOperation(op, "setPropertyToValue");
-		
+
 		assertGenerated(assertHasExecutionEdge(op, start, set));
 		assertGenerated(assertHasExecutionEdge(op, set, finish));
-		
+
 		Arithmetic arith = assertHasArithmetic(op);
 		StaticValue one = assertHasStaticValue(op, "one");
 		assertGenerated(assertHasDataFlowEdge(op, one, arith));
 		assertEquals(arith.getOperationType(), ArithmeticOperationTypes.SUBTRACT);
-		
+
 		assertGenerated(assertHasDataFlowEdge(op, results, arith));
 		assertGenerated(assertHasDataFlowEdge(op, arith, set));
 		assertGenerated(assertHasDataFlowEdge(op, set, target));
-		
-		
+
+
 	}
-	
+
 	/**
 	 * Test the contents of the generated "not empty" condition.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void testContentsOfNotEmpty() throws Exception {
 		Frame home = assertHasFrame(root, "Home");
 		DomainObjectInstance instance = assertHasDomainObjectInstance(home, "view news");
 		Condition empty = instance.getEmpty();
-		
+
 		// we need to reverse 'empty' into condition 'not empty'
 		CompositeCondition notEmpty = assertHasCompositeCondition(instance, "not empty");
-		
+
 		StartNode start = assertHasStartNode(notEmpty);
 		FinishNode finish = assertHasFinishNode(notEmpty);
 		CancelNode cancel = assertHasCancelNode(notEmpty);
-		
+
 		DecisionNode decision = assertHasDecisionNode(notEmpty);
-		
+
 		assertGenerated(assertHasConditionEdge(root, empty, decision));
-		
+
 		assertHasExecutionEdge(notEmpty, start, decision);
-		
+
 		// not empty = pass
 		assertHasExecutionEdge(notEmpty, decision, finish, "n");
-		
+
 		// empty = fail
 		assertHasExecutionEdge(notEmpty, decision, cancel, "y");
-		
+
 	}
-	
+
 	/**
 	 * The 'results' property should be Set to the 'Results'
 	 * label.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void testResultsLabel() throws Exception {
@@ -360,21 +360,21 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		DomainObjectInstance instance = assertHasDomainObjectInstance(home, "view news");
 		Property results = instance.getResults();
 		Label labelResults = assertHasLabel(form, "Results");
-		
+
 		// onChange updates the Label
-		EventTrigger onChange = instance.getOnEdit();
+		EventTrigger onChange = instance.getOnChange();
 		Operation update = assertHasOperation(labelResults, "update");
-		
+
 		RunAction run = assertHasRunAction(root, onChange, update);
-		
+
 		// with the given parameter
 		assertGenerated(assertHasParameterEdge(root, results, run));
 
 	}
-	
+
 	/**
 	 * Attribute.onChange needs to call Label.update().
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void testAttributeCallsLabelUpdate() throws Exception {
@@ -384,27 +384,27 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 
 		DomainAttributeInstance a1 = assertHasDomainAttributeInstance(instance, "title");
 		assertGenerated(a1);
-		
+
 		Label t1 = assertHasLabel(form, "title");
 		assertGenerated(t1);
-		
+
 		// connected by SetWire
 		assertGenerated(assertHasSetWire(root, a1, t1));
-		
-		EventTrigger onChange = a1.getOnEdit();
+
+		EventTrigger onChange = a1.getOnChange();
 		assertGenerated(onChange);
-		
+
 		Operation update = assertHasOperation(t1, "update");
 		assertGenerated(update);
-		
+
 		RunAction run = assertHasRunAction(root, onChange, update);
 		assertGenerated(run);
-		
+
 		Property a1value = assertHasFieldValue(a1);
 		assertGenerated(a1value);
-		
+
 		assertGenerated(assertHasParameterEdge(root, a1value, run));
-		
+
 	}
 
 }

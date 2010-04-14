@@ -71,7 +71,7 @@ public class SetWireClient extends InferenceTestCase {
 		InputTextField target = assertHasInputTextField(page, "target");
 
 		// there should be an 'edit' event in source
-		EventTrigger edit = source.getOnEdit();
+		EventTrigger edit = source.getOnChange();
 		assertGenerated(edit);
 
 		Property value = assertHasProperty(source, "fieldValue");
@@ -103,7 +103,7 @@ public class SetWireClient extends InferenceTestCase {
 		InputTextField target = assertHasInputTextField(page, "target");
 
 		// there should be an 'edit' event in target
-		EventTrigger edit = target.getOnEdit();
+		EventTrigger edit = target.getOnChange();
 		assertGenerated(edit);
 
 		Property value = assertHasProperty(target, "fieldValue");

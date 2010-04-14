@@ -41,7 +41,7 @@ public class SyncFieldDomainAttribute extends InferenceTestCase {
 		assertHasSyncWire(page, field, attribute, "syncField");
 
 		// field should now have an edit event
-		EventTrigger editEvent = field.getOnEdit();
+		EventTrigger editEvent = field.getOnChange();
 
 		// this event should have a run wire
 		RunAction runWire = (RunAction) getActionFrom(editEvent, "run");

@@ -71,17 +71,17 @@ public class SyncWireTestCase extends InferenceTestCase {
 			StartNode start = assertHasStartNode(update);
 			FinishNode finish = assertHasFinishNode(update);
 			CancelNode cancel = assertHasCancelNode(update);
-			
+
 			DecisionOperation check = assertHasDecisionOperation(update, "can cast?");
 			CastNode cast = assertHasCastNode(update);
-			
+
 			PrimitiveOperation set = assertHasPrimitiveOperation(update, "setPropertyToValue");
-			
+
 			assertHasExecutionEdge(update, start, check);
 			assertHasExecutionEdge(update, check, cancel, "no");
 			assertHasExecutionEdge(update, check, set, "yes");
 			assertHasExecutionEdge(update, set, finish);
-			
+
 			// data flow edges
 			Parameter param = assertHasParameter(update, "setValueTo");
 			assertHasDataFlowEdge(update, param, cast);
@@ -105,8 +105,8 @@ public class SyncWireTestCase extends InferenceTestCase {
 		InputTextField name1 = (InputTextField) queryOne(root, "//iaml.visual:children[iaml:name='name1']");
 		InputTextField name2 = (InputTextField) queryOne(root, "//iaml.visual:children[iaml:name='name2']");
 
-		EventTrigger name1edit = name1.getOnEdit();
-		EventTrigger name2edit = name2.getOnEdit();
+		EventTrigger name1edit = name1.getOnChange();
+		EventTrigger name2edit = name2.getOnChange();
 
 		Operation name1update = assertHasOperation(name1, "update");
 		Operation name2update = assertHasOperation(name2, "update");

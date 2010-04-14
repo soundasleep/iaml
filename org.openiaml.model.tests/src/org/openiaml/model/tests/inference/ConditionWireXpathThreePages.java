@@ -68,9 +68,9 @@ protected void setUp() throws Exception {
 
     // we can now investigate the SyncWires themselves, and make sure
     // they have the conditions attached too
-    EventTrigger f1edit = field1.getOnEdit();
-    EventTrigger f2edit = field2.getOnEdit();
-    EventTrigger f3edit = field3.getOnEdit();
+    EventTrigger f1edit = field1.getOnChange();
+    EventTrigger f2edit = field2.getOnChange();
+    EventTrigger f3edit = field3.getOnChange();
     Operation f1update = assertHasOperation(field1, "update");
     Operation f2update = assertHasOperation(field2, "update");
     Operation f3update = assertHasOperation(field3, "update");

@@ -189,8 +189,8 @@
 	 * is called, if any.
 	 */
 	function object_instance_onChange_«safeName()»() {
-		«IF onEdit != null»
-			«EXPAND template::events::EventCall::callEvent(true) FOR onEdit»
+		«IF onChange != null»
+			«EXPAND template::events::EventCall::callEvent(true) FOR onChange»
 		«ENDIF» 
 	}
 

@@ -531,13 +531,13 @@ public interface UsersPackage extends EPackage {
 	int ROLE__IN_EXTENDS_EDGES = ModelPackage.DOMAIN_OBJECT__IN_EXTENDS_EDGES;
 
 	/**
-	 * The feature id for the '<em><b>On Edit</b></em>' containment reference.
+	 * The feature id for the '<em><b>On Change</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROLE__ON_EDIT = ModelPackage.DOMAIN_OBJECT__ON_EDIT;
+	int ROLE__ON_CHANGE = ModelPackage.DOMAIN_OBJECT__ON_CHANGE;
 
 	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
@@ -956,13 +956,13 @@ public interface UsersPackage extends EPackage {
 	int USER_INSTANCE__OUT_PARAMETER_EDGES = ModelPackage.DOMAIN_OBJECT_INSTANCE__OUT_PARAMETER_EDGES;
 
 	/**
-	 * The feature id for the '<em><b>On Edit</b></em>' containment reference.
+	 * The feature id for the '<em><b>On Change</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int USER_INSTANCE__ON_EDIT = ModelPackage.DOMAIN_OBJECT_INSTANCE__ON_EDIT;
+	int USER_INSTANCE__ON_CHANGE = ModelPackage.DOMAIN_OBJECT_INSTANCE__ON_CHANGE;
 
 	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.

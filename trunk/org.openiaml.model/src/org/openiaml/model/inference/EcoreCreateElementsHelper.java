@@ -159,8 +159,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return event;
 	}
 
-	public EventTrigger generatedEventTriggerOnEdit(GeneratesElements by, Editable container) throws InferenceException {
-		EventTrigger event = (EventTrigger) createElement( container, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getEditable_OnEdit() );
+	public EventTrigger generatedEventTriggerOnChange(GeneratesElements by, Editable container) throws InferenceException {
+		EventTrigger event = (EventTrigger) createElement( container, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getEditable_OnChange() );
 		setGeneratedBy(event, by);
 		return event;
 	}

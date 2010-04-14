@@ -58,9 +58,9 @@
 					}
 				«ENDIF»
 			
-				«IF onEdit != null»
-					// expand all onEdits
-					«EXPAND template::events::EventCall::callEvent(false) FOR onEdit-»
+				«IF onChange != null»
+					// expand all onChanges
+					«EXPAND template::events::EventCall::callEvent(false) FOR onChange-»
 				«ENDIF»
 
 				«REM»

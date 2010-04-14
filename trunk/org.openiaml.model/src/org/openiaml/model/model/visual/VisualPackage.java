@@ -567,13 +567,13 @@ public interface VisualPackage extends EPackage {
 	int INPUT_FORM__OUT_PARAMETER_EDGES = ModelPackage.VISIBLE_THING__OUT_PARAMETER_EDGES;
 
 	/**
-	 * The feature id for the '<em><b>On Edit</b></em>' containment reference.
+	 * The feature id for the '<em><b>On Change</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INPUT_FORM__ON_EDIT = ModelPackage.VISIBLE_THING__ON_EDIT;
+	int INPUT_FORM__ON_CHANGE = ModelPackage.VISIBLE_THING__ON_CHANGE;
 
 	/**
 	 * The feature id for the '<em><b>On Access</b></em>' containment reference.
@@ -829,13 +829,13 @@ public interface VisualPackage extends EPackage {
 	int INPUT_TEXT_FIELD__OUT_PARAMETER_EDGES = ModelPackage.VISIBLE_THING__OUT_PARAMETER_EDGES;
 
 	/**
-	 * The feature id for the '<em><b>On Edit</b></em>' containment reference.
+	 * The feature id for the '<em><b>On Change</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INPUT_TEXT_FIELD__ON_EDIT = ModelPackage.VISIBLE_THING__ON_EDIT;
+	int INPUT_TEXT_FIELD__ON_CHANGE = ModelPackage.VISIBLE_THING__ON_CHANGE;
 
 	/**
 	 * The feature id for the '<em><b>On Access</b></em>' containment reference.
@@ -1101,13 +1101,13 @@ public interface VisualPackage extends EPackage {
 	int BUTTON__OUT_PARAMETER_EDGES = ModelPackage.VISIBLE_THING__OUT_PARAMETER_EDGES;
 
 	/**
-	 * The feature id for the '<em><b>On Edit</b></em>' containment reference.
+	 * The feature id for the '<em><b>On Change</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BUTTON__ON_EDIT = ModelPackage.VISIBLE_THING__ON_EDIT;
+	int BUTTON__ON_CHANGE = ModelPackage.VISIBLE_THING__ON_CHANGE;
 
 	/**
 	 * The feature id for the '<em><b>On Access</b></em>' containment reference.
@@ -1372,13 +1372,13 @@ public interface VisualPackage extends EPackage {
 	int LABEL__OUT_PARAMETER_EDGES = ModelPackage.VISIBLE_THING__OUT_PARAMETER_EDGES;
 
 	/**
-	 * The feature id for the '<em><b>On Edit</b></em>' containment reference.
+	 * The feature id for the '<em><b>On Change</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LABEL__ON_EDIT = ModelPackage.VISIBLE_THING__ON_EDIT;
+	int LABEL__ON_CHANGE = ModelPackage.VISIBLE_THING__ON_CHANGE;
 
 	/**
 	 * The feature id for the '<em><b>On Access</b></em>' containment reference.
@@ -1643,13 +1643,13 @@ public interface VisualPackage extends EPackage {
 	int MAP__OUT_PARAMETER_EDGES = ModelPackage.VISIBLE_THING__OUT_PARAMETER_EDGES;
 
 	/**
-	 * The feature id for the '<em><b>On Edit</b></em>' containment reference.
+	 * The feature id for the '<em><b>On Change</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAP__ON_EDIT = ModelPackage.VISIBLE_THING__ON_EDIT;
+	int MAP__ON_CHANGE = ModelPackage.VISIBLE_THING__ON_CHANGE;
 
 	/**
 	 * The feature id for the '<em><b>On Access</b></em>' containment reference.
@@ -1905,13 +1905,13 @@ public interface VisualPackage extends EPackage {
 	int MAP_POINT__OUT_PARAMETER_EDGES = ModelPackage.VISIBLE_THING__OUT_PARAMETER_EDGES;
 
 	/**
-	 * The feature id for the '<em><b>On Edit</b></em>' containment reference.
+	 * The feature id for the '<em><b>On Change</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAP_POINT__ON_EDIT = ModelPackage.VISIBLE_THING__ON_EDIT;
+	int MAP_POINT__ON_CHANGE = ModelPackage.VISIBLE_THING__ON_CHANGE;
 
 	/**
 	 * The feature id for the '<em><b>On Access</b></em>' containment reference.

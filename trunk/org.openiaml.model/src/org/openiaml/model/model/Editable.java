@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.openiaml.model.model.Editable#getOnEdit <em>On Edit</em>}</li>
+ *   <li>{@link org.openiaml.model.model.Editable#getOnChange <em>On Change</em>}</li>
  * </ul>
  * </p>
  *
@@ -26,30 +26,30 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Editable extends EObject {
 	/**
-	 * Returns the value of the '<em><b>On Edit</b></em>' containment reference.
+	 * Returns the value of the '<em><b>On Change</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>On Edit</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>On Change</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>On Edit</em>' containment reference.
-	 * @see #setOnEdit(EventTrigger)
-	 * @see org.openiaml.model.model.ModelPackage#getEditable_OnEdit()
+	 * @return the value of the '<em>On Change</em>' containment reference.
+	 * @see #setOnChange(EventTrigger)
+	 * @see org.openiaml.model.model.ModelPackage#getEditable_OnChange()
 	 * @model containment="true"
 	 *        annotation="http://openiaml.org/comment changed='added in 0.4.4'"
 	 * @generated
 	 */
-	EventTrigger getOnEdit();
+	EventTrigger getOnChange();
 
 	/**
-	 * Sets the value of the '{@link org.openiaml.model.model.Editable#getOnEdit <em>On Edit</em>}' containment reference.
+	 * Sets the value of the '{@link org.openiaml.model.model.Editable#getOnChange <em>On Change</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>On Edit</em>' containment reference.
-	 * @see #getOnEdit()
+	 * @param value the new value of the '<em>On Change</em>' containment reference.
+	 * @see #getOnChange()
 	 * @generated
 	 */
-	void setOnEdit(EventTrigger value);
+	void setOnChange(EventTrigger value);
 
 } // Editable

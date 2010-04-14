@@ -97,7 +97,7 @@ end
  *		A {@model SyncWire} connecting two elements with a {@model Condition} 'can sync?'
  *		will only {@model ConditionEdge permit} synchronisation if the value can be {@model CastNode cast successfully}.
  */
-rule "Add 'can cast?' condition check for onEdit connecting to Update"
+rule "Add 'can cast?' condition check for onChange connecting to Update"
 	when
 		source : Editable ( )
 		target : ContainsOperations ( )
@@ -107,7 +107,7 @@ rule "Add 'can cast?' condition check for onEdit connecting to Update"
 		
 		fieldValue : Property ( eContainer == source, name == "fieldValue" )		
 
-		event : EventTrigger ( source.onEdit == event )
+		event : EventTrigger ( source.onChange == event )
 		upd : Operation ( name == "update", eContainer == target )
 		
 		run : RunAction ( from == event, to == upd )

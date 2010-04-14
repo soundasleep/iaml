@@ -21,9 +21,9 @@
 		<script language="Javascript" type="application/javascript">
 		/* <![CDATA[ */
 			function onChange_«safeNameString(id)»(obj) {
-				«IF onEdit != null»
-					// expand all onEdits
-					«EXPAND template::events::EventCall::callEvent(false) FOR onEdit-»
+				«IF onChange != null»
+					// expand all onChanges
+					«EXPAND template::events::EventCall::callEvent(false) FOR onChange-»
 				«ENDIF»
 
 				return false;

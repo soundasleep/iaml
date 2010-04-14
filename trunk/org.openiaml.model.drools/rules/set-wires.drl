@@ -40,14 +40,14 @@ rule "Set wires between objects should create set wires between all elements ins
 		
 end
 
-rule "Run instance wire from edit to update (onEdit)"
+rule "Run instance wire from edit to update (onChange)"
 	when
 		sw : SetWire()
 		source : Editable( )
 		target : ContainsOperations( )
 		eval(functions.connectsSet(sw, source, target))
 		
-		event : EventTrigger( source.onEdit == event ) 
+		event : EventTrigger( source.onChange == event ) 
 		operation : Operation( eContainer == target, name=="update" )
 		
 		not (RunAction( eContainer == sw, from == event, to == operation, name == "run" ))
@@ -85,14 +85,14 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 
 end
 
-rule "Connect parameter wire to: run instance wire from source.edit to target.update [set] (onEdit)"
+rule "Connect parameter wire to: run instance wire from source.edit to target.update [set] (onChange)"
 	when
 		sw : SetWire()
 		source : Editable( )
 		target : CanBeSynced( )
 		eval(functions.connectsSet(sw, source, target))
 	
-		event : EventTrigger( source.onEdit == event ) 
+		event : EventTrigger( source.onChange == event ) 
 		operation : Operation( eContainer == target, name=="update" )
 		field : Property( eContainer == source, name=="fieldValue" )
 		wire : RunAction( from == event, to == operation, name == "run", eContainer == sw )
@@ -300,7 +300,7 @@ end
 
 # SetWires do not connect the fields together; they can _also_
 # connect the Frames together.
-rule "Connect Session.init to incoming SetWires (contained in Frames) [set] (onEdit 2)"
+rule "Connect Session.init to incoming SetWires (contained in Frames) [set] (onChange 2)"
 	when
 		session : Session (  )
 		sw : SetWire(  )
@@ -313,7 +313,7 @@ rule "Connect Session.init to incoming SetWires (contained in Frames) [set] (onE
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connectsSet(sw2, sourceElement, targetElement ))
 
-		event : EventTrigger( sourceElement.onEdit == event ) 
+		event : EventTrigger( sourceElement.onChange == event ) 
 		operation : Operation( eContainer == targetElement, name == "update" )
 
 		rw : RunAction( eContainer == sw2, from == event, to == operation, name == "run" )
@@ -330,7 +330,7 @@ rule "Connect Session.init to incoming SetWires (contained in Frames) [set] (onE
 		
 end
 
-rule "Connect Session.init to incoming SetWires (contained in Frames) [set] (onEdit 3)"
+rule "Connect Session.init to incoming SetWires (contained in Frames) [set] (onChange 3)"
 	when
 		session : Session (  )
 		sw : SetWire(  )
@@ -343,7 +343,7 @@ rule "Connect Session.init to incoming SetWires (contained in Frames) [set] (onE
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connectsSet(sw2, sourceElement, targetElement ))
 
-		event : EventTrigger( sourceElement.onEdit == event ) 
+		event : EventTrigger( sourceElement.onChange == event ) 
 		operation : Operation( eContainer == targetElement, name == "update" )
 
 		rw : RunAction( eContainer == sw2, from == event, to == operation, name == "run" )
@@ -360,7 +360,7 @@ rule "Connect Session.init to incoming SetWires (contained in Frames) [set] (onE
 		
 end
 
-rule "Connect parameter for Session.init to incoming SetWires (contained in Frames) [set] (onEdit 2)"
+rule "Connect parameter for Session.init to incoming SetWires (contained in Frames) [set] (onChange 2)"
 	when
 		session : Session (  )
 		sw : SetWire(  )
@@ -373,7 +373,7 @@ rule "Connect parameter for Session.init to incoming SetWires (contained in Fram
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connectsSet(sw2, sourceElement, targetElement ))
 
-		event : EventTrigger( sourceElement.onEdit == event )
+		event : EventTrigger( sourceElement.onChange == event )
 		operation : Operation( eContainer == targetElement, name == "update" )
 
 		rw : RunAction( eContainer == sw2, from == event, to == operation, name == "run" )
@@ -393,7 +393,7 @@ rule "Connect parameter for Session.init to incoming SetWires (contained in Fram
 		queue.add(pw2, drools);		
 end
 
-rule "Connect parameter for Session.init to incoming SetWires (contained in Frames) [set] (onEdit 3)"
+rule "Connect parameter for Session.init to incoming SetWires (contained in Frames) [set] (onChange 3)"
 	when
 		session : Session (  )
 		sw : SetWire(  )
@@ -406,7 +406,7 @@ rule "Connect parameter for Session.init to incoming SetWires (contained in Fram
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connectsSet(sw2, sourceElement, targetElement ))
 
-		event : EventTrigger( sourceElement.onEdit == event )
+		event : EventTrigger( sourceElement.onChange == event )
 		operation : Operation( eContainer == targetElement, name == "update" )
 
 		rw : RunAction( eContainer == sw2, from == event, to == operation, name == "run" )

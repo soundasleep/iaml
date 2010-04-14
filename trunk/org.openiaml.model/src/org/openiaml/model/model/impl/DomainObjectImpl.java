@@ -39,7 +39,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.impl.DomainObjectImpl#getOutParameterEdges <em>Out Parameter Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainObjectImpl#getOutExtendsEdges <em>Out Extends Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainObjectImpl#getInExtendsEdges <em>In Extends Edges</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.DomainObjectImpl#getOnEdit <em>On Edit</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.DomainObjectImpl#getOnChange <em>On Change</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainObjectImpl#getAttributes <em>Attributes</em>}</li>
  * </ul>
  * </p>
@@ -75,14 +75,14 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 	 */
 	protected EList<ExtendsEdge> inExtendsEdges;
 	/**
-	 * The cached value of the '{@link #getOnEdit() <em>On Edit</em>}' containment reference.
+	 * The cached value of the '{@link #getOnChange() <em>On Change</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOnEdit()
+	 * @see #getOnChange()
 	 * @generated
 	 * @ordered
 	 */
-	protected EventTrigger onEdit;
+	protected EventTrigger onChange;
 	/**
 	 * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -153,8 +153,8 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EventTrigger getOnEdit() {
-		return onEdit;
+	public EventTrigger getOnChange() {
+		return onChange;
 	}
 
 	/**
@@ -162,11 +162,11 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOnEdit(EventTrigger newOnEdit, NotificationChain msgs) {
-		EventTrigger oldOnEdit = onEdit;
-		onEdit = newOnEdit;
+	public NotificationChain basicSetOnChange(EventTrigger newOnChange, NotificationChain msgs) {
+		EventTrigger oldOnChange = onChange;
+		onChange = newOnChange;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_OBJECT__ON_EDIT, oldOnEdit, newOnEdit);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_OBJECT__ON_CHANGE, oldOnChange, newOnChange);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -177,18 +177,18 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setOnEdit(EventTrigger newOnEdit) {
-		if (newOnEdit != onEdit) {
+	public void setOnChange(EventTrigger newOnChange) {
+		if (newOnChange != onChange) {
 			NotificationChain msgs = null;
-			if (onEdit != null)
-				msgs = ((InternalEObject)onEdit).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOMAIN_OBJECT__ON_EDIT, null, msgs);
-			if (newOnEdit != null)
-				msgs = ((InternalEObject)newOnEdit).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOMAIN_OBJECT__ON_EDIT, null, msgs);
-			msgs = basicSetOnEdit(newOnEdit, msgs);
+			if (onChange != null)
+				msgs = ((InternalEObject)onChange).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOMAIN_OBJECT__ON_CHANGE, null, msgs);
+			if (newOnChange != null)
+				msgs = ((InternalEObject)newOnChange).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOMAIN_OBJECT__ON_CHANGE, null, msgs);
+			msgs = basicSetOnChange(newOnChange, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_OBJECT__ON_EDIT, newOnEdit, newOnEdit));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_OBJECT__ON_CHANGE, newOnChange, newOnChange));
 	}
 
 	/**
@@ -236,8 +236,8 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 				return ((InternalEList<?>)getOutExtendsEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.DOMAIN_OBJECT__IN_EXTENDS_EDGES:
 				return ((InternalEList<?>)getInExtendsEdges()).basicRemove(otherEnd, msgs);
-			case ModelPackage.DOMAIN_OBJECT__ON_EDIT:
-				return basicSetOnEdit(null, msgs);
+			case ModelPackage.DOMAIN_OBJECT__ON_CHANGE:
+				return basicSetOnChange(null, msgs);
 			case ModelPackage.DOMAIN_OBJECT__ATTRIBUTES:
 				return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
 		}
@@ -258,8 +258,8 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 				return getOutExtendsEdges();
 			case ModelPackage.DOMAIN_OBJECT__IN_EXTENDS_EDGES:
 				return getInExtendsEdges();
-			case ModelPackage.DOMAIN_OBJECT__ON_EDIT:
-				return getOnEdit();
+			case ModelPackage.DOMAIN_OBJECT__ON_CHANGE:
+				return getOnChange();
 			case ModelPackage.DOMAIN_OBJECT__ATTRIBUTES:
 				return getAttributes();
 		}
@@ -287,8 +287,8 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 				getInExtendsEdges().clear();
 				getInExtendsEdges().addAll((Collection<? extends ExtendsEdge>)newValue);
 				return;
-			case ModelPackage.DOMAIN_OBJECT__ON_EDIT:
-				setOnEdit((EventTrigger)newValue);
+			case ModelPackage.DOMAIN_OBJECT__ON_CHANGE:
+				setOnChange((EventTrigger)newValue);
 				return;
 			case ModelPackage.DOMAIN_OBJECT__ATTRIBUTES:
 				getAttributes().clear();
@@ -315,8 +315,8 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 			case ModelPackage.DOMAIN_OBJECT__IN_EXTENDS_EDGES:
 				getInExtendsEdges().clear();
 				return;
-			case ModelPackage.DOMAIN_OBJECT__ON_EDIT:
-				setOnEdit((EventTrigger)null);
+			case ModelPackage.DOMAIN_OBJECT__ON_CHANGE:
+				setOnChange((EventTrigger)null);
 				return;
 			case ModelPackage.DOMAIN_OBJECT__ATTRIBUTES:
 				getAttributes().clear();
@@ -339,8 +339,8 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 				return outExtendsEdges != null && !outExtendsEdges.isEmpty();
 			case ModelPackage.DOMAIN_OBJECT__IN_EXTENDS_EDGES:
 				return inExtendsEdges != null && !inExtendsEdges.isEmpty();
-			case ModelPackage.DOMAIN_OBJECT__ON_EDIT:
-				return onEdit != null;
+			case ModelPackage.DOMAIN_OBJECT__ON_CHANGE:
+				return onChange != null;
 			case ModelPackage.DOMAIN_OBJECT__ATTRIBUTES:
 				return attributes != null && !attributes.isEmpty();
 		}
@@ -374,7 +374,7 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 		}
 		if (baseClass == Editable.class) {
 			switch (derivedFeatureID) {
-				case ModelPackage.DOMAIN_OBJECT__ON_EDIT: return ModelPackage.EDITABLE__ON_EDIT;
+				case ModelPackage.DOMAIN_OBJECT__ON_CHANGE: return ModelPackage.EDITABLE__ON_CHANGE;
 				default: return -1;
 			}
 		}
@@ -408,7 +408,7 @@ public class DomainObjectImpl extends ApplicationElementImpl implements DomainOb
 		}
 		if (baseClass == Editable.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.EDITABLE__ON_EDIT: return ModelPackage.DOMAIN_OBJECT__ON_EDIT;
+				case ModelPackage.EDITABLE__ON_CHANGE: return ModelPackage.DOMAIN_OBJECT__ON_CHANGE;
 				default: return -1;
 			}
 		}

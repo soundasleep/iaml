@@ -38,7 +38,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.impl.DomainAttributeImpl#getOutParameterEdges <em>Out Parameter Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainAttributeImpl#getOutExtendsEdges <em>Out Extends Edges</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainAttributeImpl#getInExtendsEdges <em>In Extends Edges</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.DomainAttributeImpl#getOnEdit <em>On Edit</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.DomainAttributeImpl#getOnChange <em>On Change</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainAttributeImpl#isPrimaryKey <em>Primary Key</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.DomainAttributeImpl#getType <em>Type</em>}</li>
  * </ul>
@@ -75,14 +75,14 @@ public class DomainAttributeImpl extends ApplicationElementImpl implements Domai
 	 */
 	protected EList<ExtendsEdge> inExtendsEdges;
 	/**
-	 * The cached value of the '{@link #getOnEdit() <em>On Edit</em>}' containment reference.
+	 * The cached value of the '{@link #getOnChange() <em>On Change</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOnEdit()
+	 * @see #getOnChange()
 	 * @generated
 	 * @ordered
 	 */
-	protected EventTrigger onEdit;
+	protected EventTrigger onChange;
 	/**
 	 * The default value of the '{@link #isPrimaryKey() <em>Primary Key</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -172,8 +172,8 @@ public class DomainAttributeImpl extends ApplicationElementImpl implements Domai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EventTrigger getOnEdit() {
-		return onEdit;
+	public EventTrigger getOnChange() {
+		return onChange;
 	}
 
 	/**
@@ -181,11 +181,11 @@ public class DomainAttributeImpl extends ApplicationElementImpl implements Domai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOnEdit(EventTrigger newOnEdit, NotificationChain msgs) {
-		EventTrigger oldOnEdit = onEdit;
-		onEdit = newOnEdit;
+	public NotificationChain basicSetOnChange(EventTrigger newOnChange, NotificationChain msgs) {
+		EventTrigger oldOnChange = onChange;
+		onChange = newOnChange;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_ATTRIBUTE__ON_EDIT, oldOnEdit, newOnEdit);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_ATTRIBUTE__ON_CHANGE, oldOnChange, newOnChange);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -196,18 +196,18 @@ public class DomainAttributeImpl extends ApplicationElementImpl implements Domai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setOnEdit(EventTrigger newOnEdit) {
-		if (newOnEdit != onEdit) {
+	public void setOnChange(EventTrigger newOnChange) {
+		if (newOnChange != onChange) {
 			NotificationChain msgs = null;
-			if (onEdit != null)
-				msgs = ((InternalEObject)onEdit).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOMAIN_ATTRIBUTE__ON_EDIT, null, msgs);
-			if (newOnEdit != null)
-				msgs = ((InternalEObject)newOnEdit).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOMAIN_ATTRIBUTE__ON_EDIT, null, msgs);
-			msgs = basicSetOnEdit(newOnEdit, msgs);
+			if (onChange != null)
+				msgs = ((InternalEObject)onChange).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOMAIN_ATTRIBUTE__ON_CHANGE, null, msgs);
+			if (newOnChange != null)
+				msgs = ((InternalEObject)newOnChange).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.DOMAIN_ATTRIBUTE__ON_CHANGE, null, msgs);
+			msgs = basicSetOnChange(newOnChange, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_ATTRIBUTE__ON_EDIT, newOnEdit, newOnEdit));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.DOMAIN_ATTRIBUTE__ON_CHANGE, newOnChange, newOnChange));
 	}
 
 	/**
@@ -302,8 +302,8 @@ public class DomainAttributeImpl extends ApplicationElementImpl implements Domai
 				return ((InternalEList<?>)getOutExtendsEdges()).basicRemove(otherEnd, msgs);
 			case ModelPackage.DOMAIN_ATTRIBUTE__IN_EXTENDS_EDGES:
 				return ((InternalEList<?>)getInExtendsEdges()).basicRemove(otherEnd, msgs);
-			case ModelPackage.DOMAIN_ATTRIBUTE__ON_EDIT:
-				return basicSetOnEdit(null, msgs);
+			case ModelPackage.DOMAIN_ATTRIBUTE__ON_CHANGE:
+				return basicSetOnChange(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -322,8 +322,8 @@ public class DomainAttributeImpl extends ApplicationElementImpl implements Domai
 				return getOutExtendsEdges();
 			case ModelPackage.DOMAIN_ATTRIBUTE__IN_EXTENDS_EDGES:
 				return getInExtendsEdges();
-			case ModelPackage.DOMAIN_ATTRIBUTE__ON_EDIT:
-				return getOnEdit();
+			case ModelPackage.DOMAIN_ATTRIBUTE__ON_CHANGE:
+				return getOnChange();
 			case ModelPackage.DOMAIN_ATTRIBUTE__PRIMARY_KEY:
 				return isPrimaryKey();
 			case ModelPackage.DOMAIN_ATTRIBUTE__TYPE:
@@ -354,8 +354,8 @@ public class DomainAttributeImpl extends ApplicationElementImpl implements Domai
 				getInExtendsEdges().clear();
 				getInExtendsEdges().addAll((Collection<? extends ExtendsEdge>)newValue);
 				return;
-			case ModelPackage.DOMAIN_ATTRIBUTE__ON_EDIT:
-				setOnEdit((EventTrigger)newValue);
+			case ModelPackage.DOMAIN_ATTRIBUTE__ON_CHANGE:
+				setOnChange((EventTrigger)newValue);
 				return;
 			case ModelPackage.DOMAIN_ATTRIBUTE__PRIMARY_KEY:
 				setPrimaryKey((Boolean)newValue);
@@ -384,8 +384,8 @@ public class DomainAttributeImpl extends ApplicationElementImpl implements Domai
 			case ModelPackage.DOMAIN_ATTRIBUTE__IN_EXTENDS_EDGES:
 				getInExtendsEdges().clear();
 				return;
-			case ModelPackage.DOMAIN_ATTRIBUTE__ON_EDIT:
-				setOnEdit((EventTrigger)null);
+			case ModelPackage.DOMAIN_ATTRIBUTE__ON_CHANGE:
+				setOnChange((EventTrigger)null);
 				return;
 			case ModelPackage.DOMAIN_ATTRIBUTE__PRIMARY_KEY:
 				setPrimaryKey(PRIMARY_KEY_EDEFAULT);
@@ -411,8 +411,8 @@ public class DomainAttributeImpl extends ApplicationElementImpl implements Domai
 				return outExtendsEdges != null && !outExtendsEdges.isEmpty();
 			case ModelPackage.DOMAIN_ATTRIBUTE__IN_EXTENDS_EDGES:
 				return inExtendsEdges != null && !inExtendsEdges.isEmpty();
-			case ModelPackage.DOMAIN_ATTRIBUTE__ON_EDIT:
-				return onEdit != null;
+			case ModelPackage.DOMAIN_ATTRIBUTE__ON_CHANGE:
+				return onChange != null;
 			case ModelPackage.DOMAIN_ATTRIBUTE__PRIMARY_KEY:
 				return primaryKey != PRIMARY_KEY_EDEFAULT;
 			case ModelPackage.DOMAIN_ATTRIBUTE__TYPE:
@@ -448,7 +448,7 @@ public class DomainAttributeImpl extends ApplicationElementImpl implements Domai
 		}
 		if (baseClass == Editable.class) {
 			switch (derivedFeatureID) {
-				case ModelPackage.DOMAIN_ATTRIBUTE__ON_EDIT: return ModelPackage.EDITABLE__ON_EDIT;
+				case ModelPackage.DOMAIN_ATTRIBUTE__ON_CHANGE: return ModelPackage.EDITABLE__ON_CHANGE;
 				default: return -1;
 			}
 		}
@@ -482,7 +482,7 @@ public class DomainAttributeImpl extends ApplicationElementImpl implements Domai
 		}
 		if (baseClass == Editable.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.EDITABLE__ON_EDIT: return ModelPackage.DOMAIN_ATTRIBUTE__ON_EDIT;
+				case ModelPackage.EDITABLE__ON_CHANGE: return ModelPackage.DOMAIN_ATTRIBUTE__ON_CHANGE;
 				default: return -1;
 			}
 		}

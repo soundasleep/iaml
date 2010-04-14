@@ -75,7 +75,7 @@ import org.openiaml.model.model.wires.WiresPackage;
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getGeneratedElements <em>Generated Elements</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#isOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getOutParameterEdges <em>Out Parameter Edges</em>}</li>
- *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getOnEdit <em>On Edit</em>}</li>
+ *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getOnChange <em>On Change</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getOnAccess <em>On Access</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.openiaml.model.model.impl.VisibleThingImpl#getChildren <em>Children</em>}</li>
@@ -339,14 +339,14 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 	protected EList<ParameterEdge> outParameterEdges;
 
 	/**
-	 * The cached value of the '{@link #getOnEdit() <em>On Edit</em>}' containment reference.
+	 * The cached value of the '{@link #getOnChange() <em>On Change</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOnEdit()
+	 * @see #getOnChange()
 	 * @generated
 	 * @ordered
 	 */
-	protected EventTrigger onEdit;
+	protected EventTrigger onChange;
 
 	/**
 	 * The cached value of the '{@link #getOnAccess() <em>On Access</em>}' containment reference.
@@ -727,6 +727,49 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EventTrigger getOnChange() {
+		return onChange;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOnChange(EventTrigger newOnChange, NotificationChain msgs) {
+		EventTrigger oldOnChange = onChange;
+		onChange = newOnChange;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.VISIBLE_THING__ON_CHANGE, oldOnChange, newOnChange);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOnChange(EventTrigger newOnChange) {
+		if (newOnChange != onChange) {
+			NotificationChain msgs = null;
+			if (onChange != null)
+				msgs = ((InternalEObject)onChange).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.VISIBLE_THING__ON_CHANGE, null, msgs);
+			if (newOnChange != null)
+				msgs = ((InternalEObject)newOnChange).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.VISIBLE_THING__ON_CHANGE, null, msgs);
+			msgs = basicSetOnChange(newOnChange, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.VISIBLE_THING__ON_CHANGE, newOnChange, newOnChange));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<VisibleThing> getChildren() {
 		if (children == null) {
 			children = new EObjectContainmentEList<VisibleThing>(VisibleThing.class, this, ModelPackage.VISIBLE_THING__CHILDREN);
@@ -820,49 +863,6 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 		fieldValue = newFieldValue;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.VISIBLE_THING__FIELD_VALUE, oldFieldValue, fieldValue));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EventTrigger getOnEdit() {
-		return onEdit;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetOnEdit(EventTrigger newOnEdit, NotificationChain msgs) {
-		EventTrigger oldOnEdit = onEdit;
-		onEdit = newOnEdit;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelPackage.VISIBLE_THING__ON_EDIT, oldOnEdit, newOnEdit);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setOnEdit(EventTrigger newOnEdit) {
-		if (newOnEdit != onEdit) {
-			NotificationChain msgs = null;
-			if (onEdit != null)
-				msgs = ((InternalEObject)onEdit).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModelPackage.VISIBLE_THING__ON_EDIT, null, msgs);
-			if (newOnEdit != null)
-				msgs = ((InternalEObject)newOnEdit).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModelPackage.VISIBLE_THING__ON_EDIT, null, msgs);
-			msgs = basicSetOnEdit(newOnEdit, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ModelPackage.VISIBLE_THING__ON_EDIT, newOnEdit, newOnEdit));
 	}
 
 	/**
@@ -969,8 +969,8 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 				return ((InternalEList<?>)getGeneratedElements()).basicRemove(otherEnd, msgs);
 			case ModelPackage.VISIBLE_THING__OUT_PARAMETER_EDGES:
 				return ((InternalEList<?>)getOutParameterEdges()).basicRemove(otherEnd, msgs);
-			case ModelPackage.VISIBLE_THING__ON_EDIT:
-				return basicSetOnEdit(null, msgs);
+			case ModelPackage.VISIBLE_THING__ON_CHANGE:
+				return basicSetOnChange(null, msgs);
 			case ModelPackage.VISIBLE_THING__ON_ACCESS:
 				return basicSetOnAccess(null, msgs);
 			case ModelPackage.VISIBLE_THING__PROPERTIES:
@@ -1033,8 +1033,8 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 				return isOverridden();
 			case ModelPackage.VISIBLE_THING__OUT_PARAMETER_EDGES:
 				return getOutParameterEdges();
-			case ModelPackage.VISIBLE_THING__ON_EDIT:
-				return getOnEdit();
+			case ModelPackage.VISIBLE_THING__ON_CHANGE:
+				return getOnChange();
 			case ModelPackage.VISIBLE_THING__ON_ACCESS:
 				return getOnAccess();
 			case ModelPackage.VISIBLE_THING__PROPERTIES:
@@ -1135,8 +1135,8 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 				getOutParameterEdges().clear();
 				getOutParameterEdges().addAll((Collection<? extends ParameterEdge>)newValue);
 				return;
-			case ModelPackage.VISIBLE_THING__ON_EDIT:
-				setOnEdit((EventTrigger)newValue);
+			case ModelPackage.VISIBLE_THING__ON_CHANGE:
+				setOnChange((EventTrigger)newValue);
 				return;
 			case ModelPackage.VISIBLE_THING__ON_ACCESS:
 				setOnAccess((EventTrigger)newValue);
@@ -1231,8 +1231,8 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 			case ModelPackage.VISIBLE_THING__OUT_PARAMETER_EDGES:
 				getOutParameterEdges().clear();
 				return;
-			case ModelPackage.VISIBLE_THING__ON_EDIT:
-				setOnEdit((EventTrigger)null);
+			case ModelPackage.VISIBLE_THING__ON_CHANGE:
+				setOnChange((EventTrigger)null);
 				return;
 			case ModelPackage.VISIBLE_THING__ON_ACCESS:
 				setOnAccess((EventTrigger)null);
@@ -1304,8 +1304,8 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 				return overridden != OVERRIDDEN_EDEFAULT;
 			case ModelPackage.VISIBLE_THING__OUT_PARAMETER_EDGES:
 				return outParameterEdges != null && !outParameterEdges.isEmpty();
-			case ModelPackage.VISIBLE_THING__ON_EDIT:
-				return onEdit != null;
+			case ModelPackage.VISIBLE_THING__ON_CHANGE:
+				return onChange != null;
 			case ModelPackage.VISIBLE_THING__ON_ACCESS:
 				return onAccess != null;
 			case ModelPackage.VISIBLE_THING__PROPERTIES:
@@ -1400,7 +1400,7 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 		}
 		if (baseClass == Editable.class) {
 			switch (derivedFeatureID) {
-				case ModelPackage.VISIBLE_THING__ON_EDIT: return ModelPackage.EDITABLE__ON_EDIT;
+				case ModelPackage.VISIBLE_THING__ON_CHANGE: return ModelPackage.EDITABLE__ON_CHANGE;
 				default: return -1;
 			}
 		}
@@ -1497,7 +1497,7 @@ public class VisibleThingImpl extends EObjectImpl implements VisibleThing {
 		}
 		if (baseClass == Editable.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.EDITABLE__ON_EDIT: return ModelPackage.VISIBLE_THING__ON_EDIT;
+				case ModelPackage.EDITABLE__ON_CHANGE: return ModelPackage.VISIBLE_THING__ON_CHANGE;
 				default: return -1;
 			}
 		}

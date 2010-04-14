@@ -62,7 +62,7 @@ rule "When two TextFields of different types are under a SyncWire, add a 'valida
 
 end
 
-rule "When two TextFields of different types are under a SyncWire, call the 'validate' operation onEdit"
+rule "When two TextFields of different types are under a SyncWire, call the 'validate' operation onChange"
 	when
 		e1 : InputTextField( )
 		e1_property : Property ( name == "fieldValue", eContainer == e1 )
@@ -74,7 +74,7 @@ rule "When two TextFields of different types are under a SyncWire, call the 'val
 		
 		eval ( e1.getType() != e2.getType() )
 		
-		event : EventTrigger ( e1.onEdit == event )
+		event : EventTrigger ( e1.onChange == event )
 		
 		op : Operation ( name == "validate", eContainer == e1, eval(functions.generatedBy(sw, op)) )
 		

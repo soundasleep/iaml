@@ -172,7 +172,7 @@
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//CanBeSynced"/>
     <genClasses image="false" ecoreClass="iaml.ecore#//Editable">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Editable/onEdit"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Editable/onChange"/>
     </genClasses>
     <genClasses image="false" ecoreClass="iaml.ecore#//Accessible">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Accessible/onAccess"/>

@@ -29,14 +29,14 @@ public class PropertiesFileMapping extends EclipseInheritanceInterface {
 	@Override
 	public void checkNotInferredKnowledge(InternetApplication root)
 			throws Exception {
-		
+
 		DomainStore ds = assertHasDomainStore(root, "my domain store");
 		assertEquals(0, ds.getChildren().size());
 		assertEquals(0, ds.getAttributes().size());
 		assertEquals(0, ds.getOperations().size());
-		
+
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see org.openiaml.model.tests.inference.EclipseInheritanceInterface#checkInferredKnowledge(org.openiaml.model.model.InternetApplication)
 	 */
@@ -54,7 +54,7 @@ public class PropertiesFileMapping extends EclipseInheritanceInterface {
 		System.out.println(dobj.getAttributes());
 		assertEquals(4, dobj.getAttributes().size());	// four attributes (one is a generated primary key)
 		assertEquals(0, dobj.getOperations().size());
-		assertNotNull(dobj.getOnEdit());
+		assertNotNull(dobj.getOnChange());
 
 		{
 			DomainAttribute attribute = assertHasDomainAttribute(dobj, "fruit");

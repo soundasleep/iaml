@@ -24,17 +24,17 @@ public class MapTextFieldInput extends InferenceTestCase {
 		super.setUp();
 		root = loadAndInfer(MapTextFieldInput.class);
 	}
-	
+
 	public void testInitial() throws Exception {
 		Frame home = assertHasFrame(root, "Home");
 		assertNotGenerated(home);
 
 		InputTextField input = assertHasInputTextField(home, "select address");
 		assertNotGenerated(input);
-		
+
 		Map map = assertHasMap(home, "Target Map");
 		assertNotGenerated(map);
-		
+
 		assertNotGenerated(assertHasSetWire(root, input, map, "set"));
 	}
 
@@ -44,26 +44,26 @@ public class MapTextFieldInput extends InferenceTestCase {
 		Map map = assertHasMap(home, "Target Map");
 
 		// input.onChange -> point.update()
-		EventTrigger onChange = input.getOnEdit();
+		EventTrigger onChange = input.getOnChange();
 		CompositeOperation update = assertHasCompositeOperation(map, "update");
 		RunAction run = assertHasRunAction(root, onChange, update);
-		
+
 		Property textValue = assertHasFieldValue(input);
 		Property mapValue = assertHasFieldValue(map);
-		
+
 		assertGenerated(assertHasParameterEdge(root, textValue, run));
-		
+
 		// there should be a start node
 		assertGenerated(assertHasStartNode(update));
-		
+
 		assertGenerated(textValue);
 		assertGenerated(mapValue);
 		assertGenerated(onChange);
 		assertGenerated(update);
 		assertGenerated(run);
-		
+
 	}
-	
+
 	/**
 	 * No {@model MapPoint}s should be generated within the {@model Map}.
 	 */

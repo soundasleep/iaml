@@ -3,9 +3,9 @@
   <scopes xsi:type="iaml.visual:Frame" id="visual.1203bbadbb8.b7d" name="new container">
     <children xsi:type="iaml.visual:InputTextField" id="visual.1203bbadbb8.b9c" name="field to edit">
       <operations xsi:type="iaml:CompositeOperation" id="model.1203bbadb5b.833" name="alert" inActions="wires.1203bbadbb8.207"/>
-      <onEdit id="model.1203bbadb5b.832" outActions="wires.1203bbadbb8.207">
+      <onChange id="model.1203bbadb5b.832" outActions="wires.1203bbadbb8.207">
         <actions xsi:type="iaml.wires:RunAction" inParameterEdges="wires.1203bbadbb8.208" id="wires.1203bbadbb8.207" name="run" from="model.1203bbadb5b.832" to="model.1203bbadb5b.833"/>
-      </onEdit>
+      </onChange>
       <properties id="model.1203bbadb5b.834" name="fieldValue" outParameterEdges="wires.1203bbadbb8.208">
         <parameterEdges id="wires.1203bbadbb8.208" from="model.1203bbadb5b.834" to="wires.1203bbadbb8.207"/>
       </properties>

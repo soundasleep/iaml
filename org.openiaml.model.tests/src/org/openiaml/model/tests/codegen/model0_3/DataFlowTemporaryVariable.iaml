@@ -17,9 +17,9 @@
         <executionEdges id="model.120acfde16a.13a" from="model.120ac60dcea.2df" to="model.120ac60dcea.3a6"/>
         <variables id="model.120ac60dcea.2e0" name="a temporary variable" outFlows="model.120ac60dcea.3a9" inFlows="model.120ac60dcea.332"/>
       </operations>
-      <onEdit id="model.120ac60dcea.133" outActions="wires.120ac60dd48.b8">
+      <onChange id="model.120ac60dcea.133" outActions="wires.120ac60dd48.b8">
         <actions xsi:type="iaml.wires:RunAction" inParameterEdges="wires.120ac60dd48.cc" id="wires.120ac60dd48.b8" name="run" from="model.120ac60dcea.133" to="model.120ac60dcea.198"/>
-      </onEdit>
+      </onChange>
       <properties id="model.120ac60dcea.1d9" name="fieldValue" outParameterEdges="wires.120ac60dd48.cc">
         <parameterEdges id="wires.120ac60dd48.cc" from="model.120ac60dcea.1d9" to="wires.120ac60dd48.b8"/>
       </properties>

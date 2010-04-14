@@ -47,14 +47,14 @@ rule "Sync wires between objects should create sync wires between all elements i
 		
 end
 
-rule "Run instance wire from edit to update (onEdit)"
+rule "Run instance wire from edit to update (onChange)"
 	when
 		sw : SyncWire()
 		source : Editable( )
 		target : ContainsOperations( )
 		eval(functions.connects(sw, source, target))
 		
-		event : EventTrigger( source.onEdit == event ) 
+		event : EventTrigger( source.onChange == event ) 
 		operation : Operation( eContainer == target, name=="update" )
 		
 		not (RunAction( from == event, to == operation, name == "run", eContainer == sw ))
@@ -68,14 +68,14 @@ rule "Run instance wire from edit to update (onEdit)"
 
 end
 
-rule "Connect parameter wire to: run instance wire from source.edit to target.update (onEdit)"
+rule "Connect parameter wire to: run instance wire from source.edit to target.update (onChange)"
 	when
 		sw : SyncWire()
 		source : Editable( )
 		target : ContainsOperations( )
 		eval( functions.connects(sw, source, target))
 	
-		event : EventTrigger( source.onEdit == event )
+		event : EventTrigger( source.onChange == event )
 		operation : Operation( eContainer == target, name=="update" )
 		field : Property( eContainer == source, name=="fieldValue" )
 		wire : RunAction( from == event, to == operation, name == "run", eContainer == sw )
@@ -262,7 +262,7 @@ end
 
 # SyncWires do not connect the fields together; they can _also_
 # connect the Frames together.
-rule "Connect Session.init to incoming SyncWires (contained in Frames) (onEdit 2)"
+rule "Connect Session.init to incoming SyncWires (contained in Frames) (onChange 2)"
 	when
 		session : Session (  )
 		sw : SyncWire(  )
@@ -275,7 +275,7 @@ rule "Connect Session.init to incoming SyncWires (contained in Frames) (onEdit 2
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connects(sw2, sourceElement, targetElement ))
 
-		event : EventTrigger( sourceElement.onEdit == event ) 
+		event : EventTrigger( sourceElement.onChange == event ) 
 		operation : Operation( eContainer == targetElement, name == "update" )
 
 		rw : RunAction( eContainer == sw2, from == event, to == operation, name == "run" )
@@ -292,7 +292,7 @@ rule "Connect Session.init to incoming SyncWires (contained in Frames) (onEdit 2
 		
 end
 
-rule "Connect Session.init to incoming SyncWires (contained in Frames) (onEdit 3)"
+rule "Connect Session.init to incoming SyncWires (contained in Frames) (onChange 3)"
 	when
 		session : Session (  )
 		sw : SyncWire(  )
@@ -305,7 +305,7 @@ rule "Connect Session.init to incoming SyncWires (contained in Frames) (onEdit 3
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connects(sw2, sourceElement, targetElement ))
 
-		event : EventTrigger( sourceElement.onEdit == event ) 
+		event : EventTrigger( sourceElement.onChange == event ) 
 		operation : Operation( eContainer == targetElement, name == "update" )
 
 		rw : RunAction( eContainer == sw2, from == event, to == operation, name == "run" )
@@ -322,7 +322,7 @@ rule "Connect Session.init to incoming SyncWires (contained in Frames) (onEdit 3
 		
 end
 
-rule "Connect parameter for Session.init to incoming SyncWires (contained in Frames) (onEdit) (2)"
+rule "Connect parameter for Session.init to incoming SyncWires (contained in Frames) (onChange) (2)"
 	when
 		session : Session (  )
 		sw : SyncWire(  )
@@ -335,7 +335,7 @@ rule "Connect parameter for Session.init to incoming SyncWires (contained in Fra
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connects(sw2, sourceElement, targetElement ))
 
-		event : EventTrigger( sourceElement.onEdit == event ) 
+		event : EventTrigger( sourceElement.onChange == event ) 
 		operation : Operation( eContainer == targetElement, name == "update" )
 
 		rw : RunAction( eContainer == sw2, from == event, to == operation, name == "run" )
@@ -355,7 +355,7 @@ rule "Connect parameter for Session.init to incoming SyncWires (contained in Fra
 		queue.add(pw2, drools);		
 end
 
-rule "Connect parameter for Session.init to incoming SyncWires (contained in Frames) (onEdit) (3)"
+rule "Connect parameter for Session.init to incoming SyncWires (contained in Frames) (onChange) (3)"
 	when
 		session : Session (  )
 		sw : SyncWire(  )
@@ -368,7 +368,7 @@ rule "Connect parameter for Session.init to incoming SyncWires (contained in Fra
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connects(sw2, sourceElement, targetElement ))
 
-		event : EventTrigger( sourceElement.onEdit == event ) 
+		event : EventTrigger( sourceElement.onChange == event ) 
 		operation : Operation( eContainer == targetElement, name == "update" )
 
 		rw : RunAction( eContainer == sw2, from == event, to == operation, name == "run" )

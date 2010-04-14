@@ -1674,7 +1674,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEditable_OnEdit() {
+	public EReference getEditable_OnChange() {
 		return (EReference)editableEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1976,7 +1976,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		canBeSyncedEClass = createEClass(CAN_BE_SYNCED);
 
 		editableEClass = createEClass(EDITABLE);
-		createEReference(editableEClass, EDITABLE__ON_EDIT);
+		createEReference(editableEClass, EDITABLE__ON_CHANGE);
 
 		accessibleEClass = createEClass(ACCESSIBLE);
 		createEReference(accessibleEClass, ACCESSIBLE__ON_ACCESS);
@@ -2350,7 +2350,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		initEClass(canBeSyncedEClass, CanBeSynced.class, "CanBeSynced", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(editableEClass, Editable.class, "Editable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEditable_OnEdit(), this.getEventTrigger(), null, "onEdit", null, 0, 1, Editable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEditable_OnChange(), this.getEventTrigger(), null, "onChange", null, 0, 1, Editable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(accessibleEClass, Accessible.class, "Accessible", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAccessible_OnAccess(), this.getEventTrigger(), null, "onAccess", null, 0, 1, Accessible.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2628,7 +2628,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 			 "added", "0.4"
 		   });			
 		addAnnotation
-		  (getEditable_OnEdit(), 
+		  (getEditable_OnChange(), 
 		   source, 
 		   new String[] {
 			 "changed", "added in 0.4.4"

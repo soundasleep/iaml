@@ -1349,13 +1349,13 @@ public interface ModelPackage extends EPackage {
 	int DOMAIN_OBJECT__IN_EXTENDS_EDGES = APPLICATION_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>On Edit</b></em>' containment reference.
+	 * The feature id for the '<em><b>On Change</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_OBJECT__ON_EDIT = APPLICATION_ELEMENT_FEATURE_COUNT + 3;
+	int DOMAIN_OBJECT__ON_CHANGE = APPLICATION_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
@@ -1592,13 +1592,13 @@ public interface ModelPackage extends EPackage {
 	int DOMAIN_ATTRIBUTE__IN_EXTENDS_EDGES = APPLICATION_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>On Edit</b></em>' containment reference.
+	 * The feature id for the '<em><b>On Change</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_ATTRIBUTE__ON_EDIT = APPLICATION_ELEMENT_FEATURE_COUNT + 3;
+	int DOMAIN_ATTRIBUTE__ON_CHANGE = APPLICATION_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Primary Key</b></em>' attribute.
@@ -2986,13 +2986,13 @@ public interface ModelPackage extends EPackage {
 	int VISIBLE_THING__OUT_PARAMETER_EDGES = CONTAINS_CONDITIONS_FEATURE_COUNT + 18;
 
 	/**
-	 * The feature id for the '<em><b>On Edit</b></em>' containment reference.
+	 * The feature id for the '<em><b>On Change</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VISIBLE_THING__ON_EDIT = CONTAINS_CONDITIONS_FEATURE_COUNT + 19;
+	int VISIBLE_THING__ON_CHANGE = CONTAINS_CONDITIONS_FEATURE_COUNT + 19;
 
 	/**
 	 * The feature id for the '<em><b>On Access</b></em>' containment reference.
@@ -4328,13 +4328,13 @@ public interface ModelPackage extends EPackage {
 	int DOMAIN_OBJECT_INSTANCE__OUT_PARAMETER_EDGES = APPLICATION_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>On Edit</b></em>' containment reference.
+	 * The feature id for the '<em><b>On Change</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_OBJECT_INSTANCE__ON_EDIT = APPLICATION_ELEMENT_FEATURE_COUNT + 2;
+	int DOMAIN_OBJECT_INSTANCE__ON_CHANGE = APPLICATION_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Attributes</b></em>' containment reference list.
@@ -5357,13 +5357,13 @@ public interface ModelPackage extends EPackage {
 	int DOMAIN_ATTRIBUTE_INSTANCE__IN_EXTENDS_EDGES = APPLICATION_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>On Edit</b></em>' containment reference.
+	 * The feature id for the '<em><b>On Change</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_ATTRIBUTE_INSTANCE__ON_EDIT = APPLICATION_ELEMENT_FEATURE_COUNT + 2;
+	int DOMAIN_ATTRIBUTE_INSTANCE__ON_CHANGE = APPLICATION_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Autosave</b></em>' attribute.
@@ -5768,13 +5768,13 @@ public interface ModelPackage extends EPackage {
 	int EDITABLE = 41;
 
 	/**
-	 * The feature id for the '<em><b>On Edit</b></em>' containment reference.
+	 * The feature id for the '<em><b>On Change</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EDITABLE__ON_EDIT = 0;
+	int EDITABLE__ON_CHANGE = 0;
 
 	/**
 	 * The number of structural features of the '<em>Editable</em>' class.
@@ -7578,15 +7578,15 @@ public interface ModelPackage extends EPackage {
 	EClass getEditable();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.openiaml.model.model.Editable#getOnEdit <em>On Edit</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.openiaml.model.model.Editable#getOnChange <em>On Change</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>On Edit</em>'.
-	 * @see org.openiaml.model.model.Editable#getOnEdit()
+	 * @return the meta object for the containment reference '<em>On Change</em>'.
+	 * @see org.openiaml.model.model.Editable#getOnChange()
 	 * @see #getEditable()
 	 * @generated
 	 */
-	EReference getEditable_OnEdit();
+	EReference getEditable_OnChange();
 
 	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.Accessible <em>Accessible</em>}'.
@@ -8851,12 +8851,12 @@ public interface ModelPackage extends EPackage {
 		EClass EDITABLE = eINSTANCE.getEditable();
 
 		/**
-		 * The meta object literal for the '<em><b>On Edit</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>On Change</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EDITABLE__ON_EDIT = eINSTANCE.getEditable_OnEdit();
+		EReference EDITABLE__ON_CHANGE = eINSTANCE.getEditable_OnChange();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.Accessible <em>Accessible</em>}' class.

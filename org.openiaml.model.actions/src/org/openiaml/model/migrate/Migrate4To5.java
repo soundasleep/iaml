@@ -48,6 +48,10 @@ import org.w3c.dom.NodeList;
  *      <li>RunInstanceWire is now an Action, rather than a Wire
  *      <li>NavigateWire is now an Action, rather than a Wire
  *   </ol></li>
+ *   <li>Changed references:
+ *   <ol>
+ *   	<li>onEdit is now onChange
+ *   </ol></li>
  *   <li>VisibleThing no longer ContainsEventTriggers; now separate onAccess, onEdit, onClick events
  *   <li>Scope no longer ContainsEventTriggers; now separate onAccess, onInit events
  *   <li><strong>Many other modifications, too many to list... this migrator only implements
@@ -282,6 +286,12 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 		if (nodeName.equals("children") && "iaml.visual:Page".equals(xsiType)) {
 			return "scopes";
 		}
+
+		// <onEdit> 
+		// --> <onChange>
+		if (nodeName.equals("onEdit")) {
+			return "onChange";
+		}
 		
 		if (nodeName.equals("wires")) {
 			// <wires xsi:type="iaml.wires:ParameterWire"> 
@@ -359,7 +369,7 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 					return "onClick";
 				} else if ("edit".equals(eventName) || "onEdit".equals(eventName)
 						|| "change".equals(eventName) || "onChange".equals(eventName)) {
-					return "onEdit";
+					return "onChange";
 				} else if ("init".equals(eventName) || "onInit".equals(eventName)) {
 					return "onInit";
 				} else {

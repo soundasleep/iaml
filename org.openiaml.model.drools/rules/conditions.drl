@@ -23,7 +23,7 @@ function boolean connects(Wire wire, Object a, Object b) {
 }
 
 # @inference SyncWire,RunAction,ConditionEdge {@model RunAction RunActions} with incoming {@model ConditionEdge conditions} will be copied to elements created by {@model SyncWire SyncWires}.
-rule "Connect ConditionEdges to RunActions created by SyncWires (edit/update) (onEdit)"
+rule "Connect ConditionEdges to RunActions created by SyncWires (edit/update) (onChange)"
 	when
 		# we have a sync wire
 		sw : SyncWire( )
@@ -32,7 +32,7 @@ rule "Connect ConditionEdges to RunActions created by SyncWires (edit/update) (o
 		eval(functions.connects(sw, source, target))  
 		
 		# which has a run wire between event and operation (generated)
-		event : EventTrigger( source.onEdit == event )
+		event : EventTrigger( source.onChange == event )
 		operation : Operation( eContainer == target, name=="update" )		
 		run : RunAction( eContainer == sw, from == event, to == operation, name == "run" )
 		
@@ -88,7 +88,7 @@ rule "Connect ConditionEdges to RunActions created by SyncWires (access/init) (o
 end
 
 # @inference SyncWire,RunAction,ConditionEdge,ParameterEdge {@model RunAction RunActions} with incoming {@model ConditionEdge conditions} with {@model ParameterEdge parameters} will be copied to elements created by {@model SyncWire SyncWires}.
-rule "Connect ParameterEdges to ConditionEdges connected to RunActions created by SyncWires (edit/update) (onEdit)"
+rule "Connect ParameterEdges to ConditionEdges connected to RunActions created by SyncWires (edit/update) (onChange)"
 	when
 		# we have a syncwire
 		sw : SyncWire( )
@@ -97,7 +97,7 @@ rule "Connect ParameterEdges to ConditionEdges connected to RunActions created b
 		eval(functions.connects(sw, source, target))  
 		
 		# that has created a RunAction
-		event : EventTrigger( source.onEdit == event )
+		event : EventTrigger( source.onChange == event )
 		operation : Operation( eContainer == target, name=="update" )
 		run : RunAction( eContainer == sw, from == event, to == operation, name == "run" )
 

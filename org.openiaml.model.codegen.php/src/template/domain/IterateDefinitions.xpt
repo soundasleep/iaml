@@ -18,13 +18,13 @@
 	 */
 	function call_all_attribute_change_events_«safeName()-»() {
 		«FOREACH attributes AS a»
-		«IF a.onEdit != null»
+		«IF a.onChange != null»
 			«REM»
 				we don't check to see that it is valid, because we want it
 				to fail. if you don't want the change to fail, you should use
 				the runtime 'hasNext/hasPrevious/empty' operations.
 			«ENDREM» 
-			«EXPAND template::events::EventCall::callEvent(true) FOR a.onEdit»
+			«EXPAND template::events::EventCall::callEvent(true) FOR a.onChange»
 		«ENDIF»
 		«ENDFOREACH»
 	}

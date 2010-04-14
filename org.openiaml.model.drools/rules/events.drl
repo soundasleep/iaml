@@ -37,12 +37,12 @@ rule "Create 'edit' event trigger for Editable things"
 	when
 		f : Editable( )
 		g : GeneratesElements ( eval(f == g) )
-		not (event : EventTrigger( f.onEdit == event ))
+		not (event : EventTrigger( f.onChange == event ))
 				
 		eval ( handler.veto( g ))
 			
 	then
-		EventTrigger event = handler.generatedEventTriggerOnEdit(g, f);
+		EventTrigger event = handler.generatedEventTriggerOnChange(g, f);
 		queue.add(event, drools);
 		
 end

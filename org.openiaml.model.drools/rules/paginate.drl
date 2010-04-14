@@ -442,13 +442,13 @@ end
 
 /**
  * @implementation EventTrigger,DomainObjectInstance
- *		The '{@model Editable#onEdit}' event for a {@model DomainObjectInstance}
+ *		The '{@model Editable#onChange}' event for a {@model DomainObjectInstance}
  *		is executed when the results, that the {@model DomainObjectInstance} represent, change.
  */
 rule "Connect Instance.onChange to Results.update"
 	when
 		instance : DomainObjectInstance (  )
-		event : EventTrigger ( instance.onEdit == event )
+		event : EventTrigger ( instance.onChange == event )
 		
 		form : InputForm ( )
 		set : SetWire ( )
@@ -471,7 +471,7 @@ end
 rule "Connect results parameter to Results label update"
 	when
 		instance : DomainObjectInstance (  )
-		event : EventTrigger ( instance.onEdit == event )
+		event : EventTrigger ( instance.onChange == event )
 		
 		form : InputForm ( )
 		set : SetWire ( )

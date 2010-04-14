@@ -7,12 +7,12 @@
     xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition">
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//Editable/onEdit"/>
+        href="iaml.ecore#//Editable/onChange"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//EventTrigger"/>
       <domainSpecialization
-          body="return domainElement.eContainingFeature().getName().equals(&quot;onEdit&quot;);"
+          body="return domainElement.eContainingFeature().getName().equals(&quot;onChange&quot;);"
           language="java"/>
       <labelMappings
           readOnly="true">

@@ -263,8 +263,8 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="EventTrigger [onEdit]"
-          description="Create new EventTrigger [onEdit]">
+          title="EventTrigger [onChange]"
+          description="Create new EventTrigger [onChange]">
         <smallIcon
             xsi:type="gmftool:BundleImage"
             path="icons/full/obj16/EventTrigger.gif"

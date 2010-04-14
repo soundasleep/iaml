@@ -39,7 +39,7 @@ $arg0 = require_get("arg0");
 set_application_value($id, $arg0);
 log_message("set_application_value.php: setting id=$id, arg0=$arg0");
 
-// do we need to run any onChange/onEdit events?
+// do we need to run any onChange/onChange events?
 «EXPAND onChangeEvents FOREACH eAllContents.typeSelect(model::ContainsProperties)»
 
 echo "ok";
@@ -78,9 +78,9 @@ echo_necessary_update_callbacks();
 		«IF model::Editable.isInstance(this)»
 		«REM»select all Editable ContainsProperties«ENDREM»
 		«FOREACH getRoot().eAllContents.typeSelect(model::Editable).select(e|e==this) AS editable» 
-			«IF editable.onEdit != null»
+			«IF editable.onChange != null»
 			if ($id == '«safeName(property)»') {
-				«EXPAND template::events::EventCall::callEvent(true) FOR editable.onEdit»
+				«EXPAND template::events::EventCall::callEvent(true) FOR editable.onChange»
 			}
 			«ENDIF» 
 		«ENDFOREACH»

@@ -69,7 +69,7 @@ echo_necessary_update_callbacks();
 «DEFINE potentialDomainAttributeInstanceUpdatesRequired FOR model::DomainAttributeInstance»
 	/* attribute «this» */
 	/* expand all 'edit' events */
-	«EXPAND potentialEditEvent("edit") FOREACH {onEdit}»
+	«EXPAND potentialEditEvent("edit") FOREACH {onChange}»
 «ENDDEFINE»
 
 «DEFINE potentialEditEvent(String eventName) FOR model::EventTrigger»

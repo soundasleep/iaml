@@ -228,10 +228,13 @@ public abstract class DomBasedMigrator implements IamlModelMigrator {
 		// does it have an id?
 		// if not, create one
 		if (element.getAttribute("id").isEmpty()) {
-			String oldId = calculateOldId(element);
-			String newId = getMigratedId(oldId);
-			idMap.put(oldId, newId);
-			e.setAttribute("id", newId);
+			// do not give IDs to elements with 'href'
+			if (element.getAttribute("href") == null || element.getAttribute("href").isEmpty()) {
+				String oldId = calculateOldId(element);
+				String newId = getMigratedId(oldId);
+				idMap.put(oldId, newId);
+				e.setAttribute("id", newId);
+			}
 		}
 		
 		// should we replace the xsi:type?

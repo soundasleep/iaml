@@ -521,7 +521,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="CanBeSynced" abstract="true" interface="true"
       eSuperTypes="#//NamedElement #//GeneratedElement #//GeneratesElements #//ContainsWires #//ContainsOperations #//ContainsConditions #//WireSource #//WireDestination"/>
   <eClassifiers xsi:type="ecore:EClass" name="Editable" abstract="true" interface="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="onEdit" eType="#//EventTrigger"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="onChange" eType="#//EventTrigger"
         containment="true">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="changed" value="added in 0.4.4"/>

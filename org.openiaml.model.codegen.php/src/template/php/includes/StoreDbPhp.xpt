@@ -139,31 +139,31 @@ echo_necessary_update_callbacks();
 «ENDDEFINE»
 
 «DEFINE expandDomainAttributeDatabase(model::DomainStore store, model::DomainObject object) FOR model::DomainAttribute»
-	«IF !{onEdit}.isEmpty»
+	«IF !{onChange}.isEmpty»
 	if ($attribute_id == "«safeNameString(id)»") {
 		$db_type = "pdo";
 		«EXPAND template::domain::Select::selectDatabase» 
 		$table_name = "«safeNameString(object.name)»";
 		$row_name = "«safeNameString(name)»";
 		
-		// are there any onEdit operations for this attribute that we
+		// are there any onChange operations for this attribute that we
 		// have to then call?
-		«EXPAND expandDomainAttributeEvents("edit") FOREACH {onEdit}»
+		«EXPAND expandDomainAttributeEvents("edit") FOREACH {onChange}»
 	}
 	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE expandDomainAttributeProperties(model::DomainStore store, model::DomainObject object) FOR model::DomainAttribute»
-	«IF !{onEdit}.isEmpty»
+	«IF !{onChange}.isEmpty»
 	if ($attribute_id == "«safeNameString(id)»") {
 		$db_type = "properties";
 		$db_name = "«store.file»";
 		$table_name = null;
 		$row_name = "«safeNameString(name)»";
 		
-		// are there any onEdit operations for this attribute that we
+		// are there any onChange operations for this attribute that we
 		// have to then call?
-		«EXPAND expandDomainAttributeEvents("edit") FOREACH {onEdit}»
+		«EXPAND expandDomainAttributeEvents("edit") FOREACH {onChange}»
 	}
 	«ENDIF»
 «ENDDEFINE»
@@ -180,31 +180,31 @@ echo_necessary_update_callbacks();
 «ENDDEFINE»
 
 «DEFINE soleAttributeDatabase(model::DomainStore store) FOR model::DomainAttribute»
-	«IF !{onEdit}.isEmpty»
+	«IF !{onChange}.isEmpty»
 	if ($attribute_id == "«safeNameString(id)»") {
 		$db_type = "pdo";
 		«EXPAND template::domain::Select::selectDatabase» 
 		$table_name = "single_values";
 		$row_name = "«safeNameString(name)»";
 		
-		// are there any onEdit operations for this attribute that we
+		// are there any onChange operations for this attribute that we
 		// have to then call?
-		«EXPAND expandDomainAttributeEvents("edit") FOREACH {onEdit}»
+		«EXPAND expandDomainAttributeEvents("edit") FOREACH {onChange}»
 	}
 	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE soleAttributeProperties(model::DomainStore store) FOR model::DomainAttribute»
-	«IF !{onEdit}.isEmpty»
+	«IF !{onChange}.isEmpty»
 	if ($attribute_id == "«safeNameString(id)»") {
 		$db_type = "properties";
 		$db_name = "«store.file»";
 		$table_name = null;
 		$row_name = "«safeNameString(name)»";
 		
-		// are there any onEdit operations for this attribute that we
+		// are there any onChange operations for this attribute that we
 		// have to then call?
-		«EXPAND expandDomainAttributeEvents("edit") FOREACH {onEdit}»
+		«EXPAND expandDomainAttributeEvents("edit") FOREACH {onChange}»
 	}
 	«ENDIF»
 «ENDDEFINE»
@@ -228,31 +228,31 @@ echo_necessary_update_callbacks();
 «ENDDEFINE»
 
 «DEFINE expandDomainAttributeRootDatabase(model::DomainObject object) FOR model::DomainAttribute»
-	«IF !{onEdit}.isEmpty»
+	«IF !{onChange}.isEmpty»
 	if ($attribute_id == "«safeNameString(id)»") {
 		$db_type = "pdo";
 		«EXPAND template::domain::Select::selectDatabase» 
 		$table_name = "«safeNameString(object.name)»";
 		$row_name = "«safeNameString(name)»";
 		
-		// are there any onEdit operations for this attribute that we
+		// are there any onChange operations for this attribute that we
 		// have to then call?
-		«EXPAND expandDomainAttributeEvents("edit") FOREACH {onEdit}»
+		«EXPAND expandDomainAttributeEvents("edit") FOREACH {onChange}»
 	}
 	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE expandDomainAttributeRootProperties(model::DomainObject object) FOR model::DomainAttribute»
-	«IF !{onEdit}.isEmpty»
+	«IF !{onChange}.isEmpty»
 	if ($attribute_id == "«safeNameString(id)»") {
 		$db_type = "properties";
 		$db_name = "internet_application.properties";
 		$table_name = null;
 		$row_name = "«safeNameString(name)»";
 		
-		// are there any onEdit operations for this attribute that we
+		// are there any onChange operations for this attribute that we
 		// have to then call?
-		«EXPAND expandDomainAttributeEvents("edit") FOREACH {onEdit}»
+		«EXPAND expandDomainAttributeEvents("edit") FOREACH {onChange}»
 	}
 	«ENDIF»
 «ENDDEFINE»

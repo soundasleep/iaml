@@ -3,6 +3,9 @@
  */
 package org.openiaml.model.tests;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -21,6 +24,7 @@ import net.sourceforge.jwebunit.junit.WebTestCase;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.InternetApplication;
@@ -323,7 +327,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * 
 	 * @see #beginAtSitemapThenPage(IFile, String, String)
 	 * @param sitemap the location of the sitemap file
-	 * @param pageTitle the page title to select from the sitemap
+	 * @param pageText the <em>exact</em> page text link to click
 	 * @param expectedPageTitle the expected destination page title, usually the same as pageTitle
 	 * @param query query string to append to the end of the destination, or null if none
 	 */ 
@@ -333,9 +337,9 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		beginAt(sitemap.getProjectRelativePath().toString());
 		assertTitleMatch("sitemap");
 		
-		assertLinkPresentWithText(pageTitle);
+		assertLinkPresentWithExactText(pageTitle);
 		if (query == null) {	
-			clickLinkWithText(pageTitle);
+			clickLinkWithExactText(pageTitle);
 		} else {
 			visitLinkWithQueryParameter(pageTitle, query);
 		}
@@ -381,7 +385,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * use {@link #beginAtSitemapThenPage(IFile, String)}.
 	 * 
 	 * @param sitemap the sitemap url to start from
-	 * @param pageText the page text link to click
+	 * @param pageText the <em>exact</em> page text link to click
 	 * @param expected the expected page title on the new page, if different from the page text link
 	 */ 
 	protected void gotoSitemapThenPage(IFile sitemap, String pageText, String expectedTitle) throws Exception {
@@ -395,8 +399,8 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		gotoPage(sitemap.getProjectRelativePath().toString());
 		assertTitleMatch("sitemap");
 		
-		assertLinkPresentWithText(pageText);
-		clickLinkWithText(pageText);
+		assertLinkPresentWithExactText(pageText);
+		clickLinkWithExactText(pageText);
 		try {
 			assertTitleEquals(expectedTitle);
 			// assertEquals(expectedTitle, getPageTitle());		// could be different
@@ -419,13 +423,31 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	}
 
 	/**
+	 * Write the given log message to the debug log, '<code>php.log</code>'.
+	 * 
+	 * @param string log message
+	 * @throws CoreException 
+	 * @throws IOException 
+	 */
+	public void writeDebug(String string) throws CoreException, IOException {
+		IFile f = getProject().getFile("output/php.log");
+
+		// append
+		File fp = f.getLocation().toFile();
+		assertTrue("Log file '" + fp + "' does not exist from '" + f + "'", fp.exists());
+		FileWriter fw = new FileWriter(fp, true);
+		fw.write("[test framework] " + string + "\n");
+		fw.close();
+	}
+
+	/**
 	 * Go to the sitemap page, and then click on a particular page title.
 	 * 
 	 * <p>If you want the client to be reset (e.g. delete cookies, sessions),
 	 * use {@link #beginAtSitemapThenPage(IFile, String)}.
 	 * 
 	 * @param sitemap the sitemap url to start from
-	 * @param pageText the page text link to click
+	 * @param pageText the <em>exact</em> page text link to click
 	 * @param expected the expected page title on the new page, if different from the page text link
 	 * @param query additional query parameters to append to the URL, e.g. "id=123". may be null. 
 	 */ 
@@ -450,7 +472,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		assertTitleMatch("sitemap");
 		
 		// make sure the link exists, first
-		assertLinkPresentWithText(pageText);
+		assertLinkPresentWithExactText(pageText);
 		
 		// now find the link, and get where it goes to
 		IElement element = getElementByXPath("//a[normalize-space(text()) = normalize-space('" + pageText + "')]");		
@@ -479,7 +501,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * on the given page. Does not actually check {@link #assertProblem()}.
 	 * 
 	 * @param sitemap
-	 * @param string
+	 * @param pageText the <em>exact</em> page text link to click
 	 */
 	public void gotoSitemapWithProblem(IFile sitemap, String pageText) throws Exception {
 		logTimed("web: gotoSitemapWithProblem");
@@ -492,8 +514,8 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		gotoPage(sitemap.getProjectRelativePath().toString());
 		assertTitleMatch("sitemap");
 		
-		assertLinkPresentWithText(pageText);
-		clickLinkWithText(pageText);
+		assertLinkPresentWithExactText(pageText);
+		clickLinkWithExactText(pageText);
 		try {
 			assertTitleNotSame(pageText);
 			// assertEquals(expectedTitle, getPageTitle());		// could be different
@@ -807,6 +829,20 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 			IElement debug = getElementById("debug");
 			debug.setTextContent("");
 		}
+	}
+	
+	/**
+	 * Get the current debug dialog text, or <code>null</code>
+	 * if it can't be found.
+	 * 
+	 * @return the debug dialog text, or <code>null</code> if no debug dialog exists
+	 */
+	public String getDebugText() {
+		if (hasElementById("debug")) {
+			IElement debug = getElementById("debug");
+			return debug.getTextContent();
+		}
+		return null;
 	}
 	
 	/**

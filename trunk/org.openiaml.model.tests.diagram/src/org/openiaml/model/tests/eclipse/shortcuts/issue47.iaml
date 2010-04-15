@@ -22,7 +22,7 @@
         <executionEdges generatedBy="model.12252e52506.29" isGenerated="true" id="model.12252e52506.31" from="operations.12252e52583.1" to="model.12252e52506.2e"/>
         <executionEdges generatedBy="model.12252e52506.29" isGenerated="true" id="model.12252e52506.32" from="model.12252e52506.2e" to="operations.12252e52583.2"/>
       </operations>
-      <onEdit generatedBy="visual.12252e52574.8" isGenerated="true" id="model.12252e52506.2b" outActions="wires.12252e52583.7"/>
+      <onChange generatedBy="visual.12252e52574.8" isGenerated="true" id="model.12252e52506.2b" outActions="wires.12252e52583.7"/>
       <onAccess generatedBy="visual.12252e52574.8" isGenerated="true" id="model.12252e52506.2a" outActions="wires.12252e52583.8"/>
       <properties generatedBy="visual.12252e52574.8" isGenerated="true" id="model.12252e52506.2c" name="fieldValue" inFlows="model.12252e52506.30 model.12252e52506.36" outParameterEdges="wires.12252e52583.c wires.12252e52583.d"/>
     </children>
@@ -57,7 +57,7 @@
         <parameterEdges generatedBy="wires.12252e52583.1" isGenerated="true" id="wires.12252e52583.c" name="[sync] run instance parameter (target.edit)" from="model.12252e52506.2c" to="wires.12252e52583.7"/>
         <parameterEdges generatedBy="wires.12252e52583.1" isGenerated="true" id="wires.12252e52583.d" name="[sync] run instance parameter (source.access)" from="model.12252e52506.2c" to="wires.12252e52583.6"/>
       </wires>
-      <onEdit generatedBy="visual.12252e52574.a" isGenerated="true" id="model.12252e52506.26" outActions="wires.12252e52583.9"/>
+      <onChange generatedBy="visual.12252e52574.a" isGenerated="true" id="model.12252e52506.26" outActions="wires.12252e52583.9"/>
       <onAccess generatedBy="visual.12252e52574.a" isGenerated="true" id="model.12252e52506.25" outActions="wires.12252e52583.6"/>
       <properties generatedBy="visual.12252e52574.a" isGenerated="true" id="model.12252e52506.27" name="fieldValue" inFlows="model.12252e52506.3c model.12252e52506.42" outParameterEdges="wires.12252e52583.a wires.12252e52583.b"/>
     </children>

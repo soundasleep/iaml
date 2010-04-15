@@ -1030,7 +1030,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public SyncWire assertHasSyncWire(EObject container, WireSource element1, WireDestination element2, String name) throws JaxenException {
+	public SyncWire assertHasSyncWire(EObject container, WireSource element1, WireSource element2, String name) throws JaxenException {
 		Set<Wire> x = assertHasWiresBidirectional(1, container, element1, element2, SyncWire.class);
 		assertEquals(1, x.size());
 		SyncWire sw = (SyncWire) x.iterator().next();
@@ -1044,7 +1044,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public SyncWire assertHasSyncWire(EObject container, WireSource element1, WireDestination element2) throws JaxenException {
+	public SyncWire assertHasSyncWire(EObject container, WireSource element1, WireSource element2) throws JaxenException {
 		Set<Wire> x = assertHasWiresBidirectional(1, container, element1, element2, SyncWire.class);
 		assertEquals(1, x.size());
 		SyncWire sw = (SyncWire) x.iterator().next();
@@ -1171,7 +1171,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * Assert <em>no</em> bidirectional SyncWire exists between
 	 * the given elements.
 	 */
-	public void assertHasNoSyncWire(EObject container, WireSource from, WireDestination to) throws JaxenException {
+	public void assertHasNoSyncWire(EObject container, WireSource from, WireSource to) throws JaxenException {
 		Set<Wire> wires = getWiresBidirectional(container, from, to, SyncWire.class);
 		assertEquals("Unexpected SyncWires found: " + wires, 0, wires.size());
 	}

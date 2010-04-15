@@ -78,6 +78,19 @@ function store_event(frame_id, event_name, arg0) {
 }
 
 /**
+ * Currently there is an issue where if a TextField is changed, it will execute the 'onChange' event remotely, and also
+ * update the server-side value (which also executes 'onChange', except on the server). Both are necessary, but as a result,
+ * alert messages (which cannot repeat) are being provided twice, failing test cases. This is a quick solution that should
+ * be improved in the future, perhaps with 'transaction ID's or hashes being generated and passed along to the
+ * server to synchronise client-side and server-side events.
+ *
+ * @implementation PrimitiveOperation
+ *		If two 'javascriptAlert' operations are called in the same client-side session with the same message,
+ *		only the first alert message will be displayed.
+ */
+var last_alert_message = null;
+
+/**
  * We refactor the queued functionality so that _any_ remote call
  * will be queued up properly.
  *
@@ -169,6 +182,20 @@ function execute_queued_url(url, counter, function_queue) {
 		      						debug("[instruction] redirect(" + url + ")");
 									window.location = url;
 									ajaxIncrement();	// prevent other events from executing
+		      						break;
+		      					
+		      					case "alert":
+		      						if (bits.length != 2) {
+		      							throw new IamlJavascriptException("'alert' instruction called with incorrect number of arguments: expected 2, found " + bits.length);
+		      						}
+		      						var message = decodeURIComponent(bits[1]);
+		      						debug("[instruction] alert(" + message + ")");
+		      						if (last_alert_message === message) {
+		      							debug("[instruction] alert: ignoring duplicate message");
+		      						} else {
+		      							alert(message);
+		      						}
+		      						last_alert_message = message;
 		      						break;
 
 		      					case "call_operation":

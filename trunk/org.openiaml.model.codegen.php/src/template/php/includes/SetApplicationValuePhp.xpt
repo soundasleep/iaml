@@ -15,6 +15,8 @@
  
 «EXPAND template::Template::commonHeader("", "Set Application Value")»
 
+define('REDIRECT_ON_CLIENT', true);
+
 // include operations, condition definitions
 «EXPAND template::Common::commonPHPIncludes»
 
@@ -36,11 +38,16 @@ function get_frame_id() {
 // the value to set the property to
 $arg0 = require_get("arg0");
 
-set_application_value($id, $arg0);
-log_message("set_application_value.php: setting id=$id, arg0=$arg0");
+$old_value = get_application_value($id, null); 
 
-// do we need to run any onChange/onChange events?
-«EXPAND onChangeEvents FOREACH eAllContents.typeSelect(model::ContainsProperties)»
+// only set the value if it has actually changed
+if ($old_value !== $arg0) {
+	set_application_value($id, $arg0);
+	log_message("set_application_value.php: setting id=$id, arg0=$arg0, old=$old_value");
+	
+	// do we need to run any onChange/onChange events?
+	«EXPAND onChangeEvents FOREACH eAllContents.typeSelect(model::ContainsProperties)»
+}
 
 echo "ok";
 

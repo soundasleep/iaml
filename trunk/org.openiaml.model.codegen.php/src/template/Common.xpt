@@ -10,6 +10,9 @@
 // condition definitions
 «EXPAND template::conditions::Definitions::conditionIncludes(true) FOR getRoot()-»
 
+// expand any dynamic element sources
+«EXPAND template::dynamic::DynamicElements::dynamicElements(true) FOR getRoot()-»
+
 // expand any domain instances
 «EXPAND template::domain::Definitions::domainObjectDefinitions(true) FOR getRoot()-»
 «EXPAND template::domain::Definitions::domainAttributeDefinitions(true) FOR getRoot()-»

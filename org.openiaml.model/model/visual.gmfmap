@@ -641,7 +641,7 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//Editable/onChange"/>
+        href="iaml.ecore#//Changeable/onChange"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//EventTrigger"/>

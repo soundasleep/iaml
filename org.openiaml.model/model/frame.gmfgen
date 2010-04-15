@@ -930,7 +930,7 @@
           <metaFeatures href="iaml.genmodel#//model/wires/SelectWire/query"/>
         </modelFacet>
       </labels>
-      <labels editPartClassName="SelectWireLimitEditPart" itemSemanticEditPolicyClassName="SelectWireLimitItemSemanticEditPolicy" visualID="6016">
+      <labels editPartClassName="SelectWireLimitEditPart" itemSemanticEditPolicyClassName="SelectWireLimitItemSemanticEditPolicy" notationViewFactoryClassName="SelectWireLimitViewFactory" visualID="6016">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureSelectWireLimitFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes xsi:type="gmfgen:LabelOffsetAttributes" y="80"/>

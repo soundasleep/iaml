@@ -15,6 +15,7 @@
     <containsShortcutsTo>iaml_visual</containsShortcutsTo>
     <containsShortcutsTo>iaml_user_store</containsShortcutsTo>
     <containsShortcutsTo>iaml_domain_object</containsShortcutsTo>
+    <containsShortcutsTo>iaml_email</containsShortcutsTo>
     <shortcutsProvidedFor>iaml_frame</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_domain_object_instance</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml</shortcutsProvidedFor>
@@ -27,8 +28,9 @@
     <shortcutsProvidedFor>iaml_visual</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_user_store</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_domain_object</shortcutsProvidedFor>
+    <shortcutsProvidedFor>iaml_email</shortcutsProvidedFor>
     <domainDiagramElement href="iaml.genmodel#//model/DomainObject"/>
-    <topLevelNodes canonicalEditPolicyClassName="EventTriggerCanonicalEditPolicy" createCommandClassName="EventTriggerCreateCommand" editPartClassName="EventTriggerEditPart" graphicalNodeEditPolicyClassName="EventTriggerGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="EventTriggerItemSemanticEditPolicy" notationViewFactoryClassName="EventTriggerViewFactory" visualID="2012">
+    <topLevelNodes canonicalEditPolicyClassName="EventTrigger2CanonicalEditPolicy" createCommandClassName="EventTrigger2CreateCommand" editPartClassName="EventTrigger2EditPart" graphicalNodeEditPolicyClassName="EventTrigger2GraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="EventTrigger2ItemSemanticEditPolicy" notationViewFactoryClassName="EventTriggerViewFactory" visualID="2013">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType editHelperClassName="EventTriggerEditHelper" xsi:type="gmfgen:MetamodelType"/>
       <viewmap classBody="&#10;/**&#10; * @generated&#10; */&#10;public class EventTriggerFigure extends org.eclipse.draw2d.RectangleFigure {&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureEventTriggerContainmentFeatureFigure; &#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureEventTriggerNameFigure; &#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureEventTriggerParentNameFigure; &#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public EventTriggerFigure() {&#10;&#9;&#9;&#10;&#9;org.eclipse.draw2d.FlowLayout layoutThis = new org.eclipse.draw2d.FlowLayout();&#10;&#9;layoutThis.setStretchMinorAxis(false);&#10;&#9;layoutThis.setMinorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#10;);&#10;&#10;&#9;layoutThis.setMajorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#10;);&#10;&#9;layoutThis.setMajorSpacing(5);&#10;&#9;layoutThis.setMinorSpacing(5);&#10;&#9;layoutThis.setHorizontal(false);&#10;&#10;&#9;this.setLayoutManager(layoutThis);&#10;&#10;&#9;&#9;this.setLineWidth(1);&#10;&#9;this.setBackgroundColor(THIS_BACK&#10;);&#10;this.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(3)&#10;, getMapMode().DPtoLP(3)&#10;, getMapMode().DPtoLP(3)&#10;, getMapMode().DPtoLP(3)&#10;));&#10;&#9;&#9;createContents();&#10;&#9;}&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private void createContents(){&#10;&#10;&#10;fFigureEventTriggerContainmentFeatureFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureEventTriggerContainmentFeatureFigure.setText(&quot;&lt;...&gt;&quot;);&#10;&#9;fFigureEventTriggerContainmentFeatureFigure.setForegroundColor(org.eclipse.draw2d.ColorConstants.darkBlue);&#10;&#10;fFigureEventTriggerContainmentFeatureFigure.setFont(FFIGUREEVENTTRIGGERCONTAINMENTFEATUREFIGURE_FONT);&#10;&#10;&#10;&#10;this.add(fFigureEventTriggerContainmentFeatureFigure);&#10;&#10;&#10;&#10;fFigureEventTriggerNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureEventTriggerNameFigure.setText(&quot;&lt;...&gt;&quot;);&#10;&#10;this.add(fFigureEventTriggerNameFigure);&#10;&#10;&#10;&#10;fFigureEventTriggerParentNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureEventTriggerParentNameFigure.setText(&quot;[none]&quot;);&#10;&#9;fFigureEventTriggerParentNameFigure.setForegroundColor(org.eclipse.draw2d.ColorConstants.gray);&#10;&#10;this.add(fFigureEventTriggerParentNameFigure);&#10;&#10;&#10;&#9;}&#10;&#10;&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private boolean myUseLocalCoordinates = false;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;protected boolean useLocalCoordinates() {&#10;&#9;&#9;return myUseLocalCoordinates;&#10;&#9;}&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#10;&#9;&#9;myUseLocalCoordinates = useLocalCoordinates;&#10;&#9;}&#10;&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureEventTriggerContainmentFeatureFigure() {&#10;&#9;&#9;return fFigureEventTriggerContainmentFeatureFigure;&#10;&#9;}&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureEventTriggerNameFigure() {&#10;&#9;&#9;return fFigureEventTriggerNameFigure;&#10;&#9;}&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureEventTriggerParentNameFigure() {&#10;&#9;&#9;return fFigureEventTriggerParentNameFigure;&#10;&#9;}&#10;&#10;&#10;}&#10;&#10;/**&#10; * @generated&#10; */&#10;static final org.eclipse.swt.graphics.Color THIS_BACK = new org.eclipse.swt.graphics.Color(null, 247, 221, 238);&#10;&#10;/**&#10; * @generated&#10; */&#10;static final org.eclipse.swt.graphics.Font FFIGUREEVENTTRIGGERCONTAINMENTFEATUREFIGURE_FONT = new org.eclipse.swt.graphics.Font(org.eclipse.swt.widgets.Display.getCurrent(), org.eclipse.swt.widgets.Display.getDefault().getSystemFont().getFontData()[0].getName(), 9, org.eclipse.swt.SWT.BOLD);&#10;&#10;" className="EventTriggerFigure" layoutType="FLOW_LAYOUT" xsi:type="gmfgen:InnerClassViewmap">
@@ -36,24 +38,24 @@
       </viewmap>
       <modelFacet modelElementSelector="//@expressionProviders/@providers.0/@expressions.0">
         <metaClass href="iaml.genmodel#//model/EventTrigger"/>
-        <containmentMetaFeature href="iaml.genmodel#//model/Editable/onEdit"/>
-        <childMetaFeature href="iaml.genmodel#//model/Editable/onEdit"/>
+        <containmentMetaFeature href="iaml.genmodel#//model/Changeable/onChange"/>
+        <childMetaFeature href="iaml.genmodel#//model/Changeable/onChange"/>
       </modelFacet>
-      <labels editPartClassName="WrappingLabelEditPart" elementIcon="true" itemSemanticEditPolicyClassName="WrappingLabelItemSemanticEditPolicy" notationViewFactoryClassName="EventTriggerLabelViewFactory" readOnly="true" visualID="5026">
+      <labels editPartClassName="WrappingLabel8EditPart" elementIcon="true" itemSemanticEditPolicyClassName="WrappingLabel8ItemSemanticEditPolicy" notationViewFactoryClassName="EventTriggerLabelViewFactory" readOnly="true" visualID="5029">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureEventTriggerContainmentFeatureFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes fixedFont="true" fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
         </viewmap>
         <modelFacet parser="//@labelParsers/@implementations.0"/>
       </labels>
-      <labels editPartClassName="EventTriggerNameEditPart" itemSemanticEditPolicyClassName="EventTriggerNameItemSemanticEditPolicy" notationViewFactoryClassName="EventTriggerNameViewFactory" visualID="5027">
+      <labels editPartClassName="EventTriggerName2EditPart" itemSemanticEditPolicyClassName="EventTriggerName2ItemSemanticEditPolicy" notationViewFactoryClassName="EventTriggerNameViewFactory" visualID="5030">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureEventTriggerNameFigure" xsi:type="gmfgen:ParentAssignedViewmap"/>
         <modelFacet parser="//@labelParsers/@implementations.1" xsi:type="gmfgen:FeatureLabelModelFacet">
           <metaFeatures href="iaml.genmodel#//model/NamedElement/name"/>
         </modelFacet>
       </labels>
-      <labels editPartClassName="WrappingLabel7EditPart" itemSemanticEditPolicyClassName="WrappingLabel7ItemSemanticEditPolicy" notationViewFactoryClassName="EventTriggerLabelViewFactory" readOnly="true" visualID="5028">
+      <labels editPartClassName="WrappingLabel9EditPart" itemSemanticEditPolicyClassName="WrappingLabel9ItemSemanticEditPolicy" notationViewFactoryClassName="EventTriggerLabelViewFactory" readOnly="true" visualID="5031">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureEventTriggerParentNameFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
@@ -115,7 +117,7 @@
         <modelFacet parser="//@labelParsers/@implementations.0"/>
       </labels>
     </topLevelNodes>
-    <topLevelNodes canonicalEditPolicyClassName="PropertyCanonicalEditPolicy" createCommandClassName="PropertyCreateCommand" editPartClassName="PropertyEditPart" graphicalNodeEditPolicyClassName="PropertyGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="PropertyItemSemanticEditPolicy" visualID="2014">
+    <topLevelNodes canonicalEditPolicyClassName="PropertyCanonicalEditPolicy" createCommandClassName="PropertyCreateCommand" editPartClassName="PropertyEditPart" graphicalNodeEditPolicyClassName="PropertyGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="PropertyItemSemanticEditPolicy" notationViewFactoryClassName="PropertyViewFactory" visualID="2014">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType editHelperClassName="PropertyEditHelper" xsi:type="gmfgen:MetamodelType"/>
       <viewmap classBody="&#10;/**&#10; * @generated&#10; */&#10;public class PropertyFigure extends org.eclipse.draw2d.RectangleFigure {&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigurePropertyNameFigure; &#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigurePropertyDefaultValueFigure; &#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigurePropertyParentNameFigure; &#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigurePropertyTypeFigure; &#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public PropertyFigure() {&#10;&#9;&#9;&#10;&#9;org.eclipse.draw2d.FlowLayout layoutThis = new org.eclipse.draw2d.FlowLayout();&#10;&#9;layoutThis.setStretchMinorAxis(false);&#10;&#9;layoutThis.setMinorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#10;);&#10;&#10;&#9;layoutThis.setMajorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#10;);&#10;&#9;layoutThis.setMajorSpacing(5);&#10;&#9;layoutThis.setMinorSpacing(5);&#10;&#9;layoutThis.setHorizontal(false);&#10;&#10;&#9;this.setLayoutManager(layoutThis);&#10;&#10;&#9;&#9;this.setLineWidth(1);&#10;&#9;this.setBackgroundColor(THIS_BACK&#10;);&#10;this.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(3)&#10;, getMapMode().DPtoLP(3)&#10;, getMapMode().DPtoLP(3)&#10;, getMapMode().DPtoLP(3)&#10;));&#10;&#9;&#9;createContents();&#10;&#9;}&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private void createContents(){&#10;&#10;&#10;fFigurePropertyNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigurePropertyNameFigure.setText(&quot;&lt;...&gt;&quot;);&#10;&#10;this.add(fFigurePropertyNameFigure);&#10;&#10;&#10;&#10;fFigurePropertyDefaultValueFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigurePropertyDefaultValueFigure.setText(&quot;&lt;...&gt;&quot;);&#10;&#10;this.add(fFigurePropertyDefaultValueFigure);&#10;&#10;&#10;&#10;fFigurePropertyParentNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigurePropertyParentNameFigure.setText(&quot;[none]&quot;);&#10;&#9;fFigurePropertyParentNameFigure.setForegroundColor(org.eclipse.draw2d.ColorConstants.gray);&#10;&#10;this.add(fFigurePropertyParentNameFigure);&#10;&#10;&#10;&#10;fFigurePropertyTypeFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigurePropertyTypeFigure.setText(&quot;&lt;...&gt;&quot;);&#10;&#9;fFigurePropertyTypeFigure.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);&#10;&#10;this.add(fFigurePropertyTypeFigure);&#10;&#10;&#10;&#9;}&#10;&#10;&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private boolean myUseLocalCoordinates = false;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;protected boolean useLocalCoordinates() {&#10;&#9;&#9;return myUseLocalCoordinates;&#10;&#9;}&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#10;&#9;&#9;myUseLocalCoordinates = useLocalCoordinates;&#10;&#9;}&#10;&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigurePropertyNameFigure() {&#10;&#9;&#9;return fFigurePropertyNameFigure;&#10;&#9;}&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigurePropertyDefaultValueFigure() {&#10;&#9;&#9;return fFigurePropertyDefaultValueFigure;&#10;&#9;}&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigurePropertyParentNameFigure() {&#10;&#9;&#9;return fFigurePropertyParentNameFigure;&#10;&#9;}&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigurePropertyTypeFigure() {&#10;&#9;&#9;return fFigurePropertyTypeFigure;&#10;&#9;}&#10;&#10;&#10;}&#10;&#10;/**&#10; * @generated&#10; */&#10;static final org.eclipse.swt.graphics.Color THIS_BACK = new org.eclipse.swt.graphics.Color(null, 208, 185, 243);&#10;&#10;" className="PropertyFigure" layoutType="FLOW_LAYOUT" xsi:type="gmfgen:InnerClassViewmap">
@@ -126,28 +128,28 @@
         <containmentMetaFeature href="iaml.genmodel#//model/ContainsProperties/properties"/>
         <childMetaFeature href="iaml.genmodel#//model/ContainsProperties/properties"/>
       </modelFacet>
-      <labels editPartClassName="PropertyNameEditPart" elementIcon="true" itemSemanticEditPolicyClassName="PropertyNameItemSemanticEditPolicy" visualID="5034">
+      <labels editPartClassName="PropertyNameEditPart" elementIcon="true" itemSemanticEditPolicyClassName="PropertyNameItemSemanticEditPolicy" notationViewFactoryClassName="PropertyNameViewFactory" visualID="5034">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigurePropertyNameFigure" xsi:type="gmfgen:ParentAssignedViewmap"/>
         <modelFacet parser="//@labelParsers/@implementations.1" xsi:type="gmfgen:FeatureLabelModelFacet">
           <metaFeatures href="iaml.genmodel#//model/NamedElement/name"/>
         </modelFacet>
       </labels>
-      <labels editPartClassName="PropertyDefaultValueEditPart" itemSemanticEditPolicyClassName="PropertyDefaultValueItemSemanticEditPolicy" visualID="5035">
+      <labels editPartClassName="PropertyDefaultValueEditPart" itemSemanticEditPolicyClassName="PropertyDefaultValueItemSemanticEditPolicy" notationViewFactoryClassName="PropertyDefaultValueViewFactory" visualID="5035">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigurePropertyDefaultValueFigure" xsi:type="gmfgen:ParentAssignedViewmap"/>
         <modelFacet editPattern="{0}" parser="//@labelParsers/@implementations.1" viewPattern="default: {0}" xsi:type="gmfgen:FeatureLabelModelFacet">
           <metaFeatures href="iaml.genmodel#//model/Property/defaultValue"/>
         </modelFacet>
       </labels>
-      <labels editPartClassName="WrappingLabel4EditPart" itemSemanticEditPolicyClassName="WrappingLabel4ItemSemanticEditPolicy" readOnly="true" visualID="5036">
+      <labels editPartClassName="WrappingLabel4EditPart" itemSemanticEditPolicyClassName="WrappingLabel4ItemSemanticEditPolicy" notationViewFactoryClassName="PropertyLabelViewFactory" readOnly="true" visualID="5036">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigurePropertyParentNameFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
         </viewmap>
         <modelFacet parser="//@labelParsers/@implementations.0"/>
       </labels>
-      <labels editPartClassName="WrappingLabel10EditPart" itemSemanticEditPolicyClassName="WrappingLabel10ItemSemanticEditPolicy" readOnly="true" visualID="5037">
+      <labels editPartClassName="WrappingLabel10EditPart" itemSemanticEditPolicyClassName="WrappingLabel10ItemSemanticEditPolicy" notationViewFactoryClassName="PropertyLabelViewFactory" readOnly="true" visualID="5037">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigurePropertyTypeFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
@@ -189,7 +191,7 @@
 </labels>
     <behaviour diagramKind="Iaml_Element" editPolicyClassName="ElementOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.element.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
 </topLevelNodes>
-    <topLevelNodes canonicalEditPolicyClassName="EventTrigger2CanonicalEditPolicy" createCommandClassName="EventTrigger2CreateCommand" editPartClassName="EventTrigger2EditPart" graphicalNodeEditPolicyClassName="EventTrigger2GraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="EventTrigger2ItemSemanticEditPolicy" notationViewFactoryClassName="EventTriggerViewFactory" visualID="2013">
+    <topLevelNodes canonicalEditPolicyClassName="EventTriggerCanonicalEditPolicy" createCommandClassName="EventTriggerCreateCommand" editPartClassName="EventTriggerEditPart" graphicalNodeEditPolicyClassName="EventTriggerGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="EventTriggerItemSemanticEditPolicy" visualID="2015">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType metamodelType="//@diagram/@topLevelNodes.0/@elementType" xsi:type="gmfgen:SpecializationType"/>
       <viewmap classBody="&#10;/**&#10; * @generated&#10; */&#10;public class EventTriggerFigure extends org.eclipse.draw2d.RectangleFigure {&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureEventTriggerContainmentFeatureFigure; &#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureEventTriggerNameFigure; &#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureEventTriggerParentNameFigure; &#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public EventTriggerFigure() {&#10;&#9;&#9;&#10;&#9;org.eclipse.draw2d.FlowLayout layoutThis = new org.eclipse.draw2d.FlowLayout();&#10;&#9;layoutThis.setStretchMinorAxis(false);&#10;&#9;layoutThis.setMinorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#10;);&#10;&#10;&#9;layoutThis.setMajorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#10;);&#10;&#9;layoutThis.setMajorSpacing(5);&#10;&#9;layoutThis.setMinorSpacing(5);&#10;&#9;layoutThis.setHorizontal(false);&#10;&#10;&#9;this.setLayoutManager(layoutThis);&#10;&#10;&#9;&#9;this.setLineWidth(1);&#10;&#9;this.setBackgroundColor(THIS_BACK&#10;);&#10;this.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(3)&#10;, getMapMode().DPtoLP(3)&#10;, getMapMode().DPtoLP(3)&#10;, getMapMode().DPtoLP(3)&#10;));&#10;&#9;&#9;createContents();&#10;&#9;}&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private void createContents(){&#10;&#10;&#10;fFigureEventTriggerContainmentFeatureFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureEventTriggerContainmentFeatureFigure.setText(&quot;&lt;...&gt;&quot;);&#10;&#9;fFigureEventTriggerContainmentFeatureFigure.setForegroundColor(org.eclipse.draw2d.ColorConstants.darkBlue);&#10;&#10;fFigureEventTriggerContainmentFeatureFigure.setFont(FFIGUREEVENTTRIGGERCONTAINMENTFEATUREFIGURE_FONT);&#10;&#10;&#10;&#10;this.add(fFigureEventTriggerContainmentFeatureFigure);&#10;&#10;&#10;&#10;fFigureEventTriggerNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureEventTriggerNameFigure.setText(&quot;&lt;...&gt;&quot;);&#10;&#10;this.add(fFigureEventTriggerNameFigure);&#10;&#10;&#10;&#10;fFigureEventTriggerParentNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureEventTriggerParentNameFigure.setText(&quot;[none]&quot;);&#10;&#9;fFigureEventTriggerParentNameFigure.setForegroundColor(org.eclipse.draw2d.ColorConstants.gray);&#10;&#10;this.add(fFigureEventTriggerParentNameFigure);&#10;&#10;&#10;&#9;}&#10;&#10;&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private boolean myUseLocalCoordinates = false;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;protected boolean useLocalCoordinates() {&#10;&#9;&#9;return myUseLocalCoordinates;&#10;&#9;}&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#10;&#9;&#9;myUseLocalCoordinates = useLocalCoordinates;&#10;&#9;}&#10;&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureEventTriggerContainmentFeatureFigure() {&#10;&#9;&#9;return fFigureEventTriggerContainmentFeatureFigure;&#10;&#9;}&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureEventTriggerNameFigure() {&#10;&#9;&#9;return fFigureEventTriggerNameFigure;&#10;&#9;}&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureEventTriggerParentNameFigure() {&#10;&#9;&#9;return fFigureEventTriggerParentNameFigure;&#10;&#9;}&#10;&#10;&#10;}&#10;&#10;/**&#10; * @generated&#10; */&#10;static final org.eclipse.swt.graphics.Color THIS_BACK = new org.eclipse.swt.graphics.Color(null, 247, 221, 238);&#10;&#10;/**&#10; * @generated&#10; */&#10;static final org.eclipse.swt.graphics.Font FFIGUREEVENTTRIGGERCONTAINMENTFEATUREFIGURE_FONT = new org.eclipse.swt.graphics.Font(org.eclipse.swt.widgets.Display.getCurrent(), org.eclipse.swt.widgets.Display.getDefault().getSystemFont().getFontData()[0].getName(), 9, org.eclipse.swt.SWT.BOLD);&#10;&#10;" className="EventTriggerFigure" layoutType="FLOW_LAYOUT" xsi:type="gmfgen:InnerClassViewmap">
@@ -198,21 +200,21 @@
       <modelFacet>
         <metaClass href="iaml.genmodel#//model/EventTrigger"/>
       </modelFacet>
-      <labels editPartClassName="WrappingLabel8EditPart" elementIcon="true" itemSemanticEditPolicyClassName="WrappingLabel8ItemSemanticEditPolicy" notationViewFactoryClassName="EventTriggerLabelViewFactory" readOnly="true" visualID="5029">
+      <labels editPartClassName="WrappingLabelEditPart" elementIcon="true" itemSemanticEditPolicyClassName="WrappingLabelItemSemanticEditPolicy" readOnly="true" visualID="5038">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureEventTriggerContainmentFeatureFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes fixedFont="true" fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
         </viewmap>
         <modelFacet parser="//@labelParsers/@implementations.0"/>
       </labels>
-      <labels editPartClassName="EventTriggerName2EditPart" itemSemanticEditPolicyClassName="EventTriggerName2ItemSemanticEditPolicy" notationViewFactoryClassName="EventTriggerNameViewFactory" visualID="5030">
+      <labels editPartClassName="EventTriggerNameEditPart" itemSemanticEditPolicyClassName="EventTriggerNameItemSemanticEditPolicy" visualID="5039">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureEventTriggerNameFigure" xsi:type="gmfgen:ParentAssignedViewmap"/>
         <modelFacet parser="//@labelParsers/@implementations.1" xsi:type="gmfgen:FeatureLabelModelFacet">
           <metaFeatures href="iaml.genmodel#//model/NamedElement/name"/>
         </modelFacet>
       </labels>
-      <labels editPartClassName="WrappingLabel9EditPart" itemSemanticEditPolicyClassName="WrappingLabel9ItemSemanticEditPolicy" notationViewFactoryClassName="EventTriggerLabelViewFactory" readOnly="true" visualID="5031">
+      <labels editPartClassName="WrappingLabel7EditPart" itemSemanticEditPolicyClassName="WrappingLabel7ItemSemanticEditPolicy" readOnly="true" visualID="5040">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureEventTriggerParentNameFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
@@ -284,7 +286,7 @@
     </links>
     <palette>
       <groups description="Model Elements" title="Model Elements">
-        <entries description="Create new EventTrigger" genNodes="//@diagram/@topLevelNodes.0" largeIconPath="/org.openiaml.model.edit/icons/full/obj32/EventTrigger.gif" smallIconPath="/org.openiaml.model.edit/icons/full/obj16/EventTrigger.gif" title="EventTrigger [onEdit]" xsi:type="gmfgen:ToolEntry"/>
+        <entries description="Create new EventTrigger [onChange]" genNodes="//@diagram/@topLevelNodes.0" largeIconPath="/org.openiaml.model.edit/icons/full/obj32/EventTrigger.gif" smallIconPath="/org.openiaml.model.edit/icons/full/obj16/EventTrigger.gif" title="EventTrigger [onChange]" xsi:type="gmfgen:ToolEntry"/>
         <entries description="Create new PrimitiveOperation" genNodes="//@diagram/@topLevelNodes.2" largeIconPath="/org.openiaml.model.edit/icons/full/obj32/PrimitiveOperation.gif" smallIconPath="/org.openiaml.model.edit/icons/full/obj16/PrimitiveOperation.gif" title="PrimitiveOperation" xsi:type="gmfgen:ToolEntry"/>
         <entries description="Create new CompositeOperation" genNodes="//@diagram/@topLevelNodes.1" largeIconPath="/org.openiaml.model.edit/icons/full/obj32/CompositeOperation.gif" smallIconPath="/org.openiaml.model.edit/icons/full/obj16/CompositeOperation.gif" title="CompositeOperation" xsi:type="gmfgen:ToolEntry"/>
         <entries description="Create new Property" genNodes="//@diagram/@topLevelNodes.3" largeIconPath="/org.openiaml.model.edit/icons/full/obj32/Property.gif" smallIconPath="/org.openiaml.model.edit/icons/full/obj16/Property.gif" title="Property" xsi:type="gmfgen:ToolEntry"/>
@@ -304,9 +306,7 @@
       <children iD="org.openiaml.model.diagram.printing" kind="Printing" name="Printing" xsi:type="gmfgen:GenStandardPreferencePage"/>
       <children iD="org.openiaml.model.diagram.rulersAndGrid" kind="RulersAndGrid" name="Rulers And Grid" xsi:type="gmfgen:GenStandardPreferencePage"/>
     </preferencePages>
-  <containsShortcutsTo>iaml_email</containsShortcutsTo>
-<shortcutsProvidedFor>iaml_email</shortcutsProvidedFor>
-</diagram>
+  </diagram>
   <plugin iD="org.openiaml.model.diagram.domain_object" name="Iaml Diagram Plugin (Domain Object)" provider="www.openiaml.org" version="0.4.4.qualifier">
     <requiredPlugins>org.eclipse.draw2d</requiredPlugins>
     <requiredPlugins>org.eclipse.gmf.runtime.draw2d.ui</requiredPlugins>
@@ -375,7 +375,7 @@
   <domainGenModel href="iaml.genmodel#/"/>
   <expressionProviders>
     <providers injectExpressionBody="true" xsi:type="gmfgen:GenJavaExpressionProvider">
-      <expressions body="return domainElement.eContainingFeature().getName().equals(&quot;onEdit&quot;);" xsi:type="gmfgen:GenConstraint"/>
+      <expressions body="return domainElement.eContainingFeature().getName().equals(&quot;onChange&quot;);" xsi:type="gmfgen:GenConstraint"/>
     </providers>
     <providers xsi:type="gmfgen:GenExpressionInterpreter">
       <expressions body="self.oclIsTypeOf( CompositeOperation )" xsi:type="gmfgen:GenConstraint"/>

@@ -232,6 +232,10 @@
 				return 1;
 			«ENDIF»
 		«ELSE»
+			// if there are NO results yet, don't crash
+			if (!has_object_instance_«safeName()»())
+				return 0;
+
 			// will select count directly into $row	
 			«EXPAND Select::evaluateSelectWireCount(true) FOR inWires.typeSelect(model::wires::SelectWire).first()»
 			return $row;

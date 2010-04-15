@@ -134,12 +134,12 @@ onCurrentSession(model::WireSource source, model::WireDestination target) :
  * this is based on allContainerOperations() and possibleParentOperations(). 
  */
 availableInCurrentScript(model::WireSource source, model::WireDestination target) :
-	containingEmail(target) != null && 
+	containingEmail(target) == null && 
 	(onCurrentFrame(source, target) ||
 		containingSession(target) != null);
 		
 availableInCurrentScriptAction(model::ActionSource source, model::ActionDestination target) :
-	containingEmail(target) != null &&
+	containingEmail(target) == null &&
 	(onCurrentFrameAction(source, target) ||
 		containingSession(target) != null);
 

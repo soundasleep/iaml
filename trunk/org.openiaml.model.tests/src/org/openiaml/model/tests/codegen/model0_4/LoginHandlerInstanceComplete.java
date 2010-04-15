@@ -292,11 +292,13 @@ public class LoginHandlerInstanceComplete extends DatabaseCodegenTestCase {
 		IFile sitemap = beginAtSitemapThenPage("login");
 		assertNoProblem();
 
-		String loginId = getLabelIDForText("password");
-		setLabeledFormElementField(loginId, "test4");
-
-		String emailId = getLabelIDForText("email");
-		setLabeledFormElementField(emailId, "test4@jevon.org");
+		{
+			String loginId = getLabelIDForText("password");
+			setLabeledFormElementField(loginId, "test4");
+	
+			String emailId = getLabelIDForText("email");
+			setLabeledFormElementField(emailId, "test4@jevon.org");
+		}
 
 		submit();		// submit the form
 
@@ -324,8 +326,15 @@ public class LoginHandlerInstanceComplete extends DatabaseCodegenTestCase {
 
 		// re-login to make sure the change was successful
 		beginAtSitemapThenPage(sitemap, "login", "login");
-		String loginId2 = getLabelIDForText("password");
-		setLabeledFormElementField(loginId2, "test4");
+		{
+			String loginId = getLabelIDForText("password");
+			assertLabeledFieldEquals(loginId, "");	// the value is no longer persisted
+			setLabeledFormElementField(loginId, "test4");
+	
+			String emailId = getLabelIDForText("email");
+			assertLabeledFieldEquals(emailId, "");	// the value is no longer persisted
+			setLabeledFormElementField(emailId, "test4@jevon.org");
+		}
 		submit();		// submit the form
 
 		// we should now be on the "current user" page

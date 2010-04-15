@@ -26,9 +26,9 @@
         <executionEdges generatedBy="model.1227e0889db.5c" isGenerated="true" id="model.1227e0889db.64" from="operations.1227e088ac6.9" to="model.1227e0889db.61"/>
         <executionEdges generatedBy="model.1227e0889db.5c" isGenerated="true" id="model.1227e0889db.65" from="model.1227e0889db.61" to="operations.1227e088ac6.a"/>
       </operations>
-      <onEdit generatedBy="visual.1227e088ab6.1c" isGenerated="true" id="model.1227e0889db.5e" outActions="wires.1227e088ab6.1a">
+      <onChange generatedBy="visual.1227e088ab6.1c" isGenerated="true" id="model.1227e0889db.5e" outActions="wires.1227e088ab6.1a">
         <actions xsi:type="iaml.wires:RunAction" id="wires.1227e088ab6.1a" name="run out" from="model.1227e0889db.5e" to="model.1227e0889db.4e"/>
-      </onEdit>
+      </onChange>
       <onAccess generatedBy="visual.1227e088ab6.1c" isGenerated="true" id="model.1227e0889db.5d"/>
       <properties generatedBy="visual.1227e088ab6.1c" isGenerated="true" id="model.1227e0889db.5f" name="fieldValue" inFlows="model.1227e0889db.63 model.1227e0889db.69"/>
     </children>
@@ -53,7 +53,7 @@
         <executionEdges generatedBy="model.1227e0889db.79" isGenerated="true" id="model.1227e0889db.8d" from="operations.1227e088ac6.15" to="model.1227e0889db.8a"/>
         <executionEdges generatedBy="model.1227e0889db.79" isGenerated="true" id="model.1227e0889db.8e" from="model.1227e0889db.8a" to="operations.1227e088ac6.16"/>
       </operations>
-      <onEdit generatedBy="visual.1227e088ab6.25" isGenerated="true" id="model.1227e0889db.7b"/>
+      <onChange generatedBy="visual.1227e088ab6.25" isGenerated="true" id="model.1227e0889db.7b"/>
       <onAccess generatedBy="visual.1227e088ab6.25" isGenerated="true" id="model.1227e0889db.7a"/>
       <properties generatedBy="visual.1227e088ab6.25" isGenerated="true" id="model.1227e0889db.7c" name="fieldValue" inFlows="model.1227e0889db.8c model.1227e0889db.92"/>
     </children>

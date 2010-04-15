@@ -821,7 +821,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @param element2
 	 * @throws JaxenException
 	 */
-	protected Set<Wire> getWiresBidirectional(EObject container, WireSource element1, WireDestination element2) throws JaxenException {
+	protected Set<Wire> getWiresBidirectional(EObject container, WireSource element1, WireSource element2) throws JaxenException {
 		return getWiresBidirectional(container, element1, element2, Wire.class);
 	}
 
@@ -829,12 +829,18 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * For bidirectional wires, get all wires connecting the
 	 * two elements, with the given type.
 	 */
-	protected Set<Wire> getWiresBidirectional(EObject container, WireSource element1, WireDestination element2, Class<? extends Wire> type) throws JaxenException {
-		List<?> wires = query(container, "//iaml:wires");
+	protected Set<Wire> getWiresBidirectional(EObject container, WireSource element1, WireSource element2, Class<? extends Wire> type) throws JaxenException {
 		Set<Wire> edges = new HashSet<Wire>();
-		for (Object o : wires) {
-			if (type.isInstance(o)) {
-				Wire w = (Wire) o;
+		for (Wire w : element1.getOutWires()) {
+			if (type.isInstance(w)) {
+				if (w.getFrom().equals(element1) && w.getTo().equals(element2))
+					edges.add(w);
+				if (w.getFrom().equals(element2) && w.getTo().equals(element1))
+					edges.add(w);
+			}
+		}
+		for (Wire w : element2.getOutWires()) {
+			if (type.isInstance(w)) {
 				if (w.getFrom().equals(element1) && w.getTo().equals(element2))
 					edges.add(w);
 				if (w.getFrom().equals(element2) && w.getTo().equals(element1))
@@ -849,16 +855,16 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * Assert that a given number of bidirectional wires
 	 * occur between the two elements.
 	 *
-	 * @see #assertHasWiresFromTo(int, EObject, WireSource, WireDestination)
-	 * @see #getWiresBidirectional(EObject, WireSource, WireDestination)
-	 * @see #assertHasWiresBidirectional(int, EObject, WireSource, WireDestination, Class)
+	 * @see #assertHasWiresFromTo(int, EObject, WireSource, WireSource)
+	 * @see #getWiresBidirectional(EObject, WireSource, WireSource)
+	 * @see #assertHasWiresBidirectional(int, EObject, WireSource, WireSource, Class)
 	 * @param container
 	 * @param element1
 	 * @param element2
 	 * @return the wires found
 	 * @throws JaxenException
 	 */
-	public Set<Wire> assertHasWiresBidirectional(int count, EObject container, WireSource element1, WireDestination element2) throws JaxenException {
+	public Set<Wire> assertHasWiresBidirectional(int count, EObject container, WireSource element1, WireSource element2) throws JaxenException {
 		return assertHasWiresBidirectional(count, container, element1, element2, Wire.class);
 	}
 	
@@ -868,7 +874,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * 
 	 * @return the wires found
 	 */
-	public Set<Wire> assertHasWiresBidirectional(int count, EObject container, WireSource element1, WireDestination element2, Class<? extends Wire> type) throws JaxenException {
+	public Set<Wire> assertHasWiresBidirectional(int count, EObject container, WireSource element1, WireSource element2, Class<? extends Wire> type) throws JaxenException {
 		
 		Set<Wire> wires = getWiresBidirectional(container, element1, element2, type);
 		if (wires.size() != count) {

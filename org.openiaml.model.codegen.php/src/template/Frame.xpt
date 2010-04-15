@@ -81,9 +81,6 @@ if (require_get("redirect_on_client", "")) {
 // is access to this frame prevented by any other exit gate?
 «EXPAND template::scopes::ExitGate::runExitGate FOREACH getAllExitGates(this)-»
 
-// expand any dynamic element sources
-«EXPAND template::dynamic::DynamicElements::dynamicElements(true) FOR this-»
-
 // expand any AccessControlHandlers in the frame
 «EXPAND template::users::Definitions::accessControlHandlerDefinitions(true) FOR this-»
 
@@ -221,7 +218,7 @@ log_message("«id».php: Session data: " . print_r($_SESSION, true));
 		set_operation_handler(new operation_handler_«safeName()»());
 
 		// dynamic elements
-		«EXPAND template::dynamic::DynamicElements::dynamicElements(false) FOR this-»
+		«EXPAND template::dynamic::DynamicElements::dynamicElements(false) FOR getRoot()-»
 
 		// cached primitive operation values
 		«EXPAND template::operations::ClientSideCache::cachedPrimitiveOperations FOR getRoot()»

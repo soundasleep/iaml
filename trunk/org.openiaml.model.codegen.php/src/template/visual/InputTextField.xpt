@@ -60,7 +60,19 @@
 			
 				«IF onChange != null»
 					// expand all onChanges
+					«REM»
+						we save a copy of the current value, so that server update replies
+						don't update the value before we are finished using it.
+						
+						the calls below (in particular, set_application_value) will update
+						the local value anyway, if it needs to be changed.
+						
+						this solves a problem where JWebUnit test cases would fail, but
+						running them locally (in a non-AJAX-synchronized environment) would pass. 
+					«ENDREM»
+					var pre_onChange_value = obj.value;
 					«EXPAND template::events::EventCall::callEvent(false) FOR onChange-»
+					obj.value = pre_onChange_value;
 				«ENDIF»
 
 				«REM»

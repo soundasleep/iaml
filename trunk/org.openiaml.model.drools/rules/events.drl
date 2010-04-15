@@ -32,10 +32,10 @@ rule "Create 'click' event trigger for button"
 		
 end
 
-# @inference Editable,InputTextField,DomainAttribute An {@model Editable} thing contains an {@model EventTrigger} named 'edit'. 
+# @inference Changeable,InputTextField,DomainAttribute An {@model Editable} thing contains an {@model EventTrigger} named 'edit'. 
 rule "Create 'edit' event trigger for Editable things"
 	when
-		f : Editable( )
+		f : Changeable( )
 		g : GeneratesElements ( eval(f == g) )
 		not (event : EventTrigger( f.onChange == event ))
 				

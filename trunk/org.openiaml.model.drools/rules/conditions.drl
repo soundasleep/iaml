@@ -27,7 +27,7 @@ rule "Connect ConditionEdges to RunActions created by SyncWires (edit/update) (o
 	when
 		# we have a sync wire
 		sw : SyncWire( )
-		source : Editable( )
+		source : Changeable( )
 		target : ContainsOperations( )
 		eval(functions.connects(sw, source, target))  
 		
@@ -87,12 +87,17 @@ rule "Connect ConditionEdges to RunActions created by SyncWires (access/init) (o
 
 end
 
-# @inference SyncWire,RunAction,ConditionEdge,ParameterEdge {@model RunAction RunActions} with incoming {@model ConditionEdge conditions} with {@model ParameterEdge parameters} will be copied to elements created by {@model SyncWire SyncWires}.
+/**
+ * @inference SyncWire,RunAction,ConditionEdge,ParameterEdge 
+ *		{@model RunAction RunActions} with incoming {@model ConditionEdge conditions} 
+ *		with {@model ParameterEdge parameters} will be copied to elements 
+ *		created by {@model SyncWire SyncWires}.
+ */
 rule "Connect ParameterEdges to ConditionEdges connected to RunActions created by SyncWires (edit/update) (onChange)"
 	when
 		# we have a syncwire
 		sw : SyncWire( )
-		source : Editable( )
+		source : Changeable( )
 		target : ContainsOperations( )
 		eval(functions.connects(sw, source, target))  
 		

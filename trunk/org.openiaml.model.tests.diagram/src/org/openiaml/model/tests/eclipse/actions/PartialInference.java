@@ -222,7 +222,7 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		assertEditorHasChildren(8, editor_text);
 		
 		ShapeNodeEditPart access = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getAccessible_OnAccess());
-		ShapeNodeEditPart edit = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getEditable_OnChange());
+		ShapeNodeEditPart edit = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getChangeable_OnChange());
 		ShapeNodeEditPart update = assertHasOperation(editor_text, "update", false);
 		ShapeNodeEditPart init = assertHasOperation(editor_text, "init", false);
 		ShapeNodeEditPart fieldValue = assertHasFieldValue(editor_text, false);
@@ -258,14 +258,14 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		assertEditorHasChildren(14, editor_text);
 		
 		ShapeNodeEditPart access = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getAccessible_OnAccess());
-		ShapeNodeEditPart edit = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getEditable_OnChange());
+		ShapeNodeEditPart edit = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getChangeable_OnChange());
 		ShapeNodeEditPart update = assertHasOperation(editor_text, "update", false);
 		ShapeNodeEditPart init = assertHasOperation(editor_text, "init", false);
 		ShapeNodeEditPart fieldValue = assertHasFieldValue(editor_text, false);
 		ShapeNodeEditPart condition = assertHasCompositeCondition(editor_text, "fieldValue is set", false);
 		ShapeNodeEditPart condition2 = assertHasCompositeCondition(editor_text, "fieldValue is set", true);
 
-		ShapeNodeEditPart edit2 = assertHasEventTrigger(editor_text, true, ModelPackage.eINSTANCE.getEditable_OnChange());
+		ShapeNodeEditPart edit2 = assertHasEventTrigger(editor_text, true, ModelPackage.eINSTANCE.getChangeable_OnChange());
 		ShapeNodeEditPart update2 = assertHasOperation(editor_text, "update", true);
 		ShapeNodeEditPart fieldValue2 = assertHasFieldValue(editor_text, true);
 

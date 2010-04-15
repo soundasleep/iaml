@@ -43,7 +43,7 @@ end
 rule "Run instance wire from edit to update (onChange)"
 	when
 		sw : SetWire()
-		source : Editable( )
+		source : Changeable( )
 		target : ContainsOperations( )
 		eval(functions.connectsSet(sw, source, target))
 		
@@ -88,7 +88,7 @@ end
 rule "Connect parameter wire to: run instance wire from source.edit to target.update [set] (onChange)"
 	when
 		sw : SetWire()
-		source : Editable( )
+		source : Changeable( )
 		target : CanBeSynced( )
 		eval(functions.connectsSet(sw, source, target))
 	
@@ -309,7 +309,7 @@ rule "Connect Session.init to incoming SetWires (contained in Frames) [set] (onC
 		eval( functions.connectsSet(sw, sourceFrame, targetFrame ))
 
 		sw2 : SetWire ( eContainer == sw)
-		sourceElement : Editable( eContainer == sourceFrame )
+		sourceElement : Changeable( eContainer == sourceFrame )
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connectsSet(sw2, sourceElement, targetElement ))
 
@@ -339,7 +339,7 @@ rule "Connect Session.init to incoming SetWires (contained in Frames) [set] (onC
 		eval( functions.connectsSet(sw, sourceFrame, targetFrame ))
 
 		sw2 : SetWire ( eContainer == sw)
-		sourceElement : Editable( eContainer == sourceFrame )
+		sourceElement : Changeable( eContainer == sourceFrame )
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connectsSet(sw2, sourceElement, targetElement ))
 
@@ -369,7 +369,7 @@ rule "Connect parameter for Session.init to incoming SetWires (contained in Fram
 		eval( functions.connectsSet(sw, sourceFrame, targetFrame ))
 
 		sw2 : SetWire ( eContainer == sw)
-		sourceElement : Editable( eContainer == sourceFrame )
+		sourceElement : Changeable( eContainer == sourceFrame )
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connectsSet(sw2, sourceElement, targetElement ))
 
@@ -402,7 +402,7 @@ rule "Connect parameter for Session.init to incoming SetWires (contained in Fram
 		eval( functions.connectsSet(sw, sourceFrame, targetFrame ))
 
 		sw2 : SetWire ( eContainer == sw)
-		sourceElement : Editable( eContainer == sourceFrame )
+		sourceElement : Changeable( eContainer == sourceFrame )
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connectsSet(sw2, sourceElement, targetElement ))
 

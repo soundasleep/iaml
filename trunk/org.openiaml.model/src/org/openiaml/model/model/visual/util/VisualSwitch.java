@@ -14,11 +14,11 @@ import org.openiaml.model.model.Accessible;
 import org.openiaml.model.model.ActionDestination;
 import org.openiaml.model.model.ActionSource;
 import org.openiaml.model.model.CanBeSynced;
+import org.openiaml.model.model.Changeable;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsProperties;
 import org.openiaml.model.model.ContainsWires;
-import org.openiaml.model.model.Editable;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.NamedElement;
@@ -139,7 +139,7 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseVisibleThing(inputForm);
 				if (result == null) result = caseCanBeSynced(inputForm);
 				if (result == null) result = caseParameterEdgesSource(inputForm);
-				if (result == null) result = caseEditable(inputForm);
+				if (result == null) result = caseChangeable(inputForm);
 				if (result == null) result = caseAccessible(inputForm);
 				if (result == null) result = caseContainsProperties(inputForm);
 				if (result == null) result = caseContainsConditions(inputForm);
@@ -160,7 +160,7 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseVisibleThing(inputTextField);
 				if (result == null) result = caseCanBeSynced(inputTextField);
 				if (result == null) result = caseParameterEdgesSource(inputTextField);
-				if (result == null) result = caseEditable(inputTextField);
+				if (result == null) result = caseChangeable(inputTextField);
 				if (result == null) result = caseAccessible(inputTextField);
 				if (result == null) result = caseContainsProperties(inputTextField);
 				if (result == null) result = caseContainsConditions(inputTextField);
@@ -182,7 +182,7 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseActionSource(button);
 				if (result == null) result = caseCanBeSynced(button);
 				if (result == null) result = caseParameterEdgesSource(button);
-				if (result == null) result = caseEditable(button);
+				if (result == null) result = caseChangeable(button);
 				if (result == null) result = caseAccessible(button);
 				if (result == null) result = caseContainsProperties(button);
 				if (result == null) result = caseContainsConditions(button);
@@ -203,7 +203,7 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseVisibleThing(label);
 				if (result == null) result = caseCanBeSynced(label);
 				if (result == null) result = caseParameterEdgesSource(label);
-				if (result == null) result = caseEditable(label);
+				if (result == null) result = caseChangeable(label);
 				if (result == null) result = caseAccessible(label);
 				if (result == null) result = caseContainsProperties(label);
 				if (result == null) result = caseContainsConditions(label);
@@ -224,7 +224,7 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseVisibleThing(map);
 				if (result == null) result = caseCanBeSynced(map);
 				if (result == null) result = caseParameterEdgesSource(map);
-				if (result == null) result = caseEditable(map);
+				if (result == null) result = caseChangeable(map);
 				if (result == null) result = caseAccessible(map);
 				if (result == null) result = caseContainsProperties(map);
 				if (result == null) result = caseContainsConditions(map);
@@ -245,7 +245,7 @@ public class VisualSwitch<T> {
 				if (result == null) result = caseVisibleThing(mapPoint);
 				if (result == null) result = caseCanBeSynced(mapPoint);
 				if (result == null) result = caseParameterEdgesSource(mapPoint);
-				if (result == null) result = caseEditable(mapPoint);
+				if (result == null) result = caseChangeable(mapPoint);
 				if (result == null) result = caseAccessible(mapPoint);
 				if (result == null) result = caseContainsProperties(mapPoint);
 				if (result == null) result = caseContainsConditions(mapPoint);
@@ -430,17 +430,17 @@ public class VisualSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Editable</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Changeable</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Editable</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Changeable</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseEditable(Editable object) {
+	public T caseChangeable(Changeable object) {
 		return null;
 	}
 

@@ -17,6 +17,7 @@ import org.openiaml.model.model.ActionSource;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.CanBeSynced;
+import org.openiaml.model.model.Changeable;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Condition;
@@ -34,7 +35,6 @@ import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.DynamicApplicationElementSet;
-import org.openiaml.model.model.Editable;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.ExecutionEdgeDestination;
@@ -185,7 +185,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseParameterEdgesSource(domainObject);
 				if (result == null) result = caseExtendsEdgesSource(domainObject);
 				if (result == null) result = caseExtendsEdgeDestination(domainObject);
-				if (result == null) result = caseEditable(domainObject);
+				if (result == null) result = caseChangeable(domainObject);
 				if (result == null) result = caseCanBeSynced(domainObject);
 				if (result == null) result = caseContainsProperties(domainObject);
 				if (result == null) result = caseContainsOperations(domainObject);
@@ -207,7 +207,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseParameterEdgesSource(domainAttribute);
 				if (result == null) result = caseExtendsEdgesSource(domainAttribute);
 				if (result == null) result = caseExtendsEdgeDestination(domainAttribute);
-				if (result == null) result = caseEditable(domainAttribute);
+				if (result == null) result = caseChangeable(domainAttribute);
 				if (result == null) result = caseCanBeSynced(domainAttribute);
 				if (result == null) result = caseContainsProperties(domainAttribute);
 				if (result == null) result = caseContainsOperations(domainAttribute);
@@ -349,7 +349,7 @@ public class ModelSwitch<T> {
 				T result = caseVisibleThing(visibleThing);
 				if (result == null) result = caseCanBeSynced(visibleThing);
 				if (result == null) result = caseParameterEdgesSource(visibleThing);
-				if (result == null) result = caseEditable(visibleThing);
+				if (result == null) result = caseChangeable(visibleThing);
 				if (result == null) result = caseAccessible(visibleThing);
 				if (result == null) result = caseContainsProperties(visibleThing);
 				if (result == null) result = caseContainsConditions(visibleThing);
@@ -508,7 +508,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseApplicationElement(domainObjectInstance);
 				if (result == null) result = caseParameterEdgeDestination(domainObjectInstance);
 				if (result == null) result = caseParameterEdgesSource(domainObjectInstance);
-				if (result == null) result = caseEditable(domainObjectInstance);
+				if (result == null) result = caseChangeable(domainObjectInstance);
 				if (result == null) result = caseCanBeSynced(domainObjectInstance);
 				if (result == null) result = caseContainsProperties(domainObjectInstance);
 				if (result == null) result = caseContainsOperations(domainObjectInstance);
@@ -584,7 +584,7 @@ public class ModelSwitch<T> {
 				if (result == null) result = caseApplicationElement(domainAttributeInstance);
 				if (result == null) result = caseExtendsEdgesSource(domainAttributeInstance);
 				if (result == null) result = caseExtendsEdgeDestination(domainAttributeInstance);
-				if (result == null) result = caseEditable(domainAttributeInstance);
+				if (result == null) result = caseChangeable(domainAttributeInstance);
 				if (result == null) result = caseCanBeSynced(domainAttributeInstance);
 				if (result == null) result = caseContainsProperties(domainAttributeInstance);
 				if (result == null) result = caseContainsOperations(domainAttributeInstance);
@@ -627,9 +627,9 @@ public class ModelSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ModelPackage.EDITABLE: {
-				Editable editable = (Editable)theEObject;
-				T result = caseEditable(editable);
+			case ModelPackage.CHANGEABLE: {
+				Changeable changeable = (Changeable)theEObject;
+				T result = caseChangeable(changeable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1294,17 +1294,17 @@ public class ModelSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Editable</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Changeable</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Editable</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Changeable</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseEditable(Editable object) {
+	public T caseChangeable(Changeable object) {
 		return null;
 	}
 

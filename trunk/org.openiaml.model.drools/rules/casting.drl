@@ -99,7 +99,7 @@ end
  */
 rule "Add 'can cast?' condition check for onChange connecting to Update"
 	when
-		source : Editable ( )
+		source : Changeable ( )
 		target : ContainsOperations ( )
 		
 		sw : SyncWire ( )

@@ -32,7 +32,7 @@ import org.openiaml.model.model.wires.ExtendsEdgesSource;
  * @model annotation="http://openiaml.org/comment added='0.3'"
  * @generated
  */
-public interface DomainAttributeInstance extends ApplicationElement, ExtendsEdgesSource, ExtendsEdgeDestination, Editable {
+public interface DomainAttributeInstance extends ApplicationElement, ExtendsEdgesSource, ExtendsEdgeDestination, Changeable {
 
 	/**
 	 * Returns the value of the '<em><b>Autosave</b></em>' attribute.

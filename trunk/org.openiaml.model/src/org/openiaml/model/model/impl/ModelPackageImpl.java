@@ -19,6 +19,7 @@ import org.openiaml.model.model.ActionSource;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.CanBeSynced;
+import org.openiaml.model.model.Changeable;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Condition;
@@ -36,7 +37,6 @@ import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.DynamicApplicationElementSet;
-import org.openiaml.model.model.Editable;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.ExecutionEdgeDestination;
@@ -375,7 +375,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass editableEClass = null;
+	private EClass changeableEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1665,8 +1665,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getEditable() {
-		return editableEClass;
+	public EClass getChangeable() {
+		return changeableEClass;
 	}
 
 	/**
@@ -1674,8 +1674,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEditable_OnChange() {
-		return (EReference)editableEClass.getEStructuralFeatures().get(0);
+	public EReference getChangeable_OnChange() {
+		return (EReference)changeableEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1975,8 +1975,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		canBeSyncedEClass = createEClass(CAN_BE_SYNCED);
 
-		editableEClass = createEClass(EDITABLE);
-		createEReference(editableEClass, EDITABLE__ON_CHANGE);
+		changeableEClass = createEClass(CHANGEABLE);
+		createEReference(changeableEClass, CHANGEABLE__ON_CHANGE);
 
 		accessibleEClass = createEClass(ACCESSIBLE);
 		createEReference(accessibleEClass, ACCESSIBLE__ON_ACCESS);
@@ -2053,13 +2053,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		domainObjectEClass.getESuperTypes().add(theWiresPackage.getParameterEdgesSource());
 		domainObjectEClass.getESuperTypes().add(theWiresPackage.getExtendsEdgesSource());
 		domainObjectEClass.getESuperTypes().add(theWiresPackage.getExtendsEdgeDestination());
-		domainObjectEClass.getESuperTypes().add(this.getEditable());
+		domainObjectEClass.getESuperTypes().add(this.getChangeable());
 		domainAttributeEClass.getESuperTypes().add(this.getApplicationElement());
 		domainAttributeEClass.getESuperTypes().add(this.getContainsWires());
 		domainAttributeEClass.getESuperTypes().add(theWiresPackage.getParameterEdgesSource());
 		domainAttributeEClass.getESuperTypes().add(theWiresPackage.getExtendsEdgesSource());
 		domainAttributeEClass.getESuperTypes().add(theWiresPackage.getExtendsEdgeDestination());
-		domainAttributeEClass.getESuperTypes().add(this.getEditable());
+		domainAttributeEClass.getESuperTypes().add(this.getChangeable());
 		activityNodeEClass.getESuperTypes().add(this.getGeneratedElement());
 		operationEClass.getESuperTypes().add(this.getWireDestination());
 		operationEClass.getESuperTypes().add(this.getNamedElement());
@@ -2106,7 +2106,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		visibleThingEClass.getESuperTypes().add(this.getGeneratesElements());
 		visibleThingEClass.getESuperTypes().add(this.getCanBeSynced());
 		visibleThingEClass.getESuperTypes().add(theWiresPackage.getParameterEdgesSource());
-		visibleThingEClass.getESuperTypes().add(this.getEditable());
+		visibleThingEClass.getESuperTypes().add(this.getChangeable());
 		visibleThingEClass.getESuperTypes().add(this.getAccessible());
 		visibleThingEClass.getESuperTypes().add(this.getContainsProperties());
 		internetApplicationEClass.getESuperTypes().add(this.getContainsOperations());
@@ -2137,7 +2137,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		domainObjectInstanceEClass.getESuperTypes().add(this.getContainsWires());
 		domainObjectInstanceEClass.getESuperTypes().add(theWiresPackage.getParameterEdgeDestination());
 		domainObjectInstanceEClass.getESuperTypes().add(theWiresPackage.getParameterEdgesSource());
-		domainObjectInstanceEClass.getESuperTypes().add(this.getEditable());
+		domainObjectInstanceEClass.getESuperTypes().add(this.getChangeable());
 		scopeEClass.getESuperTypes().add(this.getGeneratesElements());
 		scopeEClass.getESuperTypes().add(this.getContainsWires());
 		scopeEClass.getESuperTypes().add(this.getNamedElement());
@@ -2161,7 +2161,7 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		domainAttributeInstanceEClass.getESuperTypes().add(this.getApplicationElement());
 		domainAttributeInstanceEClass.getESuperTypes().add(theWiresPackage.getExtendsEdgesSource());
 		domainAttributeInstanceEClass.getESuperTypes().add(theWiresPackage.getExtendsEdgeDestination());
-		domainAttributeInstanceEClass.getESuperTypes().add(this.getEditable());
+		domainAttributeInstanceEClass.getESuperTypes().add(this.getChangeable());
 		queryParameterEClass.getESuperTypes().add(this.getNamedElement());
 		queryParameterEClass.getESuperTypes().add(this.getWireSource());
 		queryParameterEClass.getESuperTypes().add(this.getDataFlowEdgesSource());
@@ -2349,8 +2349,8 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 
 		initEClass(canBeSyncedEClass, CanBeSynced.class, "CanBeSynced", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(editableEClass, Editable.class, "Editable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getEditable_OnChange(), this.getEventTrigger(), null, "onChange", null, 0, 1, Editable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(changeableEClass, Changeable.class, "Changeable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getChangeable_OnChange(), this.getEventTrigger(), null, "onChange", null, 0, 1, Changeable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(accessibleEClass, Accessible.class, "Accessible", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAccessible_OnAccess(), this.getEventTrigger(), null, "onAccess", null, 0, 1, Accessible.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2626,13 +2626,13 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "added", "0.4"
-		   });			
+		   });				
 		addAnnotation
-		  (getEditable_OnChange(), 
+		  (getChangeable_OnChange(), 
 		   source, 
 		   new String[] {
 			 "changed", "added in 0.4.4"
-		   });		
+		   });			
 		addAnnotation
 		  (getAccessible_OnAccess(), 
 		   source, 
@@ -2888,7 +2888,19 @@ public class ModelPackageImpl extends EPackageImpl implements ModelPackage {
 		   source, 
 		   new String[] {
 			 "documentation", "Represents a query parameter from the browser\'s URI string."
-		   });				
+		   });		
+		addAnnotation
+		  (changeableEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Represents something that can register when it {@model Changeable#onChange can change}."
+		   });			
+		addAnnotation
+		  (accessibleEClass, 
+		   source, 
+		   new String[] {
+			 "documentation", "Represents something that can register when it {@model Accessible#onAccess is accessed}."
+		   });			
 		addAnnotation
 		  (actionEClass, 
 		   source, 

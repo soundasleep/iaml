@@ -10,6 +10,7 @@ import org.openiaml.model.model.Accessible;
 import org.openiaml.model.model.Action;
 import org.openiaml.model.model.ActionDestination;
 import org.openiaml.model.model.ActionSource;
+import org.openiaml.model.model.Changeable;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.ContainsConditions;
@@ -24,7 +25,6 @@ import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
-import org.openiaml.model.model.Editable;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.ExecutionEdgeDestination;
@@ -159,8 +159,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return event;
 	}
 
-	public EventTrigger generatedEventTriggerOnChange(GeneratesElements by, Editable container) throws InferenceException {
-		EventTrigger event = (EventTrigger) createElement( container, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getEditable_OnChange() );
+	public EventTrigger generatedEventTriggerOnChange(GeneratesElements by, Changeable container) throws InferenceException {
+		EventTrigger event = (EventTrigger) createElement( container, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getChangeable_OnChange() );
 		setGeneratedBy(event, by);
 		return event;
 	}

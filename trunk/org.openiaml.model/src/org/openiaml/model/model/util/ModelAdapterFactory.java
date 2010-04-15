@@ -17,6 +17,7 @@ import org.openiaml.model.model.ActionSource;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.CanBeSynced;
+import org.openiaml.model.model.Changeable;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Condition;
@@ -34,7 +35,6 @@ import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.DynamicApplicationElementSet;
-import org.openiaml.model.model.Editable;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.ExecutionEdgeDestination;
@@ -285,8 +285,8 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 				return createCanBeSyncedAdapter();
 			}
 			@Override
-			public Adapter caseEditable(Editable object) {
-				return createEditableAdapter();
+			public Adapter caseChangeable(Changeable object) {
+				return createChangeableAdapter();
 			}
 			@Override
 			public Adapter caseAccessible(Accessible object) {
@@ -923,16 +923,16 @@ public class ModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.Editable <em>Editable</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.Changeable <em>Changeable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.openiaml.model.model.Editable
+	 * @see org.openiaml.model.model.Changeable
 	 * @generated
 	 */
-	public Adapter createEditableAdapter() {
+	public Adapter createChangeableAdapter() {
 		return null;
 	}
 

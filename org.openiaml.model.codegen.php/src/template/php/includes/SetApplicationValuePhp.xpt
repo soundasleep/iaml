@@ -75,9 +75,9 @@ echo_necessary_update_callbacks();
 
 «DEFINE onChangeEvents FOR model::ContainsProperties»
 	«FOREACH properties.select(p|p.name == "fieldValue") AS property»
-		«IF model::Editable.isInstance(this)»
+		«IF model::Changeable.isInstance(this)»
 		«REM»select all Editable ContainsProperties«ENDREM»
-		«FOREACH getRoot().eAllContents.typeSelect(model::Editable).select(e|e==this) AS editable» 
+		«FOREACH getRoot().eAllContents.typeSelect(model::Changeable).select(e|e==this) AS editable» 
 			«IF editable.onChange != null»
 			if ($id == '«safeName(property)»') {
 				«EXPAND template::events::EventCall::callEvent(true) FOR editable.onChange»

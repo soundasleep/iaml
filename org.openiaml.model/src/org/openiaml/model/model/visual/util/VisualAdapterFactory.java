@@ -14,11 +14,11 @@ import org.openiaml.model.model.Accessible;
 import org.openiaml.model.model.ActionDestination;
 import org.openiaml.model.model.ActionSource;
 import org.openiaml.model.model.CanBeSynced;
+import org.openiaml.model.model.Changeable;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsProperties;
 import org.openiaml.model.model.ContainsWires;
-import org.openiaml.model.model.Editable;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.NamedElement;
@@ -186,8 +186,8 @@ public class VisualAdapterFactory extends AdapterFactoryImpl {
 				return createActionDestinationAdapter();
 			}
 			@Override
-			public Adapter caseEditable(Editable object) {
-				return createEditableAdapter();
+			public Adapter caseChangeable(Changeable object) {
+				return createChangeableAdapter();
 			}
 			@Override
 			public Adapter caseVisibleThing(VisibleThing object) {
@@ -368,16 +368,16 @@ public class VisualAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.Editable <em>Editable</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.openiaml.model.model.Changeable <em>Changeable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.openiaml.model.model.Editable
+	 * @see org.openiaml.model.model.Changeable
 	 * @generated
 	 */
-	public Adapter createEditableAdapter() {
+	public Adapter createChangeableAdapter() {
 		return null;
 	}
 

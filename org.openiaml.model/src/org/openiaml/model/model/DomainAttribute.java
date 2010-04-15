@@ -34,7 +34,7 @@ import org.openiaml.model.model.wires.ParameterEdgesSource;
  * @model annotation="http://openiaml.org/comment changed='0.2 to extend the abstract counterpart\r\n0.3 to remove the abstract extension, and added \"type\" attribute'"
  * @generated
  */
-public interface DomainAttribute extends ApplicationElement, ContainsWires, ParameterEdgesSource, ExtendsEdgesSource, ExtendsEdgeDestination, Editable {
+public interface DomainAttribute extends ApplicationElement, ContainsWires, ParameterEdgesSource, ExtendsEdgesSource, ExtendsEdgeDestination, Changeable {
 
 	/**
 	 * Returns the value of the '<em><b>Primary Key</b></em>' attribute.

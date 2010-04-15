@@ -50,7 +50,7 @@ end
 rule "Run instance wire from edit to update (onChange)"
 	when
 		sw : SyncWire()
-		source : Editable( )
+		source : Changeable( )
 		target : ContainsOperations( )
 		eval(functions.connects(sw, source, target))
 		
@@ -71,7 +71,7 @@ end
 rule "Connect parameter wire to: run instance wire from source.edit to target.update (onChange)"
 	when
 		sw : SyncWire()
-		source : Editable( )
+		source : Changeable( )
 		target : ContainsOperations( )
 		eval( functions.connects(sw, source, target))
 	
@@ -271,7 +271,7 @@ rule "Connect Session.init to incoming SyncWires (contained in Frames) (onChange
 		eval( functions.connects(sw, sourceFrame, targetFrame ))
 
 		sw2 : SyncWire ( eContainer == sw)
-		sourceElement : Editable( eContainer == sourceFrame )
+		sourceElement : Changeable( eContainer == sourceFrame )
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connects(sw2, sourceElement, targetElement ))
 
@@ -301,7 +301,7 @@ rule "Connect Session.init to incoming SyncWires (contained in Frames) (onChange
 		eval( functions.connects(sw, sourceFrame, targetFrame ))
 
 		sw2 : SyncWire ( eContainer == sw)
-		sourceElement : Editable( eContainer == sourceFrame )
+		sourceElement : Changeable( eContainer == sourceFrame )
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connects(sw2, sourceElement, targetElement ))
 
@@ -331,7 +331,7 @@ rule "Connect parameter for Session.init to incoming SyncWires (contained in Fra
 		eval( functions.connects(sw, sourceFrame, targetFrame ))
 
 		sw2 : SyncWire ( eContainer == sw)
-		sourceElement : Editable( eContainer == sourceFrame )
+		sourceElement : Changeable( eContainer == sourceFrame )
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connects(sw2, sourceElement, targetElement ))
 
@@ -364,7 +364,7 @@ rule "Connect parameter for Session.init to incoming SyncWires (contained in Fra
 		eval( functions.connects(sw, sourceFrame, targetFrame ))
 
 		sw2 : SyncWire ( eContainer == sw)
-		sourceElement : Editable( eContainer == sourceFrame )
+		sourceElement : Changeable( eContainer == sourceFrame )
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connects(sw2, sourceElement, targetElement ))
 

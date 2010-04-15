@@ -17,10 +17,10 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.openiaml.model.model.Changeable;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.DomainObjectInstance;
-import org.openiaml.model.model.Editable;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.Operation;
@@ -1097,9 +1097,9 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 				default: return -1;
 			}
 		}
-		if (baseClass == Editable.class) {
+		if (baseClass == Changeable.class) {
 			switch (derivedFeatureID) {
-				case ModelPackage.DOMAIN_OBJECT_INSTANCE__ON_CHANGE: return ModelPackage.EDITABLE__ON_CHANGE;
+				case ModelPackage.DOMAIN_OBJECT_INSTANCE__ON_CHANGE: return ModelPackage.CHANGEABLE__ON_CHANGE;
 				default: return -1;
 			}
 		}
@@ -1125,9 +1125,9 @@ public class DomainObjectInstanceImpl extends ApplicationElementImpl implements 
 				default: return -1;
 			}
 		}
-		if (baseClass == Editable.class) {
+		if (baseClass == Changeable.class) {
 			switch (baseFeatureID) {
-				case ModelPackage.EDITABLE__ON_CHANGE: return ModelPackage.DOMAIN_OBJECT_INSTANCE__ON_CHANGE;
+				case ModelPackage.CHANGEABLE__ON_CHANGE: return ModelPackage.DOMAIN_OBJECT_INSTANCE__ON_CHANGE;
 				default: return -1;
 			}
 		}

@@ -5758,14 +5758,14 @@ public interface ModelPackage extends EPackage {
 
 
 	/**
-	 * The meta object id for the '{@link org.openiaml.model.model.Editable <em>Editable</em>}' class.
+	 * The meta object id for the '{@link org.openiaml.model.model.Changeable <em>Changeable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.openiaml.model.model.Editable
-	 * @see org.openiaml.model.model.impl.ModelPackageImpl#getEditable()
+	 * @see org.openiaml.model.model.Changeable
+	 * @see org.openiaml.model.model.impl.ModelPackageImpl#getChangeable()
 	 * @generated
 	 */
-	int EDITABLE = 41;
+	int CHANGEABLE = 41;
 
 	/**
 	 * The feature id for the '<em><b>On Change</b></em>' containment reference.
@@ -5774,16 +5774,16 @@ public interface ModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EDITABLE__ON_CHANGE = 0;
+	int CHANGEABLE__ON_CHANGE = 0;
 
 	/**
-	 * The number of structural features of the '<em>Editable</em>' class.
+	 * The number of structural features of the '<em>Changeable</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EDITABLE_FEATURE_COUNT = 1;
+	int CHANGEABLE_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.model.model.Accessible <em>Accessible</em>}' class.
@@ -7568,25 +7568,25 @@ public interface ModelPackage extends EPackage {
 	EClass getCanBeSynced();
 
 	/**
-	 * Returns the meta object for class '{@link org.openiaml.model.model.Editable <em>Editable</em>}'.
+	 * Returns the meta object for class '{@link org.openiaml.model.model.Changeable <em>Changeable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Editable</em>'.
-	 * @see org.openiaml.model.model.Editable
+	 * @return the meta object for class '<em>Changeable</em>'.
+	 * @see org.openiaml.model.model.Changeable
 	 * @generated
 	 */
-	EClass getEditable();
+	EClass getChangeable();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.openiaml.model.model.Editable#getOnChange <em>On Change</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.openiaml.model.model.Changeable#getOnChange <em>On Change</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>On Change</em>'.
-	 * @see org.openiaml.model.model.Editable#getOnChange()
-	 * @see #getEditable()
+	 * @see org.openiaml.model.model.Changeable#getOnChange()
+	 * @see #getChangeable()
 	 * @generated
 	 */
-	EReference getEditable_OnChange();
+	EReference getChangeable_OnChange();
 
 	/**
 	 * Returns the meta object for class '{@link org.openiaml.model.model.Accessible <em>Accessible</em>}'.
@@ -8841,14 +8841,14 @@ public interface ModelPackage extends EPackage {
 		EClass CAN_BE_SYNCED = eINSTANCE.getCanBeSynced();
 
 		/**
-		 * The meta object literal for the '{@link org.openiaml.model.model.Editable <em>Editable</em>}' class.
+		 * The meta object literal for the '{@link org.openiaml.model.model.Changeable <em>Changeable</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.openiaml.model.model.Editable
-		 * @see org.openiaml.model.model.impl.ModelPackageImpl#getEditable()
+		 * @see org.openiaml.model.model.Changeable
+		 * @see org.openiaml.model.model.impl.ModelPackageImpl#getChangeable()
 		 * @generated
 		 */
-		EClass EDITABLE = eINSTANCE.getEditable();
+		EClass CHANGEABLE = eINSTANCE.getChangeable();
 
 		/**
 		 * The meta object literal for the '<em><b>On Change</b></em>' containment reference feature.
@@ -8856,7 +8856,7 @@ public interface ModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EDITABLE__ON_CHANGE = eINSTANCE.getEditable_OnChange();
+		EReference CHANGEABLE__ON_CHANGE = eINSTANCE.getChangeable_OnChange();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.model.model.Accessible <em>Accessible</em>}' class.

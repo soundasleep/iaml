@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.CanBeSynced;
+import org.openiaml.model.model.Changeable;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsProperties;
@@ -19,7 +20,6 @@ import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
-import org.openiaml.model.model.Editable;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.NamedElement;
@@ -142,7 +142,7 @@ public class UsersSwitch<T> {
 				if (result == null) result = caseParameterEdgesSource(role);
 				if (result == null) result = caseExtendsEdgesSource(role);
 				if (result == null) result = caseExtendsEdgeDestination(role);
-				if (result == null) result = caseEditable(role);
+				if (result == null) result = caseChangeable(role);
 				if (result == null) result = caseCanBeSynced(role);
 				if (result == null) result = caseContainsProperties(role);
 				if (result == null) result = caseContainsOperations(role);
@@ -176,7 +176,7 @@ public class UsersSwitch<T> {
 				if (result == null) result = caseApplicationElement(userInstance);
 				if (result == null) result = caseParameterEdgeDestination(userInstance);
 				if (result == null) result = caseParameterEdgesSource(userInstance);
-				if (result == null) result = caseEditable(userInstance);
+				if (result == null) result = caseChangeable(userInstance);
 				if (result == null) result = caseCanBeSynced(userInstance);
 				if (result == null) result = caseContainsProperties(userInstance);
 				if (result == null) result = caseContainsOperations(userInstance);
@@ -580,17 +580,17 @@ public class UsersSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Editable</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Changeable</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Editable</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Changeable</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseEditable(Editable object) {
+	public T caseChangeable(Changeable object) {
 		return null;
 	}
 

@@ -870,6 +870,32 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		}
 		logTimed("web: clicking link with text complete");
 	}
+	
+	/**
+	 * We wrap the method to try and catch runtime exceptions
+	 * from the PHP server-side code.
+	 */
+	@Override
+	public void clickLinkWithExactText(String linkText) {
+		logTimed("web: clicking link with exact text");
+		try {
+			super.clickLinkWithExactText(linkText);
+		} catch (FailingHttpStatusCodeException f) {
+			// if we failed at exception.php, we can try and read out the error
+			if (PhpRuntimeExceptionException.canHandle(f)) {
+				throw new PhpRuntimeExceptionException(f);
+			}
+			throw f;
+		} catch (RuntimeException e) {
+			// perhaps this exception was caused by PHP running
+			// out of execution time?
+			if (getPageSource().matches("Maximum execution time of [0-9]+ seconds exceeded in")) {
+				throw new PhpExecutionTimeException("Maximum execution time exceeded in PHP script: '" + linkText + "'", e);
+			}
+			throw e; 
+		}
+		logTimed("web: clicking link with text complete");
+	}
 
 	/**
 	 * We wrap the method to try and catch runtime exceptions

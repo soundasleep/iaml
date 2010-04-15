@@ -5,8 +5,6 @@ package org.openiaml.model.tests.codegen.model0_4;
 
 import org.eclipse.core.resources.IFile;
 
-import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
-
 /**
  * Try the 'AND' constraint, which requires both 'a
  * permission' and 'default role'.
@@ -44,14 +42,9 @@ public class UserMultiplePermissionsAndRoles extends AbstractDefaultRoleUserLogi
 		assertProblem();
 		
 		// if we then try to go to 'target', we likewise will also be prevented		
-		try {
-			gotoSitemapWithProblem(sitemap, "target");
-			fail("Expected to not be able to go to 'target' page");
-		} catch (FailingHttpStatusCodeException e) {
-			// expected
-			checkExceptionContains(e, "Source role 'User' could not be translated into 'default role'");
-		}
-		assertProblem();
+		gotoSitemapWithProblem(sitemap, "target");
+		assertTitleNotSame("target");
+		assertProblem();		// who knows where we are?
 	}
 	
 	/**
@@ -78,13 +71,7 @@ public class UserMultiplePermissionsAndRoles extends AbstractDefaultRoleUserLogi
 		assertProblem();
 		
 		// if we then try to go to 'target', we likewise will also be prevented		
-		try {
-			gotoSitemapWithProblem(sitemap, "target");
-			fail("Expected to not be able to go to 'target' page");
-		} catch (FailingHttpStatusCodeException e) {
-			// expected
-			checkExceptionContains(e, "Source role 'User' could not be translated into 'default role'");
-		}
+		gotoSitemapWithProblem(sitemap, "target");
 		assertProblem();
 	}
 	
@@ -100,14 +87,8 @@ public class UserMultiplePermissionsAndRoles extends AbstractDefaultRoleUserLogi
 		assertProblem();
 		
 		// if we then try to go to 'target', we likewise will also be prevented		
-		try {
-			gotoSitemapWithProblem(sitemap, "target");
-			fail("Expected to not be able to go to 'target' page");
-		} catch (FailingHttpStatusCodeException e) {
-			// expected
-			checkExceptionContains(e, "Source role 'User' could not be translated into 'default role'");
-		}
-		assertProblem();		// who knows where we are?
+		gotoSitemapWithProblem(sitemap, "target");
+		assertProblem();
 	}
 	
 }

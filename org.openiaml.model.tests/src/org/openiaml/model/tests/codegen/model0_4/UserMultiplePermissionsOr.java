@@ -5,8 +5,6 @@ package org.openiaml.model.tests.codegen.model0_4;
 
 import org.eclipse.core.resources.IFile;
 
-import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
-
 /**
  * Try the 'OR' constraint, which lets us have any
  * of the required permissions.
@@ -52,14 +50,9 @@ public class UserMultiplePermissionsOr extends AbstractDefaultRoleUserLoginTestC
 		assertProblem();
 		
 		// if we then try to go to 'target', we likewise will also be prevented		
-		try {
-			gotoSitemapWithProblem(sitemap, "target");
-			fail("Expected to not be able to go to 'target' page");
-		} catch (FailingHttpStatusCodeException e) {
-			// expected
-			checkExceptionContains(e, "User of type 'current instance' did not have a permission 'a permission'");
-		}
-		assertProblem();
+		gotoSitemapWithProblem(sitemap, "target");
+		assertTitleNotSame("target");
+		assertProblem();		// who knows where we are?
 	}
 	
 	/**

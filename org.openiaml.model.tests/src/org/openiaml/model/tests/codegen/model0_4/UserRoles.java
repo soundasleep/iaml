@@ -7,8 +7,6 @@ import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 
-import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
-
 /**
  * Roles-based access control. 'default' is required.
  * 
@@ -44,14 +42,9 @@ public class UserRoles extends AbstractUserLoginTestCase {
 		// we actually expect a problem, because user does not have 'default role' permissions 
 		assertProblem();
 		
-		// if we then try to go to 'target', we likewise will also be prevented
-		try {
-			gotoSitemapWithProblem(sitemap, "target");
-			fail("Expected to not be able to go to 'target' page");
-		} catch (FailingHttpStatusCodeException e) {
-			// expected
-			checkExceptionContains(e, "Source role 'User' could not be translated into 'default role'");
-		}
+		// if we then try to go to 'target', we likewise will also be prevented		
+		gotoSitemapWithProblem(sitemap, "target");
+		assertTitleNotSame("target");
 		assertProblem();		// who knows where we are?
 	}
 	

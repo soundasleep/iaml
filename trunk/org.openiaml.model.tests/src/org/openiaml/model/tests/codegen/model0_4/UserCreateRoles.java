@@ -5,8 +5,6 @@ package org.openiaml.model.tests.codegen.model0_4;
 
 import org.eclipse.core.resources.IFile;
 
-import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
-
 /**
  * We can create new users and assign them roles.
  * 
@@ -53,13 +51,7 @@ public class UserCreateRoles extends AbstractUserLoginTestCase {
 		assertProblem();
 		
 		// if we then try to go to 'target', we likewise will also be prevented		
-		try {
-			gotoSitemapWithProblem(sitemap, "target");
-			fail("Expected to not be able to go to 'target' page");
-		} catch (FailingHttpStatusCodeException e) {
-			// expected
-			checkExceptionContains(e, "Source role 'User' could not be translated into 'default role'");
-		}
+		gotoSitemapWithProblem(sitemap, "target");
 		assertProblem();
 	}
 	

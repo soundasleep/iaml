@@ -408,8 +408,18 @@
  */
 «DEFINE javascriptAlert(model::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
 	«IF php»
-		«REM»how are we supposed to throw an alert on the client from the server?«ENDREM»
-		throw new IamlRuntimeException("Cannot call a Javascript alert from server-side: " . «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»);
+		/*
+		 * Alert: We can only alert on the server-side if we can pass instructions
+		 * onto the client.
+		 */
+		if (defined('REDIRECT_ON_CLIENT') && REDIRECT_ON_CLIENT) {
+			$message = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
+			log_message("[alert] $message");
+			echo "alert " . escape_parameter_string($message) . "\n";
+		} else {
+			«REM»how are we supposed to throw an alert on the client from the server?«ENDREM»
+			throw new IamlRuntimeException("Cannot call a Javascript alert from server-side: " . «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»);
+		}
 	«ELSE»
 		// throw an alert box
 		// NOTE: alert boxes currently aren't owned by any element; they are a direct

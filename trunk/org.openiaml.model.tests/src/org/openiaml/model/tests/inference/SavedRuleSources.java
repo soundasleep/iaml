@@ -87,9 +87,9 @@ public class SavedRuleSources extends InferenceTestCase {
 		assertNotSame(srcOp, targetOp);
 
 		assertTrue(srcEdit.isIsGenerated());
-		assertEquals("Create 'edit' event trigger for Editable things", srcEdit.getGeneratedRule());
+		assertEquals("Create 'onChange' event trigger for Changeable things", srcEdit.getGeneratedRule());
 		assertTrue(targetEdit.isIsGenerated());
-		assertEquals("Create 'edit' event trigger for Editable things", targetEdit.getGeneratedRule());
+		assertEquals("Create 'onChange' event trigger for Changeable things", targetEdit.getGeneratedRule());
 		assertTrue(srcOp.isIsGenerated());
 		assertEquals("Create 'update' operation for input text field", srcOp.getGeneratedRule());
 		assertTrue(targetOp.isIsGenerated());

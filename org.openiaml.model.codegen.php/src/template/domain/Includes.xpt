@@ -40,12 +40,12 @@
  */		
 
 /**
- * Getting attribute instances.
+ * Getting attribute instance '«name»'.
  */
 «EXPAND GetDefinitions::getDomainAttribute»
 
 /**
- * Storing attribute instances.
+ * Storing attribute instance '«name»'.
  */
 «EXPAND StoreDefinitions::storeDomainAttribute(true)»
 

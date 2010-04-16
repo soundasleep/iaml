@@ -170,6 +170,8 @@ function get_subclass_«safeName()»_from_«safeName(source)»($instance) {
  * Returns the db_query if the attribute update was successful; null if not.
  */
 function update_«safeName()»_attribute_instance($instance, $attribute_name, $arg0) {
+	log_message("[update attribute instance] updating attribute '$attribute_name' to '$arg0' in domain object '«name»'");
+
 	«LET attributes.selectFirst(a | a.primaryKey) AS pk»
 		// properties for '«name»'
 		if (!isset($instance["«safeNameString(pk.name)»"]))
@@ -213,19 +215,19 @@ function update_«safeName()»_attribute_instance($instance, $attribute_name, $arg
 			return $db_query;
 		}
 					
-		// we haven't; try all the subclasses of '«name»'
-		«FOREACH outExtendsEdges.to.typeSelect(model::DomainObject) AS targetSubclass»
+		// we haven't; try all the superclasses of '«name»'
+		«FOREACH outExtendsEdges.to.typeSelect(model::DomainObject) AS targetSuperclass»
 		{
-			/* subclass '«targetSubclass.name»' */
+			/* subclass '«targetSuperclass.name»' */
 			// first, get the instance of this subclass
 			
-			$subclass_instance = get_subclass_«safeName(targetSubclass)»_from_«safeName()»($instance);
+			$subclass_instance = get_subclass_«safeName(targetSuperclass)»_from_«safeName()»($instance);
 		
 			if ($subclass_instance === null)
 				throw new IamlRuntimeException("Could not get subclass '$source_class' from '«safeNameString(name)»': no results found for query '$query'");
 		
 			// try updating this instance
-			$db_query = update_«safeName(targetSubclass)»_attribute_instance($subclass_instance, $attribute_name, $arg0);
+			$db_query = update_«safeName(targetSuperclass)»_attribute_instance($subclass_instance, $attribute_name, $arg0);
 			if ($db_query !== null)
 				return $db_query;
 		}

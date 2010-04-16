@@ -90,6 +90,15 @@ function store_event(frame_id, event_name, arg0) {
  */
 var last_alert_message = null;
 
+function alert_without_repeat(message) {
+	if (last_alert_message === message) {
+		debug("[instruction] alert: ignoring duplicate message");
+	} else {
+		alert(message);
+	}
+	last_alert_message = message;
+}
+
 /**
  * We refactor the queued functionality so that _any_ remote call
  * will be queued up properly.
@@ -190,12 +199,7 @@ function execute_queued_url(url, counter, function_queue) {
 		      						}
 		      						var message = decodeURIComponent(bits[1]);
 		      						debug("[instruction] alert(" + message + ")");
-		      						if (last_alert_message === message) {
-		      							debug("[instruction] alert: ignoring duplicate message");
-		      						} else {
-		      							alert(message);
-		      						}
-		      						last_alert_message = message;
+		      						alert_without_repeat(message);
 		      						break;
 
 		      					case "call_operation":
@@ -307,9 +311,14 @@ function next_store_event() {
 	}
 }
 
+function create_stacktrace_parameter() {
+	return "&trace=" + encodeURIComponent(printStackTrace().join("\n"));
+}
+
 /* save directly to database (only one attribute) */
 function store_db(attribute_id, arg0) {
 	var url = 'store_db.php?attribute_id=' + encodeURIComponent(attribute_id) + '&frame=' + encodeURIComponent(frame_id) + '&arg0=' + encodeURIComponent(arg0);
+	url += create_stacktrace_parameter();
 	execute_queued_url(url, 'store_db', false);
 }
 
@@ -319,6 +328,7 @@ function set_session(id, arg0, function_queue, ignore_updates) {
 	if (ignore_updates) {
 		url += '&ignore_updates=true';
 	}
+	url += create_stacktrace_parameter();
 	execute_queued_url(url, 'set_session', function_queue);
 }
 
@@ -328,70 +338,83 @@ function set_application_value(id, arg0, function_queue, ignore_updates) {
 	if (ignore_updates) {
 		url += '&ignore_updates=true';
 	}
+	url += create_stacktrace_parameter();
 	execute_queued_url(url, 'set_application_value', function_queue);
 }
 
 /* save a domain instance variable */
 function set_domain_attribute(id, arg0, function_queue) {
 	var url = 'set_domain_attribute.php?id=' + encodeURIComponent(id) + '&frame=' + encodeURIComponent(frame_id) + '&arg0=' + encodeURIComponent(arg0);
+	url += create_stacktrace_parameter();
 	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
 function queued_new_domain_instance(id, function_queue) {
 	var url = 'new_domain_instance.php?id=' + encodeURIComponent(id) + '&frame=' + encodeURIComponent(frame_id);
+	url += create_stacktrace_parameter();
 	execute_queued_url(url, 'new_domain_instance', function_queue);
 }
 
 function save_queued_store_domain_attribute(id, function_queue) {
 	var url = 'save_queued_attribute.php?id=' + encodeURIComponent(id) + '&frame=' + encodeURIComponent(frame_id);
+	url += create_stacktrace_parameter();
 	execute_queued_url(url, 'queued_store_attribute', function_queue);
 }
 
 function save_queued_store_domain_object(id, function_queue) {
 	var url = 'save_queued_store_domain_object.php?id=' + encodeURIComponent(id) + '&frame=' + encodeURIComponent(frame_id);
+	url += create_stacktrace_parameter();
 	execute_queued_url(url, 'queued_store_object', function_queue);
 }
 
 function queued_add_role(role_id, instance_id, function_queue) {
 	var url = 'add_role.php?role_id=' + encodeURIComponent(role_id) + '&instance_id=' + encodeURIComponent(instance_id) + '&frame=' + encodeURIComponent(frame_id);
+	url += create_stacktrace_parameter();
 	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
 function queued_add_permission(permission_id, instance_id, function_queue) {
 	var url = 'add_permission.php?permission_id=' + encodeURIComponent(permission_id) + '&instance_id=' + encodeURIComponent(instance_id) + '&frame=' + encodeURIComponent(frame_id);
+	url += create_stacktrace_parameter();
 	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
 function queued_remove_role(role_id, instance_id, function_queue) {
 	var url = 'remove_role.php?role_id=' + encodeURIComponent(role_id) + '&instance_id=' + encodeURIComponent(instance_id) + '&frame=' + encodeURIComponent(frame_id);
+	url += create_stacktrace_parameter();
 	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
 function queued_remove_permission(permission_id, instance_id, function_queue) {
 	var url = 'remove_permission.php?permission_id=' + encodeURIComponent(permission_id) + '&instance_id=' + encodeURIComponent(instance_id) + '&frame=' + encodeURIComponent(frame_id);
+	url += create_stacktrace_parameter();
 	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
 function queued_email_send(email_id, function_queue) {
 	var url = 'email_callback_send.php?email_id=' + encodeURIComponent(email_id) + '&frame=' + encodeURIComponent(frame_id);
+	url += create_stacktrace_parameter();
 	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
 function queued_instance_next(instance_id, function_queue) {
 	var url = 'instance_next.php?instance_id=' + encodeURIComponent(instance_id) 
 		+ '&frame_id=' + encodeURIComponent(frame_id);
+	url += create_stacktrace_parameter();
 	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
 function queued_instance_previous(instance_id, function_queue) {
 	var url = 'instance_previous.php?instance_id=' + encodeURIComponent(instance_id) 
 		+ '&frame_id=' + encodeURIComponent(frame_id);
+	url += create_stacktrace_parameter();
 	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
 function queued_instance_reset(instance_id, function_queue) {
 	var url = 'instance_reset.php?instance_id=' + encodeURIComponent(instance_id) 
 		+ '&frame_id=' + encodeURIComponent(frame_id);
+	url += create_stacktrace_parameter();
 	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
@@ -399,6 +422,7 @@ function queued_instance_skip(instance_id, arg0, function_queue) {
 	var url = 'instance_skip.php?instance_id=' + encodeURIComponent(instance_id) 
 		+ '&arg0=' + encodeURIComponent(arg0)
 		+ '&frame_id=' + encodeURIComponent(frame_id);
+	url += create_stacktrace_parameter();
 	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
@@ -406,6 +430,7 @@ function queued_instance_jump(instance_id, arg0, function_queue) {
 	var url = 'instance_jump.php?instance_id=' + encodeURIComponent(instance_id) 
 		+ '&arg0=' + encodeURIComponent(arg0)
 		+ '&frame_id=' + encodeURIComponent(frame_id);
+	url += create_stacktrace_parameter();
 	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
@@ -416,6 +441,7 @@ function call_remote_event(container, operation_name, arg0, arg1, function_queue
 		+ '&operation_name=' + encodeURIComponent(operation_name)
 		+ '&arg0=' + encodeURIComponent(arg0)
 		+ '&arg1=' + encodeURIComponent(arg1);
+	url += create_stacktrace_parameter();
 	execute_queued_url(url, 'remote_event', function_queue);
 }
 

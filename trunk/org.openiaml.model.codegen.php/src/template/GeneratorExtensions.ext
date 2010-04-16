@@ -151,33 +151,38 @@ availableInCurrentScriptAction(model::ActionSource source, model::ActionDestinat
  */
 List[model::Operation] allContainerOperations(model::Scope this) :
 	operations.toSet().union( scopes.allContainerOperations() )
-		.union( possibleParentOperations(eContainer) );
+		.union( possibleParentOperations(eContainer) )
+		.select(o | operationUsed(o));
 
 List[model::Operation] allContainerOperations(model::scopes::Email this) :
 	operations.toSet().union( scopes.allContainerOperations() )
 		.union( labels.allContainerOperations() )
 		.union( buttons.allContainerOperations() )
-		.union( possibleParentOperations(eContainer) );
+		.union( possibleParentOperations(eContainer) )
+		.select(o | operationUsed(o));
 
 List[model::Operation] allContainerOperations(model::visual::Frame this) :
 	operations.toSet().union( scopes.allContainerOperations() )
 		.union( children.allContainerOperations() )
-		.union( possibleParentOperations(eContainer) );
+		.union( possibleParentOperations(eContainer) )
+		.select(o | operationUsed(o));
 
 List[model::Operation] allContainerOperations(model::VisibleThing this) :
 	operations.toSet().union( children.allContainerOperations() )
-		.union( possibleParentOperations(eContainer) );
+		.union( possibleParentOperations(eContainer) )
+		.select(o | operationUsed(o));
 		
 List[model::Operation] allContainerOperations(model::ApplicationElement this) :
-	operations;
+	operations.select(o | operationUsed(o));
 
 List[model::Operation] allContainerOperations(model::ContainsOperations this) :
-	operations;
+	operations.select(o | operationUsed(o));
 
 List[model::Operation] allContainerOperations(model::InternetApplication this) :
 	 operations.toSet()
 		.union( scopes.allContainerOperations() )
-	 	.union( children.allContainerOperations() );	 
+	 	.union( children.allContainerOperations() )
+	 	.select(o | operationUsed(o));	 
 		
 /** All of the ApplicationElementProperties stored within this InternetApplication */
 List[model::Property] allProperties(model::InternetApplication this) :
@@ -352,23 +357,12 @@ model::InternetApplication getRoot(model::InternetApplication this) :
 
 /** get all Conditions in the InternetApplication */
 cached List[model::Condition] getAllConditions(model::InternetApplication this) :
-	eAllContents.typeSelect(model::Condition);
-
-cached List[model::Condition] getAllConditions(emf::EObject this) :
-	eAllContents.typeSelect(model::Condition);
-
-cached List[model::Condition] getAllConditions(model::Condition this) :
-	eAllContents.typeSelect(model::Condition).add(this);
-
+	eAllContents.typeSelect(model::Condition)
+		.select(o | conditionUsed(o));
+		
 /** get all Frames in the InternetApplication */
 cached List[model::visual::Frame] getAllFrames(model::InternetApplication this) :
-	children.typeSelect(model::visual::Frame).toSet().union( eAllContents.getAllFrames() ).reject( e | e == null );
-
-cached List[model::visual::Frame] getAllFrames(emf::EObject this) :
-	null;
-
-cached List[model::visual::Frame] getAllFrames(model::visual::Frame this) :
-	this;
+	eAllContents.typeSelect(model::visual::Frame);
 
 /** get all Emails in the InternetApplication */
 cached List[model::scopes::Email] getAllEmails(model::InternetApplication this) :
@@ -376,14 +370,7 @@ cached List[model::scopes::Email] getAllEmails(model::InternetApplication this) 
 	
 /** get all Dynamic Element Sets in the InternetApplication */
 List[model::DynamicApplicationElementSet] getAllDynamicElements(model::InternetApplication this) :
-	children.typeSelect( model::DynamicApplicationElementSet ).toSet()
-		.union( eAllContents.getAllDynamicElements() ).reject( e | e == null );
-
-List[model::DynamicApplicationElementSet] getAllDynamicElements(emf::EObject this) :
-	null;
-
-List[model::DynamicApplicationElementSet] getAllDynamicElements(model::DynamicApplicationElementSet this) :
-	this;
+	eAllContents.typeSelect(model::DynamicApplicationElementSet);
 
 /** get all Domain Attribute Instances in the InternetApplication */
 List[model::DomainAttributeInstance] getAllDomainAttributeInstances(model::InternetApplication this) :
@@ -533,7 +520,8 @@ getExitResumeTargets(model::components::ExitGate this) :
 List[model::Operation] getClientSideCacheOperations(model::InternetApplication this) :
 	eAllContents.typeSelect(model::PrimitiveOperation)
 		.select(o | model::DomainObjectInstance.isInstance(o.eContainer))
-		.select(o | o.name == "exists?");
+		.select(o | o.name == "exists?")
+		.select(o | operationUsed(o));
 
 /**
  * Get all conditions which the server needs to keep track of, and 
@@ -542,7 +530,8 @@ List[model::Operation] getClientSideCacheOperations(model::InternetApplication t
  */
 List[model::Condition] getClientSideCacheConditions(model::InternetApplication this) :
 	eAllContents.typeSelect(model::PrimitiveCondition)
-		.select(o | model::DomainObjectInstance.isInstance(o.eContainer));
+		.select(o | model::DomainObjectInstance.isInstance(o.eContainer))
+		.select(o | conditionUsed(o));
 
 /**
  * Get all properties which the server needs to keep track of, and 
@@ -616,6 +605,12 @@ isDomainObjectInstanceResults(model::Property this) :
 boolean isNumeric(xsd::XSDSimpleTypeDefinition this) :
 	uRI == "http://www.w3.org/2001/XMLSchema#decimal"
 	|| (baseTypeDefinition != null && isNumeric(baseTypeDefinition));
+
+operationUsed(model::Operation this) :
+	!(inActions.isEmpty && inExecutions.isEmpty && inFlows.isEmpty && inWires.isEmpty); 
+
+conditionUsed(model::Condition this) :
+	!(outConditionEdges.isEmpty && outFlows.isEmpty && outWires.isEmpty);
 
 /** 
  * a hack way to create backtrace-able errors

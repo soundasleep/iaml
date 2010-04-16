@@ -184,7 +184,7 @@
 				$arg0);
 		if ($db_query === null) {
 			// could not update attribute successfully
-			throw new IamlRuntimeException("Could not update attribute '$attribute_name' into object '«name»' successfully: could not find attribute in subclass tree");
+			throw new IamlRuntimeException("Could not update attribute '$attribute_name' into object '«safeName()»' successfully: could not find attribute in subclass tree");
 		}
 	«ENDLET»
 «ENDDEFINE»

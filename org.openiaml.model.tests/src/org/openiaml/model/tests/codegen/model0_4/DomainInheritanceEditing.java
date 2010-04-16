@@ -112,9 +112,9 @@ public class DomainInheritanceEditing extends CodegenTestCase {
 			assertLabeledFieldEquals(field, "");
 			setLabeledFormElementField(field, newName);
 		}
-		// this primary key is still rendered, because it's
-		// not a generated primary key
-		getLabelIDForText("id");
+		// this primary key is not rendered, because it's
+		// a primary key
+		assertHasNotLabelIDForText("id");
 		
 		// it is autosave, so we can immediately view the person page
 		gotoSitemapThenPage(sitemap, "get person");		
@@ -141,9 +141,9 @@ public class DomainInheritanceEditing extends CodegenTestCase {
 			assertLabeledFieldEquals(field, "");
 			setLabeledFormElementField(field, newName);
 		}
-		// this primary key is still rendered, because it's
-		// not a generated primary key
-		getLabelIDForText("id");
+		// this primary key is not rendered, because it's
+		// a primary key
+		assertHasNotLabelIDForText("id");
 		
 		// it is autosave, so we can immediately try to
 		// view the new person, but we will get an error

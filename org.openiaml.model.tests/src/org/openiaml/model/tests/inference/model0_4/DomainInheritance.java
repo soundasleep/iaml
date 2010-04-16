@@ -97,10 +97,8 @@ public class DomainInheritance extends InferenceTestCase {
 		InputTextField name = assertHasInputTextField(form, "name");
 		assertGenerated(name);
 		
-		// this primary key is still rendered, because it's
-		// not a generated primary key
-		InputTextField id = assertHasInputTextField(form, "id");
-		assertGenerated(id);
+		// the primary key is not rendered
+		assertHasNoInputTextField(form, "id");
 		
 		// direct subclasses
 		assertHasNoInputTextField(form, "enrolled");
@@ -125,8 +123,9 @@ public class DomainInheritance extends InferenceTestCase {
 		// inherited fields
 		InputTextField name = assertHasInputTextField(form, "name");
 		assertGenerated(name);
-		InputTextField id = assertHasInputTextField(form, "Person.id");
-		assertGenerated(id);
+		
+		// the derived primary key is not rendered
+		assertHasNoInputTextField(form, "Person.id");
 				
 		// primary key
 		assertHasNoInputTextField(form, "generated primary key");
@@ -156,9 +155,10 @@ public class DomainInheritance extends InferenceTestCase {
 		assertGenerated(qualification);
 		InputTextField name = assertHasInputTextField(form, "name");
 		assertGenerated(name);
-		InputTextField id = assertHasInputTextField(form, "Person.id");
-		assertGenerated(id);
-				
+
+		// the derived primary key is not rendered
+		assertHasNoInputTextField(form, "Person.id");
+		
 		// primary key
 		assertHasNoInputTextField(form, "generated primary key");
 		
@@ -194,8 +194,9 @@ public class DomainInheritance extends InferenceTestCase {
 		assertGenerated(qualification);
 		InputTextField name = assertHasInputTextField(form, "name");
 		assertGenerated(name);
-		InputTextField id = assertHasInputTextField(form, "Person.id");
-		assertGenerated(id);
+
+		// the derived primary key is not rendered
+		assertHasNoInputTextField(form, "Person.id");
 				
 		// primary key
 		assertHasNoInputTextField(form, "generated primary key");

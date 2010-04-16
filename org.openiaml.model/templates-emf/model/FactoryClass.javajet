@@ -253,8 +253,8 @@ public interface <%=genPackage.getFactoryInterfaceName()%><%if (!genModel.isSupp
 	 * @param obj the EObject to possibly generate an ID for.
 	 */
 	protected void generateID(EObject obj) {
-		if (obj instanceof GeneratedElement) {
-			GeneratedElement ge = (GeneratedElement) obj;			
+		if (obj instanceof org.openiaml.model.model.GeneratedElement) {
+			org.openiaml.model.model.GeneratedElement ge = (org.openiaml.model.model.GeneratedElement) obj;			
 			generate_id_counter++;
 			ge.setId( (getEPackage() == null ? "null" : getEPackage().getName()) + "." + packageDate + "." + Long.toHexString(generate_id_counter) );
 		}
@@ -373,7 +373,11 @@ public interface <%=genPackage.getFactoryInterfaceName()%><%if (!genModel.isSupp
     <%}%>
 	public <%=genDataType.getImportedParameterizedObjectInstanceClassName()%> create<%=genDataType.getName()%>FromString(<%=genModel.getImportedName("org.eclipse.emf.ecore.EDataType")%> eDataType, String initialValue)
 	{
-    <%if (genDataType instanceof GenEnum) {%>
+	<% /* jevon modification: handle DomainStore.properties */ %>
+	<%if (genDataType.getName().equals("FileReference")) { %>
+		/* Jevon modification: use our custom container */
+		return new org.openiaml.model.impl.FileReferenceImpl(initialValue);
+    <%} else if (genDataType instanceof GenEnum) {%>
       <%if (genPackage.isDataTypeConverters()) {%>
 		return create<%=genDataType.getName()%>(initialValue);
       <%} else {%>
@@ -581,7 +585,12 @@ public interface <%=genPackage.getFactoryInterfaceName()%><%if (!genModel.isSupp
     <%}%>
 	public String convert<%=genDataType.getName()%>ToString(<%=genModel.getImportedName("org.eclipse.emf.ecore.EDataType")%> eDataType, Object instanceValue)
 	{
-    <%if (genDataType instanceof GenEnum) {%>
+	<%if (genDataType.getName().equals("FileReference")) { %>
+		/* Jevon modification: use our custom FileReferenceImpl */
+		if (instanceValue == null)
+			return null;
+		return ((org.openiaml.model.FileReference) instanceValue).toString();
+    <%} else if (genDataType instanceof GenEnum) {%>
 		return instanceValue == null ? null : instanceValue.toString();
     <%} else if (genDataType.getBaseType() != null) { GenDataType genBaseType = genDataType.getBaseType(); %>
       <%if (genBaseType.getGenPackage() == genPackage) {%>

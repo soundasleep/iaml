@@ -31,6 +31,7 @@ public class AllReleaseTests {
         suite.addTestSuite(RuntimeVersionTestCase.class);
         suite.addTestSuite(ExportDependencyGraph.class);
         suite.addTestSuite(ElementModeldocTestCase.class);
+        suite.addTestSuite(DynamicTemplatesTest.class);
 		//$JUnit-END$
         return suite; 
    }

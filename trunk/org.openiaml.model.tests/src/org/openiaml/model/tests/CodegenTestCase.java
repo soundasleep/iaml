@@ -829,6 +829,10 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 			IElement debug = getElementById("debug");
 			debug.setTextContent("");
 		}
+		if (hasElementById("response")) {
+			IElement debug = getElementById("response");
+			debug.setTextContent("");
+		}
 	}
 	
 	/**

@@ -11,8 +11,8 @@
     <descriptors
         name="EventTriggerFigure">
       <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="EventTriggerFigure">
+          xsi:type="gmfgraph:ScalablePolygon"
+          name="EventTriggerPolygonFigure">
         <layout
             xsi:type="gmfgraph:FlowLayout"
             vertical="true"/>
@@ -52,6 +52,17 @@
               xsi:type="gmfgraph:ConstantColor"
               value="gray"/>
         </children>
+        <template/>
+        <template
+            x="60"/>
+        <template
+            x="80"
+            y="20"/>
+        <template
+            x="60"
+            y="40"/>
+        <template
+            y="40"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.0/@actualFigure/@children.0"/>

@@ -6,8 +6,6 @@
  */
 package org.openiaml.model.model.impl;
 
-import java.util.Date;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -111,233 +109,332 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * An ID will be {@link #generateID() automatically generated} if the resulting
+	 * class is a {@link GeneratedElement}.
+	 *
+	 * @generated
 	 */
 	public EventTrigger createEventTrigger() {
 		EventTriggerImpl eventTrigger = new EventTriggerImpl();
-		generateID(eventTrigger);
+    	generateID(eventTrigger);
 		return eventTrigger;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * An ID will be {@link #generateID() automatically generated} if the resulting
+	 * class is a {@link GeneratedElement}.
+	 *
+	 * @generated
 	 */
 	public DomainObject createDomainObject() {
 		DomainObjectImpl domainObject = new DomainObjectImpl();
-		generateID(domainObject);
+    	generateID(domainObject);
 		return domainObject;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * An ID will be {@link #generateID() automatically generated} if the resulting
+	 * class is a {@link GeneratedElement}.
+	 *
+	 * @generated
 	 */
 	public DomainAttribute createDomainAttribute() {
 		DomainAttributeImpl domainAttribute = new DomainAttributeImpl();
-		generateID(domainAttribute);
+    	generateID(domainAttribute);
 		return domainAttribute;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * An ID will be {@link #generateID() automatically generated} if the resulting
+	 * class is a {@link GeneratedElement}.
+	 *
+	 * @generated
 	 */
 	public Parameter createParameter() {
 		ParameterImpl parameter = new ParameterImpl();
-		generateID(parameter);
+    	generateID(parameter);
 		return parameter;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * An ID will be {@link #generateID() automatically generated} if the resulting
+	 * class is a {@link GeneratedElement}.
+	 *
+	 * @generated
 	 */
 	public PrimitiveOperation createPrimitiveOperation() {
 		PrimitiveOperationImpl primitiveOperation = new PrimitiveOperationImpl();
-		generateID(primitiveOperation);
+    	generateID(primitiveOperation);
 		return primitiveOperation;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * An ID will be {@link #generateID() automatically generated} if the resulting
+	 * class is a {@link GeneratedElement}.
+	 *
+	 * @generated
 	 */
 	public CompositeOperation createCompositeOperation() {
 		CompositeOperationImpl compositeOperation = new CompositeOperationImpl();
-		generateID(compositeOperation);
+    	generateID(compositeOperation);
 		return compositeOperation;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * An ID will be {@link #generateID() automatically generated} if the resulting
+	 * class is a {@link GeneratedElement}.
+	 *
+	 * @generated
 	 */
 	public Property createProperty() {
 		PropertyImpl property = new PropertyImpl();
-		generateID(property);
+    	generateID(property);
 		return property;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * An ID will be {@link #generateID() automatically generated} if the resulting
+	 * class is a {@link GeneratedElement}.
+	 *
+	 * @generated
 	 */
 	public StaticValue createStaticValue() {
 		StaticValueImpl staticValue = new StaticValueImpl();
-		generateID(staticValue);
+    	generateID(staticValue);
 		return staticValue;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * An ID will be {@link #generateID() automatically generated} if the resulting
+	 * class is a {@link GeneratedElement}.
+	 *
+	 * @generated
 	 */
 	public VisibleThing createVisibleThing() {
 		VisibleThingImpl visibleThing = new VisibleThingImpl();
-		generateID(visibleThing);
+    	generateID(visibleThing);
 		return visibleThing;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * An ID will be {@link #generateID() automatically generated} if the resulting
+	 * class is a {@link GeneratedElement}.
+	 *
+	 * @generated
 	 */
 	public InternetApplication createInternetApplication() {
 		InternetApplicationImpl internetApplication = new InternetApplicationImpl();
-		generateID(internetApplication);
+    	generateID(internetApplication);
 		return internetApplication;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * An ID will be {@link #generateID() automatically generated} if the resulting
+	 * class is a {@link GeneratedElement}.
+	 *
+	 * @generated
 	 */
 	public DomainStore createDomainStore() {
 		DomainStoreImpl domainStore = new DomainStoreImpl();
-		generateID(domainStore);
+    	generateID(domainStore);
 		return domainStore;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * An ID will be {@link #generateID() automatically generated} if the resulting
+	 * class is a {@link GeneratedElement}.
+	 *
+	 * @generated
 	 */
 	public DataFlowEdge createDataFlowEdge() {
 		DataFlowEdgeImpl dataFlowEdge = new DataFlowEdgeImpl();
-		generateID(dataFlowEdge);
+    	generateID(dataFlowEdge);
 		return dataFlowEdge;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * An ID will be {@link #generateID() automatically generated} if the resulting
+	 * class is a {@link GeneratedElement}.
+	 *
+	 * @generated
 	 */
 	public TemporaryVariable createTemporaryVariable() {
 		TemporaryVariableImpl temporaryVariable = new TemporaryVariableImpl();
-		generateID(temporaryVariable);
+    	generateID(temporaryVariable);
 		return temporaryVariable;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * An ID will be {@link #generateID() automatically generated} if the resulting
+	 * class is a {@link GeneratedElement}.
+	 *
+	 * @generated
 	 */
 	public ExecutionEdge createExecutionEdge() {
 		ExecutionEdgeImpl executionEdge = new ExecutionEdgeImpl();
-		generateID(executionEdge);
+    	generateID(executionEdge);
 		return executionEdge;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * An ID will be {@link #generateID() automatically generated} if the resulting
+	 * class is a {@link GeneratedElement}.
+	 *
+	 * @generated
 	 */
 	public ConditionalEdge createConditionalEdge() {
 		ConditionalEdgeImpl conditionalEdge = new ConditionalEdgeImpl();
-		generateID(conditionalEdge);
+    	generateID(conditionalEdge);
 		return conditionalEdge;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * An ID will be {@link #generateID() automatically generated} if the resulting
+	 * class is a {@link GeneratedElement}.
+	 *
+	 * @generated
 	 */
 	public DynamicApplicationElementSet createDynamicApplicationElementSet() {
 		DynamicApplicationElementSetImpl dynamicApplicationElementSet = new DynamicApplicationElementSetImpl();
-		generateID(dynamicApplicationElementSet);
+    	generateID(dynamicApplicationElementSet);
 		return dynamicApplicationElementSet;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * An ID will be {@link #generateID() automatically generated} if the resulting
+	 * class is a {@link GeneratedElement}.
+	 *
+	 * @generated
 	 */
 	public DomainObjectInstance createDomainObjectInstance() {
 		DomainObjectInstanceImpl domainObjectInstance = new DomainObjectInstanceImpl();
-		generateID(domainObjectInstance);
+    	generateID(domainObjectInstance);
 		return domainObjectInstance;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * An ID will be {@link #generateID() automatically generated} if the resulting
+	 * class is a {@link GeneratedElement}.
+	 *
+	 * @generated
 	 */
 	public CompositeCondition createCompositeCondition() {
 		CompositeConditionImpl compositeCondition = new CompositeConditionImpl();
-		generateID(compositeCondition);
+    	generateID(compositeCondition);
 		return compositeCondition;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * An ID will be {@link #generateID() automatically generated} if the resulting
+	 * class is a {@link GeneratedElement}.
+	 *
+	 * @generated
 	 */
 	public DomainAttributeInstance createDomainAttributeInstance() {
 		DomainAttributeInstanceImpl domainAttributeInstance = new DomainAttributeInstanceImpl();
-		generateID(domainAttributeInstance);
+    	generateID(domainAttributeInstance);
 		return domainAttributeInstance;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * An ID will be {@link #generateID() automatically generated} if the resulting
+	 * class is a {@link GeneratedElement}.
+	 *
+	 * @generated
 	 */
 	public QueryParameter createQueryParameter() {
 		QueryParameterImpl queryParameter = new QueryParameterImpl();
-		generateID(queryParameter);
+    	generateID(queryParameter);
 		return queryParameter;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * An ID will be {@link #generateID() automatically generated} if the resulting
+	 * class is a {@link GeneratedElement}.
+	 *
+	 * @generated
 	 */
 	public PrimitiveCondition createPrimitiveCondition() {
 		PrimitiveConditionImpl primitiveCondition = new PrimitiveConditionImpl();
-		generateID(primitiveCondition);
+    	generateID(primitiveCondition);
 		return primitiveCondition;
 	}
+
+
+	
+
+	private static long generate_id_counter = 0;
+	private static final String packageDate = Long.toHexString(new java.util.Date().getTime());
+	
+	/**
+	 * We want a way to generate IDs that we know are unique between different elements
+	 * in the same model, but currently we don't mind if they aren't unique
+	 * between different models created at the exact same time. (For this, we
+	 * would need to use UUIDs.) Applies the ID to the given element.
+	 * 
+	 * <p>This is probably a really unpleasant initial implementation but can easily
+	 * be changed in the future.
+	 * 
+	 * <p>Currently it sets IDs to something like "<code>model.12b52.42</code>", where:
+	 * <ol>
+	 *   <li>the first part is the package name
+	 *   <li>the second part is the time the package factory was instantiated (in hex, accurate to ms)
+	 *   <li>the third part is a unique ID to this factory instance (in hex)
+	 * </ol>
+	 * 
+	 * @generated
+	 * @see GeneratedElement
+	 * @param obj the EObject to possibly generate an ID for.
+	 */
+	protected void generateID(EObject obj) {
+		if (obj instanceof GeneratedElement) {
+			GeneratedElement ge = (GeneratedElement) obj;			
+			generate_id_counter++;
+			ge.setId( (getEPackage() == null ? "null" : getEPackage().getName()) + "." + packageDate + "." + Long.toHexString(generate_id_counter) );
+		}
+	}
+
+	
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -357,34 +454,6 @@ public class ModelFactoryImpl extends EFactoryImpl implements ModelFactory {
 	@Deprecated
 	public static ModelPackage getPackage() {
 		return ModelPackage.eINSTANCE;
-	}
-	
-	private static long generate_id_counter = 0;
-	private static final String packageDate = Long.toHexString(new Date().getTime());
-	
-	/**
-	 * We want a way to generate IDs that we know are unique between different elements
-	 * in the same model, but currently we don't mind if they aren't unique
-	 * between different models created at the exact same time. (For this, we
-	 * would need to use UUIDs.) Applies the ID to the given element.
-	 * 
-	 * This is probably a really unpleasant initial implementation but can easily
-	 * be changed in the future :)
-	 * 
-	 * Currently it sets IDs to something like "Model.12b52.42", where
-	 * - the first part is the package name
-	 * - the second part is the time the package factory was instantiated (in hex, accurate to ms)
-	 * - the third part is a unique ID to this factory instance (in hex)
-	 * 
-	 * @see GeneratedElement
-	 * @param obj
-	 */
-	protected void generateID(EObject obj) {
-		if (obj instanceof GeneratedElement) {
-			GeneratedElement ge = (GeneratedElement) obj;			
-			generate_id_counter++;
-			ge.setId( (getEPackage() == null ? "null" : getEPackage().getName()) + "." + packageDate + "." + Long.toHexString(generate_id_counter) );
-		}
 	}
 
 } //ModelFactoryImpl

@@ -25,7 +25,8 @@ Require-Bundle: org.eclipse.gmf,
  org.openiaml.model.diagram.frame;bundle-version="0.4.1",
  org.openiaml.model.diagram.session;bundle-version="0.4.1",
  org.eclipse.xsd;bundle-version="2.5.0",
- org.eclipse.xsd.edit;bundle-version="2.5.0"
+ org.eclipse.xsd.edit;bundle-version="2.5.0",
+ org.openiaml.model.diagram.domain_object_instance;bundle-version="0.4.4"
 Bundle-Vendor: www.openiaml.org
 Export-Package: org.openiaml.model.diagram.custom.actions,
  org.openiaml.model.diagram.custom.commands,

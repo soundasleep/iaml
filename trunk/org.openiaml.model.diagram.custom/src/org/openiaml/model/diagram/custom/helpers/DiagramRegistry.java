@@ -54,12 +54,12 @@ public class DiagramRegistry {
 		public String modelId;
 		public int visualId;
 		public PreferencesHint prefHint;
-		public Map saveOptions;
+		public Map<?,?> saveOptions;
 		public String initMessage;
 		public String errorMessage;
 
 		public IamlDiagramRegistryOptions(String modelId, int visualId,
-				PreferencesHint prefHint, Map saveOptions,
+				PreferencesHint prefHint, Map<?,?> saveOptions,
 				String initMessage,
 				String errorMessage) {
 			this.modelId = modelId;
@@ -144,6 +144,26 @@ public class DiagramRegistry {
 					@Override
 					public int getDiagramVisualID(IFile modelFile, EObject modelRoot) {
 						return org.openiaml.model.diagram.domain_object.part.IamlVisualIDRegistry.getDiagramVisualID(modelRoot);
+					}
+			
+		});
+		
+		editors.put("iaml_domain_object_instance", new IamlDiagramRegistryOptions(
+				org.openiaml.model.diagram.domain_object_instance.edit.parts.DomainObjectInstanceEditPart.MODEL_ID,
+				org.openiaml.model.diagram.domain_object_instance.edit.parts.DomainObjectInstanceEditPart.VISUAL_ID,
+				org.openiaml.model.diagram.domain_object_instance.part.IamlDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT,
+				org.openiaml.model.diagram.domain_object_instance.part.IamlDiagramEditorUtil.getSaveOptions(),
+				org.openiaml.model.diagram.domain_object_instance.part.Messages.IamlNewDiagramFileWizard_InitDiagramCommand,
+				org.openiaml.model.diagram.domain_object_instance.part.Messages.IamlNewDiagramFileWizard_IncorrectRootError) {
+
+					@Override
+					public void openDiagram(Resource diagramResource) throws PartInitException {						
+						org.openiaml.model.diagram.domain_object_instance.part.IamlDiagramEditorUtil.openDiagram(diagramResource);
+					}
+					
+					@Override
+					public int getDiagramVisualID(IFile modelFile, EObject modelRoot) {
+						return org.openiaml.model.diagram.domain_object_instance.part.IamlVisualIDRegistry.getDiagramVisualID(modelRoot);
 					}
 			
 		});
@@ -339,6 +359,7 @@ public class DiagramRegistry {
 				options.initMessage,
 				affectedFiles) {
 
+			@Override
 			protected CommandResult doExecuteWithResult(
 					IProgressMonitor monitor, IAdaptable info)
 					throws ExecutionException {

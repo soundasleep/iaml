@@ -1,12 +1,12 @@
 <p>
-When the results of a {@model SelectWire} are evaluated, the resulting result set 
+When the results of a {@model SelectWire} are evaluated, the resulting result set
 is not stored in memory. That is, if the underlying view changes (objects are inserted
-or removed), the users' view will be updated accordingly. For example, 
-{@model #next next()} will skip over deleted results, possibly undesirably.
-</p> 
+or removed), the users' view will be updated accordingly. For example,
+{@model DomainObjectInstance#next next()} will skip over deleted results, possibly undesirably.
+</p>
 
 <p>
 You are therefore advised to use the "hasNext" and "hasPrevious" {@model PrimitiveCondition}s
 that are provided in the {@model DomainObjectInstance}, and connecting a
-{@model NavigateWire fail wire} if necessary.
+{@model NavigateAction fail wire} if necessary.
 </p>

@@ -701,8 +701,8 @@ end
  * may require a valid domain instance, for example - even though it hasn't been
  * set yet).
  *
- * @implementation Operation,Scope
- *		All {@model OperationCall operation calls} to {@model Operation}s contained
+ * @implementation Operation,OperationCallNode,Scope
+ *		All {@model OperationCallNode operation calls} to {@model Operation}s contained
  *		within {@model Scope}s are first evaluated for any
  * 		{@model Scope#onAccess} {@model EventTrigger events}.
  * @implementation LoginHandler

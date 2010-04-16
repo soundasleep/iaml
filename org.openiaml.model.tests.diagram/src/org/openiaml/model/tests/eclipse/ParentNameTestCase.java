@@ -13,7 +13,7 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
 import org.openiaml.model.diagram.custom.commands.GmfInferenceHandler;
-import org.openiaml.model.diagram.edit.parts.CompositeOperationEditPart.ExtendedCompositeOperationFigure;
+import org.openiaml.model.diagram.edit.parts.CompositeOperationChangePart.ExtendedCompositeOperationFigure;
 import org.openiaml.model.diagram.part.IamlDiagramEditor;
 import org.openiaml.model.diagram.part.IamlDiagramEditorPlugin;
 import org.openiaml.model.diagram.part.IamlDiagramEditorUtil;
@@ -120,7 +120,7 @@ public class ParentNameTestCase extends EclipseTestCaseHelper {
 		// what is the content pane?
 		IFigure fig = part.getContentPane();
 		assertTrue("CompositeOperation should be extended: " + fig.getClass(),
-				fig instanceof org.openiaml.model.diagram.edit.parts.CompositeOperationEditPart.ExtendedCompositeOperationFigure);
+				fig instanceof ExtendedCompositeOperationFigure);
 
 		ExtendedCompositeOperationFigure ext = (ExtendedCompositeOperationFigure) fig;
 		// check to see it has the correct initial parent value
@@ -162,7 +162,7 @@ public class ParentNameTestCase extends EclipseTestCaseHelper {
 		// what is the content pane?
 		IFigure fig_o = partOp.getContentPane();
 		assertTrue("CompositeOperation should be extended: " + fig_o.getClass(),
-				fig_o instanceof org.openiaml.model.diagram.edit.parts.CompositeOperationEditPart.ExtendedCompositeOperationFigure);
+				fig_o instanceof ExtendedCompositeOperationFigure);
 
 		ExtendedCompositeOperationFigure ext_o = (ExtendedCompositeOperationFigure) fig_o;
 		// check to see it has the correct initial parent value

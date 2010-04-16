@@ -89,8 +89,8 @@ public class DiagramRegistry {
 		Map<String,IamlDiagramRegistryOptions> editors = new HashMap<String,IamlDiagramRegistryOptions>();
 		
 		editors.put("iaml", new IamlDiagramRegistryOptions(
-				org.openiaml.model.diagram.edit.parts.InternetApplicationEditPart.MODEL_ID,
-				org.openiaml.model.diagram.edit.parts.InternetApplicationEditPart.VISUAL_ID,
+				org.openiaml.model.diagram.edit.parts.InternetApplicationChangePart.MODEL_ID,
+				org.openiaml.model.diagram.edit.parts.InternetApplicationChangePart.VISUAL_ID,
 				org.openiaml.model.diagram.part.IamlDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT,
 				org.openiaml.model.diagram.part.IamlDiagramEditorUtil.getSaveOptions(),
 				org.openiaml.model.diagram.part.Messages.IamlNewDiagramFileWizard_InitDiagramCommand,
@@ -109,8 +109,8 @@ public class DiagramRegistry {
 		});
 
 		editors.put("iaml_condition", new IamlDiagramRegistryOptions(
-				org.openiaml.model.diagram.condition.edit.parts.CompositeConditionEditPart.MODEL_ID,
-				org.openiaml.model.diagram.condition.edit.parts.CompositeConditionEditPart.VISUAL_ID,
+				org.openiaml.model.diagram.condition.edit.parts.CompositeConditionChangePart.MODEL_ID,
+				org.openiaml.model.diagram.condition.edit.parts.CompositeConditionChangePart.VISUAL_ID,
 				org.openiaml.model.diagram.condition.part.IamlDiagramEditorPlugin.DIAGRAM_PREFERENCES_HINT,
 				org.openiaml.model.diagram.condition.part.IamlDiagramEditorUtil.getSaveOptions(),
 				org.openiaml.model.diagram.condition.part.Messages.IamlNewDiagramFileWizard_InitDiagramCommand,

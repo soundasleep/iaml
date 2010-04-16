@@ -13,9 +13,9 @@ import org.openiaml.model.model.visual.Label;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
 /**
- * An {@model Email} connected to a {@model Form} via a {@model SetWire}
+ * An {@model Email} connected to an {@model InputForm} via a {@model SetWire}
  * should have {@model Property Properties} created for every field within the
- * {@model Form}.
+ * {@model InputForm}.
  *
  * @author jmwright
  */

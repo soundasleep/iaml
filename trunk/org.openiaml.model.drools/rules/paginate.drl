@@ -442,7 +442,7 @@ end
 
 /**
  * @implementation EventTrigger,DomainObjectInstance
- *		The '{@model Editable#onChange}' event for a {@model DomainObjectInstance}
+ *		The '{@model Changeable#onChange}' event for a {@model DomainObjectInstance}
  *		is executed when the results, that the {@model DomainObjectInstance} represent, change.
  */
 rule "Connect Instance.onChange to Results.update"

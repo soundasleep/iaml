@@ -348,7 +348,7 @@
       <details key="added" value="0.2"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Represents an iterator over instances of a {@model DomainObject}. Can be {@model #next navigated}."/>
+      <details key="documentation" value="Represents an iterator over instances of a {@model DomainObject}. Can be {@model DomainObjectInstance#next navigated}."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
         eType="#//DomainAttributeInstance" containment="true">
@@ -367,19 +367,19 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="onIterate" eType="#//EventTrigger"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="This {@model EventTrigger event} is called whenever the {@model #current current instance} changes."/>
+        <details key="documentation" value="This {@model EventTrigger event} is called whenever the {@model DomainObjectInstance#current current instance} changes."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="previous" eType="#//Operation"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Go to the previous result. Will throw an error if {@model #hasPrevious} would be false."/>
+        <details key="documentation" value="Go to the previous result. Will throw an error if {@model DomainObjectInstance#hasPrevious} would be false."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="next" eType="#//Operation"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Go to the next result. Will throw an error if {@model #hasNext} would be false."/>
+        <details key="documentation" value="Go to the next result. Will throw an error if {@model DomainObjectInstance#hasNext} would be false."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="reset" eType="#//Operation"
@@ -397,13 +397,13 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="hasPrevious" eType="#//Condition"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="True if navigating to the {@model #previous} result will not be out-of-bounds."/>
+        <details key="documentation" value="True if navigating to the {@model DomainObjectInstance#previous} result will not be out-of-bounds."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="hasNext" eType="#//Condition"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="True if navigating to the {@model #next} result will not be out-of-bounds."/>
+        <details key="documentation" value="True if navigating to the {@model DomainObjectInstance#next} result will not be out-of-bounds."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="empty" eType="#//Condition"
@@ -973,7 +973,7 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="CastNode" eSuperTypes="#//ActivityNode #//DataFlowEdgesSource #//DataFlowEdgeDestination">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Allows one {@model DataFlowEdgeSource data type} to be cast to another {@model DataFlowEdgeDestination data type}. Has an outgoing &quot;check&quot; {@model DataFlowEdge} which can be used to check for invalid casts (otherwise a failing conversion is silent)."/>
+        <details key="documentation" value="Allows one {@model DataFlowEdgesSource data type} to be cast to another {@model DataFlowEdgeDestination data type}. Has an outgoing &quot;check&quot; {@model DataFlowEdge} which can be used to check for invalid casts (otherwise a failing conversion is silent)."/>
       </eAnnotations>
     </eClassifiers>
   </eSubpackages>

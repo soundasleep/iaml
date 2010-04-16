@@ -7,6 +7,7 @@ import org.openiaml.docs.modeldoc.EMFClass;
 import org.openiaml.docs.modeldoc.Example;
 import org.openiaml.docs.modeldoc.FileReference;
 import org.openiaml.docs.modeldoc.JavaClass;
+import org.openiaml.docs.modeldoc.JavaMethod;
 import org.openiaml.docs.modeldoc.JavadocTagElement;
 import org.openiaml.docs.modeldoc.ModelDocumentation;
 import org.openiaml.docs.modeldoc.ModelReference;
@@ -37,12 +38,17 @@ public class HandleExampleTag implements ITagHandler {
 	
 	public void handleSemanticLink(String name,
 			JavadocTagElement description,
-			EMFClass target, Reference reference) {
+			EMFClass target, Reference reference) throws SemanticHandlerException {
 		
 		if (name.equals("@example")) {
 			
-			if (reference instanceof JavaClass) {
-				JavaClass jc = (JavaClass) reference;
+			if (reference instanceof JavaClass || reference instanceof JavaMethod) {
+				JavaClass jc = null;
+				if (reference instanceof JavaClass) {
+					jc = (JavaClass) reference;
+				} else {
+					jc = ((JavaMethod) reference).getJavaClass();
+				}
 
 				// make an inference semantics link
 				Example example = factory.createExample();
@@ -71,7 +77,7 @@ public class HandleExampleTag implements ITagHandler {
 				target.getExamples().add(example);
 
 			} else {
-				throw new IllegalArgumentException("Unknown example reference: " + reference + ", class: " + reference.getClass());
+				throw new SemanticHandlerException("Unknown example reference: " + reference + ", class: " + reference.getClass());
 			}
 
 		}

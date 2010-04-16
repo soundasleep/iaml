@@ -10,6 +10,7 @@ import java.util.List;
 import org.openiaml.docs.generation.BasicJavadocParser.IJavadocReferenceCreator;
 import org.openiaml.docs.generation.semantics.ITagHandler;
 import org.openiaml.docs.generation.semantics.SemanticFinder;
+import org.openiaml.docs.generation.semantics.SemanticHandlerException;
 import org.openiaml.docs.modeldoc.JavaElement;
 import org.openiaml.docs.modeldoc.JavadocTagElement;
 import org.openiaml.docs.modeldoc.ModelDocumentation;
@@ -52,6 +53,8 @@ public class LoadOAWImplementationNotes extends DocumentationHelper implements I
 			iterateOverTemplates(factory, root, file, plugin, startingPackage);
 		} catch (IOException e) {
 			throw new DocumentationGenerationException(e);
+		} catch (SemanticHandlerException e) {
+			throw new DocumentationGenerationException("Could not iterate over " + file + " in " + plugin + ": " + e.getMessage(), e);
 		}
 	}
 
@@ -63,7 +66,7 @@ public class LoadOAWImplementationNotes extends DocumentationHelper implements I
 	 * @throws IOException
 	 */
 	protected void iterateOverTemplates(final ModeldocFactory factory,
-			final ModelDocumentation root, File folder, String plugin, String pkg) throws IOException {
+			final ModelDocumentation root, File folder, String plugin, String pkg) throws IOException, SemanticHandlerException {
 
 		if (!folder.exists())
 			throw new RuntimeException(folder + " does not exist");
@@ -100,7 +103,7 @@ public class LoadOAWImplementationNotes extends DocumentationHelper implements I
 	 */
 	protected void loadInferenceSemantics(final ModeldocFactory factory,
 			ModelDocumentation root, String plugin, String pkg,
-			String name, File file) throws IOException {
+			String name, File file) throws IOException, SemanticHandlerException {
 		
 		// create a TemplateFile for this template file
 		final TemplateFile templateFile = factory.createTemplateFile();
@@ -131,8 +134,9 @@ public class LoadOAWImplementationNotes extends DocumentationHelper implements I
 	 * @param e
 	 * @param reference
 	 * @param root 
+	 * @throws SemanticHandlerException 
 	 */
-	protected void handleModelReferences(JavadocTagElement e, Reference reference, ModelDocumentation root) {
+	protected void handleModelReferences(JavadocTagElement e, Reference reference, ModelDocumentation root) throws SemanticHandlerException {
 		SemanticFinder finder = new SemanticFinder();
 		for (ITagHandler sem : getSemanticTagHandlers()) {
 			finder.findSemanticReferences(LoadOAWImplementationNotes.this, root, e, reference, sem);

@@ -12,6 +12,7 @@ import java.util.List;
 import org.openiaml.docs.generation.semantics.HandleInlineJavadoc;
 import org.openiaml.docs.generation.semantics.ITagHandler;
 import org.openiaml.docs.generation.semantics.SemanticFinder;
+import org.openiaml.docs.generation.semantics.SemanticHandlerException;
 import org.openiaml.docs.modeldoc.DroolsRule;
 import org.openiaml.docs.modeldoc.JavaElement;
 import org.openiaml.docs.modeldoc.JavadocTagElement;
@@ -112,7 +113,7 @@ public class BasicJavadocParser {
 	 */
 	public void findJavadocTagsInTextFile(File file, DocumentationHelper helper,
 			ModeldocFactory factory, ModelDocumentation root,
-			IJavadocReferenceCreator creator) throws IOException {
+			IJavadocReferenceCreator creator) throws IOException, SemanticHandlerException {
 		
 		// read file into array of lines
 		CharBuffer buf = CharBuffer.wrap(helper.readFile(file));
@@ -263,7 +264,7 @@ public class BasicJavadocParser {
 	 * @param reference
 	 * @param root 
 	 */
-	protected void handleModelReferences(JavadocTagElement e, Reference reference, ModelDocumentation root, DocumentationHelper helper) {
+	protected void handleModelReferences(JavadocTagElement e, Reference reference, ModelDocumentation root, DocumentationHelper helper) throws SemanticHandlerException {
 		SemanticFinder finder = new SemanticFinder();
 		for (ITagHandler sem : getSemanticTagHandlers()) {
 			finder.findSemanticReferences(helper, root, e, reference, sem);

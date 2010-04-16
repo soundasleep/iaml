@@ -145,6 +145,7 @@ In the future this guide will also contain information on topics such as:
   # Extending
     # [CreatingANewVisualEditor]
   # Integrating
+    # [GeneratingModelDoc]
   # Profiling
 
 For now you can see the [PluginIDs] of each of the modelling plugins.

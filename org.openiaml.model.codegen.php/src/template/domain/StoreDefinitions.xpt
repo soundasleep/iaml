@@ -205,7 +205,7 @@
 					$arg0);
 			if ($db_query === null) {
 				// could not update attribute successfully
-				throw new IamlRuntimeException("Could not update attribute '$attribute_name' into object '«to.eContainer»' successfully: could not find attribute in subclass tree");
+				throw new IamlRuntimeException("Could not update attribute '$attribute_name' into object '«safeName(to.eContainer)»' successfully: could not find attribute in subclass tree");
 			}
 		«ENDLET»
 	«ELSEIF model::DomainObjectInstance.isInstance(to)»
@@ -221,7 +221,7 @@
 					$arg0);
 			if ($db_query === null) {
 				// could not update attribute successfully
-				throw new IamlRuntimeException("Could not update attribute '$attribute_name' into object '«to»' successfully: could not find attribute in subclass tree");
+				throw new IamlRuntimeException("Could not update attribute '$attribute_name' into object '«safeName(to)»' successfully: could not find attribute in subclass tree");
 			}
 		«ENDLET»
 	«ELSE»

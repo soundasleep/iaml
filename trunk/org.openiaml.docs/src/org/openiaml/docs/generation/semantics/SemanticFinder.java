@@ -43,7 +43,7 @@ public class SemanticFinder {
 	 * @param reference a reference to provide later
 	 * @param handler the handler to call with matching references
 	 */
-	public void findSemanticReferences(DocumentationHelper helper, ModelDocumentation root, JavadocTagElement description, Reference reference, ITagHandler handler) {
+	public void findSemanticReferences(DocumentationHelper helper, ModelDocumentation root, JavadocTagElement description, Reference reference, ITagHandler handler) throws SemanticHandlerException {
 		for (String tag : tagsToIdentify) {
 			if (tag.equals(description.getName())) {
 				// cycle through all model elements

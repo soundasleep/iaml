@@ -23,6 +23,7 @@ import org.eclipse.jdt.core.dom.TextElement;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.openiaml.docs.generation.semantics.ITagHandler;
 import org.openiaml.docs.generation.semantics.SemanticFinder;
+import org.openiaml.docs.generation.semantics.SemanticHandlerException;
 import org.openiaml.docs.modeldoc.JavaClass;
 import org.openiaml.docs.modeldoc.JavaElement;
 import org.openiaml.docs.modeldoc.JavaMethod;
@@ -164,7 +165,7 @@ public class LoadSemanticsFromTests extends DocumentationHelper implements ILoad
 
 		private List<JavadocFragment> handleTagFragment(
 				List<?> fragments, 
-				JavaElement javaReference) {
+				JavaElement javaReference) throws SemanticHandlerException {
 			List<JavadocFragment> result = new ArrayList<JavadocFragment>();
 			for (Object o : fragments) {
 				if (o instanceof TagElement) {
@@ -223,8 +224,9 @@ public class LoadSemanticsFromTests extends DocumentationHelper implements ILoad
 		 * 
 		 * @param e
 		 * @param reference
+		 * @throws SemanticHandlerException 
 		 */
-		protected void handleModelReferences(JavadocTagElement e, Reference reference) {
+		protected void handleModelReferences(JavadocTagElement e, Reference reference) throws SemanticHandlerException {
 			SemanticFinder finder = new SemanticFinder();
 			for (ITagHandler sem : getSemanticTagHandlers()) {
 				finder.findSemanticReferences(LoadSemanticsFromTests.this, root, e, reference, sem);
@@ -280,9 +282,10 @@ public class LoadSemanticsFromTests extends DocumentationHelper implements ILoad
 		 * 
 		 * @param fragment
 		 * @return
+		 * @throws SemanticHandlerException 
 		 */
 		private JavadocTagElement handleTagFragment(
-				TagElement fragment, JavaElement javaReference) {
+				TagElement fragment, JavaElement javaReference) throws SemanticHandlerException {
 			List<Object> input = new ArrayList<Object>();
 			input.add(fragment);
 			List<JavadocFragment> result = handleTagFragment(input, javaReference);
@@ -294,30 +297,33 @@ public class LoadSemanticsFromTests extends DocumentationHelper implements ILoad
 
 		@Override
 		public boolean visit(Javadoc node) {
-			if (node.getParent() instanceof TypeDeclaration) {
-				TypeDeclaration parent = (TypeDeclaration) node.getParent();
+			try {
+				if (node.getParent() instanceof TypeDeclaration) {
+					TypeDeclaration parent = (TypeDeclaration) node.getParent();
 				
-				if (parentMatches(parent, cls)) {					
-					for (Object o : node.tags()) {
-						TagElement tag = (TagElement) o;
-						JavadocTagElement docs = handleTagFragment(tag, cls);
-						cls.getJavadocs().add(docs);
+					if (parentMatches(parent, cls)) {					
+						for (Object o : node.tags()) {
+							TagElement tag = (TagElement) o;
+							JavadocTagElement docs = handleTagFragment(tag, cls);
+							cls.getJavadocs().add(docs);
+						}
 					}
-				}
-		
-			} else if (node.getParent() instanceof MethodDeclaration) {
-				// a method
-				MethodDeclaration parent = (MethodDeclaration) node.getParent();
-				
-				JavaMethod method = getMethodFor(parent, cls);
-				if (method != null) {
-					for (Object o : node.tags()) {
-						TagElement tag = (TagElement) o;
-						JavadocTagElement docs = handleTagFragment(tag, method);
-						method.getJavadocs().add(docs);
+				} else if (node.getParent() instanceof MethodDeclaration) {
+					// a method
+					MethodDeclaration parent = (MethodDeclaration) node.getParent();
+					
+					JavaMethod method = getMethodFor(parent, cls);
+					if (method != null) {
+						for (Object o : node.tags()) {
+							TagElement tag = (TagElement) o;
+							JavadocTagElement docs = handleTagFragment(tag, method);
+							method.getJavadocs().add(docs);
+						}
 					}
+					
 				}
-				
+			} catch (SemanticHandlerException e) {
+				throw new RuntimeException("Could not process node '" + node + "': " + e.getMessage(), e);
 			}
 
 			return super.visit(node);

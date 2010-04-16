@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.openiaml.docs.generation.BasicJavadocParser.IJavadocReferenceCreator;
 import org.openiaml.docs.generation.semantics.ITagHandler;
+import org.openiaml.docs.generation.semantics.SemanticHandlerException;
 import org.openiaml.docs.modeldoc.DroolsPackage;
 import org.openiaml.docs.modeldoc.DroolsRule;
 import org.openiaml.docs.modeldoc.JavaElement;
@@ -86,10 +87,11 @@ public class LoadSemanticsFromRules extends DocumentationHelper implements ILoad
 	 * @param plugin
 	 * @param file
 	 * @throws IOException 
+	 * @throws DocumentationGenerationException 
 	 */
 	protected void loadInferenceSemantics(final ModeldocFactory factory,
 			ModelDocumentation root, String plugin, String pkg,
-			String name, File file) throws IOException {
+			String name, File file) throws IOException, DocumentationGenerationException {
 		
 		// create a package for this rule file
 		final DroolsPackage drools = factory.createDroolsPackage();
@@ -99,17 +101,21 @@ public class LoadSemanticsFromRules extends DocumentationHelper implements ILoad
 		root.getReferences().add(drools);
 		
 		BasicJavadocParser parser = new BasicJavadocParser(getSemanticTagHandlers());
-		parser.findJavadocTagsInTextFile(file, this, factory, root, new IJavadocReferenceCreator() {
-			
-			public JavaElement createReference(String[] lines, int line) {
-				DroolsRule rule = createDroolsRule(factory, line, lines);
-				if (rule != null) {
-					drools.getRules().add(rule);
+		try {
+			parser.findJavadocTagsInTextFile(file, this, factory, root, new IJavadocReferenceCreator() {
+				
+				public JavaElement createReference(String[] lines, int line) {
+					DroolsRule rule = createDroolsRule(factory, line, lines);
+					if (rule != null) {
+						drools.getRules().add(rule);
+					}
+					return rule;
 				}
-				return rule;
-			}
-			
-		});
+				
+			});
+		} catch (SemanticHandlerException e) {
+			throw new DocumentationGenerationException("Could not process rule file '" + file + "': " + e.getMessage(), e);
+		}
 		
 	}
 

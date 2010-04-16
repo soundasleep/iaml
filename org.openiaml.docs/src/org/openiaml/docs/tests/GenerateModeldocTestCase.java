@@ -4,10 +4,12 @@
 package org.openiaml.docs.tests;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -26,6 +28,9 @@ import org.openiaml.docs.generation.DocumentationGenerationException;
 import org.openiaml.docs.generation.DocumentationGenerator;
 import org.openiaml.docs.generation.DocumentationHelper;
 import org.openiaml.docs.generation.codegen.ModeldocCodeGenerator;
+import org.openiaml.docs.modeldoc.EMFAttribute;
+import org.openiaml.docs.modeldoc.EMFClass;
+import org.openiaml.docs.modeldoc.EMFReference;
 import org.openiaml.docs.modeldoc.JavaClass;
 import org.openiaml.docs.modeldoc.JavaElement;
 import org.openiaml.docs.modeldoc.JavaMethod;
@@ -35,6 +40,7 @@ import org.openiaml.docs.modeldoc.JavadocTextElement;
 import org.openiaml.docs.modeldoc.ModelDocumentation;
 import org.openiaml.docs.modeldoc.ModeldocFactory;
 import org.openiaml.model.ModelLoader;
+import org.openiaml.model.ModelLoader.ModelLoadException;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.visual.VisualPackage;
 import org.openiaml.model.tests.model.ContainmentTestCase;
@@ -307,6 +313,63 @@ public class GenerateModeldocTestCase extends TestCase {
 			 return getDescription(m.getJavaClass()) + "#" + m.getName() + "()";
 		}
 		return p.toString();
+	}
+	
+	/**
+	 * Issue 167: make sure all model elements have ModelDoc. 
+	 */
+	public void testAllElementsHaveJavadocs() throws ModelLoadException {
+		
+		EObject root = ModelLoader.load("test.modeldoc");
+		ModelDocumentation doc = (ModelDocumentation) root;
+		
+		List<String> violations = new ArrayList<String>();
+		
+		for (EMFClass cls : doc.getClasses()) {
+			if (isTaglineEmpty(cls.getTagline())) {
+				violations.add("Class: " + cls.getName());
+			}
+			
+			for (EMFReference ref : cls.getReferences()) {
+				if (isTaglineEmpty(ref.getTagline())) {
+					violations.add("Reference: " + cls.getName() + "#" + ref.getName());
+				}
+			}
+			
+			for (EMFAttribute attr : cls.getAttributes()) {
+				if (isTaglineEmpty(attr.getTagline())) {
+					violations.add("Attribute: " + cls.getName() + "#" + attr.getName());
+				}
+			}
+
+		}
+		
+		// print out all violations for easy debugging
+		for (String v : violations) {
+			System.out.println(v);
+		}
+		assertEquals("Not all model elements had documentation", 0, violations.size());
+				
+	}
+
+	/**
+	 * @param tagline
+	 * @return
+	 */
+	private boolean isTaglineEmpty(JavadocTagElement tagline) {
+		if (tagline == null)
+			return true;
+		
+		StringBuffer buf = new StringBuffer();
+		for (JavadocFragment f : tagline.getFragments()) {
+			if (f instanceof JavadocTextElement) {
+				buf.append(((JavadocTextElement) f).getValue());
+			} else if (f instanceof JavadocTagElement) {
+				buf.append(((JavadocTagElement) f).getName());
+			}
+		}
+		
+		return buf.toString().trim().isEmpty();
 	}
 	
 }

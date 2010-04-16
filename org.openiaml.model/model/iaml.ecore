@@ -22,21 +22,43 @@
       <details key="changed" value="0.4.2 to abstract"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//WireSource"
-        eOpposite="#//WireSource/outWires"/>
+        eOpposite="#//WireSource/outWires">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The source of a {@model Wire}."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//WireDestination"
-        eOpposite="#//WireDestination/inWires"/>
+        eOpposite="#//WireDestination/inWires">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The target of a {@model Wire}."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="WireDestination" abstract="true" interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A possible destination for a {@model Wire}."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inWires" upperBound="-1"
-        eType="#//Wire" eOpposite="#//Wire/to"/>
+        eType="#//Wire" eOpposite="#//Wire/to">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A list of incoming {@model Wire}s."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="WireSource" abstract="true" interface="true"
       eSuperTypes="#//ShouldntContainWires">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="comment" value="temporarily contains wires until GMF bug is fixed "/>
     </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A possible source for a {@model Wire}."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outWires" upperBound="-1"
-        eType="#//Wire" eOpposite="#//Wire/from"/>
+        eType="#//Wire" eOpposite="#//Wire/from">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A list of outgoing {@model Wire}s."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EventTrigger" eSuperTypes="#//NamedElement #//WireSource #//ActionSource">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -51,7 +73,11 @@
       <details key="documentation" value="Represents a type of {@model DomainObjectInstance}."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
-        eType="#//DomainAttribute" containment="true"/>
+        eType="#//DomainAttribute" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A {@model DomainObject} can contain many {@model DomainAttribute}s; this can represent columns in a table row."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DomainAttribute" eSuperTypes="#//ApplicationElement #//ContainsWires #//wires/ParameterEdgesSource #//wires/ExtendsEdgesSource #//wires/ExtendsEdgeDestination #//Changeable">
     <eAnnotations source="http://openiaml.org/comment">
@@ -66,7 +92,11 @@
         <details key="comment" value="added in 0.4"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/plugin/org.eclipse.xsd/model/XSD.ecore#//XSDSimpleTypeDefinition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/plugin/org.eclipse.xsd/model/XSD.ecore#//XSDSimpleTypeDefinition">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The datatype of the {@model DomainAttribute} and its contained {@model Property fieldValue}."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActivityNode" abstract="true" eSuperTypes="#//GeneratedElement">
     <eAnnotations source="http://openiaml.org/comment">
@@ -84,7 +114,11 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Incoming values to an {@model Operation operation} executed by a {@model RunAction} can be accessed via Parameters."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/plugin/org.eclipse.xsd/model/XSD.ecore#//XSDSimpleTypeDefinition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/plugin/org.eclipse.xsd/model/XSD.ecore#//XSDSimpleTypeDefinition">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The datatype of the {@model Parameter}."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PrimitiveOperation" eSuperTypes="#//Operation #//ExecutionEdgesSource #//WireSource #//ActionSource">
     <eAnnotations source="http://openiaml.org/comment">
@@ -138,7 +172,11 @@
         <details key="added" value="0.2"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/plugin/org.eclipse.xsd/model/XSD.ecore#//XSDSimpleTypeDefinition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/plugin/org.eclipse.xsd/model/XSD.ecore#//XSDSimpleTypeDefinition">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The datatype of the {@model Property}."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StaticValue" eSuperTypes="#//NamedElement #//WireSource #//DataFlowEdgesSource #//wires/ParameterEdgesSource">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -232,6 +270,9 @@
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.3"/>
       </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The platform-dependent type of how the {@model DomainStore} is serialised."/>
+      </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataFlowEdge" eSuperTypes="#//GeneratedElement">
@@ -239,25 +280,51 @@
       <details key="documentation" value="Represents the flow of data from a {@model DataFlowEdgesSource data source} to a {@model DataFlowEdgeDestination data destination}."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//DataFlowEdgesSource"
-        eOpposite="#//DataFlowEdgesSource/outFlows"/>
+        eOpposite="#//DataFlowEdgesSource/outFlows">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The source element of the {@model DataFlowEdge}."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//DataFlowEdgeDestination"
-        eOpposite="#//DataFlowEdgeDestination/inFlows"/>
+        eOpposite="#//DataFlowEdgeDestination/inFlows">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The target element of the {@model DataFlowEdge}."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataFlowEdgeDestination" abstract="true"
       interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A possible destination for a {@model DataFlowEdge}."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inFlows" upperBound="-1"
-        eType="#//DataFlowEdge" eOpposite="#//DataFlowEdge/to"/>
+        eType="#//DataFlowEdge" eOpposite="#//DataFlowEdge/to">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A list of incoming {@model DataFlowEdge}s."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataFlowEdgesSource" abstract="true"
       interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A possible source for a {@model DataFlowEdge}."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outFlows" upperBound="-1"
-        eType="#//DataFlowEdge" eOpposite="#//DataFlowEdge/from"/>
+        eType="#//DataFlowEdge" eOpposite="#//DataFlowEdge/from">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A list of outgoing {@model DataFlowEdge}s."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TemporaryVariable" eSuperTypes="#//NamedElement #//DataFlowEdgesSource #//DataFlowEdgeDestination">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Temporary storage of values contained within an {@model Operation} which will be lost once the operation is completed."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/plugin/org.eclipse.xsd/model/XSD.ecore#//XSDSimpleTypeDefinition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/plugin/org.eclipse.xsd/model/XSD.ecore#//XSDSimpleTypeDefinition">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The datatype of the {@model TemporaryVariable}."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionEdge" eSuperTypes="#//GeneratedElement #//NamedElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -273,21 +340,37 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionEdgeDestination" abstract="true"
       interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A possible destination for a {@model ExecutionEdge}."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inExecutions" upperBound="-1"
         eType="#//ExecutionEdge" eOpposite="#//ExecutionEdge/to"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionEdgesSource" abstract="true"
       interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A possible source for a {@model ExecutionEdge}."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outExecutions" upperBound="-1"
         eType="#//ExecutionEdge" eOpposite="#//ExecutionEdge/from"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ConditionalEdge" eSuperTypes="#//ExecutionEdge #//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConditionalEdge" eSuperTypes="#//ExecutionEdge #//NamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Allows for {@model Condition}s to be attached to {@model ConditionEdgeDestination elements}."/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DynamicApplicationElementSet" eSuperTypes="#//ApplicationElement #//wires/ParameterEdgesSource">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A component that allows the virtual abstraction of elements at runtime through a {@model DynamicApplicationElementSet#query query}."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="query" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ContainsWires" abstract="true" interface="true">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="changed" value="0.4.3 added 'parameterEdges' containment reference"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A generic container of {@model Wire}s, {@model Action}s and other edges."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="wires" upperBound="-1"
         eType="#//Wire" containment="true"/>
@@ -311,6 +394,9 @@
     <eAnnotations source="http://openiaml.org/comment">
       <details key="comment" value="classes that extend this SHOULDN'T contain wires, but GMF's limitations require it (see bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=249717)"/>
     </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A temporary marker for classes that &lt;em>shouldn't&lt;em> {@model ContainsWires contain wires}, but GMF limitations require it."/>
+    </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="GeneratedElement" abstract="true" interface="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -325,7 +411,11 @@
         <details key="documentation" value="A list of {@model GeneratesElements elements} that generated this element; conversely, {@model GeneratesElements#overridden overriding} the source will prevent {@model GeneratedElement this element} from being created."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isGenerated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isGenerated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="True if the current element has been generated."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         iD="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -340,8 +430,16 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="GeneratesElements" abstract="true" interface="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="generatedElements" upperBound="-1"
-        eType="#//GeneratedElement" eOpposite="#//GeneratedElement/generatedBy"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="overridden" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        eType="#//GeneratedElement" eOpposite="#//GeneratedElement/generatedBy">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A list of {@model GeneratedElement}s that this element has generated."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="overridden" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="If a {@model GeneratesElements} is &lt;em>overridden&lt;/em>, then this element will not {@model GeneratesElements#generatedElements generate any elements directly}."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DomainObjectInstance" eSuperTypes="#//ApplicationElement #//ContainsWires #//wires/ParameterEdgeDestination #//wires/ParameterEdgesSource #//Changeable">
     <eAnnotations source="http://openiaml.org/comment">
@@ -362,6 +460,9 @@
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.3"/>
         <details key="changed" value="0.4.3 to default 'false' instead of 'true'"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="If &lt;code>true&lt;/code>, then changes to the {@model DomainObjectInstance#attributes} of this instance will automatically be saved. Otherwise, the 'save' operation must be called."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="onIterate" eType="#//EventTrigger"
@@ -430,9 +531,17 @@
       <details key="changed" value="0.4: 'domainObjects', 'domainViews', 'domainInstances' references removed&#xD;&#xA;0.4.2: renamed from 'Scope' to 'AbstractScope'; added 'gate' reference"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="entryGate" eType="#//components/EntryGate"
-        containment="true"/>
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="All {@model Scope} accesses must first execute this {@model EntryGate}."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="exitGate" eType="#//components/ExitGate"
-        containment="true"/>
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="All {@model Scope} accesses must finally execute this {@model ExitGate} before moving to a different {@model Scope}."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
         eType="#//StaticValue" containment="true">
       <eAnnotations source="http://openiaml.org/comment">
@@ -455,7 +564,11 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="scopes" upperBound="-1"
-        eType="#//Scope" containment="true"/>
+        eType="#//Scope" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A {@model Scope} can contain many children {@model Scope}s."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Condition" abstract="true" eSuperTypes="#//WireSource #//DataFlowEdgesSource #//NamedElement #//wires/ConditionEdgesSource">
     <eAnnotations source="http://openiaml.org/comment">
@@ -490,8 +603,15 @@
     <eAnnotations source="http://openiaml.org/comment">
       <details key="comment" value="added in 0.2"/>
     </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Represents an element which can directly contain {@model Condition}s."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="conditions" upperBound="-1"
-        eType="#//Condition" containment="true"/>
+        eType="#//Condition" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A list of contained {@model Condition}s."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DomainAttributeInstance" eSuperTypes="#//ApplicationElement #//wires/ExtendsEdgesSource #//wires/ExtendsEdgeDestination #//Changeable">
     <eAnnotations source="http://openiaml.org/comment">
@@ -507,7 +627,11 @@
         <details key="changed" value="0.4.3 to default 'false' instead of 'true'"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/plugin/org.eclipse.xsd/model/XSD.ecore#//XSDSimpleTypeDefinition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/plugin/org.eclipse.xsd/model/XSD.ecore#//XSDSimpleTypeDefinition">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The datatype of the {@model DomainAttributeInstance} and its contained {@model Property fieldValue}."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="QueryParameter" eSuperTypes="#//NamedElement #//WireSource #//DataFlowEdgesSource #//wires/ParameterEdgesSource">
     <eAnnotations source="http://openiaml.org/comment">
@@ -516,10 +640,18 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Represents a query parameter from the browser's URI string."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="If set, provides a default value for this {@model QueryParameter}. This will prevent the application failing if the parameter has not been provided."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CanBeSynced" abstract="true" interface="true"
-      eSuperTypes="#//NamedElement #//GeneratedElement #//GeneratesElements #//ContainsWires #//ContainsOperations #//ContainsConditions #//WireSource #//WireDestination"/>
+      eSuperTypes="#//NamedElement #//GeneratedElement #//GeneratesElements #//ContainsWires #//ContainsOperations #//ContainsConditions #//WireSource #//WireDestination">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Represents something that can be synchronised through a {@model SyncWire} or {@model SetWire}."/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Changeable" abstract="true" interface="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Represents something that can register when it {@model Changeable#onChange can change}."/>
@@ -528,6 +660,9 @@
         containment="true">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="changed" value="added in 0.4.4"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This {@model EventTrigger} is executed whenever it 'changes'."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -540,6 +675,9 @@
       <eAnnotations source="http://openiaml.org/comment">
         <details key="changed" value="added in 0.4.4"/>
       </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This {@model EventTrigger} is executed whenever it is accessed."/>
+      </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Action" abstract="true" eSuperTypes="#//GeneratedElement">
@@ -547,12 +685,20 @@
       <details key="documentation" value="An {@mode Action} represents the runtime feature of the {@model EventTrigger Event}-{@model Condition}-{@model Action} paradigm. Also see: {@model Wire}"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//ActionSource"
-        eOpposite="#//ActionSource/outActions"/>
+        eOpposite="#//ActionSource/outActions">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The source element for the {@model Action}."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//ActionDestination"
-        eOpposite="#//ActionDestination/inActions"/>
+        eOpposite="#//ActionDestination/inActions">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The target element for the {@model Action}."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="priority" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="{@model RunAction}s are run in order of descending priority; that is, a higher priority {@model RunAction} will execute first."/>
+        <details key="documentation" value="{@model Action}s are run in order of descending priority; that is, a higher priority {@model Action} will execute first."/>
       </eAnnotations>
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.2"/>
@@ -560,6 +706,9 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActionDestination" abstract="true" interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A possible destination for an {@model Action}."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inActions" upperBound="-1"
         eType="#//Action" eOpposite="#//Action/to"/>
   </eClassifiers>
@@ -567,6 +716,9 @@
       eSuperTypes="#//ShouldntContainWires">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="comment" value="temporarily contains wires until GMF bug is fixed "/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A possible source for an {@model Action}."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outActions" upperBound="-1"
         eType="#//Action" eOpposite="#//Action/from"/>
@@ -606,7 +758,11 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A single text field, storing a single text value, which may be edited by the user."/>
       </eAnnotations>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/plugin/org.eclipse.xsd/model/XSD.ecore#//XSDSimpleTypeDefinition"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/plugin/org.eclipse.xsd/model/XSD.ecore#//XSDSimpleTypeDefinition">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The datatype of the {@model InputTextField} and its contained {@model Property fieldValue}."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Button" eSuperTypes="#//VisibleThing #//ActionSource">
       <eAnnotations source="http://openiaml.org/comment">
@@ -1025,7 +1181,11 @@
         <details key="documentation" value="When placed into a {@model Frame} or {@model Session}, enforces that users need to login via this LoginHandler first. Also supports logout."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1"
-          eType="#//components/LoginHandlerTypes"/>
+          eType="#//components/LoginHandlerTypes">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The type of {@model LoginHandler}, used to dictate the subsequently completed model elements."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="AccessControlHandler" eSuperTypes="#//GeneratesElements #//wires/ParameterEdgeDestination #//users/RequiresEdgesSource #//ApplicationElement #//ContainsWires">
       <eAnnotations source="http://openiaml.org/comment">
@@ -1070,8 +1230,8 @@
       <eLiterals name="PROPERTIES_FILE" value="1"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="EmptyDomainClass" abstract="true">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="comment" value="this exists solely to ensure DomainProviderFactory is generated in .genmodel; otherwise GMF complains"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This exists solely to ensure DomainProviderFactory is generated in .genmodel; otherwise GMF complains."/>
       </eAnnotations>
     </eClassifiers>
   </eSubpackages>
@@ -1084,7 +1244,11 @@
         <details key="documentation" value="Contains {@model Role Roles} and {@model Permission Permissions}."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="permissions" upperBound="-1"
-          eType="#//users/Permission" containment="true"/>
+          eType="#//users/Permission" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="A list of {@model Permission}s that this {@model UserStore} can provide."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Role" eSuperTypes="#//DomainObject #//users/RequiresEdgeDestination #//users/ProvidesEdgesSource">
       <eAnnotations source="http://openiaml.org/comment">

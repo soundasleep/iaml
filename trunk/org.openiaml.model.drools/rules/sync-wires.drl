@@ -388,6 +388,14 @@ rule "Connect parameter for Session.init to incoming SyncWires (contained in Fra
 		queue.add(pw2, drools);		
 end
 
+/**
+ * @inference DomainAttributeInstance,SyncWire
+ *		A {@model DomainAttributeInstance} which eventually {@model ExtendsEdge extends} a {@model DomainAttribute#primaryKey primary key}
+ *		will not generate a {@model InputTextField} to edit it.
+ * @implementation DomainAttributeInstance
+ *		Currently, it is not possible to modify a {@model DomainAttributeInstance}
+ *		that is {@model ExtendsEdge derived} or directly a {@model DomainAttribute#primaryKey primary key}.
+ */
 rule "Refresh New Instance Object mappings (except for generated primary keys) when sync connected to Forms: create text fields"
 	when
 		sync : SyncWire(  )
@@ -403,6 +411,9 @@ rule "Refresh New Instance Object mappings (except for generated primary keys) w
 		# at the top of the attribute inheritance heirarchy, not
 		# a generated primary key
 		eval( functions.notExtendingGeneratedPrimaryKey( originalAttribute ) )
+
+		# or ANY type of primary key
+		eval( functions.notExtendingPrimaryKey( originalAttribute ) )
 		
 		not ( tf : InputTextField( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
 						

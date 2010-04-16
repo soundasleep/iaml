@@ -422,11 +422,13 @@
 		}
 	«ELSE»
 		// throw an alert box
+		«REM»
 		// NOTE: alert boxes currently aren't owned by any element; they are a direct
 		// hack to display something immediately. eventually, this should be replaced
 		// with a generic alert(), that will render an alert box in the most appropriate
 		// way for the alert container. 
-		alert(«EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»);
+		«ENDREM»
+		alert_without_repeat(«EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»);
 	«ENDIF»
 
 	«REM»continue«ENDREM»

@@ -321,6 +321,25 @@ public class DroolsHelperFunctions {
 	}
 	
 	/**
+	 * For a DomainAttribute, this returns true if it eventually
+	 * extends a DomainAttribute which is a primary key.
+	 */
+	public boolean notExtendingPrimaryKey(DomainAttribute attr) {
+		if (attr.isPrimaryKey()) {
+			return false;
+		}
+		for (ExtendsEdge w : attr.getOutExtendsEdges()) {
+			if (w.getTo() instanceof DomainAttribute) {
+				if (!notExtendingPrimaryKey((DomainAttribute) w.getTo())) {
+					// we are extending a generated primary key
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	/**
 	 * Does the given session directly or indirectly contain the given object? 
 	 * 
 	 * @param session the session to check against

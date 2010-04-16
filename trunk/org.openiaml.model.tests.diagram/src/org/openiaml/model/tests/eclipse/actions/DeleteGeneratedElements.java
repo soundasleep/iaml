@@ -139,19 +139,19 @@ public class DeleteGeneratedElements extends AbstractActionTestCase<IFile> {
 
 		assertEqualsOneOf(new String[] {
 				"The generated element 'InputTextField 'target'' contains elements which are connected to non-generated elements:\n\n" +
-				"EventTrigger onEdit\n" +
+				"EventTrigger onChange\n" +
 				"CompositeOperation 'update'\n\n" +
 				"Deleting 'InputTextField 'target'' will also delete these generated elements, currently in use:\n\n" +
 				"CompositeOperation 'update'\n" +
-				"EventTrigger onEdit",
+				"EventTrigger onChange",
 
 				// swap Event/Operation around
 				"The generated element 'InputTextField 'target'' contains elements which are connected to non-generated elements:\n\n" +
 				"CompositeOperation 'update'\n" +
-				"EventTrigger onEdit\n\n" +
+				"EventTrigger onChange\n\n" +
 				"Deleting 'InputTextField 'target'' will also delete these generated elements, currently in use:\n\n" +
 				"CompositeOperation 'update'\n" +
-				"EventTrigger onEdit"		
+				"EventTrigger onChange"		
 		}, handler.getConfirmationMessage(toConfirm));
 	}
 

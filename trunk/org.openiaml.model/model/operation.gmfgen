@@ -15,6 +15,7 @@
     <containsShortcutsTo>iaml_domain_object</containsShortcutsTo>
     <containsShortcutsTo>iaml_session</containsShortcutsTo>
     <containsShortcutsTo>iaml_frame</containsShortcutsTo>
+    <containsShortcutsTo>iaml_email</containsShortcutsTo>
     <shortcutsProvidedFor>iaml_domain_object_instance</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_condition</shortcutsProvidedFor>
@@ -27,6 +28,7 @@
     <shortcutsProvidedFor>iaml_domain_object</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_session</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_frame</shortcutsProvidedFor>
+    <shortcutsProvidedFor>iaml_email</shortcutsProvidedFor>
     <domainDiagramElement href="iaml.genmodel#//model/CompositeOperation"/>
     <topLevelNodes canonicalEditPolicyClassName="CompositeOperation2CanonicalEditPolicy" createCommandClassName="CompositeOperationCreateCommand" editPartClassName="CompositeOperation2EditPart" graphicalNodeEditPolicyClassName="CompositeOperationGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="CompositeOperation2ItemSemanticEditPolicy" notationViewFactoryClassName="CompositeOperationViewFactory" visualID="2014">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -359,7 +361,7 @@
         </modelFacet>
       </labels>
     </topLevelNodes>
-    <topLevelNodes canonicalEditPolicyClassName="CastNodeCanonicalEditPolicy" createCommandClassName="CastNodeCreateCommand" editPartClassName="CastNodeEditPart" graphicalNodeEditPolicyClassName="CastNodeGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="CastNodeItemSemanticEditPolicy" visualID="2031">
+    <topLevelNodes canonicalEditPolicyClassName="CastNodeCanonicalEditPolicy" createCommandClassName="CastNodeCreateCommand" editPartClassName="CastNodeEditPart" graphicalNodeEditPolicyClassName="CastNodeGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="CastNodeItemSemanticEditPolicy" notationViewFactoryClassName="CastNodeViewFactory" visualID="2031">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType editHelperClassName="CastNodeEditHelper" xsi:type="gmfgen:MetamodelType"/>
       <viewmap classBody="&#10;/**&#10; * @generated&#10; */&#10;public class CastNodeFigure extends org.eclipse.draw2d.RoundedRectangle {&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureCastNodeLabelFigure; &#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public CastNodeFigure() {&#10;&#9;&#9;&#10;&#9;org.eclipse.draw2d.FlowLayout layoutThis = new org.eclipse.draw2d.FlowLayout();&#10;&#9;layoutThis.setStretchMinorAxis(false);&#10;&#9;layoutThis.setMinorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#10;);&#10;&#10;&#9;layoutThis.setMajorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#10;);&#10;&#9;layoutThis.setMajorSpacing(5);&#10;&#9;layoutThis.setMinorSpacing(5);&#10;&#9;layoutThis.setHorizontal(false);&#10;&#10;&#9;this.setLayoutManager(layoutThis);&#10;&#10;&#9;&#9;this.setCornerDimensions(new org.eclipse.draw2d.geometry.Dimension(getMapMode().DPtoLP(8)&#10;, getMapMode().DPtoLP(8)&#10;));&#10;this.setLineWidth(1);&#10;this.setLineStyle(org.eclipse.draw2d.Graphics.LINE_DASH);&#10;&#9;this.setBackgroundColor(THIS_BACK&#10;);&#10;this.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(3)&#10;, getMapMode().DPtoLP(3)&#10;, getMapMode().DPtoLP(3)&#10;, getMapMode().DPtoLP(3)&#10;));&#10;&#9;&#9;createContents();&#10;&#9;}&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private void createContents(){&#10;&#10;&#10;fFigureCastNodeLabelFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureCastNodeLabelFigure.setText(&quot;Cast&quot;);&#10;&#10;this.add(fFigureCastNodeLabelFigure);&#10;&#10;&#10;&#9;}&#10;&#10;&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private boolean myUseLocalCoordinates = false;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;protected boolean useLocalCoordinates() {&#10;&#9;&#9;return myUseLocalCoordinates;&#10;&#9;}&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#10;&#9;&#9;myUseLocalCoordinates = useLocalCoordinates;&#10;&#9;}&#10;&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureCastNodeLabelFigure() {&#10;&#9;&#9;return fFigureCastNodeLabelFigure;&#10;&#9;}&#10;&#10;&#10;}&#10;&#10;/**&#10; * @generated&#10; */&#10;static final org.eclipse.swt.graphics.Color THIS_BACK = new org.eclipse.swt.graphics.Color(null, 240, 240, 128);&#10;&#10;" className="CastNodeFigure" layoutType="FLOW_LAYOUT" xsi:type="gmfgen:InnerClassViewmap">
@@ -370,7 +372,7 @@
         <containmentMetaFeature href="iaml.genmodel#//model/CompositeOperation/nodes"/>
         <childMetaFeature href="iaml.genmodel#//model/CompositeOperation/nodes"/>
       </modelFacet>
-      <labels editPartClassName="WrappingLabel14EditPart" elementIcon="true" itemSemanticEditPolicyClassName="WrappingLabel14ItemSemanticEditPolicy" readOnly="true" visualID="5047">
+      <labels editPartClassName="WrappingLabel14EditPart" elementIcon="true" itemSemanticEditPolicyClassName="WrappingLabel14ItemSemanticEditPolicy" notationViewFactoryClassName="CastNodeLabelViewFactory" readOnly="true" visualID="5047">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureCastNodeLabelFigure" xsi:type="gmfgen:ParentAssignedViewmap"/>
         <modelFacet parser="//@labelParsers/@implementations.1"/>
@@ -486,9 +488,7 @@
       <children iD="org.openiaml.model.diagram.printing" kind="Printing" name="Printing" xsi:type="gmfgen:GenStandardPreferencePage"/>
       <children iD="org.openiaml.model.diagram.rulersAndGrid" kind="RulersAndGrid" name="Rulers And Grid" xsi:type="gmfgen:GenStandardPreferencePage"/>
     </preferencePages>
-  <containsShortcutsTo>iaml_email</containsShortcutsTo>
-<shortcutsProvidedFor>iaml_email</shortcutsProvidedFor>
-</diagram>
+  </diagram>
   <plugin iD="org.openiaml.model.diagram.operation" name="Iaml Diagram Plugin (Operation)" provider="www.openiaml.org" version="0.4.4.qualifier">
     <requiredPlugins>org.eclipse.draw2d</requiredPlugins>
     <requiredPlugins>org.eclipse.gmf.runtime.draw2d.ui</requiredPlugins>

@@ -7,7 +7,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.ui.IEditorPart;
-import org.openiaml.model.diagram.edit.parts.InternetApplicationEditPart;
+import org.openiaml.model.diagram.edit.parts.InternetApplicationChangePart;
 import org.openiaml.model.diagram.part.IamlDiagramEditor;
 
 /**
@@ -41,7 +41,7 @@ public class BreadcrumbTestCase extends EclipseTestCaseHelper {
 		// find what elements are displayed
 		IamlDiagramEditor editor = (IamlDiagramEditor) ep;
 		{
-			InternetApplicationEditPart iep = (InternetApplicationEditPart) editor.getDiagramEditPart();
+			InternetApplicationChangePart iep = (InternetApplicationChangePart) editor.getDiagramEditPart();
 			assertNotNull(iep);
 			assertEquals("InternetApplication", iep.getBreadcrumb()); // it has no name
 		}

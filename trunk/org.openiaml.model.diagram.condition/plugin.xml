@@ -262,17 +262,17 @@
       <?gmfgen generated="true"?>
       <modelingAssistantProvider class="org.openiaml.model.diagram.condition.providers.IamlModelingAssistantProvider">
          <Priority name="Lowest"/>
-         <object class="org.openiaml.model.diagram.condition.edit.parts.CompositeConditionEditPart" id="CompositeCondition_1000"/>
+         <object class="org.openiaml.model.diagram.condition.edit.parts.CompositeConditionChangePart" id="CompositeCondition_1000"/>
          <object class="org.openiaml.model.diagram.condition.edit.parts.ParameterEditPart" id="Parameter_2009"/>
          <object class="org.openiaml.model.diagram.condition.edit.parts.StartNodeEditPart" id="StartNode_2010"/>
          <object class="org.openiaml.model.diagram.condition.edit.parts.CancelNodeEditPart" id="CancelNode_2011"/>
          <object class="org.openiaml.model.diagram.condition.edit.parts.FinishNodeEditPart" id="FinishNode_2012"/>
-         <object class="org.openiaml.model.diagram.condition.edit.parts.DecisionConditionEditPart" id="DecisionCondition_2013"/>
+         <object class="org.openiaml.model.diagram.condition.edit.parts.DecisionConditionChangePart" id="DecisionCondition_2013"/>
          <object class="org.openiaml.model.diagram.condition.edit.parts.TemporaryVariableEditPart" id="TemporaryVariable_2014"/>
          <object class="org.openiaml.model.diagram.condition.edit.parts.PropertyEditPart" id="Property_2020"/>
          <object class="org.openiaml.model.diagram.condition.edit.parts.DecisionNodeEditPart" id="DecisionNode_2016"/>
-         <object class="org.openiaml.model.diagram.condition.edit.parts.PrimitiveOperationEditPart" id="PrimitiveOperation_2017"/>
-         <object class="org.openiaml.model.diagram.condition.edit.parts.CompositeOperationEditPart" id="CompositeOperation_2018"/>
+         <object class="org.openiaml.model.diagram.condition.edit.parts.PrimitiveOperationChangePart" id="PrimitiveOperation_2017"/>
+         <object class="org.openiaml.model.diagram.condition.edit.parts.CompositeOperationChangePart" id="CompositeOperation_2018"/>
          <object class="org.openiaml.model.diagram.condition.edit.parts.StaticValueEditPart" id="StaticValue_2019"/>
          <object class="org.openiaml.model.diagram.condition.edit.parts.CastNodeEditPart" id="CastNode_2021"/>
          <context elements="CompositeCondition_1000,Parameter_2009,StartNode_2010,CancelNode_2011,FinishNode_2012,DecisionCondition_2013,TemporaryVariable_2014,Property_2020,DecisionNode_2016,PrimitiveOperation_2017,CompositeOperation_2018,StaticValue_2019,CastNode_2021"/>
@@ -312,7 +312,7 @@
                name="%metatype.name.CompositeCondition_1000"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="CompositeCondition"
-               edithelper="org.openiaml.model.diagram.condition.edit.helpers.CompositeConditionEditHelper">
+               edithelper="org.openiaml.model.diagram.condition.edit.helpers.CompositeConditionChangeHelper">
             <param name="semanticHint" value="1000"/>
          </metamodelType>
       </metamodel>
@@ -362,7 +362,7 @@
                name="%metatype.name.DecisionCondition_2013"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="DecisionCondition"
-               edithelper="org.openiaml.model.diagram.condition.edit.helpers.DecisionConditionEditHelper">
+               edithelper="org.openiaml.model.diagram.condition.edit.helpers.DecisionConditionChangeHelper">
             <param name="semanticHint" value="2013"/>
          </metamodelType>
       </metamodel>
@@ -402,7 +402,7 @@
                name="%metatype.name.PrimitiveOperation_2017"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="PrimitiveOperation"
-               edithelper="org.openiaml.model.diagram.condition.edit.helpers.PrimitiveOperationEditHelper">
+               edithelper="org.openiaml.model.diagram.condition.edit.helpers.PrimitiveOperationChangeHelper">
             <param name="semanticHint" value="2017"/>
          </metamodelType>
       </metamodel>
@@ -412,7 +412,7 @@
                name="%metatype.name.CompositeOperation_2018"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="CompositeOperation"
-               edithelper="org.openiaml.model.diagram.condition.edit.helpers.CompositeOperationEditHelper">
+               edithelper="org.openiaml.model.diagram.condition.edit.helpers.CompositeOperationChangeHelper">
             <param name="semanticHint" value="2018"/>
          </metamodelType>
       </metamodel>
@@ -661,7 +661,7 @@
                <and>
                   <with variable="activePartId"><equals value="org.openiaml.model.diagram.condition.part.IamlDiagramEditorID"/></with>
                   <with variable="selection"><iterate ifEmpty="false"> 
-                     <instanceof value="org.openiaml.model.diagram.condition.edit.parts.CompositeConditionEditPart"/>
+                     <instanceof value="org.openiaml.model.diagram.condition.edit.parts.CompositeConditionChangePart"/>
                   </iterate></with>
                </and>
             </visibleWhen>

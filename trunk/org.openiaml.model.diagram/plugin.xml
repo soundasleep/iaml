@@ -273,18 +273,18 @@
       <?gmfgen generated="true"?>
       <modelingAssistantProvider class="org.openiaml.model.diagram.providers.IamlModelingAssistantProvider">
          <Priority name="Lowest"/>
-         <object class="org.openiaml.model.diagram.edit.parts.InternetApplicationEditPart" id="InternetApplication_1000"/>
+         <object class="org.openiaml.model.diagram.edit.parts.InternetApplicationChangePart" id="InternetApplication_1000"/>
          <object class="org.openiaml.model.diagram.edit.parts.EventTriggerEditPart" id="EventTrigger_2029"/>
-         <object class="org.openiaml.model.diagram.edit.parts.CompositeOperationEditPart" id="CompositeOperation_2014"/>
-         <object class="org.openiaml.model.diagram.edit.parts.PrimitiveOperationEditPart" id="PrimitiveOperation_2015"/>
+         <object class="org.openiaml.model.diagram.edit.parts.CompositeOperationChangePart" id="CompositeOperation_2014"/>
+         <object class="org.openiaml.model.diagram.edit.parts.PrimitiveOperationChangePart" id="PrimitiveOperation_2015"/>
          <object class="org.openiaml.model.diagram.edit.parts.DomainObjectEditPart" id="DomainObject_2016"/>
          <object class="org.openiaml.model.diagram.edit.parts.FrameEditPart" id="Frame_2030"/>
          <object class="org.openiaml.model.diagram.edit.parts.DynamicApplicationElementSetEditPart" id="DynamicApplicationElementSet_2018"/>
          <object class="org.openiaml.model.diagram.edit.parts.PropertyEditPart" id="Property_2032"/>
          <object class="org.openiaml.model.diagram.edit.parts.DomainStoreEditPart" id="DomainStore_2020"/>
-         <object class="org.openiaml.model.diagram.edit.parts.SessionEditPart" id="Session_2031"/>
+         <object class="org.openiaml.model.diagram.edit.parts.SessionChangePart" id="Session_2031"/>
          <object class="org.openiaml.model.diagram.edit.parts.LoginHandlerEditPart" id="LoginHandler_2022"/>
-         <object class="org.openiaml.model.diagram.edit.parts.CompositeConditionEditPart" id="CompositeCondition_2023"/>
+         <object class="org.openiaml.model.diagram.edit.parts.CompositeConditionChangePart" id="CompositeCondition_2023"/>
          <object class="org.openiaml.model.diagram.edit.parts.UserStoreEditPart" id="UserStore_2024"/>
          <object class="org.openiaml.model.diagram.edit.parts.EmailEditPart" id="Email_2033"/>
          <context elements="InternetApplication_1000,EventTrigger_2029,CompositeOperation_2014,PrimitiveOperation_2015,DomainObject_2016,Frame_2030,DynamicApplicationElementSet_2018,Property_2032,DomainStore_2020,Session_2031,LoginHandler_2022,CompositeCondition_2023,UserStore_2024,Email_2033"/>
@@ -324,7 +324,7 @@
                name="%metatype.name.InternetApplication_1000"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="InternetApplication"
-               edithelper="org.openiaml.model.diagram.edit.helpers.InternetApplicationEditHelper">
+               edithelper="org.openiaml.model.diagram.edit.helpers.InternetApplicationChangeHelper">
             <param name="semanticHint" value="1000"/>
          </metamodelType>
       </metamodel>
@@ -344,7 +344,7 @@
                name="%metatype.name.CompositeOperation_2014"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="CompositeOperation"
-               edithelper="org.openiaml.model.diagram.edit.helpers.CompositeOperationEditHelper">
+               edithelper="org.openiaml.model.diagram.edit.helpers.CompositeOperationChangeHelper">
             <param name="semanticHint" value="2014"/>
          </metamodelType>
       </metamodel>
@@ -354,7 +354,7 @@
                name="%metatype.name.PrimitiveOperation_2015"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="PrimitiveOperation"
-               edithelper="org.openiaml.model.diagram.edit.helpers.PrimitiveOperationEditHelper">
+               edithelper="org.openiaml.model.diagram.edit.helpers.PrimitiveOperationChangeHelper">
             <param name="semanticHint" value="2015"/>
          </metamodelType>
       </metamodel>
@@ -414,7 +414,7 @@
                name="%metatype.name.Session_2031"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="Session"
-               edithelper="org.openiaml.model.diagram.edit.helpers.SessionEditHelper">
+               edithelper="org.openiaml.model.diagram.edit.helpers.SessionChangeHelper">
             <param name="semanticHint" value="2031"/>
          </metamodelType>
       </metamodel>
@@ -434,7 +434,7 @@
                name="%metatype.name.CompositeCondition_2023"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="CompositeCondition"
-               edithelper="org.openiaml.model.diagram.edit.helpers.CompositeConditionEditHelper">
+               edithelper="org.openiaml.model.diagram.edit.helpers.CompositeConditionChangeHelper">
             <param name="semanticHint" value="2023"/>
          </metamodelType>
       </metamodel>
@@ -474,7 +474,7 @@
                name="%metatype.name.RunAction_4006"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="RunAction"
-               edithelper="org.openiaml.model.diagram.edit.helpers.RunActionEditHelper">
+               edithelper="org.openiaml.model.diagram.edit.helpers.RunActionChangeHelper">
             <param name="semanticHint" value="4006"/>
          </metamodelType>
       </metamodel>
@@ -494,7 +494,7 @@
                name="%metatype.name.NavigateAction_4007"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="NavigateAction"
-               edithelper="org.openiaml.model.diagram.edit.helpers.NavigateActionEditHelper">
+               edithelper="org.openiaml.model.diagram.edit.helpers.NavigateActionChangeHelper">
             <param name="semanticHint" value="4007"/>
          </metamodelType>
       </metamodel>
@@ -695,7 +695,7 @@
                <and>
                   <with variable="activePartId"><equals value="org.openiaml.model.diagram.part.IamlDiagramEditorID"/></with>
                   <with variable="selection"><iterate ifEmpty="false"> 
-                     <instanceof value="org.openiaml.model.diagram.edit.parts.InternetApplicationEditPart"/>
+                     <instanceof value="org.openiaml.model.diagram.edit.parts.InternetApplicationChangePart"/>
                   </iterate></with>
                </and>
             </visibleWhen>

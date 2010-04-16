@@ -106,6 +106,10 @@ public class ContainmentTestCase extends TestCase {
 				// see that all classes only belong to one containment
 				Map<EClass,EReference> containmentMap = new HashMap<EClass,EReference>();
 				for (EReference containment : test.getEAllContainments()) {
+					// ignore containments which are 0..1
+					if (containment.getLowerBound() == 0 && containment.getUpperBound() == 1)
+						continue;
+					
 					// see that all classes only belong to one containment
 					if (containment.getEType() instanceof EClass) {
 						EClass containmentType = (EClass) containment.getEType();

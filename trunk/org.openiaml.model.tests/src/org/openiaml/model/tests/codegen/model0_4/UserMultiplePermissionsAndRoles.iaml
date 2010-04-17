@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.1233afe61d2.26">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.1233afe61d2.26">
   <domainStores xsi:type="iaml.users:UserStore" id="users.1233afe655c.1c" name="user store">
     <children xsi:type="iaml.users:Role" id="users.1233afe655c.23" name="default role" inRequiresEdges="wires.1233afe62eb.82" outProvidesEdges="wires.1233afe62eb.36">
       <providesEdges id="wires.1233afe62eb.36" from="users.1233afe655c.23" to="users.1233afe655c.72"/>

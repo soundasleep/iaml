@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.126b0cb5dec.23">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.126b0cb5dec.23">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
   <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.20" name="External Page"/>
   <scopes xsi:type="iaml.scopes:Session" id="scopes.126b0cb5e69.4" name="Advertising Session">
@@ -14,10 +14,10 @@
       <executionEdges id="model.126b0cb5dec.68" name="n" from="operations.126b0cb5e69.15" to="operations.126b0cb5e69.14"/>
       <executionEdges id="model.126b0cb5dec.69" from="operations.126b0cb5e69.12" to="operations.126b0cb5e69.15"/>
     </conditions>
+    <properties id="model.126b0cb5dec.3e" name="ad viewed?" outFlows="model.126b0cb5dec.8a" inFlows="model.126b0cb5dec.182" defaultValue="false"/>
     <exitGate id="components.126b0cb5e69.5" name="View Ads Exit Gate" inConditionEdges="wires.126b0cb5e5a.17" outActions="wires.126b0cb5e5a.e" inActions="wires.126b0cb5e5a.10e">
       <actions xsi:type="iaml.wires:NavigateAction" id="wires.126b0cb5e5a.e" name="view ad" from="components.126b0cb5e69.5" to="visual.126b0cb5e5a.4a"/>
     </exitGate>
-    <properties id="model.126b0cb5dec.3e" name="ad viewed?" outFlows="model.126b0cb5dec.8a" inFlows="model.126b0cb5dec.182" defaultValue="false"/>
     <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.27" name="Page 1"/>
     <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.29" name="Page 2"/>
     <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.32" name="Page 3"/>

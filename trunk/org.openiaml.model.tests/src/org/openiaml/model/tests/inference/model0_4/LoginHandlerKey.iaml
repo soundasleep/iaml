@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.11e19f1adf3.1">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.11e19f1adf3.1">
   <scopes xsi:type="iaml.visual:Frame" id="visual.11e19f1b1ea.2" name="Home" inActions="wires.11e3802c67f.a"/>
   <scopes xsi:type="iaml.scopes:Session" id="scopes.11e1a0c9c91.5" name="my session">
     <properties id="model.11e37b8d89c.17" name="my login key" outWires="wires.11e37df5bde.d" inWires="wires.11e3802c67f.9" defaultValue="">

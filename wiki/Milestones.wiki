@@ -9,6 +9,7 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
 <wiki:toc max_depth="2" />
 
 =Release 0.1=
+([http://code.google.com/p/iaml/issues/list?can=1&q=label%3AMilestone-Release0.1 Resolved issues])
 ([http://journals.jevon.org/users/jevon-phd/entry/16760 Released] November 2008)
   # [Model0_1 Initial IAML model] that can describe initial requirements
   # Usability improvements
@@ -23,6 +24,7 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
   # Set up [Installation update site]
 
 =Release 0.2=
+([http://code.google.com/p/iaml/issues/list?can=1&q=label%3AMilestone-Release0.2 Resolved issues])
 ([http://journals.jevon.org/users/jevon-phd/entry/19062 Released] April 2009)
   # [Milestones Publish milestones]
   # [Model0_2 Expand IAML model]
@@ -37,6 +39,7 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
     * Test cases for code generation of all modelling elements
 
 =Release 0.3=
+([http://code.google.com/p/iaml/issues/list?can=1&q=label%3AMilestone-Release0.3 Resolved issues])
 ([http://journals.jevon.org/users/jevon-phd/entry/19718 Released] July 2009)
   # [Model0_3 Expand IAML model]
     * [IamlOperations Document existing atomic operations]
@@ -69,6 +72,7 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
     * [http://code.google.com/p/iaml/source/browse/#svn/trunk/org.openiaml.model.codegen.oaw/instrument/output Investigations into model-driven code coverage]
 
 ==Release 0.3.1==
+([http://code.google.com/p/iaml/issues/list?can=1&q=label%3AMilestone-Release0.3.1 Resolved issues])
 ([http://journals.jevon.org/users/jevon-phd/entry/19722 Released] July 2009)
   # Upgrade editor to Eclipse 3.5/GMF 2.2 ([http://code.google.com/p/iaml/issues/detail?id=50 issue 50])
   # Usability improvements
@@ -76,6 +80,7 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
     * Model element creation tools are now rendered in groups
 
 =Release 0.4=
+([http://code.google.com/p/iaml/issues/list?can=1&q=label%3AMilestone-Release0.4 Resolved issues])
 ([http://journals.jevon.org/users/jevon-phd/entry/19760 Released] October 2009)
   # [Model0_4 Expand IAML model]
     * [http://openiaml.org/model/LoginHandler Login Handlers] (domain instance and user)
@@ -100,6 +105,7 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
     * Diagram tests moved into separate bundle (issue 109)
 
 ==Release 0.4.1==
+([http://code.google.com/p/iaml/issues/list?can=1&q=label%3AMilestone-Release0.4.1 Resolved issues])
 ([http://journals.jevon.org/users/jevon-phd/entry/19777 Released] December 2009)
   # [http://code.google.com/p/iaml/wiki/Model0_5#Model_0.4.1 Expand IAML model]
     * Arithmetic
@@ -107,6 +113,7 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
     * Operational modelling is now implemented using a call stack, allowing for loops in the execution path
 
 ==Release 0.4.2==
+([http://code.google.com/p/iaml/issues/list?can=1&q=label%3AMilestone-Release0.4.2 Resolved issues])
 ([http://journals.jevon.org/users/jevon-phd/entry/19798 Released] February 2010)
   # [http://code.google.com/p/iaml/wiki/Model0_5#Model_0.4.2 Expand IAML model]
     * EntryGate: restricting entry through a given gate
@@ -116,6 +123,7 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
     * Conditional modelling is also now implemented using the same call stack in 0.4.1
 
 ==Release 0.4.3==
+([http://code.google.com/p/iaml/issues/list?can=1&q=label%3AMilestone-Release0.4.3 Resolved issues])
 ([http://journals.jevon.org/users/jevon-phd/entry/19803 Released] February 2010)
   # [http://code.google.com/p/iaml/wiki/Model0_5#Model_0.4.3 Expand IAML model]
     * Label: a static text field that cannot be edited by the user
@@ -124,6 +132,7 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
     * Some metamodel refactoring: Not all edges are now wires
 
 ==Release 0.4.4==
+([http://code.google.com/p/iaml/issues/list?can=1&q=label%3AMilestone-Release0.4.4 Resolved issues])
 ([http://journals.jevon.org/users/jevon-phd/entry/19812 Released] March 2010)
   # [http://code.google.com/p/iaml/wiki/Model0_5#Model_0.4.4 Expand IAML model]
     * Data types using XML Schema (XSD)
@@ -134,22 +143,32 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
     * Operations and conditions are now generated as individual include files
     * Test cases are now correctly synchronised with AJAX calls (issue 43)
 
-==Release 0.5==
-([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.5 Outstanding issues])
+=Release 0.5=
+([http://code.google.com/p/iaml/issues/list?can=1&q=label%3AMilestone-Release0.5 Resolved issues])
+  # [http://code.google.com/p/iaml/wiki/Model0_5#Model_0.5 Expand IAML model]
+    * Google Maps through [http://openiaml.org/model/Map Map] and [http://openiaml.org/model/MapPoint MapPoint]
+    * E-mails through [http://openiaml.org/model/Email Email]
+    * Navigating through [http://openiaml.org/model/DomainObjectInstance DomainObjectInstance] and [http://openiaml.org/model/SelectWire SelectWire]
+    * Added documentation for all model element classes (issue 167)
   # Inference
-    * Resolve issue 130: automatically mark containers as overridden
-    * Resolve issue 131: overridden flag is ignored
+    * Wrote documentation about [ModelCompletion]
+    * Automatically mark containers as overridden (issue 130)
+    * Overridden flag is ignored (issue 131)
+  # Usability improvements
+    * Highlight overridden elements in bold (issue 162)
+    * [http://openiaml.org/model/EventTrigger Events] are now rendered as UML events (issue 93)
   # Code generation
-    * Improve performance of multiple include files on client-side
+    * Operations and conditions that are never used are no longer generated (issue 169)
+  # Development
+    * `generateID()` code is automatically inserted into model code using EMF Dynamic Templates (issue 165)
 
-=Release 0.6=
+==Release 0.6==
 ([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.6 Outstanding issues])
   # [Model0_6 Expand IAML model]
-    * E-mails
-    * Google Maps
-    * RSS Feeds (Produce, Consume)
     * OpenID
     * Autocomplete
+  # Code generation
+    * Improve performance of multiple include files on client-side
 
 =Release 0.7+=
 ([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.7 Outstanding issues])

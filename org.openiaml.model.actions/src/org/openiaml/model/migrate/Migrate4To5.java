@@ -639,12 +639,12 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 	}
 
 	/**
-	 * TODO Models of version 0.5 will have a different namespace,
-	 * 	 but currently have the same as 0.4.
+	 * Models of version 0.5 will have a different namespace,
+	 * <code>http://openiaml.org/model0.5</code>.
 	 */
 	@Override
 	protected String getTargetNamespace() {
-		return "http://openiaml.org/model0.4";
+		return "http://openiaml.org/model0.5";
 	}
 
 	@Override

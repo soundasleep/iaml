@@ -116,9 +116,47 @@ The meta-model refactoring has continued; for example:
 
   * RunInstanceWire and NavigateWire are now [http://openiaml.org/model/Action Actions]
 
-=Model 0.4.5=
+=Model 0.5.0=
 
-  _Currently under development._
+*Released [http://journals.jevon.org/users/jevon-phd/entry/19824 April 2010]*
+
+This adds a lot of new modelling elements, as well as fixes [http://code.google.com/p/iaml/issues/list?can=1&q=label%3AMilestone-Release0.5 some important issues].
+
+==New Elements==
+
+===Map===
+
+A [http://openiaml.org/model/Map Map] is a browsable map, which can be generated into Google Maps, Bing Maps, or likewise. They can contain any number of [http://openiaml.org/model/MapPoint MapPoints].
+
+===Map===
+
+A [http://openiaml.org/model/MapPoint MapPoint] is a location that should be rendered within a map. This point can optionally be contained within a [http://openiaml.org/model/Map Map].
+
+===Email===
+
+[http://openiaml.org/model/Email E-mails] can now be composed and sent. Two events, _onSent_ and _onFailure_, can be used to register when the e-mail is sent and if it ever fails to get to its recipient.
+
+===PrimitiveCondition===
+
+Like a [http://openiaml.org/model/PrimitiveOperation PrimitiveOperation], allows for the definition of primitive conditions for particular model elements, even though these can be modified later.
+
+==Changed Elements==
+
+===DomainObjectInstance===
+
+[http://openiaml.org/model/DomainObjectInstance DomainObjectInstances] can now be used for navigation. A [http://openiaml.org/model/SelectWire SelectWire] can be used to select the instances and has a limit that is not 1.
+
+In particular, connecting a [http://openiaml.org/model/DomainObjectInstance DomainObjectInstances] to an [http://openiaml.org/model/InputForm InputForm] with a [http://openiaml.org/model/SetWire SetWire] will automatically populate the form with buttons necessary to navigate through the result set.
+
+  _Example: [http://iaml.googlecode.com/svn/trunk/examples/SelectWireManyPaginate/SelectWireManyPaginate.html SelectWireManyPaginate]_
+
+==Changes==
+
+The semantics of [http://openiaml.org/model/GeneratesElements generated elements] have now been refined: see [ModelCompletion].
 
   * Added [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.actions/src/org/openiaml/model/custom/actions/ExportDotGraphAction.java?spec=svn1756&r=1756 an action] to export a given IAML model to DOT format.
   * Added [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.actions/src/org/openiaml/model/custom/actions/ExportInferredDotGraphAction.java?spec=svn1756&r=1756 an action] to export the initial, and completed, model to DOT format.
+  * [http://openiaml.org/model/EventTrigger Events] now render as actual events, not just boxes.
+  * [ModelCompletion Overridden elements] are now displayed in *bold*.
+  * Various code generation optimisations; in particular, operations and conditions that are never used are no longer generated (issue 169).
+  * The model namespace is now `http://openiaml.org/model/0.5`. Migrators have been updated.

@@ -123,6 +123,8 @@ public class ExportIAMLExamplesJob extends AbstractIAMLDocJob {
 			ExportToClickableHtml export = new ExportToClickableHtml();
 			try {
 				export.doExport(diagram, examples /* copy to examples project */, new SubProgressMonitor(monitor, 1));
+			} catch (RuntimeException e) {
+				throw new RuntimeException("Could not export model '" + model + "': " + e.getMessage(), e);
 			} catch (ExportImageException e) {
 				return errorStatus(e);
 			}

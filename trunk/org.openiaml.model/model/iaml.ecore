@@ -936,12 +936,12 @@
         <details key="documentation" value="When the source element changes, the target element will be updated (but not vice versa)."/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="NavigateAction" eSuperTypes="#//WireDestination #//NamedElement #//GeneratesElements #//wires/ConditionEdgeDestination #//Action">
+    <eClassifiers xsi:type="ecore:EClass" name="NavigateAction" eSuperTypes="#//WireDestination #//NamedElement #//GeneratesElements #//wires/ConditionEdgeDestination #//Action #//wires/ParameterEdgeDestination">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.2"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="When the {@model EventTrigger source event} executes, the user will be navigated to the target {@model Frame}."/>
+        <details key="documentation" value="When the {@model EventTrigger source event} executes, the user will be navigated to the target {@model Frame}. Can be the destination of {@model ParameterEdge}s."/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="SelectWire" eSuperTypes="#//WireDestination #//wires/ParameterEdgeDestination #//wires/SingleWire #//NamedElement #//GeneratesElements">
@@ -1281,6 +1281,13 @@
           eType="#//visual/Button" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="labels" upperBound="-1"
           eType="#//visual/Label" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FeedProducer" eSuperTypes="#//NamedElement #//ContainsOperations #//Scope #//ContainsWires #//WireSource #//WireDestination #//ContainsConditions #//ContainsProperties">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Represents an accessible feed, for example an RSS feed."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+          eType="#//VisibleThing" containment="true"/>
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="components" nsURI="http://openiaml.org/model/components" nsPrefix="iaml.components">

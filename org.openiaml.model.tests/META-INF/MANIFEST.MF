@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Iaml Tests Plug-in
 Bundle-SymbolicName: org.openiaml.model.tests;singleton:=true
-Bundle-Version: 0.4.4.qualifier
+Bundle-Version: 0.5.0.qualifier
 Require-Bundle: org.junit,
  ca.ecliptical.emf.xpath,
  org.openiaml.model.codegen.php,

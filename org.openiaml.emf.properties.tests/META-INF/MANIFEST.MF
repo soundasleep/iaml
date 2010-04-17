@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: EMF Properties Tests
 Bundle-SymbolicName: org.openiaml.emf.properties.tests;singleton:=true
-Bundle-Version: 0.4.4.qualifier
+Bundle-Version: 0.5.0.qualifier
 Bundle-Vendor: www.openiaml.org
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.junit,

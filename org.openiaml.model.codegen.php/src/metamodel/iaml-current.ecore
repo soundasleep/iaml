@@ -102,6 +102,9 @@
     <eAnnotations source="http://openiaml.org/comment">
       <details key="changed" value="0.4.2 to abstract"/>
     </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="An abstract element for the functionality contained within {@model CompositeOperation}s."/>
+    </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Operation" abstract="true" eSuperTypes="#//WireDestination #//NamedElement #//DataFlowEdgeDestination #//ExecutionEdgeDestination #//DataFlowEdgesSource #//ActionDestination">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -148,8 +151,15 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ContainsOperations" abstract="true"
       interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Represents an element which can directly contain {@model Operation}s."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
-        eType="#//Operation" containment="true"/>
+        eType="#//Operation" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A list of contained {@model Operation}s."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ApplicationElement" abstract="true"
       eSuperTypes="#//ContainsOperations #//NamedElement #//WireSource #//WireDestination #//GeneratesElements #//ContainsConditions #//CanBeSynced #//ContainsProperties">
@@ -216,8 +226,15 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ContainsProperties" abstract="true"
       interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Represents an element which can directly contain {@model Property Properties}. These {@model Property Properties} can allow element attributes to change at runtime."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
-        eType="#//Property" containment="true"/>
+        eType="#//Property" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A list of contained {@model Property Properties}."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InternetApplication" eSuperTypes="#//ContainsOperations #//NamedElement #//ContainsWires #//GeneratesElements #//ContainsConditions #//ContainsProperties">
     <eAnnotations source="http://openiaml.org/comment">
@@ -373,21 +390,53 @@
       <details key="documentation" value="A generic container of {@model Wire}s, {@model Action}s and other edges."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="wires" upperBound="-1"
-        eType="#//Wire" containment="true"/>
+        eType="#//Wire" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A list of contained {@model Wire}s."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
-        eType="#//Action" containment="true"/>
+        eType="#//Action" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A list of contained {@model Action}s."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameterEdges" upperBound="-1"
-        eType="#//wires/ParameterEdge" containment="true"/>
+        eType="#//wires/ParameterEdge" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A list of contained {@model ParameterEdge}s."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="extendsEdges" upperBound="-1"
-        eType="#//wires/ExtendsEdge" containment="true"/>
+        eType="#//wires/ExtendsEdge" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A list of contained {@model ExecutionEdge}s."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="requiresEdges" upperBound="-1"
-        eType="#//wires/RequiresEdge" containment="true"/>
+        eType="#//wires/RequiresEdge" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A list of contained {@model RequiresEdge}s."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="providesEdges" upperBound="-1"
-        eType="#//wires/ProvidesEdge" containment="true"/>
+        eType="#//wires/ProvidesEdge" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A list of contained {@model ProvidesEdge}s."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="constraintEdges" upperBound="-1"
-        eType="#//wires/ConstraintEdge" containment="true"/>
+        eType="#//wires/ConstraintEdge" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A list of contained {@model ConstraintEdge}s."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="conditionEdges" upperBound="-1"
-        eType="#//wires/ConditionEdge" containment="true"/>
+        eType="#//wires/ConditionEdge" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A list of contained {@model ConditionEdge}s."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ShouldntContainWires" abstract="true"
       interface="true" eSuperTypes="#//ContainsWires">
@@ -429,6 +478,9 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="GeneratesElements" abstract="true" interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="This element may directly be used in model completion to {@model GeneratesElements#generatedElements generate} {@model GeneratedElement}s. It can also be {@model GeneratesElements#overridden}."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="generatedElements" upperBound="-1"
         eType="#//GeneratedElement" eOpposite="#//GeneratedElement/generatedBy">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -530,6 +582,9 @@
     <eAnnotations source="http://openiaml.org/comment">
       <details key="changed" value="0.4: 'domainObjects', 'domainViews', 'domainInstances' references removed&#xD;&#xA;0.4.2: renamed from 'Scope' to 'AbstractScope'; added 'gate' reference"/>
     </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Abstractly represents a scope, which can contain other {@model Scope}s. Content within this scope is accessible to all {@model Scope#scopes children scopes}, but not necessarily to parents."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="entryGate" eType="#//components/EntryGate"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -561,6 +616,9 @@
         containment="true">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="changed" value="added in 0.4.4"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This {@model EventTrigger event} is called whenever the {@model Scope} is initialised for the first time."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="scopes" upperBound="-1"
@@ -710,7 +768,11 @@
       <details key="documentation" value="A possible destination for an {@model Action}."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inActions" upperBound="-1"
-        eType="#//Action" eOpposite="#//Action/to"/>
+        eType="#//Action" eOpposite="#//Action/to">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A list of incoming {@model Action}s."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActionSource" abstract="true" interface="true"
       eSuperTypes="#//ShouldntContainWires">
@@ -721,7 +783,11 @@
       <details key="documentation" value="A possible source for an {@model Action}."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outActions" upperBound="-1"
-        eType="#//Action" eOpposite="#//Action/from"/>
+        eType="#//Action" eOpposite="#//Action/from">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A list of outgoing {@model Action}s."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PrimitiveCondition" eSuperTypes="#//Condition">
     <eAnnotations source="http://openiaml.org/comment">
@@ -746,6 +812,9 @@
           eType="#//VisibleThing" containment="true">
         <eAnnotations source="http://openiaml.org/comment">
           <details key="added" value="0.4.2"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="A {@model Frame} can directly contain other {@model VisibleThing}s, which are then rendered to the client."/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
@@ -780,7 +849,11 @@
         <details key="documentation" value="Represents a static block of text that is not user-editable."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-          defaultValueLiteral=""/>
+          defaultValueLiteral="">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="If set, provides a default value for this {@model Label}."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Map" eSuperTypes="#//VisibleThing">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1064,7 +1137,11 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Indicates that the current {@model Operation} did not execute successfully, or the {@model Condition} failed."/>
       </eAnnotations>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="exceptionText" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="exceptionText" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="This message will be provided as a reason why the {@model CompositeOperation Operation} or {@model CompositeCondition Condition} failed."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="FinishNode" eSuperTypes="#//ActivityNode #//ExecutionEdgeDestination">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1076,10 +1153,17 @@
         <details key="documentation" value="Considers the {@model ConditionEdgeDestination incoming} {@model Condition}, and follows either the passing or failing {@model ExecutionEdge} as appropriate."/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="DecisionOperation" eSuperTypes="#//PrimitiveOperation #//DataFlowEdgeDestination"/>
+    <eClassifiers xsi:type="ecore:EClass" name="DecisionOperation" eSuperTypes="#//PrimitiveOperation #//DataFlowEdgeDestination">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Primitive {@model Operation}s that allow for execution to branch. Will be merged into {@model PrimitiveCondition}s: see {@issue 160}."/>
+      </eAnnotations>
+    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="DecisionCondition" eSuperTypes="#//Condition #//ExecutionEdgesSource #//ExecutionEdgeDestination #//DataFlowEdgeDestination">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="added in 0.2"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A primitive {@model Condition} that allow for execution to branch, possibly based on incoming {@model DataFlowEdge}s. Will be merged into {@model PrimitiveCondition}s: see {@issue 160}."/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="SplitNode" eSuperTypes="#//ActivityNode #//ExecutionEdgesSource #//ExecutionEdgeDestination">
@@ -1113,7 +1197,11 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="An inline expression of arithmetic. Can be used as part of a {@model PrimitiveOperation set operation}, for example."/>
       </eAnnotations>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="operationType" eType="#//operations/ArithmeticOperationTypes"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="operationType" eType="#//operations/ArithmeticOperationTypes">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The operation to perform."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EEnum" name="ArithmeticOperationTypes">
       <eAnnotations source="http://openiaml.org/comment">
@@ -1152,15 +1240,43 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Represents an e-mail. The lifecycle is as follows: {@model PrimitiveOperation send} -> {@model EventTrigger sent} or {@model EventTrigger failed}."/>
       </eAnnotations>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="to" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="subject" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="toName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="from" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="fromName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="to" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The destination e-mail address for this {@model Email}. Can be provided at runtime through a {@model ContainsProperties contained property} with the same name."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="subject" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The subject for this {@model Email}. Can be provided at runtime through a {@model ContainsProperties contained property} with the same name."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="toName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The destination name for this {@model Email}, which is optional. Can be provided at runtime through a {@model ContainsProperties contained property} with the same name."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="from" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The source e-mail address for this {@model Email}. Can be provided at runtime through a {@model ContainsProperties contained property} with the same name."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="fromName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The source name for this {@model Email}, which is optional. Can be provided at runtime through a {@model ContainsProperties contained property} with the same name."/>
+        </eAnnotations>
+      </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="onSent" eType="#//EventTrigger"
-          containment="true"/>
+          containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="This {@model EventTrigger event} is called whenever the {@model Email} is sent, however it is not guaranteed that it has been &lt;em>successfully&lt;/em> sent."/>
+        </eAnnotations>
+      </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="onFailure" eType="#//EventTrigger"
-          containment="true"/>
+          containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="This {@model EventTrigger event} is called if the {@model Email#onSent sent e-mail} has failed to arrive at its destination, which may occur at any point after it is sent."/>
+        </eAnnotations>
+      </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="buttons" upperBound="-1"
           eType="#//visual/Button" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="labels" upperBound="-1"
@@ -1196,8 +1312,8 @@
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Gate" abstract="true" eSuperTypes="#//NamedElement #//WireSource #//WireDestination #//GeneratedElement #//GeneratesElements #//wires/ConditionEdgeDestination #//ActionSource #//ActionDestination">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="added" value="0.4.2"/>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Restricts access {@model EntryGate into}, or {@model ExitGate out of}, a {@model Scope}."/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="EntryGate" eSuperTypes="#//components/Gate">

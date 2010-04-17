@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:VisibleThing xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.128050f92d3.1c">
+  <children xsi:type="iaml.visual:MapPoint" id="visual.128050f9573.16" name="Point Name" fieldValue="Default Address"/>
+</iaml:VisibleThing>

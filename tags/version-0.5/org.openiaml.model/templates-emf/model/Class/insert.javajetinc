@@ -1,0 +1,46 @@
+<% if (isInterface) { %>
+	<% if (genClass != null && genClass.getInterfaceName() != null && genClass.getInterfaceName().equals("DomainStore")) { %>
+
+	/**
+	 * Get the properties file referenced by the FileReference.
+	 * If the file does not exist, return null.
+	 * 
+	 * @see #getFile()
+	 * @return the properties file referenced, or <code>null</code> if the file does not exist
+	 * @generated
+	 */
+	org.openiaml.model.ExtendedProperties getPropertiesFile() throws org.openiaml.model.inference.InferenceException,
+			java.io.FileNotFoundException, java.io.IOException;
+	
+	<% } %>
+<% } else if (isImplementation) { %>
+	<% if (genClass != null && genClass.getClassName() != null && genClass.getClassName().equals("DomainStoreImpl")) { %>
+
+	/**
+	 * @generated
+	 */
+	@Override
+	public org.openiaml.model.ExtendedProperties getPropertiesFile() throws org.openiaml.model.inference.InferenceException, 
+		java.io.FileNotFoundException, 
+		java.io.IOException {
+		// we need to get the absolute path path
+		// "The URI is normally expected to be absolute and hierarchical"
+		org.eclipse.emf.common.util.URI absolutePath = this.eResource().getURI();
+		
+		if (getFile() == null)
+			throw new org.openiaml.model.inference.InferenceException("No file to map to");
+		java.io.File f = getFile().toFile(absolutePath);
+		if (!f.exists()) 
+			// throw new org.openiaml.model.inference.InferenceException("File does not exist: " + f);
+			return null;
+			
+		if (!f.canRead())
+			throw new org.openiaml.model.inference.InferenceException("Cannot read file: " + f);
+		org.openiaml.model.ExtendedProperties props = new org.openiaml.model.ExtendedProperties();
+		props.load(new java.io.FileInputStream(f));
+
+		return props;
+	}
+
+	<% } %>
+<% } %>

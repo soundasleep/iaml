@@ -1,0 +1,26 @@
+«IMPORT iaml»
+
+/**
+ * Visually rendering a button.
+ */
+«EXTENSION template::GeneratorExtensions»
+
+/**
+ * @implementation Button
+ *		Currently, a {@model Button} is represented as an HTML Submit button.
+ * @implementation Button
+ *		Any {@model VisibleThing children} of a {@model Button} are also rendered
+ *		as part of that Button.
+ */
+«DEFINE renderButton(model::visual::Frame currentFrame) FOR model::visual::Button-»
+	<input type="submit" id="button_«safeNameString(id)-»" value="«buttonName()»"
+		«EXPAND EventHandlers::getInlineClickJavascript(currentFrame)» 
+		«EXPAND EventHandlers::getInlineChangeJavascript(currentFrame)» 
+		>
+
+	«EXPAND EventHandlers::getScriptClickDefinition(currentFrame)» 
+	«EXPAND EventHandlers::getScriptChangeDefinition(currentFrame)» 
+
+	«REM»expand all children«ENDREM»
+	«EXPAND Render::renderVisual(currentFrame) FOREACH children-»
+«ENDDEFINE»

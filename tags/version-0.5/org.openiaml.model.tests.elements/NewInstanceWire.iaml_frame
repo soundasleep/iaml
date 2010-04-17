@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml.visual:Frame xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="visual.1273c6bf5a4.4c">
+  <elements xsi:type="iaml:DomainObject" id="model.1273c6bf4aa.14d" name="Object" outWires="wires.1273c6bf67f.11">
+    <wires xsi:type="iaml.wires:NewInstanceWire" id="wires.1273c6bf67f.11" from="model.1273c6bf4aa.14d" to="model.1273c6bf4aa.14e" name="Wire name"/>
+  </elements>
+  <elements xsi:type="iaml:DomainObjectInstance" id="model.1273c6bf4aa.14e" name="Object Instance" inWires="wires.1273c6bf67f.11"/>
+</iaml.visual:Frame>

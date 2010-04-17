@@ -2,19 +2,24 @@
 <feature
       id="org.openiaml.model.editor"
       label="IAML Modelling Platform"
-      version="0.4.4.qualifier"
+      version="0.5.0.qualifier"
       provider-name="www.openiaml.org">
 
    <description url="http://www.openiaml.org/">
       This is the implementation of the Internet Application Modelling Language (IAML), a PhD project at Massey University, New Zealand.
    </description>
 
-   <copyright url="http://www.example.com/copyright">
-      [Enter Copyright Description here.]
+   <copyright url="http://openiaml.org/copyright">
+      Copyright (c) 2007, 2010 Jevon Wright and others.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
    </copyright>
 
    <license url="http://www.eclipse.org/legal/epl-v10.html">
-      Under the Eclipse Public Licence (EPL) 1.0.
+      Licensed under the Eclipse Public License v1.0.
+Portions of this software are also licensed under the Lesser GNU Public License v3.0.
    </license>
 
    <url>
@@ -29,6 +34,8 @@
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.core.resources" version="3.5.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.ecore" version="2.5.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.xsd" version="2.5.0" match="greaterOrEqual"/>
+      <import plugin="org.openiaml.emf.properties" version="0.4.4" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.expressions"/>
       <import plugin="org.eclipse.jface"/>
       <import plugin="org.eclipse.ui.ide"/>
@@ -62,6 +69,8 @@
       <import plugin="org.openiaml.model.diagram.condition" version="0.4.1" match="greaterOrEqual"/>
       <import plugin="org.openiaml.model.diagram.frame" version="0.4.1" match="greaterOrEqual"/>
       <import plugin="org.openiaml.model.diagram.session" version="0.4.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.xsd.edit" version="2.5.0" match="greaterOrEqual"/>
+      <import plugin="org.openiaml.model.diagram.domain_object_instance" version="0.4.4" match="greaterOrEqual"/>
       <import plugin="org.openiaml.iacleaner" version="0.3.0" match="greaterOrEqual"/>
       <import feature="ca.ecliptical.emf.xpath" version="2.0.1.20071218052038"/>
       <import plugin="org.junit"/>
@@ -72,6 +81,7 @@
       <import plugin="org.openarchitectureware.core.xpand2" version="4.3.1" match="greaterOrEqual"/>
       <import plugin="org.openarchitectureware.workflow" version="4.3.1" match="greaterOrEqual"/>
       <import plugin="org.apache.commons.logging" version="1.0.4" match="greaterOrEqual"/>
+      <import plugin="org.openiaml.model.runtime.phpmailer" version="5.1.0" match="greaterOrEqual"/>
       <import plugin="ca.ecliptical.emf.xpath" version="2.0.1" match="greaterOrEqual"/>
       <import plugin="org.apache.xerces"/>
       <import plugin="org.antlr.runtime" version="3.0.0" match="greaterOrEqual"/>
@@ -86,6 +96,14 @@
       <import plugin="org.eclipse.gmf.runtime.common.core" version="1.2.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.gmf.runtime.diagram.ui" version="1.2.0" match="greaterOrEqual"/>
       <import plugin="org.openiaml.model.diagram.helpers" version="0.4.1" match="greaterOrEqual"/>
+      <import plugin="org.openiaml.model.diagram.helpers" version="0.4.4" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.resources" version="3.5.2" match="greaterOrEqual"/>
+      <import plugin="org.openiaml.model.runtime" version="0.4.4" match="greaterOrEqual"/>
+      <import feature="ca.ecliptical.emf.xpath" version="2.0.1.20071218052038"/>
+      <import feature="ca.ecliptical.emf.xpath" version="2.0.1.20071218052038"/>
+      <import feature="ca.ecliptical.emf.xpath" version="2.0.1.20071218052038"/>
+      <import feature="ca.ecliptical.emf.xpath" version="2.0.1.20071218052038"/>
+      <import feature="ca.ecliptical.emf.xpath" version="2.0.1.20071218052038"/>
       <import feature="ca.ecliptical.emf.xpath" version="2.0.1.20071218052038"/>
       <import feature="ca.ecliptical.emf.xpath" version="2.0.1.20071218052038"/>
       <import feature="ca.ecliptical.emf.xpath" version="2.0.1.20071218052038"/>
@@ -96,9 +114,7 @@
       <import feature="ca.ecliptical.emf.xpath" version="2.0.1.20071218052038"/>
       <import feature="org.openarchitectureware.core.feature" version="4.3.1.20090107-2000PRD"/>
       <import feature="org.openarchitectureware.util.stdlib.feature" version="4.3.1.20090107-2000PRD"/>
-      <import feature="org.openiaml.iacleaner.feature" version="0.3.0"/>
-      <import plugin="org.eclipse.xsd" version="2.5.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.xsd.edit" version="2.5.0" match="greaterOrEqual"/>
+      <import feature="org.openiaml.iacleaner.feature" version="0.3.1"/>
    </requires>
 
    <plugin
@@ -243,6 +259,20 @@
 
    <plugin
          id="org.openiaml.model.diagram.frame"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.openiaml.model.diagram.email"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.openiaml.model.runtime.phpmailer"
          download-size="0"
          install-size="0"
          version="0.0.0"

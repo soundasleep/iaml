@@ -145,6 +145,7 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
 
 =Release 0.5=
 ([http://code.google.com/p/iaml/issues/list?can=1&q=label%3AMilestone-Release0.5 Resolved issues])
+([http://journals.jevon.org/users/jevon-phd/entry/19824 Released] April 2010)
   # [http://code.google.com/p/iaml/wiki/Model0_5#Model_0.5 Expand IAML model]
     * Google Maps through [http://openiaml.org/model/Map Map] and [http://openiaml.org/model/MapPoint MapPoint]
     * E-mails through [http://openiaml.org/model/Email Email]
@@ -162,7 +163,7 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
   # Development
     * `generateID()` code is automatically inserted into model code using EMF Dynamic Templates (issue 165)
 
-==Release 0.6==
+=Release 0.6=
 ([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.6 Outstanding issues])
   # [Model0_6 Expand IAML model]
     * OpenID

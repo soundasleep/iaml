@@ -19,6 +19,8 @@ import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.emf.transaction.impl.InternalTransactionalEditingDomain;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.image.ImageFileFormat;
@@ -266,7 +268,21 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 			// rendered map?
 			
 			for (DiagramEditPart part : partDestinationMap.keySet()) {
-				if (EcoreUtil.equals(part.resolveSemanticElement(), object)) {
+				// try and prevent an NPE caused by internal getChangeRecorder() returning null
+				if (part.getEditingDomain() instanceof InternalTransactionalEditingDomain) {
+					if (((InternalTransactionalEditingDomain) part.getEditingDomain()).getChangeRecorder() == null) {
+						continue;
+					}
+				}
+
+				EObject resolved;
+				try {
+					resolved = part.resolveSemanticElement();
+				} catch (RuntimeException e) {
+					throw new RuntimeException("Could not resolve element for part '" + part + "': " + e.getMessage(), e);
+				}
+				
+				if (EcoreUtil.equals(resolved, object)) {
 					// it maps
 					return new StringBuffer()
 						.append("<a href=\"")

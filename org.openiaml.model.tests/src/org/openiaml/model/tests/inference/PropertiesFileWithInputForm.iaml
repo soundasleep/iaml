@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.120b1f587bf.3ca">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.120b1f587bf.3ca">
   <domainStores id="domain.120b22b5af9.8" name="a properties file" file="result.properties" type="PROPERTIES_FILE">
     <attributes id="domain.120b22b5af9.10" name="value1" inWires="wires.120b249acac.12"/>
     <attributes id="domain.120b22b5af9.13" name="value2" inWires="wires.120b249acac.12xx"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.123172ceeef.2f">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.123172ceeef.2f">
   <domainStores id="model.123172ceeef.32" name="Users">
     <children id="model.123172ceeef.3c" name="User" outWires="wires.123172cef6c.13">
       <wires xsi:type="iaml.wires:SelectWire" inParameterEdges="wires.123172cef6c.15" id="wires.123172cef6c.13" from="model.123172ceeef.3c" to="model.123172ceeef.93" name="select" query="id = ?"/>

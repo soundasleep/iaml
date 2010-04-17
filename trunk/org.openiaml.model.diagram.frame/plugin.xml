@@ -241,7 +241,7 @@
          </object>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_Frame"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2029,2028,2002,2003,2004,2005,2033,2031,2008,2009,2010,2032,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2030,2034,2035,2036,2038"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2039,2040,2041,2042,2043,2044,2045,2046,2008,2009,2047,2048,2049,2050,2051,2052,2016,2053,2054,2019,2020,2055,2056,2057,2024,2058,2059,2035,2036,2060"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4015,4011,4004,4005,4016,4014,4008,4012,4013"/>
       </viewProvider>
    </extension>
@@ -254,13 +254,13 @@
             <method name="getType()" value="Iaml_Frame"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
-            <method name="getType()" value="2029,2028,2002,2003,2004,2005,2033,2031,2008,2009,2010,2032,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2030,2034,2035,2036,2038"/>
+            <method name="getType()" value="2039,2040,2041,2042,2043,2044,2045,2046,2008,2009,2047,2048,2049,2050,2051,2052,2016,2053,2054,2019,2020,2055,2056,2057,2024,2058,2059,2035,2036,2060"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
             <method name="getType()" value="4001,4015,4011,4004,4005,4016,4014,4008,4012,4013"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5056,5057,5058,5053,5054,5055,5003,5004,5005,5006,5007,5008,5009,5010,5064,5069,5070,5071,5072,5062,5015,5016,5017,5018,5066,5019,5020,5067,5063,5022,5023,5024,5025,5026,5027,5028,5068,5029,5030,5031,5032,5033,5034,5035,5036,5037,5038,5039,5040,5041,5042,5043,5059,5060,5061,5073,5074,5075,5076,5077,5079,5080"/>
+            <method name="getType()" value="5081,5082,5083,5084,5085,5086,5087,5088,5089,5090,5091,5092,5093,5094,5095,5096,5097,5098,5099,5100,5015,5016,5017,5018,5066,5101,5102,5103,5104,5105,5106,5107,5108,5109,5110,5111,5112,5029,5030,5113,5114,5033,5034,5115,5116,5117,5118,5119,5120,5041,5042,5043,5121,5122,5123,5124,5074,5075,5076,5077,5125,5126"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value=""/>
@@ -274,37 +274,37 @@
       <modelingAssistantProvider class="org.openiaml.model.diagram.frame.providers.IamlModelingAssistantProvider">
          <Priority name="Lowest"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.FrameEditPart" id="Frame_1000"/>
-         <object class="org.openiaml.model.diagram.frame.edit.parts.EventTrigger3EditPart" id="EventTrigger_2029"/>
-         <object class="org.openiaml.model.diagram.frame.edit.parts.EventTrigger2EditPart" id="EventTrigger_2028"/>
-         <object class="org.openiaml.model.diagram.frame.edit.parts.CompositeOperationEditPart" id="CompositeOperation_2002"/>
-         <object class="org.openiaml.model.diagram.frame.edit.parts.PrimitiveOperationEditPart" id="PrimitiveOperation_2003"/>
-         <object class="org.openiaml.model.diagram.frame.edit.parts.DomainObjectEditPart" id="DomainObject_2004"/>
-         <object class="org.openiaml.model.diagram.frame.edit.parts.DomainAttributeEditPart" id="DomainAttribute_2005"/>
-         <object class="org.openiaml.model.diagram.frame.edit.parts.PropertyEditPart" id="Property_2033"/>
-         <object class="org.openiaml.model.diagram.frame.edit.parts.Frame2EditPart" id="Frame_2031"/>
+         <object class="org.openiaml.model.diagram.frame.edit.parts.EventTriggerEditPart" id="EventTrigger_2039"/>
+         <object class="org.openiaml.model.diagram.frame.edit.parts.EventTrigger2EditPart" id="EventTrigger_2040"/>
+         <object class="org.openiaml.model.diagram.frame.edit.parts.CompositeOperationEditPart" id="CompositeOperation_2041"/>
+         <object class="org.openiaml.model.diagram.frame.edit.parts.PrimitiveOperationEditPart" id="PrimitiveOperation_2042"/>
+         <object class="org.openiaml.model.diagram.frame.edit.parts.DomainObjectEditPart" id="DomainObject_2043"/>
+         <object class="org.openiaml.model.diagram.frame.edit.parts.DomainAttributeEditPart" id="DomainAttribute_2044"/>
+         <object class="org.openiaml.model.diagram.frame.edit.parts.PropertyEditPart" id="Property_2045"/>
+         <object class="org.openiaml.model.diagram.frame.edit.parts.Frame2EditPart" id="Frame_2046"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.InputFormEditPart" id="InputForm_2008"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.InputTextFieldEditPart" id="InputTextField_2009"/>
-         <object class="org.openiaml.model.diagram.frame.edit.parts.StaticValueEditPart" id="StaticValue_2010"/>
-         <object class="org.openiaml.model.diagram.frame.edit.parts.SessionEditPart" id="Session_2032"/>
-         <object class="org.openiaml.model.diagram.frame.edit.parts.LoginHandlerEditPart" id="LoginHandler_2012"/>
-         <object class="org.openiaml.model.diagram.frame.edit.parts.CompositeConditionEditPart" id="CompositeCondition_2013"/>
-         <object class="org.openiaml.model.diagram.frame.edit.parts.DomainObjectInstanceEditPart" id="DomainObjectInstance_2014"/>
-         <object class="org.openiaml.model.diagram.frame.edit.parts.DomainAttributeInstanceEditPart" id="DomainAttributeInstance_2015"/>
+         <object class="org.openiaml.model.diagram.frame.edit.parts.StaticValueEditPart" id="StaticValue_2047"/>
+         <object class="org.openiaml.model.diagram.frame.edit.parts.SessionEditPart" id="Session_2048"/>
+         <object class="org.openiaml.model.diagram.frame.edit.parts.LoginHandlerEditPart" id="LoginHandler_2049"/>
+         <object class="org.openiaml.model.diagram.frame.edit.parts.CompositeConditionEditPart" id="CompositeCondition_2050"/>
+         <object class="org.openiaml.model.diagram.frame.edit.parts.DomainObjectInstanceEditPart" id="DomainObjectInstance_2051"/>
+         <object class="org.openiaml.model.diagram.frame.edit.parts.DomainAttributeInstanceEditPart" id="DomainAttributeInstance_2052"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.ButtonEditPart" id="Button_2016"/>
-         <object class="org.openiaml.model.diagram.frame.edit.parts.QueryParameterEditPart" id="QueryParameter_2017"/>
-         <object class="org.openiaml.model.diagram.frame.edit.parts.AccessControlHandlerEditPart" id="AccessControlHandler_2018"/>
+         <object class="org.openiaml.model.diagram.frame.edit.parts.QueryParameterEditPart" id="QueryParameter_2053"/>
+         <object class="org.openiaml.model.diagram.frame.edit.parts.AccessControlHandlerEditPart" id="AccessControlHandler_2054"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.PermissionEditPart" id="Permission_2019"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.RoleEditPart" id="Role_2020"/>
-         <object class="org.openiaml.model.diagram.frame.edit.parts.UserInstanceEditPart" id="UserInstance_2021"/>
-         <object class="org.openiaml.model.diagram.frame.edit.parts.EntryGateEditPart" id="EntryGate_2022"/>
-         <object class="org.openiaml.model.diagram.frame.edit.parts.ExitGateEditPart" id="ExitGate_2023"/>
+         <object class="org.openiaml.model.diagram.frame.edit.parts.UserInstanceEditPart" id="UserInstance_2055"/>
+         <object class="org.openiaml.model.diagram.frame.edit.parts.EntryGateEditPart" id="EntryGate_2056"/>
+         <object class="org.openiaml.model.diagram.frame.edit.parts.ExitGateEditPart" id="ExitGate_2057"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.LabelEditPart" id="Label_2024"/>
-         <object class="org.openiaml.model.diagram.frame.edit.parts.EventTriggerEditPart" id="EventTrigger_2030"/>
-         <object class="org.openiaml.model.diagram.frame.edit.parts.EmailEditPart" id="Email_2034"/>
+         <object class="org.openiaml.model.diagram.frame.edit.parts.EventTrigger3EditPart" id="EventTrigger_2058"/>
+         <object class="org.openiaml.model.diagram.frame.edit.parts.EmailEditPart" id="Email_2059"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.MapEditPart" id="Map_2035"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.MapPointEditPart" id="MapPoint_2036"/>
-         <object class="org.openiaml.model.diagram.frame.edit.parts.PrimitiveConditionEditPart" id="PrimitiveCondition_2038"/>
-         <context elements="Frame_1000,EventTrigger_2029,EventTrigger_2028,CompositeOperation_2002,PrimitiveOperation_2003,DomainObject_2004,DomainAttribute_2005,Property_2033,Frame_2031,InputForm_2008,InputTextField_2009,StaticValue_2010,Session_2032,LoginHandler_2012,CompositeCondition_2013,DomainObjectInstance_2014,DomainAttributeInstance_2015,Button_2016,QueryParameter_2017,AccessControlHandler_2018,Permission_2019,Role_2020,UserInstance_2021,EntryGate_2022,ExitGate_2023,Label_2024,EventTrigger_2030,Email_2034,Map_2035,MapPoint_2036,PrimitiveCondition_2038"/>
+         <object class="org.openiaml.model.diagram.frame.edit.parts.PrimitiveConditionEditPart" id="PrimitiveCondition_2060"/>
+         <context elements="Frame_1000,EventTrigger_2039,EventTrigger_2040,CompositeOperation_2041,PrimitiveOperation_2042,DomainObject_2043,DomainAttribute_2044,Property_2045,Frame_2046,InputForm_2008,InputTextField_2009,StaticValue_2047,Session_2048,LoginHandler_2049,CompositeCondition_2050,DomainObjectInstance_2051,DomainAttributeInstance_2052,Button_2016,QueryParameter_2053,AccessControlHandler_2054,Permission_2019,Role_2020,UserInstance_2055,EntryGate_2056,ExitGate_2057,Label_2024,EventTrigger_2058,Email_2059,Map_2035,MapPoint_2036,PrimitiveCondition_2060"/>
       </modelingAssistantProvider>
    </extension>
 
@@ -327,7 +327,7 @@
       <decoratorProvider class="org.openiaml.model.diagram.frame.providers.IamlShortcutsDecoratorProvider">
          <Priority name="Lowest"/>
          <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
-            <method name="getType()" value="2029,2028,2002,2003,2004,2005,2033,2031,2008,2009,2010,2032,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2030,2034,2035,2036,2038"/>
+            <method name="getType()" value="2039,2040,2041,2042,2043,2044,2045,2046,2008,2009,2047,2048,2049,2050,2051,2052,2016,2053,2054,2019,2020,2055,2056,2057,2024,2058,2059,2035,2036,2060"/>
          </object>
          <context decoratorTargets="generated-top-nodes"/>
       </decoratorProvider>
@@ -345,82 +345,82 @@
             <param name="semanticHint" value="1000"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.4">
+      <metamodel nsURI="http://openiaml.org/model0.5">
          <metamodelType
-               id="org.openiaml.model.diagram.frame.EventTrigger_2029"
-               name="%metatype.name.EventTrigger_2029"
+               id="org.openiaml.model.diagram.frame.EventTrigger_2039"
+               name="%metatype.name.EventTrigger_2039"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="EventTrigger"
                edithelper="org.openiaml.model.diagram.frame.edit.helpers.EventTriggerEditHelper">
-            <param name="semanticHint" value="2029"/>
+            <param name="semanticHint" value="2039"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.4">
+      <metamodel nsURI="http://openiaml.org/model0.5">
          <specializationType
-               id="org.openiaml.model.diagram.frame.EventTrigger_2028"
-               name="%metatype.name.EventTrigger_2028"
+               id="org.openiaml.model.diagram.frame.EventTrigger_2040"
+               name="%metatype.name.EventTrigger_2040"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
-            <specializes id="org.openiaml.model.diagram.frame.EventTrigger_2029"/>
-            <param name="semanticHint" value="2028"/>
+            <specializes id="org.openiaml.model.diagram.frame.EventTrigger_2039"/>
+            <param name="semanticHint" value="2040"/>
          </specializationType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.4">
+      <metamodel nsURI="http://openiaml.org/model0.5">
          <metamodelType
-               id="org.openiaml.model.diagram.frame.CompositeOperation_2002"
-               name="%metatype.name.CompositeOperation_2002"
+               id="org.openiaml.model.diagram.frame.CompositeOperation_2041"
+               name="%metatype.name.CompositeOperation_2041"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="CompositeOperation"
                edithelper="org.openiaml.model.diagram.frame.edit.helpers.CompositeOperationEditHelper">
-            <param name="semanticHint" value="2002"/>
+            <param name="semanticHint" value="2041"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.4">
+      <metamodel nsURI="http://openiaml.org/model0.5">
          <metamodelType
-               id="org.openiaml.model.diagram.frame.PrimitiveOperation_2003"
-               name="%metatype.name.PrimitiveOperation_2003"
+               id="org.openiaml.model.diagram.frame.PrimitiveOperation_2042"
+               name="%metatype.name.PrimitiveOperation_2042"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="PrimitiveOperation"
                edithelper="org.openiaml.model.diagram.frame.edit.helpers.PrimitiveOperationEditHelper">
-            <param name="semanticHint" value="2003"/>
+            <param name="semanticHint" value="2042"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.4">
+      <metamodel nsURI="http://openiaml.org/model0.5">
          <metamodelType
-               id="org.openiaml.model.diagram.frame.DomainObject_2004"
-               name="%metatype.name.DomainObject_2004"
+               id="org.openiaml.model.diagram.frame.DomainObject_2043"
+               name="%metatype.name.DomainObject_2043"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="DomainObject"
                edithelper="org.openiaml.model.diagram.frame.edit.helpers.DomainObjectEditHelper">
-            <param name="semanticHint" value="2004"/>
+            <param name="semanticHint" value="2043"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.4">
+      <metamodel nsURI="http://openiaml.org/model0.5">
          <metamodelType
-               id="org.openiaml.model.diagram.frame.DomainAttribute_2005"
-               name="%metatype.name.DomainAttribute_2005"
+               id="org.openiaml.model.diagram.frame.DomainAttribute_2044"
+               name="%metatype.name.DomainAttribute_2044"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="DomainAttribute"
                edithelper="org.openiaml.model.diagram.frame.edit.helpers.DomainAttributeEditHelper">
-            <param name="semanticHint" value="2005"/>
+            <param name="semanticHint" value="2044"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.4">
+      <metamodel nsURI="http://openiaml.org/model0.5">
          <metamodelType
-               id="org.openiaml.model.diagram.frame.Property_2033"
-               name="%metatype.name.Property_2033"
+               id="org.openiaml.model.diagram.frame.Property_2045"
+               name="%metatype.name.Property_2045"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="Property"
                edithelper="org.openiaml.model.diagram.frame.edit.helpers.PropertyEditHelper">
-            <param name="semanticHint" value="2033"/>
+            <param name="semanticHint" value="2045"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/visual">
          <specializationType
-               id="org.openiaml.model.diagram.frame.Frame_2031"
-               name="%metatype.name.Frame_2031"
+               id="org.openiaml.model.diagram.frame.Frame_2046"
+               name="%metatype.name.Frame_2046"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
             <specializes id="org.openiaml.model.diagram.frame.Frame_1000"/>
-            <param name="semanticHint" value="2031"/>
+            <param name="semanticHint" value="2046"/>
          </specializationType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/visual">
@@ -443,64 +443,64 @@
             <param name="semanticHint" value="2009"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.4">
+      <metamodel nsURI="http://openiaml.org/model0.5">
          <metamodelType
-               id="org.openiaml.model.diagram.frame.StaticValue_2010"
-               name="%metatype.name.StaticValue_2010"
+               id="org.openiaml.model.diagram.frame.StaticValue_2047"
+               name="%metatype.name.StaticValue_2047"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="StaticValue"
                edithelper="org.openiaml.model.diagram.frame.edit.helpers.StaticValueEditHelper">
-            <param name="semanticHint" value="2010"/>
+            <param name="semanticHint" value="2047"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/scopes">
          <metamodelType
-               id="org.openiaml.model.diagram.frame.Session_2032"
-               name="%metatype.name.Session_2032"
+               id="org.openiaml.model.diagram.frame.Session_2048"
+               name="%metatype.name.Session_2048"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="Session"
                edithelper="org.openiaml.model.diagram.frame.edit.helpers.SessionEditHelper">
-            <param name="semanticHint" value="2032"/>
+            <param name="semanticHint" value="2048"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/components">
          <metamodelType
-               id="org.openiaml.model.diagram.frame.LoginHandler_2012"
-               name="%metatype.name.LoginHandler_2012"
+               id="org.openiaml.model.diagram.frame.LoginHandler_2049"
+               name="%metatype.name.LoginHandler_2049"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="LoginHandler"
                edithelper="org.openiaml.model.diagram.frame.edit.helpers.LoginHandlerEditHelper">
-            <param name="semanticHint" value="2012"/>
+            <param name="semanticHint" value="2049"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.4">
+      <metamodel nsURI="http://openiaml.org/model0.5">
          <metamodelType
-               id="org.openiaml.model.diagram.frame.CompositeCondition_2013"
-               name="%metatype.name.CompositeCondition_2013"
+               id="org.openiaml.model.diagram.frame.CompositeCondition_2050"
+               name="%metatype.name.CompositeCondition_2050"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="CompositeCondition"
                edithelper="org.openiaml.model.diagram.frame.edit.helpers.CompositeConditionEditHelper">
-            <param name="semanticHint" value="2013"/>
+            <param name="semanticHint" value="2050"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.4">
+      <metamodel nsURI="http://openiaml.org/model0.5">
          <metamodelType
-               id="org.openiaml.model.diagram.frame.DomainObjectInstance_2014"
-               name="%metatype.name.DomainObjectInstance_2014"
+               id="org.openiaml.model.diagram.frame.DomainObjectInstance_2051"
+               name="%metatype.name.DomainObjectInstance_2051"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="DomainObjectInstance"
                edithelper="org.openiaml.model.diagram.frame.edit.helpers.DomainObjectInstanceEditHelper">
-            <param name="semanticHint" value="2014"/>
+            <param name="semanticHint" value="2051"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.4">
+      <metamodel nsURI="http://openiaml.org/model0.5">
          <metamodelType
-               id="org.openiaml.model.diagram.frame.DomainAttributeInstance_2015"
-               name="%metatype.name.DomainAttributeInstance_2015"
+               id="org.openiaml.model.diagram.frame.DomainAttributeInstance_2052"
+               name="%metatype.name.DomainAttributeInstance_2052"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="DomainAttributeInstance"
                edithelper="org.openiaml.model.diagram.frame.edit.helpers.DomainAttributeInstanceEditHelper">
-            <param name="semanticHint" value="2015"/>
+            <param name="semanticHint" value="2052"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/visual">
@@ -513,24 +513,24 @@
             <param name="semanticHint" value="2016"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.4">
+      <metamodel nsURI="http://openiaml.org/model0.5">
          <metamodelType
-               id="org.openiaml.model.diagram.frame.QueryParameter_2017"
-               name="%metatype.name.QueryParameter_2017"
+               id="org.openiaml.model.diagram.frame.QueryParameter_2053"
+               name="%metatype.name.QueryParameter_2053"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="QueryParameter"
                edithelper="org.openiaml.model.diagram.frame.edit.helpers.QueryParameterEditHelper">
-            <param name="semanticHint" value="2017"/>
+            <param name="semanticHint" value="2053"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/components">
          <metamodelType
-               id="org.openiaml.model.diagram.frame.AccessControlHandler_2018"
-               name="%metatype.name.AccessControlHandler_2018"
+               id="org.openiaml.model.diagram.frame.AccessControlHandler_2054"
+               name="%metatype.name.AccessControlHandler_2054"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="AccessControlHandler"
                edithelper="org.openiaml.model.diagram.frame.edit.helpers.AccessControlHandlerEditHelper">
-            <param name="semanticHint" value="2018"/>
+            <param name="semanticHint" value="2054"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/users">
@@ -555,32 +555,32 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/users">
          <metamodelType
-               id="org.openiaml.model.diagram.frame.UserInstance_2021"
-               name="%metatype.name.UserInstance_2021"
+               id="org.openiaml.model.diagram.frame.UserInstance_2055"
+               name="%metatype.name.UserInstance_2055"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="UserInstance"
                edithelper="org.openiaml.model.diagram.frame.edit.helpers.UserInstanceEditHelper">
-            <param name="semanticHint" value="2021"/>
+            <param name="semanticHint" value="2055"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/components">
          <metamodelType
-               id="org.openiaml.model.diagram.frame.EntryGate_2022"
-               name="%metatype.name.EntryGate_2022"
+               id="org.openiaml.model.diagram.frame.EntryGate_2056"
+               name="%metatype.name.EntryGate_2056"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="EntryGate"
                edithelper="org.openiaml.model.diagram.frame.edit.helpers.EntryGateEditHelper">
-            <param name="semanticHint" value="2022"/>
+            <param name="semanticHint" value="2056"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/components">
          <metamodelType
-               id="org.openiaml.model.diagram.frame.ExitGate_2023"
-               name="%metatype.name.ExitGate_2023"
+               id="org.openiaml.model.diagram.frame.ExitGate_2057"
+               name="%metatype.name.ExitGate_2057"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="ExitGate"
                edithelper="org.openiaml.model.diagram.frame.edit.helpers.ExitGateEditHelper">
-            <param name="semanticHint" value="2023"/>
+            <param name="semanticHint" value="2057"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/visual">
@@ -593,23 +593,23 @@
             <param name="semanticHint" value="2024"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.4">
+      <metamodel nsURI="http://openiaml.org/model0.5">
          <specializationType
-               id="org.openiaml.model.diagram.frame.EventTrigger_2030"
-               name="%metatype.name.EventTrigger_2030"
+               id="org.openiaml.model.diagram.frame.EventTrigger_2058"
+               name="%metatype.name.EventTrigger_2058"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
-            <specializes id="org.openiaml.model.diagram.frame.EventTrigger_2029"/>
-            <param name="semanticHint" value="2030"/>
+            <specializes id="org.openiaml.model.diagram.frame.EventTrigger_2039"/>
+            <param name="semanticHint" value="2058"/>
          </specializationType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/scopes">
          <metamodelType
-               id="org.openiaml.model.diagram.frame.Email_2034"
-               name="%metatype.name.Email_2034"
+               id="org.openiaml.model.diagram.frame.Email_2059"
+               name="%metatype.name.Email_2059"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="Email"
                edithelper="org.openiaml.model.diagram.frame.edit.helpers.EmailEditHelper">
-            <param name="semanticHint" value="2034"/>
+            <param name="semanticHint" value="2059"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/visual">
@@ -632,14 +632,14 @@
             <param name="semanticHint" value="2036"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.4">
+      <metamodel nsURI="http://openiaml.org/model0.5">
          <metamodelType
-               id="org.openiaml.model.diagram.frame.PrimitiveCondition_2038"
-               name="%metatype.name.PrimitiveCondition_2038"
+               id="org.openiaml.model.diagram.frame.PrimitiveCondition_2060"
+               name="%metatype.name.PrimitiveCondition_2060"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="PrimitiveCondition"
                edithelper="org.openiaml.model.diagram.frame.edit.helpers.PrimitiveConditionEditHelper">
-            <param name="semanticHint" value="2038"/>
+            <param name="semanticHint" value="2060"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
@@ -755,36 +755,36 @@
       </clientContext> 
       <binding context="org.openiaml.model.diagram.frame.TypeContext">
          <elementType ref="org.openiaml.model.diagram.frame.Frame_1000"/>
-         <elementType ref="org.openiaml.model.diagram.frame.EventTrigger_2029"/>
-         <elementType ref="org.openiaml.model.diagram.frame.EventTrigger_2028"/>
-         <elementType ref="org.openiaml.model.diagram.frame.CompositeOperation_2002"/>
-         <elementType ref="org.openiaml.model.diagram.frame.PrimitiveOperation_2003"/>
-         <elementType ref="org.openiaml.model.diagram.frame.DomainObject_2004"/>
-         <elementType ref="org.openiaml.model.diagram.frame.DomainAttribute_2005"/>
-         <elementType ref="org.openiaml.model.diagram.frame.Property_2033"/>
-         <elementType ref="org.openiaml.model.diagram.frame.Frame_2031"/>
+         <elementType ref="org.openiaml.model.diagram.frame.EventTrigger_2039"/>
+         <elementType ref="org.openiaml.model.diagram.frame.EventTrigger_2040"/>
+         <elementType ref="org.openiaml.model.diagram.frame.CompositeOperation_2041"/>
+         <elementType ref="org.openiaml.model.diagram.frame.PrimitiveOperation_2042"/>
+         <elementType ref="org.openiaml.model.diagram.frame.DomainObject_2043"/>
+         <elementType ref="org.openiaml.model.diagram.frame.DomainAttribute_2044"/>
+         <elementType ref="org.openiaml.model.diagram.frame.Property_2045"/>
+         <elementType ref="org.openiaml.model.diagram.frame.Frame_2046"/>
          <elementType ref="org.openiaml.model.diagram.frame.InputForm_2008"/>
          <elementType ref="org.openiaml.model.diagram.frame.InputTextField_2009"/>
-         <elementType ref="org.openiaml.model.diagram.frame.StaticValue_2010"/>
-         <elementType ref="org.openiaml.model.diagram.frame.Session_2032"/>
-         <elementType ref="org.openiaml.model.diagram.frame.LoginHandler_2012"/>
-         <elementType ref="org.openiaml.model.diagram.frame.CompositeCondition_2013"/>
-         <elementType ref="org.openiaml.model.diagram.frame.DomainObjectInstance_2014"/>
-         <elementType ref="org.openiaml.model.diagram.frame.DomainAttributeInstance_2015"/>
+         <elementType ref="org.openiaml.model.diagram.frame.StaticValue_2047"/>
+         <elementType ref="org.openiaml.model.diagram.frame.Session_2048"/>
+         <elementType ref="org.openiaml.model.diagram.frame.LoginHandler_2049"/>
+         <elementType ref="org.openiaml.model.diagram.frame.CompositeCondition_2050"/>
+         <elementType ref="org.openiaml.model.diagram.frame.DomainObjectInstance_2051"/>
+         <elementType ref="org.openiaml.model.diagram.frame.DomainAttributeInstance_2052"/>
          <elementType ref="org.openiaml.model.diagram.frame.Button_2016"/>
-         <elementType ref="org.openiaml.model.diagram.frame.QueryParameter_2017"/>
-         <elementType ref="org.openiaml.model.diagram.frame.AccessControlHandler_2018"/>
+         <elementType ref="org.openiaml.model.diagram.frame.QueryParameter_2053"/>
+         <elementType ref="org.openiaml.model.diagram.frame.AccessControlHandler_2054"/>
          <elementType ref="org.openiaml.model.diagram.frame.Permission_2019"/>
          <elementType ref="org.openiaml.model.diagram.frame.Role_2020"/>
-         <elementType ref="org.openiaml.model.diagram.frame.UserInstance_2021"/>
-         <elementType ref="org.openiaml.model.diagram.frame.EntryGate_2022"/>
-         <elementType ref="org.openiaml.model.diagram.frame.ExitGate_2023"/>
+         <elementType ref="org.openiaml.model.diagram.frame.UserInstance_2055"/>
+         <elementType ref="org.openiaml.model.diagram.frame.EntryGate_2056"/>
+         <elementType ref="org.openiaml.model.diagram.frame.ExitGate_2057"/>
          <elementType ref="org.openiaml.model.diagram.frame.Label_2024"/>
-         <elementType ref="org.openiaml.model.diagram.frame.EventTrigger_2030"/>
-         <elementType ref="org.openiaml.model.diagram.frame.Email_2034"/>
+         <elementType ref="org.openiaml.model.diagram.frame.EventTrigger_2058"/>
+         <elementType ref="org.openiaml.model.diagram.frame.Email_2059"/>
          <elementType ref="org.openiaml.model.diagram.frame.Map_2035"/>
          <elementType ref="org.openiaml.model.diagram.frame.MapPoint_2036"/>
-         <elementType ref="org.openiaml.model.diagram.frame.PrimitiveCondition_2038"/>
+         <elementType ref="org.openiaml.model.diagram.frame.PrimitiveCondition_2060"/>
          <elementType ref="org.openiaml.model.diagram.frame.SyncWire_4001"/>
          <elementType ref="org.openiaml.model.diagram.frame.RunAction_4015"/>
          <elementType ref="org.openiaml.model.diagram.frame.ParameterEdge_4011"/>

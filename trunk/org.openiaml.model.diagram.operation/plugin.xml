@@ -230,8 +230,8 @@
          </object>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_Operation"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2014,2015,2016,2017,2018,2019,2020,2021,2022,2030,2024,2025,2026,2027,2029,2031"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4004,4005,4006,4008"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4009,4010,4011,4008"/>
       </viewProvider>
    </extension>
 
@@ -243,13 +243,13 @@
             <method name="getType()" value="Iaml_Operation"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
-            <method name="getType()" value="2014,2015,2016,2017,2018,2019,2020,2021,2022,2030,2024,2025,2026,2027,2029,2031"/>
+            <method name="getType()" value="2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
-            <method name="getType()" value="4004,4005,4006,4008"/>
+            <method name="getType()" value="4009,4010,4011,4008"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5020,5021,5022,5023,5024,5025,5026,5027,5028,5029,5030,5031,5044,5041,5042,5043,5045,5035,5036,5037,5038,5046,5039,5040,5047"/>
+            <method name="getType()" value="5048,5049,5050,5051,5052,5053,5054,5055,5056,5057,5058,5059,5060,5061,5062,5063,5064,5065,5066,5067,5068,5069,5070,5071,5072"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value=""/>
@@ -263,23 +263,23 @@
       <modelingAssistantProvider class="org.openiaml.model.diagram.operation.providers.IamlModelingAssistantProvider">
          <Priority name="Lowest"/>
          <object class="org.openiaml.model.diagram.operation.edit.parts.CompositeOperationEditPart" id="CompositeOperation_1000"/>
-         <object class="org.openiaml.model.diagram.operation.edit.parts.CompositeOperation2EditPart" id="CompositeOperation_2014"/>
-         <object class="org.openiaml.model.diagram.operation.edit.parts.PrimitiveOperationEditPart" id="PrimitiveOperation_2015"/>
-         <object class="org.openiaml.model.diagram.operation.edit.parts.ParameterEditPart" id="Parameter_2016"/>
-         <object class="org.openiaml.model.diagram.operation.edit.parts.StartNodeEditPart" id="StartNode_2017"/>
-         <object class="org.openiaml.model.diagram.operation.edit.parts.CancelNodeEditPart" id="CancelNode_2018"/>
-         <object class="org.openiaml.model.diagram.operation.edit.parts.FinishNodeEditPart" id="FinishNode_2019"/>
-         <object class="org.openiaml.model.diagram.operation.edit.parts.DecisionNodeEditPart" id="DecisionNode_2020"/>
-         <object class="org.openiaml.model.diagram.operation.edit.parts.DecisionOperationEditPart" id="DecisionOperation_2021"/>
-         <object class="org.openiaml.model.diagram.operation.edit.parts.TemporaryVariableEditPart" id="TemporaryVariable_2022"/>
-         <object class="org.openiaml.model.diagram.operation.edit.parts.PropertyEditPart" id="Property_2030"/>
-         <object class="org.openiaml.model.diagram.operation.edit.parts.SplitNodeEditPart" id="SplitNode_2024"/>
-         <object class="org.openiaml.model.diagram.operation.edit.parts.JoinNodeEditPart" id="JoinNode_2025"/>
-         <object class="org.openiaml.model.diagram.operation.edit.parts.StaticValueEditPart" id="StaticValue_2026"/>
-         <object class="org.openiaml.model.diagram.operation.edit.parts.OperationCallNodeEditPart" id="OperationCallNode_2027"/>
-         <object class="org.openiaml.model.diagram.operation.edit.parts.ArithmeticEditPart" id="Arithmetic_2029"/>
-         <object class="org.openiaml.model.diagram.operation.edit.parts.CastNodeEditPart" id="CastNode_2031"/>
-         <context elements="CompositeOperation_1000,CompositeOperation_2014,PrimitiveOperation_2015,Parameter_2016,StartNode_2017,CancelNode_2018,FinishNode_2019,DecisionNode_2020,DecisionOperation_2021,TemporaryVariable_2022,Property_2030,SplitNode_2024,JoinNode_2025,StaticValue_2026,OperationCallNode_2027,Arithmetic_2029,CastNode_2031"/>
+         <object class="org.openiaml.model.diagram.operation.edit.parts.CompositeOperation2EditPart" id="CompositeOperation_2032"/>
+         <object class="org.openiaml.model.diagram.operation.edit.parts.PrimitiveOperationEditPart" id="PrimitiveOperation_2033"/>
+         <object class="org.openiaml.model.diagram.operation.edit.parts.ParameterEditPart" id="Parameter_2034"/>
+         <object class="org.openiaml.model.diagram.operation.edit.parts.StartNodeEditPart" id="StartNode_2035"/>
+         <object class="org.openiaml.model.diagram.operation.edit.parts.CancelNodeEditPart" id="CancelNode_2036"/>
+         <object class="org.openiaml.model.diagram.operation.edit.parts.FinishNodeEditPart" id="FinishNode_2037"/>
+         <object class="org.openiaml.model.diagram.operation.edit.parts.DecisionNodeEditPart" id="DecisionNode_2038"/>
+         <object class="org.openiaml.model.diagram.operation.edit.parts.DecisionOperationEditPart" id="DecisionOperation_2039"/>
+         <object class="org.openiaml.model.diagram.operation.edit.parts.TemporaryVariableEditPart" id="TemporaryVariable_2040"/>
+         <object class="org.openiaml.model.diagram.operation.edit.parts.PropertyEditPart" id="Property_2041"/>
+         <object class="org.openiaml.model.diagram.operation.edit.parts.SplitNodeEditPart" id="SplitNode_2042"/>
+         <object class="org.openiaml.model.diagram.operation.edit.parts.JoinNodeEditPart" id="JoinNode_2043"/>
+         <object class="org.openiaml.model.diagram.operation.edit.parts.StaticValueEditPart" id="StaticValue_2044"/>
+         <object class="org.openiaml.model.diagram.operation.edit.parts.OperationCallNodeEditPart" id="OperationCallNode_2045"/>
+         <object class="org.openiaml.model.diagram.operation.edit.parts.ArithmeticEditPart" id="Arithmetic_2046"/>
+         <object class="org.openiaml.model.diagram.operation.edit.parts.CastNodeEditPart" id="CastNode_2047"/>
+         <context elements="CompositeOperation_1000,CompositeOperation_2032,PrimitiveOperation_2033,Parameter_2034,StartNode_2035,CancelNode_2036,FinishNode_2037,DecisionNode_2038,DecisionOperation_2039,TemporaryVariable_2040,Property_2041,SplitNode_2042,JoinNode_2043,StaticValue_2044,OperationCallNode_2045,Arithmetic_2046,CastNode_2047"/>
       </modelingAssistantProvider>
    </extension>
 
@@ -302,7 +302,7 @@
       <decoratorProvider class="org.openiaml.model.diagram.operation.providers.IamlShortcutsDecoratorProvider">
          <Priority name="Lowest"/>
          <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
-            <method name="getType()" value="2014,2015,2016,2017,2018,2019,2020,2021,2022,2030,2024,2025,2026,2027,2029,2031"/>
+            <method name="getType()" value="2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047"/>
          </object>
          <context decoratorTargets="generated-top-nodes"/>
       </decoratorProvider>
@@ -310,7 +310,7 @@
 
    <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypes" id="element-types">
       <?gmfgen generated="true"?>
-      <metamodel nsURI="http://openiaml.org/model0.4">
+      <metamodel nsURI="http://openiaml.org/model0.5">
          <metamodelType
                id="org.openiaml.model.diagram.operation.CompositeOperation_1000"
                name="%metatype.name.CompositeOperation_1000"
@@ -320,193 +320,193 @@
             <param name="semanticHint" value="1000"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.4">
+      <metamodel nsURI="http://openiaml.org/model0.5">
          <specializationType
-               id="org.openiaml.model.diagram.operation.CompositeOperation_2014"
-               name="%metatype.name.CompositeOperation_2014"
+               id="org.openiaml.model.diagram.operation.CompositeOperation_2032"
+               name="%metatype.name.CompositeOperation_2032"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
             <specializes id="org.openiaml.model.diagram.operation.CompositeOperation_1000"/>
-            <param name="semanticHint" value="2014"/>
+            <param name="semanticHint" value="2032"/>
          </specializationType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.4">
+      <metamodel nsURI="http://openiaml.org/model0.5">
          <metamodelType
-               id="org.openiaml.model.diagram.operation.PrimitiveOperation_2015"
-               name="%metatype.name.PrimitiveOperation_2015"
+               id="org.openiaml.model.diagram.operation.PrimitiveOperation_2033"
+               name="%metatype.name.PrimitiveOperation_2033"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="PrimitiveOperation"
                edithelper="org.openiaml.model.diagram.operation.edit.helpers.PrimitiveOperationEditHelper">
-            <param name="semanticHint" value="2015"/>
+            <param name="semanticHint" value="2033"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.4">
+      <metamodel nsURI="http://openiaml.org/model0.5">
          <metamodelType
-               id="org.openiaml.model.diagram.operation.Parameter_2016"
-               name="%metatype.name.Parameter_2016"
+               id="org.openiaml.model.diagram.operation.Parameter_2034"
+               name="%metatype.name.Parameter_2034"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="Parameter"
                edithelper="org.openiaml.model.diagram.operation.edit.helpers.ParameterEditHelper">
-            <param name="semanticHint" value="2016"/>
+            <param name="semanticHint" value="2034"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/operations">
          <metamodelType
-               id="org.openiaml.model.diagram.operation.StartNode_2017"
-               name="%metatype.name.StartNode_2017"
+               id="org.openiaml.model.diagram.operation.StartNode_2035"
+               name="%metatype.name.StartNode_2035"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="StartNode"
                edithelper="org.openiaml.model.diagram.operation.edit.helpers.StartNodeEditHelper">
-            <param name="semanticHint" value="2017"/>
+            <param name="semanticHint" value="2035"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/operations">
          <metamodelType
-               id="org.openiaml.model.diagram.operation.CancelNode_2018"
-               name="%metatype.name.CancelNode_2018"
+               id="org.openiaml.model.diagram.operation.CancelNode_2036"
+               name="%metatype.name.CancelNode_2036"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="CancelNode"
                edithelper="org.openiaml.model.diagram.operation.edit.helpers.CancelNodeEditHelper">
-            <param name="semanticHint" value="2018"/>
+            <param name="semanticHint" value="2036"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/operations">
          <metamodelType
-               id="org.openiaml.model.diagram.operation.FinishNode_2019"
-               name="%metatype.name.FinishNode_2019"
+               id="org.openiaml.model.diagram.operation.FinishNode_2037"
+               name="%metatype.name.FinishNode_2037"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="FinishNode"
                edithelper="org.openiaml.model.diagram.operation.edit.helpers.FinishNodeEditHelper">
-            <param name="semanticHint" value="2019"/>
+            <param name="semanticHint" value="2037"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/operations">
          <metamodelType
-               id="org.openiaml.model.diagram.operation.DecisionNode_2020"
-               name="%metatype.name.DecisionNode_2020"
+               id="org.openiaml.model.diagram.operation.DecisionNode_2038"
+               name="%metatype.name.DecisionNode_2038"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="DecisionNode"
                edithelper="org.openiaml.model.diagram.operation.edit.helpers.DecisionNodeEditHelper">
-            <param name="semanticHint" value="2020"/>
+            <param name="semanticHint" value="2038"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/operations">
          <metamodelType
-               id="org.openiaml.model.diagram.operation.DecisionOperation_2021"
-               name="%metatype.name.DecisionOperation_2021"
+               id="org.openiaml.model.diagram.operation.DecisionOperation_2039"
+               name="%metatype.name.DecisionOperation_2039"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="DecisionOperation"
                edithelper="org.openiaml.model.diagram.operation.edit.helpers.DecisionOperationEditHelper">
-            <param name="semanticHint" value="2021"/>
+            <param name="semanticHint" value="2039"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.4">
+      <metamodel nsURI="http://openiaml.org/model0.5">
          <metamodelType
-               id="org.openiaml.model.diagram.operation.TemporaryVariable_2022"
-               name="%metatype.name.TemporaryVariable_2022"
+               id="org.openiaml.model.diagram.operation.TemporaryVariable_2040"
+               name="%metatype.name.TemporaryVariable_2040"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="TemporaryVariable"
                edithelper="org.openiaml.model.diagram.operation.edit.helpers.TemporaryVariableEditHelper">
-            <param name="semanticHint" value="2022"/>
+            <param name="semanticHint" value="2040"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.4">
+      <metamodel nsURI="http://openiaml.org/model0.5">
          <metamodelType
-               id="org.openiaml.model.diagram.operation.Property_2030"
-               name="%metatype.name.Property_2030"
+               id="org.openiaml.model.diagram.operation.Property_2041"
+               name="%metatype.name.Property_2041"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="Property"
                edithelper="org.openiaml.model.diagram.operation.edit.helpers.PropertyEditHelper">
-            <param name="semanticHint" value="2030"/>
+            <param name="semanticHint" value="2041"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/operations">
          <metamodelType
-               id="org.openiaml.model.diagram.operation.SplitNode_2024"
-               name="%metatype.name.SplitNode_2024"
+               id="org.openiaml.model.diagram.operation.SplitNode_2042"
+               name="%metatype.name.SplitNode_2042"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="SplitNode"
                edithelper="org.openiaml.model.diagram.operation.edit.helpers.SplitNodeEditHelper">
-            <param name="semanticHint" value="2024"/>
+            <param name="semanticHint" value="2042"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/operations">
          <metamodelType
-               id="org.openiaml.model.diagram.operation.JoinNode_2025"
-               name="%metatype.name.JoinNode_2025"
+               id="org.openiaml.model.diagram.operation.JoinNode_2043"
+               name="%metatype.name.JoinNode_2043"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="JoinNode"
                edithelper="org.openiaml.model.diagram.operation.edit.helpers.JoinNodeEditHelper">
-            <param name="semanticHint" value="2025"/>
+            <param name="semanticHint" value="2043"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.4">
+      <metamodel nsURI="http://openiaml.org/model0.5">
          <metamodelType
-               id="org.openiaml.model.diagram.operation.StaticValue_2026"
-               name="%metatype.name.StaticValue_2026"
+               id="org.openiaml.model.diagram.operation.StaticValue_2044"
+               name="%metatype.name.StaticValue_2044"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="StaticValue"
                edithelper="org.openiaml.model.diagram.operation.edit.helpers.StaticValueEditHelper">
-            <param name="semanticHint" value="2026"/>
+            <param name="semanticHint" value="2044"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/operations">
          <metamodelType
-               id="org.openiaml.model.diagram.operation.OperationCallNode_2027"
-               name="%metatype.name.OperationCallNode_2027"
+               id="org.openiaml.model.diagram.operation.OperationCallNode_2045"
+               name="%metatype.name.OperationCallNode_2045"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="OperationCallNode"
                edithelper="org.openiaml.model.diagram.operation.edit.helpers.OperationCallNodeEditHelper">
-            <param name="semanticHint" value="2027"/>
+            <param name="semanticHint" value="2045"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/operations">
          <metamodelType
-               id="org.openiaml.model.diagram.operation.Arithmetic_2029"
-               name="%metatype.name.Arithmetic_2029"
+               id="org.openiaml.model.diagram.operation.Arithmetic_2046"
+               name="%metatype.name.Arithmetic_2046"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="Arithmetic"
                edithelper="org.openiaml.model.diagram.operation.edit.helpers.ArithmeticEditHelper">
-            <param name="semanticHint" value="2029"/>
+            <param name="semanticHint" value="2046"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/operations">
          <metamodelType
-               id="org.openiaml.model.diagram.operation.CastNode_2031"
-               name="%metatype.name.CastNode_2031"
+               id="org.openiaml.model.diagram.operation.CastNode_2047"
+               name="%metatype.name.CastNode_2047"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="CastNode"
                edithelper="org.openiaml.model.diagram.operation.edit.helpers.CastNodeEditHelper">
-            <param name="semanticHint" value="2031"/>
+            <param name="semanticHint" value="2047"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.4">
+      <metamodel nsURI="http://openiaml.org/model0.5">
          <metamodelType
-               id="org.openiaml.model.diagram.operation.DataFlowEdge_4004"
-               name="%metatype.name.DataFlowEdge_4004"
+               id="org.openiaml.model.diagram.operation.DataFlowEdge_4009"
+               name="%metatype.name.DataFlowEdge_4009"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="DataFlowEdge"
                edithelper="org.openiaml.model.diagram.operation.edit.helpers.DataFlowEdgeEditHelper">
-            <param name="semanticHint" value="4004"/>
+            <param name="semanticHint" value="4009"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.4">
+      <metamodel nsURI="http://openiaml.org/model0.5">
          <metamodelType
-               id="org.openiaml.model.diagram.operation.ExecutionEdge_4005"
-               name="%metatype.name.ExecutionEdge_4005"
+               id="org.openiaml.model.diagram.operation.ExecutionEdge_4010"
+               name="%metatype.name.ExecutionEdge_4010"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="ExecutionEdge"
                edithelper="org.openiaml.model.diagram.operation.edit.helpers.ExecutionEdgeEditHelper">
-            <param name="semanticHint" value="4005"/>
+            <param name="semanticHint" value="4010"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.4">
+      <metamodel nsURI="http://openiaml.org/model0.5">
          <metamodelType
-               id="org.openiaml.model.diagram.operation.ConditionalEdge_4006"
-               name="%metatype.name.ConditionalEdge_4006"
+               id="org.openiaml.model.diagram.operation.ConditionalEdge_4011"
+               name="%metatype.name.ConditionalEdge_4011"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="ConditionalEdge"
                edithelper="org.openiaml.model.diagram.operation.edit.helpers.ConditionalEdgeEditHelper">
-            <param name="semanticHint" value="4006"/>
+            <param name="semanticHint" value="4011"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
@@ -532,25 +532,25 @@
       </clientContext> 
       <binding context="org.openiaml.model.diagram.operation.TypeContext">
          <elementType ref="org.openiaml.model.diagram.operation.CompositeOperation_1000"/>
-         <elementType ref="org.openiaml.model.diagram.operation.CompositeOperation_2014"/>
-         <elementType ref="org.openiaml.model.diagram.operation.PrimitiveOperation_2015"/>
-         <elementType ref="org.openiaml.model.diagram.operation.Parameter_2016"/>
-         <elementType ref="org.openiaml.model.diagram.operation.StartNode_2017"/>
-         <elementType ref="org.openiaml.model.diagram.operation.CancelNode_2018"/>
-         <elementType ref="org.openiaml.model.diagram.operation.FinishNode_2019"/>
-         <elementType ref="org.openiaml.model.diagram.operation.DecisionNode_2020"/>
-         <elementType ref="org.openiaml.model.diagram.operation.DecisionOperation_2021"/>
-         <elementType ref="org.openiaml.model.diagram.operation.TemporaryVariable_2022"/>
-         <elementType ref="org.openiaml.model.diagram.operation.Property_2030"/>
-         <elementType ref="org.openiaml.model.diagram.operation.SplitNode_2024"/>
-         <elementType ref="org.openiaml.model.diagram.operation.JoinNode_2025"/>
-         <elementType ref="org.openiaml.model.diagram.operation.StaticValue_2026"/>
-         <elementType ref="org.openiaml.model.diagram.operation.OperationCallNode_2027"/>
-         <elementType ref="org.openiaml.model.diagram.operation.Arithmetic_2029"/>
-         <elementType ref="org.openiaml.model.diagram.operation.CastNode_2031"/>
-         <elementType ref="org.openiaml.model.diagram.operation.DataFlowEdge_4004"/>
-         <elementType ref="org.openiaml.model.diagram.operation.ExecutionEdge_4005"/>
-         <elementType ref="org.openiaml.model.diagram.operation.ConditionalEdge_4006"/>
+         <elementType ref="org.openiaml.model.diagram.operation.CompositeOperation_2032"/>
+         <elementType ref="org.openiaml.model.diagram.operation.PrimitiveOperation_2033"/>
+         <elementType ref="org.openiaml.model.diagram.operation.Parameter_2034"/>
+         <elementType ref="org.openiaml.model.diagram.operation.StartNode_2035"/>
+         <elementType ref="org.openiaml.model.diagram.operation.CancelNode_2036"/>
+         <elementType ref="org.openiaml.model.diagram.operation.FinishNode_2037"/>
+         <elementType ref="org.openiaml.model.diagram.operation.DecisionNode_2038"/>
+         <elementType ref="org.openiaml.model.diagram.operation.DecisionOperation_2039"/>
+         <elementType ref="org.openiaml.model.diagram.operation.TemporaryVariable_2040"/>
+         <elementType ref="org.openiaml.model.diagram.operation.Property_2041"/>
+         <elementType ref="org.openiaml.model.diagram.operation.SplitNode_2042"/>
+         <elementType ref="org.openiaml.model.diagram.operation.JoinNode_2043"/>
+         <elementType ref="org.openiaml.model.diagram.operation.StaticValue_2044"/>
+         <elementType ref="org.openiaml.model.diagram.operation.OperationCallNode_2045"/>
+         <elementType ref="org.openiaml.model.diagram.operation.Arithmetic_2046"/>
+         <elementType ref="org.openiaml.model.diagram.operation.CastNode_2047"/>
+         <elementType ref="org.openiaml.model.diagram.operation.DataFlowEdge_4009"/>
+         <elementType ref="org.openiaml.model.diagram.operation.ExecutionEdge_4010"/>
+         <elementType ref="org.openiaml.model.diagram.operation.ConditionalEdge_4011"/>
          <elementType ref="org.openiaml.model.diagram.operation.RunAction_4008"/>
          <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
       </binding>

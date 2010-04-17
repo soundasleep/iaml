@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="model.12625f6d47e.e">
-  <scopes xsi:type="iaml.scopes:Session" id="scopes.12625f6d50b.2" name="Session name"/>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="model.128091428a9.652">
+  <scopes xsi:type="iaml.scopes:Session" id="scopes.12809142c14.3e" name="Session Name"/>
 </iaml:InternetApplication>

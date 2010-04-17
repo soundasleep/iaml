@@ -237,11 +237,11 @@
       <viewProvider class="org.openiaml.model.diagram.providers.IamlViewProvider">
          <Priority name="Lowest"/>
          <object id="referencing-diagrams" class="org.eclipse.gmf.runtime.notation.Diagram">
-            <method name="getType()" value="iaml_domain_object_instance,iaml,iaml_condition,iaml_wire,iaml_element,iaml_domain_store,iaml_operation,iaml_visual,iaml_user_store,iaml_domain_object,iaml_session,iaml_frame,iaml_email"/>
+            <method name="getType()" value="iaml_domain_object_instance,iaml,iaml_condition,iaml_wire,iaml_element,iaml_domain_store,iaml_operation,iaml_visual,iaml_user_store,iaml_domain_object,iaml_session,iaml_frame,iaml_email,iaml_feed_producer"/>
          </object>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2048"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4006,4005,4007"/>
       </viewProvider>
    </extension>
@@ -254,13 +254,13 @@
             <method name="getType()" value="Iaml"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
-            <method name="getType()" value="2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046"/>
+            <method name="getType()" value="2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2048"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
             <method name="getType()" value="4001,4006,4005,4007"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5061,5062,5063,5064,5065,5066,5067,5068,5069,5070,5071,5072,5073,5074,5075,5076,5077,5078,5079,5080,5081,5082,5083,5084"/>
+            <method name="getType()" value="5061,5062,5063,5064,5065,5066,5067,5068,5069,5070,5071,5072,5073,5074,5075,5076,5077,5078,5079,5080,5081,5082,5083,5084,5086"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value=""/>
@@ -287,7 +287,8 @@
          <object class="org.openiaml.model.diagram.edit.parts.CompositeConditionEditPart" id="CompositeCondition_2044"/>
          <object class="org.openiaml.model.diagram.edit.parts.UserStoreEditPart" id="UserStore_2045"/>
          <object class="org.openiaml.model.diagram.edit.parts.EmailEditPart" id="Email_2046"/>
-         <context elements="InternetApplication_1000,EventTrigger_2034,CompositeOperation_2035,PrimitiveOperation_2036,DomainObject_2037,Frame_2038,DynamicApplicationElementSet_2039,Property_2040,DomainStore_2041,Session_2042,LoginHandler_2043,CompositeCondition_2044,UserStore_2045,Email_2046"/>
+         <object class="org.openiaml.model.diagram.edit.parts.FeedProducerEditPart" id="FeedProducer_2048"/>
+         <context elements="InternetApplication_1000,EventTrigger_2034,CompositeOperation_2035,PrimitiveOperation_2036,DomainObject_2037,Frame_2038,DynamicApplicationElementSet_2039,Property_2040,DomainStore_2041,Session_2042,LoginHandler_2043,CompositeCondition_2044,UserStore_2045,Email_2046,FeedProducer_2048"/>
       </modelingAssistantProvider>
    </extension>
 
@@ -310,7 +311,7 @@
       <decoratorProvider class="org.openiaml.model.diagram.providers.IamlShortcutsDecoratorProvider">
          <Priority name="Lowest"/>
          <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
-            <method name="getType()" value="2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046"/>
+            <method name="getType()" value="2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2048"/>
          </object>
          <context decoratorTargets="generated-top-nodes"/>
       </decoratorProvider>
@@ -458,6 +459,16 @@
             <param name="semanticHint" value="2046"/>
          </metamodelType>
       </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/scopes">
+         <metamodelType
+               id="org.openiaml.model.diagram.FeedProducer_2048"
+               name="%metatype.name.FeedProducer_2048"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="FeedProducer"
+               edithelper="org.openiaml.model.diagram.edit.helpers.FeedProducerEditHelper">
+            <param name="semanticHint" value="2048"/>
+         </metamodelType>
+      </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
          <metamodelType
                id="org.openiaml.model.diagram.SyncWire_4001"
@@ -524,6 +535,7 @@
          <elementType ref="org.openiaml.model.diagram.CompositeCondition_2044"/>
          <elementType ref="org.openiaml.model.diagram.UserStore_2045"/>
          <elementType ref="org.openiaml.model.diagram.Email_2046"/>
+         <elementType ref="org.openiaml.model.diagram.FeedProducer_2048"/>
          <elementType ref="org.openiaml.model.diagram.SyncWire_4001"/>
          <elementType ref="org.openiaml.model.diagram.RunAction_4006"/>
          <elementType ref="org.openiaml.model.diagram.ConditionEdge_4005"/>

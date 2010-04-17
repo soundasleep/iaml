@@ -1,0 +1,7 @@
+# Tracing options for the org.openiaml.model.diagram.feed_producer plug-in
+
+# Common issues
+org.openiaml.model.diagram.feed_producer/debug=false
+
+# Visual IDs
+org.openiaml.model.diagram.feed_producer/debug/visualID=false

@@ -1,0 +1,916 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+
+   <extension point="org.eclipse.team.core.fileTypes" id="repo-ftype">
+      <?gmfgen generated="true"?>
+      <fileTypes type="text" extension="iaml_feed_producer_diagram"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser" id="resource-factory">
+      <?gmfgen generated="true"?>
+      <parser
+         type="iaml_feed_producer_diagram"
+         class="org.eclipse.gmf.runtime.emf.core.resources.GMFResourceFactory">
+      </parser>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors" id="gmf-editor">
+      <?gmfgen generated="true"?>
+      <editor
+         id="org.openiaml.model.diagram.feed_producer.part.IamlDiagramEditorID"
+         name="%editorName"
+         icon="icons/obj16/ScopesDiagramFile.gif"
+         extensions="iaml_feed_producer_diagram"
+         default="true"
+         class="org.openiaml.model.diagram.feed_producer.part.IamlDiagramEditor"
+         matchingStrategy="org.openiaml.model.diagram.feed_producer.part.IamlMatchingStrategy"
+         contributorClass="org.openiaml.model.diagram.feed_producer.part.IamlDiagramActionBarContributor">
+      </editor>
+   </extension>
+   
+   <extension point="org.eclipse.ui.contexts" id="ui-context">
+      <?gmfgen generated="true"?>
+      <context
+         description="%context.description"
+         id="org.openiaml.model.diagram.feed_producer.ui.diagramContext"
+         name="%context.name"
+         parentId="org.eclipse.gmf.runtime.diagram.ui.diagramContext">
+      </context>
+   </extension>
+
+   <extension point="org.eclipse.ui.newWizards" id="creation-wizard">
+      <?gmfgen generated="true"?>
+  	  <wizard
+  	     name="%newWizardName"
+  	     icon="icons/obj16/ScopesDiagramFile.gif"
+  	     category="org.eclipse.ui.Examples"
+  	     class="org.openiaml.model.diagram.feed_producer.part.IamlCreationWizard"
+  	     id="org.openiaml.model.diagram.feed_producer.part.IamlCreationWizardID">
+  	  	 <description>%newWizardDesc</description>  
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.popupMenus" id="init-diagram-action">
+      <?gmfgen generated="true"?>
+      <objectContribution
+            id="org.openiaml.model.diagram.feed_producer.InitDiagram"
+            nameFilter="*.iaml_feed_producer"
+            objectClass="org.eclipse.core.resources.IFile">
+         <action
+               label="%initDiagramActionLabel"
+               class="org.openiaml.model.diagram.feed_producer.part.IamlInitDiagramFileAction"
+               menubarPath="additions"
+               enablesFor="1"
+               id="org.openiaml.model.diagram.feed_producer.InitDiagramAction">
+         </action>
+      </objectContribution>
+   </extension>
+	
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.action.globalActionHandlerProviders" id="global-actions">
+      <?gmfgen generated="true"?>
+      <GlobalActionHandlerProvider
+         class="org.eclipse.gmf.runtime.diagram.ui.providers.DiagramGlobalActionHandlerProvider"
+         id="Iaml_FeedProducerPresentation">
+         <Priority name="Lowest"/>
+         <ViewId id="org.openiaml.model.diagram.feed_producer.part.IamlDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="delete"/>
+            </ElementType>
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart">
+               <GlobalActionId actionId="save"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      <GlobalActionHandlerProvider
+         class="org.eclipse.gmf.runtime.diagram.ui.providers.ide.providers.DiagramIDEGlobalActionHandlerProvider"
+         id="Iaml_FeedProducerPresentationIDE">
+         <Priority name="Lowest"/>
+         <ViewId id="org.openiaml.model.diagram.feed_producer.part.IamlDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="bookmark"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+      <GlobalActionHandlerProvider
+            class="org.eclipse.gmf.runtime.diagram.ui.render.providers.DiagramUIRenderGlobalActionHandlerProvider"
+            id="Iaml_FeedProducerRender">
+         <Priority name="Lowest"/>
+         <ViewId id="org.openiaml.model.diagram.feed_producer.part.IamlDiagramEditorID">
+            <ElementType class="org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart">
+               <GlobalActionId actionId="cut"/>
+               <GlobalActionId actionId="copy"/>
+               <GlobalActionId actionId="paste"/>
+            </ElementType>
+         </ViewId>
+      </GlobalActionHandlerProvider>
+   </extension>
+
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.markerNavigationProviders" id="markers-navigation">
+      <?gmfgen generated="true"?>
+      <MarkerNavigationProvider class="org.openiaml.model.diagram.feed_producer.providers.IamlMarkerNavigationProvider">
+         <MarkerType name="org.openiaml.model.diagram.feed_producer.diagnostic"/>
+         <Priority name="Lowest"/>
+      </MarkerNavigationProvider>
+   </extension>
+
+   <extension id="diagnostic" name="Iaml Diagram Plugin (Feed Producer) problems" point="org.eclipse.core.resources.markers">
+      <?gmfgen generated="true"?>
+      <super type="org.eclipse.core.resources.problemmarker"/>
+      <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
+      <persistent value="true"/>
+   </extension>   
+
+   <extension id="validationDecoratorProvider" name="ValidationDecorations" point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
+      <?gmfgen generated="true"?>
+      <decoratorProvider class="org.openiaml.model.diagram.feed_producer.providers.IamlValidationDecoratorProvider">
+         <Priority name="Lowest"/>
+         <object class="org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart(org.eclipse.gmf.runtime.diagram.ui)" id="PRIMARY_VIEW"/>
+         <context decoratorTargets="PRIMARY_VIEW"/>
+      </decoratorProvider>
+   </extension>
+
+   <extension point="org.eclipse.core.runtime.preferences" id="prefs">
+      <?gmfgen generated="true"?>
+      <initializer class="org.openiaml.model.diagram.feed_producer.preferences.DiagramPreferenceInitializer"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.preferencePages" id="prefpages">
+      <?gmfgen generated="true"?>
+      <page
+            id="org.openiaml.model.diagram.general"
+            name="%prefpage.org.openiaml.model.diagram.general"
+            class="org.openiaml.model.diagram.feed_producer.preferences.DiagramGeneralPreferencePage">
+      </page>
+      <page
+            id="org.openiaml.model.diagram.appearance"
+            name="%prefpage.org.openiaml.model.diagram.appearance"
+            category="org.openiaml.model.diagram.general"
+            class="org.openiaml.model.diagram.feed_producer.preferences.DiagramAppearancePreferencePage">
+      </page>
+      <page
+            id="org.openiaml.model.diagram.connections"
+            name="%prefpage.org.openiaml.model.diagram.connections"
+            category="org.openiaml.model.diagram.general"
+            class="org.openiaml.model.diagram.feed_producer.preferences.DiagramConnectionsPreferencePage">
+      </page>
+      <page
+            id="org.openiaml.model.diagram.printing"
+            name="%prefpage.org.openiaml.model.diagram.printing"
+            category="org.openiaml.model.diagram.general"
+            class="org.openiaml.model.diagram.feed_producer.preferences.DiagramPrintingPreferencePage">
+      </page>
+      <page
+            id="org.openiaml.model.diagram.rulersAndGrid"
+            name="%prefpage.org.openiaml.model.diagram.rulersAndGrid"
+            category="org.openiaml.model.diagram.general"
+            class="org.openiaml.model.diagram.feed_producer.preferences.DiagramRulersAndGridPreferencePage">
+      </page>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyContributor" id="prop-contrib">
+      <?gmfgen generated="true"?>
+      <propertyContributor
+            contributorId="org.openiaml.model.diagram.feed_producer"
+            labelProvider="org.openiaml.model.diagram.feed_producer.sheet.IamlSheetLabelProvider">
+         <propertyCategory category="domain"/>
+         <propertyCategory category="visual"/>
+         <propertyCategory category="extra"/>
+      </propertyContributor>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertyTabs" id="proptabs">
+      <?gmfgen generated="true"?>   
+      <propertyTabs contributorId="org.openiaml.model.diagram.feed_producer">
+         <propertyTab
+             category="visual"
+             id="property.tab.AppearancePropertySection"
+             label="%tab.appearance"/>
+          <propertyTab
+             category="visual"
+             id="property.tab.DiagramPropertySection"
+             label="%tab.diagram"/>
+          <propertyTab
+             category="domain"
+             id="property.tab.domain"
+             label="%tab.domain"/>
+      </propertyTabs>
+   </extension>
+
+   <extension point="org.eclipse.ui.views.properties.tabbed.propertySections" id="propsections">
+      <?gmfgen generated="true"?>   
+      <propertySections contributorId="org.openiaml.model.diagram.feed_producer">
+         <propertySection id="property.section.ConnectorAppearancePropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ConnectionEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ConnectionAppearancePropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection>
+         <propertySection id="property.section.ShapeColorAndFontPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.ShapeEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.ShapeColorsAndFontsPropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection> 
+         <propertySection id="property.section.DiagramColorsAndFontsPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.DiagramEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.appearance.DiagramColorsAndFontsPropertySection" 
+            tab="property.tab.AppearancePropertySection">
+         </propertySection>     
+         <propertySection id="property.section.RulerGridPropertySection" 
+            filter="org.eclipse.gmf.runtime.diagram.ui.properties.filters.DiagramEditPartPropertySectionFilter" 
+            class="org.eclipse.gmf.runtime.diagram.ui.properties.sections.grid.RulerGridPropertySection" 
+            tab="property.tab.DiagramPropertySection">
+         </propertySection>     
+         <propertySection
+            id="property.section.domain" 
+            tab="property.tab.domain"
+            class="org.openiaml.model.diagram.feed_producer.sheet.IamlPropertySection">
+            <input type="org.eclipse.gmf.runtime.notation.View"/>
+            <input type="org.eclipse.gef.EditPart"/>
+            <input type="org.openiaml.model.diagram.feed_producer.navigator.IamlAbstractNavigatorItem"/>
+         </propertySection>
+      </propertySections>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.core.viewProviders" id="view-provider">
+      <?gmfgen generated="true"?>
+      <viewProvider class="org.openiaml.model.diagram.feed_producer.providers.IamlViewProvider">
+         <Priority name="Lowest"/>
+         <object id="referencing-diagrams" class="org.eclipse.gmf.runtime.notation.Diagram">
+            <method name="getType()" value="iaml_domain_object_instance,iaml_condition,iaml,iaml_wire,iaml_domain_store,iaml_operation,iaml_visual,iaml_email,iaml_feed_producer,iaml_frame,iaml_element,iaml_session,iaml_domain_object,iaml_user_store"/>
+         </object>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_FeedProducer"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4002,4003,4004,4005,4006,4007,4008,4009,4010"/>
+      </viewProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.ui.editpartProviders" id="ep-provider">
+      <?gmfgen generated="true"?>
+      <editpartProvider class="org.openiaml.model.diagram.feed_producer.providers.IamlEditPartProvider">
+         <Priority name="Lowest"/>
+         <object class="org.eclipse.gmf.runtime.notation.Diagram" id="generated-diagram">
+            <method name="getType()" value="Iaml_FeedProducer"/>
+         </object>
+         <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
+            <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024"/>
+         </object>
+         <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
+            <method name="getType()" value="4001,4002,4003,4004,4005,4006,4007,4008,4009,4010"/>
+         </object>
+         <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
+            <method name="getType()" value="5001,5002,5003,5004,5005,5006,5007,5008,5009,5010,5011,5012,5013,5014,5015,5016,5017,5018,5019,5020,5021,5022,5023,5024,5025,5026,5027,5028,5029,5030,5031,5032,5033,5034,5035,5036,5037,5038,5039,5040,5041,5042,5043,5044,5045,5046,5047,5048,5049,5050,5051"/>
+         </object>
+         <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
+            <method name="getType()" value=""/>
+         </object>
+         <context views="generated-diagram,generated-nodes,generated-links,generated-labels,generated-compartments"/>
+      </editpartProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.emf.ui.modelingAssistantProviders" id="modelassist-provider">
+      <?gmfgen generated="true"?>
+      <modelingAssistantProvider class="org.openiaml.model.diagram.feed_producer.providers.IamlModelingAssistantProvider">
+         <Priority name="Lowest"/>
+         <object class="org.openiaml.model.diagram.feed_producer.edit.parts.SessionEditPart" id="FeedProducer_1000"/>
+         <object class="org.openiaml.model.diagram.feed_producer.edit.parts.EventTriggerEditPart" id="EventTrigger_2001"/>
+         <object class="org.openiaml.model.diagram.feed_producer.edit.parts.EventTrigger2EditPart" id="EventTrigger_2002"/>
+         <object class="org.openiaml.model.diagram.feed_producer.edit.parts.CompositeOperationEditPart" id="CompositeOperation_2003"/>
+         <object class="org.openiaml.model.diagram.feed_producer.edit.parts.PrimitiveOperationEditPart" id="PrimitiveOperation_2004"/>
+         <object class="org.openiaml.model.diagram.feed_producer.edit.parts.DomainObjectEditPart" id="DomainObject_2005"/>
+         <object class="org.openiaml.model.diagram.feed_producer.edit.parts.DomainAttributeEditPart" id="DomainAttribute_2006"/>
+         <object class="org.openiaml.model.diagram.feed_producer.edit.parts.PropertyEditPart" id="Property_2007"/>
+         <object class="org.openiaml.model.diagram.feed_producer.edit.parts.FrameEditPart" id="Frame_2008"/>
+         <object class="org.openiaml.model.diagram.feed_producer.edit.parts.InputFormEditPart" id="InputForm_2009"/>
+         <object class="org.openiaml.model.diagram.feed_producer.edit.parts.InputTextFieldEditPart" id="InputTextField_2010"/>
+         <object class="org.openiaml.model.diagram.feed_producer.edit.parts.StaticValueEditPart" id="StaticValue_2011"/>
+         <object class="org.openiaml.model.diagram.feed_producer.edit.parts.LoginHandlerEditPart" id="LoginHandler_2012"/>
+         <object class="org.openiaml.model.diagram.feed_producer.edit.parts.CompositeConditionEditPart" id="CompositeCondition_2013"/>
+         <object class="org.openiaml.model.diagram.feed_producer.edit.parts.DomainObjectInstanceEditPart" id="DomainObjectInstance_2014"/>
+         <object class="org.openiaml.model.diagram.feed_producer.edit.parts.DomainAttributeInstanceEditPart" id="DomainAttributeInstance_2015"/>
+         <object class="org.openiaml.model.diagram.feed_producer.edit.parts.ButtonEditPart" id="Button_2016"/>
+         <object class="org.openiaml.model.diagram.feed_producer.edit.parts.AccessControlHandlerEditPart" id="AccessControlHandler_2017"/>
+         <object class="org.openiaml.model.diagram.feed_producer.edit.parts.PermissionEditPart" id="Permission_2018"/>
+         <object class="org.openiaml.model.diagram.feed_producer.edit.parts.RoleEditPart" id="Role_2019"/>
+         <object class="org.openiaml.model.diagram.feed_producer.edit.parts.UserInstanceEditPart" id="UserInstance_2020"/>
+         <object class="org.openiaml.model.diagram.feed_producer.edit.parts.EntryGateEditPart" id="EntryGate_2021"/>
+         <object class="org.openiaml.model.diagram.feed_producer.edit.parts.ExitGateEditPart" id="ExitGate_2022"/>
+         <object class="org.openiaml.model.diagram.feed_producer.edit.parts.EventTrigger3EditPart" id="EventTrigger_2023"/>
+         <object class="org.openiaml.model.diagram.feed_producer.edit.parts.EmailEditPart" id="Email_2024"/>
+         <context elements="FeedProducer_1000,EventTrigger_2001,EventTrigger_2002,CompositeOperation_2003,PrimitiveOperation_2004,DomainObject_2005,DomainAttribute_2006,Property_2007,Frame_2008,InputForm_2009,InputTextField_2010,StaticValue_2011,LoginHandler_2012,CompositeCondition_2013,DomainObjectInstance_2014,DomainAttributeInstance_2015,Button_2016,AccessControlHandler_2017,Permission_2018,Role_2019,UserInstance_2020,EntryGate_2021,ExitGate_2022,EventTrigger_2023,Email_2024"/>
+      </modelingAssistantProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.iconProviders" id="icon-provider">
+      <?gmfgen generated="true"?>
+      <IconProvider class="org.openiaml.model.diagram.feed_producer.providers.IamlIconProvider">
+         <Priority name="Low"/>
+      </IconProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.common.ui.services.parserProviders" id="parser-provider">
+      <?gmfgen generated="true"?>
+      <ParserProvider class="org.openiaml.model.diagram.feed_producer.providers.IamlParserProvider">
+         <Priority name="Lowest"/>
+      </ParserProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders" id="decorator-provider">
+      <?gmfgen generated="true"?>
+      <decoratorProvider class="org.openiaml.model.diagram.feed_producer.providers.IamlShortcutsDecoratorProvider">
+         <Priority name="Lowest"/>
+         <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
+            <method name="getType()" value="2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024"/>
+         </object>
+         <context decoratorTargets="generated-top-nodes"/>
+      </decoratorProvider>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypes" id="element-types">
+      <?gmfgen generated="true"?>
+      <metamodel nsURI="http://openiaml.org/model/scopes">
+         <metamodelType
+               id="org.openiaml.model.diagram.feed_producer.FeedProducer_1000"
+               name="%metatype.name.FeedProducer_1000"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="FeedProducer"
+               edithelper="org.openiaml.model.diagram.feed_producer.edit.helpers.SessionEditHelper">
+            <param name="semanticHint" value="1000"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model0.5">
+         <metamodelType
+               id="org.openiaml.model.diagram.feed_producer.EventTrigger_2001"
+               name="%metatype.name.EventTrigger_2001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="EventTrigger"
+               edithelper="org.openiaml.model.diagram.feed_producer.edit.helpers.EventTriggerEditHelper">
+            <param name="semanticHint" value="2001"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model0.5">
+         <specializationType
+               id="org.openiaml.model.diagram.feed_producer.EventTrigger_2002"
+               name="%metatype.name.EventTrigger_2002"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.openiaml.model.diagram.feed_producer.EventTrigger_2001"/>
+            <param name="semanticHint" value="2002"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model0.5">
+         <metamodelType
+               id="org.openiaml.model.diagram.feed_producer.CompositeOperation_2003"
+               name="%metatype.name.CompositeOperation_2003"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="CompositeOperation"
+               edithelper="org.openiaml.model.diagram.feed_producer.edit.helpers.CompositeOperationEditHelper">
+            <param name="semanticHint" value="2003"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model0.5">
+         <metamodelType
+               id="org.openiaml.model.diagram.feed_producer.PrimitiveOperation_2004"
+               name="%metatype.name.PrimitiveOperation_2004"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="PrimitiveOperation"
+               edithelper="org.openiaml.model.diagram.feed_producer.edit.helpers.PrimitiveOperationEditHelper">
+            <param name="semanticHint" value="2004"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model0.5">
+         <metamodelType
+               id="org.openiaml.model.diagram.feed_producer.DomainObject_2005"
+               name="%metatype.name.DomainObject_2005"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="DomainObject"
+               edithelper="org.openiaml.model.diagram.feed_producer.edit.helpers.DomainObjectEditHelper">
+            <param name="semanticHint" value="2005"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model0.5">
+         <metamodelType
+               id="org.openiaml.model.diagram.feed_producer.DomainAttribute_2006"
+               name="%metatype.name.DomainAttribute_2006"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="DomainAttribute"
+               edithelper="org.openiaml.model.diagram.feed_producer.edit.helpers.DomainAttributeEditHelper">
+            <param name="semanticHint" value="2006"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model0.5">
+         <metamodelType
+               id="org.openiaml.model.diagram.feed_producer.Property_2007"
+               name="%metatype.name.Property_2007"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Property"
+               edithelper="org.openiaml.model.diagram.feed_producer.edit.helpers.PropertyEditHelper">
+            <param name="semanticHint" value="2007"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/visual">
+         <metamodelType
+               id="org.openiaml.model.diagram.feed_producer.Frame_2008"
+               name="%metatype.name.Frame_2008"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Frame"
+               edithelper="org.openiaml.model.diagram.feed_producer.edit.helpers.FrameEditHelper">
+            <param name="semanticHint" value="2008"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/visual">
+         <metamodelType
+               id="org.openiaml.model.diagram.feed_producer.InputForm_2009"
+               name="%metatype.name.InputForm_2009"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="InputForm"
+               edithelper="org.openiaml.model.diagram.feed_producer.edit.helpers.InputFormEditHelper">
+            <param name="semanticHint" value="2009"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/visual">
+         <metamodelType
+               id="org.openiaml.model.diagram.feed_producer.InputTextField_2010"
+               name="%metatype.name.InputTextField_2010"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="InputTextField"
+               edithelper="org.openiaml.model.diagram.feed_producer.edit.helpers.InputTextFieldEditHelper">
+            <param name="semanticHint" value="2010"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model0.5">
+         <metamodelType
+               id="org.openiaml.model.diagram.feed_producer.StaticValue_2011"
+               name="%metatype.name.StaticValue_2011"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="StaticValue"
+               edithelper="org.openiaml.model.diagram.feed_producer.edit.helpers.StaticValueEditHelper">
+            <param name="semanticHint" value="2011"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/components">
+         <metamodelType
+               id="org.openiaml.model.diagram.feed_producer.LoginHandler_2012"
+               name="%metatype.name.LoginHandler_2012"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="LoginHandler"
+               edithelper="org.openiaml.model.diagram.feed_producer.edit.helpers.LoginHandlerEditHelper">
+            <param name="semanticHint" value="2012"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model0.5">
+         <metamodelType
+               id="org.openiaml.model.diagram.feed_producer.CompositeCondition_2013"
+               name="%metatype.name.CompositeCondition_2013"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="CompositeCondition"
+               edithelper="org.openiaml.model.diagram.feed_producer.edit.helpers.CompositeConditionEditHelper">
+            <param name="semanticHint" value="2013"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model0.5">
+         <metamodelType
+               id="org.openiaml.model.diagram.feed_producer.DomainObjectInstance_2014"
+               name="%metatype.name.DomainObjectInstance_2014"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="DomainObjectInstance"
+               edithelper="org.openiaml.model.diagram.feed_producer.edit.helpers.DomainObjectInstanceEditHelper">
+            <param name="semanticHint" value="2014"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model0.5">
+         <metamodelType
+               id="org.openiaml.model.diagram.feed_producer.DomainAttributeInstance_2015"
+               name="%metatype.name.DomainAttributeInstance_2015"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="DomainAttributeInstance"
+               edithelper="org.openiaml.model.diagram.feed_producer.edit.helpers.DomainAttributeInstanceEditHelper">
+            <param name="semanticHint" value="2015"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/visual">
+         <metamodelType
+               id="org.openiaml.model.diagram.feed_producer.Button_2016"
+               name="%metatype.name.Button_2016"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Button"
+               edithelper="org.openiaml.model.diagram.feed_producer.edit.helpers.ButtonEditHelper">
+            <param name="semanticHint" value="2016"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/components">
+         <metamodelType
+               id="org.openiaml.model.diagram.feed_producer.AccessControlHandler_2017"
+               name="%metatype.name.AccessControlHandler_2017"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="AccessControlHandler"
+               edithelper="org.openiaml.model.diagram.feed_producer.edit.helpers.AccessControlHandlerEditHelper">
+            <param name="semanticHint" value="2017"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/users">
+         <metamodelType
+               id="org.openiaml.model.diagram.feed_producer.Permission_2018"
+               name="%metatype.name.Permission_2018"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Permission"
+               edithelper="org.openiaml.model.diagram.feed_producer.edit.helpers.PermissionEditHelper">
+            <param name="semanticHint" value="2018"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/users">
+         <metamodelType
+               id="org.openiaml.model.diagram.feed_producer.Role_2019"
+               name="%metatype.name.Role_2019"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Role"
+               edithelper="org.openiaml.model.diagram.feed_producer.edit.helpers.RoleEditHelper">
+            <param name="semanticHint" value="2019"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/users">
+         <metamodelType
+               id="org.openiaml.model.diagram.feed_producer.UserInstance_2020"
+               name="%metatype.name.UserInstance_2020"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="UserInstance"
+               edithelper="org.openiaml.model.diagram.feed_producer.edit.helpers.UserInstanceEditHelper">
+            <param name="semanticHint" value="2020"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/components">
+         <metamodelType
+               id="org.openiaml.model.diagram.feed_producer.EntryGate_2021"
+               name="%metatype.name.EntryGate_2021"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="EntryGate"
+               edithelper="org.openiaml.model.diagram.feed_producer.edit.helpers.EntryGateEditHelper">
+            <param name="semanticHint" value="2021"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/components">
+         <metamodelType
+               id="org.openiaml.model.diagram.feed_producer.ExitGate_2022"
+               name="%metatype.name.ExitGate_2022"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="ExitGate"
+               edithelper="org.openiaml.model.diagram.feed_producer.edit.helpers.ExitGateEditHelper">
+            <param name="semanticHint" value="2022"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model0.5">
+         <specializationType
+               id="org.openiaml.model.diagram.feed_producer.EventTrigger_2023"
+               name="%metatype.name.EventTrigger_2023"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
+            <specializes id="org.openiaml.model.diagram.feed_producer.EventTrigger_2001"/>
+            <param name="semanticHint" value="2023"/>
+         </specializationType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/scopes">
+         <metamodelType
+               id="org.openiaml.model.diagram.feed_producer.Email_2024"
+               name="%metatype.name.Email_2024"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="Email"
+               edithelper="org.openiaml.model.diagram.feed_producer.edit.helpers.EmailEditHelper">
+            <param name="semanticHint" value="2024"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/wires">
+         <metamodelType
+               id="org.openiaml.model.diagram.feed_producer.SyncWire_4001"
+               name="%metatype.name.SyncWire_4001"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="SyncWire"
+               edithelper="org.openiaml.model.diagram.feed_producer.edit.helpers.SyncWireEditHelper">
+            <param name="semanticHint" value="4001"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/wires">
+         <metamodelType
+               id="org.openiaml.model.diagram.feed_producer.RunAction_4002"
+               name="%metatype.name.RunAction_4002"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="RunAction"
+               edithelper="org.openiaml.model.diagram.feed_producer.edit.helpers.RunActionEditHelper">
+            <param name="semanticHint" value="4002"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/wires">
+         <metamodelType
+               id="org.openiaml.model.diagram.feed_producer.ParameterEdge_4003"
+               name="%metatype.name.ParameterEdge_4003"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="ParameterEdge"
+               edithelper="org.openiaml.model.diagram.feed_producer.edit.helpers.ParameterEdgeEditHelper">
+            <param name="semanticHint" value="4003"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/wires">
+         <metamodelType
+               id="org.openiaml.model.diagram.feed_producer.SelectWire_4004"
+               name="%metatype.name.SelectWire_4004"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="SelectWire"
+               edithelper="org.openiaml.model.diagram.feed_producer.edit.helpers.SelectWireEditHelper">
+            <param name="semanticHint" value="4004"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/wires">
+         <metamodelType
+               id="org.openiaml.model.diagram.feed_producer.SetWire_4005"
+               name="%metatype.name.SetWire_4005"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="SetWire"
+               edithelper="org.openiaml.model.diagram.feed_producer.edit.helpers.SetWireEditHelper">
+            <param name="semanticHint" value="4005"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/wires">
+         <metamodelType
+               id="org.openiaml.model.diagram.feed_producer.NavigateAction_4006"
+               name="%metatype.name.NavigateAction_4006"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="NavigateAction"
+               edithelper="org.openiaml.model.diagram.feed_producer.edit.helpers.NavigateActionEditHelper">
+            <param name="semanticHint" value="4006"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/wires">
+         <metamodelType
+               id="org.openiaml.model.diagram.feed_producer.ConditionEdge_4007"
+               name="%metatype.name.ConditionEdge_4007"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="ConditionEdge"
+               edithelper="org.openiaml.model.diagram.feed_producer.edit.helpers.ConditionEdgeEditHelper">
+            <param name="semanticHint" value="4007"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/wires">
+         <metamodelType
+               id="org.openiaml.model.diagram.feed_producer.NewInstanceWire_4008"
+               name="%metatype.name.NewInstanceWire_4008"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="NewInstanceWire"
+               edithelper="org.openiaml.model.diagram.feed_producer.edit.helpers.NewInstanceWireEditHelper">
+            <param name="semanticHint" value="4008"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/wires">
+         <metamodelType
+               id="org.openiaml.model.diagram.feed_producer.RequiresEdge_4009"
+               name="%metatype.name.RequiresEdge_4009"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="RequiresEdge"
+               edithelper="org.openiaml.model.diagram.feed_producer.edit.helpers.RequiresEdgeEditHelper">
+            <param name="semanticHint" value="4009"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/wires">
+         <metamodelType
+               id="org.openiaml.model.diagram.feed_producer.ConstraintEdge_4010"
+               name="%metatype.name.ConstraintEdge_4010"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="ConstraintEdge"
+               edithelper="org.openiaml.model.diagram.feed_producer.edit.helpers.ConstraintEdgeEditHelper">
+            <param name="semanticHint" value="4010"/>
+         </metamodelType>
+      </metamodel>
+   </extension>
+
+   <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypeBindings" id="element-types-bindings">
+      <?gmfgen generated="true"?>
+      <clientContext id="org.openiaml.model.diagram.feed_producer.TypeContext">
+         <enablement>
+            <test
+               property="org.eclipse.gmf.runtime.emf.core.editingDomain"
+               value="org.openiaml.model.diagram.feed_producer.EditingDomain"/>
+         </enablement>
+      </clientContext> 
+      <binding context="org.openiaml.model.diagram.feed_producer.TypeContext">
+         <elementType ref="org.openiaml.model.diagram.feed_producer.FeedProducer_1000"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.EventTrigger_2001"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.EventTrigger_2002"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.CompositeOperation_2003"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.PrimitiveOperation_2004"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.DomainObject_2005"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.DomainAttribute_2006"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.Property_2007"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.Frame_2008"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.InputForm_2009"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.InputTextField_2010"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.StaticValue_2011"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.LoginHandler_2012"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.CompositeCondition_2013"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.DomainObjectInstance_2014"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.DomainAttributeInstance_2015"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.Button_2016"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.AccessControlHandler_2017"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.Permission_2018"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.Role_2019"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.UserInstance_2020"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.EntryGate_2021"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.ExitGate_2022"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.EventTrigger_2023"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.Email_2024"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.SyncWire_4001"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.RunAction_4002"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.ParameterEdge_4003"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.SelectWire_4004"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.SetWire_4005"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.NavigateAction_4006"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.ConditionEdge_4007"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.NewInstanceWire_4008"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.RequiresEdge_4009"/>
+         <elementType ref="org.openiaml.model.diagram.feed_producer.ConstraintEdge_4010"/>
+         <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
+      </binding>
+   </extension>
+	   <extension point="org.eclipse.core.expressions.propertyTesters" id="navigator-proptest.isURIEditorInput">
+      <?gmfgen generated="true"?>
+       <propertyTester
+           id="org.openiaml.model.diagram.feed_producer.URIEditorInputPropertyTester"
+           type="org.eclipse.emf.common.ui.URIEditorInput"
+           namespace="org.openiaml.model.diagram.feed_producer"
+           properties="isURIEditorInput"
+           class="org.openiaml.model.diagram.feed_producer.part.IamlUriEditorInputTester">
+       </propertyTester>
+   </extension>
+
+	   <extension point="org.eclipse.core.expressions.propertyTesters" id="navigator-proptest.isShortcut">
+      <?gmfgen generated="true"?>
+       <propertyTester
+           id="org.openiaml.model.diagram.feed_producer.ShortcutPropertyTester"
+           type="org.eclipse.gmf.runtime.notation.View"
+           namespace="org.openiaml.model.diagram.feed_producer"
+           properties="isShortcut"
+           class="org.openiaml.model.diagram.feed_producer.part.IamlShortcutPropertyTester">
+       </propertyTester>
+   </extension>
+
+	   <extension point="org.eclipse.ui.navigator.viewer" id="navigator-viewbinding">
+      <?gmfgen generated="true"?>
+      <viewerContentBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
+         <includes>
+            <contentExtension pattern="org.openiaml.model.diagram.feed_producer.resourceContent"/>
+			<contentExtension pattern="org.openiaml.model.diagram.feed_producer.domainResourceContent"/>
+            <contentExtension pattern="org.openiaml.model.diagram.feed_producer.navigatorLinkHelper"/>
+         </includes>
+      </viewerContentBinding>
+      <viewerActionBinding viewerId="org.eclipse.ui.navigator.ProjectExplorer">
+         <includes>
+            <actionExtension pattern="org.openiaml.model.diagram.feed_producer.navigatorActionProvider"/>
+         </includes>
+      </viewerActionBinding>
+   </extension>
+
+   <extension point="org.eclipse.ui.navigator.navigatorContent" id="navigator-content">
+      <?gmfgen generated="true"?>
+      <navigatorContent
+            id="org.openiaml.model.diagram.feed_producer.resourceContent" 
+            name="%navigatorContentName" 
+            priority="normal" 
+            contentProvider="org.openiaml.model.diagram.feed_producer.navigator.IamlNavigatorContentProvider" 
+            labelProvider="org.openiaml.model.diagram.feed_producer.navigator.IamlNavigatorLabelProvider"
+            icon="icons/obj16/ScopesDiagramFile.gif"
+            activeByDefault="true">
+         <triggerPoints>
+            <or>
+	           <and>
+    	          <instanceof value="org.eclipse.core.resources.IFile"/>
+        	      <test property="org.eclipse.core.resources.extension" value="iaml_feed_producer_diagram"/>
+               </and>
+               <instanceof value="org.openiaml.model.diagram.feed_producer.navigator.IamlAbstractNavigatorItem"/>
+           	   <adapt type="org.eclipse.gmf.runtime.notation.View">
+           	      <test property="org.openiaml.model.diagram.feed_producer.isShortcut"/>
+           	   </adapt>
+            </or>
+         </triggerPoints>
+         <possibleChildren>
+            <or>
+         	   <instanceof value="org.openiaml.model.diagram.feed_producer.navigator.IamlAbstractNavigatorItem"/>
+           	   <adapt type="org.eclipse.gmf.runtime.notation.View">
+           	      <test property="org.openiaml.model.diagram.feed_producer.isShortcut"/>
+           	   </adapt>
+            </or>
+         </possibleChildren>
+         <commonSorter 
+               id="org.openiaml.model.diagram.feed_producer.navigatorSorter" 
+               class="org.openiaml.model.diagram.feed_producer.navigator.IamlNavigatorSorter">
+            <parentExpression>
+               <or>
+	              <and>
+    	             <instanceof value="org.eclipse.core.resources.IFile"/>
+        	         <test property="org.eclipse.core.resources.extension" value="iaml_feed_producer_diagram"/>
+                  </and>
+                  <instanceof value="org.openiaml.model.diagram.feed_producer.navigator.IamlAbstractNavigatorItem"/>
+               </or>
+            </parentExpression>
+         </commonSorter>
+      </navigatorContent>
+      <navigatorContent
+            id="org.openiaml.model.diagram.feed_producer.domainResourceContent" 
+            name="%domainNavigatorContentName" 
+            priority="normal" 
+            contentProvider="org.openiaml.model.diagram.feed_producer.navigator.IamlDomainNavigatorContentProvider" 
+            labelProvider="org.openiaml.model.diagram.feed_producer.navigator.IamlDomainNavigatorLabelProvider"
+            icon="icons/obj16/ScopesDiagramFile.gif"
+            activeByDefault="true">
+         <triggerPoints>
+            <or>
+	           <and>
+    	          <instanceof value="org.eclipse.core.resources.IFile"/>
+        	      <test property="org.eclipse.core.resources.extension" value="iaml_feed_producer"/>
+               </and>
+               <instanceof value="org.openiaml.model.diagram.feed_producer.navigator.IamlDomainNavigatorItem"/>
+            </or>
+         </triggerPoints>
+         <possibleChildren>
+            <instanceof value="org.openiaml.model.diagram.feed_producer.navigator.IamlDomainNavigatorItem"/>
+         </possibleChildren>
+      </navigatorContent>
+      <actionProvider
+            id="org.openiaml.model.diagram.feed_producer.navigatorActionProvider"
+            class="org.openiaml.model.diagram.feed_producer.navigator.IamlNavigatorActionProvider">
+         <enablement>
+            <or>
+               <instanceof value="org.openiaml.model.diagram.feed_producer.navigator.IamlAbstractNavigatorItem"/>
+           	   <adapt type="org.eclipse.gmf.runtime.notation.View">
+           	      <test property="org.openiaml.model.diagram.feed_producer.isShortcut"/>
+           	   </adapt>
+            </or>
+         </enablement>
+      </actionProvider>
+   </extension>
+   
+	   <extension point="org.eclipse.ui.navigator.linkHelper" id="navigator-linkhelper">
+      <?gmfgen generated="true"?>
+      <linkHelper
+            id="org.openiaml.model.diagram.feed_producer.navigatorLinkHelper"
+            class="org.openiaml.model.diagram.feed_producer.navigator.IamlNavigatorLinkHelper">
+         <editorInputEnablement>
+            <and>
+               <instanceof value="org.eclipse.emf.common.ui.URIEditorInput"/>
+               <test property="org.openiaml.model.diagram.feed_producer.isURIEditorInput"/>
+            </and>
+         </editorInputEnablement>
+         <selectionEnablement>
+            <instanceof value="org.openiaml.model.diagram.feed_producer.navigator.IamlAbstractNavigatorItem"/>
+         </selectionEnablement>
+      </linkHelper>
+   </extension>
+   <extension point="org.eclipse.ui.commands" id="update-cmd">
+      <?gmfgen generated="true"?>
+      <command
+         categoryId="org.eclipse.ui.category.edit"
+         defaultHandler="org.openiaml.model.diagram.feed_producer.part.IamlDiagramUpdateCommand"
+         description="%update.diagram.description"
+         id="org.openiaml.model.diagram.feed_producer.updateDiagram"
+         name="%update.diagram.name"/>
+   </extension>
+   
+   <extension point="org.eclipse.ui.bindings" id="update-cmd-binding">
+      <?gmfgen generated="true"?>
+      <key 
+         commandId="org.openiaml.model.diagram.feed_producer.updateDiagram"
+         contextId="org.openiaml.model.diagram.feed_producer.ui.diagramContext"
+         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+         sequence="F5"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.menus" id="context-menus">
+      <?gmfgen generated="true"?>
+      <!-- menuContribution locationURI="menu:org.eclipse.ui.main.menu?after=">
+      </menuContribution>
+      <menuContribution locationURI="toolbar:org.eclipse.ui.main.toolbar?after=">
+      </menuContribution -->
+      <menuContribution locationURI="popup:org.eclipse.gmf.runtime.diagram.ui.DiagramEditorContextMenu">
+         <command commandId="org.openiaml.model.diagram.feed_producer.LoadResourceAction">
+            <visibleWhen>
+               <and>
+                  <with variable="activePartId"><equals value="org.openiaml.model.diagram.feed_producer.part.IamlDiagramEditorID"/></with>
+                  <with variable="selection"><iterate ifEmpty="false"> 
+                     <instanceof value="org.openiaml.model.diagram.feed_producer.edit.parts.SessionEditPart"/>
+                  </iterate></with>
+               </and>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+
+   <extension point="org.eclipse.ui.commands" id="menu-commands">
+      <?gmfgen generated="true"?>
+      <category id="org.openiaml.model.diagram.feed_producer.part.IamlDiagramEditorID" name="%cmdcategory.name" description="%cmdcategory.desc"/>
+      <command id="org.openiaml.model.diagram.feed_producer.LoadResourceAction"
+         name="Load Resource"
+         categoryId="org.openiaml.model.diagram.feed_producer.part.IamlDiagramEditorID"
+         defaultHandler="org.openiaml.model.diagram.feed_producer.part.LoadResourceAction"/>
+   </extension>
+
+   <extension point="org.eclipse.ui.handlers" id="menu-handlers">
+      <?gmfgen generated="true"?>
+   </extension>
+
+   <!-- optionally, specify keybindings -->
+</plugin>

@@ -1,0 +1,10 @@
+#summary A brief overview of model completion.
+#labels EndUser
+
+<wiki:toc max_depth="2" />
+
+=Introduction=
+
+Model completion is the ability for the development environment to automatically complete much of the scaffolding of the model.
+
+For more information, read [http://openiaml.org/#completion our paper submitted to ASWEC 2010], in particular our slides on how the process is [http://openiaml.org/publications/aswec-2010-slides.pdf currently implemented].

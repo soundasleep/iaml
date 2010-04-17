@@ -230,7 +230,7 @@
          </object>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_DomainObject"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2013,2007,2008,2014,2010,2015"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2016,2017,2018,2019,2020,2021"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4005,4002,4004"/>
       </viewProvider>
    </extension>
@@ -243,13 +243,13 @@
             <method name="getType()" value="Iaml_DomainObject"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
-            <method name="getType()" value="2013,2007,2008,2014,2010,2015"/>
+            <method name="getType()" value="2016,2017,2018,2019,2020,2021"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
             <method name="getType()" value="4005,4002,4004"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5029,5030,5031,5014,5015,5016,5017,5034,5035,5036,5037,5021,5022,5033,5038,5039,5040"/>
+            <method name="getType()" value="5041,5042,5043,5044,5045,5046,5047,5048,5049,5050,5051,5052,5053,5054,5055,5056,5057"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value=""/>
@@ -263,13 +263,13 @@
       <modelingAssistantProvider class="org.openiaml.model.diagram.domain_object.providers.IamlModelingAssistantProvider">
          <Priority name="Lowest"/>
          <object class="org.openiaml.model.diagram.domain_object.edit.parts.DomainObjectEditPart" id="DomainObject_1000"/>
-         <object class="org.openiaml.model.diagram.domain_object.edit.parts.EventTrigger2EditPart" id="EventTrigger_2013"/>
-         <object class="org.openiaml.model.diagram.domain_object.edit.parts.CompositeOperationEditPart" id="CompositeOperation_2007"/>
-         <object class="org.openiaml.model.diagram.domain_object.edit.parts.PrimitiveOperationEditPart" id="PrimitiveOperation_2008"/>
-         <object class="org.openiaml.model.diagram.domain_object.edit.parts.PropertyEditPart" id="Property_2014"/>
-         <object class="org.openiaml.model.diagram.domain_object.edit.parts.DomainAttributeEditPart" id="DomainAttribute_2010"/>
-         <object class="org.openiaml.model.diagram.domain_object.edit.parts.EventTriggerEditPart" id="EventTrigger_2015"/>
-         <context elements="DomainObject_1000,EventTrigger_2013,CompositeOperation_2007,PrimitiveOperation_2008,Property_2014,DomainAttribute_2010,EventTrigger_2015"/>
+         <object class="org.openiaml.model.diagram.domain_object.edit.parts.EventTriggerEditPart" id="EventTrigger_2016"/>
+         <object class="org.openiaml.model.diagram.domain_object.edit.parts.CompositeOperationEditPart" id="CompositeOperation_2017"/>
+         <object class="org.openiaml.model.diagram.domain_object.edit.parts.PrimitiveOperationEditPart" id="PrimitiveOperation_2018"/>
+         <object class="org.openiaml.model.diagram.domain_object.edit.parts.PropertyEditPart" id="Property_2019"/>
+         <object class="org.openiaml.model.diagram.domain_object.edit.parts.DomainAttributeEditPart" id="DomainAttribute_2020"/>
+         <object class="org.openiaml.model.diagram.domain_object.edit.parts.EventTrigger2EditPart" id="EventTrigger_2021"/>
+         <context elements="DomainObject_1000,EventTrigger_2016,CompositeOperation_2017,PrimitiveOperation_2018,Property_2019,DomainAttribute_2020,EventTrigger_2021"/>
       </modelingAssistantProvider>
    </extension>
 
@@ -292,7 +292,7 @@
       <decoratorProvider class="org.openiaml.model.diagram.domain_object.providers.IamlShortcutsDecoratorProvider">
          <Priority name="Lowest"/>
          <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
-            <method name="getType()" value="2013,2007,2008,2014,2010,2015"/>
+            <method name="getType()" value="2016,2017,2018,2019,2020,2021"/>
          </object>
          <context decoratorTargets="generated-top-nodes"/>
       </decoratorProvider>
@@ -300,7 +300,7 @@
 
    <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypes" id="element-types">
       <?gmfgen generated="true"?>
-      <metamodel nsURI="http://openiaml.org/model0.4">
+      <metamodel nsURI="http://openiaml.org/model0.5">
          <metamodelType
                id="org.openiaml.model.diagram.domain_object.DomainObject_1000"
                name="%metatype.name.DomainObject_1000"
@@ -310,63 +310,63 @@
             <param name="semanticHint" value="1000"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.4">
+      <metamodel nsURI="http://openiaml.org/model0.5">
          <metamodelType
-               id="org.openiaml.model.diagram.domain_object.EventTrigger_2013"
-               name="%metatype.name.EventTrigger_2013"
+               id="org.openiaml.model.diagram.domain_object.EventTrigger_2016"
+               name="%metatype.name.EventTrigger_2016"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="EventTrigger"
                edithelper="org.openiaml.model.diagram.domain_object.edit.helpers.EventTriggerEditHelper">
-            <param name="semanticHint" value="2013"/>
+            <param name="semanticHint" value="2016"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.4">
+      <metamodel nsURI="http://openiaml.org/model0.5">
          <metamodelType
-               id="org.openiaml.model.diagram.domain_object.CompositeOperation_2007"
-               name="%metatype.name.CompositeOperation_2007"
+               id="org.openiaml.model.diagram.domain_object.CompositeOperation_2017"
+               name="%metatype.name.CompositeOperation_2017"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="CompositeOperation"
                edithelper="org.openiaml.model.diagram.domain_object.edit.helpers.CompositeOperationEditHelper">
-            <param name="semanticHint" value="2007"/>
+            <param name="semanticHint" value="2017"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.4">
+      <metamodel nsURI="http://openiaml.org/model0.5">
          <metamodelType
-               id="org.openiaml.model.diagram.domain_object.PrimitiveOperation_2008"
-               name="%metatype.name.PrimitiveOperation_2008"
+               id="org.openiaml.model.diagram.domain_object.PrimitiveOperation_2018"
+               name="%metatype.name.PrimitiveOperation_2018"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="PrimitiveOperation"
                edithelper="org.openiaml.model.diagram.domain_object.edit.helpers.PrimitiveOperationEditHelper">
-            <param name="semanticHint" value="2008"/>
+            <param name="semanticHint" value="2018"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.4">
+      <metamodel nsURI="http://openiaml.org/model0.5">
          <metamodelType
-               id="org.openiaml.model.diagram.domain_object.Property_2014"
-               name="%metatype.name.Property_2014"
+               id="org.openiaml.model.diagram.domain_object.Property_2019"
+               name="%metatype.name.Property_2019"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="Property"
                edithelper="org.openiaml.model.diagram.domain_object.edit.helpers.PropertyEditHelper">
-            <param name="semanticHint" value="2014"/>
+            <param name="semanticHint" value="2019"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.4">
+      <metamodel nsURI="http://openiaml.org/model0.5">
          <metamodelType
-               id="org.openiaml.model.diagram.domain_object.DomainAttribute_2010"
-               name="%metatype.name.DomainAttribute_2010"
+               id="org.openiaml.model.diagram.domain_object.DomainAttribute_2020"
+               name="%metatype.name.DomainAttribute_2020"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="DomainAttribute"
                edithelper="org.openiaml.model.diagram.domain_object.edit.helpers.DomainAttributeEditHelper">
-            <param name="semanticHint" value="2010"/>
+            <param name="semanticHint" value="2020"/>
          </metamodelType>
       </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.4">
+      <metamodel nsURI="http://openiaml.org/model0.5">
          <specializationType
-               id="org.openiaml.model.diagram.domain_object.EventTrigger_2015"
-               name="%metatype.name.EventTrigger_2015"
+               id="org.openiaml.model.diagram.domain_object.EventTrigger_2021"
+               name="%metatype.name.EventTrigger_2021"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType">
-            <specializes id="org.openiaml.model.diagram.domain_object.EventTrigger_2013"/>
-            <param name="semanticHint" value="2015"/>
+            <specializes id="org.openiaml.model.diagram.domain_object.EventTrigger_2016"/>
+            <param name="semanticHint" value="2021"/>
          </specializationType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model/wires">
@@ -412,12 +412,12 @@
       </clientContext> 
       <binding context="org.openiaml.model.diagram.domain_object.TypeContext">
          <elementType ref="org.openiaml.model.diagram.domain_object.DomainObject_1000"/>
-         <elementType ref="org.openiaml.model.diagram.domain_object.EventTrigger_2013"/>
-         <elementType ref="org.openiaml.model.diagram.domain_object.CompositeOperation_2007"/>
-         <elementType ref="org.openiaml.model.diagram.domain_object.PrimitiveOperation_2008"/>
-         <elementType ref="org.openiaml.model.diagram.domain_object.Property_2014"/>
-         <elementType ref="org.openiaml.model.diagram.domain_object.DomainAttribute_2010"/>
-         <elementType ref="org.openiaml.model.diagram.domain_object.EventTrigger_2015"/>
+         <elementType ref="org.openiaml.model.diagram.domain_object.EventTrigger_2016"/>
+         <elementType ref="org.openiaml.model.diagram.domain_object.CompositeOperation_2017"/>
+         <elementType ref="org.openiaml.model.diagram.domain_object.PrimitiveOperation_2018"/>
+         <elementType ref="org.openiaml.model.diagram.domain_object.Property_2019"/>
+         <elementType ref="org.openiaml.model.diagram.domain_object.DomainAttribute_2020"/>
+         <elementType ref="org.openiaml.model.diagram.domain_object.EventTrigger_2021"/>
          <elementType ref="org.openiaml.model.diagram.domain_object.RunAction_4005"/>
          <elementType ref="org.openiaml.model.diagram.domain_object.SyncWire_4002"/>
          <elementType ref="org.openiaml.model.diagram.domain_object.ExtendsEdge_4004"/>

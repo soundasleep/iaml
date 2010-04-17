@@ -13,7 +13,7 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
 import org.openiaml.model.diagram.custom.commands.GmfInferenceHandler;
-import org.openiaml.model.diagram.edit.parts.CompositeOperationChangePart.ExtendedCompositeOperationFigure;
+import org.openiaml.model.diagram.edit.parts.CompositeOperationEditPart.ExtendedCompositeOperationFigure;
 import org.openiaml.model.diagram.part.IamlDiagramEditor;
 import org.openiaml.model.diagram.part.IamlDiagramEditorPlugin;
 import org.openiaml.model.diagram.part.IamlDiagramEditorUtil;

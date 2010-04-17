@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.122f4cf3ef3.e0">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.122f4cf3ef3.e0">
   <scopes xsi:type="iaml.visual:Frame" id="visual.122f4cf3f60.e" name="Home">
     <operations xsi:type="iaml:CompositeOperation" id="model.122f4cf3ef3.f2" name="non-generated"/>
     <operations xsi:type="iaml:CompositeOperation" isGenerated="true" id="model.122f4cf3ef3.f3" name="generated">

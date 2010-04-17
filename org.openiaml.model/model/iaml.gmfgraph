@@ -1973,6 +1973,35 @@
       <accessors
           figure="//@figures.0/@descriptors.66/@actualFigure/@children.1"/>
     </descriptors>
+    <descriptors
+        name="FeedProducerFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="FeedProducerFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="255"
+            green="240"
+            blue="192"/>
+        <border
+            xsi:type="gmfgraph:MarginBorder">
+          <insets
+              top="3"
+              left="3"
+              bottom="3"
+              right="3"/>
+        </border>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="FeedProducerNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.67/@actualFigure/@children.0"/>
+    </descriptors>
   </figures>
   <nodes
       name="EventTrigger"
@@ -2118,6 +2147,9 @@
   <nodes
       name="PrimitiveCondition"
       figure="PrimitiveConditionFigure"/>
+  <nodes
+      name="FeedProducer"
+      figure="FeedProducerFigure"/>
   <connections
       name="DataFlowEdge"
       figure="DataFlowEdgeFigure"/>
@@ -2609,4 +2641,8 @@
       figure="SelectWireFigure"
       elementIcon="false"
       accessor="//@figures.0/@descriptors.30/@accessors.2"/>
+  <labels
+      name="FeedProducerName"
+      figure="FeedProducerFigure"
+      accessor="//@figures.0/@descriptors.67/@accessors.0"/>
 </gmfgraph:Canvas>

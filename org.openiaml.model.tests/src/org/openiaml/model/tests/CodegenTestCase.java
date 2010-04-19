@@ -52,8 +52,10 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	//protected abstract void setUp() throws Exception;
 	
 	/**
-	 * Load a model and perform code generation.
+	 * Load a model and perform code generation. The file is loaded
+	 * through {@link ModelSourceResolver#getModelFileForClass(Class) the resolver}.
 	 * 
+	 * @see ModelSourceResolver#getModelFileForClass(Class)
 	 * @see #loadAndInfer(String)
 	 * @param modelFile
 	 * @return The loaded InternetApplication
@@ -329,7 +331,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * @param sitemap the location of the sitemap file
 	 * @param pageText the <em>exact</em> page text link to click
 	 * @param expectedPageTitle the expected destination page title, usually the same as pageTitle
-	 * @param query query string to append to the end of the destination, or null if none
+	 * @param query query string to append to the end of the destination, or null if none; e.g. <code>one=1&two=2</param>
 	 */ 
 	public void beginAtSitemapThenPage(IFile sitemap, String pageTitle, String expectedPageTitle, String query) throws Exception {
 		logTimed("web: beginAtSitemapThenPage");

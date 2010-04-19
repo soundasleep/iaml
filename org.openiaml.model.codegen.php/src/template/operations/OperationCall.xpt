@@ -147,6 +147,7 @@
 		if ($resume != CURRENT_PAGE) {
 			// navigate to another frame
 			$url = "$resume.php?" . get_sid();	// need to pass session on server-side
+			«EXPAND addNamedParameters(php, inStoreDb, "url") FOR wire»	
 			log_message("[resume] Resuming to '$url'");
 			server_redirect($url);
 			die;
@@ -163,6 +164,7 @@
 			
 			echo $resume;
 		?>.php";
+		«EXPAND addNamedParameters(php, inStoreDb, "url") FOR wire»	
 		debug("[resume] Resuming to '" + url + "'");
 		window.location = url;
 		ajaxIncrement();	// prevent other events from executing		
@@ -185,6 +187,7 @@
 		if ($resume != CURRENT_PAGE) {
 			// navigate to another frame
 			$url = "$resume.php?" . get_sid();	// need to pass session on server-side
+			«EXPAND addNamedParameters(php, inStoreDb, "url") FOR wire»	
 			log_message("[resume] Resuming to '$url'");
 			server_redirect($url);
 			die;
@@ -201,6 +204,7 @@
 			
 			echo $resume;
 		?>.php";
+		«EXPAND addNamedParameters(php, inStoreDb, "url") FOR wire»	
 		debug("[resume] Resuming to '" + url + "'");
 		window.location = url;
 		ajaxIncrement();	// prevent other events from executing		
@@ -215,7 +219,8 @@
 		/* prevent infinite loops on the current frame */
 		if ("«id-»" != CURRENT_PAGE) {
 			// navigate to another frame
-			$url = "«safeName()».php?" . get_sid();	// need to pass session on server-side
+			$url = "«safeName()».php?" . get_sid();	// need to pass session on server-side		
+			«EXPAND addNamedParameters(php, inStoreDb, "url") FOR wire»	
 			log_message("[redirect] Redirecting to '$url'");
 			server_redirect($url);
 			die;
@@ -223,9 +228,50 @@
 	«ELSE»
 		// navigating to a new frame
 		var url = "«safeName()».php";
+		«EXPAND addNamedParameters(php, inStoreDb, "url") FOR wire»	
 		debug("[redirect] Redirecting to '" + url + "'");
 		window.location = url;
 		ajaxIncrement();	// prevent other events from executing
+	«ENDIF»
+«ENDDEFINE»
+
+/**
+ * Add any named parameters to the given URL (in $argName).
+ *
+ * @implementation NavigateAction,ParameterEdge
+ * 		Any incoming named {@model ParameterEdge}s to a {@model NavigateAction} will be
+ * 		passed along as named <code>GET</code> parameters to the destination.
+ */
+«DEFINE addNamedParameters(Boolean php, Boolean inStoreDb, String argName) FOR model::wires::NavigateAction»
+	«IF !inParameterEdges.isEmpty»
+		// add named parameters
+		«FOREACH inParameterEdges.select(p|p.name != null && p.name.length != 0) AS param»
+			«IF php»
+			{
+				$add_url = urlencode("«escapePhpString(param.name)»") . "=" .
+					urlencode(«EXPAND Parameters::callParameter(php, inStoreDb, false) FOR param»)
+					;
+					
+				if (strpos($«argName-», "?") === false) {
+					$«argName-» .= "?" . $add_url;
+				} else {
+					$«argName-» .= "&" . $add_url;
+				}
+			}
+			«ELSE»
+			{
+				var add_url = encodeURIComponent("«escapePhpString(param.name)»") + "=" +
+					encodeURIComponent(«EXPAND Parameters::callParameter(php, inStoreDb, false) FOR param»)
+					;
+					
+				if («argName-».indexOf("?") == -1) {
+					«argName-» += "?" + add_url;
+				} else {
+					«argName-» += "&" + add_url;
+				}
+			}
+			«ENDIF»
+		«ENDFOREACH»
 	«ENDIF»
 «ENDDEFINE»
 

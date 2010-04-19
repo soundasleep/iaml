@@ -145,19 +145,6 @@
             path="icons/full/obj32/Email.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="FeedProducer"
-          description="Create new FeedProducer">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/FeedProducer.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/FeedProducer.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
     </tools>
     <tools
         xsi:type="gmftool:ToolGroup"

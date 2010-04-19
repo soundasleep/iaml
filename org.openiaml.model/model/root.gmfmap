@@ -348,28 +348,6 @@
           href="iaml.gmfgraph#Email"/>
     </ownedChild>
   </nodes>
-  <nodes>
-    <containmentFeature
-        href="iaml.ecore#//InternetApplication/scopes"/>
-    <ownedChild>
-      <domainMetaElement
-          href="iaml.ecore#//scopes/FeedProducer"/>
-      <domainSpecialization
-          body="self.oclIsTypeOf( FeedProducer )"/>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="iaml.gmfgraph#FeedProducerName"/>
-        <features
-            href="iaml.ecore#//NamedElement/name"/>
-      </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="root.gmftool#//@palette/@tools.1/@tools.3"/>
-      <diagramNode
-          href="iaml.gmfgraph#FeedProducer"/>
-    </ownedChild>
-  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/SyncWire"/>

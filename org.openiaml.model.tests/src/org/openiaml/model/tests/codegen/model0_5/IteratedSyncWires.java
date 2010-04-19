@@ -97,19 +97,19 @@ public class IteratedSyncWires extends DatabaseCodegenTestCase {
 	}
 	
 	private void assertContent1() {
-		assertContent("Title 1", "Content 1", "2010-01-01 11:11:00");
+		assertContent("Title 1", "Content 1", "Fri, 01 Jan 2010 11:11:00 +0000");
 	}
 	private void assertContent2() {
-		assertContent("Title 2", "Content 2", "2010-02-01 12:11:00");
+		assertContent("Title 2", "Content 2", "Mon, 01 Feb 2010 12:11:00 +0000");
 	}
 	private void assertContent3() {
-		assertContent("Title 3", "Content 3", "2010-01-03 11:13:00");
+		assertContent("Title 3", "Content 3", "Sun, 03 Jan 2010 11:13:00 +0000");
 	}
 	private void assertNewContent1() {
-		assertContent("New Title 1", "Content 1", "2010-01-01 11:11:00");
+		assertContent("New Title 1", "Content 1", "Fri, 01 Jan 2010 11:11:00 +0000");
 	}
 	private void assertNewContent3() {
-		assertContent("Title 3", "New Content 3", "2010-01-03 11:13:00");
+		assertContent("Title 3", "New Content 3", "Sun, 03 Jan 2010 11:13:00 +0000");
 	}
 
 	/**
@@ -396,9 +396,9 @@ public class IteratedSyncWires extends DatabaseCodegenTestCase {
 	protected List<String> getDatabaseInitialisers() {
 		List<String> s = new ArrayList<String>();
 		s.add("CREATE TABLE News (generated_primary_key INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(64) NOT NULL, content VARCHAR(64) NOT NULL, posted VARCHAR(64) NOT NULL)");
-		s.add("INSERT INTO News (generated_primary_key, title, content, posted) VALUES (1, 'Title 1', 'Content 1', '2010-01-01 11:11:00')");
-		s.add("INSERT INTO News (generated_primary_key, title, content, posted) VALUES (2, 'Title 2', 'Content 2', '2010-02-01 12:11:00')");
-		s.add("INSERT INTO News (generated_primary_key, title, content, posted) VALUES (3, 'Title 3', 'Content 3', '2010-01-03 11:13:00')");
+		s.add("INSERT INTO News (generated_primary_key, title, content, posted) VALUES (1, 'Title 1', 'Content 1', '2010-01-01 11:11:00 +0000')");
+		s.add("INSERT INTO News (generated_primary_key, title, content, posted) VALUES (2, 'Title 2', 'Content 2', '2010-02-01 12:11:00 +0000')");
+		s.add("INSERT INTO News (generated_primary_key, title, content, posted) VALUES (3, 'Title 3', 'Content 3', '2010-01-03 11:13:00 +0000')");
 		return s;
 	}
 

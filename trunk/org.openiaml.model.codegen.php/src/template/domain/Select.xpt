@@ -38,6 +38,30 @@
 	// get the result or return null
 	$row = evaluate_select_wire($db_name, $source_id, $source_class, $query, $args
 		, «IF hasOffset»$offset«ELSE»0«ENDIF»);
+		
+	// translate each into the appropriate data type (from the DomainObject.attribute.type)
+	if ($row !== null) {
+		«FOREACH ((model::DomainObject) from).attributes.select(a | a.type != null) AS attribute»
+		{
+			/* attribute "«safeNameString(name)»" */
+			$type = '«escapePhpString(attribute.type.uRI)»';
+			if (!isset($row["«safeNameString(attribute.name)»"])) {
+				throw new IamlRuntimeException("Could not find attribute '«safeNameString(attribute.name)»' in resulting select");
+			}
+			if (!can_cast($row["«safeNameString(attribute.name)»"], '')) {
+				throw new IamlRuntimeException("Unexpectedly could not cast value '"
+					. $row["«safeNameString(attribute.name)»"] . "' into type '$type'");
+			}
+				
+			$row["«safeNameString(attribute.name)»"] =
+				do_cast($row["«safeNameString(attribute.name)»"], $type);
+				
+			// and then cast it back to a common format for translation ('iamlString')
+			$row["«safeNameString(attribute.name)»"] =
+				do_cast($row["«safeNameString(attribute.name)»"], 'http://openiaml.org/model/datatypes#iamlString');
+		}
+		«ENDFOREACH»
+	}
 	
 	«IF !force && inParameterEdges.size > 0»
 		} else {

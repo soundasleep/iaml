@@ -12,8 +12,7 @@
       <actions xsi:type="iaml.wires:NavigateAction" id="wires.12813a54ad9.d" name="onClick" from="visual.12813a54a8b.37" to="visual.12813a54a8b.c" inParameterEdges="wires.12813b48b22.d"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.12813a54a8b.38" name="two">
-      <onClick id="model.12813a548f4.58" outActions="wires.12813a54ad9.34 wires.12813b48b22.a">
-        <actions xsi:type="iaml.wires:NavigateAction" id="wires.12813a54ad9.34" name="navigate" from="model.12813a548f4.58" to="visual.12813a54a8b.c"/>
+      <onClick id="model.12813a548f4.58" outActions="wires.12813b48b22.a">
         <actions xsi:type="iaml.wires:NavigateAction" id="wires.12813b48b22.a" name="navigate" from="model.12813a548f4.58" to="visual.12813a54a8b.c" inParameterEdges="wires.12813b48b22.b"/>
       </onClick>
     </children>
@@ -24,7 +23,7 @@
       <actions xsi:type="iaml.wires:NavigateAction" id="wires.12813b48b22.e" name="onClick" from="visual.12813b48b12.18" to="visual.12813a54a8b.c" inParameterEdges="wires.12813b48b22.f"/>
     </children>
   </scopes>
-  <scopes xsi:type="iaml.visual:Frame" id="visual.12813a54a8b.c" name="Target" inActions="wires.12813a54ad9.d wires.12813a54ad9.f wires.12813a54ad9.34 wires.12813b48b22.a wires.12813b48b22.e">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12813a54a8b.c" name="Target" inActions="wires.12813a54ad9.d wires.12813a54ad9.f wires.12813b48b22.a wires.12813b48b22.e">
     <parameters id="model.12813a548f4.2e" name="select" outWires="wires.12813a54ad9.6">
       <wires xsi:type="iaml.wires:SetWire" id="wires.12813a54ad9.6" from="model.12813a548f4.2e" to="visual.12813a54a8b.20" name="set"/>
     </parameters>

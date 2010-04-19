@@ -90,12 +90,12 @@ rule "Create field value for input text field (typed)"
 end
 
 /**
- * @inference Label,Property A {@model Label} 
- * 		contains a {@model Property property} named 'fieldValue'.
+ * @inference Label,Property A typed {@model Label} 
+ * 		contains a typed {@model Property property} named 'fieldValue'.
  */
-rule "Create field value for label"
+rule "Create field value for label (typed)"
 	when
-		f : Label( )
+		f : Label( type != null )
 		not (Property( eContainer == f, name=="fieldValue" ))
 		
 		eval ( handler.veto( f ))
@@ -103,6 +103,33 @@ rule "Create field value for label"
 	then
 		Property fieldValue = handler.generatedProperty(f, f);
 		handler.setName(fieldValue, "fieldValue");
+		handler.setType(fieldValue, f.getType());
+
+		// set default to fieldValue ONLY if fieldValue is set
+		// (we want to get an error if we try to access an undefined variable)
+		if (f.getFieldValue() != null) {
+			handler.setDefault(fieldValue, f.getFieldValue());
+		}
+		
+		queue.add(fieldValue, drools);
+		
+end
+
+/**
+ * @inference Label,Property An untyped {@model Label} 
+ * 		contains an untyped {@model Property property} named 'fieldValue'.
+ */
+rule "Create field value for label (untyped)"
+	when
+		f : Label( type == null )
+		not (Property( eContainer == f, name=="fieldValue" ))
+		
+		eval ( handler.veto( f ))
+			
+	then
+		Property fieldValue = handler.generatedProperty(f, f);
+		handler.setName(fieldValue, "fieldValue");
+		handler.setType(fieldValue, null);
 
 		// set default to fieldValue ONLY if fieldValue is set
 		// (we want to get an error if we try to access an undefined variable)

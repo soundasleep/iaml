@@ -192,9 +192,14 @@
     <genClasses ecoreClass="iaml.ecore#//PrimitiveCondition"/>
     <nestedGenPackages prefix="Visual" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//visual">
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="iaml.ecore#//visual/RenderTypes">
+        <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//visual/RenderTypes/HTML"/>
+        <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//visual/RenderTypes/RSS20"/>
+      </genEnums>
       <genClasses ecoreClass="iaml.ecore#//visual/Frame">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//visual/Frame/url"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//visual/Frame/children"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//visual/Frame/render"/>
       </genClasses>
       <genClasses ecoreClass="iaml.ecore#//visual/InputForm"/>
       <genClasses ecoreClass="iaml.ecore#//visual/InputTextField">
@@ -342,9 +347,6 @@
             ecoreFeature="ecore:EReference iaml.ecore#//scopes/Email/onFailure"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//scopes/Email/buttons"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//scopes/Email/labels"/>
-      </genClasses>
-      <genClasses ecoreClass="iaml.ecore#//scopes/FeedProducer">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//scopes/FeedProducer/children"/>
       </genClasses>
     </nestedGenPackages>
     <nestedGenPackages prefix="Components" basePackage="org.openiaml.model.model"

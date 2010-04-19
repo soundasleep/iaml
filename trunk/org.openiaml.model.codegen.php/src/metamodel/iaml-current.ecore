@@ -817,6 +817,11 @@
           <details key="documentation" value="A {@model Frame} can directly contain other {@model VisibleThing}s, which are then rendered to the client."/>
         </eAnnotations>
       </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="render" eType="#//visual/RenderTypes">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The format that the {@model Frame} should be rendered as; by default, to HTML/Javascript."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="InputForm" eSuperTypes="#//VisibleThing">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -864,6 +869,18 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Represents a single mapped address. This may be contained with many other {@model MapPoint points} in a {@model Map}."/>
       </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="RenderTypes">
+      <eLiterals name="HTML">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Render the {@model Frame} in a combination of HTML and Javascript."/>
+        </eAnnotations>
+      </eLiterals>
+      <eLiterals name="RSS20" value="1">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Render the {@model Frame} as an &lt;a href=&quot;http://cyber.law.harvard.edu/rss/rss.html&quot;>RSS 2.0 document&lt;/a>."/>
+        </eAnnotations>
+      </eLiterals>
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="wires" nsURI="http://openiaml.org/model/wires" nsPrefix="iaml.wires">
@@ -1281,13 +1298,6 @@
           eType="#//visual/Button" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="labels" upperBound="-1"
           eType="#//visual/Label" containment="true"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="FeedProducer" eSuperTypes="#//NamedElement #//ContainsOperations #//Scope #//ContainsWires #//WireSource #//WireDestination #//ContainsConditions #//ContainsProperties">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Represents an accessible feed, for example an RSS feed."/>
-      </eAnnotations>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
-          eType="#//VisibleThing" containment="true"/>
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="components" nsURI="http://openiaml.org/model/components" nsPrefix="iaml.components">

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1280b46d146.74">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1280b46d146.74">
   <domainStores id="model.1280b46d146.77" name="Database">
     <children id="model.1280b46d146.81" name="News" outWires="wires.1280b46d1f2.50">
       <wires xsi:type="iaml.wires:SelectWire" id="wires.1280b46d1f2.50" from="model.1280b46d146.81" to="model.1280b46d146.13f" name="select" query="" limit="10"/>
@@ -11,7 +11,7 @@
     </children>
   </domainStores>
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
-  <scopes xsi:type="iaml.scopes:FeedProducer" id="scopes.1280b46d202.15" name="Target Feed" outActions="wires.1280b46d1f2.109">
+  <scopes xsi:type="iaml.visual:Frame" id="scopes.1280b46d202.15" name="Target Feed" outActions="wires.1280b46d1f2.109" render="RSS20">
     <actions xsi:type="iaml.wires:NavigateAction" id="wires.1280b46d1f2.109" name="view" from="scopes.1280b46d202.15" to="visual.1280b46d1e2.46"/>
     <elements xsi:type="iaml:DomainObjectInstance" id="model.1280b46d146.13f" name="recent news" outWires="wires.1280b46d1f2.5d" inWires="wires.1280b46d1f2.50">
       <wires xsi:type="iaml.wires:SetWire" id="wires.1280b46d1f2.5d" from="model.1280b46d146.13f" to="visual.1280b46d1e2.6e" name="set"/>

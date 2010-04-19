@@ -85,13 +85,7 @@ public class RSS2_0Reader extends TestCase {
 	 * feed is equal to the given parameter.
 	 */
 	public void assertLastBuildDate(Date date) throws RSSReaderException {
-		String actualDate = getTextContent("/rss/channel/lastBuildDate");
-		Date actual;
-		try {
-			actual = new SimpleDateFormat(RSS_DATE_FORMAT).parse(actualDate);
-		} catch (ParseException e) {
-			throw new RSSReaderException("Could not parse '" + actualDate + "': " + e.getMessage(), e);
-		}		
+		Date actual = getLastBuildDate();
 		assertEquals("date '" + actual + "' was not expected date '" + date + "'", date.getTime(), actual.getTime());
 	}
 
@@ -158,6 +152,24 @@ public class RSS2_0Reader extends TestCase {
 			super(message, e);
 		}
 
+	}
+
+	/**
+	 * Get the <code>/rss/channel/lastBuildDate</code> of the loaded
+	 * feed, as a {@link Date}.
+	 * 
+	 * @return the {@link Date} of the <code>lastBuildDate</code> of the feed
+	 * @throws RSSReaderException 
+	 */
+	public Date getLastBuildDate() throws RSSReaderException {
+		String actualDate = getTextContent("/rss/channel/lastBuildDate");
+		Date actual;
+		try {
+			actual = new SimpleDateFormat(RSS_DATE_FORMAT).parse(actualDate);
+		} catch (ParseException e) {
+			throw new RSSReaderException("Could not parse '" + actualDate + "': " + e.getMessage(), e);
+		}
+		return actual;
 	}
 	
 }

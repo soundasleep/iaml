@@ -5,9 +5,12 @@ package org.openiaml.model.tests.codegen.model0_5_1;
 
 import org.eclipse.core.resources.IFile;
 import org.openiaml.model.tests.CodegenTestCase;
+import org.openiaml.model.tests.PhpRuntimeExceptionException;
 
 /**
- * 
+ * @implementation ParameterEdge,NavigateAction
+ * 		Any incoming named {@model ParameterEdge}s to a {@model NavigateAction} will be
+ * 		passed along as named GET parameters to the destination {@model Frame}.
  * @example ParameterEdge,NavigateAction
  *		A {@model ParameterEdge} can connect to a {@model NavigateWire} in order to
  *		provide named {@model QueryParameter}s to the destination {@model Frame}. 
@@ -35,8 +38,12 @@ public class NavigateWithParameter extends CodegenTestCase {
 	 * @throws Exception
 	 */
 	public void testTargetFailure() throws Exception {
-		beginAtSitemapThenPage("Target");
-		assertProblem();
+		try {
+			beginAtSitemapThenPage("Target");
+			fail("Should not have been able to access 'Target' page");
+		} catch (PhpRuntimeExceptionException e) {
+			assertContains("Required get variable 'select' was not found", e.getMessage());
+		}
 	}
 	
 	/**
@@ -93,9 +100,13 @@ public class NavigateWithParameter extends CodegenTestCase {
 	public void testButtonNone() throws Exception {
 		beginAtSitemapThenPage("Home");
 		
-		clickButtonWithText("none");
-		
-		assertProblem();
+		try {
+			clickButtonWithText("none");
+			fail("Should not have been able to access 'Target' page");
+		} catch (PhpRuntimeExceptionException e) {
+			assertContains("Required get variable 'select' was not found", e.getMessage());
+		}
+
 	}
 	
 	/**
@@ -105,9 +116,13 @@ public class NavigateWithParameter extends CodegenTestCase {
 	public void testButtonWrong() throws Exception {
 		beginAtSitemapThenPage("Home");
 		
-		clickButtonWithText("wrong param name");
+		try {
+			clickButtonWithText("wrong param name");
+			fail("Should not have been able to access 'Target' page");
+		} catch (PhpRuntimeExceptionException e) {
+			assertContains("Required get variable 'select' was not found", e.getMessage());
+		}
 		
-		assertProblem();
 	}
 	
 	

@@ -636,7 +636,11 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	public void setType(InputTextField element, XSDSimpleTypeDefinition value) throws InferenceException {
 		setValue(element, VisualPackage.eINSTANCE.getInputTextField_Type(), value);
 	}
-	
+
+	public void setType(Label element, XSDSimpleTypeDefinition value) throws InferenceException {
+		setValue(element, VisualPackage.eINSTANCE.getLabel_Type(), value);
+	}
+
 	public void setType(Property element, XSDSimpleTypeDefinition value) throws InferenceException {
 		setValue(element, ModelPackage.eINSTANCE.getProperty_Type(), value);
 	}
@@ -647,6 +651,10 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 
 	public void setType(Arithmetic element, ArithmeticOperationTypes value) throws InferenceException {
 		setValue(element, OperationsPackage.eINSTANCE.getArithmetic_OperationType(), value);
+	}
+	
+	public void setType(DomainAttributeInstance element, XSDSimpleTypeDefinition value) throws InferenceException {
+		setValue(element, ModelPackage.eINSTANCE.getDomainAttributeInstance_Type(), value);
 	}
 
 	public void setPriority(Action element, int value) throws InferenceException {

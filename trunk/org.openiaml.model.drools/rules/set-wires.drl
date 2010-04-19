@@ -637,6 +637,7 @@ rule "Refresh New Instance Object mappings (except for generated primary keys) w
 		# create a new one
 		Label text = handler.generatedLabel(sync, form);
 		handler.setName(text, attribute.getName());
+		handler.setType(text, attribute.getType());
 		queue.add(text, drools);
 
 end
@@ -659,6 +660,7 @@ rule "Refresh Domain Object mappings (except for generated primary keys) when In
 		# create a new one
 		Label text = handler.generatedLabel(sync, form);
 		handler.setName(text, attribute.getName());
+		handler.setType(text, attribute.getType());
 		queue.add(text, drools);
 
 end

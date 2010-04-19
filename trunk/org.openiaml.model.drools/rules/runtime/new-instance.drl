@@ -35,6 +35,8 @@ rule "Refresh NewInstanceWire Instance Object mappings"
 		DomainAttributeInstance attr = handler.generatedDomainAttributeInstance(wire, instance);
 		handler.setName(attr, attribute.getName());
 		handler.setAutosave(attr, instance.isAutosave());
+		# set type
+		handler.setType(attr, attribute.getType());
 		queue.add(attr, drools);
 		
 		# mark it as an extension
@@ -60,6 +62,8 @@ rule "Refresh SelectWire Instance Object mappings"
 		DomainAttributeInstance attr = handler.generatedDomainAttributeInstance(wire, instance);
 		handler.setName(attr, attribute.getName());
 		handler.setAutosave(attr, instance.isAutosave());
+		# set type
+		handler.setType(attr, attribute.getType());
 		queue.add(attr, drools);
 
 		# mark it as an extension
@@ -116,6 +120,11 @@ rule "Create 'exists?' condition for DomainObjectInstances"
 
 end
 
+/**
+ * @inference DomainAttributeInstance
+ *		The 'fieldValue' {@model Property} of a {@model DomainAttributeInstance}
+ *		is created with the same {@model DomainAttributeInstance#type type} as the {@model DomainAttributeInstance}.
+ */
 rule "Create 'fieldValue' value for DomainAttributeInstances"
 	when
 		instance : DomainAttributeInstance ( )
@@ -128,6 +137,7 @@ rule "Create 'fieldValue' value for DomainAttributeInstances"
 		# create a new one
 		Property value = handler.generatedProperty(instance, instance);
 		handler.setName(value, "fieldValue");
+		handler.setType(value, instance.getType());
 		queue.add(value, drools);
 
 end

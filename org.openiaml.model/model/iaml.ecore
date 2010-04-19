@@ -859,6 +859,11 @@
           <details key="documentation" value="If set, provides a default value for this {@model Label}."/>
         </eAnnotations>
       </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/plugin/org.eclipse.xsd/model/XSD.ecore#//XSDSimpleTypeDefinition">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The datatype of the {@model Label} and its contained {@model Property fieldValue}."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Map" eSuperTypes="#//VisibleThing">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

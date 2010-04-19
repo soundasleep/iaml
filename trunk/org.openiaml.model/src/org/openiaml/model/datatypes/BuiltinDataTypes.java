@@ -46,11 +46,17 @@ public class BuiltinDataTypes {
 	 * Integer data type.
 	 */
 	public static final String TYPE_INTEGER = "http://openiaml.org/model/datatypes#iamlInteger";
-	
+
+	/**
+	 * Address data type.
+	 */
+	public static final String TYPE_ADDRESS = "http://openiaml.org/model/datatypes#iamlAddress";
+
 	private static XSDSimpleTypeDefinition xsdString = null;
 	private static XSDSimpleTypeDefinition xsdEmail = null;
 	private static XSDSimpleTypeDefinition xsdDateTime = null;
 	private static XSDSimpleTypeDefinition xsdInteger = null;
+	private static XSDSimpleTypeDefinition xsdAddress = null;
 	
 	/**
 	 * Get the {@link XSDSimpleTypeDefinition} for {@link #TYPE_INTEGER}.
@@ -109,6 +115,20 @@ public class BuiltinDataTypes {
 	}
 	
 	/**
+	 * Get the {@link XSDSimpleTypeDefinition} for {@link #TYPE_ADDRESS}.
+	 * May call {@link #updateTypeDefinitions()} if the types have not been
+	 * loaded from the plugin yet.
+	 *  
+	 * @return the XSDSimpleTypeDefinition for TYPE_ADDRESS
+	 */
+	public static final XSDSimpleTypeDefinition getTypeAddress() {
+		if (xsdAddress == null) {
+			updateTypeDefinitions();
+		}
+		return xsdAddress;
+	}
+	
+	/**
 	 * The source of the builtin data types.
 	 */
 	public static final String TYPE_DEFINITIONS = "platform:/plugin/org.openiaml.model/model/datatypes.xsd"; 
@@ -146,6 +166,8 @@ public class BuiltinDataTypes {
 					xsdEmail = stype;
 				} else if (TYPE_DATETIME.equals(u)) {
 					xsdDateTime = stype;
+				} else if (TYPE_ADDRESS.equals(u)) {
+					xsdAddress = stype;
 				}
 			}
 		}

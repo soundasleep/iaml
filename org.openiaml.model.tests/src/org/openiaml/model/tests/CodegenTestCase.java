@@ -672,6 +672,19 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	}
 	
 	/**
+	 * Construct the necessary XPath expression to find a node that 
+	 * is exactly the specific text.
+	 * 
+	 * <p>Currently returns <code>normalize-space(text()) = normalize-space('<u>text</u>')</code>.
+	 * 
+	 * @param text
+	 * @return
+	 */
+	protected String getExactTextXPath(String text) {
+		return "normalize-space(text()) = normalize-space('" + text + "')";
+	}
+	
+	/**
 	 * Assert that there is no label on the page containing the given text.
 	 * 
 	 * @param text
@@ -1046,8 +1059,32 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		assertNotNull(match);
 		String textContent = match.getTextContent();
 		// normalise
-		textContent = textContent.replaceAll("[\\s]+", " ").trim();
+		textContent = normalizeSpace(textContent);
 		assertEquals(text, textContent);
+	}
+	
+	/**
+	 * Assert that a label exists with the <em>exact</em> given text.
+	 * 
+	 * @param text
+	 */
+	public void assertLabelTextExactlyPresent(String text) {
+		IElement match = getElementByXPath("//label[" + getExactTextXPath(text) + "]");
+		assertNotNull(match);
+		String textContent = match.getTextContent();
+		// normalise
+		textContent = normalizeSpace(textContent);
+		assertEquals(text, textContent);
+	}
+	
+	/**
+	 * Implementation of XPath's <code>normalize-space()</code>.
+	 * 
+	 * @param s
+	 * @return
+	 */
+	protected String normalizeSpace(String s) {
+		return s.replaceAll("[\\s]+", " ").trim();
 	}
 	
 	/**

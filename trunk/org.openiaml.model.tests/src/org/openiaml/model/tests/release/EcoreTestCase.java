@@ -79,6 +79,18 @@ public class EcoreTestCase extends XmlTestCase {
 			String thisns = node.getAttribute("uri");
 			assertEquals(file + xpath, nsURI, thisns);
 		}
+		
+		// try org.openiaml.model/plugin.xml
+		// it doesn't look like GenModel always updates the plugin.xml correctly
+		// you may need to delete and regen plugin.xml
+		{
+			String file = "../org.openiaml.model/plugin.xml";
+			String xpath = "/plugin/extension[@point='org.eclipse.emf.ecore.generated_package']/package[@uri='" + nsURI + "']";
+			Document doc = loadDocument(file);
+			Element node = xpathFirst(doc, xpath);
+			String thisns = node.getAttribute("uri");
+			assertEquals(file + xpath, nsURI, thisns);
+		}
 	}
 	
 }

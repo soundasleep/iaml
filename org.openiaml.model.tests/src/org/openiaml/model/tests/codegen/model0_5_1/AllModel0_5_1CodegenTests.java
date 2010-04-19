@@ -21,6 +21,8 @@ public class AllModel0_5_1CodegenTests {
 		TestSuite suite = new TestSuite("Model 0.5.1");
 
 		suite.addTestSuite(NavigateWithParameter.class);
+		suite.addTestSuite(ReadRSSFeeds.class);
+		suite.addTestSuite(FeedProducerComplete.class);
 
 		return suite;
 	}

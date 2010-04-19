@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xsd.XSDSimpleTypeDefinition;
 import org.jaxen.JaxenException;
 import org.openiaml.model.model.Action;
 import org.openiaml.model.model.ActionDestination;
@@ -1467,6 +1468,20 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		}
 		assertNotNull("Did not find any wires connecting '" + from + "' to '" + to + " of type '" + type + "' with name '" + name + "'", result);
 		return result;
+	}
+	
+	/**
+	 * Assert that the given types refer <em>to the same URI</em>.
+	 * 
+	 * @param type1
+	 * @param type2
+	 */
+	public static void assertEquals(XSDSimpleTypeDefinition type1, XSDSimpleTypeDefinition type2) {
+		assertNotNull("Type cannot be null", type1);
+		assertNotNull("Type cannot be null", type2);
+		assertNotNull("Type URI cannot be null", type1.getURI());
+		assertNotNull("Type URI cannot be null", type2.getURI());
+		assertEquals(type1.getURI(), type2.getURI());
 	}
 
 }

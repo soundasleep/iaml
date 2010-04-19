@@ -230,6 +230,27 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * @param query Query to append, e.g. <code>key=value&amp;key2=value2</code>
 	 */
 	public void visitLinkWithQueryParameter(String linkName, String query) {
+		String href = getURLOfLink(linkName);
+		
+		// construct the query
+		if (href.indexOf('?') != -1) {
+			href += "&" + query;
+		} else {
+			href += "?" + query;
+		}
+		
+		// go to the link
+		gotoPage(href);
+	}
+	
+	/**
+	 * Get the given link name on the page, and return the resulting URL (as a string)
+	 * if we clicked on the link.
+	 * 
+	 * @param linkName
+	 * @return 
+	 */
+	public String getURLOfLink(String linkName) {
 		IElement link = getElementByXPath("//a[contains(text(), '" + linkName + "')]");
 		assertNotNull(link);
 		
@@ -242,15 +263,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		// the current relative path to the sitemap
 		href = "output/" + href;	// hack until we can get the actual relative URL
 		
-		// construct the query
-		if (href.indexOf('?') != -1) {
-			href += "&" + query;
-		} else {
-			href += "?" + query;
-		}
-		
-		// go to the link
-		gotoPage(href);
+		return href;
 	}
 	
 	/**
@@ -317,6 +330,27 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	public void beginAtSitemapThenPage(IFile sitemap, String pageTitle, String expectedPageTitle) throws Exception {
 		beginAtSitemapThenPage(sitemap, pageTitle, expectedPageTitle, null);
 	}
+	
+	/**
+	 * Just begin at the sitemap, and return the loaded sitemap file.
+	 * 
+	 * @return the sitemap file
+	 */
+	public IFile beginAtSitemap() {
+		IFile sitemap = getSitemap();
+		beginAtSitemap(sitemap);
+		return sitemap;
+	}
+	
+	/**
+	 * Just begin at the given sitemap.
+	 * 
+	 * @return the sitemap file
+	 */
+	public void beginAtSitemap(IFile sitemap) {
+		beginAt(sitemap.getProjectRelativePath().toString());
+		assertTitleMatch("sitemap");
+	}
 
 	/**
 	 * Begin at the sitemap page, and then click on a particular page title.
@@ -336,8 +370,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	public void beginAtSitemapThenPage(IFile sitemap, String pageTitle, String expectedPageTitle, String query) throws Exception {
 		logTimed("web: beginAtSitemapThenPage");
 
-		beginAt(sitemap.getProjectRelativePath().toString());
-		assertTitleMatch("sitemap");
+		beginAtSitemap(sitemap);
 		
 		assertLinkPresentWithExactText(pageTitle);
 		if (query == null) {	

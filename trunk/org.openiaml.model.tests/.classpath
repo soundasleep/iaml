@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="lib" path="lib/jwebunit-core-2.4-SNAPSHOT.jar" sourcepath="C:/Documents and Settings/jmwright.MASSEY/workspace-iaml-branch/jwebunit-trunk"/>
-	<classpathentry exported="true" kind="lib" path="lib/jwebunit-htmlunit-plugin-2.4-SNAPSHOT.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jwebunit-htmlunit-plugin-2.4-SNAPSHOT.jar" sourcepath="C:/Documents and Settings/jmwright.MASSEY/workspace-iaml-branch/jwebunit-trunk/jwebunit-htmlunit-plugin"/>
 	<classpathentry exported="true" kind="lib" path="lib/reqs/commons-codec-1.4.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/reqs/commons-collections-3.2.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/reqs/commons-fileupload-1.2.jar"/>

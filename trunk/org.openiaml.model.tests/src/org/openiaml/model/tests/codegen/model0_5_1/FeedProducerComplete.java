@@ -43,8 +43,12 @@ public class FeedProducerComplete extends DatabaseCodegenTestCase {
 	 * @throws Exception
 	 */
 	public void testViewWithoutID() throws Exception {
-		beginAtSitemapThenPage("View News");
-		assertProblem();
+		try {
+			beginAtSitemapThenPage("View News");
+			fail("Should not have been able to view 'View News'");
+		} catch (PhpRuntimeExceptionException e) {
+			assertContains("Required get variable 'id' was not found", e.getMessage());
+		}
 	}
 	
 	/**
@@ -57,7 +61,8 @@ public class FeedProducerComplete extends DatabaseCodegenTestCase {
 		beginAtSitemapThenPage(sitemap, "View News", "View News", "id=5");
 		assertNoProblem();
 		
-		assertContent("Title 5", "Description 5", "2010-01-05 01:00:00");
+		// date is displayed in RFC 2822 format
+		assertContent("Title 5", "Description 5", "Tue, 05 Jan 2010 01:00:00 +0000");
 		
 		// there is no navigation buttons, since we are only selecting one
 		assertButtonNotPresentWithText("Next");
@@ -78,12 +83,12 @@ public class FeedProducerComplete extends DatabaseCodegenTestCase {
 		String url = getURLOfLink("Target Feed");
 		assertNotNull(url);
 		
-		RSS2_0Reader reader = new RSS2_0Reader(url);
+		RSS2_0Reader reader = new RSS2_0Reader(getTestContext().getBaseUrl().toString() + url);
 		reader.assertTitle("Target Feed");
 		assertRecent(reader.getLastBuildDate());
 		reader.assertGenerator("Internet Application Modelling Language " + PluginsTestCase.getVersion());
 		
-		// TODO
+		fail("Method is incomplete");
 	}
 	
 	/**
@@ -124,7 +129,7 @@ public class FeedProducerComplete extends DatabaseCodegenTestCase {
 		List<String> s = new ArrayList<String>();
 		s.add("CREATE TABLE News (id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(64) NOT NULL, description VARCHAR(64) NOT NULL, updated DATETIME NOT NULL)");
 		for (int i = 1; i <= 20; i++) {
-			s.add("INSERT INTO News (id, title, description, updated) VALUES (" + i + ", 'Title " + i + "', 'Description " + i + "', '2010-01-" + i + " 01:00:00')");
+			s.add("INSERT INTO News (id, title, description, updated) VALUES (" + i + ", 'Title " + i + "', 'Description " + i + "', '2010-01-" + i + " 01:00:00 +0000')");
 		}
 		return s;
 	}

@@ -56,7 +56,10 @@ escapePhpString(String s):
  */
 escapeHtmlString(String s) :
 	s.replaceAll("&", "&amp;").replaceAll("\"", "&quot;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
-	
+
+escapeXmlString(String s) :
+	escapeHtmlString(s).replaceAll("'", "&apos;");
+
 operationName(model::WireDestination this) : 
 	throwException("Invalid operation: " + this);
 
@@ -611,6 +614,12 @@ operationUsed(model::Operation this) :
 
 conditionUsed(model::Condition this) :
 	!(outConditionEdges.isEmpty && outFlows.isEmpty && outWires.isEmpty);
+
+/**
+ * Get the current version of the IAML code generation platform.
+ */
+String iamlVersion() :
+	JAVA org.openiaml.model.codegen.php.OawCodeGenerator.getIamlVersion();
 
 /** 
  * a hack way to create backtrace-able errors

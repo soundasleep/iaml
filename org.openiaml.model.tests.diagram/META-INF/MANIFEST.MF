@@ -30,4 +30,5 @@ Require-Bundle: org.junit,
  org.openiaml.model.actions;bundle-version="0.3.1",
  org.openiaml.model.diagram.helpers;bundle-version="0.3.1",
  org.openiaml.model.diagram.frame;bundle-version="0.4.1",
- org.openiaml.emf.properties;bundle-version="0.4.2"
+ org.openiaml.emf.properties;bundle-version="0.4.2",
+ org.eclipse.xsd;bundle-version="2.5.0"

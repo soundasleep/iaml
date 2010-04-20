@@ -28,6 +28,7 @@ import org.openiaml.model.codegen.ICodeGeneratorInMemory;
 import org.openiaml.model.model.DynamicApplicationElementSet;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.domain.DomainPackage;
 
 import ca.ecliptical.emf.xpath.EMFXPath;
@@ -166,6 +167,16 @@ public class OawCodeGenerator implements ICodeGenerator, ICodeGeneratorInMemory 
 		
 		// only EAttributes can be overridden as properties
 		return f instanceof EAttribute;
+	}
+	
+	/**
+	 * Get the current version of the IAML code generation platform.
+	 * This is obtained from the version returned by the Bundle.
+	 * 
+	 * @return the current version of the IAML code generation platform
+	 */
+	public static String getIamlVersion() {
+		return IAMLPHPCodegenPlugin.getDefault().getBundle().getVersion().toString();
 	}
 	
 	/**

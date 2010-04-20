@@ -177,14 +177,22 @@ function has_get($var, $default = "") {
 }
 
 /**
- * If the current address is http://foo.com/foo/bar.php, we want to
- * get out http://foo.com/foo
+ * If the current address is <code>http://foo.com/foo/bar.php</code>, we want to
+ * get out <code>http://foo.com/foo</code>
  */
 function get_request_base() {
 	return "http://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER["REQUEST_URI"]);
 }
 function get_baseurl() {
 	return "http://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER["REQUEST_URI"]);
+}
+
+/**
+ * If the current address is <code>http://foo.com/foo/bar.php</code>, we want to
+ * get out the same address.
+ */
+function get_current_url() {
+	return "http://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
 }
 
 /**
@@ -367,6 +375,13 @@ function escape_parameter_string($string) {
 
 function unescape_parameter_string($string) {
 	return rawurldecode($string);
+}
+
+/**
+ * Escape out any special XML characters.
+ */
+function escape_xml_string($string) {
+	return str_replace('&#039;', '&apos;', htmlspecialchars($string, ENT_QUOTES));
 }
 
 /**

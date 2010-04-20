@@ -1,0 +1,87 @@
+«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+/**
+ * Render a Frame in an application of RSS 2.0.
+ * All of the required content has already been included in PHP.
+ * 
+ * <p>We come into this template already being in PHP mode, so we have
+ * to first escape out of it.
+ */
+«DEFINE renderFrameAsRSS20 FOR model::visual::Frame-»
+
+/**
+ * Firefox doesn't recognise application/rss+xml as a generic XML type:
+ * see https://bugzilla.mozilla.org/show_bug.cgi?id=155730
+ */
+header("Content-Type: application/xml");
+
+?>
+<?xml version="1.0" encoding="utf-8"?>
+«REM»TODO should we have a RSS namespace?«ENDREM»
+<rss version="2.0">
+	<channel>
+		<title>«escapeXmlString(frameTitle())»</title>
+		<link><?php echo escape_xml_string(get_baseurl()); ?></link>
+		<description>Automatically generated feed for &apos;«escapeXmlString(frameTitle())»&apos;</description>
+		<lastBuildDate><?php echo escape_xml_string(
+			«REM»Tue, 10 Jun 2008 09:41:01 GMT«ENDREM»
+			date('D, d M Y H:i:s T')); ?></lastBuildDate>
+		<docs>http://blogs.law.harvard.edu/tech/rss</docs>
+		<generator>Internet Application Modelling Language «escapeXmlString(iamlVersion())»</generator>
+		<ttl>5</ttl>
+		
+		«REM»now, we can expand the items on the page«ENDREM»
+		«EXPAND getFeedItems(this) FOREACH children.typeSelect(model::VisibleThing)»
+
+	</channel>
+</rss>
+«ENDDEFINE»
+
+«DEFINE getFeedItems(model::visual::Frame frame) FOR model::VisibleThing»
+	«throwException("Cannot get feed item for VisibleThing: " + this)»
+«ENDDEFINE»
+
+«DEFINE getFeedItems(model::visual::Frame frame) FOR model::visual::InputForm»
+	<item>
+		<title>«EXPAND getProperty(frame, null, "title") FOR this-»</title>
+		<link>TODO</link>
+		<description>«EXPAND getProperty(frame, null, "description") FOR this-»</description>
+		<pubDate>«EXPAND getProperty(frame, null, "updated") FOR this-»</pubDate>
+		<guid>TODO</guid>
+	</item> 
+«ENDDEFINE»
+
+/**
+ * @param frame the current frame
+ * @param direct the direct attribute, or <code>null</code>
+ * @param propertyName the name of the property to select; this will first search for
+ *			contained {@model Property Properties}, then contained {@model VisibleThing}s.
+ * @implementation Frame
+ *		An RSS 2.0 {@model Frame} will search for <code>&lt;title&gt;</code>, ... properties
+ *		with the following precedence: direct attribute; contained named {@model Property}; then value
+ *		of contained named {@model VisibleThing}, all case insensitive.
+ */
+«DEFINE getProperty(model::visual::Frame frame, String direct, String propertyName) FOR model::VisibleThing-»
+«IF direct != null-»
+«escapeXmlString(direct)-»
+«ELSE-»
+«IF !properties.select(p|p.name.toLowerCase() == propertyName).isEmpty-»
+<?php echo escape_xml_string(«EXPAND template::operations::Parameters::callParameterValue(true, false) FOR properties.selectFirst(p|p.name.toLowerCase() == propertyName)»); ?>
+«ELSE-»
+«IF !children.select(p|p.name.toLowerCase() == propertyName).isEmpty-»
+<?php
+$value = null;
+«EXPAND template::visual::Render::getFieldValue(frame, "value") FOR children.selectFirst(p|p.name.toLowerCase() == propertyName)»
+if ($value !== null) {
+	echo escape_xml_string($value);
+}
+?>
+«ELSE-»
+<?php /* unknown */ ?>
+«ENDIF-»
+«ENDIF-»
+«ENDIF-»
+«ENDDEFINE»
+

@@ -32,3 +32,20 @@
 «DEFINE renderVisual(model::visual::Frame currentFrame) FOR model::visual::MapPoint-»
 	«EXPAND MapPoint::renderMapPoint(currentFrame) FOR this-»
 «ENDDEFINE»
+
+/**
+ * Get the current 'value' of the given VisibleThing, into the given
+ * argument name.
+ * Assumed to be in PHP mode.
+ * If there is no current fieldValue, then the argument <em>must not be set</em>.
+ */
+«DEFINE getFieldValue(model::visual::Frame currentFrame, String argName) FOR model::VisibleThing»
+	«throwException("Cannot get field value of abstract visible thing: " + this)»
+«ENDDEFINE»
+
+«DEFINE getFieldValue(model::visual::Frame currentFrame, String argName) FOR model::visual::Label»
+	«EXPAND template::visual::Label::getLabelFieldValue(currentFrame, argName) FOR this»
+«ENDDEFINE»
+
+
+

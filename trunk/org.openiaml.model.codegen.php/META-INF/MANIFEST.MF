@@ -23,3 +23,5 @@ Export-Package: org.openiaml.model.codegen.php,
  org.openiaml.model.codegen.validation
 Bundle-Vendor: www.openiaml.org
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Bundle-Activator: org.openiaml.model.codegen.php.IAMLPHPCodegenPlugin

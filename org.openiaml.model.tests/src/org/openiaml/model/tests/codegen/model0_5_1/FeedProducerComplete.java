@@ -3,7 +3,6 @@
  */
 package org.openiaml.model.tests.codegen.model0_5_1;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -87,6 +86,9 @@ public class FeedProducerComplete extends DatabaseCodegenTestCase {
 		reader.assertTitle("Target Feed");
 		assertRecent(reader.getLastBuildDate());
 		reader.assertGenerator("Internet Application Modelling Language " + PluginsTestCase.getVersion());
+		
+		reader.assertLink(BASE_URL + "output");
+		reader.assertDocs("http://blogs.law.harvard.edu/tech/rss");
 		
 		fail("Method is incomplete");
 	}

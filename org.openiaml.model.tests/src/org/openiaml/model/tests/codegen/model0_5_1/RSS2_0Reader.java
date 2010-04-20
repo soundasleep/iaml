@@ -65,6 +65,22 @@ public class RSS2_0Reader extends TestCase {
 	}
 
 	/**
+	 * Assert that the <code>/rss/channel/link</code> of the loaded
+	 * feed is equal to the given parameter.
+	 */
+	public void assertLink(String arg) throws RSSReaderException {
+		assertEquals(arg, getTextContent("/rss/channel/link"));
+	}
+	
+	/**
+	 * Assert that the <code>/rss/channel/docs</code> of the loaded
+	 * feed is equal to the given parameter.
+	 */
+	public void assertDocs(String arg) throws RSSReaderException {
+		assertEquals(arg, getTextContent("/rss/channel/docs"));
+	}
+	
+	/**
 	 * Assert that the <code>/rss/channel/description</code> of the loaded
 	 * feed is equal to the given parameter.
 	 */

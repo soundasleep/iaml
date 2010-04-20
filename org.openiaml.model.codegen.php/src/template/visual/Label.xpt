@@ -34,35 +34,16 @@
 		?>
 		> 
 
-	<?php $label_set = false; ?>
+	<?php
+		/* get the label value */
+		$label_set = false;
+		$value = null;
+		«EXPAND getLabelFieldValue(currentFrame, "value") FOR this»
+		if ($label_set) {
+			echo htmlspecialchars($value);
+		}
+	?>
 
-	«REM»
-		an initial value?
-		TODO we could have multiple default values; right now we are relying on
-		browser behaviour to place this value as lower priority. we should work
-		out some way to select it programatically.
-	«ENDREM»
-
-	«REM»selected in _reverse order_ to InputTextField, which abused HTML to allow
-		another value to override a previously selected value«ENDREM»
-
-	«REM»Label.property[fieldValue] overrides Label.defaultValue«ENDREM»
-	«EXPAND staticInitialValue(currentFrame) FOREACH properties.select( e | e.name == "fieldValue")»			
-
-	«IF defaultValue != null && defaultValue.length > 0»
-		<?php 
-		// default value
-		if (!$label_set) { ?>
-			«escapeHtmlString(defaultValue)»
-			<?php $label_set = true; 
-		} 
-		?>
-	«ENDIF»
-	
-	«EXPAND getInitialValuesSyncWire(currentFrame) FOREACH outWires.typeSelect(model::wires::SyncWire)» 			 
-	«EXPAND getInitialValuesSyncWire(currentFrame) FOREACH inWires.typeSelect(model::wires::SyncWire)» 
-	«EXPAND getInitialValuesSetWire(currentFrame) FOREACH inWires.typeSelect(model::wires::SetWire)» 			 
-	
 		«REM»expand all children«ENDREM»
 		«EXPAND Render::renderVisual(currentFrame) FOREACH children-»
 	</label>
@@ -82,75 +63,100 @@
 	</script> 
 «ENDDEFINE»
 
+/**
+ * Get the current 'value' of the given Label, into the given
+ * argument name. Assumed to be in PHP mode.
+ */
+«DEFINE getLabelFieldValue(model::visual::Frame currentFrame, String argName) FOR model::visual::Label»
+	$label_set = false;
+	
+	«REM»
+		an initial value?
+		TODO we could have multiple default values; right now we are relying on
+		browser behaviour to place this value as lower priority. we should work
+		out some way to select it programatically.
+	«ENDREM»
+
+	«REM»selected in _reverse order_ to InputTextField, which abused HTML to allow
+		another value to override a previously selected value«ENDREM»
+
+	«REM»Label.property[fieldValue] overrides Label.defaultValue«ENDREM»
+	«EXPAND staticInitialValue(currentFrame, argName) FOREACH properties.select( e | e.name == "fieldValue")»			
+
+	«IF defaultValue != null && defaultValue.length > 0»
+		// default value
+		if (!$label_set) {
+			$«argName» = "«escapePhpString(defaultValue)»";
+			$label_set = true; 
+		} 
+	«ENDIF»
+	
+	«EXPAND getInitialValuesSyncWire(currentFrame, argName) FOREACH outWires.typeSelect(model::wires::SyncWire)» 			 
+	«EXPAND getInitialValuesSyncWire(currentFrame, argName) FOREACH inWires.typeSelect(model::wires::SyncWire)» 
+	«EXPAND getInitialValuesSetWire(currentFrame, argName) FOREACH inWires.typeSelect(model::wires::SetWire)» 			 
+	
+«ENDDEFINE»
 
 /* if it connects to a SyncWire that is an Property, use this
    property as the value */
-«DEFINE getInitialValuesSyncWire(model::visual::Frame currentFrame) FOR model::wires::SyncWire»
-	«EXPAND staticInitialValue(currentFrame) FOR from»
-	«EXPAND staticInitialValue(currentFrame) FOR to»
+«DEFINE getInitialValuesSyncWire(model::visual::Frame currentFrame, String argName) FOR model::wires::SyncWire»
+	«EXPAND staticInitialValue(currentFrame, argName) FOR from»
+	«EXPAND staticInitialValue(currentFrame, argName) FOR to»
 «ENDDEFINE»
 
 /* if it connects to a SetWire that is an Property, use this
    property as the value */
-«DEFINE getInitialValuesSetWire(model::visual::Frame currentFrame) FOR model::wires::SetWire»
-	«EXPAND staticInitialValue(currentFrame) FOR from»
+«DEFINE getInitialValuesSetWire(model::visual::Frame currentFrame, String argName) FOR model::wires::SetWire»
+	«EXPAND staticInitialValue(currentFrame, argName) FOR from»
 «ENDDEFINE»
 
 /* ignore these sources */
-«DEFINE staticInitialValue(model::visual::Frame currentFrame) FOR model::WireSource»
+«DEFINE staticInitialValue(model::visual::Frame currentFrame, String argName) FOR model::WireSource»
 «ENDDEFINE»
-«DEFINE staticInitialValue(model::visual::Frame currentFrame) FOR model::WireDestination»
+«DEFINE staticInitialValue(model::visual::Frame currentFrame, String argName) FOR model::WireDestination»
 «ENDDEFINE»
 
 /* we have a property to provide [in PHP] */
-«DEFINE staticInitialValue(model::visual::Frame currentFrame) FOR model::Property»
+«DEFINE staticInitialValue(model::visual::Frame currentFrame, String argName) FOR model::Property»
 	«IF containingSession(this) == null»
 		«REM»contained in a Frame or InternetApplication: a static value«ENDREM»
-		<?php
 		if (get_application_value("«safeNameString(id)»", null) !== null) {
-			$value = get_application_value("«safeNameString(id)»", "«escapeString(defaultValue)»");
+			$temp = get_application_value("«safeNameString(id)»", "«escapeString(defaultValue)»");
 			if (!$label_set) {
-				echo htmlspecialchars($value);
+				$«argName» = $temp;
 				$label_set = true;
 			}
 		}		
-		?>
 	«ELSE»
 		«REM»contained in a Session: a session value«ENDREM»
-		<?php
 		if (has_session("«safeName(containingSession(this))»_«safeNameString(id)»")) {
-			$value = require_session("«safeName(containingSession(this))»_«safeNameString(id)»", "«escapeString(defaultValue)»");
+			$temp = require_session("«safeName(containingSession(this))»_«safeNameString(id)»", "«escapeString(defaultValue)»");
 			if (!$label_set) {
-				echo htmlspecialchars($value);
+				$«argName» = $temp;
 				$label_set = true;
 			}
 		}		
-		?>
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE staticInitialValue(model::visual::Frame currentFrame) FOR model::DomainAttributeInstance»
+«DEFINE staticInitialValue(model::visual::Frame currentFrame, String argName) FOR model::DomainAttributeInstance»
 	«REM»from a domain attribute instance.«ENDREM»
-	<?php
 	«REM»if (has_attribute_instance_«safeName()»()) {«ENDREM»
-		$value = get_attribute_instance_«safeName()»();
+		$temp = get_attribute_instance_«safeName()»();
 		if (!$label_set) {
-			echo htmlspecialchars($value);
+			$«argName» = $temp;
 			$label_set = true;
 		}
 	«REM»}«ENDREM»		
-	?>
 «ENDDEFINE»
 
-«DEFINE staticInitialValue(model::visual::Frame currentFrame) FOR model::QueryParameter»
+«DEFINE staticInitialValue(model::visual::Frame currentFrame, String argName) FOR model::QueryParameter»
 	«REM»from the query«ENDREM»
-	<?php
-	$value = «EXPAND template::operations::Parameters::callParameterValue(true, false)»;
+	$temp = «EXPAND template::operations::Parameters::callParameterValue(true, false)»;
 	if (!$label_set) {
-		echo htmlspecialchars($value);
+		$«argName» = $temp;
 		$label_set = true;
 	}		
-	?>
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

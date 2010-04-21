@@ -383,5 +383,16 @@ public class DroolsHelperFunctions {
 		
 		throw new RuntimeException("Possible infinite loop detected in containment hierarchy: " + prop);
 	}
+	
+	/**
+	 * Perform the same as the codegen <code>safeNameString</code>; i.e.
+	 * replace all <code>[^A-Za-z0-9]</code> characters with an underscore. 
+	 * 
+	 * @param s
+	 * @return
+	 */
+	public String safeNameString(String s) {
+		return s.replaceAll("[^A-Za-z0-9]", "_");
+	}
 
 }

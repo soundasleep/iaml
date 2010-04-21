@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openiaml.model.tests.codegen.model0_5_1.RSS2_0Reader.FeedItem;
-import org.openiaml.model.tests.release.PluginsTestCase;
 
 /**
  * &lt;link&gt; and &lt;pubDate&gt; are optional in RSS, so we don't have
@@ -44,14 +43,8 @@ public class FeedProducerCompleteWithoutLink extends FeedCodegenTestCase {
 		String url = getURLOfLink("Target Feed");
 		assertNotNull(url);
 		
-		RSS2_0Reader reader = new RSS2_0Reader(getTestContext().getBaseUrl().toString() + url);
-		reader.assertTitle("Target Feed");
-		assertRecent(reader.getLastBuildDate());
-		reader.assertGenerator("Internet Application Modelling Language " + PluginsTestCase.getVersion());
-		
-		reader.assertLink(BASE_URL + getProject().getProjectName() + "/output");
-		reader.assertDocs("http://blogs.law.harvard.edu/tech/rss");
-		
+		RSS2_0Reader reader = getFeedReader(url, "Target Feed");
+
 		// there should be ten feed items
 		assertEquals(10, reader.getFeedItems().size());
 		

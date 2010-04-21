@@ -90,12 +90,12 @@ rule "Create a relevant DomainObjectInstance, with SelectWire, in the destinatio
 		SelectWire select2 = handler.generatedSelectWire(detail, target, obj, i2);
 		handler.setName(select2, "Select from query");
 		handler.setLimit(select2, 1);
-		handler.setQuery(select2, pk.getName() + " = ?");
+		handler.setQuery(select2, functions.safeNameString(pk.getName()) + " = :pk");
 		queue.add(select2, drools);
 		
 		// connect QueryParameter
 		ParameterEdge param = handler.generatedParameterEdge(detail, target, queryPk, select2);
-		handler.setName(param, pk.getName());
+		handler.setName(param, "pk");
 		queue.add(param, drools);
 	
 end

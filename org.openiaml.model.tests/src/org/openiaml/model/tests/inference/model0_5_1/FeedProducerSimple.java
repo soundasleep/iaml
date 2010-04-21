@@ -61,7 +61,7 @@ public class FeedProducerSimple extends InferenceTestCase {
 		// the order doesn't matter here
 		
 		// parameter
-		assertGenerated(assertHasParameterEdge(root, qp, select, "generated primary key"));
+		assertGenerated(assertHasParameterEdge(root, qp, select));
 		
 		// a SetWire from the instance to the form
 		assertGenerated(assertHasSetWire(root, instance, viewForm));

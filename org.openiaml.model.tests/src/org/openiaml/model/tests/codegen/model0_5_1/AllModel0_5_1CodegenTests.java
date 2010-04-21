@@ -26,6 +26,7 @@ public class AllModel0_5_1CodegenTests {
 		suite.addTestSuite(FeedProducerComplete.class);
 		suite.addTestSuite(ImplicitParameterValues.class);
 		suite.addTestSuite(FeedProducerCompleteWithoutLink.class);
+		suite.addTestSuite(FeedProducerSimple.class);
 
 		return suite;
 	}

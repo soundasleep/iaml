@@ -264,7 +264,7 @@
 		«FOREACH inParameterEdges.select(p|p.name != null && p.name.length != 0) AS param»
 			«IF php»
 			{
-				$add_url = urlencode("«escapePhpString(param.name)»") . "=" .
+				$add_url = urlencode("«escapePhpString(safeNameString(param.name))»") . "=" .
 					urlencode(«EXPAND Parameters::callParameter(php, inStoreDb, false) FOR param»)
 					;
 					
@@ -276,7 +276,7 @@
 			}
 			«ELSE»
 			{
-				var add_url = encodeURIComponent("«escapePhpString(param.name)»") + "=" +
+				var add_url = encodeURIComponent("«escapePhpString(safeNameString(param.name))»") + "=" +
 					encodeURIComponent(«EXPAND Parameters::callParameter(php, inStoreDb, false) FOR param»)
 					;
 					

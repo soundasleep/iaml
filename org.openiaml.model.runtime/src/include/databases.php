@@ -141,6 +141,7 @@ class DatabaseQuery {
  * Return the final composed result, or null if
  * none can be found.
  *
+ * @param args if an associative array, the keys MUST be cleaned up (i.e. no spaces) - see <code>clean_args()</code>
  * @param offset the offset, or 0 if there is none
  * @param order_by a row to order by, or "" if there is none
  * @param order_ascending if true, order ASC; otherwise order DESC
@@ -226,4 +227,17 @@ function compose_domain_joins($source_id) {
 	}
 
 	return $result;
+}
+
+/**
+ * Clean up the keys of the given array to <code>safeNameString()</code>
+ * specifications. Returns the cleaned array.
+ */
+function clean_args($args) {
+	$n = array();
+	foreach ($args as $key => $value) {
+		$cleaned = preg_replace("#[^A-Za-z0-9]#i", "_", $key);
+		$n[$cleaned] = $value;
+	}
+	return $n;
 }

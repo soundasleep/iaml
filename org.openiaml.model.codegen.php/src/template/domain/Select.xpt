@@ -26,6 +26,7 @@
 	$source_id = "«safeNameString(((model::DomainObject) from).id)»";
 	$query = «EXPAND getQuery FOR this-»;
 	$args = array(«EXPAND template::operations::Parameters::callParameter(true, false, true) FOREACH inParameterEdges SEPARATOR ","»); 
+	$args = clean_args($args);
 	
 	«IF hasOffset && limit > 1»
 		// make sure we are not offsetting past our limit
@@ -91,7 +92,8 @@
 	$source_class = "«safeNameString(((model::DomainObject) from).name)»";
 	$source_id = "«safeNameString(((model::DomainObject) from).id)»";
 	$query = «EXPAND getQuery FOR this-»;
-	$args = array(«EXPAND template::operations::Parameters::callParameter(true, false, true) FOREACH inParameterEdges SEPARATOR ","»); 
+	$args = array(«EXPAND template::operations::Parameters::callParameter(true, false, true) FOREACH inParameterEdges SEPARATOR ","»);	
+	$args = clean_args($args);
 	
 	// get the result or return null
 	$row = evaluate_select_wire_count($db_name, $source_id, $source_class, $query, $args);

@@ -4,12 +4,17 @@
 package org.openiaml.model.tests.codegen.model0_5_1;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.TimeZone;
 
 import org.eclipse.core.resources.IFile;
 import org.openiaml.model.tests.PhpRuntimeExceptionException;
 import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
+import org.openiaml.model.tests.codegen.model0_5_1.RSS2_0Reader.FeedItem;
 import org.openiaml.model.tests.release.PluginsTestCase;
 
 /**
@@ -87,10 +92,35 @@ public class FeedProducerComplete extends DatabaseCodegenTestCase {
 		assertRecent(reader.getLastBuildDate());
 		reader.assertGenerator("Internet Application Modelling Language " + PluginsTestCase.getVersion());
 		
-		reader.assertLink(BASE_URL + "output");
+		reader.assertLink(BASE_URL + getProject().getProjectName() + "/output");
 		reader.assertDocs("http://blogs.law.harvard.edu/tech/rss");
 		
-		fail("Method is incomplete");
+		// there should be ten feed items
+		assertEquals(10, reader.getFeedItems().size());
+		
+		// we start from 20 down to 11
+		Set<String> guids = new HashSet<String>();
+		int i = 20;
+		for (FeedItem item : reader.getFeedItems()) {
+			assertEquals("Title " + i, item.getTitle());
+			assertEquals("", item.getLink());
+			assertEquals("Description " + i, item.getDescription());
+			
+			// need to construct the date
+			Calendar c = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+			c.clear();
+			c.set(2010, 0, i, 1, 0, 0);		
+			assertEquals(c.getTime(), item.getPubDate());
+			
+			// and the GUID must be unique in this list
+			assertNotNull(item.getGuid());
+			assertFalse(guids.contains(item.getGuid()));
+			guids.add(item.getGuid());
+			
+			// increment down, since we are in DESC			
+			i--;
+		}
+
 	}
 	
 	/**

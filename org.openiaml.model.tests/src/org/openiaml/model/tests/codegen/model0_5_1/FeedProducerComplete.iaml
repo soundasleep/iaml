@@ -21,11 +21,12 @@
     </elements>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.1280b46d1f2.5d" id="visual.1280b46d1e2.6e" name="Feed Item">
       <children xsi:type="iaml.visual:Button" id="visual.1280b46d1e2.9f" name="link" outActions="wires.1280b46d1f2.ae">
-        <actions xsi:type="iaml.wires:NavigateAction" id="wires.1280b46d1f2.ae" name="onClick" from="visual.1280b46d1e2.9f" to="visual.1280b46d1e2.46" inParameterEdges="wires.1280b46d1f2.c4"/>
+        <actions xsi:type="iaml.wires:NavigateAction" id="wires.1280b46d1f2.ae" name="onClick" from="visual.1280b46d1e2.9f" to="visual.1280b46d1e2.46" inParameterEdges="wires.1281e15c5ee.d4"/>
       </children>
-    </children>
-    <children xsi:type="iaml.visual:Label" id="visual.1281e15c5ee.61" name="id" outParameterEdges="wires.1280b46d1f2.c4">
-      <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
+      <children xsi:type="iaml.visual:Label" id="visual.1281e15c5ee.248" name="id" outParameterEdges="wires.1281e15c5ee.d4">
+        <parameterEdges id="wires.1281e15c5ee.d4" from="visual.1281e15c5ee.248" to="wires.1280b46d1f2.ae"/>
+        <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
+      </children>
     </children>
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.1280b46d1e2.46" name="View News" inActions="wires.1280b46d1f2.ae">

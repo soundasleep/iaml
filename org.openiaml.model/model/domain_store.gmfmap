@@ -38,6 +38,8 @@
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//DomainObject"/>
+      <domainSpecialization
+          body="not(self.oclIsTypeOf( domain::RemoteDomainObject ))"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
@@ -176,6 +178,33 @@
           href="domain_store.gmftool#//@palette/@tools.0/@tools.4"/>
       <diagramNode
           href="iaml.gmfgraph#DomainAttribute"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//DomainStore/children"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//domain/RemoteDomainObject"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( RemoteDomainObject )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#RemoteDomainObjectName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#RemoteDomainObjectParentName"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="domain_store.gmftool#//@palette/@tools.0/@tools.5"/>
+      <diagramNode
+          href="iaml.gmfgraph#RemoteDomainObject"/>
     </ownedChild>
   </nodes>
   <links>

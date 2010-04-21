@@ -378,6 +378,11 @@
       </genEnums>
       <genDataTypes ecoreDataType="iaml.ecore#//domain/FileReference"/>
       <genClasses ecoreClass="iaml.ecore#//domain/EmptyDomainClass"/>
+      <genClasses ecoreClass="iaml.ecore#//domain/RemoteDomainObject">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//domain/RemoteDomainObject/url"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//domain/RemoteDomainObject/age"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//domain/RemoteDomainObject/refresh"/>
+      </genClasses>
     </nestedGenPackages>
     <nestedGenPackages prefix="Users" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//users">

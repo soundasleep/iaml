@@ -1388,6 +1388,28 @@
         <details key="documentation" value="This exists solely to ensure DomainProviderFactory is generated in .genmodel; otherwise GMF complains."/>
       </eAnnotations>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="RemoteDomainObject" eSuperTypes="#//DomainObject">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A {@model DomainObject} that obtains results remotely from a given URL."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The URL that this {@model DomainObject} will obtain results from"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="age" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="3600">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="How long can results be cached in this object, in seconds? The {@model RemoteDomainObject#refresh} operation can be used explicitly as well."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="refresh" eType="#//Operation"
+          containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Reloads data from the remote URL, and resets the {@model RemoteDomainObject#age} of the cache."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
   </eSubpackages>
   <eSubpackages name="users" nsURI="http://openiaml.org/model/users" nsPrefix="iaml.users">
     <eAnnotations source="http://openiaml.org/comment">

@@ -9,6 +9,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.components.ComponentsPackage;
+import org.openiaml.model.model.domain.DomainPackage;
 import org.openiaml.model.model.visual.VisualPackage;
 import org.openiaml.model.tests.XmlTestCase;
 import org.openiaml.model.xpath.IterableElementList;
@@ -33,7 +34,6 @@ public class ParentNamesTestCase extends XmlTestCase {
 	 */
 	private static final EClass[] PARENT_NAME_ELEMENTS = new EClass[] {
 		ModelPackage.eINSTANCE.getDomainObject(),
-		ModelPackage.eINSTANCE.getDomainObject(),
 		ModelPackage.eINSTANCE.getDomainAttribute(),
 		ModelPackage.eINSTANCE.getEventTrigger(),
 		ModelPackage.eINSTANCE.getPrimitiveOperation(),
@@ -50,6 +50,7 @@ public class ParentNamesTestCase extends XmlTestCase {
 		ModelPackage.eINSTANCE.getScope(),
 		VisualPackage.eINSTANCE.getMap(),
 		VisualPackage.eINSTANCE.getMapPoint(),
+		DomainPackage.eINSTANCE.getRemoteDomainObject(),
 	};
 	
 	private static List<String> inst_getParentNameElements = null;

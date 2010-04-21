@@ -382,7 +382,9 @@
   <plugin iD="org.openiaml.model.diagram.wire" name="Iaml Diagram Plugin (Wire)" provider="www.openiaml.org" version="0.5.0.qualifier">
     <requiredPlugins>org.eclipse.draw2d</requiredPlugins>
     <requiredPlugins>org.eclipse.gmf.runtime.draw2d.ui</requiredPlugins>
-  </plugin>
+  <requiredPlugins>org.openiaml.model.diagram.helpers</requiredPlugins>
+<requiredPlugins>org.eclipse.xsd</requiredPlugins>
+</plugin>
   <editor/>
   <navigator>
     <childReferences child="//@diagram"/>

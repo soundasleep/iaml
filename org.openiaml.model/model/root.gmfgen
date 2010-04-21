@@ -16,8 +16,7 @@
     <containsShortcutsTo>iaml_session</containsShortcutsTo>
     <containsShortcutsTo>iaml_frame</containsShortcutsTo>
     <containsShortcutsTo>iaml_email</containsShortcutsTo>
-    <containsShortcutsTo>iaml_feed_producer</containsShortcutsTo>
-    <shortcutsProvidedFor>iaml_domain_object_instance</shortcutsProvidedFor>
+        <shortcutsProvidedFor>iaml_domain_object_instance</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_condition</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_wire</shortcutsProvidedFor>
@@ -30,7 +29,6 @@
     <shortcutsProvidedFor>iaml_session</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_frame</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_email</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_feed_producer</shortcutsProvidedFor>
     <domainDiagramElement href="iaml.genmodel#//model/InternetApplication"/>
     <topLevelNodes canonicalEditPolicyClassName="EventTriggerCanonicalEditPolicy" createCommandClassName="EventTriggerCreateCommand" editPartClassName="EventTriggerEditPart" graphicalNodeEditPolicyClassName="EventTriggerGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="EventTriggerItemSemanticEditPolicy" notationViewFactoryClassName="EventTriggerViewFactory" visualID="2034">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>

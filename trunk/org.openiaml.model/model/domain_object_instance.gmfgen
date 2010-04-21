@@ -562,6 +562,8 @@
       <children iD="org.openiaml.model.diagram.printing" kind="Printing" name="Printing" xsi:type="gmfgen:GenStandardPreferencePage"/>
       <children iD="org.openiaml.model.diagram.rulersAndGrid" kind="RulersAndGrid" name="Rulers And Grid" xsi:type="gmfgen:GenStandardPreferencePage"/>
     </preferencePages>
+<containsShortcutsTo>iaml_remote_domain_object</containsShortcutsTo>
+<shortcutsProvidedFor>iaml_remote_domain_object</shortcutsProvidedFor>
 </diagram>
   <plugin iD="org.openiaml.model.diagram.domain_object_instance" name="Iaml Diagram Plugin (Domain Object Instance)" provider="www.openiaml.org" version="0.5.0.qualifier">
     <requiredPlugins>org.eclipse.draw2d</requiredPlugins>

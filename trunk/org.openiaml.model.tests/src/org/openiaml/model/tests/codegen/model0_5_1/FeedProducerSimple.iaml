@@ -11,12 +11,13 @@
     </children>
   </domainStores>
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
-  <scopes xsi:type="iaml.visual:Frame" id="scopes.1280b46d202.15" name="Target Feed" outActions="wires.1280b46d1f2.109" render="RSS20">
-    <actions xsi:type="iaml.wires:NavigateAction" id="wires.1280b46d1f2.109" name="view" from="scopes.1280b46d202.15" to="visual.1280b46d1e2.46"/>
+  <scopes xsi:type="iaml.visual:Frame" id="scopes.1280b46d202.15" name="Target Feed" render="RSS20">
     <elements xsi:type="iaml:DomainObjectInstance" id="model.1280b46d146.13f" name="recent news" outWires="wires.1280b46d1f2.5d" inWires="wires.1280b46d1f2.50">
       <wires xsi:type="iaml.wires:SetWire" id="wires.1280b46d1f2.5d" from="model.1280b46d146.13f" to="visual.1280b46d1e2.6e" name="set"/>
     </elements>
-    <children xsi:type="iaml.visual:InputForm" inWires="wires.1280b46d1f2.5d" id="visual.1280b46d1e2.6e" name="Feed Item"/>
+    <children xsi:type="iaml.visual:InputForm" outWires="wires.1281eb98078.11" inWires="wires.1280b46d1f2.5d" id="visual.1280b46d1e2.6e" name="Feed Item">
+      <wires xsi:type="iaml.wires:DetailWire" id="wires.1281eb98078.11" from="visual.1280b46d1e2.6e" to="visual.1280b46d1e2.46" name="detail"/>
+    </children>
   </scopes>
-  <scopes xsi:type="iaml.visual:Frame" id="visual.1280b46d1e2.46" name="View News" inActions="wires.1280b46d1f2.109"/>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.1280b46d1e2.46" name="View News" inWires="wires.1281eb98078.11"/>
 </iaml:InternetApplication>

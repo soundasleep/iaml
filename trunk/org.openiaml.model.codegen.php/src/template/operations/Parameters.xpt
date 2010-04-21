@@ -50,6 +50,18 @@
 «ENDDEFINE»
 
 /**
+ * @implementation VisibleThing,ParameterEdge
+ *		If a {@model VisibleThing} is used as the {@model ParameterEdgeSource} of a {@model ParameterEdge},
+ *		the 'fieldValue' of the {@model VisibleThing} is used as the value. 
+ */
+«DEFINE callParameterValue(Boolean php, Boolean inStoreDb) FOR model::VisibleThing»
+	«IF properties.select(p|p.name == 'fieldValue').isEmpty»
+		«throwException("VisibleThing '" + this + "' does not have a fieldValue")»
+	«ENDIF»	
+	«EXPAND callParameterValue(php, inStoreDb) FOR properties.selectFirst(p|p.name == "fieldValue")»
+«ENDDEFINE»
+
+/**
  * TODO can we remove 'wire' parameter and replace it with 'currentFrame'?
  */
 «DEFINE callParameterValue(Boolean php, Boolean inStoreDb) FOR model::Property»

@@ -24,6 +24,7 @@ public class AllModel0_5_1CodegenTests {
 		suite.addTestSuite(ReadRSSFeeds.class);
 		suite.addTestSuite(ViewDatabaseTypes.class);
 		suite.addTestSuite(FeedProducerComplete.class);
+		suite.addTestSuite(ImplicitParameterValues.class);
 
 		return suite;
 	}

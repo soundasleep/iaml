@@ -439,6 +439,29 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	}
 	
 	/**
+	 * Get <em>all</em> ParameterEdge connecting the given elements,
+	 * contained with the given container element or any of its children,
+	 * with the given name.
+	 *
+	 * @return the found ParameterEdges
+	 * @throws JaxenException
+	 */
+	protected Set<ParameterEdge> getParameterEdgesFromTo(EObject container, ParameterEdgesSource from, ParameterEdgeDestination to, String name) throws JaxenException {
+		Set<ParameterEdge> result = new HashSet<ParameterEdge>();
+		
+		List<?> wires = query(container, "//iaml:parameterEdges");
+		for (Object o : wires) {
+			if (o instanceof ParameterEdge) {
+				ParameterEdge w = (ParameterEdge) o;
+				if (w.getFrom().equals(from) && w.getTo().equals(to) && w.getName().equals(name))
+					result.add(w);
+			}
+		}
+
+		return result;
+	}
+	
+	/**
 	 * Get <em>all</em> ConditionEdge connecting the given elements,
 	 * contained with the given container element or any of its children.
 	 *

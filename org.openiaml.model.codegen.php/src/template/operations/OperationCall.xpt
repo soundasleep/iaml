@@ -130,7 +130,7 @@
 «DEFINE navigateTo(Boolean php, Boolean inStoreDb, model::wires::NavigateAction wire) FOR model::ActionDestination»
 	«IF php»
 		$url = null;
-		«EXPAND getNavigateActionDestination(php, inStoreDb, wire)»
+		«EXPAND getNavigateActionDestination(php, inStoreDb, wire, true)»
 		if ($url !== null) {
 			// navigate to another frame
 			log_message("[redirect] Redirecting to '$url'");
@@ -139,7 +139,7 @@
 		}
 	«ELSE»
 		var url = null;
-		«EXPAND getNavigateActionDestination(php, inStoreDb, wire)»	
+		«EXPAND getNavigateActionDestination(php, inStoreDb, wire, true)»	
 		debug("[resume] Resuming to '" + url + "'");
 		window.location = url;
 		ajaxIncrement();	// prevent other events from executing

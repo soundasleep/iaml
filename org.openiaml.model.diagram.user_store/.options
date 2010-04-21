@@ -1,7 +1,0 @@
-# Tracing options for the org.openiaml.model.diagram.user_store plug-in
-
-# Common issues
-org.openiaml.model.diagram.user_store/debug=false
-
-# Visual IDs
-org.openiaml.model.diagram.user_store/debug/visualID=false

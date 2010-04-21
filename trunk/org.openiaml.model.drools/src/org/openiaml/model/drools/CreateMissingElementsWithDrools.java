@@ -23,6 +23,7 @@ public class CreateMissingElementsWithDrools extends DroolsInferenceEngine {
 			"/rules/casting.drl",
 			"/rules/sync-wires.drl",
 			"/rules/set-wires.drl",
+			"/rules/detail-wires.drl",
 			"/rules/emails.drl",
 			"/rules/events.drl",
 			"/rules/sessions.drl",

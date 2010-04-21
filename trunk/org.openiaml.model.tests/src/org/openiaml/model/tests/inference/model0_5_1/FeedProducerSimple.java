@@ -117,9 +117,13 @@ public class FeedProducerSimple extends InferenceTestCase {
 		Frame feed = assertHasFrame(root, "Target Feed");
 		InputForm form = assertHasInputForm(feed, "Feed Item");
 
-		// a Property 'generated primary key'
-		Property pk = assertHasProperty(form, "generated primary key");
+		// the 'generated primary key' is from the instance
+		DomainObjectInstance instance = assertHasDomainObjectInstance(feed, "recent news");
+		DomainAttributeInstance pk = assertHasDomainAttributeInstance(instance, "generated primary key");
 		assertGenerated(pk);
+		
+		Property pkValue = assertHasFieldValue(pk);
+		assertGenerated(pkValue);
 		
 		// a Link 'link'
 		Button button = assertHasButton(form, "link");
@@ -128,33 +132,8 @@ public class FeedProducerSimple extends InferenceTestCase {
 		NavigateAction nav = assertHasNavigateAction(root, onClick, view);
 		
 		// with a parameter
-		ParameterEdge param = assertHasParameterEdge(root, pk, nav);
+		ParameterEdge param = assertHasParameterEdge(root, pkValue, nav);
 		assertEquals(param.getName(), "generated primary key");
-		
-	}
-	
-	/**
-	 * The 'generated primary key' on the InputForm should be Set
-	 * by the instance.
-	 * 
-	 * @throws Exception
-	 */
-	public void testFormPKIsSet() throws Exception {
-		Frame feed = assertHasFrame(root, "Target Feed");
-		InputForm form = assertHasInputForm(feed, "Feed Item");
-		
-		DomainObjectInstance instance = assertHasDomainObjectInstance(feed, "recent news");
-		assertNotGenerated(instance);
-		
-		DomainAttributeInstance attribute = assertHasDomainAttributeInstance(instance, "generated primary key");
-		assertGenerated(instance);
-
-		// a Property 'generated primary key'
-		Property pk = assertHasProperty(form, "generated primary key");
-		assertGenerated(pk);
-		
-		// a SetWire
-		assertHasSetWire(root, attribute, pk);
 		
 	}
 	

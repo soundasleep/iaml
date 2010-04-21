@@ -24,6 +24,7 @@ import org.openiaml.model.model.domain.DomainPackage;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.users.Role;
 import org.openiaml.model.model.visual.Frame;
+import org.openiaml.model.model.wires.DetailWire;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.SelectWire;
@@ -257,6 +258,23 @@ public class DroolsHelperFunctions {
 	 * @return true only if the wire connects the two objects
 	 */
 	public boolean connectsSet(SetWire wire, Object source, Object target) {
+		if (wire.getFrom() == null)
+			throw new NullPointerException("Wire '" + wire + "'.from = null");
+		if (wire.getTo() == null)
+			throw new NullPointerException("Wire '" + wire + "'.to = null");
+		return wire.getFrom().equals(source) && wire.getTo().equals(target);
+	}
+	
+	/**
+	 * True if the given uni-directional {@model DetailWire} connects
+	 * the source object to the target object. 
+	 * 
+	 * @param wire the wire to investigate
+	 * @param source the source object
+	 * @param target the target object
+	 * @return true only if the wire connects the two objects
+	 */
+	public boolean connectsDetail(DetailWire wire, Object source, Object target) {
 		if (wire.getFrom() == null)
 			throw new NullPointerException("Wire '" + wire + "'.from = null");
 		if (wire.getTo() == null)

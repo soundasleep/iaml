@@ -977,6 +977,17 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="query" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="limit" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="1"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="orderBy" eType="#//DomainAttribute">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The {@model SelectWire} will sort the results in the particular order, before any {@model SelectWire#limit limiting} occurs."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="orderAscending" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="If false, the {@model SelectWire#orderBy order} will be sorted in descending order (Z-A)."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ConditionEdge" eSuperTypes="#//wires/ParameterEdgeDestination #//NamedElement #//GeneratesElements">
       <eAnnotations source="http://openiaml.org/comment">

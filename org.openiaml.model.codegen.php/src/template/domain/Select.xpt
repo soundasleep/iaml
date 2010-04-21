@@ -35,9 +35,15 @@
 		} 
 	«ENDIF»
 	
+	«IF orderBy != null»
+		$order_by = '«safeNameString(orderBy.name)»';
+		$order_ascending = «orderAscending ? "true" : "false"»;
+	«ENDIF»
+	
 	// get the result or return null
 	$row = evaluate_select_wire($db_name, $source_id, $source_class, $query, $args
-		, «IF hasOffset»$offset«ELSE»0«ENDIF»);
+		, «IF hasOffset»$offset«ELSE»0«ENDIF»
+		«IF orderBy != null», $order_by, $order_ascending«ENDIF»);
 		
 	// translate each into the appropriate data type (from the DomainObject.attribute.type)
 	if ($row !== null) {

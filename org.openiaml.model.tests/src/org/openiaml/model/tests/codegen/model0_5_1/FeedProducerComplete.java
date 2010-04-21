@@ -161,7 +161,10 @@ public class FeedProducerComplete extends DatabaseCodegenTestCase {
 		List<String> s = new ArrayList<String>();
 		s.add("CREATE TABLE News (id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(64) NOT NULL, description VARCHAR(64) NOT NULL, updated DATETIME NOT NULL)");
 		for (int i = 1; i <= 20; i++) {
-			s.add("INSERT INTO News (id, title, description, updated) VALUES (" + i + ", 'Title " + i + "', 'Description " + i + "', '2010-01-" + i + " 01:00:00 +0000')");
+			// SQLite does not actually support dates, and they are stored as strings!
+			// we have to insert the date with a leading zero, to enable sorting correctly.
+			String i2 = i < 10 ? "0" + i : Integer.toString(i);  
+			s.add("INSERT INTO News (id, title, description, updated) VALUES (" + i + ", 'Title " + i + "', 'Description " + i + "', '2010-01-" + i2 + " 01:00:00 +0000')");
 		}
 		return s;
 	}

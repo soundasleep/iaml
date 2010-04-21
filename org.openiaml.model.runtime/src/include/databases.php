@@ -142,8 +142,10 @@ class DatabaseQuery {
  * none can be found.
  *
  * @param offset the offset, or 0 if there is none
+ * @param order_by a row to order by, or "" if there is none
+ * @param order_ascending if true, order ASC; otherwise order DESC
  */
-function evaluate_select_wire($db_name, $source_id, $source_class, $query, $args, $offset = 0) {
+function evaluate_select_wire($db_name, $source_id, $source_class, $query, $args, $offset = 0, $order_by = "", $order_ascending = true) {
 	log_message("[select wire] Evaluate: db = $db_name, source_id = $source_id, source_class = $source_class, query = $query, offset = $offset");
 	
 	if ($offset < 0) {
@@ -155,9 +157,13 @@ function evaluate_select_wire($db_name, $source_id, $source_class, $query, $args
 	$compose_domain_joins_done_already = array(); 
 	$joins = compose_domain_joins($source_id);
 	
+	$order_query = "";
+	if ($order_by != "") {
+		$order_query = "ORDER BY $order_by " . ($order_ascending ? "ASC " : "DESC ");
+	} 
 	$joined_query = "SELECT * FROM $source_class " 
 		. implode(" ", $joins)
-		. " WHERE $query LIMIT 1"; /* we only ever select one row at a time with a select wire */
+		. " WHERE $query $order_query LIMIT 1"; /* we only ever select one row at a time with a select wire */
 	if ($offset !== 0) {
 		$joined_query .= " OFFSET " . (int) $offset;
 	}

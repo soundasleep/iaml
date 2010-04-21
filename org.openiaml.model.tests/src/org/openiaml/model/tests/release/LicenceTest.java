@@ -4,8 +4,11 @@
 package org.openiaml.model.tests.release;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+
+import org.openiaml.model.tests.XmlTestCase;
 
 import junit.framework.TestCase;
 
@@ -26,6 +29,45 @@ public class LicenceTest extends TestCase {
 		"org.openiaml.model.runtime.phpmailer"
 	);
 	
+	/**
+	 * Issue 174: EPL licenses should be copied over automatically to
+	 * diagram plugins.
+	 * 
+	 * @throws IOException 
+	 */
+	public void testCopyEPLFilesToDiagrams() throws IOException {
+		
+		File source = new File(PluginsTestCase.PLUGIN_ROOT + "org.openiaml.model/epl-v10.html");
+		assertTrue("Source EPL '" + source + "' did not exist", source.exists());
+		
+		for (String plugin : PluginsTestCase.getPlugins()) {
+			// skip non-diagram plugins
+			if (!isDiagramPlugin(plugin)) {
+				continue;
+			}
+			
+			File epl = new File(plugin + File.separator + "epl-v10.html");
+			if (!epl.exists()) {
+				// copy file
+				System.out.println("Copying " + source + " to " + epl + "...");
+				XmlTestCase.copyFile(source, epl);
+				assertTrue(epl.exists());
+			}
+			
+		}
+		
+	}
+	
+	/**
+	 * Is the given bundle name a diagram plugin?
+	 *  
+	 * @see ExportDependencyGraph#isDiagram(String)
+	 * @return
+	 */
+	private boolean isDiagramPlugin(String bundleName) {
+		return ExportDependencyGraph.isDiagram(bundleName);
+	}
+
 	/**
 	 * Every org.openiaml.* plugin should include
 	 * <code>epl-v10.html</code>.

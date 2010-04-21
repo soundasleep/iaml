@@ -373,7 +373,7 @@ public class ExportDependencyGraph extends XmlTestCase {
 		return bundleName.contains(".tests");
 	}
 	
-	private boolean isDiagram(String bundleName) {
+	public static boolean isDiagram(String bundleName) {
 		return (bundleName.contains(".diagram.") || bundleName.endsWith(".diagram"))
 			&& !bundleName.contains(".diagram.custom") && !bundleName.contains(".diagram.helpers")
 			&& !bundleName.contains(".diagram.tests");

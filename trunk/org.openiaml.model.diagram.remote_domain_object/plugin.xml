@@ -241,7 +241,7 @@
          </object>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_RemoteDomainObject"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2001,2002,2007,2003,2004,2005,2006"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2001,2007,2002,2003,2004,2005,2006"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4002,4003"/>
       </viewProvider>
    </extension>
@@ -254,13 +254,13 @@
             <method name="getType()" value="Iaml_RemoteDomainObject"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
-            <method name="getType()" value="2001,2002,2007,2003,2004,2005,2006"/>
+            <method name="getType()" value="2001,2007,2002,2003,2004,2005,2006"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
             <method name="getType()" value="4001,4002,4003"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5001,5002,5003,5004,5005,5018,5019,5006,5007,5008,5009,5010,5011,5012,5013,5014,5015,5016,5017"/>
+            <method name="getType()" value="5001,5002,5003,5018,5019,5004,5005,5006,5007,5008,5009,5010,5011,5012,5013,5014,5015,5016,5017"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value=""/>
@@ -275,13 +275,13 @@
          <Priority name="Lowest"/>
          <object class="org.openiaml.model.diagram.remote_domain_object.edit.parts.RemoteDomainObjectEditPart" id="RemoteDomainObject_1000"/>
          <object class="org.openiaml.model.diagram.remote_domain_object.edit.parts.EventTriggerEditPart" id="EventTrigger_2001"/>
-         <object class="org.openiaml.model.diagram.remote_domain_object.edit.parts.CompositeOperationEditPart" id="CompositeOperation_2002"/>
          <object class="org.openiaml.model.diagram.remote_domain_object.edit.parts.PrimitiveOperation2EditPart" id="PrimitiveOperation_2007"/>
+         <object class="org.openiaml.model.diagram.remote_domain_object.edit.parts.CompositeOperationEditPart" id="CompositeOperation_2002"/>
          <object class="org.openiaml.model.diagram.remote_domain_object.edit.parts.PrimitiveOperationEditPart" id="PrimitiveOperation_2003"/>
          <object class="org.openiaml.model.diagram.remote_domain_object.edit.parts.PropertyEditPart" id="Property_2004"/>
          <object class="org.openiaml.model.diagram.remote_domain_object.edit.parts.DomainAttributeEditPart" id="DomainAttribute_2005"/>
          <object class="org.openiaml.model.diagram.remote_domain_object.edit.parts.EventTrigger2EditPart" id="EventTrigger_2006"/>
-         <context elements="RemoteDomainObject_1000,EventTrigger_2001,CompositeOperation_2002,PrimitiveOperation_2007,PrimitiveOperation_2003,Property_2004,DomainAttribute_2005,EventTrigger_2006"/>
+         <context elements="RemoteDomainObject_1000,EventTrigger_2001,PrimitiveOperation_2007,CompositeOperation_2002,PrimitiveOperation_2003,Property_2004,DomainAttribute_2005,EventTrigger_2006"/>
       </modelingAssistantProvider>
    </extension>
 
@@ -304,7 +304,7 @@
       <decoratorProvider class="org.openiaml.model.diagram.remote_domain_object.providers.IamlShortcutsDecoratorProvider">
          <Priority name="Lowest"/>
          <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
-            <method name="getType()" value="2001,2002,2007,2003,2004,2005,2006"/>
+            <method name="getType()" value="2001,2007,2002,2003,2004,2005,2006"/>
          </object>
          <context decoratorTargets="generated-top-nodes"/>
       </decoratorProvider>
@@ -334,22 +334,22 @@
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.5">
          <metamodelType
-               id="org.openiaml.model.diagram.remote_domain_object.CompositeOperation_2002"
-               name="%metatype.name.CompositeOperation_2002"
-               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
-               eclass="CompositeOperation"
-               edithelper="org.openiaml.model.diagram.remote_domain_object.edit.helpers.CompositeOperationEditHelper">
-            <param name="semanticHint" value="2002"/>
-         </metamodelType>
-      </metamodel>
-      <metamodel nsURI="http://openiaml.org/model0.5">
-         <metamodelType
                id="org.openiaml.model.diagram.remote_domain_object.PrimitiveOperation_2007"
                name="%metatype.name.PrimitiveOperation_2007"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
                eclass="PrimitiveOperation"
                edithelper="org.openiaml.model.diagram.remote_domain_object.edit.helpers.PrimitiveOperationEditHelper">
             <param name="semanticHint" value="2007"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model0.5">
+         <metamodelType
+               id="org.openiaml.model.diagram.remote_domain_object.CompositeOperation_2002"
+               name="%metatype.name.CompositeOperation_2002"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="CompositeOperation"
+               edithelper="org.openiaml.model.diagram.remote_domain_object.edit.helpers.CompositeOperationEditHelper">
+            <param name="semanticHint" value="2002"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.5">
@@ -434,8 +434,8 @@
       <binding context="org.openiaml.model.diagram.remote_domain_object.TypeContext">
          <elementType ref="org.openiaml.model.diagram.remote_domain_object.RemoteDomainObject_1000"/>
          <elementType ref="org.openiaml.model.diagram.remote_domain_object.EventTrigger_2001"/>
-         <elementType ref="org.openiaml.model.diagram.remote_domain_object.CompositeOperation_2002"/>
          <elementType ref="org.openiaml.model.diagram.remote_domain_object.PrimitiveOperation_2007"/>
+         <elementType ref="org.openiaml.model.diagram.remote_domain_object.CompositeOperation_2002"/>
          <elementType ref="org.openiaml.model.diagram.remote_domain_object.PrimitiveOperation_2003"/>
          <elementType ref="org.openiaml.model.diagram.remote_domain_object.Property_2004"/>
          <elementType ref="org.openiaml.model.diagram.remote_domain_object.DomainAttribute_2005"/>

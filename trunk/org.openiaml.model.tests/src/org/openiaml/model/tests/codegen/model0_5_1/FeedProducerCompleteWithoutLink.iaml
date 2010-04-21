@@ -15,13 +15,4 @@
     </elements>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.1280b46d1f2.5d" id="visual.1280b46d1e2.6e" name="Feed Item"/>
   </scopes>
-  <scopes xsi:type="iaml.visual:Frame" id="visual.1280b46d1e2.46" name="View News">
-    <parameters id="model.1280b46d146.f5" name="id" outParameterEdges="wires.1280b46d1f2.3a">
-      <parameterEdges id="wires.1280b46d1f2.3a" from="model.1280b46d146.f5" to="wires.1280b46d1f2.38"/>
-    </parameters>
-    <elements xsi:type="iaml:DomainObjectInstance" id="model.1280b46d146.f3" name="Selected News" outWires="wires.1280b46d1f2.3c" inWires="wires.1280b46d1f2.38">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.1280b46d1f2.3c" from="model.1280b46d146.f3" to="visual.1280b46d1e2.58" name="set"/>
-    </elements>
-    <children xsi:type="iaml.visual:InputForm" inWires="wires.1280b46d1f2.3c" id="visual.1280b46d1e2.58" name="View News"/>
-  </scopes>
 </iaml:InternetApplication>

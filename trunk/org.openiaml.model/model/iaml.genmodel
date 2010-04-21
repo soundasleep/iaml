@@ -244,6 +244,9 @@
       <genClasses ecoreClass="iaml.ecore#//wires/SelectWire">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/SelectWire/query"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/SelectWire/limit"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference iaml.ecore#//wires/SelectWire/orderBy"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/SelectWire/orderAscending"/>
       </genClasses>
       <genClasses ecoreClass="iaml.ecore#//wires/ConditionEdge">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"

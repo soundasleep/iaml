@@ -39,6 +39,7 @@ import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.PrimitiveCondition;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
+import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.VisibleThing;
@@ -576,12 +577,12 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return object;
 	}
 
-	public DomainObjectInstance generatedDomainObjectInstance(GeneratesElements by, Session container) throws InferenceException {
+	public DomainObjectInstance generatedDomainObjectInstance(GeneratesElements by, Scope container) throws InferenceException {
 		DomainObjectInstance object = (DomainObjectInstance) createElement( container, ModelPackage.eINSTANCE.getDomainObjectInstance(), ModelPackage.eINSTANCE.getScope_Elements() );
 		setGeneratedBy(object, by);
 		return object;
 	}
-	
+
 	public UserInstance generatedUserInstance(GeneratesElements by, Session container) throws InferenceException {
 		UserInstance object = (UserInstance) createElement( container, UsersPackage.eINSTANCE.getUserInstance(), ModelPackage.eINSTANCE.getScope_Elements() );
 		setGeneratedBy(object, by);
@@ -596,6 +597,12 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 
 	public Role generatedRole(GeneratesElements by, UserStore container) throws InferenceException {
 		Role object = (Role) createElement( container, UsersPackage.eINSTANCE.getRole(), ModelPackage.eINSTANCE.getDomainStore_Children() );
+		setGeneratedBy(object, by);
+		return object;
+	}
+
+	public QueryParameter generatedQueryParameter(GeneratesElements by, Frame container) throws InferenceException {
+		QueryParameter object = (QueryParameter) createElement( container, ModelPackage.eINSTANCE.getQueryParameter(), ModelPackage.eINSTANCE.getScope_Parameters() );
 		setGeneratedBy(object, by);
 		return object;
 	}
@@ -667,6 +674,10 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	
 	public void setDefault(Property element, String value) throws InferenceException {
 		setValue(element, ModelPackage.eINSTANCE.getProperty_DefaultValue(), value);
+	}
+	
+	public void setLimit(SelectWire element, int value) throws InferenceException {
+		setValue(element, WiresPackage.eINSTANCE.getSelectWire_Limit(), value);
 	}
 	
 }

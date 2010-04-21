@@ -615,7 +615,7 @@ end
  *
  * @inference SetWire,Label
  *		When a {@model DomainObjectInstance} is connected to a {@model InputForm} by a {@model SetWire},
- *		{@model Label}s will be generated for its attributes.
+ *		{@model Label}s will be generated for its non-generated, non-primary key attributes.
  */
 rule "Refresh New Instance Object mappings (except for generated primary keys) when Instance sets a Form: create labels"
 	when

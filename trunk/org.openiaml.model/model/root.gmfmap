@@ -450,6 +450,32 @@
         xsi:type="ecore:EReference"
         href="iaml.ecore#//Action/to"/>
   </links>
+  <links>
+    <domainMetaElement
+        href="iaml.ecore#//wires/DetailWire"/>
+    <domainSpecialization
+        body="self.oclIsTypeOf( DetailWire )"/>
+    <labelMappings
+        xsi:type="gmfmap:FeatureLabelMapping">
+      <diagramLabel
+          href="iaml.gmfgraph#DetailWireName"/>
+      <features
+          href="iaml.ecore#//NamedElement/name"/>
+    </labelMappings>
+    <containmentFeature
+        href="iaml.ecore#//ContainsWires/wires"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="root.gmftool#//@palette/@tools.2/@tools.2"/>
+    <diagramLink
+        href="iaml.gmfgraph#DetailWire"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//Wire/from"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//Wire/to"/>
+  </links>
   <diagram>
     <diagramCanvas
         href="iaml.gmfgraph#model"/>

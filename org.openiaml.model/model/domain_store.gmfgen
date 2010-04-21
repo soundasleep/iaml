@@ -16,7 +16,8 @@
     <containsShortcutsTo>iaml_session</containsShortcutsTo>
     <containsShortcutsTo>iaml_frame</containsShortcutsTo>
     <containsShortcutsTo>iaml_email</containsShortcutsTo>
-        <shortcutsProvidedFor>iaml_domain_object_instance</shortcutsProvidedFor>
+    <containsShortcutsTo>iaml_remote_domain_object</containsShortcutsTo>
+    <shortcutsProvidedFor>iaml_domain_object_instance</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_condition</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_wire</shortcutsProvidedFor>
@@ -29,6 +30,7 @@
     <shortcutsProvidedFor>iaml_session</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_frame</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_email</shortcutsProvidedFor>
+    <shortcutsProvidedFor>iaml_remote_domain_object</shortcutsProvidedFor>
     <domainDiagramElement href="iaml.genmodel#//model/DomainStore"/>
     <topLevelNodes canonicalEditPolicyClassName="CompositeOperationCanonicalEditPolicy" createCommandClassName="CompositeOperationCreateCommand" editPartClassName="CompositeOperationEditPart" graphicalNodeEditPolicyClassName="CompositeOperationGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="CompositeOperationItemSemanticEditPolicy" notationViewFactoryClassName="CompositeOperationViewFactory" visualID="2016">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -217,7 +219,7 @@
 </labels>
     <behaviour diagramKind="Iaml_Element" editPolicyClassName="ElementOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.element.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
 </topLevelNodes>
-    <topLevelNodes canonicalEditPolicyClassName="RemoteDomainObjectCanonicalEditPolicy" createCommandClassName="RemoteDomainObjectCreateCommand" editPartClassName="RemoteDomainObjectEditPart" graphicalNodeEditPolicyClassName="RemoteDomainObjectGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="RemoteDomainObjectItemSemanticEditPolicy" visualID="2022">
+    <topLevelNodes canonicalEditPolicyClassName="RemoteDomainObjectCanonicalEditPolicy" createCommandClassName="RemoteDomainObjectCreateCommand" editPartClassName="RemoteDomainObjectEditPart" graphicalNodeEditPolicyClassName="RemoteDomainObjectGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="RemoteDomainObjectItemSemanticEditPolicy" notationViewFactoryClassName="RemoteDomainObjectViewFactory" visualID="2022">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType editHelperClassName="RemoteDomainObjectEditHelper" xsi:type="gmfgen:MetamodelType"/>
       <viewmap classBody="&#10;/**&#10; * @generated&#10; */&#10;public class RemoteDomainObjectFigure extends org.eclipse.draw2d.RectangleFigure {&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureRemoteDomainObjectNameFigure; &#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureRemoteDomainObjectParentNameFigure; &#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public RemoteDomainObjectFigure() {&#10;&#9;&#9;&#10;&#9;org.eclipse.draw2d.FlowLayout layoutThis = new org.eclipse.draw2d.FlowLayout();&#10;&#9;layoutThis.setStretchMinorAxis(false);&#10;&#9;layoutThis.setMinorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#10;);&#10;&#10;&#9;layoutThis.setMajorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#10;);&#10;&#9;layoutThis.setMajorSpacing(5);&#10;&#9;layoutThis.setMinorSpacing(5);&#10;&#9;layoutThis.setHorizontal(false);&#10;&#10;&#9;this.setLayoutManager(layoutThis);&#10;&#10;&#9;&#9;this.setLineWidth(2);&#10;&#10;this.setFont(THIS_FONT);&#10;&#10;&#10;this.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(4)&#10;, getMapMode().DPtoLP(4)&#10;, getMapMode().DPtoLP(4)&#10;, getMapMode().DPtoLP(4)&#10;));&#10;&#9;&#9;createContents();&#10;&#9;}&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private void createContents(){&#10;&#10;&#10;fFigureRemoteDomainObjectNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureRemoteDomainObjectNameFigure.setText(&quot;&lt;...&gt;&quot;);&#10;&#10;this.add(fFigureRemoteDomainObjectNameFigure);&#10;&#10;&#10;&#10;fFigureRemoteDomainObjectParentNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureRemoteDomainObjectParentNameFigure.setText(&quot;[none]&quot;);&#10;&#9;fFigureRemoteDomainObjectParentNameFigure.setForegroundColor(org.eclipse.draw2d.ColorConstants.gray);&#10;&#10;this.add(fFigureRemoteDomainObjectParentNameFigure);&#10;&#10;&#10;&#9;}&#10;&#10;&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private boolean myUseLocalCoordinates = false;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;protected boolean useLocalCoordinates() {&#10;&#9;&#9;return myUseLocalCoordinates;&#10;&#9;}&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#10;&#9;&#9;myUseLocalCoordinates = useLocalCoordinates;&#10;&#9;}&#10;&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureRemoteDomainObjectNameFigure() {&#10;&#9;&#9;return fFigureRemoteDomainObjectNameFigure;&#10;&#9;}&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureRemoteDomainObjectParentNameFigure() {&#10;&#9;&#9;return fFigureRemoteDomainObjectParentNameFigure;&#10;&#9;}&#10;&#10;&#10;}&#10;&#10;/**&#10; * @generated&#10; */&#10;static final org.eclipse.swt.graphics.Font THIS_FONT = new org.eclipse.swt.graphics.Font(org.eclipse.swt.widgets.Display.getCurrent(), &quot;Arial&quot;, 9, org.eclipse.swt.SWT.BOLD);&#10;&#10;" className="RemoteDomainObjectFigure" layoutType="FLOW_LAYOUT" xsi:type="gmfgen:InnerClassViewmap">
@@ -228,22 +230,22 @@
         <containmentMetaFeature href="iaml.genmodel#//model/DomainStore/children"/>
         <childMetaFeature href="iaml.genmodel#//model/DomainStore/children"/>
       </modelFacet>
-      <labels editPartClassName="RemoteDomainObjectNameEditPart" elementIcon="true" itemSemanticEditPolicyClassName="RemoteDomainObjectNameItemSemanticEditPolicy" visualID="5055">
+      <labels editPartClassName="RemoteDomainObjectNameEditPart" elementIcon="true" itemSemanticEditPolicyClassName="RemoteDomainObjectNameItemSemanticEditPolicy" notationViewFactoryClassName="RemoteDomainObjectNameViewFactory" visualID="5055">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureRemoteDomainObjectNameFigure" xsi:type="gmfgen:ParentAssignedViewmap"/>
         <modelFacet parser="//@labelParsers/@implementations.0" xsi:type="gmfgen:FeatureLabelModelFacet">
           <metaFeatures href="iaml.genmodel#//model/NamedElement/name"/>
         </modelFacet>
       </labels>
-      <labels editPartClassName="WrappingLabel11EditPart" itemSemanticEditPolicyClassName="WrappingLabel11ItemSemanticEditPolicy" readOnly="true" visualID="5056">
+      <labels editPartClassName="WrappingLabel11EditPart" itemSemanticEditPolicyClassName="WrappingLabel11ItemSemanticEditPolicy" notationViewFactoryClassName="RemoteDomainObjectLabelViewFactory" readOnly="true" visualID="5056">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureRemoteDomainObjectParentNameFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
         </viewmap>
         <modelFacet parser="//@labelParsers/@implementations.1"/>
-      <behaviour diagramKind="Iaml_DomainObject" editPolicyClassName="DomainObjectOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.domain_object.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
+      <behaviour diagramKind="Iaml_RemoteDomainObject" editPolicyClassName="RemoteDomainObjectOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.remote_domain_object.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
 </labels>
-    <behaviour diagramKind="Iaml_DomainObject" editPolicyClassName="DomainObjectOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.domain_object.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
+    <behaviour diagramKind="Iaml_RemoteDomainObject" editPolicyClassName="RemoteDomainObjectOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.remote_domain_object.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
 </topLevelNodes>
     <links createCommandClassName="SyncWireCreateCommand" editPartClassName="SyncWireEditPart" itemSemanticEditPolicyClassName="SyncWireItemSemanticEditPolicy" notationViewFactoryClassName="SyncWireViewFactory" reorientCommandClassName="SyncWireReorientCommand" visualID="4001">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>

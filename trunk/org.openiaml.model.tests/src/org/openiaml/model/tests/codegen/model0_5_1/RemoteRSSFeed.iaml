@@ -5,7 +5,9 @@
       <wires xsi:type="iaml.wires:SelectWire" id="wires.1281f74c998.1" from="domain.1281f698855.5" to="model.1281f69878a.71" name="select" limit="10" orderBy="model.1281f69878a.3b"/>
       <attributes id="model.1281f69878a.3b" name="title"/>
       <attributes id="model.1281f69878a.3d" name="description"/>
-      <attributes id="model.1281f69878a.3e" name="pubDate"/>
+      <attributes id="model.1281f74c8dd.df" name="pubDate">
+        <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlDateTime;XSDSimpleTypeDefinition=4"/>
+      </attributes>
     </children>
   </domainStores>
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>

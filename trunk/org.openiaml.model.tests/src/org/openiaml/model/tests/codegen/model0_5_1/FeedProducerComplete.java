@@ -5,7 +5,6 @@ package org.openiaml.model.tests.codegen.model0_5_1;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,7 +12,6 @@ import java.util.TimeZone;
 
 import org.eclipse.core.resources.IFile;
 import org.openiaml.model.tests.PhpRuntimeExceptionException;
-import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
 import org.openiaml.model.tests.codegen.model0_5_1.RSS2_0Reader.FeedItem;
 import org.openiaml.model.tests.release.PluginsTestCase;
 
@@ -22,7 +20,7 @@ import org.openiaml.model.tests.release.PluginsTestCase;
  *		A complete example of using {@model FeedProducer} to provide an RSS
  *		feed from a {@model DomainObjectInstance}. 
  */
-public class FeedProducerComplete extends DatabaseCodegenTestCase {
+public class FeedProducerComplete extends FeedCodegenTestCase {
 
 	@Override
 	protected void setUp() throws Exception {
@@ -81,7 +79,7 @@ public class FeedProducerComplete extends DatabaseCodegenTestCase {
 	 * @throws Exception
 	 */
 	public void testAccessRSS() throws Exception {
-		IFile sitemap = beginAtSitemap();
+		beginAtSitemap();
 		
 		// get the URL of the 'view news' page
 		String newsUrl = getURLOfLink("View News");
@@ -129,21 +127,7 @@ public class FeedProducerComplete extends DatabaseCodegenTestCase {
 		}
 
 	}
-	
-	/**
-	 * Assert that the given date is either today, or yesterday, but
-	 * not after the current time.
-	 * 
-	 * @param date
-	 */
-	private void assertRecent(Date date) {
-		Date now = new Date();
-		long max = now.getTime();
-		long min = max - (86400l * 1000l);	// one day before
-		assertTrue("Date '" + date + "' was not recently after '" + now + "'", date.getTime() > min);
-		assertTrue("Date '" + date + "' was not recently before '" + now + "'", date.getTime() <= max);
-	}
-	
+
 	/**
 	 * Check the given content on the page.
 	 * 

@@ -237,11 +237,11 @@
       <viewProvider class="org.openiaml.model.diagram.frame.providers.IamlViewProvider">
          <Priority name="Lowest"/>
          <object id="referencing-diagrams" class="org.eclipse.gmf.runtime.notation.Diagram">
-            <method name="getType()" value="iaml_domain_object_instance,iaml,iaml_condition,iaml_frame,iaml_wire,iaml_element,iaml_domain_store,iaml_session,iaml_operation,iaml_visual,iaml_user_store,iaml_domain_object,iaml_email,iaml_feed_producer"/>
+            <method name="getType()" value="iaml_domain_object_instance,iaml,iaml_condition,iaml_frame,iaml_wire,iaml_element,iaml_domain_store,iaml_session,iaml_operation,iaml_visual,iaml_user_store,iaml_domain_object,iaml_email,iaml_remote_domain_object"/>
          </object>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_Frame"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2039,2040,2041,2042,2043,2044,2045,2046,2008,2009,2047,2048,2049,2050,2051,2052,2016,2053,2054,2019,2020,2055,2056,2057,2024,2058,2059,2035,2036,2060"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2039,2040,2041,2042,2061,2043,2044,2045,2046,2008,2009,2047,2048,2049,2050,2051,2052,2016,2053,2054,2019,2020,2055,2056,2057,2024,2058,2059,2035,2036,2060"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4015,4011,4004,4005,4016,4014,4008,4012,4013,4017"/>
       </viewProvider>
    </extension>
@@ -254,13 +254,13 @@
             <method name="getType()" value="Iaml_Frame"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-nodes">
-            <method name="getType()" value="2039,2040,2041,2042,2043,2044,2045,2046,2008,2009,2047,2048,2049,2050,2051,2052,2016,2053,2054,2019,2020,2055,2056,2057,2024,2058,2059,2035,2036,2060"/>
+            <method name="getType()" value="2039,2040,2041,2042,2061,2043,2044,2045,2046,2008,2009,2047,2048,2049,2050,2051,2052,2016,2053,2054,2019,2020,2055,2056,2057,2024,2058,2059,2035,2036,2060"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
             <method name="getType()" value="4001,4015,4011,4004,4005,4016,4014,4008,4012,4013,4017"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
-            <method name="getType()" value="5081,5082,5083,5084,5085,5086,5087,5088,5089,5090,5091,5092,5093,5094,5095,5096,5097,5098,5099,5100,5015,5016,5017,5018,5066,5101,5102,5103,5104,5105,5106,5107,5108,5109,5110,5111,5112,5029,5030,5113,5114,5033,5034,5115,5116,5117,5118,5119,5120,5041,5042,5043,5121,5122,5123,5124,5074,5075,5076,5077,5125,5126"/>
+            <method name="getType()" value="5081,5082,5083,5084,5085,5086,5087,5088,5089,5090,5127,5128,5091,5092,5093,5094,5095,5096,5097,5098,5099,5100,5015,5016,5017,5018,5066,5101,5102,5103,5104,5105,5106,5107,5108,5109,5110,5111,5112,5029,5030,5113,5114,5033,5034,5115,5116,5117,5118,5119,5120,5041,5042,5043,5121,5122,5123,5124,5074,5075,5076,5077,5125,5126"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-compartments">
             <method name="getType()" value=""/>
@@ -278,6 +278,7 @@
          <object class="org.openiaml.model.diagram.frame.edit.parts.EventTrigger2EditPart" id="EventTrigger_2040"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.CompositeOperationEditPart" id="CompositeOperation_2041"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.PrimitiveOperationEditPart" id="PrimitiveOperation_2042"/>
+         <object class="org.openiaml.model.diagram.frame.edit.parts.RemoteDomainObjectEditPart" id="RemoteDomainObject_2061"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.DomainObjectEditPart" id="DomainObject_2043"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.DomainAttributeEditPart" id="DomainAttribute_2044"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.PropertyEditPart" id="Property_2045"/>
@@ -304,7 +305,7 @@
          <object class="org.openiaml.model.diagram.frame.edit.parts.MapEditPart" id="Map_2035"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.MapPointEditPart" id="MapPoint_2036"/>
          <object class="org.openiaml.model.diagram.frame.edit.parts.PrimitiveConditionEditPart" id="PrimitiveCondition_2060"/>
-         <context elements="Frame_1000,EventTrigger_2039,EventTrigger_2040,CompositeOperation_2041,PrimitiveOperation_2042,DomainObject_2043,DomainAttribute_2044,Property_2045,Frame_2046,InputForm_2008,InputTextField_2009,StaticValue_2047,Session_2048,LoginHandler_2049,CompositeCondition_2050,DomainObjectInstance_2051,DomainAttributeInstance_2052,Button_2016,QueryParameter_2053,AccessControlHandler_2054,Permission_2019,Role_2020,UserInstance_2055,EntryGate_2056,ExitGate_2057,Label_2024,EventTrigger_2058,Email_2059,Map_2035,MapPoint_2036,PrimitiveCondition_2060"/>
+         <context elements="Frame_1000,EventTrigger_2039,EventTrigger_2040,CompositeOperation_2041,PrimitiveOperation_2042,RemoteDomainObject_2061,DomainObject_2043,DomainAttribute_2044,Property_2045,Frame_2046,InputForm_2008,InputTextField_2009,StaticValue_2047,Session_2048,LoginHandler_2049,CompositeCondition_2050,DomainObjectInstance_2051,DomainAttributeInstance_2052,Button_2016,QueryParameter_2053,AccessControlHandler_2054,Permission_2019,Role_2020,UserInstance_2055,EntryGate_2056,ExitGate_2057,Label_2024,EventTrigger_2058,Email_2059,Map_2035,MapPoint_2036,PrimitiveCondition_2060"/>
       </modelingAssistantProvider>
    </extension>
 
@@ -327,7 +328,7 @@
       <decoratorProvider class="org.openiaml.model.diagram.frame.providers.IamlShortcutsDecoratorProvider">
          <Priority name="Lowest"/>
          <object class="org.eclipse.gmf.runtime.notation.Node(org.eclipse.gmf.runtime.notation)" id="generated-top-nodes">
-            <method name="getType()" value="2039,2040,2041,2042,2043,2044,2045,2046,2008,2009,2047,2048,2049,2050,2051,2052,2016,2053,2054,2019,2020,2055,2056,2057,2024,2058,2059,2035,2036,2060"/>
+            <method name="getType()" value="2039,2040,2041,2042,2061,2043,2044,2045,2046,2008,2009,2047,2048,2049,2050,2051,2052,2016,2053,2054,2019,2020,2055,2056,2057,2024,2058,2059,2035,2036,2060"/>
          </object>
          <context decoratorTargets="generated-top-nodes"/>
       </decoratorProvider>
@@ -382,6 +383,16 @@
                eclass="PrimitiveOperation"
                edithelper="org.openiaml.model.diagram.frame.edit.helpers.PrimitiveOperationEditHelper">
             <param name="semanticHint" value="2042"/>
+         </metamodelType>
+      </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/domain">
+         <metamodelType
+               id="org.openiaml.model.diagram.frame.RemoteDomainObject_2061"
+               name="%metatype.name.RemoteDomainObject_2061"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="RemoteDomainObject"
+               edithelper="org.openiaml.model.diagram.frame.edit.helpers.RemoteDomainObjectEditHelper">
+            <param name="semanticHint" value="2061"/>
          </metamodelType>
       </metamodel>
       <metamodel nsURI="http://openiaml.org/model0.5">
@@ -769,6 +780,7 @@
          <elementType ref="org.openiaml.model.diagram.frame.EventTrigger_2040"/>
          <elementType ref="org.openiaml.model.diagram.frame.CompositeOperation_2041"/>
          <elementType ref="org.openiaml.model.diagram.frame.PrimitiveOperation_2042"/>
+         <elementType ref="org.openiaml.model.diagram.frame.RemoteDomainObject_2061"/>
          <elementType ref="org.openiaml.model.diagram.frame.DomainObject_2043"/>
          <elementType ref="org.openiaml.model.diagram.frame.DomainAttribute_2044"/>
          <elementType ref="org.openiaml.model.diagram.frame.Property_2045"/>

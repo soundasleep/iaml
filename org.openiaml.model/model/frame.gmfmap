@@ -126,6 +126,28 @@
     </ownedChild>
   </nodes>
   <nodes>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//domain/RemoteDomainObject"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( RemoteDomainObject )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#RemoteDomainObjectName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#RemoteDomainObjectParentName"/>
+      </labelMappings>
+      <diagramNode
+          href="iaml.gmfgraph#RemoteDomainObject"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
     <containmentFeature
         href="iaml.ecore#//Scope/elements"/>
     <ownedChild>

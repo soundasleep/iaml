@@ -217,8 +217,6 @@
       <children iD="org.openiaml.model.diagram.printing" kind="Printing" name="Printing" xsi:type="gmfgen:GenStandardPreferencePage"/>
       <children iD="org.openiaml.model.diagram.rulersAndGrid" kind="RulersAndGrid" name="Rulers And Grid" xsi:type="gmfgen:GenStandardPreferencePage"/>
     </preferencePages>
-  <containsShortcutsTo>iaml_feed_producer</containsShortcutsTo>
-<shortcutsProvidedFor>iaml_feed_producer</shortcutsProvidedFor>
 </diagram>
   <plugin iD="org.openiaml.model.diagram.element" name="Iaml Diagram Plugin (Element)" provider="www.openiaml.org" version="0.5.0.qualifier">
     <requiredPlugins>org.eclipse.draw2d</requiredPlugins>

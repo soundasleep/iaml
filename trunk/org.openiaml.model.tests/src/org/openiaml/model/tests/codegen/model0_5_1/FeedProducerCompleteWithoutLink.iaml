@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1280b46d146.74">
+  <domainStores id="model.1280b46d146.77" name="Database">
+    <children id="model.1280b46d146.81" name="News" outWires="wires.1280b46d1f2.38 wires.1280b46d1f2.50">
+      <wires xsi:type="iaml.wires:SelectWire" inParameterEdges="wires.1280b46d1f2.3a" id="wires.1280b46d1f2.38" from="model.1280b46d146.81" to="model.1280b46d146.f3" name="select" query="id = ?"/>
+      <wires xsi:type="iaml.wires:SelectWire" id="wires.1280b46d1f2.50" from="model.1280b46d146.81" to="model.1280b46d146.13f" name="select" query="" limit="10" orderBy="model.1280b46d146.a2" orderAscending="false"/>
+      <attributes id="model.1280b46d146.a2" name="title"/>
+      <attributes id="model.1280b46d146.a4" name="description"/>
+    </children>
+  </domainStores>
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
+  <scopes xsi:type="iaml.visual:Frame" id="scopes.1280b46d202.15" name="Target Feed" render="RSS20">
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.1280b46d146.13f" name="recent news" outWires="wires.1280b46d1f2.5d" inWires="wires.1280b46d1f2.50">
+      <wires xsi:type="iaml.wires:SetWire" id="wires.1280b46d1f2.5d" from="model.1280b46d146.13f" to="visual.1280b46d1e2.6e" name="set"/>
+    </elements>
+    <children xsi:type="iaml.visual:InputForm" inWires="wires.1280b46d1f2.5d" id="visual.1280b46d1e2.6e" name="Feed Item"/>
+  </scopes>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.1280b46d1e2.46" name="View News">
+    <parameters id="model.1280b46d146.f5" name="id" outParameterEdges="wires.1280b46d1f2.3a">
+      <parameterEdges id="wires.1280b46d1f2.3a" from="model.1280b46d146.f5" to="wires.1280b46d1f2.38"/>
+    </parameters>
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.1280b46d146.f3" name="Selected News" outWires="wires.1280b46d1f2.3c" inWires="wires.1280b46d1f2.38">
+      <wires xsi:type="iaml.wires:SetWire" id="wires.1280b46d1f2.3c" from="model.1280b46d146.f3" to="visual.1280b46d1e2.58" name="set"/>
+    </elements>
+    <children xsi:type="iaml.visual:InputForm" inWires="wires.1280b46d1f2.3c" id="visual.1280b46d1e2.58" name="View News"/>
+  </scopes>
+</iaml:InternetApplication>

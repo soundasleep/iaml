@@ -8,7 +8,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
@@ -20,6 +22,8 @@ import org.openiaml.model.tests.xpath.DefaultXpathTestCase;
 import org.openiaml.model.xpath.IXpath;
 import org.openiaml.model.xpath.IterableElementList;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
 /**
@@ -106,7 +110,7 @@ public class RSS2_0Reader extends TestCase {
 	}
 
 	/**
-	 * Execute the given XPath string and return the text content.
+	 * Execute the given XPath string on the root XML document, and return the text content.
 	 * Asserts that there is only one result for the xpath query.
 	 * 
 	 * @param query the XPath query to evaluate
@@ -114,6 +118,18 @@ public class RSS2_0Reader extends TestCase {
 	 * @throws RSSReaderException if the query throws a {@link XPathExpressionException}
 	 */
 	protected String getTextContent(String query) throws RSSReaderException {
+		return getTextContent(xml, query);
+	}
+	
+	/**
+	 * Execute the given XPath string on the given node, and return the text content.
+	 * Asserts that there is only one result for the xpath query.
+	 * 
+	 * @param query the XPath query to evaluate
+	 * @return
+	 * @throws RSSReaderException if the query throws a {@link XPathExpressionException}
+	 */
+	protected String getTextContent(Node xml, String query) throws RSSReaderException {
 		IterableElementList list;
 		try {
 			list = this.xpath.xpath(xml, query);
@@ -186,6 +202,80 @@ public class RSS2_0Reader extends TestCase {
 			throw new RSSReaderException("Could not parse '" + actualDate + "': " + e.getMessage(), e);
 		}
 		return actual;
+	}
+	
+	public class FeedItem {
+
+		private Element element;
+
+		/**
+		 * @param element the XML node that represents this <code>item</code>
+		 */
+		public FeedItem(Element element) {
+			this.element = element;
+		}
+
+		/**
+		 * @return <code>/item/title</code>
+		 * @throws RSSReaderException 
+		 */
+		public String getTitle() throws RSSReaderException {
+			return getTextContent(element, "title");
+		}
+		
+		/**
+		 * @return <code>/item/description</code>
+		 * @throws RSSReaderException 
+		 */
+		public String getDescription() throws RSSReaderException {
+			return getTextContent(element, "description");
+		}
+		
+		/**
+		 * @return <code>/item/link</code>
+		 * @throws RSSReaderException 
+		 */
+		public String getLink() throws RSSReaderException {
+			return getTextContent(element, "link");
+		}
+		
+		/**
+		 * @return <code>/item/guid</code>
+		 * @throws RSSReaderException 
+		 */
+		public String getGuid() throws RSSReaderException {
+			return getTextContent(element, "guid");
+		}
+		
+		/**
+		 * @return <code>/item/pubDate</code> as a Date
+		 * @throws RSSReaderException 
+		 */
+		public Date getPubDate() throws RSSReaderException {
+			String actualDate = getTextContent(element, "pubDate");
+			try {
+				return new SimpleDateFormat(RSS_DATE_FORMAT).parse(actualDate);
+			} catch (ParseException e) {
+				throw new RSSReaderException("Could not parse '" + actualDate + "': " + e.getMessage(), e);
+			}
+		}
+		
+	}
+
+	/**
+	 * @return
+	 * @throws RSSReaderException 
+	 */
+	public List<FeedItem> getFeedItems() throws RSSReaderException {
+		try {
+			List<FeedItem> result = new ArrayList<FeedItem>();
+			for (Element item : xpath.xpath(xml, "/rss/channel/item")) {
+				result.add(new FeedItem(item));
+			}
+			return result;
+		} catch (XPathExpressionException e) {
+			throw new RSSReaderException(e);
+		}
 	}
 	
 }

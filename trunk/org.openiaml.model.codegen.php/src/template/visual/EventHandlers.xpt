@@ -16,29 +16,32 @@
 	<script language="Javascript" type="application/javascript">
 	/* <![CDATA[ */
 		function onClick_«safeNameString(id)»(obj) {
-			«IF onClick != null»
-				// expand all onClicks
-				«EXPAND template::events::EventCall::callEvent(false) FOR onClick-»
-			«ENDIF»
-
-			// implicit operations
-			«EXPAND implicitButtonClickEvents(currentFrame) FOREACH outWires-»
-			«EXPAND anyActionImplicitButtonClickEvents(currentFrame) FOR this»
-
+			«EXPAND visibleThingClickEvents(currentFrame, false)»
 			return false;
 		}
 	/* ]]> */
 	</script>
 «ENDDEFINE»
 
+«DEFINE visibleThingClickEvents(model::visual::Frame currentFrame, Boolean php) FOR model::VisibleThing-»
+	«IF onClick != null»
+		// expand all onClicks
+		«EXPAND template::events::EventCall::callEvent(php) FOR onClick-»
+	«ENDIF»
+
+	// implicit operations
+	«EXPAND implicitButtonClickEvents(currentFrame, php) FOREACH outWires-»
+	«EXPAND anyActionImplicitButtonClickEvents(currentFrame, php) FOR this»
+«ENDDEFINE»
+
 /**
  * We cannot cast VisibleThing to ActionSource, so we have to do it at runtime.
  */
-«DEFINE anyActionImplicitButtonClickEvents(model::visual::Frame currentFrame) FOR emf::EObject»	
+«DEFINE anyActionImplicitButtonClickEvents(model::visual::Frame currentFrame, Boolean php) FOR emf::EObject»	
 	// this VisibleThing is not an ActionSource
 «ENDDEFINE»
-«DEFINE anyActionImplicitButtonClickEvents(model::visual::Frame currentFrame) FOR model::ActionSource»
-	«EXPAND implicitButtonClickEvents(currentFrame) FOREACH outActions-»
+«DEFINE anyActionImplicitButtonClickEvents(model::visual::Frame currentFrame, Boolean php) FOR model::ActionSource»
+	«EXPAND implicitButtonClickEvents(currentFrame, php) FOREACH outActions-»
 «ENDDEFINE»
 
 «DEFINE getScriptChangeDefinition(model::visual::Frame currentFrame) FOR model::VisibleThing-»
@@ -60,23 +63,23 @@
  * If buttons have a NavigateAction or RunAction called onClick,
  * execute them as if there was an EventTrigger that existed.
  */
-«DEFINE implicitButtonClickEvents(model::visual::Frame currentFrame) FOR model::Wire»
+«DEFINE implicitButtonClickEvents(model::visual::Frame currentFrame, Boolean php) FOR model::Wire»
 «ENDDEFINE»
 
-«DEFINE implicitButtonClickEvents(model::visual::Frame currentFrame) FOR model::Action»
+«DEFINE implicitButtonClickEvents(model::visual::Frame currentFrame, Boolean php) FOR model::Action»
 	// unknown action '«this»'
 «ENDDEFINE»
 
-«DEFINE implicitButtonClickEvents(model::visual::Frame currentFrame) FOR model::wires::NavigateAction»
+«DEFINE implicitButtonClickEvents(model::visual::Frame currentFrame, Boolean php) FOR model::wires::NavigateAction»
 	«IF (name == "click" || name == "onClick")»
 		/* expanding implicit trigger (navigate) */
-		«EXPAND template::operations::OperationCall::callOperation(false, false) FOR this»
+		«EXPAND template::operations::OperationCall::callOperation(php, false) FOR this»
 	«ENDIF» 
 «ENDDEFINE»
-«DEFINE implicitButtonClickEvents(model::visual::Frame currentFrame) FOR model::wires::RunAction»
+«DEFINE implicitButtonClickEvents(model::visual::Frame currentFrame, Boolean php) FOR model::wires::RunAction»
 	«IF (name == "click" || name == "onClick")»
 		/* expanding implicit trigger (run) */
-		«EXPAND template::operations::OperationCall::callOperation(false, false) FOR this»
+		«EXPAND template::operations::OperationCall::callOperation(php, false) FOR this»
 	«ENDIF» 
 «ENDDEFINE»
 

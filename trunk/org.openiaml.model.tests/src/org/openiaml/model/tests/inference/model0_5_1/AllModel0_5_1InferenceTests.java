@@ -20,6 +20,7 @@ public class AllModel0_5_1InferenceTests {
 		TestSuite suite = new TestSuite("Model 0.5.1");
 		
 		suite.addTestSuite(ViewDatabaseTypes.class);
+		suite.addTestSuite(FeedProducerComplete.class);
 		
 		return suite;
 	}

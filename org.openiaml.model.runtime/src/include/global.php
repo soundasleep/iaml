@@ -196,6 +196,13 @@ function get_current_url() {
 }
 
 /**
+ * Is the given URL absolute?
+ */
+function is_absolute_url($url) {
+	return strpos($url, ":/") !== false;
+}
+
+/**
  * Similar to a Java's RuntimeException.
  * We can also pass along additional information.
  */

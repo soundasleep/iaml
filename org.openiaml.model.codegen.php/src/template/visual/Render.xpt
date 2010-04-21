@@ -47,5 +47,14 @@
 	«EXPAND template::visual::Label::getLabelFieldValue(currentFrame, argName) FOR this»
 «ENDDEFINE»
 
-
+/**
+ * The 'value' of a Button is the <em>absolute</em> URL that it will navigate to, if it is clicked.
+ *
+ * @implementation Frame
+ *		An RSS 2.0 {@model Frame} will lose {@model Session} parameters passed as part of {@model Button links};
+ *		i.e. <code>PHPSESSID</code> will not be included in URLs.
+ */
+«DEFINE getFieldValue(model::visual::Frame currentFrame, String argName) FOR model::visual::Button»
+	«EXPAND template::visual::Button::getButtonLinkValue(currentFrame, argName, true, false) FOR this»
+«ENDDEFINE»
 

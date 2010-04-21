@@ -24,3 +24,39 @@
 	«REM»expand all children«ENDREM»
 	«EXPAND Render::renderVisual(currentFrame) FOREACH children-»
 «ENDDEFINE»
+
+/**
+ * Get the current destination link of the given Button, into the given
+ * argument name. Assumed to be in PHP mode.
+ *
+ * @param argName the argument to store the value in. Cannot be "url".
+ * @param absolute should the returned URL be absolute?
+ * @param includeSession should PHPSESSID (etc) be included in the URL? Should generally be <code>true</code>
+ */
+«DEFINE getButtonLinkValue(model::visual::Frame currentFrame, String argName, Boolean absolute, Boolean includeSession) FOR model::visual::Button»
+	«IF argName=="url"»
+		«throwException("Cannot use argName 'url'")»
+	«ENDIF»
+	«LET onClick.outActions.typeSelect(model::wires::NavigateAction).toSet().union(
+		outActions.typeSelect(model::wires::NavigateAction).select(a|a.name == "click" || a.name == "onClick"))
+		AS actions»
+	$url = null;
+	«FOREACH actions AS action»	
+		if ($url === null) {
+			«EXPAND template::operations::OperationCall::getNavigateActionDestination(true, false, action, includeSession) FOR action.to»
+		}
+	«ENDFOREACH»
+	if ($url === null) {
+		throw new IamlRuntimeException("Could not find a NavigateAction destination for Button '«safeName()»'");
+	} else {
+		$«argName» = $url;
+		«IF absolute»
+		if (!is_absolute_url($«argName»)) {
+			// need to make it absolute: add the base URL to the argument
+			$«argName» = get_baseurl() . '/' . $«argName»;
+		}
+		«ENDIF»
+	}
+	$url = null;
+	«ENDLET»
+«ENDDEFINE»

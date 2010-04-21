@@ -3,7 +3,7 @@
   <domainStores id="model.1280b46d146.77" name="Database">
     <children id="model.1280b46d146.81" name="News" outWires="wires.1280b46d1f2.38 wires.1280b46d1f2.50">
       <wires xsi:type="iaml.wires:SelectWire" inParameterEdges="wires.1280b46d1f2.3a" id="wires.1280b46d1f2.38" from="model.1280b46d146.81" to="model.1280b46d146.f3" name="select" query="id = ?"/>
-      <wires xsi:type="iaml.wires:SelectWire" id="wires.1280b46d1f2.50" from="model.1280b46d146.81" to="model.1280b46d146.13f" name="select" query="" limit="10"/>
+      <wires xsi:type="iaml.wires:SelectWire" id="wires.1280b46d1f2.50" from="model.1280b46d146.81" to="model.1280b46d146.13f" name="select" query="" limit="10" orderBy="model.1280b46d146.a5" orderAscending="false"/>
       <attributes id="model.1280b46d146.a2" name="title"/>
       <attributes id="model.1280b46d146.a4" name="description"/>
       <attributes id="model.1280b46d146.a5" name="updated">

@@ -128,13 +128,38 @@
 «ENDDEFINE»
 
 «DEFINE navigateTo(Boolean php, Boolean inStoreDb, model::wires::NavigateAction wire) FOR model::ActionDestination»
+	«IF php»
+		$url = null;
+		«EXPAND getNavigateActionDestination(php, inStoreDb, wire)»
+		if ($url !== null) {
+			// navigate to another frame
+			log_message("[redirect] Redirecting to '$url'");
+			server_redirect($url);
+			die;
+		}
+	«ELSE»
+		var url = null;
+		«EXPAND getNavigateActionDestination(php, inStoreDb, wire)»	
+		debug("[resume] Resuming to '" + url + "'");
+		window.location = url;
+		ajaxIncrement();	// prevent other events from executing
+	«ENDIF»
+«ENDDEFINE»
+
+/**
+ * Get the destination for the given {@model NavigateAction} and put it into
+ * a variable '<code>$url</code>'.
+ *
+ * @param includeSession should PHPSESSID (etc) be included in the URL? Should generally be <code>true</code>
+ */
+«DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::wires::NavigateAction wire, Boolean includeSession) FOR model::ActionDestination»
 	«throwException("Unknown NavigateAction destination: " + this)»
 «ENDDEFINE»
 
 /**
  * Resuming navigation to a EntryGate.
  */
-«DEFINE navigateTo(Boolean php, Boolean inStoreDb, model::wires::NavigateAction wire) FOR model::components::EntryGate»
+«DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::wires::NavigateAction wire, Boolean includeSession) FOR model::components::EntryGate»
 	«IF php»
 		/* navigating back to resume a gate */
 		// get the resume ID
@@ -146,11 +171,11 @@
 		
 		if ($resume != CURRENT_PAGE) {
 			// navigate to another frame
-			$url = "$resume.php?" . get_sid();	// need to pass session on server-side
+			$url = "$resume.php";
+			«IF includeSession»
+				$url .= get_sid();		// need to pass session on server-side
+			«ENDIF»
 			«EXPAND addNamedParameters(php, inStoreDb, "url") FOR wire»	
-			log_message("[resume] Resuming to '$url'");
-			server_redirect($url);
-			die;
 		}
 	«ELSE»
 		var url = "<?php
@@ -164,17 +189,14 @@
 			
 			echo $resume;
 		?>.php";
-		«EXPAND addNamedParameters(php, inStoreDb, "url") FOR wire»	
-		debug("[resume] Resuming to '" + url + "'");
-		window.location = url;
-		ajaxIncrement();	// prevent other events from executing		
+		«EXPAND addNamedParameters(php, inStoreDb, "url") FOR wire»
 	«ENDIF»
 «ENDDEFINE» 
 
 /**
  * Resuming navigation to an ExitGate.
  */
-«DEFINE navigateTo(Boolean php, Boolean inStoreDb, model::wires::NavigateAction wire) FOR model::components::ExitGate»
+«DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::wires::NavigateAction wire, Boolean includeSession) FOR model::components::ExitGate»
 	«IF php»
 		/* navigating back to resume a gate */
 		// get the resume ID
@@ -186,11 +208,11 @@
 		
 		if ($resume != CURRENT_PAGE) {
 			// navigate to another frame
-			$url = "$resume.php?" . get_sid();	// need to pass session on server-side
+			$url = "$resume.php";
+			«IF includeSession»
+				$url .= get_sid();		// need to pass session on server-side
+			«ENDIF»
 			«EXPAND addNamedParameters(php, inStoreDb, "url") FOR wire»	
-			log_message("[resume] Resuming to '$url'");
-			server_redirect($url);
-			die;
 		}
 	«ELSE»
 		var url = "<?php
@@ -205,33 +227,27 @@
 			echo $resume;
 		?>.php";
 		«EXPAND addNamedParameters(php, inStoreDb, "url") FOR wire»	
-		debug("[resume] Resuming to '" + url + "'");
-		window.location = url;
-		ajaxIncrement();	// prevent other events from executing		
 	«ENDIF»
 «ENDDEFINE» 
 
 /**
  * Navigate to a frame.
  */
-«DEFINE navigateTo(Boolean php, Boolean inStoreDb, model::wires::NavigateAction wire) FOR model::visual::Frame»
+«DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::wires::NavigateAction wire, Boolean includeSession) FOR model::visual::Frame»
 	«IF php»
 		/* prevent infinite loops on the current frame */
 		if ("«id-»" != CURRENT_PAGE) {
 			// navigate to another frame
-			$url = "«safeName()».php?" . get_sid();	// need to pass session on server-side		
+			$url = "«safeName()».php";
+			«IF includeSession»
+				$url .= get_sid();		// need to pass session on server-side
+			«ENDIF»
 			«EXPAND addNamedParameters(php, inStoreDb, "url") FOR wire»	
-			log_message("[redirect] Redirecting to '$url'");
-			server_redirect($url);
-			die;
 		}
 	«ELSE»
 		// navigating to a new frame
 		var url = "«safeName()».php";
 		«EXPAND addNamedParameters(php, inStoreDb, "url") FOR wire»	
-		debug("[redirect] Redirecting to '" + url + "'");
-		window.location = url;
-		ajaxIncrement();	// prevent other events from executing
 	«ENDIF»
 «ENDDEFINE»
 

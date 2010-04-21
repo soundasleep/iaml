@@ -57,7 +57,7 @@ header("Content-Type: application/xml");
 		<?php
 		/* this form has navigation button and results; we need to navigate over the results. */
 		
-		// first, reset ('Reset' button)
+		// first, reset ('First' button)
 		{
 			«EXPAND template::visual::EventHandlers::visibleThingClickEvents(frame, true) FOR resetButton.first()»
 		}
@@ -70,14 +70,14 @@ header("Content-Type: application/xml");
 			throw new IamlRuntimeException("'Results' label could not be retrieved");
 		}
 		
-		// now iterate over the result set, clicking 'next' each time
+		// now iterate over the result set, clicking 'Next' each time
 		for ($i = 0; $i < $results; $i++) {
 		?>
 	«ENDIF»
 
 	<item>
 		<title>«EXPAND getProperty(frame, null, "title") FOR this-»</title>
-		<link>TODO</link>
+		<link>«EXPAND getProperty(frame, null, "link") FOR this-»</link>
 		<description>«EXPAND getProperty(frame, null, "description") FOR this-»</description>
 		<pubDate>«EXPAND getProperty(frame, null, "updated") FOR this-»</pubDate>
 		<guid>TODO</guid>

@@ -43,9 +43,8 @@ import org.openiaml.model.model.wires.RequiresEdge;
  * Looks through the model and finds edges which either have no 'from'
  * or 'to', and removes them.
  * 
- * See issue 63.
+ * <p>See issue 63.
  * 
- * @see org.openiaml.model.codegen.php
  * @author jmwright
  *
  */

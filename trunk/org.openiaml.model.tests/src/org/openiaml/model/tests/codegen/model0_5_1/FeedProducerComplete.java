@@ -81,7 +81,11 @@ public class FeedProducerComplete extends DatabaseCodegenTestCase {
 	 * @throws Exception
 	 */
 	public void testAccessRSS() throws Exception {
-		beginAtSitemap();
+		IFile sitemap = beginAtSitemap();
+		
+		// get the URL of the 'view news' page
+		String newsUrl = getURLOfLink("View News");
+		assertNotNull(newsUrl);
 		
 		// get the 'target feed' link
 		String url = getURLOfLink("Target Feed");
@@ -103,8 +107,11 @@ public class FeedProducerComplete extends DatabaseCodegenTestCase {
 		int i = 20;
 		for (FeedItem item : reader.getFeedItems()) {
 			assertEquals("Title " + i, item.getTitle());
-			assertEquals("", item.getLink());
 			assertEquals("Description " + i, item.getDescription());
+			
+			// construct expected URL
+			String expectedLink = getTestContext().getBaseUrl().toString() + newsUrl + "?id=" + i;			
+			assertEquals(expectedLink, item.getLink());
 			
 			// need to construct the date
 			Calendar c = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
@@ -114,7 +121,7 @@ public class FeedProducerComplete extends DatabaseCodegenTestCase {
 			
 			// and the GUID must be unique in this list
 			assertNotNull(item.getGuid());
-			assertFalse(guids.contains(item.getGuid()));
+			assertFalse("List of GUIDs already contains '" + item.getGuid() + "': " + guids, guids.contains(item.getGuid()));
 			guids.add(item.getGuid());
 			
 			// increment down, since we are in DESC			

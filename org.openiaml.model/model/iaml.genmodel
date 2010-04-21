@@ -312,6 +312,7 @@
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference iaml.ecore#//wires/ConditionEdgeDestination/inConditionEdges"/>
       </genClasses>
+      <genClasses ecoreClass="iaml.ecore#//wires/DetailWire"/>
     </nestedGenPackages>
     <nestedGenPackages prefix="Operations" basePackage="org.openiaml.model.model"
         disposableProviderFactory="true" ecorePackage="iaml.ecore#//operations">

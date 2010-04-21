@@ -1159,6 +1159,11 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="inConditionEdges" upperBound="-1"
           eType="#//wires/ConditionEdge" eOpposite="#//wires/ConditionEdge/to"/>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DetailWire" eSuperTypes="#//wires/CompositeWire #//WireDestination #//wires/ParameterEdgeDestination #//wires/ConditionEdgeDestination">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="If both the source and target of this wire refer to the same {@model DomainObject}, the source of this wire will create a {@model Button link} to view the individual element on the target page."/>
+      </eAnnotations>
+    </eClassifiers>
   </eSubpackages>
   <eSubpackages name="operations" nsURI="http://openiaml.org/model/operations" nsPrefix="iaml.operations">
     <eClassifiers xsi:type="ecore:EClass" name="StartNode" eSuperTypes="#//ActivityNode #//ExecutionEdgesSource">

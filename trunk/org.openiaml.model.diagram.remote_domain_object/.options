@@ -1,0 +1,7 @@
+# Tracing options for the org.openiaml.model.diagram.remote_domain_object plug-in
+
+# Common issues
+org.openiaml.model.diagram.remote_domain_object/debug=false
+
+# Visual IDs
+org.openiaml.model.diagram.remote_domain_object/debug/visualID=false

@@ -14,15 +14,15 @@ import org.openiaml.model.tests.codegen.model0_5_1.RSS2_0Reader.FeedItem;
 
 /**
  * @example FeedProducer
- *		A complete example of using {@model FeedProducer} to provide an RSS
+ *		A simple example of using {@model FeedProducer} and model completion to provide an RSS
  *		feed from a {@model DomainObjectInstance}. 
  */
-public class FeedProducerComplete extends FeedCodegenTestCase {
+public class FeedProducerSimple extends FeedCodegenTestCase {
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		root = loadAndCodegen(FeedProducerComplete.class);
+		root = loadAndCodegen(FeedProducerSimple.class);
 		initialiseDatabase();
 	}
 
@@ -46,7 +46,7 @@ public class FeedProducerComplete extends FeedCodegenTestCase {
 			beginAtSitemapThenPage("View News");
 			fail("Should not have been able to view 'View News'");
 		} catch (PhpRuntimeExceptionException e) {
-			assertContains("Required get variable 'id' was not found", e.getMessage());
+			assertContains("Required get variable 'generated_primary_key' was not found", e.getMessage());
 		}
 	}
 	
@@ -57,7 +57,7 @@ public class FeedProducerComplete extends FeedCodegenTestCase {
 	 */
 	public void testViewWithID() throws Exception {
 		IFile sitemap = getSitemap();
-		beginAtSitemapThenPage(sitemap, "View News", "View News", "id=5");
+		beginAtSitemapThenPage(sitemap, "View News", "View News", "generated_primary_key=5");
 		assertNoProblem();
 		
 		// date is displayed in RFC 2822 format
@@ -99,7 +99,7 @@ public class FeedProducerComplete extends FeedCodegenTestCase {
 			assertEquals("Description " + i, item.getDescription());
 			
 			// construct expected URL
-			String expectedLink = getTestContext().getBaseUrl().toString() + newsUrl + "?id=" + i;			
+			String expectedLink = getTestContext().getBaseUrl().toString() + newsUrl + "?generated_primary_key=" + i;			
 			assertEquals(expectedLink, item.getLink());
 			
 			// need to construct the date
@@ -138,12 +138,12 @@ public class FeedProducerComplete extends FeedCodegenTestCase {
 	@Override
 	protected List<String> getDatabaseInitialisers() {
 		List<String> s = new ArrayList<String>();
-		s.add("CREATE TABLE News (id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(64) NOT NULL, description VARCHAR(64) NOT NULL, updated DATETIME NOT NULL)");
+		s.add("CREATE TABLE News (generated_primary_key INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(64) NOT NULL, description VARCHAR(64) NOT NULL, updated DATETIME NOT NULL)");
 		for (int i = 1; i <= 20; i++) {
 			// SQLite does not actually support dates, and they are stored as strings!
 			// we have to insert the date with a leading zero, to enable sorting correctly.
 			String i2 = i < 10 ? "0" + i : Integer.toString(i);  
-			s.add("INSERT INTO News (id, title, description, updated) VALUES (" + i + ", 'Title " + i + "', 'Description " + i + "', '2010-01-" + i2 + " 01:00:00 +0000')");
+			s.add("INSERT INTO News (generated_primary_key, title, description, updated) VALUES (" + i + ", 'Title " + i + "', 'Description " + i + "', '2010-01-" + i2 + " 01:00:00 +0000')");
 		}
 		return s;
 	}

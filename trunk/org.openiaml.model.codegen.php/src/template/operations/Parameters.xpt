@@ -201,7 +201,7 @@
  */
 «DEFINE callParameterValue(Boolean php, Boolean inStoreDb) FOR model::QueryParameter»
 	«IF php»
-		require_get("«name»"«IF defaultValue != null», "«defaultValue»"«ENDIF»)
+		require_get("«safeNameString(name)»"«IF defaultValue != null», "«escapePhpString(defaultValue)»"«ENDIF»)
 	«ELSE»
 		"<?php echo «EXPAND callParameterValue(true, inStoreDb) FOR this»; ?>"
 	«ENDIF»
@@ -291,7 +291,7 @@
  */
 «DEFINE callParameterValueExists FOR model::QueryParameter»
 	«IF defaultValue == null»
-		(require_get("«name»", null) !== null)
+		(require_get("«safeNameString(name)»", null) !== null)
 	«ELSE»
 		true
 	«ENDIF»

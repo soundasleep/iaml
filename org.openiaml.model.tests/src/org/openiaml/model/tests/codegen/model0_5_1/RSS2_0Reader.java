@@ -123,10 +123,10 @@ public class RSS2_0Reader extends TestCase {
 	
 	/**
 	 * Execute the given XPath string on the given node, and return the text content.
-	 * Asserts that there is only one result for the xpath query.
+	 * If results return, asserts that there is only one result for the xpath query.
 	 * 
 	 * @param query the XPath query to evaluate
-	 * @return
+	 * @return <code>null</code> if there is no such node
 	 * @throws RSSReaderException if the query throws a {@link XPathExpressionException}
 	 */
 	protected String getTextContent(Node xml, String query) throws RSSReaderException {
@@ -136,6 +136,8 @@ public class RSS2_0Reader extends TestCase {
 		} catch (XPathExpressionException e) {
 			throw new RSSReaderException("Invalid XPath: " + query, e);
 		}
+		if (list.isEmpty())
+			return null;
 		assertEquals(1, list.size());
 		return list.item(0).getTextContent();
 	}
@@ -188,20 +190,21 @@ public class RSS2_0Reader extends TestCase {
 
 	/**
 	 * Get the <code>/rss/channel/lastBuildDate</code> of the loaded
-	 * feed, as a {@link Date}.
+	 * feed, as a {@link Date}, or <code>null</code> if it doesn't exist
 	 * 
-	 * @return the {@link Date} of the <code>lastBuildDate</code> of the feed
+	 * @return the {@link Date} of the <code>lastBuildDate</code> of the feed, or <code>null</code> if it doesn't exist
 	 * @throws RSSReaderException 
 	 */
 	public Date getLastBuildDate() throws RSSReaderException {
 		String actualDate = getTextContent("/rss/channel/lastBuildDate");
-		Date actual;
+		if (actualDate == null)
+			return null;
+		
 		try {
-			actual = new SimpleDateFormat(RSS_DATE_FORMAT).parse(actualDate);
+			return new SimpleDateFormat(RSS_DATE_FORMAT).parse(actualDate);
 		} catch (ParseException e) {
 			throw new RSSReaderException("Could not parse '" + actualDate + "': " + e.getMessage(), e);
 		}
-		return actual;
 	}
 	
 	public class FeedItem {
@@ -216,7 +219,7 @@ public class RSS2_0Reader extends TestCase {
 		}
 
 		/**
-		 * @return <code>/item/title</code>
+		 * @return <code>/item/title</code>, or <code>null</code> if it doesn't exist
 		 * @throws RSSReaderException 
 		 */
 		public String getTitle() throws RSSReaderException {
@@ -224,7 +227,7 @@ public class RSS2_0Reader extends TestCase {
 		}
 		
 		/**
-		 * @return <code>/item/description</code>
+		 * @return <code>/item/description</code>, or <code>null</code> if it doesn't exist
 		 * @throws RSSReaderException 
 		 */
 		public String getDescription() throws RSSReaderException {
@@ -232,7 +235,7 @@ public class RSS2_0Reader extends TestCase {
 		}
 		
 		/**
-		 * @return <code>/item/link</code>
+		 * @return <code>/item/link</code>, or <code>null</code> if it doesn't exist
 		 * @throws RSSReaderException 
 		 */
 		public String getLink() throws RSSReaderException {
@@ -240,7 +243,7 @@ public class RSS2_0Reader extends TestCase {
 		}
 		
 		/**
-		 * @return <code>/item/guid</code>
+		 * @return <code>/item/guid</code>, or <code>null</code> if it doesn't exist
 		 * @throws RSSReaderException 
 		 */
 		public String getGuid() throws RSSReaderException {
@@ -248,11 +251,14 @@ public class RSS2_0Reader extends TestCase {
 		}
 		
 		/**
-		 * @return <code>/item/pubDate</code> as a Date
+		 * @return <code>/item/pubDate</code> as a Date, or <code>null</code> if it doesn't exist
 		 * @throws RSSReaderException 
 		 */
 		public Date getPubDate() throws RSSReaderException {
 			String actualDate = getTextContent(element, "pubDate");
+			if (actualDate == null)
+				return null;
+			
 			try {
 				return new SimpleDateFormat(RSS_DATE_FORMAT).parse(actualDate);
 			} catch (ParseException e) {

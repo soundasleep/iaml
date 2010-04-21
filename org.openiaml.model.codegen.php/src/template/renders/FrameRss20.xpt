@@ -76,11 +76,34 @@ header("Content-Type: application/xml");
 	«ENDIF»
 
 	<item>
-		<title>«EXPAND getProperty(frame, null, "title") FOR this-»</title>
-		<link>«EXPAND getProperty(frame, null, "link") FOR this-»</link>
-		<description>«EXPAND getProperty(frame, null, "description") FOR this-»</description>
-		<pubDate>«EXPAND getProperty(frame, null, "updated") FOR this-»</pubDate>
-		<guid>TODO</guid>
+		<?php
+		$rss_value = null;
+		«EXPAND getProperty(frame, null, "title", "rss_value") FOR this-»
+		if ($rss_value != null) { ?>
+			<title><?php echo escape_xml_string($rss_value); ?></title>
+		<?php } ?>
+		
+		<?php
+		$rss_value = null;
+		«EXPAND getProperty(frame, null, "link", "rss_value") FOR this-»
+		if ($rss_value != null) { ?> 
+			<link><?php echo escape_xml_string($rss_value); ?></link>
+			<guid isPermaLink="true"><?php echo escape_xml_string($rss_value); ?></guid>
+		<?php } ?>
+		
+		<?php
+		$rss_value = null;
+		«EXPAND getProperty(frame, null, "description", "rss_value") FOR this-»
+		if ($rss_value != null) { ?> 
+			<description><?php echo escape_xml_string($rss_value); ?></description>
+		<?php } ?>
+		
+		<?php
+		$rss_value = null;
+		«EXPAND getProperty(frame, null, "updated", "rss_value") FOR this-»
+		if ($rss_value != null) { ?> 
+			<pubDate><?php echo escape_xml_string($rss_value); ?></pubDate>
+		<?php } ?>
 	</item>
 		
 	«IF !(nextButton.isEmpty || resultsLabel.isEmpty || resetButton.isEmpty)»
@@ -98,33 +121,36 @@ header("Content-Type: application/xml");
 «ENDDEFINE»
 
 /**
+ * Assumed to be in PHP mode.
+ *
  * @param frame the current frame
  * @param direct the direct attribute, or <code>null</code>
  * @param propertyName the name of the property to select; this will first search for
  *			contained {@model Property Properties}, then contained {@model VisibleThing}s.
+ * @param argName the variable to save the result into; this must not be modified
+ *			if there is no value
  * @implementation Frame
  *		An RSS 2.0 {@model Frame} will search for <code>&lt;title&gt;</code>, ... properties
  *		with the following precedence: direct attribute; contained named {@model Property}; then value
  *		of contained named {@model VisibleThing}, all case insensitive.
  */
-«DEFINE getProperty(model::visual::Frame frame, String direct, String propertyName) FOR model::VisibleThing-»
-«IF direct != null-»
-«escapeXmlString(direct)-»
-«ELSE-»
-«IF !properties.select(p|p.name.toLowerCase() == propertyName).isEmpty-»
-<?php echo escape_xml_string(«EXPAND template::operations::Parameters::callParameterValue(true, false) FOR properties.selectFirst(p|p.name.toLowerCase() == propertyName)»); ?>
-«ELSE-»
-«IF !children.select(p|p.name.toLowerCase() == propertyName).isEmpty-»
-<?php
-$value = null;
-«EXPAND template::visual::Render::getFieldValue(frame, "value") FOR children.selectFirst(p|p.name.toLowerCase() == propertyName)»
-if ($value !== null) {
-	echo escape_xml_string($value);
-}
-?>«ELSE-»
-<?php /* unknown */ ?>
-«ENDIF-»
-«ENDIF-»
-«ENDIF-»
+«DEFINE getProperty(model::visual::Frame frame, String direct, String propertyName, String argName) FOR model::VisibleThing-»
+	«IF direct != null-»
+		$«argName» = "«escapePhpString(direct)-»";
+	«ELSE-»
+		«IF !properties.select(p|p.name.toLowerCase() == propertyName).isEmpty-»
+			$«argName» = «EXPAND template::operations::Parameters::callParameterValue(true, false) FOR properties.selectFirst(p|p.name.toLowerCase() == propertyName)»;
+		«ELSE-»
+			«IF !children.select(p|p.name.toLowerCase() == propertyName).isEmpty-»
+				$value = null;
+				«EXPAND template::visual::Render::getFieldValue(frame, "value") FOR children.selectFirst(p|p.name.toLowerCase() == propertyName)»
+				if ($value !== null) {
+					$«argName» = $value;
+				}
+			«ELSE-»
+				/* unknown */
+			«ENDIF-»
+		«ENDIF-»
+	«ENDIF-»
 «ENDDEFINE»
 

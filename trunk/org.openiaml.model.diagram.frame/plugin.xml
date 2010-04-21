@@ -242,7 +242,7 @@
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" containerViews="referencing-diagrams"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Diagram" semanticHints="Iaml_Frame"/>
          <context viewClass="org.eclipse.gmf.runtime.notation.Node" semanticHints="2039,2040,2041,2042,2043,2044,2045,2046,2008,2009,2047,2048,2049,2050,2051,2052,2016,2053,2054,2019,2020,2055,2056,2057,2024,2058,2059,2035,2036,2060"/>
-         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4015,4011,4004,4005,4016,4014,4008,4012,4013"/>
+         <context viewClass="org.eclipse.gmf.runtime.notation.Edge" semanticHints="4001,4015,4011,4004,4005,4016,4014,4008,4012,4013,4017"/>
       </viewProvider>
    </extension>
 
@@ -257,7 +257,7 @@
             <method name="getType()" value="2039,2040,2041,2042,2043,2044,2045,2046,2008,2009,2047,2048,2049,2050,2051,2052,2016,2053,2054,2019,2020,2055,2056,2057,2024,2058,2059,2035,2036,2060"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Edge" id="generated-links">
-            <method name="getType()" value="4001,4015,4011,4004,4005,4016,4014,4008,4012,4013"/>
+            <method name="getType()" value="4001,4015,4011,4004,4005,4016,4014,4008,4012,4013,4017"/>
          </object>
          <object class="org.eclipse.gmf.runtime.notation.Node" id="generated-labels">
             <method name="getType()" value="5081,5082,5083,5084,5085,5086,5087,5088,5089,5090,5091,5092,5093,5094,5095,5096,5097,5098,5099,5100,5015,5016,5017,5018,5066,5101,5102,5103,5104,5105,5106,5107,5108,5109,5110,5111,5112,5029,5030,5113,5114,5033,5034,5115,5116,5117,5118,5119,5120,5041,5042,5043,5121,5122,5123,5124,5074,5075,5076,5077,5125,5126"/>
@@ -742,6 +742,16 @@
             <param name="semanticHint" value="4013"/>
          </metamodelType>
       </metamodel>
+      <metamodel nsURI="http://openiaml.org/model/wires">
+         <metamodelType
+               id="org.openiaml.model.diagram.frame.DetailWire_4017"
+               name="%metatype.name.DetailWire_4017"
+               kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
+               eclass="DetailWire"
+               edithelper="org.openiaml.model.diagram.frame.edit.helpers.DetailWireEditHelper">
+            <param name="semanticHint" value="4017"/>
+         </metamodelType>
+      </metamodel>
    </extension>
 
    <extension point="org.eclipse.gmf.runtime.emf.type.core.elementTypeBindings" id="element-types-bindings">
@@ -795,6 +805,7 @@
          <elementType ref="org.openiaml.model.diagram.frame.NewInstanceWire_4008"/>
          <elementType ref="org.openiaml.model.diagram.frame.RequiresEdge_4012"/>
          <elementType ref="org.openiaml.model.diagram.frame.ConstraintEdge_4013"/>
+         <elementType ref="org.openiaml.model.diagram.frame.DetailWire_4017"/>
          <advice ref="org.eclipse.gmf.runtime.diagram.core.advice.notationDepdendents"/>
       </binding>
    </extension>

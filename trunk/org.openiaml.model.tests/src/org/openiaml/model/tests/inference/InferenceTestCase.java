@@ -1075,6 +1075,18 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	}
 	
 	/**
+	 * Assert there exists only one unidirectional ParameterEdge between
+	 * the given elements, with the given name.
+	 *
+	 * @return The element found
+	 */
+	public ParameterEdge assertHasParameterEdge(EObject container, ParameterEdgesSource from, ParameterEdgeDestination to, String name) throws JaxenException {
+		Set<ParameterEdge> params = getParameterEdgesFromTo(container, from, to, name);
+		assertEquals("Should be exactly one parameter edge: " + params, 1, params.size());
+		return params.iterator().next();
+	}
+	
+	/**
 	 * Assert there exists only one unidirectional ExtendsEdge between
 	 * the given elements.
 	 *

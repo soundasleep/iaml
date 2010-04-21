@@ -1391,4 +1391,52 @@ public class GmfGenTestCase extends XmlTestCase {
 		}
 	}
 	
+	private static final String[] REQUIRED_BUNDLES = new String[] {
+		"org.openiaml.model.diagram.helpers",
+		"org.eclipse.xsd",
+	};
+
+	/**
+	 * Issue 173: add extension plugins to .gmfgen Required Plugin Identifiers
+	 * automatically.
+	 * 
+	 * @throws Exception
+	 */
+	public void testRequiredPluginIdentifiers() throws Exception {
+		iterate(new DefaultIterator() {
+
+			@Override
+			public void execute2(String filename, Document doc)
+					throws Exception {
+				
+				// first, let's try and add it if it doesn't already exist
+				boolean changed = false;
+				for (String bundle : REQUIRED_BUNDLES) {
+					Element e = hasXpathFirst(doc, "/GenEditorGenerator/plugin/requiredPlugins[text()='" + bundle + "']");
+					if (e == null) {
+						Element root = xpathFirst(doc, "/GenEditorGenerator/plugin");
+						Element n = doc.createElement("requiredPlugins");
+						n.setTextContent(bundle);
+						root.appendChild(n);
+						changed = true;
+					}
+				}
+
+				// save
+				if (changed) {
+					saveDocument(doc, filename);
+				}
+				
+				// then recheck
+				for (String bundle : REQUIRED_BUNDLES) {
+					Element e = hasXpathFirst(doc, "/GenEditorGenerator/plugin/requiredPlugins[text()='" + bundle + "']");
+					assertNotNull(filename + ": has no requiredPlugins '" + bundle + "'", e);
+				}
+				
+			}
+			
+		});
+	}
+	
+	
 }

@@ -1,0 +1,145 @@
+«IMPORT iaml»
+
+/**
+ * Methods for accessing data from <em>remote</em> domain objects, e.g.
+ * RSS feeds.
+ * All of this code is expected to execute on the server (PHP mode).
+ */
+«EXTENSION template::GeneratorExtensions»
+
+/**
+ * Method definitions.
+ */
+«DEFINE remoteDefinitions FOR model::domain::RemoteDomainObject-»
+	/**
+	 * Does the remote object '«safeNameString(name)»' need refreshing?
+	 * This object needs updating every «age» seconds.
+	 */
+	function needs_remote_refresh_«safeName()»() {
+		return time() >
+			get_application_value('remote_object_«safeName()»_updated', 0)
+			+ «age»;			
+	}
+	
+	/**
+	 * Update the given object right now. Blocks if necessary.
+	 *
+	 * Also updates the global value 'remote_object_«safeName()»_updated' to the
+	 * current <code>time()</code>.
+	 */
+	function remote_object_«safeName()»_refresh() {
+		log_message("[remote] Refreshing remote object '«safeName()»'");
+		
+		«REM»TODO different types of remote objects (Atom, ...)«ENDREM»
+		log_message("[remote] Loading URL '«escapePhpString(url)»'"); 
+		$file = file_get_contents('«escapePhpString(url)»');
+		if ($file === false) {
+			// failed
+			throw new IamlRuntimeException("Could not load external feed: '«escapePhpString(url)»'");
+		}
+		
+		log_message("[remote] Parsing into XML");
+		// wrap up the parsing so we can catch errors and warnings
+		libxml_clear_errors();
+		libxml_use_internal_errors(false);
+		$xml = simplexml_load_string($file);
+		libxml_use_internal_errors(true);
+		$errors = libxml_get_errors();
+		
+		if ($xml === false || $errors) {
+			// errors occured
+			$first = null;
+			foreach ($errors as $k) {
+				if ($first === null) {
+					$first = $k;
+				}
+				log_message("[remote] Error: $k");
+			}
+			throw new IamlRuntimeException("Could not load external feed: " . count($errors) . " errors occured. First: $first");
+		}
+		
+		// now parse over the XML as RSS
+		$resultQueries = array();
+		$resultArgs = array();
+		$items = $xml->xpath("/rss/channel/item");
+		log_message("[remote] RSS items: " . count($items));
+		foreach ($items as $item) {
+			$args = array();
+			«FOREACH attributes AS attr»
+				/* attribute '«safeName(attr)»' */
+				«REM»in simplexml, nodes are accessed through obj->foo«ENDREM»
+				if (isset($item->«safeNameString(attr.name)»)) {
+					«REM»in simplexml, nodes need to be cast to string, otherwise this will just return another node«ENDREM»
+					$value = (string) $item->«safeNameString(attr.name)»;
+					$type = '«escapePhpString(attr.type.uRI)»';
+
+					// can we cast it to the expected type?
+					if (!can_cast($value, $type)) {
+						throw new IamlRuntimeException("Cannot cast '$value' into type '$type'");
+					}
+					
+					$value = do_cast($value, $type);
+
+					// and then cast it back into string for insertion
+					$value = do_cast($value, 'http://openiaml.org/model/datatypes#iamlString');
+					
+					$args['«safeNameString(attr.name)»'] = $value;
+				}
+			«ENDFOREACH»
+			
+			if ($args) {
+				// construct insert query
+				// only include provided data; everything else will be default values
+				$first = true;
+				$query = "INSERT INTO «safeNameString(name)» (";
+				foreach ($args as $key => $value) {
+					if (!$first) $query .= ", ";
+					$query .= $key;
+					$first = false;
+				}
+				
+				$query .= ") VALUES (";
+				$first = true;
+				foreach ($args as $key => $value) {
+					if (!$first) $query .= ", ";
+					$query .= ":" . $key;
+					$first = false;
+				}
+				$query .= ")";
+				
+				log_message("[remote] Queueing query '$query'");
+				$resultQueries[] = $query;
+				$resultArgs[] = $args;
+			}
+		}
+
+		// if we have got this far, update everything after
+		// deleting any existing content
+		«EXPAND Select::selectDatabase»
+		
+		log_message("[remote] Deleting existing records");
+		$query = "DELETE FROM «safeNameString(name)» WHERE 1";
+		$db_query = new DatabaseQuery($db_name);
+		$db_query->execute($query, array());
+		
+		// now insert the new content
+		log_message("[remote] Inserting new content");
+		foreach ($resultQueries as $i => $query) {
+			$query = $resultQueries[$i];
+			$args = $resultArgs[$i];
+			$db_query = new DatabaseQuery($db_name);
+			$db_query->execute($query, $args);
+		}
+	
+		// save updated time
+		log_message("[remote] Setting updated time to " . time());
+		set_application_value('remote_object_«safeName()»_updated', time());
+	}
+«ENDDEFINE»
+
+/* Possibly update the remote domain object. */
+«DEFINE considerUpdate FOR model::domain::RemoteDomainObject-»
+	if (needs_remote_refresh_«safeName()»()) {
+		remote_object_«safeName()»_refresh();
+	}
+«ENDDEFINE»

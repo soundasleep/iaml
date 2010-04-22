@@ -206,17 +206,26 @@
 				return get_new_domain_object_«safeName()-»(«IF isAutosaveOff()»false«ENDIF»);
 			«ENDIF»
 		«ELSE»
-			$offset = get_current_offset_«safeName()»();
-			«EXPAND Select::evaluateSelectWire(true, true) FOR inWires.typeSelect(model::wires::SelectWire).first()»
-			object_instance_onChange_«safeName()»();
-			if ($row === null) {
-				if ($default !== false) {
-					return $default;
-				} else {
-					throw new IamlRuntimeException("No results found for query '$query'");
+			«LET inWires.typeSelect(model::wires::SelectWire).first() AS selectWire»
+			«IF model::DomainObject.isInstance(selectWire.from)»
+				«IF model::domain::RemoteDomainObject.isInstance(selectWire.from)»
+					«EXPAND RemoteDefinitions::considerUpdate FOR (model::domain::RemoteDomainObject) selectWire.from»
+				«ENDIF»
+				$offset = get_current_offset_«safeName()»();
+				«EXPAND Select::evaluateSelectWire(true, true) FOR selectWire»
+				object_instance_onChange_«safeName()»();
+				if ($row === null) {
+					if ($default !== false) {
+						return $default;
+					} else {
+						throw new IamlRuntimeException("No results found for query '$query'");
+					}
 				}
-			}
-			return $row;
+				return $row;
+			«ELSE»
+				«throwException("Cannot SelectWire from a non-DomainObject")»
+			«ENDIF»
+			«ENDLET»
 		«ENDIF»
 	}
 		

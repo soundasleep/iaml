@@ -109,6 +109,11 @@
 
 		«REM»expand all children«ENDREM»
 		«EXPAND Render::renderVisual(currentFrame) FOREACH children-»
+		
+		«type.uRI»
+		«IF type != null && type.uRI == "http://openiaml.org/model/datatypes#iamlOpenIDURL"»
+			«EXPAND textFieldOpenID(currentFrame)»
+		«ENDIF»
 	</label>
 	</div>
 «ENDDEFINE»
@@ -155,5 +160,27 @@
 	value="<?php echo «EXPAND template::operations::Parameters::callParameterValue(true, false)»; ?>"
 «ENDDEFINE»
 
-«DEFINE exception FOR Object»
+/**
+ * @implementation InputTextField
+ *		{@model InputTextField}s of {@model InputTextField#type} <code>iamlOpenIDURL</code> will
+ *		provide a link to authenticate against the provided OpenID URL.
+ */ 
+«DEFINE textFieldOpenID(model::visual::Frame currentFrame) FOR model::visual::InputTextField-»
+	<!-- openID -->
+	<input type="button" value="Authenticate" 
+		onClick="return openid_authenticate_«safeName()»();">
+
+	<script language="Javascript" type="application/javascript">
+		/* <![CDATA[ */
+			function openid_authenticate_«safeName()»() {
+				var url = "open_id_callback.php?mode=start";
+				url += "&url=" + encodeURIComponent(document.getElementById('«safeNameString(id)»').value);
+				url += "&final=" + encodeURIComponent('<?php echo htmlspecialchars(get_current_url()); ?>');
+				url += create_stacktrace_parameter();
+				execute_queued_url(url, 'new_domain_instance');
+							
+				return false;
+			}
+		/* ]]> */
+	</script>
 «ENDDEFINE»

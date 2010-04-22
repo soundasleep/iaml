@@ -173,7 +173,7 @@
 			// navigate to another frame
 			$url = "$resume.php";
 			«IF includeSession»
-				$url .= get_sid();		// need to pass session on server-side
+				$url .= "?" . get_sid();		// need to pass session on server-side
 			«ENDIF»
 			«EXPAND addNamedParameters(php, inStoreDb, "url") FOR wire»	
 		}
@@ -210,7 +210,7 @@
 			// navigate to another frame
 			$url = "$resume.php";
 			«IF includeSession»
-				$url .= get_sid();		// need to pass session on server-side
+				$url .= "?" . get_sid();		// need to pass session on server-side
 			«ENDIF»
 			«EXPAND addNamedParameters(php, inStoreDb, "url") FOR wire»	
 		}
@@ -240,7 +240,7 @@
 			// navigate to another frame
 			$url = "«safeName()».php";
 			«IF includeSession»
-				$url .= get_sid();		// need to pass session on server-side
+				$url .= "?" . get_sid();		// need to pass session on server-side
 			«ENDIF»
 			«EXPAND addNamedParameters(php, inStoreDb, "url") FOR wire»	
 		}

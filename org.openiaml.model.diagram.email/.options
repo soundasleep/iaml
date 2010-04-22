@@ -1,7 +1,0 @@
-# Tracing options for the org.openiaml.model.diagram.email plug-in
-
-# Common issues
-org.openiaml.model.diagram.email/debug=false
-
-# Visual IDs
-org.openiaml.model.diagram.email/debug/visualID=false

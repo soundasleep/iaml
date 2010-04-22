@@ -33,6 +33,7 @@
 		«EXPAND template::Template::phpCheck»
 		
 		«EXPAND template::domain::Includes::getInclude FOREACH getRoot().getAllDomainObjects()» 
+		«EXPAND RemoteDefinitions::remoteDefinitions FOREACH getRoot().eAllContents.typeSelect(model::domain::RemoteDomainObject)»
 
 		«EXPAND GetDefinitions::getDomainObject FOREACH getRoot().getAllDomainObjectInstances()»
 		«EXPAND StoreDefinitions::storeDomainObject FOREACH getRoot().getAllDomainObjectInstances()»

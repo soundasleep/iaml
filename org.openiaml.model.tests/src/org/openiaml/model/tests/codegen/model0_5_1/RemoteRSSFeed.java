@@ -56,7 +56,7 @@ public class RemoteRSSFeed extends CodegenTestCase {
 		assertLabelTextNotPresent("http://example.com/feed#123");
 		
 		// the date is stored as a date, so it will be rendered as a date
-		assertLabelTextExactlyPresent("Tue, 03 Jun 2008 09:39:21 GMT");
+		assertLabelTextExactlyPresent("Tue, 03 Jun 2008 09:39:21 +0000");
 		
 		// we can click the 'Next' button
 		clickButtonWithText("Next");
@@ -71,7 +71,7 @@ public class RemoteRSSFeed extends CodegenTestCase {
 		assertLabelTextNotPresent("http://example.com/feed#124");
 		
 		// the date is stored as a date, so it will be rendered as a date
-		assertLabelTextExactlyPresent("Tue, 03 Jun 2008 09:39:21 GMT");
+		assertLabelTextExactlyPresent("Tue, 03 Jun 2008 09:39:21 +0000");
 		
 		// click the 'Next' button again
 		clickButtonWithText("Next");
@@ -80,7 +80,7 @@ public class RemoteRSSFeed extends CodegenTestCase {
 		// the values haven't changed
 		assertLabelTextExactlyPresent("New Event 124");
 		assertLabelTextExactlyPresent("This event is great, because it was also loaded through RSS!");
-		assertLabelTextExactlyPresent("Tue, 03 Jun 2008 09:39:21 GMT");
+		assertLabelTextExactlyPresent("Tue, 03 Jun 2008 09:39:21 +0000");
 		
 		// click 'Reset'
 		clickButtonWithText("First");
@@ -88,7 +88,7 @@ public class RemoteRSSFeed extends CodegenTestCase {
 		
 		assertLabelTextExactlyPresent("New Event 123");
 		assertLabelTextExactlyPresent("This event is great, because it was loaded through RSS!");
-		assertLabelTextExactlyPresent("Tue, 03 Jun 2008 09:39:21 GMT");
+		assertLabelTextExactlyPresent("Tue, 03 Jun 2008 09:39:21 +0000");
 
 	}
 	

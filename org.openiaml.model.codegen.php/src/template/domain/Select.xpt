@@ -55,7 +55,7 @@
 			if (!isset($row["«safeNameString(attribute.name)»"])) {
 				throw new IamlRuntimeException("Could not find attribute '«safeNameString(attribute.name)»' in resulting select");
 			}
-			if (!can_cast($row["«safeNameString(attribute.name)»"], '')) {
+			if (!can_cast($row["«safeNameString(attribute.name)»"], $type)) {
 				throw new IamlRuntimeException("Unexpectedly could not cast value '"
 					. $row["«safeNameString(attribute.name)»"] . "' into type '$type'");
 			}

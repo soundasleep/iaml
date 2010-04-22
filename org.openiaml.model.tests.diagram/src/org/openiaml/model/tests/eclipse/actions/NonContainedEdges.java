@@ -3,9 +3,6 @@
  */
 package org.openiaml.model.tests.eclipse.actions;
 
-import java.util.ArrayList;
-
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
@@ -65,18 +62,9 @@ public class NonContainedEdges extends AbstractActionTestCase<GraphicalEditPart>
 		assertHasDataFlowEdge(editor_sub, property2, var);
 		// identical elements being rendered
 		assertSameReferencedElement(property, property2);
+		
+		// removed testing code for elements not normally exported; is it actually necessary to test?
 
-		// lets check the object itself
-		// TODO NOTE by default the 'edit.commands' package is not exported. we have to circumvent this.
-		// it would be ideal to check that the code actually works, but this is too complicated;
-		// we take a more simpler approach and just check that the method actually exists.
-		// it should throw a NullPointerException
-		try {
-			new org.openiaml.model.diagram.condition.edit.commands.DataFlowEdgeCreateCommand(null, property2.resolveSemanticElement(), var.resolveSemanticElement(), new ArrayList<EObject>());
-			fail("Should have thrown a NullPointerException");
-		} catch (NullPointerException e) {
-			// expected
-		}
 	}
 
 	/**
@@ -102,17 +90,8 @@ public class NonContainedEdges extends AbstractActionTestCase<GraphicalEditPart>
 		// identical elements being rendered
 		assertSameReferencedElement(property, property2);
 
-		// lets check the object itself
-		// TODO NOTE by default the 'edit.commands' package is not exported. we have to circumvent this.
-		// it would be ideal to check that the code actually works, but this is too complicated;
-		// we take a more simpler approach and just check that the method actually exists.
-		// it should throw a NullPointerException
-		try {
-			new org.openiaml.model.diagram.operation.edit.commands.DataFlowEdgeCreateCommand(null, property2.resolveSemanticElement(), var.resolveSemanticElement(), new ArrayList<EObject>());
-			fail("Should have thrown a NullPointerException");
-		} catch (NullPointerException e) {
-			// expected
-		}
+		// removed testing code for elements not normally exported; is it actually necessary to test?
+
 	}
 
 	/**

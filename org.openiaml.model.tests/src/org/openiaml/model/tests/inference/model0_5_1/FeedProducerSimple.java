@@ -8,13 +8,16 @@ import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
+import org.openiaml.model.model.visual.Label;
 import org.openiaml.model.model.wires.NavigateAction;
 import org.openiaml.model.model.wires.ParameterEdge;
+import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
@@ -152,6 +155,30 @@ public class FeedProducerSimple extends InferenceTestCase {
 		assertGenerated(assertHasButton(form, "First"));
 		assertGenerated(assertHasButton(form, "Last"));
 		assertGenerated(assertHasLabel(form, "Results"));
+		
+	}
+	
+	/**
+	 * Form.onAccess should update 
+	 * Label[results], i.e. the first number of results.
+	 * 
+	 * @throws Exception
+	 */
+	public void testInstanceOnAccessUpdatesLabel() throws Exception {
+		
+		Frame feed = assertHasFrame(root, "Target Feed");
+		InputForm form = assertHasInputForm(feed, "Feed Item");
+		Label label = assertHasLabel(form, "Results");
+		Operation update = assertHasOperation(label, "update");
+		
+		DomainObjectInstance instance = assertHasDomainObjectInstance(feed, "recent news");
+		
+		EventTrigger onAccess = form.getOnAccess();
+		RunAction run = assertHasRunAction(root, onAccess, update);
+		assertGenerated(run);
+		
+		Property count = instance.getResults();
+		assertGenerated(assertHasParameterEdge(root, count, run));
 		
 	}
 

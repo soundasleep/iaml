@@ -13,8 +13,8 @@ import org.openiaml.model.tests.PhpRuntimeExceptionException;
 import org.openiaml.model.tests.codegen.model0_5_1.RSS2_0Reader.FeedItem;
 
 /**
- * @example FeedProducer
- *		A complete example of using {@model FeedProducer} to provide an RSS
+ * @example Frame
+ *		A complete example of using an {@model Frame#render RSS} {@model Frame} to provide an RSS
  *		feed from a {@model DomainObjectInstance}. 
  */
 public class FeedProducerComplete extends FeedCodegenTestCase {

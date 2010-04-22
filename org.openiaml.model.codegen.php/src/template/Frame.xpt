@@ -73,7 +73,9 @@ if (require_get("redirect_on_client", "")) {
 // run any event triggers for this frame
 // exceptions are now covered by the exception handlers above
 «EXPAND template::events::Frame::runFrameEvents('init') FOREACH {onInit}-»
-«EXPAND template::events::Frame::runFrameEvents('access') FOREACH {onAccess}-»
+
+// all 'onAccess' events in this frame, and all children
+«EXPAND getAllOnAccessEvents»
 
 // run any entry gates connected to the containing scope(s)
 «EXPAND template::scopes::EntryGate::runEntryGate FOREACH getFrameEntryGates(this)-»
@@ -126,6 +128,28 @@ log_message("«id».php: Session data: " . print_r($_SESSION, true));
 log_message("«name».php: User browsing finished");
 ?>
 	«ENDFILE»
+«ENDDEFINE»
+
+/**
+ * Execute all 'onAccess' events for this frame and all children.
+ * @implementation Frame
+ *		When a {@model Frame} is loaded, all {@model Accessible#onAccess} {@model EventTrigger events}
+ *		for the frame and its {@model Frame#children}, recursively, are executed.
+ */
+«DEFINE getAllOnAccessEvents FOR model::VisibleThing»
+	«IF onAccess != null»
+		// onAccess for '«safeNameString(name)»'
+		«EXPAND template::events::EventCall::callEvent(true) FOR onAccess»
+		«EXPAND getAllOnAccessEvents FOREACH children»
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE getAllOnAccessEvents FOR model::visual::Frame»
+	«IF onAccess != null»
+		// onAccess for '«safeNameString(name)»'
+		«EXPAND template::events::EventCall::callEvent(true) FOR onAccess»
+		«EXPAND getAllOnAccessEvents FOREACH children»
+	«ENDIF»
 «ENDDEFINE»
 
 /* default values that we should set before we access this frame */

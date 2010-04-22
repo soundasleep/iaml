@@ -196,6 +196,7 @@
 
 	/**
 	 * Get the domain object instance '«id»'.
+	 * If a {@model RemoteDomainObject}, this may refresh the remote data source.
 	 */
 	function get_object_instance_«safeName()»($default = false) {
 		«IF inWires.typeSelect(model::wires::SelectWire).isEmpty»
@@ -209,6 +210,7 @@
 			«LET inWires.typeSelect(model::wires::SelectWire).first() AS selectWire»
 			«IF model::DomainObject.isInstance(selectWire.from)»
 				«IF model::domain::RemoteDomainObject.isInstance(selectWire.from)»
+					// possibly update the domain object this instance is contained in
 					«EXPAND RemoteDefinitions::considerUpdate FOR (model::domain::RemoteDomainObject) selectWire.from»
 				«ENDIF»
 				$offset = get_current_offset_«safeName()»();
@@ -231,6 +233,7 @@
 		
 	/**
 	 * Get the number of results for the current query.
+	 * If a {@model RemoteDomainObject}, this may refresh the remote data source.
 	 */
 	function get_instance_count_«safeName()»() {
 		«IF inWires.typeSelect(model::wires::SelectWire).isEmpty»
@@ -241,18 +244,26 @@
 				return 1;
 			«ENDIF»
 		«ELSE»
-			// if there are NO results yet, don't crash
-			if (!has_object_instance_«safeName()»())
-				return 0;
-
-			// will select count directly into $row	
-			«EXPAND Select::evaluateSelectWireCount(true) FOR inWires.typeSelect(model::wires::SelectWire).first()»
-			return $row;
+			«LET inWires.typeSelect(model::wires::SelectWire).first() AS selectWire»
+				«IF model::domain::RemoteDomainObject.isInstance(selectWire.from)»
+					// possibly update the domain object this instance is contained in
+					«EXPAND RemoteDefinitions::considerUpdate FOR (model::domain::RemoteDomainObject) selectWire.from»
+				«ENDIF»
+	
+				// if there are NO results yet, don't crash
+				if (!has_object_instance_«safeName()»())
+					return 0;
+	
+				// will select count directly into $row	
+				«EXPAND Select::evaluateSelectWireCount(true) FOR selectWire»
+				return $row;
+			«ENDLET»
 		«ENDIF»
 	}
 	
 	/**
 	 * Does the domain object instance '«id»' exist yet in the database?
+	 * If a {@model RemoteDomainObject}, this may refresh the remote data source.
 	 *
 	 * Returns true or false.
 	 */
@@ -264,12 +275,19 @@
 				return has_new_domain_object_«safeName()-»();
 			«ENDIF»
 		«ELSE»
-			$offset = get_current_offset_«safeName()»();
-			«EXPAND Select::evaluateSelectWire(false, true) FOR inWires.typeSelect(model::wires::SelectWire).first()»
-			if ($row === null) {
-				return false;
-			}
-			return true;
+			«LET inWires.typeSelect(model::wires::SelectWire).first() AS selectWire»
+				«IF model::domain::RemoteDomainObject.isInstance(selectWire.from)»
+					// possibly update the domain object this instance is contained in
+					«EXPAND RemoteDefinitions::considerUpdate FOR (model::domain::RemoteDomainObject) selectWire.from»
+				«ENDIF»
+				
+				$offset = get_current_offset_«safeName()»();
+				«EXPAND Select::evaluateSelectWire(false, true) FOR selectWire»
+				if ($row === null) {
+					return false;
+				}
+				return true;
+			«ENDLET»
 		«ENDIF»
 	}
 	

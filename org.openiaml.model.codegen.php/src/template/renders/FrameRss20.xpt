@@ -48,6 +48,12 @@ header("Content-Type: application/xml");
  *		If an {@model Frame#render RSS Frame} contains a {@model InputForm} with two
  *		{@model Button}s named 'next' and 'reset', and a {@model Label} named 'results count',
  *		this {@model InputForm} will be navigated over to create the items in the feed.
+ * @implementation Frame
+ *		An {@model Frame#render RSS frame} will obtain the <code>&lt;pubdate&gt;</code> for a
+ *		feed item first from a {@model DomainAttribute} named <code>pubDate</code>, or one
+ *		named <code>updated</code>.
+ * @implementation Frame
+ *		A {@model Frame#render RSS frame} will output empty fields if the sources are empty.
  */
 «DEFINE getFeedItems(model::visual::Frame frame) FOR model::visual::InputForm»
 	«LET children.typeSelect(model::visual::Button).select(b|b.name.toLowerCase() == "next") AS nextButton»
@@ -79,14 +85,14 @@ header("Content-Type: application/xml");
 		<?php
 		$rss_value = null;
 		«EXPAND getProperty(frame, null, "title", "rss_value") FOR this-»
-		if ($rss_value != null) { ?>
+		if ($rss_value !== null) { ?>
 			<title><?php echo escape_xml_string($rss_value); ?></title>
 		<?php } ?>
 		
 		<?php
 		$rss_value = null;
 		«EXPAND getProperty(frame, null, "link", "rss_value") FOR this-»
-		if ($rss_value != null) { ?> 
+		if ($rss_value !== null) { ?> 
 			<link><?php echo escape_xml_string($rss_value); ?></link>
 			<guid isPermaLink="true"><?php echo escape_xml_string($rss_value); ?></guid>
 		<?php } ?>
@@ -94,14 +100,19 @@ header("Content-Type: application/xml");
 		<?php
 		$rss_value = null;
 		«EXPAND getProperty(frame, null, "description", "rss_value") FOR this-»
-		if ($rss_value != null) { ?> 
+		if ($rss_value !== null) { ?> 
 			<description><?php echo escape_xml_string($rss_value); ?></description>
 		<?php } ?>
 		
 		<?php
 		$rss_value = null;
-		«EXPAND getProperty(frame, null, "updated", "rss_value") FOR this-»
-		if ($rss_value != null) { ?> 
+		// try "pubDate"
+		«EXPAND getProperty(frame, null, "pubDate", "rss_value") FOR this-»
+		if ($rss_value === null) {
+			// try "updated"
+			«EXPAND getProperty(frame, null, "updated", "rss_value") FOR this-»
+		}
+		if ($rss_value !== null) { ?> 
 			<pubDate><?php echo escape_xml_string($rss_value); ?></pubDate>
 		<?php } ?>
 	</item>
@@ -138,12 +149,12 @@ header("Content-Type: application/xml");
 	«IF direct != null-»
 		$«argName» = "«escapePhpString(direct)-»";
 	«ELSE-»
-		«IF !properties.select(p|p.name.toLowerCase() == propertyName).isEmpty-»
-			$«argName» = «EXPAND template::operations::Parameters::callParameterValue(true, false) FOR properties.selectFirst(p|p.name.toLowerCase() == propertyName)»;
+		«IF !properties.select(p|p.name.toLowerCase() == propertyName.toLowerCase()).isEmpty-»
+			$«argName» = «EXPAND template::operations::Parameters::callParameterValue(true, false) FOR properties.selectFirst(p|p.name.toLowerCase() == propertyName.toLowerCase())»;
 		«ELSE-»
-			«IF !children.select(p|p.name.toLowerCase() == propertyName).isEmpty-»
+			«IF !children.select(p|p.name.toLowerCase() == propertyName.toLowerCase()).isEmpty-»
 				$value = null;
-				«EXPAND template::visual::Render::getFieldValue(frame, "value") FOR children.selectFirst(p|p.name.toLowerCase() == propertyName)»
+				«EXPAND template::visual::Render::getFieldValue(frame, "value") FOR children.selectFirst(p|p.name.toLowerCase() == propertyName.toLowerCase())»
 				if ($value !== null) {
 					$«argName» = $value;
 				}

@@ -17,4 +17,10 @@
   <xsd:simpleType name="iamlDateTime">
     <xsd:restriction base="xsd:dateTime"/>
   </xsd:simpleType>
+  <xsd:simpleType name="iamlURL">
+    <xsd:restriction base="this:iamlString"/>
+  </xsd:simpleType>
+  <xsd:simpleType name="iamlOpenIDURL">
+    <xsd:restriction base="this:iamlURL"/>
+  </xsd:simpleType>
 </xsd:schema>

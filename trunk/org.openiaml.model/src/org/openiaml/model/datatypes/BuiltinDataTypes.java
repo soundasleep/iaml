@@ -52,11 +52,23 @@ public class BuiltinDataTypes {
 	 */
 	public static final String TYPE_ADDRESS = "http://openiaml.org/model/datatypes#iamlAddress";
 
+	/**
+	 * URL data type.
+	 */
+	public static final String TYPE_URL = "http://openiaml.org/model/datatypes#iamlURL";
+	
+	/**
+	 * OpenID URL data type.
+	 */
+	public static final String TYPE_OPENID_URL = "http://openiaml.org/model/datatypes#iamlOpenIDURL";
+
 	private static XSDSimpleTypeDefinition xsdString = null;
 	private static XSDSimpleTypeDefinition xsdEmail = null;
 	private static XSDSimpleTypeDefinition xsdDateTime = null;
 	private static XSDSimpleTypeDefinition xsdInteger = null;
 	private static XSDSimpleTypeDefinition xsdAddress = null;
+	private static XSDSimpleTypeDefinition xsdURL = null;
+	private static XSDSimpleTypeDefinition xsdOpenIDURL = null;
 	
 	/**
 	 * Get the {@link XSDSimpleTypeDefinition} for {@link #TYPE_INTEGER}.
@@ -129,6 +141,34 @@ public class BuiltinDataTypes {
 	}
 	
 	/**
+	 * Get the {@link XSDSimpleTypeDefinition} for {@link #TYPE_URL}.
+	 * May call {@link #updateTypeDefinitions()} if the types have not been
+	 * loaded from the plugin yet.
+	 *  
+	 * @return the XSDSimpleTypeDefinition for TYPE_URL
+	 */
+	public static final XSDSimpleTypeDefinition getTypeURL() {
+		if (xsdURL == null) {
+			updateTypeDefinitions();
+		}
+		return xsdURL;
+	}
+	
+	/**
+	 * Get the {@link XSDSimpleTypeDefinition} for {@link #TYPE_OPENID_URL}.
+	 * May call {@link #updateTypeDefinitions()} if the types have not been
+	 * loaded from the plugin yet.
+	 *  
+	 * @return the XSDSimpleTypeDefinition for TYPE_OPENID_URL
+	 */
+	public static final XSDSimpleTypeDefinition getTypeOpenIDURL() {
+		if (xsdOpenIDURL == null) {
+			updateTypeDefinitions();
+		}
+		return xsdOpenIDURL;
+	}
+	
+	/**
 	 * The source of the builtin data types.
 	 */
 	public static final String TYPE_DEFINITIONS = "platform:/plugin/org.openiaml.model/model/datatypes.xsd"; 
@@ -168,6 +208,10 @@ public class BuiltinDataTypes {
 					xsdDateTime = stype;
 				} else if (TYPE_ADDRESS.equals(u)) {
 					xsdAddress = stype;
+				} else if (TYPE_URL.equals(u)) {
+					xsdURL = stype;
+				} else if (TYPE_OPENID_URL.equals(u)) {
+					xsdOpenIDURL = stype;
 				}
 			}
 		}

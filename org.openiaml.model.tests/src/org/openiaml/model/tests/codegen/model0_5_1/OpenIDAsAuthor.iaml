@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.128240e31d2.f25">
+  <domainStores id="model.128240e31d2.f28" name="Database">
+    <children id="model.128240e31d2.f32" name="Post" outWires="wires.128240e326e.372 wires.128240e326e.39f">
+      <wires xsi:type="iaml.wires:SelectWire" id="wires.128240e326e.372" from="model.128240e31d2.f32" to="model.128240e31d2.f8a" name="select all" limit="10"/>
+      <wires xsi:type="iaml.wires:NewInstanceWire" id="wires.128240e326e.39f" from="model.128240e31d2.f32" to="model.128240e31d2.1030" name="new"/>
+      <attributes id="model.128240e31d2.f53" name="title"/>
+      <attributes id="model.128240e31d2.f55" name="author">
+        <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlOpenIDURL;XSDSimpleTypeDefinition=6"/>
+      </attributes>
+    </children>
+  </domainStores>
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.128240e326e.3c9" name="View Posts">
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.128240e31d2.f8a" name="View Post" outWires="wires.128240e326e.385" inWires="wires.128240e326e.372">
+      <wires xsi:type="iaml.wires:SetWire" id="wires.128240e326e.385" from="model.128240e31d2.f8a" to="visual.128240e326e.3f3" name="set"/>
+    </elements>
+    <children xsi:type="iaml.visual:InputForm" inWires="wires.128240e326e.385" id="visual.128240e326e.3f3" name="View"/>
+  </scopes>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.128240e326e.3ca" name="Create New Post">
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.128240e31d2.1030" name="New Post" outWires="wires.128240e326e.3f1" inWires="wires.128240e326e.39f">
+      <operations xsi:type="iaml:PrimitiveOperation" id="model.128240e31d2.10a0" name="save" inActions="wires.128240e326e.43a"/>
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.128240e326e.3f1" from="model.128240e31d2.1030" to="visual.128240e326e.468" name="sync"/>
+    </elements>
+    <children xsi:type="iaml.visual:InputForm" inWires="wires.128240e326e.3f1" id="visual.128240e326e.468" name="Create New">
+      <children xsi:type="iaml.visual:Button" id="visual.128240e326e.4ba" name="Save" outActions="wires.128240e326e.43a">
+        <actions xsi:type="iaml.wires:RunAction" id="wires.128240e326e.43a" name="onClick" from="visual.128240e326e.4ba" to="model.128240e31d2.10a0"/>
+      </children>
+    </children>
+  </scopes>
+</iaml:InternetApplication>

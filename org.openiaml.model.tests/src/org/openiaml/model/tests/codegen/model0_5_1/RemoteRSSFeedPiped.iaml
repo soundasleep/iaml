@@ -11,12 +11,13 @@
     </children>
   </domainStores>
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
-  <scopes xsi:type="iaml.visual:Frame" id="visual.1281f698836.14" name="View Remote Feed" outWires="wires.128236bedbd.d" render="RSS20">
-    <wires xsi:type="iaml.wires:DetailWire" id="wires.128236bedbd.d" from="visual.1281f698836.14" to="visual.128236bedbd.20" name="detail"/>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.1281f698836.14" name="View Remote Feed" render="RSS20">
     <elements xsi:type="iaml:DomainObjectInstance" id="model.1281f69878a.71" name="ten feeds" outWires="wires.1281f74c998.6" inWires="wires.1281f74c998.1">
       <wires xsi:type="iaml.wires:SetWire" id="wires.1281f74c998.6" from="model.1281f69878a.71" to="visual.1281f74c998.2d" name="set"/>
     </elements>
-    <children xsi:type="iaml.visual:InputForm" inWires="wires.1281f74c998.6" id="visual.1281f74c998.2d" name="navigate"/>
+    <children xsi:type="iaml.visual:InputForm" outWires="wires.128236bedbd.2e" inWires="wires.1281f74c998.6" id="visual.1281f74c998.2d" name="navigate">
+      <wires xsi:type="iaml.wires:DetailWire" id="wires.128236bedbd.2e" from="visual.1281f74c998.2d" to="visual.128236bedbd.20" name="detail"/>
+    </children>
   </scopes>
-  <scopes xsi:type="iaml.visual:Frame" id="visual.128236bedbd.20" name="Details" inWires="wires.128236bedbd.d"/>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.128236bedbd.20" name="Details" inWires="wires.128236bedbd.2e"/>
 </iaml:InternetApplication>

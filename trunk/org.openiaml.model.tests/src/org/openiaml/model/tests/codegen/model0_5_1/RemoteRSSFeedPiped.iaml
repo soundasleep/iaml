@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1281f69878a.14">
+  <domainStores id="model.1281f69878a.20" name="Remote Feeds">
+    <children xsi:type="iaml.domain:RemoteDomainObject" id="domain.1281f698855.5" name="Remote Event Listing" outWires="wires.1281f74c998.1" url="http://openiaml.org/publications/rss_sample.xml">
+      <wires xsi:type="iaml.wires:SelectWire" id="wires.1281f74c998.1" from="domain.1281f698855.5" to="model.1281f69878a.71" name="select" limit="10" orderBy="model.1281f69878a.3b"/>
+      <attributes id="model.1281f69878a.3b" name="title"/>
+      <attributes id="model.1281f69878a.3d" name="description"/>
+      <attributes id="model.1281f74c8dd.df" name="pubDate">
+        <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlDateTime;XSDSimpleTypeDefinition=4"/>
+      </attributes>
+    </children>
+  </domainStores>
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.1281f698836.14" name="View Remote Feed" outWires="wires.128236bedbd.d" render="RSS20">
+    <wires xsi:type="iaml.wires:DetailWire" id="wires.128236bedbd.d" from="visual.1281f698836.14" to="visual.128236bedbd.20" name="detail"/>
+    <elements xsi:type="iaml:DomainObjectInstance" id="model.1281f69878a.71" name="ten feeds" outWires="wires.1281f74c998.6" inWires="wires.1281f74c998.1">
+      <wires xsi:type="iaml.wires:SetWire" id="wires.1281f74c998.6" from="model.1281f69878a.71" to="visual.1281f74c998.2d" name="set"/>
+    </elements>
+    <children xsi:type="iaml.visual:InputForm" inWires="wires.1281f74c998.6" id="visual.1281f74c998.2d" name="navigate"/>
+  </scopes>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.128236bedbd.20" name="Details" inWires="wires.128236bedbd.d"/>
+</iaml:InternetApplication>

@@ -468,7 +468,7 @@ rule "Connect Instance.onChange to Results.update"
 		
 end
 
-rule "Connect results parameter to Results label update"
+rule "Connect results parameter to Results label update (onChange)"
 	when
 		instance : DomainObjectInstance (  )
 		event : EventTrigger ( instance.onChange == event )
@@ -493,3 +493,55 @@ rule "Connect results parameter to Results label update"
 		
 end
 
+/**
+ * @implementation InputForm,DomainObjectInstance
+ *		The '{@model Accessible#onAccess}' event for a paginated {@model InputForm}
+ *		is executed when the {@model DomainObjectInstance} is accessed for the first time.
+ */
+rule "Connect Instance.onAccess to Results.update"
+	when
+		instance : DomainObjectInstance (  )
+		
+		form : InputForm ( )
+		event : EventTrigger ( form.onAccess == event )
+		set : SetWire ( )
+		eval ( functions.connectsSet ( set, instance, form ))
+				
+		label : VisibleThing ( eContainer == form, name == "Results" )
+		updateOp : Operation ( eContainer == label, name == "update" )
+		
+		not ( run : RunAction ( from == event, to == updateOp ) )
+		
+		eval ( handler.veto( set ))
+		
+	then
+		RunAction run = handler.generatedRunAction(set, set, event, updateOp);
+		handler.setName(run, "update");
+		queue.add(run, drools);
+		
+end
+
+rule "Connect results parameter to Results label update (onAccess)"
+	when
+		instance : DomainObjectInstance (  )
+		
+		form : InputForm ( )
+		event : EventTrigger ( form.onAccess == event )
+		set : SetWire ( )
+		eval ( functions.connectsSet ( set, instance, form ))
+				
+		label : VisibleThing ( eContainer == form, name == "Results" )
+		updateOp : Operation ( eContainer == label, name == "update" )
+		
+		run : RunAction ( from == event, to == updateOp )
+		property : Property ( instance.results == property )
+		
+		not ( param : ParameterEdge ( from == property, to == run ))
+		
+		eval ( handler.veto( set ))
+		
+	then
+		ParameterEdge param = handler.generatedParameterEdge(set, set, property, run);
+		queue.add(param, drools);
+		
+end

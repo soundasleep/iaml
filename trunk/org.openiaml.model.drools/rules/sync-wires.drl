@@ -423,6 +423,7 @@ rule "Refresh New Instance Object mappings (except for generated primary keys) w
 		# create a new one
 		InputTextField text = handler.generatedInputTextField(sync, form);
 		handler.setName(text, attribute.getName());
+		handler.setType(text, attribute.getType());
 		queue.add(text, drools);
 
 end
@@ -449,6 +450,7 @@ rule "Refresh Domain Object mappings (except for generated primary keys) when sy
 		# create a new one
 		InputTextField text = handler.generatedInputTextField(sync, form);
 		handler.setName(text, attribute.getName());
+		handler.setType(text, attribute.getType());
 		queue.add(text, drools);
 
 end

@@ -47,6 +47,7 @@ require("first_class_types.php");
 require("emails.php");
 require("maps.php");
 require("properties.php");
+require("open_id.php");
 
 $log_unique_id = sprintf("%04x", rand(0,0xffff)) . "-" . session_id();
 function log_message($msg, $also_debug = true) {
@@ -522,11 +523,9 @@ function can_cast($value, $type) {
 		// casting to string
 		case "":
 		case "http://openiaml.org/model/datatypes#iamlString":
+		case "http://openiaml.org/model/datatypes#iamlURL":
+		case "http://openiaml.org/model/datatypes#iamlOpenIDURL":
 			// can always convert anything to a String
-			return true;
-
-		case "http://openiaml.org/model/datatypes#iamlAddress":
-			// can always convert anything to an Address
 			return true;
 		
 		// casting to email
@@ -647,6 +646,8 @@ function do_cast($value, $type) {
 		case "":
 		case "http://openiaml.org/model/datatypes#iamlString":
 		case "http://openiaml.org/model/datatypes#iamlAddress":
+		case "http://openiaml.org/model/datatypes#iamlURL":
+		case "http://openiaml.org/model/datatypes#iamlOpenIDURL":
 			// a date?
 			if ($value instanceof DateTime) {
 				// change to UTC first

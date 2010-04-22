@@ -29,6 +29,7 @@ public class AllModel0_5_1CodegenTests {
 		suite.addTestSuite(FeedProducerSimple.class);
 		suite.addTestSuite(RemoteRSSFeed.class);
 		suite.addTestSuite(RemoteRSSFeedPiped.class);
+		suite.addTestSuite(OpenIDAsAuthor.class);
 
 		return suite;
 	}

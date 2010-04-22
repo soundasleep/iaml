@@ -738,6 +738,8 @@ function can_cast(value, type) {
 		case "":
 		case "http://openiaml.org/model/datatypes#iamlString":
 		case "http://openiaml.org/model/datatypes#iamlAddress":
+		case "http://openiaml.org/model/datatypes#iamlURL":
+		case "http://openiaml.org/model/datatypes#iamlOpenIDURL":
 			// can always convert anything to a String
 			return true;
 		
@@ -876,6 +878,8 @@ function do_cast(value, type) {
 		case "":
 		case "http://openiaml.org/model/datatypes#iamlString":
 		case "http://openiaml.org/model/datatypes#iamlAddress":
+		case "http://openiaml.org/model/datatypes#iamlURL":
+		case "http://openiaml.org/model/datatypes#iamlOpenIDURL":
 			// a date?
 			if (value instanceof Date) {
 				// format as RFC 2822

@@ -100,6 +100,7 @@
 	
 	«REM»callbacks. TODO all the actual callbacks above should be moved into here«ENDREM»
 	«FILE "output/email_callback_send.php"»«EXPAND php::callbacks::EmailCallbackSend::emailCallbackSend»«ENDFILE»
+	«FILE "output/open_id_callback.php"»«EXPAND php::callbacks::OpenIdCallback::openIdCallback»«ENDFILE»
 	
 	«FILE "output/database_dump.php"»«EXPAND template::php::DatabaseDump::databaseDump»«ENDFILE»
 	«FILE "output/view_log.php"»«EXPAND php::includes::ViewLog::viewLog»«ENDFILE»

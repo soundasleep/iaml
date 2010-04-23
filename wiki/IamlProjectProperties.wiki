@@ -78,3 +78,15 @@ The handler used to render [http://openiaml.org/model/Map Maps]. Currently, the 
 ==google_maps_api_key==
 
 If using the `googlemaps` `map_handler` option, you need to provide an API key for your application. No default key is provided with IAML, you will have to [http://code.google.com/apis/maps/signup.html generate your own] (which is tied to your Google account), and agree with the terms and conditions provided.
+
+==proxy_host==
+
+When using [http://php.net/curl CURL], this is provided as the proxy host. For example, `proxy.example.com`. This is empty by default.
+
+==proxy_port==
+
+When using [http://php.net/curl CURL], this is provided as the proxy port. For example, `8080`. This is empty by default.
+
+==proxy_userpass==
+
+When using [http://php.net/curl CURL], this is provided as the proxy username and password. For example, `username:password`. This is empty by default.

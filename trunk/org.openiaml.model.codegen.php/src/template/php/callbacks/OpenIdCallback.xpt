@@ -20,7 +20,7 @@ $mode = require_get("mode");
 // the OpenID functions will output the appropriate instructions
 if ($mode == "start") {
 	// starting a callback request
-	$return = get_baseurl() . "open_id_callback.php?mode=return";
+	$return = get_baseurl() . "/open_id_callback.php?mode=return";
 	openid_ajax_callback($return);
 } elseif ($mode == "return") {
 	// returning from a callback

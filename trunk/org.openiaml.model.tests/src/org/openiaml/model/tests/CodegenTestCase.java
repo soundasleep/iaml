@@ -402,6 +402,8 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * <b>NOTE</b> that this resets the current WebClient context, which can cause
 	 * the client to lose sessions/cookies. If this is undesirable,
 	 * use {@link #gotoSitemapThenPage(IFile, String)}.
+	 * 
+	 * <p>{@inheritDoc}
 	 */
 	@Override
 	public void beginAt(String url) {

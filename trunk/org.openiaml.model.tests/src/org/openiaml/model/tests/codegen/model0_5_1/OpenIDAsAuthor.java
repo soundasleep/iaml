@@ -148,7 +148,7 @@ public class OpenIDAsAuthor extends CodegenTestCase {
 	public void testPageServerHasLink() throws Exception {
 		beginAt(OPENID_PAGE_SERVER);
 		String source = getPageSource();
-		assertContains("<link rel=\"openid.server\" href=\"" + OPENID_PAGE_SERVER + "\">", source);
+		assertContains("link rel=\"openid.server\" href=\"" + OPENID_PAGE_SERVER + "\"", source);
 	}
 
 	/**
@@ -159,8 +159,31 @@ public class OpenIDAsAuthor extends CodegenTestCase {
 	public void testPageDelegateHasLink() throws Exception {
 		beginAt(OPENID_PAGE_DELEGATE);
 		String source = getPageSource();
-		assertContains("<link rel=\"openid.server\" href=\"" + OPENID_PAGE_SERVER + "\">", source);
-		assertContains("<link rel=\"openid.delegate\" href=\"" + OPENID_PAGE_DELEGATE + "\">", source);
+		assertContains("link rel=\"openid.server\" href=\"" + OPENID_PAGE_SERVER + "\"", source);
+		assertContains("link rel=\"openid.delegate\" href=\"" + OPENID_PAGE_DELEGATE + "\"", source);
+	}
+
+	/**
+	 * Check that the page we are looking for actually contains the <link> we are looking for.
+	 * 
+	 * @throws Exception
+	 */
+	public void testPageServerPassHasLink() throws Exception {
+		beginAt(OPENID_PAGE_SERVER_PASS);
+		String source = getPageSource();
+		assertContains("link rel=\"openid.server\" href=\"" + OPENID_PAGE_SERVER_PASS + "\"", source);
+	}
+
+	/**
+	 * Check that the page we are looking for actually contains the <link> we are looking for.
+	 * 
+	 * @throws Exception
+	 */
+	public void testPageDelegatePassHasLink() throws Exception {
+		beginAt(OPENID_PAGE_DELEGATE_PASS);
+		String source = getPageSource();
+		assertContains("link rel=\"openid.server\" href=\"" + OPENID_PAGE_SERVER_PASS + "\"", source);
+		assertContains("link rel=\"openid.delegate\" href=\"" + OPENID_PAGE_DELEGATE_PASS + "\"", source);
 	}
 
 	/**
@@ -277,6 +300,8 @@ public class OpenIDAsAuthor extends CodegenTestCase {
 			setTextField("password", "test");
 			submit();
 		}
+		
+		System.err.println(getPageSource());
 		
 		// we should be directed back to our own page
 		{

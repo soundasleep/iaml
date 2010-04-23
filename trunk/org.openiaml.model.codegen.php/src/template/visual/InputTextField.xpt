@@ -173,6 +173,7 @@
 	<script language="Javascript" type="application/javascript">
 		/* <![CDATA[ */
 			function openid_authenticate_«safeName()»() {
+				<?php log_message("Current URL: " . get_current_url()); ?>
 				var url = "open_id_callback.php?mode=start";
 				url += "&url=" + encodeURIComponent(document.getElementById('«safeNameString(id)»').value);
 				url += "&final=" + encodeURIComponent('<?php echo htmlspecialchars(get_current_url()); ?>');

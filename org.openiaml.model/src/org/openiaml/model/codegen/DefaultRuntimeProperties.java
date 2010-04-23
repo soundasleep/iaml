@@ -28,6 +28,9 @@ public class DefaultRuntimeProperties {
 		properties.put("email_handler_file_destination", "email-output.properties");
 		properties.put("map_handler", "googlemaps");
 		properties.put("google_maps_api_key", "empty");
+		properties.put("proxy_host", "");
+		properties.put("proxy_port", "");
+		properties.put("proxy_userpass", "");
 
 		return properties;
 	}

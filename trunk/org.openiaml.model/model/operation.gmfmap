@@ -383,6 +383,50 @@
           href="iaml.gmfgraph#CastNode"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//CompositeCondition"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( CompositeCondition )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#CompositeConditionName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#CompositeConditionParentName"/>
+      </labelMappings>
+      <diagramNode
+          href="iaml.gmfgraph#CompositeCondition"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//PrimitiveCondition"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( PrimitiveCondition )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveConditionName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveConditionParentName"/>
+      </labelMappings>
+      <diagramNode
+          href="iaml.gmfgraph#PrimitiveCondition"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//DataFlowEdge"/>

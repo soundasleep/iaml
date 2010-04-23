@@ -525,9 +525,16 @@ function can_cast($value, $type) {
 		case "http://openiaml.org/model/datatypes#iamlString":
 		case "http://openiaml.org/model/datatypes#iamlAddress":
 		case "http://openiaml.org/model/datatypes#iamlURL":
-		case "http://openiaml.org/model/datatypes#iamlOpenIDURL":
 			// can always convert anything to a String
 			return true;
+		
+		case "http://openiaml.org/model/datatypes#iamlOpenIDURL":
+			// OpenID urls can only be created if they have been authenticated
+			// through OpenID
+			if (openid_is_authenticated($value)) {
+				return true;
+			}
+			return false;
 		
 		// casting to email
 		case "http://openiaml.org/model/datatypes#iamlEmail":
@@ -647,8 +654,7 @@ function do_cast($value, $type) {
 		case "":
 		case "http://openiaml.org/model/datatypes#iamlString":
 		case "http://openiaml.org/model/datatypes#iamlAddress":
-		case "http://openiaml.org/model/datatypes#iamlURL":
-		case "http://openiaml.org/model/datatypes#iamlOpenIDURL":
+		case "http://openiaml.org/model/datatypes#iamlU1RL":
 			// a date?
 			if ($value instanceof DateTime) {
 				// change to UTC first
@@ -660,6 +666,14 @@ function do_cast($value, $type) {
 			
 			return (string) $value;
 		
+		case "http://openiaml.org/model/datatypes#iamlOpenIDURL":
+			// if it's already been authenticated, pass
+			if (can_cast($value, $type)) {
+				return $value;
+			}
+			// otherwise, fails
+			return "";
+			
 		// casting to email
 		case "http://openiaml.org/model/datatypes#iamlEmail":
 			// can only convert strings

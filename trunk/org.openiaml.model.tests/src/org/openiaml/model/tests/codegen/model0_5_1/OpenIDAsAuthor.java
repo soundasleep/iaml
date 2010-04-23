@@ -289,7 +289,7 @@ public class OpenIDAsAuthor extends CodegenTestCase {
 		{
 			String target = getLabelIDForText("author");
 			assertLabeledFieldEquals(target, "");
-			setLabeledFormElementField(target, OPENID_PAGE_SERVER);
+			setLabeledFormElementField(target, openid);
 		}
 		
 		// there should be a button "Authenticate"
@@ -297,11 +297,10 @@ public class OpenIDAsAuthor extends CodegenTestCase {
 		
 		if (needPass) {
 			// we are now on another page, and need to provide a password
+			System.out.println(getPageSource());
 			setTextField("password", "test");
 			submit();
 		}
-		
-		System.err.println(getPageSource());
 		
 		// we should be directed back to our own page
 		{
@@ -310,7 +309,7 @@ public class OpenIDAsAuthor extends CodegenTestCase {
 		}
 		{
 			String target = getLabelIDForText("author");
-			assertLabeledFieldEquals(target, OPENID_PAGE_SERVER);
+			assertLabeledFieldEquals(target, openid);
 		}
 		
 		// we try clicking on the button
@@ -320,7 +319,7 @@ public class OpenIDAsAuthor extends CodegenTestCase {
 		assertNoProblem();
 		
 		// now if we try and view the news page, we will succeed
-		viewNewsPageSuccessfully(sitemap, "Created Title", OPENID_PAGE_SERVER);
+		viewNewsPageSuccessfully(sitemap, "Created Title", openid);
 		
 	}
 	

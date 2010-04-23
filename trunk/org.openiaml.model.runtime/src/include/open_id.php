@@ -8,10 +8,20 @@
 /**
  * Has the given URL been authenticated against the current session?
  */
-function is_authenticated($url) {
+function openid_is_authenticated($url) {
 	$done = isset($_SESSION["openid_authenticated"]) ? $_SESSION["openid_authenticated"] : array();
 	
 	return isset($done[$url]);
+}
+
+/**
+ * Mark the given URL as authenticated against our current session.
+ */
+function openid_mark_authenticated($url) {
+	if (!isset($_SESSION["openid_authenticated"])) {
+		$_SESSION["openid_authenticated"] = array();
+	}
+	$_SESSION["openid_authenticated"][$url] = $url;
 }
 
 function get_openid_links($url) {
@@ -80,7 +90,7 @@ function openid_retrieve($url, $return, $final) {
 
 	log_message("[openid] Found server: $server, delegate: $delegate");
 	
-	$identity = isset($delegate) ? $delegate : $url;
+	$identity = (isset($delegate) && $delegate) ? $delegate : $url;
 	
 	// first, establish a secret
 	$_SESSION["openid_secret"] = sprintf("%04x%04x%04x%04x", rand(0,0xffff), rand(0,0xffff), rand(0,0xffff), rand(0,0xffff));
@@ -166,6 +176,8 @@ function openid_callback() {
 	$server = $parse["server"];
 	$delegate = $parse["delegate"];
 	log_message("[openid] Found server: $server, delegate: $delegate");
+	
+	$identity = (isset($delegate) && $delegate) ? $delegate : $url;
 
 	// now construct the URL to redirect the user to
 	// this needs to be provided as POST, not GET
@@ -198,6 +210,8 @@ function openid_callback() {
 	log_message("[openid] Response: $response");
 	if (preg_match("/is_valid:true/", $response)) {
 		// ok
+		openid_mark_authenticated($identity);
+		
 		// redirect
 		log_message("[openid] Success: Redirecting to $final");
 		

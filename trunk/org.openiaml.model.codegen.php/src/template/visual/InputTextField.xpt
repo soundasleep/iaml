@@ -110,7 +110,6 @@
 		«REM»expand all children«ENDREM»
 		«EXPAND Render::renderVisual(currentFrame) FOREACH children-»
 		
-		«type.uRI»
 		«IF type != null && type.uRI == "http://openiaml.org/model/datatypes#iamlOpenIDURL"»
 			«EXPAND textFieldOpenID(currentFrame)»
 		«ENDIF»

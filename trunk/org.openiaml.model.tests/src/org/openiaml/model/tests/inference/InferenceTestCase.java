@@ -12,6 +12,7 @@ import org.jaxen.JaxenException;
 import org.openiaml.model.model.Action;
 import org.openiaml.model.model.ActionDestination;
 import org.openiaml.model.model.ActionSource;
+import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
@@ -40,6 +41,7 @@ import org.openiaml.model.model.Property;
 import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.StaticValue;
+import org.openiaml.model.model.TemporaryVariable;
 import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.WireDestination;
@@ -935,6 +937,25 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		return (CancelNode) assertHasOne(element, "iaml:nodes", CancelNode.class);
 	}
 	
+	
+	/**
+	 * Assert that the given element contains the given
+	 * CancelNode with the given exception text.
+	 *
+	 * @return The element found
+	 */
+	public CancelNode assertHasCancelNode(CompositeCondition element, String exceptionText) throws JaxenException {
+		CancelNode found = null;
+		for (ActivityNode node : element.getNodes()) {
+			if (node instanceof CancelNode && exceptionText.equals(((CancelNode) node).getExceptionText())) {
+				assertNull("Already found a CancelNode with exception text: " + found, found);
+				found = (CancelNode) node;
+			}
+		}
+		assertNotNull("Could not find any CancelNodes with exception text '" + exceptionText, found);
+		return found;
+	}
+	
 	/**
 	 * Assert that the given element <em>does not</em> contains the given
 	 * CancelNode.
@@ -993,6 +1014,26 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public OperationCallNode assertHasOperationCallNode(CompositeCondition element, String string) throws JaxenException {
 		return (OperationCallNode) queryOne(element, "iaml:nodes[iaml:name='" + string + "']");	
+	}
+	
+	/**
+	 * Assert that the given element contains the given
+	 * TemporaryVariable.
+	 *
+	 * @return The element found
+	 */
+	public TemporaryVariable assertHasTemporaryVariable(CompositeOperation element, String string) throws JaxenException {
+		return (TemporaryVariable) queryOne(element, "iaml:variables[iaml:name='" + string + "']");	
+	}
+	
+	/**
+	 * Assert that the given element contains the given
+	 * TemporaryVariable.
+	 *
+	 * @return The element found
+	 */
+	public TemporaryVariable assertHasTemporaryVariable(CompositeCondition element, String string) throws JaxenException {
+		return (TemporaryVariable) queryOne(element, "iaml:variables[iaml:name='" + string + "']");	
 	}
 	
 	/**

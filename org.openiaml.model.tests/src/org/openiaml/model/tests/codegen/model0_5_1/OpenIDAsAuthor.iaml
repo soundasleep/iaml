@@ -23,8 +23,17 @@
       <wires xsi:type="iaml.wires:SyncWire" id="wires.128240e326e.3f1" from="model.128240e31d2.1030" to="visual.128240e326e.468" name="sync"/>
     </elements>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.128240e326e.3f1" id="visual.128240e326e.468" name="Create New">
-      <children xsi:type="iaml.visual:Button" id="visual.128240e326e.4ba" name="Save" outActions="wires.128240e326e.43a">
+      <onAccess id="model.128240e31d2.15f1" outActions="wires.128240e326e.59c">
+        <actions xsi:type="iaml.wires:RunAction" id="wires.128240e326e.59c" name="run" from="model.128240e31d2.15f1" to="model.128240e31d2.14d1"/>
+      </onAccess>
+      <children xsi:type="iaml.visual:Button" id="visual.128240e326e.4ba" name="Save" outActions="wires.128240e326e.43a wires.128240e326e.573 wires.128240e326e.574">
         <actions xsi:type="iaml.wires:RunAction" id="wires.128240e326e.43a" name="onClick" from="visual.128240e326e.4ba" to="model.128240e31d2.10a0"/>
+        <actions xsi:type="iaml.wires:RunAction" id="wires.128240e326e.573" name="pass" from="visual.128240e326e.4ba" to="model.128240e31d2.14d1"/>
+        <actions xsi:type="iaml.wires:RunAction" id="wires.128240e326e.574" name="fail" from="visual.128240e326e.4ba" to="model.128240e31d2.14d2"/>
+      </children>
+      <children xsi:type="iaml.visual:Label" id="visual.128240e326e.5dc" name="Warning" defaultValue="Error: Could not save post.">
+        <operations xsi:type="iaml:PrimitiveOperation" id="model.128240e31d2.14d1" name="hide" inActions="wires.128240e326e.573 wires.128240e326e.59c"/>
+        <operations xsi:type="iaml:PrimitiveOperation" id="model.128240e31d2.14d2" name="show" inActions="wires.128240e326e.574"/>
       </children>
     </children>
   </scopes>

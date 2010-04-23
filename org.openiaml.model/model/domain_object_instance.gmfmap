@@ -480,6 +480,34 @@
           href="iaml.gmfgraph#EventTrigger"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//DomainObjectInstance/canSave"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//PrimitiveCondition"/>
+      <domainSpecialization
+          body="return domainElement instanceof org.openiaml.model.model.PrimitiveCondition  &#xD;&#xA;&amp;&amp; domainElement.eContainingFeature().getName()&#xD;&#xA;.equals(&quot;canSave&quot;);"
+          language="java"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveConditionName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveConditionParentName"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="domain_object_instance.gmftool#//@palette/@tools.0/@tools.6"/>
+      <diagramNode
+          href="iaml.gmfgraph#PrimitiveCondition"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/SyncWire"/>

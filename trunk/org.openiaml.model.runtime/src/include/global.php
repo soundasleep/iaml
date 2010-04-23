@@ -523,6 +523,7 @@ function can_cast($value, $type) {
 		// casting to string
 		case "":
 		case "http://openiaml.org/model/datatypes#iamlString":
+		case "http://openiaml.org/model/datatypes#iamlAddress":
 		case "http://openiaml.org/model/datatypes#iamlURL":
 		case "http://openiaml.org/model/datatypes#iamlOpenIDURL":
 			// can always convert anything to a String

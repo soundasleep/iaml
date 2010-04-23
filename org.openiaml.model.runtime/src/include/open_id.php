@@ -17,9 +17,10 @@ function is_authenticated($url) {
 function get_openid_links($url) {
 
 	log_message("[openid] Retrieving $url");
-	$remote = @file_get_contents($url);
-	if ($remote === false) {
-		log_message("[openid] file_get_contents() failed");
+	$url = new DownloadURL($url);
+	$remote = $url->fetch();
+	if (!$url->passed()) {
+		log_message("[openid] Downloading URL failed: " . $url->getError());
 		return false;
 	}
 	
@@ -181,8 +182,14 @@ function openid_callback() {
 	$url = url_add($url, $args);
 	
 	log_message("[openid] Asking for confirmation: $url");
-	$response = file_get_contents($url);
-	if ($response === false) {
+	
+	$request = new DownloadURL($url);
+	$response = $request->fetch();
+	if (!$request->passed()) {
+		log_message("[openid] Downloading URL failed: " . $request->getError());
+		return false;
+	}
+	if (!$response) {
 		throw new IamlRuntimeException("Could not parse url '$url'");
 	}
 	
@@ -191,12 +198,13 @@ function openid_callback() {
 		// ok
 		// redirect
 		log_message("[openid] Success: Redirecting to $final");
-		echo "redirect " . urlencode($final);
+		
+		// we are not in AJAX mode; we are actually redirecting the entire client
+		server_redirect($final);
+		die;
 	} else {
 		log_message("[openid] Failure");
-		throw new IamlRuntimeException("Response from '$url' was not authenticated");
+		throw new IamlRuntimeException("Response from '$url' was not authenticated: $response");
 	}
 	
 }
-
-

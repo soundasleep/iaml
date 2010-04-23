@@ -7,6 +7,7 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
@@ -17,6 +18,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.xml.xpath.XPathExpressionException;
 
@@ -377,6 +379,11 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	/**
 	 * Generate the properties required for ICodeGenerator.
 	 * 
+	 * <p>This method will look for a local file <code>proxy.properties</code>;
+	 * if this file exists, this Properties file will be loaded and the
+	 * {@link DefaultRuntimeProperties#getDefaultProperties() default properties}
+	 * will be overridden with these.
+	 * 
 	 * @see org.openiaml.model.codegen.ICodeGenerator#generateCode(IFile, IProgressMonitor, Map)
 	 * @return
 	 */
@@ -389,6 +396,23 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 		properties.put("config_runtime", CONFIG_RUNTIME);
 		properties.put("config_web", CONFIG_WEB);
 		properties.put("debug", "true");
+		
+		// we might want to get instance-specific information
+		File f = new File("proxy.properties");
+		if (f.exists()) {
+			Properties p = new Properties();
+			try {
+				p.load(new FileReader(f));
+			} catch (IOException e) {
+				throw new RuntimeException("Problem loading file '" + f + "': " + e.getMessage(), e);
+			}
+			for (Object k : p.keySet()) {
+				if (k instanceof String) {
+					String ks = (String) k;
+					properties.put(ks, p.getProperty(ks));
+				}
+			}
+		}
 
 		return properties;
 	}

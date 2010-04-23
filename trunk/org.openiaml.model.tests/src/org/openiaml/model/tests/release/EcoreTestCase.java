@@ -29,6 +29,15 @@ public class EcoreTestCase extends XmlTestCase {
 		File target = new File("../org.openiaml.model.codegen.php/src/metamodel/iaml-current.ecore");
 		
 		assertFileExists(source);
+		if (!target.exists()) {
+			String sourceString = readFile(source);
+			FileWriter fw = new FileWriter(target);
+			fw.write(sourceString);
+			fw.close();
+			
+			System.out.println("Copied '" + source + "' to '" + target + "'");
+		}
+		
 		assertFileExists(target);
 		
 		String sourceString = readFile(source);

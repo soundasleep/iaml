@@ -168,22 +168,24 @@ function openid_callback() {
 	log_message("[openid] Found server: $server, delegate: $delegate");
 
 	// now construct the URL to redirect the user to
+	// this needs to be provided as POST, not GET
 	$url = $server;
-	$args = array(
-		"openid.mode" => "check_authentication",
-		"openid.assoc_handle" => require_get("openid_assoc_handle", ""),
-		"openid.sig" => require_get("openid_sig", ""),
-		"openid.signed" => require_get("openid_signed", ""),
-		"openid.response_nonce" => require_get("openid_response_nonce", ""),
-		"openid.identity" => require_get("openid_identity", ""),
-		"openid.return_to" => require_get("openid_return_to", ""),
-		"openid.invalidate_handle" => "123456",
-	);
-	$url = url_add($url, $args);
+
+	// we MUST copy over all keys of 'openid_'
+	$data = array();
+	foreach ($_GET as $key => $value) {
+		if (substr($key, 0, 7) == "openid_") {
+			$data["openid." . substr($key, 7)] = require_get($key);
+		}
+	}
+
+	// replace openid.mode
+	$data["openid.mode"] = "check_authentication";
+	print_r($data);
 	
-	log_message("[openid] Asking for confirmation: $url");
+	log_message("[openid] Asking for confirmation: $url, data = " . print_r($data, true));
 	
-	$request = new DownloadURL($url);
+	$request = new DownloadURL($url, "POST", $data);
 	$response = $request->fetch();
 	if (!$request->passed()) {
 		log_message("[openid] Downloading URL failed: " . $request->getError());

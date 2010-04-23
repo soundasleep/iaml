@@ -743,11 +743,19 @@ function do_cast($value, $type) {
 class DownloadURL {
 
 	private $url = null;
+	private $type = null;
+	private $args = null;
 	private $passed = false;
 	private $error = null;
 	
-	public function __construct($url) {
+	/**
+	 * @param $args if $type is POST, then these arguments will be posted
+	 * 		as POST data to the target request
+	 */
+	public function __construct($url, $type = "GET", $args = array()) {
 		$this->url = $url;
+		$this->type = $type;
+		$this->args = $args;
 	}
 
 	/**
@@ -768,6 +776,23 @@ class DownloadURL {
 		}
 		if (defined('PROXY_USERPASS') && PROXY_USERPASS) {
 			curl_setopt($ch, CURLOPT_PROXYUSERPWD, PROXY_USERPASS); 
+		}
+		
+		// are we using POST?
+		switch ($this->type) {
+			// OK
+			case "GET":
+				break;
+			
+			// POST
+			case "POST":
+				curl_setopt($ch, CURLOPT_POST, true);
+				curl_setopt($ch, CURLOPT_POSTFIELDS, $this->args);
+				break;
+			
+			default:
+				throw new 
+				IamlRuntimeException("Unknown mode " . $this->type);
 		}
 		
 		$output = curl_exec($ch);

@@ -30,12 +30,14 @@ When installing PHP, make sure that you have the following extensions enabled:
 
   * PDO
   * SQLite over PDO
+  * CURL
 
 In Windows, this is achieved by selecting the following configuration directives in your {{{php.ini}}}:
 
 {{{
 extension=php_pdo.dll
 extension=php_pdo_sqlite.dll
+extension=php_curl.dll
 }}}
 
 =Configure Apache=

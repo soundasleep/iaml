@@ -738,6 +738,58 @@ function do_cast($value, $type) {
 }
 
 /**
+ * Wraps information for downloading a given URL.
+ */
+class DownloadURL {
+
+	private $url = null;
+	private $passed = false;
+	private $error = null;
+	
+	public function __construct($url) {
+		$this->url = $url;
+	}
+
+	/**
+	 * Actually fetch the URL. This method blocks.
+	 * Returns the downloaded URL (if any).
+	 */
+	public function fetch() {
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $this->url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		
+		// set proxy information?
+		if (defined('PROXY_HOST') && PROXY_HOST) {
+			curl_setopt($ch, CURLOPT_PROXY, PROXY_HOST); 
+		}
+		if (defined('PROXY_PORT') && PROXY_PORT) {
+			curl_setopt($ch, CURLOPT_PROXYPORT, PROXY_PORT); 
+		}
+		if (defined('PROXY_USERPASS') && PROXY_USERPASS) {
+			curl_setopt($ch, CURLOPT_PROXYUSERPWD, PROXY_USERPASS); 
+		}
+		
+		$output = curl_exec($ch);
+		
+		$this->passed = (curl_errno($ch) == 0);
+		$this->error = curl_error($ch);
+
+		curl_close($ch);
+		return $output;
+	}
+	
+	public function passed() {
+		return $this->passed;
+	}
+	
+	public function getError() {
+		return $this->error;
+	}
+	
+}
+
+/**
  * Represents a stack for function calls.
  */
 class CallStack {

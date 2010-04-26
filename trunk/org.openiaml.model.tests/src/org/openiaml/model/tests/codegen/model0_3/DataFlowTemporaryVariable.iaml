@@ -20,12 +20,12 @@
       <onChange id="model.120ac60dcea.133" outActions="wires.120ac60dd48.b8">
         <actions xsi:type="iaml.wires:RunAction" inParameterEdges="wires.120ac60dd48.cc" id="wires.120ac60dd48.b8" name="run" from="model.120ac60dcea.133" to="model.120ac60dcea.198"/>
       </onChange>
-      <properties id="model.120ac60dcea.1d9" name="fieldValue" outParameterEdges="wires.120ac60dd48.cc">
+      <fieldValue id="model.120ac60dcea.1d9" name="fieldValue" outParameterEdges="wires.120ac60dd48.cc">
         <parameterEdges id="wires.120ac60dd48.cc" from="model.120ac60dcea.1d9" to="wires.120ac60dd48.b8"/>
-      </properties>
+      </fieldValue>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.120ac60dd48.2c7" name="destination">
-      <properties id="model.120ac60dcea.17a" name="fieldValue" inFlows="model.120ac60dcea.3aa"/>
+      <fieldValue id="model.120ac60dcea.17a" name="fieldValue" inFlows="model.120ac60dcea.3aa"/>
     </children>
   </scopes>
 </iaml:InternetApplication>

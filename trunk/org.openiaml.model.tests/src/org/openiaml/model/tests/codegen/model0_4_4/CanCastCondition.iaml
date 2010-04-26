@@ -36,15 +36,15 @@
       <executionEdges id="model.1274f8f028d.25a" from="operations.1274f8534e0.1" to="operations.1274f877c61.10"/>
     </operations>
     <children xsi:type="iaml.visual:InputTextField" id="visual.1274f76c0e0.123" name="String">
-      <properties id="model.1274f76bcd9.69" name="fieldValue" outFlows="model.1274f8533f5.25 model.1274f8f028d.2b">
+      <fieldValue id="model.1274f76bcd9.69" name="fieldValue" outFlows="model.1274f8533f5.25 model.1274f8f028d.2b">
         <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlString;XSDSimpleTypeDefinition=1"/>
-      </properties>
+      </fieldValue>
       <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlString;XSDSimpleTypeDefinition=1"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.1274f76c0e0.129" name="Target">
-      <properties id="model.1274f76bcd9.95" name="fieldValue" inFlows="model.1274f8533f5.2a model.1274f8f028d.3a7">
+      <fieldValue id="model.1274f76bcd9.95" name="fieldValue" inFlows="model.1274f8533f5.2a model.1274f8f028d.3a7">
         <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
-      </properties>
+      </fieldValue>
       <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.1274f76c0e0.131" name="Run" outActions="wires.1274f76c1da.64">

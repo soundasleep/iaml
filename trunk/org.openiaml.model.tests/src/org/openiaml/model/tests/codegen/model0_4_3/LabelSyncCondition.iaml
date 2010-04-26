@@ -13,7 +13,7 @@
       <executionEdges id="model.126c0191fac.a5" name="y" from="operations.126c01921cf.7" to="operations.126c01921cf.3"/>
     </conditions>
     <children xsi:type="iaml.visual:InputTextField" id="visual.126c01921cf.bf" name="Allow Sync?">
-      <properties id="model.126c0191fac.5d" name="fieldValue" outFlows="model.126c0191fac.a6" defaultValue="true"/>
+      <fieldValue id="model.126c0191fac.5d" name="fieldValue" outFlows="model.126c0191fac.a6" defaultValue="true"/>
     </children>
     <children xsi:type="iaml.visual:Label" inWires="wires.126c01921cf.1a" id="visual.126c01921cf.c0" name="Label"/>
     <children xsi:type="iaml.visual:InputTextField" outWires="wires.126c01921cf.1a" id="visual.126c01921cf.c1" name="Field">

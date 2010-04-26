@@ -24,7 +24,7 @@
       <actions xsi:type="iaml.wires:RunAction" id="wires.124233df3ca.1b" name="onClick" from="visual.124233df292.13" to="model.124233df234.66"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.124233df292.55" name="target field">
-      <properties id="model.124233df234.c5" name="fieldValue" inFlows="model.124233df234.ee"/>
+      <fieldValue id="model.124233df234.c5" name="fieldValue" inFlows="model.124233df234.ee"/>
     </children>
   </scopes>
 </iaml:InternetApplication>

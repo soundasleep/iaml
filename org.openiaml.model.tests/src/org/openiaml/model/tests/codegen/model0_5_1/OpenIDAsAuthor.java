@@ -115,7 +115,10 @@ public class OpenIDAsAuthor extends CodegenTestCase {
 	public void testCreateNewPostWithOpenID() throws Exception {
 		IFile sitemap = beginAtSitemapThenPage("Create New Post");
 		assertNoProblem();
-		
+
+		// it is not present
+		assertLabelTextNotPresent("Error: Could not save post.");
+
 		// edit the title
 		{
 			String target = getLabelIDForText("title");
@@ -136,8 +139,14 @@ public class OpenIDAsAuthor extends CodegenTestCase {
 		// there should be a problem
 		assertProblem();
 		
+		// the warning has now shown
+		assertLabelTextExactlyPresent("Error: Could not save post.");
+		
 		// and we can't view the news page
 		viewNewsPageUnsuccessfully(sitemap);
+		
+		// TODO: add a test case to check that the Warning label disappears
+		// when we authenticate successfully
 	}
 
 	/**

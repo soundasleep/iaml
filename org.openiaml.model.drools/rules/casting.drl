@@ -137,11 +137,12 @@ rule "Add 'can cast?' condition check for onAccess connecting to Init"
 	when
 		source : Accessible ( )
 		target : CanBeSynced ( )
+		targetc : Changeable ( eval(target.equals(targetc)) )
 		
 		sw : SyncWire ( )
 		eval ( functions.connects(sw, source, target) )
 		
-		fieldValue : Property ( target.fieldValue == fieldValue )		
+		fieldValue : Property ( targetc.fieldValue == fieldValue )		
 
 		event : EventTrigger ( source.onAccess == event )
 		upd : Operation ( name == "init", eContainer == source )

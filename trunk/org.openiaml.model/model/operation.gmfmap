@@ -522,6 +522,32 @@
         xsi:type="ecore:EReference"
         href="iaml.ecore#//Action/to"/>
   </links>
+  <links>
+    <domainMetaElement
+        href="iaml.ecore#//wires/ConditionEdge"/>
+    <domainSpecialization
+        body="self.oclIsTypeOf( ConditionEdge )"/>
+    <labelMappings
+        xsi:type="gmfmap:FeatureLabelMapping">
+      <diagramLabel
+          href="iaml.gmfgraph#ConditionEdgeName"/>
+      <features
+          href="iaml.ecore#//NamedElement/name"/>
+    </labelMappings>
+    <containmentFeature
+        href="iaml.ecore#//ContainsWires/conditionEdges"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="operation.gmftool#//@palette/@tools.3/@tools.1"/>
+    <diagramLink
+        href="iaml.gmfgraph#ConditionEdge"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//wires/ConditionEdge/from"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//wires/ConditionEdge/to"/>
+  </links>
   <diagram>
     <diagramCanvas
         href="iaml.gmfgraph#model"/>

@@ -39,172 +39,28 @@ rule "Create empty domain store"
 end
 
 /**
- * @inference InputTextField,Property An untyped {@model InputTextField} 
+ * @inference Changeable,Property A {@model Changeable} 
  * 		contains an untyped {@model Property property} named 'fieldValue'.
- * @inference InputTextField,Property If set, the {@model VisibleThing#fieldValue fieldValue}
- *		is used as the default value of the created {@model Property property} named 'fieldValue'.   
+ * @inference Changeable,Property If set, the {@model Changeable#defaultValue defaultValue}
+ *		is used as the default value of the created {@model Changeable#fieldValue } {@model Property property}.   
  */
-rule "Create field value for input text field (untyped)"
+rule "Create field value for Changeable (untyped)"
 	when
-		f : InputTextField( type == null )
-		not (Property( eContainer == f, name=="fieldValue" ))
+		f : Changeable( )
+		not (prop : Property( eContainer == f, f.fieldValue == prop ))
 			
 		eval ( handler.veto( f ))
 		
 	then
-		Property fieldValue = handler.generatedProperty(f, f);
-		handler.setName(fieldValue, "fieldValue");
-		handler.setType(fieldValue, null);
-		// set default to fieldValue ONLY if fieldValue is set
-		// (we want to get an error if we try to access an undefined variable)
-		if (f.getFieldValue() != null) {
-			handler.setDefault(fieldValue, f.getFieldValue());
-		}
-		
-		queue.add(fieldValue, drools);
-		
-end
-
-/**
- * @inference InputTextField,Property A typed {@model InputTextField} 
- * 		contains a typed {@model Property property} named 'fieldValue'.
- */
-rule "Create field value for input text field (typed)"
-	when
-		f : InputTextField( type != null )
-		not (Property( eContainer == f, name=="fieldValue" ))
-		
-		eval ( handler.veto( f ))
-			
-	then
-		Property fieldValue = handler.generatedProperty(f, f);
+		Property fieldValue = handler.generatedPropertyFieldValue(f, f);
 		handler.setName(fieldValue, "fieldValue");
 		handler.setType(fieldValue, f.getType());
 		// set default to fieldValue ONLY if fieldValue is set
 		// (we want to get an error if we try to access an undefined variable)
-		if (f.getFieldValue() != null) {
-			handler.setDefault(fieldValue, f.getFieldValue());
-		}
-		queue.add(fieldValue, drools);
-		
-end
-
-/**
- * @inference Label,Property A typed {@model Label} 
- * 		contains a typed {@model Property property} named 'fieldValue'.
- */
-rule "Create field value for label (typed)"
-	when
-		f : Label( type != null )
-		not (Property( eContainer == f, name=="fieldValue" ))
-		
-		eval ( handler.veto( f ))
-			
-	then
-		Property fieldValue = handler.generatedProperty(f, f);
-		handler.setName(fieldValue, "fieldValue");
-		handler.setType(fieldValue, f.getType());
-
-		// set default to fieldValue ONLY if fieldValue is set
-		// (we want to get an error if we try to access an undefined variable)
-		if (f.getFieldValue() != null) {
-			handler.setDefault(fieldValue, f.getFieldValue());
+		if (f.getDefaultValue() != null) {
+			handler.setDefault(fieldValue, f.getDefaultValue());
 		}
 		
-		queue.add(fieldValue, drools);
-		
-end
-
-/**
- * @inference Label,Property An untyped {@model Label} 
- * 		contains an untyped {@model Property property} named 'fieldValue'.
- */
-rule "Create field value for label (untyped)"
-	when
-		f : Label( type == null )
-		not (Property( eContainer == f, name=="fieldValue" ))
-		
-		eval ( handler.veto( f ))
-			
-	then
-		Property fieldValue = handler.generatedProperty(f, f);
-		handler.setName(fieldValue, "fieldValue");
-		handler.setType(fieldValue, null);
-
-		// set default to fieldValue ONLY if fieldValue is set
-		// (we want to get an error if we try to access an undefined variable)
-		if (f.getFieldValue() != null) {
-			handler.setDefault(fieldValue, f.getFieldValue());
-		}
-		
-		queue.add(fieldValue, drools);
-		
-end
-
-/**
- * @inference Map,Property A {@model Map} 
- * 		contains a {@model Property property} named 'fieldValue'.
- */
-rule "Create field value for map"
-	when
-		f : Map( )
-		not (Property( eContainer == f, name=="fieldValue" ))
-		
-		eval ( handler.veto( f ))
-			
-	then
-		Property fieldValue = handler.generatedProperty(f, f);
-		handler.setName(fieldValue, "fieldValue");
-
-		// set default to fieldValue ONLY if fieldValue is set
-		// (we want to get an error if we try to access an undefined variable)
-		if (f.getFieldValue() != null) {
-			handler.setDefault(fieldValue, f.getFieldValue());
-		}
-		
-		queue.add(fieldValue, drools);
-		
-end
-
-/**
- * @inference MapPoint,Property A {@model MapPoint} 
- * 		contains a {@model Property property} named 'fieldValue'.
- */
-rule "Create field value for map point"
-	when
-		f : MapPoint( )
-		not (Property( eContainer == f, name=="fieldValue" ))
-		
-		eval ( handler.veto( f ))
-			
-	then
-		Property fieldValue = handler.generatedProperty(f, f);
-		handler.setName(fieldValue, "fieldValue");
-
-		// set default to fieldValue ONLY if fieldValue is set
-		// (we want to get an error if we try to access an undefined variable)
-		if (f.getFieldValue() != null) {
-			handler.setDefault(fieldValue, f.getFieldValue());
-		}
-		
-		queue.add(fieldValue, drools);
-		
-end
-
-/**
- * @inference DomainAttribute,Property A {@model DomainAttribute} 
- *		contains a {@model Property property} named 'fieldValue'.
- */
-rule "Create field value for domain attribute"
-	when
-		f : DomainAttribute( )
-		not (Property( eContainer == f, name=="fieldValue" ))
-		
-		eval ( handler.veto( f ))
-			
-	then
-		Property fieldValue = handler.generatedProperty(f, f);
-		handler.setName(fieldValue, "fieldValue");
 		queue.add(fieldValue, drools);
 		
 end
@@ -213,7 +69,7 @@ end
  * @inference Property All {@model Property ApplicationElementProperties}
  * 		will have a {@model CompositeCondition} created called "is set".
  */
-rule "ApplicationElementProperties will also have a related 'is set' condition"
+rule "Properties will also have a related 'is set' condition"
 	when
 		container : ContainsConditions ( )
 		containerGe : GeneratesElements ( eval(containerGe == container) )

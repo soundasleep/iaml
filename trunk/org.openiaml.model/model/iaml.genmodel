@@ -28,7 +28,6 @@
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//DomainAttribute">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//DomainAttribute/primaryKey"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainAttribute/type"/>
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//ActivityNode"/>
     <genClasses image="false" ecoreClass="iaml.ecore#//Operation">
@@ -63,7 +62,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//VisibleThing/children"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//VisibleThing/values"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//VisibleThing/onClick"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//VisibleThing/fieldValue"/>
     </genClasses>
     <genClasses image="false" ecoreClass="iaml.ecore#//ContainsProperties">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ContainsProperties/properties"/>
@@ -166,7 +164,6 @@
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//DomainAttributeInstance">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//DomainAttributeInstance/autosave"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainAttributeInstance/type"/>
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//QueryParameter">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//QueryParameter/defaultValue"/>
@@ -174,6 +171,9 @@
     <genClasses ecoreClass="iaml.ecore#//CanBeSynced"/>
     <genClasses image="false" ecoreClass="iaml.ecore#//Changeable">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Changeable/onChange"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Changeable/fieldValue"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//Changeable/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//Changeable/defaultValue"/>
     </genClasses>
     <genClasses image="false" ecoreClass="iaml.ecore#//Accessible">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Accessible/onAccess"/>
@@ -202,16 +202,9 @@
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//visual/Frame/render"/>
       </genClasses>
       <genClasses ecoreClass="iaml.ecore#//visual/InputForm"/>
-      <genClasses ecoreClass="iaml.ecore#//visual/InputTextField">
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference iaml.ecore#//visual/InputTextField/type"/>
-      </genClasses>
+      <genClasses ecoreClass="iaml.ecore#//visual/InputTextField"/>
       <genClasses ecoreClass="iaml.ecore#//visual/Button"/>
-      <genClasses ecoreClass="iaml.ecore#//visual/Label">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//visual/Label/defaultValue"/>
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference iaml.ecore#//visual/Label/type"/>
-      </genClasses>
+      <genClasses ecoreClass="iaml.ecore#//visual/Label"/>
       <genClasses ecoreClass="iaml.ecore#//visual/Map"/>
       <genClasses ecoreClass="iaml.ecore#//visual/MapPoint"/>
     </nestedGenPackages>

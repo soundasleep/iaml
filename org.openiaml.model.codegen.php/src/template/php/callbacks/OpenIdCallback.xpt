@@ -21,7 +21,7 @@ $mode = require_get("mode");
 if ($mode == "start") {
 	// starting a callback request
 	$return = get_baseurl() . "/open_id_callback.php?mode=return";
-	openid_ajax_callback($return);
+	openid_ajax_callback($return, require_get("id"));
 } elseif ($mode == "return") {
 	// returning from a callback
 	openid_callback();

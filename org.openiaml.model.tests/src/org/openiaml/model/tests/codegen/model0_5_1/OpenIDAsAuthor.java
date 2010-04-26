@@ -228,8 +228,61 @@ public class OpenIDAsAuthor extends CodegenTestCase {
 		doSuccessfulOpenID("testWithDelegatePassword", OPENID_PAGE_DELEGATE_PASS, true);
 	}
 	
+	/**
+	 * Try {@link #OPENID_PAGE_DELEGATE_PASS}, but provide the wrong password,
+	 * so we have to login again.
+	 *  
+	 * @throws Exception
+	 */
 	public void testWithIncorrectPassword() throws Exception {
-		fail("TODO test cases with an incorrect password");
+		IFile sitemap = beginAtSitemapThenPage("Create New Post");
+		assertNoProblem();
+		
+		// edit the title
+		{
+			String target = getLabelIDForText("title");
+			assertLabeledFieldEquals(target, "");
+			setLabeledFormElementField(target, "Created Title");
+		}
+		
+		// set the URL
+		{
+			String target = getLabelIDForText("author");
+			assertLabeledFieldEquals(target, "");
+			setLabeledFormElementField(target, OPENID_PAGE_DELEGATE_PASS);
+		}
+		
+		// there should be a button "Authenticate"
+		clickButtonWithText("Authenticate");
+		
+		// we are now on another page, and need to provide a password
+		setTextField("password", "wrong");	// the wrong password!
+		submit();
+		
+		// we are still on the same page 
+		setTextField("password", "test");	// set it right
+		submit();
+		
+		// carry on as normal
+		
+		// we should be directed back to our own page
+		{
+			String target = getLabelIDForText("title");
+			assertLabeledFieldEquals(target, "Created Title");
+		}
+		{
+			String target = getLabelIDForText("author");
+			assertLabeledFieldEquals(target, OPENID_PAGE_DELEGATE_PASS);
+		}
+		
+		// we try clicking on the button
+		clickButtonWithText("Save");
+		
+		// there should NOT be a problem
+		assertNoProblem();
+		
+		// now if we try and view the news page, we will succeed
+		viewNewsPageSuccessfully(sitemap, "Created Title", OPENID_PAGE_DELEGATE_PASS);
 	}
 	
 	/**
@@ -257,10 +310,11 @@ public class OpenIDAsAuthor extends CodegenTestCase {
 		}
 		
 		// there should be a button "Authenticate"
+		assertTextNotPresent("Could not load authentication from invalid");
 		clickButtonWithText("Authenticate");
-		
+
 		// but we should get an error
-		assertProblem();
+		assertTextPresent("Could not load authentication from invalid");
 		
 		// and we can't view the news page
 		viewNewsPageUnsuccessfully(sitemap);

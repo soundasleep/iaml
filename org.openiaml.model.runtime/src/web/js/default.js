@@ -227,6 +227,30 @@ function execute_queued_url(url, counter, function_queue) {
 		      						debug("[instruction] operation complete");
 		      						break;
 
+		      					case "openid_fail":
+		      						if (bits.length != 3) {
+		      							throw new IamlJavascriptException("'openid_fail' instruction called with incorrect number of arguments: expected 3, found " + bits.length);
+		      						}
+		      						var element_id = decodeURIComponent(bits[1]) + "_status";
+		      						var message = decodeURIComponent(bits[2]);
+		      						debug("[instruction] openid fail(" + element_id + ")");
+		      						if (!document.getElementById(element_id))
+		      							throw new IamlJavascriptException("No such element '" + element_id + "'");
+		      						document.getElementById(element_id).innerHTML = message;
+		      						document.getElementById(element_id).style.display = '';
+		      						break;
+
+		      					case "openid_pass":
+		      						if (bits.length != 2) {
+		      							throw new IamlJavascriptException("'openid_pass' instruction called with incorrect number of arguments: expected 2, found " + bits.length);
+		      						}
+		      						var element_id = decodeURIComponent(bits[1]) + "_status";
+		      						debug("[instruction] openid fail(" + element_id + ")");
+		      						if (!document.getElementById(element_id))
+		      							throw new IamlJavascriptException("No such element '" + element_id + "'");
+		      						document.getElementById(element_id).style.display = 'none';
+		      						break;
+
 		      					default:
 		      						throw new IamlJavascriptException("Unknown instruction '" + inst + "'");
 		      				}

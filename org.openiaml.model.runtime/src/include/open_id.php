@@ -137,18 +137,19 @@ function url_add($url, $args) {
  *  - 'ok': has been validated
  *	- 'redirect URL': redirect to the given URL
  */
-function openid_ajax_callback($return) {
+function openid_ajax_callback($return, $id) {
 	
 	$url = require_get("url");
 	$final = require_get("final");
 	
 	$result = openid_retrieve($url, $return, $final);
 	if ($result === false) {
-		echo "alert " . urlencode("Could not load authentication from $url");
+		echo "openid_fail " . escape_parameter_string($id) . " " . escape_parameter_string("Could not load authentication from $url");
+		//echo "alert " . escape_parameter_string("Could not load authentication from $url");
 	} else if ($result === true) {
-		echo "ok";
+		echo "ok\nopenid_pass " . escape_parameter_string($id);
 	} else {
-		echo "redirect " . urlencode($result);
+		echo "redirect " . escape_parameter_string($result);
 	}
 	
 	die;	

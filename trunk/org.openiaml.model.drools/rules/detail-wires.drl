@@ -251,7 +251,7 @@ rule "Create a Link Button for the source of a DetailWire: Add Parameter from At
 		pkInstance : DomainAttributeInstance ( eContainer == instance )
 		ExtendsEdge ( from == pkInstance, to == pkAttribute )
 		
-		pk : Property ( eContainer == pkInstance, name == "fieldValue" ) 
+		pk : Property ( pkInstance.fieldValue == pk ) 
 		
 		not ( ParameterEdge ( from == pk, to == nav ))
 	

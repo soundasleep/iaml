@@ -455,10 +455,6 @@ rule "Create text fields for login form of 'login' pages [type=secret_key]"
 		handler.setName(field, "login key");		# login field name
 		queue.add(field, drools);
 
-		# field has a value
-		Property fieldValue = handler.generatedProperty(form, field);
-		handler.setName(fieldValue, "fieldValue");
-		queue.add(fieldValue, drools);
 end
 
 rule "Create contents of 'do login' operation [type=secret_key]"
@@ -479,7 +475,7 @@ rule "Create contents of 'do login' operation [type=secret_key]"
 		button : Button ( eContainer == form, name == "Login" )
 		
 		field : InputTextField ( eContainer == form, name == "login key" )
-		fieldValue : Property( eContainer == field, name == "fieldValue" )
+		fieldValue : Property( field.fieldValue == fieldValue )
 		
 		loginOperation : CompositeOperation ( eContainer == login_session, name == "do login" )
 		runClick : RunAction ( from == button, to == loginOperation, name == "onClick" )
@@ -645,7 +641,7 @@ rule "Connect text fields for login form of 'login' pages to 'do login' run wire
 		param : ParameterEdge ( from == attribute, to == login_handler )
 		
 		field : InputTextField ( eContainer == form, name == attribute.name )
-		fieldValue : Property ( eContainer == field, name == "fieldValue" )
+		fieldValue : Property ( field.fieldValue == fieldValue )
 		
 		button : Button ( eContainer == form, name == "Login" )
 		run : RunAction ( from == button, to == operation, name == "onClick" )
@@ -679,7 +675,7 @@ rule "Connect text fields for login form of 'login' pages to 'do login' run wire
 		param : ParameterEdge ( from == role, to == login_handler )
 		
 		field : InputTextField ( eContainer == form, name == attribute.name )
-		fieldValue : Property ( eContainer == field, name == "fieldValue" )
+		fieldValue : Property ( field.fieldValue == fieldValue )		
 		
 		button : Button ( eContainer == form, name == "Login" )
 		run : RunAction ( from == button, to == operation, name == "onClick" )

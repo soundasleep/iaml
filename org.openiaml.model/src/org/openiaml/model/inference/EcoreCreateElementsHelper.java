@@ -113,6 +113,12 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return fieldValue;
 	}
 
+	public Property generatedPropertyFieldValue(GeneratesElements by, Changeable container) throws InferenceException {
+		Property fieldValue = (Property) createElement( container, ModelPackage.eINSTANCE.getProperty(), ModelPackage.eINSTANCE.getChangeable_FieldValue() );
+		setGeneratedBy(fieldValue, by);
+		return fieldValue;
+	}
+	
 	/**
 	 * Convenience method that sets isGenerated and generatedBy to the
 	 * appropriate values.
@@ -639,14 +645,6 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	public void setAutosave(DomainAttributeInstance element, boolean value) throws InferenceException {
 		setValue(element, ModelPackage.eINSTANCE.getDomainAttributeInstance_Autosave(), value);
 	}
-	
-	public void setType(InputTextField element, XSDSimpleTypeDefinition value) throws InferenceException {
-		setValue(element, VisualPackage.eINSTANCE.getInputTextField_Type(), value);
-	}
-
-	public void setType(Label element, XSDSimpleTypeDefinition value) throws InferenceException {
-		setValue(element, VisualPackage.eINSTANCE.getLabel_Type(), value);
-	}
 
 	public void setType(Property element, XSDSimpleTypeDefinition value) throws InferenceException {
 		setValue(element, ModelPackage.eINSTANCE.getProperty_Type(), value);
@@ -660,8 +658,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setValue(element, OperationsPackage.eINSTANCE.getArithmetic_OperationType(), value);
 	}
 	
-	public void setType(DomainAttributeInstance element, XSDSimpleTypeDefinition value) throws InferenceException {
-		setValue(element, ModelPackage.eINSTANCE.getDomainAttributeInstance_Type(), value);
+	public void setType(Changeable element, XSDSimpleTypeDefinition value) throws InferenceException {
+		setValue(element, ModelPackage.eINSTANCE.getChangeable_Type(), value);
 	}
 
 	public void setPriority(Action element, int value) throws InferenceException {

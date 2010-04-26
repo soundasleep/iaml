@@ -85,8 +85,8 @@ public class ConditionWireFalseServer extends InferenceTestCase {
 		RunAction targetInitRun = assertHasRunAction(wire, targetAccess, targetInit, "run");
 
 		// they should have incoming parameters
-		Property field1value = assertHasProperty(field1, "fieldValue");
-		Property field2value = assertHasProperty(field2, "fieldValue");
+		Property field1value = assertHasFieldValue(field1);
+		Property field2value = assertHasFieldValue(field2);
 		assertNotSame(field1value, field2value);
 
 		assertHasParameterEdge(root, field2value, srcInitRun);

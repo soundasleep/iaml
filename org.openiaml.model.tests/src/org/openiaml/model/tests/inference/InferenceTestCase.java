@@ -14,6 +14,7 @@ import org.openiaml.model.model.ActionDestination;
 import org.openiaml.model.model.ActionSource;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
+import org.openiaml.model.model.Changeable;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Condition;
@@ -176,59 +177,29 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 
 	/**
 	 * Assert that the given element does not contains the given
-	 * Property called 'fieldValue'.
+	 * Property stored in 'fieldValue'.
 	 *
 	 * @return The element found
 	 */
 	public void assertHasNoFieldValue(
-			ApplicationElement element) throws JaxenException {
-		assertHasNoProperty(element, "fieldValue");
-	}
-	
-	/**
-	 * Assert that the given element does not contains the given
-	 * Property called 'fieldValue'.
-	 *
-	 * @return The element found
-	 */
-	public void assertHasNoFieldValue(
-			Scope element) throws JaxenException {
-		assertHasNoProperty(element, "fieldValue");
-	}
-	
-	/**
-	 * Assert that the given element does not contains the given
-	 * Property called 'fieldValue'.
-	 *
-	 * @return The element found
-	 */
-	public void assertHasNoFieldValue(
-			VisibleThing element) throws JaxenException {
-		assertHasNoProperty(element, "fieldValue");
+			Changeable element) throws JaxenException {
+		assertNull("Element '" + element + "' had a fieldValue: " + element.getFieldValue(), 
+				element.getFieldValue());
 	}
 	
 	/**
 	 * Assert that the given element contains the given
-	 * Property called 'fieldValue'.
+	 * Property stored in 'fieldValue'.
 	 *
 	 * @return The element found
 	 */
 	public Property assertHasFieldValue(
-			VisibleThing element) throws JaxenException {
-		return assertHasProperty(element, "fieldValue");
+			Changeable element) throws JaxenException {
+		assertNotNull("Element '" + element + "' had no fieldValue", 
+					element.getFieldValue());
+		return element.getFieldValue();
 	}
-	
-	/**
-	 * Assert that the given element contains the given
-	 * Property called 'fieldValue'.
-	 *
-	 * @return The element found
-	 */
-	public Property assertHasFieldValue(
-			DomainAttributeInstance element) throws JaxenException {
-		return assertHasProperty(element, "fieldValue");
-	}
-		
+
 	/**
 	 * Assert that the given element contains the given
 	 * Operation.

@@ -46,7 +46,7 @@ public class SelectField extends InferenceTestCase {
 		assertGenerated(update);
 		EventTrigger edit = field.getOnChange();
 		assertGenerated(edit);
-		Property fieldValue = assertHasProperty(field, "fieldValue");
+		Property fieldValue = assertHasFieldValue(field);
 		assertGenerated(fieldValue);
 
 		// [new elements]

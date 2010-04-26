@@ -97,12 +97,12 @@ public class SyncWiresProperties extends InferenceTestCase {
 		// (following from SyncFormDomainObject)
 
 		// fields should have fieldValues
-		Property value1 = assertHasProperty(f1, "fieldValue");
-		Property value2 = assertHasProperty(f2, "fieldValue");
-		Property value3 = assertHasProperty(f3, "fieldValue");
-		Property valuea1 = assertHasProperty(a1, "fieldValue");
-		Property valuea2 = assertHasProperty(a2, "fieldValue");
-		Property valuea3 = assertHasProperty(a3, "fieldValue");
+		Property value1 = assertHasFieldValue(f1);
+		Property value2 = assertHasFieldValue(f2);
+		Property value3 = assertHasFieldValue(f3);
+		Property valuea1 = assertHasFieldValue(a1);
+		Property valuea2 = assertHasFieldValue(a2);
+		Property valuea3 = assertHasFieldValue(a3);
 
 		// these field values should be parameters to run instance wires
 		{

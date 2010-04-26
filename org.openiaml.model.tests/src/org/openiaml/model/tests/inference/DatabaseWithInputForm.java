@@ -54,8 +54,8 @@ public class DatabaseWithInputForm extends InferenceTestCase {
 		RunAction targetRw = assertHasRunAction(wire, targetEdit, srcOp);
 
 		// both should have fieldValues
-		Property textValue = assertHasProperty(source, "fieldValue");
-		Property attrValue = assertHasProperty(attribute, "fieldValue");
+		Property textValue = assertHasFieldValue(source);
+		Property attrValue = assertHasFieldValue(attribute);
 
 		// they should be parameters
 		assertGenerated(assertHasParameterEdge(wire, textValue, srcRw));
@@ -88,8 +88,8 @@ public class DatabaseWithInputForm extends InferenceTestCase {
 		RunAction targetRw = assertHasRunAction(wire, targetEdit, srcOp);
 
 		// both should have fieldValues
-		Property textValue = assertHasProperty(source, "fieldValue");
-		Property attrValue = assertHasProperty(attribute, "fieldValue");
+		Property textValue = assertHasFieldValue(source);
+		Property attrValue = assertHasFieldValue(attribute);
 
 		// they should be parameters
 		assertGenerated(assertHasParameterEdge(wire, textValue, srcRw));

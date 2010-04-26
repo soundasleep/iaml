@@ -20,7 +20,7 @@ public class MigratorRegistry {
 	 * version 3-4 migrator should appear before a 5-6 migrator,
 	 * and after a 2-3 migrator.
 	 * 
-	 * In the future this might be implemented as an extension point.
+	 * <p>In the future this might be implemented as an extension point.
 	 * 
 	 * @return A list of available model migrators.
 	 */
@@ -30,6 +30,7 @@ public class MigratorRegistry {
 		migrators.add(new Migrate1To2());
 		migrators.add(new Migrate2To4());
 		migrators.add(new Migrate4To5());
+		migrators.add(new Migrate5To6());
 		return migrators;
 	}
 	

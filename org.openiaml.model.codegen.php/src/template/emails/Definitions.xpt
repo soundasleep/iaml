@@ -127,9 +127,9 @@
 					$value["«escapePhpString(p.name)»"] = «EXPAND template::operations::Parameters::callParameterValue(true, false) FOR p»;
 				«ENDFOREACH»
 				«FOREACH labels.sortBy(e|e.name) AS label»
-					«FOREACH label.properties.select(p|p.name == "fieldValue") AS p»
-						$label["«escapePhpString(label.name)»"] = «EXPAND template::operations::Parameters::callParameterValue(true, false) FOR p»;
-					«ENDFOREACH»
+					«IF label.fieldValue != null»
+						$label["«escapePhpString(label.name)»"] = «EXPAND template::operations::Parameters::callParameterValue(true, false) FOR label.fieldValue»;
+					«ENDIF»
 				«ENDFOREACH»
 							
 				// use PHP's output buffering to provide PHP templates
@@ -180,9 +180,9 @@
 		«p.name»: <?php echo $value["«escapePhpString(p.name)»"]; echo "\n"; ?>
 	«ENDFOREACH»
 	«FOREACH labels.sortBy(e|e.name) AS label»
-		«FOREACH label.properties.select(p|p.name == "fieldValue") AS p»
+		«IF label.fieldValue != null»
 			«label.name»: <?php echo $label["«escapePhpString(label.name)»"]; echo "\n"; ?>
-		«ENDFOREACH»
+		«ENDIF»
 	«ENDFOREACH»
 «ENDDEFINE»
 

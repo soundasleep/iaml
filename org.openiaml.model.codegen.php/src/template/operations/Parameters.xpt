@@ -50,15 +50,15 @@
 «ENDDEFINE»
 
 /**
- * @implementation VisibleThing,ParameterEdge
- *		If a {@model VisibleThing} is used as the {@model ParameterEdgeSource} of a {@model ParameterEdge},
- *		the 'fieldValue' of the {@model VisibleThing} is used as the value. 
+ * @implementation Changeable,ParameterEdge
+ *		If a {@model Changeable} is used as the {@model ParameterEdgeSource} of a {@model ParameterEdge},
+ *		the 'fieldValue' of the {@model Changeable} is used as the value. 
  */
-«DEFINE callParameterValue(Boolean php, Boolean inStoreDb) FOR model::VisibleThing»
-	«IF properties.select(p|p.name == 'fieldValue').isEmpty»
-		«throwException("VisibleThing '" + this + "' does not have a fieldValue")»
+«DEFINE callParameterValue(Boolean php, Boolean inStoreDb) FOR model::Changeable»
+	«IF fieldValue == null»
+		«throwException("Changeable '" + this + "' does not have a fieldValue")»
 	«ENDIF»	
-	«EXPAND callParameterValue(php, inStoreDb) FOR properties.selectFirst(p|p.name == "fieldValue")»
+	«EXPAND callParameterValue(php, inStoreDb) FOR fieldValue»
 «ENDDEFINE»
 
 /**
@@ -100,7 +100,7 @@
 		«IF inStoreDb»
 			value
 		«ELSE»
-			«IF name == "fieldValue"»
+			«IF model::Changeable.isInstance(eContainer) && ((model::Changeable) eContainer).fieldValue == this»
 				«REM»where is this value stored? is it available on the current frame?«ENDREM»
 				«IF model::DomainAttributeInstance.isInstance(eContainer)»
 					«REM»from a DomainAttributeInstance«ENDREM»
@@ -152,22 +152,6 @@
 «ENDDEFINE»
 «DEFINE dataSourceOnFrame FOR model::visual::Label»
 	document.getElementById('«safeName()»').innerHTML
-«ENDDEFINE»
-
-/**
- * If we have a Parameter from a TextField, we should use its 'fieldValue' property instead.
- */
-«DEFINE callParameterValue(Boolean php, Boolean inStoreDb) FOR model::visual::InputTextField»
-	«IF php»
-		/* implicitly from InputTextField */
-		«EXPAND callParameterValue(php, inStoreDb) FOR properties.select( e | e.name == "fieldValue" ).first()-»
-	«ELSE»
-		«IF getFieldValue(this) != null»
-			«EXPAND callParameterValue(php, false) FOR getFieldValue(this)»
-		«ELSE»
-			«throwException("No 'fieldValue' property found in the InputTextField '" + this + "', which is being used as a Parameter source.")»
-		«ENDIF» 
-	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE callParameterValue(Boolean php, Boolean inStoreDb) FOR model::StaticValue»

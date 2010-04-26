@@ -81,7 +81,9 @@
 		another value to override a previously selected value«ENDREM»
 
 	«REM»Label.property[fieldValue] overrides Label.defaultValue«ENDREM»
-	«EXPAND staticInitialValue(currentFrame, argName) FOREACH properties.select( e | e.name == "fieldValue")»			
+	«IF fieldValue != null»
+		«EXPAND staticInitialValue(currentFrame, argName) FOR fieldValue»
+	«ENDIF»			
 
 	«IF defaultValue != null && defaultValue.length > 0»
 		// default value

@@ -173,18 +173,26 @@ context model::operations::CastNode ERROR "A CastNode needs exactly one incoming
 	inFlows.size == 1;
 
 /**
+ * To quickly identify problems related to issue 170: making an explicit Property called 'fieldValue'
+ */
+context model::ContainsProperties WARNING "You should not have a contained Property named 'fieldValue', unless it is contained within the fieldValue containment feature" :
+	properties.select(e | e.name == "fieldValue").isEmpty; 
+
+/**
  * Two types are specified to be incompatible if they are different.
  * TODO this should be changed, because e.g. email is compatible with string in one direction. 
  */
-context model::visual::InputTextField ERROR "InputTextField type '" + type.uRI + "' is incompatible with fieldValue type '" + properties.selectFirst(e|e.name == "fieldValue").type.uRI  + "'" :
+context model::Changeable ERROR "Type '" + type.uRI + "' is incompatible with contained fieldValue type '" + fieldValue.type.uRI + "'":
 	type == null ||
-	properties.select(e | e.name == "fieldValue").isEmpty ||
-	properties.select(e | e.name == "fieldValue").select(e | e.type.uRI != type.uRI).isEmpty;
+	fieldValue == null ||
+	fieldValue.type == null ||
+	type.uRI == fieldValue.type.uRI;
 
-context model::VisibleThing ERROR "Mismatch between default fieldValue attribute and created fieldValue Property default" :
-	fieldValue == null || /* no fieldValue set */
-	properties.select(e | e.name == "fieldValue").isEmpty || /* no property set */
-	properties.select(e | e.name == "fieldValue").select(e | e.defaultValue != fieldValue).isEmpty /* they're all identical */;
+context model::Changeable ERROR "Contained fieldValue property has a default value, even though container already specifies one" :
+	defaultValue == null ||
+	fieldValue == null ||
+	fieldValue.defaultValue == null ||
+	defaultValue == fieldValue.defaultValue;
 
 context model::scopes::Email ERROR "An e-mail cannot contain a Property and a StaticValue with the same name" :
 	properties.collect(e|e.name).intersect(values.collect(e|e.name)).isEmpty;

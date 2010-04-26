@@ -29,6 +29,8 @@
 		«EXPAND sendOperation(start, php) FOR this» 
 	«ELSEIF name == "save"»
 		«EXPAND saveOperation(start, php) FOR this» 
+	«ELSEIF name == "new"»
+		«EXPAND newOperation(start, php) FOR this» 
 	«ELSE»
 		«throwException("Unknown function to expand '" + name + "': " + this)»
 	«ENDIF»
@@ -478,6 +480,34 @@
 		«ENDLET»
 	«ELSE»
 		«throwException("Save operation " + this + " is not contained within an expected type: " + eContainer)»
+	«ENDIF»
+
+	«REM»continue«ENDREM»
+	«FOREACH outExecutions AS e-»
+		«EXPAND ExecutionFlow::addStack(start, php) FOR e»
+	«ENDFOREACH»
+«ENDDEFINE»
+
+/**
+ * Create a new domain object instance.
+ */
+«DEFINE newOperation(model::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
+	«IF model::DomainObjectInstance.isInstance(eContainer)»
+		/* new instance */
+		«LET (model::DomainObjectInstance) eContainer AS instance»
+			«IF php»
+				new_domain_instance_«safeNameString(instance.id)»();
+			«ELSE»
+				/*
+				 * Calling 'new' on a DomainObjectInstance will NOT
+				 * block a Javascript-side call, so there is no way to get
+				 * the result from the server.
+				 */
+				queued_new_domain_instance('«safeNameString(instance.id)-»');
+			«ENDIF»
+		«ENDLET»
+	«ELSE»
+		«throwException("New operation " + this + " is not contained within an expected type: " + eContainer)»
 	«ENDIF»
 
 	«REM»continue«ENDREM»

@@ -2,13 +2,13 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12109331eea.4a">
   <scopes xsi:type="iaml.visual:Frame" id="visual.12109331f38.e1" name="container">
     <children xsi:type="iaml.visual:InputTextField" id="visual.12109331f38.e7" name="source one">
-      <properties id="model.12109331eea.5f" name="fieldValue" outParameterEdges="wires.12109331f38.1e">
+      <fieldValue id="model.12109331eea.5f" name="fieldValue" outParameterEdges="wires.12109331f38.1e">
         <parameterEdges id="wires.12109331f38.1e" from="model.12109331eea.5f" to="wires.12109331f38.1c"/>
-      </properties>
+      </fieldValue>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.12109331f38.e8" name="target one">
       <operations xsi:type="iaml:CompositeOperation" id="model.12109331eea.b2" name="update" inActions="wires.12109331f38.1c wires.12109331f38.3c"/>
-      <properties id="model.12109331eea.70" name="fieldValue"/>
+      <fieldValue id="model.12109331eea.70" name="fieldValue"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.12109331f38.f0" name="copy value over to target">
       <onClick id="model.12109331eea.89" outActions="wires.12109331f38.1c">

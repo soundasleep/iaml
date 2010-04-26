@@ -17,7 +17,7 @@
       </elements>
       <children xsi:type="iaml.visual:InputTextField" id="visual.12109c6248b.134" name="select email" outParameterEdges="wires.12109c6249b.ba">
         <parameterEdges id="wires.12109c6249b.ba" from="visual.12109c6248b.134" to="wires.12109c6249b.b9"/>
-        <properties id="model.12109c6242e.33d" name="fieldValue" defaultValue="session@jevon.org"/>
+        <fieldValue id="model.12109c6242e.33d" name="fieldValue" defaultValue="session@jevon.org"/>
       </children>
       <children xsi:type="iaml.visual:InputTextField" inWires="wires.12109c6249b.b8" id="visual.12109c6248b.135" name="edit name"/>
     </scopes>

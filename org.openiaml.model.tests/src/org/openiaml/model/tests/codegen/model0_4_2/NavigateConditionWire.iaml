@@ -18,7 +18,7 @@
       <actions xsi:type="iaml.wires:NavigateAction" id="wires.126aaf8398c.11d" name="click" inConditionEdges="wires.126aaf8398c.11e" from="visual.126aaf8397d.1b5" to="visual.126aaf8397d.1bb"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.126aaf8397d.1c3" name="value">
-      <properties id="model.126aaf83900.46f" name="fieldValue" outFlows="model.126aaf83900.4a6"/>
+      <fieldValue id="model.126aaf83900.46f" name="fieldValue" outFlows="model.126aaf83900.4a6"/>
     </children>
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.126aaf8397d.1bb" name="Destination" inActions="wires.126aaf8398c.11d"/>

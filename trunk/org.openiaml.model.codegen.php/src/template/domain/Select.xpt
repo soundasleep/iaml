@@ -7,6 +7,7 @@
 
 /**
  * Must set $row with the result.
+ *
  * @param force if the source of a query parameter does not exist, should we crash?
  * @param hasOffset is the '$offset' variable populated with the offset to apply?
  */
@@ -53,19 +54,29 @@
 			/* attribute "«safeNameString(name)»" */
 			$type = '«escapePhpString(attribute.type.uRI)»';
 			if (!isset($row["«safeNameString(attribute.name)»"])) {
-				throw new IamlRuntimeException("Could not find attribute '«safeNameString(attribute.name)»' in resulting select");
+				«IF force»
+					throw new IamlRuntimeException("Could not find attribute '«safeNameString(attribute.name)»' in resulting select");
+				«ELSE»
+					$row = null;	// don't crash
+				«ENDIF»
 			}
-			if (!can_cast($row["«safeNameString(attribute.name)»"], $type)) {
-				throw new IamlRuntimeException("Unexpectedly could not cast value '"
-					. $row["«safeNameString(attribute.name)»"] . "' into type '$type'");
+			if ($row !== null && !can_cast($row["«safeNameString(attribute.name)»"], $type)) {
+				«IF force»
+					throw new IamlRuntimeException("Unexpectedly could not cast value '"
+						. $row["«safeNameString(attribute.name)»"] . "' into type '$type'");
+				«ELSE»
+					$row = null;	// don't crash
+				«ENDIF»
 			}
-				
-			$row["«safeNameString(attribute.name)»"] =
-				do_cast($row["«safeNameString(attribute.name)»"], $type);
-				
-			// and then cast it back to a common format for translation ('iamlString')
-			$row["«safeNameString(attribute.name)»"] =
-				do_cast($row["«safeNameString(attribute.name)»"], 'http://openiaml.org/model/datatypes#iamlString');
+			
+			if ($row !== null) {
+				$row["«safeNameString(attribute.name)»"] =
+					do_cast($row["«safeNameString(attribute.name)»"], $type);
+					
+				// and then cast it back to a common format for translation ('iamlString')
+				$row["«safeNameString(attribute.name)»"] =
+					do_cast($row["«safeNameString(attribute.name)»"], 'http://openiaml.org/model/datatypes#iamlString');
+			}
 		}
 		«ENDFOREACH»
 	}

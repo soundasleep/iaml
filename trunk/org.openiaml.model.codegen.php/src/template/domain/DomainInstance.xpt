@@ -61,8 +61,10 @@
 	«IF php»
 		«IF name=="exists?"»
 			exists_object_instance_«safeNameString(object.id)»()
-			«REM»TODO shouldn't the other domain instance operations be listed here? probably a major bug«ENDREM»
+		«ELSEIF name=="save"»
+			save_queued_store_domain_object_«safeNameString(object.id)»()
 		«ELSE»
+			«REM»TODO shouldn't the other domain instance operations be listed here? probably a major bug«ENDREM»
 			«throwException("No server-side code for domainInstanceCall operation '" + name + "'")»
 		«ENDIF»
 	«ELSE»
@@ -147,6 +149,8 @@
 			can_object_instance_previous_«safeName(instance)»()
 		«ELSEIF instance.empty == this»
 			is_object_instance_empty_«safeName(instance)»()
+		«ELSEIF instance.canSave == this»
+			can_object_instance_save_«safeName(instance)»()
 		«ELSE»
 			«throwException("Unknown primitive condition for DomainObjectInstance: " + this)»
 		«ENDIF»

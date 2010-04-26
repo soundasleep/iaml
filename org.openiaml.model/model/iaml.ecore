@@ -371,11 +371,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="outExecutions" upperBound="-1"
         eType="#//ExecutionEdge" eOpposite="#//ExecutionEdge/from"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ConditionalEdge" eSuperTypes="#//ExecutionEdge #//NamedElement">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Allows for {@model Condition}s to be attached to {@model ConditionEdgeDestination elements}."/>
-    </eAnnotations>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DynamicApplicationElementSet" eSuperTypes="#//ApplicationElement #//wires/ParameterEdgesSource">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A component that allows the virtual abstraction of elements at runtime through a {@model DynamicApplicationElementSet#query query}."/>
@@ -682,7 +677,7 @@
       <details key="added" value="0.3"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Represents an instance of a {@model DomainAttribute}, which is likely contained within a {@model DomainObjectInstance}."/>
+      <details key="documentation" value="Represents an instance of a {@model DomainAttribute}; the value of this instance may be temporary - accessible only to its {@model Scope} - and not yet {@model DomainObjectInstance#save stored in the database}."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="autosave" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false">

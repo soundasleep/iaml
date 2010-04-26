@@ -310,7 +310,7 @@
         href="iaml.ecore#//CompositeCondition/dataEdges"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="condition.gmftool#//@palette/@tools.2/@tools.1"/>
+        href="condition.gmftool#//@palette/@tools.2/@tools.0"/>
     <diagramLink
         href="iaml.gmfgraph#DataFlowEdge"/>
     <sourceMetaFeature
@@ -336,35 +336,9 @@
         href="iaml.ecore#//CompositeCondition/executionEdges"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="condition.gmftool#//@palette/@tools.2/@tools.2"/>
+        href="condition.gmftool#//@palette/@tools.2/@tools.1"/>
     <diagramLink
         href="iaml.gmfgraph#ExecutionEdge"/>
-    <sourceMetaFeature
-        xsi:type="ecore:EReference"
-        href="iaml.ecore#//ExecutionEdge/from"/>
-    <linkMetaFeature
-        xsi:type="ecore:EReference"
-        href="iaml.ecore#//ExecutionEdge/to"/>
-  </links>
-  <links>
-    <domainMetaElement
-        href="iaml.ecore#//ConditionalEdge"/>
-    <domainSpecialization
-        body="self.oclIsTypeOf( ConditionalEdge )"/>
-    <labelMappings
-        xsi:type="gmfmap:FeatureLabelMapping">
-      <diagramLabel
-          href="iaml.gmfgraph#ConditionalEdgeName"/>
-      <features
-          href="iaml.ecore#//NamedElement/name"/>
-    </labelMappings>
-    <containmentFeature
-        href="iaml.ecore#//CompositeCondition/executionEdges"/>
-    <tool
-        xsi:type="gmftool:CreationTool"
-        href="condition.gmftool#//@palette/@tools.2/@tools.0"/>
-    <diagramLink
-        href="iaml.gmfgraph#ConditionalEdge"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
         href="iaml.ecore#//ExecutionEdge/from"/>

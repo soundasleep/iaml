@@ -52,7 +52,7 @@ public class SessionSyncWires extends InferenceTestCase {
 		Operation update = assertHasOperation(field2, "update");
 		RunAction rw = assertHasRunAction(root, edit, update);
 
-		Property fieldValue = assertHasProperty(field1, "fieldValue");
+		Property fieldValue = assertHasFieldValue(field1);
 		assertGenerated(getParameterEdgeFromTo(root, fieldValue, rw));
 
 		// session should have an 'init' event
@@ -84,7 +84,7 @@ public class SessionSyncWires extends InferenceTestCase {
 		Operation init = assertHasOperation(field1, "init");
 		assertGenerated(init);
 
-		Property value = assertHasProperty(field2, "fieldValue");
+		Property value = assertHasFieldValue(field2);
 		assertGenerated(value);
 
 		RunAction run = assertHasRunAction(field1, access, init, "run");
@@ -112,7 +112,7 @@ public class SessionSyncWires extends InferenceTestCase {
 		Frame inside = assertHasFrame(session, "inside");
 		InputTextField field2 = assertHasInputTextField(inside, "target");
 
-		Property value = assertHasProperty(field2, "fieldValue");
+		Property value = assertHasFieldValue(field2);
 		CompositeCondition cond = assertHasCompositeCondition(field2, "fieldValue is set");
 
 		StartNode start = assertHasStartNode(cond);

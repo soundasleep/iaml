@@ -111,8 +111,8 @@ public class SyncWireTestCase extends InferenceTestCase {
 		Operation name1update = assertHasOperation(name1, "update");
 		Operation name2update = assertHasOperation(name2, "update");
 
-		Property name1value = assertHasProperty(name1, "fieldValue");
-		Property name2value = assertHasProperty(name2, "fieldValue");
+		Property name1value = assertHasFieldValue(name1);
+		Property name2value = assertHasFieldValue(name2);
 
 		// none of these can ever be null because queryOne() also calls assert(size>1)
 

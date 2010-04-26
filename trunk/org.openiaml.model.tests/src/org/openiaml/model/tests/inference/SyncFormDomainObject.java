@@ -60,10 +60,10 @@ public class SyncFormDomainObject extends InferenceTestCase {
 		Operation updatea2 = assertHasOperation(attr2, "update");
 
 		// fields should have fieldValues
-		Property value1 = assertHasProperty(field1, "fieldValue");
-		Property value2 = assertHasProperty(field2, "fieldValue");
-		Property valuea1 = assertHasProperty(attr1, "fieldValue");
-		Property valuea2 = assertHasProperty(attr2, "fieldValue");
+		Property value1 = assertHasFieldValue(field1);
+		Property value2 = assertHasFieldValue(field2);
+		Property valuea1 = assertHasFieldValue(attr1);
+		Property valuea2 = assertHasFieldValue(attr2);
 	}
 
 }

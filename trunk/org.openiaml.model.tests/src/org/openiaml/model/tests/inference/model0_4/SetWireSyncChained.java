@@ -86,7 +86,7 @@ public class SetWireSyncChained extends InferenceTestCase {
 		});
 		assertGenerated(run);
 
-		Property sourceValue = assertHasProperty(source, "fieldValue");
+		Property sourceValue = assertHasFieldValue(source);
 		assertGenerated(sourceValue);
 
 		// parameter
@@ -135,7 +135,7 @@ public class SetWireSyncChained extends InferenceTestCase {
 		});
 		assertGenerated(run);
 
-		Property sourceValue = assertHasProperty(changed, "fieldValue");
+		Property sourceValue = assertHasFieldValue(changed);
 		assertGenerated(sourceValue);
 
 		// parameter

@@ -225,7 +225,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		assertEquals("onClick", run.getName());
 
 		// the text field has a parameter
-		Property prop = assertHasProperty(field, "fieldValue");
+		Property prop = assertHasFieldValue(field);
 		assertGenerated(prop);
 
 		// connecting to the run wire

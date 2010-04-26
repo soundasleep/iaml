@@ -57,7 +57,7 @@ public class SelectFieldFromObject extends InferenceTestCase {
 		CompositeOperation update = assertHasCompositeOperation(field, "update");
 		assertGenerated(update);
 		EventTrigger edit = field.getOnChange();
-		Property fieldValue = assertHasProperty(field, "fieldValue");
+		Property fieldValue = assertHasFieldValue(field);
 
 		// [new elements]
 		// edit operations on the attribute

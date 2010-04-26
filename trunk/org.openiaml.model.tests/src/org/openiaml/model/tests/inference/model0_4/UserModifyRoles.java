@@ -138,8 +138,8 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 		InputForm form = assertHasInputForm(login, "login form");
 		InputTextField temail = assertHasInputTextField(form, "email");
 		InputTextField tpass = assertHasInputTextField(form, "password");
-		Property femail = assertHasProperty(temail, "fieldValue");
-		Property fpassword = assertHasProperty(tpass, "fieldValue");
+		Property femail = assertHasFieldValue(temail);
+		Property fpassword = assertHasFieldValue(tpass);
 		Button button = assertHasButton(form, "Login");
 
 		// get the operation
@@ -186,8 +186,8 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 		assertHasNoSetWire(root, email, temail);
 		assertHasNoSetWire(root, password, tpass);
 
-		Property femail = assertHasProperty(temail, "fieldValue");
-		Property fpassword = assertHasProperty(tpass, "fieldValue");
+		Property femail = assertHasFieldValue(temail);
+		Property fpassword = assertHasFieldValue(tpass);
 
 		assertHasNoSetWire(root, femail, email);
 		assertHasNoSetWire(root, fpassword, password);

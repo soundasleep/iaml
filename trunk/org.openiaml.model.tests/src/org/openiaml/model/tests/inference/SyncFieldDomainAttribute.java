@@ -54,7 +54,7 @@ public class SyncFieldDomainAttribute extends InferenceTestCase {
 		assertEquals(runWire.getTo(), opUpdate);
 
 		// there should be a parameter on the field
-		Property fieldValue = assertHasProperty(field, "fieldValue");
+		Property fieldValue = assertHasFieldValue(field);
 
 		// there should be a parameter wire from fieldValue to the operation
 		assertGenerated(getParameterEdgeFromTo(page, fieldValue, runWire));

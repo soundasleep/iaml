@@ -99,7 +99,7 @@ public class SessionNewDomainInstance extends InferenceTestCase {
 		assertGenerated(edit);
 
 		// and a property
-		Property value = assertHasProperty(email, "fieldValue");
+		Property value = assertHasFieldValue(email);
 		assertGenerated(value);
 
 		// get the text field

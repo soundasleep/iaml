@@ -54,8 +54,8 @@ public class PropertiesFileWithInputForm extends InferenceTestCase {
 		RunAction targetRw = assertHasRunAction(wire, targetEdit, srcOp);
 
 		// both should have fieldValues
-		Property textValue = assertHasProperty(source, "fieldValue");
-		Property attrValue = assertHasProperty(attribute, "fieldValue");
+		Property textValue = assertHasFieldValue(source);
+		Property attrValue = assertHasFieldValue(attribute);
 
 		// they should be parameters
 		assertGenerated(getParameterEdgeFromTo(wire, textValue, srcRw));
@@ -89,8 +89,8 @@ public class PropertiesFileWithInputForm extends InferenceTestCase {
 		RunAction targetRw = assertHasRunAction(wire, targetEdit, srcOp);
 
 		// both should have fieldValues
-		Property textValue = assertHasProperty(source, "fieldValue");
-		Property attrValue = assertHasProperty(attribute, "fieldValue");
+		Property textValue = assertHasFieldValue(source);
+		Property attrValue = assertHasFieldValue(attribute);
 
 		// they should be parameters
 		assertGenerated(getParameterEdgeFromTo(wire, textValue, srcRw));

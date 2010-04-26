@@ -74,7 +74,7 @@ public class SetWireClient extends InferenceTestCase {
 		EventTrigger edit = source.getOnChange();
 		assertGenerated(edit);
 
-		Property value = assertHasProperty(source, "fieldValue");
+		Property value = assertHasFieldValue(source);
 		assertGenerated(value);
 
 		// and an 'update' event in target
@@ -106,7 +106,7 @@ public class SetWireClient extends InferenceTestCase {
 		EventTrigger edit = target.getOnChange();
 		assertGenerated(edit);
 
-		Property value = assertHasProperty(target, "fieldValue");
+		Property value = assertHasFieldValue(target);
 		assertGenerated(value);
 
 		// and an 'update' event in target
@@ -134,7 +134,7 @@ public class SetWireClient extends InferenceTestCase {
 		EventTrigger access = target.getOnAccess();
 		assertGenerated(access);
 
-		Property value = assertHasProperty(source, "fieldValue");
+		Property value = assertHasFieldValue(source);
 		assertGenerated(value);
 
 		// and an 'update' event in target
@@ -150,7 +150,7 @@ public class SetWireClient extends InferenceTestCase {
 		assertGenerated(param);
 
 		// but the parameter of 'target' is not connected to the run wire
-		Property value2 = assertHasProperty(target, "fieldValue");
+		Property value2 = assertHasFieldValue(target);
 		assertGenerated(value2);
 
 		assertHasNoWiresFromTo(page, value2, run);
@@ -193,7 +193,7 @@ public class SetWireClient extends InferenceTestCase {
 
 		Frame page = assertHasFrame(root, "Home");
 		InputTextField source = assertHasInputTextField(page, "source");
-		Property value = assertHasProperty(source, "fieldValue");
+		Property value = assertHasFieldValue(source);
 		CompositeCondition cond = assertHasCompositeCondition(source, "fieldValue is set");
 
 		// check contents of condition

@@ -94,7 +94,7 @@ public class DomainInheritanceEditing extends InferenceTestCase {
 
 		// a parameter
 		DomainAttributeInstance nameInstance = assertHasDomainAttributeInstance(studentInstance, "name");
-		Property instanceValue = assertHasProperty(nameInstance, "fieldValue");
+		Property instanceValue = assertHasFieldValue(nameInstance);
 		ParameterEdge param = assertHasParameterEdge(root, instanceValue, run);
 		assertGenerated(param);
 
@@ -148,7 +148,7 @@ public class DomainInheritanceEditing extends InferenceTestCase {
 
 		// a parameter
 		DomainAttributeInstance nameInstance = assertHasDomainAttributeInstance(studentInstance, "name");
-		Property instanceValue = assertHasProperty(nameInstance, "fieldValue");
+		Property instanceValue = assertHasFieldValue(nameInstance);
 		ParameterEdge param = assertHasParameterEdge(root, instanceValue, run);
 		assertGenerated(param);
 

@@ -393,10 +393,6 @@ getAllDomainObjects(emf::EObject e) :
 List[emf::EObject] resolveDynamicSet(model::InternetApplication root, model::DynamicApplicationElementSet set) :
 	JAVA org.openiaml.model.codegen.php.OawCodeGenerator.resolveDynamicSet(org.openiaml.model.model.InternetApplication, org.openiaml.model.model.DynamicApplicationElementSet);
 
-/** get the fieldValue of the text field, or null if none exists. */
-getFieldValue(model::visual::InputTextField this) :
-	properties.selectFirst( e | e.name == "fieldValue" );
-
 getFailHandler(model::ActionSource this) :
 	outActions.select( w | w.isFailEdge()).first();
 
@@ -553,7 +549,7 @@ List[model::Property] getClientSideCacheProperties(model::InternetApplication th
 	eAllContents.typeSelect(model::DomainObjectInstance)
 		.select(o | o.results != null)
 		.results.toSet().
-	addAll(eAllContents.typeSelect(model::VisibleThing).properties.select(p | p.name != "fieldValue").toSet());
+	addAll(eAllContents.typeSelect(model::VisibleThing).properties.toSet());
 
 /**
  * Should the given exit gate be activated/enabled on the given frame?

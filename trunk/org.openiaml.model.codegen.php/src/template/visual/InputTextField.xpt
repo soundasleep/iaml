@@ -37,7 +37,9 @@
 				browser behaviour to place this value as lower priority. we should work
 				out some way to select it programatically.
 			«ENDREM»
-			«EXPAND staticInitialValue(currentFrame) FOREACH properties.select( e | e.name == "fieldValue")»			
+			«IF fieldValue != null»
+				«EXPAND staticInitialValue(currentFrame) FOR fieldValue»
+			«ENDIF»			
 		>
 		
 		<script language="Javascript" type="application/javascript">
@@ -81,9 +83,11 @@
 					see: r1795
 				«ENDREM»
 
+				«IF fieldValue != null»
 				// server values
-				«REM»save a value for myself (which is not covered by an outEdge/inEdge) to the server/session?«ENDREM»
-				«EXPAND template::operations::OutgoingValues::outgoingValue(this) FOREACH properties.select( e | e.name == "fieldValue")»
+					«REM»save a value for myself (which is not covered by an outEdge/inEdge) to the server/session?«ENDREM»
+					«EXPAND template::operations::OutgoingValues::outgoingValue(this) FOR fieldValue»
+				«ENDIF»
 
 				// outgoing values
 				«REM»any application element properties to change? (both on client and server)«ENDREM»

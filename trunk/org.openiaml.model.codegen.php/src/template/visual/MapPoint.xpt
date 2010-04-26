@@ -79,19 +79,11 @@
 		$point_visible = false;
 		$point_address = null; 
 	
-		// cycle over fieldValue properties		
-		«FOREACH properties.select(e|e.name == "fieldValue") AS fieldValue»
-		if (!$point_visible) {
-			«EXPAND staticInitialMapPointValue(currentFrame) FOR fieldValue»
-		}
-		«ENDFOREACH» 
-
-		«IF fieldValue != null && fieldValue.length > 0»
-			// default fieldValue
+		«IF fieldValue != null»
+			// check fieldValue property
 			if (!$point_visible) {
-				$point_address = "«escapePhpString(fieldValue)»";
-				$point_visible = true; 
-			} 
+				«EXPAND staticInitialMapPointValue(currentFrame) FOR fieldValue»
+			}
 		«ENDIF»
 
 		?>
@@ -187,19 +179,11 @@
 		$point_visible = false;
 		$point_address = null; 
 	
-		// cycle over fieldValue properties		
-		«FOREACH properties.select(e|e.name == "fieldValue") AS fieldValue»
-		if (!$point_visible) {
-			«EXPAND staticInitialMapPointValue(currentFrame) FOR fieldValue»
-		}
-		«ENDFOREACH» 
-
-		«IF fieldValue != null && fieldValue.length > 0»
-			// default fieldValue
+		«IF fieldValue != null»
+			// check fieldValue property
 			if (!$point_visible) {
-				$point_address = "«escapePhpString(fieldValue)»";
-				$point_visible = true; 
-			} 
+				«EXPAND staticInitialMapPointValue(currentFrame) FOR fieldValue»
+			}
 		«ENDIF»
 
 		?>

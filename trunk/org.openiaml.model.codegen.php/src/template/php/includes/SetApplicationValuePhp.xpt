@@ -46,7 +46,7 @@ if ($old_value !== $arg0) {
 	log_message("set_application_value.php: setting id=$id, arg0=$arg0, old=$old_value");
 	
 	// do we need to run any onChange/onChange events?
-	«EXPAND onChangeEvents FOREACH eAllContents.typeSelect(model::ContainsProperties)»
+	«EXPAND onChangeEvents FOREACH eAllContents.typeSelect(model::Changeable)»
 }
 
 echo "ok";
@@ -80,19 +80,14 @@ echo_necessary_update_callbacks();
 
 «ENDDEFINE»
 
-«DEFINE onChangeEvents FOR model::ContainsProperties»
-	«FOREACH properties.select(p|p.name == "fieldValue") AS property»
-		«IF model::Changeable.isInstance(this)»
-		«REM»select all Editable ContainsProperties«ENDREM»
-		«FOREACH getRoot().eAllContents.typeSelect(model::Changeable).select(e|e==this) AS editable» 
-			«IF editable.onChange != null»
-			if ($id == '«safeName(property)»') {
-				«EXPAND template::events::EventCall::callEvent(true) FOR editable.onChange»
-			}
-			«ENDIF» 
-		«ENDFOREACH»
-		«ENDIF»
-	«ENDFOREACH»
+«DEFINE onChangeEvents FOR model::Changeable»
+	«IF fieldValue != null»
+		«IF onChange != null»
+		if ($id == '«safeName(fieldValue)»') {
+			«EXPAND template::events::EventCall::callEvent(true) FOR onChange»
+		}
+		«ENDIF» 
+	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE potentialUpdatesRequired FOR model::Property»

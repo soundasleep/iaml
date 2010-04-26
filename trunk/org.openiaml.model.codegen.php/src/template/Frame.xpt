@@ -159,7 +159,9 @@ log_message("«name».php: User browsing finished");
 
 «DEFINE initialiseDefaultValues FOR model::visual::InputTextField»
 	/* text field "«this.name-»" */
-	«EXPAND initialiseDefaultValueProperty FOREACH properties.select(e|e.name=="fieldValue")»
+	«IF fieldValue != null»
+		«EXPAND initialiseDefaultValueProperty FOR fieldValue»
+	«ENDIF»
 	«EXPAND initialiseDefaultValues FOREACH children»
 «ENDDEFINE»
 

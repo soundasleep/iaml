@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.128240e31d2.f25">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.128240e31d2.f25">
   <domainStores id="model.128240e31d2.f28" name="Database">
     <children id="model.128240e31d2.f32" name="Post" outWires="wires.128240e326e.372 wires.128240e326e.39f">
       <wires xsi:type="iaml.wires:SelectWire" id="wires.128240e326e.372" from="model.128240e31d2.f32" to="model.128240e31d2.f8a" name="select all" limit="10"/>
@@ -19,21 +19,42 @@
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.128240e326e.3ca" name="Create New Post">
     <elements xsi:type="iaml:DomainObjectInstance" id="model.128240e31d2.1030" name="New Post" outWires="wires.128240e326e.3f1" inWires="wires.128240e326e.39f">
-      <operations xsi:type="iaml:PrimitiveOperation" id="model.128240e31d2.10a0" name="save" inActions="wires.128240e326e.43a"/>
+      <operations xsi:type="iaml:PrimitiveOperation" id="model.128240e31d2.10a0" name="save" inActions="wires.128240e326e.659"/>
       <wires xsi:type="iaml.wires:SyncWire" id="wires.128240e326e.3f1" from="model.128240e31d2.1030" to="visual.128240e326e.468" name="sync"/>
+      <canSave xsi:type="iaml:PrimitiveCondition" id="model.1283779cdf7.c0" name="can save?" outConditionEdges="wires.12837b6de10.f">
+        <conditionEdges id="wires.12837b6de10.f" name="condition" from="model.1283779cdf7.c0" to="operations.12837813716.23"/>
+      </canSave>
     </elements>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.128240e326e.3f1" id="visual.128240e326e.468" name="Create New">
-      <onAccess id="model.128240e31d2.15f1" outActions="wires.128240e326e.59c">
-        <actions xsi:type="iaml.wires:RunAction" id="wires.128240e326e.59c" name="run" from="model.128240e31d2.15f1" to="model.128240e31d2.14d1"/>
+      <operations xsi:type="iaml:CompositeOperation" id="model.128240e31d2.173f" name="try save" inActions="wires.128240e326e.43a">
+        <nodes xsi:type="iaml.operations:StartNode" id="operations.128240e327e.42c" outExecutions="model.128240e31d2.1818"/>
+        <nodes xsi:type="iaml.operations:OperationCallNode" id="operations.128240e327e.430" outExecutions="model.12837b6dd45.1ed" inExecutions="model.12837b6dd45.1eb" outActions="wires.128240e326e.659">
+          <actions xsi:type="iaml.wires:RunAction" id="wires.128240e326e.659" name="run" from="operations.128240e327e.430" to="model.128240e31d2.10a0"/>
+        </nodes>
+        <nodes xsi:type="iaml.operations:OperationCallNode" id="operations.128240e327e.432" outExecutions="model.12837b6dd45.1ec" inExecutions="model.128240e31d2.181b" outActions="wires.12837b6de10.b5">
+          <actions xsi:type="iaml.wires:RunAction" id="wires.12837b6de10.b5" name="run" from="operations.128240e327e.432" to="model.12837b6dd45.119"/>
+        </nodes>
+        <nodes xsi:type="iaml.operations:DecisionNode" id="operations.12837813716.23" outExecutions="model.128240e31d2.181a model.128240e31d2.181b" inExecutions="model.128240e31d2.1818" inConditionEdges="wires.12837b6de10.f"/>
+        <nodes xsi:type="iaml.operations:FinishNode" id="operations.12837b6de10.1a" inExecutions="model.12837b6dd45.1ec model.12837b6dd45.1ed"/>
+        <nodes xsi:type="iaml.operations:OperationCallNode" id="operations.12837b6de10.bb" outExecutions="model.12837b6dd45.1eb" inExecutions="model.128240e31d2.181a" outActions="wires.12837b6de10.b4">
+          <actions xsi:type="iaml.wires:RunAction" id="wires.12837b6de10.b4" name="run" from="operations.12837b6de10.bb" to="model.12837b6dd45.118"/>
+        </nodes>
+        <executionEdges id="model.128240e31d2.1818" from="operations.128240e327e.42c" to="operations.12837813716.23"/>
+        <executionEdges id="model.128240e31d2.181a" name="y" from="operations.12837813716.23" to="operations.12837b6de10.bb"/>
+        <executionEdges id="model.128240e31d2.181b" name="n" from="operations.12837813716.23" to="operations.128240e327e.432"/>
+        <executionEdges id="model.12837b6dd45.1eb" from="operations.12837b6de10.bb" to="operations.128240e327e.430"/>
+        <executionEdges id="model.12837b6dd45.1ec" from="operations.128240e327e.432" to="operations.12837b6de10.1a"/>
+        <executionEdges id="model.12837b6dd45.1ed" from="operations.128240e327e.430" to="operations.12837b6de10.1a"/>
+      </operations>
+      <onAccess id="model.12837b6dd45.17d" outActions="wires.12837b6de10.87">
+        <actions xsi:type="iaml.wires:RunAction" id="wires.12837b6de10.87" name="run" from="model.12837b6dd45.17d" to="model.12837b6dd45.118"/>
       </onAccess>
-      <children xsi:type="iaml.visual:Button" id="visual.128240e326e.4ba" name="Save" outActions="wires.128240e326e.43a wires.128240e326e.573 wires.128240e326e.574">
-        <actions xsi:type="iaml.wires:RunAction" id="wires.128240e326e.43a" name="onClick" from="visual.128240e326e.4ba" to="model.128240e31d2.10a0"/>
-        <actions xsi:type="iaml.wires:RunAction" id="wires.128240e326e.573" name="pass" from="visual.128240e326e.4ba" to="model.128240e31d2.14d1"/>
-        <actions xsi:type="iaml.wires:RunAction" id="wires.128240e326e.574" name="fail" from="visual.128240e326e.4ba" to="model.128240e31d2.14d2"/>
+      <children xsi:type="iaml.visual:Button" id="visual.128240e326e.4ba" name="Save" outActions="wires.128240e326e.43a">
+        <actions xsi:type="iaml.wires:RunAction" id="wires.128240e326e.43a" name="onClick" from="visual.128240e326e.4ba" to="model.128240e31d2.173f"/>
       </children>
-      <children xsi:type="iaml.visual:Label" id="visual.128240e326e.5dc" name="Warning" defaultValue="Error: Could not save post.">
-        <operations xsi:type="iaml:PrimitiveOperation" id="model.128240e31d2.14d1" name="hide" inActions="wires.128240e326e.573 wires.128240e326e.59c"/>
-        <operations xsi:type="iaml:PrimitiveOperation" id="model.128240e31d2.14d2" name="show" inActions="wires.128240e326e.574"/>
+      <children xsi:type="iaml.visual:Label" id="visual.12837b6de01.45" name="Warning" fieldValue="" defaultValue="Invalid OpenID address.">
+        <operations xsi:type="iaml:PrimitiveOperation" id="model.12837b6dd45.118" name="hide" inActions="wires.12837b6de10.87 wires.12837b6de10.b4"/>
+        <operations xsi:type="iaml:PrimitiveOperation" id="model.12837b6dd45.119" name="show" inActions="wires.12837b6de10.b5"/>
       </children>
     </children>
   </scopes>

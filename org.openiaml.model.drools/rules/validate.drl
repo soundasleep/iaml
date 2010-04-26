@@ -42,9 +42,9 @@ end
 rule "When two TextFields of different types are under a SyncWire, add a 'validate' operation"
 	when
 		e1 : InputTextField( )
-		e1_property : Property ( name == "fieldValue", eContainer == e1 )
+		e1_property : Property ( e1.fieldValue == e1_property )
 		e2 : InputTextField( )
-		e2_property : Property ( name == "fieldValue", eContainer == e2 )
+		e2_property : Property ( e2.fieldValue == e2_property )
 		eval ( e1 != e2 )
 		sw : SyncWire ( )
 		eval ( functions.connects(sw, e1, e2) )
@@ -65,9 +65,9 @@ end
 rule "When two TextFields of different types are under a SyncWire, call the 'validate' operation onChange"
 	when
 		e1 : InputTextField( )
-		e1_property : Property ( name == "fieldValue", eContainer == e1 )
+		e1_property : Property ( e1.fieldValue == e1_property )
 		e2 : InputTextField( )
-		e2_property : Property ( name == "fieldValue", eContainer == e2 )
+		e2_property : Property ( e2.fieldValue == e2_property )
 		eval ( e1 != e2 )
 		sw : SyncWire ( )
 		eval ( functions.connects(sw, e1, e2) )
@@ -92,9 +92,9 @@ end
 rule "Create contents of 'validate' operation"
 	when
 		e1 : InputTextField( )
-		e1_property : Property ( name == "fieldValue", eContainer == e1 )
+		e1_property : Property ( e1.fieldValue == e1_property )
 		e2 : InputTextField( )
-		e2_property : Property ( name == "fieldValue", eContainer == e2 )
+		e2_property : Property ( e2.fieldValue == e2_property )
 		eval ( e1 != e2 )
 		sw : SyncWire ( )
 		eval ( functions.connects(sw, e1, e2) )

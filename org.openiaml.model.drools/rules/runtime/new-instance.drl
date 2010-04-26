@@ -120,28 +120,6 @@ rule "Create 'exists?' condition for DomainObjectInstances"
 
 end
 
-/**
- * @inference DomainAttributeInstance
- *		The 'fieldValue' {@model Property} of a {@model DomainAttributeInstance}
- *		is created with the same {@model DomainAttributeInstance#type type} as the {@model DomainAttributeInstance}.
- */
-rule "Create 'fieldValue' value for DomainAttributeInstances"
-	when
-		instance : DomainAttributeInstance ( )
-		
-		not ( Property( eContainer == instance, name == "fieldValue" ))
-		
-		eval ( handler.veto( instance ))
-		
-	then
-		# create a new one
-		Property value = handler.generatedProperty(instance, instance);
-		handler.setName(value, "fieldValue");
-		handler.setType(value, instance.getType());
-		queue.add(value, drools);
-
-end
-
 rule "Create the contents of the 'exists?' condition"
 	when
 		instance : DomainObjectInstance ( )

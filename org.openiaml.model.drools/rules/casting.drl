@@ -42,7 +42,7 @@ end
 rule "Create contents of 'can cast?' condition"
 	when
 		tf : InputTextField( )
-		fieldValue : Property ( name == "fieldValue", eContainer == tf )
+		fieldValue : Property ( tf.fieldValue == fieldValue )
 		c : CompositeCondition ( name == "can cast?", eContainer == tf )
 		
 		not ( start : StartNode ( eContainer == c ))
@@ -105,7 +105,7 @@ rule "Add 'can cast?' condition check for onChange connecting to Update"
 		sw : SyncWire ( )
 		eval ( functions.connects(sw, source, target) )
 		
-		fieldValue : Property ( eContainer == source, name == "fieldValue" )		
+		fieldValue : Property ( source.fieldValue == fieldValue )		
 
 		event : EventTrigger ( source.onChange == event )
 		upd : Operation ( name == "update", eContainer == target )
@@ -141,7 +141,7 @@ rule "Add 'can cast?' condition check for onAccess connecting to Init"
 		sw : SyncWire ( )
 		eval ( functions.connects(sw, source, target) )
 		
-		fieldValue : Property ( eContainer == target, name == "fieldValue" )		
+		fieldValue : Property ( target.fieldValue == fieldValue )		
 
 		event : EventTrigger ( source.onAccess == event )
 		upd : Operation ( name == "init", eContainer == source )

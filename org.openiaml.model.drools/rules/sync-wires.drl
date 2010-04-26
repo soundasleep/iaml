@@ -77,7 +77,7 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 	
 		event : EventTrigger( source.onChange == event )
 		operation : Operation( eContainer == target, name=="update" )
-		field : Property( eContainer == source, name=="fieldValue" )
+		field : Property( source.fieldValue == field )
 		wire : RunAction( from == event, to == operation, name == "run", eContainer == sw )
 		
 		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
@@ -101,7 +101,7 @@ rule "Run instance wire from source.access to source.init, when we have a value 
 		
 		event : EventTrigger( source.onAccess == event ) 
 		operation : Operation( eContainer == source, name=="init" )
-		field : Property( eContainer == target, name=="fieldValue" )
+		field : Property( target.fieldValue == field )
 		
 		not (RunAction( from == event, to == operation, name == "run", eContainer == sw ))
 						
@@ -123,7 +123,7 @@ rule "Run instance wire from source.access to source.init, adding ConditionEdge 
 		
 		event : EventTrigger( source.onAccess == event ) 
 		operation : Operation( eContainer == source, name=="init" )
-		field : Property( eContainer == target, name=="fieldValue" )
+		field : Property( target.fieldValue == field )
 		
 		run : RunAction( from == event, to == operation, name == "run", eContainer == sw )
 		
@@ -150,7 +150,7 @@ rule "Connect parameter wire to: run instance wire from source.access to source.
 	
 		event : EventTrigger( source.onAccess == event )
 		operation : Operation( eContainer == source, name=="init" )
-		field : Property( eContainer == target, name=="fieldValue" )
+		field : Property( target.fieldValue == field )
 		wire : RunAction( from == event, to == operation, name == "run", eContainer == sw )
 		
 		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
@@ -343,7 +343,7 @@ rule "Connect parameter for Session.init to incoming SyncWires (contained in Fra
 
 		initrw : RunAction( eContainer == sw2, from == inite, to == operation, name == "run" )
 		
-		field : Property( eContainer == sourceElement, name=="fieldValue" )
+		field : Property( sourceElement.fieldValue == field )
 		pw : ParameterEdge( eContainer == sw2, from == field, to == rw ) 
 
 		not( ParameterEdge( eContainer == sw2, from == field, to == initrw ))  
@@ -376,7 +376,7 @@ rule "Connect parameter for Session.init to incoming SyncWires (contained in Fra
 
 		initrw : RunAction( eContainer == sw2, from == inite, to == operation, name == "run" )
 		
-		field : Property( eContainer == sourceElement, name=="fieldValue" )
+		field : Property( sourceElement.fieldValue == field )
 		pw : ParameterEdge( eContainer == sw2, from == field, to == rw ) 
 
 		not( ParameterEdge( eContainer == sw2, from == field, to == initrw ))  
@@ -533,7 +533,7 @@ rule "A SyncWire between Attributes selected from a NewInstanceWire need to chec
 		initOp : Operation ( eContainer == tf, name == "init" )
 		run : RunAction ( from == access, to == initOp )
 		
-		attributeValue : Property ( eContainer == attribute, name == "fieldValue" )
+		attributeValue : Property ( attribute.fieldValue == attributeValue )
 		
 		param : ParameterEdge ( from == attributeValue, to == run )  
 		

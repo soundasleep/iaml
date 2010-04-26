@@ -129,10 +129,16 @@ rule "Create 'init' operation for label"
 		
 end
 
+/**
+ * @inference Changeable
+ *		A {@model Changeable} that also contains a {@model CompositeOperation} named
+ *		'update', 'refresh' or 'init' will automatically be completed.
+ */
 rule "Create components of 'update', 'refresh', 'init' operations"
 	when
-		o : CompositeOperation((name == "update" || name == "refresh" || name == "init"))
-		field : Property( eContainer == o.eContainer, name == "fieldValue" )
+		c : Changeable ( )
+		o : CompositeOperation((name == "update" || name == "refresh" || name == "init"), eContainer == c)
+		field : Property( c.fieldValue == field )
 		
 		eval ( handler.veto( o ))
 

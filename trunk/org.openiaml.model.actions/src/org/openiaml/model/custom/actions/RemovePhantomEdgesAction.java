@@ -28,7 +28,6 @@ import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.inference.InfiniteSubProgressMonitor;
 import org.openiaml.model.model.Action;
-import org.openiaml.model.model.ConditionalEdge;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.Wire;
@@ -213,9 +212,6 @@ public class RemovePhantomEdgesAction extends IamlFileAction {
 			return true;
 		} else if (obj instanceof ConstraintEdge && (((ConstraintEdge) obj).getFrom() == null 
 				|| ((ConstraintEdge) obj).getTo() == null)) {
-			return true;
-		} else if (obj instanceof ConditionalEdge && (((ConditionalEdge) obj).getFrom() == null 
-				|| ((ConditionalEdge) obj).getTo() == null)) {
 			return true;
 		} else if (obj instanceof ExecutionEdge && (((ExecutionEdge) obj).getFrom() == null 
 				|| ((ExecutionEdge) obj).getTo() == null)) {

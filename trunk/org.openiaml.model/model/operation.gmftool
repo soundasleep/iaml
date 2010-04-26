@@ -218,19 +218,6 @@
         collapsible="true">
       <tools
           xsi:type="gmftool:CreationTool"
-          title="ConditionalEdge"
-          description="Create new ConditionalEdge">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/ConditionalEdge.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/ConditionalEdge.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
           title="DataFlowEdge"
           description="Create new DataFlowEdge">
         <smallIcon

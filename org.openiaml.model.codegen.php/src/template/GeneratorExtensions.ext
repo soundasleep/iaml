@@ -154,11 +154,13 @@ availableInCurrentScriptAction(model::ActionSource source, model::ActionDestinat
  */
 List[model::Operation] allContainerOperations(model::Scope this) :
 	operations.toSet().union( scopes.allContainerOperations() )
+		.union( elements.allContainerOperations() )
 		.union( possibleParentOperations(eContainer) )
 		.select(o | operationUsed(o));
 
 List[model::Operation] allContainerOperations(model::scopes::Email this) :
 	operations.toSet().union( scopes.allContainerOperations() )
+		.union( elements.allContainerOperations() )
 		.union( labels.allContainerOperations() )
 		.union( buttons.allContainerOperations() )
 		.union( possibleParentOperations(eContainer) )
@@ -166,6 +168,7 @@ List[model::Operation] allContainerOperations(model::scopes::Email this) :
 
 List[model::Operation] allContainerOperations(model::visual::Frame this) :
 	operations.toSet().union( scopes.allContainerOperations() )
+		.union( elements.allContainerOperations() )
 		.union( children.allContainerOperations() )
 		.union( possibleParentOperations(eContainer) )
 		.select(o | operationUsed(o));
@@ -426,6 +429,12 @@ model::DomainAttribute getPrimaryKey(model::DomainObjectInstance this) :
 
 model::DomainAttribute getPrimaryKey(emf::EObject this) :
 	null;
+
+/**
+ * Does this given attribute instance represent a generated primary key?
+ */	
+isGeneratedPrimaryKey(model::DomainAttributeInstance this) :
+	isGenerated && !outExtendsEdges.to.typeSelect(model::DomainAttribute).select(a|a.primaryKey).isEmpty ;
 
 List[model::DomainObject] allSubtypes(model::DomainObject this):
 	inExtendsEdges.from.typeSelect(model::DomainObject).collect(e|allSubtypes(e)).flatten().add(this);

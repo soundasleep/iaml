@@ -350,7 +350,8 @@
 		7. the cached value is used 
 		
 	«ENDREM»
-	«IF !php && model::DomainObjectInstance.isInstance(outActions.typeSelect(model::wires::RunAction).first().to.eContainer)»
+	«IF !php && model::DomainObjectInstance.isInstance(outActions.typeSelect(model::wires::RunAction).first().to.eContainer)
+		&& getClientSideCacheOperations(getRoot()).containsAll(outActions.typeSelect(model::wires::RunAction).to)»
 
 		var function_queue = function(response) {
 		 	if (response == "ok") {
@@ -367,10 +368,10 @@
 		};
 		
 		«FOREACH outActions.typeSelect(model::wires::RunAction) AS run»
-			«IF model::PrimitiveOperation.isInstance(run.to) && ((model::PrimitiveOperation) run.to).name == "exists?"»
+			«IF getClientSideCacheOperations(getRoot()).contains(run.to)»
 				«REM»
 				/**
-				 * If we are in Javascript and we are trying to get an operation on a DomainObjectInstance (usually 'exists?') 
+				 * If we are in Javascript and we are trying to get an operation on a DomainObjectInstance (e.g. 'exists?') 
 				 * and we are in a condition, we can't wait for an async result. In this case, we use
 				 * cached operation results (stored in Javascript) which can be updated through
 				 * callbacks, etc.
@@ -381,8 +382,11 @@
 				} else {
 					function_queue("not ok");
 				}
-			«ELSE»
-				«EXPAND OperationCall::callRemoteOperation(php, false) FOREACH outActions.typeSelect(model::wires::RunAction)-»
+			«ELSE»	
+				«throwException("Unexpected remote operation call for a non-cached remote operation")»	
+				«REM»
+					EXPAND OperationCall::callRemoteOperation(php, false) FOREACH outActions.typeSelect(model::wires::RunAction)
+				«ENDREM»
 			«ENDIF»
 		«ENDFOREACH»
 	«ELSE»

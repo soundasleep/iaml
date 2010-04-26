@@ -52,7 +52,7 @@
       <children xsi:type="iaml.visual:Button" id="visual.128240e326e.4ba" name="Save" outActions="wires.128240e326e.43a">
         <actions xsi:type="iaml.wires:RunAction" id="wires.128240e326e.43a" name="onClick" from="visual.128240e326e.4ba" to="model.128240e31d2.173f"/>
       </children>
-      <children xsi:type="iaml.visual:Label" id="visual.12837b6de01.45" name="Warning" fieldValue="" defaultValue="Invalid OpenID address.">
+      <children xsi:type="iaml.visual:Label" id="visual.12837b6de01.45" name="Warning" fieldValue="" defaultValue="Error: Could not save instance successfully.">
         <operations xsi:type="iaml:PrimitiveOperation" id="model.12837b6dd45.118" name="hide" inActions="wires.12837b6de10.87 wires.12837b6de10.b4"/>
         <operations xsi:type="iaml:PrimitiveOperation" id="model.12837b6dd45.119" name="show" inActions="wires.12837b6de10.b5"/>
       </children>

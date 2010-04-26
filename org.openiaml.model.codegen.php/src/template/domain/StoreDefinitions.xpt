@@ -40,6 +40,30 @@
 				}
 			«ENDIF»
 		}
+		
+		«IF !isGeneratedPrimaryKey()»
+		/**
+		 * Can the given attribute instance be saved without throwing an error?
+		 * Not generated for generated primary keys. (TODO it should also not be
+		 * generated for attributes with a default value.)
+		 */
+		function can_save_queued_store_domain_attribute_«safeName()»() {
+			«IF containingSession(this) != null»
+				/* contained within a session */
+				$arg0 = has_session("instance_queue_«safeName(containingSession())-»_«safeName()-»", false);
+			«ELSE»
+				/* contained within a frame */
+				$arg0 = get_application_value("instance_queue_«safeName()-»", false);
+			«ENDIF»
+			
+			if ($arg0 === false) {
+				return false;
+			}
+				
+			// can we cast it?
+			return can_cast($arg0, '«type.uRI»');
+		}
+		«ENDIF»
 		«ENDIF»
 	«ELSE»
 		/* for attributes with 'autosave' set to false */
@@ -158,6 +182,21 @@
 	function save_queued_store_domain_object_«safeName()-»() {
 		/* save a queued domain object instance */
 		«EXPAND queuedDomainObjectStore FOREACH attributes»
+	}
+	
+	/**
+	 * Can the current object instance be saved without throwing an error?
+	 * i.e. Have all of the required attribute instances been set?
+	 */
+	function can_object_instance_save_«safeName()»() {
+		«FOREACH attributes AS a»
+			«IF !isGeneratedPrimaryKey(a)»
+			if (!can_save_queued_store_domain_attribute_«safeNameString(a.id)-»()) {
+				return false;
+			}
+			«ENDIF»
+		«ENDFOREACH»
+		return true;
 	}
 «ENDDEFINE»
 

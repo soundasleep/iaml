@@ -89,17 +89,11 @@ public class OpenIDAsAuthor extends CodegenTestCase {
 		}
 		
 		// we don't set the URL
+		assertLabelTextNotPresent("Error: Could not save instance successfully.");
 		
 		// we try clicking on the button
-		try {
-			clickButtonWithText("Save");
-			fail("Should have failed");
-		} catch (RuntimeException e) {
-			// expected
-			// TODO however, this RuntimeException is not a PhpRuntimeException, or anything expected.
-			// it's actually probably an implementation bug, because 'Save' is trying to
-			// be called when not all attributes have been set.
-		}
+		clickButtonWithText("Save");
+		assertLabelTextPresent("Error: Could not save instance successfully.");
 		
 		// and we can't view the news page
 		viewNewsPageUnsuccessfully(sitemap);
@@ -117,7 +111,7 @@ public class OpenIDAsAuthor extends CodegenTestCase {
 		assertNoProblem();
 
 		// it is not present
-		assertLabelTextNotPresent("Error: Could not save post.");
+		assertLabelTextNotPresent("Error: Could not save instance successfully.");
 
 		// edit the title
 		{
@@ -140,7 +134,7 @@ public class OpenIDAsAuthor extends CodegenTestCase {
 		assertProblem();
 		
 		// the warning has now shown
-		assertLabelTextExactlyPresent("Error: Could not save post.");
+		assertLabelTextExactlyPresent("Error: Could not save instance successfully.");
 		
 		// and we can't view the news page
 		viewNewsPageUnsuccessfully(sitemap);

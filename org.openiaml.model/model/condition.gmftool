@@ -145,19 +145,6 @@
             path="icons/full/obj32/TemporaryVariable.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="DecisionCondition"
-          description="Create new DecisionCondition">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/DecisionCondition.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/DecisionCondition.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
     </tools>
     <tools
         xsi:type="gmftool:ToolGroup"

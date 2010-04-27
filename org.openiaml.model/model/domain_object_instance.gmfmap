@@ -80,7 +80,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="domain_object_instance.gmftool#//@palette/@tools.0/@tools.7"/>
+          href="domain_object_instance.gmftool#//@palette/@tools.0/@tools.6"/>
       <diagramNode
           href="iaml.gmfgraph#Property"/>
     </ownedChild>
@@ -127,7 +127,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="domain_object_instance.gmftool#//@palette/@tools.0/@tools.4"/>
+          href="domain_object_instance.gmftool#//@palette/@tools.0/@tools.3"/>
       <diagramNode
           href="iaml.gmfgraph#Property"/>
     </ownedChild>
@@ -209,31 +209,9 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="domain_object_instance.gmftool#//@palette/@tools.0/@tools.5"/>
+          href="domain_object_instance.gmftool#//@palette/@tools.0/@tools.4"/>
       <diagramNode
           href="iaml.gmfgraph#DomainAttributeInstance"/>
-    </ownedChild>
-  </nodes>
-  <nodes>
-    <containmentFeature
-        href="iaml.ecore#//ContainsOperations/operations"/>
-    <ownedChild>
-      <domainMetaElement
-          href="iaml.ecore#//operations/DecisionOperation"/>
-      <domainSpecialization
-          body="self.oclIsTypeOf( DecisionOperation )"/>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="iaml.gmfgraph#DecisionOperationName"/>
-        <features
-            href="iaml.ecore#//NamedElement/name"/>
-      </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="domain_object_instance.gmftool#//@palette/@tools.0/@tools.3"/>
-      <diagramNode
-          href="iaml.gmfgraph#DecisionOperation"/>
     </ownedChild>
   </nodes>
   <nodes>
@@ -555,7 +533,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="domain_object_instance.gmftool#//@palette/@tools.0/@tools.6"/>
+          href="domain_object_instance.gmftool#//@palette/@tools.0/@tools.5"/>
       <diagramNode
           href="iaml.gmfgraph#PrimitiveCondition"/>
     </ownedChild>

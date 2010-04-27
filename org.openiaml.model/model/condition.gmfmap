@@ -94,28 +94,6 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//ContainsConditions/conditions"/>
-    <ownedChild>
-      <domainMetaElement
-          href="iaml.ecore#//operations/DecisionCondition"/>
-      <domainSpecialization
-          body="self.oclIsTypeOf( DecisionCondition )"/>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="iaml.gmfgraph#DecisionConditionName"/>
-        <features
-            href="iaml.ecore#//NamedElement/name"/>
-      </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="condition.gmftool#//@palette/@tools.1/@tools.2"/>
-      <diagramNode
-          href="iaml.gmfgraph#DecisionCondition"/>
-    </ownedChild>
-  </nodes>
-  <nodes>
-    <containmentFeature
         href="iaml.ecore#//CompositeCondition/variables"/>
     <ownedChild>
       <domainMetaElement
@@ -188,9 +166,11 @@
       <domainSpecialization
           body="self.oclIsTypeOf( DecisionNode )"/>
       <labelMappings
-          readOnly="true">
+          xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
             href="iaml.gmfgraph#DecisionNodeName"/>
+        <features
+            href="iaml.ecore#//operations/DecisionNode/name"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"

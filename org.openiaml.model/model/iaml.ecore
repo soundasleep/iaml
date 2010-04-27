@@ -327,7 +327,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TemporaryVariable" eSuperTypes="#//NamedElement #//DataFlowEdgesSource #//DataFlowEdgeDestination">
+  <eClassifiers xsi:type="ecore:EClass" name="TemporaryVariable" eSuperTypes="#//NamedElement #//DataFlowEdgesSource #//DataFlowEdgeDestination #//wires/ParameterEdgesSource">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Temporary storage of values contained within an {@model Operation} which will be lost once the operation is completed."/>
     </eAnnotations>

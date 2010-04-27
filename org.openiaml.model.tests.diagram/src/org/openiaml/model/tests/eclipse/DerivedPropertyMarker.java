@@ -59,8 +59,8 @@ public class DerivedPropertyMarker extends AbstractActionTestCase<IFile> {
 		editor_operation = openDiagram(op2);
 		assertEditorOperation(editor_operation);
 		
-		ShapeNodeEditPart dop1 = assertHasOperation(editor_operation, "non-generated");
-		ShapeNodeEditPart dop2 = assertHasOperation(editor_operation, "generated");
+		ShapeNodeEditPart dop1 = assertHasDecisionNode(editor_operation, "non-generated");
+		ShapeNodeEditPart dop2 = assertHasDecisionNode(editor_operation, "generated");
 		
 		assertNotHasDerivedMarker(dop1);
 		assertHasDerivedMarker(dop2);

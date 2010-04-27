@@ -18,7 +18,7 @@ import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.CastNode;
-import org.openiaml.model.model.operations.DecisionOperation;
+import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.visual.Frame;
@@ -168,7 +168,7 @@ public class SyncWiresProperties extends InferenceTestCase {
 			FinishNode finish = assertHasFinishNode(update);
 			CancelNode cancel = assertHasCancelNode(update);
 			
-			DecisionOperation check = assertHasDecisionOperation(update, "can cast?");
+			DecisionNode check = assertHasDecisionNode(update, "can cast?");
 			CastNode cast = assertHasCastNode(update);
 			
 			PrimitiveOperation set = assertHasPrimitiveOperation(update, "setPropertyToValue");

@@ -22,11 +22,11 @@ context model::components::LoginHandler ERROR "A login handler must have an inco
 context model::wires::RunAction ERROR "A run instance wire can only connect to an operation" :
 	model::Operation.isInstance( to );
 
-context model::operations::DecisionOperation ERROR "A compare decision operation must have at least two data flows in to compare" :
+context model::operations::DecisionNode ERROR "A compare DecisionNode must have at least two data flows in to compare" :
 	(name == "equal?" && inFlows.size >= 2) 
 	|| (name != "equal?"); 
 
-context model::operations::DecisionOperation ERROR "A DecisionOperation can only have at most two out execution edges" :
+context model::operations::DecisionNode ERROR "A DecisionNode can only have at most two out execution edges" :
 	outExecutions.size <= 2;
 	
 context model::wires::SyncWire ERROR "You cannot have a SyncWire that connects to a StaticValue":
@@ -161,11 +161,11 @@ context model::components::ExitGate ERROR "An ExitGate needs to have at least on
 	inConditionEdges.size >= 1
 	|| outWires.typeSelect(model::NamedElement).exists(w | w.name == "last");
 	
-context model::operations::DecisionCondition ERROR "A 'can cast?' decision needs to have an incoming DataFlowEdge from a CastNode" :
+context model::operations::DecisionNode ERROR "A 'can cast?' DecisionNode needs to have an incoming DataFlowEdge from a CastNode" :
 	name != "can cast?" || 
 	(inFlows.size == 1 && model::operations::CastNode.isInstance(inFlows.first().from));
 
-context model::operations::DecisionOperation ERROR "A 'can cast?' decision needs to have an incoming DataFlowEdge from a CastNode" :
+context model::operations::DecisionNode ERROR "A 'can cast?' DecisionNode needs to have an incoming DataFlowEdge from a CastNode" :
 	name != "can cast?" || 
 	(inFlows.size == 1 && model::operations::CastNode.isInstance(inFlows.first().from));
 

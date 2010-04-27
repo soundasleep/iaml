@@ -5,7 +5,6 @@ package org.openiaml.model.tests.inference.model0_4;
 
 import java.util.Set;
 
-import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.DomainObject;
@@ -14,11 +13,6 @@ import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Property;
-import org.openiaml.model.model.operations.CancelNode;
-import org.openiaml.model.model.operations.DecisionOperation;
-import org.openiaml.model.model.operations.FinishNode;
-import org.openiaml.model.model.operations.OperationCallNode;
-import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
@@ -162,40 +156,20 @@ public class DomainInheritanceEditing extends InferenceTestCase {
 	}
 
 	/**
-	 * Test the composition of the 'exists?' composite condition.
+	 * There is no 'exists?' composite condition, since there is
+	 * now an 'exists?' primitive condition.
 	 *
 	 * @throws Exception
 	 */
-	public void testExistsConditionCompositiion() throws Exception {
+	public void testExistsConditions() throws Exception {
 		root = loadAndInfer(DomainInheritanceEditing.class);
 
 		Frame page = assertHasFrame(root, "create a new student without autosave");
 		DomainObjectInstance instance = assertHasDomainObjectInstance(page, "new student");
 
-		// the 'exists?' operation
-		DecisionOperation decision = assertHasDecisionOperation(instance, "exists?");
-		assertGenerated(decision);
-
-		// the condition on the object instance
-		CompositeCondition exists = assertHasCompositeCondition(instance, "exists?");
-		assertGenerated(exists);
-
-		StartNode start = assertHasStartNode(exists);
-		FinishNode finish = assertHasFinishNode(exists);
-		CancelNode cancel = assertHasCancelNode(exists);
-
-		// virtual operation call
-		OperationCallNode callExists = assertHasOperationCallNode(exists, "exists?");
-		assertGenerated(callExists);
-
-		// calls the decision operation
-		RunAction virtual = assertHasRunAction(root, callExists, decision, "run");
-		assertGenerated(virtual);
-
-		// the rest of the structure
-		assertHasExecutionEdge(exists, start, callExists);
-		assertHasExecutionEdge(exists, callExists, finish);
-		assertHasExecutionEdge(exists, callExists, cancel);
+		// the 'exists?' PrimitiveCondition
+		assertHasNoCompositeCondition(instance, "exists?");
+		assertHasPrimitiveCondition(instance, "exists?");
 
 	}
 

@@ -11,7 +11,7 @@ import org.openiaml.model.model.Property;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.components.ExitGate;
 import org.openiaml.model.model.operations.CancelNode;
-import org.openiaml.model.model.operations.DecisionOperation;
+import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.Session;
@@ -197,7 +197,7 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 		assertGenerated(finish);
 		CancelNode cancel = assertHasCancelNode(condition);
 		assertGenerated(cancel);
-		DecisionOperation check = assertHasDecisionOperation(condition, "true?");
+		DecisionNode check = assertHasDecisionNode(condition, "true?");
 		assertGenerated(check);
 
 		// flow

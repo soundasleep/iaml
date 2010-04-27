@@ -16,8 +16,7 @@ import org.openiaml.model.model.Property;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.CastNode;
-import org.openiaml.model.model.operations.DecisionCondition;
-import org.openiaml.model.model.operations.DecisionOperation;
+import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.OperationCallNode;
 import org.openiaml.model.model.operations.StartNode;
@@ -237,7 +236,7 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 
 		// now we can check the contents
 		StartNode start = assertHasStartNode(validate);
-		DecisionOperation check = assertHasDecisionOperation(validate, "can cast?");
+		DecisionNode check = assertHasDecisionNode(validate, "can cast?");
 		assertHasExecutionEdge(validate, start, check);
 
 		CastNode cast = assertHasCastNode(validate);
@@ -397,7 +396,7 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 		// parameter is of 'any' type
 		assertNull(param.getType());
 
-		DecisionCondition check = assertHasDecisionCondition(canCast, "can cast?");
+		DecisionNode check = assertHasDecisionNode(canCast, "can cast?");
 
 		CastNode cast = assertHasCastNode(canCast);
 		assertHasDataFlowEdge(canCast, param, cast);	// in

@@ -11,7 +11,7 @@ import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.operations.CancelNode;
-import org.openiaml.model.model.operations.DecisionCondition;
+import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.visual.Frame;
@@ -201,7 +201,7 @@ public class SetWireClient extends InferenceTestCase {
 		FinishNode finish = assertHasFinishNode(cond);
 		CancelNode cancel = assertHasCancelNode(cond);
 
-		DecisionCondition check = assertHasDecisionCondition(cond, "is set?");
+		DecisionNode check = assertHasDecisionNode(cond, "is set?");
 
 		assertHasExecutionEdge(cond, start, check);
 		assertHasExecutionEdge(cond, check, finish);

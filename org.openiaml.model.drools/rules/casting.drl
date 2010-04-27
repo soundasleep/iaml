@@ -60,7 +60,7 @@ rule "Create contents of 'can cast?' condition"
 		CastNode cast = handler.generatedCastNode(c, c);
 		queue.add(cast, drools);
 		
-		DecisionCondition check = handler.generatedDecisionCondition(c, c);
+		DecisionNode check = handler.generatedDecisionNode(c, c);
 		handler.setName(check, "can cast?");
 		queue.add(check, drools);
 		

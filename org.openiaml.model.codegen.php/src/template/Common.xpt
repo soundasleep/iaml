@@ -21,3 +21,14 @@
 «EXPAND template::users::Includes::getInclude FOREACH getRoot().eAllContents.typeSelect(model::users::Role)-»
 
 «ENDDEFINE»
+
+/**
+ * Write out the code to throw a runtime exception.
+ */
+«DEFINE runtimeException(Boolean php, String message) FOR emf::EObject»
+	«IF php»
+		throw new IamlRuntimeException("«escapePhpString(message)»");
+	«ELSE»
+		throw new IamlJavascriptException("«escapeString(message)»");
+	«ENDIF»
+«ENDDEFINE»

@@ -9,7 +9,11 @@
  * A temporary variable definition.
  */
 «DEFINE temporaryVariable(Boolean php) FOR model::TemporaryVariable»
-	$temp_«safeName()-» = null;	/* temporary variable '«safeNameString(name)-»' */
+	«IF php»
+		$temp_«safeName()-» = null;	/* temporary variable '«safeNameString(name)-»' */
+	«ELSE»
+		var temp_«safeName()-» = null;	/* temporary variable '«safeNameString(name)-»' */
+	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

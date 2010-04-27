@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.127e56efe3e.1">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.127e56efe3e.1">
   <domainStores id="model.127e56efe3e.4" name="Database">
     <children id="model.127e56efe3e.f" name="News" outWires="wires.127e56eff0a.1">
       <wires xsi:type="iaml.wires:SelectWire" id="wires.127e56eff0a.1" from="model.127e56efe3e.f" to="model.127e56efe3e.b0" name="select"/>
@@ -17,10 +17,10 @@
       <previous xsi:type="iaml:PrimitiveOperation" id="model.127e56efe3e.122" name="previous" inActions="wires.127e56eff0a.2b wires.127e56eff0a.2d"/>
       <next xsi:type="iaml:PrimitiveOperation" id="model.127e56efe3e.128" name="next" inActions="wires.127e56eff0a.2a wires.127e56eff0a.2c"/>
       <reset xsi:type="iaml:PrimitiveOperation" id="model.127e56efe3e.129" name="reset" inActions="wires.127e56eff0a.28"/>
-      <hasPrevious xsi:type="iaml.operations:DecisionCondition" id="operations.127e56eff0a.3" name="has previous" outConditionEdges="wires.127e5a8ff7e.20">
+      <hasPrevious xsi:type="iaml:PrimitiveCondition" id="operations.127e56eff0a.3" name="has previous" outConditionEdges="wires.127e5a8ff7e.20">
         <conditionEdges id="wires.127e5a8ff7e.20" from="operations.127e56eff0a.3" to="wires.127e56eff0a.2d"/>
       </hasPrevious>
-      <hasNext xsi:type="iaml.operations:DecisionCondition" id="operations.127e56eff0a.4" name="has next" outConditionEdges="wires.127e5a8ff7e.1e">
+      <hasNext xsi:type="iaml:PrimitiveCondition" id="operations.127e56eff0a.4" name="has next" outConditionEdges="wires.127e5a8ff7e.1e">
         <conditionEdges id="wires.127e5a8ff7e.1e" from="operations.127e56eff0a.4" to="wires.127e56eff0a.2c"/>
       </hasNext>
       <results id="model.127e56efe3e.12a" name="result count" outWires="wires.127e56eff0a.26">

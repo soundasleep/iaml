@@ -33,7 +33,7 @@
   <scopes xsi:type="iaml.scopes:Session" id="scopes.1268c90cae0.1" name="Disclaimed Section">
     <conditions xsi:type="iaml:CompositeCondition" id="model.1268c991b90.12" name="disclaimer viewed?" outConditionEdges="wires.1268c991bee.a">
       <conditionEdges id="wires.1268c991bee.a" name="condition" from="model.1268c991b90.12" to="gate"/>
-      <operations xsi:type="iaml.operations:DecisionOperation" id="operations.1268cdc3e6e.13" name="true?" inFlows="model.1268cdc3de1.80" inExecutions="model.1268cdc3de1.82" outExecutions="model.1268cdc3de1.84 model.1268cdc3de1.85"/>
+      <nodes xsi:type="iaml.operations:DecisionNode" id="operations.1268cdc3e6e.13" outExecutions="model.1268cdc3de1.84 model.1268cdc3de1.85" inExecutions="model.1268cdc3de1.82" inFlows="model.1268cdc3de1.80"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.1268cdc3e6e.11" outExecutions="model.1268cdc3de1.82"/>
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.1268cdc3e6e.1a" inExecutions="model.1268cdc3de1.84"/>
       <nodes xsi:type="iaml.operations:CancelNode" id="operations.1268cdc3e6e.1b" inExecutions="model.1268cdc3de1.85" exceptionText="has not viewed disclaimer yet"/>

@@ -7,8 +7,8 @@
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.126aaf8397d.26e" name="Page 1">
     <conditions xsi:type="iaml:CompositeCondition" id="model.126aaf83900.4f8" name="redirect to page 2?" outConditionEdges="wires.126aaf8398c.13d">
-      <conditions xsi:type="iaml.operations:DecisionCondition" id="operations.126aaf8398c.139" name="true?" outExecutions="model.126aaf83900.536 model.126aaf83900.537" inExecutions="model.126aaf83900.538" inFlows="model.126aaf83900.539"/>
       <conditionEdges id="wires.126aaf8398c.13d" from="model.126aaf83900.4f8" to="wires.126aaf8398c.137"/>
+      <nodes xsi:type="iaml.operations:DecisionNode" id="operations.126aaf8398c.139" outExecutions="model.126aaf83900.536 model.126aaf83900.537" inExecutions="model.126aaf83900.538" inFlows="model.126aaf83900.539"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.126aaf8398c.136" outExecutions="model.126aaf83900.538"/>
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.126aaf8398c.137" inExecutions="model.126aaf83900.536"/>
       <nodes xsi:type="iaml.operations:CancelNode" id="operations.126aaf8398c.138" inExecutions="model.126aaf83900.537"/>

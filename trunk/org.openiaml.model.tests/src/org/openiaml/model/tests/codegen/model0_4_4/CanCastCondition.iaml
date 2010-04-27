@@ -2,8 +2,8 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1274f76bcd9.36">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <conditions xsi:type="iaml:CompositeCondition" id="model.1274f76bcd9.50" name="can cast?" outConditionEdges="wires.1274f76c1da.6a">
-      <conditions xsi:type="iaml.operations:DecisionCondition" id="operations.1274f877c61.62" name="can cast?" outExecutions="model.1274f8f028d.33 model.1274f8f028d.35" inExecutions="model.1274f8f028d.36" inFlows="model.1274f8f028d.2e"/>
       <conditionEdges id="wires.1274f76c1da.6a" name="bar" from="model.1274f76bcd9.50" to="wires.1274f76c1da.64"/>
+      <nodes xsi:type="iaml.operations:DecisionNode" id="operations.1274f877c61.62" outExecutions="model.1274f8f028d.33 model.1274f8f028d.35" inExecutions="model.1274f8f028d.36" inFlows="model.1274f8f028d.2e" name="can cast?"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.1274f877c61.31" outExecutions="model.1274f8f028d.36"/>
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.1274f877c61.3b" inExecutions="model.1274f8f028d.33"/>
       <nodes xsi:type="iaml.operations:CancelNode" id="operations.1274f877c61.3c" inExecutions="model.1274f8f028d.35"/>
@@ -20,7 +20,7 @@
     </conditions>
     <operations xsi:type="iaml:CompositeOperation" id="model.1274f76bcd9.47" name="convert and insert" inActions="wires.1274f76c1da.64">
       <operations xsi:type="iaml:PrimitiveOperation" id="model.1274f8533f5.28" name="setPropertyToValue" inFlows="model.1274f8f028d.3a4" inExecutions="model.1274f877ba5.27" outFlows="model.1274f8533f5.2a" outExecutions="model.1274f8533f5.2b"/>
-      <operations xsi:type="iaml.operations:DecisionOperation" id="operations.1274f877c61.10" name="can cast?" inFlows="model.1274f8f028d.3a3" inExecutions="model.1274f8f028d.25a" outExecutions="model.1274f877ba5.26 model.1274f877ba5.27"/>
+      <nodes xsi:type="iaml.operations:DecisionNode" id="operations.1274f877c61.10" outExecutions="model.1274f877ba5.26 model.1274f877ba5.27" inExecutions="model.1274f8f028d.25a" inFlows="model.1274f8f028d.3a3" name="can cast?"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.1274f8534e0.1" outExecutions="model.1274f8f028d.25a"/>
       <nodes xsi:type="iaml.operations:CastNode" id="operations.127503c4bc5.4e" outFlows="model.1274f8f028d.3a3 model.1274f8f028d.3a4 model.1274f8f028d.3a7" inFlows="model.1274f8533f5.25"/>
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.1274f8534e0.3" inExecutions="model.1274f8533f5.2b"/>

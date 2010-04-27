@@ -31,6 +31,25 @@
 		«EXPAND saveOperation(start, php) FOR this» 
 	«ELSEIF name == "new"»
 		«EXPAND newOperation(start, php) FOR this» 
+	«ELSEIF name == "check permissions"»
+		«IF model::components::AccessControlHandler.isInstance(eContainer)»
+			«EXPAND template::users::AccessControlHandler::accessControlHandlerOperationCall(php, null, (model::components::AccessControlHandler) eContainer)»
+			;
+		«ELSE»
+			«throwException("Unexpected 'check permissions' container: " + eContainer)»
+		«ENDIF»
+	«ELSEIF name == "add permission"»
+		«REM»this operation requires an incoming parameter«ENDREM»
+		«EXPAND template::Common::runtimeException(php, "Cannot call 'add permission' without a RunAction")»
+	«ELSEIF name == "remove permission"»
+		«REM»this operation requires an incoming parameter«ENDREM»
+		«EXPAND template::Common::runtimeException(php, "Cannot call 'remove permission' without a RunAction")»
+	«ELSEIF name == "add role"»
+		«REM»this operation requires an incoming parameter«ENDREM»
+		«EXPAND template::Common::runtimeException(php, "Cannot call 'add role' without a RunAction")»
+	«ELSEIF name == "remove role"»
+		«REM»this operation requires an incoming parameter«ENDREM»
+		«EXPAND template::Common::runtimeException(php, "Cannot call 'remove role' without a RunAction")»
 	«ELSE»
 		«throwException("Unknown function to expand '" + name + "': " + this)»
 	«ENDIF»
@@ -465,7 +484,7 @@
  */
 «DEFINE saveOperation(model::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
 	«IF model::DomainObjectInstance.isInstance(eContainer)»
-		/* save instance */
+		/* save object instance */
 		«LET (model::DomainObjectInstance) eContainer AS instance»
 			«IF php»
 				save_queued_store_domain_object_«safeNameString(instance.id)-»();
@@ -476,6 +495,20 @@
 				 * the result from the server.
 				 */
 				save_queued_store_domain_object('«safeNameString(instance.id)-»');
+			«ENDIF»
+		«ENDLET»
+	«ELSEIF model::DomainAttributeInstance.isInstance(eContainer)»
+		/* save attribute instance */
+		«LET (model::DomainAttributeInstance) eContainer AS instance»
+			«IF php»
+				save_queued_store_domain_attribute_«safeNameString(instance.id)-»();
+			«ELSE»
+				/*
+				 * Calling 'save' on a DomainAttributeInstance will NOT
+				 * block a Javascript-side call, so there is no way to get
+				 * the result from the server.
+				 */
+				save_queued_store_domain_attribute('«safeNameString(instance.id)-»');
 			«ENDIF»
 		«ENDLET»
 	«ELSE»

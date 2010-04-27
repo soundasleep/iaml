@@ -255,60 +255,13 @@
 	«EXPAND continueChainedOperations(php) FOR this»
 «ENDDEFINE»
 
-/* a decision operation: expandOperationContents will continue the execution flow */
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, Boolean php) FOR model::operations::DecisionOperation-»
-	// decision operation "«name-»"
-	«EXPAND Contents::operationContents(start, php) FOR this-»
-
-	«REM»Contents::operationContents() will expand outgoing executions as necessary«ENDREM»
-
-	// continue chained operations
-	«EXPAND continueChainedOperations(php) FOR this»
-«ENDDEFINE»
-
 /**
  * A decision node: consult the incoming ConditionEdges.
- *
- * @implementation DecisionNode
- *		If more than one {@model ConditionEdge} is incoming to an executed {@model DecisionNode},
- *		then all passing {@model ConditionEdgesSource} must be true for execution to pass.
- * @implementation DecisionNode
- *		If no {@model ConditionEdge}s are incoming to a {@model DecisionNode},
- *		then execution will ignore the pass/fail outgoing edges.
+ * TODO can we remove this template? It doesn't seem to do anything useful.
  */
 «DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, Boolean php) FOR model::operations::DecisionNode-»
 	// decision node
-	«IF inConditionEdges.isEmpty»
-		«FOREACH getFailFlows() AS e-»
-			«EXPAND addStack(start, php) FOR e»
-		«ENDFOREACH»
-		«FOREACH getPassFlows() AS e-»
-			«EXPAND addStack(start, php) FOR e»
-		«ENDFOREACH»
-	«ELSE»
-		«IF php»$result«ELSE»result«ENDIF» = «EXPAND template::conditions::Runtime::callCondition(php, false) FOREACH inConditionEdges SEPARATOR " && "»;
-		if (!«IF php»$result«ELSE»result«ENDIF») {
-			«REM»continue expanding following conditions (if any)«ENDREM»
-			«FOREACH getFailFlows() AS e-»
-				«EXPAND addStack(start, php) FOR e»
-			«ENDFOREACH»
-		} else {
-			«REM»continue expanding following conditions (if any)«ENDREM»
-			«FOREACH getPassFlows() AS e-»
-				«EXPAND addStack(start, php) FOR e»
-			«ENDFOREACH»
-		}
-	«ENDIF»
-«ENDDEFINE»
-
-/**
- * A decision condition.
- */
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, Boolean php) FOR model::operations::DecisionCondition-»
-	// decision condition "«name-»"
-	«EXPAND Contents::operationContents(start, php) FOR this-»
-
-	«REM»Contents::operationContents() will expand outgoing executions as necessary«ENDREM»
+	«EXPAND Contents::operationContents(start, php)»
 «ENDDEFINE»
 
 /**

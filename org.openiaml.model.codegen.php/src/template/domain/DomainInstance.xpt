@@ -151,6 +151,9 @@
 			is_object_instance_empty_«safeName(instance)»()
 		«ELSEIF instance.canSave == this»
 			can_object_instance_save_«safeName(instance)»()
+		«ELSEIF name == "exists?"»
+			«REM»issue 180: can we merge this operation into 'empty'?«ENDREM»
+			exists_object_instance_«safeNameString(instance.id)»()
 		«ELSE»
 			«throwException("Unknown primitive condition for DomainObjectInstance: " + this)»
 		«ENDIF»

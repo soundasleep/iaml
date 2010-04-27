@@ -208,23 +208,26 @@ startNode(model::CompositeOperation this) :
 startNodeCondition(model::CompositeCondition this) :
 	nodes.typeSelect(model::operations::StartNode).first();
 
-/* get the next execution flow for a decision operation that has passed */
-passedExectionFlow(model::operations::DecisionOperation this) :	
+/* get the next execution flow for a Node that has passed */
+passedExectionFlow(model::ExecutionEdgesSource this) :	
 	outExecutions.selectFirst( e | isPassFlow(e) );
 
-/* get the next execution flow for a decision operation that has failed */
-failedExectionFlow(model::operations::DecisionOperation this) :
+/* get the next execution flow for a Node that has failed */
+failedExectionFlow(model::ExecutionEdgesSource this) :
 	outExecutions.selectFirst( e | isFailFlow(e) );
 
-hasFailFlow(model::operations::DecisionOperation this) :
+hasFailFlow(model::ExecutionEdgesSource this) :
 	getFailFlows(this).size > 0; 
-hasPassFlow(model::operations::DecisionOperation this) :
-	getPassFlows(this).size > 0;
-hasFailFlow(model::operations::DecisionCondition this) :
-	getFailFlows(this).size > 0; 
-hasPassFlow(model::operations::DecisionCondition this) :
+hasPassFlow(model::ExecutionEdgesSource this) :
 	getPassFlows(this).size > 0;
 
+/**
+ * @implementation ExecutionEdge
+ *		A "failure" {@model ExecutionEdge} is any edge with a lowercase {@model ExecutionEdge#name} starting
+ *		with 'n' or 'f'.
+ * @implementation ExecutionEdge
+ *		A "passing" {@model ExecutionEdge} is any edge that is not a "failure" edge.
+ */
 isFailFlow(model::ExecutionEdge e) :
 	e.name != null && (e.name.toLowerCase().startsWith("n") || e.name.toLowerCase().startsWith("f"));
 isPassFlow(model::ExecutionEdge e) :

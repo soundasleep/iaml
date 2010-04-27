@@ -1173,23 +1173,16 @@
         <details key="documentation" value="The successful completion of an {@model Operation}, or the {@model Condition} passed."/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="DecisionNode" eSuperTypes="#//ActivityNode #//ExecutionEdgesSource #//ExecutionEdgeDestination #//wires/ConditionEdgeDestination">
+    <eClassifiers xsi:type="ecore:EClass" name="DecisionNode" eSuperTypes="#//ActivityNode #//ExecutionEdgesSource #//ExecutionEdgeDestination #//wires/ConditionEdgeDestination #//DataFlowEdgeDestination #//DataFlowEdgesSource">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Considers the {@model ConditionEdgeDestination incoming} {@model Condition}, and follows either the passing or failing {@model ExecutionEdge} as appropriate."/>
+        <details key="documentation" value="Based on its {@model DecisionNode#name}, considers the incoming {@model ConditionEdge}s or {@model DataFlowEdge}s, and follows passing or failing {@model ExecutionEdge}s as appropriate."/>
       </eAnnotations>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="DecisionOperation" eSuperTypes="#//PrimitiveOperation #//DataFlowEdgeDestination">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Primitive {@model Operation}s that allow for execution to branch. Will be merged into {@model PrimitiveCondition}s: see {@issue 160}."/>
-      </eAnnotations>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="DecisionCondition" eSuperTypes="#//Condition #//ExecutionEdgesSource #//ExecutionEdgeDestination #//DataFlowEdgeDestination">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="comment" value="added in 0.2"/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="A primitive {@model Condition} that allow for execution to branch, possibly based on incoming {@model DataFlowEdge}s. Will be merged into {@model PrimitiveCondition}s: see {@issue 160}."/>
-      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          defaultValueLiteral="true?">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The decision type - by default, &quot;true?&quot;."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="SplitNode" eSuperTypes="#//ActivityNode #//ExecutionEdgesSource #//ExecutionEdgeDestination">
       <eAnnotations source="http://openiaml.org/comment">

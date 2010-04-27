@@ -320,9 +320,9 @@
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//operations/CancelNode/exceptionText"/>
       </genClasses>
       <genClasses ecoreClass="iaml.ecore#//operations/FinishNode"/>
-      <genClasses ecoreClass="iaml.ecore#//operations/DecisionNode"/>
-      <genClasses ecoreClass="iaml.ecore#//operations/DecisionOperation"/>
-      <genClasses ecoreClass="iaml.ecore#//operations/DecisionCondition"/>
+      <genClasses ecoreClass="iaml.ecore#//operations/DecisionNode">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//operations/DecisionNode/name"/>
+      </genClasses>
       <genClasses ecoreClass="iaml.ecore#//operations/SplitNode"/>
       <genClasses ecoreClass="iaml.ecore#//operations/JoinNode"/>
       <genClasses ecoreClass="iaml.ecore#//operations/OperationCallNode"/>

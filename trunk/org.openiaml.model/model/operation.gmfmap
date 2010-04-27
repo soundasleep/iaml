@@ -457,6 +457,25 @@
   </links>
   <links>
     <domainMetaElement
+        href="iaml.ecore#//wires/ParameterEdge"/>
+    <domainSpecialization
+        body="self.oclIsTypeOf( ParameterEdge )"/>
+    <containmentFeature
+        href="iaml.ecore#//ContainsWires/parameterEdges"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="operation.gmftool#//@palette/@tools.2/@tools.2"/>
+    <diagramLink
+        href="iaml.gmfgraph#ParameterEdge"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//wires/ParameterEdge/from"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//wires/ParameterEdge/to"/>
+  </links>
+  <links>
+    <domainMetaElement
         href="iaml.ecore#//wires/RunAction"/>
     <domainSpecialization
         body="self.oclIsTypeOf( RunAction )"/>

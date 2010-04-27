@@ -51,9 +51,7 @@ import org.openiaml.model.model.operations.Arithmetic;
 import org.openiaml.model.model.operations.ArithmeticOperationTypes;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.CastNode;
-import org.openiaml.model.model.operations.DecisionCondition;
 import org.openiaml.model.model.operations.DecisionNode;
-import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.JoinNode;
 import org.openiaml.model.model.operations.OperationCallNode;
@@ -222,12 +220,6 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return operation;
 	}
 
-	public DecisionOperation generatedDecisionOperation(GeneratesElements by, ContainsOperations container) throws InferenceException {
-		DecisionOperation operation = (DecisionOperation) createElement( container, OperationsPackage.eINSTANCE.getDecisionOperation(), ModelPackage.eINSTANCE.getContainsOperations_Operations() );
-		setGeneratedBy(operation, by);
-		return operation;
-	}
-	
 	public DecisionNode generatedDecisionNode(GeneratesElements by, CompositeOperation container) throws InferenceException {
 		DecisionNode operation = (DecisionNode) createElement( container, OperationsPackage.eINSTANCE.getDecisionNode(), ModelPackage.eINSTANCE.getCompositeOperation_Nodes() );
 		setGeneratedBy(operation, by);
@@ -532,12 +524,6 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return object;
 	}
 
-	public DecisionCondition generatedDecisionCondition(GeneratesElements by, ContainsConditions container) throws InferenceException {
-		DecisionCondition object = (DecisionCondition) createElement( container, OperationsPackage.eINSTANCE.getDecisionCondition(), ModelPackage.eINSTANCE.getContainsConditions_Conditions() );
-		setGeneratedBy(object, by);
-		return object;
-	}
-
 	public ConditionEdge generatedConditionEdge(GeneratesElements by, ContainsWires container, ConditionEdgesSource source, ConditionEdgeDestination target) throws InferenceException {
 		ConditionEdge wire = (ConditionEdge) createRelationship(container, WiresPackage.eINSTANCE.getConditionEdge(), source, target, ModelPackage.eINSTANCE.getContainsWires_ConditionEdges(), WiresPackage.eINSTANCE.getConditionEdge_From(), WiresPackage.eINSTANCE.getConditionEdge_To());
 		setGeneratedBy(wire, by);
@@ -616,6 +602,10 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	// property setting helpers
 	public void setName(NamedElement element, String value) throws InferenceException {
 		setValue(element, ModelPackage.eINSTANCE.getNamedElement_Name(), value);
+	}
+
+	public void setName(DecisionNode element, String value) throws InferenceException {
+		setValue(element, OperationsPackage.eINSTANCE.getDecisionNode_Name(), value);
 	}
 
 	public void setValue(StaticValue element, String value) throws InferenceException {

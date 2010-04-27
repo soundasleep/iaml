@@ -15,6 +15,8 @@ import org.w3c.dom.Node;
  * 
  * <ol>
  *   <li>'fieldValue' Property is now a directly referenced Property
+ *   <li>DecisionOperation has been merged into DecisionNode ({@issue 160})
+ *   <li>DecisionCondition has been merged into DecisionNode ({@issue 160})
  *   <li>Others...
  * </ol>
  * 
@@ -65,6 +67,15 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 	@Override
 	public String replaceType(Element element, String xsiType,
 			List<ExpectedMigrationException> errors) {
+		
+		if (xsiType.equals("iaml.operations:DecisionOperation")) {
+			return "iaml.operations:DecisionNode";
+		}
+
+		if (xsiType.equals("iaml.operations:DecisionCondition")) {
+			return "iaml.operations:DecisionNode";
+		}
+
 		return super.replaceType(element, xsiType, errors);
 	}
 
@@ -78,6 +89,18 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 		// --> <fieldValue name="fieldValue">
 		if (nodeName.equals("properties") && "fieldValue".equals(element.getAttribute("name"))) {
 			return "fieldValue";
+		}
+		
+		// <conditions xsi:type="iaml.operations:DecisionCondition">
+		// --> <nodes xsi:type="iaml.operations:DecisionNode">
+		if (nodeName.equals("conditions") && "iaml.operations:DecisionCondition".equals(xsiType)) {
+			return "nodes";
+		}
+
+		// <operations xsi:type="iaml.operations:DecisionOperation">
+		// --> <nodes xsi:type="iaml.operations:DecisionNode">
+		if (nodeName.equals("operations") && "iaml.operations:DecisionOperation".equals(xsiType)) {
+			return "nodes";
 		}
 
 		return super.getRenamedNode(nodeName, element, errors);

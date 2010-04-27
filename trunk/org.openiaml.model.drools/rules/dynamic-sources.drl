@@ -75,7 +75,7 @@ rule "Create the contents of the XPath condition when connected to SyncWires"
 		handler.setName(xpath, "xpath");
 		queue.add(xpath, drools);
 		
-		DecisionCondition dc = handler.generatedDecisionCondition(o, o);
+		DecisionNode dc = handler.generatedDecisionNode(o, o);
 		handler.setName(dc, "xpathMatch");
 		queue.add(dc, drools);
 		

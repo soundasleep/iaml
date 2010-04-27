@@ -99,7 +99,7 @@ rule "Create contents of 'X is set' operation"
 	
 	then
 		
-		DecisionCondition decision = handler.generatedDecisionCondition(o, o);
+		DecisionNode decision = handler.generatedDecisionNode(o, o);
 		handler.setName(decision, "is set?");
 		queue.add(decision, drools);
 		

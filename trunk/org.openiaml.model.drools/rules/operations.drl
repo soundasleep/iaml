@@ -151,7 +151,7 @@ rule "Create components of 'update', 'refresh', 'init' operations"
 		CastNode cast = handler.generatedCastNode(o, o);
 		queue.add(cast, drools);
 		
-		DecisionOperation check = handler.generatedDecisionOperation(o, o);
+		DecisionNode check = handler.generatedDecisionNode(o, o);
 		handler.setName(check, "can cast?");
 		queue.add(check, drools);
 		

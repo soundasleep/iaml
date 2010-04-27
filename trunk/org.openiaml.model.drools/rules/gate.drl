@@ -207,7 +207,7 @@ rule "Create contents of 'check (gate)' condition"
 		StartNode start = handler.generatedStartNode(gate, cond);
 		FinishNode finish = handler.generatedFinishNode(gate, cond);
 		CancelNode cancel = handler.generatedCancelNode(gate, cond);
-		DecisionOperation cmp = handler.generatedDecisionOperation(gate, cond);
+		DecisionNode cmp = handler.generatedDecisionNode(gate, cond);
 		handler.setName(cmp, "true?");
 		
 		queue.add(start, drools);

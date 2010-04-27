@@ -88,84 +88,28 @@ rule "Create 'save' operation for DomainObjectInstances"
 
 end
 
-rule "Create 'exists?' operation for DomainObjectInstances"
+/**
+ * TODO this should be put into an explicit containment property 'exists',
+ * like the other primitives.
+ * TODO should this be merged with 'empty' PrimitiveCondition?
+ *
+ * @inference DomainObjectInstance
+ *		A {@model DomainObjectInstance} has a {@model PrimitiveCondition}
+ *		named 'exists?'.
+ */
+rule "Create 'exists?' primitive condition for DomainObjectInstances"
 	when
 		instance : DomainObjectInstance ( )
 		
-		not ( DecisionOperation( eContainer == instance, name == "exists?" ))
+		not ( PrimitiveCondition( eContainer == instance, name == "exists?" ))
 		
 		eval ( handler.veto( instance ))
 		
 	then
 		# create a new one
-		DecisionOperation op = handler.generatedDecisionOperation(instance, instance);
-		handler.setName(op, "exists?");
-		queue.add(op, drools);
-
-end
-
-rule "Create 'exists?' condition for DomainObjectInstances"
-	when
-		instance : DomainObjectInstance ( )
-		
-		not ( CompositeCondition( eContainer == instance, name == "exists?" ))
-		
-		eval ( handler.veto( instance ))
-		
-	then
-		# create a new one
-		CompositeCondition condition = handler.generatedCompositeCondition(instance, instance);
+		PrimitiveCondition condition = handler.generatedPrimitiveCondition(instance, instance);
 		handler.setName(condition, "exists?");
 		queue.add(condition, drools);
 
 end
 
-rule "Create the contents of the 'exists?' condition"
-	when
-		instance : DomainObjectInstance ( )
-		
-		condition : CompositeCondition( eContainer == instance, name == "exists?" )
-		existsOp : DecisionOperation( eContainer == instance, name == "exists?" )
-		
-		not ( StartNode( eContainer == condition ))
-	
-		eval ( handler.veto( condition ))
-	
-	then
-		# create contents
-		StartNode start = handler.generatedStartNode(condition, condition);
-		queue.add(start, drools);
-		
-		FinishNode finish = handler.generatedFinishNode(condition, condition);
-		queue.add(finish, drools);
-		
-		CancelNode cancel = handler.generatedCancelNode(condition, condition);
-		queue.add(cancel, drools);
-	
-		# virtual operation call
-		OperationCallNode opCall = handler.generatedOperationCallNode(condition, condition);
-		handler.setName(opCall, "exists?");
-		queue.add(opCall, drools);
-		
-		RunAction runWire = handler.generatedRunAction(condition, condition, opCall, existsOp);
-		handler.setName(runWire, "run");
-		queue.add(runWire, drools);
-				
-		ExecutionEdge edge1 = handler.generatedExecutionEdge(condition, condition);
-		handler.setFrom(edge1, start);
-		handler.setTo(edge1, opCall);
-		queue.add(edge1, drools);
-
-		ExecutionEdge edge2 = handler.generatedExecutionEdge(condition, condition);
-		handler.setName(edge2, "yes");
-		handler.setFrom(edge2, opCall);
-		handler.setTo(edge2, finish);
-		queue.add(edge2, drools);
-
-		ExecutionEdge edge3 = handler.generatedExecutionEdge(condition, condition);
-		handler.setFrom(edge3, opCall);
-		handler.setName(edge3, "no");
-		handler.setTo(edge3, cancel);
-		queue.add(edge3, drools);
-
-end

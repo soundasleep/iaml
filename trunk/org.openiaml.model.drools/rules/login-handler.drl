@@ -257,7 +257,7 @@ rule "Create contents of 'check key' operation [type=secret_key]"
 		handler.setName(parameter, "current key value");
 		queue.add(parameter, drools);
 		
-		DecisionOperation op = handler.generatedDecisionOperation(o, o);
+		DecisionNode op = handler.generatedDecisionNode(o, o);
 		handler.setName(op, "equal?");
 		queue.add(op, drools);
 		
@@ -496,7 +496,7 @@ rule "Create contents of 'do login' operation [type=secret_key]"
 		handler.setName(parameter, "provided key");
 		queue.add(parameter, drools);
 		
-		DecisionOperation op = handler.generatedDecisionOperation(loginOperation, loginOperation);
+		DecisionNode op = handler.generatedDecisionNode(loginOperation, loginOperation);
 		handler.setName(op, "equal?");
 		queue.add(op, drools);
 		

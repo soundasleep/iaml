@@ -75,6 +75,7 @@ public class ParentNamesTestCase extends XmlTestCase {
 	 */
 	private static final EClass[] CONTAINMENT_FEATURE_ELEMENTS = new EClass[] {
 		ModelPackage.eINSTANCE.getEventTrigger(),
+		ModelPackage.eINSTANCE.getProperty(),
 	};
 	
 	private static List<String> inst_getContainmentFeatureElements = null;

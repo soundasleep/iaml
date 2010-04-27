@@ -134,6 +134,11 @@
       <labelMappings
           readOnly="true">
         <diagramLabel
+            href="iaml.gmfgraph#PropertyContainmentFeature"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
             href="iaml.gmfgraph#PropertyParentName"/>
       </labelMappings>
       <labelMappings
@@ -467,7 +472,7 @@
         <diagramLabel
             href="iaml.gmfgraph#LabelDefaultValue"/>
         <features
-            href="iaml.ecore#//visual/Label/defaultValue"/>
+            href="iaml.ecore#//Changeable/defaultValue"/>
       </labelMappings>
       <labelMappings
           readOnly="true">

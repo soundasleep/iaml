@@ -369,6 +369,17 @@
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
+            name="PropertyContainmentFeatureFigure"
+            text="&lt;...>">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="darkBlue"/>
+          <font
+              xsi:type="gmfgraph:BasicFont"
+              style="BOLD"/>
+        </children>
+        <children
+            xsi:type="gmfgraph:Label"
             name="PropertyDefaultValueFigure"
             text="&lt;...>"/>
         <children
@@ -396,6 +407,8 @@
           figure="//@figures.0/@descriptors.9/@actualFigure/@children.2"/>
       <accessors
           figure="//@figures.0/@descriptors.9/@actualFigure/@children.3"/>
+      <accessors
+          figure="//@figures.0/@descriptors.9/@actualFigure/@children.4"/>
     </descriptors>
     <descriptors
         name="StaticValueFigure">
@@ -2434,7 +2447,7 @@
       name="PropertyParentName"
       figure="PropertyFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.9/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.9/@accessors.3"/>
   <labels
       name="InputFormParentName"
       figure="InputFormFigure"
@@ -2485,7 +2498,7 @@
       name="PropertyDefaultValue"
       figure="PropertyFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.9/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.9/@accessors.2"/>
   <labels
       name="SplitNodeLabel"
       figure="SplitNodeFigure"
@@ -2612,7 +2625,7 @@
       name="PropertyType"
       figure="PropertyFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.9/@accessors.3"/>
+      accessor="//@figures.0/@descriptors.9/@accessors.4"/>
   <labels
       name="DomainAttributeType"
       figure="DomainAttributeFigure"
@@ -2664,6 +2677,11 @@
       figure="PrimitiveConditionFigure"
       elementIcon="false"
       accessor="//@figures.0/@descriptors.67/@accessors.1"/>
+  <labels
+      name="PropertyContainmentFeature"
+      figure="PropertyFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.9/@accessors.1"/>
   <labels
       name="SelectWireLimit"
       figure="SelectWireFigure"

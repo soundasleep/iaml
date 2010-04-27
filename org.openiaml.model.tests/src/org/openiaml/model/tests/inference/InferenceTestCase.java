@@ -3,6 +3,7 @@
  */
 package org.openiaml.model.tests.inference;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -37,6 +38,7 @@ import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.PrimitiveCondition;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.QueryParameter;
@@ -54,9 +56,7 @@ import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.operations.Arithmetic;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.CastNode;
-import org.openiaml.model.model.operations.DecisionCondition;
 import org.openiaml.model.model.operations.DecisionNode;
-import org.openiaml.model.model.operations.DecisionOperation;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.JoinNode;
 import org.openiaml.model.model.operations.OperationCallNode;
@@ -229,7 +229,19 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public PrimitiveOperation assertHasPrimitiveOperation(ContainsOperations element, String string) throws JaxenException {
 		return (PrimitiveOperation) assertHasOperation(element, string);
 	}
-
+	
+	/**
+	 * Assert that the given element contains the given
+	 * PrimitiveCondition.
+	 *
+	 * @return The element found
+	 */
+	public PrimitiveCondition assertHasPrimitiveCondition(ContainsConditions element, String string) throws JaxenException {
+		List<Object> results = nameSelect(typeSelect(element.getConditions(), PrimitiveCondition.class), string);
+		assertEquals(1, results.size());
+		return (PrimitiveCondition) results.get(0);
+	}
+	
 	/**
 	 * Assert that the given element contains the given
 	 * Condition.
@@ -247,17 +259,18 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public CompositeCondition assertHasCompositeCondition(ContainsConditions element, String string) throws JaxenException {
-		return (CompositeCondition) assertHasCondition(element, string);
+		List<Object> results = nameSelect(typeSelect(element.getConditions(), CompositeCondition.class), string);
+		assertEquals(1, results.size());
+		return (CompositeCondition) results.get(0);
 	}
-
+	
 	/**
-	 * Assert that the given element contains the given
+	 * Assert that the given element does <em>not</em> contain the given
 	 * CompositeCondition.
-	 *
-	 * @return The element found
 	 */
-	public DecisionCondition assertHasDecisionCondition(ContainsConditions element, String string) throws JaxenException {
-		return (DecisionCondition) assertHasCondition(element, string);
+	public void assertHasNoCompositeCondition(ContainsConditions element, String string) throws JaxenException {
+		List<Object> results = nameSelect(typeSelect(element.getConditions(), CompositeCondition.class), string);
+		assertEquals(0, results.size());
 	}
 
 	/**
@@ -789,13 +802,15 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	}
 	
 	/**
-	 * Assert that the given element contains the given
-	 * DecisionOperation.
+	 * Assert that the given element contains only one
+	 * DecisionNode.
 	 *
 	 * @return The element found
 	 */
-	public DecisionOperation assertHasDecisionOperation(ContainsOperations element, String string) throws JaxenException {
-		return (DecisionOperation) queryOne(element, "iaml:operations[iaml:name='" + string + "']");	
+	public DecisionNode assertHasDecisionNode(CompositeOperation element, String name) throws JaxenException {
+		List<Object> results = nameSelect(typeSelect(element.getNodes(), DecisionNode.class), name);
+		assertEquals(1, results.size());
+		return (DecisionNode) results.get(0);	
 	}
 	
 	/**
@@ -804,18 +819,10 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public DecisionNode assertHasDecisionNode(CompositeOperation element) throws JaxenException {
-		return (DecisionNode) typeSelect(element.getNodes(), DecisionNode.class).get(0);	
-	}
-	
-	/**
-	 * Assert that the given element contains only one
-	 * DecisionNode.
-	 *
-	 * @return The element found
-	 */
-	public DecisionNode assertHasDecisionNode(CompositeCondition element) throws JaxenException {
-		return (DecisionNode) typeSelect(element.getNodes(), DecisionNode.class).get(0);	
+	public DecisionNode assertHasDecisionNode(CompositeCondition element, String name) throws JaxenException {
+		List<Object> results = nameSelect(typeSelect(element.getNodes(), DecisionNode.class), name);
+		assertEquals(1, results.size());
+		return (DecisionNode) results.get(0);	
 	}
 	
 	/**
@@ -1507,5 +1514,29 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		assertNotNull("Type URI cannot be null", type2.getURI());
 		assertEquals(type1.getURI(), type2.getURI());
 	}
+
+	/**
+	 * Select elements in the given list with the given name.
+	 * Assert that the list is not empty.
+	 * 
+	 * @param list
+	 * @param name
+	 * @return
+	 */
+	public static List<Object> nameSelect(List<?> list, String name) {
+		assertFalse("List was empty", list.isEmpty());
+		
+		List<Object> results = new ArrayList<Object>();
+		for (Object o : list) {
+			if (o instanceof NamedElement && ((NamedElement) o).getName().equals(name)) {
+				results.add(o);
+			} else if (o instanceof DecisionNode && ((DecisionNode) o).getName().equals(name)) {
+				results.add(o);
+			}
+		}
+		
+		return results;
+	}
+
 
 }

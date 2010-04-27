@@ -187,6 +187,11 @@
       <labelMappings
           readOnly="true">
         <diagramLabel
+            href="iaml.gmfgraph#PropertyContainmentFeature"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
             href="iaml.gmfgraph#PropertyParentName"/>
       </labelMappings>
       <labelMappings

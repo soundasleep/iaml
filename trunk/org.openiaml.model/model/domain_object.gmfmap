@@ -94,6 +94,53 @@
   </nodes>
   <nodes>
     <containmentFeature
+        href="iaml.ecore#//Changeable/fieldValue"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//Property"/>
+      <domainSpecialization
+          body="return domainElement.eContainingFeature().getName().equals(&quot;fieldValue&quot;);"
+          language="java"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#PropertyName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          viewPattern="default: {0}"
+          editPattern="{0}">
+        <diagramLabel
+            href="iaml.gmfgraph#PropertyDefaultValue"/>
+        <features
+            href="iaml.ecore#//Property/defaultValue"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PropertyContainmentFeature"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PropertyParentName"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PropertyType"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="domain_object.gmftool#//@palette/@tools.0/@tools.4"/>
+      <diagramNode
+          href="iaml.gmfgraph#Property"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
         href="iaml.ecore#//ContainsProperties/properties"/>
     <ownedChild>
       <domainMetaElement
@@ -113,6 +160,11 @@
             href="iaml.gmfgraph#PropertyDefaultValue"/>
         <features
             href="iaml.ecore#//Property/defaultValue"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PropertyContainmentFeature"/>
       </labelMappings>
       <labelMappings
           readOnly="true">
@@ -156,7 +208,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="domain_object.gmftool#//@palette/@tools.0/@tools.4"/>
+          href="domain_object.gmftool#//@palette/@tools.0/@tools.5"/>
       <diagramNode
           href="iaml.gmfgraph#DomainAttribute"/>
     </ownedChild>

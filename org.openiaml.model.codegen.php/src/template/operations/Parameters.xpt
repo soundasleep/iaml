@@ -192,6 +192,17 @@
 «ENDDEFINE»
 
 /**
+ * Temporary Variables are only accessible within an Operation or Condition, so
+ * we assume they have already been set.
+ *
+ * TODO We could use DataFlow::dataSource() for allowing ANY OperationalModelling
+ * element to become a ParameterEdgeSource.
+ */
+«DEFINE callParameterValue(Boolean php, Boolean inStoreDb) FOR model::TemporaryVariable»
+	«EXPAND DataFlow::dataSource(php)»
+«ENDDEFINE»
+
+/**
  * Is the given property set?
  */
 «DEFINE isSetParameter(Boolean php) FOR model::Property»

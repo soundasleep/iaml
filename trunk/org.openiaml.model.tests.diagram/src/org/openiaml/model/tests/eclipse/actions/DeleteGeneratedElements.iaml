@@ -29,8 +29,8 @@
       <onChange generatedBy="visual.1227e088ab6.1c" isGenerated="true" id="model.1227e0889db.5e" outActions="wires.1227e088ab6.1a">
         <actions xsi:type="iaml.wires:RunAction" id="wires.1227e088ab6.1a" name="run out" from="model.1227e0889db.5e" to="model.1227e0889db.4e"/>
       </onChange>
+      <fieldValue generatedBy="visual.1227e088ab6.1c" isGenerated="true" id="model.1227e0889db.5f" name="fieldValue" inFlows="model.1227e0889db.63 model.1227e0889db.69"/>
       <onAccess generatedBy="visual.1227e088ab6.1c" isGenerated="true" id="model.1227e0889db.5d"/>
-      <properties generatedBy="visual.1227e088ab6.1c" isGenerated="true" id="model.1227e0889db.5f" name="fieldValue" inFlows="model.1227e0889db.63 model.1227e0889db.69"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" isGenerated="true" id="visual.1227e088ab6.25" name="unrelated" generatedElements="model.1227e0889db.78 model.1227e0889db.79 model.1227e0889db.7a model.1227e0889db.7b model.1227e0889db.7c">
       <operations xsi:type="iaml:CompositeOperation" generatedBy="visual.1227e088ab6.25" isGenerated="true" id="model.1227e0889db.78" name="init" generatedElements="model.1227e0889db.8f model.1227e0889db.90 operations.1227e088ac6.17 operations.1227e088ac6.18 model.1227e0889db.91 model.1227e0889db.92 model.1227e0889db.93 model.1227e0889db.94">
@@ -54,8 +54,8 @@
         <executionEdges generatedBy="model.1227e0889db.79" isGenerated="true" id="model.1227e0889db.8e" from="model.1227e0889db.8a" to="operations.1227e088ac6.16"/>
       </operations>
       <onChange generatedBy="visual.1227e088ab6.25" isGenerated="true" id="model.1227e0889db.7b"/>
+      <fieldValue generatedBy="visual.1227e088ab6.25" isGenerated="true" id="model.1227e0889db.7c" name="fieldValue" inFlows="model.1227e0889db.8c model.1227e0889db.92"/>
       <onAccess generatedBy="visual.1227e088ab6.25" isGenerated="true" id="model.1227e0889db.7a"/>
-      <properties generatedBy="visual.1227e088ab6.25" isGenerated="true" id="model.1227e0889db.7c" name="fieldValue" inFlows="model.1227e0889db.8c model.1227e0889db.92"/>
     </children>
   </scopes>
 </iaml:InternetApplication>

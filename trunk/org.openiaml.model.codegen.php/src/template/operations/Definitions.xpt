@@ -80,23 +80,6 @@
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE operationDefinition(Boolean php) FOR model::operations::DecisionOperation-»
-	/* simple operation */
-	function do_«safeName()»(«EXPAND Parameters::signatures(php) FOREACH parameters.sortBy(p|p.name) SEPARATOR ", "-») {
-		«IF isDomainAttributeInstance(eContainer)-»
-			return «EXPAND template::domain::AttributeInstance::attributeInstanceCall(php, /* not sure about these parameters */ null, false, (model::DomainAttributeInstance) eContainer) FOR this»;
-		«ELSEIF isDomainObjectInstance(eContainer)-»
-			return «EXPAND template::domain::DomainInstance::domainInstanceCall(php, null, (model::DomainObjectInstance) eContainer) FOR this»;
-		«ELSE»
-			«IF php»
-				throw new IamlRuntimeException("Unknown simple operation '«this»'");
-			«ELSE»
-				throw new IamlJavascriptException("Unknown simple operation '«this»'");
-			«ENDIF»
-		«ENDIF»
-	}
-«ENDDEFINE»
-
 «DEFINE operationDefinition(Boolean php) FOR model::CompositeOperation»
 	/** composite operation "«name»" */
 	«IF php»

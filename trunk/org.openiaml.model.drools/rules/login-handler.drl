@@ -313,7 +313,7 @@ rule "Create contents of 'check instance' operation [type=domain_object or user]
 		instance : DomainObjectInstance ( eContainer == scope )
 		setWire : SetWire ( from == login_handler, to == instance, name == "set" )
 		
-		ex : Operation ( eContainer == instance, name == "exists?" )
+		ex : Condition ( eContainer == instance, name == "exists?" )
 				
 		checkOperation : CompositeOperation ( eContainer == scope, name == "check instance" )
 
@@ -334,31 +334,29 @@ rule "Create contents of 'check instance' operation [type=domain_object or user]
 		handler.setValue(cancel, OperationsPackage.eINSTANCE.getCancelNode_ExceptionText(), "Invalid domain instance, you need to login.");
 		queue.add(cancel, drools);
 		
-		# a virtual operation call
-		# (the 'exists?' operation cannot have more than 2 execution edges out)
-		OperationCallNode call = handler.generatedOperationCallNode(checkOperation, checkOperation);
-		handler.setName(call, "call exists?");
-		queue.add(call, drools);
+		# a conditional check		
+		DecisionNode check = handler.generatedDecisionNode(checkOperation, checkOperation);
+		handler.setName(check, "true?");
+		queue.add(check, drools);
 		
-		# connect with a RunAction
-		RunAction run = handler.generatedRunAction(checkOperation, checkOperation, call, ex);
-		handler.setName(run, "virtual operation call");
-		queue.add(run, drools);
+		# connect with a ConditionEdge
+		ConditionEdge ce = handler.generatedConditionEdge(checkOperation, checkOperation, ex, check);
+		queue.add(ce, drools);
 		
 		ExecutionEdge edge0 = handler.generatedExecutionEdge(checkOperation, checkOperation);
 		handler.setFrom(edge0, start);
-		handler.setTo(edge0, call);		
+		handler.setTo(edge0, check);		
 		queue.add(edge0, drools);
 		
 		ExecutionEdge edge1 = handler.generatedExecutionEdge(checkOperation, checkOperation);
 		handler.setName(edge1, "yes");
-		handler.setFrom(edge1, call);
+		handler.setFrom(edge1, check);
 		handler.setTo(edge1, finish);
 		queue.add(edge1, drools);
 
 		ExecutionEdge edge2 = handler.generatedExecutionEdge(checkOperation, checkOperation);
 		handler.setName(edge2, "no");
-		handler.setFrom(edge2, call);
+		handler.setFrom(edge2, check);
 		handler.setTo(edge2, cancel);
 		queue.add(edge2, drools);
 
@@ -735,7 +733,7 @@ rule "Create contents of 'do login' operation [type=domain_object]"
 		instance : DomainObjectInstance ( eContainer == scope )
 		setWire : SetWire ( from == login_handler, to == instance, name == "set" )
 		
-		ex : Operation ( eContainer == instance, name == "exists?" )
+		ex : Condition ( eContainer == instance, name == "exists?" )
 				
 		loginOperation : CompositeOperation ( eContainer == login_session, name == "do login" )
 
@@ -769,33 +767,31 @@ rule "Create contents of 'do login' operation [type=domain_object]"
 		
 		// we will leave the other rules to generate the contents
 
-		# a virtual operation call
-		# (the 'exists?' operation cannot have more than 2 execution edges out)
-		OperationCallNode call = handler.generatedOperationCallNode(loginOperation, loginOperation);
-		handler.setName(call, "call exists?");
-		queue.add(call, drools);
+		# a conditional check		
+		DecisionNode check = handler.generatedDecisionNode(loginOperation, loginOperation);
+		handler.setName(check, "true?");
+		queue.add(check, drools);
 		
-		# connect with a RunAction
-		RunAction run = handler.generatedRunAction(loginOperation, loginOperation, call, ex);
-		handler.setName(run, "virtual operation call");
-		queue.add(run, drools);
+		# connect with a ConditionEdge
+		ConditionEdge ce = handler.generatedConditionEdge(loginOperation, loginOperation, ex, check);
+		queue.add(ce, drools);
 		
 		ExecutionEdge edge1 = handler.generatedExecutionEdge(loginOperation, loginOperation);
 		handler.setFrom(edge1, join);
-		handler.setTo(edge1, call);
+		handler.setTo(edge1, check);
 		queue.add(edge1, drools);
 		
 		# not ok	
 		ExecutionEdge edge2 = handler.generatedExecutionEdge(loginOperation, loginOperation);
 		handler.setName(edge2, "no");
-		handler.setFrom(edge2, call);
+		handler.setFrom(edge2, check);
 		handler.setTo(edge2, cancel);
 		queue.add(edge2, drools);
 
 		# ok
 		ExecutionEdge edge3 = handler.generatedExecutionEdge(loginOperation, loginOperation);
 		handler.setName(edge3, "yes");
-		handler.setFrom(edge3, call);
+		handler.setFrom(edge3, check);
 		handler.setTo(edge3, finish);
 		queue.add(edge3, drools);
 
@@ -868,7 +864,7 @@ rule "Create contents of 'do login' operation [type=user]"
 		instance : DomainObjectInstance ( eContainer == scope )
 		setWire : SetWire ( from == login_handler, to == instance, name == "set" )
 		
-		ex : Operation ( eContainer == instance, name == "exists?" )
+		ex : Condition ( eContainer == instance, name == "exists?" )
 				
 		loginOperation : CompositeOperation ( eContainer == login_session, name == "do login" )
 
@@ -902,33 +898,31 @@ rule "Create contents of 'do login' operation [type=user]"
 		
 		// we will leave the other rules to generate the contents
 
-		# a virtual operation call
-		# (the 'exists?' operation cannot have more than 2 execution edges out)
-		OperationCallNode call = handler.generatedOperationCallNode(loginOperation, loginOperation);
-		handler.setName(call, "call exists?");
-		queue.add(call, drools);
+		# a conditional check		
+		DecisionNode check = handler.generatedDecisionNode(loginOperation, loginOperation);
+		handler.setName(check, "true?");
+		queue.add(check, drools);
 		
-		# connect with a RunAction
-		RunAction run = handler.generatedRunAction(loginOperation, loginOperation, call, ex);
-		handler.setName(run, "virtual operation call");
-		queue.add(run, drools);
+		# connect with a ConditionEdge
+		ConditionEdge ce = handler.generatedConditionEdge(loginOperation, loginOperation, ex, check);
+		queue.add(ce, drools);
 		
 		ExecutionEdge edge1 = handler.generatedExecutionEdge(loginOperation, loginOperation);
 		handler.setFrom(edge1, join);
-		handler.setTo(edge1, call);
+		handler.setTo(edge1, check);
 		queue.add(edge1, drools);
 		
 		# not ok	
 		ExecutionEdge edge2 = handler.generatedExecutionEdge(loginOperation, loginOperation);
 		handler.setName(edge2, "no");
-		handler.setFrom(edge2, call);
+		handler.setFrom(edge2, check);
 		handler.setTo(edge2, cancel);
 		queue.add(edge2, drools);
 
 		# ok
 		ExecutionEdge edge3 = handler.generatedExecutionEdge(loginOperation, loginOperation);
 		handler.setName(edge3, "yes");
-		handler.setFrom(edge3, call);
+		handler.setFrom(edge3, check);
 		handler.setTo(edge3, finish);
 		queue.add(edge3, drools);
 

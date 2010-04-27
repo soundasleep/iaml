@@ -37,6 +37,7 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.TemporaryVariable;
+import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Frame;
@@ -169,6 +170,26 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	/**
 	 * An abstract method which checks an editors children to see
 	 * if the editor contains a given model element, with the given
+	 * shortcut parameters.
+	 *
+	 * @param root the editor to search
+	 * @param objectClass the EObject class to look for
+	 * @param name the name of the NamedElement
+	 * @param checkShortcut
+	 * @param shortcutRequired
+	 * @return
+	 */
+	protected ShapeNodeEditPart assertHasRenderedNodeObject(DiagramDocumentEditor root,
+			Class<? extends DecisionNode> objectClass,
+			String name,
+			boolean checkShortcut,
+			boolean shortcutRequired) {
+		return assertHasRenderedNodeObject(root, objectClass, name, checkShortcut, shortcutRequired, null);
+	}
+	
+	/**
+	 * An abstract method which checks an editors children to see
+	 * if the editor contains a given model element, with the given
 	 * shortcut parameters, contained with a given containment feature name.
 	 * 
 	 * <p>TODO remove containingFeatureName(String), and replace with containingFeature(EStructuralFeature).
@@ -199,6 +220,56 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 					if (objectClass.isInstance(obj)) {
 						// check containing feature name
 						NamedElement e = (NamedElement) obj;
+						if (name == null || (e.getName() != null && e.getName().equals(name))) {
+							if (containingFeature == null || containingFeature.equals(obj.eContainingFeature())) {
+							assertNotNull(s);
+							return s;
+							}
+						}
+						found += e.getName() + "[" + obj.eContainingFeature() + "],";
+					}
+				}
+			}
+		}
+
+		// failed
+		fail("No " + objectClass.getSimpleName() + " named '" + name + "' found in editor " + root + " with containing feature '" + containingFeature + "'. Found: " + found);
+		return null;
+	}
+	
+	/**
+	 * An abstract method which checks an editors children to see
+	 * if the editor contains a given model element, with the given
+	 * shortcut parameters, contained with a given containment feature name.
+	 * 
+	 * <p>TODO remove containingFeatureName(String), and replace with containingFeature(EStructuralFeature).
+	 *
+	 * @param root the editor to search
+	 * @param objectClass the EObject class to look for
+	 * @param name the name of the NamedElement, or <code>null</code> to ignore
+	 * @param checkShortcut
+	 * @param shortcutRequired
+	 * @param containingFeature the containing feature, or <code>null</code> if this shouldn't be checked
+	 * @return
+	 */
+	protected ShapeNodeEditPart assertHasRenderedNodeObject(DiagramDocumentEditor root,
+			Class<? extends DecisionNode> objectClass,
+			String name,
+			boolean checkShortcut,
+			boolean shortcutRequired,
+			EStructuralFeature containingFeature) {
+		// debug
+		String found = "";
+
+		for (Object o : root.getDiagramEditPart().getChildren()) {
+			if (o instanceof ShapeNodeEditPart) {
+				ShapeNodeEditPart s = (ShapeNodeEditPart) o;
+				// check for shortcut status if necessary
+				if (!checkShortcut || isShortcut(s) == shortcutRequired) {
+					EObject obj = s.resolveSemanticElement();
+					if (objectClass.isInstance(obj)) {
+						// check containing feature name
+						DecisionNode e = (DecisionNode) obj;
 						if (name == null || (e.getName() != null && e.getName().equals(name))) {
 							if (containingFeature == null || containingFeature.equals(obj.eContainingFeature())) {
 							assertNotNull(s);
@@ -388,6 +459,18 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	public ShapeNodeEditPart assertHasOperation(DiagramDocumentEditor root, String operationName,
 			boolean checkShortcut, boolean shortcutRequired) {
 		return assertHasRenderedNamedObject(root, Operation.class, operationName, checkShortcut, shortcutRequired);
+	}
+	
+	/**
+	 * Look at the editor's children to see if an DecisionNode is being displayed.
+	 *
+	 * @param root
+	 * @param pageName
+	 * @return
+	 */
+	public ShapeNodeEditPart assertHasDecisionNode(DiagramDocumentEditor root, String operationName,
+			boolean checkShortcut, boolean shortcutRequired) {
+		return assertHasRenderedNodeObject(root, DecisionNode.class, operationName, checkShortcut, shortcutRequired);
 	}
 
 	/**
@@ -868,6 +951,14 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	public ShapeNodeEditPart assertHasOperation(
 			DiagramDocumentEditor editor, String name) {
 		return assertHasOperation(editor, name, false, false);
+	}
+	
+	/**
+	 * @see #assertHasDecisionNode(DiagramDocumentEditor, String, boolean, boolean)
+	 */
+	public ShapeNodeEditPart assertHasDecisionNode(
+			DiagramDocumentEditor editor, String name) {
+		return assertHasDecisionNode(editor, name, false, false);
 	}
 
 

@@ -23,8 +23,8 @@
         <executionEdges generatedBy="model.12252e52506.29" isGenerated="true" id="model.12252e52506.32" from="model.12252e52506.2e" to="operations.12252e52583.2"/>
       </operations>
       <onChange generatedBy="visual.12252e52574.8" isGenerated="true" id="model.12252e52506.2b" outActions="wires.12252e52583.7"/>
+      <fieldValue generatedBy="visual.12252e52574.8" isGenerated="true" id="model.12252e52506.2c" name="fieldValue" inFlows="model.12252e52506.30 model.12252e52506.36" outParameterEdges="wires.12252e52583.c wires.12252e52583.d"/>
       <onAccess generatedBy="visual.12252e52574.8" isGenerated="true" id="model.12252e52506.2a" outActions="wires.12252e52583.8"/>
-      <properties generatedBy="visual.12252e52574.8" isGenerated="true" id="model.12252e52506.2c" name="fieldValue" inFlows="model.12252e52506.30 model.12252e52506.36" outParameterEdges="wires.12252e52583.c wires.12252e52583.d"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" outWires="wires.12252e52583.1" id="visual.12252e52574.a" name="text field 2" generatedElements="model.12252e52506.23 model.12252e52506.24 model.12252e52506.25 model.12252e52506.26 model.12252e52506.27">
       <operations xsi:type="iaml:CompositeOperation" generatedBy="visual.12252e52574.a" isGenerated="true" id="model.12252e52506.23" name="init" inActions="wires.12252e52583.6" generatedElements="model.12252e52506.3f model.12252e52506.40 operations.12252e52583.7 operations.12252e52583.8 model.12252e52506.41 model.12252e52506.42 model.12252e52506.43 model.12252e52506.44">
@@ -58,8 +58,8 @@
         <parameterEdges generatedBy="wires.12252e52583.1" isGenerated="true" id="wires.12252e52583.d" name="[sync] run instance parameter (source.access)" from="model.12252e52506.2c" to="wires.12252e52583.6"/>
       </wires>
       <onChange generatedBy="visual.12252e52574.a" isGenerated="true" id="model.12252e52506.26" outActions="wires.12252e52583.9"/>
+      <fieldValue generatedBy="visual.12252e52574.a" isGenerated="true" id="model.12252e52506.27" name="fieldValue" inFlows="model.12252e52506.3c model.12252e52506.42" outParameterEdges="wires.12252e52583.a wires.12252e52583.b"/>
       <onAccess generatedBy="visual.12252e52574.a" isGenerated="true" id="model.12252e52506.25" outActions="wires.12252e52583.6"/>
-      <properties generatedBy="visual.12252e52574.a" isGenerated="true" id="model.12252e52506.27" name="fieldValue" inFlows="model.12252e52506.3c model.12252e52506.42" outParameterEdges="wires.12252e52583.a wires.12252e52583.b"/>
     </children>
   </scopes>
 </iaml:InternetApplication>

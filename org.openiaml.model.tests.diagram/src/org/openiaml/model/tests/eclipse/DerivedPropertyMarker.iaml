@@ -3,8 +3,8 @@
   <scopes xsi:type="iaml.visual:Frame" id="visual.122f4cf3f60.e" name="Home">
     <operations xsi:type="iaml:CompositeOperation" id="model.122f4cf3ef3.f2" name="non-generated"/>
     <operations xsi:type="iaml:CompositeOperation" isGenerated="true" id="model.122f4cf3ef3.f3" name="generated">
-      <operations xsi:type="iaml.operations:DecisionOperation" id="operations.122f4cf3f60.37" name="non-generated"/>
-      <operations xsi:type="iaml.operations:DecisionOperation" isGenerated="true" id="operations.122f4cf3f60.39" name="generated"/>
+      <nodes xsi:type="iaml.operations:DecisionNode" id="operations.122f4cf3f60.37" name="non-generated"/>
+      <nodes xsi:type="iaml.operations:DecisionNode" isGenerated="true" id="operations.122f4cf3f60.39" name="generated"/>
     </operations>
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" isGenerated="true" id="visual.122f4cf3f60.11" name="generated page"/>

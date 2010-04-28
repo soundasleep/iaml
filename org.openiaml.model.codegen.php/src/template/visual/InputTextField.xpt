@@ -100,12 +100,12 @@
 			}
 			
 			«REM»any on-access events?«ENDREM»
-			addOnloadFunction( function() {
 			«IF onAccess != null»
+			addOnloadFunction( function() {
 				// expand all onAccess
 				«EXPAND template::events::EventCall::callEvent(false) FOR onAccess-»
-			«ENDIF»
 			} );
+			«ENDIF»
 		/* ]]> */
 		</script>
 

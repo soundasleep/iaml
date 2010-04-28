@@ -14,21 +14,23 @@
  */
 «DEFINE renderForm(model::visual::Frame currentFrame) FOR model::visual::InputForm-»
 	<form id="«safeNameString(id)»" 
+		«IF onClick != null»
 			onClick="return onClick_«safeNameString(id)»(this);"
+		«ENDIF»
 		>
 		
+		«IF onClick != null»
 		<script language="Javascript" type="application/javascript">
 		/* <![CDATA[ */
 			function onClick_«safeNameString(id)»(obj) {
-				«IF onClick != null»
-					// expand all onClicks
-					«EXPAND template::events::EventCall::callEvent(false) FOR onClick-»
-				«ENDIF»
-			
+				// expand all onClicks
+				«EXPAND template::events::EventCall::callEvent(false) FOR onClick-»
 				return false;
 			}
 		/* ]]> */
 		</script>
+		«ENDIF»
+		
 		<h2>«formName()»</h2>
 		
 		«REM»expand all children«ENDREM»

@@ -14,7 +14,7 @@
 «ENDDEFINE»
 
 «DEFINE attributeInstanceCall(Boolean php, model::wires::ParameterEdgeDestination wire, Boolean inStoreDb, model::DomainAttributeInstance attribute) FOR model::Operation»
-	/* domain attribute instance: attribute = «attribute», this = «this» */
+	/* domain attribute instance: attribute = «simpleName(attribute)», this = «simpleName(this)» */
 	«IF name=="save"»
 		«REM»"save" operation for DomainAttribute«ENDREM»
 		«IF php»

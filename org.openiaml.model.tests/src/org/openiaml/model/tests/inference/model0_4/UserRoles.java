@@ -7,6 +7,7 @@ import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.PrimitiveCondition;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.components.AccessControlHandler;
 import org.openiaml.model.model.components.LoginHandler;
@@ -148,8 +149,8 @@ public class UserRoles extends InferenceTestCase {
 		SetWire set = assertHasSetWire(session, handler, instance, "set");
 		assertGenerated(set);
 
-		// this user instance should have an 'exists?' operation
-		Operation exists = assertHasOperation(instance, "exists?");
+		// this user instance should have an 'exists?' PrimitiveCondition
+		PrimitiveCondition exists = assertHasPrimitiveCondition(instance, "exists?");
 		assertGenerated(exists);
 
 	}

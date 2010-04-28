@@ -14,16 +14,18 @@ import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.PrimitiveCondition;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.components.LoginHandlerTypes;
-import org.openiaml.model.model.operations.OperationCallNode;
+import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
+import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.NavigateAction;
 import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SelectWire;
@@ -122,8 +124,8 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		DomainAttributeInstance aname = assertHasDomainAttributeInstance(instance, "name");
 		assertNotGenerated(aname);
 
-		// the instance should also contain an 'exists?' operation
-		Operation exists = assertHasOperation(instance, "exists?");
+		// the instance should also contain an 'exists?' PrimitiveCondition
+		PrimitiveCondition exists = assertHasPrimitiveCondition(instance, "exists?");
 		assertGenerated(exists);
 
 	}
@@ -319,30 +321,20 @@ public class LoginHandlerInstance extends InferenceTestCase {
 	 *
 	 * @throws Exception
 	 */
-	private void checkOperationCallsExists(Session session, Operation check) throws Exception {
+	private void checkOperationCallsExists(Session session, CompositeOperation check) throws Exception {
 		// find 'exists?'
 		DomainObjectInstance instance = assertHasDomainObjectInstance(session, "logged in user");
 		assertNotGenerated(instance);
-		Operation exists = assertHasOperation(instance, "exists?");
+		PrimitiveCondition exists = assertHasPrimitiveCondition(instance, "exists?");
 		assertGenerated(exists);
+		
+		// has a DecisionNode
+		DecisionNode node = assertHasDecisionNode(check, "true?");
+		assertGenerated(node);
 
-		OperationCallNode call = null;
-		List<?> nodes = query(check, "iaml:nodes");
-		for (Object o : nodes) {
-			if (o instanceof OperationCallNode) {
-				call = (OperationCallNode) o;
-			}
-		}
-
-		assertNotNull(call);
-		assertGenerated(call);
-
-		// should have a RunAction to the 'exists?' operation
-		assertHasWiresFromTo(0, session, call, exists);
-		{
-			RunAction run = assertHasRunAction(session, call, exists);
-			assertGenerated(run);
-		}
+		// DecisionNode evaluates the incoming condition
+		ConditionEdge edge = assertHasConditionEdge(session, exists, node);
+		assertGenerated(edge);
 	}
 
 	/**
@@ -377,7 +369,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 
 		// find 'do login'
 		Session loginSession = assertHasSession(root, "login handler login");
-		Operation op = assertHasOperation(loginSession, "do login");
+		CompositeOperation op = (CompositeOperation) assertHasOperation(loginSession, "do login");
 		assertGenerated(op);
 
 		// check

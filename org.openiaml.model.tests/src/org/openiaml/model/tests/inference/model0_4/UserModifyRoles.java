@@ -13,6 +13,7 @@ import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.operations.CancelNode;
+import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.JoinNode;
 import org.openiaml.model.model.operations.OperationCallNode;
@@ -73,12 +74,12 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 		SplitNode split = assertHasSplitNode(doLogin);
 		JoinNode join = assertHasJoinNode(doLogin);
 
-		// there should be an operation call to 'exists?'
-		OperationCallNode op = assertHasOperationCallNode(doLogin, "call exists?");
+		// there should be a decision node from 'exists?'
+		DecisionNode decision = assertHasDecisionNode(doLogin, "true?");
 		assertHasExecutionEdge(doLogin, start, split);
-		assertHasExecutionEdge(doLogin, join, op);
-		assertHasExecutionEdge(doLogin, op, cancel);
-		assertHasExecutionEdge(doLogin, op, finish);
+		assertHasExecutionEdge(doLogin, join, decision);
+		assertHasExecutionEdge(doLogin, decision, cancel);
+		assertHasExecutionEdge(doLogin, decision, finish);
 
 		// get the keys in the session
 		Property email = assertHasProperty(session, "current email");

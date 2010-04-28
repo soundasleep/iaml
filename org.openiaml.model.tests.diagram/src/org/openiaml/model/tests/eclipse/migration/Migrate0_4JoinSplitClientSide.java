@@ -55,7 +55,7 @@ public class Migrate0_4JoinSplitClientSide extends AbstractMigrateTestCase {
 		editor_operation = openDiagram(operation);
 		assertEditorOperation(editor_operation);
 	
-		assertHasPrimitiveOperation(editor_operation, "setPropertyToValue", false, false);
+		assertHasPrimitiveOperation(editor_operation, "set", false, false);
 	}
 
 	/**

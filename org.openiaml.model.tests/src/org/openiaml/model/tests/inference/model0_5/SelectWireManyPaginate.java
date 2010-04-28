@@ -300,7 +300,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		StartNode start = assertHasStartNode(op);
 		FinishNode finish = assertHasFinishNode(op);
 
-		PrimitiveOperation set = assertHasPrimitiveOperation(op, "setPropertyToValue");
+		PrimitiveOperation set = assertHasPrimitiveOperation(op, "set");
 
 		assertGenerated(assertHasExecutionEdge(op, start, set));
 		assertGenerated(assertHasExecutionEdge(op, set, finish));

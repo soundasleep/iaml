@@ -3,7 +3,7 @@
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
   <scopes xsi:type="iaml.visual:Frame" id="visual.1268c90c93a.a" name="Disclaimer Page" inActions="wires.1268c90ca34.3">
     <operations xsi:type="iaml:CompositeOperation" id="model.1268c991b90.3f" name="set disclaimer viewed to true" inActions="wires.1268c991bee.33">
-      <operations xsi:type="iaml:PrimitiveOperation" id="model.1268c991b90.6b" name="setPropertyToValue" inFlows="model.1268c991b90.75" inExecutions="model.1268c991b90.6d" outFlows="model.1268c991b90.77" outExecutions="model.1268c991b90.6f"/>
+      <operations xsi:type="iaml:PrimitiveOperation" id="model.1268c991b90.6b" name="set" inFlows="model.1268c991b90.75" inExecutions="model.1268c991b90.6d" outFlows="model.1268c991b90.77" outExecutions="model.1268c991b90.6f"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.1268c991bfe.1" outExecutions="model.1268c991b90.6d"/>
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.1268c991bfe.3" inExecutions="model.1268c991b90.6f"/>
       <dataEdges id="model.1268c991b90.75" from="model.1268c991b90.6c" to="model.1268c991b90.6b"/>

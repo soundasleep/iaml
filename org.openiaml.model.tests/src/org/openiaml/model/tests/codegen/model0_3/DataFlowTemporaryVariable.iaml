@@ -5,7 +5,7 @@
       <operations xsi:type="iaml:CompositeOperation" id="model.120ac60dcea.198" name="special operation" inActions="wires.120ac60dd48.b8">
         <parameters id="model.120ac60dcea.2a2" name="in value" outFlows="model.120ac60dcea.331"/>
         <operations xsi:type="iaml:PrimitiveOperation" id="model.120ac60dcea.2df" name="set" inFlows="model.120ac60dcea.331" inExecutions="model.120ac60dcea.32f" outFlows="model.120ac60dcea.332" outExecutions="model.120acfde16a.13a"/>
-        <operations xsi:type="iaml:PrimitiveOperation" id="model.120ac60dcea.3a6" name="setPropertyToValue" inFlows="model.120ac60dcea.3a9" inExecutions="model.120acfde16a.13a" outFlows="model.120ac60dcea.3aa" outExecutions="model.120ac60dcea.3a8"/>
+        <operations xsi:type="iaml:PrimitiveOperation" id="model.120ac60dcea.3a6" name="set" inFlows="model.120ac60dcea.3a9" inExecutions="model.120acfde16a.13a" outFlows="model.120ac60dcea.3aa" outExecutions="model.120ac60dcea.3a8"/>
         <nodes xsi:type="iaml.operations:StartNode" id="operations.120ac60dd48.4d" outExecutions="model.120ac60dcea.32f"/>
         <nodes xsi:type="iaml.operations:FinishNode" id="operations.120ac60dd48.74" inExecutions="model.120ac60dcea.3a8"/>
         <dataEdges id="model.120ac60dcea.331" from="model.120ac60dcea.2a2" to="model.120ac60dcea.2df"/>

@@ -1,17 +1,21 @@
 /**
  *
  */
-package org.openiaml.model.tests.inference;
+package org.openiaml.model.tests.inference.model0_3;
 
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.DomainObject;
+import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.RunAction;
+import org.openiaml.model.model.wires.SelectWire;
+import org.openiaml.model.model.wires.SyncWire;
+import org.openiaml.model.tests.inference.InferenceTestCase;
 
 /**
  * SyncWires connected to DomainAttributeInstances should call
@@ -20,34 +24,41 @@ import org.openiaml.model.model.wires.RunAction;
  * @author jmwright
  *
  */
-public class SelectField extends InferenceTestCase {
+public class SelectFieldFromObject extends InferenceTestCase {
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		root = loadAndInfer(SelectField.class, true);
+		root = loadAndInfer(SelectFieldFromObject.class, true);
 	}
 
 	public void testInference() throws Exception {
 		// initial elements
 		Frame container = assertHasFrame(root, "container");
-		InputTextField field = assertHasInputTextField(container, "editname");
+		InputTextField field = assertHasInputTextField(container, "textfield");
 
-		DomainStore store = assertHasDomainStore(root, "DomainStore");
+		DomainStore store = assertHasDomainStore(root, "domain store");
 		DomainObject user = assertHasDomainObject(store, "User");
 
-		DomainAttributeInstance attr = assertHasDomainAttributeInstance(container, "name");
-		assertNotGenerated(assertHasSyncWire(root, field, attr));
-		assertNotGenerated(assertHasSelectWire(root, user, attr));
+		DomainObjectInstance obj = assertHasDomainObjectInstance(container, "\"my user\"");
+		DomainAttributeInstance attr = assertHasDomainAttributeInstance(obj, "name");
+		SyncWire sw = (SyncWire) getWireBidirectional(root, field, attr);
+		assertNotGenerated(sw);
+		SelectWire select = (SelectWire) getWireFromTo(root, user, obj);
+		assertNotGenerated(select);
+
+		// should have autosave enabled on both fields
+		assertNotGenerated(obj);
+		assertTrue(obj.isAutosave());
+		assertNotGenerated(attr);
+		assertTrue(attr.isAutosave());
 
 		// [inferred elements]
 		// edit events and operations on the text field
 		CompositeOperation update = assertHasCompositeOperation(field, "update");
 		assertGenerated(update);
 		EventTrigger edit = field.getOnChange();
-		assertGenerated(edit);
 		Property fieldValue = assertHasFieldValue(field);
-		assertGenerated(fieldValue);
 
 		// [new elements]
 		// edit operations on the attribute
@@ -58,7 +69,6 @@ public class SelectField extends InferenceTestCase {
 
 		// with a parameter
 		assertGenerated(getParameterEdgeFromTo(root, fieldValue, runEdit));
-
 
 	}
 

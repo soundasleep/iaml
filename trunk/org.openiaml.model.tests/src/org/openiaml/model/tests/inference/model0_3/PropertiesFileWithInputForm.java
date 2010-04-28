@@ -1,7 +1,7 @@
 /**
  *
  */
-package org.openiaml.model.tests.inference;
+package org.openiaml.model.tests.inference.model0_3;
 
 import org.jaxen.JaxenException;
 import org.openiaml.model.model.DomainAttribute;
@@ -14,6 +14,7 @@ import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SyncWire;
+import org.openiaml.model.tests.inference.InferenceTestCase;
 
 /**
  * Tests inference of database sources.
@@ -21,17 +22,17 @@ import org.openiaml.model.model.wires.SyncWire;
  * @author jmwright
  *
  */
-public class DatabaseWithInputForm extends InferenceTestCase {
+public class PropertiesFileWithInputForm extends InferenceTestCase {
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		root = loadAndInfer(DatabaseWithInputForm.class);
+		root = loadAndInfer(PropertiesFileWithInputForm.class);
 	}
 
 	public void testInferenceWithoutForm() throws JaxenException {
 		// [already in model]
-		DomainStore store = assertHasDomainStore(root, "a database");
+		DomainStore store = assertHasDomainStore(root, "a properties file");
 		// the store should only have two attributes
 		assertEquals(2, store.getAttributes().size());
 		DomainAttribute attribute = assertHasDomainAttribute(store, "value1");
@@ -58,13 +59,14 @@ public class DatabaseWithInputForm extends InferenceTestCase {
 		Property attrValue = assertHasFieldValue(attribute);
 
 		// they should be parameters
-		assertGenerated(assertHasParameterEdge(wire, textValue, srcRw));
-		assertGenerated(assertHasParameterEdge(wire, attrValue, targetRw));
+		assertGenerated(getParameterEdgeFromTo(wire, textValue, srcRw));
+		assertGenerated(getParameterEdgeFromTo(wire, attrValue, targetRw));
+
 	}
 
 	public void testInferenceWithForm() throws Exception {
 		// [already in model]
-		DomainStore store = assertHasDomainStore(root, "a database");
+		DomainStore store = assertHasDomainStore(root, "a properties file");
 		// the store should only have two attributes
 		assertEquals(2, store.getAttributes().size());
 		DomainAttribute attribute = assertHasDomainAttribute(store, "value2");
@@ -92,8 +94,9 @@ public class DatabaseWithInputForm extends InferenceTestCase {
 		Property attrValue = assertHasFieldValue(attribute);
 
 		// they should be parameters
-		assertGenerated(assertHasParameterEdge(wire, textValue, srcRw));
-		assertGenerated(assertHasParameterEdge(wire, attrValue, targetRw));
+		assertGenerated(getParameterEdgeFromTo(wire, textValue, srcRw));
+		assertGenerated(getParameterEdgeFromTo(wire, attrValue, targetRw));
+
 	}
 
 }

@@ -43,12 +43,6 @@ public class AllInferenceTests {
         suite.addTestSuite(SavedRuleSources.class);
         suite.addTestSuite(SessionSyncWires.class);
         
-        // model 0.3
-        suite.addTestSuite(DatabaseWithInputForm.class);
-        suite.addTestSuite(PropertiesFileWithInputForm.class);
-        suite.addTestSuite(SelectField.class);
-        suite.addTestSuite(SelectFieldFromObject.class);
-        
         // suites of model inference tests
         suite.addTest(AllModel0_3InferenceTests.suite());
         suite.addTest(AllModel0_4InferenceTests.suite());

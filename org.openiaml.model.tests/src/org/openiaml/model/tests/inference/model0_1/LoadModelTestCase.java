@@ -20,7 +20,7 @@ public class LoadModelTestCase extends InferenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		String modelFile = ROOT + "inference/LoadModelTestCase.iaml";
+		String modelFile = ROOT + "inference/model0_1/LoadModelTestCase.iaml";
 		EObject model = loadModelDirectly(modelFile);
 		assertTrue("the model file '" + modelFile + "' should be of type InternetApplication", model instanceof InternetApplication);
 		assertNotNull(model);

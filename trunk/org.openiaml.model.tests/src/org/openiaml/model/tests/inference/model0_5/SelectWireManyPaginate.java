@@ -334,7 +334,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		FinishNode finish = assertHasFinishNode(notEmpty);
 		CancelNode cancel = assertHasCancelNode(notEmpty);
 
-		DecisionNode decision = assertHasDecisionNode(notEmpty, "false?");
+		DecisionNode decision = assertHasDecisionNode(notEmpty, "true?");
 
 		assertGenerated(assertHasConditionEdge(root, empty, decision));
 

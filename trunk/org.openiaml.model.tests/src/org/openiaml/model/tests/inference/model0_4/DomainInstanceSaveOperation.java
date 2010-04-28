@@ -47,11 +47,15 @@ public class DomainInstanceSaveOperation extends EclipseInheritanceInterface {
 		assertEquals(0, page.getChildren().size());
 		assertEquals(1, page.getElements().size());
 
-		// instance now contains a 'save' method and 'exists?' method
-		assertEquals(2, di.getOperations().size());
-
+		// instance now contains a 'save' method
+		assertEquals(1, di.getOperations().size());		
 		assertContainsNamedElement(di.getOperations(), "save", true);
-		assertContainsNamedElement(di.getOperations(), "exists?", true);
+		
+		// and lots of conditions
+		assertContainsNamedElement(di.getConditions(), "exists?", true);
+		assertContainsNamedElement(di.getConditions(), "fieldValue is set", true);
+		assertContainsNamedElement(di.getConditions(), "results count is set", true);
+		assertContainsNamedElement(di.getConditions(), "not empty", true);
 
 	}
 

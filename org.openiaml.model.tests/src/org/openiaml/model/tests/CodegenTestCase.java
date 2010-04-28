@@ -20,6 +20,7 @@ import java.util.TimeZone;
 import junit.framework.AssertionFailedError;
 import net.sourceforge.jwebunit.api.IElement;
 import net.sourceforge.jwebunit.exception.TestingEngineResponseException;
+import net.sourceforge.jwebunit.htmlunit.HtmlUnitTestingEngineImpl;
 import net.sourceforge.jwebunit.junit.WebTestCase;
 
 import org.eclipse.core.resources.IFile;
@@ -143,7 +144,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 */
 	@Override
 	protected void tearDown() throws Exception {
-		logTimed("web: navigation complete");
+		logTimed("web", "navigation complete", "");
 		
 		// remove reference to InternetApplication
 		if (root != null) {
@@ -368,7 +369,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * @param query query string to append to the end of the destination, or null if none; e.g. <code>one=1&two=2</param>
 	 */ 
 	public void beginAtSitemapThenPage(IFile sitemap, String pageTitle, String expectedPageTitle, String query) throws Exception {
-		logTimed("web: beginAtSitemapThenPage");
+		logTimed("web", "beginAtSitemapThenPage", "");
 
 		beginAtSitemap(sitemap);
 		
@@ -392,7 +393,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 			throw new PhpExecutionTimeException("Maximum execution time exceeded in PHP script: '" + pageTitle + "'");
 		}
 		
-		logTimed("web: beginAtSitemapThenPage complete");
+		logTimed("web", "beginAtSitemapThenPage complete", "");
 	}
 
 	/**
@@ -426,7 +427,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * @param expected the expected page title on the new page, if different from the page text link
 	 */ 
 	protected void gotoSitemapThenPage(IFile sitemap, String pageText, String expectedTitle) throws Exception {
-		logTimed("web: gotoSitemapThenPage");
+		logTimed("web", "gotoSitemapThenPage", "");
 		
 		// we can't goto the sitemap if we haven't begun the session yet
 		// (sanity check)
@@ -456,7 +457,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 			throw new PhpExecutionTimeException("Maximum execution time exceeded in PHP script: '" + pageText + "'");
 		}
 
-		logTimed("web: gotoSitemapThenPage complete");
+		logTimed("web", "gotoSitemapThenPage complete", "");
 	}
 
 	/**
@@ -489,7 +490,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * @param query additional query parameters to append to the URL, e.g. "id=123". may be null. 
 	 */ 
 	protected void gotoSitemapThenPage(IFile sitemap, String pageText, String expectedTitle, String query) throws Exception {
-		logTimed("web: gotoSitemapThenPage query");
+		logTimed("web", "gotoSitemapThenPage query", "");
 	
 		// prepare the query
 		if (query == null || query.isEmpty()) {
@@ -530,7 +531,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 			throw new PhpExecutionTimeException("Maximum execution time exceeded in PHP script: '" + pageText + "'");
 		}
 
-		logTimed("web: gotoSitemapThenPage query complete");
+		logTimed("web", "gotoSitemapThenPage query complete", "");
 	}
 
 	/**
@@ -541,7 +542,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * @param pageText the <em>exact</em> page text link to click
 	 */
 	public void gotoSitemapWithProblem(IFile sitemap, String pageText) throws Exception {
-		logTimed("web: gotoSitemapWithProblem");
+		logTimed("web", "gotoSitemapWithProblem", "");
 		
 		// we can't goto the sitemap if we haven't begun the session yet
 		// (sanity check)
@@ -571,7 +572,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 			throw new PhpExecutionTimeException("Maximum execution time exceeded in PHP script: '" + pageText + "'");
 		}
 
-		logTimed("web: gotoSitemapWithProblem complete");
+		logTimed("web", "gotoSitemapWithProblem complete", "");
 	}
 	
 	/**
@@ -617,11 +618,11 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * @return
 	 */
 	protected String getLabelIDForText(String text) {
-		logTimed("internal: get label ID for text");
+		logTimed("web", "internal", "get label ID for text");
 		IElement element = getElementByXPath("//label[" + getContainsTextXPath(text) + "]");
 		String id = element.getAttribute("id");
 		assertNotNull("Label ID for text '" + text + "' was null", id);
-		logTimed("internal: get label ID for text complete");
+		logTimed("web", "internal", "get label ID for text complete");
 		return id;
 	}
 
@@ -636,9 +637,9 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * @return
 	 */
 	protected String getLabelIDForText(String text, String notText) {
-		logTimed("internal: get label ID for text (2)");
+		logTimed("web", "internal", "get label ID for text (2)");
 		IElement element = getElementByXPath("//label[" + getContainsTextXPath(text) + " and not(" + getContainsTextXPath(notText) + ")]");
-		logTimed("internal: get label ID for text (2) complete");
+		logTimed("web", "internal", "get label ID for text (2) complete");
 		return element.getAttribute("id");
 	}
 	
@@ -654,9 +655,9 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * @return
 	 */
 	protected String getLabelIDForText(String text, String notText, String alsoCondition) {
-		logTimed("internal: get label ID for text (3)");
+		logTimed("web", "internal", "get label ID for text (3)");
 		IElement element = getElementByXPath("//label[" + getContainsTextXPath(text) + " and not(" + getContainsTextXPath(notText) + ") and (" + alsoCondition + ")]");
-		logTimed("internal: get label ID for text (3) complete");
+		logTimed("web", "internal", "get label ID for text (3) complete");
 		return element.getAttribute("id");
 	}
 	
@@ -905,7 +906,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 */
 	@Override
 	public void clickLinkWithText(String linkText) {
-		logTimed("web: clicking link with text");
+		logTimed("web", "clicking link with text", "");
 		try {
 			super.clickLinkWithText(linkText);
 		} catch (FailingHttpStatusCodeException f) {
@@ -922,7 +923,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 			}
 			throw e; 
 		}
-		logTimed("web: clicking link with text complete");
+		logTimed("web", "clicking link with text complete", "");
 	}
 	
 	/**
@@ -931,7 +932,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 */
 	@Override
 	public void clickLinkWithExactText(String linkText) {
-		logTimed("web: clicking link with exact text");
+		logTimed("web", "clicking link with exact text", "");
 		try {
 			super.clickLinkWithExactText(linkText);
 		} catch (FailingHttpStatusCodeException f) {
@@ -948,7 +949,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 			}
 			throw e; 
 		}
-		logTimed("web: clicking link with text complete");
+		logTimed("web", "clicking link with text complete", "");
 	}
 
 	/**
@@ -1032,21 +1033,21 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * Also prints out the current source code.
 	 */
 	public void throwDebugInformation(Throwable e) {
-		logTimed("internal: throwing debug information");
+		logTimed("web", "internal", "throwing debug information");
 		// print out the source code
 		System.out.println(getTester().getPageSource());
 		System.out.println(getElementById("debug").getTextContent());
 		// throw out any response text too
-		logTimed("internal: throwing debug information complete");
+		logTimed("web", "internal", "throwing debug information complete");
 		throw new RuntimeException("Response = '" + getElementById("response").getTextContent() + "' Debug='" + getElementById("debug").getTextContent() + "'", e);
 		
 	}
 	
 	@Override
 	public void setLabeledFormElementField(String id, String value) {
-		logTimed("web: set labeled form");
+		logTimed("web", "set labeled form", "");
 		super.setLabeledFormElementField(id, value);
-		logTimed("web: set labeled form complete");
+		logTimed("web", "set labeled form complete", "");
 	}
 	
 	/**
@@ -1140,4 +1141,23 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		return fmt.format(date);
 	}
 	
+	/**
+	 * Get a page identifier for log methods.
+	 * @return
+	 */
+	private String getPageIdentifier() {
+		if (ENABLE_TIMED_LOG) {
+			try {
+				return ((HtmlUnitTestingEngineImpl) getTestingEngine()).getPageURL().toString();
+			} catch (RuntimeException e) {
+				// ignore
+			}
+		}
+		return null;
+	}
+
+	private void logTimed(String string, String string2, String string3) {
+		logTimed(string, string2, string3, getPageIdentifier());
+	}
+
 }

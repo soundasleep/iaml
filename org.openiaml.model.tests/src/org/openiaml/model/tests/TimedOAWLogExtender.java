@@ -28,7 +28,7 @@ public class TimedOAWLogExtender implements LogExtender {
 		this.file = new File(timedLogFile);
 		
 		// write out that we have started a new extender
-		writeToFile("(log loaded)", 0);
+		logDirect("overhead", "(log loaded)", "", "");
 	}
 
 	/**
@@ -48,10 +48,10 @@ public class TimedOAWLogExtender implements LogExtender {
 		if (started) {
 			// get the key of the message
 			// format: 'Workflow - ...'
-			String key = calculateKey(message);
+			String[] key = calculateKey(message);
 			
 			if (key != null) {	
-				logDirect(key);
+				logDirect(key[0], key[1], key[2], key[3]);
 				
 			}
 		}
@@ -60,7 +60,8 @@ public class TimedOAWLogExtender implements LogExtender {
 	/**
 	 * Log the given key directly.
 	 */
-	public void logDirect(String key) {
+	public void logDirect(String key1, String key2, String key3, String key4) {
+		String key = new StringBuffer(key1).append(',').append(key2).append(',').append(key3).append(',').append(key4).toString();
 		if (key.equals(lastKey)) {
 			// ignore
 		} else {
@@ -68,7 +69,7 @@ public class TimedOAWLogExtender implements LogExtender {
 			// and write it to file
 			long newKeyTime = System.currentTimeMillis();
 			
-			writeToFile(lastKey, newKeyTime - lastKeyTime);
+			writeToFile(lastKey, newKeyTime, newKeyTime - lastKeyTime);
 			
 			lastKey = key;
 			lastKeyTime = newKeyTime;
@@ -82,32 +83,35 @@ public class TimedOAWLogExtender implements LogExtender {
 	 * @param message
 	 * @return
 	 */
-	private String calculateKey(String message) {
+	private String[] calculateKey(String message) {
 		if (message.startsWith("Adding generated EPackage"))
-			return "oaw: " + message; 
+			return new String[]{"oaw", message, "", ""}; 
 		if (message.startsWith("Checking configuration of"))
-			return "oaw: checking configuration";
+			return new String[]{"oaw", "checking configuration", "", ""};
 		if (message.startsWith("Reader:"))
-			return "oaw: loading model";
+			return new String[]{"oaw", "loading model", "", ""};
 		if (message.startsWith("CheckComponent:"))
-			return "oaw: checking model";
+			return new String[]{"oaw", "checking model", "", ""};
 		if (message.startsWith("Generator:"))
-			return "oaw: starting generator";
+			return new String[]{"oaw", "starting generator", "", ""};
 		if (message.startsWith("Opening file")) {
-			// get the filename
-			int pos = message.lastIndexOf('\\');
-			if (pos == -1)
-				message.lastIndexOf('/');
-			if (pos == -1)
-				return "oaw: opening file";
-			return "oaw: opening file " + message.substring(pos + 1);
+			message = message.replace('\\', '/');
+			String[] bits = message.split("/");
+			switch (bits.length) {
+				case 0:
+					return new String[]{"oaw", "opening file", "", ""};
+				case 1:
+					return new String[]{"oaw", "opening file", bits[0], ""};
+				default:
+					return new String[]{"oaw", "opening file", bits[bits.length-2], bits[bits.length-1]};
+			}
 		}
 		if (message.startsWith("Written"))
-			return "oaw: generation complete";
+			return new String[]{"oaw", "generation complete", "", ""};
 		if (message.startsWith("workflow completed"))
-			return "oaw: workflow completed";
+			return new String[]{"oaw", "workflow complete", "", ""};
 		
-		return "oaw: other";
+		return new String[]{"oaw", "other", "", ""};
 	}
 
 	/**
@@ -117,12 +121,14 @@ public class TimedOAWLogExtender implements LogExtender {
 	 * @param key
 	 * @param l
 	 */
-	private void writeToFile(String key, long l) {
+	private void writeToFile(String key1, long now, long diff) {
 		try {
 			FileWriter fw = new FileWriter(file, true);
-			fw.write(key);
+			fw.write(key1);
 			fw.write(",");
-			fw.write(Long.toString(l));
+			fw.write(Long.toString(now));
+			fw.write(",");
+			fw.write(Long.toString(diff));
 			fw.write("\n");
 			fw.close();
 		} catch (IOException e) {

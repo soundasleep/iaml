@@ -2,7 +2,7 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.125437f916e.4a">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <operations xsi:type="iaml:CompositeOperation" id="model.125437f916e.a1" name="update result" inActions="wires.125437f91eb.5">
-      <operations xsi:type="iaml:PrimitiveOperation" id="model.125437f916e.145" name="setPropertyToValue" inFlows="model.125437f916e.14d" inExecutions="model.125437f916e.147" outFlows="model.125437f916e.14e" outExecutions="model.125437f916e.149"/>
+      <operations xsi:type="iaml:PrimitiveOperation" id="model.125437f916e.145" name="set" inFlows="model.125437f916e.14d" inExecutions="model.125437f916e.147" outFlows="model.125437f916e.14e" outExecutions="model.125437f916e.149"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.125437f91eb.d" outExecutions="model.125437f916e.147"/>
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.125437f91eb.f" inExecutions="model.125437f916e.149"/>
       <nodes xsi:type="iaml.operations:Arithmetic" id="operations.125437f91eb.44" inFlows="model.125437f916e.14a model.125437f916e.14c" outFlows="model.125437f916e.14d"/>
@@ -30,7 +30,7 @@
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.1254759bbc9.54" name="make negative">
       <operations xsi:type="iaml:CompositeOperation" id="model.1254759b7c1.155" name="make negative" inActions="wires.1254759bc84.16">
-        <operations xsi:type="iaml:PrimitiveOperation" id="model.1254759b7c1.20e" name="setPropertyToValue" inFlows="model.1254759b7c1.216" inExecutions="model.1254759b7c1.210" outFlows="model.1254759b7c1.217" outExecutions="model.1254759b7c1.212"/>
+        <operations xsi:type="iaml:PrimitiveOperation" id="model.1254759b7c1.20e" name="set" inFlows="model.1254759b7c1.216" inExecutions="model.1254759b7c1.210" outFlows="model.1254759b7c1.217" outExecutions="model.1254759b7c1.212"/>
         <nodes xsi:type="iaml.operations:StartNode" id="operations.1254759bd7e.69" outExecutions="model.1254759b7c1.210"/>
         <nodes xsi:type="iaml.operations:FinishNode" id="operations.1254759bd7e.6a" inExecutions="model.1254759b7c1.212"/>
         <nodes xsi:type="iaml.operations:Arithmetic" id="operations.1254759bd7e.72" inFlows="model.1254759b7c1.213 model.1254759b7c1.215" outFlows="model.1254759b7c1.216" operationType="MULTIPLY"/>

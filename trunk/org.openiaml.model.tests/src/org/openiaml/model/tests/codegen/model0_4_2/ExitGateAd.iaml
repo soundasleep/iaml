@@ -23,7 +23,7 @@
     <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.32" name="Page 3"/>
     <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.4a" name="Advertisement" inActions="wires.126b0cb5e5a.e">
       <operations xsi:type="iaml:CompositeOperation" id="model.126b0cb5dec.d8" name="set flag to true" inActions="wires.126b0cb5e5a.4b">
-        <operations xsi:type="iaml:PrimitiveOperation" id="model.126b0cb5dec.176" name="setPropertyToValue" inFlows="model.126b0cb5dec.180" inExecutions="model.126b0cb5dec.17d" outFlows="model.126b0cb5dec.182" outExecutions="model.126b0cb5dec.17f"/>
+        <operations xsi:type="iaml:PrimitiveOperation" id="model.126b0cb5dec.176" name="set" inFlows="model.126b0cb5dec.180" inExecutions="model.126b0cb5dec.17d" outFlows="model.126b0cb5dec.182" outExecutions="model.126b0cb5dec.17f"/>
         <nodes xsi:type="iaml.operations:StartNode" id="operations.126b0cb5e69.8a" outExecutions="model.126b0cb5dec.17d"/>
         <nodes xsi:type="iaml.operations:FinishNode" id="operations.126b0cb5e69.8c" inExecutions="model.126b0cb5dec.17f"/>
         <dataEdges id="model.126b0cb5dec.180" from="model.126b0cb5dec.178" to="model.126b0cb5dec.176"/>

@@ -12,7 +12,7 @@
     <children xsi:type="iaml.visual:InputTextField" id="visual.1207ff8316f.fb" name="target">
       <operations xsi:type="iaml:CompositeOperation" id="model.1207ff82f9b.1bf" name="set to a static value" inActions="wires.1207ff8322b.4d wires.1207ff8322b.61">
         <parameters id="model.1207ff82f9b.1f8" name="value" outFlows="model.1207ff82f9b.269"/>
-        <operations xsi:type="iaml:PrimitiveOperation" id="model.1207ff82f9b.1fd" name="setPropertyToValue" inFlows="model.1207ff82f9b.269" inExecutions="model.1207ff82f9b.1fe" outFlows="model.1207ff82f9b.26a" outExecutions="model.1207ff82f9b.1ff"/>
+        <operations xsi:type="iaml:PrimitiveOperation" id="model.1207ff82f9b.1fd" name="set" inFlows="model.1207ff82f9b.269" inExecutions="model.1207ff82f9b.1fe" outFlows="model.1207ff82f9b.26a" outExecutions="model.1207ff82f9b.1ff"/>
         <nodes xsi:type="iaml.operations:StartNode" id="operations.1207ff832b7.63" outExecutions="model.1207ff82f9b.1fe"/>
         <nodes xsi:type="iaml.operations:FinishNode" id="operations.1207ff832b7.64" inExecutions="model.1207ff82f9b.1ff"/>
         <dataEdges id="model.1207ff82f9b.269" from="model.1207ff82f9b.1f8" to="model.1207ff82f9b.1fd"/>

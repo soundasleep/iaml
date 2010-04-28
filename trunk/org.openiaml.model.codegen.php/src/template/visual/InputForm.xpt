@@ -6,7 +6,7 @@
 «EXTENSION template::GeneratorExtensions»
 
 /**
- * TODO Should InputForms have fieldValues? Should they have 'onChange'?
+ * InputForms are no longer Changeable, so they do not have onChange or fieldValues.
  *
  * @implementation InputForm
  *		Any {@model VisibleThing children} of a {@model InputForm} are also rendered
@@ -14,21 +14,11 @@
  */
 «DEFINE renderForm(model::visual::Frame currentFrame) FOR model::visual::InputForm-»
 	<form id="«safeNameString(id)»" 
-			onChange="return onChange_«safeNameString(id)»(this);"
 			onClick="return onClick_«safeNameString(id)»(this);"
 		>
 		
 		<script language="Javascript" type="application/javascript">
 		/* <![CDATA[ */
-			function onChange_«safeNameString(id)»(obj) {
-				«IF onChange != null»
-					// expand all onChanges
-					«EXPAND template::events::EventCall::callEvent(false) FOR onChange-»
-				«ENDIF»
-
-				return false;
-			}
-			
 			function onClick_«safeNameString(id)»(obj) {
 				«IF onClick != null»
 					// expand all onClicks

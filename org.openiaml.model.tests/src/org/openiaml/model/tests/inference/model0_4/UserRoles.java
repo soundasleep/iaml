@@ -149,8 +149,8 @@ public class UserRoles extends InferenceTestCase {
 		SetWire set = assertHasSetWire(session, handler, instance, "set");
 		assertGenerated(set);
 
-		// this user instance should have an 'exists?' PrimitiveCondition
-		PrimitiveCondition exists = assertHasPrimitiveCondition(instance, "exists?");
+		// this user instance should have an 'empty' PrimitiveCondition
+		PrimitiveCondition exists = (PrimitiveCondition) instance.getEmpty();
 		assertGenerated(exists);
 
 	}

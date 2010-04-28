@@ -313,7 +313,7 @@ rule "Create contents of 'check instance' operation [type=domain_object or user]
 		instance : DomainObjectInstance ( eContainer == scope )
 		setWire : SetWire ( from == login_handler, to == instance, name == "set" )
 		
-		ex : Condition ( eContainer == instance, name == "exists?" )
+		ex : Condition ( instance.empty == ex )
 				
 		checkOperation : CompositeOperation ( eContainer == scope, name == "check instance" )
 
@@ -733,7 +733,7 @@ rule "Create contents of 'do login' operation [type=domain_object]"
 		instance : DomainObjectInstance ( eContainer == scope )
 		setWire : SetWire ( from == login_handler, to == instance, name == "set" )
 		
-		ex : Condition ( eContainer == instance, name == "exists?" )
+		ex : Condition ( instance.empty == ex )
 				
 		loginOperation : CompositeOperation ( eContainer == login_session, name == "do login" )
 
@@ -864,7 +864,7 @@ rule "Create contents of 'do login' operation [type=user]"
 		instance : DomainObjectInstance ( eContainer == scope )
 		setWire : SetWire ( from == login_handler, to == instance, name == "set" )
 		
-		ex : Condition ( eContainer == instance, name == "exists?" )
+		ex : Condition ( instance.empty == ex )
 				
 		loginOperation : CompositeOperation ( eContainer == login_session, name == "do login" )
 

@@ -87,29 +87,3 @@ rule "Create 'save' operation for DomainObjectInstances"
 		queue.add(op, drools);
 
 end
-
-/**
- * TODO this should be put into an explicit containment property 'exists',
- * like the other primitives.
- * TODO should this be merged with 'empty' PrimitiveCondition?
- *
- * @inference DomainObjectInstance
- *		A {@model DomainObjectInstance} has a {@model PrimitiveCondition}
- *		named 'exists?'.
- */
-rule "Create 'exists?' primitive condition for DomainObjectInstances"
-	when
-		instance : DomainObjectInstance ( )
-		
-		not ( PrimitiveCondition( eContainer == instance, name == "exists?" ))
-		
-		eval ( handler.veto( instance ))
-		
-	then
-		# create a new one
-		PrimitiveCondition condition = handler.generatedPrimitiveCondition(instance, instance);
-		handler.setName(condition, "exists?");
-		queue.add(condition, drools);
-
-end
-

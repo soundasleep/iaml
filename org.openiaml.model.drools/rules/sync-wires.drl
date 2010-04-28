@@ -537,8 +537,8 @@ rule "A SyncWire between Attributes selected from a NewInstanceWire need to chec
 		
 		param : ParameterEdge ( from == attributeValue, to == run )  
 		
-		# exists? condition in the instance
-		existsCondition : Condition ( eContainer == instance, name == "exists?" )
+		# 'empty' condition in the instance
+		existsCondition : Condition ( instance.empty == existsCondition )
 		
 		# but not connected		
 		not (ConditionEdge ( from == existsCondition, to == run ))

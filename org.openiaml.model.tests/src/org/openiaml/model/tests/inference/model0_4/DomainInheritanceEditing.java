@@ -12,6 +12,7 @@ import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.PrimitiveCondition;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
@@ -50,7 +51,7 @@ public class DomainInheritanceEditing extends InferenceTestCase {
 	/**
 	 * If a text field is being initialised with an attribute
 	 * stored in an object from a SelectWire, it should <em>not</em> include
-	 * an 'exists?' condition check.
+	 * an 'empty' condition check.
 	 *
 	 * @throws Exception
 	 */
@@ -93,7 +94,7 @@ public class DomainInheritanceEditing extends InferenceTestCase {
 		assertGenerated(param);
 
 		// the condition on the object instance
-		Condition exists = assertHasCondition(studentInstance, "exists?");
+		Condition exists = studentInstance.getEmpty();
 		assertGenerated(exists);
 
 		// NOT connected to the run instance wire
@@ -104,7 +105,7 @@ public class DomainInheritanceEditing extends InferenceTestCase {
 	/**
 	 * If a text field is being initialised with an attribute
 	 * stored in an object from a NewInstanceWire, it should include
-	 * an 'exists?' condition check.
+	 * an 'empty' condition check.
 	 *
 	 * @throws Exception
 	 */
@@ -147,7 +148,7 @@ public class DomainInheritanceEditing extends InferenceTestCase {
 		assertGenerated(param);
 
 		// the condition on the object instance
-		Condition exists = assertHasCondition(studentInstance, "exists?");
+		Condition exists = studentInstance.getEmpty();
 		assertGenerated(exists);
 
 		// connected to the run instance wire
@@ -156,8 +157,9 @@ public class DomainInheritanceEditing extends InferenceTestCase {
 	}
 
 	/**
-	 * There is no 'exists?' composite condition, since there is
-	 * now an 'exists?' primitive condition.
+	 * There is no 'exists?' composite condition, or 'exists?' primitive
+	 * condition; in issue 180, this has been replaced by the direct 
+	 * 'empty' condition.
 	 *
 	 * @throws Exception
 	 */
@@ -168,8 +170,12 @@ public class DomainInheritanceEditing extends InferenceTestCase {
 		DomainObjectInstance instance = assertHasDomainObjectInstance(page, "new student");
 
 		// the 'exists?' PrimitiveCondition
-		assertHasNoCompositeCondition(instance, "exists?");
-		assertHasPrimitiveCondition(instance, "exists?");
+		// it has no PrimitiveCondition or CompositeCondition whatsoever
+		assertHasNoCondition(instance, "exists?");
+		
+		assertNotNull(instance.getEmpty());
+		PrimitiveCondition pc = (PrimitiveCondition) instance.getEmpty();
+		assertGenerated(pc);
 
 	}
 

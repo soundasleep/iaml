@@ -74,7 +74,7 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 		SplitNode split = assertHasSplitNode(doLogin);
 		JoinNode join = assertHasJoinNode(doLogin);
 
-		// there should be a decision node from 'exists?'
+		// there should be a decision node from 'empty?'
 		DecisionNode decision = assertHasDecisionNode(doLogin, "true?");
 		assertHasExecutionEdge(doLogin, start, split);
 		assertHasExecutionEdge(doLogin, join, decision);

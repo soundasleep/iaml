@@ -50,17 +50,17 @@
 	
 	«EXPAND EventHandlers::getScriptClickDefinition(currentFrame)»
 	
+	«IF onAccess != null»
 	<script language="Javascript" type="application/javascript">
 		/* <![CDATA[ */
 			«REM»any on-access events?«ENDREM»
 			addOnloadFunction( function() {
-			«IF onAccess != null»
 				// expand all onAccess
 				«EXPAND template::events::EventCall::callEvent(false) FOR onAccess-»
-			«ENDIF»
 			} );
 		/* ]]> */
 	</script> 
+	«ENDIF»
 «ENDDEFINE»
 
 /**

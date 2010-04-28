@@ -16,6 +16,11 @@ textFieldName(model::visual::InputTextField this) :
 
 buttonName(model::visual::Button this) :
 	if (name == null || name == "") then "Submit Query" else name;
+	
+simpleName(model::NamedElement this) :
+	safeNameString(name);
+simpleName(emf::EObject this) :
+	safeName();
 
 /**
  * Get a safe string name of the given element; that is, one that only consists
@@ -452,7 +457,7 @@ List[model::ExecutionEdgeDestination] allDestinations(model::ExecutionEdgesSourc
 	else
 		outExecutions.to.toSet().addAll (
 			outExecutions.to.collect(e | allDestinations(e, visited.toSet().add(this)) )
-		).flatten()
+		).flatten().toSet()
 	;
 
 // default for an execution edge destination: empty

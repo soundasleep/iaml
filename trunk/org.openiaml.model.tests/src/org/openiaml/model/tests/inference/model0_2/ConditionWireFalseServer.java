@@ -1,7 +1,7 @@
 /**
  *
  */
-package org.openiaml.model.tests.inference;
+package org.openiaml.model.tests.inference.model0_2;
 
 import org.jaxen.JaxenException;
 import org.openiaml.model.model.Condition;
@@ -13,6 +13,7 @@ import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SyncWire;
+import org.openiaml.model.tests.inference.InferenceTestCase;
 
 /**
  * Tests inference of ConditionWires when attached to SyncWires, and

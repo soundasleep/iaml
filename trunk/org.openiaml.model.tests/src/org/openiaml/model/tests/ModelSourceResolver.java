@@ -79,6 +79,12 @@ public class ModelSourceResolver {
 		}
 		
 		// TODO move other inference tests into separate test folders
+		if (class1.getPackage().getName().contains("inference.model0_1")) {
+			return getAbsolutePathRoot() + ModelTestCase.ROOT + "inference/model0_1/" + class1.getSimpleName() + ".iaml";
+		}
+		if (class1.getPackage().getName().contains("inference.model0_2")) {
+			return getAbsolutePathRoot() + ModelTestCase.ROOT + "inference/model0_2/" + class1.getSimpleName() + ".iaml";
+		}
 		if (class1.getPackage().getName().contains("inference.model0_3")) {
 			return getAbsolutePathRoot() + ModelTestCase.ROOT + "inference/model0_3/" + class1.getSimpleName() + ".iaml";
 		}

@@ -1,7 +1,7 @@
 /**
  *
  */
-package org.openiaml.model.tests.inference;
+package org.openiaml.model.tests.inference.model0_2;
 
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.EventTrigger;
@@ -17,6 +17,7 @@ import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.RunAction;
+import org.openiaml.model.tests.inference.InferenceTestCase;
 import org.openiaml.model.tests.inference.model0_4.SetWireClient;
 
 /**

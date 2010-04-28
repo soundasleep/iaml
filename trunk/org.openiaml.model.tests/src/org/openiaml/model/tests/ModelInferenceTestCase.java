@@ -81,6 +81,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * Automagically load the model file (.iaml) for this given
 	 * test class, and do inference.
 	 *
+	 * @see ModelSourceResolver#getModelFileForClass(Class)
 	 * @see #loadAndCodegen(String)
 	 * @param class1 The test class to load a model for.
 	 * @return the loaded and inferred InternetApplication

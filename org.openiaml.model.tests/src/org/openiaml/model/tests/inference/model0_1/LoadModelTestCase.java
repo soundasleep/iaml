@@ -1,11 +1,12 @@
 /**
  *
  */
-package org.openiaml.model.tests.inference;
+package org.openiaml.model.tests.inference.model0_1;
 
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.visual.Frame;
+import org.openiaml.model.tests.inference.InferenceTestCase;
 
 /**
  * Tests loading the model.

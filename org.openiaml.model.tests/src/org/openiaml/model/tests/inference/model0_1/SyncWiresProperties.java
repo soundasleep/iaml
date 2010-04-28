@@ -1,7 +1,7 @@
 /**
  *
  */
-package org.openiaml.model.tests.inference;
+package org.openiaml.model.tests.inference.model0_1;
 
 import java.util.List;
 
@@ -27,6 +27,7 @@ import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SyncWire;
+import org.openiaml.model.tests.inference.InferenceTestCase;
 
 /**
  * Tests inference of sync wires between a .properties

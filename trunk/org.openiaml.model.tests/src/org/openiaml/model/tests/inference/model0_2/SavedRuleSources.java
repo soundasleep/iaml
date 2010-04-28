@@ -32,7 +32,7 @@ public class SavedRuleSources extends InferenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		// the second parameter makes the inference keep track of rule sources (just names for now)
-		root = loadAndInfer(ROOT + "inference/ConditionWireXpath.iaml", true);
+		root = loadAndInfer(ConditionWireXpath.class, true);
 	}
 
 	public void testInference() throws JaxenException {

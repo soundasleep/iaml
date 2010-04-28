@@ -35,7 +35,7 @@ public class Requirement4DynamicSources extends InferenceTestCaseWithConditionWi
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		root = loadAndInfer(ROOT + "../examples/requirements/4-dynamic_sources.iaml", true);
+		root = loadAndInfer(Requirement4DynamicSources.class, true);
 	}
 
 	public void testXPathQuery() throws JaxenException {

@@ -44,7 +44,7 @@
 	«EXPAND implicitButtonClickEvents(currentFrame, php) FOREACH outActions-»
 «ENDDEFINE»
 
-«DEFINE getScriptChangeDefinition(model::visual::Frame currentFrame) FOR model::VisibleThing-»
+«DEFINE getScriptChangeDefinition(model::visual::Frame currentFrame) FOR model::Changeable-»
 	<script language="Javascript" type="application/javascript">
 	/* <![CDATA[ */
 		function onChange_«safeNameString(id)»(obj) {

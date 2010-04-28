@@ -30,7 +30,7 @@ public class IncompatibleTypesInputTextField extends CodegenTestCase {
 		assertNotEqual(0, ex.getChildren().length);
 		boolean found = false;
 		for (IStatus s : ex.getChildren()) {
-			if (s.getMessage().startsWith("InputTextField type '" + BuiltinDataTypes.TYPE_INTEGER + "' is incompatible with fieldValue type '" + BuiltinDataTypes.TYPE_EMAIL + "'")) {
+			if (s.getMessage().startsWith("Type '" + BuiltinDataTypes.TYPE_INTEGER + "' is incompatible with contained fieldValue type '" + BuiltinDataTypes.TYPE_EMAIL + "'")) {
 				found = true;
 			}
 		}

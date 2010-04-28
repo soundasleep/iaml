@@ -1438,5 +1438,39 @@ public class GmfGenTestCase extends XmlTestCase {
 		});
 	}
 	
+	/**
+	 * Issue 110: diagram editors need to have their own "new wizard" group. 
+	 * 
+	 * @throws Exception
+	 */
+	public void testCreationWizardCategoryID() throws Exception {
+		final String expected = "org.openiaml.model.newWizards";
+		
+		iterate(new DefaultIterator() {
+
+			@Override
+			public void execute2(String filename, Document doc)
+					throws Exception {
+				
+				{
+					Element root = xpathFirst(doc, "/GenEditorGenerator/diagram");
+					assertNotNull(root);
+					
+					if (!expected.equals(root.getAttribute("creationWizardCategoryID"))) {
+						root.setAttribute("creationWizardCategoryID", expected);
+						
+						// try modifying it
+						saveDocument(doc, filename);
+					}
+				}
+				
+				// then recheck it
+				Element root = xpathFirst(doc, "/GenEditorGenerator/diagram");
+				assertEquals(filename + ": creationWizardCategoryID could not be fixed", expected, root.getAttribute("creationWizardCategoryID"));
+			}
+			
+		});
+	}
+	
 	
 }

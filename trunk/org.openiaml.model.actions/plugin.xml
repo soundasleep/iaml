@@ -114,5 +114,13 @@
 			name="Refresh mappings">
 		</command>
 	</extension>
+
+	<extension point="org.eclipse.ui.newWizards">
+		<category
+			id="org.openiaml.model.newWizards"
+			name="IAML Diagrams">
+		</category>
+	</extension>
+
 	
 </plugin>

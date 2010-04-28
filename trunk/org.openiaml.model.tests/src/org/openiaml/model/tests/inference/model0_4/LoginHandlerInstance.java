@@ -124,8 +124,8 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		DomainAttributeInstance aname = assertHasDomainAttributeInstance(instance, "name");
 		assertNotGenerated(aname);
 
-		// the instance should also contain an 'exists?' PrimitiveCondition
-		PrimitiveCondition exists = assertHasPrimitiveCondition(instance, "exists?");
+		// the instance should also contain an 'empty' PrimitiveCondition
+		PrimitiveCondition exists = (PrimitiveCondition) instance.getEmpty();
 		assertGenerated(exists);
 
 	}
@@ -317,15 +317,15 @@ public class LoginHandlerInstance extends InferenceTestCase {
 
 	/**
 	 * Helper method - the given operation should use an operation
-	 * call node to call the 'exists?' operation
+	 * call node to call the 'empty' condition
 	 *
 	 * @throws Exception
 	 */
 	private void checkOperationCallsExists(Session session, CompositeOperation check) throws Exception {
-		// find 'exists?'
+		// find 'empty'
 		DomainObjectInstance instance = assertHasDomainObjectInstance(session, "logged in user");
 		assertNotGenerated(instance);
-		PrimitiveCondition exists = assertHasPrimitiveCondition(instance, "exists?");
+		PrimitiveCondition exists = (PrimitiveCondition) instance.getEmpty();
 		assertGenerated(exists);
 		
 		// has a DecisionNode
@@ -339,7 +339,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 
 	/**
 	 * The 'check key' operation should use an operation call node
-	 * to call the 'exists?' operation
+	 * to call the 'empty' operation
 	 *
 	 * @throws Exception
 	 */
@@ -358,7 +358,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 
 	/**
 	 * The 'do login' operation should use an operation call node
-	 * to call the 'exists?' operation
+	 * to call the 'empty' operation
 	 *
 	 * @throws Exception
 	 */

@@ -385,7 +385,7 @@ public class DomainInheritanceEditing extends CodegenTestCase {
 		// insert a session id
 		IFile setSession = getProject().getFile("output/set_session.php");
 		assertTrue("session file '" + setSession + "' should exist", setSession.exists());
-		gotoPage(setSession.getProjectRelativePath().toString() + "?id=" + key + "&arg0=" + value);
+		gotoPage(setSession.getProjectRelativePath().toString() + "?id=" + key + "&arg0=" + value + "&frame=null");
 		
 		assertNoProblem();
 	}

@@ -272,6 +272,25 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		List<Object> results = nameSelect(typeSelect(element.getConditions(), CompositeCondition.class), string);
 		assertEquals(0, results.size());
 	}
+	
+	/**
+	 * Assert that the given element does <em>not</em> contain the given
+	 * PrimitiveCondition.
+	 */
+	public void assertHasNoPrimitiveCondition(ContainsConditions element, String string) throws JaxenException {
+		List<Object> results = nameSelect(typeSelect(element.getConditions(), PrimitiveCondition.class), string);
+		assertEquals(0, results.size());
+	}
+	
+	
+	/**
+	 * Assert that the given element does <em>not</em> contain the given
+	 * Condition.
+	 */
+	public void assertHasNoCondition(ContainsConditions element, String string) throws JaxenException {
+		List<Object> results = nameSelect(typeSelect(element.getConditions(), Condition.class), string);
+		assertEquals(0, results.size());
+	}
 
 	/**
 	 * Assert that the given element contains the given

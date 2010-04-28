@@ -126,7 +126,7 @@ context model::PrimitiveOperation WARNING "Unknown primitive operation name '" +
 	(eContainer != null && model::DomainObjectInstance.isInstance(eContainer) && ((model::DomainObjectInstance) eContainer).reset == this) || 
 	(eContainer != null && model::DomainObjectInstance.isInstance(eContainer) && ((model::DomainObjectInstance) eContainer).skip == this) || 
 	(eContainer != null && model::DomainObjectInstance.isInstance(eContainer) && ((model::DomainObjectInstance) eContainer).jump == this) || 
-	(name == "setPropertyToValue" || name == "set" ||
+	(name == "set" ||
 		name == "javascriptAlert" || name == "save" ||
 		name == "new" ||
 		name == "equal?" || name == "add role" ||
@@ -147,12 +147,6 @@ context model::PrimitiveCondition WARNING "Unknown primitive condition name '" +
 context model::operations::Arithmetic ERROR "Arithmetic must have at least one incoming data source edge" :
 	inFlows.size > 0;
 
-context model::PrimitiveOperation ERROR "A 'set' PrimitiveOperation cannot set an ApplicationElementProperty: use 'setPropertyToValue'" :
-	name != "set" || outFlows.to.typeSelect(model::Property).size == 0;
-
-context model::PrimitiveOperation ERROR "A 'setPropertyToValue' PrimitiveOperation cannot set a TemporaryVariable: use 'set'" :
-	name != "setPropertyToValue" || outFlows.to.typeSelect(model::TemporaryVariable).size == 0;
-	
 context model::components::EntryGate ERROR "An EntryGate needs to have at least one incoming Condition, or one outgoing 'first' wire, or it will never permit access" :
 	inConditionEdges.size >= 1
 	|| outWires.typeSelect(model::NamedElement).exists(w | w.name == "first");

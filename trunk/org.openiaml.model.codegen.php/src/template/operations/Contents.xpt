@@ -15,9 +15,7 @@
  */
 «DEFINE operationContents(model::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
 	«REM»special primitive operation names«ENDREM»
-	«IF name == "setPropertyToValue"-»
-		«EXPAND setPropertyToValueOperation(start, php) FOR this»
-	«ELSEIF name == "set"»
+	«IF name == "set"»
 		«EXPAND setOperation(start, php) FOR this»
 	«ELSEIF name == "javascriptAlert"»
 		«EXPAND javascriptAlert(start, php) FOR this»
@@ -312,11 +310,18 @@
  * Set temporary variable <-- inFlow
  */
 «DEFINE setOperation(model::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
-	«REM»set a temporary variable«ENDREM»
-	«IF php»
-		$temp_«safeName(outFlows.first().to)» = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
+	«IF model::TemporaryVariable.isInstance(outFlows.first().to)»
+		«REM»set a temporary variable«ENDREM»
+		«IF php»
+			$temp_«safeName(outFlows.first().to)» = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
+		«ELSE»
+			temp_«safeName(outFlows.first().to)» = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
+		«ENDIF»
+	«ELSEIF model::Property.isInstance(outFlows.first().to)»
+		«REM»set a property«ENDREM»
+		«EXPAND setPropertyToValueOperation(start, php) FOR this»
 	«ELSE»
-		temp_«safeName(outFlows.first().to)» = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
+		«throwException("Unexpected target to set: " + this)»
 	«ENDIF»
 
 	«REM»continue«ENDREM»

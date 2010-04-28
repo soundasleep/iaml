@@ -170,7 +170,7 @@ rule "Create components of 'update', 'refresh', 'init' operations"
 		// end add 'cast' node
 		
 		PrimitiveOperation op = handler.generatedPrimitiveOperation(o, o);
-		handler.setName(op, "setPropertyToValue");
+		handler.setName(op, "set");
 		queue.add(op, drools);
 		
 		StartNode start = handler.generatedStartNode(o, o);

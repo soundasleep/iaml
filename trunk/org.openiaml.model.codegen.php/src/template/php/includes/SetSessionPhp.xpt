@@ -10,14 +10,35 @@
  
 «EXPAND template::Template::commonHeader("", "Set Session")»
 
+define('REDIRECT_ON_CLIENT', true);
+
+// include operations, condition definitions
+«EXPAND template::Common::commonPHPIncludes»
+
+«EXPAND template::domain::Definitions::domainDefinitions»
+
 log_message("set_session.php? " . print_r($_GET, true));
 $id = require_get("id");
 $arg0 = require_get("arg0");
+
+// the current frame ID we are on
+// (used to select which elements to inform the client to update)
+$frame_id = require_get("frame");
+function get_frame_id() {
+	global $frame_id;
+	return $frame_id;
+}
 
 // set
 $_SESSION[$id] = $arg0;
 
 echo "ok";
 log_message("set_session.php completed");
+
+// update any (other) values on the client-side?
+«EXPAND template::php::callbacks::UpdateFrameProperties::updateAllFrameProperties»
+
+// update any cached conditions?
+echo_necessary_update_callbacks();
 
 «ENDDEFINE»

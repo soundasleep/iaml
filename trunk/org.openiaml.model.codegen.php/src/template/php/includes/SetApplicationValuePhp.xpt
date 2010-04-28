@@ -76,6 +76,7 @@ try {
 // update any (other) values on the client-side?
 «EXPAND template::php::callbacks::UpdateFrameProperties::updateAllFrameProperties»
 
+// update any cached conditions?
 echo_necessary_update_callbacks();
 
 «ENDDEFINE»

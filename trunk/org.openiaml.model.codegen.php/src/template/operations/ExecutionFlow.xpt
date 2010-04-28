@@ -212,7 +212,7 @@
 	«FOREACH outExecutions AS e-»
 		«EXPAND executionFlowInternal(operation, php, {e}) FOR this» 
 	«ENDFOREACH»
-	
+
 	«REM»
 		find the target join node for this split node; this is
 		where execution will continue (and set the next step
@@ -220,7 +220,14 @@
 	«ENDREM»
 	// final join node = «findFinalJoinNode(this)»
 	«IF findFinalJoinNode(this) != null»
+		«REM»
 		«EXPAND executionFlowStep(operation, start, php) FOR findFinalJoinNode(this)»
+		«ENDREM»
+		
+		«REM»continue«ENDREM»
+		«FOREACH findFinalJoinNode(this).outExecutions AS e-»
+			«EXPAND ExecutionFlow::addStack(start, php) FOR e»
+		«ENDFOREACH»
 	«ELSE»
 		«throwException("No join node found for split node '" + this + "'")»
 	«ENDIF»

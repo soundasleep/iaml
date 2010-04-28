@@ -132,7 +132,7 @@ rule "Create contents of 'set flag' operation"
 		StartNode start = handler.generatedStartNode(gate, op);
 		FinishNode finish = handler.generatedFinishNode(gate, op);
 		PrimitiveOperation set = handler.generatedPrimitiveOperation(gate, op);
-		handler.setName(set, "setPropertyToValue");
+		handler.setName(set, "set");
 		StaticValue value = handler.generatedStaticValue(gate, op);
 		handler.setName(value, "true");
 		handler.setValue(value, "true");

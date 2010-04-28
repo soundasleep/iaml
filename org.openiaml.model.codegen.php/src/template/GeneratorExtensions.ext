@@ -327,7 +327,7 @@ model::DomainObject getDomainObject(model::DomainAttribute this) :
 model::DomainObject getDomainObject(emf::EObject this) :
 	null;
 	
-/** for a given setPropertyToValue operation, should we be calling
+/** for a given set operation, should we be calling
   additional event triggers? */
 shouldExpandEventTriggers(model::PrimitiveOperation this ) :
 	getOperationName( eContainer ) == "update";

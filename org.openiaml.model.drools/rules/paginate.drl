@@ -409,7 +409,7 @@ rule "Create contents of 'update target' operation"
 		queue.add(finish, drools);
 		
 		PrimitiveOperation setOp = handler.generatedPrimitiveOperation(op, op);
-		handler.setName(setOp, "setPropertyToValue");
+		handler.setName(setOp, "set");
 		queue.add(setOp, drools);
 		
 		StaticValue one = handler.generatedStaticValue(op, op);

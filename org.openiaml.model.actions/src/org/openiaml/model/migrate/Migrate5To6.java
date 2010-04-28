@@ -17,6 +17,7 @@ import org.w3c.dom.Node;
  *   <li>'fieldValue' Property is now a directly referenced Property
  *   <li>DecisionOperation has been merged into DecisionNode ({@issue 160})
  *   <li>DecisionCondition has been merged into DecisionNode ({@issue 160})
+ *   <li>"setPropertyToValue" PrimitiveOperation is now merged into "set" ({@issue 143})
  *   <li>Others...
  * </ol>
  * 
@@ -127,9 +128,25 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 	@Override
 	public String getRenamedAttribute(Element oldElement, Element newElement,
 			String name, String value) {
-
+		
 		// otherwise, just return the same name
 		return super.getRenamedAttribute(oldElement, newElement, name, value);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.migrate.DomBasedMigrator#handleAttribute(java.lang.String, java.lang.String, org.w3c.dom.Element, java.util.List)
+	 */
+	@Override
+	public String handleAttribute(String name, String value, Element element,
+			List<ExpectedMigrationException> errors) {
+		
+		// "setPropertyToValue" -> "set"
+		if ("operations".equals(element.getNodeName()) && "name".equals(name) && "setPropertyToValue".equals(value)) {
+			return "set"; 
+		}
+		
+		// otherwise, just return the same name
+		return super.handleAttribute(name, value, element, errors);
 	}
 
 	/**

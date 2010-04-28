@@ -534,7 +534,7 @@ rule "Create contents of 'do login' operation [type=secret_key]"
 
 		# ok: set value operation
 		PrimitiveOperation setProperty = handler.generatedPrimitiveOperation(loginOperation, loginOperation);
-		handler.setName(setProperty, "setPropertyToValue");
+		handler.setName(setProperty, "set");
 		queue.add(setProperty, drools);
 		
 		DataFlowEdge data3 = handler.generatedDataFlowEdge(loginOperation, loginOperation);
@@ -826,7 +826,7 @@ rule "Create parameter for 'do login' operation inside login handler[type=domain
 		queue.add(param, drools);
 		
 		CompositeOperation setValue = handler.generatedCompositeOperation(operation, operation);
-		handler.setName(setValue, "setPropertyToValue");
+		handler.setName(setValue, "set");
 		queue.add(setValue, drools);
 		
 		// split to set value
@@ -955,7 +955,7 @@ rule "Create parameter for 'do login' operation inside login handler[type=user]"
 		queue.add(param, drools);
 		
 		CompositeOperation setValue = handler.generatedCompositeOperation(operation, operation);
-		handler.setName(setValue, "setPropertyToValue");
+		handler.setName(setValue, "set");
 		queue.add(setValue, drools);
 		
 		// split to set value
@@ -1123,9 +1123,9 @@ rule "Create contents of 'do logout' operation [type=secret_key]"
 		FinishNode finish = handler.generatedFinishNode(o, o);
 		queue.add(finish, drools);
 		
-		# setPropertyToValue
+		# set
 		PrimitiveOperation op = handler.generatedPrimitiveOperation(o, o);
-		handler.setName(op, "setPropertyToValue");
+		handler.setName(op, "set");
 		queue.add(op, drools);
 		
 		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);
@@ -1217,9 +1217,9 @@ rule "Create contents (specific keys) of 'do logout' operation [type=object]"
 	
 	then
 	
-		# setPropertyToValue
+		# set
 		PrimitiveOperation op = handler.generatedPrimitiveOperation(o, o);
-		handler.setName(op, "setPropertyToValue");
+		handler.setName(op, "set");
 		queue.add(op, drools);
 	
 		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);
@@ -1267,9 +1267,9 @@ rule "Create contents (specific keys) of 'do logout' operation [type=user]"
 	
 	then
 	
-		# setPropertyToValue
+		# set
 		PrimitiveOperation op = handler.generatedPrimitiveOperation(o, o);
-		handler.setName(op, "setPropertyToValue");
+		handler.setName(op, "set");
 		queue.add(op, drools);
 	
 		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);

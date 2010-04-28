@@ -216,7 +216,6 @@
  * outflowTarget <-- inflowTarget
  */
 «DEFINE setPropertyToValueOperation(model::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
-	// outFlows first to = «outFlows.first().to»
 	«IF php»
 		$arg0 = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»; 
 
@@ -237,12 +236,7 @@
 			// this make sure we don't accidentally call Javascript's toString() method
 			value = do_cast(value, 'http://openiaml.org/model/datatypes#iamlString');
 		
-			// ignore null parameters
-			// a null parameter may occur if the remote parameter source is unavailable, or we will have a stored_event that
-			// will populate this field
 			«IF canBeSet(outFlows.first().to.eContainer)»
-				// inflow container = «containingFrame(inFlows.first().from)»
-				// outflow container = «containingFrame(outFlows.first().to)»
 				if (containing_frame("«safeName(outFlows.first().to)»") == get_frame_id() &&
 						containing_email("«safeName(outFlows.first().to)»") == null) {
 					// set a variable in the current frame

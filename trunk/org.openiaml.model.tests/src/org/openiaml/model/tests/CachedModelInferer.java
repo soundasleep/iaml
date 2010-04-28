@@ -18,8 +18,6 @@ import org.openiaml.model.ModelLoader.ModelLoadException;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.drools.EcoreInferenceHandlerFactory;
 import org.openiaml.model.drools.ICreateElementsFactory;
-import org.openiaml.model.inference.EcoreInferenceHandler;
-import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.tests.CachedModelLoader.IModelReloader;
@@ -105,7 +103,7 @@ public class CachedModelInferer {
 			final boolean logRuleSource,
 			IProgressMonitor monitor) throws Exception {
 		if (!inferCache.containsKey(loadClass)) {
-			logTimed("infer: loading model");
+			logTimed("infer", "loading model", "", "");
 			
 			// reload
 			InternetApplication root = loader.loadDirectly(loadClass, logRuleSource);
@@ -130,21 +128,21 @@ public class CachedModelInferer {
 				
 			});
 
-			logTimed("infer: performing inference");
+			logTimed("infer", "performing inference", "", "");
 			ce.create(root, logRuleSource, monitor);
 	
 			// write out this inferred model for reference
-			logTimed("infer: writing out inferred model");
+			logTimed("infer", "writing out inferred model", "", "");
 			inferredModel = provider.saveInferredModel(resource);
 			
 			// put this model down in the cache
-			logTimed("infer: saving to cache");
+			logTimed("infer", "saving to cache", "", "");
 			inferCache.put(loadClass, inferredModel);
 			
 			// save a copy in the model cache
 			modelCache.put(loadClass, root);
 			
-			logTimed("infer: inference complete");
+			logTimed("infer", "inference complete", "", "");
 			return root;
 		} else {
 			// load it from the given file - it will be inferred already
@@ -213,12 +211,8 @@ public class CachedModelInferer {
 		return new NullProgressMonitor();
 	}
 
-	/**
-	 * Currently an empty method.
-	 * @param string
-	 */
-	private void logTimed(String string) {
-		// empty
+	private void logTimed(String key1, String key2, String key3, String key4) {
+		ModelTestCase.logTimed(key1, key2, key3, key4);
 	}
 
 	private static final ModelCache modelCache = new ModelCache();

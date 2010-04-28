@@ -129,7 +129,7 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 		// parent setup
 		super.setUp();
 		
-		logTimed("model: setUp");
+		logTimed("model", "setUp", "", "");
 		
 		monitor = new NullProgressMonitor();
 		
@@ -215,21 +215,21 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	 */
 	protected void doTransform(Class<?> cacheClass, EObject model) throws Exception {
 		if (codegenCache.containsKey(cacheClass) && projectCache.containsKey(cacheClass)) {
-			logTimed("codegen: loading from cache");
+			logTimed("codegen", "loading from cache", "", "");
 			
 			// load from cache
 			loadFromCache(cacheClass);
-			logTimed("codegen: load from cache complete");
+			logTimed("codegen", "load from cache complete", "", "");
 		} else {
 			// codegen manually
-			logTimed("codegen: doing actual codegen");
+			logTimed("codegen", "doing actual codegen", "", "");
 			doTransformActual(model);
 			
 			// update cache
-			logTimed("codegen: updating cache");
+			logTimed("codegen", "updating cache", "", "");
 			updateCache(cacheClass);
 			
-			logTimed("codegen: saving to cache complete");
+			logTimed("codegen", "saving to cache complete", "", "");
 		}
 	}
 	
@@ -794,7 +794,7 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	/**
 	 * Should we log the results to TIMED_LOG_FILE?
 	 */
-	private static final boolean ENABLE_TIMED_LOG = false;
+	public static final boolean ENABLE_TIMED_LOG = false;
 	private static final String TIMED_LOG_FILE = "timed.log";
 	
 	/**
@@ -816,9 +816,9 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 		
 	}
 	
-	protected static void logTimed(String message) {
+	protected static void logTimed(String key1, String key2, String key3, String key4) {
 		if (ENABLE_TIMED_LOG) {
-			extender.logDirect(message);
+			extender.logDirect(key1, key2, key3, key4);
 		}
 	}
 	

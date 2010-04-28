@@ -3,6 +3,7 @@ package org.openiaml.model.tests.inference;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+import org.openiaml.model.tests.inference.model0_2.AllModel0_2InferenceTests;
 import org.openiaml.model.tests.inference.model0_3.AllModel0_3InferenceTests;
 import org.openiaml.model.tests.inference.model0_4.AllModel0_4InferenceTests;
 import org.openiaml.model.tests.inference.model0_4_2.AllModel0_4_2InferenceTests;
@@ -33,17 +34,9 @@ public class AllInferenceTests {
         suite.addTestSuite(SyncFieldDomainAttribute.class);
         suite.addTestSuite(SyncFormDomainObject.class);
         suite.addTestSuite(SyncWiresProperties.class);
-        
-        // model 0.2
-        suite.addTestSuite(ConditionWireFalse.class);
-        suite.addTestSuite(ConditionWireFalseServer.class);
-        suite.addTestSuite(ConditionWireXpath.class);
-        suite.addTestSuite(ConditionWireXpathThreePages.class);
-        suite.addTestSuite(Requirement4DynamicSources.class);
-        suite.addTestSuite(SavedRuleSources.class);
-        suite.addTestSuite(SessionSyncWires.class);
-        
+
         // suites of model inference tests
+        suite.addTest(AllModel0_2InferenceTests.suite());
         suite.addTest(AllModel0_3InferenceTests.suite());
         suite.addTest(AllModel0_4InferenceTests.suite());
         suite.addTest(AllModel0_4_2InferenceTests.suite());

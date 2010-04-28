@@ -21,7 +21,7 @@ import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
-import org.openiaml.model.tests.inference.SessionSyncWires;
+import org.openiaml.model.tests.inference.model0_2.SessionSyncWires;
 
 /**
  * Inference of SetWires.

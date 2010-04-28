@@ -25,7 +25,7 @@ public class CachedModelLoader {
 	 * Load the model file (.iaml) for this given
 	 * test class, but don't do inference.
 	 *
-	 * @see #getModelFileForClass(Class)
+	 * @see ModelSourceResolver#getModelFileForClass(Class)
 	 * @see #loadModelDirectly(Class)
 	 * @param class1 The test class to load a model for.
 	 * @param logRuleSource Log the rule source of inserted elements.

@@ -70,4 +70,95 @@ public class OperationalExample extends CodegenTestCase {
 		clickButtonWithText("Run");
 	}
 	
+	/**
+	 * A possible Java skeleton for the implementation of 
+	 * the composite operation in the given example model.
+	 * 
+	 * @param input
+	 */
+	public void compositeOperation(String input) {
+		
+		try {
+			Integer.valueOf(input);
+		} catch (NumberFormatException e) {
+			throw new RuntimeException("Input is not an integer.");
+		}
+		
+		final IntegerWrapper temp = new IntegerWrapper(Integer.valueOf(input));
+		
+		BlockingRunnable t1 = new BlockingRunnable() {
+			@Override
+			public void runActual() {
+				// empty
+			}			
+		};
+		BlockingRunnable t2 = new BlockingRunnable() {
+			@Override
+			public void runActual() {
+				temp.setValue( temp.getValue() + 1 );
+			}
+		};
+		
+		new Thread(t1).start();
+		new Thread(t2).start();
+		while (!(t1.isFinished() && t2.isFinished())) {
+			Thread.yield();
+		}
+		
+		if (shouldUpdateResult()) {
+			getLabel("Target").update(temp.getValue());
+			return;
+		} else {
+			return;
+		}
+		
+	}
+	
+	/*
+	 * Various methods to allow the Java example to compile.
+	 */
+	
+	private interface Label {
+		public void update(int value);
+	}
+	
+	private Label getLabel(String string) {
+		return null;
+	}
+
+	public boolean shouldUpdateResult() {
+		return true;
+	}
+	
+	private static class IntegerWrapper {
+		private int value;
+		
+		public IntegerWrapper(int i) {
+			this.value = i;
+		}
+		
+		public int getValue() {
+			return value;	
+		}
+		
+		public void setValue(int value) {
+			this.value = value;
+		}
+	}
+	
+	private abstract static class BlockingRunnable implements Runnable {
+		private boolean finished = false;
+		
+		public boolean isFinished() {
+			return finished;
+		}
+		
+		public void run() {
+			runActual();
+			finished = true;
+		}
+		
+		public abstract void runActual();
+	}
+	
 }

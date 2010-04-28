@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><gmfgen:GenEditorGenerator xmlns:gmfgen="http://www.eclipse.org/gmf/2009/GenModel" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" diagramFileExtension="iaml_session_diagram" domainFileExtension="iaml_session" dynamicTemplates="true" modelID="Iaml_Session" packageNamePrefix="org.openiaml.model.diagram.session" templateDirectory="/org.openiaml.model/templates/" xmi:version="2.0">
-  <diagram canonicalEditPolicyClassName="SessionCanonicalEditPolicy" editPartClassName="SessionEditPart" iconProviderPriority="Low" itemSemanticEditPolicyClassName="SessionItemSemanticEditPolicy" validationDecorators="true" validationEnabled="true" validationProviderPriority="Low" visualID="1000">
+  <diagram canonicalEditPolicyClassName="SessionCanonicalEditPolicy" creationWizardCategoryID="org.openiaml.model.newWizards" editPartClassName="SessionEditPart" iconProviderPriority="Low" itemSemanticEditPolicyClassName="SessionItemSemanticEditPolicy" validationDecorators="true" validationEnabled="true" validationProviderPriority="Low" visualID="1000">
     <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Diagram"/>
     <elementType editHelperClassName="SessionEditHelper" xsi:type="gmfgen:MetamodelType"/>
     <viewmap figureQualifiedClassName="org.eclipse.draw2d.FreeformLayer" xsi:type="gmfgen:FigureViewmap"/>
@@ -253,7 +253,7 @@
         </viewmap>
         <modelFacet parser="//@labelParsers/@implementations.0"/>
       </labels>
-      <labels editPartClassName="WrappingLabel24EditPart" itemSemanticEditPolicyClassName="WrappingLabel24ItemSemanticEditPolicy" readOnly="true" visualID="5167">
+      <labels editPartClassName="WrappingLabel24EditPart" itemSemanticEditPolicyClassName="WrappingLabel24ItemSemanticEditPolicy" notationViewFactoryClassName="PropertyLabelViewFactory" readOnly="true" visualID="5167">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigurePropertyTypeFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>

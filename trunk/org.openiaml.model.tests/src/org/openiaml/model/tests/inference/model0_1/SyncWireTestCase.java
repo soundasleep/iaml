@@ -76,7 +76,7 @@ public class SyncWireTestCase extends InferenceTestCase {
 			DecisionNode check = assertHasDecisionNode(update, "can cast?");
 			CastNode cast = assertHasCastNode(update);
 
-			PrimitiveOperation set = assertHasPrimitiveOperation(update, "setPropertyToValue");
+			PrimitiveOperation set = assertHasPrimitiveOperation(update, "set");
 
 			assertHasExecutionEdge(update, start, check);
 			assertHasExecutionEdge(update, check, cancel, "no");

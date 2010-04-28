@@ -91,8 +91,8 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 		Parameter pemail = assertHasParameter(doLogin, "email");
 		Parameter ppassword = assertHasParameter(doLogin, "password");
 
-		// there will be many operations called 'setPropertyToValue'
-		List<?> sets = query(doLogin, "iaml:operations[iaml:name='setPropertyToValue']");
+		// there will be many operations called 'set'
+		List<?> sets = query(doLogin, "iaml:operations[iaml:name='set']");
 		assertEquals(2, sets.size());
 
 		boolean emailSet = false;
@@ -100,7 +100,7 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 
 		for (Object o : sets) {
 			PrimitiveOperation set = (PrimitiveOperation) o;
-			assertEquals("setPropertyToValue", set.getName());
+			assertEquals("set", set.getName());
 
 			assertHasExecutionEdge(doLogin, split, set);
 			assertHasExecutionEdge(doLogin, set, join);
@@ -224,8 +224,8 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 		StaticValue myNull = assertHasStaticValue(doLogout, "reset value");
 		assertEquals("null", myNull.getValue());
 
-		// there will be many operations called 'setPropertyToValue'
-		List<?> sets = query(doLogout, "iaml:operations[iaml:name='setPropertyToValue']");
+		// there will be many operations called 'set'
+		List<?> sets = query(doLogout, "iaml:operations[iaml:name='set']");
 		assertEquals(2, sets.size());
 
 		boolean emailReset = false;
@@ -233,7 +233,7 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 
 		for (Object o : sets) {
 			Operation set = (Operation) o;
-			assertEquals("setPropertyToValue", set.getName());
+			assertEquals("set", set.getName());
 
 			DataFlowEdge data = assertHasDataFlowEdge(doLogout, myNull, set);
 			assertGenerated(data);

@@ -13,7 +13,7 @@ import org.openiaml.model.tests.CodegenTestCase;
  * 		Setting a {@model InputTextField text field} {@model Property value}
  * 		to a {@model StaticValue static value}. 
  * @implementation PrimitiveOperation
- * 		If a {@model PrimitiveOperation} is named 'setPropertyToValue', it will
+ * 		If a {@model PrimitiveOperation} is named 'set', it will
  * 		set the {@model Property target destination} to the value
  * 		of its {@model DataFlowEdge incoming edge}.
  */

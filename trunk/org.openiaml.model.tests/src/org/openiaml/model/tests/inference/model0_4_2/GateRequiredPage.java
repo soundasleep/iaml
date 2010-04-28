@@ -138,7 +138,7 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		assertGenerated(start);
 		FinishNode finish = assertHasFinishNode(set);
 		assertGenerated(finish);
-		PrimitiveOperation s = assertHasPrimitiveOperation(set, "setPropertyToValue");
+		PrimitiveOperation s = assertHasPrimitiveOperation(set, "set");
 		assertGenerated(s);
 		StaticValue value = assertHasStaticValue(set, "true");
 		assertGenerated(value);

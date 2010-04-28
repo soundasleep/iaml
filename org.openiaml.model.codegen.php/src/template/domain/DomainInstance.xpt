@@ -59,9 +59,7 @@
  */
 «DEFINE namedDomainInstanceCall(Boolean php, model::wires::RunAction wire, model::DomainObjectInstance object) FOR model::Operation»
 	«IF php»
-		«IF name=="exists?"»
-			exists_object_instance_«safeNameString(object.id)»()
-		«ELSEIF name=="save"»
+		«IF name=="save"»
 			save_queued_store_domain_object_«safeNameString(object.id)»()
 		«ELSE»
 			«REM»TODO shouldn't the other domain instance operations be listed here? probably a major bug«ENDREM»
@@ -72,9 +70,6 @@
 		«IF name=="save"»
 			«REM»"save" operation for DomainAttribute«ENDREM»
 			save_queued_store_domain_object('«safeNameString(object.id)»')
-		«ELSEIF name=="exists?"»
-			«REM»exists operation: ask the server«ENDREM»
-			<?php echo exists_object_instance_«safeNameString(object.id)»() ? "true" : "false"; ?>
 		«ELSEIF name=="new"»
 			«REM»create a new instance of the given DomainObjectInstance«ENDREM»
 			queued_new_domain_instance('«safeNameString(object.id)»')
@@ -151,9 +146,6 @@
 			is_object_instance_empty_«safeName(instance)»()
 		«ELSEIF instance.canSave == this»
 			can_object_instance_save_«safeName(instance)»()
-		«ELSEIF name == "exists?"»
-			«REM»issue 180: can we merge this operation into 'empty'?«ENDREM»
-			exists_object_instance_«safeNameString(instance.id)»()
 		«ELSE»
 			«throwException("Unknown primitive condition for DomainObjectInstance: " + this)»
 		«ENDIF»

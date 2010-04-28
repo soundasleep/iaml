@@ -128,7 +128,7 @@ context model::PrimitiveOperation WARNING "Unknown primitive operation name '" +
 	(eContainer != null && model::DomainObjectInstance.isInstance(eContainer) && ((model::DomainObjectInstance) eContainer).jump == this) || 
 	(name == "setPropertyToValue" || name == "set" ||
 		name == "javascriptAlert" || name == "save" ||
-		name == "new" || name == "exists?" ||
+		name == "new" ||
 		name == "equal?" || name == "add role" ||
 		name == "add permission" || name == "remove role" ||
 		name == "remove permission" || name == "check permissions" ||
@@ -142,8 +142,7 @@ context model::PrimitiveCondition WARNING "Unknown primitive condition name '" +
 	(eContainer != null && model::DomainObjectInstance.isInstance(eContainer) && ((model::DomainObjectInstance) eContainer).hasNext == this) || 
 	(eContainer != null && model::DomainObjectInstance.isInstance(eContainer) && ((model::DomainObjectInstance) eContainer).hasPrevious == this) || 
 	(eContainer != null && model::DomainObjectInstance.isInstance(eContainer) && ((model::DomainObjectInstance) eContainer).canSave == this) || 
-	(eContainer != null && model::DomainObjectInstance.isInstance(eContainer) && ((model::DomainObjectInstance) eContainer).empty == this) ||
-	(eContainer != null && model::DomainObjectInstance.isInstance(eContainer) && name == "exists?");		
+	(eContainer != null && model::DomainObjectInstance.isInstance(eContainer) && ((model::DomainObjectInstance) eContainer).empty == this);		
 
 context model::operations::Arithmetic ERROR "Arithmetic must have at least one incoming data source edge" :
 	inFlows.size > 0;

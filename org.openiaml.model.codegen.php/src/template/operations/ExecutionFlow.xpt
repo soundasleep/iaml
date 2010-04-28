@@ -308,73 +308,36 @@
 		   [...]
 		6. client needs to get result of 'new_value_exists?'
 		7. the cached value is used 
+	
+		issue 180: there are no longer any types of Operations that return values
+		(only conditions); so this code is not needed here.
 		
 	«ENDREM»
-	«IF !php && model::DomainObjectInstance.isInstance(outActions.typeSelect(model::wires::RunAction).first().to.eContainer)
-		&& getClientSideCacheOperations(getRoot()).containsAll(outActions.typeSelect(model::wires::RunAction).to)»
-
-		var function_queue = function(response) {
-		 	if (response == "ok") {
-				«REM»continue expanding following operations (if any)«ENDREM»
-				«FOREACH getPassFlows() AS e-»
-					«EXPAND addStack(start, php) FOR e»
-				«ENDFOREACH»
-		 	} else {
-				«REM»continue expanding following operations (if any)«ENDREM»
-				«FOREACH getFailFlows() AS e-»
-					«EXPAND addStack(start, php) FOR e»
-				«ENDFOREACH»
-			}
-		};
-		
-		«FOREACH outActions.typeSelect(model::wires::RunAction) AS run»
-			«IF getClientSideCacheOperations(getRoot()).contains(run.to)»
-				«REM»
-				/**
-				 * If we are in Javascript and we are trying to get an operation on a DomainObjectInstance (e.g. 'exists?') 
-				 * and we are in a condition, we can't wait for an async result. In this case, we use
-				 * cached operation results (stored in Javascript) which can be updated through
-				 * callbacks, etc.
-				 */
-				«ENDREM»
-				if (cached_result_«safeName(run.to)»()) {
-					function_queue("ok");
-				} else {
-					function_queue("not ok");
-				}
-			«ELSE»	
-				«throwException("Unexpected remote operation call for a non-cached remote operation")»	
-				«REM»
-					EXPAND OperationCall::callRemoteOperation(php, false) FOREACH outActions.typeSelect(model::wires::RunAction)
-				«ENDREM»
-			«ENDIF»
+	
+	«REM»We assume '$result' will be set as the result of this operation call.«ENDREM»
+	«EXPAND OperationCall::callOperation(php, false) FOREACH outActions.typeSelect(model::wires::RunAction)-»
+	
+	«IF getFailFlows().isEmpty || getPassFlows().isEmpty»
+		/* No conditional flows; it was just an operation call */
+		«FOREACH getFailFlows() AS e-»
+			«EXPAND addStack(start, php) FOR e»
 		«ENDFOREACH»
-	«ELSE»
-		«REM»We assume '$result' will be set as the result of this operation call.«ENDREM»
-		«EXPAND OperationCall::callOperation(php, false) FOREACH outActions.typeSelect(model::wires::RunAction)-»
-		
-		«IF getFailFlows().isEmpty || getPassFlows().isEmpty»
-			/* No conditional flows; it was just an operation call */
+		«FOREACH getPassFlows() AS e-»
+			«EXPAND addStack(start, php) FOR e»
+		«ENDFOREACH»
+	«ELSE»		
+		/* Condition flow for virtual operation '«name»' */
+		if (!«IF php»$result«ELSE»result«ENDIF») {
+			«REM»continue expanding following conditions (if any)«ENDREM»
 			«FOREACH getFailFlows() AS e-»
 				«EXPAND addStack(start, php) FOR e»
 			«ENDFOREACH»
+		} else {
+			«REM»continue expanding following conditions (if any)«ENDREM»
 			«FOREACH getPassFlows() AS e-»
 				«EXPAND addStack(start, php) FOR e»
 			«ENDFOREACH»
-		«ELSE»		
-			/* Condition flow for virtual operation '«name»' */
-			if (!«IF php»$result«ELSE»result«ENDIF») {
-				«REM»continue expanding following conditions (if any)«ENDREM»
-				«FOREACH getFailFlows() AS e-»
-					«EXPAND addStack(start, php) FOR e»
-				«ENDFOREACH»
-			} else {
-				«REM»continue expanding following conditions (if any)«ENDREM»
-				«FOREACH getPassFlows() AS e-»
-					«EXPAND addStack(start, php) FOR e»
-				«ENDFOREACH»
-			}
-		«ENDIF»
+		}
 	«ENDIF»
 «ENDDEFINE»
 

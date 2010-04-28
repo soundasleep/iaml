@@ -1,7 +1,7 @@
 «IMPORT iaml»
 
 /**
- * If we are in Javascript and we are trying to get an operation on a DomainObjectInstance (usually 'exists?') 
+ * If we are in Javascript and we are trying to get an operation on a DomainObjectInstance (usually 'empty') 
  * and we are in a condition, we can't wait for an async result. In this case, we use
  * cached operation results (stored in Javascript) which can be updated through
  * callbacks, etc.
@@ -22,7 +22,6 @@
 	function get_necessary_update_callbacks() {
 		$result = array();
 		
-		«EXPAND updateCachedPrimitiveOperations FOREACH getClientSideCacheOperations()»
 		«EXPAND updateCachedPrimitiveConditions FOREACH getClientSideCacheConditions()»
 		«EXPAND updateCachedProperties FOREACH getClientSideCacheProperties()»
 			
@@ -37,29 +36,6 @@
 	}
 	
 	?>
-«ENDDEFINE»
-
-«DEFINE updateCachedPrimitiveOperations FOR model::Operation»
-	«throwException("Cannot expand client-side cached operation '" + this + "'")»
-«ENDDEFINE»
-
-«DEFINE updateCachedPrimitiveOperations FOR model::PrimitiveOperation»
-	«LET ((model::DomainObjectInstance) eContainer) AS object»
-		
-		{
-			// primitive operation '«name»'
-			$new_value = «EXPAND template::domain::DomainInstance::domainInstanceCall(true, null, object) FOR this»;
-			$old_value = $_SESSION["cached_result_«safeName()»_value"];
-			if ($new_value != $old_value) {
-				// cache needs to be updated
-				$new_value = $new_value ? "true" : "false";		// force to boolean
-				log_message("Updating cache value [server] 'cached_result_«safeName()»_value' from '$old_value' to '$new_value'");
-				$result[] = "call_operation update_cached_result_«safeName()» " . escape_parameter_string($new_value);
-				$_SESSION["cached_result_«safeName()»_value"] = $new_value;
-			}		
-		}
-		
-	«ENDLET»
 «ENDDEFINE»
 
 «DEFINE updateCachedPrimitiveConditions FOR model::Condition»

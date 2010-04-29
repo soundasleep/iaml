@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><gmftool:ToolRegistry xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmi:version="2.0">
+  <palette title="modelPalette">
+    <tools description="Schema Nodes" title="Schema Nodes" xsi:type="gmftool:ToolGroup">
+      <tools description="Create new DomainAttribute" title="DomainAttribute" xsi:type="gmftool:CreationTool">
+        <smallIcon bundle="org.openiaml.model.edit" path="icons/full/obj16/DomainAttribute.gif" xsi:type="gmftool:BundleImage"/>
+        <largeIcon bundle="org.openiaml.model.edit" path="icons/full/obj32/DomainAttribute.gif" xsi:type="gmftool:BundleImage"/>
+      </tools>
+    </tools>
+    <tools collapsible="true" description="Edge elements" title="Edges" xsi:type="gmftool:ToolGroup">
+      <tools description="Create new ExtendsEdge" title="ExtendsEdge" xsi:type="gmftool:CreationTool">
+        <smallIcon bundle="org.openiaml.model.edit" path="icons/full/obj16/ExtendsEdge.gif" xsi:type="gmftool:BundleImage"/>
+        <largeIcon bundle="org.openiaml.model.edit" path="icons/full/obj32/ExtendsEdge.gif" xsi:type="gmftool:BundleImage"/>
+      </tools>
+    </tools>
+  </palette>
+</gmftool:ToolRegistry>

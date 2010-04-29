@@ -2053,10 +2053,10 @@
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
-              top="4"
-              left="4"
-              bottom="4"
-              right="4"/>
+              top="3"
+              left="3"
+              bottom="3"
+              right="3"/>
         </border>
         <children
             xsi:type="gmfgraph:Label"

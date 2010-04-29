@@ -450,6 +450,60 @@
     </ownedChild>
   </nodes>
   <nodes>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//domain/DomainSource"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#DomainSourceName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#DomainSourceType"/>
+        <features
+            href="iaml.ecore#//domain/DomainSource/type"/>
+      </labelMappings>
+      <diagramNode
+          href="iaml.gmfgraph#DomainSource"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//Scope/elements"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//domain/DomainIterator"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( DomainIterator )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#DomainObjectInstanceName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          viewPattern="autosave: {0}"
+          editorPattern=""
+          editPattern="{0}">
+        <diagramLabel
+            href="iaml.gmfgraph#DomainObjectInstanceAutosave"/>
+        <features
+            href="iaml.ecore#//DomainObjectInstance/autosave"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="frame.gmftool#//@palette/@tools.1/@tools.4"/>
+      <diagramNode
+          href="iaml.gmfgraph#DomainObjectInstance"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
     <containmentFeature
         href="iaml.ecore#//Scope/elements"/>
     <ownedChild>
@@ -1136,6 +1190,23 @@
     <linkMetaFeature
         xsi:type="ecore:EReference"
         href="iaml.ecore#//Wire/to"/>
+  </links>
+  <links>
+    <domainMetaElement
+        href="iaml.ecore#//domain/SelectEdge"/>
+    <containmentFeature
+        href="iaml.ecore#//ContainsWires/selectEdges"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="frame.gmftool#//@palette/@tools.3/@tools.7"/>
+    <diagramLink
+        href="iaml.gmfgraph#SelectEdge"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//domain/SelectEdge/from"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//domain/SelectEdge/to"/>
   </links>
   <diagram>
     <diagramCanvas

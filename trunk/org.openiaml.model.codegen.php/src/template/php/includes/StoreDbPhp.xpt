@@ -15,39 +15,6 @@ define('REDIRECT_ON_CLIENT', true);
 // include operations, condition definitions
 «EXPAND template::Common::commonPHPIncludes»
 
-/**
- * Recursive functions in PHP. See default.js for Javascript implementations of these.
- * TODO add test cases to make sure these are both identical.
- */
-function store_event($frame_id, $event_name, $arg0) {
-	// not sure how often this will actually be called: we block on operations
-	/*
-	register_running_functions();
-	
-	$function_id = "store_event_" . $frame_id . "_" . $event_name;
-	if (has_running_function($function_id)) {
-		log_message("Breaking out of infinite loop: $function_id");
-		return false;
-	}
-	*/
-	
-	/*
-	 * a simple solution (but not scalable TODO): create a new HTTP request to store the event.
-	 * a better solution is obviously to store the new event in this same frame.
-	 */	
-	$url = get_baseurl() . "/store_event.php?frame_id=" . urlencode($frame_id)
-		. "&event_name=" . urlencode($event_name)
-		. "&arg0=" . urlencode($arg0);
-		
-	log_message("store_db.php:store_event calling $url");
-	$result = call_remote_url($url);
-
-	if (trim($result) != "ok")
-		throw new IamlRuntimeException("store_db failed: \"" . $result . "\"");
-		
-	return true;
-}
-
 log_message("store_db.php? " . print_r($_GET, true));
 $attribute_id = require_get("attribute_id");
 $arg0 = require_get("arg0");

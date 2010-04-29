@@ -79,9 +79,6 @@
 			call_remote_event('«safeNameString(containingFrame(to).id)»', '«operationName(to)-»'
 				«IF !inParameterEdges.isEmpty», «EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»«ENDIF»
 			);
-			«REM»				
-			store_event('«containingFrame(to).id»', 'do_«operationName(to)»'
-			«ENDREM»
 		«ENDIF-»
 	«ELSEIF model::scopes::Session.isInstance(to.eContainer)-»
 		«IF php || availableInCurrentScriptAction(from, to)-»
@@ -92,9 +89,6 @@
 			call_remote_event('«safeNameString(containingFrame(to).id)»', '«operationName(to)-»'
 				«IF !inParameterEdges.isEmpty», «EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»«ENDIF»
 			);
-			«REM»				
-			store_event('«containingFrame(to).id»', 'do_«operationName(to)»'
-			«ENDREM»
 		«ENDIF-»
 	«ELSEIF isDomainAttribute(to.eContainer)-»
 		«REM»direct field --> abstract domain attribute«ENDREM»

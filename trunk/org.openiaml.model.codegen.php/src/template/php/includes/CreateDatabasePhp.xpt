@@ -27,7 +27,7 @@ function store_db($attribute_id, $arg0) {
 	$result = call_remote_url($url);
 
 	if (trim($result) != "ok")
-		throw new IamlRuntimeException("store_event failed: \"" . $result . "\"");
+		throw new IamlRuntimeException("create_database failed: \"" . $result . "\"");
 		
 	return true;
 }

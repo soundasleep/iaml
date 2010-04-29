@@ -135,11 +135,6 @@
 				f();
 			}
 
-			$('response').innerHTML = "before loadStoredEvents...";
-			<?php 
-			«EXPAND template::php::includes::EventsPhp::eventsPhp FOR this-» 
-			?>
-
 			<?php queue_log_messages(false); /* re-enable log messages */ ?>
 		}
 	/* ]]> */
@@ -186,7 +181,6 @@
 	<div id="debug_monitors">
 		<div id="ajax_monitor"></div>
 		<div id="counter_store_db"></div>
-		<div id="counter_store_event"></div>
 		<div id="counter_set_session"></div>
 		<div id="counter_set_application_value"></div>
 		<div id="counter_set_domain_attribute"></div>

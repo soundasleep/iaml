@@ -1,7 +1,6 @@
 
 var stored_ajax_monitor = 0;
 var stored_counter = { 'store_db' : 0,
-	'store_event' : 0,
 	'set_session' : 0,
 	'set_application_value' : 0 };
 
@@ -22,7 +21,6 @@ function initAjaxMonitor() {
 	stored_ajax_monitor = null;
 
 	$('counter_store_db').innerHTML = stored_counter['store_db'];
-	$('counter_store_event').innerHTML = stored_counter['store_event'];
 	$('counter_set_session').innerHTML = stored_counter['set_session'];
 	$('counter_set_application_value').innerHTML = stored_counter['set_application_value'];
 	stored_counter = null;
@@ -69,13 +67,6 @@ function counterIncrement(id) {
  */
 var queued_store_events = new Array();
 var store_event_queued = false;
-
-/* approach #2: use event queues stored on the server, if the function is
-   not available on the current frame */
-function store_event(frame_id, event_name, arg0) {
-	var url = 'store_event.php?frame_id=' + encodeURIComponent(frame_id) + '&event_name=' + encodeURIComponent(event_name) + "&arg0=" + encodeURIComponent(arg0);
-	execute_queued_url(url, 'store_event', false);
-}
 
 /**
  * Currently there is an issue where if a TextField is changed, it will execute the 'onChange' event remotely, and also
@@ -291,7 +282,6 @@ function execute_queued_url(url, counter, function_queue) {
     debug(" -- running now: " + url);
     store_event_function();
   }
-  debug("store_event called");
 }
 
 function root_alert(a) {

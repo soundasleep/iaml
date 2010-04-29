@@ -173,6 +173,7 @@
 	<script language="Javascript" type="application/javascript">
 	/* <![CDATA[ */
 	<?php queue_log_messages(false); /* re-enable log messages, but only after we have "response". */ ?>
+	<?php queue_log_messages(true); /* disable log messages at the end of the page */ ?>
 	/* ]]> */
 	</script>
 	

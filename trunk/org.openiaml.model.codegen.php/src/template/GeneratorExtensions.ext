@@ -133,23 +133,26 @@ onCurrentSession(model::WireSource source, model::WireDestination target) :
  * this is true if onCurrentFrame() is true, or
  * it is an operation that will also be included in the current frame.
  *
- * all operations contained within a session are also available to all
+ * all operations contained within a session are NOT available to all
  * elements outside that session.
  *
  * all operations and properties that are contained with an Email
  * are NOT available for the current script.
  *
- * this is based on allContainerOperations() and possibleParentOperations(). 
+ * this is based on allContainerOperations() and possibleParentOperations().
+ *
+ * @implementation Operation
+ *		An {@model Operation} will <strong>only</strong> be executed on the client-side
+ *		if it is contained within the same {@model Frame} as the current
+ *		{@model Frame}.
  */
 availableInCurrentScript(model::WireSource source, model::WireDestination target) :
 	containingEmail(target) == null && 
-	(onCurrentFrame(source, target) ||
-		containingSession(target) != null);
+	(onCurrentFrame(source, target));
 		
 availableInCurrentScriptAction(model::ActionSource source, model::ActionDestination target) :
 	containingEmail(target) == null &&
-	(onCurrentFrameAction(source, target) ||
-		containingSession(target) != null);
+	(onCurrentFrameAction(source, target));
 
 /**
  * Get all the operations that may be referenced in a container. In particular:

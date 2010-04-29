@@ -76,7 +76,7 @@
 			do_«operationName(to)»(«EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»);
 		«ELSE-»
 			«REM»// not on current frame (wire id = «id»)«ENDREM»
-			call_remote_event('«safeNameString(containingFrame(to).id)»', '«operationName(to)-»'
+			call_remote_event('«safeNameString(frameContainingOperation(to).id)»', '«operationName(to)-»'
 				«IF !inParameterEdges.isEmpty», «EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»«ENDIF»
 			);
 		«ENDIF-»
@@ -86,7 +86,7 @@
 			do_«operationName(to)»(«EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»);
 		«ELSE-»
 			«REM»// not on current frame (wire id = «id»)«ENDREM»
-			call_remote_event('«safeNameString(containingFrame(to).id)»', '«operationName(to)-»'
+			call_remote_event('«safeNameString(frameContainingOperation(to).id)»', '«operationName(to)-»'
 				«IF !inParameterEdges.isEmpty», «EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»«ENDIF»
 			);
 		«ENDIF-»

@@ -92,22 +92,23 @@ attributeName(Void v) :
 isXPath(model::DynamicApplicationElementSet this) :
 	query.startsWith("xpath:");
 	
-/* is this operation contained in the current frame? */
-model::visual::Frame containingFrame(model::visual::Frame element) :
-	element;
+/**
+ * Get the {@model Frame} which can contain the given {@model Operation}.
+ */
+model::visual::Frame frameContainingOperation(model::visual::Frame this) :
+	this;
 	
-model::visual::Frame containingFrame(model::NamedElement element) :
-	containingFrame(element.eContainer);
+model::visual::Frame frameContainingOperation(model::NamedElement this) :
+	if (eContainer == null)
+		then null
+		else frameContainingOperation(eContainer);
 
 /* any frame in the Session will contain all the operations for the Session */
-model::visual::Frame containingFrame(model::scopes::Session element) :
-	element.scopes.typeSelect( model::visual::Frame ).first();
+model::visual::Frame frameContainingOperation(model::scopes::Session this) :
+	scopes.typeSelect( model::visual::Frame ).first();
 
 /* default for any EObject */
-model::visual::Frame containingFrame(emf::EObject element) :
-	null;
-
-model::visual::Frame containingFrame(Void void) :
+model::visual::Frame frameContainingOperation(emf::EObject this) :
 	null;
 
 /* is [target] on the same frame as [source]? */ 

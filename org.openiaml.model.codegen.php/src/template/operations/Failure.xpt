@@ -5,6 +5,10 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
+/**
+ * Expand the failure edge. Assumes that the current exception is in
+ * a variable called 'e'.
+ */
 «DEFINE failWire(Boolean php) FOR model::Action-»
 	«throwException("Cannot expand the fail edge '" + this + "'")»
 «ENDDEFINE»

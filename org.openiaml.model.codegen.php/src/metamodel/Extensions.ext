@@ -15,16 +15,19 @@ isRunAction(emf::EObject this) :
 isRunAction(model::wires::RunAction this) :
 	true;
 	
-model::visual::Frame containingFrame(model::visual::Frame element) :
-	element;
-	
-model::visual::Frame containingFrame(model::NamedElement element) :
-	containingFrame(element.eContainer);
+model::visual::Frame containingFrame(model::visual::Frame this) :
+	this;
+
+model::visual::Frame containingFrame(model::scopes::Session this) :
+	null;
+		
+model::visual::Frame containingFrame(model::NamedElement this) :
+	if (eContainer == null) 
+		then null
+		else containingFrame(eContainer);
 
 /* default for any EObject */
-model::visual::Frame containingFrame(emf::EObject element) :
-	null;
-model::visual::Frame containingFrame(Void void) :
+model::visual::Frame containingFrame(emf::EObject this) :
 	null;
 	
 isAccessibleOnFrame(model::visual::Frame f, model::wires::CompositeWire wire) :

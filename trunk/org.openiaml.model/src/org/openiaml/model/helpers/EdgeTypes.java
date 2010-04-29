@@ -9,6 +9,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
 import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.model.domain.DomainPackage;
 import org.openiaml.model.model.users.UsersPackage;
 import org.openiaml.model.model.wires.WiresPackage;
 
@@ -191,7 +192,27 @@ public class EdgeTypes {
 				UsersPackage.eINSTANCE.getRequiresEdgesSource_OutRequiresEdges(),
 				UsersPackage.eINSTANCE.getRequiresEdgeDestination_InRequiresEdges()
 		) );
-		
+
+		edgeTypes.add( new EdgeType(
+				DomainPackage.eINSTANCE.getSelectEdge(), /* type */
+				DomainPackage.eINSTANCE.getDomainIterator(), /* source */
+				DomainPackage.eINSTANCE.getDomainSource(), /* destination */
+				DomainPackage.eINSTANCE.getSelectEdge_From(), /* from ref */
+				DomainPackage.eINSTANCE.getSelectEdge_To(), /* to ref */
+				DomainPackage.eINSTANCE.getDomainIterator_OutSelects(),
+				DomainPackage.eINSTANCE.getDomainSource_InSelects()
+		) );
+
+		edgeTypes.add( new EdgeType(
+				DomainPackage.eINSTANCE.getSchemaEdge(), /* type */
+				DomainPackage.eINSTANCE.getDomainSource(), /* source */
+				DomainPackage.eINSTANCE.getDomainSchema(), /* destination */
+				DomainPackage.eINSTANCE.getSchemaEdge_From(), /* from ref */
+				DomainPackage.eINSTANCE.getSchemaEdge_To(), /* to ref */
+				DomainPackage.eINSTANCE.getDomainSource_OutSchemas(),
+				DomainPackage.eINSTANCE.getDomainSchema_InSchemas()
+		) );
+
 	}
 	
 	public static final List<EClass> getEdgeTypes() {

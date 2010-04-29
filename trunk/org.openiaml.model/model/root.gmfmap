@@ -353,6 +353,53 @@
           href="iaml.gmfgraph#Email"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//InternetApplication/schemas"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//domain/DomainSchema"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#DomainSchemaName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="root.gmftool#//@palette/@tools.0/@tools.7"/>
+      <diagramNode
+          href="iaml.gmfgraph#DomainSchema"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//InternetApplication/sources"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//domain/DomainSource"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#DomainSourceName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#DomainSourceType"/>
+        <features
+            href="iaml.ecore#//domain/DomainSource/type"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="root.gmftool#//@palette/@tools.0/@tools.8"/>
+      <diagramNode
+          href="iaml.gmfgraph#DomainSource"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/SyncWire"/>
@@ -480,6 +527,47 @@
     <linkMetaFeature
         xsi:type="ecore:EReference"
         href="iaml.ecore#//Wire/to"/>
+  </links>
+  <links>
+    <domainMetaElement
+        href="iaml.ecore#//domain/SchemaEdge"/>
+    <labelMappings
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#SchemaEdgeName"/>
+    </labelMappings>
+    <containmentFeature
+        href="iaml.ecore#//ContainsWires/schemaEdges"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="root.gmftool#//@palette/@tools.0/@tools.9"/>
+    <diagramLink
+        href="iaml.gmfgraph#SchemaEdge"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//domain/SchemaEdge/from"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//domain/SchemaEdge/to"/>
+  </links>
+  <links>
+    <domainMetaElement
+        href="iaml.ecore#//domain/SelectEdge"/>
+    <labelMappings
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#SelectEdgeName"/>
+    </labelMappings>
+    <containmentFeature
+        href="iaml.ecore#//ContainsWires/selectEdges"/>
+    <diagramLink
+        href="iaml.gmfgraph#SelectEdge"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//domain/SelectEdge/from"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//domain/SelectEdge/to"/>
   </links>
   <diagram>
     <diagramCanvas

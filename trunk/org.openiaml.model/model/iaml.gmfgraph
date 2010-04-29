@@ -1985,6 +1985,93 @@
       <accessors
           figure="//@figures.0/@descriptors.66/@actualFigure/@children.0"/>
     </descriptors>
+    <descriptors
+        name="SelectEdgeFigure">
+      <actualFigure
+          xsi:type="gmfgraph:PolylineConnection"
+          name="SelectEdgeFigure"
+          targetDecoration="//@figures.0/@figures.0">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="SelectEdgeNameFigure"
+            text="select"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.67/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="SchemaEdgeFigure">
+      <actualFigure
+          xsi:type="gmfgraph:PolylineConnection"
+          name="SchemaEdgeFigure"
+          targetDecoration="//@figures.0/@figures.0">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="SchemaEdgeNameFigure"
+            text="schema"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.68/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="DomainSchemaFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="DomainSchemaFigure"
+          lineWidth="2">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
+        <font
+            xsi:type="gmfgraph:BasicFont"
+            faceName="Arial"
+            style="BOLD"/>
+        <border
+            xsi:type="gmfgraph:MarginBorder">
+          <insets
+              top="4"
+              left="4"
+              bottom="4"
+              right="4"/>
+        </border>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="DomainSchemaNameFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.69/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
+        name="DomainSourceFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="DomainSourceFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
+        <border
+            xsi:type="gmfgraph:MarginBorder">
+          <insets
+              top="4"
+              left="4"
+              bottom="4"
+              right="4"/>
+        </border>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="DomainSourceNameFigure"
+            text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="DomainSourceTypeFigure"
+            text="&lt;...>"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.70/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.70/@actualFigure/@children.1"/>
+    </descriptors>
   </figures>
   <nodes
       name="EventTrigger"
@@ -2127,6 +2214,12 @@
   <nodes
       name="PrimitiveCondition"
       figure="PrimitiveConditionFigure"/>
+  <nodes
+      name="DomainSchema"
+      figure="DomainSchemaFigure"/>
+  <nodes
+      name="DomainSource"
+      figure="DomainSourceFigure"/>
   <connections
       name="DataFlowEdge"
       figure="DataFlowEdgeFigure"/>
@@ -2187,6 +2280,12 @@
   <connections
       name="DetailWire"
       figure="DetailWireFigure"/>
+  <connections
+      name="SelectEdge"
+      figure="SelectEdgeFigure"/>
+  <connections
+      name="SchemaEdge"
+      figure="SchemaEdgeFigure"/>
   <labels
       name="EventTriggerName"
       figure="EventTriggerFigure"
@@ -2622,6 +2721,27 @@
       name="DetailWireName"
       figure="DetailWireFigure"
       accessor="//@figures.0/@descriptors.66/@accessors.0"/>
+  <labels
+      name="DomainSchemaName"
+      figure="DomainSchemaFigure"
+      accessor="//@figures.0/@descriptors.69/@accessors.0"/>
+  <labels
+      name="DomainSourceName"
+      figure="DomainSourceFigure"
+      accessor="//@figures.0/@descriptors.70/@accessors.0"/>
+  <labels
+      name="DomainSourceType"
+      figure="DomainSourceFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.70/@accessors.1"/>
+  <labels
+      name="SelectEdgeName"
+      figure="SelectEdgeFigure"
+      accessor="//@figures.0/@descriptors.67/@accessors.0"/>
+  <labels
+      name="SchemaEdgeName"
+      figure="SchemaEdgeFigure"
+      accessor="//@figures.0/@descriptors.68/@accessors.0"/>
   <labels
       name="RemoteDomainObjectName"
       figure="RemoteDomainObjectFigure"

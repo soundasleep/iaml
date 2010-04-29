@@ -183,7 +183,7 @@
         </viewmap>
         <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
-      <labels editPartClassName="WrappingLabel26EditPart" itemSemanticEditPolicyClassName="WrappingLabel26ItemSemanticEditPolicy" readOnly="true" visualID="5104">
+      <labels editPartClassName="WrappingLabel26EditPart" itemSemanticEditPolicyClassName="WrappingLabel26ItemSemanticEditPolicy" notationViewFactoryClassName="PropertyLabelViewFactory" readOnly="true" visualID="5104">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigurePropertyTypeFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>

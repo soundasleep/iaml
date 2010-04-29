@@ -21,6 +21,11 @@ import org.openiaml.model.model.ExecutionEdgesSource;
 import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.WireDestination;
 import org.openiaml.model.model.WireSource;
+import org.openiaml.model.model.domain.DomainIterator;
+import org.openiaml.model.model.domain.DomainSchema;
+import org.openiaml.model.model.domain.DomainSource;
+import org.openiaml.model.model.domain.SchemaEdge;
+import org.openiaml.model.model.domain.SelectEdge;
 import org.openiaml.model.model.users.ProvidesEdgeDestination;
 import org.openiaml.model.model.users.ProvidesEdgesSource;
 import org.openiaml.model.model.users.RequiresEdgeDestination;
@@ -157,6 +162,26 @@ public class GetShortcuts {
 				// get all incoming edges
 				elements.addAll(getAllShortcutsFromConditionEdges(doneAlready, edges, view, e,
 						((ConditionEdgeDestination) e).getInConditionEdges(), registry, updater));
+			}
+			if (e instanceof DomainSchema) {
+				// get all incoming edges
+				elements.addAll(getAllShortcutsFromSchemaEdges(doneAlready, edges, view, e,
+						((DomainSchema) e).getInSchemas(), registry, updater));
+			}
+			if (e instanceof DomainSource) {
+				// get all outgoing edges
+				elements.addAll(getAllShortcutsFromSchemaEdges(doneAlready, edges, view, e,
+						((DomainSource) e).getOutSchemas(), registry, updater));
+			}
+			if (e instanceof DomainSource) {
+				// get all incoming edges
+				elements.addAll(getAllShortcutsFromSelectEdges(doneAlready, edges, view, e,
+						((DomainSource) e).getInSelects(), registry, updater));
+			}
+			if (e instanceof DomainIterator) {
+				// get all outgoing edges
+				elements.addAll(getAllShortcutsFromSelectEdges(doneAlready, edges, view, e,
+						((DomainIterator) e).getOutSelects(), registry, updater));
 			}
 		}
 	}
@@ -426,6 +451,58 @@ public class GetShortcuts {
 		return result;
 	}
 
+	private static List<ConstraintEdge> getAllShortcutsFromSchemaEdges(
+			List<EObject> doneAlready,
+			List<EObject> edges,
+			View view,
+			EObject source,
+			List<SchemaEdge> outEdges,
+			IVisualIDRegistryInstance registry,
+			IDiagramUpdater updater) {
+		List result = new LinkedList();
+
+		edges.addAll(outEdges);
+
+		// get all nodes at the start and end of the edge
+		// that are not the original object source
+		// NOTE: model-specific
+		for (SchemaEdge wire : outEdges) {
+			// only look into these edges if we can actually render them...
+			if (registry.getLinkWithClassVisualID(wire) != -1) {
+				updater.considerElementForShortcut(wire.getFrom(), wire, view, source, doneAlready, result, edges);
+				updater.considerElementForShortcut(wire.getTo(), wire, view, source, doneAlready, result, edges);
+			}
+		}
+
+		return result;
+	}
+	
+	private static List<ConstraintEdge> getAllShortcutsFromSelectEdges(
+			List<EObject> doneAlready,
+			List<EObject> edges,
+			View view,
+			EObject source,
+			List<SelectEdge> outEdges,
+			IVisualIDRegistryInstance registry,
+			IDiagramUpdater updater) {
+		List result = new LinkedList();
+
+		edges.addAll(outEdges);
+
+		// get all nodes at the start and end of the edge
+		// that are not the original object source
+		// NOTE: model-specific
+		for (SelectEdge wire : outEdges) {
+			// only look into these edges if we can actually render them...
+			if (registry.getLinkWithClassVisualID(wire) != -1) {
+				updater.considerElementForShortcut(wire.getFrom(), wire, view, source, doneAlready, result, edges);
+				updater.considerElementForShortcut(wire.getTo(), wire, view, source, doneAlready, result, edges);
+			}
+		}
+
+		return result;
+	}
+
 	private static List<ConditionEdge> getAllShortcutsFromConditionEdges(
 			List<EObject> doneAlready,
 			List<EObject> edges,
@@ -588,6 +665,12 @@ public class GetShortcuts {
 		if (relationship instanceof ConditionEdge) {
 			return ((ConditionEdge) relationship).getFrom();
 		}
+		if (relationship instanceof SelectEdge) {
+			return ((SelectEdge) relationship).getFrom();
+		}
+		if (relationship instanceof SchemaEdge) {
+			return ((SchemaEdge) relationship).getFrom();
+		}
 
 		// if we get this far, there may be a relationship type that
 		// we're not checking for
@@ -647,6 +730,12 @@ public class GetShortcuts {
 		}
 		if (relationship instanceof ConditionEdge) {
 			return ((ConditionEdge) relationship).getTo();
+		}
+		if (relationship instanceof SelectEdge) {
+			return ((SelectEdge) relationship).getTo();
+		}
+		if (relationship instanceof SchemaEdge) {
+			return ((SchemaEdge) relationship).getTo();
 		}
 
 		// if we get this far, there may be a relationship type that

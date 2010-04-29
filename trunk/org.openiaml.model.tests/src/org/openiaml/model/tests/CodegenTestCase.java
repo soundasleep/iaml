@@ -863,13 +863,24 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * Helper method: Assert that there has not been a problem.
 	 */
 	protected void assertNoProblem() {
+		resetDebug();
+		assertNoMatch("(Error|error|Exception|exception)");
+	}
+	
+	/**
+	 * Extend the base method to also throw the current page text when
+	 * displaying the error.
+	 */
+	@Override
+	public void assertNoMatch(String regexp) {
 		try {
 			resetDebug();
-			assertNoMatch("(Error|error|Exception|exception)");
+			super.assertNoMatch(regexp);
 		} catch (AssertionFailedError e) {
 			throw new RuntimeException("Problem encountered: " + getTestingEngine().getPageText(), e); 
 		}
 	}
+
 
 	/**
 	 * Reset the debug dialog text, improving the accuracy of methods

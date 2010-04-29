@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml.scopes:Session xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="scopes.1273c6bf769.8">
+  <elements xsi:type="iaml.components:AccessControlHandler" id="components.1273c6bf7c7.a" name="Handler name"/>
+</iaml.scopes:Session>

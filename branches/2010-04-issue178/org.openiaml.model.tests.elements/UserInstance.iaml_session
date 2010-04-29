@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml.scopes:Session xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.users="http://openiaml.org/model/users" id="scopes.1273c6bf769.16">
+  <elements xsi:type="iaml.users:UserInstance" id="users.1273c6bf863.21" name="User Instance name"/>
+</iaml.scopes:Session>

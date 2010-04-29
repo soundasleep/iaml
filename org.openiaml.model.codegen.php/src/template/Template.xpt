@@ -82,7 +82,6 @@
 
 	«FILE "output/exception.php"»«EXPAND php::includes::Exception::exceptionPhp»«ENDFILE»
 
-	«FILE "output/store_event.php"»«EXPAND php::includes::StoreEventsPhp::storeEventsPhp»«ENDFILE»
 	«FILE "output/store_db.php"»«EXPAND php::includes::StoreDbPhp::storeDbPhp»«ENDFILE»
 	«FILE "output/set_session.php"»«EXPAND php::includes::SetSessionPhp::setSessionPhp»«ENDFILE»
 	«FILE "output/set_application_value.php"»«EXPAND php::includes::SetApplicationValuePhp::setApplicationValuePhp»«ENDFILE»

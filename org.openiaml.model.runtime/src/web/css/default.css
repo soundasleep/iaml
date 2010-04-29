@@ -71,7 +71,6 @@ div#debug_monitors div+div { border-left: 1px solid #966; padding-left: 4px; }
 div#debug_monitors div#ajax_monitor { font-weight: bold; }
 div#debug_monitors div#ajax_monitor:before { content: 'outstanding: '; }
 div#debug_monitors div#counter_store_db:before { content: 'db '; }
-div#debug_monitors div#counter_store_event:before { content: 'event '; }
 div#debug_monitors div#counter_set_session:before { content: 'session '; }
 div#debug_monitors div#counter_set_application_value:before { content: 'app '; }
 div#debug_monitors div#counter_set_domain_attribute:before { content: 'attr '; }

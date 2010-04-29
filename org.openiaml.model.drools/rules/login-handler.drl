@@ -349,13 +349,13 @@ rule "Create contents of 'check instance' operation [type=domain_object or user]
 		queue.add(edge0, drools);
 		
 		ExecutionEdge edge1 = handler.generatedExecutionEdge(checkOperation, checkOperation);
-		handler.setName(edge1, "yes");
+		handler.setName(edge1, "no");
 		handler.setFrom(edge1, check);
 		handler.setTo(edge1, finish);
 		queue.add(edge1, drools);
 
 		ExecutionEdge edge2 = handler.generatedExecutionEdge(checkOperation, checkOperation);
-		handler.setName(edge2, "no");
+		handler.setName(edge2, "yes");
 		handler.setFrom(edge2, check);
 		handler.setTo(edge2, cancel);
 		queue.add(edge2, drools);
@@ -783,14 +783,14 @@ rule "Create contents of 'do login' operation [type=domain_object]"
 		
 		# not ok	
 		ExecutionEdge edge2 = handler.generatedExecutionEdge(loginOperation, loginOperation);
-		handler.setName(edge2, "no");
+		handler.setName(edge2, "yes");
 		handler.setFrom(edge2, check);
 		handler.setTo(edge2, cancel);
 		queue.add(edge2, drools);
 
 		# ok
 		ExecutionEdge edge3 = handler.generatedExecutionEdge(loginOperation, loginOperation);
-		handler.setName(edge3, "yes");
+		handler.setName(edge3, "no");
 		handler.setFrom(edge3, check);
 		handler.setTo(edge3, finish);
 		queue.add(edge3, drools);
@@ -914,14 +914,14 @@ rule "Create contents of 'do login' operation [type=user]"
 		
 		# not ok	
 		ExecutionEdge edge2 = handler.generatedExecutionEdge(loginOperation, loginOperation);
-		handler.setName(edge2, "no");
+		handler.setName(edge2, "yes");
 		handler.setFrom(edge2, check);
 		handler.setTo(edge2, cancel);
 		queue.add(edge2, drools);
 
 		# ok
 		ExecutionEdge edge3 = handler.generatedExecutionEdge(loginOperation, loginOperation);
-		handler.setName(edge3, "yes");
+		handler.setName(edge3, "no");
 		handler.setFrom(edge3, check);
 		handler.setTo(edge3, finish);
 		queue.add(edge3, drools);

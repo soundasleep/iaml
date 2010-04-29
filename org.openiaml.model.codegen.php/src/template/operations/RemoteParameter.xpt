@@ -53,6 +53,6 @@
 	«IF php»
 		has_attribute_instance_«safeName()-»()
 	«ELSE»
-		"<?php echo htmlspecialchars(has_attribute_instance_«safeName()-»() ? "true" : "false"); ?>"
+		<?php echo htmlspecialchars(has_attribute_instance_«safeName()-»() ? "true" : "false"); ?>
 	«ENDIF»
 «ENDDEFINE»

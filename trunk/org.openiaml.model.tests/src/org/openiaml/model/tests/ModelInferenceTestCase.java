@@ -69,6 +69,18 @@ import ca.ecliptical.emf.xpath.EMFXPath;
 public abstract class ModelInferenceTestCase extends ModelTestCase implements IProvidesInferenceEngine {
 
 	protected InternetApplication root;
+	
+	/**
+	 * Remove the given class from the inference cache. Returns the
+	 * original result for the given key, or <code>null</code> if the
+	 * key was not present.
+	 * 
+	 * @param cls the class to remove from the cache
+	 * @return the original result for the given key, or <code>null</code> if the key was not in the cache
+	 */
+	public File removeClassFromInferenceCache(Class<?> cls) {
+		return inferer.getCache().remove(cls);
+	}
 
 	/**
 	 * Load a model file and perform inference on it.
@@ -176,7 +188,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 		return new CreateMissingElementsWithDrools(handler, trackInsertions);
 	}
 	
-	private static CachedModelInferer inferer = CachedModelInferer.getInstance();
+	private static final CachedModelInferer inferer = CachedModelInferer.getInstance();
 
 	/**
 	 * Load a model file and perform inference on it.

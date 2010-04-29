@@ -31,6 +31,8 @@ public class SavedRuleSources extends InferenceTestCase {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		// remove any previous cache information
+		removeClassFromInferenceCache(ConditionWireXpath.class);
 		// the second parameter makes the inference keep track of rule sources (just names for now)
 		root = loadAndInfer(ConditionWireXpath.class, true);
 	}

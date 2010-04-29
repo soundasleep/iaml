@@ -272,4 +272,13 @@ public class CachedModelInferer {
 		return inferredModel;
 	}
 	
+	/**
+	 * Get the inference cache.
+	 * 
+	 * @return the inference cache
+	 */
+	public Map<Class<?>, File> getCache() {
+		return inferCache;
+	}
+	
 }

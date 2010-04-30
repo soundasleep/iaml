@@ -95,14 +95,18 @@ abstract class DomainIterator {
 	// is this autosave?
 	var $autosave = false;
 	
+	// is this a new instance?
+	var $is_new = false;
+	
 	public function isAutosave() { return $this->autosave; }
+	public function isNew() { return $this->is_new; }
 	
 	/**
 	 * Get the DomainAttributeInstance of the given name.
 	 */
 	public function getAttribute($name) {
 		// get the current object instance
-		$obj = $this->fetchInstance();
+		$obj = $this->toArray();
 		
 		// and return the attribute
 		if (!isset($obj[$name])) {
@@ -116,7 +120,7 @@ abstract class DomainIterator {
 	/**
 	 * Return an associative array of the current instance.
 	 */
-	public function fetchInstance() {
+	public function toArray() {
 		if ($this->current_result === null) {
 			$this->reload();
 		}
@@ -128,6 +132,54 @@ abstract class DomainIterator {
 	 */
 	public function reload() {
 		$type = $this->source->getType();
+		
+		if ($this->isNew()) {
+			if ($this->getNewInstanceID() === null) {
+				$this->current_result = array();
+				foreach ($this->source->getSchema()->getAttributes() as $key => $attr) {
+					$value = null;	// empty
+					$o2 = new DomainAttributeInstance(
+						$this, $key, $value
+					);
+					$this->current_result[$key] = $o2;
+				}
+			
+				return;
+			} else {
+				if ($type == 'RELATIONAL_DB') {
+					/*
+					 * evaluate_select_wire($db_name, $source_id, $source_class, 
+					 *		$query, $args, $offset = 0, $order_by = "", 
+					 *		$order_ascending = true)
+					 */
+					
+					// for new instances, we select by ID
+					$query = $this->getPKName() . " = ?";
+					$args = array($this->getNewInstanceID());
+		
+					$obj = evaluate_select_wire(
+						"sqlite:" . $this->source->getFile(),
+						$this->source->getSchema()->getSourceID(),
+						$this->source->getSchema()->getTableName(),
+						$query,
+						$args
+					);
+					
+					// translate the array(key=>value) into array(key=>DomainAttributeInstance)
+					$this->current_result = array();
+					foreach ($this->source->getSchema()->getAttributes() as $key => $attr) {
+						$o2 = new DomainAttributeInstance(
+							$this, $key, $obj[$key]
+						);
+						$this->current_result[$key] = $o2;
+					}
+					
+					return;
+				} else {
+					throw new IamlDomainException("Unknown source type $type");
+				}
+			}
+		}
 
 		if ($type == 'RELATIONAL_DB') {
 			/*
@@ -135,7 +187,7 @@ abstract class DomainIterator {
 			 *		$query, $args, $offset = 0, $order_by = "", 
 			 *		$order_ascending = true)
 			 */
-			 
+			
 			$query = $this->query;
 			$args = $this->constructArgs();
 
@@ -174,6 +226,24 @@ abstract class DomainIterator {
 		}
 	}
 	
+	/**
+	 * Get the name of the primary key for this instance. Throws an
+	 * exception if none can be found.
+	 */
+	protected function getPKName() {
+		$pk_name = null;
+		foreach ($this->source->getSchema()->getAttributes() as $name => $attr) {
+			if ($attr->isPrimaryKey()) {
+				$pk_name = $name;
+				break;
+			}
+		}
+		if ($pk_name === null) {
+			throw new IamlDomainException("No primary key found for " . $this->source->getSchema()->getName());
+		}
+		return $pk_name;
+	}
+	
 	protected function saveAttribute($attrinst, $value) {
 		$type = $this->source->getType();
 
@@ -182,15 +252,25 @@ abstract class DomainIterator {
 			$db = new DatabaseQuery($source);
 			
 			// find the primary key
-			$pk_name = null;
-			foreach ($this->source->getSchema()->getAttributes() as $name => $attr) {
-				if ($attr->isPrimaryKey()) {
-					$pk_name = $name;
-					break;
-				}
+			$pk_name = $this->getPKName();
+			
+			// we don't update PKs
+			if ($pk_name == $attrinst->getName()) {
+				return;
 			}
-			if ($pk_name === null) {
-				throw new IamlDomainException("No primary key found for " . $this->source->getSchema()->getName());
+			
+			// if this is a NEW object that hasn't been saved yet, we have to
+			// insert in default values
+			if ($this->isNew() && $this->getNewInstanceID() === null) {
+				// create new
+				$query = "INSERT INTO " . $this->source->getSchema()->getTableName()
+					. " DEFAULT VALUES";
+				$db_handle = $db->execute($query, array());
+				
+				// the newly created ID
+				$new_id = $db_handle->lastInsertId($pk_name);
+				$this->setNewInstanceID($new_id);
+				$this->getAttribute($pk_name)->setValue($new_id);
 			}
 			
 			// get the current PK value
@@ -214,17 +294,28 @@ abstract class DomainIterator {
 	 * Construct an array of arguments to pass to the query ($this->query).
 	 * This can be from session data, for example.
 	 */ 
-	protected abstract function constructArgs();
+	public abstract function constructArgs();
 	
 	/**
 	 * Get the offset of the current query.
 	 */
-	protected abstract function getOffset();
+	public abstract function getOffset();
 	
 	/**
 	 * Set the offset to the current value.
 	 */
-	protected abstract function setOffset($value);
+	public abstract function setOffset($value);
+	
+	/**
+	 * Get the ID of the newly created instance, or <code>null</code> if it
+	 * hasn't been created yet.
+	 */
+	public abstract function getNewInstanceID();
+
+	/**
+	 * Set the ID of the newly created instance (called internally).
+	 */
+	public abstract function setNewInstanceID($id);
 	
 	public function reset() {
 		$this->setOffset(0);
@@ -245,7 +336,7 @@ abstract class DomainIterator {
 	public function next() {
 		$this->setOffset($this->getOffset() + 1);
 		$this->reload();
-		return $this->fetchInstance();
+		return $this->toArray();
 	}
 
 	/**
@@ -255,7 +346,7 @@ abstract class DomainIterator {
 	public function previous() {
 		$this->setOffset($this->getOffset() - 1);
 		$this->reload();
-		return $this->fetchInstance();
+		return $this->toArray();
 	}
 	
 	/**
@@ -287,6 +378,15 @@ abstract class DomainIterator {
 			throw new IamlDomainException("Unknown source type $type");
 		}
 	
+	}
+	
+	/**
+	 * Create a new instance of this object. If there are any unsaved
+	 * changes, they are lost.
+	 */
+	public function createNew() {
+		$this->setNewInstanceID(null);
+		$this->reload();
 	}
 
 }

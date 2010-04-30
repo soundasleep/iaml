@@ -26,6 +26,10 @@ abstract class DomainSchema {
 		return $this->table_name;
 	}
 	public function getSourceID() { return $this->source_id; }
+	
+	protected function initDirectJoins() {
+		AllDirectJoins::getInstance()->add($this->source_id, array());
+	}
 
 }
 
@@ -49,8 +53,8 @@ abstract class DomainAttribute {
 }
 
 abstract class DomainSource {
-	// the DomainSchema
-	var $schema;
+	// the DomainSchemas this provides
+	var $schemas;
 	
 	// the type of database
 	var $type;
@@ -58,14 +62,11 @@ abstract class DomainSource {
 	// the file
 	var $file;
 	
-	public function getSchema() { return $this->schema; }
+	public function getSchemas() { return $this->schemas; }
+	public function getSchema($name) { return $this->schemas[$name]; }
 	public function getType() { return $this->type; }
 	public function getFile() { return $this->file; }
 	
-	public function getTableName() { 
-		return $this->schema->getTableName(); 
-	}
-
 }
 
 /**
@@ -73,7 +74,7 @@ abstract class DomainSource {
  */
 abstract class DomainIterator {
 	
-	// the DomainSchema of the instance
+	// the DomainSchema of the [main] instance
 	var $schema;
 	
 	// the source of the data
@@ -128,6 +129,61 @@ abstract class DomainIterator {
 	}
 	
 	/**
+	 * Check to make sure that the table exists; if it doesn't, it
+	 * will be created.
+	 */
+	protected function possiblyCreateTable() {
+		$type = $this->source->getType();
+		if ($type == 'RELATIONAL_DB') {
+			
+			// try to prepare a query on the table name; if the table doesn't exist,
+			// this will not succeed
+			$db = new DatabaseQuery("sqlite:" . $this->source->getFile());
+			$query = "SELECT 1 FROM " . $this->schema->getTableName();
+			if ($db->tableExists($query)) {
+				// OK
+				return;	
+			}
+			
+			// we need to create the new table
+			$db = new DatabaseQuery("sqlite:" . $this->source->getFile());
+			$query = "CREATE TABLE " . $this->schema->getTableName();
+			$bits = array();
+			foreach ($this->schema->getAttributes() as $key => $value) {
+				if ($value->isPrimaryKey() && $value->getType() === "iamlInteger") {
+					// this needs to be auto increment
+					$bits[] = "$key INTEGER PRIMARY KEY AUTOINCREMENT";
+				} else {
+					// this is a normal key
+					switch ($value->getType()) {
+						case "iamlString":
+							$rowtype = "VARCHAR(255)";
+							break;
+
+						case "iamlInteger":
+							$rowtype = "INTEGER";
+							break;
+							
+						default:
+							throw new IamlDomainException("Unknown attribute type " . $value->getType());
+					}
+					$bits[] = "$key $rowtype";
+				}
+			}
+			if (!$bits) {
+				throw new IamlDomainException("Schema " . $this->schema->getTableName() . " had no attributes"); 
+			}
+			$query .= "(" . implode(", ", $bits) . ")";
+			
+			// execute
+			$db->execute($query);
+			
+		} else {
+			throw new IamlDomainException("Unknown source type $type");
+		}
+	}
+	
+	/**
 	 * Reload the instance; updates $current_result.
 	 */
 	public function reload() {
@@ -136,7 +192,7 @@ abstract class DomainIterator {
 		if ($this->isNew()) {
 			if ($this->getNewInstanceID() === null) {
 				$this->current_result = array();
-				foreach ($this->source->getSchema()->getAttributes() as $key => $attr) {
+				foreach ($this->schema->getAttributes() as $key => $attr) {
 					$value = null;	// empty
 					$o2 = new DomainAttributeInstance(
 						$this, $key, $value
@@ -159,15 +215,15 @@ abstract class DomainIterator {
 		
 					$obj = evaluate_select_wire(
 						"sqlite:" . $this->source->getFile(),
-						$this->source->getSchema()->getSourceID(),
-						$this->source->getSchema()->getTableName(),
+						$this->schema->getSourceID(),
+						$this->schema->getTableName(),
 						$query,
 						$args
 					);
 					
 					// translate the array(key=>value) into array(key=>DomainAttributeInstance)
 					$this->current_result = array();
-					foreach ($this->source->getSchema()->getAttributes() as $key => $attr) {
+					foreach ($this->schema->getAttributes() as $key => $attr) {
 						$o2 = new DomainAttributeInstance(
 							$this, $key, $obj[$key]
 						);
@@ -182,19 +238,22 @@ abstract class DomainIterator {
 		}
 
 		if ($type == 'RELATIONAL_DB') {
+			// we might need to create the table first
+			$this->possiblyCreateTable();
+		
 			/*
 			 * evaluate_select_wire($db_name, $source_id, $source_class, 
 			 *		$query, $args, $offset = 0, $order_by = "", 
 			 *		$order_ascending = true)
 			 */
-			
+
 			$query = $this->query;
 			$args = $this->constructArgs();
 
 			$obj = evaluate_select_wire(
 				"sqlite:" . $this->source->getFile(),
-				$this->source->getSchema()->getSourceID(),
-				$this->source->getSchema()->getTableName(),
+				$this->schema->getSourceID(),
+				$this->schema->getTableName(),
 				$query,
 				$args,
 				$this->getOffset(),
@@ -204,7 +263,7 @@ abstract class DomainIterator {
 			
 			// translate the array(key=>value) into array(key=>DomainAttributeInstance)
 			$this->current_result = array();
-			foreach ($this->source->getSchema()->getAttributes() as $key => $attr) {
+			foreach ($this->schema->getAttributes() as $key => $attr) {
 				$o2 = new DomainAttributeInstance(
 					$this, $key, $obj[$key]
 				);
@@ -232,7 +291,7 @@ abstract class DomainIterator {
 	 */
 	protected function getPKName() {
 		$pk_name = null;
-		foreach ($this->source->getSchema()->getAttributes() as $name => $attr) {
+		foreach ($this->schema->getAttributes() as $name => $attr) {
 			if ($attr->isPrimaryKey()) {
 				$pk_name = $name;
 				break;
@@ -248,6 +307,9 @@ abstract class DomainIterator {
 		$type = $this->source->getType();
 
 		if ($type == 'RELATIONAL_DB') {
+			// we might need to create the table first
+			$this->possiblyCreateTable();
+
 			$source = "sqlite:" . $this->source->getFile();
 			$db = new DatabaseQuery($source);
 			
@@ -263,7 +325,7 @@ abstract class DomainIterator {
 			// insert in default values
 			if ($this->isNew() && $this->getNewInstanceID() === null) {
 				// create new
-				$query = "INSERT INTO " . $this->source->getSchema()->getTableName()
+				$query = "INSERT INTO " . $this->schema->getTableName()
 					. " DEFAULT VALUES";
 				$db_handle = $db->execute($query, array());
 				
@@ -277,7 +339,7 @@ abstract class DomainIterator {
 			$pk_value = $this->getAttribute($pk_name)->getValue();
 			
 			$query = "UPDATE " .
-				$this->source->getSchema()->getTableName() .
+				$this->schema->getTableName() .
 				" SET " . 
 				$attrinst->getName() .
 				" = ? WHERE $pk_name = ?";
@@ -356,6 +418,9 @@ abstract class DomainIterator {
 		$type = $this->source->getType();
 
 		if ($type == 'RELATIONAL_DB') {
+			// we might need to create the table first
+			$this->possiblyCreateTable();
+
 			/*
 			 * evaluate_select_wire_count($db_name, $source_id, $source_class, 
 			 *		$query, $args)
@@ -366,8 +431,8 @@ abstract class DomainIterator {
 
 			$obj = evaluate_select_wire_count(
 				"sqlite:" . $this->source->getFile(),
-				$this->source->getSchema()->getSourceID(),
-				$this->source->getSchema()->getTableName(),
+				$this->schema->getSourceID(),
+				$this->schema->getTableName(),
 				$query,
 				$args
 			);
@@ -434,5 +499,33 @@ class IamlDomainException extends IamlRuntimeException {
 		parent::__construct($message);
 		$this->more_info = $more_info;
 	}
+}
+
+class AllDirectJoins {
+	var $all_direct_joins = array();
+
+	private function __construct() { }
+
+	// the current instance
+	static $instance = null;
+	public static function getInstance() {
+		if (self::$instance == null) {
+			self::$instance = new AllDirectJoins();
+		}
+		return self::$instance;
+	}
+	
+	public function add($key, $value) {
+		$this->all_direct_joins[$key] = $value;
+	}
+	
+	public function getJoins() {
+		return $this->all_direct_joins;
+	}
+	
+}
+
+function get_all_domain_joins() {
+	return AllDirectJoins::getInstance()->getJoins();
 }
 

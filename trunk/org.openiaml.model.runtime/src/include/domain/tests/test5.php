@@ -7,13 +7,11 @@ class DomainSchema_Posts extends DomainSchema {
 	
 	private function __construct() {
 		$this->attributes = array(
-			"generated_primary_key" => DomainAttribute_Post_Id::getInstance($this),
-			"content" => DomainAttribute_Post_Content::getInstance($this),
+			"generated_primary_key" => DomainAttribute_Post_Id::getInstance(),
+			"content" => DomainAttribute_Post_Content::getInstance(),
 		);
 		$this->table_name = "Posts";
 		$this->source_id = '2orlls14f';
-		
-		$this->initDirectJoins();
 	}
 
 	// the current instance
@@ -28,17 +26,17 @@ class DomainSchema_Posts extends DomainSchema {
 }
 
 class DomainAttribute_Post_Id extends DomainAttribute {
-	private function __construct($schema) {
-		$this->schema = $schema;
+	private function __construct() {
 		$this->isPrimaryKey = true;
 		$this->type = 'iamlInteger';
+		$this->name = "id";
 	}
 	
 	// the current instance
 	static $instance = null;
-	public static function getInstance($schema) {
+	public static function getInstance() {
 		if (self::$instance == null) {
-			self::$instance = new DomainAttribute_Post_Id($schema);
+			self::$instance = new DomainAttribute_Post_Id();
 		}
 		return self::$instance;
 	}
@@ -46,17 +44,17 @@ class DomainAttribute_Post_Id extends DomainAttribute {
 }
 
 class DomainAttribute_Post_Content extends DomainAttribute {
-	private function __construct($schema) {
-		$this->schema = $schema;
+	private function __construct() {
 		$this->isPrimaryKey = false;
 		$this->type = 'iamlString';
+		$this->name = "content";
 	}
 	
 	// the current instance
 	static $instance = null;
-	public static function getInstance($schema) {
+	public static function getInstance() {
 		if (self::$instance == null) {
-			self::$instance = new DomainAttribute_Post_Content($schema);
+			self::$instance = new DomainAttribute_Post_Content();
 		}
 		return self::$instance;
 	}
@@ -66,7 +64,7 @@ class DomainAttribute_Post_Content extends DomainAttribute {
 class DomainSource_PostsDB extends DomainSource {
 	
 	private function __construct() {
-		$this->schema = DomainSchema_Posts::getInstance();
+		$this->schemas = array(DomainSchema_Posts::getInstance());
 		$this->type = 'RELATIONAL_DB';
 		$this->file = '1kg992k6t4.db';		// it can be in the same DB
 	}
@@ -118,16 +116,16 @@ class DomainIterator_Posts_1mkm131xzz extends DomainIterator {
 		throw new IamlDomainException("Cannot set the offset for a new object: " . get_class($this));
 	}
 	
-	public function getNewInstanceID() {
-		if (!isset($_SESSION["newid2"]) || $_SESSION["newid2"] === null) {
+	public function getNewInstanceID($key) {
+		if (!isset($_SESSION["newid2_$key"]) || $_SESSION["newid2_$key"] === null) {
 			return null;
 		}
 		
-		return $_SESSION["newid2"];
+		return $_SESSION["newid2_$key"];
 	}
 	
-	public function setNewInstanceID($id) {
-		$_SESSION["newid2"] = $id;
+	public function setNewInstanceID($key, $id) {
+		$_SESSION["newid2_$key"] = $id;
 	}
 	
 }
@@ -139,6 +137,7 @@ function printit2($instance) {
 	echo "content: " . ($content === null ? "null" : $content) . "\n";
 }
 
+echo "[test 5] ";
 ob_start();
 {
 	// get the current instance

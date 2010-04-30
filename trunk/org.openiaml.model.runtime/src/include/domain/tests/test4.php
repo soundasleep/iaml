@@ -36,20 +36,21 @@ class DomainIterator_News_rbtbtr22d extends DomainIterator {
 		throw new IamlDomainException("Cannot set the offset for a new object: " . get_class($this));
 	}
 	
-	public function getNewInstanceID() {
-		if (!isset($_SESSION["newid"]) || $_SESSION["newid"] === null) {
+	public function getNewInstanceID($key) {
+		if (!isset($_SESSION["newid_$key"]) || $_SESSION["newid_$key"] === null) {
 			return null;
 		}
 		
-		return $_SESSION["newid"];
+		return $_SESSION["newid_$key"];
 	}
 	
-	public function setNewInstanceID($id) {
-		$_SESSION["newid"] = $id;
+	public function setNewInstanceID($key, $id) {
+		$_SESSION["newid_$key"] = $id;
 	}
 	
 }
 
+echo "[test 4] ";
 ob_start();
 {
 	// get the current instance

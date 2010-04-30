@@ -38,16 +38,17 @@ class DomainIterator_News_bdb2t211 extends DomainIterator {
 		$_SESSION["offset2"] = $value;
 	}
 	
-	public function getNewInstanceID() {
+	public function getNewInstanceID($key) {
 		throw new IamlDomainException("Cannot get the new instance ID for a non-new object: " . get_class($this));
 	}
 	
-	public function setNewInstanceID($id) {
+	public function setNewInstanceID($key, $id) {
 		throw new IamlDomainException("Cannot set the new instance ID for a non-new object: " . get_class($this));
 	}
 	
 }
 
+echo "[test 2] ";
 ob_start();
 {
 	// get the current instance

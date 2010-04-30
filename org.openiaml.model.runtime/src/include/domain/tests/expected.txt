@@ -1,0 +1,8 @@
+Array
+(
+    [id] => 3
+    [0] => 3
+    [title] => new title
+    [1] => new title
+)
+results = 1

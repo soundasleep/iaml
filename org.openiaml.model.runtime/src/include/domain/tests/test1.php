@@ -34,16 +34,17 @@ class DomainIterator_News_5i92kg92 extends DomainIterator {
 		$_SESSION["offset"] = $value;
 	}
 	
-	public function getNewInstanceID() {
+	public function getNewInstanceID($key) {
 		throw new IamlDomainException("Cannot get the new instance ID for a non-new object: " . get_class($this));
 	}
 	
-	public function setNewInstanceID($id) {
+	public function setNewInstanceID($key, $id) {
 		throw new IamlDomainException("Cannot set the new instance ID for a non-new object: " . get_class($this));
 	}
 	
 }
 
+echo "[test 1] ";
 ob_start();
 {
 	// get the current instance

@@ -11,13 +11,11 @@ class DomainSchema_News extends DomainSchema {
 	
 	private function __construct() {
 		$this->attributes = array(
-			"id" => DomainAttribute_News_Id::getInstance($this),
-			"title" => DomainAttribute_News_Title::getInstance($this),
+			"id" => DomainAttribute_News_Id::getInstance(),
+			"title" => DomainAttribute_News_Title::getInstance(),
 		);
 		$this->table_name = "News";
 		$this->source_id = '1kg992k6t4';
-		
-		$this->initDirectJoins();
 	}
 
 	// the current instance
@@ -32,17 +30,17 @@ class DomainSchema_News extends DomainSchema {
 }
 
 class DomainAttribute_News_Id extends DomainAttribute {
-	private function __construct($schema) {
-		$this->schema = $schema;
+	private function __construct() {
 		$this->isPrimaryKey = true;
 		$this->type = 'iamlInteger';
+		$this->name = "id";
 	}
 	
 	// the current instance
 	static $instance = null;
-	public static function getInstance($schema) {
+	public static function getInstance() {
 		if (self::$instance == null) {
-			self::$instance = new DomainAttribute_News_Id($schema);
+			self::$instance = new DomainAttribute_News_Id();
 		}
 		return self::$instance;
 	}
@@ -50,17 +48,17 @@ class DomainAttribute_News_Id extends DomainAttribute {
 }
 
 class DomainAttribute_News_Title extends DomainAttribute {
-	private function __construct($schema) {
-		$this->schema = $schema;
+	private function __construct() {
 		$this->isPrimaryKey = false;
 		$this->type = 'iamlString';
+		$this->name = "title";
 	}
 	
 	// the current instance
 	static $instance = null;
-	public static function getInstance($schema) {
+	public static function getInstance() {
 		if (self::$instance == null) {
-			self::$instance = new DomainAttribute_News_Title($schema);
+			self::$instance = new DomainAttribute_News_Title();
 		}
 		return self::$instance;
 	}
@@ -69,7 +67,7 @@ class DomainAttribute_News_Title extends DomainAttribute {
 class DomainSource_NewsDB extends DomainSource {
 	
 	private function __construct() {
-		$this->schema = DomainSchema_News::getInstance();
+		$this->schemas = array(DomainSchema_News::getInstance());
 		$this->type = 'RELATIONAL_DB';
 		$this->file = '1kg992k6t4.db';
 	}
@@ -116,6 +114,7 @@ require("test2.php");
 require("test3.php");
 require("test4.php");
 require("test5.php");
+require("test6.php");
 
 function clean_newlines($s) {
 	$s = str_replace("\r\n", "\n", $s);
@@ -129,7 +128,7 @@ function clean_newlines($s) {
 // various mock methods 
 
 function log_message($message) {
-	// echo "[log] $message\n";
+	//echo "[log] $message\n";
 }
 
 /**

@@ -27,8 +27,49 @@ abstract class DomainSchema {
 	}
 	public function getSourceID() { return $this->source_id; }
 	
-	protected function initDirectJoins() {
-		AllDirectJoins::getInstance()->add($this->source_id, array());
+	public function initDirectJoins($source) {
+		$joins = array();
+		// go over all attributes
+		foreach ($this->attributes as $attribute) {
+			// does this attribute extend?
+			if ($attribute->getExtends() !== null) {
+				$extends = $attribute->getExtends();
+
+				// find a Schema in this source that can match it
+				$schema = $source->findSchemaForAttribute($extends);
+				
+				if ($schema === null) {
+					// we couldn't find a schema in the given source
+					throw new IamlDomainException("Could not find a schema in the source " . $source->toString() . " for attribute " . $extends->toString());
+				}
+			
+				$joins[$schema->getSourceID()] = 
+					" JOIN " . $schema->getTableName() . " ON " .
+					$this->getTableName() . "." . $attribute->getName() .
+					" = " . $schema->getTableName() . "." . $extends->getName();
+			}
+		}
+	
+		AllDirectJoins::getInstance()->add($this->source_id, $joins);
+	}
+	
+	/**
+	 * NOTE this is not the PHP toString() method
+	 */
+	public function toString() {
+		return "Schema '" . $this->getTableName() . "' [source_id='" . $this->getSourceID() . "']";
+	}
+	
+	/**
+	 * Find the primary key DomainAttribute in this schema.
+	 */
+	public function getPrimaryKey() {
+		foreach ($this->attributes as $a) {
+			if ($a->isPrimaryKey()) {
+				return $a;
+			}
+		}
+		throw new IamlDomainException("Could not find a primary key for schema " . $this->toString());
 	}
 
 }
@@ -37,18 +78,30 @@ abstract class DomainSchema {
  * The actual attribute definition.
  */
 abstract class DomainAttribute {
-	// the containing Schema
-	var $schema;
-	
+
 	// boolean: is this key a primary key?
 	var $isPrimaryKey;
 	
 	// the XSD type URI
 	var $type;
+	
+	// a DomainAttribute this attribute extends, or <code>null</code>
+	var $extends = null;
+	
+	// the name of the attribute
+	var $name = null;
 
-	public function getSchema() { return $this->schema; }
 	public function getType() { return $this->type; }
+	public function getName() { return $this->name; }
 	public function isPrimaryKey() { return $this->isPrimaryKey; }
+	public function getExtends() { return $this->extends; }
+	
+	/**
+	 * NOTE this is not the PHP toString() method
+	 */
+	public function toString() {
+		return "Attribute '" . $this->getName() . "' [type='" . $this->getType() . "']";
+	}
 	
 }
 
@@ -66,6 +119,45 @@ abstract class DomainSource {
 	public function getSchema($name) { return $this->schemas[$name]; }
 	public function getType() { return $this->type; }
 	public function getFile() { return $this->file; }
+
+	/**
+	 * Initialise the attribute extensions. Should not be called
+	 * in the constructor, but rather before evaluating a query.
+	 */
+	public function initExtensions() {
+		if ($this->schemas === null) {
+			throw new IamlDomainException("No such schemas for " . get_class($this));
+		}
+	
+		foreach ($this->schemas as $schema) {
+			$schema->initDirectJoins($this);
+		}
+	}
+	
+	/**
+	 * Find the schema that contains the given attribute within this source;
+	 * or <code>null</code> if none can be found.
+	 */
+	public function findSchemaForAttribute($attribute) {
+		foreach ($this->schemas as $schema) {
+			foreach ($schema->getAttributes() as $a) {
+				if ($a === $attribute) {
+					return $schema;
+				}
+			}
+		}
+	
+		// couldn't find any
+		return null;
+	}
+		
+	/**
+	 * NOTE this is not the PHP toString() method
+	 */
+	public function toString() {
+		return "DomainSource " . $this->getType() . "' [file='" . $this->getFile() . "']";
+	}
+	
 	
 }
 
@@ -132,14 +224,32 @@ abstract class DomainIterator {
 	 * Check to make sure that the table exists; if it doesn't, it
 	 * will be created.
 	 */
-	protected function possiblyCreateTable() {
+	protected function possiblyCreateTable($schema = null) {
+		if ($schema === null) {
+			// we will use this schema
+			$schema = $this->schema;
+		}
+		
+		// do we need to create any schemas below this current schema?
+		// this eventually recurses down to create all tables in the database
+		foreach ($schema->getAttributes() as $attribute) {
+			if ($attribute->getExtends() !== null) {
+				$new_schema = $this->source->findSchemaForAttribute($attribute->getExtends());
+				if ($new_schema === null) {
+					throw new IamlDomainException("Could not find any schema for " . $attribute->getExtends()->toString() . " in source " . $this->source->toString());
+				}
+				
+				$this->possiblyCreateTable($new_schema);
+			}
+		}
+		
 		$type = $this->source->getType();
 		if ($type == 'RELATIONAL_DB') {
 			
 			// try to prepare a query on the table name; if the table doesn't exist,
 			// this will not succeed
 			$db = new DatabaseQuery("sqlite:" . $this->source->getFile());
-			$query = "SELECT 1 FROM " . $this->schema->getTableName();
+			$query = "SELECT 1 FROM " . $schema->getTableName();
 			if ($db->tableExists($query)) {
 				// OK
 				return;	
@@ -147,9 +257,9 @@ abstract class DomainIterator {
 			
 			// we need to create the new table
 			$db = new DatabaseQuery("sqlite:" . $this->source->getFile());
-			$query = "CREATE TABLE " . $this->schema->getTableName();
+			$query = "CREATE TABLE " . $schema->getTableName();
 			$bits = array();
-			foreach ($this->schema->getAttributes() as $key => $value) {
+			foreach ($schema->getAttributes() as $key => $value) {
 				if ($value->isPrimaryKey() && $value->getType() === "iamlInteger") {
 					// this needs to be auto increment
 					$bits[] = "$key INTEGER PRIMARY KEY AUTOINCREMENT";
@@ -157,6 +267,7 @@ abstract class DomainIterator {
 					// this is a normal key
 					switch ($value->getType()) {
 						case "iamlString":
+						case "iamlEmail":
 							$rowtype = "VARCHAR(255)";
 							break;
 
@@ -171,7 +282,7 @@ abstract class DomainIterator {
 				}
 			}
 			if (!$bits) {
-				throw new IamlDomainException("Schema " . $this->schema->getTableName() . " had no attributes"); 
+				throw new IamlDomainException("Schema " . $schema->getTableName() . " had no attributes"); 
 			}
 			$query .= "(" . implode(", ", $bits) . ")";
 			
@@ -181,21 +292,51 @@ abstract class DomainIterator {
 		} else {
 			throw new IamlDomainException("Unknown source type $type");
 		}
+
+	}
+	
+	/**
+	 * Get all of the attributes, both contained and not-contained, in the
+	 * given schema, and return them as a list of keys.
+	 */
+	protected function allAttributes($schema) {
+		$result = array();
+		foreach ($schema->getAttributes() as $key => $value) {
+			if ($value->getExtends() !== null) {
+				// find the schema
+				$found = $this->source->findSchemaForAttribute($value->getExtends());
+				if ($found === null) {
+					throw new IamlDomainException("Could not find any schema for " . $value->getExtends()->toString() . " in source " . $this->source->toString());
+				}
+				$f2 = $this->allAttributes($found);
+				foreach ($f2 as $k => $a) {
+					// don't overwrite existing attributes
+					if (!isset($result[$k]))
+						$result[$k] = $a;
+				}
+			}
+			
+			$result[$key] = $value;
+		}
+		return $result;
 	}
 	
 	/**
 	 * Reload the instance; updates $current_result.
 	 */
 	public function reload() {
+		// init joins
+		$this->source->initExtensions();
+	
 		$type = $this->source->getType();
 		
 		if ($this->isNew()) {
-			if ($this->getNewInstanceID() === null) {
+			if ($this->getNewInstanceID($this->schema->getTableName()) === null) {
 				$this->current_result = array();
-				foreach ($this->schema->getAttributes() as $key => $attr) {
+				foreach ($this->allAttributes($this->schema) as $key => $attribute) {
 					$value = null;	// empty
 					$o2 = new DomainAttributeInstance(
-						$this, $key, $value
+						$this, $key, $value, $attribute
 					);
 					$this->current_result[$key] = $o2;
 				}
@@ -210,8 +351,8 @@ abstract class DomainIterator {
 					 */
 					
 					// for new instances, we select by ID
-					$query = $this->getPKName() . " = ?";
-					$args = array($this->getNewInstanceID());
+					$query = $this->schema->getTableName() . "." . $this->getPKName() . " = ?";
+					$args = array($this->getNewInstanceID($this->schema->getTableName()));
 		
 					$obj = evaluate_select_wire(
 						"sqlite:" . $this->source->getFile(),
@@ -220,12 +361,12 @@ abstract class DomainIterator {
 						$query,
 						$args
 					);
-					
+
 					// translate the array(key=>value) into array(key=>DomainAttributeInstance)
 					$this->current_result = array();
-					foreach ($this->schema->getAttributes() as $key => $attr) {
+					foreach ($this->allAttributes($this->schema) as $key => $attribute) {
 						$o2 = new DomainAttributeInstance(
-							$this, $key, $obj[$key]
+							$this, $key, $obj[$key], $attribute
 						);
 						$this->current_result[$key] = $o2;
 					}
@@ -263,9 +404,9 @@ abstract class DomainIterator {
 			
 			// translate the array(key=>value) into array(key=>DomainAttributeInstance)
 			$this->current_result = array();
-			foreach ($this->schema->getAttributes() as $key => $attr) {
+			foreach ($this->allAttributes($this->schema) as $key => $attribute) {
 				$o2 = new DomainAttributeInstance(
-					$this, $key, $obj[$key]
+					$this, $key, $obj[$key], $attribute
 				);
 				$this->current_result[$key] = $o2;
 			}
@@ -303,6 +444,53 @@ abstract class DomainIterator {
 		return $pk_name;
 	}
 	
+	/**
+	 * Create a blank new instance of the given schema.
+	 * Return the generated ID.
+	 * Recurses to create any extended tables as well.
+	 */
+	protected function initialiseStructure($schema) {
+		foreach ($schema->getAttributes() as $attribute) {
+			// is this attribute extended?
+			if ($attribute->getExtends() !== null) {
+				$parent = $this->source->findSchemaForAttribute($attribute->getExtends());
+				if ($parent === null) {
+					throw new IamlDomainException("Could not find any schema for " . $attribute->getExtends()->toString() . " in source " . $this->source->toString());
+				}
+				
+				if ($this->getNewInstanceID($parent->getTableName()) === null) {
+					$new_id = $this->initialiseStructure($parent);
+					$this->getAttribute($attribute->getName())->setValue($new_id);
+				}
+			}
+		}
+		
+		// find the primary key
+		$pk = null;
+		foreach ($schema->getAttributes() as $attribute) {
+			if ($attribute->isPrimaryKey()) {
+				$pk = $attribute;
+			}
+		}
+		if ($pk === null) {
+			throw new IamlDomainException("Could not find any primary key for schema " . $schema->toString());
+		}
+
+		$source = "sqlite:" . $this->source->getFile();
+		$db = new DatabaseQuery($source);
+		
+		// create new
+		$query = "INSERT INTO " . $schema->getTableName()
+			. " DEFAULT VALUES";
+		$db_handle = $db->execute($query, array());
+		
+		// the newly created ID
+		$new_id = $db_handle->lastInsertId($pk->getName());
+		$this->setNewInstanceID($schema->getTableName(), $new_id);
+		
+		return $new_id;
+	}
+	
 	protected function saveAttribute($attrinst, $value) {
 		$type = $this->source->getType();
 
@@ -310,46 +498,71 @@ abstract class DomainIterator {
 			// we might need to create the table first
 			$this->possiblyCreateTable();
 
-			$source = "sqlite:" . $this->source->getFile();
-			$db = new DatabaseQuery($source);
-			
-			// find the primary key
-			$pk_name = $this->getPKName();
-			
-			// we don't update PKs
-			if ($pk_name == $attrinst->getName()) {
-				return;
+			$attr_pk = $attrinst->getDefinition();
+			while ($attr_pk !== null) {
+				if ($attr_pk->isPrimaryKey()) {
+					// we don't update PKs
+					return;
+				}
+				// see if the parent extend is a PK
+				$attr_pk = $attr_pk->getExtends();
 			}
 			
+			$target_schema = $this->source->findSchemaForAttribute($attrinst->getDefinition());
+			if ($target_schema === null) {
+				throw new IamlDomainException("Could not find target schema for attribute " . $attrinst->getDefinition()->toString() . " in source " . $this->source);
+			}
+
+			
+			// what is the primary key in this schema?
+			$schema_pk = $target_schema->getPrimaryKey();
+			$schema_pk_name = $schema_pk->getName();
+						
 			// if this is a NEW object that hasn't been saved yet, we have to
 			// insert in default values
-			if ($this->isNew() && $this->getNewInstanceID() === null) {
-				// create new
-				$query = "INSERT INTO " . $this->schema->getTableName()
-					. " DEFAULT VALUES";
-				$db_handle = $db->execute($query, array());
-				
-				// the newly created ID
-				$new_id = $db_handle->lastInsertId($pk_name);
-				$this->setNewInstanceID($new_id);
-				$this->getAttribute($pk_name)->setValue($new_id);
+			if ($this->isNew() && $this->getNewInstanceID($target_schema->getTableName()) === null) {
+				$new_id = $this->initialiseStructure($target_schema);
+				$this->getAttribute($schema_pk_name)->setValue($new_id);
 			}
+
+			// find the value of this primary key for our current instance
+			$schema_pk_value = $this->getValueForPrimaryKey($schema_pk);
 			
-			// get the current PK value
-			$pk_value = $this->getAttribute($pk_name)->getValue();
-			
+			$source = "sqlite:" . $this->source->getFile();
+			$db = new DatabaseQuery($source);
 			$query = "UPDATE " .
-				$this->schema->getTableName() .
+				$target_schema->getTableName() .
 				" SET " . 
 				$attrinst->getName() .
-				" = ? WHERE $pk_name = ?";
-			$args = array($value, $pk_value);
+				" = ? WHERE $schema_pk_name = ?";
+			$args = array($value, $schema_pk_value);
 			
 			$db->execute($query, $args);
 	
 		} else {
 			throw new IamlDomainException("Unknown source type $type");
 		}
+	}
+	
+	/**
+	 * Find the value in the current instance that refers to the given
+	 * PK attribute.
+	 */
+	protected function getValueForPrimaryKey($attribute) {
+		foreach ($this->toArray() as $key => $value) {
+			if ($value->getDefinition() === $this->getRootExtends($attribute)) {
+				return $value->getValue();
+			}
+		}
+		
+		throw new IamlDomainException("Could not find value for PK attribute " . $attribute->getDefinition()->toString());
+	}
+	
+	protected function getRootExtends($attribute) {
+		if ($attribute->getExtends() === null) {
+			return $attribute;
+		}
+		return $this->getRootExtends($attribute->getExtends());
 	}
 	
 	/**
@@ -372,12 +585,12 @@ abstract class DomainIterator {
 	 * Get the ID of the newly created instance, or <code>null</code> if it
 	 * hasn't been created yet.
 	 */
-	public abstract function getNewInstanceID();
+	public abstract function getNewInstanceID($key);
 
 	/**
 	 * Set the ID of the newly created instance (called internally).
 	 */
-	public abstract function setNewInstanceID($id);
+	public abstract function setNewInstanceID($key, $id);
 	
 	public function reset() {
 		$this->setOffset(0);
@@ -450,7 +663,7 @@ abstract class DomainIterator {
 	 * changes, they are lost.
 	 */
 	public function createNew() {
-		$this->setNewInstanceID(null);
+		$this->setNewInstanceID($this->schema->getTableName(), null);
 		$this->reload();
 	}
 
@@ -467,16 +680,21 @@ class DomainAttributeInstance {
 	// the current value
 	var $value;
 	
-	public function __construct($iterator, $name, $value) {
+	// the definition of the attribute
+	var $def;
+	
+	public function __construct($iterator, $name, $value, $def) {
 		$this->iterator = $iterator;
 		$this->name = $name;
 		$this->value = $value;
+		$this->def = $def;
 	}
 	
 	public function getValue() {
 		return $this->value;
 	}
 	public function getName() { return $this->name; }
+	public function getDefinition() { return $this->def; }
 	
 	/**
 	 * We want to update the attribute instance with the new value.

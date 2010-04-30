@@ -7,18 +7,6 @@
 require("../domain.php");
 require("../../databases.php");
 
-function get_all_domain_joins() {
-	$direct_joins = array();
-	/*
-    // Undergraduate
-    $direct_joins["model_1236407970c_1d"] = array("model_1236407970c_19" => "JOIN Student ON
-						Student.generated_primary_key 
-						= Undergraduate.Student_generated_primary_key", );
-	*/
-	$direct_joins["1kg992k6t4"] = array();
-	return $direct_joins;
-}
-
 class DomainSchema_News extends DomainSchema {
 	
 	private function __construct() {
@@ -28,6 +16,8 @@ class DomainSchema_News extends DomainSchema {
 		);
 		$this->table_name = "News";
 		$this->source_id = '1kg992k6t4';
+		
+		$this->initDirectJoins();
 	}
 
 	// the current instance
@@ -125,6 +115,7 @@ require("test1.php");
 require("test2.php");
 require("test3.php");
 require("test4.php");
+require("test5.php");
 
 function clean_newlines($s) {
 	$s = str_replace("\r\n", "\n", $s);

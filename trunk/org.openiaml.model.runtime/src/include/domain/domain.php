@@ -89,6 +89,14 @@ abstract class DomainIterator {
 	var $order_by;
 	var $order_ascending;
 	
+	// the current result array
+	var $current_result = null;
+	
+	// is this autosave?
+	var $autosave = false;
+	
+	public function isAutosave() { return $this->autosave; }
+	
 	/**
 	 * Get the DomainAttributeInstance of the given name.
 	 */
@@ -101,17 +109,24 @@ abstract class DomainIterator {
 			throw new IamlDomainException("Could not find a DomainAttribute named '$name'");
 		}
 		
-		$attribute = new DomainAttributeInstance(
-			$this, $name, $obj[$name]
-		);
-		
-		return $attribute;
+		// this is already an object
+		return $obj[$name];
 	}
 	
 	/**
 	 * Return an associative array of the current instance.
 	 */
 	public function fetchInstance() {
+		if ($this->current_result === null) {
+			$this->reload();
+		}
+		return $this->current_result;
+	}
+	
+	/**
+	 * Reload the instance; updates $current_result.
+	 */
+	public function reload() {
 		$type = $this->source->getType();
 
 		if ($type == 'RELATIONAL_DB') {
@@ -135,18 +150,31 @@ abstract class DomainIterator {
 				$this->order_ascending
 			);
 			
-			return $obj;
-	
+			// translate the array(key=>value) into array(key=>DomainAttributeInstance)
+			$this->current_result = array();
+			foreach ($this->source->getSchema()->getAttributes() as $key => $attr) {
+				$o2 = new DomainAttributeInstance(
+					$this, $key, $obj[$key]
+				);
+				$this->current_result[$key] = $o2;
+			}
+			
 		} else {
 			throw new IamlDomainException("Unknown source type $type");
 		}
-
 	}
 
 	/**
-	 * We want to update the given attribute instance with the new value.
-	 */	
-	public function setAttribute($attrinst, $value) {
+	 * Manually save the current instance.
+	 */
+	public function save() {
+		foreach ($this->current_result as $key => $value) {
+			// save this attribute manually
+			$this->saveAttribute($value, $value->getValue());
+		}
+	}
+	
+	protected function saveAttribute($attrinst, $value) {
 		$type = $this->source->getType();
 
 		if ($type == 'RELATIONAL_DB') {
@@ -203,7 +231,7 @@ abstract class DomainIterator {
 	}
 	
 	public function hasNext() {
-		return ($this->count() > 0) && ($this->getOffset() < $this->count());
+		return ($this->count() > 0) && ($this->getOffset() < $this->count() - 1);
 	}
 	
 	public function hasPrevious() {
@@ -212,17 +240,21 @@ abstract class DomainIterator {
 	
 	/**
 	 * Move the offset forward and return the new object instance.
+	 * This will lose any unsaved changes.
 	 */
 	public function next() {
 		$this->setOffset($this->getOffset() + 1);
+		$this->reload();
 		return $this->fetchInstance();
 	}
 
 	/**
 	 * Move the offset backwards and return the new object instance.
+	 * This will lose any unsaved changes.
 	 */
 	public function previous() {
 		$this->setOffset($this->getOffset() - 1);
+		$this->reload();
 		return $this->fetchInstance();
 	}
 	
@@ -256,7 +288,7 @@ abstract class DomainIterator {
 		}
 	
 	}
-	
+
 }
 
 class DomainAttributeInstance {
@@ -285,8 +317,22 @@ class DomainAttributeInstance {
 	 * We want to update the attribute instance with the new value.
 	 */
 	public function setValue($value) {
-		$this->iterator->setAttribute($this, $value);
 		$this->value = $value;
+		
+		// do we need to autosave?
+		if ($this->iterator->isAutosave()) {
+			$this->iterator->save();
+		}
 	}
 	
 }
+
+class IamlDomainException extends IamlRuntimeException {
+	var $more_info;
+
+	public function __construct($message = "", $more_info = "") {
+		parent::__construct($message);
+		$this->more_info = $more_info;
+	}
+}
+

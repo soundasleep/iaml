@@ -8,7 +8,7 @@ require("../domain.php");
 require("../../databases.php");
 
 class DomainSchema_News extends DomainSchema {
-	
+
 	private function __construct() {
 		$this->attributes = array(
 			"id" => DomainAttribute_News_Id::getInstance(),
@@ -26,7 +26,7 @@ class DomainSchema_News extends DomainSchema {
 		}
 		return self::$instance;
 	}
-	
+
 }
 
 class DomainAttribute_News_Id extends DomainAttribute {
@@ -35,7 +35,7 @@ class DomainAttribute_News_Id extends DomainAttribute {
 		$this->type = 'iamlInteger';
 		$this->name = "id";
 	}
-	
+
 	// the current instance
 	static $instance = null;
 	public static function getInstance() {
@@ -44,7 +44,7 @@ class DomainAttribute_News_Id extends DomainAttribute {
 		}
 		return self::$instance;
 	}
-	
+
 }
 
 class DomainAttribute_News_Title extends DomainAttribute {
@@ -53,7 +53,7 @@ class DomainAttribute_News_Title extends DomainAttribute {
 		$this->type = 'iamlString';
 		$this->name = "title";
 	}
-	
+
 	// the current instance
 	static $instance = null;
 	public static function getInstance() {
@@ -65,7 +65,7 @@ class DomainAttribute_News_Title extends DomainAttribute {
 }
 
 class DomainSource_NewsDB extends DomainSource {
-	
+
 	private function __construct() {
 		$this->schemas = array(DomainSchema_News::getInstance());
 		$this->type = 'RELATIONAL_DB';
@@ -88,7 +88,7 @@ class DomainSource_NewsDB extends DomainSource {
 	if (file_exists("1kg992k6t4.db")) {
 		unlink("1kg992k6t4.db");
 	}
-	
+
 	$query = new DatabaseQuery("sqlite:1kg992k6t4.db");
 	$query->execute("CREATE TABLE News ( id integer primary key autoincrement, title varchar(255))");
 	$query->execute("INSERT INTO News (id, title) VALUES (?, ?)", array(1, 'hello'));
@@ -98,7 +98,7 @@ class DomainSource_NewsDB extends DomainSource {
 
 	// init the offset
 	$_SESSION["offset"] = 0;
-	
+
 }
 
 function printit($instance) {
@@ -115,8 +115,9 @@ require("test2.php");
 require("test3.php");
 require("test4.php");
 require("test5.php");
-//$enable = true;
+//$enable = true;	// for debug
 require("test6.php");
+require("test7.php");
 
 function clean_newlines($s) {
 	$s = str_replace("\r\n", "\n", $s);
@@ -127,7 +128,7 @@ function clean_newlines($s) {
 }
 
 // ---
-// various mock methods 
+// various mock methods
 
 function log_message($message) {
 	global $enable;

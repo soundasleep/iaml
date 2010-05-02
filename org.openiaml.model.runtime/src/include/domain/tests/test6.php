@@ -248,6 +248,7 @@ class DomainIterator_AdminNewIterator extends DomainIterator {
 	}
 	
 	public function setNewInstanceID($key, $id) {
+		log_message("[test6] Set new instance ID '$key' to '$id'");
 		$_SESSION["newid3_$key"] = $id;
 	}
 	
@@ -286,6 +287,7 @@ ob_start();
 	printit3($instance->toArray());
 	
 	// don't save it manually (but autosave = true, so it's already saved)
+	// this should just reload the same instance
 	$instance->reload();
 	echo "4:\n";
 	printit3($instance->toArray());
@@ -318,7 +320,7 @@ ob_start();
 	// save it
 	$instance->save();
 	echo "9:\n";
-	printit3($instance->toArray());		
+	printit3($instance->toArray());
 		
 }
 

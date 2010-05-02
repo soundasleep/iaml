@@ -109,11 +109,13 @@ function printit($instance) {
 }
 
 // list of tests
+$enable = false;
 require("test1.php");
 require("test2.php");
 require("test3.php");
 require("test4.php");
 require("test5.php");
+//$enable = true;
 require("test6.php");
 
 function clean_newlines($s) {
@@ -128,7 +130,8 @@ function clean_newlines($s) {
 // various mock methods 
 
 function log_message($message) {
-	//echo "[log] $message\n";
+	global $enable;
+	if ($enable) echo "[log] $message\n";
 }
 
 /**

@@ -29,7 +29,7 @@ class DomainAttribute_Post_Id extends DomainAttribute {
 	private function __construct() {
 		$this->isPrimaryKey = true;
 		$this->type = 'iamlInteger';
-		$this->name = "id";
+		$this->name = "generated_primary_key";
 	}
 	
 	// the current instance

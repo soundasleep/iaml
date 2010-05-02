@@ -255,6 +255,8 @@ abstract class DomainIterator {
 				return;	
 			}
 			
+			log_message("[domain] Creating new schema '" . $schema->toString() . "'");
+			
 			// we need to create the new table
 			$db = new DatabaseQuery("sqlite:" . $this->source->getFile());
 			$query = "CREATE TABLE " . $schema->getTableName();
@@ -332,6 +334,7 @@ abstract class DomainIterator {
 		
 		if ($this->isNew()) {
 			if ($this->getNewInstanceID($this->schema->getTableName()) === null) {
+				log_message("[domain reload] creating a new empty instance");
 				$this->current_result = array();
 				foreach ($this->allAttributes($this->schema) as $key => $attribute) {
 					$value = null;	// empty
@@ -343,6 +346,7 @@ abstract class DomainIterator {
 			
 				return;
 			} else {
+				log_message("[domain reload] reloading a created new instance");
 				if ($type == 'RELATIONAL_DB') {
 					/*
 					 * evaluate_select_wire($db_name, $source_id, $source_class, 
@@ -363,6 +367,7 @@ abstract class DomainIterator {
 					);
 
 					// translate the array(key=>value) into array(key=>DomainAttributeInstance)
+					log_message("result: " . print_r($obj, true));
 					$this->current_result = array();
 					foreach ($this->allAttributes($this->schema) as $key => $attribute) {
 						$o2 = new DomainAttributeInstance(
@@ -380,7 +385,9 @@ abstract class DomainIterator {
 
 		if ($type == 'RELATIONAL_DB') {
 			// we might need to create the table first
-			$this->possiblyCreateTable();
+			if ($this->isAutosave()) {
+				$this->possiblyCreateTable();
+			}
 		
 			/*
 			 * evaluate_select_wire($db_name, $source_id, $source_class, 
@@ -449,7 +456,9 @@ abstract class DomainIterator {
 	 * Return the generated ID.
 	 * Recurses to create any extended tables as well.
 	 */
-	protected function initialiseStructure($schema) {
+	protected function initialiseInstance($schema) {
+		log_message("[domain init] Initialise instance: " . $schema->toString());
+	
 		foreach ($schema->getAttributes() as $attribute) {
 			// is this attribute extended?
 			if ($attribute->getExtends() !== null) {
@@ -459,8 +468,12 @@ abstract class DomainIterator {
 				}
 				
 				if ($this->getNewInstanceID($parent->getTableName()) === null) {
-					$new_id = $this->initialiseStructure($parent);
-					$this->getAttribute($attribute->getName())->setValue($new_id);
+					log_message("[domain init] Initialising parent instance: " . $parent->toString());
+					$new_id = $this->initialiseInstance($parent);
+					log_message("Attribute " . $attribute->getName() . " set to value $new_id");
+					
+					// update the FK
+					$this->getAttribute($attribute->getName())->setValueManually($new_id);
 				}
 			}
 		}
@@ -498,35 +511,48 @@ abstract class DomainIterator {
 			// we might need to create the table first
 			$this->possiblyCreateTable();
 
-			$attr_pk = $attrinst->getDefinition();
-			while ($attr_pk !== null) {
-				if ($attr_pk->isPrimaryKey()) {
-					// we don't update PKs
-					return;
-				}
-				// see if the parent extend is a PK
-				$attr_pk = $attr_pk->getExtends();
+			// we don't update direct PKs
+			if ($attrinst->getDefinition()->isPrimaryKey()) {
+				return;
 			}
-			
+
 			$target_schema = $this->source->findSchemaForAttribute($attrinst->getDefinition());
 			if ($target_schema === null) {
 				throw new IamlDomainException("Could not find target schema for attribute " . $attrinst->getDefinition()->toString() . " in source " . $this->source);
 			}
 
-			
 			// what is the primary key in this schema?
 			$schema_pk = $target_schema->getPrimaryKey();
 			$schema_pk_name = $schema_pk->getName();
 						
 			// if this is a NEW object that hasn't been saved yet, we have to
 			// insert in default values
-			if ($this->isNew() && $this->getNewInstanceID($target_schema->getTableName()) === null) {
-				$new_id = $this->initialiseStructure($target_schema);
-				$this->getAttribute($schema_pk_name)->setValue($new_id);
+			if ($this->isNew()) {
+			 	if ($this->getNewInstanceID($target_schema->getTableName()) === null) {
+					$new_id = $this->initialiseInstance($target_schema);
+					log_message("[domain] Set '$schema_pk_name' to new ID '$new_id'"); 
+					$this->getAttribute($schema_pk_name)->setValue($new_id);
+					
+					if ($attrinst->getName() == $schema_pk_name) {
+						// update the value directly
+						$attrinst->setValue($new_id);
+					}
+				} else {
+					// the new ID hasn't been saved yet in the instance; we need to 
+					// update the attribute manually
+					$schema_pk_value = $this->getNewInstanceID($target_schema->getTableName());
+					if ($this->getAttribute($schema_pk_name)->getValue() != $schema_pk_value) {
+						$this->getAttribute($schema_pk_name)->setValue($schema_pk_value);
+					}
+				}
 			}
 
 			// find the value of this primary key for our current instance
+			log_message("[domain] Target schema: " . $target_schema->toString());
 			$schema_pk_value = $this->getValueForPrimaryKey($schema_pk);
+			if ($schema_pk_value === null) {
+				throw new IamlDomainException("Cannot use a NULL schema primary key '" . $schema_pk->toString() . "': $schema_pk_value");
+			}
 			
 			$source = "sqlite:" . $this->source->getFile();
 			$db = new DatabaseQuery($source);
@@ -663,8 +689,30 @@ abstract class DomainIterator {
 	 * changes, they are lost.
 	 */
 	public function createNew() {
-		$this->setNewInstanceID($this->schema->getTableName(), null);
+		$this->resetSchema($this->schema);
+		
+		// finally, reload
+		// (this will set all new fields to <code>null</code>, etc.)
 		$this->reload();
+	}
+
+	/**
+	 * For all schemas in this instance, set the new instance ID(s) to null
+	 */
+	private function resetSchema($schema) {
+		// set to null 
+		$this->setNewInstanceID($schema->getTableName(), null);
+		
+		// and set all parents to null as well (recursively)
+		foreach ($schema->getAttributes() as $attribute) {
+			if ($attribute->getExtends() !== null) {
+				$parent = $this->source->findSchemaForAttribute($attribute->getExtends());
+				if ($parent === null) {
+					throw new IamlDomainException("Could not find parent schema for '" . $attribute->getExtends()->toString() . "' in source '" . $this->source->toString() . "'");
+				}
+				$this->resetSchema($parent);
+			}
+		}
 	}
 
 }
@@ -706,6 +754,15 @@ class DomainAttributeInstance {
 		if ($this->iterator->isAutosave()) {
 			$this->iterator->save();
 		}
+	}
+	
+	/**
+	 * We want to update the attribute instance value with the new value,
+	 * but this does not trigger a save! This is not intended to be used
+	 * by clients.
+	 */
+	public function setValueManually($value) {
+		$this->value = $value;
 	}
 	
 }

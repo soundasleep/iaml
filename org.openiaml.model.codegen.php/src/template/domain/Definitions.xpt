@@ -44,16 +44,222 @@
 		 * application. This is used to properly compose
 		 * select wires, etc.
 		 *
-		 * TODO put this into a separate include file 
+		 * TODO put this into a separate include file
+		 * TODO remove [issue 178] 
 		 */
-		function get_all_domain_joins() {
+		function get_all_domain_joins_old() {
 			$direct_joins = array();
 			
 			«EXPAND DomainInheritance::defineInheritanceJoins FOREACH getRoot().getAllDomainObjects()»
 			
 			return $direct_joins;
 		}
+		
+		«EXPAND domainSchemaDefinition FOREACH getRoot().getAllDomainObjects()»
+		«EXPAND domainAttributeDefinition FOREACH getRoot().eAllContents.typeSelect(model::DomainAttribute)»
+		«EXPAND domainSourceDefinition FOREACH getRoot().eAllContents.typeSelect(model::DomainStore)»
+		«EXPAND domainIteratorDefinition FOREACH getRoot().eAllContents.typeSelect(model::DomainObjectInstance)»
 	«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE domainSchemaDefinition FOR model::DomainObject»
+/**
+ * Domain Schema '«escapeString(name)»'
+ */
+class DomainSchema_«safeName()» extends DomainSchema {
+	private function __construct() {
+		«FOREACH attributes AS a»
+			$this->addAttribute(DomainAttribute_«safeName(a)»::getInstance());
+		«ENDFOREACH»
+		
+		$this->table_name = "«safeNameString(name)»";
+		$this->source_id = $this->table_name . "_id";
+	}
+	
+	// the current instance
+	static $instance = null;
+	public static function getInstance() {
+		if (self::$instance == null) {
+			self::$instance = new DomainSchema_«safeName()»();
+		}
+		return self::$instance;
+	}
+	
+}
+«ENDDEFINE»
+
+«DEFINE domainAttributeDefinition FOR model::DomainAttribute»
+/**
+ * Domain Attribute '«escapeString(name)»'
+ */
+class DomainAttribute_«safeName()» extends DomainAttribute {
+	private function __construct() {
+		$this->isPrimaryKey = «primaryKey ? "true" : "false"»;
+		$this->type = "«escapePhpString(type.uRI)»";
+		$this->name = "«safeNameString(name)»";
+		
+		«FOREACH outExtendsEdges AS extends»
+			$this->extends = DomainAttribute_«safeName(extends.to)»::getInstance();
+		«ENDFOREACH»		
+		$this->table_name = "«safeNameString(name)»";
+		$this->source_id = $this->table_name . "_id";
+	}
+	
+	// the current instance
+	static $instance = null;
+	public static function getInstance() {
+		if (self::$instance == null) {
+			self::$instance = new DomainAttribute_«safeName()»();
+		}
+		return self::$instance;
+	}
+	
+}
+«ENDDEFINE»
+
+«DEFINE domainSourceDefinition FOR model::DomainStore»
+/**
+ * Domain Source for Domain Object '«escapeString(name)»'
+ */
+class DomainSource_«safeName()» extends DomainSource {
+	private function __construct() {
+		$this->schemas = array(
+		«FOREACH children.typeSelect(model::DomainObject) AS obj»
+			DomainSchema_«safeName(obj)»::getInstance(),
+		«ENDFOREACH»
+		);
+		$this->type = '«escapePhpString(type.toString())»';
+		$this->file = 'sqlite:' . ROOT_PATH . '«safeNameString(id)».db';
+	}
+	
+	// the current instance
+	static $instance = null;
+	public static function getInstance() {
+		if (self::$instance == null) {
+			self::$instance = new DomainSource_«safeName()»();
+		}
+		return self::$instance;
+	}
+	
+}
+«ENDDEFINE»
+
+«DEFINE domainIteratorDefinition FOR model::DomainObjectInstance»
+/**
+ * Domain Iterator for Domain Object Instance '«escapeString(name)»'
+ */
+class DomainIterator_«safeName()» extends DomainIterator {
+«IF inWires.typeSelect(model::wires::NewInstanceWire).isEmpty»
+	«IF inWires.typeSelect(model::wires::SelectWire).isEmpty»
+		«throwException("No SelectWire or NewInstanceWire for: " + this)»
+	«ELSE»
+	// a SelectWire
+
+	«LET inWires.typeSelect(model::wires::SelectWire).first() AS wire»
+	private function __construct() {
+		$this->schema = DomainSchema_«safeName(wire.from)»::getInstance();
+		$this->source = DomainSource_«safeName(wire.from.eContainer)»::getInstance();
+
+		«IF wire.orderBy != null»
+			$this->order_by = DomainAttribute_«safeName(wire.orderBy)»::getInstance();
+			$this->order_ascending = «wire.orderAscending ? "true" : "false"»;
+		«ELSE»
+			$this->order_by = null;
+			$this->order_ascending = true;
+		«ENDIF»
+
+		$this->query = «EXPAND Select::getQuery FOR wire»;
+		$this->is_new = false;
+		$this->autosave = «autosave ? "true" : "false"»;
+	}
+	
+	public function constructArgs() {
+		return array(«EXPAND template::operations::Parameters::callParameter(true, false, true) FOREACH inParameterEdges SEPARATOR ","»);
+	}
+	
+	public function getOffset() {
+		return get_current_offset_«safeName()»();		
+	}
+	
+	public function setOffset($value) {
+		set_current_offset_«safeName()»($value);
+	}
+	
+	public function getNewInstanceID($key) {
+		throw new IamlDomainException("Cannot get the new instance ID for a non-new object: " . get_class($this));
+	}
+	
+	public function setNewInstanceID($key, $value) {
+		throw new IamlDomainException("Cannot set the new instance ID for a non-new object: " . get_class($this));
+	}
+	«ENDLET»
+	«ENDIF»
+«ELSE»
+	«LET inWires.typeSelect(model::wires::NewInstanceWire).first() AS wire»
+	private function __construct() {
+		$this->schema = DomainSchema_«safeName(wire.from)»::getInstance();
+		$this->source = DomainSource_«safeName(wire.from.eContainer)»::getInstance();
+
+		$this->order_by = "";
+		$this->order_ascending = true;
+		$this->query = "";
+		
+		$this->is_new = true;
+		$this->autosave = «autosave ? "true" : "false"»;
+	}
+	
+	public function constructArgs() {
+		return array(
+			// no args
+		);
+	}
+	
+	public function getOffset() {
+		throw new IamlDomainException("Cannot get the offset for a new object: " . get_class($this));		
+	}
+	
+	public function setOffset($value) {
+		throw new IamlDomainException("Cannot set the offset for a new object: " . get_class($this));
+	}
+
+	public function getNewInstanceID($key) {
+		«IF containingSession() != null»
+			$key2 = "new_object_«safeNameString(containingSession().id)-»_«safeNameString(id)-»";
+			if (has_session($key2)) {
+				return require_session($key2);
+			}
+			return null;
+		«ELSE»
+			$key2 = "new_object_«safeNameString(containingSession().id)-»_«safeNameString(id)-»";
+			if (get_application_value($key2, false) !== false) {
+				return get_application_value($key2, false);
+			}
+			return null;
+		«ENDIF»
+	}
+	
+	public function setNewInstanceID($key, $value) {
+		«IF containingSession() != null»
+			$key2 = "new_object_«safeNameString(containingSession().id)-»_«safeNameString(id)-»";
+			$_SESSION[$key2] = $value;
+		«ELSE»
+			$key2 = "new_object_«safeNameString(containingSession().id)-»_«safeNameString(id)-»";
+			set_application_value($key2, $value);
+		«ENDIF»
+	}	
+	«ENDLET»
+«ENDIF»
+	
+	// the current instance
+	static $instance = null;
+	public static function getInstance() {
+		if (self::$instance == null) {
+			self::$instance = new DomainIterator_«safeName()»();
+		}
+		return self::$instance;
+	}
+
+}
 «ENDDEFINE»
 
 /**

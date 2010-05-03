@@ -17,8 +17,8 @@
 	function get_attribute_instance_«safeName()»($default = false) {
 		«IF model::DomainObjectInstance.isInstance(eContainer)»
 			/* contained in an object instance '«eContainer»': get it from the instance */
-			$obj = get_object_instance_«safeName(eContainer)»();
-			return $obj["«attributeName(this)-»"];
+			$iterator = DomainIterator_«safeName(eContainer)»::getInstance();
+			return $iterator->getAttribute("«attributeName(this)-»")->getValue();
 		«ELSEIF !inWires.typeSelect(model::wires::NewInstanceWire).isEmpty»
 			/* sourced from a new instance wire */
 			return get_new_attribute_instance_«safeName()-»();
@@ -53,12 +53,8 @@
 	function has_attribute_instance_«safeName()»($default = false) {
 		«IF model::DomainObjectInstance.isInstance(eContainer)»
 			/* contained in an object instance '«eContainer»': get it from the instance */
-			if (has_object_instance_«safeName(eContainer)»()) {
-				$obj = get_object_instance_«safeName(eContainer)»();				
-				return isset($obj["«attributeName(this)-»"]);
-			} else {
-				return false;
-			}
+			$iterator = DomainIterator_«safeName(eContainer)»::getInstance();
+			return ($iterator->getAttribute("«attributeName(this)-»")->getValue() === null);
 		«ELSEIF !inWires.typeSelect(model::wires::NewInstanceWire).isEmpty»
 			/* sourced from a new instance wire */
 			return has_new_attribute_instance_«safeName()-»();

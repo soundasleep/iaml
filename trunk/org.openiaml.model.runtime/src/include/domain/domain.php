@@ -335,7 +335,7 @@ abstract class DomainIterator {
 
 			// try to prepare a query on the table name; if the table doesn't exist,
 			// this will not succeed
-			$db = new DatabaseQuery("sqlite:" . $this->source->getFile());
+			$db = new DatabaseQuery($this->source->getFile());
 			$query = "SELECT 1 FROM " . $schema->getTableName();
 			if ($db->tableExists($query)) {
 				// OK
@@ -345,7 +345,7 @@ abstract class DomainIterator {
 			log_message("[domain] Creating new schema '" . $schema->toString() . "'");
 
 			// we need to create the new table
-			$db = new DatabaseQuery("sqlite:" . $this->source->getFile());
+			$db = new DatabaseQuery($this->source->getFile());
 			$query = "CREATE TABLE " . $schema->getTableName();
 			$bits = array();
 			foreach ($schema->getAttributes() as $value) {
@@ -457,7 +457,7 @@ abstract class DomainIterator {
 					$args = array($this->getNewInstanceID($this->schema->getTableName()));
 
 					$obj = evaluate_select_wire(
-						"sqlite:" . $this->source->getFile(),
+						$this->source->getFile(),
 						$this->schema->getSourceID(),
 						$this->schema->getTableName(),
 						$query,
@@ -498,7 +498,7 @@ abstract class DomainIterator {
 			$args = $this->constructArgs();
 
 			$obj = evaluate_select_wire(
-				"sqlite:" . $this->source->getFile(),
+				$this->source->getFile(),
 				$this->schema->getSourceID(),
 				$this->schema->getTableName(),
 				$query,
@@ -593,7 +593,7 @@ abstract class DomainIterator {
 			throw new IamlDomainException("Could not find any primary key for schema " . $schema->toString());
 		}
 
-		$source = "sqlite:" . $this->source->getFile();
+		$source = $this->source->getFile();
 		$db = new DatabaseQuery($source);
 
 		// create new
@@ -670,7 +670,7 @@ abstract class DomainIterator {
 				throw new IamlDomainException("Cannot use a NULL schema primary key '" . $schema_pk->toString() . "': $schema_pk_value");
 			}
 
-			$source = "sqlite:" . $this->source->getFile();
+			$source = $this->source->getFile();
 			$db = new DatabaseQuery($source);
 			$query = "UPDATE " .
 				$target_schema->getTableName() .
@@ -793,7 +793,7 @@ abstract class DomainIterator {
 			$args = $this->constructArgs();
 
 			$obj = evaluate_select_wire_count(
-				"sqlite:" . $this->source->getFile(),
+				$this->source->getFile(),
 				$this->schema->getSourceID(),
 				$this->schema->getTableName(),
 				$query,

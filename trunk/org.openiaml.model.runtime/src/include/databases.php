@@ -218,6 +218,9 @@ function compose_domain_joins($source_id) {
 	$compose_domain_joins_done_already[] = $source_id;
 	
 	$all_joins = get_all_domain_joins();
+	if (!isset($all_joins[$source_id])) {
+		throw new IamlIllegalArgumentException("Could not find source ID '$source_id' in all joins (size = " . count($all_joins) . ")");
+	}
 	foreach ($all_joins[$source_id] as $target_id => $join_query) {
 		// don't repeat multiple inheritance joins
 		if (!in_array($target_id, $compose_domain_joins_done_already)) {

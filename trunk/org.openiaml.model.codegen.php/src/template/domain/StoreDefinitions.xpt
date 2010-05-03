@@ -16,7 +16,7 @@
 		function queue_store_domain_attribute_«safeName()»($arg0) {
 			«IF model::DomainObjectInstance.isInstance(eContainer)»
 				$iterator = DomainIterator_«safeName(eContainer)»::getInstance();
-				$iterator->getAttribute("«escapePhpString(name)»")->setValue($arg0);
+				$iterator->getAttribute("«safeNameString(name)»")->setValue($arg0);
 			«ELSE»
 				«throwException("Can't set queued value for non-contained attribute '" + this)»
 			«ENDIF»
@@ -26,8 +26,7 @@
 		function save_queued_store_domain_attribute_«safeName()»() {
 			«IF model::DomainObjectInstance.isInstance(eContainer)»
 				$iterator = DomainIterator_«safeName(eContainer)»::getInstance();
-				$attr_inst = $iterator->getAttribute("«escapePhpString(name)»");
-				$iterator->saveAttribute($attr_inst, $attr_inst->getValue());
+				$iterator->save();
 			«ELSE»
 				«throwException("Can't save queued value for non-contained attribute '" + this)»
 			«ENDIF»
@@ -168,7 +167,8 @@
 	
 	function save_queued_store_domain_object_«safeName()-»() {
 		/* save a queued domain object instance */
-		«EXPAND queuedDomainObjectStore FOREACH attributes»
+		$iterator = DomainIterator_«safeName()»::getInstance();
+		$iterator->save();
 	}
 	
 	/**
@@ -185,10 +185,6 @@
 		«ENDFOREACH»
 		return true;
 	}
-«ENDDEFINE»
-
-«DEFINE queuedDomainObjectStore FOR model::DomainAttributeInstance»
-	save_queued_store_domain_attribute_«safeNameString(id)-»(); /* attribute "«safeNameString(name)-»" */
 «ENDDEFINE»
 
 «DEFINE setNewDomainObject(model::wires::NewInstanceWire wire) FOR model::DomainObjectInstance-»

@@ -201,9 +201,12 @@ abstract class DomainIterator {
 
 	public function isAutosave() { return $this->autosave; }
 	public function isNew() { return $this->is_new; }
+	public function getSource() { return $this->source; }
 
 	/**
-	 * Get the DomainAttributeInstance of the given name.
+	 * Get the DomainAttributeInstance of the given name. Note that if two attributes
+	 * have the same name, this will not return both.
+	 * @see #getAttributeInstance()
 	 */
 	public function getAttribute($name) {
 		// possibly reload
@@ -240,6 +243,15 @@ abstract class DomainIterator {
 
 		// could not find any with the given name; fail
 		throw new IamlDomainException("Could not find a DomainAttribute for '" . $attribute->toString() . "'");
+	}
+
+	public function getAttributeInstances() {
+		// possibly reload
+		if ($this->current_result === null) {
+			$this->reload();
+		}
+
+		return $this->current_result;
 	}
 
 	/**
@@ -359,12 +371,19 @@ abstract class DomainIterator {
 				}
 				$f2 = $this->allAttributes($found);
 				foreach ($f2 as $k => $a) {
-					$result[] = $a;
+					// we only want unique attributes
+					if (array_search($a, $result, true) === false) {
+						$result[] = $a;
+					}
 				}
 			}
 
-			$result[] = $value;
+			// we only want unique attributes
+			if (array_search($value, $result, true) === false) {
+				$result[] = $value;
+			}
 		}
+
 		return $result;
 	}
 
@@ -524,7 +543,10 @@ abstract class DomainIterator {
 					log_message("Attribute " . $attribute->getName() . " set to value $new_id");
 
 					// update the FK
-					$this->getAttribute($attribute->getName())->setValueManually($new_id);
+					$this->getAttributeInstance($attribute)->setValueManually($new_id);
+				} else {
+					// update it to the current value
+					$this->getAttributeInstance($attribute)->setValueManually($this->getNewInstanceID($parent->getTableName()));
 				}
 			}
 		}
@@ -551,6 +573,9 @@ abstract class DomainIterator {
 		// the newly created ID
 		$new_id = $db_handle->lastInsertId($pk->getName());
 		$this->setNewInstanceID($schema->getTableName(), $new_id);
+
+		// update the current attribute instance
+		$this->getAttributeInstance($pk)->setValueManually($new_id);
 
 		return $new_id;
 	}
@@ -591,9 +616,9 @@ abstract class DomainIterator {
 			 	if ($this->getNewInstanceID($target_schema->getTableName()) === null) {
 					$new_id = $this->initialiseInstance($target_schema);
 					log_message("[domain] Set '$schema_pk_name' to new ID '$new_id'");
-					$this->getAttribute($schema_pk_name)->setValue($new_id);
+					$this->getAttributeInstance($schema_pk)->setValue($new_id);
 
-					if ($attrinst->getName() == $schema_pk_name) {
+					if ($attrinst === $schema_pk) {
 						// update the value directly
 						$attrinst->setValue($new_id);
 					}
@@ -601,8 +626,8 @@ abstract class DomainIterator {
 					// the new ID hasn't been saved yet in the instance; we need to
 					// update the attribute manually
 					$schema_pk_value = $this->getNewInstanceID($target_schema->getTableName());
-					if ($this->getAttribute($schema_pk_name)->getValue() != $schema_pk_value) {
-						$this->getAttribute($schema_pk_name)->setValue($schema_pk_value);
+					if ($this->getAttributeInstance($schema_pk)->getValue() != $schema_pk_value) {
+						$this->getAttributeInstance($schema_pk)->setValue($schema_pk_value);
 					}
 				}
 			}
@@ -824,6 +849,13 @@ class DomainAttributeInstance {
 	 */
 	public function setValueManually($value) {
 		$this->value = $value;
+	}
+
+	/**
+	 * Get the containing schema for this attribute instance.
+	 */
+	public function getContainingSchema() {
+		return $this->iterator->getSource()->findSchemaForAttribute($this->getDefinition());
 	}
 
 }

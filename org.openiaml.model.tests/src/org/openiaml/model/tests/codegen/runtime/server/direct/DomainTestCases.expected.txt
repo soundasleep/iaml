@@ -7,3 +7,6 @@
 [test 7] PASS
 [test 8] PASS
 [test 9] PASS
+[test 10] PASS
+[test 11] PASS
+[test 12] PASS

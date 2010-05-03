@@ -68,7 +68,7 @@
  */
 class DomainSchema_«safeName()» extends DomainSchema {
 	private function __construct() {
-		«FOREACH attributes AS a»
+		«FOREACH attributes.select(a2|a2.outExtendsEdges.to.typeSelect(model::DomainAttribute).select(a|!a.primaryKey).isEmpty) AS a»
 			$this->addAttribute(DomainAttribute_«safeName(a)»::getInstance());
 		«ENDFOREACH»
 		
@@ -89,6 +89,9 @@ class DomainSchema_«safeName()» extends DomainSchema {
 «ENDDEFINE»
 
 «DEFINE domainAttributeDefinition FOR model::DomainAttribute»
+«IF !outExtendsEdges.to.typeSelect(model::DomainAttribute).select(a|!a.primaryKey).isEmpty»
+	/* ignoring DomainAttribute '«escapeString(name)»': it is an extension of a non-primary key (i.e. derived) */
+«ELSE»
 /**
  * Domain Attribute '«escapeString(name)»'
  */
@@ -115,6 +118,7 @@ class DomainAttribute_«safeName()» extends DomainAttribute {
 	}
 	
 }
+«ENDIF»
 «ENDDEFINE»
 
 «DEFINE domainSourceDefinition FOR model::DomainStore»
@@ -174,7 +178,7 @@ class DomainIterator_«safeName()» extends DomainIterator {
 	}
 	
 	public function constructArgs() {
-		return array(«EXPAND template::operations::Parameters::callParameter(true, false, true) FOREACH inParameterEdges SEPARATOR ","»);
+		return array(«EXPAND template::operations::Parameters::callParameter(true, false, true) FOREACH wire.inParameterEdges SEPARATOR ","»);
 	}
 	
 	public function getOffset() {
@@ -246,9 +250,43 @@ class DomainIterator_«safeName()» extends DomainIterator {
 			$key2 = "new_object_«safeNameString(containingSession().id)-»_«safeNameString(id)-»";
 			set_application_value($key2, $value);
 		«ENDIF»
-	}	
+	}
 	«ENDLET»
 «ENDIF»
+
+	«IF containingSession() != null»
+	/**
+	 * Note that PHP's <code>is_set()</code> returns <code>false</code> for variables that are set to <code>NULL</code>
+	 */
+	public function getStoredValue($key, $default = null) {
+		$target_key = "stored_value_«safeName()-»_" . $key;
+		if (has_session($_SESSION[$target_key])) {
+			return require_session($_SESSION[$target_key]);
+		}
+		return $default;
+	}
+
+	public function setStoredValue($key, $value) {
+		$target_key = "stored_value_«safeName()-»_" . $key;
+		$_SESSION[$target_key] = $value;
+	}
+	«ELSE»
+	/**
+	 * Note that PHP's <code>is_set()</code> returns <code>false</code> for variables that are set to <code>NULL</code>
+	 */
+	public function getStoredValue($key, $default = null) {
+		$target_key = "stored_value_«safeName()-»_" . $key;
+		if (get_application_value($target_key, false) !== false) {
+			return get_application_value($target_key, false);
+		}
+		return $default;
+	}
+
+	public function setStoredValue($key, $value) {
+		$target_key = "stored_value_«safeName()-»_" . $key;
+		set_application_value($target_key, $value);
+	}
+	«ENDIF»
 	
 	// the current instance
 	static $instance = null;

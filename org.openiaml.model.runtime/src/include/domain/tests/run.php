@@ -69,7 +69,7 @@ class DomainSource_NewsDB extends DomainSource {
 	private function __construct() {
 		$this->schemas = array(DomainSchema_News::getInstance());
 		$this->type = 'RELATIONAL_DB';
-		$this->file = '1kg992k6t4.db';
+		$this->file = 'sqlite:1kg992k6t4.db';
 	}
 
 	// the current instance

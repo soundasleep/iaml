@@ -4,7 +4,7 @@
 // and a new source for this schema
 
 class DomainSchema_Posts extends DomainSchema {
-	
+
 	private function __construct() {
 		$this->attributes = array(
 			"generated_primary_key" => DomainAttribute_Post_Id::getInstance(),
@@ -22,7 +22,7 @@ class DomainSchema_Posts extends DomainSchema {
 		}
 		return self::$instance;
 	}
-	
+
 }
 
 class DomainAttribute_Post_Id extends DomainAttribute {
@@ -31,7 +31,7 @@ class DomainAttribute_Post_Id extends DomainAttribute {
 		$this->type = 'iamlInteger';
 		$this->name = "generated_primary_key";
 	}
-	
+
 	// the current instance
 	static $instance = null;
 	public static function getInstance() {
@@ -40,7 +40,7 @@ class DomainAttribute_Post_Id extends DomainAttribute {
 		}
 		return self::$instance;
 	}
-	
+
 }
 
 class DomainAttribute_Post_Content extends DomainAttribute {
@@ -49,7 +49,7 @@ class DomainAttribute_Post_Content extends DomainAttribute {
 		$this->type = 'iamlString';
 		$this->name = "content";
 	}
-	
+
 	// the current instance
 	static $instance = null;
 	public static function getInstance() {
@@ -62,11 +62,11 @@ class DomainAttribute_Post_Content extends DomainAttribute {
 
 // and define the source for it
 class DomainSource_PostsDB extends DomainSource {
-	
+
 	private function __construct() {
 		$this->schemas = array(DomainSchema_Posts::getInstance());
 		$this->type = 'RELATIONAL_DB';
-		$this->file = '1kg992k6t4.db';		// it can be in the same DB
+		$this->file = 'sqlite:1kg992k6t4.db';		// it can be in the same DB
 	}
 
 	// the current instance
@@ -92,7 +92,7 @@ class DomainIterator_Posts_1mkm131xzz extends DomainIterator {
 		$this->autosave = true;
 		$this->is_new = true;
 	}
-	
+
 	// the current instance
 	static $instance = null;
 	public static function getInstance() {
@@ -101,33 +101,33 @@ class DomainIterator_Posts_1mkm131xzz extends DomainIterator {
 		}
 		return self::$instance;
 	}
-	
+
 	public function constructArgs() {
 		return array(
 			// no args
 		);
 	}
-	
+
 	public function getOffset() {
 		throw new IamlDomainException("Cannot get the offset for a new object: " . get_class($this));
 	}
-	
+
 	public function setOffset($value) {
 		throw new IamlDomainException("Cannot set the offset for a new object: " . get_class($this));
 	}
-	
+
 	public function getNewInstanceID($key) {
 		if (!isset($_SESSION["newid2_$key"]) || $_SESSION["newid2_$key"] === null) {
 			return null;
 		}
-		
+
 		return $_SESSION["newid2_$key"];
 	}
-	
+
 	public function setNewInstanceID($key, $id) {
 		$_SESSION["newid2_$key"] = $id;
 	}
-	
+
 }
 
 function printit2($instance) {
@@ -142,26 +142,26 @@ ob_start();
 {
 	// get the current instance
 	$instance = DomainIterator_Posts_1mkm131xzz::getInstance();
-	
+
 	// print it out
 	echo "1:\n";
 	printit2($instance->toArray());
-	
+
 	// set some values
 	$instance->getAttribute('content')->setValue("new content");
 	echo "2:\n";
 	printit2($instance->toArray());
-	
+
 	// don't save it manually (but autosave = true, so it's already saved)
 	$instance->reload();
 	echo "3:\n";
 	printit2($instance->toArray());
-	
+
 	// set it again
 	$instance->getAttribute('content')->setValue("another content");
 	echo "4:\n";
 	printit2($instance->toArray());
-	
+
 	// save it manually; makes no difference, already saved
 	$instance->save();
 	echo "5:\n";
@@ -171,22 +171,22 @@ ob_start();
 	$instance->reload();
 	echo "6:\n";
 	printit2($instance->toArray());
-	
+
 	// create a new one
 	$instance->createNew();
 	echo "7:\n";
 	printit2($instance->toArray());
-	
+
 	// set it
 	$instance->getAttribute('content')->setValue("a new content");
 	echo "8:\n";
 	printit2($instance->toArray());
-	
+
 	// save it
 	$instance->save();
 	echo "9:\n";
-	printit2($instance->toArray());		
-		
+	printit2($instance->toArray());
+
 }
 
 $result = ob_get_contents();

@@ -3,7 +3,7 @@
 // here we define some inheritance structures, and new schemas
 
 class DomainSchema_Users extends DomainSchema {
-	
+
 	private function __construct() {
 		$this->attributes = array(
 			"user_id" => DomainAttribute_User_Id::getInstance(),
@@ -21,12 +21,12 @@ class DomainSchema_Users extends DomainSchema {
 		}
 		return self::$instance;
 	}
-	
+
 }
 
 // Admin extends User
 class DomainSchema_Admins extends DomainSchema {
-	
+
 	private function __construct() {
 		$this->attributes = array(
 			"admin_id" => DomainAttribute_Admin_Id::getInstance(),
@@ -45,12 +45,12 @@ class DomainSchema_Admins extends DomainSchema {
 		}
 		return self::$instance;
 	}
-	
+
 }
 
 // and SuperAdmin extends Admin, but adds no new data
 class DomainSchema_SuperAdmins extends DomainSchema {
-	
+
 	private function __construct() {
 		$this->attributes = array(
 			"super_id" => DomainAttribute_SuperAdmin_Id::getInstance(),
@@ -67,7 +67,7 @@ class DomainSchema_SuperAdmins extends DomainSchema {
 		}
 		return self::$instance;
 	}
-	
+
 }
 
 class DomainAttribute_User_Id extends DomainAttribute {
@@ -76,7 +76,7 @@ class DomainAttribute_User_Id extends DomainAttribute {
 		$this->type = 'iamlInteger';
 		$this->name = "user_id";
 	}
-	
+
 	// the current instance
 	static $instance = null;
 	public static function getInstance() {
@@ -85,7 +85,7 @@ class DomainAttribute_User_Id extends DomainAttribute {
 		}
 		return self::$instance;
 	}
-	
+
 }
 
 class DomainAttribute_User_Email extends DomainAttribute {
@@ -94,7 +94,7 @@ class DomainAttribute_User_Email extends DomainAttribute {
 		$this->type = 'iamlEmail';
 		$this->name = "email";
 	}
-	
+
 	// the current instance
 	static $instance = null;
 	public static function getInstance() {
@@ -111,7 +111,7 @@ class DomainAttribute_Admin_Id extends DomainAttribute {
 		$this->type = 'iamlInteger';
 		$this->name = "admin_id";
 	}
-	
+
 	// the current instance
 	static $instance = null;
 	public static function getInstance() {
@@ -120,7 +120,7 @@ class DomainAttribute_Admin_Id extends DomainAttribute {
 		}
 		return self::$instance;
 	}
-	
+
 }
 
 class DomainAttribute_Admin_Name extends DomainAttribute {
@@ -129,7 +129,7 @@ class DomainAttribute_Admin_Name extends DomainAttribute {
 		$this->type = 'iamlString';
 		$this->name = "name";
 	}
-	
+
 	// the current instance
 	static $instance = null;
 	public static function getInstance() {
@@ -146,10 +146,10 @@ class DomainAttribute_Admin_User_Id extends DomainAttribute {
 		$this->isPrimaryKey = false;
 		$this->type = 'iamlInteger';
 		$this->name = "admin_user_id";
-		
+
 		$this->extends = DomainAttribute_User_Id::getInstance();
 	}
-	
+
 	// the current instance
 	static $instance = null;
 	public static function getInstance() {
@@ -158,7 +158,7 @@ class DomainAttribute_Admin_User_Id extends DomainAttribute {
 		}
 		return self::$instance;
 	}
-	
+
 }
 
 class DomainAttribute_SuperAdmin_Id extends DomainAttribute {
@@ -167,7 +167,7 @@ class DomainAttribute_SuperAdmin_Id extends DomainAttribute {
 		$this->type = 'iamlInteger';
 		$this->name = "super_id";
 	}
-	
+
 	// the current instance
 	static $instance = null;
 	public static function getInstance() {
@@ -176,12 +176,12 @@ class DomainAttribute_SuperAdmin_Id extends DomainAttribute {
 		}
 		return self::$instance;
 	}
-	
+
 }
 
 // and define the source for it
 class DomainSource_AdminsDB extends DomainSource {
-	
+
 	private function __construct() {
 		$this->schemas = array(
 			DomainSchema_Users::getInstance(),
@@ -189,7 +189,7 @@ class DomainSource_AdminsDB extends DomainSource {
 			DomainSchema_SuperAdmins::getInstance(),
 		);
 		$this->type = 'RELATIONAL_DB';
-		$this->file = 'admins.db';
+		$this->file = 'sqlite:admins.db';
 	}
 
 	// the current instance
@@ -215,7 +215,7 @@ class DomainIterator_AdminNewIterator extends DomainIterator {
 		$this->autosave = true;
 		$this->is_new = true;
 	}
-	
+
 	// the current instance
 	static $instance = null;
 	public static function getInstance() {
@@ -224,34 +224,34 @@ class DomainIterator_AdminNewIterator extends DomainIterator {
 		}
 		return self::$instance;
 	}
-	
+
 	public function constructArgs() {
 		return array(
 			// no args
 		);
 	}
-	
+
 	public function getOffset() {
 		throw new IamlDomainException("Cannot get the offset for a new object: " . get_class($this));
 	}
-	
+
 	public function setOffset($value) {
 		throw new IamlDomainException("Cannot set the offset for a new object: " . get_class($this));
 	}
-	
+
 	public function getNewInstanceID($key) {
 		if (!isset($_SESSION["newid3_$key"]) || $_SESSION["newid3_$key"] === null) {
 			return null;
 		}
-		
+
 		return $_SESSION["newid3_$key"];
 	}
-	
+
 	public function setNewInstanceID($key, $id) {
 		log_message("[test6] Set new instance ID '$key' to '$id'");
 		$_SESSION["newid3_$key"] = $id;
 	}
-	
+
 }
 
 function printit3($instance) {
@@ -272,11 +272,11 @@ ob_start();
 {
 	// get the current instance
 	$instance = DomainIterator_AdminNewIterator::getInstance();
-	
+
 	// print it out
 	echo "1:\n";
 	printit3($instance->toArray());
-	
+
 	// set some values
 	$instance->getAttribute('email')->setValue("test@openiaml.org");
 	echo "2:\n";
@@ -285,18 +285,18 @@ ob_start();
 	$instance->getAttribute('name')->setValue("Test User");
 	echo "3:\n";
 	printit3($instance->toArray());
-	
+
 	// don't save it manually (but autosave = true, so it's already saved)
 	// this should just reload the same instance
 	$instance->reload();
 	echo "4:\n";
 	printit3($instance->toArray());
-	
+
 	// set it again
 	$instance->getAttribute('email')->setValue("another@openiaml.org");
 	echo "5:\n";
 	printit3($instance->toArray());
-	
+
 	// save it manually; makes no difference, already saved
 	$instance->save();
 	echo "6:\n";
@@ -306,22 +306,22 @@ ob_start();
 	$instance->reload();
 	echo "7:\n";
 	printit3($instance->toArray());
-	
+
 	// create a new one
 	$instance->createNew();
 	echo "8:\n";
 	printit3($instance->toArray());
-	
+
 	// set it
 	$instance->getAttribute('name')->setValue("Changed Name");
 	echo "9:\n";
 	printit3($instance->toArray());
-	
+
 	// save it
 	$instance->save();
 	echo "9:\n";
 	printit3($instance->toArray());
-		
+
 }
 
 $result = ob_get_contents();

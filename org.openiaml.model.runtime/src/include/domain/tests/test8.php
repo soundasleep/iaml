@@ -173,7 +173,7 @@ class DomainSource_AdminsDBWithStudents extends DomainSource {
       DomainSchema_StudentAdmins::getInstance(),
     );
     $this->type = 'RELATIONAL_DB';
-    $this->file = 'admins.db';
+    $this->file = 'sqlite:admins.db';
   }
 
   // the current instance

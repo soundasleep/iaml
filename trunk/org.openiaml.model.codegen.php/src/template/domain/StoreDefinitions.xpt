@@ -14,30 +14,22 @@
 		«IF isAutosaveOff(this)»
 		/* for elements with 'autosave' off */
 		function queue_store_domain_attribute_«safeName()»($arg0) {
-			/* queue store a value into attribute id '«id»' */
-			«IF containingSession(this) != null»
-				$_SESSION["instance_queue_«safeName(containingSession())-»_«safeName()-»"] = $arg0;
+			«IF model::DomainObjectInstance.isInstance(eContainer)»
+				$iterator = DomainIterator_«safeName(eContainer)»::getInstance();
+				$iterator->getAttribute("«escapePhpString(name)»")->setValue($arg0);
 			«ELSE»
-				set_application_value("instance_queue_«safeName()-»", $arg0);
+				«throwException("Can't set queued value for non-contained attribute '" + this)»
 			«ENDIF»
 		}
 		
+		/* execute the actual save for attribute id '«id»' */
 		function save_queued_store_domain_attribute_«safeName()»() {
-			/* execute the actual save for attribute id '«id»' */
-			«IF containingSession(this) != null»
-				/* contained within a session */
-				$arg0 = has_session("instance_queue_«safeName(containingSession())-»_«safeName()-»", false);
-				if ($arg0 !== false) {
-					// lets set it
-					store_domain_attribute_«safeName()-»($arg0);
-				}
+			«IF model::DomainObjectInstance.isInstance(eContainer)»
+				$iterator = DomainIterator_«safeName(eContainer)»::getInstance();
+				$attr_inst = $iterator->getAttribute("«escapePhpString(name)»");
+				$iterator->saveAttribute($attr_inst, $attr_inst->getValue());
 			«ELSE»
-				/* contained within a frame */
-				$arg0 = get_application_value("instance_queue_«safeName()-»", false);
-				if ($arg0 !== false) {
-					// lets set it
-					store_domain_attribute_«safeName()-»($arg0);
-				}
+				«throwException("Can't save queued value for non-contained attribute '" + this)»
 			«ENDIF»
 		}
 		
@@ -93,13 +85,8 @@
 			/* store a value into attribute id '«id»' */
 			«IF model::DomainObjectInstance.isInstance(eContainer)»
 				/* contained in an object instance '«eContainer»': get it from the instance */
-				«IF outExtendsEdges.to.typeSelect(model::DomainAttribute).select(a|!a.primaryKey).outExtendsEdges.to.typeSelect(model::DomainAttribute).select(a|a.primaryKey).isEmpty»
-					store_object_instance_«safeName(eContainer)»("«safeNameString(name)-»", $arg0);
-					object_instance_onChange_«safeName(eContainer)»();
-				«ELSE»
-					// TODO I think this is a local foreign key to a remote public key, and we do not support modifying foreign keys yet
-					// TODO this implementation needs to be rewritten
-				«ENDIF»
+				$iterator = DomainIterator_«safeName(eContainer)»::getInstance();
+				$iterator->getAttribute("«escapePhpString(name)»")->setValue($arg0);
 			«ELSE»
 				/* not contained in an object instance; select it manually */
 				«IF inWires.typeSelect(model::wires::SelectWire).isEmpty»

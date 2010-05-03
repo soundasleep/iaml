@@ -24,7 +24,11 @@
 
 «DEFINE remoteValue(boolean php, boolean require, model::Property property) FOR model::DomainAttributeInstance»
 	«IF php»
-		get_attribute_instance_«safeName()-»()
+		«IF model::DomainObjectInstance.isInstance(eContainer)»
+			DomainIterator_«safeName(eContainer)»::getInstance()->getAttribute("«escapePhpString(name)»")->getValue()
+		«ELSE»
+			get_attribute_instance_«safeName()-»()
+		«ENDIF»
 	«ELSE»
 		"<?php echo htmlspecialchars(get_attribute_instance_«safeName()-»()); ?>"
 	«ENDIF»

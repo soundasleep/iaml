@@ -48,6 +48,7 @@ require("emails.php");
 require("maps.php");
 require("properties.php");
 require("open_id.php");
+require("domain/domain.php");
 
 $log_unique_id = sprintf("%04x", rand(0,0xffff)) . "-" . session_id();
 function log_message($msg, $also_debug = true) {

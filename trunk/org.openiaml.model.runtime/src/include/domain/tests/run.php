@@ -117,8 +117,9 @@ require("test4.php");
 require("test5.php");
 require("test6.php");
 require("test7.php");
-//$enable = true;	// for debug
 require("test8.php");
+//$enable = true;	// for debug
+require("test9.php");
 
 function clean_newlines($s) {
 	$s = str_replace("\r\n", "\n", $s);

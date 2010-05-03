@@ -54,7 +54,7 @@
 		«IF model::DomainObjectInstance.isInstance(eContainer)»
 			/* contained in an object instance '«eContainer»': get it from the instance */
 			$iterator = DomainIterator_«safeName(eContainer)»::getInstance();
-			return ($iterator->getAttribute("«attributeName(this)-»")->getValue() === null);
+			return !$iterator->isEmpty() && ($iterator->getAttribute("«attributeName(this)-»")->getValue() !== null);
 		«ELSEIF !inWires.typeSelect(model::wires::NewInstanceWire).isEmpty»
 			/* sourced from a new instance wire */
 			return has_new_attribute_instance_«safeName()-»();
@@ -191,40 +191,17 @@
 	}
 
 	/**
-	 * Get the domain object instance '«id»'.
+	 * Get the domain object instance '«id»' as a basic associative array. 
 	 * If a {@model RemoteDomainObject}, this may refresh the remote data source.
 	 */
 	function get_object_instance_«safeName()»($default = false) {
-		«IF inWires.typeSelect(model::wires::SelectWire).isEmpty»
-			«IF inWires.typeSelect(model::wires::NewInstanceWire).isEmpty»
-				throw new IamlRuntimeException("No selection or new instance wires exist for object instance '«id»'");
-			«ELSE»
-				// return a "new" object
-				return get_new_domain_object_«safeName()-»(«IF isAutosaveOff()»false«ENDIF»);
-			«ENDIF»
-		«ELSE»
-			«LET inWires.typeSelect(model::wires::SelectWire).first() AS selectWire»
-			«IF model::DomainObject.isInstance(selectWire.from)»
-				«IF model::domain::RemoteDomainObject.isInstance(selectWire.from)»
-					// possibly update the domain object this instance is contained in
-					«EXPAND RemoteDefinitions::considerUpdate FOR (model::domain::RemoteDomainObject) selectWire.from»
-				«ENDIF»
-				$offset = get_current_offset_«safeName()»();
-				«EXPAND Select::evaluateSelectWire(true, true) FOR selectWire»
-				object_instance_onChange_«safeName()»();
-				if ($row === null) {
-					if ($default !== false) {
-						return $default;
-					} else {
-						throw new IamlRuntimeException("No results found for query '$query'");
-					}
-				}
-				return $row;
-			«ELSE»
-				«throwException("Cannot SelectWire from a non-DomainObject")»
-			«ENDIF»
-			«ENDLET»
-		«ENDIF»
+		$iterator = DomainIterator_«safeName()»::getInstance();
+		$result = $iterator->toArray();
+		$basic = array();
+		foreach ($result as $key => $inst) {
+			$basic[$key] = $inst->getValue();
+		}
+		return $basic;
 	}
 		
 	/**
@@ -232,29 +209,8 @@
 	 * If a {@model RemoteDomainObject}, this may refresh the remote data source.
 	 */
 	function get_instance_count_«safeName()»() {
-		«IF inWires.typeSelect(model::wires::SelectWire).isEmpty»
-			«IF inWires.typeSelect(model::wires::NewInstanceWire).isEmpty»
-				throw new IamlRuntimeException("No selection or new instance wires exist for object instance '«id»'");
-			«ELSE»
-				// 'new' means there is always one available
-				return 1;
-			«ENDIF»
-		«ELSE»
-			«LET inWires.typeSelect(model::wires::SelectWire).first() AS selectWire»
-				«IF model::domain::RemoteDomainObject.isInstance(selectWire.from)»
-					// possibly update the domain object this instance is contained in
-					«EXPAND RemoteDefinitions::considerUpdate FOR (model::domain::RemoteDomainObject) selectWire.from»
-				«ENDIF»
-	
-				// if there are NO results yet, don't crash
-				if (!has_object_instance_«safeName()»())
-					return 0;
-	
-				// will select count directly into $row	
-				«EXPAND Select::evaluateSelectWireCount(true) FOR selectWire»
-				return $row;
-			«ENDLET»
-		«ENDIF»
+		$iterator = DomainIterator_«safeName()»::getInstance();
+		return $iterator->count();
 	}
 	
 	/**
@@ -264,27 +220,8 @@
 	 * Returns true or false.
 	 */
 	function has_object_instance_«safeName()»($default = false) {
-		«IF inWires.typeSelect(model::wires::SelectWire).isEmpty»
-			«IF inWires.typeSelect(model::wires::NewInstanceWire).isEmpty»
-				throw new IamlRuntimeException("No selection or new instance wires exist for checking object instance '«id»'");
-			«ELSE»
-				return has_new_domain_object_«safeName()-»();
-			«ENDIF»
-		«ELSE»
-			«LET inWires.typeSelect(model::wires::SelectWire).first() AS selectWire»
-				«IF model::domain::RemoteDomainObject.isInstance(selectWire.from)»
-					// possibly update the domain object this instance is contained in
-					«EXPAND RemoteDefinitions::considerUpdate FOR (model::domain::RemoteDomainObject) selectWire.from»
-				«ENDIF»
-				
-				$offset = get_current_offset_«safeName()»();
-				«EXPAND Select::evaluateSelectWire(false, true) FOR selectWire»
-				if ($row === null) {
-					return false;
-				}
-				return true;
-			«ENDLET»
-		«ENDIF»
+		$iterator = DomainIterator_«safeName()»::getInstance();
+		return !$iterator->isEmpty();
 	}
 	
 	/**
@@ -292,24 +229,8 @@
 	 * a new one.
 	 */
 	function new_domain_instance_«safeName()»($default = false) {
-		«IF inWires.typeSelect(model::wires::NewInstanceWire).isEmpty»
-			throw new IamlRuntimeException("No new instance wires exist for object instance '«id»'");
-		«ELSE»
-			// reset the current session instance
-			// (future calls will create the new instance)
-			// (this also handles autosave=off)
-			log_message("Resetting new object instance 'new_object_«safeNameString(containingSession().id)»_«safeNameString(id)-»')");
-			unset($_SESSION['new_object_«safeNameString(containingSession().id)-»_«safeNameString(id)-»']);
-			
-			// return the current session object (i.e. the new object)
-			return get_new_domain_object_«safeName()-»(«IF isAutosaveOff()»false«ENDIF»);
-		«ENDIF»
-	}
-
-	/* Does the DomainObjectInstance '«id»' exist? */
-	function exists_object_instance_«safeName()»() {
-		/* return get_object_instance_«safeName()»(0) !== 0; */
-		return has_object_instance_«safeName()»();
+		$iterator = DomainIterator_«safeName()»::getInstance();
+		$iterator->createNew();
 	}
 
 	«IF !inWires.typeSelect(model::wires::NewInstanceWire).isEmpty»

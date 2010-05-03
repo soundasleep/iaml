@@ -7,6 +7,26 @@
 require("../domain.php");
 require("../../databases.php");
 
+abstract class DefaultDomainIterator extends DomainIterator {
+
+	/**
+	 * Note that PHP's <code>is_set()</code> returns <code>false</code> for variables that are set to <code>NULL</code>
+	 */
+	public function getStoredValue($key, $default = null) {
+		$target_key = get_class($this) . "_" . $key;
+		if (isset($_SESSION[$target_key])) {
+			return $_SESSION[$target_key];
+		}
+		return $default;
+	}
+
+	public function setStoredValue($key, $value) {
+		$target_key = get_class($this) . "_" . $key;
+		$_SESSION[$target_key] = $value;
+	}
+
+}
+
 class DomainSchema_News extends DomainSchema {
 
 	private function __construct() {
@@ -122,6 +142,7 @@ require("test8.php");
 require("test9.php");
 require("test10.php");
 require("test11.php");
+require("test12.php");
 
 function clean_newlines($s) {
 	$s = str_replace("\r\n", "\n", $s);

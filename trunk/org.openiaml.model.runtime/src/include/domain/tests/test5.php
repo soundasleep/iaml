@@ -81,7 +81,7 @@ class DomainSource_PostsDB extends DomainSource {
 }
 
 // now define an iterator that is new, and autosaves
-class DomainIterator_Posts_1mkm131xzz extends DomainIterator {
+class DomainIterator_Posts_1mkm131xzz extends DefaultDomainIterator {
 
 	private function __construct() {
 		$this->schema = DomainSchema_Posts::getInstance();

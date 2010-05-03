@@ -1,6 +1,6 @@
 <?php
 
-class DomainIterator_News_5i92kg92 extends DomainIterator {
+class DomainIterator_News_5i92kg92 extends DefaultDomainIterator {
 
 	private function __construct() {
 		$this->schema = DomainSchema_News::getInstance();
@@ -40,6 +40,19 @@ class DomainIterator_News_5i92kg92 extends DomainIterator {
 
 	public function setNewInstanceID($key, $id) {
 		throw new IamlDomainException("Cannot set the new instance ID for a non-new object: " . get_class($this));
+	}
+
+	public function getStoredValue($key, $default = false) {
+		$target_key = get_class($this) . "_" . $key;
+		if (isset($_SESSION[$target_key])) {
+			return $_SESSION[$target_key];
+		}
+		return $default;
+	}
+
+	public function setStoredValue($key, $value) {
+		$target_key = get_class($this) . "_" . $key;
+		$_SESSION[$target_key] = $value;
 	}
 
 }

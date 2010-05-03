@@ -1,9 +1,9 @@
 <?php
 
 // uses the Test6 schema and source, but defines an
-// iterator that does not autosave
+// iterator that does not autosave, yet persists over sessions
 
-class DomainIterator_AdminNewIterator2 extends DefaultDomainIterator {
+class DomainIterator_AdminNewIteratorPersists extends DefaultDomainIterator {
 
 	private function __construct() {
 		$this->schema = DomainSchema_Admins::getInstance();
@@ -19,9 +19,14 @@ class DomainIterator_AdminNewIterator2 extends DefaultDomainIterator {
 	static $instance = null;
 	public static function getInstance() {
 		if (self::$instance == null) {
-			self::$instance = new DomainIterator_AdminNewIterator2();
+			self::$instance = new DomainIterator_AdminNewIteratorPersists();
 		}
 		return self::$instance;
+	}
+
+	// reset the instance
+	public static function resetInstance() {
+		self::$instance = null;
 	}
 
 	public function constructArgs() {
@@ -55,13 +60,16 @@ class DomainIterator_AdminNewIterator2 extends DefaultDomainIterator {
 
 {
 	// don't reset database!
+
+	// but reset the session
+	$_SESSION = array();
 }
 
-echo "[test 7] ";
+echo "[test 12] ";
 ob_start();
 {
 	// get the current instance
-	$instance = DomainIterator_AdminNewIterator2::getInstance();
+	$instance = DomainIterator_AdminNewIteratorPersists::getInstance();
 
 	// print it out
 	echo "1:\n";
@@ -69,24 +77,31 @@ ob_start();
 
 	// set some values
 	$instance->getAttribute('email')->setValue("test@openiaml.org");
-	echo "2:\n";
-	printit3($instance->toArray());
-
 	$instance->getAttribute('name')->setValue("Test User");
-	echo "3:\n";
+	echo "2:\n";
 	printit3($instance->toArray());
 
 	// reload it; it's not autosaved, so the content is lost
 	$instance->reload();
-	echo "4:\n";
+	echo "3:\n";
 	printit3($instance->toArray());
 
 	// set it again
 	$instance->getAttribute('email')->setValue("another@openiaml.org");
+	$instance->getAttribute('name')->setValue("Another User");
+	echo "4:\n";
+	printit3($instance->toArray());
+
+	// reload the entire instance
+	$instance = null;
+	DomainIterator_AdminNewIteratorPersists::resetInstance();
+	$instance = DomainIterator_AdminNewIteratorPersists::getInstance();
+
+	// it should still all be there
 	echo "5:\n";
 	printit3($instance->toArray());
 
-	// save it manually; this now populates the PK fields etc
+	// save it manually
 	$instance->save();
 	echo "6:\n";
 	printit3($instance->toArray());
@@ -101,13 +116,11 @@ ob_start();
 	echo "8:\n";
 	printit3($instance->toArray());
 
-	// set it
-	$instance->getAttribute('name')->setValue("Changed Name");
-	echo "9:\n";
-	printit3($instance->toArray());
+	// reload the entire instance
+	$instance = null;
+	DomainIterator_AdminNewIteratorPersists::resetInstance();
+	$instance = DomainIterator_AdminNewIteratorPersists::getInstance();
 
-	// save it
-	$instance->save();
 	echo "9:\n";
 	printit3($instance->toArray());
 
@@ -117,7 +130,7 @@ $result = ob_get_contents();
 ob_end_clean();
 
 // check the results are as expected
-$expected = file_get_contents("expected7.txt");
+$expected = file_get_contents("expected12.txt");
 
 // clean out newlines etc
 $result = clean_newlines($result);

@@ -1,7 +1,7 @@
 <?php
 
 // an iterator that has a limit set
-class DomainIterator_News_Limited extends DomainIterator {
+class DomainIterator_News_Limited extends DefaultDomainIterator {
 
   private function __construct() {
     $this->schema = DomainSchema_News::getInstance();

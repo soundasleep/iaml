@@ -3,7 +3,7 @@
 // here, we use the same inheritance structures in test8, but we define
 // an iterator that we can edit with
 
-class DomainIterator_StudentAdminNewEditor extends DomainIterator {
+class DomainIterator_StudentAdminNewEditor extends DefaultDomainIterator {
 
 	private function __construct() {
 		$this->schema = DomainSchema_StudentAdmins::getInstance();

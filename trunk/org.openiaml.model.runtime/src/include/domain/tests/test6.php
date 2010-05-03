@@ -204,7 +204,7 @@ class DomainSource_AdminsDB extends DomainSource {
 }
 
 // now define an iterator that is new, and autosaves
-class DomainIterator_AdminNewIterator extends DomainIterator {
+class DomainIterator_AdminNewIterator extends DefaultDomainIterator {
 
 	private function __construct() {
 		$this->schema = DomainSchema_Admins::getInstance();

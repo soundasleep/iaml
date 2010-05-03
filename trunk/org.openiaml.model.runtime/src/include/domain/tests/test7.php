@@ -8,7 +8,7 @@ class DomainIterator_AdminNewIterator2 extends DomainIterator {
 	private function __construct() {
 		$this->schema = DomainSchema_Admins::getInstance();
 		$this->source = DomainSource_AdminsDB::getInstance();
-		$this->order_by = "";
+		$this->order_by = null;
 		$this->order_ascending = true;
 		$this->query = "";
 		$this->autosave = false;

@@ -6,12 +6,12 @@ class DomainIterator_News_ergqa3bdfbd extends DomainIterator {
 	private function __construct() {
 		$this->schema = DomainSchema_News::getInstance();
 		$this->source = DomainSource_NewsDB::getInstance();
-		$this->order_by = "";
+		$this->order_by = null;
 		$this->order_ascending = true;
 		$this->query = "1";
 		$this->autosave = false;
 	}
-	
+
 	// the current instance
 	static $instance = null;
 	public static function getInstance() {
@@ -20,20 +20,20 @@ class DomainIterator_News_ergqa3bdfbd extends DomainIterator {
 		}
 		return self::$instance;
 	}
-	
+
 	public function constructArgs() {
 		return array(
 			// no args
 		);
 	}
-	
+
 	public function getOffset() {
 		if (!isset($_SESSION["offset3"])) {
 			$this->setOffset(0);
 		}
 		return $_SESSION["offset3"];
 	}
-	
+
 	public function setOffset($value) {
 		$_SESSION["offset3"] = $value;
 	}
@@ -41,11 +41,11 @@ class DomainIterator_News_ergqa3bdfbd extends DomainIterator {
 	public function getNewInstanceID($key) {
 		throw new IamlDomainException("Cannot get the new instance ID for a non-new object: " . get_class($this));
 	}
-	
+
 	public function setNewInstanceID($key, $id) {
 		throw new IamlDomainException("Cannot set the new instance ID for a non-new object: " . get_class($this));
 	}
-	
+
 }
 
 echo "[test 3] ";
@@ -56,14 +56,14 @@ ob_start();
 
 	$instance = $iterator->toArray();
 	printit($instance);
-	
+
 	// iterate over all others
 	while ($iterator->hasNext()) {
 		$instance = $iterator->next();
-		
+
 		printit($instance);
 	}
-	
+
 	// print out the result count
 	echo "results = " . $iterator->count();
 }

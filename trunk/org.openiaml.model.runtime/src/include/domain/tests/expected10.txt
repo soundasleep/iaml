@@ -1,0 +1,15 @@
+News.id: 1
+News.title: hello
+next
+News.id: 2
+News.title: world
+next
+News.id: 3
+News.title: new title
+previous
+News.id: 2
+News.title: world
+previous
+News.id: 1
+News.title: hello
+end

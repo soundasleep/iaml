@@ -5,12 +5,12 @@ class DomainIterator_News_5i92kg92 extends DomainIterator {
 	private function __construct() {
 		$this->schema = DomainSchema_News::getInstance();
 		$this->source = DomainSource_NewsDB::getInstance();
-		$this->order_by = "";
+		$this->order_by = null;
 		$this->order_ascending = true;
 		$this->query = "id = :id";
 		$this->autosave = true;
 	}
-	
+
 	// the current instance
 	static $instance = null;
 	public static function getInstance() {
@@ -19,29 +19,29 @@ class DomainIterator_News_5i92kg92 extends DomainIterator {
 		}
 		return self::$instance;
 	}
-	
+
 	public function constructArgs() {
 		return array(
 			"id" => "3",
 		);
 	}
-	
+
 	public function getOffset() {
 		return $_SESSION["offset"];
 	}
-	
+
 	public function setOffset($value) {
 		$_SESSION["offset"] = $value;
 	}
-	
+
 	public function getNewInstanceID($key) {
 		throw new IamlDomainException("Cannot get the new instance ID for a non-new object: " . get_class($this));
 	}
-	
+
 	public function setNewInstanceID($key, $id) {
 		throw new IamlDomainException("Cannot set the new instance ID for a non-new object: " . get_class($this));
 	}
-	
+
 }
 
 echo "[test 1] ";
@@ -50,8 +50,8 @@ ob_start();
 	// get the current instance
 	$instance = DomainIterator_News_5i92kg92::getInstance();
 	// then the attribute
-	$title = $instance->getAttribute('title')->getValue(); 
-	
+	$title = $instance->getAttribute('title')->getValue();
+
 	// set the attribute
 	$instance->getAttribute('title')->setValue('new title');
 }
@@ -63,14 +63,14 @@ ob_start();
 
 	$instance = $iterator->toArray();
 	printit($instance);
-	
+
 	// iterate over all others
 	while ($iterator->hasNext()) {
 		$instance = $iterator->next();
-		
+
 		printit($instance);
 	}
-	
+
 	// print out the result count
 	echo "results = " . $iterator->count();
 }

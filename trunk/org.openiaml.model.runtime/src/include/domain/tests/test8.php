@@ -193,7 +193,7 @@ class DomainIterator_StudentAdminNewIterator extends DomainIterator {
   private function __construct() {
     $this->schema = DomainSchema_StudentAdmins::getInstance();
     $this->source = DomainSource_AdminsDBWithStudents::getInstance();
-    $this->order_by = "";
+    $this->order_by = null;
     $this->order_ascending = true;
     $this->query = "";
     $this->autosave = true;

@@ -224,9 +224,7 @@ abstract class DomainIterator {
 	 */
 	public function getAttribute($name) {
 		// possibly reload
-		if ($this->current_result === null) {
-			$this->reload();
-		}
+		$this->repopulate();
 
 		// check we have a result
 		$this->checkResultsExist();
@@ -249,9 +247,7 @@ abstract class DomainIterator {
 	 */
 	public function getAttributeInstance(DomainAttribute $attribute) {
 		// possibly reload
-		if ($this->current_result === null) {
-			$this->reload();
-		}
+		$this->repopulate();
 
 		// check we have a result
 		$this->checkResultsExist();
@@ -269,9 +265,7 @@ abstract class DomainIterator {
 
 	public function getAttributeInstances() {
 		// possibly reload
-		if ($this->current_result === null) {
-			$this->reload();
-		}
+		$this->repopulate();
 
 		// check we have a result
 		$this->checkResultsExist();
@@ -290,9 +284,7 @@ abstract class DomainIterator {
 	 */
 	public function toArray() {
 		// possibly reload
-		if ($this->current_result === null) {
-			$this->reload();
-		}
+		$this->repopulate();
 
 		// check we have a result
 		$this->checkResultsExist();
@@ -420,7 +412,76 @@ abstract class DomainIterator {
 	}
 
 	/**
-	 * Reload the instance; updates $current_result.
+	 * Repopulate the instance; updates $current_result.
+	 *
+	 * This allows the current instance to be stored across multiple sessions (in $_SESSION, eg.)
+	 * and only saved when required.
+	 */
+	public function repopulate() {
+		// if the result is already set, don't overwrite it
+		if ($this->current_result !== null) {
+			return;
+		}
+
+		// do we have a defined object already?
+		if (!$this->getStoredValue("initialised", false)) {
+			// reload it instead
+			$this->reload();
+
+			// store it
+			foreach ($this->getAttributeInstances() as $inst) {
+				$this->updateAttributeInstanceValue($inst);
+			}
+
+			// mark this as initialised
+			$this->setStoredValue("initialised", true);
+
+			return;
+		}
+
+		// otherwise, load from the store
+		foreach ($this->allAttributes($this->schema) as $attribute) {
+			$schema = $this->source->findSchemaForAttribute($attribute);
+			if ($schema === null) {
+				throw new IamlDomainException("Cannot find container for attribute '" . $attribute->toString() . "'");
+			}
+
+			$key = $attribute->getName();
+			$value = $this->getStoredValue($schema->getTableName() . "." . $attribute->getName());
+			$o2 = new DomainAttributeInstance(
+				$this, $key, $value, $attribute
+			);
+			$this->current_result[] = $o2;
+		}
+
+	}
+
+	/**
+	 * Update the stored value of the given attribute instance.
+	 */
+	public function updateAttributeInstanceValue($attrInst) {
+		$attr = $attrInst->getDefinition();
+		$schema = $this->source->findSchemaForAttribute($attr);
+		if ($schema === null) {
+			throw new IamlDomainException("Cannot find container for attribute '" . $attr->toString() . "'");
+		}
+
+		$this->setStoredValue($schema->getTableName() . "." . $attr->getName(), $attrInst->getValue());
+	}
+
+	/**
+	 * Get a stored value for the given key.
+	 */
+	public abstract function getStoredValue($key, $default = false);
+
+	/**
+	 * Set a stored value for the given key.
+	 */
+	public abstract function setStoredValue($key, $value);
+
+	/**
+	 * Reload the instance from the database; updates $current_result.
+	 * If there are unsaved changes, they are lost.
 	 */
 	public function reload() {
 		// init joins
@@ -545,6 +606,10 @@ abstract class DomainIterator {
 	 * Manually save the current instance.
 	 */
 	public function save() {
+		if ($this->current_result === null) {
+			throw new IamlDomainException("Cannot save " . get_class($this) . ": The current result has not been loaded anywhere.");
+		}
+
 		foreach ($this->current_result as $value) {
 			// save this attribute manually
 			$this->saveAttribute($value, $value->getValue());
@@ -709,7 +774,7 @@ abstract class DomainIterator {
 	 * PK attribute.
 	 */
 	protected function getValueForPrimaryKey($attribute) {
-		$this->toArray();
+		$this->repopulate();
 		foreach ($this->current_result as $value) {
 			if ($value->getDefinition() === $this->getRootExtends($attribute)) {
 				return $value->getValue();
@@ -798,6 +863,15 @@ abstract class DomainIterator {
 	 * Get the number of results for this query.
 	 */
 	public function count() {
+		if ($this->isNew()) {
+			// a 'new' object always has one available
+			// TODO this is kept for BC. Should this be changed to 1 only if the current instance has been saved?
+			return 1;
+		}
+
+		// init joins
+		$this->source->initExtensions();
+
 		$type = $this->source->getType();
 
 		if ($type == 'RELATIONAL_DB') {
@@ -839,6 +913,9 @@ abstract class DomainIterator {
 		}
 
 		$this->resetSchema($this->schema);
+
+		// we need to lose the previously saved information
+		$this->setStoredValue("initialised", false);
 
 		// finally, reload
 		// (this will set all new fields to <code>null</code>, etc.)
@@ -903,6 +980,9 @@ class DomainAttributeInstance {
 		if ($this->iterator->isAutosave()) {
 			$this->iterator->save();
 		}
+
+		// we need to persist it over sessions
+		$this->iterator->updateAttributeInstanceValue($this);
 	}
 
 	/**
@@ -912,6 +992,9 @@ class DomainAttributeInstance {
 	 */
 	public function setValueManually($value) {
 		$this->value = $value;
+
+		// we need to persist it over sessions
+		$this->iterator->updateAttributeInstanceValue($this);
 	}
 
 	/**

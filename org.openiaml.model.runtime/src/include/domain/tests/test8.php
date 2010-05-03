@@ -188,7 +188,7 @@ class DomainSource_AdminsDBWithStudents extends DomainSource {
 }
 
 // now define an iterator that is new, and autosaves
-class DomainIterator_StudentAdminNewIterator extends DomainIterator {
+class DomainIterator_StudentAdminNewIterator extends DefaultDomainIterator {
 
   private function __construct() {
     $this->schema = DomainSchema_StudentAdmins::getInstance();

@@ -1,7 +1,7 @@
 <?php
 
 // this one doesn't autosave, but is a new instance
-class DomainIterator_News_rbtbtr22d extends DomainIterator {
+class DomainIterator_News_rbtbtr22d extends DefaultDomainIterator {
 
 	private function __construct() {
 		$this->schema = DomainSchema_News::getInstance();

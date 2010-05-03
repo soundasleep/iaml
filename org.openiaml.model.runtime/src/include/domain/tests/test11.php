@@ -1,7 +1,7 @@
 <?php
 
 // an iterator that has a limit set that is also sorted
-class DomainIterator_News_LimitedSorted extends DomainIterator {
+class DomainIterator_News_LimitedSorted extends DefaultDomainIterator {
 
   private function __construct() {
     $this->schema = DomainSchema_News::getInstance();
@@ -20,6 +20,10 @@ class DomainIterator_News_LimitedSorted extends DomainIterator {
       self::$instance = new DomainIterator_News_LimitedSorted();
     }
     return self::$instance;
+  }
+
+  public static function resetInstance() {
+	  self::$instance = null;
   }
 
   public function constructArgs() {
@@ -53,6 +57,29 @@ echo "[test 11] ";
 ob_start();
 {
   // get the current instance
+  $instance = DomainIterator_News_LimitedSorted::getInstance();
+  printit4($instance);
+
+  while ($instance->hasNext()) {
+    echo "next\n";
+    $instance->next();
+    printit4($instance);
+  }
+
+  while ($instance->hasPrevious()) {
+	  echo "previous\n";
+	  $instance->previous();
+	  printit4($instance);
+  }
+
+  echo "end\n";
+}
+
+echo "---\n";
+
+{
+  // get a new instance
+  DomainIterator_News_LimitedSorted::resetInstance();
   $instance = DomainIterator_News_LimitedSorted::getInstance();
   printit4($instance);
 

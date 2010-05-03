@@ -1,7 +1,7 @@
 <?php
 
 // this one doesn't autosave, and it has multiple results
-class DomainIterator_News_ergqa3bdfbd extends DomainIterator {
+class DomainIterator_News_ergqa3bdfbd extends DefaultDomainIterator {
 
 	private function __construct() {
 		$this->schema = DomainSchema_News::getInstance();

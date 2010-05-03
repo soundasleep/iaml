@@ -120,6 +120,8 @@ require("test7.php");
 require("test8.php");
 //$enable = true;	// for debug
 require("test9.php");
+require("test10.php");
+require("test11.php");
 
 function clean_newlines($s) {
 	$s = str_replace("\r\n", "\n", $s);

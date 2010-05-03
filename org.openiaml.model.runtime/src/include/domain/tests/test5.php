@@ -86,7 +86,7 @@ class DomainIterator_Posts_1mkm131xzz extends DomainIterator {
 	private function __construct() {
 		$this->schema = DomainSchema_Posts::getInstance();
 		$this->source = DomainSource_PostsDB::getInstance();
-		$this->order_by = "";
+		$this->order_by = null;
 		$this->order_ascending = true;
 		$this->query = "";
 		$this->autosave = true;

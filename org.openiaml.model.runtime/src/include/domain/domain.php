@@ -183,8 +183,8 @@ abstract class DomainIterator {
 	// the query
 	var $query;
 
-	// the limit
-	var $limit;
+	// the limit of the query, default -1 = all
+	var $limit = -1;
 
 	// the order
 	var $order_by;
@@ -202,6 +202,7 @@ abstract class DomainIterator {
 	public function isAutosave() { return $this->autosave; }
 	public function isNew() { return $this->is_new; }
 	public function getSource() { return $this->source; }
+	public function getLimit() { return $this->limit; }
 
 	/**
 	 * Check that either a result exists, or we are new.
@@ -488,6 +489,13 @@ abstract class DomainIterator {
 				$this->possiblyCreateTable();
 			}
 
+			// check we aren't going beyond our limit
+			if ($this->getLimit() > 1 && $this->getOffset() >= $this->getLimit()) {
+				$offset = $this->getOffset();
+				$limit = $this->getLimit();
+				throw new IamlDomainException("Illegal offset $offset: Cannot select past limit $limit");
+			}
+
 			/*
 			 * evaluate_select_wire($db_name, $source_id, $source_class,
 			 *		$query, $args, $offset = 0, $order_by = "",
@@ -497,6 +505,16 @@ abstract class DomainIterator {
 			$query = $this->query;
 			$args = $this->constructArgs();
 
+			// construct the order_by as TableName.attribute_name
+			$order_by = "";
+			if ($this->order_by !== null) {
+				$container = $this->source->findSchemaForAttribute($this->order_by);
+				if ($container === null) {
+					throw new IamlDomainException("Cannot find container for order_by attribute '" . $this->order_by->toString() . "'");
+				}
+				$order_by = $container->getTableName() . "." . $this->order_by->getName();
+			}
+
 			$obj = evaluate_select_wire(
 				$this->source->getFile(),
 				$this->schema->getSourceID(),
@@ -504,7 +522,7 @@ abstract class DomainIterator {
 				$query,
 				$args,
 				$this->getOffset(),
-				$this->order_by,
+				$order_by,
 				$this->order_ascending
 			);
 
@@ -740,11 +758,13 @@ abstract class DomainIterator {
 	}
 
 	public function hasNext() {
-		return ($this->count() > 0) && ($this->getOffset() < $this->count() - 1);
+		return ($this->count() > 0) && ($this->getOffset() < $this->count() - 1) &&
+			($this->getLimit() <= 1 || $this->getOffset() < ($this->getLimit() - 1));
 	}
 
 	public function hasPrevious() {
-		return ($this->count() > 0) && ($this->getOffset() > 0);
+		return ($this->count() > 0) && ($this->getOffset() > 0) &&
+			($this->getLimit() <= 1 || $this->getOffset() > 0);
 	}
 
 	/**

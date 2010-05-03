@@ -204,8 +204,21 @@ abstract class DomainIterator {
 	public function getSource() { return $this->source; }
 
 	/**
+	 * Check that either a result exists, or we are new.
+	 * Throws a IamlDomainException if calling a get() method would fail.
+	 */
+	protected function checkResultsExist() {
+		if (!$this->isNew() && $this->isEmpty()) {
+			throw new IamlDomainException("No results for query '" . $this->query . "'");
+		}
+	}
+
+	/**
 	 * Get the DomainAttributeInstance of the given name. Note that if two attributes
 	 * have the same name, this will not return both.
+	 *
+	 * Checks that a valid result exists; if the query would return no results, throws an exception.
+	 *
 	 * @see #getAttributeInstance()
 	 */
 	public function getAttribute($name) {
@@ -213,6 +226,9 @@ abstract class DomainIterator {
 		if ($this->current_result === null) {
 			$this->reload();
 		}
+
+		// check we have a result
+		$this->checkResultsExist();
 
 		// and return the attribute
 		foreach ($this->current_result as $value) {
@@ -227,12 +243,17 @@ abstract class DomainIterator {
 
 	/**
 	 * Get the DomainAttributeInstance of the given DomainAttribute.
+	 *
+	 * Checks that a valid result exists; if the query would return no results, throws an exception.
 	 */
 	public function getAttributeInstance(DomainAttribute $attribute) {
 		// possibly reload
 		if ($this->current_result === null) {
 			$this->reload();
 		}
+
+		// check we have a result
+		$this->checkResultsExist();
 
 		// and return the attribute
 		foreach ($this->current_result as $value) {
@@ -251,6 +272,9 @@ abstract class DomainIterator {
 			$this->reload();
 		}
 
+		// check we have a result
+		$this->checkResultsExist();
+
 		return $this->current_result;
 	}
 
@@ -260,12 +284,17 @@ abstract class DomainIterator {
 	 *
 	 * NOTE that if two attributes are provided with the same name, one will
 	 * be overridden; use {@link #getAttributeInstance()} and {@link #getAttributes()} instead.
+	 *
+	 * Checks that a valid result exists; if the query would return no results, throws an exception.
 	 */
 	public function toArray() {
 		// possibly reload
 		if ($this->current_result === null) {
 			$this->reload();
 		}
+
+		// check we have a result
+		$this->checkResultsExist();
 
 		// now put it into an associative array
 		$result = array();
@@ -279,6 +308,8 @@ abstract class DomainIterator {
 	/**
 	 * Check to make sure that the table exists; if it doesn't, it
 	 * will be created.
+	 *
+	 * Checks that a valid result exists; if the query would return no results, throws an exception.
 	 */
 	protected function possiblyCreateTable($schema = null) {
 		if ($schema === null) {
@@ -737,6 +768,13 @@ abstract class DomainIterator {
 	}
 
 	/**
+	 * Returns true if count = 0.
+	 */
+	public function isEmpty() {
+		return $this->count() == 0;
+	}
+
+	/**
 	 * Get the number of results for this query.
 	 */
 	public function count() {
@@ -775,6 +813,11 @@ abstract class DomainIterator {
 	 * changes, they are lost.
 	 */
 	public function createNew() {
+		// make sure that this is a new object
+		if (!$this->isNew()) {
+			throw new IamlDomainException("Cannot create a new instance of Iterator type '" . get_class($this) . "'");
+		}
+
 		$this->resetSchema($this->schema);
 
 		// finally, reload

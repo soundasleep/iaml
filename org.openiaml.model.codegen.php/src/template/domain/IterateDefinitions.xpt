@@ -59,7 +59,8 @@
 	 * is out of bounds.
 	 */
 	function object_instance_next_«safeName()»() {
-		set_current_offset_«safeName()»(get_current_offset_«safeName()»() + 1);
+		$iterator = DomainIterator_«safeName()»::getInstance();
+		$iterator->next();
 		call_all_attribute_change_events_«safeName()-»();
 	} 
 
@@ -68,7 +69,8 @@
 	 * is out of bounds.
 	 */
 	function object_instance_previous_«safeName()»() {
-		set_current_offset_«safeName()»(get_current_offset_«safeName()»() - 1);
+		$iterator = DomainIterator_«safeName()»::getInstance();
+		$iterator->previous();
 		call_all_attribute_change_events_«safeName()-»();
 	} 
 	
@@ -77,7 +79,8 @@
 	 * is out of bounds.
 	 */
 	function object_instance_reset_«safeName()»() {
-		set_current_offset_«safeName()»(0);
+		$iterator = DomainIterator_«safeName()»::getInstance();
+		$iterator->setOffset(0);
 		call_all_attribute_change_events_«safeName()-»();
 	} 
 
@@ -86,7 +89,8 @@
 	 * number of results. Will fail if it is out of bounds.
 	 */
 	function object_instance_skip_«safeName()»($n) {
-		set_current_offset_«safeName()»(get_current_offset_«safeName()»() + $n);
+		$iterator = DomainIterator_«safeName()»::getInstance();
+		$iterator->setOffset($iterator->getOffset() + $n);
 		call_all_attribute_change_events_«safeName()-»();
 	} 
 	
@@ -94,7 +98,8 @@
 	 * Set the cursor to the given value. Will fail if it is out of bounds.
 	 */
 	function object_instance_jump_«safeName()»($n) {
-		set_current_offset_«safeName()»($n);
+		$iterator = DomainIterator_«safeName()»::getInstance();
+		$iterator->setOffset($n);
 		call_all_attribute_change_events_«safeName()-»();
 	} 
 	
@@ -102,33 +107,24 @@
 	 * Can we call 'next' without causing an error?
 	 */
 	function can_object_instance_next_«safeName()»() {
-		// if there are NO results yet, don't crash
-		if (!has_object_instance_«safeName()»())
-			return false;
-		
-		$current = get_current_offset_«safeName()»();
-		$count = get_instance_count_«safeName()»();
-		return ($current + 1) >= 0 && ($current + 1) < $count;
+		$iterator = DomainIterator_«safeName()»::getInstance();
+		return $iterator->hasNext();
 	}
 	
 	/**
 	 * Can we call 'previous' without causing an error?
 	 */
 	function can_object_instance_previous_«safeName()»() {
-		// if there are NO results yet, don't crash
-		if (!has_object_instance_«safeName()»())
-			return false;
-
-		$current = get_current_offset_«safeName()»();
-		$count = get_instance_count_«safeName()»();
-		return ($current - 1) >= 0 && ($current - 1) < $count;
+		$iterator = DomainIterator_«safeName()»::getInstance();
+		return $iterator->hasPrevious();
 	}
 	
 	/**
 	 * Is the current result set empty?
 	 */
 	function is_object_instance_empty_«safeName()»() {
-		return get_instance_count_«safeName()»() == 0;
+		$iterator = DomainIterator_«safeName()»::getInstance();
+		return $iterator->isEmpty();
 	}
 
 «ENDDEFINE»

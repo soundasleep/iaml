@@ -17,6 +17,7 @@ import org.openiaml.model.tests.codegen.model0_5_1.AllModel0_5_1CodegenTests;
 import org.openiaml.model.tests.codegen.oaw.AllOawTests;
 import org.openiaml.model.tests.codegen.runtime.client.AllClientRuntimeTests;
 import org.openiaml.model.tests.codegen.runtime.server.AllServerRuntimeTests;
+import org.openiaml.model.tests.codegen.runtime.server.direct.AllDirectRuntimeTests;
 
 /**
  * All tests for code generation.
@@ -66,6 +67,9 @@ public class AllCodegenTests {
 		
 		// server-side runtime library tests
 		suite.addTest(AllServerRuntimeTests.suite());
+
+		// runtime library tests called directly
+		suite.addTest(AllDirectRuntimeTests.suite());
 
 		return suite;
 	}

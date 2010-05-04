@@ -26,6 +26,7 @@ class DomainIterator_AdminNewIteratorPersists extends DefaultDomainIterator {
 
 	// reset the instance
 	public static function resetInstance() {
+		self::$instance->current_result = null;
 		self::$instance = null;
 	}
 

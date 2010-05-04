@@ -23,6 +23,7 @@ class DomainIterator_News_LimitedSorted extends DefaultDomainIterator {
   }
 
   public static function resetInstance() {
+	  self::$instance->current_result = null;
 	  self::$instance = null;
   }
 

@@ -128,3 +128,51 @@
 	}
 
 «ENDDEFINE»
+
+/**
+ * @implementation DomainAttributeInstance
+ *		The current offset of browsing {@model DomainAttributeInstance instances} is stored
+ *		in the containing {@model Session} if there is one, otherwise globally.
+ */
+«DEFINE iterateDefinitions FOR model::DomainAttributeInstance-»
+	/**
+	 * Cycle through all attributes and call onChange. Will fail if it
+	 * is out of bounds.
+	 */
+	function call_all_attribute_change_events_«safeName()-»() {
+		«IF onChange != null»
+			«REM»
+				we don't check to see that it is valid, because we want it
+				to fail. if you don't want the change to fail, you should use
+				the runtime 'hasNext/hasPrevious/empty' operations.
+			«ENDREM» 
+			«EXPAND template::events::EventCall::callEvent(true) FOR onChange»
+		«ENDIF»
+	}
+	
+	$current_offset_«safeName()» = 0;
+	
+	/**
+	 * Get the current instance cursor offset.
+	 */
+	function get_current_offset_«safeName()»() {
+		«IF containingSession(this) == null»
+			return get_application_value("instance_«safeName()-»_offset", 0);
+		«ELSE»
+			return require_session("«safeName(containingSession())-»_instance_«safeName()-»_offset", 0);
+		«ENDIF»
+	}
+	
+	/**
+	 * Set the current instance cursor offset.
+	 */
+	function set_current_offset_«safeName()»($n) {
+		«IF containingSession(this) == null»
+			set_application_value("instance_«safeName()-»_offset", $n);
+		«ELSE»
+			$_SESSION["«safeName(containingSession())-»_instance_«safeName()-»_offset"] = $n;
+		«ENDIF»
+		call_all_attribute_change_events_«safeName()-»();
+	}
+
+«ENDDEFINE»

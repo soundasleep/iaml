@@ -87,6 +87,10 @@
 				$iterator = DomainIterator_«safeName(eContainer)»::getInstance();
 				$iterator->getAttribute("«escapePhpString(name)»")->setValue($arg0);
 			«ELSE»
+				/* contained in an attribute instance '«this»': get it from the instance */
+				$iterator = DomainIterator_Attribute_«safeName()»::getInstance();
+				$iterator->getAttribute("«escapePhpString(name)»")->setValue($arg0);
+			«REM»
 				/* not contained in an object instance; select it manually */
 				«IF inWires.typeSelect(model::wires::SelectWire).isEmpty»
 					«IF inWires.typeSelect(model::wires::NewInstanceWire).isEmpty»
@@ -99,6 +103,7 @@
 					$attribute_name = "«safeNameString(name)-»";
 					«EXPAND evaluateSelectWireStore FOR inWires.typeSelect(model::wires::SelectWire).first()»
 				«ENDIF»
+			«ENDREM»
 			«ENDIF»
 		}
 	«ELSE»

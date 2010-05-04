@@ -331,8 +331,8 @@ class DomainIterator_Attribute_«safeName()» extends DomainIterator {
 	 */
 	public function getStoredValue($key, $default = null) {
 		$target_key = "stored_value_«safeName()-»_" . $key;
-		if (has_session($_SESSION[$target_key])) {
-			return require_session($_SESSION[$target_key]);
+		if (has_session($target_key)) {
+			return require_session($target_key);
 		}
 		return $default;
 	}

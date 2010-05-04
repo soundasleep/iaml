@@ -148,12 +148,19 @@ public class DomainInheritanceEditing extends InferenceTestCase {
 		assertGenerated(param);
 
 		// the condition on the object instance
+		Condition notEmpty = assertHasCondition(studentInstance, "not empty");
+		assertGenerated(notEmpty);
+		
+		// connected to the run instance wire
+		ConditionEdge conditionEdge = assertHasConditionEdge(root, notEmpty, run, "check new instance exists");
+		assertGenerated(conditionEdge);
+		
+		// NOT the 'exists?' condition, which is the reverse
 		Condition exists = studentInstance.getEmpty();
 		assertGenerated(exists);
+		
+		assertHasNoConditionEdge(root, exists, run, "check new instance exists");
 
-		// connected to the run instance wire
-		ConditionEdge conditionEdge = assertHasConditionEdge(root, exists, run, "check new instance exists");
-		assertGenerated(conditionEdge);
 	}
 
 	/**

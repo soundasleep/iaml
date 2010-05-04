@@ -1237,6 +1237,18 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	}
 	
 	/**
+	 * Assert <em>no</em> unidirectional ConditionEdge exists between
+	 * the given elements.
+	 */
+	public void assertHasNoConditionEdge(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to, String name) throws JaxenException {
+		for (ConditionEdge e : from.getOutConditionEdges()) {
+			if (to.equals(e.getTo()) && name.equals(e.getName())) {
+				fail("Found a ConditionEdge from '" + from + "' to '" + to + "' with name '" + name + "' unexpectedly: " + e);
+			}
+		}
+	}
+	
+	/**
 	 * Assert there exists only one unidirectional SelectWire between
 	 * the given elements.
 	 *

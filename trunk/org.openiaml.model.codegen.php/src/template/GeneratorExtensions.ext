@@ -450,6 +450,22 @@ List[model::DomainObject] allSubtypes(model::DomainObject this):
 model::ExecutionEdgesSource castToExecutionEdgesSource(emf::EObject this) :
 	(model::ExecutionEdgesSource) this;
 
+model::DomainAttribute getAttributeForAttributeInstance(model::DomainAttributeInstance this) :
+	getDefinedAttribute(outExtendsEdges.to.typeSelect(model::DomainAttribute).first());
+	
+/**
+ * Get the defined attribute for the given attribute. That is:
+ * - any attribute which extends a primary key (i.e. is a foreign key)
+ * - any attribute that does not extend anything
+ */
+model::DomainAttribute getDefinedAttribute(model::DomainAttribute this) :
+	if !outExtendsEdges.to.typeSelect(model::DomainAttribute).select(a|a.primaryKey).isEmpty
+	then this
+	else 
+		if outExtendsEdges.to.typeSelect(model::DomainAttribute).isEmpty
+		then this
+		else getDefinedAttribute(outExtendsEdges.to.typeSelect(model::DomainAttribute).first());
+
 /**
  * Get a list of all the possible execution states from the given node.
  * Cached to prevent loops causing infinite loops in logic.

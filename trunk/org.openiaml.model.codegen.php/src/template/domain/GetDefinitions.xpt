@@ -18,11 +18,9 @@
 		«IF model::DomainObjectInstance.isInstance(eContainer)»
 			/* contained in an object instance '«eContainer»': get it from the instance */
 			$iterator = DomainIterator_«safeName(eContainer)»::getInstance();
-			return $iterator->getAttribute("«attributeName(this)-»")->getValue();
 		«ELSE»
 			/* contained in an attribute instance '«this»': get it from the instance */
 			$iterator = DomainIterator_Attribute_«safeName()»::getInstance();
-			return $iterator->getAttribute("«attributeName(this)-»")->getValue();
 		«REM»
 		«ELSEIF !inWires.typeSelect(model::wires::NewInstanceWire).isEmpty»
 			/* sourced from a new instance wire */
@@ -48,6 +46,7 @@
 			«ENDIF»
 		«ENDREM»
 		«ENDIF»
+		return $iterator->getAttributeInstance( DomainAttribute_«safeName(getAttributeForAttributeInstance())»::getInstance() )->getValue();
 	}
 	
 	/**
@@ -60,11 +59,9 @@
 		«IF model::DomainObjectInstance.isInstance(eContainer)»
 			/* contained in an object instance '«eContainer»': get it from the instance */
 			$iterator = DomainIterator_«safeName(eContainer)»::getInstance();
-			return !$iterator->isEmpty() && ($iterator->getAttribute("«attributeName(this)-»")->getValue() !== null);
 		«ELSE»
 			/* contained in an attribute instance '«this»': get it from the instance */
 			$iterator = DomainIterator_Attribute_«safeName()»::getInstance();
-			return !$iterator->isEmpty() && ($iterator->getAttribute("«attributeName(this)-»")->getValue() !== null);
 		«REM»
 		«ELSEIF !inWires.typeSelect(model::wires::NewInstanceWire).isEmpty»
 			/* sourced from a new instance wire */
@@ -89,6 +86,7 @@
 			«ENDIF»
 		«ENDREM»
 		«ENDIF»
+		return !$iterator->isEmpty() && ($iterator->getAttributeInstance( DomainAttribute_«safeName(getAttributeForAttributeInstance())»::getInstance() )->getValue() !== null);
 	}
 	
 	«IF !inWires.typeSelect(model::wires::NewInstanceWire).isEmpty»

@@ -31,7 +31,7 @@ public class SyncWiresPagesTestCase extends CodegenTestCase {
 	 * 
 	 */
 	public void testSyncAcrossPages() throws Exception {
-		try {
+		
 		String testingText = new Date().toString();
 		String testingText2 = "random" + new Random().nextInt(32768);
 		String testingText3 = "kittens" + new Random().nextInt(32768);
@@ -51,9 +51,6 @@ public class SyncWiresPagesTestCase extends CodegenTestCase {
 			assertLabelPresent(label_text2);
 			setLabeledFormElementField(label_text1, testingText);
 			assertTextFieldEquals("visual_11d293c2f82_4c", testingText);
-			
-			// there should be a debug message saying it is saving
-			assertTextPresent("store_event called");
 		}
 
 		{
@@ -147,10 +144,6 @@ public class SyncWiresPagesTestCase extends CodegenTestCase {
 		// check fields have synced
 		assertLabelPresent(label_text3);
 		assertLabeledFieldEquals(label_text3, testingText3);
-		
-		} catch (Error e) {
-			throwDebugInformation(e);
-		}
 		
 	}
 

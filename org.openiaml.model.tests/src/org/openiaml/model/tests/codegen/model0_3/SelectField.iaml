@@ -6,7 +6,7 @@
       <attributes id="model.12109331eea.e62" name="name"/>
       <attributes id="model.12109331eea.e64" name="email"/>
       <attributes id="model.12109331eea.e6a" name="password"/>
-      <attributes id="model.12109331eea.e8c" name="id"/>
+      <attributes id="model.12109331eea.e8c" name="id" primaryKey="true"/>
     </children>
   </domainStores>
   <scopes xsi:type="iaml.visual:Frame" id="visual.12109331f38.d82" name="container">

@@ -425,6 +425,8 @@ abstract class DomainIterator {
 
 		// do we have a defined object already?
 		if (!$this->getStoredValue("initialised", false)) {
+			log_message("[domain] Repopulating: Reloading");
+
 			// reload it instead
 			$this->reload();
 
@@ -436,8 +438,11 @@ abstract class DomainIterator {
 			// mark this as initialised
 			$this->setStoredValue("initialised", true);
 
+			$this->logInstanceToDebug();
 			return;
 		}
+
+		log_message("[domain] Repopulating: Loading from stored values");
 
 		// otherwise, load from the store
 		foreach ($this->allAttributes($this->schema) as $attribute) {
@@ -453,6 +458,8 @@ abstract class DomainIterator {
 			);
 			$this->current_result[] = $o2;
 		}
+
+		$this->logInstanceToDebug();
 
 	}
 
@@ -545,6 +552,7 @@ abstract class DomainIterator {
 		}
 
 		if ($type == 'RELATIONAL_DB') {
+			log_message("[domain reload] reloading from the domain source");
 			// we might need to create the table first
 			if ($this->isAutosave()) {
 				$this->possiblyCreateTable();
@@ -606,13 +614,25 @@ abstract class DomainIterator {
 	 * Manually save the current instance.
 	 */
 	public function save() {
+		// possibly reload
+		$this->repopulate();
+
 		if ($this->current_result === null) {
 			throw new IamlDomainException("Cannot save " . get_class($this) . ": The current result has not been loaded anywhere.");
 		}
 
+		// first, do all PKs/FKs
 		foreach ($this->current_result as $value) {
-			// save this attribute manually
-			$this->saveAttribute($value, $value->getValue());
+			if ($this->getRootExtends($value->getDefinition())->isPrimaryKey()) {
+				$this->saveAttribute($value, $value->getValue());
+			}
+		}
+
+		// then normal data
+		foreach ($this->current_result as $value) {
+			if (!$this->getRootExtends($value->getDefinition())->isPrimaryKey()) {
+				$this->saveAttribute($value, $value->getValue());
+			}
 		}
 	}
 
@@ -658,6 +678,7 @@ abstract class DomainIterator {
 
 					// update the FK
 					$this->getAttributeInstance($attribute)->setValueManually($new_id);
+
 				} else {
 					// update it to the current value
 					$this->getAttributeInstance($attribute)->setValueManually($this->getNewInstanceID($parent->getTableName()));
@@ -690,6 +711,13 @@ abstract class DomainIterator {
 
 		// update the current attribute instance
 		$this->getAttributeInstance($pk)->setValueManually($new_id);
+
+		// and any other attributes that extend this one
+		foreach ($this->current_result as $inst) {
+			if ($this->getRootExtends($inst->getDefinition()) === $pk) {
+				$inst->setValueManually($new_id);
+			}
+		}
 
 		return $new_id;
 	}
@@ -774,8 +802,8 @@ abstract class DomainIterator {
 	 * PK attribute.
 	 */
 	protected function getValueForPrimaryKey($attribute) {
-		$this->repopulate();
 		foreach ($this->current_result as $value) {
+			log_message("[domain] Finding primary key: " . $value->getDefinition()->toString() . "=" . $value->getValue());
 			if ($value->getDefinition() === $this->getRootExtends($attribute)) {
 				return $value->getValue();
 			}
@@ -907,6 +935,8 @@ abstract class DomainIterator {
 	 * changes, they are lost.
 	 */
 	public function createNew() {
+		log_message("[domain] Creating new instance manually");
+
 		// make sure that this is a new object
 		if (!$this->isNew()) {
 			throw new IamlDomainException("Cannot create a new instance of Iterator type '" . get_class($this) . "'");
@@ -926,6 +956,8 @@ abstract class DomainIterator {
 	 * For all schemas in this instance, set the new instance ID(s) to null
 	 */
 	private function resetSchema($schema) {
+		log_message("[domain] Resetting schema " . $schema->toString());
+
 		// set to null
 		$this->setNewInstanceID($schema->getTableName(), null);
 
@@ -939,6 +971,22 @@ abstract class DomainIterator {
 				$this->resetSchema($parent);
 			}
 		}
+	}
+
+	/**
+	 * Log the current values in the instance to log_message.
+	 */
+	public function logInstanceToDebug() {
+		if ($this->current_result === null) {
+			log_message("[domain] current_result = null");
+			return;
+		}
+
+		$result = "[domain] current_result =";
+		foreach ($this->current_result as $attrinst) {
+			$result .= "\n" . $attrinst->getName() . " = " . $attrinst->getValue();
+		}
+		log_message($result);
 	}
 
 }

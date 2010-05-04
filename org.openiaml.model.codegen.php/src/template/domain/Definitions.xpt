@@ -39,6 +39,9 @@
 		«EXPAND StoreDefinitions::storeDomainObject FOREACH getRoot().getAllDomainObjectInstances()»
 		«EXPAND IterateDefinitions::iterateDefinitions FOREACH getRoot().getAllDomainObjectInstances()»
 
+		/* offset definitions for attributes not contained within a domain iterator */
+		«EXPAND IterateDefinitions::iterateDefinitions FOREACH getRoot().eAllContents.typeSelect(model::DomainAttributeInstance).select(e|!model::DomainObjectInstance.isInstance(e.eContainer))»
+
 		/**
 		 * Get all of the domain joins required in this generated
 		 * application. This is used to properly compose
@@ -59,6 +62,9 @@
 		«EXPAND domainAttributeDefinition FOREACH getRoot().eAllContents.typeSelect(model::DomainAttribute)»
 		«EXPAND domainSourceDefinition FOREACH getRoot().eAllContents.typeSelect(model::DomainStore)»
 		«EXPAND domainIteratorDefinition FOREACH getRoot().eAllContents.typeSelect(model::DomainObjectInstance)»
+		
+		/* domain iterators for attributes not contained within a domain iterator */
+		«EXPAND domainIteratorDefinition FOREACH getRoot().eAllContents.typeSelect(model::DomainAttributeInstance).select(e|!model::DomainObjectInstance.isInstance(e.eContainer))»
 	«ENDFILE»
 «ENDDEFINE»
 
@@ -153,40 +159,104 @@ class DomainSource_«safeName()» extends DomainSource {
  * Domain Iterator for Domain Object Instance '«escapeString(name)»'
  */
 class DomainIterator_«safeName()» extends DomainIterator {
-«IF inWires.typeSelect(model::wires::NewInstanceWire).isEmpty»
-	«IF inWires.typeSelect(model::wires::SelectWire).isEmpty»
-		«throwException("No SelectWire or NewInstanceWire for: " + this)»
+	«IF inWires.typeSelect(model::wires::NewInstanceWire).isEmpty»
+		«IF inWires.typeSelect(model::wires::SelectWire).isEmpty»
+			«throwException("No SelectWire or NewInstanceWire for: " + this)»
+		«ELSE»
+			«EXPAND domainIteratorDefFull(autosave, this) FOR inWires.typeSelect(model::wires::SelectWire).first()»
+		«ENDIF»
 	«ELSE»
+		«EXPAND domainIteratorDefFull(autosave, this) FOR inWires.typeSelect(model::wires::NewInstanceWire).first()»
+	«ENDIF»
+	
+	«EXPAND domainIteratorGetStoredValues FOR this»
+	
+	// the current instance
+	static $instance = null;
+	public static function getInstance() {
+		if (self::$instance == null) {
+			self::$instance = new DomainIterator_«safeName()»();
+		}
+		return self::$instance;
+	}
+
+}
+«ENDDEFINE»
+
+«DEFINE domainIteratorDefinition FOR model::DomainAttributeInstance»
+/**
+ * Domain Iterator for Domain Attribute Instance '«escapeString(name)»'
+ */
+class DomainIterator_Attribute_«safeName()» extends DomainIterator {
+	«IF inWires.typeSelect(model::wires::NewInstanceWire).isEmpty»
+		«IF inWires.typeSelect(model::wires::SelectWire).isEmpty»
+			«throwException("No SelectWire or NewInstanceWire for: " + this)»
+		«ELSE»
+			«EXPAND domainIteratorDefFull(autosave, this) FOR inWires.typeSelect(model::wires::SelectWire).first()»
+		«ENDIF»
+	«ELSE»
+		«EXPAND domainIteratorDefFull(autosave, this) FOR inWires.typeSelect(model::wires::NewInstanceWire).first()»
+	«ENDIF»
+	
+	«EXPAND domainIteratorGetStoredValues FOR this»
+
+	// the current instance
+	static $instance = null;
+	public static function getInstance() {
+		if (self::$instance == null) {
+			self::$instance = new DomainIterator_Attribute_«safeName()»();
+		}
+		return self::$instance;
+	}
+	
+}
+«ENDDEFINE»
+
+«DEFINE domainIteratorSchemas FOR emf::EObject»
+	«throwException("Unknown SelectWire source: " + this)»
+«ENDDEFINE»
+
+«DEFINE domainIteratorSchemas FOR model::DomainObject»
+	$this->schema = DomainSchema_«safeName()»::getInstance();
+	$this->source = DomainSource_«safeName(eContainer)»::getInstance();
+«ENDDEFINE»
+
+«DEFINE domainIteratorSchemas FOR model::DomainAttribute»
+	«IF eContainer == null»
+		«throwException("Container was null: " + this)»
+	«ENDIF»
+	«EXPAND domainIteratorSchemas FOR eContainer»
+«ENDDEFINE»
+
+«DEFINE domainIteratorDefFull(Boolean autosave, emf::EObject container) FOR model::wires::SelectWire»
 	// a SelectWire
 
-	«LET inWires.typeSelect(model::wires::SelectWire).first() AS wire»
 	private function __construct() {
-		$this->schema = DomainSchema_«safeName(wire.from)»::getInstance();
-		$this->source = DomainSource_«safeName(wire.from.eContainer)»::getInstance();
+		«EXPAND domainIteratorSchemas FOR from»	
 
-		«IF wire.orderBy != null»
-			$this->order_by = DomainAttribute_«safeName(wire.orderBy)»::getInstance();
-			$this->order_ascending = «wire.orderAscending ? "true" : "false"»;
+		«IF orderBy != null»
+			$this->order_by = DomainAttribute_«safeName(orderBy)»::getInstance();
+			$this->order_ascending = «orderAscending ? "true" : "false"»;
 		«ELSE»
 			$this->order_by = null;
 			$this->order_ascending = true;
 		«ENDIF»
 
-		$this->query = «EXPAND Select::getQuery FOR wire»;
+		$this->query = «EXPAND Select::getQuery»;
 		$this->is_new = false;
 		$this->autosave = «autosave ? "true" : "false"»;
 	}
 	
 	public function constructArgs() {
-		return array(«EXPAND template::operations::Parameters::callParameter(true, false, true) FOREACH wire.inParameterEdges SEPARATOR ","»);
+		return array(«EXPAND template::operations::Parameters::callParameter(true, false, true) FOREACH inParameterEdges SEPARATOR ","»);
 	}
 	
 	public function getOffset() {
-		return get_current_offset_«safeName()»();		
+		return get_current_offset_«safeName(container)»();		
 	}
 	
 	public function setOffset($value) {
-		set_current_offset_«safeName()»($value);
+		set_current_offset_«safeName(container)»($value);
 	}
 	
 	public function getNewInstanceID($key) {
@@ -196,13 +266,13 @@ class DomainIterator_«safeName()» extends DomainIterator {
 	public function setNewInstanceID($key, $value) {
 		throw new IamlDomainException("Cannot set the new instance ID for a non-new object: " . get_class($this));
 	}
-	«ENDLET»
-	«ENDIF»
-«ELSE»
-	«LET inWires.typeSelect(model::wires::NewInstanceWire).first() AS wire»
+«ENDDEFINE»
+
+«DEFINE domainIteratorDefFull(Boolean autosave, emf::EObject container) FOR model::wires::NewInstanceWire»
+	// a NewInstanceWire
+
 	private function __construct() {
-		$this->schema = DomainSchema_«safeName(wire.from)»::getInstance();
-		$this->source = DomainSource_«safeName(wire.from.eContainer)»::getInstance();
+		«EXPAND domainIteratorSchemas FOR from»
 
 		$this->order_by = "";
 		$this->order_ascending = true;
@@ -251,9 +321,10 @@ class DomainIterator_«safeName()» extends DomainIterator {
 			set_application_value($key2, $value);
 		«ENDIF»
 	}
-	«ENDLET»
-«ENDIF»
 
+«ENDDEFINE»
+
+«DEFINE domainIteratorGetStoredValues FOR emf::EObject»
 	«IF containingSession() != null»
 	/**
 	 * Note that PHP's <code>is_set()</code> returns <code>false</code> for variables that are set to <code>NULL</code>
@@ -287,17 +358,7 @@ class DomainIterator_«safeName()» extends DomainIterator {
 		set_application_value($target_key, $value);
 	}
 	«ENDIF»
-	
-	// the current instance
-	static $instance = null;
-	public static function getInstance() {
-		if (self::$instance == null) {
-			self::$instance = new DomainIterator_«safeName()»();
-		}
-		return self::$instance;
-	}
 
-}
 «ENDDEFINE»
 
 /**

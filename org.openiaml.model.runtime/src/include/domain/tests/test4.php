@@ -61,7 +61,7 @@ ob_start();
 	printit($instance->toArray());
 
 	// set some values
-	$instance->getAttribute('title')->setValue("new title");
+	$instance->getAttributeInstance(DomainAttribute_News_Title::getInstance())->setValue("new title");
 	echo "2:\n";
 	printit($instance->toArray());
 
@@ -71,7 +71,7 @@ ob_start();
 	printit($instance->toArray());
 
 	// set it again
-	$instance->getAttribute('title')->setValue("another title");
+	$instance->getAttributeInstance(DomainAttribute_News_Title::getInstance())->setValue("another title");
 	echo "4:\n";
 	printit($instance->toArray());
 
@@ -91,7 +91,7 @@ ob_start();
 	printit($instance->toArray());
 
 	// set it
-	$instance->getAttribute('title')->setValue("a new title");
+	$instance->getAttributeInstance(DomainAttribute_News_Title::getInstance())->setValue("a new title");
 	echo "8:\n";
 	printit($instance->toArray());
 

@@ -214,31 +214,7 @@ abstract class DomainIterator {
 		}
 	}
 
-	/**
-	 * Get the DomainAttributeInstance of the given name. Note that if two attributes
-	 * have the same name, this will not return both.
-	 *
-	 * Checks that a valid result exists; if the query would return no results, throws an exception.
-	 *
-	 * @see #getAttributeInstance()
-	 */
-	public function getAttribute($name) {
-		// possibly reload
-		$this->repopulate();
-
-		// check we have a result
-		$this->checkResultsExist();
-
-		// and return the attribute
-		foreach ($this->current_result as $value) {
-			if ($name == $value->getName()) {
-				return $value;
-			}
-		}
-
-		// could not find any with the given name; fail
-		throw new IamlDomainException("Could not find a DomainAttribute named '$name'");
-	}
+	// can no longer getAttribute() by name; too likely to cause an inconsistent database.
 
 	/**
 	 * Get the DomainAttributeInstance of the given DomainAttribute.
@@ -826,6 +802,7 @@ abstract class DomainIterator {
 
 			// find the value of this primary key for our current instance
 			log_message("[domain] Target schema: " . $target_schema->toString());
+			$this->logInstanceToDebug();
 			$schema_pk_value = $this->getValueForPrimaryKey($schema_pk);
 			if ($schema_pk_value === null) {
 				throw new IamlDomainException("Cannot use a NULL schema primary key '" . $schema_pk->toString() . "': $schema_pk_value");

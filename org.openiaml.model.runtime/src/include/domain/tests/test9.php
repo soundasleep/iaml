@@ -68,12 +68,12 @@ ob_start();
 	printit4($instance);
 
 	// edit it
-	$instance->getAttribute('email')->setValue("changed@openiaml.org");
+	$instance->getAttributeInstance(DomainAttribute_User_Email::getInstance())->setValue("changed@openiaml.org");
 	echo "2:\n";
 	printit3($instance->toArray());
 
-	$instance->getAttribute('name')->setValue("Changed User");
-	$instance->getAttribute('degree')->setValue("B.A.");
+	$instance->getAttributeInstance(DomainAttribute_Admin_Name::getInstance())->setValue("Changed User");
+	$instance->getAttributeInstance(DomainAttribute_Student_Degree::getInstance())->setValue("B.A.");
 	echo "3:\n";
 	printit3($instance->toArray());
 
@@ -83,7 +83,7 @@ ob_start();
 	printit3($instance->toArray());
 
 	// set it again
-	$instance->getAttribute('email')->setValue("changed2@openiaml.org");
+	$instance->getAttributeInstance(DomainAttribute_User_Email::getInstance())->setValue("changed2@openiaml.org");
 	echo "5:\n";
 	printit3($instance->toArray());
 

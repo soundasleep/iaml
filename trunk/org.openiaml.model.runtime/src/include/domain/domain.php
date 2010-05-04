@@ -474,6 +474,9 @@ abstract class DomainIterator {
 		}
 
 		$this->setStoredValue($schema->getTableName() . "." . $attr->getName(), $attrInst->getValue());
+
+		// we also need to save that we've been initialised
+		$this->setStoredValue("initialised", true);
 	}
 
 	/**
@@ -525,21 +528,29 @@ abstract class DomainIterator {
 					$query = $this->schema->getTableName() . "." . $this->getPKName() . " = ?";
 					$args = array($this->getNewInstanceID($this->schema->getTableName()));
 
+					// create a mapping of expected attributes to unique names, so we can retrieve two attributes
+					// named 'id', for example
+					$m = $this->createMappings();
+					$mapping = $m["mapping"];
+					$mappingQuery = $m["query"];
+
 					$obj = evaluate_select_wire(
 						$this->source->getFile(),
 						$this->schema->getSourceID(),
 						$this->schema->getTableName(),
 						$query,
-						$args
+						$args,
+						0, "", true, /* default values */
+						$mappingQuery
 					);
 
 					// translate the array(key=>value) into array(key=>DomainAttributeInstance)
-					log_message("result: " . print_r($obj, true));
+					// log_message("result: " . print_r($obj, true));
 					$this->current_result = array();
-					foreach ($this->allAttributes($this->schema) as $attribute) {
+					foreach ($mapping as $mapKey => $attribute) {
 						$key = $attribute->getName();
 						$o2 = new DomainAttributeInstance(
-							$this, $key, $obj[$key], $attribute
+							$this, $key, $obj[$mapKey], $attribute
 						);
 						$this->current_result[] = $o2;
 					}
@@ -584,6 +595,12 @@ abstract class DomainIterator {
 				$order_by = $container->getTableName() . "." . $this->order_by->getName();
 			}
 
+			// create a mapping of expected attributes to unique names, so we can retrieve two attributes
+			// named 'id', for example
+			$m = $this->createMappings();
+			$mapping = $m["mapping"];
+			$mappingQuery = $m["query"];
+
 			$obj = evaluate_select_wire(
 				$this->source->getFile(),
 				$this->schema->getSourceID(),
@@ -592,15 +609,16 @@ abstract class DomainIterator {
 				$args,
 				$this->getOffset(),
 				$order_by,
-				$this->order_ascending
+				$this->order_ascending,
+				$mappingQuery
 			);
 
 			// translate the array(key=>value) into array(key=>DomainAttributeInstance)
 			$this->current_result = array();
-			foreach ($this->allAttributes($this->schema) as $attribute) {
+			foreach ($mapping as $mapKey => $attribute) {
 				$key = $attribute->getName();
 				$o2 = new DomainAttributeInstance(
-					$this, $key, $obj[$key], $attribute
+					$this, $key, $obj[$mapKey], $attribute
 				);
 				$this->current_result[] = $o2;
 			}
@@ -608,6 +626,31 @@ abstract class DomainIterator {
 		} else {
 			throw new IamlDomainException("Unknown source type $type");
 		}
+	}
+
+	/**
+	 * Create the necessary mappings for the SELECT (...AS) query.
+	 * Returns an associative array: 'mapping' => array (key => DomainAttribute), 'query' => query string.
+	 */
+	private function createMappings() {
+		$mapping = array();
+		$mappingQuery = array();
+		foreach ($this->allAttributes($this->schema) as $attribute) {
+			$key = "a" . count($mapping);
+			$mapping[$key] = $attribute;
+
+			$container = $this->source->findSchemaForAttribute($attribute);
+			if ($container === null) {
+				throw new IamlDomainException("Cannot find container for attribute '" . $attribute->toString() . "'");
+			}
+			$mappingQuery[] = $container->getTableName() . "." . $attribute->getName() . " AS $key";
+		}
+
+		if (!$mapping) {
+			throw new IamlDomainException("Could not construct a mapping for an empty schema.");
+		}
+
+		return array("mapping" => $mapping, "query" => implode(", ", $mappingQuery));
 	}
 
 	/**
@@ -624,14 +667,14 @@ abstract class DomainIterator {
 		// first, do all PKs/FKs
 		foreach ($this->current_result as $value) {
 			if ($this->getRootExtends($value->getDefinition())->isPrimaryKey()) {
-				$this->saveAttribute($value, $value->getValue());
+				$this->saveAttribute($value);
 			}
 		}
 
 		// then normal data
 		foreach ($this->current_result as $value) {
 			if (!$this->getRootExtends($value->getDefinition())->isPrimaryKey()) {
-				$this->saveAttribute($value, $value->getValue());
+				$this->saveAttribute($value);
 			}
 		}
 	}
@@ -677,10 +720,12 @@ abstract class DomainIterator {
 					log_message("Attribute " . $attribute->getName() . " set to value $new_id");
 
 					// update the FK
-					$this->getAttributeInstance($attribute)->setValueManually($new_id);
+					$attrinst = $this->getAttributeInstance($attribute);
+					$attrinst->setValueManually($new_id);
 
 				} else {
 					// update it to the current value
+					log_message("[domain init] Updating attribute '" . $attribute->toString() . "' manually to '" . $this->getNewInstanceID($parent->getTableName()) . "'");
 					$this->getAttributeInstance($attribute)->setValueManually($this->getNewInstanceID($parent->getTableName()));
 				}
 			}
@@ -690,6 +735,9 @@ abstract class DomainIterator {
 		$pk = null;
 		foreach ($schema->getAttributes() as $attribute) {
 			if ($attribute->isPrimaryKey()) {
+				if ($pk !== null) {
+					throw new IamlDomainException("Domain Schema '" . $schema->toString() . "' has more than one primary key attribute");
+				}
 				$pk = $attribute;
 			}
 		}
@@ -722,7 +770,7 @@ abstract class DomainIterator {
 		return $new_id;
 	}
 
-	protected function saveAttribute($attrinst, $value) {
+	protected function saveAttribute($attrinst) {
 		$type = $this->source->getType();
 
 		// if we haven't saved a new object yet, we first have to get the PK of this object
@@ -762,6 +810,7 @@ abstract class DomainIterator {
 
 					if ($attrinst === $schema_pk) {
 						// update the value directly
+						log_message("[domain] Set attribute instance '" . $attrinst->toString() . "' directly to '$new_id'");
 						$attrinst->setValue($new_id);
 					}
 				} else {
@@ -769,6 +818,7 @@ abstract class DomainIterator {
 					// update the attribute manually
 					$schema_pk_value = $this->getNewInstanceID($target_schema->getTableName());
 					if ($this->getAttributeInstance($schema_pk)->getValue() != $schema_pk_value) {
+						log_message("[domain] Set attribute instance '" . $schema_pk->toString() . "' to PK value '$schema_pk_value'");
 						$this->getAttributeInstance($schema_pk)->setValue($schema_pk_value);
 					}
 				}
@@ -788,7 +838,7 @@ abstract class DomainIterator {
 				" SET " .
 				$attrinst->getName() .
 				" = ? WHERE $schema_pk_name = ?";
-			$args = array($value, $schema_pk_value);
+			$args = array($attrinst->getValue(), $schema_pk_value);
 
 			$db->execute($query, $args);
 
@@ -1022,6 +1072,7 @@ class DomainAttributeInstance {
 	 * We want to update the attribute instance with the new value.
 	 */
 	public function setValue($value) {
+		log_message("[domain attribute] Attribute '$this->name' set to '$value'");
 		$this->value = $value;
 
 		// do we need to autosave?
@@ -1039,6 +1090,7 @@ class DomainAttributeInstance {
 	 * by clients.
 	 */
 	public function setValueManually($value) {
+		log_message("[domain attribute] Attribute '$this->name' set to '$value' manually");
 		$this->value = $value;
 
 		// we need to persist it over sessions

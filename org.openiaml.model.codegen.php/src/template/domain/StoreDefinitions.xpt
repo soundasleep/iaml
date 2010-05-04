@@ -16,10 +16,10 @@
 		function queue_store_domain_attribute_«safeName()»($arg0) {
 			«IF model::DomainObjectInstance.isInstance(eContainer)»
 				$iterator = DomainIterator_«safeName(eContainer)»::getInstance();
-				$iterator->getAttribute("«safeNameString(name)»")->setValue($arg0);
 			«ELSE»
-				«throwException("Can't set queued value for non-contained attribute '" + this)»
+				$iterator = DomainIterator_Attribute_«safeName()»::getInstance();
 			«ENDIF»
+			$iterator->getAttributeInstance( DomainAttribute_«safeName(getAttributeForAttributeInstance())»::getInstance() )->setValue($arg0);
 		}
 		
 		/* execute the actual save for attribute id '«id»' */
@@ -85,11 +85,9 @@
 			«IF model::DomainObjectInstance.isInstance(eContainer)»
 				/* contained in an object instance '«eContainer»': get it from the instance */
 				$iterator = DomainIterator_«safeName(eContainer)»::getInstance();
-				$iterator->getAttribute("«escapePhpString(name)»")->setValue($arg0);
 			«ELSE»
 				/* contained in an attribute instance '«this»': get it from the instance */
 				$iterator = DomainIterator_Attribute_«safeName()»::getInstance();
-				$iterator->getAttribute("«escapePhpString(name)»")->setValue($arg0);
 			«REM»
 				/* not contained in an object instance; select it manually */
 				«IF inWires.typeSelect(model::wires::SelectWire).isEmpty»
@@ -105,6 +103,7 @@
 				«ENDIF»
 			«ENDREM»
 			«ENDIF»
+			$iterator->getAttributeInstance( DomainAttribute_«safeName(getAttributeForAttributeInstance())»::getInstance() )->setValue($arg0);
 		}
 	«ELSE»
 		function store_domain_attribute_«safeName()»(arg0) {

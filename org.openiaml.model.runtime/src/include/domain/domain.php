@@ -767,6 +767,9 @@ abstract class DomainIterator {
 				return;
 			}
 
+			log_message("[domain] Saving attribute " . $attrinst->getDefinition()->toString());
+			$this->logInstanceToDebug();
+
 			$target_schema = $this->source->findSchemaForAttribute($attrinst->getDefinition());
 			if ($target_schema === null) {
 				throw new IamlDomainException("Could not find target schema for attribute " . $attrinst->getDefinition()->toString() . " in source " . $this->source);
@@ -778,7 +781,7 @@ abstract class DomainIterator {
 
 			// if this is a NEW object that hasn't been saved yet, we have to
 			// insert in default values
-			if ($this->isNew()) {
+			if ($this->isNew() && $this->getAttributeInstance($schema_pk)->getValue() === null) {
 			 	if ($this->getNewInstanceID($target_schema->getTableName()) === null) {
 					$new_id = $this->initialiseInstance($target_schema);
 					log_message("[domain] Set '$schema_pk_name' to new ID '$new_id'");

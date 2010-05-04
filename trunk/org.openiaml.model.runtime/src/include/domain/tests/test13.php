@@ -224,7 +224,7 @@ ob_start();
   printit4($instance);
 
   // set some values
-  $instance->getAttribute('name')->setValue("test@openiaml.org");
+  $instance->getAttributeInstance(DomainAttribute_User_Name13::getInstance())->setValue("test@openiaml.org");
   echo "2:\n";
   printit4($instance);
 
@@ -234,7 +234,7 @@ ob_start();
   printit4($instance);
 
   // set values again
-  $instance->getAttribute('name')->setValue("another@openiaml.org");
+  $instance->getAttributeInstance(DomainAttribute_User_Name13::getInstance())->setValue("another@openiaml.org");
   echo "4:\n";
   printit4($instance);
 

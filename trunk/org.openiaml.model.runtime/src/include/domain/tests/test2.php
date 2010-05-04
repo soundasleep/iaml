@@ -54,32 +54,32 @@ ob_start();
 	// get the current instance
 	$instance = DomainIterator_News_bdb2t211::getInstance();
 	// then the attribute
-	$title = $instance->getAttribute('title')->getValue();
+	$title = $instance->getAttributeInstance(DomainAttribute_News_Title::getInstance())->getValue();
 	echo "1: $title\n";
 
 	// set the attribute
-	$instance->getAttribute('title')->setValue('new title');
+	$instance->getAttributeInstance(DomainAttribute_News_Title::getInstance())->setValue('new title');
 
 	// get it back
-	$title = $instance->getAttribute('title')->getValue();
+	$title = $instance->getAttributeInstance(DomainAttribute_News_Title::getInstance())->getValue();
 	echo "2: $title\n";
 
 	// reload it
 	$instance->reload();
-	$title = $instance->getAttribute('title')->getValue();
+	$title = $instance->getAttributeInstance(DomainAttribute_News_Title::getInstance())->getValue();
 	echo "3: $title\n";
 
 	// set it again
-	$instance->getAttribute('title')->setValue('another title');
+	$instance->getAttributeInstance(DomainAttribute_News_Title::getInstance())->setValue('another title');
 	// save it now
 	$instance->save();
 
-	$title = $instance->getAttribute('title')->getValue();
+	$title = $instance->getAttributeInstance(DomainAttribute_News_Title::getInstance())->getValue();
 	echo "4: $title\n";
 
 	// reload it
 	$instance->reload();
-	$title = $instance->getAttribute('title')->getValue();
+	$title = $instance->getAttributeInstance(DomainAttribute_News_Title::getInstance())->getValue();
 	echo "5: $title\n";
 }
 

@@ -63,10 +63,10 @@ ob_start();
 	// get the current instance
 	$instance = DomainIterator_News_5i92kg92::getInstance();
 	// then the attribute
-	$title = $instance->getAttribute('title')->getValue();
+	$title = $instance->getAttributeInstance(DomainAttribute_News_Title::getInstance())->getValue();
 
 	// set the attribute
-	$instance->getAttribute('title')->setValue('new title');
+	$instance->getAttributeInstance(DomainAttribute_News_Title::getInstance())->setValue('new title');
 }
 
 // get an iterator of instances

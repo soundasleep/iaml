@@ -148,7 +148,7 @@ ob_start();
 	printit2($instance->toArray());
 
 	// set some values
-	$instance->getAttribute('content')->setValue("new content");
+	$instance->getAttributeInstance(DomainAttribute_Post_Content::getInstance())->setValue("new content");
 	echo "2:\n";
 	printit2($instance->toArray());
 
@@ -158,7 +158,7 @@ ob_start();
 	printit2($instance->toArray());
 
 	// set it again
-	$instance->getAttribute('content')->setValue("another content");
+	$instance->getAttributeInstance(DomainAttribute_Post_Content::getInstance())->setValue("another content");
 	echo "4:\n";
 	printit2($instance->toArray());
 
@@ -178,7 +178,7 @@ ob_start();
 	printit2($instance->toArray());
 
 	// set it
-	$instance->getAttribute('content')->setValue("a new content");
+	$instance->getAttributeInstance(DomainAttribute_Post_Content::getInstance())->setValue("a new content");
 	echo "8:\n";
 	printit2($instance->toArray());
 

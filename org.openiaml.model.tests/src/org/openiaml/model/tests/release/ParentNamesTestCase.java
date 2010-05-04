@@ -105,6 +105,9 @@ public class ParentNamesTestCase extends XmlTestCase {
 		ModelPackage.eINSTANCE.getDomainAttributeInstance(),
 		ModelPackage.eINSTANCE.getStaticValue(),
 		VisualPackage.eINSTANCE.getInputTextField(),
+		
+		// not data typed, but typed in a different way
+		DomainPackage.eINSTANCE.getDomainSource(),
 	};
 	
 	private static List<String> inst_getTypedElements = null;

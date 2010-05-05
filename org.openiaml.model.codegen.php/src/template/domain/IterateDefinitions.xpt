@@ -10,6 +10,9 @@
  * @implementation DomainObjectInstance
  *		The current offset of browsing {@model DomainObjectInstance instances} is stored
  *		in the containing {@model Session} if there is one, otherwise globally.
+ * @implementation DomainObjectInstance
+ *		{@model DomainObjectInstance#empty} will return <code>true</code> even if
+ *		the current arguments are not even set; i.e. it will fail silently.
  */
 «DEFINE iterateDefinitions FOR model::DomainObjectInstance-»
 	/**
@@ -123,8 +126,7 @@
 	 * Is the current result set empty?
 	 */
 	function is_object_instance_empty_«safeName()»() {
-		$iterator = DomainIterator_«safeName()»::getInstance();
-		return $iterator->isEmpty();
+		return !has_object_instance_«safeName()»();
 	}
 
 «ENDDEFINE»

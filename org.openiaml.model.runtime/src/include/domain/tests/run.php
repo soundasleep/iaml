@@ -197,8 +197,8 @@ function compareTestResults($output, $file) {
 			echo "ERROR: Cannot create file $filename\n";
 			die(1);
 		}
-		file_put_contents($filename, $output);
-		passthru("diff -u --label result $filename $file");
+		file_put_contents($filename, str_replace("\n", "\r\n", $output));
+		passthru("diff -u -a --label result $filename $file");
 		echo "\n";
 		unlink($filename);	// then delete it
 	} else {

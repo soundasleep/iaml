@@ -181,7 +181,7 @@ public class SelectFieldFromDynamicQuery extends DatabaseCodegenTestCase {
 
 			// we should now be on an exception page (redirected)
 			assertTitleEquals("An exception occured");
-			assertTextPresent("Could not find any value instance for attribute");
+			assertTextPresent("No results found for query 'email = ?'");
 			assertProblem();
 		}
 		
@@ -192,10 +192,10 @@ public class SelectFieldFromDynamicQuery extends DatabaseCodegenTestCase {
 		} catch (FailingHttpStatusCodeException e) {
 			// we should instantly have an exception occur
 			// expected
-			checkExceptionContains(e, "Could not find any value instance for attribute");
+			checkExceptionContains(e, "No results found for query 'email = ?'");
 			
 			assertTitleEquals("An exception occured");
-			assertTextPresent("Could not find any value instance for attribute");
+			assertTextPresent("No results found for query 'email = ?'");
 			assertProblem();
 		}
 		

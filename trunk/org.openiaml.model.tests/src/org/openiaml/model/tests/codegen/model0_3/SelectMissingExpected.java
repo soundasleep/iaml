@@ -50,7 +50,7 @@ public class SelectMissingExpected extends DatabaseCodegenTestCase {
 		// a problem should instantly occur, but we will be
 		// redirected
 		assertTitleEquals("an expected failure");
-		assertTextPresent("Could not find any value instance for attribute");
+		assertTextPresent("No results found for query");
 		assertProblem();
 	}
 

@@ -450,8 +450,15 @@ List[model::DomainObject] allSubtypes(model::DomainObject this):
 model::ExecutionEdgesSource castToExecutionEdgesSource(emf::EObject this) :
 	(model::ExecutionEdgesSource) this;
 
+/**
+ * If this extension fails, then you are trying to find the defining attribute for an AttributeInstance
+ * which isn't actually defined as an extension in the system, so we can't find the containing DomainSchema
+ * for it.
+ */
 model::DomainAttribute getAttributeForAttributeInstance(model::DomainAttributeInstance this) :
-	getDefinedAttribute(outExtendsEdges.to.typeSelect(model::DomainAttribute).first());
+	if outExtendsEdges.to.typeSelect(model::DomainAttribute).first() == null
+		then throwException("Tried to get the parent attribute of an attribute instance that is not an extension: " + this)
+		else getDefinedAttribute(outExtendsEdges.to.typeSelect(model::DomainAttribute).first());
 	
 /**
  * Get the defined attribute for the given attribute. That is:

@@ -46,7 +46,20 @@
 			«ENDIF»
 		«ENDREM»
 		«ENDIF»
-		return $iterator->getAttributeInstance( DomainAttribute_«safeName(getAttributeForAttributeInstance())»::getInstance() )->getValue();
+		$value = $iterator->getAttributeInstance( DomainAttribute_«safeName(getAttributeForAttributeInstance())»::getInstance() )->getValue();
+		
+		// make sure we can cast this value to the appropriate type
+		$type = "«escapePhpString(type.uRI)»";
+		
+		if (!can_cast($value, $type)) {
+			throw new IamlRuntimeException("Unexpectedly could not cast value '$value' into type '$type'"); 
+		}
+		
+		// return the casted value
+		$value = do_cast($value, $type);
+		
+		// but internally, we store all values as strings
+		return do_cast($value, 'http://openiaml.org/model/datatypes#iamlString');
 	}
 	
 	/**

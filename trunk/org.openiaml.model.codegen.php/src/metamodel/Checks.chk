@@ -194,4 +194,7 @@ context model::scopes::Email ERROR "An e-mail cannot contain a Property and a St
 context model::wires::SyncWire ERROR "A SyncWire cannot connect to an Email" :
 	!model::scopes::Email.isInstance(to) &&
 	!model::scopes::Email.isInstance(from);
+
+context model::DomainAttributeInstance ERROR "A DomainAttributeInstance must extend a DomainAttribute as its definition" :
+	!outExtendsEdges.to.typeSelect(model::DomainAttribute).isEmpty;
 	

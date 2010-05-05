@@ -210,7 +210,7 @@ abstract class DomainIterator {
 	 */
 	protected function checkResultsExist() {
 		if (!$this->isNew() && $this->isEmpty()) {
-			throw new IamlDomainException("No results for query '" . $this->query . "'");
+			throw new IamlDomainException("No results found for query '" . $this->query . "'");
 		}
 	}
 

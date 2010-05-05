@@ -88,20 +88,6 @@
 			«ELSE»
 				/* contained in an attribute instance '«this»': get it from the instance */
 				$iterator = DomainIterator_Attribute_«safeName()»::getInstance();
-			«REM»
-				/* not contained in an object instance; select it manually */
-				«IF inWires.typeSelect(model::wires::SelectWire).isEmpty»
-					«IF inWires.typeSelect(model::wires::NewInstanceWire).isEmpty»
-					throw new IamlRuntimeException("No selection wires exist for setting attribute instance '«safeNameString(id)-»'");
-					«ELSE»
-						// set the current "new" object
-						«EXPAND setNewDomainAttribute(inWires.typeSelect(model::wires::NewInstanceWire).first()) FOR this»
-					«ENDIF»
-				«ELSE»
-					$attribute_name = "«safeNameString(name)-»";
-					«EXPAND evaluateSelectWireStore FOR inWires.typeSelect(model::wires::SelectWire).first()»
-				«ENDIF»
-			«ENDREM»
 			«ENDIF»
 			$iterator->getAttributeInstance( DomainAttribute_«safeName(getAttributeForAttributeInstance())»::getInstance() )->setValue($arg0);
 		}
@@ -112,63 +98,12 @@
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE setNewDomainAttribute(model::wires::NewInstanceWire wire) FOR model::DomainAttributeInstance-»
-	// it should already be created, or this will create a new one
-	$existing = get_new_attribute_instance_«safeName()-»(true);	/* force creation */
-
-	«IF containingSession(this) != null»
-		/* contained within a session */
-		$new_id = has_session("new_attribute_«safeName(containingSession())»_«safeName()-»", false);
-		if ($new_id === false) {
-			throw new IamlRuntimeException("Unexpectedly got an empty new session attribute");
-		}
-	«ELSE»
-		/* contained within a frame */
-		$new_id = get_application_value("new_attribute_«safeName()-»", false);
-		if ($new_id === false) {
-			throw new IamlRuntimeException("Unexpectedly got an empty new frame attribute");
-		}
-	«ENDIF»
-
-	$attribute_name = "«safeNameString(name)-»";
-	log_message("updating existing new attribute '$new_id', attribute = '$attribute_name'");
-	
-	// where are we loading it from? sets $db
-	«EXPAND Select::selectDatabase FOR wire.from»
-		
-	// create query
-	$query = "UPDATE «safeNameString(((model::DomainObject) wire.from).name)»
-		SET $attribute_name = ?
-		WHERE «attributeName(getPrimaryKey(this))-» = ?";
-	
-	$args = array($arg0, $new_id);
-	
-	$db_query = new DatabaseQuery($db_name);
-	$db_query->execute($query, $args);
-	log_message("attribute '$attribute_name' set to '$arg0'");
-«ENDDEFINE»
-
 /**
  * @implementation DomainObjectInstance
  *		The current offset of browsing {@model DomainObjectInstance instances} is stored
  *		in the containing {@model Session} if there is one, otherwise globally.
  */
 «DEFINE storeDomainObject FOR model::DomainObjectInstance-»
-	function store_object_instance_«safeName()»($attribute_name, $arg0) {
-		/* store a value into object id '«id»' */
-		«IF inWires.typeSelect(model::wires::SelectWire).isEmpty»
-			«IF inWires.typeSelect(model::wires::NewInstanceWire).isEmpty»
-				throw new IamlRuntimeException("No selection wires exist for setting object instance '«id»'");
-			«ELSE»
-				// set the current "new" object
-				«EXPAND setNewDomainObject(inWires.typeSelect(model::wires::NewInstanceWire).first()) FOR this»
-			«ENDIF»
-		«ELSE»
-			«EXPAND evaluateSelectWireStore FOR inWires.typeSelect(model::wires::SelectWire).first()»
-		«ENDIF»
-		object_instance_onChange_«safeName()»();		
-	}
-	
 	function save_queued_store_domain_object_«safeName()-»() {
 		/* save a queued domain object instance */
 		$iterator = DomainIterator_«safeName()»::getInstance();
@@ -189,90 +124,6 @@
 		«ENDFOREACH»
 		return true;
 	}
-«ENDDEFINE»
-
-«DEFINE setNewDomainObject(model::wires::NewInstanceWire wire) FOR model::DomainObjectInstance-»
-	// it should already be created, or this will create a new one
-	$instance = get_new_domain_object_«safeName()-»(true);	/* force creation */
-	$new_id = $instance["«attributeName(getPrimaryKey(this))-»"];
-
-	log_message("updating existing new object '$new_id', attribute = '$attribute_name'");
-
-	// get the current instance (complete subclass) as an associative
-	// array (also deals with incoming values from superclasses, etc) 
-	$instance = get_object_instance_«safeName(wire.to)»();
-	
-	// recurse through the tree to find the attribute, and save it
-	«LET (model::DomainObject) wire.from AS fromObject»
-		$db_query = update_«safeName(fromObject)»_attribute_instance(
-				$instance,
-				$attribute_name,
-				$arg0);
-		if ($db_query === null) {
-			// could not update attribute successfully
-			throw new IamlRuntimeException("Could not update attribute '$attribute_name' into object '«safeName()»' successfully: could not find attribute in subclass tree");
-		}
-	«ENDLET»
-«ENDDEFINE»
-
-«DEFINE evaluateSelectWireStore FOR model::wires::SelectWire»
-	/* selection wire «this» (for storing values), assumes $arg0 exists */
-	
-	«IF model::DomainObjectInstance.isInstance(to.eContainer)»
-		// get the current instance (complete subclass) as an associative
-		// array (also deals with incoming values from superclasses, etc)
-		$instance = get_object_instance_«safeName(to.eContainer)»();
-		
-		// recurse through the tree to find the attribute, and save it
-		«LET (model::DomainObject) from AS fromObject»
-			$db_query = update_«safeName(fromObject)»_attribute_instance(
-					$instance,
-					$attribute_name,
-					$arg0);
-			if ($db_query === null) {
-				// could not update attribute successfully
-				throw new IamlRuntimeException("Could not update attribute '$attribute_name' into object '«safeName(to.eContainer)»' successfully: could not find attribute in subclass tree");
-			}
-		«ENDLET»
-	«ELSEIF model::DomainObjectInstance.isInstance(to)»
-		// get the current instance (complete subclass) as an associative
-		// array (also deals with incoming values from superclasses, etc)
-		$instance = get_object_instance_«safeName(to)»();
-		
-		// recurse through the tree to find the attribute, and save it
-		«LET (model::DomainObject) from AS fromObject»
-			$db_query = update_«safeName(fromObject)»_attribute_instance(
-					$instance,
-					$attribute_name,
-					$arg0);
-			if ($db_query === null) {
-				// could not update attribute successfully
-				throw new IamlRuntimeException("Could not update attribute '$attribute_name' into object '«safeName(to)»' successfully: could not find attribute in subclass tree");
-			}
-		«ENDLET»
-	«ELSE»
-		/**
-		 * The DomainAttributeInstance is NOT stored within a DomainObjectInstance;
-	 	 * we have to select the attribute manually.
-	 	 */
-		
-		// where are we loading it from? sets $db_name
-		«EXPAND Select::selectDatabase FOR from»
-		
-		// create query
-		$query = "UPDATE «safeNameString(((model::DomainObject) from).name)»
-			SET $attribute_name = ?
-			WHERE " . «EXPAND Select::getQuery FOR this-»;
-		$args = array($arg0);
-		$args2 = array(«EXPAND template::operations::Parameters::callParameter(true, false, true) FOREACH inParameterEdges SEPARATOR ","»);
-		foreach ($args2 as $k) {
-			$args[] = $k;
-		}
-		
-		$db_query = new DatabaseQuery($db_name);
-		$db_query->execute($query, $args);
-	«ENDIF»
-
 «ENDDEFINE»
 
 /** to find the relevant domain attribute set method */

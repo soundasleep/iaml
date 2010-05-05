@@ -203,6 +203,7 @@ abstract class DomainIterator {
 	public function isNew() { return $this->is_new; }
 	public function getSource() { return $this->source; }
 	public function getLimit() { return $this->limit; }
+	public function getQuery() { return $this->query; }
 
 	/**
 	 * Check that either a result exists, or we are new.
@@ -399,8 +400,19 @@ abstract class DomainIterator {
 			return;
 		}
 
-		// do we have a defined object already?
-		if (!$this->getStoredValue("initialised", false)) {
+		$needs_reload = false;
+		if (!$this->isNew() && $this->argumentsHaveChanged()) {
+			// have the query arguments changed? this means that we have to lose our saved values
+			// (but only if we are on a Select; New wires are already covered with createNew())
+			$needs_reload = true;
+			log_message("[domain] Repopulating: Reloading due to changed arguments");
+		} elseif (!$this->getStoredValue("initialised", false)) {
+			// do we have a defined object already?
+			$needs_reload = true;
+			log_message("[domain] Repopulating: Reloading as no instance exists");
+		}
+
+		if ($needs_reload) {
 			log_message("[domain] Repopulating: Reloading");
 
 			// reload it instead
@@ -437,6 +449,21 @@ abstract class DomainIterator {
 
 		$this->logInstanceToDebug();
 
+	}
+
+	/**
+	 * Have the arguments to the results of this Iterator changed? If they have, then
+	 * we will need to refresh the stored results (potentially losing unsaved changes).
+	 */
+	protected function argumentsHaveChanged() {
+		return $this->getStoredValue("query_argument_cache", "empty") != print_r($this->constructArgs(), true);
+	}
+
+	/**
+	 * Update the cached arguments. See: {@link #argumentsHaveChanged()}
+	 */
+	protected function updateCachedArguments() {
+		$this->setStoredValue("query_argument_cache", print_r($this->constructArgs(), true));
 	}
 
 	/**
@@ -560,6 +587,7 @@ abstract class DomainIterator {
 
 			$query = $this->query;
 			$args = $this->constructArgs();
+			$this->updateCachedArguments();
 
 			// construct the order_by as TableName.attribute_name
 			$order_by = "";
@@ -878,6 +906,7 @@ abstract class DomainIterator {
 
 	public function reset() {
 		$this->setOffset(0);
+		$this->reload();
 	}
 
 	public function hasNext() {
@@ -893,8 +922,13 @@ abstract class DomainIterator {
 	/**
 	 * Move the offset forward and return the new object instance.
 	 * This will lose any unsaved changes.
+	 * If we go beyond the limit of the results, we must throw an IamlDomainException.
 	 */
 	public function next() {
+		if (!$this->hasNext()) {
+			throw new IamlDomainException("No results found for query '" . $this->getQuery() . "': Passed beyond end of result set");
+		}
+
 		$this->setOffset($this->getOffset() + 1);
 		$this->reload();
 		return $this->toArray();
@@ -903,8 +937,13 @@ abstract class DomainIterator {
 	/**
 	 * Move the offset backwards and return the new object instance.
 	 * This will lose any unsaved changes.
+	 * If we go beyond the limit of the results, we must throw an IamlDomainException.
 	 */
 	public function previous() {
+		if (!$this->hasPrevious()) {
+			throw new IamlDomainException("No results found for query '" . $this->getQuery() . "': Offset cannot be negative");
+		}
+
 		$this->setOffset($this->getOffset() - 1);
 		$this->reload();
 		return $this->toArray();
@@ -943,6 +982,7 @@ abstract class DomainIterator {
 
 			$query = $this->query;
 			$args = $this->constructArgs();
+			// we don't update the cached arguments (updateCachedArguments()) since count() is always up-to-date
 
 			$obj = evaluate_select_wire_count(
 				$this->source->getFile(),

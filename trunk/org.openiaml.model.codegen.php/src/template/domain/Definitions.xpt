@@ -297,29 +297,11 @@ class DomainIterator_Attribute_«safeName()» extends DomainIterator {
 	}
 
 	public function getNewInstanceID($key) {
-		«IF containingSession() != null»
-			$key2 = "new_object_«safeNameString(containingSession().id)-»_«safeNameString(id)-»";
-			if (has_session($key2)) {
-				return require_session($key2);
-			}
-			return null;
-		«ELSE»
-			$key2 = "new_object_«safeNameString(containingSession().id)-»_«safeNameString(id)-»";
-			if (get_application_value($key2, false) !== false) {
-				return get_application_value($key2, false);
-			}
-			return null;
-		«ENDIF»
+		return $this->getStoredValue("new_instance_id_$key");
 	}
 	
 	public function setNewInstanceID($key, $value) {
-		«IF containingSession() != null»
-			$key2 = "new_object_«safeNameString(containingSession().id)-»_«safeNameString(id)-»";
-			$_SESSION[$key2] = $value;
-		«ELSE»
-			$key2 = "new_object_«safeNameString(containingSession().id)-»_«safeNameString(id)-»";
-			set_application_value($key2, $value);
-		«ENDIF»
+		$this->setStoredValue("new_instance_id_$key", $value);
 	}
 
 «ENDDEFINE»

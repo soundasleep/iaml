@@ -476,6 +476,7 @@ abstract class DomainIterator {
 			throw new IamlDomainException("Cannot find container for attribute '" . $attr->toString() . "'");
 		}
 
+		log_message("Storing " . $schema->getTableName() . "." . $attr->getName() . " to " . $attrInst->getValue());
 		$this->setStoredValue($schema->getTableName() . "." . $attr->getName(), $attrInst->getValue());
 
 		// we also need to save that we've been initialised
@@ -515,6 +516,9 @@ abstract class DomainIterator {
 						$this, $key, $value, $attribute
 					);
 					$this->current_result[] = $o2;
+
+					// update the stored value
+					$this->updateAttributeInstanceValue($o2);
 				}
 
 				return;
@@ -556,6 +560,9 @@ abstract class DomainIterator {
 							$this, $key, $obj[$mapKey], $attribute
 						);
 						$this->current_result[] = $o2;
+
+						// update the stored value
+						$this->updateAttributeInstanceValue($o2);
 					}
 
 					return;
@@ -625,7 +632,12 @@ abstract class DomainIterator {
 					$this, $key, $obj[$mapKey], $attribute
 				);
 				$this->current_result[] = $o2;
+
+				// update the stored value
+				$this->updateAttributeInstanceValue($o2);
 			}
+			log_message("Reloaded instance from domain source:");
+			$this->logInstanceToDebug();
 
 		} else {
 			throw new IamlDomainException("Unknown source type $type");
@@ -904,8 +916,27 @@ abstract class DomainIterator {
 	 */
 	public abstract function setNewInstanceID($key, $id);
 
+	/**
+	 * Start the iterator back at the beginning. Reloads the instance.
+	 */
 	public function reset() {
 		$this->setOffset(0);
+		$this->reload();
+	}
+
+	/**
+	 * Skips the given number of instances. Reloads the instance.
+	 */
+	public function skip($n) {
+		$this->setOffset($this->getOffset() + $n);
+		$this->reload();
+	}
+
+	/**
+	 * Jump to offset $n. Reloads the instance.
+	 */
+	public function jump($n) {
+		$this->setOffset($n);
 		$this->reload();
 	}
 

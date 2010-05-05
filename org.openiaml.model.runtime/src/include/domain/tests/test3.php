@@ -21,6 +21,12 @@ class DomainIterator_News_ergqa3bdfbd extends DefaultDomainIterator {
 		return self::$instance;
 	}
 
+  // reset the current instance
+  public static function resetInstance() {
+	self::$instance->current_result = null;
+    self::$instance = null;
+  }
+
 	public function constructArgs() {
 		return array(
 			// no args

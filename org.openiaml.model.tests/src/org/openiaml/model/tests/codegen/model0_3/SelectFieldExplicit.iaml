@@ -4,14 +4,15 @@
     <children id="model.12109331eea.108c" name="User" outWires="wires.12109c6249b.29">
       <wires xsi:type="iaml.wires:SelectWire" id="wires.12109c6249b.29" from="model.12109331eea.108c" to="model.12109c6242e.c6" name="select" query="id = 44"/>
       <attributes id="model.12109331eea.10ac" name="name"/>
-      <attributes id="model.12109331eea.10ad" name="email"/>
+      <attributes id="model.12109331eea.10ad" name="email" inExtendsEdges="wires.128665d425c.2a"/>
       <attributes id="model.12109331eea.10ae" name="password"/>
       <attributes id="model.12109331eea.10d3" name="id" primaryKey="true"/>
     </children>
   </domainStores>
   <scopes xsi:type="iaml.visual:Frame" id="visual.12109331f38.e3f" name="container">
-    <elements xsi:type="iaml:DomainAttributeInstance" id="model.12109c6242e.c6" name="email" outWires="wires.12109c6249b.2a" inWires="wires.12109c6249b.29" autosave="true">
+    <elements xsi:type="iaml:DomainAttributeInstance" id="model.12109c6242e.c6" name="email" outWires="wires.12109c6249b.2a" inWires="wires.12109c6249b.29" outExtendsEdges="wires.128665d425c.2a" autosave="true">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.12109c6249b.2a" from="model.12109c6242e.c6" to="visual.12109c6248b.3b" name="sync"/>
+      <extendsEdges id="wires.128665d425c.2a" from="model.12109c6242e.c6" to="model.12109331eea.10ad"/>
     </elements>
     <children xsi:type="iaml.visual:InputTextField" inWires="wires.12109c6249b.2a" id="visual.12109c6248b.3b" name="edit email"/>
   </scopes>

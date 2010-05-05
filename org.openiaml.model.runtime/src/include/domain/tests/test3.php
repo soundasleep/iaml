@@ -72,14 +72,4 @@ $result = ob_get_contents();
 ob_end_clean();
 
 // check the results are as expected
-$expected = file_get_contents("expected3.txt");
-
-// clean out newlines etc
-$result = clean_newlines($result);
-$expected = clean_newlines($expected);
-
-if ($expected !== $result) {
-	echo "ERROR: Results did not match expected:\n\n[expected]\n$expected\n\n[output]\n$result\n";
-} else {
-	echo "PASS\n";
-}
+compareTestResults($result, "expected3.txt");

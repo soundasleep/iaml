@@ -184,4 +184,24 @@ function throw_new_IamlRuntimeException($message) {
 	throw new IamlRuntimeException($message);
 }
 
+function compareTestResults($output, $file) {
+	// clean out newlines etc
+	$output = clean_newlines($output);
+	$expected = clean_newlines(file_get_contents($file));
 
+	if ($expected !== $output) {
+		echo "ERROR: Results did not match expected:\n";
+
+		$filename = "temp";	// a temporary file
+		if (file_exists($filename)) {
+			echo "ERROR: Cannot create file $filename\n";
+			die(1);
+		}
+		file_put_contents($filename, $output);
+		passthru("diff -u --label result $filename $file");
+		echo "\n";
+		unlink($filename);	// then delete it
+	} else {
+		echo "PASS\n";
+	}
+}

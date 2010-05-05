@@ -16,6 +16,7 @@ import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.components.LoginHandlerTypes;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Frame;
+import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
@@ -101,6 +102,28 @@ public class LoginHandlerInstanceMultiple extends InferenceTestCase {
 		assertTrue("Query '" + select.getQuery() + "' should contain :password", select.getQuery().contains(":password"));
 		assertTrue("Query '" + select.getQuery() + "' should contain :email", select.getQuery().contains(":email"));
 
+	}
+	
+	/**
+	 * The DomainAttributeInstance 'name' should ExtendsEdge the defined DomainAttribute 'name',
+	 * even though we haven't specified it manually in the instance.
+	 * 
+	 * @throws Exception
+	 */
+	public void testDomainInstanceAttributeNameExtendsDefinedNameAttribute() throws Exception {
+		root = loadAndInfer(LoginHandlerInstanceMultiple.class);
+		
+		Session session = assertHasSession(root, "my session");
+		DomainStore store = assertHasDomainStore(root, "Users");
+		DomainObject object = assertHasDomainObject(store, "User");
+		DomainObjectInstance instance = assertHasDomainObjectInstance(session, "logged in user");
+
+		DomainAttributeInstance ai = assertHasDomainAttributeInstance(instance, "name");
+		DomainAttribute a = assertHasDomainAttribute(object, "name");
+		
+		ExtendsEdge edge = assertHasExtendsEdge(root, ai, a);
+		assertGenerated(edge);
+		
 	}
 
 }

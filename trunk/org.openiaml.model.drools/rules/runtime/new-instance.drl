@@ -38,10 +38,6 @@ rule "Refresh NewInstanceWire Instance Object mappings"
 		# set type
 		handler.setType(attr, attribute.getType());
 		queue.add(attr, drools);
-		
-		# mark it as an extension
-		ExtendsEdge w = handler.generatedExtendsEdge(wire, instance, attr, attribute);
-		queue.add(w, drools);
 
 end
 
@@ -66,10 +62,46 @@ rule "Refresh SelectWire Instance Object mappings"
 		handler.setType(attr, attribute.getType());
 		queue.add(attr, drools);
 
-		# mark it as an extension
-		ExtendsEdge w = handler.generatedExtendsEdge(wire, instance, attr, attribute);
-		queue.add(w, drools);
+end
 
+rule "Mark AttributeInstances as extensions of the identically-named Attributes (NewInstanceWire)"
+	when
+		object : DomainObject ( )
+		instance : DomainObjectInstance ( )
+		wire : NewInstanceWire( from == object, to == instance )
+
+		attribute : DomainAttribute ( eContainer == object )
+		attrinst : DomainAttributeInstance( eContainer == instance, name == attribute.name ) 
+		
+		not ( ExtendsEdge ( from == attrinst, to == attribute ) )
+		
+		eval ( handler.veto( attrinst ))
+		
+	then
+		# mark it as an extension
+		ExtendsEdge w = handler.generatedExtendsEdge(wire, attrinst, attrinst, attribute);
+		queue.add(w, drools);
+	
+end
+
+rule "Mark AttributeInstances as extensions of the identically-named Attributes (SelectWire)"
+	when
+		object : DomainObject ( )
+		instance : DomainObjectInstance ( )
+		wire : SelectWire( from == object, to == instance )
+
+		attribute : DomainAttribute ( eContainer == object )
+		attrinst : DomainAttributeInstance( eContainer == instance, name == attribute.name ) 
+		
+		not ( ExtendsEdge ( from == attrinst, to == attribute ) )
+		
+		eval ( handler.veto( attrinst ))
+		
+	then
+		# mark it as an extension
+		ExtendsEdge w = handler.generatedExtendsEdge(wire, attrinst, attrinst, attribute);
+		queue.add(w, drools);
+	
 end
 
 rule "Create 'save' operation for DomainObjectInstances"

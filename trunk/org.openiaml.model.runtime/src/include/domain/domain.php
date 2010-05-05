@@ -989,6 +989,7 @@ abstract class DomainIterator {
 
 	/**
 	 * Get the number of results for this query.
+	 * If the limit is set, and there are more results for this query than the limit, then returns the limit instead.
 	 */
 	public function count() {
 		if ($this->isNew()) {
@@ -1022,6 +1023,10 @@ abstract class DomainIterator {
 				$query,
 				$args
 			);
+
+			// return the maximum of 'actual results' or 'limit'
+			if ($this->limit > 0 && $obj > $this->limit)
+				return $this->limit;
 
 			return $obj;
 

@@ -116,9 +116,11 @@
 «DEFINE checkIncomingParameters(String return) FOR model::DomainAttributeInstance»
 	// check that all required parameters for this DomainAttributeInstance are present	
 	«FOREACH inWires.typeSelect(model::wires::SelectWire) AS wire»
-		if (!(«EXPAND template::operations::Parameters::callParameterExists FOREACH wire.inParameterEdges SEPARATOR " && "»)) {
-			return «return»;
-		}
+		«IF !wire.inParameterEdges.isEmpty»
+			if (!(«EXPAND template::operations::Parameters::callParameterExists FOREACH wire.inParameterEdges SEPARATOR " && "»)) {
+				return «return»;
+			}
+		«ENDIF»
 	«ENDFOREACH»
 	«IF model::DomainObjectInstance.isInstance(eContainer)»
 	«LET (model::DomainObjectInstance) eContainer AS obj»
@@ -130,9 +132,11 @@
 «DEFINE checkIncomingParameters(String return) FOR model::DomainObjectInstance»
 	// check that all required parameters for this DomainObjectInstance are present	
 	«FOREACH inWires.typeSelect(model::wires::SelectWire) AS wire»
-		if (!(«EXPAND template::operations::Parameters::callParameterExists FOREACH wire.inParameterEdges SEPARATOR " && "»)) {
-			return «return»;
-		}
+		«IF !wire.inParameterEdges.isEmpty»
+			if (!(«EXPAND template::operations::Parameters::callParameterExists FOREACH wire.inParameterEdges SEPARATOR " && "»)) {
+				return «return»;
+			}
+		«ENDIF»
 	«ENDFOREACH»
 «ENDDEFINE»
 

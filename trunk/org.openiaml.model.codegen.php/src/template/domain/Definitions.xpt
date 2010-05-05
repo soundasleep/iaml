@@ -245,6 +245,8 @@ class DomainIterator_Attribute_«safeName()» extends DomainIterator {
 		$this->query = «EXPAND Select::getQuery»;
 		$this->is_new = false;
 		$this->autosave = «autosave ? "true" : "false"»;
+		
+		$this->limit = «limit»; 
 	}
 	
 	public function constructArgs() {

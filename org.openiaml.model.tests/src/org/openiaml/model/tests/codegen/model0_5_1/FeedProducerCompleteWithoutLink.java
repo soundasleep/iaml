@@ -82,9 +82,9 @@ public class FeedProducerCompleteWithoutLink extends FeedCodegenTestCase {
 	@Override
 	protected List<String> getDatabaseInitialisers() {
 		List<String> s = new ArrayList<String>();
-		s.add("CREATE TABLE News (id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(64) NOT NULL, description VARCHAR(64) NOT NULL)");
+		s.add("CREATE TABLE News (generated_primary_key INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(64) NOT NULL, description VARCHAR(64) NOT NULL)");
 		for (int i = 1; i <= 20; i++) {
-			s.add("INSERT INTO News (id, title, description) VALUES (" + i + ", 'Title " + i + "', 'Description " + i + "')");
+			s.add("INSERT INTO News (generated_primary_key, title, description) VALUES (" + i + ", 'Title " + i + "', 'Description " + i + "')");
 		}
 		return s;
 	}

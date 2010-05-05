@@ -83,7 +83,7 @@
 	 */
 	function object_instance_reset_«safeName()»() {
 		$iterator = DomainIterator_«safeName()»::getInstance();
-		$iterator->setOffset(0);
+		$iterator->reset();
 		call_all_attribute_change_events_«safeName()-»();
 	} 
 
@@ -93,7 +93,7 @@
 	 */
 	function object_instance_skip_«safeName()»($n) {
 		$iterator = DomainIterator_«safeName()»::getInstance();
-		$iterator->setOffset($iterator->getOffset() + $n);
+		$iterator->skip($n);
 		call_all_attribute_change_events_«safeName()-»();
 	} 
 	
@@ -102,7 +102,7 @@
 	 */
 	function object_instance_jump_«safeName()»($n) {
 		$iterator = DomainIterator_«safeName()»::getInstance();
-		$iterator->setOffset($n);
+		$iterator->jump($n);
 		call_all_attribute_change_events_«safeName()-»();
 	} 
 	

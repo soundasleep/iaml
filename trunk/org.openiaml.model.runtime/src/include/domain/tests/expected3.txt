@@ -7,3 +7,6 @@ title: new title
 id: 4
 title: another title
 results = 4
+---
+Caught next() exception successfully
+Caught previous() exception successfully

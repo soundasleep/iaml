@@ -66,6 +66,27 @@ ob_start();
 
 	// print out the result count
 	echo "results = " . $iterator->count();
+
+	// if we call next() on an end iterator, we must throw an exception
+	echo "\n---\n";
+	try {
+		$iterator->next();
+		echo "next() did not throw an exception\n";
+	} catch (IamlDomainException $e) {
+		echo "Caught next() exception successfully\n";
+	}
+
+	// move iterator back to start
+	$iterator->reset();
+
+	// if we call previous(), it should fail as well
+	try {
+		$iterator->previous();
+		echo "previous() did not throw an exception\n";
+	} catch (IamlDomainException $e) {
+		echo "Caught previous() exception successfully\n";
+	}
+
 }
 
 $result = ob_get_contents();

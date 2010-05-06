@@ -363,6 +363,12 @@ function set_domain_attribute(id, arg0, function_queue) {
 	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
+function queue_store_domain_attribute(id, arg0, function_queue) {
+	var url = 'queue_store_domain_attribute.php?id=' + encodeURIComponent(id) + '&frame=' + encodeURIComponent(frame_id) + '&arg0=' + encodeURIComponent(arg0);
+	url += create_stacktrace_parameter();
+	execute_queued_url(url, 'set_domain_attribute', function_queue);
+}
+
 function queued_new_domain_instance(id, function_queue) {
 	var url = 'new_domain_instance.php?id=' + encodeURIComponent(id) + '&frame=' + encodeURIComponent(frame_id);
 	url += create_stacktrace_parameter();

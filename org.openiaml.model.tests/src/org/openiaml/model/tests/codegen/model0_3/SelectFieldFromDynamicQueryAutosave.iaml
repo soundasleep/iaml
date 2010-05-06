@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12109331eea.107e">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="model.12109331eea.107e">
   <domainStores id="model.12109331eea.1083" name="domain store">
     <children id="model.12109331eea.108c" name="User" outWires="wires.12109c6249b.5f">
       <wires xsi:type="iaml.wires:SelectWire" inParameterEdges="wires.12109c6249b.60" id="wires.12109c6249b.5f" from="model.12109331eea.108c" to="model.12109c6242e.1dc" name="select" query="email = ?"/>
@@ -9,12 +9,13 @@
       <attributes id="model.12109331eea.10d3" name="id" primaryKey="true"/>
     </children>
   </domainStores>
-  <scopes xsi:type="iaml.visual:Frame" id="visual.12109331f38.e3f" name="container">
+  <scopes xsi:type="iaml.scopes:Session" id="manual_session" name="Manual Session">
     <elements xsi:type="iaml:DomainAttributeInstance" id="model.12109c6242e.1dc" name="name" outWires="wires.12109c6249b.5e" inWires="wires.12109c6249b.5f" outExtendsEdges="wires.128665d425c.85">
       <operations xsi:type="iaml:PrimitiveOperation" id="model.1213cee9b4f.415" name="save" inActions="wires.1213cee9bad.f4"/>
       <wires xsi:type="iaml.wires:SyncWire" id="wires.12109c6249b.5e" from="model.12109c6242e.1dc" to="visual.12109c6248b.ac" name="sync"/>
       <extendsEdges id="wires.128665d425c.85" from="model.12109c6242e.1dc" to="model.12109331eea.10ac"/>
     </elements>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12109331f38.e3f" name="container">
     <children xsi:type="iaml.visual:InputTextField" id="visual.12109c6248b.ab" name="select email" outParameterEdges="wires.12109c6249b.60">
       <parameterEdges id="wires.12109c6249b.60" from="visual.12109c6248b.ab" to="wires.12109c6249b.5f"/>
       <fieldValue id="model.12109c6242e.21d" name="fieldValue" defaultValue="default@jevon.org"/>
@@ -23,5 +24,6 @@
     <children xsi:type="iaml.visual:Button" id="visual.1213cee9bad.158" name="manually save" outActions="wires.1213cee9bad.f4">
       <actions xsi:type="iaml.wires:RunAction" id="wires.1213cee9bad.f4" name="click" from="visual.1213cee9bad.158" to="model.1213cee9b4f.415"/>
     </children>
+  </scopes>
   </scopes>
 </iaml:InternetApplication>

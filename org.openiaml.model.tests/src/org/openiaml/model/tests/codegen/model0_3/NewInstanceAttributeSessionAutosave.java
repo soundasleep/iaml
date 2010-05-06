@@ -64,11 +64,11 @@ public class NewInstanceAttributeSessionAutosave extends DatabaseCodegenTestCase
 		setLabeledFormElementField(field, newValue);
 		assertLabeledFieldEquals(field, newValue);
 		
-		// reload page, it should NOT be stored
+		// reload page, it will still be stored
 		reloadPage(sitemap, "session page");
 		{
 			String field2 = getLabelIDForText("edit new name");
-			assertLabeledFieldEquals(field2, "");
+			assertLabeledFieldEquals(field2, newValue);
 		}
 		
 		// *restart* session, a new instance should be created
@@ -81,11 +81,11 @@ public class NewInstanceAttributeSessionAutosave extends DatabaseCodegenTestCase
 		setLabeledFormElementField(field, newValue2);
 		assertLabeledFieldEquals(field, newValue2);
 
-		// reload page, it should NOT be stored
+		// reload page, it will still be stored
 		reloadPage(sitemap, "session page");		
 		{
 			String field3 = getLabelIDForText("edit new name");
-			assertLabeledFieldEquals(field3, "");
+			assertLabeledFieldEquals(field3, newValue2);
 		}
 
 		// check the database for the first session value

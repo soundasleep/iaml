@@ -64,18 +64,19 @@ public class NewInstanceObjectAutosave extends DatabaseCodegenTestCase {
 		setLabeledFormElementField(field, newValue);
 		assertLabeledFieldEquals(field, newValue);
 		
-		// reload page, it should NOT be stored
+		// reload page, it should persist
 		reloadPage(sitemap, "container");		
 		{
 			String field2 = getLabelIDForText("edit new instance name");
-			assertLabeledFieldEquals(field2, "");
+			assertLabeledFieldEquals(field2, newValue);
 		}
 		
-		// *restart* session, it should NOT be stored
+		// *restart* the session; but because this is stored in the root,
+		// the value will still persist
 		restartSession(sitemap, "container");
 		{
 			String field2 = getLabelIDForText("edit new instance name");
-			assertLabeledFieldEquals(field2, "");
+			assertLabeledFieldEquals(field2, newValue);
 		}
 		
 		// check the database, it should not be in there
@@ -130,7 +131,8 @@ public class NewInstanceObjectAutosave extends DatabaseCodegenTestCase {
 			assertLabeledFieldEquals(field2, newValue);
 		}
 		
-		// *restart* session, it should be stored
+		// if we *restart* the session, since this is still stored in the
+		// root, the value will still persist
 		restartSession(sitemap, "container");
 		{
 			String field2 = getLabelIDForText("edit new instance name");

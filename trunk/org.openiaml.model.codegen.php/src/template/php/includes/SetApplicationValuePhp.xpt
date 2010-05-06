@@ -45,33 +45,13 @@ if ($old_value !== $arg0) {
 	set_application_value($id, $arg0);
 	log_message("set_application_value.php: setting id=$id, arg0=$arg0, old=$old_value");
 	
-	// do we need to run any onChange/onChange events?
+	// do we need to run any onChange events?
 	«EXPAND onChangeEvents FOREACH eAllContents.typeSelect(model::Changeable)»
 }
 
 echo "ok";
 
-/* Is there additional actions we should do on the client-side once this
- * property has changed? */
-«REM»
-this is different from 'updateAllFrameProperties', because this allows
-incoming parameters for SelectWires, etc, to be propogated correctly.
-TODO this should be refactored and made cleaner in the future. 
-«ENDREM»
-try {
-	«EXPAND potentialUpdatesRequired FOREACH allProperties(this)»
-} catch (IamlRuntimeException $e) {
-	// redirect to the exception frame
-	$url = "exception.php?fail=" . urlencode($e->getMessage() . " [from setApplicationValue]");
-	log_message("[exception] " . print_r($e, true));
-	log_message("[update exception handler] Redirecting to '$url' (fail)");
-
-	log_message("redirect " 
-		. escape_parameter_string($url));
-	echo "\nredirect " 
-		. escape_parameter_string($url);				
-	die;
-}
+«EXPAND includePotentialUpdatesRequired»
 
 // update any (other) values on the client-side?
 «EXPAND template::php::callbacks::UpdateFrameProperties::updateAllFrameProperties»
@@ -81,10 +61,34 @@ echo_necessary_update_callbacks();
 
 «ENDDEFINE»
 
+«DEFINE includePotentialUpdatesRequired FOR model::InternetApplication»
+	/* Is there additional actions we should do on the client-side once this
+	 * property has changed? */
+	«REM»
+	this is different from 'updateAllFrameProperties', because this allows
+	incoming parameters for SelectWires, etc, to be propogated correctly.
+	TODO this should be refactored and made cleaner in the future. 
+	«ENDREM»
+	try {
+		«EXPAND potentialUpdatesRequired FOREACH allProperties(this)»
+	} catch (IamlRuntimeException $e) {
+		// redirect to the exception frame
+		$url = "exception.php?fail=" . urlencode($e->getMessage() . " [from setApplicationValue]");
+		log_message("[exception] " . print_r($e, true));
+		log_message("[update exception handler] Redirecting to '$url' (fail)");
+	
+		log_message("redirect " 
+			. escape_parameter_string($url));
+		echo "\nredirect " 
+			. escape_parameter_string($url);				
+		die;
+	}
+«ENDDEFINE»
+
 «DEFINE onChangeEvents FOR model::Changeable»
 	«IF fieldValue != null»
 		«IF onChange != null»
-		if ($id == '«safeName(fieldValue)»') {
+		if ($id == '«IF containingSession() != null»«safeName(containingSession())»_«ENDIF»«safeName(fieldValue)»') {
 			«EXPAND template::events::EventCall::callEvent(true) FOR onChange»
 		}
 		«ENDIF» 
@@ -92,7 +96,7 @@ echo_necessary_update_callbacks();
 «ENDDEFINE»
 
 «DEFINE potentialUpdatesRequired FOR model::Property»
-	if ($id == "«safeName()-»") {
+	if ($id == "«IF containingSession() != null»«safeName(containingSession())»_«ENDIF»«safeName()-»") {
 		/* Property "«name-»" («id-») */
 		
 		«REM»expand the direct wires from the property«ENDREM»

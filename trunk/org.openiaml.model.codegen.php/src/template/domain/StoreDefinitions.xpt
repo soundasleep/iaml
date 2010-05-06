@@ -12,7 +12,7 @@
 
 	«IF php»
 		«IF isAutosaveOff(this)»
-		/* for elements with 'autosave' off */
+		/* for attributes with 'autosave' set to false */
 		function queue_store_domain_attribute_«safeName()»($arg0) {
 			«IF model::DomainObjectInstance.isInstance(eContainer)»
 				$iterator = DomainIterator_«safeName(eContainer)»::getInstance();
@@ -28,7 +28,8 @@
 				$iterator = DomainIterator_«safeName(eContainer)»::getInstance();
 				$iterator->save();
 			«ELSE»
-				«throwException("Can't save queued value for non-contained attribute '" + this)»
+				$iterator = DomainIterator_Attribute_«safeName()»::getInstance();
+				$iterator->save();
 			«ENDIF»
 		}
 		
@@ -39,15 +40,14 @@
 		 * generated for attributes with a default value.)
 		 */
 		function can_save_queued_store_domain_attribute_«safeName()»() {
-			«IF containingSession(this) != null»
-				/* contained within a session */
-				$arg0 = has_session("instance_queue_«safeName(containingSession())-»_«safeName()-»", false);
+			«IF model::DomainObjectInstance.isInstance(eContainer)»
+				$iterator = DomainIterator_«safeName(eContainer)»::getInstance();
 			«ELSE»
-				/* contained within a frame */
-				$arg0 = get_application_value("instance_queue_«safeName()-»", false);
+				$iterator = DomainIterator_Attribute_«safeName()»::getInstance();
 			«ENDIF»
 			
-			if ($arg0 === false) {
+			$value = $iterator->getAttributeInstance( DomainAttribute_«safeName(getAttributeForAttributeInstance())»::getInstance() )->getValue();
+			if ($arg0 === null) {
 				return false;
 			}
 				
@@ -57,18 +57,18 @@
 		«ENDIF»
 		«ENDIF»
 	«ELSE»
+		«IF isAutosaveOff(this)»
 		/* for attributes with 'autosave' set to false */
 		function queue_store_domain_attribute_«safeName()»(arg0) {
-			«IF containingSession() != null»
-				set_session("instance_queue_«safeName(containingSession())-»_«safeNameString(id)-»", arg0, null, true);
-			«ELSE»
-				set_application_value("instance_queue_«safeNameString(id)-»", arg0, null, true);
-			«ENDIF» 
+			// calls the server
+			queue_store_domain_attribute("«safeNameString(id)-»", arg0);
 		}
 		
 		function save_queued_store_domain_attribute_«safeName()»() {
+			// calls the server
 			save_queued_store_domain_attribute("«safeNameString(id)-»");
 		}
+		«ENDIF»
 	«ENDIF»
 «ENDDEFINE»
 

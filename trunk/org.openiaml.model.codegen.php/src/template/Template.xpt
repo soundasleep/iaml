@@ -89,6 +89,7 @@
 	«FILE "output/set_domain_attribute.php"»«EXPAND php::includes::SetDomainAttributePhp::setDomainAttributePhp»«ENDFILE»
 	«FILE "output/save_queued_attribute.php"»«EXPAND php::includes::SaveQueuedAttributePhp::saveQueuedAttribute»«ENDFILE»
 	«FILE "output/save_queued_store_domain_object.php"»«EXPAND php::includes::SaveQueuedStoreDomainObjectPhp::saveQueuedStoreDomainObject»«ENDFILE»
+	«FILE "output/queue_store_domain_attribute.php"»«EXPAND php::includes::QueueStoreDomainAttribute::queueStoreDomainAttribute»«ENDFILE»
 	«FILE "output/clear_session.php"»«EXPAND php::includes::ClearSessionPhp::clearSessionPhp»«ENDFILE»
 	«FILE "output/call_remote_event.php"»«EXPAND php::includes::CallRemoteEvent::callRemoteEvent»«ENDFILE»
 	«FILE "output/add_role.php"»«EXPAND php::includes::AddRolePhp::addRolePhp»«ENDFILE»

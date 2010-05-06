@@ -106,15 +106,16 @@ public class SelectFieldFromDynamicQueryAutosave extends DatabaseCodegenTestCase
 		setLabeledFormElementField(field, newValue);
 		assertLabeledFieldEquals(field, newValue);
 		
-		// if we reload the page, it has not changed
+		// if we reload the page, it is still there (since it persists in the Frame)
 		reloadPage(sitemap, "container");		
 		{
 			String field2 = getLabelIDForText("edit name");
-			assertLabeledFieldEquals(field2, "User Default");
+			assertLabeledFieldEquals(field2, newValue);
 		}
 		
-		// *restart* session, it should not have changed
-		restartSession(sitemap, "container");
+		// if we restart the entire session, we have reverted back to the initial value
+		// (since it is only persisting within the given Session)
+		restartSession(sitemap, "container");		
 		{
 			String field2 = getLabelIDForText("edit name");
 			assertLabeledFieldEquals(field2, "User Default");
@@ -228,19 +229,25 @@ public class SelectFieldFromDynamicQueryAutosave extends DatabaseCodegenTestCase
 		setLabeledFormElementField(field, newValue);
 		assertLabeledFieldEquals(field, newValue);
 		
-		// reload page, it should NOT be stored
+		// if we reload the page, it is still there (since it persists in the Frame)
 		reloadPage(sitemap, "container");		
 		{
 			String field2 = getLabelIDForText("edit name");
-			assertLabeledFieldEquals(field2, "User Two");
+			assertLabeledFieldEquals(field2, newValue);
 		}
 		
-		// *restart* session, it should NOT be stored
+		// if we restart the entire session, we have reverted back to the initial value
+		// (since it is only persisting within the given Session)
+		// (and the query parameter has also defaulted back)  
 		restartSession(sitemap, "container");
 		{
 			String field2 = getLabelIDForText("edit name");
-			assertLabeledFieldEquals(field2, "User Two");
+			assertLabeledFieldEquals(field2, "User Default");
 		}
+		
+		// but if we set the parameter back to 'target@jevon.org', we will get the original name
+		setLabeledFormElementField(select, "target@jevon.org");
+		assertLabeledFieldEquals(field, "User Two");
 		
 		// check the database
 		{
@@ -307,11 +314,16 @@ public class SelectFieldFromDynamicQueryAutosave extends DatabaseCodegenTestCase
 		}
 		
 		// *restart* session, it should be stored
+		// (but the query parameter has also defaulted back)  
 		restartSession(sitemap, "container");
 		{
 			String field2 = getLabelIDForText("edit name");
-			assertLabeledFieldEquals(field2, newValue);
+			assertLabeledFieldEquals(field2, "User Default");
 		}
+		
+		// if we set the parameter back to 'target@jevon.org', we will get the new name
+		setLabeledFormElementField(select, "target@jevon.org");
+		assertLabeledFieldEquals(field, newValue);
 		
 		// check the database
 		{

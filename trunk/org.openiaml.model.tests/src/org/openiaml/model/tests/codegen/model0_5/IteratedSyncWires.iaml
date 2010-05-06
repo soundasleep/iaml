@@ -2,7 +2,7 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.127e56efe3e.1">
   <domainStores id="model.127e56efe3e.4" name="Database">
     <children id="model.127e56efe3e.f" name="News" outWires="wires.127e56eff0a.1">
-      <wires xsi:type="iaml.wires:SelectWire" id="wires.127e56eff0a.1" from="model.127e56efe3e.f" to="model.127e56efe3e.b0" name="select"/>
+      <wires xsi:type="iaml.wires:SelectWire" id="wires.127e56eff0a.1" from="model.127e56efe3e.f" to="model.127e56efe3e.b0" name="select" limit="-1"/>
       <attributes id="model.127e56efe3e.2f" name="title"/>
       <attributes id="model.127e56efe3e.35" name="content"/>
       <attributes id="model.127e56efe3e.36" name="posted">

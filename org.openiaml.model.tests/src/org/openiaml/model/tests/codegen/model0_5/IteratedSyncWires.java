@@ -14,7 +14,10 @@ import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
  * 
  * @example DomainObjectInstance
  * 		Navigating around a {@model DomainObjectInstance} using the provided
- * 		{@model PrimitiveOperation}s. 
+ * 		{@model PrimitiveOperation}s.
+ * @implementation SelectWire
+ * 		A {@model SelectWire} must have a limit not equal to 1 in order to
+ * 		navigate successfully.
  * @author jmwright
  *
  */

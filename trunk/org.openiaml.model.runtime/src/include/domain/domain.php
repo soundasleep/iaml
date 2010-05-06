@@ -494,14 +494,20 @@ abstract class DomainIterator {
 	public abstract function setStoredValue($key, $value);
 
 	/**
-	 * Reload the instance from the database; updates $current_result.
+	 * Reload the instance from the database; always updates $current_result.
 	 * If there are unsaved changes, they are lost.
+	 *
+	 * If there are no results for the given query, throws a IamlDomainException, and sets
+	 * $current_result to <code>null</code>.
 	 */
 	public function reload() {
 		// init joins
 		$this->source->initExtensions();
 
 		$type = $this->source->getType();
+
+		// reset current_result
+		$this->current_result = null;
 
 		if ($this->isNew()) {
 			if ($this->getNewInstanceID($this->schema->getTableName()) === null) {
@@ -550,6 +556,11 @@ abstract class DomainIterator {
 						0, "", true, /* default values */
 						$mappingQuery
 					);
+
+					// if no results returned, bail
+					if ($obj === null) {
+						throw new IamlDomainException("No results found for previously created new instance");
+					}
 
 					// translate the array(key=>value) into array(key=>DomainAttributeInstance)
 					// log_message("result: " . print_r($obj, true));
@@ -624,6 +635,11 @@ abstract class DomainIterator {
 				$mappingQuery
 			);
 
+			// if no results returned, bail
+			if ($obj === null) {
+				throw new IamlDomainException("No results found for query '" . $this->getQuery() . "'");
+			}
+
 			// translate the array(key=>value) into array(key=>DomainAttributeInstance)
 			$this->current_result = array();
 			foreach ($mapping as $mapKey => $attribute) {
@@ -676,7 +692,7 @@ abstract class DomainIterator {
 		// possibly reload
 		$this->repopulate();
 
-		if ($this->current_result === null) {
+		if ($this->current_result === null || (!$this->isNew() && $this->isEmpty())) {
 			throw new IamlDomainException("Cannot save " . get_class($this) . ": The current result has not been loaded anywhere.");
 		}
 

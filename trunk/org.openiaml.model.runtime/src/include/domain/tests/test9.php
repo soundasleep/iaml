@@ -104,7 +104,12 @@ ob_start();
 
 	// get the current instance
 	$instance = DomainIterator_StudentAdminNewEditor::getInstance();
-	$instance->reload();
+	try {
+		$instance->reload();
+		echo "FAIL: Could reload when there are no results\n";
+	} catch (IamlDomainException $e) {
+		// expected
+	}
 
 	echo $instance->hasNext() ? "hasNext\n" : "-\n";
 	echo $instance->hasPrevious() ? "hasPrevious\n" : "-\n";

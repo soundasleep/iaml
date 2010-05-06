@@ -47,12 +47,12 @@
 			«ENDIF»
 			
 			$value = $iterator->getAttributeInstance( DomainAttribute_«safeName(getAttributeForAttributeInstance())»::getInstance() )->getValue();
-			if ($arg0 === null) {
+			if ($value === null) {
 				return false;
 			}
 				
 			// can we cast it?
-			return can_cast($arg0, '«type.uRI»');
+			return can_cast($value, '«type.uRI»');
 		}
 		«ENDIF»
 		«ENDIF»

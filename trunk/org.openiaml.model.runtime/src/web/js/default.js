@@ -182,7 +182,7 @@ function execute_queued_url(url, counter, function_queue) {
 		      						debug("[instruction] redirect(" + url + ")");
 									window.location = url;
 									ajaxIncrement();	// prevent other events from executing
-		      						break;
+									return;		// cancel any other instructions
 		      					
 		      					case "alert":
 		      						if (bits.length != 2) {

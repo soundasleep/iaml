@@ -47,42 +47,41 @@
  * We now have a UserInstance on which to validate against
  */
 «DEFINE checkAccessDefinitionUser(model::users::UserInstance user) FOR model::components::AccessControlHandler»
-	$instance = get_object_instance_«safeName(user)»();
-	if (!$instance)
+	$iterator = DomainIterator_«safeName(user)»::getInstance();
+	if ($iterator->isEmpty()) {
+		// there are no results; bail
 		throw new IamlRuntimeException("Unexpected empty UserInstance '«user.name»'; has the user logged in?");
-
+	}
+	
 	«FOREACH outRequiresEdges.to.typeSelect(model::users::Role) AS targetRole»
-		«LET user.inWires.typeSelect(model::wires::SelectWire).from.typeSelect(model::DomainObject).first() AS initialRole»
-			/* check role '«targetRole.name»' */
-			if (cast_«safeName(initialRole)»_as_«safeName(targetRole)»($instance) == null) {
-				// user cannot be cast as this role
-				$failure['«safeName(targetRole)»'] = new IamlRuntimeException("Source role '«initialRole.name»' could not be translated into '«targetRole.name»'");
-			} else {
-				// can be cast fine
-				$failure['«safeName(targetRole)»'] = null;
-			}
-		«ENDLET»
+	«LET getContainingUserStore(targetRole) AS userStore»
+		// get the root user iterator
+		$attribute = DomainAttribute_UserRoot_«safeName(userStore)»_ID::getInstance();
+		$root_user_id = $iterator->getAttributeInstance($attribute)->getValue();
+		
+		if ($root_user_id === null) {
+			throw new IamlRuntimeException("User Instance did not have a root ID " . $attribute->toString());
+		}
+
+		// a separate query iterator
+		$query_iterator = HasRole_«safeName(targetRole)»::getInstance($root_user_id); 
+		if ($query_iterator->isEmpty()) {
+			// no such role exists
+			$failure['«safeName(targetRole)»'] = new IamlRuntimeException("Source instance '" . $iterator->toString() . "' could not be translated into '«targetRole.name»'");
+		} else {
+			// role exists fine
+			$failure['«safeName(targetRole)»'] = null;
+		}
+	«ENDLET»
 	«ENDFOREACH»
 	
 	/* check permissions */
 	«FOREACH outRequiresEdges.to.typeSelect(model::users::Permission) AS targetPermission»
 		/* permission '«targetPermission.name»' */
-		if (
-		«IF user.inWires.typeSelect(model::wires::NewInstanceWire).isEmpty»
-			«IF user.inWires.typeSelect(model::wires::SelectWire).isEmpty»
-				«throwException("Cannot deduce the instance type of UserInstance: " + user)»
-			«ELSE»
-				user_instance_«safeName(user.inWires.typeSelect(model::wires::SelectWire).from.first())»_has_permission_«safeName(targetPermission)»
-			«ENDIF»
-		«ELSE»
-			user_instance_«safeName(user.inWires.typeSelect(model::wires::NewInstanceWire).from.first())»_has_permission_«safeName(targetPermission)»
-		«ENDIF»
-		($instance)) {
-			// user has permission
-			$failure['«safeName(targetPermission)»'] = null;
-		} else {
-			// user does not
+		if (!$iterator->getAttributeInstance(Permission_«safeName(targetPermission)»::getInstance())->getValue()) {
 			$failure['«safeName(targetPermission)»'] = new IamlRuntimeException("User of type '«user.name»' did not have permission '«targetPermission.name»'");
+		} else {
+			$failure['«safeName(targetPermission)»'] = null;
 		}
 	«ENDFOREACH»
 	

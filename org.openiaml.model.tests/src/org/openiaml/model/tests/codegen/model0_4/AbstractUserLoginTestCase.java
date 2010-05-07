@@ -131,10 +131,15 @@ public abstract class AbstractUserLoginTestCase extends DatabaseCodegenTestCase 
 	@Override
 	protected List<String> getDatabaseInitialisers() {
 		List<String> s = new ArrayList<String>();
-		s.add("CREATE TABLE User (generated_primary_key INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(64), email VARCHAR(64), password VARCHAR(64))");
-		s.add("INSERT INTO User (generated_primary_key, name, email, password) VALUES (12, 'User', 'user@openiaml.org', 'user')");
-		s.add("INSERT INTO User (generated_primary_key, name, email, password) VALUES (22, 'Default Role', 'default@openiaml.org', 'test123')");
-		s.add("INSERT INTO User (generated_primary_key, name, email, password) VALUES (32, 'Registered User', 'registered@openiaml.org', 'test123')");
+		s.add("CREATE TABLE User (generated_primary_key INTEGER PRIMARY KEY AUTOINCREMENT, root_user_id INTEGER, name VARCHAR(64), email VARCHAR(64), password VARCHAR(64))");
+		s.add("INSERT INTO User (generated_primary_key, root_user_id, name, email, password) VALUES (12, 1, 'User', 'user@openiaml.org', 'user')");
+		s.add("INSERT INTO User (generated_primary_key, root_user_id, name, email, password) VALUES (22, 2, 'Default Role', 'default@openiaml.org', 'test123')");
+		s.add("INSERT INTO User (generated_primary_key, root_user_id, name, email, password) VALUES (32, 3, 'Registered User', 'registered@openiaml.org', 'test123')");
+		
+		s.add("CREATE TABLE iaml_user_root (id INTEGER PRIMARY KEY AUTOINCREMENT, inherited_permission_with_role INTEGER(1), permission_1 INTEGER(1))");
+		s.add("INSERT INTO iaml_user_root (id, inherited_permission_with_role, permission_1) VALUES (1, 0, 0)");
+		s.add("INSERT INTO iaml_user_root (id, inherited_permission_with_role, permission_1) VALUES (2, 0, 0)");
+		s.add("INSERT INTO iaml_user_root (id, inherited_permission_with_role, permission_1) VALUES (3, 0, 0)");
 		return s;
 	}
 	

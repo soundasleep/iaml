@@ -6,12 +6,184 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
+/**
+ * @implementation Role,Permission
+ *		When a {@model UserInstance} has a {@model Role} removed, all inherited
+ *		{@model Permission}s with that {@model Role} are also removed.
+ *
+ * @implementation Role,Permission
+ *		When a {@model UserInstance} has a {@model Role} added, all inherited
+ *		{@model Permission}s with that {@model Role} are also added.
+ *
+ * @implementation Role
+ *		When a {@model Role} is removed from a {@model UserInstance}, all
+ *		subtype {@model Role}s are not also automatically removed. This is probably inconsistent.
+ */
 «DEFINE roleFunctions FOR model::users::Role»
 	«REM»all roles that extend this role«ENDREM»
 	«FOREACH getDomainStore().eAllContents.typeSelect(model::users::Role) AS role»
 		«EXPAND addRoleFunction(role) FOR this»
 		«EXPAND removeRoleFunction(role) FOR this»
 	«ENDFOREACH»
+
+/**
+ * Add the role '«name»' to the given instance in the iterator $iterator;
+ * this $iterator can be pointing towards any DomainSchema, as long as both 
+ * the given role and the schema eventually extend <code>iaml_user_root</code> table.
+ */
+function add_role_«safeName()»(DomainIterator $iterator) {
+	log_message("[role] Adding role 'name»' to iterator " . $iterator->toString());
+
+	// get the root ID
+	«LET getContainingUserStore() AS userStore»
+		$attribute = DomainAttribute_UserRoot_«safeName(userStore)»_ID::getInstance();
+	«ENDLET»
+	$root_user_id = $iterator->getAttributeInstance($attribute)->getValue();
+	
+	if ($root_user_id === null) {
+		throw new IamlRuntimeException("User Instance did not have a root ID " . $attribute->toString());
+	}
+	
+	// does this role already exist?
+	if (!(HasRole_«safeName()»::getInstance($root_user_id)->isEmpty())) {
+		log_message("[role] Role already existed");
+		return; 
+	}
+	
+	// this schema
+	$this_schema = DomainSchema_«safeName()»::getInstance();
+	
+	// we need to get all the PKs of all parent roles of '«name»'
+	$fk_names = array();
+	$pk_values = array();
+	$pk_binds = array();
+	«FOREACH outExtendsEdges.to.typeSelect(model::users::Role) AS superType»
+	{
+		// make sure it exists first (recursive)
+		add_role_«safeName(superType)»($iterator);
+		
+		// $schema = DomainSchema_«safeName(superType)»::getInstance();
+		$role_instance = HasRole_«safeName(superType)»::getInstance($root_user_id);
+		
+		if ($role_instance->isEmpty()) {
+			throw new IamlRuntimeException("Unexpectedly could not create parent role '«superType.name»'");
+		}
+		
+		«FOREACH attributes AS a»
+			«FOREACH a.outExtendsEdges.to.typeSelect(model::DomainAttribute).select(a2|a2.primaryKey).select(a2|a2.eContainer == superType) AS fk»
+				$fk_names[] = DomainAttribute_«safeName(a)»::getInstance()->getName();
+				$pk_values[] = $role_instance->getAttributeInstance(DomainAttribute_«safeName(fk)»::getInstance())->getValue();
+				$pk_binds[] = "?";
+			«ENDFOREACH»
+		«ENDFOREACH»
+	}
+	«ENDFOREACH»
+	«IF outExtendsEdges.to.typeSelect(model::users::Role).isEmpty»
+	{
+		// our only extension is the root container
+		$fk_names[] = DomainAttribute_UserRole_«safeName()»_Link::getInstance()->getName();
+		$pk_values[] = $root_user_id;
+		$pk_binds[] = "?";
+	}
+	«ENDIF»
+	
+	if (!$fk_names) {
+		throw new IamlRuntimeException("Could not find any FK names for Role '«name»'"); 
+	}
+	if (!$pk_values) {
+		throw new IamlRuntimeException("Could not find any FK values for Role '«name»'"); 
+	}
+	
+	// insert this into the database
+	$query = "INSERT INTO " . $this_schema->getTableName() . " (" . implode(", ", $fk_names) . ") VALUES (" . implode(", ", $pk_binds) . ")";
+	$iterator->getSource()->executeQueryDirectly($query, $pk_values);
+	
+	log_message("[role] Added role '«name»' successfully");
+	
+	// once created, we need to add all the permissions that this role normally provides
+	«FOREACH outProvidesEdges.to.typeSelect(model::users::Permission) AS p»
+		log_message("[role] Adding permission '«escapePhpString(p.name)»'");
+		add_permission_«safeName(p)»($iterator);
+	«ENDFOREACH»
+	
+}
+
+/**
+ * Remove the role '«name»' to the given instance in the iterator $iterator;
+ * this $iterator can be pointing towards any DomainSchema, as long as both 
+ * the given role and the schema eventually extend <code>iaml_user_root</code> table.
+ *
+ * @implementation UserInstance
+ *		When a {@model Role} is removed from a {@model UserInstance}, the {@model UserInstance}
+ *		is reloaded explicitly.
+ */
+function remove_role_«safeName()»(DomainIterator $iterator) {
+	// reload
+	$iterator->reload();
+
+	log_message("[role] Removing role 'name»' to iterator " . $iterator->toString());
+	
+	// get the root ID
+	«LET getContainingUserStore() AS userStore»
+		$attribute = DomainAttribute_UserRoot_«safeName(userStore)»_ID::getInstance();
+	«ENDLET»
+	$root_user_id = $iterator->getAttributeInstance($attribute)->getValue();
+	
+	if ($root_user_id === null) {
+		throw new IamlRuntimeException("User Instance did not have a root ID " . $attribute->toString());
+	}
+	
+	// has this role already been removed?
+	if (HasRole_«safeName()»::getInstance($root_user_id)->isEmpty()) {
+		log_message("[role] Role already removed");
+		return; 
+	}
+	
+	$target_iterator = HasRole_«safeName()»::getInstance($root_user_id);
+	
+	// this schema
+	$this_schema = DomainSchema_«safeName()»::getInstance();
+	
+	/*
+	 * We don't worry about removing subtype roles; because we would have to worry
+	 * about the case where a subtype has another supertype which is disjoint
+	 * from this type. We will just let subtypes persist in the database.  
+	 * TODO This may be a security problem in the future.
+	 */
+	
+	$pk_names = array();
+	$pk_values = array();
+	«FOREACH attributes.select(a|a.primaryKey) AS a»
+	{
+		$pk_attribute = DomainAttribute_«safeName(a)»::getInstance();
+		$pk_names[] = $pk_attribute->getName() . " = ?";
+		$pk_values[] = $target_iterator->getAttributeInstance($pk_attribute)->getValue();
+	}
+	«ENDFOREACH» 
+	
+	if (!$pk_names) {
+		throw new IamlRuntimeException("Could not find any PK names for Role '«escapePhpString(name)»'");
+	}
+	if (!$pk_values) {
+		throw new IamlRuntimeException("Could not find any PK values for Role '«escapePhpString(name)»'");
+	}
+
+	// once removed, we need to remove all the permissions that this role normally provides
+	// (we need to remove the permissions *before* we remove the role, otherwise we will be
+	// trying to remove permissions from a role that doesn't exist)
+	«FOREACH outProvidesEdges.to.typeSelect(model::users::Permission) AS p»
+		log_message("[role] Removing permission '«escapePhpString(p.name)»'");
+		remove_permission_«safeName(p)»($target_iterator);
+	«ENDFOREACH»
+	
+	// execute query directly
+	$query = "DELETE FROM " . $this_schema->getTableName() . " WHERE " .
+		implode(" AND ", $pk_names);
+	$target_iterator->getSource()->executeQueryDirectly($query, $pk_values);
+	
+	log_message("[role] Removed role '«name»' successfully");
+
+}
 «ENDDEFINE»
 
 «DEFINE addRoleFunction(model::users::Role target) FOR model::users::Role»
@@ -19,9 +191,13 @@
  * Add the role '«target.name»' to the current instance of '«name»'.
  *
  * This role can only be added if there is a common ancestor of both.
- *
  */
 function add_role_«safeName(target)»_to_«safeName()»($instance) {
+
+	add_role_«safeName(target)»($instance);
+
+	«REM»
+
 	«IF target==this»
 		// same role; no need to do any more
 		return $instance;
@@ -99,6 +275,8 @@ function add_role_«safeName(target)»_to_«safeName()»($instance) {
 		// could not find any
 		throw new IamlRuntimeException("Could not find any common ancestor between '«target.name»' and '«name»'"); 
 	«ENDIF»
+	
+	«ENDREM»
 }
 «ENDDEFINE»
 

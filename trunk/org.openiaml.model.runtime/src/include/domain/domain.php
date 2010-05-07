@@ -166,6 +166,23 @@ abstract class DomainSource {
 		return "DomainSource '" . $this->getType() . "' [file='" . $this->getFile() . "']";
 	}
 
+	/**
+	 * Execute the given SQL query with the given arguments.
+	 */
+	public function executeQueryDirectly($query, $args = array()) {
+
+		if ($this->type == 'RELATIONAL_DB') {
+
+			$db = new DatabaseQuery($this->getFile());
+
+			// execute
+			$db->execute($query, $args);
+
+		} else {
+			throw new IamlDomainException("Unknown Domain Source type " . $this->type . ": " . $this->toString());
+		}
+
+	}
 
 }
 
@@ -204,6 +221,10 @@ abstract class DomainIterator {
 	public function getSource() { return $this->source; }
 	public function getLimit() { return $this->limit; }
 	public function getQuery() { return $this->query; }
+
+	public function toString() {
+		return "DomainIterator over " . $this->schema->toString() . " on source " . $this->source->toString();
+	}
 
 	/**
 	 * Check that either a result exists, or we are new.
@@ -315,7 +336,6 @@ abstract class DomainIterator {
 			log_message("[domain] Creating new schema '" . $schema->toString() . "'");
 
 			// we need to create the new table
-			$db = new DatabaseQuery($this->source->getFile());
 			$query = "CREATE TABLE " . $schema->getTableName();
 			$bits = array();
 			foreach ($schema->getAttributes() as $value) {
@@ -347,7 +367,7 @@ abstract class DomainIterator {
 			$query .= "(" . implode(", ", $bits) . ")";
 
 			// execute
-			$db->execute($query);
+			$this->source->executeQueryDirectly($query);
 
 		} else {
 			throw new IamlDomainException("Unknown source type $type");

@@ -65,7 +65,88 @@
 		
 		/* domain iterators for attributes not contained within a domain iterator */
 		«EXPAND domainIteratorDefinition FOREACH getRoot().eAllContents.typeSelect(model::DomainAttributeInstance).select(e|!model::DomainObjectInstance.isInstance(e.eContainer))»
+		
+		/* user store definitions */
+		«EXPAND domainSchemaDefinition FOREACH getRoot().eAllContents.typeSelect(model::users::UserStore)»
 	«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE domainSchemaDefinition FOR model::users::UserStore»
+/**
+ * Root User Role for User Store '«escapeString(name)»'
+ */
+class DomainSchema_UserRoot_«safeName()» extends DomainSchema {
+	private function __construct() {
+		$this->addAttribute(DomainAttribute_UserRoot_«safeName()»_ID::getInstance());
+		
+		// list of permissions: boolean
+		«FOREACH eAllContents.typeSelect(model::users::Permission) AS p»
+		$this->addAttribute(Permission_«safeName(p)»::getInstance());
+		«ENDFOREACH»
+		
+		$this->table_name = "iaml_user_root";
+		$this->source_id = $this->table_name . "_id";
+	}
+	
+	// the current instance
+	static $instance = null;
+	public static function getInstance() {
+		if (self::$instance == null) {
+			self::$instance = new DomainSchema_UserRoot_«safeName()»();
+		}
+		return self::$instance;
+	}
+	
+}
+
+/**
+ * Domain Attribute ID for Root User Role in User Store '«escapeString(name)»'
+ */
+class DomainAttribute_UserRoot_«safeName()»_ID extends DomainAttribute {
+	private function __construct() {
+		$this->isPrimaryKey = true;
+		$this->type = 'iamlInteger';
+		$this->name = 'id';
+	}
+	
+	// the current instance
+	static $instance = null;
+	public static function getInstance() {
+		if (self::$instance == null) {
+			self::$instance = new DomainAttribute_UserRoot_«safeName()»_ID();
+		}
+		return self::$instance;
+	}
+
+}
+
+«FOREACH eAllContents.typeSelect(model::users::Permission) AS p»
+/**
+ * Permission '«escapeString(p.name)»' in User Store «escapeString(name)»
+ */
+class Permission_«safeName(p)» extends DomainAttribute {
+	private function __construct() {
+		$this->isPrimaryKey = false;
+		$this->type = 'iamlBoolean';
+		$this->name = '«safeNameString(p.name)»';
+	}
+	
+	// the current instance
+	static $instance = null;
+	public static function getInstance() {
+		if (self::$instance == null) {
+			self::$instance = new Permission_«safeName(p)»();
+		}
+		return self::$instance;
+	}
+
+}
+«ENDFOREACH»
+
+/**
+ * Permission checks.
+ */
+«EXPAND template::users::Permissions::permissionChecks»
 «ENDDEFINE»
 
 «DEFINE domainSchemaDefinition FOR model::DomainObject»
@@ -77,6 +158,12 @@ class DomainSchema_«safeName()» extends DomainSchema {
 		«FOREACH attributes.select(a2|a2.outExtendsEdges.to.typeSelect(model::DomainAttribute).select(a|!a.primaryKey).isEmpty) AS a»
 			$this->addAttribute(DomainAttribute_«safeName(a)»::getInstance());
 		«ENDFOREACH»
+		«IF model::users::Role.isInstance(this)»
+			«IF attributes.outExtendsEdges.to.eContainer.typeSelect(model::users::Role).isEmpty»
+				/* this Role does not extend any other Roles: we need to add a link to the root role */
+				$this->addAttribute(DomainAttribute_UserRole_«safeName()»_Link::getInstance());
+			«ENDIF»
+		«ENDIF»
 		
 		$this->table_name = "«safeNameString(name)»";
 		$this->source_id = $this->table_name . "_id";
@@ -92,6 +179,89 @@ class DomainSchema_«safeName()» extends DomainSchema {
 	}
 	
 }
+
+«IF model::users::Role.isInstance(this)»
+	«IF attributes.outExtendsEdges.to.eContainer.typeSelect(model::users::Role).isEmpty»
+		/* this Role does not extend any other Roles: we need to add a link to the root role */
+
+class DomainAttribute_UserRole_«safeName()»_Link extends DomainAttribute {
+	private function __construct() {
+		$this->isPrimaryKey = false;
+		$this->type = 'iamlInteger';
+		$this->name = 'root_user_id';
+		$this->extends = DomainAttribute_UserRoot_«safeName(eContainer)»_ID::getInstance();
+	}
+	
+	// the current instance
+	static $instance = null;
+	public static function getInstance() {
+		if (self::$instance == null) {
+			self::$instance = new DomainAttribute_UserRole_«safeName()»_Link();
+		}
+		return self::$instance;
+	}
+	
+}
+	«ENDIF»
+
+/**
+ * A simple DomainIterator to see if a given Role exists for the given root ID.
+ */
+class HasRole_«safeName()» extends DomainIterator {
+	var $root_user_id;
+
+	private function __construct($root_user_id) {
+		$this->schema = DomainSchema_«safeName()»::getInstance();
+		$this->source = DomainSource_«safeName(getContainingUserStore(this))»::getInstance();
+
+		$this->order_by = null;
+		$this->order_ascending = true;
+
+		$this->query = "iaml_user_root.id = :id";
+		$this->is_new = false;
+		$this->autosave = false;
+		
+		$this->limit = 1;
+		
+		$this->root_user_id = $root_user_id; 
+	}
+	
+	public function constructArgs() {
+		return array(
+			"id" => $this->root_user_id
+		);
+	}
+	
+	public function getOffset() {
+		return 0;
+	}
+	
+	public function setOffset($value) {
+		throw new IamlDomainException("Cannot set an offset for this Role query: " . get_class($this));
+	}
+	
+	public function getNewInstanceID($key) {
+		throw new IamlDomainException("Cannot get the new instance ID for a non-new object: " . get_class($this));
+	}
+	
+	public function setNewInstanceID($key, $value) {
+		throw new IamlDomainException("Cannot set the new instance ID for a non-new object: " . get_class($this));
+	}
+	
+	«EXPAND domainIteratorGetStoredValues FOR this»
+	
+	// the current instance
+	static $instance = null;
+	public static function getInstance($root_user_id) {
+		if (self::$instance == null) {
+			self::$instance = new HasRole_«safeName()»($root_user_id);
+		}
+		return self::$instance;
+	}
+
+}
+
+«ENDIF»
 «ENDDEFINE»
 
 «DEFINE domainAttributeDefinition FOR model::DomainAttribute»
@@ -109,9 +279,11 @@ class DomainAttribute_«safeName()» extends DomainAttribute {
 		
 		«FOREACH outExtendsEdges AS extends»
 			$this->extends = DomainAttribute_«safeName(extends.to)»::getInstance();
-		«ENDFOREACH»		
+		«ENDFOREACH»
+		/* TODO is this even necessary?		
 		$this->table_name = "«safeNameString(name)»";
 		$this->source_id = $this->table_name . "_id";
+		*/
 	}
 	
 	// the current instance
@@ -129,7 +301,7 @@ class DomainAttribute_«safeName()» extends DomainAttribute {
 
 «DEFINE domainSourceDefinition FOR model::DomainStore»
 /**
- * Domain Source for Domain Object '«escapeString(name)»'
+ * Domain Source for Domain Store '«escapeString(name)»'
  */
 class DomainSource_«safeName()» extends DomainSource {
 	private function __construct() {
@@ -137,6 +309,10 @@ class DomainSource_«safeName()» extends DomainSource {
 		«FOREACH children.typeSelect(model::DomainObject) AS obj»
 			DomainSchema_«safeName(obj)»::getInstance(),
 		«ENDFOREACH»
+		«IF model::users::UserStore.isInstance(this)»
+			/* the root user schema */
+			DomainSchema_UserRoot_«safeName()»::getInstance(),
+		«ENDIF»
 		);
 		$this->type = '«escapePhpString(type.toString())»';
 		$this->file = 'sqlite:' . ROOT_PATH . '«safeNameString(id)».db';

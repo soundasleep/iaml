@@ -19,30 +19,22 @@ $instance_id = require_get("instance_id");
 
 log_message("add_role.php: adding role_id=$role_id, instance_id=$instance_id");
 
-// need to resolve a user instance type from a given instance ID
-«FOREACH eAllContents.typeSelect(model::users::UserInstance) AS user»
-	if ($instance_id == '«safeNameString(user.id)-»') {
-	«IF !user.inWires.typeSelect(model::wires::SelectWire).from.typeSelect(model::users::Role).isEmpty»
-		$user_instance_type = '«safeName(user.inWires.typeSelect(model::wires::SelectWire).from.typeSelect(model::users::Role).first())»';
-	«ELSE»
-		«IF !user.inWires.typeSelect(model::wires::NewInstanceWire).from.typeSelect(model::users::Role).isEmpty»
-			$user_instance_type = '«safeName(user.inWires.typeSelect(model::wires::NewInstanceWire).from.typeSelect(model::users::Role).first())»';
-		«ELSE»
-			// no DomainObject source for '«safeNameString(user.id)»'
-		«ENDIF»
-	«ENDIF»
-	}
+$iterator = null;
+switch ($instance_id) {
+«FOREACH eAllContents.typeSelect(model::users::UserInstance) AS u»
+	case "«safeName(u)»":
+		$iterator = DomainIterator_«safeName(u)»::getInstance();
+		break;
+
 «ENDFOREACH»
+	default:
+		throw new IamlRuntimeException("No such User Instance ID $instance_id");
+}
 
 // TODO probably a security risk
-$function_name = 'get_object_instance_' . $instance_id;
+$function_name = 'add_role_' . $role_id;
 log_message("add_role.php: calling $function_name");
-$instance = $function_name();
-
-// TODO probably a security risk
-$function_name = 'add_role_' . $role_id . '_to_' . $user_instance_type;
-log_message("add_role.php: calling $function_name");
-$instance = $function_name($instance);
+$function_name($iterator);
 
 // output any instructions
 echo "ok";

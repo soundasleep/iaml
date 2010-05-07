@@ -139,7 +139,7 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 			fail("Should not be able to access page");
 		} catch (FailingHttpStatusCodeException e) {
 			// expected
-			checkExceptionContains(e, "Source role 'default role' could not be translated into 'additional role 1'");
+			checkExceptionContains(e, "could not be translated into 'additional role 1'");
 		}
 	}
 	
@@ -213,7 +213,7 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 			fail("Should not have been able to get to this page");
 		} catch (FailingHttpStatusCodeException e) {
 			// expected
-			checkExceptionContains(e, "Source role 'default role' could not be translated into 'additional role 1'");
+			checkExceptionContains(e, "could not be translated into 'additional role 1'");
 		}
 		
 		// we can't access the 'requires permission 1' page
@@ -222,7 +222,7 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 			fail("Should not have been able to get to this page");
 		} catch (FailingHttpStatusCodeException e) {
 			// expected
-			checkExceptionContains(e, "User of type 'logged in user' did not have permission 'permission 1'");
+			checkExceptionContains(e, "did not have permission 'permission 1'");
 		}
 		
 		// but we can get to the inherited permissions page, because
@@ -367,12 +367,15 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 			fail("Should not have been able to get to this page");
 		} catch (FailingHttpStatusCodeException e) {
 			// expected
-			checkExceptionContains(e, "Source role 'default role' could not be translated into 'additional role 1'");
+			checkExceptionContains(e, "could not be translated into 'additional role 1'");
 		}
 	
 		// logout
 		gotoSitemapThenPage(sitemap, "logout", "Logout Successful");
 		assertNoProblem();
+		
+		// reload the session
+		restartSession(sitemap, "Home");
 		
 		// relogin
 		doStandardLoginAsIgnore(sitemap, NEW_EMAIL, NEW_PASSWORD);
@@ -384,7 +387,7 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 			fail("Should not have been able to get to this page");
 		} catch (FailingHttpStatusCodeException e) {
 			// expected
-			checkExceptionContains(e, "User of type 'logged in user' did not have permission 'inherited permission with role'");
+			checkExceptionContains(e, "did not have permission 'inherited permission with role'");
 		}
 		
 		try {
@@ -392,7 +395,7 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 			fail("Should not have been able to get to this page");
 		} catch (FailingHttpStatusCodeException e) {
 			// expected
-			checkExceptionContains(e, "Source role 'default role' could not be translated into 'additional role 1'");
+			checkExceptionContains(e, "could not be translated into 'additional role 1'");
 		}
 		
 		try {
@@ -400,7 +403,7 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 			fail("Should not have been able to get to this page");
 		} catch (FailingHttpStatusCodeException e) {
 			// expected
-			checkExceptionContains(e, "User of type 'logged in user' did not have permission 'permission 1'");
+			checkExceptionContains(e, "did not have permission 'permission 1'");
 		}
 
 	}

@@ -644,6 +644,18 @@ conditionUsed(model::Condition this) :
 	!(outConditionEdges.isEmpty && outFlows.isEmpty && outWires.isEmpty);
 
 /**
+ * Get the containing {@model UserStore} for this given object, or <code>null</code>
+ * if there is none.
+ */
+model::users::UserStore getContainingUserStore(model::users::UserStore this) :
+	this;
+
+model::users::UserStore getContainingUserStore(emf::EObject this) :
+	if eContainer == null
+		then null
+		else getContainingUserStore(eContainer);
+
+/**
  * Get the current version of the IAML code generation platform.
  */
 String iamlVersion() :

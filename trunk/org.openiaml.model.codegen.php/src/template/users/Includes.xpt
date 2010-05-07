@@ -21,12 +21,6 @@
  * Adding roles.
  */
 «EXPAND Roles::roleFunctions»
-
-/**
- * Permission checks.
- */
-«EXPAND Permissions::permissionChecks»
-
 	«ENDFILE»
 «ENDDEFINE»
 

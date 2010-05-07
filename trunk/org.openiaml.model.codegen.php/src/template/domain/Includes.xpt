@@ -6,29 +6,7 @@
 «EXTENSION template::GeneratorExtensions»
 
 «DEFINE domainIncludes FOR model::InternetApplication»
-	«EXPAND domainObjectInclude FOREACH getRoot().getAllDomainObjects()» 
 	«EXPAND domainAttributeInstanceInclude FOREACH getRoot().getAllDomainAttributeInstances()» 
-«ENDDEFINE»
-
-«DEFINE domainObjectInclude FOR model::DomainObject-»
-	«FILE "output/domain/" + safeName() + ".php"-»
-<?php
-		
-/**
- * Domain object includes file for DomainObject '«safeNameString(name)»'.
- */		
-
-/**
- * Creating new instances.
- */
-«EXPAND DomainInheritance::createNewInstanceRecursively»
-
-/**
- * Casts.
- */		
-«EXPAND DomainInheritance::allCasts»
-
-	«ENDFILE»
 «ENDDEFINE»
 
 «DEFINE domainAttributeInstanceInclude FOR model::DomainAttributeInstance-»
@@ -55,9 +33,6 @@
 /**
  * Get the include file for the given domain object.
  */
-«DEFINE getInclude FOR model::DomainObject»
-	require(ROOT_PATH . "domain/«safeName()».php");
-«ENDDEFINE»
 «DEFINE getInclude FOR model::DomainAttributeInstance»
 	require(ROOT_PATH . "domain/attribute/«safeName()».php");
 «ENDDEFINE»

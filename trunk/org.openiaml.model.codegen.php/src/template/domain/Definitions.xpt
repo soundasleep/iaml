@@ -32,7 +32,6 @@
 		<?php
 		«EXPAND template::Template::phpCheck»
 		
-		«EXPAND template::domain::Includes::getInclude FOREACH getRoot().getAllDomainObjects()» 
 		«EXPAND RemoteDefinitions::remoteDefinitions FOREACH getRoot().eAllContents.typeSelect(model::domain::RemoteDomainObject)»
 
 		«EXPAND GetDefinitions::getDomainObject FOREACH getRoot().getAllDomainObjectInstances()»
@@ -42,22 +41,6 @@
 		/* offset definitions for attributes not contained within a domain iterator */
 		«EXPAND IterateDefinitions::iterateDefinitions FOREACH getRoot().eAllContents.typeSelect(model::DomainAttributeInstance).select(e|!model::DomainObjectInstance.isInstance(e.eContainer))»
 
-		/**
-		 * Get all of the domain joins required in this generated
-		 * application. This is used to properly compose
-		 * select wires, etc.
-		 *
-		 * TODO put this into a separate include file
-		 * TODO remove [issue 178] 
-		 */
-		function get_all_domain_joins_old() {
-			$direct_joins = array();
-			
-			«EXPAND DomainInheritance::defineInheritanceJoins FOREACH getRoot().getAllDomainObjects()»
-			
-			return $direct_joins;
-		}
-		
 		«EXPAND domainSchemaDefinition FOREACH getRoot().getAllDomainObjects()»
 		«EXPAND domainAttributeDefinition FOREACH getRoot().eAllContents.typeSelect(model::DomainAttribute)»
 		«EXPAND domainSourceDefinition FOREACH getRoot().eAllContents.typeSelect(model::DomainStore)»

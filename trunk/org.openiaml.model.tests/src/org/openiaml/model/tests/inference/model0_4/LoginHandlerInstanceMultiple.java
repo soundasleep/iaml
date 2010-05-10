@@ -3,21 +3,16 @@
  */
 package org.openiaml.model.tests.inference.model0_4;
 
-import java.util.Iterator;
-import java.util.Set;
-
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainAttributeInstance;
-import org.openiaml.model.model.DomainObject;
-import org.openiaml.model.model.DomainObjectInstance;
-import org.openiaml.model.model.DomainStore;
-import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.components.LoginHandlerTypes;
+import org.openiaml.model.model.domain.DomainIterator;
+import org.openiaml.model.model.domain.DomainSchema;
+import org.openiaml.model.model.domain.DomainSource;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.wires.ExtendsEdge;
-import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
 /**
@@ -41,12 +36,12 @@ public class LoginHandlerInstanceMultiple extends InferenceTestCase {
 
 		Frame page = assertHasFrame(root, "Home");
 		assertNotGenerated(page);
-		DomainStore store = assertHasDomainStore(root, "Users");
+		DomainSource store = assertHasDomainSource(root, "domain source");
 		assertNotGenerated(store);
 		Session session = assertHasSession(root, "my session");
 		assertNotGenerated(session);
 
-		DomainObject obj = assertHasDomainObject(store, "User");
+		DomainSchema obj = assertHasDomainSchema(root, "User");
 		assertNotGenerated(obj);
 
 		DomainAttribute password = assertHasDomainAttribute(obj, "password");
@@ -55,7 +50,7 @@ public class LoginHandlerInstanceMultiple extends InferenceTestCase {
 		LoginHandler handler = assertHasLoginHandler(session, "login handler");
 		assertNotGenerated(handler);
 		assertEquals(handler.getType(), LoginHandlerTypes.DOMAIN_OBJECT);
-		DomainObjectInstance instance = assertHasDomainObjectInstance(session, "logged in user");
+		DomainIterator instance = assertHasDomainIterator(session, "logged in user");
 		assertNotGenerated(instance);
 
 		// only one attribute
@@ -70,37 +65,19 @@ public class LoginHandlerInstanceMultiple extends InferenceTestCase {
 	}
 
 	/**
-	 * Even though we have multiple parameters, there should only be one SelectWire.
+	 * Test the contents of the DomainIterator query.
 	 *
 	 * @throws Exception
 	 */
-	public void testOnlyOneSelectWire() throws Exception {
+	public void testQueryContents() throws Exception {
 		root = loadAndInfer(LoginHandlerInstanceMultiple.class);
 
 		Session session = assertHasSession(root, "my session");
-		DomainStore store = assertHasDomainStore(root, "Users");
-		DomainObject object = assertHasDomainObject(store, "User");
-		DomainObjectInstance instance = assertHasDomainObjectInstance(session, "logged in user");
-
-		SelectWire select = null;
-		int selectWireCount = 0;
-		{
-			Set<Wire> wires2 = assertHasWiresFromTo(1, session, object, instance);
-			Iterator<Wire> it = wires2.iterator();
-			while (it.hasNext()) {
-				Wire w = it.next();
-				if (w instanceof SelectWire) {
-					selectWireCount++;
-					select = (SelectWire) w;
-				}
-			}
-		}
-		assertEquals("There should only be one SelectWire", 1, selectWireCount);
-		assertGenerated(select);
+		DomainIterator instance = assertHasDomainIterator(session, "logged in user");
 
 		// the query should contain both :password and :email
-		assertTrue("Query '" + select.getQuery() + "' should contain :password", select.getQuery().contains(":password"));
-		assertTrue("Query '" + select.getQuery() + "' should contain :email", select.getQuery().contains(":email"));
+		assertTrue("Query '" + instance.getQuery() + "' should contain :password", instance.getQuery().contains(":password"));
+		assertTrue("Query '" + instance.getQuery() + "' should contain :email", instance.getQuery().contains(":email"));
 
 	}
 	
@@ -114,9 +91,8 @@ public class LoginHandlerInstanceMultiple extends InferenceTestCase {
 		root = loadAndInfer(LoginHandlerInstanceMultiple.class);
 		
 		Session session = assertHasSession(root, "my session");
-		DomainStore store = assertHasDomainStore(root, "Users");
-		DomainObject object = assertHasDomainObject(store, "User");
-		DomainObjectInstance instance = assertHasDomainObjectInstance(session, "logged in user");
+		DomainSchema object = assertHasDomainSchema(root, "User");
+		DomainIterator instance = assertHasDomainIterator(session, "logged in user");
 
 		DomainAttributeInstance ai = assertHasDomainAttributeInstance(instance, "name");
 		DomainAttribute a = assertHasDomainAttribute(object, "name");

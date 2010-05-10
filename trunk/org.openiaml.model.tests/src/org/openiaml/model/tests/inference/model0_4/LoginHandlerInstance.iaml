@@ -20,7 +20,7 @@
     </attributes>
     <attributes id="model.122f7c69efd.38" name="name"/>
   </schemas>
-  <sources id="domain.128807fbeba.d41" outSchemas="domain.128807fbeba.d42">
+  <sources name="domain source" id="domain.128807fbeba.d41" outSchemas="domain.128807fbeba.d42">
     <schemaEdges id="domain.128807fbeba.d42" from="domain.128807fbeba.d41" to="domain.128807fbeba.d40"/>
   </sources>
 </iaml:InternetApplication>

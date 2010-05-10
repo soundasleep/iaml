@@ -30,7 +30,7 @@ rule "Set wires between objects should create set wires between all elements ins
 		e1 : CanBeSynced( eContainer == p1 )
 		e2 : CanBeSynced( eContainer == p2, eval(functions.nameMatches(e1, e2)) )
 	
-		not (sw : SetWire( name == "set", eContainer == source, eval(functions.connectsSet( sw, e1, e2)) ))
+		not (sw : SetWire( eContainer == source, eval(functions.connectsSet( sw, e1, e2)) ))
 				
 		eval ( handler.veto( source ))
 		
@@ -41,6 +41,37 @@ rule "Set wires between objects should create set wires between all elements ins
 		
 end
 
+rule "Set wires from DomainSchema to CanBeSynced"
+	when
+		# source : SyncWire(, eval(connects(source, p1, p2)) )
+		source : SetWire()
+		
+		# we put in these to prevent multiple wires being generated for two connects
+		domainSource : DomainSource ( )
+		p2 : CanBeSynced ( )
+		eval ( functions.connectsSet( source, domainSource, p2 ))
+
+		eval ( domainSource != p2)
+		
+		domainSchema : DomainSchema ( )
+		schemaEdge : SchemaEdge ( )
+		eval ( functions.connectsSchema( schemaEdge, domainSource, domainSchema ))
+		
+		e1 : CanBeSynced ( eContainer == domainSchema )
+		e2 : CanBeSynced( eContainer == p2 )
+
+		eval(functions.nameMatches(e1, e2))
+	
+		not (sw : SetWire( eContainer == source, eval(functions.connectsSet( sw, e1, e2)) ))
+		
+		eval ( handler.veto( source ))
+						
+	then
+		SyncWire sw = handler.generatedSyncWire(source, source, e1, e2);
+		handler.setName(sw, "set");
+		queue.add(sw, drools);
+		
+end
 rule "Run instance wire from edit to update (onChange)"
 	when
 		sw : SetWire()
@@ -455,7 +486,7 @@ rule "Refresh Domain Object mappings (except for generated primary keys) when Fo
 	when
 		sync : SetWire(  )
 		form : InputForm (  )
-		object : DomainObject (  )
+		object : DomainSchema (  )
 		
 		eval(functions.connectsSet(sync, form, object))
 		
@@ -647,7 +678,7 @@ rule "Refresh Domain Object mappings (except for generated primary keys) when In
 	when
 		sync : SetWire(  )
 		form : InputForm (  )
-		object : DomainObject (  )
+		object : DomainSchema (  )
 		
 		eval(functions.connectsSet(sync, object, form))		// backwards
 		
@@ -670,13 +701,18 @@ rule "A SetWire between Attributes selected from a NewInstanceWire need to check
 	when
 		sync : SetWire( )
 		form : InputForm ( )
-		instance : DomainIterator ( )
+		instance : DomainIterator ( query == "new" )
 		
 		eval(functions.connectsSet(sync, form, instance))
 		
 		# the instance is created through a NewInstanceWire
-		domainObject : DomainObject ( )
-		newInstance : NewInstanceWire ( from == domainObject, to == instance )
+		schema : DomainSchema ( )
+		domainSource : DomainSource ( )
+		schemaEdge : SchemaEdge ( )
+		eval ( functions.connectsSchema( schemaEdge, domainSource, schema ))
+		
+		selectEdge : SelectEdge ( )
+		eval ( functions.connectsSelect( selectEdge, instance, domainSource ))		
 		
 		# contained attribute/field
 		attribute : DomainAttributeInstance( eContainer == instance )

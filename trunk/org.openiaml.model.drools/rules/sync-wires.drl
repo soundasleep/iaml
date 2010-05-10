@@ -35,7 +35,7 @@ rule "Sync wires between objects should create sync wires between all elements i
 
 		eval(functions.nameMatches(e1, e2))
 	
-		not (sw : SyncWire( name == "sync", eContainer == source, eval(functions.connects( sw, e1, e2)) ))
+		not (sw : SyncWire( eContainer == source, eval(functions.connects( sw, e1, e2)) ))
 		
 		eval ( handler.veto( source ))
 		
@@ -67,7 +67,7 @@ rule "Sync wires from DomainSchema to CanBeSynced"
 
 		eval(functions.nameMatches(e1, e2))
 	
-		not (sw : SyncWire( name == "sync", eContainer == source, eval(functions.connects( sw, e1, e2)) ))
+		not (sw : SyncWire( eContainer == source, eval(functions.connects( sw, e1, e2)) ))
 		
 		eval ( handler.veto( source ))
 						

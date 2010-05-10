@@ -9,9 +9,6 @@ import java.util.Set;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainAttributeInstance;
-import org.openiaml.model.model.DomainObject;
-import org.openiaml.model.model.DomainObjectInstance;
-import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.PrimitiveCondition;
@@ -19,6 +16,9 @@ import org.openiaml.model.model.Property;
 import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.components.LoginHandlerTypes;
+import org.openiaml.model.model.domain.DomainIterator;
+import org.openiaml.model.model.domain.DomainSchema;
+import org.openiaml.model.model.domain.DomainSource;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Button;
@@ -28,7 +28,6 @@ import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.NavigateAction;
 import org.openiaml.model.model.wires.RunAction;
-import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
@@ -50,12 +49,12 @@ public class LoginHandlerInstance extends InferenceTestCase {
 
 		Frame page = assertHasFrame(root, "Home");
 		assertNotGenerated(page);
-		DomainStore store = assertHasDomainStore(root, "Users");
+		DomainSource store = assertHasDomainSource(root, "domain source");
 		assertNotGenerated(store);
 		Session session = assertHasSession(root, "my session");
 		assertNotGenerated(session);
 
-		DomainObject obj = assertHasDomainObject(store, "User");
+		DomainSchema obj = assertHasDomainSchema(root, "User");
 		assertNotGenerated(obj);
 
 		DomainAttribute password = assertHasDomainAttribute(obj, "password");
@@ -64,7 +63,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		LoginHandler handler = assertHasLoginHandler(session, "login handler");
 		assertNotGenerated(handler);
 		assertEquals(handler.getType(), LoginHandlerTypes.DOMAIN_OBJECT);
-		DomainObjectInstance instance = assertHasDomainObjectInstance(session, "logged in user");
+		DomainIterator instance = assertHasDomainIterator(session, "logged in user");
 		assertNotGenerated(instance);
 
 		// only one attribute
@@ -116,7 +115,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 
 		Session session = assertHasSession(root, "my session");
 
-		DomainObjectInstance instance = assertHasDomainObjectInstance(session, "logged in user");
+		DomainIterator instance = assertHasDomainIterator(session, "logged in user");
 
 		// the domain instance should contain all attributes
 		DomainAttributeInstance apassword = assertHasDomainAttributeInstance(instance, "password");
@@ -137,20 +136,13 @@ public class LoginHandlerInstance extends InferenceTestCase {
 	 */
 	public void testInferredSelect() throws Exception {
 		root = loadAndInfer(LoginHandlerInstance.class);
-
-		DomainStore store = assertHasDomainStore(root, "Users");
+		
 		Session session = assertHasSession(root, "my session");
-
-		DomainObject obj = assertHasDomainObject(store, "User");
-
 		LoginHandler handler = assertHasLoginHandler(session, "login handler");
-		DomainObjectInstance instance = assertHasDomainObjectInstance(session, "logged in user");
+		DomainIterator instance = assertHasDomainIterator(session, "logged in user");
 
-		// there should be a select wire from the object to the instance
-		Set<Wire> wires = assertHasWiresFromTo(1, root, obj, instance);
-		SelectWire select = (SelectWire) wires.iterator().next();
-		assertEquals("password = :password", select.getQuery());
-		assertGenerated(select);
+		// check the query on the instance
+		assertEquals("password = :password", instance.getQuery());
 
 		// the login handler should have generated a key store
 		Property currentPassword = assertHasProperty(session, "current password");
@@ -161,7 +153,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		assertEquals("", currentPassword.getDefaultValue());
 
 		// each key should be connected to the select
-		assertGenerated(getParameterEdgeFromTo(handler, currentPassword, select));
+		assertGenerated(getParameterEdgeFromTo(handler, currentPassword, instance));
 
 		// there should be a set wire connecting to the generated property
 		{
@@ -323,7 +315,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 	 */
 	private void checkOperationCallsExists(Session session, CompositeOperation check) throws Exception {
 		// find 'empty'
-		DomainObjectInstance instance = assertHasDomainObjectInstance(session, "logged in user");
+		DomainIterator instance = assertHasDomainIterator(session, "logged in user");
 		assertNotGenerated(instance);
 		PrimitiveCondition exists = (PrimitiveCondition) instance.getEmpty();
 		assertGenerated(exists);

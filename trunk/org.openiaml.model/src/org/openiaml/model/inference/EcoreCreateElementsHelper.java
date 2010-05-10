@@ -175,6 +175,18 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return obj;
 	}
 
+	public DomainSource generatedDomainSource(GeneratesElements by, InternetApplication container) throws InferenceException {
+		DomainSource obj = (DomainSource) createElement( container, DomainPackage.eINSTANCE.getDomainSource(), ModelPackage.eINSTANCE.getInternetApplication_Sources() );
+		setGeneratedBy(obj, by);
+		return obj;
+	}
+
+	public DomainIterator generatedDomainIterator(GeneratesElements by, Scope container) throws InferenceException {
+		DomainIterator obj = (DomainIterator) createElement( container, DomainPackage.eINSTANCE.getDomainIterator(), ModelPackage.eINSTANCE.getScope_Elements() );
+		setGeneratedBy(obj, by);
+		return obj;
+	}
+
 	public DomainAttribute generatedDomainAttribute(GeneratesElements by, DomainSchema container) throws InferenceException {
 		DomainAttribute obj = (DomainAttribute) createElement( container, ModelPackage.eINSTANCE.getDomainAttribute(), DomainPackage.eINSTANCE.getDomainSchema_Attributes() );
 		setGeneratedBy(obj, by);
@@ -625,6 +637,10 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	
 	public void setType(Changeable element, XSDSimpleTypeDefinition value) throws InferenceException {
 		setValue(element, ModelPackage.eINSTANCE.getChangeable_Type(), value);
+	}
+
+	public void setQuery(DomainIterator element, String value) throws InferenceException {
+		setValue(element, DomainPackage.eINSTANCE.getDomainIterator_Query(), value);
 	}
 
 	public void setPriority(Action element, int value) throws InferenceException {

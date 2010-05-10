@@ -3,7 +3,6 @@
   <domainStores xsi:type="iaml.users:UserStore" id="users.1233b454017.f" name="user store">
     <children xsi:type="iaml.users:Role" id="users.1233b454017.17" name="User" outParameterEdges="wires.1233b453e32.d">
       <parameterEdges id="wires.1233b453e32.d" from="users.1233b454017.17" to="components.1233b453f6b.5"/>
-      <properties id="model.1233b453c1f.5a" name="random property"/>
     </children>
   </domainStores>
   <scopes xsi:type="iaml.visual:Frame" id="visual.1233b453dc5.9" name="Home"/>

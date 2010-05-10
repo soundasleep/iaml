@@ -5,11 +5,10 @@ package org.openiaml.model.tests.inference.model0_1;
 
 import org.jaxen.JaxenException;
 import org.openiaml.model.model.DomainAttribute;
-import org.openiaml.model.model.DomainObject;
-import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Property;
+import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.RunAction;
@@ -34,8 +33,7 @@ public class SyncFieldDomainAttribute extends InferenceTestCase {
 		Frame page = assertHasFrame(root, "page");
 		InputTextField field = assertHasInputTextField(page, "single-text-field");
 
-		DomainStore store = assertHasDomainStore(root, "store");
-		DomainObject obj = assertHasDomainObject(store, "domain");
+		DomainSchema obj = assertHasDomainSchema(root, "domain");
 		DomainAttribute attribute = assertHasDomainAttribute(obj, "attribute");
 
 		// sync wire from text field to attribute

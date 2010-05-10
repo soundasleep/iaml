@@ -9,7 +9,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.jaxen.JaxenException;
 import org.openiaml.model.model.Action;
 import org.openiaml.model.model.DomainAttribute;
-import org.openiaml.model.model.DomainObject;
 import org.openiaml.model.model.DynamicApplicationElementSet;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
@@ -20,15 +19,19 @@ import org.openiaml.model.model.Property;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.components.LoginHandler;
+import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainPackage;
+import org.openiaml.model.model.domain.DomainSchema;
+import org.openiaml.model.model.domain.DomainSource;
+import org.openiaml.model.model.domain.SchemaEdge;
+import org.openiaml.model.model.domain.SelectEdge;
 import org.openiaml.model.model.scopes.Session;
-import org.openiaml.model.model.users.Role;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.wires.DetailWire;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
-import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SetWire;
+import org.openiaml.model.model.wires.SyncWire;
 
 import ca.ecliptical.emf.xpath.EMFXPath;
 
@@ -130,24 +133,24 @@ public class DroolsHelperFunctions {
 	}
 
 	/**
-	 * Does the given DomainObject have at least one attribute?
+	 * Does the given DomainSchema have at least one attribute?
 	 * 
 	 * @param dobj
 	 * @return
 	 */
-	public boolean hasDomainAttribute(DomainObject dobj) {
+	public boolean hasDomainAttribute(DomainSchema dobj) {
 		return dobj.getAttributes().size() > 0;
 	}
 
 	/**
 	 * Does the given LoginHandler[instance] have incoming ParameterWires from
-	 * attributes contained by the given DomainObject?
+	 * attributes contained by the given DomainSchema?
 	 *  
 	 * @param handler
 	 * @param dobj
 	 * @return
 	 */
-	public boolean hasIncomingParameterEdgesFrom(LoginHandler handler, DomainObject dobj) {
+	public boolean hasIncomingParameterEdgesFrom(LoginHandler handler, DomainSchema dobj) {
 		for (ParameterEdge edge : handler.getInParameterEdges()) {
 			if (edge.getFrom() instanceof DomainAttribute) {
 				if (dobj.equals(((DomainAttribute) edge.getFrom()).eContainer())) {
@@ -191,7 +194,7 @@ public class DroolsHelperFunctions {
 	 *
 	 * Also iterates over extends so we get parent attributes. 
 	 */
-	public String getUserQueryString(Role role) {
+	public String getUserQueryString(DomainSchema role) {
 		String q = "";
 		for (DomainAttribute attribute : role.getAttributes()) {
 			// ignore primary keys
@@ -210,8 +213,8 @@ public class DroolsHelperFunctions {
 		
 		// get all parents
 		for (ExtendsEdge w : role.getOutExtendsEdges()) {
-			if (w.getTo() instanceof Role) {
-				String q2 = getUserQueryString((Role) w.getTo());
+			if (w.getTo() instanceof DomainSchema) {
+				String q2 = getUserQueryString((DomainSchema) w.getTo());
 				if (!q2.isEmpty()) {
 					if (q.isEmpty()) {
 						q = q2;
@@ -225,7 +228,7 @@ public class DroolsHelperFunctions {
 		return q;
 	}
 	
-	public String getQueryString(LoginHandler login_handler, DomainObject dobj) {
+	public String getQueryString(LoginHandler login_handler, DomainSchema dobj) {
 		String q = "";
 		for (ParameterEdge wire : login_handler.getInParameterEdges()) {
 			if (wire.getFrom() instanceof DomainAttribute &&
@@ -266,6 +269,58 @@ public class DroolsHelperFunctions {
 	}
 	
 	/**
+	 * True if the given uni-directional {@model SyncWire} connects
+	 * the source object to the target object. 
+	 * 
+	 * @param wire the wire to investigate
+	 * @param source the source object
+	 * @param target the target object
+	 * @return true only if the wire connects the two objects
+	 */
+	public boolean connectsSync1(SyncWire wire, Object source, Object target) {
+		if (wire.getFrom() == null)
+			throw new NullPointerException("Wire '" + wire + "'.from = null");
+		if (wire.getTo() == null)
+			throw new NullPointerException("Wire '" + wire + "'.to = null");
+		return wire.getFrom().equals(source) && wire.getTo().equals(target);
+	}
+	
+	/**
+	 * True if the given uni-directional {@model SchemaEdge} connects
+	 * the source object to the target object. 
+	 * 
+	 * @param wire the wire to investigate
+	 * @param source the source object
+	 * @param target the target object
+	 * @return true only if the wire connects the two objects
+	 */
+	public boolean connectsSchema(SchemaEdge wire, DomainSource source, DomainSchema target) {
+		if (wire.getFrom() == null)
+			throw new NullPointerException("Wire '" + wire + "'.from = null");
+		if (wire.getTo() == null)
+			throw new NullPointerException("Wire '" + wire + "'.to = null");
+		return wire.getFrom().equals(source) && wire.getTo().equals(target);
+	}
+	
+	
+	/**
+	 * True if the given uni-directional {@model SelectEdge} connects
+	 * the source object to the target object. 
+	 * 
+	 * @param wire the wire to investigate
+	 * @param source the source object
+	 * @param target the target object
+	 * @return true only if the wire connects the two objects
+	 */
+	public boolean connectsSelect(SelectEdge wire, DomainIterator source, DomainSource target) {
+		if (wire.getFrom() == null)
+			throw new NullPointerException("Wire '" + wire + "'.from = null");
+		if (wire.getTo() == null)
+			throw new NullPointerException("Wire '" + wire + "'.to = null");
+		return wire.getFrom().equals(source) && wire.getTo().equals(target);
+	}
+	
+	/**
 	 * True if the given uni-directional {@model DetailWire} connects
 	 * the source object to the target object. 
 	 * 
@@ -281,24 +336,7 @@ public class DroolsHelperFunctions {
 			throw new NullPointerException("Wire '" + wire + "'.to = null");
 		return wire.getFrom().equals(source) && wire.getTo().equals(target);
 	}
-	
-	/**
-	 * True if the given uni-directional {@model SelectWire} connects
-	 * the source object to the target object. 
-	 * 
-	 * @param wire the wire to investigate
-	 * @param source the source object
-	 * @param target the target object
-	 * @return true only if the wire connects the two objects
-	 */
-	public boolean connectsSelect(SelectWire wire, Object source, Object target) {
-		if (wire.getFrom() == null)
-			throw new NullPointerException("Wire '" + wire + "'.from = null");
-		if (wire.getTo() == null)
-			throw new NullPointerException("Wire '" + wire + "'.to = null");
-		return wire.getFrom().equals(source) && wire.getTo().equals(target);
-	}
-	
+
 	public Session containingSession(EObject e) {
 		if (e.eContainer() == null) {
 			return null;

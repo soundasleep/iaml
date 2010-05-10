@@ -13,6 +13,7 @@ import org.openiaml.model.model.operations.*;
 import org.openiaml.model.model.scopes.*;
 import org.openiaml.model.model.components.*;
 import org.openiaml.model.model.users.*;
+import org.openiaml.model.model.domain.*;
 
 #declare any global variables here
 global OverridableCreateElementsHelper handler;

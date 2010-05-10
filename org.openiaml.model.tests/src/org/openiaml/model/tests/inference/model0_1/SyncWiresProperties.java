@@ -8,14 +8,14 @@ import java.util.List;
 import org.jaxen.JaxenException;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.DomainAttribute;
-import org.openiaml.model.model.DomainObject;
-import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
+import org.openiaml.model.model.domain.DomainSchema;
+import org.openiaml.model.model.domain.DomainSource;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.CastNode;
 import org.openiaml.model.model.operations.DecisionNode;
@@ -47,12 +47,12 @@ public class SyncWiresProperties extends InferenceTestCase {
 	public void testInference() throws JaxenException {
 		Frame page = assertHasFrame(root, "container");
 		InputForm form = assertHasInputForm(page, "target form");
-		DomainStore store = assertHasDomainStore(root, "properties file");
-		DomainObject properties = assertHasDomainObject(store, "properties");
+		DomainSchema properties = assertHasDomainSchema(root, "properties");
+		DomainSource source = assertHasDomainSource(root, "properties file");
 
 		// there should be exactly three fields here (generated)
 		// if there are four fields here, the generated key may have been added as a text field
-		List<?> nodes = query(form, "iaml:children");
+		List<?> nodes = form.getChildren();
 		assertEquals(3, nodes.size());
 		InputTextField f1 = (InputTextField) getNodeWithName(nodes, "fruit");
 		InputTextField f2 = (InputTextField) getNodeWithName(nodes, "animal");
@@ -65,11 +65,11 @@ public class SyncWiresProperties extends InferenceTestCase {
 		assertTrue(f3.isIsGenerated());
 
 		// find the sync wire
-		SyncWire wire = assertHasSyncWire(page, form, properties, "sync properties");
+		SyncWire wire = assertHasSyncWire(page, form, source, "sync properties");
 		assertNotGenerated(wire);
 
 		// there should be 4 attributes; one of these will be a primary key
-		List<?> nodes2 = query(properties, "iaml:attributes");
+		List<?> nodes2 = properties.getAttributes();
 		assertEquals(4, nodes2.size());
 		DomainAttribute a1 = (DomainAttribute) getNodeWithName(nodes2, "fruit");
 		DomainAttribute a2 = (DomainAttribute) getNodeWithName(nodes2, "animal");

@@ -11,6 +11,7 @@ import org.openiaml.model.model.wires.*;
 import org.openiaml.model.model.visual.*;
 import org.openiaml.model.model.operations.*;
 import org.openiaml.model.model.scopes.*;
+import org.openiaml.model.model.domain.*;
 
 #declare any global variables here
 global OverridableCreateElementsHelper handler;
@@ -430,7 +431,7 @@ rule "Refresh New Instance Object mappings (except for generated primary keys) w
 	when
 		sync : SetWire(  )
 		form : InputForm (  )
-		instance : DomainObjectInstance (  )
+		instance : DomainIterator (  )
 		
 		eval(functions.connectsSet(sync, form, instance))
 		
@@ -614,14 +615,14 @@ end
  * be edited.
  *
  * @inference SetWire,Label
- *		When a {@model DomainObjectInstance} is connected to a {@model InputForm} by a {@model SetWire},
+ *		When a {@model DomainIterator} is connected to a {@model InputForm} by a {@model SetWire},
  *		{@model Label}s will be generated for its non-generated, non-primary key attributes.
  */
 rule "Refresh New Instance Object mappings (except for generated primary keys) when Instance sets a Form: create labels"
 	when
 		sync : SetWire(  )
 		form : InputForm (  )
-		instance : DomainObjectInstance (  )
+		instance : DomainIterator (  )
 		
 		eval(functions.connectsSet(sync, instance, form))	// backwards
 		
@@ -669,7 +670,7 @@ rule "A SetWire between Attributes selected from a NewInstanceWire need to check
 	when
 		sync : SetWire( )
 		form : InputForm ( )
-		instance : DomainObjectInstance ( )
+		instance : DomainIterator ( )
 		
 		eval(functions.connectsSet(sync, form, instance))
 		

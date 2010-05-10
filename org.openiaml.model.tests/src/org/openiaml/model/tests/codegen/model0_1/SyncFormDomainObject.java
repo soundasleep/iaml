@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.Random;
 
 import org.eclipse.core.resources.IFile;
-import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.tests.CodegenTestCase;
 
 /**

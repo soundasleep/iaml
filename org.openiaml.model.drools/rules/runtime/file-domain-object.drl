@@ -14,75 +14,50 @@ global OverridableCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
-/*
-rule "Refresh FileDomainStore mappings"
+rule "Create the Properties file DomainSchema"
 		
 	when
-		p : Properties ( )
-		fds : FileDomainStore ( propertiesFile == p )
-		not ( FileDomainObject ( eContainer == fds, name == "properties" ))
-
-	then
-		FileDomainObject fdo = handler.generatedFileDomainObject(fds, fds);
-		fdo.setName("properties");
-		queue.add(fdo);
+		root : InternetApplication ( )
+		$fds : DomainSource ( type == DomainStoreTypes.PROPERTIES_FILE )
 		
-end
-*/
-
-rule "Refresh FileDomainStore mappings (2)"
-		
-	when
-		$fds : DomainStore ( type == DomainStoreTypes.PROPERTIES_FILE )
 		p : ExtendedProperties ( ) from $fds.propertiesFile
-		not ( DomainObject ( eContainer == $fds, name == "properties" ))
+		not ( schema : DomainSchema ( name == "properties" )
+			and exists ( 
+				edge : SchemaEdge ( )
+				and eval ( functions.connectsSchema(edge, $fds, schema ))
+			)
+		)
 
 		eval ( handler.veto( $fds ))
 
 	then
-		DomainObject fdo = handler.generatedDomainObject($fds, $fds);
+		DomainSchema fdo = handler.generatedDomainSchema($fds, root);
 		//handler.setValue(fdo, ModelPackage.eINSTANCE.getNamedElement_Name(), "properties");
 		handler.setName(fdo, "properties");
 		queue.add(fdo, drools);
 
 end
 
-/*
-this rule doesn't work unless you also insert() all the Properties.
-
-rule "Refresh FileDomainObject mappings"
-		
-	when
-		$p : Properties ( )
-		$key : String ( ) from $p.stringPropertyNames 
-		fds : FileDomainStore ( propertiesFile == $p )
-		fdo : FileDomainObject ( eContainer == fds, name == "properties" )
-		not ( FileDomainAttribute ( eContainer == fdo, name == $key ))
-
-	then
-		FileDomainAttribute fda = handler.generatedFileDomainAttribute(fdo, fdo);
-		handler.setValue(fda, ModelPackage.eINSTANCE.getNamedElement_Name(), $key);
-		queue.add(fda, drools);
-		
-end
-*/
-
 // unfortunately $p.stringPropertyNames() cannot be iterated over.
 // this is either because Drools expects getFieldName(), or it cannot
 // iterate over Set or Collection
-rule "Refresh FileDomainObject mappings (2)"
+rule "Create DomainAttributes for Properties File DomainSchema"
 		
 	when
-		$fds : DomainStore ( type == DomainStoreTypes.PROPERTIES_FILE )
+		$fds : DomainSource ( type == DomainStoreTypes.PROPERTIES_FILE )
 		$p : ExtendedProperties ( ) from $fds.propertiesFile
 		$key : String ( ) from $p.propertyNames
-		fdo : DomainObject ( eContainer == $fds, name == "properties" )
-		not ( DomainAttribute ( eContainer == fdo, name == $key ))
+		
+		schema : DomainSchema ( name == "properties" )
+		schemaEdge : SchemaEdge ( )
+		eval ( functions.connectsSchema( schemaEdge, $fds, schema ))
+		
+		not ( DomainAttribute ( eContainer == schema, name == $key ))
 
-		eval ( handler.veto( fdo ))
+		eval ( handler.veto( schema ))
 
 	then
-		DomainAttribute fda = handler.generatedDomainAttribute(fdo, fdo);
+		DomainAttribute fda = handler.generatedDomainAttribute(schema, schema);
 		//handler.setValue(fda, ModelPackage.eINSTANCE.getNamedElement_Name(), $key);
 		handler.setName(fda, $key);
 		queue.add(fda, drools);

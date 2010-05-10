@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.util.Date;
 
 import org.eclipse.core.resources.IFile;
-import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.tests.CodegenTestCase;
 
 /**

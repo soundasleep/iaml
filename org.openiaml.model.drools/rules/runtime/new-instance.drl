@@ -21,7 +21,7 @@ global DroolsHelperFunctions functions;
 rule "Refresh NewInstanceWire Instance Object mappings"
 	when
 		object : DomainObject ( )
-		instance : DomainObjectInstance ( )
+		instance : DomainIterator ( )
 		wire : NewInstanceWire( from == object, to == instance )
 
 		attribute : DomainAttribute ( eContainer == object )
@@ -44,7 +44,7 @@ end
 rule "Refresh SelectWire Instance Object mappings"
 	when
 		object : DomainObject ( )
-		instance : DomainObjectInstance ( )
+		instance : DomainIterator ( )
 		wire : SelectWire( from == object, to == instance )
 
 		attribute : DomainAttribute ( eContainer == object )
@@ -67,7 +67,7 @@ end
 rule "Mark AttributeInstances as extensions of the identically-named Attributes (NewInstanceWire)"
 	when
 		object : DomainObject ( )
-		instance : DomainObjectInstance ( )
+		instance : DomainIterator ( )
 		wire : NewInstanceWire( from == object, to == instance )
 
 		attribute : DomainAttribute ( eContainer == object )
@@ -87,7 +87,7 @@ end
 rule "Mark AttributeInstances as extensions of the identically-named Attributes (SelectWire)"
 	when
 		object : DomainObject ( )
-		instance : DomainObjectInstance ( )
+		instance : DomainIterator ( )
 		wire : SelectWire( from == object, to == instance )
 
 		attribute : DomainAttribute ( eContainer == object )
@@ -104,9 +104,9 @@ rule "Mark AttributeInstances as extensions of the identically-named Attributes 
 	
 end
 
-rule "Create 'save' operation for DomainObjectInstances"
+rule "Create 'save' operation for DomainIterators"
 	when
-		instance : DomainObjectInstance ( )
+		instance : DomainIterator ( )
 		
 		not ( Operation( eContainer == instance, name == "save" ))
 		

@@ -27,9 +27,6 @@ import org.openiaml.model.model.DataFlowEdgeDestination;
 import org.openiaml.model.model.DataFlowEdgesSource;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainAttributeInstance;
-import org.openiaml.model.model.DomainObject;
-import org.openiaml.model.model.DomainObjectInstance;
-import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.DynamicApplicationElementSet;
 import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.ExecutionEdgeDestination;
@@ -53,6 +50,9 @@ import org.openiaml.model.model.components.AccessControlHandler;
 import org.openiaml.model.model.components.EntryGate;
 import org.openiaml.model.model.components.ExitGate;
 import org.openiaml.model.model.components.LoginHandler;
+import org.openiaml.model.model.domain.DomainIterator;
+import org.openiaml.model.model.domain.DomainSchema;
+import org.openiaml.model.model.domain.DomainSource;
 import org.openiaml.model.model.operations.Arithmetic;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.CastNode;
@@ -66,9 +66,6 @@ import org.openiaml.model.model.scopes.Email;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.users.RequiresEdgeDestination;
 import org.openiaml.model.model.users.RequiresEdgesSource;
-import org.openiaml.model.model.users.Role;
-import org.openiaml.model.model.users.UserInstance;
-import org.openiaml.model.model.users.UserStore;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
@@ -83,13 +80,11 @@ import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ExtendsEdgeDestination;
 import org.openiaml.model.model.wires.ExtendsEdgesSource;
 import org.openiaml.model.model.wires.NavigateAction;
-import org.openiaml.model.model.wires.NewInstanceWire;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.ParameterEdgeDestination;
 import org.openiaml.model.model.wires.ParameterEdgesSource;
 import org.openiaml.model.model.wires.RequiresEdge;
 import org.openiaml.model.model.wires.RunAction;
-import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.model.wires.SyncWire;
 import org.openiaml.model.tests.ModelInferenceTestCase;
@@ -298,20 +293,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public DomainAttribute assertHasDomainAttribute(DomainObject obj,
+	public DomainAttribute assertHasDomainAttribute(DomainSchema obj,
 			String string) throws JaxenException {
-		return (DomainAttribute) queryOne(obj, "iaml:attributes[iaml:name='" + string + "']");
-	}
-
-	/**
-	 * Assert that the given element contains the given
-	 * DomainAttribute.
-	 *
-	 * @return The element found
-	 */
-	public DomainAttribute assertHasDomainAttribute(DomainStore obj,
-			String string) throws JaxenException {
-		return (DomainAttribute) queryOne(obj, "iaml:attributes[iaml:name='" + string + "']");
+		return (DomainAttribute) queryOne(obj, "iaml.domain:attributes[iaml:name='" + string + "']");
 	}
 
 	/**
@@ -353,9 +337,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public DomainAttributeInstance assertHasDomainAttributeInstance(DomainObjectInstance obj,
+	public DomainAttributeInstance assertHasDomainAttributeInstance(DomainIterator obj,
 			String string) throws JaxenException {
-		return (DomainAttributeInstance) queryOne(obj, "iaml:attributes[iaml:name='" + string + "']");
+		return (DomainAttributeInstance) queryOne(obj, "iaml.domain:attributes[iaml:name='" + string + "']");
 	}
 
 	/**
@@ -386,69 +370,49 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public void assertHasNoDomainAttributeInstance(DomainObjectInstance obj,
+	public void assertHasNoDomainAttributeInstance(DomainIterator obj,
 			String string) throws JaxenException {
-		assertHasNone(obj, "iaml:attributes[iaml:name='" + string + "']");
+		assertHasNone(obj, "iaml.domain:attributes[iaml:name='" + string + "']");
 	}
 
 	/**
 	 * Assert that the given element contains the given
-	 * DomainObject.
+	 * DomainSchema.
 	 *
 	 * @return The element found
 	 */
-	public DomainObject assertHasDomainObject(DomainStore store, String string) throws JaxenException {
-		return (DomainObject) queryOne(store, "iaml:children[iaml:name='" + string + "']");
-	}
-
-	/**
-	 * Assert that the given element contains the given
-	 * DomainObject.
-	 *
-	 * @return The element found
-	 */
-	public DomainObject assertHasDomainObject(Scope store, String string) throws JaxenException {
-		return (DomainObject) queryOne(store, "iaml:elements[iaml:name='" + string + "']");
+	public DomainSchema assertHasDomainSchema(InternetApplication store, String string) throws JaxenException {
+		return (DomainSchema) queryOne(store, "iaml:schemas[iaml:name='" + string + "']");
 	}
 	
 	/**
 	 * Assert that the given element contains the given
-	 * DomainObject.
+	 * DomainSource.
 	 *
 	 * @return The element found
 	 */
-	public DomainObject assertHasDomainObject(InternetApplication root, String string) throws JaxenException {
-		return (DomainObject) queryOne(root, "iaml:children[iaml:name='" + string + "']");
+	public DomainSource assertHasDomainSource(InternetApplication store, String string) throws JaxenException {
+		return (DomainSource) queryOne(store, "iaml:sources[iaml:name='" + string + "']");
+	}
+	
+	/**
+	 * Assert that the given element contains the given
+	 * DomainIterator.
+	 *
+	 * @return The element found
+	 */
+	public DomainIterator assertHasDomainIterator(Scope root, String string) throws JaxenException {
+		return (DomainIterator) queryOne(root, "iaml:elements[iaml:name='" + string + "']");
 	}
 
 	/**
 	 * Assert that the given element contains the given
-	 * UserInstance.
+	 * DomainIterator.
 	 *
 	 * @return The element found
 	 */
-	public UserInstance assertHasUserInstance(Scope root, String string) throws JaxenException {
-		return (UserInstance) queryOne(root, "iaml:elements[iaml:name='" + string + "']");
-	}
-
-	/**
-	 * Assert that the given element contains the given
-	 * DomainObjectInstance.
-	 *
-	 * @return The element found
-	 */
-	public DomainObjectInstance assertHasDomainObjectInstance(Scope root, String string) throws JaxenException {
-		return (DomainObjectInstance) queryOne(root, "iaml:elements[iaml:name='" + string + "']");
-	}
-
-	/**
-	 * Assert that the given element contains the given
-	 * DomainObjectInstance.
-	 *
-	 * @return The element found
-	 */
-	public DomainObjectInstance assertHasDomainObjectInstance(InternetApplication root, String string) throws JaxenException {
-		return (DomainObjectInstance) queryOne(root, "iaml:children[iaml:name='" + string + "']");
+	public DomainIterator assertHasDomainObjectInstance(InternetApplication root, String string) throws JaxenException {
+		return (DomainIterator) queryOne(root, "iaml:children[iaml:name='" + string + "']");
 	}
 
 	/**
@@ -459,17 +423,6 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public void assertHasNoDomainObjectInstance(InternetApplication root, String string) throws JaxenException {
 		assertHasNone(root, "iaml:children[iaml:name='" + string + "']");
-	}
-
-	/**
-	 * Assert that the given element contains the given
-	 * DomainStore.
-	 *
-	 * @return The element found
-	 */
-	public DomainStore assertHasDomainStore(InternetApplication root,
-			String string) throws JaxenException {
-		return (DomainStore) queryOne(root, "iaml:domainStores[iaml:name='" + string + "']");
 	}
 
 	/**
@@ -660,26 +613,6 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public Map assertHasMap(Frame element, String string) throws JaxenException {
 		return (Map) queryOne(element, "iaml.visual:children[iaml:name='" + string + "']");
-	}
-
-	/**
-	 * Assert that the given element contains the given
-	 * UserStore.
-	 *
-	 * @return The element found
-	 */
-	public UserStore assertHasUserStore(InternetApplication root, String string) throws JaxenException {
-		return (UserStore) queryOne(root, "iaml:domainStores[iaml:name='" + string + "']");	
-	}
-
-	/**
-	 * Assert that the given element contains the given
-	 * Role.
-	 *
-	 * @return The element found
-	 */
-	public Role assertHasRole(UserStore root, String string) throws JaxenException {
-		return (Role) queryOne(root, "iaml:children[iaml:name='" + string + "']");	
 	}
 	
 	/**
@@ -1246,39 +1179,6 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 				fail("Found a ConditionEdge from '" + from + "' to '" + to + "' with name '" + name + "' unexpectedly: " + e);
 			}
 		}
-	}
-	
-	/**
-	 * Assert there exists only one unidirectional SelectWire between
-	 * the given elements.
-	 *
-	 * @return The element found
-	 */
-	public SelectWire assertHasSelectWire(EObject container, WireSource from, WireDestination to, String name) throws JaxenException {
-		return (SelectWire) assertHasWireFromTo(container, from, to, 
-				SelectWire.class, name, ALL);
-	}	
-	
-	/**
-	 * Assert there exists only one unidirectional SelectWire between
-	 * the given elements.
-	 *
-	 * @return The element found
-	 */
-	public SelectWire assertHasSelectWire(EObject container, WireSource from, WireDestination to) throws JaxenException {
-		return (SelectWire) assertHasWireFromTo(container, from, to, 
-				SelectWire.class, ALL);
-	}
-	
-	/**
-	 * Assert there exists only one unidirectional NewInstanceWire between
-	 * the given elements.
-	 *
-	 * @return The element found
-	 */
-	public NewInstanceWire assertHasNewInstanceWire(EObject container, WireSource from, WireDestination to, String name) throws JaxenException {
-		return (NewInstanceWire) assertHasWireFromTo(container, from, to, 
-				NewInstanceWire.class, name, ALL);
 	}
 	
 	/**

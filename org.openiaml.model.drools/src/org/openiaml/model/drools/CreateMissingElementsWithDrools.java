@@ -19,15 +19,16 @@ public class CreateMissingElementsWithDrools extends DroolsInferenceEngine {
 	}
 
 	private List<String> ruleFiles = Arrays.asList(
+			
 			"/rules/base.drl",
 			"/rules/casting.drl",
 			"/rules/sync-wires.drl",
-			"/rules/set-wires.drl",
-			"/rules/detail-wires.drl",
+			//"/rules/set-wires.drl",
+			//"/rules/detail-wires.drl", 
 			"/rules/emails.drl",
 			"/rules/events.drl",
 			"/rules/sessions.drl",
-			"/rules/login-handler.drl",
+			// "/rules/login-handler.drl",
 			"/rules/gate.drl",
 			"/rules/instance.drl",
 			"/rules/labels.drl",
@@ -35,11 +36,11 @@ public class CreateMissingElementsWithDrools extends DroolsInferenceEngine {
 			"/rules/paginate.drl",
 			"/rules/dynamic-sources.drl",
 			"/rules/conditions.drl",
-			"/rules/users.drl",
+			//"/rules/users.drl",
 			"/rules/validate.drl",
 			"/rules/runtime/file-domain-object.drl",
-			"/rules/runtime/domain.drl",
-			"/rules/runtime/new-instance.drl"
+			"/rules/runtime/domain.drl"
+			//"/rules/runtime/new-instance.drl"
 			);
 	
 	/**

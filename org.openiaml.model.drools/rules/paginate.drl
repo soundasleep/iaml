@@ -1,5 +1,5 @@
 /**
- * Rules related to DomainObjectInstances connected to InputForms for
+ * Rules related to DomainIterators connected to InputForms for
  * pagination, etc.
  */
 package org.openiaml.model.drools.rules.paginate
@@ -17,6 +17,7 @@ import org.openiaml.model.model.operations.*;
 import org.openiaml.model.model.scopes.*;
 import org.openiaml.model.model.components.*;
 import org.openiaml.model.model.users.*;
+import org.openiaml.model.model.domain.*;
 
 #declare any global variables here
 global OverridableCreateElementsHelper handler;
@@ -24,17 +25,24 @@ global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
 /**
- * @inference DomainObjectInstance,InputForm,SelectWire
- *		An {@model InputForm} connected to a {@model DomainObjectInstance},
+ * @inference DomainIterator,InputForm,SelectWire
+ *		An {@model InputForm} connected to a {@model DomainIterator},
  *		populated by a {@model SelectWire} that will return {@model SelectWire#limit many results},
  *		will contain {@model Button}s named 'Next', 'Previous', 'First' and 'Last'.
  */
-rule "Create navigation buttons for InputForms when connected to DomainObjectInstances with many results"
+rule "Create navigation buttons for InputForms when connected to DomainIterators with many results"
 	when
-		object : DomainObject ( )
-		instance : DomainObjectInstance (  )
-		select : SelectWire ( limit != 1 )
-		eval( functions.connectsSelect ( select, object, instance ))
+		object : DomainSchema ( )
+		instance : DomainIterator ( limit != 1 )
+		
+		// TODO Drools fails with a NullPointerException if we put the eval() in the 
+		// condition selector for SchemaEdge??
+		domainSource : DomainSource ( )
+		schemaEdge : SchemaEdge ( )
+		eval(functions.connectsSchema(schemaEdge, domainSource, object )) 
+		
+		select : SelectEdge ( )
+		eval(functions.connectsSelect(select, instance, domainSource ))
 		
 		form : InputForm ( )
 		set : SetWire ( )
@@ -67,18 +75,23 @@ rule "Create navigation buttons for InputForms when connected to DomainObjectIns
 end
 
 /**
- * @inference DomainObjectInstance,InputForm,SelectWire
- *		An {@model InputForm} connected to a {@model DomainObjectInstance},
+ * @inference DomainIterator,InputForm,SelectWire
+ *		An {@model InputForm} connected to a {@model DomainIterator},
  *		populated by a {@model SelectWire} that will return {@model SelectWire#limit many results},
  *		will contain a {@model Label} named 'Results'.
  */
-rule "Create 'Results' Label for InputForms when connected to DomainObjectInstances with many results"
+rule "Create 'Results' Label for InputForms when connected to DomainIterators with many results"
 	when
-		object : DomainObject ( )
-		instance : DomainObjectInstance (  )
-		select : SelectWire ( limit != 1 )
-		eval( functions.connectsSelect ( select, object, instance ))
+		object : DomainSchema ( )
+		instance : DomainIterator ( limit != 1 )
 		
+		domainSource : DomainSource ( )
+		schemaEdge : SchemaEdge ( )
+		eval(functions.connectsSchema(schemaEdge, domainSource, object ))
+		
+		select : SelectEdge ( )
+		eval(functions.connectsSelect(select, instance, domainSource ))
+				
 		form : InputForm ( )
 		set : SetWire ( )
 		eval ( functions.connectsSet ( set, instance, form ))
@@ -94,9 +107,9 @@ rule "Create 'Results' Label for InputForms when connected to DomainObjectInstan
 
 end
 
-rule "Connect Next button to 'next' operation on DomainObjectInstance"
+rule "Connect Next button to 'next' operation on DomainIterator"
 	when
-		instance : DomainObjectInstance (  )
+		instance : DomainIterator (  )
 		
 		form : InputForm ( )
 		set : SetWire ( )
@@ -120,7 +133,7 @@ end
 
 rule "Connect 'hasNext' condition to Next button action"
 	when
-		instance : DomainObjectInstance (  )
+		instance : DomainIterator (  )
 		hasNext : Condition ( instance.hasNext == hasNext )
 		
 		form : InputForm ( )
@@ -143,9 +156,9 @@ rule "Connect 'hasNext' condition to Next button action"
 
 end
 
-rule "Connect Previous button to 'previous' operation on DomainObjectInstance"
+rule "Connect Previous button to 'previous' operation on DomainIterator"
 	when
-		instance : DomainObjectInstance (  )
+		instance : DomainIterator (  )
 		
 		form : InputForm ( )
 		set : SetWire ( )
@@ -169,7 +182,7 @@ end
 
 rule "Connect 'hasPrevious' condition to Previous button action"
 	when
-		instance : DomainObjectInstance (  )
+		instance : DomainIterator (  )
 		hasPrevious : Condition ( instance.hasPrevious == hasPrevious )
 		
 		form : InputForm ( )
@@ -192,9 +205,9 @@ rule "Connect 'hasPrevious' condition to Previous button action"
 
 end
 
-rule "Connect First button to 'reset' operation on DomainObjectInstance"
+rule "Connect First button to 'reset' operation on DomainIterator"
 	when
-		instance : DomainObjectInstance (  )
+		instance : DomainIterator (  )
 		
 		form : InputForm ( )
 		set : SetWire ( )
@@ -218,7 +231,7 @@ end
 
 rule "Connect 'not empty' condition to First button action"
 	when
-		instance : DomainObjectInstance (  )
+		instance : DomainIterator (  )
 		notEmpty : Condition ( eContainer == instance, name == "not empty" ) 
 		
 		form : InputForm ( )
@@ -241,9 +254,9 @@ rule "Connect 'not empty' condition to First button action"
 
 end
 
-rule "Connect Last button to 'jump' operation on DomainObjectInstance"
+rule "Connect Last button to 'jump' operation on DomainIterator"
 	when
-		instance : DomainObjectInstance (  )
+		instance : DomainIterator (  )
 		
 		form : InputForm ( )
 		set : SetWire ( )
@@ -267,7 +280,7 @@ end
 
 rule "Connect 'not empty' condition to Last button action"
 	when
-		instance : DomainObjectInstance (  )
+		instance : DomainIterator (  )
 		notEmpty : Condition ( eContainer == instance, name == "not empty" ) 
 		
 		form : InputForm ( )
@@ -292,7 +305,7 @@ end
 
 rule "Create 'target' property in Last button"
 	when
-		instance : DomainObjectInstance (  )
+		instance : DomainIterator (  )
 		
 		form : InputForm ( )
 		set : SetWire ( )
@@ -313,7 +326,7 @@ end
 
 rule "Connect 'target' property to RunAction in Last button"
 	when
-		instance : DomainObjectInstance (  )
+		instance : DomainIterator (  )
 		
 		form : InputForm ( )
 		set : SetWire ( )
@@ -338,7 +351,7 @@ end
 
 rule "'Last' button will have a CompositeOperation named 'update target'"
 	when
-		instance : DomainObjectInstance (  )
+		instance : DomainIterator (  )
 		
 		form : InputForm ( )
 		set : SetWire ( )
@@ -359,7 +372,7 @@ end
 
 rule "'Last' button needs to call 'update target' before calling 'reset'"
 	when
-		instance : DomainObjectInstance (  )
+		instance : DomainIterator (  )
 		
 		form : InputForm ( )
 		set : SetWire ( )
@@ -388,7 +401,7 @@ end
 
 rule "Create contents of 'update target' operation"
 	when
-		instance : DomainObjectInstance (  )
+		instance : DomainIterator (  )
 		results : Property ( instance.results == results )
 		
 		form : InputForm ( )
@@ -441,13 +454,13 @@ rule "Create contents of 'update target' operation"
 end
 
 /**
- * @implementation EventTrigger,DomainObjectInstance
- *		The '{@model Changeable#onChange}' event for a {@model DomainObjectInstance}
- *		is executed when the results, that the {@model DomainObjectInstance} represent, change.
+ * @implementation EventTrigger,DomainIterator
+ *		The '{@model Changeable#onChange}' event for a {@model DomainIterator}
+ *		is executed when the results, that the {@model DomainIterator} represent, change.
  */
 rule "Connect Instance.onChange to Results.update"
 	when
-		instance : DomainObjectInstance (  )
+		instance : DomainIterator (  )
 		event : EventTrigger ( instance.onChange == event )
 		
 		form : InputForm ( )
@@ -470,7 +483,7 @@ end
 
 rule "Connect results parameter to Results label update (onChange)"
 	when
-		instance : DomainObjectInstance (  )
+		instance : DomainIterator (  )
 		event : EventTrigger ( instance.onChange == event )
 		
 		form : InputForm ( )
@@ -494,13 +507,13 @@ rule "Connect results parameter to Results label update (onChange)"
 end
 
 /**
- * @implementation InputForm,DomainObjectInstance
+ * @implementation InputForm,DomainIterator
  *		The '{@model Accessible#onAccess}' event for a paginated {@model InputForm}
- *		is executed when the {@model DomainObjectInstance} is accessed for the first time.
+ *		is executed when the {@model DomainIterator} is accessed for the first time.
  */
 rule "Connect Instance.onAccess to Results.update"
 	when
-		instance : DomainObjectInstance (  )
+		instance : DomainIterator (  )
 		
 		form : InputForm ( )
 		event : EventTrigger ( form.onAccess == event )
@@ -523,7 +536,7 @@ end
 
 rule "Connect results parameter to Results label update (onAccess)"
 	when
-		instance : DomainObjectInstance (  )
+		instance : DomainIterator (  )
 		
 		form : InputForm ( )
 		event : EventTrigger ( form.onAccess == event )

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.11d83490915.266">
-  <domainStores id="model.11d83490915.26b" name="store">
-    <children id="model.11d83490915.274" name="domain">
-      <attributes id="model.11d83490915.28e" name="attribute" inWires="wires.11d83490a7c.85"/>
-    </children>
-  </domainStores>
   <scopes xsi:type="iaml.visual:Frame" id="visual.11d83490a0f.dd" name="page">
     <children xsi:type="iaml.visual:InputTextField" outWires="wires.11d83490a7c.85" id="visual.11d83490a0f.f0" name="single-text-field">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.11d83490a7c.85" from="visual.11d83490a0f.f0" to="model.11d83490915.28e" name="syncField"/>
     </children>
   </scopes>
+  <schemas id="domain.128807fbeba.d63" name="domain" inSchemas="domain.128807fbeba.d65">
+    <attributes id="model.11d83490915.28e" name="attribute" inWires="wires.11d83490a7c.85"/>
+  </schemas>
+  <sources id="domain.128807fbeba.d64" outSchemas="domain.128807fbeba.d65">
+    <schemaEdges id="domain.128807fbeba.d65" from="domain.128807fbeba.d64" to="domain.128807fbeba.d63"/>
+  </sources>
 </iaml:InternetApplication>

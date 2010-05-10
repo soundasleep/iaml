@@ -1,17 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.11d83490915.308">
-  <domainStores id="model.11d83490915.30d" name="domainStore">
-    <children id="model.11d83490915.35e" name="user form" outWires="wires.11d83490a7c.d0" inWires="wires.11d83490a7c.109">
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.11d83490a7c.d0" from="model.11d83490915.35e" to="model.11d83490915.397" name="sync"/>
-      <attributes id="model.11d83490915.378" name="name"/>
-      <attributes id="model.11d83490915.379" name="email"/>
-      <attributes id="model.11d83490915.37a" name="password"/>
-    </children>
-    <children id="model.11d83490915.397" name="last signup" outWires="wires.11d83490a7c.f3" inWires="wires.11d83490a7c.d0">
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.11d83490a7c.f3" from="model.11d83490915.397" to="visual.11d83490a0f.3b3" name="sync"/>
-      <attributes id="model.11d83490915.3dd" name="name"/>
-    </children>
-  </domainStores>
   <scopes xsi:type="iaml.visual:Frame" id="visual.11d83490a0f.11f" name="page1" outWires="wires.11d83490a7c.92">
     <wires xsi:type="iaml.wires:SyncWire" id="wires.11d83490a7c.92" from="visual.11d83490a0f.11f" to="visual.11d83490a0f.120" name="sync"/>
     <children xsi:type="iaml.visual:InputForm" id="visual.11d83490a0f.12d" name="form">
@@ -21,7 +9,7 @@
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.11d83490a0f.120" name="page2" inWires="wires.11d83490a7c.92">
     <children xsi:type="iaml.visual:InputForm" outWires="wires.11d83490a7c.109" id="visual.11d83490a0f.147" name="form">
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.11d83490a7c.109" from="visual.11d83490a0f.147" to="model.11d83490915.35e" name="sync"/>
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.11d83490a7c.109" from="visual.11d83490a0f.147" to="domain.128807fbeba.1105" name="sync"/>
       <children xsi:type="iaml.visual:InputTextField" id="visual.11d83490a0f.1fc" name="name"/>
       <children xsi:type="iaml.visual:InputTextField" id="visual.11d83490a0f.1fd" name="email"/>
       <children xsi:type="iaml.visual:InputTextField" id="visual.11d83490a0f.1fe" name="password"/>
@@ -32,4 +20,20 @@
       <children xsi:type="iaml.visual:InputTextField" id="visual.11d83490a0f.40d" name="name"/>
     </children>
   </scopes>
+  <schemas id="domain.128807fbeba.1105" name="user form" inWires="wires.11d83490a7c.109" outWires="wires.11d83490a7c.d0" inSchemas="domain.128807fbeba.1107">
+    <wires xsi:type="iaml.wires:SyncWire" id="wires.11d83490a7c.d0" from="domain.128807fbeba.1105" to="domain.128807fbeba.1108" name="sync"/>
+    <attributes id="model.11d83490915.378" name="name"/>
+    <attributes id="model.11d83490915.379" name="email"/>
+    <attributes id="model.11d83490915.37a" name="password"/>
+  </schemas>
+  <schemas id="domain.128807fbeba.1108" name="last signup" inWires="wires.11d83490a7c.d0" outWires="wires.11d83490a7c.f3" inSchemas="domain.128807fbeba.110a">
+    <wires xsi:type="iaml.wires:SyncWire" id="wires.11d83490a7c.f3" from="domain.128807fbeba.1108" to="visual.11d83490a0f.3b3" name="sync"/>
+    <attributes id="model.11d83490915.3dd" name="name"/>
+  </schemas>
+  <sources id="domain.128807fbeba.1106" outSchemas="domain.128807fbeba.1107">
+    <schemaEdges id="domain.128807fbeba.1107" from="domain.128807fbeba.1106" to="domain.128807fbeba.1105"/>
+  </sources>
+  <sources id="domain.128807fbeba.1109" outSchemas="domain.128807fbeba.110a">
+    <schemaEdges id="domain.128807fbeba.110a" from="domain.128807fbeba.1109" to="domain.128807fbeba.1108"/>
+  </sources>
 </iaml:InternetApplication>

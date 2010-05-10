@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12109331eea.107e">
-  <domainStores id="model.12109331eea.1083" name="domain store">
-    <children id="model.12109331eea.108c" name="User" outWires="wires.12109331f38.627">
-      <wires xsi:type="iaml.wires:SelectWire" inParameterEdges="wires.12109dbdd39.54" id="wires.12109331f38.627" from="model.12109331eea.108c" to="model.12109331eea.128c" name="select" query="id = ?"/>
-      <attributes id="model.12109331eea.10ac" name="name"/>
-      <attributes id="model.12109331eea.10ad" name="email"/>
-      <attributes id="model.12109331eea.10ae" name="password"/>
-      <attributes id="model.12109331eea.10d3" name="id" primaryKey="true"/>
-    </children>
-  </domainStores>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12109331eea.107e">
   <scopes xsi:type="iaml.visual:Frame" id="visual.12109331f38.e3f" name="container">
     <values id="model.12109c6242e.5e" name="static value" outParameterEdges="wires.12109dbdd39.54" value="43">
-      <parameterEdges id="wires.12109dbdd39.54" from="model.12109c6242e.5e" to="wires.12109331f38.627"/>
+      <parameterEdges id="wires.12109dbdd39.54" from="model.12109c6242e.5e" to="domain.128807fbeba.d89"/>
     </values>
-    <elements xsi:type="iaml:DomainObjectInstance" id="model.12109331eea.128c" name="&quot;My User&quot;" inWires="wires.12109331f38.627" autosave="true">
+    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.d89" name="select" inParameterEdges="wires.12109dbdd39.54" autosave="true" query="id = ?" outSelects="domain.128807fbeba.d8d">
       <attributes id="model.12109331eea.12dc" name="name" outWires="wires.12109c6249b.9" autosave="true">
         <wires xsi:type="iaml.wires:SyncWire" id="wires.12109c6249b.9" from="model.12109331eea.12dc" to="visual.12109331f38.ebf" name="sync"/>
       </attributes>
     </elements>
     <children xsi:type="iaml.visual:InputTextField" inWires="wires.12109c6249b.9" id="visual.12109331f38.ebf" name="textfield"/>
   </scopes>
+  <schemas id="domain.128807fbeba.d8a" name="User" inSchemas="domain.128807fbeba.d8c">
+    <attributes id="model.12109331eea.10ac" name="name"/>
+    <attributes id="model.12109331eea.10ad" name="email"/>
+    <attributes id="model.12109331eea.10ae" name="password"/>
+    <attributes id="model.12109331eea.10d3" name="id" primaryKey="true"/>
+  </schemas>
+  <sources id="domain.128807fbeba.d8b" outSchemas="domain.128807fbeba.d8c" inSelects="domain.128807fbeba.d8d">
+    <schemaEdges id="domain.128807fbeba.d8c" from="domain.128807fbeba.d8b" to="domain.128807fbeba.d8a"/>
+    <selectEdges id="domain.128807fbeba.d8d" from="domain.128807fbeba.d89" to="domain.128807fbeba.d8b"/>
+  </sources>
 </iaml:InternetApplication>

@@ -1,81 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1236407970c.1">
-  <domainStores id="model.1236407970c.5" name="domain store">
-    <children id="model.1236407970c.11" name="Person" outWires="wires.12364143556.6c6" inExtendsEdges="wires.12364143556.1 wires.12364143556.3">
-      <wires xsi:type="iaml.wires:SelectWire" inParameterEdges="wires.12364143556.6c8" id="wires.12364143556.6c6" from="model.1236407970c.11" to="model.123641434e9.2abe" name="select" query="name = ?"/>
-      <attributes id="model.123641434e9.8a" name="name"/>
-      <attributes id="model.123641434e9.29a8" name="id" primaryKey="true"/>
-    </children>
-    <children id="model.1236407970c.19" name="Student" outWires="wires.12364143556.751" outExtendsEdges="wires.12364143556.1" inExtendsEdges="wires.12364143556.5 wires.12364143556.6">
-      <wires xsi:type="iaml.wires:SelectWire" inParameterEdges="wires.12364143556.752" id="wires.12364143556.751" from="model.1236407970c.19" to="model.123641434e9.2c34" name="select" query="enrolled = ?"/>
-      <extendsEdges id="wires.12364143556.1" from="model.1236407970c.19" to="model.1236407970c.11"/>
-      <attributes id="model.123641434e9.f3" name="enrolled"/>
-    </children>
-    <children id="model.1236407970c.1a" name="Teacher" outWires="wires.12364143556.818" outExtendsEdges="wires.12364143556.3 wires.12364143556.4" inExtendsEdges="wires.12364143556.8">
-      <wires xsi:type="iaml.wires:SelectWire" inParameterEdges="wires.12364143556.819" id="wires.12364143556.818" from="model.1236407970c.1a" to="model.123641434e9.2de8" name="select" query="id = ?"/>
-      <extendsEdges id="wires.12364143556.3" from="model.1236407970c.1a" to="model.1236407970c.11"/>
-      <extendsEdges id="wires.12364143556.4" from="model.1236407970c.1a" to="model.1236407970c.1b"/>
-      <attributes id="model.123641434e9.163" name="title"/>
-    </children>
-    <children id="model.1236407970c.1b" name="Qualified" inExtendsEdges="wires.12364143556.4">
-      <attributes id="model.123641434e9.1bb" name="qualification"/>
-    </children>
-    <children id="model.1236407970c.1c" name="Postgraduate" outExtendsEdges="wires.12364143556.5" inExtendsEdges="wires.12364143556.7">
-      <extendsEdges id="wires.12364143556.5" from="model.1236407970c.1c" to="model.1236407970c.19"/>
-      <attributes id="model.123641434e9.2d2" name="degree"/>
-    </children>
-    <children id="model.1236407970c.1d" name="Undergraduate" outExtendsEdges="wires.12364143556.6" inExtendsEdges="wires.12364143556.3f5">
-      <extendsEdges id="wires.12364143556.6" from="model.1236407970c.1d" to="model.1236407970c.19"/>
-      <attributes id="model.123641434e9.240" name="degree"/>
-    </children>
-    <children id="model.1236407970c.1e" name="Doctoral" outWires="wires.12364143556.93b" outExtendsEdges="wires.12364143556.7 wires.12364143556.8">
-      <wires xsi:type="iaml.wires:SelectWire" inParameterEdges="wires.12364143556.93c wires.12364143556.93d" id="wires.12364143556.93b" from="model.1236407970c.1e" to="model.123641434e9.2f0e" query="qualification = :qualification and degree = :degree"/>
-      <extendsEdges id="wires.12364143556.7" from="model.1236407970c.1e" to="model.1236407970c.1c"/>
-      <extendsEdges id="wires.12364143556.8" from="model.1236407970c.1e" to="model.1236407970c.1a"/>
-      <attributes id="model.123641434e9.371" name="thesis title"/>
-    </children>
-    <children id="model.123641434e9.1e98" name="Completed Undergrad" outExtendsEdges="wires.12364143556.3f5">
-      <extendsEdges id="wires.12364143556.3f5" from="model.123641434e9.1e98" to="model.1236407970c.1d"/>
-    </children>
-  </domainStores>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1236407970c.1">
   <scopes xsi:type="iaml.visual:Frame" id="visual.12364079826.1" name="Home"/>
   <scopes xsi:type="iaml.visual:Frame" id="visual.12364143556.bc" name="get person">
     <values id="model.123641434e9.2ad3" name="person name" outParameterEdges="wires.12364143556.6c8" value="Test Name">
-      <parameterEdges id="wires.12364143556.6c8" from="model.123641434e9.2ad3" to="wires.12364143556.6c6"/>
+      <parameterEdges id="wires.12364143556.6c8" from="model.123641434e9.2ad3" to="domain.128807fbeba.108d"/>
     </values>
-    <elements xsi:type="iaml:DomainObjectInstance" id="model.123641434e9.2abe" name="selected person" inWires="wires.12364143556.6c6 wires.12364143556.6ca" autosave="true"/>
+    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.108d" name="select" inWires="wires.12364143556.6ca" inParameterEdges="wires.12364143556.6c8" autosave="true" query="name = ?" outSelects="domain.128807fbeba.10a9"/>
     <children xsi:type="iaml.visual:InputForm" outWires="wires.12364143556.6ca" id="visual.12364143556.d2" name="view person">
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.12364143556.6ca" from="visual.12364143556.d2" to="model.123641434e9.2abe" name="sync"/>
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.12364143556.6ca" from="visual.12364143556.d2" to="domain.128807fbeba.108d" name="sync"/>
     </children>
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.12364143556.e4" name="get student">
     <values id="model.123641434e9.2c35" name="enrolled param" outParameterEdges="wires.12364143556.752" value="yesterday">
-      <parameterEdges id="wires.12364143556.752" from="model.123641434e9.2c35" to="wires.12364143556.751"/>
+      <parameterEdges id="wires.12364143556.752" from="model.123641434e9.2c35" to="domain.128807fbeba.108e"/>
     </values>
-    <elements xsi:type="iaml:DomainObjectInstance" id="model.123641434e9.2c34" name="current student" inWires="wires.12364143556.750 wires.12364143556.751" autosave="true"/>
+    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.108e" name="select" inWires="wires.12364143556.750" inParameterEdges="wires.12364143556.752" autosave="true" query="enrolled = ?" outSelects="domain.128807fbeba.10aa"/>
     <children xsi:type="iaml.visual:InputForm" outWires="wires.12364143556.750" id="visual.12364143556.108" name="view student">
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.12364143556.750" from="visual.12364143556.108" to="model.123641434e9.2c34" name="sync"/>
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.12364143556.750" from="visual.12364143556.108" to="domain.128807fbeba.108e" name="sync"/>
     </children>
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.12364143556.132" name="get teacher by id">
     <values id="model.123641434e9.2de9" name="teacher id" outParameterEdges="wires.12364143556.819" value="24">
-      <parameterEdges id="wires.12364143556.819" from="model.123641434e9.2de9" to="wires.12364143556.818"/>
+      <parameterEdges id="wires.12364143556.819" from="model.123641434e9.2de9" to="domain.128807fbeba.108f"/>
     </values>
-    <elements xsi:type="iaml:DomainObjectInstance" id="model.123641434e9.2de8" name="selected teacher" inWires="wires.12364143556.817 wires.12364143556.818" autosave="true"/>
+    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.108f" name="select" inWires="wires.12364143556.817" inParameterEdges="wires.12364143556.819" autosave="true" query="id = ?" outSelects="domain.128807fbeba.10ab"/>
     <children xsi:type="iaml.visual:InputForm" outWires="wires.12364143556.817" id="visual.12364143556.168" name="view teacher">
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.12364143556.817" from="visual.12364143556.168" to="model.123641434e9.2de8" name="sync"/>
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.12364143556.817" from="visual.12364143556.168" to="domain.128807fbeba.108f" name="sync"/>
     </children>
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.12364143556.192" name="get doctoral">
     <values id="model.123641434e9.2f0f" name="qualification" outParameterEdges="wires.12364143556.93c" value="bsc">
-      <parameterEdges id="wires.12364143556.93c" from="model.123641434e9.2f0f" to="wires.12364143556.93b"/>
+      <parameterEdges id="wires.12364143556.93c" from="model.123641434e9.2f0f" to="domain.128807fbeba.1090"/>
     </values>
     <values id="model.123641434e9.2f10" name="degree" outParameterEdges="wires.12364143556.93d" value="science">
-      <parameterEdges id="wires.12364143556.93d" from="model.123641434e9.2f10" to="wires.12364143556.93b"/>
+      <parameterEdges id="wires.12364143556.93d" from="model.123641434e9.2f10" to="domain.128807fbeba.1090"/>
     </values>
-    <elements xsi:type="iaml:DomainObjectInstance" id="model.123641434e9.2f0e" name="current doctoral" inWires="wires.12364143556.93b wires.12364143556.a92" autosave="true"/>
+    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.1090" inWires="wires.12364143556.a92" inParameterEdges="wires.12364143556.93c wires.12364143556.93d" autosave="true" query="qualification = :qualification and degree = :degree" outSelects="domain.128807fbeba.10ac"/>
     <children xsi:type="iaml.visual:InputForm" outWires="wires.12364143556.a92" id="visual.12364143556.2a7" name="view doctoral">
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.12364143556.a92" from="visual.12364143556.2a7" to="model.123641434e9.2f0e" name="sync"/>
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.12364143556.a92" from="visual.12364143556.2a7" to="domain.128807fbeba.1090" name="sync"/>
     </children>
   </scopes>
+  <schemas id="domain.128807fbeba.1091" name="Person" inExtendsEdges="wires.12364143556.1 wires.12364143556.3" inSchemas="domain.128807fbeba.1093">
+    <attributes id="model.123641434e9.8a" name="name"/>
+    <attributes id="model.123641434e9.29a8" name="id" primaryKey="true"/>
+  </schemas>
+  <schemas id="domain.128807fbeba.1094" name="Student" outExtendsEdges="wires.12364143556.1" inExtendsEdges="wires.12364143556.5 wires.12364143556.6" inSchemas="domain.128807fbeba.1096">
+    <extendsEdges id="wires.12364143556.1" from="domain.128807fbeba.1094" to="domain.128807fbeba.1091"/>
+    <attributes id="model.123641434e9.f3" name="enrolled"/>
+  </schemas>
+  <schemas id="domain.128807fbeba.1097" name="Teacher" outExtendsEdges="wires.12364143556.3 wires.12364143556.4" inExtendsEdges="wires.12364143556.8" inSchemas="domain.128807fbeba.1099">
+    <extendsEdges id="wires.12364143556.3" from="domain.128807fbeba.1097" to="domain.128807fbeba.1091"/>
+    <extendsEdges id="wires.12364143556.4" from="domain.128807fbeba.1097" to="domain.128807fbeba.109a"/>
+    <attributes id="model.123641434e9.163" name="title"/>
+  </schemas>
+  <schemas id="domain.128807fbeba.109a" name="Qualified" inExtendsEdges="wires.12364143556.4" inSchemas="domain.128807fbeba.109c">
+    <attributes id="model.123641434e9.1bb" name="qualification"/>
+  </schemas>
+  <schemas id="domain.128807fbeba.109d" name="Postgraduate" outExtendsEdges="wires.12364143556.5" inExtendsEdges="wires.12364143556.7" inSchemas="domain.128807fbeba.109f">
+    <extendsEdges id="wires.12364143556.5" from="domain.128807fbeba.109d" to="domain.128807fbeba.1094"/>
+    <attributes id="model.123641434e9.2d2" name="degree"/>
+  </schemas>
+  <schemas id="domain.128807fbeba.10a0" name="Undergraduate" outExtendsEdges="wires.12364143556.6" inExtendsEdges="wires.12364143556.3f5" inSchemas="domain.128807fbeba.10a2">
+    <extendsEdges id="wires.12364143556.6" from="domain.128807fbeba.10a0" to="domain.128807fbeba.1094"/>
+    <attributes id="model.123641434e9.240" name="degree"/>
+  </schemas>
+  <schemas id="domain.128807fbeba.10a3" name="Doctoral" outExtendsEdges="wires.12364143556.7 wires.12364143556.8" inSchemas="domain.128807fbeba.10a5">
+    <extendsEdges id="wires.12364143556.7" from="domain.128807fbeba.10a3" to="domain.128807fbeba.109d"/>
+    <extendsEdges id="wires.12364143556.8" from="domain.128807fbeba.10a3" to="domain.128807fbeba.1097"/>
+    <attributes id="model.123641434e9.371" name="thesis title"/>
+  </schemas>
+  <schemas id="domain.128807fbeba.10a6" name="Completed Undergrad" outExtendsEdges="wires.12364143556.3f5" inSchemas="domain.128807fbeba.10a8">
+    <extendsEdges id="wires.12364143556.3f5" from="domain.128807fbeba.10a6" to="domain.128807fbeba.10a0"/>
+  </schemas>
+  <sources id="domain.128807fbeba.1092" outSchemas="domain.128807fbeba.1093" inSelects="domain.128807fbeba.10a9">
+    <schemaEdges id="domain.128807fbeba.1093" from="domain.128807fbeba.1092" to="domain.128807fbeba.1091"/>
+    <selectEdges id="domain.128807fbeba.10a9" from="domain.128807fbeba.108d" to="domain.128807fbeba.1092"/>
+  </sources>
+  <sources id="domain.128807fbeba.1095" outSchemas="domain.128807fbeba.1096" inSelects="domain.128807fbeba.10aa">
+    <schemaEdges id="domain.128807fbeba.1096" from="domain.128807fbeba.1095" to="domain.128807fbeba.1094"/>
+    <selectEdges id="domain.128807fbeba.10aa" from="domain.128807fbeba.108e" to="domain.128807fbeba.1095"/>
+  </sources>
+  <sources id="domain.128807fbeba.1098" outSchemas="domain.128807fbeba.1099" inSelects="domain.128807fbeba.10ab">
+    <schemaEdges id="domain.128807fbeba.1099" from="domain.128807fbeba.1098" to="domain.128807fbeba.1097"/>
+    <selectEdges id="domain.128807fbeba.10ab" from="domain.128807fbeba.108f" to="domain.128807fbeba.1098"/>
+  </sources>
+  <sources id="domain.128807fbeba.109b" outSchemas="domain.128807fbeba.109c">
+    <schemaEdges id="domain.128807fbeba.109c" from="domain.128807fbeba.109b" to="domain.128807fbeba.109a"/>
+  </sources>
+  <sources id="domain.128807fbeba.109e" outSchemas="domain.128807fbeba.109f">
+    <schemaEdges id="domain.128807fbeba.109f" from="domain.128807fbeba.109e" to="domain.128807fbeba.109d"/>
+  </sources>
+  <sources id="domain.128807fbeba.10a1" outSchemas="domain.128807fbeba.10a2">
+    <schemaEdges id="domain.128807fbeba.10a2" from="domain.128807fbeba.10a1" to="domain.128807fbeba.10a0"/>
+  </sources>
+  <sources id="domain.128807fbeba.10a4" outSchemas="domain.128807fbeba.10a5" inSelects="domain.128807fbeba.10ac">
+    <schemaEdges id="domain.128807fbeba.10a5" from="domain.128807fbeba.10a4" to="domain.128807fbeba.10a3"/>
+    <selectEdges id="domain.128807fbeba.10ac" from="domain.128807fbeba.1090" to="domain.128807fbeba.10a4"/>
+  </sources>
+  <sources id="domain.128807fbeba.10a7" outSchemas="domain.128807fbeba.10a8">
+    <schemaEdges id="domain.128807fbeba.10a8" from="domain.128807fbeba.10a7" to="domain.128807fbeba.10a6"/>
+  </sources>
 </iaml:InternetApplication>

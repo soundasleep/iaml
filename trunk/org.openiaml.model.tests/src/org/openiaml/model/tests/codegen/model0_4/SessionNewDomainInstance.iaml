@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1230bdbae76.252">
-  <domainStores id="model.1230bdbae76.25a" name="my store">
-    <children id="model.1230bdbae76.263" name="User" outWires="wires.1230bdbb01c.1bd">
-      <wires xsi:type="iaml.wires:NewInstanceWire" id="wires.1230bdbb01c.1bd" from="model.1230bdbae76.263" to="model.1230bdbae76.2a1" name="new"/>
-      <attributes id="model.1230bdbae76.27d" name="email"/>
-    </children>
-  </domainStores>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1230bdbae76.252">
   <scopes xsi:type="iaml.visual:Frame" id="visual.1230bdbafce.1b6" name="Home"/>
   <scopes xsi:type="iaml.scopes:Session" id="scopes.1230bdbb0e7.8e" name="my session">
-    <elements xsi:type="iaml:DomainObjectInstance" id="model.1230bdbae76.2a1" name="session user" outWires="wires.1230bdbb01c.1d4" inWires="wires.1230bdbb01c.1bd" autosave="true">
+    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.fb0" name="new" outWires="wires.1230bdbb01c.1d4" autosave="true" query="new" outSelects="domain.128807fbeba.fb4">
       <operations xsi:type="iaml:PrimitiveOperation" id="model.1230bdbae76.2d4" name="new" inActions="wires.1230bdbb01c.1f7"/>
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.1230bdbb01c.1d4" from="model.1230bdbae76.2a1" to="visual.1230bdbafce.203" name="sync"/>
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.1230bdbb01c.1d4" from="domain.128807fbeba.fb0" to="visual.1230bdbafce.203" name="sync"/>
     </elements>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1230bdbafce.1bb" name="container">
       <children xsi:type="iaml.visual:InputForm" inWires="wires.1230bdbb01c.1d4" id="visual.1230bdbafce.203" name="edit current user"/>
@@ -19,4 +13,11 @@
       </children>
     </scopes>
   </scopes>
+  <schemas id="domain.128807fbeba.fb1" name="User" inSchemas="domain.128807fbeba.fb3">
+    <attributes id="model.1230bdbae76.27d" name="email"/>
+  </schemas>
+  <sources id="domain.128807fbeba.fb2" outSchemas="domain.128807fbeba.fb3" inSelects="domain.128807fbeba.fb4">
+    <schemaEdges id="domain.128807fbeba.fb3" from="domain.128807fbeba.fb2" to="domain.128807fbeba.fb1"/>
+    <selectEdges id="domain.128807fbeba.fb4" from="domain.128807fbeba.fb0" to="domain.128807fbeba.fb2"/>
+  </sources>
 </iaml:InternetApplication>

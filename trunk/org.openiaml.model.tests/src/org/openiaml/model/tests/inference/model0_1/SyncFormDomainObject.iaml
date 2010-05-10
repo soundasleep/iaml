@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.11d83490915.1c9">
-  <domainStores id="model.11d83490915.1ce" name="domainStore1">
-    <children id="model.11d83490915.1ff" name="form1" inWires="wires.11d83490a7c.81">
-      <attributes id="model.11d83490915.21e" name="field1"/>
-      <attributes id="model.11d83490915.21f" name="field2"/>
-      <attributes id="model.11d83490915.220" name="field3"/>
-    </children>
-  </domainStores>
   <scopes xsi:type="iaml.visual:Frame" id="visual.11d83490a0f.4c" name="page1">
     <children xsi:type="iaml.visual:InputForm" outWires="wires.11d83490a7c.81" id="visual.11d83490a0f.55" name="form1">
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.11d83490a7c.81" from="visual.11d83490a0f.55" to="model.11d83490915.1ff" name="sync"/>
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.11d83490a7c.81" from="visual.11d83490a0f.55" to="domain.128807fbeba.ff0" name="sync"/>
       <children xsi:type="iaml.visual:InputTextField" id="visual.11d83490a0f.69" name="field1"/>
       <children xsi:type="iaml.visual:InputTextField" id="visual.11d83490a0f.6a" name="field2"/>
     </children>
   </scopes>
+  <schemas id="domain.128807fbeba.ff0" name="form1" inWires="wires.11d83490a7c.81" inSchemas="domain.128807fbeba.ff2">
+    <attributes id="model.11d83490915.21e" name="field1"/>
+    <attributes id="model.11d83490915.21f" name="field2"/>
+    <attributes id="model.11d83490915.220" name="field3"/>
+  </schemas>
+  <sources id="domain.128807fbeba.ff1" outSchemas="domain.128807fbeba.ff2">
+    <schemaEdges id="domain.128807fbeba.ff2" from="domain.128807fbeba.ff1" to="domain.128807fbeba.ff0"/>
+  </sources>
 </iaml:InternetApplication>

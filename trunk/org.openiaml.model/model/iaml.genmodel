@@ -23,9 +23,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//WireSource/outWires"/>
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//EventTrigger"/>
-    <genClasses ecoreClass="iaml.ecore#//DomainObject">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainObject/attributes"/>
-    </genClasses>
     <genClasses ecoreClass="iaml.ecore#//DomainAttribute">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//DomainAttribute/primaryKey"/>
     </genClasses>
@@ -68,17 +65,10 @@
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//InternetApplication">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/children"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/domainStores"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//InternetApplication/runtimeUrl"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/scopes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/schemas"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/sources"/>
-    </genClasses>
-    <genClasses ecoreClass="iaml.ecore#//DomainStore">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainStore/children"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainStore/attributes"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//DomainStore/file"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//DomainStore/type"/>
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//DataFlowEdge">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//DataFlowEdge/from"/>
@@ -128,22 +118,6 @@
     <genClasses image="false" ecoreClass="iaml.ecore#//GeneratesElements">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//GeneratesElements/generatedElements"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//GeneratesElements/overridden"/>
-    </genClasses>
-    <genClasses ecoreClass="iaml.ecore#//DomainObjectInstance">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainObjectInstance/attributes"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//DomainObjectInstance/strQuery"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//DomainObjectInstance/autosave"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainObjectInstance/onIterate"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainObjectInstance/previous"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainObjectInstance/next"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainObjectInstance/reset"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainObjectInstance/skip"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainObjectInstance/hasPrevious"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainObjectInstance/hasNext"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainObjectInstance/empty"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainObjectInstance/results"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainObjectInstance/jump"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//DomainObjectInstance/canSave"/>
     </genClasses>
     <genClasses image="false" ecoreClass="iaml.ecore#//Scope">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/entryGate"/>
@@ -238,20 +212,12 @@
       </genClasses>
       <genClasses ecoreClass="iaml.ecore#//wires/SetWire"/>
       <genClasses ecoreClass="iaml.ecore#//wires/NavigateAction"/>
-      <genClasses ecoreClass="iaml.ecore#//wires/SelectWire">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/SelectWire/query"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/SelectWire/limit"/>
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference iaml.ecore#//wires/SelectWire/orderBy"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/SelectWire/orderAscending"/>
-      </genClasses>
       <genClasses ecoreClass="iaml.ecore#//wires/ConditionEdge">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference iaml.ecore#//wires/ConditionEdge/from"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference iaml.ecore#//wires/ConditionEdge/to"/>
       </genClasses>
-      <genClasses ecoreClass="iaml.ecore#//wires/NewInstanceWire"/>
       <genClasses ecoreClass="iaml.ecore#//wires/ExtendsEdge">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference iaml.ecore#//wires/ExtendsEdge/from"/>
@@ -375,12 +341,6 @@
         <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//domain/DomainStoreTypes/RSS2_0"/>
       </genEnums>
       <genDataTypes ecoreDataType="iaml.ecore#//domain/FileReference"/>
-      <genClasses ecoreClass="iaml.ecore#//domain/EmptyDomainClass"/>
-      <genClasses ecoreClass="iaml.ecore#//domain/RemoteDomainObject">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//domain/RemoteDomainObject/url"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//domain/RemoteDomainObject/age"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//domain/RemoteDomainObject/refresh"/>
-      </genClasses>
       <genClasses ecoreClass="iaml.ecore#//domain/DomainSchema">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//domain/DomainSchema/attributes"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
@@ -410,6 +370,19 @@
             ecoreFeature="ecore:EReference iaml.ecore#//domain/DomainIterator/orderBy"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//domain/DomainIterator/orderAscending"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//domain/DomainIterator/outSelects"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//domain/DomainIterator/attributes"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//domain/DomainIterator/autosave"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//domain/DomainIterator/onIterate"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//domain/DomainIterator/previous"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//domain/DomainIterator/next"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//domain/DomainIterator/reset"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//domain/DomainIterator/skip"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//domain/DomainIterator/hasPrevious"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//domain/DomainIterator/hasNext"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//domain/DomainIterator/empty"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//domain/DomainIterator/results"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//domain/DomainIterator/jump"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//domain/DomainIterator/canSave"/>
       </genClasses>
       <genClasses ecoreClass="iaml.ecore#//domain/SchemaEdge">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
@@ -420,12 +393,7 @@
     </nestedGenPackages>
     <nestedGenPackages prefix="Users" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//users">
-      <genClasses ecoreClass="iaml.ecore#//users/UserStore">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//users/UserStore/permissions"/>
-      </genClasses>
-      <genClasses ecoreClass="iaml.ecore#//users/Role"/>
       <genClasses ecoreClass="iaml.ecore#//users/Permission"/>
-      <genClasses ecoreClass="iaml.ecore#//users/UserInstance"/>
       <genClasses image="false" ecoreClass="iaml.ecore#//users/ProvidesEdgesSource">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference iaml.ecore#//users/ProvidesEdgesSource/outProvidesEdges"/>

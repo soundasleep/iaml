@@ -1,5 +1,5 @@
 <% if (isInterface) { %>
-	<% if (genClass != null && genClass.getInterfaceName() != null && genClass.getInterfaceName().equals("DomainStore")) { %>
+	<% if (genClass != null && genClass.getInterfaceName() != null && genClass.getInterfaceName().equals("DomainSource")) { %>
 
 	/**
 	 * Get the properties file referenced by the FileReference.
@@ -14,7 +14,7 @@
 	
 	<% } %>
 <% } else if (isImplementation) { %>
-	<% if (genClass != null && genClass.getClassName() != null && genClass.getClassName().equals("DomainStoreImpl")) { %>
+	<% if (genClass != null && genClass.getClassName() != null && genClass.getClassName().equals("DomainSourceImpl")) { %>
 
 	/**
 	 * @generated

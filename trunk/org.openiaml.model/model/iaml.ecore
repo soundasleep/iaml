@@ -65,20 +65,6 @@
       <details key="documentation" value="Represents the source of events."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DomainObject" eSuperTypes="#//ApplicationElement #//ContainsWires #//wires/ParameterEdgesSource #//wires/ExtendsEdgesSource #//wires/ExtendsEdgeDestination #//Changeable">
-    <eAnnotations source="http://openiaml.org/comment">
-      <details key="changed" value="0.2 to extend the abstract counterpart&#xD;&#xA;0.3 to remove the abstract extension, and added &quot;type&quot; attribute"/>
-    </eAnnotations>
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Represents a type of {@model DomainObjectInstance}."/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
-        eType="#//DomainAttribute" containment="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="A {@model DomainObject} can contain many {@model DomainAttribute}s; this can represent columns in a table row."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DomainAttribute" eSuperTypes="#//ApplicationElement #//ContainsWires #//wires/ParameterEdgesSource #//wires/ExtendsEdgesSource #//wires/ExtendsEdgeDestination #//Changeable">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="changed" value="0.2 to extend the abstract counterpart&#xD;&#xA;0.3 to remove the abstract extension, and added &quot;type&quot; attribute"/>
@@ -242,13 +228,6 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
         eType="#//ApplicationElement" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="domainStores" upperBound="-1"
-        eType="#//DomainStore" containment="true">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="comment" value="not sure if this is necessary anymore... because now objects are stored as part of their scopes"/>
-        <details key="changed" value="0.2 to extend the abstract counterpart"/>
-      </eAnnotations>
-    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="runtimeUrl" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="http://localhost:8080/output/"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="scopes" upperBound="-1"
@@ -257,38 +236,6 @@
         eType="#//domain/DomainSchema" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sources" upperBound="-1"
         eType="#//domain/DomainSource" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DomainStore" eSuperTypes="#//ContainsOperations #//NamedElement #//ContainsWires #//ContainsConditions #//GeneratesElements #//CanBeSynced #//ContainsProperties">
-    <eAnnotations source="http://openiaml.org/comment">
-      <details key="editor" value="org.openiaml.model.diagram.domain_store"/>
-      <details key="changed" value="0.2 to extend the abstract counterpart&#xD;&#xA;0.3 to remove the abstract extension, and added &quot;type&quot; attribute&#xD;&#xA;0.4.2 removed 'views' reference"/>
-    </eAnnotations>
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Stores many instances of {@model DomainObject DomainObjects} in some storage device."/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
-        eType="#//DomainObject" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
-        eType="#//DomainAttribute" containment="true">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="added" value="0.3"/>
-        <details key="reason" value="why can a data store only contain tables? why can't they also contain single values?"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="file" lowerBound="1" eType="#//domain/FileReference">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="added" value="0.3"/>
-        <details key="comment" value="originally from FileDomainStore"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//domain/DomainStoreTypes">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="added" value="0.3"/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="The platform-dependent type of how the {@model DomainStore} is serialised."/>
-      </eAnnotations>
-    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataFlowEdge" eSuperTypes="#//GeneratedElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -495,97 +442,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="overridden" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="If a {@model GeneratesElements} is &lt;em>overridden&lt;/em>, then this element will not {@model GeneratesElements#generatedElements generate any elements directly}."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DomainObjectInstance" eSuperTypes="#//ApplicationElement #//ContainsWires #//wires/ParameterEdgeDestination #//wires/ParameterEdgesSource #//Changeable">
-    <eAnnotations source="http://openiaml.org/comment">
-      <details key="added" value="0.2"/>
-    </eAnnotations>
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Represents an iterator over instances of a {@model DomainObject}. Can be {@model DomainObjectInstance#next navigated}."/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
-        eType="#//DomainAttributeInstance" containment="true">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="changed" value="0.3: changed from DomainAttribute to DomainAttributeInstance"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="strQuery" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="autosave" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="false">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="added" value="0.3"/>
-        <details key="changed" value="0.4.3 to default 'false' instead of 'true'"/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="If &lt;code>true&lt;/code>, then changes to the {@model DomainObjectInstance#attributes} of this instance will automatically be saved. Otherwise, the 'save' operation must be called."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="onIterate" eType="#//EventTrigger"
-        containment="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="This {@model EventTrigger event} is called whenever the {@model DomainObjectInstance#current current instance} changes."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="previous" eType="#//Operation"
-        containment="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Go to the previous result. Will throw an error if {@model DomainObjectInstance#hasPrevious} would be false."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="next" eType="#//Operation"
-        containment="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Go to the next result. Will throw an error if {@model DomainObjectInstance#hasNext} would be false."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="reset" eType="#//Operation"
-        containment="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Start at result number 0."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="skip" eType="#//Operation"
-        containment="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Skip the given number of results. Can be negative to go backwards."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="hasPrevious" eType="#//Condition"
-        containment="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="True if navigating to the {@model DomainObjectInstance#previous} result will not be out-of-bounds."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="hasNext" eType="#//Condition"
-        containment="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="True if navigating to the {@model DomainObjectInstance#next} result will not be out-of-bounds."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="empty" eType="#//Condition"
-        containment="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="True if the current result set is empty."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="results" eType="#//Property"
-        containment="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="The number of results in the current result set."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="jump" eType="#//Operation"
-        containment="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Jump to the specific result number, starting from 0."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="canSave" eType="#//Condition"
-        containment="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="A condition that returns 'true' if the current instance can be saved without throwing a datatype conversion error, etc."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -969,33 +825,6 @@
         <details key="documentation" value="When the {@model EventTrigger source event} executes, the user will be navigated to the target {@model Frame}. Can be the destination of {@model ParameterEdge}s."/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="SelectWire" eSuperTypes="#//WireDestination #//wires/ParameterEdgeDestination #//wires/SingleWire #//NamedElement #//GeneratesElements">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="added" value="0.2"/>
-        <details key="comment" value="parameters can be provided by ParameterWires"/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Allows for the selection of particular {@model DomainObjectInstance instances} from a {@model DomainStore}."/>
-      </eAnnotations>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="query" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="limit" lowerBound="1"
-          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="1">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The limit on the number of results to browse over. If -1, then there is no limit."/>
-        </eAnnotations>
-      </eStructuralFeatures>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="orderBy" eType="#//DomainAttribute">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The {@model SelectWire} will sort the results in the particular order, before any {@model SelectWire#limit limiting} occurs."/>
-        </eAnnotations>
-      </eStructuralFeatures>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="orderAscending" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-          defaultValueLiteral="true">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="If false, the {@model SelectWire#orderBy order} will be sorted in descending order (Z-A)."/>
-        </eAnnotations>
-      </eStructuralFeatures>
-    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ConditionEdge" eSuperTypes="#//wires/ParameterEdgeDestination #//NamedElement #//GeneratesElements">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.2"/>
@@ -1007,14 +836,6 @@
           eType="#//wires/ConditionEdgesSource" eOpposite="#//wires/ConditionEdgesSource/outConditionEdges"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//wires/ConditionEdgeDestination"
           eOpposite="#//wires/ConditionEdgeDestination/inConditionEdges"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="NewInstanceWire" eSuperTypes="#//wires/SingleWire #//NamedElement #//GeneratesElements">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="added" value="0.3"/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Creates a new instance of a {@model DomainObjectInstance} or {@model DomainAttributeInstance} from its definition."/>
-      </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ExtendsEdge" eSuperTypes="#//GeneratedElement #//GeneratesElements">
       <eAnnotations source="http://openiaml.org/comment">
@@ -1384,33 +1205,6 @@
       <eLiterals name="PROPERTIES_FILE" value="1"/>
       <eLiterals name="RSS2_0" value="2"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="EmptyDomainClass" abstract="true">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="This exists solely to ensure DomainProviderFactory is generated in .genmodel; otherwise GMF complains."/>
-      </eAnnotations>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="RemoteDomainObject" eSuperTypes="#//DomainObject">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="A {@model DomainObject} that obtains results remotely from a given URL."/>
-      </eAnnotations>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The URL that this {@model DomainObject} will obtain results from"/>
-        </eAnnotations>
-      </eStructuralFeatures>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="age" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
-          defaultValueLiteral="3600">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="How long can results be cached in this object, in seconds? The {@model RemoteDomainObject#refresh} operation can be used explicitly as well."/>
-        </eAnnotations>
-      </eStructuralFeatures>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="refresh" eType="#//Operation"
-          containment="true">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="Reloads data from the remote URL, and resets the {@model RemoteDomainObject#age} of the cache."/>
-        </eAnnotations>
-      </eStructuralFeatures>
-    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="DomainSchema" eSuperTypes="#//NamedElement #//GeneratesElements #//ContainsWires #//WireDestination #//WireSource #//wires/ParameterEdgesSource #//users/RequiresEdgeDestination #//users/ProvidesEdgesSource #//wires/ExtendsEdgesSource #//wires/ExtendsEdgeDestination">
       <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
           eType="#//DomainAttribute" containment="true"/>
@@ -1423,7 +1217,7 @@
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="DomainSource" eSuperTypes="#//NamedElement #//GeneratesElements #//ContainsWires">
+    <eClassifiers xsi:type="ecore:EClass" name="DomainSource" eSuperTypes="#//NamedElement #//GeneratesElements #//ContainsWires #//WireSource #//WireDestination">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="file" lowerBound="1"
           eType="#//domain/FileReference"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1"
@@ -1468,7 +1262,10 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="#//domain/DomainSource"
           eOpposite="#//domain/DomainSource/inSelects"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="DomainIterator" eSuperTypes="#//DomainObjectInstance">
+    <eClassifiers xsi:type="ecore:EClass" name="DomainIterator" eSuperTypes="#//ApplicationElement #//ContainsWires #//users/ProvidesEdgeDestination #//users/ProvidesEdgesSource #//Changeable #//wires/ParameterEdgeDestination">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Represents an iterator over instances of a {@model DomainObject}. Can be {@model DomainObjectInstance#next navigated}."/>
+      </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="query" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="limit" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="1"/>
@@ -1489,6 +1286,88 @@
           <details key="documentation" value="A list of contained {@model ConditionEdge}s."/>
         </eAnnotations>
       </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+          eType="#//DomainAttributeInstance" containment="true">
+        <eAnnotations source="http://openiaml.org/comment">
+          <details key="changed" value="0.3: changed from DomainAttribute to DomainAttributeInstance"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="autosave" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="false">
+        <eAnnotations source="http://openiaml.org/comment">
+          <details key="added" value="0.3"/>
+          <details key="changed" value="0.4.3 to default 'false' instead of 'true'"/>
+        </eAnnotations>
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="If &lt;code>true&lt;/code>, then changes to the {@model DomainObjectInstance#attributes} of this instance will automatically be saved. Otherwise, the 'save' operation must be called."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="onIterate" eType="#//EventTrigger"
+          containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="This {@model EventTrigger event} is called whenever the {@model DomainObjectInstance#current current instance} changes."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="previous" eType="#//Operation"
+          containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Go to the previous result. Will throw an error if {@model DomainObjectInstance#hasPrevious} would be false."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="next" eType="#//Operation"
+          containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Go to the next result. Will throw an error if {@model DomainObjectInstance#hasNext} would be false."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="reset" eType="#//Operation"
+          containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Start at result number 0."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="skip" eType="#//Operation"
+          containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Skip the given number of results. Can be negative to go backwards."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="hasPrevious" eType="#//Condition"
+          containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="True if navigating to the {@model DomainObjectInstance#previous} result will not be out-of-bounds."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="hasNext" eType="#//Condition"
+          containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="True if navigating to the {@model DomainObjectInstance#next} result will not be out-of-bounds."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="empty" eType="#//Condition"
+          containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="True if the current result set is empty."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="results" eType="#//Property"
+          containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The number of results in the current result set."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="jump" eType="#//Operation"
+          containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Jump to the specific result number, starting from 0."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="canSave" eType="#//Condition"
+          containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="A condition that returns 'true' if the current instance can be saved without throwing a datatype conversion error, etc."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="SchemaEdge" eSuperTypes="#//GeneratedElement #//GeneratesElements">
       <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="#//domain/DomainSource"
@@ -1501,33 +1380,9 @@
     <eAnnotations source="http://openiaml.org/comment">
       <details key="added" value="0.4"/>
     </eAnnotations>
-    <eClassifiers xsi:type="ecore:EClass" name="UserStore" eSuperTypes="#//DomainStore">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Contains {@model Role Roles} and {@model Permission Permissions}."/>
-      </eAnnotations>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="permissions" upperBound="-1"
-          eType="#//users/Permission" containment="true">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="A list of {@model Permission}s that this {@model UserStore} can provide."/>
-        </eAnnotations>
-      </eStructuralFeatures>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Role" eSuperTypes="#//DomainObject #//users/RequiresEdgeDestination #//users/ProvidesEdgesSource">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="note" value="another option is to create 'extends : Role' and 'extendedBy : Role' as EOpposites, and remove ExtendsWire. but this means that this relationship cannot be used as the target or source of any wires (parameters? conditions?)"/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="A particular Role that a user may have; may be {@model ExtendsEdge inherited} from other Roles."/>
-      </eAnnotations>
-    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Permission" eSuperTypes="#//NamedElement #//wires/ParameterEdgesSource #//users/RequiresEdgeDestination #//users/ProvidesEdgeDestination #//ContainsWires">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A single Permission that a user may have; may also be {@model ProvidesEdge provided} by a {@model Role}."/>
-      </eAnnotations>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="UserInstance" eSuperTypes="#//DomainObjectInstance">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Represents {@model DomainObjectInstance an instance} of a {@model Role user}."/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ProvidesEdgesSource" abstract="true"

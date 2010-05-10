@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.126f8149d3d.2b">
-  <children xsi:type="iaml:DomainObject" id="model.126f8149d3d.2e" name="Not Empty">
-    <attributes id="model.126f8149d3d.37" name="attr1"/>
-  </children>
-  <children xsi:type="iaml:DomainObject" id="model.126f8149d3d.44" name="Empty"/>
-  <children xsi:type="iaml:DomainObject" id="model.126f8149d3d.45" name="Generated Primary Key">
-    <attributes id="model.126f8149d3d.59" name="generated primary key"/>
-  </children>
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
+  <schemas id="model.126f8149d3d.2e" name="Not Empty">
+    <attributes id="model.126f8149d3d.37" name="attr1"/>
+  </schemas>
+  <schemas id="model.126f8149d3d.44" name="Empty"/>
+  <schemas id="model.126f8149d3d.45" name="Generated Primary Key">
+    <attributes id="model.126f8149d3d.59" name="generated primary key"/>
+  </schemas>
 </iaml:InternetApplication>

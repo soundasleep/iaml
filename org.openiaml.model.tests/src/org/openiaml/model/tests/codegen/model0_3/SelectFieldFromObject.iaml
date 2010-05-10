@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12109331eea.107e">
-  <domainStores id="model.12109331eea.1083" name="domain store">
-    <children id="model.12109331eea.108c" name="User" outWires="wires.12109331f38.60c">
-      <wires xsi:type="iaml.wires:SelectWire" id="wires.12109331f38.60c" from="model.12109331eea.108c" to="model.12109331eea.11a4" name="select"/>
-      <attributes id="model.12109331eea.10ac" name="name"/>
-      <attributes id="model.12109331eea.10ad" name="email"/>
-      <attributes id="model.12109331eea.10ae" name="password"/>
-      <attributes id="model.12109331eea.10d3" name="id" primaryKey="true"/>
-    </children>
-  </domainStores>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12109331eea.107e">
   <scopes xsi:type="iaml.visual:Frame" id="visual.12109331f38.e3f" name="container">
-    <elements xsi:type="iaml:DomainObjectInstance" id="model.12109331eea.11a4" name="&quot;my user&quot;" inWires="wires.12109331f38.60c" autosave="true">
+    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.db5" name="select" autosave="true" outSelects="domain.128807fbeba.db9">
       <attributes id="model.12109331eea.11ff" name="name" outWires="wires.12109331f38.61e" autosave="true">
         <wires xsi:type="iaml.wires:SyncWire" id="wires.12109331f38.61e" from="model.12109331eea.11ff" to="visual.12109331f38.e83" name="sync"/>
       </attributes>
     </elements>
     <children xsi:type="iaml.visual:InputTextField" inWires="wires.12109331f38.61e" id="visual.12109331f38.e83" name="textfield"/>
   </scopes>
+  <schemas id="domain.128807fbeba.db6" name="User" inSchemas="domain.128807fbeba.db8">
+    <attributes id="model.12109331eea.10ac" name="name"/>
+    <attributes id="model.12109331eea.10ad" name="email"/>
+    <attributes id="model.12109331eea.10ae" name="password"/>
+    <attributes id="model.12109331eea.10d3" name="id" primaryKey="true"/>
+  </schemas>
+  <sources id="domain.128807fbeba.db7" outSchemas="domain.128807fbeba.db8" inSelects="domain.128807fbeba.db9">
+    <schemaEdges id="domain.128807fbeba.db8" from="domain.128807fbeba.db7" to="domain.128807fbeba.db6"/>
+    <selectEdges id="domain.128807fbeba.db9" from="domain.128807fbeba.db5" to="domain.128807fbeba.db7"/>
+  </sources>
 </iaml:InternetApplication>

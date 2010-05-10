@@ -1,31 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.126ceb68565.70">
-  <domainStores id="model.126ceb68565.73" name="Store">
-    <children id="model.126ceb68565.7e" name="Product" outWires="wires.126cf449ab2.2e wires.126cf449ab2.44">
-      <wires xsi:type="iaml.wires:NewInstanceWire" id="wires.126cf449ab2.2e" from="model.126ceb68565.7e" to="model.126ceb68565.d4" name="new"/>
-      <wires xsi:type="iaml.wires:SelectWire" inParameterEdges="wires.126cf449ab2.52" id="wires.126cf449ab2.44" from="model.126ceb68565.7e" to="model.126cf449831.f3" name="select" query="id = ?"/>
-      <attributes id="model.126ceb68565.9a" name="id"/>
-      <attributes id="model.126ceb68565.a0" name="name"/>
-      <attributes id="model.126ceb68565.a1" name="price"/>
-    </children>
-  </domainStores>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.126ceb68565.70">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <parameters id="model.126cf449831.f2" name="id" outParameterEdges="wires.126cf449ab2.52">
-      <parameterEdges id="wires.126cf449ab2.52" from="model.126cf449831.f2" to="wires.126cf449ab2.44"/>
+      <parameterEdges id="wires.126cf449ab2.52" from="model.126cf449831.f2" to="domain.128807fbeba.f26"/>
     </parameters>
-    <elements xsi:type="iaml:DomainObjectInstance" id="model.126cf449831.f3" name="viewing instance" outWires="wires.126cf449ab2.72" inWires="wires.126cf449ab2.44">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.126cf449ab2.72" from="model.126cf449831.f3" to="visual.126cf4499f6.dd" name="set"/>
+    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.f26" name="select" outWires="wires.126cf449ab2.72" inParameterEdges="wires.126cf449ab2.52" query="id = ?" outSelects="domain.128807fbeba.f2b">
+      <wires xsi:type="iaml.wires:SetWire" id="wires.126cf449ab2.72" from="domain.128807fbeba.f26" to="visual.126cf4499f6.dd" name="set"/>
     </elements>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.126cf449ab2.72" id="visual.126cf4499f6.dd" name="View"/>
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.126ceb685c2.bd" name="Add New Product">
-    <elements xsi:type="iaml:DomainObjectInstance" id="model.126ceb68565.d4" name="New Product" outWires="wires.126cf449ab2.8" inWires="wires.126cf449ab2.2e">
+    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.f27" name="new" outWires="wires.126cf449ab2.8" query="new" outSelects="domain.128807fbeba.f2c">
       <operations xsi:type="iaml:PrimitiveOperation" id="model.126cf449831.1c" name="save" inActions="wires.126cf449ab2.3"/>
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.126cf449ab2.8" from="model.126ceb68565.d4" to="visual.126ceb685c2.c6" name="sync"/>
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.126cf449ab2.8" from="domain.128807fbeba.f27" to="visual.126ceb685c2.c6" name="sync"/>
     </elements>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.126cf449ab2.8" id="visual.126ceb685c2.c6" name="Edit Form"/>
     <children xsi:type="iaml.visual:Button" id="visual.126cf4499f6.27" name="save" outActions="wires.126cf449ab2.3">
       <actions xsi:type="iaml.wires:RunAction" id="wires.126cf449ab2.3" name="click" from="visual.126cf4499f6.27" to="model.126cf449831.1c"/>
     </children>
   </scopes>
+  <schemas id="domain.128807fbeba.f28" name="Product" inSchemas="domain.128807fbeba.f2a">
+    <attributes id="model.126ceb68565.9a" name="id"/>
+    <attributes id="model.126ceb68565.a0" name="name"/>
+    <attributes id="model.126ceb68565.a1" name="price"/>
+  </schemas>
+  <sources id="domain.128807fbeba.f29" outSchemas="domain.128807fbeba.f2a" inSelects="domain.128807fbeba.f2b domain.128807fbeba.f2c">
+    <schemaEdges id="domain.128807fbeba.f2a" from="domain.128807fbeba.f29" to="domain.128807fbeba.f28"/>
+    <selectEdges id="domain.128807fbeba.f2b" from="domain.128807fbeba.f26" to="domain.128807fbeba.f29"/>
+    <selectEdges id="domain.128807fbeba.f2c" from="domain.128807fbeba.f27" to="domain.128807fbeba.f29"/>
+  </sources>
 </iaml:InternetApplication>

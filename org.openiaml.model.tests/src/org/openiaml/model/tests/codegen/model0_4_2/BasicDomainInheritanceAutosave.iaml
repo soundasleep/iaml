@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1268cdc3de1.11a">
-  <domainStores id="model.1268cdc3de1.11d" name="Store">
-    <children id="model.1268cdc3de1.127" name="Person" inExtendsEdges="wires.1268cdc3e5e.7e">
-      <attributes id="model.1268cdc3de1.14f" name="name"/>
-    </children>
-    <children id="model.1268cdc3de1.129" name="Student" outWires="wires.1268cdc3e5e.97" outExtendsEdges="wires.1268cdc3e5e.7e">
-      <wires xsi:type="iaml.wires:NewInstanceWire" id="wires.1268cdc3e5e.97" from="model.1268cdc3de1.129" to="model.1268cdc3de1.1cb" name="new"/>
-      <extendsEdges id="wires.1268cdc3e5e.7e" from="model.1268cdc3de1.129" to="model.1268cdc3de1.127"/>
-      <attributes id="model.1268cdc3de1.186" name="id"/>
-    </children>
-  </domainStores>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1268cdc3de1.11a">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
   <scopes xsi:type="iaml.visual:Frame" id="visual.1268cdc3e5e.138" name="New User">
-    <elements xsi:type="iaml:DomainObjectInstance" id="model.1268cdc3de1.1cb" name="New Student" inWires="wires.1268cdc3e5e.97 wires.1268cdc3e5e.99"/>
+    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.e6b" name="new" inWires="wires.1268cdc3e5e.99" query="new" outSelects="domain.128807fbeba.e72"/>
     <children xsi:type="iaml.visual:InputForm" outWires="wires.1268cdc3e5e.99" id="visual.1268cdc3e5e.149" name="edit new student">
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.1268cdc3e5e.99" from="visual.1268cdc3e5e.149" to="model.1268cdc3de1.1cb" name="sync"/>
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.1268cdc3e5e.99" from="visual.1268cdc3e5e.149" to="domain.128807fbeba.e6b" name="sync"/>
     </children>
   </scopes>
+  <schemas id="domain.128807fbeba.e6c" name="Person" inExtendsEdges="wires.1268cdc3e5e.7e" inSchemas="domain.128807fbeba.e6e">
+    <attributes id="model.1268cdc3de1.14f" name="name"/>
+  </schemas>
+  <schemas id="domain.128807fbeba.e6f" name="Student" outExtendsEdges="wires.1268cdc3e5e.7e" inSchemas="domain.128807fbeba.e71">
+    <extendsEdges id="wires.1268cdc3e5e.7e" from="domain.128807fbeba.e6f" to="domain.128807fbeba.e6c"/>
+    <attributes id="model.1268cdc3de1.186" name="id"/>
+  </schemas>
+  <sources id="domain.128807fbeba.e6d" outSchemas="domain.128807fbeba.e6e">
+    <schemaEdges id="domain.128807fbeba.e6e" from="domain.128807fbeba.e6d" to="domain.128807fbeba.e6c"/>
+  </sources>
+  <sources id="domain.128807fbeba.e70" outSchemas="domain.128807fbeba.e71" inSelects="domain.128807fbeba.e72">
+    <schemaEdges id="domain.128807fbeba.e71" from="domain.128807fbeba.e70" to="domain.128807fbeba.e6f"/>
+    <selectEdges id="domain.128807fbeba.e72" from="domain.128807fbeba.e6b" to="domain.128807fbeba.e70"/>
+  </sources>
 </iaml:InternetApplication>

@@ -3,10 +3,10 @@
   <schemaEdges id="domain.128488dc790.b" from="domain.128488dc790.7" to="domain.128488dc790.9"/>
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
   <scopes xsi:type="iaml.visual:Frame" id="visual.12848bd2796.7" name="Edit News">
-    <elements xsi:type="iaml.domain:DomainIterator" id="domain.12848bd2832.17" name="new news" outWires="wires.12848bd27a5.1" query="new" outSelects="domain.12848bd2832.1e">
+    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.d16" name="new news" outWires="wires.12848bd27a5.1" query="new" outSelects="domain.12848bd2832.1e">
       <operations xsi:type="iaml:PrimitiveOperation" id="model.12848c09018.12" name="save" inActions="wires.12848c091be.15"/>
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.12848bd27a5.1" from="domain.12848bd2832.17" to="visual.12848bd2796.20" name="sync"/>
-      <selectEdges id="domain.12848bd2832.1e" from="domain.12848bd2832.17" to="domain.128488dc790.7"/>
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.12848bd27a5.1" from="domain.128807fbeba.d16" to="visual.12848bd2796.20" name="sync"/>
+      <selectEdges id="domain.12848bd2832.1e" from="domain.128807fbeba.d16" to="domain.128488dc790.7"/>
     </elements>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.12848bd27a5.1" id="visual.12848bd2796.20" name="Edit Form"/>
     <children xsi:type="iaml.visual:Button" id="visual.12848c09160.42" name="Save News" outActions="wires.12848c091be.15">
@@ -14,9 +14,9 @@
     </children>
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.12848c09160.5d" name="View News">
-    <elements xsi:type="iaml.domain:DomainIterator" id="domain.12848c092b8.94" name="browse" outWires="wires.12848c091be.25" limit="10" outSelects="domain.12848c092b8.95">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.12848c091be.25" from="domain.12848c092b8.94" to="visual.12848c09160.76" name="set"/>
-      <selectEdges id="domain.12848c092b8.95" from="domain.12848c092b8.94" to="domain.128488dc790.7"/>
+    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.d17" name="browse" outWires="wires.12848c091be.25" limit="10" outSelects="domain.12848c092b8.95">
+      <wires xsi:type="iaml.wires:SetWire" id="wires.12848c091be.25" from="domain.128807fbeba.d17" to="visual.12848c09160.76" name="set"/>
+      <selectEdges id="domain.12848c092b8.95" from="domain.128807fbeba.d17" to="domain.128488dc790.7"/>
     </elements>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.12848c091be.25" id="visual.12848c09160.76" name="Browse"/>
   </scopes>

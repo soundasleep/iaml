@@ -1,29 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1233afe61d2.26">
-  <domainStores xsi:type="iaml.users:UserStore" id="users.1233afe655c.1c" name="user store">
-    <children xsi:type="iaml.users:Role" id="users.1233afe655c.23" name="default role" outWires="wires.1233b53a3ce.7" outParameterEdges="wires.1233b53a3ce.5a" inRequiresEdges="wires.1233afe62eb.2d">
-      <wires xsi:type="iaml.wires:NewInstanceWire" id="wires.1233b53a3ce.7" from="users.1233afe655c.23" to="users.1233b53a814.a" name="new instance"/>
-      <parameterEdges id="wires.1233b53a3ce.5a" from="users.1233afe655c.23" to="components.1233b53a67e.19"/>
-    </children>
-    <children xsi:type="iaml.users:Role" id="users.1233b53a814.62" name="additional role 1" outParameterEdges="wires.1233b53a3ce.a9 wires.1233b53a3ce.16a" inRequiresEdges="wires.1233b53a3ce.23a">
-      <parameterEdges id="wires.1233b53a3ce.a9" from="users.1233b53a814.62" to="wires.1233b53a3ce.a8"/>
-      <parameterEdges id="wires.1233b53a3ce.16a" from="users.1233b53a814.62" to="wires.1233b53a3ce.168"/>
-    </children>
-    <children xsi:type="iaml.users:Role" id="users.1233b53a814.63" name="additional role 2" outParameterEdges="wires.1233b53a3ce.aa wires.1233b53a3ce.16b" outProvidesEdges="wires.1233b53a3ce.36">
-      <parameterEdges id="wires.1233b53a3ce.aa" from="users.1233b53a814.63" to="wires.1233b53a3ce.a7"/>
-      <parameterEdges id="wires.1233b53a3ce.16b" from="users.1233b53a814.63" to="wires.1233b53a3ce.169"/>
-      <providesEdges id="wires.1233b53a3ce.36" from="users.1233b53a814.63" to="users.1233b53a814.70"/>
-    </children>
-    <permissions id="users.1233b53a814.6f" name="permission 1" outParameterEdges="wires.1233b53a3ce.ab wires.1233b53a3ce.16d" inRequiresEdges="wires.1233b53a3ce.453">
-      <parameterEdges id="wires.1233b53a3ce.ab" from="users.1233b53a814.6f" to="wires.1233b53a3ce.a6"/>
-      <parameterEdges id="wires.1233b53a3ce.16d" from="users.1233b53a814.6f" to="wires.1233b53a3ce.16c"/>
-    </permissions>
-    <permissions id="users.1233b53a814.70" name="inherited permission with role" inRequiresEdges="wires.1233b53a3ce.544" inProvidesEdges="wires.1233b53a3ce.36"/>
-  </domainStores>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1233afe61d2.26">
   <scopes xsi:type="iaml.visual:Frame" id="visual.1233afe628e.15" name="Home"/>
   <scopes xsi:type="iaml.visual:Frame" id="visual.1233b453dc5.156" name="create a new user">
-    <wires xsi:type="iaml.wires:SyncWire" id="sync" from="users.1233b53a814.a" to="new" name="sync"/>
-    <elements xsi:type="iaml.users:UserInstance" id="users.1233b53a814.a" name="newly created user" outWires="sync" inWires="wires.1233b53a3ce.7">
+    <wires xsi:type="iaml.wires:SyncWire" id="sync" from="domain.128807fbeba.e9d" to="new" name="sync"/>
+    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.e9d" name="new instance" outWires="sync" query="new" outSelects="domain.128807fbeba.ea8">
       <operations xsi:type="iaml:PrimitiveOperation" id="model.1233b53a1ca.14" name="save" inActions="wires.1233b53a3ce.a"/>
     </elements>
     <children xsi:type="iaml.visual:Button" id="visual.1233b53a313.1a" name="create new user" outActions="wires.1233b53a3ce.a">
@@ -33,12 +13,12 @@
   </scopes>
   <scopes xsi:type="iaml.scopes:Session" id="scopes.1233afe6368.3" name="target session">
     <elements xsi:type="iaml.components:AccessControlHandler" outRequiresEdges="wires.1233afe62eb.2d" id="components.1233afe6424.13" name="role-based access">
-      <requiresEdges id="wires.1233afe62eb.2d" from="components.1233afe6424.13" to="users.1233afe655c.23"/>
+      <requiresEdges id="wires.1233afe62eb.2d" from="components.1233afe6424.13" to="domain.128807fbeba.e9f"/>
     </elements>
     <elements xsi:type="iaml.components:LoginHandler" inParameterEdges="wires.1233b53a3ce.5a" id="components.1233b53a67e.19" name="current user" outWires="wires.1233b53a3ce.5c" type="USER">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.1233b53a3ce.5c" from="components.1233b53a67e.19" to="users.1233b53a814.d0" name="set"/>
+      <wires xsi:type="iaml.wires:SetWire" id="wires.1233b53a3ce.5c" from="components.1233b53a67e.19" to="domain.128807fbeba.e9e" name="set"/>
     </elements>
-    <elements xsi:type="iaml.users:UserInstance" id="users.1233b53a814.d0" name="logged in user" inWires="wires.1233b53a3ce.5c" autosave="true">
+    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.e9e" name="logged in user" inWires="wires.1233b53a3ce.5c" autosave="true">
       <operations xsi:type="iaml:PrimitiveOperation" id="model.1233b53a1ca.71" name="add role" inActions="wires.1233b53a3ce.a7 wires.1233b53a3ce.a8"/>
       <operations xsi:type="iaml:PrimitiveOperation" id="model.1233b53a1ca.72" name="remove role" inActions="wires.1233b53a3ce.168 wires.1233b53a3ce.169"/>
       <operations xsi:type="iaml:PrimitiveOperation" id="model.1233b53a1ca.73" name="add permission" inActions="wires.1233b53a3ce.a6"/>
@@ -67,7 +47,7 @@
     </scopes>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233b53a313.1ce" name="requires role 1">
       <elements xsi:type="iaml.components:AccessControlHandler" outRequiresEdges="wires.1233b53a3ce.23a" id="components.1233b53a67e.9a" name="require role 1">
-        <requiresEdges id="wires.1233b53a3ce.23a" from="components.1233b53a67e.9a" to="users.1233b53a814.62"/>
+        <requiresEdges id="wires.1233b53a3ce.23a" from="components.1233b53a67e.9a" to="domain.128807fbeba.ea2"/>
       </elements>
     </scopes>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233b53a313.361" name="requires permission 1">
@@ -81,4 +61,31 @@
       </elements>
     </scopes>
   </scopes>
+  <schemas id="domain.128807fbeba.e9f" name="default role" outParameterEdges="wires.1233b53a3ce.5a" inRequiresEdges="wires.1233afe62eb.2d" inSchemas="domain.128807fbeba.ea1">
+    <parameterEdges id="wires.1233b53a3ce.5a" from="domain.128807fbeba.e9f" to="components.1233b53a67e.19"/>
+    <permissions id="users.1233b53a814.6f" name="permission 1" outParameterEdges="wires.1233b53a3ce.ab wires.1233b53a3ce.16d" inRequiresEdges="wires.1233b53a3ce.453">
+      <parameterEdges id="wires.1233b53a3ce.ab" from="users.1233b53a814.6f" to="wires.1233b53a3ce.a6"/>
+      <parameterEdges id="wires.1233b53a3ce.16d" from="users.1233b53a814.6f" to="wires.1233b53a3ce.16c"/>
+    </permissions>
+    <permissions id="users.1233b53a814.70" name="inherited permission with role" inRequiresEdges="wires.1233b53a3ce.544" inProvidesEdges="wires.1233b53a3ce.36"/>
+  </schemas>
+  <schemas id="domain.128807fbeba.ea2" name="additional role 1" outParameterEdges="wires.1233b53a3ce.a9 wires.1233b53a3ce.16a" inRequiresEdges="wires.1233b53a3ce.23a" inSchemas="domain.128807fbeba.ea4">
+    <parameterEdges id="wires.1233b53a3ce.a9" from="domain.128807fbeba.ea2" to="wires.1233b53a3ce.a8"/>
+    <parameterEdges id="wires.1233b53a3ce.16a" from="domain.128807fbeba.ea2" to="wires.1233b53a3ce.168"/>
+  </schemas>
+  <schemas id="domain.128807fbeba.ea5" name="additional role 2" outParameterEdges="wires.1233b53a3ce.aa wires.1233b53a3ce.16b" outProvidesEdges="wires.1233b53a3ce.36" inSchemas="domain.128807fbeba.ea7">
+    <parameterEdges id="wires.1233b53a3ce.aa" from="domain.128807fbeba.ea5" to="wires.1233b53a3ce.a7"/>
+    <parameterEdges id="wires.1233b53a3ce.16b" from="domain.128807fbeba.ea5" to="wires.1233b53a3ce.169"/>
+    <providesEdges id="wires.1233b53a3ce.36" from="domain.128807fbeba.ea5" to="users.1233b53a814.70"/>
+  </schemas>
+  <sources id="domain.128807fbeba.ea0" outSchemas="domain.128807fbeba.ea1" inSelects="domain.128807fbeba.ea8">
+    <schemaEdges id="domain.128807fbeba.ea1" from="domain.128807fbeba.ea0" to="domain.128807fbeba.e9f"/>
+    <selectEdges id="domain.128807fbeba.ea8" from="domain.128807fbeba.e9d" to="domain.128807fbeba.ea0"/>
+  </sources>
+  <sources id="domain.128807fbeba.ea3" outSchemas="domain.128807fbeba.ea4">
+    <schemaEdges id="domain.128807fbeba.ea4" from="domain.128807fbeba.ea3" to="domain.128807fbeba.ea2"/>
+  </sources>
+  <sources id="domain.128807fbeba.ea6" outSchemas="domain.128807fbeba.ea7">
+    <schemaEdges id="domain.128807fbeba.ea7" from="domain.128807fbeba.ea6" to="domain.128807fbeba.ea5"/>
+  </sources>
 </iaml:InternetApplication>

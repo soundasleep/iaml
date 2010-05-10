@@ -13,6 +13,7 @@ import org.openiaml.model.model.operations.*;
 import org.openiaml.model.model.scopes.*;
 import org.openiaml.model.model.components.*;
 import org.openiaml.model.model.users.*;
+import org.openiaml.model.model.domain.*;
 
 #declare any global variables here
 global OverridableCreateElementsHelper handler;
@@ -310,7 +311,7 @@ rule "Create contents of 'check instance' operation [type=domain_object or user]
 		scope : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.DOMAIN_OBJECT || type == LoginHandlerTypes.USER )
 		
-		instance : DomainObjectInstance ( eContainer == scope )
+		instance : DomainIterator ( eContainer == scope )
 		setWire : SetWire ( from == login_handler, to == instance, name == "set" )
 		
 		ex : Condition ( instance.empty == ex )
@@ -604,7 +605,7 @@ rule "Create text fields for login form of 'login' pages [type=user]"
 		form : InputForm( eContainer == login, name == "login form" )
 
 		# from a role		
-		role : Role ( )
+		role : DomainSchema ( )
 		param : ParameterEdge ( from == role, to == login_handler )
 		
 		# an attribute in that role
@@ -668,7 +669,7 @@ rule "Connect text fields for login form of 'login' pages to 'do login' run wire
 		form : InputForm( eContainer == login, name == "login form" )
 		
 		# from a role
-		role : Role ( )
+		role : DomainSchema ( )
 		attribute : DomainAttribute ( eContainer == role )
 		param : ParameterEdge ( from == role, to == login_handler )
 		
@@ -730,7 +731,7 @@ rule "Create contents of 'do login' operation [type=domain_object]"
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.DOMAIN_OBJECT )
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		
-		instance : DomainObjectInstance ( eContainer == scope )
+		instance : DomainIterator ( eContainer == scope )
 		setWire : SetWire ( from == login_handler, to == instance, name == "set" )
 		
 		ex : Condition ( instance.empty == ex )
@@ -807,7 +808,7 @@ rule "Create parameter for 'do login' operation inside login handler[type=domain
 		attribute : DomainAttribute ( )
 		paramWire : ParameterEdge( from == attribute, to == login_handler )
 		
-		instance : DomainObjectInstance ( eContainer == scope )
+		instance : DomainIterator ( eContainer == scope )
 		setWire : SetWire ( from == login_handler, to == instance, name == "set" )
 
 		operation : CompositeOperation ( eContainer == login_session, name == "do login" )
@@ -861,7 +862,7 @@ rule "Create contents of 'do login' operation [type=user]"
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.USER )
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		
-		instance : DomainObjectInstance ( eContainer == scope )
+		instance : DomainIterator ( eContainer == scope )
 		setWire : SetWire ( from == login_handler, to == instance, name == "set" )
 		
 		ex : Condition ( instance.empty == ex )
@@ -935,7 +936,7 @@ rule "Create parameter for 'do login' operation inside login handler[type=user]"
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.USER )
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		
-		role : Role ( )
+		role : DomainSchema ( )
 		attribute : DomainAttribute ( eContainer == role )
 		paramWire : ParameterEdge( from == role, to == login_handler )
 		
@@ -1250,7 +1251,7 @@ rule "Create contents (specific keys) of 'do logout' operation [type=user]"
 		o : CompositeOperation( name == "do logout", eContainer == session )
 		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.USER )
 
-		role : Role ( )
+		role : DomainSchema ( )
 		attribute : DomainAttribute ( eContainer == role, eval(functions.notPrimaryKey(attribute)) )
 		paramWire : ParameterEdge ( from == role, to == login_handler )
 		
@@ -1346,7 +1347,7 @@ end
 rule "Create Select Wire between Domain Object types [object]"
 	when
 		scope : Session ( )
-		dobj : DomainObject ( eval(functions.hasDomainAttribute(dobj)) )
+		dobj : DomainSchema ( eval(functions.hasDomainAttribute(dobj)) )
 		
 		login_handler : LoginHandler( 
 			eContainer == scope, 
@@ -1354,7 +1355,7 @@ rule "Create Select Wire between Domain Object types [object]"
 			eval(functions.hasIncomingParameterEdgesFrom(login_handler, dobj)) 
 		)
 		
-		instance : DomainObjectInstance ( )
+		instance : DomainIterator ( )
 		setWire : SetWire ( from == login_handler, to == instance )
 		
 		not ( SelectWire ( from == dobj, to == instance )) 
@@ -1482,7 +1483,7 @@ rule "Connect key properties to LoginHandler for LoginHandler[type = object]"
 		attribute : DomainAttribute ( eContainer == object )
 		paramWire : ParameterEdge ( from == attribute, to == login_handler )
 		
-		instance : DomainObjectInstance ( )
+		instance : DomainIterator ( )
 		setWire : SetWire ( from == login_handler, to == instance )
 		
 		select : SelectWire ( from == object, to == instance )
@@ -1510,7 +1511,7 @@ rule "Connect key properties to SelectWire for LoginHandler[type = object]"
 		attribute : DomainAttribute ( eContainer == object )
 		paramWire : ParameterEdge ( from == attribute, to == login_handler )
 		
-		instance : DomainObjectInstance ( )
+		instance : DomainIterator ( )
 		setWire : SetWire ( from == login_handler, to == instance )
 		
 		select : SelectWire ( from == object, to == instance )
@@ -1578,12 +1579,12 @@ rule "Create 'current instance' for LoginHandler[type=object]"
 		session : Session( ) 
 		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT )
 		
-		not (DomainObjectInstance ( eContainer == session ))
+		not (DomainIterator ( eContainer == session ))
 		
 		eval ( handler.veto( login_handler ))
 		
 	then
-		DomainObjectInstance instance = handler.generatedDomainObjectInstance( login_handler, session );
+		DomainIterator instance = handler.generatedDomainIterator( login_handler, session );
 		handler.setName(instance, "current instance");
 		queue.add(instance, drools);
 		

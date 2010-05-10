@@ -5,11 +5,11 @@ package org.openiaml.model.tests.inference.model0_1;
 
 import org.jaxen.JaxenException;
 import org.openiaml.model.model.DomainAttribute;
-import org.openiaml.model.model.DomainObject;
-import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Property;
+import org.openiaml.model.model.domain.DomainSchema;
+import org.openiaml.model.model.domain.DomainSource;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
@@ -37,8 +37,10 @@ public class SyncFormDomainObject extends InferenceTestCase {
 		InputTextField field1 = assertHasInputTextField(form, "field1");
 		InputTextField field2 = assertHasInputTextField(form, "field2");
 
-		DomainStore store = assertHasDomainStore(root, "domainStore1");
-		DomainObject obj = assertHasDomainObject(store, "form1");
+		DomainSchema obj = assertHasDomainSchema(root, "form1");
+		DomainSource source = assertHasDomainSource(root, "source");
+		assertHasSyncWire(root, source, form);
+		
 		DomainAttribute attr1 = assertHasDomainAttribute(obj, "field1");
 		DomainAttribute attr2 = assertHasDomainAttribute(obj, "field2");
 

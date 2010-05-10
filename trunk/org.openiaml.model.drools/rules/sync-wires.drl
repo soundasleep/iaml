@@ -11,6 +11,7 @@ import org.openiaml.model.model.wires.*;
 import org.openiaml.model.model.visual.*;
 import org.openiaml.model.model.operations.*;
 import org.openiaml.model.model.scopes.*;
+import org.openiaml.model.model.domain.*;
 
 #declare any global variables here
 global OverridableCreateElementsHelper handler;
@@ -21,12 +22,12 @@ rule "Sync wires between objects should create sync wires between all elements i
 	when
 		# source : SyncWire(, eval(connects(source, p1, p2)) )
 		source : SyncWire()
-		# we put in these to prevent multiple wires being generated for two connects
-
-		p1 : CanBeSynced( source.from == p1 )
-		# cannot do 'source.to == this, this != p1' - this fails!!
-		p2 : CanBeSynced( source.to == p2 )
 		
+		# we put in these to prevent multiple wires being generated for two connects
+		p1 : CanBeSynced ( )
+		p2 : CanBeSynced ( )
+		eval ( functions.connectsSync1( source, p1, p2 ))
+
 		eval (p1 != p2)
 		
 		e1 : CanBeSynced( eContainer == p1 )
@@ -36,10 +37,40 @@ rule "Sync wires between objects should create sync wires between all elements i
 	
 		not (sw : SyncWire( name == "sync", eContainer == source, eval(functions.connects( sw, e1, e2)) ))
 		
-		eval( handler.veto( source ))
-						
 		eval ( handler.veto( source ))
 		
+	then
+		SyncWire sw = handler.generatedSyncWire(source, source, e1, e2);
+		handler.setName(sw, "sync");
+		queue.add(sw, drools);
+		
+end
+
+rule "Sync wires from DomainSchema to CanBeSynced"
+	when
+		# source : SyncWire(, eval(connects(source, p1, p2)) )
+		source : SyncWire()
+		
+		# we put in these to prevent multiple wires being generated for two connects
+		domainSource : DomainSource ( )
+		p2 : CanBeSynced ( )
+		eval ( functions.connects( source, domainSource, p2 ))
+
+		eval ( domainSource != p2)
+		
+		domainSchema : DomainSchema ( )
+		schemaEdge : SchemaEdge ( )
+		eval ( functions.connectsSchema( schemaEdge, domainSource, domainSchema ))
+		
+		e1 : CanBeSynced ( eContainer == domainSchema )
+		e2 : CanBeSynced( eContainer == p2 )
+
+		eval(functions.nameMatches(e1, e2))
+	
+		not (sw : SyncWire( name == "sync", eContainer == source, eval(functions.connects( sw, e1, e2)) ))
+		
+		eval ( handler.veto( source ))
+						
 	then
 		SyncWire sw = handler.generatedSyncWire(source, source, e1, e2);
 		handler.setName(sw, "sync");
@@ -194,12 +225,14 @@ rule "Cascaded SyncWires: Conditions from parent to child"
 
 		# the containing elements	
 		sw : SyncWire (  )
-		source : CanBeSynced( sw.from == source )  
+		source : CanBeSynced( )  
 		// cannot use 'sw.to == target, target != source'
 		// can NOT use 'sw.to == target, this != source'
 		// can NOT use 'sw.to == this, this != source'
-		target : CanBeSynced( sw.to == target )
+		target : CanBeSynced( )
 		eval ( target != source )
+		
+		eval ( functions.connectsSync1(sw, source, target ))
 				
 		# the elements contained
 		e1 : CanBeSynced( eContainer == source )
@@ -227,9 +260,11 @@ rule "Cascaded SyncWires: Parameters from parent to child"
 
 		# the containing elements
 		sw : SyncWire (  )
-		source : CanBeSynced( sw.from == source )  
-		target : CanBeSynced( sw.to == target )
+		source : CanBeSynced( )  
+		target : CanBeSynced( )
 		eval ( target != source )
+
+		eval ( functions.connectsSync1(sw, source, target ))
 		
 		# the elements contained
 		e1 : CanBeSynced( eContainer == source )
@@ -400,7 +435,7 @@ rule "Refresh New Instance Object mappings (except for generated primary keys) w
 	when
 		sync : SyncWire(  )
 		form : InputForm (  )
-		instance : DomainObjectInstance (  )
+		instance : DomainIterator (  )
 		
 		eval(functions.connects(sync, form, instance))
 		
@@ -432,11 +467,15 @@ rule "Refresh Domain Object mappings (except for generated primary keys) when sy
 	when
 		sync : SyncWire(  )
 		form : InputForm (  )
-		object : DomainObject (  )
+		domainSource : DomainSource (  )
 		
-		eval(functions.connects(sync, form, object))
-		
-		attribute : DomainAttribute( eContainer == object )
+		eval(functions.connects(sync, form, domainSource))
+
+		# traverse the connections
+		domainSchema : DomainSchema ( )		
+		schemaEdge : SchemaEdge ( eval(functions.connectsSchema(schemaEdge, domainSource, domainSchema )) )  
+				
+		attribute : DomainAttribute( eContainer == domainSchema )
 		
 		# at the top of the attribute inheritance heirarchy, not
 		# a generated primary key
@@ -513,13 +552,9 @@ rule "A SyncWire between Attributes selected from a NewInstanceWire need to chec
 	when
 		sync : SyncWire(  )
 		form : InputForm (  )
-		instance : DomainObjectInstance (  )
+		instance : DomainIterator ( query == "new" )
 		
 		eval(functions.connects(sync, form, instance))
-		
-		# the instance is created through a NewInstanceWire
-		domainObject : DomainObject ( )
-		newInstance : NewInstanceWire ( from == domainObject, to == instance )
 		
 		# contained attribute/field
 		attribute : DomainAttributeInstance( eContainer == instance )

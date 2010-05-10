@@ -18,10 +18,10 @@ global OverridableCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
-rule "Create empty domain store"
+rule "Create empty domain schema"
 	when
 		a : InternetApplication ( name == "test" )
-		not (DomainStore( name=="test domain store") from a.domainStores)
+		not (DomainSchema ( name=="test domain schema", eContainer == a ) )
 
 		eval ( handler.veto( a ))
 
@@ -31,8 +31,8 @@ rule "Create empty domain store"
 		// ds.setIsGenerated(true);
 		// ds.setGeneratedBy(a);
 		
-		DomainStore ds = handler.generatedDomainStore( a, a );
-		handler.setName(ds, "test domain store");
+		DomainSchema ds = handler.generatedDomainSchema( a, a );
+		handler.setName(ds, "test domain schema");
 		
 		queue.add(ds, drools); // possibly infer new knowledge (this is necessary)
 		
@@ -47,7 +47,7 @@ end
 rule "Create field value for Changeable (untyped)"
 	when
 		f : Changeable( )
-		not (prop : Property( eContainer == f, f.fieldValue == prop ))
+		not (prop : Property( eContainer == f, f.fieldValue != null, f.fieldValue == prop ))
 			
 		eval ( handler.veto( f ))
 		

@@ -16,6 +16,7 @@ import org.openiaml.model.model.operations.*;
 import org.openiaml.model.model.scopes.*;
 import org.openiaml.model.model.components.*;
 import org.openiaml.model.model.users.*;
+import org.openiaml.model.model.domain.*;
 
 #declare any global variables here
 global OverridableCreateElementsHelper handler;
@@ -26,9 +27,9 @@ rule "Create QueryParameter for target container of DetailWire"
 	when
 		container : Frame( )
 
-		obj : DomainObject( )
-		instance : DomainObjectInstance( )
-		select : SelectWire ( eval ( functions.connectsSelect(select, obj, instance )) )
+		schema : DomainSchema ( )
+		instance : DomainIterator( )
+		edge : SchemaEdge ( eval ( functions.connectsSchema(edge, schema, instance )) )
 		
 		source : VisibleThing ( eContainer == container )
 		target : Frame ( )
@@ -37,7 +38,7 @@ rule "Create QueryParameter for target container of DetailWire"
 		detail : DetailWire ( )
 		eval ( functions.connectsDetail(detail, source, target ))
 		
-		pk : DomainAttribute ( eContainer == obj, primaryKey == true ) 
+		pk : DomainAttribute ( eContainer == schema, primaryKey == true ) 
 
 		not ( queryPk : QueryParameter ( eContainer == target, name == pk.name ) )
 	
@@ -53,20 +54,20 @@ end
 /**
  * @inference DetailWire
  *		When a {@model DetailWire} is connected from a {@model Frame} that uses a
- *		{@model SelectWire selected} {@model DomainObjectInstance}, to an empty {@model Frame},
+ *		{@model SelectWire selected} {@model DomainIterator}, to an empty {@model Frame},
  *		the target {@model Frame} will obtain content to select an instance from a {@model QueryParameter}.
  */
-rule "Create a relevant DomainObjectInstance, with SelectWire, in the destination for the DetailWire"
+rule "Create a relevant DomainIterator, with SelectWire, in the destination for the DetailWire"
 	when
 		container : Frame( )
 
-		obj : DomainObject( )
-		select : SelectWire ( )
-		instance : DomainObjectInstance( eContainer == container )
+		obj : DomainSchema ( )
+		select : SchemaEdge ( )
+		instance : DomainIterator( eContainer == container )
 		
 		pk : DomainAttribute ( eContainer == obj, primaryKey == true ) 
 		
-		eval ( functions.connectsSelect(select, obj, instance )) 
+		eval ( functions.connectsSchema(select, obj, instance )) 
 		
 		source : VisibleThing ( eContainer == container )
 		target : Frame ( )
@@ -77,16 +78,16 @@ rule "Create a relevant DomainObjectInstance, with SelectWire, in the destinatio
 		
 		queryPk : QueryParameter ( eContainer == target, name == pk.name )
 		
-		not ( DomainObjectInstance ( eContainer == target ))
+		not ( DomainIterator ( eContainer == target ))
 	
 		eval ( handler.veto( detail ))
 	
 	then
-		DomainObjectInstance i2 = handler.generatedDomainObjectInstance(detail, target);
+		DomainIterator i2 = handler.generatedDomainIterator(detail, target);
 		handler.setName(i2, "Current " + obj.getName() + " instance");		
 		queue.add(i2, drools);
 		
-		// connect SelectWire
+		// connect SelectWire`
 		SelectWire select2 = handler.generatedSelectWire(detail, target, obj, i2);
 		handler.setName(select2, "Select from query");
 		handler.setLimit(select2, 1);
@@ -102,7 +103,7 @@ end
 
 /**
  * @model DetailWire
- *		If a {@model VisibleThing} to view the selected {@model DomainObjectInstance} from a
+ *		If a {@model VisibleThing} to view the selected {@model DomainIterator} from a
  *		{@model DetailWire} does not exist, a {@model InputForm} will be created.
  */
 rule "Create a View Instance Form for target of DetailWire"
@@ -110,7 +111,7 @@ rule "Create a View Instance Form for target of DetailWire"
 		container : Frame( )
 		obj : DomainObject( )
 		
-		instance : DomainObjectInstance( eContainer == container )
+		instance : DomainIterator( eContainer == container )
 		select : SelectWire ( )
 		eval ( functions.connectsSelect(select, obj, instance )) 
 		
@@ -121,7 +122,7 @@ rule "Create a View Instance Form for target of DetailWire"
 		detail : DetailWire ( )
 		eval ( functions.connectsDetail(detail, source, target ))
 		
-		i2 : DomainObjectInstance ( eContainer == target )
+		i2 : DomainIterator ( eContainer == target )
 		s2 : SelectWire ( )
 		eval ( functions.connectsSelect(s2, obj, i2) )
 
@@ -136,12 +137,12 @@ rule "Create a View Instance Form for target of DetailWire"
 
 end
 
-rule "Connect View Instance Form with a SetWire to the DomainObjectInstance"
+rule "Connect View Instance Form with a SetWire to the DomainIterator"
 	when
 		container : Frame( )
 		obj : DomainObject( )
 		
-		instance : DomainObjectInstance( eContainer == container )
+		instance : DomainIterator( eContainer == container )
 		select : SelectWire ( )
 		eval ( functions.connectsSelect(select, obj, instance )) 
 		
@@ -151,7 +152,7 @@ rule "Connect View Instance Form with a SetWire to the DomainObjectInstance"
 		detail : DetailWire ( )
 		eval ( functions.connectsDetail(detail, source, target ))
 		
-		i2 : DomainObjectInstance ( eContainer == target )
+		i2 : DomainIterator ( eContainer == target )
 		s2 : SelectWire ( )
 		eval ( functions.connectsSelect(s2, obj, i2) )
 
@@ -179,7 +180,7 @@ rule "Create a Link Button for the source of a DetailWire"
 		container : Frame( )
 
 		obj : DomainObject( )
-		instance : DomainObjectInstance( )
+		instance : DomainIterator( )
 		select : SelectWire ( eval ( functions.connectsSelect(select, obj, instance )) )
 				
 		source : VisibleThing ( eContainer == container )
@@ -204,7 +205,7 @@ rule "Create a Link Button for the source of a DetailWire: Connect NavigateActio
 		container : Frame( )
 		obj : DomainObject( )
 		
-		instance : DomainObjectInstance( eContainer == container )
+		instance : DomainIterator( eContainer == container )
 		select : SelectWire ( )
 		eval ( functions.connectsSelect(select, obj, instance )) 
 		
@@ -233,7 +234,7 @@ rule "Create a Link Button for the source of a DetailWire: Add Parameter from At
 		container : Frame( )
 		obj : DomainObject( )
 		
-		instance : DomainObjectInstance( eContainer == container )
+		instance : DomainIterator( eContainer == container )
 		select : SelectWire ( )
 		eval ( functions.connectsSelect(select, obj, instance ))
 		

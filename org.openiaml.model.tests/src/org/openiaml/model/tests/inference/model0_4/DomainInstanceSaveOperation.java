@@ -3,8 +3,8 @@
  */
 package org.openiaml.model.tests.inference.model0_4;
 
-import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.InternetApplication;
+import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.tests.inference.EclipseInheritanceInterface;
 
@@ -25,7 +25,7 @@ public class DomainInstanceSaveOperation extends EclipseInheritanceInterface {
 	public void checkNotInferredKnowledge(InternetApplication root) throws Exception {
 
 		Frame page = assertHasFrame(root, "container");
-		DomainObjectInstance di = assertHasDomainObjectInstance(page, "domain object instance");
+		DomainIterator di = assertHasDomainIterator(page, "domain object instance");
 
 		// page is otherwise empty
 		assertEquals(0, page.getChildren().size());
@@ -41,7 +41,7 @@ public class DomainInstanceSaveOperation extends EclipseInheritanceInterface {
 	public void checkInferredKnowledge(InternetApplication root) throws Exception {
 
 		Frame page = assertHasFrame(root, "container");
-		DomainObjectInstance di = assertHasDomainObjectInstance(page, "domain object instance");
+		DomainIterator di = assertHasDomainIterator(page, "domain object instance");
 
 		// page is otherwise empty
 		assertEquals(0, page.getChildren().size());

@@ -4,9 +4,9 @@
 package org.openiaml.model.tests.inference.model0_4;
 
 import org.openiaml.model.model.DomainAttribute;
-import org.openiaml.model.model.DomainObject;
-import org.openiaml.model.model.DomainObjectInstance;
 import org.openiaml.model.model.InternetApplication;
+import org.openiaml.model.model.domain.DomainIterator;
+import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.tests.inference.EclipseInheritanceInterface;
@@ -28,12 +28,13 @@ public class SelectWireAttributeInference extends EclipseInheritanceInterface {
 	public void checkNotInferredKnowledge(InternetApplication root) throws Exception {
 
 		Frame page = assertHasFrame(root, "container");
-		DomainObject dobj = assertHasDomainObject(page, "a domain object");
-		DomainObjectInstance di = assertHasDomainObjectInstance(page, "instance");
+		DomainSchema dobj = assertHasDomainSchema(root, "a domain object");
+		DomainIterator di = assertHasDomainIterator(page, "select");
 		InputForm form = assertHasInputForm(page, "form");
 
 		// the domain object has an attribute
 		assertEquals(1, dobj.getAttributes().size());
+		assertHasDomainAttribute(dobj, "attribute");
 
 		// the instance does not have it yet
 		assertEquals(0, di.getAttributes().size());
@@ -47,8 +48,8 @@ public class SelectWireAttributeInference extends EclipseInheritanceInterface {
 	public void checkInferredKnowledge(InternetApplication root) throws Exception {
 
 		Frame page = assertHasFrame(root, "container");
-		DomainObject dobj = assertHasDomainObject(page, "a domain object");
-		DomainObjectInstance di = assertHasDomainObjectInstance(page, "instance");
+		DomainSchema dobj = assertHasDomainSchema(root, "a domain object");
+		DomainIterator di = assertHasDomainIterator(page, "select");
 		InputForm form = assertHasInputForm(page, "form");
 
 		// the domain object now has two attributes (one generated key)

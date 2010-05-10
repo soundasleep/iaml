@@ -23,7 +23,7 @@
       <parameterEdges id="wires.122f7c6a100.63" from="model.122f7c69efd.1ed" to="components.122f7c6a40e.1"/>
     </attributes>
   </schemas>
-  <sources id="domain.128807fbeba.faa" outSchemas="domain.128807fbeba.fab">
+  <sources name="domain source" id="domain.128807fbeba.faa" outSchemas="domain.128807fbeba.fab">
     <schemaEdges id="domain.128807fbeba.fab" from="domain.128807fbeba.faa" to="domain.128807fbeba.fa9"/>
   </sources>
 </iaml:InternetApplication>

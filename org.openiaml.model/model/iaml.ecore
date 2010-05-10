@@ -1382,6 +1382,7 @@
       </eAnnotations>
       <eLiterals name="RELATIONAL_DB"/>
       <eLiterals name="PROPERTIES_FILE" value="1"/>
+      <eLiterals name="RSS2_0" value="2"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="EmptyDomainClass" abstract="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1410,13 +1411,13 @@
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="DomainSchema" eSuperTypes="#//NamedElement #//GeneratesElements">
+    <eClassifiers xsi:type="ecore:EClass" name="DomainSchema" eSuperTypes="#//NamedElement #//GeneratesElements #//ContainsWires #//WireDestination #//WireSource #//wires/ParameterEdgesSource #//users/RequiresEdgeDestination #//users/ProvidesEdgesSource #//wires/ExtendsEdgesSource #//wires/ExtendsEdgeDestination">
       <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
           eType="#//DomainAttribute" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="inSchemas" upperBound="-1"
           eType="#//domain/SchemaEdge" eOpposite="#//domain/SchemaEdge/to"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="DomainSource" eSuperTypes="#//NamedElement #//GeneratesElements">
+    <eClassifiers xsi:type="ecore:EClass" name="DomainSource" eSuperTypes="#//NamedElement #//GeneratesElements #//ContainsWires">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="file" lowerBound="1"
           eType="#//domain/FileReference"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1"
@@ -1435,6 +1436,23 @@
           eType="#//domain/SelectEdge" eOpposite="#//domain/SelectEdge/to">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="A list of contained {@model ConditionEdge}s."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The URL that this {@model DomainObject} will obtain results from."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="cache" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+          defaultValueLiteral="0">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="How long can results be cached in this object, in seconds? If 0, not cached. The {@model DomainSource#reload} operation can be used explicitly as well."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="refresh" eType="#//Operation"
+          containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Reloads data from the remote URL, and resets the {@model RemoteDomainObject#age} of the cache."/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>

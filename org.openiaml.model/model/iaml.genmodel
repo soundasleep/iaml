@@ -372,6 +372,7 @@
       <genEnums typeSafeEnumCompatible="false" ecoreEnum="iaml.ecore#//domain/DomainStoreTypes">
         <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//domain/DomainStoreTypes/RELATIONAL_DB"/>
         <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//domain/DomainStoreTypes/PROPERTIES_FILE"/>
+        <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//domain/DomainStoreTypes/RSS2_0"/>
       </genEnums>
       <genDataTypes ecoreDataType="iaml.ecore#//domain/FileReference"/>
       <genClasses ecoreClass="iaml.ecore#//domain/EmptyDomainClass"/>
@@ -391,6 +392,9 @@
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//domain/DomainSource/outSchemas"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference iaml.ecore#//domain/DomainSource/inSelects"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//domain/DomainSource/url"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//domain/DomainSource/cache"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//domain/DomainSource/refresh"/>
       </genClasses>
       <genClasses ecoreClass="iaml.ecore#//domain/SelectEdge">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"

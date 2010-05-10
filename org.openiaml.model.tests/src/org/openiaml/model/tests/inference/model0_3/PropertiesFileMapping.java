@@ -4,9 +4,10 @@
 package org.openiaml.model.tests.inference.model0_3;
 
 import org.openiaml.model.model.DomainAttribute;
-import org.openiaml.model.model.DomainObject;
-import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.InternetApplication;
+import org.openiaml.model.model.domain.DomainSchema;
+import org.openiaml.model.model.domain.DomainSource;
+import org.openiaml.model.model.domain.DomainStoreTypes;
 import org.openiaml.model.tests.inference.EclipseInheritanceInterface;
 
 /**
@@ -30,10 +31,11 @@ public class PropertiesFileMapping extends EclipseInheritanceInterface {
 	public void checkNotInferredKnowledge(InternetApplication root)
 			throws Exception {
 
-		DomainStore ds = assertHasDomainStore(root, "my domain store");
-		assertEquals(0, ds.getChildren().size());
-		assertEquals(0, ds.getAttributes().size());
-		assertEquals(0, ds.getOperations().size());
+		DomainSource ds = assertHasDomainSource(root, "my domain store");
+		assertEquals(ds.getType(), DomainStoreTypes.PROPERTIES_FILE);
+		
+		// we don't have any DomainSchemas
+		assertEquals(0, root.getSchemas().size());
 
 	}
 
@@ -43,33 +45,27 @@ public class PropertiesFileMapping extends EclipseInheritanceInterface {
 	@Override
 	public void checkInferredKnowledge(InternetApplication root)
 			throws Exception {
+		
+		// generated
+		DomainSchema schema = assertHasDomainSchema(root, "properties");
+		assertGenerated(schema);
 
-		DomainStore ds = assertHasDomainStore(root, "my domain store");
-		assertEquals(1, ds.getChildren().size());	// one domain object called 'properties'
-		assertEquals(0, ds.getAttributes().size());
-		assertEquals(0, ds.getOperations().size());
-
-		DomainObject dobj = assertHasDomainObject(ds, "properties");
-		System.out.println(dobj);
-		System.out.println(dobj.getAttributes());
-		assertEquals(4, dobj.getAttributes().size());	// four attributes (one is a generated primary key)
-		assertEquals(0, dobj.getOperations().size());
-		assertNotNull(dobj.getOnChange());
+		assertEquals(4, schema.getAttributes().size());	// four attributes (one is a generated primary key)
 
 		{
-			DomainAttribute attribute = assertHasDomainAttribute(dobj, "fruit");
+			DomainAttribute attribute = assertHasDomainAttribute(schema, "fruit");
 			assertEquals(attribute.getName(), "fruit");
 		}
 		{
-			DomainAttribute attribute = assertHasDomainAttribute(dobj, "animal");
+			DomainAttribute attribute = assertHasDomainAttribute(schema, "animal");
 			assertEquals(attribute.getName(), "animal");
 		}
 		{
-			DomainAttribute attribute = assertHasDomainAttribute(dobj, "empty");
+			DomainAttribute attribute = assertHasDomainAttribute(schema, "empty");
 			assertEquals(attribute.getName(), "empty");
 		}
 		{
-			DomainAttribute attribute = assertHasDomainAttribute(dobj, "generated primary key");
+			DomainAttribute attribute = assertHasDomainAttribute(schema, "generated primary key");
 			assertEquals(attribute.getName(), "generated primary key");
 			assertTrue(attribute.isPrimaryKey());
 		}

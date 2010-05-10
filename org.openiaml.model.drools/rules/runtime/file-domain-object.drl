@@ -35,6 +35,10 @@ rule "Create the Properties file DomainSchema"
 		//handler.setValue(fdo, ModelPackage.eINSTANCE.getNamedElement_Name(), "properties");
 		handler.setName(fdo, "properties");
 		queue.add(fdo, drools);
+		
+		// and connect with SchemaEdge
+		SchemaEdge edge = handler.generatedSchemaEdge($fds, fdo, $fds, fdo);
+		queue.add(edge, drools);
 
 end
 

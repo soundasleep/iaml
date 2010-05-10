@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12234bb88ff.99">
   <scopes xsi:type="iaml.visual:Frame" id="visual.12234bb89da.47" name="container">
-    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.e09" outWires="wires.12234bb89da.3f" autosave="true" query="new" outSelects="domain.128807fbeba.e0d">
+    <elements name="User instance" xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.e09" outWires="wires.12234bb89da.3f" autosave="true" query="new" outSelects="domain.128807fbeba.e0d">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.12234bb89da.3f" from="domain.128807fbeba.e09" to="visual.12234bb89da.ce" name="sync"/>
     </elements>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.12234bb89da.3f" id="visual.12234bb89da.ce" name="target input form"/>
@@ -11,7 +11,7 @@
     <attributes id="model.12234bb88ff.139" name="username"/>
     <attributes id="model.12234bb88ff.13b" name="email"/>
   </schemas>
-  <sources id="domain.128807fbeba.e0b" outSchemas="domain.128807fbeba.e0c" inSelects="domain.128807fbeba.e0d">
+  <sources name="domain source" id="domain.128807fbeba.e0b" outSchemas="domain.128807fbeba.e0c" inSelects="domain.128807fbeba.e0d">
     <schemaEdges id="domain.128807fbeba.e0c" from="domain.128807fbeba.e0b" to="domain.128807fbeba.e0a"/>
     <selectEdges id="domain.128807fbeba.e0d" from="domain.128807fbeba.e09" to="domain.128807fbeba.e0b"/>
   </sources>

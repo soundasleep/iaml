@@ -18,46 +18,29 @@ global OverridableCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
-rule "Refresh NewInstanceWire Instance Object mappings"
+rule "Refresh Iterator Object mappings"
 	when
-		object : DomainObject ( )
-		instance : DomainIterator ( )
-		wire : NewInstanceWire( from == object, to == instance )
-
-		attribute : DomainAttribute ( eContainer == object )
+		schema : DomainSchema ( )
+		source : DomainSource ( )
+		iterator : DomainIterator ( )
 		
-		not ( DomainAttributeInstance( eContainer == instance, name == attribute.name ))
+		schemaEdge : SchemaEdge ( )
+		eval ( functions.connectsSchema(schemaEdge, source, schema ))
+		
+		selectEdge : SelectEdge ( )
+		eval ( functions.connectsSelect(selectEdge, iterator, source ))
+		
+		attribute : DomainAttribute ( eContainer == schema )
+		
+		not ( DomainAttributeInstance( eContainer == iterator, name == attribute.name ))
 
-		eval ( handler.veto( wire ))
+		eval ( handler.veto( iterator ))
 		
 	then
 		# create a new one
-		DomainAttributeInstance attr = handler.generatedDomainAttributeInstance(wire, instance);
+		DomainAttributeInstance attr = handler.generatedDomainAttributeInstance(iterator, iterator);
 		handler.setName(attr, attribute.getName());
-		handler.setAutosave(attr, instance.isAutosave());
-		# set type
-		handler.setType(attr, attribute.getType());
-		queue.add(attr, drools);
-
-end
-
-rule "Refresh SelectWire Instance Object mappings"
-	when
-		object : DomainObject ( )
-		instance : DomainIterator ( )
-		wire : SelectWire( from == object, to == instance )
-
-		attribute : DomainAttribute ( eContainer == object )
-		
-		not ( DomainAttributeInstance( eContainer == instance, name == attribute.name ))
-		
-		eval ( handler.veto( wire ))
-		
-	then
-		# create a new one
-		DomainAttributeInstance attr = handler.generatedDomainAttributeInstance(wire, instance);
-		handler.setName(attr, attribute.getName());
-		handler.setAutosave(attr, instance.isAutosave());
+		handler.setAutosave(attr, iterator.isAutosave());
 		# set type
 		handler.setType(attr, attribute.getType());
 		queue.add(attr, drools);
@@ -66,12 +49,18 @@ end
 
 rule "Mark AttributeInstances as extensions of the identically-named Attributes (NewInstanceWire)"
 	when
-		object : DomainObject ( )
-		instance : DomainIterator ( )
-		wire : NewInstanceWire( from == object, to == instance )
+		schema : DomainSchema ( )
+		source : DomainSource ( )
+		iterator : DomainIterator ( )
+		
+		schemaEdge : SchemaEdge ( )
+		eval ( functions.connectsSchema(schemaEdge, source, schema ))
+		
+		selectEdge : SelectEdge ( )
+		eval ( functions.connectsSelect(selectEdge, iterator, source ))
 
-		attribute : DomainAttribute ( eContainer == object )
-		attrinst : DomainAttributeInstance( eContainer == instance, name == attribute.name ) 
+		attribute : DomainAttribute ( eContainer == schema )
+		attrinst : DomainAttributeInstance( eContainer == iterator, name == attribute.name ) 
 		
 		not ( ExtendsEdge ( from == attrinst, to == attribute ) )
 		
@@ -79,27 +68,7 @@ rule "Mark AttributeInstances as extensions of the identically-named Attributes 
 		
 	then
 		# mark it as an extension
-		ExtendsEdge w = handler.generatedExtendsEdge(wire, attrinst, attrinst, attribute);
-		queue.add(w, drools);
-	
-end
-
-rule "Mark AttributeInstances as extensions of the identically-named Attributes (SelectWire)"
-	when
-		object : DomainObject ( )
-		instance : DomainIterator ( )
-		wire : SelectWire( from == object, to == instance )
-
-		attribute : DomainAttribute ( eContainer == object )
-		attrinst : DomainAttributeInstance( eContainer == instance, name == attribute.name ) 
-		
-		not ( ExtendsEdge ( from == attrinst, to == attribute ) )
-		
-		eval ( handler.veto( attrinst ))
-		
-	then
-		# mark it as an extension
-		ExtendsEdge w = handler.generatedExtendsEdge(wire, attrinst, attrinst, attribute);
+		ExtendsEdge w = handler.generatedExtendsEdge(attrinst, attrinst, attrinst, attribute);
 		queue.add(w, drools);
 	
 end

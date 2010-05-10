@@ -44,8 +44,12 @@ import org.openiaml.model.model.WireDestination;
 import org.openiaml.model.model.WireSource;
 import org.openiaml.model.model.components.ComponentsPackage;
 import org.openiaml.model.model.components.LoginHandler;
+import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainPackage;
 import org.openiaml.model.model.domain.DomainSchema;
+import org.openiaml.model.model.domain.DomainSource;
+import org.openiaml.model.model.domain.SchemaEdge;
+import org.openiaml.model.model.domain.SelectEdge;
 import org.openiaml.model.model.operations.Arithmetic;
 import org.openiaml.model.model.operations.ArithmeticOperationTypes;
 import org.openiaml.model.model.operations.CancelNode;
@@ -173,6 +177,12 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 
 	public DomainAttribute generatedDomainAttribute(GeneratesElements by, DomainSchema container) throws InferenceException {
 		DomainAttribute obj = (DomainAttribute) createElement( container, ModelPackage.eINSTANCE.getDomainAttribute(), DomainPackage.eINSTANCE.getDomainSchema_Attributes() );
+		setGeneratedBy(obj, by);
+		return obj;
+	}
+
+	public DomainAttributeInstance generatedDomainAttributeInstance(GeneratesElements by, DomainIterator container) throws InferenceException {
+		DomainAttributeInstance obj = (DomainAttributeInstance) createElement( container, ModelPackage.eINSTANCE.getDomainAttributeInstance(), DomainPackage.eINSTANCE.getDomainIterator_Attributes() );
 		setGeneratedBy(obj, by);
 		return obj;
 	}
@@ -378,6 +388,22 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		ExecutionEdge edge = generatedExecutionEdge(by, container);
 		setFrom(edge, from);
 		setTo(edge, to);
+		return edge;
+	}
+
+	public SchemaEdge generatedSchemaEdge(GeneratesElements by, ContainsWires container, DomainSource from, DomainSchema to) throws InferenceException {
+		SchemaEdge edge = (SchemaEdge) createElement( container, DomainPackage.eINSTANCE.getSchemaEdge(), ModelPackage.eINSTANCE.getContainsWires_SchemaEdges() );
+		setGeneratedBy(edge, by);
+		setValue(edge, DomainPackage.eINSTANCE.getSchemaEdge_From(), from);
+		setValue(edge, DomainPackage.eINSTANCE.getSchemaEdge_To(), to);
+		return edge;
+	}
+
+	public SelectEdge generatedSelectEdge(GeneratesElements by, ContainsWires container, DomainIterator from, DomainSource to) throws InferenceException {
+		SelectEdge edge = (SelectEdge) createElement( container, DomainPackage.eINSTANCE.getSelectEdge(), ModelPackage.eINSTANCE.getContainsWires_SelectEdges() );
+		setGeneratedBy(edge, by);
+		setValue(edge, DomainPackage.eINSTANCE.getSelectEdge_From(), from);
+		setValue(edge, DomainPackage.eINSTANCE.getSelectEdge_To(), to);
 		return edge;
 	}
 	

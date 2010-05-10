@@ -1416,6 +1416,12 @@
           eType="#//DomainAttribute" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="inSchemas" upperBound="-1"
           eType="#//domain/SchemaEdge" eOpposite="#//domain/SchemaEdge/to"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="permissions" upperBound="-1"
+          eType="#//users/Permission" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="A list of {@model Permission}s that this {@model UserStore} can provide."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="DomainSource" eSuperTypes="#//NamedElement #//GeneratesElements #//ContainsWires">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="file" lowerBound="1"

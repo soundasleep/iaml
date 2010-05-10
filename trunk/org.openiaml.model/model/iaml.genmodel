@@ -385,6 +385,7 @@
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//domain/DomainSchema/attributes"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference iaml.ecore#//domain/DomainSchema/inSchemas"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//domain/DomainSchema/permissions"/>
       </genClasses>
       <genClasses ecoreClass="iaml.ecore#//domain/DomainSource">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//domain/DomainSource/file"/>

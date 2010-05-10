@@ -22,9 +22,6 @@ import org.openiaml.model.model.DataFlowEdgeDestination;
 import org.openiaml.model.model.DataFlowEdgesSource;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainAttributeInstance;
-import org.openiaml.model.model.DomainObject;
-import org.openiaml.model.model.DomainObjectInstance;
-import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.ExecutionEdgeDestination;
@@ -47,6 +44,8 @@ import org.openiaml.model.model.WireDestination;
 import org.openiaml.model.model.WireSource;
 import org.openiaml.model.model.components.ComponentsPackage;
 import org.openiaml.model.model.components.LoginHandler;
+import org.openiaml.model.model.domain.DomainPackage;
+import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.operations.Arithmetic;
 import org.openiaml.model.model.operations.ArithmeticOperationTypes;
 import org.openiaml.model.model.operations.CancelNode;
@@ -63,10 +62,6 @@ import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.users.RequiresEdgeDestination;
 import org.openiaml.model.model.users.RequiresEdgesSource;
-import org.openiaml.model.model.users.Role;
-import org.openiaml.model.model.users.UserInstance;
-import org.openiaml.model.model.users.UserStore;
-import org.openiaml.model.model.users.UsersPackage;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
@@ -86,7 +81,6 @@ import org.openiaml.model.model.wires.ParameterEdgeDestination;
 import org.openiaml.model.model.wires.ParameterEdgesSource;
 import org.openiaml.model.model.wires.RequiresEdge;
 import org.openiaml.model.model.wires.RunAction;
-import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.model.wires.SyncWire;
 import org.openiaml.model.model.wires.WiresPackage;
@@ -141,17 +135,6 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setValue(element, ModelPackage.eINSTANCE.getGeneratedElement_GeneratedRule(), ruleName);
 	}
 
-	public DomainStore generatedDomainStore(GeneratesElements by, InternetApplication container) throws InferenceException {
-		DomainStore ds = createDomainStore(container);
-		setGeneratedBy(ds, by);
-		return ds;
-	}
-
-	public DomainStore createDomainStore(InternetApplication container) throws InferenceException {
-		DomainStore ds = (DomainStore) createElement( container, ModelPackage.eINSTANCE.getDomainStore(), ModelPackage.eINSTANCE.getInternetApplication_DomainStores() );
-		return ds;
-	}
-		
 	public EventTrigger generatedEventTriggerOnAccess(GeneratesElements by, Accessible container) throws InferenceException {
 		EventTrigger event = (EventTrigger) createElement( container, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getAccessible_OnAccess() );
 		setGeneratedBy(event, by);
@@ -180,6 +163,18 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		EventTrigger event = (EventTrigger) createElement( container, ModelPackage.eINSTANCE.getEventTrigger(), reference);
 		setGeneratedBy(event, by);
 		return event;
+	}
+
+	public DomainSchema generatedDomainSchema(GeneratesElements by, InternetApplication container) throws InferenceException {
+		DomainSchema obj = (DomainSchema) createElement( container, DomainPackage.eINSTANCE.getDomainSchema(), ModelPackage.eINSTANCE.getInternetApplication_Schemas() );
+		setGeneratedBy(obj, by);
+		return obj;
+	}
+
+	public DomainAttribute generatedDomainAttribute(GeneratesElements by, DomainSchema container) throws InferenceException {
+		DomainAttribute obj = (DomainAttribute) createElement( container, ModelPackage.eINSTANCE.getDomainAttribute(), DomainPackage.eINSTANCE.getDomainSchema_Attributes() );
+		setGeneratedBy(obj, by);
+		return obj;
 	}
 
 	public CompositeOperation generatedCompositeOperation(GeneratesElements by, ContainsOperations container) throws InferenceException {
@@ -422,12 +417,6 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return wire;
 	}
 
-	public SelectWire generatedSelectWire(GeneratesElements by, ContainsWires container, WireSource source, WireDestination target) throws InferenceException {
-		SelectWire wire = (SelectWire) createRelationship(container, WiresPackage.eINSTANCE.getSelectWire(), source, target, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWire_From(), ModelPackage.eINSTANCE.getWire_To());
-		setGeneratedBy(wire, by);
-		return wire;
-	}
-	
 	public NavigateAction generatedNavigateAction(GeneratesElements by, ContainsWires container, ActionSource source, ActionDestination target) throws InferenceException {
 		NavigateAction wire = (NavigateAction) createRelationship(container, WiresPackage.eINSTANCE.getNavigateAction(), source, target, ModelPackage.eINSTANCE.getContainsWires_Actions(), ModelPackage.eINSTANCE.getAction_From(), ModelPackage.eINSTANCE.getAction_To());
 		setGeneratedBy(wire, by);
@@ -551,44 +540,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return operation;
 	}
 
-	public DomainObject generatedDomainObject(GeneratesElements by, DomainStore container) throws InferenceException {
-		DomainObject object = (DomainObject) createElement( container, ModelPackage.eINSTANCE.getDomainObject(), ModelPackage.eINSTANCE.getDomainStore_Children() );
-		setGeneratedBy(object, by);
-		return object;
-	}
-
-	public DomainAttribute generatedDomainAttribute(GeneratesElements by, DomainObject container) throws InferenceException {
-		DomainAttribute object = (DomainAttribute) createElement( container, ModelPackage.eINSTANCE.getDomainAttribute(), ModelPackage.eINSTANCE.getDomainObject_Attributes() );
-		setGeneratedBy(object, by);
-		return object;
-	}
-
-	public DomainAttributeInstance generatedDomainAttributeInstance(GeneratesElements by, DomainObjectInstance container) throws InferenceException {
-		DomainAttributeInstance object = (DomainAttributeInstance) createElement( container, ModelPackage.eINSTANCE.getDomainAttributeInstance(), ModelPackage.eINSTANCE.getDomainObjectInstance_Attributes() );
-		setGeneratedBy(object, by);
-		return object;
-	}
-
-	public DomainObjectInstance generatedDomainObjectInstance(GeneratesElements by, Scope container) throws InferenceException {
-		DomainObjectInstance object = (DomainObjectInstance) createElement( container, ModelPackage.eINSTANCE.getDomainObjectInstance(), ModelPackage.eINSTANCE.getScope_Elements() );
-		setGeneratedBy(object, by);
-		return object;
-	}
-
-	public UserInstance generatedUserInstance(GeneratesElements by, Session container) throws InferenceException {
-		UserInstance object = (UserInstance) createElement( container, UsersPackage.eINSTANCE.getUserInstance(), ModelPackage.eINSTANCE.getScope_Elements() );
-		setGeneratedBy(object, by);
-		return object;
-	}
-	
 	public LoginHandler generatedLoginHandler(GeneratesElements by, Session container) throws InferenceException {
 		LoginHandler object = (LoginHandler) createElement( container, ComponentsPackage.eINSTANCE.getLoginHandler(), ModelPackage.eINSTANCE.getScope_Elements() );
-		setGeneratedBy(object, by);
-		return object;
-	}
-
-	public Role generatedRole(GeneratesElements by, UserStore container) throws InferenceException {
-		Role object = (Role) createElement( container, UsersPackage.eINSTANCE.getRole(), ModelPackage.eINSTANCE.getDomainStore_Children() );
 		setGeneratedBy(object, by);
 		return object;
 	}
@@ -628,10 +581,6 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setValue(element, ModelPackage.eINSTANCE.getExecutionEdge_To(), value);
 	}
 	
-	public void setQuery(SelectWire element, String value) throws InferenceException {
-		setValue(element, WiresPackage.eINSTANCE.getSelectWire_Query(), value);
-	}
-	
 	public void setAutosave(DomainAttributeInstance element, boolean value) throws InferenceException {
 		setValue(element, ModelPackage.eINSTANCE.getDomainAttributeInstance_Autosave(), value);
 	}
@@ -662,10 +611,6 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	
 	public void setDefault(Property element, String value) throws InferenceException {
 		setValue(element, ModelPackage.eINSTANCE.getProperty_DefaultValue(), value);
-	}
-	
-	public void setLimit(SelectWire element, int value) throws InferenceException {
-		setValue(element, WiresPackage.eINSTANCE.getSelectWire_Limit(), value);
 	}
 	
 }

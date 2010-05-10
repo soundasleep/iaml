@@ -60,7 +60,11 @@ public abstract class DatabaseCodegenTestCase extends CodegenTestCase {
 
 		// initialise the database
 		for (String s : getDatabaseInitialisers()) {
-			stat.execute(s);
+			try {
+				stat.execute(s);
+			} catch (Exception e) {
+				throw new RuntimeException("Could not execute '" + s + "': " + e.getMessage(), e);
+			}
 		}
 		
 		// close the connection and make sure the database exists

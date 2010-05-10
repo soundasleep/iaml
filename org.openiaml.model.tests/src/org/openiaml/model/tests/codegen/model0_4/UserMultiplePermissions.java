@@ -30,10 +30,8 @@ public class UserMultiplePermissions extends AbstractUserLoginTestCase {
 	@Override
 	protected List<String> getDatabaseInitialisers() {
 		List<String> s = super.getDatabaseInitialisers();
-		s.add("INSERT INTO User (generated_primary_key, name, email, password) VALUES (66, 'Both Permissions', '" + EMAIL + "', '" + PASSWORD + "')");
-		s.add("CREATE TABLE Permissions_User (generated_primary_key INTEGER PRIMARY KEY, a_permission INTEGER, a_different_permission INTEGER)");
-		s.add("INSERT INTO Permissions_User (generated_primary_key, a_permission, a_different_permission) VALUES (22, 1, 0)");
-		s.add("INSERT INTO Permissions_User (generated_primary_key, a_permission, a_different_permission) VALUES (66, 1, 1)");
+		s.add("INSERT INTO User (generated_primary_key, root_user_id, name, email, password) VALUES (66, 66, 'Both Permissions', '" + EMAIL + "', '" + PASSWORD + "')");
+		s.add("INSERT INTO iaml_user_root (id, inherited_permission_with_role, permission_1, a_permission, a_different_permission) VALUES (66, 0, 0, 1, 1)");
 		return s;
 	}
 	

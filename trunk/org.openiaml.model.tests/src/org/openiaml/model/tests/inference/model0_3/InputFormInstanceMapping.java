@@ -4,9 +4,10 @@
 package org.openiaml.model.tests.inference.model0_3;
 
 import org.openiaml.model.model.DomainAttributeInstance;
-import org.openiaml.model.model.DomainObjectInstance;
-import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.InternetApplication;
+import org.openiaml.model.model.domain.DomainIterator;
+import org.openiaml.model.model.domain.DomainSchema;
+import org.openiaml.model.model.domain.DomainSource;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
@@ -35,9 +36,10 @@ public class InputFormInstanceMapping extends EclipseInheritanceInterface {
 	@Override
 	public void checkNotInferredKnowledge(InternetApplication root) throws Exception {
 
-		DomainStore ds = assertHasDomainStore(root, "a domain store");
-		assertEquals(1, ds.getChildren().size());
-		assertEquals("User", ds.getChildren().get(0).getName());
+		DomainSource ds = assertHasDomainSource(root, "domain source");
+		assertNotGenerated(ds);
+		DomainSchema user = assertHasDomainSchema(root, "User");
+		assertNotGenerated(user);
 
 		Frame page = assertHasFrame(root, "container");
 		assertEquals("container", page.getName());
@@ -48,7 +50,7 @@ public class InputFormInstanceMapping extends EclipseInheritanceInterface {
 
 		assertEquals(2, page.getChildren().size());	// forms
 		assertEquals(1, page.getElements().size()); // domain object instance
-		DomainObjectInstance obj = assertHasDomainObjectInstance(page, "User instance");
+		DomainIterator obj = assertHasDomainIterator(page, "User instance");
 
 		// the instance should be empty
 		assertEquals(0, obj.getAttributes().size());
@@ -69,9 +71,10 @@ public class InputFormInstanceMapping extends EclipseInheritanceInterface {
 	@Override
 	public void checkInferredKnowledge(InternetApplication root) throws Exception {
 
-		DomainStore ds = assertHasDomainStore(root, "a domain store");
-		assertEquals(1, ds.getChildren().size());
-		assertEquals("User", ds.getChildren().get(0).getName());
+		DomainSource ds = assertHasDomainSource(root, "domain source");
+		assertNotGenerated(ds);
+		DomainSchema user = assertHasDomainSchema(root, "User");
+		assertNotGenerated(user);
 
 		Frame page = assertHasFrame(root, "container");
 		assertEquals("container", page.getName());
@@ -79,8 +82,7 @@ public class InputFormInstanceMapping extends EclipseInheritanceInterface {
 		// the instance should NOT be empty
 		assertEquals(2, page.getChildren().size());	// forms
 		assertEquals(1, page.getElements().size());	// domain object instance
-		DomainObjectInstance obj = assertHasDomainObjectInstance(page, "User instance");
-		assertEquals("User instance", obj.getName());
+		DomainIterator obj = assertHasDomainIterator(page, "User instance");
 
 		// two attributes + generated primary key
 		assertEquals(3, obj.getAttributes().size());

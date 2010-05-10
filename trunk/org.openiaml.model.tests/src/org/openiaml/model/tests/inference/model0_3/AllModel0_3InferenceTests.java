@@ -20,10 +20,6 @@ public class AllModel0_3InferenceTests {
 	public static Test suite() { 
 		TestSuite suite = new TestSuite("Model 0.3");
 
-        suite.addTestSuite(DatabaseWithInputForm.class);
-        suite.addTestSuite(PropertiesFileWithInputForm.class);
-        suite.addTestSuite(SelectField.class);
-        suite.addTestSuite(SelectFieldFromObject.class);
 		suite.addTestSuite(NewInstanceWireMapping.class);
 		suite.addTestSuite(InputFormInstanceMapping.class);
 		suite.addTestSuite(PropertiesFileMapping.class);

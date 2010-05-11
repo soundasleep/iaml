@@ -9,6 +9,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.openiaml.model.impl.FileReferenceImpl;
+import org.openiaml.model.model.domain.DomainSource;
 import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
 
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
@@ -31,7 +33,7 @@ public class SelectFieldFromDynamicQuery extends DatabaseCodegenTestCase {
 	
 	@Override
 	protected String getDatabaseName() {
-		return "output/model_12109331eea_1083.db";
+		return "output/default.db";
 	}
 
 	@Override
@@ -43,6 +45,22 @@ public class SelectFieldFromDynamicQuery extends DatabaseCodegenTestCase {
 		s.add("INSERT INTO User (id, name, email, password) VALUES (42, 'User Three', 'test3@jevon.org', 'test3')");
 		s.add("INSERT INTO User (id, name, email, password) VALUES (82, 'User Four', 'test4@jevon.org', 'test4')");
 		return s;
+	}
+	
+	/**
+	 * Check that {@link FileReferenceImpl#resolveFileReference(DomainSource)} 
+	 * is working as expected.
+	 */
+	public void testResolveFileReference() {
+
+		DomainSource source = root.getSources().get(0);
+		assertEquals("target source", source.getName());
+		assertNotGenerated(source);
+		
+		assertNotNull(source.getFile());
+		
+		assertEquals( getDatabaseName(), "output/" + FileReferenceImpl.resolveFileReference(source) );
+		
 	}
 	
 	/**
@@ -66,7 +84,7 @@ public class SelectFieldFromDynamicQuery extends DatabaseCodegenTestCase {
 		setLabeledFormElementField(field, newValue);
 		assertLabeledFieldEquals(field, newValue);
 		
-		// reload page, it should be stored
+		// reload page, it should be stored (autosave is enabled)
 		reloadPage(sitemap, "container");		
 		{
 			String field2 = getLabelIDForText("edit name");

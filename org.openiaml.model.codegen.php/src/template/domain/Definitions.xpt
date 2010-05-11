@@ -42,7 +42,11 @@
 		«EXPAND domainAttributeDefinition FOREACH getRoot().eAllContents.typeSelect(model::DomainAttribute)»
 		«EXPAND domainSourceDefinition FOREACH getRoot().eAllContents.typeSelect(model::domain::DomainSource)»
 		«FOREACH sources AS source»
-			«EXPAND domainIteratorDefinition(source) FOREACH source.inSelects.from»
+			«FOREACH source.outSchemas.to AS schema»
+				«FOREACH source.inSelects.from AS iterator»
+					«EXPAND domainIteratorDefinition(schema, source) FOR iterator»
+				«ENDFOREACH»
+			«ENDFOREACH»
 		«ENDFOREACH»
 		
 		/* role defintions */
@@ -302,7 +306,7 @@ class DomainSource_«safeName()» extends DomainSource {
 		«ENDIF»
 		);
 		$this->type = '«escapePhpString(type.toString())»';
-		$this->file = 'sqlite:' . ROOT_PATH . '«safeNameString(id)».db';
+		$this->file = «EXPAND template::domain::Select::getDatabaseStoreString»;
 	}
 	
 	// the current instance
@@ -317,15 +321,15 @@ class DomainSource_«safeName()» extends DomainSource {
 }
 «ENDDEFINE»
 
-«DEFINE domainIteratorDefinition(model::domain::DomainSource source) FOR model::domain::DomainIterator»
+«DEFINE domainIteratorDefinition(model::domain::DomainSchema schema, model::domain::DomainSource source) FOR model::domain::DomainIterator»
 /**
  * Domain Iterator for Domain Iterator '«escapeString(name)»'
  */
 class DomainIterator_«safeName()» extends DomainIterator {
 	«IF query == "new"»
-		«EXPAND domainIteratorDefNew(source)»
+		«EXPAND domainIteratorDefNew(schema, source)»
 	«ELSE»
-		«EXPAND domainIteratorDefSelect(source)»
+		«EXPAND domainIteratorDefSelect(schema, source)»
 	«ENDIF»
 	
 	«EXPAND domainIteratorGetStoredValues FOR this»
@@ -342,20 +346,16 @@ class DomainIterator_«safeName()» extends DomainIterator {
 }
 «ENDDEFINE»
 
-«DEFINE domainIteratorSchemas(model::domain::DomainSource source) FOR emf::EObject»
-	«throwException("Unknown SelectWire source: " + this)»
-«ENDDEFINE»
-
 «DEFINE domainIteratorSchemas(model::domain::DomainSource source) FOR model::domain::DomainSchema»
 	$this->schema = DomainSchema_«safeName()»::getInstance();
 	$this->source = DomainSource_«safeName(source)»::getInstance();
 «ENDDEFINE»
 
-«DEFINE domainIteratorDefSelect(model::domain::DomainSource source) FOR model::domain::DomainIterator»
+«DEFINE domainIteratorDefSelect(model::domain::DomainSchema schema, model::domain::DomainSource source) FOR model::domain::DomainIterator»
 	// a SelectWire
 
 	private function __construct() {
-		«EXPAND domainIteratorSchemas(source)»	
+		«EXPAND domainIteratorSchemas(source) FOR schema»
 
 		«IF orderBy != null»
 			$this->order_by = DomainAttribute_«safeName(orderBy)»::getInstance();
@@ -377,11 +377,11 @@ class DomainIterator_«safeName()» extends DomainIterator {
 	}
 	
 	public function getOffset() {
-		return get_current_offset_«safeName(source)»();		
+		return get_current_offset_«safeName()»();		
 	}
 	
 	public function setOffset($value) {
-		set_current_offset_«safeName(source)»($value);
+		set_current_offset_«safeName()»($value);
 	}
 	
 	public function getNewInstanceID($key) {
@@ -393,11 +393,11 @@ class DomainIterator_«safeName()» extends DomainIterator {
 	}
 «ENDDEFINE»
 
-«DEFINE domainIteratorDefNew(model::domain::DomainSource source) FOR model::domain::DomainIterator»
+«DEFINE domainIteratorDefNew(model::domain::DomainSchema schema, model::domain::DomainSource source) FOR model::domain::DomainIterator»
 	// a NewInstanceWire
 
 	private function __construct() {
-		«EXPAND domainIteratorSchemas(source)»
+		«EXPAND domainIteratorSchemas(source) FOR schema»
 
 		$this->order_by = "";
 		$this->order_ascending = true;

@@ -7,9 +7,8 @@ import java.util.List;
 
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainAttributeInstance;
-import org.openiaml.model.model.DomainObject;
-import org.openiaml.model.model.DomainObjectInstance;
-import org.openiaml.model.model.DomainStore;
+import org.openiaml.model.model.domain.DomainIterator;
+import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
@@ -64,21 +63,19 @@ public class DomainInheritance extends InferenceTestCase {
 			assertNotGenerated(form);
 		}
 		
-		DomainStore store = assertHasDomainStore(root, "domain store");
-		assertNotGenerated(store);
-		DomainObject person = assertHasDomainObject(store, "Person");
+		DomainSchema person = assertHasDomainSchema(root, "Person");
 		assertNotGenerated(person);
-		DomainObject q = assertHasDomainObject(store, "Qualified");
+		DomainSchema q = assertHasDomainSchema(root, "Qualified");
 		assertNotGenerated(q);
-		DomainObject t = assertHasDomainObject(store, "Teacher");
+		DomainSchema t = assertHasDomainSchema(root, "Teacher");
 		assertNotGenerated(t);
-		DomainObject s = assertHasDomainObject(store, "Student");
+		DomainSchema s = assertHasDomainSchema(root, "Student");
 		assertNotGenerated(s);
-		DomainObject pg = assertHasDomainObject(store, "Postgraduate");
+		DomainSchema pg = assertHasDomainSchema(root, "Postgraduate");
 		assertNotGenerated(pg);
-		DomainObject d = assertHasDomainObject(store, "Doctoral");
+		DomainSchema d = assertHasDomainSchema(root, "Doctoral");
 		assertNotGenerated(d);
-		DomainObject cu = assertHasDomainObject(store, "Completed Undergrad");
+		DomainSchema cu = assertHasDomainSchema(root, "Completed Undergrad");
 		assertNotGenerated(cu);
 
 	}
@@ -219,7 +216,7 @@ public class DomainInheritance extends InferenceTestCase {
 		root = loadAndInfer(DomainInheritance.class);
 		
 		Frame page = assertHasFrame(root, "get person");
-		DomainObjectInstance instance = assertHasDomainObjectInstance(page, "selected person");
+		DomainIterator instance = assertHasDomainIterator(page, "selected person");
 
 		DomainAttributeInstance name = assertHasDomainAttributeInstance(instance, "name");
 		assertGenerated(name);
@@ -242,7 +239,7 @@ public class DomainInheritance extends InferenceTestCase {
 		root = loadAndInfer(DomainInheritance.class);
 		
 		Frame page = assertHasFrame(root, "get student");
-		DomainObjectInstance instance = assertHasDomainObjectInstance(page, "current student");
+		DomainIterator instance = assertHasDomainIterator(page, "current student");
 		
 		// direct field
 		DomainAttributeInstance enrolled = assertHasDomainAttributeInstance(instance, "enrolled");
@@ -271,7 +268,7 @@ public class DomainInheritance extends InferenceTestCase {
 		root = loadAndInfer(DomainInheritance.class);
 		
 		Frame page = assertHasFrame(root, "get teacher by id");
-		DomainObjectInstance instance = assertHasDomainObjectInstance(page, "selected teacher");
+		DomainIterator instance = assertHasDomainIterator(page, "selected teacher");
 		
 		// direct field
 		DomainAttributeInstance title = assertHasDomainAttributeInstance(instance, "title");
@@ -306,7 +303,7 @@ public class DomainInheritance extends InferenceTestCase {
 		root = loadAndInfer(DomainInheritance.class);
 		
 		Frame page = assertHasFrame(root, "get doctoral");
-		DomainObjectInstance instance = assertHasDomainObjectInstance(page, "current doctoral");
+		DomainIterator instance = assertHasDomainIterator(page, "current doctoral");
 		
 		// direct field
 		DomainAttributeInstance thesis = assertHasDomainAttributeInstance(instance, "thesis title");
@@ -362,7 +359,7 @@ public class DomainInheritance extends InferenceTestCase {
 		DomainAttribute targetAttr = (DomainAttribute) ext.getTo();
 		assertNotNull(targetAttr);
 		
-		DomainObject targetObj = (DomainObject) targetAttr.eContainer();
+		DomainSchema targetObj = (DomainSchema) targetAttr.eContainer();
 		assertNotNull(targetObj);		
 		assertEquals(name, targetObj.getName());
 	}

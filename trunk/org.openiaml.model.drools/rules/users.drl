@@ -173,16 +173,17 @@ rule "Connect fail wire from 'permissions check' to 'login page' (in separate lo
 
 end
 
-rule "User Stores contain a default role 'User'"
+rule "If a Role is defined, a default role User is also defined"
 	when
-		store : UserStore ( )
+		root : InternetApplication ( )
+		exists ( r : Role ( eContainer == root ))
 		
-		not ( Role ( name == "User", eContainer == store ))
+		not ( Role ( name == "User", eContainer == root ))
 					
-		eval ( handler.veto( store ))
+		eval ( handler.veto( root ))
 	
 	then
-		Role user = handler.generatedRole(store, store);
+		Role user = handler.generatedRole(root, root);
 		handler.setName(user, "User");
 		queue.add(user, drools);
 
@@ -190,8 +191,8 @@ end
 
 rule "'User' role contains a default attribute 'email'"
 	when
-		store : UserStore ( )
-		user : Role ( eContainer == store, name == "User" )
+		root : InternetApplication ( )
+		user : Role ( name == "User", eContainer == root )
 		
 		not ( DomainAttribute ( name == "email", eContainer == user ))
 					
@@ -206,8 +207,8 @@ end
 
 rule "'User' role contains a default attribute 'password'"
 	when
-		store : UserStore ( )
-		user : Role ( eContainer == store, name == "User" )
+		root : InternetApplication ( )
+		user : Role ( name == "User", eContainer == root )
 		
 		not ( DomainAttribute ( name == "password", eContainer == user ))
 					
@@ -229,9 +230,9 @@ end
  */
 rule "A LoginHandler of type 'user' should have an incoming Role as a parameter, defaulting to User"
 	when
+		root : InternetApplication ( )
 		session : Session( ) 
 		login_handler : LoginHandler ( eContainer == session, type == LoginHandlerTypes.USER )
-		store : UserStore ( )
 		
 		exists ( 
 			// it doesn't matter if the ACH is in the session or the page
@@ -241,10 +242,11 @@ rule "A LoginHandler of type 'user' should have an incoming Role as a parameter,
 			// the store contains either the roles or the permissions
 			// referenced by the ACH; we only want one		
 			and			
-			obj : NamedElement ( eContainer == store ) and
+			obj : NamedElement ( eContainer == root ) and
 			RequiresEdge ( from == ach, to == obj ) )
 		
-		user : Role ( eContainer == store, name == "User" )
+		# default Role
+		user : Role ( eContainer == root, name == "User" )
 	
 		# if there is already an incoming parameter wire, don't connect up User
 		not (ParameterEdge ( to == login_handler ))
@@ -393,7 +395,7 @@ rule "An AccessControlHandler that creates a LoginHandler should have the create
 		ach : AccessControlHandler ( eContainer == session )
 		login_handler : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
 		
-		instance : UserInstance ( eContainer == session )
+		instance : DomainIterator ( eContainer == session )
 		setWire : SetWire ( from == login_handler, to == instance )
 		
 		not ( ParameterEdge ( from == instance, to == ach )) 
@@ -413,7 +415,7 @@ rule "A separate AccessControlHandler that creates a LoginHandler should have th
 		ach : AccessControlHandler ( eContainer == page )
 		login_handler : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
 		
-		instance : UserInstance ( eContainer == session )
+		instance : DomainIterator ( eContainer == session )
 		setWire : SetWire ( from == login_handler, to == instance )
 		
 		not ( ParameterEdge ( from == instance, to == ach )) 
@@ -428,17 +430,17 @@ end
 
 rule "Any role should extend the default User role"
 	when
-		store : UserStore ( )
-		user : Role ( name == "User", eContainer == store )
+		root : InternetApplication ( )
+		user : Role ( name == "User", eContainer == root )
 		
 		another : Role ( this != user )
 		
 		not ( ExtendsEdge ( from == another, to == user ))
 						
-		eval ( handler.veto( store ))
+		eval ( handler.veto( user ))
 		
 	then
-		ExtendsEdge ext = handler.generatedExtendsEdge(store, store, another, user);
+		ExtendsEdge ext = handler.generatedExtendsEdge(user, root, another, user);
 		queue.add(ext, drools);
 
 end

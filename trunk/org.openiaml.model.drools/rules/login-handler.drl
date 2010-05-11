@@ -605,7 +605,7 @@ rule "Create text fields for login form of 'login' pages [type=user]"
 		form : InputForm( eContainer == login, name == "login form" )
 
 		# from a role		
-		role : DomainSchema ( )
+		role : Role ( )
 		param : ParameterEdge ( from == role, to == login_handler )
 		
 		# an attribute in that role
@@ -669,7 +669,7 @@ rule "Connect text fields for login form of 'login' pages to 'do login' run wire
 		form : InputForm( eContainer == login, name == "login form" )
 		
 		# from a role
-		role : DomainSchema ( )
+		role : Role ( )
 		attribute : DomainAttribute ( eContainer == role )
 		param : ParameterEdge ( from == role, to == login_handler )
 		
@@ -936,7 +936,7 @@ rule "Create parameter for 'do login' operation inside login handler[type=user]"
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.USER )
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		
-		role : DomainSchema ( )
+		role : Role ( )
 		attribute : DomainAttribute ( eContainer == role )
 		paramWire : ParameterEdge( from == role, to == login_handler )
 		
@@ -1251,7 +1251,7 @@ rule "Create contents (specific keys) of 'do logout' operation [type=user]"
 		o : CompositeOperation( name == "do logout", eContainer == session )
 		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.USER )
 
-		role : DomainSchema ( )
+		role : Role ( )
 		attribute : DomainAttribute ( eContainer == role, eval(functions.notPrimaryKey(attribute)) )
 		paramWire : ParameterEdge ( from == role, to == login_handler )
 		
@@ -1347,7 +1347,10 @@ end
 rule "Update query parameters for LoginHandler [object]"
 	when
 		scope : Session ( )
-		dobj : DomainSchema ( eval(functions.hasDomainAttribute(dobj)) )
+		dobj : DomainSchema ( )
+		
+		# with at least one attribute
+		exists ( DomainAttribute ( eContainer == dobj ))
 		
 		login_handler : LoginHandler( 
 			eContainer == scope, 
@@ -1369,13 +1372,19 @@ rule "Update query parameters for LoginHandler [object]"
 
 end
 
-rule "Create Select Wire between Domain Object types [user]"
+rule "Create Query from a DomainAttribute [user]"
 	when
 		scope : Session ( )
-		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.USER )
+		role : Role ( )
 
-		role : DomainSchema ( )
-		parameter : ParameterEdge( from == role, to == login_handler )
+		login_handler : LoginHandler( 
+			eContainer == scope, 
+			type == LoginHandlerTypes.USER,
+			eval(functions.hasIncomingParameterEdgesFrom(login_handler, role)) 
+		)
+
+		# with at least one attribute
+		exists ( DomainAttribute ( eContainer == role ))
 
 		instance : DomainIterator ( query == null )
 		setWire : SetWire ( from == login_handler, to == instance )
@@ -1386,17 +1395,16 @@ rule "Create Select Wire between Domain Object types [user]"
 		// find all the attributes as incoming parameter wires for the
 		// given DomainObject (including superclasses)
 		String q = functions.getUserQueryString(role);
-			
 		handler.setQuery(instance, q);
 
 end
 
 # if the attributes have changed, we need to update the
 # query string
-rule "Update Select Wire between Domain Object types [user]"
+rule "Update Query from a DomainAttribute [user]"
 	when
 		scope : Session ( )
-		dobj : DomainSchema ( eval(functions.hasDomainAttribute(dobj)) )
+		dobj : Role ( )
 		
 		login_handler : LoginHandler( 
 			eContainer == scope, 
@@ -1404,11 +1412,73 @@ rule "Update Select Wire between Domain Object types [user]"
 			eval(functions.hasIncomingParameterEdgesFrom(login_handler, dobj)) 
 		)
 		
-		instance : DomainIterator ( query == null )
+		# with at least one attribute
+		exists ( DomainAttribute ( eContainer == dobj ))
+		
+		instance : DomainIterator ( query != null )
 		setWire : SetWire ( from == login_handler, to == instance )
 		
-		# a new attribute has been inserted (trigger)
-		attribute : DomainAttributeInstance ( eContainer == instance )
+		eval ( !functions.getUserQueryString(dobj).equals(instance.getQuery()))
+		
+		eval ( handler.veto( login_handler ))
+		
+	then
+		String q = functions.getUserQueryString(dobj);
+		handler.setQuery(instance, q);
+
+end
+
+rule "Create Query from a DomainSchema [user]"
+	when
+		scope : Session ( )
+		role : Role ( )
+
+		login_handler : LoginHandler( 
+			eContainer == scope, 
+			type == LoginHandlerTypes.USER
+		)
+		
+		# the Role is the incoming parameter, not just a DomainAttribute
+		param : ParameterEdge ( from == role, to == login_handler )
+
+		# with at least one attribute
+		exists ( DomainAttribute ( eContainer == role ))
+
+		instance : DomainIterator ( query == null )
+		setWire : SetWire ( from == login_handler, to == instance )
+			
+		eval ( handler.veto( login_handler ))
+		
+	then
+		// find all the attributes as incoming parameter wires for the
+		// given DomainObject (including superclasses)
+		String q = functions.getUserQueryString(role);
+		handler.setQuery(instance, q);
+
+end
+
+# if the attributes have changed, we need to update the
+# query string
+rule "Update Query from a DomainSchema [user]"
+	when
+		scope : Session ( )
+		dobj : Role ( )
+		
+		login_handler : LoginHandler( 
+			eContainer == scope, 
+			type == LoginHandlerTypes.USER
+		)
+		
+		# the Role is the incoming parameter, not just a DomainAttribute
+		param : ParameterEdge ( from == dobj, to == login_handler )
+
+		# with at least one attribute (trigger)
+		DomainAttribute ( eContainer == dobj )
+		
+		instance : DomainIterator ( )
+		setWire : SetWire ( from == login_handler, to == instance )
+		
+		eval ( functions.debug("role: " + dobj + " query: " + instance.getQuery() + " constructed: " + functions.getUserQueryString(dobj)) ) 
 		
 		eval ( !functions.getUserQueryString(dobj).equals(instance.getQuery()))
 		
@@ -1447,7 +1517,7 @@ rule "Create 'key attribute' property for LoginHandler[type = user]s"
 		session : Session( ) 
 		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.USER )
 		
-		role : DomainSchema ( )
+		role : Role ( )
 		attribute : DomainAttribute ( eContainer == role, eval(functions.notPrimaryKey(attribute)) )
 		paramWire : ParameterEdge ( from == role, to == login_handler )
 		
@@ -1526,7 +1596,7 @@ rule "Connect key properties to SelectWire for LoginHandler[type = user]"
 		session : Session( ) 
 		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.USER )
 		
-		role : DomainSchema ( )
+		role : Role ( )
 		attribute : DomainAttribute ( eContainer == role )
 		paramWire : ParameterEdge ( from == role, to == login_handler )
 		
@@ -1608,22 +1678,54 @@ rule "Create 'current instance' for LoginHandler[type=user]"
 
 end
 
-rule "Connect a default DomainSource for LoginHandlers that do not specify a SelectEdge [domain]"
+rule "Connect a default DomainSource for LoginHandlers that do not specify a SelectEdge [domain and user] (DomainAttribute)"
 	when
 		root : InternetApplication ( )
 	
 		session : Session( ) 
-		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT )
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT || type == LoginHandlerTypes.USER )
 		
 		iterator : DomainIterator ( eContainer == session )
 		set : SetWire ( from == login_handler, to == iterator )
 		
 		schema : DomainSchema ( )
 		
+		# LoginHandler selecting from a DomainAttribute
 		exists (
 			sourceAttribute : DomainAttribute ( eContainer == schema ) and
 			param : ParameterEdge ( from == sourceAttribute, to == login_handler )
 		)
+		
+		source : DomainSource ( )
+		schemaEdge : SchemaEdge ( )
+		eval ( functions.connectsSchema( schemaEdge, source, schema ) )
+		
+		not ( selectEdge : SelectEdge ( ) and 
+			eval ( functions.connectsSelect( selectEdge, iterator, source ))
+		) 
+		
+		eval ( handler.veto( login_handler ))
+
+	then
+		SelectEdge select = handler.generatedSelectEdge(login_handler, source, iterator, source);
+		queue.add(select, drools);
+	
+end	
+
+rule "Connect a default DomainSource for LoginHandlers that do not specify a SelectEdge [domain and user] (DomainSchema)"
+	when
+		root : InternetApplication ( )
+	
+		session : Session( ) 
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT || type == LoginHandlerTypes.USER )
+		
+		iterator : DomainIterator ( eContainer == session )
+		set : SetWire ( from == login_handler, to == iterator )
+		
+		schema : DomainSchema ( )
+		
+		# LoginHandler selecting from a DomainSchema
+		param : ParameterEdge ( from == schema, to == login_handler )
 		
 		source : DomainSource ( )
 		schemaEdge : SchemaEdge ( )

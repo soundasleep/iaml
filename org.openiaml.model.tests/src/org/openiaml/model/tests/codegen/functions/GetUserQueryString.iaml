@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.126f8149d3d.80">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.users="http://openiaml.org/model/users" id="model.126f8149d3d.80">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
-  <schemas id="domain.128807fbeba.1058" name="A" inExtendsEdges="wires.126f8149daa.20" inSchemas="domain.128807fbeba.105a">
+  <schemas xsi:type="iaml.users:Role" id="domain.128807fbeba.1058" name="A" inExtendsEdges="wires.126f8149daa.20" inSchemas="domain.128807fbeba.105a">
     <attributes id="model.126f8149d3d.92" name="a"/>
   </schemas>
-  <schemas id="domain.128807fbeba.105b" name="B" outExtendsEdges="wires.126f8149daa.20" inExtendsEdges="wires.126f8149daa.34" inSchemas="domain.128807fbeba.105d">
+  <schemas xsi:type="iaml.users:Role" id="domain.128807fbeba.105b" name="B" outExtendsEdges="wires.126f8149daa.20" inExtendsEdges="wires.126f8149daa.34" inSchemas="domain.128807fbeba.105d">
     <extendsEdges id="wires.126f8149daa.20" from="domain.128807fbeba.105b" to="domain.128807fbeba.1058"/>
     <attributes id="model.126f8149d3d.a3" name="b"/>
   </schemas>
-  <schemas id="domain.128807fbeba.105e" name="C" outExtendsEdges="wires.126f8149daa.34" inExtendsEdges="wires.126f8149daa.41" inSchemas="domain.128807fbeba.1060">
+  <schemas xsi:type="iaml.users:Role" id="domain.128807fbeba.105e" name="C" outExtendsEdges="wires.126f8149daa.34" inExtendsEdges="wires.126f8149daa.41" inSchemas="domain.128807fbeba.1060">
     <extendsEdges id="wires.126f8149daa.34" from="domain.128807fbeba.105e" to="domain.128807fbeba.105b"/>
   </schemas>
-  <schemas id="domain.128807fbeba.1061" name="D" outExtendsEdges="wires.126f8149daa.41" inSchemas="domain.128807fbeba.1063">
+  <schemas xsi:type="iaml.users:Role" id="domain.128807fbeba.1061" name="D" outExtendsEdges="wires.126f8149daa.41" inSchemas="domain.128807fbeba.1063">
     <extendsEdges id="wires.126f8149daa.41" from="domain.128807fbeba.1061" to="domain.128807fbeba.105e"/>
     <attributes id="model.126f8149d3d.d4" name="d"/>
   </schemas>

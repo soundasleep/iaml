@@ -113,7 +113,7 @@ public class DroolsQueueTest extends XmlTestCase {
 		InternetApplication root = createInternetApplication();
 		
 		// initially empty
-		assertEquals(0, root.getDomainStores().size());
+		assertEquals(0, root.getSchemas().size());
 		assertEquals(0, root.getScopes().size());
 
 		// infer new elements
@@ -122,7 +122,7 @@ public class DroolsQueueTest extends XmlTestCase {
 		engine.create(root, new NullProgressMonitor());
 		
 		// check that it did actually create stuff
-		assertEquals(1, root.getDomainStores().size());
+		assertEquals(1, root.getSchemas().size());
 		assertEquals(1, root.getScopes().size());
 		
 		// it should also fire new rules in the rule file

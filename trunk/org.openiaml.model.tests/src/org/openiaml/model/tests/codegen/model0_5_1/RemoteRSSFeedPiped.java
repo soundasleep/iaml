@@ -126,10 +126,5 @@ public class RemoteRSSFeedPiped extends FeedCodegenTestCase {
 		// does nothing
 		return s;
 	}
-
-	@Override
-	protected String getDatabaseName() {
-		return "output/model_1281f69878a_20.db";
-	}
 	
 }

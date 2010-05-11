@@ -27,11 +27,6 @@ public class SelectField extends DatabaseCodegenTestCase {
 		root = loadAndCodegen(SelectField.class);
 		initialiseDatabase();
 	}
-	
-	@Override
-	protected String getDatabaseName() {
-		return "output/model_12109331eea_e3e.db";
-	}
 
 	@Override
 	protected List<String> getDatabaseInitialisers() {

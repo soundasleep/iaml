@@ -122,11 +122,6 @@ public abstract class AbstractUserLoginTestCase extends DatabaseCodegenTestCase 
 		// submit form
 		submit();
 	}
-	
-	@Override
-	protected String getDatabaseName() {
-		return "output/users_1233afe655c_1c.db";
-	}
 
 	@Override
 	protected List<String> getDatabaseInitialisers() {

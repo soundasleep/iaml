@@ -405,9 +405,4 @@ public class IteratedSyncWires extends DatabaseCodegenTestCase {
 		return s;
 	}
 
-	@Override
-	protected String getDatabaseName() {
-		return "output/model_127e56efe3e_4.db";
-	}
-	
 }

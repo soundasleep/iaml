@@ -26,11 +26,6 @@ public class NewInstanceAttributeSessionAutosave extends DatabaseCodegenTestCase
 		root = loadAndCodegen(NewInstanceAttributeSessionAutosave.class);
 		initialiseDatabase();
 	}
-	
-	@Override
-	protected String getDatabaseName() {
-		return "output/model_1213cee9b4f_18.db";
-	}
 
 	@Override
 	protected List<String> getDatabaseInitialisers() {

@@ -75,10 +75,5 @@ public class ViewDatabaseTypes extends DatabaseCodegenTestCase {
 				"VALUES (00005, 'String', '2001-1-1 1:01:01 +0000', 'Address', 'test@openiaml.org')");
 		return s;
 	}
-
-	@Override
-	protected String getDatabaseName() {
-		return "output/model_12814d6da04_42.db";
-	}
 	
 }

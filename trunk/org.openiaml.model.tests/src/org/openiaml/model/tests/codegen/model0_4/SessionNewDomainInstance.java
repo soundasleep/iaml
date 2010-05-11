@@ -230,13 +230,5 @@ public class SessionNewDomainInstance extends DatabaseCodegenTestCase {
 	protected List<String> getDatabaseInitialisers() {
 		return new ArrayList<String>();	// empty
 	}
-
-	/* (non-Javadoc)
-	 * @see org.openiaml.model.tests.codegen.DatabaseCodegenTestCase#getDatabaseName()
-	 */
-	@Override
-	protected String getDatabaseName() {
-		return "output/model_1230bdbae76_25a.db";
-	}
 		
 }

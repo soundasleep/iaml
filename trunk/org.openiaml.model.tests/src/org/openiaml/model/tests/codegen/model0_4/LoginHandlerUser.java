@@ -28,11 +28,6 @@ public class LoginHandlerUser extends AbstractUserLoginTestCase {
 	public void testInitial() throws Exception {
 		beginAtSitemapThenPage("Home");
 	}
-	
-	@Override
-	protected String getDatabaseName() {
-		return "output/users_1233b454017_f.db";
-	}
 
 	/**
 	 * We can't access the login handler protected page

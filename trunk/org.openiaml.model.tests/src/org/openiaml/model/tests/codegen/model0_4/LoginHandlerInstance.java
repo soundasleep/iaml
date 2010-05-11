@@ -25,11 +25,6 @@ public class LoginHandlerInstance extends DatabaseCodegenTestCase {
 		root = loadAndCodegen(LoginHandlerInstance.class);
 		initialiseDatabase();
 	}
-	
-	@Override
-	protected String getDatabaseName() {
-		return "output/model_122f7c69efd_d.db";
-	}
 
 	@Override
 	protected List<String> getDatabaseInitialisers() {

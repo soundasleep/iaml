@@ -26,11 +26,6 @@ public class NewInstanceObjectAutosave extends DatabaseCodegenTestCase {
 		root = loadAndCodegen(NewInstanceObjectAutosave.class);
 		initialiseDatabase();
 	}
-	
-	@Override
-	protected String getDatabaseName() {
-		return "output/model_1213cee9b4f_18.db";
-	}
 
 	@Override
 	protected List<String> getDatabaseInitialisers() {

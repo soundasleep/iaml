@@ -40,7 +40,10 @@ public abstract class DatabaseCodegenTestCase extends CodegenTestCase {
 	 *  
 	 * @return
 	 */
-	protected abstract String getDatabaseName();
+	protected String getDatabaseName() {
+		// by default, databases now save to default.db (r2152)
+		return "output/default.db";
+	}
 	
 	/**
 	 * Initialise the database given the values specified in 

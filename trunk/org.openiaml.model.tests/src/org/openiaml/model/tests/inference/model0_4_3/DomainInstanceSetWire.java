@@ -5,10 +5,9 @@ package org.openiaml.model.tests.inference.model0_4_3;
 
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainAttributeInstance;
-import org.openiaml.model.model.DomainObject;
-import org.openiaml.model.model.DomainObjectInstance;
-import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.QueryParameter;
+import org.openiaml.model.model.domain.DomainIterator;
+import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
@@ -40,17 +39,16 @@ public class DomainInstanceSetWire extends ValidInferenceTestCase {
 		Frame page = assertHasFrame(root, "Home");
 		QueryParameter param = assertHasQueryParameter(page, "id");
 		
-		DomainObjectInstance viewing = assertHasDomainObjectInstance(page, "viewing instance");
+		DomainIterator viewing = assertHasDomainIterator(page, "viewing instance");
 		InputForm view = assertHasInputForm(page, "View");
 		
 		Frame add = assertHasFrame(root, "Add New Product");
 		
-		DomainObjectInstance editing = assertHasDomainObjectInstance(add, "New Product");
+		DomainIterator editing = assertHasDomainIterator(add, "New Product");
 		InputForm edit = assertHasInputForm(add, "Edit Form");
 		Button save = assertHasButton(add, "save");
 		
-		DomainStore store = assertHasDomainStore(root, "Store");
-		DomainObject product = assertHasDomainObject(store, "Product");
+		DomainSchema product = assertHasDomainSchema(root, "Product");
 		DomainAttribute id = assertHasDomainAttribute(product, "id");
 		DomainAttribute name = assertHasDomainAttribute(product, "name");
 		DomainAttribute price = assertHasDomainAttribute(product, "price");
@@ -65,7 +63,6 @@ public class DomainInstanceSetWire extends ValidInferenceTestCase {
 		assertNotGenerated(edit);
 		assertNotGenerated(save);
 		
-		assertNotGenerated(store);
 		assertNotGenerated(product);
 		assertNotGenerated(id);
 		assertNotGenerated(name);
@@ -86,7 +83,7 @@ public class DomainInstanceSetWire extends ValidInferenceTestCase {
 
 		Frame add = assertHasFrame(root, "Add New Product");
 		
-		DomainObjectInstance editing = assertHasDomainObjectInstance(add, "New Product");
+		DomainIterator editing = assertHasDomainIterator(add, "New Product");
 		InputForm edit = assertHasInputForm(add, "Edit Form");
 		
 		// text fields
@@ -132,7 +129,7 @@ public class DomainInstanceSetWire extends ValidInferenceTestCase {
 
 		Frame page = assertHasFrame(root, "Home");
 		
-		DomainObjectInstance viewing = assertHasDomainObjectInstance(page, "viewing instance");
+		DomainIterator viewing = assertHasDomainIterator(page, "viewing instance");
 		InputForm view = assertHasInputForm(page, "View");
 		
 		// labels

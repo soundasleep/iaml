@@ -25,11 +25,6 @@ public class NewInstanceObject extends DatabaseCodegenTestCase {
 		root = loadAndCodegen(NewInstanceObject.class);
 		initialiseDatabase();
 	}
-	
-	@Override
-	protected String getDatabaseName() {
-		return "output/model_1213cee9b4f_18.db";
-	}
 
 	@Override
 	protected List<String> getDatabaseInitialisers() {

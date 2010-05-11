@@ -56,11 +56,6 @@ public class DomainInheritance extends DatabaseCodegenTestCase {
 		root = loadAndCodegen(DomainInheritance.class);
 		initialiseDatabase();
 	}
-	
-	@Override
-	protected String getDatabaseName() {
-		return "output/model_1236407970c_5.db";
-	}
 
 	@Override
 	protected List<String> getDatabaseInitialisers() {

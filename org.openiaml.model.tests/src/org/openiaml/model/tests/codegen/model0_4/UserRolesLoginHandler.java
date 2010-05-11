@@ -69,12 +69,7 @@ public class UserRolesLoginHandler extends AbstractUserLoginTestCase {
 		gotoSitemapThenPage(sitemap, "target page");
 		assertNoProblem();
 	}
-
-	@Override
-	protected String getDatabaseName() {
-		return "output/users_1233b454017_bb.db";
-	}
-
+	
 	@Override
 	protected List<String> getDatabaseInitialisers() {
 		List<String> s = super.getDatabaseInitialisers();

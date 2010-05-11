@@ -26,11 +26,6 @@ public class QueryParameterAsParameter extends DatabaseCodegenTestCase {
 		root = loadAndCodegen(QueryParameterAsParameter.class);
 		initialiseDatabase();
 	}
-	
-	@Override
-	protected String getDatabaseName() {
-		return "output/model_123172ceeef_32.db";
-	}
 
 	@Override
 	protected List<String> getDatabaseInitialisers() {

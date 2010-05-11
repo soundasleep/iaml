@@ -32,11 +32,6 @@ public class SelectFieldFromDynamicQuery extends DatabaseCodegenTestCase {
 	}
 	
 	@Override
-	protected String getDatabaseName() {
-		return "output/default.db";
-	}
-
-	@Override
 	protected List<String> getDatabaseInitialisers() {
 		List<String> s = new ArrayList<String>();
 		s.add("CREATE TABLE User (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(64) NOT NULL, email VARCHAR(64) NOT NULL, password VARCHAR(64) NOT NULL)");

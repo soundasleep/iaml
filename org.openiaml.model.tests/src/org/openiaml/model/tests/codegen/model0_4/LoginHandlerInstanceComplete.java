@@ -42,11 +42,6 @@ public class LoginHandlerInstanceComplete extends DatabaseCodegenTestCase {
 	}
 
 	@Override
-	protected String getDatabaseName() {
-		return "output/model_122f7c69efd_d.db";
-	}
-
-	@Override
 	protected List<String> getDatabaseInitialisers() {
 		List<String> s = new ArrayList<String>();
 		s.add("CREATE TABLE User (generated_primary_key INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(64) NOT NULL, email VARCHAR(64) NOT NULL, password VARCHAR(64) NOT NULL)");

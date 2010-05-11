@@ -88,10 +88,5 @@ public class FeedProducerCompleteWithoutLink extends FeedCodegenTestCase {
 		}
 		return s;
 	}
-
-	@Override
-	protected String getDatabaseName() {
-		return "output/model_1280b46d146_77.db";
-	}
 	
 }

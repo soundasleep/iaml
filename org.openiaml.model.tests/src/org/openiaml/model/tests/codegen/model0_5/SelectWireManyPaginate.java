@@ -224,10 +224,5 @@ public class SelectWireManyPaginate extends DatabaseCodegenTestCase {
 		}
 		return s;
 	}
-
-	@Override
-	protected String getDatabaseName() {
-		return "output/model_127eb22429b_15.db";
-	}
 	
 }

@@ -4,7 +4,6 @@
 package org.openiaml.model.tests.codegen.functions;
 
 import org.openiaml.model.model.users.Role;
-import org.openiaml.model.model.users.UserStore;
 
 /**
  * 
@@ -20,11 +19,10 @@ public class GetUserQueryString extends DroolsHelperFunctionsTestCase {
 
 	public void testGetUserQueryString() throws Exception {
 		
-		UserStore store = assertHasUserStore(root, "User Store");
-		Role a = assertHasRole(store, "A");
-		Role b = assertHasRole(store, "B");
-		Role c = assertHasRole(store, "C");
-		Role d = assertHasRole(store, "D");
+		Role a = assertHasRole(root, "A");
+		Role b = assertHasRole(root, "B");
+		Role c = assertHasRole(root, "C");
+		Role d = assertHasRole(root, "D");
 		
 		// reverse order from extends
 		assertEquals("a = :a", getHelper().getUserQueryString(a));

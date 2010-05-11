@@ -21,7 +21,11 @@
 «ENDDEFINE»
 
 «DEFINE getDatabaseStoreString FOR model::domain::DomainSource»
-	'sqlite:' . ROOT_PATH . '«safeNameString(id)».db'
+	«IF resolveFileReference() != null»
+		'sqlite:' . ROOT_PATH . '«resolveFileReference()»'
+	«ELSE»
+		'sqlite:' . ROOT_PATH . '«safeNameString(id)».db' /* oh noes */
+	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE getDatabaseStoreString FOR model::InternetApplication»

@@ -1219,7 +1219,7 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="DomainSource" eSuperTypes="#//NamedElement #//GeneratesElements #//ContainsWires #//WireSource #//WireDestination">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="file" lowerBound="1"
-          eType="#//domain/FileReference"/>
+          eType="#//domain/FileReference" defaultValueLiteral="default.db"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1"
           eType="#//domain/DomainStoreTypes">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

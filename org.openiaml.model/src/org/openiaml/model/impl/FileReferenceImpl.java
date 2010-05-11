@@ -7,7 +7,9 @@ import java.io.File;
 
 import org.eclipse.emf.common.CommonPlugin;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.FileReference;
+import org.openiaml.model.model.domain.DomainSource;
 
 /**
  * @author jmwright
@@ -95,7 +97,20 @@ public class FileReferenceImpl implements FileReference {
 	public int hashCode() {
 		return fileName.hashCode();
 	}
+
 	
-	
+	/**
+	 * Resolve the FileReference in the given object against the
+	 * containing EResource of the object, and return a path as a string.
+	 * 
+	 * @param obj the DomainSource to resolve
+	 * @return <code>null</code> if <code>obj.file</code> is null or not set
+	 */
+	public static String resolveFileReference(DomainSource obj) {
+		if (obj.getFile() == null || !(obj.getFile() instanceof FileReferenceImpl))
+			return null;
+		
+		return ((FileReferenceImpl) obj.getFile()).getFileName();
+	}
 
 }

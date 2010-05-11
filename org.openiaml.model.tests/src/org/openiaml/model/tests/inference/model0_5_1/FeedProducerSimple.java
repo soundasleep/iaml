@@ -4,13 +4,11 @@
 package org.openiaml.model.tests.inference.model0_5_1;
 
 import org.openiaml.model.model.DomainAttributeInstance;
-import org.openiaml.model.model.DomainObject;
-import org.openiaml.model.model.DomainObjectInstance;
-import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.QueryParameter;
+import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
@@ -18,7 +16,6 @@ import org.openiaml.model.model.visual.Label;
 import org.openiaml.model.model.wires.NavigateAction;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.RunAction;
-import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
 /**
@@ -42,9 +39,6 @@ public class FeedProducerSimple extends InferenceTestCase {
 	 */
 	public void testViewNewsPage() throws Exception {
 		
-		DomainStore store = assertHasDomainStore(root, "Database");
-		DomainObject news = assertHasDomainObject(store, "News");
-		
 		Frame view = assertHasFrame(root, "View News");
 		assertNotGenerated(view);
 		
@@ -54,17 +48,14 @@ public class FeedProducerSimple extends InferenceTestCase {
 		QueryParameter qp = assertHasQueryParameter(view, "generated primary key");
 		assertGenerated(qp);
 		
-		DomainObjectInstance instance = assertHasDomainObjectInstance(view, "Current News instance");
+		DomainIterator instance = assertHasDomainIterator(view, "Current News instance");
 		assertGenerated(instance);
-		
-		SelectWire select = assertHasSelectWire(root, news, instance);
-		assertGenerated(select);
-		assertEquals(1, select.getLimit());	// selecting one!
+		assertEquals(1, instance.getLimit());	// selecting one!
 		
 		// the order doesn't matter here
 		
 		// parameter
-		assertGenerated(assertHasParameterEdge(root, qp, select));
+		assertGenerated(assertHasParameterEdge(root, qp, instance));
 		
 		// a SetWire from the instance to the form
 		assertGenerated(assertHasSetWire(root, instance, viewForm));
@@ -121,7 +112,7 @@ public class FeedProducerSimple extends InferenceTestCase {
 		InputForm form = assertHasInputForm(feed, "Feed Item");
 
 		// the 'generated primary key' is from the instance
-		DomainObjectInstance instance = assertHasDomainObjectInstance(feed, "recent news");
+		DomainIterator instance = assertHasDomainIterator(feed, "recent news");
 		DomainAttributeInstance pk = assertHasDomainAttributeInstance(instance, "generated primary key");
 		assertGenerated(pk);
 		
@@ -171,7 +162,7 @@ public class FeedProducerSimple extends InferenceTestCase {
 		Label label = assertHasLabel(form, "Results");
 		Operation update = assertHasOperation(label, "update");
 		
-		DomainObjectInstance instance = assertHasDomainObjectInstance(feed, "recent news");
+		DomainIterator instance = assertHasDomainIterator(feed, "recent news");
 		
 		EventTrigger onAccess = form.getOnAccess();
 		RunAction run = assertHasRunAction(root, onAccess, update);

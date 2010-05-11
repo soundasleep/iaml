@@ -4,10 +4,9 @@
 package org.openiaml.model.tests.inference.model0_5;
 
 import org.openiaml.model.model.DomainAttributeInstance;
-import org.openiaml.model.model.DomainObjectInstance;
-import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
@@ -31,14 +30,11 @@ public class IteratedSyncWires extends InferenceTestCase {
 		Frame home = assertHasFrame(root, "Home");
 		assertNotGenerated(home);
 
-		DomainObjectInstance instance = assertHasDomainObjectInstance(home, "iterable");
+		DomainIterator instance = assertHasDomainIterator(home, "iterable");
 		assertNotGenerated(instance);
 
 		InputForm form = assertHasInputForm(home, "View News");
 		assertNotGenerated(form);
-
-		DomainStore store = assertHasDomainStore(root, "Database");
-		assertNotGenerated(store);
 
 		SyncWire wire = assertHasSyncWire(root, instance, form);
 		assertNotGenerated(wire);
@@ -71,7 +67,7 @@ public class IteratedSyncWires extends InferenceTestCase {
 	 */
 	public void testAttributesCreated() throws Exception {
 		Frame home = assertHasFrame(root, "Home");
-		DomainObjectInstance instance = assertHasDomainObjectInstance(home, "iterable");
+		DomainIterator instance = assertHasDomainIterator(home, "iterable");
 		InputForm form = assertHasInputForm(home, "View News");
 
 		InputTextField t1 = assertHasInputTextField(form, "title");
@@ -102,7 +98,7 @@ public class IteratedSyncWires extends InferenceTestCase {
 	 */
 	public void testTextFieldEditCallsAttributeUpdate() throws Exception {
 		Frame home = assertHasFrame(root, "Home");
-		DomainObjectInstance instance = assertHasDomainObjectInstance(home, "iterable");
+		DomainIterator instance = assertHasDomainIterator(home, "iterable");
 		InputForm form = assertHasInputForm(home, "View News");
 		InputTextField t1 = assertHasInputTextField(form, "title");
 		DomainAttributeInstance a1 = assertHasDomainAttributeInstance(instance, "title");
@@ -123,7 +119,7 @@ public class IteratedSyncWires extends InferenceTestCase {
 	 */
 	public void testAttributeEditCallsTextFieldUpdate() throws Exception {
 		Frame home = assertHasFrame(root, "Home");
-		DomainObjectInstance instance = assertHasDomainObjectInstance(home, "iterable");
+		DomainIterator instance = assertHasDomainIterator(home, "iterable");
 		InputForm form = assertHasInputForm(home, "View News");
 		InputTextField t1 = assertHasInputTextField(form, "title");
 		DomainAttributeInstance a1 = assertHasDomainAttributeInstance(instance, "title");

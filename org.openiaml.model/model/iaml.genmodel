@@ -393,6 +393,7 @@
     </nestedGenPackages>
     <nestedGenPackages prefix="Users" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//users">
+      <genClasses ecoreClass="iaml.ecore#//users/Role"/>
       <genClasses ecoreClass="iaml.ecore#//users/Permission"/>
       <genClasses image="false" ecoreClass="iaml.ecore#//users/ProvidesEdgesSource">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"

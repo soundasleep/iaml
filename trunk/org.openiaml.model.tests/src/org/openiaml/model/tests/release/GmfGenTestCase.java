@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
 import org.openiaml.emf.SoftCache;
 import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.model.domain.DomainPackage;
 import org.openiaml.model.model.users.UsersPackage;
 import org.openiaml.model.tests.XmlTestCase;
 import org.openiaml.model.tests.model.ModelTestCase;
@@ -1174,35 +1175,35 @@ public class GmfGenTestCase extends XmlTestCase {
 	 * Tests {@link #getBestPair(List, EClass)}.
 	 */
 	public void testGetBestPair() {
-		EClass DomainStore = ModelPackage.eINSTANCE.getDomainStore(); 
-		EClass UserStore = UsersPackage.eINSTANCE.getUserStore(); 
-		EClass ApplicationElement = ModelPackage.eINSTANCE.getApplicationElement(); 
+		EClass domain_schema = DomainPackage.eINSTANCE.getDomainSchema(); 
+		EClass role = UsersPackage.eINSTANCE.getRole(); 
+		EClass application_element = ModelPackage.eINSTANCE.getApplicationElement(); 
 		
 		List<RootElementPair> elements = new ArrayList<RootElementPair>();
 		
-		// only DomainStore
-		elements.add(new RootElementPair(DomainStore, null, null));		
-		assertEqualsPair(DomainStore, getBestPair(elements, DomainStore));
-		assertEqualsPair(DomainStore, getBestPair(elements, UserStore));
-		assertEqualsPair(null, getBestPair(elements, ApplicationElement));
+		// only DomainSchema
+		elements.add(new RootElementPair(domain_schema, null, null));		
+		assertEqualsPair(domain_schema, getBestPair(elements, domain_schema));
+		assertEqualsPair(domain_schema, getBestPair(elements, role));
+		assertEqualsPair(null, getBestPair(elements, application_element));
 		
-		// add UserStore
-		elements.add(new RootElementPair(UserStore, null, null));		
-		assertEqualsPair(UserStore, getBestPair(elements, UserStore));
-		assertEqualsPair(DomainStore, getBestPair(elements, DomainStore));
-		assertEqualsPair(null, getBestPair(elements, ApplicationElement));
+		// add Role
+		elements.add(new RootElementPair(role, null, null));		
+		assertEqualsPair(role, getBestPair(elements, role));
+		assertEqualsPair(domain_schema, getBestPair(elements, domain_schema));
+		assertEqualsPair(null, getBestPair(elements, application_element));
 
-		// add UserStore
-		elements.add(new RootElementPair(ApplicationElement, null, null));		
-		assertEqualsPair(UserStore, getBestPair(elements, UserStore));
-		assertEqualsPair(DomainStore, getBestPair(elements, DomainStore));
-		assertEqualsPair(ApplicationElement, getBestPair(elements, ApplicationElement));
+		// add Role
+		elements.add(new RootElementPair(application_element, null, null));		
+		assertEqualsPair(role, getBestPair(elements, role));
+		assertEqualsPair(domain_schema, getBestPair(elements, domain_schema));
+		assertEqualsPair(application_element, getBestPair(elements, application_element));
 		
 		elements.clear();
-		elements.add(new RootElementPair(ApplicationElement, null, null));		
-		assertEqualsPair(null, getBestPair(elements, UserStore));
-		assertEqualsPair(null, getBestPair(elements, DomainStore));
-		assertEqualsPair(ApplicationElement, getBestPair(elements, ApplicationElement));
+		elements.add(new RootElementPair(application_element, null, null));		
+		assertEqualsPair(null, getBestPair(elements, role));
+		assertEqualsPair(null, getBestPair(elements, domain_schema));
+		assertEqualsPair(application_element, getBestPair(elements, application_element));
 
 	}
 	

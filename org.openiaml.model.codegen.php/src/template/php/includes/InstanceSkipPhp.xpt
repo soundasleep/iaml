@@ -26,7 +26,7 @@ $arg0 = require_get("arg0");
 log_message("instance_skip.php: skipping instance_id=$instance_id by $arg0");
 
 switch ($instance_id) {
-«FOREACH eAllContents.typeSelect(model::DomainObjectInstance) AS object»
+«FOREACH eAllContents.typeSelect(model::domain::DomainIterator) AS object»
 	case "«safeName(object)-»" :
 		 object_instance_skip_«safeName(object)-»($arg0);
 		 break;

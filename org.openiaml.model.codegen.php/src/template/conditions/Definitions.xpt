@@ -74,9 +74,9 @@
 	/** primitive condition "«name»" */
 	function condition_«safeName()»() {
 		«REM»here we would expand out the data flow of the condition, etc«ENDREM»
-		«IF model::DomainObjectInstance.isInstance(eContainer)»
+		«IF model::domain::DomainIterator.isInstance(eContainer)»
 			«IF php»
-			return «EXPAND template::domain::DomainInstance::domainInstanceCondition(php, (model::DomainObjectInstance) eContainer)»;
+			return «EXPAND template::domain::DomainInstance::domainInstanceCondition(php, (model::domain::DomainIterator) eContainer)»;
 			«ELSE»
 			return cached_result_«safeName()»();
 			«ENDIF»

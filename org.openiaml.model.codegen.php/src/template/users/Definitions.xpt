@@ -34,11 +34,13 @@
 	function access_control_permissions_check_«safeNameString(id)»() {
 		«REM»find the desired UserInstance to check against«ENDREM»
 		«REM»there should be exactly one incoming parameter wire with a UserInstance«ENDREM»
-		«LET inParameterEdges.from.typeSelect(model::users::UserInstance).first() AS user»
-			«IF user==null»
+		«LET inParameterEdges.from.typeSelect(model::domain::DomainIterator).select(i|!i.outSelects.to.outSchemas.to.typeSelect(model::users::Role).isEmpty) AS iterators»
+			«IF iterators.isEmpty»
 				«throwException("No incoming UserInstances for AccessControlHandler " + this)»
 			«ENDIF»
-			«EXPAND checkAccessDefinitionUser(user) FOR this»
+			«FOREACH iterators AS it»
+				«EXPAND checkAccessDefinitionUser(it)»
+			«ENDFOREACH»
 		«ENDLET»
 	}
 «ENDDEFINE»
@@ -46,7 +48,7 @@
 /**
  * We now have a UserInstance on which to validate against
  */
-«DEFINE checkAccessDefinitionUser(model::users::UserInstance user) FOR model::components::AccessControlHandler»
+«DEFINE checkAccessDefinitionUser(model::domain::DomainIterator user) FOR model::components::AccessControlHandler»
 	$iterator = DomainIterator_«safeName(user)»::getInstance();
 	if ($iterator->isEmpty()) {
 		// there are no results; bail
@@ -54,7 +56,8 @@
 	}
 	
 	«FOREACH outRequiresEdges.to.typeSelect(model::users::Role) AS targetRole»
-	«LET getContainingUserStore(targetRole) AS userStore»
+		// for each source
+		«FOREACH user.outSelects.to AS userStore»
 		// get the root user iterator
 		$attribute = DomainAttribute_UserRoot_«safeName(userStore)»_ID::getInstance();
 		$root_user_id = $iterator->getAttributeInstance($attribute)->getValue();
@@ -64,7 +67,7 @@
 		}
 
 		// a separate query iterator
-		$query_iterator = HasRole_«safeName(targetRole)»::getInstance($root_user_id); 
+		$query_iterator = HasRole_«safeName(targetRole)»_«safeName(userStore)»::getInstance($root_user_id); 
 		if ($query_iterator->isEmpty()) {
 			// no such role exists
 			$failure['«safeName(targetRole)»'] = new IamlRuntimeException("Source instance '" . $iterator->toString() . "' could not be translated into '«targetRole.name»'");
@@ -72,7 +75,7 @@
 			// role exists fine
 			$failure['«safeName(targetRole)»'] = null;
 		}
-	«ENDLET»
+		«ENDFOREACH»
 	«ENDFOREACH»
 	
 	/* check permissions */

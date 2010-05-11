@@ -10,18 +10,6 @@
 	«throwException("Cannot find a remote parameter source for " + this)»
 «ENDDEFINE»
 
-«DEFINE remoteValue(boolean php, boolean require, model::Property property) FOR model::DomainAttribute»
-	«IF php»
-		«throwException("Cannot generate server-side code for remoteValue DomainAttribute: " + this)» 
-	«ELSE»
-		«IF isPropertiesFile(getDomainStore(this))»
-			«EXPAND template::domain::properties::PropertiesSource::remotePropertiesValue(require, property) FOR this»
-		«ELSE»
-			«EXPAND template::domain::database::DatabaseSource::remoteDatabaseValue(require, property) FOR this»
-		«ENDIF»
-	«ENDIF»
-«ENDDEFINE»
-
 «DEFINE remoteValue(boolean php, boolean require, model::Property property) FOR model::DomainAttributeInstance»
 	«IF php»
 		get_attribute_instance_«safeName()-»()
@@ -35,18 +23,6 @@
  */
 «DEFINE remoteValueIsSet(boolean php, model::Property property) FOR emf::EObject»
 	«throwException("Cannot find a remote parameter source for " + this)»
-«ENDDEFINE»
-
-«DEFINE remoteValueIsSet(boolean php, model::Property property) FOR model::DomainAttribute»
-	«IF php»
-		«throwException("Cannot generate server-side code for remoteValue DomainAttribute: " + this)» 
-	«ELSE»
-		«IF isPropertiesFile(getDomainStore(this))»
-			«EXPAND template::domain::properties::PropertiesSource::remotePropertiesValueIsSet(property) FOR this»
-		«ELSE»
-			«EXPAND template::domain::database::DatabaseSource::remoteDatabaseValueIsSet(property) FOR this»
-		«ENDIF»
-	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE remoteValueIsSet(boolean php, model::Property property) FOR model::DomainAttributeInstance»

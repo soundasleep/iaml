@@ -25,7 +25,7 @@ $frame_id = require_get("frame_id");
 log_message("instance_reset.php: resetting instance_id=$instance_id");
 
 switch ($instance_id) {
-«FOREACH eAllContents.typeSelect(model::DomainObjectInstance) AS object»
+«FOREACH eAllContents.typeSelect(model::domain::DomainIterator) AS object»
 	case "«safeName(object)-»" :
 		 object_instance_reset_«safeName(object)-»();
 		 break;

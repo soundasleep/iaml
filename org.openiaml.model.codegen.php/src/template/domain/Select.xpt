@@ -6,7 +6,7 @@
 «EXTENSION template::GeneratorExtensions»
 
 /* create a SQL query to select a particular value */
-«DEFINE getQuery FOR model::wires::SelectWire»
+«DEFINE getQuery FOR model::domain::DomainIterator»
 	«IF query == null || query.trim().length == 0»
 		«REM»an empty query«ENDREM»
 		"1"
@@ -16,34 +16,11 @@
 «ENDDEFINE»
 
 /* select a database source */
-«DEFINE selectDatabase FOR model::WireSource»
-	«throwException("Cannot connect to a database source from " + this)»
-«ENDDEFINE»
-
-«DEFINE selectDatabase FOR model::DomainObject»
-	«EXPAND selectDatabaseStore FOR eContainer»	
-«ENDDEFINE»
-
-«DEFINE selectDatabase FOR model::DomainAttribute»
-	«IF model::DomainObject.isInstance(eContainer)»
-		«EXPAND selectDatabase FOR (model::DomainObject) eContainer»
-	«ELSEIF model::DomainStore.isInstance(eContainer)»
-		«EXPAND selectDatabaseStore FOR (model::DomainStore) eContainer»
-	«ELSE»
-		«EXPAND selectDatabaseStore FOR getRoot()»
-	«ENDIF»	
-«ENDDEFINE»
-
-/* select a particular database */
-«DEFINE selectDatabaseStore FOR emf::EObject»
+«DEFINE selectDatabase FOR model::domain::DomainSource»
 	$db_name = «EXPAND getDatabaseStoreString»;
 «ENDDEFINE»
 
-«DEFINE getDatabaseStoreString FOR emf::EObject»
-	«throwException("Unknown DomainObject container " + this)»
-«ENDDEFINE»
-
-«DEFINE getDatabaseStoreString FOR model::DomainStore»
+«DEFINE getDatabaseStoreString FOR model::domain::DomainSource»
 	'sqlite:' . ROOT_PATH . '«safeNameString(id)».db'
 «ENDDEFINE»
 

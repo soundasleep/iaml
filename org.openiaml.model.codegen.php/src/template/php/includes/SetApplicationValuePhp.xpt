@@ -168,16 +168,16 @@ echo_necessary_update_callbacks();
 	/* ignore «this» */
 «ENDDEFINE»
 
-«DEFINE potentialUpdatesParameter FOR model::wires::SelectWire»
-	/* SelectWire "«this-»" */
-	«EXPAND potentialUpdateDestination FOR to»
+«DEFINE potentialUpdatesParameter FOR model::domain::DomainIterator»
+	/* DomainIterator "«this-»" */
+	«EXPAND potentialUpdateDestination»
 «ENDDEFINE»
 
 «DEFINE potentialUpdateDestination FOR model::WireDestination»
 	«throwException("Unknown update wire edge destination: " + this)»
 «ENDDEFINE»
 
-«DEFINE potentialUpdateDestination FOR model::DomainObjectInstance»
+«DEFINE potentialUpdateDestination FOR model::domain::DomainIterator»
 	/* DomainObjectInstance "«this-»" */
 	$object = get_object_instance_«safeName()»(); // parameters are from server-side
 	«EXPAND potentialUpdateDestinationAttributes FOREACH attributes»

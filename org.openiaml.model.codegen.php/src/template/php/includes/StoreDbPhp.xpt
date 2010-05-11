@@ -27,7 +27,7 @@ $db_type = null;
 $db_name = false;
 $table_name = false;
 $row_name = false;
-«EXPAND expandDomainStore FOREACH domainStores»
+«EXPAND expandDomainStore FOREACH sources»
 «EXPAND expandDomainObjectRoot FOREACH children»
 
 if ($db_type == "pdo") {
@@ -79,25 +79,22 @@ echo_necessary_update_callbacks();
 /** 
  * Expand out each DomainStore.
  */
-«DEFINE expandDomainStore FOR model::DomainStore»
-	/* Domain Store «this.name» */ 
-	«EXPAND expandDomainObject(this) FOREACH children»
-	
-	/* Sole attributes */
-	«EXPAND soleAttribute(this) FOREACH attributes» 
+«DEFINE expandDomainStore FOR model::domain::DomainSource»
+	/* Domain Source «this.name» */ 
+	«EXPAND expandDomainObject(this) FOREACH outSchemas.to»
 «ENDDEFINE»
 
 /**
  * Expand out each DomainObject.
  */
-«DEFINE expandDomainObject(model::DomainStore store) FOR model::DomainObject»
+«DEFINE expandDomainObject(model::domain::DomainSource store) FOR model::domain::DomainSchema»
 	«EXPAND expandDomainAttribute(store, this) FOREACH attributes»
 «ENDDEFINE»
 
 /**
  * Expand out each DomainAttribute.
  */
-«DEFINE expandDomainAttribute(model::DomainStore store, model::DomainObject object) FOR model::DomainAttribute»
+«DEFINE expandDomainAttribute(model::domain::DomainSource store, model::domain::DomainSchema object) FOR model::DomainAttribute»
 	«IF isPropertiesFile(store)»
 		«EXPAND expandDomainAttributeProperties(store, object) FOR this»
 	«ELSE»
@@ -105,11 +102,11 @@ echo_necessary_update_callbacks();
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE expandDomainAttributeDatabase(model::DomainStore store, model::DomainObject object) FOR model::DomainAttribute»
+«DEFINE expandDomainAttributeDatabase(model::domain::DomainSource store, model::domain::DomainSchema object) FOR model::DomainAttribute»
 	«IF !{onChange}.isEmpty»
 	if ($attribute_id == "«safeNameString(id)»") {
 		$db_type = "pdo";
-		«EXPAND template::domain::Select::selectDatabase» 
+		«EXPAND template::domain::Select::selectDatabase FOR store» 
 		$table_name = "«safeNameString(object.name)»";
 		$row_name = "«safeNameString(name)»";
 		
@@ -120,7 +117,7 @@ echo_necessary_update_callbacks();
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE expandDomainAttributeProperties(model::DomainStore store, model::DomainObject object) FOR model::DomainAttribute»
+«DEFINE expandDomainAttributeProperties(model::domain::DomainSource store, model::domain::DomainSchema object) FOR model::DomainAttribute»
 	«IF !{onChange}.isEmpty»
 	if ($attribute_id == "«safeNameString(id)»") {
 		$db_type = "properties";
@@ -138,7 +135,7 @@ echo_necessary_update_callbacks();
 /**
  * Expand out each solo DomainAttribute.
  */
-«DEFINE soleAttribute(model::DomainStore store) FOR model::DomainAttribute»
+«DEFINE soleAttribute(model::domain::DomainSource store) FOR model::DomainAttribute»
 	«IF isPropertiesFile(store)»
 		«EXPAND soleAttributeProperties(store) FOR this»
 	«ELSE»
@@ -146,11 +143,11 @@ echo_necessary_update_callbacks();
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE soleAttributeDatabase(model::DomainStore store) FOR model::DomainAttribute»
+«DEFINE soleAttributeDatabase(model::domain::DomainSource store) FOR model::DomainAttribute»
 	«IF !{onChange}.isEmpty»
 	if ($attribute_id == "«safeNameString(id)»") {
 		$db_type = "pdo";
-		«EXPAND template::domain::Select::selectDatabase» 
+		«EXPAND template::domain::Select::selectDatabase FOR store» 
 		$table_name = "single_values";
 		$row_name = "«safeNameString(name)»";
 		
@@ -161,7 +158,7 @@ echo_necessary_update_callbacks();
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE soleAttributeProperties(model::DomainStore store) FOR model::DomainAttribute»
+«DEFINE soleAttributeProperties(model::domain::DomainSource store) FOR model::DomainAttribute»
 	«IF !{onChange}.isEmpty»
 	if ($attribute_id == "«safeNameString(id)»") {
 		$db_type = "properties";
@@ -182,23 +179,23 @@ echo_necessary_update_callbacks();
 	«REM»empty«ENDREM»
 «ENDDEFINE»
 
-«DEFINE expandDomainObjectRoot FOR model::DomainObject»
-	«EXPAND expandDomainAttributeRoot(this) FOREACH attributes»
+«DEFINE expandDomainObjectRoot(model::domain::DomainSource store) FOR model::domain::DomainSchema»
+	«EXPAND expandDomainAttributeRoot(store, this) FOREACH attributes»
 «ENDDEFINE»
 
-«DEFINE expandDomainAttributeRoot(model::DomainObject object) FOR model::DomainAttribute»
-	«IF isPropertiesFile(getDomainStore(this))»
+«DEFINE expandDomainAttributeRoot(model::domain::DomainSource store, model::domain::DomainSchema object) FOR model::DomainAttribute»
+	«IF isPropertiesFile(store)»
 		«EXPAND expandDomainAttributeRootProperties(object) FOR this»
 	«ELSE»
-		«EXPAND expandDomainAttributeRootDatabase(object) FOR this»
+		«EXPAND expandDomainAttributeRootDatabase(store, object) FOR this»
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE expandDomainAttributeRootDatabase(model::DomainObject object) FOR model::DomainAttribute»
+«DEFINE expandDomainAttributeRootDatabase(model::domain::DomainSource store, model::domain::DomainSchema object) FOR model::DomainAttribute»
 	«IF !{onChange}.isEmpty»
 	if ($attribute_id == "«safeNameString(id)»") {
 		$db_type = "pdo";
-		«EXPAND template::domain::Select::selectDatabase» 
+		«EXPAND template::domain::Select::selectDatabase FOR store» 
 		$table_name = "«safeNameString(object.name)»";
 		$row_name = "«safeNameString(name)»";
 		
@@ -209,7 +206,7 @@ echo_necessary_update_callbacks();
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE expandDomainAttributeRootProperties(model::DomainObject object) FOR model::DomainAttribute»
+«DEFINE expandDomainAttributeRootProperties(model::domain::DomainSchema object) FOR model::DomainAttribute»
 	«IF !{onChange}.isEmpty»
 	if ($attribute_id == "«safeNameString(id)»") {
 		$db_type = "properties";

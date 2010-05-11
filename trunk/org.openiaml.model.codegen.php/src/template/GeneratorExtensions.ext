@@ -652,5 +652,8 @@ String iamlVersion() :
 String throwException(String message) :
 	JAVA org.openiaml.model.codegen.php.OawCodeGenerator.throwException(java.lang.String);
 
+String resolveFileReference(model::domain::DomainSource source) :
+	JAVA org.openiaml.model.impl.FileReferenceImpl.resolveFileReference(org.openiaml.model.model.domain.DomainSource);
+
 String _instrument(String destination, String filename, String location) :
 	JAVA org.openiaml.model.codegen.php.coverage.InstrumentOawCode.instrument(java.lang.String, java.lang.String, java.lang.String);

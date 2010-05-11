@@ -28,8 +28,11 @@ rule "Create QueryParameter for target container of DetailWire"
 		container : Frame( )
 
 		schema : DomainSchema ( )
+		domainSource : DomainSource ( )
 		instance : DomainIterator( )
-		edge : SchemaEdge ( eval ( functions.connectsSchema(edge, schema, instance )) )
+		
+		selectEdge : SelectEdge ( eval ( functions.connectsSelect(selectEdge, instance, domainSource )) )
+		schemaEdge : SchemaEdge ( eval ( functions.connectsSchema(schemaEdge, domainSource, schema )) )
 		
 		source : VisibleThing ( eContainer == container )
 		target : Frame ( )
@@ -61,13 +64,14 @@ rule "Create a relevant DomainIterator, with SelectWire, in the destination for 
 	when
 		container : Frame( )
 
-		obj : DomainSchema ( )
-		select : SchemaEdge ( )
+		schema : DomainSchema ( )
+		domainSource : DomainSource ( )
 		instance : DomainIterator( eContainer == container )
+
+		selectEdge : SelectEdge ( eval ( functions.connectsSelect(selectEdge, instance, domainSource )) )
+		schemaEdge : SchemaEdge ( eval ( functions.connectsSchema(schemaEdge, domainSource, schema )) )
 		
-		pk : DomainAttribute ( eContainer == obj, primaryKey == true ) 
-		
-		eval ( functions.connectsSchema(select, obj, instance )) 
+		pk : DomainAttribute ( eContainer == schema, primaryKey == true )
 		
 		source : VisibleThing ( eContainer == container )
 		target : Frame ( )
@@ -84,18 +88,14 @@ rule "Create a relevant DomainIterator, with SelectWire, in the destination for 
 	
 	then
 		DomainIterator i2 = handler.generatedDomainIterator(detail, target);
-		handler.setName(i2, "Current " + obj.getName() + " instance");		
+		handler.setName(i2, "Current " + schema.getName() + " instance");
+		// set the query
+		handler.setLimit(i2, 1);
+		handler.setQuery(i2, functions.safeNameString(pk.getName()) + " = :pk");				
 		queue.add(i2, drools);
 		
-		// connect SelectWire`
-		SelectWire select2 = handler.generatedSelectWire(detail, target, obj, i2);
-		handler.setName(select2, "Select from query");
-		handler.setLimit(select2, 1);
-		handler.setQuery(select2, functions.safeNameString(pk.getName()) + " = :pk");
-		queue.add(select2, drools);
-		
 		// connect QueryParameter
-		ParameterEdge param = handler.generatedParameterEdge(detail, target, queryPk, select2);
+		ParameterEdge param = handler.generatedParameterEdge(detail, target, queryPk, i2);
 		handler.setName(param, "pk");
 		queue.add(param, drools);
 	
@@ -109,11 +109,13 @@ end
 rule "Create a View Instance Form for target of DetailWire"
 	when
 		container : Frame( )
-		obj : DomainObject( )
 		
+		schema : DomainSchema ( )
+		domainSource : DomainSource ( )
 		instance : DomainIterator( eContainer == container )
-		select : SelectWire ( )
-		eval ( functions.connectsSelect(select, obj, instance )) 
+
+		selectEdge : SelectEdge ( eval ( functions.connectsSelect(selectEdge, instance, domainSource )) )
+		schemaEdge : SchemaEdge ( eval ( functions.connectsSchema(schemaEdge, domainSource, schema )) )
 		
 		source : VisibleThing ( eContainer == container )
 		target : Frame ( )
@@ -123,16 +125,14 @@ rule "Create a View Instance Form for target of DetailWire"
 		eval ( functions.connectsDetail(detail, source, target ))
 		
 		i2 : DomainIterator ( eContainer == target )
-		s2 : SelectWire ( )
-		eval ( functions.connectsSelect(s2, obj, i2) )
 
-		not ( VisibleThing ( eContainer == target, eval( ("View " + obj.getName()).equals(name) ) ) )
+		not ( VisibleThing ( eContainer == target, eval( ("View " + schema.getName()).equals(name) ) ) )
 	
 		eval ( handler.veto( detail ))
 	
 	then
 		InputForm form = handler.generatedInputForm(detail, target);
-		handler.setName(form, "View " + obj.getName());
+		handler.setName(form, "View " + schema.getName());
 		queue.add(form, drools);
 
 end
@@ -140,12 +140,14 @@ end
 rule "Connect View Instance Form with a SetWire to the DomainIterator"
 	when
 		container : Frame( )
-		obj : DomainObject( )
 		
+		schema : DomainSchema ( )
+		domainSource : DomainSource ( )
 		instance : DomainIterator( eContainer == container )
-		select : SelectWire ( )
-		eval ( functions.connectsSelect(select, obj, instance )) 
-		
+
+		selectEdge : SelectEdge ( eval ( functions.connectsSelect(selectEdge, instance, domainSource )) )
+		schemaEdge : SchemaEdge ( eval ( functions.connectsSchema(schemaEdge, domainSource, schema )) )
+				
 		source : VisibleThing ( eContainer == container )
 		target : Frame ( )
 		
@@ -153,10 +155,8 @@ rule "Connect View Instance Form with a SetWire to the DomainIterator"
 		eval ( functions.connectsDetail(detail, source, target ))
 		
 		i2 : DomainIterator ( eContainer == target )
-		s2 : SelectWire ( )
-		eval ( functions.connectsSelect(s2, obj, i2) )
 
-		form : VisibleThing ( eContainer == target, eval( ("View " + obj.getName()).equals(name) ) )
+		form : VisibleThing ( eContainer == target, eval( ("View " + schema.getName()).equals(name) ) )
 		
 		not ( set : SetWire ( eval( functions.connectsSet( set, i2, form ) ) ) )
 	
@@ -178,11 +178,14 @@ end
 rule "Create a Link Button for the source of a DetailWire"
 	when
 		container : Frame( )
+		
+		schema : DomainSchema ( )
+		domainSource : DomainSource ( )
+		instance : DomainIterator( eContainer == container )
 
-		obj : DomainObject( )
-		instance : DomainIterator( )
-		select : SelectWire ( eval ( functions.connectsSelect(select, obj, instance )) )
-				
+		selectEdge : SelectEdge ( eval ( functions.connectsSelect(selectEdge, instance, domainSource )) )
+		schemaEdge : SchemaEdge ( eval ( functions.connectsSchema(schemaEdge, domainSource, schema )) )
+		
 		source : VisibleThing ( eContainer == container )
 		target : Frame ( )
 		
@@ -203,11 +206,13 @@ end
 rule "Create a Link Button for the source of a DetailWire: Connect NavigateAction"
 	when
 		container : Frame( )
-		obj : DomainObject( )
 		
+		schema : DomainSchema ( )
+		domainSource : DomainSource ( )
 		instance : DomainIterator( eContainer == container )
-		select : SelectWire ( )
-		eval ( functions.connectsSelect(select, obj, instance )) 
+
+		selectEdge : SelectEdge ( eval ( functions.connectsSelect(selectEdge, instance, domainSource )) )
+		schemaEdge : SchemaEdge ( eval ( functions.connectsSchema(schemaEdge, domainSource, schema )) )
 		
 		source : VisibleThing ( eContainer == container )
 		target : Frame ( )
@@ -232,11 +237,13 @@ end
 rule "Create a Link Button for the source of a DetailWire: Add Parameter from AttributeInstance"
 	when
 		container : Frame( )
-		obj : DomainObject( )
 		
+		schema : DomainSchema ( )
+		domainSource : DomainSource ( )
 		instance : DomainIterator( eContainer == container )
-		select : SelectWire ( )
-		eval ( functions.connectsSelect(select, obj, instance ))
+
+		selectEdge : SelectEdge ( eval ( functions.connectsSelect(selectEdge, instance, domainSource )) )
+		schemaEdge : SchemaEdge ( eval ( functions.connectsSchema(schemaEdge, domainSource, schema )) )
 		
 		source : VisibleThing ( eContainer == container )
 		target : Frame ( )
@@ -248,7 +255,7 @@ rule "Create a Link Button for the source of a DetailWire: Add Parameter from At
 		onClick : EventTrigger ( button.onClick == onClick )
 		nav : NavigateAction ( from == onClick, to == target )
 
-		pkAttribute : DomainAttribute ( eContainer == obj, primaryKey == true )
+		pkAttribute : DomainAttribute ( eContainer == schema, primaryKey == true )
 		pkInstance : DomainAttributeInstance ( eContainer == instance )
 		ExtendsEdge ( from == pkInstance, to == pkAttribute )
 		

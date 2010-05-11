@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.127e56efe3e.1">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
-    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.ded" name="select" outWires="wires.127e56eff0a.6" outSelects="domain.128807fbeba.df1">
+    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.ded" name="iterable" outWires="wires.127e56eff0a.6" outSelects="domain.128807fbeba.df1">
       <operations xsi:type="iaml:PrimitiveOperation" id="model.127e5a8fec3.94" name="save" inActions="wires.127e5a8ff7e.99"/>
       <wires xsi:type="iaml.wires:SyncWire" id="wires.127e56eff0a.6" from="domain.128807fbeba.ded" to="visual.127e56efefa.1e" name="sync"/>
       <previous xsi:type="iaml:PrimitiveOperation" id="model.127e56efe3e.122" name="previous" inActions="wires.127e56eff0a.2b wires.127e56eff0a.2d"/>

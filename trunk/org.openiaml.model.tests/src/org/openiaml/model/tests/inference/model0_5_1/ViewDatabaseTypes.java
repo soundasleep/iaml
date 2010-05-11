@@ -6,10 +6,9 @@ package org.openiaml.model.tests.inference.model0_5_1;
 import org.openiaml.model.datatypes.BuiltinDataTypes;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainAttributeInstance;
-import org.openiaml.model.model.DomainObject;
-import org.openiaml.model.model.DomainObjectInstance;
-import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.Property;
+import org.openiaml.model.model.domain.DomainIterator;
+import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.Label;
@@ -33,8 +32,7 @@ public class ViewDatabaseTypes extends InferenceTestCase {
 	 * @throws Exception
 	 */
 	public void testDatabaseTypes() throws Exception {
-		DomainStore store = assertHasDomainStore(root, "Database");
-		DomainObject obj = assertHasDomainObject(store, "Container");
+		DomainSchema obj = assertHasDomainSchema(root, "Container");
 		
 		DomainAttribute aString = assertHasDomainAttribute(obj, "string");
 		DomainAttribute aInteger = assertHasDomainAttribute(obj, "integer");
@@ -48,7 +46,6 @@ public class ViewDatabaseTypes extends InferenceTestCase {
 		assertEquals(aEmail.getType(), BuiltinDataTypes.getTypeEmail());
 		assertEquals(aAddress.getType(), BuiltinDataTypes.getTypeAddress());
 		
-		assertNotGenerated(store);
 		assertNotGenerated(obj);
 		assertNotGenerated(aString);
 		assertNotGenerated(aInteger);
@@ -64,8 +61,7 @@ public class ViewDatabaseTypes extends InferenceTestCase {
 	 * @throws Exception
 	 */
 	public void testAttributeInstancesHaveCorrectTypes() throws Exception {
-		DomainStore store = assertHasDomainStore(root, "Database");
-		DomainObject obj = assertHasDomainObject(store, "Container");
+		DomainSchema obj = assertHasDomainSchema(root, "Container");
 		
 		DomainAttribute aString = assertHasDomainAttribute(obj, "string");
 		DomainAttribute aInteger = assertHasDomainAttribute(obj, "integer");
@@ -74,7 +70,7 @@ public class ViewDatabaseTypes extends InferenceTestCase {
 		DomainAttribute aAddress = assertHasDomainAttribute(obj, "address");
 		
 		Frame view = assertHasFrame(root, "View");
-		DomainObjectInstance instance = assertHasDomainObjectInstance(view, "Viewed");
+		DomainIterator instance = assertHasDomainIterator(view, "Viewed");
 		
 		DomainAttributeInstance iString = assertHasDomainAttributeInstance(instance, "string");
 		DomainAttributeInstance iInteger = assertHasDomainAttributeInstance(instance, "integer");
@@ -133,7 +129,7 @@ public class ViewDatabaseTypes extends InferenceTestCase {
 	 */
 	public void testFormHasCorrectTypes() throws Exception {
 		Frame view = assertHasFrame(root, "View");
-		DomainObjectInstance instance = assertHasDomainObjectInstance(view, "Viewed");
+		DomainIterator instance = assertHasDomainIterator(view, "Viewed");
 		
 		DomainAttributeInstance iString = assertHasDomainAttributeInstance(instance, "string");
 		DomainAttributeInstance iInteger = assertHasDomainAttributeInstance(instance, "integer");

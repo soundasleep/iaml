@@ -7,14 +7,13 @@ import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.DomainAttributeInstance;
-import org.openiaml.model.model.DomainObject;
-import org.openiaml.model.model.DomainObjectInstance;
-import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.StaticValue;
+import org.openiaml.model.model.domain.DomainIterator;
+import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.operations.Arithmetic;
 import org.openiaml.model.model.operations.ArithmeticOperationTypes;
 import org.openiaml.model.model.operations.CancelNode;
@@ -27,7 +26,6 @@ import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.Label;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.RunAction;
-import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
@@ -47,21 +45,16 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		Frame home = assertHasFrame(root, "Home");
 		assertNotGenerated(home);
 
-		DomainObjectInstance instance = assertHasDomainObjectInstance(home, "view news");
+		DomainIterator instance = assertHasDomainIterator(home, "view news");
 		assertNotGenerated(instance);
 
 		InputForm form = assertHasInputForm(home, "view news");
 		assertNotGenerated(form);
 
-		DomainStore store = assertHasDomainStore(root, "News");
-		assertNotGenerated(store);
-
-		DomainObject object = assertHasDomainObject(store, "News Item");
+		DomainSchema object = assertHasDomainSchema(root, "News Item");
 		assertNotGenerated(object);
 
-		SelectWire select = assertHasSelectWire(root, object, instance, "select");
-		assertNotGenerated(select);
-		assertEquals(5, select.getLimit());
+		assertEquals(5, instance.getLimit());
 
 		SetWire wire = assertHasSetWire(root, instance, form);
 		assertNotGenerated(wire);
@@ -96,7 +89,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 	 */
 	public void testInstanceCreated() throws Exception {
 		Frame home = assertHasFrame(root, "Home");
-		DomainObjectInstance instance = assertHasDomainObjectInstance(home, "view news");
+		DomainIterator instance = assertHasDomainIterator(home, "view news");
 
 		assertNotNull(instance.getOnIterate());
 		assertNotNull(instance.getPrevious());
@@ -145,7 +138,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		Frame home = assertHasFrame(root, "Home");
 		InputForm form = assertHasInputForm(home, "view news");
 
-		DomainObjectInstance instance = assertHasDomainObjectInstance(home, "view news");
+		DomainIterator instance = assertHasDomainIterator(home, "view news");
 
 		Operation inext = instance.getNext();
 		Condition hasNext = instance.getHasNext();
@@ -171,7 +164,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		Frame home = assertHasFrame(root, "Home");
 		InputForm form = assertHasInputForm(home, "view news");
 
-		DomainObjectInstance instance = assertHasDomainObjectInstance(home, "view news");
+		DomainIterator instance = assertHasDomainIterator(home, "view news");
 		Operation iprevious = instance.getPrevious();
 		Condition hasPrevious = instance.getHasPrevious();
 
@@ -196,7 +189,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		Frame home = assertHasFrame(root, "Home");
 		InputForm form = assertHasInputForm(home, "view news");
 
-		DomainObjectInstance instance = assertHasDomainObjectInstance(home, "view news");
+		DomainIterator instance = assertHasDomainIterator(home, "view news");
 		Operation ireset = instance.getReset();
 
 		// we need to reverse 'empty' into condition 'not empty'
@@ -224,7 +217,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		Frame home = assertHasFrame(root, "Home");
 		InputForm form = assertHasInputForm(home, "view news");
 
-		DomainObjectInstance instance = assertHasDomainObjectInstance(home, "view news");
+		DomainIterator instance = assertHasDomainIterator(home, "view news");
 		Operation ijump = instance.getJump();
 
 		// we need to reverse 'empty' into condition 'not empty'
@@ -260,7 +253,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 	public void testLastButtonUpdatesTargetProperty() throws Exception {
 		Frame home = assertHasFrame(root, "Home");
 		InputForm form = assertHasInputForm(home, "view news");
-		DomainObjectInstance instance = assertHasDomainObjectInstance(home, "view news");
+		DomainIterator instance = assertHasDomainIterator(home, "view news");
 		Operation ijump = instance.getJump();
 
 		// we need to reverse 'empty' into condition 'not empty'
@@ -290,7 +283,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 	public void testContentsOfUpdateTarget() throws Exception {
 		Frame home = assertHasFrame(root, "Home");
 		InputForm form = assertHasInputForm(home, "view news");
-		DomainObjectInstance instance = assertHasDomainObjectInstance(home, "view news");
+		DomainIterator instance = assertHasDomainIterator(home, "view news");
 		Property results = instance.getResults();
 
 		Button last = assertHasButton(form, "Last");
@@ -324,7 +317,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 	 */
 	public void testContentsOfNotEmpty() throws Exception {
 		Frame home = assertHasFrame(root, "Home");
-		DomainObjectInstance instance = assertHasDomainObjectInstance(home, "view news");
+		DomainIterator instance = assertHasDomainIterator(home, "view news");
 		Condition empty = instance.getEmpty();
 
 		// we need to reverse 'empty' into condition 'not empty'
@@ -357,7 +350,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 	public void testResultsLabel() throws Exception {
 		Frame home = assertHasFrame(root, "Home");
 		InputForm form = assertHasInputForm(home, "view news");
-		DomainObjectInstance instance = assertHasDomainObjectInstance(home, "view news");
+		DomainIterator instance = assertHasDomainIterator(home, "view news");
 		Property results = instance.getResults();
 		Label labelResults = assertHasLabel(form, "Results");
 
@@ -380,7 +373,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 	public void testAttributeCallsLabelUpdate() throws Exception {
 		Frame home = assertHasFrame(root, "Home");
 		InputForm form = assertHasInputForm(home, "view news");
-		DomainObjectInstance instance = assertHasDomainObjectInstance(home, "view news");
+		DomainIterator instance = assertHasDomainIterator(home, "view news");
 
 		DomainAttributeInstance a1 = assertHasDomainAttributeInstance(instance, "title");
 		assertGenerated(a1);

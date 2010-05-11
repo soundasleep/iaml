@@ -14,7 +14,7 @@
  *		{@model DomainObjectInstance#empty} will return <code>true</code> even if
  *		the current arguments are not even set; i.e. it will fail silently.
  */
-«DEFINE iterateDefinitions FOR model::DomainObjectInstance-»
+«DEFINE iterateDefinitions FOR model::domain::DomainIterator-»
 	/**
 	 * Cycle through all attributes and call onChange. Will fail if it
 	 * is out of bounds.

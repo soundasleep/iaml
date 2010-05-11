@@ -96,7 +96,7 @@
 	«FILE "output/add_permission.php"»«EXPAND php::includes::AddPermissionPhp::addPermissionPhp»«ENDFILE»
 	«FILE "output/remove_role.php"»«EXPAND php::includes::RemoveRolePhp::removeRolePhp»«ENDFILE»
 	«FILE "output/remove_permission.php"»«EXPAND php::includes::RemovePermissionPhp::removePermissionPhp»«ENDFILE»
-	«IF !eAllContents.typeSelect(model::DomainObjectInstance).isEmpty»
+	«IF !eAllContents.typeSelect(model::domain::DomainIterator).isEmpty»
 		«FILE "output/instance_next.php"»«EXPAND php::includes::InstanceNextPhp::instanceNextPhp»«ENDFILE»
 		«FILE "output/instance_previous.php"»«EXPAND php::includes::InstancePreviousPhp::instancePreviousPhp»«ENDFILE»
 		«FILE "output/instance_reset.php"»«EXPAND php::includes::InstanceResetPhp::instanceResetPhp»«ENDFILE»
@@ -111,8 +111,6 @@
 	
 	«FILE "output/database_dump.php"»«EXPAND template::php::DatabaseDump::databaseDump»«ENDFILE»
 	«FILE "output/view_log.php"»«EXPAND php::includes::ViewLog::viewLog»«ENDFILE»
-
-	«FILE "output/create_database.php"»«EXPAND php::includes::CreateDatabasePhp::createDatabasePhp»«ENDFILE»
 «ENDDEFINE»
 
 «DEFINE phpCheck FOR model::InternetApplication»
@@ -137,7 +135,6 @@ define("CUSTOM_PATH", ROOT_PATH . "../");
 define('SCRIPT_NAME', '«script_name»');
 require(ROOT_PATH . "config.php");		// runtime library configuration
 require(ROOT_PATH . IAML_RUNTIME_ROOT . "global.php");	// runtime library import
-require(ROOT_PATH . "create_database.php");		// ensure DB exists
 require(ROOT_PATH . "update_client_cache.php");
 require(ROOT_PATH . "email_definitions.php");
 «ENDDEFINE»

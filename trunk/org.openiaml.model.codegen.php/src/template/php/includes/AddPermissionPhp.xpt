@@ -21,7 +21,7 @@ log_message("add_permission.php: adding permission_id=$permission_id, instance_i
 
 $iterator = null;
 switch ($instance_id) {
-«FOREACH eAllContents.typeSelect(model::users::UserInstance) AS u»
+«FOREACH eAllContents.typeSelect(model::domain::DomainIterator) AS u»
 	case "«safeName(u)»":
 		$iterator = DomainIterator_«safeName(u)»::getInstance();
 		break;

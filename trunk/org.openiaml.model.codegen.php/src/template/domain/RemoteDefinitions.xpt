@@ -10,15 +10,15 @@
 /**
  * Method definitions.
  */
-«DEFINE remoteDefinitions FOR model::domain::RemoteDomainObject-»
+«DEFINE remoteDefinitions FOR model::domain::DomainSource-»
 	/**
-	 * Does the remote object '«safeNameString(name)»' need refreshing?
-	 * This object needs updating every «age» seconds.
+	 * Does the remote source '«safeNameString(name)»' need refreshing?
+	 * This object needs updating every «cache» seconds.
 	 */
 	function needs_remote_refresh_«safeName()»() {
 		return time() >
 			get_application_value('remote_object_«safeName()»_updated', 0)
-			+ «age»;			
+			+ «cache»;			
 	}
 	
 	/**
@@ -59,13 +59,14 @@
 		}
 		
 		// now parse over the XML as RSS
+		«FOREACH outSchemas.to AS schema»
 		$resultQueries = array();
 		$resultArgs = array();
 		$items = $xml->xpath("/rss/channel/item");
 		log_message("[remote] RSS items: " . count($items));
 		foreach ($items as $item) {
 			$args = array();
-			«FOREACH attributes AS attr»
+			«FOREACH schema.attributes AS attr»
 				/* attribute '«safeName(attr)»' */
 				«REM»in simplexml, nodes are accessed through obj->foo«ENDREM»
 				if (isset($item->«safeNameString(attr.name)»)) {
@@ -91,7 +92,7 @@
 				// construct insert query
 				// only include provided data; everything else will be default values
 				$first = true;
-				$query = "INSERT INTO «safeNameString(name)» (";
+				$query = "INSERT INTO «safeNameString(schema.name)» (";
 				foreach ($args as $key => $value) {
 					if (!$first) $query .= ", ";
 					$query .= $key;
@@ -118,7 +119,7 @@
 		«EXPAND Select::selectDatabase»
 		
 		log_message("[remote] Deleting existing records");
-		$query = "DELETE FROM «safeNameString(name)» WHERE 1";
+		$query = "DELETE FROM «safeNameString(schema.name)» WHERE 1";
 		$db_query = new DatabaseQuery($db_name);
 		$db_query->execute($query, array());
 		
@@ -130,6 +131,7 @@
 			$db_query = new DatabaseQuery($db_name);
 			$db_query->execute($query, $args);
 		}
+		«ENDFOREACH»
 	
 		// save updated time
 		log_message("[remote] Setting updated time to " . time());
@@ -138,7 +140,7 @@
 «ENDDEFINE»
 
 /* Possibly update the remote domain object. */
-«DEFINE considerUpdate FOR model::domain::RemoteDomainObject-»
+«DEFINE considerUpdate FOR model::domain::DomainSource-»
 	if (needs_remote_refresh_«safeName()»()) {
 		remote_object_«safeName()»_refresh();
 	}

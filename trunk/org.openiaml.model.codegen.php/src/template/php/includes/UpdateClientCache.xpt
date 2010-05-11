@@ -43,7 +43,7 @@
 «ENDDEFINE»
 
 «DEFINE updateCachedPrimitiveConditions FOR model::PrimitiveCondition»
-	«LET ((model::DomainObjectInstance) eContainer) AS object»
+	«LET ((model::domain::DomainIterator) eContainer) AS object»
 		
 		{
 			// primitive condition '«name»'

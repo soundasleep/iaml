@@ -19,20 +19,18 @@
  *		When a {@model Role} is removed from a {@model UserInstance}, all
  *		subtype {@model Role}s are not also automatically removed. This is probably inconsistent.
  */
-«DEFINE roleFunctions FOR model::users::Role»
+«DEFINE roleFunctions(model::domain::DomainSource userStore) FOR model::users::Role»
 
 /**
  * Add the role '«name»' to the given instance in the iterator $iterator;
  * this $iterator can be pointing towards any DomainSchema, as long as both 
  * the given role and the schema eventually extend <code>iaml_user_root</code> table.
  */
-function add_role_«safeName()»(DomainIterator $iterator) {
+function add_role_«safeName()»_«safeName(userStore)»(DomainIterator $iterator) {
 	log_message("[role] Adding role 'name»' to iterator " . $iterator->toString());
 
 	// get the root ID
-	«LET getContainingUserStore() AS userStore»
-		$attribute = DomainAttribute_UserRoot_«safeName(userStore)»_ID::getInstance();
-	«ENDLET»
+	$attribute = DomainAttribute_UserRoot_«safeName(userStore)»_ID::getInstance();
 	$root_user_id = $iterator->getAttributeInstance($attribute)->getValue();
 	
 	if ($root_user_id === null) {
@@ -55,10 +53,10 @@ function add_role_«safeName()»(DomainIterator $iterator) {
 	«FOREACH outExtendsEdges.to.typeSelect(model::users::Role) AS superType»
 	{
 		// make sure it exists first (recursive)
-		add_role_«safeName(superType)»($iterator);
+		add_role_«safeName(superType)»_«safeName(userStore)»($iterator);
 		
 		// $schema = DomainSchema_«safeName(superType)»::getInstance();
-		$role_instance = HasRole_«safeName(superType)»::getInstance($root_user_id);
+		$role_instance = HasRole_«safeName(superType)»_«safeName(userStore)»::getInstance($root_user_id);
 		
 		if ($role_instance->isEmpty()) {
 			throw new IamlRuntimeException("Unexpectedly could not create parent role '«superType.name»'");
@@ -112,16 +110,14 @@ function add_role_«safeName()»(DomainIterator $iterator) {
  *		When a {@model Role} is removed from a {@model UserInstance}, the {@model UserInstance}
  *		is reloaded explicitly.
  */
-function remove_role_«safeName()»(DomainIterator $iterator) {
+function remove_role_«safeName()»_«safeName(userStore)»(DomainIterator $iterator) {
 	// reload
 	$iterator->reload();
 
 	log_message("[role] Removing role 'name»' to iterator " . $iterator->toString());
 	
 	// get the root ID
-	«LET getContainingUserStore() AS userStore»
-		$attribute = DomainAttribute_UserRoot_«safeName(userStore)»_ID::getInstance();
-	«ENDLET»
+	$attribute = DomainAttribute_UserRoot_«safeName(userStore)»_ID::getInstance();
 	$root_user_id = $iterator->getAttributeInstance($attribute)->getValue();
 	
 	if ($root_user_id === null) {
@@ -129,12 +125,12 @@ function remove_role_«safeName()»(DomainIterator $iterator) {
 	}
 	
 	// has this role already been removed?
-	if (HasRole_«safeName()»::getInstance($root_user_id)->isEmpty()) {
+	if (HasRole_«safeName()»_«safeName(userStore)»::getInstance($root_user_id)->isEmpty()) {
 		log_message("[role] Role already removed");
 		return; 
 	}
 	
-	$target_iterator = HasRole_«safeName()»::getInstance($root_user_id);
+	$target_iterator = HasRole_«safeName()»_«safeName(userStore)»::getInstance($root_user_id);
 	
 	// this schema
 	$this_schema = DomainSchema_«safeName()»::getInstance();

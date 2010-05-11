@@ -462,9 +462,9 @@
  * Save a domain object instance.
  */
 «DEFINE saveOperation(model::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
-	«IF model::DomainObjectInstance.isInstance(eContainer)»
+	«IF model::domain::DomainIterator.isInstance(eContainer)»
 		/* save object instance */
-		«LET (model::DomainObjectInstance) eContainer AS instance»
+		«LET (model::domain::DomainIterator) eContainer AS instance»
 			«IF php»
 				save_queued_store_domain_object_«safeNameString(instance.id)-»();
 			«ELSE»
@@ -504,9 +504,9 @@
  * Create a new domain object instance.
  */
 «DEFINE newOperation(model::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
-	«IF model::DomainObjectInstance.isInstance(eContainer)»
+	«IF model::domain::DomainIterator.isInstance(eContainer)»
 		/* new instance */
-		«LET (model::DomainObjectInstance) eContainer AS instance»
+		«LET (model::domain::DomainIterator) eContainer AS instance»
 			«IF php»
 				new_domain_instance_«safeNameString(instance.id)»();
 			«ELSE»

@@ -20,7 +20,9 @@
 /**
  * Adding roles.
  */
-«EXPAND Roles::roleFunctions»
+«FOREACH inSchemas.from AS source»
+	«EXPAND Roles::roleFunctions(source)»
+«ENDFOREACH»
 	«ENDFILE»
 «ENDDEFINE»
 

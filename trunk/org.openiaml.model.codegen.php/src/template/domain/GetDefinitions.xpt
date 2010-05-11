@@ -15,7 +15,7 @@
 	 * Returns the current value for attribute ID '«id»'.
 	 */
 	function get_attribute_instance_«safeName()»($default = false) {
-		«IF model::DomainObjectInstance.isInstance(eContainer)»
+		«IF model::domain::DomainIterator.isInstance(eContainer)»
 			/* contained in an object instance '«eContainer»': get it from the instance */
 			$iterator = DomainIterator_«safeName(eContainer)»::getInstance();
 		«ELSE»
@@ -50,9 +50,9 @@
 	 * Returns true or false.
 	 */
 	function has_attribute_instance_«safeName()»($default = false) {
-		«EXPAND checkIncomingParameters("false")»
+		«IF model::domain::DomainIterator.isInstance(eContainer)»
+			«EXPAND checkIncomingParameters("false") FOR (model::domain::DomainIterator) eContainer»
 	
-		«IF model::DomainObjectInstance.isInstance(eContainer)»
 			/* contained in an object instance '«eContainer»': get it from the instance */
 			$iterator = DomainIterator_«safeName(eContainer)»::getInstance();
 		«ELSE»
@@ -64,38 +64,16 @@
 
 «ENDDEFINE»
 
-/**
- * Check that all SelectWires incoming to this DomainObjectInstance or DomainAttributeInstance
- * can be evaluated without failing; return $return if this would cause an error.
- */
-«DEFINE checkIncomingParameters(String return) FOR model::DomainAttributeInstance»
-	// check that all required parameters for this DomainAttributeInstance are present	
-	«FOREACH inWires.typeSelect(model::wires::SelectWire) AS wire»
-		«IF !wire.inParameterEdges.isEmpty»
-			if (!(«EXPAND template::operations::Parameters::callParameterExists FOREACH wire.inParameterEdges SEPARATOR " && "»)) {
-				return «return»;
-			}
-		«ENDIF»
-	«ENDFOREACH»
-	«IF model::DomainObjectInstance.isInstance(eContainer)»
-	«LET (model::DomainObjectInstance) eContainer AS obj»
-		«EXPAND checkIncomingParameters(return) FOR obj»
-	«ENDLET»
+«DEFINE checkIncomingParameters(String return) FOR model::domain::DomainIterator»
+	// check that all required parameters for this DomainObjectInstance are present	
+	«IF !inParameterEdges.isEmpty»
+		if (!(«EXPAND template::operations::Parameters::callParameterExists FOREACH inParameterEdges SEPARATOR " && "»)) {
+			return «return»;
+		}
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE checkIncomingParameters(String return) FOR model::DomainObjectInstance»
-	// check that all required parameters for this DomainObjectInstance are present	
-	«FOREACH inWires.typeSelect(model::wires::SelectWire) AS wire»
-		«IF !wire.inParameterEdges.isEmpty»
-			if (!(«EXPAND template::operations::Parameters::callParameterExists FOREACH wire.inParameterEdges SEPARATOR " && "»)) {
-				return «return»;
-			}
-		«ENDIF»
-	«ENDFOREACH»
-«ENDDEFINE»
-
-«DEFINE getDomainObject FOR model::DomainObjectInstance-»
+«DEFINE getDomainObject FOR model::domain::DomainIterator-»
 	/**
 	 * Contains all of the Events that need to occur when 'onChange'
 	 * is called, if any.
@@ -111,9 +89,9 @@
 	 * If a {@model RemoteDomainObject}, this may refresh the remote data source.
 	 */
 	function get_object_instance_«safeName()»($default = false) {
-		«FOREACH inWires.typeSelect(model::wires::SelectWire).from.typeSelect(model::domain::RemoteDomainObject) AS rdo»
+		«FOREACH outSelects.to.select(s|s.type == model::domain::DomainStoreTypes::RSS2_0) AS remoteSource»
 			// possibly update the domain object this instance is contained in
-			«EXPAND RemoteDefinitions::considerUpdate FOR rdo»
+			«EXPAND RemoteDefinitions::considerUpdate FOR remoteSource»
 		«ENDFOREACH»
 					
 		$iterator = DomainIterator_«safeName()»::getInstance();
@@ -133,9 +111,9 @@
 	 * returns <code>0</code> rather than crashing.
 	 */
 	function get_instance_count_«safeName()»() {
-		«FOREACH inWires.typeSelect(model::wires::SelectWire).from.typeSelect(model::domain::RemoteDomainObject) AS rdo»
+		«FOREACH outSelects.to.select(s|s.type == model::domain::DomainStoreTypes::RSS2_0) AS remoteSource»
 			// possibly update the domain object this instance is contained in
-			«EXPAND RemoteDefinitions::considerUpdate FOR rdo»
+			«EXPAND RemoteDefinitions::considerUpdate FOR remoteSource»
 		«ENDFOREACH»
 
 		«EXPAND GetDefinitions::checkIncomingParameters("0")»
@@ -153,9 +131,9 @@
 	 * Returns true or false.
 	 */
 	function has_object_instance_«safeName()»($default = false) {
-		«FOREACH inWires.typeSelect(model::wires::SelectWire).from.typeSelect(model::domain::RemoteDomainObject) AS rdo»
+		«FOREACH outSelects.to.select(s|s.type == model::domain::DomainStoreTypes::RSS2_0) AS remoteSource»
 			// possibly update the domain object this instance is contained in
-			«EXPAND RemoteDefinitions::considerUpdate FOR rdo»
+			«EXPAND RemoteDefinitions::considerUpdate FOR remoteSource»
 		«ENDFOREACH»
 
 		«EXPAND GetDefinitions::checkIncomingParameters("false")»

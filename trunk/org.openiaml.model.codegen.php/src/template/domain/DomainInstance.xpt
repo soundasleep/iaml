@@ -11,18 +11,18 @@
 /**
  * Domain instance methods. (Copied from Javascript. TODO refactor with code above)
  */
-«DEFINE domainInstanceCall(Boolean php, model::wires::RunAction wire, model::DomainObjectInstance object) FOR model::WireDestination»
+«DEFINE domainInstanceCall(Boolean php, model::wires::RunAction wire, model::domain::DomainIterator object) FOR model::WireDestination»
 	«throwException("Unexpected domain attribute run instance wire destination: " + this)»
 «ENDDEFINE»
 
-«DEFINE domainInstanceCall(Boolean php, model::wires::RunAction wire, model::DomainObjectInstance object) FOR model::ActionDestination»
+«DEFINE domainInstanceCall(Boolean php, model::wires::RunAction wire, model::domain::DomainIterator object) FOR model::ActionDestination»
 	«throwException("Unexpected domain attribute run instance action destination: " + this)»
 «ENDDEFINE»
 
 /**
  * An operation defined by containing feature.
  */
-«DEFINE domainInstanceCall(Boolean php, model::wires::RunAction wire, model::DomainObjectInstance object) FOR model::Operation»
+«DEFINE domainInstanceCall(Boolean php, model::wires::RunAction wire, model::domain::DomainIterator object) FOR model::Operation»
 	«IF php»
 		«IF object.previous == this»
 			object_instance_previous_«safeNameString(object.id)»()
@@ -57,7 +57,7 @@
 /**
  * An operation defined by name.
  */
-«DEFINE namedDomainInstanceCall(Boolean php, model::wires::RunAction wire, model::DomainObjectInstance object) FOR model::Operation»
+«DEFINE namedDomainInstanceCall(Boolean php, model::wires::RunAction wire, model::domain::DomainIterator object) FOR model::Operation»
 	«IF php»
 		«IF name=="save"»
 			save_queued_store_domain_object_«safeNameString(object.id)»()
@@ -136,7 +136,7 @@
 /**
  * A condition defined by containing feature.
  */
-«DEFINE domainInstanceCondition(Boolean php, model::DomainObjectInstance instance) FOR model::PrimitiveCondition»
+«DEFINE domainInstanceCondition(Boolean php, model::domain::DomainIterator instance) FOR model::PrimitiveCondition»
 	«IF php»
 		«IF instance.hasNext == this»
 			can_object_instance_next_«safeName(instance)»()

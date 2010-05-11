@@ -76,7 +76,7 @@
 			«IF model::DomainAttributeInstance.isInstance(eContainer)»
 				«REM»from a DomainAttributeInstance«ENDREM»
 				«EXPAND RemoteParameter::remoteValue(php, false, this) FOR this.eContainer-»
-			«ELSEIF isDomainObjectInstanceResults()»
+			«ELSEIF isDomainIteratorResults()»
 				/* from the DomainObjectInstance */
 				get_instance_count_«safeName(eContainer)»()
 			«ELSEIF containingSession(this) != null»
@@ -213,8 +213,8 @@
 		«ENDREM»
 		«IF model::DomainAttributeInstance.isInstance(eContainer)»
 			«REM»from a DomainAttributeInstance«ENDREM»
-			«EXPAND RemoteParameter::remoteValueIsSet(php, this) FOR this.eContainer-»
-		«ELSEIF isDomainObjectInstanceResults()»
+			«EXPAND RemoteParameter::remoteValueIsSet(php, this) FOR (model::DomainAttributeInstance) eContainer-»
+		«ELSEIF isDomainIteratorResults()»
 			/* DomainObjectInstance count is always available */
 			true			
 		«ELSEIF containingSession(this) != null»
@@ -228,7 +228,7 @@
 			«REM»where is this value stored? is it available on the current frame?«ENDREM»
 			«IF model::DomainAttributeInstance.isInstance(eContainer)»
 				«REM»from a DomainAttributeInstance«ENDREM»
-				«EXPAND RemoteParameter::remoteValueIsSet(php, this) FOR this.eContainer-»
+				«EXPAND RemoteParameter::remoteValueIsSet(php, this) FOR (model::DomainAttributeInstance) eContainer-»
 			«ELSEIF model::visual::InputTextField.isInstance(eContainer) || 
 				model::visual::Label.isInstance(eContainer) ||
 				model::visual::Map.isInstance(eContainer) ||
@@ -237,7 +237,7 @@
 				/* if you _don't_ want an operation to use a cached value of a remote Input Text Field/Label, place the operation _outside_ of its containing frame. */
 				<?php echo («EXPAND isSetParameter(true) FOR this») ? "true" : "false"; ?>
 			«ELSE»
-				«EXPAND RemoteParameter::remoteValueIsSet(php, this) FOR this.eContainer-»
+				«throwException("Unknown remote is set eContainer: " + eContainer + " for " + this)»
 			«ENDIF»
 		«ELSE»
 			has_application_element_property("«safeName()-»")

@@ -39,7 +39,7 @@ echo "ok";
 /* Is there additional actions we should do on the client-side once this
  * property has changed? */
 try {
-	«EXPAND potentialDomainObjectInstanceUpdatesRequired FOREACH eAllContents.typeSelect(model::DomainObjectInstance)»
+	«EXPAND potentialDomainObjectInstanceUpdatesRequired FOREACH eAllContents.typeSelect(model::domain::DomainIterator)»
 } catch (IamlRuntimeException $e) {
 	// redirect to the exception frame
 	$url = "exception.php?fail=" . urlencode($e->getMessage() . " [from setApplicationValue]");
@@ -57,7 +57,7 @@ echo_necessary_update_callbacks();
 
 «ENDDEFINE»
 
-«DEFINE potentialDomainObjectInstanceUpdatesRequired FOR model::DomainObjectInstance»
+«DEFINE potentialDomainObjectInstanceUpdatesRequired FOR model::domain::DomainIterator»
 	if ($id == "«safeName()-»") {
 		/* DomainObjectInstance "«name-»" («id-») */
 		

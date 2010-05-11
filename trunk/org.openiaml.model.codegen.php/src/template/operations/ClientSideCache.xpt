@@ -19,7 +19,7 @@
 «ENDDEFINE»
 
 «DEFINE cachedPrimitiveConditions FOR model::PrimitiveCondition»
-	«LET ((model::DomainObjectInstance) eContainer) AS object»
+	«LET ((model::domain::DomainIterator) eContainer) AS object»
 		// primitive condition '«name»'
 		
 		// initial value (i.e. at execution time)

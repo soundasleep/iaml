@@ -32,31 +32,33 @@
 		<?php
 		«EXPAND template::Template::phpCheck»
 		
-		«EXPAND RemoteDefinitions::remoteDefinitions FOREACH getRoot().eAllContents.typeSelect(model::domain::RemoteDomainObject)»
+		«EXPAND RemoteDefinitions::remoteDefinitions FOREACH getRoot().eAllContents.typeSelect(model::domain::DomainSource).select(s|s.type == model::domain::DomainStoreTypes::RSS2_0)»
 
-		«EXPAND GetDefinitions::getDomainObject FOREACH getRoot().getAllDomainObjectInstances()»
-		«EXPAND StoreDefinitions::storeDomainObject FOREACH getRoot().getAllDomainObjectInstances()»
-		«EXPAND IterateDefinitions::iterateDefinitions FOREACH getRoot().getAllDomainObjectInstances()»
+		«EXPAND GetDefinitions::getDomainObject FOREACH getRoot().getAllDomainIterators()»
+		«EXPAND StoreDefinitions::storeDomainObject FOREACH getRoot().getAllDomainIterators()»
+		«EXPAND IterateDefinitions::iterateDefinitions FOREACH getRoot().getAllDomainIterators()»
 
-		/* offset definitions for attributes not contained within a domain iterator */
-		«EXPAND IterateDefinitions::iterateDefinitions FOREACH getRoot().eAllContents.typeSelect(model::DomainAttributeInstance).select(e|!model::DomainObjectInstance.isInstance(e.eContainer))»
-
-		«EXPAND domainSchemaDefinition FOREACH getRoot().getAllDomainObjects()»
+		«EXPAND domainSchemaDefinition FOREACH getRoot().getAllDomainSchemas()»
 		«EXPAND domainAttributeDefinition FOREACH getRoot().eAllContents.typeSelect(model::DomainAttribute)»
-		«EXPAND domainSourceDefinition FOREACH getRoot().eAllContents.typeSelect(model::DomainStore)»
-		«EXPAND domainIteratorDefinition FOREACH getRoot().eAllContents.typeSelect(model::DomainObjectInstance)»
+		«EXPAND domainSourceDefinition FOREACH getRoot().eAllContents.typeSelect(model::domain::DomainSource)»
+		«FOREACH sources AS source»
+			«EXPAND domainIteratorDefinition(source) FOREACH source.inSelects.from»
+		«ENDFOREACH»
 		
-		/* domain iterators for attributes not contained within a domain iterator */
-		«EXPAND domainIteratorDefinition FOREACH getRoot().eAllContents.typeSelect(model::DomainAttributeInstance).select(e|!model::DomainObjectInstance.isInstance(e.eContainer))»
-		
-		/* user store definitions */
-		«EXPAND domainSchemaDefinition FOREACH getRoot().eAllContents.typeSelect(model::users::UserStore)»
+		/* role defintions */
+		«FOREACH sources.select(s|!s.outSchemas.to.typeSelect(model::users::Role).isEmpty) AS source»
+			«EXPAND domainUserDefinition(source) FOREACH source.inSelects.from»
+		«ENDFOREACH»
+						
 	«ENDFILE»
 «ENDDEFINE»
 
-«DEFINE domainSchemaDefinition FOR model::users::UserStore»
 /**
- * Root User Role for User Store '«escapeString(name)»'
+ * Definitions for DomainSources which also provide User instances.
+ */
+«DEFINE domainUserDefinition(model::domain::DomainSource source) FOR model::domain::DomainIterator»
+/**
+ * Root User Role for Source '«escapeString(name)»'
  */
 class DomainSchema_UserRoot_«safeName()» extends DomainSchema {
 	private function __construct() {
@@ -129,10 +131,10 @@ class Permission_«safeName(p)» extends DomainAttribute {
 /**
  * Permission checks.
  */
-«EXPAND template::users::Permissions::permissionChecks»
+«EXPAND template::users::Permissions::permissionChecks FOREACH source.outSchemas.to.typeSelect(model::users::Role)»
 «ENDDEFINE»
 
-«DEFINE domainSchemaDefinition FOR model::DomainObject»
+«DEFINE domainSchemaDefinition FOR model::domain::DomainSchema»
 /**
  * Domain Schema '«escapeString(name)»'
  */
@@ -187,15 +189,16 @@ class DomainAttribute_UserRole_«safeName()»_Link extends DomainAttribute {
 }
 	«ENDIF»
 
+«FOREACH inSchemas.from AS source»
 /**
  * A simple DomainIterator to see if a given Role exists for the given root ID.
  */
-class HasRole_«safeName()» extends DomainIterator {
+class HasRole_«safeName()»_«safeName(source)» extends DomainIterator {
 	var $root_user_id;
 
 	private function __construct($root_user_id) {
 		$this->schema = DomainSchema_«safeName()»::getInstance();
-		$this->source = DomainSource_«safeName(getContainingUserStore(this))»::getInstance();
+		$this->source = DomainSource_«safeName(source)»::getInstance();
 
 		$this->order_by = null;
 		$this->order_ascending = true;
@@ -237,12 +240,13 @@ class HasRole_«safeName()» extends DomainIterator {
 	static $instance = null;
 	public static function getInstance($root_user_id) {
 		if (self::$instance == null) {
-			self::$instance = new HasRole_«safeName()»($root_user_id);
+			self::$instance = new HasRole_«safeName()»_«safeName(source)»($root_user_id);
 		}
 		return self::$instance;
 	}
 
 }
+«ENDFOREACH»
 
 «ENDIF»
 «ENDDEFINE»
@@ -282,17 +286,17 @@ class DomainAttribute_«safeName()» extends DomainAttribute {
 «ENDIF»
 «ENDDEFINE»
 
-«DEFINE domainSourceDefinition FOR model::DomainStore»
+«DEFINE domainSourceDefinition FOR model::domain::DomainSource»
 /**
  * Domain Source for Domain Store '«escapeString(name)»'
  */
 class DomainSource_«safeName()» extends DomainSource {
 	private function __construct() {
 		$this->schemas = array(
-		«FOREACH children.typeSelect(model::DomainObject) AS obj»
+		«FOREACH outSchemas.to AS obj»
 			DomainSchema_«safeName(obj)»::getInstance(),
 		«ENDFOREACH»
-		«IF model::users::UserStore.isInstance(this)»
+		«IF !outSchemas.to.typeSelect(model::users::Role).isEmpty»
 			/* the root user schema */
 			DomainSchema_UserRoot_«safeName()»::getInstance(),
 		«ENDIF»
@@ -313,19 +317,15 @@ class DomainSource_«safeName()» extends DomainSource {
 }
 «ENDDEFINE»
 
-«DEFINE domainIteratorDefinition FOR model::DomainObjectInstance»
+«DEFINE domainIteratorDefinition(model::domain::DomainSource source) FOR model::domain::DomainIterator»
 /**
- * Domain Iterator for Domain Object Instance '«escapeString(name)»'
+ * Domain Iterator for Domain Iterator '«escapeString(name)»'
  */
 class DomainIterator_«safeName()» extends DomainIterator {
-	«IF inWires.typeSelect(model::wires::NewInstanceWire).isEmpty»
-		«IF inWires.typeSelect(model::wires::SelectWire).isEmpty»
-			«throwException("No SelectWire or NewInstanceWire for: " + this)»
-		«ELSE»
-			«EXPAND domainIteratorDefFull(autosave, this) FOR inWires.typeSelect(model::wires::SelectWire).first()»
-		«ENDIF»
+	«IF query == "new"»
+		«EXPAND domainIteratorDefNew(source)»
 	«ELSE»
-		«EXPAND domainIteratorDefFull(autosave, this) FOR inWires.typeSelect(model::wires::NewInstanceWire).first()»
+		«EXPAND domainIteratorDefSelect(source)»
 	«ENDIF»
 	
 	«EXPAND domainIteratorGetStoredValues FOR this»
@@ -342,56 +342,20 @@ class DomainIterator_«safeName()» extends DomainIterator {
 }
 «ENDDEFINE»
 
-«DEFINE domainIteratorDefinition FOR model::DomainAttributeInstance»
-/**
- * Domain Iterator for Domain Attribute Instance '«escapeString(name)»'
- */
-class DomainIterator_Attribute_«safeName()» extends DomainIterator {
-	«IF inWires.typeSelect(model::wires::NewInstanceWire).isEmpty»
-		«IF inWires.typeSelect(model::wires::SelectWire).isEmpty»
-			«throwException("No SelectWire or NewInstanceWire for: " + this)»
-		«ELSE»
-			«EXPAND domainIteratorDefFull(autosave, this) FOR inWires.typeSelect(model::wires::SelectWire).first()»
-		«ENDIF»
-	«ELSE»
-		«EXPAND domainIteratorDefFull(autosave, this) FOR inWires.typeSelect(model::wires::NewInstanceWire).first()»
-	«ENDIF»
-	
-	«EXPAND domainIteratorGetStoredValues FOR this»
-
-	// the current instance
-	static $instance = null;
-	public static function getInstance() {
-		if (self::$instance == null) {
-			self::$instance = new DomainIterator_Attribute_«safeName()»();
-		}
-		return self::$instance;
-	}
-	
-}
-«ENDDEFINE»
-
-«DEFINE domainIteratorSchemas FOR emf::EObject»
+«DEFINE domainIteratorSchemas(model::domain::DomainSource source) FOR emf::EObject»
 	«throwException("Unknown SelectWire source: " + this)»
 «ENDDEFINE»
 
-«DEFINE domainIteratorSchemas FOR model::DomainObject»
+«DEFINE domainIteratorSchemas(model::domain::DomainSource source) FOR model::domain::DomainSchema»
 	$this->schema = DomainSchema_«safeName()»::getInstance();
-	$this->source = DomainSource_«safeName(eContainer)»::getInstance();
+	$this->source = DomainSource_«safeName(source)»::getInstance();
 «ENDDEFINE»
 
-«DEFINE domainIteratorSchemas FOR model::DomainAttribute»
-	«IF eContainer == null»
-		«throwException("Container was null: " + this)»
-	«ENDIF»
-	«EXPAND domainIteratorSchemas FOR eContainer»
-«ENDDEFINE»
-
-«DEFINE domainIteratorDefFull(Boolean autosave, emf::EObject container) FOR model::wires::SelectWire»
+«DEFINE domainIteratorDefSelect(model::domain::DomainSource source) FOR model::domain::DomainIterator»
 	// a SelectWire
 
 	private function __construct() {
-		«EXPAND domainIteratorSchemas FOR from»	
+		«EXPAND domainIteratorSchemas(source)»	
 
 		«IF orderBy != null»
 			$this->order_by = DomainAttribute_«safeName(orderBy)»::getInstance();
@@ -413,11 +377,11 @@ class DomainIterator_Attribute_«safeName()» extends DomainIterator {
 	}
 	
 	public function getOffset() {
-		return get_current_offset_«safeName(container)»();		
+		return get_current_offset_«safeName(source)»();		
 	}
 	
 	public function setOffset($value) {
-		set_current_offset_«safeName(container)»($value);
+		set_current_offset_«safeName(source)»($value);
 	}
 	
 	public function getNewInstanceID($key) {
@@ -429,11 +393,11 @@ class DomainIterator_Attribute_«safeName()» extends DomainIterator {
 	}
 «ENDDEFINE»
 
-«DEFINE domainIteratorDefFull(Boolean autosave, emf::EObject container) FOR model::wires::NewInstanceWire»
+«DEFINE domainIteratorDefNew(model::domain::DomainSource source) FOR model::domain::DomainIterator»
 	// a NewInstanceWire
 
 	private function __construct() {
-		«EXPAND domainIteratorSchemas FOR from»
+		«EXPAND domainIteratorSchemas(source)»
 
 		$this->order_by = "";
 		$this->order_ascending = true;

@@ -31,7 +31,7 @@ require(IAML_RUNTIME_ROOT . "global.php"); // runtime library import
 
 <?php
 $databases = array(
-	«EXPAND getDomainStores FOREACH domainStores SEPARATOR ", "»
+	«EXPAND getDomainStores FOREACH sources SEPARATOR ", "»
 );
 
 foreach ($databases as $db_name) {
@@ -76,7 +76,7 @@ foreach ($databases as $db_name) {
 </html>
 «ENDDEFINE»
 
-«DEFINE getDomainStores FOR model::DomainStore»
+«DEFINE getDomainStores FOR model::domain::DomainSource»
 	«EXPAND template::domain::Select::getDatabaseStoreString»
 «ENDDEFINE»
 

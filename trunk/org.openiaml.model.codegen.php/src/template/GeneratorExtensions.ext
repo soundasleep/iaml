@@ -315,20 +315,13 @@ model::Scope containingScope(model::Scope this) :
 model::Scope containingScope(model::InternetApplication this) :
 	null;
 
-model::DomainStore getDomainStore(model::DomainStore this) :
+model::domain::DomainSchema getDomainSchema(model::domain::DomainSchema this) :
 	this;
-model::DomainStore getDomainStore(model::DomainObject this) :
-	getDomainStore(eContainer);
-model::DomainStore getDomainStore(model::DomainAttribute this) :
-	getDomainStore(eContainer);
-model::DomainStore getDomainStore(emf::EObject this) :
-	null;
-
-model::DomainObject getDomainObject(model::DomainObject this) :
-	this;
-model::DomainObject getDomainObject(model::DomainAttribute this) :
-	getDomainObject(eContainer);
-model::DomainObject getDomainObject(emf::EObject this) :
+model::domain::DomainSchema getDomainSchema(model::DomainAttribute this) :
+	if eContainer == null
+		then null
+		else getDomainSchema(eContainer);
+model::domain::DomainSchema getDomainSchema(emf::EObject this) :
 	null;
 	
 /** for a given set operation, should we be calling
@@ -350,8 +343,8 @@ isDomainAttribute(emf::EObject this) :
 	model::DomainAttribute.isInstance(this);	
 isDomainAttributeInstance(emf::EObject this) :
 	model::DomainAttributeInstance.isInstance(this);
-isDomainObjectInstance(emf::EObject this) :
-	model::DomainObjectInstance.isInstance(this);
+isDomainIterator(emf::EObject this) :
+	model::domain::DomainIterator.isInstance(this);
 isSession(emf::EObject this) :
 	model::scopes::Session.isInstance(this);	
 isFrame(emf::EObject this) :
@@ -363,7 +356,7 @@ isInputTextField(emf::EObject this) :
 isLabel(emf::EObject this) :
 	model::visual::Label.isInstance(this);	
 
-isPropertiesFile(model::DomainStore store) :
+isPropertiesFile(model::domain::DomainSource store) :
 	store != null && store.type != null && store.type.toString() == "PROPERTIES_FILE";
 
 /* get the root InternetApplication */
@@ -395,11 +388,11 @@ List[model::DomainAttributeInstance] getAllDomainAttributeInstances(model::Inter
 	eAllContents.typeSelect( model::DomainAttributeInstance );
 
 /** get all Domain Object Instances in the InternetApplication */
-List[model::DomainObjectInstance] getAllDomainObjectInstances(model::InternetApplication this) :
-	eAllContents.typeSelect(model::DomainObjectInstance);
+List[model::domain::DomainIterator] getAllDomainIterators(model::InternetApplication this) :
+	eAllContents.typeSelect(model::domain::DomainIterator);
 
-getAllDomainObjects(emf::EObject e) :
-	e.eAllContents.typeSelect(model::DomainObject);
+getAllDomainSchemas(emf::EObject this) :
+	eAllContents.typeSelect(model::domain::DomainSchema);
 
 /** find all actual matches for the given DynamicApplicationSet in a given root */
 List[emf::EObject] resolveDynamicSet(model::InternetApplication root, model::DynamicApplicationElementSet set) :
@@ -411,29 +404,25 @@ getFailHandler(model::ActionSource this) :
 isAutosaveOff(model::DomainAttributeInstance this) :
 	autosave == false || isAutosaveOff(eContainer);
 
-isAutosaveOff(model::DomainObjectInstance this) :
+isAutosaveOff(model::domain::DomainIterator this) :
 	autosave == false;
 	
 isAutosaveOff(emf::EObject this):
 	false;
 
 model::DomainAttribute getPrimaryKey(model::DomainAttributeInstance this) :
-	if inWires.typeSelect(model::wires::NewInstanceWire).size >= 1 then
-		getPrimaryKey(inWires.typeSelect(model::wires::NewInstanceWire).first())
-	else if model::DomainObjectInstance.isInstance(eContainer) then
-		getPrimaryKey((model::DomainObjectInstance) eContainer);
+	if model::domain::DomainIterator.isInstance(eContainer)
+		then getPrimaryKey((model::domain::DomainIterator) eContainer)
+		else null;
 
-model::DomainAttribute getPrimaryKey(model::wires::NewInstanceWire this) :
-	getPrimaryKey(from);
-
-model::DomainAttribute getPrimaryKey(model::DomainObject this) :
+model::DomainAttribute getPrimaryKey(model::domain::DomainSchema this) :
 	attributes.selectFirst( e | e.primaryKey );
 
 model::DomainAttribute getPrimaryKey(model::DomainAttribute this) :
 	getPrimaryKey(eContainer);
 
-model::DomainAttribute getPrimaryKey(model::DomainObjectInstance this) :
-	getPrimaryKey(inWires.typeSelect(model::wires::NewInstanceWire).first());
+model::DomainAttribute getPrimaryKey(model::domain::DomainIterator this) :
+	getPrimaryKey( outSelects.to.outSchemas.to.first() ); 
 
 model::DomainAttribute getPrimaryKey(emf::EObject this) :
 	null;
@@ -444,8 +433,8 @@ model::DomainAttribute getPrimaryKey(emf::EObject this) :
 isGeneratedPrimaryKey(model::DomainAttributeInstance this) :
 	isGenerated && !outExtendsEdges.to.typeSelect(model::DomainAttribute).select(a|a.primaryKey).isEmpty ;
 
-List[model::DomainObject] allSubtypes(model::DomainObject this):
-	inExtendsEdges.from.typeSelect(model::DomainObject).collect(e|allSubtypes(e)).flatten().add(this);
+List[model::domain::DomainSchema] allSubtypes(model::domain::DomainSchema this):
+	inExtendsEdges.from.typeSelect(model::domain::DomainSchema).collect(e|allSubtypes(e)).flatten().add(this);
 
 model::ExecutionEdgesSource castToExecutionEdgesSource(emf::EObject this) :
 	(model::ExecutionEdgesSource) this;
@@ -561,7 +550,7 @@ getExitResumeTargets(model::components::ExitGate this) :
  */
 List[model::Condition] getClientSideCacheConditions(model::InternetApplication this) :
 	eAllContents.typeSelect(model::PrimitiveCondition)
-		.select(o | model::DomainObjectInstance.isInstance(o.eContainer))
+		.select(o | model::domain::DomainIterator.isInstance(o.eContainer))
 		.select(o | conditionUsed(o));
 
 /**
@@ -569,7 +558,7 @@ List[model::Condition] getClientSideCacheConditions(model::InternetApplication t
  * the client needs to be updated.
  */
 List[model::Property] getClientSideCacheProperties(model::InternetApplication this) :
-	eAllContents.typeSelect(model::DomainObjectInstance)
+	eAllContents.typeSelect(model::domain::DomainIterator)
 		.select(o | o.results != null)
 		.results.toSet().
 	addAll(eAllContents.typeSelect(model::VisibleThing).properties.toSet());
@@ -624,9 +613,10 @@ model::visual::Map getParentMap(emf::EObject this) :
 model::visual::Map getParentMap(model::visual::Map this) :
 	this;
 	
-isDomainObjectInstanceResults(model::Property this) :
-	model::DomainObjectInstance.isInstance(eContainer) 
-		&& ((model::DomainObjectInstance) eContainer).results == this;
+isDomainIteratorResults(model::Property this) :
+	eContainer != null && 
+	model::domain::DomainIterator.isInstance(eContainer) 
+		&& ((model::domain::DomainIterator) eContainer).results == this;
 
 /**
  * Is the given type numeric?
@@ -642,18 +632,6 @@ operationUsed(model::Operation this) :
 
 conditionUsed(model::Condition this) :
 	!(outConditionEdges.isEmpty && outFlows.isEmpty && outWires.isEmpty);
-
-/**
- * Get the containing {@model UserStore} for this given object, or <code>null</code>
- * if there is none.
- */
-model::users::UserStore getContainingUserStore(model::users::UserStore this) :
-	this;
-
-model::users::UserStore getContainingUserStore(emf::EObject this) :
-	if eContainer == null
-		then null
-		else getContainingUserStore(eContainer);
 
 /**
  * Get the current version of the IAML code generation platform.

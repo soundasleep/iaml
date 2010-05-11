@@ -14,7 +14,7 @@
 		«IF isAutosaveOff(this)»
 		/* for attributes with 'autosave' set to false */
 		function queue_store_domain_attribute_«safeName()»($arg0) {
-			«IF model::DomainObjectInstance.isInstance(eContainer)»
+			«IF model::domain::DomainIterator.isInstance(eContainer)»
 				$iterator = DomainIterator_«safeName(eContainer)»::getInstance();
 			«ELSE»
 				$iterator = DomainIterator_Attribute_«safeName()»::getInstance();
@@ -24,7 +24,7 @@
 		
 		/* execute the actual save for attribute id '«id»' */
 		function save_queued_store_domain_attribute_«safeName()»() {
-			«IF model::DomainObjectInstance.isInstance(eContainer)»
+			«IF model::domain::DomainIterator.isInstance(eContainer)»
 				$iterator = DomainIterator_«safeName(eContainer)»::getInstance();
 				$iterator->save();
 			«ELSE»
@@ -40,7 +40,7 @@
 		 * generated for attributes with a default value.)
 		 */
 		function can_save_queued_store_domain_attribute_«safeName()»() {
-			«IF model::DomainObjectInstance.isInstance(eContainer)»
+			«IF model::domain::DomainIterator.isInstance(eContainer)»
 				$iterator = DomainIterator_«safeName(eContainer)»::getInstance();
 			«ELSE»
 				$iterator = DomainIterator_Attribute_«safeName()»::getInstance();
@@ -82,7 +82,7 @@
 	«IF php»
 		function store_domain_attribute_«safeName()»($arg0) {
 			/* store a value into attribute id '«id»' */
-			«IF model::DomainObjectInstance.isInstance(eContainer)»
+			«IF model::domain::DomainIterator.isInstance(eContainer)»
 				/* contained in an object instance '«eContainer»': get it from the instance */
 				$iterator = DomainIterator_«safeName(eContainer)»::getInstance();
 			«ELSE»
@@ -103,7 +103,7 @@
  *		The current offset of browsing {@model DomainObjectInstance instances} is stored
  *		in the containing {@model Session} if there is one, otherwise globally.
  */
-«DEFINE storeDomainObject FOR model::DomainObjectInstance-»
+«DEFINE storeDomainObject FOR model::domain::DomainIterator-»
 	function save_queued_store_domain_object_«safeName()-»() {
 		/* save a queued domain object instance */
 		$iterator = DomainIterator_«safeName()»::getInstance();

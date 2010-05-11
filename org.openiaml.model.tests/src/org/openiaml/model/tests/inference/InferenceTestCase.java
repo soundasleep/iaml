@@ -66,6 +66,7 @@ import org.openiaml.model.model.scopes.Email;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.users.RequiresEdgeDestination;
 import org.openiaml.model.model.users.RequiresEdgesSource;
+import org.openiaml.model.model.users.Role;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
@@ -387,6 +388,16 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	
 	/**
 	 * Assert that the given element contains the given
+	 * Role.
+	 *
+	 * @return The element found
+	 */
+	public Role assertHasRole(InternetApplication store, String string) throws JaxenException {
+		return (Role) queryOne(store, "iaml:schemas[iaml:name='" + string + "']");
+	}
+	
+	/**
+	 * Assert that the given element contains the given
 	 * DomainSource.
 	 *
 	 * @return The element found
@@ -411,7 +422,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public DomainIterator assertHasDomainObjectInstance(InternetApplication root, String string) throws JaxenException {
+	public DomainIterator assertHasDomainIterator(InternetApplication root, String string) throws JaxenException {
 		return (DomainIterator) queryOne(root, "iaml:children[iaml:name='" + string + "']");
 	}
 
@@ -421,7 +432,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public void assertHasNoDomainObjectInstance(InternetApplication root, String string) throws JaxenException {
+	public void assertHasNoDomainIterator(InternetApplication root, String string) throws JaxenException {
 		assertHasNone(root, "iaml:children[iaml:name='" + string + "']");
 	}
 

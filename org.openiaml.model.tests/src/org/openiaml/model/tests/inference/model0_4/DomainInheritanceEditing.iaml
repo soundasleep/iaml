@@ -5,7 +5,7 @@
     <values id="model.123641434e9.2ad3" name="person name" outParameterEdges="wires.12364143556.6c8" value="Test Name">
       <parameterEdges id="wires.12364143556.6c8" from="model.123641434e9.2ad3" to="domain.128807fbeba.ff6"/>
     </values>
-    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.ff6" name="select" inWires="wires.12364143556.6ca" inParameterEdges="wires.12364143556.6c8" autosave="true" query="name = ?" outSelects="domain.128807fbeba.1015"/>
+    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.ff6" name="selected person" inWires="wires.12364143556.6ca" inParameterEdges="wires.12364143556.6c8" autosave="true" query="name = ?" outSelects="domain.128807fbeba.1015"/>
     <children xsi:type="iaml.visual:InputForm" outWires="wires.12364143556.6ca" id="visual.12364143556.d2" name="view person">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.12364143556.6ca" from="visual.12364143556.d2" to="domain.128807fbeba.ff6" name="sync"/>
     </children>
@@ -14,7 +14,7 @@
     <values id="model.123641434e9.2c35" name="enrolled param" outParameterEdges="wires.12364143556.752" value="yesterday">
       <parameterEdges id="wires.12364143556.752" from="model.123641434e9.2c35" to="domain.128807fbeba.ff7"/>
     </values>
-    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.ff7" name="select" inWires="wires.12364143556.750" inParameterEdges="wires.12364143556.752" autosave="true" query="enrolled = ?" outSelects="domain.128807fbeba.1016"/>
+    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.ff7" name="current student" inWires="wires.12364143556.750" inParameterEdges="wires.12364143556.752" autosave="true" query="enrolled = ?" outSelects="domain.128807fbeba.1016"/>
     <children xsi:type="iaml.visual:InputForm" outWires="wires.12364143556.750" id="visual.12364143556.108" name="view student">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.12364143556.750" from="visual.12364143556.108" to="domain.128807fbeba.ff7" name="sync"/>
     </children>
@@ -23,7 +23,7 @@
     <values id="model.123641434e9.2de9" name="teacher id" outParameterEdges="wires.12364143556.819" value="24">
       <parameterEdges id="wires.12364143556.819" from="model.123641434e9.2de9" to="domain.128807fbeba.ff8"/>
     </values>
-    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.ff8" name="select" inWires="wires.12364143556.817" inParameterEdges="wires.12364143556.819" autosave="true" query="id = ?" outSelects="domain.128807fbeba.1017"/>
+    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.ff8" name="selected teacher" inWires="wires.12364143556.817" inParameterEdges="wires.12364143556.819" autosave="true" query="id = ?" outSelects="domain.128807fbeba.1017"/>
     <children xsi:type="iaml.visual:InputForm" outWires="wires.12364143556.817" id="visual.12364143556.168" name="view teacher">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.12364143556.817" from="visual.12364143556.168" to="domain.128807fbeba.ff8" name="sync"/>
     </children>
@@ -35,19 +35,19 @@
     <values id="model.123641434e9.2f10" name="degree" outParameterEdges="wires.12364143556.93d" value="science">
       <parameterEdges id="wires.12364143556.93d" from="model.123641434e9.2f10" to="domain.128807fbeba.ff9"/>
     </values>
-    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.ff9" inWires="wires.12364143556.a92" inParameterEdges="wires.12364143556.93c wires.12364143556.93d" autosave="true" query="qualification = :qualification and degree = :degree" outSelects="domain.128807fbeba.1018"/>
+    <elements name="current doctoral" xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.ff9" inWires="wires.12364143556.a92" inParameterEdges="wires.12364143556.93c wires.12364143556.93d" autosave="true" query="qualification = :qualification and degree = :degree" outSelects="domain.128807fbeba.1018"/>
     <children xsi:type="iaml.visual:InputForm" outWires="wires.12364143556.a92" id="visual.12364143556.2a7" name="current doctoral">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.12364143556.a92" from="visual.12364143556.2a7" to="domain.128807fbeba.ff9" name="sync"/>
     </children>
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.12392019277.68" name="create a new person">
-    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.ffa" name="new" inWires="wires.12392019286.100" autosave="true" query="new" outSelects="domain.128807fbeba.1019"/>
+    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.ffa" name="new person" inWires="wires.12392019286.100" autosave="true" query="new" outSelects="domain.128807fbeba.1019"/>
     <children xsi:type="iaml.visual:InputForm" outWires="wires.12392019286.100" id="visual.12392019277.8b" name="editing form">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.12392019286.100" from="visual.12392019277.8b" to="domain.128807fbeba.ffa" name="sync"/>
     </children>
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.12392019277.ae" name="create a new student without autosave">
-    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.ffb" name="new" inWires="wires.12392019286.17c" query="new" outSelects="domain.128807fbeba.101a">
+    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.ffb" name="new student" inWires="wires.12392019286.17c" query="new" outSelects="domain.128807fbeba.101a">
       <operations xsi:type="iaml:PrimitiveOperation" id="model.12392019209.2aa" name="save" inActions="wires.12392019286.22b"/>
     </elements>
     <children xsi:type="iaml.visual:InputForm" outWires="wires.12392019286.17c" id="visual.12392019277.e7" name="new student form">
@@ -59,7 +59,7 @@
   </scopes>
   <scopes xsi:type="iaml.scopes:Session" id="scopes.12392019286.4" name="a session">
     <scopes xsi:type="iaml.visual:Frame" id="visual.12392019277.239" name="create a new doctoral">
-      <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.ffc" name="new" inWires="wires.12392019286.392" autosave="true" query="new" outSelects="domain.128807fbeba.101b"/>
+      <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.ffc" name="new doctoral" inWires="wires.12392019286.392" autosave="true" query="new" outSelects="domain.128807fbeba.101b"/>
       <children xsi:type="iaml.visual:InputForm" outWires="wires.12392019286.392" id="visual.12392019277.2a0" name="edit form">
         <wires xsi:type="iaml.wires:SyncWire" id="wires.12392019286.392" from="visual.12392019277.2a0" to="domain.128807fbeba.ffc" name="sync"/>
       </children>

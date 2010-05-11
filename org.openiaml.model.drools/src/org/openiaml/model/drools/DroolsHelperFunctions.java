@@ -26,6 +26,7 @@ import org.openiaml.model.model.domain.DomainSource;
 import org.openiaml.model.model.domain.SchemaEdge;
 import org.openiaml.model.model.domain.SelectEdge;
 import org.openiaml.model.model.scopes.Session;
+import org.openiaml.model.model.users.Role;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.wires.DetailWire;
 import org.openiaml.model.model.wires.ExtendsEdge;
@@ -133,16 +134,6 @@ public class DroolsHelperFunctions {
 	}
 
 	/**
-	 * Does the given DomainSchema have at least one attribute?
-	 * 
-	 * @param dobj
-	 * @return
-	 */
-	public boolean hasDomainAttribute(DomainSchema dobj) {
-		return dobj.getAttributes().size() > 0;
-	}
-
-	/**
 	 * Does the given LoginHandler[instance] have incoming ParameterWires from
 	 * attributes contained by the given DomainSchema?
 	 *  
@@ -194,7 +185,7 @@ public class DroolsHelperFunctions {
 	 *
 	 * Also iterates over extends so we get parent attributes. 
 	 */
-	public String getUserQueryString(DomainSchema role) {
+	public String getUserQueryString(Role role) {
 		String q = "";
 		for (DomainAttribute attribute : role.getAttributes()) {
 			// ignore primary keys
@@ -213,8 +204,8 @@ public class DroolsHelperFunctions {
 		
 		// get all parents
 		for (ExtendsEdge w : role.getOutExtendsEdges()) {
-			if (w.getTo() instanceof DomainSchema) {
-				String q2 = getUserQueryString((DomainSchema) w.getTo());
+			if (w.getTo() instanceof Role) {
+				String q2 = getUserQueryString((Role) w.getTo());
 				if (!q2.isEmpty()) {
 					if (q.isEmpty()) {
 						q = q2;

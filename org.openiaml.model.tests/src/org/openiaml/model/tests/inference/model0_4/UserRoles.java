@@ -12,14 +12,13 @@ import org.openiaml.model.model.Property;
 import org.openiaml.model.model.components.AccessControlHandler;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.components.LoginHandlerTypes;
+import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.OperationCallNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.users.Role;
-import org.openiaml.model.model.users.UserInstance;
-import org.openiaml.model.model.users.UserStore;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
@@ -28,7 +27,6 @@ import org.openiaml.model.model.wires.NavigateAction;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.RequiresEdge;
 import org.openiaml.model.model.wires.RunAction;
-import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
@@ -50,9 +48,7 @@ public class UserRoles extends InferenceTestCase {
 
 		Frame page = assertHasFrame(root, "Home");
 		assertNotGenerated(page);
-		UserStore store = assertHasUserStore(root, "user store");
-		assertNotGenerated(store);
-		Role role = assertHasRole(store, "default role");
+		Role role = assertHasRole(root, "default role");
 		assertNotGenerated(role);
 		assertHasNone(role, "iaml:attributes");
 		Session session = assertHasSession(root, "target session");
@@ -92,9 +88,7 @@ public class UserRoles extends InferenceTestCase {
 	public void testDefaultUserRole() throws Exception {
 		root = loadAndInfer(UserRoles.class);
 
-		UserStore store = assertHasUserStore(root, "user store");
-
-		Role guest = assertHasRole(store, "User");
+		Role guest = assertHasRole(root, "User");
 		assertGenerated(guest);
 
 	}
@@ -142,7 +136,7 @@ public class UserRoles extends InferenceTestCase {
 		LoginHandler handler = assertHasLoginHandler(session, "role-based login handler");
 
 		// user instance
-		UserInstance instance = assertHasUserInstance(session, "current instance");
+		DomainIterator instance = assertHasDomainIterator(session, "current instance");
 		assertGenerated(instance);
 
 		// a Set wire: [handler] --> [instance]
@@ -167,9 +161,8 @@ public class UserRoles extends InferenceTestCase {
 
 		Session session = assertHasSession(root, "target session");
 		LoginHandler handler = assertHasLoginHandler(session, "role-based login handler");
-		UserStore store = assertHasUserStore(root, "user store");
 
-		Role user = assertHasRole(store, "User");
+		Role user = assertHasRole(root, "User");
 		assertGenerated(user);
 
 		// a Parameter wire: [guest] --> [handler]
@@ -348,7 +341,7 @@ public class UserRoles extends InferenceTestCase {
 
 		Session session = assertHasSession(root, "target session");
 		AccessControlHandler ach = assertHasAccessControlHandler(session, "role-based access");
-		UserInstance instance = assertHasUserInstance(session, "current instance");
+		DomainIterator instance = assertHasDomainIterator(session, "current instance");
 
 		ParameterEdge param = assertHasParameterEdge(session, instance, ach);
 		assertGenerated(param);
@@ -363,13 +356,12 @@ public class UserRoles extends InferenceTestCase {
 	public void testDefaultRoleExtendsGuest() throws Exception {
 		root = loadAndInfer(UserRoles.class);
 
-		UserStore store = assertHasUserStore(root, "user store");
-		Role guest = assertHasRole(store, "User");
+		Role guest = assertHasRole(root, "User");
 		assertGenerated(guest);
-		Role role = assertHasRole(store, "default role");
+		Role role = assertHasRole(root, "default role");
 		assertNotGenerated(role);
 
-		ExtendsEdge ext = assertHasExtendsEdge(store, role, guest);
+		ExtendsEdge ext = assertHasExtendsEdge(root, role, guest);
 		assertGenerated(ext);
 
 	}
@@ -383,8 +375,7 @@ public class UserRoles extends InferenceTestCase {
 	public void testGuestAttributes() throws Exception {
 		root = loadAndInfer(UserRoles.class);
 
-		UserStore store = assertHasUserStore(root, "user store");
-		Role guest = assertHasRole(store, "User");
+		Role guest = assertHasRole(root, "User");
 
 		DomainAttribute email = assertHasDomainAttribute(guest, "email");
 		assertGenerated(email);
@@ -402,15 +393,14 @@ public class UserRoles extends InferenceTestCase {
 	public void testInheritanceOfAttributes() throws Exception {
 		root = loadAndInfer(UserRoles.class);
 
-		UserStore store = assertHasUserStore(root, "user store");
-		Role guest = assertHasRole(store, "User");
+		Role guest = assertHasRole(root, "User");
 
 		DomainAttribute email = assertHasDomainAttribute(guest, "email");
 		assertGenerated(email);
 		DomainAttribute password = assertHasDomainAttribute(guest, "password");
 		assertGenerated(password);
 
-		Role role = assertHasRole(store, "default role");
+		Role role = assertHasRole(root, "default role");
 
 		DomainAttribute email2 = assertHasDomainAttribute(role, "email");
 		assertGenerated(email2);
@@ -418,15 +408,15 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(password2);
 
 		// there should be extends wires between each attribute
-		assertGenerated(assertHasExtendsEdge(store, email2, email));
-		assertGenerated(assertHasExtendsEdge(store, password2, password));
+		assertGenerated(assertHasExtendsEdge(root, email2, email));
+		assertGenerated(assertHasExtendsEdge(root, password2, password));
 
 		// none the other way around
-		assertHasNoWiresFromTo(store, email, email2);
-		assertHasNoWiresFromTo(store, password, password2);
-		assertHasNoWiresFromTo(store, email, email);
-		assertHasNoWiresFromTo(store, email, password);
-		assertHasNoWiresFromTo(store, password2, email);
+		assertHasNoWiresFromTo(root, email, email2);
+		assertHasNoWiresFromTo(root, password, password2);
+		assertHasNoWiresFromTo(root, email, email);
+		assertHasNoWiresFromTo(root, email, password);
+		assertHasNoWiresFromTo(root, password2, email);
 
 	}
 
@@ -440,13 +430,12 @@ public class UserRoles extends InferenceTestCase {
 	public void testInheritancePrimaryKeys() throws Exception {
 		root = loadAndInfer(UserRoles.class);
 
-		UserStore store = assertHasUserStore(root, "user store");
-		Role guest = assertHasRole(store, "User");
+		Role guest = assertHasRole(root, "User");
 
 		DomainAttribute source_id = assertHasDomainAttribute(guest, "generated primary key");
 		assertGenerated(source_id);
 
-		Role role = assertHasRole(store, "default role");
+		Role role = assertHasRole(root, "default role");
 
 		DomainAttribute id = assertHasDomainAttribute(role, "generated primary key");
 		assertGenerated(id);
@@ -454,11 +443,11 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(fk);
 
 		// there should be an extends wire between the PK and FK
-		assertGenerated(assertHasExtendsEdge(store, fk, source_id));
+		assertGenerated(assertHasExtendsEdge(root, fk, source_id));
 
 		// and none between the PK and PK
-		assertHasNoWiresFromTo(store, id, source_id);
-		assertHasNoWiresFromTo(store, source_id, id);
+		assertHasNoWiresFromTo(root, id, source_id);
+		assertHasNoWiresFromTo(root, source_id, id);
 
 	}
 
@@ -525,26 +514,18 @@ public class UserRoles extends InferenceTestCase {
 		Property password = assertHasProperty(session, "current password");
 
 		// user instance
-		UserInstance instance = assertHasUserInstance(session, "current instance");
-
-		// store
-		UserStore store = assertHasUserStore(root, "user store");
-		Role user = assertHasRole(store, "User");
-
-		// generated select wire
-		SelectWire selectWire = assertHasSelectWire(root, user, instance, "select");
-		assertGenerated(selectWire);
+		DomainIterator instance = assertHasDomainIterator(session, "current instance");
 
 		// the query should be one of these values
 		assertEqualsOneOf(new String[]{
 				"email = :email and password = :password",
 				"password = :password and email = :email"
-		}, selectWire.getQuery());
+		}, instance.getQuery());
 
 		// parameters
-		ParameterEdge p1 = assertHasParameterEdge(root, email, selectWire);
+		ParameterEdge p1 = assertHasParameterEdge(root, email, instance);
 		assertGenerated(p1);
-		ParameterEdge p2 = assertHasParameterEdge(root, password, selectWire);
+		ParameterEdge p2 = assertHasParameterEdge(root, password, instance);
 		assertGenerated(p2);
 
 	}

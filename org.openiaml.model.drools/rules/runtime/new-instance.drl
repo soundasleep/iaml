@@ -24,10 +24,10 @@ rule "Refresh Iterator Object mappings"
 		source : DomainSource ( )
 		iterator : DomainIterator ( )
 		
-		schemaEdge : SchemaEdge ( )
+		schemaEdge : SchemaEdge ( ) and
 		eval ( functions.connectsSchema(schemaEdge, source, schema ))
 		
-		selectEdge : SelectEdge ( )
+		selectEdge : SelectEdge ( ) and
 		eval ( functions.connectsSelect(selectEdge, iterator, source ))
 		
 		attribute : DomainAttribute ( eContainer == schema )
@@ -44,6 +44,10 @@ rule "Refresh Iterator Object mappings"
 		# set type
 		handler.setType(attr, attribute.getType());
 		queue.add(attr, drools);
+		
+		# mark it as an extension
+		ExtendsEdge ex = handler.generatedExtendsEdge(iterator, attr, attr, attribute);
+		queue.add(ex, drools); 
 
 end
 

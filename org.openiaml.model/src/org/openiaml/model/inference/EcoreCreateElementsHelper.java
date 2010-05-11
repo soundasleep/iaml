@@ -66,6 +66,8 @@ import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.users.RequiresEdgeDestination;
 import org.openiaml.model.model.users.RequiresEdgesSource;
+import org.openiaml.model.model.users.Role;
+import org.openiaml.model.model.users.UsersPackage;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
@@ -171,6 +173,12 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 
 	public DomainSchema generatedDomainSchema(GeneratesElements by, InternetApplication container) throws InferenceException {
 		DomainSchema obj = (DomainSchema) createElement( container, DomainPackage.eINSTANCE.getDomainSchema(), ModelPackage.eINSTANCE.getInternetApplication_Schemas() );
+		setGeneratedBy(obj, by);
+		return obj;
+	}
+
+	public Role generatedRole(GeneratesElements by, InternetApplication container) throws InferenceException {
+		Role obj = (Role) createElement( container, UsersPackage.eINSTANCE.getRole(), ModelPackage.eINSTANCE.getInternetApplication_Schemas() );
 		setGeneratedBy(obj, by);
 		return obj;
 	}

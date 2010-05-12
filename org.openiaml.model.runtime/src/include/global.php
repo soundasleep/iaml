@@ -655,7 +655,7 @@ function do_cast($value, $type) {
 		case "":
 		case "http://openiaml.org/model/datatypes#iamlString":
 		case "http://openiaml.org/model/datatypes#iamlAddress":
-		case "http://openiaml.org/model/datatypes#iamlU1RL":
+		case "http://openiaml.org/model/datatypes#iamlURL":
 			// a date?
 			if ($value instanceof DateTime) {
 				// change to UTC first

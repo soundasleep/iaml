@@ -92,12 +92,13 @@ public abstract class DatabaseCodegenTestCase extends CodegenTestCase {
 	
 	/**
 	 * Directly execute a SQL query and get the results.
+	 * Uses the database name defined in {@link #getDatabaseName()}.
 	 * 
 	 * @param sql SQL query to execute
 	 * @return the result set found
 	 * @throws Exception
 	 */
-	protected ResultSet executeQuery(String sql) throws Exception {
+	public ResultSet executeQuery(String sql) throws Exception {
 		return loadDatabaseQuery(getDatabaseName(), sql);
 	}
 	

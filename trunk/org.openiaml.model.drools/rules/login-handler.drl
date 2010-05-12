@@ -1742,3 +1742,48 @@ rule "Connect a default DomainSource for LoginHandlers that do not specify a Sel
 		queue.add(select, drools);
 	
 end	
+
+/**
+ * The above rule will only connect the created Instance if there is no extension, i.e. the LoginHandler and the
+ * AccessControlHandler both point to the same Schema. However, if the AccessControlHandler requires [role],
+ * the LoginHandler has an incoming parameter from the root User, because the permission check is actually
+ * handled by the method call. But the 'current instance' is expected to be of type '[role]'; thus, we 
+ * use this as the expected schema.
+ */
+rule "Connect the DomainSource for the AccessControlHandler to the Current Instance"
+	when
+		root : InternetApplication ( )
+	
+		session : Session( ) 
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT || type == LoginHandlerTypes.USER )
+		
+		ach : AccessControlHandler ( eContainer == session )
+		
+		expected_schema : DomainSchema ( )
+		requires : RequiresEdge ( from == ach, to == expected_schema )
+		
+		iterator : DomainIterator ( eContainer == session )
+		set : SetWire ( from == login_handler, to == iterator )
+		
+		# but a <em>different</em> schema is connected		
+		other_schema : DomainSchema ( )
+		param : ParameterEdge ( from == other_schema, to == login_handler )
+		eval ( other_schema != expected_schema )
+		
+		# and our expected schema has a source
+		source : DomainSource ( )
+		schemaEdge : SchemaEdge ( )
+		eval ( functions.connectsSchema( schemaEdge, source, expected_schema ) )
+		
+		not ( selectEdge : SelectEdge ( ) and 
+			eval ( functions.connectsSelect( selectEdge, iterator, source ))
+		) 
+		
+		eval ( handler.veto( ach ))
+
+	then
+		SelectEdge select = handler.generatedSelectEdge(ach, source, iterator, source);
+		queue.add(select, drools);
+	
+end	
+

@@ -349,7 +349,9 @@ abstract class DomainIterator {
 			$bits = array();
 			foreach ($schema->getAttributes() as $value) {
 				$key = $value->getName();
-				if ($value->isPrimaryKey() && $value->getType() === "iamlInteger") {
+				if ($value->isPrimaryKey() && (
+						$value->getType() === "iamlInteger" ||
+						$value->getType() === "http://openiaml.org/model/datatypes#iamlInteger")) {
 					// this needs to be auto increment
 					$bits[] = "$key INTEGER PRIMARY KEY AUTOINCREMENT";
 				} else {

@@ -83,6 +83,7 @@ public class NewInstanceAttributeSession extends DatabaseCodegenTestCase {
 		}
 
 		// check the database for the first session value
+		// autosave is on, so it should have been pushed to the database
 		{
 			ResultSet rs = executeQuery("SELECT * FROM User WHERE name='" + newValue + "'");
 			assertTrue(rs.next());

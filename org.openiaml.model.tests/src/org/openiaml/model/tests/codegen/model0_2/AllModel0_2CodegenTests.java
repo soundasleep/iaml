@@ -25,7 +25,7 @@ public class AllModel0_2CodegenTests {
 		suite.addTestSuite(ReloadPage.class);
 		
 		// initial requirements (model 0.2)
-		suite.addTestSuite(Requirement1SyncWires.class);
+		// Requirement1 removed in 0.5.1
 		suite.addTestSuite(Requirement2StaticParams.class);
 		suite.addTestSuite(Requirement3DynamicParams.class);
 		suite.addTestSuite(Requirement4DynamicSources.class);

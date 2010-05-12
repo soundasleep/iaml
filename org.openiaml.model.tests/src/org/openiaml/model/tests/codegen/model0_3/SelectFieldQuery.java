@@ -84,6 +84,7 @@ public class SelectFieldQuery extends DatabaseCodegenTestCase {
 		}
 		
 		// check the database
+		// autosave is on, so it should have been pushed to the database
 		{
 			ResultSet rs = executeQuery("SELECT * FROM User WHERE id=42");
 			assertTrue(rs.next());

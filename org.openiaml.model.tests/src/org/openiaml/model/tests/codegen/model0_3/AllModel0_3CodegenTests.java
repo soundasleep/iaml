@@ -51,8 +51,6 @@ public class AllModel0_3CodegenTests {
 
 		// other model 0.3 tests
 		suite.addTestSuite(DataFlowTemporaryVariable.class);
-		suite.addTestSuite(DatabaseWithInputForm.class);
-		suite.addTestSuite(PropertiesFileWithInputForm.class);
 		suite.addTestSuite(FailingOperation.class);
 		suite.addTestSuite(FailingOperationHandler.class);
 		suite.addTestSuite(FailingOperationHandlerSession.class);

@@ -35,8 +35,9 @@ public class TestProgressMonitor extends CodegenTestCase {
 			}
 		};
 		
-		// do codegen
-		root = loadAndCodegen(TestProgressMonitor.class, monitor);
+		// do codegen (with a different class)
+		resetCodegenCache();
+		root = loadAndCodegen(SelectFieldFromObject.class, monitor);
 		
 		// check for all these subtasks
 		String[] wanted = {

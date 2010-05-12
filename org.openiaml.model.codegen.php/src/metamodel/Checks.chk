@@ -197,3 +197,8 @@ context model::wires::SyncWire ERROR "A SyncWire cannot connect to an Email" :
 context model::DomainAttributeInstance ERROR "A DomainAttributeInstance must extend a DomainAttribute as its definition" :
 	!outExtendsEdges.to.typeSelect(model::DomainAttribute).isEmpty;
 	
+context model::domain::DomainSource ERROR "A DomainSource can only have one Schema" :
+	outSchemas.size <= 1;
+
+context model::domain::DomainIterator ERROR "A DomainIterator can only have one Source" :
+	outSelects.size <= 1;

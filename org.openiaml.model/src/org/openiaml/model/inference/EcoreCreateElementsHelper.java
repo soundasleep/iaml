@@ -6,6 +6,7 @@ package org.openiaml.model.inference;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xsd.XSDSimpleTypeDefinition;
+import org.openiaml.model.FileReference;
 import org.openiaml.model.model.Accessible;
 import org.openiaml.model.model.Action;
 import org.openiaml.model.model.ActionDestination;
@@ -48,6 +49,7 @@ import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainPackage;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;
+import org.openiaml.model.model.domain.DomainStoreTypes;
 import org.openiaml.model.model.domain.SchemaEdge;
 import org.openiaml.model.model.domain.SelectEdge;
 import org.openiaml.model.model.operations.Arithmetic;
@@ -661,6 +663,22 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	
 	public void setDefault(Property element, String value) throws InferenceException {
 		setValue(element, ModelPackage.eINSTANCE.getProperty_DefaultValue(), value);
+	}
+	
+	public void setFile(DomainSource element, FileReference value) throws InferenceException {
+		setValue(element, DomainPackage.eINSTANCE.getDomainSource_File(), value);
+	}
+	
+	public void setType(DomainSource element, DomainStoreTypes value) throws InferenceException {
+		setValue(element, DomainPackage.eINSTANCE.getDomainSource_Type(), value);
+	}
+	
+	public void setUrl(DomainSource element, String value) throws InferenceException {
+		setValue(element, DomainPackage.eINSTANCE.getDomainSource_Url(), value);
+	}
+	
+	public void setCache(DomainSource element, int value) throws InferenceException {
+		setValue(element, DomainPackage.eINSTANCE.getDomainSource_Cache(), value);
 	}
 	
 }

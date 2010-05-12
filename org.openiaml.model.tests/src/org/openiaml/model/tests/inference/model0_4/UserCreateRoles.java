@@ -93,5 +93,39 @@ public class UserCreateRoles extends ValidInferenceTestCase {
 		assertNotGenerated(assertHasSchemaEdge(source, role));
 		
 	}
+	
+	/**
+	 * The generated role 'User' must also have a Source, but this is
+	 * different from the one for 'default role'. (Necessary for the current
+	 * metamodel structure.)
+	 * 
+	 * @throws Exception
+	 */
+	public void testCreatedDefaultRoleSource() throws Exception {
+		
+		root = loadAndInfer(UserCreateRoles.class);
+		
+		Session session = assertHasSession(root, "target session");
+		DomainIterator cur = assertHasDomainIterator(session, "current instance");
+		
+		Role role = assertHasRole(root, "default role");
+		
+		Role genrole = assertHasRole(root, "User");
+		assertGenerated(genrole);
+		
+		// the source of 'role'
+		DomainSource source = cur.getOutSelects().get(0).getTo();
+		assertNotGenerated(assertHasSchemaEdge(source, role));
+		
+		// the generated role is NOT connected to the same
+		assertHasNoSchemaEdge(source, genrole);
+		
+		// but it has its own
+		DomainSource source2 = genrole.getInSchemas().get(0).getFrom();
+		assertGenerated(source2);
+		
+		assertNotSame(source, source2);
+		
+	}
 
 }

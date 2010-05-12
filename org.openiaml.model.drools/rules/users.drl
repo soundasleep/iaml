@@ -445,3 +445,32 @@ rule "Any role should extend the default User role"
 
 end
 
+rule "The generated default User has an identical DomainSource as the extended Role"
+	when
+		root : InternetApplication ( )
+		user : Role ( name == "User", eContainer == root )
+		
+		another : Role ( this != user )
+		
+		extends : ExtendsEdge ( from == another, to == user )
+		
+		# there's a schema edge from the original source to the subclassed role
+		original : DomainSource ( )
+		schemaEdge : SchemaEdge ( from == original, to == another )
+		
+		not ( SchemaEdge ( to == user ))
+						
+		eval ( handler.veto( user ))
+
+	then
+		DomainSource source = handler.generatedDomainSource(user, root);
+		handler.setFile(source, original.getFile());
+		handler.setType(source, original.getType());
+		handler.setUrl(source, original.getUrl());
+		handler.setCache(source, original.getCache());
+		queue.add(source, drools);
+		
+		SchemaEdge edge = handler.generatedSchemaEdge(user, root, source, user);
+		queue.add(edge, drools);
+	
+end

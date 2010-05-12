@@ -147,6 +147,7 @@ require("test14.php");
 //$enable = true;	// for debug
 require("test15.php");
 require("test16.php");
+require("test17.php");
 
 function clean_newlines($s) {
 	$s = str_replace("\r\n", "\n", $s);
@@ -159,9 +160,15 @@ function clean_newlines($s) {
 // ---
 // various mock methods
 
+/**
+ * Hide the log message, unless it contains a warning message 'warning'
+ * or error 'error'.
+ */
 function log_message($message) {
 	global $enable;
-	if ($enable) echo "[log] $message\n";
+	if ($enable
+		|| strpos(strtolower($message), 'warning') !== false
+		|| strpos(strtolower($message), 'error') !== false) echo "[log] $message\n";
 }
 
 /**

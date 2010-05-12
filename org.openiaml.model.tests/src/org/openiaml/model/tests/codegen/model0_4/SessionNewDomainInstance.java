@@ -196,6 +196,11 @@ public class SessionNewDomainInstance extends DatabaseCodegenTestCase {
 	 * @throws Exception 
 	 */
 	private void assertNoEmailsExistInDatabase(String[] emails) throws Exception {
+		// if the database doesn't exist, then we can say that the emails don't exist
+		if (!getProject().getFile(getDatabaseName()).exists()) {
+			return;
+		}
+		
 		for (String email : emails) {
 			// check the database
 			{

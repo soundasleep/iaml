@@ -64,9 +64,9 @@
 /**
  * Root User Role for Source '«escapeString(name)»'
  */
-class DomainSchema_UserRoot_«safeName()» extends DomainSchema {
+class DomainSchema_UserRoot_«safeName(source)» extends DomainSchema {
 	private function __construct() {
-		$this->addAttribute(DomainAttribute_UserRoot_«safeName()»_ID::getInstance());
+		$this->addAttribute(DomainAttribute_UserRoot_«safeName(source)»_ID::getInstance());
 		
 		// list of permissions: boolean
 		«FOREACH eAllContents.typeSelect(model::users::Permission) AS p»
@@ -81,7 +81,7 @@ class DomainSchema_UserRoot_«safeName()» extends DomainSchema {
 	static $instance = null;
 	public static function getInstance() {
 		if (self::$instance == null) {
-			self::$instance = new DomainSchema_UserRoot_«safeName()»();
+			self::$instance = new DomainSchema_UserRoot_«safeName(source)»();
 		}
 		return self::$instance;
 	}
@@ -91,7 +91,7 @@ class DomainSchema_UserRoot_«safeName()» extends DomainSchema {
 /**
  * Domain Attribute ID for Root User Role in User Store '«escapeString(name)»'
  */
-class DomainAttribute_UserRoot_«safeName()»_ID extends DomainAttribute {
+class DomainAttribute_UserRoot_«safeName(source)»_ID extends DomainAttribute {
 	private function __construct() {
 		$this->isPrimaryKey = true;
 		$this->type = 'iamlInteger';
@@ -102,7 +102,7 @@ class DomainAttribute_UserRoot_«safeName()»_ID extends DomainAttribute {
 	static $instance = null;
 	public static function getInstance() {
 		if (self::$instance == null) {
-			self::$instance = new DomainAttribute_UserRoot_«safeName()»_ID();
+			self::$instance = new DomainAttribute_UserRoot_«safeName(source)»_ID();
 		}
 		return self::$instance;
 	}
@@ -170,6 +170,7 @@ class DomainSchema_«safeName()» extends DomainSchema {
 }
 
 «IF model::users::Role.isInstance(this)»
+«FOREACH inSchemas.from AS source»
 	«IF attributes.outExtendsEdges.to.eContainer.typeSelect(model::users::Role).isEmpty»
 		/* this Role does not extend any other Roles: we need to add a link to the root role */
 
@@ -178,7 +179,7 @@ class DomainAttribute_UserRole_«safeName()»_Link extends DomainAttribute {
 		$this->isPrimaryKey = false;
 		$this->type = 'iamlInteger';
 		$this->name = 'root_user_id';
-		$this->extends = DomainAttribute_UserRoot_«safeName(eContainer)»_ID::getInstance();
+		$this->extends = DomainAttribute_UserRoot_«safeName(source)»_ID::getInstance();
 	}
 	
 	// the current instance
@@ -192,8 +193,7 @@ class DomainAttribute_UserRole_«safeName()»_Link extends DomainAttribute {
 	
 }
 	«ENDIF»
-
-«FOREACH inSchemas.from AS source»
+	
 /**
  * A simple DomainIterator to see if a given Role exists for the given root ID.
  */

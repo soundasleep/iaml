@@ -33,6 +33,7 @@ public class AllModel0_4InferenceTests {
 		suite.addTestSuite(UserModifyRoles.class);
 		suite.addTestSuite(OperationCallNode.class);
 		suite.addTestSuite(SetWireSyncChained.class);
+		suite.addTestSuite(NewInstanceWithoutId.class);
 		
 		return suite;
 	}

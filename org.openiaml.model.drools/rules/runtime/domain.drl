@@ -5,6 +5,8 @@ package org.openiaml.model.drools.rules.runtime.domain
 import org.openiaml.model.drools.*;
 
 import org.openiaml.model.inference.*;
+import org.openiaml.model.datatypes.*;
+
 import org.openiaml.model.model.*;
 import org.openiaml.model.model.impl.*;
 import org.openiaml.model.model.wires.*;
@@ -30,6 +32,7 @@ rule "Create a default primary key for DomainObjects which do not have one"
 		DomainAttribute da2 = handler.generatedDomainAttribute(object, object);
 		handler.setName(da2, "generated primary key");
 		handler.setValue(da2, ModelPackage.eINSTANCE.getDomainAttribute_PrimaryKey(), true);
+		handler.setType(da2, BuiltinDataTypes.getTypeInteger());
 		queue.add(da2, drools);
 
 end 

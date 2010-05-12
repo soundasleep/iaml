@@ -278,7 +278,6 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		assertEquals(0, results.size());
 	}
 	
-	
 	/**
 	 * Assert that the given element does <em>not</em> contain the given
 	 * Condition.
@@ -297,6 +296,15 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public DomainAttribute assertHasDomainAttribute(DomainSchema obj,
 			String string) throws JaxenException {
 		return (DomainAttribute) queryOne(obj, "iaml.domain:attributes[iaml:name='" + string + "']");
+	}
+
+	/**
+	 * Assert that the given element does <em>not</em> contain the given
+	 * DomainAttribute.
+	 */
+	public void assertHasNoDomainAttribute(DomainSchema element, String string) throws JaxenException {
+		List<Object> results = nameSelect(typeSelect(element.getAttributes(), DomainAttribute.class), string);
+		assertEquals(0, results.size());
 	}
 
 	/**

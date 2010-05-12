@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.1233b453c1f.69">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.users="http://openiaml.org/model/users" id="model.1233b453c1f.69">
   <scopes xsi:type="iaml.visual:Frame" id="visual.1233b453dc5.b3" name="Home"/>
   <scopes xsi:type="iaml.scopes:Session" id="scopes.1233b453efe.5b" name="my session">
     <elements xsi:type="iaml.components:LoginHandler" inParameterEdges="wires.1233b453e32.5e" id="components.1233b453f6b.39" name="user login handler" type="USER"/>
@@ -8,8 +8,8 @@
     </elements>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233b453dc5.c2" name="target page"/>
   </scopes>
-  <schemas id="domain.128807fbeba.de1" name="Guest" inSchemas="domain.128807fbeba.de3"/>
-  <schemas id="domain.128807fbeba.de4" name="Registered User" outParameterEdges="wires.1233b453e32.5e" inRequiresEdges="wires.1233b453e32.66" inSchemas="domain.128807fbeba.de6">
+  <schemas xsi:type="iaml.users:Role" id="domain.128807fbeba.de1" name="Guest" inSchemas="domain.128807fbeba.de3"/>
+  <schemas xsi:type="iaml.users:Role" id="domain.128807fbeba.de4" name="Registered User" outParameterEdges="wires.1233b453e32.5e" inRequiresEdges="wires.1233b453e32.66" inSchemas="domain.128807fbeba.de6">
     <parameterEdges id="wires.1233b453e32.5e" from="domain.128807fbeba.de4" to="components.1233b453f6b.39"/>
   </schemas>
   <sources id="domain.128807fbeba.de2" outSchemas="domain.128807fbeba.de3">

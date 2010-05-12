@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12109331eea.e39">
   <scopes xsi:type="iaml.visual:Frame" id="visual.12109331f38.d82" name="container">
-    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.fe7" name="select" outSelects="domain.128807fbeba.fe8">
-      <attributes id="model.12109331eea.edd" name="name" outWires="wires.12109331f38.5c9" outExtendsEdges="wires.128665d425c.13" autosave="true">
+    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.fe7" name="select" outSelects="domain.128807fbeba.fe8" autosave="true">
+      <attributes id="model.12109331eea.edd" name="name" outWires="wires.12109331f38.5c9" outExtendsEdges="wires.128665d425c.13">
         <wires xsi:type="iaml.wires:SyncWire" id="wires.12109331f38.5c9" from="model.12109331eea.edd" to="visual.12109331f38.d99" name="sync"/>
         <extendsEdges id="wires.128665d425c.13" from="model.12109331eea.edd" to="model.12109331eea.e62"/>
       </attributes>

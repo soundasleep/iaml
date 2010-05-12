@@ -4,7 +4,7 @@
   <scopes xsi:type="iaml.scopes:Session" id="scopes.12109c6249b.2" name="my session">
     <scopes xsi:type="iaml.visual:Frame" id="visual.12109c6248b.11e" name="sessioned container">
       <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.f6d" name="select" inParameterEdges="wires.12109c6249b.ba" query="email = ?" outSelects="domain.128807fbeba.f6e">
-        <attributes id="model.12109c6242e.304" name="name" outWires="wires.12109c6249b.b8" outExtendsEdges="wires.128665d425c.1d5" autosave="true">
+        <attributes id="model.12109c6242e.304" name="name" outWires="wires.12109c6249b.b8" outExtendsEdges="wires.128665d425c.1d5">
           <wires xsi:type="iaml.wires:SyncWire" id="wires.12109c6249b.b8" from="model.12109c6242e.304" to="visual.12109c6248b.135" name="sync"/>
           <extendsEdges id="wires.128665d425c.1d5" from="model.12109c6242e.304" to="model.12109331eea.10ac"/>
         </attributes>

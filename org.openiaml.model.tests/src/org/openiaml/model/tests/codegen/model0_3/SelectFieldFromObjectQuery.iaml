@@ -5,7 +5,7 @@
       <parameterEdges id="wires.12109dbdd39.54" from="model.12109c6242e.5e" to="domain.128807fbeba.d89"/>
     </values>
     <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.d89" name="select" inParameterEdges="wires.12109dbdd39.54" autosave="true" query="id = ?" outSelects="domain.128807fbeba.d8d">
-      <attributes id="model.12109331eea.12dc" name="name" outWires="wires.12109c6249b.9" autosave="true">
+      <attributes id="model.12109331eea.12dc" name="name" outWires="wires.12109c6249b.9">
         <wires xsi:type="iaml.wires:SyncWire" id="wires.12109c6249b.9" from="model.12109331eea.12dc" to="visual.12109331f38.ebf" name="sync"/>
       </attributes>
     </elements>

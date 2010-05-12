@@ -627,10 +627,6 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setValue(element, ModelPackage.eINSTANCE.getExecutionEdge_To(), value);
 	}
 	
-	public void setAutosave(DomainAttributeInstance element, boolean value) throws InferenceException {
-		setValue(element, ModelPackage.eINSTANCE.getDomainAttributeInstance_Autosave(), value);
-	}
-
 	public void setType(Property element, XSDSimpleTypeDefinition value) throws InferenceException {
 		setValue(element, ModelPackage.eINSTANCE.getProperty_Type(), value);
 	}

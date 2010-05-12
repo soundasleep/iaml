@@ -57,13 +57,17 @@ public class SyncWiresMultiple extends CodegenTestCase {
 			setLabeledFormElementField(passwordId, testPassword);
 		}
 		
+		// in 0.5.1, DomainSchemas can no longer be the target
+		// of SyncWires; thus the Synchronisation will not be applied
+		// to a DomainSchema, and not applied to the target form
+		
 		// if we now go to the last signup user page, it should appear there
 		gotoSitemapThenPage(sitemap, "last signup user");
 		
 		// should have changed
 		{
 			String nameId = getLabelIDForText("name");
-			assertLabeledFieldEquals(nameId, testName);
+			assertLabeledFieldEquals(nameId, "");
 		}
 		
 	}

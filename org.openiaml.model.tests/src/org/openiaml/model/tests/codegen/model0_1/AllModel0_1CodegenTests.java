@@ -21,15 +21,12 @@ public class AllModel0_1CodegenTests {
 		TestSuite suite = new TestSuite("Model 0.1");
 		
 		suite.addTestSuite(SimpleTestCase.class);
-		suite.addTestSuite(SyncFieldDomainAttribute.class);
 		suite.addTestSuite(SyncStaticValueField.class);
 		suite.addTestSuite(SyncWiresPagesTestCase.class);
 		suite.addTestSuite(LoginHandlerKey.class);
-		suite.addTestSuite(SyncFormDomainObject.class);
 		suite.addTestSuite(SyncFieldApplicationElementProperty.class);
 		suite.addTestSuite(SyncWiresMultiple.class);
 		suite.addTestSuite(SyncWiresTestCase.class);
-		suite.addTestSuite(SyncWiresProperties.class);
 
 		return suite;
 	}

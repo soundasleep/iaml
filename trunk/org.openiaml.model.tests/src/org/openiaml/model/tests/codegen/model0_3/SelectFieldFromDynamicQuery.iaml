@@ -2,7 +2,7 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12109331eea.107e">
   <scopes xsi:type="iaml.visual:Frame" id="visual.12109331f38.e3f" name="container">
     <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.d72" name="select" inParameterEdges="wires.12109c6249b.60" query="email = ?" outSelects="domain.128807fbeba.d73" autosave="true">
-      <attributes id="model.12109c6242e.1dc" name="name" outWires="wires.12109c6249b.5e" outExtendsEdges="wires.128665d425c.4e" autosave="true">
+      <attributes id="model.12109c6242e.1dc" name="name" outWires="wires.12109c6249b.5e" outExtendsEdges="wires.128665d425c.4e">
         <wires xsi:type="iaml.wires:SyncWire" id="wires.12109c6249b.5e" from="model.12109c6242e.1dc" to="visual.12109c6248b.ac" name="sync"/>
         <extendsEdges id="wires.128665d425c.4e" from="model.12109c6242e.1dc" to="model.12109331eea.10ac"/>
       </attributes>

@@ -6,7 +6,7 @@
       <wires xsi:type="iaml.wires:SetWire" id="wires.122f7c6a100.e" from="components.122f7c6a40e.1" to="domain.128807fbeba.10f7" name="set"/>
     </elements>
     <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.10f7" name="logged in user" inWires="wires.122f7c6a100.e" autosave="true">
-      <attributes id="model.122f7c69efd.106" name="name" outWires="wires.122f7c6a100.3a" autosave="true">
+      <attributes id="model.122f7c69efd.106" name="name" outWires="wires.122f7c6a100.3a">
         <wires xsi:type="iaml.wires:SyncWire" id="wires.122f7c6a100.3a" from="model.122f7c69efd.106" to="visual.122f7c6a006.56" name="sync"/>
       </attributes>
     </elements>

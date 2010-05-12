@@ -132,7 +132,7 @@ class DomainAttribute_UserRole_Link extends DomainAttribute {
 
 «FOREACH eAllContents.typeSelect(model::users::Permission) AS p»
 /**
- * Permission '«escapeString(p.name)»' in Schema «escapeString(name)»
+ * Permission '«escapeString(p.name)»' in Internet Application «escapeString(name)»
  */
 class Permission_«safeName(p)» extends DomainAttribute {
 	private function __construct() {
@@ -156,7 +156,7 @@ class Permission_«safeName(p)» extends DomainAttribute {
 /**
  * Permission checks.
  */
-«EXPAND template::users::Permissions::permissionChecks FOREACH sources.outSchemas.to.typeSelect(model::users::Role)»
+«EXPAND template::users::Permissions::permissionChecks»
 «ENDDEFINE»
 
 «DEFINE domainSchemaDefinition FOR model::domain::DomainSchema»
@@ -191,7 +191,7 @@ class DomainSchema_«safeName()» extends DomainSchema {
 }
 
 «IF model::users::Role.isInstance(this)»
-«FOREACH inSchemas.from AS source»
+«FOREACH getRoot().eAllContents.typeSelect(model::domain::DomainSource) AS source»
 /**
  * A simple DomainIterator to see if a given Role exists for the given root ID.
  */

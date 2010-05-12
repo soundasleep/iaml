@@ -6,7 +6,7 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE permissionChecks FOR model::users::Role»
+«DEFINE permissionChecks FOR model::InternetApplication»
 	«REM»all permission types for this role«ENDREM»
 	«EXPAND addPermission FOREACH eAllContents.typeSelect(model::users::Permission)»
 	«EXPAND removePermission FOREACH eAllContents.typeSelect(model::users::Permission)»

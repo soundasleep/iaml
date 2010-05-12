@@ -39,7 +39,7 @@ public class UserModifyRoles extends AbstractUserLoginTestCase {
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		root = loadAndCodegen(UserModifyRoles.class, true);
+		root = loadAndCodegen(UserModifyRoles.class);
 		initialiseDatabase();
 	}
 	

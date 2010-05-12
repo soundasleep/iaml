@@ -42,7 +42,9 @@
   </scopes>
   <schemas id="domain.128807fbeba.eb9" name="Person" inExtendsEdges="wires.12364143556.1 wires.12364143556.3" inSchemas="domain.128807fbeba.ebb">
     <attributes id="model.123641434e9.8a" name="name"/>
-    <attributes id="model.123641434e9.29a8" name="id" primaryKey="true"/>
+    <attributes id="model.123641434e9.29a8" name="id" primaryKey="true">
+      <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
+    </attributes>
   </schemas>
   <schemas id="domain.128807fbeba.ebc" name="Student" outExtendsEdges="wires.12364143556.1" inExtendsEdges="wires.12364143556.5 wires.12364143556.6" inSchemas="domain.128807fbeba.ebe">
     <extendsEdges id="wires.12364143556.1" from="domain.128807fbeba.ebc" to="domain.128807fbeba.eb9"/>

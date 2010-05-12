@@ -117,7 +117,7 @@ abstract class DomainAttribute {
 	 * NOTE this is not the PHP toString() method
 	 */
 	public function toString() {
-		return "Attribute '" . $this->getName() . "' [type='" . $this->getType() . "']";
+		return get_class($this) . " Attribute '" . $this->getName() . "' [type='" . $this->getType() . "']";
 	}
 
 }

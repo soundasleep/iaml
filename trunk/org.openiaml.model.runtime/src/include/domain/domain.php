@@ -37,6 +37,7 @@ abstract class DomainSchema {
 
 	public function initDirectJoins($source) {
 		$joins = array();
+		$has_pk = false;
 		// go over all attributes
 		foreach ($this->getAttributes() as $attribute) {
 			// does this attribute extend?
@@ -56,6 +57,14 @@ abstract class DomainSchema {
 					$this->getTableName() . "." . $attribute->getName() .
 					" = " . $schema->getTableName() . "." . $extends->getName();
 			}
+
+			if ($attribute->isPrimaryKey()) {
+				$has_pk = true;
+			}
+		}
+
+		if (!$has_pk) {
+			log_message("[domain] Warning: Schema " . $this->toString() . " has no primary key DomainAttribute");
 		}
 
 		AllDirectJoins::getInstance()->add($this->source_id, $joins);
@@ -348,10 +357,22 @@ abstract class DomainIterator {
 					switch ($value->getType()) {
 						case "iamlString":
 						case "iamlEmail":
+						case "":
+						case "http://openiaml.org/model/datatypes#iamlString":
+						case "http://openiaml.org/model/datatypes#iamlAddress":
+						case "http://openiaml.org/model/datatypes#iamlURL":
+						case "http://openiaml.org/model/datatypes#iamlOpenIDURL":
+						case "http://openiaml.org/model/datatypes#iamlEmail":
 							$rowtype = "VARCHAR(255)";
 							break;
 
+						case "iamlDateTime":
+						case "http://openiaml.org/model/datatypes#iamlDateTime":
+							$rowtype = "DATETIME";
+							break;
+
 						case "iamlInteger":
+						case "http://openiaml.org/model/datatypes#iamlInteger":
 							$rowtype = "INTEGER";
 							break;
 

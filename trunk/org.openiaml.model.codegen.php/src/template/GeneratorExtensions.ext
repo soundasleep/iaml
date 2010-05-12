@@ -481,7 +481,9 @@ List[model::ExecutionEdgeDestination] allDestinations(Object this, Collection[mo
 	{};
 
 model::operations::JoinNode findFinalJoinNode(model::operations::SplitNode this) :
-	findFinalJoinNode(outExecutions.to.selectFirst( t | findFinalJoinNode(t) != null));
+	if outExecutions.to.select(t | findFinalJoinNode(t) != null).isEmpty
+		then null
+		else findFinalJoinNode(outExecutions.to.selectFirst( t | findFinalJoinNode(t) != null));
 
 model::operations::JoinNode findFinalJoinNode(emf::EObject this) :
 	null;

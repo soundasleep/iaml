@@ -50,23 +50,25 @@
 		«ENDFOREACH»
 		
 		/* role defintions */
-		«FOREACH sources.select(s|!s.outSchemas.to.typeSelect(model::users::Role).isEmpty) AS source»
-			«EXPAND domainUserDefinition(source) FOREACH source.inSelects.from»
-		«ENDFOREACH»
-						
+		«EXPAND domainUserDefinition»
+		
 	«ENDFILE»
 «ENDDEFINE»
 
 /**
  * Definitions for DomainSources which also provide User instances.
+ * @implementation Role
+ *		Currently, we can only have <em>one</em> root {@model Role} in a given
+ *		{@model InternetApplication}.
  */
-«DEFINE domainUserDefinition(model::domain::DomainSource source) FOR model::domain::DomainIterator»
+«DEFINE domainUserDefinition FOR model::InternetApplication»
 /**
- * Root User Role for Source '«escapeString(name)»'
+ * Root User Role for Internet Application '«escapeString(name)»'
+ * TODO Currently we can only have one root User Role in a system
  */
-class DomainSchema_UserRoot_«safeName(source)» extends DomainSchema {
+class DomainSchema_UserRoot extends DomainSchema {
 	private function __construct() {
-		$this->addAttribute(DomainAttribute_UserRoot_«safeName(source)»_ID::getInstance());
+		$this->addAttribute(DomainAttribute_UserRoot_ID::getInstance());
 		
 		// list of permissions: boolean
 		«FOREACH eAllContents.typeSelect(model::users::Permission) AS p»
@@ -81,7 +83,7 @@ class DomainSchema_UserRoot_«safeName(source)» extends DomainSchema {
 	static $instance = null;
 	public static function getInstance() {
 		if (self::$instance == null) {
-			self::$instance = new DomainSchema_UserRoot_«safeName(source)»();
+			self::$instance = new DomainSchema_UserRoot();
 		}
 		return self::$instance;
 	}
@@ -89,9 +91,9 @@ class DomainSchema_UserRoot_«safeName(source)» extends DomainSchema {
 }
 
 /**
- * Domain Attribute ID for Root User Role in User Store '«escapeString(name)»'
+ * Domain Attribute ID for Root User Role in Internet Application '«escapeString(name)»'
  */
-class DomainAttribute_UserRoot_«safeName(source)»_ID extends DomainAttribute {
+class DomainAttribute_UserRoot_ID extends DomainAttribute {
 	private function __construct() {
 		$this->isPrimaryKey = true;
 		$this->type = 'iamlInteger';
@@ -102,16 +104,35 @@ class DomainAttribute_UserRoot_«safeName(source)»_ID extends DomainAttribute {
 	static $instance = null;
 	public static function getInstance() {
 		if (self::$instance == null) {
-			self::$instance = new DomainAttribute_UserRoot_«safeName(source)»_ID();
+			self::$instance = new DomainAttribute_UserRoot_ID();
 		}
 		return self::$instance;
 	}
 
 }
 
+class DomainAttribute_UserRole_Link extends DomainAttribute {
+	private function __construct() {
+		$this->isPrimaryKey = false;
+		$this->type = 'iamlInteger';
+		$this->name = 'root_user_id';
+		$this->extends = DomainAttribute_UserRoot_ID::getInstance();
+	}
+	
+	// the current instance
+	static $instance = null;
+	public static function getInstance() {
+		if (self::$instance == null) {
+			self::$instance = new DomainAttribute_UserRole_Link();
+		}
+		return self::$instance;
+	}
+	
+}
+
 «FOREACH eAllContents.typeSelect(model::users::Permission) AS p»
 /**
- * Permission '«escapeString(p.name)»' in User Store «escapeString(name)»
+ * Permission '«escapeString(p.name)»' in Schema «escapeString(name)»
  */
 class Permission_«safeName(p)» extends DomainAttribute {
 	private function __construct() {
@@ -135,7 +156,7 @@ class Permission_«safeName(p)» extends DomainAttribute {
 /**
  * Permission checks.
  */
-«EXPAND template::users::Permissions::permissionChecks FOREACH source.outSchemas.to.typeSelect(model::users::Role)»
+«EXPAND template::users::Permissions::permissionChecks FOREACH sources.outSchemas.to.typeSelect(model::users::Role)»
 «ENDDEFINE»
 
 «DEFINE domainSchemaDefinition FOR model::domain::DomainSchema»
@@ -150,7 +171,7 @@ class DomainSchema_«safeName()» extends DomainSchema {
 		«IF model::users::Role.isInstance(this)»
 			«IF attributes.outExtendsEdges.to.eContainer.typeSelect(model::users::Role).isEmpty»
 				/* this Role does not extend any other Roles: we need to add a link to the root role */
-				$this->addAttribute(DomainAttribute_UserRole_«safeName()»_Link::getInstance());
+				$this->addAttribute(DomainAttribute_UserRole_Link::getInstance());
 			«ENDIF»
 		«ENDIF»
 		
@@ -171,29 +192,6 @@ class DomainSchema_«safeName()» extends DomainSchema {
 
 «IF model::users::Role.isInstance(this)»
 «FOREACH inSchemas.from AS source»
-	«IF attributes.outExtendsEdges.to.eContainer.typeSelect(model::users::Role).isEmpty»
-		/* this Role does not extend any other Roles: we need to add a link to the root role */
-
-class DomainAttribute_UserRole_«safeName()»_Link extends DomainAttribute {
-	private function __construct() {
-		$this->isPrimaryKey = false;
-		$this->type = 'iamlInteger';
-		$this->name = 'root_user_id';
-		$this->extends = DomainAttribute_UserRoot_«safeName(source)»_ID::getInstance();
-	}
-	
-	// the current instance
-	static $instance = null;
-	public static function getInstance() {
-		if (self::$instance == null) {
-			self::$instance = new DomainAttribute_UserRole_«safeName()»_Link();
-		}
-		return self::$instance;
-	}
-	
-}
-	«ENDIF»
-	
 /**
  * A simple DomainIterator to see if a given Role exists for the given root ID.
  */
@@ -297,12 +295,26 @@ class DomainAttribute_«safeName()» extends DomainAttribute {
 class DomainSource_«safeName()» extends DomainSource {
 	private function __construct() {
 		$this->schemas = array(
-		«FOREACH outSchemas.to AS obj»
-			DomainSchema_«safeName(obj)»::getInstance(),
-		«ENDFOREACH»
+		«REM»
+			The DomainSource API was written with the idea that multiple
+			DomainIterators can connect to one DomainSource which has one
+			DomainSchema; however, without adding an explicit link between
+			DomainSchema and DomainIterator in the metamodel, we can't automatically
+			work out the Schema type of a given DomainIterator.
+			
+			Thus, we hack DomainSource to always include ALL possible
+			schemas for the given DomainSource FileReference in all
+			copies of the schema.
+		«ENDREM»
+		«LET getRoot().eAllContents.typeSelect(model::domain::DomainSource)
+			.select(s|resolveFileReference(s) == resolveFileReference(this) && s.type == type).outSchemas.to AS allSchemas»
+			«FOREACH allSchemas AS obj»
+				DomainSchema_«safeName(obj)»::getInstance(),
+			«ENDFOREACH»
+		«ENDLET»
 		«IF !outSchemas.to.typeSelect(model::users::Role).isEmpty»
 			/* the root user schema */
-			DomainSchema_UserRoot_«safeName()»::getInstance(),
+			DomainSchema_UserRoot::getInstance(),
 		«ENDIF»
 		);
 		$this->type = '«escapePhpString(type.toString())»';

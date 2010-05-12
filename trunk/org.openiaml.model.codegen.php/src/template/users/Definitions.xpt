@@ -59,7 +59,7 @@
 		// for each source
 		«FOREACH user.outSelects.to AS userStore»
 		// get the root user iterator
-		$attribute = DomainAttribute_UserRoot_«safeName(userStore)»_ID::getInstance();
+		$attribute = DomainAttribute_UserRoot_ID::getInstance();
 		$root_user_id = $iterator->getAttributeInstance($attribute)->getValue();
 		
 		if ($root_user_id === null) {

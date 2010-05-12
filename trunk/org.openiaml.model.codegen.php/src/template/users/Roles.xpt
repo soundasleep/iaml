@@ -30,7 +30,7 @@ function add_role_«safeName()»_«safeName(userStore)»(DomainIterator $iterator) {
 	log_message("[role] Adding role 'name»' to iterator " . $iterator->toString());
 
 	// get the root ID
-	$attribute = DomainAttribute_UserRoot_«safeName(userStore)»_ID::getInstance();
+	$attribute = DomainAttribute_UserRoot_ID::getInstance();
 	$root_user_id = $iterator->getAttributeInstance($attribute)->getValue();
 	
 	if ($root_user_id === null) {
@@ -74,7 +74,7 @@ function add_role_«safeName()»_«safeName(userStore)»(DomainIterator $iterator) {
 	«IF outExtendsEdges.to.typeSelect(model::users::Role).isEmpty»
 	{
 		// our only extension is the root container
-		$fk_names[] = DomainAttribute_UserRole_«safeName()»_Link::getInstance()->getName();
+		$fk_names[] = DomainAttribute_UserRole_Link::getInstance()->getName();
 		$pk_values[] = $root_user_id;
 		$pk_binds[] = "?";
 	}
@@ -117,7 +117,7 @@ function remove_role_«safeName()»_«safeName(userStore)»(DomainIterator $iterator
 	log_message("[role] Removing role 'name»' to iterator " . $iterator->toString());
 	
 	// get the root ID
-	$attribute = DomainAttribute_UserRoot_«safeName(userStore)»_ID::getInstance();
+	$attribute = DomainAttribute_UserRoot_ID::getInstance();
 	$root_user_id = $iterator->getAttributeInstance($attribute)->getValue();
 	
 	if ($root_user_id === null) {

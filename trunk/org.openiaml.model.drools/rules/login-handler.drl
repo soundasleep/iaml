@@ -1735,6 +1735,11 @@ rule "Connect a default DomainSource for LoginHandlers that do not specify a Sel
 			eval ( functions.connectsSelect( selectEdge, iterator, source ))
 		) 
 		
+		# but will not be provided by the ACH later
+		not (
+			ach : AccessControlHandler ( eContainer == session )
+		)
+		
 		eval ( handler.veto( login_handler ))
 
 	then

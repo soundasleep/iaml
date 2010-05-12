@@ -1103,6 +1103,20 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	}
 	
 	/**
+	 * Assert there exists <em>no</em> unidirectional SchemaEdge between
+	 * the given elements.
+	 *
+	 * @return The element found
+	 */
+	public void assertHasNoSchemaEdge(DomainSource from, DomainSchema to) throws JaxenException {
+		for (SchemaEdge edge : from.getOutSchemas()) {
+			if (to.equals(edge.getTo())) {
+				fail("Found a SchemaEdge: " + edge);
+			}
+		}
+	}
+	
+	/**
 	 * Assert there exists only one unidirectional ParameterEdge between
 	 * the given elements, with the given name.
 	 *

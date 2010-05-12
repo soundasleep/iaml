@@ -53,6 +53,8 @@ import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;
+import org.openiaml.model.model.domain.SchemaEdge;
+import org.openiaml.model.model.domain.SelectEdge;
 import org.openiaml.model.model.operations.Arithmetic;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.CastNode;
@@ -1062,6 +1064,42 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		Set<ParameterEdge> params = getParameterEdgesFromTo(container, from, to);
 		assertEquals("Should be exactly one parameter edge: " + params, 1, params.size());
 		return params.iterator().next();
+	}
+	
+	/**
+	 * Assert there exists only one unidirectional SelectEdge between
+	 * the given elements.
+	 *
+	 * @return The element found
+	 */
+	public SelectEdge assertHasSelectEdge(DomainIterator from, DomainSource to) throws JaxenException {
+		SelectEdge result = null;
+		for (SelectEdge edge : from.getOutSelects()) {
+			if (to.equals(edge.getTo())) {
+				assertNull("Found two SelectEdges: " + result, result);
+				result = edge;
+			}
+		}
+		assertNotNull("Found no SelectEdge", result);
+		return result;
+	}
+	
+	/**
+	 * Assert there exists only one unidirectional SchemaEdge between
+	 * the given elements.
+	 *
+	 * @return The element found
+	 */
+	public SchemaEdge assertHasSchemaEdge(DomainSource from, DomainSchema to) throws JaxenException {
+		SchemaEdge result = null;
+		for (SchemaEdge edge : from.getOutSchemas()) {
+			if (to.equals(edge.getTo())) {
+				assertNull("Found two SchemaEdges: " + result, result);
+				result = edge;
+			}
+		}
+		assertNotNull("Found no SchemaEdge", result);
+		return result;
 	}
 	
 	/**

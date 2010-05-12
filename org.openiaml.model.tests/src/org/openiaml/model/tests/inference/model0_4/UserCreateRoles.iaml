@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" xmlns:iaml.users="http://openiaml.org/model/users" id="model.1233afe61d2.26">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.1233afe628e.15" name="Home"/>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.1233b453dc5.156" name="create a new user">
+    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.fda" name="new instance" inWires="wires.1233b53a3ce.5e8" query="new" outSelects="domain.128807fbeba.fde">
+      <operations xsi:type="iaml:PrimitiveOperation" id="model.1233b53a1ca.14" name="save" inActions="wires.1233b53a3ce.a"/>
+    </elements>
+    <children xsi:type="iaml.visual:Button" id="visual.1233b53a313.1a" name="create new user" outActions="wires.1233b53a3ce.a">
+      <actions xsi:type="iaml.wires:RunAction" id="wires.1233b53a3ce.a" name="onClick" from="visual.1233b53a313.1a" to="model.1233b53a1ca.14"/>
+    </children>
+    <children xsi:type="iaml.visual:InputForm" outWires="wires.1233b53a3ce.5e8" id="visual.1233b53a313.555" name="edit user properties form">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.1233b53a3ce.5e8" from="visual.1233b53a313.555" to="domain.128807fbeba.fda" name="sync"/>
+    </children>
+  </scopes>
+  <scopes xsi:type="iaml.scopes:Session" id="scopes.1233afe6368.3" name="target session">
+    <elements xsi:type="iaml.components:AccessControlHandler" outRequiresEdges="wires.1233afe62eb.2d" id="components.1233afe6424.13" name="role-based access">
+      <requiresEdges id="wires.1233afe62eb.2d" from="components.1233afe6424.13" to="domain.128807fbeba.fdb"/>
+    </elements>
+    <scopes xsi:type="iaml.visual:Frame" id="visual.1233afe628e.7e" name="target"/>
+  </scopes>
+  <schemas xsi:type="iaml.users:Role" id="domain.128807fbeba.fdb" name="default role" inRequiresEdges="wires.1233afe62eb.2d" inSchemas="domain.128807fbeba.fdd"/>
+  <sources id="domain.128807fbeba.fdc" outSchemas="domain.128807fbeba.fdd" inSelects="domain.128807fbeba.fde">
+    <schemaEdges id="domain.128807fbeba.fdd" from="domain.128807fbeba.fdc" to="domain.128807fbeba.fdb"/>
+    <selectEdges id="domain.128807fbeba.fde" from="domain.128807fbeba.fda" to="domain.128807fbeba.fdc"/>
+  </sources>
+</iaml:InternetApplication>

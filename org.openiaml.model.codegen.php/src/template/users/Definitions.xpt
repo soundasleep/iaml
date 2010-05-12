@@ -36,7 +36,7 @@
 		«REM»there should be exactly one incoming parameter wire with a UserInstance«ENDREM»
 		«LET inParameterEdges.from.typeSelect(model::domain::DomainIterator).select(i|!i.outSelects.to.outSchemas.to.typeSelect(model::users::Role).isEmpty) AS iterators»
 			«IF iterators.isEmpty»
-				«throwException("No incoming UserInstances for AccessControlHandler " + this)»
+				«throwException("No incoming DomainIterators for AccessControlHandler " + this)»
 			«ENDIF»
 			«FOREACH iterators AS it»
 				«EXPAND checkAccessDefinitionUser(it)»

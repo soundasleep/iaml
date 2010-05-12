@@ -34,6 +34,7 @@ public class AllModel0_4InferenceTests {
 		suite.addTestSuite(OperationCallNode.class);
 		suite.addTestSuite(SetWireSyncChained.class);
 		suite.addTestSuite(NewInstanceWithoutId.class);
+		suite.addTestSuite(UserCreateRoles.class);
 		
 		return suite;
 	}

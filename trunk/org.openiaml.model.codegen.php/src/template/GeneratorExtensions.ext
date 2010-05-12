@@ -402,7 +402,7 @@ getFailHandler(model::ActionSource this) :
 	outActions.select( w | w.isFailEdge()).first();
 
 isAutosaveOff(model::DomainAttributeInstance this) :
-	autosave == false || isAutosaveOff(eContainer);
+	isAutosaveOff(eContainer);
 
 isAutosaveOff(model::domain::DomainIterator this) :
 	autosave == false;

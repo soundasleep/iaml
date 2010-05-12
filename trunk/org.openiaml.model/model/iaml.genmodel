@@ -140,9 +140,7 @@
     <genClasses image="false" ecoreClass="iaml.ecore#//ContainsConditions">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ContainsConditions/conditions"/>
     </genClasses>
-    <genClasses ecoreClass="iaml.ecore#//DomainAttributeInstance">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//DomainAttributeInstance/autosave"/>
-    </genClasses>
+    <genClasses ecoreClass="iaml.ecore#//DomainAttributeInstance"/>
     <genClasses ecoreClass="iaml.ecore#//QueryParameter">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//QueryParameter/defaultValue"/>
     </genClasses>

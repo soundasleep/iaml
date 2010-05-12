@@ -40,7 +40,6 @@ rule "Refresh Iterator Object mappings"
 		# create a new one
 		DomainAttributeInstance attr = handler.generatedDomainAttributeInstance(iterator, iterator);
 		handler.setName(attr, attribute.getName());
-		handler.setAutosave(attr, iterator.isAutosave());
 		# set type
 		handler.setType(attr, attribute.getType());
 		queue.add(attr, drools);

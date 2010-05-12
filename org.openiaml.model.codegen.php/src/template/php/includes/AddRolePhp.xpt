@@ -26,7 +26,8 @@ switch ($instance_id) {
 	«FOREACH u.outSelects.to AS userStore»
 	case "«safeName(u)»":
 		$iterator = DomainIterator_«safeName(u)»::getInstance();
-		$function_name = 'add_role_«safeName(u)»_«safeName(userStore)»';
+		// TODO probably a security risk
+		$function_name = 'add_role_' . $role_id . '_«safeName(userStore)»';
 		break;
 	«ENDFOREACH»
 

@@ -38,7 +38,7 @@ function add_role_«safeName()»_«safeName(userStore)»(DomainIterator $iterator) {
 	}
 	
 	// does this role already exist?
-	if (!(HasRole_«safeName()»::getInstance($root_user_id)->isEmpty())) {
+	if (!(HasRole_«safeName()»_«safeName(userStore)»::getInstance($root_user_id)->isEmpty())) {
 		log_message("[role] Role already existed");
 		return; 
 	}

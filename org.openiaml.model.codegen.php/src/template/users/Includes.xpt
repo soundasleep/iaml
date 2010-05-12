@@ -20,7 +20,7 @@
 /**
  * Adding roles.
  */
-«FOREACH inSchemas.from AS source»
+«FOREACH getRoot().eAllContents.typeSelect(model::domain::DomainSource) AS source»
 	«EXPAND Roles::roleFunctions(source)»
 «ENDFOREACH»
 	«ENDFILE»

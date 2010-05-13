@@ -62,23 +62,23 @@
   <nodes>
     <ownedChild>
       <domainMetaElement
-          href="iaml.ecore#//DomainObject"/>
-      <domainSpecialization
-          body="self.oclIsTypeOf( DomainObject )"/>
+          href="iaml.ecore#//domain/DomainSource"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
-            href="iaml.gmfgraph#DomainObjectName"/>
+            href="iaml.gmfgraph#DomainSourceName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
-          readOnly="true">
+          xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
-            href="iaml.gmfgraph#DomainObjectParentName"/>
+            href="iaml.gmfgraph#DomainSourceType"/>
+        <features
+            href="iaml.ecore#//domain/DomainSource/type"/>
       </labelMappings>
       <diagramNode
-          href="iaml.gmfgraph#DomainObject"/>
+          href="iaml.gmfgraph#DomainSource"/>
     </ownedChild>
   </nodes>
   <nodes>
@@ -327,15 +327,35 @@
   <nodes>
     <ownedChild>
       <domainMetaElement
-          href="iaml.ecore#//DomainObjectInstance"/>
+          href="iaml.ecore#//domain/DomainIterator"/>
       <domainSpecialization
-          body="self.oclIsTypeOf( DomainObjectInstance )"/>
+          body="self.oclIsTypeOf( DomainIterator )"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
-            href="iaml.gmfgraph#DomainObjectInstanceName"/>
+            href="iaml.gmfgraph#DomainIteratorName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          viewPattern=""
+          editorPattern=""
+          editPattern="">
+        <diagramLabel
+            href="iaml.gmfgraph#DomainIteratorQuery"/>
+        <features
+            href="iaml.ecore#//domain/DomainIterator/query"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          viewPattern="limit: {0}"
+          editorPattern=""
+          editPattern="{0}">
+        <diagramLabel
+            href="iaml.gmfgraph#DomainIteratorLimit"/>
+        <features
+            href="iaml.ecore#//domain/DomainIterator/limit"/>
       </labelMappings>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping"
@@ -343,12 +363,12 @@
           editorPattern=""
           editPattern="{0}">
         <diagramLabel
-            href="iaml.gmfgraph#DomainObjectInstanceAutosave"/>
+            href="iaml.gmfgraph#DomainIteratorAutosave"/>
         <features
-            href="iaml.ecore#//DomainObjectInstance/autosave"/>
+            href="iaml.ecore#//domain/DomainIterator/autosave"/>
       </labelMappings>
       <diagramNode
-          href="iaml.gmfgraph#DomainObjectInstance"/>
+          href="iaml.gmfgraph#DomainIterator"/>
     </ownedChild>
   </nodes>
   <nodes>
@@ -778,6 +798,20 @@
     <linkMetaFeature
         xsi:type="ecore:EReference"
         href="iaml.ecore#//wires/ConstraintEdge/to"/>
+  </links>
+  <links>
+    <domainMetaElement
+        href="iaml.ecore#//domain/SelectEdge"/>
+    <containmentFeature
+        href="iaml.ecore#//ContainsWires/selectEdges"/>
+    <diagramLink
+        href="iaml.gmfgraph#SelectEdge"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//domain/SelectEdge/from"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//domain/SelectEdge/to"/>
   </links>
   <diagram>
     <diagramCanvas

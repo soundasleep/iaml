@@ -3,34 +3,6 @@
     <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Diagram"/>
     <elementType editHelperClassName="CompositeOperationEditHelper" xsi:type="gmfgen:MetamodelType"/>
     <viewmap figureQualifiedClassName="org.eclipse.draw2d.FreeformLayer" xsi:type="gmfgen:FigureViewmap"/>
-    <containsShortcutsTo>iaml_domain_object_instance</containsShortcutsTo>
-    <containsShortcutsTo>iaml</containsShortcutsTo>
-    <containsShortcutsTo>iaml_condition</containsShortcutsTo>
-    <containsShortcutsTo>iaml_wire</containsShortcutsTo>
-    <containsShortcutsTo>iaml_element</containsShortcutsTo>
-    <containsShortcutsTo>iaml_domain_store</containsShortcutsTo>
-    <containsShortcutsTo>iaml_operation</containsShortcutsTo>
-    <containsShortcutsTo>iaml_visual</containsShortcutsTo>
-    <containsShortcutsTo>iaml_user_store</containsShortcutsTo>
-    <containsShortcutsTo>iaml_domain_object</containsShortcutsTo>
-    <containsShortcutsTo>iaml_session</containsShortcutsTo>
-    <containsShortcutsTo>iaml_frame</containsShortcutsTo>
-    <containsShortcutsTo>iaml_email</containsShortcutsTo>
-    <containsShortcutsTo>iaml_remote_domain_object</containsShortcutsTo>
-    <shortcutsProvidedFor>iaml_domain_object_instance</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_condition</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_wire</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_element</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_domain_store</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_operation</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_visual</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_user_store</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_domain_object</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_session</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_frame</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_email</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_remote_domain_object</shortcutsProvidedFor>
     <domainDiagramElement href="iaml.genmodel#//model/CompositeOperation"/>
     <topLevelNodes canonicalEditPolicyClassName="CompositeOperation2CanonicalEditPolicy" createCommandClassName="CompositeOperationCreateCommand" editPartClassName="CompositeOperation2EditPart" graphicalNodeEditPolicyClassName="CompositeOperationGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="CompositeOperation2ItemSemanticEditPolicy" notationViewFactoryClassName="CompositeOperationViewFactory" visualID="2032">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -544,8 +516,28 @@
       <children iD="org.openiaml.model.diagram.printing" kind="Printing" name="Printing" xsi:type="gmfgen:GenStandardPreferencePage"/>
       <children iD="org.openiaml.model.diagram.rulersAndGrid" kind="RulersAndGrid" name="Rulers And Grid" xsi:type="gmfgen:GenStandardPreferencePage"/>
     </preferencePages>
-  <containsShortcutsTo>iaml_schema</containsShortcutsTo>
+  <containsShortcutsTo>iaml_iterator</containsShortcutsTo>
+<shortcutsProvidedFor>iaml_iterator</shortcutsProvidedFor>
+<containsShortcutsTo>iaml</containsShortcutsTo>
+<containsShortcutsTo>iaml_condition</containsShortcutsTo>
+<containsShortcutsTo>iaml_frame</containsShortcutsTo>
+<containsShortcutsTo>iaml_wire</containsShortcutsTo>
+<containsShortcutsTo>iaml_element</containsShortcutsTo>
+<containsShortcutsTo>iaml_session</containsShortcutsTo>
+<containsShortcutsTo>iaml_schema</containsShortcutsTo>
+<containsShortcutsTo>iaml_operation</containsShortcutsTo>
+<containsShortcutsTo>iaml_visual</containsShortcutsTo>
+<containsShortcutsTo>iaml_email</containsShortcutsTo>
+<shortcutsProvidedFor>iaml</shortcutsProvidedFor>
+<shortcutsProvidedFor>iaml_condition</shortcutsProvidedFor>
+<shortcutsProvidedFor>iaml_frame</shortcutsProvidedFor>
+<shortcutsProvidedFor>iaml_wire</shortcutsProvidedFor>
+<shortcutsProvidedFor>iaml_element</shortcutsProvidedFor>
+<shortcutsProvidedFor>iaml_session</shortcutsProvidedFor>
 <shortcutsProvidedFor>iaml_schema</shortcutsProvidedFor>
+<shortcutsProvidedFor>iaml_operation</shortcutsProvidedFor>
+<shortcutsProvidedFor>iaml_visual</shortcutsProvidedFor>
+<shortcutsProvidedFor>iaml_email</shortcutsProvidedFor>
 </diagram>
   <plugin iD="org.openiaml.model.diagram.operation" name="Iaml Diagram Plugin (Operation)" provider="www.openiaml.org" version="0.5.0.qualifier">
     <requiredPlugins>org.eclipse.draw2d</requiredPlugins>
@@ -642,6 +634,8 @@
     <childReferences child="//@diagram/@topLevelNodes.12" groupIcon="icons/linkSourceNavigatorGroup.gif" groupName="source" parent="//@diagram/@links.1" referenceType="in_source"/>
     <childReferences child="//@diagram/@links.1" groupIcon="icons/outgoingLinksNavigatorGroup.gif" groupName="outgoing links" parent="//@diagram/@topLevelNodes.12" referenceType="out_target"/>
     <childReferences child="//@diagram/@links.2" groupIcon="icons/linksNavigatorGroup.gif" groupName="links" parent="//@diagram"/>
+    <childReferences child="//@diagram/@topLevelNodes.7" groupIcon="icons/linkSourceNavigatorGroup.gif" groupName="source" parent="//@diagram/@links.2" referenceType="in_source"/>
+    <childReferences child="//@diagram/@links.2" groupIcon="icons/outgoingLinksNavigatorGroup.gif" groupName="outgoing links" parent="//@diagram/@topLevelNodes.7" referenceType="out_target"/>
     <childReferences child="//@diagram/@topLevelNodes.8" groupIcon="icons/linkSourceNavigatorGroup.gif" groupName="source" parent="//@diagram/@links.2" referenceType="in_source"/>
     <childReferences child="//@diagram/@links.2" groupIcon="icons/outgoingLinksNavigatorGroup.gif" groupName="outgoing links" parent="//@diagram/@topLevelNodes.8" referenceType="out_target"/>
     <childReferences child="//@diagram/@topLevelNodes.11" groupIcon="icons/linkSourceNavigatorGroup.gif" groupName="source" parent="//@diagram/@links.2" referenceType="in_source"/>

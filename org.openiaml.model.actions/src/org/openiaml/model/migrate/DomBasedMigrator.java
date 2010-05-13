@@ -82,7 +82,7 @@ public abstract class DomBasedMigrator implements IamlModelMigrator {
 		// recurse over the document, adding elements and translating
 		// where necessary
 		recurseOverDocument( input.getDocumentElement(), output, output, errors );
-		
+
 		// go over all deleted elements and remove them from all
 		// referenced attributes
 		removeDeletedReferences(output.getDocumentElement());
@@ -96,6 +96,12 @@ public abstract class DomBasedMigrator implements IamlModelMigrator {
 					nsuri);
 			
 		}
+
+		// make sure the root element has an ID
+		if (output.getDocumentElement().getAttribute("id").isEmpty()) {
+			output.getDocumentElement().setAttribute("id", "root");
+		}
+		
 	}
 	
 	/**

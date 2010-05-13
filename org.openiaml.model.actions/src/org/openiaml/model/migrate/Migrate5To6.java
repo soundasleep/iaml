@@ -1,5 +1,6 @@
 package org.openiaml.model.migrate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.w3c.dom.Document;
@@ -77,6 +78,10 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 			return "iaml.operations:DecisionNode";
 		}
 
+		if (xsiType.equals("iaml.users:UserInstance") || xsiType.equals("iaml:DomainObjectIterator")) {
+			return "iaml.domain:DomainIterator";
+		}
+
 		return super.replaceType(element, xsiType, errors);
 	}
 
@@ -107,17 +112,6 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 		return super.getRenamedNode(nodeName, element, errors);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.openiaml.model.diagram.custom.migrate.DomBasedMigrator#handleElement(org.w3c.dom.Element, org.w3c.dom.Element, java.util.List)
-	 */
-	@Override
-	public void handleElement(Element old, Element element,
-			List<ExpectedMigrationException> errors) {
-
-		// empty
-		
-	}
-	
 	@Override
 	public boolean shouldDeleteAttribute(Element element, Element target,
 			String name, String value, List<ExpectedMigrationException> errors) {
@@ -145,8 +139,93 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 			return "set"; 
 		}
 		
-		// otherwise, just return the same name
+		// is this a list of IDs?
+		if (value.equals(value.trim())) {
+			StringBuffer newValue = new StringBuffer();
+			String[] values = value.split(" ");
+			
+			for (String v : values) {
+				if (!idsToDelete.contains(v)) {
+					if (newValue.length() != 0)
+						newValue.append(' ');
+					newValue.append(v);
+				}
+			}
+			
+			return newValue.toString();
+		}
+		
+		// otherwise, just return the same value
 		return super.handleAttribute(name, value, element, errors);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.migrate.DomBasedMigrator#shouldDeleteNode(org.w3c.dom.Element, org.w3c.dom.Node, java.util.List)
+	 */
+	@Override
+	public boolean shouldDeleteNode(Element element, Node parent,
+			List<ExpectedMigrationException> errors) {
+
+		String xsiType = element.getAttribute("xsi:type");
+		if ("iaml:DomainObject".equals(xsiType)) {
+			errors.add(new ExpectedMigrationException(this, element, "DomainObject has been removed, and needs to be reimplemented as a DomainSchema manually."));
+			return true;
+		}
+
+		if ("iaml:DomainStore".equals(xsiType)) {
+			errors.add(new ExpectedMigrationException(this, element, "DomainStore has been removed, and needs to be reimplemented as a DomainSource manually."));
+			return true;
+		}
+
+		if ("iaml.wires:SelectWire".equals(xsiType)) {
+			errors.add(new ExpectedMigrationException(this, element, "SelectWire has been removed, and needs to be reimplemented as a DomainIterator manually."));
+			return true;
+		}
+
+		if ("iaml.wires:NewInstanceWire".equals(xsiType)) {
+			errors.add(new ExpectedMigrationException(this, element, "NewInstanceWire has been removed, and needs to be reimplemented as a DomainIterator manually."));
+			return true;
+		}
+
+		if (element.getNodeName().equals("domainStores")) {
+			errors.add(new ExpectedMigrationException(this, element, "DomainStore has been removed, and needs to be reimplemented as a DomainSource manually."));
+			return true;
+		}
+		
+		// super call
+		return super.shouldDeleteNode(element, parent, errors);
+	}
+	
+	private List<String> idsToDelete;
+	
+	protected void findDeletedElements(Element e, Node parent, boolean isDeleting) {
+		if (isDeleting || shouldDeleteNode(e, parent, new ArrayList<ExpectedMigrationException>())) {
+			// add this ID to the list
+			if (e.getAttribute("id") != null && !e.getAttribute("id").isEmpty()) {
+				idsToDelete.add(e.getAttribute("id"));
+				isDeleting = true;
+			}
+		}
+		
+		// for all children elements, call
+		for (int i = 0; i < e.getChildNodes().getLength(); i++) {
+			Node n = e.getChildNodes().item(i);
+			if (n instanceof Element) {
+				findDeletedElements((Element) n, e, isDeleting);
+			}
+		}
+	}
+	
+	@Override
+	public void prepareDocument(Element documentElement,
+			List<ExpectedMigrationException> errors) {
+		
+		// find all IDs to delete
+		idsToDelete = new ArrayList<String>();
+		findDeletedElements(documentElement, null, false);
+
+		// call super
+		super.prepareDocument(documentElement, errors);
 	}
 
 	/**
@@ -156,6 +235,17 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 	@Override
 	protected String getTargetNamespace() {
 		return "http://openiaml.org/model0.5";
+	}
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.migrate.DomBasedMigrator#handleElement(org.w3c.dom.Element, org.w3c.dom.Element, java.util.List)
+	 */
+	@Override
+	public void handleElement(Element old, Element element,
+			List<ExpectedMigrationException> errors) {
+		
+		// does nothing
+		
 	}
 	
 }

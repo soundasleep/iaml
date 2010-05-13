@@ -3,10 +3,9 @@
  */
 package org.openiaml.model.tests.eclipse.migration;
 
+import java.io.File;
 import java.util.List;
 
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.openiaml.model.migrate.IamlModelMigrator;
@@ -21,7 +20,7 @@ import org.openiaml.model.migrate.Migrate4To5;
  * @author jmwright
  *
  */
-public class Migrate0_1SignupForm extends AbstractMigrateTestCase {
+public class Migrate0_1SignupForm extends AbstractMigrateTestCaseWithWarnings {
 
 	protected DiagramDocumentEditor editor_page = null;
 	protected DiagramDocumentEditor editor_store = null;
@@ -48,15 +47,13 @@ public class Migrate0_1SignupForm extends AbstractMigrateTestCase {
 		migrateModel();
 		
 		// there should be two children
-		assertEditorHasChildren(2, editor);
+		assertEditorHasChildren(1, editor);
 		
 		// check the contents
 		ShapeNodeEditPart page = assertHasFrame(editor, "SignupForm");
-		ShapeNodeEditPart store = assertHasDomainStore(editor, "domain store");
 		
 		// here we could open the page/stores and see what they contain
 		assertNotNull(page);
-		assertNotNull(store);
 		
 	}
 	
@@ -69,20 +66,13 @@ public class Migrate0_1SignupForm extends AbstractMigrateTestCase {
 		migrateModel();
 
 		// there should be two children
-		assertEditorHasChildren(2, editor);
+		assertEditorHasChildren(1, editor);
 		
 		// check the contents
 		ShapeNodeEditPart page = assertHasFrame(editor, "SignupForm");
-		ShapeNodeEditPart store = assertHasDomainStore(editor, "domain store");
 		
 		// here we could open the page/stores and see what they contain
 		assertNotNull(page);
-		assertNotNull(store);
-		
-		editor_store = openDiagram(store);
-		assertEditorDomainStore(editor_store);
-		editor_store.close(false);
-		editor_store = null;
 
 		editor_page = openDiagram(page);
 		assertEditorFrame(editor_page);
@@ -111,16 +101,9 @@ public class Migrate0_1SignupForm extends AbstractMigrateTestCase {
 		return "signup-form-0_1.iaml";
 	}
 
-	/**
-	 * We actually expect there to be some warnings.
-	 */
 	@Override
-	public void assertStatusOK(IStatus status) throws Exception {
-		if (status.getSeverity() == IStatus.WARNING && status instanceof MultiStatus) {
-			return;
-		}
-		// if not a multi-warning status, continue
-		super.assertStatusOK(status);
-	}	
+	public File getExpectedWarningsFile() {
+		return new File("src/org/openiaml/model/tests/eclipse/migration/Migrate0_1Warnings.txt");
+	}
 	
 }

@@ -5,16 +5,15 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
-import org.openiaml.model.diagram.edit.parts.DomainStoreEditPart;
+import org.openiaml.model.diagram.edit.parts.DomainSourceEditPart;
 import org.openiaml.model.drools.DroolsInferenceEngine;
 import org.openiaml.model.drools.ICreateElementsFactory;
-import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
-import org.openiaml.model.model.DomainStore;
+import org.openiaml.model.model.domain.DomainSource;
 import org.openiaml.model.model.domain.DomainStoreTypes;
 
 /**
- * Refreshes DomainStores when connected to Properties files.
+ * Refreshes DomainSources when connected to Properties files.
  *
  * @author jmwright
  *
@@ -29,7 +28,7 @@ public class RefreshDomainStoreMappingsWithDrools extends UpdateWithDroolsAction
 	 */
 	@Override
 	public void checkModelElement(EObject object) throws InferenceException {
-		DomainStore ds = (DomainStore) object;
+		DomainSource ds = (DomainSource) object;
 		if (!ds.getType().equals(DomainStoreTypes.PROPERTIES_FILE)) {
 			throw new InferenceException("Can only refresh mappings of Properties files: actual type was '" + ds.getType() + "'");
 		}
@@ -40,7 +39,7 @@ public class RefreshDomainStoreMappingsWithDrools extends UpdateWithDroolsAction
 	 */
 	@Override
 	public Class<? extends ShapeNodeEditPart> getEditPartClass() {
-		return DomainStoreEditPart.class;
+		return DomainSourceEditPart.class;
 	}
 
 	/* (non-Javadoc)
@@ -48,7 +47,7 @@ public class RefreshDomainStoreMappingsWithDrools extends UpdateWithDroolsAction
 	 */
 	@Override
 	public Class<? extends EObject> getExpectedEObjectClass() {
-		return DomainStore.class;
+		return DomainSource.class;
 	}
 
 	/* (non-Javadoc)
@@ -72,7 +71,7 @@ public class RefreshDomainStoreMappingsWithDrools extends UpdateWithDroolsAction
 	 */
 	@Override
 	public String getTitle() {
-		return "Properties-based DomainStore";
+		return "Properties-based DomainSource";
 	}
 
 	/**

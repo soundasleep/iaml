@@ -29,18 +29,17 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.openiaml.model.custom.actions.ProgressEnabledAction;
-import org.openiaml.model.model.ApplicationElement;
-import org.openiaml.model.model.CompositeCondition;
-import org.openiaml.model.model.CompositeOperation;
-import org.openiaml.model.model.DomainObject;
-import org.openiaml.model.model.DomainObjectInstance;
-import org.openiaml.model.model.DomainStore;
-import org.openiaml.model.model.NamedElement;
-import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.diagram.part.IamlCreationWizardPage;
 import org.openiaml.model.diagram.part.IamlDiagramEditorPlugin;
 import org.openiaml.model.diagram.part.IamlDiagramEditorUtil;
 import org.openiaml.model.diagram.part.Messages;
+import org.openiaml.model.model.ApplicationElement;
+import org.openiaml.model.model.CompositeCondition;
+import org.openiaml.model.model.CompositeOperation;
+import org.openiaml.model.model.NamedElement;
+import org.openiaml.model.model.VisibleThing;
+import org.openiaml.model.model.domain.DomainIterator;
+import org.openiaml.model.model.domain.DomainSchema;
 
 /**
  * An action which allows the user to move the selected model element
@@ -275,6 +274,8 @@ public class MoveIntoSeparateModelAction extends ProgressEnabledAction<Graphical
 	 * If the given file extension does not accurately describe the EMF
 	 * object, this method must return null, so that the object is not moved
 	 * into an EMF model which cannot support it.
+	 * 
+	 * <p>TODO this should be generated automatically.
 	 *
 	 * @param target
 	 * @return The domain model file extension, or null if none can be found
@@ -283,14 +284,11 @@ public class MoveIntoSeparateModelAction extends ProgressEnabledAction<Graphical
 		if (target instanceof CompositeCondition) {
 			return "iaml_condition";
 		}
-		if (target instanceof DomainObjectInstance) {
-			return "iaml_domain_object_instance";
+		if (target instanceof DomainIterator) {
+			return "iaml_iterator";
 		}
-		if (target instanceof DomainObject) {
-			return "iaml_domain_object";
-		}
-		if (target instanceof DomainStore) {
-			return "iaml_domain_store";
+		if (target instanceof DomainSchema) {
+			return "iaml_schema";
 		}
 		if (target instanceof ApplicationElement) {
 			return "iaml_element";

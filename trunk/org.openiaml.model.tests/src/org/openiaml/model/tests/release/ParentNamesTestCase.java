@@ -33,7 +33,6 @@ public class ParentNamesTestCase extends XmlTestCase {
 	 * parent name elements.
 	 */
 	private static final EClass[] PARENT_NAME_ELEMENTS = new EClass[] {
-		DomainPackage.eINSTANCE.getDomainSchema(),
 		ModelPackage.eINSTANCE.getDomainAttribute(),
 		ModelPackage.eINSTANCE.getEventTrigger(),
 		ModelPackage.eINSTANCE.getPrimitiveOperation(),

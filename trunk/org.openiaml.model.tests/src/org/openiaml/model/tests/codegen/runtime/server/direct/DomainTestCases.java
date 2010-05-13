@@ -3,11 +3,7 @@
  */
 package org.openiaml.model.tests.codegen.runtime.server.direct;
 
-import java.io.File;
-
 import net.sourceforge.jwebunit.junit.WebTestCase;
-
-import org.openiaml.model.tests.XmlTestCase;
 
 /**
  * Tests the domain object functionality directly through PHP.
@@ -33,11 +29,17 @@ public class DomainTestCases extends WebTestCase {
 		// get the page text
 		String actual = getPageSource();
 		
-		// get the expected text
-		String expected = XmlTestCase.readFile(new File(getRootPath() + "/DomainTestCases.expected.txt"));
+		// each line should be '[test N] PASS'
+		String[] lines = actual.split("\n");
+		StringBuffer expected = new StringBuffer();
+		for (int i = 0; i < lines.length; i++) {
+			if (!lines[i].trim().isEmpty()) {
+				expected.append("[test ").append(i + 1).append("] PASS\n");
+			}
+		}
 		
 		// make sure they're identical
-		assertEquals(unifyNewlines(expected), unifyNewlines(actual));
+		assertEquals(unifyNewlines(expected.toString()), unifyNewlines(actual));
 		
 	}
 

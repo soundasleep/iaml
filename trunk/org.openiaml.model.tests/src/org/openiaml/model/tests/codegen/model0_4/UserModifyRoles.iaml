@@ -18,7 +18,7 @@
     <elements xsi:type="iaml.components:LoginHandler" inParameterEdges="wires.1233b53a3ce.5a" id="components.1233b53a67e.19" name="current user" outWires="wires.1233b53a3ce.5c" type="USER">
       <wires xsi:type="iaml.wires:SetWire" id="wires.1233b53a3ce.5c" from="components.1233b53a67e.19" to="domain.128807fbeba.cda" name="set"/>
     </elements>
-    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.cda" name="logged in user" inWires="wires.1233b53a3ce.5c" autosave="true" outSelects="select2">
+    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.cda" name="logged in user" inWires="wires.1233b53a3ce.5c" autosave="true">
       <operations xsi:type="iaml:PrimitiveOperation" id="model.1233b53a1ca.71" name="add role" inActions="wires.1233b53a3ce.a7 wires.1233b53a3ce.a8"/>
       <operations xsi:type="iaml:PrimitiveOperation" id="model.1233b53a1ca.72" name="remove role" inActions="wires.1233b53a3ce.168 wires.1233b53a3ce.169"/>
       <operations xsi:type="iaml:PrimitiveOperation" id="model.1233b53a1ca.73" name="add permission" inActions="wires.1233b53a3ce.a6"/>
@@ -61,7 +61,7 @@
       </elements>
     </scopes>
   </scopes>
-  <schemas xsi:type="iaml.users:Role" id="domain.128807fbeba.cdb" name="default role" outParameterEdges="wires.1233b53a3ce.5a" inRequiresEdges="wires.1233afe62eb.2d" inSchemas="domain.128807fbeba.cdd schema2">
+  <schemas xsi:type="iaml.users:Role" id="domain.128807fbeba.cdb" name="default role" outParameterEdges="wires.1233b53a3ce.5a" inRequiresEdges="wires.1233afe62eb.2d" inSchemas="domain.128807fbeba.cdd">
     <parameterEdges id="wires.1233b53a3ce.5a" from="domain.128807fbeba.cdb" to="components.1233b53a67e.19"/>
     <permissions id="users.1233b53a814.6f" name="permission 1" outParameterEdges="wires.1233b53a3ce.ab wires.1233b53a3ce.16d" inRequiresEdges="wires.1233b53a3ce.453">
       <parameterEdges id="wires.1233b53a3ce.ab" from="users.1233b53a814.6f" to="wires.1233b53a3ce.a6"/>
@@ -87,9 +87,5 @@
   </sources>
   <sources id="domain.128807fbeba.ce2" outSchemas="domain.128807fbeba.ce3">
     <schemaEdges id="domain.128807fbeba.ce3" from="domain.128807fbeba.ce2" to="domain.128807fbeba.ce1"/>
-  </sources>
-  <sources id="manual_source" outSchemas="schema2" inSelects="select2">
-    <schemaEdges id="schema2" from="manual_source" to="domain.128807fbeba.cdb"/>
-    <selectEdges id="select2" from="domain.128807fbeba.cda" to="manual_source" />
   </sources>
 </iaml:InternetApplication>

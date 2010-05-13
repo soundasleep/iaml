@@ -271,3 +271,39 @@ rule "Create a Link Button for the source of a DetailWire: Add Parameter from At
 		queue.add(param, drools);
 	
 end
+
+/**
+ * @inference DetailWire,DomainIterator
+ *		The generated {@model DomainIterator} used to select one instance of a
+ *		{@model DetailWire} source is given the same {@model DomainSource} as the
+ *		original {@model DomainIterator}.
+ */
+rule "The view one DomainIterator is connected to the same DomainSource as the view many DomainIterator"
+	when
+		container : Frame( )
+
+		schema : DomainSchema ( )
+		domainSource : DomainSource ( )
+		instance : DomainIterator( eContainer == container )
+
+		selectEdge : SelectEdge ( eval ( functions.connectsSelect(selectEdge, instance, domainSource )) )
+		schemaEdge : SchemaEdge ( eval ( functions.connectsSchema(schemaEdge, domainSource, schema )) )
+		
+		source : VisibleThing ( eContainer == container )
+		target : Frame ( )
+		instanceSet : SetWire ( eval(functions.connectsSet( instanceSet, instance, source ) ) )
+		
+		detail : DetailWire ( )
+		eval ( functions.connectsDetail(detail, source, target ))
+		
+		iterator2 : DomainIterator ( eContainer == target )
+		
+		not ( SelectEdge ( from == iterator2 ))		
+	
+		eval ( handler.veto( detail ))
+	
+	then
+		SelectEdge select = handler.generatedSelectEdge(detail, iterator2, iterator2, domainSource);
+		queue.add(select, drools); 
+	
+end

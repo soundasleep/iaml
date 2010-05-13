@@ -9,6 +9,8 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.domain.DomainIterator;
+import org.openiaml.model.model.domain.DomainSchema;
+import org.openiaml.model.model.domain.DomainSource;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
@@ -170,6 +172,40 @@ public class FeedProducerSimple extends InferenceTestCase {
 		
 		Property count = instance.getResults();
 		assertGenerated(assertHasParameterEdge(root, count, run));
+		
+	}
+	
+	/**
+	 * The generated DomainIterator will also be connected to the
+	 * same DomainSource, referring to the same DomainSchema.
+	 * 
+	 * @throws Exception
+	 */
+	public void testGeneratedIteratorHasSourceAndSchema() throws Exception {
+		
+		Frame view = assertHasFrame(root, "View News");
+		Frame feed = assertHasFrame(root, "Target Feed");
+		
+		DomainIterator instance = assertHasDomainIterator(view, "Current News instance");
+		assertEquals(1, instance.getLimit());	// selecting one
+		
+		// the [limit 10] iterator is connected to a source
+		DomainIterator iterator10 = assertHasDomainIterator(feed, "recent news");
+		assertEquals(10, iterator10.getLimit());
+		
+		assertEquals(1, iterator10.getOutSelects().size());
+		DomainSource source = iterator10.getOutSelects().get(0).getTo();
+		
+		// connected to a DomainSchema
+		DomainSchema schema = assertHasDomainSchema(root, "News");
+		assertNotGenerated(schema);
+		
+		assertHasSelectEdge(iterator10, source);
+		assertHasSchemaEdge(source, schema);
+		
+		// our [limit 1] iterator connects to the same source
+		assertEquals(1, instance.getOutSelects().size());
+		assertHasSelectEdge(instance, source);
 		
 	}
 

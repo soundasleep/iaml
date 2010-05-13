@@ -194,6 +194,16 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	}
 	
 	/**
+	 * Remove the given class from the codegen cache. Returns the
+	 * Strings that were in the cache (if it was present) or <code>null</code>.
+	 * 
+	 * @param class1 The class to remove from the codegen cache.
+	 */
+	public List<String> removeCodegenCache(Class<?> class1) {
+		return codegenCache.remove(class1);
+	}
+	
+	/**
 	 * This cache attempts to store the results of previous code generations, allowing us
 	 * to perform multiple tests faster.
 	 * 

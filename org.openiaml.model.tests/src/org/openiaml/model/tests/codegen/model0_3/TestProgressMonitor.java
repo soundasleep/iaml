@@ -9,6 +9,7 @@ import java.util.List;
 import junit.framework.AssertionFailedError;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.openiaml.model.tests.CachedModelInferer;
 import org.openiaml.model.tests.CodegenTestCase;
 
 /** 
@@ -36,7 +37,8 @@ public class TestProgressMonitor extends CodegenTestCase {
 		};
 		
 		// do codegen (with a different class)
-		resetCodegenCache();
+		CachedModelInferer.getInstance().remove(SelectFieldFromObject.class);
+		removeCodegenCache(SelectFieldFromObject.class);
 		root = loadAndCodegen(SelectFieldFromObject.class, monitor);
 		
 		// check for all these subtasks
@@ -48,7 +50,7 @@ public class TestProgressMonitor extends CodegenTestCase {
 		
 		try {
 			for (String w : wanted) {
-				assertTrue("Subtask '" + w + "' wasn't called by the progress monitor", subtasks.contains(w));
+				assertTrue("Subtask '" + w + "' wasn't called by the progress monitor: " + subtasks, subtasks.contains(w));
 			}
 		} catch (AssertionFailedError e) {
 			// show all subtasks that were called

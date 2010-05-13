@@ -21,6 +21,7 @@ import org.openiaml.model.drools.ICreateElementsFactory;
 import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.tests.CachedModelLoader.IModelReloader;
+import org.openiaml.model.tests.codegen.model0_3.SelectFieldFromObject;
 
 /**
  * @author jmwright
@@ -279,6 +280,16 @@ public class CachedModelInferer {
 	 */
 	public Map<Class<?>, File> getCache() {
 		return inferCache;
+	}
+
+	/**
+	 * Remove the given class from the inference cache. Returns the
+	 * File that was in the cache (if it was present) or <code>null</code>.
+	 * 
+	 * @param class1 The class to remove from the inference cache.
+	 */
+	public File remove(Class<?> class1) {
+		return inferCache.remove(class1);
 	}
 	
 }

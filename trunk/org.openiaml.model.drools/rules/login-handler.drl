@@ -1773,7 +1773,9 @@ rule "Connect the DomainSource for the AccessControlHandler to the Current Insta
 		
 		iterator : DomainIterator ( eContainer == session )
 		set : SetWire ( from == login_handler, to == iterator )
-		
+	
+		# this will also cover if there is a Role and a Permission
+
 		# but a <em>different</em> schema is connected		
 		other_schema : DomainSchema ( )
 		param : ParameterEdge ( from == other_schema, to == login_handler )
@@ -1810,6 +1812,12 @@ rule "Connect the DomainSource for the AccessControlHandler to the Current Insta
 			permission : Permission ( ) and
 			requires : RequiresEdge ( from == ach, to == permission )
 		)
+		
+		# and this isn't using a DomainSchema
+		not ( exists (
+			role : DomainSchema ( ) and
+			requires : RequiresEdge ( from == ach, to == role )
+		) )
 		
 		# we select against the default schema
 		default_schema : Role ( name == "User", eContainer == root )

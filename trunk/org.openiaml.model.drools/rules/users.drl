@@ -237,22 +237,29 @@ rule "A LoginHandler of type 'user' should have an incoming Role as a parameter,
 		exists ( 
 			// it doesn't matter if the ACH is in the session or the page
 			ach : AccessControlHandler ( eContainer == session 
-			|| eval(functions.containingSession(ach).equals(session)) )
+				|| eval(functions.containingSession(ach).equals(session)) ) and
 
 			// the store contains either the roles or the permissions
 			// referenced by the ACH; we only want one
-			and
 			obj : NamedElement ( ) and
-			(( p : Permission ( ) and eval (obj == p) ) or
-			( r : Role ( ) and eval (obj == r )) ) and
+			/*
+				TODO This code doesn't work - it allows two incoming Permission/Roles to create
+				multiple outgoing ParameterEdges.
+				
+				(( p : Permission ( ) and eval (obj == p) ) or
+				( r : Role ( ) and eval (obj == r )) ) and
+				*/
 
-			RequiresEdge ( from == ach, to == obj ) )
+			RequiresEdge ( from == ach, to == obj )
+		)
 		
 		# default Role
 		user : Role ( eContainer == root, name == "User" )
 	
 		# if there is already an incoming parameter wire, don't connect up User
 		not (ParameterEdge ( to == login_handler ))
+		
+		not (ParameterEdge ( from == user, to == login_handler ))
 					
 		eval ( handler.veto( login_handler ))
 	

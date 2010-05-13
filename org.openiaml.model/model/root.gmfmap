@@ -86,33 +86,6 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//InternetApplication/children"/>
-    <ownedChild>
-      <domainMetaElement
-          href="iaml.ecore#//DomainObject"/>
-      <domainSpecialization
-          body="self.oclIsTypeOf( DomainObject )"/>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="iaml.gmfgraph#DomainObjectName"/>
-        <features
-            href="iaml.ecore#//NamedElement/name"/>
-      </labelMappings>
-      <labelMappings
-          readOnly="true">
-        <diagramLabel
-            href="iaml.gmfgraph#DomainObjectParentName"/>
-      </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="root.gmftool#//@palette/@tools.0/@tools.4"/>
-      <diagramNode
-          href="iaml.gmfgraph#DomainObject"/>
-    </ownedChild>
-  </nodes>
-  <nodes>
-    <containmentFeature
         href="iaml.ecore#//InternetApplication/scopes"/>
     <ownedChild>
       <domainMetaElement
@@ -208,28 +181,6 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//InternetApplication/domainStores"/>
-    <ownedChild>
-      <domainMetaElement
-          href="iaml.ecore#//DomainStore"/>
-      <domainSpecialization
-          body="self.oclIsTypeOf( DomainStore ) and not self.oclIsTypeOf( users::UserStore )"/>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="iaml.gmfgraph#DomainStoreName"/>
-        <features
-            href="iaml.ecore#//NamedElement/name"/>
-      </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="root.gmftool#//@palette/@tools.0/@tools.5"/>
-      <diagramNode
-          href="iaml.gmfgraph#DomainStore"/>
-    </ownedChild>
-  </nodes>
-  <nodes>
-    <containmentFeature
         href="iaml.ecore#//InternetApplication/scopes"/>
     <ownedChild>
       <domainMetaElement
@@ -311,28 +262,6 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//InternetApplication/domainStores"/>
-    <ownedChild>
-      <domainMetaElement
-          href="iaml.ecore#//users/UserStore"/>
-      <domainSpecialization
-          body="self.oclIsTypeOf( UserStore )"/>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="iaml.gmfgraph#UserStoreName"/>
-        <features
-            href="iaml.ecore#//NamedElement/name"/>
-      </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="root.gmftool#//@palette/@tools.0/@tools.6"/>
-      <diagramNode
-          href="iaml.gmfgraph#UserStore"/>
-    </ownedChild>
-  </nodes>
-  <nodes>
-    <containmentFeature
         href="iaml.ecore#//InternetApplication/scopes"/>
     <ownedChild>
       <domainMetaElement
@@ -368,7 +297,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="root.gmftool#//@palette/@tools.0/@tools.7"/>
+          href="root.gmftool#//@palette/@tools.0/@tools.4"/>
       <diagramNode
           href="iaml.gmfgraph#DomainSchema"/>
     </ownedChild>
@@ -395,7 +324,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="root.gmftool#//@palette/@tools.0/@tools.8"/>
+          href="root.gmftool#//@palette/@tools.0/@tools.5"/>
       <diagramNode
           href="iaml.gmfgraph#DomainSource"/>
     </ownedChild>
@@ -540,7 +469,7 @@
         href="iaml.ecore#//ContainsWires/schemaEdges"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="root.gmftool#//@palette/@tools.0/@tools.9"/>
+        href="root.gmftool#//@palette/@tools.0/@tools.6"/>
     <diagramLink
         href="iaml.gmfgraph#SchemaEdge"/>
     <sourceMetaFeature

@@ -5,10 +5,10 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
-import org.openiaml.model.diagram.visual.edit.parts.DomainObjectInstanceEditPart;
+import org.openiaml.model.diagram.frame.edit.parts.DomainIteratorEditPart;
 import org.openiaml.model.drools.DroolsInferenceEngine;
 import org.openiaml.model.drools.ICreateElementsFactory;
-import org.openiaml.model.model.DomainObjectInstance;
+import org.openiaml.model.model.domain.DomainIterator;
 
 /**
  * Refresh {@link DomainObjectInstance} mappings with Drools.
@@ -35,6 +35,7 @@ public class RefreshObjectInstanceMappingsWithDrools extends UpdateWithDroolsAct
 		 * @see #addRuleFile(String)
 		 * @return
 		 */
+		@Override
 		public List<String> getRuleFiles() {
 			return ruleFiles;
 		}
@@ -46,7 +47,7 @@ public class RefreshObjectInstanceMappingsWithDrools extends UpdateWithDroolsAct
 	 */
 	@Override
 	public Class<? extends ShapeNodeEditPart> getEditPartClass() {
-		return DomainObjectInstanceEditPart.class;
+		return DomainIteratorEditPart.class;
 	}
 
 	/* (non-Javadoc)
@@ -54,7 +55,7 @@ public class RefreshObjectInstanceMappingsWithDrools extends UpdateWithDroolsAct
 	 */
 	@Override
 	public Class<? extends EObject> getExpectedEObjectClass() {
-		return DomainObjectInstance.class;
+		return DomainIterator.class;
 	}
 
 	/* (non-Javadoc)
@@ -78,7 +79,7 @@ public class RefreshObjectInstanceMappingsWithDrools extends UpdateWithDroolsAct
 	 */
 	@Override
 	public String getTitle() {
-		return "DomainObjectInstance";
+		return "DomainIterator";
 	}
 
 }

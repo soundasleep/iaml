@@ -6,6 +6,7 @@
 
 require("../domain.php");
 require("../../databases.php");
+require("../../types/types.php");
 
 abstract class DefaultDomainIterator extends DomainIterator {
 
@@ -144,10 +145,11 @@ require("test11.php");
 require("test12.php");
 require("test13.php");
 require("test14.php");
-//$enable = true;	// for debug
 require("test15.php");
 require("test16.php");
 require("test17.php");
+//$enable = true;	// for debug
+require("test18.php");
 
 function clean_newlines($s) {
 	$s = str_replace("\r\n", "\n", $s);

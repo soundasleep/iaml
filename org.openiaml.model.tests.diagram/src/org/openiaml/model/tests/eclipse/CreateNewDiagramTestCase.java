@@ -17,8 +17,8 @@ import org.openiaml.model.diagram.part.IamlDiagramEditor;
 import org.openiaml.model.diagram.part.IamlDiagramEditorPlugin;
 import org.openiaml.model.diagram.part.IamlDiagramEditorUtil;
 import org.openiaml.model.inference.EcoreCreateElementsHelper;
-import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.InternetApplication;
+import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.wires.SyncWire;
 
@@ -99,7 +99,7 @@ public class CreateNewDiagramTestCase extends EclipseTestCaseHelper {
 		assertEditorHasChildren(1, editor);
 
 		// create a DomainStore
-		DomainStore ds = gmf.createDomainStore(root);
+		DomainSchema ds = gmf.createDomainSchema(root);
 		assertNotNull(ds);
 
 		// and a Frame

@@ -45,7 +45,7 @@ public class OpenSubDiagramTestCase extends EclipseTestCaseHelper {
 		// check the contents
 		ShapeNodeEditPart page1 = assertHasFrame(editor, "page1");
 		ShapeNodeEditPart page2 = assertHasFrame(editor, "page2");
-		ShapeNodeEditPart store = assertHasDomainStore(editor, "domainStore");
+		ShapeNodeEditPart store = assertHasDomainSchema(editor, "domainStore");
 		ShapeNodeEditPart page4 = assertHasFrame(editor, "last signup user");
 
 		// stop warnings

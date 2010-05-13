@@ -32,7 +32,7 @@ public class ShortcutsDomainStoreTestCase extends AbstractShortcutsTestCase {
 		
 		// check the contents
 		ShapeNodeEditPart page = assertHasFrame(editor, "page");
-		ShapeNodeEditPart store = assertHasDomainStore(editor, "domain store");
+		ShapeNodeEditPart store = assertHasDomainSchema(editor, "domain store");
 
 		// open the domain store
 		editor_store = openDiagram(store);

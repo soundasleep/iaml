@@ -26,9 +26,6 @@ import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DomainAttribute;
-import org.openiaml.model.model.DomainObject;
-import org.openiaml.model.model.DomainObjectInstance;
-import org.openiaml.model.model.DomainStore;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.GeneratedElement;
@@ -37,6 +34,9 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.TemporaryVariable;
+import org.openiaml.model.model.domain.DomainIterator;
+import org.openiaml.model.model.domain.DomainSchema;
+import org.openiaml.model.model.domain.DomainSource;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.Session;
@@ -47,7 +47,6 @@ import org.openiaml.model.model.visual.Label;
 import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.RunAction;
-import org.openiaml.model.model.wires.SelectWire;
 import org.openiaml.model.model.wires.SyncWire;
 
 /**
@@ -401,8 +400,19 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * @param pageName
 	 * @return
 	 */
-	public ShapeNodeEditPart assertHasDomainStore(DiagramDocumentEditor root, String storeName) {
-		return assertHasRenderedNamedObject(root, DomainStore.class, storeName, false, false);
+	public ShapeNodeEditPart assertHasDomainSchema(DiagramDocumentEditor root, String storeName) {
+		return assertHasRenderedNamedObject(root, DomainSchema.class, storeName, false, false);
+	}
+
+	/**
+	 * Look at the editor's children to see if a Domain Store is being displayed.
+	 *
+	 * @param root
+	 * @param pageName
+	 * @return
+	 */
+	public ShapeNodeEditPart assertHasDomainSource(DiagramDocumentEditor root, String storeName) {
+		return assertHasRenderedNamedObject(root, DomainSource.class, storeName, false, false);
 	}
 
 	/**
@@ -434,8 +444,8 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * @param pageName
 	 * @return
 	 */
-	public ShapeNodeEditPart assertHasDomainObject(DiagramDocumentEditor root, String objectName, boolean checkShortcut, boolean shortcutRequired) {
-		return assertHasRenderedNamedObject(root, DomainObject.class, objectName, checkShortcut, shortcutRequired);
+	public ShapeNodeEditPart assertHasDomainSchema(DiagramDocumentEditor root, String objectName, boolean checkShortcut, boolean shortcutRequired) {
+		return assertHasRenderedNamedObject(root, DomainSchema.class, objectName, checkShortcut, shortcutRequired);
 	}
 
 	/**
@@ -445,8 +455,8 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * @param pageName
 	 * @return
 	 */
-	public ShapeNodeEditPart assertHasDomainObjectInstance(DiagramDocumentEditor root, String objectName, boolean checkShortcut, boolean shortcutRequired) {
-		return assertHasRenderedNamedObject(root, DomainObjectInstance.class, objectName, checkShortcut, shortcutRequired);
+	public ShapeNodeEditPart assertHasDomainIterator(DiagramDocumentEditor root, String objectName, boolean checkShortcut, boolean shortcutRequired) {
+		return assertHasRenderedNamedObject(root, DomainIterator.class, objectName, checkShortcut, shortcutRequired);
 	}
 
 	/**
@@ -584,30 +594,6 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 		}
 
 		fail("assertHasConditionEdge: no connection found between '" + source + "' and '" + target + "' with any name. found: " + found);
-		return null;
-	}
-
-	/**
-	 * Assert that a SelectWire exists between two elements in the editor.
-	 */
-	public ConnectionNodeEditPart assertHasSelectWire(DiagramDocumentEditor editor, EditPart source, EditPart target, String name) {
-		String found = "";
-
-		for (Object c : editor.getDiagramEditPart().getConnections()) {
-			if (c instanceof ConnectionNodeEditPart) {
-				ConnectionNodeEditPart connection = (ConnectionNodeEditPart) c;
-				EObject element = connection.resolveSemanticElement();
-				if (element instanceof SelectWire) {
-					SelectWire w = (SelectWire) element;
-					if (connection.getSource().equals(source) &&
-							connection.getTarget().equals(target) && w.getName().equals(name))
-						return connection;	// found it
-					found += ", " + w.getName();
-				}
-			}
-		}
-
-		fail("assertHasSelectWire: no connection found between '" + source + "' and '" + target + "' with name '" + name + "'. found: " + found);
 		return null;
 	}
 
@@ -796,17 +782,17 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	/**
 	 * @see #assertHasDomainObject(DiagramDocumentEditor, String, boolean, boolean)
 	 */
-	public ShapeNodeEditPart assertHasDomainObject(
+	public ShapeNodeEditPart assertHasDomainSchema(
 			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
-		return assertHasRenderedNamedObject(editor, DomainObject.class, name, true, shortcutRequired);
+		return assertHasRenderedNamedObject(editor, DomainSchema.class, name, true, shortcutRequired);
 	}
 
 	/**
 	 * @see #assertHasDomainObjectInstance(DiagramDocumentEditor, String, boolean, boolean)
 	 */
-	public ShapeNodeEditPart assertHasDomainObjectInstance(
+	public ShapeNodeEditPart assertHasDomainIterator(
 			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
-		return assertHasRenderedNamedObject(editor, DomainObjectInstance.class, name, true, shortcutRequired);
+		return assertHasRenderedNamedObject(editor, DomainIterator.class, name, true, shortcutRequired);
 	}
 
 	/**
@@ -903,14 +889,6 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	public ShapeNodeEditPart assertHasTemporaryVariable(
 			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
 		return assertHasRenderedNamedObject(editor, TemporaryVariable.class, name, true, shortcutRequired);
-	}
-
-	/**
-	 * @see #assertHasDomainObject(DiagramDocumentEditor, String, boolean, boolean)
-	 */
-	public ShapeNodeEditPart assertHasDomainObject(
-			DiagramDocumentEditor editor, String name) {
-		return assertHasDomainObject(editor, name, false, false);
 	}
 
 	/**

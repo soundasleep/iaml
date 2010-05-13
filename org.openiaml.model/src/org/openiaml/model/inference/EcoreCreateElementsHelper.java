@@ -174,8 +174,14 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	}
 
 	public DomainSchema generatedDomainSchema(GeneratesElements by, InternetApplication container) throws InferenceException {
-		DomainSchema obj = (DomainSchema) createElement( container, DomainPackage.eINSTANCE.getDomainSchema(), ModelPackage.eINSTANCE.getInternetApplication_Schemas() );
+		DomainSchema obj = createDomainSchema(container);
 		setGeneratedBy(obj, by);
+		return obj;
+	}
+
+	// used by tests.diagram
+	public DomainSchema createDomainSchema(InternetApplication container) throws InferenceException {
+		DomainSchema obj = (DomainSchema) createElement( container, DomainPackage.eINSTANCE.getDomainSchema(), ModelPackage.eINSTANCE.getInternetApplication_Schemas() );
 		return obj;
 	}
 

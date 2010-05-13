@@ -31,8 +31,6 @@
 	«FILE "output/domain/all_domain_objects.php"»
 		<?php
 		«EXPAND template::Template::phpCheck»
-		
-		«EXPAND RemoteDefinitions::remoteDefinitions FOREACH getRoot().eAllContents.typeSelect(model::domain::DomainSource).select(s|s.type == model::domain::DomainStoreTypes::RSS2_0)»
 
 		«EXPAND GetDefinitions::getDomainObject FOREACH getRoot().getAllDomainIterators()»
 		«EXPAND StoreDefinitions::storeDomainObject FOREACH getRoot().getAllDomainIterators()»
@@ -319,6 +317,8 @@ class DomainSource_«safeName()» extends DomainSource {
 		);
 		$this->type = '«escapePhpString(type.toString())»';
 		$this->file = «EXPAND template::domain::Select::getDatabaseStoreString»;
+		$this->cache = «cache»;
+		$this->url = '«escapePhpString(url)»';
 	}
 	
 	// the current instance

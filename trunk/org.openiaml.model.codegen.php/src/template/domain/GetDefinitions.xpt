@@ -89,11 +89,6 @@
 	 * If a {@model RemoteDomainObject}, this may refresh the remote data source.
 	 */
 	function get_object_instance_«safeName()»($default = false) {
-		«FOREACH outSelects.to.select(s|s.type == model::domain::DomainStoreTypes::RSS2_0) AS remoteSource»
-			// possibly update the domain object this instance is contained in
-			«EXPAND RemoteDefinitions::considerUpdate FOR remoteSource»
-		«ENDFOREACH»
-					
 		$iterator = DomainIterator_«safeName()»::getInstance();
 		$result = $iterator->toArray();
 		$basic = array();
@@ -111,11 +106,6 @@
 	 * returns <code>0</code> rather than crashing.
 	 */
 	function get_instance_count_«safeName()»() {
-		«FOREACH outSelects.to.select(s|s.type == model::domain::DomainStoreTypes::RSS2_0) AS remoteSource»
-			// possibly update the domain object this instance is contained in
-			«EXPAND RemoteDefinitions::considerUpdate FOR remoteSource»
-		«ENDFOREACH»
-
 		«EXPAND GetDefinitions::checkIncomingParameters("0")»
 		$iterator = DomainIterator_«safeName()»::getInstance();
 		return $iterator->count();
@@ -131,11 +121,6 @@
 	 * Returns true or false.
 	 */
 	function has_object_instance_«safeName()»($default = false) {
-		«FOREACH outSelects.to.select(s|s.type == model::domain::DomainStoreTypes::RSS2_0) AS remoteSource»
-			// possibly update the domain object this instance is contained in
-			«EXPAND RemoteDefinitions::considerUpdate FOR remoteSource»
-		«ENDFOREACH»
-
 		«EXPAND GetDefinitions::checkIncomingParameters("false")»
 		$iterator = DomainIterator_«safeName()»::getInstance();
 		return !$iterator->isEmpty();

@@ -574,6 +574,11 @@ abstract class DomainIterator {
 		// reset current_result
 		$this->current_result = null;
 
+		// if we are RSS, possibly update directly from the RSS feed
+		if ($type == 'RSS2_0') {
+			$this->possiblyUpdateFromRSS();
+		}
+
 		if ($this->isNew()) {
 			if ($this->getNewInstanceID($this->schema->getTableName()) === null) {
 				log_message("[domain reload] creating a new empty instance");
@@ -646,11 +651,6 @@ abstract class DomainIterator {
 					throw new IamlDomainException("Unknown source type $type");
 				}
 			}
-		}
-
-		// if we are RSS, possibly update directly from the RSS feed
-		if ($type == 'RSS2_0') {
-			$this->possiblyUpdateFromRSS();
 		}
 
 		if ($type == 'RELATIONAL_DB' || $type == 'RSS2_0') {
@@ -1088,6 +1088,11 @@ abstract class DomainIterator {
 		$this->source->initExtensions();
 
 		$type = $this->source->getType();
+
+		// if we are RSS, possibly update directly from the RSS feed
+		if ($type == 'RSS2_0') {
+			$this->possiblyUpdateFromRSS();
+		}
 
 		if ($type == 'RELATIONAL_DB' || $type == 'RSS2_0') {
 			// we might need to create the table first

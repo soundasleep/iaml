@@ -249,6 +249,9 @@ public class GmfGraphTestCase extends XmlTestCase {
 	 */
 	private String getAccessorKey(Element e) {
 		String ac = e.getAttribute("accessor");
+		if (ac.indexOf('/') == -1) {
+			fail("Accessor string '" + ac + "' did not contain '/': " + e.getNodeName() + ", name = " + e.getAttribute("name"));
+		}
 		return ac.substring(0, ac.lastIndexOf('/'));
 	}
 	

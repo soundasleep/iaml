@@ -253,7 +253,7 @@ public class GmfGenTestCase extends XmlTestCase {
 		EClass meta = resolveSimpleEClass(metaElementName);
 		
 		// and now lets find the EClass of the editor
-		EClass editor = getEditorEClass(modelID);
+		EClass editor = getEditorEClass(filename, modelID);
 		
 		assertNotNull(meta);
 		assertNotNull(editor);
@@ -275,7 +275,7 @@ public class GmfGenTestCase extends XmlTestCase {
 	 * @param modelID
 	 * @return
 	 */
-	private EClass getEditorEClass(String modelID) throws Exception {
+	private EClass getEditorEClass(String filename2, String modelID) throws Exception {
 		if (foundClasses.containsKey(modelID))
 			return foundClasses.get(modelID);
 		
@@ -295,7 +295,7 @@ public class GmfGenTestCase extends XmlTestCase {
 			}			
 		}
 		
-		fail("Could not find Editor EClass for model ID '" + modelID + "'");
+		fail(filename2 + ": Could not find Editor EClass for model ID '" + modelID + "'");
 		return null;
 	}
 	
@@ -1288,7 +1288,7 @@ public class GmfGenTestCase extends XmlTestCase {
 							// ApplicationElement editors
 							if (!found) {
 								// e.g. DomainObject
-								EClass actual = getEditorEClass(b.getAttribute("diagramKind"));
+								EClass actual = getEditorEClass(filename, b.getAttribute("diagramKind"));
 								if (rootElement.isSuperTypeOf(actual)) {
 									// a valid subclass
 									found = true;

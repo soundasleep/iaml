@@ -1798,6 +1798,43 @@ rule "Connect the DomainSource for the AccessControlHandler to the Current Insta
 	
 end	
 
+rule "Connect the DomainSource for the AccessControlHandler to the Current Instance (direct)"
+	when
+		root : InternetApplication ( )
+	
+		session : Session( ) 
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT || type == LoginHandlerTypes.USER )
+		
+		ach : AccessControlHandler ( eContainer == session )
+		
+		expected_schema : DomainSchema ( )
+		requires : RequiresEdge ( from == ach, to == expected_schema )
+		
+		iterator : DomainIterator ( eContainer == session )
+		set : SetWire ( from == login_handler, to == iterator )
+	
+		# this will also cover if there is a Role and a Permission
+
+		# but the same schema is selected		
+		param : ParameterEdge ( from == expected_schema, to == login_handler )
+		
+		# and our expected schema has a source
+		source : DomainSource ( )
+		schemaEdge : SchemaEdge ( )
+		eval ( functions.connectsSchema( schemaEdge, source, expected_schema ) )
+
+		not ( selectEdge : SelectEdge ( ) and 
+			eval ( functions.connectsSelect( selectEdge, iterator, source ))
+		) 
+		
+		eval ( handler.veto( ach ))
+
+	then
+		SelectEdge select = handler.generatedSelectEdge(ach, source, iterator, source);
+		queue.add(select, drools);
+	
+end
+
 rule "Connect the DomainSource for the AccessControlHandler to the Current Instance (Permission)"
 	when
 		root : InternetApplication ( )

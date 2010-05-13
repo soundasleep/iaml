@@ -132,10 +132,32 @@ abstract class DomainSource {
 	// the file
 	var $file;
 
+	// the URL of the RSS feed
+	var $url;
+
+	// the cache time, in seconds; defaults to 0
+	// currently only implemented for RSS feeds
+	var $cache = 0;
+
 	public function getSchemas() { return $this->schemas; }
 	public function getSchema($name) { return $this->schemas[$name]; }
 	public function getType() { return $this->type; }
-	public function getFile() { return $this->file; }
+	public function getURL() { return $this->url; }
+	public function getCacheTime() { return $this->cache; }
+
+	/**
+	 * Get the filename for this DomainSource.
+	 *
+	 * If this is of type RSS2_0, and 'file' is NULL, then returns 'sqlite:remote.db', as
+	 * a default RSS store.
+	 */
+	public function getFile() {
+		if ($this->type === 'RSS2_0' && $this->file === null) {
+			return 'sqlite:remote.db';
+		}
+
+		return $this->file;
+	}
 
 	/**
 	 * Initialise the attribute extensions. Should not be called
@@ -180,7 +202,7 @@ abstract class DomainSource {
 	 */
 	public function executeQueryDirectly($query, $args = array()) {
 
-		if ($this->type == 'RELATIONAL_DB') {
+		if ($this->type == 'RELATIONAL_DB' || $this->type == 'RSS2_0') {
 
 			$db = new DatabaseQuery($this->getFile());
 
@@ -331,7 +353,7 @@ abstract class DomainIterator {
 		}
 
 		$type = $this->source->getType();
-		if ($type == 'RELATIONAL_DB') {
+		if ($type == 'RELATIONAL_DB' || $type == 'RSS2_0') {
 
 			// try to prepare a query on the table name; if the table doesn't exist,
 			// this will not succeed
@@ -573,7 +595,7 @@ abstract class DomainIterator {
 				return;
 			} else {
 				log_message("[domain reload] reloading a created new instance");
-				if ($type == 'RELATIONAL_DB') {
+				if ($type == 'RELATIONAL_DB' || $type == 'RSS2_0') {
 					/*
 					 * evaluate_select_wire($db_name, $source_id, $source_class,
 					 *		$query, $args, $offset = 0, $order_by = "",
@@ -626,7 +648,12 @@ abstract class DomainIterator {
 			}
 		}
 
-		if ($type == 'RELATIONAL_DB') {
+		// if we are RSS, possibly update directly from the RSS feed
+		if ($type == 'RSS2_0') {
+			$this->possiblyUpdateFromRSS();
+		}
+
+		if ($type == 'RELATIONAL_DB' || $type == 'RSS2_0') {
 			log_message("[domain reload] reloading from the domain source");
 			// we might need to create the table first
 			if ($this->isAutosave()) {
@@ -857,7 +884,7 @@ abstract class DomainIterator {
 			$this->initialiseInstance($this->schema);
 		}
 
-		if ($type == 'RELATIONAL_DB') {
+		if ($type == 'RELATIONAL_DB' || $type == 'RSS2_0') {
 			// we might need to create the table first
 			$this->possiblyCreateTable();
 
@@ -1062,7 +1089,7 @@ abstract class DomainIterator {
 
 		$type = $this->source->getType();
 
-		if ($type == 'RELATIONAL_DB') {
+		if ($type == 'RELATIONAL_DB' || $type == 'RSS2_0') {
 			// we might need to create the table first
 			$this->possiblyCreateTable();
 
@@ -1152,6 +1179,128 @@ abstract class DomainIterator {
 			$result .= "\n" . $attrinst->getName() . " = " . $attrinst->getValue();
 		}
 		log_message($result);
+	}
+
+	/**
+	 * We might need to update the DomainSource from RSS.
+	 */
+	public function possiblyUpdateFromRSS() {
+		log_message("[domain rss] Possibly updating from RSS");
+
+		// we will need to create the table in any case
+		$this->possiblyCreateTable();
+
+		// when is the last time we updated our cache?
+		if ($this->getStoredValue("last_rss_update", 0) >= (time() - $this->source->getCacheTime())) {
+			// it is up to date; bail
+			log_message("[domain rss] RSS Data is up to date");
+			return;
+		}
+
+		$url = $this->source->getURL();
+		log_message("[domain rss] Loading '$url'");
+
+		$file = file_get_contents($url);
+		if ($file === false) {
+			// failed
+			throw new IamlDomainException("Could not load external feed '$url'");
+		}
+
+		log_message("[remote] Parsing into XML");
+		// wrap up the parsing so we can catch errors and warnings
+		libxml_clear_errors();
+		libxml_use_internal_errors(false);
+		$xml = simplexml_load_string($file);
+		libxml_use_internal_errors(true);
+		$errors = libxml_get_errors();
+
+		if ($xml === false || $errors) {
+			// errors occured
+			$first = null;
+			foreach ($errors as $k) {
+				if ($first === null) {
+					$first = $k;
+				}
+				log_message("[domain rss] Error: $k");
+			}
+			throw new IamlDomainException("Could not load external feed '$url': " . count($errors) . " errors occured. First: $first");
+		}
+
+		// delete any existing data
+		// NOTE this only handles direct schema, not inherited schemas
+		$this->source->executeQueryDirectly("DELETE FROM " . $this->schema->getTableName() . " WHERE 1");
+
+		// now parse over the XML as RSS
+		$resultQueries = array();
+		$resultArgs = array();
+		$items = $xml->xpath("/rss/channel/item");
+		log_message("[domain rss] RSS items: " . count($items));
+		foreach ($items as $item) {
+			// to store values
+			$result = array();
+
+			// translate the item keys to lowercase
+			$current_item = array();
+			foreach ($item as $key => $value) {
+				// in simplexml, nodes need to be first cast to (string) before they
+				// can be accessed as strings
+				$current_item[strtolower($key)] = (string) $value;
+			}
+
+			// check each attribute in our schema (not derived attributes)
+			foreach ($this->schema->getAttributes() as $attribute) {
+				$attribute_name = $attribute->getName();
+
+				// in simplexml, nodes are accessed through obj->foo
+				if (isset($current_item[strtolower($attribute_name)])) {
+					$value = $current_item[strtolower($attribute_name)];
+					$type = $attribute->getType();
+
+					// can we cast it to the expected type?
+					if (!can_cast($value, $type)) {
+						throw new IamlDomainException("Cannot cast '$value' into type '$type'");
+					}
+
+					$value = do_cast($value, $type);
+
+					// and then cast it back into string for insertion
+					$value = do_cast($value, 'http://openiaml.org/model/datatypes#iamlString');
+
+					$result[$attribute->getName()] = $value;
+				}
+
+			}
+
+			// we now have all the new data in $result; insert it
+
+			// construct the query
+			$query = "INSERT INTO " . $this->schema->getTableName() . " (";
+			$first = true;
+			foreach ($result as $key => $value) {
+				if (!$first)
+					$query .= ", ";
+				$query .= $key;
+				$first = false;
+			}
+			$query .= ") VALUES (";
+			$first = true;
+			foreach ($result as $key => $value) {
+				if (!$first)
+					$query .= ", ";
+				$query .= ":$key";
+				$first = false;
+			}
+			$query .= ")";
+
+			// execute
+			$this->source->executeQueryDirectly($query, $result);
+
+		}
+
+		// update the cache
+		$this->setStoredValue("last_rss_update", time());
+		log_message("[domain rss] RSS Refresh completed");
+
 	}
 
 }

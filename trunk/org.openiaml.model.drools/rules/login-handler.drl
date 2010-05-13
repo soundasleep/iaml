@@ -1478,8 +1478,6 @@ rule "Update Query from a DomainSchema [user]"
 		instance : DomainIterator ( )
 		setWire : SetWire ( from == login_handler, to == instance )
 		
-		eval ( functions.debug("role: " + dobj + " query: " + instance.getQuery() + " constructed: " + functions.getUserQueryString(dobj)) ) 
-		
 		eval ( !functions.getUserQueryString(dobj).equals(instance.getQuery()))
 		
 		eval ( handler.veto( login_handler ))
@@ -1703,6 +1701,9 @@ rule "Connect a default DomainSource for LoginHandlers that do not specify a Sel
 		not ( selectEdge : SelectEdge ( ) and 
 			eval ( functions.connectsSelect( selectEdge, iterator, source ))
 		) 
+
+		# and this source isn't being used for anything else
+		not ( s2 : SelectEdge ( to == source ) )
 		
 		eval ( handler.veto( login_handler ))
 
@@ -1734,6 +1735,9 @@ rule "Connect a default DomainSource for LoginHandlers that do not specify a Sel
 		not ( selectEdge : SelectEdge ( ) and 
 			eval ( functions.connectsSelect( selectEdge, iterator, source ))
 		) 
+
+		# and this source isn't being used for anything else
+		not ( s2 : SelectEdge ( to == source ) )
 		
 		# but will not be provided by the ACH later
 		not (
@@ -1755,7 +1759,7 @@ end
  * handled by the method call. But the 'current instance' is expected to be of type '[role]'; thus, we 
  * use this as the expected schema.
  */
-rule "Connect the DomainSource for the AccessControlHandler to the Current Instance"
+rule "Connect the DomainSource for the AccessControlHandler to the Current Instance (inherited)"
 	when
 		root : InternetApplication ( )
 	
@@ -1779,10 +1783,52 @@ rule "Connect the DomainSource for the AccessControlHandler to the Current Insta
 		source : DomainSource ( )
 		schemaEdge : SchemaEdge ( )
 		eval ( functions.connectsSchema( schemaEdge, source, expected_schema ) )
-		
+
 		not ( selectEdge : SelectEdge ( ) and 
 			eval ( functions.connectsSelect( selectEdge, iterator, source ))
 		) 
+		
+		eval ( handler.veto( ach ))
+
+	then
+		SelectEdge select = handler.generatedSelectEdge(ach, source, iterator, source);
+		queue.add(select, drools);
+	
+end	
+
+rule "Connect the DomainSource for the AccessControlHandler to the Current Instance (Permission)"
+	when
+		root : InternetApplication ( )
+	
+		session : Session( ) 
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT || type == LoginHandlerTypes.USER )
+		
+		ach : AccessControlHandler ( eContainer == session )
+		
+		# the ACH requires at least one permission
+		exists (
+			permission : Permission ( ) and
+			requires : RequiresEdge ( from == ach, to == permission )
+		)
+		
+		# we select against the default schema
+		default_schema : Role ( name == "User", eContainer == root )
+			
+		iterator : DomainIterator ( eContainer == session )
+		set : SetWire ( from == login_handler, to == iterator )
+		
+		# the expected schema is connected		
+		param : ParameterEdge ( from == default_schema, to == login_handler )
+		
+		# and our expected schema has a source
+		source : DomainSource ( )
+		schemaEdge : SchemaEdge ( )
+		eval ( functions.connectsSchema( schemaEdge, source, default_schema ) )
+
+		not ( selectEdge : SelectEdge ( ) and 
+			eval ( functions.connectsSelect( selectEdge, iterator, source ))
+		) 
+		
 		
 		eval ( handler.veto( ach ))
 

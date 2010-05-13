@@ -19,9 +19,9 @@ context model::Operation ERROR "Operation must have a name" :
 context model::components::LoginHandler ERROR "A login handler must have an incoming parameter to check against" :
 	!inParameterEdges.isEmpty;
 	
-context model::components::LoginHandler ERROR "A login handler of type USER must have at least one incoming parameter of type Role":
+context model::components::LoginHandler ERROR "A login handler of type USER must have at least one incoming parameter of type Role or Permission":
 	type != model::components::LoginHandlerTypes::USER ||
-	!inParameterEdges.from.typeSelect(model::users::Role).isEmpty;
+	!(inParameterEdges.from.typeSelect(model::users::Role).isEmpty && inParameterEdges.from.typeSelect(model::users::Permission).isEmpty);
 
 context model::components::LoginHandler ERROR "A login handler of type DOMAIN_OBJECT must have at least one incoming parameter of type DomainAttribute":
 	type != model::components::LoginHandlerTypes::DOMAIN_OBJECT ||

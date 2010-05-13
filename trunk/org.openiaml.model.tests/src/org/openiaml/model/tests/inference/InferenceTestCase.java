@@ -66,6 +66,7 @@ import org.openiaml.model.model.operations.SplitNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.Email;
 import org.openiaml.model.model.scopes.Session;
+import org.openiaml.model.model.users.Permission;
 import org.openiaml.model.model.users.RequiresEdgeDestination;
 import org.openiaml.model.model.users.RequiresEdgesSource;
 import org.openiaml.model.model.users.Role;
@@ -238,6 +239,18 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		List<Object> results = nameSelect(typeSelect(element.getConditions(), PrimitiveCondition.class), string);
 		assertEquals(1, results.size());
 		return (PrimitiveCondition) results.get(0);
+	}
+	
+	/**
+	 * Assert that the given element contains the given
+	 * Permission.
+	 *
+	 * @return The element found
+	 */
+	public Permission assertHasPermission(Role element, String string) throws JaxenException {
+		List<Object> results = nameSelect(typeSelect(element.getPermissions(), Permission.class), string);
+		assertEquals(1, results.size());
+		return (Permission) results.get(0);
 	}
 	
 	/**
@@ -1067,6 +1080,17 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	}
 	
 	/**
+	 * Assert there exists <em>no</em> unidirectional ParameterEdge between
+	 * the given elements.
+	 *
+	 * @return The element found
+	 */
+	public void assertHasNoParameterEdge(EObject container, ParameterEdgesSource from, ParameterEdgeDestination to) throws JaxenException {
+		Set<ParameterEdge> params = getParameterEdgesFromTo(container, from, to);
+		assertEquals("Should be exactly zero parameter edge: " + params, 0, params.size());
+	}
+	
+	/**
 	 * Assert there exists only one unidirectional SelectEdge between
 	 * the given elements.
 	 *
@@ -1150,6 +1174,16 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		Set<RequiresEdge> params = getRequiresEdgesFromTo(container, from, to);
 		assertEquals("Should be exactly one requires edge: " + params, 1, params.size());
 		return params.iterator().next();
+	}
+	
+	/**
+	 * Assert there exists <em>no</em> unidirectional RequiresEdge between
+	 * the given elements.
+	 *
+	 */
+	public void assertHasNoRequiresEdge(EObject container, RequiresEdgesSource from, RequiresEdgeDestination to) throws JaxenException {
+		Set<RequiresEdge> params = getRequiresEdgesFromTo(container, from, to);
+		assertEquals("Should be exactly no requires edge: " + params, 0, params.size());
 	}
 	
 	/**

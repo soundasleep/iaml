@@ -240,9 +240,12 @@ rule "A LoginHandler of type 'user' should have an incoming Role as a parameter,
 			|| eval(functions.containingSession(ach).equals(session)) )
 
 			// the store contains either the roles or the permissions
-			// referenced by the ACH; we only want one		
-			and			
-			obj : NamedElement ( eContainer == root ) and
+			// referenced by the ACH; we only want one
+			and
+			obj : NamedElement ( ) and
+			(( p : Permission ( ) and eval (obj == p) ) or
+			( r : Role ( ) and eval (obj == r )) ) and
+
 			RequiresEdge ( from == ach, to == obj ) )
 		
 		# default Role
@@ -449,20 +452,25 @@ rule "The generated default User has an identical DomainSource as the extended R
 	when
 		root : InternetApplication ( )
 		user : Role ( name == "User", eContainer == root )
-		
-		another : Role ( this != user )
-		
-		extends : ExtendsEdge ( from == another, to == user )
-		
-		# there's a schema edge from the original source to the subclassed role
-		original : DomainSource ( )
-		schemaEdge : SchemaEdge ( from == original, to == another )
-		
+
+		exists (
+			original : DomainSource ( ) and
+					 
+			another : Role ( this != user ) and
+			
+			extends : ExtendsEdge ( from == another, to == user ) and
+			
+			# there's a schema edge from the original source to the subclassed role
+			schemaEdge : SchemaEdge ( from == original, to == another )
+		)
+			
 		not ( SchemaEdge ( to == user ))
 						
 		eval ( handler.veto( user ))
 
 	then
+		DomainSource original = functions.getOriginalDomainSource(user);
+	
 		DomainSource source = handler.generatedDomainSource(user, root);
 		handler.setFile(source, original.getFile());
 		handler.setType(source, original.getType());

@@ -414,6 +414,31 @@ public class DroolsHelperFunctions {
 	}
 	
 	/**
+	 * Get a DomainSource that will be duplicated, in order to provide for the
+	 * given Role.
+	 * 
+	 * @param root_role
+	 * @return
+	 */
+	public DomainSource getOriginalDomainSource(Role root_role) {
+	
+		for (ExtendsEdge ex : root_role.getInExtendsEdges()) {
+			if (ex.getFrom() instanceof DomainSchema) {
+				DomainSchema schema = (DomainSchema) ex.getFrom();
+				
+				for (SchemaEdge se : schema.getInSchemas()) {
+					// return the first one found
+					return se.getFrom();
+				}
+			}
+		}
+		
+		// couldn't find any
+		throw new IllegalArgumentException("Role " + root_role + " did not have any extended edges that provide a DomainSource");
+		
+	}
+	
+	/**
 	 * Perform the same as the codegen <code>safeNameString</code>; i.e.
 	 * replace all <code>[^A-Za-z0-9]</code> characters with an underscore. 
 	 * 

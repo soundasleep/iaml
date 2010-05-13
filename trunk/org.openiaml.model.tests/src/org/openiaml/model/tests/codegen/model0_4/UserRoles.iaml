@@ -7,7 +7,7 @@
     </elements>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233afe628e.7e" name="target"/>
   </scopes>
-  <schemas xsi:type="iaml.users.Role" id="domain.128807fbeba.d93" name="default role" inRequiresEdges="wires.1233afe62eb.2d" inSchemas="domain.128807fbeba.d95"/>
+  <schemas xsi:type="iaml.users:Role" id="domain.128807fbeba.d93" name="default role" inRequiresEdges="wires.1233afe62eb.2d" inSchemas="domain.128807fbeba.d95"/>
   <sources id="domain.128807fbeba.d94" outSchemas="domain.128807fbeba.d95">
     <schemaEdges id="domain.128807fbeba.d95" from="domain.128807fbeba.d94" to="domain.128807fbeba.d93"/>
   </sources>

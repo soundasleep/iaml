@@ -63,45 +63,6 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="DomainObject"
-          description="Create new DomainObject">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/DomainObject.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/DomainObject.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="DomainStore"
-          description="Create new DomainStore">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/DomainStore.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/DomainStore.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="UserStore"
-          description="Create new UserStore">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/UserStore.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/UserStore.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
           title="DomainSchema"
           description="Create new DomainSchema">
         <smallIcon

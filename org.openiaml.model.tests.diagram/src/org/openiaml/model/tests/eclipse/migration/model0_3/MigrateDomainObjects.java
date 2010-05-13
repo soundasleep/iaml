@@ -6,21 +6,16 @@ package org.openiaml.model.tests.eclipse.migration.model0_3;
 import java.io.File;
 import java.util.List;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
-import org.openiaml.model.impl.FileReferenceImpl;
 import org.openiaml.model.migrate.IamlModelMigrator;
 import org.openiaml.model.migrate.Migrate0To1;
 import org.openiaml.model.migrate.Migrate1To2;
 import org.openiaml.model.migrate.Migrate2To4;
 import org.openiaml.model.migrate.Migrate4To5;
 import org.openiaml.model.model.DomainAttribute;
-import org.openiaml.model.model.DomainObject;
-import org.openiaml.model.model.DomainStore;
-import org.openiaml.model.model.domain.DomainStoreTypes;
 import org.openiaml.model.model.visual.Frame;
-import org.openiaml.model.tests.eclipse.migration.AbstractMigrateTestCase;
+import org.openiaml.model.tests.eclipse.migration.AbstractMigrateTestCaseWithWarnings;
 
 /**
  * Tests migrating a 0.2 model to 0.3: domain objects
@@ -29,7 +24,7 @@ import org.openiaml.model.tests.eclipse.migration.AbstractMigrateTestCase;
  * @author jmwright
  *
  */
-public class MigrateDomainObjects extends AbstractMigrateTestCase {
+public class MigrateDomainObjects extends AbstractMigrateTestCaseWithWarnings {
 
 	protected DiagramDocumentEditor editor_page = null;
 
@@ -85,101 +80,13 @@ public class MigrateDomainObjects extends AbstractMigrateTestCase {
 	public void testRoot() throws Exception {
 		migrateModel();
 		
-		// there should be five children (five pages)
-		assertEditorHasChildren(5, editor);
+		// there should be five children (a page and a session)
+		assertEditorHasChildren(2, editor);
 		
 		// check the contents
-		assertHasDomainStore(editor, "normal domain store");
-		assertHasDomainStore(editor, "file domain store");
-		assertHasDomainObject(editor, "normal domain object");
 		assertHasFrame(editor, "a page");
 		assertHasSession(editor, "session");
 	}
-
-	/**
-	 * Test the domain store sub-editor.
-	 * 
-	 * @throws Exception
-	 */
-	public void testNormalDomainStore() throws Exception {
-		migrateModel();
-		
-		ShapeNodeEditPart part = assertHasDomainStore(editor, "normal domain store");
-		assertNotNull(part);
-		
-		DomainStore store = (DomainStore) part.resolveSemanticElement();
-		assertEquals(store.getName(), "normal domain store");
-		assertEquals(store.getType(), DomainStoreTypes.RELATIONAL_DB);
-		
-		// open diagram
-		DiagramDocumentEditor sub = openDiagram(part);
-		assertEditorDomainStore(sub);
-		
-		// check contents
-		assertEditorHasChildren(2, sub);
-		{
-			ShapeNodeEditPart p = assertHasDomainObject(sub, "normal domain object");
-			assertNotNull(p);
-			
-			DomainObject obj = (DomainObject) p.resolveSemanticElement();
-			assertEquals(obj.getName(), "normal domain object");
-		}
-		{
-			ShapeNodeEditPart p = assertHasDomainAttribute(sub, "normal domain attribute");
-			assertNotNull(p);
-			
-			DomainAttribute obj = (DomainAttribute) p.resolveSemanticElement();
-			assertEquals(obj.getName(), "normal domain attribute");
-		}
-		
-		sub.close(false);
-	}
-
-	/**
-	 * Test the file domain store sub-editor.
-	 * 
-	 * @throws Exception
-	 */
-	public void testFileDomainStore() throws Exception {
-		migrateModel();
-		
-		ShapeNodeEditPart part = assertHasDomainStore(editor, "file domain store");
-		assertNotNull(part);
-		
-		DomainStore store = (DomainStore) part.resolveSemanticElement();
-		assertEquals(store.getName(), "file domain store");
-		assertEquals(store.getType(), DomainStoreTypes.PROPERTIES_FILE);
-		
-		// we need to get a URI
-		URI relative = store.eResource().getURI();
-		File desired = FileReferenceImpl.resolveFilePath(relative, "test1.properties");
-		File actual = store.getFile().toFile(relative);
-		assertEquals("The desired and actual FileReferences do not resolve to the same location: actual = '" + actual + "', desired = '" + desired + "'", actual, desired);
-		
-		// open diagram
-		DiagramDocumentEditor sub = openDiagram(part);
-		assertEditorDomainStore(sub);
-		
-		// check contents
-		assertEditorHasChildren(2, sub);
-		{
-			ShapeNodeEditPart p = assertHasDomainObject(sub, "file domain object");
-			assertNotNull(p);
-			
-			DomainObject obj = (DomainObject) p.resolveSemanticElement();
-			assertEquals(obj.getName(), "file domain object");
-		}
-		{
-			ShapeNodeEditPart p = assertHasDomainAttribute(sub, "file domain attribute");
-			assertNotNull(p);
-			
-			DomainAttribute obj = (DomainAttribute) p.resolveSemanticElement();
-			assertEquals(obj.getName(), "file domain attribute");
-		}
-		
-		sub.close(false);
-	}
-	
 
 	/**
 	 * Test the page sub-editor.
@@ -200,27 +107,13 @@ public class MigrateDomainObjects extends AbstractMigrateTestCase {
 		assertEditorFrame(sub);
 		
 		// check contents
-		assertEditorHasChildren(4, sub);
-		{
-			ShapeNodeEditPart p = assertHasDomainObject(sub, "do");
-			assertNotNull(p);
-			
-			DomainObject obj = (DomainObject) p.resolveSemanticElement();
-			assertEquals(obj.getName(), "do");
-		}
+		assertEditorHasChildren(2, sub);
 		{
 			ShapeNodeEditPart p = assertHasDomainAttribute(sub, "da");
 			assertNotNull(p);
 			
 			DomainAttribute obj = (DomainAttribute) p.resolveSemanticElement();
 			assertEquals(obj.getName(), "da");
-		}
-		{
-			ShapeNodeEditPart p = assertHasDomainObject(sub, "fo");
-			assertNotNull(p);
-			
-			DomainObject obj = (DomainObject) p.resolveSemanticElement();
-			assertEquals(obj.getName(), "fo");
 		}
 		{
 			ShapeNodeEditPart p = assertHasDomainAttribute(sub, "fa");
@@ -233,80 +126,9 @@ public class MigrateDomainObjects extends AbstractMigrateTestCase {
 		sub.close(false);
 	}
 	
-	/**
-	 * Test the domain store sub-editor, and then the domain
-	 * object sub-editor.
-	 * 
-	 * @throws Exception
-	 */
-	public void testNormalDomainStoreObject() throws Exception {
-		migrateModel();
-		
-		ShapeNodeEditPart part = assertHasDomainStore(editor, "normal domain store");
-		assertNotNull(part);
-		
-		// open diagram
-		DiagramDocumentEditor sub = openDiagram(part);
-		assertEditorDomainStore(sub);
-		
-		// check contents
-		ShapeNodeEditPart p2 = assertHasDomainObject(sub, "normal domain object");
-		assertNotNull(p2);
-		
-		// open diagram
-		DiagramDocumentEditor sub2 = openDiagram(p2);
-		assertEditorDomainObject(sub2);
-		
-		// check contents
-		assertEditorHasChildren(1, sub2);
-		{
-			ShapeNodeEditPart p = assertHasDomainAttribute(sub2, "another normal attribute");
-			assertNotNull(p);
-			
-			DomainAttribute obj = (DomainAttribute) p.resolveSemanticElement();
-			assertEquals(obj.getName(), "another normal attribute");
-		}
-		
-		sub2.close(false);
-		sub.close(false);
-	}
-	
-	/**
-	 * Test the file store sub-editor, and then the file
-	 * object sub-editor.
-	 * 
-	 * @throws Exception
-	 */
-	public void testFileDomainStoreObject() throws Exception {
-		migrateModel();
-		
-		ShapeNodeEditPart part = assertHasDomainStore(editor, "file domain store");
-		assertNotNull(part);
-		
-		// open diagram
-		DiagramDocumentEditor sub = openDiagram(part);
-		assertEditorDomainStore(sub);
-		
-		// check contents
-		ShapeNodeEditPart p2 = assertHasDomainObject(sub, "file domain object");
-		assertNotNull(p2);
-		
-		// open diagram
-		DiagramDocumentEditor sub2 = openDiagram(p2);
-		assertEditorDomainObject(sub2);
-		
-		// check contents
-		assertEditorHasChildren(1, sub2);
-		{
-			ShapeNodeEditPart p = assertHasDomainAttribute(sub2, "another fda");
-			assertNotNull(p);
-			
-			DomainAttribute obj = (DomainAttribute) p.resolveSemanticElement();
-			assertEquals(obj.getName(), "another fda");
-		}
-		
-		sub2.close(false);
-		sub.close(false);
+	@Override
+	public File getExpectedWarningsFile() {
+		return new File("src/org/openiaml/model/tests/eclipse/migration/model0_3/Migrate0_3Warnings.txt");
 	}
 	
 }

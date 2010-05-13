@@ -3,34 +3,6 @@
     <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Diagram"/>
     <elementType editHelperClassName="CompositeWireEditHelper" xsi:type="gmfgen:MetamodelType"/>
     <viewmap figureQualifiedClassName="org.eclipse.draw2d.FreeformLayer" xsi:type="gmfgen:FigureViewmap"/>
-    <containsShortcutsTo>iaml_domain_object_instance</containsShortcutsTo>
-    <containsShortcutsTo>iaml</containsShortcutsTo>
-    <containsShortcutsTo>iaml_condition</containsShortcutsTo>
-    <containsShortcutsTo>iaml_wire</containsShortcutsTo>
-    <containsShortcutsTo>iaml_element</containsShortcutsTo>
-    <containsShortcutsTo>iaml_domain_store</containsShortcutsTo>
-    <containsShortcutsTo>iaml_operation</containsShortcutsTo>
-    <containsShortcutsTo>iaml_visual</containsShortcutsTo>
-    <containsShortcutsTo>iaml_user_store</containsShortcutsTo>
-    <containsShortcutsTo>iaml_domain_object</containsShortcutsTo>
-    <containsShortcutsTo>iaml_session</containsShortcutsTo>
-    <containsShortcutsTo>iaml_frame</containsShortcutsTo>
-    <containsShortcutsTo>iaml_email</containsShortcutsTo>
-    <containsShortcutsTo>iaml_remote_domain_object</containsShortcutsTo>
-    <shortcutsProvidedFor>iaml_domain_object_instance</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_condition</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_wire</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_element</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_domain_store</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_operation</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_visual</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_user_store</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_domain_object</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_session</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_frame</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_email</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_remote_domain_object</shortcutsProvidedFor>
     <domainDiagramElement href="iaml.genmodel#//model/wires/CompositeWire"/>
     <topLevelNodes canonicalEditPolicyClassName="CompositeOperationCanonicalEditPolicy" createCommandClassName="CompositeOperationCreateCommand" editPartClassName="CompositeOperationEditPart" graphicalNodeEditPolicyClassName="CompositeOperationGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="CompositeOperationItemSemanticEditPolicy" notationViewFactoryClassName="CompositeOperationViewFactory" visualID="2021">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -387,6 +359,26 @@
     </preferencePages>
   <containsShortcutsTo>iaml_schema</containsShortcutsTo>
 <shortcutsProvidedFor>iaml_schema</shortcutsProvidedFor>
+<containsShortcutsTo>iaml_iterator</containsShortcutsTo>
+<shortcutsProvidedFor>iaml_iterator</shortcutsProvidedFor>
+<containsShortcutsTo>iaml</containsShortcutsTo>
+<containsShortcutsTo>iaml_condition</containsShortcutsTo>
+<containsShortcutsTo>iaml_frame</containsShortcutsTo>
+<containsShortcutsTo>iaml_wire</containsShortcutsTo>
+<containsShortcutsTo>iaml_element</containsShortcutsTo>
+<containsShortcutsTo>iaml_session</containsShortcutsTo>
+<containsShortcutsTo>iaml_operation</containsShortcutsTo>
+<containsShortcutsTo>iaml_visual</containsShortcutsTo>
+<containsShortcutsTo>iaml_email</containsShortcutsTo>
+<shortcutsProvidedFor>iaml</shortcutsProvidedFor>
+<shortcutsProvidedFor>iaml_condition</shortcutsProvidedFor>
+<shortcutsProvidedFor>iaml_frame</shortcutsProvidedFor>
+<shortcutsProvidedFor>iaml_wire</shortcutsProvidedFor>
+<shortcutsProvidedFor>iaml_element</shortcutsProvidedFor>
+<shortcutsProvidedFor>iaml_session</shortcutsProvidedFor>
+<shortcutsProvidedFor>iaml_operation</shortcutsProvidedFor>
+<shortcutsProvidedFor>iaml_visual</shortcutsProvidedFor>
+<shortcutsProvidedFor>iaml_email</shortcutsProvidedFor>
 </diagram>
   <plugin iD="org.openiaml.model.diagram.wire" name="Iaml Diagram Plugin (Wire)" provider="www.openiaml.org" version="0.5.0.qualifier">
     <requiredPlugins>org.eclipse.draw2d</requiredPlugins>

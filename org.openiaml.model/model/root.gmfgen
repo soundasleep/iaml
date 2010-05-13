@@ -3,36 +3,6 @@
     <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Diagram"/>
     <elementType editHelperClassName="InternetApplicationChangeHelper" xsi:type="gmfgen:MetamodelType"/>
     <viewmap figureQualifiedClassName="org.eclipse.draw2d.FreeformLayer" xsi:type="gmfgen:FigureViewmap"/>
-    <containsShortcutsTo>iaml_domain_object_instance</containsShortcutsTo>
-    <containsShortcutsTo>iaml</containsShortcutsTo>
-    <containsShortcutsTo>iaml_condition</containsShortcutsTo>
-    <containsShortcutsTo>iaml_wire</containsShortcutsTo>
-    <containsShortcutsTo>iaml_element</containsShortcutsTo>
-    <containsShortcutsTo>iaml_domain_store</containsShortcutsTo>
-    <containsShortcutsTo>iaml_operation</containsShortcutsTo>
-    <containsShortcutsTo>iaml_visual</containsShortcutsTo>
-    <containsShortcutsTo>iaml_user_store</containsShortcutsTo>
-    <containsShortcutsTo>iaml_domain_object</containsShortcutsTo>
-    <containsShortcutsTo>iaml_session</containsShortcutsTo>
-    <containsShortcutsTo>iaml_frame</containsShortcutsTo>
-    <containsShortcutsTo>iaml_email</containsShortcutsTo>
-    <containsShortcutsTo>iaml_remote_domain_object</containsShortcutsTo>
-    <containsShortcutsTo>iaml_schema</containsShortcutsTo>
-    <shortcutsProvidedFor>iaml_domain_object_instance</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_condition</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_wire</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_element</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_domain_store</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_operation</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_visual</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_user_store</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_domain_object</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_session</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_frame</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_email</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_remote_domain_object</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_schema</shortcutsProvidedFor>
     <domainDiagramElement href="iaml.genmodel#//model/InternetApplication"/>
     <topLevelNodes canonicalEditPolicyClassName="EventTriggerCanonicalEditPolicy" createCommandClassName="EventTriggerCreateCommand" editPartClassName="EventTriggerEditPart" graphicalNodeEditPolicyClassName="EventTriggerGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="EventTriggerItemSemanticEditPolicy" notationViewFactoryClassName="EventTriggerViewFactory" visualID="2034">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
@@ -89,8 +59,10 @@
           <attributes fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
         </viewmap>
         <modelFacet parser="//@labelParsers/@implementations.0"/>
-      </labels>
-    </topLevelNodes>
+      <behaviour diagramKind="Iaml_Operation" editPolicyClassName="OperationOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.operation.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
+</labels>
+    <behaviour diagramKind="Iaml_Operation" editPolicyClassName="OperationOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.operation.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
+</topLevelNodes>
     <topLevelNodes canonicalEditPolicyClassName="PrimitiveOperationCanonicalEditPolicy" createCommandClassName="PrimitiveOperationCreateCommand" editPartClassName="PrimitiveOperationEditPart" graphicalNodeEditPolicyClassName="PrimitiveOperationGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="PrimitiveOperationItemSemanticEditPolicy" notationViewFactoryClassName="PrimitiveOperationViewFactory" visualID="2036">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType editHelperClassName="PrimitiveOperationEditHelper" xsi:type="gmfgen:MetamodelType"/>
@@ -135,7 +107,8 @@
           <metaFeatures href="iaml.genmodel#//model/NamedElement/name"/>
         </modelFacet>
       </labels>
-    </topLevelNodes>
+    <behaviour diagramKind="Iaml_Frame" editPolicyClassName="FrameOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.frame.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
+</topLevelNodes>
     <topLevelNodes canonicalEditPolicyClassName="DynamicApplicationElementSetCanonicalEditPolicy" createCommandClassName="DynamicApplicationElementSetCreateCommand" editPartClassName="DynamicApplicationElementSetEditPart" graphicalNodeEditPolicyClassName="DynamicApplicationElementSetGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="DynamicApplicationElementSetItemSemanticEditPolicy" notationViewFactoryClassName="DynamicApplicationElementSetViewFactory" visualID="2039">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType editHelperClassName="DynamicApplicationElementSetEditHelper" xsi:type="gmfgen:MetamodelType"/>
@@ -163,7 +136,8 @@
           <metaFeatures href="iaml.genmodel#//model/DynamicApplicationElementSet/query"/>
         </modelFacet>
       </labels>
-    </topLevelNodes>
+    <behaviour diagramKind="Iaml_Element" editPolicyClassName="ElementOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.element.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
+</topLevelNodes>
     <topLevelNodes canonicalEditPolicyClassName="PropertyCanonicalEditPolicy" createCommandClassName="PropertyCreateCommand" editPartClassName="PropertyEditPart" graphicalNodeEditPolicyClassName="PropertyGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="PropertyItemSemanticEditPolicy" notationViewFactoryClassName="PropertyViewFactory" visualID="2040">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType editHelperClassName="PropertyEditHelper" xsi:type="gmfgen:MetamodelType"/>
@@ -229,7 +203,8 @@
           <metaFeatures href="iaml.genmodel#//model/NamedElement/name"/>
         </modelFacet>
       </labels>
-    </topLevelNodes>
+    <behaviour diagramKind="Iaml_Session" editPolicyClassName="SessionOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.session.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
+</topLevelNodes>
     <topLevelNodes canonicalEditPolicyClassName="LoginHandlerCanonicalEditPolicy" createCommandClassName="LoginHandlerCreateCommand" editPartClassName="LoginHandlerEditPart" graphicalNodeEditPolicyClassName="LoginHandlerGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="LoginHandlerItemSemanticEditPolicy" notationViewFactoryClassName="LoginHandlerViewFactory" visualID="2043">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType editHelperClassName="LoginHandlerEditHelper" xsi:type="gmfgen:MetamodelType"/>
@@ -255,7 +230,8 @@
           <metaFeatures href="iaml.genmodel#//model/components/LoginHandler/type"/>
         </modelFacet>
       </labels>
-    </topLevelNodes>
+    <behaviour diagramKind="Iaml_Element" editPolicyClassName="ElementOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.element.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
+</topLevelNodes>
     <topLevelNodes canonicalEditPolicyClassName="CompositeConditionCanonicalEditPolicy" createCommandClassName="CompositeConditionCreateCommand" editPartClassName="CompositeConditionEditPart" graphicalNodeEditPolicyClassName="CompositeConditionGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="CompositeConditionItemSemanticEditPolicy" notationViewFactoryClassName="CompositeConditionViewFactory" visualID="2044">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType editHelperClassName="CompositeConditionEditHelper" xsi:type="gmfgen:MetamodelType"/>
@@ -280,8 +256,10 @@
           <attributes fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
         </viewmap>
         <modelFacet parser="//@labelParsers/@implementations.0"/>
-      </labels>
-    </topLevelNodes>
+      <behaviour diagramKind="Iaml_Condition" editPolicyClassName="ConditionOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.condition.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
+</labels>
+    <behaviour diagramKind="Iaml_Condition" editPolicyClassName="ConditionOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.condition.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
+</topLevelNodes>
     <topLevelNodes canonicalEditPolicyClassName="EmailCanonicalEditPolicy" createCommandClassName="EmailCreateCommand" editPartClassName="EmailEditPart" graphicalNodeEditPolicyClassName="EmailGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="EmailItemSemanticEditPolicy" notationViewFactoryClassName="EmailViewFactory" visualID="2046">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType editHelperClassName="EmailEditHelper" xsi:type="gmfgen:MetamodelType"/>
@@ -300,7 +278,8 @@
           <metaFeatures href="iaml.genmodel#//model/NamedElement/name"/>
         </modelFacet>
       </labels>
-    </topLevelNodes>
+    <behaviour diagramKind="Iaml_Email" editPolicyClassName="EmailOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.email.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
+</topLevelNodes>
     <topLevelNodes canonicalEditPolicyClassName="DomainSchemaCanonicalEditPolicy" createCommandClassName="DomainSchemaCreateCommand" editPartClassName="DomainSchemaEditPart" graphicalNodeEditPolicyClassName="DomainSchemaGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="DomainSchemaItemSemanticEditPolicy" notationViewFactoryClassName="DomainSchemaViewFactory" visualID="2047">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType editHelperClassName="DomainSchemaEditHelper" xsi:type="gmfgen:MetamodelType"/>
@@ -319,7 +298,8 @@
           <metaFeatures href="iaml.genmodel#//model/NamedElement/name"/>
         </modelFacet>
       </labels>
-    </topLevelNodes>
+    <behaviour diagramKind="Iaml_Schema" editPolicyClassName="SchemaOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.schema.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
+</topLevelNodes>
     <topLevelNodes canonicalEditPolicyClassName="DomainSourceCanonicalEditPolicy" createCommandClassName="DomainSourceCreateCommand" editPartClassName="DomainSourceEditPart" graphicalNodeEditPolicyClassName="DomainSourceGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="DomainSourceItemSemanticEditPolicy" notationViewFactoryClassName="DomainSourceViewFactory" visualID="2048">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType editHelperClassName="DomainSourceEditHelper" xsi:type="gmfgen:MetamodelType"/>
@@ -366,7 +346,8 @@
           <metaFeatures href="iaml.genmodel#//model/NamedElement/name"/>
         </modelFacet>
       </labels>
-    </links>
+    <behaviour diagramKind="Iaml_Wire" editPolicyClassName="WireOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.wire.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
+</links>
     <links createCommandClassName="RunActionCreateCommand" editPartClassName="RunActionChangePart" itemSemanticEditPolicyClassName="RunActionItemSemanticEditPolicy" notationViewFactoryClassName="RunActionViewFactory" reorientCommandClassName="RunActionReorientCommand" visualID="4006">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
       <elementType editHelperClassName="RunActionChangeHelper" xsi:type="gmfgen:MetamodelType"/>
@@ -450,7 +431,8 @@
           <metaFeatures href="iaml.genmodel#//model/NamedElement/name"/>
         </modelFacet>
       </labels>
-    </links>
+    <behaviour diagramKind="Iaml_Wire" editPolicyClassName="WireOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.wire.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
+</links>
     <links createCommandClassName="SchemaEdgeCreateCommand" editPartClassName="SchemaEdgeEditPart" itemSemanticEditPolicyClassName="SchemaEdgeItemSemanticEditPolicy" notationViewFactoryClassName="SchemaEdgeViewFactory" reorientCommandClassName="SchemaEdgeReorientCommand" visualID="4009">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
       <elementType editHelperClassName="SchemaEdgeEditHelper" xsi:type="gmfgen:MetamodelType"/>
@@ -524,7 +506,29 @@
       <children iD="org.openiaml.model.diagram.printing" kind="Printing" name="Printing" xsi:type="gmfgen:GenStandardPreferencePage"/>
       <children iD="org.openiaml.model.diagram.rulersAndGrid" kind="RulersAndGrid" name="Rulers And Grid" xsi:type="gmfgen:GenStandardPreferencePage"/>
     </preferencePages>
-  </diagram>
+  <containsShortcutsTo>iaml_iterator</containsShortcutsTo>
+<shortcutsProvidedFor>iaml_iterator</shortcutsProvidedFor>
+<containsShortcutsTo>iaml</containsShortcutsTo>
+<containsShortcutsTo>iaml_condition</containsShortcutsTo>
+<containsShortcutsTo>iaml_frame</containsShortcutsTo>
+<containsShortcutsTo>iaml_wire</containsShortcutsTo>
+<containsShortcutsTo>iaml_element</containsShortcutsTo>
+<containsShortcutsTo>iaml_session</containsShortcutsTo>
+<containsShortcutsTo>iaml_schema</containsShortcutsTo>
+<containsShortcutsTo>iaml_operation</containsShortcutsTo>
+<containsShortcutsTo>iaml_visual</containsShortcutsTo>
+<containsShortcutsTo>iaml_email</containsShortcutsTo>
+<shortcutsProvidedFor>iaml</shortcutsProvidedFor>
+<shortcutsProvidedFor>iaml_condition</shortcutsProvidedFor>
+<shortcutsProvidedFor>iaml_frame</shortcutsProvidedFor>
+<shortcutsProvidedFor>iaml_wire</shortcutsProvidedFor>
+<shortcutsProvidedFor>iaml_element</shortcutsProvidedFor>
+<shortcutsProvidedFor>iaml_session</shortcutsProvidedFor>
+<shortcutsProvidedFor>iaml_schema</shortcutsProvidedFor>
+<shortcutsProvidedFor>iaml_operation</shortcutsProvidedFor>
+<shortcutsProvidedFor>iaml_visual</shortcutsProvidedFor>
+<shortcutsProvidedFor>iaml_email</shortcutsProvidedFor>
+</diagram>
   <plugin iD="org.openiaml.model.diagram" name="Iaml Diagram Plugin" provider="www.openiaml.org" version="0.5.0.qualifier">
     <requiredPlugins>org.eclipse.draw2d</requiredPlugins>
     <requiredPlugins>org.eclipse.gmf.runtime.draw2d.ui</requiredPlugins>

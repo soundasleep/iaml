@@ -22,6 +22,7 @@ public class AllModel0_5_1InferenceTests {
 		suite.addTestSuite(ViewDatabaseTypes.class);
 		suite.addTestSuite(FeedProducerComplete.class);
 		suite.addTestSuite(FeedProducerSimple.class);
+		suite.addTestSuite(EntryGateRequiresOpenID.class);
 		
 		return suite;
 	}

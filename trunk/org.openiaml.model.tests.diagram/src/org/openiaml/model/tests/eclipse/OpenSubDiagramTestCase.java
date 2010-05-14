@@ -59,7 +59,7 @@ public class OpenSubDiagramTestCase extends EclipseTestCaseHelper {
 
 		// if this is actually an ErrorEditPart, then an error has occured
 		// (but it may not be obvious in the log what it is)
-		assertEditorDomainStore(ep2);
+		assertEditorDomainSchema(ep2);
 
 		// close editors
 		((DiagramDocumentEditor) ep2).close(false);

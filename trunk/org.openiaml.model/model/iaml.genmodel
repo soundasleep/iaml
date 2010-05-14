@@ -301,7 +301,9 @@
     </nestedGenPackages>
     <nestedGenPackages prefix="Scopes" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//scopes">
-      <genClasses ecoreClass="iaml.ecore#//scopes/Session"/>
+      <genClasses ecoreClass="iaml.ecore#//scopes/Session">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//scopes/Session/labels"/>
+      </genClasses>
       <genClasses ecoreClass="iaml.ecore#//scopes/Email">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//scopes/Email/to"/>
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//scopes/Email/subject"/>

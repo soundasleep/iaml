@@ -242,9 +242,6 @@
         <diagramLabel
             href="iaml.gmfgraph#InputFormParentName"/>
       </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="session.gmftool#//@palette/@tools.2/@tools.1"/>
       <diagramNode
           href="iaml.gmfgraph#InputForm"/>
     </ownedChild>
@@ -272,9 +269,6 @@
         <diagramLabel
             href="iaml.gmfgraph#InputTextFieldType"/>
       </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="session.gmftool#//@palette/@tools.2/@tools.2"/>
       <diagramNode
           href="iaml.gmfgraph#InputTextField"/>
     </ownedChild>
@@ -494,9 +488,6 @@
         <diagramLabel
             href="iaml.gmfgraph#ButtonParentName"/>
       </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="session.gmftool#//@palette/@tools.2/@tools.3"/>
       <diagramNode
           href="iaml.gmfgraph#Button"/>
     </ownedChild>
@@ -647,9 +638,43 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="session.gmftool#//@palette/@tools.2/@tools.4"/>
+          href="session.gmftool#//@palette/@tools.2/@tools.2"/>
       <diagramNode
           href="iaml.gmfgraph#Email"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//scopes/Session/labels"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//visual/Label"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( Label )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#LabelName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#LabelDefaultValue"/>
+        <features
+            href="iaml.ecore#//Changeable/defaultValue"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#LabelParentName"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="session.gmftool#//@palette/@tools.2/@tools.1"/>
+      <diagramNode
+          href="iaml.gmfgraph#Label"/>
     </ownedChild>
   </nodes>
   <links>

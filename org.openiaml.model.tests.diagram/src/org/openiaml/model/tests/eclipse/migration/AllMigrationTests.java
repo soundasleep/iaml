@@ -3,8 +3,6 @@ package org.openiaml.model.tests.eclipse.migration;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import org.openiaml.model.tests.eclipse.migration.model0_3.Migrate0_3TestSuite;
-
 /**
  * All tests for the Migration functionality.
  * 
@@ -25,7 +23,7 @@ public class AllMigrationTests {
         suite.addTestSuite(Migrate0_2SyncPages.class);
         
         // model 0.3
-        suite.addTest(Migrate0_3TestSuite.suite());
+        suite.addTestSuite(Migrate0_3FileDomainObjects.class);
 
         // model 0.4
         suite.addTestSuite(Migrate0_4JoinSplitClientSide.class);

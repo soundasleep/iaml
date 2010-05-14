@@ -98,13 +98,6 @@
                menubarPath="org.openiaml.model.diagram.custom.menu2/group">
          </action>
 
-         <action
-               class="org.openiaml.model.custom.actions.MigrateAllModelsAction2"
-               id="org.openiaml.docs.tools.export2"
-               label="Temporary Migrator"
-               menubarPath="org.openiaml.model.diagram.custom.menu2/group">
-         </action>
-
       </objectContribution>                    
 
 	</extension>

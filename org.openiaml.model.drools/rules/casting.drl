@@ -22,12 +22,12 @@ global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
 /**
- * @inference InputTextField
- *		{@model InputTextField}s will contain a {@model Condition} named 'can cast?'.
+ * @inference VisibleThing
+ *		{@model VisibleThing}s will contain a {@model Condition} named 'can cast?'.
  */
-rule "Create 'can cast?' condition for InputTextFields"
+rule "Create 'can cast?' condition for VisibleThings"
 	when
-		tf : InputTextField( )
+		tf : VisibleThing( )
 		not ( condition : Condition ( name == "can cast?", eContainer == tf ))
 		
 		eval ( handler.veto( tf ))
@@ -41,7 +41,7 @@ end
 
 rule "Create contents of 'can cast?' condition"
 	when
-		tf : InputTextField( )
+		tf : VisibleThing( )
 		fieldValue : Property ( tf.fieldValue == fieldValue )
 		c : CompositeCondition ( name == "can cast?", eContainer == tf )
 		

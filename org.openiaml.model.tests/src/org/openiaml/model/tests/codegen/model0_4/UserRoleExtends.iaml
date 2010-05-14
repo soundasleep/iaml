@@ -16,10 +16,10 @@
   <schemas xsi:type="iaml.users:Role" id="domain.128807fbeba.10ee" name="another role" outProvidesEdges="wires.1233afe62eb.38" inExtendsEdges="wires.1233afe62eb.114" inSchemas="domain.128807fbeba.10f0">
     <providesEdges id="wires.1233afe62eb.38" from="domain.128807fbeba.10ee" to="users.1233afe655c.74"/>
   </schemas>
-  <sources xsi:type="iaml.users:Role" id="domain.128807fbeba.10ec" outSchemas="domain.128807fbeba.10ed">
+  <sources id="domain.128807fbeba.10ec" outSchemas="domain.128807fbeba.10ed">
     <schemaEdges id="domain.128807fbeba.10ed" from="domain.128807fbeba.10ec" to="domain.128807fbeba.10eb"/>
   </sources>
-  <sources xsi:type="iaml.users:Role" id="domain.128807fbeba.10ef" outSchemas="domain.128807fbeba.10f0">
+  <sources id="domain.128807fbeba.10ef" outSchemas="domain.128807fbeba.10f0">
     <schemaEdges id="domain.128807fbeba.10f0" from="domain.128807fbeba.10ef" to="domain.128807fbeba.10ee"/>
   </sources>
 </iaml:InternetApplication>

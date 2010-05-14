@@ -27,6 +27,7 @@ import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DomainAttribute;
+import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.GeneratedElement;
@@ -39,6 +40,7 @@ import org.openiaml.model.model.TemporaryVariable;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;
+import org.openiaml.model.model.domain.SelectEdge;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.Session;
@@ -417,6 +419,10 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	public ShapeNodeEditPart assertHasDomainSource(DiagramDocumentEditor root, String storeName) {
 		return assertHasRenderedNamedObject(root, DomainSource.class, storeName, false, false);
 	}
+	
+	public ShapeNodeEditPart assertHasDomainSource(DiagramDocumentEditor root, String storeName, boolean shortcutRequired) {
+		return assertHasRenderedNamedObject(root, DomainSource.class, storeName, true, shortcutRequired);
+	}
 
 	/**
 	 * Look at the editor's children to see if an Event Trigger is being displayed.
@@ -672,6 +678,27 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 		fail("assertHasExecutionEdge: no connection found between '" + source + "' and '" + target + "'");
 		return null;
 	}
+	
+	/**
+	 * Assert that an SelectEdge exists between two elements in the editor.
+	 */
+	public ConnectionNodeEditPart assertHasSelectEdge(DiagramDocumentEditor editor, EditPart source, EditPart target) {
+
+		for (Object c : editor.getDiagramEditPart().getConnections()) {
+			if (c instanceof ConnectionNodeEditPart) {
+				ConnectionNodeEditPart connection = (ConnectionNodeEditPart) c;
+				EObject element = connection.resolveSemanticElement();
+				if (element instanceof SelectEdge) {
+					if (connection.getSource().equals(source) &&
+							connection.getTarget().equals(target))
+						return connection;	// found it
+				}
+			}
+		}
+
+		fail("assertHasSelectEdge: no connection found between '" + source + "' and '" + target + "'");
+		return null;
+	}
 
 	/**
 	 * Assert that these two EditParts refer to the same semantic element.
@@ -797,6 +824,11 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
 		return assertHasRenderedNamedObject(editor, DomainIterator.class, name, true, shortcutRequired);
 	}
+	
+	public ShapeNodeEditPart assertHasDomainIterator(
+			DiagramDocumentEditor editor, String name) {
+		return assertHasRenderedNamedObject(editor, DomainIterator.class, name, false, false);
+	}
 
 	/**
 	 * @see #assertHasDomainAttribute(DiagramDocumentEditor, String, boolean, boolean)
@@ -906,6 +938,16 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	public ShapeNodeEditPart assertHasCompositeOperation(
 			DiagramDocumentEditor editor, String name) {
 		return assertHasRenderedNamedObject(editor, CompositeOperation.class, name, false, false);
+	}
+	
+	public ShapeNodeEditPart assertHasDomainAttributeInstance(
+			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
+		return assertHasRenderedNamedObject(editor, DomainAttributeInstance.class, name, true, shortcutRequired);
+	}
+	
+	public ShapeNodeEditPart assertHasDomainAttributeInstance(
+			DiagramDocumentEditor editor, String name) {
+		return assertHasRenderedNamedObject(editor, DomainAttributeInstance.class, name, false, false);
 	}
 	
 	/**

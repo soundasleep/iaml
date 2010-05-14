@@ -23,9 +23,6 @@ public class FormDomainObjectMapping extends AbstractActionTestCase<GraphicalEdi
 		return "FormDomainObjectMapping.iaml";
 	}
 	
-	protected DiagramDocumentEditor editor_page;
-	protected DiagramDocumentEditor editor_form;
-	
 	/**
 	 * Test the initial model.
 	 * 
@@ -35,27 +32,44 @@ public class FormDomainObjectMapping extends AbstractActionTestCase<GraphicalEdi
 		initializeModelFile();
 		
 		// there should only be two children
-		assertEditorHasChildren(2, editor);
+		assertEditorHasChildren(3, editor);
 		
 		// get contents
 		ShapeNodeEditPart page = assertHasFrame(editor, "container");
-		assertHasDomainSchema(editor, "domain store");
+		assertHasDomainSchema(editor, "domain schema");
+		assertHasDomainSource(editor, "domain source");
 		
 		// open page
-		editor_page = openDiagram(page);
-		assertEditorFrame(editor_page);
-		
-		// should have two children
-		assertEditorHasChildren(2, editor_page);
-		ShapeNodeEditPart form = assertHasInputForm(editor_page, "target form", false);
-		assertHasDomainSchema(editor_page, "domain object", true);
-		
-		// open input form
-		editor_form = openDiagram(form);
-		assertEditorVisual(editor_form);
-		
-		// empty
-		assertEditorHasChildren(0, editor_form);
+		DiagramDocumentEditor editor_page = openDiagram(page);
+		try {
+			assertEditorFrame(editor_page);
+			
+			// should have three children
+			assertEditorHasChildren(3, editor_page);
+			ShapeNodeEditPart form = assertHasInputForm(editor_page, "target form", false);
+			ShapeNodeEditPart source = assertHasDomainSource(editor_page, "domain source", true);
+			
+			ShapeNodeEditPart iterator = assertHasDomainIterator(editor_page, "iterator");
+			
+			// connected by a SyncWire
+			assertHasSyncWire(editor_page, iterator, form, "sync");
+			
+			// the iterator has a select edge
+			assertHasSelectEdge(editor_page, iterator, source);
+			
+			// open input form
+			DiagramDocumentEditor editor_form = openDiagram(form);
+			try {
+				assertEditorVisual(editor_form);
+				
+				// empty
+				assertEditorHasChildren(0, editor_form);
+			} finally {
+				editor_form.close(false);
+			}
+		} finally {
+			editor_page.close(false);
+		}
 
 	}
 	
@@ -71,64 +85,56 @@ public class FormDomainObjectMapping extends AbstractActionTestCase<GraphicalEdi
 		
 		// open page
 		ShapeNodeEditPart page = assertHasFrame(editor, "container");
-		editor_page = openDiagram(page);
-		ShapeNodeEditPart form = assertHasInputForm(editor_page, "target form", false);
-
-		// lets run the action
-		runAction(new RefreshFormMappingsWithDrools(), form);
-
-		// the current editor should still be the same
-		// should have two children
-		assertEditorHasChildren(2, editor_page);
-		assertHasInputForm(editor_page, "target form", false);
-		assertHasDomainSchema(editor_page, "domain object", true);
+		DiagramDocumentEditor editor_page = openDiagram(page);
+		try {
+			ShapeNodeEditPart form = assertHasInputForm(editor_page, "target form", false);
+	
+			// lets run the action
+			runAction(new RefreshFormMappingsWithDrools(), form);
+	
+			// the current editor should still be the same
+			// should have three children
+			assertEditorHasChildren(3, editor_page);
+			assertHasInputForm(editor_page, "target form", false);
+			
+			// open input form
+			DiagramDocumentEditor editor_form = openDiagram(form);
+			try {
+				assertEditorVisual(editor_form);
+				
+				// no longer empty!
+				// text fields in the form
+				assertEditorHasChildren(6, editor_form);
+				ShapeNodeEditPart a1 = assertHasInputTextField(editor_form, "attribute one", false);
+				assertGenerated(a1);
+				ShapeNodeEditPart a2 = assertHasInputTextField(editor_form, "attribute two", false);
+				assertGenerated(a2);
+				ShapeNodeEditPart a3 = assertHasInputTextField(editor_form, "attribute three", false);
+				assertGenerated(a3);
 		
-		// open input form
-		editor_form = openDiagram(form);
-		assertEditorVisual(editor_form);
-		
-		// no longer empty!
-		// double elements, because shortcuts are also rendered
-		assertEditorHasChildren(6, editor_form);
-		ShapeNodeEditPart a1 = assertHasInputTextField(editor_form, "attribute one", false);
-		assertGenerated(a1);
-		ShapeNodeEditPart a2 = assertHasInputTextField(editor_form, "attribute two", false);
-		assertGenerated(a2);
-		ShapeNodeEditPart a3 = assertHasInputTextField(editor_form, "attribute three", false);
-		assertGenerated(a3);
-
-		ShapeNodeEditPart d1 = assertHasDomainAttribute(editor_form, "attribute one", true);
-		assertNotGenerated(d1);
-		ShapeNodeEditPart d2 = assertHasDomainAttribute(editor_form, "attribute two", true);
-		assertNotGenerated(d2);
-		ShapeNodeEditPart d3 = assertHasDomainAttribute(editor_form, "attribute three", true);
-		assertNotGenerated(d3);
-		
-		// conneced by SyncWires
-		ConnectionNodeEditPart s1 = assertHasSyncWire(editor_form, a1, d1, "sync");
-		assertGenerated(s1);
-		ConnectionNodeEditPart s2 = assertHasSyncWire(editor_form, a2, d2, "sync");
-		assertGenerated(s2);
-		ConnectionNodeEditPart s3 = assertHasSyncWire(editor_form, a3, d3, "sync");
-		assertGenerated(s3);
-		
-
-	}
-
-	/**
-	 * Close loaded editors.
-	 * @throws Exception 
-	 */
-	@Override
-	public void tearDown() throws Exception {
-
-		if (editor_form != null)
-			editor_form.close(false);
-		
-		if (editor_page != null)
+				// attribute instances in the iterator
+				ShapeNodeEditPart d1 = assertHasDomainAttributeInstance(editor_form, "attribute one", true);
+				assertGenerated(d1);
+				ShapeNodeEditPart d2 = assertHasDomainAttributeInstance(editor_form, "attribute two", true);
+				assertGenerated(d2);
+				ShapeNodeEditPart d3 = assertHasDomainAttributeInstance(editor_form, "attribute three", true);
+				assertGenerated(d3);
+				
+				// conneced by SyncWires
+				ConnectionNodeEditPart s1 = assertHasSyncWire(editor_form, a1, d1, "sync");
+				assertGenerated(s1);
+				ConnectionNodeEditPart s2 = assertHasSyncWire(editor_form, a2, d2, "sync");
+				assertGenerated(s2);
+				ConnectionNodeEditPart s3 = assertHasSyncWire(editor_form, a3, d3, "sync");
+				assertGenerated(s3);
+			} finally {
+				editor_form.close(false);
+			}
+			
+		} finally {
 			editor_page.close(false);
-		
-		super.tearDown();
+		}
+
 	}
 
 }

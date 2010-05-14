@@ -505,13 +505,20 @@ List[model::components::EntryGate] getFrameEntryGates(model::visual::Frame this)
 */
 
 List[model::components::EntryGate] getFrameEntryGates(model::Scope this) :
-	if entryGate == null then
-		getFrameEntryGates(eContainer)
-	else
-		getFrameEntryGates(eContainer).toSet().add( entryGate );
+	if eContainer == null then
+		(if entryGate == null then
+			{}
+		else
+			{entryGate})
+	else (if entryGate == null then
+			getFrameEntryGates(eContainer)
+		else
+			getFrameEntryGates(eContainer).toSet().add( entryGate ));
 
 List[model::components::EntryGate] getFrameEntryGates(emf::EObject this) :
-	{};
+	if eContainer == null 
+		then {}
+		else getFrameEntryGates(eContainer);
 
 /**
  * Get all exit gates that may apply to the given frame.

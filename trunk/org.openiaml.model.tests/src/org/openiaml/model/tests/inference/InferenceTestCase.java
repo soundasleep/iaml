@@ -515,6 +515,16 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
+	public Label assertHasLabel(Session element, String string) throws JaxenException {
+		return (Label) queryOne(element, "iaml.scopes:labels[iaml:name='" + string + "']");
+	}
+
+	/**
+	 * Assert that the given element contains the given
+	 * Label.
+	 *
+	 * @return The element found
+	 */
 	public Label assertHasLabel(Email element, String string) throws JaxenException {
 		return (Label) queryOne(element, "iaml.scopes:labels[iaml:name='" + string + "']");
 	}
@@ -754,6 +764,16 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public Session assertHasSession(InternetApplication root, String string) throws JaxenException {
+		return (Session) queryOne(root, "iaml:scopes[iaml:name='" + string + "']");	
+	}
+
+	/**
+	 * Assert that the given element contains the given
+	 * Session.
+	 *
+	 * @return The element found
+	 */
+	public Session assertHasSession(Scope root, String string) throws JaxenException {
 		return (Session) queryOne(root, "iaml:scopes[iaml:name='" + string + "']");	
 	}
 	

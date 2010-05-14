@@ -216,7 +216,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="InternetApplication" eSuperTypes="#//ContainsOperations #//NamedElement #//ContainsWires #//GeneratesElements #//ContainsConditions #//ContainsProperties">
+  <eClassifiers xsi:type="ecore:EClass" name="InternetApplication" eSuperTypes="#//ContainsOperations #//NamedElement #//ContainsWires #//GeneratesElements #//ContainsConditions #//ContainsProperties #//Scope">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="comment" value="we cannot have InternetApplications inside of other ElementContainers, thus we don't define it as an ApplicationElement"/>
       <details key="comment2" value="but why can we have it as an ActivityEdgeSource? I don't think there are any examples of InternetApplication wire --> something else; all the wires are from objects INSIDE the IA"/>
@@ -230,8 +230,6 @@
         eType="#//ApplicationElement" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="runtimeUrl" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="http://localhost:8080/output/"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="scopes" upperBound="-1"
-        eType="#//Scope" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="schemas" upperBound="-1"
         eType="#//domain/DomainSchema" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sources" upperBound="-1"

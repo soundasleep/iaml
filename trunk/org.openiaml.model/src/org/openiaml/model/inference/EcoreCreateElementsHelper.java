@@ -483,16 +483,10 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return page;
 	}
 
-	public Frame generatedFrame(GeneratesElements by, Session container) throws InferenceException {
+	public Frame generatedFrame(GeneratesElements by, Scope container) throws InferenceException {
 		Frame page = createFrame(container);
 		setGeneratedBy(page, by);
 		return page;
-	}
-
-	public Session generatedSession(GeneratesElements by, InternetApplication container) throws InferenceException {
-		Session session = (Session) createElement( container, ScopesPackage.eINSTANCE.getSession(), ModelPackage.eINSTANCE.getInternetApplication_Scopes() );
-		setGeneratedBy(session, by);
-		return session;
 	}
 
 	public Session generatedSession(GeneratesElements by, Scope container) throws InferenceException {
@@ -571,11 +565,6 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		ConditionEdge wire = (ConditionEdge) createRelationship(container, WiresPackage.eINSTANCE.getConditionEdge(), source, target, ModelPackage.eINSTANCE.getContainsWires_ConditionEdges(), WiresPackage.eINSTANCE.getConditionEdge_From(), WiresPackage.eINSTANCE.getConditionEdge_To());
 		setGeneratedBy(wire, by);
 		return wire;
-	}
-
-	public Frame createFrame(InternetApplication container) throws InferenceException {
-		Frame page = (Frame) createElement( container, VisualPackage.eINSTANCE.getFrame(), ModelPackage.eINSTANCE.getInternetApplication_Scopes() );
-		return page;
 	}
 
 	public Frame createFrame(Scope container) throws InferenceException {

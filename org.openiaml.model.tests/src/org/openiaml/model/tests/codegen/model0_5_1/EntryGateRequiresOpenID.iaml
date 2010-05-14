@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual">
-  <iaml:InternetApplication id="model.128953a4487.17">
-    <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
-    <scopes xsi:type="iaml.scopes:Session" id="scopes.128953a465b.3" name="Protected Session">
-      <entryGate id="components.128953a46b9.5" name="Entry Gate" outRequiresEdges="wires.128956eba24.5">
-        <requiresEdges id="wires.128956eba24.5" from="components.128953a46b9.5" to="visual.12895659cec.c"/>
-      </entryGate>
-      <scopes xsi:type="iaml.visual:Frame" id="visual.128953a4590.19" name="Secure Page"/>
-      <scopes xsi:type="iaml.visual:Frame" id="visual.128953a4590.1b" name="See Your OpenID">
-        <children xsi:type="iaml.visual:Label" inWires="wires.12895522e6e.9" id="visual.12895522e6e.17" name="your current ID" defaultValue="undefined"/>
-      </scopes>
-      <labels outWires="wires.12895522e6e.9" id="visual.12895659cec.c" name="Current OpenID" defaultValue="" inRequiresEdges="wires.128956eba24.5">
-        <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlOpenIDURL;XSDSimpleTypeDefinition=6"/>
-      </labels>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.128953a4487.17">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
+  <scopes xsi:type="iaml.scopes:Session" id="scopes.128953a465b.3" name="Protected Session">
+    <entryGate id="components.128953a46b9.5" name="Entry Gate" outRequiresEdges="wires.128956eba24.5">
+      <requiresEdges id="wires.128956eba24.5" from="components.128953a46b9.5" to="visual.12895659cec.c"/>
+    </entryGate>
+    <scopes xsi:type="iaml.visual:Frame" id="visual.128953a4590.19" name="Secure Page"/>
+    <scopes xsi:type="iaml.visual:Frame" id="visual.128953a4590.1b" name="See Your OpenID">
+      <children xsi:type="iaml.visual:Label" inWires="wires.128956eba24.1d" id="visual.12895522e6e.17" name="your current ID" defaultValue="undefined"/>
     </scopes>
-  </iaml:InternetApplication>
-  <iaml.visual:Button id="visual.12895590f71.3e"/>
-</xmi:XMI>
+    <labels outWires="wires.128956eba24.1d" id="visual.12895659cec.c" name="Current OpenID" inRequiresEdges="wires.128956eba24.5">
+      <wires xsi:type="iaml.wires:SetWire" id="wires.128956eba24.1d" from="visual.12895659cec.c" to="visual.12895522e6e.17" name="set"/>
+      <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlOpenIDURL;XSDSimpleTypeDefinition=6"/>
+    </labels>
+  </scopes>
+</iaml:InternetApplication>

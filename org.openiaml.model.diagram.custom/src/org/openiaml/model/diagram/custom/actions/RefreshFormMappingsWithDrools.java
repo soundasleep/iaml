@@ -26,7 +26,10 @@ public class RefreshFormMappingsWithDrools extends UpdateWithDroolsAction {
 		}
 
 		private List<String> ruleFiles = Arrays.asList(
-				"/rules/sync-wires.drl"
+				"/rules/sync-wires.drl",
+				"/rules/set-wires.drl",
+				"/rules/detail-wires.drl",
+				"/rules/runtime/new-instance.drl"
 				);
 
 		/**
@@ -35,6 +38,7 @@ public class RefreshFormMappingsWithDrools extends UpdateWithDroolsAction {
 		 * @see #addRuleFile(String)
 		 * @return
 		 */
+		@Override
 		public List<String> getRuleFiles() {
 			return ruleFiles;
 		}

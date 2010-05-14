@@ -22,7 +22,13 @@ function boolean connects(Wire wire, Object a, Object b) {
 		(wire.getFrom().equals(b) && wire.getTo().equals(a));
 }
 
-# @inference SyncWire,RunAction,ConditionEdge {@model RunAction RunActions} with incoming {@model ConditionEdge conditions} will be copied to elements created by {@model SyncWire SyncWires}.
+/**
+ * TODO these rules should be refactored somehow.
+ *
+ * @inference SyncWire,RunAction,ConditionEdge 
+ *		{@model RunAction RunActions} with incoming {@model ConditionEdge conditions} will be 
+ *		copied to elements created by {@model SyncWire SyncWires}.
+ */
 rule "Connect ConditionEdges to RunActions created by SyncWires (edit/update) (onChange)"
 	when
 		# we have a sync wire
@@ -134,6 +140,159 @@ rule "Connect ParameterEdges to ConditionEdges connected to RunActions created b
 	when
 		# we have a syncwire
 		sw : SyncWire( )
+		source : Accessible( )
+		target : ContainsOperations( )
+		eval(functions.connects(sw, source, target))  
+		
+		# that has created a RunAction
+		event : EventTrigger( source.onAccess == event )
+		operation : Operation( eContainer == source, name=="init" )
+		run : RunAction( eContainer == sw, from == event, to == operation, name == "run" )
+
+		# and targets' value is being used for source's init
+		fvalue : Property ( target.fieldValue == fvalue ) 
+		param2 : ParameterEdge ( from == fvalue, to == run ) 
+
+		# and this SyncWire has a condition
+		condition : Condition ( )
+		sourceCw : ConditionEdge( from == condition, to == sw )
+		
+		# and the RunAction has the same condition 
+		targetCw : ConditionEdge (from == condition, to == run ) 
+		
+		# and the SyncWire had a parameter
+		param : ParameterEdgesSource ( )
+		paramWire : ParameterEdge( from == param, to == sourceCw )
+
+		# but this wire does not have it
+		not (ParameterEdge (from == param, to == targetCw ))
+			
+		eval ( handler.veto( sourceCw ))
+		
+	then
+		ParameterEdge pw = handler.generatedParameterEdge( sourceCw, sw, param, targetCw );
+		//cw.setName("copied parameter: " + paramWire.getName());
+		handler.setName(pw, "[conditions] sync from: " + paramWire.getId() + " param=" + ((GeneratedElement) param).getId() + " run=" + run.getId() );
+		queue.add(pw, drools);
+
+end
+
+/**
+ * @inference SetWire,RunAction,ConditionEdge 
+ *		{@model RunAction RunActions} with incoming {@model ConditionEdge conditions} will be 
+ *		copied to elements created by {@model SetWire}s.
+ */
+rule "Connect ConditionEdges to RunActions created by SetWires (edit/update) (onChange)"
+	when
+		# we have a sync wire
+		sw : SetWire( )
+		source : Changeable( )
+		target : ContainsOperations( )
+		eval(functions.connects(sw, source, target))  
+		
+		# which has a run wire between event and operation (generated)
+		event : EventTrigger( source.onChange == event )
+		operation : Operation( eContainer == target, name=="update" )		
+		run : RunAction( eContainer == sw, from == event, to == operation, name == "run" )
+		
+		# and the sync wire had a condition
+		condition : Condition ( )
+		sourceCw : ConditionEdge( from == condition, to == sw )
+		
+		# but our run wire doesn't 
+		not (ConditionEdge (from == condition, to == run )) 
+			
+		eval ( handler.veto( sourceCw ))
+		
+	then
+		# copy the condition
+		ConditionEdge cw = handler.generatedConditionEdge( sourceCw, sw, condition, run );
+		handler.setName(cw, "copied condition: " + sourceCw.getId());
+		queue.add(cw, drools);
+
+end
+
+rule "Connect ConditionEdges to RunActions created by SetWires (access/init) (onAccess)"
+	when
+		# we have a sync wire
+		sw : SetWire( )
+		source : Accessible( )
+		target : ContainsOperations( )
+		eval(functions.connects(sw, source, target))  
+		
+		# which has a run wire between event and operation (generated)
+		event : EventTrigger( source.onAccess == event )
+		operation : Operation( eContainer == source, name=="init" )		
+		run : RunAction( eContainer == sw, from == event, to == operation, name == "run" )
+		
+		# and targets' value is being used for source's init
+		fvalue : Property ( target.fieldValue == fvalue )
+		param : ParameterEdge ( from == fvalue, to == run ) 
+		
+		# and the sync wire had a condition
+		condition : Condition ( )
+		sourceCw : ConditionEdge( from == condition, to == sw )
+		
+		# but our run wire doesn't 
+		not (ConditionEdge (from == condition, to == run )) 
+			
+		eval ( handler.veto( sourceCw ))
+		
+	then
+		# copy the condition
+		ConditionEdge cw = handler.generatedConditionEdge( sourceCw, sw, condition, run );
+		handler.setName(cw, "copied condition: " + sourceCw.getId());
+		queue.add(cw, drools);
+
+end
+
+/**
+ * @inference SetWire,RunAction,ConditionEdge,ParameterEdge 
+ *		{@model RunAction RunActions} with incoming {@model ConditionEdge conditions} 
+ *		with {@model ParameterEdge parameters} will be copied to elements 
+ *		created by {@model SetWire}s.
+ */
+rule "Connect ParameterEdges to ConditionEdges connected to RunActions created by SetWires (edit/update) (onChange)"
+	when
+		# we have a syncwire
+		sw : SetWire( )
+		source : Changeable( )
+		target : ContainsOperations( )
+		eval(functions.connects(sw, source, target))  
+		
+		# that has created a RunAction
+		event : EventTrigger( source.onChange == event )
+		operation : Operation( eContainer == target, name=="update" )
+		run : RunAction( eContainer == sw, from == event, to == operation, name == "run" )
+
+		# and this SyncWire has a condition
+		condition : Condition ( )
+		sourceCw : ConditionEdge( from == condition, to == sw )
+		
+		# and the RunAction has the same condition 
+		targetCw : ConditionEdge (from == condition, to == run ) 
+		
+		# and the SyncWire had a parameter
+		param : ParameterEdgesSource ( )
+		paramWire : ParameterEdge( from == param, to == sourceCw )
+
+		# but this wire does not have it
+		not (ParameterEdge (from == param, to == targetCw ))
+			
+		eval ( handler.veto( sourceCw ))
+		
+	then
+		ParameterEdge pw = handler.generatedParameterEdge( sourceCw, sw, param, targetCw );
+		//cw.setName("copied parameter: " + paramWire.getName());
+		handler.setName(pw, "[conditions] sync from: " + paramWire.getId() + " param=" + ((GeneratedElement) param).getId() + " run=" + run.getId() );
+		queue.add(pw, drools);
+
+end
+
+rule "Connect ParameterEdges to ConditionEdges connected to RunActions created by SetWires (access/init) (onAccess)"
+	when
+		# we have a syncwire
+		sw : SetWire( )
 		source : Accessible( )
 		target : ContainsOperations( )
 		eval(functions.connects(sw, source, target))  

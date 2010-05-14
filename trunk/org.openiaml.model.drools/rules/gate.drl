@@ -19,11 +19,12 @@ global OverridableCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
-rule "Create 'Continue' button for Frames connected with 'first' or 'last' NavigateAction"
+rule "Create 'Continue' button for Frames connected with 'first' or 'last' or 'fail' NavigateAction"
 	when
 		gate : Gate ( )
 		target : Frame ( )
-		nav : NavigateAction ( from == gate, to == target, name == "first" || name == "last" )
+		nav : NavigateAction ( from == gate, to == target, name == "first" || name == "last" || name == "fail" )
+		
 		not (Button ( eContainer == target, name == "Continue" ))
 		not (NavigateAction ( to == gate ))
 		
@@ -40,7 +41,7 @@ rule "Connect 'click' on 'Continue' button to resume Gate"
 	when
 		gate : Gate ( )
 		target : Frame ( )
-		nav : NavigateAction ( from == gate, to == target, name == "first" || name == "last" ) 
+		nav : NavigateAction ( from == gate, to == target, name == "first" || name == "last" || name == "fail" ) 
 		button : Button ( eContainer == target, name == "Continue" )
 		
 		click : EventTrigger ( button.onClick == click, eContainer == button )
@@ -229,3 +230,167 @@ rule "Create contents of 'check (gate)' condition"
 
 end
 
+/**
+ * TODO Should the Provides page be placed into a separate Session if the protected
+ * Scope by the Gate is also a Session? The current implementation requires that if the
+ * data entered is to be unique, the protected Session will also have to be contained
+ * within a Session itself, otherwise the generated Provides Frame will allow access
+ * to the private data explicitly.
+ */
+rule "If an EntryGate requires a Label value, then a Page should be created outside the Scope to enter it"
+	when
+		container : Scope ( )
+		
+		session : Scope ( eContainer == container )
+		gate : EntryGate ( eContainer == session )
+		
+		label : Label ( eContainer == session )		
+		requires : RequiresEdge ( from == gate, to == label )
+		
+		not ( provide : Frame ( eContainer == container, name != null,
+			eval ( functions.getEntryGateFrameNameForProvides(label).equals(provide.getName()) ) ) ) 
+	
+		eval ( handler.veto( gate ))
+	
+	then
+		Frame provide = handler.generatedFrame(gate, container);
+		handler.setName(provide, functions.getEntryGateFrameNameForProvides(label));
+		queue.add(provide, drools);
+	
+end
+
+rule "For EntryGates that require Label values, connect a NavigateWire to the provides Frame"
+	when
+		container : Scope ( )
+		
+		session : Scope ( eContainer == container )
+		gate : EntryGate ( eContainer == session )
+		
+		label : Label ( eContainer == session )		
+		requires : RequiresEdge ( from == gate, to == label )
+		
+		provide : Frame ( eContainer == container, name != null,
+			eval ( functions.getEntryGateFrameNameForProvides(label).equals(provide.getName()) ) )
+		
+		# allow other NavigateActions to override this one
+		not ( NavigateAction ( from == gate )) 
+	
+		eval ( handler.veto( gate ))
+	
+	then
+		NavigateAction nav = handler.generatedNavigateAction(gate, gate, gate, provide);
+		handler.setName(nav, "fail");
+		queue.add(nav, drools);
+	
+end
+
+rule "Create TextFields for all Labels required by an EntryGate"
+	when
+		container : Scope ( )
+		
+		session : Scope ( eContainer == container )
+		gate : EntryGate ( eContainer == session )
+		
+		label : Label ( eContainer == session )		
+		requires : RequiresEdge ( from == gate, to == label )
+		
+		provide : Frame ( eContainer == container, name != null,
+			eval ( functions.getEntryGateFrameNameForProvides(label).equals(provide.getName()) ) )
+			
+		not ( VisibleThing ( eContainer == provide, name == label.name ) )
+		
+		eval ( handler.veto( gate ))
+	
+	then
+		InputTextField text = handler.generatedInputTextField(gate, provide);
+		handler.setName(text, label.getName());
+		handler.setType(text, label.getType());
+		queue.add(text, drools);
+	
+end
+
+rule "Connect TextFields for all Labels required by an EntryGate"
+	when
+		container : Scope ( )
+		
+		session : Scope ( eContainer == container )
+		gate : EntryGate ( eContainer == session )
+		
+		label : Label ( eContainer == session )		
+		requires : RequiresEdge ( from == gate, to == label )
+		
+		provide : Frame ( eContainer == container, name != null,
+			eval ( functions.getEntryGateFrameNameForProvides(label).equals(provide.getName()) ) )
+			
+		text : VisibleThing ( eContainer == provide, name == label.name )
+
+		# not connected by either Set or SyncWire		
+		not ( set : SetWire ( eval( functions.connectsSet(set, text, label ) ) ) )
+		not ( sync : SyncWire ( eval( functions.connects(sync, text, label ) ) ) )
+		
+		eval ( handler.veto( gate ))
+	
+	then
+		SetWire set = handler.generatedSetWire(gate, text, text, label);
+		handler.setName(set, "set");
+		queue.add(set, drools);
+	
+end
+
+rule "Connect TextFields for all Labels required by an EntryGate: Add 'can cast?' Condition to SetWire"
+	when
+		container : Scope ( )
+		
+		session : Scope ( eContainer == container )
+		gate : EntryGate ( eContainer == session )
+		
+		label : Label ( eContainer == session )		
+		requires : RequiresEdge ( from == gate, to == label )
+		
+		provide : Frame ( eContainer == container, name != null,
+			eval ( functions.getEntryGateFrameNameForProvides(label).equals(provide.getName()) ) )
+			
+		text : VisibleThing ( eContainer == provide, name == label.name )
+		fieldValue : Property ( text.fieldValue == fieldValue )
+
+		# provided by the source label, not the target label (to make it server-side usually)
+		canCast : Condition ( eContainer == label, name == "can cast?" ) 
+
+		set : SetWire ( eval( functions.connectsSet(set, text, label ) ) )
+		
+		not ( ConditionEdge ( from == canCast, to == set ))
+		
+		eval ( handler.veto( gate ))
+	
+	then
+		ConditionEdge edge = handler.generatedConditionEdge(gate, set, canCast, set);
+		queue.add(edge, drools);
+		
+		# with a ParameterEdge
+		ParameterEdge param = handler.generatedParameterEdge(gate, set, fieldValue, edge);
+		handler.setName(param, "value");
+		queue.add(param, drools);
+	
+end
+
+rule "If an EntryGate requires a Label value, then the 'is set?' Condition in the Label is used as the Gate Condition"
+	when
+		container : Scope ( )
+		
+		session : Scope ( eContainer == container )
+		gate : EntryGate ( eContainer == session )
+		
+		label : Label ( eContainer == session )		
+		requires : RequiresEdge ( from == gate, to == label )
+		
+		cond : Condition ( eContainer == label, name == "fieldValue is set" )
+		
+		not ( ConditionEdge ( from == cond, to == gate ))
+
+		eval ( handler.veto( gate ))
+	
+	then
+		ConditionEdge edge = handler.generatedConditionEdge(gate, gate, cond, gate);
+		queue.add(edge, drools);
+	
+end

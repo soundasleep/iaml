@@ -1,7 +1,9 @@
 package org.openiaml.model.migrate;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -78,7 +80,7 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 			return "iaml.operations:DecisionNode";
 		}
 
-		if (xsiType.equals("iaml.users:UserInstance") || xsiType.equals("iaml:DomainObjectIterator")) {
+		if (xsiType.equals("iaml.users:UserInstance") || xsiType.equals("iaml:DomainObjectInstance")) {
 			return "iaml.domain:DomainIterator";
 		}
 
@@ -247,5 +249,17 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 		// does nothing
 		
 	}
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.migrate.DomBasedMigrator#getNewNamespaces()
+	 */
+	@Override
+	public Map<String, String> getNewNamespaces() {
+		Map<String, String> map = super.getNewNamespaces();
+		map.put("iaml.domain", "http://openiaml.org/model/domain");
+		return map;
+	}
+	
+	
 	
 }

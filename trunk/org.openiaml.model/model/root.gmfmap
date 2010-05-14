@@ -287,7 +287,31 @@
         href="iaml.ecore#//InternetApplication/schemas"/>
     <ownedChild>
       <domainMetaElement
+          href="iaml.ecore#//users/Role"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( Role )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#RoleName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="root.gmftool#//@palette/@tools.0/@tools.7"/>
+      <diagramNode
+          href="iaml.gmfgraph#Role"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//InternetApplication/schemas"/>
+    <ownedChild>
+      <domainMetaElement
           href="iaml.ecore#//domain/DomainSchema"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( DomainSchema )"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel

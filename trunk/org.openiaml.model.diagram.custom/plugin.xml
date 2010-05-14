@@ -78,7 +78,7 @@
                id="org.openiaml.model.diagram.custom.actions.refresh1"
                label="Refresh all &amp;DomainStore Mappings"
                menubarPath="ModelActions/group1">
-			 <selection class="org.openiaml.model.diagram.edit.parts.DomainStoreEditPart">
+			 <selection class="org.openiaml.model.diagram.edit.parts.DomainSchemaEditPart">
 			 </selection>
          </action>
 
@@ -88,7 +88,7 @@
                id="org.openiaml.model.diagram.custom.actions.refresh2"
                label="Refresh all Domain&amp;ObjectInstance Mappings"
                menubarPath="ModelActions/group1">
-			 <selection class="org.openiaml.model.diagram.visual.edit.parts.DomainObjectInstanceEditPart">
+			 <selection class="org.openiaml.model.diagram.visual.edit.parts.DomainIteratorEditPart">
 			 </selection>
          </action>
 

@@ -1035,6 +1035,11 @@
   <links>
     <domainMetaElement
         href="iaml.ecore#//domain/SelectEdge"/>
+    <labelMappings
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#SelectEdgeName"/>
+    </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/selectEdges"/>
     <tool

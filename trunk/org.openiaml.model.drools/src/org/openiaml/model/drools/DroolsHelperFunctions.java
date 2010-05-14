@@ -28,6 +28,7 @@ import org.openiaml.model.model.domain.SelectEdge;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.users.Role;
 import org.openiaml.model.model.visual.Frame;
+import org.openiaml.model.model.visual.Label;
 import org.openiaml.model.model.wires.DetailWire;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
@@ -447,6 +448,10 @@ public class DroolsHelperFunctions {
 	 */
 	public String safeNameString(String s) {
 		return s.replaceAll("[^A-Za-z0-9]", "_");
+	}
+	
+	public String getEntryGateFrameNameForProvides(Label label) {
+		return "Provide " + label.getName();
 	}
 
 }

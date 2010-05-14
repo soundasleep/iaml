@@ -31,6 +31,7 @@ public class AllModel0_5_1CodegenTests {
 		suite.addTestSuite(RemoteRSSFeedPiped.class);
 		suite.addTestSuite(OpenIDAsAuthor.class);
 		suite.addTestSuite(OperationalExample.class);
+		suite.addTestSuite(EntryGateRequiresOpenID.class);
 
 		return suite;
 	}

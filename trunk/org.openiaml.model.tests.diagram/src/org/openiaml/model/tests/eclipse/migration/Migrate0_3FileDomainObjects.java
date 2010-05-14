@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.tests.eclipse.migration.model0_3;
+package org.openiaml.model.tests.eclipse.migration;
 
 import java.io.File;
 import java.util.List;
@@ -24,7 +24,7 @@ import org.openiaml.model.tests.eclipse.migration.AbstractMigrateTestCaseWithWar
  * @author jmwright
  *
  */
-public class MigrateDomainObjects extends AbstractMigrateTestCaseWithWarnings {
+public class Migrate0_3FileDomainObjects extends AbstractMigrateTestCaseWithWarnings {
 
 	protected DiagramDocumentEditor editor_page = null;
 
@@ -42,15 +42,6 @@ public class MigrateDomainObjects extends AbstractMigrateTestCaseWithWarnings {
 		return "FileDomainObjects-migrated.iaml";
 	}
 
-	/**
-	 * We override this because we are in a sub-folder of the
-	 * main migrate tests.
-	 */
-	@Override
-	public String getSourceModel() {
-		return "model0_3/" + getModel();
-	}
-	
 	/*
 	 * We don't expect there to be any warnings, so we
 	 * don't override {@link #assertStatusOK(IStatus)}.
@@ -128,7 +119,7 @@ public class MigrateDomainObjects extends AbstractMigrateTestCaseWithWarnings {
 	
 	@Override
 	public File getExpectedWarningsFile() {
-		return new File("src/org/openiaml/model/tests/eclipse/migration/model0_3/Migrate0_3Warnings.txt");
+		return new File("src/org/openiaml/model/tests/eclipse/migration/Migrate0_3Warnings.txt");
 	}
 	
 }

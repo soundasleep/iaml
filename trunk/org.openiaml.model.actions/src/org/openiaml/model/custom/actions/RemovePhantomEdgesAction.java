@@ -31,6 +31,8 @@ import org.openiaml.model.model.Action;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.Wire;
+import org.openiaml.model.model.domain.SchemaEdge;
+import org.openiaml.model.model.domain.SelectEdge;
 import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ConstraintEdge;
 import org.openiaml.model.model.wires.ExtendsEdge;
@@ -227,6 +229,12 @@ public class RemovePhantomEdgesAction extends IamlFileAction {
 			return true;
 		} else if (obj instanceof RequiresEdge && (((RequiresEdge) obj).getFrom() == null 
 				|| ((RequiresEdge) obj).getTo() == null)) {
+			return true;
+		} else if (obj instanceof SelectEdge && (((SelectEdge) obj).getFrom() == null 
+				|| ((SelectEdge) obj).getTo() == null)) {
+			return true;
+		} else if (obj instanceof SchemaEdge && (((SchemaEdge) obj).getFrom() == null 
+				|| ((SchemaEdge) obj).getTo() == null)) {
 			return true;
 		}
 		

@@ -28,6 +28,9 @@ public class AllMigrationTests {
         // model 0.4
         suite.addTestSuite(Migrate0_4JoinSplitClientSide.class);
 
+        // model 0.5
+        suite.addTestSuite(Migrate0_5IterateSyncWires.class);
+
         return suite; 
    }
 

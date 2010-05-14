@@ -730,7 +730,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 */
 	public void assertEditorRoot(IEditorPart editor) {
 		assertEquals("active editor is the root plugin",
-				"org.openiaml.model.diagram.part.IamlDiagramEditor",
+				org.openiaml.model.diagram.part.IamlDiagramEditor.class.getName(),
 				editor.getClass().getName());
 	}
 
@@ -739,7 +739,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 */
 	public void assertEditorVisual(IEditorPart editor) {
 		assertEquals("active editor is the visual plugin",
-				"org.openiaml.model.diagram.visual.part.IamlDiagramEditor",
+				org.openiaml.model.diagram.visual.part.IamlDiagramEditor.class.getName(),
 				editor.getClass().getName());
 	}
 	
@@ -748,7 +748,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 */
 	public void assertEditorFrame(IEditorPart editor) {
 		assertEquals("active editor is the frame plugin",
-				"org.openiaml.model.diagram.frame.part.IamlDiagramEditor",
+				org.openiaml.model.diagram.frame.part.IamlDiagramEditor.class.getName(),
 				editor.getClass().getName());
 	}
 
@@ -757,16 +757,16 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 */
 	public void assertEditorOperation(IEditorPart editor) {
 		assertEquals("active editor is the operation plugin",
-				"org.openiaml.model.diagram.operation.part.IamlDiagramEditor",
+				org.openiaml.model.diagram.operation.part.IamlDiagramEditor.class.getName(),
 				editor.getClass().getName());
 	}
 
 	/**
 	 * Assert the given editor is from the domainstore plugin.
 	 */
-	public void assertEditorDomainStore(IEditorPart editor) {
-		assertEquals("active editor is the domain store plugin",
-				"org.openiaml.model.diagram.domain_store.part.IamlDiagramEditor",
+	public void assertEditorDomainSchema(IEditorPart editor) {
+		assertEquals("active editor is the schema plugin",				
+				org.openiaml.model.diagram.schema.part.IamlDiagramEditor.class.getName(),
 				editor.getClass().getName());
 	}
 
@@ -775,16 +775,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 */
 	public void assertEditorCondition(IEditorPart editor) {
 		assertEquals("active editor is the condition plugin",
-				"org.openiaml.model.diagram.condition.part.IamlDiagramEditor",
-				editor.getClass().getName());
-	}
-
-	/**
-	 * Assert the given editor is from the domain_object plugin.
-	 */
-	public void assertEditorDomainObject(IEditorPart editor) {
-		assertEquals("active editor is the domain object plugin",
-				"org.openiaml.model.diagram.domain_object.part.IamlDiagramEditor",
+				org.openiaml.model.diagram.condition.part.IamlDiagramEditor.class.getName(),
 				editor.getClass().getName());
 	}
 
@@ -793,7 +784,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 */
 	public void assertEditorWire(IEditorPart editor) {
 		assertEquals("active editor is the wire plugin",
-				"org.openiaml.model.diagram.wire.part.IamlDiagramEditor",
+				org.openiaml.model.diagram.wire.part.IamlDiagramEditor.class.getName(),
 				editor.getClass().getName());
 	}
 

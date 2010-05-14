@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.11d83490915.308">
-  <domainStores id="model.11d83490915.30d" name="domainStore"/>
   <scopes xsi:type="iaml.visual:Frame" id="visual.11d83490a0f.11f" name="page1">
     <children xsi:type="iaml.visual:InputForm" id="visual.11d83490a0f.12d" name="form">
       <children xsi:type="iaml.visual:InputTextField" id="visual.11d83490a0f.19f" name="name"/>
@@ -20,4 +19,5 @@
       <children xsi:type="iaml.visual:InputTextField" id="visual.11d83490a0f.40d" name="name"/>
     </children>
   </scopes>
+  <schemas id="model.11d83490915.30d" name="domainStore"/>
 </iaml:InternetApplication>

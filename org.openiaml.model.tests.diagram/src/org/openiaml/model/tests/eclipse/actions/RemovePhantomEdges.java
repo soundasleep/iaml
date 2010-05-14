@@ -138,7 +138,8 @@ public class RemovePhantomEdges extends EclipseTestCaseHelper {
 			EObject obj = factory.create(typ);
 			
 			// the 'from' and to' should be null, so we need to remove this phantom edge
-			assertTrue(RemovePhantomEdgesAction.shouldRemove(obj));
+			assertTrue("We should remove type " + typ.getName() + ": " + obj, 
+					RemovePhantomEdgesAction.shouldRemove(obj));
 		}
 		
 	}

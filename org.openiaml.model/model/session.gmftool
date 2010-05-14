@@ -179,41 +179,15 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="InputForm"
-          description="Create new InputForm">
+          title="Label"
+          description="Create new Label">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/InputForm.gif"
+            path="icons/full/obj16/Label.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/InputForm.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="InputTextField"
-          description="Create new InputTextField">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/InputTextField.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/InputTextField.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="Button"
-          description="Create new Button">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/Button.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/Button.gif"
+            path="icons/full/obj32/Label.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
       <tools

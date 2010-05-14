@@ -706,7 +706,7 @@
         <details key="documentation" value="Represents a clickable button to the user."/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Label" eSuperTypes="#//VisibleThing">
+    <eClassifiers xsi:type="ecore:EClass" name="Label" eSuperTypes="#//VisibleThing #//users/RequiresEdgeDestination">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.4.3"/>
       </eAnnotations>
@@ -1084,6 +1084,12 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Represents a user session; contained data is normally not accessible by other users."/>
       </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="labels" upperBound="-1"
+          eType="#//visual/Label" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="A {@model Session} can contain {@model Label}s. This allows for data to be {@model SyncWire synchronised} and validated with other elements."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Email" eSuperTypes="#//NamedElement #//ContainsOperations #//Scope #//ContainsWires #//WireSource #//WireDestination #//ContainsConditions #//ContainsProperties #//CanBeSynced">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1160,7 +1166,7 @@
         <details key="documentation" value="When placed into a {@model Frame} or {@model Session}, enforces that all access contains the {@model Role roles} and {@model Permission permissions} provided by incoming {@model RequiresEdge}."/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Gate" abstract="true" eSuperTypes="#//NamedElement #//WireSource #//WireDestination #//GeneratedElement #//GeneratesElements #//wires/ConditionEdgeDestination #//ActionSource #//ActionDestination">
+    <eClassifiers xsi:type="ecore:EClass" name="Gate" abstract="true" eSuperTypes="#//NamedElement #//WireSource #//WireDestination #//GeneratedElement #//GeneratesElements #//wires/ConditionEdgeDestination #//ActionSource #//ActionDestination #//users/RequiresEdgesSource">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Restricts access {@model EntryGate into}, or {@model ExitGate out of}, a {@model Scope}."/>
       </eAnnotations>

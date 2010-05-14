@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.122e3c3d672.44">
-  <scopes xsi:type="iaml.visual:Frame" id="visual.122e3c3d7ab.30" name="container">
-    <elements xsi:type="iaml:DomainObjectInstance" id="model.122e3c3d672.7a" name="domain object instance" inWires="wires.122e3c3d838.17"/>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1289147fd0a.20">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
+    <values id="model.1289147fd0a.45" name="parameter" outParameterEdges="wires.1289147fdd5.e wires.1289147fdd5.1f">
+      <parameterEdges id="wires.1289147fdd5.e" from="model.1289147fd0a.45" to="wires.1289147fdd5.6"/>
+      <parameterEdges id="wires.1289147fdd5.1f" from="model.1289147fd0a.45" to="wires.1289147fdd5.1d"/>
+    </values>
+    <children xsi:type="iaml.visual:Button" id="visual.1289147fda6.2a" name="direct" outActions="wires.1289147fdd5.6">
+      <actions xsi:type="iaml.wires:RunAction" inParameterEdges="wires.1289147fdd5.e" id="wires.1289147fdd5.6" name="onClick" from="visual.1289147fda6.2a" to="model.1289147fd0a.2e"/>
+      <onChange id="model.1289147fd0a.75" outActions="wires.1289147fdd5.1d">
+        <actions xsi:type="iaml.wires:RunAction" inParameterEdges="wires.1289147fdd5.1f" id="wires.1289147fdd5.1d" name="run" from="model.1289147fd0a.75" to="model.1289147fd0a.2e"/>
+      </onChange>
+    </children>
   </scopes>
-  <scopes xsi:type="iaml.visual:Frame" id="visual.122e3c3d7ab.3a" name="referenced">
-    <properties id="model.122e3c3d672.64" name="property" outParameterEdges="wires.122e3c3d838.19">
-      <parameterEdges id="wires.122e3c3d838.19" from="model.122e3c3d672.64" to="wires.122e3c3d838.17"/>
-    </properties>
-    <elements xsi:type="iaml:DomainObject" id="model.122e3c3d672.6d" name="domain object" outWires="wires.122e3c3d838.17">
-      <wires xsi:type="iaml.wires:SelectWire" inParameterEdges="wires.122e3c3d838.19" id="wires.122e3c3d838.17" from="model.122e3c3d672.6d" to="model.122e3c3d672.7a" name="select"/>
-    </elements>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.1289147fda6.13" name="Target">
+    <operations xsi:type="iaml:CompositeOperation" id="model.1289147fd0a.2e" name="some operation" inActions="wires.1289147fdd5.6 wires.1289147fdd5.1d"/>
   </scopes>
 </iaml:InternetApplication>

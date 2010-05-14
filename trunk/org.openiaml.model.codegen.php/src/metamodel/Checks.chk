@@ -146,8 +146,9 @@ context model::PrimitiveCondition WARNING "Unknown primitive condition name '" +
 context model::operations::Arithmetic ERROR "Arithmetic must have at least one incoming data source edge" :
 	inFlows.size > 0;
 
-context model::components::EntryGate ERROR "An EntryGate needs to have at least one incoming Condition, or one outgoing 'first' wire, or it will never permit access" :
+context model::components::EntryGate ERROR "An EntryGate needs to have at least one incoming Condition, one outgoing RequiresEdge, or one outgoing 'first' wire, or it will never permit access" :
 	inConditionEdges.size >= 1
+	|| outRequiresEdges.size >= 1
 	|| outWires.typeSelect(model::NamedElement).exists(w | w.name == "first");
 
 context model::components::ExitGate ERROR "An ExitGate needs to have at least one incoming Condition, or one outgoing 'last' wire, or it will never permit access" :

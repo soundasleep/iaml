@@ -19,8 +19,6 @@ public class AllShortcutsTests {
     public static Test suite() { 
         TestSuite suite = new TestSuite("Shortcuts");
 
-        suite.addTestSuite(ShortcutsDomainObjectTestCase.class);
-        suite.addTestSuite(ShortcutsDomainStoreTestCase.class);
         suite.addTestSuite(ShortcutsManyTestCase.class);
         suite.addTestSuite(ShortcutsOperationTestCase.class);
         suite.addTestSuite(ShortcutsRootTestCase.class);

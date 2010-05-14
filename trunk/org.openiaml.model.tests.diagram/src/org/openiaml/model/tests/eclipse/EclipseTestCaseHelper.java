@@ -23,6 +23,7 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
 import org.openiaml.model.model.CompositeCondition;
+import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DomainAttribute;
@@ -33,6 +34,7 @@ import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
+import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.TemporaryVariable;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainSchema;
@@ -40,6 +42,7 @@ import org.openiaml.model.model.domain.DomainSource;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.Session;
+import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
@@ -875,6 +878,36 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 		return assertHasRenderedNamedObject(editor, Condition.class, name, true, shortcutRequired);
 	}
 
+	public ShapeNodeEditPart assertHasButton(
+			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
+		return assertHasRenderedNamedObject(editor, Button.class, name, true, shortcutRequired);
+	}
+	
+	public ShapeNodeEditPart assertHasButton(
+			DiagramDocumentEditor editor, String name) {
+		return assertHasRenderedNamedObject(editor, Button.class, name, false, false);
+	}
+	
+	public ShapeNodeEditPart assertHasStaticValue(
+			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
+		return assertHasRenderedNamedObject(editor, StaticValue.class, name, true, shortcutRequired);
+	}
+	
+	public ShapeNodeEditPart assertHasStaticValue(
+			DiagramDocumentEditor editor, String name) {
+		return assertHasRenderedNamedObject(editor, StaticValue.class, name, false, false);
+	}
+	
+	public ShapeNodeEditPart assertHasCompositeOperation(
+			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
+		return assertHasRenderedNamedObject(editor, CompositeOperation.class, name, true, shortcutRequired);
+	}
+	
+	public ShapeNodeEditPart assertHasCompositeOperation(
+			DiagramDocumentEditor editor, String name) {
+		return assertHasRenderedNamedObject(editor, CompositeOperation.class, name, false, false);
+	}
+	
 	/**
 	 * @see #assertHasApplicationElementProperty(DiagramDocumentEditor, String, boolean, boolean)
 	 */

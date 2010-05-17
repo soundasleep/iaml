@@ -581,7 +581,11 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="fieldValue" eType="#//Property"
-        containment="true"/>
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This represents the value of the {@model Changeable} object. This is always a valid {@model Changeable#type} instance."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/plugin/org.eclipse.xsd/model/XSD.ecore#//XSDSimpleTypeDefinition">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The datatype of the {@model Changeable object} and its contained {@model Property fieldValue}."/>
@@ -701,6 +705,18 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A single text field, storing a single text value, which may be edited by the user."/>
       </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="currentInput" eType="#//Property"
+          containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="This represents the transient value of the {@model InputTextField}; for example, the current text input before it has been committed. This is &lt;em>not&lt;/em> always a valid {@model InputTextField#type} instance."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="onInput" eType="#//EventTrigger"
+          containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="This {@model EventTrigger} is executed whenever the {@model EventTrigger#currentInput current input} is changed; e.g. a key has been pressed, but the focus has not been lost yet. Once focus is lost, this value becomes the {@model InputTextField#fieldValue field value} if is of a valid {@model InputTextField#type}. This event may only fire on the client-side."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Button" eSuperTypes="#//VisibleThing #//ActionSource">
       <eAnnotations source="http://openiaml.org/comment">
@@ -746,6 +762,12 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="When a connected element changes, a SyncWire will update the other connected element."/>
       </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="executeOnInput" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="false">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="If this {@model SyncWire} is connected to a {@model InputTextField}, then it will try and synchronise with the {@model InputTextField#currentInput} of the field, as opposed to the final commited {@model InputTextField#fieldValue}."/>
+        </eAnnotations>
+      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="RunAction" eSuperTypes="#//wires/ParameterEdgeDestination #//NamedElement #//GeneratesElements #//wires/ConditionEdgeDestination #//Action">
       <eAnnotations source="http://openiaml.org/comment">

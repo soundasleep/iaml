@@ -1,51 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xsi:schemaLocation="http://openiaml.org/model/domain http://openiaml.org/model0.5#//domain http://openiaml.org/model/visual http://openiaml.org/model0.5#//visual">
-  <notation:Diagram xmi:id="_nJyrwF8GEd-7r-72c8P8Tg" type="Iaml" measurementUnit="Pixel">
-    <children xmi:type="notation:Node" xmi:id="_nLk0cF8GEd-7r-72c8P8Tg" type="2038">
-      <children xmi:type="notation:DecorationNode" xmi:id="_nLk0dl8GEd-7r-72c8P8Tg" type="5070"/>
-      <styles xmi:type="notation:DescriptionStyle" xmi:id="_nLk0cV8GEd-7r-72c8P8Tg"/>
-      <styles xmi:type="notation:FontStyle" xmi:id="_nLk0cl8GEd-7r-72c8P8Tg"/>
-      <styles xmi:type="notation:LineStyle" xmi:id="_nLk0c18GEd-7r-72c8P8Tg"/>
-      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_nLk0dF8GEd-7r-72c8P8Tg" diagramLink="_pqRrgF8GEd-7r-72c8P8Tg" hint="Iaml_Frame"/>
-      <element xmi:type="iaml.visual:Frame" href="generation-sync-multiple.iaml#visual.11d83490a0f.11f"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_nLk0dV8GEd-7r-72c8P8Tg" x="135" y="20"/>
-    </children>
-    <children xmi:type="notation:Node" xmi:id="_nLk0d18GEd-7r-72c8P8Tg" type="2038">
-      <children xmi:type="notation:DecorationNode" xmi:id="_nLk0fV8GEd-7r-72c8P8Tg" type="5070"/>
-      <styles xmi:type="notation:DescriptionStyle" xmi:id="_nLk0eF8GEd-7r-72c8P8Tg"/>
-      <styles xmi:type="notation:FontStyle" xmi:id="_nLk0eV8GEd-7r-72c8P8Tg"/>
-      <styles xmi:type="notation:LineStyle" xmi:id="_nLk0el8GEd-7r-72c8P8Tg"/>
-      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_nLk0e18GEd-7r-72c8P8Tg" diagramLink="_qEDdcF8GEd-7r-72c8P8Tg" hint="Iaml_Frame"/>
-      <element xmi:type="iaml.visual:Frame" href="generation-sync-multiple.iaml#visual.11d83490a0f.120"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_nLk0fF8GEd-7r-72c8P8Tg" x="254" y="11"/>
-    </children>
-    <children xmi:type="notation:Node" xmi:id="_nLk0fl8GEd-7r-72c8P8Tg" type="2038">
-      <children xmi:type="notation:DecorationNode" xmi:id="_nLk0hF8GEd-7r-72c8P8Tg" type="5070"/>
-      <styles xmi:type="notation:DescriptionStyle" xmi:id="_nLk0f18GEd-7r-72c8P8Tg"/>
-      <styles xmi:type="notation:FontStyle" xmi:id="_nLk0gF8GEd-7r-72c8P8Tg"/>
-      <styles xmi:type="notation:LineStyle" xmi:id="_nLk0gV8GEd-7r-72c8P8Tg"/>
-      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_nLk0gl8GEd-7r-72c8P8Tg" hint="Iaml_Frame"/>
-      <element xmi:type="iaml.visual:Frame" href="generation-sync-multiple.iaml#visual.11d83490a0f.121"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_nLk0g18GEd-7r-72c8P8Tg" x="373" y="11"/>
-    </children>
-    <children xmi:type="notation:Node" xmi:id="_nLk0hV8GEd-7r-72c8P8Tg" type="2047">
-      <children xmi:type="notation:DecorationNode" xmi:id="_nLk0i18GEd-7r-72c8P8Tg" type="5086"/>
-      <styles xmi:type="notation:DescriptionStyle" xmi:id="_nLk0hl8GEd-7r-72c8P8Tg"/>
-      <styles xmi:type="notation:LineStyle" xmi:id="_nLk0h18GEd-7r-72c8P8Tg"/>
-      <styles xmi:type="notation:FillStyle" xmi:id="_nLk0iF8GEd-7r-72c8P8Tg"/>
-      <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="_nLk0iV8GEd-7r-72c8P8Tg" hint="Iaml_Schema"/>
-      <element xmi:type="iaml.domain:DomainSchema" href="generation-sync-multiple.iaml#model.11d83490915.30d"/>
-      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_nLk0il8GEd-7r-72c8P8Tg" x="542" y="11"/>
-    </children>
-    <styles xmi:type="notation:DiagramStyle" xmi:id="_nJyrwV8GEd-7r-72c8P8Tg"/>
-    <element xmi:type="iaml:InternetApplication" href="generation-sync-multiple.iaml#model.11d83490915.308"/>
-  </notation:Diagram>
-  <notation:Diagram xmi:id="_pqRrgF8GEd-7r-72c8P8Tg" type="Iaml_Frame" measurementUnit="Pixel">
-    <styles xmi:type="notation:DiagramStyle" xmi:id="_pqRrgV8GEd-7r-72c8P8Tg"/>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xsi:schemaLocation="http://openiaml.org/model/domain http://openiaml.org/model0.5#//domain http://openiaml.org/model/visual http://openiaml.org/model0.5#//visual" xmi:id="__nVPIGFrEd-xuOeUyInRVQ" type="Iaml" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="__oqr4GFrEd-xuOeUyInRVQ" type="2050">
+    <children xmi:type="notation:DecorationNode" xmi:id="__oqr5mFrEd-xuOeUyInRVQ" type="5090"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="__oqr4WFrEd-xuOeUyInRVQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="__oqr4mFrEd-xuOeUyInRVQ"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="__oqr42FrEd-xuOeUyInRVQ"/>
+    <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="__oqr5GFrEd-xuOeUyInRVQ" hint="Iaml_Frame"/>
     <element xmi:type="iaml.visual:Frame" href="generation-sync-multiple.iaml#visual.11d83490a0f.11f"/>
-  </notation:Diagram>
-  <notation:Diagram xmi:id="_qEDdcF8GEd-7r-72c8P8Tg" type="Iaml_Frame" measurementUnit="Pixel">
-    <styles xmi:type="notation:DiagramStyle" xmi:id="_qEDdcV8GEd-7r-72c8P8Tg"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="__oqr5WFrEd-xuOeUyInRVQ" x="135" y="11"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="__oqr52FrEd-xuOeUyInRVQ" type="2050">
+    <children xmi:type="notation:DecorationNode" xmi:id="__oqr7WFrEd-xuOeUyInRVQ" type="5090"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="__oqr6GFrEd-xuOeUyInRVQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="__oqr6WFrEd-xuOeUyInRVQ"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="__oqr6mFrEd-xuOeUyInRVQ"/>
+    <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="__oqr62FrEd-xuOeUyInRVQ" hint="Iaml_Frame"/>
     <element xmi:type="iaml.visual:Frame" href="generation-sync-multiple.iaml#visual.11d83490a0f.120"/>
-  </notation:Diagram>
-</xmi:XMI>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="__oqr7GFrEd-xuOeUyInRVQ" x="255" y="20"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="__oqr7mFrEd-xuOeUyInRVQ" type="2050">
+    <children xmi:type="notation:DecorationNode" xmi:id="__oqr9GFrEd-xuOeUyInRVQ" type="5090"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="__oqr72FrEd-xuOeUyInRVQ"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="__oqr8GFrEd-xuOeUyInRVQ"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="__oqr8WFrEd-xuOeUyInRVQ"/>
+    <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="__oqr8mFrEd-xuOeUyInRVQ" hint="Iaml_Frame"/>
+    <element xmi:type="iaml.visual:Frame" href="generation-sync-multiple.iaml#visual.11d83490a0f.121"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="__oqr82FrEd-xuOeUyInRVQ" x="373" y="11"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="__oqr9WFrEd-xuOeUyInRVQ" type="2047">
+    <children xmi:type="notation:DecorationNode" xmi:id="__o0c4GFrEd-xuOeUyInRVQ" type="5086"/>
+    <styles xmi:type="notation:DescriptionStyle" xmi:id="__oqr9mFrEd-xuOeUyInRVQ"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="__oqr92FrEd-xuOeUyInRVQ"/>
+    <styles xmi:type="notation:FillStyle" xmi:id="__oqr-GFrEd-xuOeUyInRVQ"/>
+    <styles xmi:type="notation:HintedDiagramLinkStyle" xmi:id="__oqr-WFrEd-xuOeUyInRVQ" hint="Iaml_Schema"/>
+    <element xmi:type="iaml.domain:DomainSchema" href="generation-sync-multiple.iaml#model.11d83490915.30d"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="__oqr-mFrEd-xuOeUyInRVQ" x="542" y="11"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="__nVPIWFrEd-xuOeUyInRVQ"/>
+  <element xmi:type="iaml:InternetApplication" href="generation-sync-multiple.iaml#model.11d83490915.308"/>
+</notation:Diagram>

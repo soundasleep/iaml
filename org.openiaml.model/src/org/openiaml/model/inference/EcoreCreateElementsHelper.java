@@ -688,4 +688,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setValue(element, DomainPackage.eINSTANCE.getDomainSource_Cache(), value);
 	}
 	
+	public void setExecuteOnInput(SyncWire element, boolean value) throws InferenceException {
+		setValue(element, WiresPackage.eINSTANCE.getSyncWire_ExecuteOnInput(), value);
+	}
+	
 }

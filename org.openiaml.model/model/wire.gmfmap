@@ -6,8 +6,6 @@
     xmlns:gmfmap="http://www.eclipse.org/gmf/2008/mappings"
     xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition">
   <nodes>
-    <containmentFeature
-        href="iaml.ecore#//wires/CompositeWire/operations"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//CompositeOperation"/>
@@ -25,16 +23,11 @@
         <diagramLabel
             href="iaml.gmfgraph#CompositeOperationParentName"/>
       </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="wire.gmftool#//@palette/@tools.0/@tools.1"/>
       <diagramNode
           href="iaml.gmfgraph#CompositeOperation"/>
     </ownedChild>
   </nodes>
   <nodes>
-    <containmentFeature
-        href="iaml.ecore#//wires/CompositeWire/operations"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//PrimitiveOperation"/>
@@ -52,16 +45,11 @@
         <diagramLabel
             href="iaml.gmfgraph#PrimitiveOperationParentName"/>
       </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="wire.gmftool#//@palette/@tools.0/@tools.0"/>
       <diagramNode
           href="iaml.gmfgraph#PrimitiveOperation"/>
     </ownedChild>
   </nodes>
   <nodes>
-    <containmentFeature
-        href="iaml.ecore#//wires/CompositeWire/children"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//DomainAttribute"/>
@@ -116,8 +104,6 @@
     </ownedChild>
   </nodes>
   <nodes>
-    <containmentFeature
-        href="iaml.ecore#//wires/CompositeWire/eventTriggers"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//EventTrigger"/>
@@ -177,14 +163,14 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="wire.gmftool#//@palette/@tools.0/@tools.2"/>
+          href="wire.gmftool#//@palette/@tools.0/@tools.0"/>
       <diagramNode
           href="iaml.gmfgraph#Property"/>
     </ownedChild>
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//wires/CompositeWire/parameters"/>
+        href="iaml.ecore#//Wire/parameters"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//Parameter"/>
@@ -197,14 +183,14 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="wire.gmftool#//@palette/@tools.0/@tools.5"/>
+          href="wire.gmftool#//@palette/@tools.0/@tools.3"/>
       <diagramNode
           href="iaml.gmfgraph#Parameter"/>
     </ownedChild>
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//wires/CompositeWire/values"/>
+        href="iaml.ecore#//Wire/values"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//StaticValue"/>
@@ -229,7 +215,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="wire.gmftool#//@palette/@tools.0/@tools.4"/>
+          href="wire.gmftool#//@palette/@tools.0/@tools.2"/>
       <diagramNode
           href="iaml.gmfgraph#StaticValue"/>
     </ownedChild>
@@ -254,7 +240,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="wire.gmftool#//@palette/@tools.0/@tools.3"/>
+          href="wire.gmftool#//@palette/@tools.0/@tools.1"/>
       <diagramNode
           href="iaml.gmfgraph#CompositeCondition"/>
     </ownedChild>
@@ -338,7 +324,7 @@
     <domainModel
         href="iaml.ecore#/"/>
     <domainMetaElement
-        href="iaml.ecore#//wires/CompositeWire"/>
+        href="iaml.ecore#//Wire"/>
     <palette
         href="wire.gmftool#//@palette"/>
   </diagram>

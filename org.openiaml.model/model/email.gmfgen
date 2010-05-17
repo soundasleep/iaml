@@ -824,7 +824,7 @@
         <sourceMetaFeature href="iaml.genmodel#//model/domain/SelectEdge/from"/>
         <targetMetaFeature href="iaml.genmodel#//model/domain/SelectEdge/to"/>
       </modelFacet>
-      <labels editPartClassName="WrappingLabel3EditPart" elementIcon="true" itemSemanticEditPolicyClassName="WrappingLabel3ItemSemanticEditPolicy" readOnly="true" visualID="6007">
+      <labels editPartClassName="WrappingLabel3EditPart" elementIcon="true" itemSemanticEditPolicyClassName="WrappingLabel3ItemSemanticEditPolicy" notationViewFactoryClassName="SelectEdgeLabelViewFactory" readOnly="true" visualID="6007">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureSelectEdgeNameFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes xsi:type="gmfgen:LabelOffsetAttributes" y="40"/>

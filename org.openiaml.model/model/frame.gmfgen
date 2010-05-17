@@ -1042,7 +1042,7 @@
         <sourceMetaFeature href="iaml.genmodel#//model/domain/SelectEdge/from"/>
         <targetMetaFeature href="iaml.genmodel#//model/domain/SelectEdge/to"/>
       </modelFacet>
-      <labels editPartClassName="WrappingLabel27EditPart" elementIcon="true" itemSemanticEditPolicyClassName="WrappingLabel27ItemSemanticEditPolicy" readOnly="true" visualID="6018">
+      <labels editPartClassName="WrappingLabel27EditPart" elementIcon="true" itemSemanticEditPolicyClassName="WrappingLabel27ItemSemanticEditPolicy" notationViewFactoryClassName="SelectEdgeLabelViewFactory" readOnly="true" visualID="6018">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureSelectEdgeNameFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes xsi:type="gmfgen:LabelOffsetAttributes" y="40"/>
@@ -1061,7 +1061,7 @@
         <sourceMetaFeature href="iaml.genmodel#//model/domain/SchemaEdge/from"/>
         <targetMetaFeature href="iaml.genmodel#//model/domain/SchemaEdge/to"/>
       </modelFacet>
-      <labels editPartClassName="WrappingLabel28EditPart" elementIcon="true" itemSemanticEditPolicyClassName="WrappingLabel28ItemSemanticEditPolicy" readOnly="true" visualID="6019">
+      <labels editPartClassName="WrappingLabel28EditPart" elementIcon="true" itemSemanticEditPolicyClassName="WrappingLabel28ItemSemanticEditPolicy" notationViewFactoryClassName="SchemaEdgeLabelViewFactory" readOnly="true" visualID="6019">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureSchemaEdgeNameFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes xsi:type="gmfgen:LabelOffsetAttributes" y="40"/>
@@ -1497,8 +1497,14 @@
     <childReferences child="//@diagram/@links.6" groupIcon="icons/incomingLinksNavigatorGroup.gif" groupName="incoming links" parent="//@diagram/@topLevelNodes.20" referenceType="in_source"/>
     <childReferences child="//@diagram/@topLevelNodes.21" groupIcon="icons/linkTargetNavigatorGroup.gif" groupName="target" parent="//@diagram/@links.6" referenceType="out_target"/>
     <childReferences child="//@diagram/@links.6" groupIcon="icons/incomingLinksNavigatorGroup.gif" groupName="incoming links" parent="//@diagram/@topLevelNodes.21" referenceType="in_source"/>
+    <childReferences child="//@diagram/@topLevelNodes.24" groupIcon="icons/linkTargetNavigatorGroup.gif" groupName="target" parent="//@diagram/@links.6" referenceType="out_target"/>
+    <childReferences child="//@diagram/@links.6" groupIcon="icons/incomingLinksNavigatorGroup.gif" groupName="incoming links" parent="//@diagram/@topLevelNodes.24" referenceType="in_source"/>
     <childReferences child="//@diagram/@topLevelNodes.19" groupIcon="icons/linkSourceNavigatorGroup.gif" groupName="source" parent="//@diagram/@links.6" referenceType="in_source"/>
     <childReferences child="//@diagram/@links.6" groupIcon="icons/outgoingLinksNavigatorGroup.gif" groupName="outgoing links" parent="//@diagram/@topLevelNodes.19" referenceType="out_target"/>
+    <childReferences child="//@diagram/@topLevelNodes.22" groupIcon="icons/linkSourceNavigatorGroup.gif" groupName="source" parent="//@diagram/@links.6" referenceType="in_source"/>
+    <childReferences child="//@diagram/@links.6" groupIcon="icons/outgoingLinksNavigatorGroup.gif" groupName="outgoing links" parent="//@diagram/@topLevelNodes.22" referenceType="out_target"/>
+    <childReferences child="//@diagram/@topLevelNodes.23" groupIcon="icons/linkSourceNavigatorGroup.gif" groupName="source" parent="//@diagram/@links.6" referenceType="in_source"/>
+    <childReferences child="//@diagram/@links.6" groupIcon="icons/outgoingLinksNavigatorGroup.gif" groupName="outgoing links" parent="//@diagram/@topLevelNodes.23" referenceType="out_target"/>
     <childReferences child="//@diagram/@links.7" groupIcon="icons/linksNavigatorGroup.gif" groupName="links" parent="//@diagram"/>
     <childReferences child="//@diagram/@links.8" groupIcon="icons/linksNavigatorGroup.gif" groupName="links" parent="//@diagram"/>
     <childReferences child="//@diagram/@topLevelNodes.2" groupIcon="icons/linkTargetNavigatorGroup.gif" groupName="target" parent="//@diagram/@links.8" referenceType="out_target"/>

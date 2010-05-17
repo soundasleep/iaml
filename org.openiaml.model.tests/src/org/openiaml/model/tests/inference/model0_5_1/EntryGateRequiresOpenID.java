@@ -17,7 +17,6 @@ import org.openiaml.model.model.visual.Label;
 import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.NavigateAction;
 import org.openiaml.model.model.wires.RunAction;
-import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
 /**
@@ -87,10 +86,9 @@ public class EntryGateRequiresOpenID extends InferenceTestCase {
 		// same data type as openid
 		assertEquals(openid.getType(), field.getType());
 		
-		// connected as a set wire
-		SetWire set2 = assertHasSetWire(root, field, openid);
-		assertGenerated(set2);
-		
+		// NOT connected as a set wire
+		assertHasNoSetWire(root, field, openid);
+
 		// the Frame is connected as a NavigateAction from the Gate
 		NavigateAction nav = assertHasNavigateAction(root, gate, enter);
 		assertGenerated(nav);
@@ -144,13 +142,16 @@ public class EntryGateRequiresOpenID extends InferenceTestCase {
 		assertGenerated(nav);
 		
 	}
-	
+		
 	/**
-	 * The SetWire from the Provide page only Sets if the value can actually be cast.
+	 * Since the target Label is contained within a Session, protected by a
+	 * Gate that requires the Label to be valid before it can actually be set,
+	 * we can't connect the TextField with a SetWire directly, because
+	 * Label.update() will force a redirect to the very same page. 
 	 * 
 	 * @throws Exception
 	 */
-	public void testSetWireHasCanCastCondition() throws Exception {
+	public void testEnterIDNotSetToLabel() throws Exception {
 		
 		Session container = assertHasSession(root, "Containing Session");
 		Session session = assertHasSession(container, "Protected Session");
@@ -159,69 +160,105 @@ public class EntryGateRequiresOpenID extends InferenceTestCase {
 		Frame enter = assertHasFrame(container, "Provide Current OpenID");
 		InputTextField field = assertHasInputTextField(enter, "Current OpenID");
 		
-		// connected as a set wire
-		SetWire set = assertHasSetWire(root, field, openid);
-		assertGenerated(set);
+		// not connected with a set wire
+		assertHasNoSetWire(root, field, openid);
 		
-		// a ConditionEdge is created
-		// from the *server* side
-		Condition canCast = assertHasCondition(openid, "can cast?");
-		assertGenerated(canCast);
-		
-		ConditionEdge edge = assertHasConditionEdge(root, canCast, set);
-		assertGenerated(edge);
-
-		// with a Parameter from the *client-side* field (this is important!)
-		Property fieldValue = assertHasFieldValue(field);
-		assertGenerated(fieldValue);
-		assertHasParameterEdge(root, fieldValue, edge);
-
 	}
 	
-	
 	/**
-	 * The Provide.text.onChange should call the Session.label.update
-	 * but with the same ConditionEdge as the SetWire.
+	 * The Scope.onAccess event will try to update the Label value
+	 * with the provided ID, only if it is valid. This is possible
+	 * because onInit/onAccess occurs before Gate events.
 	 * 
 	 * @throws Exception
 	 */
-	public void testSourceEditHasCondition() throws Exception {
+	public void testSessionOnAccessUpdatesLabel() throws Exception {
 		
 		Session container = assertHasSession(root, "Containing Session");
 		Session session = assertHasSession(container, "Protected Session");
 		Label openid = assertHasLabel(session, "Current OpenID");
 		
-		Frame enter = assertHasFrame(container, "Provide Current OpenID");
-		InputTextField field = assertHasInputTextField(enter, "Current OpenID");
+		EventTrigger onAccess = session.getOnAccess();
+		assertGenerated(onAccess);
 		
-		// a ConditionEdge is created
-		// from the *server* side
-		Condition canCast = assertHasCondition(openid, "can cast?");
+		// the target operation
+		//CompositeOperation target = assertHasCompositeOperation(session, "Update Current OpenID");
+		Operation target = assertHasOperation(openid, "update");
+		assertGenerated(target);
 		
-		EventTrigger onChange = field.getOnChange();
-		assertGenerated(onChange);
-		
-		Operation update = assertHasOperation(openid, "update");
-		assertGenerated(update);
-		
-		RunAction run = assertHasRunAction(root, onChange, update);
+		// is run
+		RunAction run = assertHasRunAction(root, onAccess, target);
 		assertGenerated(run);
 		
-		// with a Parameter from the *client-side* field (this is important!)
+		// with a value from the text field
+		Frame enter = assertHasFrame(container, "Provide Current OpenID");
+		InputTextField field = assertHasInputTextField(enter, "Current OpenID");
 		Property fieldValue = assertHasFieldValue(field);
 		assertGenerated(fieldValue);
-		assertHasParameterEdge(root, fieldValue, run);
-		
 		assertGenerated(assertHasParameterEdge(root, fieldValue, run));
 		
-		ConditionEdge edge = assertHasConditionEdge(root, canCast, run);
-		assertGenerated(edge);
-		
-		// with a Parameter from the *client-side* field (this is important!)
-		assertGenerated(fieldValue);
-		assertHasParameterEdge(root, fieldValue, edge);
-
 	}
 	
+	/**
+	 * The Scope.Label is only updated if the provided value has actually
+	 * been set. 
+	 * 
+	 * @throws Exception
+	 */
+	public void testSessionOnAccessUpdatesLabelOnlyIfSet() throws Exception {
+		
+		Session container = assertHasSession(root, "Containing Session");
+		Session session = assertHasSession(container, "Protected Session");
+		Label openid = assertHasLabel(session, "Current OpenID");
+		
+		EventTrigger onAccess = session.getOnAccess();
+		Operation target = assertHasOperation(openid, "update");
+		RunAction run = assertHasRunAction(root, onAccess, target);
+		
+		Frame enter = assertHasFrame(container, "Provide Current OpenID");
+		InputTextField field = assertHasInputTextField(enter, "Current OpenID");
+		
+		// generated 'is set?' condition
+		Condition isSet = assertHasCondition(field, "fieldValue is set");
+		assertGenerated(isSet);
+		
+		// connected to the RunAction
+		assertGenerated(assertHasConditionEdge(root, isSet, run));
+		
+	}
+	
+	/**
+	 * The Scope.Label is only updated if the provided value can actually
+	 * be cast. This is necessary because the client-side validation (e.g. OpenID)
+	 * is only done at server-side.
+	 * 
+	 * @throws Exception
+	 */
+	public void testSessionOnAccessUpdatesLabelOnlyIfCastable() throws Exception {
+		
+		Session container = assertHasSession(root, "Containing Session");
+		Session session = assertHasSession(container, "Protected Session");
+		Label openid = assertHasLabel(session, "Current OpenID");
+		
+		EventTrigger onAccess = session.getOnAccess();
+		Operation target = assertHasOperation(openid, "update");
+		RunAction run = assertHasRunAction(root, onAccess, target);
+
+		Frame enter = assertHasFrame(container, "Provide Current OpenID");
+		InputTextField field = assertHasInputTextField(enter, "Current OpenID");
+		Property fieldValue = assertHasFieldValue(field);
+		
+		// generated 'can cast?' condition on the target
+		Condition isSet = assertHasCondition(openid, "can cast?");
+		assertGenerated(isSet);
+		
+		// connected to the RunAction
+		ConditionEdge edge = assertHasConditionEdge(root, isSet, run);
+		assertGenerated(edge);
+		
+		// connected with a ParameterEdge from the source
+		assertGenerated(assertHasParameterEdge(root, fieldValue, edge));
+		
+	}
 
 }

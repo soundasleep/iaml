@@ -211,36 +211,31 @@ public class GetShortcuts {
 			// additional special logic: if we have a WireDestination, get all of the incoming edges
 			// that are RunActions, and render these as shortcut elements too (i.e. parameters)
 			// (this covers SelectWires, etc...: see Issue 69)
-			if (wire instanceof WireDestination) {
-				WireDestination run = (WireDestination) wire;
+			if (wire instanceof ParameterEdgesSource) {
+				// specifically, if this wire is also a destination of parameters, follow these up
+				ParameterEdgesSource prun =
+					(ParameterEdgesSource) wire;
 
-				if (run instanceof ParameterEdgesSource) {
-					// specifically, if this wire is also a destination of parameters, follow these up
-					ParameterEdgesSource prun =
-						(ParameterEdgesSource) run;
+				result.addAll(getAllShortcutsFromParameterEdges(doneAlready, edges, view, wire, prun.getOutParameterEdges(), registry, updater));
+			}
 
-					result.addAll(getAllShortcutsFromParameterEdges(doneAlready, edges, view, wire, prun.getOutParameterEdges(), registry, updater));
-				}
+			if (wire instanceof ParameterEdgeDestination) {
+				// specifically, if this wire is also a source of parameters, follow these up
+				ParameterEdgeDestination prun =
+					(ParameterEdgeDestination) wire;
 
-				if (run instanceof ParameterEdgeDestination) {
-					// specifically, if this wire is also a source of parameters, follow these up
-					ParameterEdgeDestination prun =
-						(ParameterEdgeDestination) run;
+				result.addAll(getAllShortcutsFromParameterEdges(doneAlready, edges, view, wire, prun.getInParameterEdges(), registry, updater));
+			}
 
-					result.addAll(getAllShortcutsFromParameterEdges(doneAlready, edges, view, wire, prun.getInParameterEdges(), registry, updater));
-				}
-
-				WireDestination e = run;
-				if (e instanceof ConditionEdgesSource) {
-					// get all incoming edges
-					result.addAll(getAllShortcutsFromConditionEdges(doneAlready, edges, view, e,
-							((ConditionEdgesSource) e).getOutConditionEdges(), registry, updater));
-				}
-				if (e instanceof ConditionEdgeDestination) {
-					// get all incoming edges
-					result.addAll(getAllShortcutsFromConditionEdges(doneAlready, edges, view, e,
-							((ConditionEdgeDestination) e).getInConditionEdges(), registry, updater));
-				}
+			if (wire instanceof ConditionEdgesSource) {
+				// get all incoming edges
+				result.addAll(getAllShortcutsFromConditionEdges(doneAlready, edges, view, wire,
+						((ConditionEdgesSource) wire).getOutConditionEdges(), registry, updater));
+			}
+			if (wire instanceof ConditionEdgeDestination) {
+				// get all incoming edges
+				result.addAll(getAllShortcutsFromConditionEdges(doneAlready, edges, view, wire,
+						((ConditionEdgeDestination) wire).getInConditionEdges(), registry, updater));
 			}
 
 			// ParameterEdges are now done in #getAllShortcutsFromParameterEdges()
@@ -274,36 +269,31 @@ public class GetShortcuts {
 			// additional special logic: if we have a WireDestination, get all of the incoming edges
 			// that are RunActions, and render these as shortcut elements too (i.e. parameters)
 			// (this covers SelectWires, etc...: see Issue 69)
-			if (wire instanceof WireDestination) {
-				WireDestination run = (WireDestination) wire;
+			if (wire instanceof ParameterEdgesSource) {
+				// specifically, if this wire is also a destination of parameters, follow these up
+				ParameterEdgesSource prun =
+					(ParameterEdgesSource) wire;
 
-				if (run instanceof ParameterEdgesSource) {
-					// specifically, if this wire is also a destination of parameters, follow these up
-					ParameterEdgesSource prun =
-						(ParameterEdgesSource) run;
+				result.addAll(getAllShortcutsFromParameterEdges(doneAlready, edges, view, wire, prun.getOutParameterEdges(), registry, updater));
+			}
 
-					result.addAll(getAllShortcutsFromParameterEdges(doneAlready, edges, view, wire, prun.getOutParameterEdges(), registry, updater));
-				}
+			if (wire instanceof ParameterEdgeDestination) {
+				// specifically, if this wire is also a source of parameters, follow these up
+				ParameterEdgeDestination prun =
+					(ParameterEdgeDestination) wire;
 
-				if (run instanceof ParameterEdgeDestination) {
-					// specifically, if this wire is also a source of parameters, follow these up
-					ParameterEdgeDestination prun =
-						(ParameterEdgeDestination) run;
+				result.addAll(getAllShortcutsFromParameterEdges(doneAlready, edges, view, wire, prun.getInParameterEdges(), registry, updater));
+			}
 
-					result.addAll(getAllShortcutsFromParameterEdges(doneAlready, edges, view, wire, prun.getInParameterEdges(), registry, updater));
-				}
-
-				WireDestination e = run;
-				if (e instanceof ConditionEdgesSource) {
-					// get all incoming edges
-					result.addAll(getAllShortcutsFromConditionEdges(doneAlready, edges, view, e,
-							((ConditionEdgesSource) e).getOutConditionEdges(), registry, updater));
-				}
-				if (e instanceof ConditionEdgeDestination) {
-					// get all incoming edges
-					result.addAll(getAllShortcutsFromConditionEdges(doneAlready, edges, view, e,
-							((ConditionEdgeDestination) e).getInConditionEdges(), registry, updater));
-				}
+			if (wire instanceof ConditionEdgesSource) {
+				// get all incoming edges
+				result.addAll(getAllShortcutsFromConditionEdges(doneAlready, edges, view, wire,
+						((ConditionEdgesSource) wire).getOutConditionEdges(), registry, updater));
+			}
+			if (wire instanceof ConditionEdgeDestination) {
+				// get all incoming edges
+				result.addAll(getAllShortcutsFromConditionEdges(doneAlready, edges, view, wire,
+						((ConditionEdgeDestination) wire).getInConditionEdges(), registry, updater));
 			}
 		}
 
@@ -527,24 +517,20 @@ public class GetShortcuts {
 				// additional special logic: if we have a WireDestination, get all of the incoming edges
 				// that are RunActions, and render these as shortcut elements too (i.e. parameters)
 				// (this covers SelectWires, etc...: see Issue 69)
-				if (wire instanceof WireDestination) {
-					WireDestination run = (WireDestination) wire;
+				if (wire instanceof ParameterEdgesSource) {
+					// specifically, if this wire is also a destination of parameters, follow these up
+					ParameterEdgesSource prun =
+						(ParameterEdgesSource) wire;
 
-					if (run instanceof ParameterEdgesSource) {
-						// specifically, if this wire is also a destination of parameters, follow these up
-						ParameterEdgesSource prun =
-							(ParameterEdgesSource) run;
+					result.addAll(getAllShortcutsFromParameterEdges(doneAlready, edges, view, wire, prun.getOutParameterEdges(), registry, updater));
+				}
 
-						result.addAll(getAllShortcutsFromParameterEdges(doneAlready, edges, view, wire, prun.getOutParameterEdges(), registry, updater));
-					}
+				if (wire instanceof ParameterEdgeDestination) {
+					// specifically, if this wire is also a source of parameters, follow these up
+					ParameterEdgeDestination prun =
+						(ParameterEdgeDestination) wire;
 
-					if (run instanceof ParameterEdgeDestination) {
-						// specifically, if this wire is also a source of parameters, follow these up
-						ParameterEdgeDestination prun =
-							(ParameterEdgeDestination) run;
-
-						result.addAll(getAllShortcutsFromParameterEdges(doneAlready, edges, view, wire, prun.getInParameterEdges(), registry, updater));
-					}
+					result.addAll(getAllShortcutsFromParameterEdges(doneAlready, edges, view, wire, prun.getInParameterEdges(), registry, updater));
 				}
 			}
 		}

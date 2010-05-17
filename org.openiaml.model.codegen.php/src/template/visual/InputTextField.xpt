@@ -24,6 +24,10 @@
 		
 		<input type="text" id="«safeNameString(id)»" name="«safeNameString(id)»"
 			onChange="return onChange_«safeNameString(id)»(this);"
+			«REM»is onInput called at all?«ENDREM»
+			«IF onInput != null && !onInput.outActions.isEmpty»
+				onKeyUp="return onInput_«safeNameString(id)»(this);"
+			«ENDIF»
 			«EXPAND EventHandlers::getInlineClickJavascript(currentFrame)»
 
 			«REM»any initial values?«ENDREM»
@@ -98,6 +102,14 @@
 				
 				return false;
 			}
+
+			«REM»is onInput called at all?«ENDREM»
+			«IF onInput != null && !onInput.outActions.isEmpty»
+			function onInput_«safeNameString(id)»(obj) {
+				// expand all onInputs
+				«EXPAND template::events::EventCall::callEvent(false) FOR onInput-»
+			}
+			«ENDIF»
 			
 			«REM»any on-access events?«ENDREM»
 			«IF onAccess != null»

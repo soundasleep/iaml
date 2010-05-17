@@ -129,6 +129,21 @@
 						«ENDIF»
 					))
 				«ENDIF»
+			«ELSEIF model::visual::InputTextField.isInstance(eContainer) && ((model::visual::InputTextField) eContainer).currentInput == this»
+				/* the current client-side value, defaulting to fieldValue if it's not accessible */
+					«REM»this is an inline call, thus the ternary operator«ENDREM»
+					(on_current_frame(get_frame_id(), "«safeName()»") ?
+						«EXPAND dataSourceOnFrame FOR eContainer»
+					: (
+						«REM»this is a text field stored outside of the current frame«ENDREM»
+						/* if you _don't_ want an operation to use a cached value of a remote Input Text Field, place the operation _outside_ of its containing frame. */
+						<?php if («EXPAND isSetParameter(true) FOR this») { ?>
+							"<?php echo «EXPAND callParameterValue(true, inStoreDb) FOR this»; ?>"
+						<?php } else { ?>
+							/* throw exception */
+							throwJavascriptException("Cached server-side variable '«name»' did not exist")
+						<?php } ?>
+					))
 			«ELSEIF getClientSideCacheProperties(getRoot()).contains(this)»
 				/* a cached property value */
 				get_instance_property_«safeName()»()
@@ -224,7 +239,7 @@
 			(get_application_value("«safeName()-»", null) !== null)
 		«ENDIF»
 	«ELSE»
-		«IF name == "fieldValue"»
+		«IF name == "fieldValue" || name == "currentInput"»
 			«REM»where is this value stored? is it available on the current frame?«ENDREM»
 			«IF model::DomainAttributeInstance.isInstance(eContainer)»
 				«REM»from a DomainAttributeInstance«ENDREM»

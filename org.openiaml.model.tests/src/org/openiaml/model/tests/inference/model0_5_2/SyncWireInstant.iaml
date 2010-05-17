@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.128a4c44297.1">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
+    <children xsi:type="iaml.visual:InputTextField" outWires="wires.128a4c44352.1" id="visual.128a4c44352.a" name="normal 1">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.128a4c44352.1" name="sync" from="visual.128a4c44352.a" to="visual.128a4c44352.c"/>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" inWires="wires.128a4c44352.1" id="visual.128a4c44352.c" name="normal 2"/>
+    <children xsi:type="iaml.visual:InputTextField" outWires="wires.128a4c44352.3" id="visual.128a4c44352.d" name="instant 1">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.128a4c44352.3" name="sync" from="visual.128a4c44352.d" to="visual.128a4c44352.e" executeOnInput="true"/>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" inWires="wires.128a4c44352.3" id="visual.128a4c44352.e" name="instant 2"/>
+    <children xsi:type="iaml.visual:InputTextField" outWires="wires.128a4c44352.4" id="visual.128a4c44352.f" name="mixed 1">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.128a4c44352.4" name="sync" from="visual.128a4c44352.f" to="visual.128a4c44352.10" executeOnInput="true"/>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" outWires="wires.128a4c44352.5" inWires="wires.128a4c44352.4" id="visual.128a4c44352.10" name="mixed 2">
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.128a4c44352.5" name="sync" from="visual.128a4c44352.10" to="visual.128a4c44352.16"/>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" inWires="wires.128a4c44352.5" id="visual.128a4c44352.16" name="mixed 3"/>
+  </scopes>
+</iaml:InternetApplication>

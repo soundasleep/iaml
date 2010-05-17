@@ -66,8 +66,8 @@ rule "Create field value for Changeable (untyped)"
 end
 
 /**
- * @inference Property All {@model Property ApplicationElementProperties}
- * 		will have a {@model CompositeCondition} created called "is set".
+ * @inference Property All {@model Property Properties}
+ * 		will have a {@model CompositeCondition} in its container called "is set".
  */
 rule "Properties will also have a related 'is set' condition"
 	when

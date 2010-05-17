@@ -309,70 +309,6 @@ rule "Create TextFields for all Labels required by an EntryGate"
 	
 end
 
-rule "Connect TextFields for all Labels required by an EntryGate"
-	when
-		container : Scope ( )
-		
-		session : Scope ( eContainer == container )
-		gate : EntryGate ( eContainer == session )
-		
-		label : Label ( eContainer == session )		
-		requires : RequiresEdge ( from == gate, to == label )
-		
-		provide : Frame ( eContainer == container, name != null,
-			eval ( functions.getEntryGateFrameNameForProvides(label).equals(provide.getName()) ) )
-			
-		text : VisibleThing ( eContainer == provide, name == label.name )
-
-		# not connected by either Set or SyncWire		
-		not ( set : SetWire ( eval( functions.connectsSet(set, text, label ) ) ) )
-		not ( sync : SyncWire ( eval( functions.connects(sync, text, label ) ) ) )
-		
-		eval ( handler.veto( gate ))
-	
-	then
-		SetWire set = handler.generatedSetWire(gate, text, text, label);
-		handler.setName(set, "set");
-		queue.add(set, drools);
-	
-end
-
-rule "Connect TextFields for all Labels required by an EntryGate: Add 'can cast?' Condition to SetWire"
-	when
-		container : Scope ( )
-		
-		session : Scope ( eContainer == container )
-		gate : EntryGate ( eContainer == session )
-		
-		label : Label ( eContainer == session )		
-		requires : RequiresEdge ( from == gate, to == label )
-		
-		provide : Frame ( eContainer == container, name != null,
-			eval ( functions.getEntryGateFrameNameForProvides(label).equals(provide.getName()) ) )
-			
-		text : VisibleThing ( eContainer == provide, name == label.name )
-		fieldValue : Property ( text.fieldValue == fieldValue )
-
-		# provided by the source label, not the target label (to make it server-side usually)
-		canCast : Condition ( eContainer == label, name == "can cast?" ) 
-
-		set : SetWire ( eval( functions.connectsSet(set, text, label ) ) )
-		
-		not ( ConditionEdge ( from == canCast, to == set ))
-		
-		eval ( handler.veto( gate ))
-	
-	then
-		ConditionEdge edge = handler.generatedConditionEdge(gate, set, canCast, set);
-		queue.add(edge, drools);
-		
-		# with a ParameterEdge
-		ParameterEdge param = handler.generatedParameterEdge(gate, set, fieldValue, edge);
-		handler.setName(param, "value");
-		queue.add(param, drools);
-	
-end
-
 rule "If an EntryGate requires a Label value, then the 'is set?' Condition in the Label is used as the Gate Condition"
 	when
 		container : Scope ( )
@@ -392,5 +328,121 @@ rule "If an EntryGate requires a Label value, then the 'is set?' Condition in th
 	then
 		ConditionEdge edge = handler.generatedConditionEdge(gate, gate, cond, gate);
 		queue.add(edge, drools);
+	
+end
+
+rule "If an EntryGate requires a Label, get the containing Scope to update the Label from the expected external source"
+	when
+		container : Scope ( )
+		
+		session : Scope ( eContainer == container )
+		gate : EntryGate ( eContainer == session )
+		
+		label : Label ( eContainer == session )		
+		requires : RequiresEdge ( from == gate, to == label )
+
+		provide : Frame ( eContainer == container, name != null,
+			eval ( functions.getEntryGateFrameNameForProvides(label).equals(provide.getName()) ) )
+			
+		field : VisibleThing ( eContainer == provide, name == label.name )
+		value : Property ( field.fieldValue == value )
+
+		# Scope.onAccess
+		onAccess : EventTrigger ( session.onAccess == onAccess )
+		
+		# Label.update()
+		op : Operation ( eContainer == label, name == "update" )
+		
+		not ( RunAction ( from == onAccess, to == op ))
+
+		eval ( handler.veto( gate ))
+	
+	then
+		RunAction run = handler.generatedRunAction(gate, gate, onAccess, op);
+		handler.setName(run, "run");
+		queue.add(run, drools);
+		
+		# connect with Parameter
+		ParameterEdge param = handler.generatedParameterEdge(gate, gate, value, run);
+		queue.add(param, drools);
+	
+end
+
+rule "If an EntryGate requires a Label, the Label is only updated externally if the given value has been set"
+	when
+		container : Scope ( )
+		
+		session : Scope ( eContainer == container )
+		gate : EntryGate ( eContainer == session )
+		
+		label : Label ( eContainer == session )		
+		requires : RequiresEdge ( from == gate, to == label )
+
+		provide : Frame ( eContainer == container, name != null,
+			eval ( functions.getEntryGateFrameNameForProvides(label).equals(provide.getName()) ) )
+			
+		field : VisibleThing ( eContainer == provide, name == label.name )
+
+		# Scope.onAccess
+		onAccess : EventTrigger ( session.onAccess == onAccess )
+		
+		# Label.update()
+		op : Operation ( eContainer == label, name == "update" )
+		
+		# Scope.onAccess --> Label.update()
+		run : RunAction ( from == onAccess, to == op )
+		
+		# Text.isSet?
+		condition : Condition ( eContainer == field, name == "fieldValue is set" )
+		
+		not ( ConditionEdge ( from == condition, to == run ))
+
+		eval ( handler.veto( gate ))
+	
+	then
+		ConditionEdge edge = handler.generatedConditionEdge(gate, gate, condition, run);
+		queue.add(edge, drools);
+	
+end
+
+rule "If an EntryGate requires a Label, the Label is only updated externally if the given value can be cast to the target type"
+	when
+		container : Scope ( )
+		
+		session : Scope ( eContainer == container )
+		gate : EntryGate ( eContainer == session )
+		
+		label : Label ( eContainer == session )		
+		requires : RequiresEdge ( from == gate, to == label )
+
+		provide : Frame ( eContainer == container, name != null,
+			eval ( functions.getEntryGateFrameNameForProvides(label).equals(provide.getName()) ) )
+			
+		field : VisibleThing ( eContainer == provide, name == label.name )
+		value : Property ( field.fieldValue == value )
+
+		# Scope.onAccess
+		onAccess : EventTrigger ( session.onAccess == onAccess )
+		
+		# Label.update()
+		op : Operation ( eContainer == label, name == "update" )
+		
+		# Scope.onAccess --> Label.update()
+		run : RunAction ( from == onAccess, to == op )
+		
+		# Label.can cast?
+		condition : Condition ( eContainer == label, name == "can cast?" )
+		
+		not ( ConditionEdge ( from == condition, to == run ))
+
+		eval ( handler.veto( gate ))
+	
+	then
+		ConditionEdge edge = handler.generatedConditionEdge(gate, gate, condition, run);
+		queue.add(edge, drools);
+		
+		# connect with fieldValue
+		ParameterEdge param = handler.generatedParameterEdge(gate, gate, value, edge);
+		queue.add(param, drools);
 	
 end

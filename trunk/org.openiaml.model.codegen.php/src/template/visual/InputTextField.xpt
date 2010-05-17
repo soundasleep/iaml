@@ -9,13 +9,19 @@
  * @implementation InputTextField
  * 		If an invalid value is typed into a typed {@model InputTextField}, then the
  *		text field is cleared, and no {@model EventTrigger events} are run.
+ *
  * @implementation InputTextField
  *		If a typed {@model InputTextField} is changed, the value of the text field
  *		is re-cast to a standard implementation using <code>do_cast</code> before
  *		any events are fired.
+ *
  * @implementation InputTextField
  *		Any {@model VisibleThing children} of a {@model InputTextField} are also rendered
  *		as part of that InputTextField.
+ *
+ * @implementation InputTextField
+ *		To improve performance, {@model InputTextField#onInput} is only executed
+ *		100 ms after the last character has been entered.
  */
 «DEFINE renderTextField(model::visual::Frame currentFrame) FOR model::visual::InputTextField-»
 	<div>
@@ -105,9 +111,43 @@
 
 			«REM»is onInput called at all?«ENDREM»
 			«IF onInput != null && !onInput.outActions.isEmpty»
+			var onInput_timeout_«safeName()» = null;
+			var onInput_timeout_«safeName()»_last_input = null;
+			
+			/**
+			 * InputTextField.onInput is only executed 250ms after the
+			 * last change has been registered, to improve performance.
+			 * TODO put this parameter into the platform-dependent properties.
+			 */
 			function onInput_«safeNameString(id)»(obj) {
-				// expand all onInputs
-				«EXPAND template::events::EventCall::callEvent(false) FOR onInput-»
+				var f = function() {
+					if (onInput_timeout_«safeName()»_last_input === obj.value) {
+						// only if the input is identical, do we actually execute onInput
+						// expand all onInputs
+						var pre_onChange_value = obj.value;
+						«EXPAND template::events::EventCall::callEvent(false) FOR onInput-»
+						obj.value = pre_onChange_value;
+						
+						// reset
+						onInput_timeout_«safeName()»_last_input = null;
+						onInput_timeout_«safeName()» = null;
+						
+						// disable ajax block
+						ajaxDecrement();
+					} else {
+						// otherwise, we re-register the onInput
+						onInput_timeout_«safeName()»_last_input = obj.value;
+						onInput_timeout_«safeName()» = window.setTimeout(f, 250);
+					}
+				};
+			
+				if (onInput_timeout_«safeName()» == null) {
+					// enable ajax block
+					ajaxIncrement();
+				
+					onInput_timeout_«safeName()»_last_input = obj.value;
+					onInput_timeout_«safeName()» = window.setTimeout(f, 250);
+				}
 			}
 			«ENDIF»
 			

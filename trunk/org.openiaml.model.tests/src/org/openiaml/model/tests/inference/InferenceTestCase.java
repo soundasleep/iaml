@@ -201,6 +201,19 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 
 	/**
 	 * Assert that the given element contains the given
+	 * Property stored in 'currentInput'.
+	 *
+	 * @return The element found
+	 */
+	public Property assertHasCurrentInput(
+			InputTextField element) throws JaxenException {
+		assertNotNull("Element '" + element + "' had no currentInput", 
+					element.getCurrentInput());
+		return element.getCurrentInput();
+	}
+
+	/**
+	 * Assert that the given element contains the given
 	 * Operation.
 	 *
 	 * @return The element found

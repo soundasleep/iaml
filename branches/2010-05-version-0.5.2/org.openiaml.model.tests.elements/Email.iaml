@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="model.128050f92d3.2c">
-  <scopes xsi:type="iaml.scopes:Email" id="scopes.128050f9592.4" name="Email Name" to="to@openiaml.org" subject="Subject" toName="To Name" from="from@openiaml.org" fromName="From Name"/>
-</iaml:InternetApplication>

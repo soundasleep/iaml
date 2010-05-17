@@ -1,8 +1,0 @@
-News.id: 1
-News.title: New Event 123
-News.description: This event is great, because it was loaded through RSS!
-News.pubdate: Tue, 03 Jun 2008 09:39:21 +0000
-News.id: 2
-News.title: New Event 124
-News.description: This event is great, because it was also loaded through RSS!
-News.pubdate: Tue, 03 Jun 2008 09:39:21 +0000

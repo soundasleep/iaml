@@ -1,6 +1,0 @@
-Migrator 0.0 to 0.1: Operations can no longer be of type StartNode, StopNode or FinishNode; operation changed to ChainedOperation (<operations>)
-Migrator 0.0 to 0.1: Operations can no longer be of type StartNode, StopNode or FinishNode; operation changed to ChainedOperation (<operations>)
-Migrator 0.0 to 0.1: Type PropertyToExecutionWire no longer exists (<edges>)
-Migrator 0.0 to 0.1: <operation> can no longer contain <edges> (<edges>)
-Migrator 0.5 to 0.6: DomainStore has been removed, and needs to be reimplemented as a DomainSource manually. (<domainStores>)
-Migrator 0.5 to 0.6: <operation> can no longer contain <edges> (<domainStores>)

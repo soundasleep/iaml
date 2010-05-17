@@ -1,3 +1,0 @@
-Caught IamlDomainException OK
-News.id: 664
-News.title: inserted value

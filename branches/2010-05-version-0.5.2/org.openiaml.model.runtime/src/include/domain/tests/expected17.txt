@@ -1,2 +1,0 @@
-[log] [domain] Warning: Schema Schema 'Users' [source_id='Users_id'] has no primary key DomainAttribute
-Users.name: null

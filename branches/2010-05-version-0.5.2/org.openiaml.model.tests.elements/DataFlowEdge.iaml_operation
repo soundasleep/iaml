@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:CompositeOperation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" id="model.1263fd37982.bc4">
+  <operations xsi:type="iaml:PrimitiveOperation" id="model.1263fd37982.bc8" name="operation" outFlows="model.1263fd37982.bca"/>
+  <dataEdges id="model.1263fd37982.bca" from="model.1263fd37982.bc8" to="model.1263fd37982.bc9"/>
+  <variables id="model.1263fd37982.bc9" name="target" inFlows="model.1263fd37982.bca"/>
+</iaml:CompositeOperation>

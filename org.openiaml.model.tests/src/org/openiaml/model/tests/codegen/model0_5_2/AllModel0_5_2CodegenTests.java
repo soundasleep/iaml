@@ -21,6 +21,7 @@ public class AllModel0_5_2CodegenTests {
 		TestSuite suite = new TestSuite("Model 0.5.2");
 
 		suite.addTestSuite(SyncWireInstant.class);
+		suite.addTestSuite(SetWireInstant.class);
 
 		return suite;
 	}

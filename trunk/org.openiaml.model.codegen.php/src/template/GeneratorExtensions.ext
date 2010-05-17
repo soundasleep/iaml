@@ -167,6 +167,13 @@ List[model::Operation] allContainerOperations(model::Scope this) :
 		.union( possibleParentOperations(eContainer) )
 		.select(o | operationUsed(o));
 
+List[model::Operation] allContainerOperations(model::scopes::Session this) :
+	operations.toSet().union( scopes.allContainerOperations() )
+		.union( elements.allContainerOperations() )
+		.union( possibleParentOperations(eContainer) )
+		.union( labels.allContainerOperations() )
+		.select(o | operationUsed(o));
+		
 List[model::Operation] allContainerOperations(model::scopes::Email this) :
 	operations.toSet().union( scopes.allContainerOperations() )
 		.union( elements.allContainerOperations() )

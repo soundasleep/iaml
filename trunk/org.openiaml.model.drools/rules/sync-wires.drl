@@ -42,6 +42,7 @@ rule "Sync wires between objects should create sync wires between all elements i
 	then
 		SyncWire sw = handler.generatedSyncWire(source, source, e1, e2);
 		handler.setName(sw, "sync");
+		handler.setExecuteOnInput(sw, source.isExecuteOnInput());
 		queue.add(sw, drools);
 		
 end
@@ -74,6 +75,7 @@ rule "Sync wires from DomainSchema to CanBeSynced"
 	then
 		SyncWire sw = handler.generatedSyncWire(source, source, e1, e2);
 		handler.setName(sw, "sync");
+		handler.setExecuteOnInput(sw, source.isExecuteOnInput());
 		queue.add(sw, drools);
 		
 end
@@ -86,6 +88,27 @@ rule "Run instance wire from edit to update (onChange)"
 		eval(functions.connects(sw, source, target))
 		
 		event : EventTrigger( source.onChange == event ) 
+		operation : Operation( eContainer == target, name=="update" )
+		
+		not (RunAction( from == event, to == operation, name == "run", eContainer == sw ))
+						
+		eval ( handler.veto( sw ))
+		
+	then
+		RunAction rw = handler.generatedRunAction(sw, sw, event, operation);
+		handler.setName(rw, "run");
+		queue.add(rw, drools);
+
+end
+
+rule "Run instance wire from edit to update, instant SyncWire (onInput)"
+	when
+		sw : SyncWire( executeOnInput == true )
+		source : InputTextField( )
+		target : ContainsOperations( )
+		eval(functions.connects(sw, source, target))
+		
+		event : EventTrigger( source.onInput == event ) 
 		operation : Operation( eContainer == target, name=="update" )
 		
 		not (RunAction( from == event, to == operation, name == "run", eContainer == sw ))
@@ -118,6 +141,29 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 	then
 		ParameterEdge pw = handler.generatedParameterEdge(sw, sw, field, wire); 
 		handler.setName(pw, "[sync] run instance parameter (source.edit)"); 
+		queue.add(pw, drools);
+
+end
+
+rule "Connect parameter wire to: run instance wire from source.edit to target.update, instant SyncWire (onInput)"
+	when
+		sw : SyncWire( executeOnInput == true )
+		source : InputTextField( )
+		target : ContainsOperations( )
+		eval( functions.connects(sw, source, target))
+	
+		event : EventTrigger( source.onInput == event ) 
+		operation : Operation( eContainer == target, name=="update" )
+		field : Property( source.currentInput == field )
+		wire : RunAction( from == event, to == operation, name == "run", eContainer == sw )
+		
+		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
+						
+		eval ( handler.veto( sw ))
+		
+	then
+		ParameterEdge pw = handler.generatedParameterEdge(sw, sw, field, wire); 
+		handler.setName(pw, "[sync] run instance parameter instant (source.edit)"); 
 		queue.add(pw, drools);
 
 end

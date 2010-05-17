@@ -20,9 +20,14 @@ public class NewWizardsTest extends XmlTestCase {
 	
 	public static final String DIAGRAM_PREFIX = "org.openiaml.model.diagram.";
 	
-	public void testNewWizards() throws Exception {
+	public void testElementWizard() throws Exception {
 		// the 'element' diagram cannot have a new wizard, as it represents an abstract container
 		checkNewWizard("org.openiaml.model.diagram.element");
+	}
+
+	public void testWireWizard() throws Exception {
+		// the 'wire' diagram cannot have a new wizard, as it represents an abstract container
+		checkNewWizard("org.openiaml.model.diagram.wire");
 	}
 
 	protected void checkNewWizard(String plugin) throws Exception {

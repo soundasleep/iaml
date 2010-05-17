@@ -34,7 +34,7 @@
       </context>
    </extension>
 
-«IF diagramFileExtension = "iaml_element_diagram"»
+«IF diagramFileExtension = "iaml_element_diagram" or diagramFileExtension = "iaml_wire_diagram"»
 	<!-- Jevon extension: selectively use NewWizards. This NewWizard is disabled. -->
 «ELSE»
 	<!-- Jevon extension: continue on as normal -->

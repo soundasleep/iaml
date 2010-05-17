@@ -24,6 +24,9 @@ public class AllModelTests {
         suite.addTestSuite(EdgeTypesTest.class);
         suite.addTestSuite(BuiltinDataTypesTests.class);
         
+        // also includes test-framework tests
+        suite.addTestSuite(ModelSourceResolverTestCase.class);
+        
         return suite; 
    }
 

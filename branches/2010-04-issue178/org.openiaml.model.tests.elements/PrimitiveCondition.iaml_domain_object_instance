@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<iaml:DomainObjectInstance xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" id="model.128050f92d3.3a">
-  <hasPrevious xsi:type="iaml:PrimitiveCondition" id="model.128050f92d3.3e" name="Condition Name"/>
-</iaml:DomainObjectInstance>

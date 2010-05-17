@@ -32,6 +32,7 @@ public class CreateMissingElementsWithDrools extends DroolsInferenceEngine {
 			"/rules/gate.drl",
 			"/rules/instance.drl",
 			"/rules/labels.drl",
+			"/rules/textfields.drl",
 			"/rules/operations.drl",
 			"/rules/paginate.drl",
 			"/rules/dynamic-sources.drl",

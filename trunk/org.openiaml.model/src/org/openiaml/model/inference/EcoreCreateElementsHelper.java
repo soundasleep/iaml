@@ -119,6 +119,12 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return fieldValue;
 	}
 	
+	public Property generatedPropertyCurrentInput(GeneratesElements by, InputTextField container) throws InferenceException {
+		Property fieldValue = (Property) createElement( container, ModelPackage.eINSTANCE.getProperty(), VisualPackage.eINSTANCE.getInputTextField_CurrentInput() );
+		setGeneratedBy(fieldValue, by);
+		return fieldValue;
+	}
+	
 	/**
 	 * Convenience method that sets isGenerated and generatedBy to the
 	 * appropriate values.
@@ -163,6 +169,12 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 
 	public EventTrigger generatedEventTriggerOnInit(GeneratesElements by, Scope container) throws InferenceException {
 		EventTrigger event = (EventTrigger) createElement( container, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getScope_OnInit() );
+		setGeneratedBy(event, by);
+		return event;
+	}
+
+	public EventTrigger generatedEventTriggerOnInput(GeneratesElements by, InputTextField container) throws InferenceException {
+		EventTrigger event = (EventTrigger) createElement( container, ModelPackage.eINSTANCE.getEventTrigger(), VisualPackage.eINSTANCE.getInputTextField_OnInput() );
 		setGeneratedBy(event, by);
 		return event;
 	}

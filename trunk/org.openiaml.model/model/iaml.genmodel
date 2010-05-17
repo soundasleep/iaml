@@ -180,7 +180,10 @@
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//visual/Frame/render"/>
       </genClasses>
       <genClasses ecoreClass="iaml.ecore#//visual/InputForm"/>
-      <genClasses ecoreClass="iaml.ecore#//visual/InputTextField"/>
+      <genClasses ecoreClass="iaml.ecore#//visual/InputTextField">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//visual/InputTextField/currentInput"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//visual/InputTextField/onInput"/>
+      </genClasses>
       <genClasses ecoreClass="iaml.ecore#//visual/Button"/>
       <genClasses ecoreClass="iaml.ecore#//visual/Label"/>
       <genClasses ecoreClass="iaml.ecore#//visual/Map"/>
@@ -193,7 +196,9 @@
         <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//wires/ConstraintTypes/OR"/>
         <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//wires/ConstraintTypes/XOR"/>
       </genEnums>
-      <genClasses ecoreClass="iaml.ecore#//wires/SyncWire"/>
+      <genClasses ecoreClass="iaml.ecore#//wires/SyncWire">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/SyncWire/executeOnInput"/>
+      </genClasses>
       <genClasses ecoreClass="iaml.ecore#//wires/RunAction"/>
       <genClasses ecoreClass="iaml.ecore#//wires/ParameterEdge">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/ParameterEdge/parameterName"/>

@@ -86,7 +86,7 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//InternetApplication/scopes"/>
+        href="iaml.ecore#//Scope/scopes"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//visual/Frame"/>
@@ -181,7 +181,7 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//InternetApplication/scopes"/>
+        href="iaml.ecore#//Scope/scopes"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//scopes/Session"/>
@@ -262,7 +262,7 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//InternetApplication/scopes"/>
+        href="iaml.ecore#//Scope/scopes"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//scopes/Email"/>

@@ -12,6 +12,7 @@ import org.openiaml.model.tests.inference.model0_4_3.AllModel0_4_3InferenceTests
 import org.openiaml.model.tests.inference.model0_4_4.AllModel0_4_4InferenceTests;
 import org.openiaml.model.tests.inference.model0_5.AllModel0_5InferenceTests;
 import org.openiaml.model.tests.inference.model0_5_1.AllModel0_5_1InferenceTests;
+import org.openiaml.model.tests.inference.model0_5_2.AllModel0_5_2InferenceTests;
 
 /**
  * All tests for model completion (a.k.a. inference).
@@ -39,6 +40,7 @@ public class AllInferenceTests {
         suite.addTest(AllModel0_4_4InferenceTests.suite());
         suite.addTest(AllModel0_5InferenceTests.suite());
         suite.addTest(AllModel0_5_1InferenceTests.suite());
+        suite.addTest(AllModel0_5_2InferenceTests.suite());
 
         return suite; 
    }

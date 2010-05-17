@@ -22,6 +22,11 @@
 		private static «EXPAND MetaModel::QualifiedClassName FOR domainDiagramElement» createInitialModel() {
 			throw new java.lang.UnsupportedOperationException("Cannot create the abstract type '«getQualifiedInterfaceName(domainDiagramElement)»' for the initial model.");
 		}
+	«ELSEIF getQualifiedInterfaceName(domainDiagramElement) = "org.openiaml.model.model.Wire"»
+		«EXPAND xpt::Common::generatedMemberComment('Throws an UnsupportedOperationException, because we cannot create an abstract element.')»
+		private static «EXPAND MetaModel::QualifiedClassName FOR domainDiagramElement» createInitialModel() {
+			throw new java.lang.UnsupportedOperationException("Cannot create the abstract type '«getQualifiedInterfaceName(domainDiagramElement)»' for the initial model.");
+		}
 	«ELSE»
 		«targetDef.proceed()»
 	«ENDIF»

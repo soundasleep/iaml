@@ -15,6 +15,9 @@
     <genClasses image="false" ecoreClass="iaml.ecore#//Wire">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//Wire/from"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//Wire/to"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Wire/children"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Wire/parameters"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Wire/values"/>
     </genClasses>
     <genClasses image="false" ecoreClass="iaml.ecore#//WireDestination">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//WireDestination/inWires"/>
@@ -190,14 +193,6 @@
         <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//wires/ConstraintTypes/OR"/>
         <genEnumLiterals ecoreEnumLiteral="iaml.ecore#//wires/ConstraintTypes/XOR"/>
       </genEnums>
-      <genClasses image="false" ecoreClass="iaml.ecore#//wires/SingleWire"/>
-      <genClasses ecoreClass="iaml.ecore#//wires/CompositeWire">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//wires/CompositeWire/children"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//wires/CompositeWire/operations"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//wires/CompositeWire/eventTriggers"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//wires/CompositeWire/parameters"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//wires/CompositeWire/values"/>
-      </genClasses>
       <genClasses ecoreClass="iaml.ecore#//wires/SyncWire"/>
       <genClasses ecoreClass="iaml.ecore#//wires/RunAction"/>
       <genClasses ecoreClass="iaml.ecore#//wires/ParameterEdge">

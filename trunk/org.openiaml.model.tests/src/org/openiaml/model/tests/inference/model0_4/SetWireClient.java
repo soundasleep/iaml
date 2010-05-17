@@ -152,8 +152,7 @@ public class SetWireClient extends InferenceTestCase {
 		// but the parameter of 'target' is not connected to the run wire
 		Property value2 = assertHasFieldValue(target);
 		assertGenerated(value2);
-
-		assertHasNoWiresFromTo(page, value2, run);
+		
 	}
 
 	/**

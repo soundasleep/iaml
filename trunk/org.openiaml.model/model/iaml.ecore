@@ -14,7 +14,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Wire" abstract="true" eSuperTypes="#//GeneratedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Wire" abstract="true" eSuperTypes="#//GeneratedElement #//NamedElement #//GeneratesElements #//ContainsConditions #//ContainsProperties #//wires/ParameterEdgeDestination #//wires/ConditionEdgeDestination #//ContainsWires">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A {@mode Wire} represents some piece of runtime functionality, usually in terms of the {@model EventTrigger Event}-{@model Condition}-{@model Operation Action} paradigm. These are expressed in {@model SingleWire}s."/>
     </eAnnotations>
@@ -33,6 +33,12 @@
         <details key="documentation" value="The target of a {@model Wire}."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//ApplicationElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//Parameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
+        eType="#//StaticValue" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="WireDestination" abstract="true" interface="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -736,43 +742,12 @@
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="wires" nsURI="http://openiaml.org/model/wires" nsPrefix="iaml.wires">
-    <eClassifiers xsi:type="ecore:EClass" name="SingleWire" abstract="true" eSuperTypes="#//Wire">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="A {@model SingleWire} represents a single piece of runtime functionality that cannot be decomposed further. A {@model CompositeWire} may ultimately be composed of many of these."/>
-      </eAnnotations>
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="comment" value="why do we have SingleWire at all? (following a design pattern?)"/>
-        <details key="changed" value="0.4.2 to abstract"/>
-      </eAnnotations>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="CompositeWire" eSuperTypes="#//Wire #//NamedElement #//ContainsWires #//GeneratesElements #//ContainsConditions #//ContainsProperties">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="comment" value="ideally this would be abstract; but we want to have a &quot;wire&quot; diagram editor, and the root element needs to be concrete. the other option is to have multiple diagram editors per concrete wire..."/>
-        <details key="comment2" value="easy visualisation: all composite wires are dashed"/>
-        <details key="comment3" value="only composite wires have a name now"/>
-        <details key="editor" value="org.openiaml.model.diagram.wire"/>
-        <details key="comment4" value="a wire shouldn't have parameters; but the operations contained within need them rendered."/>
-      </eAnnotations>
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="A {@model CompositeWire} allows for complex functionality, such as {@model SingleWire}s, to be represented as a single relationship. The decomposition is provided by model completion."/>
-      </eAnnotations>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
-          eType="#//ApplicationElement" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
-          eType="#//Operation" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="eventTriggers" upperBound="-1"
-          eType="#//EventTrigger" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
-          eType="#//Parameter" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
-          eType="#//StaticValue" containment="true"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="SyncWire" eSuperTypes="#//wires/CompositeWire #//WireDestination #//wires/ParameterEdgeDestination #//wires/ConditionEdgeDestination">
+    <eClassifiers xsi:type="ecore:EClass" name="SyncWire" eSuperTypes="#//Wire">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="When a connected element changes, a SyncWire will update the other connected element."/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="RunAction" eSuperTypes="#//WireDestination #//wires/ParameterEdgeDestination #//NamedElement #//GeneratesElements #//wires/ConditionEdgeDestination #//Action">
+    <eClassifiers xsi:type="ecore:EClass" name="RunAction" eSuperTypes="#//wires/ParameterEdgeDestination #//NamedElement #//GeneratesElements #//wires/ConditionEdgeDestination #//Action">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="comment" value="RunWire: a composite wire that contains ExecutionWires/etc"/>
       </eAnnotations>
@@ -797,7 +772,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//wires/ParameterEdgeDestination"
           eOpposite="#//wires/ParameterEdgeDestination/inParameterEdges"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="SetWire" eSuperTypes="#//wires/CompositeWire #//WireDestination #//wires/ConditionEdgeDestination">
+    <eClassifiers xsi:type="ecore:EClass" name="SetWire" eSuperTypes="#//Wire">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.2"/>
       </eAnnotations>
@@ -805,7 +780,7 @@
         <details key="documentation" value="When the source element changes, the target element will be updated (but not vice versa)."/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="NavigateAction" eSuperTypes="#//WireDestination #//NamedElement #//GeneratesElements #//wires/ConditionEdgeDestination #//Action #//wires/ParameterEdgeDestination">
+    <eClassifiers xsi:type="ecore:EClass" name="NavigateAction" eSuperTypes="#//NamedElement #//GeneratesElements #//wires/ConditionEdgeDestination #//Action #//wires/ParameterEdgeDestination">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.2"/>
       </eAnnotations>
@@ -975,7 +950,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="inConditionEdges" upperBound="-1"
           eType="#//wires/ConditionEdge" eOpposite="#//wires/ConditionEdge/to"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="DetailWire" eSuperTypes="#//wires/CompositeWire #//WireDestination #//wires/ParameterEdgeDestination #//wires/ConditionEdgeDestination">
+    <eClassifiers xsi:type="ecore:EClass" name="DetailWire" eSuperTypes="#//Wire">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="If both the source and target of this wire refer to the same {@model DomainObject}, the source of this wire will create a {@model Button link} to view the individual element on the target page."/>
       </eAnnotations>

@@ -218,8 +218,6 @@ public class SyncWireInstant extends CodegenTestCase {
 		assertFalse("Could not find any elements for label " + id, elements.isEmpty());
 		
 		for (IElement element : elements) {
-			System.out.println(element);
-			
 			// type it into this label
 			assertTrue("Expected HtmlUnitElementImpl, but was " + element.getClass().getName(),
 					element instanceof HtmlUnitElementImpl);

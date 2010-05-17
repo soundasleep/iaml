@@ -41,77 +41,8 @@ public class ModelSourceResolver {
 		if (!f.isDirectory())
 			throw new IllegalArgumentException("Resolved absolute path '" + getAbsolutePathRoot() + "' is not a directory");
 
-		if (class1.getPackage().getName().contains("codegen.functions")) {
-			return getAbsolutePathRoot() + ModelTestCase.ROOT + "codegen/functions/" + class1.getSimpleName() + ".iaml";
-		}
-		if (class1.getPackage().getName().contains("codegen.model0_1")) {
-			return getAbsolutePathRoot() + ModelTestCase.ROOT + "codegen/model0_1/" + class1.getSimpleName() + ".iaml";
-		}
-		if (class1.getPackage().getName().contains("codegen.model0_2")) {
-			return getAbsolutePathRoot() + ModelTestCase.ROOT + "codegen/model0_2/" + class1.getSimpleName() + ".iaml";
-		}
-		if (class1.getPackage().getName().contains("codegen.model0_3")) {
-			return getAbsolutePathRoot() + ModelTestCase.ROOT + "codegen/model0_3/" + class1.getSimpleName() + ".iaml";
-		}
-		if (class1.getPackage().getName().contains("codegen.model0_4_1")) {
-			return getAbsolutePathRoot() + ModelTestCase.ROOT + "codegen/model0_4_1/" + class1.getSimpleName() + ".iaml";
-		}
-		if (class1.getPackage().getName().contains("codegen.model0_4_2")) {
-			return getAbsolutePathRoot() + ModelTestCase.ROOT + "codegen/model0_4_2/" + class1.getSimpleName() + ".iaml";
-		}
-		if (class1.getPackage().getName().contains("codegen.model0_4_3")) {
-			return getAbsolutePathRoot() + ModelTestCase.ROOT + "codegen/model0_4_3/" + class1.getSimpleName() + ".iaml";
-		}
-		if (class1.getPackage().getName().contains("codegen.model0_4_4")) {
-			return getAbsolutePathRoot() + ModelTestCase.ROOT + "codegen/model0_4_4/" + class1.getSimpleName() + ".iaml";
-		}
-		if (class1.getPackage().getName().contains("codegen.model0_4")) {
-			return getAbsolutePathRoot() + ModelTestCase.ROOT + "codegen/model0_4/" + class1.getSimpleName() + ".iaml";
-		}
-		if (class1.getPackage().getName().contains("codegen.model0_5_1")) {
-			return getAbsolutePathRoot() + ModelTestCase.ROOT + "codegen/model0_5_1/" + class1.getSimpleName() + ".iaml";
-		}
-		if (class1.getPackage().getName().contains("codegen.model0_5")) {
-			return getAbsolutePathRoot() + ModelTestCase.ROOT + "codegen/model0_5/" + class1.getSimpleName() + ".iaml";
-		}
-		if (class1.getPackage().getName().contains("codegen.runtime")) {
-			return getAbsolutePathRoot() + ModelTestCase.ROOT + "codegen/runtime/" + class1.getSimpleName() + ".iaml";
-		}
+		return getAbsolutePathRoot() + getModelPathForPackage(class1.getPackage().getName()) + class1.getSimpleName() + ".iaml";
 		
-		// TODO move other inference tests into separate test folders
-		if (class1.getPackage().getName().contains("inference.model0_1")) {
-			return getAbsolutePathRoot() + ModelTestCase.ROOT + "inference/model0_1/" + class1.getSimpleName() + ".iaml";
-		}
-		if (class1.getPackage().getName().contains("inference.model0_2")) {
-			return getAbsolutePathRoot() + ModelTestCase.ROOT + "inference/model0_2/" + class1.getSimpleName() + ".iaml";
-		}
-		if (class1.getPackage().getName().contains("inference.model0_3")) {
-			return getAbsolutePathRoot() + ModelTestCase.ROOT + "inference/model0_3/" + class1.getSimpleName() + ".iaml";
-		}
-		if (class1.getPackage().getName().contains("inference.model0_4_1")) {
-			return getAbsolutePathRoot() + ModelTestCase.ROOT + "inference/model0_4_1/" + class1.getSimpleName() + ".iaml";
-		}
-		if (class1.getPackage().getName().contains("inference.model0_4_2")) {
-			return getAbsolutePathRoot() + ModelTestCase.ROOT + "inference/model0_4_2/" + class1.getSimpleName() + ".iaml";
-		}
-		if (class1.getPackage().getName().contains("inference.model0_4_3")) {
-			return getAbsolutePathRoot() + ModelTestCase.ROOT + "inference/model0_4_3/" + class1.getSimpleName() + ".iaml";
-		}
-		if (class1.getPackage().getName().contains("inference.model0_4_4")) {
-			return getAbsolutePathRoot() + ModelTestCase.ROOT + "inference/model0_4_4/" + class1.getSimpleName() + ".iaml";
-		}
-		if (class1.getPackage().getName().contains("inference.model0_4")) {
-			return getAbsolutePathRoot() + ModelTestCase.ROOT + "inference/model0_4/" + class1.getSimpleName() + ".iaml";
-		}
-		if (class1.getPackage().getName().contains("inference.model0_5_1")) {
-			return getAbsolutePathRoot() + ModelTestCase.ROOT + "inference/model0_5_1/" + class1.getSimpleName() + ".iaml";
-		}
-		if (class1.getPackage().getName().contains("inference.model0_5")) {
-			return getAbsolutePathRoot() + ModelTestCase.ROOT + "inference/model0_5/" + class1.getSimpleName() + ".iaml";
-		}
-		
-		return getAbsolutePathRoot() + ModelTestCase.ROOT + "inference/" + class1.getSimpleName() + ".iaml";
-
 	}
 
 	/**
@@ -138,6 +69,34 @@ public class ModelSourceResolver {
 			instance = new ModelSourceResolver();
 		}
 		return instance;
+	}
+
+	/**
+	 * Automatically find the path for the given fully qualified package name,
+	 * relative to the root of the testing bundle.
+	 * 
+	 * @param pkg the package, e.g. <code>org.openiaml.model.tests.codegen.model0_1</code>
+	 * @return the resulting path, ending with '/'
+	 */
+	public String getModelPathForPackage(String pkg) {
+		String[] bits = pkg.split("\\.");
+		if (bits.length < 2) {
+			return ModelTestCase.ROOT + "inference/";
+		}
+		
+		// xxx.inference.model0_1
+		// xxx.codegen.model0_1
+		if (bits[bits.length - 2].equals("inference") || bits[bits.length - 2].equals("codegen")) {		
+			return ModelTestCase.ROOT + bits[bits.length - 2] + "/" + bits[bits.length - 1] + "/";
+		}
+
+		// xxx.inference
+		// xxx.codegen
+		if (bits[bits.length - 1].equals("inference") || bits[bits.length - 1].equals("codegen")) {		
+			return ModelTestCase.ROOT + bits[bits.length - 1] + "/";
+		}
+
+		throw new IllegalArgumentException("Unexpected package: " + pkg);
 	}
 	
 	

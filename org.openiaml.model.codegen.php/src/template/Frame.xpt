@@ -7,7 +7,9 @@
 «ENDDEFINE»
 
 /**
- * @implementation {@link Gate Gates} are of a lower priority in execution than {@link EventTrigger EventTriggers}.
+ * @implementation Gate,Scope
+ *		{@model Gate}s are of a lower priority in execution than {@model EventTrigger}s.
+ *		That is, {@model Scope#onAccess} will execute before any {@model Gate}s are executed.
  */
 «DEFINE expandFrame FOR model::visual::Frame-»
 	«FILE "output/"+safeNameString(id)+".php"-»
@@ -52,22 +54,38 @@ if (require_get("redirect_on_client", "")) {
 
 // run any event triggers for this session
 «IF containingSession() != null»
+	// init
 	if (!has_session("session_init", false)) {
 		$_SESSION["session_init"] = true; /* this MUST execute before we start any events, or else we can easily call ourselves and get stuck in an infinite loop */
 
 	«REM»any fail/exception handlers?«ENDREM»
-	«IF getFailHandler(containingSession()) != null»
-		try {
-	«ENDIF»
-	«EXPAND template::events::Session::runSessionEvents('init') FOREACH {containingSession().onInit}-»
-	«EXPAND template::events::Session::runSessionEvents('access') FOREACH {containingSession().onAccess}-»
-	«IF getFailHandler(containingSession()) != null»
-		} catch (IamlRuntimeException $e) {
-			// only expand the first fail handler
-			«EXPAND template::operations::Failure::failWire(true) FOR getFailHandler(containingSession())»
-		}
+	«IF containingSession().onInit != null»
+		«IF getFailHandler(containingSession()) != null»
+			try {
+		«ENDIF»
+		«EXPAND template::events::Session::runSessionEvents('init') FOR containingSession().onInit-»
+		«IF getFailHandler(containingSession()) != null»
+			} catch (IamlRuntimeException $e) {
+				// only expand the first fail handler
+				«EXPAND template::operations::Failure::failWire(true) FOR getFailHandler(containingSession())»
+			}
+		«ENDIF»
 	«ENDIF»
 	}
+
+	// access
+	«IF containingSession().onAccess != null»
+		«IF getFailHandler(containingSession()) != null»
+			try {
+		«ENDIF»
+		«EXPAND template::events::Session::runSessionEvents('access') FOR containingSession().onAccess-»
+		«IF getFailHandler(containingSession()) != null»
+			} catch (IamlRuntimeException $e) {
+				// only expand the first fail handler
+				«EXPAND template::operations::Failure::failWire(true) FOR getFailHandler(containingSession())»
+			}
+		«ENDIF»
+	«ENDIF»
 «ENDIF»
 
 // run any event triggers for this frame

@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EPackage;
 import org.openiaml.model.model.ModelPackage;
-import org.openiaml.model.model.wires.WiresPackage;
 import org.openiaml.model.tests.XmlTestCase;
 import org.openiaml.model.tests.model.ModelTestCase;
 
@@ -41,7 +40,7 @@ public class ElementModeldocTestCase extends XmlTestCase {
 	protected List<EClass> IGNORED_CLASSES = Arrays.asList(
 			ModelPackage.eINSTANCE.getApplicationElement(),
 			ModelPackage.eINSTANCE.getVisibleThing(),
-			WiresPackage.eINSTANCE.getCompositeWire(),
+			ModelPackage.eINSTANCE.getWire(),
 			ModelPackage.eINSTANCE.getInternetApplication()
 	);
 	

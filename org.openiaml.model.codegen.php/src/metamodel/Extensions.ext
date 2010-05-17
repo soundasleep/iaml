@@ -30,11 +30,7 @@ model::visual::Frame containingFrame(model::NamedElement this) :
 model::visual::Frame containingFrame(emf::EObject this) :
 	null;
 	
-isAccessibleOnFrame(model::visual::Frame f, model::wires::CompositeWire wire) :
-	containingFrame(wire.from) == f ||
-	containingFrame(wire.to) == f;
-
-isAccessibleOnFrame(model::visual::Frame f, model::wires::SingleWire wire) :
+isAccessibleOnFrame(model::visual::Frame f, model::Wire wire) :
 	containingFrame(wire.from) == f ||
 	containingFrame(wire.to) == f;
 

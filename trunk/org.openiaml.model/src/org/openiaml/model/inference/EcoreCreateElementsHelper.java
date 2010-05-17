@@ -692,4 +692,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setValue(element, WiresPackage.eINSTANCE.getSyncWire_ExecuteOnInput(), value);
 	}
 	
+	public void setExecuteOnInput(SetWire element, boolean value) throws InferenceException {
+		setValue(element, WiresPackage.eINSTANCE.getSetWire_ExecuteOnInput(), value);
+	}
+	
 }

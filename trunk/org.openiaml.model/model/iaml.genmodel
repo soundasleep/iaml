@@ -207,7 +207,9 @@
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference iaml.ecore#//wires/ParameterEdge/to"/>
       </genClasses>
-      <genClasses ecoreClass="iaml.ecore#//wires/SetWire"/>
+      <genClasses ecoreClass="iaml.ecore#//wires/SetWire">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/SetWire/executeOnInput"/>
+      </genClasses>
       <genClasses ecoreClass="iaml.ecore#//wires/NavigateAction"/>
       <genClasses ecoreClass="iaml.ecore#//wires/ConditionEdge">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"

@@ -163,13 +163,36 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
   # Development
     * `generateID()` code is automatically inserted into model code using EMF Dynamic Templates (issue 165)
 
+==Release 0.5.1==
+([http://code.google.com/p/iaml/issues/list?can=1&q=label%3AMilestone-Release0.5.1 Resolved issues])
+([http://journals.jevon.org/users/jevon-phd/entry/19835 Released] May 2010)
+  # [http://code.google.com/p/iaml/wiki/Model0_6#Model_0.5.1 Expand IAML model]
+    * OpenID is supported through a new data type
+    * [http://openiaml.org/model/EntryGate EntryGate] can require a provided OpenID value
+    * RSS Feeds can be produced using a [http://openiaml.org/model/Frame Frame]
+    * RSS Feeds can be consumed using a [http://openiaml.org/model/DomainSource DomainSource]
+    * Refactoring of Domain Modelling elements (issue 178)
+    * DecisionOperation and DecisionCondition merged into DecisionNode (issue 160)
+    * CompositeWire and SingleWire removed (issue 189)
+    * FieldValue properties are now stored in an explicit containment reference (issue 170)
+  # Code generation
+    * A new domain modelling runtime framework (issue 178), which improves code generation time significantly
+    * Various performance and size improvements to code generation
+  # Development
+    * Diagram editors are now completely removed from version control (issue 175)
+  # Documentation
+    * The documentation has not been fully migrated yet, nor all of the example models migrated yet, but this will be completed before 0.6.
+
 =Release 0.6=
 ([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.6 Outstanding issues])
   # [Model0_6 Expand IAML model]
-    * OpenID
+    * Instant SyncWires and SetWires
     * Autocomplete
   # Code generation
     * Improve performance of multiple include files on client-side
+  # Documentation
+    * Update example models to refactored domain modelling
+    * Generate completed models for all example models
 
 =Release 0.7+=
 ([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.7 Outstanding issues])

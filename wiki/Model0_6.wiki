@@ -2,8 +2,49 @@
 
 [Model0_5 < 0.5] | *0.6* | [Model0_7 0.7 >]
 
-=Model 0.6=
-
 <wiki:toc max_depth="2" />
+
+=Model 0.5.1=
+
+*Released [http://journals.jevon.org/users/jevon-phd/entry/19824 April 2010]*
+
+This adds support for OpenID and RSS feeds. There has also been a lot of metamodel refactoring, to clean up the metamodel. Many [http://code.google.com/p/iaml/issues/list?can=1&q=label%3AMilestone-Release0.5.1 issues have been fixed].
+
+==New Data Types==
+
+===iamlOpenID===
+
+A URL that is an OpenID URL. This is always valid on the client-side, but only valid on the server-side once the user has authenticated with the given URL. This follows the specifications in [http://openid.net/specs/openid-authentication-1_1.html OpenID v1.1]; for example, it supports delegating URLs.
+
+When rendered as an [http://openiaml.org/model/InputTextField InputTextField], an "Authenticate" button is provided, which will allow the server to authenticate the user.
+
+==Changed Elements==
+
+===Frame===
+
+A [http://openiaml.org/model/Frame Frame] can now have different rendering targets. By default, it will generate HTML.
+
+If the rendering target is set to RSS2_0, then the content will be rendered as a [http://cyber.law.harvard.edu/rss/rss.html RSS 2.0 feed] instead. This is achieved by iterating over any [http://openiaml.org/model/DomainIterator DomainIterators] in the frame.
+
+===EntryGate===
+
+An [http://openiaml.org/model/EntryGate EntryGate] can now require a Label to be set (and valid) within the same Scope. For example, if the Label is of type `iamlOpenID`, then the user must provide and authenticate a valid OpenID URL before the Scope can be accessed.
+
+==Changes==
+
+  # Meta-model changes  
+    * Refactoring of Domain Modelling elements (issue 178)
+    * DecisionOperation and DecisionCondition merged into DecisionNode (issue 160)
+    * CompositeWire and SingleWire removed (issue 189)
+    * FieldValue properties are now stored in an explicit containment reference (issue 170)
+  # Code generation
+    * A new domain modelling runtime framework (issue 178), which improves code generation time significantly
+    * Various performance and size improvements to code generation
+  # Development
+    * Diagram editors are now completely removed from version control (issue 175)
+  # Documentation
+    * The documentation has not been fully migrated yet, nor all of the example models migrated yet, but this will be completed before 0.6.
+
+=Model 0.6=
 
   _Currently under development._

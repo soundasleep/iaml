@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<iaml.users:UserStore xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:iaml.users="http://openiaml.org/model/users" id="users.1273c6bf863.17">
-  <permissions id="users.1273c6bf863.1a" name="Permission name">
-    <inRequiresEdges href="ConstraintEdge.iaml_session#wires.1273c6bf67f.34"/>
-  </permissions>
-</iaml.users:UserStore>

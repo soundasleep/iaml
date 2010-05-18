@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:CompositeOperation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" id="model.1263fd37982.bd5">
+<iaml:CompositeOperation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" id="model.1263fd37982.bd5">
   <nodes xsi:type="iaml.operations:DecisionNode" id="operations.1263fd37a0f.a3" outExecutions="model.1263fd37982.bd8"/>
   <nodes xsi:type="iaml.operations:FinishNode" id="operations.1263fd37a0f.a4" inExecutions="model.1263fd37982.bd8"/>
   <executionEdges xsi:type="iaml:ConditionalEdge" id="model.1263fd37982.bd8" name="y/n" from="operations.1263fd37a0f.a3" to="operations.1263fd37a0f.a4"/>

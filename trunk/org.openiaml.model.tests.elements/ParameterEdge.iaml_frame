@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml.visual:Frame xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="visual.1273c6bf5a4.83" name="Parameter Name">
-  <operations xsi:type="iaml:CompositeOperation" inWires="wires.1273c6bf67f.25" id="model.1273c6bf4aa.1dd" name="Operation"/>
-  <properties id="model.1273c6bf4aa.1de" name="Property" outParameterEdges="wires.1273c6bf67f.26">
-    <parameterEdges id="wires.1273c6bf67f.26" from="model.1273c6bf4aa.1de" to="wires.1273c6bf67f.25"/>
-  </properties>
-  <children xsi:type="iaml.visual:Button" outWires="wires.1273c6bf67f.25" id="visual.1273c6bf5a4.86" name="Button">
-    <wires xsi:type="iaml.wires:RunAction" inParameterEdges="wires.1273c6bf67f.26" id="wires.1273c6bf67f.25" from="visual.1273c6bf5a4.86" to="model.1273c6bf4aa.1dd" name="Run"/>
-  </children>
+<iaml.visual:Frame xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="visual.128a8ccc915.190">
+  <operations xsi:type="iaml:CompositeOperation" id="model.128a8ccc888.1d" name="operation" inActions="wires.128a8ccc925.2e"/>
+  <onAccess id="model.128a8ccc888.1c" outActions="wires.128a8ccc925.2e">
+    <actions xsi:type="iaml.wires:RunAction" inParameterEdges="wires.128a8ccc925.2f" id="wires.128a8ccc925.2e" name="run" from="model.128a8ccc888.1c" to="model.128a8ccc888.1d"/>
+  </onAccess>
+  <parameters id="model.128a8ccc888.1e" name="id" outParameterEdges="wires.128a8ccc925.2f">
+    <parameterEdges id="wires.128a8ccc925.2f" name="id" from="model.128a8ccc888.1e" to="wires.128a8ccc925.2e"/>
+  </parameters>
 </iaml.visual:Frame>

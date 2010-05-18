@@ -355,7 +355,7 @@
       <children iD="org.openiaml.model.diagram.rulersAndGrid" kind="RulersAndGrid" name="Rulers And Grid" xsi:type="gmfgen:GenStandardPreferencePage"/>
     </preferencePages>
   </diagram>
-  <plugin iD="org.openiaml.model.diagram.condition" name="Iaml Diagram Plugin (Condition)" provider="www.openiaml.org" version="0.5.0.qualifier">
+  <plugin iD="org.openiaml.model.diagram.condition" name="Iaml Diagram Plugin (Condition)" provider="www.openiaml.org" version="0.5.1.qualifier">
     <requiredPlugins>org.eclipse.draw2d</requiredPlugins>
     <requiredPlugins>org.eclipse.gmf.runtime.draw2d.ui</requiredPlugins>
   <requiredPlugins>org.openiaml.model.diagram.helpers</requiredPlugins>

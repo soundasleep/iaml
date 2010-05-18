@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml.visual:Frame xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="visual.1273c6bf5a4.87">
-  <conditions xsi:type="iaml:CompositeCondition" id="model.1273c6bf4aa.1e0" name="Condition" outConditionEdges="wires.1273c6bf67f.29">
-    <conditionEdges id="wires.1273c6bf67f.29" name="condition" from="model.1273c6bf4aa.1e0" to="wires.1273c6bf67f.28"/>
+<iaml.visual:Frame xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="visual.128a8ccc915.4">
+  <conditions xsi:type="iaml:CompositeCondition" id="model.128a8ccc888.d" name="Condition" outConditionEdges="wires.128a8ccc925.8">
+    <conditionEdges id="wires.128a8ccc925.8" name="condition" from="model.128a8ccc888.d" to="wires.128a8ccc925.6"/>
   </conditions>
-  <operations xsi:type="iaml:PrimitiveOperation" inWires="wires.1273c6bf67f.28" id="model.1273c6bf4aa.1df" name="Operation"/>
-  <children xsi:type="iaml.visual:Button" outWires="wires.1273c6bf67f.28" id="visual.1273c6bf5a4.8a" name="Button">
-    <wires xsi:type="iaml.wires:RunAction" id="wires.1273c6bf67f.28" from="visual.1273c6bf5a4.8a" to="model.1273c6bf4aa.1df" name="run" inConditionEdges="wires.1273c6bf67f.29"/>
+  <operations xsi:type="iaml:CompositeOperation" id="model.128a8ccc888.18" name="Operation" inActions="wires.128a8ccc925.6"/>
+  <children xsi:type="iaml.visual:Button" id="visual.128a8ccc915.e" name="Button" outActions="wires.128a8ccc925.6">
+    <actions xsi:type="iaml.wires:RunAction" id="wires.128a8ccc925.6" name="onClick" inConditionEdges="wires.128a8ccc925.8" from="visual.128a8ccc915.e" to="model.128a8ccc888.18"/>
   </children>
 </iaml.visual:Frame>

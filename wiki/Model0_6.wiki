@@ -6,7 +6,7 @@
 
 =Model 0.5.1=
 
-*Released [http://journals.jevon.org/users/jevon-phd/entry/19824 April 2010]*
+*Released [http://journals.jevon.org/users/jevon-phd/entry/19835 May 2010]*
 
 This adds support for OpenID and RSS feeds. There has also been a lot of metamodel refactoring, to clean up the metamodel. Many [http://code.google.com/p/iaml/issues/list?can=1&q=label%3AMilestone-Release0.5.1 issues have been fixed].
 

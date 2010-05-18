@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1281e15c552.d4">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
+    <children xsi:type="iaml.visual:InputTextField" id="visual.1281e15c5ee.b5" name="text field" outParameterEdges="wires.1281e15c5ee.67">
+      <operations xsi:type="iaml:CompositeOperation" id="model.1281e15c552.f2" name="update"/>
+      <parameterEdges id="wires.1281e15c5ee.67" from="visual.1281e15c5ee.b5" to="wires.1281e15c5ee.65"/>
+    </children>
+    <children xsi:type="iaml.visual:Label" id="visual.1281e15c5ee.b6" name="label value" outParameterEdges="wires.1281e15c5ee.69">
+      <operations xsi:type="iaml:CompositeOperation" id="model.1281e15c552.103" name="update" inActions="wires.1281e15c5ee.65"/>
+      <parameterEdges id="wires.1281e15c5ee.69" from="visual.1281e15c5ee.b6" to="wires.1281e15c5ee.66"/>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.1281e15c5ee.b7" name="target field">
+      <operations xsi:type="iaml:CompositeOperation" id="model.1281e15c552.12e" name="update" inActions="wires.1281e15c5ee.66"/>
+    </children>
+    <children xsi:type="iaml.visual:Button" id="visual.1281e15c5ee.141" name="update label" outActions="wires.1281e15c5ee.65">
+      <actions xsi:type="iaml.wires:RunAction" inParameterEdges="wires.1281e15c5ee.67" id="wires.1281e15c5ee.65" name="onClick" from="visual.1281e15c5ee.141" to="model.1281e15c552.103"/>
+    </children>
+    <children xsi:type="iaml.visual:Button" id="visual.1281e15c5ee.142" name="update target" outActions="wires.1281e15c5ee.66">
+      <actions xsi:type="iaml.wires:RunAction" inParameterEdges="wires.1281e15c5ee.69" id="wires.1281e15c5ee.66" name="onClick" from="visual.1281e15c5ee.142" to="model.1281e15c552.12e"/>
+    </children>
+  </scopes>
+</iaml:InternetApplication>

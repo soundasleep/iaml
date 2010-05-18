@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+  <channel>
+    <title>sample new events RSS feed</title>
+    <link>http://example.com/feed</link>
+    <description>A sample event feed</description>
+    <language>en-us</language>
+    <pubDate>Tue, 10 Jun 2008 04:00:00 GMT</pubDate>
+    <lastBuildDate>Tue, 10 Jun 2008 09:41:01 GMT</lastBuildDate>
+    <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+    <generator>textpad</generator>
+    <managingEditor>editor@example.com</managingEditor>
+    <webMaster>webmaster@example.com</webMaster>
+    <ttl>5</ttl>
+ 
+    <item>
+      <title>New Event 123</title>
+      <link>http://example.com/event/123</link>
+      <description>This event is great, because it was loaded through RSS!</description>
+      <pubDate>Tue, 03 Jun 2008 09:39:21 GMT</pubDate>
+      <guid>http://example.com/feed#123</guid>
+      <event>
+      	<starts>2008-08-01</starts>
+      	<ends>2008-08-12</ends>
+      	<venue>Bar Mode</venue>
+      	<category>Rock</category>
+      	<seating>
+      	  <area id="front" title="Front" price="20" quantity="60" quantity_available="30" />
+      	  <area id="back" title="Back" price="40" quantity="30" quantity_available="15" />
+      	</seating>
+      </event>
+    </item>
+
+    <item>
+      <title>New Event 124</title>
+      <link>http://example.com/event/124</link>
+      <description>This event is great, because it was also loaded through RSS!</description>
+      <pubDate>Tue, 03 Jun 2008 09:39:21 GMT</pubDate>
+      <guid>http://example.com/feed#124</guid>
+      <event>
+      	<starts>2008-09-01 16:00:00</starts>
+      	<ends>2008-09-01 19:00:00</ends>
+      	<venue>Bar Mode</venue>
+      	<category>Rock</category>
+      	<seating>
+      	  <area id="front" title="Platinum Seating" price="200" quantity="6" quantity_available="3" />
+      	  <area id="back" title="Gold Seating" price="400" quantity="3" quantity_available="1" />
+      	</seating>
+      </event>
+    </item>
+
+  </channel>
+</rss>

@@ -1,0 +1,27 @@
+1:
+generated_primary_key: null
+content: null
+2:
+generated_primary_key: 1
+content: new content
+3:
+generated_primary_key: 1
+content: new content
+4:
+generated_primary_key: 1
+content: another content
+5:
+generated_primary_key: 1
+content: another content
+6:
+generated_primary_key: 1
+content: another content
+7:
+generated_primary_key: null
+content: null
+8:
+generated_primary_key: 2
+content: a new content
+9:
+generated_primary_key: 2
+content: a new content

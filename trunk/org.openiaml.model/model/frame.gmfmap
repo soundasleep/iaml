@@ -801,6 +801,33 @@
   </nodes>
   <nodes>
     <containmentFeature
+        href="iaml.ecore#//visual/Frame/children"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//visual/IteratorList"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( IteratorList )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#IteratorListName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#IteratorListParentName"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="frame.gmftool#//@palette/@tools.2/@tools.9"/>
+      <diagramNode
+          href="iaml.gmfgraph#IteratorList"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
         href="iaml.ecore#//ContainsConditions/conditions"/>
     <ownedChild>
       <domainMetaElement

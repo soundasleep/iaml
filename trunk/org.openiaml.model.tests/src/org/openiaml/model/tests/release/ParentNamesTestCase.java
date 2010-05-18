@@ -49,6 +49,7 @@ public class ParentNamesTestCase extends XmlTestCase {
 		ModelPackage.eINSTANCE.getScope(),
 		VisualPackage.eINSTANCE.getMap(),
 		VisualPackage.eINSTANCE.getMapPoint(),
+		VisualPackage.eINSTANCE.getIteratorList(),
 	};
 	
 	private static List<String> inst_getParentNameElements = null;

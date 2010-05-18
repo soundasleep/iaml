@@ -2,7 +2,7 @@
 <feature
       id="org.openiaml.model.editor"
       label="IAML Modelling Platform"
-      version="0.5.0.qualifier"
+      version="0.5.1.qualifier"
       provider-name="www.openiaml.org">
 
    <description url="http://www.openiaml.org/">
@@ -54,23 +54,21 @@ Portions of this software are also licensed under the Lesser GNU Public License 
       <import plugin="org.eclipse.gmf.runtime.diagram.ui.render"/>
       <import plugin="org.eclipse.gmf.runtime.diagram.ui.resources.editor"/>
       <import plugin="org.eclipse.gmf.runtime.diagram.ui.resources.editor.ide"/>
-      <import plugin="org.eclipse.ocl.ecore"/>
-      <import plugin="org.eclipse.gmf.runtime.draw2d.ui"/>
       <import plugin="org.eclipse.draw2d"/>
-      <import plugin="org.eclipse.gef"/>
+      <import plugin="org.eclipse.gmf.runtime.draw2d.ui"/>
+      <import plugin="org.eclipse.ocl.ecore"/>
       <import plugin="org.eclipse.emf.validation"/>
-      <import plugin="org.openiaml.model.diagram.helpers" version="0.3.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.gef"/>
       <import plugin="org.eclipse.emf.edit"/>
       <import plugin="org.eclipse.gmf"/>
       <import plugin="org.openiaml.model.runtime" version="0.3.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.ide" version="3.5.0" match="greaterOrEqual"/>
       <import plugin="org.openiaml.model.actions" version="0.3.1" match="greaterOrEqual"/>
-      <import plugin="org.openiaml.model.diagram.user_store" version="0.4.1" match="greaterOrEqual"/>
+      <import plugin="org.openiaml.model.diagram.helpers" version="0.3.1" match="greaterOrEqual"/>
       <import plugin="org.openiaml.model.diagram.condition" version="0.4.1" match="greaterOrEqual"/>
       <import plugin="org.openiaml.model.diagram.frame" version="0.4.1" match="greaterOrEqual"/>
       <import plugin="org.openiaml.model.diagram.session" version="0.4.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xsd.edit" version="2.5.0" match="greaterOrEqual"/>
-      <import plugin="org.openiaml.model.diagram.domain_object_instance" version="0.4.4" match="greaterOrEqual"/>
       <import plugin="org.openiaml.iacleaner" version="0.3.0" match="greaterOrEqual"/>
       <import feature="ca.ecliptical.emf.xpath" version="2.0.1.20071218052038"/>
       <import plugin="org.junit"/>
@@ -95,10 +93,9 @@ Portions of this software are also licensed under the Lesser GNU Public License 
       <import plugin="org.eclipse.emf.transaction" version="1.3.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.gmf.runtime.common.core" version="1.2.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.gmf.runtime.diagram.ui" version="1.2.0" match="greaterOrEqual"/>
-      <import plugin="org.openiaml.model.diagram.helpers" version="0.4.1" match="greaterOrEqual"/>
-      <import plugin="org.openiaml.model.diagram.helpers" version="0.4.4" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.resources" version="3.5.2" match="greaterOrEqual"/>
       <import plugin="org.openiaml.model.runtime" version="0.4.4" match="greaterOrEqual"/>
+      <import feature="ca.ecliptical.emf.xpath" version="2.0.1.20071218052038"/>
       <import feature="ca.ecliptical.emf.xpath" version="2.0.1.20071218052038"/>
       <import feature="ca.ecliptical.emf.xpath" version="2.0.1.20071218052038"/>
       <import feature="ca.ecliptical.emf.xpath" version="2.0.1.20071218052038"/>
@@ -115,6 +112,9 @@ Portions of this software are also licensed under the Lesser GNU Public License 
       <import feature="org.openarchitectureware.core.feature" version="4.3.1.20090107-2000PRD"/>
       <import feature="org.openarchitectureware.util.stdlib.feature" version="4.3.1.20090107-2000PRD"/>
       <import feature="org.openiaml.iacleaner.feature" version="0.3.1"/>
+      <import plugin="org.openiaml.model.diagram.email" version="0.5.0" match="greaterOrEqual"/>
+      <import plugin="org.openiaml.model.diagram.iterator" version="0.5.0" match="greaterOrEqual"/>
+      <import plugin="org.openiaml.model.diagram.schema" version="0.5.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
@@ -126,13 +126,6 @@ Portions of this software are also licensed under the Lesser GNU Public License 
 
    <plugin
          id="org.openiaml.model.diagram"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.openiaml.model.diagram.domain_store"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -174,13 +167,6 @@ Portions of this software are also licensed under the Lesser GNU Public License 
          unpack="false"/>
 
    <plugin
-         id="org.openiaml.model.diagram.domain_object"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.openiaml.model.diagram.operation"
          download-size="0"
          install-size="0"
@@ -209,13 +195,6 @@ Portions of this software are also licensed under the Lesser GNU Public License 
          unpack="false"/>
 
    <plugin
-         id="org.openiaml.model.diagram.domain_object_instance"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.openiaml.model.actions"
          download-size="0"
          install-size="0"
@@ -231,13 +210,6 @@ Portions of this software are also licensed under the Lesser GNU Public License 
 
    <plugin
          id="org.openiaml.model.diagram.session"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.openiaml.model.diagram.user_store"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -273,6 +245,20 @@ Portions of this software are also licensed under the Lesser GNU Public License 
 
    <plugin
          id="org.openiaml.model.runtime.phpmailer"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.openiaml.model.diagram.iterator"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.openiaml.model.diagram.schema"
          download-size="0"
          install-size="0"
          version="0.0.0"

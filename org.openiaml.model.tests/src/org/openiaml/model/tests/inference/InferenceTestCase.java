@@ -74,6 +74,7 @@ import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
+import org.openiaml.model.model.visual.IteratorList;
 import org.openiaml.model.model.visual.Label;
 import org.openiaml.model.model.visual.Map;
 import org.openiaml.model.model.visual.MapPoint;
@@ -510,6 +511,16 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public void assertHasNoInputTextField(VisibleThing element, String string) throws JaxenException {
 		assertHasNone(element, "iaml:children[iaml:name='" + string + "']", InputTextField.class);
+	}
+	
+	/**
+	 * Assert that the given element contains the given
+	 * IteratorList.
+	 *
+	 * @return The element found
+	 */
+	public IteratorList assertHasIteratorList(Frame element, String string) throws JaxenException {
+		return (IteratorList) queryOne(element, "iaml.visual:children[iaml:name='" + string + "']");
 	}
 
 	/**

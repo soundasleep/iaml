@@ -20,6 +20,7 @@ public class AllModel0_5_2InferenceTests {
 		TestSuite suite = new TestSuite("Model 0.5.2");
 		
 		suite.addTestSuite(SyncWireInstant.class);
+		suite.addTestSuite(IteratorListSetWire.class);
 		
 		return suite;
 	}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml.visual:Frame xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="visual.128a8ccc915.214" name="Detail Page" inWires="wires.128a8ccc925.71">
+  <children xsi:type="iaml.visual:InputForm" outWires="wires.128a8ccc925.71" id="visual.128a8ccc915.218" name="Source">
+    <wires xsi:type="iaml.wires:DetailWire" id="wires.128a8ccc925.71" name="detail" from="visual.128a8ccc915.218" to="visual.128a8ccc915.214"/>
+  </children>
+</iaml.visual:Frame>

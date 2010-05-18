@@ -756,6 +756,11 @@
         </eAnnotations>
       </eLiterals>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IteratorList" eSuperTypes="#//VisibleThing">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The contents of this {@model List} will be duplicated for each result from a {@model DomainIterator} set."/>
+      </eAnnotations>
+    </eClassifiers>
   </eSubpackages>
   <eSubpackages name="wires" nsURI="http://openiaml.org/model/wires" nsPrefix="iaml.wires">
     <eClassifiers xsi:type="ecore:EClass" name="SyncWire" eSuperTypes="#//Wire">

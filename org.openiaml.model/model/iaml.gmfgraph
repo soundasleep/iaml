@@ -1689,6 +1689,45 @@
           figure="//@figures.0/@descriptors.56/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
+        name="IteratorListFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="LabelFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="192"
+            green="192"
+            blue="232"/>
+        <border
+            xsi:type="gmfgraph:MarginBorder">
+          <insets
+              top="3"
+              left="3"
+              bottom="3"
+              right="3"/>
+        </border>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="IteratorListNameFigure"
+            text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="IteratorListParentNameFigure"
+            text="[none]">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="gray"/>
+        </children>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.57/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.57/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors
         name="CastNodeFigure">
       <actualFigure
           xsi:type="gmfgraph:RoundedRectangle"
@@ -1716,7 +1755,7 @@
             text="Cast"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.57/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.58/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="EmailFigure">
@@ -1745,7 +1784,7 @@
             text="&lt;...>"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.58/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.59/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="MapFigure">
@@ -1782,9 +1821,9 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.59/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.60/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.59/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.60/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="MapPointFigure">
@@ -1821,9 +1860,9 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.60/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.61/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.60/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.61/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="PrimitiveConditionFigure">
@@ -1860,9 +1899,9 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.61/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.62/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.61/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.62/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="DetailWireFigure">
@@ -1877,7 +1916,7 @@
             text="detail"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.62/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.63/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="SelectEdgeFigure">
@@ -1891,7 +1930,7 @@
             text="select"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.63/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.64/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="SchemaEdgeFigure">
@@ -1905,7 +1944,7 @@
             text="schema"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.64/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.65/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="DomainSchemaFigure">
@@ -1934,7 +1973,7 @@
             text="&lt;...>"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.65/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.66/@actualFigure/@children.0"/>
     </descriptors>
   </figures>
   <nodes
@@ -2057,6 +2096,9 @@
   <nodes
       name="Label"
       figure="LabelFigure"/>
+  <nodes
+      name="IteratorList"
+      figure="IteratorListFigure"/>
   <nodes
       name="CastNode"
       figure="CastNodeFigure"/>
@@ -2467,7 +2509,6 @@
   <labels
       name="LabelName"
       figure="LabelFigure"
-      elementIcon="false"
       accessor="//@figures.0/@descriptors.56/@accessors.0"/>
   <labels
       name="LabelDefaultValue"
@@ -2486,7 +2527,7 @@
   <labels
       name="CastNodeLabel"
       figure="CastNodeFigure"
-      accessor="//@figures.0/@descriptors.57/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.58/@accessors.0"/>
   <labels
       name="TemporaryVariableType"
       figure="TemporaryVariableFigure"
@@ -2520,34 +2561,34 @@
   <labels
       name="EmailName"
       figure="EmailFigure"
-      accessor="//@figures.0/@descriptors.58/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.59/@accessors.0"/>
   <labels
       name="MapName"
       figure="MapFigure"
-      accessor="//@figures.0/@descriptors.59/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.60/@accessors.0"/>
   <labels
       name="MapParentName"
       figure="MapFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.59/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.60/@accessors.1"/>
   <labels
       name="MapPointName"
       figure="MapPointFigure"
-      accessor="//@figures.0/@descriptors.60/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.61/@accessors.0"/>
   <labels
       name="MapPointParentName"
       figure="MapPointFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.60/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.61/@accessors.1"/>
   <labels
       name="PrimitiveConditionName"
       figure="PrimitiveConditionFigure"
-      accessor="//@figures.0/@descriptors.61/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.62/@accessors.0"/>
   <labels
       name="PrimitiveConditionParentName"
       figure="PrimitiveConditionFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.61/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.62/@accessors.1"/>
   <labels
       name="PropertyContainmentFeature"
       figure="PropertyFigure"
@@ -2559,17 +2600,26 @@
   <labels
       name="DetailWireName"
       figure="DetailWireFigure"
-      accessor="//@figures.0/@descriptors.62/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.63/@accessors.0"/>
   <labels
       name="DomainSchemaName"
       figure="DomainSchemaFigure"
-      accessor="//@figures.0/@descriptors.65/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.66/@accessors.0"/>
   <labels
       name="SelectEdgeName"
       figure="SelectEdgeFigure"
-      accessor="//@figures.0/@descriptors.63/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.64/@accessors.0"/>
   <labels
       name="SchemaEdgeName"
       figure="SchemaEdgeFigure"
-      accessor="//@figures.0/@descriptors.64/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.65/@accessors.0"/>
+  <labels
+      name="IteratorListName"
+      figure="IteratorListFigure"
+      accessor="//@figures.0/@descriptors.57/@accessors.0"/>
+  <labels
+      name="IteratorListParentName"
+      figure="IteratorListFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.57/@accessors.1"/>
 </gmfgraph:Canvas>

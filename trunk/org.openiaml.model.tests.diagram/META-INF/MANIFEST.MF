@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Iaml Diagram Tests
 Bundle-SymbolicName: org.openiaml.model.tests.diagram
-Bundle-Version: 0.5.0.qualifier
+Bundle-Version: 0.5.1.qualifier
 Bundle-Vendor: www.openiaml.org
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.junit,

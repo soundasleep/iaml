@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml.domain:DomainSchema xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:iaml.domain="http://openiaml.org/model/domain" id="domain.128a8c3249b.1">
-  <permissions id="users.128a8c3249b.1" name="Permission Name"/>
+  <permissions id="users.128a8c3249b.1" name="Permission Name">
+    <inRequiresEdges href="ConstraintEdge.iaml_session#wires.128a8ccc925.99"/>
+  </permissions>
 </iaml.domain:DomainSchema>

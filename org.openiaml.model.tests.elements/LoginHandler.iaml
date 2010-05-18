@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.components="http://openiaml.org/model/components" id="model.1263fd37982.bde">
-  <children xsi:type="iaml.components:LoginHandler" id="components.1263fd37a1e.c5" name="login handler name" type="DOMAIN_OBJECT"/>
-</iaml:InternetApplication>

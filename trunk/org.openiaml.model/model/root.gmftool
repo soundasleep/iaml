@@ -61,6 +61,12 @@
             path="icons/full/obj32/CompositeCondition.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
+    </tools>
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="Domain Modelling"
+        description="Domain Modelling"
+        collapsible="true">
       <tools
           xsi:type="gmftool:CreationTool"
           title="DomainSchema"
@@ -89,15 +95,15 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="SchemaEdge"
-          description="Create new SchemaEdge">
+          title="ExtendsEdge"
+          description="Create new ExtendsEdge">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/SchemaEdge.gif"
+            path="icons/full/obj16/ExtendsEdge.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/SchemaEdge.gif"
+            path="icons/full/obj32/ExtendsEdge.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
       <tools
@@ -111,6 +117,32 @@
         <largeIcon
             xsi:type="gmftool:BundleImage"
             path="icons/full/obj32/Role.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="ProvidesEdge"
+          description="Create new ProvidesEdge">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/ProvidesEdge.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/ProvidesEdge.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="SchemaEdge"
+          description="Create new SchemaEdge">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/SchemaEdge.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/SchemaEdge.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
     </tools>

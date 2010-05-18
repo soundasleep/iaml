@@ -34,6 +34,26 @@
           href="iaml.gmfgraph#DomainAttribute"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//domain/DomainSchema/permissions"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//users/Permission"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#PermissionName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="schema.gmftool#//@palette/@tools.0/@tools.1"/>
+      <diagramNode
+          href="iaml.gmfgraph#Permission"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/ExtendsEdge"/>

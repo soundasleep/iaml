@@ -99,9 +99,6 @@
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="root.gmftool#//@palette/@tools.1/@tools.0"/>
       <diagramNode
           href="iaml.gmfgraph#Frame"/>
     </ownedChild>
@@ -130,7 +127,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="root.gmftool#//@palette/@tools.3/@tools.0"/>
+          href="root.gmftool#//@palette/@tools.4/@tools.0"/>
       <diagramNode
           href="iaml.gmfgraph#DynamicApplicationElementSet"/>
     </ownedChild>
@@ -194,9 +191,6 @@
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="root.gmftool#//@palette/@tools.1/@tools.1"/>
       <diagramNode
           href="iaml.gmfgraph#Session"/>
     </ownedChild>
@@ -228,7 +222,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="root.gmftool#//@palette/@tools.3/@tools.1"/>
+          href="root.gmftool#//@palette/@tools.4/@tools.1"/>
       <diagramNode
           href="iaml.gmfgraph#LoginHandler"/>
     </ownedChild>
@@ -275,9 +269,6 @@
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="root.gmftool#//@palette/@tools.1/@tools.2"/>
       <diagramNode
           href="iaml.gmfgraph#Email"/>
     </ownedChild>
@@ -299,7 +290,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="root.gmftool#//@palette/@tools.0/@tools.7"/>
+          href="root.gmftool#//@palette/@tools.1/@tools.3"/>
       <diagramNode
           href="iaml.gmfgraph#Role"/>
     </ownedChild>
@@ -321,7 +312,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="root.gmftool#//@palette/@tools.0/@tools.4"/>
+          href="root.gmftool#//@palette/@tools.1/@tools.0"/>
       <diagramNode
           href="iaml.gmfgraph#DomainSchema"/>
     </ownedChild>
@@ -348,9 +339,24 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="root.gmftool#//@palette/@tools.0/@tools.5"/>
+          href="root.gmftool#//@palette/@tools.1/@tools.1"/>
       <diagramNode
           href="iaml.gmfgraph#DomainSource"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//users/Permission"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#PermissionName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <diagramNode
+          href="iaml.gmfgraph#Permission"/>
     </ownedChild>
   </nodes>
   <links>
@@ -369,7 +375,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="root.gmftool#//@palette/@tools.2/@tools.0"/>
+        href="root.gmftool#//@palette/@tools.3/@tools.0"/>
     <diagramLink
         href="iaml.gmfgraph#SyncWire"/>
     <sourceMetaFeature
@@ -395,7 +401,7 @@
         href="iaml.ecore#//ContainsWires/actions"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="root.gmftool#//@palette/@tools.4/@tools.0"/>
+        href="root.gmftool#//@palette/@tools.5/@tools.0"/>
     <diagramLink
         href="iaml.gmfgraph#RunAction"/>
     <sourceMetaFeature
@@ -419,7 +425,7 @@
         href="iaml.ecore#//ContainsWires/conditionEdges"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="root.gmftool#//@palette/@tools.2/@tools.1"/>
+        href="root.gmftool#//@palette/@tools.3/@tools.1"/>
     <diagramLink
         href="iaml.gmfgraph#ConditionEdge"/>
     <sourceMetaFeature
@@ -445,7 +451,7 @@
         href="iaml.ecore#//ContainsWires/actions"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="root.gmftool#//@palette/@tools.4/@tools.1"/>
+        href="root.gmftool#//@palette/@tools.5/@tools.1"/>
     <diagramLink
         href="iaml.gmfgraph#NavigateAction"/>
     <sourceMetaFeature
@@ -471,7 +477,7 @@
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="root.gmftool#//@palette/@tools.2/@tools.2"/>
+        href="root.gmftool#//@palette/@tools.3/@tools.2"/>
     <diagramLink
         href="iaml.gmfgraph#DetailWire"/>
     <sourceMetaFeature
@@ -493,7 +499,7 @@
         href="iaml.ecore#//ContainsWires/schemaEdges"/>
     <tool
         xsi:type="gmftool:CreationTool"
-        href="root.gmftool#//@palette/@tools.0/@tools.6"/>
+        href="root.gmftool#//@palette/@tools.1/@tools.5"/>
     <diagramLink
         href="iaml.gmfgraph#SchemaEdge"/>
     <sourceMetaFeature
@@ -521,6 +527,50 @@
     <linkMetaFeature
         xsi:type="ecore:EReference"
         href="iaml.ecore#//domain/SelectEdge/to"/>
+  </links>
+  <links>
+    <domainMetaElement
+        href="iaml.ecore#//wires/ProvidesEdge"/>
+    <labelMappings
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#ProvidesEdgeName"/>
+    </labelMappings>
+    <containmentFeature
+        href="iaml.ecore#//ContainsWires/providesEdges"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="root.gmftool#//@palette/@tools.1/@tools.4"/>
+    <diagramLink
+        href="iaml.gmfgraph#ProvidesEdge"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//wires/ProvidesEdge/from"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//wires/ProvidesEdge/to"/>
+  </links>
+  <links>
+    <domainMetaElement
+        href="iaml.ecore#//wires/ExtendsEdge"/>
+    <labelMappings
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#ExtendsEdgeName"/>
+    </labelMappings>
+    <containmentFeature
+        href="iaml.ecore#//ContainsWires/extendsEdges"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="root.gmftool#//@palette/@tools.1/@tools.2"/>
+    <diagramLink
+        href="iaml.gmfgraph#ExtendsEdge"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//wires/ExtendsEdge/from"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//wires/ExtendsEdge/to"/>
   </links>
   <diagram>
     <diagramCanvas

@@ -59,6 +59,25 @@
       </labels>
     <behaviour diagramKind="Iaml_Element" editPolicyClassName="ElementOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.element.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
 </topLevelNodes>
+    <topLevelNodes canonicalEditPolicyClassName="PermissionCanonicalEditPolicy" createCommandClassName="PermissionCreateCommand" editPartClassName="PermissionEditPart" graphicalNodeEditPolicyClassName="PermissionGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="PermissionItemSemanticEditPolicy" visualID="2002">
+      <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+      <elementType editHelperClassName="PermissionEditHelper" xsi:type="gmfgen:MetamodelType"/>
+      <viewmap classBody="&#10;/**&#10; * @generated&#10; */&#10;public class PermissionFigure extends org.eclipse.draw2d.Ellipse {&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigurePermissionNameFigure; &#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public PermissionFigure() {&#10;&#9;&#9;&#10;&#9;org.eclipse.draw2d.FlowLayout layoutThis = new org.eclipse.draw2d.FlowLayout();&#10;&#9;layoutThis.setStretchMinorAxis(false);&#10;&#9;layoutThis.setMinorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_CENTER&#10;);&#10;&#10;&#9;layoutThis.setMajorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_CENTER&#10;);&#10;&#9;layoutThis.setMajorSpacing(5);&#10;&#9;layoutThis.setMinorSpacing(5);&#10;&#9;layoutThis.setHorizontal(false);&#10;&#10;&#9;this.setLayoutManager(layoutThis);&#10;&#10;&#9;&#9;this.setLineWidth(1);&#10;&#9;this.setForegroundColor(THIS_FORE&#10;);&#10;this.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(3)&#10;, getMapMode().DPtoLP(3)&#10;, getMapMode().DPtoLP(3)&#10;, getMapMode().DPtoLP(3)&#10;));&#10;&#9;&#9;createContents();&#10;&#9;}&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private void createContents(){&#10;&#10;&#10;fFigurePermissionNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigurePermissionNameFigure.setText(&quot;&lt;...&gt;&quot;);&#10;&#10;this.add(fFigurePermissionNameFigure);&#10;&#10;&#10;&#9;}&#10;&#10;&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private boolean myUseLocalCoordinates = false;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;protected boolean useLocalCoordinates() {&#10;&#9;&#9;return myUseLocalCoordinates;&#10;&#9;}&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#10;&#9;&#9;myUseLocalCoordinates = useLocalCoordinates;&#10;&#9;}&#10;&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigurePermissionNameFigure() {&#10;&#9;&#9;return fFigurePermissionNameFigure;&#10;&#9;}&#10;&#10;&#10;}&#10;&#10;/**&#10; * @generated&#10; */&#10;static final org.eclipse.swt.graphics.Color THIS_FORE = new org.eclipse.swt.graphics.Color(null, 208, 185, 243);&#10;&#10;" className="PermissionFigure" layoutType="FLOW_LAYOUT" xsi:type="gmfgen:InnerClassViewmap">
+        <attributes fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
+      </viewmap>
+      <modelFacet>
+        <metaClass href="iaml.genmodel#//model/users/Permission"/>
+        <containmentMetaFeature href="iaml.genmodel#//model/domain/DomainSchema/permissions"/>
+        <childMetaFeature href="iaml.genmodel#//model/domain/DomainSchema/permissions"/>
+      </modelFacet>
+      <labels editPartClassName="PermissionNameEditPart" elementIcon="true" itemSemanticEditPolicyClassName="PermissionNameItemSemanticEditPolicy" visualID="5004">
+        <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
+        <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigurePermissionNameFigure" xsi:type="gmfgen:ParentAssignedViewmap"/>
+        <modelFacet parser="//@labelParsers/@implementations.0" xsi:type="gmfgen:FeatureLabelModelFacet">
+          <metaFeatures href="iaml.genmodel#//model/NamedElement/name"/>
+        </modelFacet>
+      </labels>
+    </topLevelNodes>
     <links createCommandClassName="ExtendsEdgeCreateCommand" editPartClassName="ExtendsEdgeEditPart" itemSemanticEditPolicyClassName="ExtendsEdgeItemSemanticEditPolicy" notationViewFactoryClassName="ExtendsEdgeViewFactory" reorientCommandClassName="ExtendsEdgeReorientCommand" visualID="4001">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
       <elementType editHelperClassName="ExtendsEdgeEditHelper" xsi:type="gmfgen:MetamodelType"/>
@@ -81,6 +100,7 @@
     <palette>
       <groups description="Schema Nodes" title="Schema Nodes">
         <entries description="Create new DomainAttribute" genNodes="//@diagram/@topLevelNodes.0" largeIconPath="/org.openiaml.model.edit/icons/full/obj32/DomainAttribute.gif" smallIconPath="/org.openiaml.model.edit/icons/full/obj16/DomainAttribute.gif" title="DomainAttribute" xsi:type="gmfgen:ToolEntry"/>
+        <entries description="Create new Permission" genNodes="//@diagram/@topLevelNodes.1" largeIconPath="/org.openiaml.model.edit/icons/full/obj32/Permission.gif" smallIconPath="/org.openiaml.model.edit/icons/full/obj16/Permission.gif" title="Permission" xsi:type="gmfgen:ToolEntry"/>
       </groups>
       <groups collapse="true" description="Edge elements" title="Edges">
         <entries description="Create new ExtendsEdge" genLinks="//@diagram/@links.0" largeIconPath="/org.openiaml.model.edit/icons/full/obj32/ExtendsEdge.gif" smallIconPath="/org.openiaml.model.edit/icons/full/obj16/ExtendsEdge.gif" title="ExtendsEdge" xsi:type="gmfgen:ToolEntry"/>
@@ -103,6 +123,7 @@
   <navigator>
     <childReferences child="//@diagram"/>
     <childReferences child="//@diagram/@topLevelNodes.0" parent="//@diagram"/>
+    <childReferences child="//@diagram/@topLevelNodes.1" parent="//@diagram"/>
     <childReferences child="//@diagram/@links.0" groupIcon="icons/linksNavigatorGroup.gif" groupName="links" parent="//@diagram"/>
     <childReferences child="//@diagram/@topLevelNodes.0" groupIcon="icons/linkTargetNavigatorGroup.gif" groupName="target" parent="//@diagram/@links.0" referenceType="out_target"/>
     <childReferences child="//@diagram/@links.0" groupIcon="icons/incomingLinksNavigatorGroup.gif" groupName="incoming links" parent="//@diagram/@topLevelNodes.0" referenceType="in_source"/>
@@ -123,7 +144,7 @@
   </propertySheet>
   <domainGenModel href="iaml.genmodel#/"/>
   <labelParsers extensibleViaService="true">
-    <implementations uses="//@diagram/@topLevelNodes.0/@labels.0/@modelFacet" xsi:type="gmfgen:PredefinedParser"/>
+    <implementations uses="//@diagram/@topLevelNodes.0/@labels.0/@modelFacet //@diagram/@topLevelNodes.1/@labels.0/@modelFacet" xsi:type="gmfgen:PredefinedParser"/>
     <implementations uses="//@diagram/@topLevelNodes.0/@labels.1/@modelFacet //@diagram/@topLevelNodes.0/@labels.2/@modelFacet //@diagram/@links.0/@labels.0/@modelFacet" xsi:type="gmfgen:ExternalParser"/>
   </labelParsers>
   <contextMenus context="//@diagram">

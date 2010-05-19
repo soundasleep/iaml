@@ -47,6 +47,9 @@ ob_start();
 	// matches(a, :a) with a = 'b c'
 	print_translated(translate_query_to_sqlite("matches(a, :a)", array("a" => "b c")));
 
+	// matches(a, :a) with a = ''
+	print_translated(translate_query_to_sqlite("matches(a, :a)", array("a" => "")));
+
 }
 
 $result = ob_get_contents();

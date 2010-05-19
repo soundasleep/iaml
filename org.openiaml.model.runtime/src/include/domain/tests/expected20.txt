@@ -43,3 +43,6 @@ args =
   a0 => b
   a1 => c
 -
+query = '1'
+args =
+-

@@ -90,7 +90,23 @@
 	}
 	
 	?>
-	<table id="«safeName()-»">
+	<table id="«safeName()-»"
+		«REM»has it been hidden by anything?«ENDREM»
+		<?php
+		/* has this label been hidden by anything? */
+		if (
+		«IF containingSession() != null»
+			(require_session("«safeName(containingSession())»_«safeName()»_hidden", null) !== null)
+			&& require_session("«safeName(containingSession())»_«safeName()»_hidden") 
+		«ELSE»
+			(get_application_value("«safeName()»_hidden", null) !== null)
+			&& get_application_value("«safeName()»_hidden", false) 
+		«ENDIF»
+		) {
+			echo 'style="display: none;"';
+		}
+		?>
+		>
 		<!-- print out the list of columns -->
 		<thead>
 		«FOREACH children AS child»

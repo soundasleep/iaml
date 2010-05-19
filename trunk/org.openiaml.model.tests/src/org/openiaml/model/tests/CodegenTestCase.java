@@ -20,6 +20,7 @@ import java.util.TimeZone;
 import junit.framework.AssertionFailedError;
 import net.sourceforge.jwebunit.api.IElement;
 import net.sourceforge.jwebunit.exception.TestingEngineResponseException;
+import net.sourceforge.jwebunit.htmlunit.HtmlUnitElementImpl;
 import net.sourceforge.jwebunit.htmlunit.HtmlUnitTestingEngineImpl;
 import net.sourceforge.jwebunit.junit.WebTestCase;
 
@@ -1111,10 +1112,9 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	public void assertLabelTextNotPresent(String text) {
 		List<IElement> results = getElementsByXPath("//label[" + getContainsTextXPath(text) + "]");
 		for (IElement e : results) {
-			if (e.getAttribute("style") != null && e.getAttribute("style").contains("display: none;")) {
-				// this element essentially is invisible
-			} else {
-				fail("Unexpectedly found a label with text '" + text + "': " + e);
+			// ask HtmlUnit if the element is visible
+			if (((HtmlUnitElementImpl) e).getHtmlElement().isDisplayed()) {
+				fail("Unexpectedly found a label with text '" + text + "' that was displayed: " + e);
 			}			
 		}
 	}

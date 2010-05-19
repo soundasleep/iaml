@@ -18,7 +18,7 @@ public class IteratorListSetWire extends DatabaseCodegenTestCase {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		root = loadAndCodegen(IteratorListSetWire.class);
+		root = loadAndCodegen(getClass());
 	}
 
 	/**
@@ -55,7 +55,6 @@ public class IteratorListSetWire extends DatabaseCodegenTestCase {
 		assertLabelTextNotPresent("Content 4");
 		assertLabelTextNotPresent("Title 10");
 		assertLabelTextNotPresent("Content 10");
-		
 		
 	}
 	

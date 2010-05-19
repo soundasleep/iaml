@@ -33,6 +33,10 @@
 	«EXPAND MapPoint::renderMapPoint(currentFrame) FOR this-»
 «ENDDEFINE»
 
+«DEFINE renderVisual(model::visual::Frame currentFrame) FOR model::visual::IteratorList-»
+	«EXPAND IteratorList::renderIteratorList(currentFrame) FOR this-»
+«ENDDEFINE»
+
 /**
  * Get the current 'value' of the given VisibleThing, into the given
  * argument name.

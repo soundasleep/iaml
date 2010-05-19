@@ -15,7 +15,7 @@
  */
 «DEFINE renderLabel(model::visual::Frame currentFrame) FOR model::visual::Label-»
 	<label
-		id="«safeNameString(id)-»" 
+		id="«safeNameString(id)-»<?php echo «EXPAND getIteratorListIndex»; ?>" 
 		«EXPAND EventHandlers::getInlineClickJavascript(currentFrame)»
 		«REM»has it been hidden by anything?«ENDREM»
 		<?php
@@ -160,6 +160,18 @@
 		$label_set = true;
 	}		
 «ENDDEFINE»
-
-«DEFINE exception FOR Object»
+	
+/**
+ * If this VisibleThing is contained within an IteratorList, we will need an
+ * index in order to reference it correctly. This returns the current list iterator,
+ * or the empty string '' if it is not contained directly within an IteratorList.
+ * If the index is 0, also return the empty string.
+ * Assumed to be in PHP mode.
+ */
+«DEFINE getIteratorListIndex FOR model::VisibleThing»
+	«IF eContainer == null || !model::visual::IteratorList.isInstance(eContainer)»
+		""
+	«ELSE»
+		get_list_iterator_index_«safeName(eContainer)»() ? get_list_iterator_index_«safeName(eContainer)»() : "";
+	«ENDIF»
 «ENDDEFINE»

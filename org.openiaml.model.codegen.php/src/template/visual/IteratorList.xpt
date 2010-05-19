@@ -1,0 +1,167 @@
+«IMPORT iaml»
+
+/**
+ * Visually rendering an IteratorList, which navigates over the connected
+ * DomainIterator to populate all results. Normally rendered as a table,
+ * but probably can also be rendered as a normal list.
+ */
+«EXTENSION template::GeneratorExtensions»
+
+/**
+ * Rendering of IteratorLists.
+ */
+«DEFINE renderIteratorList(model::visual::Frame currentFrame) FOR model::visual::IteratorList-»
+	<?php
+	/* has the list been populated yet? */
+	if (!
+	«IF containingSession() != null»
+		require_session("«safeName(containingSession())»_«safeName()»_initialised", 0)
+	«ELSE»
+		get_application_value("«safeName()»_initialised", 0)
+	«ENDIF»
+	) {
+		log_message("[iterator list] populating initial iterator list «safeName()»");
+	
+		// find the incoming iterator
+		«IF inWires.from.typeSelect(model::domain::DomainIterator).isEmpty»
+			«throwException("No incoming DomainIterator for IteratorList: " + this)»
+		«ENDIF»
+		«LET inWires.from.typeSelect(model::domain::DomainIterator).first() AS iterator»
+			$iterator = DomainIterator_«safeName(iterator)»::getInstance();
+			 
+			// reset all the stored label values
+			«IF containingSession() != null»
+				$_SESSION["«safeName(containingSession())»_«safeName()»_count] = $iterator->count();
+			«ELSE»
+				set_application_value("«safeName()»_count", $iterator->count());
+			«ENDIF»
+			 
+			if (!$iterator->isEmpty()) {
+				$iterator->reset();
+
+				$count = 0;
+				while (true) {
+					// for each attribute, call onChange; this will update
+					// all contained label values
+					«FOREACH iterator.attributes AS attribute»
+						«IF attribute.onChange != null»
+							«EXPAND template::events::EventCall::callEvent(true) FOR attribute.onChange»
+						«ENDIF» 
+					«ENDFOREACH»
+					
+					// store all the children values
+					«FOREACH children AS child»
+						«IF containingSession(child) != null»
+							$_SESSION["«safeName(containingSession(child))»_«safeNameString(child.fieldValue.id)»:$count"] = 
+								require_session("«safeName(containingSession(child))»_«safeNameString(child.fieldValue.id)»");
+						«ELSE»
+							set_application_value("«safeNameString(child.fieldValue.id)»:$count",
+								get_application_value("«safeNameString(child.fieldValue.id)»", -1)); 
+						«ENDIF»
+					«ENDFOREACH»
+					
+					if (!$iterator->hasNext())
+						break;
+						
+			 		$iterator->next();
+			 		$count++;
+				};
+				
+				// finally, reset
+				$iterator->reset();
+			}
+			
+			// remove the 'current' label values
+			«FOREACH children AS child»
+				«IF containingSession(child) != null»
+					$_SESSION["«safeName(containingSession(child))»_«safeNameString(child.fieldValue.id)»"] = null; 
+				«ELSE»
+					set_application_value("«safeNameString(child.fieldValue.id)»", null);
+				«ENDIF»
+			«ENDFOREACH»
+		«ENDLET» 
+	
+		// it has now been initialised
+		«IF containingSession() != null»
+			$_SESSION["«safeName(containingSession())»_«safeName()»_initialised] = 1;
+		«ELSE»
+			set_application_value("«safeName()»_initialised", 1);
+		«ENDIF»
+	}
+	
+	?>
+	<table id="«safeName()-»">
+		<!-- print out the list of columns -->
+		<thead>
+		«FOREACH children AS child»
+			<th id="«safeNameString(child.id)»_heading">«escapeString(child.name)»</th>
+		«ENDFOREACH»
+		</thead>
+	
+		<!-- the first child has the first ID -->
+		<tbody>
+	<?php
+	
+	$limit = 
+	«IF containingSession() != null»
+		require_session("«safeName(containingSession())»_«safeName()»_count", 0)
+	«ELSE»
+		get_application_value("«safeName()»_count", 0)
+	«ENDIF»
+	;
+	// expand the contents for each children
+	$iterator_«safeName()» = 0;
+	function get_list_iterator_index_«safeName()»() {
+		global $iterator_«safeName()»;
+		return $iterator_«safeName()»;
+	}
+	for ($iterator_«safeName()» = 0; $iterator_«safeName()» < $limit; $iterator_«safeName()»++) {
+		
+		// load the 'current' index
+		$count = $iterator_«safeName()»;
+		«FOREACH children AS child»
+			«IF containingSession(child) != null»
+				$_SESSION["«safeName(containingSession(child))»_«safeNameString(child.fieldValue.id)»"] = 
+					require_session("«safeName(containingSession(child))»_«safeNameString(child.fieldValue.id)»:$count");
+			«ELSE»
+				set_application_value("«safeNameString(child.fieldValue.id)»",
+					get_application_value("«safeNameString(child.fieldValue.id)»:$count", -1)); 
+			«ENDIF»
+		«ENDFOREACH»
+							
+		?>
+		«REM»expand all children«ENDREM»
+		<tr>
+			«FOREACH children AS child»
+			<td class="«safeNameString(child.id)»">
+				«EXPAND Render::renderVisual(currentFrame) FOR child»
+			</td>
+			«ENDFOREACH»
+		</tr>
+		<?php
+		
+		// store the 'current' index
+		$count = $iterator_«safeName()»;
+		«FOREACH children AS child»
+			«IF containingSession(child) != null»
+				$_SESSION["«safeName(containingSession(child))»_«safeNameString(child.fieldValue.id)»:$count"] = 
+					require_session("«safeName(containingSession(child))»_«safeNameString(child.fieldValue.id)»");
+			«ELSE»
+				set_application_value("«safeNameString(child.fieldValue.id)»:$count",
+					get_application_value("«safeNameString(child.fieldValue.id)»", -1)); 
+			«ENDIF»
+		«ENDFOREACH»
+					
+		// unload the 'current' index
+		«FOREACH children AS child»
+			«IF containingSession(child) != null»
+				$_SESSION["«safeName(containingSession(child))»_«safeNameString(child.fieldValue.id)»"] = null; 
+			«ELSE»
+				set_application_value("«safeNameString(child.fieldValue.id)»", null);
+			«ENDIF»
+		«ENDFOREACH»		
+	}
+	?>
+		</tbody>
+	</table>
+«ENDDEFINE»

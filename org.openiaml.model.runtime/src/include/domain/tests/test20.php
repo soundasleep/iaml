@@ -50,6 +50,12 @@ ob_start();
 	// matches(a, :a) with a = ''
 	print_translated(translate_query_to_sqlite("matches(a, :a)", array("a" => "")));
 
+	// password = :password and email = :email
+	print_translated(translate_query_to_sqlite("password = :password and email = :email", array("password" => "test", "email" => "test@openiaml.org")));
+
+	// password = :password and email = :email, with empty args
+	print_translated(translate_query_to_sqlite("password = :password and email = :email", array("password" => "", "email" => "")));
+
 }
 
 $result = ob_get_contents();

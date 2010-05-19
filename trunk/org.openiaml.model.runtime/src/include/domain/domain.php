@@ -1437,11 +1437,6 @@ function get_all_domain_joins() {
  * Returns an associative array of (query, args).
  */
 function translate_query_to_sqlite($query, $args) {
-	if (!trim($query))
-		$query = "1";
-	if ($query === "any")
-		$query = "1";
-
 	// replace matches() for all keys
 	foreach ($args as $key => $value) {
 		$split = explode(" ", $value);
@@ -1461,13 +1456,32 @@ function translate_query_to_sqlite($query, $args) {
 
 					$query = str_replace($match[0], implode(" and ", $new_query), $query);
 				}
-				unset($args[$key]);
+				unset($args[$key]);		// TODO what if the key is needed elsewhere?
 			}
+		}
+	}
+
+	// replace any empty matches()
+	foreach ($args as $key => $value) {
+		if (!$value) {
+			// empty
+			$query = preg_replace('#matches\\s*\\(\\s*(.+?),\\s*(.*?):' . $key . '(.*?)\\s*\\)#im', $query, "1");
+			unset($args[$key]);		// TODO what if the key is needed elsewhere?
 		}
 	}
 
 	// replace matches()
 	$query = preg_replace('#matches\\s*\\(\\s*(.+?),\\s*(.+?)\\s*\\)#im', '\\1 like (\'%\' || \\2 || \'%\')', $query);
+
+	// replace empty queries
+	if (!trim($query)) {
+		$query = "1";
+		$args = array();
+	}
+	if ($query === "any") {
+		$query = "1";
+		$args = array();
+	}
 
 	return array("query" => $query, "args" => $args);
 }

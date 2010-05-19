@@ -31,6 +31,7 @@ require(IAML_RUNTIME_ROOT . "global.php"); // runtime library import
 
 <?php
 $databases = array(
+	"sqlite:stored_events.db",
 	«EXPAND getDomainStores FOREACH sources SEPARATOR ", "»
 );
 

@@ -1437,6 +1437,8 @@ function get_all_domain_joins() {
  * Returns an associative array of (query, args).
  */
 function translate_query_to_sqlite($query, $args) {
+	$old_query = $query;
+
 	// replace matches() for all keys
 	foreach ($args as $key => $value) {
 		$split = explode(" ", $value);
@@ -1456,7 +1458,10 @@ function translate_query_to_sqlite($query, $args) {
 
 					$query = str_replace($match[0], implode(" and ", $new_query), $query);
 				}
-				unset($args[$key]);		// TODO what if the key is needed elsewhere?
+				if (!preg_match('#:' . $key . '[^a-z0-9]#im', $query)) {
+					// the key is not used anywhere
+					unset($args[$key]);
+				}
 			}
 		}
 	}
@@ -1465,8 +1470,15 @@ function translate_query_to_sqlite($query, $args) {
 	foreach ($args as $key => $value) {
 		if (!$value) {
 			// empty
-			$query = preg_replace('#matches\\s*\\(\\s*(.+?),\\s*(.*?):' . $key . '(.*?)\\s*\\)#im', $query, "1");
-			unset($args[$key]);		// TODO what if the key is needed elsewhere?
+			$regexp = '#matches\\s*\\(\\s*(.+?),\\s*(.*?):' . $key . '(.*?)\\s*\\)#im';
+			if (preg_match($regexp, $query)) {
+				// only unset args if matches() is actually used
+				$query = preg_replace($regexp, "1", $query);
+				if (!preg_match('#:' . $key . '[^a-z0-9]#im', $query)) {
+					// the key is not used anywhere
+					unset($args[$key]);
+				}
+			}
 		}
 	}
 
@@ -1483,5 +1495,6 @@ function translate_query_to_sqlite($query, $args) {
 		$args = array();
 	}
 
+	log_message("[domain] Rewrote query '$old_query' to '$query'");
 	return array("query" => $query, "args" => $args);
 }

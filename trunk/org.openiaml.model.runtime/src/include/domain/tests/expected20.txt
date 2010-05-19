@@ -46,3 +46,13 @@ args =
 query = '1'
 args =
 -
+query = 'password = :password and email = :email'
+args =
+  password => test
+  email => test@openiaml.org
+-
+query = 'password = :password and email = :email'
+args =
+  password => 
+  email => 
+-

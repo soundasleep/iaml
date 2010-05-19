@@ -611,6 +611,11 @@ abstract class DomainIterator {
 					$query = $this->schema->getTableName() . "." . $this->getPKName() . " = ?";
 					$args = array($this->getNewInstanceID($this->schema->getTableName()));
 
+					// translate query
+					$translated = translate_query_to_sqlite($query, $args);
+					$query = $translated["query"];
+					$args = $translated["args"];
+
 					// create a mapping of expected attributes to unique names, so we can retrieve two attributes
 					// named 'id', for example
 					$m = $this->createMappings();
@@ -676,6 +681,11 @@ abstract class DomainIterator {
 			$query = $this->query;
 			$args = $this->constructArgs();
 			$this->updateCachedArguments();
+
+			// translate query
+			$translated = translate_query_to_sqlite($query, $args);
+			$query = $translated["query"];
+			$args = $translated["args"];
 
 			// construct the order_by as TableName.attribute_name
 			$order_by = "";
@@ -1107,6 +1117,11 @@ abstract class DomainIterator {
 			$args = $this->constructArgs();
 			// we don't update the cached arguments (updateCachedArguments()) since count() is always up-to-date
 
+			// translate query
+			$translated = translate_query_to_sqlite($query, $args);
+			$query = $translated["query"];
+			$args = $translated["args"];
+
 			$obj = evaluate_select_wire_count(
 				$this->source->getFile(),
 				$this->schema->getSourceID(),
@@ -1412,3 +1427,47 @@ function get_all_domain_joins() {
 	return AllDirectJoins::getInstance()->getJoins();
 }
 
+/**
+ * Translate the given platform-independent query (and arguments) to a
+ * query supported by SQLite (and args).
+ *
+ * For example, matches(a, 'a b') becomes
+ *   <code>a LIKE '%a%' AND a LIKE '%b%'</code>.
+ *
+ * Returns an associative array of (query, args).
+ */
+function translate_query_to_sqlite($query, $args) {
+	if (!trim($query))
+		$query = "1";
+	if ($query === "any")
+		$query = "1";
+
+	// replace matches() for all keys
+	foreach ($args as $key => $value) {
+		$split = explode(" ", $value);
+
+		// only replace matches() if the argument actually has a space
+		if (count($split) > 1) {
+			$matches = null;
+			preg_match_all('#matches\\s*\\(\\s*(.+?),\\s*(.*?):' . $key . '(.*?)\\s*\\)#im', $query, $matches, PREG_SET_ORDER);
+			if (count($matches) > 0) {
+				$new_query = array();
+				foreach ($matches as $match) {
+					// query = 'a like ('%' || :a0 || '%') and a like ('%' || :a1 || '%')'
+					foreach ($split as $i => $split_value) {
+						$new_query[] = $match[1] . " like ('%' || " . $match[2] . ":" . $key . $i . $match[3] . " || '%')";
+						$args[$key . $i] = $split_value;
+					}
+
+					$query = str_replace($match[0], implode(" and ", $new_query), $query);
+				}
+				unset($args[$key]);
+			}
+		}
+	}
+
+	// replace matches()
+	$query = preg_replace('#matches\\s*\\(\\s*(.+?),\\s*(.+?)\\s*\\)#im', '\\1 like (\'%\' || \\2 || \'%\')', $query);
+
+	return array("query" => $query, "args" => $args);
+}

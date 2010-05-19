@@ -22,6 +22,7 @@ public class AllModel0_5_2CodegenTests {
 
 		suite.addTestSuite(SyncWireInstant.class);
 		suite.addTestSuite(SetWireInstant.class);
+		suite.addTestSuite(IteratorListSetWire.class);
 
 		return suite;
 	}

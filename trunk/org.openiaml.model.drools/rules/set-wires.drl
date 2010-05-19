@@ -708,7 +708,7 @@ rule "Refresh New Instance Object mappings (except for generated primary keys) w
 		attribute : DomainAttributeInstance( eContainer == instance )
 		ExtendsEdge ( from == attribute, to == originalAttribute )
 		
-		not ( tf : Label( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
+		not ( tf : VisibleThing( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
 						
 		eval ( handler.veto( sync ))
 		
@@ -721,6 +721,7 @@ rule "Refresh New Instance Object mappings (except for generated primary keys) w
 
 end
 
+# TODO is this rule even used anymore? consider removing.
 rule "Refresh Domain Object mappings (except for generated primary keys) when Instance sets a Form: create labels"
 	when
 		sync : SetWire(  )
@@ -731,7 +732,32 @@ rule "Refresh Domain Object mappings (except for generated primary keys) when In
 		
 		attribute : DomainAttribute( eContainer == object, primaryKey == false || isGenerated == false )
 		
-		not ( tf : Label( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
+		not ( tf : VisibleThing( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
+						
+		eval ( handler.veto( sync ))
+		
+	then
+		# create a new one
+		Label text = handler.generatedLabel(sync, form);
+		handler.setName(text, attribute.getName());
+		handler.setType(text, attribute.getType());
+		queue.add(text, drools);
+
+end
+
+rule "Refresh Domain Object mappings (except for generated primary keys) when Instance sets a IteratorList: create labels"
+	when
+		sync : SetWire(  )
+		form : IteratorList (  )
+		instance : DomainIterator (  )
+		
+		eval(functions.connectsSet(sync, instance, form))	// backwards
+		
+		originalAttribute : DomainAttribute ( primaryKey == false || isGenerated == false )
+		attribute : DomainAttributeInstance( eContainer == instance )
+		ExtendsEdge ( from == attribute, to == originalAttribute )
+		
+		not ( tf : VisibleThing( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
 						
 		eval ( handler.veto( sync ))
 		

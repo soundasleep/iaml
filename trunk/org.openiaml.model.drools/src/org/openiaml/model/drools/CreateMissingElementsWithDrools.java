@@ -18,8 +18,7 @@ public class CreateMissingElementsWithDrools extends DroolsInferenceEngine {
 		super(factory, trackInsertions);
 	}
 
-	private List<String> ruleFiles = Arrays.asList(
-			
+	private List<String> ruleFiles = Arrays.asList(			
 			"/rules/base.drl",
 			"/rules/casting.drl",
 			"/rules/sync-wires.drl",

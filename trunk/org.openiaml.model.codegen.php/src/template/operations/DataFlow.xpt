@@ -128,7 +128,7 @@
 	document.getElementById('«safeNameString(id)»').value
 «ENDDEFINE»
 «DEFINE dataTargetContainer(Boolean php, model::Property property) FOR model::visual::Label»
-	document.getElementById('«safeNameString(id)»').innerHTML
+	document.getElementById('«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>').innerHTML
 «ENDDEFINE»
 
 /**

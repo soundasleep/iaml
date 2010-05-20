@@ -178,13 +178,30 @@ echo_necessary_update_callbacks();
 «ENDDEFINE»
 
 «DEFINE potentialUpdateDestination FOR model::domain::DomainIterator»
-	/* DomainObjectInstance "«this-»" */
-	$object = get_object_instance_«safeName()»(); // parameters are from server-side
-	«EXPAND potentialUpdateDestinationAttributes FOREACH attributes»
-	
-	«EXPAND potentialUpdateDesinationWires FOREACH inWires.typeSelect(model::wires::SyncWire)»
-	«EXPAND potentialUpdateDesinationWires FOREACH outWires.typeSelect(model::wires::SyncWire)»
-	«EXPAND potentialUpdateDesinationWires FOREACH outWires.typeSelect(model::wires::SetWire)»
+	«REM»
+		if this DomainIterator is only connected to a IteratorList,
+		then don't expand the rest.
+		this also solves a crashing problem, because get_attribute_instance()
+		doesn't check that the instance actually exists (and we expect it in
+		most cases to exist).
+	«ENDREM»
+	/* DomainIterator "«this-»" */
+	«IF inWires.isEmpty && outWires.to.reject(o|model::visual::IteratorList.isInstance(o)).isEmpty»
+		«FOREACH outWires.to.typeSelect(model::visual::IteratorList) AS list»
+			// we are updating something within an IteratorList; update the entire IteratorList directly
+			if (!defined('POPULATED_ITERATOR_LIST_«safeName(list)»')) {
+				// we only want to populate the iterator list <em>once</em> per callback
+				possibly_populate_iterator_list_«safeName(list)»();
+				define('POPULATED_ITERATOR_LIST_«safeName(list)»', true);
+			}
+		«ENDFOREACH»
+	«ELSE»
+		«EXPAND potentialUpdateDestinationAttributes FOREACH attributes»
+		
+		«EXPAND potentialUpdateDesinationWires FOREACH inWires.typeSelect(model::wires::SyncWire)»
+		«EXPAND potentialUpdateDesinationWires FOREACH outWires.typeSelect(model::wires::SyncWire)»
+		«EXPAND potentialUpdateDesinationWires FOREACH outWires.typeSelect(model::wires::SetWire)»
+	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE potentialUpdateDestination FOR model::DomainAttributeInstance»
@@ -197,7 +214,7 @@ echo_necessary_update_callbacks();
 
 «DEFINE potentialUpdateDestinationAttributes FOR model::DomainAttributeInstance»
 	/* attribute "«name»" («this») */
-	$value = $object["«safeNameString(name)-»"];
+	$value = get_attribute_instance_«safeName()»();
 	«EXPAND potentialUpdateDesinationWires FOREACH inWires.typeSelect(model::wires::SyncWire)»
 	«EXPAND potentialUpdateDesinationWires FOREACH outWires.typeSelect(model::wires::SyncWire)»
 	«EXPAND potentialUpdateDesinationWires FOREACH outWires.typeSelect(model::wires::SetWire)»

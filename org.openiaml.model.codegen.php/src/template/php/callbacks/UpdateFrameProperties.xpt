@@ -60,6 +60,7 @@ try {
 	«ENDIF»
 
 	«IF model::visual::Label.isInstance(eContainer)»
+	«LET (model::visual::Label) eContainer AS label» 
 		/* container: Label */
 		if («EXPAND template::operations::Parameters::isSetParameter(true)») {
 			// but only if it's actually set
@@ -67,16 +68,17 @@ try {
 			$value = «EXPAND template::operations::Parameters::callParameterValue(true, false)»;
 			
 			// pass it to the client 
-			log_message("outgoing value to '«eContainer»' («safeNameString(((model::visual::Label) eContainer).id)»): '$value'");
+			log_message("outgoing value to '«label»' («safeNameString(label.id)»" . «EXPAND template::visual::Label::getIteratorListIndex FOR label» . "): '$value'");
 			log_message("set_html " 
-				. escape_parameter_string("«safeNameString(((model::visual::Label) eContainer).id)»")
+				. escape_parameter_string("«safeNameString(label.id)»" . «EXPAND template::visual::Label::getIteratorListIndex FOR label»)
 				. " "
 				. escape_parameter_string($value));
 			echo "\nset_html " 
-				. escape_parameter_string("«safeNameString(((model::visual::Label) eContainer).id)»")
+				. escape_parameter_string("«safeNameString(label.id)»" . «EXPAND template::visual::Label::getIteratorListIndex FOR label»)
 				. " "
 				. escape_parameter_string($value);
-		}				
+		}
+	«ENDLET»	
 	«ENDIF»
 	
 	«IF model::visual::MapPoint.isInstance(eContainer)»
@@ -123,5 +125,10 @@ try {
 		}
 		«ENDIF»		
 		«ENDLET»
+	«ENDIF»
+	
+	«IF model::visual::IteratorList.isInstance(eContainer)»
+		/* container: IteratorList */
+		«EXPAND template::visual::IteratorList::publishIteratorList(null, false) FOR (model::visual::IteratorList) eContainer»
 	«ENDIF»	
 «ENDDEFINE»

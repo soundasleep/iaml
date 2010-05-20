@@ -103,6 +103,7 @@
 		«FILE "output/instance_skip.php"»«EXPAND php::includes::InstanceSkipPhp::instanceSkipPhp»«ENDFILE»
 		«FILE "output/instance_jump.php"»«EXPAND php::includes::InstanceJumpPhp::instanceJumpPhp»«ENDFILE»
 	«ENDIF»
+	«FILE "output/iterator_lists.php"»«EXPAND visual::IteratorList::iteratorListDefinitions»«ENDFILE»
 	«FILE "output/update_client_cache.php"»«EXPAND php::includes::UpdateClientCache::updateClientCache»«ENDFILE»
 	
 	«REM»callbacks. TODO all the actual callbacks above should be moved into here«ENDREM»
@@ -137,6 +138,7 @@ require(ROOT_PATH . "config.php");		// runtime library configuration
 require(ROOT_PATH . IAML_RUNTIME_ROOT . "global.php");	// runtime library import
 require(ROOT_PATH . "update_client_cache.php");
 require(ROOT_PATH . "email_definitions.php");
+require(ROOT_PATH . "iterator_lists.php");
 «ENDDEFINE»
 
 /* expand sessions as if they weren't there */

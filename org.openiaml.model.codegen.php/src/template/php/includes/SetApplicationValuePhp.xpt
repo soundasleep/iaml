@@ -222,12 +222,16 @@ echo_necessary_update_callbacks();
 «DEFINE outgoingValue FOR model::Property»
 	if ($frame_id == "«safeNameString(containingFrame(this).id)-»") {
 		/* the property "«this»" needs to be updated on the client */
-		«IF model::visual::InputTextField.isInstance(eContainer)»
-		
-			// set the property directly; we will let 'updateAllFrameProperties' deal with
-			// updating the client
-			log_message("[set application value callback] setting property '«id»' to '$value'");
-			«EXPAND template::operations::OutgoingValues::outgoingValueTarget(true, "value")» 
+		«IF model::visual::InputTextField.isInstance(eContainer) || model::visual::Label.isInstance(eContainer)»
+			«IF eContainer.eContainer != null && model::visual::IteratorList.isInstance(eContainer.eContainer)»
+				// we are updating something within an IteratorList; update the entire IteratorList directly
+				populate_iterator_list_«safeName(eContainer.eContainer)»();
+			«ELSE»
+				// set the property directly; we will let 'updateAllFrameProperties' deal with
+				// updating the client
+				log_message("[set application value callback] setting property '«id»' to '$value'");
+				«EXPAND template::operations::OutgoingValues::outgoingValueTarget(true, "value")»
+			«ENDIF» 
 		«ENDIF»
 	}
 «ENDDEFINE»

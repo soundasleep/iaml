@@ -61,7 +61,8 @@ function log_message($msg, $also_debug = true) {
 	global $log_unique_id;
 	$msg = "[$log_unique_id] [$script_name] $msg";		// append a unique ID to help us track requests
 
-	$stored_log_messages[] = $msg;
+	$msg_indent = date("Y-m-d H:i:s") . " " . str_replace("\n", "\n\t", $msg) . "\n";
+	$stored_log_messages[] = $msg_indent;
 	if (count($stored_log_messages) > 10) {
 		flush_log_messages();
 	}
@@ -84,9 +85,8 @@ function flush_log_messages() {
 	global $stored_log_messages;
 	
 	$fp = fopen(ROOT_PATH . "php.log", "a");
-	foreach ($stored_log_messages as $msg) {
-		$msg_indent = str_replace("\n", "\n\t", $msg);
-		fwrite($fp, date("Y-m-d H:i:s") . " $msg_indent\n");
+	foreach ($stored_log_messages as $msg_indent) {
+		fwrite($fp, $msg_indent);
 	}
 	fclose($fp);
 	

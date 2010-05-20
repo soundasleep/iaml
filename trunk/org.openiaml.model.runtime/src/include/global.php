@@ -52,17 +52,20 @@ require("domain/domain.php");
 require("types/types.php");
 
 $log_unique_id = sprintf("%04x", rand(0,0xffff)) . "-" . session_id();
+$stored_log_messages = array();
 function log_message($msg, $also_debug = true) {
+	global $stored_log_messages;
+
 	$script_name = defined('SCRIPT_NAME') ? SCRIPT_NAME : "(no script)";
 
 	global $log_unique_id;
 	$msg = "[$log_unique_id] [$script_name] $msg";		// append a unique ID to help us track requests
 
-	$fp = fopen(ROOT_PATH . "php.log", "a");
-	$msg_indent = str_replace("\n", "\n\t", $msg);
-	fwrite($fp, date("Y-m-d H:i:s") . " $msg_indent\n");
-	fclose($fp);
-
+	$stored_log_messages[] = $msg;
+	if (count($stored_log_messages) > 10) {
+		flush_log_messages();
+	}
+	
 	// also echo to debug
 	if ($also_debug) {
 		global $enable_queue_log_messages;
@@ -74,6 +77,20 @@ function log_message($msg, $also_debug = true) {
 			echo $message;
 		}
 	}
+}
+
+register_shutdown_function('flush_log_messages');
+function flush_log_messages() {
+	global $stored_log_messages;
+	
+	$fp = fopen(ROOT_PATH . "php.log", "a");
+	foreach ($stored_log_messages as $msg) {
+		$msg_indent = str_replace("\n", "\n\t", $msg);
+		fwrite($fp, date("Y-m-d H:i:s") . " $msg_indent\n");
+	}
+	fclose($fp);
+	
+	$stored_log_messages = array();
 }
 
 /**

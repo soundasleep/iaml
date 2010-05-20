@@ -209,6 +209,18 @@
         <details key="changed" value="added in 0.4.4"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="currentInput" eType="#//Property"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This represents the transient value of the {@model VisibleThing}; for example, the current text input in a {@model InputTextField} before it has been committed. This is &lt;em>not&lt;/em> always a valid {@model VisibleThing#type} instance."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="onInput" eType="#//EventTrigger"
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This {@model EventTrigger} is executed whenever the {@model EventTrigger#currentInput current input} is changed; e.g. a key has been pressed, but the focus has not been lost yet. Once focus is lost, this value becomes the {@model VisibleThing#fieldValue field value} if is of a valid {@model VisibleThing#type}. This event may only fire on the client-side."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ContainsProperties" abstract="true"
       interface="true">
@@ -705,18 +717,6 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A single text field, storing a single text value, which may be edited by the user."/>
       </eAnnotations>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="currentInput" eType="#//Property"
-          containment="true">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="This represents the transient value of the {@model InputTextField}; for example, the current text input before it has been committed. This is &lt;em>not&lt;/em> always a valid {@model InputTextField#type} instance."/>
-        </eAnnotations>
-      </eStructuralFeatures>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="onInput" eType="#//EventTrigger"
-          containment="true">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="This {@model EventTrigger} is executed whenever the {@model EventTrigger#currentInput current input} is changed; e.g. a key has been pressed, but the focus has not been lost yet. Once focus is lost, this value becomes the {@model InputTextField#fieldValue field value} if is of a valid {@model InputTextField#type}. This event may only fire on the client-side."/>
-        </eAnnotations>
-      </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Button" eSuperTypes="#//VisibleThing #//ActionSource">
       <eAnnotations source="http://openiaml.org/comment">

@@ -119,8 +119,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return fieldValue;
 	}
 	
-	public Property generatedPropertyCurrentInput(GeneratesElements by, InputTextField container) throws InferenceException {
-		Property fieldValue = (Property) createElement( container, ModelPackage.eINSTANCE.getProperty(), VisualPackage.eINSTANCE.getInputTextField_CurrentInput() );
+	public Property generatedPropertyCurrentInput(GeneratesElements by, VisibleThing container) throws InferenceException {
+		Property fieldValue = (Property) createElement( container, ModelPackage.eINSTANCE.getProperty(), ModelPackage.eINSTANCE.getVisibleThing_CurrentInput() );
 		setGeneratedBy(fieldValue, by);
 		return fieldValue;
 	}
@@ -173,8 +173,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return event;
 	}
 
-	public EventTrigger generatedEventTriggerOnInput(GeneratesElements by, InputTextField container) throws InferenceException {
-		EventTrigger event = (EventTrigger) createElement( container, ModelPackage.eINSTANCE.getEventTrigger(), VisualPackage.eINSTANCE.getInputTextField_OnInput() );
+	public EventTrigger generatedEventTriggerOnInput(GeneratesElements by, VisibleThing container) throws InferenceException {
+		EventTrigger event = (EventTrigger) createElement( container, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getVisibleThing_OnInput() );
 		setGeneratedBy(event, by);
 		return event;
 	}

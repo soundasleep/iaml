@@ -151,6 +151,54 @@
   </nodes>
   <nodes>
     <containmentFeature
+        href="iaml.ecore#//VisibleThing/currentInput"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//Property"/>
+      <domainSpecialization
+          body="return domainElement.eContainingFeature().getName().equals(&quot;currentInput&quot;);"
+          language="java"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#PropertyName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          viewPattern="default: {0}"
+          editorPattern=""
+          editPattern="{0}">
+        <diagramLabel
+            href="iaml.gmfgraph#PropertyDefaultValue"/>
+        <features
+            href="iaml.ecore#//Property/defaultValue"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PropertyContainmentFeature"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PropertyParentName"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PropertyType"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="visual.gmftool#//@palette/@tools.0/@tools.4"/>
+      <diagramNode
+          href="iaml.gmfgraph#Property"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
         href="iaml.ecore#//ContainsProperties/properties"/>
     <ownedChild>
       <domainMetaElement
@@ -302,7 +350,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="visual.gmftool#//@palette/@tools.0/@tools.5"/>
+          href="visual.gmftool#//@palette/@tools.0/@tools.6"/>
       <diagramNode
           href="iaml.gmfgraph#StaticValue"/>
     </ownedChild>
@@ -373,7 +421,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="visual.gmftool#//@palette/@tools.0/@tools.4"/>
+          href="visual.gmftool#//@palette/@tools.0/@tools.5"/>
       <diagramNode
           href="iaml.gmfgraph#CompositeCondition"/>
     </ownedChild>
@@ -710,6 +758,39 @@
       <tool
           xsi:type="gmftool:CreationTool"
           href="visual.gmftool#//@palette/@tools.3/@tools.1"/>
+      <diagramNode
+          href="iaml.gmfgraph#EventTrigger"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//VisibleThing/onInput"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//EventTrigger"/>
+      <domainSpecialization
+          body="return domainElement.eContainingFeature().getName().equals(&quot;onInput&quot;);"
+          language="java"/>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerContainmentFeature"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerParentName"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="visual.gmftool#//@palette/@tools.3/@tools.3"/>
       <diagramNode
           href="iaml.gmfgraph#EventTrigger"/>
     </ownedChild>

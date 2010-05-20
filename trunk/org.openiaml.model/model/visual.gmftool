@@ -63,6 +63,19 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
+          title="Property [currentInput]"
+          description="Create new Property [currentInput]">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/Property.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/Property.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
           title="CompositeCondition"
           description="Create new CompositeCondition">
         <smallIcon
@@ -291,6 +304,19 @@
           xsi:type="gmftool:CreationTool"
           title="EventTrigger [onAccess]"
           description="Create new EventTrigger [onAccess]">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/EventTrigger.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/EventTrigger.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="EventTrigger [onInput]"
+          description="Create new EventTrigger [onInput]">
         <smallIcon
             xsi:type="gmftool:BundleImage"
             path="icons/full/obj16/EventTrigger.gif"

@@ -68,13 +68,21 @@ try {
 			$value = «EXPAND template::operations::Parameters::callParameterValue(true, false)»;
 			
 			// pass it to the client 
-			log_message("outgoing value to '«label»' («safeNameString(label.id)»" . «EXPAND template::visual::Label::getIteratorListIndex FOR label» . "): '$value'");
+			log_message("outgoing value to '«label»' («safeNameString(label.id)»"
+				«IF label.eContainer != null && model::visual::IteratorList.isInstance(label.eContainer)»
+					. (isset($doing_iterator_list_«safeName(label.eContainer)») && $doing_iterator_list_«safeName(label.eContainer)» ? «EXPAND template::visual::Label::getIteratorListIndex FOR label» : "")
+				«ENDIF»
+				. "): '$value'");
 			log_message("set_html " 
-				. escape_parameter_string("«safeNameString(label.id)»" . «EXPAND template::visual::Label::getIteratorListIndex FOR label»)
+				. escape_parameter_string("«safeNameString(label.id)»"«IF label.eContainer != null && model::visual::IteratorList.isInstance(label.eContainer)»
+					. (isset($doing_iterator_list_«safeName(label.eContainer)») && $doing_iterator_list_«safeName(label.eContainer)» ? «EXPAND template::visual::Label::getIteratorListIndex FOR label» : "")
+				«ENDIF»)
 				. " "
 				. escape_parameter_string($value));
 			echo "\nset_html " 
-				. escape_parameter_string("«safeNameString(label.id)»" . «EXPAND template::visual::Label::getIteratorListIndex FOR label»)
+				. escape_parameter_string("«safeNameString(label.id)»"«IF label.eContainer != null && model::visual::IteratorList.isInstance(label.eContainer)»
+					. (isset($doing_iterator_list_«safeName(label.eContainer)») && $doing_iterator_list_«safeName(label.eContainer)» ? «EXPAND template::visual::Label::getIteratorListIndex FOR label» : "")
+				«ENDIF»)
 				. " "
 				. escape_parameter_string($value);
 		}
@@ -129,6 +137,8 @@ try {
 	
 	«IF model::visual::IteratorList.isInstance(eContainer)»
 		/* container: IteratorList */
+		$doing_iterator_list_«safeName(eContainer)» = true;
 		«EXPAND template::visual::IteratorList::publishIteratorList(null, false) FOR (model::visual::IteratorList) eContainer»
+		$doing_iterator_list_«safeName(eContainer)» = false;
 	«ENDIF»	
 «ENDDEFINE»

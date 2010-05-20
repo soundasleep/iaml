@@ -1066,8 +1066,9 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * Assert that a label exists with the given text.
 	 * 
 	 * @param text
+	 * @return the Label found with the given text.
 	 */
-	public void assertLabelTextPresent(String text) {
+	public IElement assertLabelTextPresent(String text) {
 		assertFalse("Cannot assert the presence of an empty label", text.isEmpty());
 		
 		IElement match = getElementByXPath("//label[" + getContainsTextXPath(text) + "]");
@@ -1076,20 +1077,23 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		// normalise
 		textContent = normalizeSpace(textContent);
 		assertEquals(text, textContent);
+		return match;
 	}
 	
 	/**
 	 * Assert that a label exists with the <em>exact</em> given text.
 	 * 
 	 * @param text
+	 * @return the Label found with the given text.
 	 */
-	public void assertLabelTextExactlyPresent(String text) {
+	public IElement assertLabelTextExactlyPresent(String text) {
 		IElement match = getElementByXPath("//label[" + getExactTextXPath(text) + "]");
 		assertNotNull(match);
 		String textContent = match.getTextContent();
 		// normalise
 		textContent = normalizeSpace(textContent);
 		assertEquals(text, textContent);
+		return match;
 	}
 	
 	/**
@@ -1125,8 +1129,9 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * 
 	 * @param text the text to contain
 	 * @param notText the text to <em>not</em> contain
+	 * @return the Label found with the given text.
 	 */
-	public void assertLabelTextPresent(String text, String notText) {
+	public IElement assertLabelTextPresent(String text, String notText) {
 		assertFalse(text.equals(notText));	// sanity check
 		assertFalse("Cannot assert the presence of an empty label", text.isEmpty());
 		
@@ -1136,6 +1141,8 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		// normalise
 		textContent = textContent.replaceAll("[\\s]+", " ").trim();
 		assertEquals(text, textContent);
+		
+		return match;
 	}
 	
 	/**

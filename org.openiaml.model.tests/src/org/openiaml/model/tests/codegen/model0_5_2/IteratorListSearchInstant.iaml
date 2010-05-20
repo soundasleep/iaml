@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.128a9b17d03.1">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
+    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128a9b17dce.34" name="select three news" outWires="wires.128a9b17daf.1" inParameterEdges="wires.128ae917be0.19" query="matches(title, ?)" limit="3" orderBy="model.128a9b17d03.12" outSelects="domain.128a9b17dce.42">
+      <wires xsi:type="iaml.wires:SetWire" id="wires.128a9b17daf.1" name="set" from="domain.128a9b17dce.34" to="visual.128a9b17daf.17"/>
+      <selectEdges id="domain.128a9b17dce.42" from="domain.128a9b17dce.34" to="domain.128a9b17dce.3"/>
+      <reset xsi:type="iaml:PrimitiveOperation" id="model.128b548fc69.21" name="reset"/>
+    </elements>
+    <children xsi:type="iaml.visual:IteratorList" inWires="wires.128a9b17daf.1" id="visual.128a9b17daf.17" name="List"/>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.128ae917bd0.4a" name="search" outParameterEdges="wires.128ae917be0.19">
+      <operations xsi:type="iaml:CompositeOperation" id="model.128b555c911.4f" name="update" inActions="wires.128b555c9eb.19"/>
+      <parameterEdges id="wires.128ae917be0.19" from="visual.128ae917bd0.4a" to="domain.128a9b17dce.34"/>
+      <currentInput id="model.128b555c911.1d" name="current input" outParameterEdges="wires.128b555c9eb.1a">
+        <parameterEdges id="wires.128b555c9eb.1a" from="model.128b555c911.1d" to="wires.128b555c9eb.19"/>
+      </currentInput>
+      <onInput id="model.128b555c911.1f" outActions="wires.128b555c9eb.19">
+        <actions xsi:type="iaml.wires:RunAction" inParameterEdges="wires.128b555c9eb.1a" id="wires.128b555c9eb.19" name="run" from="model.128b555c911.1f" to="model.128b555c911.4f"/>
+      </onInput>
+    </children>
+  </scopes>
+  <schemas id="domain.128a9b17dce.1" name="News" inSchemas="domain.128a9b17dce.5">
+    <attributes id="model.128a9b17d03.12" name="id" primaryKey="true">
+      <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
+    </attributes>
+    <attributes id="model.128a9b17d03.14" name="title">
+      <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlString;XSDSimpleTypeDefinition=1"/>
+    </attributes>
+    <attributes id="model.128a9b17d03.15" name="content">
+      <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlString;XSDSimpleTypeDefinition=1"/>
+    </attributes>
+  </schemas>
+  <sources id="domain.128a9b17dce.3" name="Database" outSchemas="domain.128a9b17dce.5" inSelects="domain.128a9b17dce.42">
+    <schemaEdges id="domain.128a9b17dce.5" from="domain.128a9b17dce.3" to="domain.128a9b17dce.1"/>
+  </sources>
+</iaml:InternetApplication>

@@ -51,6 +51,7 @@
 	«EXPAND EventHandlers::getScriptClickDefinition(currentFrame)»
 	
 	«IF onAccess != null»
+	<?php if (!isset($skip_contained_onloads) || !$skip_contained_onloads) { ?>
 	<script language="Javascript" type="application/javascript">
 		/* <![CDATA[ */
 			«REM»any on-access events?«ENDREM»
@@ -60,6 +61,7 @@
 			} );
 		/* ]]> */
 	</script> 
+	<?php } ?>
 	«ENDIF»
 «ENDDEFINE»
 
@@ -143,13 +145,13 @@
 
 «DEFINE staticInitialValue(model::visual::Frame currentFrame, String argName) FOR model::DomainAttributeInstance»
 	«REM»from a domain attribute instance.«ENDREM»
-	«REM»if (has_attribute_instance_«safeName()»()) {«ENDREM»
+	if (!isset($check_attribute_instances) || !$check_attribute_instances || ($check_attribute_instances && has_attribute_instance_«safeName()»())) {
 		$temp = get_attribute_instance_«safeName()»();
 		if (!$label_set) {
 			$«argName» = $temp;
 			$label_set = true;
 		}
-	«REM»}«ENDREM»		
+	}		
 «ENDDEFINE»
 
 «DEFINE staticInitialValue(model::visual::Frame currentFrame, String argName) FOR model::QueryParameter»

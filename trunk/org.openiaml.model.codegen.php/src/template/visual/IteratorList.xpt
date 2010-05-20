@@ -31,8 +31,10 @@
 			 
 			// reset all the stored label values
 			«IF containingSession() != null»
+				$_SESSION["«safeName(containingSession())»_«safeName()»_limit] = $iterator->getLimit();
 				$_SESSION["«safeName(containingSession())»_«safeName()»_count] = $iterator->count();
 			«ELSE»
+				set_application_value("«safeName()»_limit", $iterator->getLimit());
 				set_application_value("«safeName()»_count", $iterator->count());
 			«ENDIF»
 			 
@@ -120,12 +122,13 @@
 	
 	$limit = 
 	«IF containingSession() != null»
-		require_session("«safeName(containingSession())»_«safeName()»_count", 0)
+		require_session("«safeName(containingSession())»_«safeName()»_limit", 0)
 	«ELSE»
-		get_application_value("«safeName()»_count", 0)
+		get_application_value("«safeName()»_limit", 0)
 	«ENDIF»
 	;
-	// expand the contents for each children
+	// expand the contents for each children, up to the limit of 
+	// the iterator; some of these won't be set
 	$iterator_«safeName()» = 0;
 	function get_list_iterator_index_«safeName()»() {
 		global $iterator_«safeName()»;
@@ -138,13 +141,22 @@
 		«FOREACH children AS child»
 			«IF containingSession(child) != null»
 				$_SESSION["«safeName(containingSession(child))»_«safeNameString(child.fieldValue.id)»"] = 
-					require_session("«safeName(containingSession(child))»_«safeNameString(child.fieldValue.id)»:$count");
+					require_session("«safeName(containingSession(child))»_«safeNameString(child.fieldValue.id)»:$count", null);
 			«ELSE»
 				set_application_value("«safeNameString(child.fieldValue.id)»",
-					get_application_value("«safeNameString(child.fieldValue.id)»:$count", -1)); 
+					get_application_value("«safeNameString(child.fieldValue.id)»:$count", null)); 
 			«ENDIF»
 		«ENDFOREACH»
-							
+		
+		// if the result set is empty, don't crash when we try and populate the contained label
+		$check_attribute_instances = true;
+		
+		// also, don't execute any onLoad()s if the database is empty
+		$skip_contained_onloads = («IF containingSession() != null»
+				require_session("«safeName(containingSession())»_«safeName()»_count)
+			«ELSE»
+				get_application_value("«safeName()»_count", -1)
+			«ENDIF») <= 0;
 		?>
 		«REM»expand all children«ENDREM»
 		<tr>
@@ -155,16 +167,18 @@
 			«ENDFOREACH»
 		</tr>
 		<?php
+		$check_attribute_instances = false;
+		$skip_contained_onloads = false;
 		
 		// store the 'current' index
 		$count = $iterator_«safeName()»;
 		«FOREACH children AS child»
 			«IF containingSession(child) != null»
 				$_SESSION["«safeName(containingSession(child))»_«safeNameString(child.fieldValue.id)»:$count"] = 
-					require_session("«safeName(containingSession(child))»_«safeNameString(child.fieldValue.id)»");
+					require_session("«safeName(containingSession(child))»_«safeNameString(child.fieldValue.id)»", null);
 			«ELSE»
 				set_application_value("«safeNameString(child.fieldValue.id)»:$count",
-					get_application_value("«safeNameString(child.fieldValue.id)»", -1)); 
+					get_application_value("«safeNameString(child.fieldValue.id)»", null)); 
 			«ENDIF»
 		«ENDFOREACH»
 					

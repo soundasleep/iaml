@@ -256,10 +256,20 @@ class IamlInvalidSessionException extends IamlRuntimeException {
 	}
 }
 
+$get_application_value_cache = array();
+
 /**
  * Set a global application value stored in the database.
+ *
+ * @param ignore_cache If true, then the local application value cache is ignored.
+ *		Missing values are never cached.
  */
-function get_application_value($id, $default) {
+function get_application_value($id, $default, $ignore_cache = false) {
+	global $get_application_value_cache;
+	if (!$ignore_cache && isset($get_application_value_cache[$id])) {
+		return $get_application_value_cache[$id];
+	}
+
 	global $db;
 	$db = new PDO('sqlite:' . ROOT_PATH . 'stored_events.db') or throw_new_IamlRuntimeException("could not open db");
 
@@ -285,6 +295,8 @@ function get_application_value($id, $default) {
 		// empty
 		return $default;
 	} else {
+		$get_application_value_cache[$id] = $row["arg0"];
+	
 		return $row["arg0"];
 	}
 }
@@ -293,7 +305,6 @@ function get_application_value($id, $default) {
  * Set a global application value stored in the database.
  */
 function set_application_value($id, $value) {
-
 	global $db;
 	$db = new PDO('sqlite:' . ROOT_PATH . 'stored_events.db') or throw_new_IamlRuntimeException("could not open db");
 
@@ -332,9 +343,15 @@ function set_application_value($id, $value) {
 	// done
 	$s = null;
 
+	// save into the cache
+	global $get_application_value_cache;
+	$get_application_value_cache[$id] = $value;
+	
+	/*
 	if (get_application_value($id, "not " . $value) != $value) {
 		throw new IamlRuntimeException("The application value '$id' was not saved (value='$value').");
 	}
+	*/
 
 }
 

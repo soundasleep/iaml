@@ -166,7 +166,7 @@
 	document.getElementById('«safeName()»').value
 «ENDDEFINE»
 «DEFINE dataSourceOnFrame FOR model::visual::Label»
-	document.getElementById('«safeName()»').innerHTML
+	document.getElementById('«safeName()»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>').innerHTML
 «ENDDEFINE»
 
 «DEFINE callParameterValue(Boolean php, Boolean inStoreDb) FOR model::StaticValue»

@@ -29,10 +29,10 @@
 		«textFieldName()»
 		
 		<input type="text" id="«safeNameString(id)»" name="«safeNameString(id)»"
-			onChange="return onChange_«safeNameString(id)»(this);"
+			onChange="return onChange_«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>(this);"
 			«REM»is onInput called at all?«ENDREM»
 			«IF onInput != null && !onInput.outActions.isEmpty»
-				onKeyUp="return onInput_«safeNameString(id)»(this);"
+				onKeyUp="return onInput_«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>(this);"
 			«ENDIF»
 			«EXPAND EventHandlers::getInlineClickJavascript(currentFrame)»
 
@@ -54,7 +54,7 @@
 		
 		<script language="Javascript" type="application/javascript">
 		/* <![CDATA[ */
-			function onChange_«safeNameString(id)»(obj) {
+			function onChange_«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>(obj) {
 				// check data type
 				«IF type != null»
 					var value = obj.value;
@@ -119,7 +119,7 @@
 			 * last change has been registered, to improve performance.
 			 * TODO put this parameter into the platform-dependent properties.
 			 */
-			function onInput_«safeNameString(id)»(obj) {
+			function onInput_«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>(obj) {
 				var f = function() {
 					if (onInput_timeout_«safeName()»_last_input === obj.value) {
 						// only if the input is identical, do we actually execute onInput

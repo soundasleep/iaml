@@ -6,16 +6,16 @@
 «EXTENSION template::GeneratorExtensions»
 
 «DEFINE getInlineClickJavascript(model::visual::Frame currentFrame) FOR model::VisibleThing-»
-	onClick="return onClick_«safeNameString(id)»(this);"
+	onClick="return onClick_«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>(this);"
 «ENDDEFINE»
 «DEFINE getInlineChangeJavascript(model::visual::Frame currentFrame) FOR model::VisibleThing-»
-	onChange="return onChange_«safeNameString(id)»(this);"
+	onChange="return onChange_«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>(this);"
 «ENDDEFINE»
 
 «DEFINE getScriptClickDefinition(model::visual::Frame currentFrame) FOR model::VisibleThing-»
 	<script language="Javascript" type="application/javascript">
 	/* <![CDATA[ */
-		function onClick_«safeNameString(id)»(obj) {
+		function onClick_«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>(obj) {
 			«EXPAND visibleThingClickEvents(currentFrame, false)»
 			return false;
 		}
@@ -44,10 +44,10 @@
 	«EXPAND implicitButtonClickEvents(currentFrame, php) FOREACH outActions-»
 «ENDDEFINE»
 
-«DEFINE getScriptChangeDefinition(model::visual::Frame currentFrame) FOR model::Changeable-»
+«DEFINE getScriptChangeDefinition(model::visual::Frame currentFrame) FOR model::VisibleThing-»
 	<script language="Javascript" type="application/javascript">
 	/* <![CDATA[ */
-		function onChange_«safeNameString(id)»(obj) {
+		function onChange_«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>(obj) {
 			«IF onChange != null»
 				// expand all onChanges
 				«EXPAND template::events::EventCall::callEvent(false) FOR onChange-»

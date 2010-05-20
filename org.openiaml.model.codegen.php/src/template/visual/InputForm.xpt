@@ -15,14 +15,14 @@
 «DEFINE renderForm(model::visual::Frame currentFrame) FOR model::visual::InputForm-»
 	<form id="«safeNameString(id)»" 
 		«IF onClick != null»
-			onClick="return onClick_«safeNameString(id)»(this);"
+			onClick="return onClick_«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>(this);"
 		«ENDIF»
 		>
 		
 		«IF onClick != null»
 		<script language="Javascript" type="application/javascript">
 		/* <![CDATA[ */
-			function onClick_«safeNameString(id)»(obj) {
+			function onClick_«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>(obj) {
 				// expand all onClicks
 				«EXPAND template::events::EventCall::callEvent(false) FOR onClick-»
 				return false;

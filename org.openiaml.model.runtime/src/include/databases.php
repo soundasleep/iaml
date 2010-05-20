@@ -117,6 +117,12 @@ class DatabaseQuery {
 		return $this->debugString($db->errorInfo());
 	}
 
+	/**
+	 * Print out the contents of $obj in a textual format, which is usually an array,
+	 * but can also be a string or integer or anything.
+	 *
+	 * <p>Returns e.g. (a => a, b => null, c => (a => b))
+	 */
 	private function debugString($obj) {
 		if (is_array($obj)) {
 			$r = "";
@@ -124,6 +130,8 @@ class DatabaseQuery {
 				$r .= "($key => " . $this->debugString($value) . ") ";
 			}
 			return "[ $r]";
+		} elseif ($obj === null) {
+			return "null";
 		} else {
 			return print_r($obj, true);
 		}

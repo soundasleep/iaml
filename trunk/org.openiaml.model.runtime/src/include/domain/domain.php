@@ -521,7 +521,21 @@ abstract class DomainIterator {
 	 * we will need to refresh the stored results (potentially losing unsaved changes).
 	 */
 	protected function argumentsHaveChanged() {
+		if ($this->original_argument_cache === null) {
+			$this->original_argument_cache = $this->getStoredValue("query_argument_cache", "empty");
+		}
+
 		return $this->getStoredValue("query_argument_cache", "empty") != print_r($this->constructArgs(), true);
+	}
+
+	var $original_argument_cache = null;
+
+	/**
+	 * Since this iterator was instantiated, have the contents changed, i.e. through
+	 * {@link #argumentsHaveChanged()}?
+	 */
+	public function contentsHaveChanged() {
+		return $this->original_argument_cache != print_r($this->constructArgs(), true);
 	}
 
 	/**

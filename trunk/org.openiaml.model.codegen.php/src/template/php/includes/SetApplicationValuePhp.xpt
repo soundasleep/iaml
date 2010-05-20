@@ -225,7 +225,11 @@ echo_necessary_update_callbacks();
 		«IF model::visual::InputTextField.isInstance(eContainer) || model::visual::Label.isInstance(eContainer)»
 			«IF eContainer.eContainer != null && model::visual::IteratorList.isInstance(eContainer.eContainer)»
 				// we are updating something within an IteratorList; update the entire IteratorList directly
-				populate_iterator_list_«safeName(eContainer.eContainer)»();
+				if (!defined('POPULATED_ITERATOR_LIST_«safeName(eContainer.eContainer)»')) {
+					// we only want to populate the iterator list <em>once</em> per callback
+					possibly_populate_iterator_list_«safeName(eContainer.eContainer)»();
+					define('POPULATED_ITERATOR_LIST_«safeName(eContainer.eContainer)»', true);
+				}
 			«ELSE»
 				// set the property directly; we will let 'updateAllFrameProperties' deal with
 				// updating the client

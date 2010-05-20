@@ -13,16 +13,9 @@
 «DEFINE renderIteratorList(model::visual::Frame currentFrame) FOR model::visual::IteratorList-»
 	<?php
 	/* has the list been populated yet? */
-	if (!
-	«IF containingSession() != null»
-		require_session("«safeName(containingSession())»_«safeName()»_initialised", 0)
-	«ELSE»
-		get_application_value("«safeName()»_initialised", 0)
-	«ENDIF»
-	) {
-		populate_iterator_list_«safeName()»();
-	}
-	
+	/* ALWAYS populate the list when rendering from HTML */
+	populate_iterator_list_«safeName()»();
+
 	?>
 	<table id="«safeName()-»"
 		«REM»has it been hidden by anything?«ENDREM»
@@ -63,6 +56,8 @@
  * @param as_html output the contents as HTML; otherwise, callbacks
  */
 «DEFINE publishIteratorList(model::visual::Frame currentFrame, Boolean as_html) FOR model::visual::IteratorList»
+if (defined('ITERATOR_LIST_«safeName()»_UPDATED')) {
+	
 	$limit = 
 	«IF containingSession() != null»
 		require_session("«safeName(containingSession())»_«safeName()»_limit", 0)
@@ -128,6 +123,7 @@
 			«ENDIF»
 		«ENDFOREACH»
 	}
+}
 «ENDDEFINE»
 
 /**
@@ -179,10 +175,51 @@
 
 «DEFINE populateIteratorListDefinition(model::visual::Frame currentFrame) FOR model::visual::IteratorList-»
 /**
+ * Has the list been populated yet? If not, populate it.
+ */
+function possibly_populate_iterator_list_«safeName()»() {
+	if (!
+	«IF containingSession() != null»
+		require_session("«safeName(containingSession())»_«safeName()»_initialised", 0)
+	«ELSE»
+		get_application_value("«safeName()»_initialised", 0)
+	«ENDIF»
+	) {
+		populate_iterator_list_«safeName()»();
+	} else {
+		// have the arguments for the source iterator changed?
+		«IF inWires.from.typeSelect(model::domain::DomainIterator).isEmpty»
+			«throwException("No incoming DomainIterator for IteratorList: " + this)»
+		«ENDIF»
+		«LET inWires.from.typeSelect(model::domain::DomainIterator).first() AS iterator»
+			$iterator = DomainIterator_«safeName(iterator)»::getInstance();
+			
+			if ($iterator->contentsHaveChanged()) {
+				// we need to reload
+				populate_iterator_list_«safeName()»();
+			}
+		«ENDLET»
+	}
+}
+
+/**
+ * If the given iterator list has been populated, reset it, so it must
+ * be repopulated again.
+ */
+function reset_populated_iterator_list_«safeName()»() {
+	«IF containingSession() != null»
+		unset($_SESSION["«safeName(containingSession())»_«safeName()»_initialised"]);
+	«ELSE»
+		set_application_value("«safeName()»_initialised", 0);
+	«ENDIF»
+}
+
+/**
  * Force repopulate the iterator list '«escapeString(name)»'.
  */
 function populate_iterator_list_«safeName()»() {
 	log_message("[iterator list] populating initial iterator list «safeName()»");
+	define('ITERATOR_LIST_«safeName()»_UPDATED', true);
 
 	// find the incoming iterator
 	«IF inWires.from.typeSelect(model::domain::DomainIterator).isEmpty»

@@ -200,12 +200,12 @@ public class IteratorListSetWireSearch extends DatabaseCodegenTestCase {
 		assertNoProblem();
 		
 		// check the content on the page
-		assertLabelTextExactlyPresent("Title 1");
-		assertLabelTextExactlyPresent("Content 1");
-		assertLabelTextExactlyPresent("Title 2");
-		assertLabelTextExactlyPresent("Content 2");
-		assertLabelTextExactlyPresent("Title 3");
-		assertLabelTextExactlyPresent("Content 3");
+		assertLabelTextNotPresent("Title 1");
+		assertLabelTextNotPresent("Content 1");
+		assertLabelTextNotPresent("Title 2");
+		assertLabelTextNotPresent("Content 2");
+		assertLabelTextNotPresent("Title 3");
+		assertLabelTextNotPresent("Content 3");
 		assertLabelTextNotPresent("Title 4");
 		assertLabelTextNotPresent("Content 4");
 		assertLabelTextNotPresent("Title 10");
@@ -222,10 +222,10 @@ public class IteratorListSetWireSearch extends DatabaseCodegenTestCase {
 		assertLabelTextExactlyPresent("Content 2");
 		assertLabelTextExactlyPresent("Title 12");
 		assertLabelTextExactlyPresent("Content 12");
-		assertLabelTextNotPresent("Title 1");
-		assertLabelTextNotPresent("Content 1");
 		assertLabelTextNotPresent("Title 3");
 		assertLabelTextNotPresent("Content 3");
+		assertLabelTextNotPresent("Title 4");
+		assertLabelTextNotPresent("Content 4");
 	}
 		
 	/**
@@ -284,6 +284,13 @@ public class IteratorListSetWireSearch extends DatabaseCodegenTestCase {
 		initialiseDatabase();
 		IFile sitemap = beginAtSitemapThenPage("Home");
 		assertNoProblem();
+		
+		// first set the query to the empty string ''
+		{
+			String target = getLabelIDForText("search");
+			assertLabeledFieldEquals(target, "");
+			setLabeledFormElementField(target, "");
+		}
 		
 		// check the content on the page
 		assertLabelTextExactlyPresent("Title 1");

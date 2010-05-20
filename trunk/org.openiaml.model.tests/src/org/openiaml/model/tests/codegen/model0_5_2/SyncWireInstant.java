@@ -3,12 +3,14 @@
  */
 package org.openiaml.model.tests.codegen.model0_5_2;
 
+import org.openiaml.model.tests.CodegenTestCase;
+
 
 /**
  * Tests SyncWires with executeOnInput = true. Also tests 
  * InputTextField.onInput.
  */
-public class SyncWireInstant extends TypedCodegenTestCase {
+public class SyncWireInstant extends CodegenTestCase {
 	
 	@Override
 	protected void setUp() throws Exception {

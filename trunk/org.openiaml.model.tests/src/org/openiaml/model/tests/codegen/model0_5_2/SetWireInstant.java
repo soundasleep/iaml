@@ -3,11 +3,13 @@
  */
 package org.openiaml.model.tests.codegen.model0_5_2;
 
+import org.openiaml.model.tests.CodegenTestCase;
+
 
 /**
  * Tests SetWires with executeOnInput = true.
  */
-public class SetWireInstant extends TypedCodegenTestCase {
+public class SetWireInstant extends CodegenTestCase {
 	
 	@Override
 	protected void setUp() throws Exception {

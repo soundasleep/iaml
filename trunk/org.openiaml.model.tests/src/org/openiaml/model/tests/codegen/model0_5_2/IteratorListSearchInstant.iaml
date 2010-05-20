@@ -7,7 +7,7 @@
       <reset xsi:type="iaml:PrimitiveOperation" id="model.128b548fc69.21" name="reset"/>
     </elements>
     <children xsi:type="iaml.visual:IteratorList" inWires="wires.128a9b17daf.1" id="visual.128a9b17daf.17" name="List"/>
-    <children xsi:type="iaml.visual:InputTextField" id="visual.128ae917bd0.4a" name="search" outParameterEdges="wires.128ae917be0.19">
+    <children xsi:type="iaml.visual:InputTextField" id="visual.128ae917bd0.4a" name="search" outParameterEdges="wires.128ae917be0.19" defaultValue="">
       <operations xsi:type="iaml:CompositeOperation" id="model.128b555c911.4f" name="update" inActions="wires.128b555c9eb.19"/>
       <parameterEdges id="wires.128ae917be0.19" from="visual.128ae917bd0.4a" to="domain.128a9b17dce.34"/>
       <currentInput id="model.128b555c911.1d" name="current input" outParameterEdges="wires.128b555c9eb.1a">

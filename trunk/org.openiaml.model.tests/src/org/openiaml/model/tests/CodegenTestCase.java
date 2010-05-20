@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.model.InternetApplication;
 
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 
 /**
  * Code generation-specific test cases.
@@ -1176,6 +1177,71 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 
 	private void logTimed(String string, String string2, String string3) {
 		logTimed(string, string2, string3, getPageIdentifier());
+	}
+	
+
+	/**
+	 * Type in the given text to the Input element labelled by the given element ID.
+	 * 
+	 * @throws IOException 
+	 */
+	public void typeLabeledFormElement(String id, String text) throws IOException {
+		// get the elements referenced by this label
+		IElement label = getElementById(id);
+		assertNotNull(label);
+		
+		List<IElement> elements = getFieldsForLabel(label);
+		assertFalse("Could not find any elements for label " + id, elements.isEmpty());
+		
+		for (IElement element : elements) {
+			// type it into this label
+			assertTrue("Expected HtmlUnitElementImpl, but was " + element.getClass().getName(),
+					element instanceof HtmlUnitElementImpl);
+
+			// get the actual HtmlUnit element
+			HtmlElement actual = ((HtmlUnitElementImpl) element).getHtmlElement();
+			assertNotNull(actual);
+			
+			// type in the text
+			actual.type(text);
+			
+			// wait until all background tasks (setTimeout, ...) are finished
+			while (((HtmlUnitTestingEngineImpl) getTestingEngine()).getWebClient().waitForBackgroundJavaScript(500) != 0);
+			
+			// and return
+			return;
+		}	
+	}
+	
+	/**
+	 * blur() on the Input element labelled by the given element ID.
+	 * 
+	 * @param id
+	 */
+	public void loseFocus(String id) {
+		// get the elements referenced by this label
+		IElement label = getElementById(id);
+		assertNotNull(label);
+		
+		List<IElement> elements = getFieldsForLabel(label);
+		assertFalse("Could not find any elements for label " + id, elements.isEmpty());
+		
+		for (IElement element : elements) {
+			// type it into this label
+			assertTrue("Expected HtmlUnitElementImpl, but was " + element.getClass().getName(),
+					element instanceof HtmlUnitElementImpl);
+
+			// get the actual HtmlUnit element
+			HtmlElement actual = ((HtmlUnitElementImpl) element).getHtmlElement();
+			assertNotNull(actual);
+			
+			// lose focus
+			actual.blur();
+			
+			// and return
+			return;
+		}	
+		
 	}
 
 }

@@ -20,75 +20,7 @@
 		get_application_value("«safeName()»_initialised", 0)
 	«ENDIF»
 	) {
-		log_message("[iterator list] populating initial iterator list «safeName()»");
-	
-		// find the incoming iterator
-		«IF inWires.from.typeSelect(model::domain::DomainIterator).isEmpty»
-			«throwException("No incoming DomainIterator for IteratorList: " + this)»
-		«ENDIF»
-		«LET inWires.from.typeSelect(model::domain::DomainIterator).first() AS iterator»
-			$iterator = DomainIterator_«safeName(iterator)»::getInstance();
-			 
-			// reset all the stored label values
-			«IF containingSession() != null»
-				$_SESSION["«safeName(containingSession())»_«safeName()»_limit] = $iterator->getLimit();
-				$_SESSION["«safeName(containingSession())»_«safeName()»_count] = $iterator->count();
-			«ELSE»
-				set_application_value("«safeName()»_limit", $iterator->getLimit());
-				set_application_value("«safeName()»_count", $iterator->count());
-			«ENDIF»
-			 
-			if (!$iterator->isEmpty()) {
-				$iterator->reset();
-
-				$count = 0;
-				while (true) {
-					// for each attribute, call onChange; this will update
-					// all contained label values
-					«FOREACH iterator.attributes AS attribute»
-						«IF attribute.onChange != null»
-							«EXPAND template::events::EventCall::callEvent(true) FOR attribute.onChange»
-						«ENDIF» 
-					«ENDFOREACH»
-					
-					// store all the children values
-					«FOREACH children AS child»
-						«IF containingSession(child) != null»
-							$_SESSION["«safeName(containingSession(child))»_«safeNameString(child.fieldValue.id)»:$count"] = 
-								require_session("«safeName(containingSession(child))»_«safeNameString(child.fieldValue.id)»");
-						«ELSE»
-							set_application_value("«safeNameString(child.fieldValue.id)»:$count",
-								get_application_value("«safeNameString(child.fieldValue.id)»", -1)); 
-						«ENDIF»
-					«ENDFOREACH»
-					
-					if (!$iterator->hasNext())
-						break;
-						
-			 		$iterator->next();
-			 		$count++;
-				};
-				
-				// finally, reset
-				$iterator->reset();
-			}
-			
-			// remove the 'current' label values
-			«FOREACH children AS child»
-				«IF containingSession(child) != null»
-					$_SESSION["«safeName(containingSession(child))»_«safeNameString(child.fieldValue.id)»"] = null; 
-				«ELSE»
-					set_application_value("«safeNameString(child.fieldValue.id)»", null);
-				«ENDIF»
-			«ENDFOREACH»
-		«ENDLET» 
-	
-		// it has now been initialised
-		«IF containingSession() != null»
-			$_SESSION["«safeName(containingSession())»_«safeName()»_initialised] = 1;
-		«ELSE»
-			set_application_value("«safeName()»_initialised", 1);
-		«ENDIF»
+		populate_iterator_list_«safeName()»();
 	}
 	
 	?>
@@ -119,7 +51,18 @@
 		<!-- the first child has the first ID -->
 		<tbody>
 	<?php
-	
+	«EXPAND publishIteratorList(currentFrame, true)»
+	?>
+		</tbody>
+	</table>
+«ENDDEFINE»
+
+/**
+ * Assumed to be in PHP mode.
+ *
+ * @param as_html output the contents as HTML; otherwise, callbacks
+ */
+«DEFINE publishIteratorList(model::visual::Frame currentFrame, Boolean as_html) FOR model::visual::IteratorList»
 	$limit = 
 	«IF containingSession() != null»
 		require_session("«safeName(containingSession())»_«safeName()»_limit", 0)
@@ -141,10 +84,10 @@
 		«FOREACH children AS child»
 			«IF containingSession(child) != null»
 				$_SESSION["«safeName(containingSession(child))»_«safeNameString(child.fieldValue.id)»"] = 
-					require_session("«safeName(containingSession(child))»_«safeNameString(child.fieldValue.id)»:$count", null);
+					require_session("«safeName(containingSession(child))»_«safeNameString(child.fieldValue.id)»:$count", "");
 			«ELSE»
 				set_application_value("«safeNameString(child.fieldValue.id)»",
-					get_application_value("«safeNameString(child.fieldValue.id)»:$count", null)); 
+					get_application_value("«safeNameString(child.fieldValue.id)»:$count", "")); 
 			«ENDIF»
 		«ENDFOREACH»
 		
@@ -157,28 +100,22 @@
 			«ELSE»
 				get_application_value("«safeName()»_count", -1)
 			«ENDIF») <= 0;
-		?>
-		«REM»expand all children«ENDREM»
-		<tr>
-			«FOREACH children AS child»
-			<td class="«safeNameString(child.id)»">
-				«EXPAND Render::renderVisual(currentFrame) FOR child»
-			</td>
-			«ENDFOREACH»
-		</tr>
-		<?php
-		$check_attribute_instances = false;
-		$skip_contained_onloads = false;
+			
+		«IF as_html»
+			«EXPAND publishIteratorListAsHTML(currentFrame)»
+		«ELSE»
+			«EXPAND publishIteratorListAsCallbacks(currentFrame)»
+		«ENDIF»
 		
 		// store the 'current' index
 		$count = $iterator_«safeName()»;
 		«FOREACH children AS child»
 			«IF containingSession(child) != null»
 				$_SESSION["«safeName(containingSession(child))»_«safeNameString(child.fieldValue.id)»:$count"] = 
-					require_session("«safeName(containingSession(child))»_«safeNameString(child.fieldValue.id)»", null);
+					require_session("«safeName(containingSession(child))»_«safeNameString(child.fieldValue.id)»", "");
 			«ELSE»
 				set_application_value("«safeNameString(child.fieldValue.id)»:$count",
-					get_application_value("«safeNameString(child.fieldValue.id)»", null)); 
+					get_application_value("«safeNameString(child.fieldValue.id)»", "")); 
 			«ENDIF»
 		«ENDFOREACH»
 					
@@ -189,9 +126,141 @@
 			«ELSE»
 				set_application_value("«safeNameString(child.fieldValue.id)»", null);
 			«ENDIF»
-		«ENDFOREACH»		
+		«ENDFOREACH»
 	}
+«ENDDEFINE»
+
+/**
+ * Assumed to be in PHP mode, but breaking out into HTML mode.
+ */
+«DEFINE publishIteratorListAsHTML(model::visual::Frame currentFrame) FOR model::visual::IteratorList»
+	// if the result set is empty, don't crash when we try and populate the contained label
+	$check_attribute_instances = true;
+	
+	// also, don't execute any onLoad()s if the database is empty
+	$skip_contained_onloads = («IF containingSession() != null»
+			require_session("«safeName(containingSession())»_«safeName()»_count)
+		«ELSE»
+			get_application_value("«safeName()»_count", -1)
+		«ENDIF») <= 0;
 	?>
-		</tbody>
-	</table>
+	«REM»expand all children«ENDREM»
+	<tr>
+		«FOREACH children AS child»
+		<td class="«safeNameString(child.id)»">
+			«EXPAND Render::renderVisual(currentFrame) FOR child»
+		</td>
+		«ENDFOREACH»
+	</tr>
+	<?php
+	$check_attribute_instances = false;
+	$skip_contained_onloads = false;
+«ENDDEFINE»
+
+/**
+ * Assumed to be in PHP mode, but printing out JS callbacks.
+ */
+«DEFINE publishIteratorListAsCallbacks(model::visual::Frame currentFrame) FOR model::visual::IteratorList»
+	«EXPAND template::php::callbacks::UpdateFrameProperties::outgoingEmailValue FOREACH children.fieldValue»
+«ENDDEFINE»
+
+/**
+ * Defines an include file for all IteratorLists and related functionality.
+ */
+«DEFINE iteratorListDefinitions FOR model::InternetApplication»
+	<?php
+		«EXPAND template::Template::phpCheck»
+		
+		«FOREACH eAllContents.typeSelect(model::visual::Frame) AS currentFrame»
+			// frame '«escapeString(currentFrame.name)»'
+			«EXPAND populateIteratorListDefinition(currentFrame) FOREACH eAllContents.typeSelect(model::visual::IteratorList).select(a|containingFrame(a) == currentFrame)»
+		«ENDFOREACH»
+«ENDDEFINE»
+
+«DEFINE populateIteratorListDefinition(model::visual::Frame currentFrame) FOR model::visual::IteratorList-»
+/**
+ * Force repopulate the iterator list '«escapeString(name)»'.
+ */
+function populate_iterator_list_«safeName()»() {
+	log_message("[iterator list] populating initial iterator list «safeName()»");
+
+	// find the incoming iterator
+	«IF inWires.from.typeSelect(model::domain::DomainIterator).isEmpty»
+		«throwException("No incoming DomainIterator for IteratorList: " + this)»
+	«ENDIF»
+	«LET inWires.from.typeSelect(model::domain::DomainIterator).first() AS iterator»
+		$iterator = DomainIterator_«safeName(iterator)»::getInstance();
+		 
+		// reset all the stored label values
+		«IF containingSession() != null»
+			$_SESSION["«safeName(containingSession())»_«safeName()»_limit] = $iterator->getLimit();
+			$_SESSION["«safeName(containingSession())»_«safeName()»_count] = $iterator->count();
+		«ELSE»
+			set_application_value("«safeName()»_limit", $iterator->getLimit());
+			set_application_value("«safeName()»_count", $iterator->count());
+		«ENDIF»
+		
+		for ($count = 0; $count < $iterator->getLimit(); $count++) {
+			«FOREACH children AS child»
+				// TODO should really be null, not the empty string
+				«IF containingSession(child) != null»
+					$_SESSION["«safeName(containingSession(child))»_«safeNameString(child.fieldValue.id)»:$count"] = "";
+				«ELSE»
+					set_application_value("«safeNameString(child.fieldValue.id)»:$count", ""); 
+				«ENDIF»
+			«ENDFOREACH»
+		}
+			 
+		if (!$iterator->isEmpty()) {
+			$iterator->reset();
+
+			$count = 0;
+			while (true) {
+				// for each attribute, call onChange; this will update
+				// all contained label values
+				«FOREACH iterator.attributes AS attribute»
+					«IF attribute.onChange != null»
+						«EXPAND template::events::EventCall::callEvent(true) FOR attribute.onChange»
+					«ENDIF» 
+				«ENDFOREACH»
+				
+				// store all the children values
+				«FOREACH children AS child»
+					«IF containingSession(child) != null»
+						$_SESSION["«safeName(containingSession(child))»_«safeNameString(child.fieldValue.id)»:$count"] = 
+							require_session("«safeName(containingSession(child))»_«safeNameString(child.fieldValue.id)»");
+					«ELSE»
+						set_application_value("«safeNameString(child.fieldValue.id)»:$count",
+							get_application_value("«safeNameString(child.fieldValue.id)»", -1)); 
+					«ENDIF»
+				«ENDFOREACH»
+				
+				if (!$iterator->hasNext())
+					break;
+					
+		 		$iterator->next();
+		 		$count++;
+			};
+			
+			// finally, reset
+			$iterator->reset();
+		}
+		
+		// remove the 'current' label values
+		«FOREACH children AS child»
+			«IF containingSession(child) != null»
+				$_SESSION["«safeName(containingSession(child))»_«safeNameString(child.fieldValue.id)»"] = null; 
+			«ELSE»
+				set_application_value("«safeNameString(child.fieldValue.id)»", null);
+			«ENDIF»
+		«ENDFOREACH»
+	«ENDLET» 
+
+	// it has now been initialised
+	«IF containingSession() != null»
+		$_SESSION["«safeName(containingSession())»_«safeName()»_initialised] = 1;
+	«ELSE»
+		set_application_value("«safeName()»_initialised", 1);
+	«ENDIF»
+}
 «ENDDEFINE»

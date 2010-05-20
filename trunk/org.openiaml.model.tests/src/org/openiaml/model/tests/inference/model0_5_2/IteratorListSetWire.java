@@ -4,14 +4,19 @@
 package org.openiaml.model.tests.inference.model0_5_2;
 
 import org.openiaml.model.datatypes.BuiltinDataTypes;
+import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainAttributeInstance;
+import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.IteratorList;
 import org.openiaml.model.model.visual.Label;
+import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
 /**
@@ -141,6 +146,39 @@ public class IteratorListSetWire extends InferenceTestCase {
 		assertGenerated(assertHasSetWire(root, iid, lid));
 		assertGenerated(assertHasSetWire(root, ititle, ltitle));
 		assertGenerated(assertHasSetWire(root, icontent, lcontent));
+	}
+	
+	/**
+	 * DomainAttribute.onChange calls Label.update only if DomainAttribute exists
+	 * 
+	 * @throws Exception
+	 */
+	public void testLabelUpdatedOnlyIfAttributeExists() throws Exception {
+		Frame home = assertHasFrame(root, "Home");
+		IteratorList list = assertHasIteratorList(home, "List");
+		DomainIterator iterator = assertHasDomainIterator(home, "select three news");
+		
+		Label ltitle = assertHasLabel(list, "title");
+		DomainAttributeInstance ititle = assertHasDomainAttributeInstance(iterator, "title");
+		assertGenerated(assertHasSetWire(root, ititle, ltitle));
+		
+		EventTrigger onChange = ititle.getOnChange();
+		assertGenerated(onChange);
+		
+		Operation op = assertHasOperation(ltitle, "update");
+		assertGenerated(op);
+		
+		RunAction run = assertHasRunAction(root, onChange, op);
+		assertGenerated(run);
+		
+		// with parameter from attr instance
+		Property value = assertHasFieldValue(ititle);
+		assertGenerated(value);
+		assertGenerated(assertHasParameterEdge(root, value, run));
+		
+		Condition cond = assertHasCondition(iterator, "not empty");
+		
+		assertGenerated(assertHasConditionEdge(root, cond, run));
 	}
 	
 }

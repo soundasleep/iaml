@@ -770,12 +770,13 @@ rule "Refresh Domain Object mappings (except for generated primary keys) when In
 
 end
 
-rule "A SetWire between Attributes selected from a NewInstanceWire need to check that the attribute exists before initialising"
+rule "A SetWire between Attributes passed to a DomainIterator need to check that the attribute exists before initialising (onAccess)"
 	when
 		sync : SetWire( )
-		form : InputForm ( )
-		instance : DomainIterator ( query == "new" )
+		form : VisibleThing ( )		# InputForm, IteratorList
+		instance : DomainIterator ( )
 		
+		# form -> Iterator
 		eval(functions.connectsSet(sync, form, instance))
 		
 		# the instance is created through a NewInstanceWire
@@ -792,12 +793,64 @@ rule "A SetWire between Attributes selected from a NewInstanceWire need to check
 		tf : Label ( eContainer == form )
 		sync2 : SetWire ( )
 		
+		# Label -> attribute
 		eval(functions.connectsSet(sync2, tf, attribute))
 		
 		# text field access/init events
 		access : EventTrigger ( tf.onAccess == access ) 
 		initOp : Operation ( eContainer == tf, name == "init" )
 		run : RunAction ( from == access, to == initOp )
+		
+		attributeValue : Property ( attribute.fieldValue == attributeValue )
+		
+		param : ParameterEdge ( from == attributeValue, to == run )  
+		
+		# 'not empty' condition in the instance
+		existsCondition : Condition ( eContainer == instance, name == "not empty" )
+		
+		# but not connected		
+		not (ConditionEdge ( from == existsCondition, to == run ))
+						
+		eval ( handler.veto( sync2 ))
+		
+	then
+		# connect it
+		ConditionEdge cw = handler.generatedConditionEdge(sync2, sync2, existsCondition, run);
+		handler.setName(cw, "check new instance exists");
+		queue.add(cw, drools);
+
+end
+
+rule "A SetWire between Attributes selected from a DomainIterator need to check that the attribute exists before initialising (onChange)"
+	when
+		sync : SetWire( )
+		form : VisibleThing ( )		# InputForm, IteratorList
+		instance : DomainIterator ( )
+		
+		# Iterator -> Form
+		eval(functions.connectsSet(sync, instance, form))
+		
+		# the instance is created through a NewInstanceWire
+		schema : DomainSchema ( )
+		domainSource : DomainSource ( )
+		schemaEdge : SchemaEdge ( )
+		eval ( functions.connectsSchema( schemaEdge, domainSource, schema ))
+		
+		selectEdge : SelectEdge ( )
+		eval ( functions.connectsSelect( selectEdge, instance, domainSource ))		
+		
+		# contained attribute/field
+		attribute : DomainAttributeInstance( eContainer == instance )
+		tf : Label ( eContainer == form )
+		sync2 : SetWire ( )
+		
+		# Attribute -> Label
+		eval(functions.connectsSet(sync2, attribute, tf))
+		
+		# text field access/init events
+		onChange : EventTrigger ( attribute.onChange == onChange ) 
+		initOp : Operation ( eContainer == tf, name == "update" )
+		run : RunAction ( from == onChange, to == initOp )
 		
 		attributeValue : Property ( attribute.fieldValue == attributeValue )
 		

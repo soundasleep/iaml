@@ -988,6 +988,16 @@
         <details key="documentation" value="If both the source and target of this wire refer to the same {@model DomainObject}, the source of this wire will create a {@model Button link} to view the individual element on the target page."/>
       </eAnnotations>
     </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AutocompleteWire" eSuperTypes="#//Wire">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Allows a target {@model VisibleThing} to be populated by matching a created {@model InputTextField} to the source {@model DomainIterator} value, specified by the {@model AutocompleteWire#match}."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="matches" eType="#//DomainAttribute">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The attribute to match the autocompleted text to. In the future this may support a list of potential attributes."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
   </eSubpackages>
   <eSubpackages name="operations" nsURI="http://openiaml.org/model/operations" nsPrefix="iaml.operations">
     <eClassifiers xsi:type="ecore:EClass" name="StartNode" eSuperTypes="#//ActivityNode #//ExecutionEdgesSource">

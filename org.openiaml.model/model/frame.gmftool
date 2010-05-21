@@ -328,6 +328,19 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
+          title="AutocompleteWire"
+          description="Create new AutocompleteWire">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/AutocompleteWire.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/AutocompleteWire.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
           title="ConditionEdge"
           description="Create new ConditionEdge">
         <smallIcon

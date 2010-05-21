@@ -1919,6 +1919,21 @@
           figure="//@figures.0/@descriptors.63/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
+        name="AutocompleteWireFigure">
+      <actualFigure
+          xsi:type="gmfgraph:PolylineConnection"
+          name="AutocompleteWireFigure"
+          lineKind="LINE_DASH"
+          targetDecoration="//@figures.0/@figures.0">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="AutocompleteWireNameFigure"
+            text="autocomplete"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.64/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors
         name="SelectEdgeFigure">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
@@ -1930,7 +1945,7 @@
             text="select"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.64/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.65/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="SchemaEdgeFigure">
@@ -1944,7 +1959,7 @@
             text="schema"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.65/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.66/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="DomainSchemaFigure">
@@ -1973,7 +1988,7 @@
             text="&lt;...>"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.66/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.67/@actualFigure/@children.0"/>
     </descriptors>
   </figures>
   <nodes
@@ -2171,6 +2186,9 @@
   <connections
       name="DetailWire"
       figure="DetailWireFigure"/>
+  <connections
+      name="AutocompleteWire"
+      figure="AutocompleteWireFigure"/>
   <connections
       name="SelectEdge"
       figure="SelectEdgeFigure"/>
@@ -2602,17 +2620,21 @@
       figure="DetailWireFigure"
       accessor="//@figures.0/@descriptors.63/@accessors.0"/>
   <labels
+      name="AutocompleteWireName"
+      figure="AutocompleteWireFigure"
+      accessor="//@figures.0/@descriptors.64/@accessors.0"/>
+  <labels
       name="DomainSchemaName"
       figure="DomainSchemaFigure"
-      accessor="//@figures.0/@descriptors.66/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.67/@accessors.0"/>
   <labels
       name="SelectEdgeName"
       figure="SelectEdgeFigure"
-      accessor="//@figures.0/@descriptors.64/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.65/@accessors.0"/>
   <labels
       name="SchemaEdgeName"
       figure="SchemaEdgeFigure"
-      accessor="//@figures.0/@descriptors.65/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.66/@accessors.0"/>
   <labels
       name="IteratorListName"
       figure="IteratorListFigure"

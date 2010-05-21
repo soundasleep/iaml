@@ -277,7 +277,7 @@
       <genClasses ecoreClass="iaml.ecore#//wires/DetailWire"/>
       <genClasses ecoreClass="iaml.ecore#//wires/AutocompleteWire">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference iaml.ecore#//wires/AutocompleteWire/matches"/>
+            ecoreFeature="ecore:EReference iaml.ecore#//wires/AutocompleteWire/match"/>
       </genClasses>
     </nestedGenPackages>
     <nestedGenPackages prefix="Operations" basePackage="org.openiaml.model.model"

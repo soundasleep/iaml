@@ -21,6 +21,7 @@ public class AllModel0_5_2InferenceTests {
 		
 		suite.addTestSuite(SyncWireInstant.class);
 		suite.addTestSuite(IteratorListSetWire.class);
+		suite.addTestSuite(AutocompleteWireSimple.class);
 		
 		return suite;
 	}

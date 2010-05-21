@@ -183,6 +183,62 @@ rule "IteratorList labels update the target of the Autocomplete Wire"
 	
 end
 
+rule "InternetApplication has a StaticValue 'blank' created"
+	when
+		container : InternetApplication ( )
+	
+		not ( StaticValue ( eContainer == container, value == "" ))
+		
+		eval ( handler.veto( container ))
+		
+	then
+		StaticValue blank = handler.generatedStaticValue(container, container);
+		handler.setName(blank, "blank");
+		handler.setType(blank, BuiltinDataTypes.getTypeString());
+		handler.setValue(blank, "");
+		queue.add(blank, drools);
+			
+end
+
+rule "IteratorList labels clear the input onClick"
+	when
+		ia : InternetApplication ( )
+		container : Frame ( )
+		target : VisibleThing ( )
+		iterator : DomainIterator ( )
+
+		attribute : DomainAttribute ( )
+
+		# input		
+		input : InputTextField ( eContainer == container, eval (functions.getAutocompleteInputName(attribute).equals(name)) )
+		updateOperation : Operation ( eContainer == input, name == "update" )
+		
+		blank : StaticValue ( eContainer == ia, value == "" )
+		
+		wire : AutocompleteWire ( from == iterator, to == target ) 
+		
+		# containing list
+		list : IteratorList ( eContainer == container )
+		set : SetWire ( eval ( functions.connectsSet( set, iterator, list ) ) )
+			
+		# for every label within
+		label : VisibleThing ( eContainer == list )
+		onClick : EventTrigger ( label.onClick == onClick )
+		
+		not ( RunAction ( from == onClick, to == updateOperation ))
+		
+		eval ( handler.veto( wire ))
+	
+	then
+		RunAction run = handler.generatedRunAction(wire, label, onClick, updateOperation);
+		handler.setName(run, "run");
+		queue.add(run, drools);
+		
+		ParameterEdge param = handler.generatedParameterEdge(wire, label, blank, run);
+		queue.add(param, drools);
+	
+end
+
 rule "Frame.onAccess hides the IteratorList if the input is empty"
 	when
 		container : Frame ( )

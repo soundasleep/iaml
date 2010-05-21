@@ -283,7 +283,13 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setGeneratedBy(value, by);
 		return value;
 	}
-	
+
+	public StaticValue generatedStaticValue(GeneratesElements by, Scope container) throws InferenceException {
+		StaticValue value = (StaticValue) createElement( container, ModelPackage.eINSTANCE.getStaticValue(), ModelPackage.eINSTANCE.getScope_Values() );
+		setGeneratedBy(value, by);
+		return value;
+	}
+
 	public StartNode generatedStartNode(GeneratesElements by, CompositeOperation container) throws InferenceException {
 		StartNode node = (StartNode) createElement( container, OperationsPackage.eINSTANCE.getStartNode(), ModelPackage.eINSTANCE.getCompositeOperation_Nodes() );
 		setGeneratedBy(node, by);

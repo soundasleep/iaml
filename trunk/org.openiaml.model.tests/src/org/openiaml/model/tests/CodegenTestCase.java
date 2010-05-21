@@ -1094,6 +1094,12 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		// normalise
 		textContent = normalizeSpace(textContent);
 		assertEquals(text, textContent);
+		
+		// make sure it's visible
+		if (!((HtmlUnitElementImpl) match).getHtmlElement().isDisplayed()) {
+			fail("The label with text '" + text + "' was not displayed: " + match);
+		}
+		
 		return match;
 	}
 	
@@ -1243,5 +1249,16 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		}	
 		
 	}
+	
+	/**
+	 * Click the given Element. Assumed to be an HtmlUnitElementImpl.
+	 * 
+	 * @param label
+	 * @throws IOException 
+	 */
+	public void clickElement(IElement label) throws IOException {
+		((HtmlUnitElementImpl) label).getHtmlElement().click(); 
+	}
+
 
 }

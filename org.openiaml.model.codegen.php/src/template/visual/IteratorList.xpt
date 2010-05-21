@@ -68,9 +68,14 @@ if (defined('ITERATOR_LIST_«safeName()»_UPDATED')) {
 	// expand the contents for each children, up to the limit of 
 	// the iterator; some of these won't be set
 	$iterator_«safeName()» = 0;
-	function get_list_iterator_index_«safeName()»() {
-		global $iterator_«safeName()»;
-		return $iterator_«safeName()»;
+
+	// a hack to prevent the function from being created multiple times
+	// should be refactored into a singleton, or likewise
+	if (!function_exists('get_list_iterator_index_«safeName()»')) {
+		function get_list_iterator_index_«safeName()»() {
+			global $iterator_«safeName()»;
+			return $iterator_«safeName()»;
+		}
 	}
 	for ($iterator_«safeName()» = 0; $iterator_«safeName()» < $limit; $iterator_«safeName()»++) {
 		

@@ -80,6 +80,20 @@
 			«ELSE»
 			return cached_result_«safeName()»();
 			«ENDIF»
+		«ELSEIF model::Changeable.isInstance(eContainer)»
+			«LET (model::Changeable) eContainer AS changeable»
+			«IF name == "empty"»
+			return !(
+				«EXPAND template::operations::Parameters::isSetParameter(php) FOR changeable.fieldValue»
+				&& («EXPAND template::operations::Parameters::callParameterValue(php, false) FOR changeable.fieldValue»));
+			«ELSEIF name == "not empty"»
+			return 
+				«EXPAND template::operations::Parameters::isSetParameter(php) FOR changeable.fieldValue»
+				&& («EXPAND template::operations::Parameters::callParameterValue(php, false) FOR changeable.fieldValue»);
+			«ELSE»
+				«throwException("Unknown primitive condition: '" + name + "'")»
+			«ENDIF»
+			«ENDLET»
 		«ELSE»
 			«throwException("Unknown primitive condition: '" + name + "'")»
 		«ENDIF»

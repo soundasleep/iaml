@@ -159,6 +159,24 @@ function execute_queued_url(url, counter, function_queue) {
 		      						document.getElementById(element_id).innerHTML = value;
 		      						break;
 
+		      					case "set_visibility":
+		      						if (bits.length != 3) {
+		      							throw new IamlJavascriptException("'set_visibility' instruction called with incorrect number of arguments: expected 3, found " + bits.length);
+		      						}
+		      						var element_id = decodeURIComponent(bits[1]);
+		      						var value = decodeURIComponent(bits[2]);
+		      						debug("[instruction] set visibility(" + element_id + ")");
+		      						if (!document.getElementById(element_id))
+		      							throw new IamlJavascriptException("No such element '" + element_id + "'");
+		      						if (value === "true") {
+		      							document.getElementById(element_id).style.display = "";
+		      						} else if (value == "false") {
+		      							document.getElementById(element_id).style.display = "none";
+		      						} else {
+		      							throw new IamlJavascriptException("Unexpected visibility '" + value + "'");
+		      						}
+		      						break;
+
 		      					case "set_map_point":
 		      						if (bits.length != 3) {
 		      							throw new IamlJavascriptException("'set_map_point' instruction called with incorrect number of arguments: expected 3, found " + bits.length);

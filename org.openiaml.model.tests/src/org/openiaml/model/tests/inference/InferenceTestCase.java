@@ -78,6 +78,7 @@ import org.openiaml.model.model.visual.IteratorList;
 import org.openiaml.model.model.visual.Label;
 import org.openiaml.model.model.visual.Map;
 import org.openiaml.model.model.visual.MapPoint;
+import org.openiaml.model.model.wires.AutocompleteWire;
 import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ConditionEdgeDestination;
 import org.openiaml.model.model.wires.ConditionEdgesSource;
@@ -1099,6 +1100,16 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		assertEquals(1, x.size());
 		SyncWire sw = (SyncWire) x.iterator().next();
 		return sw;
+	}
+	
+	/**
+	 * Assert there exists only one unidirectional AutocompleteWire between
+	 * the given elements, with any name.
+	 *
+	 * @return The element found
+	 */
+	public AutocompleteWire assertHasAutocompleteWire(EObject container, WireSource from, WireDestination to) throws JaxenException {
+		return (AutocompleteWire) assertHasWireFromTo(container, from, to, AutocompleteWire.class, ALL);
 	}
 	
 	/**

@@ -5,7 +5,7 @@
       <wires xsi:type="iaml.wires:AutocompleteWire" id="wires.128b8d998ba.8" name="autocomplete" from="domain.128b8d998ca.25" to="visual.128b8d998aa.21" match="model.128b8d997ff.1e"/>
       <selectEdges id="domain.128b928aef5.2d" from="domain.128b8d998ca.25" to="domain.128b8d998ca.17"/>
     </elements>
-    <children xsi:type="iaml.visual:Label" inWires="wires.128b8d998ba.8" id="visual.128b8d998aa.21" name="selected email">
+    <children xsi:type="iaml.visual:Label" inWires="wires.128b8d998ba.8" id="visual.128b8d998aa.21" name="email">
       <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlEmail;XSDSimpleTypeDefinition=3"/>
     </children>
   </scopes>

@@ -1,0 +1,342 @@
+/**
+ * Rules related to AutocompleteWires.
+ */
+package org.openiaml.model.drools.rules.autocomplete_wires
+
+#list any import classes here.
+import org.openiaml.model.drools.*;
+
+import org.openiaml.model.inference.*;
+import org.openiaml.model.datatypes.*;
+import org.openiaml.model.model.*;
+import org.openiaml.model.model.impl.*;
+import org.openiaml.model.model.wires.*;
+import org.openiaml.model.model.visual.*;
+import org.openiaml.model.model.operations.*;
+import org.openiaml.model.model.scopes.*;
+import org.openiaml.model.model.components.*;
+import org.openiaml.model.model.users.*;
+import org.openiaml.model.model.domain.*;
+
+#declare any global variables here
+global OverridableCreateElementsHelper handler;
+global DroolsInsertionQueue queue;
+global DroolsHelperFunctions functions;
+
+rule "Create an input field for Autocomplete"
+	when
+		container : Frame ( )
+		target : VisibleThing ( )
+		iterator : DomainIterator ( )
+		
+		attribute : DomainAttribute ( )
+		
+		wire : AutocompleteWire ( from == iterator, to == target, match == attribute )
+		
+		not ( VisibleThing ( eContainer == container, eval (functions.getAutocompleteInputName(attribute).equals(name)) ) )
+		
+		eval ( handler.veto( wire ))
+		
+	then
+		InputTextField text = handler.generatedInputTextField(wire, container);
+		handler.setName(text, functions.getAutocompleteInputName(attribute));
+		queue.add(text, drools);
+		
+end
+
+rule "Connect parameter for input field for Autocomplete"
+	when
+		container : Frame ( )
+		target : VisibleThing ( )
+		iterator : DomainIterator ( )
+		
+		attribute : DomainAttribute ( )
+		
+		wire : AutocompleteWire ( from == iterator, to == target, match == attribute )
+		
+		text : InputTextField ( eContainer == container, eval (functions.getAutocompleteInputName(attribute).equals(name)) ) 
+		fieldValue : Property ( text.fieldValue == fieldValue )
+		
+		not ( ParameterEdge ( from == fieldValue, to == iterator ) )
+		
+		eval ( handler.veto( wire ))
+		
+	then
+		ParameterEdge param = handler.generatedParameterEdge(wire, text, fieldValue, iterator);
+		handler.setName(param, attribute.getName());
+		queue.add(param, drools);
+		
+end
+
+rule "Update DomainIterator query if it is not set"
+	when
+		container : Frame ( )
+		target : VisibleThing ( )
+		iterator : DomainIterator ( )
+		
+		attribute : DomainAttribute ( )
+		
+		wire : AutocompleteWire ( from == iterator, to == target, match == attribute )
+	
+		eval ( !functions.getAutocompleteIteratorQuery(wire).equals(iterator.getQuery()) )
+				
+		eval ( handler.veto( wire ))
+		
+	then
+		handler.setQuery(iterator, functions.getAutocompleteIteratorQuery(wire));
+	
+end
+
+rule "Input field for Autocomplete should update instantly"
+	when
+		container : Frame ( )
+		target : VisibleThing ( )
+		iterator : DomainIterator ( )
+		
+		attribute : DomainAttribute ( )
+		
+		wire : AutocompleteWire ( from == iterator, to == target, match == attribute )
+		
+		text : InputTextField ( eContainer == container, eval (functions.getAutocompleteInputName(attribute).equals(name)) ) 
+	
+		onInput : EventTrigger ( text.onInput == onInput )
+		currentInput : Property ( text.currentInput == currentInput )
+		
+		updateOperation : Operation ( eContainer == text, name == "update" )
+		
+		not ( RunAction ( from == onInput, to == updateOperation ))
+		
+		eval ( handler.veto( wire ))
+		
+	then
+		RunAction run = handler.generatedRunAction(wire, text, onInput, updateOperation);
+		handler.setName(run, "run");
+		queue.add(run, drools);
+		
+		// add a parameter
+		ParameterEdge param = handler.generatedParameterEdge(wire, text, currentInput, run);
+		queue.add(param, drools);
+		
+end
+
+rule "Create IteratorList"
+	when
+		container : Frame ( )
+		target : VisibleThing ( )
+		iterator : DomainIterator ( )
+		
+		attribute : DomainAttribute ( )
+		
+		wire : AutocompleteWire ( from == iterator, to == target, match == attribute )
+		
+		not ( list : IteratorList ( eContainer == container, name == iterator.name ) )
+		
+		eval ( handler.veto( wire ))
+	
+	then
+		IteratorList list = handler.generatedIteratorList(wire, container);
+		handler.setName(list, iterator.getName());
+		queue.add(list, drools);
+		
+		// connected by SetWire
+		SetWire set = handler.generatedSetWire(wire, iterator, iterator, list);
+		handler.setName(set, "autocomplete set");
+		queue.add(set, drools);
+	
+end
+
+rule "IteratorList labels update the target of the Autocomplete Wire"
+	when
+		attribute : DomainAttribute ( )
+		container : Frame ( )
+		iterator : DomainIterator ( )
+		
+		# VisibleThing with the same name as the given attribute
+		target : VisibleThing ( name == attribute.name )
+		updateOperation : Operation ( eContainer == target, name == "update" )
+		
+		wire : AutocompleteWire ( from == iterator, to == target ) 
+		
+		# containing list
+		list : IteratorList ( eContainer == container )
+		set : SetWire ( eval ( functions.connectsSet( set, iterator, list ) ) )
+
+		# the value of the given label
+		targetLabel : VisibleThing ( eContainer == list, name == attribute.name )
+		value : Property ( targetLabel.fieldValue == value )
+			
+		# for every label within (including target label)
+		label : VisibleThing ( eContainer == list )
+		onClick : EventTrigger ( label.onClick == onClick )
+		
+		not ( RunAction ( from == onClick, to == updateOperation ))
+		
+		eval ( handler.veto( wire ))
+	
+	then
+		RunAction run = handler.generatedRunAction(wire, label, onClick, updateOperation);
+		handler.setName(run, "run");
+		queue.add(run, drools);
+		
+		ParameterEdge param = handler.generatedParameterEdge(wire, label, value, run);
+		queue.add(param, drools);
+	
+end
+
+rule "Frame.onAccess hides the IteratorList if the input is empty"
+	when
+		container : Frame ( )
+		target : VisibleThing ( )
+		iterator : DomainIterator ( )
+		
+		attribute : DomainAttribute ( )
+		
+		wire : AutocompleteWire ( from == iterator, to == target, match == attribute )
+		
+		# input
+		input : InputTextField ( eContainer == container, eval (functions.getAutocompleteInputName(attribute).equals(name)) )
+		condition : Condition ( eContainer == input, name == "empty" ) 
+		
+		# containing list
+		list : IteratorList ( eContainer == container )
+		set : SetWire ( eval ( functions.connectsSet( set, iterator, list ) ) )
+
+		# 'hide' operation
+		hide : Operation ( eContainer == list, name == "hide" )
+		
+		# Frame.onAccess
+		onAccess : EventTrigger ( container.onAccess == onAccess )
+		
+		not ( RunAction ( from == onAccess, to == hide ))
+		
+		eval ( handler.veto( wire ))
+	
+	then
+		RunAction run = handler.generatedRunAction(wire, container, onAccess, hide);
+		handler.setName(run, "run");
+		queue.add(run, drools);
+		
+		# ConditionEdge
+		ConditionEdge edge = handler.generatedConditionEdge(wire, container, condition, run);
+		queue.add(edge, drools);
+	
+end
+
+rule "Frame.onAccess shows the IteratorList if the input is not empty"
+	when
+		container : Frame ( )
+		target : VisibleThing ( )
+		iterator : DomainIterator ( )
+		
+		attribute : DomainAttribute ( )
+		
+		wire : AutocompleteWire ( from == iterator, to == target, match == attribute )
+		
+		# input
+		input : InputTextField ( eContainer == container, eval (functions.getAutocompleteInputName(attribute).equals(name)) )
+		condition : Condition ( eContainer == input, name == "not empty" ) 
+		
+		# containing list
+		list : IteratorList ( eContainer == container )
+		set : SetWire ( eval ( functions.connectsSet( set, iterator, list ) ) )
+
+		# 'hide' operation
+		hide : Operation ( eContainer == list, name == "show" )
+		
+		# Frame.onAccess
+		onAccess : EventTrigger ( container.onAccess == onAccess )
+		
+		not ( RunAction ( from == onAccess, to == hide ))
+		
+		eval ( handler.veto( wire ))
+	
+	then
+		RunAction run = handler.generatedRunAction(wire, container, onAccess, hide);
+		handler.setName(run, "run");
+		queue.add(run, drools);
+		
+		# ConditionEdge
+		ConditionEdge edge = handler.generatedConditionEdge(wire, container, condition, run);
+		queue.add(edge, drools);
+	
+end
+
+rule "Input.onChange hides the IteratorList if the input is empty"
+	when
+		container : Frame ( )
+		target : VisibleThing ( )
+		iterator : DomainIterator ( )
+		
+		attribute : DomainAttribute ( )
+		
+		wire : AutocompleteWire ( from == iterator, to == target, match == attribute )
+		
+		# input
+		input : InputTextField ( eContainer == container, eval (functions.getAutocompleteInputName(attribute).equals(name)) )
+		condition : Condition ( eContainer == input, name == "empty" ) 
+		
+		# containing list
+		list : IteratorList ( eContainer == container )
+		set : SetWire ( eval ( functions.connectsSet( set, iterator, list ) ) )
+
+		# 'hide' operation
+		hide : Operation ( eContainer == list, name == "hide" )
+		
+		# Frame.onAccess
+		onChange : EventTrigger ( input.onChange == onChange )
+		
+		not ( RunAction ( from == onChange, to == hide ))
+		
+		eval ( handler.veto( wire ))
+	
+	then
+		RunAction run = handler.generatedRunAction(wire, container, onChange, hide);
+		handler.setName(run, "run");
+		queue.add(run, drools);
+		
+		# ConditionEdge
+		ConditionEdge edge = handler.generatedConditionEdge(wire, container, condition, run);
+		queue.add(edge, drools);
+	
+end
+
+
+rule "Input.onChange shows the IteratorList if the input is not empty"
+	when
+		container : Frame ( )
+		target : VisibleThing ( )
+		iterator : DomainIterator ( )
+		
+		attribute : DomainAttribute ( )
+		
+		wire : AutocompleteWire ( from == iterator, to == target, match == attribute )
+		
+		# input
+		input : InputTextField ( eContainer == container, eval (functions.getAutocompleteInputName(attribute).equals(name)) )
+		condition : Condition ( eContainer == input, name == "not empty" ) 
+		
+		# containing list
+		list : IteratorList ( eContainer == container )
+		set : SetWire ( eval ( functions.connectsSet( set, iterator, list ) ) )
+
+		# 'hide' operation
+		hide : Operation ( eContainer == list, name == "show" )
+		
+		# Frame.onAccess
+		onChange : EventTrigger ( input.onChange == onChange )
+		
+		not ( RunAction ( from == onChange, to == hide ))
+		
+		eval ( handler.veto( wire ))
+	
+	then
+		RunAction run = handler.generatedRunAction(wire, container, onChange, hide);
+		handler.setName(run, "run");
+		queue.add(run, drools);
+		
+		# ConditionEdge
+		ConditionEdge edge = handler.generatedConditionEdge(wire, container, condition, run);
+		queue.add(edge, drools);
+	
+end
+

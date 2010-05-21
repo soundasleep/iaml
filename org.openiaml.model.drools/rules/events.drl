@@ -17,21 +17,6 @@ global OverridableCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
-# @inference Button A {@model Button} contains an {@model EventTrigger} named 'click'. 
-rule "Create 'click' event trigger for button"
-	when
-		f : Button( )
-		not (event : EventTrigger( f.onClick == event ))
-				
-		eval ( handler.veto( f ))
-			
-	then
-
-		EventTrigger event = handler.generatedEventTriggerOnClick(f, f);
-		queue.add(event, drools);
-		
-end
-
 /**
  * @inference Changeable,InputTextField,DomainAttribute 
  *		A {@model Changeable} thing contains an {@model EventTrigger} named 'onChange'. 

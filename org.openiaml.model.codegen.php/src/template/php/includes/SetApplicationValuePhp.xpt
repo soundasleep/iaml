@@ -180,13 +180,16 @@ echo_necessary_update_callbacks();
 «DEFINE potentialUpdateDestination FOR model::domain::DomainIterator»
 	«REM»
 		if this DomainIterator is only connected to a IteratorList,
+		and its attributes are only connected to VisibleThings within an IteratorList,
 		then don't expand the rest.
 		this also solves a crashing problem, because get_attribute_instance()
 		doesn't check that the instance actually exists (and we expect it in
 		most cases to exist).
 	«ENDREM»
 	/* DomainIterator "«this-»" */
-	«IF inWires.isEmpty && outWires.to.reject(o|model::visual::IteratorList.isInstance(o)).isEmpty»
+	«IF inWires.isEmpty && outWires.to.reject(o|model::visual::IteratorList.isInstance(o)).isEmpty
+		&& attributes.outWires.to.reject(o|model::visual::IteratorList.isInstance(o.eContainer)).isEmpty»
+		// container is only an IteratorList (or no outgoing wires)
 		«FOREACH outWires.to.typeSelect(model::visual::IteratorList) AS list»
 			// we are updating something within an IteratorList; update the entire IteratorList directly
 			if (!defined('POPULATED_ITERATOR_LIST_«safeName(list)»')) {

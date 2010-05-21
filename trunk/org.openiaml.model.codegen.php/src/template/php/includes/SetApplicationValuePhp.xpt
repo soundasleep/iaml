@@ -137,6 +137,13 @@ echo_necessary_update_callbacks();
 
 «DEFINE potentialContainerUpdates FOR model::visual::InputTextField»
 	«EXPAND potentialUpdates FOREACH outWires»
+
+	«REM»explicit value from InputTextField.fieldValue«ENDREM»
+	«IF fieldValue != null»
+		«EXPAND potentialParameterUpdates FOREACH fieldValue.outParameterEdges»
+	«ENDIF»
+	
+	«REM»implicit value from InputTextField«ENDREM»
 	«EXPAND potentialParameterUpdates FOREACH outParameterEdges»
 «ENDDEFINE»
 
@@ -187,7 +194,7 @@ echo_necessary_update_callbacks();
 		most cases to exist).
 	«ENDREM»
 	/* DomainIterator "«this-»" */
-	«IF inWires.isEmpty && outWires.to.reject(o|model::visual::IteratorList.isInstance(o)).isEmpty
+	«IF inWires.isEmpty && outWires.reject(w|model::wires::AutocompleteWire.isInstance(w)).to.reject(o|model::visual::IteratorList.isInstance(o)).isEmpty
 		&& attributes.outWires.to.reject(o|model::visual::IteratorList.isInstance(o.eContainer)).isEmpty»
 		// container is only an IteratorList (or no outgoing wires)
 		«FOREACH outWires.to.typeSelect(model::visual::IteratorList) AS list»

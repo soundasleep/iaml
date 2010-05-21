@@ -21,6 +21,8 @@ try {
 	«FOREACH allProperties().collect(e|containingFrame(e)).toSet() AS frame»
 	if ($frame_id == "«safeNameString(frame.id)-»") {
 		«EXPAND outgoingEmailValue FOREACH allProperties(this).select(p|containingFrame(p)==frame && containingEmail(p) == null)»
+		
+		«EXPAND updateVisibility FOREACH eAllContents.typeSelect(model::VisibleThing).select(p|containingFrame(p)==frame && containingEmail(p) == null)»
 	}
 	«ENDFOREACH»
 } catch (IamlRuntimeException $e) {
@@ -141,4 +143,27 @@ try {
 		«EXPAND template::visual::IteratorList::publishIteratorList(null, false) FOR (model::visual::IteratorList) eContainer»
 		$doing_iterator_list_«safeName(eContainer)» = false;
 	«ENDIF»	
+«ENDDEFINE»
+
+«DEFINE updateVisibility FOR model::VisibleThing»
+	{
+		/* VisibleThing '«escapeString(name)»' */
+	«IF containingSession() != null»
+		$hidden = require_session("«safeName(containingSession())»_«safeName()»_hidden", false);
+	«ELSE»
+		$hidden = get_application_value("«safeName()»_hidden", false);
+	«ENDIF»
+		$value = $hidden ? "false" : "true";
+
+		// pass it to the client 
+		log_message("outgoing visibility value to («safeNameString(id)»): '$value'");
+		log_message("set_visibility " 
+			. escape_parameter_string("«safeNameString(id)»")
+			. " "
+			. escape_parameter_string($value));
+		echo "\nset_visibility " 
+			. escape_parameter_string("«safeNameString(id)»")
+			. " "
+			. escape_parameter_string($value);
+	}
 «ENDDEFINE»

@@ -11,6 +11,7 @@ import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Property;
+import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.visual.Frame;
@@ -306,6 +307,33 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 			assertGenerated(assertHasConditionEdge(root, notEmpty, run));
 		}
 
+	}
+	
+	/**
+	 * When we click a result, we also reset the search text. 
+	 * 
+	 * @throws Exception
+	 */
+	public void testClickResetsFieldValue() throws Exception {
+		Frame home = assertHasFrame(root, "Home");
+		IteratorList list = assertHasIteratorList(home, "Select Contact");
+		Label targetLabel = assertHasLabel(list, "email");
+		EventTrigger onClick = targetLabel.getOnClick();
+		
+		InputTextField input = assertHasInputTextField(home, "Search by name");
+
+		Operation update = assertHasOperation(input, "update");
+		
+		RunAction run = assertHasRunAction(root, onClick, update);
+		assertGenerated(run);
+
+		StaticValue blank = assertHasStaticValue(root, "blank");
+		assertEquals(blank.getType(), BuiltinDataTypes.getTypeString());
+		assertEquals(blank.getValue(), "");
+		
+		// with the email as the parameter
+		assertGenerated(assertHasParameterEdge(root, blank, run));
+	
 	}
 
 	/**

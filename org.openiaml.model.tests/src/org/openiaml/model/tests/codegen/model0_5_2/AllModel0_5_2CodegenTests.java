@@ -27,6 +27,7 @@ public class AllModel0_5_2CodegenTests {
 		suite.addTestSuite(IteratorListSetWireSearch.class);
 		suite.addTestSuite(IteratorListSetClickResults.class);
 		suite.addTestSuite(IteratorListSearchInstant.class);
+		suite.addTestSuite(AutocompleteWireSimple.class);
 
 		return suite;
 	}

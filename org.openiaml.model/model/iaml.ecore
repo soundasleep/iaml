@@ -992,7 +992,7 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Allows a target {@model VisibleThing} to be populated by matching a created {@model InputTextField} to the source {@model DomainIterator} value, specified by the {@model AutocompleteWire#match}."/>
       </eAnnotations>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="matches" eType="#//DomainAttribute">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="match" eType="#//DomainAttribute">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="The attribute to match the autocompleted text to. In the future this may support a list of potential attributes."/>
         </eAnnotations>

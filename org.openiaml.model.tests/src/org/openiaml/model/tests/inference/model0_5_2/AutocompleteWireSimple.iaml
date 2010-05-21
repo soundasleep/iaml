@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.128b8d997ff.11">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
-    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128b8d998ca.25" name="Select Contact" outWires="wires.128b8d998ba.8" limit="3">
+    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128b8d998ca.25" name="Select Contact" outWires="wires.128b8d998ba.8" limit="3" outSelects="domain.128b928aef5.2d">
       <wires xsi:type="iaml.wires:AutocompleteWire" id="wires.128b8d998ba.8" name="autocomplete" from="domain.128b8d998ca.25" to="visual.128b8d998aa.21" match="model.128b8d997ff.1e"/>
+      <selectEdges id="domain.128b928aef5.2d" from="domain.128b8d998ca.25" to="domain.128b8d998ca.17"/>
     </elements>
     <children xsi:type="iaml.visual:Label" inWires="wires.128b8d998ba.8" id="visual.128b8d998aa.21" name="selected email">
       <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlEmail;XSDSimpleTypeDefinition=3"/>
@@ -16,7 +17,7 @@
       <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlEmail;XSDSimpleTypeDefinition=3"/>
     </attributes>
   </schemas>
-  <sources id="domain.128b8d998ca.17" name="Contacts DB" outSchemas="domain.128b8d998ca.18">
+  <sources id="domain.128b8d998ca.17" name="Contacts DB" outSchemas="domain.128b8d998ca.18" inSelects="domain.128b928aef5.2d">
     <schemaEdges id="domain.128b8d998ca.18" from="domain.128b8d998ca.17" to="domain.128b8d998ca.d"/>
   </sources>
 </iaml:InternetApplication>

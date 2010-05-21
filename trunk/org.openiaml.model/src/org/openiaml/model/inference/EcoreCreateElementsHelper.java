@@ -74,6 +74,7 @@ import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
+import org.openiaml.model.model.visual.IteratorList;
 import org.openiaml.model.model.visual.Label;
 import org.openiaml.model.model.visual.MapPoint;
 import org.openiaml.model.model.visual.VisualPackage;
@@ -559,6 +560,12 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		Button button = (Button) createElement( container, VisualPackage.eINSTANCE.getButton(), VisualPackage.eINSTANCE.getFrame_Children() );
 		setGeneratedBy(button, by);
 		return button;
+	}
+	
+	public IteratorList generatedIteratorList(GeneratesElements by, Frame container) throws InferenceException {
+		IteratorList list = (IteratorList) createElement( container, VisualPackage.eINSTANCE.getIteratorList(), VisualPackage.eINSTANCE.getFrame_Children() );
+		setGeneratedBy(list, by);
+		return list;
 	}
 	
 	public MapPoint generatedMapPoint(GeneratesElements by, VisibleThing container) throws InferenceException {

@@ -29,6 +29,7 @@ import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.users.Role;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.Label;
+import org.openiaml.model.model.wires.AutocompleteWire;
 import org.openiaml.model.model.wires.DetailWire;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
@@ -452,6 +453,14 @@ public class DroolsHelperFunctions {
 	
 	public String getEntryGateFrameNameForProvides(Label label) {
 		return "Provide " + label.getName();
+	}
+	
+	public String getAutocompleteInputName(DomainAttribute attribute) {
+		return "Search by " + attribute.getName();
+	}
+	
+	public String getAutocompleteIteratorQuery(AutocompleteWire wire) {
+		return "matches(" + wire.getMatch().getName() + ", :" + wire.getMatch().getName() + ")";
 	}
 
 }

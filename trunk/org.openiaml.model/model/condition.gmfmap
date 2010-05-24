@@ -288,6 +288,54 @@
           href="iaml.gmfgraph#CastNode"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//ContainsConditions/conditions"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//PrimitiveCondition"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( PrimitiveCondition )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveConditionName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveConditionParentName"/>
+      </labelMappings>
+      <diagramNode
+          href="iaml.gmfgraph#PrimitiveCondition"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//ContainsConditions/conditions"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//CompositeCondition"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( CompositeCondition )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#CompositeConditionName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#CompositeConditionParentName"/>
+      </labelMappings>
+      <diagramNode
+          href="iaml.gmfgraph#CompositeCondition"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//DataFlowEdge"/>
@@ -330,6 +378,30 @@
     <linkMetaFeature
         xsi:type="ecore:EReference"
         href="iaml.ecore#//ExecutionEdge/to"/>
+  </links>
+  <links>
+    <domainMetaElement
+        href="iaml.ecore#//wires/ConditionEdge"/>
+    <labelMappings
+        xsi:type="gmfmap:FeatureLabelMapping">
+      <diagramLabel
+          href="iaml.gmfgraph#ConditionEdgeName"/>
+      <features
+          href="iaml.ecore#//NamedElement/name"/>
+    </labelMappings>
+    <containmentFeature
+        href="iaml.ecore#//ContainsWires/conditionEdges"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="condition.gmftool#//@palette/@tools.2/@tools.2"/>
+    <diagramLink
+        href="iaml.gmfgraph#ConditionEdge"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//wires/ConditionEdge/from"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//wires/ConditionEdge/to"/>
   </links>
   <diagram>
     <diagramCanvas

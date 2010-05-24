@@ -153,7 +153,7 @@ try {
 	«ELSE»
 		$hidden = get_application_value("«safeName()»_hidden", 0);
 	«ENDIF»
-		$value = $hidden ? "false" : "true";
+		$value = make_into_boolean($hidden) ? "false" : "true";
 
 		// pass it to the client 
 		log_message("outgoing visibility value to («safeNameString(id)»): '$value'");

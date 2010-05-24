@@ -13,7 +13,7 @@
  *		as part of that Button.
  */
 «DEFINE renderButton(model::visual::Frame currentFrame) FOR model::visual::Button-»
-	<input type="submit" id="button_«safeNameString(id)-»" value="«buttonName()»"
+	<input type="submit" id="«safeNameString(id)-»" value="«buttonName()»"
 		«EXPAND EventHandlers::getInlineClickJavascript(currentFrame)» 
 		«EXPAND EventHandlers::getInlineChangeJavascript(currentFrame)» 
 		>

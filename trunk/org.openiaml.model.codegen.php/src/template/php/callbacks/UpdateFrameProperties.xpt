@@ -149,9 +149,9 @@ try {
 	{
 		/* VisibleThing '«escapeString(name)»' */
 	«IF containingSession() != null»
-		$hidden = require_session("«safeName(containingSession())»_«safeName()»_hidden", false);
+		$hidden = require_session("«safeName(containingSession())»_«safeName()»_hidden", 0);
 	«ELSE»
-		$hidden = get_application_value("«safeName()»_hidden", false);
+		$hidden = get_application_value("«safeName()»_hidden", 0);
 	«ENDIF»
 		$value = $hidden ? "false" : "true";
 

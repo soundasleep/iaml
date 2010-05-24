@@ -14,7 +14,7 @@
       <labelMappings readOnly="true">
         <diagramLabel href="iaml.gmfgraph#EventTriggerParentName"/>
       </labelMappings>
-      <tool href="iterator.gmftool#//@palette/@tools.0/@tools.0" xsi:type="gmftool:CreationTool"/>
+      <tool href="iterator.gmftool#//@palette/@tools.3/@tools.1" xsi:type="gmftool:CreationTool"/>
       <diagramNode href="iaml.gmfgraph#EventTrigger"/>
     </ownedChild>
   </nodes>
@@ -40,7 +40,7 @@
       <labelMappings readOnly="true">
         <diagramLabel href="iaml.gmfgraph#PropertyType"/>
       </labelMappings>
-      <tool href="iterator.gmftool#//@palette/@tools.0/@tools.6" xsi:type="gmftool:CreationTool"/>
+      <tool href="iterator.gmftool#//@palette/@tools.3/@tools.11" xsi:type="gmftool:CreationTool"/>
       <diagramNode href="iaml.gmfgraph#Property"/>
     </ownedChild>
   </nodes>
@@ -82,7 +82,7 @@
       <labelMappings readOnly="true">
         <diagramLabel href="iaml.gmfgraph#CompositeOperationParentName"/>
       </labelMappings>
-      <tool href="iterator.gmftool#//@palette/@tools.0/@tools.2" xsi:type="gmftool:CreationTool"/>
+      <tool href="iterator.gmftool#//@palette/@tools.0/@tools.1" xsi:type="gmftool:CreationTool"/>
       <diagramNode href="iaml.gmfgraph#CompositeOperation"/>
     </ownedChild>
   </nodes>
@@ -98,8 +98,24 @@
       <labelMappings readOnly="true">
         <diagramLabel href="iaml.gmfgraph#PrimitiveOperationParentName"/>
       </labelMappings>
-      <tool href="iterator.gmftool#//@palette/@tools.0/@tools.1" xsi:type="gmftool:CreationTool"/>
+      <tool href="iterator.gmftool#//@palette/@tools.0/@tools.0" xsi:type="gmftool:CreationTool"/>
       <diagramNode href="iaml.gmfgraph#PrimitiveOperation"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature href="iaml.ecore#//ContainsConditions/conditions"/>
+    <ownedChild>
+      <domainMetaElement href="iaml.ecore#//CompositeCondition"/>
+      <domainSpecialization body="self.oclIsTypeOf( CompositeCondition )"/>
+      <labelMappings xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel href="iaml.gmfgraph#CompositeConditionName"/>
+        <features href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings readOnly="true">
+        <diagramLabel href="iaml.gmfgraph#CompositeConditionParentName"/>
+      </labelMappings>
+      <tool href="iterator.gmftool#//@palette/@tools.0/@tools.4" xsi:type="gmftool:CreationTool"/>
+      <diagramNode href="iaml.gmfgraph#CompositeCondition"/>
     </ownedChild>
   </nodes>
   <nodes>
@@ -113,7 +129,7 @@
       <labelMappings readOnly="true">
         <diagramLabel href="iaml.gmfgraph#DomainAttributeInstanceType"/>
       </labelMappings>
-      <tool href="iterator.gmftool#//@palette/@tools.0/@tools.4" xsi:type="gmftool:CreationTool"/>
+      <tool href="iterator.gmftool#//@palette/@tools.0/@tools.2" xsi:type="gmftool:CreationTool"/>
       <diagramNode href="iaml.gmfgraph#DomainAttributeInstance"/>
     </ownedChild>
   </nodes>
@@ -147,7 +163,7 @@
       <labelMappings readOnly="true">
         <diagramLabel href="iaml.gmfgraph#PrimitiveOperationParentName"/>
       </labelMappings>
-      <tool href="iterator.gmftool#//@palette/@tools.3/@tools.1" xsi:type="gmftool:CreationTool"/>
+      <tool href="iterator.gmftool#//@palette/@tools.3/@tools.2" xsi:type="gmftool:CreationTool"/>
       <diagramNode href="iaml.gmfgraph#PrimitiveOperation"/>
     </ownedChild>
   </nodes>
@@ -163,7 +179,7 @@
       <labelMappings readOnly="true">
         <diagramLabel href="iaml.gmfgraph#PrimitiveOperationParentName"/>
       </labelMappings>
-      <tool href="iterator.gmftool#//@palette/@tools.3/@tools.2" xsi:type="gmftool:CreationTool"/>
+      <tool href="iterator.gmftool#//@palette/@tools.3/@tools.3" xsi:type="gmftool:CreationTool"/>
       <diagramNode href="iaml.gmfgraph#PrimitiveOperation"/>
     </ownedChild>
   </nodes>
@@ -179,7 +195,7 @@
       <labelMappings readOnly="true">
         <diagramLabel href="iaml.gmfgraph#PrimitiveOperationParentName"/>
       </labelMappings>
-      <tool href="iterator.gmftool#//@palette/@tools.3/@tools.3" xsi:type="gmftool:CreationTool"/>
+      <tool href="iterator.gmftool#//@palette/@tools.3/@tools.4" xsi:type="gmftool:CreationTool"/>
       <diagramNode href="iaml.gmfgraph#PrimitiveOperation"/>
     </ownedChild>
   </nodes>
@@ -195,7 +211,7 @@
       <labelMappings readOnly="true">
         <diagramLabel href="iaml.gmfgraph#PrimitiveOperationParentName"/>
       </labelMappings>
-      <tool href="iterator.gmftool#//@palette/@tools.3/@tools.4" xsi:type="gmftool:CreationTool"/>
+      <tool href="iterator.gmftool#//@palette/@tools.3/@tools.5" xsi:type="gmftool:CreationTool"/>
       <diagramNode href="iaml.gmfgraph#PrimitiveOperation"/>
     </ownedChild>
   </nodes>
@@ -211,7 +227,7 @@
       <labelMappings readOnly="true">
         <diagramLabel href="iaml.gmfgraph#PrimitiveConditionParentName"/>
       </labelMappings>
-      <tool href="iterator.gmftool#//@palette/@tools.3/@tools.5" xsi:type="gmftool:CreationTool"/>
+      <tool href="iterator.gmftool#//@palette/@tools.3/@tools.6" xsi:type="gmftool:CreationTool"/>
       <diagramNode href="iaml.gmfgraph#PrimitiveCondition"/>
     </ownedChild>
   </nodes>
@@ -227,7 +243,7 @@
       <labelMappings readOnly="true">
         <diagramLabel href="iaml.gmfgraph#PrimitiveConditionParentName"/>
       </labelMappings>
-      <tool href="iterator.gmftool#//@palette/@tools.3/@tools.6" xsi:type="gmftool:CreationTool"/>
+      <tool href="iterator.gmftool#//@palette/@tools.3/@tools.7" xsi:type="gmftool:CreationTool"/>
       <diagramNode href="iaml.gmfgraph#PrimitiveCondition"/>
     </ownedChild>
   </nodes>
@@ -243,7 +259,7 @@
       <labelMappings readOnly="true">
         <diagramLabel href="iaml.gmfgraph#PrimitiveConditionParentName"/>
       </labelMappings>
-      <tool href="iterator.gmftool#//@palette/@tools.3/@tools.7" xsi:type="gmftool:CreationTool"/>
+      <tool href="iterator.gmftool#//@palette/@tools.3/@tools.8" xsi:type="gmftool:CreationTool"/>
       <diagramNode href="iaml.gmfgraph#PrimitiveCondition"/>
     </ownedChild>
   </nodes>
@@ -266,7 +282,7 @@
       <labelMappings readOnly="true">
         <diagramLabel href="iaml.gmfgraph#PropertyType"/>
       </labelMappings>
-      <tool href="iterator.gmftool#//@palette/@tools.3/@tools.8" xsi:type="gmftool:CreationTool"/>
+      <tool href="iterator.gmftool#//@palette/@tools.3/@tools.10" xsi:type="gmftool:CreationTool"/>
       <diagramNode href="iaml.gmfgraph#Property"/>
     </ownedChild>
   </nodes>
@@ -298,7 +314,7 @@
       <labelMappings readOnly="true">
         <diagramLabel href="iaml.gmfgraph#PrimitiveConditionParentName"/>
       </labelMappings>
-      <tool href="iterator.gmftool#//@palette/@tools.0/@tools.5" xsi:type="gmftool:CreationTool"/>
+      <tool href="iterator.gmftool#//@palette/@tools.3/@tools.9" xsi:type="gmftool:CreationTool"/>
       <diagramNode href="iaml.gmfgraph#PrimitiveCondition"/>
     </ownedChild>
   </nodes>

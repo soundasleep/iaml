@@ -11,19 +11,6 @@
         description="Model Elements">
       <tools
           xsi:type="gmftool:CreationTool"
-          title="EventTrigger [onChange]"
-          description="Create new EventTrigger [onChange]">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/EventTrigger.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/EventTrigger.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
           title="PrimitiveOperation"
           description="Create new PrimitiveOperation">
         <smallIcon
@@ -50,19 +37,6 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="Property"
-          description="Create new Property">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/Property.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/Property.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
           title="DomainAttributeInstance"
           description="Create new DomainAttributeInstance">
         <smallIcon
@@ -76,21 +50,8 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="PrimitiveCondition [canSave]"
-          description="Create new PrimitiveCondition [canSave]">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/PrimitiveCondition.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/PrimitiveCondition.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="Property [fieldValue]"
-          description="Create new Property [fieldValue]">
+          title="Property"
+          description="Create new Property">
         <smallIcon
             xsi:type="gmftool:BundleImage"
             path="icons/full/obj16/Property.gif"
@@ -98,6 +59,19 @@
         <largeIcon
             xsi:type="gmftool:BundleImage"
             path="icons/full/obj32/Property.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="CompositeCondition"
+          description="Create new CompositeCondition">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/CompositeCondition.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/CompositeCondition.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
     </tools>
@@ -148,6 +122,19 @@
           xsi:type="gmftool:CreationTool"
           title="EventTrigger [onIterate]"
           description="Create new EventTrigger [onIterate]">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/EventTrigger.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/EventTrigger.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="EventTrigger [onChange]"
+          description="Create new EventTrigger [onChange]">
         <smallIcon
             xsi:type="gmftool:BundleImage"
             path="icons/full/obj16/EventTrigger.gif"
@@ -250,8 +237,34 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
+          title="PrimitiveCondition [canSave]"
+          description="Create new PrimitiveCondition [canSave]">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/PrimitiveCondition.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/PrimitiveCondition.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
           title="Property [results]"
           description="Create new Property [results]">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/Property.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/Property.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Property [fieldValue]"
+          description="Create new Property [fieldValue]">
         <smallIcon
             xsi:type="gmftool:BundleImage"
             path="icons/full/obj16/Property.gif"

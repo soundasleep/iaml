@@ -164,13 +164,13 @@ function execute_queued_url(url, counter, function_queue) {
 		      							throw new IamlJavascriptException("'set_visibility' instruction called with incorrect number of arguments: expected 3, found " + bits.length);
 		      						}
 		      						var element_id = decodeURIComponent(bits[1]);
-		      						var value = decodeURIComponent(bits[2]);
+		      						var value = make_into_boolean(decodeURIComponent(bits[2]));
 		      						debug("[instruction] set visibility(" + element_id + ")");
 		      						if (!document.getElementById(element_id))
 		      							throw new IamlJavascriptException("No such element '" + element_id + "'");
-		      						if (value === "true") {
+		      						if (value) {
 		      							document.getElementById(element_id).style.display = "";
-		      						} else if (value == "false") {
+		      						} else if (!value) {
 		      							document.getElementById(element_id).style.display = "none";
 		      						} else {
 		      							throw new IamlJavascriptException("Unexpected visibility '" + value + "'");

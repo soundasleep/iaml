@@ -526,6 +526,16 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 
 	/**
 	 * Assert that the given element contains the given
+	 * IteratorList.
+	 *
+	 * @return The element found
+	 */
+	public IteratorList assertHasIteratorList(VisibleThing element, String string) throws JaxenException {
+		return (IteratorList) queryOne(element, "iaml:children[iaml:name='" + string + "']");
+	}
+
+	/**
+	 * Assert that the given element contains the given
 	 * Label.
 	 *
 	 * @return The element found

@@ -15,6 +15,7 @@ import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.visual.Frame;
+import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.IteratorList;
 import org.openiaml.model.model.visual.Label;
@@ -76,8 +77,13 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 	public void testIteratorInputNormal() throws Exception {
 		Frame home = assertHasFrame(root, "Home");
 		
+		// a containing form for the search field, and the iterator list
+		// same name as the iterator
+		InputForm containerForm = assertHasInputForm(home, "Select Contact");
+		assertGenerated(containerForm);
+
 		// an input is created to enter in a name
-		InputTextField input = assertHasInputTextField(home, "Search by name");
+		InputTextField input = assertHasInputTextField(containerForm, "Search by name");
 		assertGenerated(input);
 
 		// the query is changed to 'matches(name, :name)'
@@ -98,9 +104,10 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 	 */
 	public void testIteratorInputInstant() throws Exception {
 		Frame home = assertHasFrame(root, "Home");
-		
+		InputForm containerForm = assertHasInputForm(home, "Select Contact");
+
 		// an input is created to enter in a name
-		InputTextField input = assertHasInputTextField(home, "Search by name");
+		InputTextField input = assertHasInputTextField(containerForm, "Search by name");
 		assertGenerated(input);
 		
 		EventTrigger onInput = input.getOnInput();
@@ -133,9 +140,10 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 		
 		Frame home = assertHasFrame(root, "Home");
 		DomainIterator iterator = assertHasDomainIterator(home, "Select Contact");
+		InputForm containerForm = assertHasInputForm(home, "Select Contact");
 		
 		// same name as the iterator
-		IteratorList list = assertHasIteratorList(home, "Select Contact");
+		IteratorList list = assertHasIteratorList(containerForm, "Select Contact");
 		assertGenerated(list);
 		
 		// connected by SetWire
@@ -172,7 +180,8 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 		DomainSchema schema = assertHasDomainSchema(root, "Contacts");
 		DomainAttribute aemail = assertHasDomainAttribute(schema, "email");
 		Frame home = assertHasFrame(root, "Home");
-		IteratorList list = assertHasIteratorList(home, "Select Contact");
+		InputForm containerForm = assertHasInputForm(home, "Select Contact");
+		IteratorList list = assertHasIteratorList(containerForm, "Select Contact");
 		Label lname = assertHasLabel(list, "name");
 		Label lemail = assertHasLabel(list, "email");
 		
@@ -210,7 +219,8 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 		DomainSchema schema = assertHasDomainSchema(root, "Contacts");
 		DomainAttribute aemail = assertHasDomainAttribute(schema, "email");
 		Frame home = assertHasFrame(root, "Home");
-		IteratorList list = assertHasIteratorList(home, "Select Contact");
+		InputForm containerForm = assertHasInputForm(home, "Select Contact");
+		IteratorList list = assertHasIteratorList(containerForm, "Select Contact");
 		Label lemail = assertHasLabel(list, "email");
 		
 		// for 'name' label
@@ -243,8 +253,9 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 	public void testFrameOnAccessHidesIteratorList() throws Exception {
 
 		Frame home = assertHasFrame(root, "Home");
-		IteratorList list = assertHasIteratorList(home, "Select Contact");
-		InputTextField input = assertHasInputTextField(home, "Search by name");
+		InputForm containerForm = assertHasInputForm(home, "Select Contact");
+		IteratorList list = assertHasIteratorList(containerForm, "Select Contact");
+		InputTextField input = assertHasInputTextField(containerForm, "Search by name");
 		
 		EventTrigger onAccess = home.getOnAccess();
 		assertGenerated(onAccess);
@@ -286,8 +297,9 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 	 */
 	public void testOnChangeShowsList() throws Exception {
 		Frame home = assertHasFrame(root, "Home");
-		IteratorList list = assertHasIteratorList(home, "Select Contact");
-		InputTextField input = assertHasInputTextField(home, "Search by name");
+		InputForm containerForm = assertHasInputForm(home, "Select Contact");
+		IteratorList list = assertHasIteratorList(containerForm, "Select Contact");
+		InputTextField input = assertHasInputTextField(containerForm, "Search by name");
 		
 		EventTrigger onChange = input.getOnChange();
 
@@ -316,11 +328,12 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 	 */
 	public void testClickResetsFieldValue() throws Exception {
 		Frame home = assertHasFrame(root, "Home");
-		IteratorList list = assertHasIteratorList(home, "Select Contact");
+		InputForm containerForm = assertHasInputForm(home, "Select Contact");
+		IteratorList list = assertHasIteratorList(containerForm, "Select Contact");
 		Label targetLabel = assertHasLabel(list, "email");
 		EventTrigger onClick = targetLabel.getOnClick();
 		
-		InputTextField input = assertHasInputTextField(home, "Search by name");
+		InputTextField input = assertHasInputTextField(containerForm, "Search by name");
 
 		Operation update = assertHasOperation(input, "update");
 		

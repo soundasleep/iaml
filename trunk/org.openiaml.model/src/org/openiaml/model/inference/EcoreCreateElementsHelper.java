@@ -574,6 +574,12 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return list;
 	}
 	
+	public IteratorList generatedIteratorList(GeneratesElements by, VisibleThing container) throws InferenceException {
+		IteratorList list = (IteratorList) createElement( container, VisualPackage.eINSTANCE.getIteratorList(), ModelPackage.eINSTANCE.getVisibleThing_Children() );
+		setGeneratedBy(list, by);
+		return list;
+	}
+	
 	public MapPoint generatedMapPoint(GeneratesElements by, VisibleThing container) throws InferenceException {
 		MapPoint field = (MapPoint) createElement( container, VisualPackage.eINSTANCE.getMapPoint(), ModelPackage.eINSTANCE.getVisibleThing_Children() );
 		setGeneratedBy(field, by);

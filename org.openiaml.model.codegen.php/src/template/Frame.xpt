@@ -146,6 +146,15 @@ log_message("«id».php: Session data: " . print_r($_SESSION, true));
 log_message("«name».php: User browsing finished");
 ?>
 	«ENDFILE»
+	
+/**
+ * Render CSS for the frame, if the frame is in HTML mode.
+ */
+«IF render.toString() == "HTML"»
+	«FILE "output/"+safeNameString(id)+".css"-»
+		«EXPAND template::renders::GeneratedCss::generatedCSS»
+	«ENDFILE»
+«ENDIF»	
 «ENDDEFINE»
 
 /**

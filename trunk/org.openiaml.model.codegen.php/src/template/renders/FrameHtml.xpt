@@ -18,6 +18,7 @@
 <head>
 	<title>«frameTitle()»</title>
 	<link rel="stylesheet" type="text/css" href="<?php echo IAML_RUNTIME_WEB; ?>css/default.css">
+	<link rel="stylesheet" type="text/css" href="«safeName()».css">
 	<link rel="stylesheet" type="text/css" href="<?php echo CUSTOM_WEB_PATH; ?>default.css">
 	<script language="Javascript" type="application/javascript">
 	/* <![CDATA[ */

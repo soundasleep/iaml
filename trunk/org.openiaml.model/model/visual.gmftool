@@ -76,6 +76,19 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
+          title="PrimitiveCondition"
+          description="Create new PrimitiveCondition">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/PrimitiveCondition.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/PrimitiveCondition.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
           title="CompositeCondition"
           description="Create new CompositeCondition">
         <smallIcon

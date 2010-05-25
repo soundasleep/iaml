@@ -83,9 +83,9 @@
 		«ELSEIF model::Changeable.isInstance(eContainer)»
 			«LET (model::Changeable) eContainer AS changeable»
 			«IF name == "empty"»
-			return !(
-				«EXPAND template::operations::Parameters::isSetParameter(php) FOR changeable.fieldValue»
-				&& («EXPAND template::operations::Parameters::callParameterValue(php, false) FOR changeable.fieldValue»));
+			return
+				!(«EXPAND template::operations::Parameters::isSetParameter(php) FOR changeable.fieldValue»)
+				|| !(«EXPAND template::operations::Parameters::callParameterValue(php, false) FOR changeable.fieldValue»);
 			«ELSEIF name == "not empty"»
 			return 
 				«EXPAND template::operations::Parameters::isSetParameter(php) FOR changeable.fieldValue»

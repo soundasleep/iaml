@@ -244,13 +244,15 @@
 			«IF model::DomainAttributeInstance.isInstance(eContainer)»
 				«REM»from a DomainAttributeInstance«ENDREM»
 				«EXPAND RemoteParameter::remoteValueIsSet(php, this) FOR (model::DomainAttributeInstance) eContainer-»
-			«ELSEIF model::visual::InputTextField.isInstance(eContainer) || 
-				model::visual::Label.isInstance(eContainer) ||
-				model::visual::Map.isInstance(eContainer) ||
-				model::visual::MapPoint.isInstance(eContainer)»
-				«REM»this is a text field stored outside of the current frame«ENDREM»
-				/* if you _don't_ want an operation to use a cached value of a remote Input Text Field/Label, place the operation _outside_ of its containing frame. */
-				<?php echo («EXPAND isSetParameter(true) FOR this») ? "true" : "false"; ?>
+			«ELSEIF model::VisibleThing.isInstance(eContainer)»
+				«REM»this is an inline call, thus the ternary operator«ENDREM»
+				(on_current_frame(get_frame_id(), "«safeName()»") ?
+					typeof («EXPAND dataSourceOnFrame FOR eContainer») !== "undefined" 
+					: (
+						«REM»this is a text field stored outside of the current frame«ENDREM»
+						/* if you _don't_ want an operation to use a cached value of a remote Input Text Field/Label, place the operation _outside_ of its containing frame. */
+						<?php echo («EXPAND isSetParameter(true) FOR this») ? "true" : "false"; ?> )
+					)
 			«ELSE»
 				«throwException("Unknown remote is set eContainer: " + eContainer + " for " + this)»
 			«ENDIF»

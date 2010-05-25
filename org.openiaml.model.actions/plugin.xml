@@ -22,6 +22,13 @@
 		<!-- more than one popup extension is displayed in reverse order:
 		     a documented bug of eclipse -->
          <action
+               class="org.openiaml.model.custom.actions.RewriteElementIDs"
+               id="org.openiaml.model.diagram.custom.action8"
+               label="Rewrite generated element I&amp;Ds"
+               menubarPath="org.openiaml.model.diagram.custom.menu1/group">
+         </action>
+         
+		<action
                class="org.openiaml.model.custom.actions.ExportInferredDotGraphAction"
                id="org.openiaml.model.diagram.custom.action7"
                label="E&amp;xport completed model to DOT"

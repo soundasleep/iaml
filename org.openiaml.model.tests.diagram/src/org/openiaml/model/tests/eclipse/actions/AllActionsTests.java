@@ -26,6 +26,7 @@ public class AllActionsTests {
         suite.addTestSuite(NonContainedEdges.class);
         suite.addTestSuite(RemovePhantomEdges.class);
         suite.addTestSuite(GenerateCodeActionTest.class);
+        suite.addTestSuite(RewriteGeneratedIDsTest.class);
 
         return suite; 
    }

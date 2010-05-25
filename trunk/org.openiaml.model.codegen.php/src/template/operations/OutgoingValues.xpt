@@ -22,6 +22,12 @@
 	«EXPAND outgoingValue(container) FOR to»
 «ENDDEFINE»
 
+/**
+ * AutocompleteWires are not used for any input/output, only for inference and CSS.
+ */
+«DEFINE outgoingValues(model::NamedElement container) FOR model::wires::AutocompleteWire»
+«ENDDEFINE»
+
 /* ignore: todo refactor */
 «DEFINE outgoingValue(model::NamedElement container) FOR model::WireSource»
 «ENDDEFINE»

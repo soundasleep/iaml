@@ -122,7 +122,8 @@
 
 «DEFINE setPath(String path) FOR model::InternetApplication»
 define("ROOT_PATH", "«path»");
-define("CUSTOM_PATH", ROOT_PATH . "../");
+define("CUSTOM_PATH", ROOT_PATH . "../");	// the local path to extensions (e.g. PHP templates)
+define("CUSTOM_WEB_PATH", "../web/");	// the remote path to extensions (e.g. additional CSS/JS files)
 «ENDDEFINE»
 
 «DEFINE typeJavascript FOR model::InternetApplication»

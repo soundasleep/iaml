@@ -50,7 +50,7 @@ public class TextFieldAnnotation extends CodegenTestCase {
 		
 		{
 			String target = getLabelIDForText("update annotation");
-			assertLabeledFieldEquals(target, "");	// shouldn't this be 'hello, world!'?
+			assertLabeledFieldEquals(target, "hello, world!");
 			setLabeledFormElementField(target, "a new annotation");
 		}
 		
@@ -79,7 +79,7 @@ public class TextFieldAnnotation extends CodegenTestCase {
 		// update the annotation
 		{
 			String target = getLabelIDForText("update annotation");
-			assertLabeledFieldEquals(target, "");	// shouldn't this be 'hello, world!'?
+			assertLabeledFieldEquals(target, "hello, world!");
 			setLabeledFormElementField(target, "a new annotation");
 		}
 		

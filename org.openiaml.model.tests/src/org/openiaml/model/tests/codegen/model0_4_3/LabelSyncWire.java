@@ -53,7 +53,7 @@ public class LabelSyncWire extends CodegenTestCase {
 		
 		{
 			String target = getLabelIDForText("Text Field");
-			assertLabeledFieldEquals(target, "");	// empty
+			assertLabeledFieldEquals(target, "initial");
 			setLabeledFormElementField(target, value);
 		}
 		

@@ -51,7 +51,7 @@ public class LabelSetWire extends CodegenTestCase {
 		
 		{
 			String target = getLabelIDForText("Target Text Field");
-			assertLabeledFieldEquals(target, "");	// empty
+			assertLabeledFieldEquals(target, "hello, world!");
 			setLabeledFormElementField(target, value);
 		}
 		
@@ -67,8 +67,11 @@ public class LabelSetWire extends CodegenTestCase {
 		assertLabelTextNotPresent(value);
 		
 		{
+			// Label --> set --> InputTextField;
+			// when the page is reloaded, the Label will refresh the InputTextField
+			// with the Label value
 			String target = getLabelIDForText("Target Text Field");
-			assertLabeledFieldEquals(target, value);
+			assertLabeledFieldEquals(target, "hello, world!");
 		}
 		
 	}

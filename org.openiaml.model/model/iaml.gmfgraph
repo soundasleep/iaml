@@ -42,6 +42,10 @@
         </children>
         <children
             xsi:type="gmfgraph:Label"
+            name="EventTriggerStereotypeFigure"
+            text=": EventTrigger"/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="EventTriggerNameFigure"
             text="&lt;...>"/>
         <children
@@ -70,6 +74,8 @@
           figure="//@figures.0/@descriptors.0/@actualFigure/@children.1"/>
       <accessors
           figure="//@figures.0/@descriptors.0/@actualFigure/@children.2"/>
+      <accessors
+          figure="//@figures.0/@descriptors.0/@actualFigure/@children.3"/>
     </descriptors>
     <descriptors
         name="DomainAttributeFigure">
@@ -93,6 +99,10 @@
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
+            name="DomainAttributeStereotypeFigure"
+            text=": DomainAttribute"/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="DomainAttributeParentNameFigure"
             text="[none]">
           <foregroundColor
@@ -114,6 +124,8 @@
           figure="//@figures.0/@descriptors.1/@actualFigure/@children.1"/>
       <accessors
           figure="//@figures.0/@descriptors.1/@actualFigure/@children.2"/>
+      <accessors
+          figure="//@figures.0/@descriptors.1/@actualFigure/@children.3"/>
     </descriptors>
     <descriptors
         name="ActivityNodeFigure">
@@ -128,7 +140,13 @@
               bottom="3"
               right="3"/>
         </border>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ActivityNodeStereotypeFigure"
+            text=": ActivityNode"/>
       </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.2/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="ParameterFigure">
@@ -155,11 +173,17 @@
             text="parameter: "/>
         <children
             xsi:type="gmfgraph:Label"
+            name="ParameterStereotypeFigure"
+            text=": Parameter"/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="ParameterNameFigure"
             text="&lt;...>"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.3/@actualFigure/@children.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.3/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="PrimitiveOperationFigure">
@@ -188,6 +212,10 @@
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
+            name="PrimitiveOperationStereotypeFigure"
+            text=": PrimitiveOperation"/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="PrimitiveOperationParentNameFigure"
             text="[none]">
           <foregroundColor
@@ -199,6 +227,8 @@
           figure="//@figures.0/@descriptors.4/@actualFigure/@children.0"/>
       <accessors
           figure="//@figures.0/@descriptors.4/@actualFigure/@children.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.4/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="CompositeOperationFigure">
@@ -228,6 +258,10 @@
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
+            name="CompositeOperationStereotypeFigure"
+            text=": CompositeOperation"/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="CompositeOperationParentNameFigure"
             text="[none]">
           <foregroundColor
@@ -239,6 +273,8 @@
           figure="//@figures.0/@descriptors.5/@actualFigure/@children.0"/>
       <accessors
           figure="//@figures.0/@descriptors.5/@actualFigure/@children.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.5/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="ApplicationElementFigure">
@@ -260,9 +296,15 @@
             xsi:type="gmfgraph:Label"
             name="ApplicationElementNameFigure"
             text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ApplicationElementStereotypeFigure"
+            text=": ApplicationElement"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.6/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.6/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="PropertyFigure">
@@ -289,6 +331,10 @@
             xsi:type="gmfgraph:Label"
             name="PropertyNameFigure"
             text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="PropertyStereotypeFigure"
+            text=": Property"/>
         <children
             xsi:type="gmfgraph:Label"
             name="PropertyContainmentFeatureFigure"
@@ -331,6 +377,8 @@
           figure="//@figures.0/@descriptors.7/@actualFigure/@children.3"/>
       <accessors
           figure="//@figures.0/@descriptors.7/@actualFigure/@children.4"/>
+      <accessors
+          figure="//@figures.0/@descriptors.7/@actualFigure/@children.5"/>
     </descriptors>
     <descriptors
         name="StaticValueFigure">
@@ -359,6 +407,10 @@
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
+            name="StaticValueStereotypeFigure"
+            text=": StaticValue"/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="StaticValueValueFigure"
             text="&lt;...>"/>
         <children
@@ -376,6 +428,8 @@
           figure="//@figures.0/@descriptors.8/@actualFigure/@children.1"/>
       <accessors
           figure="//@figures.0/@descriptors.8/@actualFigure/@children.2"/>
+      <accessors
+          figure="//@figures.0/@descriptors.8/@actualFigure/@children.3"/>
     </descriptors>
     <descriptors
         name="VisibleThingFigure">
@@ -397,9 +451,15 @@
             xsi:type="gmfgraph:Label"
             name="VisibleThingNameFigure"
             text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="VisibleThingStereotypeFigure"
+            text=": VisibleThing"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.9/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.9/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="DomainSourceFigure">
@@ -433,6 +493,10 @@
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
+            name="DomainSourceStereotypeFigure"
+            text=": DomainSource"/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="DomainSourceTypeFigure"
             text="&lt;...>"/>
       </actualFigure>
@@ -440,6 +504,8 @@
           figure="//@figures.0/@descriptors.10/@actualFigure/@children.0"/>
       <accessors
           figure="//@figures.0/@descriptors.10/@actualFigure/@children.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.10/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="DataFlowEdgeFigure">
@@ -447,7 +513,14 @@
           xsi:type="gmfgraph:PolylineConnection"
           name="DataFlowEdgeFigure"
           lineKind="LINE_DASH"
-          targetDecoration="//@figures.0/@figures.0"/>
+          targetDecoration="//@figures.0/@figures.0">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="DataFlowEdgeStereotypeFigure"
+            text=": DataFlowEdge"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.11/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="TemporaryVariableFigure">
@@ -476,6 +549,10 @@
             text="temp: "/>
         <children
             xsi:type="gmfgraph:Label"
+            name="TemporaryVariableStereotypeFigure"
+            text=": TemporaryVariable"/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="TemporaryVariableNameFigure"
             text="&lt;...>"/>
         <children
@@ -491,6 +568,8 @@
           figure="//@figures.0/@descriptors.12/@actualFigure/@children.1"/>
       <accessors
           figure="//@figures.0/@descriptors.12/@actualFigure/@children.2"/>
+      <accessors
+          figure="//@figures.0/@descriptors.12/@actualFigure/@children.3"/>
     </descriptors>
     <descriptors
         name="ExecutionEdgeFigure">
@@ -502,9 +581,15 @@
             xsi:type="gmfgraph:Label"
             name="ExecutionEdgeNameFigure"
             text=""/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ExecutionEdgeStereotypeFigure"
+            text=": ExecutionEdge"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.13/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.13/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="DynamicApplicationElementSetFigure">
@@ -534,6 +619,10 @@
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
+            name="DynamicApplicationElementSetStereotypeFigure"
+            text=": DynamicApplicationElementSet"/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="DynamicApplicationElementSetQueryFigure"
             text="&lt;...>">
           <font
@@ -546,6 +635,8 @@
           figure="//@figures.0/@descriptors.14/@actualFigure/@children.0"/>
       <accessors
           figure="//@figures.0/@descriptors.14/@actualFigure/@children.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.14/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="FrameFigure">
@@ -574,6 +665,10 @@
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
+            name="FrameStereotypeFigure"
+            text=": Frame"/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="FrameUrlFigure"
             text="&lt;...>"/>
       </actualFigure>
@@ -581,6 +676,8 @@
           figure="//@figures.0/@descriptors.15/@actualFigure/@children.0"/>
       <accessors
           figure="//@figures.0/@descriptors.15/@actualFigure/@children.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.15/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="InputFormFigure">
@@ -609,6 +706,10 @@
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
+            name="InputFormStereotypeFigure"
+            text=": InputForm"/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="InputFormParentNameFigure"
             text="[none]">
           <foregroundColor
@@ -620,6 +721,8 @@
           figure="//@figures.0/@descriptors.16/@actualFigure/@children.0"/>
       <accessors
           figure="//@figures.0/@descriptors.16/@actualFigure/@children.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.16/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="InputTextFieldFigure">
@@ -648,6 +751,10 @@
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
+            name="InputTextFieldStereotypeFigure"
+            text=": InputTextField"/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="InputTextFieldParentNameFigure"
             text="[none]">
           <foregroundColor
@@ -669,6 +776,8 @@
           figure="//@figures.0/@descriptors.17/@actualFigure/@children.1"/>
       <accessors
           figure="//@figures.0/@descriptors.17/@actualFigure/@children.2"/>
+      <accessors
+          figure="//@figures.0/@descriptors.17/@actualFigure/@children.3"/>
     </descriptors>
     <descriptors
         name="SingleWireFigure">
@@ -676,7 +785,14 @@
           xsi:type="gmfgraph:PolylineConnection"
           name="SingleWireFigure"
           lineKind="LINE_DASH"
-          targetDecoration="//@figures.0/@figures.0"/>
+          targetDecoration="//@figures.0/@figures.0">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="SingleWireStereotypeFigure"
+            text=": SingleWire"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.18/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="CompositeWireFigure">
@@ -689,9 +805,15 @@
             xsi:type="gmfgraph:Label"
             name="CompositeWireNameFigure"
             text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="CompositeWireStereotypeFigure"
+            text=": CompositeWire"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.19/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.19/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="SyncWireFigure">
@@ -705,9 +827,15 @@
             xsi:type="gmfgraph:Label"
             name="SyncWireNameFigure"
             text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="SyncWireStereotypeFigure"
+            text=": SyncWire"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.20/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.20/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="RunActionFigure">
@@ -720,16 +848,29 @@
             xsi:type="gmfgraph:Label"
             name="RunActionNameFigure"
             text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="RunActionStereotypeFigure"
+            text=": RunAction"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.21/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.21/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="ParameterEdgeFigure">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
           name="ParameterEdgeFigure"
-          targetDecoration="//@figures.0/@figures.0"/>
+          targetDecoration="//@figures.0/@figures.0">
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ParameterEdgeStereotypeFigure"
+            text=": ParameterEdge"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.22/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="StartNodeFigure">
@@ -756,9 +897,15 @@
             xsi:type="gmfgraph:Label"
             name="StartNodeLabelFigure"
             text="start"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="StartNodeStereotypeFigure"
+            text=": StartNode"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.23/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.23/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="CancelNodeFigure">
@@ -787,6 +934,10 @@
             text="cancel"/>
         <children
             xsi:type="gmfgraph:Label"
+            name="CancelNodeStereotypeFigure"
+            text=": CancelNode"/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="CancelNodeTextFigure"
             text="&lt;...>"/>
       </actualFigure>
@@ -794,6 +945,8 @@
           figure="//@figures.0/@descriptors.24/@actualFigure/@children.1"/>
       <accessors
           figure="//@figures.0/@descriptors.24/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.24/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="FinishNodeFigure">
@@ -820,9 +973,15 @@
             xsi:type="gmfgraph:Label"
             name="FinishNodeLabelFigure"
             text="finish"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="FinishNodeStereotypeFigure"
+            text=": FinishNode"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.25/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.25/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="DecisionNodeFigure">
@@ -844,9 +1003,15 @@
             xsi:type="gmfgraph:Label"
             name="DecisionNodeNameFigure"
             text="true?"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="DecisionNodeStereotypeFigure"
+            text=": DecisionNode"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.26/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.26/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="ConditionalEdgeFigure">
@@ -858,9 +1023,15 @@
             xsi:type="gmfgraph:Label"
             name="ConditionalEdgeNameFigure"
             text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ConditionalEdgeStereotypeFigure"
+            text=": ConditionalEdge"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.27/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.27/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="SetWireFigure">
@@ -873,9 +1044,15 @@
             xsi:type="gmfgraph:Label"
             name="SetWireNameFigure"
             text="set"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="SetWireStereotypeFigure"
+            text=": SetWire"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.28/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.28/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="ShowWireFigure">
@@ -888,9 +1065,15 @@
             xsi:type="gmfgraph:Label"
             name="ShowWireNameFigure"
             text="show"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ShowWireStereotypeFigure"
+            text=": ShowWire"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.29/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.29/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="NavigateActionFigure">
@@ -903,9 +1086,15 @@
             xsi:type="gmfgraph:Label"
             name="NavigateActionNameFigure"
             text="navigate"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="NavigateActionStereotypeFigure"
+            text=": NavigateAction"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.30/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.30/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="CommitWireFigure">
@@ -918,9 +1107,15 @@
             xsi:type="gmfgraph:Label"
             name="CommitWireNameFigure"
             text="commit"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="CommitWireStereotypeFigure"
+            text=": CommitWire"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.31/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.31/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="ConditionEdgeFigure">
@@ -932,9 +1127,15 @@
             xsi:type="gmfgraph:Label"
             name="ConditionEdgeNameFigure"
             text="condition"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ConditionEdgeStereotypeFigure"
+            text=": ConditionEdge"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.32/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.32/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="SessionFigure">
@@ -961,9 +1162,15 @@
             xsi:type="gmfgraph:Label"
             name="SessionNameFigure"
             text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="SessionStereotypeFigure"
+            text=": Session"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.33/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.33/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="LoginHandlerFigure">
@@ -992,6 +1199,10 @@
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
+            name="LoginHandlerStereotypeFigure"
+            text=": LoginHandler"/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="LoginHandlerTypeFigure"
             text="[type = ?]"/>
       </actualFigure>
@@ -999,6 +1210,8 @@
           figure="//@figures.0/@descriptors.34/@actualFigure/@children.0"/>
       <accessors
           figure="//@figures.0/@descriptors.34/@actualFigure/@children.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.34/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="CompositeConditionFigure">
@@ -1028,6 +1241,10 @@
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
+            name="CompositeConditionStereotypeFigure"
+            text=": CompositeCondition"/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="CompositeConditionParentNameFigure"
             text="[none]">
           <foregroundColor
@@ -1039,6 +1256,8 @@
           figure="//@figures.0/@descriptors.35/@actualFigure/@children.0"/>
       <accessors
           figure="//@figures.0/@descriptors.35/@actualFigure/@children.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.35/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="DomainIteratorFigure">
@@ -1068,6 +1287,10 @@
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
+            name="DomainIteratorStereotypeFigure"
+            text=": DomainIterator"/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="DomainIteratorQueryFigure"
             text="&lt;query>"/>
         <children
@@ -1087,6 +1310,8 @@
           figure="//@figures.0/@descriptors.36/@actualFigure/@children.2"/>
       <accessors
           figure="//@figures.0/@descriptors.36/@actualFigure/@children.3"/>
+      <accessors
+          figure="//@figures.0/@descriptors.36/@actualFigure/@children.4"/>
     </descriptors>
     <descriptors
         name="DomainAttributeInstanceFigure">
@@ -1111,6 +1336,10 @@
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
+            name="DomainAttributeInstanceStereotypeFigure"
+            text=": DomainAttributeInstance"/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="DomainAttributeInstanceTypeFigure"
             text="&lt;...>">
           <foregroundColor
@@ -1122,6 +1351,8 @@
           figure="//@figures.0/@descriptors.37/@actualFigure/@children.0"/>
       <accessors
           figure="//@figures.0/@descriptors.37/@actualFigure/@children.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.37/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="ButtonFigure">
@@ -1150,6 +1381,10 @@
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
+            name="ButtonStereotypeFigure"
+            text=": Button"/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="ButtonParentNameFigure"
             text="[none]">
           <foregroundColor
@@ -1161,6 +1396,8 @@
           figure="//@figures.0/@descriptors.38/@actualFigure/@children.0"/>
       <accessors
           figure="//@figures.0/@descriptors.38/@actualFigure/@children.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.38/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="SplitNodeFigure">
@@ -1187,9 +1424,15 @@
             xsi:type="gmfgraph:Label"
             name="SplitNodeLabelFigure"
             text="split"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="SplitNodeStereotypeFigure"
+            text=": SplitNode"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.39/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.39/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="JoinNodeFigure">
@@ -1216,9 +1459,15 @@
             xsi:type="gmfgraph:Label"
             name="JoinNodeLabelFigure"
             text="join"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="JoinNodeStereotypeFigure"
+            text=": JoinNode"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.40/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.40/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="QueryParameterFigure">
@@ -1245,11 +1494,17 @@
             text="query: "/>
         <children
             xsi:type="gmfgraph:Label"
+            name="QueryParameterStereotypeFigure"
+            text=": QueryParameter"/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="QueryParameterNameFigure"
             text="&lt;...>"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.41/@actualFigure/@children.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.41/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="UserStoreFigure">
@@ -1281,9 +1536,15 @@
             xsi:type="gmfgraph:Label"
             name="UserStoreNameFigure"
             text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="UserStoreStereotypeFigure"
+            text=": UserStore"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.42/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.42/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="RoleFigure">
@@ -1310,9 +1571,15 @@
             xsi:type="gmfgraph:Label"
             name="RoleNameFigure"
             text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="RoleStereotypeFigure"
+            text=": Role"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.43/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.43/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="PermissionFigure">
@@ -1341,9 +1608,15 @@
             xsi:type="gmfgraph:Label"
             name="PermissionNameFigure"
             text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="PermissionStereotypeFigure"
+            text=": Permission"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.44/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.44/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="UserInstanceFigure">
@@ -1373,6 +1646,10 @@
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
+            name="UserInstanceStereotypeFigure"
+            text=": UserInstance"/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="UserInstanceAutosaveFigure"
             text="autosave: true"/>
       </actualFigure>
@@ -1380,6 +1657,8 @@
           figure="//@figures.0/@descriptors.45/@actualFigure/@children.0"/>
       <accessors
           figure="//@figures.0/@descriptors.45/@actualFigure/@children.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.45/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="ExtendsEdgeFigure">
@@ -1391,9 +1670,15 @@
             xsi:type="gmfgraph:Label"
             name="ExtendsEdgeNameFigure"
             text="extends"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ExtendsEdgeStereotypeFigure"
+            text=": ExtendsEdge"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.46/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.46/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="RequiresEdgeFigure">
@@ -1406,9 +1691,15 @@
             xsi:type="gmfgraph:Label"
             name="RequiresEdgeNameFigure"
             text="requires"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="RequiresEdgeStereotypeFigure"
+            text=": RequiresEdge"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.47/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.47/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="ConstraintEdgeFigure">
@@ -1420,9 +1711,15 @@
             xsi:type="gmfgraph:Label"
             name="ConstraintEdgeNameFigure"
             text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ConstraintEdgeStereotypeFigure"
+            text=": ConstraintEdge"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.48/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.48/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="ProvidesEdgeFigure">
@@ -1435,9 +1732,15 @@
             xsi:type="gmfgraph:Label"
             name="ProvidesEdgeNameFigure"
             text="provides"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ProvidesEdgeStereotypeFigure"
+            text=": ProvidesEdge"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.49/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.49/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="AccessControlHandlerFigure">
@@ -1464,9 +1767,15 @@
             xsi:type="gmfgraph:Label"
             name="AccessControlHandlerNameFigure"
             text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="AccessControlHandlerStereotypeFigure"
+            text=": AccessControlHandler"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.50/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.50/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="OperationCallNodeFigure">
@@ -1493,9 +1802,15 @@
             xsi:type="gmfgraph:Label"
             name="OperationCallNodeLabelFigure"
             text="call"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="OperationCallNodeStereotypeFigure"
+            text=": OperationCallNode"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.51/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.51/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="ArithmeticFigure">
@@ -1522,9 +1837,15 @@
             xsi:type="gmfgraph:Label"
             name="ArithmeticTypeFigure"
             text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="ArithmeticStereotypeFigure"
+            text=": Arithmetic"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.52/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.52/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="EntryGateFigure">
@@ -1553,6 +1874,10 @@
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
+            name="EntryGateStereotypeFigure"
+            text=": EntryGate"/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="EntryGateParentNameFigure"
             text="[none]">
           <foregroundColor
@@ -1564,6 +1889,8 @@
           figure="//@figures.0/@descriptors.53/@actualFigure/@children.0"/>
       <accessors
           figure="//@figures.0/@descriptors.53/@actualFigure/@children.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.53/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="ExitGateFigure">
@@ -1592,6 +1919,10 @@
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
+            name="ExitGateStereotypeFigure"
+            text=": ExitGate"/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="ExitGateParentNameFigure"
             text="[none]">
           <foregroundColor
@@ -1603,6 +1934,8 @@
           figure="//@figures.0/@descriptors.54/@actualFigure/@children.0"/>
       <accessors
           figure="//@figures.0/@descriptors.54/@actualFigure/@children.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.54/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="ScopeFigure">
@@ -1631,6 +1964,10 @@
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
+            name="ScopeStereotypeFigure"
+            text=": Scope"/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="ScopeParentNameFigure"
             text="[none]">
           <foregroundColor
@@ -1642,6 +1979,8 @@
           figure="//@figures.0/@descriptors.55/@actualFigure/@children.0"/>
       <accessors
           figure="//@figures.0/@descriptors.55/@actualFigure/@children.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.55/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="LabelFigure">
@@ -1670,6 +2009,10 @@
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
+            name="LabelStereotypeFigure"
+            text=": Label"/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="LabelDefaultValueFigure"
             text="&lt;...>"/>
         <children
@@ -1687,6 +2030,8 @@
           figure="//@figures.0/@descriptors.56/@actualFigure/@children.1"/>
       <accessors
           figure="//@figures.0/@descriptors.56/@actualFigure/@children.2"/>
+      <accessors
+          figure="//@figures.0/@descriptors.56/@actualFigure/@children.3"/>
     </descriptors>
     <descriptors
         name="IteratorListFigure">
@@ -1715,6 +2060,10 @@
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
+            name="IteratorListStereotypeFigure"
+            text=": IteratorList"/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="IteratorListParentNameFigure"
             text="[none]">
           <foregroundColor
@@ -1726,6 +2075,8 @@
           figure="//@figures.0/@descriptors.57/@actualFigure/@children.0"/>
       <accessors
           figure="//@figures.0/@descriptors.57/@actualFigure/@children.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.57/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="CastNodeFigure">
@@ -1753,9 +2104,15 @@
             xsi:type="gmfgraph:Label"
             name="CastNodeLabelFigure"
             text="Cast"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="CastNodeStereotypeFigure"
+            text=": CastNode"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.58/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.58/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="EmailFigure">
@@ -1782,9 +2139,15 @@
             xsi:type="gmfgraph:Label"
             name="EmailNameFigure"
             text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="EmailStereotypeFigure"
+            text=": Email"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.59/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.59/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="MapFigure">
@@ -1813,6 +2176,10 @@
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
+            name="MapStereotypeFigure"
+            text=": Map"/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="MapParentNameFigure"
             text="[none]">
           <foregroundColor
@@ -1824,6 +2191,8 @@
           figure="//@figures.0/@descriptors.60/@actualFigure/@children.0"/>
       <accessors
           figure="//@figures.0/@descriptors.60/@actualFigure/@children.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.60/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="MapPointFigure">
@@ -1852,6 +2221,10 @@
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
+            name="MapPointStereotypeFigure"
+            text=": MapPoint"/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="MapPointParentNameFigure"
             text="[none]">
           <foregroundColor
@@ -1863,6 +2236,8 @@
           figure="//@figures.0/@descriptors.61/@actualFigure/@children.0"/>
       <accessors
           figure="//@figures.0/@descriptors.61/@actualFigure/@children.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.61/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="PrimitiveConditionFigure">
@@ -1891,6 +2266,10 @@
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
+            name="PrimitiveConditionStereotypeFigure"
+            text=": PrimitiveCondition"/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="PrimitiveConditionParentNameFigure"
             text="[none]">
           <foregroundColor
@@ -1902,6 +2281,8 @@
           figure="//@figures.0/@descriptors.62/@actualFigure/@children.0"/>
       <accessors
           figure="//@figures.0/@descriptors.62/@actualFigure/@children.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.62/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="DetailWireFigure">
@@ -1914,9 +2295,15 @@
             xsi:type="gmfgraph:Label"
             name="DetailWireNameFigure"
             text="detail"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="DetailWireStereotypeFigure"
+            text=": DetailWire"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.63/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.63/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="AutocompleteWireFigure">
@@ -1929,9 +2316,15 @@
             xsi:type="gmfgraph:Label"
             name="AutocompleteWireNameFigure"
             text="autocomplete"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="AutocompleteWireStereotypeFigure"
+            text=": AutocompleteWire"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.64/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.64/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="SelectEdgeFigure">
@@ -1943,9 +2336,15 @@
             xsi:type="gmfgraph:Label"
             name="SelectEdgeNameFigure"
             text="select"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="SelectEdgeStereotypeFigure"
+            text=": SelectEdge"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.65/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.65/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="SchemaEdgeFigure">
@@ -1957,9 +2356,15 @@
             xsi:type="gmfgraph:Label"
             name="SchemaEdgeNameFigure"
             text="schema"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="SchemaEdgeStereotypeFigure"
+            text=": SchemaEdge"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.66/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.66/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="DomainSchemaFigure">
@@ -1986,9 +2391,15 @@
             xsi:type="gmfgraph:Label"
             name="DomainSchemaNameFigure"
             text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="DomainSchemaStereotypeFigure"
+            text=": DomainSchema"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.67/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.67/@actualFigure/@children.1"/>
     </descriptors>
   </figures>
   <nodes
@@ -2199,7 +2610,7 @@
       name="EventTriggerName"
       figure="EventTriggerFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.0/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.0/@accessors.2"/>
   <labels
       name="DomainAttributeName"
       figure="DomainAttributeFigure"
@@ -2207,7 +2618,7 @@
   <labels
       name="ParameterName"
       figure="ParameterFigure"
-      accessor="//@figures.0/@descriptors.3/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.3/@accessors.1"/>
   <labels
       name="PrimitiveOperationName"
       figure="PrimitiveOperationFigure"
@@ -2232,7 +2643,7 @@
       name="StaticValueValue"
       figure="StaticValueFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.8/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.8/@accessors.2"/>
   <labels
       name="VisibleThingName"
       figure="VisibleThingFigure"
@@ -2245,11 +2656,11 @@
       name="DomainSourceType"
       figure="DomainSourceFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.10/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.10/@accessors.2"/>
   <labels
       name="TemporaryVariableName"
       figure="TemporaryVariableFigure"
-      accessor="//@figures.0/@descriptors.12/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.12/@accessors.1"/>
   <labels
       name="DynamicApplicationElementSetName"
       figure="DynamicApplicationElementSetFigure"
@@ -2258,7 +2669,7 @@
       name="DynamicApplicationElementSetQuery"
       figure="DynamicApplicationElementSetFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.14/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.14/@accessors.2"/>
   <labels
       name="FrameName"
       figure="FrameFigure"
@@ -2267,7 +2678,7 @@
       name="FrameUrl"
       figure="FrameFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.15/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.15/@accessors.2"/>
   <labels
       name="InputFormName"
       figure="InputFormFigure"
@@ -2328,11 +2739,11 @@
       name="LoginHandlerType"
       figure="LoginHandlerFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.34/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.34/@accessors.2"/>
   <labels
       name="CancelNodeText"
       figure="CancelNodeFigure"
-      accessor="//@figures.0/@descriptors.24/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.24/@accessors.2"/>
   <labels
       name="CompositeConditionName"
       figure="CompositeConditionFigure"
@@ -2345,17 +2756,17 @@
       name="DomainIteratorQuery"
       figure="DomainIteratorFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.36/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.36/@accessors.2"/>
   <labels
       name="DomainIteratorLimit"
       figure="DomainIteratorFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.36/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.36/@accessors.3"/>
   <labels
       name="DomainIteratorAutosave"
       figure="DomainIteratorFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.36/@accessors.3"/>
+      accessor="//@figures.0/@descriptors.36/@accessors.4"/>
   <labels
       name="DomainAttributeInstanceName"
       figure="DomainAttributeInstanceFigure"
@@ -2368,47 +2779,47 @@
       name="CompositeOperationParentName"
       figure="CompositeOperationFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.5/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.5/@accessors.2"/>
   <labels
       name="EventTriggerParentName"
       figure="EventTriggerFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.0/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.0/@accessors.3"/>
   <labels
       name="DomainAttributeParentName"
       figure="DomainAttributeFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.1/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.1/@accessors.2"/>
   <labels
       name="PrimitiveOperationParentName"
       figure="PrimitiveOperationFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.4/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.4/@accessors.2"/>
   <labels
       name="PropertyParentName"
       figure="PropertyFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.7/@accessors.3"/>
+      accessor="//@figures.0/@descriptors.7/@accessors.4"/>
   <labels
       name="InputFormParentName"
       figure="InputFormFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.16/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.16/@accessors.2"/>
   <labels
       name="InputTextFieldParentName"
       figure="InputTextFieldFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.17/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.17/@accessors.2"/>
   <labels
       name="CompositeConditionParentName"
       figure="CompositeConditionFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.35/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.35/@accessors.2"/>
   <labels
       name="ButtonParentName"
       figure="ButtonFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.38/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.38/@accessors.2"/>
   <labels
       name="DomainObjectType"
       elementIcon="false"/>
@@ -2429,7 +2840,7 @@
       name="PropertyDefaultValue"
       figure="PropertyFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.7/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.7/@accessors.3"/>
   <labels
       name="SplitNodeLabel"
       figure="SplitNodeFigure"
@@ -2441,7 +2852,7 @@
   <labels
       name="QueryParameterName"
       figure="QueryParameterFigure"
-      accessor="//@figures.0/@descriptors.41/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.41/@accessors.1"/>
   <labels
       name="UserStoreName"
       figure="UserStoreFigure"
@@ -2462,7 +2873,7 @@
       name="UserInstanceAutosave"
       figure="UserInstanceFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.45/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.45/@accessors.2"/>
   <labels
       name="ExtendsEdgeName"
       figure="ExtendsEdgeFigure"
@@ -2505,7 +2916,7 @@
       name="EntryGateParentName"
       figure="EntryGateFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.53/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.53/@accessors.2"/>
   <labels
       name="ExitGateName"
       figure="ExitGateFigure"
@@ -2514,7 +2925,7 @@
       name="ExitGateParentName"
       figure="ExitGateFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.54/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.54/@accessors.2"/>
   <labels
       name="ScopeName"
       figure="ScopeFigure"
@@ -2523,7 +2934,7 @@
       name="ScopeParentName"
       figure="EntryGateFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.55/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.55/@accessors.2"/>
   <labels
       name="LabelName"
       figure="LabelFigure"
@@ -2532,12 +2943,12 @@
       name="LabelDefaultValue"
       figure="LabelFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.56/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.56/@accessors.2"/>
   <labels
       name="LabelParentName"
       figure="LabelFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.56/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.56/@accessors.3"/>
   <labels
       name="EventTriggerContainmentFeature"
       figure="EventTriggerFigure"
@@ -2550,32 +2961,32 @@
       name="TemporaryVariableType"
       figure="TemporaryVariableFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.12/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.12/@accessors.2"/>
   <labels
       name="PropertyType"
       figure="PropertyFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.7/@accessors.4"/>
+      accessor="//@figures.0/@descriptors.7/@accessors.5"/>
   <labels
       name="DomainAttributeType"
       figure="DomainAttributeFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.1/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.1/@accessors.3"/>
   <labels
       name="DomainAttributeInstanceType"
       figure="DomainAttributeInstanceFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.37/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.37/@accessors.2"/>
   <labels
       name="InputTextFieldType"
       figure="InputTextFieldFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.17/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.17/@accessors.3"/>
   <labels
       name="StaticValueType"
       figure="StaticValueFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.8/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.8/@accessors.3"/>
   <labels
       name="EmailName"
       figure="EmailFigure"
@@ -2588,7 +2999,7 @@
       name="MapParentName"
       figure="MapFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.60/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.60/@accessors.2"/>
   <labels
       name="MapPointName"
       figure="MapPointFigure"
@@ -2597,7 +3008,7 @@
       name="MapPointParentName"
       figure="MapPointFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.61/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.61/@accessors.2"/>
   <labels
       name="PrimitiveConditionName"
       figure="PrimitiveConditionFigure"
@@ -2606,12 +3017,12 @@
       name="PrimitiveConditionParentName"
       figure="PrimitiveConditionFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.62/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.62/@accessors.2"/>
   <labels
       name="PropertyContainmentFeature"
       figure="PropertyFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.7/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.7/@accessors.2"/>
   <labels
       name="SelectWireLimit"
       elementIcon="false"/>
@@ -2643,5 +3054,345 @@
       name="IteratorListParentName"
       figure="IteratorListFigure"
       elementIcon="false"
+      accessor="//@figures.0/@descriptors.57/@accessors.2"/>
+  <labels
+      name="EventTriggerStereotype"
+      figure="EventTriggerFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.0/@accessors.1"/>
+  <labels
+      name="DomainAttributeStereotype"
+      figure="DomainAttributeFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.1/@accessors.1"/>
+  <labels
+      name="ActivityNodeStereotype"
+      figure="ActivityNodeFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.2/@accessors.0"/>
+  <labels
+      name="ParameterStereotype"
+      figure="ParameterFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.3/@accessors.0"/>
+  <labels
+      name="PrimitiveOperationStereotype"
+      figure="PrimitiveOperationFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.4/@accessors.1"/>
+  <labels
+      name="CompositeOperationStereotype"
+      figure="CompositeOperationFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.5/@accessors.1"/>
+  <labels
+      name="ApplicationElementStereotype"
+      figure="ApplicationElementFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.6/@accessors.1"/>
+  <labels
+      name="PropertyStereotype"
+      figure="PropertyFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.7/@accessors.1"/>
+  <labels
+      name="StaticValueStereotype"
+      figure="StaticValueFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.8/@accessors.1"/>
+  <labels
+      name="VisibleThingStereotype"
+      figure="VisibleThingFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.9/@accessors.1"/>
+  <labels
+      name="DomainSourceStereotype"
+      figure="DomainSourceFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.10/@accessors.1"/>
+  <labels
+      name="DataFlowEdgeStereotype"
+      figure="DataFlowEdgeFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.11/@accessors.0"/>
+  <labels
+      name="TemporaryVariableStereotype"
+      figure="TemporaryVariableFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.12/@accessors.0"/>
+  <labels
+      name="ExecutionEdgeStereotype"
+      figure="ExecutionEdgeFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.13/@accessors.1"/>
+  <labels
+      name="DynamicApplicationElementSetStereotype"
+      figure="DynamicApplicationElementSetFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.14/@accessors.1"/>
+  <labels
+      name="FrameStereotype"
+      figure="FrameFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.15/@accessors.1"/>
+  <labels
+      name="InputFormStereotype"
+      figure="InputFormFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.16/@accessors.1"/>
+  <labels
+      name="InputTextFieldStereotype"
+      figure="InputTextFieldFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.17/@accessors.1"/>
+  <labels
+      name="SingleWireStereotype"
+      figure="SingleWireFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.18/@accessors.0"/>
+  <labels
+      name="CompositeWireStereotype"
+      figure="CompositeWireFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.19/@accessors.1"/>
+  <labels
+      name="SyncWireStereotype"
+      figure="SyncWireFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.20/@accessors.1"/>
+  <labels
+      name="RunActionStereotype"
+      figure="RunActionFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.21/@accessors.1"/>
+  <labels
+      name="ParameterEdgeStereotype"
+      figure="ParameterEdgeFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.22/@accessors.0"/>
+  <labels
+      name="StartNodeStereotype"
+      figure="StartNodeFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.23/@accessors.1"/>
+  <labels
+      name="CancelNodeStereotype"
+      figure="CancelNodeFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.24/@accessors.0"/>
+  <labels
+      name="FinishNodeStereotype"
+      figure="FinishNodeFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.25/@accessors.1"/>
+  <labels
+      name="DecisionNodeStereotype"
+      figure="DecisionNodeFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.26/@accessors.1"/>
+  <labels
+      name="ConditionalEdgeStereotype"
+      figure="ConditionalEdgeFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.27/@accessors.1"/>
+  <labels
+      name="SetWireStereotype"
+      figure="SetWireFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.28/@accessors.1"/>
+  <labels
+      name="ShowWireStereotype"
+      figure="ShowWireFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.29/@accessors.1"/>
+  <labels
+      name="NavigateActionStereotype"
+      figure="NavigateActionFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.30/@accessors.1"/>
+  <labels
+      name="CommitWireStereotype"
+      figure="CommitWireFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.31/@accessors.1"/>
+  <labels
+      name="ConditionEdgeStereotype"
+      figure="ConditionEdgeFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.32/@accessors.1"/>
+  <labels
+      name="SessionStereotype"
+      figure="SessionFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.33/@accessors.1"/>
+  <labels
+      name="LoginHandlerStereotype"
+      figure="LoginHandlerFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.34/@accessors.1"/>
+  <labels
+      name="CompositeConditionStereotype"
+      figure="CompositeConditionFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.35/@accessors.1"/>
+  <labels
+      name="DomainIteratorStereotype"
+      figure="DomainIteratorFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.36/@accessors.1"/>
+  <labels
+      name="DomainAttributeInstanceStereotype"
+      figure="DomainAttributeInstanceFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.37/@accessors.1"/>
+  <labels
+      name="ButtonStereotype"
+      figure="ButtonFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.38/@accessors.1"/>
+  <labels
+      name="SplitNodeStereotype"
+      figure="SplitNodeFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.39/@accessors.1"/>
+  <labels
+      name="JoinNodeStereotype"
+      figure="JoinNodeFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.40/@accessors.1"/>
+  <labels
+      name="QueryParameterStereotype"
+      figure="QueryParameterFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.41/@accessors.0"/>
+  <labels
+      name="UserStoreStereotype"
+      figure="UserStoreFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.42/@accessors.1"/>
+  <labels
+      name="RoleStereotype"
+      figure="RoleFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.43/@accessors.1"/>
+  <labels
+      name="PermissionStereotype"
+      figure="PermissionFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.44/@accessors.1"/>
+  <labels
+      name="UserInstanceStereotype"
+      figure="UserInstanceFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.45/@accessors.1"/>
+  <labels
+      name="ExtendsEdgeStereotype"
+      figure="ExtendsEdgeFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.46/@accessors.1"/>
+  <labels
+      name="RequiresEdgeStereotype"
+      figure="RequiresEdgeFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.47/@accessors.1"/>
+  <labels
+      name="ConstraintEdgeStereotype"
+      figure="ConstraintEdgeFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.48/@accessors.1"/>
+  <labels
+      name="ProvidesEdgeStereotype"
+      figure="ProvidesEdgeFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.49/@accessors.1"/>
+  <labels
+      name="AccessControlHandlerStereotype"
+      figure="AccessControlHandlerFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.50/@accessors.1"/>
+  <labels
+      name="OperationCallNodeStereotype"
+      figure="OperationCallNodeFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.51/@accessors.1"/>
+  <labels
+      name="ArithmeticStereotype"
+      figure="ArithmeticFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.52/@accessors.1"/>
+  <labels
+      name="EntryGateStereotype"
+      figure="EntryGateFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.53/@accessors.1"/>
+  <labels
+      name="ExitGateStereotype"
+      figure="ExitGateFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.54/@accessors.1"/>
+  <labels
+      name="ScopeStereotype"
+      figure="ScopeFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.55/@accessors.1"/>
+  <labels
+      name="LabelStereotype"
+      figure="LabelFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.56/@accessors.1"/>
+  <labels
+      name="IteratorListStereotype"
+      figure="IteratorListFigure"
+      elementIcon="false"
       accessor="//@figures.0/@descriptors.57/@accessors.1"/>
+  <labels
+      name="CastNodeStereotype"
+      figure="CastNodeFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.58/@accessors.1"/>
+  <labels
+      name="EmailStereotype"
+      figure="EmailFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.59/@accessors.1"/>
+  <labels
+      name="MapStereotype"
+      figure="MapFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.60/@accessors.1"/>
+  <labels
+      name="MapPointStereotype"
+      figure="MapPointFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.61/@accessors.1"/>
+  <labels
+      name="PrimitiveConditionStereotype"
+      figure="PrimitiveConditionFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.62/@accessors.1"/>
+  <labels
+      name="DetailWireStereotype"
+      figure="DetailWireFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.63/@accessors.1"/>
+  <labels
+      name="AutocompleteWireStereotype"
+      figure="AutocompleteWireFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.64/@accessors.1"/>
+  <labels
+      name="SelectEdgeStereotype"
+      figure="SelectEdgeFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.65/@accessors.1"/>
+  <labels
+      name="SchemaEdgeStereotype"
+      figure="SchemaEdgeFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.66/@accessors.1"/>
+  <labels
+      name="DomainSchemaStereotype"
+      figure="DomainSchemaFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.67/@accessors.1"/>
 </gmfgraph:Canvas>

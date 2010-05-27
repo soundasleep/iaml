@@ -1473,5 +1473,55 @@ public class GmfGenTestCase extends XmlTestCase {
 		});
 	}
 	
+	/**
+	 * If you specify your own Font style in a .gmfgraph, by default the generated 
+	 * .gmfgen will have "fixed font" set to true for this node. This prevents font styles
+	 * being applied (e.g. stereotype underline: issue 192; or the appearance tab being
+	 * disabled).
+	 * 
+	 * <p>See http://www.jevon.org/wiki/GMF_Troubleshooting_9
+	 * 
+	 * @throws Exception
+	 */
+	public void testFontsAreNotFixed() throws Exception {
+		iterate(new DefaultIterator() {
+
+			@Override
+			public void execute2(String filename, Document doc)
+					throws Exception {
+				
+				// first, let's try and add it if it doesn't already exist
+				boolean changed = false;
+				{
+					IterableElementList attributes = xpath(doc, "//topLevelNodes/viewmap/attributes");
+					assertNotSame("Found no fixed labels in " + filename, 0, attributes.size());
+					for (Element e : attributes) {
+						if (!"false".equals(e.getAttribute("fixedFont"))) {
+							// force changed to 'false'
+							e.setAttribute("fixedFont", "false");
+							changed = true;
+						}
+					}
+				}
+
+				// save
+				if (changed) {
+					saveDocument(doc, filename);
+				}
+				
+				// then recheck
+				{
+					IterableElementList attributes = xpath(doc, "//topLevelNodes/viewmap/attributes");
+					assertNotSame(0, attributes.size());
+					for (Element e : attributes) {
+						assertEquals(filename, "false", e.getAttribute("fixedFont"));
+					}
+				}
+				
+			}
+			
+		});
+	}
+	
 	
 }

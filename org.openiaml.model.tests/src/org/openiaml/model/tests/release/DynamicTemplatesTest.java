@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.openiaml.model.tests.XmlTestCase;
+import org.openiaml.model.tests.model.ModelTestCase;
 
 /**
  * Issue 154: Check that NodeEditPart.xpt Template is synchronized with the metamodel
@@ -129,6 +130,19 @@ public class DynamicTemplatesTest extends XmlTestCase {
 				buffer.append(guilOpen).append("ENDIF").append(guilClose).append("\n");
 			}
 			replace.put("{template-types}", buffer.toString());
+		}
+		
+		// create {template-stereotypes}
+		{
+			StringBuffer buffer = new StringBuffer();
+			for (EClass cls : ModelTestCase.getAllEClasses()) {
+				String node = cls.getName();		// EventTrigger
+				buffer.append(guilOpen).append("IF className=\"").append(node).append("Figure\"").append(guilClose).append("\n");
+				buffer.append("getFigure").append(node).append("StereotypeFigure().setText(\": \" + resolvedObject.eClass().getName());\n");
+				buffer.append(guilOpen).append("ENDIF").append(guilClose).append("\n");
+				
+			}
+			replace.put("{template-stereotypes}", buffer.toString());
 		}
 		
 		for (String key : replace.keySet()) {

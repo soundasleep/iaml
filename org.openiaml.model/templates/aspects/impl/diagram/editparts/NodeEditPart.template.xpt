@@ -21,7 +21,11 @@
  */
 «AROUND createNodeShape(gmfgen::GenNode node) FOR gmfgen::InnerClassViewmap-»
 	«REM»only expand for classes which we can support«ENDREM»
-	«IF {template-classname-list}»
+	«REM»
+		ALL classes now have 'Stereotype' labels, so we need to extend ALL labels.
+		«IF {.template-classname-list.}»
+	«ENDREM»
+	«IF true»
 		«EXPAND xpt::Common::generatedMemberComment("Jevon modification: we extend createNodeShape to use our extended class.")»
 		protected org.eclipse.draw2d.IFigure createNodeShape() {
 			«className» figure = new Extended«className»();
@@ -86,6 +90,9 @@
 				
 				/* type features */
 				{template-types}
+				
+				/* stereotype figures */
+				{template-stereotypes}
 				}
 			}
 		

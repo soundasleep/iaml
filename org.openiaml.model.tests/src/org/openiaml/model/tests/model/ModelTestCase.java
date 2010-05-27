@@ -4,8 +4,10 @@
 package org.openiaml.model.tests.model;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
@@ -150,6 +152,25 @@ public class ModelTestCase extends TestCase {
 	protected void assertNotEmpty(String message, String string) {
 		assertNotNull(message, string);
 		assertFalse(message, string.isEmpty());
+	}
+
+	/**
+	 * Get all of the EClasses in the system.
+	 * 
+	 * @return
+	 */
+	public static Set<EClass> getAllEClasses() {
+		Set<EClass> classes = new HashSet<EClass>();
+		
+		for (EPackage pkg : getFactoryMap().keySet()) {
+			for (EClassifier cf : pkg.getEClassifiers()) {
+				if (cf instanceof EClass) {
+					classes.add((EClass) cf);
+				}
+			}
+		}
+		
+		return classes;
 	}
 	
 }

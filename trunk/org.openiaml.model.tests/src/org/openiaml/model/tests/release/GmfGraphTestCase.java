@@ -8,6 +8,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import junit.framework.AssertionFailedError;
+
 import org.openiaml.model.tests.XmlTestCase;
 import org.openiaml.model.xpath.IterableElementList;
 import org.w3c.dom.Document;
@@ -32,7 +34,7 @@ public class GmfGraphTestCase extends XmlTestCase {
 	 * @return
 	 * @throws Exception
 	 */
-	public Document getGmfgraph() throws Exception {
+	public static Document getGmfgraph() throws Exception {
 		return loadDocument(GMF_ROOT + GMF_FILENAME);
 	}
 	
@@ -100,6 +102,7 @@ public class GmfGraphTestCase extends XmlTestCase {
 	/**
 	 * All labels in the root should have an accessor that
 	 * points to the right label in the 'figures'.
+	 * Prints out a list of accessors that fail the test to stderr.
 	 * 
 	 * @throws Exception
 	 */
@@ -108,6 +111,7 @@ public class GmfGraphTestCase extends XmlTestCase {
 		IterableElementList nl = xpath(gmfgraph, "//labels[@accessor]");
 		
 		assertNotSame("We should have at least one label node", nl.getLength(), 0);
+		AssertionFailedError firstAssertion = null;
 		for (Element child : nl) {
 			String childName = child.getAttribute("name");
 			
@@ -121,11 +125,24 @@ public class GmfGraphTestCase extends XmlTestCase {
 			assertEquals(figure.getNodeName(), "children");
 			
 			// it should have resolved to XXXFigure
-			assertEquals(figure.getAttribute("name"), childName + "Figure");
+			try {
+				assertEquals(figure.getAttribute("name"), childName + "Figure");
+			} catch (AssertionFailedError e) {
+				// print out to stderr
+				System.err.println(figure.getAttribute("name") + " != " + childName + "Figure");
+				
+				// save it for throwing later
+				if (firstAssertion == null) {
+					firstAssertion = e;
+				}
+			}
 			
 			// and it should be of a type label
 			assertEquals(figure.getAttribute("xsi:type"), "gmfgraph:Label");
 		}
+		
+		if (firstAssertion != null)
+			throw firstAssertion;
 	}
 	
 	/**

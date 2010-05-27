@@ -32,6 +32,7 @@ public class AllReleaseTests {
         suite.addTestSuite(ExportDependencyGraph.class);
         suite.addTestSuite(ElementModeldocTestCase.class);
         suite.addTestSuite(DynamicTemplatesTest.class);
+        suite.addTestSuite(StereotypesTestCase.class);
 		//$JUnit-END$
         return suite; 
    }

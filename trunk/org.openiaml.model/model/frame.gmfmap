@@ -1049,6 +1049,12 @@
       <features
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
+    <labelMappings
+        xsi:type="gmfmap:DesignLabelMapping"
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#SyncWireStereotype"/>
+    </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
@@ -1075,6 +1081,12 @@
       <features
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
+    <labelMappings
+        xsi:type="gmfmap:DesignLabelMapping"
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#RunActionStereotype"/>
+    </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/actions"/>
     <tool
@@ -1092,6 +1104,12 @@
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/ParameterEdge"/>
+    <labelMappings
+        xsi:type="gmfmap:DesignLabelMapping"
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#ParameterEdgeStereotype"/>
+    </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/parameterEdges"/>
     <tool
@@ -1117,6 +1135,12 @@
           href="iaml.gmfgraph#SetWireName"/>
       <features
           href="iaml.ecore#//NamedElement/name"/>
+    </labelMappings>
+    <labelMappings
+        xsi:type="gmfmap:DesignLabelMapping"
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#SetWireStereotype"/>
     </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/wires"/>
@@ -1144,6 +1168,12 @@
       <features
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
+    <labelMappings
+        xsi:type="gmfmap:DesignLabelMapping"
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#NavigateActionStereotype"/>
+    </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/actions"/>
     <tool
@@ -1168,6 +1198,12 @@
       <features
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
+    <labelMappings
+        xsi:type="gmfmap:DesignLabelMapping"
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#ConditionEdgeStereotype"/>
+    </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/conditionEdges"/>
     <tool
@@ -1189,6 +1225,12 @@
         readOnly="true">
       <diagramLabel
           href="iaml.gmfgraph#RequiresEdgeName"/>
+    </labelMappings>
+    <labelMappings
+        xsi:type="gmfmap:DesignLabelMapping"
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#RequiresEdgeStereotype"/>
     </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/requiresEdges"/>
@@ -1217,6 +1259,12 @@
       <features
           href="iaml.ecore#//wires/ConstraintEdge/type"/>
     </labelMappings>
+    <labelMappings
+        xsi:type="gmfmap:DesignLabelMapping"
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#ConstraintEdgeStereotype"/>
+    </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/constraintEdges"/>
     <tool
@@ -1242,6 +1290,12 @@
           href="iaml.gmfgraph#DetailWireName"/>
       <features
           href="iaml.ecore#//NamedElement/name"/>
+    </labelMappings>
+    <labelMappings
+        xsi:type="gmfmap:DesignLabelMapping"
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#DetailWireStereotype"/>
     </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/wires"/>
@@ -1269,6 +1323,12 @@
       <features
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
+    <labelMappings
+        xsi:type="gmfmap:DesignLabelMapping"
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#AutocompleteWireStereotype"/>
+    </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
@@ -1291,6 +1351,12 @@
       <diagramLabel
           href="iaml.gmfgraph#SelectEdgeName"/>
     </labelMappings>
+    <labelMappings
+        xsi:type="gmfmap:DesignLabelMapping"
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#SelectEdgeStereotype"/>
+    </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/selectEdges"/>
     <tool
@@ -1312,6 +1378,12 @@
         readOnly="true">
       <diagramLabel
           href="iaml.gmfgraph#SchemaEdgeName"/>
+    </labelMappings>
+    <labelMappings
+        xsi:type="gmfmap:DesignLabelMapping"
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#SchemaEdgeStereotype"/>
     </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/schemaEdges"/>

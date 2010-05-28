@@ -134,12 +134,12 @@ public class StereotypesTestCase extends XmlTestCase {
 	}
 	
 	/**
-	 * Test that all nodes and links in each .gmfmap have the mapping
+	 * Test that all nodes in each .gmfmap have the mapping
 	 * to a stereotype label.
 	 * 
 	 * @throws Exception
 	 */
-	public void testGmfMapMappingsToStereotypes() throws Exception {
+	public void testGmfMapMappingsToStereotypesNodes() throws Exception {
 		
 		for (String filename : getMapList()) {
 			boolean changed = false;
@@ -208,6 +208,118 @@ public class StereotypesTestCase extends XmlTestCase {
 				{
 					IterableElementList mapping = xpath(ownedChild, "labelMappings");
 					assertNotSame(filename + ": No label mappings found for " + elementName, 0, mapping.size());
+					boolean found = false;
+					int count = -1;
+					for (Element map : mapping) {
+						count++;
+						Element labelHref = xpathFirst(map, "diagramLabel");
+						// iaml.gmfgraph#InputFormStereotype
+						String href = labelHref.getAttribute("href");
+						if (href.endsWith("#" + elementName + "Stereotype")) {
+							assertFalse(filename + ": Found two mappings for " + elementName, found);
+							found = true;
+							
+							// check attributes
+							assertEquals("true", map.getAttribute("readOnly"));
+							
+							// if this is first, it should be the only child
+							if (count == 0 && mapping.size() != 1) {
+								fail(filename + ": Stereotype mapping should have been first in an element with only one label");
+							} else if (count > 1) {
+								fail(filename + ": Stereotype mapping must be second");
+							}
+						}
+					}
+
+					// it must be OK now
+					assertTrue(filename + ": Found no Stereotype mappings for " + elementName, found);
+				}				
+			
+			}
+			
+			if (changed) {
+				System.out.println("Writing " + filename + "...");
+				saveDocument(doc, filename);
+			}
+		}
+		
+	}
+	
+
+	/**
+	 * Test that all links in each .gmfmap have the mapping
+	 * to a stereotype label.
+	 * 
+	 * @throws Exception
+	 */
+	public void testGmfMapMappingsToStereotypesLinks() throws Exception {
+		
+		for (String filename : getMapList()) {
+			boolean changed = false;
+			
+			Document doc = getMapCache().get(filename);
+			
+			IterableElementList nodes = xpath(doc, "/Mapping/links");
+			for (Element node : nodes) {
+
+				// all nodes must be contained somewhere
+				Element domainMetaElement = (Element) xpathFirst(node, "domainMetaElement");
+				
+				// iaml.ecore#//EventTrigger
+				String elementName = domainMetaElement.getAttribute("href");
+				// get the last name (ignore sub-packages) -> EventTrigger
+				elementName = elementName.substring(elementName.lastIndexOf("/") + 1);
+				
+				// there must be at least one label mapping to a stereotype label
+				{
+					IterableElementList mapping = xpath(node, "labelMappings");
+					// its OK to have a link with no node mappings
+					boolean found = false;
+					int count = -1;
+					for (Element map : mapping) {
+						count++;
+						Element labelHref = xpathFirst(map, "diagramLabel");
+						// iaml.gmfgraph#InputFormStereotype
+						String href = labelHref.getAttribute("href");
+						if (href.endsWith("#" + elementName + "Stereotype")) {
+							assertFalse(filename + ": Found two mappings for " + elementName, found);
+							found = true;
+							
+							// if this is first, it should be the only child
+							if (count == 0 && mapping.size() != 1) {
+								fail(filename + ": Stereotype mapping should have been first in an element with only one label");
+							} else if (count > 1) {
+								fail(filename + ": Stereotype mapping must be second");
+							}
+						}
+					}
+
+					if (!found) {
+						// try adding it manually
+						Element newMapping = doc.createElement("labelMappings");
+						newMapping.setAttribute("xsi:type", "gmfmap:DesignLabelMapping");
+						newMapping.setAttribute("readOnly", "true");
+						
+						// insert as second child
+						if (mapping.size() < 2) {
+							node.appendChild(newMapping);
+						} else {
+							node.insertBefore(newMapping, mapping.item(1));
+						}
+						
+						// add href
+						Element newHref = doc.createElement("diagramLabel");
+						newHref.setAttribute("href", GmfGraphTestCase.GMF_FILENAME + "#" + elementName + "Stereotype");
+						newMapping.appendChild(newHref);
+						
+						changed = true;
+					}
+				}
+				
+				// then search again
+				{
+					IterableElementList mapping = xpath(node, "labelMappings");
+					// its OK to have a link with no node mappings
 					boolean found = false;
 					int count = -1;
 					for (Element map : mapping) {

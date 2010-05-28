@@ -21,6 +21,12 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#CompositeOperationStereotype"/>
+      </labelMappings>
+      <labelMappings
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#CompositeOperationParentName"/>
@@ -48,6 +54,12 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveOperationStereotype"/>
+      </labelMappings>
+      <labelMappings
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#PrimitiveOperationParentName"/>
@@ -70,6 +82,12 @@
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#DomainSchemaStereotype"/>
+      </labelMappings>
       <diagramNode
           href="iaml.gmfgraph#DomainSchema"/>
     </ownedChild>
@@ -86,6 +104,12 @@
             href="iaml.gmfgraph#DomainAttributeName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#DomainAttributeStereotype"/>
       </labelMappings>
       <labelMappings
           readOnly="true">
@@ -116,6 +140,12 @@
             href="iaml.gmfgraph#PropertyName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PropertyStereotype"/>
       </labelMappings>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping"
@@ -166,6 +196,12 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PropertyStereotype"/>
+      </labelMappings>
+      <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping"
           viewPattern="default: {0}"
           editorPattern=""
@@ -214,6 +250,12 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PropertyStereotype"/>
+      </labelMappings>
+      <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping"
           viewPattern="default: {0}"
           editorPattern=""
@@ -258,6 +300,12 @@
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#FrameStereotype"/>
+      </labelMappings>
       <diagramNode
           href="iaml.gmfgraph#Frame"/>
     </ownedChild>
@@ -276,6 +324,12 @@
             href="iaml.gmfgraph#InputFormName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#InputFormStereotype"/>
       </labelMappings>
       <labelMappings
           readOnly="true">
@@ -303,6 +357,12 @@
             href="iaml.gmfgraph#InputTextFieldName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#InputTextFieldStereotype"/>
       </labelMappings>
       <labelMappings
           readOnly="true">
@@ -336,6 +396,12 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#StaticValueStereotype"/>
+      </labelMappings>
+      <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping"
           editPattern="">
         <diagramLabel
@@ -367,6 +433,12 @@
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#SessionStereotype"/>
+      </labelMappings>
       <diagramNode
           href="iaml.gmfgraph#Session"/>
     </ownedChild>
@@ -383,6 +455,12 @@
             href="iaml.gmfgraph#LoginHandlerName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#LoginHandlerStereotype"/>
       </labelMappings>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping"
@@ -415,6 +493,12 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#CompositeConditionStereotype"/>
+      </labelMappings>
+      <labelMappings
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#CompositeConditionParentName"/>
@@ -438,6 +522,12 @@
             href="iaml.gmfgraph#DomainIteratorName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#DomainIteratorStereotype"/>
       </labelMappings>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping"
@@ -487,6 +577,12 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#DomainAttributeInstanceStereotype"/>
+      </labelMappings>
+      <labelMappings
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#DomainAttributeInstanceType"/>
@@ -509,6 +605,12 @@
             href="iaml.gmfgraph#ButtonName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#ButtonStereotype"/>
       </labelMappings>
       <labelMappings
           readOnly="true">
@@ -534,6 +636,12 @@
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#QueryParameterStereotype"/>
+      </labelMappings>
       <diagramNode
           href="iaml.gmfgraph#QueryParameter"/>
     </ownedChild>
@@ -551,6 +659,12 @@
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#AccessControlHandlerStereotype"/>
+      </labelMappings>
       <diagramNode
           href="iaml.gmfgraph#AccessControlHandler"/>
     </ownedChild>
@@ -566,6 +680,12 @@
             href="iaml.gmfgraph#PermissionName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PermissionStereotype"/>
       </labelMappings>
       <diagramNode
           href="iaml.gmfgraph#Permission"/>
@@ -583,6 +703,12 @@
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#RoleStereotype"/>
+      </labelMappings>
       <diagramNode
           href="iaml.gmfgraph#Role"/>
     </ownedChild>
@@ -598,6 +724,12 @@
             href="iaml.gmfgraph#EntryGateName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#EntryGateStereotype"/>
       </labelMappings>
       <labelMappings
           readOnly="true">
@@ -619,6 +751,12 @@
             href="iaml.gmfgraph#ExitGateName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#ExitGateStereotype"/>
       </labelMappings>
       <labelMappings
           readOnly="true">
@@ -643,6 +781,12 @@
             href="iaml.gmfgraph#LabelName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#LabelStereotype"/>
       </labelMappings>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
@@ -678,6 +822,12 @@
             href="iaml.gmfgraph#EventTriggerContainmentFeature"/>
       </labelMappings>
       <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerStereotype"/>
+      </labelMappings>
+      <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
             href="iaml.gmfgraph#EventTriggerName"/>
@@ -709,6 +859,12 @@
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#EventTriggerContainmentFeature"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerStereotype"/>
       </labelMappings>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
@@ -744,6 +900,12 @@
             href="iaml.gmfgraph#EventTriggerContainmentFeature"/>
       </labelMappings>
       <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerStereotype"/>
+      </labelMappings>
+      <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
             href="iaml.gmfgraph#EventTriggerName"/>
@@ -777,6 +939,12 @@
             href="iaml.gmfgraph#EventTriggerContainmentFeature"/>
       </labelMappings>
       <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerStereotype"/>
+      </labelMappings>
+      <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
             href="iaml.gmfgraph#EventTriggerName"/>
@@ -803,6 +971,12 @@
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#EventTriggerContainmentFeature"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#EventTriggerStereotype"/>
       </labelMappings>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
@@ -836,6 +1010,12 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#MapStereotype"/>
+      </labelMappings>
+      <labelMappings
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#MapParentName"/>
@@ -861,6 +1041,12 @@
             href="iaml.gmfgraph#MapPointName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#MapPointStereotype"/>
       </labelMappings>
       <labelMappings
           readOnly="true">
@@ -891,6 +1077,12 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveConditionStereotype"/>
+      </labelMappings>
+      <labelMappings
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#PrimitiveConditionParentName"/>
@@ -913,6 +1105,12 @@
           href="iaml.gmfgraph#SyncWireName"/>
       <features
           href="iaml.ecore#//NamedElement/name"/>
+    </labelMappings>
+    <labelMappings
+        xsi:type="gmfmap:DesignLabelMapping"
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#SyncWireStereotype"/>
     </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/wires"/>
@@ -940,6 +1138,12 @@
       <features
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
+    <labelMappings
+        xsi:type="gmfmap:DesignLabelMapping"
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#RunActionStereotype"/>
+    </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/actions"/>
     <tool
@@ -957,6 +1161,12 @@
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/ParameterEdge"/>
+    <labelMappings
+        xsi:type="gmfmap:DesignLabelMapping"
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#ParameterEdgeStereotype"/>
+    </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/parameterEdges"/>
     <tool
@@ -982,6 +1192,12 @@
           href="iaml.gmfgraph#SetWireName"/>
       <features
           href="iaml.ecore#//NamedElement/name"/>
+    </labelMappings>
+    <labelMappings
+        xsi:type="gmfmap:DesignLabelMapping"
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#SetWireStereotype"/>
     </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/wires"/>
@@ -1009,6 +1225,12 @@
       <features
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
+    <labelMappings
+        xsi:type="gmfmap:DesignLabelMapping"
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#NavigateActionStereotype"/>
+    </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/actions"/>
     <tool
@@ -1033,6 +1255,12 @@
       <features
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
+    <labelMappings
+        xsi:type="gmfmap:DesignLabelMapping"
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#ConditionEdgeStereotype"/>
+    </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/conditionEdges"/>
     <tool
@@ -1054,6 +1282,12 @@
         readOnly="true">
       <diagramLabel
           href="iaml.gmfgraph#RequiresEdgeName"/>
+    </labelMappings>
+    <labelMappings
+        xsi:type="gmfmap:DesignLabelMapping"
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#RequiresEdgeStereotype"/>
     </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/requiresEdges"/>
@@ -1079,6 +1313,12 @@
       <features
           href="iaml.ecore#//wires/ConstraintEdge/type"/>
     </labelMappings>
+    <labelMappings
+        xsi:type="gmfmap:DesignLabelMapping"
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#ConstraintEdgeStereotype"/>
+    </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/constraintEdges"/>
     <diagramLink
@@ -1102,6 +1342,12 @@
       <features
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
+    <labelMappings
+        xsi:type="gmfmap:DesignLabelMapping"
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#DetailWireStereotype"/>
+    </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/wires"/>
     <tool
@@ -1123,6 +1369,12 @@
         readOnly="true">
       <diagramLabel
           href="iaml.gmfgraph#SelectEdgeName"/>
+    </labelMappings>
+    <labelMappings
+        xsi:type="gmfmap:DesignLabelMapping"
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#SelectEdgeStereotype"/>
     </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/selectEdges"/>

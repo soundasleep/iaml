@@ -19,6 +19,12 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#DomainAttributeStereotype"/>
+      </labelMappings>
+      <labelMappings
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#DomainAttributeParentName"/>
@@ -47,6 +53,12 @@
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PermissionStereotype"/>
+      </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="schema.gmftool#//@palette/@tools.0/@tools.1"/>
@@ -60,6 +72,12 @@
     <labelMappings>
       <diagramLabel
           href="iaml.gmfgraph#ExtendsEdgeName"/>
+    </labelMappings>
+    <labelMappings
+        xsi:type="gmfmap:DesignLabelMapping"
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#ExtendsEdgeStereotype"/>
     </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/extendsEdges"/>

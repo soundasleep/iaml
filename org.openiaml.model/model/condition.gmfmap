@@ -18,6 +18,12 @@
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#ParameterStereotype"/>
+      </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="condition.gmftool#//@palette/@tools.1/@tools.0"/>
@@ -37,6 +43,12 @@
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#StartNodeLabel"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#StartNodeStereotype"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
@@ -59,6 +71,12 @@
             href="iaml.gmfgraph#CancelNodeText"/>
         <features
             href="iaml.ecore#//operations/CancelNode/exceptionText"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#CancelNodeStereotype"/>
       </labelMappings>
       <labelMappings
           readOnly="true">
@@ -85,6 +103,12 @@
         <diagramLabel
             href="iaml.gmfgraph#FinishNodeLabel"/>
       </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#FinishNodeStereotype"/>
+      </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="condition.gmftool#//@palette/@tools.0/@tools.1"/>
@@ -104,6 +128,12 @@
             href="iaml.gmfgraph#TemporaryVariableName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#TemporaryVariableStereotype"/>
       </labelMappings>
       <labelMappings
           readOnly="true">
@@ -127,6 +157,12 @@
             href="iaml.gmfgraph#PropertyName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PropertyStereotype"/>
       </labelMappings>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping"
@@ -172,6 +208,12 @@
         <features
             href="iaml.ecore#//operations/DecisionNode/name"/>
       </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#DecisionNodeStereotype"/>
+      </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="condition.gmftool#//@palette/@tools.0/@tools.3"/>
@@ -193,6 +235,12 @@
             href="iaml.gmfgraph#PrimitiveOperationName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveOperationStereotype"/>
       </labelMappings>
       <labelMappings
           readOnly="true">
@@ -222,6 +270,12 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#CompositeOperationStereotype"/>
+      </labelMappings>
+      <labelMappings
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#CompositeOperationParentName"/>
@@ -245,6 +299,12 @@
             href="iaml.gmfgraph#StaticValueName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#StaticValueStereotype"/>
       </labelMappings>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping"
@@ -281,6 +341,12 @@
         <diagramLabel
             href="iaml.gmfgraph#CastNodeLabel"/>
       </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#CastNodeStereotype"/>
+      </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="condition.gmftool#//@palette/@tools.0/@tools.7"/>
@@ -302,6 +368,12 @@
             href="iaml.gmfgraph#PrimitiveConditionName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveConditionStereotype"/>
       </labelMappings>
       <labelMappings
           readOnly="true">
@@ -328,6 +400,12 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#CompositeConditionStereotype"/>
+      </labelMappings>
+      <labelMappings
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#CompositeConditionParentName"/>
@@ -339,6 +417,12 @@
   <links>
     <domainMetaElement
         href="iaml.ecore#//DataFlowEdge"/>
+    <labelMappings
+        xsi:type="gmfmap:DesignLabelMapping"
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#DataFlowEdgeStereotype"/>
+    </labelMappings>
     <containmentFeature
         href="iaml.ecore#//CompositeCondition/dataEdges"/>
     <tool
@@ -365,6 +449,12 @@
       <features
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
+    <labelMappings
+        xsi:type="gmfmap:DesignLabelMapping"
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#ExecutionEdgeStereotype"/>
+    </labelMappings>
     <containmentFeature
         href="iaml.ecore#//CompositeCondition/executionEdges"/>
     <tool
@@ -388,6 +478,12 @@
           href="iaml.gmfgraph#ConditionEdgeName"/>
       <features
           href="iaml.ecore#//NamedElement/name"/>
+    </labelMappings>
+    <labelMappings
+        xsi:type="gmfmap:DesignLabelMapping"
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#ConditionEdgeStereotype"/>
     </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/conditionEdges"/>

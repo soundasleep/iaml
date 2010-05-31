@@ -6,6 +6,7 @@
 	«EXPAND Index::index»
 	«EXPAND Examples::examples»
 	«EXPAND ExamplesList::examplesList»
+	«EXPAND LatexImagesList::latexImagesList»
 	
 	«EXPAND ClassTemplate::class(this) FOREACH classes»
 	

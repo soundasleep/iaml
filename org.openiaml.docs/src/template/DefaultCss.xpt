@@ -149,5 +149,16 @@ a.toggle_on, a.toggle_off { text-indent: 900em; display: inline-block; width: 9p
 a.toggle_on { background: url("../icons/plus.gif") top left no-repeat; }
 a.toggle_off { background: url("../icons/minus.gif") top left no-repeat; }
 
+/* images.html */
+div.visual_element {
+	clear: right;
+	float: left;
+	width: 300px;
+	border: 1px solid #999;
+	text-align: center;
+	margin: 5px;
+	padding: 5px;
+}
+
 «ENDFILE»
 «ENDDEFINE»

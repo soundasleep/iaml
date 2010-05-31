@@ -188,15 +188,30 @@ public class ExportIAMLImagesJob extends AbstractIAMLDocJob {
 	 */
 	protected void exportDiagramThenClose(EClass cls, DiagramDocumentEditor editor, IProgressMonitor monitor) throws CoreException {
 		DiagramEditPart part = editor.getDiagramEditPart();
-		IPath destination = generateImageDestination(cls);
 		
 		// save this image
 		// (even if there isn't anything in it)
-		IProgressMonitor saveMonitor = new SubProgressMonitor(monitor, 1);
-		saveMonitor.beginTask("Saving image " + destination, 2);
-		monitor.subTask("Saving image " + destination.lastSegment());
-		CopyToImageUtil img = getCopyToImageUtil();
-		img.copyToImage(part, destination, ImageFileFormat.PNG, new SubProgressMonitor(monitor, 1));
+		IProgressMonitor saveMonitor = new SubProgressMonitor(monitor, 2);
+		saveMonitor.beginTask("Saving image for " + cls.getName(), 2);
+		
+		// issue 193: first save as png
+		{
+			IPath destination = generateImageDestination(cls, ".png");
+			monitor.subTask("Saving PNG image " + destination.lastSegment());
+			CopyToImageUtil img = getCopyToImageUtil();
+			img.copyToImage(part, destination, ImageFileFormat.PNG, new SubProgressMonitor(monitor, 1));
+			saveMonitor.worked(1);
+		}
+
+		// issue 193: then save as svg
+		{
+			IPath destination = generateImageDestination(cls, ".svg");
+			monitor.subTask("Saving SVG image " + destination.lastSegment());
+			CopyToImageUtil img = getCopyToImageUtil();
+			img.copyToImage(part, destination, ImageFileFormat.SVG, new SubProgressMonitor(monitor, 1));
+			saveMonitor.worked(1);
+		}
+
 		saveMonitor.done();
 		
 		// close the editor once we're done
@@ -237,10 +252,14 @@ public class ExportIAMLImagesJob extends AbstractIAMLDocJob {
 	}
 	
 	/**
+	 * @param fileExtension the file extension to add, e.g. ".png"
+	 * @throws IllegalArgumentException if fileExtension does not start with '.'
 	 * @return
 	 */
-	protected IPath generateImageDestination(EClass cls) {
-		return project.getFile(cls.getName() + ".png").getLocation();
+	protected IPath generateImageDestination(EClass cls, String fileExtension) {
+		if (!fileExtension.startsWith("."))
+			throw new IllegalArgumentException("File extension needs to start with '.'");
+		return project.getFile(cls.getName() + fileExtension).getLocation();
 	}
 
 	/**

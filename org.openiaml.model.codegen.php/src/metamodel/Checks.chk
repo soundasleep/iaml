@@ -126,7 +126,7 @@ context model::PrimitiveOperation WARNING "Unknown primitive operation name '" +
 	(eContainer != null && model::domain::DomainIterator.isInstance(eContainer) && ((model::domain::DomainIterator) eContainer).skip == this) || 
 	(eContainer != null && model::domain::DomainIterator.isInstance(eContainer) && ((model::domain::DomainIterator) eContainer).jump == this) || 
 	(name == "set" ||
-		name == "javascriptAlert" || name == "save" ||
+		name == "alert" || name == "save" ||
 		name == "new" ||
 		name == "equal?" || name == "add role" ||
 		name == "add permission" || name == "remove role" ||

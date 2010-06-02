@@ -217,7 +217,7 @@ rule "Create components of 'alert' operation"
 		queue.add(parameter, drools);
 		
 		PrimitiveOperation op = handler.generatedPrimitiveOperation(o, o);
-		handler.setName(op, "javascriptAlert");
+		handler.setName(op, "alert");
 		queue.add(op, drools);
 		
 		StartNode start = handler.generatedStartNode(o, o);

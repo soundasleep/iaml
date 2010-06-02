@@ -76,7 +76,7 @@ var store_event_queued = false;
  * server to synchronise client-side and server-side events.
  *
  * @implementation PrimitiveOperation
- *		If two 'javascriptAlert' operations are called in the same client-side session with the same message,
+ *		If two 'alert' operations are called in the same client-side session with the same message,
  *		only the first alert message will be displayed.
  */
 var last_alert_message = null;

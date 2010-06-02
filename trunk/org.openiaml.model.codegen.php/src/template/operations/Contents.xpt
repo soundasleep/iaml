@@ -17,8 +17,8 @@
 	«REM»special primitive operation names«ENDREM»
 	«IF name == "set"»
 		«EXPAND setOperation(start, php) FOR this»
-	«ELSEIF name == "javascriptAlert"»
-		«EXPAND javascriptAlert(start, php) FOR this»
+	«ELSEIF name == "alert"»
+		«EXPAND alert(start, php) FOR this»
 	«ELSEIF name == "hide"»
 		«EXPAND hideOperation(start, php) FOR this»
 	«ELSEIF name == "show"»
@@ -408,7 +408,7 @@
  *
  * TODO remove this and replace with a generic 'alert()' method.
  */
-«DEFINE javascriptAlert(model::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
+«DEFINE alert(model::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
 	«IF php»
 		/*
 		 * Alert: We can only alert on the server-side if we can pass instructions

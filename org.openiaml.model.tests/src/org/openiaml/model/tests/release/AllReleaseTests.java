@@ -33,6 +33,7 @@ public class AllReleaseTests {
         suite.addTestSuite(ElementModeldocTestCase.class);
         suite.addTestSuite(DynamicTemplatesTest.class);
         suite.addTestSuite(StereotypesTestCase.class);
+        suite.addTestSuite(CodegenTestCase.class);
 		//$JUnit-END$
         return suite; 
    }

@@ -123,6 +123,9 @@
         <diagramLabel
             href="iaml.gmfgraph#FrameStereotype"/>
       </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="root.gmftool#//@palette/@tools.2/@tools.0"/>
       <diagramNode
           href="iaml.gmfgraph#Frame"/>
     </ownedChild>
@@ -233,6 +236,9 @@
         <diagramLabel
             href="iaml.gmfgraph#SessionStereotype"/>
       </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="root.gmftool#//@palette/@tools.2/@tools.1"/>
       <diagramNode
           href="iaml.gmfgraph#Session"/>
     </ownedChild>
@@ -329,6 +335,9 @@
         <diagramLabel
             href="iaml.gmfgraph#EmailStereotype"/>
       </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="root.gmftool#//@palette/@tools.2/@tools.2"/>
       <diagramNode
           href="iaml.gmfgraph#Email"/>
     </ownedChild>

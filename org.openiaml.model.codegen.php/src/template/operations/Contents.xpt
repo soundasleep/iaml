@@ -415,12 +415,20 @@
 		 * onto the client.
 		 */
 		if (defined('REDIRECT_ON_CLIENT') && REDIRECT_ON_CLIENT) {
-			$message = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
+			$message = «IF inFlows.from.isEmpty»
+				«REM»
+					this PrimitiveOperation is being called from an ECA rule, 
+					not within an operation; use the passed parameter as input
+				«ENDREM» 
+				$default_arg
+			«ELSE»
+				«EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»
+			«ENDIF»;
 			log_message("[alert] $message");
 			echo "alert " . escape_parameter_string($message) . "\n";
 		} else {
-			«REM»how are we supposed to throw an alert on the client from the server?«ENDREM»
-			throw new IamlRuntimeException("Cannot call a Javascript alert from server-side: " . «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»);
+			«REM»how are we supposed to throw an alert on the client from an entirely server-side call?«ENDREM»
+			throw new IamlRuntimeException("Cannot call a Javascript alert from server-side");
 		}
 	«ELSE»
 		// throw an alert box
@@ -430,7 +438,15 @@
 		// with a generic alert(), that will render an alert box in the most appropriate
 		// way for the alert container. 
 		«ENDREM»
-		alert_without_repeat(«EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»);
+		alert_without_repeat(«IF inFlows.from.isEmpty»
+				«REM»
+					this PrimitiveOperation is being called from an ECA rule, 
+					not within an operation; use the passed parameter as input
+				«ENDREM» 
+				default_arg
+			«ELSE»
+				«EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»
+			«ENDIF»);
 	«ENDIF»
 
 	«REM»continue«ENDREM»

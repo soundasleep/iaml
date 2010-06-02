@@ -70,11 +70,11 @@
 «DEFINE operationDefinition(Boolean php) FOR model::Operation-»
 	/* simple operation */
 	«IF php»
-	function do_«safeName()»(«EXPAND Parameters::signatures(php) FOREACH parameters.sortBy(p|p.name) SEPARATOR ", "-») {
+	function do_«safeName()»($default_arg = null) {
 		«EXPAND template::operations::Contents::operationContents(null, php) FOR this»
 	}
 	«ELSE»
-	function do_«safeName()»(«EXPAND Parameters::signatures(php) FOREACH parameters.sortBy(p|p.name) SEPARATOR ", "-») {
+	function do_«safeName()»(default_arg) {
 		«EXPAND template::operations::Contents::operationContents(null, php) FOR this»
 	}
 	«ENDIF»

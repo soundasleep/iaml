@@ -18,9 +18,9 @@
             vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="247"
-            green="221"
-            blue="238"/>
+            red="202"
+            green="225"
+            blue="173"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -44,10 +44,6 @@
             xsi:type="gmfgraph:Label"
             name="EventTriggerStereotypeFigure"
             text=": EventTrigger"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="EventTriggerNameFigure"
-            text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
             name="EventTriggerParentNameFigure"
@@ -74,8 +70,6 @@
           figure="//@figures.0/@descriptors.0/@actualFigure/@children.1"/>
       <accessors
           figure="//@figures.0/@descriptors.0/@actualFigure/@children.2"/>
-      <accessors
-          figure="//@figures.0/@descriptors.0/@actualFigure/@children.3"/>
     </descriptors>
     <descriptors
         name="DomainAttributeFigure">
@@ -103,19 +97,19 @@
             text=": DomainAttribute"/>
         <children
             xsi:type="gmfgraph:Label"
-            name="DomainAttributeParentNameFigure"
-            text="[none]">
-          <foregroundColor
-              xsi:type="gmfgraph:ConstantColor"
-              value="gray"/>
-        </children>
-        <children
-            xsi:type="gmfgraph:Label"
             name="DomainAttributeTypeFigure"
             text="&lt;...>">
           <foregroundColor
               xsi:type="gmfgraph:ConstantColor"
               value="black"/>
+        </children>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="DomainAttributeParentNameFigure"
+            text="[none]">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="gray"/>
         </children>
       </actualFigure>
       <accessors
@@ -123,30 +117,9 @@
       <accessors
           figure="//@figures.0/@descriptors.1/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.1/@actualFigure/@children.2"/>
-      <accessors
           figure="//@figures.0/@descriptors.1/@actualFigure/@children.3"/>
-    </descriptors>
-    <descriptors
-        name="ActivityNodeFigure">
-      <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="ActivityNodeFigure">
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="ActivityNodeStereotypeFigure"
-            text=": ActivityNode"/>
-      </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.2/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.1/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="ParameterFigure">
@@ -154,11 +127,8 @@
           xsi:type="gmfgraph:Rectangle"
           name="ParameterFigure">
         <layout
-            xsi:type="gmfgraph:FlowLayout"/>
-        <font
-            xsi:type="gmfgraph:BasicFont"
-            faceName="Arial"
-            style="ITALIC"/>
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -169,21 +139,17 @@
         </border>
         <children
             xsi:type="gmfgraph:Label"
-            name="ParameterNamePrefix"
-            text="parameter: "/>
+            name="ParameterNameFigure"
+            text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
             name="ParameterStereotypeFigure"
             text=": Parameter"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="ParameterNameFigure"
-            text="&lt;...>"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.3/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.2/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.3/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.2/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="PrimitiveOperationFigure">
@@ -195,9 +161,9 @@
             vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="240"
-            green="240"
-            blue="240"/>
+            red="193"
+            green="202"
+            blue="244"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -224,26 +190,25 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.4/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.3/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.4/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.3/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.4/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.3/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="CompositeOperationFigure">
       <actualFigure
           xsi:type="gmfgraph:RoundedRectangle"
-          name="CompositeOperationFigure"
-          lineKind="LINE_DASH">
+          name="CompositeOperationFigure">
         <layout
             xsi:type="gmfgraph:FlowLayout"
             vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="240"
-            green="240"
-            blue="240"/>
+            red="244"
+            green="202"
+            blue="193"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -270,41 +235,11 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.5/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.4/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.5/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.4/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.5/@actualFigure/@children.2"/>
-    </descriptors>
-    <descriptors
-        name="ApplicationElementFigure">
-      <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="ApplicationElementFigure">
-        <layout
-            xsi:type="gmfgraph:FlowLayout"
-            vertical="true"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="ApplicationElementNameFigure"
-            text="&lt;...>"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="ApplicationElementStereotypeFigure"
-            text=": ApplicationElement"/>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.6/@actualFigure/@children.0"/>
-      <accessors
-          figure="//@figures.0/@descriptors.6/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.4/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="PropertyFigure">
@@ -316,9 +251,9 @@
             vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="208"
-            green="185"
-            blue="243"/>
+            red="231"
+            green="233"
+            blue="234"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -333,10 +268,6 @@
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
-            name="PropertyStereotypeFigure"
-            text=": Property"/>
-        <children
-            xsi:type="gmfgraph:Label"
             name="PropertyContainmentFeatureFigure"
             text="&lt;...>">
           <foregroundColor
@@ -348,16 +279,8 @@
         </children>
         <children
             xsi:type="gmfgraph:Label"
-            name="PropertyDefaultValueFigure"
-            text="&lt;...>"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="PropertyParentNameFigure"
-            text="[none]">
-          <foregroundColor
-              xsi:type="gmfgraph:ConstantColor"
-              value="gray"/>
-        </children>
+            name="PropertyStereotypeFigure"
+            text=": Property"/>
         <children
             xsi:type="gmfgraph:Label"
             name="PropertyTypeFigure"
@@ -366,19 +289,25 @@
               xsi:type="gmfgraph:ConstantColor"
               value="black"/>
         </children>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="PropertyParentNameFigure"
+            text="[none]">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="gray"/>
+        </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.7/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.5/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.7/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.5/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.7/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.5/@actualFigure/@children.2"/>
       <accessors
-          figure="//@figures.0/@descriptors.7/@actualFigure/@children.3"/>
+          figure="//@figures.0/@descriptors.5/@actualFigure/@children.3"/>
       <accessors
-          figure="//@figures.0/@descriptors.7/@actualFigure/@children.4"/>
-      <accessors
-          figure="//@figures.0/@descriptors.7/@actualFigure/@children.5"/>
+          figure="//@figures.0/@descriptors.5/@actualFigure/@children.4"/>
     </descriptors>
     <descriptors
         name="StaticValueFigure">
@@ -389,9 +318,14 @@
         <layout
             xsi:type="gmfgraph:FlowLayout"
             vertical="true"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="231"
+            green="233"
+            blue="234"/>
         <font
             xsi:type="gmfgraph:BasicFont"
-            faceName="Arial"
+            faceName=""
             style="BOLD"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
@@ -404,15 +338,11 @@
         <children
             xsi:type="gmfgraph:Label"
             name="StaticValueNameFigure"
-            text="&lt;...>"/>
+            text="&lt;...> = ?"/>
         <children
             xsi:type="gmfgraph:Label"
             name="StaticValueStereotypeFigure"
             text=": StaticValue"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="StaticValueValueFigure"
-            text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
             name="StaticValueTypeFigure"
@@ -423,61 +353,28 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.8/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.6/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.8/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.6/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.8/@actualFigure/@children.2"/>
-      <accessors
-          figure="//@figures.0/@descriptors.8/@actualFigure/@children.3"/>
-    </descriptors>
-    <descriptors
-        name="VisibleThingFigure">
-      <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="VisibleThingFigure">
-        <layout
-            xsi:type="gmfgraph:FlowLayout"
-            vertical="true"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="VisibleThingNameFigure"
-            text="&lt;...>"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="VisibleThingStereotypeFigure"
-            text=": VisibleThing"/>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.9/@actualFigure/@children.0"/>
-      <accessors
-          figure="//@figures.0/@descriptors.9/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.6/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="DomainSourceFigure">
       <actualFigure
           xsi:type="gmfgraph:Rectangle"
-          name="DomainSourceFigure"
-          lineWidth="2">
+          name="DomainSourceFigure">
         <layout
             xsi:type="gmfgraph:FlowLayout"
             vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="240"
-            green="240"
-            blue="220"/>
+            red="197"
+            green="186"
+            blue="169"/>
         <font
             xsi:type="gmfgraph:BasicFont"
-            faceName="Arial"
+            faceName=""
             style="BOLD"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
@@ -498,14 +395,19 @@
         <children
             xsi:type="gmfgraph:Label"
             name="DomainSourceTypeFigure"
-            text="&lt;...>"/>
+            text="[&lt;...>]">
+          <font
+              xsi:type="gmfgraph:BasicFont"
+              faceName=""
+              style="BOLD"/>
+        </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.10/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.7/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.10/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.7/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.10/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.7/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="DataFlowEdgeFigure">
@@ -520,7 +422,7 @@
             text=": DataFlowEdge"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.11/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.8/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="TemporaryVariableFigure">
@@ -532,9 +434,9 @@
             vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="243"
-            green="212"
-            blue="185"/>
+            red="231"
+            green="233"
+            blue="234"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -545,16 +447,12 @@
         </border>
         <children
             xsi:type="gmfgraph:Label"
-            name="TemporaryVariableNamePrefix"
-            text="temp: "/>
+            name="TemporaryVariableNameFigure"
+            text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
             name="TemporaryVariableStereotypeFigure"
             text=": TemporaryVariable"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="TemporaryVariableNameFigure"
-            text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
             name="TemporaryVariableTypeFigure"
@@ -565,11 +463,11 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.12/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.9/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.12/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.9/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.12/@actualFigure/@children.3"/>
+          figure="//@figures.0/@descriptors.9/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="ExecutionEdgeFigure">
@@ -587,9 +485,9 @@
             text=": ExecutionEdge"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.13/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.10/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.13/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.10/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="DynamicApplicationElementSetFigure">
@@ -600,11 +498,6 @@
         <layout
             xsi:type="gmfgraph:FlowLayout"
             vertical="true"/>
-        <backgroundColor
-            xsi:type="gmfgraph:RGBColor"
-            red="240"
-            green="220"
-            blue="220"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -627,16 +520,16 @@
             text="&lt;...>">
           <font
               xsi:type="gmfgraph:BasicFont"
-              faceName="Arial"
+              faceName=""
               style="ITALIC"/>
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.14/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.11/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.14/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.11/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.14/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.11/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="FrameFigure">
@@ -648,9 +541,9 @@
             vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="240"
-            green="240"
-            blue="240"/>
+            red="255"
+            green="246"
+            blue="149"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -669,15 +562,19 @@
             text=": Frame"/>
         <children
             xsi:type="gmfgraph:Label"
-            name="FrameUrlFigure"
-            text="&lt;...>"/>
+            name="FrameParentNameFigure"
+            text="[none]">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="gray"/>
+        </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.15/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.12/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.15/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.12/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.15/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.12/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="InputFormFigure">
@@ -689,9 +586,9 @@
             vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="243"
-            green="185"
-            blue="192"/>
+            red="255"
+            green="246"
+            blue="149"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -718,11 +615,11 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.16/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.13/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.16/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.13/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.16/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.13/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="InputTextFieldFigure">
@@ -734,9 +631,9 @@
             vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="243"
-            green="229"
-            blue="185"/>
+            red="255"
+            green="246"
+            blue="149"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -755,65 +652,29 @@
             text=": InputTextField"/>
         <children
             xsi:type="gmfgraph:Label"
-            name="InputTextFieldParentNameFigure"
-            text="[none]">
-          <foregroundColor
-              xsi:type="gmfgraph:ConstantColor"
-              value="gray"/>
-        </children>
-        <children
-            xsi:type="gmfgraph:Label"
             name="InputTextFieldTypeFigure"
             text="&lt;...>">
           <foregroundColor
               xsi:type="gmfgraph:ConstantColor"
               value="black"/>
         </children>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.17/@actualFigure/@children.0"/>
-      <accessors
-          figure="//@figures.0/@descriptors.17/@actualFigure/@children.1"/>
-      <accessors
-          figure="//@figures.0/@descriptors.17/@actualFigure/@children.2"/>
-      <accessors
-          figure="//@figures.0/@descriptors.17/@actualFigure/@children.3"/>
-    </descriptors>
-    <descriptors
-        name="SingleWireFigure">
-      <actualFigure
-          xsi:type="gmfgraph:PolylineConnection"
-          name="SingleWireFigure"
-          lineKind="LINE_DASH"
-          targetDecoration="//@figures.0/@figures.0">
         <children
             xsi:type="gmfgraph:Label"
-            name="SingleWireStereotypeFigure"
-            text=": SingleWire"/>
+            name="InputTextFieldParentNameFigure"
+            text="[none]">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="gray"/>
+        </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.18/@actualFigure/@children.0"/>
-    </descriptors>
-    <descriptors
-        name="CompositeWireFigure">
-      <actualFigure
-          xsi:type="gmfgraph:PolylineConnection"
-          name="CompositeWireFigure"
-          lineKind="LINE_DASH"
-          targetDecoration="//@figures.0/@figures.0">
-        <children
-            xsi:type="gmfgraph:Label"
-            name="CompositeWireNameFigure"
-            text="&lt;...>"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="CompositeWireStereotypeFigure"
-            text=": CompositeWire"/>
-      </actualFigure>
+          figure="//@figures.0/@descriptors.14/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.19/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.14/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.19/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.14/@actualFigure/@children.2"/>
+      <accessors
+          figure="//@figures.0/@descriptors.14/@actualFigure/@children.3"/>
     </descriptors>
     <descriptors
         name="SyncWireFigure">
@@ -833,9 +694,9 @@
             text=": SyncWire"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.20/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.15/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.20/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.15/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="RunActionFigure">
@@ -854,9 +715,9 @@
             text=": RunAction"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.21/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.16/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.21/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.16/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="ParameterEdgeFigure">
@@ -870,7 +731,7 @@
             text=": ParameterEdge"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.22/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.17/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="StartNodeFigure">
@@ -882,9 +743,9 @@
             vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="154"
-            green="224"
-            blue="142"/>
+            red="177"
+            green="190"
+            blue="237"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -895,17 +756,11 @@
         </border>
         <children
             xsi:type="gmfgraph:Label"
-            name="StartNodeLabelFigure"
-            text="start"/>
-        <children
-            xsi:type="gmfgraph:Label"
             name="StartNodeStereotypeFigure"
             text=": StartNode"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.23/@actualFigure/@children.0"/>
-      <accessors
-          figure="//@figures.0/@descriptors.23/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.18/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="CancelNodeFigure">
@@ -917,9 +772,9 @@
             vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="255"
-            green="144"
-            blue="142"/>
+            red="177"
+            green="190"
+            blue="237"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -930,23 +785,17 @@
         </border>
         <children
             xsi:type="gmfgraph:Label"
-            name="CancelNodeLabelFigure"
-            text="cancel"/>
+            name="CancelNodeTextFigure"
+            text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
             name="CancelNodeStereotypeFigure"
             text=": CancelNode"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="CancelNodeTextFigure"
-            text="&lt;...>"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.24/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.19/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.24/@actualFigure/@children.0"/>
-      <accessors
-          figure="//@figures.0/@descriptors.24/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.19/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="FinishNodeFigure">
@@ -958,9 +807,9 @@
             vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="235"
-            green="211"
-            blue="179"/>
+            red="177"
+            green="190"
+            blue="237"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -971,17 +820,11 @@
         </border>
         <children
             xsi:type="gmfgraph:Label"
-            name="FinishNodeLabelFigure"
-            text="finish"/>
-        <children
-            xsi:type="gmfgraph:Label"
             name="FinishNodeStereotypeFigure"
             text=": FinishNode"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.25/@actualFigure/@children.0"/>
-      <accessors
-          figure="//@figures.0/@descriptors.25/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.20/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="DecisionNodeFigure">
@@ -991,6 +834,11 @@
         <layout
             xsi:type="gmfgraph:FlowLayout"
             vertical="true"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="246"
+            green="212"
+            blue="154"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -1009,9 +857,9 @@
             text=": DecisionNode"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.26/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.21/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.26/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.21/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="ConditionalEdgeFigure">
@@ -1029,9 +877,9 @@
             text=": ConditionalEdge"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.27/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.22/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.27/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.22/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="SetWireFigure">
@@ -1050,9 +898,9 @@
             text=": SetWire"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.28/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.23/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.28/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.23/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="ShowWireFigure">
@@ -1071,9 +919,9 @@
             text=": ShowWire"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.29/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.24/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.29/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.24/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="NavigateActionFigure">
@@ -1092,30 +940,9 @@
             text=": NavigateAction"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.30/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.25/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.30/@actualFigure/@children.1"/>
-    </descriptors>
-    <descriptors
-        name="CommitWireFigure">
-      <actualFigure
-          xsi:type="gmfgraph:PolylineConnection"
-          name="CommitWireFigure"
-          lineKind="LINE_DASH"
-          targetDecoration="//@figures.0/@figures.0">
-        <children
-            xsi:type="gmfgraph:Label"
-            name="CommitWireNameFigure"
-            text="commit"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="CommitWireStereotypeFigure"
-            text=": CommitWire"/>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.31/@actualFigure/@children.0"/>
-      <accessors
-          figure="//@figures.0/@descriptors.31/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.25/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="ConditionEdgeFigure">
@@ -1133,9 +960,9 @@
             text=": ConditionEdge"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.32/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.26/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.32/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.26/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="SessionFigure">
@@ -1148,8 +975,8 @@
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
             red="255"
-            green="255"
-            blue="240"/>
+            green="246"
+            blue="149"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -1168,9 +995,9 @@
             text=": Session"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.33/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.27/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.33/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.27/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="LoginHandlerFigure">
@@ -1182,9 +1009,9 @@
             vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="255"
-            green="192"
-            blue="255"/>
+            red="248"
+            green="172"
+            blue="170"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -1204,14 +1031,14 @@
         <children
             xsi:type="gmfgraph:Label"
             name="LoginHandlerTypeFigure"
-            text="[type = ?]"/>
+            text="[?]"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.34/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.28/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.34/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.28/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.34/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.28/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="CompositeConditionFigure">
@@ -1222,11 +1049,11 @@
         <layout
             xsi:type="gmfgraph:FlowLayout"
             vertical="true"/>
-        <foregroundColor
+        <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="255"
-            green="200"
-            blue="135"/>
+            red="246"
+            green="212"
+            blue="154"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -1253,11 +1080,11 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.35/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.29/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.35/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.29/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.35/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.29/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="DomainIteratorFigure">
@@ -1269,10 +1096,11 @@
         <layout
             xsi:type="gmfgraph:FlowLayout"
             vertical="true"/>
-        <font
-            xsi:type="gmfgraph:BasicFont"
-            faceName="Arial"
-            style="BOLD"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="197"
+            green="186"
+            blue="169"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -1292,7 +1120,11 @@
         <children
             xsi:type="gmfgraph:Label"
             name="DomainIteratorQueryFigure"
-            text="&lt;query>"/>
+            text="&lt;query>">
+          <font
+              xsi:type="gmfgraph:BasicFont"
+              style="ITALIC"/>
+        </children>
         <children
             xsi:type="gmfgraph:Label"
             name="DomainIteratorLimitFigure"
@@ -1303,15 +1135,15 @@
             text="autosave: true"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.36/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.30/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.36/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.30/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.36/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.30/@actualFigure/@children.2"/>
       <accessors
-          figure="//@figures.0/@descriptors.36/@actualFigure/@children.3"/>
+          figure="//@figures.0/@descriptors.30/@actualFigure/@children.3"/>
       <accessors
-          figure="//@figures.0/@descriptors.36/@actualFigure/@children.4"/>
+          figure="//@figures.0/@descriptors.30/@actualFigure/@children.4"/>
     </descriptors>
     <descriptors
         name="DomainAttributeInstanceFigure">
@@ -1346,13 +1178,23 @@
               xsi:type="gmfgraph:ConstantColor"
               value="black"/>
         </children>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="DomainAttributeInstanceParentNameFigure"
+            text="[none]">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="gray"/>
+        </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.37/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.31/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.37/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.31/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.37/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.31/@actualFigure/@children.2"/>
+      <accessors
+          figure="//@figures.0/@descriptors.31/@actualFigure/@children.3"/>
     </descriptors>
     <descriptors
         name="ButtonFigure">
@@ -1364,9 +1206,9 @@
             vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="240"
-            green="240"
-            blue="240"/>
+            red="255"
+            green="246"
+            blue="149"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -1393,11 +1235,11 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.38/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.32/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.38/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.32/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.38/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.32/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="SplitNodeFigure">
@@ -1409,9 +1251,9 @@
             vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="154"
-            green="224"
-            blue="142"/>
+            red="177"
+            green="190"
+            blue="237"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -1422,17 +1264,11 @@
         </border>
         <children
             xsi:type="gmfgraph:Label"
-            name="SplitNodeLabelFigure"
-            text="split"/>
-        <children
-            xsi:type="gmfgraph:Label"
             name="SplitNodeStereotypeFigure"
             text=": SplitNode"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.39/@actualFigure/@children.0"/>
-      <accessors
-          figure="//@figures.0/@descriptors.39/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.33/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="JoinNodeFigure">
@@ -1444,9 +1280,9 @@
             vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="154"
-            green="224"
-            blue="142"/>
+            red="177"
+            green="190"
+            blue="237"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -1457,17 +1293,11 @@
         </border>
         <children
             xsi:type="gmfgraph:Label"
-            name="JoinNodeLabelFigure"
-            text="join"/>
-        <children
-            xsi:type="gmfgraph:Label"
             name="JoinNodeStereotypeFigure"
             text=": JoinNode"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.40/@actualFigure/@children.0"/>
-      <accessors
-          figure="//@figures.0/@descriptors.40/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.34/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="QueryParameterFigure">
@@ -1475,11 +1305,8 @@
           xsi:type="gmfgraph:Rectangle"
           name="QueryParameterFigure">
         <layout
-            xsi:type="gmfgraph:FlowLayout"/>
-        <font
-            xsi:type="gmfgraph:BasicFont"
-            faceName="Arial"
-            style="ITALIC"/>
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -1490,82 +1317,33 @@
         </border>
         <children
             xsi:type="gmfgraph:Label"
-            name="QueryParameterNamePrefix"
-            text="query: "/>
+            name="QueryParameterNameFigure"
+            text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
             name="QueryParameterStereotypeFigure"
             text=": QueryParameter"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="QueryParameterNameFigure"
-            text="&lt;...>"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.41/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.35/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.41/@actualFigure/@children.2"/>
-    </descriptors>
-    <descriptors
-        name="UserStoreFigure">
-      <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="UserStoreFigure"
-          lineWidth="2">
-        <layout
-            xsi:type="gmfgraph:FlowLayout"
-            vertical="true"/>
-        <backgroundColor
-            xsi:type="gmfgraph:RGBColor"
-            red="240"
-            green="240"
-            blue="220"/>
-        <font
-            xsi:type="gmfgraph:BasicFont"
-            faceName="Arial"
-            style="BOLD"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="4"
-              left="4"
-              bottom="4"
-              right="4"/>
-        </border>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="UserStoreNameFigure"
-            text="&lt;...>"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="UserStoreStereotypeFigure"
-            text=": UserStore"/>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.42/@actualFigure/@children.0"/>
-      <accessors
-          figure="//@figures.0/@descriptors.42/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.35/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="RoleFigure">
       <actualFigure
           xsi:type="gmfgraph:Rectangle"
-          name="RoleFigure"
-          lineWidth="2">
+          name="RoleFigure">
         <layout
             xsi:type="gmfgraph:FlowLayout"
             vertical="true"/>
-        <font
-            xsi:type="gmfgraph:BasicFont"
-            faceName="Arial"
-            style="BOLD"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
-              top="4"
-              left="4"
-              bottom="4"
-              right="4"/>
+              top="3"
+              left="3"
+              bottom="3"
+              right="3"/>
         </border>
         <children
             xsi:type="gmfgraph:Label"
@@ -1577,9 +1355,9 @@
             text=": Role"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.43/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.36/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.43/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.36/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="PermissionFigure">
@@ -1591,11 +1369,11 @@
             vertical="true"
             majorAlignment="CENTER"
             minorAlignment="CENTER"/>
-        <foregroundColor
+        <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="208"
-            green="185"
-            blue="243"/>
+            red="197"
+            green="186"
+            blue="169"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -1614,51 +1392,9 @@
             text=": Permission"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.44/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.37/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.44/@actualFigure/@children.1"/>
-    </descriptors>
-    <descriptors
-        name="UserInstanceFigure">
-      <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="UserInstanceFigure"
-          lineWidth="2"
-          lineKind="LINE_DASH">
-        <layout
-            xsi:type="gmfgraph:FlowLayout"
-            vertical="true"/>
-        <font
-            xsi:type="gmfgraph:BasicFont"
-            faceName="Arial"
-            style="BOLD"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="4"
-              left="4"
-              bottom="4"
-              right="4"/>
-        </border>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="UserInstanceNameFigure"
-            text="&lt;...>"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="UserInstanceStereotypeFigure"
-            text=": UserInstance"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="UserInstanceAutosaveFigure"
-            text="autosave: true"/>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.45/@actualFigure/@children.0"/>
-      <accessors
-          figure="//@figures.0/@descriptors.45/@actualFigure/@children.1"/>
-      <accessors
-          figure="//@figures.0/@descriptors.45/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.37/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="ExtendsEdgeFigure">
@@ -1676,16 +1412,16 @@
             text=": ExtendsEdge"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.46/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.38/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.46/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.38/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="RequiresEdgeFigure">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
           name="RequiresEdgeFigure"
-          lineKind="LINE_DASH"
+          lineWidth="2"
           targetDecoration="//@figures.0/@figures.0">
         <children
             xsi:type="gmfgraph:Label"
@@ -1697,9 +1433,9 @@
             text=": RequiresEdge"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.47/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.39/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.47/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.39/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="ConstraintEdgeFigure">
@@ -1717,16 +1453,16 @@
             text=": ConstraintEdge"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.48/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.40/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.48/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.40/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="ProvidesEdgeFigure">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
           name="ProvidesEdgeFigure"
-          lineKind="LINE_DASH"
+          lineWidth="2"
           targetDecoration="//@figures.0/@figures.0">
         <children
             xsi:type="gmfgraph:Label"
@@ -1738,9 +1474,9 @@
             text=": ProvidesEdge"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.49/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.41/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.49/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.41/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="AccessControlHandlerFigure">
@@ -1752,9 +1488,9 @@
             vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="255"
-            green="192"
-            blue="255"/>
+            red="248"
+            green="172"
+            blue="170"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -1773,9 +1509,9 @@
             text=": AccessControlHandler"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.50/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.42/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.50/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.42/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="OperationCallNodeFigure">
@@ -1787,9 +1523,9 @@
             vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="224"
-            green="152"
-            blue="224"/>
+            red="177"
+            green="190"
+            blue="237"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -1800,17 +1536,11 @@
         </border>
         <children
             xsi:type="gmfgraph:Label"
-            name="OperationCallNodeLabelFigure"
-            text="call"/>
-        <children
-            xsi:type="gmfgraph:Label"
             name="OperationCallNodeStereotypeFigure"
             text=": OperationCallNode"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.51/@actualFigure/@children.0"/>
-      <accessors
-          figure="//@figures.0/@descriptors.51/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.43/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="ArithmeticFigure">
@@ -1822,9 +1552,9 @@
             vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="240"
-            green="240"
-            blue="240"/>
+            red="177"
+            green="190"
+            blue="237"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -1836,16 +1566,20 @@
         <children
             xsi:type="gmfgraph:Label"
             name="ArithmeticTypeFigure"
-            text="&lt;...>"/>
+            text="[&lt;...>]">
+          <font
+              xsi:type="gmfgraph:BasicFont"
+              style="BOLD"/>
+        </children>
         <children
             xsi:type="gmfgraph:Label"
             name="ArithmeticStereotypeFigure"
             text=": Arithmetic"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.52/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.44/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.52/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.44/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="EntryGateFigure">
@@ -1857,9 +1591,9 @@
             vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="159"
-            green="187"
-            blue="211"/>
+            red="202"
+            green="225"
+            blue="173"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -1886,11 +1620,11 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.53/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.45/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.53/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.45/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.53/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.45/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="ExitGateFigure">
@@ -1902,9 +1636,9 @@
             vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="169"
-            green="197"
-            blue="221"/>
+            red="202"
+            green="225"
+            blue="173"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -1931,56 +1665,11 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.54/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.46/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.54/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.46/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.54/@actualFigure/@children.2"/>
-    </descriptors>
-    <descriptors
-        name="ScopeFigure">
-      <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="ScopeFigure">
-        <layout
-            xsi:type="gmfgraph:FlowLayout"
-            vertical="true"/>
-        <backgroundColor
-            xsi:type="gmfgraph:RGBColor"
-            red="211"
-            green="187"
-            blue="159"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="ScopeNameFigure"
-            text="&lt;...>"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="ScopeStereotypeFigure"
-            text=": Scope"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="ScopeParentNameFigure"
-            text="[none]">
-          <foregroundColor
-              xsi:type="gmfgraph:ConstantColor"
-              value="gray"/>
-        </children>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.55/@actualFigure/@children.0"/>
-      <accessors
-          figure="//@figures.0/@descriptors.55/@actualFigure/@children.1"/>
-      <accessors
-          figure="//@figures.0/@descriptors.55/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.46/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="LabelFigure">
@@ -1992,9 +1681,9 @@
             vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="232"
-            green="232"
-            blue="222"/>
+            red="255"
+            green="246"
+            blue="149"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -2013,8 +1702,12 @@
             text=": Label"/>
         <children
             xsi:type="gmfgraph:Label"
-            name="LabelDefaultValueFigure"
-            text="&lt;...>"/>
+            name="LabelTypeFigure"
+            text="&lt;...>">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="black"/>
+        </children>
         <children
             xsi:type="gmfgraph:Label"
             name="LabelParentNameFigure"
@@ -2025,13 +1718,13 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.56/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.47/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.56/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.47/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.56/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.47/@actualFigure/@children.2"/>
       <accessors
-          figure="//@figures.0/@descriptors.56/@actualFigure/@children.3"/>
+          figure="//@figures.0/@descriptors.47/@actualFigure/@children.3"/>
     </descriptors>
     <descriptors
         name="IteratorListFigure">
@@ -2043,9 +1736,9 @@
             vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="192"
-            green="192"
-            blue="232"/>
+            red="255"
+            green="246"
+            blue="149"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -2072,11 +1765,11 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.57/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.48/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.57/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.48/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.57/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.48/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="CastNodeFigure">
@@ -2089,9 +1782,9 @@
             vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="240"
-            green="240"
-            blue="128"/>
+            red="177"
+            green="190"
+            blue="237"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -2102,17 +1795,11 @@
         </border>
         <children
             xsi:type="gmfgraph:Label"
-            name="CastNodeLabelFigure"
-            text="Cast"/>
-        <children
-            xsi:type="gmfgraph:Label"
             name="CastNodeStereotypeFigure"
             text=": CastNode"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.58/@actualFigure/@children.0"/>
-      <accessors
-          figure="//@figures.0/@descriptors.58/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.49/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="EmailFigure">
@@ -2124,9 +1811,9 @@
             vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="255"
-            green="240"
-            blue="255"/>
+            red="231"
+            green="233"
+            blue="234"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -2145,9 +1832,9 @@
             text=": Email"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.59/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.50/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.59/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.50/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="MapFigure">
@@ -2159,9 +1846,9 @@
             vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="185"
-            green="243"
-            blue="192"/>
+            red="255"
+            green="246"
+            blue="149"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -2188,11 +1875,11 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.60/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.51/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.60/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.51/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.60/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.51/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="MapPointFigure">
@@ -2204,9 +1891,9 @@
             vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="195"
-            green="253"
-            blue="202"/>
+            red="255"
+            green="246"
+            blue="149"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -2233,25 +1920,26 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.61/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.52/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.61/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.52/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.61/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.52/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="PrimitiveConditionFigure">
       <actualFigure
           xsi:type="gmfgraph:Ellipse"
-          name="PrimitiveConditionFigure">
+          name="PrimitiveConditionFigure"
+          lineKind="LINE_DASH">
         <layout
             xsi:type="gmfgraph:FlowLayout"
             vertical="true"/>
         <foregroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="255"
-            green="200"
-            blue="135"/>
+            red="246"
+            green="212"
+            blue="154"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -2278,11 +1966,11 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.62/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.53/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.62/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.53/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.62/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.53/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="DetailWireFigure">
@@ -2301,9 +1989,9 @@
             text=": DetailWire"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.63/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.54/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.63/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.54/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="AutocompleteWireFigure">
@@ -2322,15 +2010,16 @@
             text=": AutocompleteWire"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.64/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.55/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.64/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.55/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="SelectEdgeFigure">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
           name="SelectEdgeFigure"
+          lineWidth="2"
           targetDecoration="//@figures.0/@figures.0">
         <children
             xsi:type="gmfgraph:Label"
@@ -2342,15 +2031,16 @@
             text=": SelectEdge"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.65/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.56/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.65/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.56/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="SchemaEdgeFigure">
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
           name="SchemaEdgeFigure"
+          lineWidth="2"
           targetDecoration="//@figures.0/@figures.0">
         <children
             xsi:type="gmfgraph:Label"
@@ -2362,30 +2052,25 @@
             text=": SchemaEdge"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.66/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.57/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.66/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.57/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="DomainSchemaFigure">
       <actualFigure
           xsi:type="gmfgraph:Rectangle"
-          name="DomainSchemaFigure"
-          lineWidth="2">
+          name="DomainSchemaFigure">
         <layout
             xsi:type="gmfgraph:FlowLayout"
             vertical="true"/>
-        <font
-            xsi:type="gmfgraph:BasicFont"
-            faceName="Arial"
-            style="BOLD"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
-              top="4"
-              left="4"
-              bottom="4"
-              right="4"/>
+              top="3"
+              left="3"
+              bottom="3"
+              right="3"/>
         </border>
         <children
             xsi:type="gmfgraph:Label"
@@ -2397,9 +2082,9 @@
             text=": DomainSchema"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.67/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.58/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.67/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.58/@actualFigure/@children.1"/>
     </descriptors>
   </figures>
   <nodes
@@ -2408,9 +2093,6 @@
   <nodes
       name="DomainAttribute"
       figure="DomainAttributeFigure"/>
-  <nodes
-      name="ActivityNode"
-      figure="ActivityNodeFigure"/>
   <nodes
       name="Parameter"
       figure="ParameterFigure"/>
@@ -2421,17 +2103,11 @@
       name="CompositeOperation"
       figure="CompositeOperationFigure"/>
   <nodes
-      name="ApplicationElement"
-      figure="ApplicationElementFigure"/>
-  <nodes
       name="Property"
       figure="PropertyFigure"/>
   <nodes
       name="StaticValue"
       figure="StaticValueFigure"/>
-  <nodes
-      name="VisibleThing"
-      figure="VisibleThingFigure"/>
   <nodes
       name="DomainSource"
       figure="DomainSourceFigure"/>
@@ -2490,17 +2166,11 @@
       name="QueryParameter"
       figure="QueryParameterFigure"/>
   <nodes
-      name="UserStore"
-      figure="UserStoreFigure"/>
-  <nodes
       name="Role"
       figure="RoleFigure"/>
   <nodes
       name="Permission"
       figure="PermissionFigure"/>
-  <nodes
-      name="UserInstance"
-      figure="UserInstanceFigure"/>
   <nodes
       name="AccessControlHandler"
       figure="AccessControlHandlerFigure"/>
@@ -2516,9 +2186,6 @@
   <nodes
       name="ExitGate"
       figure="ExitGateFigure"/>
-  <nodes
-      name="Scope"
-      figure="ScopeFigure"/>
   <nodes
       name="Label"
       figure="LabelFigure"/>
@@ -2550,12 +2217,6 @@
       name="ExecutionEdge"
       figure="ExecutionEdgeFigure"/>
   <connections
-      name="SingleWire"
-      figure="SingleWireFigure"/>
-  <connections
-      name="CompositeWire"
-      figure="CompositeWireFigure"/>
-  <connections
       name="SyncWire"
       figure="SyncWireFigure"/>
   <connections
@@ -2568,17 +2229,8 @@
       name="ConditionalEdge"
       figure="ConditionalEdgeFigure"/>
   <connections
-      name="SetWire"
-      figure="SetWireFigure"/>
-  <connections
-      name="ShowWire"
-      figure="ShowWireFigure"/>
-  <connections
       name="NavigateAction"
       figure="NavigateActionFigure"/>
-  <connections
-      name="CommitWire"
-      figure="CommitWireFigure"/>
   <connections
       name="ConditionEdge"
       figure="ConditionEdgeFigure"/>
@@ -2607,366 +2259,311 @@
       name="SchemaEdge"
       figure="SchemaEdgeFigure"/>
   <labels
-      name="EventTriggerName"
-      figure="EventTriggerFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.0/@accessors.2"/>
-  <labels
       name="DomainAttributeName"
       figure="DomainAttributeFigure"
       accessor="//@figures.0/@descriptors.1/@accessors.0"/>
   <labels
       name="ParameterName"
       figure="ParameterFigure"
-      accessor="//@figures.0/@descriptors.3/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.2/@accessors.0"/>
   <labels
       name="PrimitiveOperationName"
       figure="PrimitiveOperationFigure"
-      accessor="//@figures.0/@descriptors.4/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.3/@accessors.0"/>
   <labels
       name="CompositeOperationName"
       figure="CompositeOperationFigure"
-      accessor="//@figures.0/@descriptors.5/@accessors.0"/>
-  <labels
-      name="ApplicationElementName"
-      figure="ApplicationElementFigure"
-      accessor="//@figures.0/@descriptors.6/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.4/@accessors.0"/>
   <labels
       name="PropertyName"
       figure="PropertyFigure"
-      accessor="//@figures.0/@descriptors.7/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.5/@accessors.0"/>
   <labels
       name="StaticValueName"
       figure="StaticValueFigure"
-      accessor="//@figures.0/@descriptors.8/@accessors.0"/>
-  <labels
-      name="StaticValueValue"
-      figure="StaticValueFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.8/@accessors.2"/>
-  <labels
-      name="VisibleThingName"
-      figure="VisibleThingFigure"
-      accessor="//@figures.0/@descriptors.9/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.6/@accessors.0"/>
   <labels
       name="DomainSourceName"
       figure="DomainSourceFigure"
-      accessor="//@figures.0/@descriptors.10/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.7/@accessors.0"/>
   <labels
       name="DomainSourceType"
       figure="DomainSourceFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.10/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.7/@accessors.2"/>
   <labels
       name="TemporaryVariableName"
       figure="TemporaryVariableFigure"
-      accessor="//@figures.0/@descriptors.12/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.9/@accessors.0"/>
   <labels
       name="DynamicApplicationElementSetName"
       figure="DynamicApplicationElementSetFigure"
-      accessor="//@figures.0/@descriptors.14/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.11/@accessors.0"/>
   <labels
       name="DynamicApplicationElementSetQuery"
       figure="DynamicApplicationElementSetFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.14/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.11/@accessors.2"/>
   <labels
       name="FrameName"
       figure="FrameFigure"
-      accessor="//@figures.0/@descriptors.15/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.12/@accessors.0"/>
   <labels
-      name="FrameUrl"
+      name="FrameParentName"
       figure="FrameFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.15/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.12/@accessors.2"/>
   <labels
       name="InputFormName"
       figure="InputFormFigure"
-      accessor="//@figures.0/@descriptors.16/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.13/@accessors.0"/>
   <labels
       name="InputTextFieldName"
       figure="InputTextFieldFigure"
-      accessor="//@figures.0/@descriptors.17/@accessors.0"/>
-  <labels
-      name="CompositeWireName"
-      figure="CompositeWireFigure"
-      accessor="//@figures.0/@descriptors.19/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.14/@accessors.0"/>
   <labels
       name="SyncWireName"
       figure="SyncWireFigure"
-      accessor="//@figures.0/@descriptors.20/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.15/@accessors.0"/>
   <labels
       name="RunActionName"
       figure="RunActionFigure"
-      accessor="//@figures.0/@descriptors.21/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.16/@accessors.0"/>
   <labels
       name="DecisionNodeName"
       figure="DecisionNodeFigure"
-      accessor="//@figures.0/@descriptors.26/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.21/@accessors.0"/>
   <labels
       name="ConditionalEdgeName"
       figure="ConditionalEdgeFigure"
-      accessor="//@figures.0/@descriptors.27/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.22/@accessors.0"/>
   <labels
       name="SetWireName"
       figure="SetWireFigure"
-      accessor="//@figures.0/@descriptors.28/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.23/@accessors.0"/>
   <labels
       name="ShowWireName"
       figure="ShowWireFigure"
-      accessor="//@figures.0/@descriptors.29/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.24/@accessors.0"/>
   <labels
       name="NavigateActionName"
       figure="NavigateActionFigure"
-      accessor="//@figures.0/@descriptors.30/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.25/@accessors.0"/>
   <labels
-      name="CommitWireName"
-      figure="CommitWireFigure"
-      accessor="//@figures.0/@descriptors.31/@accessors.0"/>
+      name="CommitWireName"/>
   <labels
       name="ConditionEdgeName"
       figure="ConditionEdgeFigure"
-      accessor="//@figures.0/@descriptors.32/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.26/@accessors.0"/>
   <labels
       name="SessionName"
       figure="SessionFigure"
-      accessor="//@figures.0/@descriptors.33/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.27/@accessors.0"/>
   <labels
       name="LoginHandlerName"
       figure="LoginHandlerFigure"
-      accessor="//@figures.0/@descriptors.34/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.28/@accessors.0"/>
   <labels
       name="LoginHandlerType"
       figure="LoginHandlerFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.34/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.28/@accessors.2"/>
   <labels
       name="CancelNodeText"
       figure="CancelNodeFigure"
-      accessor="//@figures.0/@descriptors.24/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.19/@accessors.0"/>
   <labels
       name="CompositeConditionName"
       figure="CompositeConditionFigure"
-      accessor="//@figures.0/@descriptors.35/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.29/@accessors.0"/>
   <labels
       name="DomainIteratorName"
       figure="DomainIteratorFigure"
-      accessor="//@figures.0/@descriptors.36/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.30/@accessors.0"/>
   <labels
       name="DomainIteratorQuery"
       figure="DomainIteratorFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.36/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.30/@accessors.2"/>
   <labels
       name="DomainIteratorLimit"
       figure="DomainIteratorFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.36/@accessors.3"/>
+      accessor="//@figures.0/@descriptors.30/@accessors.3"/>
   <labels
       name="DomainIteratorAutosave"
       figure="DomainIteratorFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.36/@accessors.4"/>
+      accessor="//@figures.0/@descriptors.30/@accessors.4"/>
   <labels
       name="DomainAttributeInstanceName"
       figure="DomainAttributeInstanceFigure"
-      accessor="//@figures.0/@descriptors.37/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.31/@accessors.0"/>
   <labels
       name="ButtonName"
       figure="ButtonFigure"
-      accessor="//@figures.0/@descriptors.38/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.32/@accessors.0"/>
   <labels
       name="CompositeOperationParentName"
       figure="CompositeOperationFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.5/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.4/@accessors.2"/>
   <labels
       name="EventTriggerParentName"
       figure="EventTriggerFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.0/@accessors.3"/>
+      accessor="//@figures.0/@descriptors.0/@accessors.2"/>
   <labels
       name="DomainAttributeParentName"
       figure="DomainAttributeFigure"
       elementIcon="false"
       accessor="//@figures.0/@descriptors.1/@accessors.2"/>
   <labels
+      name="DomainAttributeInstanceParentName"
+      figure="DomainAttributeInstanceFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.31/@accessors.3"/>
+  <labels
       name="PrimitiveOperationParentName"
       figure="PrimitiveOperationFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.4/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.3/@accessors.2"/>
   <labels
       name="PropertyParentName"
       figure="PropertyFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.7/@accessors.4"/>
+      accessor="//@figures.0/@descriptors.5/@accessors.4"/>
   <labels
       name="InputFormParentName"
       figure="InputFormFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.16/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.13/@accessors.2"/>
   <labels
       name="InputTextFieldParentName"
       figure="InputTextFieldFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.17/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.14/@accessors.3"/>
   <labels
       name="CompositeConditionParentName"
       figure="CompositeConditionFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.35/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.29/@accessors.2"/>
   <labels
       name="ButtonParentName"
       figure="ButtonFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.38/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.32/@accessors.2"/>
   <labels
       name="DomainObjectType"
       elementIcon="false"/>
   <labels
-      name="CancelNodeLabel"
-      figure="CancelNodeFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.24/@accessors.1"/>
-  <labels
-      name="FinishNodeLabel"
-      figure="FinishNodeFigure"
-      accessor="//@figures.0/@descriptors.25/@accessors.0"/>
-  <labels
-      name="StartNodeLabel"
-      figure="StartNodeFigure"
-      accessor="//@figures.0/@descriptors.23/@accessors.0"/>
-  <labels
       name="PropertyDefaultValue"
       figure="PropertyFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.7/@accessors.3"/>
-  <labels
-      name="SplitNodeLabel"
-      figure="SplitNodeFigure"
-      accessor="//@figures.0/@descriptors.39/@accessors.0"/>
-  <labels
-      name="JoinNodeLabel"
-      figure="JoinNodeFigure"
-      accessor="//@figures.0/@descriptors.40/@accessors.0"/>
+      elementIcon="false"/>
   <labels
       name="QueryParameterName"
       figure="QueryParameterFigure"
-      accessor="//@figures.0/@descriptors.41/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.35/@accessors.0"/>
   <labels
-      name="UserStoreName"
-      figure="UserStoreFigure"
-      accessor="//@figures.0/@descriptors.42/@accessors.0"/>
+      name="UserStoreName"/>
   <labels
       name="RoleName"
       figure="RoleFigure"
-      accessor="//@figures.0/@descriptors.43/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.36/@accessors.0"/>
   <labels
       name="PermissionName"
       figure="PermissionFigure"
-      accessor="//@figures.0/@descriptors.44/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.37/@accessors.0"/>
   <labels
-      name="UserInstanceName"
-      figure="UserInstanceFigure"
-      accessor="//@figures.0/@descriptors.45/@accessors.0"/>
+      name="UserInstanceName"/>
   <labels
       name="UserInstanceAutosave"
-      figure="UserInstanceFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.45/@accessors.2"/>
+      elementIcon="false"/>
   <labels
       name="ExtendsEdgeName"
       figure="ExtendsEdgeFigure"
-      accessor="//@figures.0/@descriptors.46/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.38/@accessors.0"/>
   <labels
       name="RequiresEdgeName"
       figure="RequiresEdgeFigure"
-      accessor="//@figures.0/@descriptors.47/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.39/@accessors.0"/>
   <labels
       name="ConstraintEdgeName"
       figure="ConstraintEdgeFigure"
-      accessor="//@figures.0/@descriptors.48/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.40/@accessors.0"/>
   <labels
       name="ProvidesEdgeName"
       figure="ProvidesEdgeFigure"
-      accessor="//@figures.0/@descriptors.49/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.41/@accessors.0"/>
   <labels
       name="AccessControlHandlerName"
       figure="AccessControlHandlerFigure"
-      accessor="//@figures.0/@descriptors.50/@accessors.0"/>
-  <labels
-      name="OperationCallNodeLabel"
-      figure="OperationCallNodeFigure"
-      accessor="//@figures.0/@descriptors.51/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.42/@accessors.0"/>
   <labels
       name="ArithmeticType"
       figure="ArithmeticFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.52/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.44/@accessors.0"/>
   <labels
       name="ExecutionEdgeName"
       figure="ExecutionEdgeFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.13/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.10/@accessors.0"/>
   <labels
       name="EntryGateName"
       figure="EntryGateFigure"
-      accessor="//@figures.0/@descriptors.53/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.45/@accessors.0"/>
   <labels
       name="EntryGateParentName"
       figure="EntryGateFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.53/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.45/@accessors.2"/>
   <labels
       name="ExitGateName"
       figure="ExitGateFigure"
-      accessor="//@figures.0/@descriptors.54/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.46/@accessors.0"/>
   <labels
       name="ExitGateParentName"
       figure="ExitGateFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.54/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.46/@accessors.2"/>
   <labels
-      name="ScopeName"
-      figure="ScopeFigure"
-      accessor="//@figures.0/@descriptors.55/@accessors.0"/>
+      name="ScopeName"/>
   <labels
       name="ScopeParentName"
       figure="EntryGateFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.55/@accessors.2"/>
+      elementIcon="false"/>
   <labels
       name="LabelName"
       figure="LabelFigure"
-      accessor="//@figures.0/@descriptors.56/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.47/@accessors.0"/>
   <labels
-      name="LabelDefaultValue"
+      name="LabelType"
       figure="LabelFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.56/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.47/@accessors.2"/>
   <labels
       name="LabelParentName"
       figure="LabelFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.56/@accessors.3"/>
+      accessor="//@figures.0/@descriptors.47/@accessors.3"/>
   <labels
       name="EventTriggerContainmentFeature"
       figure="EventTriggerFigure"
       accessor="//@figures.0/@descriptors.0/@accessors.0"/>
   <labels
       name="CastNodeLabel"
-      figure="CastNodeFigure"
-      accessor="//@figures.0/@descriptors.58/@accessors.0"/>
+      figure="CastNodeFigure"/>
   <labels
       name="TemporaryVariableType"
       figure="TemporaryVariableFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.12/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.9/@accessors.2"/>
   <labels
       name="PropertyType"
       figure="PropertyFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.7/@accessors.5"/>
+      accessor="//@figures.0/@descriptors.5/@accessors.3"/>
   <labels
       name="DomainAttributeType"
       figure="DomainAttributeFigure"
@@ -2976,89 +2573,88 @@
       name="DomainAttributeInstanceType"
       figure="DomainAttributeInstanceFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.37/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.31/@accessors.2"/>
   <labels
       name="InputTextFieldType"
       figure="InputTextFieldFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.17/@accessors.3"/>
+      accessor="//@figures.0/@descriptors.14/@accessors.2"/>
   <labels
       name="StaticValueType"
       figure="StaticValueFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.8/@accessors.3"/>
+      accessor="//@figures.0/@descriptors.6/@accessors.2"/>
   <labels
       name="EmailName"
       figure="EmailFigure"
-      accessor="//@figures.0/@descriptors.59/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.50/@accessors.0"/>
   <labels
       name="MapName"
       figure="MapFigure"
-      accessor="//@figures.0/@descriptors.60/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.51/@accessors.0"/>
   <labels
       name="MapParentName"
       figure="MapFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.60/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.51/@accessors.2"/>
   <labels
       name="MapPointName"
       figure="MapPointFigure"
-      accessor="//@figures.0/@descriptors.61/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.52/@accessors.0"/>
   <labels
       name="MapPointParentName"
       figure="MapPointFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.61/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.52/@accessors.2"/>
   <labels
       name="PrimitiveConditionName"
       figure="PrimitiveConditionFigure"
-      accessor="//@figures.0/@descriptors.62/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.53/@accessors.0"/>
   <labels
       name="PrimitiveConditionParentName"
       figure="PrimitiveConditionFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.62/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.53/@accessors.2"/>
   <labels
       name="PropertyContainmentFeature"
       figure="PropertyFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.7/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.5/@accessors.1"/>
   <labels
       name="SelectWireLimit"
       elementIcon="false"/>
   <labels
       name="DetailWireName"
       figure="DetailWireFigure"
-      accessor="//@figures.0/@descriptors.63/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.54/@accessors.0"/>
   <labels
       name="AutocompleteWireName"
       figure="AutocompleteWireFigure"
-      accessor="//@figures.0/@descriptors.64/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.55/@accessors.0"/>
   <labels
       name="DomainSchemaName"
       figure="DomainSchemaFigure"
-      accessor="//@figures.0/@descriptors.67/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.58/@accessors.0"/>
   <labels
       name="SelectEdgeName"
       figure="SelectEdgeFigure"
-      accessor="//@figures.0/@descriptors.65/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.56/@accessors.0"/>
   <labels
       name="SchemaEdgeName"
       figure="SchemaEdgeFigure"
-      accessor="//@figures.0/@descriptors.66/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.57/@accessors.0"/>
   <labels
       name="IteratorListName"
       figure="IteratorListFigure"
-      accessor="//@figures.0/@descriptors.57/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.48/@accessors.0"/>
   <labels
       name="IteratorListParentName"
       figure="IteratorListFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.57/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.48/@accessors.2"/>
   <labels
       name="EventTriggerStereotype"
       figure="EventTriggerFigure"
-      elementIcon="false"
       accessor="//@figures.0/@descriptors.0/@accessors.1"/>
   <labels
       name="DomainAttributeStereotype"
@@ -3066,333 +2662,280 @@
       elementIcon="false"
       accessor="//@figures.0/@descriptors.1/@accessors.1"/>
   <labels
-      name="ActivityNodeStereotype"
-      figure="ActivityNodeFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.2/@accessors.0"/>
-  <labels
       name="ParameterStereotype"
       figure="ParameterFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.3/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.2/@accessors.1"/>
   <labels
       name="PrimitiveOperationStereotype"
       figure="PrimitiveOperationFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.4/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.3/@accessors.1"/>
   <labels
       name="CompositeOperationStereotype"
       figure="CompositeOperationFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.5/@accessors.1"/>
-  <labels
-      name="ApplicationElementStereotype"
-      figure="ApplicationElementFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.6/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.4/@accessors.1"/>
   <labels
       name="PropertyStereotype"
       figure="PropertyFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.7/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.5/@accessors.2"/>
   <labels
       name="StaticValueStereotype"
       figure="StaticValueFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.8/@accessors.1"/>
-  <labels
-      name="VisibleThingStereotype"
-      figure="VisibleThingFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.9/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.6/@accessors.1"/>
   <labels
       name="DomainSourceStereotype"
       figure="DomainSourceFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.10/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.7/@accessors.1"/>
   <labels
       name="DataFlowEdgeStereotype"
       figure="DataFlowEdgeFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.11/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.8/@accessors.0"/>
   <labels
       name="TemporaryVariableStereotype"
       figure="TemporaryVariableFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.12/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.9/@accessors.1"/>
   <labels
       name="ExecutionEdgeStereotype"
       figure="ExecutionEdgeFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.13/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.10/@accessors.1"/>
   <labels
       name="DynamicApplicationElementSetStereotype"
       figure="DynamicApplicationElementSetFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.14/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.11/@accessors.1"/>
   <labels
       name="FrameStereotype"
       figure="FrameFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.15/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.12/@accessors.1"/>
   <labels
       name="InputFormStereotype"
       figure="InputFormFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.16/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.13/@accessors.1"/>
   <labels
       name="InputTextFieldStereotype"
       figure="InputTextFieldFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.17/@accessors.1"/>
-  <labels
-      name="SingleWireStereotype"
-      figure="SingleWireFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.18/@accessors.0"/>
-  <labels
-      name="CompositeWireStereotype"
-      figure="CompositeWireFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.19/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.14/@accessors.1"/>
   <labels
       name="SyncWireStereotype"
       figure="SyncWireFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.20/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.15/@accessors.1"/>
   <labels
       name="RunActionStereotype"
       figure="RunActionFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.21/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.16/@accessors.1"/>
   <labels
       name="ParameterEdgeStereotype"
       figure="ParameterEdgeFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.22/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.17/@accessors.0"/>
   <labels
       name="StartNodeStereotype"
       figure="StartNodeFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.23/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.18/@accessors.0"/>
   <labels
       name="CancelNodeStereotype"
       figure="CancelNodeFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.24/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.19/@accessors.1"/>
   <labels
       name="FinishNodeStereotype"
       figure="FinishNodeFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.25/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.20/@accessors.0"/>
   <labels
       name="DecisionNodeStereotype"
       figure="DecisionNodeFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.26/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.21/@accessors.1"/>
   <labels
       name="ConditionalEdgeStereotype"
       figure="ConditionalEdgeFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.27/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.22/@accessors.1"/>
   <labels
       name="SetWireStereotype"
       figure="SetWireFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.28/@accessors.1"/>
-  <labels
-      name="ShowWireStereotype"
-      figure="ShowWireFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.29/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.23/@accessors.1"/>
   <labels
       name="NavigateActionStereotype"
       figure="NavigateActionFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.30/@accessors.1"/>
-  <labels
-      name="CommitWireStereotype"
-      figure="CommitWireFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.31/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.25/@accessors.1"/>
   <labels
       name="ConditionEdgeStereotype"
       figure="ConditionEdgeFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.32/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.26/@accessors.1"/>
   <labels
       name="SessionStereotype"
       figure="SessionFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.33/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.27/@accessors.1"/>
   <labels
       name="LoginHandlerStereotype"
       figure="LoginHandlerFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.34/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.28/@accessors.1"/>
   <labels
       name="CompositeConditionStereotype"
       figure="CompositeConditionFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.35/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.29/@accessors.1"/>
   <labels
       name="DomainIteratorStereotype"
       figure="DomainIteratorFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.36/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.30/@accessors.1"/>
   <labels
       name="DomainAttributeInstanceStereotype"
       figure="DomainAttributeInstanceFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.37/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.31/@accessors.1"/>
   <labels
       name="ButtonStereotype"
       figure="ButtonFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.38/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.32/@accessors.1"/>
   <labels
       name="SplitNodeStereotype"
       figure="SplitNodeFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.39/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.33/@accessors.0"/>
   <labels
       name="JoinNodeStereotype"
       figure="JoinNodeFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.40/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.34/@accessors.0"/>
   <labels
       name="QueryParameterStereotype"
       figure="QueryParameterFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.41/@accessors.0"/>
-  <labels
-      name="UserStoreStereotype"
-      figure="UserStoreFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.42/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.35/@accessors.1"/>
   <labels
       name="RoleStereotype"
       figure="RoleFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.43/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.36/@accessors.1"/>
   <labels
       name="PermissionStereotype"
       figure="PermissionFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.44/@accessors.1"/>
-  <labels
-      name="UserInstanceStereotype"
-      figure="UserInstanceFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.45/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.37/@accessors.1"/>
   <labels
       name="ExtendsEdgeStereotype"
       figure="ExtendsEdgeFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.46/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.38/@accessors.1"/>
   <labels
       name="RequiresEdgeStereotype"
       figure="RequiresEdgeFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.47/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.39/@accessors.1"/>
   <labels
       name="ConstraintEdgeStereotype"
       figure="ConstraintEdgeFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.48/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.40/@accessors.1"/>
   <labels
       name="ProvidesEdgeStereotype"
       figure="ProvidesEdgeFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.49/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.41/@accessors.1"/>
   <labels
       name="AccessControlHandlerStereotype"
       figure="AccessControlHandlerFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.50/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.42/@accessors.1"/>
   <labels
       name="OperationCallNodeStereotype"
       figure="OperationCallNodeFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.51/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.43/@accessors.0"/>
   <labels
       name="ArithmeticStereotype"
       figure="ArithmeticFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.52/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.44/@accessors.1"/>
   <labels
       name="EntryGateStereotype"
       figure="EntryGateFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.53/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.45/@accessors.1"/>
   <labels
       name="ExitGateStereotype"
       figure="ExitGateFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.54/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.46/@accessors.1"/>
   <labels
       name="ScopeStereotype"
-      figure="ScopeFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.55/@accessors.1"/>
+      elementIcon="false"/>
   <labels
       name="LabelStereotype"
       figure="LabelFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.56/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.47/@accessors.1"/>
   <labels
       name="IteratorListStereotype"
       figure="IteratorListFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.57/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.48/@accessors.1"/>
   <labels
       name="CastNodeStereotype"
       figure="CastNodeFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.58/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.49/@accessors.0"/>
   <labels
       name="EmailStereotype"
       figure="EmailFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.59/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.50/@accessors.1"/>
   <labels
       name="MapStereotype"
       figure="MapFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.60/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.51/@accessors.1"/>
   <labels
       name="MapPointStereotype"
       figure="MapPointFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.61/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.52/@accessors.1"/>
   <labels
       name="PrimitiveConditionStereotype"
       figure="PrimitiveConditionFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.62/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.53/@accessors.1"/>
   <labels
       name="DetailWireStereotype"
       figure="DetailWireFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.63/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.54/@accessors.1"/>
   <labels
       name="AutocompleteWireStereotype"
       figure="AutocompleteWireFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.64/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.55/@accessors.1"/>
   <labels
       name="SelectEdgeStereotype"
       figure="SelectEdgeFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.65/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.56/@accessors.1"/>
   <labels
       name="SchemaEdgeStereotype"
       figure="SchemaEdgeFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.66/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.57/@accessors.1"/>
   <labels
       name="DomainSchemaStereotype"
       figure="DomainSchemaFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.67/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.58/@accessors.1"/>
 </gmfgraph:Canvas>

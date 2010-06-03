@@ -2056,7 +2056,9 @@
           lineKind="LINE_DASH">
         <layout
             xsi:type="gmfgraph:FlowLayout"
-            vertical="true"/>
+            vertical="true"
+            majorAlignment="CENTER"
+            minorAlignment="CENTER"/>
         <foregroundColor
             xsi:type="gmfgraph:ConstantColor"
             value="black"/>

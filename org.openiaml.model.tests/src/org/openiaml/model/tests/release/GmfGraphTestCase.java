@@ -94,6 +94,7 @@ public class GmfGraphTestCase extends XmlTestCase {
 			if (hasNode != null) {
 				assertEquals("Root node '" + name + "' has a valid name.", hasNode.getAttribute("name"), hasNode.getAttribute("figure").replace("Figure", ""));
 			} else {
+				assertNotNull("Node " + name + " was not a node or a link", hasLink);
 				assertEquals("Root connection '" + name + "' has a valid name.", hasLink.getAttribute("name"), hasLink.getAttribute("figure").replace("Figure", ""));
 			}
 		}

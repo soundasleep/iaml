@@ -33,6 +33,7 @@ import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.PrimitiveCondition;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.StaticValue;
@@ -43,6 +44,7 @@ import org.openiaml.model.model.domain.DomainSource;
 import org.openiaml.model.model.domain.SelectEdge;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.StartNode;
+import org.openiaml.model.model.scopes.Email;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
@@ -337,7 +339,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	}
 
 	/**
-	 * Look at the editor's children to see if an Page is being displayed.
+	 * Look at the editor's children to see if a Frame is being displayed.
 	 *
 	 * @param editor
 	 * @param name
@@ -345,6 +347,17 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 */
 	public ShapeNodeEditPart assertHasFrame(DiagramDocumentEditor editor, String name, boolean checkShortcut, boolean shortcutRequired) {
 		return assertHasRenderedNamedObject(editor, Frame.class, name, checkShortcut, shortcutRequired);
+	}
+
+	/**
+	 * Look at the editor's children to see if an Email is being displayed.
+	 *
+	 * @param editor
+	 * @param name
+	 * @return
+	 */
+	public ShapeNodeEditPart assertHasEmail(DiagramDocumentEditor editor, String name, boolean checkShortcut, boolean shortcutRequired) {
+		return assertHasRenderedNamedObject(editor, Email.class, name, checkShortcut, shortcutRequired);
 	}
 
 	/**
@@ -514,6 +527,18 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	public ShapeNodeEditPart assertHasPrimitiveOperation(DiagramDocumentEditor root, String operationName,
 			boolean shortcutRequired) {
 		return assertHasRenderedNamedObject(root, PrimitiveOperation.class, operationName, true, shortcutRequired);
+	}
+	
+	/**
+	 * Look at the editor's children to see if a PrimitiveCondition is being displayed.
+	 *
+	 * @param root
+	 * @param pageName
+	 * @return
+	 */
+	public ShapeNodeEditPart assertHasPrimitiveCondition(DiagramDocumentEditor root, String operationName,
+			boolean shortcutRequired) {
+		return assertHasRenderedNamedObject(root, PrimitiveCondition.class, operationName, true, shortcutRequired);
 	}
 
 	/**
@@ -978,6 +1003,14 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	public ShapeNodeEditPart assertHasFrame(
 			DiagramDocumentEditor editor, String name) {
 		return assertHasFrame(editor, name, false, false);
+	}
+
+	/**
+	 * @see #assertHasEmaile(DiagramDocumentEditor, String, boolean, boolean)
+	 */
+	public ShapeNodeEditPart assertHasEmail(
+			DiagramDocumentEditor editor, String name) {
+		return assertHasEmail(editor, name, false, false);
 	}
 
 	/**

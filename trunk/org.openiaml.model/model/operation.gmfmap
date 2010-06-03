@@ -106,11 +106,6 @@
       <domainSpecialization
           body="self.oclIsTypeOf( StartNode )"/>
       <labelMappings
-          readOnly="true">
-        <diagramLabel
-            href="iaml.gmfgraph#StartNodeLabel"/>
-      </labelMappings>
-      <labelMappings
           xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
@@ -131,11 +126,6 @@
           href="iaml.ecore#//operations/CancelNode"/>
       <domainSpecialization
           body="self.oclIsTypeOf( CancelNode )"/>
-      <labelMappings
-          readOnly="true">
-        <diagramLabel
-            href="iaml.gmfgraph#CancelNodeLabel"/>
-      </labelMappings>
       <labelMappings
           xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
@@ -164,11 +154,6 @@
           href="iaml.ecore#//operations/FinishNode"/>
       <domainSpecialization
           body="self.oclIsTypeOf( FinishNode )"/>
-      <labelMappings
-          readOnly="true">
-        <diagramLabel
-            href="iaml.gmfgraph#FinishNodeLabel"/>
-      </labelMappings>
       <labelMappings
           xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
@@ -259,15 +244,6 @@
             href="iaml.gmfgraph#PropertyStereotype"/>
       </labelMappings>
       <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping"
-          viewPattern="default: {0}"
-          editPattern="{0}">
-        <diagramLabel
-            href="iaml.gmfgraph#PropertyDefaultValue"/>
-        <features
-            href="iaml.ecore#//Property/defaultValue"/>
-      </labelMappings>
-      <labelMappings
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#PropertyContainmentFeature"/>
@@ -295,11 +271,6 @@
       <domainSpecialization
           body="self.oclIsTypeOf( SplitNode )"/>
       <labelMappings
-          readOnly="true">
-        <diagramLabel
-            href="iaml.gmfgraph#SplitNodeLabel"/>
-      </labelMappings>
-      <labelMappings
           xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
@@ -321,11 +292,6 @@
       <domainSpecialization
           body="self.oclIsTypeOf( JoinNode )"/>
       <labelMappings
-          readOnly="true">
-        <diagramLabel
-            href="iaml.gmfgraph#JoinNodeLabel"/>
-      </labelMappings>
-      <labelMappings
           xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
@@ -345,24 +311,22 @@
       <domainMetaElement
           href="iaml.ecore#//StaticValue"/>
       <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
+          xsi:type="gmfmap:FeatureLabelMapping"
+          viewPattern="{0} = {1}"
+          editorPattern="{0} = {1}"
+          editPattern="{0} = {1}">
         <diagramLabel
             href="iaml.gmfgraph#StaticValueName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
+        <features
+            href="iaml.ecore#//StaticValue/value"/>
       </labelMappings>
       <labelMappings
           xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#StaticValueStereotype"/>
-      </labelMappings>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="iaml.gmfgraph#StaticValueValue"/>
-        <features
-            href="iaml.ecore#//StaticValue/value"/>
       </labelMappings>
       <labelMappings
           readOnly="true">
@@ -385,11 +349,6 @@
       <domainSpecialization
           body="self.oclIsTypeOf( OperationCallNode )"/>
       <labelMappings
-          readOnly="true">
-        <diagramLabel
-            href="iaml.gmfgraph#OperationCallNodeLabel"/>
-      </labelMappings>
-      <labelMappings
           xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
@@ -411,7 +370,10 @@
       <domainSpecialization
           body="self.oclIsTypeOf( Arithmetic )"/>
       <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
+          xsi:type="gmfmap:FeatureLabelMapping"
+          viewPattern="[{0}]"
+          editorPattern="[{0}]"
+          editPattern="[{0}]">
         <diagramLabel
             href="iaml.gmfgraph#ArithmeticType"/>
         <features
@@ -440,11 +402,6 @@
           href="iaml.ecore#//operations/CastNode"/>
       <domainSpecialization
           body="self.oclIsTypeOf( CastNode )"/>
-      <labelMappings
-          readOnly="true">
-        <diagramLabel
-            href="iaml.gmfgraph#CastNodeLabel"/>
-      </labelMappings>
       <labelMappings
           xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">

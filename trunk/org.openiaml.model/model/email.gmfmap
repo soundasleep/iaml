@@ -586,6 +586,11 @@
         <diagramLabel
             href="iaml.gmfgraph#LabelParentName"/>
       </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#LabelType"/>
+      </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="email.gmftool#//@palette/@tools.1/@tools.1"/>

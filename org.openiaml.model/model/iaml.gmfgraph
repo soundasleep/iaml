@@ -138,6 +138,11 @@
         <foregroundColor
             xsi:type="gmfgraph:ConstantColor"
             value="black"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="231"
+            green="233"
+            blue="234"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -1383,6 +1388,11 @@
         <foregroundColor
             xsi:type="gmfgraph:ConstantColor"
             value="black"/>
+        <backgroundColor
+            xsi:type="gmfgraph:RGBColor"
+            red="231"
+            green="233"
+            blue="234"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -2594,10 +2604,6 @@
       accessor="//@figures.0/@descriptors.31/@accessors.2"/>
   <labels
       name="DomainObjectType"
-      elementIcon="false"/>
-  <labels
-      name="PropertyDefaultValue"
-      figure="PropertyFigure"
       elementIcon="false"/>
   <labels
       name="QueryParameterName"

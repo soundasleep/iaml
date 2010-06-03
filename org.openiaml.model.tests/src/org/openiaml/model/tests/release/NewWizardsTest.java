@@ -25,11 +25,6 @@ public class NewWizardsTest extends XmlTestCase {
 		checkNewWizard("org.openiaml.model.diagram.element");
 	}
 
-	public void testWireWizard() throws Exception {
-		// the 'wire' diagram cannot have a new wizard, as it represents an abstract container
-		checkNewWizard("org.openiaml.model.diagram.wire");
-	}
-
 	protected void checkNewWizard(String plugin) throws Exception {
 		String pluginXml = PluginsTestCase.PLUGIN_ROOT + plugin + "/plugin.xml";
 		File f = new File(pluginXml);

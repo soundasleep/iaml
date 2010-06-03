@@ -780,15 +780,6 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	}
 
 	/**
-	 * Assert the given editor is from the wire plugin.
-	 */
-	public void assertEditorWire(IEditorPart editor) {
-		assertEquals("active editor is the wire plugin",
-				org.openiaml.model.diagram.wire.part.IamlDiagramEditor.class.getName(),
-				editor.getClass().getName());
-	}
-
-	/**
 	 * Check the number of children nodes in this editor.
 	 * The "number of children" are the number of nodes, not the number of
 	 * edges, visible in the current editor.

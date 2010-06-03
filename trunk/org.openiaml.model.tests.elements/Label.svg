@@ -28,7 +28,7 @@
 </g>
 <g stroke-width="1.1" font-family="'Tahoma'" stroke-linecap="butt">
 <rect x="10" y="10" clip-path="url(#clipPath1)" fill="none" width="87" height="78"/>
-<image x="13" y="13" clip-path="url(#clipPath2)" width="16" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAArElEQVR42mNgGP7A&#13;&#10;weHAf3zyTPgkDxyAaIbRJBvQ0AB2AZjGBZhxSfT03PwvJbWFgYcnkgFE+/jMbNi1&#13;&#10;a0ojQQNAzn3wIKEBptnE5DnDmzeWDF++LAe7acGCBCBeADeIEVuAgZwN0wwDZ85I&#13;&#10;gg05cMABapEDI0YYgARB/gUpAikGaULXDJVnxOoC9DAAaQK5BEaXlKhjqGcklAZA&#13;&#10;3gHZjGwrSdEIczbNUuLAAwBH5l2jjU+LUAAAAABJRU5ErkJggg==" xlink:type="simple" xlink:actuate="onLoad" height="16" preserveAspectRatio="none" xlink:show="embed"/>
+<image x="13" y="13" clip-path="url(#clipPath2)" width="16" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAPElEQVR42mNgGAWM&#13;&#10;Bw4c+E+JASwgwt7enizNL168YGCCcQ4ePEiWIUyUhsEgMoDcgGRRV1cHh+YoIB8A&#13;&#10;ALqTDPX33chOAAAAAElFTkSuQmCC" xlink:type="simple" xlink:actuate="onLoad" height="16" preserveAspectRatio="none" xlink:show="embed"/>
 <text xml:space="preserve" x="32" y="26" clip-path="url(#clipPath3)" stroke="none">Label Name</text>
 <text xml:space="preserve" x="13" y="46" clip-path="url(#clipPath4)" stroke="none">: Label</text>
 <line clip-path="url(#clipPath4)" fill="none" x1="13" x2="49" y1="47" y2="47" stroke-width="0.1"/>

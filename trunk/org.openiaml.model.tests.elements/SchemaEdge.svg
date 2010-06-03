@@ -4,10 +4,6 @@
 <defs id="genericDefs"/>
 <g>
 <defs id="defs1">
-<linearGradient x1="69" x2="69" y1="10" gradientUnits="userSpaceOnUse" y2="70" xlink:type="simple" xlink:actuate="onLoad" id="linearGradient1" xlink:show="other" spreadMethod="pad">
-<stop stop-opacity="1" stop-color="black" offset="0%"/>
-<stop stop-opacity="1" stop-color="white" offset="100%"/>
-</linearGradient>
 <clipPath clipPathUnits="userSpaceOnUse" id="clipPath1">
 <path d="M66 129 L180 129 L180 172 L66 172 L66 129 Z"/>
 </clipPath>
@@ -61,7 +57,7 @@
 <text xml:space="preserve" x="70" y="166" clip-path="url(#clipPath4)" stroke="none">: DomainSchema</text>
 <line clip-path="url(#clipPath4)" fill="none" x1="70" x2="161" y1="167" y2="167" stroke-width="0.1"/>
 </g>
-<g stroke-linecap="butt" fill="url(#linearGradient1)" font-family="'Tahoma'" stroke="url(#linearGradient1)" font-weight="bold" stroke-width="0.1">
+<g stroke-linecap="butt" fill="white" font-family="'Tahoma'" stroke="white" font-weight="bold" stroke-width="0.1">
 <rect x="69" y="10" clip-path="url(#clipPath5)" width="108" height="60" stroke="none"/>
 <rect x="69" y="10" clip-path="url(#clipPath5)" fill="none" width="107" height="59" stroke="black" stroke-width="1.1"/>
 </g>
@@ -72,7 +68,7 @@
 <line clip-path="url(#clipPath8)" fill="none" x1="72" x2="158" y1="47" y2="47" stroke-width="0.1"/>
 <text x="72" y="65" clip-path="url(#clipPath9)" stroke="none" font-weight="bold" stroke-width="0.1" xml:space="preserve">RELATIONAL_DB</text>
 <line clip-path="url(#clipPath10)" fill="none" x1="123" x2="123" y1="70" y2="130" stroke-width="2.1"/>
-<image width="16" xlink:show="embed" xlink:type="simple" clip-path="url(#clipPath11)" preserveAspectRatio="none" stroke-width="2.1" height="16" x="53" y="92" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAvklEQVR42mNgGP5g&#13;&#10;pnHaf3zyTPgkDxw48B+ZxgZY8Blws3gZw3NfKQYGII0LMOOSmDNnzv9nkv8ZZGRk&#13;&#10;GEB0TExMw6ZNmxoJGgByruVltgaYZhUVFYY/f/4wPHnyhCHys1pDyfLehgULFsAN&#13;&#10;YsQWYCBnwzTDwJ07d8CGSG5+Buann53FiBGIIEH13iiwIpBikCZ0zSB5mGYMF6CH&#13;&#10;AUgTyCUwOiUlBUM9I6E0APIOyGZkW4lOBzDvgGiapcSBBwAWbmOxqMNN4AAAAABJRU5ErkJggg==" xlink:actuate="onLoad"/>
+<image width="16" xlink:show="embed" xlink:type="simple" clip-path="url(#clipPath11)" preserveAspectRatio="none" stroke-width="2.1" height="16" x="53" y="92" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACc0lEQVR42qVTS2gT&#13;&#10;URQ9+ZVqErUkmIZIsN25sNiKWgxFNNBNoWkRlRL8pH4QQRBExVqpiFTBjWiI4KIL&#13;&#10;JUp3AQuiiGJC2iL4w5qkQVoSJmYkQk2TkEnmzYxvZoJJdhUv3Lnv3Llz7nl33gP+&#13;&#10;0zTy48NSWYozFaxyBIIoUgeIIFCX15ISeSIqOZ66wEtwWFpwabhDo5cJvqbLOLjH&#13;&#10;/E+drzxZVKJCUKoICphOPgQRCe3Cg6exSuTIoypjouYIXd/a9wDlMqkTECpTtpNd&#13;&#10;59fUvcjJ5EKdQKiBqTfsmggO77WiyjcQ8PLUajZ6oB2P32ZxbL/9by4YycLbV8e5&#13;&#10;PEcVkGYCUZJgoCgYZqHTa/E0wkKjBbS1j6ajVB2taaE1251GVKpNWxAhT0Gv02DE&#13;&#10;ZaPFP3HE1d6koBEvMnkQItYJqvTfSpTQQNs9C6eR+jaL66+SsNusSGdYOHsGMPWy&#13;&#10;gGQ4CKfDhlzuF9avbmrYgqyAytNKBCsLM5DyeZw7exrFYhGpVArvoq/RtsGEE0dH&#13;&#10;oNPpwDAMWubn0e/3SyqBqMpJfJkDE0vAd2oUN27fw8LHKLY4HOju7sby0ndMTMyC&#13;&#10;yWSwu7cPgwP9CIVC6owIT5QZLCc+o22jeiLv371J8zx8Ph/cbjeGhobg8XiU3PEz&#13;&#10;F5Qak8nUMAO6ha5tW/Hp/Zzy8uLlq+Bp8fj4OMxmlbRQKECkah/57+DQ8CBYllUJ&#13;&#10;OjavwzV6trOMFb9/rGDm+Qvs6NkJV+8uZLNZxGIxtLa2orOzE3a7HSVORCQ6D47j&#13;&#10;1NvYaPF4XBobG4PRaITBYFCUeb1eWCwWBAIBCPKNpMpKpRImJyfxB/9WPvZkdTrB&#13;&#10;AAAAAElFTkSuQmCC" xlink:actuate="onLoad"/>
 <text x="72" y="105" clip-path="url(#clipPath12)" stroke="none" stroke-width="2.1" xml:space="preserve">schema</text>
 <text x="24" y="105" clip-path="url(#clipPath13)" stroke="none" stroke-width="2.1" xml:space="preserve">: SchemaEdge</text>
 <line clip-path="url(#clipPath13)" fill="none" x1="24" x2="103" y1="106" y2="106" stroke-width="0.1"/>

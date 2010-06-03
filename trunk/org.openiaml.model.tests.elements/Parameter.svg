@@ -22,7 +22,7 @@
 </g>
 <g stroke-width="1.1" font-family="'Tahoma'" stroke-linecap="butt">
 <rect x="10" y="10" clip-path="url(#clipPath1)" fill="none" width="114" height="40"/>
-<image x="13" y="13" clip-path="url(#clipPath2)" width="16" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAwUlEQVR42u1RPQuD&#13;&#10;MBB9+RhcpGCHUgRdu7qI/3/K4iAUujsIRSp0EySxuQSj7SR09cHl7pK8d5cLcIDR&#13;&#10;0nXdXNc1+r7fRYrjGGVZIs9zJmlDKWWTK4ri5lVZ0Lbx6n3MbKGX4xCcwDiOSJIT&#13;&#10;2vaJadLugHMeSGRLLqVEmp4t574KLK8RQkDrOVzeiqwCwsYisPi/Q9x0MNvqGsYY&#13;&#10;Z1SR/G8HBGP0t0AURRiGN7LssnuIxAkCVVWBvrFpHru/kTgHPD5plj4FP6EQKQAA&#13;&#10;AABJRU5ErkJggg==" xlink:type="simple" xlink:actuate="onLoad" height="16" preserveAspectRatio="none" xlink:show="embed"/>
+<image x="13" y="13" clip-path="url(#clipPath2)" width="16" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAA1UlEQVR42mNgGAWM&#13;&#10;IOI/EKxdu5bh9u3bRGkSFxdnSExMZGAEAhaQwJIlSxjMzHQYgoPdkZQxIdsBpZnB&#13;&#10;4s+e3WWYNWsWWBRswKdPnxgUFaUYzp27zvD9+y+IBAsLAxMTE8gWMA3ig9js7OwM&#13;&#10;amrKQD2bEAZAADMDKysrw+/f/xiYmZlRNCGzOTjYoC5BdSfZAMkFf4G2/2b48+cP&#13;&#10;GINs/Pv3L9wFMDZMLYoBfHx8DPfvP2MwMtIkOhBBeuAGxMTEMICicd26HURHY1pa&#13;&#10;GkN6evpoRgACAHaPQBvKpKeiAAAAAElFTkSuQmCC" xlink:type="simple" xlink:actuate="onLoad" height="16" preserveAspectRatio="none" xlink:show="embed"/>
 <text xml:space="preserve" x="32" y="26" clip-path="url(#clipPath3)" stroke="none">parameter name</text>
 <text xml:space="preserve" x="13" y="46" clip-path="url(#clipPath4)" stroke="none">: Parameter</text>
 <line clip-path="url(#clipPath4)" fill="none" x1="13" x2="77" y1="47" y2="47" stroke-width="0.1"/>

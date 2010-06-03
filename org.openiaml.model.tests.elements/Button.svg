@@ -20,15 +20,15 @@
 <path d="M12 52 L76 52 L76 68 L12 68 L12 52 Z"/>
 </clipPath>
 </defs>
-<g fill="rgb(240,240,240)" font-family="'Tahoma'" stroke-linejoin="round" stroke="rgb(240,240,240)" stroke-width="0" stroke-miterlimit="0">
+<g fill="rgb(255,246,149)" font-family="'Tahoma'" stroke-linejoin="round" stroke="rgb(255,246,149)" stroke-width="0" stroke-miterlimit="0">
 <rect x="10" y="10" clip-path="url(#clipPath1)" width="97" height="60" stroke="none"/>
 </g>
-<g fill="rgb(176,176,176)" stroke-width="1.1" font-family="'Tahoma'" stroke-linecap="butt" stroke="rgb(176,176,176)">
+<g stroke-width="1.1" font-family="'Tahoma'" stroke-linecap="butt">
 <rect x="10" y="10" clip-path="url(#clipPath1)" fill="none" width="96" height="59"/>
 <image x="13" y="13" clip-path="url(#clipPath2)" width="16" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABrElEQVR42n1Tu3LC&#13;&#10;QAxcGwMD2IE8KlNQQpEZJkMKGqj5Jmp+gf+hoaWhDlUwBYUHzCM8nVuRuzGERB7N&#13;&#10;nU+6lVbSWd1uN+50OqDEcYxbsSzr6t+2bWQyGQwGA/R6PTjtdhutVgt/CUG1ns9n&#13;&#10;WQmQy+XQ7/fh8JByPB6NA1e9T17W6rqu+PPcAJxOp3+zSO5JQwcwAKlUykQjb+2U&#13;&#10;rAVV+xmAC+oZQTCTFTTGNIpFZXZxTKfTkvbhcEClUjHBBGC5jBTAFJ73IMiWZV/S&#13;&#10;Vg14eX6Sy8PhEKVSSeye50kmFEenstvtYKc2qFZflVFwxflru8RqtcJ6vZbqa2pX&#13;&#10;FChBECCfzwuyJZ8CUA6LRYjtZoOPyQSPxSJcFb1Wq5naOORVKBTgl8uIFgvMpp9y&#13;&#10;kUXgRzos3lu9jqPqFPcMxFqYLjiOg/dG41fPZc+zn24kB4kAkoG+sN/vTZ+TQ6TB&#13;&#10;NAA1m82a2TBFJBWmdw/g3jRy8IQCi0YK5KVRkyN9u/Ii3wGVAZ3RaIRmsymc9Djr&#13;&#10;lJOAyYdF3/F4jCiKYKkOxL7v333OmtLtGXU+nyMMQ3wD4YWj0ILIRBAAAAAASUVO&#13;&#10;RK5CYII=" xlink:type="simple" xlink:actuate="onLoad" height="16" preserveAspectRatio="none" xlink:show="embed"/>
-<text x="32" y="26" clip-path="url(#clipPath3)" fill="black" stroke="none" xml:space="preserve">button name</text>
-<text x="13" y="46" clip-path="url(#clipPath4)" fill="black" stroke="none" xml:space="preserve">: Button</text>
-<line clip-path="url(#clipPath4)" fill="none" x1="13" x2="59" y1="47" y2="47" stroke="black" stroke-width="0.1"/>
+<text xml:space="preserve" x="32" y="26" clip-path="url(#clipPath3)" stroke="none">button name</text>
+<text xml:space="preserve" x="13" y="46" clip-path="url(#clipPath4)" stroke="none">: Button</text>
+<line clip-path="url(#clipPath4)" fill="none" x1="13" x2="59" y1="47" y2="47" stroke-width="0.1"/>
 <text x="13" y="65" clip-path="url(#clipPath5)" fill="gray" stroke="none" stroke-width="0.1" xml:space="preserve">Parent: null</text>
 </g>
 </g>

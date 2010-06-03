@@ -50,28 +50,28 @@
 <path d="M105 122 L114 122 L114 132 L105 132 L105 122 Z"/>
 </clipPath>
 </defs>
-<g fill="rgb(243,185,192)" font-family="'Tahoma'" stroke-linejoin="round" stroke="rgb(243,185,192)" stroke-width="0" stroke-miterlimit="0">
+<g fill="rgb(255,246,149)" font-family="'Tahoma'" stroke-linejoin="round" stroke="rgb(255,246,149)" stroke-width="0" stroke-miterlimit="0">
 <rect x="74" y="10" clip-path="url(#clipPath1)" width="71" height="60" stroke="none"/>
 </g>
-<g fill="rgb(176,176,176)" stroke-width="1.1" font-family="'Tahoma'" stroke-linecap="butt" stroke="rgb(176,176,176)">
+<g stroke-width="1.1" font-family="'Tahoma'" stroke-linecap="butt">
 <rect x="74" y="10" clip-path="url(#clipPath1)" fill="none" width="70" height="59"/>
 <image x="77" y="13" clip-path="url(#clipPath2)" width="16" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACM0lEQVR42lVTPW/b&#13;&#10;QAx9Op1kyY6jJHVR2ECLDgW6dchSdyngrf5Lzeb/0P9TBF09uQU6dAiyBQbiJIol&#13;&#10;W7qPkjzbSQ5HiOIdyfdIXnRx8d1Pp1M4H8F7D178jfC0PNgeLFEUIetkuLz8idls&#13;&#10;Bj2ZTNAMxvhzVSJRgLEO9pk468XG4pxDVVkMXxf48vUbhm9+QLfG4u+/B/z6fYNM&#13;&#10;KzSGLpPNtA58xkGMedIfSoO3wwof+hvEKoK2dDA9L/DpnYICZaF/5zysiBPdWyv/&#13;&#10;jGDbWLw6K5C3V9iQrp2z+DiM8b7QSFINFRMP72g7Jk+baYRAbmfP+33M5yBUDlrR&#13;&#10;/cfHGtfXNzg97UPrWCB3Ohp13RBsizxPEVNg1hmFj43Q4WJrS0Xiw5OTIySJJqOT&#13;&#10;uocVdHYKHQgd2gsvzVGzLBXnqqqlXazf3t4L7DRNCGEldkYVnN0uEQXgDG1rcHdX&#13;&#10;UgZFwRIwLda73eAQRVqQMKWAKIhQYCRlWeP+fo2iOJIa1PUWx8dd0pW0lLMxDUbj&#13;&#10;nBFHrsGBQq+XiXPbthQs1KQsqx0dhc1mKzZFfWeR2fRuj8CLY9M0ApsrnlI7m8ZI&#13;&#10;Vk7ATjzCbjcLe/iCgJU4jsVpuzVChevANEJwI7S63Qw8M+GthMCCIDgnGAzOpE3G&#13;&#10;GLmUpumOQiyQmUJw5BnJCWkuqPScRmo8/iyZOOo+wx7yeu1e9J6F6S4WC6oTda7X&#13;&#10;6/nRaHR4xi9X9GyocHjOLMvlEqvVCv8BULqkBWfNV8QAAAAASUVORK5CYII=" xlink:type="simple" xlink:actuate="onLoad" height="16" preserveAspectRatio="none" xlink:show="embed"/>
-<text x="96" y="26" clip-path="url(#clipPath3)" fill="black" stroke="none" xml:space="preserve">Form 1</text>
-<text x="77" y="46" clip-path="url(#clipPath4)" fill="black" stroke="none" xml:space="preserve">: InputForm</text>
-<line clip-path="url(#clipPath4)" fill="none" x1="77" x2="142" y1="47" y2="47" stroke="black" stroke-width="0.1"/>
+<text xml:space="preserve" x="96" y="26" clip-path="url(#clipPath3)" stroke="none">Form 1</text>
+<text xml:space="preserve" x="77" y="46" clip-path="url(#clipPath4)" stroke="none">: InputForm</text>
+<line clip-path="url(#clipPath4)" fill="none" x1="77" x2="142" y1="47" y2="47" stroke-width="0.1"/>
 <text x="77" y="65" clip-path="url(#clipPath5)" fill="gray" stroke="none" stroke-width="0.1" xml:space="preserve">Parent: null</text>
-<rect x="74" y="130" clip-path="url(#clipPath6)" fill="rgb(243,185,192)" width="71" height="60" stroke="none" stroke-width="0.1"/>
+<rect x="74" y="130" clip-path="url(#clipPath6)" fill="rgb(255,246,149)" width="71" height="60" stroke="none" stroke-width="0.1"/>
 <rect x="74" y="130" clip-path="url(#clipPath6)" fill="none" width="70" height="59"/>
 <image x="77" y="133" clip-path="url(#clipPath7)" width="16" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACM0lEQVR42lVTPW/b&#13;&#10;QAx9Op1kyY6jJHVR2ECLDgW6dchSdyngrf5Lzeb/0P9TBF09uQU6dAiyBQbiJIol&#13;&#10;W7qPkjzbSQ5HiOIdyfdIXnRx8d1Pp1M4H8F7D178jfC0PNgeLFEUIetkuLz8idls&#13;&#10;Bj2ZTNAMxvhzVSJRgLEO9pk468XG4pxDVVkMXxf48vUbhm9+QLfG4u+/B/z6fYNM&#13;&#10;KzSGLpPNtA58xkGMedIfSoO3wwof+hvEKoK2dDA9L/DpnYICZaF/5zysiBPdWyv/&#13;&#10;jGDbWLw6K5C3V9iQrp2z+DiM8b7QSFINFRMP72g7Jk+baYRAbmfP+33M5yBUDlrR&#13;&#10;/cfHGtfXNzg97UPrWCB3Ohp13RBsizxPEVNg1hmFj43Q4WJrS0Xiw5OTIySJJqOT&#13;&#10;uocVdHYKHQgd2gsvzVGzLBXnqqqlXazf3t4L7DRNCGEldkYVnN0uEQXgDG1rcHdX&#13;&#10;UgZFwRIwLda73eAQRVqQMKWAKIhQYCRlWeP+fo2iOJIa1PUWx8dd0pW0lLMxDUbj&#13;&#10;nBFHrsGBQq+XiXPbthQs1KQsqx0dhc1mKzZFfWeR2fRuj8CLY9M0ApsrnlI7m8ZI&#13;&#10;Vk7ATjzCbjcLe/iCgJU4jsVpuzVChevANEJwI7S63Qw8M+GthMCCIDgnGAzOpE3G&#13;&#10;GLmUpumOQiyQmUJw5BnJCWkuqPScRmo8/iyZOOo+wx7yeu1e9J6F6S4WC6oTda7X&#13;&#10;6/nRaHR4xi9X9GyocHjOLMvlEqvVCv8BULqkBWfNV8QAAAAASUVORK5CYII=" xlink:type="simple" xlink:actuate="onLoad" height="16" preserveAspectRatio="none" xlink:show="embed"/>
-<text x="96" y="146" clip-path="url(#clipPath8)" fill="black" stroke="none" xml:space="preserve">Form 2</text>
-<text x="77" y="166" clip-path="url(#clipPath9)" fill="black" stroke="none" xml:space="preserve">: InputForm</text>
-<line clip-path="url(#clipPath9)" fill="none" x1="77" x2="142" y1="167" y2="167" stroke="black" stroke-width="0.1"/>
+<text xml:space="preserve" x="96" y="146" clip-path="url(#clipPath8)" stroke="none">Form 2</text>
+<text xml:space="preserve" x="77" y="166" clip-path="url(#clipPath9)" stroke="none">: InputForm</text>
+<line clip-path="url(#clipPath9)" fill="none" x1="77" x2="142" y1="167" y2="167" stroke-width="0.1"/>
 <text x="77" y="185" clip-path="url(#clipPath10)" fill="gray" stroke="none" stroke-width="0.1" xml:space="preserve">Parent: null</text>
 <line clip-path="url(#clipPath11)" fill="none" x1="109" x2="109" y1="70" y2="130" stroke-dasharray="6.6,3.3"/>
 <image width="16" xlink:show="embed" xlink:type="simple" clip-path="url(#clipPath12)" preserveAspectRatio="none" stroke-dasharray="6.6,3.3" height="16" x="51" y="92" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAsElEQVR42mNgGP7A&#13;&#10;wcHhPz55JnySBw4c+I9MYwPM+Ax48OBBA9AFDAsWLACxG0kyYP/9+f8ZPwoy2MfL&#13;&#10;M4Do+vnxDQsnbmwkaADIuSCb4ZofKjLI2/9nOLjwIUi6AegaEIYbxIgtwEDOhmmG&#13;&#10;gf/y98GGAC2AWcSIEYggwYaGBrAikGKQJnTNUHlGrC5ADwOQJpBLYLSjYiKGekZC&#13;&#10;aQDkHZDNyLYSnQ5g3gHRNEuJAw8AW9RnFeyG0WQAAAAASUVORK5CYII=" xlink:actuate="onLoad"/>
-<text x="70" y="105" clip-path="url(#clipPath13)" fill="black" stroke-dasharray="6.6,3.3" stroke="none" xml:space="preserve">set</text>
-<text x="23" y="105" clip-path="url(#clipPath14)" fill="black" stroke-dasharray="6.6,3.3" stroke="none" xml:space="preserve">: SetWire</text>
-<line clip-path="url(#clipPath14)" fill="none" x1="23" x2="75" y1="106" y2="106" stroke="black" stroke-width="0.1"/>
+<text x="70" y="105" clip-path="url(#clipPath13)" stroke-dasharray="6.6,3.3" stroke="none" xml:space="preserve">set</text>
+<text x="23" y="105" clip-path="url(#clipPath14)" stroke-dasharray="6.6,3.3" stroke="none" xml:space="preserve">: SetWire</text>
+<line clip-path="url(#clipPath14)" fill="none" x1="23" x2="75" y1="106" y2="106" stroke-width="0.1"/>
 <line clip-path="url(#clipPath15)" fill="none" x1="106" x2="109" y1="123" y2="130"/>
 <line clip-path="url(#clipPath15)" fill="none" x1="109" x2="112" y1="130" y2="123"/>
 </g>

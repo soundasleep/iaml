@@ -20,15 +20,15 @@
 <path d="M12 52 L76 52 L76 68 L12 68 L12 52 Z"/>
 </clipPath>
 </defs>
-<g fill="rgb(185,243,192)" font-family="'Tahoma'" stroke-linejoin="round" stroke="rgb(185,243,192)" stroke-width="0" stroke-miterlimit="0">
+<g fill="rgb(255,246,149)" font-family="'Tahoma'" stroke-linejoin="round" stroke="rgb(255,246,149)" stroke-width="0" stroke-miterlimit="0">
 <rect x="10" y="10" clip-path="url(#clipPath1)" width="82" height="60" stroke="none"/>
 </g>
-<g fill="rgb(176,176,176)" stroke-width="1.1" font-family="'Tahoma'" stroke-linecap="butt" stroke="rgb(176,176,176)">
+<g stroke-width="1.1" font-family="'Tahoma'" stroke-linecap="butt">
 <rect x="10" y="10" clip-path="url(#clipPath1)" fill="none" width="81" height="59"/>
 <image x="13" y="13" clip-path="url(#clipPath2)" width="16" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAuklEQVR42mNgGP5A&#13;&#10;p03nPz55JnySBw4c+I9Mk2xAzrEchpBfIWAaF2DGJRF8LPi/4y1HhstulxlAtHCb&#13;&#10;cMP1udcbCRoAcu4ZtTMNMM25v3IZNqttZtDdpcvwxu1Nw6raVQ0LFiyAG8SILcBA&#13;&#10;zoZphoHJbJPBhqxhWwPmX6m6wogRBiDBKVZTwIpAikGa0DWD5GGaMVyAHgYgTSCX&#13;&#10;wOi1Vmsx1DMSSgMg74BsRraV6GiEeQdE0ywlDjwAAAr0XyAC3D6HAAAAAElFTkSu&#13;&#10;QmCC" xlink:type="simple" xlink:actuate="onLoad" height="16" preserveAspectRatio="none" xlink:show="embed"/>
-<text x="32" y="26" clip-path="url(#clipPath3)" fill="black" stroke="none" xml:space="preserve">Map Name</text>
-<text x="13" y="46" clip-path="url(#clipPath4)" fill="black" stroke="none" xml:space="preserve">: Map</text>
-<line clip-path="url(#clipPath4)" fill="none" x1="13" x2="43" y1="47" y2="47" stroke="black" stroke-width="0.1"/>
+<text xml:space="preserve" x="32" y="26" clip-path="url(#clipPath3)" stroke="none">Map Name</text>
+<text xml:space="preserve" x="13" y="46" clip-path="url(#clipPath4)" stroke="none">: Map</text>
+<line clip-path="url(#clipPath4)" fill="none" x1="13" x2="43" y1="47" y2="47" stroke-width="0.1"/>
 <text x="13" y="65" clip-path="url(#clipPath5)" fill="gray" stroke="none" stroke-width="0.1" xml:space="preserve">Parent: null</text>
 </g>
 </g>

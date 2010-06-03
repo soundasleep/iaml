@@ -17,15 +17,15 @@
 <path d="M12 33 L62 33 L62 49 L12 49 L12 33 Z"/>
 </clipPath>
 </defs>
-<g fill="rgb(255,255,240)" font-family="'Tahoma'" stroke-linejoin="round" stroke="rgb(255,255,240)" stroke-width="0" stroke-miterlimit="0">
+<g fill="rgb(255,246,149)" font-family="'Tahoma'" stroke-linejoin="round" stroke="rgb(255,246,149)" stroke-width="0" stroke-miterlimit="0">
 <rect x="10" y="10" clip-path="url(#clipPath1)" width="100" height="41" stroke="none"/>
 </g>
-<g fill="rgb(176,176,176)" stroke-width="1.1" font-family="'Tahoma'" stroke-linecap="butt" stroke="rgb(176,176,176)">
+<g stroke-width="1.1" font-family="'Tahoma'" stroke-linecap="butt">
 <rect x="10" y="10" clip-path="url(#clipPath1)" fill="none" width="99" height="40"/>
 <image x="13" y="13" clip-path="url(#clipPath2)" width="16" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACp0lEQVR42qWTS2vU&#13;&#10;UBTHf7nJZDKp06nvouIbpAVRsCq60pW404XgBxBBRHDhxr2CCAquxJ3gNxBEELEg&#13;&#10;unJRX/ior1ZR1FrqjDOdmeQ+PDcZP4EhJ8k9uefx///PDQ4dvuoaqxpkuUMbME7M&#13;&#10;lm+/1pRrbQf+f/9QxK1fRJu2b2Tf6aPMfis3ZbmYGZgurT+wXJf+nuyJh2Du9h2i&#13;&#10;ZtsxeX+e1kKPUIGrxFgp43SOI8BJNWvlEVVAKaIsoy7LTpjQXbSS4I/hxDgcGF9B&#13;&#10;oCLszAyqFsOq1dK8lRT+UuTzP9HNRdKtW8SXcfd5xrkHFqUDRS2psHS4SvrjHe3L&#13;&#10;J4m/f2CkHoslNAqLUfPf+HLtFMw+oz5Uo1qVYhKrjJO+Kwl/Xk/z5tIxXP0pJh0p&#13;&#10;6jrp33g48h0kDZaNTDN34Sj9qSkhISn6i3wHBebeAunEcZK1W0k2bCyCPHafJBc5&#13;&#10;4tFRagevCsS3mN9zmEaO9ZwICnTWZ3jXHrG9ReCgfBHskxgj1Kc16oeOIV9U6KKf&#13;&#10;9GSPGnTgqQ5KuoJBvDY+2OtuCxi+XV0oIr7QFX6CkMgQ4sIq+uUUnbeCf/l6hnZO&#13;&#10;ENbrRWUr5iR53urQevGI3vxH+qMCsbpf/EKi9jVVKHdK6+4V2vdO0p6ZxcpQaAnW&#13;&#10;Ml1GCnS//iR+eJZ88qIMU1wo4JxXQdqw/S5qbBtLz9zkx+cGurtQQrFeAYHiAfSb&#13;&#10;dF6FJEduMLxnN6bTKQoLBJFR+4nXLNkxwdj5W0T1GhWTCUQJDQxGdwiXN4jPXicY&#13;&#10;HyPt/qKmEqFNSKymCZOfFNNzv8lsgEo2k/f65I+bxaEpVBD2tFqJjddh3rSJgoj3&#13;&#10;zQp9GfvIdha4c/8l7UVTzL3x0rkA68pT59m3XjtXSivMeacQr1iTtvjv6y9+I3GD&#13;&#10;cqCRhwAAAABJRU5ErkJggg==" xlink:type="simple" xlink:actuate="onLoad" height="16" preserveAspectRatio="none" xlink:show="embed"/>
-<text x="32" y="26" clip-path="url(#clipPath3)" fill="black" stroke="none" xml:space="preserve">Session Name</text>
-<text x="13" y="46" clip-path="url(#clipPath4)" fill="black" stroke="none" xml:space="preserve">: Session</text>
-<line clip-path="url(#clipPath4)" fill="none" x1="13" x2="61" y1="47" y2="47" stroke="black" stroke-width="0.1"/>
+<text xml:space="preserve" x="32" y="26" clip-path="url(#clipPath3)" stroke="none">Session Name</text>
+<text xml:space="preserve" x="13" y="46" clip-path="url(#clipPath4)" stroke="none">: Session</text>
+<line clip-path="url(#clipPath4)" fill="none" x1="13" x2="61" y1="47" y2="47" stroke-width="0.1"/>
 </g>
 </g>
 </svg>

@@ -20,15 +20,15 @@
 <path d="M12 52 L76 52 L76 68 L12 68 L12 52 Z"/>
 </clipPath>
 </defs>
-<g fill="rgb(159,187,211)" font-family="'Tahoma'" stroke-linejoin="round" stroke="rgb(159,187,211)" stroke-width="0" stroke-miterlimit="0">
+<g fill="rgb(202,225,173)" font-family="'Tahoma'" stroke-linejoin="round" stroke="rgb(202,225,173)" stroke-width="0" stroke-miterlimit="0">
 <rect x="10" y="10" clip-path="url(#clipPath1)" width="85" height="60" stroke="none"/>
 </g>
-<g fill="rgb(176,176,176)" stroke-width="1.1" font-family="'Tahoma'" stroke-linecap="butt" stroke="rgb(176,176,176)">
+<g stroke-width="1.1" font-family="'Tahoma'" stroke-linecap="butt">
 <rect x="10" y="10" clip-path="url(#clipPath1)" fill="none" width="84" height="59"/>
 <image x="13" y="13" clip-path="url(#clipPath2)" width="16" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACbklEQVR42pVTS2gT&#13;&#10;URQ9bz7RmMa0TW3RVowJ9KOJiAsRLBKiouJaLXSlVQRXLsR13QpxoS0u3blQUHHh&#13;&#10;TkUsQjcVRGgRQwihotZqm0+TeZ953pnmQ9yob7jcYZh33rnnnMcWZi9ppiQGDp3F&#13;&#10;rvELDP+5zMunU9PLlRWELODKsfj09ckz0zNP5m79K4AlhAOtXYQTo4gM70P58xI+&#13;&#10;zF6kLwZm3jOYpgnDMGBZlt+blc1mWQOA+wC1tWWYga3oio9SjeD7u9dIpQ76p2it&#13;&#10;O3qhUGgxMISoQ7sKLgGJ6i/UfhbgkiaKijHWKm/teVWDpkcp1Qbg3ANwCaDugyjp&#13;&#10;wJUCQvIOAK9WnTIGX1YhpWxrwD0GsCC5AzB6I5aaflCkzfrzj7Bo3gCzqVsY6U6A&#13;&#10;2QaO5B3cb43APREldvbmoPkGJAF6mzkxcVyJU+MncDydQTqTRvTwXr/ikUE8vXpX&#13;&#10;txh0WQrR3hWUyjZKlT4ag0bgHFIraEfCWd2AESD1A+RE0CaQGPR8Hm9uP9a+jXVn&#13;&#10;G3K5fqyvURhMTwNiIGqQJKTLJcygBUabmWWAmQaKbxfxo09i8uY15gMEScSVb7RZ&#13;&#10;c1g288XkTh2cRns4/4I0MGCSBqnuGGzq+cpX3Hh2bzMHUgi4vguCtBAkJKMRyFJi&#13;&#10;sH8q05GBL48WvRfMRYptG6VyGzY6mzaSqMpjQP1PG10KXPD8WKeNSvrwsENR2FtC&#13;&#10;MOyAnwNP3GaAmis8kfS7ILbNxe6c26EHhvqxPdxDytfh1KpUFZRLJTz4lOi4B969&#13;&#10;aFYsFkMymaTcUIyLuSWMHZ1AT2wI0d3DOHByqnH0wl9v428GvU8uPPITXgAAAABJRU5ErkJggg==" xlink:type="simple" xlink:actuate="onLoad" height="16" preserveAspectRatio="none" xlink:show="embed"/>
-<text x="32" y="26" clip-path="url(#clipPath3)" fill="black" stroke="none" xml:space="preserve">Gate name</text>
-<text x="13" y="46" clip-path="url(#clipPath4)" fill="black" stroke="none" xml:space="preserve">: EntryGate</text>
-<line clip-path="url(#clipPath4)" fill="none" x1="13" x2="76" y1="47" y2="47" stroke="black" stroke-width="0.1"/>
+<text xml:space="preserve" x="32" y="26" clip-path="url(#clipPath3)" stroke="none">Gate name</text>
+<text xml:space="preserve" x="13" y="46" clip-path="url(#clipPath4)" stroke="none">: EntryGate</text>
+<line clip-path="url(#clipPath4)" fill="none" x1="13" x2="76" y1="47" y2="47" stroke-width="0.1"/>
 <text x="13" y="65" clip-path="url(#clipPath5)" fill="gray" stroke="none" stroke-width="0.1" xml:space="preserve">Parent: null</text>
 </g>
 </g>

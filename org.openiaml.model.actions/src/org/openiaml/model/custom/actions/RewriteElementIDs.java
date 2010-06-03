@@ -150,6 +150,11 @@ public class RewriteElementIDs extends IamlFileAction {
 			className = rewriteClassNameMap.get(className);
 		}
 		
+		// XXXedge -> edge
+		if (className.endsWith("edge")) {
+			className = "edge";
+		}
+		
 		int i;
 		if (existingCount.containsKey(className)) {
 			i = existingCount.get(className);

@@ -581,8 +581,8 @@
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
             red="255"
-            green="246"
-            blue="149"/>
+            green="248"
+            blue="170"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -629,8 +629,8 @@
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
             red="255"
-            green="246"
-            blue="149"/>
+            green="248"
+            blue="170"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -677,8 +677,8 @@
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
             red="255"
-            green="246"
-            blue="149"/>
+            green="248"
+            blue="170"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -1035,8 +1035,8 @@
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
             red="255"
-            green="246"
-            blue="149"/>
+            green="248"
+            blue="170"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -1279,8 +1279,8 @@
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
             red="255"
-            green="246"
-            blue="149"/>
+            green="248"
+            blue="170"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -1795,8 +1795,8 @@
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
             red="255"
-            green="246"
-            blue="149"/>
+            green="248"
+            blue="170"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -1853,8 +1853,8 @@
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
             red="255"
-            green="246"
-            blue="149"/>
+            green="248"
+            blue="170"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -1934,8 +1934,8 @@
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
             red="255"
-            green="246"
-            blue="149"/>
+            green="248"
+            blue="170"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -1972,8 +1972,8 @@
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
             red="255"
-            green="246"
-            blue="149"/>
+            green="248"
+            blue="170"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -2020,8 +2020,8 @@
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
             red="255"
-            green="246"
-            blue="149"/>
+            green="248"
+            blue="170"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets

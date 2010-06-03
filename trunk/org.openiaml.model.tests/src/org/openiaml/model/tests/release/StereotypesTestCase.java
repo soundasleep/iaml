@@ -5,8 +5,6 @@ package org.openiaml.model.tests.release;
 
 import java.util.Set;
 
-import junit.framework.AssertionFailedError;
-
 import org.openiaml.emf.SoftCache;
 import org.openiaml.model.tests.XmlTestCase;
 import org.openiaml.model.xpath.IterableElementList;
@@ -121,7 +119,7 @@ public class StereotypesTestCase extends XmlTestCase {
 			
 			// if it has 2 or more nodes, it must be second
 			if (children.size() >= 2) {
-				assertEquals(label, children.item(1));
+				assertEquals(name, label, children.item(1));
 			}
 
 		}

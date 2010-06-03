@@ -34,11 +34,13 @@ public class ParentNamesTestCase extends XmlTestCase {
 	 */
 	private static final EClass[] PARENT_NAME_ELEMENTS = new EClass[] {
 		ModelPackage.eINSTANCE.getDomainAttribute(),
+		ModelPackage.eINSTANCE.getDomainAttributeInstance(),
 		ModelPackage.eINSTANCE.getEventTrigger(),
 		ModelPackage.eINSTANCE.getPrimitiveOperation(),
 		ModelPackage.eINSTANCE.getPrimitiveCondition(),
 		ModelPackage.eINSTANCE.getCompositeOperation(),
 		ModelPackage.eINSTANCE.getProperty(),
+		VisualPackage.eINSTANCE.getFrame(),
 		VisualPackage.eINSTANCE.getInputForm(),
 		VisualPackage.eINSTANCE.getInputTextField(),
 		VisualPackage.eINSTANCE.getLabel(),
@@ -46,7 +48,6 @@ public class ParentNamesTestCase extends XmlTestCase {
 		VisualPackage.eINSTANCE.getButton(),
 		ComponentsPackage.eINSTANCE.getEntryGate(),
 		ComponentsPackage.eINSTANCE.getExitGate(),
-		ModelPackage.eINSTANCE.getScope(),
 		VisualPackage.eINSTANCE.getMap(),
 		VisualPackage.eINSTANCE.getMapPoint(),
 		VisualPackage.eINSTANCE.getIteratorList(),
@@ -104,6 +105,7 @@ public class ParentNamesTestCase extends XmlTestCase {
 		ModelPackage.eINSTANCE.getDomainAttributeInstance(),
 		ModelPackage.eINSTANCE.getStaticValue(),
 		VisualPackage.eINSTANCE.getInputTextField(),
+		VisualPackage.eINSTANCE.getLabel(),
 		
 		// not data typed, but typed in a different way
 		DomainPackage.eINSTANCE.getDomainSource(),

@@ -276,7 +276,6 @@ public class GmfGraphTestCase extends XmlTestCase {
 	/**
 	 * Issue 54: Make sure that all nodes have a border.
 	 * Sets the border if it is not present. 
-	 * @throws Exception 
 	 * 
 	 * @throws Exception
 	 */
@@ -332,6 +331,40 @@ public class GmfGraphTestCase extends XmlTestCase {
 		}
 		
 		if (changed) {
+			saveDocument(gmfgraph, GMF_ROOT + GMF_FILENAME);
+		}
+	}
+
+	/**
+	 * All nodes must have a foreground color of black.
+	 * 
+	 * @throws Exception
+	 */
+	public void testAllForegroundColoursBlack() throws Exception {
+		Document gmfgraph = getGmfgraph();
+		IterableElementList nl = xpath(gmfgraph, "/Canvas/figures/descriptors/actualFigure");
+		
+		assertNotSame("We should have at least one figure node", nl.getLength(), 0);
+		
+		boolean changed = false;
+		for (Element child : nl) {
+			if (hasXpathFirst(child, "foregroundColor") == null) {
+				// add it
+				Element e = gmfgraph.createElement("foregroundColor");
+				e.setAttribute("xsi:type", "gmfgraph:ConstantColor");
+				e.setAttribute("value", "black");
+				child.appendChild(e);
+				changed = true;
+			}
+			
+			// there should be a foreground color
+			Element fg = xpathFirst(child, "foregroundColor");
+			assertEquals(child.getAttribute("name"), "gmfgraph:ConstantColor", fg.getAttribute("xsi:type"));
+			assertEquals(child.getAttribute("name"), "black", fg.getAttribute("value"));
+		}
+		
+		if (changed) {
+			System.out.println("Writing " + GMF_FILENAME + "...");
 			saveDocument(gmfgraph, GMF_ROOT + GMF_FILENAME);
 		}
 	}

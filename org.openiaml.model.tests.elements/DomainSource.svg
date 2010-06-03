@@ -4,10 +4,6 @@
 <defs id="genericDefs"/>
 <g>
 <defs id="defs1">
-<linearGradient x1="10" x2="10" y1="10" gradientUnits="userSpaceOnUse" y2="70" xlink:type="simple" xlink:actuate="onLoad" id="linearGradient1" xlink:show="other" spreadMethod="pad">
-<stop stop-opacity="1" stop-color="black" offset="0%"/>
-<stop stop-opacity="1" stop-color="white" offset="100%"/>
-</linearGradient>
 <clipPath clipPathUnits="userSpaceOnUse" id="clipPath1">
 <path d="M9 9 L119 9 L119 71 L9 71 L9 9 Z"/>
 </clipPath>
@@ -24,7 +20,7 @@
 <path d="M12 52 L116 52 L116 68 L12 68 L12 52 Z"/>
 </clipPath>
 </defs>
-<g fill="url(#linearGradient1)" font-family="'Tahoma'" stroke-linejoin="round" stroke="url(#linearGradient1)" font-weight="bold" stroke-width="0" stroke-miterlimit="0">
+<g fill="white" font-family="'Tahoma'" stroke-linejoin="round" stroke="white" font-weight="bold" stroke-width="0" stroke-miterlimit="0">
 <rect x="10" y="10" clip-path="url(#clipPath1)" width="108" height="60" stroke="none"/>
 </g>
 <g stroke-width="1.1" font-weight="bold" font-family="'Tahoma'" stroke-linecap="butt">

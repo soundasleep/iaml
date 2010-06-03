@@ -20,12 +20,12 @@
 <g fill="white" font-family="'Tahoma'" stroke-linejoin="round" stroke="white" stroke-width="0" stroke-miterlimit="0">
 <ellipse clip-path="url(#clipPath1)" rx="57.5" cx="67.5" ry="20" cy="30" stroke="none"/>
 </g>
-<g fill="rgb(208,185,243)" stroke-width="1.1" font-family="'Tahoma'" stroke-linecap="butt" stroke="rgb(208,185,243)">
+<g stroke-width="1.1" font-family="'Tahoma'" stroke-linecap="butt">
 <ellipse clip-path="url(#clipPath1)" fill="none" rx="57.5" cx="67.5" ry="20" cy="30"/>
 <image x="13" y="13" clip-path="url(#clipPath2)" width="16" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAlklEQVR42mNgGP7g&#13;&#10;gMOB//jkmfBqPgDRDKNJNoChAewCME2yATd7bv4HaY7kiQQbAuJjU8eI1dlQm0Ga&#13;&#10;n5s8Z5A8I8mw/MtyBocDDmDXODg4MGI1ABZgyJphAMUQIADSjBheAAs2gGmwYpAm&#13;&#10;DM0NCM1YvYAcBiBNIJfAaPUSdUaCYYDuJZB3QDYj20pSNMKcTbOUOPAAAOB9VEUC&#13;&#10;Y+naAAAAAElFTkSuQmCC" xlink:type="simple" xlink:actuate="onLoad" height="16" preserveAspectRatio="none" xlink:show="embed"/>
-<text x="32" y="26" clip-path="url(#clipPath3)" fill="black" stroke="none" xml:space="preserve">Permission Name</text>
-<text x="36" y="46" clip-path="url(#clipPath4)" fill="black" stroke="none" xml:space="preserve">: Permission</text>
-<line clip-path="url(#clipPath4)" fill="none" x1="36" x2="100" y1="47" y2="47" stroke="black" stroke-width="0.1"/>
+<text xml:space="preserve" x="32" y="26" clip-path="url(#clipPath3)" stroke="none">Permission Name</text>
+<text xml:space="preserve" x="36" y="46" clip-path="url(#clipPath4)" stroke="none">: Permission</text>
+<line clip-path="url(#clipPath4)" fill="none" x1="36" x2="100" y1="47" y2="47" stroke-width="0.1"/>
 </g>
 </g>
 </svg>

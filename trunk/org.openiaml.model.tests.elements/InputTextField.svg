@@ -17,23 +17,23 @@
 <path d="M12 33 L102 33 L102 49 L12 49 L12 33 Z"/>
 </clipPath>
 <clipPath clipPathUnits="userSpaceOnUse" id="clipPath5">
-<path d="M12 52 L76 52 L76 68 L12 68 L12 52 Z"/>
+<path d="M12 52 L71 52 L71 68 L12 68 L12 52 Z"/>
 </clipPath>
 <clipPath clipPathUnits="userSpaceOnUse" id="clipPath6">
-<path d="M12 71 L71 71 L71 87 L12 87 L12 71 Z"/>
+<path d="M12 71 L76 71 L76 87 L12 87 L12 71 Z"/>
 </clipPath>
 </defs>
-<g fill="rgb(243,229,185)" font-family="'Tahoma'" stroke-linejoin="round" stroke="rgb(243,229,185)" stroke-width="0" stroke-miterlimit="0">
+<g fill="rgb(255,246,149)" font-family="'Tahoma'" stroke-linejoin="round" stroke="rgb(255,246,149)" stroke-width="0" stroke-miterlimit="0">
 <rect x="10" y="10" clip-path="url(#clipPath1)" width="108" height="79" stroke="none"/>
 </g>
-<g fill="rgb(176,176,176)" stroke-width="1.1" font-family="'Tahoma'" stroke-linecap="butt" stroke="rgb(176,176,176)">
+<g stroke-width="1.1" font-family="'Tahoma'" stroke-linecap="butt">
 <rect x="10" y="10" clip-path="url(#clipPath1)" fill="none" width="107" height="78"/>
 <image x="13" y="13" clip-path="url(#clipPath2)" width="16" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABSklEQVR42o1Tr7NE&#13;&#10;UBQ+awQaURRFVRTFFUV/Bv+CKIq2EUVRpK0o2rYabfd9d+YY3mPfnhlz7j3u+X6c&#13;&#10;yyWKopfruqSqKs3zTIij9TYjmqahOI5JdhyHAPBfLMuyrhVFIU3TKE1Tko8OfGrG&#13;&#10;Gs1ckz6xVlVFwzAIxqOApVOAcRypKAqq63rHzmBYYx7SmUdmx7AAtm3cKeACDjBD&#13;&#10;3/cCwPd9USvL8tSmdCQvz3OxD8OQLMsSVs5U7GbA7LfbTVwtpo0MK1B0NEz5NyLY&#13;&#10;0YDh3e93mqaJHo+HqMPSIQACbF3XUZZldL1eKQgCej6fpOs62bZNSZIIK6jzAAUA&#13;&#10;e0cGK64GhzzPW5WZpine4UZQNwzjrwJIxUs8YMWev32ogzIA8rMC8GCQwYSMZq5t&#13;&#10;8/a2+KeS27YVHr/9J9AMZejD/vJTeG09fRsYMJS+AXWN53FsynqeAAAAAElFTkSu&#13;&#10;QmCC" xlink:type="simple" xlink:actuate="onLoad" height="16" preserveAspectRatio="none" xlink:show="embed"/>
-<text x="32" y="26" clip-path="url(#clipPath3)" fill="black" stroke="none" xml:space="preserve">text field name</text>
-<text x="13" y="46" clip-path="url(#clipPath4)" fill="black" stroke="none" xml:space="preserve">: InputTextField</text>
-<line clip-path="url(#clipPath4)" fill="none" x1="13" x2="101" y1="47" y2="47" stroke="black" stroke-width="0.1"/>
-<text x="13" y="65" clip-path="url(#clipPath5)" fill="gray" stroke="none" stroke-width="0.1" xml:space="preserve">Parent: null</text>
-<text x="13" y="84" clip-path="url(#clipPath6)" fill="black" stroke="none" stroke-width="0.1" xml:space="preserve">Type: Any</text>
+<text xml:space="preserve" x="32" y="26" clip-path="url(#clipPath3)" stroke="none">text field name</text>
+<text xml:space="preserve" x="13" y="46" clip-path="url(#clipPath4)" stroke="none">: InputTextField</text>
+<line clip-path="url(#clipPath4)" fill="none" x1="13" x2="101" y1="47" y2="47" stroke-width="0.1"/>
+<text x="13" y="65" clip-path="url(#clipPath5)" stroke="none" stroke-width="0.1" xml:space="preserve">Type: Any</text>
+<text x="13" y="84" clip-path="url(#clipPath6)" fill="gray" stroke="none" stroke-width="0.1" xml:space="preserve">Parent: null</text>
 </g>
 </g>
 </svg>

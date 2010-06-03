@@ -8,30 +8,30 @@
 <path d="M9 9 L133 9 L133 71 L9 71 L9 9 Z"/>
 </clipPath>
 <clipPath clipPathUnits="userSpaceOnUse" id="clipPath2">
-<path d="M12 12 L119 12 L119 30 L12 30 L12 12 Z"/>
+<path d="M17 12 L124 12 L124 30 L17 30 L17 12 Z"/>
 </clipPath>
 <clipPath clipPathUnits="userSpaceOnUse" id="clipPath3">
-<path d="M31 13 L119 13 L119 29 L31 29 L31 13 Z"/>
+<path d="M36 13 L124 13 L124 29 L36 29 L36 13 Z"/>
 </clipPath>
 <clipPath clipPathUnits="userSpaceOnUse" id="clipPath4">
 <path d="M12 33 L130 33 L130 49 L12 49 L12 33 Z"/>
 </clipPath>
 <clipPath clipPathUnits="userSpaceOnUse" id="clipPath5">
-<path d="M12 52 L76 52 L76 68 L12 68 L12 52 Z"/>
+<path d="M39 52 L103 52 L103 68 L39 68 L39 52 Z"/>
 </clipPath>
 </defs>
-<g fill="white" font-family="'Tahoma'" stroke-linejoin="round" stroke="white" stroke-width="0" stroke-miterlimit="0">
+<g fill="rgb(246,212,154)" font-family="'Tahoma'" stroke-linejoin="round" stroke="rgb(246,212,154)" stroke-width="0" stroke-miterlimit="0">
 <ellipse clip-path="url(#clipPath1)" rx="60.5" cx="70.5" ry="29.5" cy="39.5" stroke="none"/>
 </g>
-<g stroke-linecap="butt" fill="rgb(255,200,135)" font-family="'Tahoma'" stroke-dasharray="6.6,3.3" stroke="rgb(255,200,135)" stroke-width="1.1">
+<g stroke-width="1.1" stroke-dasharray="6.6,3.3" font-family="'Tahoma'" stroke-linecap="butt">
 <ellipse clip-path="url(#clipPath1)" fill="none" rx="60.5" cx="70.5" ry="29.5" cy="39.5"/>
-<image x="13" y="13" clip-path="url(#clipPath2)" width="16" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACtElEQVR42rWTW0jT&#13;&#10;ARTGf38v25pu84pTW06ttCzvE7NETCyaYCCWWFB0oYceygiKntKHKAyCLvRQD6XR&#13;&#10;/aULGqaBSmZBTl2ppenErjYvU9duuq2xUU9dHqLzdjjn+87Hd86Bfwzhbw2DV3e5&#13;&#10;xY53OMVKFpwOjB/shGqPsTK7wIv1+xNYfyrbHRkJssQ8Aq0DyKVOMotz6bug5UVr&#13;&#10;k/uXCiY6L7pNvbf5ahggPSeDGUcA9nG9t3F+9j2ylAoUygTu3XlJyt4z+P8A2r++&#13;&#10;de+I7qgON7fjF5vFp/6XRGtKMY+0IQ6NxzY5TNSm84SuP8XEs3PMOey4lHkE/CAw&#13;&#10;3NyJOlaONbYck0HHJ6MNp/kLoohklJWN2EYakCSU8Pl6Mdaxp8wLWqxWq8+D6d67&#13;&#10;7ghnP/NxWkwD97F9fI6/SERQUAiWkRYmmw/5wPWFzL5qQbF6O7bx17hcLp+C0aZa&#13;&#10;lqVtwfKlD+eUAZdllohIKfrmG6gLq5hqP82c/joLc0YWqZKRWXR0z2VQGBDgU/B+&#13;&#10;8DV+8jgshhak6jzi97QREh6CzpGPvuESqrW7iYxPQ51bhskm48BlyC6tJDg42Kdg&#13;&#10;xuKP4HJ4duKPJCodsTKDpft1RJhMvGmt48TJasaMECgSYxEkVByvJywsDIVC4SMI&#13;&#10;TdQgGHs80wswNtWwYDchW1uD2DLMop5qMuM9E9elIRZJaOn6RkxMDHK5nKSkJMFL&#13;&#10;sGrzEXqvlZKz7SBWVQqTT86yMD3KzEgrUs+5iBeHoExdQfvDJrKKDqPRaH7ej9cD&#13;&#10;dfYmYUiyke7GWyzJXE+YpgyzZxt+1hmUnjw1fzMfdG3oJ1Ss0W79/S9cripxh083&#13;&#10;U7QhF2n0cm/ZPD5Ew4NO+u3p7Dt5BXXSSuGPz9Tf8cj9uK6WwZ4ubHYXquUrKNl7&#13;&#10;lJyN5QL/I74DDo8C+0dzAh4AAAAASUVORK5CYII=" xlink:type="simple" xlink:actuate="onLoad" height="16" preserveAspectRatio="none" xlink:show="embed"/>
-<text x="32" y="26" clip-path="url(#clipPath3)" fill="black" stroke="none" xml:space="preserve">Condition Name</text>
-<text x="13" y="46" clip-path="url(#clipPath4)" fill="black" stroke="none" xml:space="preserve">: CompositeCondition</text>
+<image x="18" y="13" clip-path="url(#clipPath2)" width="16" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACtElEQVR42rWTW0jT&#13;&#10;ARTGf38v25pu84pTW06ttCzvE7NETCyaYCCWWFB0oYceygiKntKHKAyCLvRQD6XR&#13;&#10;/aULGqaBSmZBTl2ppenErjYvU9duuq2xUU9dHqLzdjjn+87Hd86Bfwzhbw2DV3e5&#13;&#10;xY53OMVKFpwOjB/shGqPsTK7wIv1+xNYfyrbHRkJssQ8Aq0DyKVOMotz6bug5UVr&#13;&#10;k/uXCiY6L7pNvbf5ahggPSeDGUcA9nG9t3F+9j2ylAoUygTu3XlJyt4z+P8A2r++&#13;&#10;de+I7qgON7fjF5vFp/6XRGtKMY+0IQ6NxzY5TNSm84SuP8XEs3PMOey4lHkE/CAw&#13;&#10;3NyJOlaONbYck0HHJ6MNp/kLoohklJWN2EYakCSU8Pl6Mdaxp8wLWqxWq8+D6d67&#13;&#10;7ghnP/NxWkwD97F9fI6/SERQUAiWkRYmmw/5wPWFzL5qQbF6O7bx17hcLp+C0aZa&#13;&#10;lqVtwfKlD+eUAZdllohIKfrmG6gLq5hqP82c/joLc0YWqZKRWXR0z2VQGBDgU/B+&#13;&#10;8DV+8jgshhak6jzi97QREh6CzpGPvuESqrW7iYxPQ51bhskm48BlyC6tJDg42Kdg&#13;&#10;xuKP4HJ4duKPJCodsTKDpft1RJhMvGmt48TJasaMECgSYxEkVByvJywsDIVC4SMI&#13;&#10;TdQgGHs80wswNtWwYDchW1uD2DLMop5qMuM9E9elIRZJaOn6RkxMDHK5nKSkJMFL&#13;&#10;sGrzEXqvlZKz7SBWVQqTT86yMD3KzEgrUs+5iBeHoExdQfvDJrKKDqPRaH7ej9cD&#13;&#10;dfYmYUiyke7GWyzJXE+YpgyzZxt+1hmUnjw1fzMfdG3oJ1Ss0W79/S9cripxh083&#13;&#10;U7QhF2n0cm/ZPD5Ew4NO+u3p7Dt5BXXSSuGPz9Tf8cj9uK6WwZ4ubHYXquUrKNl7&#13;&#10;lJyN5QL/I74DDo8C+0dzAh4AAAAASUVORK5CYII=" xlink:type="simple" xlink:actuate="onLoad" height="16" preserveAspectRatio="none" xlink:show="embed"/>
+<text xml:space="preserve" x="37" y="26" clip-path="url(#clipPath3)" stroke="none">Condition Name</text>
+<text xml:space="preserve" x="13" y="46" clip-path="url(#clipPath4)" stroke="none">: CompositeCondition</text>
+<line clip-path="url(#clipPath4)" fill="none" x1="13" x2="129" y1="47" y2="47" stroke-dasharray="none" stroke-width="0.1"/>
 </g>
-<g stroke-width="0.1" font-family="'Tahoma'" stroke-linecap="butt">
-<line clip-path="url(#clipPath4)" fill="none" x1="13" x2="129" y1="47" y2="47"/>
-<text x="13" y="65" clip-path="url(#clipPath5)" fill="gray" stroke="none" xml:space="preserve">Parent: null</text>
+<g fill="gray" stroke-width="0.1" font-family="'Tahoma'" stroke-linecap="butt" stroke="gray">
+<text xml:space="preserve" x="40" y="65" clip-path="url(#clipPath5)" stroke="none">Parent: null</text>
 </g>
 </g>
 </svg>

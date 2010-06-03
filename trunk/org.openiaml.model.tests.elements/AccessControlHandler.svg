@@ -17,15 +17,15 @@
 <path d="M12 33 L139 33 L139 49 L12 49 L12 33 Z"/>
 </clipPath>
 </defs>
-<g fill="rgb(255,192,255)" font-family="'Tahoma'" stroke-linejoin="round" stroke="rgb(255,192,255)" stroke-width="0" stroke-miterlimit="0">
+<g fill="rgb(248,172,170)" font-family="'Tahoma'" stroke-linejoin="round" stroke="rgb(248,172,170)" stroke-width="0" stroke-miterlimit="0">
 <rect x="10" y="10" clip-path="url(#clipPath1)" width="131" height="41" stroke="none"/>
 </g>
-<g fill="rgb(176,176,176)" stroke-width="1.1" font-family="'Tahoma'" stroke-linecap="butt" stroke="rgb(176,176,176)">
+<g stroke-width="1.1" font-family="'Tahoma'" stroke-linecap="butt">
 <rect x="10" y="10" clip-path="url(#clipPath1)" fill="none" width="130" height="40"/>
 <image x="13" y="13" clip-path="url(#clipPath2)" width="16" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAsElEQVR42t1Suw3D&#13;&#10;IBA9kg2oKRnEg1AyCN6DghmYgEEoKBgDifCsEFk2wkkRRcpJ6BB378PpiP4/lmWp&#13;&#10;s/ptVgwh1H0exX1GkFIyzQE553BfPyKw1lbOOQkhCFkpZbz36yUB7EK5g6WUVEqh&#13;&#10;nDPKprnBeRGx0cBgu4N7xBg3kibQhdhpiHg0xmxNaAboCH7W2dDBcQYAwUnPWutT&#13;&#10;P7vaAXwHynvVt/egfwf5a5v4+3gAljRmpsGGprMAAAAASUVORK5CYII=" xlink:type="simple" xlink:actuate="onLoad" height="16" preserveAspectRatio="none" xlink:show="embed"/>
-<text x="32" y="26" clip-path="url(#clipPath3)" fill="black" stroke="none" xml:space="preserve">Handler name</text>
-<text x="13" y="46" clip-path="url(#clipPath4)" fill="black" stroke="none" xml:space="preserve">: AccessControlHandler</text>
-<line clip-path="url(#clipPath4)" fill="none" x1="13" x2="138" y1="47" y2="47" stroke="black" stroke-width="0.1"/>
+<text xml:space="preserve" x="32" y="26" clip-path="url(#clipPath3)" stroke="none">Handler name</text>
+<text xml:space="preserve" x="13" y="46" clip-path="url(#clipPath4)" stroke="none">: AccessControlHandler</text>
+<line clip-path="url(#clipPath4)" fill="none" x1="13" x2="138" y1="47" y2="47" stroke-width="0.1"/>
 </g>
 </g>
 </svg>

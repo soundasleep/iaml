@@ -212,14 +212,21 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		checkFullInferenceEditor();
 		
 	}
-
+	
 	/**
 	 * Check the editor to make sure it's been _partially_ inferred.
 	 */
 	protected void checkPartialInferenceEditor() {
+		checkPartialInferenceEditor(16);		// 16 to begin with
+	}
+
+	/**
+	 * Check the editor to make sure it's been _partially_ inferred.
+	 */
+	protected void checkPartialInferenceEditor(int expectedChildren) {
 		assertEditorVisual(editor_text);
 		
-		assertEditorHasChildren(8, editor_text);
+		assertEditorHasChildren(expectedChildren, editor_text);
 		
 		ShapeNodeEditPart access = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getAccessible_OnAccess());
 		ShapeNodeEditPart edit = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getChangeable_OnChange());
@@ -231,7 +238,17 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		// model 0.4.4
 		ShapeNodeEditPart label = assertHasLabel(editor_text, "Warning", false);
 		ShapeNodeEditPart canCast = assertHasCompositeCondition(editor_text, "can cast?", false);
-		
+
+		// model 0.5.1
+		ShapeNodeEditPart currentInput = assertHasProperty(editor_text, "currentInput", false);
+		ShapeNodeEditPart condition2 = assertHasCompositeCondition(editor_text, "currentInput is set", false);
+		ShapeNodeEditPart notEmpty = assertHasPrimitiveCondition(editor_text, "not empty", false);
+		ShapeNodeEditPart empty = assertHasPrimitiveCondition(editor_text, "empty", false);
+		ShapeNodeEditPart show = assertHasPrimitiveOperation(editor_text, "show", false);
+		ShapeNodeEditPart hide = assertHasPrimitiveOperation(editor_text, "hide", false);
+		ShapeNodeEditPart onClick = assertHasEventTrigger(editor_text, null, false, ModelPackage.eINSTANCE.getVisibleThing_OnClick());
+		ShapeNodeEditPart onInput = assertHasEventTrigger(editor_text, null, false, ModelPackage.eINSTANCE.getVisibleThing_OnInput());
+
 		// all generated
 		assertGenerated(access);
 		assertGenerated(edit);
@@ -243,6 +260,17 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		// model 0.4.4
 		assertGenerated(label);
 		assertGenerated(canCast);
+		
+		// model 0.5.1
+		assertGenerated(currentInput);
+		assertGenerated(condition2);
+		assertGenerated(notEmpty);
+		assertGenerated(empty);
+		assertGenerated(show);
+		assertGenerated(condition);
+		assertGenerated(hide);
+		assertGenerated(onClick);
+		assertGenerated(onInput);
 		
 		// connected by run wire
 		ConnectionNodeEditPart run = assertHasRunAction(editor_text, access, init, "run");
@@ -255,14 +283,9 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 	protected void checkFullInferenceEditor() {
 		assertEditorVisual(editor_text);
 		
-		assertEditorHasChildren(14, editor_text);
+		// use checkPartialInferenceEditor() to check the base elements; should not have changed 
+		checkPartialInferenceEditor(22);
 		
-		ShapeNodeEditPart access = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getAccessible_OnAccess());
-		ShapeNodeEditPart edit = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getChangeable_OnChange());
-		ShapeNodeEditPart update = assertHasOperation(editor_text, "update", false);
-		ShapeNodeEditPart init = assertHasOperation(editor_text, "init", false);
-		ShapeNodeEditPart fieldValue = assertHasFieldValue(editor_text, false);
-		ShapeNodeEditPart condition = assertHasCompositeCondition(editor_text, "fieldValue is set", false);
 		ShapeNodeEditPart condition2 = assertHasCompositeCondition(editor_text, "fieldValue is set", true);
 
 		ShapeNodeEditPart edit2 = assertHasEventTrigger(editor_text, true, ModelPackage.eINSTANCE.getChangeable_OnChange());
@@ -270,27 +293,23 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		ShapeNodeEditPart fieldValue2 = assertHasFieldValue(editor_text, true);
 
 		// model 0.4.4
-		ShapeNodeEditPart label = assertHasLabel(editor_text, "Warning", false);
-		ShapeNodeEditPart canCast = assertHasCompositeCondition(editor_text, "can cast?", false);
 		ShapeNodeEditPart label2 = assertHasLabel(editor_text, "Warning", true);
 		ShapeNodeEditPart canCast2 = assertHasCompositeCondition(editor_text, "can cast?", true);
 
 		// all generated
-		assertGenerated(access);
-		assertGenerated(edit);
-		assertGenerated(update);
-		assertGenerated(init);
-		assertGenerated(fieldValue);
-		assertGenerated(condition);
 		assertGenerated(edit2);
 		assertGenerated(update2);
 		assertGenerated(fieldValue2);
 		
 		// model 0.4.4
-		assertGenerated(label);
-		assertGenerated(canCast);
 		assertGenerated(label2);
 		assertGenerated(canCast2);
+		
+		// additional connections on previously contained elements
+		ShapeNodeEditPart access = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getAccessible_OnAccess());
+		ShapeNodeEditPart edit = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getChangeable_OnChange());
+		ShapeNodeEditPart init = assertHasOperation(editor_text, "init", false);
+		ShapeNodeEditPart fieldValue = assertHasFieldValue(editor_text, false);
 		
 		// connected by run wire
 		ConnectionNodeEditPart run = assertHasRunAction(editor_text, access, init, "run");

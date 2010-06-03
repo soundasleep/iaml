@@ -20,7 +20,10 @@ import org.openiaml.model.diagram.part.IamlDiagramEditorUtil;
 import org.openiaml.model.inference.EcoreCreateElementsHelper;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.InternetApplication;
+import org.openiaml.model.model.scopes.Email;
+import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.visual.Frame;
+import org.openiaml.model.tests.release.ParentNamesTestCase;
 
 /**
  * Tests that editors that have elements with "parents" rendering
@@ -124,13 +127,13 @@ public class ParentNameTestCase extends EclipseTestCaseHelper {
 
 		ExtendedCompositeOperationFigure ext = (ExtendedCompositeOperationFigure) fig;
 		// check to see it has the correct initial parent value
-		assertEquals(ext.getFigureCompositeOperationParentNameFigure().getText(), "root element");
+		assertEquals("Parent: root element", ext.getFigureCompositeOperationParentNameFigure().getText());
 
 		// change the root name
 		gmf.setName(root, "a new parent name");
 		assertEquals(root.getName(), "a new parent name");
 		// the parent label should have changed
-		assertEquals(ext.getFigureCompositeOperationParentNameFigure().getText(), "a new parent name");
+		assertEquals("Parent: a new parent name", ext.getFigureCompositeOperationParentNameFigure().getText());
 	}
 
 	/**
@@ -166,19 +169,21 @@ public class ParentNameTestCase extends EclipseTestCaseHelper {
 
 		ExtendedCompositeOperationFigure ext_o = (ExtendedCompositeOperationFigure) fig_o;
 		// check to see it has the correct initial parent value
-		assertEquals(ext_o.getFigureCompositeOperationParentNameFigure().getText(), "root element");
+		assertEquals("Parent: root element", ext_o.getFigureCompositeOperationParentNameFigure().getText());
 
 		// change the root name
 		gmf.setName(root, "a new parent name");
 		assertEquals(root.getName(), "a new parent name");
 
 		// the parent labels should have changed
-		assertEquals(ext_o.getFigureCompositeOperationParentNameFigure().getText(), "a new parent name");
+		assertEquals("Parent: a new parent name", ext_o.getFigureCompositeOperationParentNameFigure().getText());
 	}
-
+	
 	/**
-	 * Check that elements that shouldn't have parent names (e.g. Pages)
-	 * do NOT have them (or are extended).
+	 * <strike>Check that elements that shouldn't have parent names (e.g. Pages)
+	 * do NOT have them (or are extended).</strike>
+	 * 
+	 * <p>All elements are now extended, even elements without a Parent annotation.
 	 *
 	 * TODO refactor!!
 	 *
@@ -193,23 +198,26 @@ public class ParentNameTestCase extends EclipseTestCaseHelper {
 		gmf.setName(root, "root element");
 		assertEquals(root.getName(), "root element");
 
-		// create a Frame
-		Frame page = gmf.createFrame(root);
+		// Email is not in Parents
+		assertFalse(ParentNamesTestCase.getParentNameElements().contains(ScopesPackage.eINSTANCE.getEmail()));
+
+		// create an Email
+		Email page = gmf.createEmail(root);
 		assertNotNull(page);
 
 		// set name
-		gmf.setName(page, "my page");
-		assertEquals(page.getName(), "my page");
+		gmf.setName(page, "my email");
+		assertEquals(page.getName(), "my email");
 
 		// find the edit part for this element
-		ShapeNodeEditPart part = assertHasFrame(editor, "my page");
+		ShapeNodeEditPart part = assertHasEmail(editor, "my email");
 		assertNotNull(part);
 
 		// what is the content pane?
 		IFigure fig = part.getContentPane();
-		assertEquals("Frame should NOT be extended.",
-				fig.getClass().getSimpleName(),
-				"FrameFigure");
+		assertEquals("Email should be extended.",
+				"ExtendedEmailFigure",
+				fig.getClass().getSimpleName());
 	}
 
 	/**

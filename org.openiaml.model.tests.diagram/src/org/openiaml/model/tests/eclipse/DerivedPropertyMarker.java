@@ -102,6 +102,10 @@ public class DerivedPropertyMarker extends AbstractActionTestCase<IFile> {
 			if (o instanceof IAccessibleTextAwareEditPart) {
 				IAccessibleTextAwareEditPart text = (IAccessibleTextAwareEditPart) o;
 				
+				// is this a stereotype label? then we don't need to check it
+				if (text.getLabelText().equals(": " + p.resolveSemanticElement().eClass().getName()))
+					continue;
+				
 				boolean c = hasDerivedMarker(text.getLabelText());
 				if (check) {
 					assertTrue("The label '" + text + " (" + text.getLabelText() + ") should be derived", c);

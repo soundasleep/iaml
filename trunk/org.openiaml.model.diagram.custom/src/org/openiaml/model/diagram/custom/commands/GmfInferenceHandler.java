@@ -257,9 +257,6 @@ public class GmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 		if (this.editorId.equals(org.openiaml.model.diagram.element.part.IamlDiagramEditorPlugin.ID)) {
 			return org.openiaml.model.diagram.element.providers.IamlElementTypes.getCreateEdgeCommand(request, elementType, source, target);
 		}
-		if (this.editorId.equals(org.openiaml.model.diagram.wire.part.IamlDiagramEditorPlugin.ID)) {
-			return org.openiaml.model.diagram.wire.providers.IamlElementTypes.getCreateEdgeCommand(request, elementType, source, target);
-		}
 		if (this.editorId.equals(org.openiaml.model.diagram.visual.part.IamlDiagramEditorPlugin.ID)) {
 			return org.openiaml.model.diagram.visual.providers.IamlElementTypes.getCreateEdgeCommand(request, elementType, source, target);
 		}
@@ -289,9 +286,6 @@ public class GmfInferenceHandler extends EcoreCreateElementsHelper implements IC
 		 */
 		if (this.editorId.equals(org.openiaml.model.diagram.element.part.IamlDiagramEditorPlugin.ID)) {
 			return org.openiaml.model.diagram.element.providers.IamlElementTypes.getElementType(elementType);
-		}
-		if (this.editorId.equals(org.openiaml.model.diagram.wire.part.IamlDiagramEditorPlugin.ID)) {
-			return org.openiaml.model.diagram.wire.providers.IamlElementTypes.getElementType(elementType);
 		}
 		if (this.editorId.equals(org.openiaml.model.diagram.visual.part.IamlDiagramEditorPlugin.ID)) {
 			return org.openiaml.model.diagram.visual.providers.IamlElementTypes.getElementType(elementType);

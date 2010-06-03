@@ -173,9 +173,9 @@ public class StereotypesTestCase extends XmlTestCase {
 							
 							// if this is first, it should be the only child
 							if (count == 0 && mapping.size() != 1) {
-								fail(filename + ": Stereotype mapping should have been first in an element with only one label");
+								fail(filename + ": Stereotype mapping should have been first in an element with only one label: " + href);
 							} else if (count > 1) {
-								fail(filename + ": Stereotype mapping must be second");
+								fail(filename + ": Stereotype mapping must be second: " + href);
 							}
 						}
 					}

@@ -268,6 +268,10 @@
             text="&lt;...>"/>
         <children
             xsi:type="gmfgraph:Label"
+            name="PropertyStereotypeFigure"
+            text=": Property"/>
+        <children
+            xsi:type="gmfgraph:Label"
             name="PropertyContainmentFeatureFigure"
             text="&lt;...>">
           <foregroundColor
@@ -277,10 +281,6 @@
               xsi:type="gmfgraph:BasicFont"
               style="BOLD"/>
         </children>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="PropertyStereotypeFigure"
-            text=": Property"/>
         <children
             xsi:type="gmfgraph:Label"
             name="PropertyTypeFigure"
@@ -2579,7 +2579,7 @@
       name="PropertyContainmentFeature"
       figure="PropertyFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.5/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.5/@accessors.2"/>
   <labels
       name="SelectWireLimit"
       elementIcon="false"/>
@@ -2641,7 +2641,7 @@
       name="PropertyStereotype"
       figure="PropertyFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.5/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.5/@accessors.1"/>
   <labels
       name="StaticValueStereotype"
       figure="StaticValueFigure"

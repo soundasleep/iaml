@@ -91,16 +91,6 @@
             href="iaml.gmfgraph#PropertyStereotype"/>
       </labelMappings>
       <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping"
-          viewPattern="default: {0}"
-          editorPattern=""
-          editPattern="{0}">
-        <diagramLabel
-            href="iaml.gmfgraph#PropertyDefaultValue"/>
-        <features
-            href="iaml.ecore#//Property/defaultValue"/>
-      </labelMappings>
-      <labelMappings
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#PropertyContainmentFeature"/>
@@ -136,13 +126,6 @@
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#EventTriggerStereotype"/>
-      </labelMappings>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="iaml.gmfgraph#EventTriggerName"/>
-        <features
-            href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
           readOnly="true">

@@ -26,13 +26,6 @@
             href="iaml.gmfgraph#EventTriggerStereotype"/>
       </labelMappings>
       <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="iaml.gmfgraph#EventTriggerName"/>
-        <features
-            href="iaml.ecore#//NamedElement/name"/>
-      </labelMappings>
-      <labelMappings
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#EventTriggerParentName"/>
@@ -63,13 +56,6 @@
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#EventTriggerStereotype"/>
-      </labelMappings>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="iaml.gmfgraph#EventTriggerName"/>
-        <features
-            href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
           readOnly="true">
@@ -228,16 +214,6 @@
             href="iaml.gmfgraph#PropertyStereotype"/>
       </labelMappings>
       <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping"
-          viewPattern="default: {0}"
-          editorPattern=""
-          editPattern="{0}">
-        <diagramLabel
-            href="iaml.gmfgraph#PropertyDefaultValue"/>
-        <features
-            href="iaml.ecore#//Property/defaultValue"/>
-      </labelMappings>
-      <labelMappings
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#PropertyContainmentFeature"/>
@@ -366,25 +342,21 @@
           href="iaml.ecore#//StaticValue"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping"
-          editPattern="">
+          viewPattern="{0} = {1}"
+          editorPattern="{0} = {1}"
+          editPattern="{0} = {1}">
         <diagramLabel
             href="iaml.gmfgraph#StaticValueName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
+        <features
+            href="iaml.ecore#//StaticValue/value"/>
       </labelMappings>
       <labelMappings
           xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#StaticValueStereotype"/>
-      </labelMappings>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping"
-          editPattern="">
-        <diagramLabel
-            href="iaml.gmfgraph#StaticValueValue"/>
-        <features
-            href="iaml.ecore#//StaticValue/value"/>
       </labelMappings>
       <labelMappings
           readOnly="true">
@@ -450,7 +422,7 @@
       </labelMappings>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping"
-          viewPattern="[type = {0}]"
+          viewPattern="[{0}]"
           editorPattern="{0}"
           editPattern="{0}">
         <diagramLabel
@@ -830,13 +802,6 @@
             href="iaml.gmfgraph#LabelStereotype"/>
       </labelMappings>
       <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="iaml.gmfgraph#LabelDefaultValue"/>
-        <features
-            href="iaml.ecore#//Changeable/defaultValue"/>
-      </labelMappings>
-      <labelMappings
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#LabelParentName"/>
@@ -862,13 +827,6 @@
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#EventTriggerStereotype"/>
-      </labelMappings>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
-        <diagramLabel
-            href="iaml.gmfgraph#EventTriggerName"/>
-        <features
-            href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
           readOnly="true">

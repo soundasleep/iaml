@@ -127,17 +127,17 @@
       <domainSpecialization
           body="self.oclIsTypeOf( CancelNode )"/>
       <labelMappings
-          xsi:type="gmfmap:DesignLabelMapping"
-          readOnly="true">
-        <diagramLabel
-            href="iaml.gmfgraph#CancelNodeStereotype"/>
-      </labelMappings>
-      <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
             href="iaml.gmfgraph#CancelNodeText"/>
         <features
             href="iaml.ecore#//operations/CancelNode/exceptionText"/>
+      </labelMappings>
+      <labelMappings
+          xsi:type="gmfmap:DesignLabelMapping"
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#CancelNodeStereotype"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"

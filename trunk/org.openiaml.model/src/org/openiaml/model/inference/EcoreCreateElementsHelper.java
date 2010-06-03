@@ -603,6 +603,11 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return page;
 	}
 	
+	public Email createEmail(Scope container) throws InferenceException {
+		Email page = (Email) createElement( container, ScopesPackage.eINSTANCE.getEmail(), ModelPackage.eINSTANCE.getScope_Scopes() );
+		return page;
+	}
+	
 	public SyncWire createSyncWire(ContainsWires container, WireSource source,
 			WireDestination target) throws InferenceException {
 		SyncWire wire = (SyncWire) createRelationship(container, WiresPackage.eINSTANCE.getSyncWire(), source, target, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWire_From(), ModelPackage.eINSTANCE.getWire_To());

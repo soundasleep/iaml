@@ -16,6 +16,9 @@
         <layout
             xsi:type="gmfgraph:FlowLayout"
             vertical="true"/>
+        <foregroundColor
+            xsi:type="gmfgraph:ConstantColor"
+            value="black"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
             red="202"
@@ -206,9 +209,9 @@
             vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="244"
+            red="193"
             green="202"
-            blue="193"/>
+            blue="244"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -367,11 +370,6 @@
         <layout
             xsi:type="gmfgraph:FlowLayout"
             vertical="true"/>
-        <backgroundColor
-            xsi:type="gmfgraph:RGBColor"
-            red="197"
-            green="186"
-            blue="169"/>
         <font
             xsi:type="gmfgraph:BasicFont"
             faceName=""
@@ -1075,11 +1073,6 @@
         <layout
             xsi:type="gmfgraph:FlowLayout"
             vertical="true"/>
-        <backgroundColor
-            xsi:type="gmfgraph:RGBColor"
-            red="197"
-            green="186"
-            blue="169"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -1348,11 +1341,6 @@
             vertical="true"
             majorAlignment="CENTER"
             minorAlignment="CENTER"/>
-        <backgroundColor
-            xsi:type="gmfgraph:RGBColor"
-            red="197"
-            green="186"
-            blue="169"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -1790,9 +1778,9 @@
             vertical="true"/>
         <backgroundColor
             xsi:type="gmfgraph:RGBColor"
-            red="231"
-            green="233"
-            blue="234"/>
+            red="255"
+            green="246"
+            blue="149"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets

@@ -47,7 +47,7 @@
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureCompositeOperationStereotypeFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
         </viewmap>
-        <modelFacet parser="//@labelParsers/@implementations.1" xsi:type="gmfgen:DesignLabelModelFacet"/>
+        <modelFacet parser="//@labelParsers/@implementations.1"/>
       <behaviour diagramKind="Iaml_Operation" editPolicyClassName="OperationOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.operation.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
 </labels>
       <labels editPartClassName="WrappingLabel18EditPart" itemSemanticEditPolicyClassName="WrappingLabel18ItemSemanticEditPolicy" notationViewFactoryClassName="CompositeOperationLabelViewFactory" readOnly="true" visualID="5078">
@@ -55,7 +55,7 @@
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureCompositeOperationParentNameFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
         </viewmap>
-        <modelFacet parser="//@labelParsers/@implementations.2"/>
+        <modelFacet parser="//@labelParsers/@implementations.1"/>
       <behaviour diagramKind="Iaml_Operation" editPolicyClassName="OperationOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.operation.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
 </labels>
     <behaviour diagramKind="Iaml_Operation" editPolicyClassName="OperationOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.operation.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
@@ -83,14 +83,14 @@
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigurePrimitiveOperationStereotypeFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
         </viewmap>
-        <modelFacet parser="//@labelParsers/@implementations.1" xsi:type="gmfgen:DesignLabelModelFacet"/>
+        <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
       <labels editPartClassName="WrappingLabel19EditPart" itemSemanticEditPolicyClassName="WrappingLabel19ItemSemanticEditPolicy" notationViewFactoryClassName="PrimitiveOperationLabelViewFactory" readOnly="true" visualID="5079">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigurePrimitiveOperationParentNameFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
         </viewmap>
-        <modelFacet parser="//@labelParsers/@implementations.2"/>
+        <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
     </topLevelNodes>
     <topLevelNodes canonicalEditPolicyClassName="ParameterCanonicalEditPolicy" createCommandClassName="ParameterCreateCommand" editPartClassName="ParameterEditPart" graphicalNodeEditPolicyClassName="ParameterGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="ParameterItemSemanticEditPolicy" notationViewFactoryClassName="ParameterViewFactory" visualID="2034">
@@ -114,7 +114,7 @@
       <labels editPartClassName="WrappingLabel20EditPart" itemSemanticEditPolicyClassName="WrappingLabel20ItemSemanticEditPolicy" notationViewFactoryClassName="ParameterLabelViewFactory" readOnly="true" visualID="5080">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureParameterStereotypeFigure" xsi:type="gmfgen:ParentAssignedViewmap"/>
-        <modelFacet parser="//@labelParsers/@implementations.1" xsi:type="gmfgen:DesignLabelModelFacet"/>
+        <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
     </topLevelNodes>
     <topLevelNodes canonicalEditPolicyClassName="StartNodeCanonicalEditPolicy" createCommandClassName="StartNodeCreateCommand" editPartClassName="StartNodeEditPart" graphicalNodeEditPolicyClassName="StartNodeGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="StartNodeItemSemanticEditPolicy" notationViewFactoryClassName="StartNodeViewFactory" visualID="2035">
@@ -131,7 +131,7 @@
       <labels editPartClassName="WrappingLabel3EditPart" elementIcon="true" itemSemanticEditPolicyClassName="WrappingLabel3ItemSemanticEditPolicy" notationViewFactoryClassName="StartNodeLabelViewFactory" readOnly="true" visualID="5053">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureStartNodeStereotypeFigure" xsi:type="gmfgen:ParentAssignedViewmap"/>
-        <modelFacet parser="//@labelParsers/@implementations.1" xsi:type="gmfgen:DesignLabelModelFacet"/>
+        <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
     </topLevelNodes>
     <topLevelNodes canonicalEditPolicyClassName="CancelNodeCanonicalEditPolicy" createCommandClassName="CancelNodeCreateCommand" editPartClassName="CancelNodeEditPart" graphicalNodeEditPolicyClassName="CancelNodeGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="CancelNodeItemSemanticEditPolicy" notationViewFactoryClassName="CancelNodeViewFactory" visualID="2036">
@@ -155,7 +155,7 @@
       <labels editPartClassName="CancelNodeExceptionTextEditPart" itemSemanticEditPolicyClassName="CancelNodeExceptionTextItemSemanticEditPolicy" notationViewFactoryClassName="CancelNodeExceptionTextViewFactory" readOnly="true" visualID="5055">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureCancelNodeStereotypeFigure" xsi:type="gmfgen:ParentAssignedViewmap"/>
-        <modelFacet parser="//@labelParsers/@implementations.1" xsi:type="gmfgen:DesignLabelModelFacet"/>
+        <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
     </topLevelNodes>
     <topLevelNodes canonicalEditPolicyClassName="FinishNodeCanonicalEditPolicy" createCommandClassName="FinishNodeCreateCommand" editPartClassName="FinishNodeEditPart" graphicalNodeEditPolicyClassName="FinishNodeGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="FinishNodeItemSemanticEditPolicy" notationViewFactoryClassName="FinishNodeViewFactory" visualID="2037">
@@ -172,7 +172,7 @@
       <labels editPartClassName="WrappingLabel5EditPart" elementIcon="true" itemSemanticEditPolicyClassName="WrappingLabel5ItemSemanticEditPolicy" notationViewFactoryClassName="FinishNodeLabelViewFactory" readOnly="true" visualID="5056">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureFinishNodeStereotypeFigure" xsi:type="gmfgen:ParentAssignedViewmap"/>
-        <modelFacet parser="//@labelParsers/@implementations.1" xsi:type="gmfgen:DesignLabelModelFacet"/>
+        <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
     </topLevelNodes>
     <topLevelNodes canonicalEditPolicyClassName="DecisionNodeCanonicalEditPolicy" createCommandClassName="DecisionNodeCreateCommand" editPartClassName="DecisionNodeEditPart" graphicalNodeEditPolicyClassName="DecisionNodeGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="DecisionNodeItemSemanticEditPolicy" notationViewFactoryClassName="DecisionNodeViewFactory" visualID="2038">
@@ -196,7 +196,7 @@
       <labels editPartClassName="WrappingLabel23EditPart" itemSemanticEditPolicyClassName="WrappingLabel23ItemSemanticEditPolicy" notationViewFactoryClassName="DecisionNodeLabelViewFactory" readOnly="true" visualID="5084">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureDecisionNodeStereotypeFigure" xsi:type="gmfgen:ParentAssignedViewmap"/>
-        <modelFacet parser="//@labelParsers/@implementations.1" xsi:type="gmfgen:DesignLabelModelFacet"/>
+        <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
     </topLevelNodes>
     <topLevelNodes canonicalEditPolicyClassName="TemporaryVariableCanonicalEditPolicy" createCommandClassName="TemporaryVariableCreateCommand" editPartClassName="TemporaryVariableEditPart" graphicalNodeEditPolicyClassName="TemporaryVariableGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="TemporaryVariableItemSemanticEditPolicy" notationViewFactoryClassName="TemporaryVariableViewFactory" visualID="2040">
@@ -222,14 +222,14 @@
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureTemporaryVariableStereotypeFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
         </viewmap>
-        <modelFacet parser="//@labelParsers/@implementations.1" xsi:type="gmfgen:DesignLabelModelFacet"/>
+        <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
       <labels editPartClassName="WrappingLabel24EditPart" itemSemanticEditPolicyClassName="WrappingLabel24ItemSemanticEditPolicy" notationViewFactoryClassName="TemporaryVariableLabelViewFactory" readOnly="true" visualID="5085">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureTemporaryVariableTypeFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
         </viewmap>
-        <modelFacet parser="//@labelParsers/@implementations.2"/>
+        <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
     </topLevelNodes>
     <topLevelNodes canonicalEditPolicyClassName="PropertyCanonicalEditPolicy" createCommandClassName="PropertyCreateCommand" editPartClassName="PropertyEditPart" graphicalNodeEditPolicyClassName="PropertyGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="PropertyItemSemanticEditPolicy" notationViewFactoryClassName="PropertyViewFactory" visualID="2041">
@@ -251,28 +251,28 @@
       <labels editPartClassName="PropertyDefaultValueEditPart" itemSemanticEditPolicyClassName="PropertyDefaultValueItemSemanticEditPolicy" notationViewFactoryClassName="PropertyDefaultValueViewFactory" readOnly="true" visualID="5062">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigurePropertyStereotypeFigure" xsi:type="gmfgen:ParentAssignedViewmap"/>
-        <modelFacet parser="//@labelParsers/@implementations.1" xsi:type="gmfgen:DesignLabelModelFacet"/>
+        <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
       <labels editPartClassName="WrappingLabel8EditPart" itemSemanticEditPolicyClassName="WrappingLabel8ItemSemanticEditPolicy" notationViewFactoryClassName="PropertyLabelViewFactory" readOnly="true" visualID="5063">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigurePropertyContainmentFeatureFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes fixedFont="true" fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
         </viewmap>
-        <modelFacet parser="//@labelParsers/@implementations.2"/>
+        <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
       <labels editPartClassName="WrappingLabel9EditPart" itemSemanticEditPolicyClassName="WrappingLabel9ItemSemanticEditPolicy" notationViewFactoryClassName="PropertyLabelViewFactory" readOnly="true" visualID="5064">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigurePropertyParentNameFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
         </viewmap>
-        <modelFacet parser="//@labelParsers/@implementations.2"/>
+        <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
       <labels editPartClassName="WrappingLabel17EditPart" itemSemanticEditPolicyClassName="WrappingLabel17ItemSemanticEditPolicy" notationViewFactoryClassName="PropertyLabelViewFactory" readOnly="true" visualID="5077">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigurePropertyTypeFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
         </viewmap>
-        <modelFacet parser="//@labelParsers/@implementations.2"/>
+        <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
     </topLevelNodes>
     <topLevelNodes canonicalEditPolicyClassName="SplitNodeCanonicalEditPolicy" createCommandClassName="SplitNodeCreateCommand" editPartClassName="SplitNodeEditPart" graphicalNodeEditPolicyClassName="SplitNodeGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="SplitNodeItemSemanticEditPolicy" notationViewFactoryClassName="SplitNodeViewFactory" visualID="2042">
@@ -289,7 +289,7 @@
       <labels editPartClassName="WrappingLabel10EditPart" elementIcon="true" itemSemanticEditPolicyClassName="WrappingLabel10ItemSemanticEditPolicy" notationViewFactoryClassName="SplitNodeLabelViewFactory" readOnly="true" visualID="5065">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureSplitNodeStereotypeFigure" xsi:type="gmfgen:ParentAssignedViewmap"/>
-        <modelFacet parser="//@labelParsers/@implementations.1" xsi:type="gmfgen:DesignLabelModelFacet"/>
+        <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
     </topLevelNodes>
     <topLevelNodes canonicalEditPolicyClassName="JoinNodeCanonicalEditPolicy" createCommandClassName="JoinNodeCreateCommand" editPartClassName="JoinNodeEditPart" graphicalNodeEditPolicyClassName="JoinNodeGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="JoinNodeItemSemanticEditPolicy" notationViewFactoryClassName="JoinNodeViewFactory" visualID="2043">
@@ -306,7 +306,7 @@
       <labels editPartClassName="WrappingLabel11EditPart" elementIcon="true" itemSemanticEditPolicyClassName="WrappingLabel11ItemSemanticEditPolicy" notationViewFactoryClassName="JoinNodeLabelViewFactory" readOnly="true" visualID="5066">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureJoinNodeStereotypeFigure" xsi:type="gmfgen:ParentAssignedViewmap"/>
-        <modelFacet parser="//@labelParsers/@implementations.1" xsi:type="gmfgen:DesignLabelModelFacet"/>
+        <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
     </topLevelNodes>
     <topLevelNodes canonicalEditPolicyClassName="StaticValueCanonicalEditPolicy" createCommandClassName="StaticValueCreateCommand" editPartClassName="StaticValueEditPart" graphicalNodeEditPolicyClassName="StaticValueGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="StaticValueItemSemanticEditPolicy" notationViewFactoryClassName="StaticValueViewFactory" visualID="2044">
@@ -331,14 +331,14 @@
       <labels editPartClassName="StaticValueValueEditPart" itemSemanticEditPolicyClassName="StaticValueValueItemSemanticEditPolicy" notationViewFactoryClassName="StaticValueValueViewFactory" readOnly="true" visualID="5068">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureStaticValueStereotypeFigure" xsi:type="gmfgen:ParentAssignedViewmap"/>
-        <modelFacet parser="//@labelParsers/@implementations.1" xsi:type="gmfgen:DesignLabelModelFacet"/>
+        <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
       <labels editPartClassName="WrappingLabel12EditPart" itemSemanticEditPolicyClassName="WrappingLabel12ItemSemanticEditPolicy" notationViewFactoryClassName="StaticValueLabelViewFactory" readOnly="true" visualID="5069">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureStaticValueTypeFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
         </viewmap>
-        <modelFacet parser="//@labelParsers/@implementations.2"/>
+        <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
     </topLevelNodes>
     <topLevelNodes canonicalEditPolicyClassName="OperationCallNodeCanonicalEditPolicy" createCommandClassName="OperationCallNodeCreateCommand" editPartClassName="OperationCallNodeEditPart" graphicalNodeEditPolicyClassName="OperationCallNodeGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="OperationCallNodeItemSemanticEditPolicy" notationViewFactoryClassName="OperationCallNodeViewFactory" visualID="2045">
@@ -355,7 +355,7 @@
       <labels editPartClassName="WrappingLabel13EditPart" elementIcon="true" itemSemanticEditPolicyClassName="WrappingLabel13ItemSemanticEditPolicy" notationViewFactoryClassName="OperationCallNodeLabelViewFactory" readOnly="true" visualID="5070">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureOperationCallNodeStereotypeFigure" xsi:type="gmfgen:ParentAssignedViewmap"/>
-        <modelFacet parser="//@labelParsers/@implementations.1" xsi:type="gmfgen:DesignLabelModelFacet"/>
+        <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
     </topLevelNodes>
     <topLevelNodes canonicalEditPolicyClassName="ArithmeticCanonicalEditPolicy" createCommandClassName="ArithmeticCreateCommand" editPartClassName="ArithmeticEditPart" graphicalNodeEditPolicyClassName="ArithmeticGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="ArithmeticItemSemanticEditPolicy" notationViewFactoryClassName="ArithmeticViewFactory" visualID="2046">
@@ -369,7 +369,7 @@
         <containmentMetaFeature href="iaml.genmodel#//model/CompositeOperation/nodes"/>
         <childMetaFeature href="iaml.genmodel#//model/CompositeOperation/nodes"/>
       </modelFacet>
-      <labels editPartClassName="ArithmeticOperationTypeEditPart" itemSemanticEditPolicyClassName="ArithmeticOperationTypeItemSemanticEditPolicy" notationViewFactoryClassName="ArithmeticOperationTypeViewFactory" visualID="5071">
+      <labels editPartClassName="ArithmeticOperationTypeEditPart" elementIcon="true" itemSemanticEditPolicyClassName="ArithmeticOperationTypeItemSemanticEditPolicy" notationViewFactoryClassName="ArithmeticOperationTypeViewFactory" visualID="5071">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureArithmeticTypeFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes fixedFont="true" xsi:type="gmfgen:StyleAttributes"/>
@@ -382,7 +382,7 @@
       <labels editPartClassName="WrappingLabel30EditPart" itemSemanticEditPolicyClassName="WrappingLabel30ItemSemanticEditPolicy" notationViewFactoryClassName="ArithmeticLabelViewFactory" readOnly="true" visualID="5091">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureArithmeticStereotypeFigure" xsi:type="gmfgen:ParentAssignedViewmap"/>
-        <modelFacet parser="//@labelParsers/@implementations.1" xsi:type="gmfgen:DesignLabelModelFacet"/>
+        <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
     </topLevelNodes>
     <topLevelNodes canonicalEditPolicyClassName="CastNodeCanonicalEditPolicy" createCommandClassName="CastNodeCreateCommand" editPartClassName="CastNodeEditPart" graphicalNodeEditPolicyClassName="CastNodeGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="CastNodeItemSemanticEditPolicy" notationViewFactoryClassName="CastNodeViewFactory" visualID="2047">
@@ -399,7 +399,7 @@
       <labels editPartClassName="WrappingLabel14EditPart" elementIcon="true" itemSemanticEditPolicyClassName="WrappingLabel14ItemSemanticEditPolicy" notationViewFactoryClassName="CastNodeLabelViewFactory" readOnly="true" visualID="5072">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureCastNodeStereotypeFigure" xsi:type="gmfgen:ParentAssignedViewmap"/>
-        <modelFacet parser="//@labelParsers/@implementations.1" xsi:type="gmfgen:DesignLabelModelFacet"/>
+        <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
     </topLevelNodes>
     <topLevelNodes canonicalEditPolicyClassName="CompositeConditionCanonicalEditPolicy" createCommandClassName="CompositeConditionCreateCommand" editPartClassName="CompositeConditionEditPart" graphicalNodeEditPolicyClassName="CompositeConditionGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="CompositeConditionItemSemanticEditPolicy" notationViewFactoryClassName="CompositeConditionViewFactory" visualID="2048">
@@ -423,7 +423,7 @@
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureCompositeConditionStereotypeFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
         </viewmap>
-        <modelFacet parser="//@labelParsers/@implementations.1" xsi:type="gmfgen:DesignLabelModelFacet"/>
+        <modelFacet parser="//@labelParsers/@implementations.1"/>
       <behaviour diagramKind="Iaml_Condition" editPolicyClassName="ConditionOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.condition.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
 </labels>
       <labels editPartClassName="WrappingLabel32EditPart" itemSemanticEditPolicyClassName="WrappingLabel32ItemSemanticEditPolicy" notationViewFactoryClassName="CompositeConditionLabelViewFactory" readOnly="true" visualID="5093">
@@ -431,7 +431,7 @@
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureCompositeConditionParentNameFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
         </viewmap>
-        <modelFacet parser="//@labelParsers/@implementations.2"/>
+        <modelFacet parser="//@labelParsers/@implementations.1"/>
       <behaviour diagramKind="Iaml_Condition" editPolicyClassName="ConditionOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.condition.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
 </labels>
     <behaviour diagramKind="Iaml_Condition" editPolicyClassName="ConditionOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.condition.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
@@ -457,14 +457,14 @@
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigurePrimitiveConditionStereotypeFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
         </viewmap>
-        <modelFacet parser="//@labelParsers/@implementations.1" xsi:type="gmfgen:DesignLabelModelFacet"/>
+        <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
       <labels editPartClassName="WrappingLabel33EditPart" itemSemanticEditPolicyClassName="WrappingLabel33ItemSemanticEditPolicy" notationViewFactoryClassName="PrimitiveConditionLabelViewFactory" readOnly="true" visualID="5094">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigurePrimitiveConditionParentNameFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
         </viewmap>
-        <modelFacet parser="//@labelParsers/@implementations.2"/>
+        <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
     </topLevelNodes>
     <links createCommandClassName="DataFlowEdgeCreateCommand" editPartClassName="DataFlowEdgeEditPart" itemSemanticEditPolicyClassName="DataFlowEdgeItemSemanticEditPolicy" notationViewFactoryClassName="DataFlowEdgeViewFactory" reorientCommandClassName="DataFlowEdgeReorientCommand" visualID="4009">
@@ -485,7 +485,7 @@
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureDataFlowEdgeStereotypeFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes xsi:type="gmfgen:LabelOffsetAttributes" y="40"/>
         </viewmap>
-        <modelFacet parser="//@labelParsers/@implementations.1" xsi:type="gmfgen:DesignLabelModelFacet"/>
+        <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
     </links>
     <links createCommandClassName="ExecutionEdgeCreateCommand" editPartClassName="ExecutionEdgeEditPart" itemSemanticEditPolicyClassName="ExecutionEdgeItemSemanticEditPolicy" notationViewFactoryClassName="ExecutionEdgeViewFactory" reorientCommandClassName="ExecutionEdgeReorientCommand" visualID="4010">
@@ -515,7 +515,7 @@
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureExecutionEdgeStereotypeFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes xsi:type="gmfgen:LabelOffsetAttributes" y="60"/>
         </viewmap>
-        <modelFacet parser="//@labelParsers/@implementations.1" xsi:type="gmfgen:DesignLabelModelFacet"/>
+        <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
     </links>
     <links createCommandClassName="ParameterEdgeCreateCommand" editPartClassName="ParameterEdgeEditPart" itemSemanticEditPolicyClassName="ParameterEdgeItemSemanticEditPolicy" notationViewFactoryClassName="ParameterEdgeViewFactory" reorientCommandClassName="ParameterEdgeReorientCommand" visualID="4013">
@@ -536,7 +536,7 @@
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureParameterEdgeStereotypeFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes xsi:type="gmfgen:LabelOffsetAttributes" y="40"/>
         </viewmap>
-        <modelFacet parser="//@labelParsers/@implementations.1" xsi:type="gmfgen:DesignLabelModelFacet"/>
+        <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
     </links>
     <links createCommandClassName="RunActionCreateCommand" editPartClassName="RunActionEditPart" itemSemanticEditPolicyClassName="RunActionItemSemanticEditPolicy" notationViewFactoryClassName="RunActionViewFactory" reorientCommandClassName="RunActionReorientCommand" visualID="4008">
@@ -566,7 +566,7 @@
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureRunActionStereotypeFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes xsi:type="gmfgen:LabelOffsetAttributes" y="60"/>
         </viewmap>
-        <modelFacet parser="//@labelParsers/@implementations.1" xsi:type="gmfgen:DesignLabelModelFacet"/>
+        <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
     </links>
     <links createCommandClassName="ConditionEdgeCreateCommand" editPartClassName="ConditionEdgeEditPart" itemSemanticEditPolicyClassName="ConditionEdgeItemSemanticEditPolicy" notationViewFactoryClassName="ConditionEdgeViewFactory" reorientCommandClassName="ConditionEdgeReorientCommand" visualID="4012">
@@ -596,7 +596,7 @@
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureConditionEdgeStereotypeFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes xsi:type="gmfgen:LabelOffsetAttributes" y="60"/>
         </viewmap>
-        <modelFacet parser="//@labelParsers/@implementations.1" xsi:type="gmfgen:DesignLabelModelFacet"/>
+        <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
     </links>
     <palette>
@@ -793,8 +793,7 @@
   </expressionProviders>
   <labelParsers extensibleViaService="true">
     <implementations uses="//@diagram/@topLevelNodes.0/@labels.0/@modelFacet //@diagram/@topLevelNodes.1/@labels.0/@modelFacet //@diagram/@topLevelNodes.2/@labels.0/@modelFacet //@diagram/@topLevelNodes.4/@labels.0/@modelFacet //@diagram/@topLevelNodes.6/@labels.0/@modelFacet //@diagram/@topLevelNodes.7/@labels.0/@modelFacet //@diagram/@topLevelNodes.8/@labels.0/@modelFacet //@diagram/@topLevelNodes.11/@labels.0/@modelFacet //@diagram/@topLevelNodes.13/@labels.0/@modelFacet //@diagram/@topLevelNodes.15/@labels.0/@modelFacet //@diagram/@topLevelNodes.16/@labels.0/@modelFacet //@diagram/@links.1/@labels.0/@modelFacet //@diagram/@links.3/@labels.0/@modelFacet //@diagram/@links.4/@labels.0/@modelFacet" xsi:type="gmfgen:PredefinedParser"/>
-    <implementations uses="//@diagram/@topLevelNodes.0/@labels.1/@modelFacet //@diagram/@topLevelNodes.1/@labels.1/@modelFacet //@diagram/@topLevelNodes.2/@labels.1/@modelFacet //@diagram/@topLevelNodes.3/@labels.0/@modelFacet //@diagram/@topLevelNodes.4/@labels.1/@modelFacet //@diagram/@topLevelNodes.5/@labels.0/@modelFacet //@diagram/@topLevelNodes.6/@labels.1/@modelFacet //@diagram/@topLevelNodes.7/@labels.1/@modelFacet //@diagram/@topLevelNodes.8/@labels.1/@modelFacet //@diagram/@topLevelNodes.9/@labels.0/@modelFacet //@diagram/@topLevelNodes.10/@labels.0/@modelFacet //@diagram/@topLevelNodes.11/@labels.1/@modelFacet //@diagram/@topLevelNodes.12/@labels.0/@modelFacet //@diagram/@topLevelNodes.13/@labels.1/@modelFacet //@diagram/@topLevelNodes.14/@labels.0/@modelFacet //@diagram/@topLevelNodes.15/@labels.1/@modelFacet //@diagram/@topLevelNodes.16/@labels.1/@modelFacet //@diagram/@links.0/@labels.0/@modelFacet //@diagram/@links.1/@labels.1/@modelFacet //@diagram/@links.2/@labels.0/@modelFacet //@diagram/@links.3/@labels.1/@modelFacet //@diagram/@links.4/@labels.1/@modelFacet" xsi:type="gmfgen:ExternalParser"/>
-    <implementations uses="//@diagram/@topLevelNodes.0/@labels.2/@modelFacet //@diagram/@topLevelNodes.1/@labels.2/@modelFacet //@diagram/@topLevelNodes.7/@labels.2/@modelFacet //@diagram/@topLevelNodes.8/@labels.2/@modelFacet //@diagram/@topLevelNodes.8/@labels.3/@modelFacet //@diagram/@topLevelNodes.8/@labels.4/@modelFacet //@diagram/@topLevelNodes.11/@labels.2/@modelFacet //@diagram/@topLevelNodes.15/@labels.2/@modelFacet //@diagram/@topLevelNodes.16/@labels.2/@modelFacet" xsi:type="gmfgen:ExternalParser"/>
+    <implementations uses="//@diagram/@topLevelNodes.0/@labels.1/@modelFacet //@diagram/@topLevelNodes.0/@labels.2/@modelFacet //@diagram/@topLevelNodes.1/@labels.1/@modelFacet //@diagram/@topLevelNodes.1/@labels.2/@modelFacet //@diagram/@topLevelNodes.2/@labels.1/@modelFacet //@diagram/@topLevelNodes.3/@labels.0/@modelFacet //@diagram/@topLevelNodes.4/@labels.1/@modelFacet //@diagram/@topLevelNodes.5/@labels.0/@modelFacet //@diagram/@topLevelNodes.6/@labels.1/@modelFacet //@diagram/@topLevelNodes.7/@labels.1/@modelFacet //@diagram/@topLevelNodes.7/@labels.2/@modelFacet //@diagram/@topLevelNodes.8/@labels.1/@modelFacet //@diagram/@topLevelNodes.8/@labels.2/@modelFacet //@diagram/@topLevelNodes.8/@labels.3/@modelFacet //@diagram/@topLevelNodes.8/@labels.4/@modelFacet //@diagram/@topLevelNodes.9/@labels.0/@modelFacet //@diagram/@topLevelNodes.10/@labels.0/@modelFacet //@diagram/@topLevelNodes.11/@labels.1/@modelFacet //@diagram/@topLevelNodes.11/@labels.2/@modelFacet //@diagram/@topLevelNodes.12/@labels.0/@modelFacet //@diagram/@topLevelNodes.13/@labels.1/@modelFacet //@diagram/@topLevelNodes.14/@labels.0/@modelFacet //@diagram/@topLevelNodes.15/@labels.1/@modelFacet //@diagram/@topLevelNodes.15/@labels.2/@modelFacet //@diagram/@topLevelNodes.16/@labels.1/@modelFacet //@diagram/@topLevelNodes.16/@labels.2/@modelFacet //@diagram/@links.0/@labels.0/@modelFacet //@diagram/@links.1/@labels.1/@modelFacet //@diagram/@links.2/@labels.0/@modelFacet //@diagram/@links.3/@labels.1/@modelFacet //@diagram/@links.4/@labels.1/@modelFacet" xsi:type="gmfgen:ExternalParser"/>
   </labelParsers>
   <contextMenus context="//@diagram">
     <items xsi:type="gmfgen:LoadResourceAction"/>

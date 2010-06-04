@@ -53,7 +53,7 @@
 <path d="M112 122 L121 122 L121 132 L112 132 L112 122 Z"/>
 </clipPath>
 </defs>
-<g fill="rgb(255,246,149)" font-family="'Tahoma'" stroke-linejoin="round" stroke="rgb(255,246,149)" stroke-width="0" stroke-miterlimit="0">
+<g fill="rgb(255,248,170)" font-family="'Tahoma'" stroke-linejoin="round" stroke="rgb(255,248,170)" stroke-width="0" stroke-miterlimit="0">
 <rect x="82" y="10" clip-path="url(#clipPath1)" width="68" height="60" stroke="none"/>
 </g>
 <g stroke-width="1.1" font-family="'Tahoma'" stroke-linecap="butt">
@@ -63,7 +63,7 @@
 <text xml:space="preserve" x="85" y="46" clip-path="url(#clipPath4)" stroke="none">: Frame</text>
 <line clip-path="url(#clipPath4)" fill="none" x1="85" x2="126" y1="47" y2="47" stroke-width="0.1"/>
 <text x="85" y="65" clip-path="url(#clipPath5)" fill="gray" stroke="none" stroke-width="0.1" xml:space="preserve">Parent: null</text>
-<rect x="82" y="130" clip-path="url(#clipPath6)" fill="rgb(255,246,149)" width="68" height="60" stroke="none" stroke-width="0.1"/>
+<rect x="82" y="130" clip-path="url(#clipPath6)" fill="rgb(255,248,170)" width="68" height="60" stroke="none" stroke-width="0.1"/>
 <rect x="82" y="130" clip-path="url(#clipPath6)" fill="none" width="67" height="59"/>
 <image x="85" y="133" clip-path="url(#clipPath7)" width="16" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAxElEQVR42mNkAIJ7&#13;&#10;9+79P378OMPPnz8Z8AEzMzMGHR0dRmQxMGfp0qX/o6KiGAiBvr4+Bnd3dxRDmEAE&#13;&#10;IZvfvXsHpqOjoxl2797NcOXKlf8oBhACzMzMYFpcXJyhoKCA4cCBA3BDiDKAiQlV&#13;&#10;WXZ2NsOpU6eIdwEvLy/Dt2/fGD5+/Mjw/PlzFDkWBiIBFxcXmGZnZ0d1HQOJgIOD&#13;&#10;gzIDMMJn1AAqGcDKykqyRlh6ACckS0tLhiVLljD8/v2baM3m5uZgNgABpTfVSTFM&#13;&#10;MwAAAABJRU5ErkJggg==" xlink:type="simple" xlink:actuate="onLoad" height="16" preserveAspectRatio="none" xlink:show="embed"/>
 <text xml:space="preserve" x="104" y="146" clip-path="url(#clipPath8)" stroke="none">Frame2</text>

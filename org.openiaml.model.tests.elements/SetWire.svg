@@ -50,7 +50,7 @@
 <path d="M105 122 L114 122 L114 132 L105 132 L105 122 Z"/>
 </clipPath>
 </defs>
-<g fill="rgb(255,246,149)" font-family="'Tahoma'" stroke-linejoin="round" stroke="rgb(255,246,149)" stroke-width="0" stroke-miterlimit="0">
+<g fill="rgb(255,248,170)" font-family="'Tahoma'" stroke-linejoin="round" stroke="rgb(255,248,170)" stroke-width="0" stroke-miterlimit="0">
 <rect x="74" y="10" clip-path="url(#clipPath1)" width="71" height="60" stroke="none"/>
 </g>
 <g stroke-width="1.1" font-family="'Tahoma'" stroke-linecap="butt">
@@ -60,7 +60,7 @@
 <text xml:space="preserve" x="77" y="46" clip-path="url(#clipPath4)" stroke="none">: InputForm</text>
 <line clip-path="url(#clipPath4)" fill="none" x1="77" x2="142" y1="47" y2="47" stroke-width="0.1"/>
 <text x="77" y="65" clip-path="url(#clipPath5)" fill="gray" stroke="none" stroke-width="0.1" xml:space="preserve">Parent: null</text>
-<rect x="74" y="130" clip-path="url(#clipPath6)" fill="rgb(255,246,149)" width="71" height="60" stroke="none" stroke-width="0.1"/>
+<rect x="74" y="130" clip-path="url(#clipPath6)" fill="rgb(255,248,170)" width="71" height="60" stroke="none" stroke-width="0.1"/>
 <rect x="74" y="130" clip-path="url(#clipPath6)" fill="none" width="70" height="59"/>
 <image x="77" y="133" clip-path="url(#clipPath7)" width="16" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABSUlEQVR42tVTsUoD&#13;&#10;QRB9i1fZ2AS1EUMkYLjGWNgYf8DSb5B0IT+Qzg+QK9UvsLLzBxTsYhlBBW0OYgoj&#13;&#10;Xnc3s87MLUHFHNjpcMvc3O69ee8xC/z7cJdX9/7hbQHjd4b38oUlyyImyR7spSaS&#13;&#10;7C2T7NUWGTvNGvb3mi66fgYGB6u/7txLbixHXjsoupXeHjiH2+Fw7s/b7bYxNADl&#13;&#10;TUKtmzzNDpz165Y7nc6PAFmWgYsAoEiq76S3Lp2VgbO6Klh8YOIgQY2SQliLaUGG&#13;&#10;AMVxjOn0FV+xnO07AwkM9EWX/3REi9HdaC6DzVbLWBhAkefmQf90PDuQdFcqPZhM&#13;&#10;XlDkRZAg9BXt+HC5bB00VgVROStBggLYBAWFZTQaG0jTtBTlVLczP9w3o6P6EuPo&#13;&#10;/FGMJDNT5SgoiTQD1xlRjyhMpTUEdrfWcPEnLtMHwerVdiW5lhQAAAAASUVORK5C&#13;&#10;YII=" xlink:type="simple" xlink:actuate="onLoad" height="16" preserveAspectRatio="none" xlink:show="embed"/>
 <text xml:space="preserve" x="96" y="146" clip-path="url(#clipPath8)" stroke="none">Form 2</text>

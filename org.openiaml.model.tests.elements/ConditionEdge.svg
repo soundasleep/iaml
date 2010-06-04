@@ -87,7 +87,7 @@
 <text xml:space="preserve" x="56" y="170" clip-path="url(#clipPath4)" stroke="none">: CompositeOperation</text>
 <line clip-path="url(#clipPath4)" fill="none" x1="56" x2="175" y1="171" y2="171" stroke-width="0.1"/>
 <text x="56" y="189" clip-path="url(#clipPath5)" fill="gray" stroke="none" stroke-width="0.1" xml:space="preserve">Parent: null</text>
-<rect x="81" y="14" clip-path="url(#clipPath6)" fill="rgb(255,246,149)" width="68" height="60" stroke="none" stroke-width="0.1"/>
+<rect x="81" y="14" clip-path="url(#clipPath6)" fill="rgb(255,248,170)" width="68" height="60" stroke="none" stroke-width="0.1"/>
 <rect x="81" y="14" clip-path="url(#clipPath6)" fill="none" width="67" height="59"/>
 <image x="84" y="17" clip-path="url(#clipPath7)" width="16" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAPElEQVR42mNgGAWM&#13;&#10;/4GAEgNYQMTjBzfJ0tzSXMfABOPcuHmJJM0w9UyUhsHAG8CCzV8kGZCeHD6amCkE&#13;&#10;AJjkEN1jkkbpAAAAAElFTkSuQmCC" xlink:type="simple" xlink:actuate="onLoad" height="16" preserveAspectRatio="none" xlink:show="embed"/>
 <text xml:space="preserve" x="103" y="30" clip-path="url(#clipPath8)" stroke="none">Button</text>

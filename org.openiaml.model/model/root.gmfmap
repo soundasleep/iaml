@@ -15,7 +15,6 @@
             href="iaml.gmfgraph#EventTriggerContainmentFeature"/>
       </labelMappings>
       <labelMappings
-          xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#EventTriggerStereotype"/>
@@ -45,7 +44,6 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
-          xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#CompositeOperationStereotype"/>
@@ -78,7 +76,6 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
-          xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#PrimitiveOperationStereotype"/>
@@ -111,7 +108,6 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
-          xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#FrameStereotype"/>
@@ -139,7 +135,6 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
-          xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#DynamicApplicationElementSetStereotype"/>
@@ -172,7 +167,6 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
-          xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#PropertyStereotype"/>
@@ -215,7 +209,6 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
-          xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#SessionStereotype"/>
@@ -243,7 +236,6 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
-          xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#LoginHandlerStereotype"/>
@@ -281,7 +273,6 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
-          xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#CompositeConditionStereotype"/>
@@ -314,7 +305,6 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
-          xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#EmailStereotype"/>
@@ -342,7 +332,6 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
-          xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#RoleStereotype"/>
@@ -370,7 +359,6 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
-          xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#DomainSchemaStereotype"/>
@@ -396,7 +384,6 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
-          xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#DomainSourceStereotype"/>
@@ -427,7 +414,6 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
-          xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#PermissionStereotype"/>
@@ -449,7 +435,6 @@
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
     <labelMappings
-        xsi:type="gmfmap:DesignLabelMapping"
         readOnly="true">
       <diagramLabel
           href="iaml.gmfgraph#SyncWireStereotype"/>
@@ -481,7 +466,6 @@
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
     <labelMappings
-        xsi:type="gmfmap:DesignLabelMapping"
         readOnly="true">
       <diagramLabel
           href="iaml.gmfgraph#RunActionStereotype"/>
@@ -511,7 +495,6 @@
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
     <labelMappings
-        xsi:type="gmfmap:DesignLabelMapping"
         readOnly="true">
       <diagramLabel
           href="iaml.gmfgraph#ConditionEdgeStereotype"/>
@@ -543,7 +526,6 @@
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
     <labelMappings
-        xsi:type="gmfmap:DesignLabelMapping"
         readOnly="true">
       <diagramLabel
           href="iaml.gmfgraph#NavigateActionStereotype"/>
@@ -575,7 +557,6 @@
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
     <labelMappings
-        xsi:type="gmfmap:DesignLabelMapping"
         readOnly="true">
       <diagramLabel
           href="iaml.gmfgraph#DetailWireStereotype"/>
@@ -603,7 +584,6 @@
           href="iaml.gmfgraph#SchemaEdgeName"/>
     </labelMappings>
     <labelMappings
-        xsi:type="gmfmap:DesignLabelMapping"
         readOnly="true">
       <diagramLabel
           href="iaml.gmfgraph#SchemaEdgeStereotype"/>
@@ -631,7 +611,6 @@
           href="iaml.gmfgraph#SelectEdgeName"/>
     </labelMappings>
     <labelMappings
-        xsi:type="gmfmap:DesignLabelMapping"
         readOnly="true">
       <diagramLabel
           href="iaml.gmfgraph#SelectEdgeStereotype"/>
@@ -656,7 +635,6 @@
           href="iaml.gmfgraph#ProvidesEdgeName"/>
     </labelMappings>
     <labelMappings
-        xsi:type="gmfmap:DesignLabelMapping"
         readOnly="true">
       <diagramLabel
           href="iaml.gmfgraph#ProvidesEdgeStereotype"/>
@@ -684,7 +662,6 @@
           href="iaml.gmfgraph#ExtendsEdgeName"/>
     </labelMappings>
     <labelMappings
-        xsi:type="gmfmap:DesignLabelMapping"
         readOnly="true">
       <diagramLabel
           href="iaml.gmfgraph#ExtendsEdgeStereotype"/>

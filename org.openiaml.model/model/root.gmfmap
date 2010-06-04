@@ -389,7 +389,10 @@
             href="iaml.gmfgraph#DomainSourceStereotype"/>
       </labelMappings>
       <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping">
+          xsi:type="gmfmap:FeatureLabelMapping"
+          viewPattern="[{0}]"
+          editorPattern="{0}"
+          editPattern="{0}">
         <diagramLabel
             href="iaml.gmfgraph#DomainSourceType"/>
         <features

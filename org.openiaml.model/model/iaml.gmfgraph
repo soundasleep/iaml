@@ -349,10 +349,6 @@
             red="231"
             green="233"
             blue="234"/>
-        <font
-            xsi:type="gmfgraph:BasicFont"
-            faceName=""
-            style="BOLD"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -396,10 +392,6 @@
         <foregroundColor
             xsi:type="gmfgraph:ConstantColor"
             value="black"/>
-        <font
-            xsi:type="gmfgraph:BasicFont"
-            faceName=""
-            style="BOLD"/>
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
@@ -419,12 +411,7 @@
         <children
             xsi:type="gmfgraph:Label"
             name="DomainSourceTypeFigure"
-            text="[&lt;...>]">
-          <font
-              xsi:type="gmfgraph:BasicFont"
-              faceName=""
-              style="BOLD"/>
-        </children>
+            text="[&lt;...>]"/>
       </actualFigure>
       <accessors
           figure="//@figures.0/@descriptors.7/@actualFigure/@children.0"/>
@@ -1159,7 +1146,6 @@
       <actualFigure
           xsi:type="gmfgraph:Rectangle"
           name="DomainIteratorFigure"
-          lineWidth="2"
           lineKind="LINE_DASH">
         <layout
             xsi:type="gmfgraph:FlowLayout"
@@ -1170,10 +1156,10 @@
         <border
             xsi:type="gmfgraph:MarginBorder">
           <insets
-              top="4"
-              left="4"
-              bottom="4"
-              right="4"/>
+              top="3"
+              left="3"
+              bottom="3"
+              right="3"/>
         </border>
         <children
             xsi:type="gmfgraph:Label"
@@ -1511,7 +1497,6 @@
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
           name="RequiresEdgeFigure"
-          lineWidth="2"
           targetDecoration="//@figures.0/@figures.0">
         <foregroundColor
             xsi:type="gmfgraph:ConstantColor"
@@ -1558,7 +1543,6 @@
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
           name="ProvidesEdgeFigure"
-          lineWidth="2"
           targetDecoration="//@figures.0/@figures.0">
         <foregroundColor
             xsi:type="gmfgraph:ConstantColor"
@@ -2158,7 +2142,6 @@
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
           name="SelectEdgeFigure"
-          lineWidth="2"
           targetDecoration="//@figures.0/@figures.0">
         <foregroundColor
             xsi:type="gmfgraph:ConstantColor"
@@ -2182,7 +2165,6 @@
       <actualFigure
           xsi:type="gmfgraph:PolylineConnection"
           name="SchemaEdgeFigure"
-          lineWidth="2"
           targetDecoration="//@figures.0/@figures.0">
         <foregroundColor
             xsi:type="gmfgraph:ConstantColor"
@@ -2636,7 +2618,6 @@
   <labels
       name="ArithmeticType"
       figure="ArithmeticFigure"
-      elementIcon="false"
       accessor="//@figures.0/@descriptors.43/@accessors.0"/>
   <labels
       name="ExecutionEdgeName"

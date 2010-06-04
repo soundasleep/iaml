@@ -21,7 +21,6 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
-          xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#CompositeOperationStereotype"/>
@@ -54,7 +53,6 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
-          xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#PrimitiveOperationStereotype"/>
@@ -85,7 +83,6 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
-          xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#ParameterStereotype"/>
@@ -106,7 +103,6 @@
       <domainSpecialization
           body="self.oclIsTypeOf( StartNode )"/>
       <labelMappings
-          xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#StartNodeStereotype"/>
@@ -134,7 +130,6 @@
             href="iaml.ecore#//operations/CancelNode/exceptionText"/>
       </labelMappings>
       <labelMappings
-          xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#CancelNodeStereotype"/>
@@ -155,7 +150,6 @@
       <domainSpecialization
           body="self.oclIsTypeOf( FinishNode )"/>
       <labelMappings
-          xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#FinishNodeStereotype"/>
@@ -183,7 +177,6 @@
             href="iaml.ecore#//operations/DecisionNode/name"/>
       </labelMappings>
       <labelMappings
-          xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#DecisionNodeStereotype"/>
@@ -209,7 +202,6 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
-          xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#TemporaryVariableStereotype"/>
@@ -238,7 +230,6 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
-          xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#PropertyStereotype"/>
@@ -271,7 +262,6 @@
       <domainSpecialization
           body="self.oclIsTypeOf( SplitNode )"/>
       <labelMappings
-          xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#SplitNodeStereotype"/>
@@ -292,7 +282,6 @@
       <domainSpecialization
           body="self.oclIsTypeOf( JoinNode )"/>
       <labelMappings
-          xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#JoinNodeStereotype"/>
@@ -323,7 +312,6 @@
             href="iaml.ecore#//StaticValue/value"/>
       </labelMappings>
       <labelMappings
-          xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#StaticValueStereotype"/>
@@ -349,7 +337,6 @@
       <domainSpecialization
           body="self.oclIsTypeOf( OperationCallNode )"/>
       <labelMappings
-          xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#OperationCallNodeStereotype"/>
@@ -382,7 +369,6 @@
             href="iaml.ecore#//operations/Arithmetic/operationType"/>
       </labelMappings>
       <labelMappings
-          xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#ArithmeticStereotype"/>
@@ -403,7 +389,6 @@
       <domainSpecialization
           body="self.oclIsTypeOf( CastNode )"/>
       <labelMappings
-          xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#CastNodeStereotype"/>
@@ -429,7 +414,6 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
-          xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#CompositeConditionStereotype"/>
@@ -457,7 +441,6 @@
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
-          xsi:type="gmfmap:DesignLabelMapping"
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#PrimitiveConditionStereotype"/>
@@ -475,7 +458,6 @@
     <domainMetaElement
         href="iaml.ecore#//DataFlowEdge"/>
     <labelMappings
-        xsi:type="gmfmap:DesignLabelMapping"
         readOnly="true">
       <diagramLabel
           href="iaml.gmfgraph#DataFlowEdgeStereotype"/>
@@ -507,7 +489,6 @@
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
     <labelMappings
-        xsi:type="gmfmap:DesignLabelMapping"
         readOnly="true">
       <diagramLabel
           href="iaml.gmfgraph#ExecutionEdgeStereotype"/>
@@ -532,7 +513,6 @@
     <domainSpecialization
         body="self.oclIsTypeOf( ParameterEdge )"/>
     <labelMappings
-        xsi:type="gmfmap:DesignLabelMapping"
         readOnly="true">
       <diagramLabel
           href="iaml.gmfgraph#ParameterEdgeStereotype"/>
@@ -564,7 +544,6 @@
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
     <labelMappings
-        xsi:type="gmfmap:DesignLabelMapping"
         readOnly="true">
       <diagramLabel
           href="iaml.gmfgraph#RunActionStereotype"/>
@@ -596,7 +575,6 @@
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
     <labelMappings
-        xsi:type="gmfmap:DesignLabelMapping"
         readOnly="true">
       <diagramLabel
           href="iaml.gmfgraph#ConditionEdgeStereotype"/>

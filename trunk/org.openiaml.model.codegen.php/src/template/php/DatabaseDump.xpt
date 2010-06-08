@@ -56,12 +56,14 @@ foreach ($databases as $db_name) {
 				echo "<tr>";
 				if (!$done) {
 					foreach ($row as $key => $value) {
+						if ($key === null) $key = "<i>NULL</i>";
 						echo "<th>$key</th>";
 					}
 					echo "</tr><tr>";
 					$done = true;
 				}
 				foreach ($row as $key => $value) {
+					if ($value === null) $value = "<i>NULL</i>";
 					echo "<td>$value</td>";
 				}
 				echo "</tr>";

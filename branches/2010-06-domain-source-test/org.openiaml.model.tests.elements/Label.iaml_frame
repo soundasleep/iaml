@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml.visual:Frame xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml.visual="http://openiaml.org/model/visual" id="visual.1273c6bf5a4.8e">
+  <children xsi:type="iaml.visual:Label" id="visual.1273c6bf5a4.91" name="Label Name" defaultValue="Default Value"/>
+</iaml.visual:Frame>

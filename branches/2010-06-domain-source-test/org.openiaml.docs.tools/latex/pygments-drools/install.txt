@@ -1,0 +1,11 @@
+How to install the Drools mapping.
+
+First, copy to your /pygments/lexers folder.
+
+Then install the mappings:
+
+  $ python _mappings.py
+
+You should then see 'drools, drl' listed:
+
+  $ pygmentize -L lexers

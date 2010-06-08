@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ASCII"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.124985804ff.1">
+  <children xsi:type="iaml.visual:Page" id="visual.1249858055d.1" name="Home">
+    <children xsi:type="iaml.visual:Button" id="visual.1249858055d.3" name="Navigate to page 0">
+      <eventTriggers id="model.124985804ff.2" name="click" outEdges="wires.1249858056c.1"/>
+      <wires xsi:type="iaml.wires:NavigateWire" id="wires.1249858056c.1" from="model.124985804ff.2" to="visual.1249858055d.2" name="run"/>
+    </children>
+    <children xsi:type="iaml.visual:Button" id="visual.1249858055d.5" name="Navigate to page 1">
+      <eventTriggers id="model.124985804ff.3" name="click" outEdges="wires.1249858056c.2"/>
+      <wires xsi:type="iaml.wires:NavigateWire" id="wires.1249858056c.2" from="model.124985804ff.3" to="visual.1249858055d.4" name="run"/>
+    </children>
+  </children>
+  <children xsi:type="iaml.visual:Page" id="visual.1249858055d.2" name="page 0" inEdges="wires.1249858056c.1 wires.1249858056c.4">
+    <eventTriggers id="model.124985804ff.4" name="access" outEdges="wires.1249858056c.3"/>
+    <wires xsi:type="iaml.wires:NavigateWire" id="wires.1249858056c.3" from="model.124985804ff.4" to="visual.1249858055d.4" name="navigate"/>
+  </children>
+  <children xsi:type="iaml.visual:Page" id="visual.1249858055d.4" name="page 1" inEdges="wires.1249858056c.2 wires.1249858056c.3">
+    <eventTriggers id="model.124985804ff.5" name="access" outEdges="wires.1249858056c.4"/>
+    <wires xsi:type="iaml.wires:NavigateWire" id="wires.1249858056c.4" from="model.124985804ff.5" to="visual.1249858055d.2" name="navigate"/>
+  </children>
+</iaml:InternetApplication>

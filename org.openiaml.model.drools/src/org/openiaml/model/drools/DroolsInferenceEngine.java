@@ -48,6 +48,34 @@ import org.openiaml.model.model.GeneratedElement;
  */
 public abstract class DroolsInferenceEngine {
 	
+	public class LoggerWorkingMemoryEventListener extends DefaultWorkingMemoryEventListener {
+
+		private ICreateElements handler;
+		
+		private int currentStep = -1;
+
+		public LoggerWorkingMemoryEventListener(ICreateElements handler) {
+			this.handler = handler;
+		}
+		
+		public void setCurrentStep(int k) {
+			this.currentStep = k;
+		}
+
+		@Override
+		public void objectInserted(ObjectInsertedEvent event) {
+			if (event.getObject() instanceof GeneratedElement) {
+				GeneratedElement e = (GeneratedElement) event.getObject();
+				try {
+					handler.setGeneratedRule(e, event.getPropagationContext().getRuleOrigin().getName() + " (" + currentStep + ")");
+				} catch (InferenceException e1) {
+					throw new RuntimeException(e1.getMessage(), e1);
+				}
+			}
+		}
+		
+	}
+
 	/**
 	 * How many iterations of inserting new elements (and revaluating
 	 * the rules) should we limit ourselves to?
@@ -250,25 +278,15 @@ public abstract class DroolsInferenceEngine {
         
         monitor.subTask("Inferring new model elements");
         
+        LoggerWorkingMemoryEventListener logger = null;
+        
         /*
          * This simply adds the Rule source for inserted elements
          * (where possible).
          */
         if (logRuleSource) {
-	        workingMemory.addEventListener(new DefaultWorkingMemoryEventListener() {
-	
-				@Override
-				public void objectInserted(ObjectInsertedEvent event) {
-					if (event.getObject() instanceof GeneratedElement) {
-						GeneratedElement e = (GeneratedElement) event.getObject();
-						try {
-							handler.setGeneratedRule(e, event.getPropagationContext().getRuleOrigin().getName());
-						} catch (InferenceException e1) {
-							throw new RuntimeException(e1.getMessage(), e1);
-						}
-					}
-				}
-	        });
+        	logger = new LoggerWorkingMemoryEventListener(handler);
+	        workingMemory.addEventListener(logger);
         }
         
 	    subProgressMonitor = new InfiniteSubProgressMonitor(monitor, 50);
@@ -277,6 +295,11 @@ public abstract class DroolsInferenceEngine {
         	// check for monitor cancel
         	if (monitor.isCanceled()) {
         		return;
+        	}
+        	
+        	// update the rule logger
+        	if (logger != null) {
+        		logger.setCurrentStep(k);
         	}
         	
         	// actually do the work

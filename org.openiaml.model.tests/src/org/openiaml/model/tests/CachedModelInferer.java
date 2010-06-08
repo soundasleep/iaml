@@ -21,7 +21,6 @@ import org.openiaml.model.drools.ICreateElementsFactory;
 import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.tests.CachedModelLoader.IModelReloader;
-import org.openiaml.model.tests.codegen.model0_3.SelectFieldFromObject;
 
 /**
  * @author jmwright

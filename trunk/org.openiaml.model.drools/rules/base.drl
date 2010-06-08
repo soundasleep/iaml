@@ -18,7 +18,7 @@ global OverridableCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
-rule "Create empty domain schema"
+rule "Create empty domain schema for 'test' InternetApplication"
 	when
 		a : InternetApplication ( name == "test" )
 		not (DomainSchema ( name=="test domain schema", eContainer == a ) )
@@ -35,6 +35,14 @@ rule "Create empty domain schema"
 		handler.setName(ds, "test domain schema");
 		
 		queue.add(ds, drools); // possibly infer new knowledge (this is necessary)
+		
+		# a schema also requires a DomainSource
+		DomainSource source = handler.generatedDomainSource(a, a);
+		handler.setName(source, "test domain schema source");
+		queue.add(source, drools);
+		
+		SchemaEdge edge = handler.generatedSchemaEdge(a, a, source, ds);
+		queue.add(edge, drools); 
 		
 end
 

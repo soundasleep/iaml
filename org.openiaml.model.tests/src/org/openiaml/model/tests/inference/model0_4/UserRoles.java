@@ -3,6 +3,7 @@
  */
 package org.openiaml.model.tests.inference.model0_4;
 
+import org.openiaml.model.datatypes.BuiltinDataTypes;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.EventTrigger;
@@ -381,6 +382,10 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(email);
 		DomainAttribute password = assertHasDomainAttribute(guest, "password");
 		assertGenerated(password);
+		
+		// check the types
+		assertEquals(BuiltinDataTypes.getTypeEmail(), email.getType());
+		// TODO password needs to have iamlPassword data type
 
 	}
 
@@ -448,6 +453,11 @@ public class UserRoles extends InferenceTestCase {
 		// and none between the PK and PK
 		assertHasNoWiresFromTo(root, id, source_id);
 		assertHasNoWiresFromTo(root, source_id, id);
+		
+		// check the types of the keys
+		assertEquals(BuiltinDataTypes.getTypeInteger(), id.getType());
+		assertEquals(id.getType(), fk.getType());
+		assertEquals(BuiltinDataTypes.getTypeInteger(), fk.getType());
 
 	}
 

@@ -3,6 +3,7 @@
  */
 package org.openiaml.model.tests.inference.model0_3;
 
+import org.openiaml.model.datatypes.BuiltinDataTypes;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.domain.DomainSchema;
@@ -55,19 +56,25 @@ public class PropertiesFileMapping extends EclipseInheritanceInterface {
 		{
 			DomainAttribute attribute = assertHasDomainAttribute(schema, "fruit");
 			assertEquals(attribute.getName(), "fruit");
+			assertEquals(BuiltinDataTypes.getTypeString(), attribute.getType());
 		}
 		{
 			DomainAttribute attribute = assertHasDomainAttribute(schema, "animal");
 			assertEquals(attribute.getName(), "animal");
+			assertEquals(BuiltinDataTypes.getTypeString(), attribute.getType());
 		}
 		{
 			DomainAttribute attribute = assertHasDomainAttribute(schema, "empty");
 			assertEquals(attribute.getName(), "empty");
+			assertEquals(BuiltinDataTypes.getTypeString(), attribute.getType());
 		}
 		{
 			DomainAttribute attribute = assertHasDomainAttribute(schema, "generated primary key");
 			assertEquals(attribute.getName(), "generated primary key");
 			assertTrue(attribute.isPrimaryKey());
+			
+			// primary keys are always integer
+			assertEquals(BuiltinDataTypes.getTypeInteger(), attribute.getType());
 		}
 
 	}

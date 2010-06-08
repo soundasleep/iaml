@@ -55,6 +55,7 @@ rule "Domain objects that extend each other will also copy over attributes, conn
 		DomainAttribute copy = handler.generatedDomainAttribute(ext, targetObject);
 		handler.setName(copy, sourceAttribute.getName());
 		handler.setValue(copy, ModelPackage.eINSTANCE.getDomainAttribute_PrimaryKey(), sourceAttribute.isPrimaryKey());
+		handler.setType(copy, sourceAttribute.getType());		// copy over type
 		queue.add(copy, drools);
 		
 		// extends wire to maintain relationship
@@ -84,6 +85,7 @@ rule "Domain objects that extend each other should include an indexable referenc
 		# create the target ID attribute
 		DomainAttribute id_ref = handler.generatedDomainAttribute(ext, targetObject);
 		handler.setName(id_ref, sourceObject.getName() + "." + sourceId.getName());
+		handler.setType(id_ref, sourceId.getType());	// copy over type of ID
 		queue.add(id_ref, drools);
 		
 		# and set it as extends to signify relationship

@@ -5,6 +5,8 @@ package org.openiaml.model.drools.rules.users
 import org.openiaml.model.drools.*;
 
 import org.openiaml.model.inference.*;
+import org.openiaml.model.datatypes.*;
+
 import org.openiaml.model.model.*;
 import org.openiaml.model.model.impl.*;
 import org.openiaml.model.model.wires.*;
@@ -201,6 +203,7 @@ rule "'User' role contains a default attribute 'email'"
 	then
 		DomainAttribute attr = handler.generatedDomainAttribute(user, user);
 		handler.setName(attr, "email");
+		handler.setType(attr, BuiltinDataTypes.getTypeEmail());
 		queue.add(attr, drools);
 
 end
@@ -217,6 +220,7 @@ rule "'User' role contains a default attribute 'password'"
 	then
 		DomainAttribute attr = handler.generatedDomainAttribute(user, user);
 		handler.setName(attr, "password");
+		// TODO set type to iamlPassword
 		queue.add(attr, drools);
 
 end

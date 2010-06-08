@@ -92,3 +92,49 @@ rule "Domain objects that extend each other should include an indexable referenc
 
 end		
 
+/**
+ * TODO check that this is OK with test cases.
+ *
+ * @inference DomainSchema,DomainSource
+ * If a DomainSchema is defined that extends another DomainSchema, and the source
+ * schema has a DomainSource, but the <em>target</em> schema does not, then
+ * we create a new DomainSource for the <em>target</em> schema that is a duplicate
+ * of the source DomainSource. 
+ */
+rule "Duplicate DomainSource for superclasses of extended schemas"
+	when
+		root : InternetApplication ( )
+		source_schema : DomainSchema ( )
+		target_schema : DomainSchema ( )
+		extendsEdge : ExtendsEdge ( from == source_schema, to == target_schema)
+		
+		source_source : DomainSource ( )
+		schema_edge : SchemaEdge ( from == source_source, to == source_schema )
+		
+		not ( 
+			exists (
+				target_source : DomainSource ( ) and
+				schema2 : SchemaEdge ( from == target_source, to == target_schema )
+			)
+		)
+		
+		eval ( handler.veto( target_schema ))
+
+	then
+		DomainSource original = source_source;
+	
+		# copy over original properties
+		DomainSource source = handler.generatedDomainSource(target_schema, root);
+		handler.setFile(source, original.getFile());
+		handler.setType(source, original.getType());
+		handler.setUrl(source, original.getUrl());
+		handler.setCache(source, original.getCache());
+		queue.add(source, drools);
+		
+		# and connect with SchemaEdge
+		SchemaEdge edge = handler.generatedSchemaEdge(target_schema, root, source, target_schema);
+		queue.add(edge, drools);
+	
+end
+
+

@@ -1874,7 +1874,6 @@ rule "Connect the DomainSource for the AccessControlHandler to the Current Insta
 			eval ( functions.connectsSelect( selectEdge, iterator, source ))
 		) 
 		
-		
 		eval ( handler.veto( ach ))
 
 	then

@@ -8,6 +8,7 @@ import org.openiaml.model.model.*;	// for ModelPackage
 import org.openiaml.model.model.domain.*;
 
 import org.openiaml.model.inference.*;		// for handler
+import org.openiaml.model.datatypes.*;
 
 #declare any global variables here
 global OverridableCreateElementsHelper handler;
@@ -64,6 +65,7 @@ rule "Create DomainAttributes for Properties File DomainSchema"
 		DomainAttribute fda = handler.generatedDomainAttribute(schema, schema);
 		//handler.setValue(fda, ModelPackage.eINSTANCE.getNamedElement_Name(), $key);
 		handler.setName(fda, $key);
+		handler.setType(fda, BuiltinDataTypes.getTypeString());	// all Properties attributes are strings
 		queue.add(fda, drools);
 		
 end

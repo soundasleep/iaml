@@ -48,6 +48,7 @@ class EclipseStyle(Style):
     	Name.Function:             "nobold #000",
         Name.Attribute:            "nobold #000",			# XML/HTML attributes
         Name.Decorator:            "nobold #646464",			# @Annotations - 100,100,100
+        Name.Builtin:              "bold #7F0055",			# e.g. null
     
         String:                    "#2A00FF",		# 42,0,255
         #String.Interpol:           "bold",

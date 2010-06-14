@@ -1,0 +1,11 @@
+How to install the OCL mapping.
+
+First, copy to your /pygments/lexers folder.
+
+Then install the mappings:
+
+  $ python _mappings.py
+
+You should then see the lexer listed:
+
+  $ pygmentize -L lexers

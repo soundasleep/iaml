@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.12234bb88ff.722">
-  <sources id="manual_source" name="my domain store" file="PropertiesFileMapping.properties" type="PROPERTIES_FILE"/>
   <scopes xsi:type="iaml.visual:Frame" id="visual.12234bb89da.2ad" name="unrelated page"/>
+  <sources id="manual_source" name="my domain store" file="PropertiesFileMapping.properties" type="PROPERTIES_FILE"/>
 </iaml:InternetApplication>

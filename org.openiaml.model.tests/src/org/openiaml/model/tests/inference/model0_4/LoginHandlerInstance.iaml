@@ -3,11 +3,11 @@
   <scopes xsi:type="iaml.visual:Frame" id="visual.122f7c6a006.6" name="Home"/>
   <scopes xsi:type="iaml.scopes:Session" id="scopes.122f7c6a297.1" name="my session">
     <elements xsi:type="iaml.components:LoginHandler" inParameterEdges="wires.122f7c6a100.1" id="components.122f7c6a40e.1" name="login handler" outWires="wires.122f7c6a100.e" type="DOMAIN_OBJECT">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.122f7c6a100.e" from="components.122f7c6a40e.1" to="domain.128807fbeba.d3f" name="set"/>
+      <wires xsi:type="iaml.wires:SetWire" id="wires.122f7c6a100.e" name="set" from="components.122f7c6a40e.1" to="domain.128807fbeba.d3f"/>
     </elements>
     <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.d3f" name="logged in user" inWires="wires.122f7c6a100.e" autosave="true">
       <attributes id="model.122f7c69efd.106" name="name" outWires="wires.122f7c6a100.3a">
-        <wires xsi:type="iaml.wires:SyncWire" id="wires.122f7c6a100.3a" from="model.122f7c69efd.106" to="visual.122f7c6a006.56" name="sync"/>
+        <wires xsi:type="iaml.wires:SyncWire" id="wires.122f7c6a100.3a" name="sync" from="model.122f7c69efd.106" to="visual.122f7c6a006.56"/>
       </attributes>
     </elements>
     <scopes xsi:type="iaml.visual:Frame" id="visual.122f7c6a006.24" name="current user">
@@ -20,7 +20,7 @@
     </attributes>
     <attributes id="model.122f7c69efd.38" name="name"/>
   </schemas>
-  <sources name="domain source" id="domain.128807fbeba.d41" outSchemas="domain.128807fbeba.d42">
+  <sources id="domain.128807fbeba.d41" name="domain source" outSchemas="domain.128807fbeba.d42">
     <schemaEdges id="domain.128807fbeba.d42" from="domain.128807fbeba.d41" to="domain.128807fbeba.d40"/>
   </sources>
 </iaml:InternetApplication>

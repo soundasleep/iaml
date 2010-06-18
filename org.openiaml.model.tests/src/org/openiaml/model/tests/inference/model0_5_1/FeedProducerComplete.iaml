@@ -3,7 +3,7 @@
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
   <scopes xsi:type="iaml.visual:Frame" id="scopes.1280b46d202.15" name="Target Feed" render="RSS20">
     <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.e85" name="recent news" outWires="wires.1280b46d1f2.5d" query="" limit="10" outSelects="domain.128807fbeba.e8b">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.1280b46d1f2.5d" from="domain.128807fbeba.e85" to="visual.1280b46d1e2.6e" name="set"/>
+      <wires xsi:type="iaml.wires:SetWire" id="wires.1280b46d1f2.5d" name="set" from="domain.128807fbeba.e85" to="visual.1280b46d1e2.6e"/>
     </elements>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.1280b46d1f2.5d" id="visual.1280b46d1e2.6e" name="Feed Item">
       <properties id="model.1280b46d146.1b9" name="id" outParameterEdges="wires.1280b46d1f2.c4">
@@ -19,7 +19,7 @@
       <parameterEdges id="wires.1280b46d1f2.3a" from="model.1280b46d146.f5" to="domain.128807fbeba.e86"/>
     </parameters>
     <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.e86" name="select" outWires="wires.1280b46d1f2.3c" inParameterEdges="wires.1280b46d1f2.3a" query="id = ?" outSelects="domain.128807fbeba.e8a">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.1280b46d1f2.3c" from="domain.128807fbeba.e86" to="visual.1280b46d1e2.58" name="set"/>
+      <wires xsi:type="iaml.wires:SetWire" id="wires.1280b46d1f2.3c" name="set" from="domain.128807fbeba.e86" to="visual.1280b46d1e2.58"/>
     </elements>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.1280b46d1f2.3c" id="visual.1280b46d1e2.58" name="View News"/>
   </scopes>

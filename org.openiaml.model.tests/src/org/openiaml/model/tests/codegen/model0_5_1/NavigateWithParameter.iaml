@@ -25,7 +25,7 @@
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.12813a54a8b.c" name="Target" inActions="wires.12813a54ad9.d wires.12813a54ad9.f wires.12813b48b22.a wires.12813b48b22.e">
     <parameters id="model.12813a548f4.2e" name="select" outWires="wires.12813a54ad9.6">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.12813a54ad9.6" from="model.12813a548f4.2e" to="visual.12813a54a8b.20" name="set"/>
+      <wires xsi:type="iaml.wires:SetWire" id="wires.12813a54ad9.6" name="set" from="model.12813a548f4.2e" to="visual.12813a54a8b.20"/>
     </parameters>
     <children xsi:type="iaml.visual:InputTextField" inWires="wires.12813a54ad9.6" id="visual.12813a54a8b.20" name="parameter:"/>
   </scopes>

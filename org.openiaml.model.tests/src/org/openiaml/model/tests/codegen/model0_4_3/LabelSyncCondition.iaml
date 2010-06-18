@@ -17,7 +17,7 @@
     </children>
     <children xsi:type="iaml.visual:Label" inWires="wires.126c01921cf.1a" id="visual.126c01921cf.c0" name="Label"/>
     <children xsi:type="iaml.visual:InputTextField" outWires="wires.126c01921cf.1a" id="visual.126c01921cf.c1" name="Field">
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.126c01921cf.1a" from="visual.126c01921cf.c1" to="visual.126c01921cf.c0" name="sync" inConditionEdges="wires.126c01921cf.39"/>
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.126c01921cf.1a" name="sync" inConditionEdges="wires.126c01921cf.39" from="visual.126c01921cf.c1" to="visual.126c01921cf.c0"/>
     </children>
   </scopes>
 </iaml:InternetApplication>

@@ -2,13 +2,13 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.11d0841c6f5.a" name="test">
   <scopes xsi:type="iaml.visual:Frame" id="visual.11d0841c753.5" name="on-page">
     <children xsi:type="iaml.visual:InputTextField" outWires="wires.11d0841c753.6" id="name1" name="name1">
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.11d0841c753.6" from="name1" to="name2" name="sync1"/>
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.11d0841c753.6" name="sync1" from="name1" to="name2"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" outWires="wires.11d0841c753.7" inWires="wires.11d0841c753.6" id="name2" name="name2">
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.11d0841c753.7" from="name2" to="name3" name="sync2"/>
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.11d0841c753.7" name="sync2" from="name2" to="name3"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" outWires="wires.11d0841c753.8" inWires="wires.11d0841c753.7" id="name3" name="name3">
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.11d0841c753.8" from="name3" to="name4" name="sync3"/>
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.11d0841c753.8" name="sync3" from="name3" to="name4"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" inWires="wires.11d0841c753.8" id="name4" name="name4"/>
     <children xsi:type="iaml.visual:InputForm" id="visual.11d0841c753.2b" name="form that shouldn't exist (but jwebunit complains otherwise)"/>

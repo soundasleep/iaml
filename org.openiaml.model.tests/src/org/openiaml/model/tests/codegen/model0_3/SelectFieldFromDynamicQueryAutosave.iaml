@@ -4,7 +4,7 @@
     <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.f1f" name="select" inParameterEdges="wires.12109c6249b.60" query="email = ?" outSelects="domain.128807fbeba.f20">
       <attributes id="model.12109c6242e.1dc" name="name" outWires="wires.12109c6249b.5e" outExtendsEdges="wires.128665d425c.85">
         <operations xsi:type="iaml:PrimitiveOperation" id="model.1213cee9b4f.415" name="save" inActions="wires.1213cee9bad.f4"/>
-        <wires xsi:type="iaml.wires:SyncWire" id="wires.12109c6249b.5e" from="model.12109c6242e.1dc" to="visual.12109c6248b.ac" name="sync"/>
+        <wires xsi:type="iaml.wires:SyncWire" id="wires.12109c6249b.5e" name="sync" from="model.12109c6242e.1dc" to="visual.12109c6248b.ac"/>
         <extendsEdges id="wires.128665d425c.85" from="model.12109c6242e.1dc" to="model.12109331eea.10ac"/>
       </attributes>
     </elements>

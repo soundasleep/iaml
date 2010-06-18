@@ -8,7 +8,7 @@
       <executionEdges id="model.1207ff82f9b.4d" from="operations.1207ff832b7.9" to="operations.1207ff832b7.b"/>
     </conditions>
     <children xsi:type="iaml.visual:InputTextField" outWires="wires.1207ff8322b.3" id="visual.1207ff8316f.2b" name="field1">
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.1207ff8322b.3" from="visual.1207ff8316f.2b" to="visual.1207ff8316f.2e" name="sync" inConditionEdges="wires.1207ff8322b.5"/>
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.1207ff8322b.3" name="sync" inConditionEdges="wires.1207ff8322b.5" from="visual.1207ff8316f.2b" to="visual.1207ff8316f.2e"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" inWires="wires.1207ff8322b.3" id="visual.1207ff8316f.2e" name="field2"/>
   </scopes>

@@ -14,22 +14,22 @@
       <actions xsi:type="iaml.wires:RunAction" id="wires.127b1fff8c4.12" name="onClick" from="visual.127b1fff818.5f" to="model.127b1fff682.65"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" outWires="wires.127b1fff8c4.23" id="visual.127b1fff818.60" name="to">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.127b1fff8c4.23" from="visual.127b1fff818.60" to="model.127b1fff682.61" name="set"/>
+      <wires xsi:type="iaml.wires:SetWire" id="wires.127b1fff8c4.23" name="set" from="visual.127b1fff818.60" to="model.127b1fff682.61"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" outWires="wires.127b254e207.89" id="visual.127b1fff818.61" name="to name">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.127b254e207.89" from="visual.127b1fff818.61" to="model.127b1fff682.62" name="set"/>
+      <wires xsi:type="iaml.wires:SetWire" id="wires.127b254e207.89" name="set" from="visual.127b1fff818.61" to="model.127b1fff682.62"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" outWires="wires.127b1fff8c4.22" id="visual.127b1fff818.62" name="from name">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.127b1fff8c4.22" from="visual.127b1fff818.62" to="model.127b1fff682.64" name="set"/>
+      <wires xsi:type="iaml.wires:SetWire" id="wires.127b1fff8c4.22" name="set" from="visual.127b1fff818.62" to="model.127b1fff682.64"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" outWires="wires.127b254e207.8a" id="visual.127b1fff818.63" name="from">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.127b254e207.8a" from="visual.127b1fff818.63" to="model.127b1fff682.63" name="set"/>
+      <wires xsi:type="iaml.wires:SetWire" id="wires.127b254e207.8a" name="set" from="visual.127b1fff818.63" to="model.127b1fff682.63"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" outWires="wires.127b1fff8c4.20" id="visual.127b1fff818.112" name="subject">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.127b1fff8c4.20" from="visual.127b1fff818.112" to="model.127b1fff682.b5" name="set"/>
+      <wires xsi:type="iaml.wires:SetWire" id="wires.127b1fff8c4.20" name="set" from="visual.127b1fff818.112" to="model.127b1fff682.b5"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" outWires="wires.127b1fff8c4.21" id="visual.127b1fff818.113" name="content">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.127b1fff8c4.21" from="visual.127b1fff818.113" to="model.127b1fff682.e1" name="set"/>
+      <wires xsi:type="iaml.wires:SetWire" id="wires.127b1fff8c4.21" name="set" from="visual.127b1fff818.113" to="model.127b1fff682.e1"/>
     </children>
   </scopes>
 </iaml:InternetApplication>

@@ -7,7 +7,7 @@
     </values>
     <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.d82" name="select" inParameterEdges="wires.12109c6249b.123" query="id = ?" outSelects="domain.128807fbeba.d83">
       <attributes id="model.12109c6242e.482" name="name" outWires="wires.12109c6249b.124" outExtendsEdges="wires.128665d425c.153">
-        <wires xsi:type="iaml.wires:SyncWire" id="wires.12109c6249b.124" from="model.12109c6242e.482" to="visual.12109c6248b.227" name="sync"/>
+        <wires xsi:type="iaml.wires:SyncWire" id="wires.12109c6249b.124" name="sync" from="model.12109c6242e.482" to="visual.12109c6248b.227"/>
         <extendsEdges id="wires.128665d425c.153" from="model.12109c6242e.482" to="model.12109331eea.10ac"/>
       </attributes>
     </elements>

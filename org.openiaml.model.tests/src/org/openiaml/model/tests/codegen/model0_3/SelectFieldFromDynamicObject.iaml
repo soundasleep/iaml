@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12109331eea.107e">
   <scopes xsi:type="iaml.visual:Frame" id="visual.12109331f38.e3f" name="container">
-    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.cfb" name="select" inParameterEdges="wires.12109c6249b.32" autosave="true" query="email = ?" outSelects="domain.128807fbeba.cff">
+    <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.cfb" name="select" inParameterEdges="wires.12109c6249b.32" query="email = ?" outSelects="domain.128807fbeba.cff" autosave="true">
       <attributes id="model.12109c6242e.140" name="name" outWires="wires.12109c6249b.4b">
-        <wires xsi:type="iaml.wires:SyncWire" id="wires.12109c6249b.4b" from="model.12109c6242e.140" to="visual.12109c6248b.4b" name="sync"/>
+        <wires xsi:type="iaml.wires:SyncWire" id="wires.12109c6249b.4b" name="sync" from="model.12109c6242e.140" to="visual.12109c6248b.4b"/>
       </attributes>
     </elements>
     <children xsi:type="iaml.visual:InputTextField" id="visual.12109c6248b.4a" name="select email" outParameterEdges="wires.12109c6249b.32">

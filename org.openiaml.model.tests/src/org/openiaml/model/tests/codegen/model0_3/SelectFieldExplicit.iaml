@@ -3,7 +3,7 @@
   <scopes xsi:type="iaml.visual:Frame" id="visual.12109331f38.e3f" name="container">
     <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.cf4" name="select" query="id = 44" outSelects="domain.128807fbeba.cf5" autosave="true">
       <attributes id="model.12109c6242e.c6" name="email" outWires="wires.12109c6249b.2a" outExtendsEdges="wires.128665d425c.2a">
-        <wires xsi:type="iaml.wires:SyncWire" id="wires.12109c6249b.2a" from="model.12109c6242e.c6" to="visual.12109c6248b.3b" name="sync"/>
+        <wires xsi:type="iaml.wires:SyncWire" id="wires.12109c6249b.2a" name="sync" from="model.12109c6242e.c6" to="visual.12109c6248b.3b"/>
         <extendsEdges id="wires.128665d425c.2a" from="model.12109c6242e.c6" to="model.12109331eea.10ad"/>
       </attributes>
     </elements>

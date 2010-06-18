@@ -205,3 +205,7 @@ context model::domain::DomainSource ERROR "A DomainSource can only have one Sche
 
 context model::domain::DomainIterator ERROR "A DomainIterator can only have one Source" :
 	outSelects.size <= 1;
+
+context model::domain::DomainSchema WARNING "A DomainSchema should have at least one DomainSource specified" :
+	inSchemas.size >= 1;
+	

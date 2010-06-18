@@ -148,6 +148,9 @@
 		#debug_monitors { display: none; }
 	<?php } ?>
 	</style>
+	<?php 
+	log_message("«id».php: Post-refresh session data: " . print_r($_SESSION, true));
+  	?>
 </head>
 <body onLoad="loadStoredEvents()">
 	<div style="font-size:small; text-align: right;"><a href="clear_session.php">clear session</a> - <a href="sitemap.html">sitemap</a></div>

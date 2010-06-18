@@ -121,7 +121,7 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//InternetApplication/children"/>
+        href="iaml.ecore#//Scope/elements"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//DynamicApplicationElementSet"/>
@@ -222,7 +222,7 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//InternetApplication/children"/>
+        href="iaml.ecore#//Scope/elements"/>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//components/LoginHandler"/>

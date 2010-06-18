@@ -32,7 +32,7 @@ switch ($instance_id) {
 		 break;
 «ENDFOREACH»
 	default:
-		die("No such instance ID $instance_id");
+		shutdown("No such instance ID $instance_id");
 }
 
 // output any instructions

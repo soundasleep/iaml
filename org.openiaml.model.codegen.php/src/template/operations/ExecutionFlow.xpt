@@ -375,7 +375,7 @@
 				$url = "«safeName(to)».php?" . get_sid();	// need to pass session on server-side
 				log_message("[redirect] Redirecting to '$url'");
 				server_redirect($url);
-				die;
+				shutdown();
 			}
 		«ELSE»
 			// navigate to another frame

@@ -152,7 +152,7 @@ function openid_ajax_callback($return, $id) {
 		echo "redirect " . escape_parameter_string($result);
 	}
 	
-	die;	
+	shutdown();	
 }
 
 /**
@@ -218,7 +218,7 @@ function openid_callback() {
 		
 		// we are not in AJAX mode; we are actually redirecting the entire client
 		server_redirect($final);
-		die;
+		shutdown();
 	} else {
 		log_message("[openid] Failure");
 		throw new IamlRuntimeException("Response from '$url' was not authenticated: $response");

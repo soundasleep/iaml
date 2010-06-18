@@ -35,7 +35,7 @@ if (require_get("redirect_on_client", "")) {
 «IF getFailHandler(this) != null»
 	function frame_fail_handler($e) {
 		«EXPAND template::operations::Failure::failWire(true) FOR getFailHandler(this)»
-		die;
+		shutdown();
 	}
 	set_exception_handler('frame_fail_handler');
 «ENDIF»
@@ -44,7 +44,7 @@ if (require_get("redirect_on_client", "")) {
 «IF containingSession() != null && getFailHandler(containingSession()) != null»
 	function session_fail_handler($e) {
 		«EXPAND template::operations::Failure::failWire(true) FOR getFailHandler(containingSession())»
-		die;
+		shutdown();
 	}
 	set_exception_handler('session_fail_handler');
 «ENDIF»
@@ -124,7 +124,7 @@ if (require_get("operation", "")) {
 	log_message("«name».php: Remote operation $operation_name('$arg0', '$arg1') complete");
 
 	echo "ok";
-	die;
+	shutdown();
 }
 
 log_message("«id».php: User browsing started");

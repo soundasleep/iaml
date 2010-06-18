@@ -81,7 +81,7 @@ echo_necessary_update_callbacks();
 			. escape_parameter_string($url));
 		echo "\nredirect " 
 			. escape_parameter_string($url);				
-		die;
+		shutdown();
 	}
 «ENDDEFINE»
 

@@ -16,9 +16,20 @@
 	 * TODO currently we add the XSD directly on every new element created. 
 	 * We should only add it once (on load or on create). 
 	 */ 
-	org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createPlatformPluginURI("/org.openiaml.model/model/datatypes.xsd", false);
-	org.eclipse.emf.ecore.resource.ResourceSet set = getElementToEdit().eResource().getResourceSet();
-	set.getResource(uri, true);
+	{
+		org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createPlatformPluginURI("/org.openiaml.model/model/datatypes.xsd", false);
+		org.eclipse.emf.ecore.resource.ResourceSet set = getElementToEdit().eResource().getResourceSet();
+		set.getResource(uri, true);
+	}
+
+	/** 
+	 * Also add the EMF XSD data types.
+	 */
+	{
+		org.eclipse.emf.common.util.URI uri = org.eclipse.emf.common.util.URI.createPlatformPluginURI("/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd", false);
+		org.eclipse.emf.ecore.resource.ResourceSet set = getElementToEdit().eResource().getResourceSet();
+		set.getResource(uri, true);
+	}	
 
 	«targetDef.proceed()»
 «ENDAROUND»

@@ -129,7 +129,7 @@
 			// navigate to another frame
 			log_message("[redirect] Redirecting to '$url'");
 			server_redirect($url);
-			die;
+			shutdown();
 		}
 	«ELSE»
 		var url = null;

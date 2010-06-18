@@ -54,5 +54,5 @@ if (isset($_GET["javascript"]) && $_GET["javascript"] == "1") {
 	$template = $_GET["template"];
 	$key = $_GET["key"];
 	php_instrument("javascript-instrumented.dump", $dir, $template, $key);
-	die("instrumented");	// halt
+	shutdown("instrumented");	// halt
 }

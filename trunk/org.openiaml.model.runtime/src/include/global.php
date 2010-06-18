@@ -80,6 +80,15 @@ function log_message($msg, $also_debug = true) {
 	}
 }
 
+/**
+ * Just calls die(), but also calls registered shutdown functions:
+ * die() does not call shutdown functions by default.
+ */
+function shutdown($value = 1) {
+	flush_log_messages();
+	die($value);
+}
+
 register_shutdown_function('flush_log_messages');
 function flush_log_messages() {
 	global $stored_log_messages;
@@ -108,12 +117,12 @@ function server_redirect($url) {
 			. escape_parameter_string($url));
 		echo "\nredirect "
 			. escape_parameter_string($url);
-		die;
+		shutdown();
 	}
 
 	// otherwise, redirect as normal
 	header("Location: $url");
-	die;
+	shutdown();
 }
 
 /**
@@ -171,7 +180,7 @@ try {
 	header("HTTP/1.0 500 Fatal error");
 	echo "<b>A fatal error occured:</b> " . $pe->getMessage();
 	echo "<br>While trying to access <code>stored_events.db</code>";
-	die;
+	shutdown();
 }
 
 function require_session($var, $default = false) {
@@ -524,7 +533,7 @@ function default_exception_handler($e) {
 	log_message("[exception] " . print_r($e, true));
 	log_message("[default exception handler] Redirecting to '$url' (fail)");
 	server_redirect($url);
-	die;
+	shutdown();
 }
 
 /**

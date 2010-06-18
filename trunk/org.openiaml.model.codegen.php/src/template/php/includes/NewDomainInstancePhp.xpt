@@ -50,7 +50,7 @@ try {
 		. escape_parameter_string($url));
 	echo "\nredirect " 
 		. escape_parameter_string($url);				
-	die;
+	shutdown();
 }
 
 echo_necessary_update_callbacks();

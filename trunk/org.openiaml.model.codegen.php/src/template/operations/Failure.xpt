@@ -19,7 +19,7 @@
 		$url = "«safeName(to)».php?fail=" . urlencode($e->getMessage()) . "&trace=" . urlencode($e->getTraceAsString()) . "&" . get_sid();	// need to pass session on server-side;
 		log_message("[redirect] Redirecting to '$url' (fail)");
 		server_redirect($url);
-		die;
+		shutdown();
 	«ELSE»
 		// we need to navigate to the fail frame
 		var url = "«safeName(to)».php?fail=" + encodeURIComponent(e);

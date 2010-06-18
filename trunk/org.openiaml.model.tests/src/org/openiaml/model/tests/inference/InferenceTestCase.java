@@ -343,17 +343,6 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public DomainAttributeInstance assertHasDomainAttributeInstance(ApplicationElement obj,
-			String string) throws JaxenException {
-		return (DomainAttributeInstance) queryOne(obj, "iaml:children[iaml:name='" + string + "']");
-	}
-
-	/**
-	 * Assert that the given element contains the given
-	 * DomainAttributeInstance.
-	 *
-	 * @return The element found
-	 */
 	public DomainAttributeInstance assertHasDomainAttributeInstance(Scope obj,
 			String string) throws JaxenException {
 		return (DomainAttributeInstance) queryOne(obj, "iaml:elements[iaml:name='" + string + "']");
@@ -367,7 +356,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public DomainAttributeInstance assertHasDomainAttributeInstance(InternetApplication obj,
 			String string) throws JaxenException {
-		return (DomainAttributeInstance) queryOne(obj, "iaml:children[iaml:name='" + string + "']");
+		return (DomainAttributeInstance) queryOne(obj, "iaml:elements[iaml:name='" + string + "']");
 	}
 	
 	/**
@@ -461,7 +450,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public DomainIterator assertHasDomainIterator(InternetApplication root, String string) throws JaxenException {
-		return (DomainIterator) queryOne(root, "iaml:children[iaml:name='" + string + "']");
+		return (DomainIterator) queryOne(root, "iaml:elements[iaml:name='" + string + "']");
 	}
 
 	/**
@@ -839,7 +828,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public DynamicApplicationElementSet assertHasDynamicApplicationElementSet(InternetApplication element, String string) throws JaxenException {
-		return (DynamicApplicationElementSet) queryOne(element, "iaml:children[iaml:name='" + string + "']");	
+		return (DynamicApplicationElementSet) queryOne(element, "iaml:elements[iaml:name='" + string + "']");	
 	}
 	
 	/**

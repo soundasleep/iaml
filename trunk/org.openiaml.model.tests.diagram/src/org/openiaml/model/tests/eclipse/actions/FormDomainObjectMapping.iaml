@@ -2,7 +2,7 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1289147fd0a.fd">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="container">
     <elements xsi:type="iaml.domain:DomainIterator" id="domain.1289147feb0.1e" name="iterator" outWires="wires.1289147fdd5.60" outSelects="domain.1289147feb0.62">
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.1289147fdd5.60" from="domain.1289147feb0.1e" to="visual.1289147fda6.102" name="sync"/>
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.1289147fdd5.60" name="sync" from="domain.1289147feb0.1e" to="visual.1289147fda6.102"/>
       <selectEdges id="domain.1289147feb0.62" from="domain.1289147feb0.1e" to="domain.1289147feb0.9"/>
     </elements>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.1289147fdd5.60" id="visual.1289147fda6.102" name="target form"/>

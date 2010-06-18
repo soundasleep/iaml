@@ -118,6 +118,7 @@
 		«FOREACH attributes AS a»
 			«IF !isGeneratedPrimaryKey(a)»
 			if (!can_save_queued_store_domain_attribute_«safeNameString(a.id)-»()) {
+				log_message("Can't save «escapePhpString(name)»: Attribute «escapePhpString(a.name)» could not be saved");
 				return false;
 			}
 			«ENDIF»

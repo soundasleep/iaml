@@ -392,6 +392,10 @@ public class OpenIDAsAuthor extends CodegenTestCase {
 	protected void viewNewsPageSuccessfully(IFile sitemap, String title,
 			String openidPageServer) throws Exception {
 		
+		// TODO there is some weird synchrony issues going on. this resolves
+		// it temporarily. check with HtmlUnit 2.8 and see if the issue is fixed.
+		Thread.sleep(1000);
+		
 		gotoSitemapThenPage(sitemap, "View Posts");
 		assertNoProblem();
 		

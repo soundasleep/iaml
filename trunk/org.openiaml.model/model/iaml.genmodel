@@ -69,7 +69,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ContainsProperties/properties"/>
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//InternetApplication">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/children"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//InternetApplication/runtimeUrl"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/schemas"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/sources"/>

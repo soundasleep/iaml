@@ -1,7 +1,6 @@
 package org.openiaml.model.migrate;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +20,7 @@ import org.w3c.dom.Node;
  *   <li>DecisionOperation has been merged into DecisionNode ({@issue 160})
  *   <li>DecisionCondition has been merged into DecisionNode ({@issue 160})
  *   <li>"setPropertyToValue" PrimitiveOperation is now merged into "set" ({@issue 143})
+ *   <li>InternetApplication.children is now merged into InternetApplication.elements (as it is now a Scope)
  *   <li>Others...
  * </ol>
  * 
@@ -109,6 +109,16 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 		// --> <nodes xsi:type="iaml.operations:DecisionNode">
 		if (nodeName.equals("operations") && "iaml.operations:DecisionOperation".equals(xsiType)) {
 			return "nodes";
+		}
+		
+		// <InternetApplication><children>
+		// --> <InternetApplication><elements>
+		if (nodeName.equals("children") && element.getParentNode() != null && element.getParentNode() instanceof Element) {
+			Element parent = (Element) element.getParentNode();
+			if ("InternetApplication".equals(parent.getNodeName()) ||
+					"iaml:InternetApplication".equals(parent.getNodeName())) {
+				return "elements";
+			}
 		}
 
 		return super.getRenamedNode(nodeName, element, errors);

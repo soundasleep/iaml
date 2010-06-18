@@ -61,7 +61,7 @@ public class CreateNewDiagramTestCase extends EclipseTestCaseHelper {
 		assertEditorHasChildren(1, editor);
 
 		root = (InternetApplication) rendering;
-		assertEquals(0, root.getChildren().size());
+		assertEquals(0, root.getElements().size());
 		assertEquals(1, root.getScopes().size());
 		Frame page = (Frame) root.getScopes().get(0);
 		assertEquals("Home", page.getName());

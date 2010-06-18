@@ -5,14 +5,14 @@
       <parameterEdges id="wires.126cf449ab2.52" from="model.126cf449831.f2" to="domain.128807fbeba.f26"/>
     </parameters>
     <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.f26" name="viewing instance" outWires="wires.126cf449ab2.72" inParameterEdges="wires.126cf449ab2.52" query="id = ?" outSelects="domain.128807fbeba.f2b">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.126cf449ab2.72" from="domain.128807fbeba.f26" to="visual.126cf4499f6.dd" name="set"/>
+      <wires xsi:type="iaml.wires:SetWire" id="wires.126cf449ab2.72" name="set" from="domain.128807fbeba.f26" to="visual.126cf4499f6.dd"/>
     </elements>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.126cf449ab2.72" id="visual.126cf4499f6.dd" name="View"/>
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.126ceb685c2.bd" name="Add New Product">
     <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.f27" name="New Product" outWires="wires.126cf449ab2.8" query="new" outSelects="domain.128807fbeba.f2c">
       <operations xsi:type="iaml:PrimitiveOperation" id="model.126cf449831.1c" name="save" inActions="wires.126cf449ab2.3"/>
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.126cf449ab2.8" from="domain.128807fbeba.f27" to="visual.126ceb685c2.c6" name="sync"/>
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.126cf449ab2.8" name="sync" from="domain.128807fbeba.f27" to="visual.126ceb685c2.c6"/>
     </elements>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.126cf449ab2.8" id="visual.126ceb685c2.c6" name="Edit Form"/>
     <children xsi:type="iaml.visual:Button" id="visual.126cf4499f6.27" name="save" outActions="wires.126cf449ab2.3">

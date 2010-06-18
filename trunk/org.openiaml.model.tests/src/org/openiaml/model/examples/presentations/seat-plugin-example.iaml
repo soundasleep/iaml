@@ -2,7 +2,7 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.121a45a251b.f" runtimeUrl="http://localhost:8080/runtime-EclipseApplication2/examples/output/">
   <scopes xsi:type="iaml.visual:Frame" id="visual.121a45a2653.9" name="synchronising on-page">
     <children xsi:type="iaml.visual:InputTextField" outWires="wires.121a45a270f.7" id="visual.121a45a2653.10" name="source">
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.121a45a270f.7" from="visual.121a45a2653.10" to="visual.121a45a2653.19" name="sync"/>
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.121a45a270f.7" name="sync" from="visual.121a45a2653.10" to="visual.121a45a2653.19"/>
       <fieldValue id="model.121a45a251b.4c" name="fieldValue" outParameterEdges="wires.121a45a270f.71">
         <parameterEdges id="wires.121a45a270f.71" from="model.121a45a251b.4c" to="wires.121a45a270f.70"/>
       </fieldValue>

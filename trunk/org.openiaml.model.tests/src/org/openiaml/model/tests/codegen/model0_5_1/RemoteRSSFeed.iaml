@@ -3,7 +3,7 @@
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
   <scopes xsi:type="iaml.visual:Frame" id="visual.1281f698836.14" name="View Remote Feed">
     <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.1083" name="select" outWires="wires.1281f74c998.6" limit="10" orderBy="model.1281f69878a.3b" outSelects="domain.128807fbeba.1087">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.1281f74c998.6" from="domain.128807fbeba.1083" to="visual.1281f74c998.2d" name="set"/>
+      <wires xsi:type="iaml.wires:SetWire" id="wires.1281f74c998.6" name="set" from="domain.128807fbeba.1083" to="visual.1281f74c998.2d"/>
     </elements>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.1281f74c998.6" id="visual.1281f74c998.2d" name="navigate"/>
   </scopes>

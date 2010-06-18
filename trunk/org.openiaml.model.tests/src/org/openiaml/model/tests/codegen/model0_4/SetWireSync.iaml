@@ -2,10 +2,10 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12311ff1569.27e">
   <scopes xsi:type="iaml.visual:Frame" id="visual.12311ff15c6.1bf" name="Home">
     <children xsi:type="iaml.visual:InputTextField" outWires="wires.12311ff15e6.59" id="visual.12311ff15c6.1c6" name="source">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.12311ff15e6.59" from="visual.12311ff15c6.1c6" to="visual.12311ff15c6.1c7" name="set"/>
+      <wires xsi:type="iaml.wires:SetWire" id="wires.12311ff15e6.59" name="set" from="visual.12311ff15c6.1c6" to="visual.12311ff15c6.1c7"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" outWires="wires.12311ff15e6.57" inWires="wires.12311ff15e6.59" id="visual.12311ff15c6.1c7" name="sync1">
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.12311ff15e6.57" from="visual.12311ff15c6.1c7" to="visual.12311ff15c6.1c8" name="sync"/>
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.12311ff15e6.57" name="sync" from="visual.12311ff15c6.1c7" to="visual.12311ff15c6.1c8"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" inWires="wires.12311ff15e6.57" id="visual.12311ff15c6.1c8" name="sync2"/>
   </scopes>

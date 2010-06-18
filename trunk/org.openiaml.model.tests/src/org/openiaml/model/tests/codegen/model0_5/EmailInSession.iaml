@@ -9,10 +9,10 @@
     </scopes>
     <scopes xsi:type="iaml.visual:Frame" id="visual.127b1fff818.471" name="Send a Session Email">
       <children xsi:type="iaml.visual:InputTextField" outWires="wires.127b1fff8c4.1c4" id="visual.127b1fff818.4be" name="set from">
-        <wires xsi:type="iaml.wires:SetWire" id="wires.127b1fff8c4.1c4" from="visual.127b1fff818.4be" to="model.127b1fff682.571" name="set"/>
+        <wires xsi:type="iaml.wires:SetWire" id="wires.127b1fff8c4.1c4" name="set" from="visual.127b1fff818.4be" to="model.127b1fff682.571"/>
       </children>
       <children xsi:type="iaml.visual:InputTextField" outWires="wires.127b1fff8c4.1c3" id="visual.127b1fff818.4bf" name="set to">
-        <wires xsi:type="iaml.wires:SetWire" id="wires.127b1fff8c4.1c3" from="visual.127b1fff818.4bf" to="model.127b1fff682.572" name="set"/>
+        <wires xsi:type="iaml.wires:SetWire" id="wires.127b1fff8c4.1c3" name="set" from="visual.127b1fff818.4bf" to="model.127b1fff682.572"/>
       </children>
       <children xsi:type="iaml.visual:Button" id="visual.127b1fff818.4c0" name="send email" outActions="wires.127b1fff8c4.1c5">
         <actions xsi:type="iaml.wires:RunAction" id="wires.127b1fff8c4.1c5" name="onClick" from="visual.127b1fff818.4c0" to="model.127b1fff682.573"/>

@@ -3,7 +3,7 @@
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <children xsi:type="iaml.visual:Map" inWires="wires.127b83e57f8.12" id="visual.127b84b628d.17" name="target map"/>
     <children xsi:type="iaml.visual:InputForm" outWires="wires.127b83e57f8.12" id="visual.127b83e57e8.d6" name="type in some addresses">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.127b83e57f8.12" from="visual.127b83e57e8.d6" to="visual.127b84b628d.17" name="set"/>
+      <wires xsi:type="iaml.wires:SetWire" id="wires.127b83e57f8.12" name="set" from="visual.127b83e57e8.d6" to="visual.127b84b628d.17"/>
       <children xsi:type="iaml.visual:InputTextField" id="visual.127b83e57e8.f2" name="address 1"/>
       <children xsi:type="iaml.visual:InputTextField" id="visual.127b83e57e8.f3" name="address 2"/>
       <children xsi:type="iaml.visual:InputTextField" id="visual.127b83e57e8.f4" name="address 3"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.users="http://openiaml.org/model/users" id="model.1233b453c1f.69">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.1233b453c1f.69">
   <scopes xsi:type="iaml.visual:Frame" id="visual.1233b453dc5.b3" name="Home"/>
   <scopes xsi:type="iaml.scopes:Session" id="scopes.1233b453efe.5b" name="my session">
     <elements xsi:type="iaml.components:LoginHandler" inParameterEdges="wires.1233b453e32.5e" id="components.1233b453f6b.39" name="user login handler" type="USER"/>
@@ -8,14 +8,14 @@
     </elements>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233b453dc5.c2" name="target page"/>
   </scopes>
-  <schemas id="domain.128807fbeba.fc4" xsi:type="iaml.users:Role" name="Guest" inSchemas="domain.128807fbeba.fc6"/>
-  <schemas id="domain.128807fbeba.fc7" xsi:type="iaml.users:Role" name="Registered User" outParameterEdges="wires.1233b453e32.5e" inRequiresEdges="wires.1233b453e32.66" inSchemas="domain.128807fbeba.fc9">
+  <schemas xsi:type="iaml.users:Role" id="domain.128807fbeba.fc4" name="Guest" inSchemas="domain.128807fbeba.fc6"/>
+  <schemas xsi:type="iaml.users:Role" id="domain.128807fbeba.fc7" name="Registered User" outParameterEdges="wires.1233b453e32.5e" inSchemas="domain.128807fbeba.fc9" inRequiresEdges="wires.1233b453e32.66">
     <parameterEdges id="wires.1233b453e32.5e" from="domain.128807fbeba.fc7" to="components.1233b453f6b.39"/>
   </schemas>
-  <sources name="domain store" id="domain.128807fbeba.fc5" outSchemas="domain.128807fbeba.fc6">
+  <sources id="domain.128807fbeba.fc5" name="domain store" outSchemas="domain.128807fbeba.fc6">
     <schemaEdges id="domain.128807fbeba.fc6" from="domain.128807fbeba.fc5" to="domain.128807fbeba.fc4"/>
   </sources>
-  <sources name="domain store 2" id="domain.128807fbeba.fc511" outSchemas="domain.128807fbeba.fc9">
+  <sources id="domain.128807fbeba.fc511" name="domain store 2" outSchemas="domain.128807fbeba.fc9">
     <schemaEdges id="domain.128807fbeba.fc9" from="domain.128807fbeba.fc511" to="domain.128807fbeba.fc7"/>
   </sources>
 </iaml:InternetApplication>

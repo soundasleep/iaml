@@ -3,7 +3,7 @@
   <scopes xsi:type="iaml.visual:Frame" id="visual.12109331f38.e3f" name="container">
     <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.d72" name="select" inParameterEdges="wires.12109c6249b.60" query="email = ?" outSelects="domain.128807fbeba.d73" autosave="true">
       <attributes id="model.12109c6242e.1dc" name="name" outWires="wires.12109c6249b.5e" outExtendsEdges="wires.128665d425c.4e">
-        <wires xsi:type="iaml.wires:SyncWire" id="wires.12109c6249b.5e" from="model.12109c6242e.1dc" to="visual.12109c6248b.ac" name="sync"/>
+        <wires xsi:type="iaml.wires:SyncWire" id="wires.12109c6249b.5e" name="sync" from="model.12109c6242e.1dc" to="visual.12109c6248b.ac"/>
         <extendsEdges id="wires.128665d425c.4e" from="model.12109c6242e.1dc" to="model.12109331eea.10ac"/>
       </attributes>
     </elements>
@@ -19,7 +19,7 @@
     <attributes id="model.12109331eea.10ae" name="password"/>
     <attributes id="model.12109331eea.10d3" name="id" primaryKey="true"/>
   </schemas>
-  <sources name="target source" id="domain.128807fbeba.d70" outSchemas="domain.128807fbeba.d71" inSelects="domain.128807fbeba.d73">
+  <sources id="domain.128807fbeba.d70" name="target source" outSchemas="domain.128807fbeba.d71" inSelects="domain.128807fbeba.d73">
     <schemaEdges id="domain.128807fbeba.d71" from="domain.128807fbeba.d70" to="domain.128807fbeba.d6f"/>
     <selectEdges id="domain.128807fbeba.d73" from="domain.128807fbeba.d72" to="domain.128807fbeba.d70"/>
   </sources>

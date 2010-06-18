@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.users="http://openiaml.org/model/users" id="model.1233afe61d2.26">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.1233afe61d2.26">
   <scopes xsi:type="iaml.visual:Frame" id="visual.1233afe628e.15" name="Home"/>
   <scopes xsi:type="iaml.scopes:Session" id="scopes.1233afe6368.3" name="target session">
     <elements xsi:type="iaml.components:AccessControlHandler" outRequiresEdges="wires.1233afe62eb.2d" id="components.1233afe6424.13" name="role-based access">
@@ -7,7 +7,7 @@
     </elements>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233afe628e.7e" name="target"/>
   </scopes>
-  <schemas xsi:type="iaml.users:Role" id="domain.128807fbeba.d93" name="default role" inRequiresEdges="wires.1233afe62eb.2d" inSchemas="domain.128807fbeba.d95"/>
+  <schemas xsi:type="iaml.users:Role" id="domain.128807fbeba.d93" name="default role" inSchemas="domain.128807fbeba.d95" inRequiresEdges="wires.1233afe62eb.2d"/>
   <sources id="domain.128807fbeba.d94" outSchemas="domain.128807fbeba.d95">
     <schemaEdges id="domain.128807fbeba.d95" from="domain.128807fbeba.d94" to="domain.128807fbeba.d93"/>
   </sources>

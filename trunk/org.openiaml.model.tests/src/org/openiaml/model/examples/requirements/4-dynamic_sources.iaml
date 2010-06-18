@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="migrated0">
-  <children xsi:type="iaml:DynamicApplicationElementSet" id="migrated5" name="all pages" outWires="migrated4" query="xpath:iaml:scopes[starts-with(iaml:name, 'page')]">
-    <wires xsi:type="iaml.wires:SyncWire" id="migrated4" from="migrated5" to="fieldlist" name="sync"/>
-  </children>
+  <elements xsi:type="iaml:DynamicApplicationElementSet" id="migrated5" name="all pages" outWires="migrated4" query="xpath:iaml:scopes[starts-with(iaml:name, 'page')]">
+    <wires xsi:type="iaml.wires:SyncWire" id="migrated4" name="sync" from="migrated5" to="fieldlist"/>
+  </elements>
   <scopes xsi:type="iaml.visual:Frame" id="migrated1" name="page a">
     <children xsi:type="iaml.visual:InputTextField" id="visual.1203bbadbb8.475" name="target"/>
     <children xsi:type="iaml.visual:InputTextField" id="visual.1203bbadbb8.476" name="unrelated1"/>

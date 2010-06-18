@@ -4,7 +4,7 @@
   <scopes xsi:type="iaml.visual:Frame" id="visual.1268cdc3e5e.138" name="New User">
     <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.e6b" name="new" inWires="wires.1268cdc3e5e.99" query="new" outSelects="domain.128807fbeba.e72"/>
     <children xsi:type="iaml.visual:InputForm" outWires="wires.1268cdc3e5e.99" id="visual.1268cdc3e5e.149" name="edit new student">
-      <wires xsi:type="iaml.wires:SyncWire" id="wires.1268cdc3e5e.99" from="visual.1268cdc3e5e.149" to="domain.128807fbeba.e6b" name="sync"/>
+      <wires xsi:type="iaml.wires:SyncWire" id="wires.1268cdc3e5e.99" name="sync" from="visual.1268cdc3e5e.149" to="domain.128807fbeba.e6b"/>
     </children>
   </scopes>
   <schemas id="domain.128807fbeba.e6c" name="Person" inExtendsEdges="wires.1268cdc3e5e.7e" inSchemas="domain.128807fbeba.e6e">

@@ -5,7 +5,7 @@
       <operations xsi:type="iaml:PrimitiveOperation" id="model.127b1fff682.4ca" name="send" inActions="wires.127b1fff8c4.183"/>
     </scopes>
     <children xsi:type="iaml.visual:InputForm" outWires="wires.127b254e207.ce" id="visual.127b1fff818.3a9" name="form">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.127b254e207.ce" from="visual.127b1fff818.3a9" to="scopes.127b254e216.1d" name="set"/>
+      <wires xsi:type="iaml.wires:SetWire" id="wires.127b254e207.ce" name="set" from="visual.127b1fff818.3a9" to="scopes.127b254e216.1d"/>
       <children xsi:type="iaml.visual:InputTextField" id="visual.127b1fff818.3bd" name="field 1"/>
       <children xsi:type="iaml.visual:InputTextField" id="visual.127b1fff818.3bf" name="field 2"/>
       <children xsi:type="iaml.visual:InputTextField" id="visual.127b1fff818.3c0" name="field 3"/>

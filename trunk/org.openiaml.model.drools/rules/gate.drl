@@ -19,14 +19,14 @@ global OverridableCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
-rule "Create 'Continue' button for Frames connected with 'first' or 'last' or 'fail' NavigateAction"
+rule "Create 'Continue' button for Frames connected with 'first' or 'last' or 'fail' ActionEdge"
 	when
 		gate : Gate ( )
 		target : Frame ( )
-		nav : NavigateAction ( from == gate, to == target, name == "first" || name == "last" || name == "fail" )
+		nav : ActionEdge ( from == gate, to == target, name == "first" || name == "last" || name == "fail" )
 		
 		not (Button ( eContainer == target, name == "Continue" ))
-		not (NavigateAction ( to == gate ))
+		not (ActionEdge ( to == gate ))
 		
 		eval ( handler.veto( gate ))
 	
@@ -41,17 +41,17 @@ rule "Connect 'click' on 'Continue' button to resume Gate"
 	when
 		gate : Gate ( )
 		target : Frame ( )
-		nav : NavigateAction ( from == gate, to == target, name == "first" || name == "last" || name == "fail" ) 
+		nav : ActionEdge ( from == gate, to == target, name == "first" || name == "last" || name == "fail" ) 
 		button : Button ( eContainer == target, name == "Continue" )
 		
 		click : EventTrigger ( button.onClick == click, eContainer == button )
 		
-		not (NavigateAction ( from == click, to == gate ))
+		not (ActionEdge ( from == click, to == gate ))
 		
 		eval ( handler.veto( gate ))
 	
 	then
-		NavigateAction wire = handler.generatedNavigateAction(gate, target, click, gate);
+		ActionEdge wire = handler.generatedActionEdge(gate, target, click, gate);
 		handler.setName(wire, "resume");
 		queue.add(wire, drools);
 
@@ -62,7 +62,7 @@ rule "Create '(gate) flag' property when Gate is connected by 'first' or 'last'"
 		session : Scope ( )
 		gate : Gate ( eContainer == session )
 		
-		wire : NavigateAction ( from == gate, name == "first" || name == "last" )
+		wire : ActionEdge ( from == gate, name == "first" || name == "last" )
 		
 		not (Property ( eContainer == session, eval( name.equals(gate.getName() + " flag")) ))
 		
@@ -76,11 +76,11 @@ rule "Create '(gate) flag' property when Gate is connected by 'first' or 'last'"
 	
 end
 
-rule "Create 'set flag' operation for Frames connected with 'first' or 'last' NavigateAction"
+rule "Create 'set flag' operation for Frames connected with 'first' or 'last' ActionEdge"
 	when
 		gate : Gate ( )
 		target : Frame ( )
-		nav : NavigateAction ( from == gate, to == target, name == "first" || name == "last" )
+		nav : ActionEdge ( from == gate, to == target, name == "first" || name == "last" )
 		button : Button ( eContainer == target, name == "Continue" )
 		
 		not (CompositeOperation ( eContainer == target, name == "Set gate flag" ))
@@ -98,17 +98,17 @@ rule "Connect 'access' event with 'set flag' operation"
 	when
 		gate : Gate ( )
 		target : Frame ( )
-		nav : NavigateAction ( from == gate, to == target, name == "first" || name == "last" )
+		nav : ActionEdge ( from == gate, to == target, name == "first" || name == "last" )
 		button : Button ( eContainer == target, name == "Continue" )
 		op : CompositeOperation ( eContainer == target, name == "Set gate flag" )
 		access : EventTrigger ( eContainer == target, target.onAccess == access )
 		
-		not (RunAction ( from == access, to == op ))
+		not (ActionEdge ( from == access, to == op ))
 			
 		eval ( handler.veto( gate ))
 		
 	then
-		RunAction run = handler.generatedRunAction(gate, target, access, op);
+		ActionEdge run = handler.generatedActionEdge(gate, target, access, op);
 		handler.setName(run, "run");
 		queue.add(run, drools);
 
@@ -119,7 +119,7 @@ rule "Create contents of 'set flag' operation"
 		session : Scope ( )
 		gate : Gate ( eContainer == session )
 		target : Frame ( )
-		nav : NavigateAction ( from == gate, to == target, name == "first" || name == "last" )
+		nav : ActionEdge ( from == gate, to == target, name == "first" || name == "last" )
 		button : Button ( eContainer == target, name == "Continue" )
 		property : Property ( eContainer == session, eval( name.equals(gate.getName() + " flag")) )
 		
@@ -158,7 +158,7 @@ rule "Create condition 'check (gate)'"
 	when
 		session : Scope ( )
 		gate : Gate ( eContainer == session )
-		wire : NavigateAction ( from == gate, name == "first" || name == "last" )
+		wire : ActionEdge ( from == gate, name == "first" || name == "last" )
 		
 		not ( Condition ( eContainer == session, eval( name.equals("check " + gate.getName())) ))
 		
@@ -175,7 +175,7 @@ rule "Connect condition 'check (gate)' with gate"
 	when
 		session : Scope ( )
 		gate : Gate ( eContainer == session )
-		wire : NavigateAction ( from == gate, name == "first" || name == "last" )
+		wire : ActionEdge ( from == gate, name == "first" || name == "last" )
 		
 		cond : Condition ( eContainer == session, eval( name.equals("check " + gate.getName())) )
 		
@@ -194,7 +194,7 @@ rule "Create contents of 'check (gate)' condition"
 	when
 		session : Scope ( )
 		gate : Gate ( eContainer == session )
-		wire : NavigateAction ( from == gate, name == "first" || name == "last" )
+		wire : ActionEdge ( from == gate, name == "first" || name == "last" )
 		property : Property ( eContainer == session, eval( name.equals(gate.getName() + " flag")) )
 		
 		cond : CompositeCondition ( eContainer == session, eval( name.equals("check " + gate.getName())) )
@@ -272,13 +272,13 @@ rule "For EntryGates that require Label values, connect a NavigateWire to the pr
 		provide : Frame ( eContainer == container, name != null,
 			eval ( functions.getEntryGateFrameNameForProvides(label).equals(provide.getName()) ) )
 		
-		# allow other NavigateActions to override this one
-		not ( NavigateAction ( from == gate )) 
+		# allow other ActionEdges to override this one
+		not ( ActionEdge ( from == gate )) 
 	
 		eval ( handler.veto( gate ))
 	
 	then
-		NavigateAction nav = handler.generatedNavigateAction(gate, gate, gate, provide);
+		ActionEdge nav = handler.generatedActionEdge(gate, gate, gate, provide);
 		handler.setName(nav, "fail");
 		queue.add(nav, drools);
 	
@@ -353,12 +353,12 @@ rule "If an EntryGate requires a Label, get the containing Scope to update the L
 		# Label.update()
 		op : Operation ( eContainer == label, name == "update" )
 		
-		not ( RunAction ( from == onAccess, to == op ))
+		not ( ActionEdge ( from == onAccess, to == op ))
 
 		eval ( handler.veto( gate ))
 	
 	then
-		RunAction run = handler.generatedRunAction(gate, gate, onAccess, op);
+		ActionEdge run = handler.generatedActionEdge(gate, gate, onAccess, op);
 		handler.setName(run, "run");
 		queue.add(run, drools);
 		
@@ -390,7 +390,7 @@ rule "If an EntryGate requires a Label, the Label is only updated externally if 
 		op : Operation ( eContainer == label, name == "update" )
 		
 		# Scope.onAccess --> Label.update()
-		run : RunAction ( from == onAccess, to == op )
+		run : ActionEdge ( from == onAccess, to == op )
 		
 		# Text.isSet?
 		condition : Condition ( eContainer == field, name == "fieldValue is set" )
@@ -428,7 +428,7 @@ rule "If an EntryGate requires a Label, the Label is only updated externally if 
 		op : Operation ( eContainer == label, name == "update" )
 		
 		# Scope.onAccess --> Label.update()
-		run : RunAction ( from == onAccess, to == op )
+		run : ActionEdge ( from == onAccess, to == op )
 		
 		# Label.can cast?
 		condition : Condition ( eContainer == label, name == "can cast?" )

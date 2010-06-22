@@ -128,12 +128,12 @@ rule "Input field for Autocomplete should update instantly"
 		
 		updateOperation : Operation ( eContainer == text, name == "update" )
 		
-		not ( RunAction ( from == onInput, to == updateOperation ))
+		not ( ActionEdge ( from == onInput, to == updateOperation ))
 		
 		eval ( handler.veto( wire ))
 		
 	then
-		RunAction run = handler.generatedRunAction(wire, text, onInput, updateOperation);
+		ActionEdge run = handler.generatedActionEdge(wire, text, onInput, updateOperation);
 		handler.setName(run, "run");
 		queue.add(run, drools);
 		
@@ -195,12 +195,12 @@ rule "IteratorList labels update the target of the Autocomplete Wire"
 		label : VisibleThing ( eContainer == list )
 		onClick : EventTrigger ( label.onClick == onClick )
 		
-		not ( RunAction ( from == onClick, to == updateOperation ))
+		not ( ActionEdge ( from == onClick, to == updateOperation ))
 		
 		eval ( handler.veto( wire ))
 	
 	then
-		RunAction run = handler.generatedRunAction(wire, label, onClick, updateOperation);
+		ActionEdge run = handler.generatedActionEdge(wire, label, onClick, updateOperation);
 		handler.setName(run, "run");
 		queue.add(run, drools);
 		
@@ -252,12 +252,12 @@ rule "IteratorList labels clear the input onClick"
 		label : VisibleThing ( eContainer == list )
 		onClick : EventTrigger ( label.onClick == onClick )
 		
-		not ( RunAction ( from == onClick, to == updateOperation ))
+		not ( ActionEdge ( from == onClick, to == updateOperation ))
 		
 		eval ( handler.veto( wire ))
 	
 	then
-		RunAction run = handler.generatedRunAction(wire, label, onClick, updateOperation);
+		ActionEdge run = handler.generatedActionEdge(wire, label, onClick, updateOperation);
 		handler.setName(run, "run");
 		queue.add(run, drools);
 		
@@ -291,12 +291,12 @@ rule "Frame.onAccess hides the IteratorList if the input is empty"
 		# Frame.onAccess
 		onAccess : EventTrigger ( container.onAccess == onAccess )
 		
-		not ( RunAction ( from == onAccess, to == hide ))
+		not ( ActionEdge ( from == onAccess, to == hide ))
 		
 		eval ( handler.veto( wire ))
 	
 	then
-		RunAction run = handler.generatedRunAction(wire, container, onAccess, hide);
+		ActionEdge run = handler.generatedActionEdge(wire, container, onAccess, hide);
 		handler.setName(run, "run");
 		queue.add(run, drools);
 		
@@ -331,12 +331,12 @@ rule "Frame.onAccess shows the IteratorList if the input is not empty"
 		# Frame.onAccess
 		onAccess : EventTrigger ( container.onAccess == onAccess )
 		
-		not ( RunAction ( from == onAccess, to == hide ))
+		not ( ActionEdge ( from == onAccess, to == hide ))
 		
 		eval ( handler.veto( wire ))
 	
 	then
-		RunAction run = handler.generatedRunAction(wire, container, onAccess, hide);
+		ActionEdge run = handler.generatedActionEdge(wire, container, onAccess, hide);
 		handler.setName(run, "run");
 		queue.add(run, drools);
 		
@@ -371,12 +371,12 @@ rule "Input.onChange hides the IteratorList if the input is empty"
 		# Frame.onAccess
 		onChange : EventTrigger ( input.onChange == onChange )
 		
-		not ( RunAction ( from == onChange, to == hide ))
+		not ( ActionEdge ( from == onChange, to == hide ))
 		
 		eval ( handler.veto( wire ))
 	
 	then
-		RunAction run = handler.generatedRunAction(wire, container, onChange, hide);
+		ActionEdge run = handler.generatedActionEdge(wire, container, onChange, hide);
 		handler.setName(run, "run");
 		queue.add(run, drools);
 		
@@ -412,12 +412,12 @@ rule "Input.onChange shows the IteratorList if the input is not empty"
 		# Frame.onAccess
 		onChange : EventTrigger ( input.onChange == onChange )
 		
-		not ( RunAction ( from == onChange, to == hide ))
+		not ( ActionEdge ( from == onChange, to == hide ))
 		
 		eval ( handler.veto( wire ))
 	
 	then
-		RunAction run = handler.generatedRunAction(wire, container, onChange, hide);
+		ActionEdge run = handler.generatedActionEdge(wire, container, onChange, hide);
 		handler.setName(run, "run");
 		queue.add(run, drools);
 		

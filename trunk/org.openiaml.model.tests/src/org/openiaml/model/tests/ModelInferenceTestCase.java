@@ -29,9 +29,9 @@ import org.openiaml.model.ModelLoader.ModelLoadException;
 import org.openiaml.model.codegen.php.CheckModelInstance;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.drools.ICreateElementsFactory;
-import org.openiaml.model.model.Action;
-import org.openiaml.model.model.ActionDestination;
-import org.openiaml.model.model.ActionSource;
+import org.openiaml.model.model.ActionEdge;
+import org.openiaml.model.model.ActionEdgeDestination;
+import org.openiaml.model.model.ActionEdgeSource;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelFactory;
@@ -365,8 +365,8 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @return the wire found or null
 	 * @throws JaxenException
 	 */
-	protected Action getActionFrom(ActionSource from, String name) throws JaxenException {
-		for (Action w : from.getOutActions()) {
+	protected ActionEdge getActionFrom(ActionEdgeSource from, String name) throws JaxenException {
+		for (ActionEdge w : from.getOutActions()) {
 			if (w instanceof NamedElement && name.equals(((NamedElement) w).getName())) {
 				return w;
 			}
@@ -590,8 +590,8 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @throws JaxenException
 	 * @see #getWiresFromTo(EObject, WireSource, WireDestination, Class)
 	 */
-	protected Set<Action> getActionsFromTo(EObject container, ActionSource fromElement, ActionDestination toElement) throws JaxenException {
-		return getActionsFromTo(container, fromElement, toElement, Action.class);
+	protected Set<ActionEdge> getActionsFromTo(EObject container, ActionEdgeSource fromElement, ActionEdgeDestination toElement) throws JaxenException {
+		return getActionsFromTo(container, fromElement, toElement, ActionEdge.class);
 	}
 	
 	/**
@@ -625,9 +625,9 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @return the wire found or throws an exception
 	 * @throws JaxenException
 	 */
-	protected Set<Action> getActionsFromTo(EObject container, ActionSource fromElement, ActionDestination toElement, Class<? extends Action> type) throws JaxenException {
-		Set<Action> results = new HashSet<Action>();
-		for (Action w : fromElement.getOutActions()) {
+	protected Set<ActionEdge> getActionsFromTo(EObject container, ActionEdgeSource fromElement, ActionEdgeDestination toElement, Class<? extends ActionEdge> type) throws JaxenException {
+		Set<ActionEdge> results = new HashSet<ActionEdge>();
+		for (ActionEdge w : fromElement.getOutActions()) {
 			if (type.isInstance(w) && w.getTo().equals(toElement)) {
 				results.add(w);
 			}
@@ -771,8 +771,8 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 		}
 	}
 
-	protected void assertNoActionsFrom(EObject container, ActionSource fromElement, Class<? extends Action> cls) throws JaxenException {
-		for (Action w : fromElement.getOutActions()) {
+	protected void assertNoActionsFrom(EObject container, ActionEdgeSource fromElement, Class<? extends ActionEdge> cls) throws JaxenException {
+		for (ActionEdge w : fromElement.getOutActions()) {
 			if (cls.isInstance(w)) {
 				fail("Unexpectedly found action '" + w + "' of type '" + cls + "' from element '" + fromElement + "'");
 			}

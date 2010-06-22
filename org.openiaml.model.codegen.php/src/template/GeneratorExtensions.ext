@@ -68,7 +68,7 @@ escapeXmlString(String s) :
 operationName(model::WireDestination this) : 
 	throwException("Invalid operation: " + this);
 
-operationName(model::ActionDestination this) : 
+operationName(model::ActionEdgeDestination this) : 
 	throwException("Invalid operation: " + this);
 
 operationName(model::Operation this) :
@@ -120,7 +120,7 @@ onCurrentFrame(emf::EObject source, model::WireDestination target) :
 	containingFrame(source) != null && 
 	containingFrame(source) == containingFrame(target);
 
-onCurrentFrameAction(emf::EObject source, model::ActionDestination target) :
+onCurrentFrameAction(emf::EObject source, model::ActionEdgeDestination target) :
 	containingFrame(source) != null && 
 	containingFrame(source) == containingFrame(target);
 
@@ -151,7 +151,7 @@ availableInCurrentScript(model::WireSource source, model::WireDestination target
 	containingEmail(target) == null && 
 	(onCurrentFrame(source, target));
 		
-availableInCurrentScriptAction(model::ActionSource source, model::ActionDestination target) :
+availableInCurrentScriptAction(model::ActionEdgeSource source, model::ActionEdgeDestination target) :
 	containingEmail(target) == null &&
 	(onCurrentFrameAction(source, target));
 
@@ -260,7 +260,7 @@ getPassFlows(model::ExecutionEdgesSource this):
 getFailEdge(model::CompositeOperation this) :
 	outActions.selectFirst( e | e.isFailEdge() ) ;
 
-isFailEdge(model::Action this ) :
+isFailEdge(model::ActionEdge this ) :
 	false;
 	
 isFailEdge(model::wires::NavigateAction this ) :
@@ -405,7 +405,7 @@ getAllDomainSchemas(emf::EObject this) :
 List[emf::EObject] resolveDynamicSet(model::InternetApplication root, model::DynamicApplicationElementSet set) :
 	JAVA org.openiaml.model.codegen.php.OawCodeGenerator.resolveDynamicSet(org.openiaml.model.model.InternetApplication, org.openiaml.model.model.DynamicApplicationElementSet);
 
-getFailHandler(model::ActionSource this) :
+getFailHandler(model::ActionEdgeSource this) :
 	outActions.select( w | w.isFailEdge()).first();
 
 isAutosaveOff(model::DomainAttributeInstance this) :

@@ -10,7 +10,7 @@
 	«throwException("Unknown wire to expand: " + this)»
 «ENDDEFINE»
 
-«DEFINE callOperation(Boolean php, Boolean inStoreDb) FOR model::Action»
+«DEFINE callOperation(Boolean php, Boolean inStoreDb) FOR model::ActionEdge»
 	«throwException("Unknown action to expand: " + this)»
 «ENDDEFINE»
 
@@ -121,7 +121,7 @@
 	«EXPAND navigateTo(php, inStoreDb, this) FOR to» 
 «ENDDEFINE»
 
-«DEFINE navigateTo(Boolean php, Boolean inStoreDb, model::wires::NavigateAction wire) FOR model::ActionDestination»
+«DEFINE navigateTo(Boolean php, Boolean inStoreDb, model::wires::NavigateAction wire) FOR model::ActionEdgeDestination»
 	«IF php»
 		$url = null;
 		«EXPAND getNavigateActionDestination(php, inStoreDb, wire, true)»
@@ -146,7 +146,7 @@
  *
  * @param includeSession should PHPSESSID (etc) be included in the URL? Should generally be <code>true</code>
  */
-«DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::wires::NavigateAction wire, Boolean includeSession) FOR model::ActionDestination»
+«DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::wires::NavigateAction wire, Boolean includeSession) FOR model::ActionEdgeDestination»
 	«throwException("Unknown NavigateAction destination: " + this)»
 «ENDDEFINE»
 

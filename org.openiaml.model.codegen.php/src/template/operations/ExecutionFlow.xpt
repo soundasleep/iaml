@@ -358,7 +358,7 @@
 	«throwException("Cannot continue a chained operation for Wire " + this)»
 «ENDDEFINE»
 
-«DEFINE continueChainedOperations(Boolean php) FOR model::Action»
+«DEFINE continueChainedOperations(Boolean php) FOR model::ActionEdge»
 	«throwException("Cannot continue a chained operation for Action " + this)»
 «ENDDEFINE»
 

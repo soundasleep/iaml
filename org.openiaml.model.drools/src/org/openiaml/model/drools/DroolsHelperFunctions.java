@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.jaxen.JaxenException;
-import org.openiaml.model.model.Action;
+import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DynamicApplicationElementSet;
 import org.openiaml.model.model.GeneratedElement;
@@ -170,7 +170,7 @@ public class DroolsHelperFunctions {
 	 * What is the last chained operation for the given PrimitiveOperation?
 	 */
 	public PrimitiveOperation lastChainedOperation(PrimitiveOperation op) {
-		for (Action action : op.getOutActions()) {
+		for (ActionEdge action : op.getOutActions()) {
 			if (action.getTo() instanceof PrimitiveOperation) {
 				return lastChainedOperation((PrimitiveOperation) action.getTo());
 			}

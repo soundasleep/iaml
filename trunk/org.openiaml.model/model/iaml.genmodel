@@ -198,7 +198,6 @@
       <genClasses ecoreClass="iaml.ecore#//wires/SyncWire">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/SyncWire/executeOnInput"/>
       </genClasses>
-      <genClasses ecoreClass="iaml.ecore#//wires/RunAction"/>
       <genClasses ecoreClass="iaml.ecore#//wires/ParameterEdge">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/ParameterEdge/parameterName"/>
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
@@ -209,7 +208,6 @@
       <genClasses ecoreClass="iaml.ecore#//wires/SetWire">
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//wires/SetWire/executeOnInput"/>
       </genClasses>
-      <genClasses ecoreClass="iaml.ecore#//wires/NavigateAction"/>
       <genClasses ecoreClass="iaml.ecore#//wires/ConditionEdge">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"
             ecoreFeature="ecore:EReference iaml.ecore#//wires/ConditionEdge/from"/>

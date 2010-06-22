@@ -40,7 +40,7 @@
 «DEFINE anyActionImplicitButtonClickEvents(model::visual::Frame currentFrame, Boolean php) FOR emf::EObject»	
 	// this VisibleThing is not an ActionSource
 «ENDDEFINE»
-«DEFINE anyActionImplicitButtonClickEvents(model::visual::Frame currentFrame, Boolean php) FOR model::ActionSource»
+«DEFINE anyActionImplicitButtonClickEvents(model::visual::Frame currentFrame, Boolean php) FOR model::ActionEdgeSource»
 	«EXPAND implicitButtonClickEvents(currentFrame, php) FOREACH outActions-»
 «ENDDEFINE»
 
@@ -66,7 +66,7 @@
 «DEFINE implicitButtonClickEvents(model::visual::Frame currentFrame, Boolean php) FOR model::Wire»
 «ENDDEFINE»
 
-«DEFINE implicitButtonClickEvents(model::visual::Frame currentFrame, Boolean php) FOR model::Action»
+«DEFINE implicitButtonClickEvents(model::visual::Frame currentFrame, Boolean php) FOR model::ActionEdge»
 	// unknown action '«this»'
 «ENDDEFINE»
 

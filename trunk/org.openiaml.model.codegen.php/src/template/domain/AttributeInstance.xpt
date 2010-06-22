@@ -9,7 +9,7 @@
 	«throwException("Unexpected domain attribute run instance wire destination: " + this)»
 «ENDDEFINE»
 
-«DEFINE attributeInstanceCall(Boolean php, model::wires::ParameterEdgeDestination wire, Boolean inStoreDb, model::DomainAttributeInstance attribute) FOR model::ActionDestination»
+«DEFINE attributeInstanceCall(Boolean php, model::wires::ParameterEdgeDestination wire, Boolean inStoreDb, model::DomainAttributeInstance attribute) FOR model::ActionEdgeDestination»
 	«throwException("Unexpected domain attribute run instance action destination: " + this)»
 «ENDDEFINE»
 

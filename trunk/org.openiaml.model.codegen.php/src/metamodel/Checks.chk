@@ -67,9 +67,9 @@ context model::Wire ERROR "A Wire must have a 'from'" :
 context model::Wire ERROR "A Wire must have a 'to'" :
 	to != null;
 
-context model::Action ERROR "An Action must have a 'from'" :
+context model::ActionEdge ERROR "An ActionEdge must have a 'from'" :
 	from != null;
-context model::Action ERROR "An Action must have a 'to'" :
+context model::ActionEdge ERROR "An ActionEdge must have a 'to'" :
 	to != null;
 
 context model::wires::ExtendsEdge ERROR "A Role cannot extend itself" :

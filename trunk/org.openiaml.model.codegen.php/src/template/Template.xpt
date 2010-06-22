@@ -12,7 +12,7 @@
 		«throwException("We should be able to catch this exception.")» 
 	«ENDIF»
 
-	«EXPAND Frame::expandFrame FOREACH children»
+	«EXPAND Frame::expandFrame FOREACH elements»
 
 	«EXPAND expandSession FOREACH scopes»
 	
@@ -27,7 +27,7 @@
 		<body>
 		<h1>Sitemap</h1>
 		<ol>
-			«EXPAND expandSitemapFrame FOREACH children»
+			«EXPAND expandSitemapFrame FOREACH elements»
 
 			«EXPAND expandSitemapFrame FOREACH scopes»
 			

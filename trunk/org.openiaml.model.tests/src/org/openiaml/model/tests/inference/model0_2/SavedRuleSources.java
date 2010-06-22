@@ -4,6 +4,7 @@
 package org.openiaml.model.tests.inference.model0_2;
 
 import org.jaxen.JaxenException;
+import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.DynamicApplicationElementSet;
 import org.openiaml.model.model.EventTrigger;
@@ -12,7 +13,6 @@ import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
-import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SyncWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
@@ -103,8 +103,8 @@ public class SavedRuleSources extends InferenceTestCase {
 		assertHasWiresFromTo(0, wire, targetEdit, srcOp);
 
 		// there should be a run wire between these two
-		RunAction srcRw = assertHasRunAction(wire, srcEdit, targetOp);
-		RunAction targetRw = assertHasRunAction(wire, targetEdit, srcOp);
+		ActionEdge srcRw = assertHasRunAction(wire, srcEdit, targetOp);
+		ActionEdge targetRw = assertHasRunAction(wire, targetEdit, srcOp);
 		assertTrue(srcRw.isIsGenerated());
 		assertEquals("Run instance wire from edit to update (onChange)", srcRw.getGeneratedRule());
 		assertTrue(targetRw.isIsGenerated());

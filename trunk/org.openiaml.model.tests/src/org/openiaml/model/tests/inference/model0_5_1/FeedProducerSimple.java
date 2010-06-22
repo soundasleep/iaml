@@ -3,6 +3,7 @@
  */
 package org.openiaml.model.tests.inference.model0_5_1;
 
+import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
@@ -15,9 +16,7 @@ import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.Label;
-import org.openiaml.model.model.wires.NavigateAction;
 import org.openiaml.model.model.wires.ParameterEdge;
-import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
 /**
@@ -125,7 +124,7 @@ public class FeedProducerSimple extends InferenceTestCase {
 		Button button = assertHasButton(form, "link");
 		EventTrigger onClick = button.getOnClick();
 		
-		NavigateAction nav = assertHasNavigateAction(root, onClick, view);
+		ActionEdge nav = assertHasNavigateAction(root, onClick, view);
 		
 		// with a parameter
 		ParameterEdge param = assertHasParameterEdge(root, pkValue, nav);
@@ -167,7 +166,7 @@ public class FeedProducerSimple extends InferenceTestCase {
 		DomainIterator instance = assertHasDomainIterator(feed, "recent news");
 		
 		EventTrigger onAccess = form.getOnAccess();
-		RunAction run = assertHasRunAction(root, onAccess, update);
+		ActionEdge run = assertHasRunAction(root, onAccess, update);
 		assertGenerated(run);
 		
 		Property count = instance.getResults();

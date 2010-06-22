@@ -3,6 +3,7 @@
  */
 package org.openiaml.model.tests.inference.model0_5;
 
+import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
@@ -13,7 +14,6 @@ import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Map;
 import org.openiaml.model.model.visual.MapPoint;
 import org.openiaml.model.model.wires.ParameterEdge;
-import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
 /**
@@ -109,7 +109,7 @@ public class MapFormInput extends InferenceTestCase {
 
 		Operation update = assertHasOperation(point1, "update");
 
-		RunAction run = assertHasRunAction(root, change, update);
+		ActionEdge run = assertHasRunAction(root, change, update);
 		assertGenerated(run);
 
 		ParameterEdge param = assertHasParameterEdge(root, value1, run);

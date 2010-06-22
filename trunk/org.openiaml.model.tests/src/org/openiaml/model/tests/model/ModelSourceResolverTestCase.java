@@ -3,10 +3,10 @@
  */
 package org.openiaml.model.tests.model;
 
+import junit.framework.TestCase;
+
 import org.openiaml.model.tests.ModelSourceResolver;
 import org.openiaml.model.tests.ModelTestCase;
-
-import junit.framework.TestCase;
 
 /**
  * Tests the {@link ModelSourceResolver} implementation.

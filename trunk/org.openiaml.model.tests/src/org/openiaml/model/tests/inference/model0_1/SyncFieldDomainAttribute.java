@@ -4,6 +4,7 @@
 package org.openiaml.model.tests.inference.model0_1;
 
 import org.jaxen.JaxenException;
+import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
@@ -11,7 +12,6 @@ import org.openiaml.model.model.Property;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
 /**
@@ -43,7 +43,7 @@ public class SyncFieldDomainAttribute extends InferenceTestCase {
 		EventTrigger editEvent = field.getOnChange();
 
 		// this event should have a run wire
-		RunAction runWire = (RunAction) getActionFrom(editEvent, "run");
+		ActionEdge runWire = getActionFrom(editEvent, "run");
 
 		// the attribute should have an operation 'update'
 		Operation opUpdate = assertHasOperation(attribute, "update");

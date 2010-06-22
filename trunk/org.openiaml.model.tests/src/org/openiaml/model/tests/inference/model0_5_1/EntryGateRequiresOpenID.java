@@ -4,6 +4,7 @@
 package org.openiaml.model.tests.inference.model0_5_1;
 
 import org.openiaml.model.datatypes.BuiltinDataTypes;
+import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
@@ -15,8 +16,6 @@ import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Label;
 import org.openiaml.model.model.wires.ConditionEdge;
-import org.openiaml.model.model.wires.NavigateAction;
-import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
 /**
@@ -90,7 +89,7 @@ public class EntryGateRequiresOpenID extends InferenceTestCase {
 		assertHasNoSetWire(root, field, openid);
 
 		// the Frame is connected as a NavigateAction from the Gate
-		NavigateAction nav = assertHasNavigateAction(root, gate, enter);
+		ActionEdge nav = assertHasNavigateAction(root, gate, enter);
 		assertGenerated(nav);
 		
 	}
@@ -138,7 +137,7 @@ public class EntryGateRequiresOpenID extends InferenceTestCase {
 		EventTrigger click = button.getOnClick();
 		assertGenerated(click);
 		
-		NavigateAction nav = assertHasNavigateAction(root, click, gate);
+		ActionEdge nav = assertHasNavigateAction(root, click, gate);
 		assertGenerated(nav);
 		
 	}
@@ -187,7 +186,7 @@ public class EntryGateRequiresOpenID extends InferenceTestCase {
 		assertGenerated(target);
 		
 		// is run
-		RunAction run = assertHasRunAction(root, onAccess, target);
+		ActionEdge run = assertHasRunAction(root, onAccess, target);
 		assertGenerated(run);
 		
 		// with a value from the text field
@@ -213,7 +212,7 @@ public class EntryGateRequiresOpenID extends InferenceTestCase {
 		
 		EventTrigger onAccess = session.getOnAccess();
 		Operation target = assertHasOperation(openid, "update");
-		RunAction run = assertHasRunAction(root, onAccess, target);
+		ActionEdge run = assertHasRunAction(root, onAccess, target);
 		
 		Frame enter = assertHasFrame(container, "Provide Current OpenID");
 		InputTextField field = assertHasInputTextField(enter, "Current OpenID");
@@ -242,7 +241,7 @@ public class EntryGateRequiresOpenID extends InferenceTestCase {
 		
 		EventTrigger onAccess = session.getOnAccess();
 		Operation target = assertHasOperation(openid, "update");
-		RunAction run = assertHasRunAction(root, onAccess, target);
+		ActionEdge run = assertHasRunAction(root, onAccess, target);
 
 		Frame enter = assertHasFrame(container, "Provide Current OpenID");
 		InputTextField field = assertHasInputTextField(enter, "Current OpenID");

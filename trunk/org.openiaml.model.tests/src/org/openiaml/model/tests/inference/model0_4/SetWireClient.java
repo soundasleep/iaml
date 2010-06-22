@@ -5,6 +5,7 @@ package org.openiaml.model.tests.inference.model0_4;
 
 import java.util.Set;
 
+import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.EventTrigger;
@@ -18,7 +19,6 @@ import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
-import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 import org.openiaml.model.tests.inference.model0_2.SessionSyncWires;
@@ -82,7 +82,7 @@ public class SetWireClient extends InferenceTestCase {
 		assertGenerated(update);
 
 		// connected with a run wire
-		RunAction run = assertHasRunAction(page, edit, update, "run");
+		ActionEdge run = assertHasRunAction(page, edit, update, "run");
 		assertGenerated(run);
 
 		// which has a parameter
@@ -142,7 +142,7 @@ public class SetWireClient extends InferenceTestCase {
 		assertGenerated(init);
 
 		// connected with a run wire
-		RunAction run = assertHasRunAction(page, access, init, "run");
+		ActionEdge run = assertHasRunAction(page, access, init, "run");
 		assertGenerated(run);
 
 		// which has a parameter
@@ -172,7 +172,7 @@ public class SetWireClient extends InferenceTestCase {
 		// there should be an 'edit' event in target
 		EventTrigger access = target.getOnAccess();
 		CompositeOperation init = assertHasCompositeOperation(target, "init");
-		RunAction run = assertHasRunAction(page, access, init, "run");
+		ActionEdge run = assertHasRunAction(page, access, init, "run");
 
 		// newly created condition
 		CompositeCondition cond = assertHasCompositeCondition(source, "fieldValue is set");

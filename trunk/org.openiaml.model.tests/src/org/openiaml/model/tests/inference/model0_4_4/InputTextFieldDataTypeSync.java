@@ -4,6 +4,7 @@
 package org.openiaml.model.tests.inference.model0_4_4;
 
 import org.openiaml.model.datatypes.BuiltinDataTypes;
+import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Condition;
@@ -24,7 +25,6 @@ import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Label;
 import org.openiaml.model.model.wires.ConditionEdge;
-import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.tests.inference.ValidInferenceTestCase;
 
 /**
@@ -251,7 +251,7 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 
 		// 'n' first sets the value of the label
 		OperationCallNode callUpdate = assertHasOperationCallNode(validate, "update label");
-		RunAction runUpdate = assertHasRunAction(validate, callUpdate, update);
+		ActionEdge runUpdate = assertHasRunAction(validate, callUpdate, update);
 		assertHasExecutionEdge(validate, check, callUpdate, "no");
 
 		// with a parmameter of the exception
@@ -335,7 +335,7 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 		EventTrigger onEdit = email.getOnChange();
 		Operation update = assertHasOperation(integer, "update");
 
-		RunAction run = assertHasRunAction(root, onEdit, update);
+		ActionEdge run = assertHasRunAction(root, onEdit, update);
 		assertGenerated(run);
 
 		// should be an incoming condition edge
@@ -365,7 +365,7 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 		EventTrigger onEdit = integer.getOnChange();
 		Operation update = assertHasOperation(email, "update");
 
-		RunAction run = assertHasRunAction(root, onEdit, update);
+		ActionEdge run = assertHasRunAction(root, onEdit, update);
 		assertGenerated(run);
 
 		// should be an incoming condition edge
@@ -431,7 +431,7 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 		Property emailValue = assertHasFieldValue(email);
 
 		// Integer.onInit should call Integer.update(Email.fieldValue)
-		RunAction run = assertHasRunAction(root, onAccess, init);
+		ActionEdge run = assertHasRunAction(root, onAccess, init);
 		assertHasParameterEdge(root, emailValue, run);
 
 		// now make sure that the condition is connected
@@ -459,11 +459,11 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 		Operation init = assertHasOperation(integer, "init");
 
 		// Integer.onInit should call Integer.update(Email.fieldValue)
-		RunAction runInit = assertHasRunAction(root, onAccess, init);
+		ActionEdge runInit = assertHasRunAction(root, onAccess, init);
 
 		// validate operation is also called
 		CompositeOperation validate = assertHasCompositeOperation(integer, "validate");
-		RunAction runValidate = assertHasRunAction(root, onAccess, validate);
+		ActionEdge runValidate = assertHasRunAction(root, onAccess, validate);
 
 		// it should be a lower priority
 		assertTrue("Run priority '" + runValidate.getPriority() + "' should be lower than '" + runInit.getPriority() + "'",
@@ -487,7 +487,7 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 
 		// validate operation is also called
 		CompositeOperation validate = assertHasCompositeOperation(integer, "validate");
-		RunAction runValidate = assertHasRunAction(root, onAccess, validate);
+		ActionEdge runValidate = assertHasRunAction(root, onAccess, validate);
 
 		// the 'fieldValue is set' condition
 		Condition isSet = assertHasCondition(integer, "fieldValue is set");

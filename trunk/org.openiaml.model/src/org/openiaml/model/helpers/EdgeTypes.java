@@ -104,13 +104,13 @@ public class EdgeTypes {
 		) );
 		
 		edgeTypes.add( new EdgeType(
-				ModelPackage.eINSTANCE.getAction(), /* type */
-				ModelPackage.eINSTANCE.getActionSource(), /* source */
-				ModelPackage.eINSTANCE.getActionDestination(), /* destination */
-				ModelPackage.eINSTANCE.getAction_From(), /* from ref */
-				ModelPackage.eINSTANCE.getAction_To(), /* to ref */
-				ModelPackage.eINSTANCE.getActionSource_OutActions(), /* from opposite */
-				ModelPackage.eINSTANCE.getActionDestination_InActions() /* to opposite */
+				ModelPackage.eINSTANCE.getActionEdge(), /* type */
+				ModelPackage.eINSTANCE.getActionEdgeSource(), /* source */
+				ModelPackage.eINSTANCE.getActionEdgeDestination(), /* destination */
+				ModelPackage.eINSTANCE.getActionEdge_From(), /* from ref */
+				ModelPackage.eINSTANCE.getActionEdge_To(), /* to ref */
+				ModelPackage.eINSTANCE.getActionEdgeSource_OutActions(), /* from opposite */
+				ModelPackage.eINSTANCE.getActionEdgeDestination_InActions() /* to opposite */
 		) );
 
 		edgeTypes.add( new EdgeType(

@@ -8,9 +8,9 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xsd.XSDSimpleTypeDefinition;
 import org.openiaml.model.FileReference;
 import org.openiaml.model.model.Accessible;
-import org.openiaml.model.model.Action;
-import org.openiaml.model.model.ActionDestination;
-import org.openiaml.model.model.ActionSource;
+import org.openiaml.model.model.ActionEdge;
+import org.openiaml.model.model.ActionEdgeDestination;
+import org.openiaml.model.model.ActionEdgeSource;
 import org.openiaml.model.model.Changeable;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
@@ -454,8 +454,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return edge;
 	}
 	
-	public RunAction generatedRunAction(GeneratesElements by, ContainsWires container, ActionSource source, ActionDestination target) throws InferenceException {
-		RunAction wire = (RunAction) createRelationship(container, WiresPackage.eINSTANCE.getRunAction(), source, target, ModelPackage.eINSTANCE.getContainsWires_Actions(), ModelPackage.eINSTANCE.getAction_From(), ModelPackage.eINSTANCE.getAction_To());
+	public RunAction generatedRunAction(GeneratesElements by, ContainsWires container, ActionEdgeSource source, ActionEdgeDestination target) throws InferenceException {
+		RunAction wire = (RunAction) createRelationship(container, WiresPackage.eINSTANCE.getRunAction(), source, target, ModelPackage.eINSTANCE.getContainsWires_Actions(), ModelPackage.eINSTANCE.getActionEdge_From(), ModelPackage.eINSTANCE.getActionEdge_To());
 		setGeneratedBy(wire, by);
 		return wire;
 	}
@@ -490,8 +490,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return wire;
 	}
 
-	public NavigateAction generatedNavigateAction(GeneratesElements by, ContainsWires container, ActionSource source, ActionDestination target) throws InferenceException {
-		NavigateAction wire = (NavigateAction) createRelationship(container, WiresPackage.eINSTANCE.getNavigateAction(), source, target, ModelPackage.eINSTANCE.getContainsWires_Actions(), ModelPackage.eINSTANCE.getAction_From(), ModelPackage.eINSTANCE.getAction_To());
+	public NavigateAction generatedNavigateAction(GeneratesElements by, ContainsWires container, ActionEdgeSource source, ActionEdgeDestination target) throws InferenceException {
+		NavigateAction wire = (NavigateAction) createRelationship(container, WiresPackage.eINSTANCE.getNavigateAction(), source, target, ModelPackage.eINSTANCE.getContainsWires_Actions(), ModelPackage.eINSTANCE.getActionEdge_From(), ModelPackage.eINSTANCE.getActionEdge_To());
 		setGeneratedBy(wire, by);
 		return wire;
 	}
@@ -680,8 +680,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setValue(element, DomainPackage.eINSTANCE.getDomainIterator_Query(), value);
 	}
 
-	public void setPriority(Action element, int value) throws InferenceException {
-		setValue(element, ModelPackage.eINSTANCE.getAction_Priority(), value);
+	public void setPriority(ActionEdge element, int value) throws InferenceException {
+		setValue(element, ModelPackage.eINSTANCE.getActionEdge_Priority(), value);
 	}
 
 	public void setLimit(DomainIterator element, int value) throws InferenceException {

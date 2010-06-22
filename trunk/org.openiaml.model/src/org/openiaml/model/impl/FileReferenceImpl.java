@@ -7,7 +7,6 @@ import java.io.File;
 
 import org.eclipse.emf.common.CommonPlugin;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.FileReference;
 import org.openiaml.model.model.domain.DomainSource;
 

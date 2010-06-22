@@ -110,7 +110,7 @@ rule "Add 'can cast?' condition check for onChange connecting to Update"
 		event : EventTrigger ( source.onChange == event )
 		upd : Operation ( name == "update", eContainer == target )
 		
-		run : RunAction ( from == event, to == upd )
+		run : ActionEdge ( from == event, to == upd )
 		
 		condition : Condition ( name == "can cast?", eContainer == target )
 		
@@ -147,7 +147,7 @@ rule "Add 'can cast?' condition check for onAccess connecting to Init"
 		event : EventTrigger ( source.onAccess == event )
 		upd : Operation ( name == "init", eContainer == source )
 		
-		run : RunAction ( from == event, to == upd )
+		run : ActionEdge ( from == event, to == upd )
 		p2 : ParameterEdge ( from == fieldValue, to == run )
 		
 		condition : Condition ( name == "can cast?", eContainer == source )
@@ -180,16 +180,16 @@ rule "After 'init' has been called on a typed element, call 'validate'"
 		event : EventTrigger ( source.onAccess == event )
 		upd : Operation ( name == "init", eContainer == source )
 		
-		run : RunAction ( from == event, to == upd )
+		run : ActionEdge ( from == event, to == upd )
 		
 		validate : Operation ( name == "validate", eContainer == source )
 		
-		not ( runValidate : RunAction ( from == event, to == validate ))
+		not ( runValidate : ActionEdge ( from == event, to == validate ))
 		
 		eval ( handler.veto( source ))
 	
 	then
-		RunAction runValidate = handler.generatedRunAction(source, source, event, validate);
+		ActionEdge runValidate = handler.generatedActionEdge(source, source, event, validate);
 		handler.setName(runValidate, "call validate after init");
 		// must be a lower priority 		
 		handler.setPriority(runValidate, run.getPriority() - 10);
@@ -209,10 +209,10 @@ rule "Only call 'validate' operation onAccess if fieldValue has been set"
 		event : EventTrigger ( source.onAccess == event )
 		upd : Operation ( name == "init", eContainer == source )
 		
-		run : RunAction ( from == event, to == upd )
+		run : ActionEdge ( from == event, to == upd )
 		
 		validate : Operation ( name == "validate", eContainer == source )
-		runValidate : RunAction ( from == event, to == validate )
+		runValidate : ActionEdge ( from == event, to == validate )
 		
 		isSet : Condition ( name == "fieldValue is set", eContainer == source )
 		

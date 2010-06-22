@@ -120,12 +120,12 @@ rule "Connect Next button to 'next' operation on DomainIterator"
 		
 		nextOp : Operation ( instance.next == nextOp )
 	
-		not ( run : RunAction ( from == onClick, to == nextOp ))  
+		not ( run : ActionEdge ( from == onClick, to == nextOp ))  
 		
 		eval ( handler.veto( next ))
 
 	then
-		RunAction run = handler.generatedRunAction(next, next, onClick, nextOp);
+		ActionEdge run = handler.generatedActionEdge(next, next, onClick, nextOp);
 		handler.setName(run, "run");
 		queue.add(run, drools);
 
@@ -144,7 +144,7 @@ rule "Connect 'hasNext' condition to Next button action"
 		onClick : EventTrigger ( next.onClick == onClick )
 		
 		nextOp : Operation ( instance.next == nextOp )
-		run : RunAction ( from == onClick, to == nextOp )
+		run : ActionEdge ( from == onClick, to == nextOp )
 	
 		not ( ce : ConditionEdge ( from == hasNext, to == run ) )  
 		
@@ -169,12 +169,12 @@ rule "Connect Previous button to 'previous' operation on DomainIterator"
 		
 		prevOp : Operation ( instance.previous == prevOp )
 	
-		not ( run : RunAction ( from == onClick, to == prevOp ))  
+		not ( run : ActionEdge ( from == onClick, to == prevOp ))  
 		
 		eval ( handler.veto( prev ))
 
 	then
-		RunAction run = handler.generatedRunAction(prev, prev, onClick, prevOp);
+		ActionEdge run = handler.generatedActionEdge(prev, prev, onClick, prevOp);
 		handler.setName(run, "run");
 		queue.add(run, drools);
 
@@ -193,7 +193,7 @@ rule "Connect 'hasPrevious' condition to Previous button action"
 		onClick : EventTrigger ( prev.onClick == onClick )
 		
 		prevOp : Operation ( instance.previous == prevOp )
-		run : RunAction ( from == onClick, to == prevOp )
+		run : ActionEdge ( from == onClick, to == prevOp )
 	
 		not ( ce : ConditionEdge ( from == hasPrevious, to == run ) )  
 		
@@ -218,12 +218,12 @@ rule "Connect First button to 'reset' operation on DomainIterator"
 		
 		resetOp : Operation ( instance.reset == resetOp )
 	
-		not ( run : RunAction ( from == onClick, to == resetOp ))  
+		not ( run : ActionEdge ( from == onClick, to == resetOp ))  
 		
 		eval ( handler.veto( first ))
 
 	then
-		RunAction run = handler.generatedRunAction(first, first, onClick, resetOp);
+		ActionEdge run = handler.generatedActionEdge(first, first, onClick, resetOp);
 		handler.setName(run, "run");
 		queue.add(run, drools);
 
@@ -242,7 +242,7 @@ rule "Connect 'not empty' condition to First button action"
 		onClick : EventTrigger ( first.onClick == onClick )
 		
 		resetOp : Operation ( instance.reset == resetOp )
-		run : RunAction ( from == onClick, to == resetOp )
+		run : ActionEdge ( from == onClick, to == resetOp )
 	
 		not ( ce : ConditionEdge ( from == notEmpty, to == run ) )  
 		
@@ -267,12 +267,12 @@ rule "Connect Last button to 'jump' operation on DomainIterator"
 		
 		jumpOp : Operation ( instance.jump == jumpOp )
 	
-		not ( run : RunAction ( from == onClick, to == jumpOp ))  
+		not ( run : ActionEdge ( from == onClick, to == jumpOp ))  
 		
 		eval ( handler.veto( last ))
 
 	then
-		RunAction run = handler.generatedRunAction(last, last, onClick, jumpOp);
+		ActionEdge run = handler.generatedActionEdge(last, last, onClick, jumpOp);
 		handler.setName(run, "run");
 		queue.add(run, drools);
 
@@ -291,7 +291,7 @@ rule "Connect 'not empty' condition to Last button action"
 		onClick : EventTrigger ( last.onClick == onClick )
 		
 		jumpOp : Operation ( instance.jump == jumpOp )
-		run : RunAction ( from == onClick, to == jumpOp )
+		run : ActionEdge ( from == onClick, to == jumpOp )
 	
 		not ( ce : ConditionEdge ( from == notEmpty, to == run ) )  
 		
@@ -324,7 +324,7 @@ rule "Create 'target' property in Last button"
 		
 end
 
-rule "Connect 'target' property to RunAction in Last button"
+rule "Connect 'target' property to ActionEdge in Last button"
 	when
 		instance : DomainIterator (  )
 		
@@ -337,7 +337,7 @@ rule "Connect 'target' property to RunAction in Last button"
 		property : Property ( eContainer == last, name == "target" )
 		
 		jumpOp : Operation ( instance.jump == jumpOp )
-		run : RunAction ( from == onClick, to == jumpOp )
+		run : ActionEdge ( from == onClick, to == jumpOp )
 		
 		not ( param : ParameterEdge ( from == property, to == run ))
 		
@@ -383,16 +383,16 @@ rule "'Last' button needs to call 'update target' before calling 'reset'"
 		property : Property ( eContainer == last, name == "target" )
 		
 		jumpOp : Operation ( instance.jump == jumpOp )
-		run : RunAction ( from == onClick, to == jumpOp )
+		run : ActionEdge ( from == onClick, to == jumpOp )
 		
 		op : Operation ( eContainer == last, name == "update target" )
 		
-		not ( run2 : RunAction ( from == onClick, to == op ) ) 
+		not ( run2 : ActionEdge ( from == onClick, to == op ) ) 
 		
 		eval ( handler.veto( last ))
 
 	then
-		RunAction run2 = handler.generatedRunAction(last, last, onClick, op);
+		ActionEdge run2 = handler.generatedActionEdge(last, last, onClick, op);
 		handler.setName(run2, "update target");
 		handler.setPriority(run2, run.getPriority() + 100); 	// higher = run earlier
 		queue.add(run2, drools);
@@ -470,12 +470,12 @@ rule "Connect Instance.onChange to Results.update"
 		label : VisibleThing ( eContainer == form, name == "Results" )
 		updateOp : Operation ( eContainer == label, name == "update" )
 		
-		not ( run : RunAction ( from == event, to == updateOp ) )
+		not ( run : ActionEdge ( from == event, to == updateOp ) )
 		
 		eval ( handler.veto( set ))
 		
 	then
-		RunAction run = handler.generatedRunAction(set, set, event, updateOp);
+		ActionEdge run = handler.generatedActionEdge(set, set, event, updateOp);
 		handler.setName(run, "update");
 		queue.add(run, drools);
 		
@@ -493,7 +493,7 @@ rule "Connect results parameter to Results label update (onChange)"
 		label : VisibleThing ( eContainer == form, name == "Results" )
 		updateOp : Operation ( eContainer == label, name == "update" )
 		
-		run : RunAction ( from == event, to == updateOp )
+		run : ActionEdge ( from == event, to == updateOp )
 		property : Property ( instance.results == property )
 		
 		not ( param : ParameterEdge ( from == property, to == run ))
@@ -523,12 +523,12 @@ rule "Connect Instance.onAccess to Results.update"
 		label : VisibleThing ( eContainer == form, name == "Results" )
 		updateOp : Operation ( eContainer == label, name == "update" )
 		
-		not ( run : RunAction ( from == event, to == updateOp ) )
+		not ( run : ActionEdge ( from == event, to == updateOp ) )
 		
 		eval ( handler.veto( set ))
 		
 	then
-		RunAction run = handler.generatedRunAction(set, set, event, updateOp);
+		ActionEdge run = handler.generatedActionEdge(set, set, event, updateOp);
 		handler.setName(run, "update");
 		queue.add(run, drools);
 		
@@ -546,7 +546,7 @@ rule "Connect results parameter to Results label update (onAccess)"
 		label : VisibleThing ( eContainer == form, name == "Results" )
 		updateOp : Operation ( eContainer == label, name == "update" )
 		
-		run : RunAction ( from == event, to == updateOp )
+		run : ActionEdge ( from == event, to == updateOp )
 		property : Property ( instance.results == property )
 		
 		not ( param : ParameterEdge ( from == property, to == run ))

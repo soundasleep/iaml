@@ -87,15 +87,15 @@ rule "Instruct 'logout' page to follow to the actual logout destination if set"
 		logout : Frame (eContainer == scope, name=="logout" )
 		
 		destination : Frame ( this != logout )
-		navigate : NavigateAction ( from == login_handler, to == destination, name == "logout")
+		navigate : ActionEdge ( from == login_handler, to == destination, name == "logout")
 
 		access : EventTrigger ( eContainer == logout, logout.onAccess == access )
-		not (NavigateAction ( from == access, to == destination ))
+		not (ActionEdge ( from == access, to == destination ))
 		
 		eval ( handler.veto( login_handler ))
 	
 	then
-		NavigateAction wire = handler.generatedNavigateAction(login_handler, logout, access, destination);
+		ActionEdge wire = handler.generatedActionEdge(login_handler, logout, access, destination);
 		handler.setName(wire, "redirect to intended logout page");
 		queue.add(wire, drools);
 
@@ -167,12 +167,12 @@ rule "Connect 'access' event to 'check' operations"
 		page : Frame( eContainer == scope )
 		access : EventTrigger( page.onAccess == access, eContainer == page )
 		check : CompositeOperation( name == "check key" || name == "check instance", eContainer == scope )
-		not (RunAction( from == access, to == check ))
+		not (ActionEdge( from == access, to == check ))
 				
 		eval ( handler.veto( scope ))
 		
 	then
-		RunAction wire = handler.generatedRunAction(scope, page, access, check);
+		ActionEdge wire = handler.generatedActionEdge(scope, page, access, check);
 		handler.setName(wire, "run");
 		handler.setPriority(wire, 100); // high priority
 		queue.add(wire, drools);	
@@ -190,7 +190,7 @@ rule "Connect 'login key' parameter to 'check key' operation run wire"
 		value : Property( )
 		mySetWire : SetWire( from == login_handler, to == value, name == "set" )
 		
-		wire : RunAction( from == access, to == check )
+		wire : ActionEdge( from == access, to == check )
 		not (ParameterEdge( from == value, to == wire ))
 				
 		eval ( handler.veto( scope ))
@@ -209,12 +209,12 @@ rule "Connect 'fail' wire from 'check key' or 'check instance' operation to Logi
 		login_handler : LoginHandler( eContainer == scope )
 		login : Frame (eContainer == container, name=="login" )
 		check : CompositeOperation( name == "check key" || name == "check instance", eContainer == scope )
-		not (NavigateAction( from == check, to == login, name == "fail") )
+		not (ActionEdge( from == check, to == login, name == "fail") )
 			
 		eval ( handler.veto( scope ))
 	
 	then
-		NavigateAction fail = handler.generatedNavigateAction(scope, scope, check, login);
+		ActionEdge fail = handler.generatedActionEdge(scope, scope, check, login);
 		handler.setName(fail, "fail");
 		queue.add(fail, drools);
 		
@@ -228,12 +228,12 @@ rule "Connect 'fail' wire from 'check key' or 'check instance' operation to Logi
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		login : Frame (eContainer == login_session, name=="login" )
 		check : CompositeOperation( name == "check key" || name == "check instance", eContainer == scope )
-		not (NavigateAction( from == check, to == login, name == "fail") )
+		not (ActionEdge( from == check, to == login, name == "fail") )
 			
 		eval ( handler.veto( scope ))
 	
 	then
-		NavigateAction fail = handler.generatedNavigateAction(scope, scope, check, login);
+		ActionEdge fail = handler.generatedActionEdge(scope, scope, check, login);
 		handler.setName(fail, "fail");
 		queue.add(fail, drools);
 		
@@ -372,7 +372,7 @@ rule "Connect expected login key as parameter to check key operation"
 		page : Frame( eContainer == scope )
 		access : EventTrigger( name == "access", eContainer == page )
 		check : CompositeOperation( name == "check key", eContainer == scope )
-		wire : RunAction( from == access, to == check )
+		wire : ActionEdge( from == access, to == check )
 		login_handler : LoginHandler( eContainer == scope )
 		
 		expected : StaticValue( ) 
@@ -423,12 +423,12 @@ rule "Connect 'Login' button to 'do login' operation"
 		
 		operation : Operation ( eContainer == login_session, name == "do login" )
 		
-		not (RunAction ( from == button, to == operation, name == "onClick"))
+		not (ActionEdge ( from == button, to == operation, name == "onClick"))
 		
 		eval ( handler.veto( login_handler ))
 
 	then
-		RunAction run = handler.generatedRunAction(login_handler, login, button, operation);
+		ActionEdge run = handler.generatedActionEdge(login_handler, login, button, operation);
 		handler.setName(run, "onClick");
 		queue.add(run, drools);
 
@@ -477,7 +477,7 @@ rule "Create contents of 'do login' operation [type=secret_key]"
 		fieldValue : Property( field.fieldValue == fieldValue )
 		
 		loginOperation : CompositeOperation ( eContainer == login_session, name == "do login" )
-		runClick : RunAction ( from == button, to == loginOperation, name == "onClick" )
+		runClick : ActionEdge ( from == button, to == loginOperation, name == "onClick" )
 		
 		not ( StartNode ( eContainer == loginOperation ))
 		
@@ -643,7 +643,7 @@ rule "Connect text fields for login form of 'login' pages to 'do login' run wire
 		fieldValue : Property ( field.fieldValue == fieldValue )
 		
 		button : Button ( eContainer == form, name == "Login" )
-		run : RunAction ( from == button, to == operation, name == "onClick" )
+		run : ActionEdge ( from == button, to == operation, name == "onClick" )
 		
 		not ( ParameterEdge ( from == fieldValue, to == run, name == attribute.name )) 
 		
@@ -677,7 +677,7 @@ rule "Connect text fields for login form of 'login' pages to 'do login' run wire
 		fieldValue : Property ( field.fieldValue == fieldValue )		
 		
 		button : Button ( eContainer == form, name == "Login" )
-		run : RunAction ( from == button, to == operation, name == "onClick" )
+		run : ActionEdge ( from == button, to == operation, name == "onClick" )
 		
 		not ( ParameterEdge ( from == fieldValue, to == run, name == attribute.name )) 
 		
@@ -995,14 +995,14 @@ rule "Connect successful 'login' operation to navigate to final 'login' page"
 		
 		login_operation : CompositeOperation( eContainer == login_session, name == "do login" )		
 		login_target : Frame ( ) 
-		login_wire : NavigateAction( from == login_handler, to == login_target, name == "login" )
+		login_wire : ActionEdge( from == login_handler, to == login_target, name == "login" )
 
-		not (NavigateAction(from == login_operation, to == login_target))
+		not (ActionEdge(from == login_operation, to == login_target))
 		
 		eval ( handler.veto( login_handler ))
 			
 	then
-		NavigateAction wire = handler.generatedNavigateAction(login_handler, scope, login_operation, login_target);
+		ActionEdge wire = handler.generatedActionEdge(login_handler, scope, login_operation, login_target);
 		handler.setName(wire, "navigate on successful login");
 		queue.add(wire, drools);
 				
@@ -1017,12 +1017,12 @@ rule "Connect failed 'login' operation to navigate back to 'login'"
 		login : Frame (eContainer == login_session, name=="login" )
 		login_operation : CompositeOperation( eContainer == login_session, name == "do login" )		
 
-		not (NavigateAction(from == login_operation, to == login, name == "fail"))
+		not (ActionEdge(from == login_operation, to == login, name == "fail"))
 		
 		eval ( handler.veto( login_handler ))
 			
 	then
-		NavigateAction wire = handler.generatedNavigateAction(login_handler, scope, login_operation, login);
+		ActionEdge wire = handler.generatedActionEdge(login_handler, scope, login_operation, login);
 		handler.setName(wire, "fail");
 		queue.add(wire, drools);
 		
@@ -1053,7 +1053,7 @@ rule "Connect 'access' operation for logout page to 'do logout' operation"
 		login_handler : LoginHandler( eContainer == scope )
 		
 		logout : Frame ( )
-		wire : NavigateAction ( from == login_handler, to == logout, name == "logout" )
+		wire : ActionEdge ( from == login_handler, to == logout, name == "logout" )
 		
 		logout_operation : Operation ( eContainer == scope, name == "do logout" )
 		access : EventTrigger ( eContainer == logout, logout.onAccess == access )
@@ -1061,12 +1061,12 @@ rule "Connect 'access' operation for logout page to 'do logout' operation"
 		# all operations will have to run it as well.
 		# add it to the end of the access operation chain
 		
-		not (RunAction( from == access, to == logout_operation ))
+		not (ActionEdge( from == access, to == logout_operation ))
 		
 		eval ( handler.veto( login_handler ))
 	
 	then 
-		RunAction run = handler.generatedRunAction(login_handler, logout, access, logout_operation);
+		ActionEdge run = handler.generatedActionEdge(login_handler, logout, access, logout_operation);
 		handler.setName(run, "run logout operation");
 		queue.add(run, drools);
 
@@ -1083,14 +1083,14 @@ rule "Connect new navigate wire from logout to logout destination"
 		# in this case, we want all accesses to "do logout" to always redirect to "home" (for example)
 		final_operation : CompositeOperation ( eval(final_operation.equals(functions.lastChainedOperation(logout_operation))) )
 		destination : Frame ( )
-		logout_wire : NavigateAction( from == login_handler, to == destination, name == "logout" )
+		logout_wire : ActionEdge( from == login_handler, to == destination, name == "logout" )
 		
-		not (NavigateAction( from == final_operation, to == destination ))
+		not (ActionEdge( from == final_operation, to == destination ))
 		
 		eval ( handler.veto( login_handler ))
 	
 	then
-		NavigateAction wire = handler.generatedNavigateAction(login_handler, scope, final_operation, destination);
+		ActionEdge wire = handler.generatedActionEdge(login_handler, scope, final_operation, destination);
 		handler.setName(wire, "navigate on successful logout");
 		queue.add(wire, drools);
 		
@@ -1300,7 +1300,7 @@ rule "Create default login successful page"
 		scope : Session ( )
 		login_handler : LoginHandler( eContainer == scope )
 		
-		not ( wire : NavigateAction (from == login_handler, name == "login" ))
+		not ( wire : ActionEdge (from == login_handler, name == "login" ))
 		
 		eval ( handler.veto( login_handler ))
 
@@ -1309,7 +1309,7 @@ rule "Create default login successful page"
 		handler.setName(page, "Login Successful");
 		queue.add(page, drools);
 		
-		NavigateAction wire = handler.generatedNavigateAction(login_handler, login_handler, login_handler, page);
+		ActionEdge wire = handler.generatedActionEdge(login_handler, login_handler, login_handler, page);
 		handler.setName(wire, "login");
 		queue.add(wire, drools);
 
@@ -1321,7 +1321,7 @@ rule "Create default logout successful page"
 		scope : Session ( )
 		login_handler : LoginHandler( eContainer == scope )
 		
-		not ( wire : NavigateAction (from == login_handler, name == "logout" ))
+		not ( wire : ActionEdge (from == login_handler, name == "logout" ))
 		
 		eval ( handler.veto( login_handler ))
 
@@ -1330,7 +1330,7 @@ rule "Create default logout successful page"
 		handler.setName(page, "Logout Successful");
 		queue.add(page, drools);
 		
-		NavigateAction wire = handler.generatedNavigateAction(login_handler, login_handler, login_handler, page);
+		ActionEdge wire = handler.generatedActionEdge(login_handler, login_handler, login_handler, page);
 		handler.setName(wire, "logout");
 		queue.add(wire, drools);
 

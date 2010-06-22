@@ -25,11 +25,11 @@ function boolean connects(Wire wire, Object a, Object b) {
 /**
  * TODO these rules should be refactored somehow.
  *
- * @inference SyncWire,RunAction,ConditionEdge 
- *		{@model RunAction RunActions} with incoming {@model ConditionEdge conditions} will be 
+ * @inference SyncWire,ActionEdge,ConditionEdge 
+ *		{@model ActionEdge ActionEdges} with incoming {@model ConditionEdge conditions} will be 
  *		copied to elements created by {@model SyncWire SyncWires}.
  */
-rule "Connect ConditionEdges to RunActions created by SyncWires (edit/update) (onChange)"
+rule "Connect ConditionEdges to ActionEdges created by SyncWires (edit/update) (onChange)"
 	when
 		# we have a sync wire
 		sw : SyncWire( )
@@ -40,7 +40,7 @@ rule "Connect ConditionEdges to RunActions created by SyncWires (edit/update) (o
 		# which has a run wire between event and operation (generated)
 		event : EventTrigger( source.onChange == event )
 		operation : Operation( eContainer == target, name=="update" )		
-		run : RunAction( eContainer == sw, from == event, to == operation, name == "run" )
+		run : ActionEdge( eContainer == sw, from == event, to == operation, name == "run" )
 		
 		# and the sync wire had a condition
 		condition : Condition ( )
@@ -59,7 +59,7 @@ rule "Connect ConditionEdges to RunActions created by SyncWires (edit/update) (o
 
 end
 
-rule "Connect ConditionEdges to RunActions created by SyncWires (access/init) (onAccess)"
+rule "Connect ConditionEdges to ActionEdges created by SyncWires (access/init) (onAccess)"
 	when
 		# we have a sync wire
 		sw : SyncWire( )
@@ -70,7 +70,7 @@ rule "Connect ConditionEdges to RunActions created by SyncWires (access/init) (o
 		# which has a run wire between event and operation (generated)
 		event : EventTrigger( source.onAccess == event )
 		operation : Operation( eContainer == source, name=="init" )		
-		run : RunAction( eContainer == sw, from == event, to == operation, name == "run" )
+		run : ActionEdge( eContainer == sw, from == event, to == operation, name == "run" )
 		
 		# and targets' value is being used for source's init
 		fvalue : Property ( target.fieldValue == fvalue )
@@ -94,12 +94,12 @@ rule "Connect ConditionEdges to RunActions created by SyncWires (access/init) (o
 end
 
 /**
- * @inference SyncWire,RunAction,ConditionEdge,ParameterEdge 
- *		{@model RunAction RunActions} with incoming {@model ConditionEdge conditions} 
+ * @inference SyncWire,ActionEdge,ConditionEdge,ParameterEdge 
+ *		{@model ActionEdge ActionEdges} with incoming {@model ConditionEdge conditions} 
  *		with {@model ParameterEdge parameters} will be copied to elements 
  *		created by {@model SyncWire SyncWires}.
  */
-rule "Connect ParameterEdges to ConditionEdges connected to RunActions created by SyncWires (edit/update) (onChange)"
+rule "Connect ParameterEdges to ConditionEdges connected to ActionEdges created by SyncWires (edit/update) (onChange)"
 	when
 		# we have a syncwire
 		sw : SyncWire( )
@@ -107,16 +107,16 @@ rule "Connect ParameterEdges to ConditionEdges connected to RunActions created b
 		target : ContainsOperations( )
 		eval(functions.connects(sw, source, target))  
 		
-		# that has created a RunAction
+		# that has created a ActionEdge
 		event : EventTrigger( source.onChange == event )
 		operation : Operation( eContainer == target, name=="update" )
-		run : RunAction( eContainer == sw, from == event, to == operation, name == "run" )
+		run : ActionEdge( eContainer == sw, from == event, to == operation, name == "run" )
 
 		# and this SyncWire has a condition
 		condition : Condition ( )
 		sourceCw : ConditionEdge( from == condition, to == sw )
 		
-		# and the RunAction has the same condition 
+		# and the ActionEdge has the same condition 
 		targetCw : ConditionEdge (from == condition, to == run ) 
 		
 		# and the SyncWire had a parameter
@@ -136,7 +136,7 @@ rule "Connect ParameterEdges to ConditionEdges connected to RunActions created b
 
 end
 
-rule "Connect ParameterEdges to ConditionEdges connected to RunActions created by SyncWires (access/init) (onAccess)"
+rule "Connect ParameterEdges to ConditionEdges connected to ActionEdges created by SyncWires (access/init) (onAccess)"
 	when
 		# we have a syncwire
 		sw : SyncWire( )
@@ -144,10 +144,10 @@ rule "Connect ParameterEdges to ConditionEdges connected to RunActions created b
 		target : ContainsOperations( )
 		eval(functions.connects(sw, source, target))  
 		
-		# that has created a RunAction
+		# that has created a ActionEdge
 		event : EventTrigger( source.onAccess == event )
 		operation : Operation( eContainer == source, name=="init" )
-		run : RunAction( eContainer == sw, from == event, to == operation, name == "run" )
+		run : ActionEdge( eContainer == sw, from == event, to == operation, name == "run" )
 
 		# and targets' value is being used for source's init
 		fvalue : Property ( target.fieldValue == fvalue ) 
@@ -157,7 +157,7 @@ rule "Connect ParameterEdges to ConditionEdges connected to RunActions created b
 		condition : Condition ( )
 		sourceCw : ConditionEdge( from == condition, to == sw )
 		
-		# and the RunAction has the same condition 
+		# and the ActionEdge has the same condition 
 		targetCw : ConditionEdge (from == condition, to == run ) 
 		
 		# and the SyncWire had a parameter
@@ -178,11 +178,11 @@ rule "Connect ParameterEdges to ConditionEdges connected to RunActions created b
 end
 
 /**
- * @inference SetWire,RunAction,ConditionEdge 
- *		{@model RunAction RunActions} with incoming {@model ConditionEdge conditions} will be 
+ * @inference SetWire,ActionEdge,ConditionEdge 
+ *		{@model ActionEdge ActionEdges} with incoming {@model ConditionEdge conditions} will be 
  *		copied to elements created by {@model SetWire}s.
  */
-rule "Connect ConditionEdges to RunActions created by SetWires (edit/update) (onChange)"
+rule "Connect ConditionEdges to ActionEdges created by SetWires (edit/update) (onChange)"
 	when
 		# we have a sync wire
 		sw : SetWire( )
@@ -193,7 +193,7 @@ rule "Connect ConditionEdges to RunActions created by SetWires (edit/update) (on
 		# which has a run wire between event and operation (generated)
 		event : EventTrigger( source.onChange == event )
 		operation : Operation( eContainer == target, name=="update" )		
-		run : RunAction( eContainer == sw, from == event, to == operation, name == "run" )
+		run : ActionEdge( eContainer == sw, from == event, to == operation, name == "run" )
 		
 		# and the sync wire had a condition
 		condition : Condition ( )
@@ -212,7 +212,7 @@ rule "Connect ConditionEdges to RunActions created by SetWires (edit/update) (on
 
 end
 
-rule "Connect ConditionEdges to RunActions created by SetWires (access/init) (onAccess)"
+rule "Connect ConditionEdges to ActionEdges created by SetWires (access/init) (onAccess)"
 	when
 		# we have a sync wire
 		sw : SetWire( )
@@ -223,7 +223,7 @@ rule "Connect ConditionEdges to RunActions created by SetWires (access/init) (on
 		# which has a run wire between event and operation (generated)
 		event : EventTrigger( source.onAccess == event )
 		operation : Operation( eContainer == source, name=="init" )		
-		run : RunAction( eContainer == sw, from == event, to == operation, name == "run" )
+		run : ActionEdge( eContainer == sw, from == event, to == operation, name == "run" )
 		
 		# and targets' value is being used for source's init
 		fvalue : Property ( target.fieldValue == fvalue )
@@ -247,12 +247,12 @@ rule "Connect ConditionEdges to RunActions created by SetWires (access/init) (on
 end
 
 /**
- * @inference SetWire,RunAction,ConditionEdge,ParameterEdge 
- *		{@model RunAction RunActions} with incoming {@model ConditionEdge conditions} 
+ * @inference SetWire,ActionEdge,ConditionEdge,ParameterEdge 
+ *		{@model ActionEdge ActionEdges} with incoming {@model ConditionEdge conditions} 
  *		with {@model ParameterEdge parameters} will be copied to elements 
  *		created by {@model SetWire}s.
  */
-rule "Connect ParameterEdges to ConditionEdges connected to RunActions created by SetWires (edit/update) (onChange)"
+rule "Connect ParameterEdges to ConditionEdges connected to ActionEdges created by SetWires (edit/update) (onChange)"
 	when
 		# we have a syncwire
 		sw : SetWire( )
@@ -260,16 +260,16 @@ rule "Connect ParameterEdges to ConditionEdges connected to RunActions created b
 		target : ContainsOperations( )
 		eval(functions.connects(sw, source, target))  
 		
-		# that has created a RunAction
+		# that has created a ActionEdge
 		event : EventTrigger( source.onChange == event )
 		operation : Operation( eContainer == target, name=="update" )
-		run : RunAction( eContainer == sw, from == event, to == operation, name == "run" )
+		run : ActionEdge( eContainer == sw, from == event, to == operation, name == "run" )
 
 		# and this SyncWire has a condition
 		condition : Condition ( )
 		sourceCw : ConditionEdge( from == condition, to == sw )
 		
-		# and the RunAction has the same condition 
+		# and the ActionEdge has the same condition 
 		targetCw : ConditionEdge (from == condition, to == run ) 
 		
 		# and the SyncWire had a parameter
@@ -289,7 +289,7 @@ rule "Connect ParameterEdges to ConditionEdges connected to RunActions created b
 
 end
 
-rule "Connect ParameterEdges to ConditionEdges connected to RunActions created by SetWires (access/init) (onAccess)"
+rule "Connect ParameterEdges to ConditionEdges connected to ActionEdges created by SetWires (access/init) (onAccess)"
 	when
 		# we have a syncwire
 		sw : SetWire( )
@@ -297,10 +297,10 @@ rule "Connect ParameterEdges to ConditionEdges connected to RunActions created b
 		target : ContainsOperations( )
 		eval(functions.connects(sw, source, target))  
 		
-		# that has created a RunAction
+		# that has created a ActionEdge
 		event : EventTrigger( source.onAccess == event )
 		operation : Operation( eContainer == source, name=="init" )
-		run : RunAction( eContainer == sw, from == event, to == operation, name == "run" )
+		run : ActionEdge( eContainer == sw, from == event, to == operation, name == "run" )
 
 		# and targets' value is being used for source's init
 		fvalue : Property ( target.fieldValue == fvalue ) 
@@ -310,7 +310,7 @@ rule "Connect ParameterEdges to ConditionEdges connected to RunActions created b
 		condition : Condition ( )
 		sourceCw : ConditionEdge( from == condition, to == sw )
 		
-		# and the RunAction has the same condition 
+		# and the ActionEdge has the same condition 
 		targetCw : ConditionEdge (from == condition, to == run ) 
 		
 		# and the SyncWire had a parameter

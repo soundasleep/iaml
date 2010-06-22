@@ -78,12 +78,12 @@ rule "When two TextFields of different types are under a SyncWire, call the 'val
 		
 		op : Operation ( name == "validate", eContainer == e1, eval(functions.generatedBy(sw, op)) )
 		
-		not ( run : RunAction ( from == event, to == op ) )
+		not ( run : ActionEdge ( from == event, to == op ) )
 						
 		eval ( handler.veto( sw ))
 		
 	then
-		RunAction run = handler.generatedRunAction(sw, e1, event, op);
+		ActionEdge run = handler.generatedActionEdge(sw, e1, event, op);
 		handler.setName(run, "run");
 		queue.add(run, drools);
 
@@ -142,7 +142,7 @@ rule "Create contents of 'validate' operation"
 		handler.setName(callHide, "call hide");
 		queue.add(callHide, drools);
 		
-		RunAction runHide = handler.generatedRunAction(o, o, callHide, hide);
+		ActionEdge runHide = handler.generatedActionEdge(o, o, callHide, hide);
 		handler.setName(runHide, "run");
 		queue.add(runHide, drools);
 		 
@@ -150,7 +150,7 @@ rule "Create contents of 'validate' operation"
 		handler.setName(callShow, "call show");
 		queue.add(callShow, drools);
 		
-		RunAction runShow = handler.generatedRunAction(o, o, callShow, show);
+		ActionEdge runShow = handler.generatedActionEdge(o, o, callShow, show);
 		handler.setName(runShow, "run");
 		queue.add(runShow, drools);
 		
@@ -158,7 +158,7 @@ rule "Create contents of 'validate' operation"
 		handler.setName(callUpdate, "update label");
 		queue.add(callUpdate, drools);
 		
-		RunAction runUpdate = handler.generatedRunAction(o, o, callUpdate, upd);
+		ActionEdge runUpdate = handler.generatedActionEdge(o, o, callUpdate, upd);
 		handler.setName(runUpdate, "run");
 		queue.add(runUpdate, drools);
 		

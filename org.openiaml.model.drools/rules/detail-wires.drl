@@ -173,7 +173,7 @@ end
  * @inference DetailWire
  *		When a {@model DetailWire} is connecting from a {@model InputForm} that is populated
  *		by a {@model SelectWire}, a {@model Button} will be created in the {@model InputForm}
- *		to {@model NavigateAction view} the current instance in the target {@model Frame}.
+ *		to {@model ActionEdge view} the current instance in the target {@model Frame}.
  */
 rule "Create a Link Button for the source of a DetailWire"
 	when
@@ -203,7 +203,7 @@ rule "Create a Link Button for the source of a DetailWire"
 	
 end
 
-rule "Create a Link Button for the source of a DetailWire: Connect NavigateAction"
+rule "Create a Link Button for the source of a DetailWire: Connect ActionEdge"
 	when
 		container : Frame( )
 		
@@ -223,12 +223,12 @@ rule "Create a Link Button for the source of a DetailWire: Connect NavigateActio
 		button : VisibleThing ( eContainer == source, name == "link" )
 		onClick : EventTrigger ( button.onClick == onClick )
 		
-		not ( NavigateAction ( from == onClick, to == target )) 
+		not ( ActionEdge ( from == onClick, to == target )) 
 	
 		eval ( handler.veto( detail ))
 	
 	then
-		NavigateAction nav = handler.generatedNavigateAction(detail, source, onClick, target);
+		ActionEdge nav = handler.generatedActionEdge(detail, source, onClick, target);
 		handler.setName(nav, "View detail");
 		queue.add(nav, drools);
 		
@@ -253,7 +253,7 @@ rule "Create a Link Button for the source of a DetailWire: Add Parameter from At
 		
 		button : VisibleThing ( eContainer == source, name == "link" )
 		onClick : EventTrigger ( button.onClick == onClick )
-		nav : NavigateAction ( from == onClick, to == target )
+		nav : ActionEdge ( from == onClick, to == target )
 
 		pkAttribute : DomainAttribute ( eContainer == schema, primaryKey == true )
 		pkInstance : DomainAttributeInstance ( eContainer == instance )

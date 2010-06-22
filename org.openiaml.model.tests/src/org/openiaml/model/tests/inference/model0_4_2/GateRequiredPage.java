@@ -3,6 +3,7 @@
  */
 package org.openiaml.model.tests.inference.model0_4_2;
 
+import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.EventTrigger;
@@ -18,8 +19,6 @@ import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.wires.ConditionEdge;
-import org.openiaml.model.model.wires.NavigateAction;
-import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.tests.inference.ValidInferenceTestCase;
 
 /**
@@ -55,7 +54,7 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		EntryGate gate = assertHasEntryGate(session, "requires a page is viewed first");
 		assertNotGenerated(gate);
 
-		NavigateAction nav = assertHasNavigateAction(session, gate, required, "first");
+		ActionEdge nav = assertHasNavigateAction(session, gate, required, "first");
 		assertNotGenerated(nav);
 
 	}
@@ -80,7 +79,7 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		EventTrigger event = button.getOnClick();
 		assertGenerated(event);
 
-		NavigateAction nav = assertHasNavigateAction(root, event, gate, "resume");
+		ActionEdge nav = assertHasNavigateAction(root, event, gate, "resume");
 		assertGenerated(nav);
 
 	}
@@ -111,7 +110,7 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		assertGenerated(set);
 
 		// run wire
-		RunAction run = assertHasRunAction(required, access, set);
+		ActionEdge run = assertHasRunAction(required, access, set);
 		assertGenerated(run);
 
 	}

@@ -5,6 +5,7 @@ package org.openiaml.model.tests.inference.model0_4;
 
 import java.util.List;
 
+import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.Operation;
@@ -24,7 +25,6 @@ import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ParameterEdge;
-import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.tests.inference.ValidInferenceTestCase;
 
 /**
@@ -146,7 +146,7 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 		Operation doLogin = assertHasOperation(loginSession, "do login");
 
 		// get the run instance wire
-		RunAction run = assertHasRunAction(login, button, doLogin, "onClick");
+		ActionEdge run = assertHasRunAction(login, button, doLogin, "onClick");
 
 		// assert parameter wires
 		ParameterEdge pe = assertHasParameterEdge(root, femail, run);

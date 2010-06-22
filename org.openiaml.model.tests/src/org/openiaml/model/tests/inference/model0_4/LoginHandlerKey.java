@@ -6,6 +6,7 @@ package org.openiaml.model.tests.inference.model0_4;
 import java.util.List;
 import java.util.Set;
 
+import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
@@ -19,8 +20,6 @@ import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.NavigateAction;
-import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.tests.inference.ValidInferenceTestCase;
 
@@ -70,14 +69,14 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		// handler logout--> home
 		{
 			assertHasNoWiresFromTo(handler, handler, page);
-			NavigateAction nav = assertHasNavigateAction(handler, handler, page, "logout");
+			ActionEdge nav = assertHasNavigateAction(handler, handler, page, "logout");
 			assertNotGenerated(nav);
 		}
 
 		// handler login--> viewkey
 		{
 			assertHasNoWiresFromTo(handler, handler, viewkey);
-			NavigateAction nav = assertHasNavigateAction(handler, handler, viewkey, "login");
+			ActionEdge nav = assertHasNavigateAction(handler, handler, viewkey, "login");
 			assertNotGenerated(nav);
 		}
 
@@ -108,7 +107,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		EventTrigger access = viewkey.getOnAccess();
 		assertHasWiresFromTo(0, session, access, check);
 		{
-			RunAction run = assertHasRunAction(session, access, check);
+			ActionEdge run = assertHasRunAction(session, access, check);
 			assertGenerated(run);
 			assertEquals("run", run.getName());
 		}
@@ -132,7 +131,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		EventTrigger access = page.getOnAccess();
 		assertHasWiresFromTo(0, session, access, op);
 		{
-			RunAction run = assertHasRunAction(session, access, op);
+			ActionEdge run = assertHasRunAction(session, access, op);
 			assertGenerated(run);
 		}
 
@@ -159,7 +158,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		EventTrigger access = page.getOnAccess();
 		assertHasNoWiresFromTo(session, access, target);
 		{
-			NavigateAction nav = assertHasNavigateAction(session, access, target);
+			ActionEdge nav = assertHasNavigateAction(session, access, target);
 			assertGenerated(nav);
 		}
 	}
@@ -220,7 +219,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 
 		// button has an 'onClick' run wire
 		assertHasWiresFromTo(0, root, button, op);
-		RunAction run = assertHasRunAction(root, button, op);
+		ActionEdge run = assertHasRunAction(root, button, op);
 		assertGenerated(run);
 		assertEquals("onClick", run.getName());
 
@@ -254,7 +253,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		Frame login = assertHasFrame(loginSession, "login");
 		{
 			assertHasNoWiresFromTo(root, check, login);
-			NavigateAction wire = assertHasNavigateAction(root, check, login, "fail");
+			ActionEdge wire = assertHasNavigateAction(root, check, login, "fail");
 			assertGenerated(wire);
 		}
 

@@ -5,6 +5,7 @@ package org.openiaml.model.tests.inference.model0_4;
 
 import java.util.Set;
 
+import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.EventTrigger;
@@ -18,7 +19,6 @@ import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
-import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SyncWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
@@ -69,7 +69,7 @@ public class DomainInheritanceEditing extends InferenceTestCase {
 		Operation init = assertHasOperation(field, "init");
 		assertGenerated(init);
 
-		RunAction run = assertHasRunAction(field, access, init, "run");
+		ActionEdge run = assertHasRunAction(field, access, init, "run");
 		assertGenerated(run);
 
 		// a parameter
@@ -113,7 +113,7 @@ public class DomainInheritanceEditing extends InferenceTestCase {
 		Operation init = assertHasOperation(field, "init");
 		assertGenerated(init);
 
-		RunAction run = assertHasRunAction(field, access, init, "run");
+		ActionEdge run = assertHasRunAction(field, access, init, "run");
 		assertGenerated(run);
 
 		// a parameter

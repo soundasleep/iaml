@@ -3,6 +3,7 @@
  */
 package org.openiaml.model.tests.inference.model0_5;
 
+import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Condition;
@@ -25,7 +26,6 @@ import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.Label;
 import org.openiaml.model.model.wires.ParameterEdge;
-import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
@@ -148,7 +148,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		EventTrigger onClick = next.getOnClick();
 		assertGenerated(onClick);
 
-		RunAction run = assertHasRunAction(root, onClick, inext);
+		ActionEdge run = assertHasRunAction(root, onClick, inext);
 		assertGenerated(run);
 
 		assertGenerated(assertHasConditionEdge(root, hasNext, run));
@@ -173,7 +173,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		EventTrigger onClick = previous.getOnClick();
 		assertGenerated(onClick);
 
-		RunAction run = assertHasRunAction(root, onClick, iprevious);
+		ActionEdge run = assertHasRunAction(root, onClick, iprevious);
 		assertGenerated(run);
 
 		assertGenerated(assertHasConditionEdge(root, hasPrevious, run));
@@ -201,7 +201,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		EventTrigger onClick = first.getOnClick();
 		assertGenerated(onClick);
 
-		RunAction run = assertHasRunAction(root, onClick, ireset);
+		ActionEdge run = assertHasRunAction(root, onClick, ireset);
 		assertGenerated(run);
 
 		assertGenerated(assertHasConditionEdge(root, notEmpty, run));
@@ -230,7 +230,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		EventTrigger onClick = last.getOnClick();
 		assertGenerated(onClick);
 
-		RunAction run = assertHasRunAction(root, onClick, ijump);
+		ActionEdge run = assertHasRunAction(root, onClick, ijump);
 		assertGenerated(run);
 
 		assertGenerated(assertHasConditionEdge(root, notEmpty, run));
@@ -268,10 +268,10 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		CompositeOperation op = assertHasCompositeOperation(last, "update target");
 		assertGenerated(op);
 
-		RunAction update = assertHasRunAction(root, onClick, op);
+		ActionEdge update = assertHasRunAction(root, onClick, op);
 
 		// it must have a higher priority than the action to the instance
-		RunAction run = assertHasRunAction(root, onClick, ijump);
+		ActionEdge run = assertHasRunAction(root, onClick, ijump);
 		assertGreater(run.getPriority(), update.getPriority());
 
 	}
@@ -358,7 +358,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		EventTrigger onChange = instance.getOnChange();
 		Operation update = assertHasOperation(labelResults, "update");
 
-		RunAction run = assertHasRunAction(root, onChange, update);
+		ActionEdge run = assertHasRunAction(root, onChange, update);
 
 		// with the given parameter
 		assertGenerated(assertHasParameterEdge(root, results, run));
@@ -390,7 +390,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		Operation update = assertHasOperation(t1, "update");
 		assertGenerated(update);
 
-		RunAction run = assertHasRunAction(root, onChange, update);
+		ActionEdge run = assertHasRunAction(root, onChange, update);
 		assertGenerated(run);
 
 		Property a1value = assertHasFieldValue(a1);

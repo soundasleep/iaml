@@ -4,6 +4,7 @@
 package org.openiaml.model.tests.inference.model0_2;
 
 import org.jaxen.JaxenException;
+import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
@@ -11,7 +12,6 @@ import org.openiaml.model.model.Property;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ConditionEdge;
-import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SyncWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
@@ -60,8 +60,8 @@ public class ConditionWireFalseServer extends InferenceTestCase {
 		assertNotSame(srcOp, targetOp);
 
 		// there should be a run wire between these two
-		RunAction srcRw = assertHasRunAction(wire, srcEdit, targetOp, "run");
-		RunAction targetRw = assertHasRunAction(wire, targetEdit, srcOp, "run");
+		ActionEdge srcRw = assertHasRunAction(wire, srcEdit, targetOp, "run");
+		ActionEdge targetRw = assertHasRunAction(wire, targetEdit, srcOp, "run");
 
 		// [new]
 		// there should be a condition wire to the new SyncWire
@@ -82,8 +82,8 @@ public class ConditionWireFalseServer extends InferenceTestCase {
 		assertNotSame(srcInit, targetInit);
 
 		// execution wires
-		RunAction srcInitRun = assertHasRunAction(wire, srcAccess, srcInit, "run");
-		RunAction targetInitRun = assertHasRunAction(wire, targetAccess, targetInit, "run");
+		ActionEdge srcInitRun = assertHasRunAction(wire, srcAccess, srcInit, "run");
+		ActionEdge targetInitRun = assertHasRunAction(wire, targetAccess, targetInit, "run");
 
 		// they should have incoming parameters
 		Property field1value = assertHasFieldValue(field1);

@@ -4,6 +4,7 @@
 package org.openiaml.model.tests.inference.model0_2;
 
 import org.jaxen.JaxenException;
+import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.DynamicApplicationElementSet;
 import org.openiaml.model.model.EventTrigger;
@@ -11,7 +12,6 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ConditionEdge;
-import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SyncWire;
 import org.openiaml.model.tests.inference.InferenceTestCaseWithConditionWires;
 
@@ -81,10 +81,10 @@ protected void setUp() throws Exception {
     assertNotSame(f3update, f2update);
 
     // there should be a run wire between these
-    RunAction rw1_2 = assertHasRunAction(wire, f1edit, f2update);
-    RunAction rw2_1 = assertHasRunAction(wire, f2edit, f1update);
-    RunAction rw1_3 = assertHasRunAction(wire, f1edit, f3update);
-    RunAction rw3_1 = assertHasRunAction(wire, f3edit, f1update);
+    ActionEdge rw1_2 = assertHasRunAction(wire, f1edit, f2update);
+    ActionEdge rw2_1 = assertHasRunAction(wire, f2edit, f1update);
+    ActionEdge rw1_3 = assertHasRunAction(wire, f1edit, f3update);
+    ActionEdge rw3_1 = assertHasRunAction(wire, f3edit, f1update);
 
     // condition wires all over!
     ConditionEdge cw1_2 = assertHasConditionEdge(page1, cond, rw1_2);

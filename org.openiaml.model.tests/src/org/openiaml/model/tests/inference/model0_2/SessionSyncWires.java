@@ -3,6 +3,7 @@
  */
 package org.openiaml.model.tests.inference.model0_2;
 
+import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
@@ -16,7 +17,6 @@ import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
-import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 import org.openiaml.model.tests.inference.model0_4.SetWireClient;
 
@@ -51,7 +51,7 @@ public class SessionSyncWires extends InferenceTestCase {
 		// all part of SyncWire elements generation
 		EventTrigger edit = field1.getOnChange();
 		Operation update = assertHasOperation(field2, "update");
-		RunAction rw = assertHasRunAction(root, edit, update);
+		ActionEdge rw = assertHasRunAction(root, edit, update);
 
 		Property fieldValue = assertHasFieldValue(field1);
 		assertGenerated(getParameterEdgeFromTo(root, fieldValue, rw));
@@ -60,7 +60,7 @@ public class SessionSyncWires extends InferenceTestCase {
 		EventTrigger init = session.getOnInit();
 
 		// it should be connected to 'update'
-		RunAction rw2 = assertHasRunAction(root, init, update);
+		ActionEdge rw2 = assertHasRunAction(root, init, update);
 		assertGenerated(rw2);
 
 	}
@@ -88,7 +88,7 @@ public class SessionSyncWires extends InferenceTestCase {
 		Property value = assertHasFieldValue(field2);
 		assertGenerated(value);
 
-		RunAction run = assertHasRunAction(field1, access, init, "run");
+		ActionEdge run = assertHasRunAction(field1, access, init, "run");
 		assertGenerated(run);
 
 		ParameterEdge param = assertHasParameterEdge(field1, value, run);

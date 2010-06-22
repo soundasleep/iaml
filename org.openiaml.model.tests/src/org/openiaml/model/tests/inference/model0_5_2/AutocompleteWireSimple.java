@@ -4,6 +4,7 @@
 package org.openiaml.model.tests.inference.model0_5_2;
 
 import org.openiaml.model.datatypes.BuiltinDataTypes;
+import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.Changeable;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.DomainAttribute;
@@ -21,7 +22,6 @@ import org.openiaml.model.model.visual.IteratorList;
 import org.openiaml.model.model.visual.Label;
 import org.openiaml.model.model.wires.AutocompleteWire;
 import org.openiaml.model.model.wires.ParameterEdge;
-import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
 /**
@@ -116,7 +116,7 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 		Operation update = assertHasOperation(input, "update");
 		assertGenerated(update);
 		
-		RunAction run = assertHasRunAction(root, onInput, update);
+		ActionEdge run = assertHasRunAction(root, onInput, update);
 		assertGenerated(run);
 		
 		// currentInput as parameter
@@ -199,7 +199,7 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 		Operation update = assertHasOperation(target, "update");
 		assertGenerated(update);
 		
-		RunAction run = assertHasRunAction(root, onClick, update);
+		ActionEdge run = assertHasRunAction(root, onClick, update);
 		assertGenerated(run);
 		
 		// with the email as the parameter
@@ -237,7 +237,7 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 		Operation update = assertHasOperation(target, "update");
 		assertGenerated(update);
 		
-		RunAction run = assertHasRunAction(root, onClick, update);
+		ActionEdge run = assertHasRunAction(root, onClick, update);
 		assertGenerated(run);
 		
 		// with the email as the parameter
@@ -264,7 +264,7 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 			Operation hide = assertHasPrimitiveOperation(list, "hide");
 			assertGenerated(hide);
 			
-			RunAction run = assertHasRunAction(root, onAccess, hide);
+			ActionEdge run = assertHasRunAction(root, onAccess, hide);
 			assertGenerated(run);
 			
 			// only if the input is empty
@@ -278,7 +278,7 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 			Operation hide = assertHasPrimitiveOperation(list, "show");
 			assertGenerated(hide);
 			
-			RunAction run = assertHasRunAction(root, onAccess, hide);
+			ActionEdge run = assertHasRunAction(root, onAccess, hide);
 			assertGenerated(run);
 			
 			// only if the input is not empty
@@ -306,7 +306,7 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 		// only if the input is empty
 		{
 			Operation hide = assertHasPrimitiveOperation(list, "hide");
-			RunAction run = assertHasRunAction(root, onChange, hide);
+			ActionEdge run = assertHasRunAction(root, onChange, hide);
 			Condition empty = assertHasPrimitiveCondition(input, "empty");
 			assertGenerated(assertHasConditionEdge(root, empty, run));
 		}
@@ -314,7 +314,7 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 		// only if the input is not empty
 		{
 			Operation show = assertHasPrimitiveOperation(list, "show");
-			RunAction run = assertHasRunAction(root, onChange, show);
+			ActionEdge run = assertHasRunAction(root, onChange, show);
 			Condition notEmpty = assertHasPrimitiveCondition(input, "not empty");
 			assertGenerated(assertHasConditionEdge(root, notEmpty, run));
 		}
@@ -337,7 +337,7 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 
 		Operation update = assertHasOperation(input, "update");
 		
-		RunAction run = assertHasRunAction(root, onClick, update);
+		ActionEdge run = assertHasRunAction(root, onClick, update);
 		assertGenerated(run);
 
 		StaticValue blank = assertHasStaticValue(root, "blank");

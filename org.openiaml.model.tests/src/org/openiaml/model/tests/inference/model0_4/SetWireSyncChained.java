@@ -11,7 +11,6 @@ import org.openiaml.model.model.Property;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ParameterEdgesSource;
-import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
 /**
@@ -72,10 +71,9 @@ public class SetWireSyncChained extends InferenceTestCase {
 		Operation init = assertHasOperation(target, "init");
 		assertGenerated(init);
 
-		RunAction run = assertHasRunAction(root, onAccess, init, new Filter<ActionEdge>() {
+		ActionEdge run = assertHasRunAction(root, onAccess, init, new Filter<ActionEdge>() {
 			@Override
-			public boolean accept(ActionEdge o) {
-				RunAction r = (RunAction) o;
+			public boolean accept(ActionEdge r) {
 				if (r.getInParameterEdges().size() != 1)
 					return false;
 				ParameterEdgesSource paramSource = r.getInParameterEdges().get(0).getFrom();
@@ -121,10 +119,9 @@ public class SetWireSyncChained extends InferenceTestCase {
 		Operation init = assertHasOperation(target, "init");
 		assertGenerated(init);
 
-		RunAction run = assertHasRunAction(root, onAccess, init, new Filter<ActionEdge>() {
+		ActionEdge run = assertHasRunAction(root, onAccess, init, new Filter<ActionEdge>() {
 			@Override
-			public boolean accept(ActionEdge o) {
-				RunAction r = (RunAction) o;
+			public boolean accept(ActionEdge r) {
 				if (r.getInParameterEdges().size() != 1)
 					return false;
 				ParameterEdgesSource paramSource = r.getInParameterEdges().get(0).getFrom();
@@ -166,7 +163,7 @@ public class SetWireSyncChained extends InferenceTestCase {
 		assertGenerated(onAccess);
 
 		// onAccess should do nothing!
-		assertNoActionsFrom(root, onAccess, RunAction.class);
+		assertNoActionsFrom(root, onAccess, ActionEdge.class);
 
 	}
 

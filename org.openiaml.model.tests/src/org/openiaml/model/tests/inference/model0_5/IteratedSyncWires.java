@@ -3,6 +3,7 @@
  */
 package org.openiaml.model.tests.inference.model0_5;
 
+import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
@@ -10,7 +11,6 @@ import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SyncWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
@@ -106,7 +106,7 @@ public class IteratedSyncWires extends InferenceTestCase {
 		EventTrigger edit = t1.getOnChange();
 		Operation update = assertHasOperation(a1, "update");
 
-		RunAction run = assertHasRunAction(root, edit, update);
+		ActionEdge run = assertHasRunAction(root, edit, update);
 		System.out.println(run);
 
 		assertGenerated(run);
@@ -127,7 +127,7 @@ public class IteratedSyncWires extends InferenceTestCase {
 		EventTrigger edit = a1.getOnChange();
 		Operation update = assertHasOperation(t1, "update");
 
-		RunAction run = assertHasRunAction(root, edit, update);
+		ActionEdge run = assertHasRunAction(root, edit, update);
 
 		assertGenerated(run);
 

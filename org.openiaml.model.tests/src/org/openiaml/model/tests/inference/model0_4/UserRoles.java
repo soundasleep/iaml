@@ -4,6 +4,7 @@
 package org.openiaml.model.tests.inference.model0_4;
 
 import org.openiaml.model.datatypes.BuiltinDataTypes;
+import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.EventTrigger;
@@ -24,10 +25,8 @@ import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ExtendsEdge;
-import org.openiaml.model.model.wires.NavigateAction;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.RequiresEdge;
-import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
@@ -217,13 +216,13 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(pageOp);
 
 		// connected
-		RunAction run = assertHasRunAction(target, event, pageOp, "run");
+		ActionEdge run = assertHasRunAction(target, event, pageOp, "run");
 		assertGenerated(run);
 
 		// a failure wire connecting the op to the login page
 		Session loginSession = assertHasSession(root, "role-based login handler login");
 		Frame login = assertHasFrame(loginSession, "login");
-		NavigateAction fail = assertHasNavigateAction(root, pageOp, login, "fail");
+		ActionEdge fail = assertHasNavigateAction(root, pageOp, login, "fail");
 		assertGenerated(fail);
 
 	}
@@ -277,13 +276,13 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(event);
 
 		// connected
-		RunAction run = assertHasRunAction(target, event, check, "run");
+		ActionEdge run = assertHasRunAction(target, event, check, "run");
 		assertGenerated(run);
 
 		// a failure wire connecting the op to the login page
 		Session loginSession = assertHasSession(root, "role-based login handler login");
 		Frame login = assertHasFrame(loginSession, "login");
-		NavigateAction fail = assertHasNavigateAction(root, check, login, "fail");
+		ActionEdge fail = assertHasNavigateAction(root, check, login, "fail");
 		assertGenerated(fail);
 
 	}
@@ -321,7 +320,7 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(cancel);
 		OperationCallNode virtualOp = assertHasOperationCallNode(op, "call permissions operation");
 		assertGenerated(virtualOp);
-		RunAction virtualRun = assertHasRunAction(op, virtualOp, targetOp, "run");
+		ActionEdge virtualRun = assertHasRunAction(op, virtualOp, targetOp, "run");
 		assertGenerated(virtualRun);
 
 		// execution edges between all the operations

@@ -4,12 +4,12 @@
 package org.openiaml.model.tests.inference.model0_2;
 
 import org.jaxen.JaxenException;
+import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SyncWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
@@ -44,8 +44,8 @@ public class ConditionWireFalse extends InferenceTestCase {
 		assertNotSame(srcOp, targetOp);
 
 		// there should be a run wire between these two
-		RunAction srcRw = assertHasRunAction(wire, srcEdit, targetOp);
-		RunAction targetRw = assertHasRunAction(wire, targetEdit, srcOp);
+		ActionEdge srcRw = assertHasRunAction(wire, srcEdit, targetOp);
+		ActionEdge targetRw = assertHasRunAction(wire, targetEdit, srcOp);
 
 		// [new]
 		// there should be additional ConditionWires to these RunActions

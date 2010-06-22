@@ -8,9 +8,9 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import org.openiaml.model.tests.XmlTestCase;
-
 import junit.framework.TestCase;
+
+import org.openiaml.model.tests.XmlTestCase;
 
 /**
  * Check all plugins have the correct licencing information.

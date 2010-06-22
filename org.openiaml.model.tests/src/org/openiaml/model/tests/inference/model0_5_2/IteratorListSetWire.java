@@ -4,6 +4,7 @@
 package org.openiaml.model.tests.inference.model0_5_2;
 
 import org.openiaml.model.datatypes.BuiltinDataTypes;
+import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainAttributeInstance;
@@ -16,7 +17,6 @@ import org.openiaml.model.model.domain.DomainSource;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.IteratorList;
 import org.openiaml.model.model.visual.Label;
-import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
 /**
@@ -168,7 +168,7 @@ public class IteratorListSetWire extends InferenceTestCase {
 		Operation op = assertHasOperation(ltitle, "update");
 		assertGenerated(op);
 		
-		RunAction run = assertHasRunAction(root, onChange, op);
+		ActionEdge run = assertHasRunAction(root, onChange, op);
 		assertGenerated(run);
 		
 		// with parameter from attr instance

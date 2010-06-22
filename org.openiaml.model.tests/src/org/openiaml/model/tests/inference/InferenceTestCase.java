@@ -10,9 +10,9 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xsd.XSDSimpleTypeDefinition;
 import org.jaxen.JaxenException;
-import org.openiaml.model.model.Action;
-import org.openiaml.model.model.ActionDestination;
-import org.openiaml.model.model.ActionSource;
+import org.openiaml.model.model.ActionEdge;
+import org.openiaml.model.model.ActionEdgeDestination;
+import org.openiaml.model.model.ActionEdgeSource;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.Changeable;
@@ -125,9 +125,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	/**
 	 * A filter that accepts everything.
 	 */
-	public static final Filter<Action> ALL_ACTIONS = new Filter<Action>() {
+	public static final Filter<ActionEdge> ALL_ACTIONS = new Filter<ActionEdge>() {
 		@Override
-		public boolean accept(Action o) {
+		public boolean accept(ActionEdge o) {
 			return true;
 		}
 	};
@@ -1246,21 +1246,21 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public RunAction assertHasRunAction(EObject container, ActionSource from, ActionDestination to, String name) throws JaxenException {
+	public RunAction assertHasRunAction(EObject container, ActionEdgeSource from, ActionEdgeDestination to, String name) throws JaxenException {
 		return (RunAction) assertHasActionFromTo(container, from, to, 
 				RunAction.class, getNameFilter(name));
 	}
 	
 	/**
-	 * Construct a new filter for only selecting {@link Action}s with a given name.
+	 * Construct a new filter for only selecting {@link ActionEdge}s with a given name.
 	 * 
 	 * @param name the name to search for
-	 * @return a new name filter for {@link Action}s.
+	 * @return a new name filter for {@link ActionEdge}s.
 	 */
-	private Filter<Action> getNameFilter(final String name) {
-		return new Filter<Action>() {
+	private Filter<ActionEdge> getNameFilter(final String name) {
+		return new Filter<ActionEdge>() {
 			@Override
-			public boolean accept(Action o) {
+			public boolean accept(ActionEdge o) {
 				if (o instanceof NamedElement) {
 					return name.equals(((NamedElement) o).getName());
 				}						
@@ -1275,7 +1275,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public RunAction assertHasRunAction(EObject container, ActionSource from, ActionDestination to) throws JaxenException {
+	public RunAction assertHasRunAction(EObject container, ActionEdgeSource from, ActionEdgeDestination to) throws JaxenException {
 		return (RunAction) assertHasActionFromTo(container, from, to, 
 				RunAction.class, ALL_ACTIONS);
 	}
@@ -1286,7 +1286,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public RunAction assertHasRunAction(EObject container, ActionSource from, ActionDestination to, Filter<Action> filter) throws JaxenException {
+	public RunAction assertHasRunAction(EObject container, ActionEdgeSource from, ActionEdgeDestination to, Filter<ActionEdge> filter) throws JaxenException {
 		return (RunAction) assertHasActionFromTo(container, from, to, 
 				RunAction.class, filter);
 	}
@@ -1323,8 +1323,8 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * Assert <em>no</em> unidirectional RunAction exists between
 	 * the given elements.
 	 */
-	public void assertHasNoRunAction(EObject container, ActionSource from, ActionDestination to) throws JaxenException {
-		Set<Action> actions = getActionsFromTo(container, from, to, RunAction.class);
+	public void assertHasNoRunAction(EObject container, ActionEdgeSource from, ActionEdgeDestination to) throws JaxenException {
+		Set<ActionEdge> actions = getActionsFromTo(container, from, to, RunAction.class);
 		assertEquals("Unexpected actions found: " + actions, 0, actions.size());
 	}
 	
@@ -1370,7 +1370,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public NavigateAction assertHasNavigateAction(EObject container, ActionSource from, ActionDestination to, String name) throws JaxenException {
+	public NavigateAction assertHasNavigateAction(EObject container, ActionEdgeSource from, ActionEdgeDestination to, String name) throws JaxenException {
 		return (NavigateAction) assertHasActionFromTo(container, from, to, 
 				NavigateAction.class, getNameFilter(name) );
 	}
@@ -1381,7 +1381,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public NavigateAction assertHasNavigateAction(EObject container, ActionSource from, ActionDestination to) throws JaxenException {
+	public NavigateAction assertHasNavigateAction(EObject container, ActionEdgeSource from, ActionEdgeDestination to) throws JaxenException {
 		return (NavigateAction) assertHasActionFromTo(container, from, to, 
 				NavigateAction.class, ALL_ACTIONS);
 	}
@@ -1544,10 +1544,10 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return the wire edge found
 	 * @throws JaxenException 
 	 */
-	public Action assertHasActionFromTo(EObject container, ActionSource from, ActionDestination to, Class<? extends Action> type, Filter<Action> filter) throws JaxenException {
-		Set<Action> wires = getActionsFromTo(container, from, to);
-		Action result = null;
-		for (Action w : wires) {
+	public ActionEdge assertHasActionFromTo(EObject container, ActionEdgeSource from, ActionEdgeDestination to, Class<? extends ActionEdge> type, Filter<ActionEdge> filter) throws JaxenException {
+		Set<ActionEdge> wires = getActionsFromTo(container, from, to);
+		ActionEdge result = null;
+		for (ActionEdge w : wires) {
 			if (type.isInstance(w)) {
 				if (filter == null || filter.accept(w)) {
 					// found it

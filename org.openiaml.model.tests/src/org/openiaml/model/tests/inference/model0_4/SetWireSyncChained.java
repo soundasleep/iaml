@@ -3,7 +3,7 @@
  */
 package org.openiaml.model.tests.inference.model0_4;
 
-import org.openiaml.model.model.Action;
+import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
@@ -72,9 +72,9 @@ public class SetWireSyncChained extends InferenceTestCase {
 		Operation init = assertHasOperation(target, "init");
 		assertGenerated(init);
 
-		RunAction run = assertHasRunAction(root, onAccess, init, new Filter<Action>() {
+		RunAction run = assertHasRunAction(root, onAccess, init, new Filter<ActionEdge>() {
 			@Override
-			public boolean accept(Action o) {
+			public boolean accept(ActionEdge o) {
 				RunAction r = (RunAction) o;
 				if (r.getInParameterEdges().size() != 1)
 					return false;
@@ -121,9 +121,9 @@ public class SetWireSyncChained extends InferenceTestCase {
 		Operation init = assertHasOperation(target, "init");
 		assertGenerated(init);
 
-		RunAction run = assertHasRunAction(root, onAccess, init, new Filter<Action>() {
+		RunAction run = assertHasRunAction(root, onAccess, init, new Filter<ActionEdge>() {
 			@Override
-			public boolean accept(Action o) {
+			public boolean accept(ActionEdge o) {
 				RunAction r = (RunAction) o;
 				if (r.getInParameterEdges().size() != 1)
 					return false;

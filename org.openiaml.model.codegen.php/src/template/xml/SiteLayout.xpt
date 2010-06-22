@@ -16,7 +16,7 @@
 	xmlns:iaml.visual="http://openiaml.org/model/visual" 
 	xmlns:iaml.wires="http://openiaml.org/model/wires"
 	id="«id-»">
-«EXPAND siteLayoutChildren FOREACH children»
+«EXPAND siteLayoutChildren FOREACH elements»
 </iaml:InternetApplication>
 «ENDDEFINE»
 

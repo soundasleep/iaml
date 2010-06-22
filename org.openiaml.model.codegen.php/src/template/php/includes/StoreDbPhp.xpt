@@ -28,7 +28,7 @@ $db_name = false;
 $table_name = false;
 $row_name = false;
 «EXPAND expandDomainStore FOREACH sources»
-«EXPAND expandDomainObjectRoot FOREACH children»
+«EXPAND expandDomainObjectRoot FOREACH elements»
 
 if ($db_type == "pdo") {
 	if (!$db_name)

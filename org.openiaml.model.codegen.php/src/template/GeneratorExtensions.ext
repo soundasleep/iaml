@@ -203,7 +203,7 @@ List[model::Operation] allContainerOperations(model::ContainsOperations this) :
 List[model::Operation] allContainerOperations(model::InternetApplication this) :
 	 operations.toSet()
 		.union( scopes.allContainerOperations() )
-	 	.union( children.allContainerOperations() )
+	 	.union( elements.allContainerOperations() )
 	 	.select(o | operationUsed(o));	 
 		
 /** All of the ApplicationElementProperties stored within this InternetApplication */

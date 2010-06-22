@@ -84,12 +84,10 @@ import org.openiaml.model.model.wires.ConditionEdgesSource;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ExtendsEdgeDestination;
 import org.openiaml.model.model.wires.ExtendsEdgesSource;
-import org.openiaml.model.model.wires.NavigateAction;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.ParameterEdgeDestination;
 import org.openiaml.model.model.wires.ParameterEdgesSource;
 import org.openiaml.model.model.wires.RequiresEdge;
-import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.model.wires.SyncWire;
 import org.openiaml.model.model.wires.WiresPackage;
@@ -454,8 +452,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return edge;
 	}
 	
-	public RunAction generatedRunAction(GeneratesElements by, ContainsWires container, ActionEdgeSource source, ActionEdgeDestination target) throws InferenceException {
-		RunAction wire = (RunAction) createRelationship(container, WiresPackage.eINSTANCE.getRunAction(), source, target, ModelPackage.eINSTANCE.getContainsWires_Actions(), ModelPackage.eINSTANCE.getActionEdge_From(), ModelPackage.eINSTANCE.getActionEdge_To());
+	public ActionEdge generatedActionEdge(GeneratesElements by, ContainsWires container, ActionEdgeSource source, ActionEdgeDestination target) throws InferenceException {
+		ActionEdge wire = (ActionEdge) createRelationship(container, ModelPackage.eINSTANCE.getActionEdge(), source, target, ModelPackage.eINSTANCE.getContainsWires_Actions(), ModelPackage.eINSTANCE.getActionEdge_From(), ModelPackage.eINSTANCE.getActionEdge_To());
 		setGeneratedBy(wire, by);
 		return wire;
 	}
@@ -486,12 +484,6 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 
 	public SetWire generatedSetWire(GeneratesElements by, ContainsWires container, WireSource source, WireDestination target) throws InferenceException {
 		SetWire wire = (SetWire) createRelationship(container, WiresPackage.eINSTANCE.getSetWire(), source, target, ModelPackage.eINSTANCE.getContainsWires_Wires(), ModelPackage.eINSTANCE.getWire_From(), ModelPackage.eINSTANCE.getWire_To());
-		setGeneratedBy(wire, by);
-		return wire;
-	}
-
-	public NavigateAction generatedNavigateAction(GeneratesElements by, ContainsWires container, ActionEdgeSource source, ActionEdgeDestination target) throws InferenceException {
-		NavigateAction wire = (NavigateAction) createRelationship(container, WiresPackage.eINSTANCE.getNavigateAction(), source, target, ModelPackage.eINSTANCE.getContainsWires_Actions(), ModelPackage.eINSTANCE.getActionEdge_From(), ModelPackage.eINSTANCE.getActionEdge_To());
 		setGeneratedBy(wire, by);
 		return wire;
 	}

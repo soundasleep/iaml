@@ -11,10 +11,6 @@
 «ENDDEFINE»
 
 «DEFINE callOperation(Boolean php, Boolean inStoreDb) FOR model::ActionEdge»
-	«throwException("Unknown action to expand: " + this)»
-«ENDDEFINE»
-
-«DEFINE callOperation(Boolean php, Boolean inStoreDb) FOR model::wires::RunAction»
 	«IF inConditionEdges.size > 0» 
 		/* expand conditions */
 		if («EXPAND template::conditions::Runtime::callCondition(php, inStoreDb) FOREACH inConditionEdges SEPARATOR " && "») {
@@ -25,14 +21,13 @@
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE callOperation(Boolean php, Boolean inStoreDb) FOR model::wires::NavigateAction»
-	«IF inConditionEdges.size > 0» 
-		/* expand conditions */
-		if («EXPAND template::conditions::Runtime::callCondition(php, inStoreDb) FOREACH inConditionEdges SEPARATOR " && "») {
-			«EXPAND callOperationContents(php, inStoreDb) FOR this»
-		}
+«DEFINE callOperationContents(Boolean php, Boolean inStoreDb) FOR model::ActionEdge-»
+	«IF model::visual::Frame.isInstance(to)»
+		«REM»implicit: a NavigateAction«ENDREM»
+		«EXPAND callOperationContentsNavigate(php, inStoreDb) FOR this»
 	«ELSE»
-		«EXPAND callOperationContents(php, inStoreDb) FOR this»
+		«REM»explicit: a RunAction«ENDREM»
+		«EXPAND callOperationContentsRun(php, inStoreDb) FOR this»
 	«ENDIF»
 «ENDDEFINE»
 
@@ -49,7 +44,7 @@
  *		When {@model RunAction running} an {@model Operation}, the {@model ParameterEdge}s are
  *		provided in alphabetical order according to their {@model ParameterEdge#name}.
  */
-«DEFINE callOperationContents(Boolean php, Boolean inStoreDb) FOR model::wires::RunAction-»
+«DEFINE callOperationContentsRun(Boolean php, Boolean inStoreDb) FOR model::ActionEdge-»
 	/* eContainer == «to.eContainer» */
 	
 	«IF php»
@@ -117,11 +112,11 @@
  * We need to switch on the target, because we could navigate to many different types
  * of new destinations?
  */
-«DEFINE callOperationContents(Boolean php, Boolean inStoreDb) FOR model::wires::NavigateAction»
+«DEFINE callOperationContentsNavigate(Boolean php, Boolean inStoreDb) FOR model::ActionEdge»
 	«EXPAND navigateTo(php, inStoreDb, this) FOR to» 
 «ENDDEFINE»
 
-«DEFINE navigateTo(Boolean php, Boolean inStoreDb, model::wires::NavigateAction wire) FOR model::ActionEdgeDestination»
+«DEFINE navigateTo(Boolean php, Boolean inStoreDb, model::ActionEdge wire) FOR model::ActionEdgeDestination»
 	«IF php»
 		$url = null;
 		«EXPAND getNavigateActionDestination(php, inStoreDb, wire, true)»
@@ -146,14 +141,14 @@
  *
  * @param includeSession should PHPSESSID (etc) be included in the URL? Should generally be <code>true</code>
  */
-«DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::wires::NavigateAction wire, Boolean includeSession) FOR model::ActionEdgeDestination»
+«DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::ActionEdge wire, Boolean includeSession) FOR model::ActionEdgeDestination»
 	«throwException("Unknown NavigateAction destination: " + this)»
 «ENDDEFINE»
 
 /**
  * Resuming navigation to a EntryGate.
  */
-«DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::wires::NavigateAction wire, Boolean includeSession) FOR model::components::EntryGate»
+«DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::ActionEdge wire, Boolean includeSession) FOR model::components::EntryGate»
 	«IF php»
 		/* navigating back to resume a gate */
 		// get the resume ID
@@ -190,7 +185,7 @@
 /**
  * Resuming navigation to an ExitGate.
  */
-«DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::wires::NavigateAction wire, Boolean includeSession) FOR model::components::ExitGate»
+«DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::ActionEdge wire, Boolean includeSession) FOR model::components::ExitGate»
 	«IF php»
 		/* navigating back to resume a gate */
 		// get the resume ID
@@ -227,7 +222,7 @@
 /**
  * Navigate to a frame.
  */
-«DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::wires::NavigateAction wire, Boolean includeSession) FOR model::visual::Frame»
+«DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::ActionEdge wire, Boolean includeSession) FOR model::visual::Frame»
 	«IF php»
 		/* prevent infinite loops on the current frame */
 		if ("«id-»" != CURRENT_PAGE) {
@@ -252,7 +247,7 @@
  * 		Any incoming named {@model ParameterEdge}s to a {@model NavigateAction} will be
  * 		passed along as named <code>GET</code> parameters to the destination.
  */
-«DEFINE addNamedParameters(Boolean php, Boolean inStoreDb, String argName) FOR model::wires::NavigateAction»
+«DEFINE addNamedParameters(Boolean php, Boolean inStoreDb, String argName) FOR model::ActionEdge»
 	«IF !inParameterEdges.isEmpty»
 		// add named parameters
 		«FOREACH inParameterEdges.select(p|p.name != null && p.name.length != 0) AS param»
@@ -289,7 +284,7 @@
  * Assumes that there is a function call waiting in 'function_queue'.
  * This function will be executed with the response as a parameter.
  */
-«DEFINE callRemoteOperation(Boolean php, Boolean inStoreDb) FOR model::wires::RunAction-»
+«DEFINE callRemoteOperation(Boolean php, Boolean inStoreDb) FOR model::ActionEdge-»
 	«IF inParameterEdges.size > 0» 
 		var arg0 = «EXPAND Parameters::callParameter(php, inStoreDb, false) FOR inParameterEdges.get(0)»;
 	«ELSE»

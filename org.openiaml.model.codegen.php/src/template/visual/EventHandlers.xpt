@@ -67,16 +67,6 @@
 «ENDDEFINE»
 
 «DEFINE implicitButtonClickEvents(model::visual::Frame currentFrame, Boolean php) FOR model::ActionEdge»
-	// unknown action '«this»'
-«ENDDEFINE»
-
-«DEFINE implicitButtonClickEvents(model::visual::Frame currentFrame, Boolean php) FOR model::wires::NavigateAction»
-	«IF (name == "click" || name == "onClick")»
-		/* expanding implicit trigger (navigate) */
-		«EXPAND template::operations::OperationCall::callOperation(php, false) FOR this»
-	«ENDIF» 
-«ENDDEFINE»
-«DEFINE implicitButtonClickEvents(model::visual::Frame currentFrame, Boolean php) FOR model::wires::RunAction»
 	«IF (name == "click" || name == "onClick")»
 		/* expanding implicit trigger (run) */
 		«EXPAND template::operations::OperationCall::callOperation(php, false) FOR this»

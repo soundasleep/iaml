@@ -315,7 +315,7 @@
 	«ENDREM»
 	
 	«REM»We assume '$result' will be set as the result of this operation call.«ENDREM»
-	«EXPAND OperationCall::callOperation(php, false) FOREACH outActions.typeSelect(model::wires::RunAction)-»
+	«EXPAND OperationCall::callOperation(php, false) FOREACH outActions-»
 	
 	«IF getFailFlows().isEmpty || getPassFlows().isEmpty»
 		/* No conditional flows; it was just an operation call */
@@ -359,11 +359,10 @@
 «ENDDEFINE»
 
 «DEFINE continueChainedOperations(Boolean php) FOR model::ActionEdge»
-	«throwException("Cannot continue a chained operation for Action " + this)»
-«ENDDEFINE»
-
-«DEFINE continueChainedOperations(Boolean php) FOR model::wires::NavigateAction»
 	«IF name != "fail"»
+		«IF !model::visual::Frame.isInstance(to)»
+			«throwException("Cannot continue a chained operation for an ActionEdge that doesn't go to a Frame: " + this)»
+		«ENDIF»
 		«IF php»
 			«IF model::visual::Frame.isInstance(to)»
 			/* prevent infinite loops on the current frame */

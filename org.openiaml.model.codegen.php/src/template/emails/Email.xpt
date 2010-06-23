@@ -9,15 +9,15 @@
 /**
  * Domain instance methods.
  */
-«DEFINE emailOperationCall(Boolean php, model::wires::RunAction wire, model::scopes::Email email) FOR model::WireDestination»
+«DEFINE emailOperationCall(Boolean php, model::ActionEdge wire, model::scopes::Email email) FOR model::WireDestination»
 	«throwException("Unexpected emailOperationCall run instance wire destination: " + this)»
 «ENDDEFINE»
 
-«DEFINE emailOperationCall(Boolean php, model::wires::RunAction wire, model::scopes::Email email) FOR model::ActionEdgeDestination»
+«DEFINE emailOperationCall(Boolean php, model::ActionEdge wire, model::scopes::Email email) FOR model::ActionEdgeDestination»
 	«throwException("Unexpected emailOperationCall run instance action destination: " + this)»
 «ENDDEFINE»
 
-«DEFINE emailOperationCall(Boolean php, model::wires::RunAction wire, model::scopes::Email email) FOR model::Operation»
+«DEFINE emailOperationCall(Boolean php, model::ActionEdge wire, model::scopes::Email email) FOR model::Operation»
 	«REM»drop the 'wire' parameter«ENDREM»
 	«EXPAND actualEmailOperationCall(php, email)» 
 «ENDDEFINE»

@@ -259,14 +259,8 @@ getPassFlows(model::ExecutionEdgesSource this):
 /** does this operation have a "fail" edge? */
 getFailEdge(model::CompositeOperation this) :
 	outActions.selectFirst( e | e.isFailEdge() ) ;
-
-isFailEdge(model::ActionEdge this ) :
-	false;
 	
-isFailEdge(model::wires::NavigateAction this ) :
-	name == "fail" ;
-
-isFailEdge(model::wires::RunAction this ) :
+isFailEdge(model::ActionEdge this ) :
 	name == "fail" ;
 
 /**

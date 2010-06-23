@@ -9,12 +9,6 @@ isOperation(emf::EObject this) :
 isOperation(model::Operation this) :
 	true;
 	
-isRunAction(emf::EObject this) :
-	false;
-	
-isRunAction(model::wires::RunAction this) :
-	true;
-	
 model::visual::Frame containingFrame(model::visual::Frame this) :
 	this;
 

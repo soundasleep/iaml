@@ -27,9 +27,6 @@ context model::components::LoginHandler ERROR "A login handler of type DOMAIN_OB
 	type != model::components::LoginHandlerTypes::DOMAIN_OBJECT ||
 	!inParameterEdges.from.typeSelect(model::DomainAttribute).isEmpty;
 
-context model::wires::RunAction ERROR "A run instance wire can only connect to an operation" :
-	model::Operation.isInstance( to );
-
 context model::operations::DecisionNode ERROR "A compare DecisionNode must have at least two data flows in to compare" :
 	(name == "equal?" && inFlows.size >= 2) 
 	|| (name != "equal?"); 
@@ -84,12 +81,11 @@ context model::wires::ExtendsEdge ERROR "A Role cannot extend itself" :
  * i.e.: "name != 'single_values'"
  */
 
-context model::operations::OperationCallNode ERROR "An OperationCallNode must have exactly one RunAction connecting it to an Operation" :
+context model::operations::OperationCallNode ERROR "An OperationCallNode must have exactly one ActionEdge connecting it to an Operation" :
 	outActions.size == 1
-		&& model::wires::RunAction.isInstance(outActions.first())
 		&& model::Operation.isInstance(outActions.first().to);
 
-context model::wires::RunAction WARNING "This RunAction will not do anything: consider naming it 'onClick'" :
+context model::ActionEdge WARNING "This RunAction will not do anything: consider naming it 'onClick'" :
 	!(model::VisibleThing.isInstance(from) && !(name == "click" || name == "onClick"));
 
 context model::Property WARNING "A session property used as part of a login handler should have a default value set, otherwise secure frames will crash with an exception rather than going to the login frame" :

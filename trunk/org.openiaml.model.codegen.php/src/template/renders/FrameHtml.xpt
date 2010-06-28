@@ -148,9 +148,13 @@
 		#debug_monitors { display: none; }
 	<?php } ?>
 	</style>
+	«REM»
+		NOTE: including this will include the log_message information as HTML directly in the page,
+		possibly breaking test cases.
 	<?php 
 	log_message("«id».php: Post-refresh session data: " . print_r($_SESSION, true));
   	?>
+  	«ENDREM»
 </head>
 <body onLoad="loadStoredEvents()">
 	<div style="font-size:small; text-align: right;"><a href="clear_session.php">clear session</a> - <a href="sitemap.html">sitemap</a></div>

@@ -48,10 +48,10 @@
         <executionEdges generatedBy="model.12252e52506.24" isGenerated="true" id="model.12252e52506.3e" from="model.12252e52506.3a" to="operations.12252e52583.6"/>
       </operations>
       <wires xsi:type="iaml.wires:SyncWire" id="wires.12252e52583.1" name="sync" generatedElements="wires.12252e52583.6 wires.12252e52583.7 wires.12252e52583.8 wires.12252e52583.9 wires.12252e52583.a wires.12252e52583.b wires.12252e52583.c wires.12252e52583.d" from="visual.12252e52574.a" to="visual.12252e52574.8">
-        <actions xsi:type="iaml.wires:RunAction" inParameterEdges="wires.12252e52583.d" generatedBy="wires.12252e52583.1" isGenerated="true" id="wires.12252e52583.6" name="run" from="model.12252e52506.25" to="model.12252e52506.23"/>
-        <actions xsi:type="iaml.wires:RunAction" inParameterEdges="wires.12252e52583.c" generatedBy="wires.12252e52583.1" isGenerated="true" id="wires.12252e52583.7" name="run" from="model.12252e52506.2b" to="model.12252e52506.24"/>
-        <actions xsi:type="iaml.wires:RunAction" inParameterEdges="wires.12252e52583.b" generatedBy="wires.12252e52583.1" isGenerated="true" id="wires.12252e52583.8" name="run" from="model.12252e52506.2a" to="model.12252e52506.28"/>
-        <actions xsi:type="iaml.wires:RunAction" inParameterEdges="wires.12252e52583.a" generatedBy="wires.12252e52583.1" isGenerated="true" id="wires.12252e52583.9" name="run" from="model.12252e52506.26" to="model.12252e52506.29"/>
+        <actions generatedBy="wires.12252e52583.1" isGenerated="true" id="wires.12252e52583.6" inParameterEdges="wires.12252e52583.d" name="run" from="model.12252e52506.25" to="model.12252e52506.23"/>
+        <actions generatedBy="wires.12252e52583.1" isGenerated="true" id="wires.12252e52583.7" inParameterEdges="wires.12252e52583.c" name="run" from="model.12252e52506.2b" to="model.12252e52506.24"/>
+        <actions generatedBy="wires.12252e52583.1" isGenerated="true" id="wires.12252e52583.8" inParameterEdges="wires.12252e52583.b" name="run" from="model.12252e52506.2a" to="model.12252e52506.28"/>
+        <actions generatedBy="wires.12252e52583.1" isGenerated="true" id="wires.12252e52583.9" inParameterEdges="wires.12252e52583.a" name="run" from="model.12252e52506.26" to="model.12252e52506.29"/>
         <parameterEdges generatedBy="wires.12252e52583.1" isGenerated="true" id="wires.12252e52583.a" name="[sync] run instance parameter (source.edit)" from="model.12252e52506.27" to="wires.12252e52583.9"/>
         <parameterEdges generatedBy="wires.12252e52583.1" isGenerated="true" id="wires.12252e52583.b" name="[sync] run instance parameter (target.access)" from="model.12252e52506.27" to="wires.12252e52583.8"/>
         <parameterEdges generatedBy="wires.12252e52583.1" isGenerated="true" id="wires.12252e52583.c" name="[sync] run instance parameter (target.edit)" from="model.12252e52506.2c" to="wires.12252e52583.7"/>

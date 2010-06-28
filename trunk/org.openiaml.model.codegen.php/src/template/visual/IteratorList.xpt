@@ -96,7 +96,7 @@ if (defined('ITERATOR_LIST_«safeName()»_UPDATED')) {
 		
 		// also, don't execute any onLoad()s if the database is empty
 		$skip_contained_onloads = («IF containingSession() != null»
-				require_session("«safeName(containingSession())»_«safeName()»_count)
+				require_session("«safeName(containingSession())»_«safeName()»_count", -1)
 			«ELSE»
 				get_application_value("«safeName()»_count", -1)
 			«ENDIF») <= 0;
@@ -140,7 +140,7 @@ if (defined('ITERATOR_LIST_«safeName()»_UPDATED')) {
 	
 	// also, don't execute any onLoad()s if the database is empty
 	$skip_contained_onloads = («IF containingSession() != null»
-			require_session("«safeName(containingSession())»_«safeName()»_count)
+			require_session("«safeName(containingSession())»_«safeName()»_count", -1)
 		«ELSE»
 			get_application_value("«safeName()»_count", -1)
 		«ENDIF») <= 0;
@@ -270,7 +270,7 @@ function populate_iterator_list_«safeName()»() {
 				«FOREACH children AS child»
 					«IF containingSession(child) != null»
 						$_SESSION["«safeName(containingSession(child))»_«safeNameString(child.fieldValue.id)»:$count"] = 
-							require_session("«safeName(containingSession(child))»_«safeNameString(child.fieldValue.id)»");
+							require_session("«safeName(containingSession(child))»_«safeNameString(child.fieldValue.id)»", -1);
 					«ELSE»
 						set_application_value("«safeNameString(child.fieldValue.id)»:$count",
 							get_application_value("«safeNameString(child.fieldValue.id)»", -1)); 

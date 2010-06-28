@@ -29,10 +29,17 @@ function get_email_datatype_regexp() {
  * Returns true if the given value (any type) can be successfully cast into the given
  * XSD type.
  *
+ * <p>PHP's <code>null</code> is the same as the empty string "".
+ *
  * <p>See also the documentation for {@model CastNode}.
  */
 function can_cast($value, $type) {
 	log_message("can_cast('" . print_r($value, true) . "', '$type')");
+
+	// PHP's <code>null</code> is the same as the empty string ""
+	if ($value === null)
+		$value = "";
+
 	switch ($type) {
 		// casting to string
 		case "":
@@ -159,10 +166,17 @@ function can_cast($value, $type) {
 /**
  * Cast the given value to the given type, as best as possible.
  *
+ * <p>PHP's <code>null</code> is the same as the empty string "".
+ *
  * <p>See also the documentation for {@model CastNode}.
  */
 function do_cast($value, $type) {
 	log_message("do_cast('" . print_r($value, true) . "', '$type')");
+
+	// PHP's <code>null</code> is the same as the empty string ""
+	if ($value === null)
+		$value = "";
+			
 	switch ($type) {
 		// casting to string
 		case "":

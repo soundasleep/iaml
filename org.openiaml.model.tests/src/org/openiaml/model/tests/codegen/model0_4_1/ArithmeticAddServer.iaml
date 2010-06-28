@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.125437f916e.4a">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.125437f916e.4a">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <operations xsi:type="iaml:CompositeOperation" id="model.125437f916e.a1" name="update result" inActions="wires.125437f91eb.5">
       <operations xsi:type="iaml:PrimitiveOperation" id="model.125437f916e.145" name="set" inFlows="model.125437f916e.14d" inExecutions="model.125437f916e.147" outFlows="model.125437f916e.14e" outExecutions="model.125437f916e.149"/>
@@ -15,7 +15,7 @@
       <values id="model.125437f916e.146" name="static value" outFlows="model.125437f916e.14c" value="42"/>
     </operations>
     <onAccess id="model.125437f916e.5a" outActions="wires.125437f91eb.5">
-      <actions xsi:type="iaml.wires:RunAction" id="wires.125437f91eb.5" name="run" from="model.125437f916e.5a" to="model.125437f916e.a1"/>
+      <actions id="wires.125437f91eb.5" name="run" from="model.125437f916e.5a" to="model.125437f916e.a1"/>
     </onAccess>
     <children xsi:type="iaml.visual:InputTextField" id="visual.125437f91db.33" name="result">
       <fieldValue id="model.125437f916e.11b" name="fieldValue" outFlows="model.1254759b7c1.213" inFlows="model.125437f916e.14e"/>
@@ -43,7 +43,7 @@
         <values id="model.1254759b7c1.20f" name="negative 1" outFlows="model.1254759b7c1.215" value="-1"/>
       </operations>
       <onClick id="model.1254759b7c1.154" outActions="wires.1254759bc84.16">
-        <actions xsi:type="iaml.wires:RunAction" id="wires.1254759bc84.16" name="run" from="model.1254759b7c1.154" to="model.1254759b7c1.155"/>
+        <actions id="wires.1254759bc84.16" name="run" from="model.1254759b7c1.154" to="model.1254759b7c1.155"/>
       </onClick>
     </children>
   </scopes>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12542c563bb.1b">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.12542c563bb.1b">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <children xsi:type="iaml.visual:InputTextField" id="visual.12542c56418.18" name="op1">
       <fieldValue id="model.12542c563bb.35" name="fieldValue" outFlows="model.12542c563bb.e1"/>
@@ -21,7 +21,7 @@
         <executionEdges id="model.12542c563bb.e8" from="model.12542c563bb.dc" to="operations.12542c56428.7"/>
       </operations>
       <onClick id="model.12542c563bb.80" outActions="wires.12542c56428.3">
-        <actions xsi:type="iaml.wires:RunAction" id="wires.12542c56428.3" name="run" from="model.12542c563bb.80" to="model.12542c563bb.81"/>
+        <actions id="wires.12542c56428.3" name="run" from="model.12542c563bb.80" to="model.12542c563bb.81"/>
       </onClick>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.12542c56418.1f" name="result">

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.127b1fff682.6">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.127b1fff682.6">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <scopes xsi:type="iaml.scopes:Email" id="scopes.127b254e216.14" name="Passing Email" to="test@openiaml.org" subject="A test e-mail" toName="Test User" from="source@openiaml.org" fromName="Source">
       <operations xsi:type="iaml:PrimitiveOperation" id="model.127b1fff682.35" name="send" inActions="wires.127b1fff8c4.6"/>
@@ -11,15 +11,15 @@
         <parameterEdges id="wires.127b1fff8c4.dc" from="model.127b1fff682.366" to="wires.127b1fff8c4.d9"/>
       </values>
       <onSent id="model.127b1fff682.224" outActions="wires.127b1fff8c4.d8">
-        <actions xsi:type="iaml.wires:RunAction" inParameterEdges="wires.127b1fff8c4.da" id="wires.127b1fff8c4.d8" name="run" from="model.127b1fff682.224" to="model.127b1fff682.316"/>
+        <actions id="wires.127b1fff8c4.d8" inParameterEdges="wires.127b1fff8c4.da" name="run" from="model.127b1fff682.224" to="model.127b1fff682.316"/>
       </onSent>
       <onFailure id="model.127b1fff682.298" outActions="wires.127b1fff8c4.d9">
-        <actions xsi:type="iaml.wires:RunAction" inParameterEdges="wires.127b1fff8c4.dc" id="wires.127b1fff8c4.d9" name="run" from="model.127b1fff682.298" to="model.127b1fff682.316"/>
+        <actions id="wires.127b1fff8c4.d9" inParameterEdges="wires.127b1fff8c4.dc" name="run" from="model.127b1fff682.298" to="model.127b1fff682.316"/>
       </onFailure>
     </scopes>
     <scopes xsi:type="iaml.scopes:Email" id="scopes.127b254e216.15" name="Failing Email" to="fail@example" from="fail@example" fromName="">
       <operations xsi:type="iaml:PrimitiveOperation" id="model.127b1fff682.1df" name="send" inActions="wires.127b1fff8c4.47"/>
-      <actions xsi:type="iaml.wires:RunAction" id="wires.127b1fff8c4.47" name="onClick" from="visual.127b1fff818.1c9" to="model.127b1fff682.1df"/>
+      <actions id="wires.127b1fff8c4.47" name="onClick" from="visual.127b1fff818.1c9" to="model.127b1fff682.1df"/>
       <values id="model.127b1fff682.47b" name="on sent status" outParameterEdges="wires.127b1fff8c4.147" value="failing email sent">
         <parameterEdges id="wires.127b1fff8c4.147" from="model.127b1fff682.47b" to="wires.127b1fff8c4.145"/>
       </values>
@@ -27,14 +27,14 @@
         <parameterEdges id="wires.127b1fff8c4.146" from="model.127b1fff682.47c" to="wires.127b1fff8c4.144"/>
       </values>
       <onSent id="model.127b1fff682.258" outActions="wires.127b1fff8c4.145">
-        <actions xsi:type="iaml.wires:RunAction" inParameterEdges="wires.127b1fff8c4.147" id="wires.127b1fff8c4.145" name="run" from="model.127b1fff682.258" to="model.127b1fff682.316"/>
+        <actions id="wires.127b1fff8c4.145" inParameterEdges="wires.127b1fff8c4.147" name="run" from="model.127b1fff682.258" to="model.127b1fff682.316"/>
       </onSent>
       <onFailure id="model.127b1fff682.257" outActions="wires.127b1fff8c4.144">
-        <actions xsi:type="iaml.wires:RunAction" inParameterEdges="wires.127b1fff8c4.146" id="wires.127b1fff8c4.144" name="run" from="model.127b1fff682.257" to="model.127b1fff682.316"/>
+        <actions id="wires.127b1fff8c4.144" inParameterEdges="wires.127b1fff8c4.146" name="run" from="model.127b1fff682.257" to="model.127b1fff682.316"/>
       </onFailure>
     </scopes>
     <children xsi:type="iaml.visual:Button" id="visual.127b1fff818.1c" name="send passing email" outActions="wires.127b1fff8c4.6">
-      <actions xsi:type="iaml.wires:RunAction" id="wires.127b1fff8c4.6" name="onClick" from="visual.127b1fff818.1c" to="model.127b1fff682.35"/>
+      <actions id="wires.127b1fff8c4.6" name="onClick" from="visual.127b1fff818.1c" to="model.127b1fff682.35"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.127b1fff818.1c9" name="send failing email" outActions="wires.127b1fff8c4.47"/>
     <children xsi:type="iaml.visual:InputTextField" id="visual.127b1fff818.280" name="status">

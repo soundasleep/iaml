@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12311dd5ff7.1">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.12311dd5ff7.1">
   <scopes xsi:type="iaml.visual:Frame" id="visual.12311dd6084.1" name="Home">
     <operations xsi:type="iaml:CompositeOperation" id="model.12311dd5ff7.c" name="target operation" inActions="wires.12311ff15e6.4">
       <operations xsi:type="iaml:PrimitiveOperation" id="model.12311e69386.13" name="set" inFlows="model.12311eb1e33.36" inExecutions="model.12311e69386.21" outFlows="model.12311e69386.28" outExecutions="model.12311e69386.24"/>
@@ -28,7 +28,7 @@
       <values id="model.12311eb1e33.34" name="value3" outFlows="model.12311eb1e33.39" value="baz"/>
     </operations>
     <onAccess id="model.12311eb1e33.140" outActions="wires.12311ff15e6.4">
-      <actions xsi:type="iaml.wires:RunAction" id="wires.12311ff15e6.4" name="run" from="model.12311eb1e33.140" to="model.12311dd5ff7.c"/>
+      <actions id="wires.12311ff15e6.4" name="run" from="model.12311eb1e33.140" to="model.12311dd5ff7.c"/>
     </onAccess>
     <children xsi:type="iaml.visual:InputTextField" id="visual.12311dd6084.8a" name="field1">
       <fieldValue id="model.12311dd5ff7.167" name="fieldValue" inFlows="model.12311e69386.28"/>

@@ -19,15 +19,15 @@
       <operations xsi:type="iaml:CompositeOperation" id="model.128240e31d2.173f" name="try save" inActions="wires.128240e326e.43a">
         <nodes xsi:type="iaml.operations:StartNode" id="operations.128240e327e.42c" outExecutions="model.128240e31d2.1818"/>
         <nodes xsi:type="iaml.operations:OperationCallNode" id="operations.128240e327e.430" outExecutions="model.12837b6dd45.1ed" inExecutions="model.12837b6dd45.1eb" outActions="wires.128240e326e.659">
-          <actions xsi:type="iaml.wires:RunAction" id="wires.128240e326e.659" name="run" from="operations.128240e327e.430" to="model.128240e31d2.10a0"/>
+          <actions id="wires.128240e326e.659" name="run" from="operations.128240e327e.430" to="model.128240e31d2.10a0"/>
         </nodes>
         <nodes xsi:type="iaml.operations:OperationCallNode" id="operations.128240e327e.432" outExecutions="model.12837b6dd45.1ec" inExecutions="model.128240e31d2.181b" outActions="wires.12837b6de10.b5">
-          <actions xsi:type="iaml.wires:RunAction" id="wires.12837b6de10.b5" name="run" from="operations.128240e327e.432" to="model.12837b6dd45.119"/>
+          <actions id="wires.12837b6de10.b5" name="run" from="operations.128240e327e.432" to="model.12837b6dd45.119"/>
         </nodes>
         <nodes xsi:type="iaml.operations:DecisionNode" id="operations.12837813716.23" outExecutions="model.128240e31d2.181a model.128240e31d2.181b" inExecutions="model.128240e31d2.1818" inConditionEdges="wires.12837b6de10.f"/>
         <nodes xsi:type="iaml.operations:FinishNode" id="operations.12837b6de10.1a" inExecutions="model.12837b6dd45.1ec model.12837b6dd45.1ed"/>
         <nodes xsi:type="iaml.operations:OperationCallNode" id="operations.12837b6de10.bb" outExecutions="model.12837b6dd45.1eb" inExecutions="model.128240e31d2.181a" outActions="wires.12837b6de10.b4">
-          <actions xsi:type="iaml.wires:RunAction" id="wires.12837b6de10.b4" name="run" from="operations.12837b6de10.bb" to="model.12837b6dd45.118"/>
+          <actions id="wires.12837b6de10.b4" name="run" from="operations.12837b6de10.bb" to="model.12837b6dd45.118"/>
         </nodes>
         <executionEdges id="model.128240e31d2.1818" from="operations.128240e327e.42c" to="operations.12837813716.23"/>
         <executionEdges id="model.128240e31d2.181a" name="y" from="operations.12837813716.23" to="operations.12837b6de10.bb"/>
@@ -37,10 +37,10 @@
         <executionEdges id="model.12837b6dd45.1ed" from="operations.128240e327e.430" to="operations.12837b6de10.1a"/>
       </operations>
       <onAccess id="model.12837b6dd45.17d" outActions="wires.12837b6de10.87">
-        <actions xsi:type="iaml.wires:RunAction" id="wires.12837b6de10.87" name="run" from="model.12837b6dd45.17d" to="model.12837b6dd45.118"/>
+        <actions id="wires.12837b6de10.87" name="run" from="model.12837b6dd45.17d" to="model.12837b6dd45.118"/>
       </onAccess>
       <children xsi:type="iaml.visual:Button" id="visual.128240e326e.4ba" name="Save" outActions="wires.128240e326e.43a">
-        <actions xsi:type="iaml.wires:RunAction" id="wires.128240e326e.43a" name="onClick" from="visual.128240e326e.4ba" to="model.128240e31d2.173f"/>
+        <actions id="wires.128240e326e.43a" name="onClick" from="visual.128240e326e.4ba" to="model.128240e31d2.173f"/>
       </children>
       <children xsi:type="iaml.visual:Label" id="visual.12837b6de01.45" name="Warning" defaultValue="Error: Could not save instance successfully.">
         <operations xsi:type="iaml:PrimitiveOperation" id="model.12837b6dd45.118" name="hide" inActions="wires.12837b6de10.87 wires.12837b6de10.b4"/>

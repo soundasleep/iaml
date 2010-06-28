@@ -16,7 +16,7 @@
     </elements>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.126cf449ab2.8" id="visual.126ceb685c2.c6" name="Edit Form"/>
     <children xsi:type="iaml.visual:Button" id="visual.126cf4499f6.27" name="save" outActions="wires.126cf449ab2.3">
-      <actions xsi:type="iaml.wires:RunAction" id="wires.126cf449ab2.3" name="click" from="visual.126cf4499f6.27" to="model.126cf449831.1c"/>
+      <actions id="wires.126cf449ab2.3" name="click" from="visual.126cf4499f6.27" to="model.126cf449831.1c"/>
     </children>
   </scopes>
   <schemas id="domain.128807fbeba.111d" name="Product" inSchemas="domain.128807fbeba.111f">

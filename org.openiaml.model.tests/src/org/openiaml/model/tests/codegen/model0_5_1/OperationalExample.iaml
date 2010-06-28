@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1283d80df01.1">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.1283d80df01.1">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <conditions xsi:type="iaml:CompositeCondition" id="model.1283d8dbd2d.aa" name="should update result?" outConditionEdges="wires.1283d8dbe46.54">
       <conditionEdges id="wires.1283d8dbe46.54" name="check" from="model.1283d8dbd2d.aa" to="operations.1283d8dbe46.112"/>
@@ -22,7 +22,7 @@
       <nodes xsi:type="iaml.operations:JoinNode" id="operations.1283d80dfbd.5f" outExecutions="model.1283d80df01.30a" inExecutions="model.1283d80df01.10f model.1283d80df01.383"/>
       <nodes xsi:type="iaml.operations:Arithmetic" id="operations.1283d80dfbd.78" inFlows="model.1283d80df01.14c model.1283d80df01.14f" outFlows="model.1283d80df01.14e"/>
       <nodes xsi:type="iaml.operations:OperationCallNode" id="operations.1283d80dfbd.105" outExecutions="model.1283d80df01.384" inExecutions="model.1283d8dbd2d.326" outActions="wires.1283d80dfad.73">
-        <actions xsi:type="iaml.wires:RunAction" inParameterEdges="wires.1283d98dcaf.b" id="wires.1283d80dfad.73" name="run external" from="operations.1283d80dfbd.105" to="model.1283d80df01.26b"/>
+        <actions id="wires.1283d80dfad.73" inParameterEdges="wires.1283d98dcaf.b" name="run external" from="operations.1283d80dfbd.105" to="model.1283d80df01.26b"/>
       </nodes>
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.1283d80dfbd.12e" inExecutions="model.1283d80df01.384 model.1283d8dbd2d.327"/>
       <nodes xsi:type="iaml.operations:DecisionNode" id="operations.1283d8dbe46.112" outExecutions="model.1283d8dbd2d.326 model.1283d8dbd2d.327" inExecutions="model.1283d80df01.30a" inConditionEdges="wires.1283d8dbe46.54"/>
@@ -54,7 +54,7 @@
       </values>
     </operations>
     <children xsi:type="iaml.visual:Button" id="visual.1283d80dfad.9" name="Run" outActions="wires.1283d80dfad.1">
-      <actions xsi:type="iaml.wires:RunAction" inParameterEdges="wires.1283d80dfad.3" id="wires.1283d80dfad.1" name="onClick" from="visual.1283d80dfad.9" to="model.1283d80df01.a"/>
+      <actions id="wires.1283d80dfad.1" inParameterEdges="wires.1283d80dfad.3" name="onClick" from="visual.1283d80dfad.9" to="model.1283d80df01.a"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.1283d80dfad.1e" name="Input" outParameterEdges="wires.1283d80dfad.3">
       <parameterEdges id="wires.1283d80dfad.3" from="visual.1283d80dfad.1e" to="wires.1283d80dfad.1"/>

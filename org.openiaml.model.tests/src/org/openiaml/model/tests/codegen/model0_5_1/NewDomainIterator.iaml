@@ -10,7 +10,7 @@
     </elements>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.12848bd27a5.1" id="visual.12848bd2796.20" name="Edit Form"/>
     <children xsi:type="iaml.visual:Button" id="visual.12848c09160.42" name="Save News" outActions="wires.12848c091be.15">
-      <actions xsi:type="iaml.wires:RunAction" id="wires.12848c091be.15" name="onClick" from="visual.12848c09160.42" to="model.12848c09018.12"/>
+      <actions id="wires.12848c091be.15" name="onClick" from="visual.12848c09160.42" to="model.12848c09018.12"/>
     </children>
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.12848c09160.5d" name="View News">

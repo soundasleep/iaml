@@ -11,7 +11,7 @@
       <children xsi:type="iaml.visual:InputTextField" id="visual.127b1fff818.3c0" name="field 3"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.127b1fff818.3f1" name="send email" outActions="wires.127b1fff8c4.183">
-      <actions xsi:type="iaml.wires:RunAction" id="wires.127b1fff8c4.183" name="onClick" from="visual.127b1fff818.3f1" to="model.127b1fff682.4ca"/>
+      <actions id="wires.127b1fff8c4.183" name="onClick" from="visual.127b1fff818.3f1" to="model.127b1fff682.4ca"/>
     </children>
   </scopes>
 </iaml:InternetApplication>

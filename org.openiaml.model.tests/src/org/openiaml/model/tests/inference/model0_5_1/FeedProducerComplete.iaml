@@ -10,7 +10,7 @@
         <parameterEdges id="wires.1280b46d1f2.c4" name="id" from="model.1280b46d146.1b9" to="wires.1280b46d1f2.ae"/>
       </properties>
       <children xsi:type="iaml.visual:Button" id="visual.1280b46d1e2.9f" name="link" outActions="wires.1280b46d1f2.ae">
-        <actions xsi:type="iaml.wires:NavigateAction" id="wires.1280b46d1f2.ae" name="onClick" from="visual.1280b46d1e2.9f" to="visual.1280b46d1e2.46" inParameterEdges="wires.1280b46d1f2.c4"/>
+        <actions id="wires.1280b46d1f2.ae" inParameterEdges="wires.1280b46d1f2.c4" name="onClick" from="visual.1280b46d1e2.9f" to="visual.1280b46d1e2.46"/>
       </children>
     </children>
   </scopes>

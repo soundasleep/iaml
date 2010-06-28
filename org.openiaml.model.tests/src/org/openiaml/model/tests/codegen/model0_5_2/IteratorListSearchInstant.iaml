@@ -14,7 +14,7 @@
         <parameterEdges id="wires.128b555c9eb.1a" from="model.128b555c911.1d" to="wires.128b555c9eb.19"/>
       </currentInput>
       <onInput id="model.128b555c911.1f" outActions="wires.128b555c9eb.19">
-        <actions xsi:type="iaml.wires:RunAction" inParameterEdges="wires.128b555c9eb.1a" id="wires.128b555c9eb.19" name="run" from="model.128b555c911.1f" to="model.128b555c911.4f"/>
+        <actions id="wires.128b555c9eb.19" inParameterEdges="wires.128b555c9eb.1a" name="run" from="model.128b555c911.1f" to="model.128b555c911.4f"/>
       </onInput>
     </children>
   </scopes>

@@ -10,10 +10,10 @@
       <operations xsi:type="iaml:PrimitiveOperation" id="model.128ae917af5.1f" name="show" inActions="wires.128ae917be0.b"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.128ae917bd0.2e" name="hide list" outActions="wires.128ae917be0.9">
-      <actions xsi:type="iaml.wires:RunAction" id="wires.128ae917be0.9" name="onClick" from="visual.128ae917bd0.2e" to="model.128ae917af5.1d"/>
+      <actions id="wires.128ae917be0.9" name="onClick" from="visual.128ae917bd0.2e" to="model.128ae917af5.1d"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.128ae917bd0.2f" name="show list" outActions="wires.128ae917be0.b">
-      <actions xsi:type="iaml.wires:RunAction" id="wires.128ae917be0.b" name="onClick" from="visual.128ae917bd0.2f" to="model.128ae917af5.1f"/>
+      <actions id="wires.128ae917be0.b" name="onClick" from="visual.128ae917bd0.2f" to="model.128ae917af5.1f"/>
     </children>
   </scopes>
   <schemas id="domain.128a9b17dce.1" name="News" inSchemas="domain.128a9b17dce.5">

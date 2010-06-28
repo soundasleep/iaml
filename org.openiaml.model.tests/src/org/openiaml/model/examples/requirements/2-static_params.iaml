@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="migrated0">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" id="migrated0">
   <scopes xsi:type="iaml.visual:Frame" id="visual.1203bbadbb8.85c" name="new">
     <children xsi:type="iaml.visual:InputTextField" id="visual.1203bbadbb8.879" name="value">
       <operations xsi:type="iaml:CompositeOperation" id="model.1203bbadb5b.53d" name="init" inActions="wires.1203bbadbb8.152"/>
       <onAccess id="model.1203bbadb5b.53c" outActions="wires.1203bbadbb8.152">
-        <actions xsi:type="iaml.wires:RunAction" inParameterEdges="wires.1203bbadbb8.153" id="wires.1203bbadbb8.152" name="run" from="model.1203bbadb5b.53c" to="model.1203bbadb5b.53d"/>
+        <actions id="wires.1203bbadbb8.152" inParameterEdges="wires.1203bbadbb8.153" name="run" from="model.1203bbadb5b.53c" to="model.1203bbadb5b.53d"/>
       </onAccess>
       <values id="model.1203bbadb5b.53e" name="a static value" outParameterEdges="wires.1203bbadbb8.153" value="value goes here">
         <parameterEdges id="wires.1203bbadbb8.153" from="model.1203bbadb5b.53e" to="wires.1203bbadbb8.152"/>

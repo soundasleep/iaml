@@ -54,7 +54,7 @@
       <wires xsi:type="iaml.wires:SyncWire" id="wires.12392019286.17c" name="sync" from="visual.12392019277.e7" to="domain.128807fbeba.e18"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.12392019277.178" name="save student" outActions="wires.12392019286.22b">
-      <actions xsi:type="iaml.wires:RunAction" id="wires.12392019286.22b" name="onClick" from="visual.12392019277.178" to="model.12392019209.2aa"/>
+      <actions id="wires.12392019286.22b" name="onClick" from="visual.12392019277.178" to="model.12392019209.2aa"/>
     </children>
   </scopes>
   <scopes xsi:type="iaml.scopes:Session" id="scopes.12392019286.4" name="a session">

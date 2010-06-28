@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12109dbdceb.19">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.12109dbdceb.19">
   <scopes xsi:type="iaml.visual:Frame" id="visual.12109dbdd39.37" name="expected failure page" inActions="wires.121370d7b40.23"/>
   <scopes xsi:type="iaml.visual:Frame" id="visual.121370d7b40.6" name="normal page"/>
   <scopes xsi:type="iaml.scopes:Session" id="scopes.121370d7b50.1" name="containing session" outActions="wires.121370d7b40.23">
@@ -8,9 +8,9 @@
       <nodes xsi:type="iaml.operations:CancelNode" id="operations.121370d7b50.1b" inExecutions="model.121370d7af2.82" exceptionText="an expected failure message"/>
       <executionEdges id="model.121370d7af2.82" from="operations.121370d7b50.19" to="operations.121370d7b50.1b"/>
     </operations>
-    <actions xsi:type="iaml.wires:NavigateAction" id="wires.121370d7b40.23" name="fail" from="scopes.121370d7b50.1" to="visual.12109dbdd39.37"/>
+    <actions id="wires.121370d7b40.23" name="fail" from="scopes.121370d7b50.1" to="visual.12109dbdd39.37"/>
     <onAccess id="model.121370d7af2.29" outActions="wires.121370d7b40.11">
-      <actions xsi:type="iaml.wires:RunAction" id="wires.121370d7b40.11" name="run" from="model.121370d7af2.29" to="model.121370d7af2.33"/>
+      <actions id="wires.121370d7b40.11" name="run" from="model.121370d7af2.29" to="model.121370d7af2.33"/>
     </onAccess>
     <scopes xsi:type="iaml.visual:Frame" id="visual.121370d7b40.18" name="session page">
       <operations xsi:type="iaml:CompositeOperation" id="model.121370d7af2.117" name="instant failure in the page itself" inActions="wires.121370d7b40.73">
@@ -20,7 +20,7 @@
         <executionEdges id="model.121370d7af2.1cc" from="operations.121370d7b50.5a" to="operations.121370d7b50.5c"/>
       </operations>
       <onAccess id="model.121370d7af2.f5" outActions="wires.121370d7b40.73">
-        <actions xsi:type="iaml.wires:RunAction" id="wires.121370d7b40.73" name="run" from="model.121370d7af2.f5" to="model.121370d7af2.117"/>
+        <actions id="wires.121370d7b40.73" name="run" from="model.121370d7af2.f5" to="model.121370d7af2.117"/>
       </onAccess>
     </scopes>
   </scopes>

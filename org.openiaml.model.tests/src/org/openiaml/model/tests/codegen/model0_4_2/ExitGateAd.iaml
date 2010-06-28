@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.126b0cb5dec.23">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.126b0cb5dec.23">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
   <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.20" name="External Page"/>
   <scopes xsi:type="iaml.scopes:Session" id="scopes.126b0cb5e69.4" name="Advertising Session">
@@ -16,7 +16,7 @@
     </conditions>
     <properties id="model.126b0cb5dec.3e" name="ad viewed?" outFlows="model.126b0cb5dec.8a" inFlows="model.126b0cb5dec.182" defaultValue="false"/>
     <exitGate id="components.126b0cb5e69.5" name="View Ads Exit Gate" inConditionEdges="wires.126b0cb5e5a.17" outActions="wires.126b0cb5e5a.e" inActions="wires.126b0cb5e5a.10e">
-      <actions xsi:type="iaml.wires:NavigateAction" id="wires.126b0cb5e5a.e" name="view ad" from="components.126b0cb5e69.5" to="visual.126b0cb5e5a.4a"/>
+      <actions id="wires.126b0cb5e5a.e" name="view ad" from="components.126b0cb5e69.5" to="visual.126b0cb5e5a.4a"/>
     </exitGate>
     <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.27" name="Page 1"/>
     <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.29" name="Page 2"/>
@@ -33,10 +33,10 @@
         <values id="model.126b0cb5dec.178" name="true" outFlows="model.126b0cb5dec.180" value="true"/>
       </operations>
       <onAccess id="model.126b0cb5dec.c4" outActions="wires.126b0cb5e5a.4b">
-        <actions xsi:type="iaml.wires:RunAction" id="wires.126b0cb5e5a.4b" name="run" from="model.126b0cb5dec.c4" to="model.126b0cb5dec.d8"/>
+        <actions id="wires.126b0cb5e5a.4b" name="run" from="model.126b0cb5dec.c4" to="model.126b0cb5dec.d8"/>
       </onAccess>
       <children xsi:type="iaml.visual:Button" id="visual.126b0cb5e5a.2d5" name="Resume" outActions="wires.126b0cb5e5a.10e">
-        <actions xsi:type="iaml.wires:NavigateAction" id="wires.126b0cb5e5a.10e" name="onClick" from="visual.126b0cb5e5a.2d5" to="components.126b0cb5e69.5"/>
+        <actions id="wires.126b0cb5e5a.10e" name="onClick" from="visual.126b0cb5e5a.2d5" to="components.126b0cb5e69.5"/>
       </children>
     </scopes>
   </scopes>

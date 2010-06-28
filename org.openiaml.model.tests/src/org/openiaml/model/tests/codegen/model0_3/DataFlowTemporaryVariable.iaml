@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.120ac60dcea.125">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.120ac60dcea.125">
   <scopes xsi:type="iaml.visual:Frame" id="visual.120ac60dd48.2c0" name="container">
     <children xsi:type="iaml.visual:InputTextField" id="visual.120ac60dd48.2c6" name="target">
       <operations xsi:type="iaml:CompositeOperation" id="model.120ac60dcea.198" name="special operation" inActions="wires.120ac60dd48.b8">
@@ -18,7 +18,7 @@
         <variables id="model.120ac60dcea.2e0" name="a temporary variable" outFlows="model.120ac60dcea.3a9" inFlows="model.120ac60dcea.332"/>
       </operations>
       <onChange id="model.120ac60dcea.133" outActions="wires.120ac60dd48.b8">
-        <actions xsi:type="iaml.wires:RunAction" inParameterEdges="wires.120ac60dd48.cc" id="wires.120ac60dd48.b8" name="run" from="model.120ac60dcea.133" to="model.120ac60dcea.198"/>
+        <actions id="wires.120ac60dd48.b8" inParameterEdges="wires.120ac60dd48.cc" name="run" from="model.120ac60dcea.133" to="model.120ac60dcea.198"/>
       </onChange>
       <fieldValue id="model.120ac60dcea.1d9" name="fieldValue" outParameterEdges="wires.120ac60dd48.cc">
         <parameterEdges id="wires.120ac60dd48.cc" from="model.120ac60dcea.1d9" to="wires.120ac60dd48.b8"/>

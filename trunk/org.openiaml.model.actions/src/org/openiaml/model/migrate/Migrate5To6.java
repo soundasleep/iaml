@@ -21,6 +21,7 @@ import org.w3c.dom.Node;
  *   <li>DecisionCondition has been merged into DecisionNode ({@issue 160})
  *   <li>"setPropertyToValue" PrimitiveOperation is now merged into "set" ({@issue 143})
  *   <li>InternetApplication.children is now merged into InternetApplication.elements (as it is now a Scope)
+ *   <li>NavigateAction and RunAction merged into ActionEdge
  *   <li>Others...
  * </ol>
  * 
@@ -82,6 +83,12 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 
 		if (xsiType.equals("iaml.users:UserInstance") || xsiType.equals("iaml:DomainObjectInstance")) {
 			return "iaml.domain:DomainIterator";
+		}
+		
+		// NavigateAction, RunAction --> ActionEdge
+		// (EMF reloading/resaving will remove the xsiType entirely)
+		if (xsiType.equals("iaml.wires:NavigateAction") || xsiType.equals("iaml.wires:RunAction")) {
+			return "iaml:ActionEdge";
 		}
 
 		return super.replaceType(element, xsiType, errors);

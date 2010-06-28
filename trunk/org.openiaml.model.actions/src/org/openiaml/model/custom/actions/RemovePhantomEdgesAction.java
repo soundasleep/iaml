@@ -27,7 +27,7 @@ import org.openiaml.model.inference.EcoreInferenceHandler;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.inference.InfiniteSubProgressMonitor;
-import org.openiaml.model.model.Action;
+import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.Wire;
@@ -192,6 +192,8 @@ public class RemovePhantomEdgesAction extends IamlFileAction {
 	/**
 	 * Should the given object be removed, i.e. does it contain a phantom edge?
 	 * 
+	 * TODO Should be refactored using {@link EdgeTypes}.
+	 * 
 	 * @see EdgeTypes#getEdgeTypes() 
 	 * @param obj
 	 * @return
@@ -200,8 +202,8 @@ public class RemovePhantomEdgesAction extends IamlFileAction {
 		if (obj instanceof Wire && (((Wire) obj).getFrom() == null 
 				|| ((Wire) obj).getTo() == null)) {
 			return true;
-		} else if (obj instanceof Action && (((Action) obj).getFrom() == null 
-				|| ((Action) obj).getTo() == null)) {
+		} else if (obj instanceof ActionEdge && (((ActionEdge) obj).getFrom() == null 
+				|| ((ActionEdge) obj).getTo() == null)) {
 			return true;
 		} else if (obj instanceof ExecutionEdge && (((ExecutionEdge) obj).getFrom() == null 
 				|| ((ExecutionEdge) obj).getTo() == null)) {

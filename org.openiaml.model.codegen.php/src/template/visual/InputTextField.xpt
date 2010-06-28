@@ -22,6 +22,11 @@
  * @implementation InputTextField
  *		To improve performance, {@model InputTextField#onInput} is only executed
  *		100 ms after the last character has been entered.
+ *
+ * @implementation InputTextField
+ *		The rendered {@model Changeable#fieldValue value} of a {@model InputTextField}
+ *		is selected from the following order: the set {@model Changeable#fieldValue}; outgoing
+ *		{@model SyncWire}s; incoming {@model SyncWire}s; or incoming {@model SetWire}s.
  */
 «DEFINE renderTextField(model::visual::Frame currentFrame) FOR model::visual::InputTextField-»
 	<div>
@@ -201,6 +206,11 @@
 		«REM»contained in a Session: a session value«ENDREM»
 		value="<?php echo htmlspecialchars(require_session("«safeName(containingSession(this))»_«safeNameString(id)»", "«escapeString(defaultValue)»")); ?>"
 	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE staticInitialValue(model::visual::Frame currentFrame) FOR model::VisibleThing»
+	«REM»VisibleThings simply refer to the containing fieldValue implicitly«ENDREM»
+	«EXPAND staticInitialValue(currentFrame) FOR fieldValue»
 «ENDDEFINE»
 
 «DEFINE staticInitialValue(model::visual::Frame currentFrame) FOR model::DomainAttributeInstance»

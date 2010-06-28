@@ -117,6 +117,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//GeneratedElement/isGenerated"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//GeneratedElement/id"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//GeneratedElement/generatedRule"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//GeneratedElement/overriddenNames"/>
     </genClasses>
     <genClasses image="false" ecoreClass="iaml.ecore#//GeneratesElements">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//GeneratesElements/generatedElements"/>

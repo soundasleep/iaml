@@ -9,7 +9,7 @@
 	<label
 		id="«safeNameString(id)-»_label"
 		for="«safeNameString(id)-»" 
-		class="iaml_map_label"
+		class="iaml_map_label map_«safeNameString(name)»"
 		«EXPAND EventHandlers::getInlineClickJavascript(currentFrame)»
 		>
 

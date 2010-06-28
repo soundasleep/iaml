@@ -235,8 +235,8 @@ function populate_iterator_list_«safeName()»() {
 		 
 		// reset all the stored label values
 		«IF containingSession() != null»
-			$_SESSION["«safeName(containingSession())»_«safeName()»_limit] = $iterator->getLimit();
-			$_SESSION["«safeName(containingSession())»_«safeName()»_count] = $iterator->count();
+			$_SESSION["«safeName(containingSession())»_«safeName()»_limit"] = $iterator->getLimit();
+			$_SESSION["«safeName(containingSession())»_«safeName()»_count"] = $iterator->count();
 		«ELSE»
 			set_application_value("«safeName()»_limit", $iterator->getLimit());
 			set_application_value("«safeName()»_count", $iterator->count());
@@ -300,7 +300,7 @@ function populate_iterator_list_«safeName()»() {
 
 	// it has now been initialised
 	«IF containingSession() != null»
-		$_SESSION["«safeName(containingSession())»_«safeName()»_initialised] = 1;
+		$_SESSION["«safeName(containingSession())»_«safeName()»_initialised"] = 1;
 	«ELSE»
 		set_application_value("«safeName()»_initialised", 1);
 	«ENDIF»

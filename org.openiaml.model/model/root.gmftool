@@ -275,28 +275,15 @@
         collapsible="true">
       <tools
           xsi:type="gmftool:CreationTool"
-          title="RunAction"
-          description="Create new RunAction">
+          title="ActionEdge"
+          description="Create new ActionEdge">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/RunAction.gif"
+            path="icons/full/obj16/ActionEdge.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/RunAction.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
-          title="NavigateAction"
-          description="Create new NavigateAction">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/NavigateAction.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/NavigateAction.gif"
+            path="icons/full/obj32/ActionEdge.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
     </tools>

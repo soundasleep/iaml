@@ -678,31 +678,31 @@
         <modelFacet parser="//@labelParsers/@implementations.0"/>
       </labels>
     </links>
-    <links createCommandClassName="RunActionCreateCommand" editPartClassName="RunActionEditPart" itemSemanticEditPolicyClassName="RunActionItemSemanticEditPolicy" notationViewFactoryClassName="RunActionViewFactory" reorientCommandClassName="RunActionReorientCommand" visualID="4003">
+    <links createCommandClassName="ActionEdgeCreateCommand" editPartClassName="ActionEdgeEditPart" itemSemanticEditPolicyClassName="ActionEdgeItemSemanticEditPolicy" reorientCommandClassName="ActionEdgeReorientCommand" visualID="4004">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
-      <elementType editHelperClassName="RunActionEditHelper" xsi:type="gmfgen:MetamodelType"/>
-      <viewmap classBody="&#10;/**&#10; * @generated&#10; */&#10;public class RunActionFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureRunActionNameFigure; &#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureRunActionStereotypeFigure; &#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public RunActionFigure() {&#10;&#9;&#9;this.setLineWidth(1);&#10;this.setLineStyle(org.eclipse.draw2d.Graphics.LINE_DASH);&#10;&#9;this.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);&#10;&#10;&#9;&#9;createContents();&#10;&#9;&#9;setTargetDecoration(createTargetDecoration());&#10;&#9;}&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private void createContents(){&#10;&#10;&#10;fFigureRunActionNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureRunActionNameFigure.setText(&quot;&lt;...&gt;&quot;);&#10;&#10;this.add(fFigureRunActionNameFigure);&#10;&#10;&#10;&#10;fFigureRunActionStereotypeFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureRunActionStereotypeFigure.setText(&quot;: RunAction&quot;);&#10;&#10;this.add(fFigureRunActionStereotypeFigure);&#10;&#10;&#10;&#9;}&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#10;&#9;&#9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#10;df.setLineWidth(1);&#10;&#9;&#9;return df;&#10;&#9;}&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureRunActionNameFigure() {&#10;&#9;&#9;return fFigureRunActionNameFigure;&#10;&#9;}&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureRunActionStereotypeFigure() {&#10;&#9;&#9;return fFigureRunActionStereotypeFigure;&#10;&#9;}&#10;&#10;&#10;}&#10;&#10;" className="RunActionFigure" xsi:type="gmfgen:InnerClassViewmap">
+      <elementType editHelperClassName="ActionEdgeEditHelper" xsi:type="gmfgen:MetamodelType"/>
+      <viewmap classBody="&#10;/**&#10; * @generated&#10; */&#10;public class ActionEdgeFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureActionEdgeNameFigure; &#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureActionEdgeStereotypeFigure; &#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public ActionEdgeFigure() {&#10;&#9;&#9;this.setLineWidth(1);&#10;this.setLineStyle(org.eclipse.draw2d.Graphics.LINE_DASH);&#10;&#9;this.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);&#10;&#10;&#9;&#9;createContents();&#10;&#9;&#9;setTargetDecoration(createTargetDecoration());&#10;&#9;}&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private void createContents(){&#10;&#10;&#10;fFigureActionEdgeNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureActionEdgeNameFigure.setText(&quot;&lt;...&gt;&quot;);&#10;&#10;this.add(fFigureActionEdgeNameFigure);&#10;&#10;&#10;&#10;fFigureActionEdgeStereotypeFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureActionEdgeStereotypeFigure.setText(&quot;: ActionEdge&quot;);&#10;&#10;this.add(fFigureActionEdgeStereotypeFigure);&#10;&#10;&#10;&#9;}&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#10;&#9;&#9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#10;df.setLineWidth(1);&#10;&#9;&#9;return df;&#10;&#9;}&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureActionEdgeNameFigure() {&#10;&#9;&#9;return fFigureActionEdgeNameFigure;&#10;&#9;}&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureActionEdgeStereotypeFigure() {&#10;&#9;&#9;return fFigureActionEdgeStereotypeFigure;&#10;&#9;}&#10;&#10;&#10;}&#10;&#10;" className="ActionEdgeFigure" xsi:type="gmfgen:InnerClassViewmap">
         <attributes fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
       </viewmap>
-      <modelFacet modelElementSelector="//@expressionProviders/@providers.1/@expressions.3" xsi:type="gmfgen:TypeLinkModelFacet">
-        <metaClass href="iaml.genmodel#//model/wires/RunAction"/>
+      <modelFacet xsi:type="gmfgen:TypeLinkModelFacet">
+        <metaClass href="iaml.genmodel#//model/ActionEdge"/>
         <containmentMetaFeature href="iaml.genmodel#//model/ContainsWires/actions"/>
         <childMetaFeature href="iaml.genmodel#//model/ContainsWires/actions"/>
-        <sourceMetaFeature href="iaml.genmodel#//model/Action/from"/>
-        <targetMetaFeature href="iaml.genmodel#//model/Action/to"/>
+        <sourceMetaFeature href="iaml.genmodel#//model/ActionEdge/from"/>
+        <targetMetaFeature href="iaml.genmodel#//model/ActionEdge/to"/>
       </modelFacet>
-      <labels editPartClassName="RunActionNameEditPart" elementIcon="true" itemSemanticEditPolicyClassName="RunActionNameItemSemanticEditPolicy" notationViewFactoryClassName="RunActionNameViewFactory" visualID="6003">
+      <labels editPartClassName="ActionEdgeNameEditPart" elementIcon="true" itemSemanticEditPolicyClassName="ActionEdgeNameItemSemanticEditPolicy" visualID="6006">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
-        <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureRunActionNameFigure" xsi:type="gmfgen:ParentAssignedViewmap">
+        <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureActionEdgeNameFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes xsi:type="gmfgen:LabelOffsetAttributes" y="40"/>
         </viewmap>
         <modelFacet parser="//@labelParsers/@implementations.1" xsi:type="gmfgen:FeatureLabelModelFacet">
           <metaFeatures href="iaml.genmodel#//model/NamedElement/name"/>
         </modelFacet>
       </labels>
-      <labels editPartClassName="WrappingLabel46EditPart" itemSemanticEditPolicyClassName="WrappingLabel46ItemSemanticEditPolicy" notationViewFactoryClassName="RunActionLabelViewFactory" readOnly="true" visualID="6005">
+      <labels editPartClassName="WrappingLabel27EditPart" itemSemanticEditPolicyClassName="WrappingLabel27ItemSemanticEditPolicy" readOnly="true" visualID="6007">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
-        <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureRunActionStereotypeFigure" xsi:type="gmfgen:ParentAssignedViewmap">
+        <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureActionEdgeStereotypeFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes xsi:type="gmfgen:LabelOffsetAttributes" y="60"/>
         </viewmap>
         <modelFacet parser="//@labelParsers/@implementations.0"/>
@@ -720,7 +720,7 @@
         <entries description="Create new SyncWire" genLinks="//@diagram/@links.0" largeIconPath="/org.openiaml.model.edit/icons/full/obj32/SyncWire.gif" smallIconPath="/org.openiaml.model.edit/icons/full/obj16/SyncWire.gif" title="SyncWire" xsi:type="gmfgen:ToolEntry"/>
       </groups>
       <groups collapse="true" description="Actions" title="Actions">
-        <entries description="Create new RunAction" genLinks="//@diagram/@links.1" largeIconPath="/org.openiaml.model.edit/icons/full/obj32/RunAction.gif" smallIconPath="/org.openiaml.model.edit/icons/full/obj16/RunAction.gif" title="RunAction" xsi:type="gmfgen:ToolEntry"/>
+        <entries description="Create new ActionEdge" genLinks="//@diagram/@links.1" largeIconPath="/org.openiaml.model.edit/icons/full/obj32/ActionEdge.gif" smallIconPath="/org.openiaml.model.edit/icons/full/obj16/ActionEdge.gif" title="ActionEdge" xsi:type="gmfgen:ToolEntry"/>
       </groups>
       <groups collapse="true" description="Domain Iterating" title="Domain Iterating">
         <entries description="Create new EventTrigger [onIterate]" largeIconPath="/org.openiaml.model.edit/icons/full/obj32/EventTrigger.gif" smallIconPath="/org.openiaml.model.edit/icons/full/obj16/EventTrigger.gif" title="EventTrigger [onIterate]" xsi:type="gmfgen:ToolEntry"/>
@@ -900,7 +900,6 @@
       <expressions body="self.oclIsTypeOf( CompositeOperation )" xsi:type="gmfgen:GenConstraint"/>
       <expressions body="self.oclIsTypeOf( CompositeCondition )" xsi:type="gmfgen:GenConstraint"/>
       <expressions body="self.oclIsTypeOf( SyncWire )" xsi:type="gmfgen:GenConstraint"/>
-      <expressions body="self.oclIsTypeOf( RunAction )" xsi:type="gmfgen:GenConstraint"/>
     </providers>
   </expressionProviders>
   <labelParsers extensibleViaService="true">

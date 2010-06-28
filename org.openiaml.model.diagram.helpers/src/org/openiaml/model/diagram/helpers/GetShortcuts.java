@@ -9,9 +9,9 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.notation.View;
-import org.openiaml.model.model.Action;
-import org.openiaml.model.model.ActionDestination;
-import org.openiaml.model.model.ActionSource;
+import org.openiaml.model.model.ActionEdge;
+import org.openiaml.model.model.ActionEdgeDestination;
+import org.openiaml.model.model.ActionEdgeSource;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DataFlowEdgeDestination;
 import org.openiaml.model.model.DataFlowEdgesSource;
@@ -73,15 +73,15 @@ public class GetShortcuts {
 				elements.addAll(getAllShortcutsFromWires(doneAlready, edges, view, e,
 						((WireDestination) e).getInWires(), registry, updater));
 			}
-			if (e instanceof ActionSource) {
+			if (e instanceof ActionEdgeSource) {
 				// get all incoming edges
-				elements.addAll(getAllShortcutsFromActions(doneAlready, edges, view, e,
-						((ActionSource) e).getOutActions(), registry, updater));
+				elements.addAll(getAllShortcutsFromActionEdges(doneAlready, edges, view, e,
+						((ActionEdgeSource) e).getOutActions(), registry, updater));
 			}
-			if (e instanceof ActionDestination) {
+			if (e instanceof ActionEdgeDestination) {
 				// get all incoming edges
-				elements.addAll(getAllShortcutsFromActions(doneAlready, edges, view, e,
-						((ActionDestination) e).getInActions(), registry, updater));
+				elements.addAll(getAllShortcutsFromActionEdges(doneAlready, edges, view, e,
+						((ActionEdgeDestination) e).getInActions(), registry, updater));
 			}
 			if (e instanceof ExecutionEdgesSource) {
 				// get all incoming edges
@@ -244,12 +244,12 @@ public class GetShortcuts {
 		return result;
 	}
 
-	private static List<Action> getAllShortcutsFromActions(
+	private static List<ActionEdge> getAllShortcutsFromActionEdges(
 			List<EObject> doneAlready,
 			List<EObject> edges,
 			View view,
 			EObject source,
-			List<Action> outEdges,
+			List<ActionEdge> outEdges,
 			IVisualIDRegistryInstance registry,
 			IDiagramUpdater updater) {
 		List result = new LinkedList();
@@ -259,7 +259,7 @@ public class GetShortcuts {
 		// get all nodes at the start and end of the edge
 		// that are not the original object source
 		// NOTE: model-specific
-		for (Action wire : outEdges) {
+		for (ActionEdge wire : outEdges) {
 			// only look into these edges if we can actually render them...
 			if (registry.getLinkWithClassVisualID(wire) != -1) {
 				updater.considerElementForShortcut(wire.getFrom(), wire, view, source, doneAlready, result, edges);
@@ -624,8 +624,8 @@ public class GetShortcuts {
 		if (relationship instanceof Wire) {
 			return ((Wire) relationship).getFrom();
 		}
-		if (relationship instanceof Action) {
-			return ((Action) relationship).getFrom();
+		if (relationship instanceof ActionEdge) {
+			return ((ActionEdge) relationship).getFrom();
 		}
 		if (relationship instanceof ExecutionEdge) {
 			return ((ExecutionEdge) relationship).getFrom();
@@ -690,8 +690,8 @@ public class GetShortcuts {
 		if (relationship instanceof Wire) {
 			return ((Wire) relationship).getTo();
 		}
-		if (relationship instanceof Action) {
-			return ((Action) relationship).getTo();
+		if (relationship instanceof ActionEdge) {
+			return ((ActionEdge) relationship).getTo();
 		}
 		if (relationship instanceof ExecutionEdge) {
 			return ((ExecutionEdge) relationship).getTo();

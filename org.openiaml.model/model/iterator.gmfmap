@@ -637,20 +637,18 @@
   </links>
   <links>
     <domainMetaElement
-        href="iaml.ecore#//wires/RunAction"/>
-    <domainSpecialization
-        body="self.oclIsTypeOf( RunAction )"/>
+        href="iaml.ecore#//ActionEdge"/>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping">
       <diagramLabel
-          href="iaml.gmfgraph#RunActionName"/>
+          href="iaml.gmfgraph#ActionEdgeName"/>
       <features
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
     <labelMappings
         readOnly="true">
       <diagramLabel
-          href="iaml.gmfgraph#RunActionStereotype"/>
+          href="iaml.gmfgraph#ActionEdgeStereotype"/>
     </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/actions"/>
@@ -658,13 +656,13 @@
         xsi:type="gmftool:CreationTool"
         href="iterator.gmftool#//@palette/@tools.2/@tools.0"/>
     <diagramLink
-        href="iaml.gmfgraph#RunAction"/>
+        href="iaml.gmfgraph#ActionEdge"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//Action/from"/>
+        href="iaml.ecore#//ActionEdge/from"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//Action/to"/>
+        href="iaml.ecore#//ActionEdge/to"/>
   </links>
   <diagram>
     <diagramCanvas

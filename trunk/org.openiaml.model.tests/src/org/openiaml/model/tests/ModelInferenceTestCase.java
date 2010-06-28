@@ -321,21 +321,25 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	}
 	
 	/**
-	 * Assert that the given element is generated.
+	 * Assert that the given elements are generated.
 	 * 
 	 * @param e
 	 */
-	public void assertGenerated(GeneratedElement e) {
-		assertTrue("Element '" + e + "' should be generated", e.isIsGenerated());
+	public void assertGenerated(GeneratedElement... elements) {
+		for (GeneratedElement e : elements) { 
+			assertTrue("Element '" + e + "' should be generated", e.isIsGenerated());
+		}
 	}
 
 	/**
-	 * Assert that the given element is not generated.
+	 * Assert that the given elements are not generated.
 	 * 
 	 * @param e
 	 */
-	public void assertNotGenerated(GeneratedElement e) {
-		assertFalse("Element '" + e + "' should not be generated", e.isIsGenerated());
+	public void assertNotGenerated(GeneratedElement... elements) {
+		for (GeneratedElement e : elements) {
+			assertFalse("Element '" + e + "' should not be generated", e.isIsGenerated());
+		}
 	}
 
 	/**

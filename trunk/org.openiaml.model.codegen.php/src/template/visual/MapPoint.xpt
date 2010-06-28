@@ -21,6 +21,12 @@
 	«ENDIF»
 «ENDDEFINE»
 
+/**
+ * @implementation MapPoint
+ *		The rendered {@model Changeable#fieldValue value} of a {@model MapPoint}
+ *		is selected from the following order: the set {@model Changeable#fieldValue}; outgoing
+ *		{@model SyncWire}s; incoming {@model SyncWire}s; or incoming {@model SetWire}s.
+ */
 «DEFINE continueMapPointRender(model::visual::Frame currentFrame) FOR model::visual::MapPoint-»
 	«REM»print out any required scripting for the point«ENDREM»
 	<?php
@@ -78,13 +84,23 @@
 		
 		$point_visible = false;
 		$point_address = null; 
-	
+
 		«IF fieldValue != null»
 			// check fieldValue property
 			if (!$point_visible) {
 				«EXPAND staticInitialMapPointValue(currentFrame) FOR fieldValue»
 			}
 		«ENDIF»
+			
+		if (!$point_visible) {
+			«EXPAND mapPoint_getInitialValuesSyncWire(currentFrame) FOREACH outWires.typeSelect(model::wires::SyncWire)» 			 
+		}		
+		if (!$point_visible) {
+			«EXPAND mapPoint_getInitialValuesSyncWire(currentFrame) FOREACH inWires.typeSelect(model::wires::SyncWire)»
+		} 
+		if (!$point_visible) {
+			«EXPAND mapPoint_getInitialValuesSetWire(currentFrame) FOREACH inWires.typeSelect(model::wires::SetWire)»
+		} 			 
 
 		?>
 
@@ -225,5 +241,67 @@
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE exception FOR Object»
+/**
+ * @implementation SyncWire,MapPoint
+ *		If a {@model MapPoint} is connected to a {@model SyncWire}, then the
+ * 		value obtained from the {@model SyncWire} will be used to initially populate the
+ *		{@model MapPoint} if the value is empty.
+ */
+«DEFINE mapPoint_getInitialValuesSyncWire(model::visual::Frame currentFrame) FOR model::wires::SyncWire»
+	«EXPAND mapPoint_staticInitialValue(currentFrame) FOR from»
+	«EXPAND mapPoint_staticInitialValue(currentFrame) FOR to»
+«ENDDEFINE»
+
+/* if it connects to a SetWire that is an Property, use this
+   property as the value */
+«DEFINE mapPoint_getInitialValuesSetWire(model::visual::Frame currentFrame) FOR model::wires::SetWire»
+	«EXPAND mapPoint_staticInitialValue(currentFrame) FOR from»
+«ENDDEFINE»
+
+/* ignore these sources */
+«DEFINE mapPoint_staticInitialValue(model::visual::Frame currentFrame) FOR model::WireSource»
+«ENDDEFINE»
+«DEFINE mapPoint_staticInitialValue(model::visual::Frame currentFrame) FOR model::WireDestination»
+«ENDDEFINE»
+
+/* we have a property to provide [in PHP] */
+«DEFINE mapPoint_staticInitialValue(model::visual::Frame currentFrame) FOR model::Property»
+	«IF containingSession(this) == null»
+		«REM»contained in a Frame or InternetApplication: a static value«ENDREM»
+		if (get_application_value("«safeNameString(id)»", null) !== null) {
+			$value = get_application_value("«safeNameString(id)»", "«escapeString(defaultValue)»");
+			$point_address = $value;
+			$point_visible = true;
+		}
+	«ELSE»
+		«REM»contained in a Session: a session value«ENDREM»
+		if (has_session("«safeName(containingSession(this))»_«safeNameString(id)»", null) !== null) {
+			$value = require_session("«safeName(containingSession(this))»_«safeNameString(id)»", "«escapeString(defaultValue)»");
+			$point_address = $value;
+			$point_visible = true;
+		}
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE mapPoint_staticInitialValue(model::visual::Frame currentFrame) FOR model::VisibleThing»
+	«REM»VisibleThings simply refer to the containing fieldValue implicitly«ENDREM»
+	«EXPAND mapPoint_staticInitialValue(currentFrame) FOR fieldValue»
+«ENDDEFINE»
+
+«DEFINE mapPoint_staticInitialValue(model::visual::Frame currentFrame) FOR model::DomainAttributeInstance»
+	«REM»from a domain attribute instance.«ENDREM»
+	if (has_attribute_instance_«safeName()»()) {
+		$value = htmlspecialchars(get_attribute_instance_«safeName()»());
+		$point_address = $value;
+		$point_visible = true;
+	}
+«ENDDEFINE»
+
+«DEFINE mapPoint_staticInitialValue(model::visual::Frame currentFrame) FOR model::QueryParameter»
+	«REM»from the query«ENDREM»
+	if («EXPAND template::operations::Parameters::callParameterValueExists») {
+		$value = «EXPAND template::operations::Parameters::callParameterValue(true, false)»;
+		$point_address = $value;
+		$point_visible = true;
+	}
 «ENDDEFINE»

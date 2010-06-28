@@ -68,6 +68,12 @@
 /**
  * Get the current 'value' of the given Label, into the given
  * argument name. Assumed to be in PHP mode.
+ *
+ * @implementation Label
+ *		The rendered {@model Changeable#fieldValue value} of a {@model Label}
+ *		is selected from the following order: the set {@model Changeable#fieldValue}; 
+ *		the set {@model Changeable#defaultValue}; outgoing
+ *		{@model SyncWire}s; incoming {@model SyncWire}s; or incoming {@model SetWire}s.
  */
 «DEFINE getLabelFieldValue(model::visual::Frame currentFrame, String argName) FOR model::visual::Label»
 	$label_set = false;

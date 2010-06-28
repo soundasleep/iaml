@@ -22,6 +22,7 @@ import org.eclipse.gmf.runtime.notation.Style;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
+import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Condition;
@@ -53,7 +54,6 @@ import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Label;
 import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
-import org.openiaml.model.model.wires.RunAction;
 import org.openiaml.model.model.wires.SyncWire;
 
 /**
@@ -555,16 +555,25 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 
 	/**
 	 * Assert that a RunAction exists between two elements in the editor.
+	 * 
+	 * @deprecated use {@link #assertHasActionEdge(DiagramDocumentEditor, EditPart, EditPart, String)} instead.
 	 */
 	public ConnectionNodeEditPart assertHasRunAction(DiagramDocumentEditor editor, EditPart source, EditPart target, String name) {
+		return assertHasActionEdge(editor, source, target, name);
+	}
+	
+	/**
+	 * Assert that an ActionEdge exists between two elements in the editor.
+	 */
+	public ConnectionNodeEditPart assertHasActionEdge(DiagramDocumentEditor editor, EditPart source, EditPart target, String name) {
 		String found = "";
 
 		for (Object c : editor.getDiagramEditPart().getConnections()) {
 			if (c instanceof ConnectionNodeEditPart) {
 				ConnectionNodeEditPart connection = (ConnectionNodeEditPart) c;
 				EObject element = connection.resolveSemanticElement();
-				if (element instanceof RunAction) {
-					RunAction w = (RunAction) element;
+				if (element instanceof ActionEdge) {
+					ActionEdge w = (ActionEdge) element;
 					if (connection.getSource().equals(source) &&
 							connection.getTarget().equals(target) && w.getName().equals(name))
 						return connection;	// found it

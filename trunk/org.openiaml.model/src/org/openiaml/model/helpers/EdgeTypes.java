@@ -8,19 +8,30 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
+import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.ModelPackage;
+import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.domain.DomainPackage;
 import org.openiaml.model.model.users.UsersPackage;
 import org.openiaml.model.model.wires.WiresPackage;
 
 /**
- * TODO make this class non-static
+ * A helper run-time class that lists runtime information about all of the
+ * edge types in the system; for example, {@link Wire} or {@link ExecutionEdge}.
  * 
  * @author jmwright
  *
  */
 public class EdgeTypes {
 	
+	/**
+	 * Represents a single type of edge, along with its implementing class,
+	 * to/from references and their opposites, and the implementing classes
+	 * of the source and target of the edge. 
+	 * 
+	 * @author jmwright
+	 *
+	 */
 	public static class EdgeType {
 		private EClass edgeType;
 		private EClass edgeSource;
@@ -29,6 +40,7 @@ public class EdgeTypes {
 		private EReference toRef;
 		private EReference toOpposite;
 		private EReference fromOpposite;
+		
 		/**
 		 * @param edgeType
 		 * @param edgeSource

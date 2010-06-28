@@ -458,20 +458,18 @@
   </links>
   <links>
     <domainMetaElement
-        href="iaml.ecore#//wires/RunAction"/>
-    <domainSpecialization
-        body="self.oclIsTypeOf( RunAction )"/>
+        href="iaml.ecore#//ActionEdge"/>
     <labelMappings
         xsi:type="gmfmap:FeatureLabelMapping">
       <diagramLabel
-          href="iaml.gmfgraph#RunActionName"/>
+          href="iaml.gmfgraph#ActionEdgeName"/>
       <features
           href="iaml.ecore#//NamedElement/name"/>
     </labelMappings>
     <labelMappings
         readOnly="true">
       <diagramLabel
-          href="iaml.gmfgraph#RunActionStereotype"/>
+          href="iaml.gmfgraph#ActionEdgeStereotype"/>
     </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/actions"/>
@@ -479,13 +477,13 @@
         xsi:type="gmftool:CreationTool"
         href="root.gmftool#//@palette/@tools.5/@tools.0"/>
     <diagramLink
-        href="iaml.gmfgraph#RunAction"/>
+        href="iaml.gmfgraph#ActionEdge"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//Action/from"/>
+        href="iaml.ecore#//ActionEdge/from"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//Action/to"/>
+        href="iaml.ecore#//ActionEdge/to"/>
   </links>
   <links>
     <domainMetaElement
@@ -515,37 +513,6 @@
     <linkMetaFeature
         xsi:type="ecore:EReference"
         href="iaml.ecore#//wires/ConditionEdge/to"/>
-  </links>
-  <links>
-    <domainMetaElement
-        href="iaml.ecore#//wires/NavigateAction"/>
-    <domainSpecialization
-        body="self.oclIsTypeOf( NavigateAction )"/>
-    <labelMappings
-        xsi:type="gmfmap:FeatureLabelMapping">
-      <diagramLabel
-          href="iaml.gmfgraph#NavigateActionName"/>
-      <features
-          href="iaml.ecore#//NamedElement/name"/>
-    </labelMappings>
-    <labelMappings
-        readOnly="true">
-      <diagramLabel
-          href="iaml.gmfgraph#NavigateActionStereotype"/>
-    </labelMappings>
-    <containmentFeature
-        href="iaml.ecore#//ContainsWires/actions"/>
-    <tool
-        xsi:type="gmftool:CreationTool"
-        href="root.gmftool#//@palette/@tools.5/@tools.1"/>
-    <diagramLink
-        href="iaml.gmfgraph#NavigateAction"/>
-    <sourceMetaFeature
-        xsi:type="ecore:EReference"
-        href="iaml.ecore#//Action/from"/>
-    <linkMetaFeature
-        xsi:type="ecore:EReference"
-        href="iaml.ecore#//Action/to"/>
   </links>
   <links>
     <domainMetaElement

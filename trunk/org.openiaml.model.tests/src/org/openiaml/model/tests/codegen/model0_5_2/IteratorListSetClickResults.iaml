@@ -11,7 +11,7 @@
           <parameterEdges id="wires.128b5279ae4.21" from="model.128b5279a48.e3" to="wires.128b5279ae4.1f"/>
         </fieldValue>
         <onClick id="model.128b5279a48.47" outActions="wires.128b5279ae4.1f">
-          <actions xsi:type="iaml.wires:RunAction" inParameterEdges="wires.128b5279ae4.21" id="wires.128b5279ae4.1f" name="run" from="model.128b5279a48.47" to="model.128b5279a48.b8"/>
+          <actions id="wires.128b5279ae4.1f" inParameterEdges="wires.128b5279ae4.21" name="run" from="model.128b5279a48.47" to="model.128b5279a48.b8"/>
         </onClick>
       </children>
     </children>

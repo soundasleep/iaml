@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1254759b7c1.724">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.1254759b7c1.724">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <operations xsi:type="iaml:CompositeOperation" id="model.1254759b7c1.72b" name="fibonacci" inActions="wires.1254759bc84.8f">
       <parameters id="model.1254759b7c1.75d" name="max" outFlows="model.1254759b7c1.79e"/>
@@ -39,7 +39,7 @@
       <values id="model.1254759b7c1.7a0" name="one" outFlows="model.1254759b7c1.7a8" value="1"/>
     </operations>
     <onAccess id="model.1254759b7c1.72a" outActions="wires.1254759bc84.8f">
-      <actions xsi:type="iaml.wires:RunAction" inParameterEdges="wires.1254759bc84.94" id="wires.1254759bc84.8f" name="run" from="model.1254759b7c1.72a" to="model.1254759b7c1.72b"/>
+      <actions id="wires.1254759bc84.8f" inParameterEdges="wires.1254759bc84.94" name="run" from="model.1254759b7c1.72a" to="model.1254759b7c1.72b"/>
     </onAccess>
     <values id="model.1254759b7c1.741" name="fib value" outParameterEdges="wires.1254759bc84.94" value="5">
       <parameterEdges id="wires.1254759bc84.94" from="model.1254759b7c1.741" to="wires.1254759bc84.8f"/>

@@ -19,23 +19,23 @@
     </elements>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.127e56eff0a.6" id="visual.127e56efefa.1e" name="View News"/>
     <children xsi:type="iaml.visual:Button" id="visual.127e56efefa.3a" name="reset" outActions="wires.127e56eff0a.28">
-      <actions xsi:type="iaml.wires:RunAction" id="wires.127e56eff0a.28" name="onClick" from="visual.127e56efefa.3a" to="model.127e56efe3e.129"/>
+      <actions id="wires.127e56eff0a.28" name="onClick" from="visual.127e56efefa.3a" to="model.127e56efe3e.129"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.127e56efefa.3b" name="next" outActions="wires.127e56eff0a.2a">
-      <actions xsi:type="iaml.wires:RunAction" id="wires.127e56eff0a.2a" name="onClick" from="visual.127e56efefa.3b" to="model.127e56efe3e.128"/>
+      <actions id="wires.127e56eff0a.2a" name="onClick" from="visual.127e56efefa.3b" to="model.127e56efe3e.128"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.127e56efefa.3c" name="previous" outActions="wires.127e56eff0a.2b">
-      <actions xsi:type="iaml.wires:RunAction" id="wires.127e56eff0a.2b" name="onClick" from="visual.127e56efefa.3c" to="model.127e56efe3e.122"/>
+      <actions id="wires.127e56eff0a.2b" name="onClick" from="visual.127e56efefa.3c" to="model.127e56efe3e.122"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.127e56efefa.3d" name="possibly next" outActions="wires.127e56eff0a.2c">
-      <actions xsi:type="iaml.wires:RunAction" id="wires.127e56eff0a.2c" name="onClick" inConditionEdges="wires.127e5a8ff7e.1e" from="visual.127e56efefa.3d" to="model.127e56efe3e.128"/>
+      <actions id="wires.127e56eff0a.2c" inConditionEdges="wires.127e5a8ff7e.1e" name="onClick" from="visual.127e56efefa.3d" to="model.127e56efe3e.128"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.127e56efefa.3e" name="possibly previous" outActions="wires.127e56eff0a.2d">
-      <actions xsi:type="iaml.wires:RunAction" id="wires.127e56eff0a.2d" name="onClick" inConditionEdges="wires.127e5a8ff7e.20" from="visual.127e56efefa.3e" to="model.127e56efe3e.122"/>
+      <actions id="wires.127e56eff0a.2d" inConditionEdges="wires.127e5a8ff7e.20" name="onClick" from="visual.127e56efefa.3e" to="model.127e56efe3e.122"/>
     </children>
     <children xsi:type="iaml.visual:Label" inWires="wires.127e56eff0a.26" id="visual.127e56efefa.40" name="results" defaultValue="none"/>
     <children xsi:type="iaml.visual:Button" id="visual.127e5a8ff6f.aa" name="save current" outActions="wires.127e5a8ff7e.99">
-      <actions xsi:type="iaml.wires:RunAction" id="wires.127e5a8ff7e.99" name="onClick" from="visual.127e5a8ff6f.aa" to="model.127e5a8fec3.94"/>
+      <actions id="wires.127e5a8ff7e.99" name="onClick" from="visual.127e5a8ff6f.aa" to="model.127e5a8fec3.94"/>
     </children>
   </scopes>
   <schemas id="domain.128807fbeba.dee" name="News" inSchemas="domain.128807fbeba.df0">

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1268c90c552.23">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.1268c90c552.23">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
   <scopes xsi:type="iaml.visual:Frame" id="visual.1268c90c93a.a" name="Disclaimer Page" inActions="wires.1268c90ca34.3">
     <operations xsi:type="iaml:CompositeOperation" id="model.1268c991b90.3f" name="set disclaimer viewed to true" inActions="wires.1268c991bee.33">
@@ -13,21 +13,21 @@
       <values id="model.1268c991b90.6c" name="true" outFlows="model.1268c991b90.75" value="true"/>
     </operations>
     <onAccess id="model.1268c991b90.33" outActions="wires.1268c991bee.33">
-      <actions xsi:type="iaml.wires:RunAction" id="wires.1268c991bee.33" name="run" from="model.1268c991b90.33" to="model.1268c991b90.3f"/>
+      <actions id="wires.1268c991bee.33" name="run" from="model.1268c991b90.33" to="model.1268c991b90.3f"/>
     </onAccess>
     <children xsi:type="iaml.visual:Button" id="visual.1268c991bee.74" name="continue" outActions="wires.1268c991bee.4a">
-      <actions xsi:type="iaml.wires:NavigateAction" id="wires.1268c991bee.4a" name="onClick" from="visual.1268c991bee.74" to="gate"/>
+      <actions id="wires.1268c991bee.4a" name="onClick" from="visual.1268c991bee.74" to="gate"/>
     </children>
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.1268c991bee.cc" name="List of Pages">
     <children xsi:type="iaml.visual:Button" id="visual.1268c991bee.f3" name="page 1" outActions="wires.1268c991bee.88">
-      <actions xsi:type="iaml.wires:NavigateAction" id="wires.1268c991bee.88" name="onClick" from="visual.1268c991bee.f3" to="visual.1268c90c93a.11"/>
+      <actions id="wires.1268c991bee.88" name="onClick" from="visual.1268c991bee.f3" to="visual.1268c90c93a.11"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.1268c991bee.f4" name="page 2" outActions="wires.1268c991bee.89">
-      <actions xsi:type="iaml.wires:NavigateAction" id="wires.1268c991bee.89" name="onClick" from="visual.1268c991bee.f4" to="visual.1268c991bee.b4"/>
+      <actions id="wires.1268c991bee.89" name="onClick" from="visual.1268c991bee.f4" to="visual.1268c991bee.b4"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.1268c991bee.f5" name="page 3" outActions="wires.1268c991bee.8a">
-      <actions xsi:type="iaml.wires:NavigateAction" id="wires.1268c991bee.8a" name="onClick" from="visual.1268c991bee.f5" to="visual.1268c991bee.b5"/>
+      <actions id="wires.1268c991bee.8a" name="onClick" from="visual.1268c991bee.f5" to="visual.1268c991bee.b5"/>
     </children>
   </scopes>
   <scopes xsi:type="iaml.scopes:Session" id="scopes.1268c90cae0.1" name="Disclaimed Section">
@@ -44,7 +44,7 @@
     </conditions>
     <properties id="model.1268c90c552.44" name="disclaimer viewed" outFlows="model.1268cdc3de1.80" inFlows="model.1268c991b90.77" defaultValue="false"/>
     <entryGate id="gate" name="Display Disclaimer" inConditionEdges="wires.1268c991bee.a" outActions="wires.1268c90ca34.3" inActions="wires.1268c991bee.4a">
-      <actions xsi:type="iaml.wires:NavigateAction" id="wires.1268c90ca34.3" name="navigate" from="gate" to="visual.1268c90c93a.a"/>
+      <actions id="wires.1268c90ca34.3" name="navigate" from="gate" to="visual.1268c90c93a.a"/>
     </entryGate>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1268c90c93a.11" name="Page 1" inActions="wires.1268c991bee.88"/>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1268c991bee.b4" name="Page 2" inActions="wires.1268c991bee.89"/>

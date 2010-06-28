@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.126b0cb5dec.23">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.126b0cb5dec.23">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
   <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.20" name="External Page"/>
   <scopes xsi:type="iaml.scopes:Session" id="scopes.126b0cb5e69.4" name="Advertising Session">
     <exitGate id="components.126b0cb5e69.5" name="View Ads Exit Gate" outActions="wires.126b0cb5e5a.e">
-      <actions xsi:type="iaml.wires:NavigateAction" id="wires.126b0cb5e5a.e" name="last" from="components.126b0cb5e69.5" to="visual.126b0cb5e5a.4a"/>
+      <actions id="wires.126b0cb5e5a.e" name="last" from="components.126b0cb5e69.5" to="visual.126b0cb5e5a.4a"/>
     </exitGate>
     <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.27" name="Page 1"/>
     <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.29" name="Page 2"/>

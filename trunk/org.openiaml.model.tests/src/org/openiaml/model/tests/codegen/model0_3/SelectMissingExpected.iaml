@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12109331eea.107e">
   <scopes xsi:type="iaml.visual:Frame" id="visual.12109331f38.e3f" name="container" outActions="wires.12109dbdd39.4">
-    <actions xsi:type="iaml.wires:NavigateAction" id="wires.12109dbdd39.4" name="fail" from="visual.12109331f38.e3f" to="visual.12109dbdd39.7"/>
+    <actions id="wires.12109dbdd39.4" name="fail" from="visual.12109331f38.e3f" to="visual.12109dbdd39.7"/>
     <values id="model.12109c6242e.483" name="a missing id" outParameterEdges="wires.12109c6249b.123" value="impossible">
       <parameterEdges id="wires.12109c6249b.123" from="model.12109c6242e.483" to="domain.128807fbeba.d82"/>
     </values>

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1275ffa62dc.16">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.1275ffa62dc.16">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <children xsi:type="iaml.visual:Label" id="visual.1275ffa6388.6e" name="Label" defaultValue="test value">
       <operations xsi:type="iaml:PrimitiveOperation" id="model.1275ffa62dc.23" name="show" inActions="wires.1275ffa6397.2a"/>
       <operations xsi:type="iaml:PrimitiveOperation" id="model.1275ffa62dc.25" name="hide" inActions="wires.1275ffa6397.2c"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.1275ffa6388.6f" name="show" outActions="wires.1275ffa6397.2a">
-      <actions xsi:type="iaml.wires:RunAction" id="wires.1275ffa6397.2a" name="onClick" from="visual.1275ffa6388.6f" to="model.1275ffa62dc.23"/>
+      <actions id="wires.1275ffa6397.2a" name="onClick" from="visual.1275ffa6388.6f" to="model.1275ffa62dc.23"/>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.1275ffa6388.70" name="hide" outActions="wires.1275ffa6397.2c">
-      <actions xsi:type="iaml.wires:RunAction" id="wires.1275ffa6397.2c" name="onClick" from="visual.1275ffa6388.70" to="model.1275ffa62dc.25"/>
+      <actions id="wires.1275ffa6397.2c" name="onClick" from="visual.1275ffa6388.70" to="model.1275ffa62dc.25"/>
     </children>
   </scopes>
 </iaml:InternetApplication>

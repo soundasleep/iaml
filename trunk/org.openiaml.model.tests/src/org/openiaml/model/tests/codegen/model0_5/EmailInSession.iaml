@@ -15,7 +15,7 @@
         <wires xsi:type="iaml.wires:SetWire" id="wires.127b1fff8c4.1c3" name="set" from="visual.127b1fff818.4bf" to="model.127b1fff682.572"/>
       </children>
       <children xsi:type="iaml.visual:Button" id="visual.127b1fff818.4c0" name="send email" outActions="wires.127b1fff8c4.1c5">
-        <actions xsi:type="iaml.wires:RunAction" id="wires.127b1fff8c4.1c5" name="onClick" from="visual.127b1fff818.4c0" to="model.127b1fff682.573"/>
+        <actions id="wires.127b1fff8c4.1c5" name="onClick" from="visual.127b1fff818.4c0" to="model.127b1fff682.573"/>
       </children>
     </scopes>
   </scopes>

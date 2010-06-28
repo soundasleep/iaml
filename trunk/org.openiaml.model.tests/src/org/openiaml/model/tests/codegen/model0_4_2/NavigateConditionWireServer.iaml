@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.126aaf83900.4da">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.126aaf83900.4da">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <children xsi:type="iaml.visual:InputTextField" id="visual.126aaf8397d.24e" name="redirect to page two?">
       <fieldValue id="model.126aaf83900.4e6" name="fieldValue" outFlows="model.126aaf83900.539"/>
@@ -18,7 +18,7 @@
       <executionEdges id="model.126aaf83900.538" from="operations.126aaf8398c.136" to="operations.126aaf8398c.139"/>
     </conditions>
     <onAccess id="model.126aaf83900.4f5" outActions="wires.126aaf8398c.137">
-      <actions xsi:type="iaml.wires:NavigateAction" id="wires.126aaf8398c.137" name="navigate" inConditionEdges="wires.126aaf8398c.13d" from="model.126aaf83900.4f5" to="visual.126aaf8397d.270"/>
+      <actions id="wires.126aaf8398c.137" inConditionEdges="wires.126aaf8398c.13d" name="navigate" from="model.126aaf83900.4f5" to="visual.126aaf8397d.270"/>
     </onAccess>
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.126aaf8397d.270" name="Page 2" inActions="wires.126aaf8398c.137"/>

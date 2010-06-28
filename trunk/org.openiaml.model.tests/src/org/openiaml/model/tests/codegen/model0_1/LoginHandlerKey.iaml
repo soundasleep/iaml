@@ -10,8 +10,8 @@
     </values>
     <elements xsi:type="iaml.components:LoginHandler" inParameterEdges="wires.11e37b8d957.6" id="components.11e37b8d957.3" name="Login Handler" outWires="wires.11e3802c67f.9" outActions="wires.11e3802c67f.8 wires.11e3802c67f.a">
       <wires xsi:type="iaml.wires:SetWire" id="wires.11e3802c67f.9" name="set" from="components.11e37b8d957.3" to="model.11e37b8d89c.17"/>
-      <actions xsi:type="iaml.wires:NavigateAction" id="wires.11e3802c67f.8" name="login" from="components.11e37b8d957.3" to="visual.11e37b8d948.d"/>
-      <actions xsi:type="iaml.wires:NavigateAction" id="wires.11e3802c67f.a" name="logout" from="components.11e37b8d957.3" to="visual.11e19f1b1ea.2"/>
+      <actions id="wires.11e3802c67f.8" name="login" from="components.11e37b8d957.3" to="visual.11e37b8d948.d"/>
+      <actions id="wires.11e3802c67f.a" name="logout" from="components.11e37b8d957.3" to="visual.11e19f1b1ea.2"/>
     </elements>
     <scopes xsi:type="iaml.visual:Frame" id="visual.11e37b8d948.d" name="viewkey" inActions="wires.11e3802c67f.8">
       <children xsi:type="iaml.visual:InputTextField" inWires="wires.11e37df5bde.d" id="visual.11e37df5bce.1c" name="current login key"/>

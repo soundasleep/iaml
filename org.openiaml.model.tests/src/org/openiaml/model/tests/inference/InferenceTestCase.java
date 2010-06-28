@@ -4,6 +4,7 @@
 package org.openiaml.model.tests.inference;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -1641,5 +1642,30 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		return results;
 	}
 
+	/**
+	 * Assert that the given input is exactly the collection in
+	 * the given parameter.
+	 * 
+	 * @param input the input collection
+	 * @param strings the strings to check against
+	 */
+	public void assertCollectionEquals(Collection<String> input, String...strings) {
+		assertEquals(input.size(), strings.length);
+		
+		// make a copy of the input list
+		List<String> copy = new ArrayList<String>(input);
+		
+		for (String s : strings) {
+			if (copy.contains(s)) {
+				copy.remove(s);
+			} else {
+				fail("Could not find string '" + s + "' in '" + copy + "', original list = '" + input + "'");
+			}
+		}
+		
+		// must now be empty
+		assertTrue(copy.isEmpty());
+		
+	}
 
 }

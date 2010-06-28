@@ -113,18 +113,18 @@ public class SavedRuleSources extends InferenceTestCase {
 		// there should be additional ConditionWires to these RunActions
 		ConditionEdge srcCw = assertHasConditionEdge(root, cond, srcRw);
 		assertTrue(srcCw.isIsGenerated());
-		assertEquals("Connect ConditionEdges to RunActions created by SyncWires (edit/update) (onChange)", srcCw.getGeneratedRule());
+		assertEquals("Connect ConditionEdges to ActionEdges created by SyncWires (edit/update) (onChange)", srcCw.getGeneratedRule());
 		ConditionEdge targetCw = assertHasConditionEdge(root, cond, targetRw);
 		assertTrue(targetCw.isIsGenerated());
-		assertEquals("Connect ConditionEdges to RunActions created by SyncWires (edit/update) (onChange)", targetCw.getGeneratedRule());
+		assertEquals("Connect ConditionEdges to ActionEdges created by SyncWires (edit/update) (onChange)", targetCw.getGeneratedRule());
 
 		// all the ConditionWires need parameters: the XPath source, and the element to evaluate
 		ParameterEdge param1 = getParameterEdgeFromTo(root, dae, srcCw);
 		assertTrue(param1.isIsGenerated());
-		assertEquals("Connect ParameterEdges to ConditionEdges connected to RunActions created by SyncWires (edit/update) (onChange)", param1.getGeneratedRule());
+		assertEquals("Connect ParameterEdges to ConditionEdges connected to ActionEdges created by SyncWires (edit/update) (onChange)", param1.getGeneratedRule());
 		ParameterEdge param2 = getParameterEdgeFromTo(root, dae, targetCw);
 		assertTrue(param2.isIsGenerated());
-		assertEquals("Connect ParameterEdges to ConditionEdges connected to RunActions created by SyncWires (edit/update) (onChange)", param2.getGeneratedRule());
+		assertEquals("Connect ParameterEdges to ConditionEdges connected to ActionEdges created by SyncWires (edit/update) (onChange)", param2.getGeneratedRule());
 
 
 	}

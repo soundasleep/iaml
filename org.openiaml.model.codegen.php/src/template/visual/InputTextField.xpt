@@ -30,10 +30,13 @@
  */
 «DEFINE renderTextField(model::visual::Frame currentFrame) FOR model::visual::InputTextField-»
 	<div>
-	<label id="label_«safeNameString(id)-»">
+	<label id="label_«safeNameString(id)-»" class="text_label_«safeNameString(name)»">
 		«textFieldName()»
 		
-		<input type="text" id="«safeNameString(id)»" name="«safeNameString(id)»"
+		<input type="text" 
+			id="«safeNameString(id)»"
+			name="«safeNameString(id)»"
+			class="text_«safeNameString(name)»"
 			onChange="return onChange_«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>(this);"
 			«REM»is onInput called at all?«ENDREM»
 			«IF onInput != null && !onInput.outActions.isEmpty»

@@ -18,6 +18,7 @@
 
 	?>
 	<table id="«safeName()-»"
+		class="list_«safeNameString(name)»"
 		«REM»has it been hidden by anything?«ENDREM»
 		<?php
 		/* has this label been hidden by anything? */
@@ -37,7 +38,7 @@
 		<!-- print out the list of columns -->
 		<thead>
 		«FOREACH children AS child»
-			<th id="«safeNameString(child.id)»_heading">«escapeString(child.name)»</th>
+			<th id="«safeNameString(child.id)»_heading" class="list_heading_«safeNameString(child.name)»">«escapeString(child.name)»</th>
 		«ENDFOREACH»
 		</thead>
 	
@@ -148,7 +149,7 @@ if (defined('ITERATOR_LIST_«safeName()»_UPDATED')) {
 	«REM»expand all children«ENDREM»
 	<tr>
 		«FOREACH children AS child»
-		<td class="«safeNameString(child.id)»">
+		<td class="«safeNameString(child.id)»" class="list_item_«safeNameString(child.name)»">
 			«EXPAND Render::renderVisual(currentFrame) FOR child»
 		</td>
 		«ENDFOREACH»

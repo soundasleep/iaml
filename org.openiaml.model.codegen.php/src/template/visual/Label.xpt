@@ -15,7 +15,8 @@
  */
 «DEFINE renderLabel(model::visual::Frame currentFrame) FOR model::visual::Label-»
 	<label
-		id="«safeNameString(id)-»<?php echo «EXPAND getIteratorListIndex»; ?>" 
+		id="«safeNameString(id)-»<?php echo «EXPAND getIteratorListIndex»; ?>"
+		class="label_«safeNameString(name)»" 
 		«EXPAND EventHandlers::getInlineClickJavascript(currentFrame)»
 		«REM»has it been hidden by anything?«ENDREM»
 		<?php

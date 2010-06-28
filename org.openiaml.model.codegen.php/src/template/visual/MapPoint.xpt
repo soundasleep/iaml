@@ -56,7 +56,7 @@
 	<label
 		id="<?php echo $id; ?>_label" 
 		for="<?php echo $id; ?>"
-		class="iaml_point_label">«escapeHtmlString(name)»</label>
+		class="iaml_point_label mappoint_«safeNameString(name)»">«escapeHtmlString(name)»</label>
 
 	<div
 		id="<?php echo $id; ?>" 

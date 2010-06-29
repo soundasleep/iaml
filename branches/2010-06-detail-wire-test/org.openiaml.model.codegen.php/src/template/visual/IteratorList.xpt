@@ -119,7 +119,7 @@ if (defined('ITERATOR_LIST_«safeName()»_UPDATED')) {
 					get_application_value("«safeNameString(child.fieldValue.id)»", "")); 
 			«ENDIF»
 		«ENDFOREACH»
-					
+
 		// unload the 'current' index
 		«FOREACH children AS child»
 			«IF containingSession(child) != null»
@@ -266,6 +266,17 @@ function populate_iterator_list_«safeName()»() {
 					set_application_value("«safeNameString(child.fieldValue.id)»:$count", ""); 
 				«ENDIF»
 			«ENDFOREACH»
+			
+			// also reset all stored attribute instances
+			«FOREACH iterator.attributes AS attribute»
+				«IF containingSession() != null»
+					$_SESSION["«safeName(containingSession())»_«safeNameString(id)»:$count:attribute_«safeName(attribute)»"] =
+						"";
+				«ELSE»
+					set_application_value("«safeNameString(id)»:$count:attribute_«safeName(attribute)»",
+						"");
+				«ENDIF»
+			«ENDFOREACH»
 		}
 			 
 		if (!$iterator->isEmpty()) {
@@ -278,7 +289,16 @@ function populate_iterator_list_«safeName()»() {
 				«FOREACH iterator.attributes AS attribute»
 					«IF attribute.onChange != null»
 						«EXPAND template::events::EventCall::callEvent(true) FOR attribute.onChange»
-					«ENDIF» 
+					«ENDIF»
+					
+					// also store the attribute value as a local property
+					«IF containingSession() != null»
+						$_SESSION["«safeName(containingSession())»_«safeNameString(id)»:$count:attribute_«safeName(attribute)»"] =
+							get_attribute_instance_«safeName(attribute)-»();
+					«ELSE»
+						set_application_value("«safeNameString(id)»:$count:attribute_«safeName(attribute)»",
+							get_attribute_instance_«safeName(attribute)-»());
+					«ENDIF»
 				«ENDFOREACH»
 				
 				// store all the children values

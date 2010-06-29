@@ -156,7 +156,7 @@
   	?>
   	«ENDREM»
 </head>
-<body onLoad="loadStoredEvents()">
+<body id="«safeNameString(id)»" class="frame_«safeNameString(name)»" onLoad="loadStoredEvents()">
 	<div style="font-size:small; text-align: right;"><a href="clear_session.php">clear session</a> - <a href="sitemap.html">sitemap</a></div>
 		
 	<h1>«frameTitle()»</h1>

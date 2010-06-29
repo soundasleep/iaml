@@ -147,7 +147,13 @@ if (defined('ITERATOR_LIST_«safeName()»_UPDATED')) {
 		«ENDIF») <= 0;
 	?>
 	«REM»expand all children«ENDREM»
-	<tr>
+	<tr id="«safeName()»_row_<?php echo ((string) $iterator_«safeName()»); ?>"<?php
+		/* visibility of row at generation time */
+		$count = «EXPAND iteratorListCurrentResultCount»; 
+		if ($iterator_«safeName()» >= $count) {
+		?> style="display: none;"<?php
+		} 
+	?>>
 		«FOREACH children AS child»
 		<td class="«safeNameString(child.id)»" class="list_item_«safeNameString(child.name)»">
 			«EXPAND Render::renderVisual(currentFrame) FOR child»
@@ -158,6 +164,14 @@ if (defined('ITERATOR_LIST_«safeName()»_UPDATED')) {
 	$check_attribute_instances = false;
 	$skip_contained_onloads = false;
 «ENDDEFINE»
+
+«DEFINE iteratorListCurrentResultCount FOR model::visual::IteratorList»
+	«IF containingSession(eContainer) != null»
+		require_session("«safeName(containingSession())»_«safeName()»_count")
+	«ELSE»
+		get_application_value("«safeName()»_count")
+	«ENDIF»
+«ENDDEFINE» 
 
 /**
  * Assumed to be in PHP mode, but printing out JS callbacks.

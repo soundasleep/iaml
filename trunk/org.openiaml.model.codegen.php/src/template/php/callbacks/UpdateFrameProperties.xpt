@@ -27,7 +27,7 @@ try {
 	«ENDFOREACH»
 } catch (IamlRuntimeException $e) {
 	// redirect to the exception frame
-	$url = "exception.php?fail=" . urlencode($e->getMessage() . " [from setApplicationValue]");
+	$url = "exception.php?fail=" . urlencode($e->getMessage() . " [from UpdateFrameProperties]");
 	log_message("[exception] " . print_r($e, true));
 	log_message("[update exception handler] Redirecting to '$url' (fail)");
 
@@ -142,7 +142,7 @@ try {
 		$doing_iterator_list_«safeName(eContainer)» = true;
 		«EXPAND template::visual::IteratorList::publishIteratorList(null, false) FOR (model::visual::IteratorList) eContainer»
 		$doing_iterator_list_«safeName(eContainer)» = false;
-	«ENDIF»	
+	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE updateVisibility FOR model::VisibleThing»
@@ -165,5 +165,24 @@ try {
 			. escape_parameter_string("«safeNameString(id)»")
 			. " "
 			. escape_parameter_string($value);
+	}
+	
+	«IF model::visual::IteratorList.isInstance(this)»
+		«EXPAND updateVisibilityIteratorList FOR ((model::visual::IteratorList) this)»
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE updateVisibilityIteratorList FOR model::visual::IteratorList»
+	{
+		// notify the number of rows visible in the IteratorList
+		$value = «EXPAND template::visual::IteratorList::iteratorListCurrentResultCount»;
+		log_message("iterator_list_rows " 
+			. escape_parameter_string("«safeNameString(id)»")
+			. " "
+			. escape_parameter_string($value));
+		echo "\niterator_list_rows " 
+			. escape_parameter_string("«safeNameString(id)»")
+			. " "
+			. escape_parameter_string($value); 
 	}
 «ENDDEFINE»

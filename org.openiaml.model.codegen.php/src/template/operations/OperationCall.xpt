@@ -21,8 +21,13 @@
 	«ENDIF»
 «ENDDEFINE»
 
+/**
+ * @implementation ActionEdge
+ *		An {@model ActionEdge} linking to a {@model Frame} or a {@model Gate} will
+ *		implicitly be a navigation, rather than executing an {@model Operation}.
+ */
 «DEFINE callOperationContents(Boolean php, Boolean inStoreDb) FOR model::ActionEdge-»
-	«IF model::visual::Frame.isInstance(to)»
+	«IF model::visual::Frame.isInstance(to) || model::components::Gate.isInstance(to)»
 		«REM»implicit: a NavigateAction«ENDREM»
 		«EXPAND callOperationContentsNavigate(php, inStoreDb) FOR this»
 	«ELSE»

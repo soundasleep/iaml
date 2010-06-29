@@ -5,6 +5,6 @@
   </conditions>
   <operations xsi:type="iaml:CompositeOperation" id="model.128a8ccc888.18" name="Operation" inActions="wires.128a8ccc925.6"/>
   <children xsi:type="iaml.visual:Button" id="visual.128a8ccc915.e" name="Button" outActions="wires.128a8ccc925.6">
-    <actions xsi:type="iaml.wires:RunAction" id="wires.128a8ccc925.6" name="onClick" inConditionEdges="wires.128a8ccc925.8" from="visual.128a8ccc915.e" to="model.128a8ccc888.18"/>
+    <actions id="wires.128a8ccc925.6" name="onClick" inConditionEdges="wires.128a8ccc925.8" from="visual.128a8ccc915.e" to="model.128a8ccc888.18"/>
   </children>
 </iaml.visual:Frame>

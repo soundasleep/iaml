@@ -2,7 +2,7 @@
 <iaml.visual:Frame xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="visual.128a8ccc915.190">
   <operations xsi:type="iaml:CompositeOperation" id="model.128a8ccc888.1d" name="operation" inActions="wires.128a8ccc925.2e"/>
   <onAccess id="model.128a8ccc888.1c" outActions="wires.128a8ccc925.2e">
-    <actions xsi:type="iaml.wires:RunAction" inParameterEdges="wires.128a8ccc925.2f" id="wires.128a8ccc925.2e" name="run" from="model.128a8ccc888.1c" to="model.128a8ccc888.1d"/>
+    <actions inParameterEdges="wires.128a8ccc925.2f" id="wires.128a8ccc925.2e" name="run" from="model.128a8ccc888.1c" to="model.128a8ccc888.1d"/>
   </onAccess>
   <parameters id="model.128a8ccc888.1e" name="id" outParameterEdges="wires.128a8ccc925.2f">
     <parameterEdges id="wires.128a8ccc925.2f" name="id" from="model.128a8ccc888.1e" to="wires.128a8ccc925.2e"/>

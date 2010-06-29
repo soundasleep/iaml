@@ -28,7 +28,8 @@
 <image x="13" y="13" clip-path="url(#clipPath2)" width="16" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAB+UlEQVR42qVTy2oU&#13;&#10;QRQ93enMRBezELLyRUB/QFDcuQgu3bj3C8SN4i+4dS/4JUJ2YghKFoqiMAsVIiGO&#13;&#10;jMlMd71uXc+tnvERl9Nw+1YXdV5V1dW2HGOVp3n+8kBtoPZW6wrNi76ozAm+Oc54&#13;&#10;cPtK9Q9B8opzFxvo37OnPpafnz/8+N+Baq8+3nUFmDMBQj1zYT1lCCtpwuToJx6P&#13;&#10;9zVpxNNHN6qeIPf87TTj8rUhAdoXwRJZIpBcsQOUwObWBt6+mvxxUJRMOVIpZLx7&#13;&#10;4WCk2cCLubSotqvxdXeKk1nG3Xs7GrOnA9ECSASkoJhPBFvXB/BzQWypOlP4LsP5&#13;&#10;wFgtmiEQuzkGoxE+7R3Sge2wObCsJDDF2VEqBKV8hA+OFdC5DjXFfHQIMoCTuRFI&#13;&#10;OarkM2JMiF4wY8TQCgJBzhMsHiF5tKHFGnfaS4eYh3Cp7QkOxsc4ns7x7UuL5BpM&#13;&#10;Dw0QEaKHTw6W1YupOqxVipAdTyUUoubhnavlOO7v7evmhbMYd2QdWazEikAljMcx&#13;&#10;EuqarnIsRFItCJbHYSof35ww6zr8tC3KXF4Wxxx6VfaoHnYPtGJkRvtN8OzJzeJk&#13;&#10;+9aOnr+0QVAN0Ya667wHkWRneJnppqIbc2X0JG1OX03b2fevvxd7wTZv2bnYFM2N&#13;&#10;OTEXkhOqVf/GGis+vwBMHMDIpj3ibwAAAABJRU5ErkJggg==" xlink:type="simple" xlink:actuate="onLoad" height="16" preserveAspectRatio="none" xlink:show="embed"/>
 <text xml:space="preserve" x="32" y="26" clip-path="url(#clipPath3)" stroke="none">element set name</text>
 <text xml:space="preserve" x="13" y="46" clip-path="url(#clipPath4)" stroke="none">: DynamicApplicationElementSet</text>
-<text x="13" y="65" clip-path="url(#clipPath5)" font-style="italic" stroke="none" xml:space="preserve">set query</text>
+<line clip-path="url(#clipPath4)" fill="none" x1="13" x2="189" y1="47" y2="47" stroke-dasharray="none" stroke-width="0.1"/>
+<text x="13" y="65" clip-path="url(#clipPath5)" stroke-dasharray="none" font-style="italic" stroke="none" stroke-width="0.1" xml:space="preserve">set query</text>
 </g>
 </g>
 </svg>

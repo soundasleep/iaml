@@ -191,6 +191,37 @@ function execute_queued_url(url, counter, function_queue) {
 
 		      						set_map_point_handler(element_id, value);
 		      						break;
+		      					
+		      					case "iterator_list_rows":
+		      						// the given number of rows are visible to the iterator list
+		      						if (bits.length != 3) {
+		      							throw new IamlJavascriptException("'iterator_list_rows' instruction called with incorrect number of arguments: expected 3, found " + bits.length);
+		      						}
+		      						var element_id = decodeURIComponent(bits[1]);
+		      						var value = decodeURIComponent(bits[2]);
+		      						debug("[instruction] iterator_list_rows(" + element_id + ") : " + value);
+		      						
+		      						for (var j = 0; j < 102; j++) {
+			      						// max 101 rows
+		      							if (j > 101) {
+		      								throw new IamlJavascriptException("Too many rows visible through 'iterator_list_rows': " + j);
+		      							}
+		      							
+		      							var e = document.getElementById(element_id + "_row_" + j);
+		      							if (!e) {
+		      								// no more rows to process
+		      								break;
+		      							}
+		      							
+		      							if (j < value) {
+		      								// show
+		      								e.style.display = "";
+		      							} else {
+		      								// hide
+		      								e.style.display = "none";
+		      							}
+		      						}
+		      						break;
 
 		      					case "redirect":
 		      						if (bits.length != 2) {

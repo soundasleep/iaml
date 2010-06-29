@@ -792,6 +792,38 @@
     </ownedChild>
   </nodes>
   <nodes>
+    <containmentFeature
+        href="iaml.ecore#//visual/Frame/children"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//visual/Hidden"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( Hidden )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#HiddenName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#HiddenStereotype"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#HiddenParentName"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="frame.gmftool#//@palette/@tools.2/@tools.10"/>
+      <diagramNode
+          href="iaml.gmfgraph#Hidden"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
     <ownedChild>
       <domainMetaElement
           href="iaml.ecore#//EventTrigger"/>

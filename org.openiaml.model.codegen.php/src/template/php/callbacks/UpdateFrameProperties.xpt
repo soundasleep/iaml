@@ -6,7 +6,6 @@
 /* Is there additional actions we should do on the client-side once this
  * property has changed? */
 if (!require_get("ignore_updates", 0)) { 
-try {
 	if (!isset($frame_id) || !$frame_id) {
 		throw new IamlRuntimeException("Invalid frame ID: frame ID not set");
 	}
@@ -25,18 +24,6 @@ try {
 		«EXPAND updateVisibility FOREACH eAllContents.typeSelect(model::VisibleThing).select(p|containingFrame(p)==frame && containingEmail(p) == null)»
 	}
 	«ENDFOREACH»
-} catch (IamlRuntimeException $e) {
-	// redirect to the exception frame
-	$url = "exception.php?fail=" . urlencode($e->getMessage() . " [from UpdateFrameProperties]");
-	log_message("[exception] " . print_r($e, true));
-	log_message("[update exception handler] Redirecting to '$url' (fail)");
-
-	log_message("redirect " 
-		. escape_parameter_string($url));
-	echo "\nredirect " 
-		. escape_parameter_string($url);				
-	shutdown();
-}
 }
 «ENDDEFINE»
 

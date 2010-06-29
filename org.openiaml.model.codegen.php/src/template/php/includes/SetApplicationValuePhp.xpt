@@ -69,20 +69,7 @@ echo_necessary_update_callbacks();
 	incoming parameters for SelectWires, etc, to be propogated correctly.
 	TODO this should be refactored and made cleaner in the future. 
 	«ENDREM»
-	try {
-		«EXPAND potentialUpdatesRequired FOREACH allProperties(this)»
-	} catch (IamlRuntimeException $e) {
-		// redirect to the exception frame
-		$url = "exception.php?fail=" . urlencode($e->getMessage() . " [from setApplicationValue]");
-		log_message("[exception] " . print_r($e, true));
-		log_message("[update exception handler] Redirecting to '$url' (fail)");
-	
-		log_message("redirect " 
-			. escape_parameter_string($url));
-		echo "\nredirect " 
-			. escape_parameter_string($url);				
-		shutdown();
-	}
+	«EXPAND potentialUpdatesRequired FOREACH allProperties(this)»
 «ENDDEFINE»
 
 «DEFINE onChangeEvents FOR model::Changeable»

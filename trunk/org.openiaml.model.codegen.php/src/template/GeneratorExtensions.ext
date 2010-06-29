@@ -65,9 +65,6 @@ escapeHtmlString(String s) :
 escapeXmlString(String s) :
 	escapeHtmlString(s).replaceAll("'", "&apos;");
 
-operationName(model::WireDestination this) : 
-	throwException("Invalid operation: " + this);
-
 operationName(model::ActionEdgeDestination this) : 
 	throwException("Invalid operation: " + this);
 

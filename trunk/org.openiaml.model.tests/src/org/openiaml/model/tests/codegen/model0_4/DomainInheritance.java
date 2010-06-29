@@ -229,7 +229,7 @@ public class DomainInheritance extends DatabaseCodegenTestCase {
 		{
 			String sql = trimWhitespace(getGeneratedSQL("Student"));
 			assertContains("enrolled VARCHAR", sql);
-			assertContains("Person_id VARCHAR", sql);
+			assertContains("Person_id INTEGER", sql);
 			assertContains("generated_primary_key INTEGER", sql);
 			assertNotContains("name VARCHAR", sql);
 		}
@@ -237,12 +237,12 @@ public class DomainInheritance extends DatabaseCodegenTestCase {
 		{
 			String sql = trimWhitespace(getGeneratedSQL("Doctoral"));
 			assertContains("thesis_title VARCHAR", sql);
-			assertContains("Teacher_generated_primary_key VARCHAR", sql);
+			assertContains("Teacher_generated_primary_key INTEGER", sql);
 			assertContains("generated_primary_key INTEGER", sql);
 			assertNotContains("name VARCHAR", sql);
 			assertNotContains("qualification VARCHAR", sql);
 			assertNotContains("enrolled VARCHAR", sql);
-			assertNotContains("Person_id VARCHAR", sql);
+			assertNotContains("Person_id INTEGER", sql);
 		}
 
 	}

@@ -233,7 +233,7 @@
 		}		
 	«ELSE»
 		«REM»contained in a Session: a session value«ENDREM»
-		if (has_session("«safeName(containingSession(this))»_«safeNameString(id)»")) {
+		if (has_session("«safeName(containingSession(this))»_«safeNameString(id)»", null) !== null) {
 			$value = require_session("«safeName(containingSession(this))»_«safeNameString(id)»", "«escapeString(defaultValue)»");
 			$point_address = $value;
 			$point_visible = true;

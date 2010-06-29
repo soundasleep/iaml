@@ -234,7 +234,7 @@
 			true			
 		«ELSEIF containingSession(this) != null»
 			/* a property from our session */
-			has_session("«safeName(containingSession(this))»_«safeName()-»")
+			(has_session("«safeName(containingSession(this))»_«safeName()-»", null) !== null)
 		«ELSE»
 			(get_application_value("«safeName()-»", null) !== null)
 		«ENDIF»

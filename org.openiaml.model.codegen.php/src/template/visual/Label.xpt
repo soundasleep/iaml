@@ -140,7 +140,7 @@
 		}		
 	«ELSE»
 		«REM»contained in a Session: a session value«ENDREM»
-		if (has_session("«safeName(containingSession(this))»_«safeNameString(id)»")) {
+		if (has_session("«safeName(containingSession(this))»_«safeNameString(id)»", null) !== null) {
 			$temp = require_session("«safeName(containingSession(this))»_«safeNameString(id)»", "«escapeString(defaultValue)»");
 			if (!$label_set) {
 				$«argName» = $temp;
@@ -158,7 +158,7 @@
 			$«argName» = $temp;
 			$label_set = true;
 		}
-	}		
+	}
 «ENDDEFINE»
 
 «DEFINE staticInitialValue(model::visual::Frame currentFrame, String argName) FOR model::QueryParameter»

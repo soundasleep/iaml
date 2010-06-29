@@ -6,10 +6,11 @@
 «EXTENSION template::GeneratorExtensions»
 
 «DEFINE renderMap(model::visual::Frame currentFrame) FOR model::visual::Map-»
+	<div class="map_«safeNameString(name)»">
 	<label
 		id="«safeNameString(id)-»_label"
 		for="«safeNameString(id)-»" 
-		class="iaml_map_label map_«safeNameString(name)»"
+		class="iaml_map_label"
 		«EXPAND EventHandlers::getInlineClickJavascript(currentFrame)»
 		>
 
@@ -58,7 +59,8 @@
 			«ENDIF»
 			} );
 		/* ]]> */
-	</script> 
+	</script>
+	</div>
 «ENDDEFINE»
 
 «DEFINE renderMapSolo(model::visual::Frame currentFrame) FOR model::visual::MapPoint-»

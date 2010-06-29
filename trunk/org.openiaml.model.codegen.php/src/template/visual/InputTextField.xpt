@@ -184,14 +184,36 @@
 /* if it connects to a SyncWire that is an Property, use this
    property as the value */
 «DEFINE getInitialValuesSyncWire(model::visual::Frame currentFrame) FOR model::wires::SyncWire»
+	«IF inConditionEdges.size > 0»
+		<?php 
+		/* expand conditions */
+		if («EXPAND template::conditions::Runtime::callCondition(true, false) FOREACH inConditionEdges SEPARATOR " && "») {
+		?>
+	«ENDIF»
 	«EXPAND staticInitialValue(currentFrame) FOR from»
 	«EXPAND staticInitialValue(currentFrame) FOR to»
+	«IF inConditionEdges.size > 0»
+		<?php
+		}
+		?>
+	«ENDIF» 
 «ENDDEFINE»
 
 /* if it connects to a SetWire that is an Property, use this
    property as the value */
 «DEFINE getInitialValuesSetWire(model::visual::Frame currentFrame) FOR model::wires::SetWire»
+	«IF inConditionEdges.size > 0»
+		<?php 
+		/* expand conditions */
+		if («EXPAND template::conditions::Runtime::callCondition(true, false) FOREACH inConditionEdges SEPARATOR " && "») {
+		?>
+	«ENDIF»
 	«EXPAND staticInitialValue(currentFrame) FOR from»
+	«IF inConditionEdges.size > 0»
+		<?php
+		}
+		?>
+	«ENDIF» 
 «ENDDEFINE»
 
 /* ignore these sources */

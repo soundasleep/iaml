@@ -12,9 +12,12 @@
 
 «DEFINE remoteValue(boolean php, boolean require, model::Property property) FOR model::DomainAttributeInstance»
 	«IF php»
+		/* loaded from within an Iterator List: load from the cached property */
+		(isset($check_attribute_instances) && $check_attribute_instances) ? 
+		null /* TODO */ :
 		get_attribute_instance_«safeName()-»()
 	«ELSE»
-		"<?php echo htmlspecialchars(get_attribute_instance_«safeName()-»()); ?>"
+		"<?php echo htmlspecialchars(«EXPAND remoteValue(true, require, property)»); ?>"
 	«ENDIF»
 «ENDDEFINE»
 
@@ -29,6 +32,6 @@
 	«IF php»
 		has_attribute_instance_«safeName()-»()
 	«ELSE»
-		<?php echo htmlspecialchars(has_attribute_instance_«safeName()-»() ? "true" : "false"); ?>
+		<?php echo htmlspecialchars(«EXPAND remoteValueIsSet(true, property)» ? "true" : "false"); ?>
 	«ENDIF»
 «ENDDEFINE»

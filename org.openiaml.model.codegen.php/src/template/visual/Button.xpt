@@ -13,7 +13,8 @@
  *		as part of that Button.
  */
 «DEFINE renderButton(model::visual::Frame currentFrame) FOR model::visual::Button-»
-	<input type="submit" id="«safeNameString(id)-»" value="«buttonName()»"
+	<input type="submit" id="«safeNameString(id)-»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>" 
+		value="«buttonName()»"
 		class="button_«safeNameString(name)»"
 		«EXPAND EventHandlers::getInlineClickJavascript(currentFrame)» 
 		«EXPAND EventHandlers::getInlineChangeJavascript(currentFrame)» 

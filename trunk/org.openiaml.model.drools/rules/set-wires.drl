@@ -790,6 +790,34 @@ rule "Refresh Domain Object mappings (except for generated primary keys) when In
 
 end
 
+rule "Refresh Domain Object mappings (generated primary keys) when Instance sets a IteratorList: create hiddens"
+	when
+		sync : SetWire(  )
+		form : IteratorList (  )
+		instance : DomainIterator (  )
+		
+		eval(functions.connectsSet(sync, instance, form))	// backwards
+		
+		// only generated primary keys
+		originalAttribute : DomainAttribute ( primaryKey == true && isGenerated == true )
+		attribute : DomainAttributeInstance( eContainer == instance )
+		ExtendsEdge ( from == attribute, to == originalAttribute )
+		
+		not ( tf : VisibleThing( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
+
+		eval ( !form.getOverriddenNames().contains(attribute.getName()) )
+						
+		eval ( handler.veto( sync ))
+		
+	then
+		# create a new Hidden
+		Hidden text = handler.generatedHidden(sync, form);
+		handler.setName(text, attribute.getName());
+		handler.setType(text, attribute.getType());
+		queue.add(text, drools);
+
+end
+
 rule "A SetWire between Attributes passed to a DomainIterator need to check that the attribute exists before initialising (onAccess)"
 	when
 		sync : SetWire( )

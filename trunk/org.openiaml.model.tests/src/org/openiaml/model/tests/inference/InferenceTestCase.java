@@ -73,6 +73,7 @@ import org.openiaml.model.model.users.RequiresEdgesSource;
 import org.openiaml.model.model.users.Role;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
+import org.openiaml.model.model.visual.Hidden;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.IteratorList;
@@ -83,6 +84,7 @@ import org.openiaml.model.model.wires.AutocompleteWire;
 import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ConditionEdgeDestination;
 import org.openiaml.model.model.wires.ConditionEdgesSource;
+import org.openiaml.model.model.wires.DetailWire;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ExtendsEdgeDestination;
 import org.openiaml.model.model.wires.ExtendsEdgesSource;
@@ -580,6 +582,26 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public void assertHasNoLabel(VisibleThing element, String string) throws JaxenException {
 		assertHasNone(element, "iaml:children[iaml:name='" + string + "']", Label.class);
+	}
+	
+	/**
+	 * Assert that the given element contains the given
+	 * Hidden.
+	 *
+	 * @return The element found
+	 */
+	public Hidden assertHasHidden(VisibleThing element, String string) throws JaxenException {
+		return (Hidden) queryOne(element, "iaml:children[iaml:name='" + string + "']");
+	}
+
+	/**
+	 * Assert that the given element does not contains the given
+	 * Hidden.
+	 *
+	 * @return The element found
+	 */
+	public void assertHasNoHidden(VisibleThing element, String string) throws JaxenException {
+		assertHasNone(element, "iaml:children[iaml:name='" + string + "']", Hidden.class);
 	}
 
 	/**
@@ -1121,6 +1143,16 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	}
 	
 	/**
+	 * Assert there exists only one unidirectional DetailWire between
+	 * the given elements, with any name.
+	 *
+	 * @return The element found
+	 */
+	public DetailWire assertHasDetailWire(EObject container, WireSource from, WireDestination to) throws JaxenException {
+		return (DetailWire) assertHasWireFromTo(container, from, to, DetailWire.class, ALL);
+	}
+	
+	/**
 	 * Assert there exists only one unidirectional ParameterEdge between
 	 * the given elements.
 	 *
@@ -1253,6 +1285,16 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public ActionEdge assertHasActionEdge(EObject container, ActionEdgeSource from, ActionEdgeDestination to, String name) throws JaxenException {
 		return (ActionEdge) assertHasActionFromTo(container, from, to, 
 				ActionEdge.class, getNameFilter(name));
+	}
+	
+	public ActionEdge assertHasActionEdge(EObject container, ActionEdgeSource from, ActionEdgeDestination to) throws JaxenException {
+		return (ActionEdge) assertHasActionFromTo(container, from, to, 
+				ActionEdge.class, new Filter<ActionEdge>() {
+					@Override
+					public boolean accept(ActionEdge o) {
+						return true;
+					}
+				});
 	}
 	
 	/**

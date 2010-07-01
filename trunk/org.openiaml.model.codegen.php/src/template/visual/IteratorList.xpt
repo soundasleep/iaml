@@ -169,7 +169,7 @@ if (defined('ITERATOR_LIST_«safeName()»_UPDATED')) {
 	«IF containingSession(eContainer) != null»
 		require_session("«safeName(containingSession())»_«safeName()»_count")
 	«ELSE»
-		get_application_value("«safeName()»_count")
+		get_application_value("«safeName()»_count", null)
 	«ENDIF»
 «ENDDEFINE» 
 

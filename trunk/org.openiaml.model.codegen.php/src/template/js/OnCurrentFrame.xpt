@@ -27,6 +27,7 @@ function containing_frame(element_id) {
 			.union( eAllContents.select( e | model::VisibleThing.isInstance(e) ))
 			.union( eAllContents.select( e | model::ContainsOperations.isInstance(e) ))
 			.union( eAllContents.select( e | e.eContainer != null && canBeSet(e.eContainer) ))
+			.sortBy( e | safeName(e) )
 				AS targets»
 	«FOREACH targets AS e»
 		case "«safeName(e)»":
@@ -66,6 +67,7 @@ function containing_email(element_id) {
 			.union( eAllContents.select( e | model::ContainsOperations.isInstance(e) ))
 			.union( eAllContents.select( e | e.eContainer != null && canBeSet(e.eContainer) ))
 			.select( t | containingEmail(t) != null )
+			.sortBy( e | safeName(e) )
 				AS targets»
 	«FOREACH targets AS e»
 		case "«safeName(e)»":

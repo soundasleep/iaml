@@ -120,7 +120,6 @@
 «DEFINE dataTargetContainer(Boolean php, model::Property property) FOR emf::EObject»
 	«throwException("Unknown property container: " + this)»
 «ENDDEFINE»
-
 «DEFINE dataTargetContainer(Boolean php, model::Property property) FOR model::visual::InputTextField»
 	document.getElementById('«safeNameString(id)»').value
 «ENDDEFINE»
@@ -139,6 +138,21 @@
  */
 «DEFINE convertToFloat FOR model::DataFlowEdgesSource»
 	parse_float_or_zero(«EXPAND dataSource(false) FOR this»)
+«ENDDEFINE»
+
+/**
+ * Should any additional methods be called after setting a particular property?
+ */
+«DEFINE dataTargetOnChange(Boolean php) FOR model::DataFlowEdgeDestination»
+	«throwException("Unknown data flow edge target for dataTargetOnChange: " + this)»
+«ENDDEFINE»
+
+«DEFINE dataTargetOnChange(Boolean php) FOR model::Property»	
+	«EXPAND dataTargetOnChangeContainer(php, this) FOR eContainer»
+«ENDDEFINE»
+
+«DEFINE dataTargetOnChangeContainer(Boolean php, model::Property property) FOR emf::EObject»
+	«REM»by default, does nothing«ENDREM»
 «ENDDEFINE»
 
 /**

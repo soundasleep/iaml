@@ -25,6 +25,10 @@
 	«EXPAND Label::renderLabel(currentFrame) FOR this-»
 «ENDDEFINE»
 
+«DEFINE renderVisual(model::visual::Frame currentFrame) FOR model::visual::Hidden-»
+	«EXPAND Hidden::renderHidden(currentFrame) FOR this-»
+«ENDDEFINE»
+
 «DEFINE renderVisual(model::visual::Frame currentFrame) FOR model::visual::Map-»
 	«EXPAND Map::renderMap(currentFrame) FOR this-»
 «ENDDEFINE»

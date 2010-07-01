@@ -18,7 +18,7 @@ global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
 /**
- * @inference Changeable,InputTextField,DomainAttribute 
+ * @inference Changeable,DomainAttribute 
  *		A {@model Changeable} thing contains an {@model EventTrigger} named 'onChange'. 
  */
 rule "Create 'onChange' event trigger for Changeable things"
@@ -36,7 +36,7 @@ rule "Create 'onChange' event trigger for Changeable things"
 end
 
 /**
- * @inference Accessible,InputTextField 
+ * @inference Accessible
  *		An {@model Accessible} thing contains an {@model EventTrigger} named 'onAccess'.
  */
 rule "Create 'onAccess' event trigger for Accessible things"

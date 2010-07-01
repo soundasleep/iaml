@@ -138,5 +138,19 @@ public class DetailWireOnSetIteratorList extends InferenceTestCase {
 		assertGenerated(assertHasSetWire(root, dai, hpk));
 
 	}
+	
+	/**
+	 * IteratorLists must <em>NOT</em> have update operations; what does it mean
+	 * to update the value of a list? 
+	 * 
+	 * @throws Exception
+	 */
+	public void testIteratorListMustNotHaveUpdateOperation() throws Exception {
+		
+		Frame home = assertHasFrame(root, "Home");
+		IteratorList list = assertHasIteratorList(home, "List");
+		
+		assertHasNoOperation(list, "update");
+	}
 
 }

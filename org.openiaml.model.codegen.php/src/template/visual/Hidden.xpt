@@ -27,6 +27,14 @@
 			class="hidden_«safeNameString(name)»"
 			onChange="return onChange_«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>(this);"
 			
+			«REM»
+				if this Hidden is within an IteratorList, then the fieldValue will have already
+				been set by the IteratorList, so this has precedence.
+			«ENDREM»
+			«IF fieldValue != null && model::visual::IteratorList.isInstance(eContainer)»
+				«EXPAND InputTextField::staticInitialValue(currentFrame) FOR fieldValue»
+			«ENDIF»
+			
 			«REM»Hiddens dont have onInput«ENDREM»
 
 			«REM»any initial values?«ENDREM»
@@ -42,7 +50,7 @@
 			«ENDREM»
 			«IF fieldValue != null»
 				«EXPAND InputTextField::staticInitialValue(currentFrame) FOR fieldValue»
-			«ENDIF»			
+			«ENDIF»
 		>
 
 		<script language="Javascript" type="application/javascript">

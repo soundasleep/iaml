@@ -19,11 +19,13 @@ global DroolsHelperFunctions functions;
 
 /**
  * @inference VisibleThing
- *		All {@model VisibleThing}s will have an {@model Operation} called "update".
+ *		All {@model VisibleThing}s (except {@model IteratorList}s and {@model InputForm}s) will have an {@model Operation} called "update".
  */
 rule "Create 'update' operation for VisibleThings"
 	when
 		f : VisibleThing( )
+		not ( IteratorList ( this == f )) # not IteratorLists
+		not ( InputForm ( this == f )) # not InputForms
 		not (Operation( eContainer == f, name=="update" ))
 		
 		eval ( handler.veto( f ))
@@ -65,11 +67,13 @@ end
 
 /**
  * @inference VisibleThing
- *		All {@model VisibleThing}s will have an {@model Operation} called "init".
+ *		All {@model VisibleThing}s (except {@model IteratorList}s and {@model InputForm}s) will have an {@model Operation} called "init".
  */
 rule "Create 'init' operation for VisibleThings"
 	when
 		f : VisibleThing( )
+		not ( IteratorList ( this == f )) # not IteratorLists
+		not ( InputForm ( this == f )) # not InputForms
 		not (Operation( eContainer == f, name=="init" ))
 				
 		eval ( handler.veto( f ))

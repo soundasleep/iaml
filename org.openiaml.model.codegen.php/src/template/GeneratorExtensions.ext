@@ -348,7 +348,7 @@ isSession(emf::EObject this) :
 isFrame(emf::EObject this) :
 	model::visual::Frame.isInstance(this);
 canBeSet(emf::EObject this) :
-	isInputTextField(this) || isLabel(this);
+	model::VisibleThing.isInstance(this);
 isInputTextField(emf::EObject this) :
 	model::visual::InputTextField.isInstance(this);	
 isLabel(emf::EObject this) :

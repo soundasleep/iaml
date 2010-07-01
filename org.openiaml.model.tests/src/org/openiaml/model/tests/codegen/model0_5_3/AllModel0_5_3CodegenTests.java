@@ -21,6 +21,7 @@ public class AllModel0_5_3CodegenTests {
 		TestSuite suite = new TestSuite("Model 0.5.3");
 
 		suite.addTestSuite(HiddenFieldSyncWire.class);
+		suite.addTestSuite(HiddenFieldAsParameter.class);
 
 		return suite;
 	}

@@ -283,6 +283,10 @@
 	true
 «ENDDEFINE»
 
+«DEFINE callParameterValueExists FOR model::visual::Hidden»
+	true
+«ENDDEFINE»
+
 «DEFINE callParameterValueExists FOR model::StaticValue»
 	true
 «ENDDEFINE»

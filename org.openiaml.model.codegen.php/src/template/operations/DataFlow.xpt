@@ -129,6 +129,9 @@
 «DEFINE dataTargetContainer(Boolean php, model::Property property) FOR model::visual::Label»
 	document.getElementById('«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>').innerHTML
 «ENDDEFINE»
+«DEFINE dataTargetContainer(Boolean php, model::Property property) FOR model::visual::Hidden»
+	document.getElementById('«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>').value
+«ENDDEFINE»
 
 /**
  * Quick helper code to translate a value into a floating point number, to force
@@ -154,6 +157,14 @@
 «DEFINE dataTargetOnChangeContainer(Boolean php, model::Property property) FOR emf::EObject»
 	«REM»by default, does nothing«ENDREM»
 «ENDDEFINE»
+«REM»
+«DEFINE dataTargetOnChangeContainer(Boolean php, model::Property property) FOR model::visual::Hidden»
+	«IF !php»
+		// must call onChange manually
+		onChange_«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>(document.getElementById('«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>'));
+	«ENDIF»
+«ENDDEFINE»
+«ENDREM»
 
 /**
  * Data sources - are the sources set? Only supports Property.

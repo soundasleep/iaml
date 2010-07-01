@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12982b34bf8.27">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
+  <scopes xsi:type="iaml.scopes:Session" id="scopes.12982b34ed7.6" name="containing session">
+    <scopes xsi:type="iaml.visual:Frame" id="visual.12982b34d11.3c" name="Target Frame">
+      <children xsi:type="iaml.visual:InputTextField" outWires="wires.12982b34d8e.1a" id="visual.12982b34d11.43" name="parameter">
+        <wires xsi:type="iaml.wires:SetWire" id="wires.12982b34d8e.1a" name="set" from="visual.12982b34d11.43" to="visual.12982b34d11.44"/>
+      </children>
+      <children xsi:type="iaml.visual:Hidden" inWires="wires.12982b34d8e.1a" id="visual.12982b34d11.44" name="hidden" outParameterEdges="wires.12982b34d8e.1b">
+        <parameterEdges id="wires.12982b34d8e.1b" from="visual.12982b34d11.44" to="model.12982b34bf8.42"/>
+      </children>
+      <children xsi:type="iaml.visual:Button" id="visual.12982b34d11.45" name="update target" outActions="model.12982b34bf8.42">
+        <actions id="model.12982b34bf8.42" inParameterEdges="wires.12982b34d8e.1b" name="onClick" from="visual.12982b34d11.45" to="model.12982b34bf8.31"/>
+      </children>
+      <children xsi:type="iaml.visual:InputTextField" id="visual.12982b34d11.46" name="target">
+        <operations xsi:type="iaml:CompositeOperation" id="model.12982b34bf8.31" name="update" inActions="model.12982b34bf8.42"/>
+      </children>
+    </scopes>
+  </scopes>
+</iaml:InternetApplication>

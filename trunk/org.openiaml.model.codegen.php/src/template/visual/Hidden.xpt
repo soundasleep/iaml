@@ -1,0 +1,118 @@
+«IMPORT iaml»
+
+/**
+ * Visually rendering a Hidden.
+ */
+«EXTENSION template::GeneratorExtensions»
+
+/**
+ * @implementation Hidden
+ *   The value of {@model Property} 'fieldValue' of a {@model Hidden}
+ *   overrides the value of the Label.defaultValue attribute.
+ * @implementation Hidden
+ *		Any {@model VisibleThing children} of a {@model Hidden} are also rendered,
+ *		but are not hidden.
+ * @implementation Hidden
+ *		{@model Hidden#onInput} will never be called.
+ * @implementation Hidden
+ *		{@model Hidden#onClick} will never be called.
+ * @implementation Hidden
+ *		A {@model Hidden} is rendered as a <code>&lt;input type="hidden"&gt;</code>.
+ */
+«DEFINE renderHidden(model::visual::Frame currentFrame) FOR model::visual::Hidden-»
+	<div class="hidden_element">
+		<input type="hidden" 
+			id="«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>"
+			name="«safeNameString(id)»"
+			class="hidden_«safeNameString(name)»"
+			onChange="return onChange_«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>(this);"
+			
+			«REM»Hiddens dont have onInput«ENDREM»
+
+			«REM»any initial values?«ENDREM»
+			«EXPAND InputTextField::getInitialValuesSetWire(currentFrame) FOREACH inWires.typeSelect(model::wires::SetWire)» 			 
+			«EXPAND InputTextField::getInitialValuesSyncWire(currentFrame) FOREACH inWires.typeSelect(model::wires::SyncWire)» 
+			«EXPAND InputTextField::getInitialValuesSyncWire(currentFrame) FOREACH outWires.typeSelect(model::wires::SyncWire)» 			 
+
+			«REM»
+				an initial value?
+				TODO we could have multiple default values; right now we are relying on
+				browser behaviour to place this value as lower priority. we should work
+				out some way to select it programatically.
+			«ENDREM»
+			«IF fieldValue != null»
+				«EXPAND InputTextField::staticInitialValue(currentFrame) FOR fieldValue»
+			«ENDIF»			
+		>
+
+		<script language="Javascript" type="application/javascript">
+		/* <![CDATA[ */
+			function onChange_«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>(obj) {
+				// check data type
+				«IF type != null»
+					var value = obj.value;
+					if (!can_cast(value, '«type.uRI»')) {
+						// reset
+						obj.value = "";
+						return false;
+					} else {
+						// reformat it
+						// but make sure it's represented as a string
+						// (this prevents the Date from switching timezones, etc)
+						obj.value = do_cast(do_cast(value, '«type.uRI»'), 'http://openiaml.org/model/datatypes#iamlString');						
+					}
+				«ENDIF»
+			
+				«IF onChange != null»
+					// expand all onChanges
+					«REM»
+						we save a copy of the current value, so that server update replies
+						don't update the value before we are finished using it.
+						
+						the calls below (in particular, set_application_value) will update
+						the local value anyway, if it needs to be changed.
+						
+						this solves a problem where JWebUnit test cases would fail, but
+						running them locally (in a non-AJAX-synchronized environment) would pass. 
+					«ENDREM»
+					var pre_onChange_value = obj.value;
+					«EXPAND template::events::EventCall::callEvent(false) FOR onChange-»
+					obj.value = pre_onChange_value;
+				«ENDIF»
+
+				«REM»
+					if 'server values' is after 'outgoing values', then the value of the field
+					is temporarily changed to the old one, until 'server values' is then executed.
+					see: r1795
+				«ENDREM»
+
+				«IF fieldValue != null»
+				// server values
+					«REM»save a value for myself (which is not covered by an outEdge/inEdge) to the server/session?«ENDREM»
+					«EXPAND template::operations::OutgoingValues::outgoingValue(this) FOR fieldValue»
+				«ENDIF»
+
+				// outgoing values
+				«REM»any application element properties to change? (both on client and server)«ENDREM»
+				«REM»this doesn't cover fieldValues connected by Set/SyncWires; these are covered by server code (below)«ENDREM»
+				«EXPAND template::operations::OutgoingValues::outgoingValues(this) FOREACH outWires»
+				«EXPAND template::operations::OutgoingValues::outgoingValues(this) FOREACH inWires»
+				«REM»it may be required to outgoingValues(this) FOREACH properties.outWires«ENDREM»
+				
+				return false;
+			}
+
+			«REM»any on-access events?«ENDREM»
+			«IF onAccess != null»
+			addOnloadFunction( function() {
+				// expand all onAccess
+				«EXPAND template::events::EventCall::callEvent(false) FOR onAccess-»
+			} );
+			«ENDIF»
+		/* ]]> */
+		</script>
+		
+		«REM»expand all children«ENDREM»
+		«EXPAND Render::renderVisual(currentFrame) FOREACH children-»
+	</div>
+«ENDDEFINE»

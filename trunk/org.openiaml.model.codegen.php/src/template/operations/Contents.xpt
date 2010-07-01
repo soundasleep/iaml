@@ -240,6 +240,8 @@
 					// set a variable in the current frame
 					«EXPAND DataFlow::dataTarget(php) FOR outFlows.first().to» = value;
 					
+					«EXPAND DataFlow::dataTargetOnChange(php) FOR outFlows.first().to» 
+					
 					// set server/session variables too
 					«EXPAND OutgoingValues::outgoingValue((model::visual::InputTextField) outFlows.first().to.eContainer) FOR outFlows.first().to»
 				} else {

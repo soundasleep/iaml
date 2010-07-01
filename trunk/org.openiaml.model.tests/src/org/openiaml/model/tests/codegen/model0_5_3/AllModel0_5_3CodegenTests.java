@@ -22,6 +22,7 @@ public class AllModel0_5_3CodegenTests {
 
 		suite.addTestSuite(HiddenFieldSyncWire.class);
 		suite.addTestSuite(HiddenFieldAsParameter.class);
+		suite.addTestSuite(DetailWireOnSetIteratorList.class);
 
 		return suite;
 	}

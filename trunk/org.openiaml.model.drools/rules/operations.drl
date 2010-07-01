@@ -17,51 +17,13 @@ global OverridableCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
-rule "Create 'update' operation for input text field"
+/**
+ * @inference VisibleThing
+ *		All {@model VisibleThing}s will have an {@model Operation} called "update".
+ */
+rule "Create 'update' operation for VisibleThings"
 	when
-		f : InputTextField( )
-		not (Operation( eContainer == f, name=="update" ))
-		
-		eval ( handler.veto( f ))
-			
-	then
-		CompositeOperation operation = handler.generatedCompositeOperation(f, f);
-		handler.setName(operation, "update");
-		queue.add(operation, drools);
-		
-end
-
-rule "Create 'update' operation for label"
-	when
-		f : Label( )
-		not (Operation( eContainer == f, name=="update" ))
-		
-		eval ( handler.veto( f ))
-			
-	then
-		CompositeOperation operation = handler.generatedCompositeOperation(f, f);
-		handler.setName(operation, "update");
-		queue.add(operation, drools);
-		
-end
-
-rule "Create 'update' operation for map"
-	when
-		f : Map( )
-		not (Operation( eContainer == f, name=="update" ))
-		
-		eval ( handler.veto( f ))
-			
-	then
-		CompositeOperation operation = handler.generatedCompositeOperation(f, f);
-		handler.setName(operation, "update");
-		queue.add(operation, drools);
-		
-end
-
-rule "Create 'update' operation for map point"
-	when
-		f : MapPoint( )
+		f : VisibleThing( )
 		not (Operation( eContainer == f, name=="update" ))
 		
 		eval ( handler.veto( f ))
@@ -101,23 +63,13 @@ rule "Create 'update' operation for domain attribute instance"
 		
 end
 
-rule "Create 'init' operation for input text field"
+/**
+ * @inference VisibleThing
+ *		All {@model VisibleThing}s will have an {@model Operation} called "init".
+ */
+rule "Create 'init' operation for VisibleThings"
 	when
-		f : InputTextField( )
-		not (Operation( eContainer == f, name=="init" ))
-				
-		eval ( handler.veto( f ))
-			
-	then
-		CompositeOperation operation = handler.generatedCompositeOperation(f, f);
-		handler.setName(operation, "init");
-		queue.add(operation, drools);
-		
-end
-
-rule "Create 'init' operation for label"
-	when
-		f : Label( )
+		f : VisibleThing( )
 		not (Operation( eContainer == f, name=="init" ))
 				
 		eval ( handler.veto( f ))

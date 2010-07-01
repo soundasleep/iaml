@@ -234,7 +234,7 @@ rule "Create a Link Button for the source of a DetailWire: Connect ActionEdge"
 		
 end
 
-rule "Create a Link Button for the source of a DetailWire: Add Parameter from AttributeInstance"
+rule "Create a Link Button for the source of a DetailWire (not IteratorList): Add Parameter from AttributeInstance"
 	when
 		container : Frame( )
 		
@@ -246,6 +246,8 @@ rule "Create a Link Button for the source of a DetailWire: Add Parameter from At
 		schemaEdge : SchemaEdge ( eval ( functions.connectsSchema(schemaEdge, domainSource, schema )) )
 		
 		source : VisibleThing ( eContainer == container )
+		# ignoring IteratorLists
+		not ( IteratorList ( this == source )) 
 		target : Frame ( )
 		
 		detail : DetailWire ( )
@@ -260,6 +262,48 @@ rule "Create a Link Button for the source of a DetailWire: Add Parameter from At
 		ExtendsEdge ( from == pkInstance, to == pkAttribute )
 		
 		pk : Property ( pkInstance.fieldValue == pk ) 
+		
+		not ( ParameterEdge ( from == pk, to == nav ))
+	
+		eval ( handler.veto( detail ))
+	
+	then
+		ParameterEdge param = handler.generatedParameterEdge(detail, source, pk, nav);
+		handler.setName(param, pkAttribute.getName());
+		queue.add(param, drools);
+	
+end
+
+rule "Create a Link Button for the source of a DetailWire (IteratorList): Add Parameter from AttributeInstance"
+	when
+		container : Frame( )
+		
+		schema : DomainSchema ( )
+		domainSource : DomainSource ( )
+		instance : DomainIterator( eContainer == container )
+
+		selectEdge : SelectEdge ( eval ( functions.connectsSelect(selectEdge, instance, domainSource )) )
+		schemaEdge : SchemaEdge ( eval ( functions.connectsSchema(schemaEdge, domainSource, schema )) )
+		
+		source : IteratorList ( eContainer == container )
+		target : Frame ( )
+		
+		detail : DetailWire ( )
+		eval ( functions.connectsDetail(detail, source, target ))
+		
+		button : VisibleThing ( eContainer == source, name == "link" )
+		onClick : EventTrigger ( button.onClick == onClick )
+		nav : ActionEdge ( from == onClick, to == target )
+
+		pkAttribute : DomainAttribute ( eContainer == schema, primaryKey == true )
+		pkInstance : DomainAttributeInstance ( eContainer == instance )
+		ExtendsEdge ( from == pkInstance, to == pkAttribute )
+		
+		# attribute instance is connected to the Container by a SetWire or SyncWire to a Hidden
+		hidden : Hidden ( eContainer == source )
+		set : SetWire ( eval(functions.connectsSet(set, pkInstance, hidden) ) )
+		
+		pk : Property ( hidden.fieldValue == pk ) 
 		
 		not ( ParameterEdge ( from == pk, to == nav ))
 	

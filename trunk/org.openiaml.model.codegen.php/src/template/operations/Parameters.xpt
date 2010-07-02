@@ -110,7 +110,11 @@
 					(on_current_frame(get_frame_id(), "«safeName()»") ?
 						«EXPAND dataSourceOnFrame FOR eContainer»
 					: (
-						«IF model::visual::InputTextField.isInstance(eContainer) || model::visual::Label.isInstance(eContainer) || model::visual::Hidden.isInstance(eContainer)»
+						«IF model::visual::InputTextField.isInstance(eContainer) 
+								|| model::visual::Label.isInstance(eContainer) 
+								|| model::visual::Hidden.isInstance(eContainer)
+								|| model::visual::Map.isInstance(eContainer)
+								|| model::visual::MapPoint.isInstance(eContainer)»
 							«REM»this is a text field stored outside of the current frame«ENDREM»
 							/* if you _don't_ want an operation to use a cached value of a remote Input Text Field, place the operation _outside_ of its containing frame. */
 							<?php if («EXPAND isSetParameter(true) FOR this») { ?>
@@ -170,6 +174,12 @@
 «ENDDEFINE»
 «DEFINE dataSourceOnFrame FOR model::visual::Hidden»
 	document.getElementById('«safeName()»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>').value
+«ENDDEFINE»
+«DEFINE dataSourceOnFrame FOR model::visual::MapPoint»
+	document.getElementById('map_point_«safeNameString(id)»_value').value
+«ENDDEFINE»
+«DEFINE dataSourceOnFrame FOR model::visual::Map»
+	document.getElementById('map_single_«safeNameString(id)»_value').value
 «ENDDEFINE»
 
 «DEFINE callParameterValue(Boolean php, Boolean inStoreDb) FOR model::StaticValue»
@@ -278,31 +288,30 @@
 «DEFINE callParameterValueExists FOR model::Property»
 	true
 «ENDDEFINE»
-
 «DEFINE callParameterValueExists FOR model::visual::InputTextField»
 	true
 «ENDDEFINE»
-
 «DEFINE callParameterValueExists FOR model::visual::Hidden»
 	true
 «ENDDEFINE»
-
+«DEFINE callParameterValueExists FOR model::visual::Map»
+	true
+«ENDDEFINE»
+«DEFINE callParameterValueExists FOR model::visual::MapPoint»
+	true
+«ENDDEFINE»
 «DEFINE callParameterValueExists FOR model::StaticValue»
 	true
 «ENDDEFINE»
-
 «DEFINE callParameterValueExists FOR model::DynamicApplicationElementSet»
 	true
 «ENDDEFINE»
-
 «DEFINE callParameterValueExists FOR model::visual::Frame»
 	true
 «ENDDEFINE»
-
 «DEFINE callParameterValueExists FOR model::users::Role»
 	true
 «ENDDEFINE»
-
 «DEFINE callParameterValueExists FOR model::users::Permission»
 	true
 «ENDDEFINE»

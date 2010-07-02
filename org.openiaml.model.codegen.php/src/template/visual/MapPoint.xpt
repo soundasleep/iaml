@@ -100,7 +100,7 @@
 		} 
 		if (!$point_visible) {
 			«EXPAND mapPoint_getInitialValuesSetWire(currentFrame) FOREACH inWires.typeSelect(model::wires::SetWire)»
-		} 			 
+		}
 
 		?>
 
@@ -119,6 +119,11 @@
 			} );
 		/* ]]> */
 		</script> 
+	
+		«REM»for storing and accessing the value programatically at runtime«ENDREM»
+		<input type="hidden" 
+			id="map_point_<?php echo $id; ?>_value" 
+			value="<?php if ($point_visible) echo htmlspecialchars($point_address); ?>" />
 		
 		«REM»expand all children«ENDREM»
 		«EXPAND Render::renderVisual(currentFrame) FOREACH children-»
@@ -204,6 +209,11 @@
 
 		?>
 
+		«REM»for storing and accessing the value programatically at runtime«ENDREM»
+		<input type="hidden" 
+			id="map_single_«safeNameString(id)-»_value" 
+			value="<?php if ($point_visible) echo htmlspecialchars($point_address); ?>" />
+
 		«REM»
 			show/hide the map point at runtime (client-side)
 		«ENDREM»
@@ -218,7 +228,7 @@
 				<?php } ?>
 			} );
 		/* ]]> */
-		</script> 
+		</script>
 	</div>
 «ENDDEFINE»
 

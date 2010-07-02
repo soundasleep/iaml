@@ -132,6 +132,12 @@
 «DEFINE dataTargetContainer(Boolean php, model::Property property) FOR model::visual::Hidden»
 	document.getElementById('«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>').value
 «ENDDEFINE»
+«DEFINE dataTargetContainer(Boolean php, model::Property property) FOR model::visual::MapPoint»
+	document.getElementById('map_point_«safeNameString(id)»_value').value
+«ENDDEFINE»
+«DEFINE dataTargetContainer(Boolean php, model::Property property) FOR model::visual::Map»
+	document.getElementById('map_single_«safeNameString(id)»_value').value
+«ENDDEFINE»
 
 /**
  * Quick helper code to translate a value into a floating point number, to force
@@ -165,6 +171,10 @@
 	«ENDIF»
 «ENDDEFINE»
 «ENDREM»
+«DEFINE dataTargetOnChangeContainer(Boolean php, model::Property property) FOR model::visual::MapPoint»
+	// need to refresh map point manually
+	set_map_point_«safeNameString(id)»(«EXPAND dataTargetContainer(php, property)»);
+«ENDDEFINE»
 
 /**
  * Data sources - are the sources set? Only supports Property.

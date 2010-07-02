@@ -94,9 +94,9 @@ public class SavedRuleSources extends InferenceTestCase {
 		assertTrue(targetEdit.isIsGenerated());
 		assertEquals("Create 'onChange' event trigger for Changeable things", targetEdit.getGeneratedRule());
 		assertTrue(srcOp.isIsGenerated());
-		assertEquals("Create 'update' operation for input text field", srcOp.getGeneratedRule());
+		assertEquals("Create 'update' operation for VisibleThings", srcOp.getGeneratedRule());
 		assertTrue(targetOp.isIsGenerated());
-		assertEquals("Create 'update' operation for input text field", targetOp.getGeneratedRule());
+		assertEquals("Create 'update' operation for VisibleThings", targetOp.getGeneratedRule());
 
 		// there should not be any wires between these two
 		assertHasWiresFromTo(0, wire, srcEdit, targetOp);

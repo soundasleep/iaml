@@ -53,6 +53,10 @@ end
  * to prevent a target onAccess.init using a fieldValue that can't ever be
  * completed.
  *
+ * <p>A DomainIterator also can not have a fieldValue, because it doesn't make
+ * any sense at the moment. Both DomainIterator and InputForm should have this
+ * incorrect inheritance of Changeable removed.
+ *
  * @inference Changeable,Property 
  *		A {@model Changeable} 
  * 		contains an untyped {@model Property property} named 'fieldValue'.
@@ -60,13 +64,17 @@ end
  *		If set, the {@model Changeable#defaultValue defaultValue}
  *		is used as the default value of the created {@model Changeable#fieldValue } {@model Property property}.
  * @inference InputForm
- *		{@model InputForm} do <em>not</em> have a {@model Property property} 
+ *		{@model InputForm}s do <em>not</em> have a {@model Property property} 
+ *		named 'fieldValue' created by default.
+ * @inference DomainIterator
+ *		{@model DomainIterator}s do <em>not</em> have a {@model Property property} 
  *		named 'fieldValue' created by default.
  */
 rule "Create field value for Changeable (untyped)"
 	when
 		f : Changeable( )
 		not ( InputForm ( this == f ))
+		not ( DomainIterator ( this == f ))
 		not (prop : Property( eContainer == f, f.fieldValue != null, f.fieldValue == prop ))
 			
 		eval ( handler.veto( f ))

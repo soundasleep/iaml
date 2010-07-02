@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.1299191da4f.5dfd">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
+  <scopes xsi:type="iaml.scopes:Session" id="scopes.1299191dafb.19d" name="Session">
+    <elements xsi:type="iaml.components:AccessControlHandler" id="components.1299191dafb.94" name="Access Control" outActions="model.12991cf837c.b">
+      <actions id="model.12991cf837c.b" name="login" from="components.1299191dafb.94" to="visual.1299191daeb.9e6"/>
+    </elements>
+  </scopes>
+  <scopes xsi:type="iaml.scopes:Session" id="scopes.1299191dafb.19e" name="Login Session">
+    <scopes xsi:type="iaml.visual:Frame" id="visual.1299191daeb.9e6" name="Login Page" inActions="model.12991cf837c.b"/>
+  </scopes>
+</iaml:InternetApplication>

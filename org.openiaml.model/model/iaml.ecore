@@ -1168,7 +1168,7 @@
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="AccessControlHandler" eSuperTypes="#//GeneratesElements #//wires/ParameterEdgeDestination #//users/RequiresEdgesSource #//ApplicationElement #//ContainsWires">
+    <eClassifiers xsi:type="ecore:EClass" name="AccessControlHandler" eSuperTypes="#//GeneratesElements #//wires/ParameterEdgeDestination #//users/RequiresEdgesSource #//ApplicationElement #//ContainsWires #//ActionEdgeSource">
       <eAnnotations source="http://openiaml.org/comment">
         <details key="added" value="0.4"/>
       </eAnnotations>

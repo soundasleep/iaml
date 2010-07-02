@@ -557,6 +557,14 @@ function set_operation_handler(handler) {
 }
 
 /**
+ * Allows an exception to be thrown as part of a value assignment.
+ * c.f. the PHP runtime's <code>throw_new_IamlRuntimeException()</code>
+ */
+function throw_new_IamlJavascriptException(message) {
+	throw new IamlJavascriptException(message);
+}
+
+/**
  * Is every element in the array equal?
  */
 function is_array_equal(a) {

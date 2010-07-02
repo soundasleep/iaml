@@ -17,7 +17,9 @@ function echo_google_map($id) {
             type="text/javascript"></script>
     	<?php define('GOOGLE_MAPS_INCLUDED', true); ?>
     <?php } ?>
-	<div id="map_canvas_<?php echo $id; ?>" style="width: 500px; height: 300px"></div>
+	<div id="map_canvas_<?php echo $id; ?>"
+		class="map_canvas"
+		style="width: 500px; height: 300px"></div>
 	
 	<script language="Javascript" type="application/javascript">
 	/* <![CDATA[ */

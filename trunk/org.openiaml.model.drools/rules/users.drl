@@ -65,7 +65,7 @@ end
  *
  * @inference AccessControlHandler
  *		If a {@model AccessControlHandler} specifies a 'login' {@model ActionEdge}
- *		that goes to a {@model Frame}, the same login Frame will be used as the login Frame
+ *		that goes to a {@model Frame}, the same Frame will be used as the login Frame
  *		for the generated {@model LoginHandler}.
  */
 rule "If an AccessControlHandler specifies a Login page, connect this to the generated LoginHandler"
@@ -75,7 +75,7 @@ rule "If an AccessControlHandler specifies a Login page, connect this to the gen
 		login_handler : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
 		
 		login_page : Frame ( )
-		login_edge : ActionEdge ( from == ach, to == login_page )
+		login_edge : ActionEdge ( from == ach, to == login_page, name == "login" )
 		
 		not ( ActionEdge( from == login_handler, name == "login" ))
 		
@@ -84,6 +84,62 @@ rule "If an AccessControlHandler specifies a Login page, connect this to the gen
 	then
 		ActionEdge edge = handler.generatedActionEdge(ach, session, login_handler, login_page);
 		handler.setName(edge, "login");
+		queue.add(edge, drools);
+
+end
+
+/**
+ * Allow AccessControlHandlers to specify target Logout pages.
+ *
+ * @inference AccessControlHandler
+ *		If a {@model AccessControlHandler} specifies a 'logout' {@model ActionEdge}
+ *		that goes to a {@model Frame}, the same Frame will be used as the logout Frame
+ *		for the generated {@model LoginHandler}.
+ */
+rule "If an AccessControlHandler specifies a Logout page, connect this to the generated LoginHandler"
+	when
+		session : Session ( )
+		ach : AccessControlHandler ( eContainer == session )
+		login_handler : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
+		
+		login_page : Frame ( )
+		login_edge : ActionEdge ( from == ach, to == login_page, name == "logout" )
+		
+		not ( ActionEdge( from == login_handler, name == "logout" ))
+		
+		eval ( handler.veto( ach ))
+
+	then
+		ActionEdge edge = handler.generatedActionEdge(ach, session, login_handler, login_page);
+		handler.setName(edge, "logout");
+		queue.add(edge, drools);
+
+end
+
+/**
+ * Allow AccessControlHandlers to specify target Success pages.
+ *
+ * @inference AccessControlHandler
+ *		If a {@model AccessControlHandler} specifies a 'success' {@model ActionEdge}
+ *		that goes to a {@model Frame}, the same Frame will be used as the successful login Frame
+ *		for the generated {@model LoginHandler}.
+ */
+rule "If an AccessControlHandler specifies a Success page, connect this to the generated LoginHandler"
+	when
+		session : Session ( )
+		ach : AccessControlHandler ( eContainer == session )
+		login_handler : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
+		
+		login_page : Frame ( )
+		login_edge : ActionEdge ( from == ach, to == login_page, name == "success" )
+		
+		not ( ActionEdge( from == login_handler, name == "success" ))
+		
+		eval ( handler.veto( ach ))
+
+	then
+		ActionEdge edge = handler.generatedActionEdge(ach, session, login_handler, login_page);
+		handler.setName(edge, "success");
 		queue.add(edge, drools);
 
 end

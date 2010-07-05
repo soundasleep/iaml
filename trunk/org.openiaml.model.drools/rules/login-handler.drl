@@ -89,7 +89,9 @@ rule "Create 'logout' page for LoginHandlers"
 	when
 		scope : Session( ) 
 		login_handler : LoginHandler( eContainer == scope )
+		
 		not (Frame (eContainer == scope, name=="logout" ))
+		not ( ActionEdge ( from == login_handler, name == "logout" ) )
 				
 		eval ( handler.veto( login_handler ))
 		
@@ -1314,6 +1316,7 @@ rule "Create default login successful page"
 		scope : Session ( )
 		login_handler : LoginHandler( eContainer == scope )
 		
+		not ( Frame ( eContainer == scope, name == "Login Successful" ) )
 		not ( wire : ActionEdge (from == login_handler, name == "success" ))
 		
 		eval ( handler.veto( login_handler ))
@@ -1322,8 +1325,22 @@ rule "Create default login successful page"
 		Frame page = handler.generatedFrame(login_handler, scope);
 		handler.setName(page, "Login Successful");
 		queue.add(page, drools);
+
+end
+
+rule "Connect default login successful page to LoginHandler"
+	when
+		scope : Session ( )
+		login_handler : LoginHandler( eContainer == scope )
 		
-		ActionEdge wire = handler.generatedActionEdge(login_handler, login_handler, login_handler, page);
+		success : Frame ( eContainer == scope, name == "Login Successful" )
+		
+		not ( wire : ActionEdge (from == login_handler, name == "success" ))
+		
+		eval ( handler.veto( login_handler ))
+
+	then
+		ActionEdge wire = handler.generatedActionEdge(login_handler, login_handler, login_handler, success);
 		handler.setName(wire, "success");
 		queue.add(wire, drools);
 
@@ -1336,15 +1353,31 @@ rule "Create default logout successful page"
 		login_handler : LoginHandler( eContainer == scope )
 		
 		not ( wire : ActionEdge (from == login_handler, name == "logout" ))
-		
+		not ( Frame ( eContainer == container, name == "Logout Successful" ) )
+				
 		eval ( handler.veto( login_handler ))
 
 	then
 		Frame page = handler.generatedFrame(login_handler, container);
 		handler.setName(page, "Logout Successful");
 		queue.add(page, drools);
+
+end
+
+rule "Connect default logout successful page to LoginHandler"
+	when
+		container : InternetApplication( )
+		scope : Session ( )
+		login_handler : LoginHandler( eContainer == scope )
 		
-		ActionEdge wire = handler.generatedActionEdge(login_handler, login_handler, login_handler, page);
+		logout : Frame ( eContainer == container, name == "Logout Successful" )
+		
+		not ( wire : ActionEdge (from == login_handler, name == "logout" ))
+		
+		eval ( handler.veto( login_handler ))
+
+	then
+		ActionEdge wire = handler.generatedActionEdge(login_handler, login_handler, login_handler, logout);
 		handler.setName(wire, "logout");
 		queue.add(wire, drools);
 

@@ -28,7 +28,7 @@ If the rendering target is set to RSS2_0, then the content will be rendered as a
 
 ===EntryGate===
 
-An [http://openiaml.org/model/EntryGate EntryGate] can now require a Label to be set (and valid) within the same Scope. For example, if the Label is of type `iamlOpenID`, then the user must provide and authenticate a valid OpenID URL before the Scope can be accessed.
+An [http://openiaml.org/model/EntryGate EntryGate] can now require a Label to be set (and valid) within the same Scope. For example, if the Label is of type `iamlOpenIDURL`, then the user must provide and authenticate a valid OpenID URL before the Scope can be accessed.
 
 ==Changes==
 
@@ -43,6 +43,50 @@ An [http://openiaml.org/model/EntryGate EntryGate] can now require a Label to be
   # Development
     * Diagram editors are now completely removed from version control (issue 175)
   # Documentation
+    * The documentation has not been fully migrated yet, nor all of the example models migrated yet, but this will be completed before 0.6.
+
+=Model 0.5.2=
+
+*Released [http://journals.jevon.org/users/jevon-phd/entry/19848 July 2010]*
+
+This minor release adds autocomplete wires, and refreshes the rendering of elements in the diagram editors. There is also a small amount of metamodel refactoring, along with other [http://code.google.com/p/iaml/issues/list?can=1&q=label%3AMilestone-Release0.5.2 issue fixes].
+
+==New Elements==
+
+===Autocomplete Wire===
+
+An [http://openiaml.org/model/AutocompleteWire Autocomplete Wire] allows for the easy creation of an autocompletion visual element.
+
+==Changed Elements==
+
+===Visible Thing===
+
+All [http://openiaml.org/model/VisibleThing VisibleThings] now support an additional property, rather than just [http://openiaml.org/model/InputTextField InputTextFields]: _currentInput_. If supported at runtime, this represents input that the user has provided but before it has been committed.
+
+It also adds the [http://openiaml.org/model/EventTrigger Event] _onInput_, which is fired whenever the _currentInput_ has changed. Not all model elements support _onInput_ and it is not guaranteed to fire consistently.
+
+===Action Edge===
+
+To unify better with the desired ECA style, Actions have been renamed to [http://openiaml.org/model/ActionEdge ActionEdges].
+
+The differences between [http://openiaml.org/model/RunAction RunAction] and [http://openiaml.org/model/NavigateAction NavigateAction] have been removed, and the two elements have been unified into [http://openiaml.org/model/ActionEdge ActionEdge].
+
+==Unified Design==
+
+The style and design of model elements has been refreshed, and unified according to the _Physics of Notation_ by Moody (issue 195). The wide range of colours that were in use before have been unified down into seven; full details on this change will be in the thesis.
+
+==Changes==
+
+  # Meta-model changes  
+    * [http://openiaml.org/model/DomainIterator DomainIterators] and [http://openiaml.org/model/InputForm InputForm] no longer have _fieldValues_ created through model completion.
+    * The `javascriptAlert` [http://openiaml.org/model/PrimitiveOperation PrimitiveOperation] has been renamed to `alert` (issue 196)
+  # Code generation
+    * Duplicate extensions are now found and provided as warnings when developing templates (issue 182)
+  # Interface
+    * The diagram elements icons have been refreshed (issue 18)
+    * A new tool to generate new element IDs has been added; for example, an [http://openiaml.org/model/InputTextField InputTextField] with an ID of `model.1a9b9019af.153` may be renamed to `text1` (issue 86)
+  # Documentation
+    * The element export script now also exports to SVG, as well as PNG (issue 193)
     * The documentation has not been fully migrated yet, nor all of the example models migrated yet, but this will be completed before 0.6.
 
 =Model 0.6=

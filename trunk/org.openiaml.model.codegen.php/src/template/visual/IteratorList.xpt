@@ -154,7 +154,7 @@ if (defined('ITERATOR_LIST_«safeName()»_UPDATED')) {
 		?> style="display: none;"<?php
 		} 
 	?>>
-		«FOREACH children AS child»
+		«FOREACH children.sortBy(c|c.renderOrder) AS child»
 		<td class="«safeNameString(child.id)»" class="list_item_«safeNameString(child.name)»">
 			«EXPAND Render::renderVisual(currentFrame) FOR child»
 		</td>

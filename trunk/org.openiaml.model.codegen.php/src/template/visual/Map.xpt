@@ -36,7 +36,7 @@
 		?>
 		
 		«REM»expand all children«ENDREM»
-		«EXPAND Render::renderVisual(currentFrame) FOREACH children-»
+		«EXPAND Render::renderVisual(currentFrame) FOREACH children.sortBy(c|c.renderOrder)-»
 		
 		«REM»if there are no children MapPoints, render one anyway that is hidden, for the fieldValue of the Map«ENDREM»
 		«IF children.typeSelect(model::visual::MapPoint).isEmpty»

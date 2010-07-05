@@ -15,14 +15,14 @@ import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.Hidden;
 import org.openiaml.model.model.visual.IteratorList;
 import org.openiaml.model.model.visual.Label;
-import org.openiaml.model.tests.inference.InferenceTestCase;
+import org.openiaml.model.tests.inference.ValidInferenceTestCase;
 
 /**
  * 
  * 
  * @author jmwright
  */
-public class DetailWireOnSetIteratorList extends InferenceTestCase {
+public class DetailWireOnSetIteratorList extends ValidInferenceTestCase {
 
 	@Override
 	protected void setUp() throws Exception {
@@ -151,6 +151,11 @@ public class DetailWireOnSetIteratorList extends InferenceTestCase {
 		IteratorList list = assertHasIteratorList(home, "List");
 		
 		assertHasNoOperation(list, "update");
+	}
+	
+	@Override
+	public Class<? extends ValidInferenceTestCase> getInferenceClass() {
+		return getClass();
 	}
 
 }

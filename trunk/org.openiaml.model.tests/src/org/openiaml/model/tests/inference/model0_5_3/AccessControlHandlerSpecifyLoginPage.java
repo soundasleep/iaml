@@ -12,19 +12,19 @@ import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.users.Role;
 import org.openiaml.model.model.visual.Frame;
-import org.openiaml.model.tests.inference.InferenceTestCase;
+import org.openiaml.model.tests.inference.ValidInferenceTestCase;
 
 /**
  * Issue 206: Allow AccessControlHandlers to specify target Login pages
  * 
  * @author jmwright
  */
-public class AccessControlHandlerSpecifyLoginPage extends InferenceTestCase {
+public class AccessControlHandlerSpecifyLoginPage extends ValidInferenceTestCase {
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		root = loadAndInfer(AccessControlHandlerSpecifyLoginPage.class);
+		root = loadAndInfer(getInferenceClass());
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class AccessControlHandlerSpecifyLoginPage extends InferenceTestCase {
 		// the LoginHandler will have an outgoing ActionEdge to denote the login page
 		assertGenerated(assertHasActionEdge(root, handler, login, "login"));
 		
-		// there is only two outgoing ActionEdges from the LoginHandler; login and logout
+		// there is only three outgoing ActionEdges from the LoginHandler
 		List<String> actions = new ArrayList<String>();
 		for (ActionEdge e : handler.getOutActions()) {
 			actions.add(e.getName());
@@ -87,6 +87,11 @@ public class AccessControlHandlerSpecifyLoginPage extends InferenceTestCase {
 		// should have an InputForm
 		assertGenerated(assertHasInputForm(login, "login form"));
 		
+	}
+
+	@Override
+	public Class<? extends ValidInferenceTestCase> getInferenceClass() {
+		return getClass();
 	}
 	
 }

@@ -13,14 +13,14 @@ import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Label;
-import org.openiaml.model.tests.inference.InferenceTestCase;
+import org.openiaml.model.tests.inference.ValidInferenceTestCase;
 
 /**
  * Tests the "overridden names" helper property for model generation.
  * 
  * @author jmwright
  */
-public class OverriddenNames extends InferenceTestCase {
+public class OverriddenNames extends ValidInferenceTestCase {
 
 	@Override
 	protected void setUp() throws Exception {
@@ -216,8 +216,12 @@ public class OverriddenNames extends InferenceTestCase {
 			assertNotNull(e.getCause());
 			assertTrue(e.getCause() instanceof AssertionFailedError);
 		}
-		
-
+	
+	}
+	
+	@Override
+	public Class<? extends ValidInferenceTestCase> getInferenceClass() {
+		return getClass();
 	}
 	
 }

@@ -5,14 +5,14 @@ package org.openiaml.model.tests.inference.model0_5_3;
 
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
-import org.openiaml.model.tests.inference.InferenceTestCase;
+import org.openiaml.model.tests.inference.ValidInferenceTestCase;
 
 /**
  * Tests the "overridden names" helper property for model generation.
  * 
  * @author jmwright
  */
-public class OverriddenNamesSync extends InferenceTestCase {
+public class OverriddenNamesSync extends ValidInferenceTestCase {
 
 	@Override
 	protected void setUp() throws Exception {
@@ -117,6 +117,11 @@ public class OverriddenNamesSync extends InferenceTestCase {
 		assertHasInputTextField(right, "a");
 		assertHasNoLabel(right, "b");
 		
+	}
+	
+	@Override
+	public Class<? extends ValidInferenceTestCase> getInferenceClass() {
+		return getClass();
 	}
 	
 }

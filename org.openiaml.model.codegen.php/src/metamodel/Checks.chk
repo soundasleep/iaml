@@ -205,3 +205,8 @@ context model::domain::DomainIterator ERROR "A DomainIterator can only have one 
 context model::domain::DomainSchema WARNING "A DomainSchema should have at least one DomainSource specified" :
 	inSchemas.size >= 1;
 	
+context model::components::LoginHandler WARNING "Unknown outgoing ActionEdge '" + name + "' for this LoginHandler" :
+	outActions.select(a | a.name != "login" && a.name != "logout" && a.name != "success").isEmpty;
+	
+context model::components::AccessControlHandler WARNING "Unknown outgoing ActionEdge '" + name + "' for this AccessControlHandler" :
+	outActions.select(a | a.name != "login").isEmpty;

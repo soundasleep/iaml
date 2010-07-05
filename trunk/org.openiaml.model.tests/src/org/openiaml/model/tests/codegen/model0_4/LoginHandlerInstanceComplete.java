@@ -26,8 +26,8 @@ import org.openiaml.model.tests.codegen.DatabaseCodegenTestCase;
  *
  * @implementation LoginHandler
  * 		If a {@model LoginHandler} (selecting a {@model DomainObject}) has an outgoing
- * 		{@model NavigateAction navigation} to a {@model Frame} named 'login', the successful
- * 		logout of the current user will be redirected to this page.
+ * 		{@model NavigateAction navigation} to a {@model Frame} named 'success', the successful
+ * 		login of the current user will be redirected to this page.
  *
  * @author jmwright
  *

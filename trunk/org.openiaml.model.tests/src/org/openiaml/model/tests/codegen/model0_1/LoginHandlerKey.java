@@ -13,7 +13,7 @@ import org.openiaml.model.tests.CodegenTestCase;
  * InternetApplication
  *   Page "Home"
  *   Session "My Session"
- *     LoginHandler type=key [in=42, set=myKey, navigate"login"=viewkey, navigate"logout"=home]
+ *     LoginHandler type=key [in=42, set=myKey, navigate"success"=viewkey, navigate"logout"=home]
  *     StaticValue key=42
  *     FieldValue "my login key"
  *   Page "View Page"

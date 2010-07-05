@@ -76,7 +76,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		// handler login--> viewkey
 		{
 			assertHasNoWiresFromTo(handler, handler, viewkey);
-			ActionEdge nav = assertHasNavigateAction(handler, handler, viewkey, "login");
+			ActionEdge nav = assertHasNavigateAction(handler, handler, viewkey, "success");
 			assertNotGenerated(nav);
 		}
 

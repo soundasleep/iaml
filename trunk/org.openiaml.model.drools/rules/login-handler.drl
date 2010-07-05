@@ -985,7 +985,7 @@ rule "Create parameter for 'do login' operation inside login handler[type=user]"
 end
 
 /* it's possible in the future that this method should be split up. */
-rule "Connect successful 'login' operation to navigate to final 'login' page"
+rule "Connect successful login operation ('success') to navigate to final 'login' page"
 	when
 		container : InternetApplication( )
 		scope : Session( eContainer == container ) 
@@ -995,7 +995,7 @@ rule "Connect successful 'login' operation to navigate to final 'login' page"
 		
 		login_operation : CompositeOperation( eContainer == login_session, name == "do login" )		
 		login_target : Frame ( ) 
-		login_wire : ActionEdge( from == login_handler, to == login_target, name == "login" )
+		login_wire : ActionEdge( from == login_handler, to == login_target, name == "success" )
 
 		not (ActionEdge(from == login_operation, to == login_target))
 		
@@ -1008,7 +1008,7 @@ rule "Connect successful 'login' operation to navigate to final 'login' page"
 				
 end
 
-rule "Connect failed 'login' operation to navigate back to 'login'"
+rule "Connect failed login operation ('fail') to navigate back to 'login'"
 	when
 		container : InternetApplication( )
 		scope : Session( eContainer == container ) 
@@ -1300,7 +1300,7 @@ rule "Create default login successful page"
 		scope : Session ( )
 		login_handler : LoginHandler( eContainer == scope )
 		
-		not ( wire : ActionEdge (from == login_handler, name == "login" ))
+		not ( wire : ActionEdge (from == login_handler, name == "success" ))
 		
 		eval ( handler.veto( login_handler ))
 
@@ -1310,7 +1310,7 @@ rule "Create default login successful page"
 		queue.add(page, drools);
 		
 		ActionEdge wire = handler.generatedActionEdge(login_handler, login_handler, login_handler, page);
-		handler.setName(wire, "login");
+		handler.setName(wire, "success");
 		queue.add(wire, drools);
 
 end

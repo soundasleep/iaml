@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.users="http://openiaml.org/model/users" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.1299191da4f.5dfd">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home"/>
+  <scopes xsi:type="iaml.scopes:Session" id="scopes.1299191dafb.19d" name="Session">
+    <elements xsi:type="iaml.components:AccessControlHandler" outRequiresEdges="wires.12991de743d.18" id="components.1299191dafb.94" name="Access Control" outActions="model.12991cf837c.b">
+      <actions id="model.12991cf837c.b" name="success" from="components.1299191dafb.94" to="visual.1299191daeb.9e6"/>
+      <requiresEdges id="wires.12991de743d.18" from="components.1299191dafb.94" to="users.12991de7595.b"/>
+    </elements>
+  </scopes>
+  <scopes xsi:type="iaml.scopes:Session" id="scopes.1299191dafb.19e" name="Success Session">
+    <scopes xsi:type="iaml.visual:Frame" id="visual.1299191daeb.9e6" name="Success Page" inActions="model.12991cf837c.b"/>
+  </scopes>
+  <schemas xsi:type="iaml.users:Role" id="users.12991de7595.b" name="Target Role" inSchemas="domain.12991cf8427.16" inRequiresEdges="wires.12991de743d.18"/>
+  <sources id="domain.12991cf8427.14" name="Database" outSchemas="domain.12991cf8427.16">
+    <schemaEdges id="domain.12991cf8427.16" from="domain.12991cf8427.14" to="users.12991de7595.b"/>
+  </sources>
+</iaml:InternetApplication>

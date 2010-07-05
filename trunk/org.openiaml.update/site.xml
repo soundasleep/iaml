@@ -33,6 +33,9 @@
    <feature url="features/org.openiaml.model.editor_0.5.1.201005181449.jar" id="org.openiaml.model.editor" version="0.5.1.201005181449">
       <category name="org.openiaml.model.editor"/>
    </feature>
+   <feature url="features/org.openiaml.model.editor_0.5.2.201007051557.jar" id="org.openiaml.model.editor" version="0.5.2.201007051557">
+      <category name="org.openiaml.model.editor"/>
+   </feature>
    <category-def name="org.openiaml.model.editor" label="IAML Modelling Environment"/>
    <category-def name="org.openiaml.verification.crocopat.feature" label="Verification with Crocopat (Win-only)"/>
 </site>

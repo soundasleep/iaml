@@ -121,6 +121,6 @@
 		</script>
 		
 		«REM»expand all children«ENDREM»
-		«EXPAND Render::renderVisual(currentFrame) FOREACH children-»
+		«EXPAND Render::renderVisual(currentFrame) FOREACH children.sortBy(c|c.renderOrder)-»
 	</div>
 «ENDDEFINE»

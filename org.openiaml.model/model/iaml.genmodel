@@ -64,6 +64,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//VisibleThing/onClick"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//VisibleThing/currentInput"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//VisibleThing/onInput"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//VisibleThing/renderOrder"/>
     </genClasses>
     <genClasses image="false" ecoreClass="iaml.ecore#//ContainsProperties">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ContainsProperties/properties"/>

@@ -174,7 +174,7 @@
 		
 	<?php queue_log_messages(true); ?>
 
-	«EXPAND template::visual::Render::renderVisual(this) FOREACH children.typeSelect(model::VisibleThing)-»
+	«EXPAND template::visual::Render::renderVisual(this) FOREACH children.typeSelect(model::VisibleThing).sortBy(c|c.renderOrder)-»
 
 	<div id="debug"></div>
 	<div id="response">empty</div>

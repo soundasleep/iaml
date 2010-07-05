@@ -221,6 +221,12 @@
         <details key="documentation" value="This {@model EventTrigger} is executed whenever the {@model EventTrigger#currentInput current input} is changed; e.g. a key has been pressed, but the focus has not been lost yet. Once focus is lost, this value becomes the {@model VisibleThing#fieldValue field value} if is of a valid {@model VisibleThing#type}. This event may only fire on the client-side."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="renderOrder" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="{@model VisibleThing}s are rendered in order of ascending order; that is, a lower order {@model VisibleThing} will render first."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ContainsProperties" abstract="true"
       interface="true">

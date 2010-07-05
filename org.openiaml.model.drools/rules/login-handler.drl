@@ -1633,7 +1633,7 @@ rule "Create 'check instance' operation for LoginHandler[type = object or user]"
 		
 end
 
-# TODO merge these two rules together
+# TODO merge these two rules (object, user) together
 rule "Create 'current instance' for LoginHandler[type=object]"
 	when
 		session : Session( ) 
@@ -1647,8 +1647,21 @@ rule "Create 'current instance' for LoginHandler[type=object]"
 		DomainIterator instance = handler.generatedDomainIterator( login_handler, session );
 		handler.setName(instance, "current instance");
 		queue.add(instance, drools);
+
+end
+
+rule "Create 'current instance' for LoginHandler[type=object] - connect SetWire"
+	when
+		session : Session( ) 
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT )
 		
-		// connect with SetWire
+		instance : DomainIterator ( eContainer == session, name == "current instance" )
+		
+		not (set : SetWire ( eval (functions.connectsSet(set, login_handler, instance )) ) )
+		
+		eval ( handler.veto( login_handler ))
+		
+	then	
 		SetWire setWire = handler.generatedSetWire(login_handler, session, login_handler, instance);
 		handler.setName(setWire, "set");
 		queue.add(setWire, drools);
@@ -1668,7 +1681,21 @@ rule "Create 'current instance' for LoginHandler[type=user]"
 		DomainIterator instance = handler.generatedDomainIterator( login_handler, session );
 		handler.setName(instance, "current instance");
 		queue.add(instance, drools);
+
+end
+
+rule "Create 'current instance' for LoginHandler[type=user] - connect SetWire"
+	when
+		session : Session( ) 
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.USER )
 		
+		instance : DomainIterator ( eContainer == session, name == "current instance" )
+		
+		not (set : SetWire ( eval (functions.connectsSet(set, login_handler, instance )) ) )
+		
+		eval ( handler.veto( login_handler ))
+		
+	then
 		// connect with SetWire
 		SetWire setWire = handler.generatedSetWire(login_handler, session, login_handler, instance);
 		handler.setName(setWire, "set");

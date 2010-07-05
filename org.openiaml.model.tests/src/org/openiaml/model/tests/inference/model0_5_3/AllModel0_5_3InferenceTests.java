@@ -22,6 +22,7 @@ public class AllModel0_5_3InferenceTests {
 		suite.addTestSuite(OverriddenNames.class);
 		suite.addTestSuite(OverriddenNamesSync.class);
 		suite.addTestSuite(DetailWireOnSetIteratorList.class);
+		suite.addTestSuite(AccessControlHandlerSpecifyLoginPage.class);
 		
 		return suite;
 	}

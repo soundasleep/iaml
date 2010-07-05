@@ -182,8 +182,10 @@ public class OverriddenNames extends InferenceTestCase {
 		try {
 			assertCollectionEquals(s, "1");
 			throw new RuntimeException("Unexpectedly passed.");
-		} catch (AssertionFailedError e) {
+		} catch (RuntimeException e) {
 			// expected
+			assertNotNull(e.getCause());
+			assertTrue(e.getCause() instanceof AssertionFailedError);
 		}
 		
 		// the following should fail
@@ -193,23 +195,29 @@ public class OverriddenNames extends InferenceTestCase {
 		} catch (AssertionFailedError e) {
 			// expected
 		}
-		
+
 		// the following should fail
 		try {
 			assertCollectionEquals(s, "1", "2", "1");
 			throw new RuntimeException("Unexpectedly passed.");
-		} catch (AssertionFailedError e) {
+		} catch (RuntimeException e) {
 			// expected
+			assertNotNull(e.getCause());
+			assertTrue(e.getCause() instanceof AssertionFailedError);
 		}
 		
+
 		// the following should fail
 		try {
 			assertCollectionEquals(s, "0");
 			throw new RuntimeException("Unexpectedly passed.");
-		} catch (AssertionFailedError e) {
+		} catch (RuntimeException e) {
 			// expected
+			assertNotNull(e.getCause());
+			assertTrue(e.getCause() instanceof AssertionFailedError);
 		}
 		
+
 	}
 	
 }

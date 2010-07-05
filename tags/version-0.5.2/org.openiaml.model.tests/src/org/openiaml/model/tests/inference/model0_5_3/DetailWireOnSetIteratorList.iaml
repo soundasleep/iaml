@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12982b34bf8.4a">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
+    <elements xsi:type="iaml.domain:DomainIterator" id="domain.12982b350da.4b" name="Iterator" outWires="wires.12982b34d8e.21" limit="3" outSelects="domain.12982b350da.4c">
+      <selectEdges id="domain.12982b350da.4c" from="domain.12982b350da.4b" to="domain.12982b350da.2f"/>
+    </elements>
+    <children xsi:type="iaml.visual:IteratorList" outWires="wires.12982b34d8e.28" inWires="wires.12982b34d8e.21" id="visual.12982b34d11.a4" name="List">
+      <wires xsi:type="iaml.wires:DetailWire" id="wires.12982b34d8e.28" name="detail" from="visual.12982b34d11.a4" to="visual.12982b34d11.ac"/>
+    </children>
+  </scopes>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12982b34d11.ac" name="Target Frame" inWires="wires.12982b34d8e.28"/>
+  <schemas id="domain.12982b350da.20" name="schema" inSchemas="domain.12982b350da.31">
+    <attributes id="model.12982b34bf8.4f" name="attribute"/>
+  </schemas>
+  <sources id="domain.12982b350da.2f" name="database" outSchemas="domain.12982b350da.31" inSelects="domain.12982b350da.4c">
+    <wires xsi:type="iaml.wires:SetWire" id="wires.12982b34d8e.21" name="set" from="domain.12982b350da.4b" to="visual.12982b34d11.a4"/>
+    <schemaEdges id="domain.12982b350da.31" from="domain.12982b350da.2f" to="domain.12982b350da.20"/>
+  </sources>
+</iaml:InternetApplication>

@@ -43,7 +43,7 @@ rule "Create separate 'login' scope for LoginHandlers [InternetApplication]"
 	
 end
 
-rule "Create 'login' page for LoginHandlers [InternetApplication]"
+rule "Create default 'login' page for LoginHandlers"
 	when
 		container : InternetApplication( )
 		scope : Scope( eContainer == container ) 
@@ -51,7 +51,8 @@ rule "Create 'login' page for LoginHandlers [InternetApplication]"
 		
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		
-		not (Frame (eContainer == login_session, name=="login" ))
+		not ( ActionEdge ( from == login_handler, name == "login" ))
+		not ( Frame (eContainer == login_session, name=="login" ) )
 			
 		eval ( handler.veto( login_handler ))
 		
@@ -60,6 +61,27 @@ rule "Create 'login' page for LoginHandlers [InternetApplication]"
 		Frame login = handler.generatedFrame(login_handler, login_session);
 		handler.setName(login, "login");
 		queue.add(login, drools);
+		
+end
+
+rule "Connect default 'login' page to LoginHandler"
+	when
+		container : InternetApplication( )
+		scope : Scope( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope )
+		
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
+		login_page : Frame ( eContainer == login_session, name == "login" )
+		
+		not ( ActionEdge ( from == login_handler, to == login_page, name == "login" ))
+			
+		eval ( handler.veto( login_handler ))
+		
+	then
+	
+		ActionEdge edge = handler.generatedActionEdge(login_handler, login_session, login_handler, login_page);
+		handler.setName(edge, "login");
+		queue.add(edge, drools);
 		
 end
 
@@ -207,26 +229,8 @@ rule "Connect 'fail' wire from 'check key' or 'check instance' operation to Logi
 		container : ContainsWires( )
 		scope : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope )
-		login : Frame (eContainer == container, name=="login" )
-		check : CompositeOperation( name == "check key" || name == "check instance", eContainer == scope )
-		not (ActionEdge( from == check, to == login, name == "fail") )
-			
-		eval ( handler.veto( scope ))
-	
-	then
-		ActionEdge fail = handler.generatedActionEdge(scope, scope, check, login);
-		handler.setName(fail, "fail");
-		queue.add(fail, drools);
-		
-end
-
-rule "Connect 'fail' wire from 'check key' or 'check instance' operation to Login Frame (login page in separate session)"
-	when
-		container : ContainsWires( )
-		scope : Session( eContainer == container ) 
-		login_handler : LoginHandler( eContainer == scope )
-		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
-		login : Frame (eContainer == login_session, name=="login" )
+		login : Frame ( )
+		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
 		check : CompositeOperation( name == "check key" || name == "check instance", eContainer == scope )
 		not (ActionEdge( from == check, to == login, name == "fail") )
 			
@@ -393,7 +397,8 @@ rule "Create login form for 'login' pages"
 		scope : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope )
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
-		login : Frame (eContainer == login_session, name=="login" )
+		login : Frame ( )
+		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
 
 		not (InputForm( eContainer == login ))
 				
@@ -416,7 +421,8 @@ rule "Connect 'Login' button to 'do login' operation"
 		scope : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope )
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
-		login : Frame (eContainer == login_session, name=="login" )
+		login : Frame ( )
+		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
 
 		form : InputForm ( eContainer == login, name == "login form" )
 		button : Button ( eContainer == form, name == "Login" )
@@ -440,7 +446,8 @@ rule "Create text fields for login form of 'login' pages [type=secret_key]"
 		scope : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
-		login : Frame (eContainer == login_session, name=="login" )
+		login : Frame ( )
+		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
 
 		form : InputForm( eContainer == login, name == "login form" )
 		
@@ -462,7 +469,8 @@ rule "Create contents of 'do login' operation [type=secret_key]"
 		scope : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
-		login : Frame (eContainer == login_session, name=="login" )
+		login : Frame ( )
+		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
 
 		value : Property( )
 		mySetWire : SetWire( from == login_handler, to == value, name == "set" )
@@ -569,7 +577,8 @@ rule "Create text fields for login form of 'login' pages [type=domain_object]"
 		scope : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.DOMAIN_OBJECT )
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
-		login : Frame (eContainer == login_session, name=="login" )
+		login : Frame ( )
+		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
 
 		form : InputForm( eContainer == login, name == "login form" )
 		
@@ -600,7 +609,8 @@ rule "Create text fields for login form of 'login' pages [type=user]"
 		scope : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.USER )
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
-		login : Frame (eContainer == login_session, name=="login" )
+		login : Frame ( )
+		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
 
 		form : InputForm( eContainer == login, name == "login form" )
 
@@ -629,7 +639,8 @@ rule "Connect text fields for login form of 'login' pages to 'do login' run wire
 		scope : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.DOMAIN_OBJECT )
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
-		login : Frame (eContainer == login_session, name=="login" )
+		login : Frame ( )
+		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
 		
 		operation : Operation( eContainer == login_session, name == "do login" )
 
@@ -662,7 +673,8 @@ rule "Connect text fields for login form of 'login' pages to 'do login' run wire
 		scope : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.USER )
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
-		login : Frame (eContainer == login_session, name=="login" )
+		login : Frame ( )
+		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
 		
 		operation : Operation( eContainer == login_session, name == "do login" )
 
@@ -991,7 +1003,8 @@ rule "Connect successful login operation ('success') to navigate to final 'login
 		scope : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope )
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
-		login : Frame (eContainer == login_session, name=="login" )
+		login : Frame ( )
+		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
 		
 		login_operation : CompositeOperation( eContainer == login_session, name == "do login" )		
 		login_target : Frame ( ) 
@@ -1014,7 +1027,8 @@ rule "Connect failed login operation ('fail') to navigate back to 'login'"
 		scope : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope )
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
-		login : Frame (eContainer == login_session, name=="login" )
+		login : Frame ( )
+		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
 		login_operation : CompositeOperation( eContainer == login_session, name == "do login" )		
 
 		not (ActionEdge(from == login_operation, to == login, name == "fail"))

@@ -8,6 +8,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import junit.framework.AssertionFailedError;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xsd.XSDSimpleTypeDefinition;
 import org.jaxen.JaxenException;
@@ -1695,13 +1697,17 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 
 	/**
 	 * Assert that the given input is exactly the collection in
-	 * the given parameter.
+	 * the given parameter, but in any order.
 	 * 
 	 * @param input the input collection
 	 * @param strings the strings to check against
 	 */
 	public void assertCollectionEquals(Collection<String> input, String...strings) {
-		assertEquals(input.size(), strings.length);
+		try {
+			assertEquals(strings.length, input.size());
+		} catch (AssertionFailedError e) {
+			throw new RuntimeException(e.getMessage() + ": " + input, e);
+		}
 		
 		// make a copy of the input list
 		List<String> copy = new ArrayList<String>(input);

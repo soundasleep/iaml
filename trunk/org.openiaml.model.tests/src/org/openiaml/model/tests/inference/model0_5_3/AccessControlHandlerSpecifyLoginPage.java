@@ -61,16 +61,32 @@ public class AccessControlHandlerSpecifyLoginPage extends InferenceTestCase {
 		Session session = assertHasSession(root, "Session");
 		LoginHandler handler = assertHasLoginHandler(session, "role-based login handler");
 		
-		// the handler will have an outgoing ActionEdge
+		// the LoginHandler will have an outgoing ActionEdge to denote the login page
 		assertGenerated(assertHasActionEdge(root, handler, login, "login"));
 		
-		// there is only two outgoing ActionEdges; login and logout
+		// there is only two outgoing ActionEdges from the LoginHandler; login and logout
 		List<String> actions = new ArrayList<String>();
-		for (ActionEdge e : login.getOutActions()) {
+		for (ActionEdge e : handler.getOutActions()) {
 			actions.add(e.getName());
 		}
 			
-		assertCollectionEquals(actions, "login", "logout");
+		assertCollectionEquals(actions, "login", "logout", "success");
+	}
+	
+	/**
+	 * The targeted Login page is completed as normal, even though 
+	 * it is empty.
+	 * 
+	 * @throws Exception
+	 */
+	public void testLoginPage() throws Exception {
+		
+		Session target = assertHasSession(root, "Login Session");
+		Frame login = assertHasFrame(target, "Login Page");
+		
+		// should have an InputForm
+		assertGenerated(assertHasInputForm(login, "login form"));
+		
 	}
 	
 }

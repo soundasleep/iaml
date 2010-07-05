@@ -60,6 +60,34 @@ rule "When a page is protected by an AccessControlHandler with no login handler[
 
 end
 
+/**
+ * Issue 206: Allow AccessControlHandlers to specify target Login pages.
+ *
+ * @inference AccessControlHandler
+ *		If a {@model AccessControlHandler} specifies a 'login' {@model ActionEdge}
+ *		that goes to a {@model Frame}, the same login Frame will be used as the login Frame
+ *		for the generated {@model LoginHandler}.
+ */
+rule "If an AccessControlHandler specifies a Login page, connect this to the generated LoginHandler"
+	when
+		session : Session ( )
+		ach : AccessControlHandler ( eContainer == session )
+		login_handler : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
+		
+		login_page : Frame ( )
+		login_edge : ActionEdge ( from == ach, to == login_page )
+		
+		not ( ActionEdge( from == login_handler, name == "login" ))
+		
+		eval ( handler.veto( ach ))
+
+	then
+		ActionEdge edge = handler.generatedActionEdge(ach, session, login_handler, login_page);
+		handler.setName(edge, "login");
+		queue.add(edge, drools);
+
+end
+
 rule "A page within a session protected by an ACH should have a 'permissions check' operation"
 	when
 		session : Session ( )

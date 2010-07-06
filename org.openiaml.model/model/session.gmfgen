@@ -362,6 +362,7 @@
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureStaticValueNameFigure" xsi:type="gmfgen:ParentAssignedViewmap"/>
         <modelFacet editPattern="{0} = {1}" editorPattern="{0} = {1}" parser="//@labelParsers/@implementations.1" viewPattern="{0} = {1}" xsi:type="gmfgen:FeatureLabelModelFacet">
           <metaFeatures href="iaml.genmodel#//model/NamedElement/name"/>
+          <metaFeatures href="iaml.genmodel#//model/StaticValue/value"/>
         </modelFacet>
       </labels>
       <labels editPartClassName="StaticValueValueEditPart" itemSemanticEditPolicyClassName="StaticValueValueItemSemanticEditPolicy" notationViewFactoryClassName="StaticValueValueViewFactory" readOnly="true" visualID="5146">
@@ -861,7 +862,7 @@
         <modelFacet parser="//@labelParsers/@implementations.0"/>
       </labels>
     </links>
-    <links createCommandClassName="ActionEdgeCreateCommand" editPartClassName="ActionEdgeEditPart" itemSemanticEditPolicyClassName="ActionEdgeItemSemanticEditPolicy" reorientCommandClassName="ActionEdgeReorientCommand" visualID="4020">
+    <links createCommandClassName="ActionEdgeCreateCommand" editPartClassName="ActionEdgeEditPart" itemSemanticEditPolicyClassName="ActionEdgeItemSemanticEditPolicy" notationViewFactoryClassName="ActionEdgeViewFactory" reorientCommandClassName="ActionEdgeReorientCommand" visualID="4020">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
       <elementType editHelperClassName="ActionEdgeEditHelper" xsi:type="gmfgen:MetamodelType"/>
       <viewmap classBody="&#10;/**&#10; * @generated&#10; */&#10;public class ActionEdgeFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureActionEdgeNameFigure; &#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureActionEdgeStereotypeFigure; &#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public ActionEdgeFigure() {&#10;&#9;&#9;this.setLineWidth(1);&#10;this.setLineStyle(org.eclipse.draw2d.Graphics.LINE_DASH);&#10;&#9;this.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);&#10;&#10;&#9;&#9;createContents();&#10;&#9;&#9;setTargetDecoration(createTargetDecoration());&#10;&#9;}&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private void createContents(){&#10;&#10;&#10;fFigureActionEdgeNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureActionEdgeNameFigure.setText(&quot;&lt;...&gt;&quot;);&#10;&#10;this.add(fFigureActionEdgeNameFigure);&#10;&#10;&#10;&#10;fFigureActionEdgeStereotypeFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureActionEdgeStereotypeFigure.setText(&quot;: ActionEdge&quot;);&#10;&#10;this.add(fFigureActionEdgeStereotypeFigure);&#10;&#10;&#10;&#9;}&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#10;&#9;&#9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#10;df.setLineWidth(1);&#10;&#9;&#9;return df;&#10;&#9;}&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureActionEdgeNameFigure() {&#10;&#9;&#9;return fFigureActionEdgeNameFigure;&#10;&#9;}&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureActionEdgeStereotypeFigure() {&#10;&#9;&#9;return fFigureActionEdgeStereotypeFigure;&#10;&#9;}&#10;&#10;&#10;}&#10;&#10;" className="ActionEdgeFigure" xsi:type="gmfgen:InnerClassViewmap">
@@ -874,7 +875,7 @@
         <sourceMetaFeature href="iaml.genmodel#//model/ActionEdge/from"/>
         <targetMetaFeature href="iaml.genmodel#//model/ActionEdge/to"/>
       </modelFacet>
-      <labels editPartClassName="ActionEdgeNameEditPart" elementIcon="true" itemSemanticEditPolicyClassName="ActionEdgeNameItemSemanticEditPolicy" visualID="6028">
+      <labels editPartClassName="ActionEdgeNameEditPart" elementIcon="true" itemSemanticEditPolicyClassName="ActionEdgeNameItemSemanticEditPolicy" notationViewFactoryClassName="ActionEdgeNameViewFactory" visualID="6028">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureActionEdgeNameFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes xsi:type="gmfgen:LabelOffsetAttributes" y="40"/>
@@ -883,7 +884,7 @@
           <metaFeatures href="iaml.genmodel#//model/NamedElement/name"/>
         </modelFacet>
       </labels>
-      <labels editPartClassName="WrappingLabel26EditPart" itemSemanticEditPolicyClassName="WrappingLabel26ItemSemanticEditPolicy" readOnly="true" visualID="6029">
+      <labels editPartClassName="WrappingLabel26EditPart" itemSemanticEditPolicyClassName="WrappingLabel26ItemSemanticEditPolicy" notationViewFactoryClassName="ActionEdgeLabelViewFactory" readOnly="true" visualID="6029">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureActionEdgeStereotypeFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes xsi:type="gmfgen:LabelOffsetAttributes" y="60"/>
@@ -1249,6 +1250,8 @@
     <childReferences child="//@diagram/@links.1" groupIcon="icons/outgoingLinksNavigatorGroup.gif" groupName="outgoing links" parent="//@diagram/@topLevelNodes.10" referenceType="out_target"/>
     <childReferences child="//@diagram/@topLevelNodes.15" groupIcon="icons/linkSourceNavigatorGroup.gif" groupName="source" parent="//@diagram/@links.1" referenceType="in_source"/>
     <childReferences child="//@diagram/@links.1" groupIcon="icons/outgoingLinksNavigatorGroup.gif" groupName="outgoing links" parent="//@diagram/@topLevelNodes.15" referenceType="out_target"/>
+    <childReferences child="//@diagram/@topLevelNodes.16" groupIcon="icons/linkSourceNavigatorGroup.gif" groupName="source" parent="//@diagram/@links.1" referenceType="in_source"/>
+    <childReferences child="//@diagram/@links.1" groupIcon="icons/outgoingLinksNavigatorGroup.gif" groupName="outgoing links" parent="//@diagram/@topLevelNodes.16" referenceType="out_target"/>
     <childReferences child="//@diagram/@topLevelNodes.19" groupIcon="icons/linkSourceNavigatorGroup.gif" groupName="source" parent="//@diagram/@links.1" referenceType="in_source"/>
     <childReferences child="//@diagram/@links.1" groupIcon="icons/outgoingLinksNavigatorGroup.gif" groupName="outgoing links" parent="//@diagram/@topLevelNodes.19" referenceType="out_target"/>
     <childReferences child="//@diagram/@topLevelNodes.20" groupIcon="icons/linkSourceNavigatorGroup.gif" groupName="source" parent="//@diagram/@links.1" referenceType="in_source"/>

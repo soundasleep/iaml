@@ -370,15 +370,18 @@
 			«ELSE»
 			if (true) {
 			«ENDIF»
-				// navigate to another frame
-				$url = "«safeName(to)».php?" . get_sid();	// need to pass session on server-side
-				log_message("[redirect] Redirecting to '$url'");
-				server_redirect($url);
-				shutdown();
+				$url = null;
+				«EXPAND OperationCall::getNavigateActionDestination(php, false, this, true) FOR to»
+				if ($url !== null) {
+					// navigate to another frame
+					log_message("[redirect] Redirecting to '$url'");
+					server_redirect($url);
+					shutdown();
+				}
 			}
 		«ELSE»
-			// navigate to another frame
-			var url = "«safeName(to)».php";
+			var url = null;
+			«EXPAND OperationCall::getNavigateActionDestination(php, false, this, true) FOR to»	
 			debug("[redirect] Redirecting to '" + url + "'");
 			window.location = url;
 			ajaxIncrement();	// prevent other events from executing

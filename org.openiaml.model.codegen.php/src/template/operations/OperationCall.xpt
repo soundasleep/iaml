@@ -134,7 +134,7 @@
 	«ELSE»
 		var url = null;
 		«EXPAND getNavigateActionDestination(php, inStoreDb, wire, true)»	
-		debug("[resume] Resuming to '" + url + "'");
+		debug("[redirect] Redirecting to '" + url + "'");
 		window.location = url;
 		ajaxIncrement();	// prevent other events from executing
 	«ENDIF»
@@ -163,7 +163,7 @@
 			«EXPAND template::scopes::EntryGate::getEntryAnyTarget('resume')»
 		}
 		
-		if ($resume != CURRENT_PAGE) {
+		if (!defined('CURRENT_PAGE') || $resume != CURRENT_PAGE) {
 			// navigate to another frame
 			$url = "$resume.php";
 			«IF includeSession»
@@ -200,7 +200,7 @@
 			«EXPAND template::scopes::ExitGate::getExitAnyTarget('resume')»
 		}
 		
-		if ($resume != CURRENT_PAGE) {
+		if (!defined('CURRENT_PAGE') || $resume != CURRENT_PAGE) {
 			// navigate to another frame
 			$url = "$resume.php";
 			«IF includeSession»
@@ -230,7 +230,7 @@
 «DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::ActionEdge wire, Boolean includeSession) FOR model::visual::Frame»
 	«IF php»
 		/* prevent infinite loops on the current frame */
-		if ("«id-»" != CURRENT_PAGE) {
+		if (!defined('CURRENT_PAGE') || "«id-»" != CURRENT_PAGE) {
 			// navigate to another frame
 			$url = "«safeName()».php";
 			«IF includeSession»

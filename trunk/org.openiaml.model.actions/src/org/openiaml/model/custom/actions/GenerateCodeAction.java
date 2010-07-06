@@ -18,6 +18,7 @@ import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
 import org.openiaml.model.ModelLoader;
@@ -316,6 +317,35 @@ public class GenerateCodeAction extends IamlFileAction {
 	@Override
 	protected EObject getLoadedModel() {
 		return model;
+	}
+
+	/**
+	 * Issue 208: If the code generation process returns a Status higher than
+	 * {@link Status#ERROR}, then display the error message in a
+	 * dialog box.
+	 * 
+	 * <p>{@inheritDoc}
+	 */
+	@Override
+	public IStatus execute(IFile o, IProgressMonitor monitor) {
+		final IStatus status = super.execute(o, monitor);
+		
+		if (status.getSeverity() >= Status.ERROR) {
+			// display in the UI thread
+			// get user confirmation
+			Display.getDefault().asyncExec(new Runnable() {
+			    @Override
+			    public void run() {
+			    	ErrorDialog.openError(null, 
+			    			"Code generation failed", 
+			    			"Could not generate code: " + status.getMessage(),
+			    			status);
+			    }
+			  });
+		
+		}
+		
+		return status;
 	}
 
 }

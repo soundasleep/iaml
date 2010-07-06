@@ -212,3 +212,12 @@ context model::ActionEdge WARNING "Unknown outgoing ActionEdge '" + name + "' fr
 context model::ActionEdge WARNING "Unknown outgoing ActionEdge '" + name + "' from this LoginHandler" :
 	(!model::components::LoginHandler.isInstance(from)) ||
 		(name == "login" || name == "logout" || name == "success");
+
+context model::operations::DecisionNode	WARNING "Unknown DecisionNode '" + name + "'" :
+	name == "xpathMatch" || name == "emailAddress" || name == "is set"
+		|| name == "equal" || name == "true" || name == "can cast"
+		|| name == "empty"
+	|| name == "xpathMatch?" || name == "emailAddress?" || name == "is set?"
+		|| name == "equal?" || name == "true?" || name == "can cast?"
+		|| name == "empty?";
+		

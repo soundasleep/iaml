@@ -64,8 +64,11 @@
  *		A {@model DecisionNode} named 'true?' passes if all incoming {@model DataFlowEdge}s
  *		are considered true.
  * @implementation DecisionNode#name
- *		A {@model DecisionNode} named 'is set??' passes if all incoming {@model DataFlowEdge}s
+ *		A {@model DecisionNode} named 'is set?' passes if all incoming {@model DataFlowEdge}s
  *		are set.
+ * @implementation DecisionNode#name
+ *		A {@model DecisionNode} named 'empty?' passes if all incoming {@model DataFlowEdge}s
+ *		are considered empty when converted to <code>iamlString</code>s.
  * @implementation DecisionNode
  *		For a {@model DecisionNode} named 'true?',
  *		if more than one {@model ConditionEdge} is incoming to an executed {@model DecisionNode},
@@ -78,20 +81,20 @@
 «DEFINE operationContents(model::ExecutionEdgesSource start, Boolean php) FOR model::operations::DecisionNode-»
 	«REM»compare operations«ENDREM»
 	if (
-	«IF name=="xpathMatch"»
+	«IF name=="xpathMatch" || name == "xpathMatch?"»
 		xpathMatch(«EXPAND getDataValue(php) FOREACH inFlows SEPARATOR ","»)
-	«ELSEIF name=="emailAddress"»
+	«ELSEIF name=="emailAddress" || name == "emailAddress?"»
 		emailAddressMatch(«EXPAND getDataValue(php) FOREACH inFlows SEPARATOR ","»)
-	«ELSEIF name=="is set?"»
+	«ELSEIF name=="is set" || name == "is set?"»
 		«EXPAND DataFlow::isSet(php) FOREACH inFlows.from SEPARATOR " && "»
-	«ELSEIF name == "equal?"-»
+	«ELSEIF name == "equal" || name == "equal?"-»
 		«REM»check all inflow targets are identical«ENDREM»
 		«IF php»
 			«EXPAND getDataValue(php) FOREACH inFlows SEPARATOR " == "»
 		«ELSE»
 			is_array_equal(new Array(«EXPAND getDataValue(php) FOREACH inFlows SEPARATOR ", "»))
 		«ENDIF»
-	«ELSEIF name == "true?"-»
+	«ELSEIF name == "true" || name == "true?"-»
 		«IF inConditionEdges.isEmpty»
 			«IF php»
 				«EXPAND trueDecisionOperationSource(php) FOREACH inFlows SEPARATOR " == "»
@@ -101,7 +104,14 @@
 		«ELSE»
 			«EXPAND template::conditions::Runtime::callCondition(php, false) FOREACH inConditionEdges SEPARATOR " && "»
 		«ENDIF»
-	«ELSEIF name == "can cast?"-»
+	«ELSEIF name == "empty" || name == "empty?"-»
+		(«IF php»
+			(«EXPAND trueDecisionOperationSource(php) FOREACH inFlows SEPARATOR " . "»)
+		«ELSE»
+			(«EXPAND trueDecisionOperationSource(php) FOREACH inFlows SEPARATOR " == "»)
+		«ENDIF»
+		== "")
+	«ELSEIF name == "can cast" || name == "can cast?"-»
 		«REM»inflow should be a CastNode; ask the CastNode about the success of the cast.«ENDREM»
 		«IF inFlows.from.typeSelect(model::operations::CastNode).isEmpty»
 			«throwException("'can cast?' check needs to have at least one incoming CastNode")»

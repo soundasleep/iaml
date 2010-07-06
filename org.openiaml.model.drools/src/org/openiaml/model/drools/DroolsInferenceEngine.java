@@ -137,7 +137,7 @@ public abstract class DroolsInferenceEngine {
 	 * @param monitor a progress monitor
 	 * @throws Exception 
 	 */
-	public void create(EObject model, boolean logRuleSource, IProgressMonitor monitor, InferenceQueueLog log) throws InferenceException {
+	public void create(EObject model, boolean logRuleSource, final IProgressMonitor monitor, InferenceQueueLog log) throws InferenceException {
 
 		monitor.beginTask("Inferring model using Drools", 150);
 		monitor.subTask("Loading rulebase");
@@ -196,6 +196,10 @@ public abstract class DroolsInferenceEngine {
 					// get all objects within 
 					TreeIterator<EObject> it = ((EObject) obj.getObject()).eAllContents();
 					while (it.hasNext()) {
+						// need to cancel
+						if (monitor.isCanceled())
+							return;
+						
 						EObject o = it.next();
 						factMemory.put(o, workingMemory.insert( o ));
 						
@@ -245,6 +249,9 @@ public abstract class DroolsInferenceEngine {
 
         //go !
         workingMemory.insert( model );
+        if (monitor.isCanceled()) {
+        	return;
+        }
         subProgressMonitor.done();
         subProgressMonitor = null;
         

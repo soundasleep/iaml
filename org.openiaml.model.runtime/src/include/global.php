@@ -403,11 +403,16 @@ function call_remote_url($url) {
 	return $result;
 }
 
-function call_remote_event($container, $id, $arg0 = "", $arg1 = "") {
+function call_remote_event($container, $id, $arg0 = "", $arg1 = "",
+	$arg2 = "", $arg3 = "", $arg4 = "", $arg5 = "") {
 	$url = get_request_base() . "/" . 'call_remote_event.php?container=' . urlencode($container)
 		. '&operation_name=' . urlencode($id)
 		. '&arg0=' . urlencode($arg0)
 		. '&arg1=' . urlencode($arg1)
+		. '&arg2=' . urlencode($arg2)
+		. '&arg3=' . urlencode($arg3)
+		. '&arg4=' . urlencode($arg4)
+		. '&arg5=' . urlencode($arg5)
 		. '&frame=' . urlencode(get_frame_id());
 
 	return call_remote_url($url);

@@ -503,13 +503,22 @@ function queued_instance_jump(instance_id, arg0, function_queue) {
 	execute_queued_url(url, 'set_domain_attribute', function_queue);
 }
 
-/* call a remote operation (only one attribute) */
-function call_remote_event(container, operation_name, arg0, arg1, function_queue) {
+/**
+ * Call a remote operation.
+ *
+ * @implementation Operation
+ *		Remote {@model Operation} calls can only support up to six arguments.
+ */
+function call_remote_event(container, operation_name, arg0, arg1, arg2, arg3, arg4, arg5, function_queue) {
 	var url = 'call_remote_event.php?container=' + encodeURIComponent(container)
 		+ '&frame=' + encodeURIComponent(frame_id)
 		+ '&operation_name=' + encodeURIComponent(operation_name)
 		+ '&arg0=' + encodeURIComponent(arg0)
-		+ '&arg1=' + encodeURIComponent(arg1);
+		+ '&arg1=' + encodeURIComponent(arg1)
+		+ '&arg2=' + encodeURIComponent(arg2)
+		+ '&arg3=' + encodeURIComponent(arg3)
+		+ '&arg4=' + encodeURIComponent(arg4)
+		+ '&arg5=' + encodeURIComponent(arg5);
 	url += create_stacktrace_parameter();
 	execute_queued_url(url, 'remote_event', function_queue);
 }

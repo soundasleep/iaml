@@ -37,8 +37,8 @@
 /**
  * Does the given parameter exist? Return 'true' or 'false'. Expected to be in PHP mode.
  */
-«DEFINE callParameterExists FOR model::wires::ParameterEdge»
-	«EXPAND callParameterValueExists FOR from»
+«DEFINE callParameterExists(Boolean php) FOR model::wires::ParameterEdge»
+	«EXPAND callParameterValueExists(php) FOR from»
 «ENDDEFINE»
 
 /**
@@ -159,7 +159,10 @@
 	«ENDIF»
 «ENDDEFINE»
 
-/** Loading a current value from the currently loaded frame (i.e. client-side) */
+/** 
+ * Loading a current value from the currently loaded frame (i.e. client-side).
+ * All assumed to be client-side.
+ */
 «DEFINE dataSourceOnFrame FOR emf::EObject»
 	throw_new_IamlJavascriptException("Unknown data source: «this»")
 «ENDDEFINE»
@@ -180,6 +183,9 @@
 «ENDDEFINE»
 «DEFINE dataSourceOnFrame FOR model::visual::Map»
 	document.getElementById('map_single_«safeNameString(id)»_value').value
+«ENDDEFINE»
+«DEFINE dataSourceOnFrame FOR model::DomainAttributeInstance»
+	<?php /* DomainAttributeInstances are cached */ echo htmlspecialchars(get_attribute_instance_«safeName()»()); ?>
 «ENDDEFINE»
 
 «DEFINE callParameterValue(Boolean php, Boolean inStoreDb) FOR model::StaticValue»
@@ -281,48 +287,61 @@
  * Exists calls.
  */
 
-«DEFINE callParameterValueExists FOR model::wires::ParameterEdgesSource»
+«DEFINE callParameterValueExists(Boolean php) FOR model::wires::ParameterEdgesSource»
 	«throwException("Unknown parameter wire source: " + this)»
 «ENDDEFINE»
 
-«DEFINE callParameterValueExists FOR model::Property»
+«DEFINE callParameterValueExists(Boolean php) FOR model::DomainAttributeInstance»
+	«IF php»
+		has_attribute_instance_«safeName()»()
+	«ELSE»
+		<?php /* DomainAttributeInstances are cached */ echo has_attribute_instance_«safeName()»() ? "true" : "false"; ?>
+	«ENDIF»
+«ENDDEFINE»
+«DEFINE callParameterValueExists(Boolean php) FOR model::Property»
 	true
 «ENDDEFINE»
-«DEFINE callParameterValueExists FOR model::visual::InputTextField»
+«DEFINE callParameterValueExists(Boolean php) FOR model::visual::InputTextField»
 	true
 «ENDDEFINE»
-«DEFINE callParameterValueExists FOR model::visual::Hidden»
+«DEFINE callParameterValueExists(Boolean php) FOR model::visual::Hidden»
 	true
 «ENDDEFINE»
-«DEFINE callParameterValueExists FOR model::visual::Map»
+«DEFINE callParameterValueExists(Boolean php) FOR model::visual::Map»
 	true
 «ENDDEFINE»
-«DEFINE callParameterValueExists FOR model::visual::MapPoint»
+«DEFINE callParameterValueExists(Boolean php) FOR model::visual::MapPoint»
 	true
 «ENDDEFINE»
-«DEFINE callParameterValueExists FOR model::StaticValue»
+«DEFINE callParameterValueExists(Boolean php) FOR model::StaticValue»
 	true
 «ENDDEFINE»
-«DEFINE callParameterValueExists FOR model::DynamicApplicationElementSet»
+«DEFINE callParameterValueExists(Boolean php) FOR model::DynamicApplicationElementSet»
 	true
 «ENDDEFINE»
-«DEFINE callParameterValueExists FOR model::visual::Frame»
+«DEFINE callParameterValueExists(Boolean php) FOR model::visual::Frame»
 	true
 «ENDDEFINE»
-«DEFINE callParameterValueExists FOR model::users::Role»
+«DEFINE callParameterValueExists(Boolean php) FOR model::users::Role»
 	true
 «ENDDEFINE»
-«DEFINE callParameterValueExists FOR model::users::Permission»
+«DEFINE callParameterValueExists(Boolean php) FOR model::users::Permission»
 	true
 «ENDDEFINE»
 
 /**
  * A value specified as part of the URI, e.g. ?key=value
  */
-«DEFINE callParameterValueExists FOR model::QueryParameter»
+«DEFINE callParameterValueExists(Boolean php) FOR model::QueryParameter»
+	«IF !php»
+		<?php echo 
+	«ENDIF»
 	«IF defaultValue == null»
 		(require_get("«safeNameString(name)»", null) !== null)
 	«ELSE»
 		true
 	«ENDIF»
+	«IF !php»
+		? "true" : "false"; ?>
+	«ENDIF»	
 «ENDDEFINE»

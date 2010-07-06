@@ -67,7 +67,7 @@
 «DEFINE checkIncomingParameters(String return) FOR model::domain::DomainIterator»
 	// check that all required parameters for this DomainObjectInstance are present	
 	«IF !inParameterEdges.isEmpty»
-		if (!(«EXPAND template::operations::Parameters::callParameterExists FOREACH inParameterEdges SEPARATOR " && "»)) {
+		if (!(«EXPAND template::operations::Parameters::callParameterExists(true) FOREACH inParameterEdges SEPARATOR " && "»)) {
 			return «return»;
 		}
 	«ENDIF»

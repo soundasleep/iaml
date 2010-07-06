@@ -34,3 +34,25 @@ rule "Create 'init' event for Sessions"
 		queue.add(event, drools);
 	
 end
+
+/**
+ * If a Session contains an Operation, but not a Frame, then the target Operation
+ * can never be called. Consequently, we add a new Frame to all empty Sessions
+ * to permit these Operations to be called.
+ *
+ * <p>TODO This should NOT be put as part of the inference rules, but rather the
+ * code generation logic - however, this is a quicker hack ;)
+ */
+rule "Create an empty Frame for an empty Session, for Operation callbacks"
+	when
+		session : Session( )
+		not ( Frame ( eContainer == session) )
+				
+		eval ( handler.veto( session ))
+		
+	then
+		Frame frame = handler.generatedFrame(session, session);
+		handler.setName(frame, "Empty frame for session");		
+		queue.add(frame, drools);
+	
+end

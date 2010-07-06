@@ -21,6 +21,15 @@ public abstract class SoftCache<Source,Result> {
 	protected Map<Object,SoftReference<Result>> referenceMap = new HashMap<Object,SoftReference<Result>>();
 	
 	/**
+	 * Manually remove the reference provided by the given key, if it exists.
+	 * 
+	 * @param key
+	 */
+	public void remove(Source key) {
+		referenceMap.remove(key);
+	}
+	
+	/**
 	 * Get a value from the SoftCache. If the value does
 	 * not exist, or has been lost, then
 	 * {@link #retrieve(Object)} will be used to re-instantiate

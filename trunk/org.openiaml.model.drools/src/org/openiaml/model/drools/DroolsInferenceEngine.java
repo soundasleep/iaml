@@ -148,6 +148,10 @@ public abstract class DroolsInferenceEngine {
         RuleBase ruleBase;
 		try {
 			ruleBase = getRuleBase(new SubProgressMonitor(monitor, 50));
+			
+			// the rule base is null if the loading was cancelled
+			if (ruleBase == null)
+				return;
 		} catch (Exception e) {
 			throw new InferenceException("Could not load rulebase: " + e.getMessage(), e);
 		}
@@ -453,22 +457,35 @@ public abstract class DroolsInferenceEngine {
 		 * Get the RuleBase from the rules provided.
 		 * Copied from sample DroolsTest.java.
 		 * 
+		 * <p>Returns <code>null</code> if the loading was cancelled through
+		 * the monitor.
+		 * 
+		 * <p>{@inheritDoc}
+		 * 
+		 * @see SoftCache#retrieve(Object)
 		 * @see DroolsInferenceEngine#getRuleFiles()
 		 * @see #doRetrieve(List)
-		 * @return
+		 * @return the loaded RuleBase, or <code>null</code> if the load was cancelled through the monitor.
 		 * @throws Exception 
 		 */
 		@Override
 		public RuleBase retrieve(DroolsInferenceEngine input) {
 			try {
-				return doRetrieve(input);
+				RuleBase result = doRetrieve(input);
+				if (result == null) {
+					// remove the cached result if the load was cancelled
+					remove(input);
+				}
+				
+				return result;
 			} catch (Exception e) {
 				throw new RuntimeException(e.getMessage(), e);
 			}
 		}
 		
 		/**
-		 * Actually loads the rulebase.
+		 * Actually loads the rulebase. Returns <code>null</code> if the
+		 * loading is cancelled.
 		 * 
 		 * @see #retrieve(List)
 		 * @throws Exception 
@@ -479,6 +496,10 @@ public abstract class DroolsInferenceEngine {
 			monitor.beginTask("Parsing and loading rule files", input.getRuleFiles().size());
 			for (String ruleFile : input.getRuleFiles()) {
 				try {
+					// if the monitor is cancelled
+					if (monitor.isCanceled())
+						return null;
+					
 					monitor.subTask("Loading " + ruleFile + "...");
 			
 					// load the stream

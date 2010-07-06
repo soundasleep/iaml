@@ -1,5 +1,8 @@
 package org.openiaml.model.custom.actions;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -67,7 +70,7 @@ public class GenerateCodeAction extends IamlFileAction {
 	 */
 	@Override
 	public IStatus doExecute(IFile o, IProgressMonitor monitor) throws InferenceException, IOException, CoreException {
-		monitor.beginTask("Generating code for file '" + o.getName() + "'", 140);
+		monitor.beginTask("Generating code for file '" + o.getName() + "'", 150);
 
 		// first, load the model
 		monitor.subTask("Loading model");
@@ -153,10 +156,13 @@ public class GenerateCodeAction extends IamlFileAction {
 		// does a properties file exist?
 		// (used to define the location of runtime libraries)
 		IFile properties = null;
+		IFile saveInferred = null;
 		if (o.getParent() instanceof IFolder) {
 			properties = ((IFolder) o.getParent()).getFile("runtime.properties");
+			saveInferred = ((IFolder) o.getParent()).getFile(getSaveInferredModelFilename(o));
 		} else if (o.getParent() instanceof IProject) {
 			properties = ((IProject) o.getParent()).getFile("runtime.properties");
+			saveInferred = ((IProject) o.getParent()).getFile(getSaveInferredModelFilename(o));
 		}
 		
 		// load the properties file if it does
@@ -168,7 +174,30 @@ public class GenerateCodeAction extends IamlFileAction {
 
 		if (monitor.isCanceled())
 			return Status.CANCEL_STATUS;
-
+		
+		// save a copy of the inferred model
+		if (saveInferred != null) {
+			monitor.subTask("Saving a copy of the inferred model");
+			File tempJavaFile = File.createTempFile("temp-iaml", ".iaml");
+			Map<?,?> options = model.eResource().getResourceSet().getLoadOptions();
+			model.eResource().save(new FileOutputStream(tempJavaFile), options);
+			
+			// now load it into IFile
+			IProgressMonitor sub = new SubProgressMonitor(monitor, 10);
+			if (saveInferred.exists()) {
+				saveInferred.setContents(new FileInputStream(tempJavaFile), true, false, sub); 				
+			} else {
+				saveInferred.create(new FileInputStream(tempJavaFile), true, sub);				
+			}
+			sub.done();
+		} else {
+			monitor.worked(10);
+		}
+		
+		if (monitor.isCanceled()) {
+			return Status.CANCEL_STATUS;
+		}
+	
 		// create code generator instance
 		ICodeGenerator codegen = new OawCodeGeneratorWithRuntime();
 		IStatus status = codegen.generateCode(model, o.getProject(), new SubProgressMonitor(monitor, 50), runtimeProperties);
@@ -180,6 +209,34 @@ public class GenerateCodeAction extends IamlFileAction {
 		monitor.done();
 		
 		return status;
+	}
+
+	/**
+	 * Get a filename to save the inferred model to, or <code>null</code>
+	 * if none can be found.
+	 * 
+	 * <p>By default, returns <code>file.inferred.iaml</code> for
+	 * a <code>file.iaml</code>. Doesn't check to see if the file
+	 * exists or not (assumed to overwrite).
+	 * 
+	 * @param o
+	 * @return
+	 */
+	private String getSaveInferredModelFilename(IFile o) {
+		String name = o.getName();
+		String[] bits = name.split("\\.");
+		if (bits.length <= 1) {
+			return null;
+		}
+		
+		StringBuffer newName = new StringBuffer();
+		for (int i = 0; i < bits.length - 1; i++) {
+			newName.append(bits[i]).append(".");
+		}
+		newName.append("inferred.");
+		newName.append(bits[bits.length-1]);
+		
+		return newName.toString();
 	}
 
 	/**

@@ -666,6 +666,36 @@
           href="iaml.gmfgraph#StaticValue"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//DomainAttribute"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#DomainAttributeName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#DomainAttributeStereotype"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#DomainAttributeType"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#DomainAttributeParentName"/>
+      </labelMappings>
+      <diagramNode
+          href="iaml.gmfgraph#DomainAttribute"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/SyncWire"/>
@@ -747,6 +777,33 @@
     <linkMetaFeature
         xsi:type="ecore:EReference"
         href="iaml.ecore#//wires/ParameterEdge/to"/>
+  </links>
+  <links>
+    <domainMetaElement
+        href="iaml.ecore#//wires/ExtendsEdge"/>
+    <labelMappings
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#ExtendsEdgeName"/>
+    </labelMappings>
+    <labelMappings
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#ExtendsEdgeStereotype"/>
+    </labelMappings>
+    <containmentFeature
+        href="iaml.ecore#//ContainsWires/extendsEdges"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="iterator.gmftool#//@palette/@tools.1/@tools.2"/>
+    <diagramLink
+        href="iaml.gmfgraph#ExtendsEdge"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//wires/ExtendsEdge/from"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//wires/ExtendsEdge/to"/>
   </links>
   <diagram>
     <diagramCanvas

@@ -115,13 +115,17 @@ if (require_get("operation", "")) {
 	$operation_name = "do_" . require_get("operation");
 	$arg0 = require_get("arg0");
 	$arg1 = require_get("arg1");
+	$arg2 = require_get("arg2");
+	$arg3 = require_get("arg3");
+	$arg4 = require_get("arg4");
+	$arg5 = require_get("arg5");
 			
 	// any running functions? (prevent infinite loops)
 	register_running_functions();
 
-	log_message("«name».php: Remote operation $operation_name('$arg0', '$arg1')");
-	$operation_name($arg0, $arg1);
-	log_message("«name».php: Remote operation $operation_name('$arg0', '$arg1') complete");
+	log_message("«name».php: Remote operation $operation_name('$arg0', '$arg1', '$arg2', '$arg3', '$arg4', '$arg5')");
+	$operation_name($arg0, $arg1, $arg2, $arg3, $arg4, $arg5);
+	log_message("«name».php: Remote operation $operation_name('$arg0', '$arg1', '$arg2', '$arg3', '$arg4', '$arg5') complete");
 
 	echo "ok";
 	shutdown();

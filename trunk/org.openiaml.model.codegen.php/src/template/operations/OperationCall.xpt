@@ -300,11 +300,35 @@
 	«ELSE»
 		var arg1 = null;	/* no parameter */
 	«ENDIF»
+	«IF inParameterEdges.size > 2»
+		var arg2 = «EXPAND Parameters::callParameter(php, inStoreDb, false) FOR inParameterEdges.get(2)»;
+	«ELSE»
+		var arg2 = null;	/* no parameter */
+	«ENDIF»
+	«IF inParameterEdges.size > 3»
+		var arg3 = «EXPAND Parameters::callParameter(php, inStoreDb, false) FOR inParameterEdges.get(3)»;
+	«ELSE»
+		var arg3 = null;	/* no parameter */
+	«ENDIF»
+	«IF inParameterEdges.size > 4»
+		var arg4 = «EXPAND Parameters::callParameter(php, inStoreDb, false) FOR inParameterEdges.get(4)»;
+	«ELSE»
+		var arg4 = null;	/* no parameter */
+	«ENDIF»
+	«IF inParameterEdges.size > 5»
+		var arg5 = «EXPAND Parameters::callParameter(php, inStoreDb, false) FOR inParameterEdges.get(5)»;
+	«ELSE»
+		var arg5 = null;	/* no parameter */
+	«ENDIF»
 	call_remote_event(
 		'«safeNameString(containingFrame(to).id)»', 
 		'«operationName(to)-»',
 		arg0,
 		arg1,
+		arg2,
+		arg3,
+		arg4,
+		arg5,
 		function_queue
 	);
 «ENDDEFINE»

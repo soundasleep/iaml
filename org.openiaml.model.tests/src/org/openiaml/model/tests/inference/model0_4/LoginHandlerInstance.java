@@ -91,7 +91,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		Frame login = assertHasFrame(session, "Login Successful");
 		{
 			assertHasNoWiresFromTo(root, handler, login);
-			ActionEdge wire = assertHasNavigateAction(root, handler, login, "login");
+			ActionEdge wire = assertHasNavigateAction(root, handler, login, "success");
 			assertGenerated(wire);
 		}
 

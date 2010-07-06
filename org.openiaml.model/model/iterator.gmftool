@@ -63,6 +63,19 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
+          title="StaticValue"
+          description="Create new StaticValue">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/StaticValue.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/StaticValue.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
           title="CompositeCondition"
           description="Create new CompositeCondition">
         <smallIcon
@@ -91,6 +104,19 @@
         <largeIcon
             xsi:type="gmftool:BundleImage"
             path="icons/full/obj32/SyncWire.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="ParameterEdge"
+          description="Create new ParameterEdge">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/ParameterEdge.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/ParameterEdge.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
     </tools>

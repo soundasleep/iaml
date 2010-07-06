@@ -214,7 +214,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="iterator.gmftool#//@palette/@tools.0/@tools.4"/>
+          href="iterator.gmftool#//@palette/@tools.0/@tools.5"/>
       <diagramNode
           href="iaml.gmfgraph#CompositeCondition"/>
     </ownedChild>
@@ -604,6 +604,68 @@
           href="iaml.gmfgraph#PrimitiveCondition"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//visual/Frame"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( Frame )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#FrameName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#FrameStereotype"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#FrameParentName"/>
+      </labelMappings>
+      <diagramNode
+          href="iaml.gmfgraph#Frame"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//ApplicationElement/values"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//StaticValue"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          viewPattern="{0} = {1}"
+          editorPattern="{0} = {1}"
+          editPattern="{0} = {1}">
+        <diagramLabel
+            href="iaml.gmfgraph#StaticValueName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+        <features
+            href="iaml.ecore#//StaticValue/value"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#StaticValueStereotype"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#StaticValueType"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="iterator.gmftool#//@palette/@tools.0/@tools.4"/>
+      <diagramNode
+          href="iaml.gmfgraph#StaticValue"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/SyncWire"/>
@@ -663,6 +725,28 @@
     <linkMetaFeature
         xsi:type="ecore:EReference"
         href="iaml.ecore#//ActionEdge/to"/>
+  </links>
+  <links>
+    <domainMetaElement
+        href="iaml.ecore#//wires/ParameterEdge"/>
+    <labelMappings
+        readOnly="true">
+      <diagramLabel
+          href="iaml.gmfgraph#ParameterEdgeStereotype"/>
+    </labelMappings>
+    <containmentFeature
+        href="iaml.ecore#//ContainsWires/parameterEdges"/>
+    <tool
+        xsi:type="gmftool:CreationTool"
+        href="iterator.gmftool#//@palette/@tools.1/@tools.1"/>
+    <diagramLink
+        href="iaml.gmfgraph#ParameterEdge"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//wires/ParameterEdge/from"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="iaml.ecore#//wires/ParameterEdge/to"/>
   </links>
   <diagram>
     <diagramCanvas

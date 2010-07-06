@@ -8,6 +8,10 @@
 /**
  * Expand the failure edge. Assumes that the current exception is in
  * a variable called 'e'.
+ *
+ * @implementation ActionEdge
+ *		Currently <code>fail</code> {@model ActionEdge}s cannot handle additional
+ *		incoming {@model ParameterEdge}s.
  */
 «DEFINE failWire(Boolean php) FOR model::ActionEdge-»
 	«IF !model::visual::Frame.isInstance(to)»

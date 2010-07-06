@@ -309,6 +309,8 @@
             href="iaml.gmfgraph#StaticValueName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
+        <features
+            href="iaml.ecore#//StaticValue/value"/>
       </labelMappings>
       <labelMappings
           readOnly="true">

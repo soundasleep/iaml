@@ -309,7 +309,7 @@
 
 «DEFINE mapPoint_staticInitialValue(model::visual::Frame currentFrame) FOR model::QueryParameter»
 	«REM»from the query«ENDREM»
-	if («EXPAND template::operations::Parameters::callParameterValueExists») {
+	if («EXPAND template::operations::Parameters::callParameterValueExists(true)») {
 		$value = «EXPAND template::operations::Parameters::callParameterValue(true, false)»;
 		$point_address = $value;
 		$point_visible = true;

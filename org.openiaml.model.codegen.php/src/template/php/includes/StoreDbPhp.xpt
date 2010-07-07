@@ -227,7 +227,7 @@ echo_necessary_update_callbacks();
 «DEFINE expandDomainAttributeEvents(String eventName) FOR model::EventTrigger»
 	«IF eventName=="edit"»
 		«EXPAND template::operations::OperationCall::callOperation(true, true) FOREACH outWires»
-		«EXPAND template::operations::OperationCall::callOperation(true, true) FOREACH outActions»
+		«EXPAND template::operations::OperationCall::callOperation(true, true) FOREACH outActions.sortBy(e|-e.priority)»
 	«ELSE»
 		«throwException("Unknown event name '" + eventName + "'")»
 	«ENDIF»

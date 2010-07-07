@@ -177,7 +177,7 @@
 	// expanding chained event trigger «name»
 	«IF type=="edit"»
 		«EXPAND OperationCall::callOperation(php, inStoreDb) FOREACH outWires»
-		«EXPAND OperationCall::callOperation(php, inStoreDb) FOREACH outActions»
+		«EXPAND OperationCall::callOperation(php, inStoreDb) FOREACH outActions.sortBy(e|-e.priority)»
 	«ELSEIF type=="access"»
 		// we don't expand 'access' events as part of a chain
 	«ELSE»

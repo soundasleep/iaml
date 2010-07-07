@@ -694,6 +694,10 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	public void setPriority(ActionEdge element, int value) throws InferenceException {
 		setValue(element, ModelPackage.eINSTANCE.getActionEdge_Priority(), value);
 	}
+	
+	public void setRenderOrder(VisibleThing element, int value) throws InferenceException {
+		setValue(element, ModelPackage.eINSTANCE.getVisibleThing_RenderOrder(), value);
+	}
 
 	public void setLimit(DomainIterator element, int value) throws InferenceException {
 		setValue(element, DomainPackage.eINSTANCE.getDomainIterator_Limit(), value);

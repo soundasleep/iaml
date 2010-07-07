@@ -157,6 +157,32 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 		assertEquals("password", pp.getName());
 
 	}
+	
+	/**
+	 * On the login form, 'email' should appear before 'password' in
+	 * render order.
+	 *
+	 * @throws Exception
+	 */
+	public void testRenderOrderOfEmailPassword() throws Exception {
+		root = loadAndInfer(UserModifyRoles.class);
+
+		Session loginSession = assertHasSession(root, "current user login");
+
+		// get the keys in the input form
+		Frame login = assertHasFrame(loginSession, "login");
+		InputForm form = assertHasInputForm(login, "login form");
+		InputTextField temail = assertHasInputTextField(form, "email");
+		InputTextField tpass = assertHasInputTextField(form, "password");
+
+		assertGreater(temail.getRenderOrder(), tpass.getRenderOrder());
+		
+		// the 'Login' button should be after the password, too
+		Button submit = assertHasButton(form, "Login");
+
+		assertGreater(tpass.getRenderOrder(), submit.getRenderOrder());
+		
+	}
 
 	/**
 	 * Before r1110, the 'email' text field and 'current email' session

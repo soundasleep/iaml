@@ -166,23 +166,34 @@ require(ROOT_PATH . "iterator_lists.php");
 
 «DEFINE expandSitemapFrame FOR model::visual::Frame»
 <li>
-	«EXPAND expandSitemapFrame FOREACH scopes»
 	<a href="«safeNameString(id)».php">«name»</a>
+	«IF !scopes.isEmpty»
+	<ol>
+		«EXPAND expandSitemapFrame FOREACH scopes»
+	</ol>
+	«ENDIF»
 </li>
 «ENDDEFINE»
 
 «DEFINE expandSitemapFrame FOR model::scopes::Session»
 <li>
 	[Session «name»]
+	«IF !scopes.isEmpty»
 	<ol>
 		«EXPAND expandSitemapFrame FOREACH scopes»
 	</ol>
+	«ENDIF»
 </li>
 «ENDDEFINE»
 
 «DEFINE expandSitemapFrame FOR model::scopes::Email»
 <li>
 	[Email «name»]
+	«IF !scopes.isEmpty»
+	<ol>
+		«EXPAND expandSitemapFrame FOREACH scopes»
+	</ol>
+	«ENDIF»	
 </li>
 «ENDDEFINE»
 

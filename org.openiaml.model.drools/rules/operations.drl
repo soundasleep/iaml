@@ -86,6 +86,30 @@ rule "Create 'init' operation for VisibleThings"
 end
 
 /**
+ * @inference SetWire,Property
+ *		An {@model Operation} 'set property XXX' is created for all {@model Property Properties}
+ *		that are the target of {@model SetWire}s.
+ */
+rule "Create 'set property XXX' Operation for all Properties, except fieldValue"
+	when
+		container : ContainsOperations ( )
+		gen : GeneratesElements ( this == container )
+		p : Property ( eContainer == container, name != "fieldValue" )
+		
+		exists ( setWire : SetWire ( to == p ) )
+
+		not ( op : Operation ( eContainer == container, name != null, eval( ("set property " + p.getName()).equals(op.getName()) ) ) )
+		
+		eval ( handler.veto( gen ))
+		
+	then
+		CompositeOperation op = handler.generatedCompositeOperation(gen, container);
+		handler.setName(op, "set property " + p.getName());
+		queue.add(op, drools); 
+	
+end 
+
+/**
  * @inference Changeable
  *		A {@model Changeable} that also contains a {@model CompositeOperation} named
  *		'update', 'refresh' or 'init' will automatically be completed.
@@ -95,6 +119,82 @@ rule "Create components of 'update', 'refresh', 'init' operations"
 		c : Changeable ( )
 		o : CompositeOperation((name == "update" || name == "refresh" || name == "init"), eContainer == c)
 		field : Property( c.fieldValue == field )
+		
+		not ( StartNode ( eContainer == o ))
+		
+		eval ( handler.veto( o ))
+
+	then
+		Parameter parameter = handler.generatedParameter(o, o);
+		handler.setName(parameter, "setValueTo");
+		queue.add(parameter, drools);
+		
+		// need to add 'cast' node
+		CastNode cast = handler.generatedCastNode(o, o);
+		queue.add(cast, drools);
+		
+		DecisionNode check = handler.generatedDecisionNode(o, o);
+		handler.setName(check, "can cast?");
+		queue.add(check, drools);
+		
+		DataFlowEdge castIn = handler.generatedDataFlowEdge(o, o, parameter, cast);
+		queue.add(castIn, drools);
+
+		DataFlowEdge castOut = handler.generatedDataFlowEdge(o, o, cast, field);
+		queue.add(castOut, drools);
+
+		DataFlowEdge castCheck = handler.generatedDataFlowEdge(o, o, cast, check);
+		queue.add(castCheck, drools);
+		
+		CancelNode cancel = handler.generatedCancelNode(o, o);
+		handler.setExceptionText(cancel, "Could not cast successfully.");
+		queue.add(cancel, drools);
+		// end add 'cast' node
+		
+		PrimitiveOperation op = handler.generatedPrimitiveOperation(o, o);
+		handler.setName(op, "set");
+		queue.add(op, drools);
+		
+		StartNode start = handler.generatedStartNode(o, o);
+		queue.add(start, drools);
+		
+		FinishNode finish = handler.generatedFinishNode(o, o);
+		queue.add(finish, drools);
+		
+		DataFlowEdge data1 = handler.generatedDataFlowEdge(o, o);
+		handler.setFrom(data1, cast);
+		handler.setTo(data1, op);
+		queue.add(data1, drools);
+
+		DataFlowEdge data2 = handler.generatedDataFlowEdge(o, o);
+		handler.setFrom(data2, op);
+		handler.setTo(data2, field);
+		queue.add(data2, drools);
+		
+		ExecutionEdge edge1 = handler.generatedExecutionEdge(o, o, start, check);
+		queue.add(edge1, drools);
+		
+		ExecutionEdge checkFail = handler.generatedExecutionEdge(o, o, check, cancel);
+		handler.setName(checkFail, "no");
+		queue.add(checkFail, drools);
+
+		ExecutionEdge checkPass = handler.generatedExecutionEdge(o, o, check, op);
+		handler.setName(checkPass, "yes");
+		queue.add(checkPass, drools);
+		
+		ExecutionEdge edge2 = handler.generatedExecutionEdge(o, o, op, finish);
+		queue.add(edge2, drools);
+
+end
+
+rule "Create components of 'set property XXX' operations"
+	when
+		container : ContainsOperations ( )
+		field : Property ( eContainer == container, name != "fieldValue" )
+
+		o : CompositeOperation ( eContainer == container, name != null, eval( ("set property " + field.getName()).equals(o.getName()) ) )
+		
+		not ( StartNode ( eContainer == o ))
 		
 		eval ( handler.veto( o ))
 

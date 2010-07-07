@@ -315,7 +315,7 @@
 	«ENDREM»
 	
 	«REM»We assume '$result' will be set as the result of this operation call.«ENDREM»
-	«EXPAND OperationCall::callOperation(php, false) FOREACH outActions-»
+	«EXPAND OperationCall::callOperation(php, false) FOREACH outActions.sortBy(e|-e.priority)-»
 	
 	«IF getFailFlows().isEmpty || getPassFlows().isEmpty»
 		/* No conditional flows; it was just an operation call */
@@ -343,50 +343,19 @@
 
 /**
  * Continue operations chained onto the current one.
- * TODO more documentation required. When are chained conditions used?
  *
  * @implementation PrimitiveOperation,ExecutionEdge 
- * 		After a {@model PrimitiveOperation}, all outgoing {@model Wire}s and {@model Action}s 
- *		are executed sequentially.
+ * 		After a {@model PrimitiveOperation} has completed, all outgoing {@model ActionEdge}s 
+ *		are executed in oirder of {@model ActionEdge#priority}.
  */
 «DEFINE continueChainedOperations(Boolean php) FOR model::PrimitiveOperation-»
-	«EXPAND continueChainedOperations(php) FOREACH outWires»
-	«EXPAND continueChainedOperations(php) FOREACH outActions»
-«ENDDEFINE»
-
-«DEFINE continueChainedOperations(Boolean php) FOR model::Wire»
-	«throwException("Cannot continue a chained operation for Wire " + this)»
+	«EXPAND continueChainedOperations(php) FOREACH outActions.sortBy(e|-e.priority)»
 «ENDDEFINE»
 
 «DEFINE continueChainedOperations(Boolean php) FOR model::ActionEdge»
-	«IF name != "fail"»
-		«IF !model::visual::Frame.isInstance(to)»
-			«throwException("Cannot continue a chained operation for an ActionEdge that doesn't go to a Frame: " + this)»
-		«ENDIF»
-		«IF php»
-			«IF model::visual::Frame.isInstance(to)»
-			/* prevent infinite loops on the current frame */
-			if (!defined('CURRENT_PAGE') || "«safeName((model::visual::Frame) to)»" != CURRENT_PAGE) {
-			«ELSE»
-			if (true) {
-			«ENDIF»
-				$url = null;
-				«EXPAND OperationCall::getNavigateActionDestination(php, false, this, true) FOR to»
-				if ($url !== null) {
-					// navigate to another frame
-					log_message("[redirect] Redirecting to '$url'");
-					server_redirect($url);
-					shutdown();
-				}
-			}
-		«ELSE»
-			var url = null;
-			«EXPAND OperationCall::getNavigateActionDestination(php, false, this, true) FOR to»	
-			debug("[redirect] Redirecting to '" + url + "'");
-			window.location = url;
-			ajaxIncrement();	// prevent other events from executing
-		«ENDIF»
-	«ELSE»
+	«IF name == "fail"»
 		// ignoring fail wire
+	«ELSE»
+		«EXPAND template::operations::OperationCall::callOperationContents(php, false)»
 	«ENDIF»
 «ENDDEFINE»

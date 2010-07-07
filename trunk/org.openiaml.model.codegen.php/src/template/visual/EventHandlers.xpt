@@ -41,7 +41,7 @@
 	// this VisibleThing is not an ActionSource
 «ENDDEFINE»
 «DEFINE anyActionImplicitButtonClickEvents(model::visual::Frame currentFrame, Boolean php) FOR model::ActionEdgeSource»
-	«EXPAND implicitButtonClickEvents(currentFrame, php) FOREACH outActions-»
+	«EXPAND implicitButtonClickEvents(currentFrame, php) FOREACH outActions.sortBy(e|-e.priority)-»
 «ENDDEFINE»
 
 «DEFINE getScriptChangeDefinition(model::visual::Frame currentFrame) FOR model::VisibleThing-»

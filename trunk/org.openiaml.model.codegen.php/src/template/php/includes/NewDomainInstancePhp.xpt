@@ -61,7 +61,7 @@ echo_necessary_update_callbacks();
 
 «DEFINE potentialEditEvent(String eventName) FOR model::EventTrigger»
 	«IF eventName=="edit"»
-		«EXPAND editEvent FOREACH outActions»
+		«EXPAND editEvent FOREACH outActions.sortBy(e|-e.priority)»
 	«ELSE»
 		«throwException("Invalid event name '" + eventName + "'")»
 	«ENDIF»

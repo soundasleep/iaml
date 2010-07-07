@@ -408,7 +408,25 @@ rule "Create login form for 'login' pages"
 		InputForm form = handler.generatedInputForm(login_handler, login);
 		handler.setName(form, "login form");
 		queue.add(form, drools);
+		
+end
 
+rule "Create 'Login' button for login form"
+	when
+		container : InternetApplication( )
+		scope : Session( eContainer == container ) 
+		login_handler : LoginHandler( eContainer == scope )
+		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
+		login : Frame ( )
+		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
+		
+		form : InputForm ( name == "login form", eContainer == login )
+
+		not (Button( name == "Login", eContainer == form ))
+				
+		eval ( handler.veto( login_handler ))
+		
+	then
 		Button button = handler.generatedButton(form, form);
 		handler.setName(button, "Login");
 		queue.add(button, drools);

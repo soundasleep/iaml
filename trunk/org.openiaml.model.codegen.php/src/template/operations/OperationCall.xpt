@@ -90,6 +90,16 @@
 				«IF !inParameterEdges.isEmpty», «EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»«ENDIF»
 			);
 		«ENDIF-»
+	«ELSEIF model::CompositeOperation.isInstance(to) && model::scopes::Email.isInstance(to.eContainer)-»
+		«IF php || availableInCurrentScriptAction(from, to)-»
+			«REM»// on current frame (wire id = «id»)«ENDREM»
+			do_«operationName(to)»(«EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»);
+		«ELSE-»
+			«REM»// not on current frame (wire id = «id»)«ENDREM»
+			call_remote_event('«safeNameString(frameContainingOperation(to).id)»', '«operationName(to)-»'
+				«IF !inParameterEdges.isEmpty», «EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»«ENDIF»
+			);
+		«ENDIF-»		
 	«ELSEIF isDomainAttribute(to.eContainer)-»
 		«REM»direct field --> abstract domain attribute«ENDREM»
 		store_db('«safeNameString(((model::DomainAttribute) to.eContainer).id)»'

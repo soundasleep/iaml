@@ -85,7 +85,40 @@ rule "Run instance wire from edit to update (onChange)"
 		event : EventTrigger( source.onChange == event ) 
 		operation : Operation( eContainer == target, name=="update" )
 		
-		not (ActionEdge( eContainer == sw, from == event, to == operation, name == "run" ))
+		not (ActionEdge( eContainer == sw, from == event, to == operation ))
+				
+		eval ( handler.veto( sw ))
+		
+	then
+		ActionEdge rw = handler.generatedActionEdge(sw, sw, event, operation);
+		handler.setName(rw, "run");
+		queue.add(rw, drools);
+
+end
+
+/**
+ * Solves issue 209: Allow Properties to be set directly by SetWires or SyncWires.
+ *
+ * @inference Changeable,SetWire
+ *		A {@model SetWire} connecting a {@model Changeable} to a {@model Property}
+ *		directly will update the target {@model Property} when the
+ *		source element is {@model Changeable#onChange changed}.
+ */
+rule "Run instance wire from edit to Property update (onChange)"
+	when
+		sw : SetWire( overriddenNames not contains "run" )
+		source : Changeable( )
+		
+		targetContainer : ContainsOperations ( )
+		target : Property ( eContainer == targetContainer )
+		eval(functions.connectsSet(sw, source, target))
+		
+		event : EventTrigger( source.onChange == event ) 
+		operation : Operation( eContainer == targetContainer, 
+			name != null, 
+			eval( ("set property " + target.getName()).equals(operation.getName()) ) )
+		
+		not (ActionEdge( eContainer == sw, from == event, to == operation ))
 				
 		eval ( handler.veto( sw ))
 		
@@ -161,6 +194,35 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 		ParameterEdge pw = handler.generatedParameterEdge(sw, sw, field, wire); 
 		handler.setName(pw, "[set] run instance parameter (source.edit)"); 
 		queue.add(pw, drools);
+
+end
+
+rule "Connect parameter wire to: Run instance wire from edit to Property update (onChange)"
+	when
+		sw : SetWire( overriddenNames not contains "[set] run instance parameter (source.edit)" )
+		source : Changeable( )
+		
+		targetContainer : ContainsOperations ( )
+		target : Property ( eContainer == targetContainer )
+		eval(functions.connectsSet(sw, source, target))
+		
+		event : EventTrigger( source.onChange == event ) 
+		operation : Operation( eContainer == targetContainer, 
+			name != null, 
+			eval( ("set property " + target.getName()).equals(operation.getName()) ) )
+
+		field : Property( source.fieldValue == field )
+		wire : ActionEdge( from == event, to == operation, name == "run", eContainer == sw )
+				
+		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
+				
+		eval ( handler.veto( sw ))
+		
+	then
+		ParameterEdge pw = handler.generatedParameterEdge(sw, sw, field, wire); 
+		handler.setName(pw, "[set] run instance parameter (source.edit)"); 
+		queue.add(pw, drools);
+
 
 end
 
@@ -919,3 +981,5 @@ rule "A SetWire between Attributes selected from a DomainIterator need to check 
 		queue.add(cw, drools);
 
 end
+
+

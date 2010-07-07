@@ -429,6 +429,7 @@ rule "Create 'Login' button for login form"
 	then
 		Button button = handler.generatedButton(form, form);
 		handler.setName(button, "Login");
+		handler.setRenderOrder(button, 60);		// at the end of the form
 		queue.add(button, drools);
 		
 end
@@ -646,7 +647,13 @@ rule "Create text fields for login form of 'login' pages [type=user]"
 	then
 		InputTextField field = handler.generatedInputTextField(form, form);
 		# login field name
-		handler.setName(field, attribute.getName());		
+		handler.setName(field, attribute.getName());
+		
+		# if password, this should always be last
+		if ("password".equals(attribute.getName())) {
+			handler.setRenderOrder(field, 20);
+		}
+				
 		queue.add(field, drools);
 		
 end

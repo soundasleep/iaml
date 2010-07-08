@@ -240,7 +240,7 @@
 «DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::ActionEdge wire, Boolean includeSession) FOR model::visual::Frame»
 	«IF php»
 		/* prevent infinite loops on the current frame */
-		if (!defined('CURRENT_PAGE') || "«id-»" != CURRENT_PAGE) {
+		if (!defined('CURRENT_PAGE') || "«safeNameString(id)-»" != CURRENT_PAGE) {
 			// navigate to another frame
 			$url = "«safeName()».php";
 			«IF includeSession»

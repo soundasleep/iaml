@@ -852,7 +852,7 @@ rule "Refresh Domain Object mappings (except for generated primary keys) when In
 
 end
 
-rule "Refresh Domain Object mappings (generated primary keys) when Instance sets a IteratorList: create hiddens"
+rule "Refresh Domain Object mappings (primary keys) when Instance sets a IteratorList: create hiddens"
 	when
 		sync : SetWire(  )
 		form : IteratorList (  )
@@ -861,7 +861,7 @@ rule "Refresh Domain Object mappings (generated primary keys) when Instance sets
 		eval(functions.connectsSet(sync, instance, form))	// backwards
 		
 		// only generated primary keys
-		originalAttribute : DomainAttribute ( primaryKey == true && isGenerated == true )
+		originalAttribute : DomainAttribute ( primaryKey == true )
 		attribute : DomainAttributeInstance( eContainer == instance )
 		ExtendsEdge ( from == attribute, to == originalAttribute )
 		

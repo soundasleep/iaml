@@ -104,7 +104,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="element.gmftool#//@palette/@tools.0/@tools.2"/>
+          href="element.gmftool#//@palette/@tools.0/@tools.4"/>
       <diagramNode
           href="iaml.gmfgraph#Property"/>
     </ownedChild>
@@ -130,6 +130,70 @@
       </labelMappings>
       <diagramNode
           href="iaml.gmfgraph#EventTrigger"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//ContainsConditions/conditions"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//CompositeCondition"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( CompositeCondition )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#CompositeConditionName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#CompositeConditionStereotype"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#CompositeConditionParentName"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="element.gmftool#//@palette/@tools.0/@tools.3"/>
+      <diagramNode
+          href="iaml.gmfgraph#CompositeCondition"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//ContainsConditions/conditions"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//PrimitiveCondition"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( PrimitiveCondition )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveConditionName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveConditionStereotype"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveConditionParentName"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="element.gmftool#//@palette/@tools.0/@tools.2"/>
+      <diagramNode
+          href="iaml.gmfgraph#PrimitiveCondition"/>
     </ownedChild>
   </nodes>
   <links>

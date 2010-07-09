@@ -48,6 +48,30 @@ import org.openiaml.model.model.GeneratedElement;
  */
 public abstract class DroolsInferenceEngine {
 	
+	private class CounterWrapper {
+		private long value = 0;
+		
+		public void increment() {
+			value++;
+		}
+
+		/**
+		 * @return the value
+		 */
+		public long getValue() {
+			return value;
+		}
+
+		/**
+		 * @param value the value to set
+		 */
+		public void setValue(long value) {
+			this.value = value;
+		}
+		
+		
+	}
+	
 	/**
 	 * How many iterations of inserting new elements (and revaluating
 	 * the rules) should we limit ourselves to?
@@ -173,6 +197,9 @@ public abstract class DroolsInferenceEngine {
         
         final Map<EObject,FactHandle> factMemory = new HashMap<EObject,FactHandle>();
         
+        // keep track of the number of elements created
+        final CounterWrapper counter = new CounterWrapper();
+
         // automatically insert new objects based on a given object
         workingMemory.addEventListener( new WorkingMemoryEventListener() {
 
@@ -189,14 +216,23 @@ public abstract class DroolsInferenceEngine {
 				// increment a progress monitor
 				if (getSubprogressMonitor() != null) {
 					getSubprogressMonitor().worked(1);
-					/*
+					
 					if (obj.getObject() instanceof EObject) {
-						getSubprogressMonitor().subTask("Inserting " + ((EObject) obj.getObject()).eClass().getName());						
+						//getSubprogressMonitor().subTask("Inserting " + ((EObject) obj.getObject()).eClass().getName());
+						
+						/*
+						if (obj.getPropagationContext() != null && 
+								obj.getPropagationContext().getRuleOrigin() != null) {
+							System.out.println(obj.getPropagationContext().getRuleOrigin().getName());
+						}
+						*/
 					}
-					*/
+					
 				}
 				
 				if (obj.getObject() instanceof EObject) {
+					counter.increment();
+
 					// get all objects within 
 					TreeIterator<EObject> it = ((EObject) obj.getObject()).eAllContents();
 					while (it.hasNext()) {
@@ -285,6 +321,9 @@ public abstract class DroolsInferenceEngine {
 	    subProgressMonitor = new InfiniteSubProgressMonitor(monitor, 50);
 		subProgressMonitor.beginTask("Inferring elements iteratively", INSERTION_ITERATION_LIMIT);
         for (int k = 0; k < INSERTION_ITERATION_LIMIT; k++) {
+        	System.out.println("Step " + k + ": " + counter.getValue() + " elements");
+        	counter.setValue(0);
+        	
         	// check for monitor cancel
         	if (monitor.isCanceled()) {
         		return;

@@ -42,12 +42,15 @@ rule "VisibleThings have an event onInput"
 end
 
 /**
- * @inference VisibleThing
- *		{@model VisibleThing}s have an {@model Property} 'currentInput'.
+ * We only create currentInput for things that can actually use it, to
+ * simplify the completed model; i.e. only text fields.
+ *
+ * @inference InputTextField
+ *		{@model InputTextField}s have an {@model Property} 'currentInput'.
  */
-rule "VisibleThings have a Property currentInput"
+rule "InputTextFields have a Property currentInput"
 	when
-		field : VisibleThing ( )
+		field : InputTextField ( )
 		not ( property : Property ( field.currentInput == property ))
 	
 		eval ( handler.veto( field ))

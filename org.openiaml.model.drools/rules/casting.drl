@@ -22,6 +22,9 @@ global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
 /**
+ * Similar to issue 210: Create PrimitiveConditions by default, but
+ * allow later overriding using the same semantics if it was a CompositeCondition.
+ *
  * @inference VisibleThing
  *		{@model VisibleThing}s will contain a {@model Condition} named 'can cast?'.
  */
@@ -33,7 +36,7 @@ rule "Create 'can cast?' condition for VisibleThings"
 		eval ( handler.veto( tf ))
 	
 	then
-		CompositeCondition condition = handler.generatedCompositeCondition(tf, tf);
+		PrimitiveCondition condition = handler.generatedPrimitiveCondition(tf, tf);
 		handler.setName(condition, "can cast?");
 		queue.add(condition, drools);
 

@@ -601,6 +601,11 @@
 		var arg0 = default_arg;
 		«EXPAND setFieldValue(php) FOR fieldValue»
 	«ENDIF»
+	
+	«IF operation.name == "update"»
+		// call outgoing event triggers (if any) 
+		«EXPAND chainedEventFlow(php) FOR fieldValue-»
+	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE updateOperationForContainer(Boolean php, model::PrimitiveOperation operation) FOR model::DomainAttributeInstance»
@@ -614,6 +619,11 @@
 	«ELSE»
 		var arg0 = default_arg;
 		«EXPAND setFieldValue(php) FOR fieldValue»
+	«ENDIF»
+
+	«IF operation.name == "update"»
+		// call outgoing event triggers (if any) 
+		«EXPAND chainedEventFlow(php) FOR fieldValue-»
 	«ENDIF»
 «ENDDEFINE»
 
@@ -629,5 +639,9 @@
 		var arg0 = default_arg;
 		«EXPAND setFieldValue(php) FOR fieldValue»
 	«ENDIF»
-«ENDDEFINE»
 
+	«IF operation.name == "update"»
+		// call outgoing event triggers (if any) 
+		«EXPAND chainedEventFlow(php) FOR fieldValue-»
+	«ENDIF»
+«ENDDEFINE»

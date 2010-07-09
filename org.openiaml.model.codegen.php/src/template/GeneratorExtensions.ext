@@ -322,8 +322,10 @@ model::domain::DomainSchema getDomainSchema(model::DomainAttribute this) :
 model::domain::DomainSchema getDomainSchema(emf::EObject this) :
 	null;
 	
-/** for a given set operation, should we be calling
-  additional event triggers? */
+/**
+ * This is designed to return <code>true</code> if the current Operation
+ * is 'set', and within an Operation called 'update'.
+ */
 shouldExpandEventTriggers(model::PrimitiveOperation this ) :
 	getOperationName( eContainer ) == "update";
 	

@@ -205,7 +205,7 @@ rule "Run instance wire from source.access to source.init, adding ConditionEdge 
 		run : ActionEdge( from == event, to == operation, name == "run", eContainer == sw )
 		
 		# condition check
-		condition : CompositeCondition ( eContainer == target, name == "fieldValue is set" )
+		condition : Condition ( eContainer == target, name == "fieldValue is set" )
 		
 		not ( ConditionEdge ( from == condition, to == run ))
 					

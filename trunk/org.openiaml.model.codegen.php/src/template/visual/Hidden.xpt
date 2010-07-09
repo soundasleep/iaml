@@ -111,12 +111,14 @@
 			}
 
 			«REM»any on-access events?«ENDREM»
+			<?php if (!isset($skip_contained_onloads) || !$skip_contained_onloads) { ?>
 			«IF onAccess != null»
 			addOnloadFunction( function() {
 				// expand all onAccess
 				«EXPAND template::events::EventCall::callEvent(false) FOR onAccess-»
 			} );
 			«ENDIF»
+			<?php } ?>
 		/* ]]> */
 		</script>
 		

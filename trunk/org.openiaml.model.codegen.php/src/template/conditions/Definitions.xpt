@@ -72,7 +72,13 @@
 
 «DEFINE conditionDefinition(Boolean php) FOR model::PrimitiveCondition»
 	/** primitive condition "«name»" */
-	function condition_«safeName()»() {
+	function condition_«safeName()»(
+	«IF php»
+		$default_arg = null
+	«ELSE»
+		default_arg
+	«ENDIF»
+	) {
 		«REM»here we would expand out the data flow of the condition, etc«ENDREM»
 		«IF model::domain::DomainIterator.isInstance(eContainer)»
 			«IF php»
@@ -80,6 +86,8 @@
 			«ELSE»
 			return cached_result_«safeName()»();
 			«ENDIF»
+		«ELSEIF (name == "can cast?" || name == "can cast") && model::VisibleThing.isInstance(eContainer)»
+			«EXPAND conditionDefinition_canCast(php, this) FOR (model::VisibleThing) eContainer»
 		«ELSEIF model::Changeable.isInstance(eContainer)»
 			«LET (model::Changeable) eContainer AS changeable»
 			«IF name == "empty"»
@@ -109,4 +117,15 @@
 
 		return false;
 	}
+«ENDDEFINE»
+
+«DEFINE conditionDefinition_canCast(Boolean php, model::PrimitiveCondition condition) FOR model::VisibleThing»
+	/* PrimitiveOperation 'can cast?' */
+	«IF php»
+		$type = "«escapePhpString(fieldValue.type.uRI)»";
+		return can_cast($default_arg, $type);
+	«ELSE»
+		var type = "«escapePhpString(fieldValue.type.uRI)»";
+		return can_cast(default_arg, type);
+	«ENDIF»
 «ENDDEFINE»

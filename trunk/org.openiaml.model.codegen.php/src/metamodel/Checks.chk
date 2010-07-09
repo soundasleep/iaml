@@ -120,7 +120,11 @@ context model::PrimitiveOperation WARNING "Unknown primitive operation name '" +
 	(eContainer != null && model::domain::DomainIterator.isInstance(eContainer) && ((model::domain::DomainIterator) eContainer).previous == this) || 
 	(eContainer != null && model::domain::DomainIterator.isInstance(eContainer) && ((model::domain::DomainIterator) eContainer).reset == this) || 
 	(eContainer != null && model::domain::DomainIterator.isInstance(eContainer) && ((model::domain::DomainIterator) eContainer).skip == this) || 
-	(eContainer != null && model::domain::DomainIterator.isInstance(eContainer) && ((model::domain::DomainIterator) eContainer).jump == this) || 
+	(eContainer != null && model::domain::DomainIterator.isInstance(eContainer) && ((model::domain::DomainIterator) eContainer).jump == this) ||
+	(eContainer != null && model::VisibleThing.isInstance(eContainer) && name == "update") || 
+	(eContainer != null && model::DomainAttribute.isInstance(eContainer) && name == "update") || 
+	(eContainer != null && model::DomainAttributeInstance.isInstance(eContainer) && name == "update") || 
+	(eContainer != null && model::VisibleThing.isInstance(eContainer) && name == "init") || 
 	(name == "set" ||
 		name == "alert" || name == "save" ||
 		name == "new" ||

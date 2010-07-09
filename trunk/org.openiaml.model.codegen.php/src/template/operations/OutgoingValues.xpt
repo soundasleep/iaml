@@ -8,38 +8,38 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE outgoingValues(model::NamedElement container) FOR model::Wire»
+«DEFINE outgoingValues(emf::EObject container) FOR model::Wire»
 	«throwException("Unexpected outgoingValue wire: '" + this + "'")»
 «ENDDEFINE»
 
 /* if it connects to a SyncWire that is an Property, use this
    property as the destination */
-«DEFINE outgoingValues(model::NamedElement container) FOR model::wires::SyncWire»
+«DEFINE outgoingValues(emf::EObject container) FOR model::wires::SyncWire»
 	«EXPAND outgoingValue(container) FOR from»
 	«EXPAND outgoingValue(container) FOR to»
 «ENDDEFINE»
-«DEFINE outgoingValues(model::NamedElement container) FOR model::wires::SetWire»
+«DEFINE outgoingValues(emf::EObject container) FOR model::wires::SetWire»
 	«EXPAND outgoingValue(container) FOR to»
 «ENDDEFINE»
 
 /**
  * AutocompleteWires are not used for any input/output, only for inference and CSS.
  */
-«DEFINE outgoingValues(model::NamedElement container) FOR model::wires::AutocompleteWire»
+«DEFINE outgoingValues(emf::EObject container) FOR model::wires::AutocompleteWire»
 «ENDDEFINE»
 
 /* ignore: todo refactor */
-«DEFINE outgoingValue(model::NamedElement container) FOR model::WireSource»
+«DEFINE outgoingValue(emf::EObject container) FOR model::WireSource»
 «ENDDEFINE»
-«DEFINE outgoingValue(model::NamedElement container) FOR model::WireDestination»
+«DEFINE outgoingValue(emf::EObject container) FOR model::WireDestination»
 «ENDDEFINE»
-«DEFINE outgoingValue(model::NamedElement container) FOR model::DataFlowEdgesSource»
+«DEFINE outgoingValue(emf::EObject container) FOR model::DataFlowEdgesSource»
 «ENDDEFINE»
-«DEFINE outgoingValue(model::NamedElement container) FOR model::DataFlowEdgeDestination»
+«DEFINE outgoingValue(emf::EObject container) FOR model::DataFlowEdgeDestination»
 «ENDDEFINE»
 
 /* we have a property to set [in Javascript] */
-«DEFINE outgoingValue(model::NamedElement container) FOR model::Property»
+«DEFINE outgoingValue(emf::EObject container) FOR model::Property»
 	var value = «EXPAND Parameters::dataSourceOnFrame FOR container»;
 	«EXPAND outgoingValueTarget(false, "value")»
 «ENDDEFINE»

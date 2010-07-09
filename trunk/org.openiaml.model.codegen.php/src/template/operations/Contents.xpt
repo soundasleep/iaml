@@ -48,6 +48,9 @@
 	«ELSEIF name == "remove role"»
 		«REM»this operation requires an incoming parameter«ENDREM»
 		«EXPAND template::Common::runtimeException(php, "Cannot call 'remove role' without a RunAction")»
+	«ELSEIF name == "update" || name == "init"»
+		«REM»Issue 210: Change 'update' CompositeOperation to PrimitiveOperation.«ENDREM»
+		«EXPAND updateOperation(php) FOR this»
 	«ELSE»
 		«throwException("Unknown function to expand '" + name + "': " + this)»
 	«ENDIF»
@@ -221,43 +224,41 @@
 «ENDDEFINE»
 
 /**
- * outflowTarget <-- inflowTarget
+ * Assumes that $arg0 has been already set.
  */
-«DEFINE setPropertyToValueOperation(model::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
+«DEFINE setFieldValue(Boolean php) FOR model::Property»
 	«IF php»
-		$arg0 = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»; 
-
 		// cast it to something we can actually represent it as first
 		// this make sure we don't accidentally call Javascript's toString() method
 		$arg0 = do_cast($arg0, 'http://openiaml.org/model/datatypes#iamlString');
 
-		«IF containingSession(outFlows.first().to) != null»
-			$_SESSION["«safeName(containingSession(outFlows.first().to))»_«safeName(outFlows.first().to)-»"] = $arg0;
+		«IF containingSession(this) != null»
+			$_SESSION["«safeName(containingSession(this))»_«safeName(this)-»"] = $arg0;
 		«ELSE»
-			set_application_value("«outFlows.first().to.safeName()»", $arg0);
+			set_application_value("«safeName(this)»", $arg0);
 		«ENDIF»
-		if (true) {
 	«ELSE»
-		var value = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
-		if (value !== null) {
+		var value = arg0;
+		
 			// cast it to something we can actually represent it as first
 			// this make sure we don't accidentally call Javascript's toString() method
 			value = do_cast(value, 'http://openiaml.org/model/datatypes#iamlString');
 		
-			«IF canBeSet(outFlows.first().to.eContainer)»
-				if (containing_frame("«safeName(outFlows.first().to)»") == get_frame_id() &&
-						containing_email("«safeName(outFlows.first().to)»") == null) {
+			«IF canBeSet(eContainer)»
+				if (containing_frame("«safeName(this)»") == get_frame_id() &&
+						containing_email("«safeName(this)»") == null) {
 					// set a variable in the current frame
-					«EXPAND DataFlow::dataTarget(php) FOR outFlows.first().to» = value;
+					«EXPAND DataFlow::dataTarget(php) FOR this» = value;
 					
-					«EXPAND DataFlow::dataTargetOnChange(php) FOR outFlows.first().to» 
+					// call client-side onChange manually
+					«EXPAND DataFlow::dataTargetOnChange(php) FOR this» 
 					
 					// set server/session variables too
-					«EXPAND OutgoingValues::outgoingValue((model::visual::InputTextField) outFlows.first().to.eContainer) FOR outFlows.first().to»
+					«EXPAND OutgoingValues::outgoingValue(eContainer) FOR this»
 				} else {
-					«IF containingSession(outFlows.first().to) != null»
+					«IF containingSession(this) != null»
 						// the target is a session variable
-						set_session("«safeName(containingSession(outFlows.first().to))»_«safeName(outFlows.first().to)»", 
+						set_session("«safeName(containingSession(this))»_«safeName(this)»", 
 							value, 
 							function_queue);
 						function_queue_queued = true;		// we are waiting for it to return to execute the function queue
@@ -265,32 +266,47 @@
 					«ELSE»
 						// the target is a remote variable
 	
-						set_application_value("«outFlows.first().to.safeName()»", 
+						set_application_value("«safeName(this)»", 
 							value, 
 							function_queue);
 						function_queue_queued = true;		// we are waiting for it to return to execute the function queue
 					«ENDIF»
 				}
-			«ELSEIF isDomainAttribute(outFlows.first().to.eContainer)-»
+			«ELSEIF isDomainAttribute(eContainer)-»
 				«REM»direct field --> domain attribute«ENDREM»
-				store_db('«safeNameString(((model::DomainAttribute) outFlows.first().to.eContainer).id)»',
+				store_db('«safeNameString(((model::DomainAttribute) eContainer).id)»',
 					value);
 
 				// set server/session variables too
-				«EXPAND OutgoingValues::outgoingValue((model::DomainAttribute) outFlows.first().to.eContainer) FOR outFlows.first().to»
-			«ELSEIF containingSession(outFlows.first().to) == null»
+				«EXPAND OutgoingValues::outgoingValue((model::DomainAttribute) eContainer) FOR this»
+			«ELSEIF containingSession(this) == null»
 				«REM»contained in a Frame or InternetApplication: a static value«ENDREM»
-				set_application_value("«safeName(outFlows.first().to)»", 
+				set_application_value("«safeName(this)»", 
 					value, 
 					function_queue);
 				function_queue_queued = true;		// we are waiting for it to return to execute the function queue
 			«ELSE»
 				«REM»contained in a Session: a session value«ENDREM»
-				set_session("«safeName(containingSession(outFlows.first().to))»_«safeName(outFlows.first().to)»", 
+				set_session("«safeName(containingSession(this))»_«safeName(this)»", 
 					value, 
 					function_queue);
 				function_queue_queued = true;		// we are waiting for it to return to execute the function queue
 			«ENDIF»
+	«ENDIF»
+«ENDDEFINE» 
+
+/**
+ * outflowTarget <-- inflowTarget
+ */
+«DEFINE setPropertyToValueOperation(model::ExecutionEdgesSource start, Boolean php, model::Property property) FOR model::PrimitiveOperation-»
+	«IF php»
+		$arg0 = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
+		if (true) {
+			«EXPAND setFieldValue(php) FOR property»
+	«ELSE»
+		var arg0 = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
+		if (arg0 !== null) {
+			«EXPAND setFieldValue(php) FOR property»
 	«ENDIF»
 
 	«REM»
@@ -331,7 +347,7 @@
 		«ENDIF»
 	«ELSEIF model::Property.isInstance(outFlows.first().to)»
 		«REM»set a property«ENDREM»
-		«EXPAND setPropertyToValueOperation(start, php) FOR this»
+		«EXPAND setPropertyToValueOperation(start, php, (model::Property) outFlows.first().to) FOR this»
 	«ELSE»
 		«throwException("Unexpected target to set: " + this)»
 	«ENDIF»
@@ -555,3 +571,63 @@
 		«EXPAND ExecutionFlow::addStack(start, php) FOR e»
 	«ENDFOREACH»
 «ENDDEFINE»
+
+/**
+ * Issue 210: Change 'update' CompositeOperation inference to a PrimitiveOperation.
+ *
+ * IMPORTANT: We must provide identical semantics for both the Primitive and
+ * the generated Composite operations. 
+ */
+«DEFINE updateOperation(Boolean php) FOR model::PrimitiveOperation»
+	«EXPAND updateOperationForContainer(php, this) FOR eContainer»
+«ENDDEFINE»
+«DEFINE initOperation(Boolean php) FOR model::PrimitiveOperation»
+	«EXPAND updateOperationForContainer(php, this) FOR eContainer»
+«ENDDEFINE»
+
+«DEFINE updateOperationForContainer(Boolean php, model::PrimitiveOperation operation) FOR emf::EObject»
+	«throwException("'update' PrimitiveOperation not defined for container " + this)»
+«ENDDEFINE»
+
+«DEFINE updateOperationForContainer(Boolean php, model::PrimitiveOperation operation) FOR model::VisibleThing»
+	«IF fieldValue == null»
+		«throwException("Cannot set a null fieldValue: " + this)»
+	«ENDIF»
+	/* 'update' PrimitiveOperation */
+	«IF php»
+		$arg0 = $default_arg;
+		«EXPAND setFieldValue(php) FOR fieldValue»
+	«ELSE»
+		var arg0 = default_arg;
+		«EXPAND setFieldValue(php) FOR fieldValue»
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE updateOperationForContainer(Boolean php, model::PrimitiveOperation operation) FOR model::DomainAttributeInstance»
+	«IF fieldValue == null»
+		«throwException("Cannot set a null fieldValue: " + this)»
+	«ENDIF»
+	/* 'update' PrimitiveOperation */
+	«IF php»
+		$arg0 = $default_arg;
+		«EXPAND setFieldValue(php) FOR fieldValue»
+	«ELSE»
+		var arg0 = default_arg;
+		«EXPAND setFieldValue(php) FOR fieldValue»
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE updateOperationForContainer(Boolean php, model::PrimitiveOperation operation) FOR model::DomainAttribute»
+	«IF fieldValue == null»
+		«throwException("Cannot set a null fieldValue: " + this)»
+	«ENDIF»
+	/* 'update' PrimitiveOperation */
+	«IF php»
+		$arg0 = $default_arg;
+		«EXPAND setFieldValue(php) FOR fieldValue»
+	«ELSE»
+		var arg0 = default_arg;
+		«EXPAND setFieldValue(php) FOR fieldValue»
+	«ENDIF»
+«ENDDEFINE»
+

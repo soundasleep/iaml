@@ -18,6 +18,8 @@ global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
 /**
+ * Issue 210: Create PrimitiveOperations rather than CompositeOperations.
+ *
  * @inference VisibleThing
  *		All {@model VisibleThing}s (except {@model IteratorList}s and {@model InputForm}s) will have an {@model Operation} called "update".
  */
@@ -31,7 +33,7 @@ rule "Create 'update' operation for VisibleThings"
 		eval ( handler.veto( f ))
 			
 	then
-		CompositeOperation operation = handler.generatedCompositeOperation(f, f);
+		PrimitiveOperation operation = handler.generatedPrimitiveOperation(f, f);
 		handler.setName(operation, "update");
 		queue.add(operation, drools);
 		
@@ -45,7 +47,7 @@ rule "Create 'update' operation for domain attribute"
 		eval ( handler.veto( f ))
 			
 	then
-		CompositeOperation operation = handler.generatedCompositeOperation(f, f);
+		PrimitiveOperation operation = handler.generatedPrimitiveOperation(f, f);
 		handler.setName(operation, "update");
 		queue.add(operation, drools);
 		
@@ -59,13 +61,15 @@ rule "Create 'update' operation for domain attribute instance"
 		eval ( handler.veto( f ))
 			
 	then
-		CompositeOperation operation = handler.generatedCompositeOperation(f, f);
+		PrimitiveOperation operation = handler.generatedPrimitiveOperation(f, f);
 		handler.setName(operation, "update");
 		queue.add(operation, drools);
 		
 end
 
 /**
+ * Issue 210: Create PrimitiveOperations rather than CompositeOperations.
+ *
  * @inference VisibleThing
  *		All {@model VisibleThing}s (except {@model IteratorList}s and {@model InputForm}s) will have an {@model Operation} called "init".
  */
@@ -79,7 +83,7 @@ rule "Create 'init' operation for VisibleThings"
 		eval ( handler.veto( f ))
 			
 	then
-		CompositeOperation operation = handler.generatedCompositeOperation(f, f);
+		PrimitiveOperation operation = handler.generatedPrimitiveOperation(f, f);
 		handler.setName(operation, "init");
 		queue.add(operation, drools);
 		

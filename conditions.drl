@@ -32,10 +32,9 @@ function boolean connects(Wire wire, Object a, Object b) {
 rule "Connect ConditionEdges to ActionEdges created by SyncWires (edit/update) (onChange)"
 	when
 		# we have a sync wire
-		sw : SyncWire( )
 		source : Changeable( )
 		target : ContainsOperations( )
-		eval(functions.connects(sw, source, target))  
+		sw : SyncWire( (from == source && to == target) || (from == target && to == source) )
 		
 		# which has a run wire between event and operation (generated)
 		event : EventTrigger( source.onChange == event )
@@ -62,11 +61,10 @@ end
 rule "Connect ConditionEdges to ActionEdges created by SyncWires (access/init) (onAccess)"
 	when
 		# we have a sync wire
-		sw : SyncWire( )
 		source : Accessible( )
 		target : ContainsOperations( )
-		eval(functions.connects(sw, source, target))  
-		
+		sw : SyncWire( (from == source && to == target) || (from == target && to == source) )
+
 		# which has a run wire between event and operation (generated)
 		event : EventTrigger( source.onAccess == event )
 		operation : Operation( eContainer == source, name=="init" )		
@@ -102,11 +100,10 @@ end
 rule "Connect ParameterEdges to ConditionEdges connected to ActionEdges created by SyncWires (edit/update) (onChange)"
 	when
 		# we have a syncwire
-		sw : SyncWire( )
 		source : Changeable( )
 		target : ContainsOperations( )
-		eval(functions.connects(sw, source, target))  
-		
+		sw : SyncWire( (from == source && to == target) || (from == target && to == source) )
+
 		# that has created a ActionEdge
 		event : EventTrigger( source.onChange == event )
 		operation : Operation( eContainer == target, name=="update" )
@@ -139,11 +136,10 @@ end
 rule "Connect ParameterEdges to ConditionEdges connected to ActionEdges created by SyncWires (access/init) (onAccess)"
 	when
 		# we have a syncwire
-		sw : SyncWire( )
 		source : Accessible( )
 		target : ContainsOperations( )
-		eval(functions.connects(sw, source, target))  
-		
+		sw : SyncWire( (from == source && to == target) || (from == target && to == source) )
+
 		# that has created a ActionEdge
 		event : EventTrigger( source.onAccess == event )
 		operation : Operation( eContainer == source, name=="init" )
@@ -185,11 +181,10 @@ end
 rule "Connect ConditionEdges to ActionEdges created by SetWires (edit/update) (onChange)"
 	when
 		# we have a sync wire
-		sw : SetWire( )
 		source : Changeable( )
 		target : ContainsOperations( )
-		eval(functions.connects(sw, source, target))  
-		
+		sw : SyncWire( (from == source && to == target) || (from == target && to == source) )
+
 		# which has a run wire between event and operation (generated)
 		event : EventTrigger( source.onChange == event )
 		operation : Operation( eContainer == target, name=="update" )		
@@ -215,11 +210,10 @@ end
 rule "Connect ConditionEdges to ActionEdges created by SetWires (access/init) (onAccess)"
 	when
 		# we have a sync wire
-		sw : SetWire( )
 		source : Accessible( )
 		target : ContainsOperations( )
-		eval(functions.connects(sw, source, target))  
-		
+		sw : SyncWire( (from == source && to == target) || (from == target && to == source) )
+
 		# which has a run wire between event and operation (generated)
 		event : EventTrigger( source.onAccess == event )
 		operation : Operation( eContainer == source, name=="init" )		
@@ -255,10 +249,9 @@ end
 rule "Connect ParameterEdges to ConditionEdges connected to ActionEdges created by SetWires (edit/update) (onChange)"
 	when
 		# we have a syncwire
-		sw : SetWire( )
 		source : Changeable( )
 		target : ContainsOperations( )
-		eval(functions.connects(sw, source, target))  
+		sw : SetWire( from == source, to == target )
 		
 		# that has created a ActionEdge
 		event : EventTrigger( source.onChange == event )
@@ -292,11 +285,10 @@ end
 rule "Connect ParameterEdges to ConditionEdges connected to ActionEdges created by SetWires (access/init) (onAccess)"
 	when
 		# we have a syncwire
-		sw : SetWire( )
 		source : Accessible( )
 		target : ContainsOperations( )
-		eval(functions.connects(sw, source, target))  
-		
+		sw : SetWire( from == source, to == target )
+
 		# that has created a ActionEdge
 		event : EventTrigger( source.onAccess == event )
 		operation : Operation( eContainer == source, name=="init" )

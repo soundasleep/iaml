@@ -23,9 +23,9 @@ rule "Connect SyncWires for a dynamic source, referenced by XPath"
 		container : InternetApplication ( )
 		ds : DynamicApplicationElementSet( eval(functions.isXPath(query)), eContainer == container )
 		source : Frame ( ) 
-		sw : SyncWire ( eval(functions.connects(sw, ds, source)) )
+		sw : SyncWire ( (from == ds && to == source) || (from == source && to == ds) )
 		target : Frame ( eval(source != target), eval(functions.potentialXPathMatch(container, ds, target)) )
-		not ( tw : SyncWire( eval(functions.connects(tw, source, target)) ) )
+		not ( tw : SyncWire( (from == source && to == target) || (from == target && to == source ) ) )
 			
 		eval ( handler.veto( container ))
 		
@@ -135,9 +135,9 @@ rule "Create the XPath ConditionEdge for generated SyncWires"
 		container : InternetApplication( )
 		ds : DynamicApplicationElementSet( eval(functions.isXPath(query)), eContainer == container )
 		source : Frame ( ) 
-		sw : SyncWire ( eval(functions.connects(sw, ds, source)) )
-		target : Frame ( eval(source != target), eval(functions.potentialXPathMatch(container, ds, target)) )
-		tw : SyncWire ( eval(functions.connects(tw, source, target)) )
+		sw : SyncWire ( (from == ds && to == source) || (from == source && to == ds) )
+		target : Frame ( this != source, eval(functions.potentialXPathMatch(container, ds, target)) )
+		tw : SyncWire ( (from == source && to == target) || (from == target && to == source) )
 		condition : CompositeCondition ( eContainer == ds )
 		not (
 			tw_cw : ConditionEdge ( from == condition, to == tw ) 
@@ -170,9 +170,9 @@ rule "Connect ParameterEdges to empty ConditionEdge for XPath"
 		container : InternetApplication( )
 		ds : DynamicApplicationElementSet( eval(functions.isXPath(query)), eContainer == container )
 		source : Frame ( ) 
-		sw : SyncWire ( eval(functions.connects(sw, ds, source)) )
-		target : Frame ( eval(source != target), eval(functions.potentialXPathMatch(container, ds, target)) )
-		tw : SyncWire ( eval(functions.connects(tw, source, target)) )
+		sw : SyncWire ( (from == ds && to == source) || (from == source && to == ds) )
+		target : Frame ( this != source, eval(functions.potentialXPathMatch(container, ds, target)) )
+		tw : SyncWire ( (from == source && to == target) || (from == target && to == source) )
 		condition : CompositeCondition ( eContainer == ds )
 		cwt : ConditionEdge ( from == condition, to == tw )
 		not (

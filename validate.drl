@@ -43,11 +43,9 @@ rule "When two TextFields of different types are under a SyncWire, add a 'valida
 	when
 		e1 : InputTextField( )
 		e1_property : Property ( e1.fieldValue == e1_property )
-		e2 : InputTextField( )
+		e2 : InputTextField( this != e1 )
 		e2_property : Property ( e2.fieldValue == e2_property )
-		eval ( e1 != e2 )
-		sw : SyncWire ( )
-		eval ( functions.connects(sw, e1, e2) )
+		sw : SyncWire ( (from == e1 && to == e2) || (from == e2 && to == e1) )
 		
 		eval ( e1.getType() != e2.getType() )
 		
@@ -66,11 +64,9 @@ rule "When two TextFields of different types are under a SyncWire, call the 'val
 	when
 		e1 : InputTextField( )
 		e1_property : Property ( e1.fieldValue == e1_property )
-		e2 : InputTextField( )
+		e2 : InputTextField( this != e1 )
 		e2_property : Property ( e2.fieldValue == e2_property )
-		eval ( e1 != e2 )
-		sw : SyncWire ( )
-		eval ( functions.connects(sw, e1, e2) )
+		sw : SyncWire ( (from == e1 && to == e2) || (from == e2 && to == e1) )
 		
 		eval ( e1.getType() != e2.getType() )
 		
@@ -93,11 +89,9 @@ rule "Create contents of 'validate' operation"
 	when
 		e1 : InputTextField( )
 		e1_property : Property ( e1.fieldValue == e1_property )
-		e2 : InputTextField( )
+		e2 : InputTextField( this != e1 )
 		e2_property : Property ( e2.fieldValue == e2_property )
-		eval ( e1 != e2 )
-		sw : SyncWire ( )
-		eval ( functions.connects(sw, e1, e2) )
+		sw : SyncWire ( (from == e1 && to == e2) || (from == e2 && to == e1) )
 		
 		eval ( e1.getType() != e2.getType() )
 		

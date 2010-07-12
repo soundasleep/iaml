@@ -31,9 +31,11 @@ rule "Create a containing InputForm for Autocomplete list and input"
 		
 		attribute : DomainAttribute ( )
 		
-		wire : AutocompleteWire ( overridden == false, from == iterator, to == target, match == attribute )
+		wire : AutocompleteWire ( from == iterator, to == target, match == attribute )
 		
 		not ( form : InputForm ( eContainer == container, name == iterator.name ) )
+		
+		eval ( handler.veto( wire ))
 	
 	then
 		InputForm form = handler.generatedInputForm(wire, container);
@@ -50,11 +52,13 @@ rule "Create an input field for Autocomplete"
 		
 		attribute : DomainAttribute ( )
 		
-		wire : AutocompleteWire ( overridden == false, from == iterator, to == target, match == attribute )
+		wire : AutocompleteWire ( from == iterator, to == target, match == attribute )
 		form : InputForm ( eContainer == container, name == iterator.name )
 		
 		not ( VisibleThing ( eContainer == form, eval (functions.getAutocompleteInputName(attribute).equals(name)) ) )
-
+		
+		eval ( handler.veto( wire ))
+		
 	then
 		InputTextField text = handler.generatedInputTextField(wire, form);
 		handler.setName(text, functions.getAutocompleteInputName(attribute));
@@ -70,14 +74,16 @@ rule "Connect parameter for input field for Autocomplete"
 		
 		attribute : DomainAttribute ( )
 		
-		wire : AutocompleteWire ( overridden == false, from == iterator, to == target, match == attribute )
+		wire : AutocompleteWire ( from == iterator, to == target, match == attribute )
 		form : InputForm ( eContainer == container, name == iterator.name )
 		
 		text : InputTextField ( eContainer == form, eval (functions.getAutocompleteInputName(attribute).equals(name)) ) 
 		fieldValue : Property ( text.fieldValue == fieldValue )
 		
 		not ( ParameterEdge ( from == fieldValue, to == iterator ) )
-
+		
+		eval ( handler.veto( wire ))
+		
 	then
 		ParameterEdge param = handler.generatedParameterEdge(wire, text, fieldValue, iterator);
 		handler.setName(param, attribute.getName());
@@ -93,9 +99,11 @@ rule "Update DomainIterator query if it is not set"
 		
 		attribute : DomainAttribute ( )
 		
-		wire : AutocompleteWire ( overridden == false, from == iterator, to == target, match == attribute )
+		wire : AutocompleteWire ( from == iterator, to == target, match == attribute )
 	
 		eval ( !functions.getAutocompleteIteratorQuery(wire).equals(iterator.getQuery()) )
+				
+		eval ( handler.veto( wire ))
 		
 	then
 		handler.setQuery(iterator, functions.getAutocompleteIteratorQuery(wire));
@@ -110,7 +118,7 @@ rule "Input field for Autocomplete should update instantly"
 		
 		attribute : DomainAttribute ( )
 		
-		wire : AutocompleteWire ( overridden == false, from == iterator, to == target, match == attribute )
+		wire : AutocompleteWire ( from == iterator, to == target, match == attribute )
 		form : InputForm ( eContainer == container, name == iterator.name )
 		
 		text : InputTextField ( eContainer == form, eval (functions.getAutocompleteInputName(attribute).equals(name)) ) 
@@ -121,6 +129,8 @@ rule "Input field for Autocomplete should update instantly"
 		updateOperation : Operation ( eContainer == text, name == "update" )
 		
 		not ( ActionEdge ( from == onInput, to == updateOperation ))
+		
+		eval ( handler.veto( wire ))
 		
 	then
 		ActionEdge run = handler.generatedActionEdge(wire, text, onInput, updateOperation);
@@ -141,11 +151,13 @@ rule "Create IteratorList"
 		
 		attribute : DomainAttribute ( )
 		
-		wire : AutocompleteWire ( overridden == false, from == iterator, to == target, match == attribute )
+		wire : AutocompleteWire ( from == iterator, to == target, match == attribute )
 		form : InputForm ( eContainer == container, name == iterator.name )
 		
 		not ( list : IteratorList ( eContainer == form, name == iterator.name ) )
-
+		
+		eval ( handler.veto( wire ))
+	
 	then
 		IteratorList list = handler.generatedIteratorList(wire, form);
 		handler.setName(list, iterator.getName());
@@ -168,7 +180,7 @@ rule "IteratorList labels update the target of the Autocomplete Wire"
 		target : VisibleThing ( name == attribute.name )
 		updateOperation : Operation ( eContainer == target, name == "update" )
 		
-		wire : AutocompleteWire ( overridden == false, from == iterator, to == target ) 
+		wire : AutocompleteWire ( from == iterator, to == target ) 
 		form : InputForm ( eContainer == container, name == iterator.name )
 		
 		# containing list
@@ -184,6 +196,8 @@ rule "IteratorList labels update the target of the Autocomplete Wire"
 		onClick : EventTrigger ( label.onClick == onClick )
 		
 		not ( ActionEdge ( from == onClick, to == updateOperation ))
+		
+		eval ( handler.veto( wire ))
 	
 	then
 		ActionEdge run = handler.generatedActionEdge(wire, label, onClick, updateOperation);
@@ -197,10 +211,12 @@ end
 
 rule "InternetApplication has a StaticValue 'blank' created"
 	when
-		container : InternetApplication ( overridden == false )
+		container : InternetApplication ( )
 	
-		not ( StaticValue ( eContainer == container, value == "" ))		
-
+		not ( StaticValue ( eContainer == container, value == "" ))
+		
+		eval ( handler.veto( container ))
+		
 	then
 		StaticValue blank = handler.generatedStaticValue(container, container);
 		handler.setName(blank, "blank");
@@ -219,7 +235,7 @@ rule "IteratorList labels clear the input onClick"
 
 		attribute : DomainAttribute ( )
 
-		wire : AutocompleteWire ( overridden == false, from == iterator, to == target ) 
+		wire : AutocompleteWire ( from == iterator, to == target ) 
 		form : InputForm ( eContainer == container, name == iterator.name )
 		
 		# containing list
@@ -237,7 +253,9 @@ rule "IteratorList labels clear the input onClick"
 		onClick : EventTrigger ( label.onClick == onClick )
 		
 		not ( ActionEdge ( from == onClick, to == updateOperation ))
-
+		
+		eval ( handler.veto( wire ))
+	
 	then
 		ActionEdge run = handler.generatedActionEdge(wire, label, onClick, updateOperation);
 		handler.setName(run, "run");
@@ -256,7 +274,7 @@ rule "Frame.onAccess hides the IteratorList if the input is empty"
 		
 		attribute : DomainAttribute ( )
 		
-		wire : AutocompleteWire ( overridden == false, from == iterator, to == target, match == attribute )
+		wire : AutocompleteWire ( from == iterator, to == target, match == attribute )
 		form : InputForm ( eContainer == container, name == iterator.name )
 		
 		# input
@@ -274,6 +292,8 @@ rule "Frame.onAccess hides the IteratorList if the input is empty"
 		onAccess : EventTrigger ( container.onAccess == onAccess )
 		
 		not ( ActionEdge ( from == onAccess, to == hide ))
+		
+		eval ( handler.veto( wire ))
 	
 	then
 		ActionEdge run = handler.generatedActionEdge(wire, container, onAccess, hide);
@@ -294,7 +314,7 @@ rule "Frame.onAccess shows the IteratorList if the input is not empty"
 		
 		attribute : DomainAttribute ( )
 		
-		wire : AutocompleteWire ( overridden == false, from == iterator, to == target, match == attribute )
+		wire : AutocompleteWire ( from == iterator, to == target, match == attribute )
 		form : InputForm ( eContainer == container, name == iterator.name )
 		
 		# input
@@ -312,6 +332,8 @@ rule "Frame.onAccess shows the IteratorList if the input is not empty"
 		onAccess : EventTrigger ( container.onAccess == onAccess )
 		
 		not ( ActionEdge ( from == onAccess, to == hide ))
+		
+		eval ( handler.veto( wire ))
 	
 	then
 		ActionEdge run = handler.generatedActionEdge(wire, container, onAccess, hide);
@@ -332,7 +354,7 @@ rule "Input.onChange hides the IteratorList if the input is empty"
 		
 		attribute : DomainAttribute ( )
 		
-		wire : AutocompleteWire ( overridden == false, from == iterator, to == target, match == attribute )
+		wire : AutocompleteWire ( from == iterator, to == target, match == attribute )
 		form : InputForm ( eContainer == container, name == iterator.name )
 		
 		# input
@@ -350,6 +372,8 @@ rule "Input.onChange hides the IteratorList if the input is empty"
 		onChange : EventTrigger ( input.onChange == onChange )
 		
 		not ( ActionEdge ( from == onChange, to == hide ))
+		
+		eval ( handler.veto( wire ))
 	
 	then
 		ActionEdge run = handler.generatedActionEdge(wire, container, onChange, hide);
@@ -371,7 +395,7 @@ rule "Input.onChange shows the IteratorList if the input is not empty"
 		
 		attribute : DomainAttribute ( )
 		
-		wire : AutocompleteWire ( overridden == false, from == iterator, to == target, match == attribute )
+		wire : AutocompleteWire ( from == iterator, to == target, match == attribute )
 		form : InputForm ( eContainer == container, name == iterator.name )
 		
 		# input
@@ -389,7 +413,9 @@ rule "Input.onChange shows the IteratorList if the input is not empty"
 		onChange : EventTrigger ( input.onChange == onChange )
 		
 		not ( ActionEdge ( from == onChange, to == hide ))
-
+		
+		eval ( handler.veto( wire ))
+	
 	then
 		ActionEdge run = handler.generatedActionEdge(wire, container, onChange, hide);
 		handler.setName(run, "run");

@@ -24,9 +24,11 @@ global DroolsHelperFunctions functions;
 rule "Create 'onChange' event trigger for Changeable things"
 	when
 		f : Changeable( )
-		g : GeneratesElements ( overridden == false, eval(f == g) )
+		g : GeneratesElements ( eval(f == g) )
 		not (event : EventTrigger( f.onChange == event ))
-
+				
+		eval ( handler.veto( g ))
+			
 	then
 		EventTrigger event = handler.generatedEventTriggerOnChange(g, f);
 		queue.add(event, drools);
@@ -40,9 +42,11 @@ end
 rule "Create 'onAccess' event trigger for Accessible things"
 	when
 		f : Accessible( )
-		g : GeneratesElements ( overridden == false, eval(f == g) )
+		g : GeneratesElements ( eval(f == g) )
 		not (event : EventTrigger( f.onAccess == event ))
-
+				
+		eval ( handler.veto( g ))
+			
 	then
 		handler.veto(g);
 		EventTrigger event = handler.generatedEventTriggerOnAccess(g, f);

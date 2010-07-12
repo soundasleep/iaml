@@ -24,10 +24,12 @@ global DroolsHelperFunctions functions;
  */
 rule "Create 'to' property for Email"
 	when
-		f : Email ( overridden == false, to != null )
+		f : Email ( to != null )
 		not ( Property ( eContainer == f, name == "to" ))
 		not ( StaticValue ( eContainer == f, name == "to" ))
-
+		
+		eval ( handler.veto( f ))
+			
 	then
 		Property p = handler.generatedProperty(f, f);
 		handler.setName(p, "to");
@@ -44,9 +46,11 @@ end
  */
 rule "Create 'toName' property for Email"
 	when
-		f : Email ( overridden == false, toName != null )
+		f : Email ( toName != null )
 		not ( Property ( eContainer == f, name == "toName" ))
 		not ( StaticValue ( eContainer == f, name == "toName" ))
+		
+		eval ( handler.veto( f ))
 			
 	then
 		Property p = handler.generatedProperty(f, f);
@@ -64,9 +68,11 @@ end
  */
 rule "Create 'from' property for Email"
 	when
-		f : Email ( overridden == false, from != null )
+		f : Email ( from != null )
 		not ( Property ( eContainer == f, name == "from" ))
 		not ( StaticValue ( eContainer == f, name == "from" ))
+		
+		eval ( handler.veto( f ))
 			
 	then
 		Property p = handler.generatedProperty(f, f);
@@ -84,9 +90,11 @@ end
  */
 rule "Create 'fromName' property for Email"
 	when
-		f : Email ( overridden == false, fromName != null )
+		f : Email ( fromName != null )
 		not ( Property ( eContainer == f, name == "fromName" ))
 		not ( StaticValue ( eContainer == f, name == "fromName" ))
+		
+		eval ( handler.veto( f ))
 			
 	then
 		Property p = handler.generatedProperty(f, f);
@@ -104,9 +112,11 @@ end
  */
 rule "Create 'subject' property for Email"
 	when
-		f : Email ( overridden == false, subject != null )
+		f : Email ( subject != null )
 		not ( Property ( eContainer == f, name == "subject" ))
 		not ( StaticValue ( eContainer == f, name == "subject" ))
+		
+		eval ( handler.veto( f ))
 			
 	then
 		Property p = handler.generatedProperty(f, f);

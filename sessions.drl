@@ -24,8 +24,10 @@ global DroolsHelperFunctions functions;
  */
 rule "Create 'init' event for Sessions"
 	when
-		session : Scope( overridden == false )
+		session : Scope( )
 		not (event : EventTrigger( eContainer == session, session.onInit == event ))
+				
+		eval ( handler.veto( session ))
 		
 	then
 		EventTrigger event = handler.generatedEventTriggerOnInit(session, session);
@@ -43,9 +45,11 @@ end
  */
 rule "Create an empty Frame for an empty Session, for Operation callbacks"
 	when
-		session : Session( overridden == false )
+		session : Session( )
 		not ( Frame ( eContainer == session) )
-
+				
+		eval ( handler.veto( session ))
+		
 	then
 		Frame frame = handler.generatedFrame(session, session);
 		handler.setName(frame, "Empty frame for session");		

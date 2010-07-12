@@ -30,9 +30,11 @@ rule "Create separate 'login' scope for LoginHandlers [InternetApplication]"
 	when
 		container : InternetApplication( )
 		scope : Scope( eContainer == container ) 
-		login_handler : LoginHandler( eContainer == scope, overridden == false )
+		login_handler : LoginHandler( eContainer == scope )
 		
-		not ( login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) ))			
+		not ( login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) ))
+			
+		eval ( handler.veto( login_handler ))
 	
 	then
 		Session login_session = handler.generatedSession(login_handler, container);
@@ -45,11 +47,13 @@ rule "Create default 'login' page for LoginHandlers"
 	when
 		container : InternetApplication( )
 		scope : Scope( eContainer == container ) 
-		login_handler : LoginHandler( eContainer == scope, overridden == false )
+		login_handler : LoginHandler( eContainer == scope )
 		
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		
 		not ( ActionEdge ( from == login_handler, name == "login" ))
+			
+		eval ( handler.veto( login_handler ))
 		
 	then
 
@@ -63,13 +67,15 @@ rule "Connect default 'login' page to LoginHandler"
 	when
 		container : InternetApplication( )
 		scope : Scope( eContainer == container ) 
-		login_handler : LoginHandler( eContainer == scope, overridden == false )
+		login_handler : LoginHandler( eContainer == scope )
 		
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		login_page : Frame ( eContainer == login_session, name == "login" )
 		
 		not ( ActionEdge ( from == login_handler, to == login_page, name == "login" ))
-
+			
+		eval ( handler.veto( login_handler ))
+		
 	then
 	
 		ActionEdge edge = handler.generatedActionEdge(login_handler, login_session, login_handler, login_page);
@@ -81,9 +87,11 @@ end
 rule "Create 'logout' page for LoginHandlers"
 	when
 		scope : Session( ) 
-		login_handler : LoginHandler( eContainer == scope, overridden == false )
+		login_handler : LoginHandler( eContainer == scope )
 		
 		not (Frame (eContainer == scope, name=="logout" ))
+				
+		eval ( handler.veto( login_handler ))
 		
 	then
 
@@ -96,7 +104,7 @@ end
 rule "Instruct 'logout' page to follow to the actual logout destination if set"
 	when
 		scope : Session( ) 
-		login_handler : LoginHandler( eContainer == scope, overridden == false )
+		login_handler : LoginHandler( eContainer == scope )
 		
 		logout : Frame (eContainer == scope, name=="logout" )
 		
@@ -105,6 +113,8 @@ rule "Instruct 'logout' page to follow to the actual logout destination if set"
 
 		access : EventTrigger ( eContainer == logout, logout.onAccess == access )
 		not (ActionEdge ( from == access, to == destination ))
+		
+		eval ( handler.veto( login_handler ))
 	
 	then
 		ActionEdge wire = handler.generatedActionEdge(login_handler, logout, access, destination);
@@ -116,7 +126,7 @@ end
 rule "Create 'key attribute' property for LoginHandler[type = key]s"
 	when
 		scope : Session( ) 
-		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY, overridden == false )
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
 
 		not (Property (eContainer == scope, 
 			name=="current login key" ) )
@@ -127,6 +137,8 @@ rule "Create 'key attribute' property for LoginHandler[type = key]s"
 				and SetWire ( name == "set", from == login_handler, to == actual_key )
 			)
 		) 
+		
+		eval ( handler.veto( login_handler ))
 		
 	then
 
@@ -141,10 +153,12 @@ end
 rule "Connect 'key' property to LoginHandler"
 	when
 		scope : Session( ) 
-		login_handler : LoginHandler( eContainer == scope, overridden == false )
+		login_handler : LoginHandler( eContainer == scope )
 		key : Property (eContainer == scope,
 			name == "current login key")
 		not (SetWire( from == login_handler, to == key, name == "set") )
+		
+		eval ( handler.veto( login_handler ))
 
 	then
 
@@ -157,8 +171,10 @@ end
 rule "Create 'check key' operation for LoginHandler[type = key]"
 	when
 		scope : Session( ) 
-		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY, overridden == false )
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
 		not (Operation( eContainer == scope, name == "check key") )
+					
+		eval ( handler.veto( login_handler ))
 					
 	then
 		CompositeOperation op = handler.generatedCompositeOperation( login_handler, scope );
@@ -169,12 +185,14 @@ end
 
 rule "Connect 'access' event to 'check' operations"
 	when
-		scope : Session( overridden == false )
+		scope : Session( )
 		page : Frame( eContainer == scope )
 		access : EventTrigger( page.onAccess == access, eContainer == page )
 		check : CompositeOperation( name == "check key" || name == "check instance", eContainer == scope )
 		not (ActionEdge( from == access, to == check ))
-
+				
+		eval ( handler.veto( scope ))
+		
 	then
 		ActionEdge wire = handler.generatedActionEdge(scope, page, access, check);
 		handler.setName(wire, "run");
@@ -185,7 +203,7 @@ end
 
 rule "Connect 'login key' parameter to 'check key' operation run wire"
 	when
-		scope : Session( overridden == false )
+		scope : Session( )
 		page : Frame( eContainer == scope )
 		access : EventTrigger( page.onAccess == access, eContainer == page )
 		check : CompositeOperation( name == "check key", eContainer == scope )
@@ -196,7 +214,9 @@ rule "Connect 'login key' parameter to 'check key' operation run wire"
 		
 		wire : ActionEdge( from == access, to == check )
 		not (ParameterEdge( from == value, to == wire ))
-
+				
+		eval ( handler.veto( scope ))
+		
 	then
 		ParameterEdge param = handler.generatedParameterEdge(scope, page, value, wire);
 		handler.setName(param, "[sessions] 'login key' parameter to 'check key'");
@@ -207,12 +227,14 @@ end
 rule "Connect 'fail' wire from 'check key' or 'check instance' operation to Login Frame"
 	when
 		container : ContainsWires( )
-		scope : Session( eContainer == container, overridden == false ) 
+		scope : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope )
 		login : Frame ( )
 		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
 		check : CompositeOperation( name == "check key" || name == "check instance", eContainer == scope )
 		not (ActionEdge( from == check, to == login, name == "fail") )
+			
+		eval ( handler.veto( scope ))
 	
 	then
 		ActionEdge fail = handler.generatedActionEdge(scope, scope, check, login);
@@ -224,7 +246,7 @@ end
 rule "Create contents of 'check key' operation [type=secret_key]"
 	when
 		scope : Session( )
-		o : CompositeOperation( name == "check key", eContainer == scope, overridden == false )
+		o : CompositeOperation( name == "check key", eContainer == scope )
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
 		
 		expected : StaticValue( ) 
@@ -232,6 +254,8 @@ rule "Create contents of 'check key' operation [type=secret_key]"
 		
 		not (StartNode( eContainer == o))
 		# not (FinishNode( eContainer == o)) - not necessary
+			
+		eval ( handler.veto( o ))
 	
 	then
 		Parameter parameter = handler.generatedParameter(o, o);
@@ -296,9 +320,11 @@ rule "Create contents of 'check instance' operation [type=domain_object or user]
 		
 		ex : Condition ( instance.empty == ex )
 				
-		checkOperation : CompositeOperation ( eContainer == scope, name == "check instance", overridden == false )
+		checkOperation : CompositeOperation ( eContainer == scope, name == "check instance" )
 
 		not ( StartNode ( eContainer == checkOperation ))
+		
+		eval ( handler.veto( checkOperation ))
 
 	then
 		StartNode start = handler.generatedStartNode(checkOperation, checkOperation);
@@ -369,12 +395,14 @@ rule "Create login form for 'login' pages"
 	when
 		container : InternetApplication( )
 		scope : Session( eContainer == container ) 
-		login_handler : LoginHandler( eContainer == scope, overridden == false )
+		login_handler : LoginHandler( eContainer == scope )
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		login : Frame ( )
 		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
 
 		not (InputForm( eContainer == login ))
+				
+		eval ( handler.veto( login_handler ))
 		
 	then
 		InputForm form = handler.generatedInputForm(login_handler, login);
@@ -387,7 +415,7 @@ rule "Create 'Login' button for login form"
 	when
 		container : InternetApplication( )
 		scope : Session( eContainer == container ) 
-		login_handler : LoginHandler( eContainer == scope, overridden == false )
+		login_handler : LoginHandler( eContainer == scope )
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		login : Frame ( )
 		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
@@ -395,6 +423,8 @@ rule "Create 'Login' button for login form"
 		form : InputForm ( name == "login form", eContainer == login )
 
 		not (Button( name == "Login", eContainer == form ))
+				
+		eval ( handler.veto( login_handler ))
 		
 	then
 		Button button = handler.generatedButton(form, form);
@@ -408,7 +438,7 @@ rule "Connect 'Login' button to 'do login' operation"
 	when
 		container : InternetApplication( )
 		scope : Session( eContainer == container ) 
-		login_handler : LoginHandler( eContainer == scope, overridden == false )
+		login_handler : LoginHandler( eContainer == scope )
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		login : Frame ( )
 		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
@@ -419,6 +449,8 @@ rule "Connect 'Login' button to 'do login' operation"
 		operation : Operation ( eContainer == login_session, name == "do login" )
 		
 		not (ActionEdge ( from == button, to == operation, name == "onClick"))
+		
+		eval ( handler.veto( login_handler ))
 
 	then
 		ActionEdge run = handler.generatedActionEdge(login_handler, login, button, operation);
@@ -436,9 +468,11 @@ rule "Create text fields for login form of 'login' pages [type=secret_key]"
 		login : Frame ( )
 		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
 
-		form : InputForm( eContainer == login, name == "login form", overridden == false )
+		form : InputForm( eContainer == login, name == "login form" )
 		
 		not ( InputTextField ( eContainer == form, name == "login key" ))
+					
+		eval ( handler.veto( form ))
 		
 	then
 
@@ -469,10 +503,12 @@ rule "Create contents of 'do login' operation [type=secret_key]"
 		field : InputTextField ( eContainer == form, name == "login key" )
 		fieldValue : Property( field.fieldValue == fieldValue )
 		
-		loginOperation : CompositeOperation ( eContainer == login_session, name == "do login", overridden == false )
+		loginOperation : CompositeOperation ( eContainer == login_session, name == "do login" )
 		runClick : ActionEdge ( from == button, to == loginOperation, name == "onClick" )
 		
 		not ( StartNode ( eContainer == loginOperation ))
+		
+		eval ( handler.veto( loginOperation ))
 			
 	then
 		
@@ -563,13 +599,16 @@ rule "Create text fields for login form of 'login' pages [type=domain_object]"
 		login : Frame ( )
 		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
 
-		form : InputForm( eContainer == login, name == "login form", overridden == false )
+		form : InputForm( eContainer == login, name == "login form" )
 		
 		# from a domain object
 		attribute : DomainAttribute ( )
 		param : ParameterEdge ( from == attribute, to == login_handler )
 		
 		not ( InputTextField ( eContainer == form, name == attribute.name ))
+		
+		eval ( handler.veto( form ))
+
 	then
 		InputTextField field = handler.generatedInputTextField(form, form);
 		# login field name
@@ -592,7 +631,7 @@ rule "Create text fields for login form of 'login' pages [type=user]"
 		login : Frame ( )
 		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
 
-		form : InputForm( eContainer == login, name == "login form", overridden == false )
+		form : InputForm( eContainer == login, name == "login form" )
 
 		# from a role		
 		role : Role ( )
@@ -602,6 +641,8 @@ rule "Create text fields for login form of 'login' pages [type=user]"
 		attribute : DomainAttribute ( eContainer == role, eval(functions.notPrimaryKey(attribute)) )
 		
 		not ( InputTextField ( eContainer == form, name == attribute.name ))
+		
+		eval ( handler.veto( form ))
 
 	then
 		InputTextField field = handler.generatedInputTextField(form, form);
@@ -621,7 +662,7 @@ rule "Connect text fields for login form of 'login' pages to 'do login' run wire
 	when
 		container : InternetApplication( )
 		scope : Session( eContainer == container ) 
-		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.DOMAIN_OBJECT, overridden == false )
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.DOMAIN_OBJECT )
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		login : Frame ( )
 		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
@@ -641,6 +682,8 @@ rule "Connect text fields for login form of 'login' pages to 'do login' run wire
 		run : ActionEdge ( from == button, to == operation, name == "onClick" )
 		
 		not ( ParameterEdge ( from == fieldValue, to == run, name == attribute.name )) 
+		
+		eval ( handler.veto( login_handler ))
 
 	then
 		ParameterEdge param2 = handler.generatedParameterEdge(login_handler, fieldValue, fieldValue, run);
@@ -653,7 +696,7 @@ rule "Connect text fields for login form of 'login' pages to 'do login' run wire
 	when
 		container : InternetApplication( )
 		scope : Session( eContainer == container ) 
-		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.USER, overridden == false )
+		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.USER )
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		login : Frame ( )
 		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
@@ -674,6 +717,8 @@ rule "Connect text fields for login form of 'login' pages to 'do login' run wire
 		run : ActionEdge ( from == button, to == operation, name == "onClick" )
 		
 		not ( ParameterEdge ( from == fieldValue, to == run, name == attribute.name )) 
+		
+		eval ( handler.veto( login_handler ))
 
 	then
 		ParameterEdge param2 = handler.generatedParameterEdge(login_handler, fieldValue, fieldValue, run);
@@ -702,10 +747,12 @@ rule "Create 'do login' operation within all login_handlers"
 	when
 		container : InternetApplication( )
 		session : Session( eContainer == container ) 
-		login_handler : LoginHandler( eContainer == session, overridden == false )
+		login_handler : LoginHandler( eContainer == session )
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		
 		not ( Operation ( eContainer == login_session, name == "do login" ))
+		
+		eval ( handler.veto( login_handler ))
 
 	then
 		CompositeOperation loginOperation = handler.generatedCompositeOperation(login_handler, login_session);
@@ -726,10 +773,12 @@ rule "Create contents of 'do login' operation [type=domain_object]"
 		
 		ex : Condition ( instance.empty == ex )
 				
-		loginOperation : CompositeOperation ( eContainer == login_session, name == "do login", overridden == false )
+		loginOperation : CompositeOperation ( eContainer == login_session, name == "do login" )
 
 		not ( StartNode ( eContainer == loginOperation ))
 		
+		eval ( handler.veto( loginOperation ))
+
 	then
 		StartNode start = handler.generatedStartNode(loginOperation, loginOperation);
 		queue.add(start, drools);
@@ -799,13 +848,15 @@ rule "Create parameter for 'do login' operation inside login handler[type=domain
 		instance : DomainIterator ( eContainer == scope )
 		setWire : SetWire ( from == login_handler, to == instance, name == "set" )
 
-		operation : CompositeOperation ( eContainer == login_session, name == "do login", overridden == false )
+		operation : CompositeOperation ( eContainer == login_session, name == "do login" )
 		split : SplitNode ( eContainer == operation )
 		join : JoinNode ( eContainer == operation )
 		
 		target : Property ( eContainer == scope, eval(functions.loginAttributeMatches(target, attribute)))
 
 		not ( Parameter ( eContainer == operation, name == attribute.name ))
+		
+		eval ( handler.veto( operation ))
 
 	then
 		Parameter param = handler.generatedParameter(operation, operation);
@@ -853,9 +904,11 @@ rule "Create contents of 'do login' operation [type=user]"
 		
 		ex : Condition ( instance.empty == ex )
 				
-		loginOperation : CompositeOperation ( eContainer == login_session, name == "do login", overridden == false )
+		loginOperation : CompositeOperation ( eContainer == login_session, name == "do login" )
 
 		not ( StartNode ( eContainer == loginOperation ))
+		
+		eval ( handler.veto( loginOperation ))
 
 	then
 		StartNode start = handler.generatedStartNode(loginOperation, loginOperation);
@@ -924,13 +977,15 @@ rule "Create parameter for 'do login' operation inside login handler[type=user]"
 		attribute : DomainAttribute ( eContainer == role )
 		paramWire : ParameterEdge( from == role, to == login_handler )
 		
-		operation : CompositeOperation ( eContainer == login_session, name == "do login", overridden == false )
+		operation : CompositeOperation ( eContainer == login_session, name == "do login" )
 		split : SplitNode ( eContainer == operation )
 		join : JoinNode ( eContainer == operation )
 		
 		target : Property ( eContainer == scope, eval(functions.loginAttributeMatches(target, attribute)))
 
 		not ( Parameter ( eContainer == operation, name == attribute.name ))
+		
+		eval ( handler.veto( operation ))
 
 	then
 		Parameter param = handler.generatedParameter(operation, operation);
@@ -971,7 +1026,7 @@ rule "Connect successful login operation ('success') to navigate to final 'login
 	when
 		container : InternetApplication( )
 		scope : Session( eContainer == container ) 
-		login_handler : LoginHandler( eContainer == scope, overridden == false )
+		login_handler : LoginHandler( eContainer == scope )
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		login : Frame ( )
 		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
@@ -981,7 +1036,9 @@ rule "Connect successful login operation ('success') to navigate to final 'login
 		login_wire : ActionEdge( from == login_handler, to == login_target, name == "success" )
 
 		not (ActionEdge(from == login_operation, to == login_target))
-
+		
+		eval ( handler.veto( login_handler ))
+			
 	then
 		ActionEdge wire = handler.generatedActionEdge(login_handler, scope, login_operation, login_target);
 		handler.setName(wire, "navigate on successful login");
@@ -993,13 +1050,15 @@ rule "Connect failed login operation ('fail') to navigate back to 'login'"
 	when
 		container : InternetApplication( )
 		scope : Session( eContainer == container ) 
-		login_handler : LoginHandler( eContainer == scope, overridden == false )
+		login_handler : LoginHandler( eContainer == scope )
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		login : Frame ( )
 		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
 		login_operation : CompositeOperation( eContainer == login_session, name == "do login" )		
 
 		not (ActionEdge(from == login_operation, to == login, name == "fail"))
+		
+		eval ( handler.veto( login_handler ))
 			
 	then
 		ActionEdge wire = handler.generatedActionEdge(login_handler, scope, login_operation, login);
@@ -1012,10 +1071,12 @@ rule "Create 'do logout' operation in session"
 	when
 		container : InternetApplication( )
 		scope : Session ( )
-		login_handler : LoginHandler( eContainer == scope, overridden == false )
+		login_handler : LoginHandler( eContainer == scope )
 		logout : Frame ( eContainer == scope, name == "logout" )
 	
 		not (CompositeOperation ( eContainer == scope, name == "do logout" ))
+		
+		eval ( handler.veto( login_handler ))
 
 	then
 		CompositeOperation operation = handler.generatedCompositeOperation(login_handler, scope);
@@ -1028,7 +1089,7 @@ rule "Connect 'access' operation for logout page to 'do logout' operation"
 	when
 		container : InternetApplication( )
 		scope : Session ( )
-		login_handler : LoginHandler( eContainer == scope, overridden == false )
+		login_handler : LoginHandler( eContainer == scope )
 		
 		logout : Frame ( )
 		wire : ActionEdge ( from == login_handler, to == logout, name == "logout" )
@@ -1040,6 +1101,8 @@ rule "Connect 'access' operation for logout page to 'do logout' operation"
 		# add it to the end of the access operation chain
 		
 		not (ActionEdge( from == access, to == logout_operation ))
+		
+		eval ( handler.veto( login_handler ))
 	
 	then 
 		ActionEdge run = handler.generatedActionEdge(login_handler, logout, access, logout_operation);
@@ -1052,7 +1115,7 @@ rule "Connect new navigate wire from logout to logout destination"
 	when
 		container : InternetApplication( )
 		scope : Session ( )
-		login_handler : LoginHandler( eContainer == scope, overridden == false )
+		login_handler : LoginHandler( eContainer == scope )
 		logout : Frame ( eContainer == scope, name == "logout" )
 		logout_operation : CompositeOperation ( eContainer == scope, name == "do logout" )
 		# add it at the end of the operation chain (final_operation may == logout_operation)
@@ -1063,6 +1126,8 @@ rule "Connect new navigate wire from logout to logout destination"
 		
 		not (ActionEdge( from == final_operation, to == destination ))
 		
+		eval ( handler.veto( login_handler ))
+	
 	then
 		ActionEdge wire = handler.generatedActionEdge(login_handler, scope, final_operation, destination);
 		handler.setName(wire, "navigate on successful logout");
@@ -1073,7 +1138,7 @@ end
 rule "Create contents of 'do logout' operation [type=secret_key]"
 	when
 		scope : Session( )
-		o : CompositeOperation( name == "do logout", eContainer == scope, overridden == false )
+		o : CompositeOperation( name == "do logout", eContainer == scope )
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
 
 		value : Property( )
@@ -1081,6 +1146,8 @@ rule "Create contents of 'do logout' operation [type=secret_key]"
 		
 		not (StartNode( eContainer == o))
 		not (FinishNode( eContainer == o))
+		
+		eval ( handler.veto( o ))
 	
 	then
 		# create a 'null' value
@@ -1127,11 +1194,13 @@ end
 rule "Create contents (initial) of 'do logout' operation [type=object or user]"
 	when
 		scope : Session( )
-		o : CompositeOperation( name == "do logout", eContainer == scope, overridden == false )
+		o : CompositeOperation( name == "do logout", eContainer == scope )
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.DOMAIN_OBJECT || type == LoginHandlerTypes.USER )
 
 		not (StartNode( eContainer == o))
 		not (FinishNode( eContainer == o))
+		
+		eval ( handler.veto( o ))
 	
 	then
 		# create a 'null' value
@@ -1169,7 +1238,7 @@ end
 rule "Create contents (specific keys) of 'do logout' operation [type=object]"
 	when
 		session : Session( )
-		o : CompositeOperation( name == "do logout", eContainer == session, overridden == false )
+		o : CompositeOperation( name == "do logout", eContainer == session )
 		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT )
 
 		attribute : DomainAttribute ( )
@@ -1183,7 +1252,9 @@ rule "Create contents (specific keys) of 'do logout' operation [type=object]"
 		join : JoinNode ( eContainer == o )
 			
 		not (DataFlowEdge ( eContainer == o, from == key ))
-
+		
+		eval ( handler.veto( o ))
+	
 	then
 	
 		# set
@@ -1216,7 +1287,7 @@ end
 rule "Create contents (specific keys) of 'do logout' operation [type=user]"
 	when
 		session : Session( )
-		o : CompositeOperation( name == "do logout", eContainer == session, overridden == false )
+		o : CompositeOperation( name == "do logout", eContainer == session )
 		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.USER )
 
 		role : Role ( )
@@ -1231,7 +1302,9 @@ rule "Create contents (specific keys) of 'do logout' operation [type=user]"
 		join : JoinNode ( eContainer == o )
 			
 		not (DataFlowEdge ( eContainer == o, from == key ))
-
+		
+		eval ( handler.veto( o ))
+	
 	then
 	
 		# set
@@ -1264,10 +1337,12 @@ end
 rule "Create default login successful page"
 	when
 		scope : Session ( )
-		login_handler : LoginHandler( eContainer == scope, overridden == false )
+		login_handler : LoginHandler( eContainer == scope )
 		
 		not ( Frame ( eContainer == scope, name == "Login Successful" ) )
 		not ( wire : ActionEdge (from == login_handler, name == "success" ))
+		
+		eval ( handler.veto( login_handler ))
 
 	then
 		Frame page = handler.generatedFrame(login_handler, scope);
@@ -1279,11 +1354,13 @@ end
 rule "Connect default login successful page to LoginHandler"
 	when
 		scope : Session ( )
-		login_handler : LoginHandler( eContainer == scope, overridden == false )
+		login_handler : LoginHandler( eContainer == scope )
 		
 		success : Frame ( eContainer == scope, name == "Login Successful" )
 		
 		not ( wire : ActionEdge (from == login_handler, name == "success" ))
+		
+		eval ( handler.veto( login_handler ))
 
 	then
 		ActionEdge wire = handler.generatedActionEdge(login_handler, login_handler, login_handler, success);
@@ -1296,10 +1373,12 @@ rule "Create default logout successful page"
 	when
 		container : InternetApplication( )
 		scope : Session ( )
-		login_handler : LoginHandler( eContainer == scope, overridden == false )
+		login_handler : LoginHandler( eContainer == scope )
 		
 		not ( wire : ActionEdge (from == login_handler, name == "logout" ))
 		not ( Frame ( eContainer == container, name == "Logout Successful" ) )
+				
+		eval ( handler.veto( login_handler ))
 
 	then
 		Frame page = handler.generatedFrame(login_handler, container);
@@ -1312,11 +1391,13 @@ rule "Connect default logout successful page to LoginHandler"
 	when
 		container : InternetApplication( )
 		scope : Session ( )
-		login_handler : LoginHandler( eContainer == scope, overridden == false )
+		login_handler : LoginHandler( eContainer == scope )
 		
 		logout : Frame ( eContainer == container, name == "Logout Successful" )
 		
 		not ( wire : ActionEdge (from == login_handler, name == "logout" ))
+		
+		eval ( handler.veto( login_handler ))
 
 	then
 		ActionEdge wire = handler.generatedActionEdge(login_handler, login_handler, login_handler, logout);
@@ -1342,7 +1423,6 @@ rule "Update query parameters for LoginHandler [object]"
 		exists ( DomainAttribute ( eContainer == dobj ))
 		
 		login_handler : LoginHandler( 
-			overridden == false,
 			eContainer == scope, 
 			type == LoginHandlerTypes.DOMAIN_OBJECT,
 			eval(functions.hasIncomingParameterEdgesFrom(login_handler, dobj)) 
@@ -1350,7 +1430,9 @@ rule "Update query parameters for LoginHandler [object]"
 		
 		instance : DomainIterator ( query == null )
 		setWire : SetWire ( from == login_handler, to == instance )
-
+		
+		eval ( handler.veto( login_handler ))
+		
 	then
 		// find all the attributes as incoming parameter wires for the
 		// given DomainObject
@@ -1366,7 +1448,6 @@ rule "Create Query from a DomainAttribute [user]"
 		role : Role ( )
 
 		login_handler : LoginHandler( 
-			overridden == false,
 			eContainer == scope, 
 			type == LoginHandlerTypes.USER,
 			eval(functions.hasIncomingParameterEdgesFrom(login_handler, role)) 
@@ -1377,6 +1458,8 @@ rule "Create Query from a DomainAttribute [user]"
 
 		instance : DomainIterator ( query == null )
 		setWire : SetWire ( from == login_handler, to == instance )
+			
+		eval ( handler.veto( login_handler ))
 		
 	then
 		// find all the attributes as incoming parameter wires for the
@@ -1394,7 +1477,6 @@ rule "Update Query from a DomainAttribute [user]"
 		dobj : Role ( )
 		
 		login_handler : LoginHandler( 
-			overridden == false,
 			eContainer == scope, 
 			type == LoginHandlerTypes.USER,
 			eval(functions.hasIncomingParameterEdgesFrom(login_handler, dobj)) 
@@ -1408,6 +1490,8 @@ rule "Update Query from a DomainAttribute [user]"
 		
 		eval ( !functions.getUserQueryString(dobj).equals(instance.getQuery()))
 		
+		eval ( handler.veto( login_handler ))
+		
 	then
 		String q = functions.getUserQueryString(dobj);
 		handler.setQuery(instance, q);
@@ -1420,7 +1504,6 @@ rule "Create Query from a DomainSchema [user]"
 		role : Role ( )
 
 		login_handler : LoginHandler( 
-			overridden == false,
 			eContainer == scope, 
 			type == LoginHandlerTypes.USER
 		)
@@ -1433,6 +1516,8 @@ rule "Create Query from a DomainSchema [user]"
 
 		instance : DomainIterator ( query == null )
 		setWire : SetWire ( from == login_handler, to == instance )
+			
+		eval ( handler.veto( login_handler ))
 		
 	then
 		// find all the attributes as incoming parameter wires for the
@@ -1450,7 +1535,6 @@ rule "Update Query from a DomainSchema [user]"
 		dobj : Role ( )
 		
 		login_handler : LoginHandler( 
-			overridden == false,
 			eContainer == scope, 
 			type == LoginHandlerTypes.USER
 		)
@@ -1465,7 +1549,9 @@ rule "Update Query from a DomainSchema [user]"
 		setWire : SetWire ( from == login_handler, to == instance )
 		
 		eval ( !functions.getUserQueryString(dobj).equals(instance.getQuery()))
-	
+		
+		eval ( handler.veto( login_handler ))
+		
 	then
 		String q = functions.getUserQueryString(dobj);
 		handler.setQuery(instance, q);
@@ -1475,13 +1561,15 @@ end
 rule "Create 'key attribute' property for LoginHandler[type = object]s"
 	when
 		session : Session( ) 
-		login_handler : LoginHandler( overridden == false, eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT )
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT )
 		
 		attribute : DomainAttribute ( )
 		paramWire : ParameterEdge ( from == attribute, to == login_handler )
 		
 		not ( p : Property ( eContainer == session, 
 			eval(functions.loginAttributeMatches(p, attribute) ) ) )
+		
+		eval ( handler.veto( login_handler ))
 				
 	then
 		Property key = handler.generatedProperty(login_handler, session);
@@ -1495,7 +1583,7 @@ end
 rule "Create 'key attribute' property for LoginHandler[type = user]s"
 	when
 		session : Session( ) 
-		login_handler : LoginHandler( overridden == false, eContainer == session, type == LoginHandlerTypes.USER )
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.USER )
 		
 		role : Role ( )
 		attribute : DomainAttribute ( eContainer == role, eval(functions.notPrimaryKey(attribute)) )
@@ -1503,6 +1591,8 @@ rule "Create 'key attribute' property for LoginHandler[type = user]s"
 		
 		not ( p : Property ( eContainer == session, 
 			eval(functions.loginAttributeMatches(p, attribute) ) ) )
+		
+		eval ( handler.veto( login_handler ))
 				
 	then
 		Property key = handler.generatedProperty(login_handler, session);
@@ -1516,7 +1606,7 @@ end
 rule "Connect key properties to LoginHandler for LoginHandler[type = object]"
 	when
 		session : Session( ) 
-		login_handler : LoginHandler( overridden == false, eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT )
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT )
 		
 		object : DomainSchema ( )
 		attribute : DomainAttribute ( eContainer == object )
@@ -1531,7 +1621,9 @@ rule "Connect key properties to LoginHandler for LoginHandler[type = object]"
 			eval(functions.loginAttributeMatches(key, attribute) ) )
 			
 		not ( SetWire ( from == login_handler, to == key ))
-
+		
+		eval ( handler.veto( login_handler ))
+		
 	then
 		SetWire wire = handler.generatedSetWire(login_handler, session, login_handler, key);
 		handler.setName(wire, "set");
@@ -1542,7 +1634,7 @@ end
 rule "Connect key properties to SelectWire for LoginHandler[type = object]"
 	when
 		session : Session( ) 
-		login_handler : LoginHandler( overridden == false, eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT )
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT )
 		
 		object : DomainSchema ( )
 		attribute : DomainAttribute ( eContainer == object )
@@ -1557,7 +1649,9 @@ rule "Connect key properties to SelectWire for LoginHandler[type = object]"
 			eval(functions.loginAttributeMatches(key, attribute) ) )
 			
 		not ( ParameterEdge ( from == key, to == instance ))
-
+		
+		eval ( handler.veto( login_handler ))
+		
 	then
 		ParameterEdge wire = handler.generatedParameterEdge(login_handler, session, key, instance);
 		handler.setName(wire, attribute.getName());
@@ -1568,7 +1662,7 @@ end
 rule "Connect key properties to SelectWire for LoginHandler[type = user]"
 	when
 		session : Session( ) 
-		login_handler : LoginHandler( overridden == false, eContainer == session, type == LoginHandlerTypes.USER )
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.USER )
 		
 		role : Role ( )
 		attribute : DomainAttribute ( eContainer == role )
@@ -1584,6 +1678,8 @@ rule "Connect key properties to SelectWire for LoginHandler[type = user]"
 			
 		not ( ParameterEdge ( from == key, to == instance ))
 		
+		eval ( handler.veto( login_handler ))
+		
 	then
 		ParameterEdge wire = handler.generatedParameterEdge(login_handler, session, key, instance);
 		handler.setName(wire, attribute.getName());
@@ -1594,10 +1690,12 @@ end
 rule "Create 'check instance' operation for LoginHandler[type = object or user]"
 	when
 		session : Session( ) 
-		login_handler : LoginHandler( overridden == false, eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT || type == LoginHandlerTypes.USER )
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT || type == LoginHandlerTypes.USER )
 		
 		not (Operation( eContainer == session, name == "check instance") )
-
+		
+		eval ( handler.veto( login_handler ))
+					
 	then
 		CompositeOperation op = handler.generatedCompositeOperation( login_handler, session );
 		handler.setName(op, "check instance");
@@ -1609,9 +1707,11 @@ end
 rule "Create 'current instance' for LoginHandler[type=object]"
 	when
 		session : Session( ) 
-		login_handler : LoginHandler( overridden == false, eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT )
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT )
 		
 		not (DomainIterator ( eContainer == session ))
+		
+		eval ( handler.veto( login_handler ))
 		
 	then
 		DomainIterator instance = handler.generatedDomainIterator( login_handler, session );
@@ -1623,11 +1723,13 @@ end
 rule "Create 'current instance' for LoginHandler[type=object] - connect SetWire"
 	when
 		session : Session( ) 
-		login_handler : LoginHandler( overridden == false, eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT )
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT )
 		
 		instance : DomainIterator ( eContainer == session, name == "current instance" )
 		
 		not (set : SetWire ( eval (functions.connectsSet(set, login_handler, instance )) ) )
+		
+		eval ( handler.veto( login_handler ))
 		
 	then	
 		SetWire setWire = handler.generatedSetWire(login_handler, session, login_handler, instance);
@@ -1639,9 +1741,11 @@ end
 rule "Create 'current instance' for LoginHandler[type=user]"
 	when
 		session : Session( ) 
-		login_handler : LoginHandler( overridden == false, eContainer == session, type == LoginHandlerTypes.USER )
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.USER )
 		
 		not (DomainIterator ( eContainer == session ))
+		
+		eval ( handler.veto( login_handler ))
 		
 	then
 		DomainIterator instance = handler.generatedDomainIterator( login_handler, session );
@@ -1653,12 +1757,14 @@ end
 rule "Create 'current instance' for LoginHandler[type=user] - connect SetWire"
 	when
 		session : Session( ) 
-		login_handler : LoginHandler( overridden == false, eContainer == session, type == LoginHandlerTypes.USER )
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.USER )
 		
 		instance : DomainIterator ( eContainer == session, name == "current instance" )
 		
 		not (set : SetWire ( eval (functions.connectsSet(set, login_handler, instance )) ) )
-
+		
+		eval ( handler.veto( login_handler ))
+		
 	then
 		// connect with SetWire
 		SetWire setWire = handler.generatedSetWire(login_handler, session, login_handler, instance);
@@ -1672,7 +1778,7 @@ rule "Connect a default DomainSource for LoginHandlers that do not specify a Sel
 		root : InternetApplication ( )
 	
 		session : Session( ) 
-		login_handler : LoginHandler( overridden == false, eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT || type == LoginHandlerTypes.USER )
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT || type == LoginHandlerTypes.USER )
 		
 		iterator : DomainIterator ( eContainer == session )
 		set : SetWire ( from == login_handler, to == iterator )
@@ -1695,6 +1801,8 @@ rule "Connect a default DomainSource for LoginHandlers that do not specify a Sel
 
 		# and this source isn't being used for anything else
 		not ( s2 : SelectEdge ( to == source ) )
+		
+		eval ( handler.veto( login_handler ))
 
 	then
 		SelectEdge select = handler.generatedSelectEdge(login_handler, source, iterator, source);
@@ -1707,7 +1815,7 @@ rule "Connect a default DomainSource for LoginHandlers that do not specify a Sel
 		root : InternetApplication ( )
 	
 		session : Session( ) 
-		login_handler : LoginHandler( overridden == false, eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT || type == LoginHandlerTypes.USER )
+		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT || type == LoginHandlerTypes.USER )
 		
 		iterator : DomainIterator ( eContainer == session )
 		set : SetWire ( from == login_handler, to == iterator )
@@ -1732,6 +1840,8 @@ rule "Connect a default DomainSource for LoginHandlers that do not specify a Sel
 		not (
 			ach : AccessControlHandler ( eContainer == session )
 		)
+		
+		eval ( handler.veto( login_handler ))
 
 	then
 		SelectEdge select = handler.generatedSelectEdge(login_handler, source, iterator, source);
@@ -1753,7 +1863,7 @@ rule "Connect the DomainSource for the AccessControlHandler to the Current Insta
 		session : Session( ) 
 		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT || type == LoginHandlerTypes.USER )
 		
-		ach : AccessControlHandler ( overridden == false, eContainer == session )
+		ach : AccessControlHandler ( eContainer == session )
 		
 		expected_schema : DomainSchema ( )
 		requires : RequiresEdge ( from == ach, to == expected_schema )
@@ -1776,6 +1886,8 @@ rule "Connect the DomainSource for the AccessControlHandler to the Current Insta
 		not ( selectEdge : SelectEdge ( ) and 
 			eval ( functions.connectsSelect( selectEdge, iterator, source ))
 		) 
+		
+		eval ( handler.veto( ach ))
 
 	then
 		SelectEdge select = handler.generatedSelectEdge(ach, source, iterator, source);
@@ -1790,7 +1902,7 @@ rule "Connect the DomainSource for the AccessControlHandler to the Current Insta
 		session : Session( ) 
 		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT || type == LoginHandlerTypes.USER )
 		
-		ach : AccessControlHandler ( overridden == false, eContainer == session )
+		ach : AccessControlHandler ( eContainer == session )
 		
 		expected_schema : DomainSchema ( )
 		requires : RequiresEdge ( from == ach, to == expected_schema )
@@ -1811,6 +1923,8 @@ rule "Connect the DomainSource for the AccessControlHandler to the Current Insta
 		not ( selectEdge : SelectEdge ( ) and 
 			eval ( functions.connectsSelect( selectEdge, iterator, source ))
 		) 
+		
+		eval ( handler.veto( ach ))
 
 	then
 		SelectEdge select = handler.generatedSelectEdge(ach, source, iterator, source);
@@ -1825,7 +1939,7 @@ rule "Connect the DomainSource for the AccessControlHandler to the Current Insta
 		session : Session( ) 
 		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT || type == LoginHandlerTypes.USER )
 		
-		ach : AccessControlHandler ( overridden == false, eContainer == session )
+		ach : AccessControlHandler ( eContainer == session )
 		
 		# the ACH requires at least one permission
 		exists (
@@ -1856,6 +1970,9 @@ rule "Connect the DomainSource for the AccessControlHandler to the Current Insta
 		not ( selectEdge : SelectEdge ( ) and 
 			eval ( functions.connectsSelect( selectEdge, iterator, source ))
 		) 
+		
+		
+		eval ( handler.veto( ach ))
 
 	then
 		SelectEdge select = handler.generatedSelectEdge(ach, source, iterator, source);

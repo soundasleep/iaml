@@ -38,13 +38,15 @@ rule "Create QueryParameter for target container of DetailWire"
 		target : Frame ( )
 		instanceSet : SetWire ( eval(functions.connectsSet(instanceSet, instance, source )) )
 
-		detail : DetailWire ( overridden == false )
+		detail : DetailWire ( )
 		eval ( functions.connectsDetail(detail, source, target ))
 		
 		pk : DomainAttribute ( eContainer == schema, primaryKey == true ) 
 
 		not ( queryPk : QueryParameter ( eContainer == target, name == pk.name ) )
-
+	
+		eval ( handler.veto( detail ))
+	
 	then
 		QueryParameter qp = handler.generatedQueryParameter(detail, target);
 		handler.setName(qp, pk.getName());
@@ -75,14 +77,16 @@ rule "Create a relevant DomainIterator, with SelectWire, in the destination for 
 		target : Frame ( )
 		instanceSet : SetWire ( eval(functions.connectsSet( instanceSet, instance, source ) ) )
 		
-		detail : DetailWire ( overridden == false )
+		detail : DetailWire ( )
 		eval ( functions.connectsDetail(detail, source, target ))
 		
 		queryPk : QueryParameter ( eContainer == target, name == pk.name )
 		
 		not ( DomainIterator ( eContainer == target,
 			name != null && eval( name.equals("Current " + schema.getName() + " instance") ) ))
-
+	
+		eval ( handler.veto( detail ))
+	
 	then
 		DomainIterator i2 = handler.generatedDomainIterator(detail, target);
 		handler.setName(i2, "Current " + schema.getName() + " instance");
@@ -118,13 +122,15 @@ rule "Create a View Instance Form for target of DetailWire"
 		target : Frame ( )
 		instanceSet : SetWire ( eval(functions.connectsSet( instanceSet, instance, source ) ) )
 		
-		detail : DetailWire ( overridden == false )
+		detail : DetailWire ( )
 		eval ( functions.connectsDetail(detail, source, target ))
 		
 		i2 : DomainIterator ( eContainer == target,
 			name != null && eval( name.equals("Current " + schema.getName() + " instance") ) )
 
 		not ( VisibleThing ( eContainer == target, eval( ("View " + schema.getName()).equals(name) ) ) )
+	
+		eval ( handler.veto( detail ))
 	
 	then
 		InputForm form = handler.generatedInputForm(detail, target);
@@ -147,7 +153,7 @@ rule "Connect View Instance Form with a SetWire to the DomainIterator"
 		source : VisibleThing ( eContainer == container )
 		target : Frame ( )
 		
-		detail : DetailWire ( overridden == false )
+		detail : DetailWire ( )
 		eval ( functions.connectsDetail(detail, source, target ))
 		
 		i2 : DomainIterator ( eContainer == target,
@@ -156,6 +162,8 @@ rule "Connect View Instance Form with a SetWire to the DomainIterator"
 		form : VisibleThing ( eContainer == target, eval( ("View " + schema.getName()).equals(name) ) )
 		
 		not ( set : SetWire ( eval( functions.connectsSet( set, i2, form ) ) ) )
+	
+		eval ( handler.veto( detail ))
 	
 	then
 		SetWire set = handler.generatedSetWire(detail, target, i2, form);
@@ -184,10 +192,12 @@ rule "Create a Link Button for the source of a DetailWire"
 		source : VisibleThing ( eContainer == container )
 		target : Frame ( )
 		
-		detail : DetailWire ( overridden == false )
+		detail : DetailWire ( )
 		eval ( functions.connectsDetail(detail, source, target ))
 		
 		not ( button : VisibleThing ( eContainer == source, name == "link" )) 
+	
+		eval ( handler.veto( detail ))
 	
 	then
 		Button link = handler.generatedButton(detail, source);
@@ -210,14 +220,16 @@ rule "Create a Link Button for the source of a DetailWire: Connect ActionEdge"
 		source : VisibleThing ( eContainer == container )
 		target : Frame ( )
 		
-		detail : DetailWire ( overridden == false )
+		detail : DetailWire ( )
 		eval ( functions.connectsDetail(detail, source, target ))
 		
 		button : VisibleThing ( eContainer == source, name == "link" )
 		onClick : EventTrigger ( button.onClick == onClick )
 		
 		not ( ActionEdge ( from == onClick, to == target )) 
-
+	
+		eval ( handler.veto( detail ))
+	
 	then
 		ActionEdge nav = handler.generatedActionEdge(detail, source, onClick, target);
 		handler.setName(nav, "View detail");
@@ -241,7 +253,7 @@ rule "Create a Link Button for the source of a DetailWire (not IteratorList): Ad
 		not ( IteratorList ( this == source )) 
 		target : Frame ( )
 		
-		detail : DetailWire ( overridden == false )
+		detail : DetailWire ( )
 		eval ( functions.connectsDetail(detail, source, target ))
 		
 		button : VisibleThing ( eContainer == source, name == "link" )
@@ -255,6 +267,8 @@ rule "Create a Link Button for the source of a DetailWire (not IteratorList): Ad
 		pk : Property ( pkInstance.fieldValue == pk ) 
 		
 		not ( ParameterEdge ( from == pk, to == nav ))
+	
+		eval ( handler.veto( detail ))
 	
 	then
 		ParameterEdge param = handler.generatedParameterEdge(detail, source, pk, nav);
@@ -277,7 +291,7 @@ rule "Create a Link Button for the source of a DetailWire (IteratorList): Add Pa
 		source : IteratorList ( eContainer == container )
 		target : Frame ( )
 		
-		detail : DetailWire ( overridden == false )
+		detail : DetailWire ( )
 		eval ( functions.connectsDetail(detail, source, target ))
 		
 		button : VisibleThing ( eContainer == source, name == "link" )
@@ -295,6 +309,8 @@ rule "Create a Link Button for the source of a DetailWire (IteratorList): Add Pa
 		pk : Property ( hidden.fieldValue == pk ) 
 		
 		not ( ParameterEdge ( from == pk, to == nav ))
+	
+		eval ( handler.veto( detail ))
 	
 	then
 		ParameterEdge param = handler.generatedParameterEdge(detail, source, pk, nav);
@@ -324,13 +340,15 @@ rule "The view one DomainIterator is connected to the same DomainSource as the v
 		target : Frame ( )
 		instanceSet : SetWire ( eval(functions.connectsSet( instanceSet, instance, source ) ) )
 		
-		detail : DetailWire ( overridden == false )
+		detail : DetailWire ( )
 		eval ( functions.connectsDetail(detail, source, target ))
 		
 		iterator2 : DomainIterator ( eContainer == target,
 			name != null && eval( name.equals("Current " + schema.getName() + " instance") ) )
 		
 		not ( SelectEdge ( from == iterator2 ))		
+	
+		eval ( handler.veto( detail ))
 	
 	then
 		SelectEdge select = handler.generatedSelectEdge(detail, iterator2, iterator2, domainSource);

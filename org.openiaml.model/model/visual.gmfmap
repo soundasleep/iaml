@@ -991,6 +991,43 @@
           href="iaml.gmfgraph#PrimitiveCondition"/>
     </ownedChild>
   </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//VisibleThing/children"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//visual/Hidden"/>
+      <domainSpecialization
+          body="self.oclIsTypeOf( Hidden )"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#HiddenName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#HiddenStereotype"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#HiddenParentName"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#HiddenType"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="visual.gmftool#//@palette/@tools.1/@tools.6"/>
+      <diagramNode
+          href="iaml.gmfgraph#Hidden"/>
+    </ownedChild>
+  </nodes>
   <links>
     <domainMetaElement
         href="iaml.ecore#//wires/SyncWire"/>

@@ -197,6 +197,19 @@
             path="icons/full/obj32/MapPoint.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Hidden"
+          description="Create new Hidden">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/Hidden.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/Hidden.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
     </tools>
     <tools
         xsi:type="gmftool:ToolGroup"

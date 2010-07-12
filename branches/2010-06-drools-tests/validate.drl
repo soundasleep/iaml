@@ -27,8 +27,10 @@ global DroolsHelperFunctions functions;
  */
 rule "Create 'Warning' Label for InputTextFields"
 	when
-		tf : InputTextField( overridden == false )
+		tf : InputTextField( )
 		not ( warning : Label ( name == "Warning", eContainer == tf ))
+					
+		eval ( handler.veto( tf ))
 	
 	then
 		Label warning = handler.generatedLabel(tf, tf);
@@ -44,12 +46,14 @@ rule "When two TextFields of different types are under a SyncWire, add a 'valida
 		e2 : InputTextField( )
 		e2_property : Property ( e2.fieldValue == e2_property )
 		eval ( e1 != e2 )
-		sw : SyncWire ( overridden == false )
+		sw : SyncWire ( )
 		eval ( functions.connects(sw, e1, e2) )
 		
 		eval ( e1.getType() != e2.getType() )
 		
 		not ( op : Operation ( name == "validate", eContainer == e1, eval(functions.generatedBy(sw, op)) ))
+						
+		eval ( handler.veto( sw ))
 		
 	then
 		CompositeOperation op = handler.generatedCompositeOperation(sw, e1);
@@ -65,7 +69,7 @@ rule "When two TextFields of different types are under a SyncWire, call the 'val
 		e2 : InputTextField( )
 		e2_property : Property ( e2.fieldValue == e2_property )
 		eval ( e1 != e2 )
-		sw : SyncWire ( overridden == false )
+		sw : SyncWire ( )
 		eval ( functions.connects(sw, e1, e2) )
 		
 		eval ( e1.getType() != e2.getType() )
@@ -75,6 +79,8 @@ rule "When two TextFields of different types are under a SyncWire, call the 'val
 		op : Operation ( name == "validate", eContainer == e1, eval(functions.generatedBy(sw, op)) )
 		
 		not ( run : ActionEdge ( from == event, to == op ) )
+						
+		eval ( handler.veto( sw ))
 		
 	then
 		ActionEdge run = handler.generatedActionEdge(sw, e1, event, op);
@@ -95,7 +101,7 @@ rule "Create contents of 'validate' operation"
 		
 		eval ( e1.getType() != e2.getType() )
 		
-		o : CompositeOperation ( name == "validate", eContainer == e1, eval(functions.generatedBy(sw, o)), overridden == false )
+		o : CompositeOperation ( name == "validate", eContainer == e1, eval(functions.generatedBy(sw, o)) )
 
 		warning : Label ( name == "Warning", eContainer == e1 )
 
@@ -105,6 +111,8 @@ rule "Create contents of 'validate' operation"
 		upd : Operation ( name == "update", eContainer == warning )
 		
 		not ( start : StartNode ( eContainer == o ))
+				
+		eval ( handler.veto( o ))
 
 	then
 	

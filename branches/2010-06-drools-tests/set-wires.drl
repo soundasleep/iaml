@@ -21,7 +21,7 @@ global DroolsHelperFunctions functions;
 rule "Set wires between objects should create set wires between all elements inside each object that matches [set]"
 	when
 		# source : SetWire(, eval(functions.connectsSet(source, p1, p2)) )
-		source : SetWire( overriddenNames not contains "set", overridden == false )
+		source : SetWire( overriddenNames not contains "set" )
 		p1 : CanBeSynced( )
 		p2 : CanBeSynced( )
 		eval( p1 != p2 )
@@ -31,6 +31,8 @@ rule "Set wires between objects should create set wires between all elements ins
 		e2 : CanBeSynced( eContainer == p2, eval(functions.nameMatches(e1, e2)) )
 	
 		not (sw : SetWire( eContainer == source, eval(functions.connectsSet( sw, e1, e2)) ))
+				
+		eval ( handler.veto( source ))
 		
 	then
 		SetWire sw = handler.generatedSetWire(source, source, e1, e2);
@@ -43,7 +45,7 @@ end
 rule "Set wires from DomainSchema to CanBeSynced"
 	when
 		# source : SyncWire(, eval(connects(source, p1, p2)) )
-		source : SetWire( overriddenNames not contains "set", overridden == false )
+		source : SetWire( overriddenNames not contains "set" )
 		
 		# we put in these to prevent multiple wires being generated for two connects
 		domainSource : DomainSource ( )
@@ -62,6 +64,8 @@ rule "Set wires from DomainSchema to CanBeSynced"
 		eval(functions.nameMatches(e1, e2))
 	
 		not (sw : SetWire( eContainer == source, eval(functions.connectsSet( sw, e1, e2)) ))
+		
+		eval ( handler.veto( source ))
 						
 	then
 		SyncWire sw = handler.generatedSyncWire(source, source, e1, e2);
@@ -73,7 +77,7 @@ end
 
 rule "Run instance wire from edit to update (onChange)"
 	when
-		sw : SetWire( overriddenNames not contains "run", overridden == false )
+		sw : SetWire( overriddenNames not contains "run" )
 		source : Changeable( )
 		target : ContainsOperations( )
 		eval(functions.connectsSet(sw, source, target))
@@ -82,6 +86,8 @@ rule "Run instance wire from edit to update (onChange)"
 		operation : Operation( eContainer == target, name=="update" )
 		
 		not (ActionEdge( eContainer == sw, from == event, to == operation ))
+				
+		eval ( handler.veto( sw ))
 		
 	then
 		ActionEdge rw = handler.generatedActionEdge(sw, sw, event, operation);
@@ -100,7 +106,7 @@ end
  */
 rule "Run instance wire from edit to Property update (onChange)"
 	when
-		sw : SetWire( overriddenNames not contains "run", overridden == false )
+		sw : SetWire( overriddenNames not contains "run" )
 		source : Changeable( )
 		
 		targetContainer : ContainsOperations ( )
@@ -113,6 +119,8 @@ rule "Run instance wire from edit to Property update (onChange)"
 			eval( ("set property " + target.getName()).equals(operation.getName()) ) )
 		
 		not (ActionEdge( eContainer == sw, from == event, to == operation ))
+				
+		eval ( handler.veto( sw ))
 		
 	then
 		ActionEdge rw = handler.generatedActionEdge(sw, sw, event, operation);
@@ -123,7 +131,7 @@ end
 
 rule "Run instance wire from edit to update, instant SetWire (onInput)"
 	when
-		sw : SetWire( executeOnInput == true, overriddenNames not contains "run", overridden == false ) 
+		sw : SetWire( executeOnInput == true, overriddenNames not contains "run" ) 
 		source : InputTextField( )
 		target : ContainsOperations( )
 		eval(functions.connectsSet(sw, source, target))
@@ -132,7 +140,9 @@ rule "Run instance wire from edit to update, instant SetWire (onInput)"
 		operation : Operation( eContainer == target, name=="update" )
 		
 		not (ActionEdge( eContainer == sw, from == event, to == operation, name == "run" ))
-
+				
+		eval ( handler.veto( sw ))
+		
 	then
 		ActionEdge rw = handler.generatedActionEdge(sw, sw, event, operation);
 		handler.setName(rw, "run");
@@ -143,7 +153,7 @@ end
 # Ideally, these two commands would be joined together into one
 rule "Connect parameter wire to: run instance wire from source.edit to target.update [set]"
 	when
-		sw : SetWire( overriddenNames not contains "[set] run instance parameter (source.edit)", overridden == false )
+		sw : SetWire( overriddenNames not contains "[set] run instance parameter (source.edit)" )
 		source : CanBeSynced( )
 		target : CanBeSynced( )
 		eval(functions.connectsSet(sw, source, target))
@@ -154,6 +164,8 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 		wire : ActionEdge( from == event, to == operation, name == "run", eContainer == sw )
 		
 		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
+				
+		eval ( handler.veto( sw ))
 		
 	then
 		ParameterEdge pw = handler.generatedParameterEdge(sw, sw, field, wire); 
@@ -164,7 +176,7 @@ end
 
 rule "Connect parameter wire to: run instance wire from source.edit to target.update [set] (onChange)"
 	when
-		sw : SetWire( overriddenNames not contains "[set] run instance parameter (source.edit)", overridden == false )
+		sw : SetWire( overriddenNames not contains "[set] run instance parameter (source.edit)" )
 		source : Changeable( )
 		target : CanBeSynced( )
 		eval(functions.connectsSet(sw, source, target))
@@ -175,6 +187,8 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 		wire : ActionEdge( from == event, to == operation, name == "run", eContainer == sw )
 		
 		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
+						
+		eval ( handler.veto( sw ))
 		
 	then
 		ParameterEdge pw = handler.generatedParameterEdge(sw, sw, field, wire); 
@@ -185,7 +199,7 @@ end
 
 rule "Connect parameter wire to: Run instance wire from edit to Property update (onChange)"
 	when
-		sw : SetWire( overriddenNames not contains "[set] run instance parameter (source.edit)", overridden == false )
+		sw : SetWire( overriddenNames not contains "[set] run instance parameter (source.edit)" )
 		source : Changeable( )
 		
 		targetContainer : ContainsOperations ( )
@@ -201,6 +215,8 @@ rule "Connect parameter wire to: Run instance wire from edit to Property update 
 		wire : ActionEdge( from == event, to == operation, name == "run", eContainer == sw )
 				
 		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
+				
+		eval ( handler.veto( sw ))
 		
 	then
 		ParameterEdge pw = handler.generatedParameterEdge(sw, sw, field, wire); 
@@ -212,7 +228,7 @@ end
 
 rule "Connect parameter wire to: run instance wire from source.edit to target.update [set], instant SetWire (onInput)"
 	when
-		sw : SetWire( overriddenNames not contains "[set] run instance parameter, instant SetWire (source.edit)", overridden == false )
+		sw : SetWire( overriddenNames not contains "[set] run instance parameter, instant SetWire (source.edit)" )
 		source : InputTextField( )
 		target : CanBeSynced( )
 		eval(functions.connectsSet(sw, source, target))
@@ -223,6 +239,8 @@ rule "Connect parameter wire to: run instance wire from source.edit to target.up
 		wire : ActionEdge( from == event, to == operation, name == "run", eContainer == sw )
 		
 		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
+						
+		eval ( handler.veto( sw ))
 		
 	then
 		ParameterEdge pw = handler.generatedParameterEdge(sw, sw, field, wire); 
@@ -234,7 +252,7 @@ end
 # Ideally, these two commands would be joined together into one
 rule "Run instance wire from target.access to target.init, when we have a value to provide as a parameter [set] (onAccess)"
 	when
-		sw : SetWire( overriddenNames not contains "run", overridden == false )
+		sw : SetWire( overriddenNames not contains "run" )
 		source : ContainsOperations( )
 		target : Accessible( )
 		eval(functions.connectsSet(sw, source, target))
@@ -244,7 +262,9 @@ rule "Run instance wire from target.access to target.init, when we have a value 
 		field : Property( source.fieldValue == field )
 		
 		not (ActionEdge( eContainer == sw, from == event, to == operation, name == "run" ))
-
+						
+		eval ( handler.veto( sw ))
+		
 	then
 		ActionEdge rw = handler.generatedActionEdge(sw, sw, event, operation);
 		handler.setName(rw, "run");
@@ -254,7 +274,7 @@ end
 
 rule "Run instance wire from target.access to target.init, adding ConditionEdge to check it is set [set] (onAccess)"
 	when
-		sw : SetWire( overridden == false )
+		sw : SetWire()
 		source : ContainsOperations( )
 		target : Accessible( )
 		eval(functions.connectsSet(sw, source, target))
@@ -270,6 +290,8 @@ rule "Run instance wire from target.access to target.init, adding ConditionEdge 
 		condition : Condition ( eContainer == source, name == "fieldValue is set" )
 		
 		not ( ConditionEdge ( from == condition, to == run ))
+					
+		eval ( handler.veto( sw ))
 	
 	then
 		ConditionEdge cw = handler.generatedConditionEdge(sw, sw, condition, run);
@@ -280,7 +302,7 @@ end
 # Ideally, these two commands would be joined together into one
 rule "Connect parameter wire to: run instance wire from target.access to target.init [set]"
 	when
-		sw : SetWire( overriddenNames not contains "[sync] run instance parameter (source.access)", overridden == false )
+		sw : SetWire( overriddenNames not contains "[sync] run instance parameter (source.access)" )
 		source : CanBeSynced( )
 		target : CanBeSynced( )
 		eval(functions.connectsSet(sw, source, target))
@@ -291,6 +313,8 @@ rule "Connect parameter wire to: run instance wire from target.access to target.
 		wire : ActionEdge( from == event, to == operation, name == "run", eContainer == sw )
 		
 		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
+						
+		eval ( handler.veto( sw ))
 		
 	then
 		ParameterEdge pw = handler.generatedParameterEdge(sw, sw, field, wire); 
@@ -301,7 +325,7 @@ end
 
 rule "Connect parameter wire to: run instance wire from target.access to target.init [set] (onAccess)"
 	when
-		sw : SetWire( overriddenNames not contains "[set] run instance parameter (source.access)", overridden == false )
+		sw : SetWire( overriddenNames not contains "[set] run instance parameter (source.access)" )
 		source : CanBeSynced( )
 		target : Accessible( )
 		eval(functions.connectsSet(sw, source, target))
@@ -312,6 +336,8 @@ rule "Connect parameter wire to: run instance wire from target.access to target.
 		wire : ActionEdge( from == event, to == operation, name == "run", eContainer == sw )
 		
 		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
+						
+		eval ( handler.veto( sw ))
 		
 	then
 		ParameterEdge pw = handler.generatedParameterEdge(sw, sw, field, wire); 
@@ -361,10 +387,12 @@ rule "Cascaded SetWires: Conditions from parent to child [set]"
 		
 		# there is a condition on the containing sync wire
 		condition : Condition ( )
-		cw : ConditionEdge( from == condition, to == sw, overridden == false )
+		cw : ConditionEdge( from == condition, to == sw )
 
 		# and there isn't one on the element sync wire
 		not (ecw : ConditionEdge( from == condition, to == esw )) 
+						
+		eval ( handler.veto( cw ))
 		
 	then
 		ConditionEdge ecw = handler.generatedConditionEdge( cw, sw, condition, esw );
@@ -389,7 +417,7 @@ rule "Cascaded SetWires: Parameters from parent to child [set]"
 		
 		# there is a condition on the containing sync wire
 		condition : Condition ( )
-		cw : ConditionEdge( from == condition, to == sw, overridden == false )
+		cw : ConditionEdge( from == condition, to == sw )
 		
 		# the generated condition wire
 		ecw : ConditionEdge( from == condition, to == esw )
@@ -400,6 +428,8 @@ rule "Cascaded SetWires: Parameters from parent to child [set]"
 
 		# and there isn't one on the element sync wire
 		not (epw : ParameterEdge( from == parameter, to == ecw )) 
+						
+		eval ( handler.veto( cw ))
 		
 	then
 		# create it
@@ -419,7 +449,7 @@ rule "Connect Session.init to incoming SetWires (contained in Frames) [set] (onC
 		targetFrame : ContainsOperations( eval(functions.containingSessionEquals(targetFrame, session)) )
 		eval( functions.connectsSet(sw, sourceFrame, targetFrame ))
 
-		sw2 : SetWire ( eContainer == sw, overriddenNames not contains "run", overridden == false )
+		sw2 : SetWire ( eContainer == sw, overriddenNames not contains "run" )
 		sourceElement : Changeable( eContainer == sourceFrame )
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connectsSet(sw2, sourceElement, targetElement ))
@@ -431,7 +461,9 @@ rule "Connect Session.init to incoming SetWires (contained in Frames) [set] (onC
 		inite : EventTrigger (eContainer == session, session.onInit == inite )
 		
 		not (ActionEdge( eContainer == sw2, from == inite, to == operation, name == "run" ))
-
+						
+		eval ( handler.veto( sw2 ))
+		
 	then
 		ActionEdge rw2 = handler.generatedActionEdge(sw2, sw2, inite, operation);
 		handler.setName(rw2, "run");
@@ -447,7 +479,7 @@ rule "Connect Session.init to incoming SetWires (contained in Frames) [set] (onC
 		targetFrame : ContainsOperations( eval(functions.containingSessionEquals(targetFrame, session)) )
 		eval( functions.connectsSet(sw, sourceFrame, targetFrame ))
 
-		sw2 : SetWire ( eContainer == sw, overriddenNames not contains "run", overridden == false )
+		sw2 : SetWire ( eContainer == sw, overriddenNames not contains "run" )
 		sourceElement : Changeable( eContainer == sourceFrame )
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connectsSet(sw2, sourceElement, targetElement ))
@@ -459,7 +491,9 @@ rule "Connect Session.init to incoming SetWires (contained in Frames) [set] (onC
 		inite : EventTrigger (eContainer == session, session.onInit == inite )
 		
 		not (ActionEdge( eContainer == sw2, from == inite, to == operation, name == "run" ))
-
+						
+		eval ( handler.veto( sw2 ))
+		
 	then
 		ActionEdge rw2 = handler.generatedActionEdge(sw2, sw2, inite, operation);
 		handler.setName(rw2, "run");
@@ -470,7 +504,7 @@ end
 rule "Connect parameter for Session.init to incoming SetWires (contained in Frames) [set] (onChange 2)"
 	when
 		session : Session (  )
-		sw : SetWire( overridden == false )
+		sw : SetWire(  )
 		sourceFrame : VisibleThing( eval(!functions.containingSessionEquals(sourceFrame, session)) )  
 		targetFrame : ContainsOperations( eval(functions.containingSessionEquals(targetFrame, session)) )
 		eval( functions.connectsSet(sw, sourceFrame, targetFrame ))
@@ -492,7 +526,9 @@ rule "Connect parameter for Session.init to incoming SetWires (contained in Fram
 		pw : ParameterEdge( eContainer == sw2, from == field, to == rw ) 
 
 		not( ParameterEdge( eContainer == sw2, from == field, to == initrw ))  
-
+						
+		eval ( handler.veto( sw ))
+		
 	then
 		ParameterEdge pw2 = handler.generatedParameterEdge(sw, sw, field, initrw);
 		queue.add(pw2, drools);		
@@ -501,12 +537,12 @@ end
 rule "Connect parameter for Session.init to incoming SetWires (contained in Frames) [set] (onChange 3)"
 	when
 		session : Session (  )
-		sw : SetWire( overridden == false )
+		sw : SetWire(  )
 		sourceFrame : Frame( eval(!functions.containingSessionEquals(sourceFrame, session)) )  
 		targetFrame : ContainsOperations( eval(functions.containingSessionEquals(targetFrame, session)) )
 		eval( functions.connectsSet(sw, sourceFrame, targetFrame ))
 
-		sw2 : SetWire ( eContainer == sw )
+		sw2 : SetWire ( eContainer == sw)
 		sourceElement : Changeable( eContainer == sourceFrame )
 		targetElement : ContainsOperations( eContainer == targetFrame )
 		eval( functions.connectsSet(sw2, sourceElement, targetElement ))
@@ -523,6 +559,8 @@ rule "Connect parameter for Session.init to incoming SetWires (contained in Fram
 		pw : ParameterEdge( eContainer == sw2, from == field, to == rw ) 
 
 		not( ParameterEdge( eContainer == sw2, from == field, to == initrw ))  
+						
+		eval ( handler.veto( sw ))
 		
 	then
 		ParameterEdge pw2 = handler.generatedParameterEdge(sw, sw, field, initrw);
@@ -531,7 +569,7 @@ end
 
 rule "Refresh New Instance Object mappings (except for generated primary keys) when Form sets an Instance: create text fields"
 	when
-		sync : SetWire( overridden == false )
+		sync : SetWire(  )
 		form : InputForm (  )
 		instance : DomainIterator (  )
 		
@@ -544,7 +582,9 @@ rule "Refresh New Instance Object mappings (except for generated primary keys) w
 		not ( tf : InputTextField( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
 		
 		eval ( !form.getOverriddenNames().contains(attribute.getName()) )
-
+						
+		eval ( handler.veto( sync ))
+		
 	then
 		# create a new one
 		InputTextField text = handler.generatedInputTextField(sync, form);
@@ -555,7 +595,7 @@ end
 
 rule "Refresh Domain Object mappings (except for generated primary keys) when Form sets an Instance: create text fields"
 	when
-		sync : SetWire( overridden == false )
+		sync : SetWire(  )
 		form : InputForm (  )
 		object : DomainSchema (  )
 		
@@ -566,7 +606,9 @@ rule "Refresh Domain Object mappings (except for generated primary keys) when Fo
 		not ( tf : InputTextField( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
 
 		eval ( !form.getOverriddenNames().contains(attribute.getName()) )
-
+						
+		eval ( handler.veto( sync ))
+		
 	then
 		# create a new one
 		InputTextField text = handler.generatedInputTextField(sync, form);
@@ -583,7 +625,7 @@ end
  */
 rule "Refresh mappings between InputForms connected to InputForms containing InputTextFields"
 	when
-		sync : SetWire( overridden == false )
+		sync : SetWire(  )
 		source : InputForm (  )
 		target : InputForm (  )
 		
@@ -593,6 +635,8 @@ rule "Refresh mappings between InputForms connected to InputForms containing Inp
 		not ( tf : VisibleThing ( eContainer == target, eval(functions.nameMatches( sf, tf ))) )
 		
 		eval ( !target.getOverriddenNames().contains(sf.getName()) )
+						
+		eval ( handler.veto( sync ))
 		
 	then
 		# create a new one
@@ -610,7 +654,7 @@ end
  */
 rule "Refresh mappings between InputForms connected to InputForms containing Labels"
 	when
-		sync : SetWire( overridden == false )
+		sync : SetWire(  )
 		source : InputForm (  )
 		target : InputForm (  )
 		
@@ -620,6 +664,8 @@ rule "Refresh mappings between InputForms connected to InputForms containing Lab
 		not ( tf : VisibleThing ( eContainer == target, eval(functions.nameMatches( sf, tf ))) )
 						
 		eval ( !target.getOverriddenNames().contains(sf.getName()) )
+						
+		eval ( handler.veto( sync ))
 		
 	then
 		# create a new one
@@ -637,7 +683,7 @@ end
  */
 rule "Refresh mappings between InputForms connected to Emails containing InputTextFields"
 	when
-		sync : SetWire( overridden == false )
+		sync : SetWire(  )
 		source : InputForm (  )
 		target : Email (  )
 		
@@ -647,6 +693,8 @@ rule "Refresh mappings between InputForms connected to Emails containing InputTe
 		not ( tf : VisibleThing ( eContainer == target, eval(functions.nameMatches( sf, tf ))) )
 
 		eval ( !target.getOverriddenNames().contains(sf.getName()) )
+						
+		eval ( handler.veto( sync ))
 		
 	then
 		# create a new one
@@ -664,7 +712,7 @@ end
  */
 rule "Refresh mappings between InputForms connected to Emails containing Labels"
 	when
-		sync : SetWire( overridden == false )
+		sync : SetWire(  )
 		source : InputForm (  )
 		target : Email (  )
 		
@@ -674,7 +722,9 @@ rule "Refresh mappings between InputForms connected to Emails containing Labels"
 		not ( tf : VisibleThing ( eContainer == target, eval(functions.nameMatches( sf, tf ))) )
 
 		eval ( !target.getOverriddenNames().contains(sf.getName()) )
-
+						
+		eval ( handler.veto( sync ))
+		
 	then
 		# create a new one
 		Label tf = handler.generatedLabel(sync, target);
@@ -691,7 +741,7 @@ end
  */
 rule "Refresh mappings between InputForms connected to Maps containing InputTextFields"
 	when
-		sync : SetWire( overridden == false )
+		sync : SetWire(  )
 		source : InputForm (  )
 		target : Map (  )
 		
@@ -701,6 +751,8 @@ rule "Refresh mappings between InputForms connected to Maps containing InputText
 		not ( tf : VisibleThing ( eContainer == target, eval(functions.nameMatches( sf, tf ))) )
 
 		eval ( !target.getOverriddenNames().contains(sf.getName()) )
+						
+		eval ( handler.veto( sync ))
 		
 	then
 		# create a new one
@@ -722,7 +774,7 @@ end
  */
 rule "Refresh New Instance Object mappings (except for generated primary keys) when Instance sets a Form: create labels"
 	when
-		sync : SetWire( overridden == false )
+		sync : SetWire(  )
 		form : InputForm (  )
 		instance : DomainIterator (  )
 		
@@ -735,6 +787,8 @@ rule "Refresh New Instance Object mappings (except for generated primary keys) w
 		not ( tf : VisibleThing( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
 
 		eval ( !form.getOverriddenNames().contains(attribute.getName()) )
+						
+		eval ( handler.veto( sync ))
 		
 	then
 		# create a new one
@@ -748,7 +802,7 @@ end
 # TODO is this rule even used anymore? consider removing.
 rule "Refresh Domain Object mappings (except for generated primary keys) when Instance sets a Form: create labels"
 	when
-		sync : SetWire( overridden == false )
+		sync : SetWire(  )
 		form : InputForm (  )
 		object : DomainSchema (  )
 		
@@ -759,6 +813,8 @@ rule "Refresh Domain Object mappings (except for generated primary keys) when In
 		not ( tf : VisibleThing( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
 
 		eval ( !form.getOverriddenNames().contains(attribute.getName()) )
+						
+		eval ( handler.veto( sync ))
 		
 	then
 		# create a new one
@@ -771,7 +827,7 @@ end
 
 rule "Refresh Domain Object mappings (except for generated primary keys) when Instance sets a IteratorList: create labels"
 	when
-		sync : SetWire( overridden == false )
+		sync : SetWire(  )
 		form : IteratorList (  )
 		instance : DomainIterator (  )
 		
@@ -784,6 +840,8 @@ rule "Refresh Domain Object mappings (except for generated primary keys) when In
 		not ( tf : VisibleThing( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
 
 		eval ( !form.getOverriddenNames().contains(attribute.getName()) )
+						
+		eval ( handler.veto( sync ))
 		
 	then
 		# create a new one
@@ -796,7 +854,7 @@ end
 
 rule "Refresh Domain Object mappings (primary keys) when Instance sets a IteratorList: create hiddens"
 	when
-		sync : SetWire( overridden == false )
+		sync : SetWire(  )
 		form : IteratorList (  )
 		instance : DomainIterator (  )
 		
@@ -810,6 +868,8 @@ rule "Refresh Domain Object mappings (primary keys) when Instance sets a Iterato
 		not ( tf : VisibleThing( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
 
 		eval ( !form.getOverriddenNames().contains(attribute.getName()) )
+						
+		eval ( handler.veto( sync ))
 		
 	then
 		# create a new Hidden
@@ -841,7 +901,7 @@ rule "A SetWire between Attributes passed to a DomainIterator need to check that
 		# contained attribute/field
 		attribute : DomainAttributeInstance( eContainer == instance )
 		tf : Label ( eContainer == form )
-		sync2 : SetWire ( overriddenNames not contains "check new instance exists", overridden == false )
+		sync2 : SetWire ( overriddenNames not contains "check new instance exists" )
 		
 		# Label -> attribute
 		eval(functions.connectsSet(sync2, tf, attribute))
@@ -860,6 +920,8 @@ rule "A SetWire between Attributes passed to a DomainIterator need to check that
 		
 		# but not connected		
 		not (ConditionEdge ( from == existsCondition, to == run ))
+						
+		eval ( handler.veto( sync2 ))
 		
 	then
 		# connect it
@@ -890,7 +952,7 @@ rule "A SetWire between Attributes selected from a DomainIterator need to check 
 		# contained attribute/field
 		attribute : DomainAttributeInstance( eContainer == instance )
 		tf : Label ( eContainer == form )
-		sync2 : SetWire ( overriddenNames not contains "check new instance exists", overridden == false )
+		sync2 : SetWire ( overriddenNames not contains "check new instance exists" )
 		
 		# Attribute -> Label
 		eval(functions.connectsSet(sync2, attribute, tf))
@@ -909,7 +971,9 @@ rule "A SetWire between Attributes selected from a DomainIterator need to check 
 		
 		# but not connected		
 		not (ConditionEdge ( from == existsCondition, to == run ))
-
+						
+		eval ( handler.veto( sync2 ))
+		
 	then
 		# connect it
 		ConditionEdge cw = handler.generatedConditionEdge(sync2, sync2, existsCondition, run);

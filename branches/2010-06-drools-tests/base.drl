@@ -20,8 +20,10 @@ global DroolsHelperFunctions functions;
 
 rule "Create empty domain schema for 'test' InternetApplication"
 	when
-		a : InternetApplication ( overridden == false, name == "test" )
+		a : InternetApplication ( name == "test" )
 		not (DomainSchema ( name=="test domain schema", eContainer == a ) )
+
+		eval ( handler.veto( a ))
 
 	then 
 		#actions
@@ -70,10 +72,12 @@ end
  */
 rule "Create field value for Changeable (untyped)"
 	when
-		f : Changeable( overridden == false )
+		f : Changeable( )
 		not ( InputForm ( this == f ))
 		not ( DomainIterator ( this == f ))
 		not (prop : Property( eContainer == f, f.fieldValue != null, f.fieldValue == prop ))
+			
+		eval ( handler.veto( f ))
 		
 	then
 		Property fieldValue = handler.generatedPropertyFieldValue(f, f);
@@ -96,10 +100,12 @@ end
 rule "Properties will also have a related 'is set' condition"
 	when
 		container : ContainsConditions ( )
-		containerGe : GeneratesElements ( overridden == false, eval(containerGe == container) )
+		containerGe : GeneratesElements ( eval(containerGe == container) )
 		value : Property ( eContainer == container )
 		
 		not ( Condition( eval(name.equals(value.getName() + " is set")), eContainer == container ))
+	
+		eval ( handler.veto( containerGe ))
 	
 	then
 		CompositeCondition cond = handler.generatedCompositeCondition(containerGe, container);
@@ -113,10 +119,12 @@ rule "Create contents of 'X is set' operation"
 		container : ContainsConditions ( )
 		value : Property ( eContainer == container )
 		
-		o : CompositeCondition( overridden == false, eval(name.equals(value.getName() + " is set")), eContainer == container )
+		o : CompositeCondition( eval(name.equals(value.getName() + " is set")), eContainer == container )
 		
 		not ( StartNode ( eContainer == o ))
-
+		
+		eval ( handler.veto( o ))
+	
 	then
 		
 		DecisionNode decision = handler.generatedDecisionNode(o, o);

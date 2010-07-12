@@ -25,10 +25,12 @@ global DroolsHelperFunctions functions;
  */
 rule "Create 'update' operation for VisibleThings"
 	when
-		f : VisibleThing( overridden == false )
+		f : VisibleThing( )
 		not ( IteratorList ( this == f )) # not IteratorLists
 		not ( InputForm ( this == f )) # not InputForms
 		not (Operation( eContainer == f, name=="update" ))
+		
+		eval ( handler.veto( f ))
 			
 	then
 		PrimitiveOperation operation = handler.generatedPrimitiveOperation(f, f);
@@ -39,8 +41,10 @@ end
 
 rule "Create 'update' operation for domain attribute"
 	when
-		f : DomainAttribute( overridden == false )
+		f : DomainAttribute( )
 		not (Operation( eContainer == f, name=="update" ))
+				
+		eval ( handler.veto( f ))
 			
 	then
 		PrimitiveOperation operation = handler.generatedPrimitiveOperation(f, f);
@@ -51,8 +55,10 @@ end
 
 rule "Create 'update' operation for domain attribute instance"
 	when
-		f : DomainAttributeInstance( overridden == false )
+		f : DomainAttributeInstance( )
 		not (Operation( eContainer == f, name=="update" ))
+				
+		eval ( handler.veto( f ))
 			
 	then
 		PrimitiveOperation operation = handler.generatedPrimitiveOperation(f, f);
@@ -69,11 +75,13 @@ end
  */
 rule "Create 'init' operation for VisibleThings"
 	when
-		f : VisibleThing( overridden == false )
+		f : VisibleThing( )
 		not ( IteratorList ( this == f )) # not IteratorLists
 		not ( InputForm ( this == f )) # not InputForms
 		not (Operation( eContainer == f, name=="init" ))
-	
+				
+		eval ( handler.veto( f ))
+			
 	then
 		PrimitiveOperation operation = handler.generatedPrimitiveOperation(f, f);
 		handler.setName(operation, "init");
@@ -89,13 +97,15 @@ end
 rule "Create 'set property XXX' Operation for all Properties, except fieldValue"
 	when
 		container : ContainsOperations ( )
-		gen : GeneratesElements ( this == container, overridden == false )
+		gen : GeneratesElements ( this == container )
 		p : Property ( eContainer == container, name != "fieldValue" )
 		
 		exists ( setWire : SetWire ( to == p ) )
 
 		not ( op : Operation ( eContainer == container, name != null, eval( ("set property " + p.getName()).equals(op.getName()) ) ) )
-
+		
+		eval ( handler.veto( gen ))
+		
 	then
 		CompositeOperation op = handler.generatedCompositeOperation(gen, container);
 		handler.setName(op, "set property " + p.getName());
@@ -111,10 +121,12 @@ end
 rule "Create components of 'update', 'refresh', 'init' operations"
 	when
 		c : Changeable ( )
-		o : CompositeOperation((name == "update" || name == "refresh" || name == "init"), eContainer == c, overridden == false )
+		o : CompositeOperation((name == "update" || name == "refresh" || name == "init"), eContainer == c)
 		field : Property( c.fieldValue == field )
 		
 		not ( StartNode ( eContainer == o ))
+		
+		eval ( handler.veto( o ))
 
 	then
 		Parameter parameter = handler.generatedParameter(o, o);
@@ -184,9 +196,11 @@ rule "Create components of 'set property XXX' operations"
 		container : ContainsOperations ( )
 		field : Property ( eContainer == container, name != "fieldValue" )
 
-		o : CompositeOperation ( overridden == false, eContainer == container, name != null, eval( ("set property " + field.getName()).equals(o.getName()) ) )
+		o : CompositeOperation ( eContainer == container, name != null, eval( ("set property " + field.getName()).equals(o.getName()) ) )
 		
 		not ( StartNode ( eContainer == o ))
+		
+		eval ( handler.veto( o ))
 
 	then
 		Parameter parameter = handler.generatedParameter(o, o);
@@ -253,7 +267,9 @@ end
 
 rule "Create components of 'alert' operation"
 	when
-		o : CompositeOperation( overridden == false, name == "alert")
+		o : CompositeOperation(name == "alert")
+		
+		eval ( handler.veto( o ))
 
 	then
 		Parameter parameter = handler.generatedParameter(o, o);

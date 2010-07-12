@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1263fd37982.b79">
-  <scopes xsi:type="iaml.visual:Frame" id="index" name="Frame1" outWires="wires.1263fd37a0f.5e9">
-    <wires xsi:type="iaml.wires:SyncWire" id="wires.1263fd37a0f.5e9" name="Sync wire name" from="index" to="visual.1263fd379ff.7c6"/>
-  </scopes>
-  <scopes xsi:type="iaml.visual:Frame" id="visual.1263fd379ff.7c6" name="Frame2" inWires="wires.1263fd37a0f.5e9"/>
-</iaml:InternetApplication>

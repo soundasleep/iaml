@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<iaml.visual:Frame xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="visual.128fcbddf0d.f">
-  <elements xsi:type="iaml.domain:DomainIterator" id="domain.128fcbddf1d.1" name="Iterator" outWires="wires.128fcbddf0d.27">
-    <wires xsi:type="iaml.wires:AutocompleteWire" id="wires.128fcbddf0d.27" name="Autocomplete" from="domain.128fcbddf1d.1" to="visual.128fcbddf0d.1a"/>
-  </elements>
-  <children xsi:type="iaml.visual:InputTextField" inWires="wires.128fcbddf0d.27" id="visual.128fcbddf0d.1a" name="Target"/>
-</iaml.visual:Frame>

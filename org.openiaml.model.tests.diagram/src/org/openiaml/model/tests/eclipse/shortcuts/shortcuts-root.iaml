@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.11d889e30c6.2ca">
-  <operations xsi:type="iaml:PrimitiveOperation" id="model.11d889e30c6.2cf" name="op" inActions="wires.11d889e3162.6a"/>
-  <scopes xsi:type="iaml.visual:Frame" id="visual.11d889e3114.251" name="page">
-    <onInit id="model.11d889e30c6.2da" outActions="wires.11d889e3162.6a">
-      <actions id="wires.11d889e3162.6a" name="run2" from="model.11d889e30c6.2da" to="model.11d889e30c6.2cf"/>
-    </onInit>
-  </scopes>
-</iaml:InternetApplication>

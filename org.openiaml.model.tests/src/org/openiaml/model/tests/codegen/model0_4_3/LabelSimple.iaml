@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.126c0191fac.1">
-  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
-    <children xsi:type="iaml.visual:Label" id="visual.126c01921cf.9" name="Label 1" defaultValue="initial value"/>
-    <children xsi:type="iaml.visual:Label" id="visual.126c01921cf.f" name="Label 2"/>
-  </scopes>
-</iaml:InternetApplication>

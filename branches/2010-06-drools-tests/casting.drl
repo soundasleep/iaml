@@ -105,8 +105,7 @@ rule "Add 'can cast?' condition check for onChange connecting to Update"
 		source : Changeable ( )
 		target : ContainsOperations ( )
 		
-		sw : SyncWire ( )
-		eval ( functions.connects(sw, source, target) )
+		sw : SyncWire ( (from == source && to == target) || (from == target && to == source) )
 		
 		fieldValue : Property ( source.fieldValue == fieldValue )		
 
@@ -140,10 +139,9 @@ rule "Add 'can cast?' condition check for onAccess connecting to Init"
 	when
 		source : Accessible ( )
 		target : CanBeSynced ( )
-		targetc : Changeable ( eval(target.equals(targetc)) )
+		targetc : Changeable ( this == target )
 		
-		sw : SyncWire ( )
-		eval ( functions.connects(sw, source, target) )
+		sw : SyncWire ( (from == source && to == target) || (from == target && to == source) )
 		
 		fieldValue : Property ( targetc.fieldValue == fieldValue )		
 

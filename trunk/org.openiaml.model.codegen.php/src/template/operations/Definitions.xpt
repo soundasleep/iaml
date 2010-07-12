@@ -70,12 +70,31 @@
 «DEFINE operationDefinition(Boolean php) FOR model::Operation-»
 	/* simple operation */
 	«IF php»
+	$running_«safeName()» = false;
 	function do_«safeName()»($default_arg = null) {
-		«EXPAND template::operations::Contents::operationContents(null, php) FOR this»
+		// prevent infinite loops
+		global $running_«safeName()-»;
+		if ($running_«safeName()-» == false && !has_running_function("«safeName()-»")) {
+			$running_«safeName()-» = true;		// prevent loops
+			add_running_function("«safeName()-»");
+		
+			«EXPAND template::operations::Contents::operationContents(null, php) FOR this»
+			
+			$running_«safeName()-» = false;
+			remove_running_function("«safeName()-»");
+		}
 	}
 	«ELSE»
+	var running_«safeName()» = false;
 	function do_«safeName()»(default_arg) {
-		«EXPAND template::operations::Contents::operationContents(null, php) FOR this»
+		// prevent infinite loops
+		if (running_«safeName()-» == false) {
+			running_«safeName()-» = true;		// prevent loops
+		
+			«EXPAND template::operations::Contents::operationContents(null, php) FOR this»
+			
+			running_«safeName()-» = false;
+		}	
 	}
 	«ENDIF»
 «ENDDEFINE»

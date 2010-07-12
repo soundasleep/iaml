@@ -1727,7 +1727,7 @@ rule "Create 'current instance' for LoginHandler[type=object] - connect SetWire"
 		
 		instance : DomainIterator ( eContainer == session, name == "current instance" )
 		
-		not (set : SetWire ( from == login_handler, to == instance ) )
+		not (set : SetWire ( eval (functions.connectsSet(set, login_handler, instance )) ) )
 		
 		eval ( handler.veto( login_handler ))
 		
@@ -1761,7 +1761,7 @@ rule "Create 'current instance' for LoginHandler[type=user] - connect SetWire"
 		
 		instance : DomainIterator ( eContainer == session, name == "current instance" )
 		
-		not (set : SetWire ( from == login_handler, to == instance ) )
+		not (set : SetWire ( eval (functions.connectsSet(set, login_handler, instance )) ) )
 		
 		eval ( handler.veto( login_handler ))
 		

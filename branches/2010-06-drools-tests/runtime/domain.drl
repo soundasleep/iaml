@@ -22,10 +22,8 @@ global DroolsHelperFunctions functions;
 rule "Create a default primary key for DomainObjects which do not have one"
 
 	when
-		object : DomainSchema ( )
+		object : DomainSchema ( overridden == false )
 		not (da : DomainAttribute ( eContainer == object, primaryKey == true ) )
-	
-		eval ( handler.veto( object ))
 	
 	then	
 		// create a new one
@@ -45,11 +43,9 @@ rule "Domain objects that extend each other will also copy over attributes, conn
 		
 		targetObject : DomainSchema ( this != sourceObject )
 		
-		ext : ExtendsEdge ( from == targetObject, to == sourceObject )
+		ext : ExtendsEdge ( overridden == false, from == targetObject, to == sourceObject )
 		
 		not ( DomainAttribute ( eContainer == targetObject, name == sourceAttribute.name )) 
-
-		eval ( handler.veto( ext ))
 	
 	then
 		DomainAttribute copy = handler.generatedDomainAttribute(ext, targetObject);
@@ -70,7 +66,7 @@ rule "Domain objects that extend each other should include an indexable referenc
 		
 		targetObject : DomainSchema ( this != sourceObject )
 		
-		ext : ExtendsEdge ( from == targetObject, to == sourceObject )
+		ext : ExtendsEdge ( overridden == false, from == targetObject, to == sourceObject )
 		
 		sourceId : DomainAttribute ( eContainer == sourceObject, primaryKey == true )
 		
@@ -78,8 +74,6 @@ rule "Domain objects that extend each other should include an indexable referenc
 		da : DomainAttribute ( eContainer == targetObject, primaryKey == false )
 		and 
 		ExtendsEdge ( from == da, to == sourceId ) ) 
-
-		eval ( handler.veto( ext ))
 
 	then
 		# create the target ID attribute

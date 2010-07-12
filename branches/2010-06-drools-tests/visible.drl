@@ -29,11 +29,9 @@ global DroolsHelperFunctions functions;
  */
 rule "VisibleThings have an event onInput"
 	when
-		field : VisibleThing ( )
+		field : VisibleThing ( overridden == false )
 		not ( event : EventTrigger ( field.onInput == event ))
-	
-		eval ( handler.veto( field ))
-	
+
 	then
 		EventTrigger event = handler.generatedEventTriggerOnInput(field, field);
 		handler.setName(event, "onInput");
@@ -50,10 +48,8 @@ end
  */
 rule "InputTextFields have a Property currentInput"
 	when
-		field : InputTextField ( )
+		field : InputTextField ( overridden == false )
 		not ( property : Property ( field.currentInput == property ))
-	
-		eval ( handler.veto( field ))
 	
 	then
 		Property property = handler.generatedPropertyCurrentInput(field, field);
@@ -69,10 +65,8 @@ end
  */
 rule "VisibleThings have an event onClick"
 	when
-		f : VisibleThing( )
+		f : VisibleThing( overridden == false )
 		not (event : EventTrigger( f.onClick == event ))
-				
-		eval ( handler.veto( f ))
 			
 	then
 		EventTrigger event = handler.generatedEventTriggerOnClick(f, f);
@@ -86,10 +80,8 @@ end
  */
 rule "VisibleThings have a PrimitiveCondition 'empty'"
 	when
-		f : VisibleThing( )
+		f : VisibleThing( overridden == false )
 		not (condition : Condition( eContainer == f, name == "empty" ))
-				
-		eval ( handler.veto( f ))
 			
 	then
 		PrimitiveCondition condition = handler.generatedPrimitiveCondition(f, f);
@@ -104,10 +96,8 @@ end
  */
 rule "VisibleThings have a PrimitiveCondition 'not empty'"
 	when
-		f : VisibleThing( )
+		f : VisibleThing( overridden == false )
 		not (condition : Condition( eContainer == f, name == "not empty" ))
-				
-		eval ( handler.veto( f ))
 			
 	then
 		PrimitiveCondition condition = handler.generatedPrimitiveCondition(f, f);
@@ -122,10 +112,8 @@ end
  */
 rule "Create 'hide' PrimitiveOperation for VisibleThing"
 	when
-		tf : VisibleThing( )
+		tf : VisibleThing( overridden == false )
 		not ( op : Operation ( name == "hide", eContainer == tf ))
-		
-		eval ( handler.veto( tf ))
 	
 	then
 		PrimitiveOperation warning = handler.generatedPrimitiveOperation(tf, tf);
@@ -140,10 +128,8 @@ end
  */
 rule "Create 'show' PrimitiveOperation for VisibleThing"
 	when
-		tf : VisibleThing( )
+		tf : VisibleThing( overridden == false )
 		not ( op : Operation ( name == "show", eContainer == tf ))
-		
-		eval ( handler.veto( tf ))
 	
 	then
 		PrimitiveOperation warning = handler.generatedPrimitiveOperation(tf, tf);

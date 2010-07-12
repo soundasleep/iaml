@@ -7,8 +7,8 @@ import java.util.Set;
 
 import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.CompositeCondition;
-import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.operations.CancelNode;
@@ -78,7 +78,7 @@ public class SetWireClient extends InferenceTestCase {
 		assertGenerated(value);
 
 		// and an 'update' event in target
-		CompositeOperation update = assertHasCompositeOperation(target, "update");
+		PrimitiveOperation update = assertHasPrimitiveOperation(target, "update");
 		assertGenerated(update);
 
 		// connected with a run wire
@@ -110,7 +110,7 @@ public class SetWireClient extends InferenceTestCase {
 		assertGenerated(value);
 
 		// and an 'update' event in target
-		CompositeOperation update = assertHasCompositeOperation(source, "update");
+		PrimitiveOperation update = assertHasPrimitiveOperation(source, "update");
 		assertGenerated(update);
 
 		// but NOT connected with a run wire
@@ -138,7 +138,7 @@ public class SetWireClient extends InferenceTestCase {
 		assertGenerated(value);
 
 		// and an 'update' event in target
-		CompositeOperation init = assertHasCompositeOperation(target, "init");
+		PrimitiveOperation init = assertHasPrimitiveOperation(target, "init");
 		assertGenerated(init);
 
 		// connected with a run wire
@@ -171,7 +171,7 @@ public class SetWireClient extends InferenceTestCase {
 
 		// there should be an 'edit' event in target
 		EventTrigger access = target.getOnAccess();
-		CompositeOperation init = assertHasCompositeOperation(target, "init");
+		PrimitiveOperation init = assertHasPrimitiveOperation(target, "init");
 		ActionEdge run = assertHasRunAction(page, access, init, "run");
 
 		// newly created condition

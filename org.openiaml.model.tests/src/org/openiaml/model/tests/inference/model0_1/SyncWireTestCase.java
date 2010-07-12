@@ -7,17 +7,9 @@ import java.util.List;
 
 import org.jaxen.JaxenException;
 import org.openiaml.model.model.ActionEdge;
-import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.Parameter;
-import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
-import org.openiaml.model.model.operations.CancelNode;
-import org.openiaml.model.model.operations.CastNode;
-import org.openiaml.model.model.operations.DecisionNode;
-import org.openiaml.model.model.operations.FinishNode;
-import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ParameterEdge;
@@ -51,47 +43,6 @@ public class SyncWireTestCase extends InferenceTestCase {
 		// these elements should now have generated elements that match
 		// the semantics specified in our .vsd file
 		assertHasOperation(name1, "update");
-	}
-
-	public void testUpdateContents() throws JaxenException {
-		// get all 'update' operations
-		List<?> updates = query(root, "//iaml:operations[iaml:name='update']");
-
-		// there are 4 input texts => there should be at least 4 update operations
-		assertGreaterEq(4, updates.size());
-
-		int i = 0;
-		for (Object obj : updates) {
-			i++;
-			String prelude = "'update' operation #" + i;
-			CompositeOperation update = (CompositeOperation) obj;	// should be a composite operation
-			assertEquals(prelude, update.getName(), "update");
-
-			// -- traverse from start node --
-			StartNode start = assertHasStartNode(update);
-			FinishNode finish = assertHasFinishNode(update);
-			CancelNode cancel = assertHasCancelNode(update);
-
-			DecisionNode check = assertHasDecisionNode(update, "can cast?");
-			CastNode cast = assertHasCastNode(update);
-
-			PrimitiveOperation set = assertHasPrimitiveOperation(update, "set");
-
-			assertHasExecutionEdge(update, start, check);
-			assertHasExecutionEdge(update, check, cancel, "no");
-			assertHasExecutionEdge(update, check, set, "yes");
-			assertHasExecutionEdge(update, set, finish);
-
-			// data flow edges
-			Parameter param = assertHasParameter(update, "setValueTo");
-			assertHasDataFlowEdge(update, param, cast);
-			assertHasDataFlowEdge(update, cast, check);
-			assertHasDataFlowEdge(update, cast, set);
-
-			assertEquals(1, set.getOutFlows().size());
-			Property f2 = (Property) set.getOutFlows().get(0).getTo();
-			assertEquals("fieldValue", f2.getName());
-		}
 	}
 
 	public void testSyncWire1() throws JaxenException {

@@ -3,8 +3,10 @@
  */
 package org.openiaml.model.tests.inference.model0_5_3;
 
+import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.PrimitiveCondition;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.operations.CancelNode;
@@ -41,12 +43,14 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 		InputTextField text1 = assertHasInputTextField(home, "text1");
 		PrimitiveOperation init1 = assertHasPrimitiveOperation(text1, "init"); 
 		PrimitiveOperation update1 = assertHasPrimitiveOperation(text1, "update"); 
+		PrimitiveCondition cast1 = assertHasPrimitiveCondition(text1, "can cast?"); 
 		
 		InputTextField text2 = assertHasInputTextField(home, "text2");
 		CompositeOperation init2 = assertHasCompositeOperation(text2, "init"); 
 		CompositeOperation update2 = assertHasCompositeOperation(text2, "update"); 
+		CompositeCondition cast2 = assertHasCompositeCondition(text2, "can cast?"); 
 
-		assertNotGenerated(text1, text2, init1, init2, update1, update2);
+		assertNotGenerated(text1, text2, init1, init2, update1, update2, cast1, cast2);
 		
 	}
 	
@@ -68,7 +72,7 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 
 	}
 	
-public void testContentsOfUpdateOperation() throws Exception {
+	public void testContentsOfUpdateOperation() throws Exception {
 		
 		Frame home = assertHasFrame(root, "Home");
 		InputTextField text2 = assertHasInputTextField(home, "text2");
@@ -131,6 +135,50 @@ public void testContentsOfUpdateOperation() throws Exception {
 		assertEquals(1, set.getOutFlows().size());
 		Property f2 = (Property) set.getOutFlows().get(0).getTo();
 		assertEquals("fieldValue", f2.getName());
+		
+	}
+	
+	/**
+	 * Primitive conditions are not composite conditions.
+	 * 
+	 * @throws Exception
+	 */
+	public void testPrimitiveConditionsAreNotComposite() throws Exception {
+		
+		Frame home = assertHasFrame(root, "Home");
+		
+		InputTextField text1 = assertHasInputTextField(home, "text1");
+		PrimitiveCondition cast1 = assertHasPrimitiveCondition(text1, "can cast?");
+		
+		assertFalse(cast1 instanceof CompositeCondition);
+
+	}
+	
+	public void testContentsOfCanCastCondition() throws Exception {
+		
+		Frame home = assertHasFrame(root, "Home");
+		InputTextField text2 = assertHasInputTextField(home, "text2");
+		CompositeCondition canCast = assertHasCompositeCondition(text2, "can cast?"); 
+		Property integerValue = assertHasFieldValue(text2);
+		
+		StartNode start = assertHasStartNode(canCast);
+		Parameter param = assertHasParameter(canCast, "value");
+		// parameter is of 'any' type
+		assertNull(param.getType());
+
+		DecisionNode check = assertHasDecisionNode(canCast, "can cast?");
+
+		CastNode cast = assertHasCastNode(canCast);
+		assertHasDataFlowEdge(canCast, param, cast);	// in
+		assertHasDataFlowEdge(canCast, cast, integerValue);	// out
+		assertHasDataFlowEdge(canCast, cast, check);	// check
+
+		CancelNode cancel = assertHasCancelNode(canCast);
+		FinishNode finish = assertHasFinishNode(canCast);
+
+		assertHasExecutionEdge(canCast, start, check);
+		assertHasExecutionEdge(canCast, check, cancel, "no");
+		assertHasExecutionEdge(canCast, check, finish, "yes");
 		
 	}
 	

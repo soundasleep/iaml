@@ -4,7 +4,6 @@
 package org.openiaml.model.tests.inference.model0_5;
 
 import org.openiaml.model.model.ActionEdge;
-import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Property;
@@ -115,22 +114,6 @@ public class MapFormInput extends InferenceTestCase {
 		ParameterEdge param = assertHasParameterEdge(root, value1, run);
 		assertGenerated(param);
 
-	}
-
-	/**
-	 * 'update' operation has a StartNode
-	 *
-	 * @throws Exception
-	 */
-	public void testUpdateContents() throws Exception {
-		Frame home = assertHasFrame(root, "Home");
-		Map map = assertHasMap(home, "target map");
-		MapPoint point1 = assertHasMapPoint(map, "address 1");
-
-		// following generated
-		CompositeOperation update = assertHasCompositeOperation(point1, "update");
-
-		assertGenerated(assertHasStartNode(update));
 	}
 
 }

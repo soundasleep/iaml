@@ -2,10 +2,12 @@
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.129c46b2e93.1">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <children xsi:type="iaml.visual:InputTextField" id="visual.129c46b2f1f.9" name="text1">
+      <conditions xsi:type="iaml:PrimitiveCondition" id="model.129c46b2e93.64" name="can cast?"/>
       <operations xsi:type="iaml:PrimitiveOperation" id="model.129c46b2e93.2a" name="init"/>
       <operations xsi:type="iaml:PrimitiveOperation" id="model.129c46b2e93.2b" name="update"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.129c46b2f1f.13" name="text2">
+      <conditions xsi:type="iaml:CompositeCondition" id="model.129c46b2e93.89" name="can cast?"/>
       <operations xsi:type="iaml:CompositeOperation" id="model.129c46b2e93.44" name="init"/>
       <operations xsi:type="iaml:CompositeOperation" id="model.129c46b2e93.45" name="update"/>
     </children>

@@ -26,6 +26,7 @@ public class AllModel0_5_3InferenceTests {
 		suite.addTestSuite(AccessControlHandlerSpecifyLogoutPage.class);
 		suite.addTestSuite(AccessControlHandlerSpecifySuccessPage.class);
 		suite.addTestSuite(SetPropertiesDirectly.class);
+		suite.addTestSuite(PrimitiveUpdateOperations.class);
 		
 		return suite;
 	}

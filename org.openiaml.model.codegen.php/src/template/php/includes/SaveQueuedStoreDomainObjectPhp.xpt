@@ -12,6 +12,9 @@
 
 define('REDIRECT_ON_CLIENT', true);
 
+// include operations, condition definitions
+«EXPAND template::Common::commonPHPIncludes»
+
 «EXPAND template::domain::Definitions::domainDefinitions»
 
 log_message("save_queued_store_domain_object.php? " . print_r($_GET, true));

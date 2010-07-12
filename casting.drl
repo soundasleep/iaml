@@ -30,11 +30,9 @@ global DroolsHelperFunctions functions;
  */
 rule "Create 'can cast?' condition for VisibleThings"
 	when
-		tf : VisibleThing( )
+		tf : VisibleThing( overridden == false )
 		not ( condition : Condition ( name == "can cast?", eContainer == tf ))
-		
-		eval ( handler.veto( tf ))
-	
+
 	then
 		PrimitiveCondition condition = handler.generatedPrimitiveCondition(tf, tf);
 		handler.setName(condition, "can cast?");
@@ -46,11 +44,9 @@ rule "Create contents of 'can cast?' condition"
 	when
 		tf : VisibleThing( )
 		fieldValue : Property ( tf.fieldValue == fieldValue )
-		c : CompositeCondition ( name == "can cast?", eContainer == tf )
+		c : CompositeCondition ( overridden == false, name == "can cast?", eContainer == tf )
 		
 		not ( start : StartNode ( eContainer == c ))
-		
-		eval ( handler.veto( c ))
 	
 	then
 		StartNode start = handler.generatedStartNode(c, c);		
@@ -105,7 +101,7 @@ rule "Add 'can cast?' condition check for onChange connecting to Update"
 		source : Changeable ( )
 		target : ContainsOperations ( )
 		
-		sw : SyncWire ( )
+		sw : SyncWire ( overridden == false )
 		eval ( functions.connects(sw, source, target) )
 		
 		fieldValue : Property ( source.fieldValue == fieldValue )		
@@ -118,9 +114,7 @@ rule "Add 'can cast?' condition check for onChange connecting to Update"
 		condition : Condition ( name == "can cast?", eContainer == target )
 		
 		not ( ce : ConditionEdge ( from == condition, to == run )) 
-		
-		eval ( handler.veto( sw ))
-	
+
 	then
 		ConditionEdge ce = handler.generatedConditionEdge(sw, sw, condition, run);
 		handler.setName(ce, "prevent incompatible types");
@@ -142,7 +136,7 @@ rule "Add 'can cast?' condition check for onAccess connecting to Init"
 		target : CanBeSynced ( )
 		targetc : Changeable ( eval(target.equals(targetc)) )
 		
-		sw : SyncWire ( )
+		sw : SyncWire ( overridden == false )
 		eval ( functions.connects(sw, source, target) )
 		
 		fieldValue : Property ( targetc.fieldValue == fieldValue )		
@@ -156,8 +150,6 @@ rule "Add 'can cast?' condition check for onAccess connecting to Init"
 		condition : Condition ( name == "can cast?", eContainer == source )
 		
 		not ( ce : ConditionEdge ( from == condition, to == run )) 
-		
-		eval ( handler.veto( sw ))
 	
 	then
 		ConditionEdge ce = handler.generatedConditionEdge(sw, sw, condition, run);
@@ -176,7 +168,7 @@ end
  */
 rule "After 'init' has been called on a typed element, call 'validate'"
 	when
-		source : CanBeSynced ( )
+		source : CanBeSynced ( overridden == false )
 		accessible : Accessible ( )
 		eval ( source == accessible )
 		
@@ -188,8 +180,6 @@ rule "After 'init' has been called on a typed element, call 'validate'"
 		validate : Operation ( name == "validate", eContainer == source )
 		
 		not ( runValidate : ActionEdge ( from == event, to == validate ))
-		
-		eval ( handler.veto( source ))
 	
 	then
 		ActionEdge runValidate = handler.generatedActionEdge(source, source, event, validate);
@@ -215,13 +205,11 @@ rule "Only call 'validate' operation onAccess if fieldValue has been set"
 		run : ActionEdge ( from == event, to == upd )
 		
 		validate : Operation ( name == "validate", eContainer == source )
-		runValidate : ActionEdge ( from == event, to == validate )
+		runValidate : ActionEdge ( overridden == false, from == event, to == validate )
 		
 		isSet : Condition ( name == "fieldValue is set", eContainer == source )
 		
 		not ( edge : ConditionEdge ( from == isSet, to == runValidate) )
-		
-		eval ( handler.veto( runValidate ))
 	
 	then
 		ConditionEdge edge = handler.generatedConditionEdge(runValidate, source, isSet, runValidate);

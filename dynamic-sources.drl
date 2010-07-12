@@ -20,14 +20,12 @@ global DroolsHelperFunctions functions;
 rule "Connect SyncWires for a dynamic source, referenced by XPath"
 		
 	when
-		container : InternetApplication ( )
+		container : InternetApplication ( overridden == false )
 		ds : DynamicApplicationElementSet( eval(functions.isXPath(query)), eContainer == container )
 		source : Frame ( ) 
 		sw : SyncWire ( eval(functions.connects(sw, ds, source)) )
 		target : Frame ( eval(source != target), eval(functions.potentialXPathMatch(container, ds, target)) )
 		not ( tw : SyncWire( eval(functions.connects(tw, source, target)) ) )
-			
-		eval ( handler.veto( container ))
 		
 	then 
 		SyncWire sw2 = handler.generatedSyncWire( container, container, source, target );
@@ -39,11 +37,9 @@ end
 rule "Create the Condition for an XPath set"
 
 	when
-		ds : DynamicApplicationElementSet( eval(functions.isXPath(query)) )
+		ds : DynamicApplicationElementSet( overridden == false, eval(functions.isXPath(query)) )
 		not ( CompositeCondition(eContainer == ds, name == 'xpath' ) )
-		
-		eval ( handler.veto( ds ))
-	
+
 	then
 		CompositeCondition c = handler.generatedCompositeCondition(ds, ds);
 		handler.setName(c, "xpath");
@@ -56,15 +52,13 @@ rule "Create the contents of the XPath condition when connected to SyncWires"
 	when
 		container : InternetApplication( )
 		ds : DynamicApplicationElementSet( eval(functions.isXPath(query)), eContainer == container )
-		o : CompositeCondition ( eContainer == ds, name == "xpath" )
+		o : CompositeCondition ( overridden == false, eContainer == ds, name == "xpath" )
 		# limit to only creating one contents of the condition
 		exists ( any_sync_wire : SyncWire( )
 			and cw : ConditionEdge ( from == o, to == any_sync_wire ) )
 		
 		not ( StartNode( eContainer == o ))
-		
-		eval ( handler.veto( o ))
-	
+
 	then
 		# create contents
 		Parameter parameter = handler.generatedParameter(o, o);
@@ -133,7 +127,7 @@ end
 rule "Create the XPath ConditionEdge for generated SyncWires"
 	when
 		container : InternetApplication( )
-		ds : DynamicApplicationElementSet( eval(functions.isXPath(query)), eContainer == container )
+		ds : DynamicApplicationElementSet( overridden == false, eval(functions.isXPath(query)), eContainer == container )
 		source : Frame ( ) 
 		sw : SyncWire ( eval(functions.connects(sw, ds, source)) )
 		target : Frame ( eval(source != target), eval(functions.potentialXPathMatch(container, ds, target)) )
@@ -142,8 +136,6 @@ rule "Create the XPath ConditionEdge for generated SyncWires"
 		not (
 			tw_cw : ConditionEdge ( from == condition, to == tw ) 
 		)
-		
-		eval ( handler.veto( ds ))
 	
 	then
 		ConditionEdge cwt = handler.generatedConditionEdge( ds, ds, condition, tw );
@@ -174,15 +166,13 @@ rule "Connect ParameterEdges to empty ConditionEdge for XPath"
 		target : Frame ( eval(source != target), eval(functions.potentialXPathMatch(container, ds, target)) )
 		tw : SyncWire ( eval(functions.connects(tw, source, target)) )
 		condition : CompositeCondition ( eContainer == ds )
-		cwt : ConditionEdge ( from == condition, to == tw )
+		cwt : ConditionEdge ( overridden == false, from == condition, to == tw )
 		not (
 			#tw_cw : ConditionEdge ( from == condition, to == tw ) and
 			tw_pw : ParameterEdge ( from == ds, to == cwt ) 
 			#and
 			#tw_pw2 : ParameterEdge ( from == target, to == tw_cw )
 		)
-		
-		eval ( handler.veto( cwt ))
 	
 	then
 		# We have a ConditionEdge that does not have any parameters:

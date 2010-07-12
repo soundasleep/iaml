@@ -21,14 +21,13 @@ global DroolsHelperFunctions functions;
 
 rule "Create 'Continue' button for Frames connected with 'first' or 'last' or 'fail' ActionEdge"
 	when
-		gate : Gate ( )
+		gate : Gate ( overridden == false )
 		target : Frame ( )
 		nav : ActionEdge ( from == gate, to == target, name == "first" || name == "last" || name == "fail" )
 		
 		not (Button ( eContainer == target, name == "Continue" ))
 		not (ActionEdge ( to == gate ))
-		
-		eval ( handler.veto( gate ))
+
 	
 	then
 		Button button = handler.generatedButton(gate, target);
@@ -39,7 +38,7 @@ end
 
 rule "Connect 'click' on 'Continue' button to resume Gate"
 	when
-		gate : Gate ( )
+		gate : Gate ( overridden == false )
 		target : Frame ( )
 		nav : ActionEdge ( from == gate, to == target, name == "first" || name == "last" || name == "fail" ) 
 		button : Button ( eContainer == target, name == "Continue" )
@@ -47,8 +46,6 @@ rule "Connect 'click' on 'Continue' button to resume Gate"
 		click : EventTrigger ( button.onClick == click, eContainer == button )
 		
 		not (ActionEdge ( from == click, to == gate ))
-		
-		eval ( handler.veto( gate ))
 	
 	then
 		ActionEdge wire = handler.generatedActionEdge(gate, target, click, gate);
@@ -60,13 +57,11 @@ end
 rule "Create '(gate) flag' property when Gate is connected by 'first' or 'last'"
 	when
 		session : Scope ( )
-		gate : Gate ( eContainer == session )
+		gate : Gate ( eContainer == session, overridden == false )
 		
 		wire : ActionEdge ( from == gate, name == "first" || name == "last" )
 		
 		not (Property ( eContainer == session, eval( name.equals(gate.getName() + " flag")) ))
-		
-		eval ( handler.veto( gate ))
 	
 	then
 		Property prop = handler.generatedProperty(gate, session);
@@ -78,15 +73,13 @@ end
 
 rule "Create 'set flag' operation for Frames connected with 'first' or 'last' ActionEdge"
 	when
-		gate : Gate ( )
+		gate : Gate ( overridden == false )
 		target : Frame ( )
 		nav : ActionEdge ( from == gate, to == target, name == "first" || name == "last" )
 		button : Button ( eContainer == target, name == "Continue" )
 		
 		not (CompositeOperation ( eContainer == target, name == "Set gate flag" ))
-			
-		eval ( handler.veto( gate ))
-		
+
 	then
 		CompositeOperation op = handler.generatedCompositeOperation(gate, target);
 		handler.setName(op, "Set gate flag");
@@ -96,7 +89,7 @@ end
 
 rule "Connect 'access' event with 'set flag' operation"
 	when
-		gate : Gate ( )
+		gate : Gate ( overridden == false )
 		target : Frame ( )
 		nav : ActionEdge ( from == gate, to == target, name == "first" || name == "last" )
 		button : Button ( eContainer == target, name == "Continue" )
@@ -104,8 +97,6 @@ rule "Connect 'access' event with 'set flag' operation"
 		access : EventTrigger ( eContainer == target, target.onAccess == access )
 		
 		not (ActionEdge ( from == access, to == op ))
-			
-		eval ( handler.veto( gate ))
 		
 	then
 		ActionEdge run = handler.generatedActionEdge(gate, target, access, op);
@@ -117,7 +108,7 @@ end
 rule "Create contents of 'set flag' operation"
 	when
 		session : Scope ( )
-		gate : Gate ( eContainer == session )
+		gate : Gate ( eContainer == session, overridden == false )
 		target : Frame ( )
 		nav : ActionEdge ( from == gate, to == target, name == "first" || name == "last" )
 		button : Button ( eContainer == target, name == "Continue" )
@@ -126,8 +117,6 @@ rule "Create contents of 'set flag' operation"
 		op : CompositeOperation ( eContainer == target, name == "Set gate flag" )
 		
 		not (StartNode ( eContainer == op ))
-			
-		eval ( handler.veto( gate ))
 		
 	then
 		StartNode start = handler.generatedStartNode(gate, op);
@@ -157,12 +146,10 @@ end
 rule "Create condition 'check (gate)'"
 	when
 		session : Scope ( )
-		gate : Gate ( eContainer == session )
+		gate : Gate ( eContainer == session, overridden == false )
 		wire : ActionEdge ( from == gate, name == "first" || name == "last" )
 		
 		not ( Condition ( eContainer == session, eval( name.equals("check " + gate.getName())) ))
-		
-		eval ( handler.veto( gate ))
 	
 	then
 		CompositeCondition cond = handler.generatedCompositeCondition(gate, session);
@@ -174,15 +161,13 @@ end
 rule "Connect condition 'check (gate)' with gate"
 	when
 		session : Scope ( )
-		gate : Gate ( eContainer == session )
+		gate : Gate ( eContainer == session, overridden == false )
 		wire : ActionEdge ( from == gate, name == "first" || name == "last" )
 		
 		cond : Condition ( eContainer == session, eval( name.equals("check " + gate.getName())) )
 		
 		not ( ConditionEdge ( from == cond, to == gate ))
-		
-		eval ( handler.veto( gate ))
-	
+
 	then
 		ConditionEdge cw = handler.generatedConditionEdge(gate, session, cond, gate);
 		handler.setName(cw, "condition");
@@ -193,7 +178,7 @@ end
 rule "Create contents of 'check (gate)' condition"
 	when
 		session : Scope ( )
-		gate : Gate ( eContainer == session )
+		gate : Gate ( eContainer == session, overridden == false )
 		wire : ActionEdge ( from == gate, name == "first" || name == "last" )
 		property : Property ( eContainer == session, eval( name.equals(gate.getName() + " flag")) )
 		
@@ -201,9 +186,7 @@ rule "Create contents of 'check (gate)' condition"
 		cw : ConditionEdge ( from == cond, to == gate )
 		
 		not ( StartNode ( eContainer == cond ))
-		
-		eval ( handler.veto( gate ))
-	
+
 	then
 		StartNode start = handler.generatedStartNode(gate, cond);
 		FinishNode finish = handler.generatedFinishNode(gate, cond);
@@ -242,15 +225,13 @@ rule "If an EntryGate requires a Label value, then a Page should be created outs
 		container : Scope ( )
 		
 		session : Scope ( eContainer == container )
-		gate : EntryGate ( eContainer == session )
+		gate : EntryGate ( eContainer == session, overridden == false )
 		
 		label : Label ( eContainer == session )		
 		requires : RequiresEdge ( from == gate, to == label )
 		
 		not ( provide : Frame ( eContainer == container, name != null,
 			eval ( functions.getEntryGateFrameNameForProvides(label).equals(provide.getName()) ) ) ) 
-	
-		eval ( handler.veto( gate ))
 	
 	then
 		Frame provide = handler.generatedFrame(gate, container);
@@ -264,7 +245,7 @@ rule "For EntryGates that require Label values, connect a NavigateWire to the pr
 		container : Scope ( )
 		
 		session : Scope ( eContainer == container )
-		gate : EntryGate ( eContainer == session )
+		gate : EntryGate ( eContainer == session, overridden == false )
 		
 		label : Label ( eContainer == session )		
 		requires : RequiresEdge ( from == gate, to == label )
@@ -274,8 +255,6 @@ rule "For EntryGates that require Label values, connect a NavigateWire to the pr
 		
 		# allow other ActionEdges to override this one
 		not ( ActionEdge ( from == gate )) 
-	
-		eval ( handler.veto( gate ))
 	
 	then
 		ActionEdge nav = handler.generatedActionEdge(gate, gate, gate, provide);
@@ -289,7 +268,7 @@ rule "Create TextFields for all Labels required by an EntryGate"
 		container : Scope ( )
 		
 		session : Scope ( eContainer == container )
-		gate : EntryGate ( eContainer == session )
+		gate : EntryGate ( eContainer == session, overridden == false )
 		
 		label : Label ( eContainer == session )		
 		requires : RequiresEdge ( from == gate, to == label )
@@ -298,9 +277,7 @@ rule "Create TextFields for all Labels required by an EntryGate"
 			eval ( functions.getEntryGateFrameNameForProvides(label).equals(provide.getName()) ) )
 			
 		not ( VisibleThing ( eContainer == provide, name == label.name ) )
-		
-		eval ( handler.veto( gate ))
-	
+
 	then
 		InputTextField text = handler.generatedInputTextField(gate, provide);
 		handler.setName(text, label.getName());
@@ -314,7 +291,7 @@ rule "If an EntryGate requires a Label value, then the 'is set?' Condition in th
 		container : Scope ( )
 		
 		session : Scope ( eContainer == container )
-		gate : EntryGate ( eContainer == session )
+		gate : EntryGate ( eContainer == session, overridden == false )
 		
 		label : Label ( eContainer == session )		
 		requires : RequiresEdge ( from == gate, to == label )
@@ -322,8 +299,6 @@ rule "If an EntryGate requires a Label value, then the 'is set?' Condition in th
 		cond : Condition ( eContainer == label, name == "fieldValue is set" )
 		
 		not ( ConditionEdge ( from == cond, to == gate ))
-
-		eval ( handler.veto( gate ))
 	
 	then
 		ConditionEdge edge = handler.generatedConditionEdge(gate, gate, cond, gate);
@@ -336,7 +311,7 @@ rule "If an EntryGate requires a Label, get the containing Scope to update the L
 		container : Scope ( )
 		
 		session : Scope ( eContainer == container )
-		gate : EntryGate ( eContainer == session )
+		gate : EntryGate ( eContainer == session, overridden == false )
 		
 		label : Label ( eContainer == session )		
 		requires : RequiresEdge ( from == gate, to == label )
@@ -354,8 +329,6 @@ rule "If an EntryGate requires a Label, get the containing Scope to update the L
 		op : Operation ( eContainer == label, name == "update" )
 		
 		not ( ActionEdge ( from == onAccess, to == op ))
-
-		eval ( handler.veto( gate ))
 	
 	then
 		ActionEdge run = handler.generatedActionEdge(gate, gate, onAccess, op);
@@ -373,7 +346,7 @@ rule "If an EntryGate requires a Label, the Label is only updated externally if 
 		container : Scope ( )
 		
 		session : Scope ( eContainer == container )
-		gate : EntryGate ( eContainer == session )
+		gate : EntryGate ( eContainer == session, overridden == false )
 		
 		label : Label ( eContainer == session )		
 		requires : RequiresEdge ( from == gate, to == label )
@@ -396,8 +369,6 @@ rule "If an EntryGate requires a Label, the Label is only updated externally if 
 		condition : Condition ( eContainer == field, name == "fieldValue is set" )
 		
 		not ( ConditionEdge ( from == condition, to == run ))
-
-		eval ( handler.veto( gate ))
 	
 	then
 		ConditionEdge edge = handler.generatedConditionEdge(gate, gate, condition, run);
@@ -410,7 +381,7 @@ rule "If an EntryGate requires a Label, the Label is only updated externally if 
 		container : Scope ( )
 		
 		session : Scope ( eContainer == container )
-		gate : EntryGate ( eContainer == session )
+		gate : EntryGate ( eContainer == session, overridden == false )
 		
 		label : Label ( eContainer == session )		
 		requires : RequiresEdge ( from == gate, to == label )
@@ -435,8 +406,6 @@ rule "If an EntryGate requires a Label, the Label is only updated externally if 
 		
 		not ( ConditionEdge ( from == condition, to == run ))
 
-		eval ( handler.veto( gate ))
-	
 	then
 		ConditionEdge edge = handler.generatedConditionEdge(gate, gate, condition, run);
 		queue.add(edge, drools);

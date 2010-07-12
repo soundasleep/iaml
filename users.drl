@@ -25,12 +25,9 @@ global DroolsHelperFunctions functions;
 rule "When a session is protected by an AccessControlHandler with no login handler[type=user], add it"
 	when
 		session : Session ( )
-		ach : AccessControlHandler ( eContainer == session )
+		ach : AccessControlHandler ( eContainer == session, overridden == false )
 		
 		not (LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session ))
-				
-		eval ( handler.veto( ach ))
-
 	then
 		LoginHandler lh = handler.generatedLoginHandler(ach, session);
 		handler.setValue(lh, ComponentsPackage.eINSTANCE.getLoginHandler_Type(), LoginHandlerTypes.USER);
@@ -43,14 +40,12 @@ rule "When a page is protected by an AccessControlHandler with no login handler[
 	when
 		session : Session ( )
 		page : Frame ( eContainer == session )
-		ach : AccessControlHandler ( eContainer == page )
+		ach : AccessControlHandler ( eContainer == page, overridden == false )
 		
 		not (LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session ))
 		
 		# no AccessControlHandler within the session too (the above rule will create one)
 		not (AccessControlHandler ( eContainer == session ))
-				
-		eval ( handler.veto( ach ))
 
 	then
 		LoginHandler lh = handler.generatedLoginHandler(ach, session);
@@ -71,15 +66,13 @@ end
 rule "If an AccessControlHandler specifies a Login page, connect this to the generated LoginHandler"
 	when
 		session : Session ( )
-		ach : AccessControlHandler ( eContainer == session )
+		ach : AccessControlHandler ( eContainer == session, overridden == false )
 		login_handler : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
 		
 		login_page : Frame ( )
 		login_edge : ActionEdge ( from == ach, to == login_page, name == "login" )
 		
 		not ( ActionEdge( from == login_handler, name == "login" ))
-		
-		eval ( handler.veto( ach ))
 
 	then
 		ActionEdge edge = handler.generatedActionEdge(ach, session, login_handler, login_page);
@@ -99,7 +92,7 @@ end
 rule "If an AccessControlHandler specifies a Logout page, connect this to the generated LoginHandler"
 	when
 		session : Session ( )
-		ach : AccessControlHandler ( eContainer == session )
+		ach : AccessControlHandler ( eContainer == session, overridden == false )
 		login_handler : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
 		
 		login_page : Frame ( )
@@ -107,8 +100,6 @@ rule "If an AccessControlHandler specifies a Logout page, connect this to the ge
 		
 		not ( ActionEdge( from == login_handler, name == "logout" ))
 		
-		eval ( handler.veto( ach ))
-
 	then
 		ActionEdge edge = handler.generatedActionEdge(ach, session, login_handler, login_page);
 		handler.setName(edge, "logout");
@@ -127,15 +118,13 @@ end
 rule "If an AccessControlHandler specifies a Success page, connect this to the generated LoginHandler"
 	when
 		session : Session ( )
-		ach : AccessControlHandler ( eContainer == session )
+		ach : AccessControlHandler ( eContainer == session, overridden == false )
 		login_handler : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
 		
 		login_page : Frame ( )
 		login_edge : ActionEdge ( from == ach, to == login_page, name == "success" )
 		
 		not ( ActionEdge( from == login_handler, name == "success" ))
-		
-		eval ( handler.veto( ach ))
 
 	then
 		ActionEdge edge = handler.generatedActionEdge(ach, session, login_handler, login_page);
@@ -148,12 +137,10 @@ rule "A page within a session protected by an ACH should have a 'permissions che
 	when
 		session : Session ( )
 		page : Frame ( eContainer == session )
-		ach : AccessControlHandler ( eContainer == session )
+		ach : AccessControlHandler ( eContainer == session, overridden == false )
 
 		not ( Operation ( eContainer == page, name == "permissions check" ))
-					
-		eval ( handler.veto( ach ))
-	
+
 	then
 		CompositeOperation check = handler.generatedCompositeOperation(ach, page);
 		handler.setName(check, "permissions check");
@@ -164,11 +151,9 @@ end
 rule "A page protected by an ACH should have a 'permissions check' operation"
 	when
 		page : Frame ( )
-		ach : AccessControlHandler ( eContainer == page )
+		ach : AccessControlHandler ( eContainer == page, overridden == false )
 
 		not ( Operation ( eContainer == page, name == "page permissions check" ))
-					
-		eval ( handler.veto( ach ))
 	
 	then
 		CompositeOperation check = handler.generatedCompositeOperation(ach, page);
@@ -181,13 +166,11 @@ rule "Connect 'permissions check' up to the 'access' event of the session (ACH i
 	when
 		session : Session ( )
 		page : Frame ( eContainer == session )
-		ach : AccessControlHandler ( eContainer == session )
+		ach : AccessControlHandler ( eContainer == session, overridden == false )
 		access : EventTrigger ( eContainer == page, page.onAccess == access ) 
 		check : Operation ( eContainer == page, name == "permissions check" )
 		
 		not ( ActionEdge ( from == access, to == check ))
-					
-		eval ( handler.veto( ach ))
 	
 	then
 		ActionEdge run = handler.generatedActionEdge(ach, page, access, check);
@@ -199,14 +182,12 @@ end
 rule "Connect 'permissions check' up to the 'access' event of the page (ACH in page)"
 	when
 		page : Frame ( )
-		ach : AccessControlHandler ( eContainer == page )
+		ach : AccessControlHandler ( eContainer == page, overridden == false )
 		access : EventTrigger ( eContainer == page, page.onAccess == access )
 		check : Operation ( eContainer == page, name == "page permissions check" )
 		
 		not ( ActionEdge ( from == access, to == check ))
-					
-		eval ( handler.veto( ach ))
-	
+
 	then
 		ActionEdge run = handler.generatedActionEdge(ach, page, access, check);
 		handler.setName(run, "run");
@@ -219,15 +200,13 @@ rule "Connect fail wire from 'permissions check' to 'login page'"
 		root : InternetApplication ( )
 		session : Session ( eContainer == root )
 		page : Frame ( eContainer == session )
-		ach : AccessControlHandler ( eContainer == session )
+		ach : AccessControlHandler ( eContainer == session, overridden == false )
 		access : EventTrigger ( eContainer == page, page.onAccess == access )
 		check : CompositeOperation ( eContainer == page, name == "permissions check" )
 		lh : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
 		login : Frame ( name == "login", eContainer == root ) 
 		
 		not ( ActionEdge ( from == check, to == login, name == "fail" ))
-					
-		eval ( handler.veto( ach ))
 	
 	then
 		ActionEdge nav = handler.generatedActionEdge(ach, page, check, login);
@@ -241,7 +220,7 @@ rule "Connect fail wire from 'permissions check' to 'login page' (in separate lo
 		root : InternetApplication ( )
 		session : Session ( eContainer == root )
 		page : Frame ( eContainer == session )
-		ach : AccessControlHandler ( eContainer == session )
+		ach : AccessControlHandler ( eContainer == session, overridden == false )
 		access : EventTrigger ( eContainer == page, page.onAccess == access )
 		check : CompositeOperation ( eContainer == page, name == "permissions check" )
 		lh : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
@@ -249,8 +228,6 @@ rule "Connect fail wire from 'permissions check' to 'login page' (in separate lo
 		login : Frame ( name == "login", eContainer == login_session ) 
 		
 		not ( ActionEdge ( from == check, to == login, name == "fail" ))
-					
-		eval ( handler.veto( ach ))
 	
 	then
 		ActionEdge nav = handler.generatedActionEdge(ach, page, check, login);
@@ -261,13 +238,11 @@ end
 
 rule "If a Role is defined, a default role User is also defined"
 	when
-		root : InternetApplication ( )
+		root : InternetApplication ( overridden == false )
 		exists ( r : Role ( eContainer == root ))
 		
 		not ( Role ( name == "User", eContainer == root ))
 					
-		eval ( handler.veto( root ))
-	
 	then
 		Role user = handler.generatedRole(root, root);
 		handler.setName(user, "User");
@@ -278,11 +253,9 @@ end
 rule "'User' role contains a default attribute 'email'"
 	when
 		root : InternetApplication ( )
-		user : Role ( name == "User", eContainer == root )
+		user : Role ( name == "User", eContainer == root, overridden == false )
 		
 		not ( DomainAttribute ( name == "email", eContainer == user ))
-					
-		eval ( handler.veto( user ))
 	
 	then
 		DomainAttribute attr = handler.generatedDomainAttribute(user, user);
@@ -295,11 +268,9 @@ end
 rule "'User' role contains a default attribute 'password'"
 	when
 		root : InternetApplication ( )
-		user : Role ( name == "User", eContainer == root )
+		user : Role ( name == "User", eContainer == root, overridden == false )
 		
 		not ( DomainAttribute ( name == "password", eContainer == user ))
-					
-		eval ( handler.veto( user ))
 	
 	then
 		DomainAttribute attr = handler.generatedDomainAttribute(user, user);
@@ -320,7 +291,7 @@ rule "A LoginHandler of type 'user' should have an incoming Role as a parameter,
 	when
 		root : InternetApplication ( )
 		session : Session( ) 
-		login_handler : LoginHandler ( eContainer == session, type == LoginHandlerTypes.USER )
+		login_handler : LoginHandler ( eContainer == session, type == LoginHandlerTypes.USER, overridden == false )
 		
 		exists ( 
 			// it doesn't matter if the ACH is in the session or the page
@@ -348,8 +319,6 @@ rule "A LoginHandler of type 'user' should have an incoming Role as a parameter,
 		not (ParameterEdge ( to == login_handler ))
 		
 		not (ParameterEdge ( from == user, to == login_handler ))
-					
-		eval ( handler.veto( login_handler ))
 	
 	then
 		ParameterEdge param = handler.generatedParameterEdge(login_handler, session, user, login_handler);
@@ -359,11 +328,9 @@ end
 
 rule "Create 'check permissions' operation in AccessControlHandler"
 	when
-		ach : AccessControlHandler( )
+		ach : AccessControlHandler( overridden == false )
 		
 		not ( Operation ( name == "check permissions", eContainer == ach ))
-					
-		eval ( handler.veto( ach ))
 	
 	then
 		PrimitiveOperation op = handler.generatedPrimitiveOperation(ach, ach);
@@ -378,12 +345,10 @@ rule "Create contents of 'permissions check' operation in a Frame (session)"
 		page : Frame ( eContainer == session )
 		ach : AccessControlHandler ( eContainer == session )
 
-		check : CompositeOperation ( eContainer == page, name == "permissions check" )
+		check : CompositeOperation ( eContainer == page, name == "permissions check", overridden == false )
 		ach_check : Operation ( eContainer == ach, name == "check permissions" )
 		
 		not ( StartNode( eContainer == check ))	
-				
-		eval ( handler.veto( check ))
 
 	then
 			
@@ -435,12 +400,10 @@ rule "Create contents of 'permissions check' operation in a Frame (page)"
 		page : Frame ( )
 		ach : AccessControlHandler ( eContainer == page )
 
-		check : CompositeOperation ( eContainer == page, name == "page permissions check" )
+		check : CompositeOperation ( eContainer == page, name == "page permissions check", overridden == false )
 		ach_check : Operation ( eContainer == ach, name == "check permissions" )
 		
 		not ( StartNode( eContainer == check ))	
-				
-		eval ( handler.veto( check ))
 
 	then
 			
@@ -490,16 +453,14 @@ end
 rule "An AccessControlHandler that creates a LoginHandler should have the created 'current instance' as an incoming parameter (session)"
 	when
 		session : Session ( )
-		ach : AccessControlHandler ( eContainer == session )
+		ach : AccessControlHandler ( eContainer == session, overridden == false )
 		login_handler : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
 		
 		instance : DomainIterator ( eContainer == session )
 		setWire : SetWire ( from == login_handler, to == instance )
 		
 		not ( ParameterEdge ( from == instance, to == ach )) 
-					
-		eval ( handler.veto( ach ))
-	
+
 	then
 		ParameterEdge param = handler.generatedParameterEdge(ach, ach, instance, ach);
 		queue.add(param, drools);
@@ -510,15 +471,13 @@ rule "A separate AccessControlHandler that creates a LoginHandler should have th
 	when
 		session : Session ( )
 		page : Frame ( eContainer == session )
-		ach : AccessControlHandler ( eContainer == page )
+		ach : AccessControlHandler ( eContainer == page, overridden == false )
 		login_handler : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
 		
 		instance : DomainIterator ( eContainer == session )
 		setWire : SetWire ( from == login_handler, to == instance )
 		
 		not ( ParameterEdge ( from == instance, to == ach )) 
-					
-		eval ( handler.veto( ach ))
 	
 	then
 		ParameterEdge param = handler.generatedParameterEdge(ach, ach, instance, ach);
@@ -529,13 +488,11 @@ end
 rule "Any role should extend the default User role"
 	when
 		root : InternetApplication ( )
-		user : Role ( name == "User", eContainer == root )
+		user : Role ( name == "User", eContainer == root, overridden == false )
 		
 		another : Role ( this != user )
 		
 		not ( ExtendsEdge ( from == another, to == user ))
-						
-		eval ( handler.veto( user ))
 		
 	then
 		ExtendsEdge ext = handler.generatedExtendsEdge(user, root, another, user);
@@ -546,7 +503,7 @@ end
 rule "The generated default User has an identical DomainSource as the extended Role"
 	when
 		root : InternetApplication ( )
-		user : Role ( name == "User", eContainer == root )
+		user : Role ( name == "User", eContainer == root, overridden == false )
 
 		exists (
 			original : DomainSource ( ) and
@@ -560,8 +517,6 @@ rule "The generated default User has an identical DomainSource as the extended R
 		)
 			
 		not ( SchemaEdge ( to == user ))
-						
-		eval ( handler.veto( user ))
 
 	then
 		DomainSource original = functions.getOriginalDomainSource(user);

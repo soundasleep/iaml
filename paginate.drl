@@ -41,7 +41,7 @@ rule "Create navigation buttons for InputForms when connected to DomainIterators
 		schemaEdge : SchemaEdge ( )
 		eval(functions.connectsSchema(schemaEdge, domainSource, object )) 
 		
-		select : SelectEdge ( )
+		select : SelectEdge ( overridden == false )
 		eval(functions.connectsSelect(select, instance, domainSource ))
 		
 		form : InputForm ( )
@@ -52,8 +52,6 @@ rule "Create navigation buttons for InputForms when connected to DomainIterators
 		not ( button : VisibleThing ( eContainer == form, name == "Previous" ) )
 		not ( button : VisibleThing ( eContainer == form, name == "First" ) )
 		not ( button : VisibleThing ( eContainer == form, name == "Last" ) )
-
-		eval ( handler.veto( select ))
 		
 	then
 		Button next = handler.generatedButton(select, form);
@@ -89,7 +87,7 @@ rule "Create 'Results' Label for InputForms when connected to DomainIterators wi
 		schemaEdge : SchemaEdge ( )
 		eval(functions.connectsSchema(schemaEdge, domainSource, object ))
 		
-		select : SelectEdge ( )
+		select : SelectEdge ( overridden == false )
 		eval(functions.connectsSelect(select, instance, domainSource ))
 				
 		form : InputForm ( )
@@ -97,8 +95,6 @@ rule "Create 'Results' Label for InputForms when connected to DomainIterators wi
 		eval ( functions.connectsSet ( set, instance, form ))
 				
 		not ( button : VisibleThing ( eContainer == form, name == "Results" ) )
-
-		eval ( handler.veto( select ))
 		
 	then
 		Label label = handler.generatedLabel(select, form);
@@ -115,14 +111,12 @@ rule "Connect Next button to 'next' operation on DomainIterator"
 		set : SetWire ( )
 		eval ( functions.connectsSet ( set, instance, form ))
 		
-		next : Button ( eContainer == form, name == "Next" )
+		next : Button ( eContainer == form, name == "Next", overridden == false )
 		onClick : EventTrigger ( next.onClick == onClick )
 		
 		nextOp : Operation ( instance.next == nextOp )
 	
 		not ( run : ActionEdge ( from == onClick, to == nextOp ))  
-		
-		eval ( handler.veto( next ))
 
 	then
 		ActionEdge run = handler.generatedActionEdge(next, next, onClick, nextOp);
@@ -144,11 +138,9 @@ rule "Connect 'hasNext' condition to Next button action"
 		onClick : EventTrigger ( next.onClick == onClick )
 		
 		nextOp : Operation ( instance.next == nextOp )
-		run : ActionEdge ( from == onClick, to == nextOp )
+		run : ActionEdge ( from == onClick, to == nextOp, overridden == false )
 	
 		not ( ce : ConditionEdge ( from == hasNext, to == run ) )  
-		
-		eval ( handler.veto( run ))
 
 	then
 		ConditionEdge ce = handler.generatedConditionEdge(run, next, hasNext, run);
@@ -164,14 +156,12 @@ rule "Connect Previous button to 'previous' operation on DomainIterator"
 		set : SetWire ( )
 		eval ( functions.connectsSet ( set, instance, form ))
 		
-		prev : Button ( eContainer == form, name == "Previous" )
+		prev : Button ( eContainer == form, name == "Previous", overridden == false )
 		onClick : EventTrigger ( prev.onClick == onClick )
 		
 		prevOp : Operation ( instance.previous == prevOp )
 	
 		not ( run : ActionEdge ( from == onClick, to == prevOp ))  
-		
-		eval ( handler.veto( prev ))
 
 	then
 		ActionEdge run = handler.generatedActionEdge(prev, prev, onClick, prevOp);
@@ -193,11 +183,9 @@ rule "Connect 'hasPrevious' condition to Previous button action"
 		onClick : EventTrigger ( prev.onClick == onClick )
 		
 		prevOp : Operation ( instance.previous == prevOp )
-		run : ActionEdge ( from == onClick, to == prevOp )
+		run : ActionEdge ( from == onClick, to == prevOp, overridden == false )
 	
 		not ( ce : ConditionEdge ( from == hasPrevious, to == run ) )  
-		
-		eval ( handler.veto( run ))
 
 	then
 		ConditionEdge ce = handler.generatedConditionEdge(run, prev, hasPrevious, run);
@@ -213,14 +201,12 @@ rule "Connect First button to 'reset' operation on DomainIterator"
 		set : SetWire ( )
 		eval ( functions.connectsSet ( set, instance, form ))
 		
-		first : Button ( eContainer == form, name == "First" )
+		first : Button ( eContainer == form, name == "First", overridden == false )
 		onClick : EventTrigger ( first.onClick == onClick )
 		
 		resetOp : Operation ( instance.reset == resetOp )
 	
 		not ( run : ActionEdge ( from == onClick, to == resetOp ))  
-		
-		eval ( handler.veto( first ))
 
 	then
 		ActionEdge run = handler.generatedActionEdge(first, first, onClick, resetOp);
@@ -242,11 +228,9 @@ rule "Connect 'not empty' condition to First button action"
 		onClick : EventTrigger ( first.onClick == onClick )
 		
 		resetOp : Operation ( instance.reset == resetOp )
-		run : ActionEdge ( from == onClick, to == resetOp )
+		run : ActionEdge ( from == onClick, to == resetOp, overridden == false )
 	
 		not ( ce : ConditionEdge ( from == notEmpty, to == run ) )  
-		
-		eval ( handler.veto( run ))
 
 	then
 		ConditionEdge ce = handler.generatedConditionEdge(run, first, notEmpty, run);
@@ -262,14 +246,12 @@ rule "Connect Last button to 'jump' operation on DomainIterator"
 		set : SetWire ( )
 		eval ( functions.connectsSet ( set, instance, form ))
 		
-		last : Button ( eContainer == form, name == "Last" )
+		last : Button ( eContainer == form, name == "Last", overridden == false )
 		onClick : EventTrigger ( last.onClick == onClick )
 		
 		jumpOp : Operation ( instance.jump == jumpOp )
 	
 		not ( run : ActionEdge ( from == onClick, to == jumpOp ))  
-		
-		eval ( handler.veto( last ))
 
 	then
 		ActionEdge run = handler.generatedActionEdge(last, last, onClick, jumpOp);
@@ -291,12 +273,10 @@ rule "Connect 'not empty' condition to Last button action"
 		onClick : EventTrigger ( last.onClick == onClick )
 		
 		jumpOp : Operation ( instance.jump == jumpOp )
-		run : ActionEdge ( from == onClick, to == jumpOp )
+		run : ActionEdge ( from == onClick, to == jumpOp, overridden == false )
 	
 		not ( ce : ConditionEdge ( from == notEmpty, to == run ) )  
 		
-		eval ( handler.veto( run ))
-
 	then
 		ConditionEdge ce = handler.generatedConditionEdge(run, last, notEmpty, run);
 		queue.add(ce, drools);
@@ -311,11 +291,9 @@ rule "Create 'target' property in Last button"
 		set : SetWire ( )
 		eval ( functions.connectsSet ( set, instance, form ))
 		
-		last : Button ( eContainer == form, name == "Last" )
+		last : Button ( eContainer == form, name == "Last", overridden == false )
 		
 		not ( property : Property ( eContainer == last, name == "target" ))
-		
-		eval ( handler.veto( last ))
 
 	then
 		Property property = handler.generatedProperty(last, last);
@@ -337,11 +315,9 @@ rule "Connect 'target' property to ActionEdge in Last button"
 		property : Property ( eContainer == last, name == "target" )
 		
 		jumpOp : Operation ( instance.jump == jumpOp )
-		run : ActionEdge ( from == onClick, to == jumpOp )
+		run : ActionEdge ( from == onClick, to == jumpOp, overridden == false )
 		
 		not ( param : ParameterEdge ( from == property, to == run ))
-		
-		eval ( handler.veto( run ))
 
 	then
 		ParameterEdge param = handler.generatedParameterEdge(run, last, property, run);
@@ -357,11 +333,9 @@ rule "'Last' button will have a CompositeOperation named 'update target'"
 		set : SetWire ( )
 		eval ( functions.connectsSet ( set, instance, form ))
 		
-		last : Button ( eContainer == form, name == "Last" )
+		last : Button ( eContainer == form, name == "Last", overridden == false )
 		
 		not ( op : Operation ( eContainer == last, name == "update target" )) 
-		
-		eval ( handler.veto( last ))
 
 	then
 		CompositeOperation op = handler.generatedCompositeOperation(last, last);
@@ -378,7 +352,7 @@ rule "'Last' button needs to call 'update target' before calling 'reset'"
 		set : SetWire ( )
 		eval ( functions.connectsSet ( set, instance, form ))
 		
-		last : Button ( eContainer == form, name == "Last" )
+		last : Button ( eContainer == form, name == "Last", overridden == false )
 		onClick : EventTrigger ( last.onClick == onClick )
 		property : Property ( eContainer == last, name == "target" )
 		
@@ -388,8 +362,6 @@ rule "'Last' button needs to call 'update target' before calling 'reset'"
 		op : Operation ( eContainer == last, name == "update target" )
 		
 		not ( run2 : ActionEdge ( from == onClick, to == op ) ) 
-		
-		eval ( handler.veto( last ))
 
 	then
 		ActionEdge run2 = handler.generatedActionEdge(last, last, onClick, op);
@@ -411,7 +383,7 @@ rule "Create contents of 'update target' operation"
 		last : Button ( eContainer == form, name == "Last" )
 		target : Property ( eContainer == last, name == "target" )
 
-		op : CompositeOperation ( eContainer == last, name == "update target" )
+		op : CompositeOperation ( eContainer == last, name == "update target", overridden == false )
 		
 		not ( StartNode ( eContainer == op ))
 
@@ -464,15 +436,13 @@ rule "Connect Instance.onChange to Results.update"
 		event : EventTrigger ( instance.onChange == event )
 		
 		form : InputForm ( )
-		set : SetWire ( )
+		set : SetWire ( overridden == false )
 		eval ( functions.connectsSet ( set, instance, form ))
 				
 		label : VisibleThing ( eContainer == form, name == "Results" )
 		updateOp : Operation ( eContainer == label, name == "update" )
 		
 		not ( run : ActionEdge ( from == event, to == updateOp ) )
-		
-		eval ( handler.veto( set ))
 		
 	then
 		ActionEdge run = handler.generatedActionEdge(set, set, event, updateOp);
@@ -487,7 +457,7 @@ rule "Connect results parameter to Results label update (onChange)"
 		event : EventTrigger ( instance.onChange == event )
 		
 		form : InputForm ( )
-		set : SetWire ( )
+		set : SetWire ( overridden == false )
 		eval ( functions.connectsSet ( set, instance, form ))
 				
 		label : VisibleThing ( eContainer == form, name == "Results" )
@@ -497,9 +467,7 @@ rule "Connect results parameter to Results label update (onChange)"
 		property : Property ( instance.results == property )
 		
 		not ( param : ParameterEdge ( from == property, to == run ))
-		
-		eval ( handler.veto( set ))
-		
+
 	then
 		ParameterEdge param = handler.generatedParameterEdge(set, set, property, run);
 		queue.add(param, drools);
@@ -517,15 +485,13 @@ rule "Connect Instance.onAccess to Results.update"
 		
 		form : InputForm ( )
 		event : EventTrigger ( form.onAccess == event )
-		set : SetWire ( )
+		set : SetWire ( overridden == false )
 		eval ( functions.connectsSet ( set, instance, form ))
 				
 		label : VisibleThing ( eContainer == form, name == "Results" )
 		updateOp : Operation ( eContainer == label, name == "update" )
 		
 		not ( run : ActionEdge ( from == event, to == updateOp ) )
-		
-		eval ( handler.veto( set ))
 		
 	then
 		ActionEdge run = handler.generatedActionEdge(set, set, event, updateOp);
@@ -540,7 +506,7 @@ rule "Connect results parameter to Results label update (onAccess)"
 		
 		form : InputForm ( )
 		event : EventTrigger ( form.onAccess == event )
-		set : SetWire ( )
+		set : SetWire ( overridden == false )
 		eval ( functions.connectsSet ( set, instance, form ))
 				
 		label : VisibleThing ( eContainer == form, name == "Results" )
@@ -550,8 +516,6 @@ rule "Connect results parameter to Results label update (onAccess)"
 		property : Property ( instance.results == property )
 		
 		not ( param : ParameterEdge ( from == property, to == run ))
-		
-		eval ( handler.veto( set ))
 		
 	then
 		ParameterEdge param = handler.generatedParameterEdge(set, set, property, run);

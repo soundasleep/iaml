@@ -44,13 +44,11 @@ rule "Connect ConditionEdges to ActionEdges created by SyncWires (edit/update) (
 		
 		# and the sync wire had a condition
 		condition : Condition ( )
-		sourceCw : ConditionEdge( from == condition, to == sw )
+		sourceCw : ConditionEdge( overridden == false, from == condition, to == sw )
 		
 		# but our run wire doesn't 
 		not (ConditionEdge (from == condition, to == run )) 
-			
-		eval ( handler.veto( sourceCw ))
-		
+
 	then
 		# copy the condition
 		ConditionEdge cw = handler.generatedConditionEdge( sourceCw, sw, condition, run );
@@ -78,12 +76,10 @@ rule "Connect ConditionEdges to ActionEdges created by SyncWires (access/init) (
 		
 		# and the sync wire had a condition
 		condition : Condition ( )
-		sourceCw : ConditionEdge( from == condition, to == sw )
+		sourceCw : ConditionEdge( overridden == false, from == condition, to == sw )
 		
 		# but our run wire doesn't 
 		not (ConditionEdge (from == condition, to == run )) 
-			
-		eval ( handler.veto( sourceCw ))
 		
 	then
 		# copy the condition
@@ -114,7 +110,7 @@ rule "Connect ParameterEdges to ConditionEdges connected to ActionEdges created 
 
 		# and this SyncWire has a condition
 		condition : Condition ( )
-		sourceCw : ConditionEdge( from == condition, to == sw )
+		sourceCw : ConditionEdge( overridden == false, from == condition, to == sw )
 		
 		# and the ActionEdge has the same condition 
 		targetCw : ConditionEdge (from == condition, to == run ) 
@@ -125,9 +121,7 @@ rule "Connect ParameterEdges to ConditionEdges connected to ActionEdges created 
 
 		# but this wire does not have it
 		not (ParameterEdge (from == param, to == targetCw ))
-			
-		eval ( handler.veto( sourceCw ))
-		
+
 	then
 		ParameterEdge pw = handler.generatedParameterEdge( sourceCw, sw, param, targetCw );
 		//cw.setName("copied parameter: " + paramWire.getName());
@@ -155,7 +149,7 @@ rule "Connect ParameterEdges to ConditionEdges connected to ActionEdges created 
 
 		# and this SyncWire has a condition
 		condition : Condition ( )
-		sourceCw : ConditionEdge( from == condition, to == sw )
+		sourceCw : ConditionEdge( overridden == false, from == condition, to == sw )
 		
 		# and the ActionEdge has the same condition 
 		targetCw : ConditionEdge (from == condition, to == run ) 
@@ -166,8 +160,6 @@ rule "Connect ParameterEdges to ConditionEdges connected to ActionEdges created 
 
 		# but this wire does not have it
 		not (ParameterEdge (from == param, to == targetCw ))
-			
-		eval ( handler.veto( sourceCw ))
 		
 	then
 		ParameterEdge pw = handler.generatedParameterEdge( sourceCw, sw, param, targetCw );
@@ -197,13 +189,11 @@ rule "Connect ConditionEdges to ActionEdges created by SetWires (edit/update) (o
 		
 		# and the sync wire had a condition
 		condition : Condition ( )
-		sourceCw : ConditionEdge( from == condition, to == sw )
+		sourceCw : ConditionEdge( overridden == false, from == condition, to == sw )
 		
 		# but our run wire doesn't 
 		not (ConditionEdge (from == condition, to == run )) 
-			
-		eval ( handler.veto( sourceCw ))
-		
+
 	then
 		# copy the condition
 		ConditionEdge cw = handler.generatedConditionEdge( sourceCw, sw, condition, run );
@@ -231,13 +221,11 @@ rule "Connect ConditionEdges to ActionEdges created by SetWires (access/init) (o
 		
 		# and the sync wire had a condition
 		condition : Condition ( )
-		sourceCw : ConditionEdge( from == condition, to == sw )
+		sourceCw : ConditionEdge( overridden == false, from == condition, to == sw )
 		
 		# but our run wire doesn't 
 		not (ConditionEdge (from == condition, to == run )) 
-			
-		eval ( handler.veto( sourceCw ))
-		
+
 	then
 		# copy the condition
 		ConditionEdge cw = handler.generatedConditionEdge( sourceCw, sw, condition, run );
@@ -267,7 +255,7 @@ rule "Connect ParameterEdges to ConditionEdges connected to ActionEdges created 
 
 		# and this SyncWire has a condition
 		condition : Condition ( )
-		sourceCw : ConditionEdge( from == condition, to == sw )
+		sourceCw : ConditionEdge( overridden == false, from == condition, to == sw )
 		
 		# and the ActionEdge has the same condition 
 		targetCw : ConditionEdge (from == condition, to == run ) 
@@ -278,8 +266,6 @@ rule "Connect ParameterEdges to ConditionEdges connected to ActionEdges created 
 
 		# but this wire does not have it
 		not (ParameterEdge (from == param, to == targetCw ))
-			
-		eval ( handler.veto( sourceCw ))
 		
 	then
 		ParameterEdge pw = handler.generatedParameterEdge( sourceCw, sw, param, targetCw );
@@ -308,7 +294,7 @@ rule "Connect ParameterEdges to ConditionEdges connected to ActionEdges created 
 
 		# and this SyncWire has a condition
 		condition : Condition ( )
-		sourceCw : ConditionEdge( from == condition, to == sw )
+		sourceCw : ConditionEdge( overridden == false, from == condition, to == sw )
 		
 		# and the ActionEdge has the same condition 
 		targetCw : ConditionEdge (from == condition, to == run ) 
@@ -319,8 +305,6 @@ rule "Connect ParameterEdges to ConditionEdges connected to ActionEdges created 
 
 		# but this wire does not have it
 		not (ParameterEdge (from == param, to == targetCw ))
-			
-		eval ( handler.veto( sourceCw ))
 		
 	then
 		ParameterEdge pw = handler.generatedParameterEdge( sourceCw, sw, param, targetCw );

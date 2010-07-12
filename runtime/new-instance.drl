@@ -22,7 +22,7 @@ rule "Refresh Iterator Object mappings"
 	when
 		schema : DomainSchema ( )
 		source : DomainSource ( )
-		iterator : DomainIterator ( )
+		iterator : DomainIterator ( overridden == false )
 		
 		schemaEdge : SchemaEdge ( ) and
 		eval ( functions.connectsSchema(schemaEdge, source, schema ))
@@ -34,8 +34,6 @@ rule "Refresh Iterator Object mappings"
 		
 		not ( DomainAttributeInstance( eContainer == iterator, name == attribute.name ))
 
-		eval ( handler.veto( iterator ))
-		
 	then
 		# create a new one
 		DomainAttributeInstance attr = handler.generatedDomainAttributeInstance(iterator, iterator);
@@ -63,12 +61,10 @@ rule "Mark AttributeInstances as extensions of the identically-named Attributes 
 		eval ( functions.connectsSelect(selectEdge, iterator, source ))
 
 		attribute : DomainAttribute ( eContainer == schema )
-		attrinst : DomainAttributeInstance( eContainer == iterator, name == attribute.name ) 
+		attrinst : DomainAttributeInstance( overridden == false, eContainer == iterator, name == attribute.name ) 
 		
 		not ( ExtendsEdge ( from == attrinst, to == attribute ) )
-		
-		eval ( handler.veto( attrinst ))
-		
+
 	then
 		# mark it as an extension
 		ExtendsEdge w = handler.generatedExtendsEdge(attrinst, attrinst, attrinst, attribute);
@@ -78,12 +74,10 @@ end
 
 rule "Create 'save' operation for DomainIterators"
 	when
-		instance : DomainIterator ( )
+		instance : DomainIterator ( overridden == false )
 		
 		not ( Operation( eContainer == instance, name == "save" ))
-		
-		eval ( handler.veto( instance ))
-		
+
 	then
 		# create a new one
 		PrimitiveOperation op = handler.generatedPrimitiveOperation(instance, instance);

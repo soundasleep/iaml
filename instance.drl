@@ -29,11 +29,9 @@ global DroolsHelperFunctions functions;
  */
 rule "Create 'previous' PrimitiveOperation"
 	when
-		instance : DomainIterator( )
+		instance : DomainIterator( overridden == false )
 		not ( op : Operation ( instance.previous == op ) )
 
-		eval ( handler.veto( instance ))
-	
 	then
 		PrimitiveOperation op = handler.generatedPrimitiveOperation(instance, instance, 
 			DomainPackage.eINSTANCE.getDomainIterator_Previous());
@@ -49,11 +47,9 @@ end
  */
 rule "Create 'next' PrimitiveOperation"
 	when
-		instance : DomainIterator( )
+		instance : DomainIterator( overridden == false )
 		not ( op : Operation ( instance.next == op ) )
 
-		eval ( handler.veto( instance ))
-	
 	then
 		PrimitiveOperation op = handler.generatedPrimitiveOperation(instance, instance, 
 			DomainPackage.eINSTANCE.getDomainIterator_Next());
@@ -69,10 +65,9 @@ end
  */
 rule "Create 'reset' PrimitiveOperation"
 	when
-		instance : DomainIterator( )
+		instance : DomainIterator( overridden == false )
 		not ( op : Operation ( instance.reset == op ) )
 
-		eval ( handler.veto( instance ))
 	
 	then
 		PrimitiveOperation op = handler.generatedPrimitiveOperation(instance, instance, 
@@ -89,11 +84,9 @@ end
  */
 rule "Create 'skip' PrimitiveOperation"
 	when
-		instance : DomainIterator( )
+		instance : DomainIterator( overridden == false )
 		not ( op : Operation ( instance.skip == op ) )
 
-		eval ( handler.veto( instance ))
-	
 	then
 		PrimitiveOperation op = handler.generatedPrimitiveOperation(instance, instance, 
 			DomainPackage.eINSTANCE.getDomainIterator_Skip());
@@ -109,11 +102,9 @@ end
  */
 rule "Create 'jump' PrimitiveOperation"
 	when
-		instance : DomainIterator( )
+		instance : DomainIterator( overridden == false )
 		not ( op : Operation ( instance.jump == op ) )
 
-		eval ( handler.veto( instance ))
-	
 	then
 		PrimitiveOperation op = handler.generatedPrimitiveOperation(instance, instance, 
 			DomainPackage.eINSTANCE.getDomainIterator_Jump());
@@ -129,11 +120,9 @@ end
  */
 rule "Create 'hasNext' PrimitiveCondition"
 	when
-		instance : DomainIterator( )
+		instance : DomainIterator( overridden == false )
 		not ( cond : Condition ( instance.hasNext == cond ) )
 
-		eval ( handler.veto( instance ))
-	
 	then
 		PrimitiveCondition cond = handler.generatedPrimitiveCondition(instance, instance, 
 			DomainPackage.eINSTANCE.getDomainIterator_HasNext());
@@ -149,11 +138,9 @@ end
  */
 rule "Create 'hasPrevious' PrimitiveCondition"
 	when
-		instance : DomainIterator( )
+		instance : DomainIterator( overridden == false )
 		not ( cond : Condition ( instance.hasPrevious == cond ) )
 
-		eval ( handler.veto( instance ))
-	
 	then
 		PrimitiveCondition cond = handler.generatedPrimitiveCondition(instance, instance, 
 			DomainPackage.eINSTANCE.getDomainIterator_HasPrevious());
@@ -169,11 +156,9 @@ end
  */
 rule "Create 'empty' PrimitiveCondition"
 	when
-		instance : DomainIterator( )
+		instance : DomainIterator( overridden == false )
 		not ( cond : Condition ( instance.empty == cond ) )
 
-		eval ( handler.veto( instance ))
-	
 	then
 		PrimitiveCondition cond = handler.generatedPrimitiveCondition(instance, instance, 
 			DomainPackage.eINSTANCE.getDomainIterator_Empty());
@@ -189,11 +174,9 @@ end
  */
 rule "Create 'results' Property"
 	when
-		instance : DomainIterator( )
+		instance : DomainIterator( overridden == false )
 		not ( property : Property ( instance.results == property ) )
 
-		eval ( handler.veto( instance ))
-	
 	then
 		Property property = handler.generatedProperty(instance, instance, 
 			DomainPackage.eINSTANCE.getDomainIterator_Results());
@@ -209,11 +192,9 @@ end
  */
 rule "Create 'onIterate' EventTrigger"
 	when
-		instance : DomainIterator( )
+		instance : DomainIterator( overridden == false )
 		not ( event : EventTrigger ( instance.onIterate == event ) )
 
-		eval ( handler.veto( instance ))
-	
 	then
 		EventTrigger event = handler.generatedEventTrigger(instance, instance, 
 			DomainPackage.eINSTANCE.getDomainIterator_OnIterate());
@@ -229,11 +210,9 @@ end
  */
 rule "Create 'not empty' composite condition"
 	when
-		instance : DomainIterator( )
+		instance : DomainIterator( overridden == false )
 		not ( condition : Condition ( eContainer == instance, name == "not empty" ) )
 
-		eval ( handler.veto( instance ))
-	
 	then
 		CompositeCondition condition = handler.generatedCompositeCondition(instance, instance);
 		handler.setName(condition, "not empty");
@@ -245,11 +224,10 @@ rule "Create contents of 'not empty' condition"
 	when
 		instance : DomainIterator( )
 		isEmpty : Condition ( instance.empty == isEmpty )
-		condition : CompositeCondition ( eContainer == instance, name == "not empty" )
+		condition : CompositeCondition ( overridden == false, eContainer == instance, name == "not empty" )
 		
 		not ( StartNode ( eContainer == condition ))
-
-		eval ( handler.veto( condition ))
+		
 	
 	then
 		StartNode start = handler.generatedStartNode(condition, condition);

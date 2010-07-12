@@ -19,7 +19,7 @@ rule "Create the Properties file DomainSchema"
 		
 	when
 		root : InternetApplication ( )
-		$fds : DomainSource ( type == DomainStoreTypes.PROPERTIES_FILE )
+		$fds : DomainSource ( overridden == false, type == DomainStoreTypes.PROPERTIES_FILE )
 		
 		p : ExtendedProperties ( ) from $fds.propertiesFile
 		not ( schema : DomainSchema ( name == "properties" )
@@ -28,8 +28,6 @@ rule "Create the Properties file DomainSchema"
 				and eval ( functions.connectsSchema(edge, $fds, schema ))
 			)
 		)
-
-		eval ( handler.veto( $fds ))
 
 	then
 		DomainSchema fdo = handler.generatedDomainSchema($fds, root);
@@ -53,13 +51,11 @@ rule "Create DomainAttributes for Properties File DomainSchema"
 		$p : ExtendedProperties ( ) from $fds.propertiesFile
 		$key : String ( ) from $p.propertyNames
 		
-		schema : DomainSchema ( name == "properties" )
+		schema : DomainSchema ( overridden == false, name == "properties" )
 		schemaEdge : SchemaEdge ( )
 		eval ( functions.connectsSchema( schemaEdge, $fds, schema ))
 		
 		not ( DomainAttribute ( eContainer == schema, name == $key ))
-
-		eval ( handler.veto( schema ))
 
 	then
 		DomainAttribute fda = handler.generatedDomainAttribute(schema, schema);

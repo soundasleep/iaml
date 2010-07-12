@@ -45,8 +45,7 @@ rule "Create navigation buttons for InputForms when connected to DomainIterators
 		eval(functions.connectsSelect(select, instance, domainSource ))
 		
 		form : InputForm ( )
-		set : SetWire ( )
-		eval ( functions.connectsSet ( set, instance, form ))
+		set : SetWire ( from == instance, to == form )
 				
 		not ( button : VisibleThing ( eContainer == form, name == "Next" ) )
 		not ( button : VisibleThing ( eContainer == form, name == "Previous" ) )
@@ -93,9 +92,8 @@ rule "Create 'Results' Label for InputForms when connected to DomainIterators wi
 		eval(functions.connectsSelect(select, instance, domainSource ))
 				
 		form : InputForm ( )
-		set : SetWire ( )
-		eval ( functions.connectsSet ( set, instance, form ))
-				
+		set : SetWire ( from == instance, to == form )
+
 		not ( button : VisibleThing ( eContainer == form, name == "Results" ) )
 
 		eval ( handler.veto( select ))
@@ -112,9 +110,8 @@ rule "Connect Next button to 'next' operation on DomainIterator"
 		instance : DomainIterator (  )
 		
 		form : InputForm ( )
-		set : SetWire ( )
-		eval ( functions.connectsSet ( set, instance, form ))
-		
+		set : SetWire ( from == instance, to == form )
+
 		next : Button ( eContainer == form, name == "Next" )
 		onClick : EventTrigger ( next.onClick == onClick )
 		
@@ -137,9 +134,8 @@ rule "Connect 'hasNext' condition to Next button action"
 		hasNext : Condition ( instance.hasNext == hasNext )
 		
 		form : InputForm ( )
-		set : SetWire ( )
-		eval ( functions.connectsSet ( set, instance, form ))
-		
+		set : SetWire ( from == instance, to == form )
+
 		next : Button ( eContainer == form, name == "Next" )
 		onClick : EventTrigger ( next.onClick == onClick )
 		
@@ -161,9 +157,8 @@ rule "Connect Previous button to 'previous' operation on DomainIterator"
 		instance : DomainIterator (  )
 		
 		form : InputForm ( )
-		set : SetWire ( )
-		eval ( functions.connectsSet ( set, instance, form ))
-		
+		set : SetWire ( from == instance, to == form )
+
 		prev : Button ( eContainer == form, name == "Previous" )
 		onClick : EventTrigger ( prev.onClick == onClick )
 		
@@ -186,9 +181,8 @@ rule "Connect 'hasPrevious' condition to Previous button action"
 		hasPrevious : Condition ( instance.hasPrevious == hasPrevious )
 		
 		form : InputForm ( )
-		set : SetWire ( )
-		eval ( functions.connectsSet ( set, instance, form ))
-		
+		set : SetWire ( from == instance, to == form )
+
 		prev : Button ( eContainer == form, name == "Previous" )
 		onClick : EventTrigger ( prev.onClick == onClick )
 		
@@ -210,9 +204,8 @@ rule "Connect First button to 'reset' operation on DomainIterator"
 		instance : DomainIterator (  )
 		
 		form : InputForm ( )
-		set : SetWire ( )
-		eval ( functions.connectsSet ( set, instance, form ))
-		
+		set : SetWire ( from == instance, to == form )
+
 		first : Button ( eContainer == form, name == "First" )
 		onClick : EventTrigger ( first.onClick == onClick )
 		
@@ -235,9 +228,8 @@ rule "Connect 'not empty' condition to First button action"
 		notEmpty : Condition ( eContainer == instance, name == "not empty" ) 
 		
 		form : InputForm ( )
-		set : SetWire ( )
-		eval ( functions.connectsSet ( set, instance, form ))
-		
+		set : SetWire ( from == instance, to == form )
+
 		first : Button ( eContainer == form, name == "First" )
 		onClick : EventTrigger ( first.onClick == onClick )
 		
@@ -259,9 +251,8 @@ rule "Connect Last button to 'jump' operation on DomainIterator"
 		instance : DomainIterator (  )
 		
 		form : InputForm ( )
-		set : SetWire ( )
-		eval ( functions.connectsSet ( set, instance, form ))
-		
+		set : SetWire ( from == instance, to == form )
+
 		last : Button ( eContainer == form, name == "Last" )
 		onClick : EventTrigger ( last.onClick == onClick )
 		
@@ -284,9 +275,8 @@ rule "Connect 'not empty' condition to Last button action"
 		notEmpty : Condition ( eContainer == instance, name == "not empty" ) 
 		
 		form : InputForm ( )
-		set : SetWire ( )
-		eval ( functions.connectsSet ( set, instance, form ))
-		
+		set : SetWire ( from == instance, to == form )
+
 		last : Button ( eContainer == form, name == "Last" )
 		onClick : EventTrigger ( last.onClick == onClick )
 		
@@ -308,9 +298,8 @@ rule "Create 'target' property in Last button"
 		instance : DomainIterator (  )
 		
 		form : InputForm ( )
-		set : SetWire ( )
-		eval ( functions.connectsSet ( set, instance, form ))
-		
+		set : SetWire ( from == instance, to == form )
+
 		last : Button ( eContainer == form, name == "Last" )
 		
 		not ( property : Property ( eContainer == last, name == "target" ))
@@ -329,9 +318,8 @@ rule "Connect 'target' property to ActionEdge in Last button"
 		instance : DomainIterator (  )
 		
 		form : InputForm ( )
-		set : SetWire ( )
-		eval ( functions.connectsSet ( set, instance, form ))
-		
+		set : SetWire ( from == instance, to == form )
+
 		last : Button ( eContainer == form, name == "Last" )
 		onClick : EventTrigger ( last.onClick == onClick )
 		property : Property ( eContainer == last, name == "target" )
@@ -354,9 +342,8 @@ rule "'Last' button will have a CompositeOperation named 'update target'"
 		instance : DomainIterator (  )
 		
 		form : InputForm ( )
-		set : SetWire ( )
-		eval ( functions.connectsSet ( set, instance, form ))
-		
+		set : SetWire ( from == instance, to == form )
+
 		last : Button ( eContainer == form, name == "Last" )
 		
 		not ( op : Operation ( eContainer == last, name == "update target" )) 
@@ -375,9 +362,8 @@ rule "'Last' button needs to call 'update target' before calling 'reset'"
 		instance : DomainIterator (  )
 		
 		form : InputForm ( )
-		set : SetWire ( )
-		eval ( functions.connectsSet ( set, instance, form ))
-		
+		set : SetWire ( from == instance, to == form )
+
 		last : Button ( eContainer == form, name == "Last" )
 		onClick : EventTrigger ( last.onClick == onClick )
 		property : Property ( eContainer == last, name == "target" )
@@ -405,9 +391,8 @@ rule "Create contents of 'update target' operation"
 		results : Property ( instance.results == results )
 		
 		form : InputForm ( )
-		set : SetWire ( )
-		eval ( functions.connectsSet ( set, instance, form ))
-		
+		set : SetWire ( from == instance, to == form )
+
 		last : Button ( eContainer == form, name == "Last" )
 		target : Property ( eContainer == last, name == "target" )
 
@@ -464,9 +449,8 @@ rule "Connect Instance.onChange to Results.update"
 		event : EventTrigger ( instance.onChange == event )
 		
 		form : InputForm ( )
-		set : SetWire ( )
-		eval ( functions.connectsSet ( set, instance, form ))
-				
+		set : SetWire ( from == instance, to == form )
+	
 		label : VisibleThing ( eContainer == form, name == "Results" )
 		updateOp : Operation ( eContainer == label, name == "update" )
 		
@@ -487,9 +471,8 @@ rule "Connect results parameter to Results label update (onChange)"
 		event : EventTrigger ( instance.onChange == event )
 		
 		form : InputForm ( )
-		set : SetWire ( )
-		eval ( functions.connectsSet ( set, instance, form ))
-				
+		set : SetWire ( from == instance, to == form )
+
 		label : VisibleThing ( eContainer == form, name == "Results" )
 		updateOp : Operation ( eContainer == label, name == "update" )
 		
@@ -517,9 +500,8 @@ rule "Connect Instance.onAccess to Results.update"
 		
 		form : InputForm ( )
 		event : EventTrigger ( form.onAccess == event )
-		set : SetWire ( )
-		eval ( functions.connectsSet ( set, instance, form ))
-				
+		set : SetWire ( from == instance, to == form )
+	
 		label : VisibleThing ( eContainer == form, name == "Results" )
 		updateOp : Operation ( eContainer == label, name == "update" )
 		
@@ -540,9 +522,8 @@ rule "Connect results parameter to Results label update (onAccess)"
 		
 		form : InputForm ( )
 		event : EventTrigger ( form.onAccess == event )
-		set : SetWire ( )
-		eval ( functions.connectsSet ( set, instance, form ))
-				
+		set : SetWire ( from == instance, to == form )
+
 		label : VisibleThing ( eContainer == form, name == "Results" )
 		updateOp : Operation ( eContainer == label, name == "update" )
 		

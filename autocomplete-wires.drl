@@ -185,7 +185,7 @@ rule "IteratorList labels update the target of the Autocomplete Wire"
 		
 		# containing list
 		list : IteratorList ( eContainer == form )
-		set : SetWire ( eval ( functions.connectsSet( set, iterator, list ) ) )
+		set : SetWire ( from == iterator, to == list )
 
 		# the value of the given label
 		targetLabel : VisibleThing ( eContainer == list, name == attribute.name )
@@ -240,7 +240,7 @@ rule "IteratorList labels clear the input onClick"
 		
 		# containing list
 		list : IteratorList ( eContainer == form )
-		set : SetWire ( eval ( functions.connectsSet( set, iterator, list ) ) )
+		set : SetWire ( from == iterator, to == list )
 
 		# input		
 		input : InputTextField ( eContainer == form, eval (functions.getAutocompleteInputName(attribute).equals(name)) )
@@ -283,7 +283,7 @@ rule "Frame.onAccess hides the IteratorList if the input is empty"
 		
 		# containing list
 		list : IteratorList ( eContainer == form )
-		set : SetWire ( eval ( functions.connectsSet( set, iterator, list ) ) )
+		set : SetWire ( from == iterator, to == list )
 
 		# 'hide' operation
 		hide : Operation ( eContainer == list, name == "hide" )
@@ -323,7 +323,7 @@ rule "Frame.onAccess shows the IteratorList if the input is not empty"
 		
 		# containing list
 		list : IteratorList ( eContainer == form )
-		set : SetWire ( eval ( functions.connectsSet( set, iterator, list ) ) )
+		set : SetWire ( from == iterator, to == list )
 
 		# 'hide' operation
 		hide : Operation ( eContainer == list, name == "show" )
@@ -363,7 +363,7 @@ rule "Input.onChange hides the IteratorList if the input is empty"
 		
 		# containing list
 		list : IteratorList ( eContainer == form )
-		set : SetWire ( eval ( functions.connectsSet( set, iterator, list ) ) )
+		set : SetWire ( from == iterator, to == list )
 
 		# 'hide' operation
 		hide : Operation ( eContainer == list, name == "hide" )
@@ -404,7 +404,7 @@ rule "Input.onChange shows the IteratorList if the input is not empty"
 		
 		# containing list
 		list : IteratorList ( eContainer == form )
-		set : SetWire ( eval ( functions.connectsSet( set, iterator, list ) ) )
+		set : SetWire ( from == iterator, to == list )
 
 		# 'hide' operation
 		hide : Operation ( eContainer == list, name == "show" )

@@ -5,17 +5,15 @@ package org.openiaml.model.tests.inference.model0_4_4;
 
 import org.openiaml.model.datatypes.BuiltinDataTypes;
 import org.openiaml.model.model.ActionEdge;
-import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.ExecutionEdgesSource;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.PrimitiveCondition;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.StaticValue;
-import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.CastNode;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.FinishNode;
@@ -297,19 +295,19 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 
 		InputTextField email = assertHasInputTextField(home, "Email 2");
 		{
-			CompositeCondition canCast = assertHasCompositeCondition(email, "can cast?");
+			PrimitiveCondition canCast = assertHasPrimitiveCondition(email, "can cast?");
 			assertGenerated(canCast);
 		}
 
 		InputTextField integer = assertHasInputTextField(home, "Integer");
 		{
-			CompositeCondition canCast = assertHasCompositeCondition(integer, "can cast?");
+			PrimitiveCondition canCast = assertHasPrimitiveCondition(integer, "can cast?");
 			assertGenerated(canCast);
 		}
 
 		InputTextField def = assertHasInputTextField(home, "Default");
 		{
-			CompositeCondition canCast = assertHasCompositeCondition(def, "can cast?");
+			PrimitiveCondition canCast = assertHasPrimitiveCondition(def, "can cast?");
 			assertGenerated(canCast);
 		}
 
@@ -330,7 +328,7 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 		Property emailValue = assertHasFieldValue(email);
 		InputTextField integer = assertHasInputTextField(home, "Integer");
 
-		CompositeCondition canCast = assertHasCompositeCondition(integer, "can cast?");
+		PrimitiveCondition canCast = assertHasPrimitiveCondition(integer, "can cast?");
 
 		EventTrigger onEdit = email.getOnChange();
 		Operation update = assertHasOperation(integer, "update");
@@ -360,7 +358,7 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 		Property intValue = assertHasFieldValue(integer);
 		InputTextField email = assertHasInputTextField(home, "Email 2");
 
-		CompositeCondition canCast = assertHasCompositeCondition(email, "can cast?");
+		PrimitiveCondition canCast = assertHasPrimitiveCondition(email, "can cast?");
 
 		EventTrigger onEdit = integer.getOnChange();
 		Operation update = assertHasOperation(email, "update");
@@ -373,42 +371,6 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 
 		// and the edge should have the current Email.property as a parameter
 		assertHasParameterEdge(root, intValue, edge);
-
-	}
-
-	/**
-	 * Test the contents of the 'can cast?' condition.
-	 *
-	 * @throws Exception
-	 */
-	public void testCanCastConditionContents() throws Exception {
-
-		root = loadAndInfer(InputTextFieldDataTypeSync.class);
-		Frame home = assertHasFrame(root, "Home");
-
-		InputTextField integer = assertHasInputTextField(home, "Integer");
-		Property integerValue = assertHasFieldValue(integer);
-
-		CompositeCondition canCast = assertHasCompositeCondition(integer, "can cast?");
-
-		StartNode start = assertHasStartNode(canCast);
-		Parameter param = assertHasParameter(canCast, "value");
-		// parameter is of 'any' type
-		assertNull(param.getType());
-
-		DecisionNode check = assertHasDecisionNode(canCast, "can cast?");
-
-		CastNode cast = assertHasCastNode(canCast);
-		assertHasDataFlowEdge(canCast, param, cast);	// in
-		assertHasDataFlowEdge(canCast, cast, integerValue);	// out
-		assertHasDataFlowEdge(canCast, cast, check);	// check
-
-		CancelNode cancel = assertHasCancelNode(canCast);
-		FinishNode finish = assertHasFinishNode(canCast);
-
-		assertHasExecutionEdge(canCast, start, check);
-		assertHasExecutionEdge(canCast, check, cancel, "no");
-		assertHasExecutionEdge(canCast, check, finish, "yes");
 
 	}
 
@@ -435,7 +397,7 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 		assertHasParameterEdge(root, emailValue, run);
 
 		// now make sure that the condition is connected
-		CompositeCondition canCast = assertHasCompositeCondition(integer, "can cast?");
+		PrimitiveCondition canCast = assertHasPrimitiveCondition(integer, "can cast?");
 
 		ConditionEdge edge = assertHasConditionEdge(root, canCast, run);
 		assertHasParameterEdge(root, emailValue, edge);
@@ -492,44 +454,6 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 		// the 'fieldValue is set' condition
 		Condition isSet = assertHasCondition(integer, "fieldValue is set");
 		assertHasConditionEdge(root, isSet, runValidate);
-
-	}
-
-	/**
-	 * There should be a cast node within the 'update' operation.
-	 * We will leave other inference test methods to check that the operation is
-	 * constructed correctly.
-	 *
-	 * @throws Exception
-	 */
-	public void testInputsAreCastInUpdate() throws Exception {
-
-		root = loadAndInfer(InputTextFieldDataTypeSync.class);
-		Frame home = assertHasFrame(root, "Home");
-
-		InputTextField integer = assertHasInputTextField(home, "Integer");
-		CompositeOperation update = assertHasCompositeOperation(integer, "update");
-
-		assertGenerated(assertHasCastNode(update));
-
-	}
-
-	/**
-	 * There should be a cast node within the 'init' operation.
-	 * We will leave other inference test methods to check that the operation is
-	 * constructed correctly.
-	 *
-	 * @throws Exception
-	 */
-	public void testInputsAreCastInInit() throws Exception {
-
-		root = loadAndInfer(InputTextFieldDataTypeSync.class);
-		Frame home = assertHasFrame(root, "Home");
-
-		InputTextField integer = assertHasInputTextField(home, "Integer");
-		CompositeOperation init = assertHasCompositeOperation(integer, "init");
-
-		assertGenerated(assertHasCastNode(init));
 
 	}
 

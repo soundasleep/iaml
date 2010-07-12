@@ -7,21 +7,13 @@ import java.util.List;
 
 import org.jaxen.JaxenException;
 import org.openiaml.model.model.ActionEdge;
-import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.Parameter;
-import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;
-import org.openiaml.model.model.operations.CancelNode;
-import org.openiaml.model.model.operations.CastNode;
-import org.openiaml.model.model.operations.DecisionNode;
-import org.openiaml.model.model.operations.FinishNode;
-import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
@@ -141,56 +133,7 @@ public class SyncWiresProperties extends InferenceTestCase {
 		}
 
 	}
-
-	/**
-	 * Test the contents of each init operation, used to
-	 * initialise the field at access.
-	 *
-	 * Same as {@link SyncWireTestCase#testAllUpdates()}.
-	 *
-	 * @throws JaxenException
-	 */
-	public void testInitContents() throws JaxenException {
-		// get all 'initialise' operations
-		List<?> inits = query(root, "//iaml:operations[iaml:name='init']");
-
-		// there are 3 input texts => there should be at least 3 initialise operations
-		assertGreaterEq(3, inits.size());
-
-		int i = 0;
-		for (Object obj : inits) {
-			i++;
-			String prelude = "'init' operation #" + i;
-			CompositeOperation update = (CompositeOperation) obj;	// should be a composite operation
-			assertEquals(prelude, update.getName(), "init");
-
-			// -- traverse from start node --
-			StartNode start = assertHasStartNode(update);
-			FinishNode finish = assertHasFinishNode(update);
-			CancelNode cancel = assertHasCancelNode(update);
-			
-			DecisionNode check = assertHasDecisionNode(update, "can cast?");
-			CastNode cast = assertHasCastNode(update);
-			
-			PrimitiveOperation set = assertHasPrimitiveOperation(update, "set");
-			
-			assertHasExecutionEdge(update, start, check);
-			assertHasExecutionEdge(update, check, cancel, "no");
-			assertHasExecutionEdge(update, check, set, "yes");
-			assertHasExecutionEdge(update, set, finish);
-			
-			// data flow edges
-			Parameter param = assertHasParameter(update, "setValueTo");
-			assertHasDataFlowEdge(update, param, cast);
-			assertHasDataFlowEdge(update, cast, check);
-			assertHasDataFlowEdge(update, cast, set);
-
-			assertEquals(1, set.getOutFlows().size());
-			Property f2 = (Property) set.getOutFlows().get(0).getTo();
-			assertEquals("fieldValue", f2.getName());
-		}
-	}
-
+	
 	/**
 	 * Get a NamedElement with a given name, or fail.
 	 *
@@ -198,7 +141,7 @@ public class SyncWiresProperties extends InferenceTestCase {
 	 * @param name
 	 * @return
 	 */
-	protected NamedElement getNodeWithName(List<?> nodes, String name) {
+	private NamedElement getNodeWithName(List<?> nodes, String name) {
 		for (Object n : nodes) {
 			if (n instanceof NamedElement && name.equals(((NamedElement) n).getName()))
 				return (NamedElement) n;

@@ -3,7 +3,6 @@
  */
 package org.openiaml.model.tests.inference.model0_5;
 
-import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.scopes.Email;
 import org.openiaml.model.model.visual.Frame;
@@ -83,26 +82,7 @@ public class EmailSetWire extends InferenceTestCase {
 		assertGenerated(label.getOnChange());
 
 		// and an operation 'update'
-		assertGenerated(assertHasCompositeOperation(label, "update"));
-
-	}
-
-	/**
-	 * The generated {@model CompositeOperation} 'update' should have a
-	 * {@model StartNode}.
-	 *
-	 * @throws Exception
-	 */
-	public void testLabelUpdateHasStartNode() throws Exception {
-
-		Frame home = assertHasFrame(root, "Home");
-		Email email = assertHasEmail(home, "Email");
-
-		// the following should be generated
-		Label label = assertHasLabel(email, "field 1");
-
-		CompositeOperation op = assertHasCompositeOperation(label, "update");
-		assertHasStartNode(op);
+		assertGenerated(assertHasOperation(label, "update"));
 
 	}
 

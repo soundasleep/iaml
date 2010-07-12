@@ -36,7 +36,7 @@ rule "Create QueryParameter for target container of DetailWire"
 		
 		source : VisibleThing ( eContainer == container )
 		target : Frame ( )
-		instanceSet : SetWire ( eval(functions.connectsSet(instanceSet, instance, source )) )
+		instanceSet : SetWire ( from == instance, to == source )
 
 		detail : DetailWire ( )
 		eval ( functions.connectsDetail(detail, source, target ))
@@ -75,7 +75,7 @@ rule "Create a relevant DomainIterator, with SelectWire, in the destination for 
 		
 		source : VisibleThing ( eContainer == container )
 		target : Frame ( )
-		instanceSet : SetWire ( eval(functions.connectsSet( instanceSet, instance, source ) ) )
+		instanceSet : SetWire ( from == instance, to == source )
 		
 		detail : DetailWire ( )
 		eval ( functions.connectsDetail(detail, source, target ))
@@ -120,7 +120,7 @@ rule "Create a View Instance Form for target of DetailWire"
 		
 		source : VisibleThing ( eContainer == container )
 		target : Frame ( )
-		instanceSet : SetWire ( eval(functions.connectsSet( instanceSet, instance, source ) ) )
+		instanceSet : SetWire ( from == instance, to == source )
 		
 		detail : DetailWire ( )
 		eval ( functions.connectsDetail(detail, source, target ))
@@ -161,7 +161,7 @@ rule "Connect View Instance Form with a SetWire to the DomainIterator"
 
 		form : VisibleThing ( eContainer == target, eval( ("View " + schema.getName()).equals(name) ) )
 		
-		not ( set : SetWire ( eval( functions.connectsSet( set, i2, form ) ) ) )
+		not ( set : SetWire ( from == i2, to == form ) )
 	
 		eval ( handler.veto( detail ))
 	
@@ -304,7 +304,7 @@ rule "Create a Link Button for the source of a DetailWire (IteratorList): Add Pa
 		
 		# attribute instance is connected to the Container by a SetWire or SyncWire to a Hidden
 		hidden : Hidden ( eContainer == source )
-		set : SetWire ( eval(functions.connectsSet(set, pkInstance, hidden) ) )
+		set : SetWire ( from == pkInstance, to == hidden )
 		
 		pk : Property ( hidden.fieldValue == pk ) 
 		
@@ -338,7 +338,7 @@ rule "The view one DomainIterator is connected to the same DomainSource as the v
 		
 		source : VisibleThing ( eContainer == container )
 		target : Frame ( )
-		instanceSet : SetWire ( eval(functions.connectsSet( instanceSet, instance, source ) ) )
+		instanceSet : SetWire ( from == instance, to == source )
 		
 		detail : DetailWire ( )
 		eval ( functions.connectsDetail(detail, source, target ))

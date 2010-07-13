@@ -1335,7 +1335,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="reset" eType="#//Operation"
           containment="true">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="Start at result number 0."/>
+          <details key="documentation" value="Start at result number 0. If this is a new {@model DomainIterator}, creates a new instance instead."/>
         </eAnnotations>
       </eStructuralFeatures>
       <eStructuralFeatures xsi:type="ecore:EReference" name="skip" eType="#//Operation"

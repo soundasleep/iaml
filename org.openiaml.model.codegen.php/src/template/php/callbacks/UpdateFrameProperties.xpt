@@ -35,12 +35,14 @@ if (!require_get("ignore_updates", 0)) {
 			// get the current value
 			$value = «EXPAND template::operations::Parameters::callParameterValue(true, false)»;
 			
-			// pass it to the client 
-			log_message("outgoing value to '«eContainer»' («safeNameString(((model::visual::InputTextField) eContainer).id)»): '$value'");
-			log_message("set_value " 
-				. escape_parameter_string("«safeNameString(((model::visual::InputTextField) eContainer).id)»")
-				. " "
-				. escape_parameter_string($value));
+			// pass it to the client
+			if (DEBUG) {
+				log_message("outgoing value to '«eContainer»' («safeNameString(((model::visual::InputTextField) eContainer).id)»): '$value'");
+				log_message("set_value " 
+					. escape_parameter_string("«safeNameString(((model::visual::InputTextField) eContainer).id)»")
+					. " "
+					. escape_parameter_string($value));
+			}
 			echo "\nset_value " 
 				. escape_parameter_string("«safeNameString(((model::visual::InputTextField) eContainer).id)»")
 				. " "
@@ -56,18 +58,20 @@ if (!require_get("ignore_updates", 0)) {
 			// get the current value
 			$value = «EXPAND template::operations::Parameters::callParameterValue(true, false)»;
 			
-			// pass it to the client 
-			log_message("outgoing value to '«label»' («safeNameString(label.id)»"
-				«IF label.eContainer != null && model::visual::IteratorList.isInstance(label.eContainer)»
-					. (isset($doing_iterator_list_«safeName(label.eContainer)») && $doing_iterator_list_«safeName(label.eContainer)» ? «EXPAND template::visual::Label::getIteratorListIndex FOR label» : "")
-				«ENDIF»
-				. "): '$value'");
-			log_message("set_html " 
-				. escape_parameter_string("«safeNameString(label.id)»"«IF label.eContainer != null && model::visual::IteratorList.isInstance(label.eContainer)»
-					. (isset($doing_iterator_list_«safeName(label.eContainer)») && $doing_iterator_list_«safeName(label.eContainer)» ? «EXPAND template::visual::Label::getIteratorListIndex FOR label» : "")
-				«ENDIF»)
-				. " "
-				. escape_parameter_string($value));
+			// pass it to the client
+			if (DEBUG) {
+				log_message("outgoing value to '«label»' («safeNameString(label.id)»"
+					«IF label.eContainer != null && model::visual::IteratorList.isInstance(label.eContainer)»
+						. (isset($doing_iterator_list_«safeName(label.eContainer)») && $doing_iterator_list_«safeName(label.eContainer)» ? «EXPAND template::visual::Label::getIteratorListIndex FOR label» : "")
+					«ENDIF»
+					. "): '$value'");
+				log_message("set_html " 
+					. escape_parameter_string("«safeNameString(label.id)»"«IF label.eContainer != null && model::visual::IteratorList.isInstance(label.eContainer)»
+						. (isset($doing_iterator_list_«safeName(label.eContainer)») && $doing_iterator_list_«safeName(label.eContainer)» ? «EXPAND template::visual::Label::getIteratorListIndex FOR label» : "")
+					«ENDIF»)
+					. " "
+					. escape_parameter_string($value));
+			}
 			echo "\nset_html " 
 				. escape_parameter_string("«safeNameString(label.id)»"«IF label.eContainer != null && model::visual::IteratorList.isInstance(label.eContainer)»
 					. (isset($doing_iterator_list_«safeName(label.eContainer)») && $doing_iterator_list_«safeName(label.eContainer)» ? «EXPAND template::visual::Label::getIteratorListIndex FOR label» : "")
@@ -86,11 +90,13 @@ if (!require_get("ignore_updates", 0)) {
 			$value = «EXPAND template::operations::Parameters::callParameterValue(true, false)»;
 			
 			// pass it to the client 
-			log_message("outgoing value to '«eContainer»' («safeNameString(((model::visual::MapPoint) eContainer).id)»): '$value'");
-			log_message("set_map_point " 
-				. escape_parameter_string("«safeNameString(((model::visual::MapPoint) eContainer).id)»")
-				. " "
-				. escape_parameter_string($value));
+			if (DEBUG) {
+				log_message("outgoing value to '«eContainer»' («safeNameString(((model::visual::MapPoint) eContainer).id)»): '$value'");
+				log_message("set_map_point " 
+					. escape_parameter_string("«safeNameString(((model::visual::MapPoint) eContainer).id)»")
+					. " "
+					. escape_parameter_string($value));
+			}
 			echo "\nset_map_point " 
 				. escape_parameter_string("«safeNameString(((model::visual::MapPoint) eContainer).id)»")
 				. " "
@@ -110,11 +116,13 @@ if (!require_get("ignore_updates", 0)) {
 			$value = «EXPAND template::operations::Parameters::callParameterValue(true, false)»;
 			
 			// pass it to the client 
-			log_message("outgoing value to '«eContainer»' («safeNameString(((model::visual::Map) eContainer).id)»): '$value'");
-			log_message("set_map_point " 
-				. escape_parameter_string("map_«safeNameString(((model::visual::Map) eContainer).id)»")
-				. " "
-				. escape_parameter_string($value));
+			if (DEBUG) {
+				log_message("outgoing value to '«eContainer»' («safeNameString(((model::visual::Map) eContainer).id)»): '$value'");
+				log_message("set_map_point " 
+					. escape_parameter_string("map_«safeNameString(((model::visual::Map) eContainer).id)»")
+					. " "
+					. escape_parameter_string($value));
+			}
 			echo "\nset_map_point " 
 				. escape_parameter_string("map_«safeNameString(((model::visual::Map) eContainer).id)»")
 				. " "
@@ -143,11 +151,13 @@ if (!require_get("ignore_updates", 0)) {
 		$value = make_into_boolean($hidden) ? "false" : "true";
 
 		// pass it to the client 
-		log_message("outgoing visibility value to («safeNameString(id)»): '$value'");
-		log_message("set_visibility " 
-			. escape_parameter_string("«safeNameString(id)»")
-			. " "
-			. escape_parameter_string($value));
+		if (DEBUG) {
+			log_message("outgoing visibility value to («safeNameString(id)»): '$value'");
+			log_message("set_visibility " 
+				. escape_parameter_string("«safeNameString(id)»")
+				. " "
+				. escape_parameter_string($value));
+		}
 		echo "\nset_visibility " 
 			. escape_parameter_string("«safeNameString(id)»")
 			. " "
@@ -163,10 +173,12 @@ if (!require_get("ignore_updates", 0)) {
 	{
 		// notify the number of rows visible in the IteratorList
 		$value = «EXPAND template::visual::IteratorList::iteratorListCurrentResultCount»;
-		log_message("iterator_list_rows " 
-			. escape_parameter_string("«safeNameString(id)»")
-			. " "
-			. escape_parameter_string($value));
+		if (DEBUG) {
+			log_message("iterator_list_rows " 
+				. escape_parameter_string("«safeNameString(id)»")
+				. " "
+				. escape_parameter_string($value));
+		}
 		echo "\niterator_list_rows " 
 			. escape_parameter_string("«safeNameString(id)»")
 			. " "

@@ -226,4 +226,15 @@ context model::operations::DecisionNode	WARNING "Unknown DecisionNode '" + name 
 	|| name == "xpathMatch?" || name == "emailAddress?" || name == "is set?"
 		|| name == "equal?" || name == "true?" || name == "can cast?"
 		|| name == "empty?";
-		
+
+/**
+ * Based on SQLite docs. This should be the list of reserved words in SQL99
+ * (or a related standard); however, different RDBMSes allow different reserved
+ * words to also be column names. TODO IAML should instead allow all names, but
+ * modify their runtime name if they are a reserved word (issue 211).
+ */
+context model::DomainAttribute ERROR "Using a reserved SQL word for a DomainAttribute name" :
+	!{"alter", "analyze", "attach", "begin", "commit", "create", 
+	"delete", "detach", "drop", "end", "explain", "from", "group", "having", "indexed", 
+	"insert", "limit", "not", "on", "order", "pragma", "reindex", "release", "replace", 
+	"rollback", "savepoint", "select", "union", "update", "using", "vacuum", "where"}.contains(name.toLowerCase());

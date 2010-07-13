@@ -496,7 +496,7 @@ rule "Refresh New Instance Object mappings (except for generated primary keys) w
 		# or ANY type of primary key
 		eval( functions.notExtendingPrimaryKey( originalAttribute ) )
 		
-		not ( tf : InputTextField( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
+		not ( tf : VisibleThing( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
 		
 		eval ( !form.getOverriddenNames().contains(attribute.getName()) )
 						
@@ -529,7 +529,7 @@ rule "Refresh Domain Object mappings (except for generated primary keys) when sy
 		# a generated primary key
 		eval( functions.notExtendingGeneratedPrimaryKey( attribute ) )
 		
-		not ( tf : InputTextField( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
+		not ( tf : VisibleThing( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
 
 		eval ( !form.getOverriddenNames().contains(attribute.getName()) )
 						

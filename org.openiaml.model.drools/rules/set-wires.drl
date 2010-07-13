@@ -551,7 +551,7 @@ rule "Refresh New Instance Object mappings (except for generated primary keys) w
 		attribute : DomainAttributeInstance( eContainer == instance )
 		ExtendsEdge ( from == attribute, to == originalAttribute )
 		
-		not ( tf : InputTextField( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
+		not ( tf : VisibleThing( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
 		
 		eval ( !form.getOverriddenNames().contains(attribute.getName()) )
 						
@@ -573,7 +573,7 @@ rule "Refresh Domain Object mappings (except for generated primary keys) when Fo
 		
 		attribute : DomainAttribute( eContainer == object, primaryKey == false || isGenerated == false )
 		
-		not ( tf : InputTextField( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
+		not ( tf : VisibleThing( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
 
 		eval ( !form.getOverriddenNames().contains(attribute.getName()) )
 						

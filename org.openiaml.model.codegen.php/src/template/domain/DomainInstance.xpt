@@ -61,6 +61,8 @@
 	«IF php»
 		«IF name=="save"»
 			save_queued_store_domain_object_«safeNameString(object.id)»()
+		«ELSEIF name=="new"»
+			new_domain_instance_«safeNameString(object.id)»()
 		«ELSE»
 			«REM»TODO shouldn't the other domain instance operations be listed here? probably a major bug«ENDREM»
 			«throwException("No server-side code for domainInstanceCall operation '" + name + "'")»

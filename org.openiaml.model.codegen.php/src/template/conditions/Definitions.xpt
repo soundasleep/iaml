@@ -90,11 +90,11 @@
 			«EXPAND conditionDefinition_canCast(php, this) FOR (model::VisibleThing) eContainer»
 		«ELSEIF model::Changeable.isInstance(eContainer)»
 			«LET (model::Changeable) eContainer AS changeable»
-			«IF name == "empty"»
+			«IF name == "empty" || name == "empty?"»
 			return
 				!(«EXPAND template::operations::Parameters::isSetParameter(php) FOR changeable.fieldValue»)
 				|| !(«EXPAND template::operations::Parameters::callParameterValue(php, false) FOR changeable.fieldValue»);
-			«ELSEIF name == "not empty"»
+			«ELSEIF name == "not empty" || name == "not empty?"»
 			return 
 				«EXPAND template::operations::Parameters::isSetParameter(php) FOR changeable.fieldValue»
 				&& («EXPAND template::operations::Parameters::callParameterValue(php, false) FOR changeable.fieldValue»);

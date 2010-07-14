@@ -4,11 +4,14 @@
 package org.openiaml.model.tests;
 
 import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -851,6 +854,20 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	 */
 	public static void writeFile(File sourceFile, String data) throws IOException {
 		XmlTestCase.writeFile(sourceFile, data);
+	}
+	
+	/**
+	 * Write the given string to the target IFile.
+	 * Assumed that the given string is in UTF-8 encoding.
+	 * 
+	 * @param target
+	 * @param data
+	 * @throws UnsupportedEncodingException 
+	 * @throws CoreException 
+	 */
+	public static void writeFile(IFile target, String data) throws UnsupportedEncodingException, CoreException {
+		InputStream source = new ByteArrayInputStream(data.getBytes("UTF-8")); 
+		target.create(source, true, new NullProgressMonitor());
 	}
 	
 }

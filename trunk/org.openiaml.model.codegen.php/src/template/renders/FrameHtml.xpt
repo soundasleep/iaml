@@ -8,18 +8,38 @@
  * 
  * <p>We come into this template already being in PHP mode, so we have
  * to first escape out of it.
+ *
+ * @implementation Frame
+ *		A header file is selected from the first file that exists
+ *		of <code>CUSTOM_PATH/templates/header/frame_id.php</code>;
+ *		<code>CUSTOM_PATH/templates/header/default.php</code>; or
+ *		the default include <code>header_default.php</code>.
+ * @implementation Frame
+ *		A footer file is selected from the first file that exists
+ *		of <code>CUSTOM_PATH/templates/footer/frame_id.php</code>;
+ *		<code>CUSTOM_PATH/templates/footer/default.php</code>; or
+ *		the default include <code>footer_default.php</code>.
+ * @implementation Frame
+ *		A meta include file is selected from the first file that exists
+ *		of <code>CUSTOM_PATH/templates/meta/frame_id.php</code>;
+ *		<code>CUSTOM_PATH/templates/meta/default.php</code>; or
+ *		the default include <code>meta_default.php</code>.
  */
 «DEFINE renderFrameAsHTML FOR model::visual::Frame-»
 
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-	"http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<title>«frameTitle()»</title>
-	<link rel="stylesheet" type="text/css" href="<?php echo IAML_RUNTIME_WEB; ?>css/default.css">
-	<link rel="stylesheet" type="text/css" href="«safeName()».css">
-	<link rel="stylesheet" type="text/css" href="<?php echo CUSTOM_WEB_PATH; ?>default.css">
+<?php
+$body_id = "«safeNameString(id)»";
+$body_name = "«safeNameString(name)»";
+$body_title = "«frameTitle()»";
+if (file_exists(CUSTOM_PATH . "templates/meta/" . $body_id . ".php")) {
+	require(CUSTOM_PATH . "templates/meta/" . $body_id . ".php");
+} elseif (file_exists(CUSTOM_PATH . "templates/meta/default.php")) {
+	require(CUSTOM_PATH . "templates/meta/default.php");
+} else {
+	require("meta_default.php");
+}
+?>
 	<script language="Javascript" type="application/javascript">
 	/* <![CDATA[ */
 		var frame_id = "«safeNameString(id)-»";
@@ -156,22 +176,18 @@
   	?>
   	«ENDREM»
 </head>
-<body id="«safeNameString(id)»" class="frame_«safeNameString(name)»" onLoad="loadStoredEvents()">
-	<div style="font-size:small; text-align: right;"><a href="clear_session.php">clear session</a> - <a href="sitemap.html">sitemap</a></div>
-		
-	<h1>«frameTitle()»</h1>
-		
-	<div id="runtime_errors"><!-- any runtime errors go into here --></div>
-		
-	<?php
-	/* expand any fail error messages */
-	if (has_get("fail")) { 
-	?>
-		<div class="error">
-			<p>An exception occured: <i><?php echo htmlspecialchars(require_get("fail")); ?></i></p>
-		</div>
-	<?php } ?>
-		
+<?php
+$body_id = "«safeNameString(id)»";
+$body_name = "«safeNameString(name)»";
+$body_title = "«frameTitle()»";
+if (file_exists(CUSTOM_PATH . "templates/header/" . $body_id . ".php")) {
+	require(CUSTOM_PATH . "templates/header/" . $body_id . ".php");
+} elseif (file_exists(CUSTOM_PATH . "templates/header/default.php")) {
+	require(CUSTOM_PATH . "templates/header/default.php");
+} else {
+	require("header_default.php");
+}
+?>
 	<?php queue_log_messages(true); ?>
 
 	«EXPAND template::visual::Render::renderVisual(this) FOREACH children.typeSelect(model::VisibleThing).sortBy(c|c.renderOrder)-»
@@ -200,7 +216,17 @@
 		<div id="counter_new_domain_instance"></div>
 	</div>
 	<script language="Javascript" type="application/javascript">initAjaxMonitor();</script>
-	
-</body>
-</html>
+
+<?php
+$body_id = "«safeNameString(id)»";
+$body_name = "«safeNameString(name)»";
+$body_title = "«frameTitle()»";
+if (file_exists(CUSTOM_PATH . "templates/footer/" . $body_id . ".php")) {
+	require(CUSTOM_PATH . "templates/footer/" . $body_id . ".php");
+} elseif (file_exists(CUSTOM_PATH . "templates/footer/default.php")) {
+	require(CUSTOM_PATH . "templates/footer/default.php");
+} else {
+	require("footer_default.php");
+}
+?>
 «ENDDEFINE»

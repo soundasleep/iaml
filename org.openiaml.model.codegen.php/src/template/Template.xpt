@@ -14,6 +14,11 @@
 
 	«EXPAND Frame::expandFrame FOREACH elements»
 
+	«REM»header/footer includes«ENDREM»
+	«FILE "output/header_default.php"»«EXPAND template::renders::HeaderDefault::headerDefault»«ENDFILE»
+	«FILE "output/footer_default.php"»«EXPAND template::renders::HeaderDefault::footerDefault»«ENDFILE»
+	«FILE "output/meta_default.php"»«EXPAND template::renders::HeaderDefault::metaDefault»«ENDFILE»
+
 	«EXPAND expandSession FOREACH scopes»
 	
 	«REM»create a sitemap«ENDREM»

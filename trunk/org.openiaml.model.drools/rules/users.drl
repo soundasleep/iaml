@@ -34,12 +34,12 @@ rule "When a session is protected by an AccessControlHandler with no login handl
 	then
 		LoginHandler lh = handler.generatedLoginHandler(ach, session);
 		handler.setValue(lh, ComponentsPackage.eINSTANCE.getLoginHandler_Type(), LoginHandlerTypes.USER);
-		handler.setName(lh, "role-based login handler");
+		handler.setName(lh, "role-based login handler for " + session.getName());
 		queue.add(lh, drools);
 
 end
 
-rule "When a page is protected by an AccessControlHandler with no login handler[type=user], add it"
+rule "When a Frame is protected by an AccessControlHandler with no login handler[type=user], add it"
 	when
 		session : Session ( )
 		page : Frame ( eContainer == session )
@@ -55,7 +55,7 @@ rule "When a page is protected by an AccessControlHandler with no login handler[
 	then
 		LoginHandler lh = handler.generatedLoginHandler(ach, session);
 		handler.setValue(lh, ComponentsPackage.eINSTANCE.getLoginHandler_Type(), LoginHandlerTypes.USER);
-		handler.setName(lh, "role-based login handler");
+		handler.setName(lh, "role-based login handler for " + session.getName());
 		queue.add(lh, drools);
 
 end

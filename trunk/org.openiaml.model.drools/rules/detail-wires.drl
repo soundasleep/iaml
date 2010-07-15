@@ -38,8 +38,7 @@ rule "Create QueryParameter for target container of DetailWire"
 		target : Frame ( )
 		instanceSet : SetWire ( from == instance, to == source )
 
-		detail : DetailWire ( )
-		eval ( functions.connectsDetail(detail, source, target ))
+		detail : DetailWire ( from == source, to == target )
 		
 		pk : DomainAttribute ( eContainer == schema, primaryKey == true ) 
 
@@ -77,9 +76,8 @@ rule "Create a relevant DomainIterator, with SelectWire, in the destination for 
 		target : Frame ( )
 		instanceSet : SetWire ( from == instance, to == source )
 		
-		detail : DetailWire ( )
-		eval ( functions.connectsDetail(detail, source, target ))
-		
+		detail : DetailWire ( from == source, to == target )
+
 		queryPk : QueryParameter ( eContainer == target, name == pk.name )
 		
 		not ( DomainIterator ( eContainer == target,
@@ -122,9 +120,8 @@ rule "Create a View Instance Form for target of DetailWire"
 		target : Frame ( )
 		instanceSet : SetWire ( from == instance, to == source )
 		
-		detail : DetailWire ( )
-		eval ( functions.connectsDetail(detail, source, target ))
-		
+		detail : DetailWire ( from == source, to == target )
+
 		i2 : DomainIterator ( eContainer == target,
 			name != null && eval( name.equals("Current " + schema.getName() + " instance") ) )
 
@@ -153,9 +150,8 @@ rule "Connect View Instance Form with a SetWire to the DomainIterator"
 		source : VisibleThing ( eContainer == container )
 		target : Frame ( )
 		
-		detail : DetailWire ( )
-		eval ( functions.connectsDetail(detail, source, target ))
-		
+		detail : DetailWire ( from == source, to == target )
+
 		i2 : DomainIterator ( eContainer == target,
 			name != null && eval( name.equals("Current " + schema.getName() + " instance") ) )
 
@@ -192,9 +188,8 @@ rule "Create a Link Button for the source of a DetailWire"
 		source : VisibleThing ( eContainer == container )
 		target : Frame ( )
 		
-		detail : DetailWire ( )
-		eval ( functions.connectsDetail(detail, source, target ))
-		
+		detail : DetailWire ( from == source, to == target )
+
 		not ( button : VisibleThing ( eContainer == source, name == "link" )) 
 	
 		eval ( handler.veto( detail ))
@@ -220,9 +215,8 @@ rule "Create a Link Button for the source of a DetailWire: Connect ActionEdge"
 		source : VisibleThing ( eContainer == container )
 		target : Frame ( )
 		
-		detail : DetailWire ( )
-		eval ( functions.connectsDetail(detail, source, target ))
-		
+		detail : DetailWire ( from == source, to == target )
+
 		button : VisibleThing ( eContainer == source, name == "link" )
 		onClick : EventTrigger ( button.onClick == onClick )
 		
@@ -253,9 +247,8 @@ rule "Create a Link Button for the source of a DetailWire (not IteratorList): Ad
 		not ( IteratorList ( this == source )) 
 		target : Frame ( )
 		
-		detail : DetailWire ( )
-		eval ( functions.connectsDetail(detail, source, target ))
-		
+		detail : DetailWire ( from == source, to == target )
+
 		button : VisibleThing ( eContainer == source, name == "link" )
 		onClick : EventTrigger ( button.onClick == onClick )
 		nav : ActionEdge ( from == onClick, to == target )
@@ -291,9 +284,8 @@ rule "Create a Link Button for the source of a DetailWire (IteratorList): Add Pa
 		source : IteratorList ( eContainer == container )
 		target : Frame ( )
 		
-		detail : DetailWire ( )
-		eval ( functions.connectsDetail(detail, source, target ))
-		
+		detail : DetailWire ( from == source, to == target )
+
 		button : VisibleThing ( eContainer == source, name == "link" )
 		onClick : EventTrigger ( button.onClick == onClick )
 		nav : ActionEdge ( from == onClick, to == target )
@@ -340,9 +332,8 @@ rule "The view one DomainIterator is connected to the same DomainSource as the v
 		target : Frame ( )
 		instanceSet : SetWire ( from == instance, to == source )
 		
-		detail : DetailWire ( )
-		eval ( functions.connectsDetail(detail, source, target ))
-		
+		detail : DetailWire ( from == source, to == target )
+
 		iterator2 : DomainIterator ( eContainer == target,
 			name != null && eval( name.equals("Current " + schema.getName() + " instance") ) )
 		

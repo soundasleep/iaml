@@ -245,23 +245,6 @@ public class DroolsHelperFunctions {
 	}
 
 	/**
-	 * True if the given uni-directional {@model SetWire} connects
-	 * the source object to the target object. 
-	 * 
-	 * @param wire the wire to investigate
-	 * @param source the source object
-	 * @param target the target object
-	 * @return true only if the wire connects the two objects
-	 */
-	public boolean connectsSet(SetWire wire, Object source, Object target) {
-		if (wire.getFrom() == null)
-			throw new NullPointerException("Wire '" + wire + "'.from = null");
-		if (wire.getTo() == null)
-			throw new NullPointerException("Wire '" + wire + "'.to = null");
-		return wire.getFrom().equals(source) && wire.getTo().equals(target);
-	}
-	
-	/**
 	 * True if the given uni-directional {@model SyncWire} connects
 	 * the source object to the target object. 
 	 * 
@@ -277,24 +260,6 @@ public class DroolsHelperFunctions {
 			throw new NullPointerException("Wire '" + wire + "'.to = null");
 		return wire.getFrom().equals(source) && wire.getTo().equals(target);
 	}
-	
-	/**
-	 * True if the given uni-directional {@model SchemaEdge} connects
-	 * the source object to the target object. 
-	 * 
-	 * @param wire the wire to investigate
-	 * @param source the source object
-	 * @param target the target object
-	 * @return true only if the wire connects the two objects
-	 */
-	public boolean connectsSchema(SchemaEdge wire, DomainSource source, DomainSchema target) {
-		if (wire.getFrom() == null)
-			throw new NullPointerException("Wire '" + wire + "'.from = null");
-		if (wire.getTo() == null)
-			throw new NullPointerException("Wire '" + wire + "'.to = null");
-		return wire.getFrom().equals(source) && wire.getTo().equals(target);
-	}
-	
 	
 	/**
 	 * True if the given uni-directional {@model SelectEdge} connects

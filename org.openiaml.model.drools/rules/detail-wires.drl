@@ -31,8 +31,8 @@ rule "Create QueryParameter for target container of DetailWire"
 		domainSource : DomainSource ( )
 		instance : DomainIterator( )
 		
-		selectEdge : SelectEdge ( eval ( functions.connectsSelect(selectEdge, instance, domainSource )) )
-		schemaEdge : SchemaEdge ( eval ( functions.connectsSchema(schemaEdge, domainSource, schema )) )
+		selectEdge : SelectEdge ( from == instance, to == domainSource )
+		schemaEdge : SchemaEdge ( from == domainSource, to == schema )
 		
 		source : VisibleThing ( eContainer == container )
 		target : Frame ( )
@@ -68,8 +68,8 @@ rule "Create a relevant DomainIterator, with SelectWire, in the destination for 
 		domainSource : DomainSource ( )
 		instance : DomainIterator( eContainer == container )
 
-		selectEdge : SelectEdge ( eval ( functions.connectsSelect(selectEdge, instance, domainSource )) )
-		schemaEdge : SchemaEdge ( eval ( functions.connectsSchema(schemaEdge, domainSource, schema )) )
+		selectEdge : SelectEdge ( from == instance, to == domainSource )
+		schemaEdge : SchemaEdge ( from == domainSource, to == schema )
 		
 		pk : DomainAttribute ( eContainer == schema, primaryKey == true )
 		
@@ -115,9 +115,9 @@ rule "Create a View Instance Form for target of DetailWire"
 		domainSource : DomainSource ( )
 		instance : DomainIterator( eContainer == container )
 
-		selectEdge : SelectEdge ( eval ( functions.connectsSelect(selectEdge, instance, domainSource )) )
-		schemaEdge : SchemaEdge ( eval ( functions.connectsSchema(schemaEdge, domainSource, schema )) )
-		
+		selectEdge : SelectEdge ( from == instance, to == domainSource )
+		schemaEdge : SchemaEdge ( from == domainSource, to == schema )
+
 		source : VisibleThing ( eContainer == container )
 		target : Frame ( )
 		instanceSet : SetWire ( from == instance, to == source )
@@ -147,9 +147,9 @@ rule "Connect View Instance Form with a SetWire to the DomainIterator"
 		domainSource : DomainSource ( )
 		instance : DomainIterator( eContainer == container )
 
-		selectEdge : SelectEdge ( eval ( functions.connectsSelect(selectEdge, instance, domainSource )) )
-		schemaEdge : SchemaEdge ( eval ( functions.connectsSchema(schemaEdge, domainSource, schema )) )
-				
+		selectEdge : SelectEdge ( from == instance, to == domainSource )
+		schemaEdge : SchemaEdge ( from == domainSource, to == schema )
+	
 		source : VisibleThing ( eContainer == container )
 		target : Frame ( )
 		
@@ -186,9 +186,9 @@ rule "Create a Link Button for the source of a DetailWire"
 		domainSource : DomainSource ( )
 		instance : DomainIterator( eContainer == container )
 
-		selectEdge : SelectEdge ( eval ( functions.connectsSelect(selectEdge, instance, domainSource )) )
-		schemaEdge : SchemaEdge ( eval ( functions.connectsSchema(schemaEdge, domainSource, schema )) )
-		
+		selectEdge : SelectEdge ( from == instance, to == domainSource )
+		schemaEdge : SchemaEdge ( from == domainSource, to == schema )
+
 		source : VisibleThing ( eContainer == container )
 		target : Frame ( )
 		
@@ -214,9 +214,9 @@ rule "Create a Link Button for the source of a DetailWire: Connect ActionEdge"
 		domainSource : DomainSource ( )
 		instance : DomainIterator( eContainer == container )
 
-		selectEdge : SelectEdge ( eval ( functions.connectsSelect(selectEdge, instance, domainSource )) )
-		schemaEdge : SchemaEdge ( eval ( functions.connectsSchema(schemaEdge, domainSource, schema )) )
-		
+		selectEdge : SelectEdge ( from == instance, to == domainSource )
+		schemaEdge : SchemaEdge ( from == domainSource, to == schema )
+
 		source : VisibleThing ( eContainer == container )
 		target : Frame ( )
 		
@@ -245,9 +245,9 @@ rule "Create a Link Button for the source of a DetailWire (not IteratorList): Ad
 		domainSource : DomainSource ( )
 		instance : DomainIterator( eContainer == container )
 
-		selectEdge : SelectEdge ( eval ( functions.connectsSelect(selectEdge, instance, domainSource )) )
-		schemaEdge : SchemaEdge ( eval ( functions.connectsSchema(schemaEdge, domainSource, schema )) )
-		
+		selectEdge : SelectEdge ( from == instance, to == domainSource )
+		schemaEdge : SchemaEdge ( from == domainSource, to == schema )
+
 		source : VisibleThing ( eContainer == container )
 		# ignoring IteratorLists
 		not ( IteratorList ( this == source )) 
@@ -285,9 +285,9 @@ rule "Create a Link Button for the source of a DetailWire (IteratorList): Add Pa
 		domainSource : DomainSource ( )
 		instance : DomainIterator( eContainer == container )
 
-		selectEdge : SelectEdge ( eval ( functions.connectsSelect(selectEdge, instance, domainSource )) )
-		schemaEdge : SchemaEdge ( eval ( functions.connectsSchema(schemaEdge, domainSource, schema )) )
-		
+		selectEdge : SelectEdge ( from == instance, to == domainSource )
+		schemaEdge : SchemaEdge ( from == domainSource, to == schema )
+
 		source : IteratorList ( eContainer == container )
 		target : Frame ( )
 		
@@ -333,9 +333,9 @@ rule "The view one DomainIterator is connected to the same DomainSource as the v
 		domainSource : DomainSource ( )
 		instance : DomainIterator( eContainer == container )
 
-		selectEdge : SelectEdge ( eval ( functions.connectsSelect(selectEdge, instance, domainSource )) )
-		schemaEdge : SchemaEdge ( eval ( functions.connectsSchema(schemaEdge, domainSource, schema )) )
-		
+		selectEdge : SelectEdge ( from == instance, to == domainSource )
+		schemaEdge : SchemaEdge ( from == domainSource, to == schema )
+
 		source : VisibleThing ( eContainer == container )
 		target : Frame ( )
 		instanceSet : SetWire ( from == instance, to == source )

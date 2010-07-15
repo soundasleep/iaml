@@ -24,8 +24,7 @@ rule "Create the Properties file DomainSchema"
 		p : ExtendedProperties ( ) from $fds.propertiesFile
 		not ( schema : DomainSchema ( name == "properties" )
 			and exists ( 
-				edge : SchemaEdge ( )
-				and eval ( functions.connectsSchema(edge, $fds, schema ))
+				edge : SchemaEdge ( from == $fds, to == schema )
 			)
 		)
 
@@ -54,8 +53,7 @@ rule "Create DomainAttributes for Properties File DomainSchema"
 		$key : String ( ) from $p.propertyNames
 		
 		schema : DomainSchema ( name == "properties" )
-		schemaEdge : SchemaEdge ( )
-		eval ( functions.connectsSchema( schemaEdge, $fds, schema ))
+		schemaEdge : SchemaEdge ( from == $fds, to == schema )
 		
 		not ( DomainAttribute ( eContainer == schema, name == $key ))
 

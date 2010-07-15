@@ -24,8 +24,7 @@ rule "Refresh Iterator Object mappings"
 		source : DomainSource ( )
 		iterator : DomainIterator ( )
 		
-		schemaEdge : SchemaEdge ( ) and
-		eval ( functions.connectsSchema(schemaEdge, source, schema ))
+		schemaEdge : SchemaEdge ( from == source, to == schema )
 		
 		selectEdge : SelectEdge ( ) and
 		eval ( functions.connectsSelect(selectEdge, iterator, source ))
@@ -56,8 +55,7 @@ rule "Mark AttributeInstances as extensions of the identically-named Attributes 
 		source : DomainSource ( )
 		iterator : DomainIterator ( )
 		
-		schemaEdge : SchemaEdge ( )
-		eval ( functions.connectsSchema(schemaEdge, source, schema ))
+		schemaEdge : SchemaEdge ( from == source, to == schema )
 		
 		selectEdge : SelectEdge ( )
 		eval ( functions.connectsSelect(selectEdge, iterator, source ))

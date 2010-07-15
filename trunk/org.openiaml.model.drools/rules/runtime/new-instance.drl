@@ -25,10 +25,7 @@ rule "Refresh Iterator Object mappings"
 		iterator : DomainIterator ( )
 		
 		schemaEdge : SchemaEdge ( from == source, to == schema )
-		
-		selectEdge : SelectEdge ( ) and
-		eval ( functions.connectsSelect(selectEdge, iterator, source ))
-		
+		selectEdge : SelectEdge ( from == iterator, to == source )
 		attribute : DomainAttribute ( eContainer == schema )
 		
 		not ( DomainAttributeInstance( eContainer == iterator, name == attribute.name ))
@@ -56,9 +53,7 @@ rule "Mark AttributeInstances as extensions of the identically-named Attributes 
 		iterator : DomainIterator ( )
 		
 		schemaEdge : SchemaEdge ( from == source, to == schema )
-		
-		selectEdge : SelectEdge ( )
-		eval ( functions.connectsSelect(selectEdge, iterator, source ))
+		selectEdge : SelectEdge ( from == iterator, to == source )
 
 		attribute : DomainAttribute ( eContainer == schema )
 		attrinst : DomainAttributeInstance( eContainer == iterator, name == attribute.name ) 

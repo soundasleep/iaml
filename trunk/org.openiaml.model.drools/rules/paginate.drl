@@ -39,9 +39,7 @@ rule "Create navigation buttons for InputForms when connected to DomainIterators
 		// condition selector for SchemaEdge??
 		domainSource : DomainSource ( )
 		schemaEdge : SchemaEdge ( from == domainSource, to == object )
-		
-		select : SelectEdge ( )
-		eval(functions.connectsSelect(select, instance, domainSource ))
+		select : SelectEdge ( from == instance, to == domainSource )
 		
 		form : InputForm ( )
 		set : SetWire ( from == instance, to == form )
@@ -85,9 +83,7 @@ rule "Create 'Results' Label for InputForms when connected to DomainIterators wi
 		
 		domainSource : DomainSource ( )
 		schemaEdge : SchemaEdge ( from == domainSource, to == object )
-		
-		select : SelectEdge ( )
-		eval(functions.connectsSelect(select, instance, domainSource ))
+		select : SelectEdge ( from == instance, to == domainSource )
 				
 		form : InputForm ( )
 		set : SetWire ( from == instance, to == form )

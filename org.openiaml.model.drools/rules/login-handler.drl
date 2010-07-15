@@ -51,6 +51,7 @@ rule "Create default 'login' page for LoginHandlers"
 		
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		
+		not ( Frame ( eContainer == login_session, name == "login" ))
 		not ( ActionEdge ( from == login_handler, name == "login" ))
 			
 		eval ( handler.veto( login_handler ))

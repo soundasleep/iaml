@@ -7,7 +7,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.openiaml.model.model.ActionEdge;
+import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.Property;
 import org.openiaml.model.model.scopes.Session;
+import org.openiaml.model.model.visual.Button;
+import org.openiaml.model.model.visual.Frame;
+import org.openiaml.model.model.visual.InputForm;
+import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.tests.inference.ValidInferenceTestCase;
 
 /**
@@ -41,6 +48,42 @@ public class MultipleAccessControlHandlers extends ValidInferenceTestCase {
 		}
 		
 		assertFalse(foundNames.isEmpty());
+	}
+	
+	/**
+	 * Test the contents of the login form for Session A.
+	 * 
+	 * @throws Exception
+	 */
+	public void testSessionHasLoginForms() throws Exception {
+		for (String sessionName : new String[] {"Session A", "Session B", "Session C"}) {
+			Session target = assertHasSession(root, sessionName);
+			
+			Session loginSession = assertHasSession(root, "role-based login handler for " + target.getName() + " login");
+			
+			// it has an inputform
+			Frame loginFrame = assertHasFrame(loginSession, "login");
+			InputForm loginForm = assertHasInputForm(loginFrame, "login form");
+			
+			// the form should have an 'email' and 'password' field
+			InputTextField email = assertHasInputTextField(loginForm, "email");
+			InputTextField password = assertHasInputTextField(loginForm, "password");
+			
+			// and a login button
+			Button button = assertHasButton(loginForm, "Login");
+			
+			// calls 'do login'
+			Operation doLogin = assertHasOperation(loginSession, "do login");
+			ActionEdge call = assertHasActionEdge(root, button, doLogin, "onClick");
+			
+			// with parameters
+			Property emailValue = assertHasFieldValue(email);
+			Property passwordValue = assertHasFieldValue(password);
+			
+			assertGenerated(assertHasParameterEdge(root, emailValue, call, "email"));
+			assertGenerated(assertHasParameterEdge(root, passwordValue, call, "password"));
+		}
+		
 	}
 	
 	/**

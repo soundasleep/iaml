@@ -24,7 +24,7 @@
 	«IF resolveFileReference() != null»
 		'sqlite:' . ROOT_PATH . '«resolveFileReference()»'
 	«ELSE»
-		'sqlite:' . ROOT_PATH . '«safeNameString(id)».db' /* oh noes */
+		'sqlite:' . ROOT_PATH . '«safeNameString(id)».db' /* TODO could not resolve file reference */
 	«ENDIF»
 «ENDDEFINE»
 

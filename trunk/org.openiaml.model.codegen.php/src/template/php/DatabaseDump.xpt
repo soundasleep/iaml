@@ -14,12 +14,18 @@ require("config.php"); // runtime library configuration
 require(IAML_RUNTIME_ROOT . "global.php"); // runtime library import
 
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-	"http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<title>Database dump</title>
-	<link rel="stylesheet" type="text/css" href="<?php echo IAML_RUNTIME_WEB; ?>css/default.css">
+<?php
+$body_id = "database_dump";
+$body_name = "database_dump";
+$body_title = "Database dump";
+if (file_exists(CUSTOM_PATH . "templates/meta/" . $body_id . ".php")) {
+	require(CUSTOM_PATH . "templates/meta/" . $body_id . ".php");
+} elseif (file_exists(CUSTOM_PATH . "templates/meta/default.php")) {
+	require(CUSTOM_PATH . "templates/meta/default.php");
+} else {
+	require("meta_default.php");
+}
+?>
 </head>
 		
 <body id="database_dump">
@@ -34,6 +40,9 @@ $databases = array(
 	"sqlite:stored_events.db",
 	«EXPAND getDomainStores FOREACH sources SEPARATOR ", "»
 );
+
+// remove duplicate sources
+$databases = array_unique($databases);
 
 foreach ($databases as $db_name) {
 	echo "<h1>$db_name</h1>\n";

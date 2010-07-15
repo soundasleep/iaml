@@ -240,3 +240,14 @@ context model::DomainAttribute ERROR "Using a reserved SQL word for a DomainAttr
 	"delete", "detach", "drop", "end", "explain", "from", "group", "having", "indexed", 
 	"insert", "limit", "not", "on", "order", "pragma", "reindex", "release", "replace", 
 	"rollback", "savepoint", "select", "union", "update", "using", "vacuum", "where"}.contains(name.toLowerCase());
+
+/**
+ * A 'login' ActionEdge for an AccessControlHandler should not be in the 
+ * same Scope as the handler; this will cause an infinite redirection, 
+ * as the login page can never be accessed.
+ */
+context model::ActionEdge ERROR "A 'login' ActionEdge for an AccessControlHandler should not be in the same Scope as the handler; this will cause an infinite redirection, as the login page can never be accessed." :
+	!(from != null && to != null && model::components::AccessControlHandler.isInstance(from) 
+		&& name == "login" && to.eContainer != null && from.eContainer != null
+		&& to.eContainer == from.eContainer);
+		 

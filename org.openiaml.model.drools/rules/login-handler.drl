@@ -1794,9 +1794,7 @@ rule "Connect a default DomainSource for LoginHandlers that do not specify a Sel
 		source : DomainSource ( )
 		schemaEdge : SchemaEdge ( from == source, to == schema )
 		
-		not ( selectEdge : SelectEdge ( ) and 
-			eval ( functions.connectsSelect( selectEdge, iterator, source ))
-		) 
+		not ( selectEdge : SelectEdge ( from == iterator, to == source ) ) 
 
 		# and this source isn't being used for anything else
 		not ( s2 : SelectEdge ( to == source ) )
@@ -1827,9 +1825,7 @@ rule "Connect a default DomainSource for LoginHandlers that do not specify a Sel
 		source : DomainSource ( )
 		schemaEdge : SchemaEdge ( from == source, to == schema )
 		
-		not ( selectEdge : SelectEdge ( ) and 
-			eval ( functions.connectsSelect( selectEdge, iterator, source ))
-		) 
+		not ( selectEdge : SelectEdge ( from == iterator, to == source ) ) 
 
 		# and this source isn't being used for anything else
 		not ( s2 : SelectEdge ( to == source ) )
@@ -1880,10 +1876,8 @@ rule "Connect the DomainSource for the AccessControlHandler to the Current Insta
 		source : DomainSource ( )
 		schemaEdge : SchemaEdge ( from == source, to == expected_schema )
 
-		not ( selectEdge : SelectEdge ( ) and 
-			eval ( functions.connectsSelect( selectEdge, iterator, source ))
-		) 
-		
+		not ( selectEdge : SelectEdge ( from == iterator, to == source ) ) 
+
 		eval ( handler.veto( ach ))
 
 	then
@@ -1916,10 +1910,8 @@ rule "Connect the DomainSource for the AccessControlHandler to the Current Insta
 		source : DomainSource ( )
 		schemaEdge : SchemaEdge ( from == source, to == expected_schema )
 
-		not ( selectEdge : SelectEdge ( ) and 
-			eval ( functions.connectsSelect( selectEdge, iterator, source ))
-		) 
-		
+		not ( selectEdge : SelectEdge ( from == iterator, to == source ) ) 
+
 		eval ( handler.veto( ach ))
 
 	then
@@ -1962,11 +1954,8 @@ rule "Connect the DomainSource for the AccessControlHandler to the Current Insta
 		source : DomainSource ( )
 		schemaEdge : SchemaEdge ( from == source, to == default_schema )
 
-		not ( selectEdge : SelectEdge ( ) and 
-			eval ( functions.connectsSelect( selectEdge, iterator, source ))
-		) 
-		
-		
+		not ( selectEdge : SelectEdge ( from == iterator, to == source ) ) 
+
 		eval ( handler.veto( ach ))
 
 	then

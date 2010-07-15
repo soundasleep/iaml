@@ -844,8 +844,7 @@ rule "A SetWire between Attributes passed to a DomainIterator need to check that
 		domainSource : DomainSource ( )
 		schemaEdge : SchemaEdge ( from == domainSource, to == schema )
 		
-		selectEdge : SelectEdge ( )
-		eval ( functions.connectsSelect( selectEdge, instance, domainSource ))		
+		selectEdge : SelectEdge ( from == instance, to == domainSource )
 		
 		# contained attribute/field
 		attribute : DomainAttributeInstance( eContainer == instance )
@@ -892,8 +891,7 @@ rule "A SetWire between Attributes selected from a DomainIterator need to check 
 		domainSource : DomainSource ( )
 		schemaEdge : SchemaEdge ( from == domainSource, to == schema )
 		
-		selectEdge : SelectEdge ( )
-		eval ( functions.connectsSelect( selectEdge, instance, domainSource ))		
+		selectEdge : SelectEdge ( from == instance, to == domainSource )
 		
 		# contained attribute/field
 		attribute : DomainAttributeInstance( eContainer == instance )

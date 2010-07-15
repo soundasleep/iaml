@@ -19,12 +19,10 @@ import org.openiaml.model.model.Property;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.components.LoginHandler;
-import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainPackage;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;
 import org.openiaml.model.model.domain.SchemaEdge;
-import org.openiaml.model.model.domain.SelectEdge;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.users.Role;
 import org.openiaml.model.model.visual.Frame;
@@ -33,7 +31,6 @@ import org.openiaml.model.model.wires.AutocompleteWire;
 import org.openiaml.model.model.wires.DetailWire;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
-import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.model.wires.SyncWire;
 
 import ca.ecliptical.emf.xpath.EMFXPath;
@@ -254,23 +251,6 @@ public class DroolsHelperFunctions {
 	 * @return true only if the wire connects the two objects
 	 */
 	public boolean connectsSync1(SyncWire wire, Object source, Object target) {
-		if (wire.getFrom() == null)
-			throw new NullPointerException("Wire '" + wire + "'.from = null");
-		if (wire.getTo() == null)
-			throw new NullPointerException("Wire '" + wire + "'.to = null");
-		return wire.getFrom().equals(source) && wire.getTo().equals(target);
-	}
-	
-	/**
-	 * True if the given uni-directional {@model SelectEdge} connects
-	 * the source object to the target object. 
-	 * 
-	 * @param wire the wire to investigate
-	 * @param source the source object
-	 * @param target the target object
-	 * @return true only if the wire connects the two objects
-	 */
-	public boolean connectsSelect(SelectEdge wire, DomainIterator source, DomainSource target) {
 		if (wire.getFrom() == null)
 			throw new NullPointerException("Wire '" + wire + "'.from = null");
 		if (wire.getTo() == null)

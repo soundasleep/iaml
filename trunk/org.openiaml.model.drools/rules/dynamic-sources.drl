@@ -24,7 +24,7 @@ rule "Connect SyncWires for a dynamic source, referenced by XPath"
 		ds : DynamicApplicationElementSet( eval(functions.isXPath(query)), eContainer == container )
 		source : Frame ( ) 
 		sw : SyncWire ( eval(functions.connects(sw, ds, source)) )
-		target : Frame ( eval(source != target), eval(functions.potentialXPathMatch(container, ds, target)) )
+		target : Frame ( this != source, eval(functions.potentialXPathMatch(container, ds, target)) )
 		not ( tw : SyncWire( eval(functions.connects(tw, source, target)) ) )
 			
 		eval ( handler.veto( container ))
@@ -136,7 +136,7 @@ rule "Create the XPath ConditionEdge for generated SyncWires"
 		ds : DynamicApplicationElementSet( eval(functions.isXPath(query)), eContainer == container )
 		source : Frame ( ) 
 		sw : SyncWire ( eval(functions.connects(sw, ds, source)) )
-		target : Frame ( eval(source != target), eval(functions.potentialXPathMatch(container, ds, target)) )
+		target : Frame ( this != source, eval(functions.potentialXPathMatch(container, ds, target)) )
 		tw : SyncWire ( eval(functions.connects(tw, source, target)) )
 		condition : CompositeCondition ( eContainer == ds )
 		not (
@@ -171,7 +171,7 @@ rule "Connect ParameterEdges to empty ConditionEdge for XPath"
 		ds : DynamicApplicationElementSet( eval(functions.isXPath(query)), eContainer == container )
 		source : Frame ( ) 
 		sw : SyncWire ( eval(functions.connects(sw, ds, source)) )
-		target : Frame ( eval(source != target), eval(functions.potentialXPathMatch(container, ds, target)) )
+		target : Frame ( this != source, eval(functions.potentialXPathMatch(container, ds, target)) )
 		tw : SyncWire ( eval(functions.connects(tw, source, target)) )
 		condition : CompositeCondition ( eContainer == ds )
 		cwt : ConditionEdge ( from == condition, to == tw )

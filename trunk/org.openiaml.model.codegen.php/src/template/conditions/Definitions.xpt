@@ -88,6 +88,8 @@
 			«ENDIF»
 		«ELSEIF (name == "can cast?" || name == "can cast") && model::VisibleThing.isInstance(eContainer)»
 			«EXPAND conditionDefinition_canCast(php, this) FOR (model::VisibleThing) eContainer»
+		«ELSEIF (name == "fieldValue is set?" || name == "fieldValue is set") && model::Changeable.isInstance(eContainer)»
+			«EXPAND conditionDefinition_fieldValueIsSet(php, this) FOR (model::Changeable) eContainer»
 		«ELSEIF model::Changeable.isInstance(eContainer)»
 			«LET (model::Changeable) eContainer AS changeable»
 			«IF name == "empty" || name == "empty?"»
@@ -128,4 +130,9 @@
 		var type = "«escapePhpString(fieldValue.type.uRI)»";
 		return can_cast(default_arg, type);
 	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE conditionDefinition_fieldValueIsSet(Boolean php, model::PrimitiveCondition condition) FOR model::Changeable»
+	/* PrimitiveOperation 'fieldValue is set?' */
+	return «EXPAND template::operations::DataFlow::isSet(php) FOR fieldValue»;
 «ENDDEFINE»

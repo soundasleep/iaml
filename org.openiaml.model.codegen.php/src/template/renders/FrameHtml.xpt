@@ -27,8 +27,6 @@
  */
 «DEFINE renderFrameAsHTML FOR model::visual::Frame-»
 
-?>
-<?php
 $body_id = "«safeNameString(id)»";
 $body_name = "«safeNameString(name)»";
 $body_title = "«frameTitle()»";

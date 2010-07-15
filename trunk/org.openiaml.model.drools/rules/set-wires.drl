@@ -50,8 +50,7 @@ rule "Set wires from DomainSchema to CanBeSynced"
 		eval ( domainSource != p2)
 		
 		domainSchema : DomainSchema ( )
-		schemaEdge : SchemaEdge ( )
-		eval ( functions.connectsSchema( schemaEdge, domainSource, domainSchema ))
+		schemaEdge : SchemaEdge ( from == domainSource, to == domainSchema )
 		
 		e1 : CanBeSynced ( eContainer == domainSchema )
 		e2 : CanBeSynced( eContainer == p2 )
@@ -843,8 +842,7 @@ rule "A SetWire between Attributes passed to a DomainIterator need to check that
 		# the instance is created through a NewInstanceWire
 		schema : DomainSchema ( )
 		domainSource : DomainSource ( )
-		schemaEdge : SchemaEdge ( )
-		eval ( functions.connectsSchema( schemaEdge, domainSource, schema ))
+		schemaEdge : SchemaEdge ( from == domainSource, to == schema )
 		
 		selectEdge : SelectEdge ( )
 		eval ( functions.connectsSelect( selectEdge, instance, domainSource ))		
@@ -892,8 +890,7 @@ rule "A SetWire between Attributes selected from a DomainIterator need to check 
 		# the instance is created through a NewInstanceWire
 		schema : DomainSchema ( )
 		domainSource : DomainSource ( )
-		schemaEdge : SchemaEdge ( )
-		eval ( functions.connectsSchema( schemaEdge, domainSource, schema ))
+		schemaEdge : SchemaEdge ( from == domainSource, to == schema )
 		
 		selectEdge : SelectEdge ( )
 		eval ( functions.connectsSelect( selectEdge, instance, domainSource ))		

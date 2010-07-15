@@ -1792,8 +1792,7 @@ rule "Connect a default DomainSource for LoginHandlers that do not specify a Sel
 		)
 		
 		source : DomainSource ( )
-		schemaEdge : SchemaEdge ( )
-		eval ( functions.connectsSchema( schemaEdge, source, schema ) )
+		schemaEdge : SchemaEdge ( from == source, to == schema )
 		
 		not ( selectEdge : SelectEdge ( ) and 
 			eval ( functions.connectsSelect( selectEdge, iterator, source ))
@@ -1826,8 +1825,7 @@ rule "Connect a default DomainSource for LoginHandlers that do not specify a Sel
 		param : ParameterEdge ( from == schema, to == login_handler )
 		
 		source : DomainSource ( )
-		schemaEdge : SchemaEdge ( )
-		eval ( functions.connectsSchema( schemaEdge, source, schema ) )
+		schemaEdge : SchemaEdge ( from == source, to == schema )
 		
 		not ( selectEdge : SelectEdge ( ) and 
 			eval ( functions.connectsSelect( selectEdge, iterator, source ))
@@ -1880,8 +1878,7 @@ rule "Connect the DomainSource for the AccessControlHandler to the Current Insta
 		
 		# and our expected schema has a source
 		source : DomainSource ( )
-		schemaEdge : SchemaEdge ( )
-		eval ( functions.connectsSchema( schemaEdge, source, expected_schema ) )
+		schemaEdge : SchemaEdge ( from == source, to == expected_schema )
 
 		not ( selectEdge : SelectEdge ( ) and 
 			eval ( functions.connectsSelect( selectEdge, iterator, source ))
@@ -1917,8 +1914,7 @@ rule "Connect the DomainSource for the AccessControlHandler to the Current Insta
 		
 		# and our expected schema has a source
 		source : DomainSource ( )
-		schemaEdge : SchemaEdge ( )
-		eval ( functions.connectsSchema( schemaEdge, source, expected_schema ) )
+		schemaEdge : SchemaEdge ( from == source, to == expected_schema )
 
 		not ( selectEdge : SelectEdge ( ) and 
 			eval ( functions.connectsSelect( selectEdge, iterator, source ))
@@ -1964,8 +1960,7 @@ rule "Connect the DomainSource for the AccessControlHandler to the Current Insta
 		
 		# and our expected schema has a source
 		source : DomainSource ( )
-		schemaEdge : SchemaEdge ( )
-		eval ( functions.connectsSchema( schemaEdge, source, default_schema ) )
+		schemaEdge : SchemaEdge ( from == source, to == default_schema )
 
 		not ( selectEdge : SelectEdge ( ) and 
 			eval ( functions.connectsSelect( selectEdge, iterator, source ))

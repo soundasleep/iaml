@@ -38,8 +38,7 @@ rule "Create navigation buttons for InputForms when connected to DomainIterators
 		// TODO Drools fails with a NullPointerException if we put the eval() in the 
 		// condition selector for SchemaEdge??
 		domainSource : DomainSource ( )
-		schemaEdge : SchemaEdge ( )
-		eval(functions.connectsSchema(schemaEdge, domainSource, object )) 
+		schemaEdge : SchemaEdge ( from == domainSource, to == object )
 		
 		select : SelectEdge ( )
 		eval(functions.connectsSelect(select, instance, domainSource ))
@@ -85,8 +84,7 @@ rule "Create 'Results' Label for InputForms when connected to DomainIterators wi
 		instance : DomainIterator ( limit != 1 )
 		
 		domainSource : DomainSource ( )
-		schemaEdge : SchemaEdge ( )
-		eval(functions.connectsSchema(schemaEdge, domainSource, object ))
+		schemaEdge : SchemaEdge ( from == domainSource, to == object )
 		
 		select : SelectEdge ( )
 		eval(functions.connectsSelect(select, instance, domainSource ))

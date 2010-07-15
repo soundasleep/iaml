@@ -24,7 +24,7 @@ global DroolsHelperFunctions functions;
 rule "Create 'onChange' event trigger for Changeable things"
 	when
 		f : Changeable( )
-		g : GeneratesElements ( eval(f == g) )
+		g : GeneratesElements ( this == f )
 		not (event : EventTrigger( f.onChange == event ))
 				
 		eval ( handler.veto( g ))
@@ -42,7 +42,7 @@ end
 rule "Create 'onAccess' event trigger for Accessible things"
 	when
 		f : Accessible( )
-		g : GeneratesElements ( eval(f == g) )
+		g : GeneratesElements ( this == f )
 		not (event : EventTrigger( f.onAccess == event ))
 				
 		eval ( handler.veto( g ))

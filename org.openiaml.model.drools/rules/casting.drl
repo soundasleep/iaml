@@ -140,7 +140,7 @@ rule "Add 'can cast?' condition check for onAccess connecting to Init"
 	when
 		source : Accessible ( )
 		target : CanBeSynced ( )
-		targetc : Changeable ( eval(target.equals(targetc)) )
+		targetc : Changeable ( this == target )
 		
 		sw : SyncWire ( )
 		eval ( functions.connects(sw, source, target) )

@@ -35,8 +35,6 @@ rule "Create navigation buttons for InputForms when connected to DomainIterators
 		object : DomainSchema ( )
 		instance : DomainIterator ( limit != 1 )
 		
-		// TODO Drools fails with a NullPointerException if we put the eval() in the 
-		// condition selector for SchemaEdge??
 		domainSource : DomainSource ( )
 		schemaEdge : SchemaEdge ( from == domainSource, to == object )
 		select : SelectEdge ( from == instance, to == domainSource )

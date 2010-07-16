@@ -560,7 +560,10 @@ getExitResumeTargets(model::components::ExitGate this) :
 List[model::Condition] getClientSideCacheConditions(model::InternetApplication this) :
 	eAllContents.typeSelect(model::PrimitiveCondition)
 		.select(o | model::domain::DomainIterator.isInstance(o.eContainer))
-		.select(o | conditionUsed(o));
+		.select(o | conditionUsed(o))
+	.addAll( eAllContents.typeSelect(model::VisibleThing).conditions.typeSelect(model::PrimitiveCondition)
+		.select(c|c.name == "fieldValue is set" || c.name == "fieldValue is set?")
+		.select(c|conditionUsed(c)) );
 
 /**
  * Get all properties which the server needs to keep track of, and 

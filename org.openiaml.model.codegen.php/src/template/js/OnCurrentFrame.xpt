@@ -19,13 +19,13 @@ function containing_frame(element_id) {
 		3. things that can contain operations
 		4. data flow destinations that are contained by
 		   things that canBeSet()
-		   
+		
 		everything else can return null.
 	«ENDREM»
 	«LET
 		eAllContents.select( e | model::Scope.isInstance(e) )
-			.union( eAllContents.select( e | model::VisibleThing.isInstance(e) ))
-			.union( eAllContents.select( e | model::ContainsOperations.isInstance(e) ))
+			.union( eAllContents.typeSelect(model::VisibleThing) )
+			.union( eAllContents.typeSelect(model::ContainsOperations ))
 			.union( eAllContents.select( e | e.eContainer != null && canBeSet(e.eContainer) ))
 			.sortBy( e | safeName(e) )
 				AS targets»

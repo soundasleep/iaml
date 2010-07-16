@@ -43,22 +43,18 @@
 «ENDDEFINE»
 
 «DEFINE updateCachedPrimitiveConditions FOR model::PrimitiveCondition»
-	«LET ((model::domain::DomainIterator) eContainer) AS object»
-		
-		{
-			// primitive condition '«name»'
-			$new_value = «EXPAND template::domain::DomainInstance::domainInstanceCondition(true, object) FOR this»;
-			$old_value = $_SESSION["cached_result_«safeName()»_value"];
-			if ($new_value != $old_value) {
-				// cache needs to be updated
-				$new_value = $new_value ? "true" : "false";		// force to boolean
-				log_message("Updating cache value [server] 'cached_result_«safeName()»_value' from '$old_value' to '$new_value'");
-				$result[] = "call_operation update_cached_result_«safeName()» " . escape_parameter_string($new_value);
-				$_SESSION["cached_result_«safeName()»_value"] = $new_value;
-			}		
-		}
-		
-	«ENDLET»
+	{
+		// primitive condition '«name»'
+		$new_value = condition_«safeName()»();
+		$old_value = $_SESSION["cached_result_«safeName()»_value"];
+		if ($new_value != $old_value) {
+			// cache needs to be updated
+			$new_value = $new_value ? "true" : "false";		// force to boolean
+			log_message("Updating cache value [server] 'cached_result_«safeName()»_value' from '$old_value' to '$new_value'");
+			$result[] = "call_operation update_cached_result_«safeName()» " . escape_parameter_string($new_value);
+			$_SESSION["cached_result_«safeName()»_value"] = $new_value;
+		}		
+	}
 «ENDDEFINE»
 
 /**

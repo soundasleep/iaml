@@ -28,7 +28,6 @@ import org.openiaml.model.model.users.Role;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.Label;
 import org.openiaml.model.model.wires.AutocompleteWire;
-import org.openiaml.model.model.wires.DetailWire;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.SyncWire;

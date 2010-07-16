@@ -6,15 +6,11 @@ package org.openiaml.model.tests.inference.model0_4;
 import java.util.Set;
 
 import org.openiaml.model.model.ActionEdge;
-import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.PrimitiveCondition;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.Wire;
-import org.openiaml.model.model.operations.CancelNode;
-import org.openiaml.model.model.operations.DecisionNode;
-import org.openiaml.model.model.operations.FinishNode;
-import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ConditionEdge;
@@ -175,38 +171,11 @@ public class SetWireClient extends InferenceTestCase {
 		ActionEdge run = assertHasRunAction(page, access, init, "run");
 
 		// newly created condition
-		CompositeCondition cond = assertHasCompositeCondition(source, "fieldValue is set");
+		PrimitiveCondition cond = assertHasPrimitiveCondition(source, "fieldValue is set");
 		assertGenerated(cond);
 
 		ConditionEdge cw = assertHasConditionEdge(root, cond, run);
 		assertGenerated(cw);
-	}
-
-	/**
-	 * Tests the contents of Page.target.[fieldValue is set]
-	 *
-	 * @throws Exception
-	 */
-	public void testSetWireConditionContents() throws Exception {
-		root = loadAndInfer(SetWireClient.class);
-
-		Frame page = assertHasFrame(root, "Home");
-		InputTextField source = assertHasInputTextField(page, "source");
-		Property value = assertHasFieldValue(source);
-		CompositeCondition cond = assertHasCompositeCondition(source, "fieldValue is set");
-
-		// check contents of condition
-		StartNode start = assertHasStartNode(cond);
-		FinishNode finish = assertHasFinishNode(cond);
-		CancelNode cancel = assertHasCancelNode(cond);
-
-		DecisionNode check = assertHasDecisionNode(cond, "is set?");
-
-		assertHasExecutionEdge(cond, start, check);
-		assertHasExecutionEdge(cond, check, finish);
-		assertHasExecutionEdge(cond, check, cancel);
-
-		assertHasDataFlowEdge(cond, value, check);
 	}
 
 }

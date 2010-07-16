@@ -44,13 +44,15 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 		PrimitiveOperation init1 = assertHasPrimitiveOperation(text1, "init"); 
 		PrimitiveOperation update1 = assertHasPrimitiveOperation(text1, "update"); 
 		PrimitiveCondition cast1 = assertHasPrimitiveCondition(text1, "can cast?"); 
+		PrimitiveCondition set1 = assertHasPrimitiveCondition(text1, "fieldValue is set"); 
 		
 		InputTextField text2 = assertHasInputTextField(home, "text2");
 		CompositeOperation init2 = assertHasCompositeOperation(text2, "init"); 
 		CompositeOperation update2 = assertHasCompositeOperation(text2, "update"); 
 		CompositeCondition cast2 = assertHasCompositeCondition(text2, "can cast?"); 
+		CompositeCondition set2 = assertHasCompositeCondition(text2, "fieldValue is set"); 
 
-		assertNotGenerated(text1, text2, init1, init2, update1, update2, cast1, cast2);
+		assertNotGenerated(text1, text2, init1, init2, update1, update2, cast1, cast2, set1, set2);
 		
 	}
 	
@@ -179,6 +181,27 @@ public class PrimitiveUpdateOperations extends ValidInferenceTestCase {
 		assertHasExecutionEdge(canCast, start, check);
 		assertHasExecutionEdge(canCast, check, cancel, "no");
 		assertHasExecutionEdge(canCast, check, finish, "yes");
+		
+	}
+
+	public void testContentsOfFieldValueIsSetCondition() throws Exception {
+		
+		Frame home = assertHasFrame(root, "Home");
+		InputTextField text2 = assertHasInputTextField(home, "text2");
+		CompositeCondition cond = assertHasCompositeCondition(text2, "fieldValue is set"); 
+		Property value = assertHasFieldValue(text2);
+		
+		StartNode start = assertHasStartNode(cond);
+		FinishNode finish = assertHasFinishNode(cond);
+		CancelNode cancel = assertHasCancelNode(cond);
+
+		DecisionNode check = assertHasDecisionNode(cond, "is set?");
+
+		assertHasExecutionEdge(cond, start, check);
+		assertHasExecutionEdge(cond, check, finish);
+		assertHasExecutionEdge(cond, check, cancel);
+
+		assertHasDataFlowEdge(cond, value, check);
 		
 	}
 	

@@ -59,7 +59,7 @@ public class AccessControlHandlerSpecifyLoginPage extends ValidInferenceTestCase
 		Session target = assertHasSession(root, "Login Session");
 		Frame login = assertHasFrame(target, "Login Page");
 		Session session = assertHasSession(root, "Session");
-		LoginHandler handler = assertHasLoginHandler(session, "role-based login handler");
+		LoginHandler handler = assertHasLoginHandler(session, "role-based login handler for Session");
 		
 		// the LoginHandler will have an outgoing ActionEdge to denote the login page
 		assertGenerated(assertHasActionEdge(root, handler, login, "login"));

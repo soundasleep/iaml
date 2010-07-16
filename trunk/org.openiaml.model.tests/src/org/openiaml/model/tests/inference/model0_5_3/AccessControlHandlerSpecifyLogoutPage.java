@@ -59,7 +59,7 @@ public class AccessControlHandlerSpecifyLogoutPage extends ValidInferenceTestCas
 		Session target = assertHasSession(root, "Logout Session");
 		Frame logout = assertHasFrame(target, "Logout Page");
 		Session session = assertHasSession(root, "Session");
-		LoginHandler handler = assertHasLoginHandler(session, "role-based login handler");
+		LoginHandler handler = assertHasLoginHandler(session, "role-based login handler for Session");
 		
 		// the LoginHandler will have an outgoing ActionEdge to denote the logout page
 		assertGenerated(assertHasActionEdge(root, handler, logout, "logout"));

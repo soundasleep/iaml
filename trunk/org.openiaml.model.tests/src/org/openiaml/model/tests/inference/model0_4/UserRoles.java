@@ -105,14 +105,14 @@ public class UserRoles extends InferenceTestCase {
 		Session session = assertHasSession(root, "target session");
 
 		// the session should have a generated login handler
-		LoginHandler handler = assertHasLoginHandler(session, "role-based login handler");
+		LoginHandler handler = assertHasLoginHandler(session, "role-based login handler for target session");
 		assertGenerated(handler);
 
 		// the login handler should be of type 'user'
 		assertEquals(handler.getType(), LoginHandlerTypes.USER);
 
 		// so there should be a login page
-		Session loginSession = assertHasSession(root, "role-based login handler login");
+		Session loginSession = assertHasSession(root, "role-based login handler for target session login");
 		assertGenerated(loginSession);
 		Frame login = assertHasFrame(loginSession, "login");
 		assertGenerated(login);
@@ -133,7 +133,7 @@ public class UserRoles extends InferenceTestCase {
 		root = loadAndInfer(UserRoles.class);
 
 		Session session = assertHasSession(root, "target session");
-		LoginHandler handler = assertHasLoginHandler(session, "role-based login handler");
+		LoginHandler handler = assertHasLoginHandler(session, "role-based login handler for target session");
 
 		// user instance
 		DomainIterator instance = assertHasDomainIterator(session, "current instance");
@@ -160,7 +160,7 @@ public class UserRoles extends InferenceTestCase {
 		root = loadAndInfer(UserRoles.class);
 
 		Session session = assertHasSession(root, "target session");
-		LoginHandler handler = assertHasLoginHandler(session, "role-based login handler");
+		LoginHandler handler = assertHasLoginHandler(session, "role-based login handler for target session");
 
 		Role user = assertHasRole(root, "User");
 		assertGenerated(user);
@@ -181,7 +181,7 @@ public class UserRoles extends InferenceTestCase {
 		root = loadAndInfer(UserRoles.class);
 
 		Session session = assertHasSession(root, "target session");
-		LoginHandler handler = assertHasLoginHandler(session, "role-based login handler");
+		LoginHandler handler = assertHasLoginHandler(session, "role-based login handler for target session");
 		assertGenerated(handler);
 
 		CompositeOperation check = assertHasCompositeOperation(session, "check instance");
@@ -220,7 +220,7 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(run);
 
 		// a failure wire connecting the op to the login page
-		Session loginSession = assertHasSession(root, "role-based login handler login");
+		Session loginSession = assertHasSession(root, "role-based login handler for target session login");
 		Frame login = assertHasFrame(loginSession, "login");
 		ActionEdge fail = assertHasNavigateAction(root, pageOp, login, "fail");
 		assertGenerated(fail);
@@ -280,7 +280,7 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(run);
 
 		// a failure wire connecting the op to the login page
-		Session loginSession = assertHasSession(root, "role-based login handler login");
+		Session loginSession = assertHasSession(root, "role-based login handler for target session login");
 		Frame login = assertHasFrame(loginSession, "login");
 		ActionEdge fail = assertHasNavigateAction(root, check, login, "fail");
 		assertGenerated(fail);
@@ -469,7 +469,7 @@ public class UserRoles extends InferenceTestCase {
 	public void testLoginFormAttributes() throws Exception {
 		root = loadAndInfer(UserRoles.class);
 
-		Session loginSession = assertHasSession(root, "role-based login handler login");
+		Session loginSession = assertHasSession(root, "role-based login handler for target session login");
 		Frame login = assertHasFrame(loginSession, "login");
 		assertGenerated(login);
 

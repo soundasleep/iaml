@@ -4,14 +4,10 @@
 package org.openiaml.model.tests.inference.model0_2;
 
 import org.openiaml.model.model.ActionEdge;
-import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.PrimitiveCondition;
 import org.openiaml.model.model.Property;
-import org.openiaml.model.model.operations.CancelNode;
-import org.openiaml.model.model.operations.DecisionNode;
-import org.openiaml.model.model.operations.FinishNode;
-import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
@@ -95,39 +91,11 @@ public class SessionSyncWires extends InferenceTestCase {
 		assertGenerated(param);
 
 		// newly created condition
-		CompositeCondition cond = assertHasCompositeCondition(field2, "fieldValue is set");
+		PrimitiveCondition cond = assertHasPrimitiveCondition(field2, "fieldValue is set");
 		assertGenerated(cond);
 
 		ConditionEdge cw = assertHasConditionEdge(root, cond, run);
 		assertGenerated(cw);
-
-	}
-
-	/**
-	 * Tests the contents of Session.Page.target.[fieldValue is set]
-	 *
-	 * @throws Exception
-	 */
-	public void testSessionCheckConditionContents() throws Exception {
-		Session session = assertHasSession(root, "session");
-		Frame inside = assertHasFrame(session, "inside");
-		InputTextField field2 = assertHasInputTextField(inside, "target");
-
-		Property value = assertHasFieldValue(field2);
-		CompositeCondition cond = assertHasCompositeCondition(field2, "fieldValue is set");
-
-		StartNode start = assertHasStartNode(cond);
-		FinishNode finish = assertHasFinishNode(cond);
-		CancelNode cancel = assertHasCancelNode(cond);
-
-		DecisionNode check = assertHasDecisionNode(cond, "is set?");
-
-		assertHasExecutionEdge(cond, start, check);
-		assertHasExecutionEdge(cond, check, finish);
-		assertHasExecutionEdge(cond, check, cancel);
-
-		assertHasDataFlowEdge(cond, value, check);
-
 
 	}
 

@@ -26,8 +26,7 @@
 		var cached_result_«safeName()»_value = 
 		<?php
 		/* save the current cached result, so we know when to update it on the client */
-		$_SESSION["cached_result_«safeName()»_value"] = 
-			condition_«safeName()»();
+		$_SESSION["cached_result_«safeName()»_value"] = «EXPAND template::domain::DomainInstance::domainInstanceCondition(true, object) FOR this»;
 		echo $_SESSION["cached_result_«safeName()»_value"] ? "true" : "false";
 		?>;
 

@@ -7,6 +7,7 @@ import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.PrimitiveCondition;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
@@ -92,7 +93,7 @@ public class SetWireSyncChained extends InferenceTestCase {
 		// but there should only be one
 		assertEquals(run.getInParameterEdges().toString(), 1, run.getInParameterEdges().size());
 
-		CompositeCondition cond = assertHasCompositeCondition(source, "fieldValue is set");
+		PrimitiveCondition cond = assertHasPrimitiveCondition(source, "fieldValue is set");
 		assertGenerated(cond);
 
 		assertGenerated(assertHasConditionEdge(root, cond, run));
@@ -140,7 +141,7 @@ public class SetWireSyncChained extends InferenceTestCase {
 		// but there should only be one
 		assertEquals(run.getInParameterEdges().toString(), 1, run.getInParameterEdges().size());
 
-		CompositeCondition cond = assertHasCompositeCondition(changed, "fieldValue is set");
+		PrimitiveCondition cond = assertHasPrimitiveCondition(changed, "fieldValue is set");
 		assertGenerated(cond);
 
 		assertGenerated(assertHasConditionEdge(root, cond, run));

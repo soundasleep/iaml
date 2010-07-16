@@ -59,7 +59,7 @@ public class AccessControlHandlerSpecifySuccessPage extends ValidInferenceTestCa
 		Session target = assertHasSession(root, "Success Session");
 		Frame success = assertHasFrame(target, "Success Page");
 		Session session = assertHasSession(root, "Session");
-		LoginHandler handler = assertHasLoginHandler(session, "role-based login handler");
+		LoginHandler handler = assertHasLoginHandler(session, "role-based login handler for Session");
 		
 		// the LoginHandler will have an outgoing ActionEdge to denote the success page
 		assertGenerated(assertHasActionEdge(root, handler, success, "success"));

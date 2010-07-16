@@ -87,7 +87,7 @@ public class UserMultiplePermissions extends ValidInferenceTestCase {
 		// is extended
 		assertGenerated(assertHasExtendsEdge(root, user, default_user));
 
-		LoginHandler handler = assertHasLoginHandler(session, "role-based login handler");
+		LoginHandler handler = assertHasLoginHandler(session, "role-based login handler for target session");
 		assertGenerated(handler);
 		
 		// the LoginHandler has an incoming User (not permissions)
@@ -117,7 +117,7 @@ public class UserMultiplePermissions extends ValidInferenceTestCase {
 		assertGenerated(iterator);
 		
 		// connected by a SetWire from the LoginHandler
-		LoginHandler handler = assertHasLoginHandler(session, "role-based login handler");
+		LoginHandler handler = assertHasLoginHandler(session, "role-based login handler for target session");
 		assertGenerated(assertHasSetWire(root, handler, iterator));
 		
 		// TODO which Schema should it connect to?

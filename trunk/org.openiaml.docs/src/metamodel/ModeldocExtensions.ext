@@ -56,6 +56,9 @@ Set[modeldoc::EMFClass] allSubtypes(modeldoc::EMFClass this) :
 String timestamp() :
 	JAVA org.openiaml.docs.generation.codegen.ModeldocCodeGenerator.timestamp();
 
+String escapeLatex(String s) :
+	s.replaceAll("_", "\\\\_");
+
 /**
  * Turn a string like "InputTextField" into "Input Text Field".
  */

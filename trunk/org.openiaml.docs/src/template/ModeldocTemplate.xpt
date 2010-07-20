@@ -12,6 +12,7 @@
 	«EXPAND ClassTemplate::class(this) FOREACH classes»
 
 	«EXPAND template::latex::LatexTemplate::latexClass(this) FOREACH classes»
+	«EXPAND template::latex::LatexClassList::latexClassList»
 	
 	«EXPAND DefaultCss::getCss»
 	«EXPAND DefaultJs::getJs»

@@ -48,6 +48,13 @@
 			</div>
 		«ENDIF»
 		
+		«IF rationale != null»
+		<div id="rationale">
+			<h3>Rationale</h3>
+			«EXPAND ClassTemplate::javadocElement FOR rationale»
+		</div>
+		«ENDIF»
+		
 		«IF !subtypes.isEmpty»
 		<p>
 		<div id="subtypes">

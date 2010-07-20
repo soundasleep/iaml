@@ -728,6 +728,9 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A single text field, storing a single text value, which may be edited by the user."/>
       </eAnnotations>
+      <eAnnotations source="http://openiaml.org/modeldoc">
+        <details key="rationale" value="Compare this to a {@model Label}, which stores a single text value, but cannot be edited directly by the user."/>
+      </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Button" eSuperTypes="#//VisibleThing #//ActionEdgeSource">
       <eAnnotations source="http://openiaml.org/comment">

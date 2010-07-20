@@ -75,37 +75,31 @@ A visual representation of this element is provided in Figure \ref{fig:reference
 % It uses the orange background of all input elements\footnote{Not implemented yet}, and uses a textual icon of \verb|'A'| to signify it is editable.
 «ENDIF»
 
-\subsection{Attributes}
 «EXPAND latexAttributes»
 
-\subsection{Children}
 «EXPAND latexChildren»
 
-\subsection{References}
 «EXPAND latexReferences»
 
-\subsection{Events}
 «EXPAND latexEvents»
 
-\subsection{Conditions}
 «EXPAND latexConditions»
 
-\subsection{Operations}
 «EXPAND latexOperations»
 
-\subsection{Inference Semantics}
 «EXPAND latexInferenceSemantics»
 
-\subsection{Constraints}
 «EXPAND latexConstraints»
 
-\subsection{Implementation Notes}
 «EXPAND latexImplementationNotes»
 
 	«ENDFILE»
 «ENDDEFINE»
 
-«DEFINE latexAttributes FOR modeldoc::EMFClass»
+«DEFINE latexAttributes FOR modeldoc::EMFClass»	
+«IF !attributes.union(getInheritedAttributes(this)).isEmpty»
+	\subsection{Attributes}
+
 	«IF !attributes.isEmpty»
 		\subsubsection{Direct Attributes}
 				
@@ -126,9 +120,18 @@ A visual representation of this element is provided in Figure \ref{fig:reference
 		
 		«FOREACH getInheritedAttributes(this).sortBy(a|a.name) AS attribute SEPARATOR "; "»\modeldocName{«attribute.name»} (from «EXPAND modelLink FOR attribute.containingType»)«ENDFOREACH»
 	«ENDIF»
+
+«ENDIF»
 «ENDDEFINE»
 
 «DEFINE latexChildren FOR modeldoc::EMFClass»
+«IF !references.union(getInheritedReferences(this)).select(r|r.containment)
+		.reject(r|r.type.name == "EventTrigger")
+		.reject(r|r.type.name.endsWith("Condition"))
+		.reject(r|r.type.name.endsWith("Operation"))
+		.isEmpty»
+	\subsection{Children}
+
 	«IF !references.select(r|r.containment)
 			.reject(r|r.type.name == "EventTrigger")
 			.reject(r|r.type.name.endsWith("Condition"))
@@ -165,9 +168,17 @@ A visual representation of this element is provided in Figure \ref{fig:reference
 				.reject(r|r.type.name.endsWith("Operation"))
 				.sortBy(a|a.name) AS ref SEPARATOR "; "»\modeldocName{«ref.name»} (from «EXPAND modelLink FOR ref.containingType»)«ENDFOREACH»
 	«ENDIF»
+«ENDIF»
 «ENDDEFINE»
 
 «DEFINE latexReferences FOR modeldoc::EMFClass»
+«IF !references.union(getInheritedReferences(this)).select(r|!r.containment)
+		.reject(r|r.type.name == "EventTrigger")
+		.reject(r|r.type.name.endsWith("Condition"))
+		.reject(r|r.type.name.endsWith("Operation"))
+		.isEmpty»
+	\subsection{References}
+		
 	«IF !references.select(r|!r.containment)
 			.reject(r|r.type.name == "EventTrigger")
 			.reject(r|r.type.name.endsWith("Condition"))
@@ -204,9 +215,15 @@ A visual representation of this element is provided in Figure \ref{fig:reference
 				.reject(r|r.type.name.endsWith("Operation"))
 				.sortBy(a|a.name) AS ref SEPARATOR "; "»\modeldocName{«ref.name»} (from «EXPAND modelLink FOR ref.containingType»)«ENDFOREACH»
 	«ENDIF»
+«ENDIF»
 «ENDDEFINE»
 
 «DEFINE latexEvents FOR modeldoc::EMFClass»
+«IF !references.union(getInheritedReferences(this))
+		.select(r|r.type.name == "EventTrigger")
+		.isEmpty»
+	\subsection{Events}
+
 	«IF !references.select(r|r.type.name == "EventTrigger").isEmpty»
 		\subsubsection{Direct Events}
 				
@@ -227,9 +244,15 @@ A visual representation of this element is provided in Figure \ref{fig:reference
 		
 		«FOREACH getInheritedReferences(this).select(r|r.type.name == "EventTrigger").sortBy(a|a.name) AS ref SEPARATOR "; "»\modeldocName{«ref.name»} (from «EXPAND modelLink FOR ref.containingType»)«ENDFOREACH»
 	«ENDIF»
+«ENDIF»
 «ENDDEFINE»
 
 «DEFINE latexConditions FOR modeldoc::EMFClass»
+«IF !references.union(getInheritedReferences(this))
+		.select(r|r.type.name.endsWith("Condition"))
+		.isEmpty»
+	\subsection{Conditions}
+
 	«IF !references.select(r|r.type.name.endsWith("Condition")).isEmpty»
 		\subsubsection{Direct Conditions}
 				
@@ -250,9 +273,15 @@ A visual representation of this element is provided in Figure \ref{fig:reference
 		
 		«FOREACH getInheritedReferences(this).select(r|r.type.name.endsWith("Condition")).sortBy(a|a.name) AS ref SEPARATOR "; "»\modeldocName{«ref.name»} (from «EXPAND modelLink FOR ref.containingType»)«ENDFOREACH»
 	«ENDIF»
+«ENDIF»
 «ENDDEFINE»
 
 «DEFINE latexOperations FOR modeldoc::EMFClass»
+«IF !references.union(getInheritedReferences(this))
+		.select(r|r.type.name.endsWith("Operation"))
+		.isEmpty»
+	\subsection{Operations}
+
 	«IF !references.select(r|r.type.name.endsWith("Operation")).isEmpty»
 		\subsubsection{Direct Operations}
 				
@@ -273,26 +302,25 @@ A visual representation of this element is provided in Figure \ref{fig:reference
 		
 		«FOREACH getInheritedReferences(this).select(r|r.type.name.endsWith("Operation")).sortBy(a|a.name) AS ref SEPARATOR "; "»\modeldocName{«ref.name»} (from «EXPAND modelLink FOR ref.containingType»)«ENDFOREACH»
 	«ENDIF»
+«ENDIF»
 «ENDDEFINE»
 
-«DEFINE bounds(int lowerBound, int upperBound) FOR emf::EObject»
-	«IF upperBound != 0 || lowerBound != 1»
-  		«IF lowerBound == 1 && upperBound == 1»
-  			«REM»ignore 1..1«ENDREM»
-  		«ELSEIF upperBound == lowerBound»
-  			«lowerBound»
-  		«ELSEIF upperBound == -1»
-  			[«lowerBound»..*]
-  		«ELSE»
-  			[«lowerBound»..«upperBound»]
-  		«ENDIF»
-  	«ENDIF»
+«DEFINE bounds(int lowerBound, int upperBound) FOR emf::EObject-»
+«IF upperBound != 0 || lowerBound != 1-»
+«IF lowerBound == 1 && upperBound == 1-»«REM»ignore 1..1«ENDREM»«ELSEIF upperBound == lowerBound-»
+«lowerBound-»
+«ELSEIF upperBound == -1-»
+[«lowerBound»..*]«ELSE-»
+[«lowerBound»..«upperBound»]«ENDIF-»
+«ENDIF-»
 «ENDDEFINE»
 
 «DEFINE latexInferenceSemantics FOR modeldoc::EMFClass»
 	«IF inferenceSemantics.isEmpty»
-		\textit{No direct inference semantics.}
+		% \textit{No direct inference semantics.}
 	«ELSE»
+		\subsection{Inference Semantics}
+	
 		\begin{modeldocList}
 			«EXPAND latexInferenceSemantic FOREACH inferenceSemantics»
 		\end{modeldocList}
@@ -305,8 +333,10 @@ A visual representation of this element is provided in Figure \ref{fig:reference
 
 «DEFINE latexConstraints FOR modeldoc::EMFClass»
 	«IF constraints.isEmpty»
-		\textit{No direct constraints.}
+		% \textit{No direct constraints.}
 	«ELSE»
+		\subsection{Constraints}
+
 		\begin{modeldocList}
 			«EXPAND latexConstraint FOREACH constraints»
 		\end{modeldocList}
@@ -314,19 +344,15 @@ A visual representation of this element is provided in Figure \ref{fig:reference
 «ENDDEFINE»
 
 «DEFINE latexConstraint FOR modeldoc::Constraint»	
-	\item
-		«IF type == modeldoc::ConstraintType::WARNING»
-			\constraintWarning
-		«ELSE»
-			\constraintError
-		«ENDIF» 
-		«escapeLatex(message)»
+	\item «IF type == modeldoc::ConstraintType::WARNING»\constraintWarning«ELSE»\constraintError«ENDIF» «escapeLatex(message)»
 «ENDDEFINE»
 
 «DEFINE latexImplementationNotes FOR modeldoc::EMFClass»
 	«IF implementationNotes.isEmpty»
-		\textit{No direct implementation notes.}
+		% \textit{No direct implementation notes.}
 	«ELSE»
+		\subsection{Implementation Notes}
+
 		\begin{modeldocList}
 			«EXPAND latexImplementationNote FOREACH implementationNotes»
 		\end{modeldocList}

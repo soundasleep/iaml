@@ -127,6 +127,7 @@ div.intro div#intro_end { clear: right; }
 body#summary .subtype_list { padding-left: 2em; margin-top: .5em; line-height: 1.4em; }
 
 body#examples li.example { margin-bottom: 1em; }
+div#rationale h3 { margin-bottom: 6px; font-size: 100%; }
 
 .constraint .warning { background: url("../icons/warning_obj.gif") top left no-repeat; padding-left: 18px; }
 .constraint .error { background: url("../icons/error_tsk.gif") top left no-repeat; padding-left: 18px; }

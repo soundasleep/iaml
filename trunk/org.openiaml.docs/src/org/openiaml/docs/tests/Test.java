@@ -96,6 +96,5 @@ public class Test extends TestCase {
 		System.out.println("inferred model saved to: " + tempJavaFile.getAbsolutePath());
 		return tempJavaFile;
 	}
-
 	
 }

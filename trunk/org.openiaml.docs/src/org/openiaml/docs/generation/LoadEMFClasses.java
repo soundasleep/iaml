@@ -84,9 +84,19 @@ public class LoadEMFClasses extends EMFLoaderHelper implements ILoader {
 				c.setInterface(cls.isInterface());
 
 				// add tagline
-				JavadocTagElement e = getTaglineForEMFElement(factory, cls);
-				if (e != null) {
-					c.setTagline(e);
+				{
+					JavadocTagElement e = getTaglineForEMFElement(factory, cls);
+					if (e != null) {
+						c.setTagline(e);
+					}
+				}
+				
+				// add rationale
+				{
+					JavadocTagElement e = getRationaleForEMFElement(factory, cls);
+					if (e != null) {
+						c.setRationale(e);
+					}
 				}
 				
 				c.setParent(root);

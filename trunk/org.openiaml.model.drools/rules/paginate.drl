@@ -301,6 +301,7 @@ rule "Create 'target' property in Last button"
 	then
 		Property property = handler.generatedProperty(last, last);
 		handler.setName(property, "target");
+		handler.setDefault(property, "not set");	// set empty to prevent session crashes
 		queue.add(property, drools);
 		
 end

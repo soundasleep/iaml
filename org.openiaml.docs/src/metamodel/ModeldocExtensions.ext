@@ -56,6 +56,12 @@ Set[modeldoc::EMFClass] allSubtypes(modeldoc::EMFClass this) :
 String timestamp() :
 	JAVA org.openiaml.docs.generation.codegen.ModeldocCodeGenerator.timestamp();
 
+/**
+ * Turn a string like "InputTextField" into "Input Text Field".
+ */
+String humanise(String name) :
+	JAVA org.openiaml.docs.generation.codegen.LatexCodegenFunctions.humanise(java.lang.String);
+
 /** 
  * a hack way to create backtrace-able errors
  * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540

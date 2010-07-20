@@ -1,0 +1,162 @@
+«IMPORT modeldoc»
+
+«EXTENSION metamodel::ModeldocExtensions»
+
+«DEFINE latexClass(modeldoc::ModelDocumentation root) FOR modeldoc::EMFClass»
+	«FILE "output/latex/" + name + ".tex"»
+
+% generated ModelDoc latex for class «name»
+		
+\hypertarget{model reference:«humanise(name)»}{}
+\hypertarget{model reference:«humanise(name)»s}{}
+\section{«humanise(name)»}
+
+% tagline
+«IF tagline != null»
+«EXPAND LatexTemplate::javadocElementToLatex FOR tagline»
+«ELSE»
+\textbf{TODO} Tagline for «EXPAND modelLink».
+«ENDIF»
+
+\subsubsection{Rationale}
+
+% Rationale
+«IF rationale != null»
+«EXPAND LatexTemplate::javadocElementToLatex FOR rationale»
+«ELSE»
+\textbf{TODO} Rationale for «EXPAND modelLink».
+«ENDIF»
+
+% structure
+\subsubsection{Structure}
+«IF !supertypes.isEmpty»
+	\noindent \textbf{Extends:} «EXPAND modelLink FOREACH supertypes.sortBy(t|t.name) SEPARATOR ", "» 
+«ENDIF»
+
+«IF !subtypes.isEmpty»
+	\noindent \textbf{Direct subtypes:} «EXPAND modelLink FOREACH subtypes.sortBy(t|t.name) SEPARATOR ", "» 
+«ENDIF»
+
+«IF !allSubtypes().without(subtypes).isEmpty»
+	\noindent \textbf{Additional subtypes:} «EXPAND modelLink FOREACH allSubtypes().without(subtypes).sortBy(t|t.name) SEPARATOR ", "» 
+«ENDIF»
+
+% visual representation
+\subsection{Visual Representation}
+
+\begin{figure}[htb]
+\centering
+% TODO this should be using SVG images, not PNG
+\includegraphics{elements/«name».eps}
+\caption{«humanise(name)»}
+\label{fig:reference-«name»}
+\end{figure}
+
+% Rationale behind the visual representation
+A visual representation of this element is provided in Figure \ref{fig:reference-«name»}.
+\textbf{TODO} Visual representation rationale.
+% It uses the orange background of all input elements\footnote{Not implemented yet}, and uses a textual icon of \verb|'A'| to signify it is editable.
+
+\subsection{Attributes}
+«EXPAND latexAttributes»
+
+	«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE latexAttributes FOR modeldoc::EMFClass»
+	«IF !attributes.isEmpty»
+		\subsubsection{Direct Attributes}
+				
+		\begin{modeldocList}
+		«FOREACH attributes.sortBy(a|a.name) AS attribute»
+		  \item \modeldocName{«attribute.name»} :
+		  	«IF attribute.upperBound != 0 || attribute.lowerBound != 1»
+		  		«IF attribute.lowerBound == 1 && attribute.upperBound == 1»
+		  			«REM»ignore 1..1«ENDREM»
+		  		«ELSEIF attribute.upperBound == attribute.lowerBound»
+		  			«attribute.lowerBound»
+		  		«ELSEIF attribute.upperBound == -1»
+		  			[«attribute.lowerBound»..*]
+		  		«ELSE»
+		  			[«attribute.lowerBound»..«attribute.upperBound»]
+		  		«ENDIF»
+		  	«ENDIF»
+		  	\code{«attribute.type»}
+		  
+			«IF attribute.tagline != null»
+			  \begin{modeldocList}
+				  \item	«EXPAND javadocElementToLatex FOR attribute.tagline»
+			  \end{modeldocList}
+			«ENDIF»
+		«ENDFOREACH»
+	«ENDIF»
+	
+	«IF !getInheritedAttributes(this).isEmpty»
+		\subsubsection{Inherited Attributes}
+		
+		«FOREACH getInheritedAttributes(this).sortBy(a|a.name) AS attribute SEPARATOR "; "»\modeldocName{«attribute.name»} (from «EXPAND modelLink FOR attribute.containingType»)«ENDFOREACH»
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE modelLink FOR modeldoc::EMFClass-»
+\modelLink{«humanise(name)»}«ENDDEFINE» 
+
+«DEFINE javadocElementToLatex FOR modeldoc::Reference»
+
+	\textbf{TODO} Unknown javadoc '«this»'
+	
+«ENDDEFINE»
+
+«DEFINE javadocElementToLatex FOR modeldoc::JavadocTagElement»«IF name == "@inference" || name == "@operational" || name == "@implementation" || name == "@example"-»
+«REM»need to remove the first text in the tag (referring to the model elements to tag)«ENDREM»
+«EXPAND javadocSemanticsElementToLatex FOR fragments.first()-»
+«EXPAND javadocElementToLatex FOREACH fragments.withoutFirst()-»
+«ELSEIF name == "@model" || name == "@link"-»
+«EXPAND javadocModelElementToLatex FOREACH fragments-»
+«ELSE-»
+«EXPAND javadocElementToLatex FOREACH fragments-»
+«ENDIF-»«ENDDEFINE»
+
+«DEFINE javadocElementToLatex FOR modeldoc::JavadocTextElement-»
+«IF !(value.startsWith(",") || value.startsWith(".") || value.startsWith("?"))»«" "»«ENDIF»«value-»
+«ENDDEFINE»
+
+«REM»the formatting is ugly, but we sadly can't have _any_ whitespace«ENDREM»
+«DEFINE javadocModelElementToLatex FOR modeldoc::JavadocTextElement-»
+«" "»«IF value.contains(".")-»
+«value-»«REM»the value contains an illegal character; it can't link to a model element«ENDREM»
+«ELSE-»
+«IF value.trim().contains(" ")-»
+«LET value.trim().split(" ") AS bits-»
+«IF bits.first().contains("#")-»
+«LET bits.first().trim().split("#") AS hashBits-»
+<a href="«hashBits.first()».html#«hashBits.withoutFirst().first()»">
+«ENDLET-»
+«ELSE-»
+<a href="«bits.first()».html">
+«ENDIF-»
+«FOREACH bits.withoutFirst().withoutLast() AS s»«s» «ENDFOREACH»«bits.last()»</a>«ENDLET-»
+«ELSE-»
+«IF value.trim().contains("#")-»
+«LET value.trim().split("#") AS hashBits-»
+<a href="«hashBits.first()».html#«hashBits.withoutFirst().first()»">«hashBits.withoutFirst().first()»</a>
+«ENDLET-» 
+«ELSE-»
+\modelLink{«humanise(value)»}
+«ENDIF-»
+«ENDIF-»
+«ENDIF-»
+«ENDDEFINE»
+
+«REM»need to remove the first text in the tag (referring to the model elements to tag)«ENDREM»
+«DEFINE javadocSemanticsElementToLatex FOR modeldoc::JavadocTextElement»
+	«FOREACH value.trim().split(" ").withoutFirst() AS s»«s» «ENDFOREACH»
+«ENDDEFINE»
+«DEFINE javadocSemanticsElementToLatex FOR modeldoc::JavadocFragment»
+	<span class="error">(unknown semantic starting tag '«this»')</span>
+«ENDDEFINE»
+
+/* no special meaning; just render it like normal */
+«DEFINE javadocModelElementToLatex FOR modeldoc::JavadocFragment»
+	«EXPAND javadocElementToLatex» 
+«ENDDEFINE»

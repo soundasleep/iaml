@@ -60,6 +60,21 @@ A visual representation of this element is provided in Figure \ref{fig:reference
 \subsection{Attributes}
 «EXPAND latexAttributes»
 
+\subsection{Children}
+«EXPAND latexChildren»
+
+\subsection{References}
+«EXPAND latexReferences»
+
+\subsection{Events}
+«EXPAND latexEvents»
+
+\subsection{Conditions}
+«EXPAND latexConditions»
+
+\subsection{Operations}
+«EXPAND latexOperations»
+
 	«ENDFILE»
 «ENDDEFINE»
 
@@ -69,20 +84,7 @@ A visual representation of this element is provided in Figure \ref{fig:reference
 				
 		\begin{modeldocList}
 		«FOREACH attributes.sortBy(a|a.name) AS attribute»
-		  \item \modeldocName{«attribute.name»} :
-		  	«IF attribute.upperBound != 0 || attribute.lowerBound != 1»
-		  		«IF attribute.lowerBound == 1 && attribute.upperBound == 1»
-		  			«REM»ignore 1..1«ENDREM»
-		  		«ELSEIF attribute.upperBound == attribute.lowerBound»
-		  			«attribute.lowerBound»
-		  		«ELSEIF attribute.upperBound == -1»
-		  			[«attribute.lowerBound»..*]
-		  		«ELSE»
-		  			[«attribute.lowerBound»..«attribute.upperBound»]
-		  		«ENDIF»
-		  	«ENDIF»
-		  	\code{«attribute.type»}
-		  
+		  \item \modeldocName{«attribute.name»} : «EXPAND bounds(attribute.lowerBound, attribute.upperBound)» \code{«attribute.type»}
 			«IF attribute.tagline != null»
 			  \begin{modeldocList}
 				  \item	«EXPAND javadocElementToLatex FOR attribute.tagline»
@@ -98,13 +100,167 @@ A visual representation of this element is provided in Figure \ref{fig:reference
 	«ENDIF»
 «ENDDEFINE»
 
+«DEFINE latexChildren FOR modeldoc::EMFClass»
+	«IF !references.select(r|r.containment)
+			.reject(r|r.type.name == "EventTrigger")
+			.reject(r|r.type.name.endsWith("Condition"))
+			.reject(r|r.type.name.endsWith("Operation"))
+			.isEmpty»
+		\subsubsection{Direct Children}
+				
+		\begin{modeldocList}
+		«FOREACH references.select(r|r.containment)
+				.reject(r|r.type.name == "EventTrigger")
+				.reject(r|r.type.name.endsWith("Condition"))
+				.reject(r|r.type.name.endsWith("Operation"))
+				.sortBy(a|a.name) AS ref»
+		  \item \modeldocName{«ref.name»} : «EXPAND bounds(ref.lowerBound, ref.upperBound)» «EXPAND modelLink FOR ref.type»
+			«IF ref.tagline != null»
+			  \begin{modeldocList}
+				  \item	«EXPAND javadocElementToLatex FOR ref.tagline»
+			  \end{modeldocList}
+			«ENDIF»
+		«ENDFOREACH»
+	«ENDIF»
+	
+	«IF !getInheritedReferences(this).select(r|r.containment)
+			.reject(r|r.type.name == "EventTrigger")
+			.reject(r|r.type.name.endsWith("Condition"))
+			.reject(r|r.type.name.endsWith("Operation"))
+			.isEmpty»
+		\subsubsection{Inherited Children}
+		
+		«FOREACH getInheritedReferences(this).select(r|r.containment)
+				.reject(r|r.type.name == "EventTrigger")
+				.reject(r|r.type.name.endsWith("Condition"))
+				.reject(r|r.type.name.endsWith("Operation"))
+				.sortBy(a|a.name) AS ref SEPARATOR "; "»\modeldocName{«ref.name»} (from «EXPAND modelLink FOR ref.containingType»)«ENDFOREACH»
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE latexReferences FOR modeldoc::EMFClass»
+	«IF !references.select(r|!r.containment)
+			.reject(r|r.type.name == "EventTrigger")
+			.reject(r|r.type.name.endsWith("Condition"))
+			.reject(r|r.type.name.endsWith("Operation"))
+			.isEmpty»
+		\subsubsection{Direct References}
+				
+		\begin{modeldocList}
+		«FOREACH references.select(r|!r.containment)
+				.reject(r|r.type.name == "EventTrigger")
+				.reject(r|r.type.name.endsWith("Condition"))
+				.reject(r|r.type.name.endsWith("Operation"))
+				.sortBy(a|a.name) AS ref»
+		  \item \modeldocName{«ref.name»} : «EXPAND bounds(ref.lowerBound, ref.upperBound)» «EXPAND modelLink FOR ref.type»
+			«IF ref.tagline != null»
+			  \begin{modeldocList}
+				  \item	«EXPAND javadocElementToLatex FOR ref.tagline»
+			  \end{modeldocList}
+			«ENDIF»
+		«ENDFOREACH»
+	«ENDIF»
+	
+	«IF !getInheritedReferences(this).select(r|!r.containment)
+			.reject(r|r.type.name == "EventTrigger")
+			.reject(r|r.type.name.endsWith("Condition"))
+			.reject(r|r.type.name.endsWith("Operation"))
+			.isEmpty»
+		\subsubsection{Inherited References}
+		
+		«FOREACH getInheritedReferences(this).select(r|!r.containment)
+				.reject(r|r.type.name == "EventTrigger")
+				.reject(r|r.type.name.endsWith("Condition"))
+				.reject(r|r.type.name.endsWith("Operation"))
+				.sortBy(a|a.name) AS ref SEPARATOR "; "»\modeldocName{«ref.name»} (from «EXPAND modelLink FOR ref.containingType»)«ENDFOREACH»
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE latexEvents FOR modeldoc::EMFClass»
+	«IF !references.select(r|r.type.name == "EventTrigger").isEmpty»
+		\subsubsection{Direct Events}
+				
+		\begin{modeldocList}
+		«FOREACH references.select(r|r.type.name == "EventTrigger").sortBy(a|a.name) AS ref»
+		  \item \modeldocName{«ref.name»} : «EXPAND bounds(ref.lowerBound, ref.upperBound)» «EXPAND modelLink FOR ref.type»
+			«IF ref.tagline != null»
+			  \begin{modeldocList}
+				  \item	«EXPAND javadocElementToLatex FOR ref.tagline»
+			  \end{modeldocList}
+			«ENDIF»
+		«ENDFOREACH»
+	«ENDIF»
+	
+	«IF !getInheritedReferences(this).select(r|r.type.name == "EventTrigger").isEmpty»
+		\subsubsection{Inherited Events}
+		
+		«FOREACH getInheritedReferences(this).select(r|r.type.name == "EventTrigger").sortBy(a|a.name) AS ref SEPARATOR "; "»\modeldocName{«ref.name»} (from «EXPAND modelLink FOR ref.containingType»)«ENDFOREACH»
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE latexConditions FOR modeldoc::EMFClass»
+	«IF !references.select(r|r.type.name.endsWith("Condition")).isEmpty»
+		\subsubsection{Direct Conditions}
+				
+		\begin{modeldocList}
+		«FOREACH references.select(r|r.type.name.endsWith("Condition")).sortBy(a|a.name) AS ref»
+		  \item \modeldocName{«ref.name»} : «EXPAND bounds(ref.lowerBound, ref.upperBound)» «EXPAND modelLink FOR ref.type»
+			«IF ref.tagline != null»
+			  \begin{modeldocList}
+				  \item	«EXPAND javadocElementToLatex FOR ref.tagline»
+			  \end{modeldocList}
+			«ENDIF»
+		«ENDFOREACH»
+	«ENDIF»
+	
+	«IF !getInheritedReferences(this).select(r|r.type.name.endsWith("Condition")).isEmpty»
+		\subsubsection{Inherited Conditions}
+		
+		«FOREACH getInheritedReferences(this).select(r|r.type.name.endsWith("Condition")).sortBy(a|a.name) AS ref SEPARATOR "; "»\modeldocName{«ref.name»} (from «EXPAND modelLink FOR ref.containingType»)«ENDFOREACH»
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE latexOperations FOR modeldoc::EMFClass»
+	«IF !references.select(r|r.type.name.endsWith("Operation")).isEmpty»
+		\subsubsection{Direct Operations}
+				
+		\begin{modeldocList}
+		«FOREACH references.select(r|r.type.name.endsWith("Operation")).sortBy(a|a.name) AS ref»
+		  \item \modeldocName{«ref.name»} : «EXPAND bounds(ref.lowerBound, ref.upperBound)» «EXPAND modelLink FOR ref.type»
+			«IF ref.tagline != null»
+			  \begin{modeldocList}
+				  \item	«EXPAND javadocElementToLatex FOR ref.tagline»
+			  \end{modeldocList}
+			«ENDIF»
+		«ENDFOREACH»
+	«ENDIF»
+	
+	«IF !getInheritedReferences(this).select(r|r.type.name.endsWith("Operation")).isEmpty»
+		\subsubsection{Inherited Operations}
+		
+		«FOREACH getInheritedReferences(this).select(r|r.type.name.endsWith("Operation")).sortBy(a|a.name) AS ref SEPARATOR "; "»\modeldocName{«ref.name»} (from «EXPAND modelLink FOR ref.containingType»)«ENDFOREACH»
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE bounds(int lowerBound, int upperBound) FOR emf::EObject»
+	«IF upperBound != 0 || lowerBound != 1»
+  		«IF lowerBound == 1 && upperBound == 1»
+  			«REM»ignore 1..1«ENDREM»
+  		«ELSEIF upperBound == lowerBound»
+  			«lowerBound»
+  		«ELSEIF upperBound == -1»
+  			[«lowerBound»..*]
+  		«ELSE»
+  			[«lowerBound»..«upperBound»]
+  		«ENDIF»
+  	«ENDIF»
+«ENDDEFINE»
+
 «DEFINE modelLink FOR modeldoc::EMFClass-»
-\modelLink{«humanise(name)»}«ENDDEFINE» 
+«IF this==null»\textbf{TODO} \code{null} class«ELSE»\modelLink{«humanise(name)»}«ENDIF»«ENDDEFINE» 
 
 «DEFINE javadocElementToLatex FOR modeldoc::Reference»
-
 	\textbf{TODO} Unknown javadoc '«this»'
-	
 «ENDDEFINE»
 
 «DEFINE javadocElementToLatex FOR modeldoc::JavadocTagElement»«IF name == "@inference" || name == "@operational" || name == "@implementation" || name == "@example"-»

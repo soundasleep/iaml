@@ -29,6 +29,16 @@
 
 % structure
 \subsubsection{Structure}
+«IF abstract»
+	«IF interface»
+		\noindent Abstract interface.
+	«ELSE»
+		\noindent Abstract.
+	«ENDIF»
+«ELSEIF interface»
+	\noindent Interface.
+«ENDIF»
+
 «IF !supertypes.isEmpty»
 	\noindent \textbf{Extends:} «EXPAND modelLink FOREACH supertypes.sortBy(t|t.name) SEPARATOR ", "» 
 «ENDIF»
@@ -74,6 +84,15 @@ A visual representation of this element is provided in Figure \ref{fig:reference
 
 \subsection{Operations}
 «EXPAND latexOperations»
+
+\subsection{Inference Semantics}
+«EXPAND latexInferenceSemantics»
+
+\subsection{Constraints}
+«EXPAND latexConstraints»
+
+\subsection{Implementation Notes}
+«EXPAND latexImplementationNotes»
 
 	«ENDFILE»
 «ENDDEFINE»
@@ -256,8 +275,56 @@ A visual representation of this element is provided in Figure \ref{fig:reference
   	«ENDIF»
 «ENDDEFINE»
 
+«DEFINE latexInferenceSemantics FOR modeldoc::EMFClass»
+	«IF inferenceSemantics.isEmpty»
+		\textit{No direct inference semantics.}
+	«ELSE»
+		\begin{modeldocList}
+			«EXPAND latexInferenceSemantic FOREACH inferenceSemantics»
+		\end{modeldocList}
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE latexInferenceSemantic FOR modeldoc::InferenceSemantic»
+	\item «EXPAND javadocElementToLatex FOR description»
+«ENDDEFINE»
+
+«DEFINE latexConstraints FOR modeldoc::EMFClass»
+	«IF constraints.isEmpty»
+		\textit{No direct constraints.}
+	«ELSE»
+		\begin{modeldocList}
+			«EXPAND latexConstraint FOREACH constraints»
+		\end{modeldocList}
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE latexConstraint FOR modeldoc::Constraint»	
+	\item
+		«IF type == modeldoc::ConstraintType::WARNING»
+			\constraintWarning
+		«ELSE»
+			\constraintError
+		«ENDIF» 
+		«message»
+«ENDDEFINE»
+
+«DEFINE latexImplementationNotes FOR modeldoc::EMFClass»
+	«IF implementationNotes.isEmpty»
+		\textit{No direct implementation notes.}
+	«ELSE»
+		\begin{modeldocList}
+			«EXPAND latexImplementationNote FOREACH implementationNotes»
+		\end{modeldocList}
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE latexImplementationNote FOR modeldoc::ImplementationNote»
+	\item «EXPAND javadocElementToLatex FOR description»
+«ENDDEFINE»
+
 «DEFINE modelLink FOR modeldoc::EMFClass-»
-«IF this==null»\textbf{TODO} \code{null} class«ELSE»\modelLink{«humanise(name)»}«ENDIF»«ENDDEFINE» 
+«IF this==null»\textbf{TODO} \code{null} class.«ELSE»\modelLink{«humanise(name)»}«ENDIF»«ENDDEFINE» 
 
 «DEFINE javadocElementToLatex FOR modeldoc::Reference»
 	\textbf{TODO} Unknown javadoc '«this»'
@@ -284,18 +351,11 @@ A visual representation of this element is provided in Figure \ref{fig:reference
 «ELSE-»
 «IF value.trim().contains(" ")-»
 «LET value.trim().split(" ") AS bits-»
-«IF bits.first().contains("#")-»
-«LET bits.first().trim().split("#") AS hashBits-»
-<a href="«hashBits.first()».html#«hashBits.withoutFirst().first()»">
-«ENDLET-»
-«ELSE-»
-<a href="«bits.first()».html">
-«ENDIF-»
-«FOREACH bits.withoutFirst().withoutLast() AS s»«s» «ENDFOREACH»«bits.last()»</a>«ENDLET-»
+«FOREACH bits.withoutFirst().withoutLast() AS s»«s» «ENDFOREACH»\modelLink{«humanise(bits.last())»}«ENDLET-»
 «ELSE-»
 «IF value.trim().contains("#")-»
 «LET value.trim().split("#") AS hashBits-»
-<a href="«hashBits.first()».html#«hashBits.withoutFirst().first()»">«hashBits.withoutFirst().first()»</a>
+\modeldocName{«hashBits.withoutFirst().first()»}
 «ENDLET-» 
 «ELSE-»
 \modelLink{«humanise(value)»}
@@ -309,7 +369,7 @@ A visual representation of this element is provided in Figure \ref{fig:reference
 	«FOREACH value.trim().split(" ").withoutFirst() AS s»«s» «ENDFOREACH»
 «ENDDEFINE»
 «DEFINE javadocSemanticsElementToLatex FOR modeldoc::JavadocFragment»
-	<span class="error">(unknown semantic starting tag '«this»')</span>
+	\textbf{TODO} Unknown semantic starting tag '«this»'.
 «ENDDEFINE»
 
 /* no special meaning; just render it like normal */

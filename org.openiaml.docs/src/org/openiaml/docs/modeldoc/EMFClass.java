@@ -38,6 +38,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getReferences <em>References</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getAdditionalDocumentation <em>Additional Documentation</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getRationale <em>Rationale</em>}</li>
  * </ul>
  * </p>
  *
@@ -461,6 +462,32 @@ public interface EMFClass extends EObject {
 	 * @generated
 	 */
 	EList<AdditionalDocumentation> getAdditionalDocumentation();
+
+	/**
+	 * Returns the value of the '<em><b>Rationale</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Rationale</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Rationale</em>' containment reference.
+	 * @see #setRationale(JavadocTagElement)
+	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getEMFClass_Rationale()
+	 * @model containment="true"
+	 * @generated
+	 */
+	JavadocTagElement getRationale();
+
+	/**
+	 * Sets the value of the '{@link org.openiaml.docs.modeldoc.EMFClass#getRationale <em>Rationale</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Rationale</em>' containment reference.
+	 * @see #getRationale()
+	 * @generated
+	 */
+	void setRationale(JavadocTagElement value);
 
 	/**
 	 * Returns the value of the '<em><b>Implementation Notes</b></em>' containment reference list.

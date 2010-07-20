@@ -63,6 +63,7 @@ import org.openiaml.docs.modeldoc.OperationalSemantic;
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getReferences <em>References</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getAdditionalDocumentation <em>Additional Documentation</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getRationale <em>Rationale</em>}</li>
  * </ul>
  * </p>
  *
@@ -267,6 +268,15 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 	 * @ordered
 	 */
 	protected EList<AdditionalDocumentation> additionalDocumentation;
+	/**
+	 * The cached value of the '{@link #getRationale() <em>Rationale</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRationale()
+	 * @generated
+	 * @ordered
+	 */
+	protected JavadocTagElement rationale;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -720,6 +730,49 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public JavadocTagElement getRationale() {
+		return rationale;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetRationale(JavadocTagElement newRationale, NotificationChain msgs) {
+		JavadocTagElement oldRationale = rationale;
+		rationale = newRationale;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModeldocPackage.EMF_CLASS__RATIONALE, oldRationale, newRationale);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRationale(JavadocTagElement newRationale) {
+		if (newRationale != rationale) {
+			NotificationChain msgs = null;
+			if (rationale != null)
+				msgs = ((InternalEObject)rationale).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ModeldocPackage.EMF_CLASS__RATIONALE, null, msgs);
+			if (newRationale != null)
+				msgs = ((InternalEObject)newRationale).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ModeldocPackage.EMF_CLASS__RATIONALE, null, msgs);
+			msgs = basicSetRationale(newRationale, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModeldocPackage.EMF_CLASS__RATIONALE, newRationale, newRationale));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<ImplementationNote> getImplementationNotes() {
 		if (implementationNotes == null) {
 			implementationNotes = new EObjectContainmentWithInverseEList<ImplementationNote>(ImplementationNote.class, this, ModeldocPackage.EMF_CLASS__IMPLEMENTATION_NOTES, ModeldocPackage.IMPLEMENTATION_NOTE__CONTAINING_CLASS);
@@ -806,6 +859,8 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				return ((InternalEList<?>)getReferences()).basicRemove(otherEnd, msgs);
 			case ModeldocPackage.EMF_CLASS__ADDITIONAL_DOCUMENTATION:
 				return ((InternalEList<?>)getAdditionalDocumentation()).basicRemove(otherEnd, msgs);
+			case ModeldocPackage.EMF_CLASS__RATIONALE:
+				return basicSetRationale(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -874,6 +929,8 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				return getReferences();
 			case ModeldocPackage.EMF_CLASS__ADDITIONAL_DOCUMENTATION:
 				return getAdditionalDocumentation();
+			case ModeldocPackage.EMF_CLASS__RATIONALE:
+				return getRationale();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -958,6 +1015,9 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				getAdditionalDocumentation().clear();
 				getAdditionalDocumentation().addAll((Collection<? extends AdditionalDocumentation>)newValue);
 				return;
+			case ModeldocPackage.EMF_CLASS__RATIONALE:
+				setRationale((JavadocTagElement)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -1030,6 +1090,9 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 			case ModeldocPackage.EMF_CLASS__ADDITIONAL_DOCUMENTATION:
 				getAdditionalDocumentation().clear();
 				return;
+			case ModeldocPackage.EMF_CLASS__RATIONALE:
+				setRationale((JavadocTagElement)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1082,6 +1145,8 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				return references != null && !references.isEmpty();
 			case ModeldocPackage.EMF_CLASS__ADDITIONAL_DOCUMENTATION:
 				return additionalDocumentation != null && !additionalDocumentation.isEmpty();
+			case ModeldocPackage.EMF_CLASS__RATIONALE:
+				return rationale != null;
 		}
 		return super.eIsSet(featureID);
 	}

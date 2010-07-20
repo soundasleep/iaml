@@ -52,12 +52,19 @@
 «ENDIF»
 
 % visual representation
+«IF abstract || interface»
+% no visual representation: class is abstract, or an interface 
+«ELSE»
 \subsection{Visual Representation}
 
 \begin{figure}[htb]
 \centering
 % TODO this should be using SVG images, not PNG
+«IF gmfEditor == null»
+\textbf{TODO} No visual representation found for «EXPAND modelLink»
+«ELSE»
 \includegraphics{elements/«name».eps}
+«ENDIF»
 \caption{«humanise(name)»}
 \label{fig:reference-«name»}
 \end{figure}
@@ -66,6 +73,7 @@
 A visual representation of this element is provided in Figure \ref{fig:reference-«name»}.
 \textbf{TODO} Visual representation rationale.
 % It uses the orange background of all input elements\footnote{Not implemented yet}, and uses a textual icon of \verb|'A'| to signify it is editable.
+«ENDIF»
 
 \subsection{Attributes}
 «EXPAND latexAttributes»
@@ -110,6 +118,7 @@ A visual representation of this element is provided in Figure \ref{fig:reference
 			  \end{modeldocList}
 			«ENDIF»
 		«ENDFOREACH»
+		\end{modeldocList}
 	«ENDIF»
 	
 	«IF !getInheritedAttributes(this).isEmpty»
@@ -140,6 +149,7 @@ A visual representation of this element is provided in Figure \ref{fig:reference
 			  \end{modeldocList}
 			«ENDIF»
 		«ENDFOREACH»
+		\end{modeldocList}
 	«ENDIF»
 	
 	«IF !getInheritedReferences(this).select(r|r.containment)
@@ -178,6 +188,7 @@ A visual representation of this element is provided in Figure \ref{fig:reference
 			  \end{modeldocList}
 			«ENDIF»
 		«ENDFOREACH»
+		\end{modeldocList}
 	«ENDIF»
 	
 	«IF !getInheritedReferences(this).select(r|!r.containment)
@@ -208,6 +219,7 @@ A visual representation of this element is provided in Figure \ref{fig:reference
 			  \end{modeldocList}
 			«ENDIF»
 		«ENDFOREACH»
+		\end{modeldocList}
 	«ENDIF»
 	
 	«IF !getInheritedReferences(this).select(r|r.type.name == "EventTrigger").isEmpty»
@@ -230,6 +242,7 @@ A visual representation of this element is provided in Figure \ref{fig:reference
 			  \end{modeldocList}
 			«ENDIF»
 		«ENDFOREACH»
+		\end{modeldocList}
 	«ENDIF»
 	
 	«IF !getInheritedReferences(this).select(r|r.type.name.endsWith("Condition")).isEmpty»
@@ -252,6 +265,7 @@ A visual representation of this element is provided in Figure \ref{fig:reference
 			  \end{modeldocList}
 			«ENDIF»
 		«ENDFOREACH»
+		\end{modeldocList}
 	«ENDIF»
 	
 	«IF !getInheritedReferences(this).select(r|r.type.name.endsWith("Operation")).isEmpty»
@@ -306,7 +320,7 @@ A visual representation of this element is provided in Figure \ref{fig:reference
 		«ELSE»
 			\constraintError
 		«ENDIF» 
-		«message»
+		«escapeLatex(message)»
 «ENDDEFINE»
 
 «DEFINE latexImplementationNotes FOR modeldoc::EMFClass»
@@ -341,7 +355,7 @@ A visual representation of this element is provided in Figure \ref{fig:reference
 «ENDIF-»«ENDDEFINE»
 
 «DEFINE javadocElementToLatex FOR modeldoc::JavadocTextElement-»
-«IF !(value.startsWith(",") || value.startsWith(".") || value.startsWith("?"))»«" "»«ENDIF»«value-»
+«IF !(value.startsWith(",") || value.startsWith(".") || value.startsWith("?"))»«" "»«ENDIF»«escapeLatex(value)-»
 «ENDDEFINE»
 
 «REM»the formatting is ugly, but we sadly can't have _any_ whitespace«ENDREM»
@@ -366,7 +380,7 @@ A visual representation of this element is provided in Figure \ref{fig:reference
 
 «REM»need to remove the first text in the tag (referring to the model elements to tag)«ENDREM»
 «DEFINE javadocSemanticsElementToLatex FOR modeldoc::JavadocTextElement»
-	«FOREACH value.trim().split(" ").withoutFirst() AS s»«s» «ENDFOREACH»
+	«FOREACH value.trim().split(" ").withoutFirst() AS s»«escapeLatex(s)» «ENDFOREACH»
 «ENDDEFINE»
 «DEFINE javadocSemanticsElementToLatex FOR modeldoc::JavadocFragment»
 	\textbf{TODO} Unknown semantic starting tag '«this»'.

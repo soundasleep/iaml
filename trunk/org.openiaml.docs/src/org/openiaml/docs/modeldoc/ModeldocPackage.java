@@ -288,13 +288,22 @@ public interface ModeldocPackage extends EPackage {
 	int EMF_CLASS__ADDITIONAL_DOCUMENTATION = 19;
 
 	/**
+	 * The feature id for the '<em><b>Rationale</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_CLASS__RATIONALE = 20;
+
+	/**
 	 * The number of structural features of the '<em>EMF Class</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_CLASS_FEATURE_COUNT = 20;
+	int EMF_CLASS_FEATURE_COUNT = 21;
 
 
 	/**
@@ -2027,6 +2036,17 @@ public interface ModeldocPackage extends EPackage {
 	EReference getEMFClass_AdditionalDocumentation();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.openiaml.docs.modeldoc.EMFClass#getRationale <em>Rationale</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Rationale</em>'.
+	 * @see org.openiaml.docs.modeldoc.EMFClass#getRationale()
+	 * @see #getEMFClass()
+	 * @generated
+	 */
+	EReference getEMFClass_Rationale();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link org.openiaml.docs.modeldoc.EMFClass#getImplementationNotes <em>Implementation Notes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3406,6 +3426,14 @@ public interface ModeldocPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EMF_CLASS__ADDITIONAL_DOCUMENTATION = eINSTANCE.getEMFClass_AdditionalDocumentation();
+
+		/**
+		 * The meta object literal for the '<em><b>Rationale</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EMF_CLASS__RATIONALE = eINSTANCE.getEMFClass_Rationale();
 
 		/**
 		 * The meta object literal for the '<em><b>Implementation Notes</b></em>' containment reference list feature.

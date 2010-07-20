@@ -47,6 +47,8 @@
         eType="#//EMFReference" containment="true" eOpposite="#//EMFReference/containingType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="additionalDocumentation"
         upperBound="-1" eType="#//AdditionalDocumentation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rationale" eType="#//JavadocTagElement"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AdditionalDocumentation">
     <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="#//Reference"/>

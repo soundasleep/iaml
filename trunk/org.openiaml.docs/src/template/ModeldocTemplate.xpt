@@ -10,6 +10,8 @@
 	«EXPAND LatexImagesList::latexImagesList»
 	
 	«EXPAND ClassTemplate::class(this) FOREACH classes»
+
+	«EXPAND template::latex::LatexTemplate::latexClass(this) FOREACH classes»
 	
 	«EXPAND DefaultCss::getCss»
 	«EXPAND DefaultJs::getJs»

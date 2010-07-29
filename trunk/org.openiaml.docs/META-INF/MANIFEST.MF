@@ -21,5 +21,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.openarchitectureware.workflow;bundle-version="4.3.1",
  org.openarchitectureware.core.workflow;bundle-version="4.3.1",
  org.openarchitectureware.core.xpand2;bundle-version="4.3.1",
- org.openiaml.iacleaner;bundle-version="0.2.0"
+ org.openiaml.iacleaner;bundle-version="0.2.0",
+ org.openiaml.emf.properties;bundle-version="0.5.2"
 Bundle-ActivationPolicy: lazy

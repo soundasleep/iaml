@@ -152,13 +152,21 @@ public class DocumentationGenerator {
 			);
 			loader.load(factory, root);
 		}
-		
+
 		// get all icons
 		{
 			ILoader loader = new LoadGMFEditors(
 					new File("../org.openiaml.model.tests.elements/") /* editor base */,
 					"org.openiaml.model.tests.elements" /* plugin */,
 					"" /* package base */
+			);
+			loader.load(factory, root);
+		}
+	
+		// get all metrics
+		{
+			ILoader loader = new LoadMetrics(
+					ModelPackage.eINSTANCE /* root package */
 			);
 			loader.load(factory, root);
 		}

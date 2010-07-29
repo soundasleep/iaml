@@ -20,6 +20,7 @@ public class AllEMFPropertiesTests {
 		TestSuite suite = new TestSuite("EMF properties");
 		//$JUnit-BEGIN$
 		suite.addTestSuite(TestReferencesCycles.class);
+		suite.addTestSuite(TestEMFMetamodelProperties.class);
 		//$JUnit-END$
 		return suite;
 	}

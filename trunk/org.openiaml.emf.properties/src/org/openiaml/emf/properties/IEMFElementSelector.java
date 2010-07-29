@@ -24,7 +24,7 @@ public interface IEMFElementSelector {
 	 * 
 	 * @author jmwright
 	 */
-	public class DefaultElementSelector implements IEMFElementSelector {
+	public static class DefaultElementSelector implements IEMFElementSelector {
 
 		public boolean ignoreAttribute(EAttribute ref) {
 			return false;

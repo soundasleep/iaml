@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.users="http://openiaml.org/model/users" id="model.128a8c95c0e.1">
-  <schemas xsi:type="iaml.users:Role" id="users.128a8c95cf9.1" name="Role" outProvidesEdges="wires.128a8c95cda.1">
-    <providesEdges id="wires.128a8c95cda.1" from="users.128a8c95cf9.1" to="users.128a8c95cf9.8"/>
-    <permissions id="users.128a8c95cf9.8" name="Permission" inProvidesEdges="wires.128a8c95cda.1"/>
-  </schemas>
-</iaml:InternetApplication>

@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<iaml.domain:DomainSchema xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:iaml.domain="http://openiaml.org/model/domain" id="domain.128a8ccc934.c">
-  <attributes id="model.128a8ccc888.30" name="Attribute Name" defaultValue="42">
-    <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
-  </attributes>
-</iaml.domain:DomainSchema>

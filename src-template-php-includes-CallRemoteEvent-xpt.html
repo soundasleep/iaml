@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>Coverage: CallRemoteEvent.xpt</title>
+	<link rel="stylesheet" type="text/css" href="default.css" />
+</head>
+<body>
+
+<h1>CallRemoteEvent.xpt</h1>
+
+<a href="index.html">Summary</a>
+
+<ul id="legend">
+	<li class="none">Never executed</li>
+	<li class="oaw">Generated output</li>
+	<li class="php">Executed on server (PHP)</li>
+	<li class="js">Executed on client (Javascript)</li>
+</ul>
+
+<p><pre>«IMPORT iaml»
+
+«EXTENSION template::GeneratorExtensions»
+
+<span class="oaw php " title="19 steps in OAW 30 steps in PHP (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\php\includes\CallRemoteEvent.xpt: 5:DEFINE callRemoteEvent FOR model::InternetApplication-)"><a name="callRemoteEvent.html">«DEFINE callRemoteEvent FOR model::InternetApplication-»</a>
+&lt;?php
+/**
+ * Call a remote event.
+ */
+ 
+require("header.php");
+
+log_message("call_remote_event.php? " . print_r($_GET, true));
+$container = require_get("container");
+$operation_name = require_get("operation_name");
+$arg0 = require_get("arg0");
+$arg1 = require_get("arg1");
+$running = require_get("running", "");	// optional stacktrace
+
+/* check to make sure it's in an existing page */
+$existing_pages = array(
+	<a href="#allPageNames.html">«EXPAND allPageNames FOREACH getAllPages() SEPARATOR ", "»</a>
+);
+if (!isset($existing_pages[$container])) {
+	throw new IamlRuntimeException("Container '$container' was not found in existing pages.");
+}
+
+/* let's call it through a HTTP request */
+$url = get_request_base() . "/" . $existing_pages[$container]
+	. "?operation=" . urlencode($operation_name) . "&amp;arg0=" . urlencode($arg0) . "&amp;arg1=" . urlencode($arg1) . "&amp;running=" . urlencode($running);
+
+// copy over session parameters
+$url .= "&amp;" . get_sid();		// directly from PHP, so we don't need to set session_id() ourselves
+
+log_message("Remote call to: $url");
+
+// stop current session: the default PHP session handler blocks to prevent concurrent access
+$old_id = session_id();
+session_write_close();
+
+$result = file_get_contents($url);
+
+// restart the session once complete
+session_id($old_id);
+session_start();
+
+if (strpos(strtolower($result), "Fatal error") !== false) {
+	// TODO add test case to make sure we will catch this exception
+	throw new IamlRuntimeException("Remote call to '$url' failed: Fatal error.", $result);
+} 
+if (strpos(strtolower($result), "Warning") !== false) {
+	// TODO add test case to make sure we will catch this exception
+	throw new IamlRuntimeException("Remote call to '$url' failed: Warning.", $result);
+} 
+echo $result;
+
+log_message("call_remote_event.php complete");
+
+«ENDDEFINE»</span>
+
+<span class="oaw " title="28 steps in OAW (C:\Documents and Settings\jmwright.MASSEY\workspace-iaml\org.openiaml.model.codegen.php\src\template\php\includes\CallRemoteEvent.xpt: 61:DEFINE allPageNames FOR model::visual::Page)"><a name="allPageNames.html">«DEFINE allPageNames FOR model::visual::Page»</a>
+	"«safeName()-»" =&gt; "«safeNameString(id)-».php"
+«ENDDEFINE»</span>
+</pre></p>
+
+</body>
+</html>

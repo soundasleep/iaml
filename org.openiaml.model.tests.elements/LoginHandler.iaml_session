@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<iaml.scopes:Session xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml.components="http://openiaml.org/model/components" xmlns:iaml.scopes="http://openiaml.org/model/scopes" id="scopes.128a8ccc925.46">
-  <values id="model.128a8ccc888.1e3" name="secret key" outParameterEdges="wires.128a8ccc925.a0" value="42">
-    <parameterEdges id="wires.128a8ccc925.a0" from="model.128a8ccc888.1e3" to="components.128a8ccc934.32"/>
-  </values>
-  <elements xsi:type="iaml.components:LoginHandler" inParameterEdges="wires.128a8ccc925.a0" id="components.128a8ccc934.32" name="Login Handler"/>
-</iaml.scopes:Session>

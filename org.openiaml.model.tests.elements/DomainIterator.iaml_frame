@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<iaml.visual:Frame xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" id="visual.128a8ccc915.222">
-  <elements xsi:type="iaml.domain:DomainIterator" id="domain.128a8ccc934.26" name="Iterator Name" query="name = ?" limit="7"/>
-</iaml.visual:Frame>

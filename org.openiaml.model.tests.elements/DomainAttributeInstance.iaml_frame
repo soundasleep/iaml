@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<iaml.visual:Frame xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" id="visual.1273c6bf5a4.15">
-  <elements xsi:type="iaml:DomainAttributeInstance" id="model.1273c6bf4aa.97" name="Attribute instance name"/>
-</iaml.visual:Frame>

@@ -89,13 +89,22 @@ public interface ModeldocPackage extends EPackage {
 	int MODEL_DOCUMENTATION__REFERENCES = 1;
 
 	/**
+	 * The feature id for the '<em><b>Metrics</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_DOCUMENTATION__METRICS = 2;
+
+	/**
 	 * The number of structural features of the '<em>Model Documentation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_DOCUMENTATION_FEATURE_COUNT = 2;
+	int MODEL_DOCUMENTATION_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl <em>EMF Class</em>}' class.
@@ -1774,6 +1783,43 @@ public interface ModeldocPackage extends EPackage {
 	int TEMPLATE_FEATURE_COUNT = REFERENCE_FEATURE_COUNT + 5;
 
 	/**
+	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.MetricImpl <em>Metric</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.openiaml.docs.modeldoc.impl.MetricImpl
+	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getMetric()
+	 * @generated
+	 */
+	int METRIC = 29;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METRIC__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METRIC__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Metric</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METRIC_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.ConstraintType <em>Constraint Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1781,7 +1827,7 @@ public interface ModeldocPackage extends EPackage {
 	 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getConstraintType()
 	 * @generated
 	 */
-	int CONSTRAINT_TYPE = 29;
+	int CONSTRAINT_TYPE = 30;
 
 
 	/**
@@ -1815,6 +1861,17 @@ public interface ModeldocPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getModelDocumentation_References();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.docs.modeldoc.ModelDocumentation#getMetrics <em>Metrics</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Metrics</em>'.
+	 * @see org.openiaml.docs.modeldoc.ModelDocumentation#getMetrics()
+	 * @see #getModelDocumentation()
+	 * @generated
+	 */
+	EReference getModelDocumentation_Metrics();
 
 	/**
 	 * Returns the meta object for class '{@link org.openiaml.docs.modeldoc.EMFClass <em>EMF Class</em>}'.
@@ -3208,6 +3265,38 @@ public interface ModeldocPackage extends EPackage {
 	EReference getTemplate_TemplateFile();
 
 	/**
+	 * Returns the meta object for class '{@link org.openiaml.docs.modeldoc.Metric <em>Metric</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Metric</em>'.
+	 * @see org.openiaml.docs.modeldoc.Metric
+	 * @generated
+	 */
+	EClass getMetric();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.openiaml.docs.modeldoc.Metric#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.openiaml.docs.modeldoc.Metric#getName()
+	 * @see #getMetric()
+	 * @generated
+	 */
+	EAttribute getMetric_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.openiaml.docs.modeldoc.Metric#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see org.openiaml.docs.modeldoc.Metric#getValue()
+	 * @see #getMetric()
+	 * @generated
+	 */
+	EAttribute getMetric_Value();
+
+	/**
 	 * Returns the meta object for enum '{@link org.openiaml.docs.modeldoc.ConstraintType <em>Constraint Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3264,6 +3353,14 @@ public interface ModeldocPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MODEL_DOCUMENTATION__REFERENCES = eINSTANCE.getModelDocumentation_References();
+
+		/**
+		 * The meta object literal for the '<em><b>Metrics</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MODEL_DOCUMENTATION__METRICS = eINSTANCE.getModelDocumentation_Metrics();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl <em>EMF Class</em>}' class.
@@ -4352,6 +4449,32 @@ public interface ModeldocPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TEMPLATE__TEMPLATE_FILE = eINSTANCE.getTemplate_TemplateFile();
+
+		/**
+		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.impl.MetricImpl <em>Metric</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.openiaml.docs.modeldoc.impl.MetricImpl
+		 * @see org.openiaml.docs.modeldoc.impl.ModeldocPackageImpl#getMetric()
+		 * @generated
+		 */
+		EClass METRIC = eINSTANCE.getMetric();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute METRIC__NAME = eINSTANCE.getMetric_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute METRIC__VALUE = eINSTANCE.getMetric_Value();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.ConstraintType <em>Constraint Type</em>}' enum.

@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.openiaml.docs.modeldoc.ModelDocumentation#getClasses <em>Classes</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.ModelDocumentation#getReferences <em>References</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.ModelDocumentation#getMetrics <em>Metrics</em>}</li>
  * </ul>
  * </p>
  *
@@ -62,5 +63,21 @@ public interface ModelDocumentation extends EObject {
 	 * @generated
 	 */
 	EList<Reference> getReferences();
+
+	/**
+	 * Returns the value of the '<em><b>Metrics</b></em>' containment reference list.
+	 * The list contents are of type {@link org.openiaml.docs.modeldoc.Metric}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Metrics</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Metrics</em>' containment reference list.
+	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getModelDocumentation_Metrics()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Metric> getMetrics();
 
 } // ModelDocumentation

@@ -251,6 +251,15 @@ public interface ModeldocFactory extends EFactory {
 	Template createTemplate();
 
 	/**
+	 * Returns a new object of class '<em>Metric</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Metric</em>'.
+	 * @generated
+	 */
+	Metric createMetric();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

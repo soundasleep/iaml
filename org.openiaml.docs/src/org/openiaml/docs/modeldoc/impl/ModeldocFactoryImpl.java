@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.openiaml.docs.modeldoc.*;
 import org.openiaml.docs.modeldoc.AdditionalDocumentation;
 import org.openiaml.docs.modeldoc.Constraint;
 import org.openiaml.docs.modeldoc.ConstraintType;
@@ -110,6 +111,7 @@ public class ModeldocFactoryImpl extends EFactoryImpl implements ModeldocFactory
 			case ModeldocPackage.EMF_REFERENCE: return createEMFReference();
 			case ModeldocPackage.TEMPLATE_FILE: return createTemplateFile();
 			case ModeldocPackage.TEMPLATE: return createTemplate();
+			case ModeldocPackage.METRIC: return createMetric();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -393,6 +395,16 @@ public class ModeldocFactoryImpl extends EFactoryImpl implements ModeldocFactory
 	public Template createTemplate() {
 		TemplateImpl template = new TemplateImpl();
 		return template;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Metric createMetric() {
+		MetricImpl metric = new MetricImpl();
+		return metric;
 	}
 
 	/**

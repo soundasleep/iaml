@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.openiaml.docs.modeldoc.*;
 import org.openiaml.docs.modeldoc.AdditionalDocumentation;
 import org.openiaml.docs.modeldoc.Constraint;
 import org.openiaml.docs.modeldoc.DroolsPackage;
@@ -316,6 +317,12 @@ public class ModeldocSwitch<T> {
 				T result = caseTemplate(template);
 				if (result == null) result = caseJavaElement(template);
 				if (result == null) result = caseReference(template);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModeldocPackage.METRIC: {
+				Metric metric = (Metric)theEObject;
+				T result = caseMetric(metric);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -755,6 +762,21 @@ public class ModeldocSwitch<T> {
 	 * @generated
 	 */
 	public T caseTemplate(Template object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Metric</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Metric</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMetric(Metric object) {
 		return null;
 	}
 

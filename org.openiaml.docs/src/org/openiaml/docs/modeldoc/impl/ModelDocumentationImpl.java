@@ -13,9 +13,11 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.docs.modeldoc.EMFClass;
+import org.openiaml.docs.modeldoc.Metric;
 import org.openiaml.docs.modeldoc.ModelDocumentation;
 import org.openiaml.docs.modeldoc.ModeldocPackage;
 import org.openiaml.docs.modeldoc.Reference;
@@ -29,6 +31,7 @@ import org.openiaml.docs.modeldoc.Reference;
  * <ul>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.ModelDocumentationImpl#getClasses <em>Classes</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.ModelDocumentationImpl#getReferences <em>References</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.impl.ModelDocumentationImpl#getMetrics <em>Metrics</em>}</li>
  * </ul>
  * </p>
  *
@@ -54,6 +57,16 @@ public class ModelDocumentationImpl extends EObjectImpl implements ModelDocument
 	 * @ordered
 	 */
 	protected EList<Reference> references;
+
+	/**
+	 * The cached value of the '{@link #getMetrics() <em>Metrics</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMetrics()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Metric> metrics;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -103,6 +116,18 @@ public class ModelDocumentationImpl extends EObjectImpl implements ModelDocument
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Metric> getMetrics() {
+		if (metrics == null) {
+			metrics = new EObjectContainmentEList<Metric>(Metric.class, this, ModeldocPackage.MODEL_DOCUMENTATION__METRICS);
+		}
+		return metrics;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -127,6 +152,8 @@ public class ModelDocumentationImpl extends EObjectImpl implements ModelDocument
 				return ((InternalEList<?>)getClasses()).basicRemove(otherEnd, msgs);
 			case ModeldocPackage.MODEL_DOCUMENTATION__REFERENCES:
 				return ((InternalEList<?>)getReferences()).basicRemove(otherEnd, msgs);
+			case ModeldocPackage.MODEL_DOCUMENTATION__METRICS:
+				return ((InternalEList<?>)getMetrics()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -143,6 +170,8 @@ public class ModelDocumentationImpl extends EObjectImpl implements ModelDocument
 				return getClasses();
 			case ModeldocPackage.MODEL_DOCUMENTATION__REFERENCES:
 				return getReferences();
+			case ModeldocPackage.MODEL_DOCUMENTATION__METRICS:
+				return getMetrics();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -164,6 +193,10 @@ public class ModelDocumentationImpl extends EObjectImpl implements ModelDocument
 				getReferences().clear();
 				getReferences().addAll((Collection<? extends Reference>)newValue);
 				return;
+			case ModeldocPackage.MODEL_DOCUMENTATION__METRICS:
+				getMetrics().clear();
+				getMetrics().addAll((Collection<? extends Metric>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -182,6 +215,9 @@ public class ModelDocumentationImpl extends EObjectImpl implements ModelDocument
 			case ModeldocPackage.MODEL_DOCUMENTATION__REFERENCES:
 				getReferences().clear();
 				return;
+			case ModeldocPackage.MODEL_DOCUMENTATION__METRICS:
+				getMetrics().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -198,6 +234,8 @@ public class ModelDocumentationImpl extends EObjectImpl implements ModelDocument
 				return classes != null && !classes.isEmpty();
 			case ModeldocPackage.MODEL_DOCUMENTATION__REFERENCES:
 				return references != null && !references.isEmpty();
+			case ModeldocPackage.MODEL_DOCUMENTATION__METRICS:
+				return metrics != null && !metrics.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

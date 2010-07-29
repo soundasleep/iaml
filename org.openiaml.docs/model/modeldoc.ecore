@@ -8,6 +8,8 @@
         eType="#//EMFClass" containment="true" eOpposite="#//EMFClass/parent"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
         eType="#//Reference" containment="true" eOpposite="#//Reference/parent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metrics" upperBound="-1"
+        eType="#//Metric" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EMFClass">
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetClass" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
@@ -213,5 +215,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="line" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="templateFile" eType="#//TemplateFile"
         eOpposite="#//TemplateFile/templates"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Metric">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

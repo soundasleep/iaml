@@ -34,6 +34,7 @@ import org.openiaml.docs.modeldoc.JavadocFragment;
 import org.openiaml.docs.modeldoc.JavadocMethodReference;
 import org.openiaml.docs.modeldoc.JavadocTagElement;
 import org.openiaml.docs.modeldoc.JavadocTextElement;
+import org.openiaml.docs.modeldoc.Metric;
 import org.openiaml.docs.modeldoc.ModelDocumentation;
 import org.openiaml.docs.modeldoc.ModelExtension;
 import org.openiaml.docs.modeldoc.ModelReference;
@@ -232,6 +233,12 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass metricEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum constraintTypeEEnum = null;
 
 	/**
@@ -320,6 +327,15 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 */
 	public EReference getModelDocumentation_References() {
 		return (EReference)modelDocumentationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getModelDocumentation_Metrics() {
+		return (EReference)modelDocumentationEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1488,6 +1504,33 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getMetric() {
+		return metricEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMetric_Name() {
+		return (EAttribute)metricEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getMetric_Value() {
+		return (EAttribute)metricEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getConstraintType() {
 		return constraintTypeEEnum;
 	}
@@ -1523,6 +1566,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		modelDocumentationEClass = createEClass(MODEL_DOCUMENTATION);
 		createEReference(modelDocumentationEClass, MODEL_DOCUMENTATION__CLASSES);
 		createEReference(modelDocumentationEClass, MODEL_DOCUMENTATION__REFERENCES);
+		createEReference(modelDocumentationEClass, MODEL_DOCUMENTATION__METRICS);
 
 		emfClassEClass = createEClass(EMF_CLASS);
 		createEReference(emfClassEClass, EMF_CLASS__TARGET_CLASS);
@@ -1681,6 +1725,10 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		createEAttribute(templateEClass, TEMPLATE__LINE);
 		createEReference(templateEClass, TEMPLATE__TEMPLATE_FILE);
 
+		metricEClass = createEClass(METRIC);
+		createEAttribute(metricEClass, METRIC__NAME);
+		createEAttribute(metricEClass, METRIC__VALUE);
+
 		// Create enums
 		constraintTypeEEnum = createEEnum(CONSTRAINT_TYPE);
 	}
@@ -1744,6 +1792,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		initEClass(modelDocumentationEClass, ModelDocumentation.class, "ModelDocumentation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getModelDocumentation_Classes(), this.getEMFClass(), this.getEMFClass_Parent(), "classes", null, 0, -1, ModelDocumentation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModelDocumentation_References(), this.getReference(), this.getReference_Parent(), "references", null, 0, -1, ModelDocumentation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelDocumentation_Metrics(), this.getMetric(), null, "metrics", null, 0, -1, ModelDocumentation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(emfClassEClass, EMFClass.class, "EMFClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEMFClass_TargetClass(), ecorePackage.getEClass(), null, "targetClass", null, 0, 1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1901,6 +1950,10 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		initEAttribute(getTemplate_Type(), ecorePackage.getEString(), "type", null, 0, 1, Template.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTemplate_Line(), ecorePackage.getEInt(), "line", null, 0, 1, Template.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTemplate_TemplateFile(), this.getTemplateFile(), this.getTemplateFile_Templates(), "templateFile", null, 0, 1, Template.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(metricEClass, Metric.class, "Metric", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMetric_Name(), ecorePackage.getEString(), "name", null, 0, 1, Metric.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMetric_Value(), ecorePackage.getEString(), "value", null, 0, 1, Metric.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(constraintTypeEEnum, ConstraintType.class, "ConstraintType");

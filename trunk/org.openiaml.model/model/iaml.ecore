@@ -661,7 +661,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="ActionEdgeDestination" abstract="true"
       interface="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="A possible destination for an {@model Action}."/>
+      <details key="documentation" value="A possible destination for an {@model ActionEdge}."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inActions" upperBound="-1"
         eType="#//ActionEdge" eOpposite="#//ActionEdge/to">
@@ -676,7 +676,7 @@
       <details key="comment" value="temporarily contains wires until GMF bug is fixed "/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="A possible source for an {@model Action}."/>
+      <details key="documentation" value="A possible source for an {@model ActionEdge}."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="outActions" upperBound="-1"
         eType="#//ActionEdge" eOpposite="#//ActionEdge/from">

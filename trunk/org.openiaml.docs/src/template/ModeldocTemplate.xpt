@@ -13,6 +13,8 @@
 
 	«EXPAND template::latex::LatexTemplate::latexClass(this) FOREACH classes»
 	«EXPAND template::latex::LatexClassList::latexClassList»
+
+	«EXPAND EventTriggersTemplate::eventsList»
 	
 	«EXPAND DefaultCss::getCss»
 	«EXPAND DefaultJs::getJs»

@@ -1,0 +1,66 @@
+«IMPORT modeldoc»
+
+«EXTENSION metamodel::ModeldocExtensions»
+
+«DEFINE eventsList FOR modeldoc::ModelDocumentation»
+	«FILE "output/events.html"»
+«EXPAND ModeldocTemplate::header("Events List", "event")»
+
+<div class="navigation">
+<a href="index.html">Model Elements</a>
+</div>
+
+<div class="intro">
+<h1>Model Events Index</h1>
+
+<p>
+	This is an automatically-generated list of events for 
+	<a href="http://openiaml.org">the Internet Application Modelling Language</a> (IAML).
+</p>
+</div>
+
+<ul>
+«FOREACH classes.references.select(r|r.type.name == "EventTrigger").name.toSet().sortBy(e|e) AS eventName»
+	<li><a href="event-«eventName-».html">«eventName»</a></li>
+	«EXPAND eventReference(eventName)»
+«ENDFOREACH»
+</ul>
+
+«EXPAND ModeldocTemplate::footer»
+	«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE eventReference(String eventName) FOR modeldoc::ModelDocumentation»
+	«FILE "output/event-" + eventName + ".html"»
+«EXPAND ModeldocTemplate::header("Event " + eventName, "event")»
+
+<div class="navigation">
+<a href="events.html">Events List</a>
+</div>
+
+<div class="intro">
+<h1>Model Event «eventName»</h1>
+</div>
+
+<ul>
+«FOREACH classes.select(e|!e.references.select(r|r.type.name == "EventTrigger").select(r|r.name == eventName).isEmpty).sortBy(c|c.name) AS cls»
+	<li class="class «IF cls.abstract»abstract«ENDIF» «IF cls.abstract»interface«ENDIF»">
+	<a href="«fileName(cls)»" class="icon_image">«EXPAND ModeldocTemplate::getIcon FOR cls»</a>
+	<a href="«fileName(cls)»">«cls.name»</a>
+	
+	<ul>
+		«EXPAND ClassTemplate::reference(false) FOREACH cls.references.select(r|r.type.name == "EventTrigger").select(r|r.name == eventName).sortBy(r|r.name)»
+	</ul>
+«ENDFOREACH»
+</ul>
+
+«EXPAND ModeldocTemplate::footer»
+	«ENDFILE»
+«ENDDEFINE»
+
+/** 
+ * a hack way to create backtrace-able errors
+ * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540  
+ */
+«DEFINE exception FOR Object»
+«ENDDEFINE»

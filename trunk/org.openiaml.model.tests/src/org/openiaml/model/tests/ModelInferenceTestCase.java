@@ -29,8 +29,8 @@ import org.openiaml.model.ModelLoader.ModelLoadException;
 import org.openiaml.model.codegen.php.CheckModelInstance;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.drools.ICreateElementsFactory;
+import org.openiaml.model.model.Action;
 import org.openiaml.model.model.ActionEdge;
-import org.openiaml.model.model.ActionEdgeDestination;
 import org.openiaml.model.model.ActionEdgeSource;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.InternetApplication;
@@ -594,7 +594,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @throws JaxenException
 	 * @see #getWiresFromTo(EObject, WireSource, WireDestination, Class)
 	 */
-	protected Set<ActionEdge> getActionsFromTo(EObject container, ActionEdgeSource fromElement, ActionEdgeDestination toElement) throws JaxenException {
+	protected Set<ActionEdge> getActionsFromTo(EObject container, ActionEdgeSource fromElement, Action toElement) throws JaxenException {
 		return getActionsFromTo(container, fromElement, toElement, ActionEdge.class);
 	}
 	
@@ -629,7 +629,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @return the wire found or throws an exception
 	 * @throws JaxenException
 	 */
-	protected Set<ActionEdge> getActionsFromTo(EObject container, ActionEdgeSource fromElement, ActionEdgeDestination toElement, Class<? extends ActionEdge> type) throws JaxenException {
+	protected Set<ActionEdge> getActionsFromTo(EObject container, ActionEdgeSource fromElement, Action toElement, Class<? extends ActionEdge> type) throws JaxenException {
 		Set<ActionEdge> results = new HashSet<ActionEdge>();
 		for (ActionEdge w : fromElement.getOutActions()) {
 			if (type.isInstance(w) && w.getTo().equals(toElement)) {

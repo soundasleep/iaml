@@ -8,8 +8,8 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xsd.XSDSimpleTypeDefinition;
 import org.openiaml.model.FileReference;
 import org.openiaml.model.model.Accessible;
+import org.openiaml.model.model.Action;
 import org.openiaml.model.model.ActionEdge;
-import org.openiaml.model.model.ActionEdgeDestination;
 import org.openiaml.model.model.ActionEdgeSource;
 import org.openiaml.model.model.Changeable;
 import org.openiaml.model.model.CompositeCondition;
@@ -453,7 +453,7 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return edge;
 	}
 	
-	public ActionEdge generatedActionEdge(GeneratesElements by, ContainsWires container, ActionEdgeSource source, ActionEdgeDestination target) throws InferenceException {
+	public ActionEdge generatedActionEdge(GeneratesElements by, ContainsWires container, ActionEdgeSource source, Action target) throws InferenceException {
 		ActionEdge wire = (ActionEdge) createRelationship(container, ModelPackage.eINSTANCE.getActionEdge(), source, target, ModelPackage.eINSTANCE.getContainsWires_Actions(), ModelPackage.eINSTANCE.getActionEdge_From(), ModelPackage.eINSTANCE.getActionEdge_To());
 		setGeneratedBy(wire, by);
 		return wire;

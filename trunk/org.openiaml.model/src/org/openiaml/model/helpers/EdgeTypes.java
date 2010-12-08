@@ -118,11 +118,11 @@ public class EdgeTypes {
 		edgeTypes.add( new EdgeType(
 				ModelPackage.eINSTANCE.getActionEdge(), /* type */
 				ModelPackage.eINSTANCE.getActionEdgeSource(), /* source */
-				ModelPackage.eINSTANCE.getActionEdgeDestination(), /* destination */
+				ModelPackage.eINSTANCE.getActionEdge(), /* destination */
 				ModelPackage.eINSTANCE.getActionEdge_From(), /* from ref */
 				ModelPackage.eINSTANCE.getActionEdge_To(), /* to ref */
 				ModelPackage.eINSTANCE.getActionEdgeSource_OutActions(), /* from opposite */
-				ModelPackage.eINSTANCE.getActionEdgeDestination_InActions() /* to opposite */
+				ModelPackage.eINSTANCE.getAction_InActions() /* to opposite */
 		) );
 
 		edgeTypes.add( new EdgeType(

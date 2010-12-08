@@ -9,8 +9,8 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.notation.View;
+import org.openiaml.model.model.Action;
 import org.openiaml.model.model.ActionEdge;
-import org.openiaml.model.model.ActionEdgeDestination;
 import org.openiaml.model.model.ActionEdgeSource;
 import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.DataFlowEdgeDestination;
@@ -78,10 +78,10 @@ public class GetShortcuts {
 				elements.addAll(getAllShortcutsFromActionEdges(doneAlready, edges, view, e,
 						((ActionEdgeSource) e).getOutActions(), registry, updater));
 			}
-			if (e instanceof ActionEdgeDestination) {
+			if (e instanceof Action) {
 				// get all incoming edges
 				elements.addAll(getAllShortcutsFromActionEdges(doneAlready, edges, view, e,
-						((ActionEdgeDestination) e).getInActions(), registry, updater));
+						((Action) e).getInActions(), registry, updater));
 			}
 			if (e instanceof ExecutionEdgesSource) {
 				// get all incoming edges

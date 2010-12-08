@@ -13,8 +13,8 @@ import junit.framework.AssertionFailedError;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xsd.XSDSimpleTypeDefinition;
 import org.jaxen.JaxenException;
+import org.openiaml.model.model.Action;
 import org.openiaml.model.model.ActionEdge;
-import org.openiaml.model.model.ActionEdgeDestination;
 import org.openiaml.model.model.ActionEdgeSource;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
@@ -1286,19 +1286,19 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * Assert there exists only one unidirectional RunAction between
 	 * the given elements, with the given name.
 	 * 
-	 * @deprecated use {@link #assertHasActionEdge(EObject, ActionEdgeSource, ActionEdgeDestination, String)} instead
+	 * @deprecated use {@link #assertHasActionEdge(EObject, ActionEdgeSource, Action, String)} instead
 	 * @return The element found
 	 */
-	public ActionEdge assertHasRunAction(EObject container, ActionEdgeSource from, ActionEdgeDestination to, String name) throws JaxenException {
+	public ActionEdge assertHasRunAction(EObject container, ActionEdgeSource from, Action to, String name) throws JaxenException {
 		return assertHasActionEdge(container, from, to, name);
 	}
 	
-	public ActionEdge assertHasActionEdge(EObject container, ActionEdgeSource from, ActionEdgeDestination to, String name) throws JaxenException {
+	public ActionEdge assertHasActionEdge(EObject container, ActionEdgeSource from, Action to, String name) throws JaxenException {
 		return (ActionEdge) assertHasActionFromTo(container, from, to, 
 				ActionEdge.class, getNameFilter(name));
 	}
 	
-	public ActionEdge assertHasActionEdge(EObject container, ActionEdgeSource from, ActionEdgeDestination to) throws JaxenException {
+	public ActionEdge assertHasActionEdge(EObject container, ActionEdgeSource from, Action to) throws JaxenException {
 		return (ActionEdge) assertHasActionFromTo(container, from, to, 
 				ActionEdge.class, new Filter<ActionEdge>() {
 					@Override
@@ -1330,10 +1330,10 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * Assert there exists only one unidirectional RunAction between
 	 * the given elements.
 	 *
-	 * @deprecated use {@link #assertHasActionEdge(EObject, ActionEdgeSource, ActionEdgeDestination, String)} instead
+	 * @deprecated use {@link #assertHasActionEdge(EObject, ActionEdgeSource, Action, String)} instead
 	 * @return The element found
 	 */
-	public ActionEdge assertHasRunAction(EObject container, ActionEdgeSource from, ActionEdgeDestination to) throws JaxenException {
+	public ActionEdge assertHasRunAction(EObject container, ActionEdgeSource from, Action to) throws JaxenException {
 		return (ActionEdge) assertHasActionFromTo(container, from, to, 
 				ActionEdge.class, ALL_ACTIONS);
 	}
@@ -1342,10 +1342,10 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * Assert there exists only one unidirectional RunAction between
 	 * the given elements.
 	 *
-	 * @deprecated use {@link #assertHasActionEdge(EObject, ActionEdgeSource, ActionEdgeDestination, String)} instead
+	 * @deprecated use {@link #assertHasActionEdge(EObject, ActionEdgeSource, Action, String)} instead
 	 * @return The element found
 	 */
-	public ActionEdge assertHasRunAction(EObject container, ActionEdgeSource from, ActionEdgeDestination to, Filter<ActionEdge> filter) throws JaxenException {
+	public ActionEdge assertHasRunAction(EObject container, ActionEdgeSource from, Action to, Filter<ActionEdge> filter) throws JaxenException {
 		return (ActionEdge) assertHasActionFromTo(container, from, to, 
 				ActionEdge.class, filter);
 	}
@@ -1382,13 +1382,13 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * Assert <em>no</em> unidirectional RunAction exists between
 	 * the given elements.
 	 * 
-	 * @deprecated use {@link #assertHasNoActionEdge(EObject, ActionEdgeSource, ActionEdgeDestination, String)} instead
+	 * @deprecated use {@link #assertHasNoActionEdge(EObject, ActionEdgeSource, Action, String)} instead
 	 */
-	public void assertHasNoRunAction(EObject container, ActionEdgeSource from, ActionEdgeDestination to) throws JaxenException {
+	public void assertHasNoRunAction(EObject container, ActionEdgeSource from, Action to) throws JaxenException {
 		assertHasNoActionEdge(container, from, to);
 	}
 	
-	public void assertHasNoActionEdge(EObject container, ActionEdgeSource from, ActionEdgeDestination to) throws JaxenException {
+	public void assertHasNoActionEdge(EObject container, ActionEdgeSource from, Action to) throws JaxenException {
 		Set<ActionEdge> actions = getActionsFromTo(container, from, to, ActionEdge.class);
 		assertEquals("Unexpected actions found: " + actions, 0, actions.size());
 	}
@@ -1433,10 +1433,10 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * Assert there exists only one unidirectional NavigateAction between
 	 * the given elements.
 	 *
-	 * @deprecated use {@link #assertHasActionEdge(EObject, ActionEdgeSource, ActionEdgeDestination, String)} instead
+	 * @deprecated use {@link #assertHasActionEdge(EObject, ActionEdgeSource, Action, String)} instead
 	 * @return The element found
 	 */
-	public ActionEdge assertHasNavigateAction(EObject container, ActionEdgeSource from, ActionEdgeDestination to, String name) throws JaxenException {
+	public ActionEdge assertHasNavigateAction(EObject container, ActionEdgeSource from, Action to, String name) throws JaxenException {
 		return (ActionEdge) assertHasActionFromTo(container, from, to, 
 				ActionEdge.class, getNameFilter(name) );
 	}
@@ -1445,10 +1445,10 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * Assert there exists only one unidirectional NavigateAction between
 	 * the given elements.
 	 *
-	 * @deprecated use {@link #assertHasActionEdge(EObject, ActionEdgeSource, ActionEdgeDestination, String)} instead
+	 * @deprecated use {@link #assertHasActionEdge(EObject, ActionEdgeSource, Action, String)} instead
 	 * @return The element found
 	 */
-	public ActionEdge assertHasNavigateAction(EObject container, ActionEdgeSource from, ActionEdgeDestination to) throws JaxenException {
+	public ActionEdge assertHasNavigateAction(EObject container, ActionEdgeSource from, Action to) throws JaxenException {
 		return (ActionEdge) assertHasActionFromTo(container, from, to, 
 				ActionEdge.class, ALL_ACTIONS);
 	}
@@ -1611,7 +1611,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return the wire edge found
 	 * @throws JaxenException 
 	 */
-	public ActionEdge assertHasActionFromTo(EObject container, ActionEdgeSource from, ActionEdgeDestination to, Class<? extends ActionEdge> type, Filter<ActionEdge> filter) throws JaxenException {
+	public ActionEdge assertHasActionFromTo(EObject container, ActionEdgeSource from, Action to, Class<? extends ActionEdge> type, Filter<ActionEdge> filter) throws JaxenException {
 		Set<ActionEdge> wires = getActionsFromTo(container, from, to);
 		ActionEdge result = null;
 		for (ActionEdge w : wires) {

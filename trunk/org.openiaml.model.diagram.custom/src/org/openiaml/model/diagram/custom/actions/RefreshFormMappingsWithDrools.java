@@ -8,7 +8,6 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.openiaml.model.diagram.visual.edit.parts.InputFormEditPart;
 import org.openiaml.model.drools.DroolsInferenceEngine;
 import org.openiaml.model.drools.ICreateElementsFactory;
-import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.model.visual.InputForm;
 
 /**

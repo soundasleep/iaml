@@ -21,10 +21,10 @@ import org.eclipse.gmf.runtime.emf.type.core.commands.SetValueCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateRelationshipRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.SetRequest;
+import org.openiaml.model.diagram.part.IamlDiagramEditorPlugin;
 import org.openiaml.model.inference.EcoreCreateElementsHelper;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
-import org.openiaml.model.diagram.part.IamlDiagramEditorPlugin;
 
 /**
  * A GMF-based inference handler. Extracted from old InferMissingElementsCommand.

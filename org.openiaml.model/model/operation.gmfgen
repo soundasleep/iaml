@@ -539,7 +539,7 @@
         <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
     </links>
-    <links createCommandClassName="ActionEdgeCreateCommand" editPartClassName="ActionEdgeEditPart" itemSemanticEditPolicyClassName="ActionEdgeItemSemanticEditPolicy" reorientCommandClassName="ActionEdgeReorientCommand" visualID="4014">
+    <links createCommandClassName="ActionEdgeCreateCommand" editPartClassName="ActionEdgeEditPart" itemSemanticEditPolicyClassName="ActionEdgeItemSemanticEditPolicy" notationViewFactoryClassName="ActionEdgeViewFactory" reorientCommandClassName="ActionEdgeReorientCommand" visualID="4014">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
       <elementType editHelperClassName="ActionEdgeEditHelper" xsi:type="gmfgen:MetamodelType"/>
       <viewmap classBody="&#10;/**&#10; * @generated&#10; */&#10;public class ActionEdgeFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureActionEdgeNameFigure; &#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureActionEdgeStereotypeFigure; &#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public ActionEdgeFigure() {&#10;&#9;&#9;this.setLineWidth(1);&#10;this.setLineStyle(org.eclipse.draw2d.Graphics.LINE_DASH);&#10;&#9;this.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);&#10;&#10;&#9;&#9;createContents();&#10;&#9;&#9;setTargetDecoration(createTargetDecoration());&#10;&#9;}&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private void createContents(){&#10;&#10;&#10;fFigureActionEdgeNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureActionEdgeNameFigure.setText(&quot;&lt;...&gt;&quot;);&#10;&#10;this.add(fFigureActionEdgeNameFigure);&#10;&#10;&#10;&#10;fFigureActionEdgeStereotypeFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureActionEdgeStereotypeFigure.setText(&quot;: ActionEdge&quot;);&#10;&#10;this.add(fFigureActionEdgeStereotypeFigure);&#10;&#10;&#10;&#9;}&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#10;&#9;&#9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#10;df.setLineWidth(1);&#10;&#9;&#9;return df;&#10;&#9;}&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureActionEdgeNameFigure() {&#10;&#9;&#9;return fFigureActionEdgeNameFigure;&#10;&#9;}&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureActionEdgeStereotypeFigure() {&#10;&#9;&#9;return fFigureActionEdgeStereotypeFigure;&#10;&#9;}&#10;&#10;&#10;}&#10;&#10;" className="ActionEdgeFigure" xsi:type="gmfgen:InnerClassViewmap">
@@ -552,7 +552,7 @@
         <sourceMetaFeature href="iaml.genmodel#//model/ActionEdge/from"/>
         <targetMetaFeature href="iaml.genmodel#//model/ActionEdge/to"/>
       </modelFacet>
-      <labels editPartClassName="ActionEdgeNameEditPart" elementIcon="true" itemSemanticEditPolicyClassName="ActionEdgeNameItemSemanticEditPolicy" visualID="6014">
+      <labels editPartClassName="ActionEdgeNameEditPart" elementIcon="true" itemSemanticEditPolicyClassName="ActionEdgeNameItemSemanticEditPolicy" notationViewFactoryClassName="ActionEdgeNameViewFactory" visualID="6014">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureActionEdgeNameFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes xsi:type="gmfgen:LabelOffsetAttributes" y="40"/>
@@ -561,7 +561,7 @@
           <metaFeatures href="iaml.genmodel#//model/NamedElement/name"/>
         </modelFacet>
       </labels>
-      <labels editPartClassName="WrappingLabel21EditPart" itemSemanticEditPolicyClassName="WrappingLabel21ItemSemanticEditPolicy" readOnly="true" visualID="6015">
+      <labels editPartClassName="WrappingLabel21EditPart" itemSemanticEditPolicyClassName="WrappingLabel21ItemSemanticEditPolicy" notationViewFactoryClassName="ActionEdgeLabelViewFactory" readOnly="true" visualID="6015">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureActionEdgeStereotypeFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes xsi:type="gmfgen:LabelOffsetAttributes" y="60"/>

@@ -9,9 +9,11 @@ import java.util.List;
 
 import org.openiaml.docs.generation.semantics.ITagHandler;
 import org.openiaml.docs.modeldoc.AdditionalDocumentation;
+import org.openiaml.docs.modeldoc.AdditionalLatex;
 import org.openiaml.docs.modeldoc.EMFClass;
 import org.openiaml.docs.modeldoc.FileReference;
 import org.openiaml.docs.modeldoc.JavadocTagElement;
+import org.openiaml.docs.modeldoc.JavadocTextElement;
 import org.openiaml.docs.modeldoc.ModelDocumentation;
 import org.openiaml.docs.modeldoc.ModeldocFactory;
 
@@ -69,38 +71,74 @@ public class LoadEMFDescription extends DocumentationHelper implements ILoader {
 		for (EMFClass cls : root.getClasses()) {
 			
 			// does a HTML file exist here?
-			File f = new File(docBase + File.separator + cls.getName() + ".html");
-			if (f.exists()) {
-				// it exists; load it in as additional documentation
-				try {
-					char[] html = readFile(f);
-
-					// parse into a JavadocTagElement
-					JavadocTagElement e = factory.createJavadocTagElement();
+			{
+				File f = new File(docBase + File.separator + cls.getName() + ".html");
+				if (f.exists()) {
+					// it exists; load it in as additional documentation
+					try {
+						char[] html = readFile(f);
+	
+						// parse into a JavadocTagElement
+						JavadocTagElement e = factory.createJavadocTagElement();
+						
+						// parse the line into javadoc elements
+						// (the line needs to be parsed into fragments before we can find semantic references)
+						new BasicJavadocParser(getSemanticTagHandlers()).parseSemanticLineIntoFragments(String.valueOf(html), factory, e);
+						
+						AdditionalDocumentation doc = factory.createAdditionalDocumentation();
+						doc.setDescription( e );
+						
+						// add javadoc element to root
+						root.getReferences().add( e );
+						
+						FileReference ref = factory.createFileReference();
+						ref.setName(cls.getName() + ".html");
+						ref.setPackage(packageBase);
+						ref.setPlugin(plugin);
+						root.getReferences().add(ref);
+						
+						doc.setReference(ref);
+						cls.getAdditionalDocumentation().add(doc);
+						
+					} catch (IOException e) {
+						throw new DocumentationGenerationException(e); 
+					}
 					
-					// parse the line into javadoc elements
-					// (the line needs to be parsed into fragments before we can find semantic references)
-					new BasicJavadocParser(getSemanticTagHandlers()).parseSemanticLineIntoFragments(String.valueOf(html), factory, e);
-					
-					AdditionalDocumentation doc = factory.createAdditionalDocumentation();
-					doc.setDescription( e );
-					
-					// add javadoc element to root
-					root.getReferences().add( e );
-					
-					FileReference ref = factory.createFileReference();
-					ref.setName(cls.getName() + ".html");
-					ref.setPackage(packageBase);
-					ref.setPlugin(plugin);
-					root.getReferences().add(ref);
-					
-					doc.setReference(ref);
-					cls.getAdditionalDocumentation().add(doc);
-					
-				} catch (IOException e) {
-					throw new DocumentationGenerationException(e); 
 				}
-				
+			}
+			
+			// does a TEX file exist here?
+			{
+				File f = new File(docBase + File.separator + cls.getName() + ".tex");
+				if (f.exists()) {
+					// it exists; load it in as additional documentation
+					try {
+						char[] html = readFile(f);
+	
+						// parse into a JavadocTextElement
+						JavadocTextElement e = factory.createJavadocTextElement();
+						e.setValue( new String(html) );
+						
+						AdditionalLatex doc = factory.createAdditionalLatex();
+						doc.setDescription( e );
+						
+						// add javadoc element to root
+						root.getReferences().add( e );
+						
+						FileReference ref = factory.createFileReference();
+						ref.setName(cls.getName() + ".tex");
+						ref.setPackage(packageBase);
+						ref.setPlugin(plugin);
+						root.getReferences().add(ref);
+						
+						doc.setReference(ref);
+						cls.getAdditionalLatex().add(doc);
+						
+					} catch (IOException e) {
+						throw new DocumentationGenerationException(e); 
+					}
+					
+				}
 			}
 		}
 	

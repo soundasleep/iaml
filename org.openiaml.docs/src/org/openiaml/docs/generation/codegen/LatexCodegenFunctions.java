@@ -28,4 +28,14 @@ public class LatexCodegenFunctions {
 		return buf.toString();
 	}
 	
+	/**
+	 * Turn a string like "InputTextField" into "input-text-field".
+	 * 
+	 * @param s InputTextField
+	 * @return input-text-field
+	 */
+	public static String latexise(String s) {
+		return humanise(s).toLowerCase().replace(' ', '-');
+	}
+	
 }

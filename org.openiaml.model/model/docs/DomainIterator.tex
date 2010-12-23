@@ -1,0 +1,3 @@
+When the results of a \modelLink{Select Wire} are evaluated, the resulting result set is not stored in memory. That is, if the underlying view changes (objects are inserted or removed), the users' view will be updated accordingly. For example, \modelProperty{Domain Iterator}{next()} will skip over deleted results, possibly undesirably.
+
+You are therefore advised to use the "hasNext" and "hasPrevious" \modelLink{Primitive Conditions} that are provided in the \modelLink{Domain Iterator}, and connecting a fail \modelLink{Navigate Action} if necessary.

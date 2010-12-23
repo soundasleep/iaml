@@ -1,3 +1,17 @@
 When the results of a \modelLink{Select Wire} are evaluated, the resulting result set is not stored in memory. That is, if the underlying view changes (objects are inserted or removed), the users' view will be updated accordingly. For example, \modelProperty{Domain Iterator}{next()} will skip over deleted results, possibly undesirably.
 
 You are therefore advised to use the "hasNext" and "hasPrevious" \modelLink{Primitive Conditions} that are provided in the \modelLink{Domain Iterator}, and connecting a fail \modelLink{Navigate Action} if necessary.
+
+A variety of query functions are provided:
+
+% from [modeldoc/DomainIterator.xls]
+\begin{tabularx}{\useCaseTableWidthSmaller}{|l|X|}
+
+  \hline
+  \textbf{Function} & \textbf{Returns} \\
+  \hline
+  \hline
+  \code{matches(a,b)}&Performs a case-insensitive text search of \code{a} against the query \code{b}. Every word in \code{b} is matched, usually using a SQL keyword or function \code{LIKE}, against \code{a}.\\
+  \hline
+
+\end{tabularx}

@@ -388,6 +388,7 @@
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//domain/DomainIterator/results"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//domain/DomainIterator/jump"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//domain/DomainIterator/canSave"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//domain/DomainIterator/currentPointer"/>
       </genClasses>
       <genClasses ecoreClass="iaml.ecore#//domain/SchemaEdge">
         <genFeatures notify="false" createChild="false" propertySortChoices="true"

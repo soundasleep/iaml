@@ -10,12 +10,21 @@
 \hypertarget{model reference:«humanise(name)»}{}
 \hypertarget{model reference:«humanise(name)»s}{}
 \section{«humanise(name)»}
+\label{section:model-reference:«latexise(name)»}
 
 % tagline
 «IF tagline != null»
 «EXPAND LatexTemplate::javadocElementToLatex FOR tagline»
 «ELSE»
 \textbf{TODO} Tagline for «EXPAND modelLink».
+«ENDIF»
+
+«IF !additionalLatex.isEmpty»
+% additional latex documentation
+«FOREACH additionalLatex.description AS latex»
+«latex.value-»
+
+«ENDFOREACH»
 «ENDIF»
 
 \subsubsection{Rationale}

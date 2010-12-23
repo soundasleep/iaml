@@ -65,6 +65,12 @@ String escapeLatex(String s) :
 String humanise(String name) :
 	JAVA org.openiaml.docs.generation.codegen.LatexCodegenFunctions.humanise(java.lang.String);
 
+/**
+ * Turn a string like "InputTextField" into "input-text-field".
+ */
+String latexise(String name) :
+	JAVA org.openiaml.docs.generation.codegen.LatexCodegenFunctions.latexise(java.lang.String);
+
 /** 
  * a hack way to create backtrace-able errors
  * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540

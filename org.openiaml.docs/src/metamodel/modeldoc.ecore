@@ -8,6 +8,8 @@
         eType="#//EMFClass" containment="true" eOpposite="#//EMFClass/parent"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
         eType="#//Reference" containment="true" eOpposite="#//Reference/parent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metrics" upperBound="-1"
+        eType="#//Metric" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EMFClass">
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetClass" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
@@ -47,12 +49,18 @@
         eType="#//EMFReference" containment="true" eOpposite="#//EMFReference/containingType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="additionalDocumentation"
         upperBound="-1" eType="#//AdditionalDocumentation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="additionalLatex" upperBound="-1"
+        eType="#//AdditionalLatex" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="rationale" eType="#//JavadocTagElement"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AdditionalDocumentation">
     <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="#//Reference"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="description" eType="#//JavadocTagElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AdditionalLatex">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="#//Reference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="description" eType="#//JavadocTextElement"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Semantic" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="#//Reference"/>
@@ -213,5 +221,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="line" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="templateFile" eType="#//TemplateFile"
         eOpposite="#//TemplateFile/templates"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Metric">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

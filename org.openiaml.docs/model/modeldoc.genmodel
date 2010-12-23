@@ -37,11 +37,16 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/attributes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/references"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/additionalDocumentation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/additionalLatex"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFClass/rationale"/>
     </genClasses>
     <genClasses ecoreClass="modeldoc.ecore#//AdditionalDocumentation">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//AdditionalDocumentation/reference"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//AdditionalDocumentation/description"/>
+    </genClasses>
+    <genClasses ecoreClass="modeldoc.ecore#//AdditionalLatex">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//AdditionalLatex/reference"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//AdditionalLatex/description"/>
     </genClasses>
     <genClasses image="false" ecoreClass="modeldoc.ecore#//Semantic">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference modeldoc.ecore#//Semantic/reference"/>

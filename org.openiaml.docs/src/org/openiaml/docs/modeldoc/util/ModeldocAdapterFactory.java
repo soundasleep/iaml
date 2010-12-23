@@ -10,8 +10,8 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.openiaml.docs.modeldoc.*;
 import org.openiaml.docs.modeldoc.AdditionalDocumentation;
+import org.openiaml.docs.modeldoc.AdditionalLatex;
 import org.openiaml.docs.modeldoc.Constraint;
 import org.openiaml.docs.modeldoc.DroolsPackage;
 import org.openiaml.docs.modeldoc.DroolsRule;
@@ -32,6 +32,7 @@ import org.openiaml.docs.modeldoc.JavadocFragment;
 import org.openiaml.docs.modeldoc.JavadocMethodReference;
 import org.openiaml.docs.modeldoc.JavadocTagElement;
 import org.openiaml.docs.modeldoc.JavadocTextElement;
+import org.openiaml.docs.modeldoc.Metric;
 import org.openiaml.docs.modeldoc.ModelDocumentation;
 import org.openiaml.docs.modeldoc.ModelExtension;
 import org.openiaml.docs.modeldoc.ModelReference;
@@ -109,6 +110,10 @@ public class ModeldocAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseAdditionalDocumentation(AdditionalDocumentation object) {
 				return createAdditionalDocumentationAdapter();
+			}
+			@Override
+			public Adapter caseAdditionalLatex(AdditionalLatex object) {
+				return createAdditionalLatexAdapter();
 			}
 			@Override
 			public Adapter caseSemantic(Semantic object) {
@@ -277,6 +282,20 @@ public class ModeldocAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAdditionalDocumentationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.openiaml.docs.modeldoc.AdditionalLatex <em>Additional Latex</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.openiaml.docs.modeldoc.AdditionalLatex
+	 * @generated
+	 */
+	public Adapter createAdditionalLatexAdapter() {
 		return null;
 	}
 

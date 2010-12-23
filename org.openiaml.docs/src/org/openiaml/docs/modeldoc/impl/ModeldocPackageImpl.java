@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.openiaml.docs.modeldoc.AdditionalDocumentation;
+import org.openiaml.docs.modeldoc.AdditionalLatex;
 import org.openiaml.docs.modeldoc.Constraint;
 import org.openiaml.docs.modeldoc.ConstraintType;
 import org.openiaml.docs.modeldoc.DroolsPackage;
@@ -72,6 +73,12 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * @generated
 	 */
 	private EClass additionalDocumentationEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass additionalLatexEClass = null;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -523,8 +530,17 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getEMFClass_Rationale() {
+	public EReference getEMFClass_AdditionalLatex() {
 		return (EReference)emfClassEClass.getEStructuralFeatures().get(20);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEMFClass_Rationale() {
+		return (EReference)emfClassEClass.getEStructuralFeatures().get(21);
 	}
 
 	/**
@@ -561,6 +577,33 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 */
 	public EReference getAdditionalDocumentation_Description() {
 		return (EReference)additionalDocumentationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAdditionalLatex() {
+		return additionalLatexEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAdditionalLatex_Reference() {
+		return (EReference)additionalLatexEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAdditionalLatex_Description() {
+		return (EReference)additionalLatexEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1589,11 +1632,16 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		createEReference(emfClassEClass, EMF_CLASS__ATTRIBUTES);
 		createEReference(emfClassEClass, EMF_CLASS__REFERENCES);
 		createEReference(emfClassEClass, EMF_CLASS__ADDITIONAL_DOCUMENTATION);
+		createEReference(emfClassEClass, EMF_CLASS__ADDITIONAL_LATEX);
 		createEReference(emfClassEClass, EMF_CLASS__RATIONALE);
 
 		additionalDocumentationEClass = createEClass(ADDITIONAL_DOCUMENTATION);
 		createEReference(additionalDocumentationEClass, ADDITIONAL_DOCUMENTATION__REFERENCE);
 		createEReference(additionalDocumentationEClass, ADDITIONAL_DOCUMENTATION__DESCRIPTION);
+
+		additionalLatexEClass = createEClass(ADDITIONAL_LATEX);
+		createEReference(additionalLatexEClass, ADDITIONAL_LATEX__REFERENCE);
+		createEReference(additionalLatexEClass, ADDITIONAL_LATEX__DESCRIPTION);
 
 		semanticEClass = createEClass(SEMANTIC);
 		createEReference(semanticEClass, SEMANTIC__REFERENCE);
@@ -1815,11 +1863,16 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		initEReference(getEMFClass_Attributes(), this.getEMFAttribute(), this.getEMFAttribute_ContainingType(), "attributes", null, 0, -1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEMFClass_References(), this.getEMFReference(), this.getEMFReference_ContainingType(), "references", null, 0, -1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEMFClass_AdditionalDocumentation(), this.getAdditionalDocumentation(), null, "additionalDocumentation", null, 0, -1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEMFClass_AdditionalLatex(), this.getAdditionalLatex(), null, "additionalLatex", null, 0, -1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEMFClass_Rationale(), this.getJavadocTagElement(), null, "rationale", null, 0, 1, EMFClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(additionalDocumentationEClass, AdditionalDocumentation.class, "AdditionalDocumentation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAdditionalDocumentation_Reference(), this.getReference(), null, "reference", null, 0, 1, AdditionalDocumentation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAdditionalDocumentation_Description(), this.getJavadocTagElement(), null, "description", null, 0, 1, AdditionalDocumentation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(additionalLatexEClass, AdditionalLatex.class, "AdditionalLatex", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAdditionalLatex_Reference(), this.getReference(), null, "reference", null, 0, 1, AdditionalLatex.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAdditionalLatex_Description(), this.getJavadocTextElement(), null, "description", null, 0, 1, AdditionalLatex.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(semanticEClass, Semantic.class, "Semantic", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSemantic_Reference(), this.getReference(), null, "reference", null, 0, 1, Semantic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

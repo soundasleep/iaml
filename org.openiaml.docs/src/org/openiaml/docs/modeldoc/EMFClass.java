@@ -38,6 +38,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getReferences <em>References</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getAdditionalDocumentation <em>Additional Documentation</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getAdditionalLatex <em>Additional Latex</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFClass#getRationale <em>Rationale</em>}</li>
  * </ul>
  * </p>
@@ -462,6 +463,22 @@ public interface EMFClass extends EObject {
 	 * @generated
 	 */
 	EList<AdditionalDocumentation> getAdditionalDocumentation();
+
+	/**
+	 * Returns the value of the '<em><b>Additional Latex</b></em>' containment reference list.
+	 * The list contents are of type {@link org.openiaml.docs.modeldoc.AdditionalLatex}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Additional Latex</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Additional Latex</em>' containment reference list.
+	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getEMFClass_AdditionalLatex()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<AdditionalLatex> getAdditionalLatex();
 
 	/**
 	 * Returns the value of the '<em><b>Rationale</b></em>' containment reference.

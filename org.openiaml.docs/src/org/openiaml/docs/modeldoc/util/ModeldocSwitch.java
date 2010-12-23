@@ -10,8 +10,8 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.openiaml.docs.modeldoc.*;
 import org.openiaml.docs.modeldoc.AdditionalDocumentation;
+import org.openiaml.docs.modeldoc.AdditionalLatex;
 import org.openiaml.docs.modeldoc.Constraint;
 import org.openiaml.docs.modeldoc.DroolsPackage;
 import org.openiaml.docs.modeldoc.DroolsRule;
@@ -32,6 +32,7 @@ import org.openiaml.docs.modeldoc.JavadocFragment;
 import org.openiaml.docs.modeldoc.JavadocMethodReference;
 import org.openiaml.docs.modeldoc.JavadocTagElement;
 import org.openiaml.docs.modeldoc.JavadocTextElement;
+import org.openiaml.docs.modeldoc.Metric;
 import org.openiaml.docs.modeldoc.ModelDocumentation;
 import org.openiaml.docs.modeldoc.ModelExtension;
 import org.openiaml.docs.modeldoc.ModelReference;
@@ -131,6 +132,12 @@ public class ModeldocSwitch<T> {
 			case ModeldocPackage.ADDITIONAL_DOCUMENTATION: {
 				AdditionalDocumentation additionalDocumentation = (AdditionalDocumentation)theEObject;
 				T result = caseAdditionalDocumentation(additionalDocumentation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ModeldocPackage.ADDITIONAL_LATEX: {
+				AdditionalLatex additionalLatex = (AdditionalLatex)theEObject;
+				T result = caseAdditionalLatex(additionalLatex);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -372,6 +379,21 @@ public class ModeldocSwitch<T> {
 	 * @generated
 	 */
 	public T caseAdditionalDocumentation(AdditionalDocumentation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Additional Latex</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Additional Latex</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAdditionalLatex(AdditionalLatex object) {
 		return null;
 	}
 

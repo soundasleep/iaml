@@ -53,6 +53,15 @@ public interface ModeldocFactory extends EFactory {
 	AdditionalDocumentation createAdditionalDocumentation();
 
 	/**
+	 * Returns a new object of class '<em>Additional Latex</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Additional Latex</em>'.
+	 * @generated
+	 */
+	AdditionalLatex createAdditionalLatex();
+
+	/**
 	 * Returns a new object of class '<em>Example</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

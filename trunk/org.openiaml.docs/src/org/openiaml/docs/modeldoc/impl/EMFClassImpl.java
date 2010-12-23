@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.docs.modeldoc.AdditionalDocumentation;
+import org.openiaml.docs.modeldoc.AdditionalLatex;
 import org.openiaml.docs.modeldoc.Constraint;
 import org.openiaml.docs.modeldoc.EMFAttribute;
 import org.openiaml.docs.modeldoc.EMFClass;
@@ -63,6 +64,7 @@ import org.openiaml.docs.modeldoc.OperationalSemantic;
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getAttributes <em>Attributes</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getReferences <em>References</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getAdditionalDocumentation <em>Additional Documentation</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getAdditionalLatex <em>Additional Latex</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFClassImpl#getRationale <em>Rationale</em>}</li>
  * </ul>
  * </p>
@@ -268,6 +270,15 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 	 * @ordered
 	 */
 	protected EList<AdditionalDocumentation> additionalDocumentation;
+	/**
+	 * The cached value of the '{@link #getAdditionalLatex() <em>Additional Latex</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAdditionalLatex()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<AdditionalLatex> additionalLatex;
 	/**
 	 * The cached value of the '{@link #getRationale() <em>Rationale</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -730,6 +741,18 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<AdditionalLatex> getAdditionalLatex() {
+		if (additionalLatex == null) {
+			additionalLatex = new EObjectContainmentEList<AdditionalLatex>(AdditionalLatex.class, this, ModeldocPackage.EMF_CLASS__ADDITIONAL_LATEX);
+		}
+		return additionalLatex;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public JavadocTagElement getRationale() {
 		return rationale;
 	}
@@ -859,6 +882,8 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				return ((InternalEList<?>)getReferences()).basicRemove(otherEnd, msgs);
 			case ModeldocPackage.EMF_CLASS__ADDITIONAL_DOCUMENTATION:
 				return ((InternalEList<?>)getAdditionalDocumentation()).basicRemove(otherEnd, msgs);
+			case ModeldocPackage.EMF_CLASS__ADDITIONAL_LATEX:
+				return ((InternalEList<?>)getAdditionalLatex()).basicRemove(otherEnd, msgs);
 			case ModeldocPackage.EMF_CLASS__RATIONALE:
 				return basicSetRationale(null, msgs);
 		}
@@ -929,6 +954,8 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				return getReferences();
 			case ModeldocPackage.EMF_CLASS__ADDITIONAL_DOCUMENTATION:
 				return getAdditionalDocumentation();
+			case ModeldocPackage.EMF_CLASS__ADDITIONAL_LATEX:
+				return getAdditionalLatex();
 			case ModeldocPackage.EMF_CLASS__RATIONALE:
 				return getRationale();
 		}
@@ -1015,6 +1042,10 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				getAdditionalDocumentation().clear();
 				getAdditionalDocumentation().addAll((Collection<? extends AdditionalDocumentation>)newValue);
 				return;
+			case ModeldocPackage.EMF_CLASS__ADDITIONAL_LATEX:
+				getAdditionalLatex().clear();
+				getAdditionalLatex().addAll((Collection<? extends AdditionalLatex>)newValue);
+				return;
 			case ModeldocPackage.EMF_CLASS__RATIONALE:
 				setRationale((JavadocTagElement)newValue);
 				return;
@@ -1090,6 +1121,9 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 			case ModeldocPackage.EMF_CLASS__ADDITIONAL_DOCUMENTATION:
 				getAdditionalDocumentation().clear();
 				return;
+			case ModeldocPackage.EMF_CLASS__ADDITIONAL_LATEX:
+				getAdditionalLatex().clear();
+				return;
 			case ModeldocPackage.EMF_CLASS__RATIONALE:
 				setRationale((JavadocTagElement)null);
 				return;
@@ -1145,6 +1179,8 @@ public class EMFClassImpl extends EObjectImpl implements EMFClass {
 				return references != null && !references.isEmpty();
 			case ModeldocPackage.EMF_CLASS__ADDITIONAL_DOCUMENTATION:
 				return additionalDocumentation != null && !additionalDocumentation.isEmpty();
+			case ModeldocPackage.EMF_CLASS__ADDITIONAL_LATEX:
+				return additionalLatex != null && !additionalLatex.isEmpty();
 			case ModeldocPackage.EMF_CLASS__RATIONALE:
 				return rationale != null;
 		}

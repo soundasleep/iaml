@@ -12,8 +12,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.openiaml.docs.modeldoc.*;
 import org.openiaml.docs.modeldoc.AdditionalDocumentation;
+import org.openiaml.docs.modeldoc.AdditionalLatex;
 import org.openiaml.docs.modeldoc.Constraint;
 import org.openiaml.docs.modeldoc.ConstraintType;
 import org.openiaml.docs.modeldoc.DroolsPackage;
@@ -33,6 +33,7 @@ import org.openiaml.docs.modeldoc.JavadocClassReference;
 import org.openiaml.docs.modeldoc.JavadocMethodReference;
 import org.openiaml.docs.modeldoc.JavadocTagElement;
 import org.openiaml.docs.modeldoc.JavadocTextElement;
+import org.openiaml.docs.modeldoc.Metric;
 import org.openiaml.docs.modeldoc.ModelDocumentation;
 import org.openiaml.docs.modeldoc.ModelExtension;
 import org.openiaml.docs.modeldoc.ModelReference;
@@ -89,6 +90,7 @@ public class ModeldocFactoryImpl extends EFactoryImpl implements ModeldocFactory
 			case ModeldocPackage.MODEL_DOCUMENTATION: return createModelDocumentation();
 			case ModeldocPackage.EMF_CLASS: return createEMFClass();
 			case ModeldocPackage.ADDITIONAL_DOCUMENTATION: return createAdditionalDocumentation();
+			case ModeldocPackage.ADDITIONAL_LATEX: return createAdditionalLatex();
 			case ModeldocPackage.EXAMPLE: return createExample();
 			case ModeldocPackage.OPERATIONAL_SEMANTIC: return createOperationalSemantic();
 			case ModeldocPackage.GRAPHICAL_REPRESENTATION: return createGraphicalRepresentation();
@@ -175,6 +177,16 @@ public class ModeldocFactoryImpl extends EFactoryImpl implements ModeldocFactory
 	public AdditionalDocumentation createAdditionalDocumentation() {
 		AdditionalDocumentationImpl additionalDocumentation = new AdditionalDocumentationImpl();
 		return additionalDocumentation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AdditionalLatex createAdditionalLatex() {
+		AdditionalLatexImpl additionalLatex = new AdditionalLatexImpl();
+		return additionalLatex;
 	}
 
 	/**

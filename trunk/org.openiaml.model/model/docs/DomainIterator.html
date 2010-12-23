@@ -10,3 +10,20 @@ You are therefore advised to use the "hasNext" and "hasPrevious" {@model Primiti
 that are provided in the {@model DomainIterator}, and connecting a
 {@model NavigateAction fail wire} if necessary.
 </p>
+
+<p>
+A variety of query functions are provided:
+
+<table>
+<tr>
+  <th>Function</th>
+  <th>Returns</th>
+</tr>
+<tr>
+  <td><code>matches(a,b)</code></td>
+  <td>Performs a case-insensitive text search of <code>a</code> against the query <code>b</code>. Every word in <code>b</code> is matched, usually using a SQL keyword or function <code>LIKE</code>, against <code>a</code>.</td>
+</tr>
+</table>
+</p>
+
+

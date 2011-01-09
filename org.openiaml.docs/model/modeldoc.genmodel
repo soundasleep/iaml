@@ -153,6 +153,7 @@
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFAttribute/containingType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//EMFAttribute/defaultLiteral"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference modeldoc.ecore#//EMFAttribute/tagline"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//EMFAttribute/acceptedValues"/>
     </genClasses>
     <genClasses ecoreClass="modeldoc.ecore#//EMFReference">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//EMFReference/name"/>

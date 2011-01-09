@@ -1367,6 +1367,15 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getEMFAttribute_AcceptedValues() {
+		return (EAttribute)emfAttributeEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getEMFReference() {
 		return emfReferenceEClass;
 	}
@@ -1749,6 +1758,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		createEReference(emfAttributeEClass, EMF_ATTRIBUTE__CONTAINING_TYPE);
 		createEAttribute(emfAttributeEClass, EMF_ATTRIBUTE__DEFAULT_LITERAL);
 		createEReference(emfAttributeEClass, EMF_ATTRIBUTE__TAGLINE);
+		createEAttribute(emfAttributeEClass, EMF_ATTRIBUTE__ACCEPTED_VALUES);
 
 		emfReferenceEClass = createEClass(EMF_REFERENCE);
 		createEAttribute(emfReferenceEClass, EMF_REFERENCE__NAME);
@@ -1980,6 +1990,7 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		initEReference(getEMFAttribute_ContainingType(), this.getEMFClass(), this.getEMFClass_Attributes(), "containingType", null, 0, 1, EMFAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEMFAttribute_DefaultLiteral(), ecorePackage.getEString(), "defaultLiteral", null, 0, 1, EMFAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEMFAttribute_Tagline(), this.getJavadocTagElement(), null, "tagline", null, 0, 1, EMFAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEMFAttribute_AcceptedValues(), ecorePackage.getEString(), "acceptedValues", null, 0, -1, EMFAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(emfReferenceEClass, EMFReference.class, "EMFReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getEMFReference_Name(), ecorePackage.getEString(), "name", null, 0, 1, EMFReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

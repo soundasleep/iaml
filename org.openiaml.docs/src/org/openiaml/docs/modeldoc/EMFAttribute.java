@@ -6,6 +6,7 @@
  */
 package org.openiaml.docs.modeldoc;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -24,6 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.openiaml.docs.modeldoc.EMFAttribute#getContainingType <em>Containing Type</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFAttribute#getDefaultLiteral <em>Default Literal</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.EMFAttribute#getTagline <em>Tagline</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.EMFAttribute#getAcceptedValues <em>Accepted Values</em>}</li>
  * </ul>
  * </p>
  *
@@ -243,5 +245,21 @@ public interface EMFAttribute extends EObject {
 	 * @generated
 	 */
 	void setTagline(JavadocTagElement value);
+
+	/**
+	 * Returns the value of the '<em><b>Accepted Values</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Accepted Values</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Accepted Values</em>' attribute list.
+	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getEMFAttribute_AcceptedValues()
+	 * @model
+	 * @generated
+	 */
+	EList<String> getAcceptedValues();
 
 } // EMFAttribute

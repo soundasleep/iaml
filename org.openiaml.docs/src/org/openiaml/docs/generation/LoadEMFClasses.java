@@ -8,6 +8,8 @@ import java.util.List;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EEnum;
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EPackage;
 import org.openiaml.docs.generation.semantics.ITagHandler;
 import org.openiaml.docs.modeldoc.EMFAttribute;
@@ -133,6 +135,14 @@ public class LoadEMFClasses extends EMFLoaderHelper implements ILoader {
 			JavadocTagElement e = getTaglineForEMFElement(factory, a);
 			if (e != null) {
 				created.setTagline(e);
+			}
+			
+			// is it an enumeration? populate list of accepted literals
+			if (a.getEAttributeType() instanceof EEnum) {
+				EEnum en = (EEnum) a.getEAttributeType();
+				for (EEnumLiteral literal : en.getELiterals()) {
+					created.getAcceptedValues().add(literal.getLiteral());
+				}
 			}
 			
 			target.getAttributes().add(created);

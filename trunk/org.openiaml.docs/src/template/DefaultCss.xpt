@@ -48,7 +48,7 @@ body#summary div.intro + .semantic_block { margin-top: .6em; }
 #inference.semantic_block li,
 #implementation.semantic_block li,
 #examples.semantic_block li
-	{ margin-bottom: 0.3em; }
+	{ margin-bottom: 0.3em; clear: right; }
 .none { margin-bottom: 1em; }
 
 .semantic_block div.tagline {
@@ -68,7 +68,7 @@ body#summary div.intro + .semantic_block { margin-top: .6em; }
 .opposite_block a:hover { color: #789; }
 .opposite_block a img { opacity: .7; }
 
-.javadoc_reference { float: right; margin-left: .5em; }
+.javadoc_reference { float: right; clear: right; margin-left: .5em; }
 
 table { border: 1px solid #aab; border-collapse: collapse; }
 table th { background: #ccd; }

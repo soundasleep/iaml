@@ -350,6 +350,13 @@
 		«EXPAND ClassTemplate::javadocElement FOR tagline»
 		</div>
 		«ENDIF»
+		
+		«IF !acceptedValues.isEmpty»
+		<div class="tagline">
+		<b>Accepted literals:</b>
+		«FOREACH acceptedValues AS literal SEPARATOR ", "»«literal»«ENDFOREACH»
+		</div>
+		«ENDIF»
 	</li>
 «ENDDEFINE»
 

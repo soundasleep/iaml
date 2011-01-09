@@ -1583,13 +1583,22 @@ public interface ModeldocPackage extends EPackage {
 	int EMF_ATTRIBUTE__TAGLINE = 7;
 
 	/**
+	 * The feature id for the '<em><b>Accepted Values</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EMF_ATTRIBUTE__ACCEPTED_VALUES = 8;
+
+	/**
 	 * The number of structural features of the '<em>EMF Attribute</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EMF_ATTRIBUTE_FEATURE_COUNT = 8;
+	int EMF_ATTRIBUTE_FEATURE_COUNT = 9;
 
 	/**
 	 * The meta object id for the '{@link org.openiaml.docs.modeldoc.impl.EMFReferenceImpl <em>EMF Reference</em>}' class.
@@ -3137,6 +3146,17 @@ public interface ModeldocPackage extends EPackage {
 	EReference getEMFAttribute_Tagline();
 
 	/**
+	 * Returns the meta object for the attribute list '{@link org.openiaml.docs.modeldoc.EMFAttribute#getAcceptedValues <em>Accepted Values</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Accepted Values</em>'.
+	 * @see org.openiaml.docs.modeldoc.EMFAttribute#getAcceptedValues()
+	 * @see #getEMFAttribute()
+	 * @generated
+	 */
+	EAttribute getEMFAttribute_AcceptedValues();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.docs.modeldoc.EMFReference <em>EMF Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4406,6 +4426,14 @@ public interface ModeldocPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EMF_ATTRIBUTE__TAGLINE = eINSTANCE.getEMFAttribute_Tagline();
+
+		/**
+		 * The meta object literal for the '<em><b>Accepted Values</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EMF_ATTRIBUTE__ACCEPTED_VALUES = eINSTANCE.getEMFAttribute_AcceptedValues();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.impl.EMFReferenceImpl <em>EMF Reference</em>}' class.

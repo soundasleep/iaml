@@ -6,12 +6,16 @@
  */
 package org.openiaml.docs.modeldoc.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.openiaml.docs.modeldoc.EMFAttribute;
 import org.openiaml.docs.modeldoc.EMFClass;
@@ -33,6 +37,7 @@ import org.openiaml.docs.modeldoc.ModeldocPackage;
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFAttributeImpl#getContainingType <em>Containing Type</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFAttributeImpl#getDefaultLiteral <em>Default Literal</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFAttributeImpl#getTagline <em>Tagline</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.impl.EMFAttributeImpl#getAcceptedValues <em>Accepted Values</em>}</li>
  * </ul>
  * </p>
  *
@@ -168,6 +173,16 @@ public class EMFAttributeImpl extends EObjectImpl implements EMFAttribute {
 	 * @ordered
 	 */
 	protected JavadocTagElement tagline;
+
+	/**
+	 * The cached value of the '{@link #getAcceptedValues() <em>Accepted Values</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAcceptedValues()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> acceptedValues;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -403,6 +418,18 @@ public class EMFAttributeImpl extends EObjectImpl implements EMFAttribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<String> getAcceptedValues() {
+		if (acceptedValues == null) {
+			acceptedValues = new EDataTypeUniqueEList<String>(String.class, this, ModeldocPackage.EMF_ATTRIBUTE__ACCEPTED_VALUES);
+		}
+		return acceptedValues;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -468,6 +495,8 @@ public class EMFAttributeImpl extends EObjectImpl implements EMFAttribute {
 				return getDefaultLiteral();
 			case ModeldocPackage.EMF_ATTRIBUTE__TAGLINE:
 				return getTagline();
+			case ModeldocPackage.EMF_ATTRIBUTE__ACCEPTED_VALUES:
+				return getAcceptedValues();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -477,6 +506,7 @@ public class EMFAttributeImpl extends EObjectImpl implements EMFAttribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -503,6 +533,10 @@ public class EMFAttributeImpl extends EObjectImpl implements EMFAttribute {
 				return;
 			case ModeldocPackage.EMF_ATTRIBUTE__TAGLINE:
 				setTagline((JavadocTagElement)newValue);
+				return;
+			case ModeldocPackage.EMF_ATTRIBUTE__ACCEPTED_VALUES:
+				getAcceptedValues().clear();
+				getAcceptedValues().addAll((Collection<? extends String>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -540,6 +574,9 @@ public class EMFAttributeImpl extends EObjectImpl implements EMFAttribute {
 			case ModeldocPackage.EMF_ATTRIBUTE__TAGLINE:
 				setTagline((JavadocTagElement)null);
 				return;
+			case ModeldocPackage.EMF_ATTRIBUTE__ACCEPTED_VALUES:
+				getAcceptedValues().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -568,6 +605,8 @@ public class EMFAttributeImpl extends EObjectImpl implements EMFAttribute {
 				return DEFAULT_LITERAL_EDEFAULT == null ? defaultLiteral != null : !DEFAULT_LITERAL_EDEFAULT.equals(defaultLiteral);
 			case ModeldocPackage.EMF_ATTRIBUTE__TAGLINE:
 				return tagline != null;
+			case ModeldocPackage.EMF_ATTRIBUTE__ACCEPTED_VALUES:
+				return acceptedValues != null && !acceptedValues.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -594,6 +633,8 @@ public class EMFAttributeImpl extends EObjectImpl implements EMFAttribute {
 		result.append(type);
 		result.append(", defaultLiteral: ");
 		result.append(defaultLiteral);
+		result.append(", acceptedValues: ");
+		result.append(acceptedValues);
 		result.append(')');
 		return result.toString();
 	}

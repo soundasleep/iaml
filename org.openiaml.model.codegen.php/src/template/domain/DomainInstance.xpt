@@ -56,6 +56,29 @@
 
 /**
  * An operation defined by name.
+ *
+ * @implementation DomainIterator,PrimitiveOperation
+ *		A {@model DomainIterator} has a {@model PrimitiveOperation} named 'save'. 
+ * @implementation DomainIterator,PrimitiveOperation
+ *		A {@model DomainIterator} has a {@model PrimitiveOperation} named 'new'. 
+ * @implementation DomainIterator,PrimitiveOperation
+ *		A {@model DomainIterator} has a {@model PrimitiveOperation} named 'add role'. 
+ * @implementation DomainIterator,PrimitiveOperation
+ *		A {@model DomainIterator} has a {@model PrimitiveOperation} named 'add permission'. 
+ * @implementation DomainIterator,PrimitiveOperation
+ *		A {@model DomainIterator} has a {@model PrimitiveOperation} named 'remove role'. 
+ * @implementation DomainIterator,PrimitiveOperation
+ *		A {@model DomainIterator} has a {@model PrimitiveOperation} named 'remove permission'. 
+ * @implementation DomainIterator,PrimitiveOperation
+ *		A {@model DomainIterator} has a {@model PrimitiveOperation} named 'next'. 
+ * @implementation DomainIterator,PrimitiveOperation
+ *		A {@model DomainIterator} has a {@model PrimitiveOperation} named 'previous'. 
+ * @implementation DomainIterator,PrimitiveOperation
+ *		A {@model DomainIterator} has a {@model PrimitiveOperation} named 'reset'. 
+ * @implementation DomainIterator,PrimitiveOperation
+ *		A {@model DomainIterator} has a {@model PrimitiveOperation} named 'skip'. 
+ * @implementation DomainIterator,PrimitiveOperation
+ *		A {@model DomainIterator} has a {@model PrimitiveOperation} named 'jump'. 
  */
 «DEFINE namedDomainInstanceCall(Boolean php, model::ActionEdge wire, model::domain::DomainIterator object) FOR model::Operation»
 	«IF php»
@@ -137,6 +160,15 @@
 
 /**
  * A condition defined by containing feature.
+ *
+ * @implementation DomainIterator,PrimitiveCondition
+ *		A {@model DomainIterator} has a {@model PrimitiveCondition} named 'hasNext'. 
+ * @implementation DomainIterator,PrimitiveCondition
+ *		A {@model DomainIterator} has a {@model PrimitiveCondition} named 'hasPrevious'. 
+ * @implementation DomainIterator,PrimitiveCondition
+ *		A {@model DomainIterator} has a {@model PrimitiveCondition} named 'empty'. 
+ * @implementation DomainIterator,PrimitiveCondition
+ *		A {@model DomainIterator} has a {@model PrimitiveCondition} named 'canSave'. 
  */
 «DEFINE domainInstanceCondition(Boolean php, model::domain::DomainIterator instance) FOR model::PrimitiveCondition»
 	«IF php»

@@ -11,9 +11,10 @@
  * Option: Start new threads, though this could be challenging for Javascript, and it
  * will also introduce concurrency issues.
  *
- * @param operation is the current operation flow from an operation? if false, it is from a condition.  
+ * @param operation is the current operation flow from an operation? if false, it is from a condition.
+ * @implementation StartNode,ExecutionEdge 
+ *		If a {@model StartNode} has more than one {@model ExecutionEdge} coming out of it, they will be executed sequentially.  
  */
-# @implementation StartNode If a {@model StartNode} has more than one {@model ExecutionEdge} coming out of it, they will be executed sequentially. 
 «DEFINE executionFlow(Boolean operation, Boolean php) FOR model::operations::StartNode-»
 	«EXPAND executionFlowInternal(operation, php, outExecutions) FOR this»
 «ENDDEFINE»

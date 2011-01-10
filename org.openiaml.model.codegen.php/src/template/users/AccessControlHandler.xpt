@@ -13,7 +13,7 @@
 	«throwException("Unexpected accessControlHandlerOperationCall run instance wire destination: " + this)»
 «ENDDEFINE»
 
-«DEFINE accessControlHandlerOperationCall(Boolean php, model::ActionEdge wire, model::components::AccessControlHandler object) FOR model::ActionEdgeDestination»
+«DEFINE accessControlHandlerOperationCall(Boolean php, model::ActionEdge wire, model::components::AccessControlHandler object) FOR model::Action»
 	«throwException("Unexpected accessControlHandlerOperationCall run instance action destination: " + this)»
 «ENDDEFINE»
 

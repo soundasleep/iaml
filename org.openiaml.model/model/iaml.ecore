@@ -160,7 +160,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
         eType="#//StaticValue" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="#//NamedElement #//WireSource #//WireDestination #//DataFlowEdgesSource #//DataFlowEdgeDestination #//wires/ParameterEdgesSource #//Action">
+  <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="#//NamedElement #//WireSource #//WireDestination #//DataFlowEdgesSource #//DataFlowEdgeDestination #//wires/ParameterEdgesSource">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Represents a single value, accessible and modifiable at runtime."/>
     </eAnnotations>

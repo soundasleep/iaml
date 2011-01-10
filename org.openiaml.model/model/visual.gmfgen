@@ -1594,12 +1594,6 @@
     <childReferences child="//@diagram/@links.1" groupIcon="icons/incomingLinksNavigatorGroup.gif" groupName="incoming links" parent="//@diagram/@topLevelNodes.0" referenceType="in_source"/>
     <childReferences child="//@diagram/@topLevelNodes.1" groupIcon="icons/linkTargetNavigatorGroup.gif" groupName="target" parent="//@diagram/@links.1" referenceType="out_target"/>
     <childReferences child="//@diagram/@links.1" groupIcon="icons/incomingLinksNavigatorGroup.gif" groupName="incoming links" parent="//@diagram/@topLevelNodes.1" referenceType="in_source"/>
-    <childReferences child="//@diagram/@topLevelNodes.4" groupIcon="icons/linkTargetNavigatorGroup.gif" groupName="target" parent="//@diagram/@links.1" referenceType="out_target"/>
-    <childReferences child="//@diagram/@links.1" groupIcon="icons/incomingLinksNavigatorGroup.gif" groupName="incoming links" parent="//@diagram/@topLevelNodes.4" referenceType="in_source"/>
-    <childReferences child="//@diagram/@topLevelNodes.5" groupIcon="icons/linkTargetNavigatorGroup.gif" groupName="target" parent="//@diagram/@links.1" referenceType="out_target"/>
-    <childReferences child="//@diagram/@links.1" groupIcon="icons/incomingLinksNavigatorGroup.gif" groupName="incoming links" parent="//@diagram/@topLevelNodes.5" referenceType="in_source"/>
-    <childReferences child="//@diagram/@topLevelNodes.6" groupIcon="icons/linkTargetNavigatorGroup.gif" groupName="target" parent="//@diagram/@links.1" referenceType="out_target"/>
-    <childReferences child="//@diagram/@links.1" groupIcon="icons/incomingLinksNavigatorGroup.gif" groupName="incoming links" parent="//@diagram/@topLevelNodes.6" referenceType="in_source"/>
     <childReferences child="//@diagram/@topLevelNodes.7" groupIcon="icons/linkTargetNavigatorGroup.gif" groupName="target" parent="//@diagram/@links.1" referenceType="out_target"/>
     <childReferences child="//@diagram/@links.1" groupIcon="icons/incomingLinksNavigatorGroup.gif" groupName="incoming links" parent="//@diagram/@topLevelNodes.7" referenceType="in_source"/>
     <childReferences child="//@diagram/@topLevelNodes.21" groupIcon="icons/linkTargetNavigatorGroup.gif" groupName="target" parent="//@diagram/@links.1" referenceType="out_target"/>

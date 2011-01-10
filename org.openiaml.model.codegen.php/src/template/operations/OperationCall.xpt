@@ -48,6 +48,9 @@
  * @implementation RunAction
  *		When {@model RunAction running} an {@model Operation}, the {@model ParameterEdge}s are
  *		provided in alphabetical order according to their {@model ParameterEdge#name}.
+ * @generation Action,ActionEdge
+ *		When a {@model Action} is executed through a {@model ActionEdge},
+ *		the type of activity executed is dependent on the subtype of the given {@model Action}.
  */
 «DEFINE callOperationContentsRun(Boolean php, Boolean inStoreDb) FOR model::ActionEdge-»
 	/* eContainer == «to.eContainer» */
@@ -162,6 +165,10 @@
 
 /**
  * Resuming navigation to a EntryGate.
+ *
+ * @semantics Action,EntryGate
+ *		When an {@model ActionEdge} executes a {@model EntryGate}, the user is
+ *		redirected to the resumption of the given {@model EntryGate}.
  */
 «DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::ActionEdge wire, Boolean includeSession) FOR model::components::EntryGate»
 	«IF php»
@@ -199,6 +206,10 @@
 
 /**
  * Resuming navigation to an ExitGate.
+ *
+ * @semantics Action,ExitGate
+ *		When an {@model ActionEdge} executes a {@model ExitGate}, the user is
+ *		redirected to the resumption of the given {@model ExitGate}.
  */
 «DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::ActionEdge wire, Boolean includeSession) FOR model::components::ExitGate»
 	«IF php»
@@ -236,6 +247,10 @@
 
 /**
  * Navigate to a frame.
+ *
+ * @semantics Action,Frame
+ *		When an {@model ActionEdge} executes a {@model Frame}, the user is
+ *		redirected to the location of the given {@model Frame}.
  */
 «DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::ActionEdge wire, Boolean includeSession) FOR model::visual::Frame»
 	«IF php»

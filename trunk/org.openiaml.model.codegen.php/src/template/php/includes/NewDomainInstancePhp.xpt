@@ -75,7 +75,7 @@ echo_necessary_update_callbacks();
 	// unknown RunAction target: «this»
 «ENDDEFINE»
 
-«DEFINE editEventTarget(model::ActionEdge wire) FOR model::ActionEdgeDestination»
+«DEFINE editEventTarget(model::ActionEdge wire) FOR model::Action»
 	// unknown RunAction target: «this»
 «ENDDEFINE»
 

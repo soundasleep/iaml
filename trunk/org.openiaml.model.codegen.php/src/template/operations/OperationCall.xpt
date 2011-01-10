@@ -131,7 +131,7 @@
 	«EXPAND navigateTo(php, inStoreDb, this) FOR to» 
 «ENDDEFINE»
 
-«DEFINE navigateTo(Boolean php, Boolean inStoreDb, model::ActionEdge wire) FOR model::ActionEdgeDestination»
+«DEFINE navigateTo(Boolean php, Boolean inStoreDb, model::ActionEdge wire) FOR model::Action»
 	«IF php»
 		$url = null;
 		«EXPAND getNavigateActionDestination(php, inStoreDb, wire, true)»
@@ -156,7 +156,7 @@
  *
  * @param includeSession should PHPSESSID (etc) be included in the URL? Should generally be <code>true</code>
  */
-«DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::ActionEdge wire, Boolean includeSession) FOR model::ActionEdgeDestination»
+«DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::ActionEdge wire, Boolean includeSession) FOR model::Action»
 	«throwException("Unknown NavigateAction destination: " + this)»
 «ENDDEFINE»
 

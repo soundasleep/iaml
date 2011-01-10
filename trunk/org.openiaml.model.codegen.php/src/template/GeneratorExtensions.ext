@@ -65,7 +65,7 @@ escapeHtmlString(String s) :
 escapeXmlString(String s) :
 	escapeHtmlString(s).replaceAll("'", "&apos;");
 
-operationName(model::ActionEdgeDestination this) : 
+operationName(model::Action this) : 
 	throwException("Invalid operation: " + this);
 
 operationName(model::Operation this) :
@@ -117,7 +117,7 @@ onCurrentFrame(emf::EObject source, model::WireDestination target) :
 	containingFrame(source) != null && 
 	containingFrame(source) == containingFrame(target);
 
-onCurrentFrameAction(emf::EObject source, model::ActionEdgeDestination target) :
+onCurrentFrameAction(emf::EObject source, model::Action target) :
 	containingFrame(source) != null && 
 	containingFrame(source) == containingFrame(target);
 
@@ -148,7 +148,7 @@ availableInCurrentScript(model::WireSource source, model::WireDestination target
 	containingEmail(target) == null && 
 	(onCurrentFrame(source, target));
 		
-availableInCurrentScriptAction(model::ActionEdgeSource source, model::ActionEdgeDestination target) :
+availableInCurrentScriptAction(model::ActionEdgeSource source, model::Action target) :
 	containingEmail(target) == null &&
 	(onCurrentFrameAction(source, target));
 

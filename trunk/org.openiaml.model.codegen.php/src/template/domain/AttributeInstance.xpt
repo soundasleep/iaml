@@ -13,6 +13,10 @@
 	«throwException("Unexpected domain attribute run instance action destination: " + this)»
 «ENDDEFINE»
 
+/**
+ * @implementation DomainAttributeInstance,PrimitiveOperation
+ *		A {@model DomainAttributeInstance} has a {@model PrimitiveOperation} named 'save'. 
+ */
 «DEFINE attributeInstanceCall(Boolean php, model::wires::ParameterEdgeDestination wire, Boolean inStoreDb, model::DomainAttributeInstance attribute) FOR model::Operation»
 	/* domain attribute instance: attribute = «simpleName(attribute)», this = «simpleName(this)» */
 	«IF name=="save"»

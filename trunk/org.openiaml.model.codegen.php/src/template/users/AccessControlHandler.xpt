@@ -17,6 +17,10 @@
 	«throwException("Unexpected accessControlHandlerOperationCall run instance action destination: " + this)»
 «ENDDEFINE»
 
+/**
+ * @implementation PrimitiveOperation,AccessControlHandler
+ *		An {@model AccessControlHandler} has a {@model PrimitiveOperation} named 'check permissions'. 
+ */
 «DEFINE accessControlHandlerOperationCall(Boolean php, model::ActionEdge wire, model::components::AccessControlHandler object) FOR model::Operation»
 	«IF php»
 		«IF name=="check permissions"»

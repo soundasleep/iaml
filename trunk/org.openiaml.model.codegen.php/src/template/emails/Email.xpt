@@ -22,6 +22,10 @@
 	«EXPAND actualEmailOperationCall(php, email)» 
 «ENDDEFINE»
 
+/**
+ * @implementation Email,PrimitiveOperation
+ *		An {@model Email} has a {@model PrimitiveOperation} named 'send'. 
+ */
 «DEFINE actualEmailOperationCall(Boolean php, model::scopes::Email email) FOR model::Operation»
 	«IF php»
 		«IF name=="send"»

@@ -12,6 +12,9 @@
 /**
  * Expand the definition of an operation, assumed to be called 
  * as part of an existing function call.
+ *
+ * @implementation AccessControlHandler,PrimitiveOperation
+ *		A {@model AccessControlHandler} has a {@model PrimitiveOperation} named 'check permissions'. 
  */
 «DEFINE operationContents(model::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
 	«REM»special primitive operation names«ENDREM»
@@ -86,8 +89,6 @@
 	if (
 	«IF name=="xpathMatch" || name == "xpathMatch?"»
 		xpathMatch(«EXPAND getDataValue(php) FOREACH inFlows SEPARATOR ","»)
-	«ELSEIF name=="emailAddress" || name == "emailAddress?"»
-		emailAddressMatch(«EXPAND getDataValue(php) FOREACH inFlows SEPARATOR ","»)
 	«ELSEIF name=="is set" || name == "is set?"»
 		«EXPAND DataFlow::isSet(php) FOREACH inFlows.from SEPARATOR " && "»
 	«ELSEIF name == "equal" || name == "equal?"-»
@@ -336,6 +337,9 @@
 
 /**
  * Set temporary variable <-- inFlow
+ *
+ * @implementation PrimitiveOperation
+ *		There is a global {@model PrimitiveOperation} named 'set'. 
  */
 «DEFINE setOperation(model::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
 	«IF model::TemporaryVariable.isInstance(outFlows.first().to)»
@@ -360,6 +364,9 @@
 
 /**
  * Hide a visible thing.
+ *
+ * @implementation VisibleThing,PrimitiveOperation
+ *		A {@model VisibleThing} has a {@model PrimitiveOperation} named 'hide'. 
  */
 «DEFINE hideOperation(model::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
 	/* hide a visible thing: «this» */
@@ -396,6 +403,9 @@
 
 /**
  * Show a visible thing.
+ *
+ * @implementation VisibleThing,PrimitiveOperation
+ *		A {@model VisibleThing} has a {@model PrimitiveOperation} named 'show'. 
  */
 «DEFINE showOperation(model::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
 	/* show a visible thing: «this» */
@@ -435,6 +445,9 @@
  * Fails on the server-side.
  *
  * TODO remove this and replace with a generic 'alert()' method.
+ *
+ * @implementation PrimitiveOperation
+ *		There is a global {@model PrimitiveOperation} named 'alert'. 
  */
 «DEFINE alert(model::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
 	«IF php»
@@ -485,6 +498,9 @@
 
 /**
  * Send an e-mail.
+ *
+ * @implementation Email,PrimitiveOperation
+ *		An {@model Email} has a {@model PrimitiveOperation} named 'send'. 
  */
 «DEFINE sendOperation(model::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
 	«IF model::scopes::Email.isInstance(eContainer)»
@@ -589,6 +605,12 @@
 	«throwException("'update' PrimitiveOperation not defined for container " + this)»
 «ENDDEFINE»
 
+/**
+ * @implementation VisibleThing,PrimitiveOperation
+ *		A {@model VisibleThing} has a {@model PrimitiveOperation} named 'update'. 
+ * @implementation VisibleThing,PrimitiveOperation
+ *		A {@model VisibleThing} has a {@model PrimitiveOperation} named 'init'. 
+ */
 «DEFINE updateOperationForContainer(Boolean php, model::PrimitiveOperation operation) FOR model::VisibleThing»
 	«IF fieldValue == null»
 		«throwException("Cannot set a null fieldValue: " + this)»
@@ -608,6 +630,12 @@
 	«ENDIF»
 «ENDDEFINE»
 
+/**
+ * @implementation DomainAttributeInstance,PrimitiveOperation
+ *		A {@model DomainAttributeInstance} has a {@model PrimitiveOperation} named 'update'. 
+ * @implementation DomainAttributeInstance,PrimitiveOperation
+ *		A {@model DomainAttributeInstance} has a {@model PrimitiveOperation} named 'init'. 
+ */
 «DEFINE updateOperationForContainer(Boolean php, model::PrimitiveOperation operation) FOR model::DomainAttributeInstance»
 	«IF fieldValue == null»
 		«throwException("Cannot set a null fieldValue: " + this)»
@@ -627,6 +655,12 @@
 	«ENDIF»
 «ENDDEFINE»
 
+/**
+ * @implementation DomainAttribute,PrimitiveOperation
+ *		A {@model DomainAttribute} has a {@model PrimitiveOperation} named 'update'. 
+ * @implementation DomainAttribute,PrimitiveOperation
+ *		A {@model DomainAttribute} has a {@model PrimitiveOperation} named 'init'. 
+ */
 «DEFINE updateOperationForContainer(Boolean php, model::PrimitiveOperation operation) FOR model::DomainAttribute»
 	«IF fieldValue == null»
 		«throwException("Cannot set a null fieldValue: " + this)»

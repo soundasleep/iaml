@@ -12,15 +12,6 @@ package org.openiaml.model.tests.codegen.runtime.client;
 public class ComparisonFunctions extends JavascriptCodegenTestCase {
 	
 	/**
-	 * tests emailAddressMatch()
-	 */
-	public void testEmailAddressMatch() throws Exception {
-		assertJavascriptResult(true, "emailAddressMatch('test@jevon.org')");
-		assertJavascriptResult(true, "emailAddressMatch('long.address@test.example.co.nz')");
-		assertJavascriptResult(false, "emailAddressMatch('failure')");
-	}
-
-	/**
 	 * tests xpathMatch()
 	 */
 	public void testXpathMatch() throws Exception {

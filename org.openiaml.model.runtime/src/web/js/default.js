@@ -707,19 +707,6 @@ function xpathMatch(a, b) {
 }
 
 /**
- * Comparison function: emailAddressMatch(a)
- * Returns true if 'a' is an e-mail address.
- */
-function emailAddressMatch(a) {
-	if (a == null) {
-		throw new IamlJavascriptException("Cannot emailAddressMatch a null address.");
-	}
-
-	var re = new RegExp("([A-Za-z0-9\._\-]+)@([A-Za-z0-9_\-]+)(\.[A-Za-z0-9_\-]+)+");
-	return re.exec(a) ? true : false;
-}
-
-/**
  * Define an exception class.
  */
 function IamlJavascriptException(message) {

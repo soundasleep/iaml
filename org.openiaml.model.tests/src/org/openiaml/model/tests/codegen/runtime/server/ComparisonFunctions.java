@@ -10,15 +10,6 @@ package org.openiaml.model.tests.codegen.runtime.server;
  *
  */
 public class ComparisonFunctions extends PhpCodegenTestCase {
-	
-	/**
-	 * Tests <code>emailAddressMatch()</code>.
-	 */
-	public void testEmailAddressMatch() throws Exception {
-		assertPhpResult(true, "emailAddressMatch('test@jevon.org')");
-		assertPhpResult(true, "emailAddressMatch('long.address@test.example.co.nz')");
-		assertPhpResult(false, "emailAddressMatch('failure')");
-	}
 
 	/**
 	 * Tests <code>xpathMatch()</code>.

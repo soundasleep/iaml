@@ -516,15 +516,6 @@ function xpathMatch($a, $b) {
 }
 
 /**
- * Comparison function: emailAddressMatch(a)
- * Returns true if 'a' is an e-mail address.
- */
-function emailAddressMatch($a) {
-	$regexp = "/^([A-Za-z0-9\._\-]+)@([A-Za-z0-9_\-]+)(\.[A-Za-z0-9_\-]+)+$/i";
-	return preg_match($regexp, $a);
-}
-
-/**
  * For some reason, SID isn't being set.
  * This forces it.
  */

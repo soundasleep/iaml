@@ -17,6 +17,11 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EClass;
 import org.openarchitectureware.workflow.WorkflowRunner;
 import org.openarchitectureware.workflow.util.ProgressMonitorAdapter;
+import org.openiaml.docs.modeldoc.JavadocClassReference;
+import org.openiaml.docs.modeldoc.JavadocFragment;
+import org.openiaml.docs.modeldoc.JavadocMethodReference;
+import org.openiaml.docs.modeldoc.JavadocTagElement;
+import org.openiaml.docs.modeldoc.JavadocTextElement;
 
 /**
  * @author jmwright
@@ -167,6 +172,30 @@ public class ModeldocCodeGenerator {
 	
 	public static String timestamp() {
 		return DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG).format(new Date());
+	}
+	
+	/**
+	 * Get a simple string representation of the given Javadocs string.
+	 * This is generally used for sorting.
+	 * 
+	 * @param e a soup of Javadoc tags
+	 * @return a simple string representation of how it may be rendered
+	 */
+	public static String collateJavadocs(JavadocTagElement e) {
+		StringBuffer s = new StringBuffer();
+		for (JavadocFragment fragment : e.getFragments()) {
+			if (fragment instanceof JavadocClassReference) {
+				s.append(((JavadocClassReference) fragment).getReference().getName());
+			} else if (fragment instanceof JavadocMethodReference) {
+				s.append(((JavadocMethodReference) fragment).getReference().getName());
+			} else if (fragment instanceof JavadocTagElement) {
+				s.append(collateJavadocs((JavadocTagElement) fragment));
+			} else if (fragment instanceof JavadocTextElement) {
+				s.append(((JavadocTextElement) fragment).getValue());
+			}
+			s.append(' ');
+		}
+		return s.toString();
 	}
 		
 }

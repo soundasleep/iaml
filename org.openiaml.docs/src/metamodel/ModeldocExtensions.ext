@@ -39,7 +39,7 @@ String getString(modeldoc::JavadocFragment this) :
 
 String getString(modeldoc::JavadocTextElement this) :
 	value;
-	
+
 /**
  * Converts 'foo.bar.baz' into 'foo/bar/baz'.
  * If package is the empty string '', returns '.'.
@@ -70,6 +70,16 @@ String humanise(String name) :
  */
 String latexise(String name) :
 	JAVA org.openiaml.docs.generation.codegen.LatexCodegenFunctions.latexise(java.lang.String);
+
+/**
+ * Get a simple string representation of the given Javadocs string.
+ * This is generally used for sorting.
+ * 
+ * @param e a soup of Javadoc tags
+ * @return a simple string representation of how it may be rendered
+ */
+String collateJavadocs(modeldoc::JavadocTagElement e) :
+	JAVA org.openiaml.docs.generation.codegen.ModeldocCodeGenerator.collateJavadocs(org.openiaml.docs.modeldoc.JavadocTagElement);
 
 /** 
  * a hack way to create backtrace-able errors

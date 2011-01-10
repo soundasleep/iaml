@@ -151,11 +151,11 @@ public class LoadOAWImplementationNotes extends DocumentationHelper implements I
 	 */
 	private Template createTemplate(ModeldocFactory factory, int i, String[] lines) {
 		for (int j = i; j < lines.length; j++) {
-			if (lines[i].trim().startsWith("«DEFINE ")) {
+			if (lines[j].trim().startsWith("«DEFINE ")) {
 				// found a template
 				
 				// find the template name
-				String templateName = lines[i].trim();
+				String templateName = lines[j].trim();
 				// jump over to first whitespace
 				if (!templateName.contains(" "))
 					throw new RuntimeException("Template does not contain ' ': '" + templateName + "'");
@@ -166,7 +166,7 @@ public class LoadOAWImplementationNotes extends DocumentationHelper implements I
 				templateName = templateName.substring(0, templateName.indexOf(" FOR ")).trim();
 				
 				// find the template type
-				String templateType = lines[i].trim();
+				String templateType = lines[j].trim();
 				if (!templateType.contains(" FOR "))
 					throw new RuntimeException("Template does not contain ' FOR ': '" + templateType + "'");
 				templateType = templateType.substring(templateType.indexOf(" FOR ")).trim();

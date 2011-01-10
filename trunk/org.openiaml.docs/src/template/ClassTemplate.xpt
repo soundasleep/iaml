@@ -115,7 +115,7 @@
 			<h2>Implementation Notes</h2>
 			
 			<ul>
-			«EXPAND implementationNote FOREACH implementationNotes»
+			«EXPAND implementationNote FOREACH implementationNotes.sortBy(n|collateJavadocs(n.description))»
 			</ul>
 		</div>
 		«ENDIF»
@@ -128,8 +128,8 @@
 				<div class="none">(none)</div>
 			«ELSE»
 				<ul>
-				«EXPAND operationalSemantics(true) FOREACH operationalSemantics»
-				«EXPAND operationalSemantics(false) FOREACH getInheritedOperationalSemantics(this).sortBy( c | c.containingClass.name )»
+				«EXPAND operationalSemantics(true) FOREACH operationalSemantics.sortBy(n|collateJavadocs(n.description))»
+				«EXPAND operationalSemantics(false) FOREACH getInheritedOperationalSemantics(this).sortBy(n|collateJavadocs(n.description))»
 				</ul>
 			«ENDIF»
 		</div>
@@ -142,8 +142,8 @@
 				<div class="none">(none)</div>
 			«ELSE»
 				<ul>
-				«EXPAND inferenceSemantics(true) FOREACH inferenceSemantics»
-				«EXPAND inferenceSemantics(false) FOREACH getInheritedInferenceSemantics(this).sortBy( c | c.containingClass.name )»
+				«EXPAND inferenceSemantics(true) FOREACH inferenceSemantics.sortBy(n|collateJavadocs(n.description))»
+				«EXPAND inferenceSemantics(false) FOREACH getInheritedInferenceSemantics(this).sortBy( c | c.containingClass.name ).sortBy(n|collateJavadocs(n.description))»
 				</ul>
 			«ENDIF»
 		</div>

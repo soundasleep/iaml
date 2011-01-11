@@ -144,12 +144,12 @@ context model::PrimitiveCondition WARNING "Unknown primitive condition name '" +
 	(eContainer != null && model::domain::DomainIterator.isInstance(eContainer) && ((model::domain::DomainIterator) eContainer).empty == this) ||		
 	(eContainer != null && model::Changeable.isInstance(eContainer) && name == "fieldValue is set?") ||		
 	(eContainer != null && model::Changeable.isInstance(eContainer) && name == "fieldValue is set") ||		
-	(eContainer != null && model::VisibleThing.isInstance(eContainer) && name == "can cast?") ||		
-	(eContainer != null && model::VisibleThing.isInstance(eContainer) && name == "can cast") ||		
-	(eContainer != null && model::VisibleThing.isInstance(eContainer) && name == "empty?") ||		
-	(eContainer != null && model::VisibleThing.isInstance(eContainer) && name == "empty") ||		
-	(eContainer != null && model::VisibleThing.isInstance(eContainer) && name == "not empty?") ||		
-	(eContainer != null && model::VisibleThing.isInstance(eContainer) && name == "not empty");		
+	(eContainer != null && model::Changeable.isInstance(eContainer) && name == "can cast?") ||		
+	(eContainer != null && model::Changeable.isInstance(eContainer) && name == "can cast") ||		
+	(eContainer != null && model::Changeable.isInstance(eContainer) && name == "empty?") ||		
+	(eContainer != null && model::Changeable.isInstance(eContainer) && name == "empty") ||		
+	(eContainer != null && model::Changeable.isInstance(eContainer) && name == "not empty?") ||		
+	(eContainer != null && model::Changeable.isInstance(eContainer) && name == "not empty");		
 
 context model::operations::Arithmetic ERROR "Arithmetic must have at least one incoming data source edge" :
 	inFlows.size > 0;

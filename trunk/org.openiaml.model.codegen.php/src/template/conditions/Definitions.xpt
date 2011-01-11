@@ -70,6 +70,17 @@
 	«throwException("Cannot expand an abstract Condition: " + this)»
 «ENDDEFINE»
 
+/**
+ *
+ * @implementation VisibleThing,PrimitiveCondition
+ *		A {@model VisibleThing} has a {@model PrimitiveCondition} named 'can cast?'. 
+ * @implementation Changeable,PrimitiveCondition
+ *		A {@model Changeable} has a {@model PrimitiveCondition} named 'fieldValue is set?'. 
+ * @implementation Changeable,PrimitiveCondition
+ *		A {@model Changeable} has a {@model PrimitiveCondition} named 'empty?'. 
+ * @implementation Changeable,PrimitiveCondition
+ *		A {@model Changeable} has a {@model PrimitiveCondition} named 'not empty?'. 
+ */
 «DEFINE conditionDefinition(Boolean php) FOR model::PrimitiveCondition»
 	/** primitive condition "«name»" */
 	function condition_«safeName()»(

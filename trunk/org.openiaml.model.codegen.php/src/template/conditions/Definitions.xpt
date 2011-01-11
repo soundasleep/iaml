@@ -72,8 +72,8 @@
 
 /**
  *
- * @implementation VisibleThing,PrimitiveCondition
- *		A {@model VisibleThing} has a {@model PrimitiveCondition} named 'can cast?'. 
+ * @implementation Changeable,PrimitiveCondition
+ *		A {@model Changeable} has a {@model PrimitiveCondition} named 'can cast?'. 
  * @implementation Changeable,PrimitiveCondition
  *		A {@model Changeable} has a {@model PrimitiveCondition} named 'fieldValue is set?'. 
  * @implementation Changeable,PrimitiveCondition
@@ -97,8 +97,8 @@
 			«ELSE»
 			return cached_result_«safeName()»();
 			«ENDIF»
-		«ELSEIF (name == "can cast?" || name == "can cast") && model::VisibleThing.isInstance(eContainer)»
-			«EXPAND conditionDefinition_canCast(php, this) FOR (model::VisibleThing) eContainer»
+		«ELSEIF (name == "can cast?" || name == "can cast") && model::Changeable.isInstance(eContainer)»
+			«EXPAND conditionDefinition_canCast(php, this) FOR (model::Changeable) eContainer»
 		«ELSEIF (name == "fieldValue is set?" || name == "fieldValue is set") && model::Changeable.isInstance(eContainer)»
 			«EXPAND conditionDefinition_fieldValueIsSet(php, this) FOR (model::Changeable) eContainer»
 		«ELSEIF model::Changeable.isInstance(eContainer)»
@@ -132,7 +132,7 @@
 	}
 «ENDDEFINE»
 
-«DEFINE conditionDefinition_canCast(Boolean php, model::PrimitiveCondition condition) FOR model::VisibleThing»
+«DEFINE conditionDefinition_canCast(Boolean php, model::PrimitiveCondition condition) FOR model::Changeable»
 	/* PrimitiveOperation 'can cast?' */
 	«IF php»
 		$type = "«escapePhpString(fieldValue.type.uRI)»";

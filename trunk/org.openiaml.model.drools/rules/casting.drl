@@ -25,12 +25,14 @@ global DroolsHelperFunctions functions;
  * Similar to issue 210: Create PrimitiveConditions by default, but
  * allow later overriding using the same semantics if it was a CompositeCondition.
  *
- * @inference VisibleThing
- *		{@model VisibleThing}s will contain a {@model Condition} named 'can cast?'.
+ * <p>Issue 221: Add 'can cast?' Primitive Condition to all Changeable elements
+ *
+ * @inference Changeable,PrimitiveCondition
+ *		{@model Changeable}s will contain a {@model PrimitiveCondition} named 'can cast?'.
  */
-rule "Create 'can cast?' condition for VisibleThings"
+rule "Create 'can cast?' condition for Changeables"
 	when
-		tf : VisibleThing( )
+		tf : Changeable( )
 		not ( condition : Condition ( name == "can cast?", eContainer == tf ))
 		
 		eval ( handler.veto( tf ))
@@ -44,7 +46,7 @@ end
 
 rule "Create contents of 'can cast?' condition"
 	when
-		tf : VisibleThing( )
+		tf : Changeable( )
 		fieldValue : Property ( tf.fieldValue == fieldValue )
 		c : CompositeCondition ( name == "can cast?", eContainer == tf )
 		

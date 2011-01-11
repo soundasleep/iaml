@@ -63,11 +63,11 @@ public class EdgeTypes {
 			this.toOpposite = toOpposite;
 			
 			if (edgeType.equals(edgeSource))
-				throw new IllegalArgumentException("EdgeType cannot be EdgeSource");
+				throw new IllegalArgumentException("EdgeType cannot be EdgeSource: " + edgeType.getName() + ", " + edgeSource.getName());
 			if (edgeType.equals(edgeDestination))
-				throw new IllegalArgumentException("EdgeType cannot be EdgeDestination");
+				throw new IllegalArgumentException("EdgeType cannot be EdgeDestination: " + edgeType.getName() + ", " + edgeDestination.getName());
 			if (edgeSource.equals(edgeDestination))
-				throw new IllegalArgumentException("EdgeSource cannot be EdgeDestination");
+				throw new IllegalArgumentException("EdgeSource cannot be EdgeDestination: " + edgeSource.getName() + ", " + edgeDestination.getName());
 
 		}
 		
@@ -118,7 +118,7 @@ public class EdgeTypes {
 		edgeTypes.add( new EdgeType(
 				ModelPackage.eINSTANCE.getActionEdge(), /* type */
 				ModelPackage.eINSTANCE.getActionEdgeSource(), /* source */
-				ModelPackage.eINSTANCE.getActionEdge(), /* destination */
+				ModelPackage.eINSTANCE.getAction(), /* destination */
 				ModelPackage.eINSTANCE.getActionEdge_From(), /* from ref */
 				ModelPackage.eINSTANCE.getActionEdge_To(), /* to ref */
 				ModelPackage.eINSTANCE.getActionEdgeSource_OutActions(), /* from opposite */

@@ -589,7 +589,7 @@
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Changeable" abstract="true" interface="true"
-      eSuperTypes="#//GeneratesElements #//wires/ParameterEdgesSource #//GeneratedElement">
+      eSuperTypes="#//GeneratesElements #//wires/ParameterEdgesSource #//GeneratedElement #//ContainsConditions">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Represents something that {@model Changeable#fieldValue has a value}, and can register when it {@model Changeable#onChange can change}. Since it has a {@model Changeable#fieldValue value}, it can be used as a {@model ParameterEdgesSource parameter}."/>
     </eAnnotations>

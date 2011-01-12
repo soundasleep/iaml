@@ -353,7 +353,7 @@ A visual representation of this element is provided in Figure \ref{fig:reference
 «ENDDEFINE»
 
 «DEFINE latexConstraint FOR modeldoc::Constraint»	
-	\item «IF type == modeldoc::ConstraintType::WARNING»\constraintWarning«ELSE»\constraintError«ENDIF» «escapeLatex(message)»
+	\item «IF type == modeldoc::ConstraintType::WARNING»\constraintWarning«ELSE»\constraintError«ENDIF» «convertHTMLIntoLatex(message)»
 «ENDDEFINE»
 
 «DEFINE latexImplementationNotes FOR modeldoc::EMFClass»
@@ -390,13 +390,13 @@ A visual representation of this element is provided in Figure \ref{fig:reference
 «ENDIF-»«ENDDEFINE»
 
 «DEFINE javadocElementToLatex FOR modeldoc::JavadocTextElement-»
-«IF !(value.startsWith(",") || value.startsWith(".") || value.startsWith("?"))»«" "»«ENDIF»«escapeLatex(value)-»
+«IF !(value.startsWith(",") || value.startsWith(".") || value.startsWith("?"))»«" "»«ENDIF»«convertHTMLIntoLatex(value)-»
 «ENDDEFINE»
 
 «REM»the formatting is ugly, but we sadly can't have _any_ whitespace«ENDREM»
 «DEFINE javadocModelElementToLatex FOR modeldoc::JavadocTextElement-»
 «" "»«IF value.contains(".")-»
-«value-»«REM»the value contains an illegal character; it can't link to a model element«ENDREM»
+«convertHTMLIntoLatex(value)-»«REM»the value contains an illegal character; it can't link to a model element«ENDREM»
 «ELSE-»
 «IF value.trim().contains(" ")-»
 «LET value.trim().split(" ") AS bits-»
@@ -415,7 +415,7 @@ A visual representation of this element is provided in Figure \ref{fig:reference
 
 «REM»need to remove the first text in the tag (referring to the model elements to tag)«ENDREM»
 «DEFINE javadocSemanticsElementToLatex FOR modeldoc::JavadocTextElement»
-	«FOREACH value.trim().split(" ").withoutFirst() AS s»«escapeLatex(s)» «ENDFOREACH»
+	«FOREACH value.trim().split(" ").withoutFirst() AS s»«convertHTMLIntoLatex(s)» «ENDFOREACH»
 «ENDDEFINE»
 «DEFINE javadocSemanticsElementToLatex FOR modeldoc::JavadocFragment»
 	\textbf{TODO} Unknown semantic starting tag '«this»'.

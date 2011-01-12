@@ -56,9 +56,6 @@ Set[modeldoc::EMFClass] allSubtypes(modeldoc::EMFClass this) :
 String timestamp() :
 	JAVA org.openiaml.docs.generation.codegen.ModeldocCodeGenerator.timestamp();
 
-String escapeLatex(String s) :
-	s.replaceAll("_", "\\\\_");
-
 /**
  * Turn a string like "InputTextField" into "Input Text Field".
  */
@@ -70,6 +67,12 @@ String humanise(String name) :
  */
 String latexise(String name) :
 	JAVA org.openiaml.docs.generation.codegen.LatexCodegenFunctions.latexise(java.lang.String);
+
+/**
+ * Escape out any HTML, and also make LaTeX-safe. See Javadocs for more information.
+ */
+String convertHTMLIntoLatex(String value) :
+	JAVA org.openiaml.docs.generation.codegen.LatexCodegenFunctions.convertHTMLIntoLatex(java.lang.String);
 
 /**
  * Get a simple string representation of the given Javadocs string.

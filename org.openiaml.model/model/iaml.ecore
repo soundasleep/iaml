@@ -786,7 +786,7 @@
   <eSubpackages name="wires" nsURI="http://openiaml.org/model/wires" nsPrefix="iaml.wires">
     <eClassifiers xsi:type="ecore:EClass" name="SyncWire" eSuperTypes="#//Wire">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="When a connected element changes, a SyncWire will update the other connected element."/>
+        <details key="documentation" value="When the value of a connected element changes, a {@model SyncWire} will update the other connected element. Can be connected to any {@model CanBeSynced} model element."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="executeOnInput" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
           defaultValueLiteral="false">
@@ -817,7 +817,7 @@
         <details key="added" value="0.2"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="When the source element changes, the target element will be updated (but not vice versa)."/>
+        <details key="documentation" value="When the value of a source element changes, the target element will be updated with this value (but not vice versa). Can be connected to any {@model CanBeSynced} model element."/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="executeOnInput" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
           defaultValueLiteral="false">

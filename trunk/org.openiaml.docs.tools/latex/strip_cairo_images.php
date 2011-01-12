@@ -25,36 +25,40 @@ into:
 
 */
 
+define("MAX_LINE", 1048576);
+
 if ($argc < 2) {
 	throw new Exception("Expected arguments: [input file]");
 }
 
-$input = file($argv[1]);
-for ($i = 0; $i < count($input); $i++) {
-	$line = $input[$i];
+$fp = fopen($argv[1], 'r');
+while (!feof($fp)) {
+	$line = fgets($fp, MAX_LINE);
 
 	// is this a %%BeginDocument line?
 	$skip_line = false;
 	if (substr($line, 0, strlen("%%BeginDocument")) == "%%BeginDocument") {
-		for ($j = $i + 1; $j < count($input); $j++) {
-			if (substr($input[$j], 0, 1) != "%") {
+		$current_pointer = ftell($fp);
+		while (!feof($fp)) {
+			$line2 = fgets($fp, MAX_LINE);
+			if (substr($line2, 0, 1) != "%") {
 				// ran out of comments; this isn't a cairo document
+				fseek($fp, $current_pointer);
 				break;
-			} else {
-				if (substr($input[$j], 0, strlen("%%Creator: cairo ")) == "%%Creator: cairo ") {
-					// it is a cairo document!
-					$skip_line = true;
+			} elseif (substr($line2, 0, strlen("%%Creator: cairo ")) == "%%Creator: cairo ") {
+				// it is a cairo document!
+				$skip_line = true;
 
-					// consume lines until we get out of the document
-					for ($i = $j; $i < count($input); $i++) {
-						if (substr($input[$i], 0, strlen("%%EndDocument")) == "%%EndDocument") {
-							// we have found the end of the document
-							break;
-						}
+				// consume lines until we get out of the document
+				while (!feof($fp)) {
+					$line2 = fgets($fp, MAX_LINE);
+					if (substr($line2, 0, strlen("%%EndDocument")) == "%%EndDocument") {
+						// we have found the end of the document
+						break;
 					}
-
-					break;
 				}
+
+				break;
 			}
 		}
 

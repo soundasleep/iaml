@@ -62,7 +62,7 @@ rule "Set wires from DomainSchema to CanBeSynced"
 		eval ( handler.veto( source ))
 						
 	then
-		SyncWire sw = handler.generatedSyncWire(source, source, e1, e2);
+		SetWire sw = handler.generatedSetWire(source, source, e1, e2);
 		handler.setName(sw, "set");
 		handler.setExecuteOnInput(sw, source.isExecuteOnInput());
 		queue.add(sw, drools);

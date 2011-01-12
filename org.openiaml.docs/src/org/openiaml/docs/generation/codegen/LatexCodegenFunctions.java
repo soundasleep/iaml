@@ -37,5 +37,29 @@ public class LatexCodegenFunctions {
 	public static String latexise(String s) {
 		return humanise(s).toLowerCase().replace(' ', '-');
 	}
+
+	/**
+	 * Turns a string - which may contain HTML - into Latex
+	 * code. In particular, it changes:
+	 * 
+	 * <ol>
+	 * 	<li> <code>&lt;code&gt;AAA&lt;/code&gt;</code> into <code>\code{AAA}</code>
+	 * 	<li> <code>&amp;lt;</code> into <code>&lt;</code>
+	 * 	<li> <code>&amp;gt;</code> into <code>&gt;</code>
+	 * 	<li> <code>&amp;amp;</code> into <code>\&amp;</code>
+	 * 	<li> <code>_</code> into <code>\_</code>
+	 * </ol>
+	 * 
+	 * @param s
+	 * @return
+	 */
+	public static String convertHTMLIntoLatex(String s) {
+		return s.replaceAll("(?i)<code>", "\\\\code{")
+			.replaceAll("(?i)</code>", "}")
+			.replace("&lt;", "<")
+			.replace("&gt;", ">")
+			.replace("&amp;", "\\&")
+			.replace("_", "\\_");
+	}
 	
 }

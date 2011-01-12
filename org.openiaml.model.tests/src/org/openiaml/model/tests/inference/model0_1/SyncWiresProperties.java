@@ -90,28 +90,9 @@ public class SyncWiresProperties extends InferenceTestCase {
 		// (following from SyncFormDomainObject)
 
 		// fields should have fieldValues
-		Property value1 = assertHasFieldValue(f1);
-		Property value2 = assertHasFieldValue(f2);
-		Property value3 = assertHasFieldValue(f3);
 		Property valuea1 = assertHasFieldValue(a1);
 		Property valuea2 = assertHasFieldValue(a2);
 		Property valuea3 = assertHasFieldValue(a3);
-
-		// these field values should be parameters to run instance wires
-		{
-			ParameterEdge pw1 = value1.getOutParameterEdges().get(0);
-			assertTrue(pw1.toString(), pw1.getTo() instanceof ActionEdge);
-			ParameterEdge pw2 = value2.getOutParameterEdges().get(0);
-			assertTrue(pw2.toString(), pw2.getTo() instanceof ActionEdge);
-			ParameterEdge pw3 = value3.getOutParameterEdges().get(0);
-			assertTrue(pw3.toString(), pw3.getTo() instanceof ActionEdge);
-			ParameterEdge pwa1 = valuea1.getOutParameterEdges().get(0);
-			assertTrue(pwa1.toString(), pwa1.getTo() instanceof ActionEdge);
-			ParameterEdge pwa2 = valuea2.getOutParameterEdges().get(0);
-			assertTrue(pwa2.toString(), pwa2.getTo() instanceof ActionEdge);
-			ParameterEdge pwa3 = valuea3.getOutParameterEdges().get(0);
-			assertTrue(pwa3.toString(), pwa3.getTo() instanceof ActionEdge);
-		}
 
 		// test for 'access' events and 'initialize' operations (new)
 		EventTrigger access1 = f1.getOnAccess();

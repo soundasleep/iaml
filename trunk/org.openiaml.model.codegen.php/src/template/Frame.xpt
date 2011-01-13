@@ -10,6 +10,12 @@
  * @implementation Gate,Scope
  *		{@model Gate}s are of a lower priority in execution than {@model EventTrigger}s.
  *		That is, {@model Scope#onAccess} will execute before any {@model Gate}s are executed.
+ * @implementation Frame,EntryGate
+ *		When a {@model Frame} is accessed, all {@model EntryGate}s will be checked in order
+ *		of the {@model EntryGate#name} of each gate.
+ * @implementation Frame,ExitGate
+ *		When a {@model Frame} is accessed, all {@model ExitGate}s will be checked in order
+ *		of the {@model ExitGate#name} of each gate.
  */
 «DEFINE expandFrame FOR model::visual::Frame-»
 	«FILE "output/"+safeNameString(id)+".php"-»
@@ -96,10 +102,10 @@ if (require_get("redirect_on_client", "")) {
 «EXPAND getAllOnAccessEvents»
 
 // run any entry gates connected to the containing scope(s)
-«EXPAND template::scopes::EntryGate::runEntryGate FOREACH getFrameEntryGates(this)-»
+«EXPAND template::scopes::EntryGate::runEntryGate FOREACH getFrameEntryGates(this).sortBy(e|e.name)-»
 
 // is access to this frame prevented by any other exit gate?
-«EXPAND template::scopes::ExitGate::runExitGate FOREACH getAllExitGates(this)-»
+«EXPAND template::scopes::ExitGate::runExitGate FOREACH getAllExitGates(this).sortBy(e|e.name)-»
 
 // expand any AccessControlHandlers in the frame
 «EXPAND template::users::Definitions::accessControlHandlerDefinitions(true) FOR this-»

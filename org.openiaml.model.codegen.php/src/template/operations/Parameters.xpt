@@ -63,6 +63,14 @@
 
 /**
  * TODO can we remove 'wire' parameter and replace it with 'currentFrame'?
+ *
+ * @implementation Session
+ *		The <i>storage semantics</i> for an {@model Session} follow the
+ *		semantics of a normal Web session.
+ * @implementation Scope
+ *		If a {@model Scope} is not contained by a {@model Session}, then
+ *		the <i>storage semantics</i> for that {@model Scope} are globally
+ *		accessible; otherwise, they follow the semantics of the {@model Session}.
  */
 «DEFINE callParameterValue(Boolean php, Boolean inStoreDb) FOR model::Property»
 	«IF php»

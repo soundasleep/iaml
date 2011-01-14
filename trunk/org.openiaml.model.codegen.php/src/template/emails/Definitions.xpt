@@ -43,6 +43,9 @@
  *		An {@model Email} with any 'to' address ending in <code>@example</code> will instantly 
  *		{@model Email#onFailure fail};
  *		it will not even attempt to be sent. 
+ * @implementation Email
+ *		The <i>storage semantics</i> for an {@model Email} follows the
+ *		<i>storage semantics</i> of its parent {@model Scope}.
  */
 «DEFINE emailDefinition FOR model::scopes::Email»
 	/**

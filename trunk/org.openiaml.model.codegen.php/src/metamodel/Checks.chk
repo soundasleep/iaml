@@ -27,6 +27,14 @@ context model::components::LoginHandler ERROR "A login handler of type DOMAIN_OB
 	type != model::components::LoginHandlerTypes::DOMAIN_OBJECT ||
 	!inParameterEdges.from.typeSelect(model::DomainAttribute).isEmpty;
 
+context model::components::LoginHandler ERROR "A login handler of type SECRET_KEY must have exactly one incoming parameter":
+	type != model::components::LoginHandlerTypes::SECRET_KEY ||
+	inParameterEdges.size == 1;
+
+context model::components::LoginHandler ERROR "All incoming DomainAttribute parameters for a DOMAIN_OBJECT LoginHandler must belong to the same DomainSchema":
+	type != model::components::LoginHandlerTypes::DOMAIN_OBJECT ||
+	inParameterEdges.from.eContainer.typeSelect(model::domain::DomainSchema).toSet().size == 1;
+
 context model::operations::DecisionNode ERROR "A compare DecisionNode must have at least two data flows in to compare" :
 	(name == "equal?" && inFlows.size >= 2) 
 	|| (name != "equal?"); 

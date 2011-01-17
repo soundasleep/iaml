@@ -34,7 +34,7 @@ public class MapTextFieldInput extends MapsCodegenTestCase {
 	/**
 	 * 
 	 * @implementation Map
-	 * 		A {@model Map} that is unitialized will normally display anyway, at
+	 * 		A {@model Map} that is unitialised will normally display anyway, at
 	 * 		any location.
 	 * 
 	 * @throws Exception

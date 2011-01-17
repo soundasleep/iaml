@@ -7,6 +7,9 @@
 «EXTENSION template::GeneratorExtensions»
 
 /**
+ * TODO when removing a Role, only the Permissions <em>unique</em> to that Role
+ * should be removed from the current user instance.
+ *
  * @implementation Role,Permission
  *		When a {@model UserInstance} has a {@model Role} removed, all inherited
  *		{@model Permission}s with that {@model Role} are also removed.

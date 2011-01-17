@@ -275,6 +275,11 @@ rule "If a Role is defined, a default role User is also defined"
 
 end
 
+/**
+ * @inference Role
+ *		The <i>default {@model Role}</i> will contain a default
+ *		{@model DomainAttribute} {@model DomainAttribute#name named} 'email'.
+ */
 rule "'User' role contains a default attribute 'email'"
 	when
 		root : InternetApplication ( )
@@ -292,6 +297,11 @@ rule "'User' role contains a default attribute 'email'"
 
 end
 
+/**
+ * @inference Role
+ *		The <i>default {@model Role}</i> will contain a default
+ *		{@model DomainAttribute} {@model DomainAttribute#name named} 'password'.
+ */
 rule "'User' role contains a default attribute 'password'"
 	when
 		root : InternetApplication ( )
@@ -526,6 +536,11 @@ rule "A separate AccessControlHandler that creates a LoginHandler should have th
 
 end
 
+/**
+ * @inference Role
+ *		All {@model Role}s that do not {@model ExtendsEdge extend} another {@model Role}
+ *		will {@model ExtendsEdge extend} the <i>default {@model Role}</i>.
+ */
 rule "Any role should extend the default User role"
 	when
 		root : InternetApplication ( )

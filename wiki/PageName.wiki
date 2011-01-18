@@ -1,0 +1,17 @@
+#summary A summary of the elements used in operational modelling.
+#labels EndUser,Featured
+
+=Introduction=
+
+IAML defines a number of [http://openiaml.org/model/VisibleThing visual elements] which may be rendered. Their actual rendering depends on the implementation of the language, but some sample representations are provided here.
+
+<wiki:toc max_depth="2"/>
+
+|| *Model Element* || *Sample Representation* ||
+|| [http://openiaml.org/model/Button Button] || [http://iaml.googlecode.com/svn/wiki/interface/button.png] ||
+|| [http://openiaml.org/model/InputTextField InputTextField] || [http://iaml.googlecode.com/svn/wiki/interface/input-text-field.png] ||
+|| [http://openiaml.org/model/InputForm InputForm] || [http://iaml.googlecode.com/svn/wiki/interface/input-form.png] ||
+|| [http://openiaml.org/model/Map Map] || [http://iaml.googlecode.com/svn/wiki/interface/map.png] ||
+|| [http://openiaml.org/model/MapPoint MapPoint] || [http://iaml.googlecode.com/svn/wiki/interface/map-point.png] ||
+|| [http://openiaml.org/model/IteratorList IteratorList] || [http://iaml.googlecode.com/svn/wiki/interface/iterator-list.png] ||
+|| [http://openiaml.org/model/Hidden Hidden] || _n/a_ ||

@@ -787,7 +787,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * @return the SQL result set
 	 * @throws Exception
 	 */
-	protected ResultSet loadDatabaseQuery(String dbName, String query) throws Exception {
+	public ResultSet loadDatabaseQuery(String dbName, String query) throws Exception {
 		// refresh the workspace
 		assertTrue(getProject().refreshProject().isOK());
 		

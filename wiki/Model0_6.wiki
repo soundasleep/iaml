@@ -88,6 +88,7 @@ The style and design of model elements has been refreshed, and unified according
   # Documentation
     * The element export script now also exports to SVG, as well as PNG (issue 193)
     * The documentation has not been fully migrated yet, nor all of the example models migrated yet, but this will be completed before 0.6.
+    * Wrote up a list of sample representations of user interface elements in [InterfaceElements]
 
 =Model 0.6=
 

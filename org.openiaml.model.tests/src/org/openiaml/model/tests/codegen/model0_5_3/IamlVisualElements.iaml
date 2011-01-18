@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.domain="http://openiaml.org/model/domain" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12d9744b5d0.1">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Frame">
+    <elements xsi:type="iaml.domain:DomainIterator" id="domain.12d9744c1a7.1c" name="Select contents" outWires="wires.12d9744bb4e.1" limit="10" outSelects="domain.12d9744c1a7.37">
+      <wires xsi:type="iaml.wires:SetWire" id="wires.12d9744bb4e.1" name="set" from="domain.12d9744c1a7.1c" to="visual.12d9744b831.aa"/>
+      <selectEdges id="domain.12d9744c1a7.37" from="domain.12d9744c1a7.1c" to="domain.12d9744c1a7.12"/>
+    </elements>
+    <scopes xsi:type="iaml.visual:Frame" id="visual.12d9744b831.a" name="Frame"/>
+    <children xsi:type="iaml.visual:InputForm" id="visual.12d9744b831.13" name="Input Form">
+      <children xsi:type="iaml.visual:InputTextField" id="visual.12d9744b831.28" name="Input Text Field"/>
+      <children xsi:type="iaml.visual:Button" id="visual.12d9744b831.2a" name="Button"/>
+    </children>
+    <children xsi:type="iaml.visual:Label" id="visual.12d9744b831.56" name="Label" defaultValue="Label"/>
+    <children xsi:type="iaml.visual:Map" id="visual.12d9744b831.57" name="Map">
+      <children xsi:type="iaml.visual:MapPoint" id="visual.12d9744b831.83" name="Map Point"/>
+    </children>
+    <children xsi:type="iaml.visual:IteratorList" inWires="wires.12d9744bb4e.1" id="visual.12d9744b831.aa" name="Iterator List"/>
+    <children xsi:type="iaml.visual:Hidden" id="visual.12d9744b831.ab" name="Hidden"/>
+  </scopes>
+  <schemas id="domain.12d9744c1a7.8" name="Iterator List contents" inSchemas="domain.12d9744c1a7.13">
+    <attributes id="model.12d9744b5d0.3f" name="value"/>
+    <attributes id="model.12d9744b5d0.41" name="key"/>
+  </schemas>
+  <sources id="domain.12d9744c1a7.12" name="Iterator List database" outSchemas="domain.12d9744c1a7.13" inSelects="domain.12d9744c1a7.37">
+    <schemaEdges id="domain.12d9744c1a7.13" from="domain.12d9744c1a7.12" to="domain.12d9744c1a7.8"/>
+  </sources>
+</iaml:InternetApplication>

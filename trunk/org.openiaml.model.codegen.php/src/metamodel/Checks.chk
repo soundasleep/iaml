@@ -229,6 +229,10 @@ context model::domain::DomainIterator ERROR "A DomainIterator can only have one 
 context model::domain::DomainSchema WARNING "A DomainSchema should have at least one DomainSource specified" :
 	inSchemas.size >= 1;
 
+// TODO should this become an Error?
+context model::domain::DomainIterator WARNING "A DomainIterator should have one DomainSource specified" :
+	outSelects.size == 1;
+
 context model::ActionEdge WARNING "Unknown outgoing ActionEdge '" + name + "' from this AccessControlHandler" :
 	(!model::components::AccessControlHandler.isInstance(from)) ||
 		(name == "login" || name == "logout" || name == "success");

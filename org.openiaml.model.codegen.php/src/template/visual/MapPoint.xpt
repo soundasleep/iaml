@@ -236,14 +236,14 @@
 «DEFINE staticInitialMapPointValue(model::visual::Frame currentFrame) FOR model::Property»
 	«IF containingSession(this) == null»
 		«REM»contained in a Frame or InternetApplication: a static value«ENDREM»
-		if (get_application_value("«safeNameString(id)»", null) !== null) {
+		if (get_application_value("«safeNameString(id)»", null) !== null || /* or a default value is set */ "«escapeString(defaultValue)»") {
 			$value = get_application_value("«safeNameString(id)»", "«escapeString(defaultValue)»");
 			$point_address = $value;
 			$point_visible = true;
 		}		
 	«ELSE»
 		«REM»contained in a Session: a session value«ENDREM»
-		if (has_session("«safeName(containingSession(this))»_«safeNameString(id)»", null) !== null) {
+		if (has_session("«safeName(containingSession(this))»_«safeNameString(id)»", null) !== null || /* or a default value is set */ "«escapeString(defaultValue)»") {
 			$value = require_session("«safeName(containingSession(this))»_«safeNameString(id)»", "«escapeString(defaultValue)»");
 			$point_address = $value;
 			$point_visible = true;

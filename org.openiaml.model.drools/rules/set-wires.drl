@@ -789,6 +789,9 @@ rule "Refresh Domain Object mappings (except for generated primary keys) when In
 		originalAttribute : DomainAttribute ( primaryKey == false || isGenerated == false )
 		attribute : DomainAttributeInstance( eContainer == instance )
 		ExtendsEdge ( from == attribute, to == originalAttribute )
+
+		// not extending ANY kind of primary key
+		eval( functions.notExtendingPrimaryKey( originalAttribute ) )
 		
 		not ( tf : VisibleThing( eContainer == form, eval(functions.nameMatches( attribute, tf )) ) )
 

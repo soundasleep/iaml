@@ -24,6 +24,7 @@ public class AllModel0_5_3CodegenTests {
 		suite.addTestSuite(HiddenFieldAsParameter.class);
 		suite.addTestSuite(DetailWireOnSetIteratorList.class);
 		suite.addTestSuite(CustomHeaderFooter.class);
+		suite.addTestSuite(IamlVisualElements.class);
 
 		return suite;
 	}

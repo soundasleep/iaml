@@ -89,11 +89,19 @@ The style and design of model elements has been refreshed, and unified according
     * The element export script now also exports to SVG, as well as PNG (issue 193)
     * The documentation has not been fully migrated yet, nor all of the example models migrated yet, but this will be completed before 0.6.
 
-=Model 0.6=
+=Model 0.5.3=
 
-  _Currently under development._
+*Released [http://journals.jevon.org/users/jevon-phd/entry/19886 January 2011]*
+
+This release is mostly bug fixes and other small changes. The metamodel may be changing significantly in the next release (as the thesis requires) so this is an interim release before these changes proceed. Many [http://code.google.com/p/iaml/issues/list?can=1&q=label%3AMilestone-Release0.5.3 improvements have been completed].
+
+There has also been some performance improvements, such as [http://code.google.com/p/iaml/issues/detail?id=210 reducing the size of generated models], [http://code.google.com/p/iaml/source/detail?r=2494 improving Drools rule performance] and [http://code.google.com/p/iaml/source/detail?r=2527 improvements to Modeldoc].
 
 ==Changes==
 
   # Documentation
     * Wrote up a list of sample representations of user interface elements in [InterfaceElements]
+
+=Model 0.6=
+
+  _Currently under development._

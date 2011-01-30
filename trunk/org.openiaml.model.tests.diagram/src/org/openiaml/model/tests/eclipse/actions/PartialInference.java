@@ -233,11 +233,11 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		ShapeNodeEditPart update = assertHasOperation(editor_text, "update", false);
 		ShapeNodeEditPart init = assertHasOperation(editor_text, "init", false);
 		ShapeNodeEditPart fieldValue = assertHasFieldValue(editor_text, false);
-		ShapeNodeEditPart condition = assertHasCompositeCondition(editor_text, "fieldValue is set", false);
+		ShapeNodeEditPart condition = assertHasPrimitiveCondition(editor_text, "fieldValue is set", false);
 		
 		// model 0.4.4
 		ShapeNodeEditPart label = assertHasLabel(editor_text, "Warning", false);
-		ShapeNodeEditPart canCast = assertHasCompositeCondition(editor_text, "can cast?", false);
+		ShapeNodeEditPart canCast = assertHasPrimitiveCondition(editor_text, "can cast?", false);
 
 		// model 0.5.1
 		ShapeNodeEditPart currentInput = assertHasProperty(editor_text, "currentInput", false);
@@ -286,7 +286,7 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		// use checkPartialInferenceEditor() to check the base elements; should not have changed 
 		checkPartialInferenceEditor(22);
 		
-		ShapeNodeEditPart condition2 = assertHasCompositeCondition(editor_text, "fieldValue is set", true);
+		ShapeNodeEditPart condition2 = assertHasPrimitiveCondition(editor_text, "fieldValue is set", true);
 
 		ShapeNodeEditPart edit2 = assertHasEventTrigger(editor_text, true, ModelPackage.eINSTANCE.getChangeable_OnChange());
 		ShapeNodeEditPart update2 = assertHasOperation(editor_text, "update", true);
@@ -294,7 +294,7 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 
 		// model 0.4.4
 		ShapeNodeEditPart label2 = assertHasLabel(editor_text, "Warning", true);
-		ShapeNodeEditPart canCast2 = assertHasCompositeCondition(editor_text, "can cast?", true);
+		ShapeNodeEditPart canCast2 = assertHasPrimitiveCondition(editor_text, "can cast?", true);
 
 		// all generated
 		assertGenerated(edit2);

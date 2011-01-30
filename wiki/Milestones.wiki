@@ -196,6 +196,14 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
     * The element export script now also exports to SVG, as well as PNG (issue 193)
     * The documentation has not been fully migrated yet, nor all of the example models migrated yet, but this will be completed before 0.6.
 
+==Release 0.5.3==
+([http://code.google.com/p/iaml/issues/list?can=1&q=label%3AMilestone-Release0.5.3 Resolved issues])
+([http://journals.jevon.org/users/jevon-phd/entry/19886 Released] January 2011)
+  # [http://code.google.com/p/iaml/wiki/Model0_6#Model_0.5.3 Various fixes]
+    * Various performance improvements
+  # Documentation
+    * Wrote up a list of sample representations of user interface elements in [InterfaceElements]
+
 =Release 0.6=
 ([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.6 Outstanding issues])
   # [Model0_6 Expand IAML model]

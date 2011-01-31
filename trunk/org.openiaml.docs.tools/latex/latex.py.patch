@@ -1,0 +1,26 @@
+--- C:/Documents and Settings/jmwright.MASSEY/workspace/jmwright/research/trunk/thesis/common/doc-tools/latex.py	Mon Jan 31 17:59:18 2011
++++ C:/Documents and Settings/jmwright.MASSEY/workspace/jmwright/research/trunk/thesis/common/doc-tools/latex-new.py	Mon Jan 31 18:13:53 2011
+@@ -18,7 +18,10 @@
+ 
+ 
+ def escape_tex(text, commandprefix):
+-    return text.replace('\\', '\x00'). \
++    return text.replace('\\!!\\', '\x05'). \
++    			replace('\\!!{', '\x06'). \
++    			replace('\\!!}', '\x07'). \
++    			replace('\\', '\x00'). \
+                 replace('{', '\x01'). \
+                 replace('}', '\x02'). \
+                 replace('^', '\x03'). \
+@@ -27,7 +30,10 @@
+                 replace('\x01', r'\%sZob{}' % commandprefix). \
+                 replace('\x02', r'\%sZcb{}' % commandprefix). \
+                 replace('\x03', r'\%sZca{}' % commandprefix). \
+-                replace('\x04', r'\%sZus{}' % commandprefix)
++                replace('\x04', r'\%sZus{}' % commandprefix). \
++                replace('\x07', '}'). \
++                replace('\x06', '{'). \
++                replace('\x05', '\\')
+ 
+ 
+ DOC_TEMPLATE = r'''

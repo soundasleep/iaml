@@ -102,7 +102,7 @@ public class IamlBreadcrumb {
 			if (object instanceof NamedElement) {
 				NamedElement e = (NamedElement) object;
 				if (e.getName() != null && !e.getName().isEmpty()) {
-					return "'" + e.getName() + "'";		// 'root'
+					return e.eClass().getName() + ": '" + e.getName() + "'";		// InternetApplication: 'root'
 				} else {
 					return e.eClass().getName();			// InternetApplication
 				}

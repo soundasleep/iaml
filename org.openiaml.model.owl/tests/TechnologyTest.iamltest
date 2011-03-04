@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:iaml="http://openiaml.org/iaml.test">
+	<pages id="page1">
+		<children xsi:type="iaml:BooleanProperty" id="property1" />
+		<children xsi:type="iaml:BooleanProperty" id="property2" />
+		<editors xsi:type="iaml:Checkbox" id="checkbox1" for="property1" />
+	</pages> 
+</iaml:InternetApplication>

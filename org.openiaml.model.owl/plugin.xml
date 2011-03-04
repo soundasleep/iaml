@@ -17,6 +17,13 @@
             genModel="model/simple.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://openiaml.org/iaml.test"
+            class="org.openiaml.model.test.iaml.IamlPackage"
+            genModel="model/technology.genmodel"/>
+   </extension>
+
 	<extension point="org.eclipse.ui.popupMenus">
       <objectContribution
             adaptable="false"

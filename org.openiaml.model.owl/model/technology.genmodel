@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.openiaml.model.owl/src"
+    modelPluginID="org.openiaml.model.owl" modelName="Technology" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>technology.ecore</foreignModel>
+  <genPackages prefix="IamlTest" basePackage="org.openiaml.model.test" disposableProviderFactory="true"
+      fileExtensions="iamltest" ecorePackage="technology.ecore#/">
+    <genClasses ecoreClass="technology.ecore#//InternetApplication">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference technology.ecore#//InternetApplication/pages"/>
+    </genClasses>
+    <genClasses ecoreClass="technology.ecore#//BooleanProperty"/>
+    <genClasses image="false" ecoreClass="technology.ecore#//Property"/>
+    <genClasses image="false" ecoreClass="technology.ecore#//Editor">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference technology.ecore#//Editor/for"/>
+    </genClasses>
+    <genClasses ecoreClass="technology.ecore#//Checkbox"/>
+    <genClasses ecoreClass="technology.ecore#//Page">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference technology.ecore#//Page/children"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference technology.ecore#//Page/editors"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="technology.ecore#//GeneratedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute technology.ecore#//GeneratedElement/id"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference technology.ecore#//GeneratedElement/generatedBy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute technology.ecore#//GeneratedElement/isGenerated"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

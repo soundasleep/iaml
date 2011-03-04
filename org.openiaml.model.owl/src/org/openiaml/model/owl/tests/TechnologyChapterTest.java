@@ -6,6 +6,7 @@ package org.openiaml.model.owl.tests;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -50,12 +51,12 @@ import com.hp.hpl.jena.util.PrintUtil;
 import com.hp.hpl.jena.vocabulary.ReasonerVocabulary;
 
 /**
- * Load and evaluate the IAML models and instances. 
+ * Test for using Jena for model completion, in thesis chapter "technology".
  * 
  * @author jmwright
  *
  */
-public class TransformIAMLToOwl extends ModelTestCase {
+public class TechnologyChapterTest extends ModelTestCase {
 
 	/**
 	 * Takes simple.ecore and translates it into simple.owl.
@@ -65,15 +66,15 @@ public class TransformIAMLToOwl extends ModelTestCase {
 	protected Model setupOwlTransform() throws Exception {
 
 		// copy over ecore file
-		File source = new File("../../org.openiaml.model/model/iaml.ecore");
+		File source = new File("model/technology.ecore");
 		// File source = new File("model/simple.ecore");
 		System.out.println(source.getAbsolutePath());
 		assertTrue("Source file exists: " + source, source.exists());
-		IFile target = getProject().getFile("iaml.ecore");
+		IFile target = getProject().getFile("technology.ecore");
 		assertFalse("Target file should not exist: " + target, target.exists());
 		copyFileIntoWorkspace(source, target);
 		assertTrue("Target file should exist: " + target, target.exists());
-		IFile transformed = getProject().getFile("iaml.owl");
+		IFile transformed = getProject().getFile("technology.owl");
 		assertFalse("Final file should not exist: " + transformed, transformed.exists());
 		
 		// try the transformation action
@@ -90,9 +91,9 @@ public class TransformIAMLToOwl extends ModelTestCase {
 	
 	public void testLogger() throws Exception {
 		
-		Logger.getLogger(TransformIAMLToOwl.class).warn("test");
-		Logger.getLogger(TransformIAMLToOwl.class).info("test");
-		Logger.getLogger(TransformIAMLToOwl.class).debug("test");
+		Logger.getLogger(TechnologyChapterTest.class).warn("test");
+		Logger.getLogger(TechnologyChapterTest.class).info("test");
+		Logger.getLogger(TechnologyChapterTest.class).debug("test");
 	}
 	
 	/**
@@ -192,13 +193,13 @@ public class TransformIAMLToOwl extends ModelTestCase {
 	public IFile testMyRdf() throws Exception {
 		// copy over ecore file
 		// File source = new File("../org.openiaml.model/model/iaml.ecore");
-		File source = new File("tests/SimpleTestCase.iaml");
+		File source = new File("tests/TechnologyTest.iamltest");
 		assertTrue("Source file exists: " + source, source.exists());
-		IFile target = getProject().getFile("SimpleTestCase.iaml");
+		IFile target = getProject().getFile("TechnologyTest.iamltest");
 		assertFalse("Target file should not exist: " + target, target.exists());
 		copyFileIntoWorkspace(source, target);
 		assertTrue("Target file should exist: " + target, target.exists());
-		IFile transformed = getProject().getFile("SimpleTestCase.rdf");
+		IFile transformed = getProject().getFile("TechnologyTest.rdf");
 		assertFalse("Final file should not exist: " + transformed, transformed.exists());
 
 		// load the model file
@@ -244,27 +245,36 @@ public class TransformIAMLToOwl extends ModelTestCase {
 	public void testEObjectRdfValidation1() throws Throwable {
 		try {
 		
+		// manually translate EMF instance into XML/RDF
 		IFile rdf = testMyRdf();
 
-		PrintUtil.registerPrefix("iaml", "http://openiaml.org/model0.5#");
+		PrintUtil.registerPrefix("iaml", "http://openiaml.org/iaml.test#");
 		Model model = FileManager.get().loadModel("file:" + rdf.getLocation().toString());
 		
-		/*
-		String rules = "[moreThan2Children: (?X rdf:type s:InternetApplication) (?X s:pages ?P1) (?X s:pages ?P2) notEqual(?P1, ?P2) -> (?X eg:moreThan2Children 'true') ]\n" +
-			"[validationRule: (?v rb:validation on()) -> " +
-			"[(?X rb:violation error('test', 'test', ?X)) <- " +
-			"(?X rdf:type s:InternetApplication) " +
-			"noValue(?X eg:moreThan2Children 'true') ]]";
-			*/
+		// load rules
+		File rulesFile = new File("rules/technology-test.txt");
+		assertTrue("Rules file " + rulesFile + " should exist", rulesFile.exists());
+		String rules = readFile(rulesFile);
 		
-		String rules = "";
-		
+		// create reasoner
 		Reasoner reason = new GenericRuleReasoner(Rule.parseRules(rules));
 		reason = reason.bindSchema(setupOwlTransform());
 		
+		// infer
 		InfModel inf = ModelFactory.createInfModel(reason, model);
 		ValidityReport valid = inf.validate();
 		assertIsValid(valid);
+		
+		// write out new model
+		File output = new File("tests/created.xml");
+		inf.write(new FileOutputStream(output));
+		
+		// print out contents of generated file
+		assertTrue("Output file " + output + " should exist", output.exists());
+		System.out.println(readFile(output));
+		
+		// output is RDF/XML; still needs translation back into an
+		// EMF instance. (future work)
 	
 		} catch (Throwable t) {
 			System.out.println(t.getMessage());

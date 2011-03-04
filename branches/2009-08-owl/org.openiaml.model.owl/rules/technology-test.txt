@@ -1,0 +1,26 @@
+[exampleModelCompletion_debug:
+	(?P rdf:type iaml:BooleanProperty)
+	noValue(?E iaml:for ?P)
+	->
+	print(?P)
+]
+
+[exampleModelCompletion:
+	(?P rdf:type iaml:BooleanProperty)
+	(?C iaml:children ?P)
+	noValue(?E iaml:for ?P)
+	makeSkolem(?A, ?P, ?C)
+	->
+	(?A rdf:type iaml:Checkbox)
+	(?A iaml:id 'generated')
+	(?A iaml:isGenerated 'true')
+	(?A iaml:for ?P)
+	(?C iaml:children ?A)
+	print(?A)
+]
+
+[allCheckboxes:
+	(?C rdf:type iaml:Checkbox)
+	->
+	print(?C)
+]

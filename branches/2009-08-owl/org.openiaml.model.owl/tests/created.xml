@@ -1,0 +1,190 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:iaml="http://openiaml.org/iaml.test#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" > 
+  <rdf:Description rdf:about="http://openiaml.org/iaml.test#_wQd7QUYXEeC6PJHWekLITQ">
+    <rdf:type rdf:resource="http://openiaml.org/iaml.test#InternetApplication"/>
+    <iaml:pages rdf:resource="http://openiaml.org/iaml.test#page1"/>
+    <iaml:isGenerated>false</iaml:isGenerated>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://openiaml.org/iaml.test#pages">
+    <rdfs:domain rdf:resource="http://openiaml.org/iaml.test#InternetApplication"/>
+    <rdfs:range rdf:resource="http://openiaml.org/iaml.test#Page"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A0">
+    <owl:onProperty rdf:resource="http://openiaml.org/iaml.test#children"/>
+    <owl:allValuesFrom rdf:resource="http://openiaml.org/iaml.test#Property"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A1">
+    <owl:onProperty rdf:resource="http://openiaml.org/iaml.test#generatedBy"/>
+    <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</owl:minCardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A2">
+    <owl:onProperty rdf:resource="http://openiaml.org/iaml.test#generatedBy"/>
+    <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</owl:maxCardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A3">
+    <owl:onProperty rdf:resource="http://openiaml.org/iaml.test#children"/>
+    <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</owl:minCardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://openiaml.org/iaml.test#isGenerated">
+    <rdfs:domain rdf:resource="http://openiaml.org/iaml.test#GeneratedElement"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://openiaml.org/iaml.test#property1">
+    <rdf:type rdf:resource="http://openiaml.org/iaml.test#BooleanProperty"/>
+    <iaml:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">property1</iaml:id>
+    <iaml:isGenerated>false</iaml:isGenerated>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://openiaml.org/iaml.test#">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://openiaml.org/iaml.test#Editor">
+    <rdfs:subClassOf rdf:nodeID="A4"/>
+    <rdfs:subClassOf rdf:nodeID="A5"/>
+    <rdfs:subClassOf rdf:resource="http://openiaml.org/iaml.test#GeneratedElement"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A4">
+    <owl:onProperty rdf:resource="http://openiaml.org/iaml.test#for"/>
+    <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</owl:minCardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://openiaml.org/iaml.test#GeneratedElement">
+    <rdfs:subClassOf rdf:nodeID="A6"/>
+    <rdfs:subClassOf rdf:nodeID="A1"/>
+    <rdfs:subClassOf rdf:nodeID="A7"/>
+    <rdfs:subClassOf rdf:nodeID="A2"/>
+    <rdfs:subClassOf rdf:nodeID="A8"/>
+    <rdfs:subClassOf rdf:nodeID="A9"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A10">
+    <owl:onProperty rdf:resource="http://openiaml.org/iaml.test#editors"/>
+    <owl:allValuesFrom rdf:resource="http://openiaml.org/iaml.test#Editor"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A11">
+    <iaml:for rdf:resource="http://openiaml.org/iaml.test#property2"/>
+    <iaml:isGenerated>true</iaml:isGenerated>
+    <iaml:id>generated</iaml:id>
+    <rdf:type rdf:resource="http://openiaml.org/iaml.test#Checkbox"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A12">
+    <owl:onProperty rdf:resource="http://openiaml.org/iaml.test#editors"/>
+    <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</owl:minCardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A8">
+    <owl:onProperty rdf:resource="http://openiaml.org/iaml.test#isGenerated"/>
+    <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</owl:cardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A6">
+    <owl:onProperty rdf:resource="http://openiaml.org/iaml.test#id"/>
+    <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</owl:minCardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://openiaml.org/iaml.test#Property">
+    <rdfs:subClassOf rdf:resource="http://openiaml.org/iaml.test#GeneratedElement"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A9">
+    <owl:onProperty rdf:resource="http://openiaml.org/iaml.test#generatedBy"/>
+    <owl:allValuesFrom rdf:resource="http://openiaml.org/iaml.test#GeneratedElement"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://openiaml.org/iaml.test#Page">
+    <rdfs:subClassOf rdf:nodeID="A3"/>
+    <rdfs:subClassOf rdf:nodeID="A12"/>
+    <rdfs:subClassOf rdf:nodeID="A0"/>
+    <rdfs:subClassOf rdf:nodeID="A10"/>
+    <rdfs:subClassOf rdf:resource="http://openiaml.org/iaml.test#GeneratedElement"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A13">
+    <owl:onProperty rdf:resource="http://openiaml.org/iaml.test#pages"/>
+    <owl:allValuesFrom rdf:resource="http://openiaml.org/iaml.test#Page"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A7">
+    <owl:onProperty rdf:resource="http://openiaml.org/iaml.test#id"/>
+    <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</owl:maxCardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://openiaml.org/iaml.test#id">
+    <rdfs:domain rdf:resource="http://openiaml.org/iaml.test#GeneratedElement"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://openiaml.org/iaml.test#BooleanProperty">
+    <rdfs:subClassOf rdf:resource="http://openiaml.org/iaml.test#Property"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://openiaml.org/iaml.test#generatedBy">
+    <rdfs:domain rdf:resource="http://openiaml.org/iaml.test#GeneratedElement"/>
+    <rdfs:range rdf:resource="http://openiaml.org/iaml.test#GeneratedElement"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://openiaml.org/iaml.test#checkbox1">
+    <rdf:type rdf:resource="http://openiaml.org/iaml.test#Checkbox"/>
+    <iaml:for rdf:resource="http://openiaml.org/iaml.test#property1"/>
+    <iaml:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">checkbox1</iaml:id>
+    <iaml:isGenerated>false</iaml:isGenerated>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://openiaml.org/iaml.test#property2">
+    <rdf:type rdf:resource="http://openiaml.org/iaml.test#BooleanProperty"/>
+    <iaml:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">property2</iaml:id>
+    <iaml:isGenerated>false</iaml:isGenerated>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://openiaml.org/iaml.test#children">
+    <rdfs:domain rdf:resource="http://openiaml.org/iaml.test#Page"/>
+    <rdfs:range rdf:resource="http://openiaml.org/iaml.test#Property"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://openiaml.org/iaml.test#page1">
+    <iaml:children rdf:nodeID="A11"/>
+    <rdf:type rdf:resource="http://openiaml.org/iaml.test#Page"/>
+    <iaml:children rdf:resource="http://openiaml.org/iaml.test#property1"/>
+    <iaml:children rdf:resource="http://openiaml.org/iaml.test#property2"/>
+    <iaml:editors rdf:resource="http://openiaml.org/iaml.test#checkbox1"/>
+    <iaml:id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">page1</iaml:id>
+    <iaml:isGenerated>false</iaml:isGenerated>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://openiaml.org/iaml.test#Checkbox">
+    <rdfs:subClassOf rdf:resource="http://openiaml.org/iaml.test#Editor"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://openiaml.org/iaml.test#InternetApplication">
+    <rdfs:subClassOf rdf:nodeID="A14"/>
+    <rdfs:subClassOf rdf:nodeID="A13"/>
+    <rdfs:subClassOf rdf:resource="http://openiaml.org/iaml.test#GeneratedElement"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://openiaml.org/iaml.test#for">
+    <rdfs:domain rdf:resource="http://openiaml.org/iaml.test#Editor"/>
+    <rdfs:range rdf:resource="http://openiaml.org/iaml.test#Property"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A5">
+    <owl:onProperty rdf:resource="http://openiaml.org/iaml.test#for"/>
+    <owl:allValuesFrom rdf:resource="http://openiaml.org/iaml.test#Property"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://openiaml.org/iaml.test#editors">
+    <rdfs:domain rdf:resource="http://openiaml.org/iaml.test#Page"/>
+    <rdfs:range rdf:resource="http://openiaml.org/iaml.test#Editor"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="A14">
+    <owl:onProperty rdf:resource="http://openiaml.org/iaml.test#pages"/>
+    <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#int">0</owl:minCardinality>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+  </rdf:Description>
+</rdf:RDF>

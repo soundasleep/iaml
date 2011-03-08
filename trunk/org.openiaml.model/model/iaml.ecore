@@ -416,7 +416,7 @@
       <details key="comment" value="classes that extend this SHOULDN'T contain wires, but GMF's limitations require it (see bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=249717)"/>
     </eAnnotations>
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="A temporary marker for classes that &lt;em>shouldn't&lt;em> {@model ContainsWires contain wires}, but GMF limitations require it."/>
+      <details key="documentation" value="A temporary marker for classes that &lt;em>shouldn't&lt;/em> {@model ContainsWires contain wires}, but GMF limitations require it."/>
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="GeneratedElement" abstract="true" interface="true">

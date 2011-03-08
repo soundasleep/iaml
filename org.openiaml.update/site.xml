@@ -36,9 +36,6 @@
    <feature url="features/org.openiaml.model.editor_0.5.2.201007051557.jar" id="org.openiaml.model.editor" version="0.5.2.201007051557">
       <category name="org.openiaml.model.editor"/>
    </feature>
-   <feature url="features/org.openiaml.model.editor_0.5.3.201101311119.jar" id="org.openiaml.model.editor" version="0.5.3.201101311119">
-      <category name="org.openiaml.model.editor"/>
-   </feature>
    <feature url="features/ca.ecliptical.emf.xpath_2.0.1.20071218052038.jar" id="ca.ecliptical.emf.xpath" version="2.0.1.20071218052038">
       <category name="ca-ecliptical-emf-xpath"/>
    </feature>
@@ -47,6 +44,9 @@
    </feature>
    <feature url="features/ca.ecliptical.emf.xpath.source_2.0.1.20071218052038.jar" id="ca.ecliptical.emf.xpath.source" version="2.0.1.20071218052038">
       <category name="ca-ecliptical-emf-xpath"/>
+   </feature>
+   <feature url="features/org.openiaml.model.editor_0.5.3.201103081642.jar" id="org.openiaml.model.editor" version="0.5.3.201103081642">
+      <category name="org.openiaml.model.editor"/>
    </feature>
    <category-def name="org.openiaml.model.editor" label="IAML Modelling Environment"/>
    <category-def name="org.openiaml.verification.crocopat.feature" label="Verification with Crocopat (Win-only)"/>

@@ -25,7 +25,7 @@ into:
 
 */
 
-define("MAX_LINE", 1048576);
+define("MAX_LINE", 1024);
 
 if ($argc < 2) {
 	throw new Exception("Expected arguments: [input file]");

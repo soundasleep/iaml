@@ -30,11 +30,6 @@ Name: OpenArchitectureWare update site
 URL: http://www.openarchitectureware.org/updatesite/milestone/
 }}}
 
-{{{
-Name: Ecliptical Software update site
-URL: http://www.eclipticalsoftware.com/updates
-}}}
-
 Click the "Add" button and add the following update site to your Eclipse installation. All updates to the IAML project will be provided through this update site, and Eclipse includes functionality to automatically update your installation when new versions are released.
 
 {{{
@@ -47,6 +42,8 @@ URL:  http://iaml.googlecode.com/svn/trunk/org.openiaml.update/
 Once the update site has been added, you should be able to select the latest version of the IAML Modelling Platform to install.
 
 [http://iaml.googlecode.com/svn/wiki/install/software-select.png]
+
+You will also need to install the *EMF XPath Support*.
 
 Click "Next" and continue through the installation wizard. Eclipse will automatically contact relevant update sites and locate the required dependencies of the IAML plugin. This may take a significant period of time. Once all of these dependencies have been downloaded, the platform will be installed, and you will be asked to restart your platform (highly recommended).
 

@@ -204,6 +204,9 @@ I hope to also use [http://c2.com/cgi/wiki?TestDrivenDevelopment Test Driven Dev
   # Documentation
     * Wrote up a list of sample representations of user interface elements in [InterfaceElements]
 
+(Re-released March 2011)
+  # Resolved issue 227.
+
 =Release 0.6=
 ([http://code.google.com/p/iaml/issues/list?can=2&q=label%3AMilestone-Release0.6 Outstanding issues])
   # [Model0_6 Expand IAML model]

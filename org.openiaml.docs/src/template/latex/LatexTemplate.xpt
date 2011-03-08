@@ -79,7 +79,7 @@
 \end{figure}
 
 % Rationale behind the visual representation
-A visual representation of this element is provided in Figure \ref{fig:reference-«name»}.
+A visual representation of this element is provided in Figure~\ref{fig:reference-«name»}.
 \textbf{TODO} Visual representation rationale.
 % It uses the orange background of all input elements\footnote{Not implemented yet}, and uses a textual icon of \verb|'A'| to signify it is editable.
 «ENDIF»

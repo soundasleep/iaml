@@ -11,11 +11,14 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference technology.ecore#//InternetApplication/pages"/>
     </genClasses>
     <genClasses ecoreClass="technology.ecore#//BooleanProperty"/>
-    <genClasses image="false" ecoreClass="technology.ecore#//Property"/>
+    <genClasses image="false" ecoreClass="technology.ecore#//Property">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference technology.ecore#//Property/editor"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="technology.ecore#//Editor">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference technology.ecore#//Editor/for"/>
     </genClasses>
     <genClasses ecoreClass="technology.ecore#//Checkbox"/>
+    <genClasses ecoreClass="technology.ecore#//Textbox"/>
     <genClasses ecoreClass="technology.ecore#//Page">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference technology.ecore#//Page/children"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference technology.ecore#//Page/editors"/>

@@ -8,11 +8,16 @@
         eType="#//Page" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanProperty" eSuperTypes="#//Property"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Property" abstract="true" eSuperTypes="#//GeneratedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Property" abstract="true" eSuperTypes="#//GeneratedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="editor" eType="#//Editor"
+        eOpposite="#//Editor/for"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Editor" abstract="true" eSuperTypes="#//GeneratedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="for" upperBound="-1" eType="#//Property"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="for" eType="#//Property"
+        eOpposite="#//Property/editor"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Checkbox" eSuperTypes="#//Editor"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Textbox" eSuperTypes="#//Editor"/>
   <eClassifiers xsi:type="ecore:EClass" name="Page" eSuperTypes="#//GeneratedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
         eType="#//Property" containment="true"/>

@@ -3,6 +3,6 @@
 	<pages id="page1">
 		<children xsi:type="iaml:BooleanProperty" id="property1" />
 		<children xsi:type="iaml:BooleanProperty" id="property2" />
-		<editors xsi:type="iaml:Checkbox" id="checkbox1" for="property1" />
+		<editors xsi:type="iaml:Checkbox" id="editor1" for="property1" />
 	</pages> 
 </iaml:InternetApplication>

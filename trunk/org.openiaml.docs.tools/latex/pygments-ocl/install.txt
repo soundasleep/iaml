@@ -4,7 +4,7 @@ First, copy to your /pygments/lexers folder.
 
 Then install the mappings:
 
-  $ python _mappings.py
+  $ python _mapping.py
 
 You should then see the lexer listed:
 

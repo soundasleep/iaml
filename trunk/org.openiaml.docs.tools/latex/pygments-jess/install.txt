@@ -1,0 +1,11 @@
+How to install the Jess mapping.
+
+First, copy to your /pygments/lexers folder.
+
+Then install the mappings:
+
+  $ python _mapping.py
+
+You should then see 'jess' listed:
+
+  $ pygmentize -L lexers

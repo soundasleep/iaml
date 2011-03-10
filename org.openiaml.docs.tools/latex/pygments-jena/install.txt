@@ -1,0 +1,11 @@
+How to install the Jena mapping.
+
+First, copy to your /pygments/lexers folder.
+
+Then install the mappings:
+
+  $ python _mapping.py
+
+You should then see 'jena' listed:
+
+  $ pygmentize -L lexers

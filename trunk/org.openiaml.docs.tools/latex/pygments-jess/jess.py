@@ -57,7 +57,6 @@ class JessLexer(RegexLexer):
             (r"'\\.'|'[^\\]'|'\\u[0-9a-f]{4}'", String.Char),
             (r'(\?)([a-zA-Z_][a-zA-Z0-9_]*)', bygroups(Operator, Name.Attribute)),
             (r'\?\*?[a-zA-Z_][a-zA-Z0-9_]*\*?', Name.Variable),
-            (r'[a-zA-Z_][a-zA-Z0-9_]*:', Name.Label),
             (r'[a-zA-Z_\$][a-zA-Z0-9_]*', Name),
             (r'[~\^\*!%&\[\]\(\)\{\}<>\|+=:;,./?-]', Operator),
             (r'(\-\-|\+\+|\*\*|<=|>=|=>|<>)', Operator),

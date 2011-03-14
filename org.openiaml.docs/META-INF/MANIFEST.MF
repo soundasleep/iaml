@@ -14,13 +14,11 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.junit,
  org.openiaml.model;bundle-version="0.3.1",
- org.openarchitectureware.core.expressions;bundle-version="4.3.1",
  org.openiaml.model.tests;bundle-version="0.3.1",
  org.eclipse.jdt.core;bundle-version="3.5.0",
  org.openiaml.model.drools;bundle-version="0.3.1",
  org.openarchitectureware.workflow;bundle-version="4.3.1",
- org.openarchitectureware.core.workflow;bundle-version="4.3.1",
- org.openarchitectureware.core.xpand2;bundle-version="4.3.1",
  org.openiaml.iacleaner;bundle-version="0.2.0",
- org.openiaml.emf.properties;bundle-version="0.5.2"
+ org.openiaml.emf.properties;bundle-version="0.5.2",
+ org.openarchitectureware.dependencies;bundle-version="4.3.1"
 Bundle-ActivationPolicy: lazy

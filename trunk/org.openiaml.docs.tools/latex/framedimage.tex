@@ -4,6 +4,8 @@
 % param4: the image caption
 % param5: the reference label
 \newcommand{\framedimage}[5]{
+  \renewcommand\arraystretch{0.9}
+  \renewcommand\tabcolsep{2pt}
   \centering
   \begin{tabular}{@{}lllr@{}}
     
@@ -11,7 +13,7 @@
   \arrayrulecolor{gray}
   \cline{1-1} \cline{3-4}
   \arrayrulecolor{gray}
-  {\color{gray}\vline} & & & {\color{gray}\vline} \\
+  {\color{gray}\vline} & \vspace{-6pt} & & {\color{gray}\vline} \\
   \arrayrulecolor{gray}
   {\color{gray}\vline} & \multicolumn{2}{c}{\includegraphics[width={#2}]{#3}} & {\color{gray}\vline} \\
     

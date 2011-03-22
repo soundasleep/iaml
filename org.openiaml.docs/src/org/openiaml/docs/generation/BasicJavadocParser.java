@@ -75,7 +75,7 @@ public class BasicJavadocParser {
 					if (line.length() > next2 + 2) {
 						if (!tagText.contains(" ")) {
 							String s2 = line.substring( next2 + 1, next2 + 3 );
-							if (s2 != null && s2.length() == 2 && s2.charAt(0) == 's' && Character.isWhitespace(s2.charAt(1))) {
+							if (s2 != null && s2.length() == 2 && s2.charAt(0) == 's' && isWordSeperator(s2.charAt(1))) {
 								next2++;	// keep whitespace
 								tagText += " " + tagText + "s";
 							}
@@ -100,6 +100,20 @@ public class BasicJavadocParser {
 		
 	}
 	
+	/**
+	 * Is the given character a word separator character? A word separator character
+	 * is one of the following:
+	 * 
+	 * <ul>
+	 * <li>{@link Character#isWhitespace(char)}
+	 * <li>One of the following: <code>.,;:</code>
+	 * </ul>
+	 */
+	private boolean isWordSeperator(char c) {
+		return Character.isWhitespace(c) ||
+			c == '.' || c == ',' || c == ';' || c == ':';
+	}
+
 	/**
 	 * Get the first comment of the file, or does nothing if there
 	 * is no first comment of the file. The first comment is then parsed

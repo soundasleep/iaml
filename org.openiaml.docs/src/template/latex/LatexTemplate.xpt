@@ -390,7 +390,7 @@ A visual representation of this element is provided in Figure~\ref{fig:reference
 «ENDIF-»«ENDDEFINE»
 
 «DEFINE javadocElementToLatex FOR modeldoc::JavadocTextElement-»
-«IF !(value.startsWith(",") || value.startsWith(".") || value.startsWith("?"))»«" "»«ENDIF»«convertHTMLIntoLatex(value)-»
+«IF !(value.startsWith(",") || value.startsWith(".") || value.startsWith("?") || value.startsWith(")"))»«" "»«ENDIF»«convertHTMLIntoLatex(value)-»
 «ENDDEFINE»
 
 «REM»the formatting is ugly, but we sadly can't have _any_ whitespace«ENDREM»

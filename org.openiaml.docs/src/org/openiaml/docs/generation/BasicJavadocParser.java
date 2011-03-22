@@ -106,12 +106,15 @@ public class BasicJavadocParser {
 	 * 
 	 * <ul>
 	 * <li>{@link Character#isWhitespace(char)}
-	 * <li>One of the following: <code>.,;:</code>
+	 * <li>One of the following: <code>.,;:()[]'"!?-</code>
 	 * </ul>
 	 */
 	private boolean isWordSeperator(char c) {
 		return Character.isWhitespace(c) ||
-			c == '.' || c == ',' || c == ';' || c == ':';
+			c == '.' || c == ',' || c == ';' || c == ':' || 
+			c == '(' || c == ')' || c == '[' || c == ']' ||
+			c == '\'' || c == '"' || c == '!' || c == '?' ||
+			c == '-';
 	}
 
 	/**

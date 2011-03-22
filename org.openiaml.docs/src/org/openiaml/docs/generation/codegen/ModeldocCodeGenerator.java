@@ -17,11 +17,14 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EClass;
 import org.openarchitectureware.workflow.WorkflowRunner;
 import org.openarchitectureware.workflow.util.ProgressMonitorAdapter;
+import org.openiaml.docs.modeldoc.DroolsPackage;
 import org.openiaml.docs.modeldoc.JavadocClassReference;
 import org.openiaml.docs.modeldoc.JavadocFragment;
 import org.openiaml.docs.modeldoc.JavadocMethodReference;
 import org.openiaml.docs.modeldoc.JavadocTagElement;
 import org.openiaml.docs.modeldoc.JavadocTextElement;
+import org.openiaml.docs.modeldoc.ModelDocumentation;
+import org.openiaml.docs.modeldoc.Reference;
 
 /**
  * @author jmwright
@@ -196,6 +199,20 @@ public class ModeldocCodeGenerator {
 			s.append(' ');
 		}
 		return s.toString();
+	}
+	
+	/**
+	 * Get the total number of rules used in this system.
+	 */
+	public static int getTotalRuleCount(ModelDocumentation root) {
+		int count = 0;
+		for (Reference ref : root.getReferences()) {
+			if (ref instanceof DroolsPackage) {
+				DroolsPackage pkg = (DroolsPackage) ref;
+				count += pkg.getUniqueRules();
+			}
+		}
+		return count;
 	}
 		
 }

@@ -112,7 +112,7 @@ public class LoadSemanticsFromRules extends DocumentationHelper implements ILoad
 			}
 			
 			// parse all the semantics from the rules
-			parser.findJavadocTagsInTextFile(file, this, factory, root, new IJavadocReferenceCreator() {
+			String[] lines = parser.findJavadocTagsInTextFile(file, this, factory, root, new IJavadocReferenceCreator() {
 				
 				public JavaElement createReference(String[] lines, int line) {
 					DroolsRule rule = createDroolsRule(factory, line, lines);
@@ -123,17 +123,41 @@ public class LoadSemanticsFromRules extends DocumentationHelper implements ILoad
 				}
 				
 			});
+
+			// finally, find the number of unique rules
+			drools.setUniqueRules(getUniqueRuleCount(factory, lines));
+
 		} catch (SemanticHandlerException e) {
 			throw new DocumentationGenerationException("Could not process rule file '" + file + "': " + e.getMessage(), e);
 		}
-		
+
+	}
+	
+	/**
+	 * Find the number of unique rules in this file.
+	 * It achieves this naively by simply searching for lines that
+	 * start with "<code>rule </code>", as per {@link #createDroolsRule(ModeldocFactory, int, String[])}.
+	 * 
+	 * @param factory
+	 * @param lines
+	 * @return the number of unique rules found
+	 * @see #createDroolsRule(ModeldocFactory, int, String[])
+	 */
+	protected int getUniqueRuleCount(ModeldocFactory factory, String[] lines) {
+		int count = 0;
+		for (int line = 0; line < lines.length; line++) {
+			if (lines[line].trim().startsWith("rule ")) {
+				count++;
+			}
+		}
+		return count;
 	}
 
 	/**
 	 * Parse down until we find a line starting with 
 	 * <code>rule "rule title"</code>.
 	 *  
-	 * @return a newly created rule, or null if none could be found
+	 * @return a newly created rule, or <code>null</code> if none could be found
 	 */
 	private DroolsRule createDroolsRule(ModeldocFactory factory, int i, String[] lines) {
 		for (int j = i; j < lines.length; j++) {

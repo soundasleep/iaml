@@ -433,20 +433,16 @@
 «LET value.trim().split(" ") AS bits-»
 «IF bits.first().contains("#")-»
 «LET bits.first().trim().split("#") AS hashBits-»
-<a href="«hashBits.first()».html#«hashBits.withoutFirst().first()»">
-«ENDLET-»
+<a href="«hashBits.first()».html#«hashBits.withoutFirst().first()»">«ENDLET-»
 «ELSE-»
-<a href="«bits.first()».html">
-«ENDIF-»
+<a href="«bits.first()».html">«ENDIF-»
 «FOREACH bits.withoutFirst().withoutLast() AS s»«s» «ENDFOREACH»«bits.last()»</a>«ENDLET-»
 «ELSE-»
 «IF value.trim().contains("#")-»
 «LET value.trim().split("#") AS hashBits-»
-<a href="«hashBits.first()».html#«hashBits.withoutFirst().first()»">«hashBits.withoutFirst().first()»</a>
-«ENDLET-» 
+<a href="«hashBits.first()».html#«hashBits.withoutFirst().first()»">«hashBits.withoutFirst().first()»</a>«ENDLET-» 
 «ELSE-»
-<a href="«value».html">«value»</a>
-«ENDIF-»
+<a href="«value».html">«value»</a>«ENDIF-»
 «ENDIF-»
 «ENDIF-»
 «ENDDEFINE»

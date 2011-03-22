@@ -341,7 +341,7 @@ public class BasicJavadocParser {
 			}
 			
 			// add it to the buffer
-			if (isEmpty) buf.append(" ");
+			if (!isEmpty) buf.append(" ");
 			buf.append(cur);
 			isEmpty = false;
 			

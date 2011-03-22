@@ -1,0 +1,29 @@
+«IMPORT modeldoc»
+
+«EXTENSION metamodel::ModeldocExtensions»
+
+«DEFINE latexRulesSummary FOR modeldoc::ModelDocumentation»
+	«FILE "output/latex/rules.tex"»
+		% Generated summary of all rules in the modeldoc, along with documentation
+
+\begin{tabular}{|l|r|p{\RulesSummaryTableWidth}|}
+\hline
+\textbf{Rule File}&\textbf{Rules}&\textbf{Description}\\
+\hline
+\hline
+«FOREACH references.typeSelect(modeldoc::DroolsPackage).sortBy(e|e.plugin + "/" + e.package + "/" + e.name) AS pkg-»
+«LET pkg.package.replaceAll("rules\\.","").replaceAll("\\.","/") AS path-»
+«IF path.length != 0 && path != "rules"»«path»/«ENDIF»«pkg.name».drl&«pkg.uniqueRules»&«EXPAND LatexTemplate::javadocElementToLatex FOREACH pkg.javadocs»\\
+«ENDLET-»
+«ENDFOREACH»
+\hline
+\end{tabular}
+	«ENDFILE»
+«ENDDEFINE»
+
+/** 
+ * a hack way to create backtrace-able errors
+ * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540  
+ */
+«DEFINE exception FOR Object»
+«ENDDEFINE»

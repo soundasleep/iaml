@@ -151,9 +151,9 @@ public class BasicJavadocParser {
 	 * parse this new tag for new semantic information.</p>
 	 * 
 	 * @throws IOException 
-	 * 
+	 * @return the source of the file, in terms of String[]
 	 */
-	public void findJavadocTagsInTextFile(File file, DocumentationHelper helper,
+	public String[] findJavadocTagsInTextFile(File file, DocumentationHelper helper,
 			ModeldocFactory factory, ModelDocumentation root,
 			IJavadocReferenceCreator creator) throws IOException, SemanticHandlerException {
 		
@@ -226,6 +226,8 @@ public class BasicJavadocParser {
 				
 			}
 		}
+		
+		return lines;
 		
 	}
 	

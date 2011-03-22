@@ -23,8 +23,7 @@
 <ul class="class_list rule_list">
 «FOREACH references.typeSelect(modeldoc::DroolsPackage).sortBy(e|e.plugin + "/" + e.package + "/" + e.name) AS pkg»
 	<li class="drools_file">
-		«EXPAND ClassTemplate::linkReference FOR pkg»
-		: «pkg.uniqueRules» unique rules
+		«EXPAND ClassTemplate::linkReference FOR pkg»: «pkg.uniqueRules» rules
 		«IF !pkg.javadocs.isEmpty»
 		<ul>
 			«FOREACH pkg.javadocs AS fragment»
@@ -37,6 +36,8 @@
 	</li>
 «ENDFOREACH»
 </ul>
+
+Total rules: «getTotalRuleCount(this)»
 
 «EXPAND ModeldocTemplate::footer»
 

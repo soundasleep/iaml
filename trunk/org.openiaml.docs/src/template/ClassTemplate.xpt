@@ -421,7 +421,7 @@
 «ENDIF-»</span>«ENDDEFINE»
 
 «DEFINE javadocElement FOR modeldoc::JavadocTextElement-»
-«IF !(value.startsWith(",") || value.startsWith(".") || value.startsWith("?"))»«" "»«ENDIF»«value-»
+«IF !(value.startsWith(",") || value.startsWith(".") || value.startsWith("?") || value.startsWith(")"))»«" "»«ENDIF»«value-»
 «ENDDEFINE»
 
 «REM»the formatting is ugly, but we sadly can't have _any_ whitespace«ENDREM»

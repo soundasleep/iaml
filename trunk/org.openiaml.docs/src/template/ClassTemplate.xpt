@@ -410,7 +410,7 @@
 	<span class="error">Unknown javadoc '«this»'</span>
 «ENDDEFINE»
 
-«DEFINE javadocElement FOR modeldoc::JavadocTagElement»<span class="javadocTag">«IF name == "@inference" || name == "@operational" || name == "@implementation" || name == "@example"-»
+«DEFINE javadocElement FOR modeldoc::JavadocTagElement»<span class="javadocTag «getCssTagName(name)»">«IF name == "@inference" || name == "@operational" || name == "@implementation" || name == "@example"-»
 «REM»need to remove the first text in the tag (referring to the model elements to tag)«ENDREM»
 «EXPAND javadocSemanticsElement FOR fragments.first()-»
 «EXPAND javadocElement FOREACH fragments.withoutFirst()-»
@@ -474,6 +474,10 @@
 
 «DEFINE linkReference FOR modeldoc::JavaClass»
 	<span class="java_class reference">[<a href="«EXPAND browseSource»«plugin»/src/«getPackage(package)»/«name».java">«name»</a>]</span>
+«ENDDEFINE»
+
+«DEFINE linkReference FOR modeldoc::DroolsPackage»
+	<span class="drools_file reference">[<a href="«EXPAND browseSource»«plugin»/«getPackage(package)»/«name».drl">«name».drl</a>]</span>
 «ENDDEFINE»
 
 «DEFINE linkReference FOR modeldoc::DroolsRule»

@@ -136,6 +136,7 @@ span.error { background: #fcc; }
 .java_method a { background: url("../icons/java_method.gif") top left no-repeat; padding-left: 18px; }
 .java_class a { background: url("../icons/java_file.gif") top left no-repeat; padding-left: 18px; }
 .drools_rule a { background: url("../icons/drools.gif") top left no-repeat; padding-left: 18px; }
+.drools_file a { background: url("../icons/drools.gif") top left no-repeat; padding-left: 18px; }
 .template a { background: url("../icons/templatefile.gif") top left no-repeat; padding-left: 18px; }
 .file_line_reference a { background: url("../icons/file_obj.gif") top left no-repeat; padding-left: 18px; }
 .file_reference a { background: url("../icons/file_obj.gif") top left no-repeat; padding-left: 18px; }
@@ -145,6 +146,9 @@ a.model_source { background: url("../icons/file_obj.gif") top left no-repeat; pa
 .constraint .file_reference a { background: url("../icons/checkfile.gif") top left no-repeat; padding-left: 18px; }
 .extension .file_line_reference a { background: url("../icons/extensionfile.gif") top left no-repeat; padding-left: 18px; }
 .extension .file_reference a { background: url("../icons/extensionfile.gif") top left no-repeat; padding-left: 18px; }
+
+/* turn off recursive background images for @model tags */
+span.tag_model a { background: none; padding-left: 0; } 
 
 a.toggle_on, a.toggle_off { text-indent: 900em; display: inline-block; width: 9px; height: 9px; overflow: hidden; cursor: pointer; }
 a.toggle_on { background: url("../icons/plus.gif") top left no-repeat; }

@@ -6,6 +6,7 @@
 	«EXPAND Index::index»
 	«EXPAND Examples::examples»
 	«EXPAND ExamplesList::examplesList»
+	«EXPAND RulesSummary::rulesSummary»
 	«EXPAND ImagesList::imagesList»
 	«EXPAND LatexImagesList::latexImagesList»
 	

@@ -84,6 +84,15 @@ String convertHTMLIntoLatex(String value) :
 String collateJavadocs(modeldoc::JavadocTagElement e) :
 	JAVA org.openiaml.docs.generation.codegen.ModeldocCodeGenerator.collateJavadocs(org.openiaml.docs.modeldoc.JavadocTagElement);
 
+/**
+ * Convert a tag name such as '@model' into a CSS-able class name
+ * such as 'tag_model'.
+ */
+String getCssTagName(String n) :
+	if n == null
+		then ""
+		else "tag_" + n.replaceAll("@", "");
+
 /** 
  * a hack way to create backtrace-able errors
  * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540

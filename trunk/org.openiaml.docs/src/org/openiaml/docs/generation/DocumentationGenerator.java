@@ -78,8 +78,6 @@ public class DocumentationGenerator {
 			ILoader loader = new LoadEMFReferences(this);
 			loader.load(factory, root);
 		}
-
-	if (false) {
 		
 		// get all constraints
 		{
@@ -121,8 +119,7 @@ public class DocumentationGenerator {
 					this
 			);
 			loader.load(factory, root);
-		}
-	}		
+		}	
 		
 		// load all rule files for inference semantics
 		{
@@ -134,8 +131,6 @@ public class DocumentationGenerator {
 			);
 			loader.load(factory, root);
 		}
-
-	if (false) {
 		
 		// load all OAW templates for implementation notes
 		{
@@ -175,8 +170,7 @@ public class DocumentationGenerator {
 			);
 			loader.load(factory, root);
 		}
-		
-	}
+
 		return root;
 	}
 	

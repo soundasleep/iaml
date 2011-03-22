@@ -1,3 +1,6 @@
+/**
+ * Connects {@model ConditionEdge}s and {@model ParameterEdge}s due to {@model Wire} completion.
+ */
 package org.openiaml.model.drools.rules.conditions
 
 #list any import classes here.

@@ -1,5 +1,5 @@
 /**
- * Rules related to DetailWires.
+ * Completes the functionality of {@model DetailWire}s.
  */
 package org.openiaml.model.drools.rules.detail_wires
 

@@ -1,4 +1,7 @@
-#created on: 4/11/2008
+/**
+ * Completes the functionality of {@model Role}s when connected to
+ * {@model LoginHandler}s or {@model AccessControlHandler}s.
+ */
 package org.openiaml.model.drools.rules.users
 
 #list any import classes here.

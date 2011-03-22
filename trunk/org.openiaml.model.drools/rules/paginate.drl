@@ -1,6 +1,5 @@
 /**
- * Rules related to DomainIterators connected to InputForms for
- * pagination, etc.
+ * Creates interface elements to paginate across many {@model DomainIterator} results.
  */
 package org.openiaml.model.drools.rules.paginate
 

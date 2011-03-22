@@ -1,3 +1,6 @@
+/**
+ * Completes the functionality and logic of {@model Gate}s.
+ */
 #created on: 4/11/2008
 package org.openiaml.model.drools.rules.gate
 

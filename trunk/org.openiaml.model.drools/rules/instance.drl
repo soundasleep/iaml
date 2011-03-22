@@ -1,5 +1,6 @@
 /**
- * Rules related to DomainIterators.
+ * Creates the default {@model Operation}s and {@model Condition}s for
+ * {@model DomainIterator}s.
  */
 package org.openiaml.model.drools.rules.instance
 

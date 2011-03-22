@@ -1,4 +1,6 @@
-#created on: 4/11/2008
+/**
+ * Creates default {@model Operation}s for {@model Property}s, and their contents.
+ */
 package org.openiaml.model.drools.rules.operations
 
 #list any import classes here.

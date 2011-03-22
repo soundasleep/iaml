@@ -1,4 +1,6 @@
-#created on: 4/11/2008
+/**
+ * Completes the functionality of {@model SyncWire}s.
+ */
 package org.openiaml.model.drools.rules.sync_wires
 
 #list any import classes here.

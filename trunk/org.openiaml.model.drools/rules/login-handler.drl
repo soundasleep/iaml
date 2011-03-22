@@ -1,4 +1,7 @@
-#created on: 4/11/2008
+/**
+ * Secures {@model Scope}s based on {@model LoginHandler}s and
+ * {@model AccessControlHandler}s.
+ */
 package org.openiaml.model.drools.rules.login_handler
 
 #list any import classes here.

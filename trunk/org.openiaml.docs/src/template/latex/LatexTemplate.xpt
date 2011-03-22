@@ -404,11 +404,9 @@ A visual representation of this element is provided in Figure~\ref{fig:reference
 «ELSE-»
 «IF value.trim().contains("#")-»
 «LET value.trim().split("#") AS hashBits-»
-\modeldocName{«hashBits.withoutFirst().first()»}
-«ENDLET-» 
+\modeldocName{«hashBits.withoutFirst().first()»}«ENDLET-» 
 «ELSE-»
-\modelLink{«humanise(value)»}
-«ENDIF-»
+\modelLink{«humanise(value)»}«ENDIF-»
 «ENDIF-»
 «ENDIF-»
 «ENDDEFINE»

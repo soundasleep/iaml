@@ -1,0 +1,24 @@
+«IMPORT modeldoc»
+
+«EXTENSION metamodel::ModeldocExtensions»
+
+«DEFINE latexMetrics FOR modeldoc::ModelDocumentation»
+	«FILE "output/latex/metrics.tex"»
+% Generated summary of some metrics of the current project
+
+\def{\modeldocRuleCount}{«getTotalRuleCount(this)»}
+\def{\modeldocRuleFileCount}{«references.typeSelect(modeldoc::DroolsPackage).size»}
+
+% List of all metrics
+«FOREACH metrics AS metric»
+\def{\modeldoc«metric.name»}{«metric.value»}
+«ENDFOREACH»
+	«ENDFILE»
+«ENDDEFINE»
+
+/** 
+ * a hack way to create backtrace-able errors
+ * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540  
+ */
+«DEFINE exception FOR Object»
+«ENDDEFINE»

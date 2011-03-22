@@ -15,6 +15,7 @@
 	«EXPAND template::latex::LatexTemplate::latexClass(this) FOREACH classes»
 	«EXPAND template::latex::LatexClassList::latexClassList»
 	«EXPAND template::latex::LatexRulesSummary::latexRulesSummary»
+	«EXPAND template::latex::LatexMetrics::latexMetrics»
 
 	«EXPAND EventTriggersTemplate::eventsList»
 	

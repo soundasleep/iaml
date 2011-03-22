@@ -1184,13 +1184,31 @@ public interface ModeldocPackage extends EPackage {
 	int DROOLS_PACKAGE__RULES = REFERENCE_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Javadocs</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DROOLS_PACKAGE__JAVADOCS = REFERENCE_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Unique Rules</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DROOLS_PACKAGE__UNIQUE_RULES = REFERENCE_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>Drools Package</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DROOLS_PACKAGE_FEATURE_COUNT = REFERENCE_FEATURE_COUNT + 4;
+	int DROOLS_PACKAGE_FEATURE_COUNT = REFERENCE_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
@@ -2825,6 +2843,28 @@ public interface ModeldocPackage extends EPackage {
 	EReference getDroolsPackage_Rules();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.openiaml.docs.modeldoc.DroolsPackage#getJavadocs <em>Javadocs</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Javadocs</em>'.
+	 * @see org.openiaml.docs.modeldoc.DroolsPackage#getJavadocs()
+	 * @see #getDroolsPackage()
+	 * @generated
+	 */
+	EReference getDroolsPackage_Javadocs();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.openiaml.docs.modeldoc.DroolsPackage#getUniqueRules <em>Unique Rules</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Unique Rules</em>'.
+	 * @see org.openiaml.docs.modeldoc.DroolsPackage#getUniqueRules()
+	 * @see #getDroolsPackage()
+	 * @generated
+	 */
+	EAttribute getDroolsPackage_UniqueRules();
+
+	/**
 	 * Returns the meta object for class '{@link org.openiaml.docs.modeldoc.FileReference <em>File Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4168,6 +4208,22 @@ public interface ModeldocPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DROOLS_PACKAGE__RULES = eINSTANCE.getDroolsPackage_Rules();
+
+		/**
+		 * The meta object literal for the '<em><b>Javadocs</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DROOLS_PACKAGE__JAVADOCS = eINSTANCE.getDroolsPackage_Javadocs();
+
+		/**
+		 * The meta object literal for the '<em><b>Unique Rules</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DROOLS_PACKAGE__UNIQUE_RULES = eINSTANCE.getDroolsPackage_UniqueRules();
 
 		/**
 		 * The meta object literal for the '{@link org.openiaml.docs.modeldoc.impl.FileReferenceImpl <em>File Reference</em>}' class.

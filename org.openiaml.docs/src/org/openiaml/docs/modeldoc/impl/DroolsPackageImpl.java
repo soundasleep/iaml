@@ -14,10 +14,12 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.openiaml.docs.modeldoc.DroolsPackage;
 import org.openiaml.docs.modeldoc.DroolsRule;
+import org.openiaml.docs.modeldoc.JavadocFragment;
 import org.openiaml.docs.modeldoc.ModeldocPackage;
 
 /**
@@ -31,6 +33,8 @@ import org.openiaml.docs.modeldoc.ModeldocPackage;
  *   <li>{@link org.openiaml.docs.modeldoc.impl.DroolsPackageImpl#getPackage <em>Package</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.DroolsPackageImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.impl.DroolsPackageImpl#getRules <em>Rules</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.impl.DroolsPackageImpl#getJavadocs <em>Javadocs</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.impl.DroolsPackageImpl#getUniqueRules <em>Unique Rules</em>}</li>
  * </ul>
  * </p>
  *
@@ -106,6 +110,36 @@ public class DroolsPackageImpl extends ReferenceImpl implements DroolsPackage {
 	 * @ordered
 	 */
 	protected EList<DroolsRule> rules;
+
+	/**
+	 * The cached value of the '{@link #getJavadocs() <em>Javadocs</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getJavadocs()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<JavadocFragment> javadocs;
+
+	/**
+	 * The default value of the '{@link #getUniqueRules() <em>Unique Rules</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUniqueRules()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int UNIQUE_RULES_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getUniqueRules() <em>Unique Rules</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUniqueRules()
+	 * @generated
+	 * @ordered
+	 */
+	protected int uniqueRules = UNIQUE_RULES_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -206,6 +240,39 @@ public class DroolsPackageImpl extends ReferenceImpl implements DroolsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<JavadocFragment> getJavadocs() {
+		if (javadocs == null) {
+			javadocs = new EObjectContainmentEList<JavadocFragment>(JavadocFragment.class, this, ModeldocPackage.DROOLS_PACKAGE__JAVADOCS);
+		}
+		return javadocs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getUniqueRules() {
+		return uniqueRules;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setUniqueRules(int newUniqueRules) {
+		int oldUniqueRules = uniqueRules;
+		uniqueRules = newUniqueRules;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ModeldocPackage.DROOLS_PACKAGE__UNIQUE_RULES, oldUniqueRules, uniqueRules));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -226,6 +293,8 @@ public class DroolsPackageImpl extends ReferenceImpl implements DroolsPackage {
 		switch (featureID) {
 			case ModeldocPackage.DROOLS_PACKAGE__RULES:
 				return ((InternalEList<?>)getRules()).basicRemove(otherEnd, msgs);
+			case ModeldocPackage.DROOLS_PACKAGE__JAVADOCS:
+				return ((InternalEList<?>)getJavadocs()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -246,6 +315,10 @@ public class DroolsPackageImpl extends ReferenceImpl implements DroolsPackage {
 				return getName();
 			case ModeldocPackage.DROOLS_PACKAGE__RULES:
 				return getRules();
+			case ModeldocPackage.DROOLS_PACKAGE__JAVADOCS:
+				return getJavadocs();
+			case ModeldocPackage.DROOLS_PACKAGE__UNIQUE_RULES:
+				return getUniqueRules();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -272,6 +345,13 @@ public class DroolsPackageImpl extends ReferenceImpl implements DroolsPackage {
 				getRules().clear();
 				getRules().addAll((Collection<? extends DroolsRule>)newValue);
 				return;
+			case ModeldocPackage.DROOLS_PACKAGE__JAVADOCS:
+				getJavadocs().clear();
+				getJavadocs().addAll((Collection<? extends JavadocFragment>)newValue);
+				return;
+			case ModeldocPackage.DROOLS_PACKAGE__UNIQUE_RULES:
+				setUniqueRules((Integer)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -296,6 +376,12 @@ public class DroolsPackageImpl extends ReferenceImpl implements DroolsPackage {
 			case ModeldocPackage.DROOLS_PACKAGE__RULES:
 				getRules().clear();
 				return;
+			case ModeldocPackage.DROOLS_PACKAGE__JAVADOCS:
+				getJavadocs().clear();
+				return;
+			case ModeldocPackage.DROOLS_PACKAGE__UNIQUE_RULES:
+				setUniqueRules(UNIQUE_RULES_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -316,6 +402,10 @@ public class DroolsPackageImpl extends ReferenceImpl implements DroolsPackage {
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case ModeldocPackage.DROOLS_PACKAGE__RULES:
 				return rules != null && !rules.isEmpty();
+			case ModeldocPackage.DROOLS_PACKAGE__JAVADOCS:
+				return javadocs != null && !javadocs.isEmpty();
+			case ModeldocPackage.DROOLS_PACKAGE__UNIQUE_RULES:
+				return uniqueRules != UNIQUE_RULES_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -336,6 +426,8 @@ public class DroolsPackageImpl extends ReferenceImpl implements DroolsPackage {
 		result.append(package_);
 		result.append(", name: ");
 		result.append(name);
+		result.append(", uniqueRules: ");
+		result.append(uniqueRules);
 		result.append(')');
 		return result.toString();
 	}

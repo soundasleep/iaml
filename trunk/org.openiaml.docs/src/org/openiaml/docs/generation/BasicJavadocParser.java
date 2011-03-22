@@ -15,6 +15,7 @@ import org.openiaml.docs.generation.semantics.SemanticFinder;
 import org.openiaml.docs.generation.semantics.SemanticHandlerException;
 import org.openiaml.docs.modeldoc.DroolsRule;
 import org.openiaml.docs.modeldoc.JavaElement;
+import org.openiaml.docs.modeldoc.JavadocFragment;
 import org.openiaml.docs.modeldoc.JavadocTagElement;
 import org.openiaml.docs.modeldoc.ModelDocumentation;
 import org.openiaml.docs.modeldoc.ModeldocFactory;
@@ -39,10 +40,13 @@ public class BasicJavadocParser {
 	/**
 	 * <p>Parse the given semantic rule line, e.g.
 	 * <code>This element {@model Element} ...</code>,
-	 * and place it into JavadocFragments.</p>
+	 * and place it into JavadocFragments, which are inserted
+	 * into the JavadocTagElement <code>e</code>.</p>
 	 * 
 	 * <p>This is a very basic parser, and won't handle anything
 	 * complicated (e.g. additional javadoc block characters).</p>
+	 * 
+	 * @param e the element where {@link JavadocFragment}s will be inserted
 	 */
 	public void parseSemanticLineIntoFragments(String line, ModeldocFactory factory,
 			JavadocTagElement e) {
@@ -93,6 +97,44 @@ public class BasicJavadocParser {
 		// handle remaining test
 		String text = line.substring(pos);
 		inline.handleText(text);
+		
+	}
+	
+	/**
+	 * Get the first comment of the file, or does nothing if there
+	 * is no first comment of the file. The first comment is then parsed
+	 * for sub-tags such as <code>{@model ...}</code>.
+	 *
+	 * @param file the file to load
+	 * @param ref the {@link Reference} that will be provided to all of the 
+	 * 	sub-tags in the first comment
+	 * @param root the root {@link ModelDocumentation} element
+	 * @return the first found comment as a JavadocFragment, or <code>null</code> if none was found 
+	 */
+	public JavadocFragment findFirstCommentOfFile(File file, DocumentationHelper helper,
+			ModeldocFactory factory, Reference ref, ModelDocumentation root) throws IOException, SemanticHandlerException {
+		
+		// read file into array of lines
+		CharBuffer buf = CharBuffer.wrap(helper.readFile(file));
+		String[] lines = buf.toString().split("\n");
+		
+		String firstComment = getFirstJavadocComment(lines);
+		if (firstComment == null || firstComment.trim().isEmpty())
+			return null;
+		
+		// create a new fragment for this comment
+		JavadocTagElement e = factory.createJavadocTagElement();
+		e.setName("summary");
+		
+		// parse the line into javadoc elements
+		// (the line needs to be parsed into fragments before we can find semantic references)
+		parseSemanticLineIntoFragments(firstComment, factory, e);
+		
+		// identify semantic rules back
+		handleModelReferences(e, ref, root, helper);
+		
+		// return the fragment
+		return e;
 		
 	}
 	
@@ -254,6 +296,53 @@ public class BasicJavadocParser {
 			result.add(currentString.trim());
 		}
 		return result.toArray(new String[] {});
+	}
+
+	/**
+	 * Get the first Javadoc comment of the given set of lines.
+	 * If there is some actual content, returns the empty string.
+	 * 
+	 * <p>Does not parse it for tags.
+	 */
+	protected String getFirstJavadocComment(String[] lines) {
+		StringBuffer buf = new StringBuffer();
+		
+		// skip until we find either the first /**, or some non-empty text
+		int line = 0;
+		for (line = 0; line < lines.length; line++) {
+			if (lines[line].trim().isEmpty())
+				continue;
+			if (lines[line].trim().startsWith("/**"))
+				break;
+			
+			// found something else
+			return "";
+		}
+		
+		for (int j = line; j < lines.length; j++) {
+			String cur = lines[j].trim();
+			
+			// jump over first
+			if (j == line) {
+				cur = cur.substring(cur.indexOf("/**") + 3).trim();
+			}
+
+			// bail if we get to the end
+			if (cur.startsWith("*/")) {
+				break;
+			}
+
+			// skip over any initial stars
+			while (cur.startsWith("*")) {
+				cur = cur.substring(1).trim();
+			}
+			
+			// add it to the buffer
+			buf.append(cur);
+			
+		}
+
+		return buf.toString();
 	}
 
 	/**

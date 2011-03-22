@@ -13,6 +13,7 @@ import org.openiaml.docs.generation.semantics.SemanticHandlerException;
 import org.openiaml.docs.modeldoc.DroolsPackage;
 import org.openiaml.docs.modeldoc.DroolsRule;
 import org.openiaml.docs.modeldoc.JavaElement;
+import org.openiaml.docs.modeldoc.JavadocFragment;
 import org.openiaml.docs.modeldoc.ModelDocumentation;
 import org.openiaml.docs.modeldoc.ModeldocFactory;
 import org.openiaml.model.drools.DroolsInferenceEngine;
@@ -101,7 +102,16 @@ public class LoadSemanticsFromRules extends DocumentationHelper implements ILoad
 		root.getReferences().add(drools);
 		
 		BasicJavadocParser parser = new BasicJavadocParser(getSemanticTagHandlers());
+		
 		try {
+			// try and find the first comment from the file, in order to
+			// provide documentation on the entire rule file
+			JavadocFragment packageComment = parser.findFirstCommentOfFile(file, this, factory, drools, root);
+			if (packageComment != null) {
+				drools.getJavadocs().add(packageComment);
+			}
+			
+			// parse all the semantics from the rules
 			parser.findJavadocTagsInTextFile(file, this, factory, root, new IJavadocReferenceCreator() {
 				
 				public JavaElement createReference(String[] lines, int line) {

@@ -20,6 +20,8 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.openiaml.docs.modeldoc.DroolsPackage#getPackage <em>Package</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.DroolsPackage#getName <em>Name</em>}</li>
  *   <li>{@link org.openiaml.docs.modeldoc.DroolsPackage#getRules <em>Rules</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.DroolsPackage#getJavadocs <em>Javadocs</em>}</li>
+ *   <li>{@link org.openiaml.docs.modeldoc.DroolsPackage#getUniqueRules <em>Unique Rules</em>}</li>
  * </ul>
  * </p>
  *
@@ -123,5 +125,47 @@ public interface DroolsPackage extends Reference {
 	 * @generated
 	 */
 	EList<DroolsRule> getRules();
+
+	/**
+	 * Returns the value of the '<em><b>Javadocs</b></em>' containment reference list.
+	 * The list contents are of type {@link org.openiaml.docs.modeldoc.JavadocFragment}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Javadocs</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Javadocs</em>' containment reference list.
+	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getDroolsPackage_Javadocs()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<JavadocFragment> getJavadocs();
+
+	/**
+	 * Returns the value of the '<em><b>Unique Rules</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Unique Rules</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Unique Rules</em>' attribute.
+	 * @see #setUniqueRules(int)
+	 * @see org.openiaml.docs.modeldoc.ModeldocPackage#getDroolsPackage_UniqueRules()
+	 * @model
+	 * @generated
+	 */
+	int getUniqueRules();
+
+	/**
+	 * Sets the value of the '{@link org.openiaml.docs.modeldoc.DroolsPackage#getUniqueRules <em>Unique Rules</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Unique Rules</em>' attribute.
+	 * @see #getUniqueRules()
+	 * @generated
+	 */
+	void setUniqueRules(int value);
 
 } // DroolsPackage

@@ -1097,6 +1097,24 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getDroolsPackage_Javadocs() {
+		return (EReference)droolsPackageEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDroolsPackage_UniqueRules() {
+		return (EAttribute)droolsPackageEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getFileReference() {
 		return fileReferenceEClass;
 	}
@@ -1717,6 +1735,8 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		createEAttribute(droolsPackageEClass, DROOLS_PACKAGE__PACKAGE);
 		createEAttribute(droolsPackageEClass, DROOLS_PACKAGE__NAME);
 		createEReference(droolsPackageEClass, DROOLS_PACKAGE__RULES);
+		createEReference(droolsPackageEClass, DROOLS_PACKAGE__JAVADOCS);
+		createEAttribute(droolsPackageEClass, DROOLS_PACKAGE__UNIQUE_RULES);
 
 		droolsRuleEClass = createEClass(DROOLS_RULE);
 		createEAttribute(droolsRuleEClass, DROOLS_RULE__NAME);
@@ -1949,6 +1969,8 @@ public class ModeldocPackageImpl extends EPackageImpl implements ModeldocPackage
 		initEAttribute(getDroolsPackage_Package(), ecorePackage.getEString(), "package", null, 0, 1, DroolsPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDroolsPackage_Name(), ecorePackage.getEString(), "name", null, 0, 1, DroolsPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDroolsPackage_Rules(), this.getDroolsRule(), this.getDroolsRule_Package(), "rules", null, 0, -1, DroolsPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDroolsPackage_Javadocs(), this.getJavadocFragment(), null, "javadocs", null, 0, -1, DroolsPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDroolsPackage_UniqueRules(), ecorePackage.getEInt(), "uniqueRules", null, 0, 1, DroolsPackage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(droolsRuleEClass, DroolsRule.class, "DroolsRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDroolsRule_Name(), ecorePackage.getEString(), "name", null, 0, 1, DroolsRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

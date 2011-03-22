@@ -143,6 +143,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="rules" upperBound="-1"
         eType="#//DroolsRule" containment="true" eOpposite="#//DroolsRule/package"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="javadocs" upperBound="-1"
+        eType="#//JavadocFragment" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uniqueRules" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DroolsRule" eSuperTypes="#//Reference #//JavaElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

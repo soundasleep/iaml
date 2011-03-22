@@ -79,6 +79,8 @@ public class DocumentationGenerator {
 			loader.load(factory, root);
 		}
 
+	if (false) {
+		
 		// get all constraints
 		{
 			ILoader loader = new LoadOAWConstraints(
@@ -120,6 +122,7 @@ public class DocumentationGenerator {
 			);
 			loader.load(factory, root);
 		}
+	}		
 		
 		// load all rule files for inference semantics
 		{
@@ -131,6 +134,8 @@ public class DocumentationGenerator {
 			);
 			loader.load(factory, root);
 		}
+
+	if (false) {
 		
 		// load all OAW templates for implementation notes
 		{
@@ -171,6 +176,7 @@ public class DocumentationGenerator {
 			loader.load(factory, root);
 		}
 		
+	}
 		return root;
 	}
 	

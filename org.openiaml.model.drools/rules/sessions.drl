@@ -1,4 +1,6 @@
-#created on: 4/11/2008
+/**
+ * Creates the 'onInit' {@model EventTrigger} for {@model Session}s.
+ */
 package org.openiaml.model.drools.rules.sessions
 
 #list any import classes here.

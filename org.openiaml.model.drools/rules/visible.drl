@@ -1,5 +1,6 @@
 /**
- * Rules related to VisibleThings.
+ * Creates the default {@model EventTrigger}s and {@model Condition}s of
+ * {@model VisibleThing}s.
  */
 package org.openiaml.model.drools.rules.visible
 

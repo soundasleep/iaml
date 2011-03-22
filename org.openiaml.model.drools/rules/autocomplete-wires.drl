@@ -1,5 +1,5 @@
 /**
- * Rules related to AutocompleteWires.
+ * Completes the functionality of {@model AutocompleteWire}s.
  */
 package org.openiaml.model.drools.rules.autocomplete_wires
 

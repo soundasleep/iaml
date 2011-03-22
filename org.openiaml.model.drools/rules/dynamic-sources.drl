@@ -1,3 +1,6 @@
+/**
+ * Rules relating to {@model DynamicApplicationElementSet}s.
+ */
 #created on: 4/11/2008
 package org.openiaml.model.drools.rules.dynamic_sources
 

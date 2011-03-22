@@ -1,5 +1,5 @@
 /**
- * Rules related to casting (can_cast).
+ * Rules related to types and casting, and the 'can cast?' {@model Condition}.
  */
 package org.openiaml.model.drools.rules.casting
 

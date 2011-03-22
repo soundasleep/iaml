@@ -1,4 +1,6 @@
-#created on: 4/11/2008
+/**
+ * Completes the default {@model Property}s of {@model Email}s.
+ */
 package org.openiaml.model.drools.rules.email
 
 #list any import classes here.

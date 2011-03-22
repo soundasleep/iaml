@@ -6,12 +6,12 @@
 	«FILE "output/latex/metrics.tex"»
 % Generated summary of some metrics of the current project
 
-\def{\modeldocRuleCount}{«getTotalRuleCount(this)»}
-\def{\modeldocRuleFileCount}{«references.typeSelect(modeldoc::DroolsPackage).size»}
+\def\modeldocRuleCount{«getTotalRuleCount(this)»}
+\def\modeldocRuleFileCount{«references.typeSelect(modeldoc::DroolsPackage).size»}
 
 % List of all metrics
 «FOREACH metrics AS metric»
-\def{\modeldoc«metric.name»}{«metric.value»}
+\def\modeldoc«metric.name»{«metric.value»}
 «ENDFOREACH»
 	«ENDFILE»
 «ENDDEFINE»

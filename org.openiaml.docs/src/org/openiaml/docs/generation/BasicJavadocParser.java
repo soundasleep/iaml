@@ -319,6 +319,7 @@ public class BasicJavadocParser {
 			return "";
 		}
 		
+		boolean isEmpty = true;
 		for (int j = line; j < lines.length; j++) {
 			String cur = lines[j].trim();
 			
@@ -338,7 +339,9 @@ public class BasicJavadocParser {
 			}
 			
 			// add it to the buffer
+			if (isEmpty) buf.append(" ");
 			buf.append(cur);
+			isEmpty = false;
 			
 		}
 

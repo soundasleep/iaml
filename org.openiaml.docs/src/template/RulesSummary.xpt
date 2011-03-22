@@ -1,0 +1,51 @@
+«IMPORT modeldoc»
+
+«EXTENSION metamodel::ModeldocExtensions»
+
+«DEFINE rulesSummary FOR modeldoc::ModelDocumentation»
+	«FILE "output/rules.html"»
+	
+«EXPAND ModeldocTemplate::header("Rules summary", "rules")»
+
+<div class="navigation">
+<a href="index.html">Model Elements</a>
+</div>
+
+<div class="intro">
+<h1>Model Completion Rules Summary</h1>
+
+<p>
+	This is an automatically-generated summary of model completion rules used in 
+	<a href="http://openiaml.org">the Internet Application Modelling Language</a> (IAML).
+</p>
+</div>
+
+<ul class="class_list rule_list">
+«FOREACH references.typeSelect(modeldoc::DroolsPackage).sortBy(e|e.plugin + "/" + e.package + "/" + e.name) AS pkg»
+	<li class="drools_file">
+		«EXPAND ClassTemplate::linkReference FOR pkg»
+		: «pkg.uniqueRules» unique rules
+		«IF !pkg.javadocs.isEmpty»
+		<ul>
+			«FOREACH pkg.javadocs AS fragment»
+			<li>
+				«EXPAND ClassTemplate::javadocElement FOR fragment»
+			</li>
+			«ENDFOREACH»
+		</ul>
+		«ENDIF»
+	</li>
+«ENDFOREACH»
+</ul>
+
+«EXPAND ModeldocTemplate::footer»
+
+	«ENDFILE»
+«ENDDEFINE»
+
+/** 
+ * a hack way to create backtrace-able errors
+ * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540  
+ */
+«DEFINE exception FOR Object»
+«ENDDEFINE»

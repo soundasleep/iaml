@@ -182,7 +182,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/plugin/org.eclipse.xsd/model/XSD.ecore#//XSDSimpleTypeDefinition"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VisibleThing" eSuperTypes="#//ContainsConditions #//ContainsOperations #//ContainsWires #//WireSource #//WireDestination #//NamedElement #//GeneratedElement #//GeneratesElements #//CanBeSynced #//Accessible #//ContainsProperties #//Changeable">
+  <eClassifiers xsi:type="ecore:EClass" name="VisibleThing" abstract="true" eSuperTypes="#//ContainsConditions #//ContainsOperations #//ContainsWires #//WireSource #//WireDestination #//NamedElement #//GeneratedElement #//GeneratesElements #//CanBeSynced #//Accessible #//ContainsProperties #//Changeable">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="comment" value="this used to mean nothing; now anything that extends VisibleThing (which unforuntately needs to be concrete) has an editor"/>
       <details key="editor" value="org.openiaml.model.diagram.visual"/>

@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EPackage;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.components.ComponentsPackage;
 import org.openiaml.model.model.domain.DomainPackage;
@@ -28,27 +30,55 @@ public class ParentNamesTestCase extends XmlTestCase {
 	public static final String GMF_ROOT = "../org.openiaml.model/model/";
 
 	/**
-	 * TODO Ideally this would be from some design document. This
-	 * is the list of all elements that we expect will contain 
-	 * parent name elements.
+	 * A list of all abstract types of elements that should display parent names.
+	 * This is essentially the design document for parent name types.
+	 * 
+	 * <p>The test method {@link #testParentNameElements()} checks that
+	 * all of the concrete classes in the model that are subtypes of
+	 * one of these types are specified in {@link #PARENT_NAME_ELEMENTS}.
 	 */
-	private static final EClass[] PARENT_NAME_ELEMENTS = new EClass[] {
+	private static final EClass[] PARENT_NAME_TYPES = new EClass[] {
 		ModelPackage.eINSTANCE.getDomainAttribute(),
 		ModelPackage.eINSTANCE.getDomainAttributeInstance(),
 		ModelPackage.eINSTANCE.getEventTrigger(),
-		ModelPackage.eINSTANCE.getPrimitiveOperation(),
-		ModelPackage.eINSTANCE.getPrimitiveCondition(),
-		ModelPackage.eINSTANCE.getCompositeOperation(),
+		ModelPackage.eINSTANCE.getOperation(),
+		ModelPackage.eINSTANCE.getCondition(),
 		ModelPackage.eINSTANCE.getProperty(),
 		VisualPackage.eINSTANCE.getFrame(),
+		ComponentsPackage.eINSTANCE.getGate(),
+		ModelPackage.eINSTANCE.getVisibleThing(),
+	};
+	
+	/**
+	 * A list of all elements that should display parent names. This
+	 * list is derived from {@link #PARENT_NAME_TYPES}.
+	 */
+	private static final EClass[] PARENT_NAME_ELEMENTS = new EClass[] {
+		// DomainAttribute
+		ModelPackage.eINSTANCE.getDomainAttribute(),
+		// DomainAttributeInstance
+		ModelPackage.eINSTANCE.getDomainAttributeInstance(),
+		// EventTrigger
+		ModelPackage.eINSTANCE.getEventTrigger(),
+		// Operation
+		ModelPackage.eINSTANCE.getPrimitiveOperation(),
+		ModelPackage.eINSTANCE.getCompositeOperation(),
+		// Condition
+		ModelPackage.eINSTANCE.getPrimitiveCondition(),
+		ModelPackage.eINSTANCE.getCompositeCondition(),
+		// Property
+		ModelPackage.eINSTANCE.getProperty(),
+		// Frame
+		VisualPackage.eINSTANCE.getFrame(),
+		// Gate
+		ComponentsPackage.eINSTANCE.getEntryGate(),
+		ComponentsPackage.eINSTANCE.getExitGate(),
+		// VisibleThing
 		VisualPackage.eINSTANCE.getInputForm(),
 		VisualPackage.eINSTANCE.getInputTextField(),
 		VisualPackage.eINSTANCE.getLabel(),
 		VisualPackage.eINSTANCE.getHidden(),
-		ModelPackage.eINSTANCE.getCompositeCondition(),
 		VisualPackage.eINSTANCE.getButton(),
-		ComponentsPackage.eINSTANCE.getEntryGate(),
-		ComponentsPackage.eINSTANCE.getExitGate(),
 		VisualPackage.eINSTANCE.getMap(),
 		VisualPackage.eINSTANCE.getMapPoint(),
 		VisualPackage.eINSTANCE.getIteratorList(),
@@ -56,6 +86,71 @@ public class ParentNamesTestCase extends XmlTestCase {
 	
 	private static List<String> inst_getParentNameElements = null;
 	
+	/**
+	 * Test that all subtypes of {@link #PARENT_NAME_TYPES} are
+	 * in {@link #PARENT_NAME_ELEMENTS}.
+	 */
+	public void testParentNameElements() {
+		testParentNameElementsPackage(ModelPackage.eINSTANCE);
+	}
+	
+	// test all of the components in the given package
+	private void testParentNameElementsPackage(EPackage pkg) {
+		// test subpackages
+		for (EPackage sub : pkg.getESubpackages()) {
+			testParentNameElementsPackage(sub);
+		}
+		
+		for (EClassifier cls : pkg.getEClassifiers()) {
+			if (cls instanceof EClass) {
+				EClass c = (EClass) cls;
+				// ignore abstract classes
+				if (!c.isAbstract() && !c.isInterface()) {
+					// check each PARENT_NAME_TYPES
+					for (EClass typ : PARENT_NAME_TYPES) {
+						if (typ.isSuperTypeOf(c)) {
+							// it should be in PARENT_NAME_ELEMENTS
+							assertParentNameElementsContains(c);
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Assert that {@link #PARENT_NAME_ELEMENTS} contains the given class.
+	 * 
+	 * @param c
+	 */
+	private void assertParentNameElementsContains(EClass c) {
+		for (EClass cls : PARENT_NAME_ELEMENTS) {
+			if (cls.equals(c)) {
+				// ok
+				return;
+			}
+		}
+		fail("Could not find class '" + c.getName() + "' in PARENT_NAME_ELEMENTS");
+	}
+	
+	/**
+	 * Test that all classes in {@link #PARENT_NAME_ELEMENTS} are
+	 * an instance of at least one specified {@link #PARENT_NAME_TYPES}.
+	 */
+	public void testParentNameElementsAreAllSpecified() {
+		for (EClass target : PARENT_NAME_ELEMENTS) {
+			boolean found = false;
+			for (EClass source : PARENT_NAME_TYPES) {
+				if (source.isSuperTypeOf(target)) {
+					// ok
+					found = true;
+				}
+			}
+			
+			assertTrue("Specified parent name class '" + target.getName() + "' was not an instance of any type in PARENT_NAME_TYPES", found);
+		}
+	}
+
 	/**
 	 * Get a list of all elements that should have a parent name label.
 	 */

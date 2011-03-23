@@ -17,11 +17,11 @@ import org.openiaml.emf.properties.library.metamodel.AllMetamodelPropertiesLibra
  * @author jmwright
  *
  */
-public class LoadMetrics extends DocumentationHelper implements ILoader {
+public class LoadMetamodelMetrics extends DocumentationHelper implements ILoader {
 
 	private EPackage rootPackage;
 
-	public LoadMetrics(EPackage root) {
+	public LoadMetamodelMetrics(EPackage root) {
 		super();
 		
 		this.rootPackage = root;

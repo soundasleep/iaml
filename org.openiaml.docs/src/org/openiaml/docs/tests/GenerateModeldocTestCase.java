@@ -27,6 +27,7 @@ import org.openiaml.docs.generation.BasicJavadocParser;
 import org.openiaml.docs.generation.DocumentationGenerationException;
 import org.openiaml.docs.generation.DocumentationGenerator;
 import org.openiaml.docs.generation.DocumentationHelper;
+import org.openiaml.docs.generation.LoadFileMetrics;
 import org.openiaml.docs.generation.codegen.ModeldocCodeGenerator;
 import org.openiaml.docs.modeldoc.EMFAttribute;
 import org.openiaml.docs.modeldoc.EMFClass;
@@ -143,6 +144,13 @@ public class GenerateModeldocTestCase extends TestCase {
 			return getJavadocTags(lines, line);
 		}
 		
+	}
+	
+	public void testFileMetricsMethods() {
+		assertEquals("txt", LoadFileMetrics.getFileExtension(new File("foo.txt")));
+		assertEquals("txt", LoadFileMetrics.getFileExtension(new File("foo.TXT")));
+		assertEquals("none", LoadFileMetrics.getFileExtension(new File("foo.")));
+		assertEquals("none", LoadFileMetrics.getFileExtension(new File("foo")));
 	}
 	
 	/**

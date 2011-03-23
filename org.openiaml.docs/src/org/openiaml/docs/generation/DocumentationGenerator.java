@@ -55,7 +55,7 @@ public class DocumentationGenerator {
 			);
 			loader.load(factory, root);
 		}
-		
+
 		// load additional documentation
 		{
 			ILoader loader = new LoadEMFDescription(
@@ -162,11 +162,41 @@ public class DocumentationGenerator {
 			);
 			loader.load(factory, root);
 		}
-	
+
 		// get all metrics
 		{
-			ILoader loader = new LoadMetrics(
+			ILoader loader = new LoadMetamodelMetrics(
 					ModelPackage.eINSTANCE /* root package */
+			);
+			loader.load(factory, root);
+		}
+		
+		// file metrics
+		{
+			ILoader loader = new LoadFileMetrics(
+					new File("../org.openiaml.model/") /* file root */,
+					"org.openiaml.model" /* plugin name */
+			);
+			loader.load(factory, root);
+		}
+		{
+			ILoader loader = new LoadFileMetrics(
+					new File("../org.openiaml.model.codegen.php/") /* file root */,
+					"org.openiaml.model.codegen.php" /* plugin name */
+			);
+			loader.load(factory, root);
+		}
+		{
+			ILoader loader = new LoadFileMetrics(
+					new File("../org.openiaml.model.drools/") /* file root */,
+					"org.openiaml.model.drools" /* plugin name */
+			);
+			loader.load(factory, root);
+		}
+		{
+			ILoader loader = new LoadFileMetrics(
+					new File("../org.openiaml.model.runtime/") /* file root */,
+					"org.openiaml.model.runtime" /* plugin name */
 			);
 			loader.load(factory, root);
 		}

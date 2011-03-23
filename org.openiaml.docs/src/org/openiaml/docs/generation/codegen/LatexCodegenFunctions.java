@@ -37,7 +37,28 @@ public class LatexCodegenFunctions {
 	public static String latexise(String s) {
 		return humanise(s).toLowerCase().replace(' ', '-');
 	}
+	
+	/**
+	 * Turn a string like "input.text.field" into "inputTextField".
+	 * 
+	 * @param s input.text.field
+	 * @return inputTextField
+	 */
+	public static String camelcase(String s) {
+		// split up based on "."s
+		String[] bits = s.split("\\.");
+		StringBuffer buf = new StringBuffer(bits[0]);
+		for (int i = 1; i < bits.length; i++) {
+			if (bits[i].length() > 0) {
+				buf.append(Character.toUpperCase(bits[i].charAt(0)));
+				if (bits[i].length() > 1) {
+					buf.append(bits[i].substring(1));
+				}
+			}
+		}
 
+		return buf.toString();
+	}
 	/**
 	 * Turns a string - which may contain HTML - into Latex
 	 * code. In particular, it changes:

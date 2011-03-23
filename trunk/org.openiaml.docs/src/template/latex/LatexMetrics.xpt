@@ -10,8 +10,8 @@
 \def\modeldocRuleFileCount{«references.typeSelect(modeldoc::DroolsPackage).size»}
 
 % List of all metrics
-«FOREACH metrics AS metric»
-\def\modeldoc«metric.name»{«metric.value»}
+«FOREACH metrics.sortBy(m|m.name) AS metric-»
+\def\modeldoc«camelcase(metric.name)»{«metric.value»}
 «ENDFOREACH»
 	«ENDFILE»
 «ENDDEFINE»

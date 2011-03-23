@@ -69,6 +69,12 @@ String latexise(String name) :
 	JAVA org.openiaml.docs.generation.codegen.LatexCodegenFunctions.latexise(java.lang.String);
 
 /**
+ * Turn a string like "input.text.field" into "inputTextField"
+ */
+String camelcase(String name) :
+	JAVA org.openiaml.docs.generation.codegen.LatexCodegenFunctions.camelcase(java.lang.String);
+
+/**
  * Escape out any HTML, and also make LaTeX-safe. See Javadocs for more information.
  */
 String convertHTMLIntoLatex(String value) :

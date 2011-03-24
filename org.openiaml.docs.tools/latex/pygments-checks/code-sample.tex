@@ -1,0 +1,44 @@
+\chapter{Code Sample}
+
+\usemintedstyle{eclipse}
+\begin{minted}[fontsize=\small]{checks}
+import iaml;
+
+// NOTE: checks cannot have a semicolon in the exception, otherwise the 
+// OAW parser won't be able to parse beyond it
+extension metamodel::Extensions;
+
+// TODO add test cases for model validation
+// both through Eclipse and through manual test cases (code generation)
+context model::InternetApplication ERROR "No frames in internet application" :
+  !(scopes.typeSelect(model::visual::Frame).isEmpty &&
+    scopes.scopes.typeSelect(model::visual::Frame).isEmpty);
+
+context model::visual::Frame ERROR "Frame must have a name" :
+  name.length > 0;
+  
+context model::Operation ERROR "Operation must have a name" :
+  name.length > 0;
+  
+context model::components::LoginHandler ERROR "A login handler must have an incoming parameter to check against" :
+  !inParameterEdges.isEmpty;
+  
+/**
+ * A 'login' ActionEdge for an AccessControlHandler should not be in the 
+ * same Scope as the handler; this will cause an infinite redirection, 
+ * as the login page can never be accessed.
+ */
+context model::ActionEdge ERROR "A 'login' ActionEdge for an AccessControlHandler should not be in the same Scope as the handler; this will cause an infinite redirection, as the login page can never be accessed." :
+  !(from != null && to != null && model::components::AccessControlHandler.isInstance(from) 
+    && name == "login" && to.eContainer != null && from.eContainer != null
+    && to.eContainer == from.eContainer);
+     
+     
+context model::operations::DecisionNode WARNING "Unknown DecisionNode '" + name + "'" :
+  name == "xpathMatch" || name == "emailAddress" || name == "is set"
+    || name == "equal" || name == "true" || name == "can cast"
+    || name == "empty"
+  || name == "xpathMatch?" || name == "emailAddress?" || name == "is set?"
+    || name == "equal?" || name == "true?" || name == "can cast?"
+    || name == "empty?";
+/**\end{minted}

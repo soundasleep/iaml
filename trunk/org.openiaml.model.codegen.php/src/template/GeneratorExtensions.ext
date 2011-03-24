@@ -300,7 +300,10 @@ model::scopes::Email containingEmail(emf::EObject this) :
 	else
 		containingEmail(eContainer);
 
-/** get the containing Scope of the given element, or null if none */
+/**
+ * Get the containing {@model Scope} of the given element, 
+ * or <code>null</code> if none.
+ */
 model::Scope containingScope(emf::EObject this) :
 	null;
 

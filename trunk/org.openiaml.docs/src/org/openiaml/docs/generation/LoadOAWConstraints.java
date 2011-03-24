@@ -11,11 +11,11 @@ import java.io.InputStreamReader;
 import org.openarchitectureware.xtend.ast.Check;
 import org.openarchitectureware.xtend.ast.ExtensionFile;
 import org.openarchitectureware.xtend.parser.ParseFacade;
+import org.openiaml.docs.modeldoc.ChecksReference;
 import org.openiaml.docs.modeldoc.Constraint;
 import org.openiaml.docs.modeldoc.ConstraintType;
 import org.openiaml.docs.modeldoc.EMFClass;
 import org.openiaml.docs.modeldoc.FileLineReference;
-import org.openiaml.docs.modeldoc.FileReference;
 import org.openiaml.docs.modeldoc.ModelDocumentation;
 import org.openiaml.docs.modeldoc.ModeldocFactory;
 
@@ -72,7 +72,7 @@ public class LoadOAWConstraints extends DocumentationHelper implements ILoader {
 			throw new DocumentationGenerationException(e);
 		}
 		
-		FileReference fr = factory.createFileReference();
+		ChecksReference fr = factory.createChecksReference();
 		fr.setPlugin(plugin);
 		fr.setPackage(packageBase);
 		fr.setName(name);
@@ -102,6 +102,10 @@ public class LoadOAWConstraints extends DocumentationHelper implements ILoader {
 			// add this constraint
 			identifier.getConstraints().add(constraint);
 		}
+		
+		// set number of constraints
+		fr.setUniqueConstraints(file.getChecks().size());
+		
 	}
 	
 }

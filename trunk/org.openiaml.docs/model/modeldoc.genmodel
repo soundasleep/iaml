@@ -121,6 +121,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//DroolsRule/line"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference modeldoc.ecore#//DroolsRule/package"/>
     </genClasses>
+    <genClasses ecoreClass="modeldoc.ecore#//ChecksReference">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//ChecksReference/uniqueConstraints"/>
+    </genClasses>
     <genClasses ecoreClass="modeldoc.ecore#//FileReference">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//FileReference/plugin"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute modeldoc.ecore#//FileReference/package"/>

@@ -153,6 +153,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="package" eType="#//DroolsPackage"
         eOpposite="#//DroolsPackage/rules"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChecksReference" eSuperTypes="#//FileReference">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uniqueConstraints" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FileReference" eSuperTypes="#//Reference">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="plugin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="package" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

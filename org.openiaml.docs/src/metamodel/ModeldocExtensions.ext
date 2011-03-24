@@ -105,6 +105,12 @@ String getCssTagName(String n) :
 String getTotalRuleCount(modeldoc::ModelDocumentation root) :
 	JAVA org.openiaml.docs.generation.codegen.ModeldocCodeGenerator.getTotalRuleCount(org.openiaml.docs.modeldoc.ModelDocumentation);
 
+/**
+ * Get the total number of constraints used in this system.
+ */
+String getTotalConstraintCount(modeldoc::ModelDocumentation root) :
+	JAVA org.openiaml.docs.generation.codegen.ModeldocCodeGenerator.getTotalConstraintCount(org.openiaml.docs.modeldoc.ModelDocumentation);
+
 /** 
  * a hack way to create backtrace-able errors
  * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540

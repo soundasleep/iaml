@@ -17,6 +17,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EClass;
 import org.openarchitectureware.workflow.WorkflowRunner;
 import org.openarchitectureware.workflow.util.ProgressMonitorAdapter;
+import org.openiaml.docs.modeldoc.ChecksReference;
 import org.openiaml.docs.modeldoc.DroolsPackage;
 import org.openiaml.docs.modeldoc.JavadocClassReference;
 import org.openiaml.docs.modeldoc.JavadocFragment;
@@ -210,6 +211,19 @@ public class ModeldocCodeGenerator {
 			if (ref instanceof DroolsPackage) {
 				DroolsPackage pkg = (DroolsPackage) ref;
 				count += pkg.getUniqueRules();
+			}
+		}
+		return count;
+	}
+	/**
+	 * Get the total number of constraints used in this system.
+	 */
+	public static int getTotalConstraintCount(ModelDocumentation root) {
+		int count = 0;
+		for (Reference ref : root.getReferences()) {
+			if (ref instanceof ChecksReference) {
+				ChecksReference pkg = (ChecksReference) ref;
+				count += pkg.getUniqueConstraints();
 			}
 		}
 		return count;

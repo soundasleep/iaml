@@ -8,6 +8,7 @@
 
 \def\modeldocRuleCount{«getTotalRuleCount(this)»}
 \def\modeldocRuleFileCount{«references.typeSelect(modeldoc::DroolsPackage).size»}
+\def\modeldocConstraintCount{«getTotalConstraintCount(this)»}
 
 % List of all metrics
 «FOREACH metrics.sortBy(m|m.name) AS metric-»

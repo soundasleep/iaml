@@ -592,6 +592,28 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	}
 	
 	/**
+	 * Get the first IElement that a given label (with the given label text)
+	 * is for. i.e.:
+	 * 
+	 * <pre>
+	 * &lt;label for="target"&gt;label text&lt;/label&gt;
+	 * &lt;input id="target" /&gt;
+	 * </pre>
+	 * 
+	 * @param labelText
+	 * @return
+	 */
+	protected IElement getFieldForLabel(String labelText) {
+		List<IElement> list = hasLabelForText(labelText);
+		assertEquals(1, list.size());
+		IElement label = list.get(0);
+		
+		List<IElement> forFields = getFieldsForLabel(label);
+		assertEquals(1, forFields.size());
+		return forFields.get(0);		
+	}
+	
+	/**
 	 * <p>
 	 * We need some way of working out the label ID that contains 
 	 * a particular string.
@@ -616,16 +638,45 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	 * <p>TODO return a custom object, not just a String, which can be easily confused.</p>
 	 * 
 	 * @see #getContainsTextXPath(String)
+	 * @see #hasLabelForText(String)
 	 * @param text
 	 * @return
 	 */
 	protected String getLabelIDForText(String text) {
-		logTimed("web", "internal", "get label ID for text");
-		IElement element = getElementByXPath("//label[" + getContainsTextXPath(text) + "]");
+		List<IElement> elements = hasLabelForText(text);
+		assertEquals("Too many labels found for text '" + text + "'", 1, elements.size());
+		IElement element = elements.get(0);
 		String id = element.getAttribute("id");
 		assertNotNull("Label ID for text '" + text + "' was null", id);
-		logTimed("web", "internal", "get label ID for text complete");
 		return id;
+	}
+	
+	/**
+	 * Assert that a label with the given text exists. 
+	 * Returns a list of labels that match the given text.
+	 * 
+	 * @see #getLabelIDForText(String)
+	 * @see #hasNoLabelForText(String)
+	 * @param text
+	 * @return
+	 */
+	protected List<IElement> hasLabelForText(String text) {
+		logTimed("web", "internal", "get label ID for text");
+		List<IElement> elements = getElementsByXPath("//label[" + getContainsTextXPath(text) + "]");
+		assertFalse("No labels found for text '" + text + "'", elements.isEmpty());
+		logTimed("web", "internal", "get label ID for text complete");
+		return elements;
+	}
+
+	/**
+	 * Assert that a label with the given text <em>does not</em> exist. 
+	 * 
+	 * @see #hasLabelForText(String)
+	 * @param text
+	 */
+	protected void hasNoLabelForText(String text) {
+		List<IElement> elements = getElementsByXPath("//label[" + getContainsTextXPath(text) + "]");
+		assertTrue("Labels found for text '" + text + "'", elements.isEmpty());
 	}
 
 	/**
@@ -662,6 +713,33 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		logTimed("web", "internal", "get label ID for text (3) complete");
 		return element.getAttribute("id");
 	}
+	
+	/**
+	 * Assert that a form with the given heading exists. 
+	 * Returns a list of forms that match the given text.
+	 * 
+	 * @see #hasNoInputFormForText(String)
+	 * @param text
+	 * @return
+	 */
+	protected List<IElement> hasInputFormForText(String text) {
+		logTimed("web", "internal", "get form ID for text");
+		List<IElement> elements = getElementsByXPath("//form[h2[" + getContainsTextXPath(text) + "]]");
+		assertFalse("No forms found for text '" + text + "'", elements.isEmpty());
+		logTimed("web", "internal", "get form ID for text complete");
+		return elements;
+	}
+
+	/**
+	 * Assert that a form with the given heading <em>does not</em> exist. 
+	 * 
+	 * @see #hasInputFormForText(String)
+	 * @param text
+	 */
+	protected void hasNoInputFormForText(String text) {
+		List<IElement> elements = getElementsByXPath("//form[h2[" + getContainsTextXPath(text) + "]]");
+		assertTrue("Forms found for text '" + text + "'", elements.isEmpty());
+	}	
 	
 	/**
 	 * Construct the necessary XPath expression to find a node that 
@@ -1096,7 +1174,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		assertEquals(text, textContent);
 		
 		// make sure it's visible
-		if (!((HtmlUnitElementImpl) match).getHtmlElement().isDisplayed()) {
+		if (!isDisplayed(match)) {
 			fail("The label with text '" + text + "' was not displayed: " + match);
 		}
 		
@@ -1124,7 +1202,7 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		List<IElement> results = getElementsByXPath("//label[" + getContainsTextXPath(text) + "]");
 		for (IElement e : results) {
 			// ask HtmlUnit if the element is visible
-			if (((HtmlUnitElementImpl) e).getHtmlElement().isDisplayed()) {
+			if (isDisplayed(e)) {
 				fail("Unexpectedly found a label with text '" + text + "' that was displayed: " + e);
 			}			
 		}
@@ -1259,6 +1337,32 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	public void clickElement(IElement label) throws IOException {
 		((HtmlUnitElementImpl) label).getHtmlElement().click(); 
 	}
-
+	
+	/**
+	 * Get a button with the given text.
+	 * 
+	 * @throws AssertionFailedError if no button could be found
+	 * @param text
+	 * @return 
+	 * @return the button found
+	 */
+	public IElement getButtonWithText(String text) {
+		try {
+        	// try <button>
+    		return getElementByXPath("//button[" + getExactTextXPath(text) + "]" );
+    	} catch (AssertionFailedError e) {
+        	// try <input type="button">
+    		return getElementByXPath("//input[(@type='button' or @type='submit' or @type='reset' or @type='image') and (@value='" + text + "')]" );
+    	}
+	}
+	
+    /**
+     * Returns <code>true</code> if the given IElement is visible.
+     * 
+	 * @param element
+	 */
+	protected boolean isDisplayed(IElement element) {
+		return ((HtmlUnitElementImpl) element).getHtmlElement().isDisplayed();
+	}
 
 }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.12eeb3f61e6.11">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
+    <children xsi:type="iaml.visual:Button" id="visual.12eeb3f62a1.40" name="target">
+      <operations xsi:type="iaml:PrimitiveOperation" id="model.12eeb49d2c8.3d" name="set visible" inActions="model.12eeb49d2c8.53"/>
+      <properties id="model.12eeb3f61e6.1c" name="visible">
+        <type href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//boolean;XSDSimpleTypeDefinition=10"/>
+      </properties>
+    </children>
+    <children xsi:type="iaml.visual:Button" id="visual.12eeb3f62a1.41" name="set visibility" outActions="model.12eeb49d2c8.53">
+      <actions id="model.12eeb49d2c8.53" inParameterEdges="wires.12eeb49d384.1" name="onClick" from="visual.12eeb3f62a1.41" to="model.12eeb49d2c8.3d"/>
+      <properties id="model.12eeb3f61e6.4a" name="visible">
+        <type href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//boolean;XSDSimpleTypeDefinition=10"/>
+      </properties>
+    </children>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.12eeb3f62a1.42" name="visibility value" outParameterEdges="wires.12eeb49d384.1">
+      <parameterEdges id="wires.12eeb49d384.1" from="visual.12eeb3f62a1.42" to="model.12eeb49d2c8.53"/>
+      <type href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//boolean;XSDSimpleTypeDefinition=10"/>
+    </children>
+  </scopes>
+</iaml:InternetApplication>

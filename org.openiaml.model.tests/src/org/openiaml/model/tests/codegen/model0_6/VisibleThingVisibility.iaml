@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.12eeb39e42e.a">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
+    <children xsi:type="iaml.visual:InputForm" id="visual.12eeb39e537.15" name="Form visible"/>
+    <children xsi:type="iaml.visual:InputForm" id="visual.12eeb39e537.17" name="Form hidden" visible="false"/>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.12eeb39e537.18" name="Text visible"/>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.12eeb39e537.1a" name="Text hidden" visible="false"/>
+    <children xsi:type="iaml.visual:Button" id="visual.12eeb39e537.1b" name="Button visible"/>
+    <children xsi:type="iaml.visual:Button" id="visual.12eeb39e537.1d" name="Button hidden" visible="false"/>
+    <children xsi:type="iaml.visual:Label" id="visual.12eeb39e537.1e" name="Label visible"/>
+    <children xsi:type="iaml.visual:Label" id="visual.12eeb39e537.20" name="Label hidden" visible="false"/>
+    <children xsi:type="iaml.visual:Map" id="visual.12eeb39e537.21" name="Map visible"/>
+    <children xsi:type="iaml.visual:Map" id="visual.12eeb39e537.23" name="Map hidden" visible="false"/>
+  </scopes>
+</iaml:InternetApplication>

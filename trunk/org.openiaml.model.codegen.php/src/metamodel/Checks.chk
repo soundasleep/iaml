@@ -132,7 +132,9 @@ context model::PrimitiveOperation WARNING "Unknown primitive operation name '" +
 	(eContainer != null && model::VisibleThing.isInstance(eContainer) && name == "update") || 
 	(eContainer != null && model::DomainAttribute.isInstance(eContainer) && name == "update") || 
 	(eContainer != null && model::DomainAttributeInstance.isInstance(eContainer) && name == "update") || 
-	(eContainer != null && model::VisibleThing.isInstance(eContainer) && name == "init") || 
+	(eContainer != null && model::VisibleThing.isInstance(eContainer) && name == "init") ||
+	
+	// primitive operations defined with no parent	
 	(name == "set" ||
 		name == "alert" || name == "save" ||
 		name == "new" ||
@@ -143,7 +145,10 @@ context model::PrimitiveOperation WARNING "Unknown primitive operation name '" +
 			(name == "hide" || name == "show")) || 
 		(model::scopes::Email.isInstance(eContainer) &&
 			(name == "send")) ||
-		name == "true?" || name == "can cast?");
+		name == "true?" || name == "can cast?") ||
+
+	// a Property 'XXX' will generate a PrimitiveOperation named 'set XXX'		
+	(eContainer != null && eContainer.eContents.typeSelect(model::Property).exists(p|name == "set " + p.name));
 
 context model::PrimitiveCondition WARNING "Unknown primitive condition name '" + name + "'" :
 	(eContainer != null && model::domain::DomainIterator.isInstance(eContainer) && ((model::domain::DomainIterator) eContainer).hasNext == this) || 

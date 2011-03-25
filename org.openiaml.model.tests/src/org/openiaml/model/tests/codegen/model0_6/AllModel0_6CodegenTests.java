@@ -21,6 +21,7 @@ public class AllModel0_6CodegenTests {
 		TestSuite suite = new TestSuite("Model 0.6");
 
 		suite.addTestSuite(VisibleThingVisibility.class);
+		suite.addTestSuite(VisibleThingVisibilityProperty.class);
 
 		return suite;
 	}

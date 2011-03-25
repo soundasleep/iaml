@@ -19,7 +19,9 @@
 			
 	</label>
 	
-	<div id="«safeNameString(id)-»" class="iaml_map">
+	<div id="«safeNameString(id)-»" class="iaml_map"
+		«EXPAND Render::getVisibilityInlineCode(currentFrame)»
+		>
 		<?php
 		switch (MAP_HANDLER) {
 			case "googlemaps":

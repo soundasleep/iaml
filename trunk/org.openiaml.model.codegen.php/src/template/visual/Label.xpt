@@ -17,6 +17,7 @@
 	<label
 		id="«safeNameString(id)-»<?php echo «EXPAND getIteratorListIndex»; ?>"
 		class="label_«safeNameString(name)»" 
+		«EXPAND Render::getVisibilityInlineCode(currentFrame)»
 		«EXPAND EventHandlers::getInlineClickJavascript(currentFrame)»
 		«REM»has it been hidden by anything?«ENDREM»
 		<?php

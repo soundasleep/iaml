@@ -14,7 +14,9 @@
  * as part of an existing function call.
  *
  * @implementation AccessControlHandler,PrimitiveOperation
- *		A {@model AccessControlHandler} has a {@model PrimitiveOperation} named 'check permissions'. 
+ *		A {@model AccessControlHandler} has a {@model PrimitiveOperation} named 'check permissions'.
+ * @implementation PrimitiveOperation
+ *		A {@model PrimitiveOperation} can only accept a single argument or {@model Parameter} at most. 
  */
 «DEFINE operationContents(model::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
 	«REM»special primitive operation names«ENDREM»
@@ -54,6 +56,17 @@
 	«ELSEIF name == "update" || name == "init"»
 		«REM»Issue 210: Change 'update' CompositeOperation to PrimitiveOperation.«ENDREM»
 		«EXPAND updateOperation(php) FOR this»
+	«ELSEIF name.startsWith("set ") && eContainer.eContents.typeSelect(model::Property).exists(p|"set " + p.name == name)»
+		«REM»Issue 223: create 'set XXX' operation for all properties«ENDREM»
+		«LET eContainer.eContents.typeSelect(model::Property).selectFirst(p|"set " + p.name == name) AS property»
+			«REM»primitive operations only have access to a single argument, currently«ENDREM»
+			«IF php»
+				$arg0 = $default_arg;
+			«ELSE»
+				var arg0 = default_arg;
+			«ENDIF»
+			«EXPAND setFieldValue(php) FOR property»
+		«ENDLET»
 	«ELSE»
 		«throwException("Unknown function to expand '" + name + "': " + this)»
 	«ENDIF»
@@ -300,6 +313,9 @@
  * outflowTarget <-- inflowTarget
  */
 «DEFINE setPropertyToValueOperation(model::ExecutionEdgesSource start, Boolean php, model::Property property) FOR model::PrimitiveOperation-»
+	«IF inFlows.isEmpty»
+		«throwException("Trying to call a PrimitiveOperation with no incoming flows: " + this)»
+	«ENDIF»
 	«IF php»
 		$arg0 = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
 		if (true) {

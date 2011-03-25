@@ -330,7 +330,8 @@ model::domain::DomainSchema getDomainSchema(emf::EObject this) :
  * is 'set', and within an Operation called 'update'.
  */
 shouldExpandEventTriggers(model::PrimitiveOperation this ) :
-	getOperationName( eContainer ) == "update";
+	model::Operation.isInstance(eContainer) &&
+		getOperationName( eContainer ) == "update";
 	
 shouldExpandEventTriggersServer(model::PrimitiveOperation this ) :
 	shouldExpandEventTriggers(this);

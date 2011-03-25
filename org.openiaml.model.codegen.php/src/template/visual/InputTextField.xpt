@@ -37,6 +37,7 @@
 			id="«safeNameString(id)»"
 			name="«safeNameString(id)»"
 			class="text_«safeNameString(name)»"
+			«EXPAND Render::getVisibilityInlineCode(currentFrame)»
 			onChange="return onChange_«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>(this);"
 			«REM»is onInput called at all?«ENDREM»
 			«IF onInput != null && !onInput.outActions.isEmpty»

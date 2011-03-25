@@ -61,6 +61,7 @@
 	<div
 		id="<?php echo $id; ?>" 
 		style="display: none;"
+		«EXPAND Render::getVisibilityInlineCode(currentFrame)»
 		«EXPAND EventHandlers::getInlineClickJavascript(currentFrame)»	
 		> 
 		

@@ -18,6 +18,7 @@
 			onClick="return onClick_«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>(this);"
 		«ENDIF»
 		class="form_«safeNameString(name)»"
+		«EXPAND Render::getVisibilityInlineCode(currentFrame)»
 		>
 		
 		«IF onClick != null»

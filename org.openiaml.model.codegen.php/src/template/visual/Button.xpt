@@ -16,6 +16,7 @@
 	<input type="submit" id="«safeNameString(id)-»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>" 
 		value="«buttonName()»"
 		class="button_«safeNameString(name)»"
+		«EXPAND Render::getVisibilityInlineCode(currentFrame)»
 		«EXPAND EventHandlers::getInlineClickJavascript(currentFrame)» 
 		«EXPAND EventHandlers::getInlineChangeJavascript(currentFrame)» 
 		>

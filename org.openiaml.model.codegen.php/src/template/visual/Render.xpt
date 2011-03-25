@@ -66,3 +66,31 @@
 	«EXPAND template::visual::Button::getButtonLinkValue(currentFrame, argName, true, false) FOR this»
 «ENDDEFINE»
 
+/**
+ * We are currently in a HTML tag - should the current element be hidden?
+ */
+«DEFINE getVisibilityInlineCode(model::visual::Frame currentFrame) FOR model::VisibleThing»
+	<?php
+	$found_visible_value = false;
+	$visible_value = null;
+	 
+	«REM»first, go through all properties«ENDREM»	
+	«FOREACH properties.select(p|p.name == "visible") AS p»
+		if (!$found_hidden_value && «EXPAND template::operations::Parameters::isSetParameter(true) FOR p») {
+			$visible_value = make_into_boolean(«EXPAND template::operations::Parameters::callParameterValue(true, false) FOR p»);
+			$found_hidden_value = true;
+		}
+	«ENDFOREACH»
+	
+	«REM»then revert back to the attribute«ENDREM»
+	if (!$found_visible_value) {
+		// default attribute
+		$visible_value = «IF visible»true«ELSE»false«ENDIF»;
+	}
+	
+	if (!$visible_value) {
+		echo 'style="display: none;" ';
+	}
+	?>
+«ENDDEFINE»
+

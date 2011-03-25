@@ -19,6 +19,7 @@
 	?>
 	<table id="«safeName()-»"
 		class="list_«safeNameString(name)»"
+		«EXPAND Render::getVisibilityInlineCode(currentFrame)»
 		«REM»has it been hidden by anything?«ENDREM»
 		<?php
 		/* has this label been hidden by anything? */

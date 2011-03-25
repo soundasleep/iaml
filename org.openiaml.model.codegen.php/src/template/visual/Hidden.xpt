@@ -25,6 +25,7 @@
 			id="«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>"
 			name="«safeNameString(id)»"
 			class="hidden_«safeNameString(name)»"
+			«EXPAND Render::getVisibilityInlineCode(currentFrame)»
 			onChange="return onChange_«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>(this);"
 			
 			«REM»

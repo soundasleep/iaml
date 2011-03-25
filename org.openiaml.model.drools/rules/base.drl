@@ -97,7 +97,7 @@ rule "Create field value for Changeable (untyped)"
 end
 
 /**
- * @inference Property All {@model Property Properties}
+ * @inference Condition,Property All {@model Property Properties}
  * 		will have a {@model CompositeCondition} in its container called "is set".
  */
 rule "Properties will also have a related 'is set' condition (not fieldValue)"
@@ -134,6 +134,27 @@ rule "Properties will also have a related 'is set' condition (fieldValue)"
 		PrimitiveCondition cond = handler.generatedPrimitiveCondition(containerGe, container);
 		handler.setName(cond, "fieldValue is set");
 		queue.add(cond, drools);
+
+end
+
+/**
+ * @inference Operation,Property All {@model Property Properties}, other than 'fieldValue',
+ * 		will have an {@model PrimitiveOperation} in its container called "set XXX".
+ */
+rule "Properties will have a related 'set XXX' operation"
+	when
+		container : ContainsOperations ( )
+		containerGe : GeneratesElements ( this == container )
+		value : Property ( eContainer == container, name != "fieldValue" )
+		
+		not ( Operation( eval(name.equals("set " + value.getName())), eContainer == container ))
+	
+		eval ( handler.veto( containerGe ))
+	
+	then
+		PrimitiveOperation op = handler.generatedPrimitiveOperation(containerGe, container);
+		handler.setName(op, "set " + value.getName());
+		queue.add(op, drools);
 
 end
 

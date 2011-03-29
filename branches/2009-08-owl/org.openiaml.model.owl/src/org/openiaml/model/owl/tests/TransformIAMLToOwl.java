@@ -50,7 +50,10 @@ import com.hp.hpl.jena.util.PrintUtil;
 import com.hp.hpl.jena.vocabulary.ReasonerVocabulary;
 
 /**
- * Load and evaluate the IAML models and instances. 
+ * This test method takes the IAML metamodel (iaml.ecore) and attempts
+ * to transform it into an OWL model (iaml.owl).
+ * 
+ * <p>TODO refactor with {@link TransformEcoreToOwl}
  * 
  * @author jmwright
  *
@@ -58,14 +61,15 @@ import com.hp.hpl.jena.vocabulary.ReasonerVocabulary;
 public class TransformIAMLToOwl extends ModelTestCase {
 
 	/**
-	 * Takes simple.ecore and translates it into simple.owl.
+	 * Takes iaml.ecore and translates it into iaml.owl.
 	 * 
 	 * @return The generated OWL schema.
 	 */
 	protected Model setupOwlTransform() throws Exception {
 
 		// copy over ecore file
-		File source = new File("../../org.openiaml.model/model/iaml.ecore");
+		// File source = new File("../../org.openiaml.model/model/iaml.ecore");
+		File source = new File("model/iaml.modified.ecore");
 		// File source = new File("model/simple.ecore");
 		System.out.println(source.getAbsolutePath());
 		assertTrue("Source file exists: " + source, source.exists());

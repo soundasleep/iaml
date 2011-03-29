@@ -3,28 +3,12 @@ Bundle-ManifestVersion: 2
 Bundle-Name: IAML Validation (OWL)
 Bundle-SymbolicName: org.openiaml.model.owl;singleton:=true
 Bundle-Version: 0.3.1
-Bundle-ClassPath: .,
- lib/jena/arq-2.8.7.jar,
- lib/jena/icu4j-3.4.4.jar,
- lib/jena/iri-0.8.jar,
- lib/jena/jena-2.6.4-tests.jar,
- lib/jena/jena-2.6.4.jar,
- lib/jena/log4j-1.2.13.jar,
- lib/jena/lucene-core-2.3.1.jar,
- lib/jena/slf4j-api-1.5.8.jar,
- lib/jena/slf4j-log4j12-1.5.8.jar,
- lib/jena/stax-api-1.0.1.jar,
- lib/jena/wstx-asl-3.2.9.jar,
- lib/jena/xercesImpl-2.7.1.jar
+Bundle-ClassPath: .
 Bundle-Vendor: www.openiaml.org
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: com.hp.hpl.jena.ontology,
- com.hp.hpl.jena.rdf.model,
- com.hp.hpl.jena.reasoner,
- com.hp.hpl.jena.reasoner.rulesys,
- com.hp.hpl.jena.util,
- org.openiaml.model.owl.actions,
+Export-Package: org.openiaml.model.owl.actions,
+ org.openiaml.model.owl.rdf,
  org.openiaml.model.owl.simple.simple,
  org.openiaml.model.owl.simple.simple.impl,
  org.openiaml.model.owl.simple.simple.util,
@@ -46,5 +30,5 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui;bundle-version="3.5.0",
  l3i.sido.emf4sw.rdf;bundle-version="0.4.0",
  org.openiaml.model.actions;bundle-version="0.3.1",
- org.apache.xerces
+ l3i.sido.emf4sw.jena;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy

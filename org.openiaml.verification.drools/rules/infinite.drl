@@ -28,7 +28,7 @@ rule "Frame navigating to another Frame on access"
 		
 end
 
-rule "Recursiveness of NavigatesTo"
+rule "NavigatesTo is transitive"
 	when
 		p1 : Frame ( )
 		p2 : Frame ( eval(p1 != p2) )

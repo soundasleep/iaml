@@ -1,0 +1,8 @@
+import iaml;
+
+// NOTE: checks cannot have a semicolon in the exception, otherwise the 
+// OAW parser won't be able to parse beyond it
+extension validation::InfiniteRedirect;
+
+context model::visual::Page ERROR "Infinite redirection":
+	!infiniteRedirect();

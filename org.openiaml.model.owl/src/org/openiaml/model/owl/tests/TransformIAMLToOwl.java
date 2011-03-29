@@ -69,7 +69,7 @@ public class TransformIAMLToOwl extends ModelTestCase {
 
 		// copy over ecore file
 		// File source = new File("../../org.openiaml.model/model/iaml.ecore");
-		File source = new File("model/iaml.modified.ecore");
+		File source = new File("model/iaml-1284.ecore");
 		// File source = new File("model/simple.ecore");
 		System.out.println(source.getAbsolutePath());
 		assertTrue("Source file exists: " + source, source.exists());
@@ -87,6 +87,7 @@ public class TransformIAMLToOwl extends ModelTestCase {
 		
 		// once run, the "target.owl" file should exist
 		assertTrue("Final file should exist: " + transformed, transformed.exists());
+		System.out.println("Output file " + transformed + " has been created.");
 		
 		Model schema = FileManager.get().loadModel( transformed.getLocation().toString() );
 		return schema;
@@ -105,7 +106,7 @@ public class TransformIAMLToOwl extends ModelTestCase {
 	 * @throws Exception
 	 */
 	public void testDefaultModelIsValid() throws Exception {
-		System.setProperty("log4j.configuration", "file:///" + new File("log4j.properties").getAbsolutePath());
+		// System.setProperty("log4j.configuration", "file:///" + new File("log4j.properties").getAbsolutePath());
 
 		Model schema = setupOwlTransform();		
 		Reasoner reasoner = ReasonerRegistry.getOWLReasoner();

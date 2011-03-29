@@ -1,23 +1,23 @@
 import iaml;
 
 // initial def
-Set[model::visual::Page] incomingPages(model::visual::Page this) :
-	inEdges.typeSelect(model::wires::NavigateWire).select(w|w.name == "onClick")
+Set[model::visual::Frame] incomingPages(model::visual::Frame this) :
+	inActions.select(w|w.name == "onClick")
 		.from.typeSelect(model::visual::Button)
-		.eContainer.typeSelect(model::visual::Page)
+		.eContainer.typeSelect(model::visual::Frame)
 		
 	.union(
-		inEdges.typeSelect(model::wires::NavigateWire)
-		.from.typeSelect(model::EventTrigger).select(e|e.name == "click")
+		inActions
+		.from.typeSelect(model::EventTrigger).select(e|e.name == "click" || e.name == "onClick")
 		.eContainer.typeSelect(model::visual::Button)
-		.eContainer.typeSelect(model::visual::Page)		
+		.eContainer.typeSelect(model::visual::Frame)		
 	);
 
 // transitivity
-Boolean connectedToHomePage(model::visual::Page this) :
+Boolean connectedToHomePage(model::visual::Frame this) :
 	name == "Home" ||
 	(!incomingPages().isEmpty && incomingPages().exists(p | connectedToHomePage(p)));
 	
 // definition
-accessible(model::visual::Page this) :
+accessible(model::visual::Frame this) :
 	connectedToHomePage(this);

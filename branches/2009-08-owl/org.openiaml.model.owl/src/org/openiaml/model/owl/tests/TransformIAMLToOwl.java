@@ -69,7 +69,7 @@ public class TransformIAMLToOwl extends ModelTestCase {
 
 		// copy over ecore file
 		// File source = new File("../../org.openiaml.model/model/iaml.ecore");
-		File source = new File("model/iaml-1284.ecore");
+		File source = new File("model/iaml-2611.ecore");
 		// File source = new File("model/simple.ecore");
 		System.out.println(source.getAbsolutePath());
 		assertTrue("Source file exists: " + source, source.exists());

@@ -12,12 +12,12 @@ import org.openiaml.verification.model.validation.*;
 global org.openiaml.verification.model.validation.ValidationFactory factory;
 global org.openiaml.verification.drools.VerifyHandler verify;
 
-rule "Page navigating to another Page on access"
+rule "Frame navigating to another Frame on access"
 	when
-		p : Page ( )
-		access : EventTrigger ( eContainer == p, name == "access" )
-		p2 : Page ( eval(p != p2) )
-		navigate : NavigateWire ( from == access, to == p2 )
+		access : EventTrigger ( )
+		p : Frame ( onAccess == access )
+		p2 : Frame ( eval(p != p2) )
+		navigate : ActionEdge ( from == access, to == p2 )
 		not ( NavigatesTo ( from == p, to == p2 ))
 	
 	then
@@ -30,10 +30,10 @@ end
 
 rule "Recursiveness of NavigatesTo"
 	when
-		p1 : Page ( )
-		p2 : Page ( eval(p1 != p2) )
+		p1 : Frame ( )
+		p2 : Frame ( eval(p1 != p2) )
 		n : NavigatesTo( from == p1, to == p2 )
-		p3 : Page ( eval(p2 != p3) )
+		p3 : Frame ( eval(p2 != p3) )
 		n2 : NavigatesTo ( from == p2, to == p3 )
 		not ( NavigatesTo ( from == p1, to == p3 ))
 	
@@ -47,7 +47,7 @@ end
 
 rule "A circular access loop"
 	when
-		p : Page ( )
+		p : Frame ( )
 		n : NavigatesTo ( from == p, to == p )
 		not (Violation ( source == p ))
 	

@@ -19,7 +19,13 @@ Bundle-ClassPath: .,
 Bundle-Vendor: www.openiaml.org
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.openiaml.model.owl.simple.simple,
+Export-Package: com.hp.hpl.jena.ontology,
+ com.hp.hpl.jena.rdf.model,
+ com.hp.hpl.jena.reasoner,
+ com.hp.hpl.jena.reasoner.rulesys,
+ com.hp.hpl.jena.util,
+ org.openiaml.model.owl.actions,
+ org.openiaml.model.owl.simple.simple,
  org.openiaml.model.owl.simple.simple.impl,
  org.openiaml.model.owl.simple.simple.util,
  org.openiaml.model.owl.tests,

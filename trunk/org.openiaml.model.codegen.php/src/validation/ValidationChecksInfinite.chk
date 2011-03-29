@@ -4,5 +4,5 @@ import iaml;
 // OAW parser won't be able to parse beyond it
 extension validation::InfiniteRedirect;
 
-context model::visual::Page ERROR "Infinite redirection":
+context model::visual::Frame ERROR "Infinite redirection":
 	!infiniteRedirect();

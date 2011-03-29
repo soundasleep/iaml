@@ -1,12 +1,11 @@
 import iaml;
 
-shouldBeSecure(model::visual::Page this) :
+shouldBeSecure(model::visual::Frame this) :
 	eContainer != null && model::scopes::Session.isInstance(eContainer)	
-		&& !((model::scopes::Session) eContainer).children.typeSelect(model::components::LoginHandler).isEmpty;	
+		&& !((model::scopes::Session) eContainer).elements.typeSelect(model::components::LoginHandler).isEmpty;	
 
-isSecure(model::visual::Page this) :
-	eventTriggers.select(e|e.name == "access")
-		.outEdges.typeSelect(model::wires::RunInstanceWire)
+isSecure(model::visual::Frame this) :
+	onAccess.outActions
 		.to.typeSelect(model::Operation).exists(o | isSecureOperation(o));
 
 isSecureOperation(model::Operation this) :

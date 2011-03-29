@@ -1,0 +1,27 @@
+import iaml;
+
+// initial def
+cached List[model::visual::Page] redirectsTo(model::visual::Page this) :
+	eventTriggers.select(e|e.name == "access")
+		.outEdges.typeSelect(model::wires::NavigateWire)
+		.to.typeSelect(model::visual::Page);
+
+// transitivity
+// this approach infinite loops for Inf2
+/*
+cached Boolean doesRedirectTo(model::visual::Page a, model::visual::Page b) :
+	a.redirectsTo().exists( c | c == b|| doesRedirectTo(c, b));
+*/
+
+// we need to keep track of which nodes we have visited
+cached Boolean doesRedirectTo(model::visual::Page a, model::visual::Page b, Set[model::visual::Page] visited) :
+	visited.contains(b) ||
+	a.redirectsTo().exists( c | 
+		c == b || 
+		doesRedirectTo(c, b, (visited.add(a)).toSet())
+	);
+
+// definition
+infiniteRedirect(model::visual::Page this) :
+	doesRedirectTo(this, this, {}.toSet());
+	

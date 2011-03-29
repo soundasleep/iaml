@@ -12,12 +12,12 @@ import org.openiaml.verification.model.validation.*;
 global org.openiaml.verification.model.validation.ValidationFactory factory;
 global org.openiaml.verification.drools.VerifyHandler verify;
 
-rule "Page has a path (1)"
+rule "Frame has a path (1)"
 	when
-		p : Page ( )
+		p : Frame ( )
 		b : Button ( eContainer == p )
-		p2 : Page ( )
-		n : NavigateWire ( from == b, to == p2, name == "onClick")
+		p2 : Frame ( )
+		n : ActionEdge ( from == b, to == p2, name == "onClick")
 		not ( PathTo ( from == p, to == p2 ))
 	
 	then
@@ -28,13 +28,13 @@ rule "Page has a path (1)"
 
 end
 		
-rule "Page has a path (2)"
+rule "Frame has a path (2)"
 	when
-		p : Page ( )
+		p : Frame ( )
 		b : Button ( eContainer == p )
 		e : EventTrigger ( eContainer == b, name == "click" )
-		p2 : Page ( )
-		n : NavigateWire ( from == e, to == p2 )
+		p2 : Frame ( )
+		n : ActionEdge ( from == e, to == p2 )
 		not ( PathTo ( from == p, to == p2 ))
 	
 	then
@@ -47,9 +47,9 @@ end
 
 rule "Recursiveness of PathTo"
 	when
-		p1 : Page ( )
-		p2 : Page ( )
-		p3 : Page ( )
+		p1 : Frame ( )
+		p2 : Frame ( )
+		p3 : Frame ( )
 		PathTo ( from == p1, to == p2 )
 		PathTo ( from == p2, to == p3 )
 		not ( PathTo ( from == p1, to == p3 ))
@@ -62,26 +62,26 @@ rule "Recursiveness of PathTo"
 	
 end
 
-rule "Page is accessible"
+rule "Frame is accessible"
 	when
-		home : Page ( name == "Home" )
-		p : Page ( eval(p != home) )
+		home : Frame ( name == "Home" )
+		p : Frame ( eval(p != home) )
 		not ( PathTo ( from == home, to == p ))
 	
 	then
 		Violation violation = factory.createViolation();
 		violation.setSource(p);
-		violation.setReason("Page is not accessible");
+		violation.setReason("Frame is not accessible");
 		verify.failed(violation);
 		insert(violation);
 
 end
 
-rule "Retract previously inaccessible page"
+rule "Retract previously inaccessible frame"
 	when
-		home : Page ( name == "Home" )
-		p : Page ( )
-		violation : Violation ( source == p, reason == "Page is not accessible" )
+		home : Frame ( name == "Home" )
+		p : Frame ( )
+		violation : Violation ( source == p, reason == "Frame is not accessible" )
 		PathTo ( from == home, to == p )
 	
 	then

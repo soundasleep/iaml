@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-    pygments.lexers.checks
+    pygments.lexers.xtend
     ~~~~~~~~~~~~~~~~~~~~~~~~
 
-    Lexer for Checks.
-    Based on pygments.lexers.compiled
+    Lexer for openArchitecutreWare Xtend.
+    Based on pygments.lexers.checks
 
     :license: BSD, see LICENSE for details.
 """
@@ -22,18 +22,18 @@ from pygments.token import \
 # backwards compatibility
 from pygments.lexers.functional import OcamlLexer
 
-__all__ = ['ChecksLexer']
+__all__ = ['XtendLexer']
 
 # based on JavaLexer
-class ChecksLexer(RegexLexer):
+class XtendLexer(RegexLexer):
     """
-    For Checks source code (.chk) [jevon mod]
+    For Xtend source code (.ext) [jevon mod]
     """
 
-    name = 'Checks'
-    aliases = ['checks', 'chk']
-    filenames = ['*.chk']
-    mimetypes = ['text/x-chk']
+    name = 'Xtend'
+    aliases = ['xtend', 'ext']
+    filenames = ['*.ext']
+    mimetypes = ['text/x-xtend']
 
     flags = re.MULTILINE | re.DOTALL
 
@@ -52,7 +52,6 @@ class ChecksLexer(RegexLexer):
             (r'/\*.*?\*/', Comment.Multiline),
             (r'@[a-zA-Z_][a-zA-Z0-9_\.]*', Name.Decorator),
             (r'(this|context|cached|if|then|else)\b', Keyword),
-            (r'(ERROR|WARNING)\b', Keyword),
             (r'(true|false|null)\b', Keyword.Constant),
             (r'(extension)(\s+)', bygroups(Keyword.Namespace, Text), 'import'),
             (r'(import)(\s+)', bygroups(Keyword.Namespace, Text), 'import'),

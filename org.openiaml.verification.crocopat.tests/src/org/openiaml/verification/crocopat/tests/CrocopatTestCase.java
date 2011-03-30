@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.openiaml.model.model.visual.Page;
+import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.tests.ModelInferenceTestCase;
 import org.openiaml.verification.crocopat.VerificationEngine;
 import org.openiaml.verification.crocopat.VerificationViolation;
@@ -46,9 +46,9 @@ public class CrocopatTestCase extends TestCase {
 			// none of the violations should have empty objects
 			assertEquals(1, violation.getObjects().size());
 			
-			// they should all be of class Page
-			assertTrue("EObject should be Page but was: " + violation.getObjects().get(0).getClass().getSimpleName(),
-					violation.getObjects().get(0) instanceof Page);			
+			// they should all be of class Frame
+			assertTrue("EObject should be Frame but was: " + violation.getObjects().get(0).getClass().getSimpleName(),
+					violation.getObjects().get(0) instanceof Frame);			
 		}
 		
 	}

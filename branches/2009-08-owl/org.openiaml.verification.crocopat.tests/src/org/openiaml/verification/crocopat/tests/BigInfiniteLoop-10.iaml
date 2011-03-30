@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ASCII"?>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.12eff86980a.10006">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12eff8698c5.800a" name="Home">
+    <children xsi:type="iaml.visual:Button" id="visual.12eff8698c5.800c" name="Navigate to page 0">
+      <actions id="model.12eff86980a.10008" name="run" from="model.12eff86980a.10007" to="visual.12eff8698c5.800b"/>
+      <onClick id="model.12eff86980a.10007" name="click" outActions="model.12eff86980a.10008"/>
+    </children>
+    <children xsi:type="iaml.visual:Button" id="visual.12eff8698c5.800e" name="Navigate to page 1">
+      <actions id="model.12eff86980a.1000a" name="run" from="model.12eff86980a.10009" to="visual.12eff8698c5.800d"/>
+      <onClick id="model.12eff86980a.10009" name="click" outActions="model.12eff86980a.1000a"/>
+    </children>
+    <children xsi:type="iaml.visual:Button" id="visual.12eff8698c5.8010" name="Navigate to page 2">
+      <actions id="model.12eff86980a.1000e" name="run" from="model.12eff86980a.1000d" to="visual.12eff8698c5.800f"/>
+      <onClick id="model.12eff86980a.1000d" name="click" outActions="model.12eff86980a.1000e"/>
+    </children>
+    <children xsi:type="iaml.visual:Button" id="visual.12eff8698c5.8012" name="Navigate to page 3">
+      <actions id="model.12eff86980a.10012" name="run" from="model.12eff86980a.10011" to="visual.12eff8698c5.8011"/>
+      <onClick id="model.12eff86980a.10011" name="click" outActions="model.12eff86980a.10012"/>
+    </children>
+    <children xsi:type="iaml.visual:Button" id="visual.12eff8698c5.8014" name="Navigate to page 4">
+      <actions id="model.12eff86980a.10016" name="run" from="model.12eff86980a.10015" to="visual.12eff8698c5.8013"/>
+      <onClick id="model.12eff86980a.10015" name="click" outActions="model.12eff86980a.10016"/>
+    </children>
+    <children xsi:type="iaml.visual:Button" id="visual.12eff8698c5.8016" name="Navigate to page 5">
+      <actions id="model.12eff86980a.1001a" name="run" from="model.12eff86980a.10019" to="visual.12eff8698c5.8015"/>
+      <onClick id="model.12eff86980a.10019" name="click" outActions="model.12eff86980a.1001a"/>
+    </children>
+    <children xsi:type="iaml.visual:Button" id="visual.12eff8698c5.8018" name="Navigate to page 6">
+      <actions id="model.12eff86980a.1001e" name="run" from="model.12eff86980a.1001d" to="visual.12eff8698c5.8017"/>
+      <onClick id="model.12eff86980a.1001d" name="click" outActions="model.12eff86980a.1001e"/>
+    </children>
+    <children xsi:type="iaml.visual:Button" id="visual.12eff8698c5.801a" name="Navigate to page 7">
+      <actions id="model.12eff86980a.10022" name="run" from="model.12eff86980a.10021" to="visual.12eff8698c5.8019"/>
+      <onClick id="model.12eff86980a.10021" name="click" outActions="model.12eff86980a.10022"/>
+    </children>
+    <children xsi:type="iaml.visual:Button" id="visual.12eff8698c5.801c" name="Navigate to page 8">
+      <actions id="model.12eff86980a.10026" name="run" from="model.12eff86980a.10025" to="visual.12eff8698c5.801b"/>
+      <onClick id="model.12eff86980a.10025" name="click" outActions="model.12eff86980a.10026"/>
+    </children>
+    <children xsi:type="iaml.visual:Button" id="visual.12eff8698c5.801e" name="Navigate to page 9">
+      <actions id="model.12eff86980a.1002a" name="run" from="model.12eff86980a.10029" to="visual.12eff8698c5.801d"/>
+      <onClick id="model.12eff86980a.10029" name="click" outActions="model.12eff86980a.1002a"/>
+    </children>
+  </scopes>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12eff8698c5.800b" name="page 0" inActions="model.12eff86980a.10008 model.12eff86980a.1002e">
+    <actions id="model.12eff86980a.1000c" name="navigate" from="model.12eff86980a.1000b" to="visual.12eff8698c5.800d"/>
+    <onAccess id="model.12eff86980a.1000b" name="access" outActions="model.12eff86980a.1000c"/>
+  </scopes>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12eff8698c5.800d" name="page 1" inActions="model.12eff86980a.1000a model.12eff86980a.1000c">
+    <actions id="model.12eff86980a.10010" name="navigate" from="model.12eff86980a.1000f" to="visual.12eff8698c5.800f"/>
+    <onAccess id="model.12eff86980a.1000f" name="access" outActions="model.12eff86980a.10010"/>
+  </scopes>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12eff8698c5.800f" name="page 2" inActions="model.12eff86980a.1000e model.12eff86980a.10010">
+    <actions id="model.12eff86980a.10014" name="navigate" from="model.12eff86980a.10013" to="visual.12eff8698c5.8011"/>
+    <onAccess id="model.12eff86980a.10013" name="access" outActions="model.12eff86980a.10014"/>
+  </scopes>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12eff8698c5.8011" name="page 3" inActions="model.12eff86980a.10012 model.12eff86980a.10014">
+    <actions id="model.12eff86980a.10018" name="navigate" from="model.12eff86980a.10017" to="visual.12eff8698c5.8013"/>
+    <onAccess id="model.12eff86980a.10017" name="access" outActions="model.12eff86980a.10018"/>
+  </scopes>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12eff8698c5.8013" name="page 4" inActions="model.12eff86980a.10016 model.12eff86980a.10018">
+    <actions id="model.12eff86980a.1001c" name="navigate" from="model.12eff86980a.1001b" to="visual.12eff8698c5.8015"/>
+    <onAccess id="model.12eff86980a.1001b" name="access" outActions="model.12eff86980a.1001c"/>
+  </scopes>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12eff8698c5.8015" name="page 5" inActions="model.12eff86980a.1001a model.12eff86980a.1001c">
+    <actions id="model.12eff86980a.10020" name="navigate" from="model.12eff86980a.1001f" to="visual.12eff8698c5.8017"/>
+    <onAccess id="model.12eff86980a.1001f" name="access" outActions="model.12eff86980a.10020"/>
+  </scopes>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12eff8698c5.8017" name="page 6" inActions="model.12eff86980a.1001e model.12eff86980a.10020">
+    <actions id="model.12eff86980a.10024" name="navigate" from="model.12eff86980a.10023" to="visual.12eff8698c5.8019"/>
+    <onAccess id="model.12eff86980a.10023" name="access" outActions="model.12eff86980a.10024"/>
+  </scopes>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12eff8698c5.8019" name="page 7" inActions="model.12eff86980a.10022 model.12eff86980a.10024">
+    <actions id="model.12eff86980a.10028" name="navigate" from="model.12eff86980a.10027" to="visual.12eff8698c5.801b"/>
+    <onAccess id="model.12eff86980a.10027" name="access" outActions="model.12eff86980a.10028"/>
+  </scopes>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12eff8698c5.801b" name="page 8" inActions="model.12eff86980a.10026 model.12eff86980a.10028">
+    <actions id="model.12eff86980a.1002c" name="navigate" from="model.12eff86980a.1002b" to="visual.12eff8698c5.801d"/>
+    <onAccess id="model.12eff86980a.1002b" name="access" outActions="model.12eff86980a.1002c"/>
+  </scopes>
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12eff8698c5.801d" name="page 9" inActions="model.12eff86980a.1002a model.12eff86980a.1002c">
+    <actions id="model.12eff86980a.1002e" name="navigate" from="model.12eff86980a.1002d" to="visual.12eff8698c5.800b"/>
+    <onAccess id="model.12eff86980a.1002d" name="access" outActions="model.12eff86980a.1002e"/>
+  </scopes>
+</iaml:InternetApplication>

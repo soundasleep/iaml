@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12644812769.1">
-  <children xsi:type="iaml.visual:Page" id="index" name="Home">
-    <operations xsi:type="iaml:CompositeOperation" inEdges="wires.1264dbfd861.47" id="model.12644812769.e" name="operation">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.12644812769.1">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
+    <operations xsi:type="iaml:CompositeOperation" id="model.12644812769.e" name="operation" inActions="wires.1264dbfd861.47">
       <operations xsi:type="iaml:PrimitiveOperation" id="model.12644812769.32" name="setValue" inFlows="model.12644812769.53" inExecutions="model.12644812769.4d model.12644812769.ca" outFlows="model.12644812769.54" outExecutions="model.12644812769.4f"/>
       <operations xsi:type="iaml:PrimitiveOperation" id="model.12644812769.c5" name="setValue" inFlows="model.12644812769.c8" inExecutions="model.12644812769.4f" outFlows="model.12644812769.c9" outExecutions="model.12644812769.ca"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.12644812bce.1" outExecutions="model.12644812769.4d"/>
@@ -23,17 +23,17 @@
       <values id="model.12644812769.30" name="v1" outFlows="model.12644812769.50 model.12644812769.c7" value="1"/>
       <values id="model.12644812769.31" name="v2" outFlows="model.12644812769.52" value="2"/>
     </operations>
-    <operations xsi:type="iaml:CompositeOperation" inEdges="wires.1264dbfd861.16" id="model.1264dbfd64e.49b" name="call operation">
+    <operations xsi:type="iaml:CompositeOperation" id="model.1264dbfd64e.49b" name="call operation" inActions="wires.1264dbfd861.16">
       <nodes xsi:type="iaml.operations:StartNode" id="operations.1264dbfd90d.11b" outExecutions="model.1264dbfd64e.563"/>
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.1264dbfd90d.11c" inExecutions="model.1264dbfd64e.564"/>
-      <nodes xsi:type="iaml.operations:OperationCallNode" id="operations.1264dbfd90d.11d" outExecutions="model.1264dbfd64e.564" inExecutions="model.1264dbfd64e.563" outEdges="wires.1264dbfd861.47">
-        <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1264dbfd861.47" from="operations.1264dbfd90d.11d" to="model.12644812769.e" name="run"/>
+      <nodes xsi:type="iaml.operations:OperationCallNode" id="operations.1264dbfd90d.11d" outExecutions="model.1264dbfd64e.564" inExecutions="model.1264dbfd64e.563" outActions="wires.1264dbfd861.47">
+        <actions id="wires.1264dbfd861.47" name="run" from="operations.1264dbfd90d.11d" to="model.12644812769.e"/>
       </nodes>
       <executionEdges id="model.1264dbfd64e.563" from="operations.1264dbfd90d.11b" to="operations.1264dbfd90d.11d"/>
       <executionEdges id="model.1264dbfd64e.564" from="operations.1264dbfd90d.11d" to="operations.1264dbfd90d.11c"/>
     </operations>
-    <eventTriggers id="model.1264dbfd64e.2c4" name="access" outEdges="wires.1264dbfd861.16">
-      <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1264dbfd861.16" from="model.1264dbfd64e.2c4" to="model.1264dbfd64e.49b" name="run"/>
-    </eventTriggers>
-  </children>
+    <onAccess id="model.1264dbfd64e.2c4" outActions="wires.1264dbfd861.16">
+      <actions id="wires.1264dbfd861.16" name="run" from="model.1264dbfd64e.2c4" to="model.1264dbfd64e.49b"/>
+    </onAccess>
+  </scopes>
 </iaml:InternetApplication>

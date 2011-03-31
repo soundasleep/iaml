@@ -171,7 +171,7 @@ VAR
 	«ENDFOREACH»
 	
 	-- operation calls
-	«FOREACH nodes.typeSelect(model::operations::OperationCallNode).outEdges.typeSelect(model::wires::RunInstanceWire).to AS call»
+	«FOREACH nodes.typeSelect(model::operations::OperationCallNode).outActions.select(a|model::Operation.isInstance(a.to)).to AS call»
 		run_call_«safeName(call)» : boolean;
 		call_«safeName(call)» : process operation_«safeName(call)»(run_call_«safeName(call)»«REM»operation calls have their own variable instances«ENDREM», navigation_finished);
 	«ENDFOREACH»
@@ -268,7 +268,7 @@ ASSIGN
 
 	-- operation calls
 	«FOREACH nodes.typeSelect(model::operations::OperationCallNode) AS call»
-		«FOREACH call.outEdges.typeSelect(model::wires::RunInstanceWire).to AS target»
+		«FOREACH call.outActions.select(a|model::Operation.isInstance(a.to)).to AS target»
 		next(run_call_«safeName(target)») := case
 			current_step = «safeName(call)» : 1;
 			1 : 0;

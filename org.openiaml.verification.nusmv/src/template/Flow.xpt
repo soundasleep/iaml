@@ -6,24 +6,7 @@
 	«safeName(outExecutions.to.first())»
 «ENDDEFINE»
 
-«DEFINE nextStep FOR model::operations::DecisionOperation»
-	«IF name == "equal?" || name == "equals?"»
-		«IF getPassFlow().to.size != 1 || getFailFlow().to.size != 1»
-		«safeName(outExecutions.to.first())»
-		«ELSE»
-		case
-			«EXPAND getTemporaryVariableValue FOREACH inFlows.from SEPARATOR " = "» 
-				: «safeName(getPassFlow(this).to.first())»;
-				 
-			1 : «safeName(getFailFlow(this).to.first())»;
-		esac
-		«ENDIF»
-	«ELSE»
-		«EXPAND exception FOR throwException("Unknown decision operation: " + this)»
-	«ENDIF»
-«ENDDEFINE»
-
-«DEFINE nextStep FOR model::operations::DecisionCondition»
+«DEFINE nextStep FOR model::operations::DecisionNode»
 	«IF name == "equal?" || name == "equals?"»
 		«IF getPassFlow().to.size != 1 || getFailFlow().to.size != 1»
 		«safeName(outExecutions.to.first())»
@@ -53,7 +36,7 @@
 «DEFINE nextStep FOR model::operations::OperationCallNode»
 	-- wait for operation call to complete; then we can resume
 	case 
-		«FOREACH outEdges.typeSelect(model::wires::RunInstanceWire).to AS call SEPARATOR " & "»
+		«FOREACH outActions.select(a|model::Operation.isInstance(a.to)).to AS call SEPARATOR " & "»
 			call_«safeName(call)».finished
 		«ENDFOREACH» : «safeName(outExecutions.to.first())»;
 		1 : current_step;
@@ -112,7 +95,7 @@ esac;
 	-- another temporary variable
 «ENDDEFINE»
 
-«DEFINE getTemporaryVariableValue FOR model::ApplicationElementProperty»
+«DEFINE getTemporaryVariableValue FOR model::Property»
 	«REM»we pass all property values by reference to each operation/condition«ENDREM»
 	property_«safeName(this)»
 «ENDDEFINE»

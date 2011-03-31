@@ -12,7 +12,7 @@
 «EXPAND ConditionContents::conditionContents FOREACH eAllContents.typeSelect(model::CompositeCondition)»
 
 -- main module
-«LET eAllContents.typeSelect(model::visual::Page) AS allPages»
+«LET eAllContents.typeSelect(model::visual::Frame) AS allPages»
 «LET eAllContents.typeSelect(model::visual::Button) AS allButtons»
 
 MODULE main
@@ -117,8 +117,8 @@ ASSIGN
 			same page (as long as it isn't currently being run); this is the same as reloading the page«ENDREM»
 			operation_running = 0 : case
 				«FOREACH allPages AS p»
-					«IF p.eventTriggers.select(e|e.name == "access" || e.name == "onAccess")
-							.outEdges.typeSelect(model::wires::RunInstanceWire).to.contains(operation)»
+					«IF p.onAccess != null && p.onAccess.outActions.select(a|model::Operation.isInstance(a.to))
+						.to.contains(operation)»
 						current_page = «safeName(p)» : 1;
 					«ENDIF»
 					
@@ -127,11 +127,11 @@ ASSIGN
 						-- TODO if there is a button on a page with 'access', it can never be executed
 					
 						«REM»button -> run[onClick] -> operation«ENDREM»
-						«IF !b.outEdges.typeSelect(model::wires::RunInstanceWire).select(w|w.name == "click" || w.name == "onClick").select(w|w.to == operation).isEmpty»				
+						«IF !b.outActions.select(w|w.name == "click" || w.name == "onClick").select(w|w.to == operation).isEmpty»				
 						current_page = «safeName(p)» & click_«safeName(b)» = 1 : 1;
 						«ENDIF»
 						«REM»button -> event[onClick] -> run -> operation«ENDREM»
-						«IF !b.eventTriggers.select(e|e.name == "click" || e.name == "onClick").outEdges.typeSelect(model::wires::RunInstanceWire).select(w|w.to == operation).isEmpty»				
+						«IF !(b.onClick != null && b.onClick.outActions.select(w|w.to == operation).isEmpty)»				
 						current_page = «safeName(p)» & click_«safeName(b)» = 1 : 1;
 						«ENDIF»
 						«REM»TODO button -> event -> run -> operation«ENDREM»
@@ -163,8 +163,7 @@ ASSIGN
 			-- navigation just started?
 			navigation_running = 1 & navigation_finished = 0 : case
 				«FOREACH allPages AS p»
-					«IF !p.eventTriggers.select(e|e.name == "access" || e.name == "onAccess")
-							.outEdges.typeSelect(model::WireEdgeDestination).select(w | !w.inEdges.select(w|w.from == condition).isEmpty).isEmpty»
+					«IF !(p.onAccess != null && p.onAccess.outActions.select(w | !w.inConditionEdges.select(w|w.from == condition).isEmpty).isEmpty)»
 						-- start the condition
 						current_page = «safeName(p)» : 1;
 					«ENDIF»
@@ -213,14 +212,17 @@ ASSIGN
 				-- does the current page have a redirection attached?
 				«FOREACH allPages AS p»
 				current_page = «safeName(p)» :
-					«LET p.eventTriggers.select(e|e.name == "access").outEdges.typeSelect(model::wires::NavigateWire).select(w | model::visual::Page.isInstance(w.to)) AS navs»
+					«IF p.onAccess == null»
+						current_page;	-- we must have stopped navigating (2)
+					«ELSE»
+					«LET p.onAccess.outActions.select(w | model::visual::Frame.isInstance(w.to)) AS navs»
 						«IF navs.size == 1»
 							«LET navs.first() AS nav»
-							«IF inConditionWires(nav).isEmpty»
+							«IF nav.inConditionEdges.isEmpty»
 								-- an instant redirect
 								«safeName(nav.to)»;
-							«ELSEIF inConditionWires(nav).size == 1»
-								«LET inConditionWires(nav).first() AS condition»
+							«ELSEIF nav.inConditionEdges.size == 1»
+								«LET nav.inConditionEdges.first() AS condition»
 								-- a conditional redirect '«safeNameString(condition.name)»'
 								case
 									running_condition_«safeName(condition.from)».finished = 0 : current_page;
@@ -242,6 +244,7 @@ ASSIGN
 							current_page;	-- we must have stopped navigating
 						«ENDIF» 
 					«ENDLET»
+					«ENDIF»
 				«ENDFOREACH»
 				
 				-- no redirections; stay where we are
@@ -265,15 +268,18 @@ ASSIGN
 		-- we are currently navigating
 		navigation_running = 1 : case
 			«FOREACH allPages AS p»
-				current_page = «safeName(p)» :				
-				«LET p.eventTriggers.select(e|e.name == "access").outEdges.typeSelect(model::wires::NavigateWire).select(w | model::visual::Page.isInstance(w.to)) AS navs»
+				current_page = «safeName(p)» :
+				«IF p.onAccess == null»
+					0;	-- we must have stopped navigating (2)
+				«ELSE»
+				«LET p.onAccess.outActions.select(w | model::visual::Frame.isInstance(w.to)) AS navs»
 					«IF navs.size == 1»
 						«LET navs.first() AS nav»
-						«IF inConditionWires(nav).isEmpty»
+						«IF nav.inConditionEdges.isEmpty»
 							-- an instant redirect
 							1;
-						«ELSEIF inConditionWires(nav).size == 1»
-							«LET inConditionWires(nav).first() AS condition»
+						«ELSEIF nav.inConditionEdges.size == 1»
+							«LET nav.inConditionEdges.first() AS condition»
 							-- a conditional redirect '«safeNameString(condition.name)»'
 							case
 								running_condition_«safeName(condition.from)».finished = 0 : 1;	-- still navigating
@@ -295,6 +301,7 @@ ASSIGN
 						0;	-- we must have stopped navigating
 					«ENDIF»
 				«ENDLET»
+				«ENDIF»
 			«ENDFOREACH»
 
 			current_page = null : 0;	-- should never occur
@@ -317,14 +324,17 @@ ASSIGN
 		navigation_running = 1 : case
 			«FOREACH allPages AS p»
 				current_page = «safeName(p)» :
-				«LET p.eventTriggers.select(e|e.name == "access").outEdges.typeSelect(model::wires::NavigateWire).select(w | model::visual::Page.isInstance(w.to)) AS navs»
+				«IF p.onAccess == null»
+					1;	-- we must have stopped navigating (2)
+				«ELSE»
+				«LET p.onAccess.outActions.select(w | model::visual::Frame.isInstance(w.to)) AS navs»
 					«IF navs.size == 1»
 						«LET navs.first() AS nav»
-						«IF inConditionWires(nav).isEmpty»
+						«IF nav.inConditionEdges.isEmpty»
 							-- an instant redirect
 							1;
-						«ELSEIF inConditionWires(nav).size == 1»
-							«LET inConditionWires(nav).first() AS condition»
+						«ELSEIF nav.inConditionEdges.size == 1»
+							«LET nav.inConditionEdges.first() AS condition»
 							-- a conditional redirect '«safeNameString(condition.name)»'
 							case
 								running_condition_«safeName(condition.from)».finished = 0 : 1;	-- still navigating
@@ -346,7 +356,7 @@ ASSIGN
 						1;	-- we must have stopped navigating
 					«ENDIF» 
 				«ENDLET»
-				
+				«ENDIF»
 			«ENDFOREACH»
 			
 			current_page = null : 0;	-- should never occur

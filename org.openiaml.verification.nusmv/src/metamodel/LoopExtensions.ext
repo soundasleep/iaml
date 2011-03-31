@@ -21,7 +21,7 @@ maximumIntegerSize() : 15;
 /**
  * Get all of the buttons on a particular page.
  */
-allButtonsOnPage(model::visual::Page this) :
+allButtonsOnPage(model::visual::Frame this) :
 	eAllContents.typeSelect(model::visual::Button);
 
 /** get all failing edges */
@@ -43,11 +43,11 @@ selectStartNode(model::CompositeCondition this) :
  * all application properties stored in the InternetApplication; i.e.
  * those outside Sessions. 
  */
-List[model::ApplicationElementProperty] allApplicationProperties(model::InternetApplication this) :
-	properties.toSet().union( children.typeSelect(model::visual::Page).collect(e|allApplicationProperties(e)).flatten());
+List[model::Property] allApplicationProperties(model::InternetApplication this) :
+	properties.toSet().union( scopes.typeSelect(model::visual::Frame).collect(e|allApplicationProperties(e)).flatten());
 
-List[model::ApplicationElementProperty] allApplicationProperties(model::visual::Page this) :
-	properties.toSet().union( children.typeSelect(model::visual::Page).collect(e|allApplicationProperties(e)).flatten());
+List[model::Property] allApplicationProperties(model::visual::Frame this) :
+	properties.toSet().union( scopes.typeSelect(model::visual::Frame).collect(e|allApplicationProperties(e)).flatten());
 
 model::InternetApplication getRoot(model::InternetApplication this) :
 	this;
@@ -55,9 +55,6 @@ model::InternetApplication getRoot(model::NamedElement this) :
 	getRoot(eContainer);
 model::InternetApplication getRoot(emf::EObject this) :
 	null;
-	
-inConditionWires(model::WireEdgeDestination this) :
-	inEdges.typeSelect(model::wires::ConditionWire);
 
 /** 
  * a hack way to create backtrace-able errors

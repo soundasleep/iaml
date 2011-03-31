@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.4" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.1264a3c92ec.56">
-  <children xsi:type="iaml.visual:Page" id="index" name="Home">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.1264a3c92ec.56">
+  <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <children xsi:type="iaml.visual:Button" id="visual.1264a3c934a.18" name="Click Button">
-      <operations xsi:type="iaml:CompositeOperation" inEdges="wires.1264a3c934a.7" id="model.1264a3c92ec.79" name="split operation">
+      <operations xsi:type="iaml:CompositeOperation" id="model.1264a3c92ec.79" name="split operation" inActions="wires.1264a3c934a.7">
         <operations xsi:type="iaml:PrimitiveOperation" id="model.1264a90e726.1a" name="do nothing" inExecutions="model.1264a90e726.1e" outExecutions="model.1264a90e726.23"/>
         <operations xsi:type="iaml:PrimitiveOperation" id="model.1264a90e726.1b" name="do nothing 2" inExecutions="model.1264a90e726.1f model.1264a90e726.99" outExecutions="model.1264a90e726.20"/>
         <operations xsi:type="iaml:PrimitiveOperation" id="model.1264a90e726.1c" name="a bit longer" inExecutions="model.1264a90e726.20" outExecutions="model.1264a90e726.22"/>
@@ -20,9 +20,9 @@
         <executionEdges id="model.1264a90e726.24" from="operations.1264a90eab1.d" to="operations.1264a90eab1.b"/>
         <executionEdges id="model.1264a90e726.99" from="model.1264a90e726.98" to="model.1264a90e726.1b"/>
       </operations>
-      <eventTriggers id="model.1264a3c92ec.70" name="click" outEdges="wires.1264a3c934a.7">
-        <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.1264a3c934a.7" from="model.1264a3c92ec.70" to="model.1264a3c92ec.79" name="run"/>
-      </eventTriggers>
+      <onClick id="model.1264a3c92ec.70" outActions="wires.1264a3c934a.7">
+        <actions id="wires.1264a3c934a.7" name="run" from="model.1264a3c92ec.70" to="model.1264a3c92ec.79"/>
+      </onClick>
     </children>
-  </children>
+  </scopes>
 </iaml:InternetApplication>

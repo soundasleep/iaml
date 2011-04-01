@@ -9,6 +9,7 @@
 	«EXPAND RulesSummary::rulesSummary»
 	«EXPAND ImagesList::imagesList»
 	«EXPAND LatexImagesList::latexImagesList»
+	«EXPAND Metrics::metricsList»
 	
 	«EXPAND ClassTemplate::class(this) FOREACH classes»
 

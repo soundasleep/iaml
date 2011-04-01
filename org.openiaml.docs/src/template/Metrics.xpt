@@ -1,0 +1,56 @@
+«IMPORT modeldoc»
+
+«EXTENSION metamodel::ModeldocExtensions»
+
+/**
+ * A list of metrics.
+ */
+«DEFINE metricsList FOR modeldoc::ModelDocumentation»
+	«FILE "output/metrics.html"-»
+		«EXPAND ModeldocTemplate::header("Metrics", "metrics")»
+
+		<div class="navigation">
+		<a href="index.html">&lt; Back to list</a>
+		</div>
+		
+		<div class="intro">
+			This is a list of all metrics loaded through the modeldoc process.
+		</div>
+		
+		<table>
+		<thead>
+			<tr>
+				<th>Metric Key</th>
+				<th>Value</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th>Rule Count</th>
+				<td>«getTotalRuleCount(this)»</td>
+			</tr>
+			<tr>
+				<th>Rule File Count</th>
+				<td>«references.typeSelect(modeldoc::DroolsPackage).size»</td>
+			</tr>
+			<tr>
+				<th>Constraint Count</th>
+				<td>«getTotalConstraintCount(this)»</td>
+			</tr>			
+			«FOREACH metrics.sortBy(m|m.name) AS metric-»
+			<tr>
+				<th>«metric.name»</th>
+				<td>«metric.value»</td>
+			</tr>			
+			«ENDFOREACH»
+		</tbody>
+		</table>
+	«ENDFILE»
+«ENDDEFINE»
+
+/** 
+ * a hack way to create backtrace-able errors
+ * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540  
+ */
+«DEFINE exception FOR Object»
+«ENDDEFINE»

@@ -12,7 +12,7 @@
 
 % List of all metrics
 «FOREACH metrics.sortBy(m|m.name) AS metric-»
-\def\modeldoc«camelcase(metric.name)»{«metric.value»}
+\def\modeldoc«camelcase(metric.name).replaceAll("[^A-Za-z]","")»{«metric.value»}
 «ENDFOREACH»
 	«ENDFILE»
 «ENDDEFINE»

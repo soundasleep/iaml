@@ -7,6 +7,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.openiaml.docs.generation.LoadFileMetrics.FileMetricAccumulator;
 import org.openiaml.docs.generation.semantics.HandleExampleTag;
 import org.openiaml.docs.generation.semantics.HandleImplementationTag;
 import org.openiaml.docs.generation.semantics.HandleInferenceTag;
@@ -172,34 +173,58 @@ public class DocumentationGenerator {
 		}
 		
 		// file metrics
+		FileMetricAccumulator acc = new FileMetricAccumulator();
 		{
-			ILoader loader = new LoadFileMetrics(
+			LoadFileMetrics loader = new LoadFileMetrics(
 					new File("../org.openiaml.model/") /* file root */,
 					"org.openiaml.model" /* plugin name */
 			);
 			loader.load(factory, root);
+			acc.add(loader);
 		}
 		{
-			ILoader loader = new LoadFileMetrics(
+			LoadFileMetrics loader = new LoadFileMetrics(
 					new File("../org.openiaml.model.codegen.php/") /* file root */,
 					"org.openiaml.model.codegen.php" /* plugin name */
 			);
 			loader.load(factory, root);
+			acc.add(loader);
 		}
 		{
-			ILoader loader = new LoadFileMetrics(
+			LoadFileMetrics loader = new LoadFileMetrics(
 					new File("../org.openiaml.model.drools/") /* file root */,
 					"org.openiaml.model.drools" /* plugin name */
 			);
 			loader.load(factory, root);
+			acc.add(loader);
 		}
 		{
-			ILoader loader = new LoadFileMetrics(
+			LoadFileMetrics loader = new LoadFileMetrics(
 					new File("../org.openiaml.model.runtime/") /* file root */,
 					"org.openiaml.model.runtime" /* plugin name */
 			);
 			loader.load(factory, root);
+			acc.add(loader);
 		}
+		{
+			LoadFileMetrics loader = new LoadFileMetrics(
+					new File("../org.openiaml.model.tests/") /* file root */,
+					"org.openiaml.model.tests" /* plugin name */
+			);
+			loader.load(factory, root);
+			acc.add(loader);
+		}
+		{
+			LoadFileMetrics loader = new LoadFileMetrics(
+					new File("../org.openiaml.model.tests.diagram/") /* file root */,
+					"org.openiaml.model.tests.diagram" /* plugin name */
+			);
+			loader.load(factory, root);
+			acc.add(loader);
+		}
+		
+		// publish total metrics
+		acc.publish(factory, root);
 
 		return root;
 	}

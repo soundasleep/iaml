@@ -111,6 +111,19 @@ String getTotalRuleCount(modeldoc::ModelDocumentation root) :
 String getTotalConstraintCount(modeldoc::ModelDocumentation root) :
 	JAVA org.openiaml.docs.generation.codegen.ModeldocCodeGenerator.getTotalConstraintCount(org.openiaml.docs.modeldoc.ModelDocumentation);
 
+/**
+ * Is the given string a float value?
+ */
+isFloat(String s) :
+	s.matches("[0-9]+\\.[0-9]+");
+
+/**
+ * Format the given number as a two decimal point float.
+ */
+formatFloat(String str) :
+	JAVA org.openiaml.docs.generation.codegen.ModeldocCodeGenerator.formatFloat(java.lang.String);
+
+
 /** 
  * a hack way to create backtrace-able errors
  * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540

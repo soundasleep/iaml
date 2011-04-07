@@ -5,6 +5,8 @@ package org.openiaml.docs.generation.codegen;
 
 import java.io.File;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -215,6 +217,7 @@ public class ModeldocCodeGenerator {
 		}
 		return count;
 	}
+	
 	/**
 	 * Get the total number of constraints used in this system.
 	 */
@@ -227,6 +230,21 @@ public class ModeldocCodeGenerator {
 			}
 		}
 		return count;
+	}
+	
+	/**
+	 * Format the given value as a float to two dp.
+	 * 
+	 * @param value e.g. "123.5665472"
+	 * @return e.g. "123.57"
+	 */
+	public static String formatFloat(String value) {
+		if (!value.contains(".")) {
+			return value;
+		}
+		
+		NumberFormat formatter = new DecimalFormat("#,###,##0.00");
+		return formatter.format(Float.valueOf(value));
 	}
 		
 }

@@ -44,6 +44,9 @@ import org.openiaml.model.helpers.IamlBreadcrumb.BreadcrumbLinker;
  *
  */
 public class ExportToClickableHtml extends ExportImagePartsAction {
+	
+	private static final int LATEX_BREADCRUMB_DEPTH = 2;
+	private static final int HTML_BREADCRUMB_DEPTH = 4;
 
 	/**
 	 * A Comparator that sorts based firstly on depth to the object root, and then
@@ -73,11 +76,11 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 			Integer depth2 = getDepth(o2);
 			
 			if (depth1.compareTo(depth2) != 0) {
-				return -depth1.compareTo(depth2);
+				return depth1.compareTo(depth2);
 			}
 			
-			String bread1 = IamlBreadcrumb.breadcrumb(o1, 3);
-			String bread2 = IamlBreadcrumb.breadcrumb(o2, 3);
+			String bread1 = IamlBreadcrumb.breadcrumb(o1, LATEX_BREADCRUMB_DEPTH);
+			String bread2 = IamlBreadcrumb.breadcrumb(o2, LATEX_BREADCRUMB_DEPTH);
 			
 			return bread1.compareTo(bread2);
 		}
@@ -375,7 +378,7 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 	private String getBreadcrumb(EObject resolved) {
 		return new StringBuffer()
 		.append("<h2>")
-		.append(IamlBreadcrumb.breadcrumb(resolved, 4, new HtmlBreadcrumbLinker(partDestinationMap) /* HTML linker */))
+		.append(IamlBreadcrumb.breadcrumb(resolved, HTML_BREADCRUMB_DEPTH, new HtmlBreadcrumbLinker(partDestinationMap) /* HTML linker */))
 		.append("</h2>\n")
 		.toString();
 	}
@@ -388,7 +391,7 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 	 * @return
 	 */
 	private String getLatexTag(EObject element, IPath image) {
-		String breadcrumb = IamlBreadcrumb.breadcrumb(element, 3 /* no linker */);
+		String breadcrumb = IamlBreadcrumb.breadcrumb(element, LATEX_BREADCRUMB_DEPTH /* no linker */);
 		return "\\exportedImage{" + breadcrumb + "}{" + image.removeFileExtension().lastSegment() + "}\n";
 	}
 

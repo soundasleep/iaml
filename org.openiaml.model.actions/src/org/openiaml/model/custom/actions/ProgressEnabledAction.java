@@ -164,7 +164,7 @@ public abstract class ProgressEnabledAction<T> implements IViewActionDelegate {
 	/**
 	 * Make a new ERROR IStatus with the given message and cause.
 	 * 
-	 * @param message
+	 * @param message The message to provide to the new {@link IStatus}
 	 * @param cause
 	 * @return
 	 */
@@ -175,8 +175,7 @@ public abstract class ProgressEnabledAction<T> implements IViewActionDelegate {
 	/**
 	 * Make a new ERROR IStatus with the given message.
 	 * 
-	 * @param message
-	 * @param cause
+	 * @param message The message to provide to the new {@link IStatus}
 	 * @return
 	 */
 	protected IStatus errorStatus(String message) {
@@ -191,6 +190,23 @@ public abstract class ProgressEnabledAction<T> implements IViewActionDelegate {
 	 */
 	protected IStatus errorStatus(Throwable cause) {
 		return new Status(IStatus.ERROR, PLUGIN_ID, cause.getMessage(), cause);
+	}
+
+	/**
+	 * Make a new CANCELLED IStatus with the given message.
+	 * 
+	 * @param message The message to provide to the new {@link IStatus}
+	 */
+	protected IStatus cancelledStatus(String message) {
+		return new Status(IStatus.CANCEL, PLUGIN_ID, message, null);
+	}
+
+	/**
+	 * Make a new CANCELLED IStatus with no specific message; the message
+	 * on the new {@link IStatus} will be "Operation was cancelled."
+	 */
+	protected IStatus cancelledStatus() {
+		return cancelledStatus("Operation was cancelled.");
 	}
 	
 	/**

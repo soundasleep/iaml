@@ -202,19 +202,19 @@ public class ExportImagePartsAction extends ProgressEnabledUIAction<IFile> {
 			return;
 		
 		DiagramEditPart part = editor.getDiagramEditPart();
-		IPath destination = generateImageDestination(container);
 		
 		// save this image if there is something in it
 		if (part.getChildren().size() > 0) {
 			IProgressMonitor saveMonitor = new SubProgressMonitor(monitor, 1);
-			saveMonitor.beginTask("Saving image " + destination, 1 + formats.size());
+			saveMonitor.beginTask("Saving container " + part.resolveSemanticElement(), 1 + formats.size());
 			for (ImageFileFormat format : formats) {
+				IPath destination = generateImageDestination(container, format);
 				monitor.subTask("Saving image " + destination.lastSegment() + " ( " + format.getName() + ")");
 				CopyToImageUtil img = getCopyToImageUtil();
 				img.copyToImage(part, destination, format, new SubProgressMonitor(monitor, 1));
+				imagesSaved++;
 			}
 			saveMonitor.done();
-			imagesSaved++;
 		}
 		
 		// get children
@@ -286,15 +286,15 @@ public class ExportImagePartsAction extends ProgressEnabledUIAction<IFile> {
 	 * Generate an image destination that shouldn't exist.
 	 * 
 	 * @param container the container to write the image to
+	 * @param format the image file format of the file; will be used to generate the file name
 	 * @return
-	 * @throws ExportImageException 
 	 */
-	protected IPath generateImageDestination(IContainer container) throws ExportImageException {
+	protected IPath generateImageDestination(IContainer container, ImageFileFormat format) throws ExportImageException {
 		IPath ct = container.getLocation();
 		String extension = diagramFile.getFileExtension();
 		String fileName = diagramFile.getName();
 		String append = imagesSaved == 0 ? "" : "-" + imagesSaved;
-		String newFileName = fileName.substring(0, fileName.length() - extension.length() - 1) + append + ".png"; 
+		String newFileName = fileName.substring(0, fileName.length() - extension.length() - 1) + append + "." + format.getName().trim().toLowerCase(); 
 
 		IPath destination = ct.append(newFileName);
 		

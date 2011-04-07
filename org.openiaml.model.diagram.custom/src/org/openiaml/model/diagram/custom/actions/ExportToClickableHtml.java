@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -42,6 +44,45 @@ import org.openiaml.model.helpers.IamlBreadcrumb.BreadcrumbLinker;
  *
  */
 public class ExportToClickableHtml extends ExportImagePartsAction {
+
+	/**
+	 * A Comparator that sorts based firstly on depth to the object root, and then
+	 * on the breadcrumb String of the objects.
+	 * 
+	 * @author jmwright
+	 * @see #getDepth(EObject)
+	 * @see IamlBreadcrumb#breadcrumb(EObject, int)
+	 */
+	public class EObjectDepthComparator implements Comparator<EObject> {
+
+		/**
+		 * Get the depth of the object. Limits to 100.
+		 */
+		private int getDepth(EObject o) {
+			int depth = 0;
+			while (o.eContainer() != null && depth < 100) {
+				o = o.eContainer();
+				depth++;
+			}
+			return depth; 
+		}
+		
+		@Override
+		public int compare(EObject o1, EObject o2) {
+			Integer depth1 = getDepth(o1);
+			Integer depth2 = getDepth(o2);
+			
+			if (depth1.compareTo(depth2) != 0) {
+				return -depth1.compareTo(depth2);
+			}
+			
+			String bread1 = IamlBreadcrumb.breadcrumb(o1, 3);
+			String bread2 = IamlBreadcrumb.breadcrumb(o2, 3);
+			
+			return bread1.compareTo(bread2);
+		}
+
+	}
 
 	/**
 	 * We want to render much more of the entire model; we
@@ -168,7 +209,7 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 		partEObjectMap = new HashMap<DiagramEditPart,EObject>();
 		
 		// for latex export
-		StringBuffer latex = new StringBuffer();
+		Map<EObject, String> latexMap = new HashMap<EObject, String>();
 		
 		// do parent
 		super.doExport(targetDiagram, container, new SubProgressMonitor(monitor, 70));
@@ -195,7 +236,7 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 				.append(getHTMLFooter());
 			
 			// add the SVG
-			latex.append(getLatexTag(resolved, destination));
+			latexMap.put(resolved, getLatexTag(resolved, destination));
 			
 			finalMonitor.worked(1);
 			
@@ -216,7 +257,13 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 		try {
 			File destFile = new File(latexDestination.toOSString());
 			FileWriter fw = new FileWriter(destFile);
-			fw.write(latex.toString());
+			
+			// we want to sort the latex output based on EObject depth
+			List<EObject> objectList = new ArrayList<EObject>(latexMap.keySet());
+			Collections.sort(objectList, new EObjectDepthComparator());
+			for (EObject obj : objectList) {
+				fw.write(latexMap.get(obj));
+			}
 			fw.close();
 			finalMonitor.worked(5);
 		} catch (IOException e) {
@@ -243,10 +290,10 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 	 * @throws ExportImageException 
 	 */
 	@Override
-	protected IPath generateImageDestination(IContainer container) throws ExportImageException {
+	protected IPath generateImageDestination(IContainer container, ImageFileFormat format) throws ExportImageException {
 
 		// get default
-		IPath source = super.generateImageDestination(container);
+		IPath source = super.generateImageDestination(container, format);
 		
 		// does the folder exist?
 		// get the folder name from the diagram, e.g. Foo.iaml_diagram -> "Foo"
@@ -328,7 +375,7 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 	private String getBreadcrumb(EObject resolved) {
 		return new StringBuffer()
 		.append("<h2>")
-		.append(IamlBreadcrumb.breadcrumb(resolved, 4, new HtmlBreadcrumbLinker(partDestinationMap)))
+		.append(IamlBreadcrumb.breadcrumb(resolved, 4, new HtmlBreadcrumbLinker(partDestinationMap) /* HTML linker */))
 		.append("</h2>\n")
 		.toString();
 	}
@@ -341,8 +388,8 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 	 * @return
 	 */
 	private String getLatexTag(EObject element, IPath image) {
-		String breadcrumb = IamlBreadcrumb.breadcrumb(element, 4, new HtmlBreadcrumbLinker(partDestinationMap));
-		return "\\exportedImage{" + breadcrumb + "}{" + image.removeFileExtension() + "}\n";
+		String breadcrumb = IamlBreadcrumb.breadcrumb(element, 3 /* no linker */);
+		return "\\exportedImage{" + breadcrumb + "}{" + image.removeFileExtension().lastSegment() + "}\n";
 	}
 
 	/**

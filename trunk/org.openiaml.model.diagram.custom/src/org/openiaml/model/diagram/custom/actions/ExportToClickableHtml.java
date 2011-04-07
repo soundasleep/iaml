@@ -5,8 +5,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
@@ -157,13 +159,16 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 	public void doExport(IFile targetDiagram, IContainer container, IProgressMonitor monitor)
 			throws ExportImageException {
 		
-		monitor.beginTask("Exporting to HTML", 105);
+		monitor.beginTask("Exporting to HTML", 110);
 		this.targetDiagram = targetDiagram;
 		
 		// initialise maps
 		partDestinationMap = new HashMap<DiagramEditPart,IPath>();
 		partRectangleMap = new HashMap<DiagramEditPart,Rectangle>();
 		partEObjectMap = new HashMap<DiagramEditPart,EObject>();
+		
+		// for latex export
+		StringBuffer latex = new StringBuffer();
 		
 		// do parent
 		super.doExport(targetDiagram, container, new SubProgressMonitor(monitor, 70));
@@ -188,18 +193,34 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 				.append(getImageTag(destination))
 				.append(getClickableMap(root))
 				.append(getHTMLFooter());
+			
+			// add the SVG
+			latex.append(getLatexTag(resolved, destination));
+			
 			finalMonitor.worked(1);
 			
-			// export
+			// export HTML page
 			try {
 				File destFile = new File(htmlDestination.toOSString());
 				FileWriter fw = new FileWriter(destFile);
 				fw.write(html.toString());
 				fw.close();
 			} catch (IOException e) {
-				throw new ExportImageException(e);
+				throw new ExportImageException("Could not export individual HTML page '" + htmlDestination + "': " + e.getMessage(), e);
 			}
 			finalMonitor.worked(1);
+		}
+		
+		// export Latex page
+		IPath latexDestination = targetDiagram.getLocation().removeFileExtension().addFileExtension("tex");
+		try {
+			File destFile = new File(latexDestination.toOSString());
+			FileWriter fw = new FileWriter(destFile);
+			fw.write(latex.toString());
+			fw.close();
+			finalMonitor.worked(5);
+		} catch (IOException e) {
+			throw new ExportImageException("Could not export Latex page '" + latexDestination + "': " + e.getMessage(), e);
 		}
 		
 		finalMonitor.done();
@@ -311,6 +332,18 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 		.append("</h2>\n")
 		.toString();
 	}
+	
+	/**
+	 * Get the latex output for the given element, which has been generated to the given
+	 * image path. The file extension for the image is also removed.
+	 * 
+	 * @param destination
+	 * @return
+	 */
+	private String getLatexTag(EObject element, IPath image) {
+		String breadcrumb = IamlBreadcrumb.breadcrumb(element, 4, new HtmlBreadcrumbLinker(partDestinationMap));
+		return "\\exportedImage{" + breadcrumb + "}{" + image.removeFileExtension() + "}\n";
+	}
 
 	/**
 	 * For a given path (e.g. "foo.png"), get the HTML file
@@ -322,7 +355,7 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 	protected IPath getHTMLDestinationFor(IPath source) {
 		return source.removeFileExtension().addFileExtension("html");
 	}
-	
+
 	/**
 	 * Construct the map. 
 	 * 
@@ -477,5 +510,20 @@ public class ExportToClickableHtml extends ExportImagePartsAction {
 	protected IMapMode getMapMode(DiagramEditPart part) {
 		return MapModeUtil.getMapMode(part.getFigure());
 	}
+
+	/**
+	 * Extends the list of image formats to also include SVG.
+	 * 
+	 * @see org.openiaml.model.diagram.custom.actions.ExportImagePartsAction#getExportedImageFormats()
+	 */
+	@Override
+	protected Set<ImageFileFormat> getExportedImageFormats() {
+		Set<ImageFileFormat> set = new HashSet<ImageFileFormat>();
+		set.addAll(super.getExportedImageFormats());
+		set.add(ImageFileFormat.SVG);
+		return set;
+	}
+	
+	
 
 }

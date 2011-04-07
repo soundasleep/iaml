@@ -3,7 +3,10 @@ package org.openiaml.model.diagram.custom.actions;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
@@ -128,7 +131,7 @@ public class ExportImagePartsAction extends ProgressEnabledUIAction<IFile> {
 			
 			// export all of the images
 			imagesSaved = 0;
-			recurseExportDiagram(editor, container, monitor);
+			recurseExportDiagram(editor, container, monitor, getExportedImageFormats());
 			
 			// only once we return are we actually done
 			monitor.done();
@@ -138,6 +141,17 @@ public class ExportImagePartsAction extends ProgressEnabledUIAction<IFile> {
 
 	}
 	
+	/**
+	 * Return a list of all the file formats to export to. By default,
+	 * only returns PNG.
+	 * 
+	 * @see #recurseExportDiagram(DiagramDocumentEditor, IContainer, IProgressMonitor, Collection)
+	 * @see ImageFileFormat
+	 */
+	protected Set<ImageFileFormat> getExportedImageFormats() {
+		return Collections.singleton(ImageFileFormat.PNG);
+	}
+
 	/**
 	 * The maximum number of images that will be created.
 	 * 
@@ -176,10 +190,12 @@ public class ExportImagePartsAction extends ProgressEnabledUIAction<IFile> {
 	 * 
 	 * @param part
 	 * @param container the container to place the exported images into; cannot be null
+	 * @param formats the list of image formats to export to
 	 * @throws CoreException 
 	 * @throws ExportImageException 
 	 */
-	protected void recurseExportDiagram(DiagramDocumentEditor editor, IContainer container, IProgressMonitor monitor) throws CoreException, ExportImageException {
+	protected void recurseExportDiagram(DiagramDocumentEditor editor, IContainer container, 
+			IProgressMonitor monitor, Set<ImageFileFormat> formats) throws CoreException, ExportImageException {
 		assert(container != null);
 		
 		if (monitor.isCanceled())
@@ -191,10 +207,12 @@ public class ExportImagePartsAction extends ProgressEnabledUIAction<IFile> {
 		// save this image if there is something in it
 		if (part.getChildren().size() > 0) {
 			IProgressMonitor saveMonitor = new SubProgressMonitor(monitor, 1);
-			saveMonitor.beginTask("Saving image " + destination, 2);
-			monitor.subTask("Saving image " + destination.lastSegment());
-			CopyToImageUtil img = getCopyToImageUtil();
-			img.copyToImage(part, destination, ImageFileFormat.PNG, new SubProgressMonitor(monitor, 1));
+			saveMonitor.beginTask("Saving image " + destination, 1 + formats.size());
+			for (ImageFileFormat format : formats) {
+				monitor.subTask("Saving image " + destination.lastSegment() + " ( " + format.getName() + ")");
+				CopyToImageUtil img = getCopyToImageUtil();
+				img.copyToImage(part, destination, format, new SubProgressMonitor(monitor, 1));
+			}
 			saveMonitor.done();
 			imagesSaved++;
 		}
@@ -221,7 +239,7 @@ public class ExportImagePartsAction extends ProgressEnabledUIAction<IFile> {
 					}
 					
 					// export this diagram editor
-					recurseExportDiagram(newEd, container, monitor);
+					recurseExportDiagram(newEd, container, monitor, formats);
 
 				}
 			}
@@ -321,6 +339,10 @@ public class ExportImagePartsAction extends ProgressEnabledUIAction<IFile> {
 
 		private static final long serialVersionUID = 1L;
 
+		public ExportImageException(String message, Exception e) {
+			super(message, e);
+		}
+		
 		public ExportImageException(Exception e) {
 			super(e.getMessage(), e);
 		}

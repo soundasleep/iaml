@@ -154,6 +154,23 @@ public class GenerateModeldocTestCase extends TestCase {
 	}
 	
 	/**
+	 * Tests {@link ModeldocCodeGenerator#formatFloat(String)}.
+	 */
+	public void testFormatFloat() {
+		assertEquals("test", ModeldocCodeGenerator.formatFloat("test"));
+		assertEquals("123.45", ModeldocCodeGenerator.formatFloat("123.45"));
+		assertEquals("123.40", ModeldocCodeGenerator.formatFloat("123.4"));
+		assertEquals("123", ModeldocCodeGenerator.formatFloat("123"));
+		assertEquals("123.00", ModeldocCodeGenerator.formatFloat("123.00"));
+		assertEquals("0.01", ModeldocCodeGenerator.formatFloat("0.01"));
+		assertEquals("0", ModeldocCodeGenerator.formatFloat("0"));
+		assertEquals("0.00", ModeldocCodeGenerator.formatFloat("0.000000"));
+		assertEquals("0.01", ModeldocCodeGenerator.formatFloat("0.009"));
+		assertEquals("9999990", ModeldocCodeGenerator.formatFloat("9999990"));
+		assertEquals("9,999,990.00", ModeldocCodeGenerator.formatFloat("9999990.0"));
+	}
+	
+	/**
 	 * Test the extraction of Javadoc block comments.
 	 */
 	public void testJavadocBlockExtract() {

@@ -141,6 +141,11 @@ public class MigrateModelAction extends ProgressEnabledUIAction<IFile> {
 	public IStatus execute(IFile source, IProgressMonitor monitor) {
 		IFile target = askForFilename(source);	// uses the same file extension
 		
+		if (target == null) {
+			// migration cancelled
+			return cancelledStatus();
+		}
+		
 		if (target.exists()) {
 			return errorStatus("The target model file already exists.");
 		}

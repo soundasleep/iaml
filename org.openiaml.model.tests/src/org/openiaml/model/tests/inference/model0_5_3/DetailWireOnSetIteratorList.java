@@ -12,7 +12,6 @@ import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
-import org.openiaml.model.model.visual.Hidden;
 import org.openiaml.model.model.visual.IteratorList;
 import org.openiaml.model.model.visual.Label;
 import org.openiaml.model.tests.inference.ValidInferenceTestCase;
@@ -73,16 +72,12 @@ public class DetailWireOnSetIteratorList extends ValidInferenceTestCase {
 		
 		// List has 'attribute' as a Label
 		Label lattr = assertHasLabel(list, "attribute");
+		assertTrue(lattr.isVisible());
 		
 		// generated primary key is stored as a hidden
-		Hidden hpk = assertHasHidden(list, "generated primary key");
-		
-		// no Label for generated primary key
-		assertHasNoLabel(list, "generated primary key");
-		
-		// no Hidden for attribute
-		assertHasNoHidden(list, "attribute");
-		
+		Label hpk = assertHasLabel(list, "generated primary key");
+		assertFalse(hpk.isVisible());
+
 		assertGenerated(lattr, hpk);
 		
 	}
@@ -98,7 +93,7 @@ public class DetailWireOnSetIteratorList extends ValidInferenceTestCase {
 		Frame home = assertHasFrame(root, "Home");
 		Frame target = assertHasFrame(root, "Target Frame");
 		IteratorList list = assertHasIteratorList(home, "List");
-		Hidden hpk = assertHasHidden(list, "generated primary key");
+		Label hpk = assertHasLabel(list, "generated primary key");
 		
 		Button link = assertHasButton(list, "link");
 		assertGenerated(link);
@@ -131,7 +126,7 @@ public class DetailWireOnSetIteratorList extends ValidInferenceTestCase {
 		Frame home = assertHasFrame(root, "Home");
 		DomainIterator iterator = assertHasDomainIterator(home, "Iterator");
 		IteratorList list = assertHasIteratorList(home, "List");
-		Hidden hpk = assertHasHidden(list, "generated primary key");
+		Label hpk = assertHasLabel(list, "generated primary key");
 		
 		DomainAttributeInstance dai = assertHasDomainAttributeInstance(iterator, "generated primary key");
 		assertGenerated(dai);

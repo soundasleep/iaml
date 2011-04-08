@@ -97,6 +97,9 @@ function can_cast($value, $type) {
 
 		// casting to integer
 		case "http://openiaml.org/model/datatypes#iamlInteger":
+			if (is_bool($value))
+				return true;	// all booleans can be integers
+
 			if (is_int($value))
 				return true;	// already an integer
 
@@ -155,6 +158,11 @@ function can_cast($value, $type) {
 
 			// don't know how to deal with this otherwise
 			return false;
+
+		// casting to boolean
+		case "http://openiaml.org/model/datatypes#iamlInteger":
+			// all objects can be cast to boolean
+			return true;
 
 		default:
 			throw new IamlRuntimeException("Unknown cast type '$type'");
@@ -250,6 +258,9 @@ function do_cast($value, $type) {
 
 		// casting to integer
 		case "http://openiaml.org/model/datatypes#iamlInteger":
+			if (is_bool($value))
+				return $value ? 1 : 0;
+							
 			if (is_int($value))
 				return $value;	// return copy
 
@@ -271,6 +282,11 @@ function do_cast($value, $type) {
 
 			// don't know how to deal with this otherwise
 			return 0;
+
+		// casting to boolean
+		case "http://openiaml.org/model/datatypes#iamlBoolean":
+		case "http://www.w3.org/2001/XMLSchema#boolean":
+			return make_into_boolean($value);
 
 		default:
 			throw new IamlRuntimeException("Unknown cast type '$type'");

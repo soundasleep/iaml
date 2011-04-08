@@ -16,7 +16,7 @@
       </children>
     </children>
     <children xsi:type="iaml.visual:IteratorList" inWires="wires.12d9744bb4e.1" id="visual.12d9744b831.aa" name="Iterator List"/>
-    <children xsi:type="iaml.visual:Hidden" id="visual.12d9744b831.ab" name="Hidden"/>
+    <children xsi:type="iaml.visual:Label" id="visual.12d9744b831.ab" name="Hidden" visible="false"/>
   </scopes>
   <schemas id="domain.12d9744c1a7.8" name="Iterator List contents" inSchemas="domain.12d9744c1a7.13">
     <attributes id="model.12d9744b5d0.3f" name="value"/>

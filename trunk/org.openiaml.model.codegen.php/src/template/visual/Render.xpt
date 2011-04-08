@@ -76,9 +76,9 @@
 	 
 	«REM»first, go through all properties«ENDREM»	
 	«FOREACH properties.select(p|p.name == "visible") AS p»
-		if (!$found_hidden_value && «EXPAND template::operations::Parameters::isSetParameter(true) FOR p») {
+		if (!$found_visible_value && «EXPAND template::operations::Parameters::isSetParameter(true) FOR p») {
 			$visible_value = make_into_boolean(«EXPAND template::operations::Parameters::callParameterValue(true, false) FOR p»);
-			$found_hidden_value = true;
+			$found_visible_value = true;
 		}
 	«ENDFOREACH»
 	

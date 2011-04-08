@@ -28,6 +28,7 @@ if (!require_get("ignore_updates", 0)) {
 «ENDDEFINE»
 
 «DEFINE outgoingEmailValue FOR model::Property»
+	«IF model::Changeable.isInstance(eContainer) && ((model::Changeable) eContainer).fieldValue == this»
 	«IF model::visual::InputTextField.isInstance(eContainer)»
 		/* container: InputTextField */
 		if («EXPAND template::operations::Parameters::isSetParameter(true)») {
@@ -131,6 +132,7 @@ if (!require_get("ignore_updates", 0)) {
 		«ENDIF»		
 		«ENDLET»
 	«ENDIF»
+	«ENDIF»
 	
 	«IF model::visual::IteratorList.isInstance(eContainer)»
 		/* container: IteratorList */
@@ -149,6 +151,11 @@ if (!require_get("ignore_updates", 0)) {
 		$hidden = get_application_value("«safeName()»_hidden", 0);
 	«ENDIF»
 		$value = make_into_boolean($hidden) ? "false" : "true";
+		«FOREACH properties.select(p|p.name=="visible") AS p»
+		if («EXPAND template::operations::Parameters::isSetParameter(true) FOR p») {
+			$value = make_into_boolean(«EXPAND template::operations::Parameters::callParameterValue(true, false) FOR p») ? "true" : "false";
+		}
+		«ENDFOREACH»
 
 		// pass it to the client 
 		if (DEBUG) {

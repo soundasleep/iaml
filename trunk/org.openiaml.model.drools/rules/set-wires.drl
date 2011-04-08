@@ -828,10 +828,11 @@ rule "Refresh Domain Object mappings (primary keys) when Instance sets a Iterato
 		eval ( handler.veto( sync ))
 		
 	then
-		# create a new Hidden
-		Hidden text = handler.generatedHidden(sync, form);
+		# create a new Label[visible = false]
+		Label text = handler.generatedLabel(sync, form);
 		handler.setName(text, attribute.getName());
 		handler.setType(text, attribute.getType());
+		handler.setVisible(text, false);
 		queue.add(text, drools);
 
 end

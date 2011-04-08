@@ -295,7 +295,7 @@ rule "Create a Link Button for the source of a DetailWire (IteratorList): Add Pa
 		ExtendsEdge ( from == pkInstance, to == pkAttribute )
 		
 		# attribute instance is connected to the Container by a SetWire or SyncWire to a Hidden
-		hidden : Hidden ( eContainer == source )
+		hidden : Label ( eContainer == source, visible == false )
 		set : SetWire ( from == pkInstance, to == hidden )
 		
 		pk : Property ( hidden.fieldValue == pk ) 

@@ -384,6 +384,7 @@
 
 /**
  * Hide a visible thing.
+ * TODO Remove this method and replace with setVisibility(boolean) : see issue 223
  *
  * @implementation VisibleThing,PrimitiveOperation
  *		A {@model VisibleThing} has a {@model PrimitiveOperation} named 'hide'. 
@@ -423,6 +424,7 @@
 
 /**
  * Show a visible thing.
+ * TODO Remove this method and replace with setVisibility(boolean) : see issue 223
  *
  * @implementation VisibleThing,PrimitiveOperation
  *		A {@model VisibleThing} has a {@model PrimitiveOperation} named 'show'. 

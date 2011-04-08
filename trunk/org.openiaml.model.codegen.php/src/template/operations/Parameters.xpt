@@ -120,7 +120,6 @@
 					: (
 						«IF model::visual::InputTextField.isInstance(eContainer) 
 								|| model::visual::Label.isInstance(eContainer) 
-								|| model::visual::Hidden.isInstance(eContainer)
 								|| model::visual::Map.isInstance(eContainer)
 								|| model::visual::MapPoint.isInstance(eContainer)»
 							«REM»this is a text field stored outside of the current frame«ENDREM»
@@ -182,9 +181,6 @@
 «ENDDEFINE»
 «DEFINE dataSourceOnFrame FOR model::visual::Label»
 	document.getElementById('«safeName()»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>').innerHTML
-«ENDDEFINE»
-«DEFINE dataSourceOnFrame FOR model::visual::Hidden»
-	document.getElementById('«safeName()»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>').value
 «ENDDEFINE»
 «DEFINE dataSourceOnFrame FOR model::visual::MapPoint»
 	document.getElementById('map_point_«safeNameString(id)»_value').value
@@ -310,9 +306,6 @@
 	true
 «ENDDEFINE»
 «DEFINE callParameterValueExists(Boolean php) FOR model::visual::InputTextField»
-	true
-«ENDDEFINE»
-«DEFINE callParameterValueExists(Boolean php) FOR model::visual::Hidden»
 	true
 «ENDDEFINE»
 «DEFINE callParameterValueExists(Boolean php) FOR model::visual::Map»

@@ -129,9 +129,6 @@
 «DEFINE dataTargetContainer(Boolean php, model::Property property) FOR model::visual::Label»
 	document.getElementById('«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>').innerHTML
 «ENDDEFINE»
-«DEFINE dataTargetContainer(Boolean php, model::Property property) FOR model::visual::Hidden»
-	document.getElementById('«safeNameString(id)»<?php echo «EXPAND template::visual::Label::getIteratorListIndex»; ?>').value
-«ENDDEFINE»
 «DEFINE dataTargetContainer(Boolean php, model::Property property) FOR model::visual::MapPoint»
 	document.getElementById('map_point_«safeNameString(id)»_value').value
 «ENDDEFINE»

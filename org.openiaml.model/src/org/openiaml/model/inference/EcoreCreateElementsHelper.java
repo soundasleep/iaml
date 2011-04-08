@@ -72,7 +72,6 @@ import org.openiaml.model.model.users.Role;
 import org.openiaml.model.model.users.UsersPackage;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
-import org.openiaml.model.model.visual.Hidden;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.IteratorList;
@@ -548,24 +547,6 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setGeneratedBy(field, by);
 		return field;
 	}
-	
-	public Hidden generatedHidden(GeneratesElements by, VisibleThing container) throws InferenceException {
-		Hidden field = (Hidden) createElement( container, VisualPackage.eINSTANCE.getHidden(), ModelPackage.eINSTANCE.getVisibleThing_Children() );
-		setGeneratedBy(field, by);
-		return field;
-	}
-
-	public Hidden generatedHidden(GeneratesElements by, Frame container) throws InferenceException {
-		Hidden field = (Hidden) createElement( container, VisualPackage.eINSTANCE.getHidden(), VisualPackage.eINSTANCE.getFrame_Children() );
-		setGeneratedBy(field, by);
-		return field;
-	}
-
-	public Hidden generatedHidden(GeneratesElements by, Email container) throws InferenceException {
-		Hidden field = (Hidden) createElement( container, VisualPackage.eINSTANCE.getHidden(), ScopesPackage.eINSTANCE.getEmail_Labels() );
-		setGeneratedBy(field, by);
-		return field;
-	}
 
 	public Button generatedButton(GeneratesElements by, VisibleThing container) throws InferenceException {
 		Button button = (Button) createElement( container, VisualPackage.eINSTANCE.getButton(), ModelPackage.eINSTANCE.getVisibleThing_Children() );
@@ -733,6 +714,10 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	
 	public void setExecuteOnInput(SetWire element, boolean value) throws InferenceException {
 		setValue(element, WiresPackage.eINSTANCE.getSetWire_ExecuteOnInput(), value);
+	}
+	
+	public void setVisible(VisibleThing element, boolean value) throws InferenceException {
+		setValue(element, ModelPackage.eINSTANCE.getVisibleThing_Visible(), value);
 	}
 	
 }

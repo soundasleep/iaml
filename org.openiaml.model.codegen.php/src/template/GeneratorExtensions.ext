@@ -637,14 +637,24 @@ isDomainIteratorResults(model::Property this) :
  * 		<code>http://www.w3.org/2001/XMLSchema#decimal</code>.
  */
 boolean isNumeric(xsd::XSDSimpleTypeDefinition this) :
-	uRI == "http://www.w3.org/2001/XMLSchema#decimal"
-	|| (baseTypeDefinition != null && isNumeric(baseTypeDefinition));
+	uRI != "http://www.w3.org/2001/XMLSchema#anySimpleType"
+	&& uRI != "http://www.w3.org/2001/XMLSchema#anyType"
+	&& (
+		uRI == "http://www.w3.org/2001/XMLSchema#decimal"
+		|| (baseTypeDefinition != null && isNumeric(baseTypeDefinition))
+	);
 
 operationUsed(model::Operation this) :
 	!(inActions.isEmpty && inExecutions.isEmpty && inFlows.isEmpty && inWires.isEmpty); 
 
 conditionUsed(model::Condition this) :
 	!(outConditionEdges.isEmpty && outFlows.isEmpty && outWires.isEmpty);
+
+/**
+ * Is the given property the fieldValue property of its containing object?
+ */
+isFieldValue(model::Property this) :
+	name == "fieldValue" || (model::Changeable.isInstance(eContainer) && ((model::Changeable) eContainer).fieldValue == this); 
 
 /**
  * Get the current version of the IAML code generation platform.

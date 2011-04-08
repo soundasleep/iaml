@@ -40,7 +40,12 @@
 
 /* we have a property to set [in Javascript] */
 «DEFINE outgoingValue(emf::EObject container) FOR model::Property»
-	var value = «EXPAND Parameters::dataSourceOnFrame FOR container»;
+	«IF isFieldValue(this)»
+		// reload value from page
+		var value = «EXPAND Parameters::dataSourceOnFrame FOR container»;
+	«ELSE»
+		// not a field value, a value should already be present in 'value'
+	«ENDIF»
 	«EXPAND outgoingValueTarget(false, "value")»
 «ENDDEFINE»
 

@@ -261,11 +261,15 @@
 			«IF canBeSet(eContainer)»
 				if (containing_frame("«safeName(this)»") == get_frame_id() &&
 						containing_email("«safeName(this)»") == null) {
-					// set a variable in the current frame
-					«EXPAND DataFlow::dataTarget(php) FOR this» = value;
+					«IF isFieldValue(this)»
+						// set a variable in the current frame
+						«EXPAND DataFlow::dataTarget(php) FOR this» = value;
+					«ELSE»
+						// not a field value
+					«ENDIF»
 					
 					// call client-side onChange manually
-					«EXPAND DataFlow::dataTargetOnChange(php) FOR this» 
+					«EXPAND DataFlow::dataTargetOnChange(php) FOR this»
 					
 					// set server/session variables too
 					«EXPAND OutgoingValues::outgoingValue(eContainer) FOR this»

@@ -270,6 +270,23 @@ public abstract class DomBasedMigrator implements IamlModelMigrator {
 	}
 	
 	/**
+	 * Return the <code>xsi:type</code> of the given element, or <code>null</code>
+	 * if none is defined.
+	 */
+	protected String getXsiType(Element element) {
+		if (!element.getAttribute("xsi:type").isEmpty()) {
+			String s = element.getAttribute("xsi:type");
+			
+			if (s != null && !s.isEmpty())
+				return s;
+			
+			return null;
+		}
+		
+		return null;
+	}
+	
+	/**
 	 * Should the given attribute be renamed? By default, this implementation
 	 * just returns the same name.
 	 * 

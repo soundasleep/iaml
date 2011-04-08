@@ -75,7 +75,6 @@ import org.openiaml.model.model.users.RequiresEdgesSource;
 import org.openiaml.model.model.users.Role;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
-import org.openiaml.model.model.visual.Hidden;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.IteratorList;
@@ -593,26 +592,6 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public void assertHasNoLabel(VisibleThing element, String string) throws JaxenException {
 		assertHasNone(element, "iaml:children[iaml:name='" + string + "']", Label.class);
-	}
-	
-	/**
-	 * Assert that the given element contains the given
-	 * Hidden.
-	 *
-	 * @return The element found
-	 */
-	public Hidden assertHasHidden(VisibleThing element, String string) throws JaxenException {
-		return (Hidden) queryOne(element, "iaml:children[iaml:name='" + string + "']");
-	}
-
-	/**
-	 * Assert that the given element does not contains the given
-	 * Hidden.
-	 *
-	 * @return The element found
-	 */
-	public void assertHasNoHidden(VisibleThing element, String string) throws JaxenException {
-		assertHasNone(element, "iaml:children[iaml:name='" + string + "']", Hidden.class);
 	}
 
 	/**

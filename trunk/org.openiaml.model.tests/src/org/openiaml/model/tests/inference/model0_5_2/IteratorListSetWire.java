@@ -15,7 +15,6 @@ import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;
 import org.openiaml.model.model.visual.Frame;
-import org.openiaml.model.model.visual.Hidden;
 import org.openiaml.model.model.visual.IteratorList;
 import org.openiaml.model.model.visual.Label;
 import org.openiaml.model.tests.inference.InferenceTestCase;
@@ -106,13 +105,16 @@ public class IteratorListSetWire extends InferenceTestCase {
 		DomainSchema news = assertHasDomainSchema(root, "News");
 		IteratorList list = assertHasIteratorList(home, "List");
 		
-		Hidden lid = assertHasHidden(list, "id");
+		Label lid = assertHasLabel(list, "id");
 		Label ltitle = assertHasLabel(list, "title");
 		Label lcontent = assertHasLabel(list, "content");
 		
 		assertGenerated(lid);
 		assertGenerated(ltitle);
 		assertGenerated(lcontent);
+		assertFalse(lid.isVisible());
+		assertTrue(ltitle.isVisible());
+		assertTrue(lcontent.isVisible());
 		
 		// same data types
 		// attributes in the schema
@@ -136,7 +138,7 @@ public class IteratorListSetWire extends InferenceTestCase {
 		IteratorList list = assertHasIteratorList(home, "List");
 		DomainIterator iterator = assertHasDomainIterator(home, "select three news");
 		
-		Hidden lid = assertHasHidden(list, "id");
+		Label lid = assertHasLabel(list, "id");
 		Label ltitle = assertHasLabel(list, "title");
 		Label lcontent = assertHasLabel(list, "content");
 		

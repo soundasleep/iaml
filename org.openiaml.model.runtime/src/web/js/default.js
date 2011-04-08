@@ -858,6 +858,10 @@ function can_cast(value, type) {
 		
 		// casting to integer
 		case "http://openiaml.org/model/datatypes#iamlInteger":
+			if (typeof(value) == "boolean") {
+				return true;	// can always cast boolean to int
+			}
+		
 			if (typeof(value) == "number") {
 				// numbers are both int's and float's; make sure it's
 				// not one of the maximums on int
@@ -904,7 +908,13 @@ function can_cast(value, type) {
 			
 			// don't know how to deal with this otherwise
 			return false;
-	
+			
+		// casting to boolean
+		case "http://openiaml.org/model/datatypes#iamlBoolean":
+		case "http://www.w3.org/2001/XMLSchema#boolean":
+			// all objects can be cast to boolean
+			return true;
+				
 		default:
 			throw new IamlJavascriptException("Unknown cast type '" + type + "'");
 	}
@@ -1008,6 +1018,10 @@ function do_cast(value, type) {
 		
 		// casting to integer
 		case "http://openiaml.org/model/datatypes#iamlInteger":
+			if (typeof(value) == "boolean") {
+				return value ? 1 : 0;
+			}
+		
 			if (typeof(value) == "number") {
 				// too big?
 				if (!(value >= -2147483648 &&
@@ -1057,6 +1071,11 @@ function do_cast(value, type) {
 			
 			// don't know how to deal with this otherwise
 			return 0;
+
+		// casting to boolean
+		case "http://openiaml.org/model/datatypes#iamlBoolean":
+		case "http://www.w3.org/2001/XMLSchema#boolean":
+			return make_into_boolean(value);
 	
 		default:
 			throw new IamlJavascriptException("Unknown cast type '" + type + "'");

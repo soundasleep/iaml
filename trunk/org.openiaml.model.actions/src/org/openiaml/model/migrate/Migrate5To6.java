@@ -22,6 +22,7 @@ import org.w3c.dom.Node;
  *   <li>"setPropertyToValue" PrimitiveOperation is now merged into "set" ({@issue 143})
  *   <li>InternetApplication.children is now merged into InternetApplication.elements (as it is now a Scope)
  *   <li>NavigateAction and RunAction merged into ActionEdge
+ *   <li>Hidden is now a Label[visible=false] ({@issue 224})
  *   <li>Others...
  * </ol>
  * 
@@ -91,6 +92,12 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 			return "iaml:ActionEdge";
 		}
 
+		// <children xsi:type="iaml.visual:Hidden">
+		// --> <children xsi:type="iaml.visual:Label" visible="false">
+		if (xsiType.equals("iaml.visual:Hidden")) {
+			return "iaml.visual:Label";
+		}
+		
 		return super.replaceType(element, xsiType, errors);
 	}
 
@@ -263,7 +270,11 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 	public void handleElement(Element old, Element element,
 			List<ExpectedMigrationException> errors) {
 		
-		// does nothing
+		// <children xsi:type="iaml.visual:Hidden">
+		// --> <children xsi:type="iaml.visual:Label" visible="false">
+		if ("iaml.visual:Hidden".equals(getXsiType(old))) {
+			element.setAttribute("visible", "false");
+		}
 		
 	}
 

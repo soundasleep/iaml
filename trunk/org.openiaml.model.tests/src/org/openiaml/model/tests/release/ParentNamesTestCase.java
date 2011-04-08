@@ -77,7 +77,6 @@ public class ParentNamesTestCase extends XmlTestCase {
 		VisualPackage.eINSTANCE.getInputForm(),
 		VisualPackage.eINSTANCE.getInputTextField(),
 		VisualPackage.eINSTANCE.getLabel(),
-		VisualPackage.eINSTANCE.getHidden(),
 		VisualPackage.eINSTANCE.getButton(),
 		VisualPackage.eINSTANCE.getMap(),
 		VisualPackage.eINSTANCE.getMapPoint(),
@@ -202,7 +201,6 @@ public class ParentNamesTestCase extends XmlTestCase {
 		ModelPackage.eINSTANCE.getStaticValue(),
 		VisualPackage.eINSTANCE.getInputTextField(),
 		VisualPackage.eINSTANCE.getLabel(),
-		VisualPackage.eINSTANCE.getHidden(),
 		
 		// not data typed, but typed in a different way
 		DomainPackage.eINSTANCE.getDomainSource(),

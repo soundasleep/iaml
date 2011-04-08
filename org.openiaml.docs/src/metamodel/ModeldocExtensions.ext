@@ -120,7 +120,7 @@ isFloat(String s) :
 /**
  * Format the given number as a two decimal point float.
  */
-formatFloat(String str) :
+String formatFloat(String str) :
 	JAVA org.openiaml.docs.generation.codegen.ModeldocCodeGenerator.formatFloat(java.lang.String);
 
 

@@ -146,9 +146,9 @@ if (!require_get("ignore_updates", 0)) {
 	{
 		/* VisibleThing '«escapeString(name)»' */
 	«IF containingSession() != null»
-		$hidden = require_session("«safeName(containingSession())»_«safeName()»_hidden", «visible ? 'false' : 'true'»);
+		$hidden = require_session("«safeName(containingSession())»_«safeName()»_hidden", "«visible ? 'false' : 'true'»");
 	«ELSE»
-		$hidden = get_application_value("«safeName()»_hidden", «visible ? 'false' : 'true'»);
+		$hidden = get_application_value("«safeName()»_hidden", "«visible ? 'false' : 'true'»");
 	«ENDIF»
 		$value = make_into_boolean($hidden) ? "false" : "true";
 		«FOREACH properties.select(p|p.name=="visible") AS p»

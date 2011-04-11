@@ -106,7 +106,7 @@ public class InputTextFieldDataTypeSync extends WarningEnabledCodegenTestCase {
 		
 		// and the target value should be as expected
 		{
-			String target = getLabelIDForText("Integer");
+			String target = getLabelIDForText("Integer", "Integer 2");
 			assertLabeledFieldEquals(target, "");	// should not change
 		}
 	}
@@ -133,7 +133,7 @@ public class InputTextFieldDataTypeSync extends WarningEnabledCodegenTestCase {
 		
 		// and the target value should be as expected
 		{
-			String target = getLabelIDForText("Email");
+			String target = getLabelIDForText("Email", "Email 2");
 			assertLabeledFieldEquals(target, "test@openiaml.org");
 		}
 		
@@ -145,7 +145,7 @@ public class InputTextFieldDataTypeSync extends WarningEnabledCodegenTestCase {
 			assertLabeledFieldEquals(target, "test@openiaml.org");
 		}
 		{
-			String target = getLabelIDForText("Email");
+			String target = getLabelIDForText("Email", "Email 2");
 			assertLabeledFieldEquals(target, "test@openiaml.org");
 		}
 		
@@ -168,7 +168,7 @@ public class InputTextFieldDataTypeSync extends WarningEnabledCodegenTestCase {
 		reloadPage(sitemap, "Home");
 		
 		{
-			String target = getLabelIDForText("Integer");
+			String target = getLabelIDForText("Integer", "Integer 2");
 			assertLabeledFieldEquals(target, "12345");
 		}
 		
@@ -200,7 +200,7 @@ public class InputTextFieldDataTypeSync extends WarningEnabledCodegenTestCase {
 		beginAtSitemapThenPage("Home");
 		assertNoProblem();
 		{
-			String target = getLabelIDForText(fieldName);
+			String target = getLabelIDForText(fieldName, fieldName + " 2");
 			assertLabeledFieldEquals(target, "");	// empty
 			
 			// we can set it to a string
@@ -213,7 +213,7 @@ public class InputTextFieldDataTypeSync extends WarningEnabledCodegenTestCase {
 		
 		// and the target value should be as expected
 		{
-			String target = getLabelIDForText(targetName);
+			String target = getLabelIDForText(targetName, fieldName + " 2");
 			assertLabeledFieldEquals(target, expected);
 		}
 		
@@ -248,7 +248,7 @@ public class InputTextFieldDataTypeSync extends WarningEnabledCodegenTestCase {
 		IFile sitemap = beginAtSitemapThenPage("Home");
 		assertNoProblem();
 		{
-			String target = getLabelIDForText(fieldName);
+			String target = getLabelIDForText(fieldName, fieldName + " 2");
 			assertLabeledFieldEquals(target, "");	// empty
 			
 			// we can set it to a string
@@ -264,7 +264,7 @@ public class InputTextFieldDataTypeSync extends WarningEnabledCodegenTestCase {
 		
 		// and the target value should be as expected
 		{
-			String target = getLabelIDForText(targetName);
+			String target = getLabelIDForText(targetName, fieldName + " 2");
 			assertLabeledFieldEquals(target, "");	// should not change
 		}
 		

@@ -51,12 +51,12 @@ class OclLexer(RegexLexer):
             (r'"(\\\\|\\"|[^"])*"', String),
             include('numbers'),
             (r'(oclIsTypeOf|allInstances|includes|isUnique|isEmpty|exists|forAll|size|'
-             r'implies|asSet|includes)\b', Name.Function),
+             r'asSet|includes)\b', Name.Function),
         ],
         'keywords': [
         	# TODO not yet populated
             (r'(context|inv|if|else|library|metamodel|require|public|definitions|'
-             r'init|derive|pre|body|'
+             r'init|derive|pre|body|and|or|implies|'
              r'enddefinitions|endlibrary)\b', Keyword),
             (r'(Sequence|Set|Bag|OrderedSet)\b', Keyword.Type),
             (r'(true|false|null)\b', Keyword.Constant),

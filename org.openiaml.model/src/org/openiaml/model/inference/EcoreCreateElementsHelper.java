@@ -720,4 +720,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setValue(element, ModelPackage.eINSTANCE.getVisibleThing_Visible(), value);
 	}
 	
+	public void setReadOnly(Property element, boolean value) throws InferenceException {
+		setValue(element, ModelPackage.eINSTANCE.getProperty_ReadOnly(), value);
+	}
+
 }

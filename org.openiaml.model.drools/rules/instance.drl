@@ -185,7 +185,7 @@ end
 
 /**
  * @inference DomainIterator
- *		A {@model DomainIterator} has a {@model Property} 
+ *		A {@model DomainIterator} has a {@model Property#readOnly} {@model Property} 
  *		called '{@model DomainIterator#results}'.
  */
 rule "Create 'results' Property"
@@ -199,6 +199,7 @@ rule "Create 'results' Property"
 		Property property = handler.generatedProperty(instance, instance, 
 			DomainPackage.eINSTANCE.getDomainIterator_Results());
 		handler.setName(property, "results count");
+		handler.setReadOnly(property, true);
 		queue.add(property, drools);
 	
 end

@@ -39,7 +39,7 @@ public class ExplicitFieldValue extends CodegenTestCase {
 	
 		beginAtSitemapThenPage("Home");
 		{
-			String target = getLabelIDForText("target");
+			String target = getLabelIDForText("source target");
 			assertLabeledFieldEquals(target, "");	// empty
 		}
 		
@@ -54,7 +54,7 @@ public class ExplicitFieldValue extends CodegenTestCase {
 		
 		beginAtSitemapThenPage("Home");
 		{
-			String target = getLabelIDForText("target");
+			String target = getLabelIDForText("source target");
 			assertLabeledFieldEquals(target, "");	// empty
 		}
 		{
@@ -65,7 +65,7 @@ public class ExplicitFieldValue extends CodegenTestCase {
 		
 		// it should change 'target'
 		{
-			String target = getLabelIDForText("target");
+			String target = getLabelIDForText("source target");
 			assertLabeledFieldEquals(target, "new value");	// empty
 		}
 		

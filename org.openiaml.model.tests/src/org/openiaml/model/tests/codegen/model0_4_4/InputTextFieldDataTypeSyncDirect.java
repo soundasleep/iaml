@@ -59,9 +59,9 @@ public class InputTextFieldDataTypeSyncDirect extends WarningEnabledCodegenTestC
 		beginAtSitemapThenPage("Home");
 		assertNoProblem();
 		
-		doTest("String", "String 2", "", "hello, world!");
+		doTest("String 1", "String 2", "", "hello, world!");
 		assertNoProblem();
-		doTest("String 2", "String", "hello, world!", "goodbye, world!");
+		doTest("String 2", "String 1", "hello, world!", "goodbye, world!");
 		assertNoProblem();
 	}
 	
@@ -69,9 +69,9 @@ public class InputTextFieldDataTypeSyncDirect extends WarningEnabledCodegenTestC
 		beginAtSitemapThenPage("Home");
 		assertNoProblem();
 		
-		doTest("Email", "Email 2", "", "one@openiaml.org");
+		doTest("Email 1", "Email 2", "", "one@openiaml.org");
 		assertNoProblem();
-		doTest("Email 2", "Email", "one@openiaml.org", "two@openiaml.org");
+		doTest("Email 2", "Email 1", "one@openiaml.org", "two@openiaml.org");
 		assertNoProblem();
 	}
 
@@ -79,9 +79,9 @@ public class InputTextFieldDataTypeSyncDirect extends WarningEnabledCodegenTestC
 		beginAtSitemapThenPage("Home");
 		assertNoProblem();
 		
-		doTest("Integer", "Integer 2", "", "1234");
+		doTest("Integer 1", "Integer 2", "", "1234");
 		assertNoProblem();
-		doTest("Integer 2", "Integer", "1234", "5678");
+		doTest("Integer 2", "Integer 1", "1234", "5678");
 		assertNoProblem();
 	}
 	
@@ -89,9 +89,9 @@ public class InputTextFieldDataTypeSyncDirect extends WarningEnabledCodegenTestC
 		beginAtSitemapThenPage("Home");
 		assertNoProblem();
 		
-		doTest("Default", "Default 2", "", "one@openiaml.org");
+		doTest("Default 1", "Default 2", "", "one@openiaml.org");
 		assertNoProblem();
-		doTest("Default 2", "Default", "one@openiaml.org", "12345");
+		doTest("Default 2", "Default 1", "one@openiaml.org", "12345");
 		assertNoProblem();
 	}
 	
@@ -109,9 +109,9 @@ public class InputTextFieldDataTypeSyncDirect extends WarningEnabledCodegenTestC
 		c.set(2001, 0 /* 0-based */, 12);
 		String date2 = rfc2822(c.getTime());
 
-		doTest("Date", "Date 2", "", "12/25/1998 +0000", date1);
+		doTest("Date 1", "Date 2", "", "12/25/1998 +0000", date1);
 		assertNoProblem();
-		doTest("Date 2", "Date", date1, "01/12/2001 +0000", date2);
+		doTest("Date 2", "Date 1", date1, "01/12/2001 +0000", date2);
 		assertNoProblem();
 	}
 

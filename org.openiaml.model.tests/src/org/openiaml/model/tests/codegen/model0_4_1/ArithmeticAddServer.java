@@ -29,7 +29,7 @@ public class ArithmeticAddServer extends CodegenTestCase {
 		
 		beginAtSitemapThenPage("Home");
 		{
-			String result = getLabelIDForText("result");
+			String result = getLabelIDForText("result", "negative result");
 			assertLabeledFieldEquals(result, "42");
 		}
 		assertNoProblem();
@@ -55,7 +55,7 @@ public class ArithmeticAddServer extends CodegenTestCase {
 		// go back to home page
 		gotoSitemapThenPage(sitemap, "Home");
 		{
-			String result = getLabelIDForText("result");
+			String result = getLabelIDForText("result", "negative result");
 			assertLabeledFieldEquals(result, "85");
 		}
 		assertNoProblem();
@@ -73,7 +73,7 @@ public class ArithmeticAddServer extends CodegenTestCase {
 		// initialise result to '42', since it's set as 'access'
 		IFile sitemap = beginAtSitemapThenPage("Home");
 		{
-			String result = getLabelIDForText("result");
+			String result = getLabelIDForText("result", "negative result");
 			assertLabeledFieldEquals(result, "42");
 			
 			// currently empty
@@ -94,7 +94,7 @@ public class ArithmeticAddServer extends CodegenTestCase {
 		gotoSitemapThenPage(sitemap, "Home");
 		{
 			// still the same value
-			String result = getLabelIDForText("result");
+			String result = getLabelIDForText("result", "negative result");
 			assertLabeledFieldEquals(result, "42");
 			// has been changed
 			String nresult = getLabelIDForText("negative result");
@@ -115,7 +115,7 @@ public class ArithmeticAddServer extends CodegenTestCase {
 		// initialise result to '42', since it's set as 'access'
 		IFile sitemap = beginAtSitemapThenPage("Home");
 		{
-			String result = getLabelIDForText("result");
+			String result = getLabelIDForText("result", "negative result");
 			assertLabeledFieldEquals(result, "42");
 			
 			// set it
@@ -128,7 +128,7 @@ public class ArithmeticAddServer extends CodegenTestCase {
 		
 		// hasn't changed
 		{
-			String result = getLabelIDForText("result");
+			String result = getLabelIDForText("result", "negative result");
 			assertLabeledFieldEquals(result, "42");
 		}
 		assertNoProblem();

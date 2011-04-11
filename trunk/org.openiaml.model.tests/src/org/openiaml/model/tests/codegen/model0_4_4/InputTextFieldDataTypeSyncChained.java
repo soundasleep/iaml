@@ -36,7 +36,7 @@ public class InputTextFieldDataTypeSyncChained extends WarningEnabledCodegenTest
 		
 		String text = "hello, world!";
 		{
-			String target = getLabelIDForText("String");
+			String target = getLabelIDForText("String 1");
 			assertLabeledFieldEquals(target, "");	// empty
 			
 			// we can set it to a string
@@ -45,16 +45,16 @@ public class InputTextFieldDataTypeSyncChained extends WarningEnabledCodegenTest
 		}
 		
 		// 'Default' is changed
-		assertLabel("Default", text);
+		assertLabel("Default 1", text);
 		
 		// Integer is not
-		assertLabel("Integer", "");
+		assertLabel("Integer 1", "");
 		
 		// Email is not
-		assertLabel("Email", "");
+		assertLabel("Email 1", "");
 		
 		// Date and Date 2 are not
-		assertLabel("Date", "");
+		assertLabel("Date 1", "");
 		assertLabel("Date 2", "");
 		
 		// in fact, there is a warning because of the lack of conversion
@@ -84,7 +84,7 @@ public class InputTextFieldDataTypeSyncChained extends WarningEnabledCodegenTest
 		String expected = rfc2822(c.getTime());
 		
 		{
-			String target = getLabelIDForText("String");
+			String target = getLabelIDForText("String 1");
 			assertLabeledFieldEquals(target, "");	// empty
 			
 			// we can set it to a string
@@ -93,17 +93,17 @@ public class InputTextFieldDataTypeSyncChained extends WarningEnabledCodegenTest
 		}
 		
 		// 'Default' is changed
-		assertLabel("Default", expected);
+		assertLabel("Default 1", expected);
 		
 		// Date and Date 2 are
-		assertLabel("Date", expected);
+		assertLabel("Date 1", expected);
 		assertLabel("Date 2", expected);
 		
 		// Integer is not
-		assertLabel("Integer", "");
+		assertLabel("Integer 1", "");
 		
 		// Email is not
-		assertLabel("Email", "");
+		assertLabel("Email 1", "");
 
 		// in fact, there is a warning because of the lack of conversion
 		assertProblem();
@@ -126,7 +126,7 @@ public class InputTextFieldDataTypeSyncChained extends WarningEnabledCodegenTest
 		String text = "1642015";
 		
 		{
-			String target = getLabelIDForText("Integer");
+			String target = getLabelIDForText("Integer 1");
 			assertLabeledFieldEquals(target, "");	// empty
 			
 			// we can set it to a string
@@ -135,17 +135,17 @@ public class InputTextFieldDataTypeSyncChained extends WarningEnabledCodegenTest
 		}
 		
 		// 'Default' is changed
-		assertLabel("Default", text);
+		assertLabel("Default 1", text);
 
 		// 'String' is changed
-		assertLabel("String", text);
+		assertLabel("String 1", text);
 
 		// Date and Date 2 are not
-		assertLabel("Date", "");
+		assertLabel("Date 1", "");
 		assertLabel("Date 2", "");
 		
 		// Email is not
-		assertLabel("Email", "");
+		assertLabel("Email 1", "");
 
 		// in fact, there is a warning because of the lack of conversion
 		assertProblem();
@@ -168,7 +168,7 @@ public class InputTextFieldDataTypeSyncChained extends WarningEnabledCodegenTest
 		String text = "hello, world!";
 		
 		{
-			String target = getLabelIDForText("Integer");
+			String target = getLabelIDForText("Integer 1");
 			assertLabeledFieldEquals(target, "");	// empty
 			
 			setLabeledFormElementField(target, text);
@@ -178,11 +178,11 @@ public class InputTextFieldDataTypeSyncChained extends WarningEnabledCodegenTest
 		}
 		
 		// none of the chained elements change
-		assertLabel("Default", "");
-		assertLabel("String", "");
-		assertLabel("Date", "");
+		assertLabel("Default 1", "");
+		assertLabel("String 1", "");
+		assertLabel("Date 1", "");
 		assertLabel("Date 2", "");
-		assertLabel("Email", "");
+		assertLabel("Email 1", "");
 		
 		// there is no problem, because the non-integer wasn't even accepted
 		assertNoProblem();

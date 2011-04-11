@@ -21,6 +21,7 @@ global DroolsHelperFunctions functions;
 
 /**
  * Issue 210: Create PrimitiveOperations rather than CompositeOperations.
+ * TODO do not create 'update' operation for {@model Property#readOnly} Properties.
  *
  * @inference VisibleThing
  *		All {@model VisibleThing}s (except {@model IteratorList}s and {@model InputForm}s) will have an {@model Operation} called "update".

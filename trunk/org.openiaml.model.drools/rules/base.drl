@@ -138,14 +138,14 @@ rule "Properties will also have a related 'is set' condition (fieldValue)"
 end
 
 /**
- * @inference Operation,Property All {@model Property Properties}, other than 'fieldValue',
+ * @inference Operation,Property All non-{@model Property#readOnly} {@model Property Properties}, other than 'fieldValue',
  * 		will have an {@model PrimitiveOperation} in its container called "set XXX".
  */
 rule "Properties will have a related 'set XXX' operation"
 	when
 		container : ContainsOperations ( )
 		containerGe : GeneratesElements ( this == container )
-		value : Property ( eContainer == container, name != "fieldValue" )
+		value : Property ( eContainer == container, name != "fieldValue", readOnly == false )
 		
 		not ( Operation( eval(name.equals("set " + value.getName())), eContainer == container ))
 	

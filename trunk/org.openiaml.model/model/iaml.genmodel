@@ -53,6 +53,7 @@
     <genClasses ecoreClass="iaml.ecore#//Property">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//Property/defaultValue"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//Property/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//Property/readOnly"/>
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//StaticValue">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//StaticValue/value"/>

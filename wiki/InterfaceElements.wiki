@@ -12,6 +12,6 @@ IAML defines a number of [http://openiaml.org/model/VisibleThing visual elements
 || [http://openiaml.org/model/InputTextField InputTextField] || [http://iaml.googlecode.com/svn/wiki/interface/input-text-field.png] ||
 || [http://openiaml.org/model/InputForm InputForm] || [http://iaml.googlecode.com/svn/wiki/interface/input-form.png] ||
 || [http://openiaml.org/model/Map Map] || [http://iaml.googlecode.com/svn/wiki/interface/map.png] ||
+|| [http://openiaml.org/model/Label Label] || [http://iaml.googlecode.com/svn/wiki/interface/label.png] ||
 || [http://openiaml.org/model/MapPoint MapPoint] || [http://iaml.googlecode.com/svn/wiki/interface/map-point.png] ||
 || [http://openiaml.org/model/IteratorList IteratorList] || [http://iaml.googlecode.com/svn/wiki/interface/iterator-list.png] ||
-|| [http://openiaml.org/model/Hidden Hidden] || _n/a_ ||

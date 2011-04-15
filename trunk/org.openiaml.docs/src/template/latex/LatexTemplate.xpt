@@ -2,6 +2,16 @@
 
 «EXTENSION metamodel::ModeldocExtensions»
 
+«DEFINE ifThenOpen(String key) FOR emf::EObject»
+\ifthenelse{\equal{\include«key»}{yes}}{
+\begin{modeldoc«key»}
+«ENDDEFINE»
+
+«DEFINE ifThenClose(String key) FOR emf::EObject»
+\end{modeldoc«key»}
+}{}% if «key»
+«ENDDEFINE»
+
 «DEFINE latexClass(modeldoc::ModelDocumentation root) FOR modeldoc::EMFClass»
 	«FILE "output/latex/" + name + ".tex"»
 
@@ -13,11 +23,14 @@
 \label{section:model-reference:«latexise(name)»}
 
 % tagline
-«IF tagline != null»
-«EXPAND LatexTemplate::javadocElementToLatex FOR tagline»
-«ELSE»
-\textbf{TODO} Tagline for «EXPAND modelLink».
-«ENDIF»
+
+«EXPAND ifThenOpen("Tagline")»
+	«IF tagline != null»
+	«EXPAND LatexTemplate::javadocElementToLatex FOR tagline»
+	«ELSE»
+	\textbf{TODO} Tagline for «EXPAND modelLink».
+	«ENDIF»
+«EXPAND ifThenClose("Tagline")»
 
 «IF !additionalLatex.isEmpty»
 % additional latex documentation
@@ -27,61 +40,71 @@
 «ENDFOREACH»
 «ENDIF»
 
-\subsubsection{Rationale}
-
-% Rationale
-«IF rationale != null»
-«EXPAND LatexTemplate::javadocElementToLatex FOR rationale»
-«ELSE»
-\textbf{TODO} Rationale for «EXPAND modelLink».
-«ENDIF»
-
-% structure
-\subsubsection{Structure}
-«IF abstract»
-	«IF interface»
-		\noindent Abstract interface.
+«EXPAND ifThenOpen("Rationale")»
+	% Rationale
+	«IF rationale != null»
+	«EXPAND LatexTemplate::javadocElementToLatex FOR rationale»
 	«ELSE»
-		\noindent Abstract.
+	\textbf{TODO} Rationale for «EXPAND modelLink».
 	«ENDIF»
-«ELSEIF interface»
-	\noindent Interface.
-«ENDIF»
+«EXPAND ifThenClose("Rationale")»
 
-«IF !supertypes.isEmpty»
-	\noindent \textbf{Extends:} «EXPAND modelLink FOREACH supertypes.sortBy(t|t.name) SEPARATOR ", "» 
-«ENDIF»
-
-«IF !subtypes.isEmpty»
-	\noindent \textbf{Direct subtypes:} «EXPAND modelLink FOREACH subtypes.sortBy(t|t.name) SEPARATOR ", "» 
-«ENDIF»
-
-«IF !allSubtypes().without(subtypes).isEmpty»
-	\noindent \textbf{Additional subtypes:} «EXPAND modelLink FOREACH allSubtypes().without(subtypes).sortBy(t|t.name) SEPARATOR ", "» 
-«ENDIF»
+«EXPAND ifThenOpen("Structure")»
+	% Structure
+	«IF abstract»
+		«IF interface»
+			\modeldocAbstractInterface
+		«ELSE»
+			\modeldocAbstract
+		«ENDIF»
+	«ELSEIF interface»
+		\modeldocInterface
+	«ENDIF»
+	
+	«IF !supertypes.isEmpty»
+	«EXPAND ifThenOpen("StructureExtends")»
+		«EXPAND modelLink FOREACH supertypes.sortBy(t|t.name) SEPARATOR ", "» 
+	«EXPAND ifThenClose("StructureExtends")»
+	«ENDIF»
+	
+	«IF !subtypes.isEmpty»
+	«EXPAND ifThenOpen("StructureSubtypes")»
+		«EXPAND modelLink FOREACH subtypes.sortBy(t|t.name) SEPARATOR ", "» 
+	«EXPAND ifThenClose("StructureSubtypes")»
+	«ENDIF»
+	
+	«IF !allSubtypes().without(subtypes).isEmpty»
+	«EXPAND ifThenOpen("StructureAllSubtypes")»
+		«EXPAND modelLink FOREACH allSubtypes().without(subtypes).sortBy(t|t.name) SEPARATOR ", "» 
+	«EXPAND ifThenClose("StructureAllSubtypes")»
+	«ENDIF»
+«EXPAND ifThenClose("Structure")»
 
 % visual representation
 «IF abstract || interface»
 % no visual representation: class is abstract, or an interface 
 «ELSE»
-\subsection{Visual Representation}
+«EXPAND ifThenOpen("Visual")»
+	\begin{figure}[htb]
+	\centering
+	% TODO this should be using SVG images, not PNG
+	«IF gmfEditor == null»
+	\textbf{TODO} No visual representation found for «EXPAND modelLink»
+	«ELSE»
+	\includegraphics{elements/«name».eps}
+	«ENDIF»
+	\modeldocVisualCaption{«humanise(name)»}
+	\label{fig:reference-«name»}
+	\end{figure}
 
-\begin{figure}[htb]
-\centering
-% TODO this should be using SVG images, not PNG
-«IF gmfEditor == null»
-\textbf{TODO} No visual representation found for «EXPAND modelLink»
-«ELSE»
-\includegraphics{elements/«name».eps}
-«ENDIF»
-\caption{«humanise(name)»}
-\label{fig:reference-«name»}
-\end{figure}
-
-% Rationale behind the visual representation
-A visual representation of this element is provided in Figure~\ref{fig:reference-«name»}.
-\textbf{TODO} Visual representation rationale.
-% It uses the orange background of all input elements\footnote{Not implemented yet}, and uses a textual icon of \verb|'A'| to signify it is editable.
+	\modeldocVisualReference{fig:reference-«name»}
+	
+	«EXPAND ifThenOpen("VisualRationale")»
+		% Rationale behind the visual representation; still has to be implemented.
+		\textbf{TODO} Visual representation rationale.
+		% It uses the orange background of all input elements\footnote{Not implemented yet}, and uses a textual icon of \verb|'A'| to signify it is editable.
+	«EXPAND ifThenClose("VisualRationale")»
+«EXPAND ifThenClose("Visual")»
 «ENDIF»
 
 «EXPAND latexAttributes»
@@ -107,10 +130,11 @@ A visual representation of this element is provided in Figure~\ref{fig:reference
 
 «DEFINE latexAttributes FOR modeldoc::EMFClass»	
 «IF !attributes.union(getInheritedAttributes(this)).isEmpty»
-	\subsection{Attributes}
+	«EXPAND ifThenOpen("Attributes")»
+	% Attributes
 
 	«IF !attributes.isEmpty»
-		\subsubsection{Direct Attributes}
+		«EXPAND ifThenOpen("AttributesDirect")»
 				
 		\begin{modeldocList}
 		«FOREACH attributes.sortBy(a|a.name) AS attribute»
@@ -122,14 +146,18 @@ A visual representation of this element is provided in Figure~\ref{fig:reference
 			«ENDIF»
 		«ENDFOREACH»
 		\end{modeldocList}
+		
+		«EXPAND ifThenClose("AttributesDirect")»
 	«ENDIF»
 	
 	«IF !getInheritedAttributes(this).isEmpty»
-		\subsubsection{Inherited Attributes}
-		
+
+		«EXPAND ifThenOpen("AttributesInherited")»
 		«FOREACH getInheritedAttributes(this).sortBy(a|a.name) AS attribute SEPARATOR "; "»\modeldocName{«attribute.name»} (from «EXPAND modelLink FOR attribute.containingType»)«ENDFOREACH»
+		«EXPAND ifThenClose("AttributesInherited")»
 	«ENDIF»
 
+	«EXPAND ifThenClose("Attributes")»
 «ENDIF»
 «ENDDEFINE»
 

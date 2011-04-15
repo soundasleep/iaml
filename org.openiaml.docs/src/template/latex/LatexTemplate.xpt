@@ -2,6 +2,9 @@
 
 «EXTENSION metamodel::ModeldocExtensions»
 
+/**
+ * Macros for if/then/else
+ */ 
 «DEFINE ifThenOpen(String key) FOR emf::EObject»
 \ifthenelse{\equal{\include«key»}{yes}}{
 \begin{modeldoc«key»}
@@ -12,11 +15,14 @@
 }{}% if «key»
 «ENDDEFINE»
 
+/**
+ * Invidivual class latex template
+ */
 «DEFINE latexClass(modeldoc::ModelDocumentation root) FOR modeldoc::EMFClass»
 	«FILE "output/latex/" + name + ".tex"»
 
 % generated ModelDoc latex for class «name»
-		
+
 \hypertarget{model reference:«humanise(name)»}{}
 \hypertarget{model reference:«humanise(name)»s}{}
 \section{«humanise(name)»}
@@ -153,7 +159,7 @@
 	«IF !getInheritedAttributes(this).isEmpty»
 
 		«EXPAND ifThenOpen("AttributesInherited")»
-		«FOREACH getInheritedAttributes(this).sortBy(a|a.name) AS attribute SEPARATOR "; "»\modeldocName{«attribute.name»} (from «EXPAND modelLink FOR attribute.containingType»)«ENDFOREACH»
+		«FOREACH getInheritedAttributes(this).sortBy(a|a.name) AS attribute SEPARATOR "; "»\inheritedElement{\modeldocName{«attribute.name»}}{«EXPAND modelLink FOR attribute.containingType»}«ENDFOREACH»
 		«EXPAND ifThenClose("AttributesInherited")»
 	«ENDIF»
 
@@ -167,15 +173,14 @@
 		.reject(r|r.type.name.endsWith("Condition"))
 		.reject(r|r.type.name.endsWith("Operation"))
 		.isEmpty»
-	\subsection{Children}
+	«EXPAND ifThenOpen("Children")»
 
 	«IF !references.select(r|r.containment)
 			.reject(r|r.type.name == "EventTrigger")
 			.reject(r|r.type.name.endsWith("Condition"))
 			.reject(r|r.type.name.endsWith("Operation"))
 			.isEmpty»
-		\subsubsection{Direct Children}
-				
+		«EXPAND ifThenOpen("ChildrenDirect")»
 		\begin{modeldocList}
 		«FOREACH references.select(r|r.containment)
 				.reject(r|r.type.name == "EventTrigger")
@@ -190,6 +195,7 @@
 			«ENDIF»
 		«ENDFOREACH»
 		\end{modeldocList}
+		«EXPAND ifThenClose("ChildrenDirect")»
 	«ENDIF»
 	
 	«IF !getInheritedReferences(this).select(r|r.containment)
@@ -197,14 +203,15 @@
 			.reject(r|r.type.name.endsWith("Condition"))
 			.reject(r|r.type.name.endsWith("Operation"))
 			.isEmpty»
-		\subsubsection{Inherited Children}
-		
+		«EXPAND ifThenOpen("ChildrenInherited")»
 		«FOREACH getInheritedReferences(this).select(r|r.containment)
 				.reject(r|r.type.name == "EventTrigger")
 				.reject(r|r.type.name.endsWith("Condition"))
 				.reject(r|r.type.name.endsWith("Operation"))
-				.sortBy(a|a.name) AS ref SEPARATOR "; "»\modeldocName{«ref.name»} (from «EXPAND modelLink FOR ref.containingType»)«ENDFOREACH»
+				.sortBy(a|a.name) AS ref SEPARATOR "; "»\inheritedElement{\modeldocName{«ref.name»}}{«EXPAND modelLink FOR ref.containingType»}«ENDFOREACH»
+		«EXPAND ifThenClose("ChildrenInherited")»
 	«ENDIF»
+	«EXPAND ifThenClose("Children")»
 «ENDIF»
 «ENDDEFINE»
 
@@ -214,15 +221,14 @@
 		.reject(r|r.type.name.endsWith("Condition"))
 		.reject(r|r.type.name.endsWith("Operation"))
 		.isEmpty»
-	\subsection{References}
-		
+	«EXPAND ifThenOpen("References")»
+
 	«IF !references.select(r|!r.containment)
 			.reject(r|r.type.name == "EventTrigger")
 			.reject(r|r.type.name.endsWith("Condition"))
 			.reject(r|r.type.name.endsWith("Operation"))
 			.isEmpty»
-		\subsubsection{Direct References}
-				
+		«EXPAND ifThenOpen("ReferencesDirect")»
 		\begin{modeldocList}
 		«FOREACH references.select(r|!r.containment)
 				.reject(r|r.type.name == "EventTrigger")
@@ -237,6 +243,7 @@
 			«ENDIF»
 		«ENDFOREACH»
 		\end{modeldocList}
+		«EXPAND ifThenClose("ReferencesDirect")»
 	«ENDIF»
 	
 	«IF !getInheritedReferences(this).select(r|!r.containment)
@@ -244,14 +251,15 @@
 			.reject(r|r.type.name.endsWith("Condition"))
 			.reject(r|r.type.name.endsWith("Operation"))
 			.isEmpty»
-		\subsubsection{Inherited References}
-		
+		«EXPAND ifThenOpen("ReferencesInherited")»
 		«FOREACH getInheritedReferences(this).select(r|!r.containment)
 				.reject(r|r.type.name == "EventTrigger")
 				.reject(r|r.type.name.endsWith("Condition"))
 				.reject(r|r.type.name.endsWith("Operation"))
-				.sortBy(a|a.name) AS ref SEPARATOR "; "»\modeldocName{«ref.name»} (from «EXPAND modelLink FOR ref.containingType»)«ENDFOREACH»
+				.sortBy(a|a.name) AS ref SEPARATOR "; "»\inheritedElement{\modeldocName{«ref.name»}}{«EXPAND modelLink FOR ref.containingType»}«ENDFOREACH»
+		«EXPAND ifThenClose("ReferencesInherited")»
 	«ENDIF»
+	«EXPAND ifThenClose("References")»
 «ENDIF»
 «ENDDEFINE»
 
@@ -259,11 +267,10 @@
 «IF !references.union(getInheritedReferences(this))
 		.select(r|r.type.name == "EventTrigger")
 		.isEmpty»
-	\subsection{Events}
+	«EXPAND ifThenOpen("Events")»
 
 	«IF !references.select(r|r.type.name == "EventTrigger").isEmpty»
-		\subsubsection{Direct Events}
-				
+		«EXPAND ifThenOpen("EventsDirect")»
 		\begin{modeldocList}
 		«FOREACH references.select(r|r.type.name == "EventTrigger").sortBy(a|a.name) AS ref»
 		  \item \modeldocName{«ref.name»} : «EXPAND bounds(ref.lowerBound, ref.upperBound)» «EXPAND modelLink FOR ref.type»
@@ -274,13 +281,15 @@
 			«ENDIF»
 		«ENDFOREACH»
 		\end{modeldocList}
+		«EXPAND ifThenClose("EventsDirect")»
 	«ENDIF»
 	
 	«IF !getInheritedReferences(this).select(r|r.type.name == "EventTrigger").isEmpty»
-		\subsubsection{Inherited Events}
-		
-		«FOREACH getInheritedReferences(this).select(r|r.type.name == "EventTrigger").sortBy(a|a.name) AS ref SEPARATOR "; "»\modeldocName{«ref.name»} (from «EXPAND modelLink FOR ref.containingType»)«ENDFOREACH»
+		«EXPAND ifThenOpen("EventsInherited")»
+		«FOREACH getInheritedReferences(this).select(r|r.type.name == "EventTrigger").sortBy(a|a.name) AS ref SEPARATOR "; "»\inheritedElement{\modeldocName{«ref.name»}}{«EXPAND modelLink FOR ref.containingType»}«ENDFOREACH»
+		«EXPAND ifThenClose("EventsInherited")»
 	«ENDIF»
+	«EXPAND ifThenClose("Events")»
 «ENDIF»
 «ENDDEFINE»
 
@@ -288,11 +297,10 @@
 «IF !references.union(getInheritedReferences(this))
 		.select(r|r.type.name.endsWith("Condition"))
 		.isEmpty»
-	\subsection{Conditions}
+	«EXPAND ifThenOpen("Conditions")»
 
 	«IF !references.select(r|r.type.name.endsWith("Condition")).isEmpty»
-		\subsubsection{Direct Conditions}
-				
+		«EXPAND ifThenOpen("ConditionsDirect")»
 		\begin{modeldocList}
 		«FOREACH references.select(r|r.type.name.endsWith("Condition")).sortBy(a|a.name) AS ref»
 		  \item \modeldocName{«ref.name»} : «EXPAND bounds(ref.lowerBound, ref.upperBound)» «EXPAND modelLink FOR ref.type»
@@ -303,13 +311,15 @@
 			«ENDIF»
 		«ENDFOREACH»
 		\end{modeldocList}
+		«EXPAND ifThenClose("ConditionsDirect")»
 	«ENDIF»
 	
 	«IF !getInheritedReferences(this).select(r|r.type.name.endsWith("Condition")).isEmpty»
-		\subsubsection{Inherited Conditions}
-		
-		«FOREACH getInheritedReferences(this).select(r|r.type.name.endsWith("Condition")).sortBy(a|a.name) AS ref SEPARATOR "; "»\modeldocName{«ref.name»} (from «EXPAND modelLink FOR ref.containingType»)«ENDFOREACH»
+		«EXPAND ifThenOpen("ConditionsInherited")»
+		«FOREACH getInheritedReferences(this).select(r|r.type.name.endsWith("Condition")).sortBy(a|a.name) AS ref SEPARATOR "; "»\inheritedElement{\modeldocName{«ref.name»}}{«EXPAND modelLink FOR ref.containingType»}«ENDFOREACH»
+		«EXPAND ifThenClose("ConditionsInherited")»
 	«ENDIF»
+	«EXPAND ifThenClose("Conditions")»
 «ENDIF»
 «ENDDEFINE»
 
@@ -317,11 +327,10 @@
 «IF !references.union(getInheritedReferences(this))
 		.select(r|r.type.name.endsWith("Operation"))
 		.isEmpty»
-	\subsection{Operations}
+	«EXPAND ifThenOpen("Operations")»
 
 	«IF !references.select(r|r.type.name.endsWith("Operation")).isEmpty»
-		\subsubsection{Direct Operations}
-				
+		«EXPAND ifThenOpen("OperationsDirect")»
 		\begin{modeldocList}
 		«FOREACH references.select(r|r.type.name.endsWith("Operation")).sortBy(a|a.name) AS ref»
 		  \item \modeldocName{«ref.name»} : «EXPAND bounds(ref.lowerBound, ref.upperBound)» «EXPAND modelLink FOR ref.type»
@@ -332,13 +341,15 @@
 			«ENDIF»
 		«ENDFOREACH»
 		\end{modeldocList}
+		«EXPAND ifThenClose("OperationsDirect")»
 	«ENDIF»
 	
 	«IF !getInheritedReferences(this).select(r|r.type.name.endsWith("Operation")).isEmpty»
-		\subsubsection{Inherited Operations}
-		
-		«FOREACH getInheritedReferences(this).select(r|r.type.name.endsWith("Operation")).sortBy(a|a.name) AS ref SEPARATOR "; "»\modeldocName{«ref.name»} (from «EXPAND modelLink FOR ref.containingType»)«ENDFOREACH»
+		«EXPAND ifThenOpen("OperationsInherited")»
+		«FOREACH getInheritedReferences(this).select(r|r.type.name.endsWith("Operation")).sortBy(a|a.name) AS ref SEPARATOR "; "»\inheritedElement{\modeldocName{«ref.name»}}{«EXPAND modelLink FOR ref.containingType»}«ENDFOREACH»
+		«EXPAND ifThenClose("OperationsInherited")»
 	«ENDIF»
+	«EXPAND ifThenClose("Operations")»
 «ENDIF»
 «ENDDEFINE»
 
@@ -354,13 +365,13 @@
 
 «DEFINE latexInferenceSemantics FOR modeldoc::EMFClass»
 	«IF inferenceSemantics.isEmpty»
-		% \textit{No direct inference semantics.}
+		\modeldocNoInferenceSemantics
 	«ELSE»
-		\subsection{Inference Semantics}
-	
+		«EXPAND ifThenOpen("Inference")»
 		\begin{modeldocList}
 			«EXPAND latexInferenceSemantic FOREACH inferenceSemantics»
 		\end{modeldocList}
+		«EXPAND ifThenClose("Inference")»
 	«ENDIF»
 «ENDDEFINE»
 
@@ -370,13 +381,13 @@
 
 «DEFINE latexConstraints FOR modeldoc::EMFClass»
 	«IF constraints.isEmpty»
-		% \textit{No direct constraints.}
+		\modeldocNoDirectConstraints
 	«ELSE»
-		\subsection{Constraints}
-
+		«EXPAND ifThenOpen("Constraints")»
 		\begin{modeldocList}
 			«EXPAND latexConstraint FOREACH constraints»
 		\end{modeldocList}
+		«EXPAND ifThenClose("Constraints")»
 	«ENDIF»
 «ENDDEFINE»
 
@@ -386,13 +397,13 @@
 
 «DEFINE latexImplementationNotes FOR modeldoc::EMFClass»
 	«IF implementationNotes.isEmpty»
-		% \textit{No direct implementation notes.}
+		\modeldocNoDirectImplementationNotes
 	«ELSE»
-		\subsection{Implementation Notes}
-
+		«EXPAND ifThenOpen("ImplementationNotes")»
 		\begin{modeldocList}
 			«EXPAND latexImplementationNote FOREACH implementationNotes»
 		\end{modeldocList}
+		«EXPAND ifThenClose("ImplementationNotes")»
 	«ENDIF»
 «ENDDEFINE»
 

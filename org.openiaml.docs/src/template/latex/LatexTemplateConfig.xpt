@@ -20,6 +20,24 @@
 \newcommand{\includeAttributes}{yes}
 \newcommand{\includeAttributesDirect}{yes}
 \newcommand{\includeAttributesInherited}{yes}
+\newcommand{\includeChildren}{yes}
+\newcommand{\includeChildrenDirect}{yes}
+\newcommand{\includeChildrenInherited}{yes}
+\newcommand{\includeReferences}{yes}
+\newcommand{\includeReferencesDirect}{yes}
+\newcommand{\includeReferencesInherited}{yes}
+\newcommand{\includeOperations}{yes}
+\newcommand{\includeOperationsDirect}{yes}
+\newcommand{\includeOperationsInherited}{yes}
+\newcommand{\includeConditions}{yes}
+\newcommand{\includeConditionsDirect}{yes}
+\newcommand{\includeConditionsInherited}{yes}
+\newcommand{\includeEvents}{yes}
+\newcommand{\includeEventsDirect}{yes}
+\newcommand{\includeEventsInherited}{yes}
+\newcommand{\includeInference}{yes}
+\newcommand{\includeConstraints}{yes}
+\newcommand{\includeImplementationNotes}{yes}
 
 % Templates
 \newcommand{\modeldocAbstractInterface}{\noindent Abstract interface.}
@@ -32,6 +50,14 @@
 \newcommand{\modeldocName}[1]{\code{#1}}
 \newcommand{\constraintWarning}{\textbf{W:} } % for constraints that give a warning
 \newcommand{\constraintError}{\textbf{E:} } % for constraints that give an error
+\newcommand{\modeldocNoInferenceSemantics}{} % empty
+\newcommand{\modeldocNoDirectConstraints}{} % empty
+\newcommand{\modeldocNoDirectImplementationNotes}{} % empty
+
+% #1 - property name, e.g. name
+% #2 - property parent, e.g. NamedElement
+% each parameter is already linked e.g. \modelLink
+\newcommand{\inheritedElement}[2]{{#1} (from {#2})}
 
 % Environment options
 \newenvironment{modeldocTagline}{
@@ -101,6 +127,115 @@
 }{
   % empty
 }
+
+\newenvironment{modeldocChildren}{
+  \subsection{Children}
+}{
+  % empty
+}
+
+\newenvironment{modeldocChildrenDirect}{
+  \subsubsection{Direct Children}
+}{
+  % empty
+}
+
+\newenvironment{modeldocChildrenInherited}{
+  \subsubsection{Inherited Children}
+}{
+  % empty
+}
+
+\newenvironment{modeldocReferences}{
+  \subsection{References}
+}{
+  % empty
+}
+
+\newenvironment{modeldocReferencesDirect}{
+  \subsubsection{Direct References}
+}{
+  % empty
+}
+
+\newenvironment{modeldocReferencesInherited}{
+  \subsubsection{Inherited References}
+}{
+  % empty
+}
+
+\newenvironment{modeldocOperations}{
+  \subsection{Operations}
+}{
+  % empty
+}
+
+\newenvironment{modeldocOperationsDirect}{
+  \subsubsection{Direct Operations}
+}{
+  % empty
+}
+
+\newenvironment{modeldocOperationsInherited}{
+  \subsubsection{Inherited Operations}
+}{
+  % empty
+}
+
+\newenvironment{modeldocConditions}{
+  \subsection{Conditions}
+}{
+  % empty
+}
+
+\newenvironment{modeldocConditionsDirect}{
+  \subsubsection{Direct Conditions}
+}{
+  % empty
+}
+
+\newenvironment{modeldocConditionsInherited}{
+  \subsubsection{Inherited Conditions}
+}{
+  % empty
+}
+
+\newenvironment{modeldocEvents}{
+  \subsection{Events}
+}{
+  % empty
+}
+
+\newenvironment{modeldocEventsDirect}{
+  \subsubsection{Direct Events}
+}{
+  % empty
+}
+
+\newenvironment{modeldocEventsInherited}{
+  \subsubsection{Inherited Events}
+}{
+  % empty
+}
+
+\newenvironment{modeldocInference}{
+  \subsection{Inference Semantics}
+}{
+  % empty
+}
+
+\newenvironment{modeldocConstraints}{
+  \subsection{Constraints}
+}{
+  % empty
+}
+
+\newenvironment{modeldocImplementationNotes}{
+  \subsection{Implementation Notes}
+}{
+  % empty
+}
+
 
 % a general list environment
 \newenvironment{modeldocList}{

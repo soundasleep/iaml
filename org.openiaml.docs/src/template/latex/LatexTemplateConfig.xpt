@@ -1,0 +1,113 @@
+«IMPORT modeldoc»
+
+«EXTENSION metamodel::ModeldocExtensions»
+
+«DEFINE latexTemplateConfig FOR modeldoc::ModelDocumentation»
+	«FILE "output/latex/config.tex"»
+% Default configuration file for each ModelElement.tex
+% All commands can be renewed to be overridden, i.e. \renewcommand, \renewenvironment
+
+% Include sections options
+\newcommand{\includeTagline}{yes}
+\newcommand{\includeRationale}{yes}
+\newcommand{\includeModeldocStructure}{yes}
+\newcommand{\includeStructure}{yes}
+\newcommand{\includeStructureExtends}{yes}
+\newcommand{\includeStructureSubtypes}{yes}
+\newcommand{\includeStructureAllSubtypes}{yes}
+\newcommand{\includeVisual}{yes}
+\newcommand{\includeVisualRationale}{yes}
+\newcommand{\includeAttributes}{yes}
+\newcommand{\includeAttributesDirect}{yes}
+\newcommand{\includeAttributesInherited}{yes}
+
+% Templates
+\newcommand{\modeldocAbstractInterface}{\noindent Abstract interface.}
+\newcommand{\modeldocAbstract}{\noindent Abstract.}
+\newcommand{\modeldocInterface}{\noindent Interface.}
+\newcommand{\modeldocVisualCaption}[1]{\caption{#1}}
+\newcommand{\modeldocVisualReference}[1]{
+  A visual representation of this element is provided in Figure~\ref{#1}.
+}
+\newcommand{\modeldocName}[1]{\code{#1}}
+\newcommand{\constraintWarning}{\textbf{W:} } % for constraints that give a warning
+\newcommand{\constraintError}{\textbf{E:} } % for constraints that give an error
+
+% Environment options
+\newenvironment{modeldocTagline}{
+  % empty
+}{
+  % empty
+}
+
+\newenvironment{modeldocRationale}{
+  \subsection{Rationale}
+}{
+  % empty
+}
+
+\newenvironment{modeldocStructure}{
+  \subsection{Structure}
+}{
+  % empty
+}
+
+\newenvironment{modeldocStructureExtends}{
+  \noindent \textbf{Extends:} 
+}{
+  % empty
+}
+
+\newenvironment{modeldocStructureSubtypes}{
+  \noindent \textbf{Direct subtypes:} 
+}{
+  % empty
+}
+
+\newenvironment{modeldocStructureAllSubtypes}{
+  \noindent \textbf{Additional subtypes:}  
+}{
+  % empty
+}
+
+% visual representation
+\newenvironment{modeldocVisual}{
+  \subsection{Visual Representation}
+}{
+  % empty
+}
+
+% rationale behind visual representation
+\newenvironment{modeldocVisualRationale}{
+  % empty  
+}{
+  % empty
+}
+
+\newenvironment{modeldocAttributes}{
+  \subsection{Attributes}
+}{
+  % empty
+}
+
+\newenvironment{modeldocAttributesDirect}{
+  \subsubsection{Direct Attributes}
+}{
+  % empty
+}
+
+\newenvironment{modeldocAttributesInherited}{
+  \subsubsection{Inherited Attributes}  
+}{
+  % empty
+}
+
+% a general list environment
+\newenvironment{modeldocList}{
+  \begin{itemize}[leftmargin=0.75cm,parsep=0pt]
+}{
+  \end{itemize}
+}
+
+	«ENDFILE»
+«ENDDEFINE»

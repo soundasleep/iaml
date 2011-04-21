@@ -188,8 +188,8 @@ public abstract class DomBasedMigrator implements IamlModelMigrator {
 	 * 
 	 * <b>NOTE:</b> This is where all the logic for migration is stored.
 	 * 
-	 * @param element
-	 * @param output
+	 * @param element the original element
+	 * @param output the element to append the newly created element to
 	 * @param document
 	 */
 	protected void recurseOverDocument(Element element,
@@ -208,6 +208,9 @@ public abstract class DomBasedMigrator implements IamlModelMigrator {
 		nodeName = getRenamedNode(nodeName, element, errors);
 
 		Element e = createElement(document, nodeName);
+		
+		// copy any inner text
+		e.setTextContent(getTextContent(element, e, element.getTextContent()));
 		
 		// do anything fancy with the element?
 		handleElement(element, e, errors);
@@ -378,6 +381,21 @@ public abstract class DomBasedMigrator implements IamlModelMigrator {
 	 */
 	public String getRenamedNode(String nodeName, Element element, List<ExpectedMigrationException> errors) {
 		return nodeName;
+	}
+
+	/**
+	 * Should the given node value -- i.e. text -- of the element
+	 * be changed? The node value may be null if there is no value.
+	 * 
+	 * By default, returns the original node value.
+	 * 
+	 * @param nodeName The element name (equal to element.getNodeName())
+	 * @param element The original element
+	 * @param errors The list of errors to insert errors into
+	 * @return the new name of the node
+	 */
+	public String getTextContent(Element oldElement, Element newElement, String value) {
+		return value;
 	}
 
 	/**

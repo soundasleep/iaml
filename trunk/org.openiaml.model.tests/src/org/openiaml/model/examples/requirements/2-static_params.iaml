@@ -6,9 +6,9 @@
       <onAccess id="model.1203bbadb5b.53c" outActions="wires.1203bbadbb8.152">
         <actions id="wires.1203bbadbb8.152" inParameterEdges="wires.1203bbadbb8.153" name="run" from="model.1203bbadb5b.53c" to="model.1203bbadb5b.53d"/>
       </onAccess>
-      <properties id="model.1203bbadb5b.53e" name="a static value" outParameterEdges="wires.1203bbadbb8.153" defaultValue="value goes here" readOnly="true">
+      <values id="model.1203bbadb5b.53e" name="a static value" outParameterEdges="wires.1203bbadbb8.153" value="value goes here">
         <parameterEdges id="wires.1203bbadbb8.153" from="model.1203bbadb5b.53e" to="wires.1203bbadbb8.152"/>
-      </properties>
+      </values>
     </children>
   </scopes>
 </iaml:InternetApplication>

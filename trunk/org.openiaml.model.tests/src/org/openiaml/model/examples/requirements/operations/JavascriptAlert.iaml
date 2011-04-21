@@ -10,6 +10,6 @@
       <executionEdges id="model.120acfde16a.827" from="operations.120acfde225.1f6" to="model.120acfde16a.742"/>
       <executionEdges id="model.120acfde16a.828" from="model.120acfde16a.742" to="operations.120acfde225.1f7"/>
     </operations>
-    <properties id="model.12f7645ca99.1c3" defaultValue="some property"/>
+    <properties id="model.120acfde16a.783" name="some property"/>
   </scopes>
 </iaml:InternetApplication>

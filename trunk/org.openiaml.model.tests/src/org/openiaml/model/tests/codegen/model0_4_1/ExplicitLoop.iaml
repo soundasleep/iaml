@@ -7,8 +7,6 @@
       <operations xsi:type="iaml:PrimitiveOperation" id="model.1254759b7c1.764" name="set" inFlows="model.1254759b7c1.799" inExecutions="model.1254759b7c1.79a" outFlows="model.1254759b7c1.79b" outExecutions="model.1254759b7c1.79c"/>
       <operations xsi:type="iaml:PrimitiveOperation" id="model.1254759b7c1.7a1" name="set" inFlows="model.1254759b7c1.7a4" inExecutions="model.1254759b7c1.79c model.1254759b7c1.7ad" outFlows="model.1254759b7c1.7a5" outExecutions="model.1254759b7c1.7ab"/>
       <operations xsi:type="iaml:PrimitiveOperation" id="model.1254759b7c1.7a6" name="set" inFlows="model.1254759b7c1.7a9" inExecutions="model.1254759b7c1.7ab" outFlows="model.1254759b7c1.7aa" outExecutions="model.1254759b7c1.7ac"/>
-      <properties id="model.1254759b7c1.797" name="init" outFlows="model.1254759b7c1.798 model.1254759b7c1.799" defaultValue="1" readOnly="true"/>
-      <properties id="model.1254759b7c1.7a0" name="one" outFlows="model.1254759b7c1.7a8" defaultValue="1" readOnly="true"/>
       <nodes xsi:type="iaml.operations:DecisionNode" id="operations.1254759bd7e.1aa" outExecutions="model.1254759b7c1.79f model.1254759b7c1.7ad" inExecutions="model.1254759b7c1.7ac" inFlows="model.1254759b7c1.79d model.1254759b7c1.79e" name="equal?"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.1254759bd7e.19f" outExecutions="model.1254759b7c1.761"/>
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.1254759bd7e.1a0" inExecutions="model.1254759b7c1.79f"/>
@@ -37,12 +35,14 @@
       <executionEdges id="model.1254759b7c1.7ad" name="n" from="operations.1254759bd7e.1aa" to="model.1254759b7c1.7a1"/>
       <variables id="model.1254759b7c1.75e" name="current" outFlows="model.1254759b7c1.7a2" inFlows="model.1254759b7c1.763 model.1254759b7c1.7a5"/>
       <variables id="model.1254759b7c1.765" name="position" outFlows="model.1254759b7c1.79d model.1254759b7c1.7a3 model.1254759b7c1.7a7" inFlows="model.1254759b7c1.79b model.1254759b7c1.7aa"/>
+      <values id="model.1254759b7c1.797" name="init" outFlows="model.1254759b7c1.798 model.1254759b7c1.799" value="1"/>
+      <values id="model.1254759b7c1.7a0" name="one" outFlows="model.1254759b7c1.7a8" value="1"/>
     </operations>
     <onAccess id="model.1254759b7c1.72a" outActions="wires.1254759bc84.8f">
       <actions id="wires.1254759bc84.8f" inParameterEdges="wires.1254759bc84.94" name="run" from="model.1254759b7c1.72a" to="model.1254759b7c1.72b"/>
     </onAccess>
-    <properties id="model.1254759b7c1.741" name="fib value" outParameterEdges="wires.1254759bc84.94" defaultValue="5" readOnly="true">
+    <values id="model.1254759b7c1.741" name="fib value" outParameterEdges="wires.1254759bc84.94" value="5">
       <parameterEdges id="wires.1254759bc84.94" from="model.1254759b7c1.741" to="wires.1254759bc84.8f"/>
-    </properties>
+    </values>
   </scopes>
 </iaml:InternetApplication>

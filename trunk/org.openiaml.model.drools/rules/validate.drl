@@ -163,9 +163,10 @@ rule "Create contents of 'validate' operation"
 		queue.add(runUpdate, drools);
 		
 		// parameter for update
-		StaticValue message = handler.generatedStaticValue(o, o);
+		Property message = handler.generatedProperty(o, o);
+		handler.setReadOnly(message, true);
 		handler.setName(message, "failure message");
-		handler.setValue(message, "Warning: Invalid input.");
+		handler.setDefaultValue(message, "Warning: Invalid input.");
 		queue.add(message, drools);
 		
 		ParameterEdge param = handler.generatedParameterEdge(o, o, message, runUpdate);

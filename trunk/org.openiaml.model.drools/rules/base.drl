@@ -89,7 +89,7 @@ rule "Create field value for Changeable (untyped)"
 		// set default to fieldValue ONLY if fieldValue is set
 		// (we want to get an error if we try to access an undefined variable)
 		if (f.getDefaultValue() != null) {
-			handler.setDefault(fieldValue, f.getDefaultValue());
+			handler.setDefaultValue(fieldValue, f.getDefaultValue());
 		}
 		
 		queue.add(fieldValue, drools);

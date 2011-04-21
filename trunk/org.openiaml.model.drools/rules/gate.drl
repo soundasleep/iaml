@@ -137,9 +137,10 @@ rule "Create contents of 'set flag' operation"
 		FinishNode finish = handler.generatedFinishNode(gate, op);
 		PrimitiveOperation set = handler.generatedPrimitiveOperation(gate, op);
 		handler.setName(set, "set");
-		StaticValue value = handler.generatedStaticValue(gate, op);
+		Property value = handler.generatedProperty(gate, op);
+		handler.setReadOnly(value, true);
 		handler.setName(value, "true");
-		handler.setValue(value, "true");
+		handler.setDefaultValue(value, "true");
 		
 		queue.add(start, drools);
 		queue.add(finish, drools);

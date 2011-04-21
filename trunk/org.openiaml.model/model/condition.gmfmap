@@ -255,41 +255,6 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//CompositeCondition/values"/>
-    <ownedChild>
-      <domainMetaElement
-          href="iaml.ecore#//StaticValue"/>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping"
-          viewPattern="{0} = {1}"
-          editorPattern="{0} = {1}"
-          editPattern="{0} = {1}">
-        <diagramLabel
-            href="iaml.gmfgraph#StaticValueName"/>
-        <features
-            href="iaml.ecore#//NamedElement/name"/>
-        <features
-            href="iaml.ecore#//StaticValue/value"/>
-      </labelMappings>
-      <labelMappings
-          readOnly="true">
-        <diagramLabel
-            href="iaml.gmfgraph#StaticValueStereotype"/>
-      </labelMappings>
-      <labelMappings
-          readOnly="true">
-        <diagramLabel
-            href="iaml.gmfgraph#StaticValueType"/>
-      </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="condition.gmftool#//@palette/@tools.0/@tools.6"/>
-      <diagramNode
-          href="iaml.gmfgraph#StaticValue"/>
-    </ownedChild>
-  </nodes>
-  <nodes>
-    <containmentFeature
         href="iaml.ecore#//CompositeCondition/nodes"/>
     <ownedChild>
       <domainMetaElement
@@ -303,7 +268,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="condition.gmftool#//@palette/@tools.0/@tools.7"/>
+          href="condition.gmftool#//@palette/@tools.0/@tools.6"/>
       <diagramNode
           href="iaml.gmfgraph#CastNode"/>
     </ownedChild>

@@ -214,7 +214,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="iterator.gmftool#//@palette/@tools.0/@tools.5"/>
+          href="iterator.gmftool#//@palette/@tools.0/@tools.4"/>
       <diagramNode
           href="iaml.gmfgraph#CompositeCondition"/>
     </ownedChild>
@@ -629,41 +629,6 @@
       </labelMappings>
       <diagramNode
           href="iaml.gmfgraph#Frame"/>
-    </ownedChild>
-  </nodes>
-  <nodes>
-    <containmentFeature
-        href="iaml.ecore#//ApplicationElement/values"/>
-    <ownedChild>
-      <domainMetaElement
-          href="iaml.ecore#//StaticValue"/>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping"
-          viewPattern="{0} = {1}"
-          editorPattern="{0} = {1}"
-          editPattern="{0} = {1}">
-        <diagramLabel
-            href="iaml.gmfgraph#StaticValueName"/>
-        <features
-            href="iaml.ecore#//NamedElement/name"/>
-        <features
-            href="iaml.ecore#//StaticValue/value"/>
-      </labelMappings>
-      <labelMappings
-          readOnly="true">
-        <diagramLabel
-            href="iaml.gmfgraph#StaticValueStereotype"/>
-      </labelMappings>
-      <labelMappings
-          readOnly="true">
-        <diagramLabel
-            href="iaml.gmfgraph#StaticValueType"/>
-      </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="iterator.gmftool#//@palette/@tools.0/@tools.4"/>
-      <diagramNode
-          href="iaml.gmfgraph#StaticValue"/>
     </ownedChild>
   </nodes>
   <nodes>

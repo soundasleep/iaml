@@ -63,19 +63,6 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="StaticValue"
-          description="Create new StaticValue">
-        <smallIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/StaticValue.gif"
-            bundle="org.openiaml.model.edit"/>
-        <largeIcon
-            xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/StaticValue.gif"
-            bundle="org.openiaml.model.edit"/>
-      </tools>
-      <tools
-          xsi:type="gmftool:CreationTool"
           title="EntryGate"
           description="Create new EntryGate">
         <smallIcon

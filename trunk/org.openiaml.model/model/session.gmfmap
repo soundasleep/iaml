@@ -296,41 +296,6 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//Scope/values"/>
-    <ownedChild>
-      <domainMetaElement
-          href="iaml.ecore#//StaticValue"/>
-      <labelMappings
-          xsi:type="gmfmap:FeatureLabelMapping"
-          viewPattern="{0} = {1}"
-          editorPattern="{0} = {1}"
-          editPattern="{0} = {1}">
-        <diagramLabel
-            href="iaml.gmfgraph#StaticValueName"/>
-        <features
-            href="iaml.ecore#//NamedElement/name"/>
-        <features
-            href="iaml.ecore#//StaticValue/value"/>
-      </labelMappings>
-      <labelMappings
-          readOnly="true">
-        <diagramLabel
-            href="iaml.gmfgraph#StaticValueStereotype"/>
-      </labelMappings>
-      <labelMappings
-          readOnly="true">
-        <diagramLabel
-            href="iaml.gmfgraph#StaticValueType"/>
-      </labelMappings>
-      <tool
-          xsi:type="gmftool:CreationTool"
-          href="session.gmftool#//@palette/@tools.0/@tools.4"/>
-      <diagramNode
-          href="iaml.gmfgraph#StaticValue"/>
-    </ownedChild>
-  </nodes>
-  <nodes>
-    <containmentFeature
         href="iaml.ecore#//Scope/elements"/>
     <ownedChild>
       <domainMetaElement
@@ -361,7 +326,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="session.gmftool#//@palette/@tools.0/@tools.5"/>
+          href="session.gmftool#//@palette/@tools.0/@tools.4"/>
       <diagramNode
           href="iaml.gmfgraph#LoginHandler"/>
     </ownedChild>
@@ -641,7 +606,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="session.gmftool#//@palette/@tools.0/@tools.6"/>
+          href="session.gmftool#//@palette/@tools.0/@tools.5"/>
       <diagramNode
           href="iaml.gmfgraph#EntryGate"/>
     </ownedChild>
@@ -671,7 +636,7 @@
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
-          href="session.gmftool#//@palette/@tools.0/@tools.7"/>
+          href="session.gmftool#//@palette/@tools.0/@tools.6"/>
       <diagramNode
           href="iaml.gmfgraph#ExitGate"/>
     </ownedChild>

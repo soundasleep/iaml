@@ -8,7 +8,7 @@ import org.openiaml.model.tests.CodegenTestCase;
 /**
  * Issue 176: A test model demonstrating all of the Operational Modelling concepts. 
  * 
- * @example StartNode,CancelNode,FinishNode,DecisionNode,SplitNode,JoinNode,OperationCallNode,Arithmetic,CastNode,TemporaryVariable,Parameter,StaticValue,DataFlowEdge,ExecutionEdge,ParameterEdge,RunAction,ConditionEdge
+ * @example StartNode,CancelNode,FinishNode,DecisionNode,SplitNode,JoinNode,OperationCallNode,Arithmetic,CastNode,TemporaryVariable,Parameter,DataFlowEdge,ExecutionEdge,ParameterEdge,RunAction,ConditionEdge
  *		A summary of all of the elements used in {@model CompositeOperation Operational Modelling}. 
  */
 public class OperationalExample extends CodegenTestCase {

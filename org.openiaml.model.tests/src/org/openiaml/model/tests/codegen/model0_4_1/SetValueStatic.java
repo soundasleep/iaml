@@ -9,9 +9,9 @@ import org.openiaml.model.tests.CodegenTestCase;
  * Testing the 'set' PrimitiveOperation with a StaticValue.
  * 
  * @author jmwright
- * @example PrimitiveOperation,StaticValue,CompositeOperation,Property
+ * @example PrimitiveOperation,CompositeOperation,Property
  * 		Setting a {@model InputTextField text field} {@model Property value}
- * 		to a {@model StaticValue static value}. 
+ * 		to a {@model Property#readOnly} {@model Property static value}. 
  * @implementation PrimitiveOperation
  * 		If a {@model PrimitiveOperation} is named 'set', it will
  * 		set the {@model Property target destination} to the value

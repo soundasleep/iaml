@@ -329,6 +329,38 @@
     </tools>
     <tools
         xsi:type="gmftool:ToolGroup"
+        title="Conditions"
+        description="Conditions"
+        collapsible="true">
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="PrimitiveCondition [empty]"
+          description="Create new PrimitiveCondition [empty]">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/PrimitiveCondition.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/PrimitiveCondition.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="PrimitiveCondition [notEmpty]"
+          description="Create new PrimitiveCondition [notEmpty]">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/PrimitiveCondition.gif"
+            bundle="org.openiaml.model.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj32/PrimitiveCondition.gif"
+            bundle="org.openiaml.model.edit"/>
+      </tools>
+    </tools>
+    <tools
+        xsi:type="gmftool:ToolGroup"
         title="Actions"
         description="Actions"
         collapsible="true">

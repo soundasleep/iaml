@@ -2002,6 +2002,17 @@
             text=": PrimitiveCondition"/>
         <children
             xsi:type="gmfgraph:Label"
+            name="PrimitiveConditionContainmentFeatureFigure"
+            text="&lt;...>">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="darkBlue"/>
+          <font
+              xsi:type="gmfgraph:BasicFont"
+              style="BOLD"/>
+        </children>
+        <children
+            xsi:type="gmfgraph:Label"
             name="PrimitiveConditionParentNameFigure"
             text="[none]">
           <foregroundColor
@@ -2015,6 +2026,8 @@
           figure="//@figures.0/@descriptors.50/@actualFigure/@children.1"/>
       <accessors
           figure="//@figures.0/@descriptors.50/@actualFigure/@children.2"/>
+      <accessors
+          figure="//@figures.0/@descriptors.50/@actualFigure/@children.3"/>
     </descriptors>
     <descriptors
         name="DetailWireFigure">
@@ -2625,10 +2638,15 @@
       figure="PrimitiveConditionFigure"
       accessor="//@figures.0/@descriptors.50/@accessors.0"/>
   <labels
-      name="PrimitiveConditionParentName"
+      name="PrimitiveConditionContainmentFeature"
       figure="PrimitiveConditionFigure"
       elementIcon="false"
       accessor="//@figures.0/@descriptors.50/@accessors.2"/>
+  <labels
+      name="PrimitiveConditionParentName"
+      figure="PrimitiveConditionFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.50/@accessors.3"/>
   <labels
       name="PropertyContainmentFeature"
       figure="PropertyFigure"

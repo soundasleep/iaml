@@ -925,6 +925,84 @@
   </nodes>
   <nodes>
     <containmentFeature
+        href="iaml.ecore#//VisibleThing/empty"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//PrimitiveCondition"/>
+      <domainSpecialization
+          body="return domainElement instanceof org.openiaml.model.model.PrimitiveCondition &#xD;&#xA;&amp;&amp; domainElement.eContainingFeature().getName()&#xD;&#xA;.equals(&quot;empty&quot;);"
+          language="java"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          editPattern="">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveConditionName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveConditionStereotype"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveConditionParentName"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveConditionContainmentFeature"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="visual.gmftool#//@palette/@tools.4/@tools.0"/>
+      <diagramNode
+          href="iaml.gmfgraph#PrimitiveCondition"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
+        href="iaml.ecore#//VisibleThing/notEmpty"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//PrimitiveCondition"/>
+      <domainSpecialization
+          body="return domainElement instanceof org.openiaml.model.model.PrimitiveCondition &#xD;&#xA;&amp;&amp; domainElement.eContainingFeature().getName()&#xD;&#xA;.equals(&quot;notEmpty&quot;);"
+          language="java"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping"
+          editPattern="">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveConditionName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveConditionStereotype"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveConditionParentName"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveConditionContainmentFeature"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="visual.gmftool#//@palette/@tools.4/@tools.1"/>
+      <diagramNode
+          href="iaml.gmfgraph#PrimitiveCondition"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
         href="iaml.ecore#//ContainsConditions/conditions"/>
     <ownedChild>
       <domainMetaElement
@@ -948,6 +1026,11 @@
           readOnly="true">
         <diagramLabel
             href="iaml.gmfgraph#PrimitiveConditionParentName"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveConditionContainmentFeature"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
@@ -1004,9 +1087,6 @@
     </labelMappings>
     <containmentFeature
         href="iaml.ecore#//ContainsWires/actions"/>
-    <tool
-        xsi:type="gmftool:CreationTool"
-        href="visual.gmftool#//@palette/@tools.4/@tools.0"/>
     <diagramLink
         href="iaml.gmfgraph#ActionEdge"/>
     <sourceMetaFeature

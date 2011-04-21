@@ -144,13 +144,6 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 
 		return super.getRenamedNode(nodeName, element, errors);
 	}
-
-	@Override
-	public boolean shouldDeleteAttribute(Element element, Element target,
-			String name, String value, List<ExpectedMigrationException> errors) {
-		
-		return super.shouldDeleteAttribute(element, target, name, value, errors);
-	}
 	
 	@Override
 	public String getRenamedAttribute(Element oldElement, Element newElement,
@@ -158,8 +151,8 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 
 		// <values value="static">
 		// --> <properties defaultValue="static" readOnly="true">
-		if (("properties".equals(oldElement.getNodeName()) || "values".equals(oldElement.getNodeName()) &&
-				"value".equals(name))) {
+		if (("properties".equals(oldElement.getNodeName()) || "values".equals(oldElement.getNodeName())) &&
+				"value".equals(name)) {
 			return "defaultValue";
 		}
 		
@@ -306,6 +299,19 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 		Map<String, String> map = super.getNewNamespaces();
 		map.put("iaml.domain", "http://openiaml.org/model/domain");
 		return map;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.migrate.DomBasedMigrator#shouldCopyTextContent(org.w3c.dom.Element, org.w3c.dom.Element)
+	 */
+	@Override
+	public boolean shouldCopyTextContent(Element oldElement, Element newElement) {
+		if ("overriddenNames".equals(oldElement.getNodeName())) {
+			return true;
+		}
+		
+		// call super
+		return super.shouldCopyTextContent(oldElement, newElement);
 	}
 	
 	

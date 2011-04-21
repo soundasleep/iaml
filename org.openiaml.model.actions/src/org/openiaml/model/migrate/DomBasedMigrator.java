@@ -210,7 +210,9 @@ public abstract class DomBasedMigrator implements IamlModelMigrator {
 		Element e = createElement(document, nodeName);
 		
 		// copy any inner text
-		e.setTextContent(getTextContent(element, e, element.getTextContent()));
+		if (shouldCopyTextContent(element, e)) {
+			e.setTextContent(element.getTextContent());
+		}
 		
 		// do anything fancy with the element?
 		handleElement(element, e, errors);
@@ -272,6 +274,18 @@ public abstract class DomBasedMigrator implements IamlModelMigrator {
 		output.appendChild(e);
 	}
 	
+	/**
+	 * Should the text content of the given {@link Element} be copied?
+	 * 
+	 * <p>Returns <code>false</code> by default.
+	 * 
+	 * @param oldElement
+	 * @param newElement
+	 */
+	public boolean shouldCopyTextContent(Element oldElement, Element newElement) {
+		return false;
+	}
+
 	/**
 	 * Return the <code>xsi:type</code> of the given element, or <code>null</code>
 	 * if none is defined.
@@ -381,21 +395,6 @@ public abstract class DomBasedMigrator implements IamlModelMigrator {
 	 */
 	public String getRenamedNode(String nodeName, Element element, List<ExpectedMigrationException> errors) {
 		return nodeName;
-	}
-
-	/**
-	 * Should the given node value -- i.e. text -- of the element
-	 * be changed? The node value may be null if there is no value.
-	 * 
-	 * By default, returns the original node value.
-	 * 
-	 * @param nodeName The element name (equal to element.getNodeName())
-	 * @param element The original element
-	 * @param errors The list of errors to insert errors into
-	 * @return the new name of the node
-	 */
-	public String getTextContent(Element oldElement, Element newElement, String value) {
-		return value;
 	}
 
 	/**

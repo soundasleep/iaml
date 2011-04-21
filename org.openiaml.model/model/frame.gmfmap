@@ -928,6 +928,11 @@
         <diagramLabel
             href="iaml.gmfgraph#PrimitiveConditionParentName"/>
       </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveConditionContainmentFeature"/>
+      </labelMappings>
       <diagramNode
           href="iaml.gmfgraph#PrimitiveCondition"/>
     </ownedChild>

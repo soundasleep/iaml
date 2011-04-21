@@ -3,13 +3,13 @@
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <children xsi:type="iaml.visual:Button" id="visual.12eeb3f62a1.40" name="target">
       <operations xsi:type="iaml:PrimitiveOperation" id="model.12eeb49d2c8.3d" name="set visible" inActions="model.12eeb49d2c8.53"/>
-      <properties id="model.12eeb3f61e6.1c" name="visible">
+      <properties id="model.12f7645ca99.38f" defaultValue="visible">
         <type href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//boolean;XSDSimpleTypeDefinition=10"/>
       </properties>
     </children>
     <children xsi:type="iaml.visual:Button" id="visual.12eeb3f62a1.41" name="set visibility" outActions="model.12eeb49d2c8.53">
       <actions id="model.12eeb49d2c8.53" inParameterEdges="wires.12eeb49d384.1" name="onClick" from="visual.12eeb3f62a1.41" to="model.12eeb49d2c8.3d"/>
-      <properties id="model.12eeb3f61e6.4a" name="visible">
+      <properties id="model.12f7645ca99.391" defaultValue="visible">
         <type href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//boolean;XSDSimpleTypeDefinition=10"/>
       </properties>
     </children>

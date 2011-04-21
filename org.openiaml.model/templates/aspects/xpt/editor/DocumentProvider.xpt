@@ -11,8 +11,6 @@
  * TODO when issue 30 is resolved, reimplement isReadOnly and remove this template.  
  */
 «IMPORT 'http://www.eclipse.org/gmf/2009/GenModel'»
-«EXTENSION MetaModel»
-«EXTENSION xpt::editor::GenDiagram»
 «EXTENSION xpt::editor::Utils»
 
 /**
@@ -105,3 +103,16 @@ protected void doSaveDocument(org.eclipse.core.runtime.IProgressMonitor monitor,
 	}
 }
 «ENDAROUND»
+
+/**
+ * Other definitions that don't seem to be dynamic properly.
+ */
+«DEFINE fileEditorInputClassFQName FOR gmfgen::GenDiagram»org.eclipse.ui.part.FileEditorInput«ENDDEFINE»
+«DEFINE uriEditorInputClassFQName FOR gmfgen::GenDiagram»org.eclipse.emf.common.ui.URIEditorInput«ENDDEFINE»
+«DEFINE throwIncorrectInputException FOR gmfgen::GenDiagram-»
+throw new org.eclipse.core.runtime.CoreException(new org.eclipse.core.runtime.Status(org.eclipse.core.runtime.IStatus.ERROR, «editorGen.plugin.getActivatorQualifiedClassName()».ID, 0, 
+		org.eclipse.osgi.util.NLS.bind(
+			«EXPAND xpt::Externalizer::accessorCall(i18nKeyForDocumentProviderIncorrectInputError(self)) FOR editorGen»,
+			new Object[] {element, «IF null = editorGen.application»"«EXPAND fileEditorInputClassFQName»", «ENDIF»"«EXPAND uriEditorInputClassFQName»"}),«EXPAND xpt::Common::nonNLS(1)»«IF null = editorGen.application»«EXPAND xpt::Common::nonNLS(2)»«ENDIF» 
+		null));
+«ENDDEFINE»

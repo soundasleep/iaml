@@ -21,8 +21,9 @@ import org.w3c.dom.Node;
  *   <li>DecisionCondition has been merged into DecisionNode ({@issue 160})
  *   <li>"setPropertyToValue" PrimitiveOperation is now merged into "set" ({@issue 143})
  *   <li>InternetApplication.children is now merged into InternetApplication.elements (as it is now a Scope)
- *   <li>NavigateAction and RunAction merged into ActionEdge
- *   <li>Hidden is now a Label[visible=false] ({@issue 224})
+ *   <li>NavigateAction and RunAction merged into {@model ActionEdge}
+ *   <li>Hidden is now a {@model Label}[visible=false] ({@issue 224})
+ *   <li>StaticValue is merged into {@model Property}[readOnly=true] ({@issue 179})
  *   <li>Others...
  * </ol>
  * 
@@ -113,6 +114,12 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 			return "fieldValue";
 		}
 		
+		// <values name="static">
+		// --> <properties name="static" readOnly="true">
+		if (nodeName.equals("values")) {
+			return "properties";
+		}
+		
 		// <conditions xsi:type="iaml.operations:DecisionCondition">
 		// --> <nodes xsi:type="iaml.operations:DecisionNode">
 		if (nodeName.equals("conditions") && "iaml.operations:DecisionCondition".equals(xsiType)) {
@@ -148,6 +155,13 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 	@Override
 	public String getRenamedAttribute(Element oldElement, Element newElement,
 			String name, String value) {
+
+		// <values value="static">
+		// --> <properties defaultValue="static" readOnly="true">
+		if (("properties".equals(oldElement.getNodeName()) || "values".equals(oldElement.getNodeName()) &&
+				"value".equals(name))) {
+			return "defaultValue";
+		}
 		
 		// otherwise, just return the same name
 		return super.getRenamedAttribute(oldElement, newElement, name, value);
@@ -274,6 +288,12 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 		// --> <children xsi:type="iaml.visual:Label" visible="false">
 		if ("iaml.visual:Hidden".equals(getXsiType(old))) {
 			element.setAttribute("visible", "false");
+		}
+		
+		// <values name="static">
+		// --> <properties name="static" readOnly="true">
+		if ("values".equals(old.getNodeName())) {
+			element.setAttribute("readOnly", "true");
 		}
 		
 	}

@@ -189,6 +189,11 @@
         <diagramLabel
             href="iaml.gmfgraph#PrimitiveConditionParentName"/>
       </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PrimitiveConditionContainmentFeature"/>
+      </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="element.gmftool#//@palette/@tools.0/@tools.2"/>

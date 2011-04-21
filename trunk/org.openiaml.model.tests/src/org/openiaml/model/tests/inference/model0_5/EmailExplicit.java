@@ -4,7 +4,6 @@
 package org.openiaml.model.tests.inference.model0_5;
 
 import org.openiaml.model.model.Property;
-import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.scopes.Email;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.tests.inference.InferenceTestCase;
@@ -51,7 +50,8 @@ public class EmailExplicit extends InferenceTestCase {
 		assertEquals(subject.getDefaultValue(), email.getSubject());
 
 		// the 'content' static value was already there
-		StaticValue content = assertHasStaticValue(email, "content");
+		Property content = assertHasProperty(email, "content");
+		assertTrue(content.isReadOnly());
 		assertNotGenerated(content);
 		
 	}

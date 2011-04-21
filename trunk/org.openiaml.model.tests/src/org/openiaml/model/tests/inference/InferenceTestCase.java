@@ -36,7 +36,6 @@ import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.Scope;
-import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.WireDestination;
@@ -810,26 +809,6 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public Session assertHasSession(Scope root, String string) throws JaxenException {
 		return (Session) queryOne(root, "iaml:scopes[iaml:name='" + string + "']");	
-	}
-	
-	/**
-	 * Assert that the given element contains the given
-	 * StaticValue.
-	 *
-	 * @return The element found
-	 */
-	public StaticValue assertHasStaticValue(Scope session, String string) throws JaxenException {
-		return (StaticValue) queryOne(session, "iaml:values[iaml:name='" + string + "']");	
-	}
-	
-	/**
-	 * Assert that the given element contains the given
-	 * StaticValue.
-	 *
-	 * @return The element found
-	 */
-	public StaticValue assertHasStaticValue(CompositeOperation element, String string) throws JaxenException {
-		return (StaticValue) queryOne(element, "iaml:values[iaml:name='" + string + "']");	
 	}
 	
 	/**

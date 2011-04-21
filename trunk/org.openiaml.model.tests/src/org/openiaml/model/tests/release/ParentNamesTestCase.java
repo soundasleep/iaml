@@ -199,7 +199,6 @@ public class ParentNamesTestCase extends XmlTestCase {
 		ModelPackage.eINSTANCE.getProperty(),
 		ModelPackage.eINSTANCE.getDomainAttribute(),
 		ModelPackage.eINSTANCE.getDomainAttributeInstance(),
-		ModelPackage.eINSTANCE.getStaticValue(),
 		VisualPackage.eINSTANCE.getInputTextField(),
 		VisualPackage.eINSTANCE.getLabel(),
 		

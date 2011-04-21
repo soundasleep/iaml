@@ -12,7 +12,6 @@ import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Property;
-import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.visual.Frame;
@@ -340,9 +339,10 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 		ActionEdge run = assertHasRunAction(root, onClick, update);
 		assertGenerated(run);
 
-		StaticValue blank = assertHasStaticValue(root, "blank");
+		Property blank = assertHasProperty(root, "blank");
+		assertTrue(blank.isReadOnly());
 		assertEquals(blank.getType(), BuiltinDataTypes.getTypeString());
-		assertEquals(blank.getValue(), "");
+		assertEquals(blank.getDefaultValue(), "");
 		
 		// with the email as the parameter
 		assertGenerated(assertHasParameterEdge(root, blank, run));

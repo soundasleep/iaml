@@ -10,7 +10,6 @@ import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
-import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DataFlowEdge;
 import org.openiaml.model.model.operations.DecisionNode;
@@ -246,8 +245,9 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 		Property password = assertHasProperty(session, "current password");
 		assertGenerated(password);
 
-		StaticValue myNull = assertHasStaticValue(doLogout, "reset value");
-		assertEquals("null", myNull.getValue());
+		Property myNull = assertHasProperty(doLogout, "reset value");
+		assertTrue(myNull.isReadOnly());
+		assertEquals("null", myNull.getDefaultValue());
 
 		// there will be many operations called 'set'
 		List<?> sets = query(doLogout, "iaml:operations[iaml:name='set']");

@@ -28,7 +28,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//Wire/to"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Wire/children"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Wire/parameters"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Wire/values"/>
     </genClasses>
     <genClasses image="false" ecoreClass="iaml.ecore#//WireDestination">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//WireDestination/inWires"/>
@@ -50,26 +49,25 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeOperation/dataEdges"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeOperation/executionEdges"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeOperation/variables"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeOperation/values"/>
+    </genClasses>
+    <genClasses ecoreClass="iaml.ecore#//CompositeCondition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeCondition/nodes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeCondition/dataEdges"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeCondition/executionEdges"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeCondition/variables"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeCondition/parameters"/>
     </genClasses>
     <genClasses image="false" ecoreClass="iaml.ecore#//ContainsOperations">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ContainsOperations/operations"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="iaml.ecore#//ApplicationElement">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ApplicationElement/values"/>
-    </genClasses>
+    <genClasses image="false" ecoreClass="iaml.ecore#//ApplicationElement"/>
     <genClasses ecoreClass="iaml.ecore#//Property">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//Property/defaultValue"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//Property/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//Property/readOnly"/>
     </genClasses>
-    <genClasses ecoreClass="iaml.ecore#//StaticValue">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//StaticValue/value"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//StaticValue/type"/>
-    </genClasses>
     <genClasses ecoreClass="iaml.ecore#//VisibleThing">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//VisibleThing/children"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//VisibleThing/values"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//VisibleThing/onClick"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//VisibleThing/currentInput"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//VisibleThing/onInput"/>
@@ -103,21 +101,12 @@
     <genClasses image="false" ecoreClass="iaml.ecore#//Scope">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/entryGate"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/exitGate"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/values"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/parameters"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/elements"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/onInit"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/scopes"/>
     </genClasses>
     <genClasses image="false" ecoreClass="iaml.ecore#//Condition"/>
-    <genClasses ecoreClass="iaml.ecore#//CompositeCondition">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeCondition/nodes"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeCondition/dataEdges"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeCondition/executionEdges"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeCondition/variables"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeCondition/values"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//CompositeCondition/parameters"/>
-    </genClasses>
     <genClasses image="false" ecoreClass="iaml.ecore#//ContainsConditions">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ContainsConditions/conditions"/>
     </genClasses>

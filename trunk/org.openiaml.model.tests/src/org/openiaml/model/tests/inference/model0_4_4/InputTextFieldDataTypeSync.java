@@ -12,7 +12,6 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.PrimitiveCondition;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
-import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.operations.CastNode;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.ExecutionEdgesSource;
@@ -253,8 +252,9 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 		assertHasExecutionEdge(validate, check, callUpdate, "no");
 
 		// with a parmameter of the exception
-		StaticValue warning = assertHasStaticValue(validate, "failure message");
-		assertEquals("Warning: Invalid input.", warning.getValue());
+		Property warning = assertHasProperty(validate, "failure message");
+		assertTrue(warning.isReadOnly());
+		assertEquals("Warning: Invalid input.", warning.getDefaultValue());
 		assertHasParameterEdge(validate, warning, runUpdate);
 
 		// and then 'n' calls 'show'

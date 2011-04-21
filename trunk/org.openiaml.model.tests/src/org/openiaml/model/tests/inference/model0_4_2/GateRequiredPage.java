@@ -9,7 +9,6 @@ import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
-import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.components.EntryGate;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DecisionNode;
@@ -139,9 +138,10 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		assertGenerated(finish);
 		PrimitiveOperation s = assertHasPrimitiveOperation(set, "set");
 		assertGenerated(s);
-		StaticValue value = assertHasStaticValue(set, "true");
+		Property value = assertHasProperty(set, "true");
+		assertTrue(value.isReadOnly());
 		assertGenerated(value);
-		assertEquals(value.getValue(), "true");
+		assertEquals("true", value.getDefaultValue());
 
 		// flow
 		assertGenerated(assertHasExecutionEdge(set, start, s));

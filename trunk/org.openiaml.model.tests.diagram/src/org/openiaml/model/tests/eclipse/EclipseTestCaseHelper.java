@@ -35,7 +35,6 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.PrimitiveCondition;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
-import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;
@@ -936,16 +935,6 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 		return assertHasRenderedNamedObject(editor, Button.class, name, false, false);
 	}
 	
-	public ShapeNodeEditPart assertHasStaticValue(
-			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
-		return assertHasRenderedNamedObject(editor, StaticValue.class, name, true, shortcutRequired);
-	}
-	
-	public ShapeNodeEditPart assertHasStaticValue(
-			DiagramDocumentEditor editor, String name) {
-		return assertHasRenderedNamedObject(editor, StaticValue.class, name, false, false);
-	}
-	
 	public ShapeNodeEditPart assertHasCompositeOperation(
 			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
 		return assertHasRenderedNamedObject(editor, CompositeOperation.class, name, true, shortcutRequired);
@@ -972,6 +961,11 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	public ShapeNodeEditPart assertHasProperty(
 			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
 		return assertHasRenderedNamedObject(editor, Property.class, name, true, shortcutRequired);
+	}
+	
+	public ShapeNodeEditPart assertHasProperty(
+			DiagramDocumentEditor editor, String name) {
+		return assertHasRenderedNamedObject(editor, Property.class, name, true, false);
 	}
 
 	/**

@@ -24,10 +24,11 @@ global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
 /**
- * @inference DomainIterator,InputForm,SelectWire
- *		An {@model InputForm} connected to a {@model DomainIterator},
- *		populated by a {@model SelectWire} that will return {@model SelectWire#limit many results},
- *		will contain {@model Button}s named 'Next', 'Previous', 'First' and 'Last'.
+ * @inference DomainIterator,InputForm,SetWire
+ *		An {@model InputForm} connected to a {@model DomainIterator} using a {@model SetWire}
+ *		with a {@model DomainIterator#limit} set, will be completed with
+ * 		{@model Button}s named 'Next', 'Previous', 'First' and 'Last', in order
+ *		to support navigation through the {@model DomainIterator}.
  */
 rule "Create navigation buttons for InputForms when connected to DomainIterators with many results"
 	when
@@ -68,10 +69,10 @@ rule "Create navigation buttons for InputForms when connected to DomainIterators
 end
 
 /**
- * @inference DomainIterator,InputForm,SelectWire
- *		An {@model InputForm} connected to a {@model DomainIterator},
- *		populated by a {@model SelectWire} that will return {@model SelectWire#limit many results},
- *		will contain a {@model Label} named 'Results'.
+ * @inference DomainIterator,InputForm,SetWire
+ *		An {@model InputForm} connected to a {@model DomainIterator} using a {@model SetWire}
+ *		with a {@model DomainIterator#limit} set, will be completed with
+ * 		a {@model Label} named 'Results'.
  */
 rule "Create 'Results' Label for InputForms when connected to DomainIterators with many results"
 	when

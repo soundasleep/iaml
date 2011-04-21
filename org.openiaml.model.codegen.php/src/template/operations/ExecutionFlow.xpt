@@ -19,7 +19,7 @@
 	«EXPAND executionFlowInternal(operation, php, outExecutions) FOR this»
 «ENDDEFINE»
 
-«DEFINE executionFlowInternal(Boolean operation, Boolean php, List[model::ExecutionEdge] edges) FOR model::ExecutionEdgesSource-»
+«DEFINE executionFlowInternal(Boolean operation, Boolean php, List[model::operations::ExecutionEdge] edges) FOR model::operations::ExecutionEdgesSource-»
 	// flow starts here
 	«REM»
 	/**
@@ -85,12 +85,12 @@
 /**
  * Converts an ExecutionEdge into an operation on the call stack.
  */
-«DEFINE addStack(model::ExecutionEdgesSource start, Boolean php) FOR model::ExecutionEdge»
+«DEFINE addStack(model::operations::ExecutionEdgesSource start, Boolean php) FOR model::operations::ExecutionEdge»
 	«IF php»$call_stack_«safeName(start)»->push«ELSE»call_stack_«safeName(start)».push«ENDIF»
 	("«safeName(to)-»");
 «ENDDEFINE»
 
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, Boolean php) FOR emf::EObject-»
+«DEFINE executionFlowStep(Boolean operation, model::operations::ExecutionEdgesSource start, Boolean php) FOR emf::EObject-»
 	/* disabled */
 	«REM»
 	// all destinations 1:
@@ -103,11 +103,11 @@
 /**
  * The individual steps within a flow.
  */
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, Boolean php) FOR model::ExecutionEdgeDestination-»
+«DEFINE executionFlowStep(Boolean operation, model::operations::ExecutionEdgesSource start, Boolean php) FOR model::operations::ExecutionEdgeDestination-»
 	«throwException("Unknown operation contents node: " + this)»
 «ENDDEFINE»
 
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, Boolean php) FOR model::operations::CancelNode-»
+«DEFINE executionFlowStep(Boolean operation, model::operations::ExecutionEdgesSource start, Boolean php) FOR model::operations::CancelNode-»
 	«IF operation»
 		«REM»operations will throw exceptions at CancelNodes«ENDREM»
 		«IF exceptionText.length > 0»
@@ -125,11 +125,11 @@
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, Boolean php) FOR model::operations::StartNode-»
+«DEFINE executionFlowStep(Boolean operation, model::operations::ExecutionEdgesSource start, Boolean php) FOR model::operations::StartNode-»
 	«throwException("Should never have the executionFlowStep start at a StartNode: use executionFlow.")»
 «ENDDEFINE»
 
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, Boolean php) FOR model::operations::FinishNode-»
+«DEFINE executionFlowStep(Boolean operation, model::operations::ExecutionEdgesSource start, Boolean php) FOR model::operations::FinishNode-»
 	// operation finished successfully
 	«IF operation»
 		«REM»operations will continue at FinishNodes (to let threads finish)«ENDREM»
@@ -163,7 +163,7 @@
  *       |-> d ----> e ->|
  */ 
 # @implementation SplitNode,JoinNode Currently execution split is implemented in a single threaded way; each {@model ExecutionEdge execution flow} is executed sequentially until all flows are complete. 
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, Boolean php) FOR model::operations::SplitNode-»
+«DEFINE executionFlowStep(Boolean operation, model::operations::ExecutionEdgesSource start, Boolean php) FOR model::operations::SplitNode-»
 	/* a split node */
 	
 	«REM»
@@ -243,7 +243,7 @@
 
 «ENDDEFINE»
 
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, Boolean php) FOR model::operations::JoinNode-»
+«DEFINE executionFlowStep(Boolean operation, model::operations::ExecutionEdgesSource start, Boolean php) FOR model::operations::JoinNode-»
 	// split finished successfully
 	«IF php»
 		$completed_«safeName(start)» = true;
@@ -253,7 +253,7 @@
 «ENDDEFINE»
 
 /* a primitive operation: carry on */
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
+«DEFINE executionFlowStep(Boolean operation, model::operations::ExecutionEdgesSource start, Boolean php) FOR model::PrimitiveOperation-»
 	// primitive operation "«name-»"
 	«EXPAND Contents::operationContents(start, php) FOR this-»
 	
@@ -267,7 +267,7 @@
  * A decision node: consult the incoming ConditionEdges.
  * TODO can we remove this template? It doesn't seem to do anything useful.
  */
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, Boolean php) FOR model::operations::DecisionNode-»
+«DEFINE executionFlowStep(Boolean operation, model::operations::ExecutionEdgesSource start, Boolean php) FOR model::operations::DecisionNode-»
 	// decision node
 	«EXPAND Contents::operationContents(start, php)»
 «ENDDEFINE»
@@ -280,7 +280,7 @@
  * @implementation OperationCallNode If a {@model OperationCallNode} does not have any explicit pass/fail
  *    {@model ExecutionEdge ExecutionEdges} defined, then the result value is ignored.
  */
-«DEFINE executionFlowStep(Boolean operation, model::ExecutionEdgesSource start, Boolean php) FOR model::operations::OperationCallNode-»
+«DEFINE executionFlowStep(Boolean operation, model::operations::ExecutionEdgesSource start, Boolean php) FOR model::operations::OperationCallNode-»
 	// virtual operation call "«name-»"
 
 	«REM»

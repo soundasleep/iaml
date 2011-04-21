@@ -33,9 +33,9 @@
 «ENDDEFINE»
 «DEFINE outgoingValue(emf::EObject container) FOR model::WireDestination»
 «ENDDEFINE»
-«DEFINE outgoingValue(emf::EObject container) FOR model::DataFlowEdgesSource»
+«DEFINE outgoingValue(emf::EObject container) FOR model::operations::DataFlowEdgesSource»
 «ENDDEFINE»
-«DEFINE outgoingValue(emf::EObject container) FOR model::DataFlowEdgeDestination»
+«DEFINE outgoingValue(emf::EObject container) FOR model::operations::DataFlowEdgeDestination»
 «ENDDEFINE»
 
 /* we have a property to set [in Javascript] */

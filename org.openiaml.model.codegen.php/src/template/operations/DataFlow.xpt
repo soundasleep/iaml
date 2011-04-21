@@ -8,7 +8,7 @@
 /**
  * Data sources
  */
-«DEFINE dataSource(Boolean php) FOR model::DataFlowEdgesSource»
+«DEFINE dataSource(Boolean php) FOR model::operations::DataFlowEdgesSource»
 	«throwException("Unknown data flow edge source for dataSource: " + this)»
 «ENDDEFINE»
 
@@ -53,12 +53,7 @@
 	«ENDIF»
 «ENDDEFINE»
 
-// TODO need to wrap value in some sort of encoding algorithm
-«DEFINE dataSource(Boolean php) FOR model::StaticValue»
-	"«value-»" /* static value "«safeName()-»" */ 
-«ENDDEFINE»
-
-«DEFINE dataSource(Boolean php) FOR model::Parameter»
+«DEFINE dataSource(Boolean php) FOR model::operations::Parameter»
 	«IF php»
 	$«safeName()»
 	«ELSE»
@@ -66,7 +61,7 @@
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE dataSource(Boolean php) FOR model::TemporaryVariable»
+«DEFINE dataSource(Boolean php) FOR model::operations::TemporaryVariable»
 	«IF php»
 	$temp_«safeName()»
 	«ELSE»
@@ -109,7 +104,7 @@
 /**
  * Data targets
  */
-«DEFINE dataTarget(Boolean php) FOR model::DataFlowEdgeDestination»
+«DEFINE dataTarget(Boolean php) FOR model::operations::DataFlowEdgeDestination»
 	«throwException("Unknown data flow edge target for dataTarget: " + this)»
 «ENDDEFINE»
 
@@ -142,14 +137,14 @@
  *
  * Uses JS parseFloatOrZero() from Runtime JS.
  */
-«DEFINE convertToFloat FOR model::DataFlowEdgesSource»
+«DEFINE convertToFloat FOR model::operations::DataFlowEdgesSource»
 	parse_float_or_zero(«EXPAND dataSource(false) FOR this»)
 «ENDDEFINE»
 
 /**
  * Should any additional methods be called after setting a particular property?
  */
-«DEFINE dataTargetOnChange(Boolean php) FOR model::DataFlowEdgeDestination»
+«DEFINE dataTargetOnChange(Boolean php) FOR model::operations::DataFlowEdgeDestination»
 	«throwException("Unknown data flow edge target for dataTargetOnChange: " + this)»
 «ENDDEFINE»
 
@@ -180,7 +175,7 @@
  *	only supports incoming {@model Property ApplicationElementProperties}
  *	as {@model DataFlowEdge parameters}.   
  */
-«DEFINE isSet(Boolean php) FOR model::DataFlowEdgesSource»
+«DEFINE isSet(Boolean php) FOR model::operations::DataFlowEdgesSource»
 	«throwException("Unknown data flow edge source for isSet: " + this)»
 «ENDDEFINE»
 

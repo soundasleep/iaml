@@ -122,7 +122,7 @@
 			«ENDIF»
 			
 			// temporary variables (if any)
-			«EXPAND Variables::temporaryVariable(php) FOREACH variables.typeSelect(model::TemporaryVariable)»			
+			«EXPAND Variables::temporaryVariable(php) FOREACH variables.typeSelect(model::operations::TemporaryVariable)»			
 			
 			// execute the operation
 			«IF startNode() == null»
@@ -149,7 +149,7 @@
 			running_«safeName()-» = true;		// prevent loops
 
 			// temporary variables (if any)
-			«EXPAND Variables::temporaryVariable(php) FOREACH variables.typeSelect(model::TemporaryVariable)»			
+			«EXPAND Variables::temporaryVariable(php) FOREACH variables.typeSelect(model::operations::TemporaryVariable)»			
 			
 			// has this operation got a fail handler?
 			«IF getFailEdge() != null»

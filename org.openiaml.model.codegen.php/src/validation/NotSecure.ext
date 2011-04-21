@@ -21,7 +21,7 @@ Boolean goesToCancelNode(emf::EObject this, Set[emf::EObject] visited) :
 Boolean goesToCancelNode(model::operations::CancelNode this, Set[emf::EObject] visited) :
 	true;
 	
-Boolean goesToCancelNode(model::ExecutionEdgesSource this, Set[emf::EObject] visited) :
+Boolean goesToCancelNode(model::operations::ExecutionEdgesSource this, Set[emf::EObject] visited) :
 	!visited.contains(this) &&
 	outExecutions.exists(edge | 
 		edge.to != null && 

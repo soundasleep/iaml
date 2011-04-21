@@ -8,7 +8,7 @@
 /**
  * Parameter definitions within the signature of an operation/method.
  */
-«DEFINE signatures(Boolean php) FOR model::Parameter-»
+«DEFINE signatures(Boolean php) FOR model::operations::Parameter-»
 	/* «name» */
 	«IF php»
 		$«safeName()-»
@@ -192,10 +192,6 @@
 	<?php /* DomainAttributeInstances are cached */ echo htmlspecialchars(get_attribute_instance_«safeName()»()); ?>
 «ENDDEFINE»
 
-«DEFINE callParameterValue(Boolean php, Boolean inStoreDb) FOR model::StaticValue»
-	"«value-»" /* static value "«name-»" */
-«ENDDEFINE»
-
 «DEFINE callParameterValue(Boolean php, Boolean inStoreDb) FOR model::DynamicApplicationElementSet»
 	/* dynamic element set "«name-»" */
 	get_dynamic_elements_«safeName()-»()
@@ -236,7 +232,7 @@
  * TODO We could use DataFlow::dataSource() for allowing ANY OperationalModelling
  * element to become a ParameterEdgeSource.
  */
-«DEFINE callParameterValue(Boolean php, Boolean inStoreDb) FOR model::TemporaryVariable»
+«DEFINE callParameterValue(Boolean php, Boolean inStoreDb) FOR model::operations::TemporaryVariable»
 	«EXPAND DataFlow::dataSource(php)»
 «ENDDEFINE»
 
@@ -249,7 +245,10 @@
 			values stored in sessions will not always be called 'fieldValue';
 			perhaps fieldValue is only those stored as part of InputTextFields, etc.
 		«ENDREM»
-		«IF model::DomainAttributeInstance.isInstance(eContainer)»
+		«IF readOnly»
+			/* read only Properties are always set */
+			true
+		«ELSEIF model::DomainAttributeInstance.isInstance(eContainer)»
 			«REM»from a DomainAttributeInstance«ENDREM»
 			«EXPAND RemoteParameter::remoteValueIsSet(php, this) FOR (model::DomainAttributeInstance) eContainer-»
 		«ELSEIF isDomainIteratorResults()»
@@ -262,7 +261,10 @@
 			(get_application_value("«safeName()-»", null) !== null)
 		«ENDIF»
 	«ELSE»
-		«IF name == "fieldValue" || name == "currentInput"»
+		«IF readOnly»
+			/* read only Properties are always set */
+			true
+		«ELSEIF name == "fieldValue" || name == "currentInput"»
 			«REM»where is this value stored? is it available on the current frame?«ENDREM»
 			«IF model::DomainAttributeInstance.isInstance(eContainer)»
 				«REM»from a DomainAttributeInstance«ENDREM»
@@ -312,9 +314,6 @@
 	true
 «ENDDEFINE»
 «DEFINE callParameterValueExists(Boolean php) FOR model::visual::MapPoint»
-	true
-«ENDDEFINE»
-«DEFINE callParameterValueExists(Boolean php) FOR model::StaticValue»
 	true
 «ENDDEFINE»
 «DEFINE callParameterValueExists(Boolean php) FOR model::DynamicApplicationElementSet»

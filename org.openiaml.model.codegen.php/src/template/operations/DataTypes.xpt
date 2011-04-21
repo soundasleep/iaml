@@ -8,7 +8,7 @@
 /**
  * Get the representation of the data type of the given data destination.
  */
-«DEFINE getDataType(Boolean php) FOR model::DataFlowEdgeDestination-»
+«DEFINE getDataType(Boolean php) FOR model::operations::DataFlowEdgeDestination-»
 	«throwException("Unknown data type container '" + this + "'")»
 «ENDDEFINE»
 
@@ -16,6 +16,6 @@
 	/* xsd type '«type.name»' */ "«type.uRI»"
 «ENDDEFINE»
 
-«DEFINE getDataType(Boolean php) FOR model::TemporaryVariable-»
+«DEFINE getDataType(Boolean php) FOR model::operations::TemporaryVariable-»
 	/* xsd type '«type.name»' */ "«type.uRI»"
 «ENDDEFINE»

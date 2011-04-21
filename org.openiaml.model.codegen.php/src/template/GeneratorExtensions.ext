@@ -222,16 +222,16 @@ startNodeCondition(model::CompositeCondition this) :
 	nodes.typeSelect(model::operations::StartNode).first();
 
 /* get the next execution flow for a Node that has passed */
-passedExectionFlow(model::ExecutionEdgesSource this) :	
+passedExectionFlow(model::operations::ExecutionEdgesSource this) :	
 	outExecutions.selectFirst( e | isPassFlow(e) );
 
 /* get the next execution flow for a Node that has failed */
-failedExectionFlow(model::ExecutionEdgesSource this) :
+failedExectionFlow(model::operations::ExecutionEdgesSource this) :
 	outExecutions.selectFirst( e | isFailFlow(e) );
 
-hasFailFlow(model::ExecutionEdgesSource this) :
+hasFailFlow(model::operations::ExecutionEdgesSource this) :
 	getFailFlows(this).size > 0; 
-hasPassFlow(model::ExecutionEdgesSource this) :
+hasPassFlow(model::operations::ExecutionEdgesSource this) :
 	getPassFlows(this).size > 0;
 
 /**
@@ -241,16 +241,16 @@ hasPassFlow(model::ExecutionEdgesSource this) :
  * @implementation ExecutionEdge
  *		A "passing" {@model ExecutionEdge} is any edge that is not a "failure" edge.
  */
-isFailFlow(model::ExecutionEdge e) :
+isFailFlow(model::operations::ExecutionEdge e) :
 	e.name != null && (e.name.toLowerCase().startsWith("n") || e.name.toLowerCase().startsWith("f"));
-isPassFlow(model::ExecutionEdge e) :
+isPassFlow(model::operations::ExecutionEdge e) :
 	!isFailFlow(e);
 
 /* get failed/passed out edges from a given DecisionCondition */
-getFailFlows(model::ExecutionEdgesSource this):
+getFailFlows(model::operations::ExecutionEdgesSource this):
 	outExecutions.select( e | isFailFlow(e) );
 
-getPassFlows(model::ExecutionEdgesSource this):
+getPassFlows(model::operations::ExecutionEdgesSource this):
 	outExecutions.select( e | isPassFlow(e) );
 
 /** does this operation have a "fail" edge? */
@@ -440,8 +440,8 @@ isGeneratedPrimaryKey(model::DomainAttributeInstance this) :
 List[model::domain::DomainSchema] allSubtypes(model::domain::DomainSchema this):
 	inExtendsEdges.from.typeSelect(model::domain::DomainSchema).collect(e|allSubtypes(e)).flatten().add(this);
 
-model::ExecutionEdgesSource castToExecutionEdgesSource(emf::EObject this) :
-	(model::ExecutionEdgesSource) this;
+model::operations::ExecutionEdgesSource castToExecutionEdgesSource(emf::EObject this) :
+	(model::operations::ExecutionEdgesSource) this;
 
 /**
  * If this extension fails, then you are trying to find the defining attribute for an AttributeInstance
@@ -471,7 +471,7 @@ model::DomainAttribute getDefinedAttribute(model::DomainAttribute this) :
  * Cached to prevent loops causing infinite loops in logic.
  */
 // for a destination that is actually a source: recurse
-List[model::ExecutionEdgeDestination] allDestinations(model::ExecutionEdgesSource this, Collection[model::ExecutionEdgesSource] visited) :
+List[model::operations::ExecutionEdgeDestination] allDestinations(model::operations::ExecutionEdgesSource this, Collection[model::operations::ExecutionEdgesSource] visited) :
 	if visited.contains(this) then
 		{}
 	else
@@ -481,7 +481,7 @@ List[model::ExecutionEdgeDestination] allDestinations(model::ExecutionEdgesSourc
 	;
 
 // default for an execution edge destination: empty
-List[model::ExecutionEdgeDestination] allDestinations(Object this, Collection[model::ExecutionEdgesSource] visited) :
+List[model::operations::ExecutionEdgeDestination] allDestinations(Object this, Collection[model::operations::ExecutionEdgesSource] visited) :
 	{};
 
 model::operations::JoinNode findFinalJoinNode(model::operations::SplitNode this) :
@@ -492,7 +492,7 @@ model::operations::JoinNode findFinalJoinNode(model::operations::SplitNode this)
 model::operations::JoinNode findFinalJoinNode(emf::EObject this) :
 	null;
 
-model::operations::JoinNode findFinalJoinNode(model::ExecutionEdgesSource this) :
+model::operations::JoinNode findFinalJoinNode(model::operations::ExecutionEdgesSource this) :
 	findFinalJoinNode(outExecutions.to.selectFirst( t | findFinalJoinNode(t) != null));
 
 model::operations::JoinNode findFinalJoinNode(model::operations::JoinNode this) :

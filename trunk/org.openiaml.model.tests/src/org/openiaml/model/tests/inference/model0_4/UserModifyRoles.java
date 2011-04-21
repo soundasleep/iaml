@@ -7,16 +7,16 @@ import java.util.List;
 
 import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.CompositeOperation;
-import org.openiaml.model.model.DataFlowEdge;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.operations.CancelNode;
+import org.openiaml.model.model.operations.DataFlowEdge;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.JoinNode;
+import org.openiaml.model.model.operations.Parameter;
 import org.openiaml.model.model.operations.SplitNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.Session;

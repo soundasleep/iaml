@@ -8,10 +8,11 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
-import org.openiaml.model.model.ExecutionEdge;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.domain.DomainPackage;
+import org.openiaml.model.model.operations.ExecutionEdge;
+import org.openiaml.model.model.operations.OperationsPackage;
 import org.openiaml.model.model.users.UsersPackage;
 import org.openiaml.model.model.wires.WiresPackage;
 
@@ -126,13 +127,13 @@ public class EdgeTypes {
 		) );
 
 		edgeTypes.add( new EdgeType(
-				ModelPackage.eINSTANCE.getDataFlowEdge(), /* type */
-				ModelPackage.eINSTANCE.getDataFlowEdgesSource(), /* source */
-				ModelPackage.eINSTANCE.getDataFlowEdgeDestination(), /* destination */
-				ModelPackage.eINSTANCE.getDataFlowEdge_From(), /* from ref */
-				ModelPackage.eINSTANCE.getDataFlowEdge_To(), /* to ref */
-				ModelPackage.eINSTANCE.getDataFlowEdgesSource_OutFlows(),
-				ModelPackage.eINSTANCE.getDataFlowEdgeDestination_InFlows()
+				OperationsPackage.eINSTANCE.getDataFlowEdge(), /* type */
+				OperationsPackage.eINSTANCE.getDataFlowEdgesSource(), /* source */
+				OperationsPackage.eINSTANCE.getDataFlowEdgeDestination(), /* destination */
+				OperationsPackage.eINSTANCE.getDataFlowEdge_From(), /* from ref */
+				OperationsPackage.eINSTANCE.getDataFlowEdge_To(), /* to ref */
+				OperationsPackage.eINSTANCE.getDataFlowEdgesSource_OutFlows(),
+				OperationsPackage.eINSTANCE.getDataFlowEdgeDestination_InFlows()
 		) );
 		
 		edgeTypes.add( new EdgeType(
@@ -156,13 +157,13 @@ public class EdgeTypes {
 		) );
 		
 		edgeTypes.add( new EdgeType(
-				ModelPackage.eINSTANCE.getExecutionEdge(), /* type */
-				ModelPackage.eINSTANCE.getExecutionEdgesSource(), /* source */
-				ModelPackage.eINSTANCE.getExecutionEdgeDestination(), /* destination */
-				ModelPackage.eINSTANCE.getExecutionEdge_From(), /* from ref */
-				ModelPackage.eINSTANCE.getExecutionEdge_To(), /* to ref */
-				ModelPackage.eINSTANCE.getExecutionEdgesSource_OutExecutions(),
-				ModelPackage.eINSTANCE.getExecutionEdgeDestination_InExecutions()
+				OperationsPackage.eINSTANCE.getExecutionEdge(), /* type */
+				OperationsPackage.eINSTANCE.getExecutionEdgesSource(), /* source */
+				OperationsPackage.eINSTANCE.getExecutionEdgeDestination(), /* destination */
+				OperationsPackage.eINSTANCE.getExecutionEdge_From(), /* from ref */
+				OperationsPackage.eINSTANCE.getExecutionEdge_To(), /* to ref */
+				OperationsPackage.eINSTANCE.getExecutionEdgesSource_OutExecutions(),
+				OperationsPackage.eINSTANCE.getExecutionEdgeDestination_InExecutions()
 		) );
 		
 		edgeTypes.add( new EdgeType(

@@ -7,10 +7,10 @@
       <nodes xsi:type="iaml.operations:StartNode" id="operations.120acfde225.1f6" outExecutions="model.120acfde16a.827"/>
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.120acfde225.1f7" inExecutions="model.120acfde16a.828"/>
       <dataEdges id="model.120acfde16a.825" from="model.120acfde16a.824" to="model.120acfde16a.742"/>
-      <dataEdges id="model.120acfde16a.826" from="model.120acfde16a.742" to="model.120acfde16a.783"/>
+      <dataEdges id="model.120acfde16a.826" from="model.120acfde16a.742"/>
       <executionEdges id="model.120acfde16a.827" from="operations.120acfde225.1f6" to="model.120acfde16a.742"/>
       <executionEdges id="model.120acfde16a.828" from="model.120acfde16a.742" to="operations.120acfde225.1f7"/>
     </operations>
-    <properties id="model.120acfde16a.783" name="some property" inFlows="model.120acfde16a.826"/>
+    <properties id="model.12f7645ca99.302" defaultValue="some property"/>
   </scopes>
 </iaml:InternetApplication>

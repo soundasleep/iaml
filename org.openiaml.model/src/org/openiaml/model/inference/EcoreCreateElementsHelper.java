@@ -18,22 +18,15 @@ import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsProperties;
 import org.openiaml.model.model.ContainsWires;
-import org.openiaml.model.model.DataFlowEdge;
-import org.openiaml.model.model.DataFlowEdgeDestination;
-import org.openiaml.model.model.DataFlowEdgesSource;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.EventTrigger;
-import org.openiaml.model.model.ExecutionEdge;
-import org.openiaml.model.model.ExecutionEdgeDestination;
-import org.openiaml.model.model.ExecutionEdgesSource;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.PrimitiveCondition;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
@@ -56,11 +49,18 @@ import org.openiaml.model.model.operations.Arithmetic;
 import org.openiaml.model.model.operations.ArithmeticOperationTypes;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.CastNode;
+import org.openiaml.model.model.operations.DataFlowEdge;
+import org.openiaml.model.model.operations.DataFlowEdgeDestination;
+import org.openiaml.model.model.operations.DataFlowEdgesSource;
 import org.openiaml.model.model.operations.DecisionNode;
+import org.openiaml.model.model.operations.ExecutionEdge;
+import org.openiaml.model.model.operations.ExecutionEdgeDestination;
+import org.openiaml.model.model.operations.ExecutionEdgesSource;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.JoinNode;
 import org.openiaml.model.model.operations.OperationCallNode;
 import org.openiaml.model.model.operations.OperationsPackage;
+import org.openiaml.model.model.operations.Parameter;
 import org.openiaml.model.model.operations.SplitNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.Email;
@@ -233,13 +233,13 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	}
 	
 	public Parameter generatedParameter(GeneratesElements by, Operation container) throws InferenceException {
-		Parameter parameter = (Parameter) createElement( container, ModelPackage.eINSTANCE.getParameter(), ModelPackage.eINSTANCE.getOperation_Parameters() );
+		Parameter parameter = (Parameter) createElement( container, OperationsPackage.eINSTANCE.getParameter(), ModelPackage.eINSTANCE.getOperation_Parameters() );
 		setGeneratedBy(parameter, by);
 		return parameter;
 	}	
 	
 	public Parameter generatedParameter(GeneratesElements by, CompositeCondition container) throws InferenceException {
-		Parameter parameter = (Parameter) createElement( container, ModelPackage.eINSTANCE.getParameter(), ModelPackage.eINSTANCE.getCompositeCondition_Parameters() );
+		Parameter parameter = (Parameter) createElement( container, OperationsPackage.eINSTANCE.getParameter(), ModelPackage.eINSTANCE.getCompositeCondition_Parameters() );
 		setGeneratedBy(parameter, by);
 		return parameter;
 	}
@@ -385,7 +385,7 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	}
 	
 	public DataFlowEdge generatedDataFlowEdge(GeneratesElements by, CompositeOperation container) throws InferenceException {
-		DataFlowEdge edge = (DataFlowEdge) createElement( container, ModelPackage.eINSTANCE.getDataFlowEdge(), ModelPackage.eINSTANCE.getCompositeOperation_DataEdges() );
+		DataFlowEdge edge = (DataFlowEdge) createElement( container, OperationsPackage.eINSTANCE.getDataFlowEdge(), ModelPackage.eINSTANCE.getCompositeOperation_DataEdges() );
 		setGeneratedBy(edge, by);
 		return edge;
 	}
@@ -398,7 +398,7 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	}
 	
 	public ExecutionEdge generatedExecutionEdge(GeneratesElements by, CompositeOperation container) throws InferenceException {
-		ExecutionEdge edge = (ExecutionEdge) createElement( container, ModelPackage.eINSTANCE.getExecutionEdge(), ModelPackage.eINSTANCE.getCompositeOperation_ExecutionEdges() );
+		ExecutionEdge edge = (ExecutionEdge) createElement( container, OperationsPackage.eINSTANCE.getExecutionEdge(), ModelPackage.eINSTANCE.getCompositeOperation_ExecutionEdges() );
 		setGeneratedBy(edge, by);
 		return edge;
 	}
@@ -411,7 +411,7 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	}
 	
 	public DataFlowEdge generatedDataFlowEdge(GeneratesElements by, CompositeCondition container) throws InferenceException {
-		DataFlowEdge edge = (DataFlowEdge) createElement( container, ModelPackage.eINSTANCE.getDataFlowEdge(), ModelPackage.eINSTANCE.getCompositeCondition_DataEdges() );
+		DataFlowEdge edge = (DataFlowEdge) createElement( container, OperationsPackage.eINSTANCE.getDataFlowEdge(), ModelPackage.eINSTANCE.getCompositeCondition_DataEdges() );
 		setGeneratedBy(edge, by);
 		return edge;
 	}
@@ -424,7 +424,7 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	}
 
 	public ExecutionEdge generatedExecutionEdge(GeneratesElements by, CompositeCondition container) throws InferenceException {
-		ExecutionEdge edge = (ExecutionEdge) createElement( container, ModelPackage.eINSTANCE.getExecutionEdge(), ModelPackage.eINSTANCE.getCompositeCondition_ExecutionEdges() );
+		ExecutionEdge edge = (ExecutionEdge) createElement( container, OperationsPackage.eINSTANCE.getExecutionEdge(), ModelPackage.eINSTANCE.getCompositeCondition_ExecutionEdges() );
 		setGeneratedBy(edge, by);
 		return edge;
 	}
@@ -637,19 +637,19 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	}
 	
 	public void setFrom(DataFlowEdge element, EObject value) throws InferenceException {
-		setValue(element, ModelPackage.eINSTANCE.getDataFlowEdge_From(), value);
+		setValue(element, OperationsPackage.eINSTANCE.getDataFlowEdge_From(), value);
 	}
 
 	public void setTo(DataFlowEdge element, EObject value) throws InferenceException {
-		setValue(element, ModelPackage.eINSTANCE.getDataFlowEdge_To(), value);
+		setValue(element, OperationsPackage.eINSTANCE.getDataFlowEdge_To(), value);
 	}
 
 	public void setFrom(ExecutionEdge element, EObject value) throws InferenceException {
-		setValue(element, ModelPackage.eINSTANCE.getExecutionEdge_From(), value);
+		setValue(element, OperationsPackage.eINSTANCE.getExecutionEdge_From(), value);
 	}
 
 	public void setTo(ExecutionEdge element, EObject value) throws InferenceException {
-		setValue(element, ModelPackage.eINSTANCE.getExecutionEdge_To(), value);
+		setValue(element, OperationsPackage.eINSTANCE.getExecutionEdge_To(), value);
 	}
 	
 	public void setType(Property element, XSDSimpleTypeDefinition value) throws InferenceException {

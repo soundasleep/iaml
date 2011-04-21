@@ -9,6 +9,17 @@
   <foreignModel>iaml.ecore</foreignModel>
   <genPackages prefix="Model" basePackage="org.openiaml.model" disposableProviderFactory="true"
       ecorePackage="iaml.ecore#/">
+    <genClasses image="false" ecoreClass="iaml.ecore#//GeneratedElement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//GeneratedElement/generatedBy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//GeneratedElement/isGenerated"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//GeneratedElement/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//GeneratedElement/generatedRule"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//GeneratedElement/overriddenNames"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="iaml.ecore#//GeneratesElements">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//GeneratesElements/generatedElements"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//GeneratesElements/overridden"/>
+    </genClasses>
     <genClasses image="false" ecoreClass="iaml.ecore#//NamedElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//NamedElement/name"/>
     </genClasses>
@@ -32,9 +43,6 @@
     <genClasses ecoreClass="iaml.ecore#//ActivityNode"/>
     <genClasses image="false" ecoreClass="iaml.ecore#//Operation">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Operation/parameters"/>
-    </genClasses>
-    <genClasses ecoreClass="iaml.ecore#//Parameter">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//Parameter/type"/>
     </genClasses>
     <genClasses ecoreClass="iaml.ecore#//PrimitiveOperation"/>
     <genClasses ecoreClass="iaml.ecore#//CompositeOperation">
@@ -76,29 +84,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/schemas"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//InternetApplication/sources"/>
     </genClasses>
-    <genClasses ecoreClass="iaml.ecore#//DataFlowEdge">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//DataFlowEdge/from"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//DataFlowEdge/to"/>
-    </genClasses>
-    <genClasses image="false" ecoreClass="iaml.ecore#//DataFlowEdgeDestination">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//DataFlowEdgeDestination/inFlows"/>
-    </genClasses>
-    <genClasses image="false" ecoreClass="iaml.ecore#//DataFlowEdgesSource">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//DataFlowEdgesSource/outFlows"/>
-    </genClasses>
-    <genClasses ecoreClass="iaml.ecore#//TemporaryVariable">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//TemporaryVariable/type"/>
-    </genClasses>
-    <genClasses ecoreClass="iaml.ecore#//ExecutionEdge">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//ExecutionEdge/from"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//ExecutionEdge/to"/>
-    </genClasses>
-    <genClasses image="false" ecoreClass="iaml.ecore#//ExecutionEdgeDestination">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//ExecutionEdgeDestination/inExecutions"/>
-    </genClasses>
-    <genClasses image="false" ecoreClass="iaml.ecore#//ExecutionEdgesSource">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//ExecutionEdgesSource/outExecutions"/>
-    </genClasses>
     <genClasses ecoreClass="iaml.ecore#//DynamicApplicationElementSet">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//DynamicApplicationElementSet/query"/>
     </genClasses>
@@ -115,17 +100,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//ContainsWires/selectEdges"/>
     </genClasses>
     <genClasses image="false" ecoreClass="iaml.ecore#//ShouldntContainWires"/>
-    <genClasses image="false" ecoreClass="iaml.ecore#//GeneratedElement">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//GeneratedElement/generatedBy"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//GeneratedElement/isGenerated"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//GeneratedElement/id"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//GeneratedElement/generatedRule"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//GeneratedElement/overriddenNames"/>
-    </genClasses>
-    <genClasses image="false" ecoreClass="iaml.ecore#//GeneratesElements">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference iaml.ecore#//GeneratesElements/generatedElements"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//GeneratesElements/overridden"/>
-    </genClasses>
     <genClasses image="false" ecoreClass="iaml.ecore#//Scope">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/entryGate"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference iaml.ecore#//Scope/exitGate"/>
@@ -304,6 +278,42 @@
         <genFeatures createChild="false" ecoreFeature="ecore:EAttribute iaml.ecore#//operations/Arithmetic/operationType"/>
       </genClasses>
       <genClasses ecoreClass="iaml.ecore#//operations/CastNode"/>
+      <genClasses ecoreClass="iaml.ecore#//operations/Parameter">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference iaml.ecore#//operations/Parameter/type"/>
+      </genClasses>
+      <genClasses ecoreClass="iaml.ecore#//operations/TemporaryVariable">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference iaml.ecore#//operations/TemporaryVariable/type"/>
+      </genClasses>
+      <genClasses ecoreClass="iaml.ecore#//operations/DataFlowEdge">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference iaml.ecore#//operations/DataFlowEdge/from"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference iaml.ecore#//operations/DataFlowEdge/to"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="iaml.ecore#//operations/DataFlowEdgeDestination">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference iaml.ecore#//operations/DataFlowEdgeDestination/inFlows"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="iaml.ecore#//operations/DataFlowEdgesSource">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference iaml.ecore#//operations/DataFlowEdgesSource/outFlows"/>
+      </genClasses>
+      <genClasses ecoreClass="iaml.ecore#//operations/ExecutionEdge">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference iaml.ecore#//operations/ExecutionEdge/from"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference iaml.ecore#//operations/ExecutionEdge/to"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="iaml.ecore#//operations/ExecutionEdgeDestination">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference iaml.ecore#//operations/ExecutionEdgeDestination/inExecutions"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="iaml.ecore#//operations/ExecutionEdgesSource">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference iaml.ecore#//operations/ExecutionEdgesSource/outExecutions"/>
+      </genClasses>
     </nestedGenPackages>
     <nestedGenPackages prefix="Scopes" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//scopes">

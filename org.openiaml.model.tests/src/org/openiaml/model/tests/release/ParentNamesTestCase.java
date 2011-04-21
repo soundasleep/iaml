@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.components.ComponentsPackage;
 import org.openiaml.model.model.domain.DomainPackage;
+import org.openiaml.model.model.operations.OperationsPackage;
 import org.openiaml.model.model.visual.VisualPackage;
 import org.openiaml.model.tests.XmlTestCase;
 import org.openiaml.model.xpath.IterableElementList;
@@ -194,7 +195,7 @@ public class ParentNamesTestCase extends XmlTestCase {
 	 * parent name elements.
 	 */
 	private static final EClass[] TYPED_ELEMENTS = new EClass[] {
-		ModelPackage.eINSTANCE.getTemporaryVariable(),
+		OperationsPackage.eINSTANCE.getTemporaryVariable(),
 		ModelPackage.eINSTANCE.getProperty(),
 		ModelPackage.eINSTANCE.getDomainAttribute(),
 		ModelPackage.eINSTANCE.getDomainAttributeInstance(),

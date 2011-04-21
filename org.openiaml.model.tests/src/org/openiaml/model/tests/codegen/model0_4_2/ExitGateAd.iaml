@@ -24,13 +24,13 @@
     <scopes xsi:type="iaml.visual:Frame" id="visual.126b0cb5e5a.4a" name="Advertisement" inActions="wires.126b0cb5e5a.e">
       <operations xsi:type="iaml:CompositeOperation" id="model.126b0cb5dec.d8" name="set flag to true" inActions="wires.126b0cb5e5a.4b">
         <operations xsi:type="iaml:PrimitiveOperation" id="model.126b0cb5dec.176" name="set" inFlows="model.126b0cb5dec.180" inExecutions="model.126b0cb5dec.17d" outFlows="model.126b0cb5dec.182" outExecutions="model.126b0cb5dec.17f"/>
+        <properties id="model.126b0cb5dec.178" name="true" outFlows="model.126b0cb5dec.180" defaultValue="true" readOnly="true"/>
         <nodes xsi:type="iaml.operations:StartNode" id="operations.126b0cb5e69.8a" outExecutions="model.126b0cb5dec.17d"/>
         <nodes xsi:type="iaml.operations:FinishNode" id="operations.126b0cb5e69.8c" inExecutions="model.126b0cb5dec.17f"/>
         <dataEdges id="model.126b0cb5dec.180" from="model.126b0cb5dec.178" to="model.126b0cb5dec.176"/>
         <dataEdges id="model.126b0cb5dec.182" from="model.126b0cb5dec.176" to="model.126b0cb5dec.3e"/>
         <executionEdges id="model.126b0cb5dec.17d" from="operations.126b0cb5e69.8a" to="model.126b0cb5dec.176"/>
         <executionEdges id="model.126b0cb5dec.17f" from="model.126b0cb5dec.176" to="operations.126b0cb5e69.8c"/>
-        <values id="model.126b0cb5dec.178" name="true" outFlows="model.126b0cb5dec.180" value="true"/>
       </operations>
       <onAccess id="model.126b0cb5dec.c4" outActions="wires.126b0cb5e5a.4b">
         <actions id="wires.126b0cb5e5a.4b" name="run" from="model.126b0cb5dec.c4" to="model.126b0cb5dec.d8"/>

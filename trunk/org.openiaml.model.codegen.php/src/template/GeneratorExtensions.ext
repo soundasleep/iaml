@@ -557,7 +557,7 @@ getExitResumeTargets(model::components::ExitGate this) :
 	getRoot().eAllContents.typeSelect(model::visual::Frame);
 
 /**
- * Get all conditions which the server needs to keep track of, and 
+ * Get all {@model Condition}s which the server needs to keep track of, and 
  * the client needs to be updated.
  * <strong>All of these operations need to be consequence-free.</strong>
  */
@@ -567,14 +567,15 @@ List[model::Condition] getClientSideCacheConditions(model::InternetApplication t
 		.select(o | conditionUsed(o));
 
 /**
- * Get all properties which the server needs to keep track of, and 
+ * Get all {@model Property}s which the server needs to keep track of, and 
  * the client needs to be updated.
  */
 List[model::Property] getClientSideCacheProperties(model::InternetApplication this) :
 	eAllContents.typeSelect(model::domain::DomainIterator)
 		.select(o | o.results != null)
-		.results.toSet().
-	addAll(eAllContents.typeSelect(model::VisibleThing).properties.toSet());
+		.results.toSet()
+	.addAll(eAllContents.typeSelect(model::VisibleThing).properties.toSet())
+	.addAll(eAllContents.typeSelect(model::Property).select(p|p.readOnly));
 
 /**
  * Should the given exit gate be activated/enabled on the given frame?

@@ -24,25 +24,25 @@
     <shortcutsProvidedFor>iaml_visual</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_email</shortcutsProvidedFor>
     <domainDiagramElement href="iaml.genmodel#//model/CompositeCondition"/>
-    <topLevelNodes canonicalEditPolicyClassName="ParameterCanonicalEditPolicy" createCommandClassName="ParameterCreateCommand" editPartClassName="ParameterEditPart" graphicalNodeEditPolicyClassName="ParameterGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="ParameterItemSemanticEditPolicy" notationViewFactoryClassName="ParameterViewFactory" visualID="2022">
+    <topLevelNodes canonicalEditPolicyClassName="ParameterCanonicalEditPolicy" createCommandClassName="ParameterCreateCommand" editPartClassName="ParameterEditPart" graphicalNodeEditPolicyClassName="ParameterGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="ParameterItemSemanticEditPolicy" visualID="2036">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType editHelperClassName="ParameterEditHelper" xsi:type="gmfgen:MetamodelType"/>
       <viewmap classBody="&#10;/**&#10; * @generated&#10; */&#10;public class ParameterFigure extends org.eclipse.draw2d.RectangleFigure {&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureParameterNameFigure; &#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureParameterStereotypeFigure; &#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public ParameterFigure() {&#10;&#9;&#9;&#10;&#9;org.eclipse.draw2d.FlowLayout layoutThis = new org.eclipse.draw2d.FlowLayout();&#10;&#9;layoutThis.setStretchMinorAxis(false);&#10;&#9;layoutThis.setMinorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#10;);&#10;&#10;&#9;layoutThis.setMajorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#10;);&#10;&#9;layoutThis.setMajorSpacing(5);&#10;&#9;layoutThis.setMinorSpacing(5);&#10;&#9;layoutThis.setHorizontal(false);&#10;&#10;&#9;this.setLayoutManager(layoutThis);&#10;&#10;&#9;&#9;this.setLineWidth(1);&#10;&#9;this.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);&#10;&#9;this.setBackgroundColor(THIS_BACK&#10;);&#10;this.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(3)&#10;, getMapMode().DPtoLP(3)&#10;, getMapMode().DPtoLP(3)&#10;, getMapMode().DPtoLP(3)&#10;));&#10;&#9;&#9;createContents();&#10;&#9;}&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private void createContents(){&#10;&#10;&#10;fFigureParameterNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureParameterNameFigure.setText(&quot;&lt;...&gt;&quot;);&#10;&#10;this.add(fFigureParameterNameFigure);&#10;&#10;&#10;&#10;fFigureParameterStereotypeFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureParameterStereotypeFigure.setText(&quot;: Parameter&quot;);&#10;&#10;this.add(fFigureParameterStereotypeFigure);&#10;&#10;&#10;&#9;}&#10;&#10;&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private boolean myUseLocalCoordinates = false;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;protected boolean useLocalCoordinates() {&#10;&#9;&#9;return myUseLocalCoordinates;&#10;&#9;}&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#10;&#9;&#9;myUseLocalCoordinates = useLocalCoordinates;&#10;&#9;}&#10;&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureParameterNameFigure() {&#10;&#9;&#9;return fFigureParameterNameFigure;&#10;&#9;}&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureParameterStereotypeFigure() {&#10;&#9;&#9;return fFigureParameterStereotypeFigure;&#10;&#9;}&#10;&#10;&#10;}&#10;&#10;/**&#10; * @generated&#10; */&#10;static final org.eclipse.swt.graphics.Color THIS_BACK = new org.eclipse.swt.graphics.Color(null, 231, 233, 234);&#10;&#10;" className="ParameterFigure" layoutType="FLOW_LAYOUT" xsi:type="gmfgen:InnerClassViewmap">
         <attributes fixedBackground="true" fixedFont="false" fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
       </viewmap>
       <modelFacet>
-        <metaClass href="iaml.genmodel#//model/Parameter"/>
+        <metaClass href="iaml.genmodel#//model/operations/Parameter"/>
         <containmentMetaFeature href="iaml.genmodel#//model/CompositeCondition/parameters"/>
         <childMetaFeature href="iaml.genmodel#//model/CompositeCondition/parameters"/>
       </modelFacet>
-      <labels editPartClassName="ParameterNameEditPart" elementIcon="true" itemSemanticEditPolicyClassName="ParameterNameItemSemanticEditPolicy" notationViewFactoryClassName="ParameterNameViewFactory" visualID="5036">
+      <labels editPartClassName="ParameterNameEditPart" elementIcon="true" itemSemanticEditPolicyClassName="ParameterNameItemSemanticEditPolicy" visualID="5075">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureParameterNameFigure" xsi:type="gmfgen:ParentAssignedViewmap"/>
         <modelFacet parser="//@labelParsers/@implementations.0" xsi:type="gmfgen:FeatureLabelModelFacet">
           <metaFeatures href="iaml.genmodel#//model/NamedElement/name"/>
         </modelFacet>
       </labels>
-      <labels editPartClassName="WrappingLabel15EditPart" itemSemanticEditPolicyClassName="WrappingLabel15ItemSemanticEditPolicy" notationViewFactoryClassName="ParameterLabelViewFactory" readOnly="true" visualID="5062">
+      <labels editPartClassName="WrappingLabel4EditPart" itemSemanticEditPolicyClassName="WrappingLabel4ItemSemanticEditPolicy" readOnly="true" visualID="5076">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureParameterStereotypeFigure" xsi:type="gmfgen:ParentAssignedViewmap"/>
         <modelFacet parser="//@labelParsers/@implementations.1"/>
@@ -106,32 +106,30 @@
         <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
     </topLevelNodes>
-    <topLevelNodes canonicalEditPolicyClassName="TemporaryVariableCanonicalEditPolicy" createCommandClassName="TemporaryVariableCreateCommand" editPartClassName="TemporaryVariableEditPart" graphicalNodeEditPolicyClassName="TemporaryVariableGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="TemporaryVariableItemSemanticEditPolicy" notationViewFactoryClassName="TemporaryVariableViewFactory" visualID="2027">
+    <topLevelNodes canonicalEditPolicyClassName="TemporaryVariableCanonicalEditPolicy" createCommandClassName="TemporaryVariableCreateCommand" editPartClassName="TemporaryVariableEditPart" graphicalNodeEditPolicyClassName="TemporaryVariableGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="TemporaryVariableItemSemanticEditPolicy" visualID="2037">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType editHelperClassName="TemporaryVariableEditHelper" xsi:type="gmfgen:MetamodelType"/>
       <viewmap classBody="&#10;/**&#10; * @generated&#10; */&#10;public class TemporaryVariableFigure extends org.eclipse.draw2d.RectangleFigure {&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureTemporaryVariableNameFigure; &#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureTemporaryVariableStereotypeFigure; &#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureTemporaryVariableTypeFigure; &#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public TemporaryVariableFigure() {&#10;&#9;&#9;&#10;&#9;org.eclipse.draw2d.FlowLayout layoutThis = new org.eclipse.draw2d.FlowLayout();&#10;&#9;layoutThis.setStretchMinorAxis(false);&#10;&#9;layoutThis.setMinorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#10;);&#10;&#10;&#9;layoutThis.setMajorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#10;);&#10;&#9;layoutThis.setMajorSpacing(5);&#10;&#9;layoutThis.setMinorSpacing(5);&#10;&#9;layoutThis.setHorizontal(false);&#10;&#10;&#9;this.setLayoutManager(layoutThis);&#10;&#10;&#9;&#9;this.setLineWidth(1);&#10;&#9;this.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);&#10;&#9;this.setBackgroundColor(THIS_BACK&#10;);&#10;this.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(3)&#10;, getMapMode().DPtoLP(3)&#10;, getMapMode().DPtoLP(3)&#10;, getMapMode().DPtoLP(3)&#10;));&#10;&#9;&#9;createContents();&#10;&#9;}&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private void createContents(){&#10;&#10;&#10;fFigureTemporaryVariableNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureTemporaryVariableNameFigure.setText(&quot;&lt;...&gt;&quot;);&#10;&#10;this.add(fFigureTemporaryVariableNameFigure);&#10;&#10;&#10;&#10;fFigureTemporaryVariableStereotypeFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureTemporaryVariableStereotypeFigure.setText(&quot;: TemporaryVariable&quot;);&#10;&#10;this.add(fFigureTemporaryVariableStereotypeFigure);&#10;&#10;&#10;&#10;fFigureTemporaryVariableTypeFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureTemporaryVariableTypeFigure.setText(&quot;&lt;...&gt;&quot;);&#10;&#9;fFigureTemporaryVariableTypeFigure.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);&#10;&#10;this.add(fFigureTemporaryVariableTypeFigure);&#10;&#10;&#10;&#9;}&#10;&#10;&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private boolean myUseLocalCoordinates = false;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;protected boolean useLocalCoordinates() {&#10;&#9;&#9;return myUseLocalCoordinates;&#10;&#9;}&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#10;&#9;&#9;myUseLocalCoordinates = useLocalCoordinates;&#10;&#9;}&#10;&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureTemporaryVariableNameFigure() {&#10;&#9;&#9;return fFigureTemporaryVariableNameFigure;&#10;&#9;}&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureTemporaryVariableStereotypeFigure() {&#10;&#9;&#9;return fFigureTemporaryVariableStereotypeFigure;&#10;&#9;}&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureTemporaryVariableTypeFigure() {&#10;&#9;&#9;return fFigureTemporaryVariableTypeFigure;&#10;&#9;}&#10;&#10;&#10;}&#10;&#10;/**&#10; * @generated&#10; */&#10;static final org.eclipse.swt.graphics.Color THIS_BACK = new org.eclipse.swt.graphics.Color(null, 231, 233, 234);&#10;&#10;" className="TemporaryVariableFigure" layoutType="FLOW_LAYOUT" xsi:type="gmfgen:InnerClassViewmap">
         <attributes fixedBackground="true" fixedFont="false" fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
       </viewmap>
       <modelFacet>
-        <metaClass href="iaml.genmodel#//model/TemporaryVariable"/>
+        <metaClass href="iaml.genmodel#//model/operations/TemporaryVariable"/>
         <containmentMetaFeature href="iaml.genmodel#//model/CompositeCondition/variables"/>
         <childMetaFeature href="iaml.genmodel#//model/CompositeCondition/variables"/>
       </modelFacet>
-      <labels editPartClassName="TemporaryVariableNameEditPart" elementIcon="true" itemSemanticEditPolicyClassName="TemporaryVariableNameItemSemanticEditPolicy" notationViewFactoryClassName="TemporaryVariableNameViewFactory" visualID="5042">
+      <labels editPartClassName="TemporaryVariableNameEditPart" elementIcon="true" itemSemanticEditPolicyClassName="TemporaryVariableNameItemSemanticEditPolicy" visualID="5077">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureTemporaryVariableNameFigure" xsi:type="gmfgen:ParentAssignedViewmap"/>
         <modelFacet parser="//@labelParsers/@implementations.0" xsi:type="gmfgen:FeatureLabelModelFacet">
           <metaFeatures href="iaml.genmodel#//model/NamedElement/name"/>
         </modelFacet>
       </labels>
-      <labels editPartClassName="WrappingLabel4EditPart" itemSemanticEditPolicyClassName="WrappingLabel4ItemSemanticEditPolicy" notationViewFactoryClassName="TemporaryVariableLabelViewFactory" readOnly="true" visualID="5043">
+      <labels editPartClassName="WrappingLabel15EditPart" itemSemanticEditPolicyClassName="WrappingLabel15ItemSemanticEditPolicy" readOnly="true" visualID="5078">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
-        <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureTemporaryVariableStereotypeFigure" xsi:type="gmfgen:ParentAssignedViewmap">
-          <attributes fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
-        </viewmap>
+        <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureTemporaryVariableStereotypeFigure" xsi:type="gmfgen:ParentAssignedViewmap"/>
         <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
-      <labels editPartClassName="WrappingLabel19EditPart" itemSemanticEditPolicyClassName="WrappingLabel19ItemSemanticEditPolicy" notationViewFactoryClassName="TemporaryVariableLabelViewFactory" readOnly="true" visualID="5066">
+      <labels editPartClassName="WrappingLabel16EditPart" itemSemanticEditPolicyClassName="WrappingLabel16ItemSemanticEditPolicy" readOnly="true" visualID="5079">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureTemporaryVariableTypeFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
@@ -393,20 +391,20 @@
 </labels>
     <behaviour diagramKind="Iaml_Condition" editPolicyClassName="ConditionOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.condition.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
 </topLevelNodes>
-    <links createCommandClassName="DataFlowEdgeCreateCommand" editPartClassName="DataFlowEdgeEditPart" itemSemanticEditPolicyClassName="DataFlowEdgeItemSemanticEditPolicy" notationViewFactoryClassName="DataFlowEdgeViewFactory" reorientCommandClassName="DataFlowEdgeReorientCommand" visualID="4007">
+    <links createCommandClassName="DataFlowEdgeCreateCommand" editPartClassName="DataFlowEdgeEditPart" itemSemanticEditPolicyClassName="DataFlowEdgeItemSemanticEditPolicy" reorientCommandClassName="DataFlowEdgeReorientCommand" visualID="4010">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
       <elementType editHelperClassName="DataFlowEdgeEditHelper" xsi:type="gmfgen:MetamodelType"/>
       <viewmap classBody="&#10;/**&#10; * @generated&#10; */&#10;public class DataFlowEdgeFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureDataFlowEdgeStereotypeFigure; &#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public DataFlowEdgeFigure() {&#10;&#9;&#9;this.setLineWidth(1);&#10;this.setLineStyle(org.eclipse.draw2d.Graphics.LINE_DASH);&#10;&#9;this.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);&#10;&#10;&#9;&#9;createContents();&#10;&#9;&#9;setTargetDecoration(createTargetDecoration());&#10;&#9;}&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private void createContents(){&#10;&#10;&#10;fFigureDataFlowEdgeStereotypeFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureDataFlowEdgeStereotypeFigure.setText(&quot;: DataFlowEdge&quot;);&#10;&#10;this.add(fFigureDataFlowEdgeStereotypeFigure);&#10;&#10;&#10;&#9;}&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#10;&#9;&#9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#10;df.setLineWidth(1);&#10;&#9;&#9;return df;&#10;&#9;}&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureDataFlowEdgeStereotypeFigure() {&#10;&#9;&#9;return fFigureDataFlowEdgeStereotypeFigure;&#10;&#9;}&#10;&#10;&#10;}&#10;&#10;" className="DataFlowEdgeFigure" xsi:type="gmfgen:InnerClassViewmap">
         <attributes fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
       </viewmap>
       <modelFacet xsi:type="gmfgen:TypeLinkModelFacet">
-        <metaClass href="iaml.genmodel#//model/DataFlowEdge"/>
+        <metaClass href="iaml.genmodel#//model/operations/DataFlowEdge"/>
         <containmentMetaFeature href="iaml.genmodel#//model/CompositeCondition/dataEdges"/>
         <childMetaFeature href="iaml.genmodel#//model/CompositeCondition/dataEdges"/>
-        <sourceMetaFeature href="iaml.genmodel#//model/DataFlowEdge/from"/>
-        <targetMetaFeature href="iaml.genmodel#//model/DataFlowEdge/to"/>
+        <sourceMetaFeature href="iaml.genmodel#//model/operations/DataFlowEdge/from"/>
+        <targetMetaFeature href="iaml.genmodel#//model/operations/DataFlowEdge/to"/>
       </modelFacet>
-      <labels editPartClassName="WrappingLabel28EditPart" itemSemanticEditPolicyClassName="WrappingLabel28ItemSemanticEditPolicy" notationViewFactoryClassName="DataFlowEdgeLabelViewFactory" readOnly="true" visualID="6006">
+      <labels editPartClassName="WrappingLabel17EditPart" itemSemanticEditPolicyClassName="WrappingLabel17ItemSemanticEditPolicy" readOnly="true" visualID="6009">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureDataFlowEdgeStereotypeFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes xsi:type="gmfgen:LabelOffsetAttributes" y="40"/>
@@ -414,20 +412,20 @@
         <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
     </links>
-    <links createCommandClassName="ExecutionEdgeCreateCommand" editPartClassName="ExecutionEdgeEditPart" itemSemanticEditPolicyClassName="ExecutionEdgeItemSemanticEditPolicy" notationViewFactoryClassName="ExecutionEdgeViewFactory" reorientCommandClassName="ExecutionEdgeReorientCommand" visualID="4008">
+    <links createCommandClassName="ExecutionEdgeCreateCommand" editPartClassName="ExecutionEdgeEditPart" itemSemanticEditPolicyClassName="ExecutionEdgeItemSemanticEditPolicy" reorientCommandClassName="ExecutionEdgeReorientCommand" visualID="4011">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Edge"/>
       <elementType editHelperClassName="ExecutionEdgeEditHelper" xsi:type="gmfgen:MetamodelType"/>
       <viewmap classBody="&#10;/**&#10; * @generated&#10; */&#10;public class ExecutionEdgeFigure extends org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx {&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureExecutionEdgeNameFigure; &#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureExecutionEdgeStereotypeFigure; &#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public ExecutionEdgeFigure() {&#10;&#9;&#9;this.setLineWidth(1);&#10;&#9;this.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);&#10;&#10;&#9;&#9;createContents();&#10;&#9;&#9;setTargetDecoration(createTargetDecoration());&#10;&#9;}&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private void createContents(){&#10;&#10;&#10;fFigureExecutionEdgeNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureExecutionEdgeNameFigure.setText(&quot;&quot;);&#10;&#10;this.add(fFigureExecutionEdgeNameFigure);&#10;&#10;&#10;&#10;fFigureExecutionEdgeStereotypeFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureExecutionEdgeStereotypeFigure.setText(&quot;: ExecutionEdge&quot;);&#10;&#10;this.add(fFigureExecutionEdgeStereotypeFigure);&#10;&#10;&#10;&#9;}&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.draw2d.RotatableDecoration createTargetDecoration() {&#10;&#9;&#9;org.eclipse.draw2d.PolylineDecoration df = new org.eclipse.draw2d.PolylineDecoration();&#10;df.setLineWidth(1);&#10;&#9;&#9;return df;&#10;&#9;}&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureExecutionEdgeNameFigure() {&#10;&#9;&#9;return fFigureExecutionEdgeNameFigure;&#10;&#9;}&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureExecutionEdgeStereotypeFigure() {&#10;&#9;&#9;return fFigureExecutionEdgeStereotypeFigure;&#10;&#9;}&#10;&#10;&#10;}&#10;&#10;" className="ExecutionEdgeFigure" xsi:type="gmfgen:InnerClassViewmap">
         <attributes fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
       </viewmap>
       <modelFacet modelElementSelector="//@expressionProviders/@providers.0/@expressions.9" xsi:type="gmfgen:TypeLinkModelFacet">
-        <metaClass href="iaml.genmodel#//model/ExecutionEdge"/>
+        <metaClass href="iaml.genmodel#//model/operations/ExecutionEdge"/>
         <containmentMetaFeature href="iaml.genmodel#//model/CompositeCondition/executionEdges"/>
         <childMetaFeature href="iaml.genmodel#//model/CompositeCondition/executionEdges"/>
-        <sourceMetaFeature href="iaml.genmodel#//model/ExecutionEdge/from"/>
-        <targetMetaFeature href="iaml.genmodel#//model/ExecutionEdge/to"/>
+        <sourceMetaFeature href="iaml.genmodel#//model/operations/ExecutionEdge/from"/>
+        <targetMetaFeature href="iaml.genmodel#//model/operations/ExecutionEdge/to"/>
       </modelFacet>
-      <labels editPartClassName="ExecutionEdgeNameEditPart" itemSemanticEditPolicyClassName="ExecutionEdgeNameItemSemanticEditPolicy" notationViewFactoryClassName="ExecutionEdgeNameViewFactory" visualID="6004">
+      <labels editPartClassName="ExecutionEdgeNameEditPart" itemSemanticEditPolicyClassName="ExecutionEdgeNameItemSemanticEditPolicy" visualID="6010">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureExecutionEdgeNameFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes xsi:type="gmfgen:LabelOffsetAttributes" y="40"/>
@@ -436,7 +434,7 @@
           <metaFeatures href="iaml.genmodel#//model/NamedElement/name"/>
         </modelFacet>
       </labels>
-      <labels editPartClassName="WrappingLabel29EditPart" itemSemanticEditPolicyClassName="WrappingLabel29ItemSemanticEditPolicy" notationViewFactoryClassName="ExecutionEdgeLabelViewFactory" readOnly="true" visualID="6007">
+      <labels editPartClassName="WrappingLabel18EditPart" itemSemanticEditPolicyClassName="WrappingLabel18ItemSemanticEditPolicy" readOnly="true" visualID="6011">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureExecutionEdgeStereotypeFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes xsi:type="gmfgen:LabelOffsetAttributes" y="60"/>

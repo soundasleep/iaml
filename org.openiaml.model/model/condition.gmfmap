@@ -10,7 +10,7 @@
         href="iaml.ecore#//CompositeCondition/parameters"/>
     <ownedChild>
       <domainMetaElement
-          href="iaml.ecore#//Parameter"/>
+          href="iaml.ecore#//operations/Parameter"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
@@ -102,7 +102,7 @@
         href="iaml.ecore#//CompositeCondition/variables"/>
     <ownedChild>
       <domainMetaElement
-          href="iaml.ecore#//TemporaryVariable"/>
+          href="iaml.ecore#//operations/TemporaryVariable"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
@@ -368,7 +368,7 @@
   </nodes>
   <links>
     <domainMetaElement
-        href="iaml.ecore#//DataFlowEdge"/>
+        href="iaml.ecore#//operations/DataFlowEdge"/>
     <labelMappings
         readOnly="true">
       <diagramLabel
@@ -383,14 +383,14 @@
         href="iaml.gmfgraph#DataFlowEdge"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//DataFlowEdge/from"/>
+        href="iaml.ecore#//operations/DataFlowEdge/from"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//DataFlowEdge/to"/>
+        href="iaml.ecore#//operations/DataFlowEdge/to"/>
   </links>
   <links>
     <domainMetaElement
-        href="iaml.ecore#//ExecutionEdge"/>
+        href="iaml.ecore#//operations/ExecutionEdge"/>
     <domainSpecialization
         body="self.oclIsTypeOf( ExecutionEdge )"/>
     <labelMappings
@@ -414,10 +414,10 @@
         href="iaml.gmfgraph#ExecutionEdge"/>
     <sourceMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//ExecutionEdge/from"/>
+        href="iaml.ecore#//operations/ExecutionEdge/from"/>
     <linkMetaFeature
         xsi:type="ecore:EReference"
-        href="iaml.ecore#//ExecutionEdge/to"/>
+        href="iaml.ecore#//operations/ExecutionEdge/to"/>
   </links>
   <links>
     <domainMetaElement

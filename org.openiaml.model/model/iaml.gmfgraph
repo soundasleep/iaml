@@ -333,55 +333,6 @@
           figure="//@figures.0/@descriptors.5/@actualFigure/@children.4"/>
     </descriptors>
     <descriptors
-        name="StaticValueFigure">
-      <actualFigure
-          xsi:type="gmfgraph:Rectangle"
-          name="StaticValueFigure"
-          lineKind="LINE_DASH">
-        <layout
-            xsi:type="gmfgraph:FlowLayout"
-            vertical="true"/>
-        <foregroundColor
-            xsi:type="gmfgraph:ConstantColor"
-            value="black"/>
-        <backgroundColor
-            xsi:type="gmfgraph:RGBColor"
-            red="231"
-            green="233"
-            blue="234"/>
-        <border
-            xsi:type="gmfgraph:MarginBorder">
-          <insets
-              top="3"
-              left="3"
-              bottom="3"
-              right="3"/>
-        </border>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="StaticValueNameFigure"
-            text="&lt;...> = ?"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="StaticValueStereotypeFigure"
-            text=": StaticValue"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="StaticValueTypeFigure"
-            text="&lt;...>">
-          <foregroundColor
-              xsi:type="gmfgraph:ConstantColor"
-              value="black"/>
-        </children>
-      </actualFigure>
-      <accessors
-          figure="//@figures.0/@descriptors.6/@actualFigure/@children.0"/>
-      <accessors
-          figure="//@figures.0/@descriptors.6/@actualFigure/@children.1"/>
-      <accessors
-          figure="//@figures.0/@descriptors.6/@actualFigure/@children.2"/>
-    </descriptors>
-    <descriptors
         name="DomainSourceFigure">
       <actualFigure
           xsi:type="gmfgraph:Rectangle"
@@ -414,11 +365,11 @@
             text="[&lt;...>]"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.7/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.6/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.7/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.6/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.7/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.6/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="DataFlowEdgeFigure">
@@ -436,7 +387,7 @@
             text=": DataFlowEdge"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.8/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.7/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="TemporaryVariableFigure">
@@ -480,11 +431,11 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.9/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.8/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.9/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.8/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.9/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.8/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="ExecutionEdgeFigure">
@@ -505,9 +456,9 @@
             text=": ExecutionEdge"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.10/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.9/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.10/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.9/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="DynamicApplicationElementSetFigure">
@@ -548,11 +499,11 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.11/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.10/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.11/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.10/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.11/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.10/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="FrameFigure">
@@ -596,11 +547,11 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.12/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.11/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.12/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.11/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.12/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.11/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="InputFormFigure">
@@ -644,11 +595,11 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.13/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.12/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.13/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.12/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.13/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.12/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="InputTextFieldFigure">
@@ -700,13 +651,13 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.14/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.13/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.14/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.13/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.14/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.13/@actualFigure/@children.2"/>
       <accessors
-          figure="//@figures.0/@descriptors.14/@actualFigure/@children.3"/>
+          figure="//@figures.0/@descriptors.13/@actualFigure/@children.3"/>
     </descriptors>
     <descriptors
         name="SyncWireFigure">
@@ -729,9 +680,9 @@
             text=": SyncWire"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.15/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.14/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.15/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.14/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="ActionEdgeFigure">
@@ -753,9 +704,9 @@
             text=": ActionEdge"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.16/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.15/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.16/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.15/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="ParameterEdgeFigure">
@@ -772,7 +723,7 @@
             text=": ParameterEdge"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.17/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.16/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="StartNodeFigure">
@@ -804,7 +755,7 @@
             text=": StartNode"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.18/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.17/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="CancelNodeFigure">
@@ -840,9 +791,9 @@
             text=": CancelNode"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.19/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.18/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.19/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.18/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="FinishNodeFigure">
@@ -874,7 +825,7 @@
             text=": FinishNode"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.20/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.19/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="DecisionNodeFigure">
@@ -910,9 +861,9 @@
             text=": DecisionNode"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.21/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.20/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.21/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.20/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="ConditionalEdgeFigure">
@@ -933,9 +884,9 @@
             text=": ConditionalEdge"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.22/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.21/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.22/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.21/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="SetWireFigure">
@@ -957,9 +908,9 @@
             text=": SetWire"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.23/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.22/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.23/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.22/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="ConditionEdgeFigure">
@@ -980,9 +931,9 @@
             text=": ConditionEdge"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.24/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.23/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.24/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.23/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="SessionFigure">
@@ -1018,9 +969,9 @@
             text=": Session"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.25/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.24/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.25/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.24/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="LoginHandlerFigure">
@@ -1060,11 +1011,11 @@
             text="[?]"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.26/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.25/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.26/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.25/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.26/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.25/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="CompositeConditionFigure">
@@ -1111,11 +1062,11 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.27/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.26/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.27/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.26/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.27/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.26/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="DomainIteratorFigure">
@@ -1163,15 +1114,15 @@
             text="autosave: true"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.28/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.27/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.28/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.27/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.28/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.27/@actualFigure/@children.2"/>
       <accessors
-          figure="//@figures.0/@descriptors.28/@actualFigure/@children.3"/>
+          figure="//@figures.0/@descriptors.27/@actualFigure/@children.3"/>
       <accessors
-          figure="//@figures.0/@descriptors.28/@actualFigure/@children.4"/>
+          figure="//@figures.0/@descriptors.27/@actualFigure/@children.4"/>
     </descriptors>
     <descriptors
         name="DomainAttributeInstanceFigure">
@@ -1219,13 +1170,13 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.29/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.28/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.29/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.28/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.29/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.28/@actualFigure/@children.2"/>
       <accessors
-          figure="//@figures.0/@descriptors.29/@actualFigure/@children.3"/>
+          figure="//@figures.0/@descriptors.28/@actualFigure/@children.3"/>
     </descriptors>
     <descriptors
         name="ButtonFigure">
@@ -1269,11 +1220,11 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.30/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.29/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.30/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.29/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.30/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.29/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="SplitNodeFigure">
@@ -1305,7 +1256,7 @@
             text=": SplitNode"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.31/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.30/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="JoinNodeFigure">
@@ -1337,7 +1288,7 @@
             text=": JoinNode"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.32/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.31/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="QueryParameterFigure">
@@ -1373,9 +1324,9 @@
             text=": QueryParameter"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.33/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.32/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.33/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.32/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="RoleFigure">
@@ -1406,9 +1357,9 @@
             text=": Role"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.34/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.33/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.34/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.33/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="PermissionFigure">
@@ -1441,9 +1392,9 @@
             text=": Permission"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.35/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.34/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.35/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.34/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="ExtendsEdgeFigure">
@@ -1464,9 +1415,9 @@
             text=": ExtendsEdge"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.36/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.35/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.36/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.35/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="RequiresEdgeFigure">
@@ -1487,9 +1438,9 @@
             text=": RequiresEdge"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.37/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.36/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.37/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.36/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="ConstraintEdgeFigure">
@@ -1510,9 +1461,9 @@
             text=": ConstraintEdge"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.38/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.37/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.38/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.37/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="ProvidesEdgeFigure">
@@ -1533,9 +1484,9 @@
             text=": ProvidesEdge"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.39/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.38/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.39/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.38/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="AccessControlHandlerFigure">
@@ -1571,9 +1522,9 @@
             text=": AccessControlHandler"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.40/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.39/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.40/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.39/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="OperationCallNodeFigure">
@@ -1605,7 +1556,7 @@
             text=": OperationCallNode"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.41/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.40/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="ArithmeticFigure">
@@ -1641,9 +1592,9 @@
             text=": Arithmetic"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.42/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.41/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.42/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.41/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="EntryGateFigure">
@@ -1687,11 +1638,11 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.43/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.42/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.43/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.42/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.43/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.42/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="ExitGateFigure">
@@ -1735,11 +1686,11 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.44/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.43/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.44/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.43/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.44/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.43/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="LabelFigure">
@@ -1791,13 +1742,13 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.45/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.44/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.45/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.44/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.45/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.44/@actualFigure/@children.2"/>
       <accessors
-          figure="//@figures.0/@descriptors.45/@actualFigure/@children.3"/>
+          figure="//@figures.0/@descriptors.44/@actualFigure/@children.3"/>
     </descriptors>
     <descriptors
         name="IteratorListFigure">
@@ -1841,11 +1792,11 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.46/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.45/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.46/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.45/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.46/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.45/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="CastNodeFigure">
@@ -1878,7 +1829,7 @@
             text=": CastNode"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.47/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.46/@actualFigure/@children.0"/>
     </descriptors>
     <descriptors
         name="EmailFigure">
@@ -1914,9 +1865,9 @@
             text=": Email"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.48/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.47/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.48/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.47/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="MapFigure">
@@ -1960,11 +1911,11 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.49/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.48/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.49/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.48/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.49/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.48/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="MapPointFigure">
@@ -2008,11 +1959,11 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.50/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.49/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.50/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.49/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.50/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.49/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="PrimitiveConditionFigure">
@@ -2059,11 +2010,11 @@
         </children>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.51/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.50/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.51/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.50/@actualFigure/@children.1"/>
       <accessors
-          figure="//@figures.0/@descriptors.51/@actualFigure/@children.2"/>
+          figure="//@figures.0/@descriptors.50/@actualFigure/@children.2"/>
     </descriptors>
     <descriptors
         name="DetailWireFigure">
@@ -2085,9 +2036,9 @@
             text=": DetailWire"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.52/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.51/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.52/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.51/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="AutocompleteWireFigure">
@@ -2109,9 +2060,9 @@
             text=": AutocompleteWire"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.53/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.52/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.53/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.52/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="SelectEdgeFigure">
@@ -2132,9 +2083,9 @@
             text=": SelectEdge"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.54/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.53/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.54/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.53/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="SchemaEdgeFigure">
@@ -2155,9 +2106,9 @@
             text=": SchemaEdge"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.55/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.54/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.55/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.54/@actualFigure/@children.1"/>
     </descriptors>
     <descriptors
         name="DomainSchemaFigure">
@@ -2188,9 +2139,9 @@
             text=": DomainSchema"/>
       </actualFigure>
       <accessors
-          figure="//@figures.0/@descriptors.56/@actualFigure/@children.0"/>
+          figure="//@figures.0/@descriptors.55/@actualFigure/@children.0"/>
       <accessors
-          figure="//@figures.0/@descriptors.56/@actualFigure/@children.1"/>
+          figure="//@figures.0/@descriptors.55/@actualFigure/@children.1"/>
     </descriptors>
   </figures>
   <nodes
@@ -2211,9 +2162,6 @@
   <nodes
       name="Property"
       figure="PropertyFigure"/>
-  <nodes
-      name="StaticValue"
-      figure="StaticValueFigure"/>
   <nodes
       name="DomainSource"
       figure="DomainSourceFigure"/>
@@ -2385,120 +2333,116 @@
       figure="PropertyFigure"
       accessor="//@figures.0/@descriptors.5/@accessors.0"/>
   <labels
-      name="StaticValueName"
-      figure="StaticValueFigure"
-      accessor="//@figures.0/@descriptors.6/@accessors.0"/>
-  <labels
       name="DomainSourceName"
       figure="DomainSourceFigure"
-      accessor="//@figures.0/@descriptors.7/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.6/@accessors.0"/>
   <labels
       name="DomainSourceType"
       figure="DomainSourceFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.7/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.6/@accessors.2"/>
   <labels
       name="TemporaryVariableName"
       figure="TemporaryVariableFigure"
-      accessor="//@figures.0/@descriptors.9/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.8/@accessors.0"/>
   <labels
       name="DynamicApplicationElementSetName"
       figure="DynamicApplicationElementSetFigure"
-      accessor="//@figures.0/@descriptors.11/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.10/@accessors.0"/>
   <labels
       name="DynamicApplicationElementSetQuery"
       figure="DynamicApplicationElementSetFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.11/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.10/@accessors.2"/>
   <labels
       name="FrameName"
       figure="FrameFigure"
-      accessor="//@figures.0/@descriptors.12/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.11/@accessors.0"/>
   <labels
       name="FrameParentName"
       figure="FrameFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.12/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.11/@accessors.2"/>
   <labels
       name="InputFormName"
       figure="InputFormFigure"
-      accessor="//@figures.0/@descriptors.13/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.12/@accessors.0"/>
   <labels
       name="InputTextFieldName"
       figure="InputTextFieldFigure"
-      accessor="//@figures.0/@descriptors.14/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.13/@accessors.0"/>
   <labels
       name="SyncWireName"
       figure="SyncWireFigure"
-      accessor="//@figures.0/@descriptors.15/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.14/@accessors.0"/>
   <labels
       name="ActionEdgeName"
       figure="ActionEdgeFigure"
-      accessor="//@figures.0/@descriptors.16/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.15/@accessors.0"/>
   <labels
       name="DecisionNodeName"
       figure="DecisionNodeFigure"
-      accessor="//@figures.0/@descriptors.21/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.20/@accessors.0"/>
   <labels
       name="ConditionalEdgeName"
       figure="ConditionalEdgeFigure"
-      accessor="//@figures.0/@descriptors.22/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.21/@accessors.0"/>
   <labels
       name="SetWireName"
       figure="SetWireFigure"
-      accessor="//@figures.0/@descriptors.23/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.22/@accessors.0"/>
   <labels
       name="ConditionEdgeName"
       figure="ConditionEdgeFigure"
-      accessor="//@figures.0/@descriptors.24/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.23/@accessors.0"/>
   <labels
       name="SessionName"
       figure="SessionFigure"
-      accessor="//@figures.0/@descriptors.25/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.24/@accessors.0"/>
   <labels
       name="LoginHandlerName"
       figure="LoginHandlerFigure"
-      accessor="//@figures.0/@descriptors.26/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.25/@accessors.0"/>
   <labels
       name="LoginHandlerType"
       figure="LoginHandlerFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.26/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.25/@accessors.2"/>
   <labels
       name="CancelNodeText"
       figure="CancelNodeFigure"
-      accessor="//@figures.0/@descriptors.19/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.18/@accessors.0"/>
   <labels
       name="CompositeConditionName"
       figure="CompositeConditionFigure"
-      accessor="//@figures.0/@descriptors.27/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.26/@accessors.0"/>
   <labels
       name="DomainIteratorName"
       figure="DomainIteratorFigure"
-      accessor="//@figures.0/@descriptors.28/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.27/@accessors.0"/>
   <labels
       name="DomainIteratorQuery"
       figure="DomainIteratorFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.28/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.27/@accessors.2"/>
   <labels
       name="DomainIteratorLimit"
       figure="DomainIteratorFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.28/@accessors.3"/>
+      accessor="//@figures.0/@descriptors.27/@accessors.3"/>
   <labels
       name="DomainIteratorAutosave"
       figure="DomainIteratorFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.28/@accessors.4"/>
+      accessor="//@figures.0/@descriptors.27/@accessors.4"/>
   <labels
       name="DomainAttributeInstanceName"
       figure="DomainAttributeInstanceFigure"
-      accessor="//@figures.0/@descriptors.29/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.28/@accessors.0"/>
   <labels
       name="ButtonName"
       figure="ButtonFigure"
-      accessor="//@figures.0/@descriptors.30/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.29/@accessors.0"/>
   <labels
       name="CompositeOperationParentName"
       figure="CompositeOperationFigure"
@@ -2518,7 +2462,7 @@
       name="DomainAttributeInstanceParentName"
       figure="DomainAttributeInstanceFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.29/@accessors.3"/>
+      accessor="//@figures.0/@descriptors.28/@accessors.3"/>
   <labels
       name="PrimitiveOperationParentName"
       figure="PrimitiveOperationFigure"
@@ -2533,98 +2477,98 @@
       name="InputFormParentName"
       figure="InputFormFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.13/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.12/@accessors.2"/>
   <labels
       name="InputTextFieldParentName"
       figure="InputTextFieldFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.14/@accessors.3"/>
+      accessor="//@figures.0/@descriptors.13/@accessors.3"/>
   <labels
       name="CompositeConditionParentName"
       figure="CompositeConditionFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.27/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.26/@accessors.2"/>
   <labels
       name="ButtonParentName"
       figure="ButtonFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.30/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.29/@accessors.2"/>
   <labels
       name="DomainObjectType"
       elementIcon="false"/>
   <labels
       name="QueryParameterName"
       figure="QueryParameterFigure"
-      accessor="//@figures.0/@descriptors.33/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.32/@accessors.0"/>
   <labels
       name="RoleName"
       figure="RoleFigure"
-      accessor="//@figures.0/@descriptors.34/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.33/@accessors.0"/>
   <labels
       name="PermissionName"
       figure="PermissionFigure"
-      accessor="//@figures.0/@descriptors.35/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.34/@accessors.0"/>
   <labels
       name="ExtendsEdgeName"
       figure="ExtendsEdgeFigure"
-      accessor="//@figures.0/@descriptors.36/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.35/@accessors.0"/>
   <labels
       name="RequiresEdgeName"
       figure="RequiresEdgeFigure"
-      accessor="//@figures.0/@descriptors.37/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.36/@accessors.0"/>
   <labels
       name="ConstraintEdgeName"
       figure="ConstraintEdgeFigure"
-      accessor="//@figures.0/@descriptors.38/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.37/@accessors.0"/>
   <labels
       name="ProvidesEdgeName"
       figure="ProvidesEdgeFigure"
-      accessor="//@figures.0/@descriptors.39/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.38/@accessors.0"/>
   <labels
       name="AccessControlHandlerName"
       figure="AccessControlHandlerFigure"
-      accessor="//@figures.0/@descriptors.40/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.39/@accessors.0"/>
   <labels
       name="ArithmeticType"
       figure="ArithmeticFigure"
-      accessor="//@figures.0/@descriptors.42/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.41/@accessors.0"/>
   <labels
       name="ExecutionEdgeName"
       figure="ExecutionEdgeFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.10/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.9/@accessors.0"/>
   <labels
       name="EntryGateName"
       figure="EntryGateFigure"
-      accessor="//@figures.0/@descriptors.43/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.42/@accessors.0"/>
   <labels
       name="EntryGateParentName"
       figure="EntryGateFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.43/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.42/@accessors.2"/>
   <labels
       name="ExitGateName"
       figure="ExitGateFigure"
-      accessor="//@figures.0/@descriptors.44/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.43/@accessors.0"/>
   <labels
       name="ExitGateParentName"
       figure="ExitGateFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.44/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.43/@accessors.2"/>
   <labels
       name="LabelName"
       figure="LabelFigure"
-      accessor="//@figures.0/@descriptors.45/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.44/@accessors.0"/>
   <labels
       name="LabelType"
       figure="LabelFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.45/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.44/@accessors.2"/>
   <labels
       name="LabelParentName"
       figure="LabelFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.45/@accessors.3"/>
+      accessor="//@figures.0/@descriptors.44/@accessors.3"/>
   <labels
       name="EventTriggerContainmentFeature"
       figure="EventTriggerFigure"
@@ -2633,7 +2577,7 @@
       name="TemporaryVariableType"
       figure="TemporaryVariableFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.9/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.8/@accessors.2"/>
   <labels
       name="PropertyType"
       figure="PropertyFigure"
@@ -2648,48 +2592,43 @@
       name="DomainAttributeInstanceType"
       figure="DomainAttributeInstanceFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.29/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.28/@accessors.2"/>
   <labels
       name="InputTextFieldType"
       figure="InputTextFieldFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.14/@accessors.2"/>
-  <labels
-      name="StaticValueType"
-      figure="StaticValueFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.6/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.13/@accessors.2"/>
   <labels
       name="EmailName"
       figure="EmailFigure"
-      accessor="//@figures.0/@descriptors.48/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.47/@accessors.0"/>
   <labels
       name="MapName"
       figure="MapFigure"
-      accessor="//@figures.0/@descriptors.49/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.48/@accessors.0"/>
   <labels
       name="MapParentName"
       figure="MapFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.49/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.48/@accessors.2"/>
   <labels
       name="MapPointName"
       figure="MapPointFigure"
-      accessor="//@figures.0/@descriptors.50/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.49/@accessors.0"/>
   <labels
       name="MapPointParentName"
       figure="MapPointFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.50/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.49/@accessors.2"/>
   <labels
       name="PrimitiveConditionName"
       figure="PrimitiveConditionFigure"
-      accessor="//@figures.0/@descriptors.51/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.50/@accessors.0"/>
   <labels
       name="PrimitiveConditionParentName"
       figure="PrimitiveConditionFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.51/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.50/@accessors.2"/>
   <labels
       name="PropertyContainmentFeature"
       figure="PropertyFigure"
@@ -2701,32 +2640,32 @@
   <labels
       name="DetailWireName"
       figure="DetailWireFigure"
-      accessor="//@figures.0/@descriptors.52/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.51/@accessors.0"/>
   <labels
       name="AutocompleteWireName"
       figure="AutocompleteWireFigure"
-      accessor="//@figures.0/@descriptors.53/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.52/@accessors.0"/>
   <labels
       name="DomainSchemaName"
       figure="DomainSchemaFigure"
-      accessor="//@figures.0/@descriptors.56/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.55/@accessors.0"/>
   <labels
       name="SelectEdgeName"
       figure="SelectEdgeFigure"
-      accessor="//@figures.0/@descriptors.54/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.53/@accessors.0"/>
   <labels
       name="SchemaEdgeName"
       figure="SchemaEdgeFigure"
-      accessor="//@figures.0/@descriptors.55/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.54/@accessors.0"/>
   <labels
       name="IteratorListName"
       figure="IteratorListFigure"
-      accessor="//@figures.0/@descriptors.46/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.45/@accessors.0"/>
   <labels
       name="IteratorListParentName"
       figure="IteratorListFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.46/@accessors.2"/>
+      accessor="//@figures.0/@descriptors.45/@accessors.2"/>
   <labels
       name="EventTriggerStereotype"
       figure="EventTriggerFigure"
@@ -2758,195 +2697,190 @@
       elementIcon="false"
       accessor="//@figures.0/@descriptors.5/@accessors.1"/>
   <labels
-      name="StaticValueStereotype"
-      figure="StaticValueFigure"
-      elementIcon="false"
-      accessor="//@figures.0/@descriptors.6/@accessors.1"/>
-  <labels
       name="DomainSourceStereotype"
       figure="DomainSourceFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.7/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.6/@accessors.1"/>
   <labels
       name="DataFlowEdgeStereotype"
       figure="DataFlowEdgeFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.8/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.7/@accessors.0"/>
   <labels
       name="TemporaryVariableStereotype"
       figure="TemporaryVariableFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.9/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.8/@accessors.1"/>
   <labels
       name="ExecutionEdgeStereotype"
       figure="ExecutionEdgeFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.10/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.9/@accessors.1"/>
   <labels
       name="DynamicApplicationElementSetStereotype"
       figure="DynamicApplicationElementSetFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.11/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.10/@accessors.1"/>
   <labels
       name="FrameStereotype"
       figure="FrameFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.12/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.11/@accessors.1"/>
   <labels
       name="InputFormStereotype"
       figure="InputFormFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.13/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.12/@accessors.1"/>
   <labels
       name="InputTextFieldStereotype"
       figure="InputTextFieldFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.14/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.13/@accessors.1"/>
   <labels
       name="SyncWireStereotype"
       figure="SyncWireFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.15/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.14/@accessors.1"/>
   <labels
       name="ActionEdgeStereotype"
       figure="ActionEdgeFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.16/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.15/@accessors.1"/>
   <labels
       name="ParameterEdgeStereotype"
       figure="ParameterEdgeFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.17/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.16/@accessors.0"/>
   <labels
       name="StartNodeStereotype"
       figure="StartNodeFigure"
-      accessor="//@figures.0/@descriptors.18/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.17/@accessors.0"/>
   <labels
       name="CancelNodeStereotype"
       figure="CancelNodeFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.19/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.18/@accessors.1"/>
   <labels
       name="FinishNodeStereotype"
       figure="FinishNodeFigure"
-      accessor="//@figures.0/@descriptors.20/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.19/@accessors.0"/>
   <labels
       name="DecisionNodeStereotype"
       figure="DecisionNodeFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.21/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.20/@accessors.1"/>
   <labels
       name="ConditionalEdgeStereotype"
       figure="ConditionalEdgeFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.22/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.21/@accessors.1"/>
   <labels
       name="SetWireStereotype"
       figure="SetWireFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.23/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.22/@accessors.1"/>
   <labels
       name="ConditionEdgeStereotype"
       figure="ConditionEdgeFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.24/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.23/@accessors.1"/>
   <labels
       name="SessionStereotype"
       figure="SessionFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.25/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.24/@accessors.1"/>
   <labels
       name="LoginHandlerStereotype"
       figure="LoginHandlerFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.26/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.25/@accessors.1"/>
   <labels
       name="CompositeConditionStereotype"
       figure="CompositeConditionFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.27/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.26/@accessors.1"/>
   <labels
       name="DomainIteratorStereotype"
       figure="DomainIteratorFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.28/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.27/@accessors.1"/>
   <labels
       name="DomainAttributeInstanceStereotype"
       figure="DomainAttributeInstanceFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.29/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.28/@accessors.1"/>
   <labels
       name="ButtonStereotype"
       figure="ButtonFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.30/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.29/@accessors.1"/>
   <labels
       name="SplitNodeStereotype"
       figure="SplitNodeFigure"
-      accessor="//@figures.0/@descriptors.31/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.30/@accessors.0"/>
   <labels
       name="JoinNodeStereotype"
       figure="JoinNodeFigure"
-      accessor="//@figures.0/@descriptors.32/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.31/@accessors.0"/>
   <labels
       name="QueryParameterStereotype"
       figure="QueryParameterFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.33/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.32/@accessors.1"/>
   <labels
       name="RoleStereotype"
       figure="RoleFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.34/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.33/@accessors.1"/>
   <labels
       name="PermissionStereotype"
       figure="PermissionFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.35/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.34/@accessors.1"/>
   <labels
       name="ExtendsEdgeStereotype"
       figure="ExtendsEdgeFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.36/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.35/@accessors.1"/>
   <labels
       name="RequiresEdgeStereotype"
       figure="RequiresEdgeFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.37/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.36/@accessors.1"/>
   <labels
       name="ConstraintEdgeStereotype"
       figure="ConstraintEdgeFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.38/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.37/@accessors.1"/>
   <labels
       name="ProvidesEdgeStereotype"
       figure="ProvidesEdgeFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.39/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.38/@accessors.1"/>
   <labels
       name="AccessControlHandlerStereotype"
       figure="AccessControlHandlerFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.40/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.39/@accessors.1"/>
   <labels
       name="OperationCallNodeStereotype"
       figure="OperationCallNodeFigure"
-      accessor="//@figures.0/@descriptors.41/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.40/@accessors.0"/>
   <labels
       name="ArithmeticStereotype"
       figure="ArithmeticFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.42/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.41/@accessors.1"/>
   <labels
       name="EntryGateStereotype"
       figure="EntryGateFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.43/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.42/@accessors.1"/>
   <labels
       name="ExitGateStereotype"
       figure="ExitGateFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.44/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.43/@accessors.1"/>
   <labels
       name="ScopeStereotype"
       elementIcon="false"/>
@@ -2954,59 +2888,59 @@
       name="LabelStereotype"
       figure="LabelFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.45/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.44/@accessors.1"/>
   <labels
       name="IteratorListStereotype"
       figure="IteratorListFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.46/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.45/@accessors.1"/>
   <labels
       name="CastNodeStereotype"
       figure="CastNodeFigure"
-      accessor="//@figures.0/@descriptors.47/@accessors.0"/>
+      accessor="//@figures.0/@descriptors.46/@accessors.0"/>
   <labels
       name="EmailStereotype"
       figure="EmailFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.48/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.47/@accessors.1"/>
   <labels
       name="MapStereotype"
       figure="MapFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.49/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.48/@accessors.1"/>
   <labels
       name="MapPointStereotype"
       figure="MapPointFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.50/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.49/@accessors.1"/>
   <labels
       name="PrimitiveConditionStereotype"
       figure="PrimitiveConditionFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.51/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.50/@accessors.1"/>
   <labels
       name="DetailWireStereotype"
       figure="DetailWireFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.52/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.51/@accessors.1"/>
   <labels
       name="AutocompleteWireStereotype"
       figure="AutocompleteWireFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.53/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.52/@accessors.1"/>
   <labels
       name="SelectEdgeStereotype"
       figure="SelectEdgeFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.54/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.53/@accessors.1"/>
   <labels
       name="SchemaEdgeStereotype"
       figure="SchemaEdgeFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.55/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.54/@accessors.1"/>
   <labels
       name="DomainSchemaStereotype"
       figure="DomainSchemaFigure"
       elementIcon="false"
-      accessor="//@figures.0/@descriptors.56/@accessors.1"/>
+      accessor="//@figures.0/@descriptors.55/@accessors.1"/>
 </gmfgraph:Canvas>

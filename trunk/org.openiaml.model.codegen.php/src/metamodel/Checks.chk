@@ -42,9 +42,9 @@ context model::operations::DecisionNode ERROR "A compare DecisionNode must have 
 context model::operations::DecisionNode ERROR "A DecisionNode can only have at most two out execution edges" :
 	outExecutions.size <= 2;
 	
-context model::wires::SyncWire ERROR "You cannot have a SyncWire that connects to a StaticValue":
-	!model::StaticValue.isInstance(from) &&
-	!model::StaticValue.isInstance(to);
+context model::wires::SyncWire ERROR "You cannot have a SyncWire that connects to a read-only Property":
+	!(model::Property.isInstance(from) && ((model::Property) from).readOnly) && 
+	!(model::Property.isInstance(to) && ((model::Property) to).readOnly);
 	
 context model::wires::SyncWire ERROR "You cannot have a SyncWire that connects to a QueryParameter":
 	!model::QueryParameter.isInstance(from) &&
@@ -215,9 +215,6 @@ context model::Changeable ERROR "Contained fieldValue property has a default val
 	fieldValue.defaultValue == null ||
 	defaultValue == fieldValue.defaultValue;
 
-context model::scopes::Email ERROR "An e-mail cannot contain a Property and a StaticValue with the same name" :
-	properties.collect(e|e.name).intersect(values.collect(e|e.name)).isEmpty;
-
 context model::wires::SyncWire ERROR "A SyncWire cannot connect to an Email" :
 	!model::scopes::Email.isInstance(to) &&
 	!model::scopes::Email.isInstance(from);
@@ -253,6 +250,12 @@ context model::operations::DecisionNode	WARNING "Unknown DecisionNode '" + name 
 	|| name == "xpathMatch?" || name == "emailAddress?" || name == "is set?"
 		|| name == "equal?" || name == "true?" || name == "can cast?"
 		|| name == "empty?";
+
+context model::operations::DataFlowEdge ERROR "Readonly Properties can not be set" :
+	!(to != null && model::Property.isInstance(to) && ((model::Property) to).readOnly);
+
+context model::Property ERROR "Readonly Properties must have a default value set" :
+	!(readOnly && defaultValue == null);
 
 /**
  * Based on SQLite docs. This should be the list of reserved words in SQL99

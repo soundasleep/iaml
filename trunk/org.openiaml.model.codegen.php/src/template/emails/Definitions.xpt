@@ -126,9 +126,6 @@
 				«FOREACH properties.sortBy(e|e.name) AS p»
 					$property["«escapePhpString(p.name)»"] = «EXPAND template::operations::Parameters::callParameterValue(true, false) FOR p»;
 				«ENDFOREACH»
-				«FOREACH values.sortBy(e|e.name) AS p»
-					$value["«escapePhpString(p.name)»"] = «EXPAND template::operations::Parameters::callParameterValue(true, false) FOR p»;
-				«ENDFOREACH»
 				«FOREACH labels.sortBy(e|e.name) AS label»
 					«IF label.fieldValue != null»
 						«IF label.onAccess != null»
@@ -185,9 +182,6 @@
 	«FOREACH properties.sortBy(e|e.name) AS p»
 		«p.name»: <?php echo $property["«escapePhpString(p.name)»"]; echo "\n"; ?>
 	«ENDFOREACH»
-	«FOREACH values.sortBy(e|e.name) AS p»
-		«p.name»: <?php echo $value["«escapePhpString(p.name)»"]; echo "\n"; ?>
-	«ENDFOREACH»
 	«FOREACH labels.sortBy(e|e.name) AS label»
 		«IF label.fieldValue != null»
 			«label.name»: <?php echo $label["«escapePhpString(label.name)»"]; echo "\n"; ?>
@@ -206,8 +200,6 @@
 «DEFINE getEmailProperty(String name) FOR model::scopes::Email»
 	«IF !properties.select(e|e.name == name).isEmpty»
 		«EXPAND template::operations::Parameters::callParameterValue(true, false) FOR properties.selectFirst(e|e.name == name)»
-	«ELSEIF !values.select(e|e.name == name).isEmpty»
-		«EXPAND template::operations::Parameters::callParameterValue(true, false) FOR values.selectFirst(e|e.name == name)»
 	«ELSE»
 	  	null
 	«ENDIF» 

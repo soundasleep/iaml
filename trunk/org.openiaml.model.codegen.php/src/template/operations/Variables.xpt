@@ -8,7 +8,7 @@
 /**
  * A temporary variable definition.
  */
-«DEFINE temporaryVariable(Boolean php) FOR model::TemporaryVariable»
+«DEFINE temporaryVariable(Boolean php) FOR model::operations::TemporaryVariable»
 	«IF php»
 		$temp_«safeName()-» = null;	/* temporary variable '«safeNameString(name)-»' */
 	«ELSE»

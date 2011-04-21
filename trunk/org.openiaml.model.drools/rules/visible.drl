@@ -88,12 +88,13 @@ end
 rule "VisibleThings have a PrimitiveCondition 'empty'"
 	when
 		f : VisibleThing( )
-		not (condition : Condition( eContainer == f, name == "empty" ))
+		not (condition : Condition( f.empty == condition ))
 				
 		eval ( handler.veto( f ))
 			
 	then
-		PrimitiveCondition condition = handler.generatedPrimitiveCondition(f, f);
+		PrimitiveCondition condition = handler.generatedPrimitiveCondition(f, f,
+			ModelPackage.eINSTANCE.getVisibleThing_Empty());
 		handler.setName(condition, "empty");
 		queue.add(condition, drools);
 		
@@ -106,12 +107,13 @@ end
 rule "VisibleThings have a PrimitiveCondition 'not empty'"
 	when
 		f : VisibleThing( )
-		not (condition : Condition( eContainer == f, name == "not empty" ))
+		not (condition : Condition( f.notEmpty == condition ))
 				
 		eval ( handler.veto( f ))
 			
 	then
-		PrimitiveCondition condition = handler.generatedPrimitiveCondition(f, f);
+		PrimitiveCondition condition = handler.generatedPrimitiveCondition(f, f,
+			ModelPackage.eINSTANCE.getVisibleThing_NotEmpty());
 		handler.setName(condition, "not empty");
 		queue.add(condition, drools);
 		

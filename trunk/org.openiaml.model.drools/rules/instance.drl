@@ -200,6 +200,7 @@ rule "Create 'results' Property"
 			DomainPackage.eINSTANCE.getDomainIterator_Results());
 		handler.setName(property, "results count");
 		handler.setReadOnly(property, true);
+		handler.setDefaultValue(property, "-1");
 		queue.add(property, drools);
 	
 end

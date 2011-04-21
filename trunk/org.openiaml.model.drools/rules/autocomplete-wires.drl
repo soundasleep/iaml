@@ -280,7 +280,7 @@ rule "Frame.onAccess hides the IteratorList if the input is empty"
 		
 		# input
 		input : InputTextField ( eContainer == form, eval (functions.getAutocompleteInputName(attribute).equals(name)) )
-		condition : Condition ( eContainer == input, name == "empty" ) 
+		condition : Condition ( input.empty == condition )
 		
 		# containing list
 		list : IteratorList ( eContainer == form )
@@ -360,7 +360,7 @@ rule "Input.onChange hides the IteratorList if the input is empty"
 		
 		# input
 		input : InputTextField ( eContainer == form, eval (functions.getAutocompleteInputName(attribute).equals(name)) )
-		condition : Condition ( eContainer == input, name == "empty" ) 
+		condition : Condition ( input.empty == condition )
 		
 		# containing list
 		list : IteratorList ( eContainer == form )

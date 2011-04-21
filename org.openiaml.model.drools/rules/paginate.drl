@@ -300,7 +300,7 @@ rule "Create 'target' property in Last button"
 	then
 		Property property = handler.generatedProperty(last, last);
 		handler.setName(property, "target");
-		handler.setDefault(property, "not set");	// set empty to prevent session crashes
+		handler.setDefaultValue(property, "not set");	// set empty to prevent session crashes
 		queue.add(property, drools);
 		
 end
@@ -402,9 +402,10 @@ rule "Create contents of 'update target' operation"
 		handler.setName(setOp, "set");
 		queue.add(setOp, drools);
 		
-		StaticValue one = handler.generatedStaticValue(op, op);
+		Property one = handler.generatedProperty(op, op);
+		handler.setReadOnly(one, true);
 		handler.setName(one, "one");
-		handler.setValue(one, "1");
+		handler.setDefaultValue(one, "1");
 		handler.setType(one, BuiltinDataTypes.getTypeInteger());
 		queue.add(one, drools);
 		

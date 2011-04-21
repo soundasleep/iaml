@@ -209,19 +209,20 @@ rule "IteratorList labels update the target of the Autocomplete Wire"
 	
 end
 
-rule "InternetApplication has a StaticValue 'blank' created"
+rule "InternetApplication has a readonly Property 'blank' created"
 	when
 		container : InternetApplication ( )
 	
-		not ( StaticValue ( eContainer == container, value == "" ))
+		not ( Property ( eContainer == container, defaultValue == "" ))
 		
 		eval ( handler.veto( container ))
 		
 	then
-		StaticValue blank = handler.generatedStaticValue(container, container);
+		Property blank = handler.generatedProperty(container, container);
 		handler.setName(blank, "blank");
+		handler.setReadOnly(blank, true);
 		handler.setType(blank, BuiltinDataTypes.getTypeString());
-		handler.setValue(blank, "");
+		handler.setDefaultValue(blank, "");
 		queue.add(blank, drools);
 			
 end
@@ -246,7 +247,7 @@ rule "IteratorList labels clear the input onClick"
 		input : InputTextField ( eContainer == form, eval (functions.getAutocompleteInputName(attribute).equals(name)) )
 		updateOperation : Operation ( eContainer == input, name == "update" )
 		
-		blank : StaticValue ( eContainer == ia, value == "" )
+		blank : Property ( eContainer == ia, defaultValue == "" )
 		
 		# for every label within
 		label : VisibleThing ( eContainer == list )

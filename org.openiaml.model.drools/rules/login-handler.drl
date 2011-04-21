@@ -253,7 +253,7 @@ rule "Create contents of 'check key' operation [type=secret_key]"
 		o : CompositeOperation( name == "check key", eContainer == scope )
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
 		
-		expected : StaticValue( ) 
+		expected : Property( ) 
 		expected_param : ParameterEdge( from == expected, to == login_handler )
 		
 		not (StartNode( eContainer == o))
@@ -498,7 +498,7 @@ rule "Create contents of 'do login' operation [type=secret_key]"
 		value : Property( )
 		mySetWire : SetWire( from == login_handler, to == value, name == "set" )
 
-		expected : StaticValue( ) 
+		expected : Property( ) 
 		expected_param : ParameterEdge( from == expected, to == login_handler )
 
 		form : InputForm( eContainer == login, name == "login form" )
@@ -1155,9 +1155,10 @@ rule "Create contents of 'do logout' operation [type=secret_key]"
 	
 	then
 		# create a 'null' value
-		StaticValue myNull = handler.generatedStaticValue(o, o);
+		Property myNull = handler.generatedProperty(o, o);
+		handler.setReadOnly(myNull, true);
 		handler.setName(myNull, "reset value");
-		handler.setValue(myNull, ModelPackage.eINSTANCE.getStaticValue_Value(), "null");
+		handler.setDefaultValue(myNull, "null");
 		queue.add(myNull, drools);
 		
 		StartNode start = handler.generatedStartNode(o, o);
@@ -1208,9 +1209,10 @@ rule "Create contents (initial) of 'do logout' operation [type=object or user]"
 	
 	then
 		# create a 'null' value
-		StaticValue myNull = handler.generatedStaticValue(o, o);
+		Property myNull = handler.generatedProperty(o, o);
+		handler.setReadOnly(myNull, true);
+		handler.setDefaultValue(myNull, "null");
 		handler.setName(myNull, "reset value");
-		handler.setValue(myNull, ModelPackage.eINSTANCE.getStaticValue_Value(), "null");
 		queue.add(myNull, drools);
 		
 		StartNode start = handler.generatedStartNode(o, o);
@@ -1251,7 +1253,7 @@ rule "Create contents (specific keys) of 'do logout' operation [type=object]"
 		key : Property ( eContainer == session, 
 			eval(functions.loginAttributeMatches(key, attribute) ) )
 
-		myNull : StaticValue ( eContainer == o, name == "reset value" )
+		myNull : Property ( eContainer == o, name == "reset value" )
 		split : SplitNode ( eContainer == o )
 		join : JoinNode ( eContainer == o )
 			
@@ -1301,7 +1303,7 @@ rule "Create contents (specific keys) of 'do logout' operation [type=user]"
 		key : Property ( eContainer == session, 
 			eval(functions.loginAttributeMatches(key, attribute) ) )
 
-		myNull : StaticValue ( eContainer == o, name == "reset value" )
+		myNull : Property ( eContainer == o, name == "reset value" )
 		split : SplitNode ( eContainer == o )
 		join : JoinNode ( eContainer == o )
 			

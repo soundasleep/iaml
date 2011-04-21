@@ -32,7 +32,6 @@ import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.Scope;
-import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.WireDestination;
 import org.openiaml.model.model.WireSource;
@@ -274,18 +273,6 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		DecisionNode operation = (DecisionNode) createElement( container, OperationsPackage.eINSTANCE.getDecisionNode(), ModelPackage.eINSTANCE.getCompositeCondition_Nodes() );
 		setGeneratedBy(operation, by);
 		return operation;
-	}
-
-	public StaticValue generatedStaticValue(GeneratesElements by, CompositeOperation container) throws InferenceException {
-		StaticValue value = (StaticValue) createElement( container, ModelPackage.eINSTANCE.getStaticValue(), ModelPackage.eINSTANCE.getCompositeOperation_Values() );
-		setGeneratedBy(value, by);
-		return value;
-	}
-
-	public StaticValue generatedStaticValue(GeneratesElements by, Scope container) throws InferenceException {
-		StaticValue value = (StaticValue) createElement( container, ModelPackage.eINSTANCE.getStaticValue(), ModelPackage.eINSTANCE.getScope_Values() );
-		setGeneratedBy(value, by);
-		return value;
 	}
 
 	public StartNode generatedStartNode(GeneratesElements by, CompositeOperation container) throws InferenceException {
@@ -632,10 +619,6 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setValue(element, OperationsPackage.eINSTANCE.getDecisionNode_Name(), value);
 	}
 
-	public void setValue(StaticValue element, String value) throws InferenceException {
-		setValue(element, ModelPackage.eINSTANCE.getStaticValue_Value(), value);
-	}
-	
 	public void setFrom(DataFlowEdge element, EObject value) throws InferenceException {
 		setValue(element, OperationsPackage.eINSTANCE.getDataFlowEdge_From(), value);
 	}
@@ -654,10 +637,6 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	
 	public void setType(Property element, XSDSimpleTypeDefinition value) throws InferenceException {
 		setValue(element, ModelPackage.eINSTANCE.getProperty_Type(), value);
-	}
-
-	public void setType(StaticValue element, XSDSimpleTypeDefinition value) throws InferenceException {
-		setValue(element, ModelPackage.eINSTANCE.getStaticValue_Type(), value);
 	}
 
 	public void setType(Arithmetic element, ArithmeticOperationTypes value) throws InferenceException {
@@ -688,7 +667,7 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setValue(element, OperationsPackage.eINSTANCE.getCancelNode_ExceptionText(), value);
 	}
 	
-	public void setDefault(Property element, String value) throws InferenceException {
+	public void setDefaultValue(Property element, String value) throws InferenceException {
 		setValue(element, ModelPackage.eINSTANCE.getProperty_DefaultValue(), value);
 	}
 	

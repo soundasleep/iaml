@@ -12,7 +12,6 @@ import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
-import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.operations.Arithmetic;
@@ -299,7 +298,8 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		assertGenerated(assertHasExecutionEdge(op, set, finish));
 
 		Arithmetic arith = assertHasArithmetic(op);
-		StaticValue one = assertHasStaticValue(op, "one");
+		Property one = assertHasProperty(op, "one");
+		assertTrue(one.isReadOnly());
 		assertGenerated(assertHasDataFlowEdge(op, one, arith));
 		assertEquals(arith.getOperationType(), ArithmeticOperationTypes.SUBTRACT);
 

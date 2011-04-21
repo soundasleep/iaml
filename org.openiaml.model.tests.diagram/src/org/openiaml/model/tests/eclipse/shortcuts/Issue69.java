@@ -42,7 +42,7 @@ public class Issue69 extends AbstractShortcutsTestCase {
 			
 			// directly, there is a button and a static value
 			ShapeNodeEditPart button = assertHasButton(editor_page, "direct");
-			ShapeNodeEditPart staticValue = assertHasStaticValue(editor_page, "parameter");
+			ShapeNodeEditPart staticValue = assertHasProperty(editor_page, "parameter");
 			
 			// the button runs an external operation, which is a shortcut
 			ShapeNodeEditPart op = assertHasCompositeOperation(editor_page, "some operation", true);
@@ -94,7 +94,7 @@ public class Issue69 extends AbstractShortcutsTestCase {
 				ConnectionNodeEditPart run = assertHasRunAction(editor_button, event, op, "run");
 				
 				// there is also a shortcutted StaticValue, which is the parameter
-				ShapeNodeEditPart staticValue = assertHasStaticValue(editor_button, "parameter", true);
+				ShapeNodeEditPart staticValue = assertHasProperty(editor_button, "parameter", true);
 				
 				// which is connected to the RunAction
 				assertHasParameterEdge(editor_button, staticValue, run);
@@ -143,7 +143,7 @@ public class Issue69 extends AbstractShortcutsTestCase {
 			ConnectionNodeEditPart run2 = assertHasRunAction(editor_page, event, op, "run");
 			
 			// finally, there is a static value that has a shortcut
-			ShapeNodeEditPart staticValue = assertHasStaticValue(editor_page, "parameter", true);
+			ShapeNodeEditPart staticValue = assertHasProperty(editor_page, "parameter", true);
 			
 			// connected to both run actions
 			assertHasParameterEdge(editor_page, staticValue, run);

@@ -11,7 +11,6 @@ import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Property;
-import org.openiaml.model.model.StaticValue;
 import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.components.LoginHandlerTypes;
@@ -49,7 +48,8 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		Session session = assertHasSession(root, "my session");
 		assertNotGenerated(session);
 
-		StaticValue value = assertHasStaticValue(session, "login key");
+		Property value = assertHasProperty(session, "login key");
+		assertTrue(value.isReadOnly());
 		assertNotGenerated(value);
 
 		Frame viewkey = assertHasFrame(session, "viewkey");

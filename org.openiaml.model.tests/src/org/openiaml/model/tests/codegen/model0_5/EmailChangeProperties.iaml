@@ -3,33 +3,33 @@
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <scopes xsi:type="iaml.scopes:Email" id="scopes.127b254e216.11" name="Email">
       <operations xsi:type="iaml:PrimitiveOperation" id="model.127b1fff682.65" name="send" inActions="wires.127b1fff8c4.12"/>
-      <properties id="model.12f7645ca99.30f" defaultValue="to"/>
-      <properties id="model.12f7645ca99.310" defaultValue="toName"/>
-      <properties id="model.12f7645ca99.311" defaultValue="from"/>
-      <properties id="model.12f7645ca99.312" defaultValue="fromName"/>
-      <properties id="model.12f7645ca99.313" defaultValue="subject"/>
-      <properties id="model.12f7645ca99.314" defaultValue="content"/>
+      <properties id="model.127b1fff682.61" name="to" inWires="wires.127b1fff8c4.23" defaultValue="to@openiaml.org"/>
+      <properties id="model.127b1fff682.62" name="toName" inWires="wires.127b254e207.89" defaultValue="To name"/>
+      <properties id="model.127b1fff682.63" name="from" inWires="wires.127b254e207.8a" defaultValue="from@openiaml.org"/>
+      <properties id="model.127b1fff682.64" name="fromName" inWires="wires.127b1fff8c4.22" defaultValue="From name"/>
+      <properties id="model.127b1fff682.b5" name="subject" inWires="wires.127b1fff8c4.20" defaultValue="Subject"/>
+      <properties id="model.127b1fff682.e1" name="content" inWires="wires.127b1fff8c4.21" defaultValue="Content"/>
     </scopes>
     <children xsi:type="iaml.visual:Button" id="visual.127b1fff818.5f" name="send email" outActions="wires.127b1fff8c4.12">
       <actions id="wires.127b1fff8c4.12" name="onClick" from="visual.127b1fff818.5f" to="model.127b1fff682.65"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" outWires="wires.127b1fff8c4.23" id="visual.127b1fff818.60" name="to">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.127b1fff8c4.23" name="set" from="visual.127b1fff818.60"/>
+      <wires xsi:type="iaml.wires:SetWire" id="wires.127b1fff8c4.23" name="set" from="visual.127b1fff818.60" to="model.127b1fff682.61"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" outWires="wires.127b254e207.89" id="visual.127b1fff818.61" name="to name">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.127b254e207.89" name="set" from="visual.127b1fff818.61"/>
+      <wires xsi:type="iaml.wires:SetWire" id="wires.127b254e207.89" name="set" from="visual.127b1fff818.61" to="model.127b1fff682.62"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" outWires="wires.127b1fff8c4.22" id="visual.127b1fff818.62" name="from name">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.127b1fff8c4.22" name="set" from="visual.127b1fff818.62"/>
+      <wires xsi:type="iaml.wires:SetWire" id="wires.127b1fff8c4.22" name="set" from="visual.127b1fff818.62" to="model.127b1fff682.64"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" outWires="wires.127b254e207.8a" id="visual.127b1fff818.63" name="from">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.127b254e207.8a" name="set" from="visual.127b1fff818.63"/>
+      <wires xsi:type="iaml.wires:SetWire" id="wires.127b254e207.8a" name="set" from="visual.127b1fff818.63" to="model.127b1fff682.63"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" outWires="wires.127b1fff8c4.20" id="visual.127b1fff818.112" name="subject">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.127b1fff8c4.20" name="set" from="visual.127b1fff818.112"/>
+      <wires xsi:type="iaml.wires:SetWire" id="wires.127b1fff8c4.20" name="set" from="visual.127b1fff818.112" to="model.127b1fff682.b5"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" outWires="wires.127b1fff8c4.21" id="visual.127b1fff818.113" name="content">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.127b1fff8c4.21" name="set" from="visual.127b1fff818.113"/>
+      <wires xsi:type="iaml.wires:SetWire" id="wires.127b1fff8c4.21" name="set" from="visual.127b1fff818.113" to="model.127b1fff682.e1"/>
     </children>
   </scopes>
 </iaml:InternetApplication>

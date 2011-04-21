@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.scopes="http://openiaml.org/model/scopes" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.120a748ea9e.c7">
   <scopes xsi:type="iaml.scopes:Session" id="scopes.120a748ed3d.de" name="session">
-    <properties id="model.120a748ea9e.103" name="initial value" outParameterEdges="wires.120a748ec72.9d" defaultValue="initialised by init" readOnly="true">
+    <values id="model.120a748ea9e.103" name="initial value" outParameterEdges="wires.120a748ec72.9d" value="initialised by init">
       <parameterEdges id="wires.120a748ec72.9d" from="model.120a748ea9e.103" to="wires.120a748ec72.9b"/>
-    </properties>
+    </values>
     <onInit id="model.120a748ea9e.d9" outActions="wires.120a748ec72.9b">
       <actions id="wires.120a748ec72.9b" inParameterEdges="wires.120a748ec72.9d" name="run on init" from="model.120a748ea9e.d9" to="model.120a748ea9e.ec"/>
     </onInit>

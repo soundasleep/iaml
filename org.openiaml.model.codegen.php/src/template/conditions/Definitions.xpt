@@ -101,6 +101,21 @@
 			«EXPAND conditionDefinition_canCast(php, this) FOR (model::Changeable) eContainer»
 		«ELSEIF (name == "fieldValue is set?" || name == "fieldValue is set") && model::Changeable.isInstance(eContainer)»
 			«EXPAND conditionDefinition_fieldValueIsSet(php, this) FOR (model::Changeable) eContainer»
+		«ELSEIF model::VisibleThing.isInstance(eContainer)»
+			«REM»TODO merge this into Changeable below«ENDREM»
+			«LET (model::VisibleThing) eContainer AS changeable»
+			«IF this == changeable.empty»
+			return
+				!(«EXPAND template::operations::Parameters::isSetParameter(php) FOR changeable.fieldValue»)
+				|| !(«EXPAND template::operations::Parameters::callParameterValue(php, false) FOR changeable.fieldValue»);
+			«ELSEIF this == changeable.notEmpty»
+			return 
+				«EXPAND template::operations::Parameters::isSetParameter(php) FOR changeable.fieldValue»
+				&& («EXPAND template::operations::Parameters::callParameterValue(php, false) FOR changeable.fieldValue»);
+			«ELSE»
+				«throwException("Unknown primitive condition: '" + name + "'")»
+			«ENDIF»
+			«ENDLET»
 		«ELSEIF model::Changeable.isInstance(eContainer)»
 			«LET (model::Changeable) eContainer AS changeable»
 			«IF name == "empty" || name == "empty?"»

@@ -267,7 +267,7 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 			assertGenerated(run);
 			
 			// only if the input is empty
-			Condition empty = assertHasPrimitiveCondition(input, "empty");
+			Condition empty = input.getEmpty();
 			assertGenerated(empty);
 			
 			assertGenerated(assertHasConditionEdge(root, empty, run));
@@ -281,7 +281,7 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 			assertGenerated(run);
 			
 			// only if the input is not empty
-			Condition empty = assertHasPrimitiveCondition(input, "not empty");
+			Condition empty = input.getNotEmpty();
 			assertGenerated(empty);
 			
 			assertGenerated(assertHasConditionEdge(root, empty, run));
@@ -306,7 +306,7 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 		{
 			Operation hide = assertHasPrimitiveOperation(list, "hide");
 			ActionEdge run = assertHasRunAction(root, onChange, hide);
-			Condition empty = assertHasPrimitiveCondition(input, "empty");
+			Condition empty = input.getEmpty();
 			assertGenerated(assertHasConditionEdge(root, empty, run));
 		}
 		
@@ -314,7 +314,7 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 		{
 			Operation show = assertHasPrimitiveOperation(list, "show");
 			ActionEdge run = assertHasRunAction(root, onChange, show);
-			Condition notEmpty = assertHasPrimitiveCondition(input, "not empty");
+			Condition notEmpty = input.getNotEmpty();
 			assertGenerated(assertHasConditionEdge(root, notEmpty, run));
 		}
 

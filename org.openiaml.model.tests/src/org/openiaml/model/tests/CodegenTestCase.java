@@ -1365,4 +1365,49 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 		return ((HtmlUnitElementImpl) element).getHtmlElement().isDisplayed();
 	}
 
+	/*
+	 * Extended to check that web browsing has first begun through {@link #beginAt()}. 
+	 */
+	@Override
+	public String getElementAttributeByXPath(String xpath, String attribute) {
+		assertTrue("Web browsing has not yet begun", hasBegun);
+		return super.getElementAttributeByXPath(xpath, attribute);
+	}
+
+	/*
+	 * Extended to check that web browsing has first begun through {@link #beginAt()}. 
+	 */
+	@Override
+	public IElement getElementById(String id) {
+		assertTrue("Web browsing has not yet begun", hasBegun);
+		return super.getElementById(id);
+	}
+
+	/*
+	 * Extended to check that web browsing has first begun through {@link #beginAt()}. 
+	 */
+	@Override
+	public IElement getElementByXPath(String xpath) {
+		assertTrue("Web browsing has not yet begun", hasBegun);
+		return super.getElementByXPath(xpath);
+	}
+
+	/*
+	 * Extended to check that web browsing has first begun through {@link #beginAt()}. 
+	 */
+	@Override
+	public List<IElement> getElementsByXPath(String xpath) {
+		assertTrue("Web browsing has not yet begun", hasBegun);
+		return super.getElementsByXPath(xpath);
+	}
+
+	/*
+	 * Extended to check that web browsing has first begun through {@link #beginAt()}. 
+	 */
+	@Override
+	public String getElementTextByXPath(String xpath) {
+		assertTrue("Web browsing has not yet begun", hasBegun);
+		return super.getElementTextByXPath(xpath);
+	}
+	
 }

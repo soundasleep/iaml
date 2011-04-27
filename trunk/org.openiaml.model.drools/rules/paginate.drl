@@ -26,7 +26,7 @@ global DroolsHelperFunctions functions;
 /**
  * @inference DomainIterator,InputForm,SetWire
  *		An {@model InputForm} connected to a {@model DomainIterator} using a {@model SetWire}
- *		with a {@model DomainIterator#limit} set, will be completed with
+ *		with a {@model DomainIterator#limit} set (not 1), will be completed with
  * 		{@model Button}s named 'Next', 'Previous', 'First' and 'Last', in order
  *		to support navigation through the {@model DomainIterator}.
  */
@@ -71,7 +71,7 @@ end
 /**
  * @inference DomainIterator,InputForm,SetWire
  *		An {@model InputForm} connected to a {@model DomainIterator} using a {@model SetWire}
- *		with a {@model DomainIterator#limit} set, will be completed with
+ *		with a {@model DomainIterator#limit} set (not 1), will be completed with
  * 		a {@model Label} named 'Results'.
  */
 rule "Create 'Results' Label for InputForms when connected to DomainIterators with many results"

@@ -112,6 +112,15 @@
 	}
 	
 	/**
+	 * Get the current instance pointer of the domain iterator.
+	 * Returns as an integer.
+	 */
+	function get_instance_current_pointer_«safeName()»() {
+		$iterator = DomainIterator_«safeName()»::getInstance();
+		return do_cast($iterator->getOffset(), "http://openiaml.org/model/datatypes#iamlInteger");
+	}
+	
+	/**
 	 * Does the domain object instance '«id»' exist yet in the database?
 	 * If a {@model RemoteDomainObject}, this may refresh the remote data source.
 	 *

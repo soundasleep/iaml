@@ -354,6 +354,15 @@ class DomainIterator_«safeName()» extends DomainIterator {
 		}
 		return self::$instance;
 	}
+	
+	«IF onIterate != null»
+	/**
+	 * onIterate is defined for this DomainIterator.
+	 */
+	public function onIterate() {
+		«EXPAND template::events::EventCall::callEvent(true) FOR onIterate»
+	}
+	«ENDIF»
 
 }
 «ENDDEFINE»

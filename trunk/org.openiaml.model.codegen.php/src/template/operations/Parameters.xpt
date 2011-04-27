@@ -87,6 +87,9 @@
 			«ELSEIF isDomainIteratorResults()»
 				/* from the DomainObjectInstance */
 				get_instance_count_«safeName(eContainer)»()
+			«ELSEIF isDomainIteratorCurrentPointer()»
+				/* from the DomainObjectInstance */
+				get_instance_current_pointer_«safeName(eContainer)»()
 			«ELSEIF containingSession(this) != null»
 				/* a property from our session */
 				require_session("«safeName(containingSession(this))»_«safeName()-»"

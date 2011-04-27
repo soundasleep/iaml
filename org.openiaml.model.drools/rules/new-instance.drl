@@ -3,7 +3,7 @@
  */
 # Update the attributes in "new instance" objects when they
 # are connected to DomainObjects.
-package org.openiaml.model.drools.rules.runtime.new_instance
+package org.openiaml.model.drools.rules.new_instance
 
 #list any import classes here.
 import org.openiaml.model.drools.*;

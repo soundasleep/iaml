@@ -1,7 +1,7 @@
 /**
  * Rules relating to {@model DomainSource}s of <code>.properties</code> files.
  */
-package org.openiaml.model.drools.rules.runtime.file_domain_object
+package org.openiaml.model.drools.rules.file_domain_object
 
 #list any import classes here.
 import org.openiaml.model.drools.*;

@@ -152,6 +152,7 @@ require("test17.php");
 require("test18.php");
 require("test19.php");
 require("test20.php");
+require("test21.php");
 
 function clean_newlines($s) {
 	$s = str_replace("\r\n", "\n", $s);

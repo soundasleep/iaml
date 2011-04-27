@@ -23,8 +23,8 @@ global DroolsHelperFunctions functions;
  * Issue 210: Create PrimitiveOperations rather than CompositeOperations.
  * TODO do not create 'update' operation for {@model Property#readOnly} Properties.
  *
- * @inference VisibleThing
- *		All {@model VisibleThing}s (except {@model IteratorList}s and {@model InputForm}s) will have an {@model Operation} called "update".
+ * @inference VisibleThing,Operation
+ *		All {@model VisibleThing}s (except {@model IteratorList}s and {@model InputForm}s) will contain an {@model Operation} named "update".
  */
 rule "Create 'update' operation for VisibleThings"
 	when
@@ -42,6 +42,10 @@ rule "Create 'update' operation for VisibleThings"
 		
 end
 
+/**
+ * @inference DomainAttribute,Operation
+ *		All {@model DomainAttribute}s will contain an {@model Operation} named "update".
+ */
 rule "Create 'update' operation for domain attribute"
 	when
 		f : DomainAttribute( )
@@ -56,6 +60,10 @@ rule "Create 'update' operation for domain attribute"
 		
 end
 
+/**
+ * @inference DomainAttributeInstance,Operation
+ *		All {@model DomainAttributeInstance}s will contain an {@model Operation} named "update".
+ */
 rule "Create 'update' operation for domain attribute instance"
 	when
 		f : DomainAttributeInstance( )
@@ -74,7 +82,7 @@ end
  * Issue 210: Create PrimitiveOperations rather than CompositeOperations.
  *
  * @inference VisibleThing
- *		All {@model VisibleThing}s (except {@model IteratorList}s and {@model InputForm}s) will have an {@model Operation} called "init".
+ *		All {@model VisibleThing}s (except {@model IteratorList}s and {@model InputForm}s) will contain an {@model Operation} named "init".
  */
 rule "Create 'init' operation for VisibleThings"
 	when
@@ -93,8 +101,8 @@ rule "Create 'init' operation for VisibleThings"
 end
 
 /**
- * @inference SetWire,Property
- *		An {@model Operation} 'set property XXX' is created for all {@model Property Properties}
+ * @inference SetWire,Property,Operation
+ *		An {@model Operation} 'set property XXX' is created in the container of all {@model Property Properties}
  *		that are the target of {@model SetWire}s.
  */
 rule "Create 'set property XXX' Operation for all Properties, except fieldValue"
@@ -117,9 +125,10 @@ rule "Create 'set property XXX' Operation for all Properties, except fieldValue"
 end 
 
 /**
- * @inference Changeable
- *		A {@model Changeable} that also contains a {@model CompositeOperation} named
- *		'update', 'refresh' or 'init' will automatically be completed.
+ * @inference Changeable,CompositeOperation
+ *		An empty {@model CompositeOperation} named "update", "refresh" or "init", contained within a
+ *		{@model Changeable}, will automatically be completed with {@model ActivityNode}s to implement
+ *		the particular operation.
  */
 rule "Create components of 'update', 'refresh', 'init' operations"
 	when
@@ -194,6 +203,13 @@ rule "Create components of 'update', 'refresh', 'init' operations"
 
 end
 
+/**
+ * @inference Changeable,CompositeOperation,Property
+ *		An empty {@model CompositeOperation} named "set property XXX", contained within a
+ *		{@model Changeable}, used to set a {@model Property} other than {@model Changeable#fieldValue},
+ *		will automatically be completed with {@model ActivityNode}s to implement
+ *		the particular operation.
+ */
 rule "Create components of 'set property XXX' operations"
 	when
 		container : ContainsOperations ( )
@@ -268,9 +284,16 @@ rule "Create components of 'set property XXX' operations"
 
 end
 
+/**
+ * @inference CompositeOperation
+ *		An empty {@model CompositeOperation} named "alert" will automatically be completed 
+ *		with {@model ActivityNode}s that will execute the {@model PrimitiveOperation} named "alert".
+ */
 rule "Create components of 'alert' operation"
 	when
 		o : CompositeOperation(name == "alert")
+
+		not ( StartNode ( eContainer == o ))
 		
 		eval ( handler.veto( o ))
 

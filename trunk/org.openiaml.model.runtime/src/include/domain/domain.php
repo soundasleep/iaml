@@ -1032,6 +1032,7 @@ abstract class DomainIterator {
 	public function reset() {
 		$this->setOffset(0);
 		$this->reload();
+		$this->onIterate();
 	}
 
 	/**
@@ -1040,6 +1041,7 @@ abstract class DomainIterator {
 	public function skip($n) {
 		$this->setOffset($this->getOffset() + $n);
 		$this->reload();
+		$this->onIterate();
 	}
 
 	/**
@@ -1048,6 +1050,7 @@ abstract class DomainIterator {
 	public function jump($n) {
 		$this->setOffset($n);
 		$this->reload();
+		$this->onIterate();
 	}
 
 	public function hasNext() {
@@ -1072,6 +1075,7 @@ abstract class DomainIterator {
 
 		$this->setOffset($this->getOffset() + 1);
 		$this->reload();
+		$this->onIterate();
 		return $this->toArray();
 	}
 
@@ -1087,6 +1091,7 @@ abstract class DomainIterator {
 
 		$this->setOffset($this->getOffset() - 1);
 		$this->reload();
+		$this->onIterate();
 		return $this->toArray();
 	}
 
@@ -1335,6 +1340,18 @@ abstract class DomainIterator {
 		$this->setStoredValue("last_rss_update", time());
 		log_message("[domain rss] RSS Refresh completed");
 
+	}
+
+	/**
+	 * This represents the "onIterate" event for the DomainIterator.
+	 * As described in the modelling language definition, this event is triggered
+	 * immediately after the current <em>instance pointer</em> of the iterator
+	 * changes.
+	 *
+	 * <p>By default, this method is empty.
+	 */
+	public function onIterate() {
+		// by default, empty
 	}
 
 }

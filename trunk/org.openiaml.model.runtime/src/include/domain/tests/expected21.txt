@@ -1,0 +1,22 @@
+onIterate: 0
+id: 1
+title: Counter 42
+onIterate: 1
+id: 2
+title: Counter 43
+onIterate: 2
+id: 3
+title: Counter 44
+onIterate: 3
+id: 4
+title: Counter 45
+onIterate: 4
+id: 5
+title: Counter 46
+onIterate: 5
+id: 6
+title: Counter 47
+onIterate: 6
+id: 664
+title: inserted value
+results = 7

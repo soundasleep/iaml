@@ -86,6 +86,22 @@ ob_start();
   // print out the result count
   echo "results = " . $iterator->count();
 }
+
+echo "\n---\n";
+
+// try resetting the iterator lots of times; onIterate will be
+// called many times, as reset() reloads the current instance
+{
+  $iterator = DomainIterator_News_onIterate::getInstance();
+  $iterator->reset();
+  $iterator->reset();
+  $iterator->reset();
+  $iterator->reset();
+  $iterator->reset();
+
+  // print out the result count
+  echo "results = " . $iterator->count();
+}
 $result = ob_get_contents();
 ob_end_clean();
 

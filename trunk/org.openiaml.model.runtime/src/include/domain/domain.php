@@ -465,6 +465,9 @@ abstract class DomainIterator {
 			return;
 		}
 
+		// call onIterate the first time the instance is loaded
+		$this->onIterate();
+
 		$needs_reload = false;
 		if (!$this->isNew() && $this->argumentsHaveChanged()) {
 			// have the query arguments changed? this means that we have to lose our saved values
@@ -587,6 +590,9 @@ abstract class DomainIterator {
 
 		// reset current_result
 		$this->current_result = null;
+
+		// call onIterate
+		$this->onIterate();
 
 		// if we are RSS, possibly update directly from the RSS feed
 		if ($type == 'RSS2_0') {
@@ -1032,7 +1038,6 @@ abstract class DomainIterator {
 	public function reset() {
 		$this->setOffset(0);
 		$this->reload();
-		$this->onIterate();
 	}
 
 	/**
@@ -1041,7 +1046,6 @@ abstract class DomainIterator {
 	public function skip($n) {
 		$this->setOffset($this->getOffset() + $n);
 		$this->reload();
-		$this->onIterate();
 	}
 
 	/**
@@ -1050,7 +1054,6 @@ abstract class DomainIterator {
 	public function jump($n) {
 		$this->setOffset($n);
 		$this->reload();
-		$this->onIterate();
 	}
 
 	public function hasNext() {
@@ -1075,7 +1078,6 @@ abstract class DomainIterator {
 
 		$this->setOffset($this->getOffset() + 1);
 		$this->reload();
-		$this->onIterate();
 		return $this->toArray();
 	}
 
@@ -1091,7 +1093,6 @@ abstract class DomainIterator {
 
 		$this->setOffset($this->getOffset() - 1);
 		$this->reload();
-		$this->onIterate();
 		return $this->toArray();
 	}
 

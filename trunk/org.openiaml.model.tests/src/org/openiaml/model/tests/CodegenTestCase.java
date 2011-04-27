@@ -742,6 +742,18 @@ public abstract class CodegenTestCase extends ModelInferenceTestCase {
 	}	
 	
 	/**
+	 * Assert that the {@model InputTextField} with the given name
+	 * (<code>label</code>) has the expected text.
+	 * 
+	 * @param label the label of the {@model InputTextField}
+	 * @param expected the expected value
+	 */
+	public void assertInputTextFieldEquals(String label, String expected) {
+		String target = getLabelIDForText(label);
+		assertLabeledFieldEquals(target, expected);
+	}
+	
+	/**
 	 * Construct the necessary XPath expression to find a node that 
 	 * contains the specific text.
 	 * 

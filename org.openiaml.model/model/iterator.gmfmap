@@ -81,6 +81,49 @@
   </nodes>
   <nodes>
     <containmentFeature
+        href="iaml.ecore#//domain/DomainIterator/currentPointer"/>
+    <ownedChild>
+      <domainMetaElement
+          href="iaml.ecore#//Property"/>
+      <domainSpecialization
+          body="return domainElement.eContainingFeature().getName().equals(&quot;currentPointer&quot;);"
+          language="java"/>
+      <labelMappings
+          xsi:type="gmfmap:FeatureLabelMapping">
+        <diagramLabel
+            href="iaml.gmfgraph#PropertyName"/>
+        <features
+            href="iaml.ecore#//NamedElement/name"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PropertyStereotype"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PropertyContainmentFeature"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PropertyParentName"/>
+      </labelMappings>
+      <labelMappings
+          readOnly="true">
+        <diagramLabel
+            href="iaml.gmfgraph#PropertyType"/>
+      </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="iterator.gmftool#//@palette/@tools.3/@tools.12"/>
+      <diagramNode
+          href="iaml.gmfgraph#Property"/>
+    </ownedChild>
+  </nodes>
+  <nodes>
+    <containmentFeature
         href="iaml.ecore#//ContainsProperties/properties"/>
     <ownedChild>
       <domainMetaElement

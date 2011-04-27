@@ -318,6 +318,9 @@
         <diagramLabel
             href="iaml.gmfgraph#EventTriggerParentName"/>
       </labelMappings>
+      <tool
+          xsi:type="gmftool:CreationTool"
+          href="iterator.gmftool#//@palette/@tools.3/@tools.0"/>
       <diagramNode
           href="iaml.gmfgraph#EventTrigger"/>
     </ownedChild>

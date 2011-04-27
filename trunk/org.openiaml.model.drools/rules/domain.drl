@@ -2,7 +2,7 @@
  * Rules relating to {@model DomainSchema}s.
  */
 #created on: 4/11/2008
-package org.openiaml.model.drools.rules.runtime.domain
+package org.openiaml.model.drools.rules.domain
 
 #list any import classes here.
 import org.openiaml.model.drools.*;

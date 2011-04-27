@@ -25,8 +25,8 @@ public class RefreshObjectInstanceMappingsWithDrools extends UpdateWithDroolsAct
 		}
 
 		private List<String> ruleFiles = Arrays.asList(
-				"/rules/runtime/domain.drl",
-				"/rules/runtime/new-instance.drl"
+				"/rules/domain.drl",
+				"/rules/new-instance.drl"
 				);
 
 		/**

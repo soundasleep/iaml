@@ -28,7 +28,7 @@ public class RefreshFormMappingsWithDrools extends UpdateWithDroolsAction {
 				"/rules/sync-wires.drl",
 				"/rules/set-wires.drl",
 				"/rules/detail-wires.drl",
-				"/rules/runtime/new-instance.drl"
+				"/rules/new-instance.drl"
 				);
 
 		/**

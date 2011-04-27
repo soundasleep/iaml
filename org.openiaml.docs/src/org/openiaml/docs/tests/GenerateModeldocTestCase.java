@@ -4,6 +4,8 @@
 package org.openiaml.docs.tests;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -29,6 +31,8 @@ import org.openiaml.docs.generation.DocumentationGenerator;
 import org.openiaml.docs.generation.DocumentationHelper;
 import org.openiaml.docs.generation.LoadFileMetrics;
 import org.openiaml.docs.generation.codegen.ModeldocCodeGenerator;
+import org.openiaml.docs.modeldoc.DroolsPackage;
+import org.openiaml.docs.modeldoc.DroolsRule;
 import org.openiaml.docs.modeldoc.EMFAttribute;
 import org.openiaml.docs.modeldoc.EMFClass;
 import org.openiaml.docs.modeldoc.EMFReference;
@@ -40,6 +44,7 @@ import org.openiaml.docs.modeldoc.JavadocTagElement;
 import org.openiaml.docs.modeldoc.JavadocTextElement;
 import org.openiaml.docs.modeldoc.ModelDocumentation;
 import org.openiaml.docs.modeldoc.ModeldocFactory;
+import org.openiaml.docs.modeldoc.Reference;
 import org.openiaml.model.ModelLoader;
 import org.openiaml.model.ModelLoader.ModelLoadException;
 import org.openiaml.model.model.ModelPackage;
@@ -342,8 +347,9 @@ public class GenerateModeldocTestCase extends TestCase {
 	
 	/**
 	 * Issue 167: make sure all model elements have ModelDoc. 
+	 * @throws IOException 
 	 */
-	public void testAllElementsHaveJavadocs() throws ModelLoadException {
+	public void testAllElementsHaveJavadocs() throws ModelLoadException, IOException {
 		
 		EObject root = ModelLoader.load("test.modeldoc");
 		ModelDocumentation doc = (ModelDocumentation) root;
@@ -370,10 +376,68 @@ public class GenerateModeldocTestCase extends TestCase {
 		}
 		
 		// print out all violations for easy debugging
+		StringBuffer buf = new StringBuffer();
 		for (String v : violations) {
 			System.out.println(v);
+			buf.append(v).append("\n");
 		}
-		assertEquals("Not all model elements had documentation", 0, violations.size());
+		File f = new File("missing-emf-documentation.txt");
+		FileWriter writer = new FileWriter(f);
+		writer.write(buf.toString());
+		writer.close();
+		
+		assertEquals("Not all model elements had documentation, written to " + f, 0, violations.size());
+				
+	}
+	
+	/**
+	 * Issue 240: Make sure that all inference rules have associated
+	 * documentation.
+	 * 
+	 * @throws IOException 
+	 */
+	public void testAllInferenceRulesHaveModeldoc() throws ModelLoadException, IOException {
+		
+		EObject root = ModelLoader.load("test.modeldoc");
+		ModelDocumentation doc = (ModelDocumentation) root;
+
+		StringBuffer buf = new StringBuffer();
+		int violations = 0;
+		for (Reference ref : doc.getReferences()) {
+			if (ref instanceof DroolsPackage) {
+				DroolsPackage pkg = (DroolsPackage) ref;
+				
+				// ModelDoc does not load all rules, but only
+				// those with Javadoc tags. therefore, we can't
+				// check that each rule has documentation; but rather,
+				// check that the number of rules saved == the number
+				// of unique rules in the package
+				if (pkg.getUniqueRules() != pkg.getRules().size()) {
+					violations++;
+					buf.append("Package ")
+						.append(pkg.getPlugin())
+						.append("/")
+						.append(pkg.getPackage())
+						.append("/")
+						.append(pkg.getName())
+						.append(".drl: Expected ")
+						.append(pkg.getUniqueRules())
+						.append(" tags, found ")
+						.append(pkg.getRules().size())
+						.append("\n");
+				}
+				
+			}
+		}
+		
+		// print out all violations for easy debugging
+		File f = new File("missing-inference-documentation.txt");
+		FileWriter writer = new FileWriter(f);
+		writer.write(buf.toString());
+		writer.close();
+		System.out.println(buf.toString());
+	
+		assertEquals("Not all inference rules had documentation, written to " + f, 0, violations);
 				
 	}
 

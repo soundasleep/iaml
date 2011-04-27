@@ -632,6 +632,11 @@ isDomainIteratorResults(model::Property this) :
 	model::domain::DomainIterator.isInstance(eContainer) 
 		&& ((model::domain::DomainIterator) eContainer).results == this;
 
+isDomainIteratorCurrentPointer(model::Property this) :
+	eContainer != null && 
+	model::domain::DomainIterator.isInstance(eContainer) 
+		&& ((model::domain::DomainIterator) eContainer).currentPointer == this;
+
 /**
  * Is the given type numeric?
  * This returns true if this type is, or is recursively restricted, from

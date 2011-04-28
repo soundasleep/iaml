@@ -11,6 +11,7 @@ digraph {
 "org.openiaml.model.diagram.helpers";
 "org.openiaml.model.drools";
 "org.openiaml.model.edit";
+"org.openiaml.model.migration";
 "org.openiaml.model.runtime";
 "org.openiaml.model.runtime.phpmailer";
   node [style=filled, fillcolor="#cc7766"];
@@ -22,6 +23,7 @@ digraph {
   "org.openiaml.docs.tools" -> "org.openiaml.model";
   "org.openiaml.docs.tools" -> "org.openiaml.model.diagram";
   "org.openiaml.docs.tools" -> "org.openiaml.model.diagram.custom";
+  "org.openiaml.model.actions" -> "org.openiaml.emf.properties";
   "org.openiaml.model.actions" -> "org.openiaml.model";
   "org.openiaml.model.actions" -> "org.openiaml.model.codegen.php";
   "org.openiaml.model.actions" -> "org.openiaml.model.drools";

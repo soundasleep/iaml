@@ -6,6 +6,7 @@ package org.openiaml.model.tests.inference.model0_4_3;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
+import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.visual.Button;
@@ -84,6 +85,8 @@ public class DomainInstanceSetWire extends ValidInferenceTestCase {
 		Frame add = assertHasFrame(root, "Add New Product");
 		
 		DomainIterator editing = assertHasDomainIterator(add, "New Product");
+		DomainInstance instance = editing.getCurrentInstance();
+		assertGenerated(instance);
 		InputForm edit = assertHasInputForm(add, "Edit Form");
 		
 		// text fields
@@ -98,9 +101,9 @@ public class DomainInstanceSetWire extends ValidInferenceTestCase {
 		assertHasNone(edit, "iaml:children", Label.class);
 		
 		// domain object instance, generated attributes
-		DomainAttributeInstance aid = assertHasDomainAttributeInstance(editing, "id");
-		DomainAttributeInstance aname = assertHasDomainAttributeInstance(editing, "name");
-		DomainAttributeInstance aprice = assertHasDomainAttributeInstance(editing, "price");
+		DomainAttributeInstance aid = assertHasDomainAttributeInstance(instance, "id");
+		DomainAttributeInstance aname = assertHasDomainAttributeInstance(instance, "name");
+		DomainAttributeInstance aprice = assertHasDomainAttributeInstance(instance, "price");
 		assertGenerated(aid);
 		assertGenerated(aname);
 		assertGenerated(aprice);
@@ -130,6 +133,8 @@ public class DomainInstanceSetWire extends ValidInferenceTestCase {
 		Frame page = assertHasFrame(root, "Home");
 		
 		DomainIterator viewing = assertHasDomainIterator(page, "viewing instance");
+		DomainInstance instance = viewing.getCurrentInstance();
+		assertGenerated(instance);
 		InputForm view = assertHasInputForm(page, "View");
 		
 		// labels
@@ -144,9 +149,9 @@ public class DomainInstanceSetWire extends ValidInferenceTestCase {
 		assertHasNone(view, "iaml:children", InputTextField.class);
 		
 		// domain object instance, generated attributes
-		DomainAttributeInstance aid = assertHasDomainAttributeInstance(viewing, "id");
-		DomainAttributeInstance aname = assertHasDomainAttributeInstance(viewing, "name");
-		DomainAttributeInstance aprice = assertHasDomainAttributeInstance(viewing, "price");
+		DomainAttributeInstance aid = assertHasDomainAttributeInstance(instance, "id");
+		DomainAttributeInstance aname = assertHasDomainAttributeInstance(instance, "name");
+		DomainAttributeInstance aprice = assertHasDomainAttributeInstance(instance, "price");
 		assertGenerated(aid);
 		assertGenerated(aname);
 		assertGenerated(aprice);

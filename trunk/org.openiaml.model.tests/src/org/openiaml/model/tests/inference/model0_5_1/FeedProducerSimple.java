@@ -9,6 +9,7 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
+import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;
@@ -113,7 +114,9 @@ public class FeedProducerSimple extends InferenceTestCase {
 		InputForm form = assertHasInputForm(feed, "Feed Item");
 
 		// the 'generated primary key' is from the instance
-		DomainIterator instance = assertHasDomainIterator(feed, "recent news");
+		DomainIterator iterator = assertHasDomainIterator(feed, "recent news");
+		DomainInstance instance = iterator.getCurrentInstance();
+		assertGenerated(instance);
 		DomainAttributeInstance pk = assertHasDomainAttributeInstance(instance, "generated primary key");
 		assertGenerated(pk);
 		

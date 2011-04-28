@@ -12,6 +12,7 @@ import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
+import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.visual.Frame;
@@ -139,6 +140,8 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 		
 		Frame home = assertHasFrame(root, "Home");
 		DomainIterator iterator = assertHasDomainIterator(home, "Select Contact");
+		DomainInstance instance = iterator.getCurrentInstance();
+		assertGenerated(instance);
 		InputForm containerForm = assertHasInputForm(home, "Select Contact");
 		
 		// same name as the iterator
@@ -149,8 +152,8 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 		assertGenerated(assertHasSetWire(root, iterator, list));
 
 		// check contents of Iterator
-		DomainAttributeInstance iname = assertHasDomainAttributeInstance(iterator, "name");
-		DomainAttributeInstance iemail = assertHasDomainAttributeInstance(iterator, "email");
+		DomainAttributeInstance iname = assertHasDomainAttributeInstance(instance, "name");
+		DomainAttributeInstance iemail = assertHasDomainAttributeInstance(instance, "email");
 
 		// test contents of list
 		Label lname = assertHasLabel(list, "name");

@@ -67,8 +67,8 @@ public class SelectWireAttributeInference extends EclipseInheritanceInterface {
 		
 		// the instance has both of these values
 		assertEquals(2, typeSelect(instance.getFeatureInstances(), DomainAttributeInstance.class).size());
-		assertHasDomainAttributeInstance(di, "attribute");
-		assertHasDomainAttributeInstance(di, "generated primary key");
+		assertHasDomainAttributeInstance(instance, "attribute");
+		assertHasDomainAttributeInstance(instance, "generated primary key");
 
 		// the form only has 'attribute'
 		assertEquals(1, form.getChildren().size());

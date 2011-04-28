@@ -7,6 +7,7 @@ import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.components.LoginHandlerTypes;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
+import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;
@@ -50,7 +51,9 @@ public class LoginHandlerInstanceMultiple extends InferenceTestCase {
 		LoginHandler handler = assertHasLoginHandler(session, "login handler");
 		assertNotGenerated(handler);
 		assertEquals(handler.getType(), LoginHandlerTypes.DOMAIN_OBJECT);
-		DomainIterator instance = assertHasDomainIterator(session, "logged in user");
+		DomainIterator iterator = assertHasDomainIterator(session, "logged in user");
+		assertNotGenerated(iterator);
+		DomainInstance instance = iterator.getCurrentInstance();
 		assertNotGenerated(instance);
 
 		// only one attribute
@@ -92,8 +95,9 @@ public class LoginHandlerInstanceMultiple extends InferenceTestCase {
 		
 		Session session = assertHasSession(root, "my session");
 		DomainSchema object = assertHasDomainSchema(root, "User");
-		DomainIterator instance = assertHasDomainIterator(session, "logged in user");
-
+		DomainIterator iterator = assertHasDomainIterator(session, "logged in user");
+		DomainInstance instance = iterator.getCurrentInstance();
+		
 		DomainAttributeInstance ai = assertHasDomainAttributeInstance(instance, "name");
 		DomainAttribute a = assertHasDomainAttribute(object, "name");
 		

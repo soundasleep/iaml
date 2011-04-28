@@ -7,6 +7,7 @@ import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
+import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
@@ -67,7 +68,9 @@ public class IteratedSyncWires extends InferenceTestCase {
 	 */
 	public void testAttributesCreated() throws Exception {
 		Frame home = assertHasFrame(root, "Home");
-		DomainIterator instance = assertHasDomainIterator(home, "iterable");
+		DomainIterator iterator = assertHasDomainIterator(home, "iterable");
+		DomainInstance instance = iterator.getCurrentInstance();
+		assertGenerated(instance);
 		InputForm form = assertHasInputForm(home, "View News");
 
 		InputTextField t1 = assertHasInputTextField(form, "title");
@@ -98,7 +101,10 @@ public class IteratedSyncWires extends InferenceTestCase {
 	 */
 	public void testTextFieldEditCallsAttributeUpdate() throws Exception {
 		Frame home = assertHasFrame(root, "Home");
-		DomainIterator instance = assertHasDomainIterator(home, "iterable");
+		DomainIterator iterator = assertHasDomainIterator(home, "iterable");
+		DomainInstance instance = iterator.getCurrentInstance();
+		assertGenerated(instance);
+		
 		InputForm form = assertHasInputForm(home, "View News");
 		InputTextField t1 = assertHasInputTextField(form, "title");
 		DomainAttributeInstance a1 = assertHasDomainAttributeInstance(instance, "title");
@@ -119,7 +125,10 @@ public class IteratedSyncWires extends InferenceTestCase {
 	 */
 	public void testAttributeEditCallsTextFieldUpdate() throws Exception {
 		Frame home = assertHasFrame(root, "Home");
-		DomainIterator instance = assertHasDomainIterator(home, "iterable");
+		DomainIterator iterator = assertHasDomainIterator(home, "iterable");
+		DomainInstance instance = iterator.getCurrentInstance();
+		assertGenerated(instance);
+		
 		InputForm form = assertHasInputForm(home, "View News");
 		InputTextField t1 = assertHasInputTextField(form, "title");
 		DomainAttributeInstance a1 = assertHasDomainAttributeInstance(instance, "title");

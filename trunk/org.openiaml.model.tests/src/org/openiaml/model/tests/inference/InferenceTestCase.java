@@ -44,6 +44,7 @@ import org.openiaml.model.model.components.EntryGate;
 import org.openiaml.model.model.components.ExitGate;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
+import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;
@@ -375,9 +376,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public DomainAttributeInstance assertHasDomainAttributeInstance(DomainIterator obj,
+	public DomainAttributeInstance assertHasDomainAttributeInstance(DomainInstance obj,
 			String string) throws JaxenException {
-		return (DomainAttributeInstance) queryOne(obj, "iaml.domain:attributes[iaml:name='" + string + "']");
+		return (DomainAttributeInstance) queryOne(obj, "iaml.domain:featureInstances[iaml:name='" + string + "']");
 	}
 
 	/**
@@ -408,9 +409,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 *
 	 * @return The element found
 	 */
-	public void assertHasNoDomainAttributeInstance(DomainIterator obj,
+	public void assertHasNoDomainAttributeInstance(DomainInstance obj,
 			String string) throws JaxenException {
-		assertHasNone(obj, "iaml.domain:attributes[iaml:name='" + string + "']");
+		assertHasNone(obj, "iaml.domain:featureInstances[iaml:name='" + string + "']");
 	}
 
 	/**

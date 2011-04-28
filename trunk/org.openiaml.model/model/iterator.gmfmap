@@ -264,34 +264,29 @@
   </nodes>
   <nodes>
     <containmentFeature
-        href="iaml.ecore#//domain/DomainIterator/attributes"/>
+        href="iaml.ecore#//domain/DomainIterator/currentInstance"/>
     <ownedChild>
       <domainMetaElement
-          href="iaml.ecore#//DomainAttributeInstance"/>
+          href="iaml.ecore#//domain/DomainInstance"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping"
           editorPattern=""
           editPattern="">
         <diagramLabel
-            href="iaml.gmfgraph#DomainAttributeInstanceName"/>
+            href="iaml.gmfgraph#DomainInstanceName"/>
         <features
             href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
           readOnly="true">
         <diagramLabel
-            href="iaml.gmfgraph#DomainAttributeInstanceStereotype"/>
-      </labelMappings>
-      <labelMappings
-          readOnly="true">
-        <diagramLabel
-            href="iaml.gmfgraph#DomainAttributeInstanceType"/>
+            href="iaml.gmfgraph#DomainInstanceStereotype"/>
       </labelMappings>
       <tool
           xsi:type="gmftool:CreationTool"
           href="iterator.gmftool#//@palette/@tools.0/@tools.2"/>
       <diagramNode
-          href="iaml.gmfgraph#DomainAttributeInstance"/>
+          href="iaml.gmfgraph#DomainInstance"/>
     </ownedChild>
   </nodes>
   <nodes>

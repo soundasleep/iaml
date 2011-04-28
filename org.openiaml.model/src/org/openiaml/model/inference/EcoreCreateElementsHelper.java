@@ -214,7 +214,7 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return obj;
 	}
 	
-	public DomainInstance generatedDomainInstance(GeneratesElements by, Scope container) throws InferenceException {
+	public DomainInstance generatedDomainInstance(GeneratesElements by, DomainIterator container) throws InferenceException {
 		DomainInstance obj = (DomainInstance) createElement( container, DomainPackage.eINSTANCE.getDomainInstance(), DomainPackage.eINSTANCE.getDomainIterator_CurrentInstance() );
 		setGeneratedBy(obj, by);
 		return obj;

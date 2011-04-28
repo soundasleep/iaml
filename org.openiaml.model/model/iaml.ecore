@@ -1395,7 +1395,7 @@
       </eStructuralFeatures>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="DomainFeatureInstance" abstract="true"
-        eSuperTypes="#//Changeable #//ContainsOperations #//ApplicationElement #//wires/ExtendsEdgesSource #//wires/ExtendsEdgeDestination">
+        eSuperTypes="#//Changeable #//ContainsOperations #//ApplicationElement #//wires/ExtendsEdgesSource #//wires/ExtendsEdgeDestination #//CanBeSynced">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Represents an instance of a {@model DomainFeature}; the value of this instance may be temporary - accessible only to its {@model Scope} - and not yet {@model DomainObjectInstance#save stored in the database}."/>
       </eAnnotations>

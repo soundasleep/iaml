@@ -14,7 +14,6 @@
     <containsShortcutsTo>iaml_instance</containsShortcutsTo>
     <containsShortcutsTo>iaml_visual</containsShortcutsTo>
     <containsShortcutsTo>iaml_email</containsShortcutsTo>
-    <containsShortcutsTo>iaml_Copy of root</containsShortcutsTo>
     <shortcutsProvidedFor>iaml_iterator</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_condition</shortcutsProvidedFor>
@@ -26,7 +25,6 @@
     <shortcutsProvidedFor>iaml_instance</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_visual</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_email</shortcutsProvidedFor>
-    <shortcutsProvidedFor>iaml_Copy of root</shortcutsProvidedFor>
     <domainDiagramElement href="iaml.genmodel#//model/domain/DomainInstance"/>
     <topLevelNodes canonicalEditPolicyClassName="DomainAttributeInstanceCanonicalEditPolicy" createCommandClassName="DomainAttributeInstanceCreateCommand" editPartClassName="DomainAttributeInstanceEditPart" graphicalNodeEditPolicyClassName="DomainAttributeInstanceGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="DomainAttributeInstanceItemSemanticEditPolicy" notationViewFactoryClassName="DomainAttributeInstanceViewFactory" visualID="2001">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>

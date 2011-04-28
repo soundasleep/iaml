@@ -158,7 +158,7 @@ public class MigrateModelAction extends ProgressEnabledUIAction<IFile> {
 	 * @param monitor
 	 * @return
 	 */
-	protected IStatus migrateModel(IFile source, IFile target,
+	public IStatus migrateModel(IFile source, IFile target,
 			IProgressMonitor monitor) {
 		MigrationController mc = new MigrationController();
 		return mc.migrateModel(source, target, monitor);

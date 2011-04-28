@@ -15,7 +15,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.openiaml.model.runtime;bundle-version="0.3.1",
  org.eclipse.emf.ecore;bundle-version="2.5.0",
  org.eclipse.emf.ecore.xmi;bundle-version="2.5.0",
- org.openiaml.iacleaner;bundle-version="0.3.0",
  org.openiaml.emf.properties;bundle-version="0.4.4",
  org.openiaml.model.migration;bundle-version="0.5.3"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

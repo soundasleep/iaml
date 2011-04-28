@@ -9,9 +9,9 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.ui.IEditorPart;
-import org.openiaml.model.custom.actions.MigrateModelAction;
 import org.openiaml.model.diagram.part.IamlDiagramEditor;
 import org.openiaml.model.migrate.IamlModelMigrator;
+import org.openiaml.model.migrate.MigrationController;
 import org.openiaml.model.tests.eclipse.EclipseTestCaseHelper;
 
 /**
@@ -57,7 +57,7 @@ public abstract class AbstractMigrateTestCase extends EclipseTestCaseHelper {
 
 		// migrate the model
 		assertFalse("the target model should not exist yet", targetModel.exists());
-		MigrateModelAction a = new MigrateModelAction();
+		MigrationController a = new MigrationController();
 		IStatus status = a.migrateModel(sourceModel, targetModel, new NullProgressMonitor());
 		assertStatusOK(status);
 		assertTrue("the target model should have been created", targetModel.exists());

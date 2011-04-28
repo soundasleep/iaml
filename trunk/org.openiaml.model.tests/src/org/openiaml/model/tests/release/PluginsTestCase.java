@@ -402,7 +402,7 @@ public class PluginsTestCase extends XmlTestCase {
 		for (String file : getAllGmfGens()) {
 			Document doc = GmfGenTestCase.getCache().get(file);
 			IterableElementList nodes = xpath(doc, "//diagram/containsShortcutsTo");
-			assertEquals(nodes.getLength(), shortcuts.size());
+			assertEquals(file, nodes.getLength(), shortcuts.size());
 			for (Element node : nodes) {
 				String value = node.getFirstChild().getNodeValue();
 				assertTrue( file + ": contains " + value, shortcuts.contains(value) );
@@ -431,7 +431,7 @@ public class PluginsTestCase extends XmlTestCase {
 		for (String file : getAllGmfGens()) {
 			Document doc = GmfGenTestCase.getCache().get(file);
 			IterableElementList nodes = xpath(doc, "//diagram/shortcutsProvidedFor");
-			assertEquals(nodes.getLength(), shortcuts.size());
+			assertEquals(file, nodes.getLength(), shortcuts.size());
 			for (Element node : nodes) {
 				String value = node.getFirstChild().getNodeValue();
 				assertTrue( file + ": contains " + value, shortcuts.contains(value) );

@@ -4,7 +4,6 @@
 package org.openiaml.model.tests.inference.model0_4;
 
 import org.openiaml.model.model.ActionEdge;
-import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.PrimitiveCondition;

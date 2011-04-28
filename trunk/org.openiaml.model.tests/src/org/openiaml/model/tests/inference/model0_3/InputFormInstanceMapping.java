@@ -3,8 +3,9 @@
  */
 package org.openiaml.model.tests.inference.model0_3;
 
-import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.InternetApplication;
+import org.openiaml.model.model.domain.DomainAttributeInstance;
+import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;
@@ -53,7 +54,7 @@ public class InputFormInstanceMapping extends EclipseInheritanceInterface {
 		DomainIterator obj = assertHasDomainIterator(page, "User instance");
 
 		// the instance should be empty
-		assertEquals(0, obj.getAttributes().size());
+		assertNull(obj.getCurrentInstance());
 
 		// the untargeted form should remain empty
 		InputForm ignore = assertHasInputForm(page, "unrelated input form");
@@ -84,8 +85,12 @@ public class InputFormInstanceMapping extends EclipseInheritanceInterface {
 		assertEquals(1, page.getElements().size());	// domain object instance
 		DomainIterator obj = assertHasDomainIterator(page, "User instance");
 
+		// issue 241: there should now be a DomainInstance
+		DomainInstance instance = obj.getCurrentInstance();
+		assertGenerated(instance);
+		
 		// two attributes + generated primary key
-		assertEquals(3, obj.getAttributes().size());
+		assertEquals(3, typeSelect(instance.getFeatureInstances(), DomainAttributeInstance.class).size());
 
 		// get the domain attribute instances
 		DomainAttributeInstance username = assertHasDomainAttributeInstance(obj, "username");

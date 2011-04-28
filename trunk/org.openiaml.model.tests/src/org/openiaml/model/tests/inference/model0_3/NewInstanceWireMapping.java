@@ -3,8 +3,9 @@
  */
 package org.openiaml.model.tests.inference.model0_3;
 
-import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.InternetApplication;
+import org.openiaml.model.model.domain.DomainAttributeInstance;
+import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;
@@ -45,7 +46,7 @@ public class NewInstanceWireMapping extends EclipseInheritanceInterface {
 		DomainIterator obj = assertHasDomainIterator(page, "User instance");
 
 		// the instance should be empty
-		assertEquals(0, obj.getAttributes().size());
+		assertNull(obj.getCurrentInstance());
 		
 	}
 
@@ -68,9 +69,12 @@ public class NewInstanceWireMapping extends EclipseInheritanceInterface {
 		assertEquals(1, page.getElements().size());
 		DomainIterator obj = assertHasDomainIterator(page, "User instance");
 
-		// the instance should NOT be empty
-		// but contain three attributes (two plus a generated key)
-		assertEquals(3, obj.getAttributes().size());
+		// issue 241: there should now be a DomainInstance
+		DomainInstance instance = obj.getCurrentInstance();
+		assertGenerated(instance);
+		
+		// two attributes + generated primary key
+		assertEquals(3, typeSelect(instance.getFeatureInstances(), DomainAttributeInstance.class).size());
 
 		{
 			DomainAttributeInstance attr = assertHasDomainAttributeInstance(obj, "username");

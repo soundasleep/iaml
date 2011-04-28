@@ -40,7 +40,7 @@ public class ParentNamesTestCase extends XmlTestCase {
 	 */
 	private static final EClass[] PARENT_NAME_TYPES = new EClass[] {
 		ModelPackage.eINSTANCE.getDomainAttribute(),
-		ModelPackage.eINSTANCE.getDomainAttributeInstance(),
+		DomainPackage.eINSTANCE.getDomainAttributeInstance(),
 		ModelPackage.eINSTANCE.getEventTrigger(),
 		ModelPackage.eINSTANCE.getOperation(),
 		ModelPackage.eINSTANCE.getCondition(),
@@ -58,7 +58,7 @@ public class ParentNamesTestCase extends XmlTestCase {
 		// DomainAttribute
 		ModelPackage.eINSTANCE.getDomainAttribute(),
 		// DomainAttributeInstance
-		ModelPackage.eINSTANCE.getDomainAttributeInstance(),
+		DomainPackage.eINSTANCE.getDomainAttributeInstance(),
 		// EventTrigger
 		ModelPackage.eINSTANCE.getEventTrigger(),
 		// Operation
@@ -199,7 +199,7 @@ public class ParentNamesTestCase extends XmlTestCase {
 		OperationsPackage.eINSTANCE.getTemporaryVariable(),
 		ModelPackage.eINSTANCE.getProperty(),
 		ModelPackage.eINSTANCE.getDomainAttribute(),
-		ModelPackage.eINSTANCE.getDomainAttributeInstance(),
+		DomainPackage.eINSTANCE.getDomainAttributeInstance(),
 		VisualPackage.eINSTANCE.getInputTextField(),
 		VisualPackage.eINSTANCE.getLabel(),
 		

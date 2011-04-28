@@ -259,7 +259,7 @@ public class GmfGenTestCase extends XmlTestCase {
 		assertNotNull(editor);
 		
 		// sanity check
-		assertTrue(ModelPackage.eINSTANCE.getApplicationElement().isSuperTypeOf( ModelPackage.eINSTANCE.getDomainAttributeInstance() ));
+		assertTrue(ModelPackage.eINSTANCE.getApplicationElement().isSuperTypeOf( DomainPackage.eINSTANCE.getDomainAttributeInstance() ));
 		
 		// the meta element should be a subclass of the editor
 		assertTrue(filename + ": Element '" + metaHref + "' is not a subclass of diagram type '" + modelID + "' [resolved meta = '" + meta + "', editor = '" + editor + "']", 

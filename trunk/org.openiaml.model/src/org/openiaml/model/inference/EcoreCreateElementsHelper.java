@@ -19,7 +19,6 @@ import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsProperties;
 import org.openiaml.model.model.ContainsWires;
 import org.openiaml.model.model.DomainAttribute;
-import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
@@ -37,6 +36,8 @@ import org.openiaml.model.model.WireDestination;
 import org.openiaml.model.model.WireSource;
 import org.openiaml.model.model.components.ComponentsPackage;
 import org.openiaml.model.model.components.LoginHandler;
+import org.openiaml.model.model.domain.DomainAttributeInstance;
+import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainPackage;
 import org.openiaml.model.model.domain.DomainSchema;
@@ -212,6 +213,12 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setGeneratedBy(obj, by);
 		return obj;
 	}
+	
+	public DomainInstance generatedDomainInstance(GeneratesElements by, Scope container) throws InferenceException {
+		DomainInstance obj = (DomainInstance) createElement( container, DomainPackage.eINSTANCE.getDomainInstance(), DomainPackage.eINSTANCE.getDomainIterator_CurrentInstance() );
+		setGeneratedBy(obj, by);
+		return obj;
+	}
 
 	public DomainAttribute generatedDomainAttribute(GeneratesElements by, DomainSchema container) throws InferenceException {
 		DomainAttribute obj = (DomainAttribute) createElement( container, ModelPackage.eINSTANCE.getDomainAttribute(), DomainPackage.eINSTANCE.getDomainSchema_Attributes() );
@@ -219,8 +226,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return obj;
 	}
 
-	public DomainAttributeInstance generatedDomainAttributeInstance(GeneratesElements by, DomainIterator container) throws InferenceException {
-		DomainAttributeInstance obj = (DomainAttributeInstance) createElement( container, ModelPackage.eINSTANCE.getDomainAttributeInstance(), DomainPackage.eINSTANCE.getDomainIterator_Attributes() );
+	public DomainAttributeInstance generatedDomainAttributeInstance(GeneratesElements by, DomainInstance container) throws InferenceException {
+		DomainAttributeInstance obj = (DomainAttributeInstance) createElement( container, DomainPackage.eINSTANCE.getDomainAttributeInstance(), DomainPackage.eINSTANCE.getDomainInstance_FeatureInstances() );
 		setGeneratedBy(obj, by);
 		return obj;
 	}

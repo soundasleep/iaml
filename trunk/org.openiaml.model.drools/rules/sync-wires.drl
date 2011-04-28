@@ -49,6 +49,36 @@ rule "Sync wires between objects should create sync wires between all elements i
 		
 end
 
+rule "Sync wires to Domain Iterators should be copied to the contents of the Domain Iterator"
+	when
+		# source : SyncWire(, eval(connects(source, p1, p2)) )
+		source : SyncWire( overriddenNames not contains "sync" )
+		
+		# we put in these to prevent multiple wires being generated for two connects
+		p1 : CanBeSynced ( )
+		p2_container : DomainIterator ( )
+		p2 : DomainInstance ( eContainer == p2_container )
+		eval ( functions.connects( source, p1, p2_container )) # can no longer rely on unidirectionality
+
+		eval (p1 != p2)
+		
+		e1 : CanBeSynced( eContainer == p1 )
+		e2 : CanBeSynced( eContainer == p2 )
+
+		eval(functions.nameMatches(e1, e2))
+	
+		not (sw : SyncWire( eContainer == source, eval(functions.connects( sw, e1, e2)) ))
+		
+		eval ( handler.veto( source ))
+		
+	then
+		SyncWire sw = handler.generatedSyncWire(source, source, e1, e2);
+		handler.setName(sw, "sync");
+		handler.setExecuteOnInput(sw, source.isExecuteOnInput());
+		queue.add(sw, drools);
+		
+end
+
 rule "Sync wires from DomainSchema to CanBeSynced"
 	when
 		# source : SyncWire(, eval(connects(source, p1, p2)) )
@@ -302,13 +332,55 @@ rule "Cascaded SyncWires: Conditions from parent to child"
 
 end
 
+rule "Cascaded SyncWires: Conditions from parent to child (Domain Instances)"
+	when
+
+		# the containing elements	
+		sw : SyncWire (  )
+		source : CanBeSynced( )  
+		// cannot use 'sw.to == target, target != source'
+		// can NOT use 'sw.to == target, this != source'
+		// can NOT use 'sw.to == this, this != source'
+		target_container : DomainIterator ( )
+		target : DomainInstance( eContainer == target_container )
+		
+		eval ( target != source )
+		
+		eval ( functions.connects(sw, source, target_container )) # can no longer rely on unidirectionality
+				
+		# the elements contained
+		e1 : CanBeSynced( eContainer == source )
+		e2 : CanBeSynced( eContainer == target, eval(functions.nameMatches(e1, e2)) )
+		esw : SyncWire( name == "sync", eval(functions.connects(esw, e1, e2)) )
+		
+		# there is a condition on the containing sync wire
+		condition : Condition ( )
+		cw : ConditionEdge( from == condition, to == sw )
+
+		# and there isn't one on the element sync wire
+		not (ecw : ConditionEdge( from == condition, to == esw )) 
+						
+		eval ( handler.veto( cw ))
+		
+	then
+		ConditionEdge ecw = handler.generatedConditionEdge( cw, sw, condition, esw );
+		handler.setName(ecw, "[copied] from: " + cw.getId());
+		queue.add(ecw, drools);
+
+end
+
 rule "Cascaded SyncWires: Parameters from parent to child"
 	when
 
-		# the containing elements
+		# the containing elements	
 		sw : SyncWire (  )
 		source : CanBeSynced( )  
-		target : CanBeSynced( )
+		// cannot use 'sw.to == target, target != source'
+		// can NOT use 'sw.to == target, this != source'
+		// can NOT use 'sw.to == this, this != source'
+		target_container : DomainIterator ( )
+		target : DomainInstance( eContainer == target_container )
+		
 		eval ( target != source )
 
 		eval ( functions.connectsSync1(sw, source, target ))
@@ -482,9 +554,10 @@ rule "Refresh New Instance Object mappings (except for generated primary keys) w
 	when
 		sync : SyncWire(  )
 		form : InputForm (  )
-		instance : DomainIterator (  )
+		iterator : DomainIterator ( )
+		instance : DomainInstance ( iterator.currentInstance == instance )
 		
-		eval(functions.connects(sync, form, instance))
+		eval(functions.connects(sync, form, iterator))
 		
 		originalAttribute : DomainAttribute ( )
 		attribute : DomainAttributeInstance( eContainer == instance )
@@ -607,9 +680,10 @@ rule "A SyncWire between Attributes selected from a NewInstanceWire need to chec
 	when
 		sync : SyncWire(  )
 		form : InputForm (  )
-		instance : DomainIterator ( query == "new" )
+		iterator : DomainIterator ( query == "new" )
+		instance : DomainInstance ( iterator.currentInstance == instance )
 		
-		eval(functions.connects(sync, form, instance))
+		eval(functions.connects(sync, form, iterator))
 		
 		# contained attribute/field
 		attribute : DomainAttributeInstance( eContainer == instance )
@@ -627,8 +701,9 @@ rule "A SyncWire between Attributes selected from a NewInstanceWire need to chec
 		
 		param : ParameterEdge ( from == attributeValue, to == run )  
 		
-		# 'not empty' condition in the instance
-		existsCondition : Condition ( eContainer == instance, name == "not empty" )
+		# 'not empty' condition in the iterator
+		# TODO this could also be part of the DomainInstance
+		existsCondition : Condition ( eContainer == iterator, name == "not empty" )
 		
 		# but not connected		
 		not (ConditionEdge ( from == existsCondition, to == run ))

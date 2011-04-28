@@ -237,7 +237,8 @@ rule "Create a Link Button for the source of a DetailWire (not IteratorList): Ad
 		
 		schema : DomainSchema ( )
 		domainSource : DomainSource ( )
-		instance : DomainIterator( eContainer == container )
+		instance : DomainIterator ( )
+		inst2 : DomainInstance ( instance.currentInstance == inst2 )
 
 		selectEdge : SelectEdge ( from == instance, to == domainSource )
 		schemaEdge : SchemaEdge ( from == domainSource, to == schema )
@@ -254,7 +255,7 @@ rule "Create a Link Button for the source of a DetailWire (not IteratorList): Ad
 		nav : ActionEdge ( from == onClick, to == target )
 
 		pkAttribute : DomainAttribute ( eContainer == schema, primaryKey == true )
-		pkInstance : DomainAttributeInstance ( eContainer == instance )
+		pkInstance : DomainAttributeInstance ( eContainer == inst2 )
 		ExtendsEdge ( from == pkInstance, to == pkAttribute )
 		
 		pk : Property ( pkInstance.fieldValue == pk ) 
@@ -276,8 +277,9 @@ rule "Create a Link Button for the source of a DetailWire (IteratorList): Add Pa
 		
 		schema : DomainSchema ( )
 		domainSource : DomainSource ( )
-		instance : DomainIterator( eContainer == container )
-
+		instance : DomainIterator ( )
+		inst2 : DomainInstance ( instance.currentInstance == inst2 )
+		
 		selectEdge : SelectEdge ( from == instance, to == domainSource )
 		schemaEdge : SchemaEdge ( from == domainSource, to == schema )
 
@@ -291,7 +293,7 @@ rule "Create a Link Button for the source of a DetailWire (IteratorList): Add Pa
 		nav : ActionEdge ( from == onClick, to == target )
 
 		pkAttribute : DomainAttribute ( eContainer == schema, primaryKey == true )
-		pkInstance : DomainAttributeInstance ( eContainer == instance )
+		pkInstance : DomainAttributeInstance ( eContainer == inst2 )
 		ExtendsEdge ( from == pkInstance, to == pkAttribute )
 		
 		# attribute instance is connected to the Container by a SetWire or SyncWire to a Hidden

@@ -84,7 +84,7 @@ public class ElementModeldocTestCase extends XmlTestCase {
 			for (String s : missing) {
 				System.err.println("Missing: " + s);
 			}
-			assertEquals("Some non-abstract, non-interface model elements do not have a corresponding generated diagram: " + missing, 0, missing.size());
+			assertEquals("Some non-abstract, non-interface model elements do not have a corresponding generated sample element image: " + missing, 0, missing.size());
 		}
 	}
 	

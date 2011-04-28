@@ -5,6 +5,8 @@ package org.openiaml.model.tests.inference.model0_4;
 
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.InternetApplication;
+import org.openiaml.model.model.domain.DomainAttributeInstance;
+import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.visual.Frame;
@@ -36,8 +38,8 @@ public class SelectWireAttributeInference extends EclipseInheritanceInterface {
 		assertEquals(1, dobj.getAttributes().size());
 		assertHasDomainAttribute(dobj, "attribute");
 
-		// the instance does not have it yet
-		assertEquals(0, di.getAttributes().size());
+		// the iterator does not yet contain an instance
+		assertNull(di.getCurrentInstance());
 
 		// or the form
 		assertEquals(0, form.getChildren().size());
@@ -59,8 +61,12 @@ public class SelectWireAttributeInference extends EclipseInheritanceInterface {
 		assertTrue(key.isPrimaryKey());
 		assertTrue(key.isIsGenerated());
 
+		// an instance is created
+		DomainInstance instance = di.getCurrentInstance();
+		assertGenerated(instance);
+		
 		// the instance has both of these values
-		assertEquals(2, di.getAttributes().size());
+		assertEquals(2, typeSelect(instance.getFeatureInstances(), DomainAttributeInstance.class).size());
 		assertHasDomainAttributeInstance(di, "attribute");
 		assertHasDomainAttributeInstance(di, "generated primary key");
 

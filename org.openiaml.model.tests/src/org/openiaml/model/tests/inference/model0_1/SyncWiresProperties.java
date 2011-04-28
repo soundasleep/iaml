@@ -17,7 +17,6 @@ import org.openiaml.model.model.domain.DomainSource;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.SyncWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 

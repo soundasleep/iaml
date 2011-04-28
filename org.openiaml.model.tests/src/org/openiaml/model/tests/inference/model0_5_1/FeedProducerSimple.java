@@ -4,11 +4,11 @@
 package org.openiaml.model.tests.inference.model0_5_1;
 
 import org.openiaml.model.model.ActionEdge;
-import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.QueryParameter;
+import org.openiaml.model.model.domain.DomainAttributeInstance;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;

@@ -4,9 +4,9 @@
 package org.openiaml.model.tests.inference.model0_4;
 
 import org.openiaml.model.model.DomainAttribute;
-import org.openiaml.model.model.DomainAttributeInstance;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.components.LoginHandlerTypes;
+import org.openiaml.model.model.domain.DomainAttributeInstance;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;

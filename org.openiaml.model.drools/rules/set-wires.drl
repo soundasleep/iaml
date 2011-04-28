@@ -41,6 +41,51 @@ rule "Set wires between objects should create set wires between all elements ins
 		
 end
 
+rule "Copy set wires: Domain Instances (source)"
+	when
+		p1_container : DomainIterator ( )
+		p1 : DomainInstance( )
+		p2 : CanBeSynced( this != p1 )
+		source : SetWire( from == p1_container, to == p2, overriddenNames not contains "set" )
+		
+		e1 : CanBeSynced( eContainer == p1 )
+		e2 : CanBeSynced( eContainer == p2, eval(functions.nameMatches(e1, e2)) )
+	
+		not (sw : SetWire( eContainer == source, from == e1, to == e2 ))
+				
+		eval ( handler.veto( source ))
+		
+	then
+		SetWire sw = handler.generatedSetWire(source, source, e1, e2);
+		handler.setName(sw, "set");
+		handler.setExecuteOnInput(sw, source.isExecuteOnInput());
+		queue.add(sw, drools);
+		
+end
+
+
+rule "Copy set wires: Domain Instances (target)"
+	when
+		p1 : CanBeSynced( )
+		p2_container : DomainIterator ( )
+		p2 : DomainInstance( this != p1 )
+		source : SetWire( from == p1, to == p2_container, overriddenNames not contains "set" )
+		
+		e1 : CanBeSynced( eContainer == p1 )
+		e2 : CanBeSynced( eContainer == p2, eval(functions.nameMatches(e1, e2)) )
+	
+		not (sw : SetWire( eContainer == source, from == e1, to == e2 ))
+				
+		eval ( handler.veto( source ))
+		
+	then
+		SetWire sw = handler.generatedSetWire(source, source, e1, e2);
+		handler.setName(sw, "set");
+		handler.setExecuteOnInput(sw, source.isExecuteOnInput());
+		queue.add(sw, drools);
+		
+end
+
 rule "Set wires from DomainSchema to CanBeSynced"
 	when
 		# we put in these to prevent multiple wires being generated for two connects
@@ -331,6 +376,53 @@ rule "Connect parameter wire to: run instance wire from target.access to target.
 
 end
 
+rule "Connect parameter wire: Domain Instance (source)"
+	when
+		source_container : DomainIterator( )
+		source : DomainInstance ( eContainer == source_container )
+		target : CanBeSynced( )
+		sw : SetWire( from == source_container, to == target, overriddenNames not contains "[sync] run instance parameter (source.access)" )
+	
+		event : EventTrigger( eContainer == target, name=="access" )
+		operation : Operation( eContainer == target, name=="init" )
+		field : Property( source.fieldValue == field )
+		wire : ActionEdge( from == event, to == operation, name == "run", eContainer == sw )
+		
+		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
+						
+		eval ( handler.veto( sw ))
+		
+	then
+		ParameterEdge pw = handler.generatedParameterEdge(sw, sw, field, wire); 
+		handler.setName(pw, "[sync] run instance parameter (source.access)"); 
+		queue.add(pw, drools);
+
+end
+
+rule "Connect parameter wire: Domain Instance (target)"
+	when
+		source : CanBeSynced( )
+		target_container : DomainIterator( )
+		target : DomainInstance ( eContainer == target_container )
+		sw : SetWire( from == source, to == target_container, overriddenNames not contains "[sync] run instance parameter (source.access)" )
+	
+		event : EventTrigger( eContainer == target, name=="access" )
+		operation : Operation( eContainer == target, name=="init" )
+		field : Property( source.fieldValue == field )
+		wire : ActionEdge( from == event, to == operation, name == "run", eContainer == sw )
+		
+		not (ParameterEdge( eContainer == sw, from == field, to == wire )) 
+						
+		eval ( handler.veto( sw ))
+		
+	then
+		ParameterEdge pw = handler.generatedParameterEdge(sw, sw, field, wire); 
+		handler.setName(pw, "[sync] run instance parameter (source.access)"); 
+		queue.add(pw, drools);
+
+end
+
+
 /**
  * I think that chained SetWires are generally impossible. Consider:
  * 
@@ -385,6 +477,66 @@ rule "Cascaded SetWires: Conditions from parent to child [set]"
 
 end
 
+rule "Cascaded SetWires: Conditions: Domain Iterator (source)"
+	when
+
+		# the containing elements	
+		source_container : DomainIterator( )
+		source : DomainInstance( eContainer == source_container )
+		target : CanBeSynced( )
+		sw : SetWire ( from == source_container, to == target )
+		
+		# the elements contained
+		e1 : CanBeSynced( eContainer == source )
+		e2 : CanBeSynced( eContainer == target, eval(functions.nameMatches(e1, e2)) )
+		esw : SetWire( from == e1, to == e2 )
+		
+		# there is a condition on the containing sync wire
+		condition : Condition ( )
+		cw : ConditionEdge( from == condition, to == sw )
+
+		# and there isn't one on the element sync wire
+		not (ecw : ConditionEdge( from == condition, to == esw )) 
+						
+		eval ( handler.veto( cw ))
+		
+	then
+		ConditionEdge ecw = handler.generatedConditionEdge( cw, sw, condition, esw );
+		handler.setName(ecw, "[copied] from: " + cw.getId());
+		queue.add(ecw, drools);
+
+end
+
+rule "Cascaded SetWires: Conditions: Domain Iterator (target)"
+	when
+
+		# the containing elements	
+		source : CanBeSynced( )
+		target_container : DomainIterator( )
+		target : DomainInstance( eContainer == target_container )
+		sw : SetWire ( from == source, to == target_container )
+		
+		# the elements contained
+		e1 : CanBeSynced( eContainer == source )
+		e2 : CanBeSynced( eContainer == target, eval(functions.nameMatches(e1, e2)) )
+		esw : SetWire( from == e1, to == e2 )
+		
+		# there is a condition on the containing sync wire
+		condition : Condition ( )
+		cw : ConditionEdge( from == condition, to == sw )
+
+		# and there isn't one on the element sync wire
+		not (ecw : ConditionEdge( from == condition, to == esw )) 
+						
+		eval ( handler.veto( cw ))
+		
+	then
+		ConditionEdge ecw = handler.generatedConditionEdge( cw, sw, condition, esw );
+		handler.setName(ecw, "[copied] from: " + cw.getId());
+		queue.add(ecw, drools);
+
+end
+
 rule "Cascaded SetWires: Parameters from parent to child [set]"
 	when
 
@@ -392,6 +544,82 @@ rule "Cascaded SetWires: Parameters from parent to child [set]"
 		source : CanBeSynced( )
 		target : CanBeSynced( )
 		sw : SetWire ( from == source, to == target )
+		
+		# the elements contained
+		e1 : CanBeSynced( eContainer == source )
+		e2 : CanBeSynced( eContainer == target, eval(functions.nameMatches(e1, e2)) )
+		esw : SetWire( from == e1, to == e2 )
+		
+		# there is a condition on the containing sync wire
+		condition : Condition ( )
+		cw : ConditionEdge( from == condition, to == sw )
+		
+		# the generated condition wire
+		ecw : ConditionEdge( from == condition, to == esw )
+		
+		# there is a parameter on the condition wire
+		parameter : ParameterEdgesSource( )
+		pw : ParameterEdge( from == parameter, to == cw )
+
+		# and there isn't one on the element sync wire
+		not (epw : ParameterEdge( from == parameter, to == ecw )) 
+						
+		eval ( handler.veto( cw ))
+		
+	then
+		# create it
+		ParameterEdge epw = handler.generatedParameterEdge( cw, sw, parameter, ecw );
+		handler.setName(epw, "[copied] from: " + pw.getId());
+		queue.add(epw, drools);
+
+end
+
+rule "Cascaded SetWires: Parameters: Domain Iterator (source)"
+	when
+
+		# the containing elements
+		source_container : DomainIterator( )
+		source : DomainInstance( eContainer == source_container )
+		target : CanBeSynced( )
+		sw : SetWire ( from == source_container, to == target )
+		
+		# the elements contained
+		e1 : CanBeSynced( eContainer == source )
+		e2 : CanBeSynced( eContainer == target, eval(functions.nameMatches(e1, e2)) )
+		esw : SetWire( from == e1, to == e2 )
+		
+		# there is a condition on the containing sync wire
+		condition : Condition ( )
+		cw : ConditionEdge( from == condition, to == sw )
+		
+		# the generated condition wire
+		ecw : ConditionEdge( from == condition, to == esw )
+		
+		# there is a parameter on the condition wire
+		parameter : ParameterEdgesSource( )
+		pw : ParameterEdge( from == parameter, to == cw )
+
+		# and there isn't one on the element sync wire
+		not (epw : ParameterEdge( from == parameter, to == ecw )) 
+						
+		eval ( handler.veto( cw ))
+		
+	then
+		# create it
+		ParameterEdge epw = handler.generatedParameterEdge( cw, sw, parameter, ecw );
+		handler.setName(epw, "[copied] from: " + pw.getId());
+		queue.add(epw, drools);
+
+end
+
+rule "Cascaded SetWires: Parameters: Domain Iterator (target)"
+	when
+
+		# the containing elements
+		source : CanBeSynced( )
+		target_container : DomainIterator( )
+		target : DomainInstance( eContainer == target_container )
+		sw : SetWire ( from == source, to == target_container )
 		
 		# the elements contained
 		e1 : CanBeSynced( eContainer == source )

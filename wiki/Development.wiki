@@ -142,6 +142,7 @@ In the future this guide will also contain information on topics such as:
   # Testing
   # Deploying
   # Contributing
+    # [MetamodelRefactoring]
   # Extending
     # [CreatingANewVisualEditor]
     # [AddingANewEdgeType]

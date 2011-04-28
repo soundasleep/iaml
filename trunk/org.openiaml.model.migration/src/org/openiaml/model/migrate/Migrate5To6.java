@@ -9,7 +9,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 /**
- * <p>Migrate model version 0.5 to 0.6.
+ * <p>Migrate model version 0.5 to 0..
  *
  * <p>In the future most of this functionality should be refactored into an abstract superclass.
  *
@@ -140,6 +140,15 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 					"iaml:InternetApplication".equals(parent.getNodeName())) {
 				return "elements";
 			}
+		}
+		
+		// <attributes>
+		// --> <featureInstances xsi:type="iaml.domain:DomainAttributeInstance">
+		if ("attributes".equals(element.getNodeName())
+				&& element.getParentNode() != null
+				&& element.getParentNode() instanceof Element 
+				&& "iaml.domain:DomainIterator".equals(getXsiType((Element) element.getParentNode()))) {
+			return "featureInstances";
 		}
 
 		return super.getRenamedNode(nodeName, element, errors);
@@ -312,6 +321,77 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 		
 		// call super
 		return super.shouldCopyTextContent(oldElement, newElement);
+	}
+
+	/**
+	 * DomainIterator/DomainAttributeInstance has been changed
+	 * to DomainIterator/DomainInstance/DomainAttributeInstance
+	 * 
+	 * @see org.openiaml.model.migrate.DomBasedMigrator#appendElementToParent(org.w3c.dom.Node, org.w3c.dom.Element, org.w3c.dom.Element)
+	 */
+	@Override
+	public void appendElementToParent(Node parent, Element oldElement,
+			Element newElement, Document document) {
+		if ("attributes".equals(oldElement.getNodeName()) 
+				&& parent instanceof Element
+				&& "iaml.domain:DomainIterator".equals(getXsiType((Element) parent))) {
+			
+			// DomainIterator > DomainAttributeInstance
+			// --> DomainIterator > DomainInstance > DomainAttributeInstance
+			
+			// does a DomainInstance exist yet?
+			Element domainInstance = hasDomainInstance((Element) parent);
+			if (domainInstance == null) {
+				// add a new DomainInstance
+				domainInstance = createElement(document, "currentInstance");
+				domainInstance.setAttribute("id", generateMigratedId());
+				domainInstance.setAttribute("name", "Current instance");
+				parent.appendChild(domainInstance);
+			}
+			domainInstance.appendChild(newElement);
+			return;	// we're done
+		}
+			
+		// otherwise, do normal work
+		super.appendElementToParent(parent, oldElement, newElement, document);
+	}
+
+	/**
+	 * Does the given element have an &lt;currentInstance&gt; element?
+	 * If none is found, returns <code>null</code>.
+	 */
+	private Element hasDomainInstance(Element element) {
+		// recurse over children
+		for (int i = 0; i < element.getChildNodes().getLength(); i++) {
+			Node n = element.getChildNodes().item(i);
+			if (n.getNodeType() == Node.ELEMENT_NODE) {
+				if ("currentInstance".equals(n.getNodeName())) {
+					return (Element) n;
+				}
+			} else {					
+				// e.appendChild(document.adoptNode(n));	// this also adds the children of the node, which we don't want 
+			}
+		}
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.migrate.DomBasedMigrator#shouldAddType(org.w3c.dom.Element, java.util.List)
+	 */
+	@Override
+	protected String shouldAddType(Element oldElement,
+			List<ExpectedMigrationException> errors) {
+		// <attributes>
+		// --> <featureInstances xsi:type="iaml.domain:DomainAttributeInstance">
+		if ("attributes".equals(oldElement.getNodeName())
+				&& oldElement.getParentNode() != null
+				&& oldElement.getParentNode() instanceof Element 
+				&& "iaml.domain:DomainIterator".equals(getXsiType((Element) oldElement.getParentNode()))) {
+			return "iaml.domain:DomainAttributeInstance";
+		}
+
+		// otherwise, call super
+		return super.shouldAddType(oldElement, errors);
 	}
 	
 	

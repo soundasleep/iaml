@@ -10,7 +10,7 @@
 	«throwException("Cannot find a remote parameter source for " + this)»
 «ENDDEFINE»
 
-«DEFINE remoteValue(boolean php, boolean require, model::Property property) FOR model::DomainAttributeInstance»
+«DEFINE remoteValue(boolean php, boolean require, model::Property property) FOR model::domain::DomainAttributeInstance»
 	«IF php»
 		get_attribute_instance_«safeName()-»()
 	«ELSE»
@@ -25,7 +25,7 @@
 	«throwException("Cannot find a remote parameter source for " + this)»
 «ENDDEFINE»
 
-«DEFINE remoteValueIsSet(boolean php, model::Property property) FOR model::DomainAttributeInstance»
+«DEFINE remoteValueIsSet(boolean php, model::Property property) FOR model::domain::DomainAttributeInstance»
 	«IF php»
 		has_attribute_instance_«safeName()-»()
 	«ELSE»

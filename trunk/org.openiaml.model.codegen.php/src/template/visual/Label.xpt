@@ -151,7 +151,7 @@
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE staticInitialValue(model::visual::Frame currentFrame, String argName) FOR model::DomainAttributeInstance»
+«DEFINE staticInitialValue(model::visual::Frame currentFrame, String argName) FOR model::domain::DomainAttributeInstance»
 	«REM»from a domain attribute instance.«ENDREM»
 	if (!isset($check_attribute_instances) || !$check_attribute_instances || ($check_attribute_instances && has_attribute_instance_«safeName()»())) {
 		$temp = get_attribute_instance_«safeName()»();

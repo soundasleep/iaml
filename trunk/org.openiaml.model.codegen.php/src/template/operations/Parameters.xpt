@@ -81,7 +81,7 @@
 				values stored in sessions will not always be called 'fieldValue';
 				perhaps fieldValue is only those stored as part of InputTextFields, etc.
 			«ENDREM»
-			«IF model::DomainAttributeInstance.isInstance(eContainer)»
+			«IF model::domain::DomainAttributeInstance.isInstance(eContainer)»
 				«REM»from a DomainAttributeInstance«ENDREM»
 				«EXPAND RemoteParameter::remoteValue(php, false, this) FOR this.eContainer-»
 			«ELSEIF isDomainIteratorResults()»
@@ -113,7 +113,7 @@
 		«ELSE»
 			«IF model::Changeable.isInstance(eContainer) && ((model::Changeable) eContainer).fieldValue == this»
 				«REM»where is this value stored? is it available on the current frame?«ENDREM»
-				«IF model::DomainAttributeInstance.isInstance(eContainer)»
+				«IF model::domain::DomainAttributeInstance.isInstance(eContainer)»
 					«REM»from a DomainAttributeInstance«ENDREM»
 					«EXPAND RemoteParameter::remoteValue(php, false, this) FOR this.eContainer-»
 				«ELSE»
@@ -191,7 +191,7 @@
 «DEFINE dataSourceOnFrame FOR model::visual::Map»
 	document.getElementById('map_single_«safeNameString(id)»_value').value
 «ENDDEFINE»
-«DEFINE dataSourceOnFrame FOR model::DomainAttributeInstance»
+«DEFINE dataSourceOnFrame FOR model::domain::DomainAttributeInstance»
 	<?php /* DomainAttributeInstances are cached */ echo htmlspecialchars(get_attribute_instance_«safeName()»()); ?>
 «ENDDEFINE»
 
@@ -251,9 +251,9 @@
 		«IF readOnly»
 			/* read only Properties are always set */
 			true
-		«ELSEIF model::DomainAttributeInstance.isInstance(eContainer)»
+		«ELSEIF model::domain::DomainAttributeInstance.isInstance(eContainer)»
 			«REM»from a DomainAttributeInstance«ENDREM»
-			«EXPAND RemoteParameter::remoteValueIsSet(php, this) FOR (model::DomainAttributeInstance) eContainer-»
+			«EXPAND RemoteParameter::remoteValueIsSet(php, this) FOR (model::domain::DomainAttributeInstance) eContainer-»
 		«ELSEIF isDomainIteratorResults()»
 			/* DomainObjectInstance count is always available */
 			true			
@@ -269,9 +269,9 @@
 			true
 		«ELSEIF name == "fieldValue" || name == "currentInput"»
 			«REM»where is this value stored? is it available on the current frame?«ENDREM»
-			«IF model::DomainAttributeInstance.isInstance(eContainer)»
+			«IF model::domain::DomainAttributeInstance.isInstance(eContainer)»
 				«REM»from a DomainAttributeInstance«ENDREM»
-				«EXPAND RemoteParameter::remoteValueIsSet(php, this) FOR (model::DomainAttributeInstance) eContainer-»
+				«EXPAND RemoteParameter::remoteValueIsSet(php, this) FOR (model::domain::DomainAttributeInstance) eContainer-»
 			«ELSEIF model::VisibleThing.isInstance(eContainer)»
 				«REM»this is an inline call, thus the ternary operator«ENDREM»
 				(on_current_frame(get_frame_id(), "«safeName()»") ?	
@@ -300,7 +300,7 @@
 	«throwException("Unknown parameter wire source: " + this)»
 «ENDDEFINE»
 
-«DEFINE callParameterValueExists(Boolean php) FOR model::DomainAttributeInstance»
+«DEFINE callParameterValueExists(Boolean php) FOR model::domain::DomainAttributeInstance»
 	«IF php»
 		has_attribute_instance_«safeName()»()
 	«ELSE»

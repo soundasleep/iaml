@@ -276,11 +276,15 @@ function populate_iterator_list_«safeName()»() {
 			while (true) {
 				// for each attribute, call onChange; this will update
 				// all contained label values
-				«FOREACH iterator.attributes AS attribute»
-					«IF attribute.onChange != null»
-						«EXPAND template::events::EventCall::callEvent(true) FOR attribute.onChange»
-					«ENDIF» 
-				«ENDFOREACH»
+				«IF iterator.currentInstance == null»
+					// current instance = null
+				«ELSE»
+					«FOREACH iterator.currentInstance.featureInstances.typeSelect(model::domain::DomainAttributeInstance) AS attribute»
+						«IF attribute.onChange != null»
+							«EXPAND template::events::EventCall::callEvent(true) FOR attribute.onChange»
+						«ENDIF» 
+					«ENDFOREACH»
+				«ENDIF»
 				
 				// store all the children values
 				«FOREACH children AS child»

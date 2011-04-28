@@ -239,7 +239,7 @@
 	«EXPAND staticInitialValue(currentFrame) FOR fieldValue»
 «ENDDEFINE»
 
-«DEFINE staticInitialValue(model::visual::Frame currentFrame) FOR model::DomainAttributeInstance»
+«DEFINE staticInitialValue(model::visual::Frame currentFrame) FOR model::domain::DomainAttributeInstance»
 	«REM»from a domain attribute instance.«ENDREM»
 	<?php if (has_attribute_instance_«safeName()»()) { ?>
 	value="<?php echo htmlspecialchars(get_attribute_instance_«safeName()»()); ?>"

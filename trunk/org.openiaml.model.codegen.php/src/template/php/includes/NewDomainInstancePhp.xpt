@@ -49,11 +49,15 @@ echo_necessary_update_callbacks();
 		/* DomainObjectInstance "«name-»" («id-») */
 		
 		/* expand all attributes */
-		«EXPAND potentialDomainAttributeInstanceUpdatesRequired FOREACH attributes»
+		«IF currentInstance == null»
+			// no current instance in this iterator
+		«ELSE»
+			«EXPAND potentialDomainAttributeInstanceUpdatesRequired FOREACH currentInstance.featureInstances.typeSelect(model::domain::DomainAttributeInstance)»
+		«ENDIF»
 	}
 «ENDDEFINE»
 
-«DEFINE potentialDomainAttributeInstanceUpdatesRequired FOR model::DomainAttributeInstance»
+«DEFINE potentialDomainAttributeInstanceUpdatesRequired FOR model::domain::DomainAttributeInstance»
 	/* attribute «this» */
 	/* expand all 'edit' events */
 	«EXPAND potentialEditEvent("edit") FOREACH {onChange}»

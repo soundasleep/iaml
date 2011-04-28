@@ -9,7 +9,7 @@
 	«EXPAND domainAttributeInstanceInclude FOREACH getRoot().getAllDomainAttributeInstances()» 
 «ENDDEFINE»
 
-«DEFINE domainAttributeInstanceInclude FOR model::DomainAttributeInstance-»
+«DEFINE domainAttributeInstanceInclude FOR domain::DomainAttributeInstance-»
 	«FILE "output/domain/attribute/" + safeName() + ".php"-»
 <?php
 		
@@ -33,7 +33,7 @@
 /**
  * Get the include file for the given domain object.
  */
-«DEFINE getInclude FOR model::DomainAttributeInstance»
+«DEFINE getInclude FOR domain::DomainAttributeInstance»
 	require(ROOT_PATH . "domain/attribute/«safeName()».php");
 «ENDDEFINE»
 

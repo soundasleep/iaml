@@ -20,16 +20,20 @@
 	 * is out of bounds.
 	 */
 	function call_all_attribute_change_events_«safeName()-»() {
-		«FOREACH attributes AS a»
-		«IF a.onChange != null»
-			«REM»
-				we don't check to see that it is valid, because we want it
-				to fail. if you don't want the change to fail, you should use
-				the runtime 'hasNext/hasPrevious/empty' operations.
-			«ENDREM» 
-			«EXPAND template::events::EventCall::callEvent(true) FOR a.onChange»
+		«IF currentInstance == null»
+			// current instance is null
+		«ELSE»
+			«FOREACH currentInstance.featureInstances.typeSelect(domain::DomainAttributeInstance) AS a»
+			«IF a.onChange != null»
+				«REM»
+					we don't check to see that it is valid, because we want it
+					to fail. if you don't want the change to fail, you should use
+					the runtime 'hasNext/hasPrevious/empty' operations.
+				«ENDREM» 
+				«EXPAND template::events::EventCall::callEvent(true) FOR a.onChange»
+			«ENDIF»
+			«ENDFOREACH»
 		«ENDIF»
-		«ENDFOREACH»
 	}
 	
 	$current_offset_«safeName()» = 0;
@@ -136,7 +140,7 @@
  *		The current offset of browsing {@model DomainAttributeInstance instances} is stored
  *		in the containing {@model Session} if there is one, otherwise globally.
  */
-«DEFINE iterateDefinitions FOR model::DomainAttributeInstance-»
+«DEFINE iterateDefinitions FOR domain::DomainAttributeInstance-»
 	/**
 	 * Cycle through all attributes and call onChange. Will fail if it
 	 * is out of bounds.

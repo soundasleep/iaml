@@ -32,6 +32,9 @@ public class AllMigrationTests {
         // model 0.5
         suite.addTestSuite(Migrate0_5IterateSyncWires.class);
 
+        // model 0.6
+        suite.addTestSuite(Migrate0_5_3IteratorCurrentPointer.class);
+
         return suite; 
    }
 

@@ -1,0 +1,24 @@
+#summary Technical guidelines on refactoring the IAML metamodel
+#labels Development,Phase-Implementation
+
+[Development < Development]
+
+=Introduction=
+
+This is a brief technical guideline on what may be the best approach to implementing a metamodel refactoring, such as the major refactoring done to satisfy issue 234. Each step is illustrated with an example revision from the implementation of issue 241.
+
+  # Update the Ecore metamodel itself (r2700).
+  # Update diagram editors as in [CreatingANewVisualEditor] (r2706).
+  # Execute [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/release/AllReleaseTests.java?r=2315 AllReleaseTests] ensure the quality of the diagram editors.
+  # Test creating a new instance of the metamodel using the new diagram editors.
+  # Implement the metamodel changes in a model migrator (r2712).
+  # Migrate all test model instances (r2713).
+  # Fix compile errors in test cases (r2714).
+  # Clean and rebuild the inference plugin to identify build errors.
+  # Update inference rules to new metamodel (r2716).
+  # Run a quick inference smoke test, such as [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/inference/model0_4/AllModel0_4InferenceTests.java?r=2710 AllModel0_4InferenceTests].
+  # Execute [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/release/AllReleaseTests.java?r=2315 AllReleaseTests] to synchronise the OAW version of the IAML metamodel.
+  # Clean and rebuild the codegen plugin to identify build errors.
+  # Update codegen templates to new metamodel (r2718).
+  # Run a quick codegen smoke test, such as [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_6/AllModel0_6CodegenTests.java?r=2710 AllModel0_6CodegenTests].
+  # Run [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/AllTests.java?r=2710 AllTests], identify failing test cases, fix errors.

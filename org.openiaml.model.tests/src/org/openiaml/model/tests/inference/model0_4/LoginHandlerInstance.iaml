@@ -6,9 +6,11 @@
       <wires xsi:type="iaml.wires:SetWire" id="wires.122f7c6a100.e" name="set" from="components.122f7c6a40e.1" to="domain.128807fbeba.d3f"/>
     </elements>
     <elements xsi:type="iaml.domain:DomainIterator" id="domain.128807fbeba.d3f" name="logged in user" inWires="wires.122f7c6a100.e" autosave="true">
-      <attributes id="model.122f7c69efd.106" name="name" outWires="wires.122f7c6a100.3a">
-        <wires xsi:type="iaml.wires:SyncWire" id="wires.122f7c6a100.3a" name="sync" from="model.122f7c69efd.106" to="visual.122f7c6a006.56"/>
-      </attributes>
+      <currentInstance id="migrated0" name="Current instance">
+        <featureInstances xsi:type="iaml.domain:DomainAttributeInstance" id="model.122f7c69efd.106" name="name" outWires="wires.122f7c6a100.3a">
+          <wires xsi:type="iaml.wires:SyncWire" id="wires.122f7c6a100.3a" name="sync" from="model.122f7c69efd.106" to="visual.122f7c6a006.56"/>
+        </featureInstances>
+      </currentInstance>
     </elements>
     <scopes xsi:type="iaml.visual:Frame" id="visual.122f7c6a006.24" name="current user">
       <children xsi:type="iaml.visual:InputTextField" inWires="wires.122f7c6a100.3a" id="visual.122f7c6a006.56" name="current user name"/>

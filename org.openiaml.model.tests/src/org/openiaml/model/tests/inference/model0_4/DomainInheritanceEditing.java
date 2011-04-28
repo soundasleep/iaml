@@ -12,6 +12,7 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.PrimitiveCondition;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
+import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.visual.Frame;
@@ -56,7 +57,9 @@ public class DomainInheritanceEditing extends InferenceTestCase {
 		Frame page = assertHasFrame(root, "get student");
 		InputForm form = assertHasInputForm(page, "view student");
 		DomainIterator studentInstance = assertHasDomainIterator(page, "current student");
-
+		DomainInstance instance = studentInstance.getCurrentInstance();
+		assertGenerated(instance);
+		
 		SyncWire sync = assertHasSyncWire(root, studentInstance, form, "sync");
 		assertNotGenerated(sync);
 
@@ -73,7 +76,7 @@ public class DomainInheritanceEditing extends InferenceTestCase {
 		assertGenerated(run);
 
 		// a parameter
-		DomainAttributeInstance nameInstance = assertHasDomainAttributeInstance(studentInstance, "name");
+		DomainAttributeInstance nameInstance = assertHasDomainAttributeInstance(instance, "name");
 		Property instanceValue = assertHasFieldValue(nameInstance);
 		ParameterEdge param = assertHasParameterEdge(root, instanceValue, run);
 		assertGenerated(param);
@@ -100,7 +103,9 @@ public class DomainInheritanceEditing extends InferenceTestCase {
 		Frame page = assertHasFrame(root, "create a new student without autosave");
 		InputForm form = assertHasInputForm(page, "new student form");
 		DomainIterator studentInstance = assertHasDomainIterator(page, "new student");
-
+		DomainInstance instance = studentInstance.getCurrentInstance();
+		assertGenerated(instance);
+		
 		SyncWire sync = assertHasSyncWire(root, studentInstance, form, "sync");
 		assertNotGenerated(sync);
 
@@ -117,10 +122,13 @@ public class DomainInheritanceEditing extends InferenceTestCase {
 		assertGenerated(run);
 
 		// a parameter
-		DomainAttributeInstance nameInstance = assertHasDomainAttributeInstance(studentInstance, "name");
+		DomainAttributeInstance nameInstance = assertHasDomainAttributeInstance(instance, "name");
 		Property instanceValue = assertHasFieldValue(nameInstance);
 		ParameterEdge param = assertHasParameterEdge(root, instanceValue, run);
 		assertGenerated(param);
+		
+		// the AttributeInstance and the InputTextField should be synchronised too
+		assertGenerated(assertHasSyncWire(root, field, nameInstance));
 
 		// the condition on the object instance
 		Condition notEmpty = assertHasCondition(studentInstance, "not empty");

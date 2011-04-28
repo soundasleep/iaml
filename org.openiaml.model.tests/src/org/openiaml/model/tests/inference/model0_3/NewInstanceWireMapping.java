@@ -77,15 +77,15 @@ public class NewInstanceWireMapping extends EclipseInheritanceInterface {
 		assertEquals(3, typeSelect(instance.getFeatureInstances(), DomainAttributeInstance.class).size());
 
 		{
-			DomainAttributeInstance attr = assertHasDomainAttributeInstance(obj, "username");
+			DomainAttributeInstance attr = assertHasDomainAttributeInstance(instance, "username");
 			assertEquals(attr.getName(), "username");
 		}
 		{
-			DomainAttributeInstance attr = assertHasDomainAttributeInstance(obj, "email");
+			DomainAttributeInstance attr = assertHasDomainAttributeInstance(instance, "email");
 			assertEquals(attr.getName(), "email");
 		}
 		{
-			DomainAttributeInstance attr = assertHasDomainAttributeInstance(obj, "generated primary key");
+			DomainAttributeInstance attr = assertHasDomainAttributeInstance(instance, "generated primary key");
 			assertEquals(attr.getName(), "generated primary key");
 		}
 

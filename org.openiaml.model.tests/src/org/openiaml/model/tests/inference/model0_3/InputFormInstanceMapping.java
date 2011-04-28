@@ -93,10 +93,10 @@ public class InputFormInstanceMapping extends EclipseInheritanceInterface {
 		assertEquals(3, typeSelect(instance.getFeatureInstances(), DomainAttributeInstance.class).size());
 
 		// get the domain attribute instances
-		DomainAttributeInstance username = assertHasDomainAttributeInstance(obj, "username");
+		DomainAttributeInstance username = assertHasDomainAttributeInstance(instance, "username");
 		assertEquals(username.getName(), "username");
 
-		DomainAttributeInstance email = assertHasDomainAttributeInstance(obj, "email");
+		DomainAttributeInstance email = assertHasDomainAttributeInstance(instance, "email");
 		assertEquals(email.getName(), "email");
 
 		// the form should NOT be empty

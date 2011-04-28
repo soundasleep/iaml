@@ -11,6 +11,7 @@ import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
+import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;
@@ -75,10 +76,12 @@ public class IteratorListSetWire extends InferenceTestCase {
 		Frame home = assertHasFrame(root, "Home");
 		DomainSchema news = assertHasDomainSchema(root, "News");
 		DomainIterator iterator = assertHasDomainIterator(home, "select three news");
+		DomainInstance instance = iterator.getCurrentInstance();
+		assertGenerated(instance);
 		
-		DomainAttributeInstance iid = assertHasDomainAttributeInstance(iterator, "id");
-		DomainAttributeInstance ititle = assertHasDomainAttributeInstance(iterator, "title");
-		DomainAttributeInstance icontent = assertHasDomainAttributeInstance(iterator, "content");
+		DomainAttributeInstance iid = assertHasDomainAttributeInstance(instance, "id");
+		DomainAttributeInstance ititle = assertHasDomainAttributeInstance(instance, "title");
+		DomainAttributeInstance icontent = assertHasDomainAttributeInstance(instance, "content");
 		
 		assertGenerated(iid);
 		assertGenerated(ititle);
@@ -137,14 +140,16 @@ public class IteratorListSetWire extends InferenceTestCase {
 		Frame home = assertHasFrame(root, "Home");
 		IteratorList list = assertHasIteratorList(home, "List");
 		DomainIterator iterator = assertHasDomainIterator(home, "select three news");
+		DomainInstance instance = iterator.getCurrentInstance();
+		assertGenerated(instance);
 		
 		Label lid = assertHasLabel(list, "id");
 		Label ltitle = assertHasLabel(list, "title");
 		Label lcontent = assertHasLabel(list, "content");
 		
-		DomainAttributeInstance iid = assertHasDomainAttributeInstance(iterator, "id");
-		DomainAttributeInstance ititle = assertHasDomainAttributeInstance(iterator, "title");
-		DomainAttributeInstance icontent = assertHasDomainAttributeInstance(iterator, "content");
+		DomainAttributeInstance iid = assertHasDomainAttributeInstance(instance, "id");
+		DomainAttributeInstance ititle = assertHasDomainAttributeInstance(instance, "title");
+		DomainAttributeInstance icontent = assertHasDomainAttributeInstance(instance, "content");
 		
 		assertGenerated(assertHasSetWire(root, iid, lid));
 		assertGenerated(assertHasSetWire(root, ititle, ltitle));
@@ -160,9 +165,11 @@ public class IteratorListSetWire extends InferenceTestCase {
 		Frame home = assertHasFrame(root, "Home");
 		IteratorList list = assertHasIteratorList(home, "List");
 		DomainIterator iterator = assertHasDomainIterator(home, "select three news");
+		DomainInstance instance = iterator.getCurrentInstance();
+		assertGenerated(instance);
 		
 		Label ltitle = assertHasLabel(list, "title");
-		DomainAttributeInstance ititle = assertHasDomainAttributeInstance(iterator, "title");
+		DomainAttributeInstance ititle = assertHasDomainAttributeInstance(instance, "title");
 		assertGenerated(assertHasSetWire(root, ititle, ltitle));
 		
 		EventTrigger onChange = ititle.getOnChange();

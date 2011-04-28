@@ -9,6 +9,7 @@ import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
+import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.users.Role;
@@ -119,7 +120,9 @@ public class UserRolesLoginHandler extends ValidInferenceTestCase {
 		
 		Session session = assertHasSession(root, "my session");
 		DomainIterator user = assertHasDomainIterator(session, "current instance");
-
+		DomainInstance instance = user.getCurrentInstance();
+		assertGenerated(instance);
+		
 		Role defaultRole = assertHasRole(root, "User");
 		assertGenerated(defaultRole);
 		
@@ -130,7 +133,7 @@ public class UserRolesLoginHandler extends ValidInferenceTestCase {
 		assertGenerated(assertHasExtendsEdge(root, registeredUser, defaultRole));
 		
 		{
-			DomainAttributeInstance dai = assertHasDomainAttributeInstance(user, "email");
+			DomainAttributeInstance dai = assertHasDomainAttributeInstance(instance, "email");
 			assertGenerated(dai);
 			DomainAttribute actual = assertHasDomainAttribute(defaultRole, "email");
 			assertGenerated(actual);
@@ -142,7 +145,7 @@ public class UserRolesLoginHandler extends ValidInferenceTestCase {
 		}
 		
 		{
-			DomainAttributeInstance dai = assertHasDomainAttributeInstance(user, "password");
+			DomainAttributeInstance dai = assertHasDomainAttributeInstance(instance, "password");
 			assertGenerated(dai);
 			DomainAttribute actual = assertHasDomainAttribute(defaultRole, "password");
 			assertGenerated(actual);

@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
+import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.visual.Frame;
@@ -216,7 +217,9 @@ public class DomainInheritance extends InferenceTestCase {
 		root = loadAndInfer(DomainInheritance.class);
 		
 		Frame page = assertHasFrame(root, "get person");
-		DomainIterator instance = assertHasDomainIterator(page, "selected person");
+		DomainIterator iterator = assertHasDomainIterator(page, "selected person");
+		DomainInstance instance = iterator.getCurrentInstance();
+		assertGenerated(instance);
 
 		DomainAttributeInstance name = assertHasDomainAttributeInstance(instance, "name");
 		assertGenerated(name);
@@ -239,7 +242,9 @@ public class DomainInheritance extends InferenceTestCase {
 		root = loadAndInfer(DomainInheritance.class);
 		
 		Frame page = assertHasFrame(root, "get student");
-		DomainIterator instance = assertHasDomainIterator(page, "current student");
+		DomainIterator iterator = assertHasDomainIterator(page, "current student");
+		DomainInstance instance = iterator.getCurrentInstance();
+		assertGenerated(instance);
 		
 		// direct field
 		DomainAttributeInstance enrolled = assertHasDomainAttributeInstance(instance, "enrolled");
@@ -268,7 +273,9 @@ public class DomainInheritance extends InferenceTestCase {
 		root = loadAndInfer(DomainInheritance.class);
 		
 		Frame page = assertHasFrame(root, "get teacher by id");
-		DomainIterator instance = assertHasDomainIterator(page, "selected teacher");
+		DomainIterator iterator = assertHasDomainIterator(page, "selected teacher");
+		DomainInstance instance = iterator.getCurrentInstance();
+		assertGenerated(instance);
 		
 		// direct field
 		DomainAttributeInstance title = assertHasDomainAttributeInstance(instance, "title");
@@ -303,7 +310,9 @@ public class DomainInheritance extends InferenceTestCase {
 		root = loadAndInfer(DomainInheritance.class);
 		
 		Frame page = assertHasFrame(root, "get doctoral");
-		DomainIterator instance = assertHasDomainIterator(page, "current doctoral");
+		DomainIterator iterator = assertHasDomainIterator(page, "current doctoral");
+		DomainInstance instance = iterator.getCurrentInstance();
+		assertGenerated(instance);
 		
 		// direct field
 		DomainAttributeInstance thesis = assertHasDomainAttributeInstance(instance, "thesis title");

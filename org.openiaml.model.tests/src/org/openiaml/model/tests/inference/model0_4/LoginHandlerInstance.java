@@ -17,6 +17,7 @@ import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.components.LoginHandlerTypes;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
+import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;
@@ -62,7 +63,9 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		LoginHandler handler = assertHasLoginHandler(session, "login handler");
 		assertNotGenerated(handler);
 		assertEquals(handler.getType(), LoginHandlerTypes.DOMAIN_OBJECT);
-		DomainIterator instance = assertHasDomainIterator(session, "logged in user");
+		DomainIterator iterator = assertHasDomainIterator(session, "logged in user");
+		assertNotGenerated(iterator);
+		DomainInstance instance = iterator.getCurrentInstance();
 		assertNotGenerated(instance);
 
 		// only one attribute
@@ -114,8 +117,10 @@ public class LoginHandlerInstance extends InferenceTestCase {
 
 		Session session = assertHasSession(root, "my session");
 
-		DomainIterator instance = assertHasDomainIterator(session, "logged in user");
-
+		DomainIterator iterator = assertHasDomainIterator(session, "logged in user");
+		DomainInstance instance = iterator.getCurrentInstance();
+		assertNotGenerated(instance);
+		
 		// the domain instance should contain all attributes
 		DomainAttributeInstance apassword = assertHasDomainAttributeInstance(instance, "password");
 		assertGenerated(apassword);
@@ -123,7 +128,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		assertNotGenerated(aname);
 
 		// the instance should also contain an 'empty' PrimitiveCondition
-		PrimitiveCondition exists = (PrimitiveCondition) instance.getEmpty();
+		PrimitiveCondition exists = (PrimitiveCondition) iterator.getEmpty();
 		assertGenerated(exists);
 
 	}

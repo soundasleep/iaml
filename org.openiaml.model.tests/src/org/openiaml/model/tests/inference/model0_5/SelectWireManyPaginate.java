@@ -12,6 +12,7 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
+import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.operations.Arithmetic;
@@ -373,8 +374,10 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 	public void testAttributeCallsLabelUpdate() throws Exception {
 		Frame home = assertHasFrame(root, "Home");
 		InputForm form = assertHasInputForm(home, "view news");
-		DomainIterator instance = assertHasDomainIterator(home, "view news");
-
+		DomainIterator iterator = assertHasDomainIterator(home, "view news");
+		DomainInstance instance = iterator.getCurrentInstance();
+		assertGenerated(instance);
+		
 		DomainAttributeInstance a1 = assertHasDomainAttributeInstance(instance, "title");
 		assertGenerated(a1);
 

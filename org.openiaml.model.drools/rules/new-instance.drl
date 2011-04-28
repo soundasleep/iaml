@@ -21,30 +21,52 @@ global OverridableCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
 global DroolsHelperFunctions functions;
 
+/**
+ * @inference DomainIterator,DomainInstance
+ *		All {@model DomainIterator}s will be populated with a single
+ *		instance of a {@model DomainInstance}, representing the
+ *		{@model DomainIterator#currentInstance} of that iterator.
+ */
+rule "Create Current Instance for all Domain Iterators"
+	when
+		iterator : DomainIterator ( )
+		
+		not ( DomainInstance ( eContainer == iterator ))
+
+		eval ( handler.veto( iterator ))
+		
+	then
+		DomainInstance inst = handler.generatedDomainInstance(iterator, iterator);
+		handler.setName(inst, "Current instance");
+		queue.add(inst, drools);
+
+end
+
 rule "Refresh Iterator Object mappings"
 	when
 		schema : DomainSchema ( )
 		source : DomainSource ( )
 		iterator : DomainIterator ( )
+		instance : DomainInstance ( iterator.currentInstance == instance )
 		
 		schemaEdge : SchemaEdge ( from == source, to == schema )
 		selectEdge : SelectEdge ( from == iterator, to == source )
 		attribute : DomainAttribute ( eContainer == schema )
 		
-		not ( DomainAttributeInstance( eContainer == iterator, name == attribute.name ))
+		not ( DomainAttributeInstance( eContainer == instance, name == attribute.name ))
 
-		eval ( handler.veto( iterator ))
+		eval ( handler.veto( instance ))
 		
 	then
 		# create a new one
-		DomainAttributeInstance attr = handler.generatedDomainAttributeInstance(iterator, iterator);
+		DomainAttributeInstance attr = handler.generatedDomainAttributeInstance(instance, instance);
 		handler.setName(attr, attribute.getName());
 		# set type
 		handler.setType(attr, attribute.getType());
 		queue.add(attr, drools);
 		
 		# mark it as an extension
-		ExtendsEdge ex = handler.generatedExtendsEdge(iterator, attr, attr, attribute);
+		ExtendsEdge ex = handler.generatedExtendsEdge(instance, attr, attr, attribute);
 		queue.add(ex, drools); 
 
 end
@@ -54,12 +76,13 @@ rule "Mark AttributeInstances as extensions of the identically-named Attributes 
 		schema : DomainSchema ( )
 		source : DomainSource ( )
 		iterator : DomainIterator ( )
-		
+		instance : DomainInstance ( iterator.currentInstance == instance )
+				
 		schemaEdge : SchemaEdge ( from == source, to == schema )
 		selectEdge : SelectEdge ( from == iterator, to == source )
 
 		attribute : DomainAttribute ( eContainer == schema )
-		attrinst : DomainAttributeInstance( eContainer == iterator, name == attribute.name ) 
+		attrinst : DomainAttributeInstance( eContainer == instance, name == attribute.name ) 
 		
 		not ( ExtendsEdge ( from == attrinst, to == attribute ) )
 		

@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: IAML Model Migration
+Bundle-SymbolicName: org.openiaml.model.migration
+Bundle-Version: 0.5.3.qualifier
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.5.0"
+Export-Package: org.openiaml.model.migrate

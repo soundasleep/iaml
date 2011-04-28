@@ -482,7 +482,7 @@
   <nodes>
     <ownedChild>
       <domainMetaElement
-          href="iaml.ecore#//DomainAttributeInstance"/>
+          href="iaml.ecore#//domain/DomainAttributeInstance"/>
       <domainSpecialization
           body="self.oclIsTypeOf( DomainAttributeInstance )"/>
       <labelMappings

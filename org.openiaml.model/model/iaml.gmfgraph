@@ -2156,6 +2156,39 @@
       <accessors
           figure="//@figures.0/@descriptors.55/@actualFigure/@children.1"/>
     </descriptors>
+    <descriptors
+        name="DomainInstanceFigure">
+      <actualFigure
+          xsi:type="gmfgraph:Rectangle"
+          name="DomainInstanceFigure">
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
+        <foregroundColor
+            xsi:type="gmfgraph:ConstantColor"
+            value="black"/>
+        <border
+            xsi:type="gmfgraph:MarginBorder">
+          <insets
+              top="3"
+              left="3"
+              bottom="3"
+              right="3"/>
+        </border>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="DomainInstanceNameFigure"
+            text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="DomainInstanceStereotypeFigure"
+            text=": DomainInstance"/>
+      </actualFigure>
+      <accessors
+          figure="//@figures.0/@descriptors.56/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.56/@actualFigure/@children.1"/>
+    </descriptors>
   </figures>
   <nodes
       name="EventTrigger"
@@ -2277,6 +2310,9 @@
   <nodes
       name="DomainSchema"
       figure="DomainSchemaFigure"/>
+  <nodes
+      name="DomainInstance"
+      figure="DomainInstanceFigure"/>
   <connections
       name="DataFlowEdge"
       figure="DataFlowEdgeFigure"/>
@@ -2961,4 +2997,13 @@
       figure="DomainSchemaFigure"
       elementIcon="false"
       accessor="//@figures.0/@descriptors.55/@accessors.1"/>
+  <labels
+      name="DomainInstanceName"
+      figure="DomainInstanceFigure"
+      accessor="//@figures.0/@descriptors.56/@accessors.0"/>
+  <labels
+      name="DomainInstanceStereotype"
+      figure="DomainSchemaFigure"
+      elementIcon="false"
+      accessor="//@figures.0/@descriptors.56/@accessors.1"/>
 </gmfgraph:Canvas>

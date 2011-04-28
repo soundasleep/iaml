@@ -37,15 +37,15 @@
       </tools>
       <tools
           xsi:type="gmftool:CreationTool"
-          title="DomainAttributeInstance"
-          description="Create new DomainAttributeInstance">
+          title="DomainInstance"
+          description="Create new DomainInstance">
         <smallIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj16/DomainAttributeInstance.gif"
+            path="icons/full/obj16/DomainInstance.gif"
             bundle="org.openiaml.model.edit"/>
         <largeIcon
             xsi:type="gmftool:BundleImage"
-            path="icons/full/obj32/DomainAttributeInstance.gif"
+            path="icons/full/obj32/DomainInstance.gif"
             bundle="org.openiaml.model.edit"/>
       </tools>
       <tools

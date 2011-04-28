@@ -648,7 +648,7 @@
 		public CreateShortcutDecorationsCommand(
 				org.eclipse.emf.transaction.TransactionalEditingDomain editingDomain, org.eclipse.gmf.runtime.notation.View parentView,
 				org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest.ViewDescriptor viewDescriptor, String modelId) {
-			this(editingDomain, parentView, Collections
+			this(editingDomain, parentView, java.util.Collections
 					.singletonList(viewDescriptor), modelId);
 		}
 

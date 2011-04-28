@@ -96,7 +96,11 @@ public class GmfGenTestCase extends XmlTestCase {
 			}
 
 			IterableElementList links = xpath(doc, "/GenEditorGenerator/diagram/links");
-			assertFalse(filename + ": No links found", links.isEmpty());
+			if (filename.endsWith("/instance.gmfgen")) {
+				assertTrue(filename + ": Links found", links.isEmpty());
+			} else {
+				assertFalse(filename + ": No links found", links.isEmpty());
+			}
 			for (Element link : links) {
 				// directly contained OpenDiagramPolicies
 				IterableElementList opens = xpath(link, "behaviour");
@@ -1523,5 +1527,87 @@ public class GmfGenTestCase extends XmlTestCase {
 		});
 	}
 	
+	/**
+	 * Allows an int to be accessed in an inner class.
+	 */
+	private class IntegerHolder {
+		public int value = 0;
+	}
+
+	/**
+	 * Only one Domain Model Navigator is generated. This is necessary
+	 * to ensure that the project navigator listings are kept consistent:
+	 * http://www.jevon.org/wiki/GMF_Troubleshooting_3
+	 * @throws Exception 
+	 */
+	public void testOnlyOneDomainModelNavigator() throws Exception {
+		final IntegerHolder holder = new IntegerHolder();
+		holder.value = 0;
+		
+		iterate(new DefaultIterator() {
+
+			@Override
+			public void execute2(String filename, Document doc)
+					throws Exception {
+				
+				
+				// first, let's try and add it if it doesn't already exist
+				boolean changed = false;
+				if (filename.endsWith("/root.gmfgen")) {
+					holder.value++;
+					
+					// check that generateDomainModelNavigator is either true or not set
+					IterableElementList nav = xpath(doc, "/GenEditorGenerator/navigator");
+					assertEquals("Only one <navigator> expected", 1, nav.size());
+					for (Element e : nav) {
+						if (e.hasAttribute("generateDomainModelNavigator") && !"true".equals(e.getAttribute("generateDomainModelNavigator"))) {
+							// force change to 'true'
+							e.setAttribute("generateDomainModelNavigator", "true");
+						}
+					}
+				} else {
+					// check that generateDomainModelNavigator is either true or not set
+					IterableElementList nav = xpath(doc, "/GenEditorGenerator/navigator");
+					assertEquals("Only one <navigator> expected", 1, nav.size());
+					for (Element e : nav) {
+						if (!e.hasAttribute("generateDomainModelNavigator") || !"false".equals(e.getAttribute("generateDomainModelNavigator"))) {
+							// force change to 'false'
+							e.setAttribute("generateDomainModelNavigator", "false");
+						}
+					}
+				}
+				
+				// save
+				if (changed) {
+					saveDocument(doc, filename);
+				}
+				
+				// then recheck
+				if (filename.endsWith("/root.gmfgen")) {
+					// check that generateDomainModelNavigator is either true or not set
+					IterableElementList nav = xpath(doc, "/GenEditorGenerator/navigator");
+					assertEquals("Only one <navigator> expected", 1, nav.size());
+					for (Element e : nav) {
+						if (e.hasAttribute("generateDomainModelNavigator")) {
+							assertEquals(filename, "true", e.getAttribute("generateDomainModelNavigator"));
+						}
+					}
+				} else {
+					// check that generateDomainModelNavigator is either true or not set
+					IterableElementList nav = xpath(doc, "/GenEditorGenerator/navigator");
+					assertEquals("Only one <navigator> expected", 1, nav.size());
+					for (Element e : nav) {
+						assertTrue(filename, e.hasAttribute("generateDomainModelNavigator"));
+						assertEquals(filename, "false", e.getAttribute("generateDomainModelNavigator"));
+					}
+				}
+
+				
+			}
+			
+		});
+		
+		assertEquals("One diagram editor with a filename of root.gmfgen must be found", 1, holder.value);
+	}
 	
 }

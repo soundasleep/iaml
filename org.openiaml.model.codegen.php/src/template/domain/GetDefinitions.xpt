@@ -7,7 +7,7 @@
 «EXTENSION template::GeneratorExtensions»
 
 /* code to get domain attributes */
-«DEFINE getDomainAttribute FOR model::DomainAttributeInstance-»
+«DEFINE getDomainAttribute FOR domain::DomainAttributeInstance-»
 	/**
 	 * Get the attribute instance '«safeNameString(name)»' contained in
 	 * '«safeName(eContainer)»'.
@@ -15,9 +15,9 @@
 	 * Returns the current value for attribute ID '«id»'.
 	 */
 	function get_attribute_instance_«safeName()»($default = false) {
-		«IF model::domain::DomainIterator.isInstance(eContainer)»
+		«IF isInDomainIterator()»
 			/* contained in an object instance '«eContainer»': get it from the instance */
-			$iterator = DomainIterator_«safeName(eContainer)»::getInstance();
+			$iterator = DomainIterator_«safeName(getDomainIterator())»::getInstance();
 		«ELSE»
 			/* contained in an attribute instance '«this»': get it from the instance */
 			$iterator = DomainIterator_Attribute_«safeName()»::getInstance();
@@ -50,11 +50,11 @@
 	 * Returns true or false.
 	 */
 	function has_attribute_instance_«safeName()»($default = false) {
-		«IF model::domain::DomainIterator.isInstance(eContainer)»
-			«EXPAND checkIncomingParameters("false") FOR (model::domain::DomainIterator) eContainer»
+		«IF isInDomainIterator()»
+			«EXPAND checkIncomingParameters("false") FOR getDomainIterator()»
 	
-			/* contained in an object instance '«eContainer»': get it from the instance */
-			$iterator = DomainIterator_«safeName(eContainer)»::getInstance();
+			/* contained in an object instance '«getDomainIterator()»': get it from the instance */
+			$iterator = DomainIterator_«safeName(getDomainIterator())»::getInstance();
 		«ELSE»
 			/* contained in an attribute instance '«this»': get it from the instance */
 			$iterator = DomainIterator_Attribute_«safeName()»::getInstance();

@@ -558,9 +558,9 @@
 				save_queued_store_domain_object('«safeNameString(instance.id)-»');
 			«ENDIF»
 		«ENDLET»
-	«ELSEIF model::DomainAttributeInstance.isInstance(eContainer)»
+	«ELSEIF domain::DomainAttributeInstance.isInstance(eContainer)»
 		/* save attribute instance */
-		«LET (model::DomainAttributeInstance) eContainer AS instance»
+		«LET (domain::DomainAttributeInstance) eContainer AS instance»
 			«IF php»
 				save_queued_store_domain_attribute_«safeNameString(instance.id)-»();
 			«ELSE»
@@ -658,7 +658,7 @@
  * @implementation DomainAttributeInstance,PrimitiveOperation
  *		A {@model DomainAttributeInstance} has a {@model PrimitiveOperation} named 'init'. 
  */
-«DEFINE updateOperationForContainer(Boolean php, model::PrimitiveOperation operation) FOR model::DomainAttributeInstance»
+«DEFINE updateOperationForContainer(Boolean php, model::PrimitiveOperation operation) FOR domain::DomainAttributeInstance»
 	«IF fieldValue == null»
 		«throwException("Cannot set a null fieldValue: " + this)»
 	«ENDIF»

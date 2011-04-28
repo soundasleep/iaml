@@ -80,7 +80,7 @@ conditionName(model::Condition this) :
 attributeName(model::DomainAttribute this) :
 	safeNameString(name);
 
-attributeName(model::DomainAttributeInstance this) :
+attributeName(domain::DomainAttributeInstance this) :
 	safeNameString(name);
 	
 attributeName(Void v) :
@@ -346,7 +346,7 @@ isVisibleThing(emf::EObject this) :
 isDomainAttribute(emf::EObject this) :
 	model::DomainAttribute.isInstance(this);	
 isDomainAttributeInstance(emf::EObject this) :
-	model::DomainAttributeInstance.isInstance(this);
+	domain::DomainAttributeInstance.isInstance(this);
 isDomainIterator(emf::EObject this) :
 	model::domain::DomainIterator.isInstance(this);
 isSession(emf::EObject this) :
@@ -388,8 +388,8 @@ List[model::DynamicApplicationElementSet] getAllDynamicElements(model::InternetA
 	eAllContents.typeSelect(model::DynamicApplicationElementSet);
 
 /** get all Domain Attribute Instances in the InternetApplication */
-List[model::DomainAttributeInstance] getAllDomainAttributeInstances(model::InternetApplication this) :
-	eAllContents.typeSelect( model::DomainAttributeInstance );
+List[domain::DomainAttributeInstance] getAllDomainAttributeInstances(model::InternetApplication this) :
+	eAllContents.typeSelect( domain::DomainAttributeInstance );
 
 /** get all Domain Object Instances in the InternetApplication */
 List[model::domain::DomainIterator] getAllDomainIterators(model::InternetApplication this) :
@@ -405,7 +405,10 @@ List[emf::EObject] resolveDynamicSet(model::InternetApplication root, model::Dyn
 getFailHandler(model::ActionEdgeSource this) :
 	outActions.select( w | w.isFailEdge()).first();
 
-isAutosaveOff(model::DomainAttributeInstance this) :
+isAutosaveOff(domain::DomainAttributeInstance this) :
+	isAutosaveOff(eContainer);
+
+isAutosaveOff(model::domain::DomainInstance this) :
 	isAutosaveOff(eContainer);
 
 isAutosaveOff(model::domain::DomainIterator this) :
@@ -414,7 +417,7 @@ isAutosaveOff(model::domain::DomainIterator this) :
 isAutosaveOff(emf::EObject this):
 	false;
 
-model::DomainAttribute getPrimaryKey(model::DomainAttributeInstance this) :
+model::DomainAttribute getPrimaryKey(domain::DomainAttributeInstance this) :
 	if model::domain::DomainIterator.isInstance(eContainer)
 		then getPrimaryKey((model::domain::DomainIterator) eContainer)
 		else null;
@@ -430,11 +433,19 @@ model::DomainAttribute getPrimaryKey(model::domain::DomainIterator this) :
 
 model::DomainAttribute getPrimaryKey(emf::EObject this) :
 	null;
+	
+isInDomainIterator(model::domain::DomainAttributeInstance this) :
+	model::domain::DomainInstance.isInstance(eContainer) && model::domain::DomainIterator.isInstance(eContainer.eContainer);
+	
+model::domain::DomainIterator getDomainIterator(model::domain::DomainAttributeInstance this) :
+	if isInDomainIterator()
+		then ((model::domain::DomainIterator) (eContainer.eContainer))
+		else null;
 
 /**
  * Does this given attribute instance represent a generated primary key?
  */	
-isGeneratedPrimaryKey(model::DomainAttributeInstance this) :
+isGeneratedPrimaryKey(domain::DomainAttributeInstance this) :
 	isGenerated && !outExtendsEdges.to.typeSelect(model::DomainAttribute).select(a|a.primaryKey).isEmpty ;
 
 List[model::domain::DomainSchema] allSubtypes(model::domain::DomainSchema this):
@@ -448,7 +459,7 @@ model::operations::ExecutionEdgesSource castToExecutionEdgesSource(emf::EObject 
  * which isn't actually defined as an extension in the system, so we can't find the containing DomainSchema
  * for it.
  */
-model::DomainAttribute getAttributeForAttributeInstance(model::DomainAttributeInstance this) :
+model::DomainAttribute getAttributeForAttributeInstance(domain::DomainAttributeInstance this) :
 	if outExtendsEdges.to.typeSelect(model::DomainAttribute).first() == null
 		then throwException("Tried to get the parent attribute of an attribute instance that is not an extension: " + this)
 		else getDefinedAttribute(outExtendsEdges.to.typeSelect(model::DomainAttribute).first());

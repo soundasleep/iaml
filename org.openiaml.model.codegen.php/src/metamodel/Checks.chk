@@ -131,7 +131,7 @@ context model::PrimitiveOperation WARNING "Unknown primitive operation name '" +
 	(eContainer != null && model::domain::DomainIterator.isInstance(eContainer) && ((model::domain::DomainIterator) eContainer).jump == this) ||
 	(eContainer != null && model::VisibleThing.isInstance(eContainer) && name == "update") || 
 	(eContainer != null && model::DomainAttribute.isInstance(eContainer) && name == "update") || 
-	(eContainer != null && model::DomainAttributeInstance.isInstance(eContainer) && name == "update") || 
+	(eContainer != null && domain::DomainAttributeInstance.isInstance(eContainer) && name == "update") || 
 	(eContainer != null && model::VisibleThing.isInstance(eContainer) && name == "init") ||
 	
 	// primitive operations defined with no parent	
@@ -219,7 +219,7 @@ context model::wires::SyncWire ERROR "A SyncWire cannot connect to an Email" :
 	!model::scopes::Email.isInstance(to) &&
 	!model::scopes::Email.isInstance(from);
 
-context model::DomainAttributeInstance ERROR "A DomainAttributeInstance must extend a DomainAttribute as its definition" :
+context domain::DomainAttributeInstance ERROR "A DomainAttributeInstance must extend a DomainAttribute as its definition" :
 	!outExtendsEdges.to.typeSelect(model::DomainAttribute).isEmpty;
 	
 context model::domain::DomainSource ERROR "A DomainSource can only have one Schema" :

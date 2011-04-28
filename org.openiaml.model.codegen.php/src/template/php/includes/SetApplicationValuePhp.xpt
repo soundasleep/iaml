@@ -181,29 +181,33 @@ echo_necessary_update_callbacks();
 		most cases to exist).
 	«ENDREM»
 	/* DomainIterator "«this-»" */
-	«IF inWires.isEmpty && outWires.reject(w|model::wires::AutocompleteWire.isInstance(w))
-		.to.reject(o|model::visual::IteratorList.isInstance(o))
-		   .reject(o|model::visual::Map.isInstance(o)).isEmpty
-		&& attributes.outWires.to.reject(o|model::visual::IteratorList.isInstance(o.eContainer)).isEmpty»
-		// container is only an IteratorList (or no outgoing wires)
-		«FOREACH outWires.to.typeSelect(model::visual::IteratorList) AS list»
-			// we are updating something within an IteratorList; update the entire IteratorList directly
-			if (!defined('POPULATED_ITERATOR_LIST_«safeName(list)»')) {
-				// we only want to populate the iterator list <em>once</em> per callback
-				possibly_populate_iterator_list_«safeName(list)»();
-				define('POPULATED_ITERATOR_LIST_«safeName(list)»', true);
-			}
-		«ENDFOREACH»
+	«IF currentInstance == null»
+		// current instance = null
 	«ELSE»
-		«EXPAND potentialUpdateDestinationAttributes FOREACH attributes»
-		
-		«EXPAND potentialUpdateDesinationWires FOREACH inWires.typeSelect(model::wires::SyncWire)»
-		«EXPAND potentialUpdateDesinationWires FOREACH outWires.typeSelect(model::wires::SyncWire)»
-		«EXPAND potentialUpdateDesinationWires FOREACH outWires.typeSelect(model::wires::SetWire)»
+		«IF inWires.isEmpty && outWires.reject(w|model::wires::AutocompleteWire.isInstance(w))
+			.to.reject(o|model::visual::IteratorList.isInstance(o))
+			   .reject(o|model::visual::Map.isInstance(o)).isEmpty
+			&& currentInstance.featureInstances.typeSelect(model::domain::DomainAttributeInstance).outWires.to.reject(o|model::visual::IteratorList.isInstance(o.eContainer)).isEmpty»
+			// container is only an IteratorList (or no outgoing wires)
+			«FOREACH outWires.to.typeSelect(model::visual::IteratorList) AS list»
+				// we are updating something within an IteratorList; update the entire IteratorList directly
+				if (!defined('POPULATED_ITERATOR_LIST_«safeName(list)»')) {
+					// we only want to populate the iterator list <em>once</em> per callback
+					possibly_populate_iterator_list_«safeName(list)»();
+					define('POPULATED_ITERATOR_LIST_«safeName(list)»', true);
+				}
+			«ENDFOREACH»
+		«ELSE»
+			«EXPAND potentialUpdateDestinationAttributes FOREACH currentInstance.featureInstances.typeSelect(model::domain::DomainAttributeInstance)»
+			
+			«EXPAND potentialUpdateDesinationWires FOREACH inWires.typeSelect(model::wires::SyncWire)»
+			«EXPAND potentialUpdateDesinationWires FOREACH outWires.typeSelect(model::wires::SyncWire)»
+			«EXPAND potentialUpdateDesinationWires FOREACH outWires.typeSelect(model::wires::SetWire)»
+		«ENDIF»
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE potentialUpdateDestination FOR model::DomainAttributeInstance»
+«DEFINE potentialUpdateDestination FOR model::domain::DomainAttributeInstance»
 	/* DomainAttributeInstance "«this-»" */
 	$value = get_attribute_instance_«safeName()»(); // parameters are from server-side
 	«EXPAND potentialUpdateDesinationWires FOREACH inWires.typeSelect(model::wires::SyncWire)»
@@ -211,7 +215,7 @@ echo_necessary_update_callbacks();
 	«EXPAND potentialUpdateDesinationWires FOREACH outWires.typeSelect(model::wires::SetWire)»
 «ENDDEFINE»
 
-«DEFINE potentialUpdateDestinationAttributes FOR model::DomainAttributeInstance»
+«DEFINE potentialUpdateDestinationAttributes FOR model::domain::DomainAttributeInstance»
 	/* attribute "«name»" («this») */
 	$value = get_attribute_instance_«safeName()»();
 	«EXPAND potentialUpdateDesinationWires FOREACH inWires.typeSelect(model::wires::SyncWire)»

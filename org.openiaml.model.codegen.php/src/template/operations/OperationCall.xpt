@@ -110,7 +110,7 @@
 		); 
 	«ELSEIF isDomainAttributeInstance(to.eContainer)-»
 		«REM»direct field --> domain attribute instance«ENDREM»
-		«EXPAND template::domain::AttributeInstance::attributeInstanceCall(php, this, inStoreDb, (model::DomainAttributeInstance) to.eContainer) FOR to»;
+		«EXPAND template::domain::AttributeInstance::attributeInstanceCall(php, this, inStoreDb, (model::domain::DomainAttributeInstance) to.eContainer) FOR to»;
 	«ELSEIF isDomainIterator(to.eContainer)-»
 		«REM»direct field --> domain object instance«ENDREM»
 		«EXPAND template::domain::DomainInstance::domainInstanceCall(php, this, (model::domain::DomainIterator) to.eContainer) FOR to»;

@@ -299,7 +299,7 @@
 	«EXPAND mapPoint_staticInitialValue(currentFrame) FOR fieldValue»
 «ENDDEFINE»
 
-«DEFINE mapPoint_staticInitialValue(model::visual::Frame currentFrame) FOR model::DomainAttributeInstance»
+«DEFINE mapPoint_staticInitialValue(model::visual::Frame currentFrame) FOR model::domain::DomainAttributeInstance»
 	«REM»from a domain attribute instance.«ENDREM»
 	if (has_attribute_instance_«safeName()»()) {
 		$value = htmlspecialchars(get_attribute_instance_«safeName()»());

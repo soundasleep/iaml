@@ -6,6 +6,7 @@ import junit.framework.TestSuite;
 import org.openiaml.model.tests.codegen.AllCodegenTests;
 import org.openiaml.model.tests.drools.AllDroolsTests;
 import org.openiaml.model.tests.inference.AllInferenceTests;
+import org.openiaml.model.tests.migration.AllMigrationTests;
 import org.openiaml.model.tests.model.AllModelTests;
 import org.openiaml.model.tests.release.AllReleaseTests;
 
@@ -32,6 +33,7 @@ public class AllTests {
         suite.addTest(AllCodegenTests.suite());
         suite.addTest(AllDroolsTests.suite());
         suite.addTest(AllReleaseTests.suite());
+        suite.addTest(AllMigrationTests.suite());
         suite.addTest(AllModelTests.suite());
 
         return suite; 

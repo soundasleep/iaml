@@ -139,6 +139,15 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 		return loader.loadModelDirectly(filename);
 	}
 	
+	/**
+	 * Load a model file directly.
+	 * Assumes that it will only contain one element (and tests this with JUnit).
+	 * @throws ModelLoadException 
+	 */
+	public EObject loadModelDirectly(IFile f) throws ModelLoadException {
+		return loader.loadModelDirectly(f);
+	}
+	
 	private static ModelSourceResolver resolver = ModelSourceResolver.getInstance();
 	private static CachedModelLoader loader = CachedModelLoader.getInstance();
 	

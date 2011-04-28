@@ -3,6 +3,7 @@
  */
 package org.openiaml.model.tests;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.EObject;
 import org.openiaml.model.ModelLoader;
 import org.openiaml.model.ModelLoader.ModelLoadException;
@@ -58,6 +59,16 @@ public class CachedModelLoader {
 	 */
 	public EObject loadModelDirectly(String filename) throws ModelLoadException {
 		EObject model = ModelLoader.load(filename);
+		return model;
+	}
+	
+	/**
+	 * Load a model file directly.
+	 * Assumes that it will only contain one element (and tests this with JUnit).
+	 * @throws ModelLoadException 
+	 */
+	public EObject loadModelDirectly(IFile f) throws ModelLoadException {
+		EObject model = ModelLoader.load(f);
 		return model;
 	}
 	

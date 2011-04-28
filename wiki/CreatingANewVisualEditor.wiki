@@ -15,23 +15,24 @@ In this example, consider we are making a new editor "user_store", for UserStore
   # Create a new {{{user_store.gmftool}}}
   # Create a new {{{user_store.gmfmap}}} and map the tools to the graph elements
   # Generate the {{{user_store.gmfgen}}}
-  # Set the following properties in the new {{gmfgen}} file:
-    * _Gen Editor Generator_ (all automatically replaced)
+  # Set the following properties in the new {{{gmfgen}}} file:
+    * _Gen Expression Provider_ > _Gen Java Expression Provider_
+      * _Inject Expression Body_ to *true* (until issue 164 is resolved)
+  # The following properties should be replaced automatically when [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/release/AllReleaseTests.java?r=2315 AllReleaseTests] are executed:
+    * _Gen Editor Generator_
       * _Domain File Extension_ to "iaml_user_store" (will update _Diagram File Extension_ automatically)
       * _Dynamic Templates_ to "true"
       * _Model ID_ to "Iaml_UserStore"
       * _Package Name Prefix_ to "org.openiaml.model.diagram.user_store"
       * _Template Directory_ to "/org.openiaml.model/templates/"
-    * _Gen Diagram_ (all automatically replaced)
+    * _Gen Diagram_
       * _Validation Decorators_ to "true"
       * _Validation Enabled_ to "true"
       * _Contains Shortcuts To_ and _Shortcuts Provided For_ to all domain file extensions in the model (checked with [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/release/PluginsTestCase.java?r=1006&spec=svn1006#181 PluginsTestCase])
-    * _Gen Plugin_ (all automatically replaced)
+    * _Gen Plugin_
       * _ID_ to "org.openiaml.model.diagram.user_store"
       * _Name_ to "Iaml Diagram Plugin (User Store)"
       * _Provider_ to "www.openiaml.org"
       * _Version_ to the latest version (e.g. "0.3.1.qualified")
-    * _Gen Expression Provider_ > _Gen Java Expression Provider_
-      * _Inject Expression Body_ to *true* (until issue 164 is resolved)
-    * You will still need to add _OpenDiagramBehaviors_ to any elements that require it (checked with [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/release/GmfGenTestCase.java?r=1006#329 GmfGenTestCase]) (automatically replaced)
+    * You will still need to add _OpenDiagramBehaviors_ to any elements that require it (checked with [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/release/GmfGenTestCase.java?r=1006#329 GmfGenTestCase])
   # Generate the plug-in code and execute the Release test cases twice (once to replace broken values; a second time to test)

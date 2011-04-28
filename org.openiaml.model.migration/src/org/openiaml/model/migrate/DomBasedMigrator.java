@@ -259,6 +259,11 @@ public abstract class DomBasedMigrator implements IamlModelMigrator {
 				
 				e.setAttribute("xsi:type", xsiType);
 			}
+		} else {
+			String xsiType = shouldAddType(element, errors);
+			if (xsiType != null) {
+				e.setAttribute("xsi:type", xsiType);
+			}
 		}
 		
 		// recurse over children
@@ -271,9 +276,41 @@ public abstract class DomBasedMigrator implements IamlModelMigrator {
 			}
 		}
 		
-		output.appendChild(e);
+		appendElementToParent(output, element, e, document);		
 	}
 	
+	/**
+	 * Should a new <code>xsi:type</code> be added for this element?
+	 * If not, returns <code>null</code>. By default, this method
+	 * returns <code>null</code>.
+	 * 
+	 * @param oldElement
+	 * @param errors
+	 * @return
+	 */
+	protected String shouldAddType(Element oldElement,
+			List<ExpectedMigrationException> errors) {
+		// don't change any XSI types by default
+		return null;
+	}
+
+	/**
+	 * By default, the migrated element will simply be placed within
+	 * the same container as its original element. If this new element
+	 * should instead be part of a different element, this method can
+	 * be used to override the logic.
+	 * 
+	 * <p>By default, simply calls {@link Node#appendChild(Node)} on the
+	 * normal parent.
+	 * 
+	 * @param oldElement the old element
+	 * @param newElement the new element
+	 * @return the element that will be appended to the currently recursed element
+	 */
+	public void appendElementToParent(Node parent, Element oldElement, Element newElement, Document document) {
+		parent.appendChild(newElement);
+	}
+
 	/**
 	 * Should the text content of the given {@link Element} be copied?
 	 * 
@@ -457,6 +494,18 @@ public abstract class DomBasedMigrator implements IamlModelMigrator {
 		String newId = "migrated" + idCounter++;
 		idMap.put(oldId, newId);
 		return newId;
+	}
+
+	/**
+	 * Create a brand new migrated ID for this element. As a result,
+	 * this new element <em>cannot</em> have any incoming or outgoing
+	 * references.
+	 * 
+	 * @param oldId
+	 * @return
+	 */
+	protected String generateMigratedId() {
+		return "migrated" + idCounter++;
 	}
 
 	/**

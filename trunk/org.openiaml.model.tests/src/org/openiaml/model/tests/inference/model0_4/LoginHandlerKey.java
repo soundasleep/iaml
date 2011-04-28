@@ -175,12 +175,18 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 
 		Property my = assertHasProperty(session, "my login key");
 		assertNotGenerated(my);
+		assertFalse(my.isReadOnly());
+		
+		// in r2677, StaticValue was merged into Property[readOnly]
+		Property key = assertHasProperty(session, "login key");
+		assertNotGenerated(key);
+		assertTrue(key.isReadOnly());
 
 		// shouldn't be generated
 		assertHasNoProperty(session, "current login key");
 
 		// there should only be one
-		assertHasOne(session, "iaml:properties", Property.class);
+		assertEquals("Properties found: " + session.getProperties().toString(), 2, session.getProperties().size());
 
 		// there should be a SetWire from the LoginHandler to this
 		LoginHandler loginHandler = assertHasLoginHandler(session, "Login Handler");

@@ -1377,7 +1377,8 @@
           <details key="added" value="0.5.3 for issue 219"/>
         </eAnnotations>
       </eStructuralFeatures>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="currentInstance" eType="#//domain/DomainInstance"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="currentInstance" eType="#//domain/DomainInstance"
+          containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="SchemaEdge" eSuperTypes="#//GeneratedElement #//GeneratesElements">
       <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="#//domain/DomainSource"
@@ -1385,7 +1386,7 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="#//domain/DomainSchema"
           eOpposite="#//domain/DomainSchema/inSchemas"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="DomainInstance" eSuperTypes="#//NamedElement #//GeneratedElement #//GeneratesElements #//WireSource #//WireDestination #//ContainsWires">
+    <eClassifiers xsi:type="ecore:EClass" name="DomainInstance" eSuperTypes="#//NamedElement #//GeneratedElement #//GeneratesElements #//WireSource #//WireDestination #//ContainsWires #//ContainsOperations">
       <eStructuralFeatures xsi:type="ecore:EReference" name="featureInstances" upperBound="-1"
           eType="#//domain/DomainFeatureInstance" containment="true" eOpposite="#//domain/DomainFeatureInstance/instance">
         <eAnnotations source="http://openiaml.org/comment">

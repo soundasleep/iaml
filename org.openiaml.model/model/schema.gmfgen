@@ -26,42 +26,37 @@
     <shortcutsProvidedFor>iaml_email</shortcutsProvidedFor>
     <shortcutsProvidedFor>iaml_instance</shortcutsProvidedFor>
     <domainDiagramElement href="iaml.genmodel#//model/domain/DomainSchema"/>
-    <topLevelNodes canonicalEditPolicyClassName="DomainAttributeCanonicalEditPolicy" createCommandClassName="DomainAttributeCreateCommand" editPartClassName="DomainAttributeEditPart" graphicalNodeEditPolicyClassName="DomainAttributeGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="DomainAttributeItemSemanticEditPolicy" notationViewFactoryClassName="DomainAttributeViewFactory" visualID="2001">
+    <topLevelNodes canonicalEditPolicyClassName="DomainAttributeCanonicalEditPolicy" createCommandClassName="DomainAttributeCreateCommand" editPartClassName="DomainAttributeEditPart" graphicalNodeEditPolicyClassName="DomainAttributeGraphicalNodeEditPolicy" itemSemanticEditPolicyClassName="DomainAttributeItemSemanticEditPolicy" visualID="2003">
       <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
       <elementType editHelperClassName="DomainAttributeEditHelper" xsi:type="gmfgen:MetamodelType"/>
       <viewmap classBody="&#10;/**&#10; * @generated&#10; */&#10;public class DomainAttributeFigure extends org.eclipse.draw2d.RectangleFigure {&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureDomainAttributeNameFigure; &#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureDomainAttributeStereotypeFigure; &#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureDomainAttributeParentNameFigure; &#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel fFigureDomainAttributeTypeFigure; &#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public DomainAttributeFigure() {&#10;&#9;&#9;&#10;&#9;org.eclipse.draw2d.FlowLayout layoutThis = new org.eclipse.draw2d.FlowLayout();&#10;&#9;layoutThis.setStretchMinorAxis(false);&#10;&#9;layoutThis.setMinorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#10;);&#10;&#10;&#9;layoutThis.setMajorAlignment(org.eclipse.draw2d.FlowLayout.ALIGN_LEFTTOP&#10;);&#10;&#9;layoutThis.setMajorSpacing(5);&#10;&#9;layoutThis.setMinorSpacing(5);&#10;&#9;layoutThis.setHorizontal(false);&#10;&#10;&#9;this.setLayoutManager(layoutThis);&#10;&#10;&#9;&#9;this.setLineWidth(1);&#10;&#9;this.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);&#10;this.setBorder(new org.eclipse.draw2d.MarginBorder(getMapMode().DPtoLP(3)&#10;, getMapMode().DPtoLP(3)&#10;, getMapMode().DPtoLP(3)&#10;, getMapMode().DPtoLP(3)&#10;));&#10;&#9;&#9;createContents();&#10;&#9;}&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private void createContents(){&#10;&#10;&#10;fFigureDomainAttributeNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureDomainAttributeNameFigure.setText(&quot;&lt;...&gt;&quot;);&#10;&#10;this.add(fFigureDomainAttributeNameFigure);&#10;&#10;&#10;&#10;fFigureDomainAttributeStereotypeFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureDomainAttributeStereotypeFigure.setText(&quot;: DomainAttribute&quot;);&#10;&#10;this.add(fFigureDomainAttributeStereotypeFigure);&#10;&#10;&#10;&#10;fFigureDomainAttributeTypeFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureDomainAttributeTypeFigure.setText(&quot;&lt;...&gt;&quot;);&#10;&#9;fFigureDomainAttributeTypeFigure.setForegroundColor(org.eclipse.draw2d.ColorConstants.black);&#10;&#10;this.add(fFigureDomainAttributeTypeFigure);&#10;&#10;&#10;&#10;fFigureDomainAttributeParentNameFigure = new org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel();&#10;fFigureDomainAttributeParentNameFigure.setText(&quot;[none]&quot;);&#10;&#9;fFigureDomainAttributeParentNameFigure.setForegroundColor(org.eclipse.draw2d.ColorConstants.gray);&#10;&#10;this.add(fFigureDomainAttributeParentNameFigure);&#10;&#10;&#10;&#9;}&#10;&#10;&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;private boolean myUseLocalCoordinates = false;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;protected boolean useLocalCoordinates() {&#10;&#9;&#9;return myUseLocalCoordinates;&#10;&#9;}&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;protected void setUseLocalCoordinates(boolean useLocalCoordinates) {&#10;&#9;&#9;myUseLocalCoordinates = useLocalCoordinates;&#10;&#9;}&#10;&#10;&#10;&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureDomainAttributeNameFigure() {&#10;&#9;&#9;return fFigureDomainAttributeNameFigure;&#10;&#9;}&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureDomainAttributeStereotypeFigure() {&#10;&#9;&#9;return fFigureDomainAttributeStereotypeFigure;&#10;&#9;}&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureDomainAttributeParentNameFigure() {&#10;&#9;&#9;return fFigureDomainAttributeParentNameFigure;&#10;&#9;}&#10;&#9;/**&#10;&#9; * @generated&#10;&#9; */&#10;&#9;public org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel getFigureDomainAttributeTypeFigure() {&#10;&#9;&#9;return fFigureDomainAttributeTypeFigure;&#10;&#9;}&#10;&#10;&#10;}&#10;&#10;" className="DomainAttributeFigure" layoutType="FLOW_LAYOUT" xsi:type="gmfgen:InnerClassViewmap">
         <attributes fixedFont="false" fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
       </viewmap>
-      <behaviour diagramKind="Iaml_Element" editPolicyClassName="ElementOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.element.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
       <modelFacet>
-        <metaClass href="iaml.genmodel#//model/DomainAttribute"/>
-        <containmentMetaFeature href="iaml.genmodel#//model/domain/DomainSchema/attributes"/>
-        <childMetaFeature href="iaml.genmodel#//model/domain/DomainSchema/attributes"/>
+        <metaClass href="iaml.genmodel#//model/domain/DomainAttribute"/>
+        <containmentMetaFeature href="../../../plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore/EClass/eStructuralFeatures"/>
+        <childMetaFeature href="../../../plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore/EClass/eStructuralFeatures"/>
       </modelFacet>
-      <labels editPartClassName="DomainAttributeNameEditPart" elementIcon="true" itemSemanticEditPolicyClassName="DomainAttributeNameItemSemanticEditPolicy" notationViewFactoryClassName="DomainAttributeNameViewFactory" visualID="5001">
+      <labels editPartClassName="DomainAttributeNameEditPart" elementIcon="true" itemSemanticEditPolicyClassName="DomainAttributeNameItemSemanticEditPolicy" visualID="5007">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureDomainAttributeNameFigure" xsi:type="gmfgen:ParentAssignedViewmap"/>
         <modelFacet parser="//@labelParsers/@implementations.0" xsi:type="gmfgen:FeatureLabelModelFacet">
-          <metaFeatures href="iaml.genmodel#//model/NamedElement/name"/>
+          <metaFeatures href="../../../plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore/ENamedElement/name"/>
         </modelFacet>
       </labels>
-      <labels editPartClassName="WrappingLabelEditPart" itemSemanticEditPolicyClassName="WrappingLabelItemSemanticEditPolicy" notationViewFactoryClassName="DomainAttributeLabelViewFactory" readOnly="true" visualID="5002">
+      <labels editPartClassName="WrappingLabelEditPart" itemSemanticEditPolicyClassName="WrappingLabelItemSemanticEditPolicy" readOnly="true" visualID="5008">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
-        <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureDomainAttributeStereotypeFigure" xsi:type="gmfgen:ParentAssignedViewmap">
-          <attributes fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
-        </viewmap>
-        <behaviour diagramKind="Iaml_Element" editPolicyClassName="ElementOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.element.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
+        <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureDomainAttributeStereotypeFigure" xsi:type="gmfgen:ParentAssignedViewmap"/>
         <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
-      <labels editPartClassName="WrappingLabel2EditPart" itemSemanticEditPolicyClassName="WrappingLabel2ItemSemanticEditPolicy" notationViewFactoryClassName="DomainAttributeLabelViewFactory" readOnly="true" visualID="5003">
+      <labels editPartClassName="WrappingLabel2EditPart" itemSemanticEditPolicyClassName="WrappingLabel2ItemSemanticEditPolicy" readOnly="true" visualID="5009">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureDomainAttributeParentNameFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
         </viewmap>
-        <behaviour diagramKind="Iaml_Element" editPolicyClassName="ElementOpenDiagramEditPolicy" editorID="org.openiaml.model.diagram.element.part.IamlDiagramEditorID" xsi:type="gmfgen:OpenDiagramBehaviour"/>
         <modelFacet parser="//@labelParsers/@implementations.1"/>
       </labels>
-      <labels editPartClassName="WrappingLabel4EditPart" itemSemanticEditPolicyClassName="WrappingLabel4ItemSemanticEditPolicy" notationViewFactoryClassName="DomainAttributeLabelViewFactory" visualID="5005">
+      <labels editPartClassName="WrappingLabel4EditPart" itemSemanticEditPolicyClassName="WrappingLabel4ItemSemanticEditPolicy" visualID="5010">
         <diagramRunTimeClass href="../../../plugin/org.eclipse.gmf.runtime.notation/model/notation.genmodel#//notation/Node"/>
         <viewmap figureQualifiedClassName="org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel" getterName="getFigureDomainAttributeTypeFigure" xsi:type="gmfgen:ParentAssignedViewmap">
           <attributes fixedForeground="true" xsi:type="gmfgen:StyleAttributes"/>
@@ -140,9 +135,9 @@
   <plugin iD="org.openiaml.model.diagram.schema" name="Iaml Diagram Plugin (Schema)" provider="www.openiaml.org" version="0.5.3.qualifier">
     <requiredPlugins>org.eclipse.draw2d</requiredPlugins>
     <requiredPlugins>org.eclipse.gmf.runtime.draw2d.ui</requiredPlugins>
-    <requiredPlugins>org.openiaml.model.diagram.helpers</requiredPlugins>
-    <requiredPlugins>org.eclipse.xsd</requiredPlugins>
-  </plugin>
+  <requiredPlugins>org.openiaml.model.diagram.helpers</requiredPlugins>
+<requiredPlugins>org.eclipse.xsd</requiredPlugins>
+</plugin>
   <editor/>
   <navigator generateDomainModelNavigator="false">
     <childReferences child="//@diagram"/>

@@ -329,7 +329,7 @@
         <diagramLabel
             href="iaml.gmfgraph#RoleName"/>
         <features
-            href="iaml.ecore#//NamedElement/name"/>
+            href="../../../plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ENamedElement/name"/>
       </labelMappings>
       <labelMappings
           readOnly="true">
@@ -356,7 +356,7 @@
         <diagramLabel
             href="iaml.gmfgraph#DomainSchemaName"/>
         <features
-            href="iaml.ecore#//NamedElement/name"/>
+            href="../../../plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ENamedElement/name"/>
       </labelMappings>
       <labelMappings
           readOnly="true">

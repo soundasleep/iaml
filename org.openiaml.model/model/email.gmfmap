@@ -102,7 +102,7 @@
   <nodes>
     <ownedChild>
       <domainMetaElement
-          href="iaml.ecore#//DomainAttribute"/>
+          href="iaml.ecore#//domain/DomainAttribute"/>
       <domainSpecialization
           body="self.oclIsTypeOf( DomainAttribute )"/>
       <labelMappings
@@ -110,7 +110,7 @@
         <diagramLabel
             href="iaml.gmfgraph#DomainAttributeName"/>
         <features
-            href="iaml.ecore#//NamedElement/name"/>
+            href="../../../plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ENamedElement/name"/>
       </labelMappings>
       <labelMappings
           readOnly="true">

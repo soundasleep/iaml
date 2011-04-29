@@ -1198,8 +1198,6 @@
       <eLiterals name="RSS2_0" value="2"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="DomainSchema" eSuperTypes="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass #//GeneratesElements #//wires/ExtendsEdgesSource #//wires/ExtendsEdgeDestination #//GeneratedElement">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
-          eType="#//domain/DomainAttribute" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="inSchemas" upperBound="-1"
           eType="#//domain/SchemaEdge" eOpposite="#//domain/SchemaEdge/to"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="permissions" upperBound="-1"
@@ -1223,7 +1221,7 @@
           <details key="comment" value="added in 0.4"/>
         </eAnnotations>
       </eStructuralFeatures>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="attributeType" eType="ecore:EClass platform:/plugin/org.eclipse.xsd/model/XSD.ecore#//XSDSimpleTypeDefinition">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/plugin/org.eclipse.xsd/model/XSD.ecore#//XSDSimpleTypeDefinition">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="The datatype of the {@model Changeable object} and its contained {@model Property fieldValue}."/>
         </eAnnotations>

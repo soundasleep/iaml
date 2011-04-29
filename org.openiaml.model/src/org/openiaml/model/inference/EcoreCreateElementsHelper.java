@@ -5,6 +5,7 @@ package org.openiaml.model.inference;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xsd.XSDSimpleTypeDefinition;
 import org.openiaml.model.FileReference;
 import org.openiaml.model.model.Accessible;
@@ -18,7 +19,6 @@ import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsProperties;
 import org.openiaml.model.model.ContainsWires;
-import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
@@ -36,6 +36,7 @@ import org.openiaml.model.model.WireDestination;
 import org.openiaml.model.model.WireSource;
 import org.openiaml.model.model.components.ComponentsPackage;
 import org.openiaml.model.model.components.LoginHandler;
+import org.openiaml.model.model.domain.DomainAttribute;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
 import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
@@ -221,7 +222,7 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	}
 
 	public DomainAttribute generatedDomainAttribute(GeneratesElements by, DomainSchema container) throws InferenceException {
-		DomainAttribute obj = (DomainAttribute) createElement( container, ModelPackage.eINSTANCE.getDomainAttribute(), DomainPackage.eINSTANCE.getDomainSchema_Attributes() );
+		DomainAttribute obj = (DomainAttribute) createElement( container, DomainPackage.eINSTANCE.getDomainAttribute(), EcorePackage.eINSTANCE.getEClass_EStructuralFeatures() );
 		setGeneratedBy(obj, by);
 		return obj;
 	}

@@ -44,7 +44,7 @@ end
 rule "Copy set wires: Domain Instances (source)"
 	when
 		p1_container : DomainIterator ( )
-		p1 : DomainInstance( )
+		p1 : DomainInstance( p1_container.currentInstance == p1 )
 		p2 : CanBeSynced( this != p1 )
 		source : SetWire( from == p1_container, to == p2, overriddenNames not contains "set" )
 		
@@ -68,7 +68,7 @@ rule "Copy set wires: Domain Instances (target)"
 	when
 		p1 : CanBeSynced( )
 		p2_container : DomainIterator ( )
-		p2 : DomainInstance( this != p1 )
+		p2 : DomainInstance( p2_container.currentInstance == p2, this != p1 )
 		source : SetWire( from == p1, to == p2_container, overriddenNames not contains "set" )
 		
 		e1 : CanBeSynced( eContainer == p1 )
@@ -1076,7 +1076,7 @@ rule "A SetWire between Attributes passed to a DomainIterator need to check that
 		instance : DomainInstance ( iterator.currentInstance == instance )
 		
 		# form -> Iterator
-		sync : SetWire( from == form, to == instance )
+		sync : SetWire( from == form, to == iterator )
 		
 		# the instance is created through a NewInstanceWire
 		schema : DomainSchema ( )
@@ -1124,7 +1124,7 @@ rule "A SetWire between Attributes selected from a DomainIterator need to check 
 		instance : DomainInstance ( iterator.currentInstance == instance )
 		
 		# Iterator -> Form
-		sync : SetWire( from == instance, to == form )
+		sync : SetWire( from == iterator, to == form )
 		
 		# the instance is created through a NewInstanceWire
 		schema : DomainSchema ( )
@@ -1164,5 +1164,4 @@ rule "A SetWire between Attributes selected from a DomainIterator need to check 
 		queue.add(cw, drools);
 
 end
-
 

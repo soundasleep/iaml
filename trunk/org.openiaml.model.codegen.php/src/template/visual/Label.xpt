@@ -133,8 +133,8 @@
 	«IF containingSession(this) == null»
 		«REM»contained in a Frame or InternetApplication: a static value«ENDREM»
 		if (get_application_value("«safeNameString(id)»", null) !== null) {
-			$temp = get_application_value("«safeNameString(id)»", "«escapeString(defaultValue)»");
 			if (!$label_set) {
+				$temp = get_application_value("«safeNameString(id)»", "«escapeString(defaultValue)»");
 				$«argName» = $temp;
 				$label_set = true;
 			}
@@ -142,8 +142,8 @@
 	«ELSE»
 		«REM»contained in a Session: a session value«ENDREM»
 		if (has_session("«safeName(containingSession(this))»_«safeNameString(id)»", null) !== null) {
-			$temp = require_session("«safeName(containingSession(this))»_«safeNameString(id)»", "«escapeString(defaultValue)»");
 			if (!$label_set) {
+				$temp = require_session("«safeName(containingSession(this))»_«safeNameString(id)»", "«escapeString(defaultValue)»");
 				$«argName» = $temp;
 				$label_set = true;
 			}
@@ -154,8 +154,8 @@
 «DEFINE staticInitialValue(model::visual::Frame currentFrame, String argName) FOR model::domain::DomainAttributeInstance»
 	«REM»from a domain attribute instance.«ENDREM»
 	if (!isset($check_attribute_instances) || !$check_attribute_instances || ($check_attribute_instances && has_attribute_instance_«safeName()»())) {
-		$temp = get_attribute_instance_«safeName()»();
 		if (!$label_set) {
+			$temp = get_attribute_instance_«safeName()»();
 			$«argName» = $temp;
 			$label_set = true;
 		}
@@ -164,8 +164,8 @@
 
 «DEFINE staticInitialValue(model::visual::Frame currentFrame, String argName) FOR model::QueryParameter»
 	«REM»from the query«ENDREM»
-	$temp = «EXPAND template::operations::Parameters::callParameterValue(true, false)»;
 	if (!$label_set) {
+		$temp = «EXPAND template::operations::Parameters::callParameterValue(true, false)»;
 		$«argName» = $temp;
 		$label_set = true;
 	}		

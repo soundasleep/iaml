@@ -237,7 +237,7 @@ rule "Create a Link Button for the source of a DetailWire (not IteratorList): Ad
 		
 		schema : DomainSchema ( )
 		domainSource : DomainSource ( )
-		instance : DomainIterator ( )
+		instance : DomainIterator ( eContainer == container )
 		inst2 : DomainInstance ( instance.currentInstance == inst2 )
 
 		selectEdge : SelectEdge ( from == instance, to == domainSource )
@@ -277,7 +277,7 @@ rule "Create a Link Button for the source of a DetailWire (IteratorList): Add Pa
 		
 		schema : DomainSchema ( )
 		domainSource : DomainSource ( )
-		instance : DomainIterator ( )
+		instance : DomainIterator ( eContainer == container )
 		inst2 : DomainInstance ( instance.currentInstance == inst2 )
 		
 		selectEdge : SelectEdge ( from == instance, to == domainSource )

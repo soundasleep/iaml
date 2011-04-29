@@ -21,4 +21,4 @@ This is a brief technical guideline on what may be the best approach to implemen
   # Clean and rebuild the codegen plugin to identify build errors.
   # Update codegen templates to new metamodel (r2718).
   # Run a quick codegen smoke test, such as [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/codegen/model0_6/AllModel0_6CodegenTests.java?r=2710 AllModel0_6CodegenTests].
-  # Run [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/AllTests.java?r=2710 AllTests], identify failing test cases, fix errors.
+  # Run [http://code.google.com/p/iaml/source/browse/trunk/org.openiaml.model.tests/src/org/openiaml/model/tests/AllTests.java?r=2710 AllTests], identify failing test cases, fix errors (r2723).

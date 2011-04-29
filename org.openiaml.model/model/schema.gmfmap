@@ -7,16 +7,16 @@
     xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition">
   <nodes>
     <containmentFeature
-        href="../../../plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass/eStructuralFeatures"/>
+        href="iaml.ecore#//domain/DomainSchema/attributes"/>
     <ownedChild>
       <domainMetaElement
-          href="iaml.ecore#//domain/DomainAttribute"/>
+          href="iaml.ecore#//DomainAttribute"/>
       <labelMappings
           xsi:type="gmfmap:FeatureLabelMapping">
         <diagramLabel
             href="iaml.gmfgraph#DomainAttributeName"/>
         <features
-            href="../../../plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ENamedElement/name"/>
+            href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
           readOnly="true">

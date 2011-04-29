@@ -140,7 +140,7 @@
         <diagramLabel
             href="iaml.gmfgraph#DomainSchemaName"/>
         <features
-            href="../../../plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ENamedElement/name"/>
+            href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
           readOnly="true">
@@ -152,9 +152,11 @@
     </ownedChild>
   </nodes>
   <nodes>
+    <containmentFeature
+        href="iaml.ecore#//Scope/elements"/>
     <ownedChild>
       <domainMetaElement
-          href="iaml.ecore#//domain/DomainAttribute"/>
+          href="iaml.ecore#//DomainAttribute"/>
       <domainSpecialization
           body="self.oclIsTypeOf( DomainAttribute )"/>
       <labelMappings
@@ -162,7 +164,7 @@
         <diagramLabel
             href="iaml.gmfgraph#DomainAttributeName"/>
         <features
-            href="../../../plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ENamedElement/name"/>
+            href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
           readOnly="true">
@@ -655,7 +657,7 @@
         <diagramLabel
             href="iaml.gmfgraph#RoleName"/>
         <features
-            href="../../../plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ENamedElement/name"/>
+            href="iaml.ecore#//NamedElement/name"/>
       </labelMappings>
       <labelMappings
           readOnly="true">

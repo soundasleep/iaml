@@ -18,5 +18,6 @@ Export-Package: org.openiaml.model.model.components.provider,
  org.openiaml.model.model.wires.provider
 Require-Bundle: org.eclipse.core.runtime,
  org.openiaml.model;visibility:=reexport,
- org.eclipse.emf.edit;visibility:=reexport
+ org.eclipse.emf.edit;visibility:=reexport,
+ org.eclipse.emf.ecore.edit;bundle-version="2.5.0"
 Bundle-ActivationPolicy: lazy

@@ -1,23 +1,51 @@
 import simplegmf;
 import ecore;
 
+List[ecore::EClass] getAllNonAbstractElements(ecore::EPackage this) :
+	eClassifiers.typeSelect(ecore::EClass).select(c|!toBoolean(c.abstract) && !toBoolean(c.interface));
+
+/**
+ * Is the given EClass an edge type?
+ */
+isEdgeType(simplegmf::GMFConfiguration root, ecore::EClass cls) :
+	root.edgeTypes.exists(et|toBoolean(et.isSuperTypeOf(cls)));
+
 /**
  * Get the derived FigureConfiguration for this element.
  * Selects the first FigureConfiguration that is an instance of the given classifier,
- * or the <default> classifier if there are none
+ * or the <default> classifier if there are none.
  */
-simplegmf::FigureConfiguration deriveFigureConfiguration(simplegmf::GMFConfiguration root, ecore::EClass cls) :
-	if possibleFigureConfigurations(root, cls).isEmpty
-		then defaultFigureConfiguration(root)
-		else possibleFigureConfigurations(root, cls).first();
+simplegmf::AbstractFigure deriveFigureConfiguration(simplegmf::GMFConfiguration root, ecore::EClass cls) :
+	if isEdgeType(root, cls)
+		then
+			(if possibleEdgeConfigurations(root, cls).isEmpty
+				then defaultEdgeConfiguration(root)
+				else possibleEdgeConfigurations(root, cls).first())
+		else
+			(if possibleFigureConfigurations(root, cls).isEmpty
+				then defaultFigureConfiguration(root)
+				else possibleFigureConfigurations(root, cls).first());
+
+List[simplegmf::FigureProperty] defaultFigureProperties(simplegmf::GMFConfiguration root, ecore::EClass cls) :
+	if isEdgeType(root, cls)
+		then
+			defaultEdgeConfiguration(root).properties
+		else
+			defaultFigureConfiguration(root).properties;
 
 simplegmf::FigureConfiguration defaultFigureConfiguration(simplegmf::GMFConfiguration root) :
 	root.figureConfigurations.selectFirst(fc|fc.isDefault);
+
+simplegmf::FigureConfiguration defaultEdgeConfiguration(simplegmf::GMFConfiguration root) :
+	root.edgeConfigurations.selectFirst(fc|fc.isDefault);
 		
 // all figure configurations of which the given figure (e.g. VisibleThing) is a supertype of the given classifier (e.g. InputTextField)
 // may return the empty set 
 List[simplegmf::FigureConfiguration] possibleFigureConfigurations(simplegmf::GMFConfiguration root, ecore::EClass cls) :
 	root.figureConfigurations.select(c | c.classifier.isSuperTypeOf(cls) ); 
+
+List[simplegmf::FigureConfiguration] possibleEdgeConfigurations(simplegmf::GMFConfiguration root, ecore::EClass cls) :
+	root.edgeConfigurations.select(c | c.classifier.isSuperTypeOf(cls) ); 
 
 String getShapeType(simplegmf::GMFConfiguration root, ecore::EClass cls) :
 	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.getShapeType(org.openiaml.simplegmf.model.simplegmf.GMFConfiguration, org.eclipse.emf.ecore.EClass);

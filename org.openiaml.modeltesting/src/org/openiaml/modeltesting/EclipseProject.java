@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.model.tests;
+package org.openiaml.modeltesting;
 
 import junit.framework.TestCase;
 
@@ -26,6 +26,8 @@ import org.eclipse.core.runtime.Status;
  */
 public class EclipseProject extends TestCase {
 	
+	private static final String PLUGIN_ID = "org.openiaml.modeltesting";
+
 	private IProject project;
 	private String projectName;
 	
@@ -118,7 +120,7 @@ public class EclipseProject extends TestCase {
 				Thread.sleep(300);
 			}
 		} catch (InterruptedException e) {
-			return new Status(Status.ERROR, ModelTestCase.PLUGIN_ID, "refresh thread was interrupted", e);
+			return new Status(Status.ERROR, PLUGIN_ID , "refresh thread was interrupted", e);
 		}
 
 		return Status.OK_STATUS;

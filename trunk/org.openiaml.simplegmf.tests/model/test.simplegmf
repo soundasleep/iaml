@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sgmf:GMFConfiguration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:sgmf="http://openiaml.org/simplegmf" name="IAML Editors" defaultPaletteTitle="Model Elements" iconBundle="org.openiaml.model.edit">
+  <figureConfigurations name="&lt;default>" isDefault="true" shape="RECTANGLE">
+    <properties xsi:type="sgmf:FlowLayout" flowLayout="true"/>
+    <properties xsi:type="sgmf:LineWidth" width="1"/>
+    <properties xsi:type="sgmf:FigureMargin" margin="3"/>
+    <properties xsi:type="sgmf:BackgroundColor" color="white"/>
+    <properties xsi:type="sgmf:ForegroundColor" color="black"/>
+  </figureConfigurations>
+  <figureConfigurations name="VisibleThing">
+    <classifier href="iaml-r2734.ecore#//VisibleThing"/>
+    <properties xsi:type="sgmf:BackgroundColor" color="(255,255,192)"/>
+  </figureConfigurations>
+  <figureConfigurations name="EventTrigger" customShape="id1">
+    <classifier href="iaml-r2734.ecore#//EventTrigger"/>
+  </figureConfigurations>
+  <figureConfigurations name="Condition" shape="ELLIPSE">
+    <classifier href="iaml-r2734.ecore#//Condition"/>
+  </figureConfigurations>
+  <edgeConfigurations id="edge.default" name="&lt;default>" isDefault="true" targetArrow="true">
+    <properties xsi:type="sgmf:LineWidth" width="1"/>
+    <properties xsi:type="sgmf:LinePattern"/>
+  </edgeConfigurations>
+  <edgeConfigurations id="edge.wire" name="SyncWire" sourceArrow="true" targetArrow="true">
+    <classifier href="iaml-r2734.ecore#//wires/SyncWire"/>
+    <properties xsi:type="sgmf:LinePattern"/>
+  </edgeConfigurations>
+  <customShapes id="id1" name="EventTrigger">
+    <points/>
+    <points x="60"/>
+    <points x="80" y="20"/>
+    <points x="60" y="40"/>
+    <points y="40"/>
+  </customShapes>
+  <labelConfigurations name="ContainmentFeature" readOnly="true" specialLabel="CONTAINMENT_NAME">
+    <properties xsi:type="sgmf:LabelBold" value="true"/>
+    <properties xsi:type="sgmf:ForegroundColor" color="red"/>
+  </labelConfigurations>
+  <labelConfigurations name="Name">
+    <feature xsi:type="ecore:EAttribute" href="iaml-r2734.ecore#//NamedElement/name"/>
+  </labelConfigurations>
+  <labelConfigurations name="Stereotype" readOnly="true" prefix=": " specialLabel="METACLASS_NAME">
+    <properties xsi:type="sgmf:LabelUnderline" value="true"/>
+  </labelConfigurations>
+  <labelConfigurations name="Type" prefix="Type: ">
+    <classifiers href="iaml-r2734.ecore#//Property"/>
+    <feature xsi:type="ecore:EReference" href="iaml-r2734.ecore#//Property/type"/>
+  </labelConfigurations>
+  <labelConfigurations name="ParentName" readOnly="true" prefix="Parent: " parentFeature="true">
+    <classifiers href="iaml-r2734.ecore#//Operation"/>
+    <classifiers href="iaml-r2734.ecore#//Condition"/>
+    <classifiers href="iaml-r2734.ecore#//VisibleThing"/>
+    <feature xsi:type="ecore:EAttribute" href="iaml-r2734.ecore#//NamedElement/name"/>
+    <properties xsi:type="sgmf:ForegroundColor" color="gray"/>
+  </labelConfigurations>
+  <palettes name="Visual Elements">
+    <classifiers href="iaml-r2734.ecore#//VisibleThing"/>
+  </palettes>
+  <palettes name="Wires">
+    <classifiers href="iaml-r2734.ecore#//Wire"/>
+  </palettes>
+  <palettes name="Event Triggers">
+    <classifiers href="iaml-r2734.ecore#//EventTrigger"/>
+  </palettes>
+  <palettes name="Conditions">
+    <classifiers href="iaml-r2734.ecore#//Condition"/>
+  </palettes>
+  <diagramEditors id="root">
+    <classifier href="iaml-r2734.ecore#//InternetApplication"/>
+    <elements xsi:type="sgmf:ContainedNode" name="Frame">
+      <classifier href="iaml-r2734.ecore#//visual/Frame"/>
+    </elements>
+  </diagramEditors>
+  <diagramEditors id="frame">
+    <classifier href="iaml-r2734.ecore#//visual/Frame"/>
+    <elements xsi:type="sgmf:ContainedNode" name="InputTextField">
+      <classifier href="iaml-r2734.ecore#//visual/InputTextField"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="Label">
+      <classifier href="iaml-r2734.ecore#//visual/Label"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="InputForm">
+      <classifier href="iaml-r2734.ecore#//visual/InputForm"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="EventTrigger">
+      <classifier href="iaml-r2734.ecore#//EventTrigger"/>
+    </elements>
+  </diagramEditors>
+  <diagramEditors id="visual">
+    <classifier href="iaml-r2734.ecore#//VisibleThing"/>
+    <elements xsi:type="sgmf:ContainedNode" name="PrimitiveOperation">
+      <classifier href="iaml-r2734.ecore#//PrimitiveOperation"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
+      <classifier href="iaml-r2734.ecore#//CompositeOperation"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="SyncWire">
+      <classifier href="iaml-r2734.ecore#//wires/SyncWire"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="SetWire">
+      <classifier href="iaml-r2734.ecore#//wires/SetWire"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" id="" name="DomainSchema">
+      <classifier href="iaml-r2734.ecore#//domain/DomainSchema"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" id="" name="EventTrigger">
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml-r2734.ecore#//VisibleThing/onClick"/>
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml-r2734.ecore#//VisibleThing/onInput"/>
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml-r2734.ecore#//Accessible/onAccess"/>
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml-r2734.ecore#//Changeable/onChange"/>
+      <classifier href="iaml-r2734.ecore#//EventTrigger"/>
+    </elements>
+  </diagramEditors>
+</sgmf:GMFConfiguration>

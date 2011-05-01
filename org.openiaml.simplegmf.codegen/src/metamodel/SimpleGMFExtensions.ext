@@ -57,3 +57,22 @@ Void counterIncrement(String id):
 String counterGet(String id):
 	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.counterGet(java.lang.String);
 	
+/* for saving references back to labels */
+
+Void labelSave(String figureName, String labelName, String href, boolean elementIcon):
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.labelSave(java.lang.String, java.lang.String, java.lang.String, java.lang.Boolean);
+	
+List[int] savedLabelList():
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.savedLabelList();
+
+String savedLabelFigureName(int i):
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.savedLabelFigureName(java.lang.Integer);
+
+String savedLabelName(int i):
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.savedLabelName(java.lang.Integer);
+	
+String savedLabelHref(int i):
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.savedLabelHref(java.lang.Integer);
+
+boolean savedLabelElementIcon(int i):
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.savedLabelElementIcon(java.lang.Integer);

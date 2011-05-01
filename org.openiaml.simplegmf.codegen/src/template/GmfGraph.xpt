@@ -21,26 +21,20 @@
 	«counterReset("descriptors")»
 	«EXPAND generateGmfGraphPackage(this) FOR rootElement.ePackage»
   </figures>
+	
+«EXPAND generateAllLabelReferences»
 </gmfgraph:Canvas>
 	«ENDFILE»
 «ENDDEFINE»
 
 «DEFINE generateGmfGraphPackage(simplegmf::GMFConfiguration root) FOR ecore::EPackage»
 	<!-- package «name» «nsPrefix» «nsURI» -->
-	«EXPAND generateGmfGraphClass(root) FOREACH eClassifiers.typeSelect(ecore::EClass).select(c|!toBoolean(c.abstract) && !toBoolean(c.interface))»
+	«EXPAND generateGmfGraphClass(root) FOREACH 
+		eClassifiers.typeSelect(ecore::EClass).select(c|!toBoolean(c.abstract) && !toBoolean(c.interface))
+		.reject(c|root.edgeTypes.exists(edge|toBoolean(edge.isSuperTypeOf(c))))»
 	
 	«EXPAND generateGmfGraphPackage(root) FOREACH eSubpackages»
 «ENDDEFINE»
-
-/*
-	counterReset("descriptors")
-	counterMapReset("descriptors")
-	counterMap("descriptors", this)
-	counterIncrement("descriptors")
-	<!-- href //@figures.0/@descriptors.
-	counterGet("descriptors")
-	 -->
-*/
 
 «DEFINE generateGmfGraphClass(simplegmf::GMFConfiguration root) FOR ecore::EClass»
 	«LET deriveFigureConfiguration(root, this) AS fc»
@@ -128,8 +122,16 @@
 	</actualFigure>
 	«counterReset("labels")»
 	«FOREACH labels AS label»
-	  <accessors
-	      figure="//@figures.0/@descriptors.«counterGet("descriptors")»/@actualFigure/@children.«counterGet("labels")»"/>
+	    <accessors
+	        figure="//@figures.0/@descriptors.«counterGet("descriptors")»/@actualFigure/@children.«counterGet("labels")»"/>
+
+		«REM»save this label for <labels> later«ENDREM»
+		«labelSave(
+			toString(name) + "Figure", /* figure name */ 
+			toString(name) + toString(label.name) + "Figure", /* label name */
+			"//@figures.0/@descriptors." + counterGet("descriptors") + "/@accessors." + counterGet("labels"), /* href */
+			labels.first() == label ? true : false /* element icon */)» 
+
 	  «counterIncrement("labels")»
 	«ENDFOREACH»
 «ENDLET»
@@ -138,42 +140,6 @@
     «counterIncrement("descriptors")»
 	«ENDLET»
 «ENDDEFINE»
-
-
-«REM»
-        <children
-            xsi:type="gmfgraph:Label"
-            name="DomainAttributeNameFigure"
-            text="&lt;...>"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="DomainAttributeStereotypeFigure"
-            text=": DomainAttribute"/>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="DomainAttributeTypeFigure"
-            text="&lt;...>">
-          <foregroundColor
-              xsi:type="gmfgraph:ConstantColor"
-              value="black"/>
-        </children>
-        <children
-            xsi:type="gmfgraph:Label"
-            name="DomainAttributeParentNameFigure"
-            text="[none]">
-          <foregroundColor
-              xsi:type="gmfgraph:ConstantColor"
-              value="gray"/>
-        </children>
-      <accessors
-          figure="//@figures.0/@descriptors.1/@actualFigure/@children.0"/>
-      <accessors
-          figure="//@figures.0/@descriptors.1/@actualFigure/@children.1"/>
-      <accessors
-          figure="//@figures.0/@descriptors.1/@actualFigure/@children.3"/>
-      <accessors
-          figure="//@figures.0/@descriptors.1/@actualFigure/@children.2"/>
-«ENDREM»
 
 «DEFINE toColor FOR String»
 	«IF toString().startsWith("(")»
@@ -189,6 +155,16 @@
 	    xsi:type="gmfgraph:ConstantColor"
 	    value="«this»"
 	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE generateAllLabelReferences FOR simplegmf::GMFConfiguration»
+«FOREACH savedLabelList() AS i»
+  <labels
+      name="«savedLabelName(i)»"
+      figure="«savedLabelFigureName(i)»"
+      accessor="«savedLabelHref(i)»"
+      elementIcon="«IF savedLabelElementIcon(i)»true«ELSE»false«ENDIF»"/>
+«ENDFOREACH»
 «ENDDEFINE»
 
 /** 

@@ -1,0 +1,5 @@
+import simplegmf;
+   
+String throwException(String message) :
+	JAVA org.openiaml.docs.generation.codegen.ModeldocCodeGenerator.throwException(java.lang.String);
+	

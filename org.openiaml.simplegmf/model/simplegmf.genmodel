@@ -2,8 +2,9 @@
 <genmodel:GenModel xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.openiaml.simplegmf/src"
-    modelPluginID="org.openiaml.simplegmf" modelName="Simplegmf" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="6.0" copyrightFields="false" usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+    modelPluginID="org.openiaml.simplegmf" modelName="Simplegmf" modelPluginClass=""
+    rootImplementsInterface="" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    copyrightFields="false" usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <foreignModel>simplegmf.ecore</foreignModel>
   <genPackages prefix="SimpleGMF" basePackage="org.openiaml.simplegmf.model" disposableProviderFactory="true"
       ecorePackage="simplegmf.ecore#/">
@@ -51,7 +52,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//Point/x"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//Point/y"/>
     </genClasses>
-    <genClasses ecoreClass="simplegmf.ecore#//LabelConfiguration" labelFeature="#//SimpleGMF/LabelConfiguration/prefix">
+    <genClasses ecoreClass="simplegmf.ecore#//LabelConfiguration" labelFeature="#//simplegmf/LabelConfiguration/prefix">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simplegmf.ecore#//LabelConfiguration/classifiers"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//LabelConfiguration/readOnly"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//LabelConfiguration/prefix"/>

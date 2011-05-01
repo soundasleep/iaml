@@ -23,7 +23,7 @@
   </edgeConfigurations>
   <edgeConfigurations id="edge.wire" name="SyncWire" sourceArrow="true" targetArrow="true">
     <classifier href="iaml-r2734.ecore#//wires/SyncWire"/>
-    <properties xsi:type="sgmf:LinePattern"/>
+    <properties xsi:type="sgmf:LinePattern" linePattern="DASH"/>
   </edgeConfigurations>
   <customShapes id="id1" name="EventTrigger">
     <points/>

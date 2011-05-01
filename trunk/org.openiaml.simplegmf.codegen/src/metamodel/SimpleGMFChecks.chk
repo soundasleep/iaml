@@ -1,1 +1,10 @@
 import simplegmf;
+import ecore;
+
+extension metamodel::SimpleGMFExtensions;
+
+context simplegmf::GMFConfiguration ERROR "RootElement must be set":
+	rootElement != null;
+
+context simplegmf::GMFConfiguration ERROR "id must be set to create id.gmfgraph":
+	toString(id).length > 0;

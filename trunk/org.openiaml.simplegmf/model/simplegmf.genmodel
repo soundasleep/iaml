@@ -15,6 +15,8 @@
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="simplegmf.ecore#//BuiltinPatterns">
       <genEnumLiterals ecoreEnumLiteral="simplegmf.ecore#//BuiltinPatterns/SOLID"/>
+      <genEnumLiterals ecoreEnumLiteral="simplegmf.ecore#//BuiltinPatterns/DASH"/>
+      <genEnumLiterals ecoreEnumLiteral="simplegmf.ecore#//BuiltinPatterns/DOT"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="simplegmf.ecore#//BuiltinLabels">
       <genEnumLiterals ecoreEnumLiteral="simplegmf.ecore#//BuiltinLabels/DEFAULT"/>
@@ -52,7 +54,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//Point/x"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//Point/y"/>
     </genClasses>
-    <genClasses ecoreClass="simplegmf.ecore#//LabelConfiguration" labelFeature="#//simplegmf/LabelConfiguration/prefix">
+    <genClasses ecoreClass="simplegmf.ecore#//LabelConfiguration" labelFeature="#//simplegmf/NamedElement/name">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simplegmf.ecore#//LabelConfiguration/classifiers"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//LabelConfiguration/readOnly"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//LabelConfiguration/prefix"/>

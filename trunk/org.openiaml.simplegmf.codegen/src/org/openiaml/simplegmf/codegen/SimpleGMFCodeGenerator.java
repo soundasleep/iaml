@@ -35,6 +35,7 @@ public class SimpleGMFCodeGenerator {
 	public IStatus generateCode(EObject model, String targetFolder) {
 		
 		CurrentModel.setCurrentModel(model);
+		SimpleGMFCodegenFunctions.reset();
 		
 		// reset exception-key map
 		resetKeyToExceptionMap();

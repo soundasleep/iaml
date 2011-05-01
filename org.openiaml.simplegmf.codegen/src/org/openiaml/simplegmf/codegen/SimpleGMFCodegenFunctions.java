@@ -3,10 +3,12 @@
  */
 package org.openiaml.simplegmf.codegen;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.openiaml.simplegmf.model.simplegmf.BuiltinShapes;
 import org.openiaml.simplegmf.model.simplegmf.FigureConfiguration;
 import org.openiaml.simplegmf.model.simplegmf.GMFConfiguration;
 
@@ -58,6 +60,24 @@ public class SimpleGMFCodegenFunctions {
 		
 		throw new RuntimeException("Found no default FigureConfigurations for " + classifier);
 		
+	}
+	
+	// counter functions
+	private static Map<String,Integer> counterMap = new HashMap<String,Integer>();
+	
+	public static void counterReset(String key) {
+		System.out.println("reset " + key);
+		counterMap.put(key, 0);
+	}
+	
+	public static String counterGet(String key) {
+		System.out.println("get " + key);
+		return counterMap.get(key).toString();
+	}
+	
+	public static void counterIncrement(String key) {
+		System.out.println("increment " + key);
+		counterMap.put(key, counterMap.get(key) + 1);
 	}
 	
 }

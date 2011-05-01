@@ -46,3 +46,14 @@ String throwException(String message) :
 
 String debug(emf::EObject obj) :
 	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.debug(org.eclipse.emf.ecore.EObject);
+
+/* counters, to hack around EMF elements that do not have iDs set */
+Void counterReset(String id):
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.counterReset(java.lang.String);
+
+Void counterIncrement(String id):
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.counterIncrement(java.lang.String);
+	
+String counterGet(String id):
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.counterGet(java.lang.String);
+	

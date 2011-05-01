@@ -18,6 +18,7 @@
     <figures
         xsi:type="gmfgraph:PolylineDecoration"
         name="MyArrowDecorator"/>
+	«counterReset("descriptors")»
 	«EXPAND generateGmfGraphPackage(this) FOR rootElement.ePackage»
   </figures>
 </gmfgraph:Canvas>
@@ -106,33 +107,33 @@
 		eAllStructuralFeatures.contains(lc.feature)) /* matching a feature */
 	))
 	AS labels»
-«FOREACH labels AS label»
-    <children
-        xsi:type="gmfgraph:Label"
-        name="«name»«label.name»Figure"
-        text="«label.prefix»«IF label.specialLabel.toString() == "CONTAINMENT_NAME"»&lt;containment>«ELSEIF label.specialLabel.toString() == "METACLASS_NAME"»«name»«ELSE»&lt;...>«ENDIF»«label.suffix»">
-		«FOREACH label.properties.typeSelect(simplegmf::ForegroundColor) AS p»
-	        <foregroundColor
-	        	«EXPAND toColor FOR toString(p.color)»
-			/>
-		«ENDFOREACH»
-		«IF !label.properties.typeSelect(simplegmf::LabelBold).isEmpty»
-          <font
-              xsi:type="gmfgraph:BasicFont"
-              style="BOLD"/>
-        «ENDIF»
-    </children>
-«ENDFOREACH»
-«FOREACH labels AS label»
-  «counterReset("labels")»
-  <accessors
-      figure="//@figures.0/@descriptors.«counterGet("descriptors")»/@actualFigure/@children.«counterGet("labels")»"/>
-  «counterIncrement("labels")»
-«ENDFOREACH»
+	«FOREACH labels AS label»
+	    <children
+	        xsi:type="gmfgraph:Label"
+	        name="«name»«label.name»Figure"
+	        text="«label.prefix»«IF label.specialLabel.toString() == "CONTAINMENT_NAME"»&lt;containment>«ELSEIF label.specialLabel.toString() == "METACLASS_NAME"»«name»«ELSE»&lt;...>«ENDIF»«label.suffix»">
+			«FOREACH label.properties.typeSelect(simplegmf::ForegroundColor) AS p»
+		        <foregroundColor
+		        	«EXPAND toColor FOR toString(p.color)»
+				/>
+			«ENDFOREACH»
+			«IF !label.properties.typeSelect(simplegmf::LabelBold).isEmpty»
+	          <font
+	              xsi:type="gmfgraph:BasicFont"
+	              style="BOLD"/>
+	        «ENDIF»
+	    </children>
+	«ENDFOREACH»
+
+	</actualFigure>
+	«counterReset("labels")»
+	«FOREACH labels AS label»
+	  <accessors
+	      figure="//@figures.0/@descriptors.«counterGet("descriptors")»/@actualFigure/@children.«counterGet("labels")»"/>
+	  «counterIncrement("labels")»
+	«ENDFOREACH»
 «ENDLET»
 		
-      </actualFigure>
-    <!-- TODO accessors -->
     </descriptors>
     «counterIncrement("descriptors")»
 	«ENDLET»

@@ -1,9 +1,11 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Tests
+Bundle-Name: SimpleGMF Tests
 Bundle-SymbolicName: org.openiaml.simplegmf.tests
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 0.5.3.qualifier
 Require-Bundle: org.junit,
  org.openiaml.simplegmf;bundle-version="1.0.0",
  org.openiaml.simplegmf.codegen;bundle-version="1.0.0",
- org.eclipse.core.resources;bundle-version="3.5.2"
+ org.eclipse.core.resources;bundle-version="3.5.2",
+ org.eclipse.core.runtime;bundle-version="3.5.0",
+ org.openiaml.modeltesting;bundle-version="0.5.3"

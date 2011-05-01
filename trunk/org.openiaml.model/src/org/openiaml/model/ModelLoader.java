@@ -3,6 +3,7 @@
  */
 package org.openiaml.model;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,9 +47,15 @@ public class ModelLoader {
 	/**
 	 * Load the EMF model in the given filename.
 	 * 
+	 * <p>Deprecated: The <code>filename</code> parameter should not be relative, otherwise
+	 * proxy elements will often fail to be resolved: see <a href="http://www.jevon.org/wiki/Resolving_Proxy_EMF_Elements">http://www.jevon.org/wiki/Resolving_Proxy_EMF_Elements</a>.
+	 * Instead, use the {@link ModelLoader#load(File)} method.
+	 * 
 	 * @param filename the filename to load
 	 * @return
 	 * @throws ModelLoadException if the resource is null, or the resource contains too many elements
+	 * @deprecated
+	 * 		use {@link ModelLoader#load(File)} to ensure loaded paths are not relative
 	 */
 	public static EObject load(String filename) throws ModelLoadException {
 		ResourceSet resourceSet = new ResourceSetImpl();
@@ -60,6 +67,28 @@ public class ModelLoader {
 		
 		if (resource.getContents().size() != 1) {
 			throw new ModelLoadException(new RuntimeException("Unexpected number of contents in the file '" + filename + "': " + resource.getContents().size())); 
+		}
+		
+		return resource.getContents().get(0);
+	}
+
+	/**
+	 * Load the EMF model in the given file.
+	 * 
+	 * @param f the file to load
+	 * @return
+	 * @throws ModelLoadException if the resource is null, or the resource contains too many elements
+	 */
+	public static EObject load(File f) throws ModelLoadException {
+		ResourceSet resourceSet = new ResourceSetImpl();
+		URI uri = URI.createFileURI(f.getAbsolutePath());
+		Resource resource = resourceSet.getResource(uri, true);
+		
+		if (resource == null)
+			throw new ModelLoadException(new NullPointerException("Unexpected null resource in '" + f + "'"));
+		
+		if (resource.getContents().size() != 1) {
+			throw new ModelLoadException(new RuntimeException("Unexpected number of contents in the file '" + f + "': " + resource.getContents().size())); 
 		}
 		
 		return resource.getContents().get(0);

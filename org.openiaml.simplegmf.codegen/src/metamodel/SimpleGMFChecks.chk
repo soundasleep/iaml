@@ -16,4 +16,6 @@ context simplegmf::FigureConfiguration ERROR "The default FigureConfiguration mu
 	if toBoolean(isDefault)
 		then shape.toString() != "DEFAULT"
 		else true;			
-	
+
+context simplegmf::LabelConfiguration ERROR "A LabelConfiguration needs to have a name set":
+	toString(name).length > 0;	

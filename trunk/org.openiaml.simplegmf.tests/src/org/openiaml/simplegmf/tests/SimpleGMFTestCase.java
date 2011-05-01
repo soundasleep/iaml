@@ -3,10 +3,15 @@
  */
 package org.openiaml.simplegmf.tests;
 
-import org.eclipse.core.resources.IFile;
-import org.openiaml.simplegmf.codegen.SimpleGMFCodeGenerator;
+import java.io.File;
 
 import junit.framework.TestCase;
+
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.openiaml.modeltesting.EclipseProject;
+import org.openiaml.simplegmf.codegen.SimpleGMFCodeGenerator;
 
 /**
  * Tests the code generation functionality of SimpleGMF.
@@ -17,20 +22,28 @@ import junit.framework.TestCase;
 public class SimpleGMFTestCase extends TestCase {
 
 	/**
-	 * Tries to create a new instance of ModelDocumentation and
-	 * save it to a file. It also executes the actual documentation
-	 * generation through OAW.
 	 * 
 	 * @throws Exception
 	 */
 	public void testDump() throws Exception {
+
+		// create new project
+		EclipseProject project = new EclipseProject("simplegmf");
+		project.createProject();
 		
-		// TODO move EclipseProject into a generic testing framework
-		IFile modelFile = null;
-		
+		// copy local test instance
+		IFile modelFile = EclipseProject.copyFileIntoWorkspace(new File("test.simplegmf"), project.getFile("test.simplegmf"), new NullProgressMonitor());
+				
 		// generate code
 		SimpleGMFCodeGenerator codegen = new SimpleGMFCodeGenerator();
-		codegen.generateCode(modelFile);
+		IStatus status = codegen.generateCode(modelFile.getLocation().toFile());
+		
+		// check everything is OK
+		assertTrue(status.toString(), status.isOK());
+		
+		// files should be created
+		IFile check = project.getFile("root.gmftool");
+		assertTrue(check + " should exist", check.exists());
 		
 	}
 	

@@ -3,10 +3,8 @@
  */
 package org.openiaml.model.tests;
 
-import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -32,9 +30,7 @@ import net.sourceforge.jwebunit.htmlunit.HtmlUnitTestingEngineImpl;
 import net.sourceforge.jwebunit.junit.WebTestCase;
 import net.sourceforge.jwebunit.junit.WebTester;
 
-import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -464,44 +460,7 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	 * @throws FileNotFoundException 
 	 */
 	protected IFile copyFileIntoWorkspace(File sourceFile, IFile target) throws CoreException, FileNotFoundException {
-		createFolderRecursively(target.getParent());
-		
-		assertTrue("source file '" + sourceFile + "' should exist", sourceFile.exists());
-
-		assertFalse("target file '" + target + "' should not exist yet", target.exists());
-		
-		// copy
-		target.create(new BufferedInputStream(new FileInputStream(sourceFile)), true, monitor);
-		
-		// check
-		assertTrue("target file '" + target + "' should now exist", target.exists());
-		
-		return target;
-	}
-	
-	/**
-	 * If the given argument is an IFolder, create it if it does not yet
-	 * exist. This method will
-	 * also create any parent IFolders if they need to be created first.
-	 * 
-	 * @param parent
-	 * @throws CoreException 
-	 */
-	protected void createFolderRecursively(IContainer parent) throws CoreException {
-		if (!(parent instanceof IFolder))
-			return;
-		
-		IFolder folder = (IFolder) parent;
-		
-		if (folder.exists())
-			return;
-		
-		// it doesn't exist
-		// make sure the parent exists
-		createFolderRecursively(folder.getParent());
-		
-		// create this one
-		folder.create(true, true, new NullProgressMonitor());
+		return project.copyFileIntoWorkspace(sourceFile, target, monitor);	
 	}
 
 	/**

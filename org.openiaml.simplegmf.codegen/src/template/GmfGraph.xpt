@@ -22,37 +22,102 @@
 	«EXPAND generateGmfGraphPackage(this) FOR rootElement.ePackage»
   </figures>
 	
+«EXPAND generateAllNodeReferences(this) FOR rootElement.ePackage»
+«EXPAND generateAllEdgeReferences(this) FOR rootElement.ePackage»
 «EXPAND generateAllLabelReferences»
 </gmfgraph:Canvas>
 	«ENDFILE»
 «ENDDEFINE»
 
+«REM»node references«ENDREM»
+«DEFINE generateAllNodeReferences(simplegmf::GMFConfiguration root) FOR ecore::EPackage»
+	«EXPAND generateNodeReferences(root) FOREACH getAllNonAbstractElements().select(c|!isEdgeType(root, c))»
+	«EXPAND generateAllNodeReferences(root) FOREACH eSubpackages»
+«ENDDEFINE»
+
+«DEFINE generateNodeReferences(simplegmf::GMFConfiguration root) FOR ecore::EClass»
+  <nodes
+      name="«name»"
+      figure="«name»Figure"/>
+«ENDDEFINE»
+
+«REM»edge references«ENDREM»
+«DEFINE generateAllEdgeReferences(simplegmf::GMFConfiguration root) FOR ecore::EPackage»
+	«EXPAND generateEdgeReferences(root) FOREACH getAllNonAbstractElements().select(c|isEdgeType(root, c))»
+	«EXPAND generateAllEdgeReferences(root) FOREACH eSubpackages»
+«ENDDEFINE»
+
+«DEFINE generateEdgeReferences(simplegmf::GMFConfiguration root) FOR ecore::EClass»
+  <connections
+      name="«name»"
+      figure="«name»Figure"/>
+«ENDDEFINE»
+
 «DEFINE generateGmfGraphPackage(simplegmf::GMFConfiguration root) FOR ecore::EPackage»
 	<!-- package «name» «nsPrefix» «nsURI» -->
-	«EXPAND generateGmfGraphClass(root) FOREACH 
-		eClassifiers.typeSelect(ecore::EClass).select(c|!toBoolean(c.abstract) && !toBoolean(c.interface))
-		.reject(c|root.edgeTypes.exists(edge|toBoolean(edge.isSuperTypeOf(c))))»
-	
+	«EXPAND generateGmfGraphClass(root) FOREACH getAllNonAbstractElements()»
 	«EXPAND generateGmfGraphPackage(root) FOREACH eSubpackages»
+«ENDDEFINE»
+
+«REM»Figures based on the type of Figure«ENDREM»
+«DEFINE selectActualFigure(simplegmf::GMFConfiguration root, ecore::EClass classifier, Collection[simplegmf::FigureProperty] allProperties) FOR simplegmf::AbstractFigure»
+	«throwException("Unexpected AbstractFigure type: " + this)»
+«ENDDEFINE»
+
+«REM»for Nodes«ENDREM»
+«DEFINE selectActualFigure(simplegmf::GMFConfiguration root, ecore::EClass classifier, Collection[simplegmf::FigureProperty] allProperties) FOR simplegmf::FigureConfiguration»
+	<actualFigure
+«IF getShapeType(root, classifier) == "RECTANGLE"»
+  		xsi:type="gmfgraph:Rectangle"
+«ELSEIF getShapeType(root, classifier) == "ELLIPSE"»
+  		xsi:type="gmfgraph:Ellipse"
+«ELSE»
+	«throwException("Unknown shape for classifier " + classifier + ": " + shape.toString())»
+«ENDIF»
+  		name="«classifier.name»Figure">
+«ENDDEFINE»
+
+«REM»for Edges«ENDREM»
+«DEFINE selectActualFigure(simplegmf::GMFConfiguration root, ecore::EClass classifier, Collection[simplegmf::FigureProperty] allProperties) FOR simplegmf::EdgeConfiguration»
+	<actualFigure
+		xsi:type="gmfgraph:PolylineConnection"
+		name="«classifier.name»Figure"
+
+		«IF !allProperties.typeSelect(simplegmf::LinePattern).isEmpty»
+		«FOREACH {allProperties.typeSelect(simplegmf::LinePattern).first()} AS p»
+			«IF p.linePattern.toString() == "SOLID"»
+				«REM»empty«ENDREM»
+			«ELSEIF p.linePattern.toString() == "DASH"»
+				lineKind="LINE_DASH"
+			«ELSEIF p.linePattern.toString() == "DOT"»
+				lineKind="LINE_DOT"
+			«ELSE»
+				«throwException("Unknown line pattern: " + p.linePattern)»
+			«ENDIF»
+		«ENDFOREACH»
+		«ENDIF»
+	
+		«IF toBoolean(sourceArrow)»
+		sourceDecoration="//@figures.0/@figures.0"
+		«ENDIF»
+		«IF toBoolean(targetArrow)»
+		targetDecoration="//@figures.0/@figures.0"
+		«ENDIF»
+		>
 «ENDDEFINE»
 
 «DEFINE generateGmfGraphClass(simplegmf::GMFConfiguration root) FOR ecore::EClass»
 	«LET deriveFigureConfiguration(root, this) AS fc»
     <descriptors
         name="«name»Figure">
-      <actualFigure
-«IF getShapeType(root, this) == "RECTANGLE"»
-          xsi:type="gmfgraph:Rectangle"
-«ELSEIF getShapeType(root, this) == "ELLIPSE"»
-          xsi:type="gmfgraph:Ellipse"
-«ELSE»
-	«throwException("Unknown shape for classifier " + this + ": " + fc.shape.toString())»
-«ENDIF»
-          name="«name»Figure">
-«LET fc.properties.toSet().addAll(defaultFigureConfiguration(root).properties) AS allProperties»
+
+«LET fc.properties.toSet().addAll(defaultFigureProperties(root, this)) AS allProperties»
+	«EXPAND selectActualFigure(root, this, allProperties) FOR fc»
+
 	«FOREACH allProperties AS p»
 	<!-- «p.metaType.name»: «p» -->
 	«ENDFOREACH»
+	
 	«IF !allProperties.typeSelect(simplegmf::FlowLayout).isEmpty»
 	«FOREACH {allProperties.typeSelect(simplegmf::FlowLayout).first()} AS p»
 		«IF toBoolean(p.flowLayout)»
@@ -138,6 +203,7 @@
 		
     </descriptors>
     «counterIncrement("descriptors")»
+
 	«ENDLET»
 «ENDDEFINE»
 

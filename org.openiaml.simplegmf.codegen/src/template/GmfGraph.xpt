@@ -1,0 +1,38 @@
+«IMPORT simplegmf»
+«IMPORT ecore»
+
+«EXTENSION metamodel::SimpleGMFExtensions»
+
+/**
+ * Generates the .gmfgraph
+ */
+«DEFINE generateGmfGraph FOR simplegmf::GMFConfiguration»
+	«FILE toString(id) + ".gmfgraph"»
+	
+		root = «rootElement.toString()»
+		
+		root «rootElement» «debug(rootElement)»
+		«EXPAND generateGmfGraphPackage FOR rootElement.ePackage»
+	«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE generateGmfGraphPackage FOR ecore::EPackage»
+	package «toString()» = «debug()»
+	<!-- package «name» «nsPrefix» «nsURI» -->
+	
+	«EXPAND generateGmfGraphClass FOREACH eClassifiers.typeSelect(ecore::EClass).select(c|!toBoolean(c.abstract) && !toBoolean(c.interface))»
+	
+	«EXPAND generateGmfGraphPackage FOREACH eSubpackages»
+«ENDDEFINE»
+
+«DEFINE generateGmfGraphClass FOR ecore::EClass»
+	class
+	// «name»
+«ENDDEFINE»
+
+/** 
+ * a hack way to create backtrace-able errors
+ * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540  
+ */
+«DEFINE exception FOR Object»
+«ENDDEFINE»

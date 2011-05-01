@@ -13,7 +13,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="http://openiaml.org/simplegmf"
-            class="org.openiaml.simplegmf.model.SimpleGMF.SimpleGMFPackage"
+            class="org.openiaml.simplegmf.model.simplegmf.SimpleGMFPackage"
             genModel="model/simplegmf.genmodel"/>
    </extension>
 

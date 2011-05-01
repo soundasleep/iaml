@@ -1,8 +1,11 @@
 «IMPORT simplegmf»
+«IMPORT ecore»
 
 «EXTENSION metamodel::SimpleGMFExtensions»
 
 «DEFINE main FOR simplegmf::GMFConfiguration»
+	«EXPAND GmfGraph::generateGmfGraph FOR this»
+	
 	«FILE "out.html"»
 		«FOREACH diagramEditors AS editor»
 			editor: «editor.id»

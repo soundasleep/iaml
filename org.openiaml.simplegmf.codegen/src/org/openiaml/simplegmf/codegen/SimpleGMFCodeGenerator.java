@@ -3,7 +3,6 @@
  */
 package org.openiaml.simplegmf.codegen;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,6 +11,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.ecore.EObject;
 import org.openarchitectureware.workflow.WorkflowRunner;
 import org.openarchitectureware.workflow.util.ProgressMonitorAdapter;
 
@@ -29,8 +29,12 @@ public class SimpleGMFCodeGenerator {
 	 * Generate code for a given model file into a given output directory.
 	 * Does NOT deal with inference.
 	 * 
+	 * @param targetFolder target folder to output to; can be "." for current directory
+	 * 
 	 */
-	public IStatus generateCode(File file) {
+	public IStatus generateCode(EObject model, String targetFolder) {
+		
+		CurrentModel.setCurrentModel(model);
 		
 		// reset exception-key map
 		resetKeyToExceptionMap();
@@ -54,13 +58,15 @@ public class SimpleGMFCodeGenerator {
 			
 			String wfFile = "src/workflow/simplegmf.oaw";
 			Map<String,String> properties = new HashMap<String,String>();
-			properties.put("model", file.getAbsolutePath());
-			properties.put("src-gen", ".");	// have to get absolute filename for output dir
+			// properties.put("model", );
+			properties.put("src-gen", targetFolder);	// have to get absolute filename for output dir
 			
 			Map<String,Object> slotContents = new HashMap<String,Object>();
 
 			try {
-				executeWorkflow(wfFile, new NullProgressMonitor(), properties, slotContents);
+				boolean result = executeWorkflow(wfFile, new NullProgressMonitor(), properties, slotContents);
+				if (!result)
+					return new Status(Status.ERROR, "org.openiaml.simplegmf.codegen", "Workflow could not be generated: expected true, got: " + result);
 			} catch (OperationCanceledException e) {
 				// monitor was cancelled; OK
 			} finally {
@@ -71,12 +77,13 @@ public class SimpleGMFCodeGenerator {
 		} finally {
 			// reset the classloader/log
 			//Thread.currentThread().setContextClassLoader(oldcl);
+			CurrentModel.setCurrentModel(null);
 		}
 			
 	}
 	
-	protected void executeWorkflow(String wfFile, IProgressMonitor monitor, Map<String, String> properties, Map<String, ?> slotContents) {
-		new WorkflowRunner().run(wfFile,
+	protected boolean executeWorkflow(String wfFile, IProgressMonitor monitor, Map<String, String> properties, Map<String, ?> slotContents) {
+		return new WorkflowRunner().run(wfFile,
 				new ProgressMonitorAdapter(monitor), properties, slotContents);
 		
 	}

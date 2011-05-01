@@ -1,5 +1,17 @@
 import simplegmf;
-   
+import ecore;
+
+String toString(String s) :
+	s == null ? "" : s;
+
+String toString(ecore::EString s) :
+	s == null ? "" : s;
+
+boolean toBoolean(ecore::EBoolean b) :
+	b;
+
 String throwException(String message) :
 	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodeGenerator.throwException(java.lang.String);
-	
+
+String debug(emf::EObject obj) :
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.debug(org.eclipse.emf.ecore.EObject);

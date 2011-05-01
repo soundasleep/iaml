@@ -10,9 +10,8 @@
        	<registerGeneratedEPackage value="org.openiaml.simplegmf.model.simplegmf.SimpleGMFPackage" /><!-- loads subpackages -->
 	</bean>
 
-	<!-- load model and store it in slot 'model' -->
-	<component class="org.eclipse.mwe.emf.Reader">
-		<uri value="file:///${model}" />
+	<!-- get model already loaded in memory, and store it in slot 'model' -->
+	<component class="org.openiaml.simplegmf.codegen.CurrentModel">
 		<modelSlot value="model" />
 	</component>
 	
@@ -20,7 +19,7 @@
 	<component class="oaw.check.CheckComponent">
 		<metaModel id="mm"
 			class="org.eclipse.m2t.type.emf.EmfRegistryMetaModel"/>
-		<checkFile value="metamodel::ModeldocChecks" />
+		<checkFile value="metamodel::SimpleGMFChecks" />
 		<emfAllChildrenSlot value="model" />
 	</component>
 
@@ -28,9 +27,11 @@
 	<component class="org.openarchitectureware.xpand2.Generator">
 		<metaModel idRef="mm"/>
 		<expand
-			value="template::ModeldocTemplate::main FOR model" />
+			value="template::SimpleGMFTemplate::main FOR model" />
 		<outlet path="${src-gen}" >
-			<postprocessor class="org.openiaml.docs.generation.codegen.IACleanerBeautifier"/>
+			<!--
+			postprocessor class="org.openiaml.docs.generation.codegen.IACleanerBeautifier"
+			-->
 		</outlet>
 	</component>
 

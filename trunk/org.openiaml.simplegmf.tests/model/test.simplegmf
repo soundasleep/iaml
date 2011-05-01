@@ -111,4 +111,5 @@
       <classifier href="iaml-r2734.ecore#//EventTrigger"/>
     </elements>
   </diagramEditors>
+  <rootElement href="iaml-r2734.ecore#//InternetApplication"/>
 </sgmf:GMFConfiguration>

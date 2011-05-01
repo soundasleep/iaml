@@ -1,14 +1,45 @@
 import simplegmf;
 import ecore;
 
+/**
+ * Get the derived FigureConfiguration for this element.
+ * Selects the first FigureConfiguration that is an instance of the given classifier,
+ * or the <default> classifier if there are none
+ */
+simplegmf::FigureConfiguration deriveFigureConfiguration(simplegmf::GMFConfiguration root, ecore::EClass cls) :
+	if possibleFigureConfigurations(root, cls).isEmpty
+		then defaultFigureConfiguration(root)
+		else possibleFigureConfigurations(root, cls).first();
+
+simplegmf::FigureConfiguration defaultFigureConfiguration(simplegmf::GMFConfiguration root) :
+	root.figureConfigurations.selectFirst(fc|fc.isDefault);
+		
+// all figure configurations of which the given figure (e.g. VisibleThing) is a supertype of the given classifier (e.g. InputTextField)
+// may return the empty set 
+List[simplegmf::FigureConfiguration] possibleFigureConfigurations(simplegmf::GMFConfiguration root, ecore::EClass cls) :
+	root.figureConfigurations.select(c | c.classifier.isSuperTypeOf(cls) ); 
+
+String getShapeType(simplegmf::GMFConfiguration root, ecore::EClass cls) :
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.getShapeType(org.openiaml.simplegmf.model.simplegmf.GMFConfiguration, org.eclipse.emf.ecore.EClass);
+
+/**
+ * Extensions to satisfy OAW's bugs.
+ */
+
 String toString(String s) :
 	s == null ? "" : s;
 
-String toString(ecore::EString s) :
+String toString(emf::EObject s) :
 	s == null ? "" : s;
+
+String toString(ecore::EString s) :
+	toStringOrNull(s);
 
 boolean toBoolean(ecore::EBoolean b) :
 	b;
+
+String toStringOrNull(ecore::EString s) :
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.toStringOrNull(java.lang.String);
 
 String throwException(String message) :
 	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodeGenerator.throwException(java.lang.String);

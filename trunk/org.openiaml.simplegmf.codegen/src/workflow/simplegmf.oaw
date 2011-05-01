@@ -8,6 +8,7 @@
 	<bean class="org.eclipse.mwe.emf.StandaloneSetup" >
 		<platformUri value=".."/>
        	<registerGeneratedEPackage value="org.openiaml.simplegmf.model.simplegmf.SimpleGMFPackage" /><!-- loads subpackages -->
+       	<registerGeneratedEPackage value="org.eclipse.emf.ecore.EcorePackage" /><!-- loads subpackages -->
 	</bean>
 
 	<!-- get model already loaded in memory, and store it in slot 'model' -->

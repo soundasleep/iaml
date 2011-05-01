@@ -7,27 +7,152 @@
  * Generates the .gmfgraph
  */
 «DEFINE generateGmfGraph FOR simplegmf::GMFConfiguration»
-	«FILE toString(id) + ".gmfgraph"»
-	
-		root = «rootElement.toString()»
-		
-		root «rootElement» «debug(rootElement)»
-		«EXPAND generateGmfGraphPackage FOR rootElement.ePackage»
+	«FILE toString(id) + ".gmfgraph"-»
+<?xml version="1.0" encoding="UTF-8"?>
+<gmfgraph:Canvas xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:gmfgraph="http://www.eclipse.org/gmf/2006/GraphicalDefinition" name="model">
+  <figures
+      name="Default">
+    <figures
+        xsi:type="gmfgraph:PolylineDecoration"
+        name="MyArrowDecorator"/>
+	«EXPAND generateGmfGraphPackage(this) FOR rootElement.ePackage»
+  </figures>
+</gmfgraph:Canvas>
 	«ENDFILE»
 «ENDDEFINE»
 
-«DEFINE generateGmfGraphPackage FOR ecore::EPackage»
-	package «toString()» = «debug()»
+«DEFINE generateGmfGraphPackage(simplegmf::GMFConfiguration root) FOR ecore::EPackage»
 	<!-- package «name» «nsPrefix» «nsURI» -->
+	«EXPAND generateGmfGraphClass(root) FOREACH eClassifiers.typeSelect(ecore::EClass).select(c|!toBoolean(c.abstract) && !toBoolean(c.interface))»
 	
-	«EXPAND generateGmfGraphClass FOREACH eClassifiers.typeSelect(ecore::EClass).select(c|!toBoolean(c.abstract) && !toBoolean(c.interface))»
-	
-	«EXPAND generateGmfGraphPackage FOREACH eSubpackages»
+	«EXPAND generateGmfGraphPackage(root) FOREACH eSubpackages»
 «ENDDEFINE»
 
-«DEFINE generateGmfGraphClass FOR ecore::EClass»
-	class
-	// «name»
+/*
+	counterReset("descriptors")
+	counterMapReset("descriptors")
+	counterMap("descriptors", this)
+	counterIncrement("descriptors")
+	<!-- href //@figures.0/@descriptors.
+	counterGet("descriptors")
+	 -->
+*/
+
+«DEFINE generateGmfGraphClass(simplegmf::GMFConfiguration root) FOR ecore::EClass»
+	«LET deriveFigureConfiguration(root, this) AS fc»
+    <descriptors
+        name="«name»Figure">
+      <actualFigure
+«IF getShapeType(root, this) == "RECTANGLE"»
+          xsi:type="gmfgraph:rectangle"
+«ELSEIF getShapeType(root, this) == "ELLIPSE"»
+          xsi:type="gmfgraph:Ellipse"
+«ELSE»
+	«throwException("Unknown shape for classifier " + this + ": " + fc.shape.toString())»
+«ENDIF»
+          name="«name»Figure">
+«LET fc.properties.addAll(defaultFigureConfiguration(root).properties) AS allProperties»
+	«FOREACH allProperties AS p»
+	<!-- «p.metaType.name»: «p» -->
+	«ENDFOREACH»
+	«IF !allProperties.typeSelect(simplegmf::FlowLayout).isEmpty»
+	«FOREACH {allProperties.typeSelect(simplegmf::FlowLayout).first()} AS p»
+		«IF toBoolean(p.flowLayout)»
+        <layout
+            xsi:type="gmfgraph:FlowLayout"
+            vertical="true"/>
+		«ENDIF»
+	«ENDFOREACH»
+	«ENDIF»
+	
+	«IF !allProperties.typeSelect(simplegmf::ForegroundColor).isEmpty»
+	«FOREACH {allProperties.typeSelect(simplegmf::ForegroundColor).first()} AS p»
+        <foregroundColor
+        	«EXPAND toColor FOR toString(p.color)»
+		/>
+	«ENDFOREACH»
+	«ENDIF»	
+	
+	«IF !allProperties.typeSelect(simplegmf::BackgroundColor).isEmpty»
+	«FOREACH {allProperties.typeSelect(simplegmf::BackgroundColor).first()} AS p»
+        <backgroundColor
+        	«EXPAND toColor FOR toString(p.color)»
+		/>
+	«ENDFOREACH»
+	«ENDIF»	
+	
+	«IF !allProperties.typeSelect(simplegmf::FigureMargin).isEmpty»
+	«FOREACH {allProperties.typeSelect(simplegmf::FigureMargin).first()} AS p»
+        <border
+            xsi:type="gmfgraph:MarginBorder">
+          <insets
+              top="«p.margin»"
+              left="«p.margin»"
+              bottom="«p.margin»"
+              right="«p.margin»"/>
+        </border>
+	«ENDFOREACH»
+	«ENDIF»	
+	
+«ENDLET»
+      </actualFigure>
+    <!-- TODO accessors -->
+    </descriptors>
+	«ENDLET»
+«ENDDEFINE»
+
+«REM»
+        <children
+            xsi:type="gmfgraph:Label"
+            name="DomainAttributeNameFigure"
+            text="&lt;...>"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="DomainAttributeStereotypeFigure"
+            text=": DomainAttribute"/>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="DomainAttributeTypeFigure"
+            text="&lt;...>">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="black"/>
+        </children>
+        <children
+            xsi:type="gmfgraph:Label"
+            name="DomainAttributeParentNameFigure"
+            text="[none]">
+          <foregroundColor
+              xsi:type="gmfgraph:ConstantColor"
+              value="gray"/>
+        </children>
+      <accessors
+          figure="//@figures.0/@descriptors.1/@actualFigure/@children.0"/>
+      <accessors
+          figure="//@figures.0/@descriptors.1/@actualFigure/@children.1"/>
+      <accessors
+          figure="//@figures.0/@descriptors.1/@actualFigure/@children.3"/>
+      <accessors
+          figure="//@figures.0/@descriptors.1/@actualFigure/@children.2"/>
+«ENDREM»
+
+«DEFINE toColor FOR String»
+	«IF toString().startsWith("(")»
+		«LET toString() AS rgb»
+		«LET rgb.subString(1,rgb.length-1).split(",") AS rgb2»
+	    xsi:type="gmfgraph:RGBColor"
+	    red="«rgb2.get(0)»"
+	    green="«rgb2.get(1)»"
+	    blue="«rgb2.get(2)»"
+		«ENDLET»
+		«ENDLET»
+	«ELSE»
+	    xsi:type="gmfgraph:ConstantColor"
+	    value="«this»"
+	«ENDIF»
 «ENDDEFINE»
 
 /** 

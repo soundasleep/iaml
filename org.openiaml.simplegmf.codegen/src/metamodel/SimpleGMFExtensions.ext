@@ -56,6 +56,9 @@ List[simplegmf::FigureConfiguration] possibleEdgeConfigurations(simplegmf::GMFCo
 String getShapeType(simplegmf::GMFConfiguration root, ecore::EClass cls) :
 	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.getShapeType(org.openiaml.simplegmf.model.simplegmf.GMFConfiguration, org.eclipse.emf.ecore.EClass);
 
+simplegmf::CustomShape getCustomShape(simplegmf::GMFConfiguration root, ecore::EClass cls) :
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.getCustomShape(org.openiaml.simplegmf.model.simplegmf.GMFConfiguration, org.eclipse.emf.ecore.EClass);
+
 /**
  * Get the URI of the containing resource of this EObject.
  */

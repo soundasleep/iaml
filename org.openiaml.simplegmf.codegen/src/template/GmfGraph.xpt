@@ -68,7 +68,9 @@
 «REM»for Nodes«ENDREM»
 «DEFINE selectActualFigure(simplegmf::GMFConfiguration root, ecore::EClass classifier, Collection[simplegmf::FigureProperty] allProperties) FOR simplegmf::FigureConfiguration»
 	<actualFigure
-«IF getShapeType(root, classifier) == "RECTANGLE"»
+«IF getCustomShape(root, classifier) != null»
+		xsi:type="gmfgraph:ScalablePolygon"
+«ELSEIF getShapeType(root, classifier) == "RECTANGLE"»
   		xsi:type="gmfgraph:Rectangle"
 «ELSEIF getShapeType(root, classifier) == "ELLIPSE"»
   		xsi:type="gmfgraph:Ellipse"
@@ -76,6 +78,13 @@
 	«throwException("Unknown shape for classifier " + classifier + ": " + shape.toString())»
 «ENDIF»
   		name="«classifier.name»Figure">
+  	«IF getCustomShape(root, classifier) != null»
+  	«LET getCustomShape(root, classifier) AS cs»
+  		«FOREACH cs.points AS p»
+  			<template x="«p.x»" y="«p.y»" />
+  		«ENDFOREACH»
+  	«ENDLET»
+  	«ENDIF»
 «ENDDEFINE»
 
 «REM»for Edges«ENDREM»

@@ -12,6 +12,7 @@
       <genEnumLiterals ecoreEnumLiteral="simplegmf.ecore#//BuiltinShapes/DEFAULT"/>
       <genEnumLiterals ecoreEnumLiteral="simplegmf.ecore#//BuiltinShapes/RECTANGLE"/>
       <genEnumLiterals ecoreEnumLiteral="simplegmf.ecore#//BuiltinShapes/ELLIPSE"/>
+      <genEnumLiterals ecoreEnumLiteral="simplegmf.ecore#//BuiltinShapes/ROUNDED_RECTANGLE"/>
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="simplegmf.ecore#//BuiltinPatterns">
       <genEnumLiterals ecoreEnumLiteral="simplegmf.ecore#//BuiltinPatterns/SOLID"/>
@@ -22,6 +23,12 @@
       <genEnumLiterals ecoreEnumLiteral="simplegmf.ecore#//BuiltinLabels/DEFAULT"/>
       <genEnumLiterals ecoreEnumLiteral="simplegmf.ecore#//BuiltinLabels/CONTAINMENT_NAME"/>
       <genEnumLiterals ecoreEnumLiteral="simplegmf.ecore#//BuiltinLabels/METACLASS_NAME"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="simplegmf.ecore#//BuiltinAlignments">
+      <genEnumLiterals ecoreEnumLiteral="simplegmf.ecore#//BuiltinAlignments/BEGINNING"/>
+      <genEnumLiterals ecoreEnumLiteral="simplegmf.ecore#//BuiltinAlignments/CENTER"/>
+      <genEnumLiterals ecoreEnumLiteral="simplegmf.ecore#//BuiltinAlignments/END"/>
+      <genEnumLiterals ecoreEnumLiteral="simplegmf.ecore#//BuiltinAlignments/FILL"/>
     </genEnums>
     <genClasses ecoreClass="simplegmf.ecore#//GMFConfiguration">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simplegmf.ecore#//GMFConfiguration/figureConfigurations"/>
@@ -92,6 +99,8 @@
     </genClasses>
     <genClasses ecoreClass="simplegmf.ecore#//FlowLayout">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//FlowLayout/flowLayout"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//FlowLayout/majorAlignment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//FlowLayout/minorAlignment"/>
     </genClasses>
     <genClasses ecoreClass="simplegmf.ecore#//LineWidth">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//LineWidth/width"/>

@@ -1,13 +1,11 @@
 /**
  * 
  */
-package org.openiaml.simplegmf.tests;
+package org.openiaml.model.tests.simplegmf;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -19,58 +17,40 @@ import junit.framework.TestCase;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EObject;
+import org.openiaml.model.ModelLoader;
 import org.openiaml.simplegmf.codegen.SimpleGMFCodeGenerator;
 import org.openiaml.simplegmf.model.simplegmf.GMFConfiguration;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 /**
- * Tests the code generation functionality of SimpleGMF.
- * 
  * @author jmwright
  *
  */
-public class SimpleGMFTestCase extends TestCase {
+public class GenerateIAMLGMFMappings extends TestCase {
+	
+	private static final String MODEL_ROOT = "../org.openiaml.model/model/";
 
 	/**
+	 * This is essentially a script to generate the .gmfXXX mappings from
+	 * the <code>/org.openiaml.model/model/iaml.simplegmf</code> file.
 	 * 
 	 * @throws Exception
 	 */
-	public void testDump() throws Exception {
-		
-		// delete everything in output folder
-		File outputFolder = new File("output");
-		if (outputFolder.exists() && outputFolder.isDirectory()) {
-			for (File f : outputFolder.listFiles()) {
-				if (!f.isDirectory()) {
-					assertTrue("Could not delete " + f, f.delete());
-				}
-			}
-		}
-
-		File localFile = new File("model/test.simplegmf");
-		assertTrue(localFile + " should exist", localFile.exists());
+	public void testGenerateIAMLGMFMappings() throws Exception {
 		
 		// load model
-		EObject model = ModelLoader.load(new File("model/test.simplegmf"));
+		EObject model = ModelLoader.load(new File(MODEL_ROOT + "iaml.simplegmf"));
 		assertNotNull(model);
 		assertTrue(model.getClass().getName(), model instanceof GMFConfiguration);
-		
+
 		// generate code
 		SimpleGMFCodeGenerator codegen = new SimpleGMFCodeGenerator();
-		IStatus status = codegen.generateCode(model, "./output");
-		
+		IStatus status = codegen.generateCode(model, MODEL_ROOT);
+
 		// check everything is OK
 		assertTrue(status.toString(), status.isOK());
 		
-		// copy the local ecore file into output folder
-		File ecoreSource = new File("model/iaml-r2734.ecore");
-		assertTrue(ecoreSource + " should exist", ecoreSource.exists());
-		File ecoreCache = new File("output/" + ecoreSource.getName());
-		assertFalse(ecoreCache + " should not exist", ecoreCache.exists());
-		copyFile(ecoreSource, ecoreCache);
-		assertTrue(ecoreCache + " should now exist", ecoreCache.exists());
-
 		// check that files are created;
 		String[] filenames = new String[] {
 				"iaml.gmfgraph",
@@ -84,7 +64,7 @@ public class SimpleGMFTestCase extends TestCase {
 		
 		for (String f : filenames) {
 			// check the file exists
-			File ff = new File("output/" + f);
+			File ff = new File(MODEL_ROOT + f);
 			assertTrue(ff + " should exist", ff.exists());
 			assertFalse(ff + " should not be a directory", ff.isDirectory());
 
@@ -92,29 +72,8 @@ public class SimpleGMFTestCase extends TestCase {
 			loadDocument(ff);
 		}
 		
-		// files should be created
-		File check = new File("output/root.gmftool");
-		assertTrue(check + " should exist", check.exists());
-		
 	}
 	
-	/**
-	 * @param source
-	 * @param target
-	 * @throws IOException 
-	 */
-	private void copyFile(File source, File target) throws IOException {
-		FileReader fr = new FileReader(source);
-		FileWriter fw = new FileWriter(target);
-		int c;
-		while ((c = fr.read()) != -1) {
-			fw.write(c);
-		}
-		fr.close();
-		fw.close();
-		
-	}
-
 	/**
 	 * Load an XML document.
 	 * TODO refactor out into helper class.
@@ -146,6 +105,5 @@ public class SimpleGMFTestCase extends TestCase {
 		
 		return doc;
 	}
-
 	
 }

@@ -50,7 +50,7 @@
   <labelConfigurations name="Stereotype" readOnly="true" prefix=": " specialLabel="METACLASS_NAME">
     <properties xsi:type="sgmf:LabelUnderline" value="true"/>
   </labelConfigurations>
-  <labelConfigurations name="Type" prefix="Type: ">
+  <labelConfigurations name="Type" prefix="Type: " providedAtRuntime="true" readOnly="true">
     <classifiers href="iaml.ecore#//Property"/>
     <feature xsi:type="ecore:EReference" href="iaml.ecore#//Property/type"/>
   </labelConfigurations>

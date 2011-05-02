@@ -51,6 +51,12 @@ String getShapeType(simplegmf::GMFConfiguration root, ecore::EClass cls) :
 	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.getShapeType(org.openiaml.simplegmf.model.simplegmf.GMFConfiguration, org.eclipse.emf.ecore.EClass);
 
 /**
+ * Get the URI of the containing resource of this EObject.
+ */
+String getResourceFileName(emf::EObject object) :
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.getResourceFileName(org.eclipse.emf.ecore.EObject);
+
+/**
  * Extensions to satisfy OAW's bugs.
  */
 

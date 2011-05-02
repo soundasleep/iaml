@@ -81,6 +81,13 @@ public class SimpleGMFCodegenFunctions {
 		
 	}
 	
+	/**
+	 * Get the URI of the containing resource of this EObject.
+	 */
+	public static String getResourceFileName(EObject obj) {
+		return obj.eResource().getURI().lastSegment();
+	}
+	
 	// counter functions
 	private Map<String,Integer> counterMap = new HashMap<String,Integer>();
 	

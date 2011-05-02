@@ -23,3 +23,5 @@ context simplegmf::LabelConfiguration ERROR "A LabelConfiguration needs to have 
 context simplegmf::DiagramEditor ERROR "A DiagramEditor must have an ID set":
 	toString(id).length > 0;
 
+context simplegmf::ReferencedNode ERROR "A ReferencedNode cannot have a containment feature set":
+	containmentFeatures.isEmpty;

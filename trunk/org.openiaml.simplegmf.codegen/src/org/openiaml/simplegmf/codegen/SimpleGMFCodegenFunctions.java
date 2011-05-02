@@ -10,9 +10,11 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.openiaml.simplegmf.model.simplegmf.FigureConfiguration;
 import org.openiaml.simplegmf.model.simplegmf.GMFConfiguration;
+import org.openiaml.simplegmf.model.simplegmf.LabelConfiguration;
 
 
 /**
@@ -120,9 +122,12 @@ public class SimpleGMFCodegenFunctions {
 
 	}
 	
+	/*
+	 * For saving back references to labels.
+	 */
+	
 	private List<SavedReference> savedReferences = new ArrayList<SavedReference>();
 	
-	// for saving back references to labels
 	public static void labelSave(String figureName, String labelName, String href, Boolean elementIcon) {
 		SavedReference ref = new SavedReference(figureName, labelName, href, elementIcon);
 		getInstance().savedReferences.add(ref);
@@ -151,6 +156,96 @@ public class SimpleGMFCodegenFunctions {
 	public static Boolean savedLabelElementIcon(Integer i) {
 		return getInstance().savedReferences.get(i).elementIcon;
 	}
+	
+	/*
+	 * For saving references between EClasses and labels.
+	 */
+	
+	private Map<EClass, List<LabelConfiguration>> gmfmapLabelMap = 
+		new HashMap<EClass, List<LabelConfiguration>>();
+	
+	public static void gmfmapLabelMapReset() {
+		getInstance().gmfmapLabelMap.clear();
+	}
+	
+	public static void gmfmapLabelMapSet(EClass classifier, LabelConfiguration label) {
+		if (!getInstance().gmfmapLabelMap.containsKey(classifier)) {
+			getInstance().gmfmapLabelMap.put(classifier, new ArrayList<LabelConfiguration>());
+		}
+		
+		getInstance().gmfmapLabelMap.get(classifier).add(label);
+	}
+	
+	public static List<LabelConfiguration> gmfmapLabelMapGet(EClass classifier) {
+		return getInstance().gmfmapLabelMap.get(classifier);
+	}
+	
+	/*
+	 * For saving references between .gmftool and .gmfmap for creation tool purposes.
+	 * A multi-level map of (node mappings) -> href strings.
+	 */
+	
+	private Map<String, Map<EClass, String>> defaultCreationTools =
+		new HashMap<String, Map<EClass, String>>();
+	private Map<String, Map<EClass, Map<EStructuralFeature, String>>> featureCreationTools =
+		new HashMap<String, Map<EClass, Map<EStructuralFeature, String>>>();
+	
+	/**
+	 * @see #defaultCreationTools
+	 */
+	public static void putCreationToolMappingDefault(String id, EClass classifier, String href) {
+		SimpleGMFCodegenFunctions instance = getInstance();
+		
+		if (!instance.defaultCreationTools.containsKey(id)) {
+			instance.defaultCreationTools.put(id, new HashMap<EClass, String>());
+		}
+		instance.defaultCreationTools.get(id).put(classifier, href);
+		
+	}
+	
+	/**
+	 * @see #featureCreationTools
+	 */
+	public static void putCreationToolMappingFeature(String id, EClass classifier, EStructuralFeature feature, String href) {
+		SimpleGMFCodegenFunctions instance = getInstance();
+		
+		if (!instance.featureCreationTools.containsKey(id)) {
+			instance.featureCreationTools.put(id, new HashMap<EClass, Map<EStructuralFeature, String>>());
+		}
+		if (!instance.featureCreationTools.get(id).containsKey(classifier)) {
+			instance.featureCreationTools.get(id).put(classifier, new HashMap<EStructuralFeature, String>());
+		}
+		instance.featureCreationTools.get(id).get(classifier).put(feature, href);
+		
+	}
+
+	/**
+	 * @returns null if there is no mapping found
+	 */
+	public static String getCreationToolMapping(String id, EClass classifier, EStructuralFeature feature) {
+		SimpleGMFCodegenFunctions instance = getInstance();
+		
+		// try a specific mapping
+		if (instance.featureCreationTools.containsKey(id)) {
+			if (instance.featureCreationTools.get(id).containsKey(classifier)) {
+				if (instance.featureCreationTools.get(id).get(classifier).containsKey(feature)) {
+					return instance.featureCreationTools.get(id).get(classifier).get(feature);
+				}
+			}
+		}
+		
+		// try a direct class mapping
+		if (instance.defaultCreationTools.containsKey(id)) {
+			if (instance.defaultCreationTools.get(id).containsKey(classifier)) {
+				return instance.defaultCreationTools.get(id).get(classifier);
+			}
+		}
+		
+		// return null otherwise
+		return null;
+
+	}
+
 	
 }
 

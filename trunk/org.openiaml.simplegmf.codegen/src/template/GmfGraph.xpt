@@ -18,6 +18,7 @@
     <figures
         xsi:type="gmfgraph:PolylineDecoration"
         name="MyArrowDecorator"/>
+    «gmfmapLabelMapReset()»
 	«counterReset("descriptors")»
 	«EXPAND generateGmfGraphPackage(this) FOR rootElement.ePackage»
   </figures>
@@ -155,7 +156,7 @@
               right="«p.margin»"/>
         </border>
 	«ENDFOREACH»
-	«ENDIF»	
+	«ENDIF»
 	
 «ENDLET»
 
@@ -167,6 +168,7 @@
 	))
 	AS labels»
 	«FOREACH labels AS label»
+		«gmfmapLabelMapSet(this, label)»
 	    <children
 	        xsi:type="gmfgraph:Label"
 	        name="«name»«label.name»Figure"

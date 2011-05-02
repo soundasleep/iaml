@@ -13,7 +13,11 @@
     xmlns:gmfmap="http://www.eclipse.org/gmf/2008/mappings"
     xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition">
     
-  «EXPAND elementDefinition(root, this) FOREACH elements.typeSelect(simplegmf::ContainedNode).toSet().addAll(elements.typeSelect(simplegmf::ReferencedNode))»
+  <!-- nodes -->
+  «EXPAND elementNodeDefinition(root, this) FOREACH elements.typeSelect(simplegmf::ContainedNode).toSet().addAll(elements.typeSelect(simplegmf::ReferencedNode))»
+
+  <!-- edges -->
+  «EXPAND elementEdgeDefinition(root, this) FOREACH elements.typeSelect(simplegmf::ContainedEdge).toSet().addAll(elements.typeSelect(simplegmf::ReferencedEdge))»
 
   <!-- canvas element -->
   <diagram>
@@ -30,7 +34,7 @@
 	«ENDFILE»
 «ENDDEFINE»
 
-«DEFINE elementDefinition(simplegmf::GMFConfiguration root, simplegmf::DiagramEditor editor) FOR simplegmf::DiagramElement»
+«DEFINE elementNodeDefinition(simplegmf::GMFConfiguration root, simplegmf::DiagramEditor editor) FOR simplegmf::DiagramElement»
 	«IF containmentFeatures.isEmpty»
 		<!-- node '«classifier.name»' -->
 		<nodes>
@@ -45,13 +49,13 @@
 				«ELSE»
 				    <containmentFeature
 				        href="«EXPAND toHref(root) FOR allContainmentFeatures.first()»"/>
-				    «EXPAND ownedChild(root, editor, allContainmentFeatures.first(), false) FOR this»
+				    «EXPAND ownedChild(root, editor, allContainmentFeatures.first(), false, true) FOR this»
 				«ENDIF»
 			«ENDLET»
 		«ELSE»
 			«REM»ReferencedNodes: no containment feature«ENDREM»
 			<!-- no containment feature -->
-		    «EXPAND ownedChild(root, editor, null, false) FOR this»
+		    «EXPAND ownedChild(root, editor, null, false, true) FOR this»
 		«ENDIF»
 		</nodes>
 	«ELSE»
@@ -63,7 +67,7 @@
 				<nodes>
 					<containmentFeature
 				        href="«EXPAND toHref(root) FOR feature»"/>
-				    «EXPAND ownedChild(root, editor, feature, true) FOR this»
+				    «EXPAND ownedChild(root, editor, feature, true, true) FOR this»
 				</nodes>
 			«ENDFOREACH»
 		«ELSE»
@@ -73,11 +77,55 @@
 	«ENDIF»
 «ENDDEFINE»
 
+«DEFINE elementEdgeDefinition(simplegmf::GMFConfiguration root, simplegmf::DiagramEditor editor) FOR simplegmf::DiagramElement»
+	«IF containmentFeatures.isEmpty»
+		<!-- edge '«classifier.name»' -->
+		<links>
+		«IF simplegmf::ContainedEdge.isInstance(this)»
+			«REM»ContainedEdges: derive containment feature«ENDREM»
+			«LET editor.classifier.eAllContainments.select(c| ecore::EClass.isInstance(c.eType) &&
+				toBoolean(((ecore::EClass) c.eType).isSuperTypeOf(this.classifier))) AS allContainmentFeatures»
+				«IF allContainmentFeatures.isEmpty»
+					«throwException("No containment feature found for: " + this)»
+				«ELSEIF allContainmentFeatures.size > 1»
+					«throwException("More than one containment feature found for: " + this + ", found " + allContainmentFeatures.size + ": " + allContainmentFeatures)»
+				«ELSE»
+				    <containmentFeature
+				        href="«EXPAND toHref(root) FOR allContainmentFeatures.first()»"/>
+				    «EXPAND ownedChild(root, editor, allContainmentFeatures.first(), false, false) FOR this»
+				«ENDIF»
+			«ENDLET»
+		«ELSE»
+			«REM»ReferencedEdges: no containment feature«ENDREM»
+			<!-- no containment feature -->
+		    «EXPAND ownedChild(root, editor, null, false, false) FOR this»
+		«ENDIF»
+		</links>
+	«ELSE»
+		«IF simplegmf::ContainedEdge.isInstance(this)»
+			<!-- contained edge '«classifier.name»' -->
+			«REM»ContainedEdges: lots of specific containment features«ENDREM»
+			«FOREACH containmentFeatures AS feature»
+				<!-- containment feature: «EXPAND toHref(root) FOR feature» -->
+				<links>
+					<containmentFeature
+				        href="«EXPAND toHref(root) FOR feature»"/>
+				    «EXPAND ownedChild(root, editor, feature, true, false) FOR this»
+				</links>
+			«ENDFOREACH»
+		«ELSE»
+			«REM»ReferencedEdges: exception«ENDREM»
+			«throwException("Only ContainedEdges can have containment features set: " + this)»
+		«ENDIF»
+	«ENDIF»
+«ENDDEFINE»
+
 «DEFINE ownedChild(simplegmf::GMFConfiguration root, 
 	simplegmf::DiagramEditor editor, 
 	ecore::EStructuralFeature feature,
-	boolean multipleContainments) FOR simplegmf::DiagramElement»
-<ownedChild>
+	boolean multipleContainments,
+	boolean isNode) FOR simplegmf::DiagramElement»
+«IF isNode»<ownedChild>«ENDIF»
 	<domainMetaElement
 		href="«EXPAND toHref(root) FOR classifier»"/>
 «IF feature != null»
@@ -101,11 +149,22 @@ domainElement.eContainingFeature().getName().equals(&quot;«feature.name»&quot;);
 	«ENDIF»
 «ENDIF»
 
+«IF isNode»
 	<diagramNode
 		href="«root.id».gmfgraph#«classifier.name»"/>
+«ELSE»
+	<diagramLink
+		href="«root.id».gmfgraph#«classifier.name»"/>
+    <sourceMetaFeature
+        xsi:type="ecore:EReference"
+        href="«EXPAND toHref(root) FOR deriveSourceMetaElement(classifier)»"/>
+    <linkMetaFeature
+        xsi:type="ecore:EReference"
+        href="«EXPAND toHref(root) FOR deriveTargetMetaElement(classifier)»"/>
+«ENDIF»
 	
 	«EXPAND labelMappings(root, this) FOREACH gmfmapLabelMapGet(classifier)»
-</ownedChild>
+«IF isNode»</ownedChild>«ENDIF»
 «ENDDEFINE»
 
 «DEFINE labelMappings(simplegmf::GMFConfiguration root, simplegmf::DiagramElement element) FOR simplegmf::LabelConfiguration»

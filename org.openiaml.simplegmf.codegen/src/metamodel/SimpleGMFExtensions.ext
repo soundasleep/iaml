@@ -10,6 +10,12 @@ List[ecore::EClass] getAllNonAbstractElements(ecore::EPackage this) :
 isEdgeType(simplegmf::GMFConfiguration root, ecore::EClass cls) :
 	root.edgeTypes.exists(et|toBoolean(et.isSuperTypeOf(cls)));
 
+ecore::EStructuralFeature deriveSourceMetaElement(ecore::EClass cls) :
+	cls.eAllStructuralFeatures.selectFirst(f | toString(f.name) == "from" || toString(f.name) == "source");
+
+ecore::EStructuralFeature deriveTargetMetaElement(ecore::EClass cls) :
+	cls.eAllStructuralFeatures.selectFirst(f | toString(f.name) == "to" || toString(f.name) == "target");
+
 /**
  * Get the derived FigureConfiguration for this element.
  * Selects the first FigureConfiguration that is an instance of the given classifier,

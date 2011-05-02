@@ -25,3 +25,10 @@ context simplegmf::DiagramEditor ERROR "A DiagramEditor must have an ID set":
 
 context simplegmf::ReferencedNode ERROR "A ReferencedNode cannot have a containment feature set":
 	containmentFeatures.isEmpty;
+
+context simplegmf::ContainedEdge ERROR "Cannot derive the source meta feature for " + toString(classifier.name) :
+	deriveSourceMetaElement(classifier) != null;
+
+context simplegmf::ReferencedEdge ERROR "Cannot derive the source meta feature for " + toString(classifier.name) :
+	deriveSourceMetaElement(classifier) != null;
+	

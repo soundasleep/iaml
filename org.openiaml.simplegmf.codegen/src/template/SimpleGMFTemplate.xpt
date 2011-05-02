@@ -9,12 +9,6 @@
 	«EXPAND GmfTool::generateGmfTool(this) FOREACH diagramEditors»
 
 	«EXPAND GmfMap::generateGmfMap(this) FOREACH diagramEditors»
-	
-	«FILE "out.html"»
-		«FOREACH diagramEditors AS editor»
-			editor: «editor.id»
-		«ENDFOREACH»
-	«ENDFILE»
 «ENDDEFINE»
 
 /** 

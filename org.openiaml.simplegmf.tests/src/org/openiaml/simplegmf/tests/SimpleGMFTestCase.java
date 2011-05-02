@@ -19,6 +19,7 @@ import junit.framework.TestCase;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.EObject;
+import org.openiaml.simplegmf.codegen.ModelLoader;
 import org.openiaml.simplegmf.codegen.SimpleGMFCodeGenerator;
 import org.openiaml.simplegmf.model.simplegmf.GMFConfiguration;
 import org.w3c.dom.Document;

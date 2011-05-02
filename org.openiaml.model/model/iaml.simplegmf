@@ -71,20 +71,19 @@
   <edgeConfigurations id="" name="&lt;default>" isDefault="true" targetArrow="true">
     <properties xsi:type="sgmf:LineWidth" width="1"/>
     <properties xsi:type="sgmf:LinePattern"/>
+    <properties xsi:type="sgmf:ForegroundColor" color="black"/>
   </edgeConfigurations>
   <edgeConfigurations name="ActionEdge" targetArrow="true">
     <classifier href="iaml.ecore#//ActionEdge"/>
     <properties xsi:type="sgmf:LinePattern" linePattern="DASH"/>
   </edgeConfigurations>
-  <edgeConfigurations name="Wire">
-    <classifier href="iaml.ecore#//Wire"/>
-    <properties xsi:type="sgmf:LinePattern" linePattern="DASH"/>
-  </edgeConfigurations>
   <edgeConfigurations id="" name="SyncWire" sourceArrow="true" targetArrow="true">
     <classifier href="iaml.ecore#//wires/SyncWire"/>
+    <properties xsi:type="sgmf:LinePattern" linePattern="DASH"/>
   </edgeConfigurations>
-  <edgeConfigurations id="" name="SetWire" targetArrow="true">
-    <classifier href="iaml.ecore#//wires/SetWire"/>
+  <edgeConfigurations name="Wire" targetArrow="true">
+    <classifier href="iaml.ecore#//Wire"/>
+    <properties xsi:type="sgmf:LinePattern" linePattern="DASH"/>
   </edgeConfigurations>
   <customShapes id="id1" name="EventTrigger">
     <points/>

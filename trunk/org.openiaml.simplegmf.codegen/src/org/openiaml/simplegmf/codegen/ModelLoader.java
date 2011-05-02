@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.openiaml.simplegmf.tests;
+package org.openiaml.simplegmf.codegen;
 
 import java.io.File;
 import java.util.HashMap;

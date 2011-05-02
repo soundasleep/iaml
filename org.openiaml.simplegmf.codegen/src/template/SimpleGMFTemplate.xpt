@@ -7,6 +7,8 @@
 	«EXPAND GmfGraph::generateGmfGraph FOR this»
 	
 	«EXPAND GmfTool::generateGmfTool(this) FOREACH diagramEditors»
+
+	«EXPAND GmfMap::generateGmfMap(this) FOREACH diagramEditors»
 	
 	«FILE "out.html"»
 		«FOREACH diagramEditors AS editor»

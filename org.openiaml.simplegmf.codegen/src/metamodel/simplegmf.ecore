@@ -36,6 +36,7 @@
     <eLiterals name="DEFAULT"/>
     <eLiterals name="RECTANGLE" value="1"/>
     <eLiterals name="ELLIPSE" value="2" literal="ELLIPSE"/>
+    <eLiterals name="ROUNDED_RECTANGLE" value="3"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="BuiltinPatterns">
     <eLiterals name="SOLID"/>
@@ -102,6 +103,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FlowLayout" eSuperTypes="#//FigureProperty">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="flowLayout" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="majorAlignment" eType="#//BuiltinAlignments"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minorAlignment" eType="#//BuiltinAlignments"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LineWidth" eSuperTypes="#//FigureProperty">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
@@ -125,5 +128,11 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
         iD="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="BuiltinAlignments">
+    <eLiterals name="BEGINNING"/>
+    <eLiterals name="CENTER" value="1"/>
+    <eLiterals name="END" value="2"/>
+    <eLiterals name="FILL" value="3"/>
   </eClassifiers>
 </ecore:EPackage>

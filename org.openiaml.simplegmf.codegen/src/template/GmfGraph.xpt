@@ -72,6 +72,8 @@
 		xsi:type="gmfgraph:ScalablePolygon"
 «ELSEIF getShapeType(root, classifier) == "RECTANGLE"»
   		xsi:type="gmfgraph:Rectangle"
+«ELSEIF getShapeType(root, classifier) == "ROUNDED_RECTANGLE"»
+  		xsi:type="gmfgraph:RoundedRectangle"
 «ELSEIF getShapeType(root, classifier) == "ELLIPSE"»
   		xsi:type="gmfgraph:Ellipse"
 «ELSE»
@@ -133,7 +135,10 @@
 		«IF toBoolean(p.flowLayout)»
         <layout
             xsi:type="gmfgraph:FlowLayout"
-            vertical="true"/>
+            vertical="true"
+            majorAlignment="«p.majorAlignment.toString()»"
+            minorAlignment="«p.minorAlignment.toString()»"
+            />
 		«ENDIF»
 	«ENDFOREACH»
 	«ENDIF»

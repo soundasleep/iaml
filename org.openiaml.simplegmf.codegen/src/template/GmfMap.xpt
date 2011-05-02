@@ -187,7 +187,7 @@ domainElement.eContainingFeature().getName().equals(&quot;«feature.name»&quot;);
 	>
 	<diagramLabel
 		href="iaml.gmfgraph#«element.classifier.name»«name»Figure"/>
-	«IF feature != null && !toBoolean(parentFeature)»
+	«IF feature != null && !toBoolean(parentFeature) && !toBoolean(providedAtRuntime)»
 		<features
 			href="«EXPAND toHref(root) FOR feature»"/>
 	«ENDIF»

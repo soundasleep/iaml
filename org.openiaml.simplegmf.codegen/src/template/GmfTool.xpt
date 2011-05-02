@@ -1,0 +1,87 @@
+«IMPORT simplegmf»
+«IMPORT ecore»
+
+«EXTENSION metamodel::SimpleGMFExtensions»
+
+«DEFINE generateGmfTool(simplegmf::GMFConfiguration root) FOR simplegmf::DiagramEditor»
+	«FILE toString(id) + ".gmftool"-»
+<?xml version="1.0" encoding="UTF-8"?>
+<gmftool:ToolRegistry xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition">
+  <palette
+      title="modelPalette">
+«LET elements.typeSelect(simplegmf::ContainedNode).toSet().addAll(elements.typeSelect(simplegmf::ContainedEdge)) AS creationTools»
+	«REM»any in the default group?«ENDREM»
+	«LET creationTools.reject(t| root.palettes.exists(p| p.classifiers.exists(c | toBoolean(c.isSuperTypeOf(t.classifier))))) AS defaultTools»
+	«IF !defaultTools.isEmpty»
+		<!-- default tool group -->
+	    <tools
+	        xsi:type="gmftool:ToolGroup"
+	        title="«root.defaultPaletteTitle»"
+	        description="«root.defaultPaletteTitle»">
+	      «EXPAND toolTemplate(root) FOREACH defaultTools»
+	    </tools>
+      «ENDIF»
+	«ENDLET»
+	
+	«FOREACH root.palettes AS p»
+		«LET creationTools.select(t | p.classifiers.exists( c | toBoolean(c.isSuperTypeOf(t.classifier) ))) AS theseTools»
+		«IF !theseTools.isEmpty»
+			<!-- palette group '«p.name»' -->
+		    <tools
+		        xsi:type="gmftool:ToolGroup"
+		        title="«p.name»"
+		        description="«p.name»"
+		        collapsible="true">
+				«EXPAND toolTemplate(root) FOREACH theseTools»
+		    </tools>
+		«ENDIF»
+		«ENDLET»
+	«ENDFOREACH»
+«ENDLET»
+  </palette>
+</gmftool:ToolRegistry>
+	«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE toolTemplate(simplegmf::GMFConfiguration root) FOR simplegmf::DiagramElement»
+	«IF containmentFeatures.isEmpty»
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="«classifier.name»"
+          description="Create new «classifier.name»">
+			«EXPAND toolIconTemplate(root)»
+      </tools>
+   	«ELSE»
+   		«FOREACH containmentFeatures AS f»
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="«classifier.name» [«f.name»]"
+          description="Create new «classifier.name» [«f.name»]">
+			«EXPAND toolIconTemplate(root)»
+      </tools>
+      	«ENDFOREACH»
+   	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE toolIconTemplate(simplegmf::GMFConfiguration root) FOR simplegmf::DiagramElement»
+	«IF toString(root.iconBundle).length > 0»
+	<smallIcon
+	    xsi:type="gmftool:BundleImage"
+	    path="icons/full/obj16/«classifier.name».gif"
+	    bundle="«root.iconBundle»"/>
+	<largeIcon
+	    xsi:type="gmftool:BundleImage"
+	    path="icons/full/obj32/«classifier.name».gif"
+	    bundle="org.openiaml.model.edit"/>
+	«ENDIF»
+«ENDDEFINE»
+
+/** 
+ * a hack way to create backtrace-able errors
+ * based on http://www.openarchitectureware.org/forum/viewtopic.php?showtopic=5540  
+ */
+«DEFINE exception FOR Object»
+«ENDDEFINE»

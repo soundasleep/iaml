@@ -45,12 +45,13 @@
 				«ELSE»
 				    <containmentFeature
 				        href="«EXPAND toHref(root) FOR allContainmentFeatures.first()»"/>
-				    «EXPAND ownedChild(root, editor) FOR this»
+				    «EXPAND ownedChild(root, editor, allContainmentFeatures.first(), false) FOR this»
 				«ENDIF»
 			«ENDLET»
 		«ELSE»
 			«REM»ReferencedNodes: no containment feature«ENDREM»
 			<!-- no containment feature -->
+		    «EXPAND ownedChild(root, editor, null, false) FOR this»
 		«ENDIF»
 		</nodes>
 	«ELSE»
@@ -62,7 +63,7 @@
 				<nodes>
 					<containmentFeature
 				        href="«EXPAND toHref(root) FOR feature»"/>
-				    «EXPAND ownedChild(root, editor) FOR this»
+				    «EXPAND ownedChild(root, editor, feature, true) FOR this»
 				</nodes>
 			«ENDFOREACH»
 		«ELSE»
@@ -72,14 +73,67 @@
 	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE ownedChild(simplegmf::GMFConfiguration root, simplegmf::DiagramEditor editor)  FOR simplegmf::DiagramElement»
+«DEFINE ownedChild(simplegmf::GMFConfiguration root, 
+	simplegmf::DiagramEditor editor, 
+	ecore::EStructuralFeature feature,
+	boolean multipleContainments) FOR simplegmf::DiagramElement»
 <ownedChild>
 	<domainMetaElement
 		href="«EXPAND toHref(root) FOR classifier»"/>
+«IF feature != null»
+	«IF multipleContainments»
+		<domainSpecialization
+			body="return «IF feature.eType != classifier»domainElement instanceof «classifier.name» && «ENDIF-»
+domainElement.eContainingFeature().getName().equals(&quot;«feature.name»&quot;);"
+			language="java"/>
+	«ELSE»
+		«IF feature.eType != classifier»
+		<domainSpecialization
+			body="self.oclIsTypeOf( «classifier.name» )"/>
+		«ENDIF»
+	«ENDIF»
+
+	«REM»@palette/@tools.4/@tools.1«ENDREM»
+	«IF getCreationToolMapping(toString(editor.id), classifier, feature) != null»
+	<tool
+		xsi:type="gmftool:CreationTool"
+		href="«editor.id».gmftool#//«getCreationToolMapping(toString(editor.id), classifier, feature)»"/>
+	«ENDIF»
+«ENDIF»
+
 	<diagramNode
 		href="«root.id».gmfgraph#«classifier.name»"/>
+	
+	«EXPAND labelMappings(root, this) FOREACH gmfmapLabelMapGet(classifier)»
 </ownedChild>
 «ENDDEFINE»
+
+«DEFINE labelMappings(simplegmf::GMFConfiguration root, simplegmf::DiagramElement element) FOR simplegmf::LabelConfiguration»
+<labelMappings
+	«IF feature != null && !toBoolean(parentFeature)»
+		xsi:type="gmfmap:FeatureLabelMapping"
+	«ENDIF»
+	«IF toBoolean(readOnly)»
+		readOnly="true"
+	«ENDIF»
+	«IF toString(viewPattern).length > 0»
+		viewPattern="«viewPattern»"
+	«ENDIF»
+	«IF toString(editorPattern).length > 0»
+		editorPattern="«editorPattern»"
+	«ENDIF»
+	«IF toString(editPattern).length > 0»
+		editPattern="«editPattern»"
+	«ENDIF»
+	>
+	<diagramLabel
+		href="iaml.gmfgraph#«element.classifier»«name»"/>
+	«IF feature != null && !toBoolean(parentFeature)»
+		<features
+			href="«EXPAND toHref(root) FOR feature»"/>
+	«ENDIF»
+</labelMappings>
+«ENDDEFINE» 
 
 /**
  * Translates an EStructuralFeature into something similar to:

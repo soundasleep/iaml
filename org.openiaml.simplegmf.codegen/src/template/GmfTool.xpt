@@ -12,6 +12,7 @@
     xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition">
   <palette
       title="modelPalette">
+      «counterReset("tool0")»
 «LET elements.typeSelect(simplegmf::ContainedNode).toSet().addAll(elements.typeSelect(simplegmf::ContainedEdge)) AS creationTools»
 	«REM»any in the default group?«ENDREM»
 	«LET creationTools.reject(t| root.palettes.exists(p| p.classifiers.exists(c | toBoolean(c.isSuperTypeOf(t.classifier))))) AS defaultTools»
@@ -21,8 +22,10 @@
 	        xsi:type="gmftool:ToolGroup"
 	        title="«root.defaultPaletteTitle»"
 	        description="«root.defaultPaletteTitle»">
-	      «EXPAND toolTemplate(root) FOREACH defaultTools»
+		  «counterReset("tool1")»
+	      «EXPAND toolTemplate(root, this) FOREACH defaultTools»
 	    </tools>
+        «counterIncrement("tool0")»
       «ENDIF»
 	«ENDLET»
 	
@@ -35,8 +38,10 @@
 		        title="«p.name»"
 		        description="«p.name»"
 		        collapsible="true">
-				«EXPAND toolTemplate(root) FOREACH theseTools»
+			    «counterReset("tool1")»
+				«EXPAND toolTemplate(root, this) FOREACH theseTools»
 		    </tools>
+			«counterIncrement("tool0")»
 		«ENDIF»
 		«ENDLET»
 	«ENDFOREACH»
@@ -46,7 +51,7 @@
 	«ENDFILE»
 «ENDDEFINE»
 
-«DEFINE toolTemplate(simplegmf::GMFConfiguration root) FOR simplegmf::DiagramElement»
+«DEFINE toolTemplate(simplegmf::GMFConfiguration root, simplegmf::DiagramEditor editor) FOR simplegmf::DiagramElement»
 	«IF containmentFeatures.isEmpty»
       <tools
           xsi:type="gmftool:CreationTool"
@@ -54,6 +59,8 @@
           description="Create new «classifier.name»">
 			«EXPAND toolIconTemplate(root)»
       </tools>
+      	«putCreationToolMappingDefault(toString(editor.id), classifier, "@palette/@tools." + counterGet("tool0") + "/@tools." + counterGet("tool1"))»
+		«counterIncrement("tool1")»
    	«ELSE»
    		«FOREACH containmentFeatures AS f»
       <tools
@@ -62,6 +69,8 @@
           description="Create new «classifier.name» [«f.name»]">
 			«EXPAND toolIconTemplate(root)»
       </tools>
+      	«putCreationToolMappingFeature(toString(editor.id), classifier, f, "@palette/@tools." + counterGet("tool0") + "/@tools." + counterGet("tool1"))»
+		«counterIncrement("tool1")»
       	«ENDFOREACH»
    	«ENDIF»
 «ENDDEFINE»

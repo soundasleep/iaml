@@ -59,13 +59,6 @@ String getResourceFileName(emf::EObject object) :
 /**
  * Extensions to satisfy OAW's bugs.
  */
-
-String toString(String s) :
-	s == null ? "" : s;
-
-String toString(emf::EObject s) :
-	s == null ? "" : s;
-
 String toString(ecore::EString s) :
 	toStringOrNull(s);
 
@@ -110,3 +103,25 @@ String savedLabelHref(int i):
 
 boolean savedLabelElementIcon(int i):
 	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.savedLabelElementIcon(java.lang.Integer);
+
+/* for saving references between EClasses and Labels */
+Void gmfmapLabelMapReset() :
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.gmfmapLabelMapReset();
+
+Void gmfmapLabelMapSet(ecore::EClass classifier, simplegmf::LabelConfiguration label) :
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.gmfmapLabelMapSet(org.eclipse.emf.ecore.EClass, org.openiaml.simplegmf.model.simplegmf.LabelConfiguration);
+
+List[simplegmf::LabelConfiguration] gmfmapLabelMapGet(ecore::EClass classifier) : 
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.gmfmapLabelMapGet(org.eclipse.emf.ecore.EClass);
+
+/* for saving references between .gmftool and .gmfmap for creation tools */
+String getCreationToolMapping(String id, ecore::EClass classifier, ecore::EStructuralFeature feature) :
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.getCreationToolMapping(java.lang.String, org.eclipse.emf.ecore.EClass, org.eclipse.emf.ecore.EStructuralFeature);
+
+Void putCreationToolMappingFeature(String id, ecore::EClass classifier, ecore::EStructuralFeature feature, String href) :
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.putCreationToolMappingFeature(java.lang.String, org.eclipse.emf.ecore.EClass, org.eclipse.emf.ecore.EStructuralFeature, java.lang.String);
+
+Void putCreationToolMappingDefault(String id, ecore::EClass classifier, String href) :
+	JAVA org.openiaml.simplegmf.codegen.SimpleGMFCodegenFunctions.putCreationToolMappingDefault(java.lang.String, org.eclipse.emf.ecore.EClass, java.lang.String);
+
+

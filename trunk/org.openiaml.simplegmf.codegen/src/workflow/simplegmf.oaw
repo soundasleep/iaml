@@ -30,9 +30,7 @@
 		<expand
 			value="template::SimpleGMFTemplate::main FOR model" />
 		<outlet path="${src-gen}" >
-			<!--
-			postprocessor class="org.openiaml.docs.generation.codegen.IACleanerBeautifier"
-			-->
+			<postprocessor class="org.openiaml.simplegmf.codegen.XMLBeautifier"/>
 		</outlet>
 	</component>
 

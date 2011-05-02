@@ -43,9 +43,9 @@
 			«LET editor.classifier.eAllContainments.select(c| ecore::EClass.isInstance(c.eType) &&
 				toBoolean(((ecore::EClass) c.eType).isSuperTypeOf(this.classifier))) AS allContainmentFeatures»
 				«IF allContainmentFeatures.isEmpty»
-					«throwException("No containment feature found for: " + this)»
+					«throwException("Editor " + toString(editor.id) + ": No containment feature found for " + toString(classifier.name))»
 				«ELSEIF allContainmentFeatures.size > 1»
-					«throwException("More than one containment feature found for: " + this + ", found " + allContainmentFeatures.size + ": " + allContainmentFeatures)»
+					«throwException("Editor " + toString(editor.id) + ": More than one containment feature found for " + toString(classifier.name) + ", found " + allContainmentFeatures.size + ": " + allContainmentFeatures)»
 				«ELSE»
 				    <containmentFeature
 				        href="«EXPAND toHref(root) FOR allContainmentFeatures.first()»"/>
@@ -131,7 +131,7 @@
 «IF feature != null»
 	«IF multipleContainments»
 		<domainSpecialization
-			body="return «IF feature.eType != classifier»domainElement instanceof «classifier.name» && «ENDIF-»
+			body="return «IF feature.eType != classifier»domainElement instanceof «classifier.name» &amp;&amp; «ENDIF-»
 domainElement.eContainingFeature().getName().equals(&quot;«feature.name»&quot;);"
 			language="java"/>
 	«ELSE»

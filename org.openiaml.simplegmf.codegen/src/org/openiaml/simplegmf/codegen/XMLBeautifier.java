@@ -120,11 +120,11 @@ public class XMLBeautifier implements org.openarchitectureware.xpand2.output.Pos
 			} catch (IOException e) {
 				throw new RuntimeException("Could not read target file " + fh.getTargetFile() + ": " + e.getMessage(), e);
 			} catch (ParserConfigurationException e) {
-				throw new RuntimeException(e.getMessage(), e);
+				throw new RuntimeException("Could not configure for target file " + fh.getTargetFile() + ": " + e.getMessage(), e);
 			} catch (SAXException e) {
-				throw new RuntimeException(e.getMessage(), e);
+				throw new RuntimeException("Could not parse target file " + fh.getTargetFile() + ": " + e.getMessage(), e);
 			} catch (TransformerException e) {
-				throw new RuntimeException(e.getMessage(), e);
+				throw new RuntimeException("Could not transform target file " + fh.getTargetFile() + ": " + e.getMessage(), e);
 			}
 		}
 		

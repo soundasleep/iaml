@@ -6,6 +6,8 @@
 «DEFINE main FOR simplegmf::GMFConfiguration»
 	«EXPAND GmfGraph::generateGmfGraph FOR this»
 	
+	«EXPAND GmfTool::generateGmfTool(this) FOREACH diagramEditors»
+	
 	«FILE "out.html"»
 		«FOREACH diagramEditors AS editor»
 			editor: «editor.id»

@@ -18,4 +18,8 @@ context simplegmf::FigureConfiguration ERROR "The default FigureConfiguration mu
 		else true;			
 
 context simplegmf::LabelConfiguration ERROR "A LabelConfiguration needs to have a name set":
-	toString(name).length > 0;	
+	toString(name).length > 0;
+
+context simplegmf::DiagramEditor ERROR "A DiagramEditor must have an ID set":
+	toString(id).length > 0;
+

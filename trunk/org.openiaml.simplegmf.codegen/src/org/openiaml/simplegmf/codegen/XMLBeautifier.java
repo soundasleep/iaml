@@ -105,8 +105,6 @@ public class XMLBeautifier implements org.openarchitectureware.xpand2.output.Pos
 	 */
 	@Override
 	public void afterClose(FileHandle fh) {
-		System.out.println(fh.getTargetFile());
-		
 		// only process XML files
 		String name = fh.getTargetFile().getName().toLowerCase();
 		if (name.endsWith(".xml") || name.endsWith(".xsd") ||
@@ -119,7 +117,6 @@ public class XMLBeautifier implements org.openarchitectureware.xpand2.output.Pos
 				Document doc = loadDocument(fh.getTargetFile());
 				removeContainedText(doc);
 				saveDocument(doc, fh.getTargetFile());
-				System.out.println("saved " + fh.getTargetFile());
 			} catch (IOException e) {
 				throw new RuntimeException("Could not read target file " + fh.getTargetFile() + ": " + e.getMessage(), e);
 			} catch (ParserConfigurationException e) {

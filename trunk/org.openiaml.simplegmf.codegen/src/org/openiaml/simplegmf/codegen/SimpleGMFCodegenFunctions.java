@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.openiaml.simplegmf.model.simplegmf.CustomShape;
 import org.openiaml.simplegmf.model.simplegmf.FigureConfiguration;
 import org.openiaml.simplegmf.model.simplegmf.GMFConfiguration;
 import org.openiaml.simplegmf.model.simplegmf.LabelConfiguration;
@@ -51,6 +52,28 @@ public class SimpleGMFCodegenFunctions {
 	
 	public static String toStringOrNull(String s) {
 		return s == null ? "" : s;
+	}
+	
+	/**
+	 * Get the first CustomShape that matches this classifier, otherwise
+	 * <code>null</code> if none is defined.
+	 * 
+	 * @param root
+	 * @param classifier
+	 * @return null if no {@link CustomShape} is found.
+	 */
+	public static CustomShape getCustomShape(GMFConfiguration root, EClass classifier) {
+		// do any figure configurations exist for this classifier?
+		for (FigureConfiguration fc : root.getFigureConfigurations()) {
+			if (fc.getClassifier() != null 
+					&& fc.getClassifier().isSuperTypeOf(classifier)
+					&& fc.getCustomShape() != null /* a custom shape is set */ ) {
+				return fc.getCustomShape();
+			}
+		}
+		
+		// return null
+		return null;
 	}
 	
 	/**

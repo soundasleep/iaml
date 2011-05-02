@@ -94,6 +94,7 @@
   </customShapes>
   <labelConfigurations name="ContainmentFeature" readOnly="true" specialLabel="CONTAINMENT_NAME">
     <classifiers href="iaml.ecore#//EventTrigger"/>
+    <classifiers href="iaml.ecore#//users/Permission"/>
     <properties xsi:type="sgmf:LabelBold" value="true"/>
     <properties xsi:type="sgmf:ForegroundColor" color="darkBlue"/>
   </labelConfigurations>
@@ -106,6 +107,7 @@
   </labelConfigurations>
   <labelConfigurations name="Type" readOnly="true" prefix="Type: " providedAtRuntime="true">
     <classifiers href="iaml.ecore#//Property"/>
+    <classifiers href="iaml.ecore#//domain/DomainSource"/>
     <feature xsi:type="ecore:EReference" href="iaml.ecore#//Property/type"/>
   </labelConfigurations>
   <labelConfigurations name="ParentName" readOnly="true" prefix="Parent: " parentFeature="true">
@@ -114,6 +116,8 @@
     <classifiers href="iaml.ecore#//VisibleThing"/>
     <classifiers href="iaml.ecore#//EventTrigger"/>
     <classifiers href="iaml.ecore#//DomainAttribute"/>
+    <classifiers href="iaml.ecore#//Scope"/>
+    <classifiers href="iaml.ecore#//users/Permission"/>
     <feature xsi:type="ecore:EAttribute" href="iaml.ecore#//NamedElement/name"/>
     <properties xsi:type="sgmf:ForegroundColor" color="gray"/>
   </labelConfigurations>
@@ -139,10 +143,12 @@
     <classifiers href="iaml.ecore#//components/LoginHandler"/>
     <classifiers href="iaml.ecore#//components/AccessControlHandler"/>
   </palettes>
-  <palettes name="Wires">
+  <palettes name="Edges">
     <classifiers href="iaml.ecore#//Wire"/>
     <classifiers href="iaml.ecore#//wires/ConditionEdge"/>
     <classifiers href="iaml.ecore#//ActionEdge"/>
+    <classifiers href="iaml.ecore#//operations/DataFlowEdge"/>
+    <classifiers href="iaml.ecore#//operations/ExecutionEdge"/>
   </palettes>
   <palettes name="Event Triggers">
     <classifiers href="iaml.ecore#//EventTrigger"/>
@@ -150,6 +156,406 @@
   <palettes name="Conditions">
     <classifiers href="iaml.ecore#//Condition"/>
   </palettes>
+  <diagramEditors id="condition">
+    <classifier href="iaml.ecore#//CompositeCondition"/>
+    <elements xsi:type="sgmf:ContainedNode" name="StartNode">
+      <classifier href="iaml.ecore#//operations/StartNode"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" id="" name="FinishNode">
+      <classifier href="iaml.ecore#//operations/FinishNode"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="CancelNode">
+      <classifier href="iaml.ecore#//operations/CancelNode"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="DecisionNode">
+      <classifier href="iaml.ecore#//operations/DecisionNode"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="PrimitiveOperation">
+      <classifier href="iaml.ecore#//PrimitiveOperation"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
+      <classifier href="iaml.ecore#//CompositeOperation"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="CastNode">
+      <classifier href="iaml.ecore#//operations/CastNode"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="Parameter">
+      <classifier href="iaml.ecore#//operations/Parameter"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="TemporaryVariable">
+      <classifier href="iaml.ecore#//operations/TemporaryVariable"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="DataFlowEdge">
+      <classifier href="iaml.ecore#//operations/DataFlowEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="ExecutionEdge">
+      <classifier href="iaml.ecore#//operations/ExecutionEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="ConditionEdge">
+      <classifier href="iaml.ecore#//wires/ConditionEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="Property">
+      <classifier href="iaml.ecore#//Property"/>
+    </elements>
+  </diagramEditors>
+  <diagramEditors id="element">
+    <classifier href="iaml.ecore#//ApplicationElement"/>
+    <elements xsi:type="sgmf:ContainedNode" name="PrimitiveOperation">
+      <classifier href="iaml.ecore#//PrimitiveOperation"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
+      <classifier href="iaml.ecore#//CompositeOperation"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="PrimitiveCondition">
+      <classifier href="iaml.ecore#//PrimitiveCondition"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="CompositeCondition">
+      <classifier href="iaml.ecore#//CompositeCondition"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="Property">
+      <classifier href="iaml.ecore#//Property"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="SyncWire">
+      <classifier href="iaml.ecore#//wires/SyncWire"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="ActionEdge">
+      <classifier href="iaml.ecore#//ActionEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="EventTrigger">
+      <classifier href="iaml.ecore#//EventTrigger"/>
+    </elements>
+  </diagramEditors>
+  <diagramEditors id="email">
+    <classifier href="iaml.ecore#//scopes/Email"/>
+    <elements xsi:type="sgmf:ContainedNode" name="PrimitiveOperation">
+      <classifier href="iaml.ecore#//PrimitiveOperation"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
+      <classifier href="iaml.ecore#//CompositeOperation"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="CompositeCondition">
+      <classifier href="iaml.ecore#//CompositeCondition"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="Property">
+      <classifier href="iaml.ecore#//Property"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="EntryGate">
+      <classifier href="iaml.ecore#//components/EntryGate"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="ExitGate">
+      <classifier href="iaml.ecore#//components/ExitGate"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" id="" name="Button">
+      <classifier href="iaml.ecore#//visual/Button"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" id="" name="Label">
+      <classifier href="iaml.ecore#//visual/Label"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="EventTrigger">
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Accessible/onAccess"/>
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//scopes/Email/onSent"/>
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//scopes/Email/onFailure"/>
+      <classifier href="iaml.ecore#//EventTrigger"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="SyncWire">
+      <classifier href="iaml.ecore#//wires/SyncWire"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="SetWire">
+      <classifier href="iaml.ecore#//wires/SetWire"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="ConditionEdge">
+      <classifier href="iaml.ecore#//wires/ConditionEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="ParameterEdge">
+      <classifier href="iaml.ecore#//wires/ParameterEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="SelectEdge">
+      <classifier href="iaml.ecore#//domain/SelectEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="ActionEdge">
+      <classifier href="iaml.ecore#//ActionEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="EventTrigger">
+      <classifier href="iaml.ecore#//EventTrigger"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="DomainSource">
+      <classifier href="iaml.ecore#//domain/DomainSource"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="DomainAttribute">
+      <classifier href="iaml.ecore#//DomainAttribute"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" id="" name="Frame">
+      <classifier href="iaml.ecore#//visual/Frame"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" id="" name="InputForm">
+      <classifier href="iaml.ecore#//visual/InputForm"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" id="" name="InputTextField">
+      <classifier href="iaml.ecore#//visual/InputTextField"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" id="" name="Session">
+      <classifier href="iaml.ecore#//scopes/Session"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" id="" name="LoginHandler">
+      <classifier href="iaml.ecore#//components/LoginHandler"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="DomainIterator">
+      <classifier href="iaml.ecore#//domain/DomainIterator"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="DomainAttributeInstance">
+      <classifier href="iaml.ecore#//domain/DomainAttributeInstance"/>
+    </elements>
+  </diagramEditors>
+  <diagramEditors id="frame">
+    <classifier href="iaml.ecore#//visual/Frame"/>
+    <elements xsi:type="sgmf:ContainedNode" name="EventTrigger">
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Accessible/onAccess"/>
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Scope/onInit"/>
+      <classifier href="iaml.ecore#//EventTrigger"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="PrimitiveOperation">
+      <classifier href="iaml.ecore#//PrimitiveOperation"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
+      <classifier href="iaml.ecore#//CompositeOperation"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="CompositeCondition">
+      <classifier href="iaml.ecore#//CompositeCondition"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="Property">
+      <classifier href="iaml.ecore#//Property"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="InputForm">
+      <classifier href="iaml.ecore#//visual/InputForm"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="InputTextField">
+      <classifier href="iaml.ecore#//visual/InputTextField"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="Button">
+      <classifier href="iaml.ecore#//visual/Button"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="Session">
+      <classifier href="iaml.ecore#//scopes/Session"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="Label">
+      <classifier href="iaml.ecore#//visual/Label"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="Email">
+      <classifier href="iaml.ecore#//scopes/Email"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="Map">
+      <classifier href="iaml.ecore#//visual/Map"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="MapPoint">
+      <classifier href="iaml.ecore#//visual/MapPoint"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="IteratorList">
+      <classifier href="iaml.ecore#//visual/IteratorList"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="LoginHandler">
+      <classifier href="iaml.ecore#//components/LoginHandler"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" id="" name="QueryParameter">
+      <classifier href="iaml.ecore#//QueryParameter"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="DomainIterator">
+      <classifier href="iaml.ecore#//domain/DomainIterator"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="AccessControlHandler">
+      <classifier href="iaml.ecore#//components/AccessControlHandler"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="SyncWire">
+      <classifier href="iaml.ecore#//wires/SyncWire"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="SetWire">
+      <classifier href="iaml.ecore#//wires/SetWire"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="DetailWire">
+      <classifier href="iaml.ecore#//wires/DetailWire"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="AutocompleteWire">
+      <classifier href="iaml.ecore#//wires/AutocompleteWire"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="ConditionEdge">
+      <classifier href="iaml.ecore#//wires/ConditionEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="ParameterEdge">
+      <classifier href="iaml.ecore#//wires/ParameterEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="SelectEdge">
+      <classifier href="iaml.ecore#//domain/SelectEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="SchemaEdge">
+      <classifier href="iaml.ecore#//domain/SchemaEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="ActionEdge">
+      <classifier href="iaml.ecore#//ActionEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="RequiresEdge">
+      <classifier href="iaml.ecore#//wires/RequiresEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="ConstraintEdge">
+      <classifier href="iaml.ecore#//wires/ConstraintEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="EventTrigger">
+      <classifier href="iaml.ecore#//EventTrigger"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="DomainAttribute">
+      <classifier href="iaml.ecore#//DomainAttribute"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="DomainAttributeInstance">
+      <classifier href="iaml.ecore#//domain/DomainAttributeInstance"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="DomainSchema">
+      <classifier href="iaml.ecore#//domain/DomainSchema"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="Permission">
+      <classifier href="iaml.ecore#//users/Permission"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="Role">
+      <classifier href="iaml.ecore#//users/Role"/>
+    </elements>
+  </diagramEditors>
+  <diagramEditors id="instance">
+    <classifier href="iaml.ecore#//domain/DomainInstance"/>
+    <elements xsi:type="sgmf:ContainedNode" name="PrimitiveOperation">
+      <classifier href="iaml.ecore#//PrimitiveOperation"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
+      <classifier href="iaml.ecore#//CompositeOperation"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="DomainAttributeInstance">
+      <classifier href="iaml.ecore#//domain/DomainAttributeInstance"/>
+    </elements>
+  </diagramEditors>
+  <diagramEditors id="iterator">
+    <classifier href="iaml.ecore#//domain/DomainIterator"/>
+    <elements xsi:type="sgmf:ContainedNode" name="EventTrigger">
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Changeable/onChange"/>
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//domain/DomainIterator/onIterate"/>
+      <classifier href="iaml.ecore#//EventTrigger"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" id="" name="Property">
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Changeable/fieldValue"/>
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//domain/DomainIterator/results"/>
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//domain/DomainIterator/currentPointer"/>
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//ContainsProperties/properties"/>
+      <classifier href="iaml.ecore#//Property"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" id="" name="PrimitiveOperation">
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//domain/DomainIterator/previous"/>
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//domain/DomainIterator/next"/>
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//domain/DomainIterator/reset"/>
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//domain/DomainIterator/skip"/>
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//ContainsOperations/operations"/>
+      <classifier href="iaml.ecore#//PrimitiveOperation"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" id="" name="PrimitiveOperation">
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//domain/DomainIterator/hasPrevious"/>
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//domain/DomainIterator/hasNext"/>
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//domain/DomainIterator/empty"/>
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//domain/DomainIterator/canSave"/>
+      <classifier href="iaml.ecore#//PrimitiveCondition"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//ContainsOperations/operations"/>
+      <classifier href="iaml.ecore#//CompositeOperation"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="CompositeCondition">
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//ContainsConditions/conditions"/>
+      <classifier href="iaml.ecore#//CompositeCondition"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="DomainInstance">
+      <classifier href="iaml.ecore#//domain/DomainInstance"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="SyncWire">
+      <classifier href="iaml.ecore#//wires/SyncWire"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="ActionEdge">
+      <classifier href="iaml.ecore#//ActionEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="ParameterEdge">
+      <classifier href="iaml.ecore#//wires/ParameterEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" id="" name="ExtendsEdge">
+      <classifier href="iaml.ecore#//wires/ExtendsEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="EventTrigger">
+      <classifier href="iaml.ecore#//EventTrigger"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="Frame">
+      <classifier href="iaml.ecore#//visual/Frame"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="DomainAttribute">
+      <classifier href="iaml.ecore#//DomainAttribute"/>
+    </elements>
+  </diagramEditors>
+  <diagramEditors id="operation">
+    <classifier href="iaml.ecore#//CompositeOperation"/>
+    <elements xsi:type="sgmf:ContainedNode" name="StartNode">
+      <classifier href="iaml.ecore#//operations/StartNode"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" id="" name="FinishNode">
+      <classifier href="iaml.ecore#//operations/FinishNode"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="CancelNode">
+      <classifier href="iaml.ecore#//operations/CancelNode"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="DecisionNode">
+      <classifier href="iaml.ecore#//operations/DecisionNode"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="SplitNode">
+      <classifier href="iaml.ecore#//operations/SplitNode"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="JoinNode">
+      <classifier href="iaml.ecore#//operations/JoinNode"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="OperationCallNode">
+      <classifier href="iaml.ecore#//operations/OperationCallNode"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="Arithmetic">
+      <classifier href="iaml.ecore#//operations/Arithmetic"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="CastNode">
+      <classifier href="iaml.ecore#//operations/CastNode"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="PrimitiveOperation">
+      <classifier href="iaml.ecore#//PrimitiveOperation"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
+      <classifier href="iaml.ecore#//CompositeOperation"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="Parameter">
+      <classifier href="iaml.ecore#//operations/Parameter"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="TemporaryVariable">
+      <classifier href="iaml.ecore#//operations/TemporaryVariable"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="ActionEdge">
+      <classifier href="iaml.ecore#//ActionEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="DataFlowEdge">
+      <classifier href="iaml.ecore#//operations/DataFlowEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="ExecutionEdge">
+      <classifier href="iaml.ecore#//operations/ExecutionEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="ParameterEdge">
+      <classifier href="iaml.ecore#//wires/ParameterEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="ConditionEdge">
+      <classifier href="iaml.ecore#//wires/ConditionEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="Property">
+      <classifier href="iaml.ecore#//Property"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="CompositeCondition">
+      <classifier href="iaml.ecore#//CompositeCondition"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" id="" name="PrimitiveCondition">
+      <classifier href="iaml.ecore#//PrimitiveCondition"/>
+    </elements>
+  </diagramEditors>
   <diagramEditors id="root">
     <classifier href="iaml.ecore#//InternetApplication"/>
     <elements xsi:type="sgmf:ContainedNode" name="PrimitiveOperation">
@@ -188,17 +594,11 @@
     <elements xsi:type="sgmf:ContainedNode" name="LoginHandler">
       <classifier href="iaml.ecore#//components/LoginHandler"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedEdge" name="ExtendsEdge">
-      <classifier href="iaml.ecore#//wires/ExtendsEdge"/>
-    </elements>
-    <elements xsi:type="sgmf:ContainedEdge" name="ProvidesEdge">
-      <classifier href="iaml.ecore#//wires/ProvidesEdge"/>
-    </elements>
-    <elements xsi:type="sgmf:ContainedEdge" name="SchemaEdge">
-      <classifier href="iaml.ecore#//domain/SchemaEdge"/>
-    </elements>
     <elements xsi:type="sgmf:ContainedEdge" name="SyncWire">
       <classifier href="iaml.ecore#//wires/SyncWire"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="ActionEdge">
+      <classifier href="iaml.ecore#//ActionEdge"/>
     </elements>
     <elements xsi:type="sgmf:ContainedEdge" name="ConditionEdge">
       <classifier href="iaml.ecore#//wires/ConditionEdge"/>
@@ -206,8 +606,17 @@
     <elements xsi:type="sgmf:ContainedEdge" name="DetailWire">
       <classifier href="iaml.ecore#//wires/DetailWire"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedEdge" name="ActionEdge">
-      <classifier href="iaml.ecore#//ActionEdge"/>
+    <elements xsi:type="sgmf:ContainedEdge" name="SchemaEdge">
+      <classifier href="iaml.ecore#//domain/SchemaEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="SelectEdge">
+      <classifier href="iaml.ecore#//domain/SelectEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="ProvidesEdge">
+      <classifier href="iaml.ecore#//wires/ProvidesEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="ExtendsEdge">
+      <classifier href="iaml.ecore#//wires/ExtendsEdge"/>
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" id="" name="EventTrigger">
       <classifier href="iaml.ecore#//EventTrigger"/>
@@ -216,28 +625,60 @@
       <classifier href="iaml.ecore#//users/Permission"/>
     </elements>
   </diagramEditors>
-  <diagramEditors id="frame">
-    <classifier href="iaml.ecore#//visual/Frame"/>
-    <elements xsi:type="sgmf:ContainedNode" name="InputTextField">
-      <classifier href="iaml.ecore#//visual/InputTextField"/>
+  <diagramEditors id="schema">
+    <classifier href="iaml.ecore#//domain/DomainSchema"/>
+    <elements xsi:type="sgmf:ContainedNode" name="DomainAttribute">
+      <classifier href="iaml.ecore#//DomainAttribute"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="Label">
-      <classifier href="iaml.ecore#//visual/Label"/>
+    <elements xsi:type="sgmf:ContainedNode" name="Permission">
+      <classifier href="iaml.ecore#//users/Permission"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="InputForm">
-      <classifier href="iaml.ecore#//visual/InputForm"/>
-    </elements>
-    <elements xsi:type="sgmf:ReferencedNode" name="EventTrigger">
-      <classifier href="iaml.ecore#//EventTrigger"/>
+    <elements xsi:type="sgmf:ContainedEdge" name="ExtendsEdge">
+      <classifier href="iaml.ecore#//wires/ExtendsEdge"/>
     </elements>
   </diagramEditors>
-  <diagramEditors id="visual">
-    <classifier href="iaml.ecore#//VisibleThing"/>
+  <diagramEditors id="session">
+    <classifier href="iaml.ecore#//scopes/Session"/>
+    <elements xsi:type="sgmf:ContainedNode" name="EventTrigger">
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Accessible/onAccess"/>
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Scope/onInit"/>
+      <classifier href="iaml.ecore#//EventTrigger"/>
+    </elements>
     <elements xsi:type="sgmf:ContainedNode" name="PrimitiveOperation">
       <classifier href="iaml.ecore#//PrimitiveOperation"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
       <classifier href="iaml.ecore#//CompositeOperation"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="CompositeCondition">
+      <classifier href="iaml.ecore#//CompositeCondition"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="Property">
+      <classifier href="iaml.ecore#//Property"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="Frame">
+      <classifier href="iaml.ecore#//visual/Frame"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="Email">
+      <classifier href="iaml.ecore#//scopes/Email"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="LoginHandler">
+      <classifier href="iaml.ecore#//components/LoginHandler"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" id="" name="QueryParameter">
+      <classifier href="iaml.ecore#//QueryParameter"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="DomainIterator">
+      <classifier href="iaml.ecore#//domain/DomainIterator"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="AccessControlHandler">
+      <classifier href="iaml.ecore#//components/AccessControlHandler"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="ExitGate">
+      <classifier href="iaml.ecore#//components/ExitGate"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="EntryGate">
+      <classifier href="iaml.ecore#//components/EntryGate"/>
     </elements>
     <elements xsi:type="sgmf:ContainedEdge" name="SyncWire">
       <classifier href="iaml.ecore#//wires/SyncWire"/>
@@ -245,15 +686,153 @@
     <elements xsi:type="sgmf:ContainedEdge" name="SetWire">
       <classifier href="iaml.ecore#//wires/SetWire"/>
     </elements>
-    <elements xsi:type="sgmf:ReferencedNode" id="" name="DomainSchema">
+    <elements xsi:type="sgmf:ContainedEdge" name="AutocompleteWire">
+      <classifier href="iaml.ecore#//wires/AutocompleteWire"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="ConditionEdge">
+      <classifier href="iaml.ecore#//wires/ConditionEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="ParameterEdge">
+      <classifier href="iaml.ecore#//wires/ParameterEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="SelectEdge">
+      <classifier href="iaml.ecore#//domain/SelectEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="ActionEdge">
+      <classifier href="iaml.ecore#//ActionEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="RequiresEdge">
+      <classifier href="iaml.ecore#//wires/RequiresEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="ConstraintEdge">
+      <classifier href="iaml.ecore#//wires/ConstraintEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="EventTrigger">
+      <classifier href="iaml.ecore#//EventTrigger"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="DomainAttribute">
+      <classifier href="iaml.ecore#//DomainAttribute"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="DomainSource">
+      <classifier href="iaml.ecore#//domain/DomainSource"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="Permission">
+      <classifier href="iaml.ecore#//users/Permission"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="Role">
+      <classifier href="iaml.ecore#//users/Role"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" id="" name="Button">
+      <classifier href="iaml.ecore#//visual/Button"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" id="" name="InputForm">
+      <classifier href="iaml.ecore#//visual/InputForm"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" id="" name="InputTextField">
+      <classifier href="iaml.ecore#//visual/InputTextField"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="DomainAttributeInstance">
+      <classifier href="iaml.ecore#//domain/DomainAttributeInstance"/>
+    </elements>
+  </diagramEditors>
+  <diagramEditors id="visual">
+    <classifier href="iaml.ecore#//VisibleThing"/>
+    <elements xsi:type="sgmf:ContainedNode" name="EventTrigger">
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Accessible/onAccess"/>
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Scope/onInit"/>
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Changeable/onChange"/>
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//VisibleThing/onClick"/>
+      <classifier href="iaml.ecore#//EventTrigger"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="PrimitiveOperation">
+      <classifier href="iaml.ecore#//PrimitiveOperation"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
+      <classifier href="iaml.ecore#//CompositeOperation"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="PrimitiveCondition">
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//VisibleThing/empty"/>
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//VisibleThing/notEmpty"/>
+      <classifier href="iaml.ecore#//PrimitiveCondition"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="CompositeCondition">
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//ContainsConditions/conditions"/>
+      <classifier href="iaml.ecore#//CompositeCondition"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="Property">
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Changeable/fieldValue"/>
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//VisibleThing/currentInput"/>
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//ContainsProperties/properties"/>
+      <classifier href="iaml.ecore#//Property"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="InputForm">
+      <classifier href="iaml.ecore#//visual/InputForm"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="InputTextField">
+      <classifier href="iaml.ecore#//visual/InputTextField"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="Button">
+      <classifier href="iaml.ecore#//visual/Button"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="Label">
+      <classifier href="iaml.ecore#//visual/Label"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="Map">
+      <classifier href="iaml.ecore#//visual/Map"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="MapPoint">
+      <classifier href="iaml.ecore#//visual/MapPoint"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="SyncWire">
+      <classifier href="iaml.ecore#//wires/SyncWire"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="SetWire">
+      <classifier href="iaml.ecore#//wires/SetWire"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="DetailWire">
+      <classifier href="iaml.ecore#//wires/DetailWire"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="ConditionEdge">
+      <classifier href="iaml.ecore#//wires/ConditionEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="ParameterEdge">
+      <classifier href="iaml.ecore#//wires/ParameterEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="SelectEdge">
+      <classifier href="iaml.ecore#//domain/SelectEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedEdge" name="ActionEdge">
+      <classifier href="iaml.ecore#//ActionEdge"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="EventTrigger">
+      <classifier href="iaml.ecore#//EventTrigger"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="DomainAttribute">
+      <classifier href="iaml.ecore#//DomainAttribute"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="DomainAttributeInstance">
+      <classifier href="iaml.ecore#//domain/DomainAttributeInstance"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="DomainSchema">
       <classifier href="iaml.ecore#//domain/DomainSchema"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" id="" name="EventTrigger">
-      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//VisibleThing/onClick"/>
-      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//VisibleThing/onInput"/>
-      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Accessible/onAccess"/>
-      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Changeable/onChange"/>
-      <classifier href="iaml.ecore#//EventTrigger"/>
+    <elements xsi:type="sgmf:ReferencedNode" name="Permission">
+      <classifier href="iaml.ecore#//users/Permission"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="Role">
+      <classifier href="iaml.ecore#//users/Role"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="LoginHandler">
+      <classifier href="iaml.ecore#//components/LoginHandler"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="QueryParameter">
+      <classifier href="iaml.ecore#//QueryParameter"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="AccessControlHandler">
+      <classifier href="iaml.ecore#//components/AccessControlHandler"/>
+    </elements>
+    <elements xsi:type="sgmf:ReferencedNode" name="DomainIterator">
+      <classifier href="iaml.ecore#//domain/DomainIterator"/>
     </elements>
   </diagramEditors>
   <rootElement href="iaml.ecore#//InternetApplication"/>

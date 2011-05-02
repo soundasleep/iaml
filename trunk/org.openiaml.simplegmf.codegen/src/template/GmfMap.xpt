@@ -169,7 +169,7 @@ domainElement.eContainingFeature().getName().equals(&quot;«feature.name»&quot;);
 
 «DEFINE labelMappings(simplegmf::GMFConfiguration root, simplegmf::DiagramElement element) FOR simplegmf::LabelConfiguration»
 <labelMappings
-	«IF feature != null && !toBoolean(parentFeature)»
+	«IF feature != null && !toBoolean(parentFeature) && !toBoolean(providedAtRuntime)»
 		xsi:type="gmfmap:FeatureLabelMapping"
 	«ENDIF»
 	«IF toBoolean(readOnly)»

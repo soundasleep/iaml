@@ -67,6 +67,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//LabelConfiguration/viewPattern"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//LabelConfiguration/editPattern"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//LabelConfiguration/editorPattern"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//LabelConfiguration/providedAtRuntime"/>
     </genClasses>
     <genClasses ecoreClass="simplegmf.ecore#//PaletteGroup">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simplegmf.ecore#//PaletteGroup/classifiers"/>

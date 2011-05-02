@@ -219,14 +219,12 @@
 «ENDDEFINE»
 
 «DEFINE toColor FOR String»
-	«IF toString().startsWith("(")»
-		«LET toString() AS rgb»
-		«LET rgb.subString(1,rgb.length-1).split(",") AS rgb2»
+	«IF startsWith("(")»
+		«LET subString(1,length-1).split(",") AS rgb2»
 	    xsi:type="gmfgraph:RGBColor"
 	    red="«rgb2.get(0)»"
 	    green="«rgb2.get(1)»"
 	    blue="«rgb2.get(2)»"
-		«ENDLET»
 		«ENDLET»
 	«ELSE»
 	    xsi:type="gmfgraph:ConstantColor"

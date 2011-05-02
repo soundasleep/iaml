@@ -13,13 +13,68 @@
   </figureConfigurations>
   <figureConfigurations name="EventTrigger" customShape="id1">
     <classifier href="iaml.ecore#//EventTrigger"/>
+    <properties xsi:type="sgmf:BackgroundColor" color="(202,225,173)"/>
+  </figureConfigurations>
+  <figureConfigurations name="Parameter">
+    <classifier href="iaml.ecore#//operations/Parameter"/>
+    <properties xsi:type="sgmf:BackgroundColor" color="(231,233,234)"/>
+  </figureConfigurations>
+  <figureConfigurations name="Property">
+    <classifier href="iaml.ecore#//Property"/>
+    <properties xsi:type="sgmf:BackgroundColor" color="(231,233,234)"/>
+  </figureConfigurations>
+  <figureConfigurations name="TemporaryVariable">
+    <classifier href="iaml.ecore#//operations/TemporaryVariable"/>
+    <properties xsi:type="sgmf:BackgroundColor" color="(231,233,234)"/>
   </figureConfigurations>
   <figureConfigurations name="Condition" shape="ELLIPSE">
     <classifier href="iaml.ecore#//Condition"/>
+    <properties xsi:type="sgmf:BackgroundColor" color="(246,212,154)"/>
+    <properties xsi:type="sgmf:FlowLayout" flowLayout="true" majorAlignment="CENTER" minorAlignment="CENTER"/>
+  </figureConfigurations>
+  <figureConfigurations name="Operation" shape="ROUNDED_RECTANGLE">
+    <classifier href="iaml.ecore#//Operation"/>
+    <properties xsi:type="sgmf:BackgroundColor" color="(177,190,237)"/>
+  </figureConfigurations>
+  <figureConfigurations name="Gate">
+    <classifier href="iaml.ecore#//components/Gate"/>
+    <properties xsi:type="sgmf:BackgroundColor" color="(202,225,173)"/>
+  </figureConfigurations>
+  <figureConfigurations name="CastNode" shape="ROUNDED_RECTANGLE">
+    <classifier href="iaml.ecore#//operations/CastNode"/>
+    <properties xsi:type="sgmf:LinePattern" linePattern="DASH"/>
+  </figureConfigurations>
+  <figureConfigurations name="ActivityNode">
+    <classifier href="iaml.ecore#//ActivityNode"/>
+    <properties xsi:type="sgmf:BackgroundColor" color="(177,190,237)"/>
+  </figureConfigurations>
+  <figureConfigurations name="DomainAttributeInstance">
+    <classifier href="iaml.ecore#//domain/DomainAttributeInstance"/>
+    <properties xsi:type="sgmf:LinePattern" linePattern="DASH"/>
+  </figureConfigurations>
+  <figureConfigurations name="DomainIterator">
+    <classifier href="iaml.ecore#//domain/DomainIterator"/>
+    <properties xsi:type="sgmf:LinePattern" linePattern="DASH"/>
+  </figureConfigurations>
+  <figureConfigurations name="DynamicApplicationElementSet">
+    <classifier href="iaml.ecore#//DynamicApplicationElementSet"/>
+    <properties xsi:type="sgmf:LinePattern" linePattern="DASH"/>
+  </figureConfigurations>
+  <figureConfigurations name="ApplicationElement">
+    <classifier href="iaml.ecore#//ApplicationElement"/>
+    <properties xsi:type="sgmf:BackgroundColor" color="(248,172,170)"/>
+  </figureConfigurations>
+  <figureConfigurations name="Permission" shape="ELLIPSE">
+    <classifier href="iaml.ecore#//users/Permission"/>
+    <properties xsi:type="sgmf:FlowLayout" flowLayout="true" majorAlignment="CENTER" minorAlignment="CENTER"/>
   </figureConfigurations>
   <edgeConfigurations id="" name="&lt;default>" isDefault="true" targetArrow="true">
     <properties xsi:type="sgmf:LineWidth" width="1"/>
     <properties xsi:type="sgmf:LinePattern"/>
+  </edgeConfigurations>
+  <edgeConfigurations name="ActionEdge" targetArrow="true">
+    <classifier href="iaml.ecore#//ActionEdge"/>
+    <properties xsi:type="sgmf:LinePattern" linePattern="DASH"/>
   </edgeConfigurations>
   <edgeConfigurations name="Wire">
     <classifier href="iaml.ecore#//Wire"/>
@@ -41,7 +96,7 @@
   <labelConfigurations name="ContainmentFeature" readOnly="true" specialLabel="CONTAINMENT_NAME">
     <classifiers href="iaml.ecore#//EventTrigger"/>
     <properties xsi:type="sgmf:LabelBold" value="true"/>
-    <properties xsi:type="sgmf:ForegroundColor" color="red"/>
+    <properties xsi:type="sgmf:ForegroundColor" color="darkBlue"/>
   </labelConfigurations>
   <labelConfigurations name="Name">
     <classifiers href="iaml.ecore#//NamedElement"/>
@@ -50,7 +105,7 @@
   <labelConfigurations name="Stereotype" readOnly="true" prefix=": " specialLabel="METACLASS_NAME">
     <properties xsi:type="sgmf:LabelUnderline" value="true"/>
   </labelConfigurations>
-  <labelConfigurations name="Type" prefix="Type: " providedAtRuntime="true" readOnly="true">
+  <labelConfigurations name="Type" readOnly="true" prefix="Type: " providedAtRuntime="true">
     <classifiers href="iaml.ecore#//Property"/>
     <feature xsi:type="ecore:EReference" href="iaml.ecore#//Property/type"/>
   </labelConfigurations>
@@ -58,6 +113,8 @@
     <classifiers href="iaml.ecore#//Operation"/>
     <classifiers href="iaml.ecore#//Condition"/>
     <classifiers href="iaml.ecore#//VisibleThing"/>
+    <classifiers href="iaml.ecore#//EventTrigger"/>
+    <classifiers href="iaml.ecore#//DomainAttribute"/>
     <feature xsi:type="ecore:EAttribute" href="iaml.ecore#//NamedElement/name"/>
     <properties xsi:type="sgmf:ForegroundColor" color="gray"/>
   </labelConfigurations>

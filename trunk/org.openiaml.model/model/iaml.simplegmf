@@ -94,7 +94,6 @@
   </customShapes>
   <labelConfigurations name="ContainmentFeature" readOnly="true" specialLabel="CONTAINMENT_NAME">
     <classifiers href="iaml.ecore#//EventTrigger"/>
-    <classifiers href="iaml.ecore#//users/Permission"/>
     <classifiers href="iaml.ecore#//Property"/>
     <classifiers href="iaml.ecore#//PrimitiveCondition"/>
     <properties xsi:type="sgmf:LabelBold" value="true"/>
@@ -108,7 +107,10 @@
     <properties xsi:type="sgmf:LabelUnderline" value="true"/>
   </labelConfigurations>
   <labelConfigurations name="Type" readOnly="true" prefix="Type: " providedAtRuntime="true">
-    <classifiers href="iaml.ecore#//Changeable"/>
+    <classifiers href="iaml.ecore#//DomainAttribute"/>
+    <classifiers href="iaml.ecore#//domain/DomainAttributeInstance"/>
+    <classifiers href="iaml.ecore#//visual/InputTextField"/>
+    <classifiers href="iaml.ecore#//visual/Label"/>
     <feature xsi:type="ecore:EReference" href="iaml.ecore#//Changeable/type"/>
   </labelConfigurations>
   <labelConfigurations name="Type" readOnly="true" prefix="Type: " providedAtRuntime="true">
@@ -135,15 +137,14 @@
     <classifiers href="iaml.ecore#//wires/ConstraintEdge"/>
     <feature xsi:type="ecore:EAttribute" href="iaml.ecore#//wires/ConstraintEdge/type"/>
   </labelConfigurations>
-  <labelConfigurations name="ParentName" readOnly="true" prefix="Parent: " parentFeature="true">
+  <labelConfigurations name="ParentName" readOnly="true" parentFeature="true" defaultText="[none]">
     <classifiers href="iaml.ecore#//Operation"/>
     <classifiers href="iaml.ecore#//Condition"/>
     <classifiers href="iaml.ecore#//VisibleThing"/>
     <classifiers href="iaml.ecore#//EventTrigger"/>
     <classifiers href="iaml.ecore#//DomainAttribute"/>
     <classifiers href="iaml.ecore#//domain/DomainAttributeInstance"/>
-    <classifiers href="iaml.ecore#//Scope"/>
-    <classifiers href="iaml.ecore#//users/Permission"/>
+    <classifiers href="iaml.ecore#//visual/Frame"/>
     <classifiers href="iaml.ecore#//Property"/>
     <classifiers href="iaml.ecore#//components/Gate"/>
     <feature xsi:type="ecore:EAttribute" href="iaml.ecore#//NamedElement/name"/>

@@ -60,7 +60,8 @@ public class GmfGraphTestCase extends XmlTestCase {
 				if (childName.endsWith("Figure")) {
 					assertTrue("'" + childName + "' should end in 'Figure'", childName.endsWith("Figure"));
 					
-					String labelName = childName.replace("Figure", "");
+					// String labelName = childName.replace("Figure", "");
+					String labelName = childName;
 					
 					// this label should be in the root
 					Element root = xpathFirst(gmfgraph, "Canvas/labels[@name='" + labelName + "']");
@@ -125,12 +126,12 @@ public class GmfGraphTestCase extends XmlTestCase {
 			Element figure = resolveEmfElement(gmfgraph, accessor.getAttribute("figure"));
 			assertEquals(figure.getNodeName(), "children");
 			
-			// it should have resolved to XXXFigure
+			// it should have resolved to the correct name
 			try {
-				assertEquals(figure.getAttribute("name"), childName + "Figure");
+				assertEquals(figure.getAttribute("name"), childName /* + "Figure" */);
 			} catch (AssertionFailedError e) {
 				// print out to stderr
-				System.err.println(figure.getAttribute("name") + " != " + childName + "Figure");
+				System.err.println(figure.getAttribute("name") + " != " + childName /* + "Figure" */);
 				
 				// save it for throwing later
 				if (firstAssertion == null) {

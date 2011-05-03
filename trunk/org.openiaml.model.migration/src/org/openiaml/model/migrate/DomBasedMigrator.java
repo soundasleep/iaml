@@ -197,7 +197,6 @@ public abstract class DomBasedMigrator implements IamlModelMigrator {
 		
 		// should the element be deleted?
 		if (shouldDeleteNode(element, output, errors)) {
-			errors.add( new ExpectedMigrationException( this, element, "<operation> can no longer contain <edges>" ) );
 			addDeletedReference(element);
 			return;
 		}
@@ -215,7 +214,7 @@ public abstract class DomBasedMigrator implements IamlModelMigrator {
 		}
 		
 		// do anything fancy with the element?
-		handleElement(element, e, errors);
+		handleElement(element, e, document, errors);
 
 		// cycle over attributes
 		for (int i = 0; i < element.getAttributes().getLength(); i++) {
@@ -374,6 +373,7 @@ public abstract class DomBasedMigrator implements IamlModelMigrator {
 	 * @param errors The list of errors to insert errors into
 	 */
 	public abstract void handleElement(Element old, Element element,
+			Document document,
 			List<ExpectedMigrationException> errors);
 
 	/**

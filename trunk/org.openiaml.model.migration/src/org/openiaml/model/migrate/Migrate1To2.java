@@ -120,6 +120,7 @@ public class Migrate1To2 extends DomBasedMigrator implements IamlModelMigrator {
 	 */
 	@Override
 	public void handleElement(Element old, Element element,
+			Document document,
 			List<ExpectedMigrationException> errors) {
 		
 		Element parentNode = (old.getParentNode() != null && old.getParentNode() instanceof Element) ?

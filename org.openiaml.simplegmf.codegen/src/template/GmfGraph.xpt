@@ -186,7 +186,7 @@
 	    <children
 	        xsi:type="gmfgraph:Label"
 	        name="«name»«label.name»Figure"
-	        text="«label.prefix»«IF label.specialLabel.toString() == "CONTAINMENT_NAME"»&lt;containment>«ELSEIF label.specialLabel.toString() == "METACLASS_NAME"»«name»«ELSE»&lt;...>«ENDIF»«label.suffix»">
+	        text="«label.prefix»«IF toString(label.defaultText).length > 0»«label.defaultText»«ELSE»«IF label.specialLabel.toString() == "CONTAINMENT_NAME"»&lt;containment>«ELSEIF label.specialLabel.toString() == "METACLASS_NAME"»«name»«ELSE»&lt;...>«ENDIF»«ENDIF»«label.suffix»">
 			«FOREACH label.properties.typeSelect(simplegmf::ForegroundColor) AS p»
 		        <foregroundColor
 		        	«EXPAND toColor FOR toString(p.color)»

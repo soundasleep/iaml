@@ -103,6 +103,10 @@
     <classifiers href="iaml.ecore#//NamedElement"/>
     <feature xsi:type="ecore:EAttribute" href="iaml.ecore#//NamedElement/name"/>
   </labelConfigurations>
+  <labelConfigurations name="Name">
+    <classifiers href="iaml.ecore#//EXSDDataType"/>
+    <feature xsi:type="ecore:EAttribute" href="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ENamedElement/name"/>
+  </labelConfigurations>
   <labelConfigurations name="Stereotype" readOnly="true" prefix=": " specialLabel="METACLASS_NAME">
     <properties xsi:type="sgmf:LabelUnderline" value="true"/>
   </labelConfigurations>
@@ -137,7 +141,7 @@
     <classifiers href="iaml.ecore#//wires/ConstraintEdge"/>
     <feature xsi:type="ecore:EAttribute" href="iaml.ecore#//wires/ConstraintEdge/type"/>
   </labelConfigurations>
-  <labelConfigurations name="ParentName" readOnly="true" parentFeature="true" defaultText="[none]">
+  <labelConfigurations name="ParentName" readOnly="true" defaultText="[none]" parentFeature="true">
     <classifiers href="iaml.ecore#//Operation"/>
     <classifiers href="iaml.ecore#//Condition"/>
     <classifiers href="iaml.ecore#//VisibleThing"/>
@@ -589,6 +593,9 @@
     <classifier href="iaml.ecore#//InternetApplication"/>
     <elements xsi:type="sgmf:ContainedNode" name="PrimitiveOperation">
       <classifier href="iaml.ecore#//PrimitiveOperation"/>
+    </elements>
+    <elements xsi:type="sgmf:ContainedNode" name="EXSDDataType">
+      <classifier href="iaml.ecore#//EXSDDataType"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="CompositeOperation">
       <classifier href="iaml.ecore#//CompositeOperation"/>

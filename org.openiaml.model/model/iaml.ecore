@@ -515,7 +515,7 @@
         <details key="documentation" value="This represents the value of the {@model Changeable} object. This is always a valid {@model Changeable#type} instance."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/plugin/org.eclipse.xsd/model/XSD.ecore#//XSDSimpleTypeDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//EXSDDataType">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The datatype of the {@model Changeable object} and its contained {@model Property fieldValue}."/>
       </eAnnotations>
@@ -1002,7 +1002,7 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Incoming values to an {@model Operation operation} executed by a {@model RunAction} can be accessed via Parameters."/>
       </eAnnotations>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/plugin/org.eclipse.xsd/model/XSD.ecore#//XSDSimpleTypeDefinition">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//EXSDDataType">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="The datatype of the {@model Parameter}."/>
         </eAnnotations>
@@ -1012,7 +1012,7 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Temporary storage of values contained within an {@model Operation} which will be lost once the operation is completed."/>
       </eAnnotations>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/plugin/org.eclipse.xsd/model/XSD.ecore#//XSDSimpleTypeDefinition">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//EXSDDataType">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="The datatype of the {@model TemporaryVariable}."/>
         </eAnnotations>

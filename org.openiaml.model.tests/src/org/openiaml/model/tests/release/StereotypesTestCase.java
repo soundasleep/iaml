@@ -112,14 +112,24 @@ public class StereotypesTestCase extends XmlTestCase {
 			assertEquals("gmfgraph:Label", label.getAttribute("xsi:type"));
 			assertEquals(": " + name, label.getAttribute("text"));
 			
+			/*
 			// make sure that it's second
 			IterableElementList children = xpath(child, "actualFigure/children");
 			assertNotSame("We should have at least one children node", children.getLength(), 0);
 			
-			// if it has 2 or more nodes, it must be second
-			if (children.size() >= 2) {
-				assertEquals(name, label, children.item(1));
+			String xpath2 = "actualFigure/children[@name='" + name + "ContainmentFeatureFigure']";
+			if (hasXpathFirst(child, xpath2) != null) {
+				// if the first label is a containment label, the Stereotype label must be third
+				if (children.size() >= 3) {
+					assertEquals(name + ": " + label, label, children.item(2));
+				}
+			} else {
+				// if the first label is NOT a containment label, the Stereotype label must be second
+				if (children.size() >= 2) {
+					assertEquals(name + ": " + label, label, children.item(1));
+				}
 			}
+			*/
 
 		}
 		

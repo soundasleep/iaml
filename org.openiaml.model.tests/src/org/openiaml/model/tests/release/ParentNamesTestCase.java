@@ -14,6 +14,7 @@ import org.openiaml.model.model.components.ComponentsPackage;
 import org.openiaml.model.model.domain.DomainPackage;
 import org.openiaml.model.model.operations.OperationsPackage;
 import org.openiaml.model.model.visual.VisualPackage;
+import org.openiaml.model.model.wires.WiresPackage;
 import org.openiaml.model.tests.XmlTestCase;
 import org.openiaml.model.xpath.IterableElementList;
 import org.w3c.dom.Document;
@@ -198,6 +199,9 @@ public class ParentNamesTestCase extends XmlTestCase {
 	private static final EClass[] TYPED_ELEMENTS = new EClass[] {
 		OperationsPackage.eINSTANCE.getTemporaryVariable(),
 		ModelPackage.eINSTANCE.getProperty(),
+		OperationsPackage.eINSTANCE.getParameter(),
+		
+		// changeable
 		ModelPackage.eINSTANCE.getDomainAttribute(),
 		DomainPackage.eINSTANCE.getDomainAttributeInstance(),
 		VisualPackage.eINSTANCE.getInputTextField(),
@@ -205,6 +209,9 @@ public class ParentNamesTestCase extends XmlTestCase {
 		
 		// not data typed, but typed in a different way
 		DomainPackage.eINSTANCE.getDomainSource(),
+		
+		// also typed in a different way
+		WiresPackage.eINSTANCE.getConstraintEdge(),
 	};
 	
 	private static List<String> inst_getTypedElements = null;
@@ -374,7 +381,7 @@ public class ParentNamesTestCase extends XmlTestCase {
 		Document gmfgraph = getGmfgraph();
 		for (String parent : getParentNameElements()) {
 			// make sure the element is there
-			Element label = xpathFirst(gmfgraph, "Canvas/labels[@name='" + parent + "ParentName']");
+			Element label = xpathFirst(gmfgraph, "Canvas/labels[@name='" + parent + "ParentNameFigure']");
 			
 			// element icon should be false
 			assertEquals(label.getAttribute("elementIcon"), "false");

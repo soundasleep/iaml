@@ -86,9 +86,9 @@
 			«LET editor.classifier.eAllContainments.select(c| ecore::EClass.isInstance(c.eType) &&
 				toBoolean(((ecore::EClass) c.eType).isSuperTypeOf(this.classifier))) AS allContainmentFeatures»
 				«IF allContainmentFeatures.isEmpty»
-					«throwException("No containment feature found for: " + this)»
+					«throwException("Editor " + toString(editor.id) + ": No containment feature found for " + toString(classifier.name))»
 				«ELSEIF allContainmentFeatures.size > 1»
-					«throwException("More than one containment feature found for: " + this + ", found " + allContainmentFeatures.size + ": " + allContainmentFeatures)»
+					«throwException("Editor " + toString(editor.id) + ": More than one containment feature found for " + toString(classifier.name) + ", found " + allContainmentFeatures.size + ": " + allContainmentFeatures)»
 				«ELSE»
 				    <containmentFeature
 				        href="«EXPAND toHref(root) FOR allContainmentFeatures.first()»"/>
@@ -138,6 +138,22 @@ domainElement.eContainingFeature().getName().equals(&quot;«feature.name»&quot;);
 		«IF feature.eType != classifier»
 		<domainSpecialization
 			body="self.oclIsTypeOf( «classifier.name» )"/>
+		«ELSE»
+			«LET root.rootElement.ePackage.eAllContents.typeSelect(ecore::EClass).select( c | toBoolean(classifier.isSuperTypeOf(c))) AS allPossibleElements»
+			«IF allPossibleElements.size == 0»
+				«throwException("Unexpectedly could not get a single instance for type " + toString(classifier.name))»
+			«ELSEIF allPossibleElements.size == 1»
+				«REM»only one possible container«ENDREM»
+			«ELSE»
+				«REM»need to negate all subtypes«ENDREM»
+		<domainSpecialization
+			body="self.oclIsTypeOf( «classifier.name» ) and 
+				«FOREACH allPossibleElements.reject(c|c == classifier) AS c SEPARATOR " and "»
+					not(self.oclIsTypeOf( «c.name» ))
+				«ENDFOREACH»
+			"/>
+			«ENDIF»
+			«ENDLET» 
 		«ENDIF»
 	«ENDIF»
 

@@ -67,6 +67,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//LabelConfiguration/readOnly"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//LabelConfiguration/prefix"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//LabelConfiguration/suffix"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//LabelConfiguration/defaultText"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference simplegmf.ecore#//LabelConfiguration/feature"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplegmf.ecore#//LabelConfiguration/parentFeature"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simplegmf.ecore#//LabelConfiguration/properties"/>

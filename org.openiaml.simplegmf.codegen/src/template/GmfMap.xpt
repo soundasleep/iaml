@@ -137,7 +137,7 @@ domainElement.eContainingFeature().getName().equals(&quot;«feature.name»&quot;);
 	«ELSE»
 		«IF feature.eType != classifier»
 		<domainSpecialization
-			body="self.oclIsTypeOf( «classifier.name» )"/>
+			body="self.oclIsTypeOf( «EXPAND classifierOCLReference(root) FOR classifier» )"/>
 		«ELSE»
 			«LET root.rootElement.ePackage.eAllContents.typeSelect(ecore::EClass).select( c | toBoolean(classifier.isSuperTypeOf(c))) AS allPossibleElements»
 			«IF allPossibleElements.size == 0»
@@ -147,9 +147,9 @@ domainElement.eContainingFeature().getName().equals(&quot;«feature.name»&quot;);
 			«ELSE»
 				«REM»need to negate all subtypes«ENDREM»
 		<domainSpecialization
-			body="self.oclIsTypeOf( «classifier.name» ) and 
+			body="self.oclIsTypeOf( «EXPAND classifierOCLReference(root) FOR classifier» ) and 
 				«FOREACH allPossibleElements.reject(c|c == classifier) AS c SEPARATOR " and "»
-					not(self.oclIsTypeOf( «c.name» ))
+					not(self.oclIsTypeOf( «EXPAND classifierOCLReference(root) FOR c» ))
 				«ENDFOREACH»
 			"/>
 			«ENDIF»
@@ -181,6 +181,10 @@ domainElement.eContainingFeature().getName().equals(&quot;«feature.name»&quot;);
 	
 	«EXPAND labelMappings(root, this) FOREACH gmfmapLabelMapGet(classifier)»
 «IF isNode»</ownedChild>«ENDIF»
+«ENDDEFINE»
+
+«DEFINE classifierOCLReference(simplegmf::GMFConfiguration root) FOR ecore::EClass-»
+«IF root.rootElement.ePackage != ePackage»«ePackage.name»::«ENDIF»«name-»
 «ENDDEFINE»
 
 «DEFINE labelMappings(simplegmf::GMFConfiguration root, simplegmf::DiagramElement element) FOR simplegmf::LabelConfiguration»

@@ -111,25 +111,6 @@ public class StereotypesTestCase extends XmlTestCase {
 			// check its properties
 			assertEquals("gmfgraph:Label", label.getAttribute("xsi:type"));
 			assertEquals(": " + name, label.getAttribute("text"));
-			
-			/*
-			// make sure that it's second
-			IterableElementList children = xpath(child, "actualFigure/children");
-			assertNotSame("We should have at least one children node", children.getLength(), 0);
-			
-			String xpath2 = "actualFigure/children[@name='" + name + "ContainmentFeatureFigure']";
-			if (hasXpathFirst(child, xpath2) != null) {
-				// if the first label is a containment label, the Stereotype label must be third
-				if (children.size() >= 3) {
-					assertEquals(name + ": " + label, label, children.item(2));
-				}
-			} else {
-				// if the first label is NOT a containment label, the Stereotype label must be second
-				if (children.size() >= 2) {
-					assertEquals(name + ": " + label, label, children.item(1));
-				}
-			}
-			*/
 
 		}
 		
@@ -180,7 +161,7 @@ public class StereotypesTestCase extends XmlTestCase {
 						Element labelHref = xpathFirst(map, "diagramLabel");
 						// iaml.gmfgraph#InputFormStereotype
 						String href = labelHref.getAttribute("href");
-						if (href.endsWith("#" + elementName + "Stereotype")) {
+						if (href.endsWith("#" + elementName + "StereotypeFigure")) {
 							assertFalse(filename + ": Found two mappings for " + elementName, found);
 							
 							if ("gmfmap:DesignLabelMapping".equals(map.getAttribute("xsi:type"))) {
@@ -202,16 +183,9 @@ public class StereotypesTestCase extends XmlTestCase {
 						Element labelHref = xpathFirst(map, "diagramLabel");
 						// iaml.gmfgraph#InputFormStereotype
 						String href = labelHref.getAttribute("href");
-						if (href.endsWith("#" + elementName + "Stereotype")) {
+						if (href.endsWith("#" + elementName + "StereotypeFigure")) {
 							assertFalse(filename + ": Found two mappings for " + elementName, found);
 							found = true;
-							
-							// if this is first, it should be the only child
-							if (count == 0 && mapping.size() != 1) {
-								fail(filename + ": Stereotype mapping should have been first in an element with only one label: " + href);
-							} else if (count > 1) {
-								fail(filename + ": Stereotype mapping must be second: " + href);
-							}
 						}
 					}
 
@@ -231,7 +205,7 @@ public class StereotypesTestCase extends XmlTestCase {
 						
 						// add href
 						Element newHref = doc.createElement("diagramLabel");
-						newHref.setAttribute("href", GmfGraphTestCase.GMF_FILENAME + "#" + elementName + "Stereotype");
+						newHref.setAttribute("href", GmfGraphTestCase.GMF_FILENAME + "#" + elementName + "StereotypeFigure");
 						newMapping.appendChild(newHref);
 						
 						changed = true;
@@ -249,7 +223,7 @@ public class StereotypesTestCase extends XmlTestCase {
 						Element labelHref = xpathFirst(map, "diagramLabel");
 						// iaml.gmfgraph#InputFormStereotype
 						String href = labelHref.getAttribute("href");
-						if (href.endsWith("#" + elementName + "Stereotype")) {
+						if (href.endsWith("#" + elementName + "StereotypeFigure")) {
 							assertFalse(filename + ": Found two mappings for " + elementName, found);
 							found = true;
 							
@@ -258,13 +232,6 @@ public class StereotypesTestCase extends XmlTestCase {
 							
 							// must not be design label mapping
 							assertNotEqual(filename + ": " + href, "gmfmap:DesignLabelMapping", map.getAttribute("xsi:type"));
-							
-							// if this is first, it should be the only child
-							if (count == 0 && mapping.size() != 1) {
-								fail(filename + ": Stereotype mapping should have been first in an element with only one label");
-							} else if (count > 1) {
-								fail(filename + ": Stereotype mapping must be second");
-							}
 						}
 					}
 
@@ -322,7 +289,7 @@ public class StereotypesTestCase extends XmlTestCase {
 						Element labelHref = xpathFirst(map, "diagramLabel");
 						// iaml.gmfgraph#InputFormStereotype
 						String href = labelHref.getAttribute("href");
-						if (href.endsWith("#" + elementName + "Stereotype")) {
+						if (href.endsWith("#" + elementName + "StereotypeFigure")) {
 							assertFalse(filename + ": Found two mappings for " + elementName, found);
 							
 							if ("gmfmap:DesignLabelMapping".equals(map.getAttribute("xsi:type"))) {
@@ -345,16 +312,9 @@ public class StereotypesTestCase extends XmlTestCase {
 						Element labelHref = xpathFirst(map, "diagramLabel");
 						// iaml.gmfgraph#InputFormStereotype
 						String href = labelHref.getAttribute("href");
-						if (href.endsWith("#" + elementName + "Stereotype")) {
+						if (href.endsWith("#" + elementName + "StereotypeFigure")) {
 							assertFalse(filename + ": Found two mappings for " + elementName, found);
 							found = true;
-							
-							// if this is first, it should be the only child
-							if (count == 0 && mapping.size() != 1) {
-								fail(filename + ": Stereotype mapping should have been first in an element with only one label");
-							} else if (count > 1) {
-								fail(filename + ": Stereotype mapping must be second");
-							}
 						}
 					}
 
@@ -374,7 +334,7 @@ public class StereotypesTestCase extends XmlTestCase {
 						
 						// add href
 						Element newHref = doc.createElement("diagramLabel");
-						newHref.setAttribute("href", GmfGraphTestCase.GMF_FILENAME + "#" + elementName + "Stereotype");
+						newHref.setAttribute("href", GmfGraphTestCase.GMF_FILENAME + "#" + elementName + "StereotypeFigure");
 						newMapping.appendChild(newHref);
 						
 						changed = true;
@@ -392,7 +352,7 @@ public class StereotypesTestCase extends XmlTestCase {
 						Element labelHref = xpathFirst(map, "diagramLabel");
 						// iaml.gmfgraph#InputFormStereotype
 						String href = labelHref.getAttribute("href");
-						if (href.endsWith("#" + elementName + "Stereotype")) {
+						if (href.endsWith("#" + elementName + "StereotypeFigure")) {
 							assertFalse(filename + ": Found two mappings for " + elementName, found);
 							found = true;
 							
@@ -401,13 +361,6 @@ public class StereotypesTestCase extends XmlTestCase {
 							
 							// must not be design label mapping
 							assertNotEqual(filename + ": " + href, "gmfmap:DesignLabelMapping", map.getAttribute("xsi:type"));
-							
-							// if this is first, it should be the only child
-							if (count == 0 && mapping.size() != 1) {
-								fail(filename + ": Stereotype mapping should have been first in an element with only one label");
-							} else if (count > 1) {
-								fail(filename + ": Stereotype mapping must be second");
-							}
 						}
 					}
 

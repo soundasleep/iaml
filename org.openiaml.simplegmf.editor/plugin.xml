@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="org.openiaml.simplegmf.model.simplegmf.presentation.SimpleGMFModelWizardID"
+            name="%_UI_SimpleGMFModelWizard_label"
+            class="org.openiaml.simplegmf.model.simplegmf.presentation.SimpleGMFModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/SimpleGMFModelFile.gif">
+         <description>%_UI_SimpleGMFModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="org.openiaml.simplegmf.model.simplegmf.presentation.SimpleGMFEditorID"
+            name="%_UI_SimpleGMFEditor_label"
+            icon="icons/full/obj16/SimpleGMFModelFile.gif"
+            extensions="simplegmf"
+            class="org.openiaml.simplegmf.model.simplegmf.presentation.SimpleGMFEditor"
+            contributorClass="org.openiaml.simplegmf.model.simplegmf.presentation.SimpleGMFActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>

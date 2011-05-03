@@ -14,6 +14,12 @@ digraph {
 "org.openiaml.model.migration";
 "org.openiaml.model.runtime";
 "org.openiaml.model.runtime.phpmailer";
+"org.openiaml.modeltesting";
+"org.openiaml.simplegmf";
+"org.openiaml.simplegmf.codegen";
+"org.openiaml.simplegmf.edit";
+"org.openiaml.simplegmf.editor";
+"org.openiaml.simplegmf.ui";
   node [style=filled, fillcolor="#cc7766"];
 "org.openiaml.model.diagram";
   node [style=filled, fillcolor="#ffffff"];
@@ -44,4 +50,9 @@ digraph {
   "org.openiaml.model.drools" -> "org.openiaml.emf.properties";
   "org.openiaml.model.drools" -> "org.openiaml.model";
   "org.openiaml.model.edit" -> "org.openiaml.model";
+  "org.openiaml.simplegmf.codegen" -> "org.openiaml.simplegmf";
+  "org.openiaml.simplegmf.edit" -> "org.openiaml.simplegmf";
+  "org.openiaml.simplegmf.editor" -> "org.openiaml.simplegmf.edit";
+  "org.openiaml.simplegmf.ui" -> "org.openiaml.simplegmf";
+  "org.openiaml.simplegmf.ui" -> "org.openiaml.simplegmf.codegen";
 }

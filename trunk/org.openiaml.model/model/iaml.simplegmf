@@ -109,13 +109,27 @@
   </labelConfigurations>
   <labelConfigurations name="Type" readOnly="true" prefix="Type: " providedAtRuntime="true">
     <classifiers href="iaml.ecore#//Property"/>
-    <classifiers href="iaml.ecore#//domain/DomainSource"/>
-    <classifiers href="iaml.ecore#//operations/TemporaryVariable"/>
     <classifiers href="iaml.ecore#//DomainAttribute"/>
     <classifiers href="iaml.ecore#//domain/DomainAttributeInstance"/>
     <classifiers href="iaml.ecore#//domain/DomainFeatureInstance"/>
     <classifiers href="iaml.ecore#//VisibleThing"/>
-    <feature xsi:type="ecore:EReference" href="iaml.ecore#//Property/type"/>
+    <feature xsi:type="ecore:EReference" href="iaml.ecore#//Changeable/type"/>
+  </labelConfigurations>
+  <labelConfigurations name="Type" readOnly="true" prefix="Type: " providedAtRuntime="true">
+    <classifiers href="iaml.ecore#//operations/TemporaryVariable"/>
+    <feature xsi:type="ecore:EReference" href="iaml.ecore#//operations/TemporaryVariable/type"/>
+  </labelConfigurations>
+  <labelConfigurations name="Type" readOnly="true" prefix="Type: " providedAtRuntime="true">
+    <classifiers href="iaml.ecore#//components/LoginHandler"/>
+    <feature xsi:type="ecore:EAttribute" href="iaml.ecore#//components/LoginHandler/type"/>
+  </labelConfigurations>
+  <labelConfigurations name="Type" readOnly="true" prefix="Type: " editPattern="" providedAtRuntime="true">
+    <classifiers href="iaml.ecore#//domain/DomainSource"/>
+    <feature xsi:type="ecore:EAttribute" href="iaml.ecore#//domain/DomainSource/type"/>
+  </labelConfigurations>
+  <labelConfigurations name="Type" readOnly="true" prefix="Type: " editPattern="" editorPattern="" providedAtRuntime="true">
+    <classifiers href="iaml.ecore#//wires/ConstraintEdge"/>
+    <feature xsi:type="ecore:EAttribute" href="iaml.ecore#//wires/ConstraintEdge/type"/>
   </labelConfigurations>
   <labelConfigurations name="ParentName" readOnly="true" prefix="Parent: " parentFeature="true">
     <classifiers href="iaml.ecore#//Operation"/>

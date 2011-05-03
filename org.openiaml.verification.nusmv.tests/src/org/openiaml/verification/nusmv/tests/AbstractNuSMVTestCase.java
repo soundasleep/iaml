@@ -80,6 +80,11 @@ public class AbstractNuSMVTestCase extends TestCase {
 		List<NuSMVViolation> violations = engine.getViolations();
 		try {
 			if (violationsSize == 0) {
+				System.err.println(status.getPlugin());
+				System.err.println(status.getMessage());
+				if (status.getException() != null)
+					status.getException().printStackTrace();
+				System.err.println("---");
 				assertTrue("status was not OK: " + status, status.isOK());
 			} else {
 				assertFalse("status was OK: " + status, status.isOK());

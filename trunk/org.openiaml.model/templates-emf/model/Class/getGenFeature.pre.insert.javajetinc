@@ -1,0 +1,9 @@
+<%if ("XSDSimpleTypeDefinition".equals(genFeature.getImportedType(genClass))) {%>
+		// issue 251: disable resolving proxy references for XSD reference types
+		// while the diagram is still being loaded.
+		// this is handled through the custom singleton class EXSDDataTypeTransactionHandler.
+		if (<%=genFeature.getSafeName()%> == null
+				&& <%=genFeature.getSafeName()%>.eIsProxy()
+				&& org.openiaml.model.EXSDDataTypeTransactionHandler.getInstance().isLoadingDiagram() )
+			return <%=genFeature.getSafeName()%>; /* return null */
+<%}%> 

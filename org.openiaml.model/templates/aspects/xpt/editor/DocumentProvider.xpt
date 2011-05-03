@@ -104,6 +104,39 @@ protected void doSaveDocument(org.eclipse.core.runtime.IProgressMonitor monitor,
 }
 «ENDAROUND»
 
+«AROUND setDocumentContent FOR gmfgen::GenDiagram-»
+	«EXPAND xpt::Common::generatedMemberComment("Jevon: wraps the original method in a class wrapper")»
+	private class OriginalDocumentProvider {
+	«targetDef.proceed()»
+	}
+	
+	«EXPAND xpt::Common::generatedMemberComment("Jevon extension: disable full loading of references")»
+	protected void setDocumentContent(org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDocument document, org.eclipse.ui.IEditorInput element) throws org.eclipse.core.runtime.CoreException {
+		
+		org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDiagramDocument diagramDocument = (org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDiagramDocument) document;
+		org.eclipse.emf.transaction.TransactionalEditingDomain domain = diagramDocument.getEditingDomain();
+		
+		try {
+			// essentially calls a super method
+			org.openiaml.model.EXSDDataTypeTransactionHandler.getInstance().setLoadingDiagram(true);
+			new OriginalDocumentProvider().setDocumentContent(document, element);
+		} finally {
+			org.openiaml.model.EXSDDataTypeTransactionHandler.getInstance().setLoadingDiagram(false);
+			final org.eclipse.emf.ecore.EObject diagramObject = diagramDocument.getDiagram().getElement();
+			org.eclipse.emf.common.command.Command command = new org.eclipse.emf.transaction.RecordingCommand(domain, "Resolve all outstanding cross-references") {
+				
+				«EXPAND xpt::Common::generatedMemberComment("Jevon extension: it is necessary to resolve missing references once the model has loaded.")»
+				@Override
+				protected void doExecute() {
+					org.eclipse.emf.ecore.util.EcoreUtil.resolveAll(diagramObject.eResource().getResourceSet());
+				}
+				
+			};
+			domain.getCommandStack().execute(command);
+		}
+	}
+«ENDAROUND»
+
 /**
  * Other definitions that don't seem to be dynamic properly.
  */

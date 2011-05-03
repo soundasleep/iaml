@@ -108,12 +108,16 @@
     <properties xsi:type="sgmf:LabelUnderline" value="true"/>
   </labelConfigurations>
   <labelConfigurations name="Type" readOnly="true" prefix="Type: " providedAtRuntime="true">
-    <classifiers href="iaml.ecore#//Property"/>
-    <classifiers href="iaml.ecore#//DomainAttribute"/>
-    <classifiers href="iaml.ecore#//domain/DomainAttributeInstance"/>
-    <classifiers href="iaml.ecore#//domain/DomainFeatureInstance"/>
-    <classifiers href="iaml.ecore#//VisibleThing"/>
+    <classifiers href="iaml.ecore#//Changeable"/>
     <feature xsi:type="ecore:EReference" href="iaml.ecore#//Changeable/type"/>
+  </labelConfigurations>
+  <labelConfigurations name="Type" readOnly="true" prefix="Type: " providedAtRuntime="true">
+    <classifiers href="iaml.ecore#//operations/Parameter"/>
+    <feature xsi:type="ecore:EReference" href="iaml.ecore#//operations/Parameter/type"/>
+  </labelConfigurations>
+  <labelConfigurations id="" name="Type" readOnly="true" prefix="Type: " providedAtRuntime="true">
+    <classifiers href="iaml.ecore#//Property"/>
+    <feature xsi:type="ecore:EReference" href="iaml.ecore#//Property/type"/>
   </labelConfigurations>
   <labelConfigurations name="Type" readOnly="true" prefix="Type: " providedAtRuntime="true">
     <classifiers href="iaml.ecore#//operations/TemporaryVariable"/>

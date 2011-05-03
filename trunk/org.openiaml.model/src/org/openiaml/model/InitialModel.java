@@ -3,10 +3,11 @@
  */
 package org.openiaml.model;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xsd.XSDSchema;
 import org.eclipse.xsd.XSDSimpleTypeDefinition;
 import org.eclipse.xsd.XSDTypeDefinition;
@@ -50,6 +51,10 @@ public class InitialModel {
 	
 	private static XSDSchema xsdSchemaInstance = null;
 	
+	/**
+	 * Initialise the EMF data types from
+	 * <code>/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd</code>.
+	 */
 	private static void initialiseEMFXSDDataTypes() throws ModelInitializationException {
 		if (xsdSchemaInstance == null) {
 			URI uri = URI.createPlatformPluginURI("/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd", false);
@@ -66,6 +71,23 @@ public class InitialModel {
 		}
 	}
 	
+	/**
+	 * To reduce the clutter in initial diagrams, only a limited set of
+	 * XSD data types are provided by default. Note that this does not
+	 * restrict a model instance from referencing other XSD data types
+	 * in the XSD data type definition. 
+	 */
+	private static final List<String> INCLUDED_DATA_TYPES = Arrays.asList(
+			"integer",
+			"decimal",
+			"string",
+			"boolean",
+			"float",
+			"double",
+			"time",
+			"date"
+			);
+	
 	private static void addEMFXSDDataTypes(InternetApplication app) throws ModelInitializationException {
 		initialiseEMFXSDDataTypes();
 		
@@ -73,17 +95,24 @@ public class InitialModel {
 			if (type instanceof XSDSimpleTypeDefinition) {
 				XSDSimpleTypeDefinition xs = (XSDSimpleTypeDefinition) type;
 				
-				EXSDDataType dt = ModelFactory.eINSTANCE.createEXSDDataType();
-				dt.setId("xsd:" + xs.getName());
-				dt.setDefinition(xs);
-				dt.setName("xsd:" + xs.getName());
-				app.getXsdDataTypes().add(dt);
+				// for now, we will only initialise with a few builtin types
+				if (INCLUDED_DATA_TYPES.contains(xs.getName())) {
+					EXSDDataType dt = ModelFactory.eINSTANCE.createEXSDDataType();
+					dt.setId("xsd_" + xs.getName());
+					dt.setDefinition(xs);
+					dt.setName("xsd:" + xs.getName());
+					app.getXsdDataTypes().add(dt);
+				}
 			}
 		}
 	}
 
 	private static XSDSchema builtinXsdTypes = null;
 	
+	/**
+	 * Initialise the builtin data types from
+	 * <code>/org.openiaml.model/model/datatypes.xsd</code>.
+	 */
 	private static void initialiseBuiltinXSDDataTypes() throws ModelInitializationException {
 		if (builtinXsdTypes == null) {
 			URI uri = URI.createPlatformPluginURI("/org.openiaml.model/model/datatypes.xsd", false);
@@ -108,7 +137,7 @@ public class InitialModel {
 				XSDSimpleTypeDefinition xs = (XSDSimpleTypeDefinition) type;
 				
 				EXSDDataType dt = ModelFactory.eINSTANCE.createEXSDDataType();
-				dt.setId("builtin:" + xs.getName());
+				dt.setId("builtin_" + xs.getName());
 				dt.setDefinition(xs);
 				dt.setName("builtin:" + xs.getName());
 				app.getXsdDataTypes().add(dt);

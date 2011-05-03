@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -108,9 +109,17 @@ public class SimpleGMFCodegenFunctions {
 	
 	/**
 	 * Get the URI of the containing resource of this EObject.
+	 * If this URI is a {@link URI#isPlatform() platform URI}, then the
+	 * full URI is returned as a string; otherwise, it is assumed to
+	 * be relative.
 	 */
 	public static String getResourceFileName(EObject obj) {
-		return obj.eResource().getURI().lastSegment();
+		URI uri = obj.eResource().getURI();
+		if (uri.isPlatform()) {
+			return uri.toString();
+		} else {
+			return uri.lastSegment();
+		}
 	}
 	
 	// counter functions

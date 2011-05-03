@@ -174,9 +174,13 @@
 	
 «ENDLET»
 
+«FOREACH root.labelConfigurations.select(lc|lc.feature != null && toBoolean(lc.feature.eIsProxy())) AS proxylc-»
+<!-- warning: label configuration feature '«proxylc.feature»' is a proxy feature -->
+«ENDFOREACH-»
+
 «LET root.labelConfigurations.select(lc |
 	(lc.classifiers.isEmpty && lc.feature == null) || /* no classifiers or features set */
-	(!lc.classifiers.select(c | c.isSuperTypeOf(this)).isEmpty && ( /* matching classifiers */
+	(lc.classifiers.exists(c | toBoolean(c.isSuperTypeOf(this))) && ( /* matching classifiers */
 		lc.feature == null || /* no feature to match */
 		eAllStructuralFeatures.contains(lc.feature)) /* matching a feature */
 	))

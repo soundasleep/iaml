@@ -223,12 +223,13 @@ domainElement.eContainingFeature().getName().equals(&quot;«feature.name»&quot;);
 «ENDDEFINE»
 
 «DEFINE toHref(simplegmf::GMFConfiguration root) FOR ecore::EClass-»
-«getResourceFileName()-»#//«EXPAND toHrefPackage(root) FOR ePackage-»«name-»
+«getResourceFileName()-»#//«EXPAND toHrefPackage(root, this) FOR ePackage-»«name-»
 «ENDDEFINE»
 
-«DEFINE toHrefPackage(simplegmf::GMFConfiguration root) FOR ecore::EPackage-»
-«IF this == null»«throwException("Unexpected null ePackage for EClass: " + this)»«ENDIF-»
-«IF this != root.rootElement.ePackage»«EXPAND toHrefPackage(root) FOR this.eSuperPackage»«name»/«ENDIF-»
+«REM»top-level package: don't generate any package identifier«ENDREM»
+«DEFINE toHrefPackage(simplegmf::GMFConfiguration root, ecore::EClass classifier) FOR ecore::EPackage-»
+«IF this == null»«throwException("Unexpected null ePackage for EClass " + classifier + ": " + this)»«ENDIF-»
+«IF eSuperPackage != null-»«EXPAND toHrefPackage(root, classifier) FOR this.eSuperPackage»«name»/«ENDIF-»
 «ENDDEFINE»
 
 /** 

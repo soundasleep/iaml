@@ -113,6 +113,7 @@ public class Migrate2To4 extends DomBasedMigrator implements IamlModelMigrator {
 	 */
 	@Override
 	public void handleElement(Element old, Element element,
+			Document document,
 			List<ExpectedMigrationException> errors) {
 		
 		// <domainStores xsi:type="iaml:DomainStore"> 

@@ -72,6 +72,7 @@ public class Migrate0To1 extends DomBasedMigrator implements IamlModelMigrator {
 	public boolean shouldDeleteNode(Element element, Node parent, List<ExpectedMigrationException> errors) {
 		// an <operation> can no longer contain <wires> (<edges>)
 		if (element.getNodeName().equals("edges") && parent.getNodeName().equals("operations")) {
+			errors.add( new ExpectedMigrationException( this, element, "<operation> can no longer contain <edges>" ) );
 			return true;
 		}
 
@@ -134,6 +135,7 @@ public class Migrate0To1 extends DomBasedMigrator implements IamlModelMigrator {
 	 */
 	@Override
 	public void handleElement(Element old, Element element,
+			Document document,
 			List<ExpectedMigrationException> errors) {
 		// does nothing
 	}

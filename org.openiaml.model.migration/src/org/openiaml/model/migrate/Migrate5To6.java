@@ -1,12 +1,14 @@
 package org.openiaml.model.migrate;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * <p>Migrate model version 0.5 to 0..
@@ -180,7 +182,7 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 		if ("operations".equals(element.getNodeName()) && "name".equals(name) && "setPropertyToValue".equals(value)) {
 			return "set"; 
 		}
-		
+
 		// is this a list of IDs?
 		if (value.equals(value.trim())) {
 			StringBuffer newValue = new StringBuffer();
@@ -195,7 +197,7 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 			}
 			
 			return newValue.toString();
-		}
+		}		
 		
 		// otherwise, just return the same value
 		return super.handleAttribute(name, value, element, errors);
@@ -234,8 +236,31 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 			return true;
 		}
 		
+		// issue 242: replace <attribute><type href="..."></attribute>
+		// --> with <attribute type="..." />
+		if (isOldTypedElement(element)) {
+			// this is not an error
+			return true;
+		}
+		
 		// super call
 		return super.shouldDeleteNode(element, parent, errors);
+	}
+	
+	private boolean isOldTypedElement(Element element) {
+		Node parent = element.getParentNode();
+		
+		if ("type".equals(element.getNodeName()) &&
+				element.hasAttribute("href")) {
+			String parentName = (parent != null ? parent.getNodeName() : null);
+			if ("attributes".equals(parentName) || "fieldValue".equals(parentName) 
+					|| "properties".equals("parentName")) {
+				
+				return true;
+			}
+		}
+		
+		return false;
 	}
 	
 	private List<String> idsToDelete;
@@ -284,6 +309,7 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 	 */
 	@Override
 	public void handleElement(Element old, Element element,
+			Document document,
 			List<ExpectedMigrationException> errors) {
 		
 		// <children xsi:type="iaml.visual:Hidden">
@@ -298,7 +324,114 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 			element.setAttribute("readOnly", "true");
 		}
 		
+		// <internetApplication>:
+		// need to add lots of builtin datatypes
+		if ("InternetApplication".equals(old.getNodeName()) ||
+				"iaml:InternetApplication".equals(old.getNodeName())) {
+			
+			// XSD data types
+			{
+				Map<String,String> map = getXSDTypeMap();
+				for (String key : map.keySet()) {
+					String uri = map.get(key);
+
+					Element et = createElement(document, "xsdDataTypes");
+					et.setAttribute("name", key.replace("_", ":"));
+					et.setAttribute("id", key);
+					Element def = createElement(document, "definition");
+					def.setAttribute("href", uri);
+					et.appendChild(def);
+					element.appendChild(et);
+				}
+			}
+			
+			// builtin data types
+			{
+				Map<String,String> map = getBuiltinTypeMap();
+				for (String key : map.keySet()) {
+					String uri = map.get(key);
+
+					Element et = createElement(document, "xsdDataTypes");
+					et.setAttribute("name", key.replace("_", ":"));
+					et.setAttribute("id", key);
+					Element def = createElement(document, "definition");
+					def.setAttribute("href", uri);
+					et.appendChild(def);
+					element.appendChild(et);
+				}
+			}
+
+		}
+		
+		// issue 242: replace <attribute><type href="..."></attribute>
+		// --> with <attribute type="..." />
+		{
+			NodeList nl = old.getChildNodes();
+			for (int i = 0; i < nl.getLength(); i++) {
+				Node n = nl.item(i);
+				if (n instanceof Element) {
+					Element e = (Element) n;
+					if (isOldTypedElement(e)) {
+						// we found an old typed element
+						// need to add a new "type" attribute
+						String type = null;
+						String href = e.hasAttribute("href") ? e.getAttribute("href") : null;
+						
+						{
+							Map<String,String> map = getXSDTypeMap();
+							for (String key : map.keySet()) {
+								if (map.get(key).equals(href)) {
+									type = key;
+								}
+							}
+						}
+
+						{
+							Map<String,String> map = getBuiltinTypeMap();
+							for (String key : map.keySet()) {
+								if (map.get(key).equals(href)) {
+									type = key;
+								}
+							}
+						}
+						
+						if (type != null) {
+							element.setAttribute("type", type);
+						}
+					}
+				}
+			}
+		}
+		
 	}
+
+	public Map<String, String> getXSDTypeMap() {
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("xsd_boolean", XSD_URI + "boolean;XSDSimpleTypeDefinition=10");
+		map.put("xsd_date", XSD_URI + "date;XSDSimpleTypeDefinition=17");
+		map.put("xsd_decimal", XSD_URI + "decimal;XSDSimpleTypeDefinition=13");
+		map.put("xsd_double", XSD_URI + "double;XSDSimpleTypeDefinition=12");
+		map.put("xsd_float", XSD_URI + "float;XSDSimpleTypeDefinition=11");
+		map.put("xsd_integer", XSD_URI + "integer;XSDSimpleTypeDefinition=40");
+		map.put("xsd_string", XSD_URI + "string;XSDSimpleTypeDefinition=9");
+		map.put("xsd_time", XSD_URI + "time;XSDSimpleTypeDefinition=16");
+		return map;
+	}
+	
+	public Map<String, String> getBuiltinTypeMap() {
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("builtin_iamlAddress", BUILTIN_URI + "iamlAddress;XSDSimpleTypeDefinition=2");
+		map.put("builtin_iamlDateTime", BUILTIN_URI + "iamlDateTime;XSDSimpleTypeDefinition=4");
+		map.put("builtin_iamlEmail", BUILTIN_URI + "iamlEmail;XSDSimpleTypeDefinition=3");
+		map.put("builtin_iamlInteger", BUILTIN_URI + "iamlInteger;XSDSimpleTypeDefinition");
+		map.put("builtin_iamlOpenIDURL", BUILTIN_URI + "iamlOpenIDURL;XSDSimpleTypeDefinition=6");
+		map.put("builtin_iamlString", BUILTIN_URI + "iamlString;XSDSimpleTypeDefinition=1");
+		map.put("builtin_iamlURL", BUILTIN_URI + "iamlURL;XSDSimpleTypeDefinition=5");
+		return map;
+	}
+	
+	public static final String XSD_URI = "platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//";
+	public static final String BUILTIN_URI = "platform:/plugin/org.openiaml.model/model/datatypes.xsd#//";
 
 	/* (non-Javadoc)
 	 * @see org.openiaml.model.migrate.DomBasedMigrator#getNewNamespaces()

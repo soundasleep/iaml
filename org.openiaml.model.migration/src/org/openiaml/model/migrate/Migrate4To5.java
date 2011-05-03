@@ -417,6 +417,7 @@ public class Migrate4To5 extends DomBasedMigrator implements IamlModelMigrator {
 	 */
 	@Override
 	public void handleElement(Element old, Element element,
+			Document document,
 			List<ExpectedMigrationException> errors) {
 
 		// <sessions> 

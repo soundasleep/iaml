@@ -115,7 +115,7 @@
     <classifiers href="iaml.ecore#//operations/Parameter"/>
     <feature xsi:type="ecore:EReference" href="iaml.ecore#//operations/Parameter/type"/>
   </labelConfigurations>
-  <labelConfigurations id="" name="Type" readOnly="true" prefix="Type: " providedAtRuntime="true">
+  <labelConfigurations name="Type" readOnly="true" prefix="Type: " providedAtRuntime="true">
     <classifiers href="iaml.ecore#//Property"/>
     <feature xsi:type="ecore:EReference" href="iaml.ecore#//Property/type"/>
   </labelConfigurations>
@@ -127,11 +127,11 @@
     <classifiers href="iaml.ecore#//components/LoginHandler"/>
     <feature xsi:type="ecore:EAttribute" href="iaml.ecore#//components/LoginHandler/type"/>
   </labelConfigurations>
-  <labelConfigurations name="Type" readOnly="true" prefix="Type: " editPattern="" providedAtRuntime="true">
+  <labelConfigurations name="Type" readOnly="true" prefix="Type: " providedAtRuntime="true">
     <classifiers href="iaml.ecore#//domain/DomainSource"/>
     <feature xsi:type="ecore:EAttribute" href="iaml.ecore#//domain/DomainSource/type"/>
   </labelConfigurations>
-  <labelConfigurations name="Type" readOnly="true" prefix="Type: " editPattern="" editorPattern="" providedAtRuntime="true">
+  <labelConfigurations name="Type" readOnly="true" prefix="Type: " providedAtRuntime="true">
     <classifiers href="iaml.ecore#//wires/ConstraintEdge"/>
     <feature xsi:type="ecore:EAttribute" href="iaml.ecore#//wires/ConstraintEdge/type"/>
   </labelConfigurations>
@@ -141,6 +141,7 @@
     <classifiers href="iaml.ecore#//VisibleThing"/>
     <classifiers href="iaml.ecore#//EventTrigger"/>
     <classifiers href="iaml.ecore#//DomainAttribute"/>
+    <classifiers href="iaml.ecore#//domain/DomainAttributeInstance"/>
     <classifiers href="iaml.ecore#//Scope"/>
     <classifiers href="iaml.ecore#//users/Permission"/>
     <classifiers href="iaml.ecore#//Property"/>
@@ -766,7 +767,7 @@
     <classifier href="iaml.ecore#//VisibleThing"/>
     <elements xsi:type="sgmf:ContainedNode" name="EventTrigger">
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Accessible/onAccess"/>
-      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Scope/onInit"/>
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//VisibleThing/onInput"/>
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Changeable/onChange"/>
       <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//VisibleThing/onClick"/>
       <classifier href="iaml.ecore#//EventTrigger"/>

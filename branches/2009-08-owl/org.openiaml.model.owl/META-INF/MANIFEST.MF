@@ -30,5 +30,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui;bundle-version="3.5.0",
  l3i.sido.emf4sw.rdf;bundle-version="0.4.0",
  org.openiaml.model.actions;bundle-version="0.3.1",
- l3i.sido.emf4sw.jena;bundle-version="1.0.0"
+ l3i.sido.emf4sw.jena;bundle-version="1.0.0",
+ org.openiaml.modeltesting;bundle-version="0.5.3"
 Bundle-ActivationPolicy: lazy

@@ -348,3 +348,13 @@
 		? "true" : "false"; ?>
 	«ENDIF»	
 «ENDDEFINE»
+
+/**
+ * Getting definitions for types.
+ */
+«DEFINE getTypeURI FOR ecore::EDataType»
+	«throwException("No support for EDataType")»
+«ENDDEFINE»
+
+«DEFINE getTypeURI FOR model::EXSDDataType-»
+'«escapePhpString(definition.uRI)-»'«ENDDEFINE»

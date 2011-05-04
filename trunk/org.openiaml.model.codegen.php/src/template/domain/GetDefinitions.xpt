@@ -30,7 +30,7 @@
 		}
 		
 		// make sure we can cast this value to the appropriate type
-		$type = "«escapePhpString(type.uRI)»";
+		$type = «EXPAND template::operations::Parameters::getTypeURI FOR type»;
 		
 		if (!can_cast($value, $type)) {
 			throw new IamlRuntimeException("Unexpectedly could not cast value '$value' into type '$type'"); 

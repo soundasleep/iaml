@@ -54,7 +54,7 @@
 			}
 				
 			// can we cast it?
-			return can_cast($value, '«type.uRI»');
+			return can_cast($value, «EXPAND template::operations::Parameters::getTypeURI FOR type»);
 		}
 		«ENDIF»
 		«ENDIF»

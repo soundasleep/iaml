@@ -261,7 +261,7 @@ class HasRole_«safeName()»_«safeName(source)» extends DomainIterator {
 class DomainAttribute_«safeName()» extends DomainAttribute {
 	private function __construct() {
 		$this->isPrimaryKey = «primaryKey ? "true" : "false"»;
-		$this->type = "«escapePhpString(type.uRI)»";
+		$this->type = «EXPAND template::operations::Parameters::getTypeURI FOR type»;
 		$this->name = "«safeNameString(name)»";
 		
 		«FOREACH outExtendsEdges AS extends»

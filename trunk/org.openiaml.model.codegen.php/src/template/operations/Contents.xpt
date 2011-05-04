@@ -244,7 +244,7 @@
 	«IF php»
 		// cast it to something we can actually represent it as first
 		// this make sure we don't accidentally call Javascript's toString() method
-		$arg0 = do_cast(do_cast($arg0, '«type.uRI»'), 'http://openiaml.org/model/datatypes#iamlString');
+		$arg0 = do_cast(do_cast($arg0, «EXPAND template::operations::Parameters::getTypeURI FOR type»), 'http://openiaml.org/model/datatypes#iamlString');
 
 		«IF containingSession(this) != null»
 			$_SESSION["«safeName(containingSession(this))»_«safeName(this)-»"] = $arg0;

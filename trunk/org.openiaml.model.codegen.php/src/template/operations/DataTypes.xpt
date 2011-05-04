@@ -13,9 +13,9 @@
 «ENDDEFINE»
 
 «DEFINE getDataType(Boolean php) FOR model::Property-»
-	/* xsd type '«type.name»' */ "«type.uRI»"
+	/* xsd type '«type.name»' */ «EXPAND template::operations::Parameters::getTypeURI FOR type»
 «ENDDEFINE»
 
 «DEFINE getDataType(Boolean php) FOR model::operations::TemporaryVariable-»
-	/* xsd type '«type.name»' */ "«type.uRI»"
+	/* xsd type '«type.name»' */ «EXPAND template::operations::Parameters::getTypeURI FOR type»
 «ENDDEFINE»

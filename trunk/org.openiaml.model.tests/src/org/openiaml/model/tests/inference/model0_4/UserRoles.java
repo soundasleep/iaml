@@ -7,6 +7,7 @@ import org.openiaml.model.datatypes.BuiltinDataTypes;
 import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.DomainAttribute;
+import org.openiaml.model.model.EXSDDataType;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.PrimitiveCondition;
@@ -383,7 +384,7 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(password);
 		
 		// check the types
-		assertEquals(BuiltinDataTypes.getTypeEmail(), email.getType());
+		assertEqualType(BuiltinDataTypes.getTypeEmail(), ((EXSDDataType) email.getType()).getDefinition());
 		// TODO password needs to have iamlPassword data type
 
 	}
@@ -454,9 +455,9 @@ public class UserRoles extends InferenceTestCase {
 		assertHasNoWiresFromTo(root, source_id, id);
 		
 		// check the types of the keys
-		assertEquals(BuiltinDataTypes.getTypeInteger(), id.getType());
-		assertEquals(id.getType(), fk.getType());
-		assertEquals(BuiltinDataTypes.getTypeInteger(), fk.getType());
+		assertEqualType(BuiltinDataTypes.getTypeInteger(), ((EXSDDataType) id.getType()).getDefinition());
+		assertEqualType(id, fk);
+		assertEqualType(BuiltinDataTypes.getTypeInteger(), ((EXSDDataType) fk.getType()).getDefinition());
 
 	}
 

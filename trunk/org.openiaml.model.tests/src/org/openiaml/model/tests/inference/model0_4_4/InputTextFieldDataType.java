@@ -4,6 +4,8 @@
 package org.openiaml.model.tests.inference.model0_4_4;
 
 import org.openiaml.model.datatypes.BuiltinDataTypes;
+import org.openiaml.model.drools.DroolsHelperFunctions;
+import org.openiaml.model.model.EXSDDataType;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
@@ -40,22 +42,22 @@ public class InputTextFieldDataType extends ValidInferenceTestCase {
 		InputTextField integer = assertHasInputTextField(home, "Integer");
 		assertNotGenerated(integer);
 		assertHasNoFieldValue(integer);
-		assertEquals(integer.getType().getURI(), BuiltinDataTypes.TYPE_INTEGER);
+		assertEquals(((EXSDDataType) integer.getType()).getDefinition().getURI(), BuiltinDataTypes.TYPE_INTEGER);
 		
 		InputTextField str = assertHasInputTextField(home, "String");
 		assertNotGenerated(str);
 		assertHasNoFieldValue(str);
-		assertEquals(str.getType().getURI(), BuiltinDataTypes.TYPE_STRING);
+		assertEquals(((EXSDDataType) str.getType()).getDefinition().getURI(), BuiltinDataTypes.TYPE_STRING);
 		
 		InputTextField dt = assertHasInputTextField(home, "Date/Time");
 		assertNotGenerated(dt);
 		assertHasNoFieldValue(dt);
-		assertEquals(dt.getType().getURI(), BuiltinDataTypes.TYPE_DATETIME);
+		assertEquals(((EXSDDataType) dt.getType()).getDefinition().getURI(), BuiltinDataTypes.TYPE_DATETIME);
 		
 		InputTextField email = assertHasInputTextField(home, "Email");
 		assertNotGenerated(email);
 		assertHasNoFieldValue(email);
-		assertEquals(email.getType().getURI(), BuiltinDataTypes.TYPE_EMAIL);
+		assertEquals(((EXSDDataType) email.getType()).getDefinition().getURI(), BuiltinDataTypes.TYPE_EMAIL);
 		
 	}
 
@@ -78,25 +80,41 @@ public class InputTextFieldDataType extends ValidInferenceTestCase {
 		InputTextField integer = assertHasInputTextField(home, "Integer");
 		{
 			Property fieldValue = assertHasFieldValue(integer);
-			assertEquals(fieldValue.getType().getURI(), BuiltinDataTypes.TYPE_INTEGER);
+			EXSDDataType exsd = (EXSDDataType) fieldValue.getType();
+			assertEquals(exsd.getDefinition().getURI(), BuiltinDataTypes.TYPE_INTEGER);
+			assertTrue(DroolsHelperFunctions.equalDataTypes(
+					exsd.getDefinition(), 
+					BuiltinDataTypes.getTypeInteger()));
 		}
 		
 		InputTextField str = assertHasInputTextField(home, "String");
 		{
 			Property fieldValue = assertHasFieldValue(str);
-			assertEquals(fieldValue.getType().getURI(), BuiltinDataTypes.TYPE_STRING);
+			EXSDDataType exsd = (EXSDDataType) fieldValue.getType();
+			assertEquals(exsd.getDefinition().getURI(), BuiltinDataTypes.TYPE_STRING);
+			assertTrue(DroolsHelperFunctions.equalDataTypes(
+					exsd.getDefinition(), 
+					BuiltinDataTypes.getTypeString()));
 		}
 		
 		InputTextField dt = assertHasInputTextField(home, "Date/Time");
 		{
 			Property fieldValue = assertHasFieldValue(dt);
-			assertEquals(fieldValue.getType().getURI(), BuiltinDataTypes.TYPE_DATETIME);
+			EXSDDataType exsd = (EXSDDataType) fieldValue.getType();
+			assertEquals(exsd.getDefinition().getURI(), BuiltinDataTypes.TYPE_DATETIME);
+			assertTrue(DroolsHelperFunctions.equalDataTypes(
+					exsd.getDefinition(), 
+					BuiltinDataTypes.getTypeDateTime()));
 		}
 		
 		InputTextField email = assertHasInputTextField(home, "Email");
 		{
 			Property fieldValue = assertHasFieldValue(email);
-			assertEquals(fieldValue.getType().getURI(), BuiltinDataTypes.TYPE_EMAIL);
+			EXSDDataType exsd = (EXSDDataType) fieldValue.getType();
+			assertEquals(exsd.getDefinition().getURI(), BuiltinDataTypes.TYPE_EMAIL);
+			assertTrue(DroolsHelperFunctions.equalDataTypes(
+					exsd.getDefinition(), 
+					BuiltinDataTypes.getTypeEmail()));
 		}
 		
 	}

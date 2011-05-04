@@ -4,10 +4,12 @@
 package org.openiaml.model.tests.inference.model0_5_2;
 
 import org.openiaml.model.datatypes.BuiltinDataTypes;
+import org.openiaml.model.drools.DroolsHelperFunctions;
 import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.Changeable;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.DomainAttribute;
+import org.openiaml.model.model.EXSDDataType;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Property;
@@ -60,7 +62,8 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 
 		Label target = assertHasLabel(home, "email");
 		assertNotGenerated(target);
-		assertEquals(BuiltinDataTypes.getTypeEmail().getURI(), target.getType().getURI());
+		assertEquals(BuiltinDataTypes.getTypeEmail().getURI(), 
+				((EXSDDataType) target.getType()).getDefinition().getURI());
 		
 		AutocompleteWire ac = assertHasAutocompleteWire(root, iterator, target);
 		assertNotGenerated(ac);
@@ -350,51 +353,6 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 		// with the email as the parameter
 		assertGenerated(assertHasParameterEdge(root, blank, run));
 	
-	}
-
-	/**
-	 * Are the two elements of the same type? That is, do their type URIs
-	 * match?
-	 */
-	protected void assertEqualType(Changeable a,
-			Changeable b) {
-		assertEquals(a.getType().getURI(), b.getType().getURI());
-	}
-
-	/**
-	 * Are the two elements of the same type? That is, do their type URIs
-	 * match?
-	 */
-	protected void assertEqualType(Property a,
-			Changeable b) {
-		assertEquals(a.getType().getURI(), b.getType().getURI());
-	}
-	
-	/**
-	 * Are the two elements of the same type? That is, do their type URIs
-	 * match?
-	 */
-	protected void assertEqualType(Changeable a,
-			Property b) {
-		assertEquals(a.getType().getURI(), b.getType().getURI());
-	}
-	
-	/**
-	 * Are the two elements of the same type? That is, do their type URIs
-	 * match?
-	 */
-	protected void assertEqualType(Property a,
-			Property b) {
-		assertEquals(a.getType().getURI(), b.getType().getURI());
-	}
-	
-	/**
-	 * Are the two elements <em>not</em> of the same type? That is, do their type URIs
-	 * not match?
-	 */
-	protected void assertNotEqualType(Changeable a,
-			Changeable b) {
-		assertNotEqual(a.getType().getURI(), b.getType().getURI());
 	}
 	
 }

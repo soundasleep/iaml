@@ -254,7 +254,7 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 				element.hasAttribute("href")) {
 			String parentName = (parent != null ? parent.getNodeName() : null);
 			if ("attributes".equals(parentName) || "fieldValue".equals(parentName) 
-					|| "properties".equals("parentName")) {
+					|| "properties".equals(parentName) || "children".equals(parentName)) {
 				
 				return true;
 			}
@@ -375,12 +375,18 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 						// we found an old typed element
 						// need to add a new "type" attribute
 						String type = null;
-						String href = e.hasAttribute("href") ? e.getAttribute("href") : null;
+						String href = e.hasAttribute("href") ? e.getAttribute("href") : "";
+						if (href.contains(";")) {
+							href = href.substring(0, href.indexOf(";"));	// remove ; (hash)
+						}
 						
 						{
 							Map<String,String> map = getXSDTypeMap();
 							for (String key : map.keySet()) {
-								if (map.get(key).equals(href)) {
+								String value = map.get(key);
+								if (value.contains(";"))
+									value = value.substring(0, value.indexOf(";"));	// remove ; (hash)
+								if (value.equals(href)) {
 									type = key;
 								}
 							}
@@ -389,7 +395,10 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 						{
 							Map<String,String> map = getBuiltinTypeMap();
 							for (String key : map.keySet()) {
-								if (map.get(key).equals(href)) {
+								String value = map.get(key);
+								if (value.contains(";"))
+									value = value.substring(0, value.indexOf(";"));	// remove ; (hash)
+								if (value.equals(href)) {
 									type = key;
 								}
 							}

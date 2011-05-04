@@ -27,7 +27,7 @@ rule "Create a default primary key for DomainObjects which do not have one"
 	when
 		object : DomainSchema ( )
 		type : EXSDDataType( definition != null, 
-			eval(functions.equalDataTypes(definition, BuiltinDataTypes.getTypeInteger())))  
+			definition.URI == "http://openiaml.org/model/datatypes#iamlInteger" )
 		not (da : DomainAttribute ( eContainer == object, primaryKey == true ) )
 	
 		eval ( handler.veto( object ))

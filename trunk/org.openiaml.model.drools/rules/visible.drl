@@ -53,7 +53,7 @@ rule "InputTextFields have a Property currentInput"
 	when
 		field : InputTextField ( )
 		type : EXSDDataType( definition != null, 
-			eval(functions.equalDataTypes(definition, BuiltinDataTypes.getTypeString())))  
+			definition.URI == "http://openiaml.org/model/datatypes#iamlString" )
 		not ( property : Property ( field.currentInput == property ))
 	
 		eval ( handler.veto( field ))

@@ -392,7 +392,7 @@ rule "Create contents of 'update target' operation"
 		op : CompositeOperation ( eContainer == last, name == "update target" )
 
 		type : EXSDDataType( definition != null, 
-			eval(functions.equalDataTypes(definition, BuiltinDataTypes.getTypeInteger())))  
+			definition.URI == "http://openiaml.org/model/datatypes#iamlInteger" )
 		
 		not ( StartNode ( eContainer == op ))
 

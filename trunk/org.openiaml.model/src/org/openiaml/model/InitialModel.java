@@ -79,13 +79,8 @@ public class InitialModel {
 	 */
 	private static final List<String> INCLUDED_DATA_TYPES = Arrays.asList(
 			"integer",
-			"decimal",
 			"string",
-			"boolean",
-			"float",
-			"double",
-			"time",
-			"date"
+			"boolean"
 			);
 	
 	private static void addEMFXSDDataTypes(InternetApplication app) throws ModelInitializationException {

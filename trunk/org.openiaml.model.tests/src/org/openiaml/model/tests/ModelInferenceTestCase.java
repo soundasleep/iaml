@@ -232,6 +232,8 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	/**
 	 * Perform an XPath-like query on an EMF object
 	 *
+	 * @deprecated XPath queries should not be used; the metamodel should
+	 * 		be used instead
 	 * @param root
 	 * @param query
 	 * @return
@@ -269,6 +271,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * Helper method: perform a query, but assert that there is only
 	 * one result returned, and it is of type EObject
 	 *
+	 * @deprecated use EMF methods instead
 	 * @param root
 	 * @param query
 	 * @return
@@ -283,6 +286,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	/**
 	 * Assert that there are no results for the given XPath query.
 	 *
+	 * @deprecated use EMF methods instead
 	 * @param root the node on which to execute the XPath query
 	 * @param query the query to execute
 	 * @throws JaxenException
@@ -296,6 +300,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * Assert that there are no results for the given XPath query with
 	 * the given type.
 	 *
+	 * @deprecated use EMF methods instead
 	 * @param root the node on which to execute the XPath query
 	 * @param query the query to execute
 	 * @param type the type to check for in the results
@@ -404,15 +409,12 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @throws AssertionFailedError if no wire was found
 	 */
 	protected Wire getWireFromTo(EObject container, WireSource fromElement, WireDestination toElement) throws JaxenException {
-		List<?> wires = query(container, "//iaml:wires");
-		for (Object o : wires) {
-			if (o instanceof Wire) {
-				Wire w = (Wire) o;
-				if (w.getFrom().equals(fromElement) && w.getTo().equals(toElement))
-					return w;
+		for (Wire w : fromElement.getOutWires()) {
+			if (toElement.equals(w.getTo())) {
+				return w;
 			}
 		}
-
+		
 		fail("No wire found from [" + fromElement + "] to [" + toElement + "]");
 		return null;
 	}
@@ -452,12 +454,9 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	protected Set<ParameterEdge> getParameterEdgesFromTo(EObject container, ParameterEdgesSource from, ParameterEdgeDestination to) throws JaxenException {
 		Set<ParameterEdge> result = new HashSet<ParameterEdge>();
 		
-		List<?> wires = query(container, "//iaml:parameterEdges");
-		for (Object o : wires) {
-			if (o instanceof ParameterEdge) {
-				ParameterEdge w = (ParameterEdge) o;
-				if (w.getFrom().equals(from) && w.getTo().equals(to))
-					result.add(w);
+		for (ParameterEdge w : from.getOutParameterEdges()) {
+			if (to.equals(w.getTo())) {
+				result.add(w);
 			}
 		}
 
@@ -475,15 +474,12 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	protected Set<ParameterEdge> getParameterEdgesFromTo(EObject container, ParameterEdgesSource from, ParameterEdgeDestination to, String name) throws JaxenException {
 		Set<ParameterEdge> result = new HashSet<ParameterEdge>();
 		
-		List<?> wires = query(container, "//iaml:parameterEdges");
-		for (Object o : wires) {
-			if (o instanceof ParameterEdge) {
-				ParameterEdge w = (ParameterEdge) o;
-				if (w.getFrom().equals(from) && w.getTo().equals(to) && w.getName().equals(name))
-					result.add(w);
+		for (ParameterEdge w : from.getOutParameterEdges()) {
+			if (name.equals(w.getName()) && to.equals(w.getTo())) {
+				result.add(w);
 			}
 		}
-
+		
 		return result;
 	}
 	
@@ -497,15 +493,12 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	protected Set<ConditionEdge> getConditionEdgesFromTo(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to) throws JaxenException {
 		Set<ConditionEdge> result = new HashSet<ConditionEdge>();
 		
-		List<?> wires = query(container, "//iaml:conditionEdges");
-		for (Object o : wires) {
-			if (o instanceof ConditionEdge) {
-				ConditionEdge w = (ConditionEdge) o;
-				if (w.getFrom().equals(from) && w.getTo().equals(to))
-					result.add(w);
+		for (ConditionEdge w : from.getOutConditionEdges()) {
+			if (to.equals(w.getTo())) {
+				result.add(w);
 			}
 		}
-
+		
 		return result;
 	}
 	
@@ -521,15 +514,12 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	protected Set<ConditionEdge> getConditionEdgesFromTo(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to, String name) throws JaxenException {
 		Set<ConditionEdge> result = new HashSet<ConditionEdge>();
 		
-		List<?> wires = query(container, "//iaml:conditionEdges");
-		for (Object o : wires) {
-			if (o instanceof ConditionEdge) {
-				ConditionEdge w = (ConditionEdge) o;
-				if (w.getFrom().equals(from) && w.getTo().equals(to) && name.equals(w.getName()))
-					result.add(w);
+		for (ConditionEdge w : from.getOutConditionEdges()) {
+			if (to.equals(w.getTo())) {
+				result.add(w);
 			}
 		}
-
+		
 		return result;
 	}
 	
@@ -542,16 +532,13 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 */
 	protected Set<ExtendsEdge> getExtendsEdgesFromTo(EObject container, ExtendsEdgesSource from, ExtendsEdgeDestination to) throws JaxenException {
 		Set<ExtendsEdge> result = new HashSet<ExtendsEdge>();
-		
-		List<?> wires = query(container, "//iaml:extendsEdges");
-		for (Object o : wires) {
-			if (o instanceof ExtendsEdge) {
-				ExtendsEdge w = (ExtendsEdge) o;
-				if (w.getFrom().equals(from) && w.getTo().equals(to))
-					result.add(w);
+
+		for (ExtendsEdge w : from.getOutExtendsEdges()) {
+			if (to.equals(w.getTo())) {
+				result.add(w);
 			}
 		}
-
+		
 		return result;
 	}
 
@@ -565,15 +552,12 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	protected Set<RequiresEdge> getRequiresEdgesFromTo(EObject container, RequiresEdgesSource from, RequiresEdgeDestination to) throws JaxenException {
 		Set<RequiresEdge> result = new HashSet<RequiresEdge>();
 		
-		List<?> wires = query(container, "//iaml:requiresEdges");
-		for (Object o : wires) {
-			if (o instanceof RequiresEdge) {
-				RequiresEdge w = (RequiresEdge) o;
-				if (w.getFrom().equals(from) && w.getTo().equals(to))
-					result.add(w);
+		for (RequiresEdge w : from.getOutRequiresEdges()) {
+			if (to.equals(w.getTo())) {
+				result.add(w);
 			}
 		}
-
+		
 		return result;
 	}
 
@@ -660,14 +644,9 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 */
 	public void assertHasNoWiresFromTo(EObject container, WireSource fromElement, WireDestination toElement) throws JaxenException {
 
-		List<?> wires = query(container, "//iaml:wires");
-		for (Object o : wires) {
-			if (o instanceof Wire) {
-				Wire w = (Wire) o;
-				if (w.getFrom().equals(fromElement) && w.getTo().equals(toElement)) {
-					fail("Unexpected wire found from '" + w.getFrom() + "' to '" + w.getTo() + "'");
-				}
-			}
+		for (Wire w : fromElement.getWires()) {
+			if (toElement.equals(w.getTo()))
+				fail("Unexpected wire found from '" + w.getFrom() + "' to '" + w.getTo() + "'");
 		}
 		
 		// no wires found: pass
@@ -729,23 +708,10 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @return the wire found or null
 	 * @throws JaxenException
 	 */
-	protected Set<Wire> getWiresTo(EObject container, WireDestination toElement) throws JaxenException {
-		Set<Wire> results = new HashSet<Wire>();
-		List<?> wires = query(container, "//iaml:wires");
-		for (Object o : wires) {
-			if (o instanceof Wire) {
-				Wire w = (Wire) o;
-				if (w.getTo().equals(toElement)) {
-					results.add(w);
-				}
-			}
-		}
-
-		if (results.isEmpty()) {
-			fail("No wires found to [" + toElement + "]");
-		}
-
-		return results;
+	protected List<Wire> getWiresTo(EObject container, WireDestination toElement) throws JaxenException {
+		assertFalse("No wires found to [" + toElement + "]", toElement.getInWires().isEmpty());
+		
+		return toElement.getInWires();
 	}
 	
 	/**
@@ -757,23 +723,10 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @return the wire found or null
 	 * @throws JaxenException
 	 */
-	protected Set<Wire> getWiresFrom(EObject container, WireSource fromElement) throws JaxenException {
-		Set<Wire> results = new HashSet<Wire>();
-		List<?> wires = query(container, "//iaml:wires");
-		for (Object o : wires) {
-			if (o instanceof Wire) {
-				Wire w = (Wire) o;
-				if (w.getFrom().equals(fromElement)) {
-					results.add(w);
-				}
-			}
-		}
-
-		if (results.isEmpty()) {
-			fail("No wires found from [" + fromElement + "]");
-		}
-
-		return results;
+	protected List<Wire> getWiresFrom(EObject container, WireSource fromElement) throws JaxenException {
+		assertFalse("No wires found from [" + fromElement + "]", fromElement.getOutWires().isEmpty());
+		
+		return fromElement.getOutWires();		
 	}
 
 	protected void assertNoWiresFrom(EObject container, WireSource fromElement, Class<? extends Wire> cls) throws JaxenException {
@@ -801,7 +754,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @return
 	 * @throws JaxenException
 	 */
-	protected Set<Wire> getWiresTo(EObject container, WireDestination toElement, Class<? extends Wire> type) throws JaxenException {
+	protected List<?> getWiresTo(EObject container, WireDestination toElement, Class<? extends Wire> type) throws JaxenException {
 		return typeSelect(getWiresTo(container, toElement), type);
 	}
 	
@@ -814,7 +767,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @return
 	 * @throws JaxenException
 	 */
-	protected Set<Wire> getWiresFrom(EObject container, WireSource fromElement, Class<? extends Wire> type) throws JaxenException {
+	protected List<?> getWiresFrom(EObject container, WireSource fromElement, Class<? extends Wire> type) throws JaxenException {
 		return typeSelect(getWiresFrom(container, fromElement), type);
 	}
 	
@@ -844,20 +797,10 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @return the wire found or null
 	 * @throws JaxenException
 	 */
-	protected Wire getWireBidirectional(EObject container, WireSource element1, WireDestination element2) throws JaxenException {
-		List<?> wires = query(container, "//iaml:wires");
-		for (Object o : wires) {
-			if (o instanceof Wire) {
-				Wire w = (Wire) o;
-				if (w.getFrom().equals(element1) && w.getTo().equals(element2))
-					return w;
-				if (w.getFrom().equals(element2) && w.getTo().equals(element1))
-					return w;
-			}
-		}
-
-		fail("No wire found between [" + element1 + "] and [" + element2 + "]");
-		return null;
+	protected Wire getWireBidirectional(EObject container, WireSource element1, WireSource element2) throws JaxenException {
+		Set<Wire> wires = getWiresBidirectional(container, element1, element2);
+		assertFalse("No wire found between [" + element1 + "] and [" + element2 + "]", wires.isEmpty());
+		return wires.iterator().next();
 	}
 	
 	/**
@@ -939,48 +882,15 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	/**
 	 * Assert that no given bidirectional wire exists.
 	 * 
-	 * @see #getWireBidirectional(EObject, WireSource, WireDestination)
+	 * @see #getWireBidirectional(EObject, WireSource, WireSource)
 	 * @param container
 	 * @param element1
 	 * @param element2
 	 * @throws JaxenException
 	 */
-	public void assertNoWireBidirectional(EObject container, WireSource element1, WireDestination element2) throws JaxenException {
-		List<?> wires = query(container, "//iaml:wires");
-		for (Object o : wires) {
-			if (o instanceof Wire) {
-				Wire w = (Wire) o;
-				if (w.getFrom().equals(element1) && w.getTo().equals(element2))
-					fail("Found an unexpected wire between [" + element1 + "] and [" + element2 + "]: " + w);
-				if (w.getFrom().equals(element2) && w.getTo().equals(element1))
-					fail("Found an unexpected wire between [" + element2 + "] and [" + element1 + "]: " + w);
-			}
-		}
-
-		// pass
-	}
-	
-	/**
-	 * It's not possible to do something like //iaml:wire[iaml:from='id']
-	 * so we need to parse them manually?
-	 *
-	 * @param container
-	 * @param fromElement
-	 * @return the wire found or null
-	 * @throws JaxenException
-	 */
-	protected Wire getWireFrom(EObject container, EObject fromElement) throws JaxenException {
-		List<?> wires = query(container, "//iaml:wires");
-		for (Object o : wires) {
-			if (o instanceof Wire) {
-				Wire w = (Wire) o;
-				if (w.getFrom().equals(fromElement))
-					return w;
-			}
-		}
-
-		fail("no wire found");
-		return null;
+	public void assertNoWireBidirectional(EObject container, WireSource element1, WireSource element2) throws JaxenException {
+		Set<Wire> wires = getWiresBidirectional(container, element1, element2);
+		assertEquals(0, wires.size());
 	}
 	
 	/**

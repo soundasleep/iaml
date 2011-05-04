@@ -217,8 +217,10 @@ end
 rule "InternetApplication has a readonly Property 'blank' created"
 	when
 		container : InternetApplication ( )
-		type : EXSDDataType( definition != null, 
-			eval(functions.equalDataTypes(definition, BuiltinDataTypes.getTypeString())))  
+		type : EXSDDataType( definition != null,
+			// eval(functions.equalDataTypes(definition, BuiltinDataTypes.getTypeString())))
+			// remove eval() to reduce memory usage  
+			definition.URI == "http://openiaml.org/model/datatypes#iamlString" )
 	
 		not ( Property ( eContainer == container, defaultValue == "" ))
 		

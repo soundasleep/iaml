@@ -59,7 +59,7 @@ rule "Create DomainAttributes for Properties File DomainSchema"
 		schemaEdge : SchemaEdge ( from == $fds, to == schema )
 		
 		type : EXSDDataType( definition != null, 
-			eval(functions.equalDataTypes(definition, BuiltinDataTypes.getTypeString())))  
+			definition.URI == "http://openiaml.org/model/datatypes#iamlString" )
 		
 		not ( DomainAttribute ( eContainer == schema, name == $key ))
 

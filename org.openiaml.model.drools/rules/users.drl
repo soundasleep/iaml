@@ -289,7 +289,7 @@ rule "'User' role contains a default attribute 'email'"
 		user : Role ( name == "User", eContainer == root )
 
 		type : EXSDDataType( definition != null, 
-			eval(functions.equalDataTypes(definition, BuiltinDataTypes.getTypeEmail())))  
+			definition.URI == "http://openiaml.org/model/datatypes#iamlEmail" )
 		
 		not ( DomainAttribute ( name == "email", eContainer == user ))
 					

@@ -254,7 +254,8 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 				element.hasAttribute("href")) {
 			String parentName = (parent != null ? parent.getNodeName() : null);
 			if ("attributes".equals(parentName) || "fieldValue".equals(parentName) 
-					|| "properties".equals(parentName) || "children".equals(parentName)) {
+					|| "properties".equals(parentName) || "children".equals(parentName)
+					|| "labels".equals(parentName)) {
 				
 				return true;
 			}
@@ -417,13 +418,8 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 	public Map<String, String> getXSDTypeMap() {
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("xsd_boolean", XSD_URI + "boolean;XSDSimpleTypeDefinition=10");
-		map.put("xsd_date", XSD_URI + "date;XSDSimpleTypeDefinition=17");
-		map.put("xsd_decimal", XSD_URI + "decimal;XSDSimpleTypeDefinition=13");
-		map.put("xsd_double", XSD_URI + "double;XSDSimpleTypeDefinition=12");
-		map.put("xsd_float", XSD_URI + "float;XSDSimpleTypeDefinition=11");
 		map.put("xsd_integer", XSD_URI + "integer;XSDSimpleTypeDefinition=40");
 		map.put("xsd_string", XSD_URI + "string;XSDSimpleTypeDefinition=9");
-		map.put("xsd_time", XSD_URI + "time;XSDSimpleTypeDefinition=16");
 		return map;
 	}
 	

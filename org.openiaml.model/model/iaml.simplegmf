@@ -104,18 +104,21 @@
     <feature xsi:type="ecore:EAttribute" href="iaml.ecore#//NamedElement/name"/>
   </labelConfigurations>
   <labelConfigurations name="Name">
-    <classifiers href="iaml.ecore#//EXSDDataType"/>
+    <classifiers href="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ENamedElement"/>
     <feature xsi:type="ecore:EAttribute" href="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ENamedElement/name"/>
   </labelConfigurations>
   <labelConfigurations name="Stereotype" readOnly="true" prefix=": " specialLabel="METACLASS_NAME">
     <properties xsi:type="sgmf:LabelUnderline" value="true"/>
   </labelConfigurations>
   <labelConfigurations name="Type" readOnly="true" prefix="Type: " providedAtRuntime="true">
-    <classifiers href="iaml.ecore#//DomainAttribute"/>
     <classifiers href="iaml.ecore#//domain/DomainAttributeInstance"/>
     <classifiers href="iaml.ecore#//visual/InputTextField"/>
     <classifiers href="iaml.ecore#//visual/Label"/>
     <feature xsi:type="ecore:EReference" href="iaml.ecore#//Changeable/type"/>
+  </labelConfigurations>
+  <labelConfigurations name="Type" readOnly="true" prefix="Type: " providedAtRuntime="true">
+    <classifiers href="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ETypedElement"/>
+    <feature xsi:type="ecore:EReference" href="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ETypedElement/eType"/>
   </labelConfigurations>
   <labelConfigurations name="Type" readOnly="true" prefix="Type: " providedAtRuntime="true">
     <classifiers href="iaml.ecore#//operations/Parameter"/>
@@ -146,16 +149,15 @@
     <classifiers href="iaml.ecore#//Condition"/>
     <classifiers href="iaml.ecore#//VisibleThing"/>
     <classifiers href="iaml.ecore#//EventTrigger"/>
-    <classifiers href="iaml.ecore#//DomainAttribute"/>
     <classifiers href="iaml.ecore#//domain/DomainAttributeInstance"/>
     <classifiers href="iaml.ecore#//visual/Frame"/>
     <classifiers href="iaml.ecore#//Property"/>
     <classifiers href="iaml.ecore#//components/Gate"/>
+    <classifiers href="iaml.ecore#//domain/DomainAttribute"/>
     <feature xsi:type="ecore:EAttribute" href="iaml.ecore#//NamedElement/name"/>
     <properties xsi:type="sgmf:ForegroundColor" color="gray"/>
   </labelConfigurations>
   <palettes name="Domain Modelling">
-    <classifiers href="iaml.ecore#//DomainAttribute"/>
     <classifiers href="iaml.ecore#//domain/DomainAttributeInstance"/>
     <classifiers href="iaml.ecore#//domain/DomainFeatureInstance"/>
     <classifiers href="iaml.ecore#//domain/DomainInstance"/>
@@ -166,6 +168,7 @@
     <classifiers href="iaml.ecore#//domain/SchemaEdge"/>
     <classifiers href="iaml.ecore#//domain/SelectEdge"/>
     <classifiers href="iaml.ecore#//wires/ExtendsEdge"/>
+    <classifiers href="iaml.ecore#//domain/DomainAttribute"/>
   </palettes>
   <palettes name="Visual Elements">
     <classifiers href="iaml.ecore#//VisibleThing"/>
@@ -315,7 +318,7 @@
       <classifier href="iaml.ecore#//domain/DomainSource"/>
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="DomainAttribute">
-      <classifier href="iaml.ecore#//DomainAttribute"/>
+      <classifier href="iaml.ecore#//domain/DomainAttribute"/>
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" id="" name="Frame">
       <classifier href="iaml.ecore#//visual/Frame"/>
@@ -434,7 +437,7 @@
       <classifier href="iaml.ecore#//EventTrigger"/>
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="DomainAttribute">
-      <classifier href="iaml.ecore#//DomainAttribute"/>
+      <classifier href="iaml.ecore#//domain/DomainAttribute"/>
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="DomainAttributeInstance">
       <classifier href="iaml.ecore#//domain/DomainAttributeInstance"/>
@@ -520,7 +523,7 @@
       <classifier href="iaml.ecore#//visual/Frame"/>
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="DomainAttribute">
-      <classifier href="iaml.ecore#//DomainAttribute"/>
+      <classifier href="iaml.ecore#//domain/DomainAttribute"/>
     </elements>
   </diagramEditors>
   <diagramEditors id="operation">
@@ -664,7 +667,7 @@
   <diagramEditors id="schema">
     <classifier href="iaml.ecore#//domain/DomainSchema"/>
     <elements xsi:type="sgmf:ContainedNode" name="DomainAttribute">
-      <classifier href="iaml.ecore#//DomainAttribute"/>
+      <classifier href="iaml.ecore#//domain/DomainAttribute"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="Permission">
       <classifier href="iaml.ecore#//users/Permission"/>
@@ -747,7 +750,7 @@
       <classifier href="iaml.ecore#//EventTrigger"/>
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="DomainAttribute">
-      <classifier href="iaml.ecore#//DomainAttribute"/>
+      <classifier href="iaml.ecore#//domain/DomainAttribute"/>
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="DomainSource">
       <classifier href="iaml.ecore#//domain/DomainSource"/>
@@ -844,7 +847,7 @@
       <classifier href="iaml.ecore#//EventTrigger"/>
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="DomainAttribute">
-      <classifier href="iaml.ecore#//DomainAttribute"/>
+      <classifier href="iaml.ecore#//domain/DomainAttribute"/>
     </elements>
     <elements xsi:type="sgmf:ReferencedNode" name="DomainAttributeInstance">
       <classifier href="iaml.ecore#//domain/DomainAttributeInstance"/>

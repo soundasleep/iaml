@@ -121,20 +121,6 @@
       <details key="documentation" value="Represents the source of events."/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DomainAttribute" eSuperTypes="#//ApplicationElement #//ContainsWires #//wires/ParameterEdgesSource #//wires/ExtendsEdgesSource #//wires/ExtendsEdgeDestination #//Changeable">
-    <eAnnotations source="http://openiaml.org/comment">
-      <details key="changed" value="0.2 to extend the abstract counterpart&#xD;&#xA;0.3 to remove the abstract extension, and added &quot;type&quot; attribute"/>
-    </eAnnotations>
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="Represents a single attribute contained by a {@model DomainObject}."/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="primaryKey" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        defaultValueLiteral="false">
-      <eAnnotations source="http://openiaml.org/comment">
-        <details key="comment" value="added in 0.4"/>
-      </eAnnotations>
-    </eStructuralFeatures>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActivityNode" abstract="true" eSuperTypes="#//GeneratedElement">
     <eAnnotations source="http://openiaml.org/comment">
       <details key="changed" value="0.4.2 to abstract"/>
@@ -905,7 +891,7 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Allows a target {@model VisibleThing} to be populated by matching a created {@model InputTextField} to the source {@model DomainIterator} value, specified by the {@model AutocompleteWire#match}."/>
       </eAnnotations>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="match" eType="#//DomainAttribute">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="match" eType="#//domain/DomainAttribute">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="The attribute to match the autocompleted text to. In the future this may support a list of potential attributes."/>
         </eAnnotations>
@@ -1219,15 +1205,29 @@
       <eLiterals name="PROPERTIES_FILE" value="1"/>
       <eLiterals name="RSS2_0" value="2"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="DomainSchema" eSuperTypes="#//NamedElement #//GeneratesElements #//ContainsWires #//WireDestination #//WireSource #//wires/ParameterEdgesSource #//wires/ExtendsEdgesSource #//wires/ExtendsEdgeDestination">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
-          eType="#//DomainAttribute" containment="true"/>
+    <eClassifiers xsi:type="ecore:EClass" name="DomainSchema" eSuperTypes="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass #//GeneratedElement #//GeneratesElements #//wires/ParameterEdgesSource #//wires/ExtendsEdgesSource #//wires/ExtendsEdgeDestination #//ContainsWires">
       <eStructuralFeatures xsi:type="ecore:EReference" name="inSchemas" upperBound="-1"
           eType="#//domain/SchemaEdge" eOpposite="#//domain/SchemaEdge/to"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="permissions" upperBound="-1"
           eType="#//users/Permission" containment="true">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="A list of {@model Permission}s that this {@model UserStore} can provide."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="DomainFeature" eSuperTypes="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EStructuralFeature #//GeneratedElement #//GeneratesElements #//wires/ExtendsEdgesSource #//wires/ExtendsEdgeDestination #//wires/ParameterEdgesSource #//ContainsWires"/>
+    <eClassifiers xsi:type="ecore:EClass" name="DomainAttribute" eSuperTypes="#//domain/DomainFeature">
+      <eAnnotations source="http://openiaml.org/comment">
+        <details key="changed" value="0.2 to extend the abstract counterpart&#xD;&#xA;0.3 to remove the abstract extension, and added &quot;type&quot; attribute"/>
+        <details key="note" value="could not be a EAttribute, as EAttribute.iD is different from GeneratedElement.id"/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Represents a single attribute contained by a {@model DomainObject}."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="primaryKey" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+          defaultValueLiteral="false">
+        <eAnnotations source="http://openiaml.org/comment">
+          <details key="comment" value="added in 0.4"/>
         </eAnnotations>
       </eStructuralFeatures>
     </eClassifiers>
@@ -1283,7 +1283,7 @@
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="query" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="limit" lowerBound="1"
           eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="1"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="orderBy" eType="#//DomainAttribute">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="orderBy" eType="#//domain/DomainAttribute">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="The {@model SelectWire} will sort the results in the particular order, before any {@model SelectWire#limit limiting} occurs."/>
         </eAnnotations>

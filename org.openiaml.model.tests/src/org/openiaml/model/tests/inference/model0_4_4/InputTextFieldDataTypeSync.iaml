@@ -5,33 +5,66 @@
       <wires xsi:type="iaml.wires:SyncWire" id="wires.1274f76c1da.1" name="sync" from="visual.1274f76c0e0.27" to="visual.1274f76c0e0.29"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" inWires="wires.1274f76c1da.5" id="visual.1274f76c0e0.28" name="Default 2"/>
-    <children xsi:type="iaml.visual:InputTextField" inWires="wires.1274f76c1da.1" id="visual.1274f76c0e0.29" name="String">
-      <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlString;XSDSimpleTypeDefinition=1"/>
-    </children>
-    <children xsi:type="iaml.visual:InputTextField" inWires="wires.1274f76c1da.3" id="visual.1274f76c0e0.2a" name="String 2">
-      <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlString;XSDSimpleTypeDefinition=1"/>
-    </children>
-    <children xsi:type="iaml.visual:InputTextField" outWires="wires.1274f76c1da.3" id="visual.1274f76c0e0.2b" name="Email">
+    <children xsi:type="iaml.visual:InputTextField" inWires="wires.1274f76c1da.1" id="visual.1274f76c0e0.29" name="String" type="builtin_iamlString"/>
+    <children xsi:type="iaml.visual:InputTextField" inWires="wires.1274f76c1da.3" id="visual.1274f76c0e0.2a" name="String 2" type="builtin_iamlString"/>
+    <children xsi:type="iaml.visual:InputTextField" outWires="wires.1274f76c1da.3" id="visual.1274f76c0e0.2b" name="Email" type="builtin_iamlEmail">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.1274f76c1da.3" name="sync" from="visual.1274f76c0e0.2b" to="visual.1274f76c0e0.2a"/>
-      <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlEmail;XSDSimpleTypeDefinition=2"/>
     </children>
-    <children xsi:type="iaml.visual:InputTextField" outWires="wires.1274f76c1da.4" id="visual.1274f76c0e0.2c" name="Email 2">
+    <children xsi:type="iaml.visual:InputTextField" outWires="wires.1274f76c1da.4" id="visual.1274f76c0e0.2c" name="Email 2" type="builtin_iamlEmail">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.1274f76c1da.4" name="sync" from="visual.1274f76c0e0.2c" to="visual.1274f76c0e0.2f"/>
-      <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlEmail;XSDSimpleTypeDefinition=2"/>
     </children>
-    <children xsi:type="iaml.visual:InputTextField" outWires="wires.1274f76c1da.5" id="visual.1274f76c0e0.2d" name="Date">
+    <children xsi:type="iaml.visual:InputTextField" outWires="wires.1274f76c1da.5" id="visual.1274f76c0e0.2d" name="Date" type="builtin_iamlDateTime">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.1274f76c1da.5" name="sync" from="visual.1274f76c0e0.2d" to="visual.1274f76c0e0.28"/>
-      <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlDateTime;XSDSimpleTypeDefinition=3"/>
     </children>
-    <children xsi:type="iaml.visual:InputTextField" inWires="wires.1274f76c1da.29" id="visual.1274f76c0e0.2e" name="Date 2">
-      <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlDateTime;XSDSimpleTypeDefinition=3"/>
-    </children>
-    <children xsi:type="iaml.visual:InputTextField" inWires="wires.1274f76c1da.4" id="visual.1274f76c0e0.2f" name="Integer">
-      <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
-    </children>
-    <children xsi:type="iaml.visual:InputTextField" outWires="wires.1274f76c1da.29" id="visual.1274f76c0e0.30" name="Integer 2">
+    <children xsi:type="iaml.visual:InputTextField" inWires="wires.1274f76c1da.29" id="visual.1274f76c0e0.2e" name="Date 2" type="builtin_iamlDateTime"/>
+    <children xsi:type="iaml.visual:InputTextField" inWires="wires.1274f76c1da.4" id="visual.1274f76c0e0.2f" name="Integer" type="builtin_iamlInteger"/>
+    <children xsi:type="iaml.visual:InputTextField" outWires="wires.1274f76c1da.29" id="visual.1274f76c0e0.30" name="Integer 2" type="builtin_iamlInteger">
       <wires xsi:type="iaml.wires:SyncWire" id="wires.1274f76c1da.29" name="sync" from="visual.1274f76c0e0.30" to="visual.1274f76c0e0.2e"/>
-      <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
     </children>
   </scopes>
+  <xsdDataTypes name="xsd:time" id="xsd_time">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//time;XSDSimpleTypeDefinition=16"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:date" id="xsd_date">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//date;XSDSimpleTypeDefinition=17"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:integer" id="xsd_integer">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//integer;XSDSimpleTypeDefinition=40"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:boolean" id="xsd_boolean">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//boolean;XSDSimpleTypeDefinition=10"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:decimal" id="xsd_decimal">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//decimal;XSDSimpleTypeDefinition=13"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:float" id="xsd_float">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//float;XSDSimpleTypeDefinition=11"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:double" id="xsd_double">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//double;XSDSimpleTypeDefinition=12"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:string" id="xsd_string">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//string;XSDSimpleTypeDefinition=9"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlURL" id="builtin_iamlURL">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlURL;XSDSimpleTypeDefinition=5"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlInteger" id="builtin_iamlInteger">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlDateTime" id="builtin_iamlDateTime">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlDateTime;XSDSimpleTypeDefinition=4"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlEmail" id="builtin_iamlEmail">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlEmail;XSDSimpleTypeDefinition=3"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlString" id="builtin_iamlString">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlString;XSDSimpleTypeDefinition=1"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlOpenIDURL" id="builtin_iamlOpenIDURL">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlOpenIDURL;XSDSimpleTypeDefinition=6"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlAddress" id="builtin_iamlAddress">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlAddress;XSDSimpleTypeDefinition=2"/>
+  </xsdDataTypes>
 </iaml:InternetApplication>

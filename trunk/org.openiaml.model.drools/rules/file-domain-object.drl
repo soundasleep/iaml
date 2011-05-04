@@ -58,6 +58,9 @@ rule "Create DomainAttributes for Properties File DomainSchema"
 		schema : DomainSchema ( name == "properties" )
 		schemaEdge : SchemaEdge ( from == $fds, to == schema )
 		
+		type : EXSDDataType( definition != null, 
+			eval(functions.equalDataTypes(definition, BuiltinDataTypes.getTypeString())))  
+		
 		not ( DomainAttribute ( eContainer == schema, name == $key ))
 
 		eval ( handler.veto( schema ))
@@ -66,7 +69,7 @@ rule "Create DomainAttributes for Properties File DomainSchema"
 		DomainAttribute fda = handler.generatedDomainAttribute(schema, schema);
 		//handler.setValue(fda, ModelPackage.eINSTANCE.getNamedElement_Name(), $key);
 		handler.setName(fda, $key);
-		handler.setType(fda, BuiltinDataTypes.getTypeString());	// all Properties attributes are strings
+		handler.setType(fda, type);	// all Properties attributes are strings
 		queue.add(fda, drools);
 		
 end

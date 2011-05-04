@@ -26,6 +26,8 @@ rule "Create a default primary key for DomainObjects which do not have one"
 
 	when
 		object : DomainSchema ( )
+		type : EXSDDataType( definition != null, 
+			eval(functions.equalDataTypes(definition, BuiltinDataTypes.getTypeInteger())))  
 		not (da : DomainAttribute ( eContainer == object, primaryKey == true ) )
 	
 		eval ( handler.veto( object ))
@@ -35,7 +37,7 @@ rule "Create a default primary key for DomainObjects which do not have one"
 		DomainAttribute da2 = handler.generatedDomainAttribute(object, object);
 		handler.setName(da2, "generated primary key");
 		handler.setValue(da2, ModelPackage.eINSTANCE.getDomainAttribute_PrimaryKey(), true);
-		handler.setType(da2, BuiltinDataTypes.getTypeInteger());
+		handler.setType(da2, type);
 		queue.add(da2, drools);
 
 end 

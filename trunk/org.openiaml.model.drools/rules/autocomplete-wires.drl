@@ -209,9 +209,16 @@ rule "IteratorList labels update the target of the Autocomplete Wire"
 	
 end
 
+/**
+ * @inference InternetApplication,EXSDDataType
+ *		An {@model InternetApplication} will contain a {@model Property#readOnly}
+ *		{@model Property}, named 'blank', which represents an empty string.
+ */
 rule "InternetApplication has a readonly Property 'blank' created"
 	when
 		container : InternetApplication ( )
+		type : EXSDDataType( definition != null, 
+			eval(functions.equalDataTypes(definition, BuiltinDataTypes.getTypeString())))  
 	
 		not ( Property ( eContainer == container, defaultValue == "" ))
 		
@@ -221,7 +228,7 @@ rule "InternetApplication has a readonly Property 'blank' created"
 		Property blank = handler.generatedProperty(container, container);
 		handler.setName(blank, "blank");
 		handler.setReadOnly(blank, true);
-		handler.setType(blank, BuiltinDataTypes.getTypeString());
+		handler.setType(blank, type);
 		handler.setDefaultValue(blank, "");
 		queue.add(blank, drools);
 			

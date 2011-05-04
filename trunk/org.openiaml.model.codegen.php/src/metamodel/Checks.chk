@@ -203,11 +203,11 @@ context model::ContainsProperties WARNING "You should not have a contained Prope
  * Two types are specified to be incompatible if they are different.
  * TODO this should be changed, because e.g. email is compatible with string in one direction. 
  */
-context model::Changeable ERROR "Type '" + type.uRI + "' is incompatible with contained fieldValue type '" + fieldValue.type.uRI + "'":
+context model::Changeable ERROR "Type '" + type + "' is incompatible with contained fieldValue type '" + fieldValue.type + "'":
 	type == null ||
 	fieldValue == null ||
 	fieldValue.type == null ||
-	type.uRI == fieldValue.type.uRI;
+	type == fieldValue.type;
 
 context model::Changeable ERROR "Contained fieldValue property has a default value, even though container already specifies one" :
 	defaultValue == null ||

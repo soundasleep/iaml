@@ -3,9 +3,9 @@
  */
 package org.openiaml.model.inference;
 
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xsd.XSDSimpleTypeDefinition;
 import org.openiaml.model.FileReference;
 import org.openiaml.model.model.Accessible;
 import org.openiaml.model.model.Action;
@@ -642,7 +642,7 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setValue(element, OperationsPackage.eINSTANCE.getExecutionEdge_To(), value);
 	}
 	
-	public void setType(Property element, XSDSimpleTypeDefinition value) throws InferenceException {
+	public void setType(Property element, EDataType value) throws InferenceException {
 		setValue(element, ModelPackage.eINSTANCE.getProperty_Type(), value);
 	}
 
@@ -650,7 +650,7 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setValue(element, OperationsPackage.eINSTANCE.getArithmetic_OperationType(), value);
 	}
 	
-	public void setType(Changeable element, XSDSimpleTypeDefinition value) throws InferenceException {
+	public void setType(Changeable element, EDataType value) throws InferenceException {
 		setValue(element, ModelPackage.eINSTANCE.getChangeable_Type(), value);
 	}
 

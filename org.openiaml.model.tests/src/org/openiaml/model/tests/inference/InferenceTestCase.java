@@ -10,9 +10,11 @@ import java.util.Set;
 
 import junit.framework.AssertionFailedError;
 
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xsd.XSDSimpleTypeDefinition;
 import org.jaxen.JaxenException;
+import org.openiaml.model.drools.DroolsHelperFunctions;
 import org.openiaml.model.model.Action;
 import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.ActionEdgeSource;
@@ -27,6 +29,7 @@ import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsProperties;
 import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DynamicApplicationElementSet;
+import org.openiaml.model.model.EXSDDataType;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
@@ -1683,5 +1686,103 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		assertTrue(copy.isEmpty());
 		
 	}
+	
+	/**
+	 * Are the two {@link EDataType}s equal? They are equal if
+	 * {@link EDataType#equals(Object)} returns <code>true</code>,
+	 * or if both are {@link EXSDDataType}s and their definition
+	 * URIs are equal.
+	 * 
+	 * @see DroolsHelperFunctions#equalDataTypes(XSDSimpleTypeDefinition, XSDSimpleTypeDefinition)
+	 * @param e1
+	 * @param e2
+	 * @return
+	 */
+	protected boolean equalType(EDataType e1, EDataType e2) {
+		if (e1.equals(e2))
+			return true;
+		
+		if (e1 instanceof EXSDDataType) {
+			if (e2 instanceof EXSDDataType) {
+				return DroolsHelperFunctions.equalDataTypes(
+						((EXSDDataType) e1).getDefinition(),
+						((EXSDDataType) e2).getDefinition());						
+			}
+		}
+		
+		return false;
+	}
 
+	/**
+	 * Are the two elements of the same type? That is, do their type URIs
+	 * match?
+	 */
+	protected void assertEqualType(XSDSimpleTypeDefinition a,
+			XSDSimpleTypeDefinition b) {
+		assertTrue(DroolsHelperFunctions.equalDataTypes(a, b));
+	}
+	
+	/**
+	 * Are the two elements of the same type? That is, do their type URIs
+	 * match?
+	 */
+	protected void assertEqualType(EDataType a,
+			XSDSimpleTypeDefinition b) {
+		assertEqualType(((EXSDDataType) a).getDefinition(), b);
+	}
+	
+	/**
+	 * Are the two elements of the same type? That is, do their type URIs
+	 * match?
+	 */
+	protected void assertEqualType(XSDSimpleTypeDefinition a,
+			EDataType b) {
+		assertEqualType(a, ((EXSDDataType) b).getDefinition());
+	}
+	
+	/**
+	 * Are the two elements of the same type? That is, do their type URIs
+	 * match?
+	 */
+	protected void assertEqualType(Changeable a,
+			Changeable b) {
+		assertTrue(equalType(a.getType(), b.getType()));
+	}
+	
+	/**
+	 * Are the two elements of the same type? That is, do their type URIs
+	 * match?
+	 */
+	protected void assertEqualType(Property a,
+			Changeable b) {
+		assertTrue(equalType(a.getType(), b.getType()));
+	}
+	
+	/**
+	 * Are the two elements of the same type? That is, do their type URIs
+	 * match?
+	 */
+	protected void assertEqualType(Changeable a,
+			Property b) {
+		assertTrue(equalType(a.getType(), b.getType()));
+	}
+	
+	/**
+	 * Are the two elements of the same type? That is, do their type URIs
+	 * match?
+	 */
+	protected void assertEqualType(Property a,
+			Property b) {
+		assertTrue(equalType(a.getType(), b.getType()));
+	}
+	
+	/**
+	 * Are the two elements <em>not</em> of the same type? That is, do their type URIs
+	 * not match?
+	 */
+	protected void assertNotEqualType(Changeable a,
+			Changeable b) {
+		assertFalse(equalType(a.getType(), b.getType()));
+	}
+	
 }

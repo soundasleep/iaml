@@ -7,6 +7,7 @@ import org.openiaml.model.datatypes.BuiltinDataTypes;
 import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.DomainAttribute;
+import org.openiaml.model.model.EXSDDataType;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Property;
@@ -61,9 +62,9 @@ public class IteratorListSetWire extends InferenceTestCase {
 		DomainAttribute title = assertHasDomainAttribute(news, "title");
 		DomainAttribute content = assertHasDomainAttribute(news, "content");
 
-		assertEquals(id.getType().getURI(), BuiltinDataTypes.getTypeInteger().getURI());
-		assertEquals(title.getType().getURI(), BuiltinDataTypes.getTypeString().getURI());
-		assertEquals(content.getType().getURI(), BuiltinDataTypes.getTypeString().getURI());
+		assertEquals(((EXSDDataType) id.getType()).getDefinition().getURI(), BuiltinDataTypes.getTypeInteger().getURI());
+		assertEquals(((EXSDDataType) title.getType()).getDefinition().getURI(), BuiltinDataTypes.getTypeString().getURI());
+		assertEquals(((EXSDDataType) content.getType()).getDefinition().getURI(), BuiltinDataTypes.getTypeString().getURI());
 		
 	}
 	
@@ -92,9 +93,9 @@ public class IteratorListSetWire extends InferenceTestCase {
 		DomainAttribute title = assertHasDomainAttribute(news, "title");
 		DomainAttribute content = assertHasDomainAttribute(news, "content");
 
-		assertEquals(id.getType().getURI(), iid.getType().getURI());
-		assertEquals(title.getType().getURI(), ititle.getType().getURI());
-		assertEquals(content.getType().getURI(), icontent.getType().getURI());
+		assertEqualType(id, iid);
+		assertEqualType(title, ititle);
+		assertEqualType(content, icontent);
 		
 	}
 	
@@ -125,9 +126,9 @@ public class IteratorListSetWire extends InferenceTestCase {
 		DomainAttribute title = assertHasDomainAttribute(news, "title");
 		DomainAttribute content = assertHasDomainAttribute(news, "content");
 
-		assertEquals(id.getType().getURI(), lid.getType().getURI());
-		assertEquals(title.getType().getURI(), ltitle.getType().getURI());
-		assertEquals(content.getType().getURI(), lcontent.getType().getURI());
+		assertEqualType(id, lid);
+		assertEqualType(title, ltitle);
+		assertEqualType(content, lcontent);
 		
 	}
 	

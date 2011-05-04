@@ -7,6 +7,7 @@ import org.openiaml.model.datatypes.BuiltinDataTypes;
 import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Condition;
+import org.openiaml.model.model.EXSDDataType;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.PrimitiveCondition;
@@ -55,22 +56,22 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 		InputTextField integer = assertHasInputTextField(home, "Integer");
 		assertNotGenerated(integer);
 		assertHasNoFieldValue(integer);
-		assertEquals(integer.getType().getURI(), BuiltinDataTypes.TYPE_INTEGER);
+		assertEquals(((EXSDDataType) integer.getType()).getDefinition().getURI(), BuiltinDataTypes.TYPE_INTEGER);
 
 		InputTextField str = assertHasInputTextField(home, "String");
 		assertNotGenerated(str);
 		assertHasNoFieldValue(str);
-		assertEquals(str.getType().getURI(), BuiltinDataTypes.TYPE_STRING);
+		assertEquals(((EXSDDataType) str.getType()).getDefinition().getURI(), BuiltinDataTypes.TYPE_STRING);
 
 		InputTextField dt = assertHasInputTextField(home, "Date");
 		assertNotGenerated(dt);
 		assertHasNoFieldValue(dt);
-		assertEquals(dt.getType().getURI(), BuiltinDataTypes.TYPE_DATETIME);
+		assertEquals(((EXSDDataType) dt.getType()).getDefinition().getURI(), BuiltinDataTypes.TYPE_DATETIME);
 
 		InputTextField email = assertHasInputTextField(home, "Email");
 		assertNotGenerated(email);
 		assertHasNoFieldValue(email);
-		assertEquals(email.getType().getURI(), BuiltinDataTypes.TYPE_EMAIL);
+		assertEquals(((EXSDDataType) email.getType()).getDefinition().getURI(), BuiltinDataTypes.TYPE_EMAIL);
 
 	}
 

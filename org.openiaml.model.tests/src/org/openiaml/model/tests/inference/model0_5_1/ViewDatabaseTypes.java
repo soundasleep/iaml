@@ -5,6 +5,7 @@ package org.openiaml.model.tests.inference.model0_5_1;
 
 import org.openiaml.model.datatypes.BuiltinDataTypes;
 import org.openiaml.model.model.DomainAttribute;
+import org.openiaml.model.model.EXSDDataType;
 import org.openiaml.model.model.Property;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
 import org.openiaml.model.model.domain.DomainInstance;
@@ -41,11 +42,11 @@ public class ViewDatabaseTypes extends InferenceTestCase {
 		DomainAttribute aEmail = assertHasDomainAttribute(obj, "email");
 		DomainAttribute aAddress = assertHasDomainAttribute(obj, "address");
 		
-		assertEquals(aString.getType(), BuiltinDataTypes.getTypeString());
-		assertEquals(aInteger.getType(), BuiltinDataTypes.getTypeInteger());
-		assertEquals(aDate.getType(), BuiltinDataTypes.getTypeDateTime());
-		assertEquals(aEmail.getType(), BuiltinDataTypes.getTypeEmail());
-		assertEquals(aAddress.getType(), BuiltinDataTypes.getTypeAddress());
+		assertEqualType(aString.getType(), BuiltinDataTypes.getTypeString());
+		assertEqualType(aInteger.getType(), BuiltinDataTypes.getTypeInteger());
+		assertEqualType(aDate.getType(), BuiltinDataTypes.getTypeDateTime());
+		assertEqualType(aEmail.getType(), BuiltinDataTypes.getTypeEmail());
+		assertEqualType(aAddress.getType(), BuiltinDataTypes.getTypeAddress());
 		
 		assertNotGenerated(obj);
 		assertNotGenerated(aString);
@@ -89,36 +90,36 @@ public class ViewDatabaseTypes extends InferenceTestCase {
 		assertGenerated(iAddress);
 		
 		// equal types
-		assertEquals(aString.getType(), iString.getType());
-		assertEquals(aInteger.getType(), iInteger.getType());
-		assertEquals(aDate.getType(), iDate.getType());
-		assertEquals(aEmail.getType(), iEmail.getType());
-		assertEquals(aAddress.getType(), iAddress.getType());
+		assertEqualType(aString, iString);
+		assertEqualType(aInteger, iInteger);
+		assertEqualType(aDate, iDate);
+		assertEqualType(aEmail, iEmail);
+		assertEqualType(aAddress, iAddress);
 		
 		// test the field values of the attribute instances, as well
 		{
 			Property value = assertHasFieldValue(iString);
-			assertEquals(value.getType(), iString.getType());
+			assertEqualType(value, iString);
 			assertGenerated(value);
 		}
 		{
 			Property value = assertHasFieldValue(iInteger);
-			assertEquals(value.getType(), iInteger.getType());
+			assertEqualType(value, iInteger);
 			assertGenerated(value);
 		}
 		{
 			Property value = assertHasFieldValue(iDate);
-			assertEquals(value.getType(), iDate.getType());
+			assertEqualType(value, iDate);
 			assertGenerated(value);
 		}
 		{
 			Property value = assertHasFieldValue(iEmail);
-			assertEquals(value.getType(), iEmail.getType());
+			assertEqualType(value, iEmail);
 			assertGenerated(value);
 		}
 		{
 			Property value = assertHasFieldValue(iAddress);
-			assertEquals(value.getType(), iAddress.getType());
+			assertEqualType(value, iAddress);
 			assertGenerated(value);
 		}
 		
@@ -158,38 +159,39 @@ public class ViewDatabaseTypes extends InferenceTestCase {
 		assertGenerated(iAddress);
 		
 		// equal types
-		assertEquals(tString.getType(), iString.getType());
-		assertEquals(tInteger.getType(), iInteger.getType());
-		assertEquals(tDate.getType(), iDate.getType());
-		assertEquals(tEmail.getType(), iEmail.getType());
-		assertEquals(tAddress.getType(), iAddress.getType());
+		assertEqualType(tString, iString);
+		assertEqualType(tInteger, iInteger);
+		assertEqualType(tDate, iDate);
+		assertEqualType(tEmail, iEmail);
+		assertEqualType(tAddress, iAddress);
 		
 		// test the field values of the attribute instances, as well
 		{
 			Property value = assertHasFieldValue(tString);
-			assertEquals(value.getType(), iString.getType());
+			assertEqualType(value, tString);
 			assertGenerated(value);
 		}
 		{
 			Property value = assertHasFieldValue(tInteger);
-			assertEquals(value.getType(), iInteger.getType());
+			assertEqualType(value, tInteger);
 			assertGenerated(value);
 		}
 		{
 			Property value = assertHasFieldValue(tDate);
-			assertEquals(value.getType(), iDate.getType());
+			assertEqualType(value, tDate);
 			assertGenerated(value);
 		}
 		{
 			Property value = assertHasFieldValue(tEmail);
-			assertEquals(value.getType(), iEmail.getType());
+			assertEqualType(value, tEmail);
 			assertGenerated(value);
 		}
 		{
 			Property value = assertHasFieldValue(tAddress);
-			assertEquals(value.getType(), iAddress.getType());
+			assertEqualType(value, tAddress);
 			assertGenerated(value);
 		}
+		
 		
 	}
 

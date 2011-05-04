@@ -56,17 +56,17 @@ public class PropertiesFileMapping extends EclipseInheritanceInterface {
 		{
 			DomainAttribute attribute = assertHasDomainAttribute(schema, "fruit");
 			assertEquals(attribute.getName(), "fruit");
-			assertEquals(BuiltinDataTypes.getTypeString(), attribute.getType());
+			assertEqualType(BuiltinDataTypes.getTypeString(), attribute.getType());
 		}
 		{
 			DomainAttribute attribute = assertHasDomainAttribute(schema, "animal");
 			assertEquals(attribute.getName(), "animal");
-			assertEquals(BuiltinDataTypes.getTypeString(), attribute.getType());
+			assertEqualType(BuiltinDataTypes.getTypeString(), attribute.getType());
 		}
 		{
 			DomainAttribute attribute = assertHasDomainAttribute(schema, "empty");
 			assertEquals(attribute.getName(), "empty");
-			assertEquals(BuiltinDataTypes.getTypeString(), attribute.getType());
+			assertEqualType(BuiltinDataTypes.getTypeString(), attribute.getType());
 		}
 		{
 			DomainAttribute attribute = assertHasDomainAttribute(schema, "generated primary key");
@@ -74,7 +74,7 @@ public class PropertiesFileMapping extends EclipseInheritanceInterface {
 			assertTrue(attribute.isPrimaryKey());
 			
 			// primary keys are always integer
-			assertEquals(BuiltinDataTypes.getTypeInteger(), attribute.getType());
+			assertEqualType(BuiltinDataTypes.getTypeInteger(), attribute.getType());
 		}
 
 	}

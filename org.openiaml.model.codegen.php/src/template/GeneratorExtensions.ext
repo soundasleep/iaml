@@ -653,13 +653,19 @@ isDomainIteratorCurrentPointer(model::Property this) :
  * This returns true if this type is, or is recursively restricted, from
  * 		<code>http://www.w3.org/2001/XMLSchema#decimal</code>.
  */
-boolean isNumeric(xsd::XSDSimpleTypeDefinition this) :
+boolean isNumericXSD(xsd::XSDSimpleTypeDefinition this) :
 	uRI != "http://www.w3.org/2001/XMLSchema#anySimpleType"
 	&& uRI != "http://www.w3.org/2001/XMLSchema#anyType"
 	&& (
 		uRI == "http://www.w3.org/2001/XMLSchema#decimal"
-		|| (baseTypeDefinition != null && isNumeric(baseTypeDefinition))
+		|| (baseTypeDefinition != null && isNumericXSD(baseTypeDefinition))
 	);
+
+boolean isNumeric(ecore::EDataType this) :
+	throwException("Cannot check isNumeric on EDataTypes");
+
+boolean isNumeric(model::EXSDDataType this) :
+	isNumericXSD(definition);
 
 operationUsed(model::Operation this) :
 	!(inActions.isEmpty && inExecutions.isEmpty && inFlows.isEmpty && inWires.isEmpty); 

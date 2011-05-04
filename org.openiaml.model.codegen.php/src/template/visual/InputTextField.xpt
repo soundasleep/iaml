@@ -67,7 +67,7 @@
 				// check data type
 				«IF type != null»
 					var value = obj.value;
-					if (!can_cast(value, '«type.uRI»')) {
+					if (!can_cast(value, «EXPAND template::operations::Parameters::getTypeURI FOR type»)) {
 						// reset
 						obj.value = "";
 						return false;
@@ -75,7 +75,7 @@
 						// reformat it
 						// but make sure it's represented as a string
 						// (this prevents the Date from switching timezones, etc)
-						obj.value = do_cast(do_cast(value, '«type.uRI»'), 'http://openiaml.org/model/datatypes#iamlString');						
+						obj.value = do_cast(do_cast(value, «EXPAND template::operations::Parameters::getTypeURI FOR type»), 'http://openiaml.org/model/datatypes#iamlString');						
 					}
 				«ENDIF»
 			
@@ -175,7 +175,7 @@
 		«REM»expand all children«ENDREM»
 		«EXPAND Render::renderVisual(currentFrame) FOREACH children.sortBy(c|c.renderOrder)-»
 		
-		«IF type != null && type.uRI == "http://openiaml.org/model/datatypes#iamlOpenIDURL"»
+		«IF type != null && model::EXSDDataType.isInstance(type) && ((model::EXSDDataType) type).definition.uRI == "http://openiaml.org/model/datatypes#iamlOpenIDURL"»
 			«EXPAND textFieldOpenID(currentFrame)»
 		«ENDIF»
 	</label>

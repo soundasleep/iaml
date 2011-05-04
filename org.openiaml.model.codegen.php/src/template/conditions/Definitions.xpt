@@ -150,10 +150,10 @@
 «DEFINE conditionDefinition_canCast(Boolean php, model::PrimitiveCondition condition) FOR model::Changeable»
 	/* PrimitiveOperation 'can cast?' */
 	«IF php»
-		$type = "«escapePhpString(fieldValue.type.uRI)»";
+		$type = «EXPAND template::operations::Parameters::getTypeURI FOR fieldValue.type»; 
 		return can_cast($default_arg, $type);
 	«ELSE»
-		var type = "«escapePhpString(fieldValue.type.uRI)»";
+		var type = «EXPAND template::operations::Parameters::getTypeURI FOR fieldValue.type»;
 		return can_cast(default_arg, type);
 	«ENDIF»
 «ENDDEFINE»

@@ -52,6 +52,8 @@ end
 rule "InputTextFields have a Property currentInput"
 	when
 		field : InputTextField ( )
+		type : EXSDDataType( definition != null, 
+			eval(functions.equalDataTypes(definition, BuiltinDataTypes.getTypeString())))  
 		not ( property : Property ( field.currentInput == property ))
 	
 		eval ( handler.veto( field ))
@@ -59,7 +61,7 @@ rule "InputTextFields have a Property currentInput"
 	then
 		Property property = handler.generatedPropertyCurrentInput(field, field);
 		handler.setName(property, "currentInput");
-		handler.setType(property, BuiltinDataTypes.getTypeString());
+		handler.setType(property, type);
 		queue.add(property, drools);
 
 end

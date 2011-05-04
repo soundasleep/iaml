@@ -390,6 +390,9 @@ rule "Create contents of 'update target' operation"
 		target : Property ( eContainer == last, name == "target" )
 
 		op : CompositeOperation ( eContainer == last, name == "update target" )
+
+		type : EXSDDataType( definition != null, 
+			eval(functions.equalDataTypes(definition, BuiltinDataTypes.getTypeInteger())))  
 		
 		not ( StartNode ( eContainer == op ))
 
@@ -407,7 +410,7 @@ rule "Create contents of 'update target' operation"
 		handler.setReadOnly(one, true);
 		handler.setName(one, "one");
 		handler.setDefaultValue(one, "1");
-		handler.setType(one, BuiltinDataTypes.getTypeInteger());
+		handler.setType(one, type);
 		queue.add(one, drools);
 		
 		Arithmetic subtract = handler.generatedArithmetic(op, op);

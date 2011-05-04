@@ -6,6 +6,7 @@ package org.openiaml.model.drools;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xsd.XSDSimpleTypeDefinition;
 import org.jaxen.JaxenException;
 import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.DomainAttribute;
@@ -388,6 +389,19 @@ public class DroolsHelperFunctions {
 	
 	public String getAutocompleteIteratorQuery(AutocompleteWire wire) {
 		return "matches(" + wire.getMatch().getName() + ", :" + wire.getMatch().getName() + ")";
+	}
+	
+	/**
+	 * Are the two given XSD data types equal?
+	 * The definition by {@link XSDSimpleTypeDefinition#equals(Object)} is extended
+	 * to also check for {@link XSDSimpleTypeDefinition#getURI() URI} equality.
+	 */
+	public static boolean equalDataTypes(XSDSimpleTypeDefinition def1, 
+			XSDSimpleTypeDefinition def2) {
+		
+		return def1.equals(def2) ||
+			(def1 != null && def2 != null && def1.getURI().equals(def2.getURI()));
+		
 	}
 
 }

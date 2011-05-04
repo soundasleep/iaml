@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.2" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12311dd5ff7.1">
-  <children xsi:type="iaml.visual:Page" id="visual.12311dd6084.1" name="Home">
-    <operations xsi:type="iaml:CompositeOperation" inEdges="wires.12311dd6093.1" id="model.12311dd5ff7.c" name="target operation">
-      <operations xsi:type="iaml:ChainedOperation" id="model.12311e69386.13" name="setPropertyToValue" inFlows="model.12311eb1e33.36" inExecutions="model.12311e69386.21" outFlows="model.12311e69386.28" outExecutions="model.12311e69386.24"/>
-      <operations xsi:type="iaml:ChainedOperation" id="model.12311e69386.14" name="setPropertyToValue" inFlows="model.12311eb1e33.38" inExecutions="model.12311e69386.22" outFlows="model.12311e69386.2a" outExecutions="model.12311e69386.25"/>
-      <operations xsi:type="iaml:ChainedOperation" id="model.12311e69386.15" name="setPropertyToValue" inFlows="model.12311eb1e33.39" inExecutions="model.12311e69386.23" outFlows="model.12311e69386.2b" outExecutions="model.12311e69386.26"/>
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.operations="http://openiaml.org/model/operations" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.12311dd5ff7.1">
+  <scopes xsi:type="iaml.visual:Frame" id="visual.12311dd6084.1" name="Home">
+    <operations xsi:type="iaml:CompositeOperation" id="model.12311dd5ff7.c" name="target operation" inActions="wires.12311dd6093.1">
+      <operations xsi:type="iaml:PrimitiveOperation" id="model.12311e69386.13" name="set" inFlows="model.12311eb1e33.36" inExecutions="model.12311e69386.21" outFlows="model.12311e69386.28" outExecutions="model.12311e69386.24"/>
+      <operations xsi:type="iaml:PrimitiveOperation" id="model.12311e69386.14" name="set" inFlows="model.12311eb1e33.38" inExecutions="model.12311e69386.22" outFlows="model.12311e69386.2a" outExecutions="model.12311e69386.25"/>
+      <operations xsi:type="iaml:PrimitiveOperation" id="model.12311e69386.15" name="set" inFlows="model.12311eb1e33.39" inExecutions="model.12311e69386.23" outFlows="model.12311e69386.2b" outExecutions="model.12311e69386.26"/>
+      <properties id="model.12311eb1e33.2e" name="value1" outFlows="model.12311eb1e33.36" defaultValue="foo" readOnly="true"/>
+      <properties id="model.12311eb1e33.33" name="value2" outFlows="model.12311eb1e33.38" defaultValue="bar" readOnly="true"/>
+      <properties id="model.12311eb1e33.34" name="value3" outFlows="model.12311eb1e33.39" defaultValue="baz" readOnly="true"/>
       <nodes xsi:type="iaml.operations:StartNode" id="operations.12311dd6093.3d" outExecutions="model.12311e69386.1f"/>
       <nodes xsi:type="iaml.operations:FinishNode" id="operations.12311dd6093.3f" inExecutions="model.12311e69386.27"/>
       <nodes xsi:type="iaml.operations:SplitNode" id="operations.12311e693f4.7" outExecutions="model.12311e69386.21 model.12311e69386.22 model.12311e69386.23" inExecutions="model.12311e69386.1f"/>
@@ -23,21 +26,48 @@
       <executionEdges id="model.12311e69386.25" from="model.12311e69386.14" to="operations.12311e693f4.9"/>
       <executionEdges id="model.12311e69386.26" from="model.12311e69386.15" to="operations.12311e693f4.9"/>
       <executionEdges id="model.12311e69386.27" from="operations.12311e693f4.9" to="operations.12311dd6093.3f"/>
-      <values id="model.12311eb1e33.2e" name="value1" outFlows="model.12311eb1e33.36" value="foo"/>
-      <values id="model.12311eb1e33.33" name="value2" outFlows="model.12311eb1e33.38" value="bar"/>
-      <values id="model.12311eb1e33.34" name="value3" outFlows="model.12311eb1e33.39" value="baz"/>
     </operations>
-    <children xsi:type="iaml.visual:Button" id="visual.12311dd6084.9" name="target" outEdges="wires.12311dd6093.1">
-      <wires xsi:type="iaml.wires:RunInstanceWire" id="wires.12311dd6093.1" from="visual.12311dd6084.9" to="model.12311dd5ff7.c" name="onClick"/>
+    <children xsi:type="iaml.visual:Button" id="visual.12311dd6084.9" name="target" outActions="wires.12311dd6093.1">
+      <actions id="wires.12311dd6093.1" name="onClick" from="visual.12311dd6084.9" to="model.12311dd5ff7.c"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.12311dd6084.8a" name="field1">
-      <properties id="model.12311dd5ff7.167" name="fieldValue" inFlows="model.12311e69386.28"/>
+      <fieldValue id="model.12311dd5ff7.167" name="fieldValue" inFlows="model.12311e69386.28"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.12311dd6084.8b" name="field2">
-      <properties id="model.12311dd5ff7.185" name="fieldValue" inFlows="model.12311e69386.2a"/>
+      <fieldValue id="model.12311dd5ff7.185" name="fieldValue" inFlows="model.12311e69386.2a"/>
     </children>
     <children xsi:type="iaml.visual:InputTextField" id="visual.12311dd6084.8c" name="field3">
-      <properties id="model.12311dd5ff7.1ab" name="fieldValue" inFlows="model.12311e69386.2b"/>
+      <fieldValue id="model.12311dd5ff7.1ab" name="fieldValue" inFlows="model.12311e69386.2b"/>
     </children>
-  </children>
+  </scopes>
+  <xsdDataTypes name="xsd:integer" id="xsd_integer">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//integer;XSDSimpleTypeDefinition=40"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:boolean" id="xsd_boolean">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//boolean;XSDSimpleTypeDefinition=10"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="xsd:string" id="xsd_string">
+    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//string;XSDSimpleTypeDefinition=9"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlURL" id="builtin_iamlURL">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlURL;XSDSimpleTypeDefinition=5"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlInteger" id="builtin_iamlInteger">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlDateTime" id="builtin_iamlDateTime">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlDateTime;XSDSimpleTypeDefinition=4"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlEmail" id="builtin_iamlEmail">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlEmail;XSDSimpleTypeDefinition=3"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlString" id="builtin_iamlString">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlString;XSDSimpleTypeDefinition=1"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlOpenIDURL" id="builtin_iamlOpenIDURL">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlOpenIDURL;XSDSimpleTypeDefinition=6"/>
+  </xsdDataTypes>
+  <xsdDataTypes name="builtin:iamlAddress" id="builtin_iamlAddress">
+    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlAddress;XSDSimpleTypeDefinition=2"/>
+  </xsdDataTypes>
 </iaml:InternetApplication>

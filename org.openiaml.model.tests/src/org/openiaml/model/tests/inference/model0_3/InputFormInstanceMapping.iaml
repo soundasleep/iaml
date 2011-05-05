@@ -7,9 +7,9 @@
     <children xsi:type="iaml.visual:InputForm" inWires="wires.12234bb89da.3f" id="visual.12234bb89da.ce" name="target input form"/>
     <children xsi:type="iaml.visual:InputForm" id="visual.12234bb89da.de" name="unrelated input form"/>
   </scopes>
-  <schemas id="domain.128807fbeba.e0a" name="User" inSchemas="domain.128807fbeba.e0c">
-    <attributes id="model.12234bb88ff.139" name="username"/>
-    <attributes id="model.12234bb88ff.13b" name="email"/>
+  <schemas name="User" id="domain.128807fbeba.e0a" inSchemas="domain.128807fbeba.e0c">
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="username" id="model.12234bb88ff.139"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="email" id="model.12234bb88ff.13b"/>
   </schemas>
   <sources id="domain.128807fbeba.e0b" name="domain source" outSchemas="domain.128807fbeba.e0c" inSelects="domain.128807fbeba.e0d">
     <schemaEdges id="domain.128807fbeba.e0c" from="domain.128807fbeba.e0b" to="domain.128807fbeba.e0a"/>

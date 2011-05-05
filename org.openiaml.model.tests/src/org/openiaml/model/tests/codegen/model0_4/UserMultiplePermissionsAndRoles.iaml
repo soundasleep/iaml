@@ -10,15 +10,15 @@
     </elements>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233afe628e.6e" name="target"/>
   </scopes>
-  <schemas xsi:type="iaml.users:Role" id="domain.128807fbeba.f3a" name="default role" inSchemas="domain.128807fbeba.f3c" inRequiresEdges="wires.1233afe62eb.82" outProvidesEdges="wires.1233afe62eb.36">
+  <schemas xsi:type="iaml.users:Role" name="default role" id="domain.128807fbeba.f3a" inSchemas="domain.128807fbeba.f3c" inRequiresEdges="wires.1233afe62eb.82" outProvidesEdges="wires.1233afe62eb.36">
     <providesEdges id="wires.1233afe62eb.36" from="domain.128807fbeba.f3a" to="users.1233afe655c.72"/>
     <permissions id="users.1233afe655c.72" name="a permission" inRequiresEdges="wires.1233afe62eb.4a" inProvidesEdges="wires.1233afe62eb.36 wires.1233afe62eb.66"/>
     <permissions id="users.1233afe655c.74" name="a different permission" inProvidesEdges="wires.1233afe62eb.38 wires.1233afe62eb.65"/>
   </schemas>
-  <schemas xsi:type="iaml.users:Role" id="domain.128807fbeba.f3d" name="another role" inSchemas="domain.128807fbeba.f3f" outProvidesEdges="wires.1233afe62eb.38">
+  <schemas xsi:type="iaml.users:Role" name="another role" id="domain.128807fbeba.f3d" inSchemas="domain.128807fbeba.f3f" outProvidesEdges="wires.1233afe62eb.38">
     <providesEdges id="wires.1233afe62eb.38" from="domain.128807fbeba.f3d" to="users.1233afe655c.74"/>
   </schemas>
-  <schemas xsi:type="iaml.users:Role" id="domain.128807fbeba.f40" name="both roles" inSchemas="domain.128807fbeba.f42" outProvidesEdges="wires.1233afe62eb.65 wires.1233afe62eb.66">
+  <schemas xsi:type="iaml.users:Role" name="both roles" id="domain.128807fbeba.f40" inSchemas="domain.128807fbeba.f42" outProvidesEdges="wires.1233afe62eb.65 wires.1233afe62eb.66">
     <providesEdges id="wires.1233afe62eb.65" from="domain.128807fbeba.f40" to="users.1233afe655c.74"/>
     <providesEdges id="wires.1233afe62eb.66" from="domain.128807fbeba.f40" to="users.1233afe655c.72"/>
   </schemas>

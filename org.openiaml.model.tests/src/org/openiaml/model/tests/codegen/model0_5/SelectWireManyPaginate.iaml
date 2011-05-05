@@ -6,9 +6,9 @@
     </elements>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.127eb224338.7" id="visual.127eb224328.1a" name="view news"/>
   </scopes>
-  <schemas id="domain.128807fbeba.10ce" name="News Item" inSchemas="domain.128807fbeba.10d0">
-    <attributes id="model.127eb22429b.41" name="title"/>
-    <attributes id="model.127eb22429b.47" name="content"/>
+  <schemas name="News Item" id="domain.128807fbeba.10ce" inSchemas="domain.128807fbeba.10d0">
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="title" id="model.127eb22429b.41"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="content" id="model.127eb22429b.47"/>
   </schemas>
   <sources id="domain.128807fbeba.10cf" outSchemas="domain.128807fbeba.10d0" inSelects="domain.128807fbeba.10d1">
     <schemaEdges id="domain.128807fbeba.10d0" from="domain.128807fbeba.10cf" to="domain.128807fbeba.10ce"/>

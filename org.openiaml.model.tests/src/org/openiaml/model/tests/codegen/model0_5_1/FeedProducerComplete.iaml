@@ -23,11 +23,11 @@
     </elements>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.1280b46d1f2.3c" id="visual.1280b46d1e2.58" name="View News"/>
   </scopes>
-  <schemas id="domain.128807fbeba.dc1" name="News" inSchemas="domain.128807fbeba.dc3">
-    <attributes id="model.1280b46d146.a2" name="title"/>
-    <attributes id="model.1280b46d146.a4" name="description"/>
-    <attributes id="model.1280b46d146.a5" name="updated" type="builtin_iamlDateTime"/>
-    <attributes id="model.1280b46d146.a6" name="id" type="builtin_iamlInteger" primaryKey="true"/>
+  <schemas name="News" id="domain.128807fbeba.dc1" inSchemas="domain.128807fbeba.dc3">
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="title" id="model.1280b46d146.a2"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="description" id="model.1280b46d146.a4"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="updated" eType="builtin_iamlDateTime" id="model.1280b46d146.a5"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="id" eType="builtin_iamlInteger" id="model.1280b46d146.a6" primaryKey="true"/>
   </schemas>
   <sources id="domain.128807fbeba.dc2" outSchemas="domain.128807fbeba.dc3" inSelects="domain.128807fbeba.dc4 domain.128807fbeba.dc5">
     <schemaEdges id="domain.128807fbeba.dc3" from="domain.128807fbeba.dc2" to="domain.128807fbeba.dc1"/>

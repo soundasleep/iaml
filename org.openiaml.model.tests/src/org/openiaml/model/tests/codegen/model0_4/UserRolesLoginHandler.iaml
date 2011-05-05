@@ -8,8 +8,8 @@
     </elements>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233b453dc5.c2" name="target page"/>
   </scopes>
-  <schemas xsi:type="iaml.users:Role" id="domain.128807fbeba.de1" name="Guest" inSchemas="domain.128807fbeba.de3"/>
-  <schemas xsi:type="iaml.users:Role" id="domain.128807fbeba.de4" name="Registered User" outParameterEdges="wires.1233b453e32.5e" inSchemas="domain.128807fbeba.de6" inRequiresEdges="wires.1233b453e32.66">
+  <schemas xsi:type="iaml.users:Role" name="Guest" id="domain.128807fbeba.de1" inSchemas="domain.128807fbeba.de3"/>
+  <schemas xsi:type="iaml.users:Role" name="Registered User" id="domain.128807fbeba.de4" outParameterEdges="wires.1233b453e32.5e" inSchemas="domain.128807fbeba.de6" inRequiresEdges="wires.1233b453e32.66">
     <parameterEdges id="wires.1233b453e32.5e" from="domain.128807fbeba.de4" to="components.1233b453f6b.39"/>
   </schemas>
   <sources id="domain.128807fbeba.de2" outSchemas="domain.128807fbeba.de3">

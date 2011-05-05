@@ -7,13 +7,13 @@
     </elements>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233afe628e.78" name="target"/>
   </scopes>
-  <schemas xsi:type="iaml.users:Role" id="domain.128807fbeba.10eb" name="default role" outExtendsEdges="wires.1233afe62eb.114" inSchemas="domain.128807fbeba.10ed" outProvidesEdges="wires.1233afe62eb.36">
+  <schemas xsi:type="iaml.users:Role" name="default role" id="domain.128807fbeba.10eb" outExtendsEdges="wires.1233afe62eb.114" inSchemas="domain.128807fbeba.10ed" outProvidesEdges="wires.1233afe62eb.36">
     <extendsEdges id="wires.1233afe62eb.114" from="domain.128807fbeba.10eb" to="domain.128807fbeba.10ee"/>
     <providesEdges id="wires.1233afe62eb.36" from="domain.128807fbeba.10eb" to="users.1233afe655c.72"/>
     <permissions id="users.1233afe655c.72" name="a permission" inProvidesEdges="wires.1233afe62eb.36"/>
     <permissions id="users.1233afe655c.74" name="inherited permission" inRequiresEdges="wires.1233afe62eb.13d" inProvidesEdges="wires.1233afe62eb.38"/>
   </schemas>
-  <schemas xsi:type="iaml.users:Role" id="domain.128807fbeba.10ee" name="another role" inExtendsEdges="wires.1233afe62eb.114" inSchemas="domain.128807fbeba.10f0" outProvidesEdges="wires.1233afe62eb.38">
+  <schemas xsi:type="iaml.users:Role" name="another role" id="domain.128807fbeba.10ee" inExtendsEdges="wires.1233afe62eb.114" inSchemas="domain.128807fbeba.10f0" outProvidesEdges="wires.1233afe62eb.38">
     <providesEdges id="wires.1233afe62eb.38" from="domain.128807fbeba.10ee" to="users.1233afe655c.74"/>
   </schemas>
   <sources id="domain.128807fbeba.10ec" outSchemas="domain.128807fbeba.10ed">

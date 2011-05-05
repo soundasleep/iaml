@@ -17,11 +17,11 @@
       </children>
     </scopes>
   </scopes>
-  <schemas id="domain.128807fbeba.d35" name="User" inSchemas="domain.128807fbeba.d37">
-    <attributes id="model.1213cee9b4f.50" name="id" primaryKey="true"/>
-    <attributes id="model.1213cee9b4f.57" name="name" inExtendsEdges="wires.128665d425c.df"/>
-    <attributes id="model.1213cee9b4f.58" name="email"/>
-    <attributes id="model.1213cee9b4f.59" name="password"/>
+  <schemas name="User" id="domain.128807fbeba.d35" inSchemas="domain.128807fbeba.d37">
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="id" id="model.1213cee9b4f.50" primaryKey="true"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="name" id="model.1213cee9b4f.57" inExtendsEdges="wires.128665d425c.df"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="email" id="model.1213cee9b4f.58"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="password" id="model.1213cee9b4f.59"/>
   </schemas>
   <sources id="domain.128807fbeba.d36" outSchemas="domain.128807fbeba.d37" inSelects="domain.128807fbeba.d39">
     <schemaEdges id="domain.128807fbeba.d37" from="domain.128807fbeba.d36" to="domain.128807fbeba.d35"/>

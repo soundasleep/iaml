@@ -13,8 +13,8 @@
       </children>
     </scopes>
   </scopes>
-  <schemas id="domain.128807fbeba.fb1" name="User" inSchemas="domain.128807fbeba.fb3">
-    <attributes id="model.1230bdbae76.27d" name="email"/>
+  <schemas name="User" id="domain.128807fbeba.fb1" inSchemas="domain.128807fbeba.fb3">
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="email" id="model.1230bdbae76.27d"/>
   </schemas>
   <sources id="domain.128807fbeba.fb2" outSchemas="domain.128807fbeba.fb3" inSelects="domain.128807fbeba.fb4">
     <schemaEdges id="domain.128807fbeba.fb3" from="domain.128807fbeba.fb2" to="domain.128807fbeba.fb1"/>

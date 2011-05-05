@@ -337,7 +337,7 @@ rule "A LoginHandler of type 'user' should have an incoming Role as a parameter,
 		root : InternetApplication ( )
 		session : Session( ) 
 		login_handler : LoginHandler ( eContainer == session, type == LoginHandlerTypes.USER )
-		
+
 		exists ( 
 			// it doesn't matter if the ACH is in the session or the page
 			ach : AccessControlHandler ( eContainer == session 
@@ -345,7 +345,7 @@ rule "A LoginHandler of type 'user' should have an incoming Role as a parameter,
 
 			// the store contains either the roles or the permissions
 			// referenced by the ACH; we only want one
-			obj : RequiresEdgesSource ( ) and
+			obj : RequiresEdgeDestination ( ) and
 			/*
 				TODO This code doesn't work - it allows two incoming Permission/Roles to create
 				multiple outgoing ParameterEdges.
@@ -364,7 +364,7 @@ rule "A LoginHandler of type 'user' should have an incoming Role as a parameter,
 		not (ParameterEdge ( to == login_handler ))
 		
 		not (ParameterEdge ( from == user, to == login_handler ))
-					
+		
 		eval ( handler.veto( login_handler ))
 	
 	then

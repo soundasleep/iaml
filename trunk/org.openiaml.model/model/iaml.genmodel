@@ -337,8 +337,6 @@
       </genClasses>
       <genClasses ecoreClass="iaml.ecore#//components/AccessControlHandler"/>
       <genClasses ecoreClass="iaml.ecore#//components/Gate"/>
-      <genClasses ecoreClass="iaml.ecore#//components/EntryGate"/>
-      <genClasses ecoreClass="iaml.ecore#//components/ExitGate"/>
     </nestedGenPackages>
     <nestedGenPackages prefix="Domain" basePackage="org.openiaml.model.model" disposableProviderFactory="true"
         ecorePackage="iaml.ecore#//domain">

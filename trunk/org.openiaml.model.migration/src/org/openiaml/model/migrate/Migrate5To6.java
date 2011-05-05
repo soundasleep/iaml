@@ -475,7 +475,12 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 						}
 						
 						if (type != null) {
-							element.setAttribute("type", type);
+							if (old.getParentNode() != null &&
+									"schemas".equals(old.getParentNode().getNodeName())) {
+								element.setAttribute("eType", type);
+							} else {
+								element.setAttribute("type", type);
+							}
 						}
 					}
 				}
@@ -607,7 +612,6 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 		// otherwise, call super
 		return super.shouldAddType(oldElement, errors);
 	}
-	
 	
 	
 }

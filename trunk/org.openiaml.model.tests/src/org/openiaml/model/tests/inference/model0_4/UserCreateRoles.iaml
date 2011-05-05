@@ -18,7 +18,7 @@
     </elements>
     <scopes xsi:type="iaml.visual:Frame" id="visual.1233afe628e.7e" name="target"/>
   </scopes>
-  <schemas xsi:type="iaml.users:Role" id="domain.128807fbeba.fdb" name="default role" inSchemas="domain.128807fbeba.fdd" inRequiresEdges="wires.1233afe62eb.2d"/>
+  <schemas xsi:type="iaml.users:Role" name="default role" id="domain.128807fbeba.fdb" inSchemas="domain.128807fbeba.fdd" inRequiresEdges="wires.1233afe62eb.2d"/>
   <sources id="domain.128807fbeba.fdc" outSchemas="domain.128807fbeba.fdd" inSelects="domain.128807fbeba.fde">
     <schemaEdges id="domain.128807fbeba.fdd" from="domain.128807fbeba.fdc" to="domain.128807fbeba.fdb"/>
     <selectEdges id="domain.128807fbeba.fde" from="domain.128807fbeba.fda" to="domain.128807fbeba.fdc"/>

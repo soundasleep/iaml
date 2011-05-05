@@ -19,10 +19,10 @@
       <operations xsi:type="iaml:CompositeOperation" id="model.128b5279a48.b8" name="update" inActions="wires.128b5279ae4.1f"/>
     </children>
   </scopes>
-  <schemas id="domain.128a9b17dce.1" name="News" inSchemas="domain.128a9b17dce.5">
-    <attributes id="model.128a9b17d03.12" name="id" type="builtin_iamlInteger" primaryKey="true"/>
-    <attributes id="model.128a9b17d03.14" name="title" type="builtin_iamlString"/>
-    <attributes id="model.128a9b17d03.15" name="content" type="builtin_iamlString"/>
+  <schemas name="News" id="domain.128a9b17dce.1" inSchemas="domain.128a9b17dce.5">
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="id" eType="builtin_iamlInteger" id="model.128a9b17d03.12" primaryKey="true"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="title" eType="builtin_iamlString" id="model.128a9b17d03.14"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="content" eType="builtin_iamlString" id="model.128a9b17d03.15"/>
   </schemas>
   <sources id="domain.128a9b17dce.3" name="Database" outSchemas="domain.128a9b17dce.5" inSelects="domain.128a9b17dce.42">
     <schemaEdges id="domain.128a9b17dce.5" from="domain.128a9b17dce.3" to="domain.128a9b17dce.1"/>

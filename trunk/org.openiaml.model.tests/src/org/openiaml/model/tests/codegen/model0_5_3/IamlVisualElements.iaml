@@ -18,9 +18,9 @@
     <children xsi:type="iaml.visual:IteratorList" inWires="wires.12d9744bb4e.1" id="visual.12d9744b831.aa" name="Iterator List"/>
     <children xsi:type="iaml.visual:Label" id="visual.12d9744b831.ab" name="Hidden" visible="false"/>
   </scopes>
-  <schemas id="domain.12d9744c1a7.8" name="Iterator List contents" inSchemas="domain.12d9744c1a7.13">
-    <attributes id="model.12d9744b5d0.3f" name="value"/>
-    <attributes id="model.12d9744b5d0.41" name="key"/>
+  <schemas name="Iterator List contents" id="domain.12d9744c1a7.8" inSchemas="domain.12d9744c1a7.13">
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="value" id="model.12d9744b5d0.3f"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="key" id="model.12d9744b5d0.41"/>
   </schemas>
   <sources id="domain.12d9744c1a7.12" name="Iterator List database" outSchemas="domain.12d9744c1a7.13" inSelects="domain.12d9744c1a7.37">
     <schemaEdges id="domain.12d9744c1a7.13" from="domain.12d9744c1a7.12" to="domain.12d9744c1a7.8"/>

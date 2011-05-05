@@ -10,10 +10,10 @@
     </children>
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.1280b46d1e2.46" name="View News" inWires="wires.1281eb98078.11"/>
-  <schemas id="domain.128807fbeba.fbb" name="News" inSchemas="domain.128807fbeba.fbd">
-    <attributes id="model.1280b46d146.a2" name="title"/>
-    <attributes id="model.1280b46d146.a4" name="description"/>
-    <attributes id="model.1280b46d146.a5" name="updated" type="builtin_iamlDateTime"/>
+  <schemas name="News" id="domain.128807fbeba.fbb" inSchemas="domain.128807fbeba.fbd">
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="title" id="model.1280b46d146.a2"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="description" id="model.1280b46d146.a4"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="updated" eType="builtin_iamlDateTime" id="model.1280b46d146.a5"/>
   </schemas>
   <sources id="domain.128807fbeba.fbc" outSchemas="domain.128807fbeba.fbd" inSelects="domain.128807fbeba.fbe">
     <schemaEdges id="domain.128807fbeba.fbd" from="domain.128807fbeba.fbc" to="domain.128807fbeba.fbb"/>

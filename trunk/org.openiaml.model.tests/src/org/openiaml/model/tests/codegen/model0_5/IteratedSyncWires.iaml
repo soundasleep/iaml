@@ -38,10 +38,10 @@
       <actions id="wires.127e5a8ff7e.99" name="onClick" from="visual.127e5a8ff6f.aa" to="model.127e5a8fec3.94"/>
     </children>
   </scopes>
-  <schemas id="domain.128807fbeba.10e2" name="News" inSchemas="domain.128807fbeba.10e4">
-    <attributes id="model.127e56efe3e.2f" name="title"/>
-    <attributes id="model.127e56efe3e.35" name="content"/>
-    <attributes id="model.127e56efe3e.36" name="posted" type="builtin_iamlDateTime"/>
+  <schemas name="News" id="domain.128807fbeba.10e2" inSchemas="domain.128807fbeba.10e4">
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="title" id="model.127e56efe3e.2f"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="content" id="model.127e56efe3e.35"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="posted" eType="builtin_iamlDateTime" id="model.127e56efe3e.36"/>
   </schemas>
   <sources id="domain.128807fbeba.10e3" outSchemas="domain.128807fbeba.10e4" inSelects="domain.128807fbeba.10e5">
     <schemaEdges id="domain.128807fbeba.10e4" from="domain.128807fbeba.10e3" to="domain.128807fbeba.10e2"/>

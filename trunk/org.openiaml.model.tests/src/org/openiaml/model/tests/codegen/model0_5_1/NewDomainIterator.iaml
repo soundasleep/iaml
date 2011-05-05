@@ -20,9 +20,9 @@
     </elements>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.12848c091be.25" id="visual.12848c09160.76" name="Browse"/>
   </scopes>
-  <schemas id="domain.128488dc790.9" name="schema" inSchemas="domain.128488dc790.b">
-    <attributes id="model.12848b28bda.c" name="attribute 1"/>
-    <attributes id="model.12848b28bda.e" name="attribute 2"/>
+  <schemas name="schema" id="domain.128488dc790.9" inSchemas="domain.128488dc790.b">
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="attribute 1" id="model.12848b28bda.c"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="attribute 2" id="model.12848b28bda.e"/>
   </schemas>
   <sources id="domain.128488dc790.7" name="database" outSchemas="domain.128488dc790.b" inSelects="domain.12848bd2832.1e domain.12848c092b8.95"/>
   <xsdDataTypes name="xsd:integer" id="xsd_integer">

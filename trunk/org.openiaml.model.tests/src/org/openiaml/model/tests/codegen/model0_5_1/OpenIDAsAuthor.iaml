@@ -48,9 +48,9 @@
       </children>
     </children>
   </scopes>
-  <schemas id="domain.128807fbeba.f76" name="Post" inSchemas="domain.128807fbeba.f78">
-    <attributes id="model.128240e31d2.f53" name="title"/>
-    <attributes id="model.128240e31d2.f55" name="author" type="builtin_iamlOpenIDURL"/>
+  <schemas name="Post" id="domain.128807fbeba.f76" inSchemas="domain.128807fbeba.f78">
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="title" id="model.128240e31d2.f53"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="author" eType="builtin_iamlOpenIDURL" id="model.128240e31d2.f55"/>
   </schemas>
   <sources id="domain.128807fbeba.f77" outSchemas="domain.128807fbeba.f78" inSelects="domain.128807fbeba.f79 domain.128807fbeba.f7a">
     <schemaEdges id="domain.128807fbeba.f78" from="domain.128807fbeba.f77" to="domain.128807fbeba.f76"/>

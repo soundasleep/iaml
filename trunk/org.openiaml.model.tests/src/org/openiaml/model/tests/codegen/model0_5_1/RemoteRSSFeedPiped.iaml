@@ -10,10 +10,10 @@
     </children>
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.128236bedbd.20" name="Details" inWires="wires.128236bedbd.2e"/>
-  <schemas id="domain.128807fbeba.f13" name="Remote Event Listing" inSchemas="domain.128807fbeba.f15">
-    <attributes id="model.1281f69878a.3b" name="title"/>
-    <attributes id="model.1281f69878a.3d" name="description"/>
-    <attributes id="model.1281f74c8dd.df" name="pubDate" type="builtin_iamlDateTime"/>
+  <schemas name="Remote Event Listing" id="domain.128807fbeba.f13" inSchemas="domain.128807fbeba.f15">
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="title" id="model.1281f69878a.3b"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="description" id="model.1281f69878a.3d"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="pubDate" eType="builtin_iamlDateTime" id="model.1281f74c8dd.df"/>
   </schemas>
   <sources id="domain.128807fbeba.f14" type="RSS2_0" outSchemas="domain.128807fbeba.f15" inSelects="domain.128807fbeba.f16" url="http://openiaml.org/publications/rss_sample.xml" cache="3600">
     <schemaEdges id="domain.128807fbeba.f15" from="domain.128807fbeba.f14" to="domain.128807fbeba.f13"/>

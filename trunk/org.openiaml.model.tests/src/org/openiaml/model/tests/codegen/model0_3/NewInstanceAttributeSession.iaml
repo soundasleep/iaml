@@ -13,11 +13,11 @@
       <children xsi:type="iaml.visual:InputTextField" inWires="wires.1213cee9bad.52" id="visual.1213cee9bad.ad" name="edit new name"/>
     </scopes>
   </scopes>
-  <schemas id="domain.128807fbeba.d2b" name="User" inSchemas="domain.128807fbeba.d2d">
-    <attributes id="model.1213cee9b4f.50" name="id" primaryKey="true"/>
-    <attributes id="model.1213cee9b4f.57" name="name" inExtendsEdges="wires.128665d425c.b0"/>
-    <attributes id="model.1213cee9b4f.58" name="email"/>
-    <attributes id="model.1213cee9b4f.59" name="password"/>
+  <schemas name="User" id="domain.128807fbeba.d2b" inSchemas="domain.128807fbeba.d2d">
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="id" id="model.1213cee9b4f.50" primaryKey="true"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="name" id="model.1213cee9b4f.57" inExtendsEdges="wires.128665d425c.b0"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="email" id="model.1213cee9b4f.58"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="password" id="model.1213cee9b4f.59"/>
   </schemas>
   <sources id="domain.128807fbeba.d2c" outSchemas="domain.128807fbeba.d2d" inSelects="domain.128807fbeba.d2f">
     <schemaEdges id="domain.128807fbeba.d2d" from="domain.128807fbeba.d2c" to="domain.128807fbeba.d2b"/>

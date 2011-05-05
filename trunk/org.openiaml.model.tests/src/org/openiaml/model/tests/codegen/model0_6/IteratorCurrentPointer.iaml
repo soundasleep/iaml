@@ -16,9 +16,9 @@
     </children>
     <children xsi:type="iaml.visual:InputForm" inWires="wires.12f948872c2.1" id="visual.12f948872b2.30" name="current instance"/>
   </scopes>
-  <schemas id="domain.12f76d0c47d.1" name="Blog" inSchemas="domain.12f76dc4258.8">
-    <attributes id="model.12f76d0c22b.19" name="title"/>
-    <attributes id="model.12f76d0c22b.1b" name="content"/>
+  <schemas name="Blog" id="domain.12f76d0c47d.1" inSchemas="domain.12f76dc4258.8">
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="title" id="model.12f76d0c22b.19"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="content" id="model.12f76d0c22b.1b"/>
   </schemas>
   <sources id="domain.12f76da5174.8" name="blog db" outSchemas="domain.12f76dc4258.8" inSelects="domain.12f948872d2.7b">
     <schemaEdges id="domain.12f76dc4258.8" from="domain.12f76da5174.8" to="domain.12f76d0c47d.1"/>

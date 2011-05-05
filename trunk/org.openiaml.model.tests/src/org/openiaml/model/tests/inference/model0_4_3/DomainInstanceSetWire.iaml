@@ -19,10 +19,10 @@
       <actions id="wires.126cf449ab2.3" name="click" from="visual.126cf4499f6.27" to="model.126cf449831.1c"/>
     </children>
   </scopes>
-  <schemas id="domain.128807fbeba.f28" name="Product" inSchemas="domain.128807fbeba.f2a">
-    <attributes id="model.126ceb68565.9a" name="id"/>
-    <attributes id="model.126ceb68565.a0" name="name"/>
-    <attributes id="model.126ceb68565.a1" name="price"/>
+  <schemas name="Product" id="domain.128807fbeba.f28" inSchemas="domain.128807fbeba.f2a">
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="id" id="model.126ceb68565.9a"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="name" id="model.126ceb68565.a0"/>
+    <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" name="price" id="model.126ceb68565.a1"/>
   </schemas>
   <sources id="domain.128807fbeba.f29" outSchemas="domain.128807fbeba.f2a" inSelects="domain.128807fbeba.f2b domain.128807fbeba.f2c">
     <schemaEdges id="domain.128807fbeba.f2a" from="domain.128807fbeba.f29" to="domain.128807fbeba.f28"/>

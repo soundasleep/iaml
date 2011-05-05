@@ -61,7 +61,7 @@
       </elements>
     </scopes>
   </scopes>
-  <schemas xsi:type="iaml.users:Role" id="domain.128807fbeba.e9f" name="default role" outParameterEdges="wires.1233b53a3ce.5a" inSchemas="domain.128807fbeba.ea1" inRequiresEdges="wires.1233afe62eb.2d">
+  <schemas xsi:type="iaml.users:Role" name="default role" id="domain.128807fbeba.e9f" outParameterEdges="wires.1233b53a3ce.5a" inSchemas="domain.128807fbeba.ea1" inRequiresEdges="wires.1233afe62eb.2d">
     <parameterEdges id="wires.1233b53a3ce.5a" from="domain.128807fbeba.e9f" to="components.1233b53a67e.19"/>
     <permissions id="users.1233b53a814.6f" name="permission 1" outParameterEdges="wires.1233b53a3ce.ab wires.1233b53a3ce.16d" inRequiresEdges="wires.1233b53a3ce.453">
       <parameterEdges id="wires.1233b53a3ce.ab" from="users.1233b53a814.6f" to="wires.1233b53a3ce.a6"/>
@@ -69,11 +69,11 @@
     </permissions>
     <permissions id="users.1233b53a814.70" name="inherited permission with role" inRequiresEdges="wires.1233b53a3ce.544" inProvidesEdges="wires.1233b53a3ce.36"/>
   </schemas>
-  <schemas xsi:type="iaml.users:Role" id="domain.128807fbeba.ea2" name="additional role 1" outParameterEdges="wires.1233b53a3ce.a9 wires.1233b53a3ce.16a" inSchemas="domain.128807fbeba.ea4" inRequiresEdges="wires.1233b53a3ce.23a">
+  <schemas xsi:type="iaml.users:Role" name="additional role 1" id="domain.128807fbeba.ea2" outParameterEdges="wires.1233b53a3ce.a9 wires.1233b53a3ce.16a" inSchemas="domain.128807fbeba.ea4" inRequiresEdges="wires.1233b53a3ce.23a">
     <parameterEdges id="wires.1233b53a3ce.a9" from="domain.128807fbeba.ea2" to="wires.1233b53a3ce.a8"/>
     <parameterEdges id="wires.1233b53a3ce.16a" from="domain.128807fbeba.ea2" to="wires.1233b53a3ce.168"/>
   </schemas>
-  <schemas xsi:type="iaml.users:Role" id="domain.128807fbeba.ea5" name="additional role 2" outParameterEdges="wires.1233b53a3ce.aa wires.1233b53a3ce.16b" inSchemas="domain.128807fbeba.ea7" outProvidesEdges="wires.1233b53a3ce.36">
+  <schemas xsi:type="iaml.users:Role" name="additional role 2" id="domain.128807fbeba.ea5" outParameterEdges="wires.1233b53a3ce.aa wires.1233b53a3ce.16b" inSchemas="domain.128807fbeba.ea7" outProvidesEdges="wires.1233b53a3ce.36">
     <parameterEdges id="wires.1233b53a3ce.aa" from="domain.128807fbeba.ea5" to="wires.1233b53a3ce.a7"/>
     <parameterEdges id="wires.1233b53a3ce.16b" from="domain.128807fbeba.ea5" to="wires.1233b53a3ce.169"/>
     <providesEdges id="wires.1233b53a3ce.36" from="domain.128807fbeba.ea5" to="users.1233b53a814.70"/>

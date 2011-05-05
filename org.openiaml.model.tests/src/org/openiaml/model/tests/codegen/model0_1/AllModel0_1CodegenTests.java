@@ -25,7 +25,6 @@ public class AllModel0_1CodegenTests {
 		suite.addTestSuite(SyncWiresPagesTestCase.class);
 		suite.addTestSuite(LoginHandlerKey.class);
 		suite.addTestSuite(SyncFieldApplicationElementProperty.class);
-		suite.addTestSuite(SyncWiresMultiple.class);
 		suite.addTestSuite(SyncWiresTestCase.class);
 
 		return suite;

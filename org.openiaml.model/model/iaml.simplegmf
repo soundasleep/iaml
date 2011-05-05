@@ -96,6 +96,7 @@
     <classifiers href="iaml.ecore#//EventTrigger"/>
     <classifiers href="iaml.ecore#//Property"/>
     <classifiers href="iaml.ecore#//PrimitiveCondition"/>
+    <classifiers href="iaml.ecore#//components/Gate"/>
     <properties xsi:type="sgmf:LabelBold" value="true"/>
     <properties xsi:type="sgmf:ForegroundColor" color="darkBlue"/>
   </labelConfigurations>
@@ -274,11 +275,10 @@
     <elements xsi:type="sgmf:ContainedNode" name="Property">
       <classifier href="iaml.ecore#//Property"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="EntryGate">
-      <classifier href="iaml.ecore#//components/EntryGate"/>
-    </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="ExitGate">
-      <classifier href="iaml.ecore#//components/ExitGate"/>
+    <elements xsi:type="sgmf:ContainedNode" name="Gate">
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Scope/entryGate"/>
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Scope/exitGate"/>
+      <classifier href="iaml.ecore#//components/Gate"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" id="" name="Button">
       <classifier href="iaml.ecore#//visual/Button"/>
@@ -712,11 +712,10 @@
     <elements xsi:type="sgmf:ContainedNode" name="AccessControlHandler">
       <classifier href="iaml.ecore#//components/AccessControlHandler"/>
     </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="ExitGate">
-      <classifier href="iaml.ecore#//components/ExitGate"/>
-    </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="EntryGate">
-      <classifier href="iaml.ecore#//components/EntryGate"/>
+    <elements xsi:type="sgmf:ContainedNode" name="Gate">
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Scope/entryGate"/>
+      <containmentFeatures xsi:type="ecore:EReference" href="iaml.ecore#//Scope/exitGate"/>
+      <classifier href="iaml.ecore#//components/Gate"/>
     </elements>
     <elements xsi:type="sgmf:ContainedEdge" name="SyncWire">
       <classifier href="iaml.ecore#//wires/SyncWire"/>

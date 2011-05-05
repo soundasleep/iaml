@@ -73,8 +73,7 @@ public class ParentNamesTestCase extends XmlTestCase {
 		// Frame
 		VisualPackage.eINSTANCE.getFrame(),
 		// Gate
-		ComponentsPackage.eINSTANCE.getEntryGate(),
-		ComponentsPackage.eINSTANCE.getExitGate(),
+		ComponentsPackage.eINSTANCE.getGate(),
 		// VisibleThing
 		VisualPackage.eINSTANCE.getInputForm(),
 		VisualPackage.eINSTANCE.getInputTextField(),
@@ -174,6 +173,7 @@ public class ParentNamesTestCase extends XmlTestCase {
 		ModelPackage.eINSTANCE.getEventTrigger(),
 		ModelPackage.eINSTANCE.getProperty(),
 		ModelPackage.eINSTANCE.getPrimitiveCondition(),
+		ComponentsPackage.eINSTANCE.getGate(),
 	};
 	
 	private static List<String> inst_getContainmentFeatureElements = null;

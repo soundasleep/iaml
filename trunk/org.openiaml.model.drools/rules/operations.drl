@@ -43,24 +43,6 @@ rule "Create 'update' operation for VisibleThings"
 end
 
 /**
- * @inference DomainAttribute,Operation
- *		All {@model DomainAttribute}s will contain an {@model Operation} named "update".
- */
-rule "Create 'update' operation for domain attribute"
-	when
-		f : DomainAttribute( )
-		not (Operation( eContainer == f, name=="update" ))
-				
-		eval ( handler.veto( f ))
-			
-	then
-		PrimitiveOperation operation = handler.generatedPrimitiveOperation(f, f);
-		handler.setName(operation, "update");
-		queue.add(operation, drools);
-		
-end
-
-/**
  * @inference DomainAttributeInstance,Operation
  *		All {@model DomainAttributeInstance}s will contain an {@model Operation} named "update".
  */

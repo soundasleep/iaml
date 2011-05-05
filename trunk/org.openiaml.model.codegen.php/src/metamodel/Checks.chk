@@ -25,7 +25,7 @@ context model::components::LoginHandler ERROR "A login handler of type USER must
 
 context model::components::LoginHandler ERROR "A login handler of type DOMAIN_OBJECT must have at least one incoming parameter of type DomainAttribute":
 	type != model::components::LoginHandlerTypes::DOMAIN_OBJECT ||
-	!inParameterEdges.from.typeSelect(model::DomainAttribute).isEmpty;
+	!inParameterEdges.from.typeSelect(domain::DomainAttribute).isEmpty;
 
 context model::components::LoginHandler ERROR "A login handler of type SECRET_KEY must have exactly one incoming parameter":
 	type != model::components::LoginHandlerTypes::SECRET_KEY ||
@@ -58,7 +58,7 @@ context model::wires::SyncWire ERROR "You cannot have a SyncWire connecting two 
 	model::Property.isInstance(to));
 	
 context model::domain::DomainSchema ERROR "You cannot have a DomainSchema called single_values (reserved word)" :
-	name != "single_values";
+	toString(name) != "single_values";
 	
 /**
  * Important: If this message changes, it must also be updated in org.openiaml.model.custom.actions.GenerateCodeAction#couldBePhantomEdges()
@@ -130,7 +130,7 @@ context model::PrimitiveOperation WARNING "Unknown primitive operation name '" +
 	(eContainer != null && model::domain::DomainIterator.isInstance(eContainer) && ((model::domain::DomainIterator) eContainer).skip == this) || 
 	(eContainer != null && model::domain::DomainIterator.isInstance(eContainer) && ((model::domain::DomainIterator) eContainer).jump == this) ||
 	(eContainer != null && model::VisibleThing.isInstance(eContainer) && name == "update") || 
-	(eContainer != null && model::DomainAttribute.isInstance(eContainer) && name == "update") || 
+	(eContainer != null && domain::DomainAttribute.isInstance(eContainer) && name == "update") || 
 	(eContainer != null && domain::DomainAttributeInstance.isInstance(eContainer) && name == "update") || 
 	(eContainer != null && model::VisibleThing.isInstance(eContainer) && name == "init") ||
 	
@@ -220,7 +220,7 @@ context model::wires::SyncWire ERROR "A SyncWire cannot connect to an Email" :
 	!model::scopes::Email.isInstance(from);
 
 context domain::DomainAttributeInstance ERROR "A DomainAttributeInstance must extend a DomainAttribute as its definition" :
-	!outExtendsEdges.to.typeSelect(model::DomainAttribute).isEmpty;
+	!outExtendsEdges.to.typeSelect(domain::DomainAttribute).isEmpty;
 	
 context model::domain::DomainSource ERROR "A DomainSource can only have one Schema" :
 	outSchemas.size <= 1;
@@ -263,11 +263,11 @@ context model::Property ERROR "Readonly Properties must have a default value set
  * words to also be column names. TODO IAML should instead allow all names, but
  * modify their runtime name if they are a reserved word (issue 211).
  */
-context model::DomainAttribute ERROR "Using a reserved SQL word for a DomainAttribute name" :
+context domain::DomainAttribute ERROR "Using a reserved SQL word for a DomainAttribute name" :
 	!{"alter", "analyze", "attach", "begin", "commit", "create", 
 	"delete", "detach", "drop", "end", "explain", "from", "group", "having", "indexed", 
 	"insert", "limit", "not", "on", "order", "pragma", "reindex", "release", "replace", 
-	"rollback", "savepoint", "select", "union", "update", "using", "vacuum", "where"}.contains(name.toLowerCase());
+	"rollback", "savepoint", "select", "union", "update", "using", "vacuum", "where"}.contains(toString(name).toLowerCase());
 
 /**
  * A 'login' ActionEdge for an AccessControlHandler should not be in the 

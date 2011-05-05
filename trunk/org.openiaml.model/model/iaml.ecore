@@ -1205,7 +1205,7 @@
       <eLiterals name="PROPERTIES_FILE" value="1"/>
       <eLiterals name="RSS2_0" value="2"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="DomainSchema" eSuperTypes="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass #//GeneratedElement #//GeneratesElements #//wires/ParameterEdgesSource #//wires/ExtendsEdgesSource #//wires/ExtendsEdgeDestination #//ContainsWires">
+    <eClassifiers xsi:type="ecore:EClass" name="DomainSchema" eSuperTypes="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass #//GeneratedElement #//GeneratesElements #//wires/ParameterEdgesSource #//wires/ExtendsEdgesSource #//wires/ExtendsEdgeDestination #//ContainsWires #//users/RequiresEdgesSource">
       <eStructuralFeatures xsi:type="ecore:EReference" name="inSchemas" upperBound="-1"
           eType="#//domain/SchemaEdge" eOpposite="#//domain/SchemaEdge/to"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="permissions" upperBound="-1"

@@ -13,6 +13,7 @@ import org.openiaml.model.model.*;	// for ModelPackage
 import org.openiaml.model.model.domain.*;
 import org.openiaml.model.model.wires.*;
 import org.openiaml.model.model.operations.*;
+import org.eclipse.emf.ecore.*;
 
 import org.openiaml.model.inference.*;		// for handler
 
@@ -62,7 +63,7 @@ rule "Refresh Iterator Object mappings"
 		DomainAttributeInstance attr = handler.generatedDomainAttributeInstance(instance, instance);
 		handler.setName(attr, attribute.getName());
 		# set type
-		handler.setType(attr, attribute.getType());
+		handler.setType(attr, (EDataType) attribute.getEType());
 		queue.add(attr, drools);
 		
 		# mark it as an extension

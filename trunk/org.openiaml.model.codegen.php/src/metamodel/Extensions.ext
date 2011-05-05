@@ -37,3 +37,13 @@ isAccessibleOnFrame(model::visual::Frame f, emf::EObject element) :
 isCastDestination(model::operations::DataFlowEdgeDestination this) :
 	model::Property.isInstance(this) ||
 	model::operations::TemporaryVariable.isInstance(this);
+	
+/**
+ * Extensions to satisfy OAW's bugs: EString cannot be used
+ * as a String, EBoolean cannot be used as a boolean.
+ */
+String toString(ecore::EString s) :
+	s.toString();
+
+boolean toBoolean(ecore::EBoolean b) :
+	b;

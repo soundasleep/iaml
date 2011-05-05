@@ -298,7 +298,7 @@ rule "'User' role contains a default attribute 'email'"
 	then
 		DomainAttribute attr = handler.generatedDomainAttribute(user, user);
 		handler.setName(attr, "email");
-		handler.setType(attr, type);
+		handler.setEType(attr, type);
 		queue.add(attr, drools);
 
 end
@@ -345,7 +345,7 @@ rule "A LoginHandler of type 'user' should have an incoming Role as a parameter,
 
 			// the store contains either the roles or the permissions
 			// referenced by the ACH; we only want one
-			obj : NamedElement ( ) and
+			obj : RequiresEdgesSource ( ) and
 			/*
 				TODO This code doesn't work - it allows two incoming Permission/Roles to create
 				multiple outgoing ParameterEdges.

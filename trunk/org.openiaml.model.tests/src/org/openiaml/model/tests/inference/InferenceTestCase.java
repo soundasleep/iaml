@@ -44,8 +44,6 @@ import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.WireDestination;
 import org.openiaml.model.model.WireSource;
 import org.openiaml.model.model.components.AccessControlHandler;
-import org.openiaml.model.model.components.EntryGate;
-import org.openiaml.model.model.components.ExitGate;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.domain.DomainAttribute;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
@@ -712,26 +710,6 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		return (AccessControlHandler) queryOne(root, "iaml:elements[iaml:name='" + string + "']");	
 	}
 	
-	/**
-	 * Assert that the given element contains the given
-	 * EntryGate.
-	 *
-	 * @return The element found
-	 */
-	public EntryGate assertHasEntryGate(Scope root, String string) throws JaxenException {
-		return (EntryGate) queryOne(root, "iaml:entryGate[iaml:name='" + string + "']");	
-	}
-	
-	/**
-	 * Assert that the given element contains the given
-	 * ExitGate.
-	 *
-	 * @return The element found
-	 */
-	public ExitGate assertHasExitGate(Scope root, String string) throws JaxenException {
-		return (ExitGate) queryOne(root, "iaml:exitGate[iaml:name='" + string + "']");	
-	}
-
 	/**
 	 * Assert that the given element contains the given
 	 * Frame.

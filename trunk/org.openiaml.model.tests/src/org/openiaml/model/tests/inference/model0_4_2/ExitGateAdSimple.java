@@ -9,7 +9,7 @@ import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
-import org.openiaml.model.model.components.ExitGate;
+import org.openiaml.model.model.components.Gate;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.FinishNode;
@@ -58,7 +58,8 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 		Frame ad = assertHasFrame(session, "Advertisement");
 		assertNotGenerated(ad);
 
-		ExitGate gate = assertHasExitGate(session, "View Ads Exit Gate");
+		Gate gate = session.getExitGate();
+		assertEquals("View Ads Exit Gate", gate.getName());
 		assertNotGenerated(gate);
 
 		ActionEdge nav = assertHasNavigateAction(session, gate, ad, "last");
@@ -77,7 +78,8 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 
 		Session session = assertHasSession(root, "Advertising Session");
 		Frame ad = assertHasFrame(session, "Advertisement");
-		ExitGate gate = assertHasExitGate(session, "View Ads Exit Gate");
+		Gate gate = session.getExitGate();
+		assertEquals("View Ads Exit Gate", gate.getName());
 
 		Button button = assertHasButton(ad, "Continue");
 		assertGenerated(button);
@@ -164,7 +166,8 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 		root = loadAndInfer(ExitGateAdSimple.class);
 
 		Session session = assertHasSession(root, "Advertising Session");
-		ExitGate gate = assertHasExitGate(session, "View Ads Exit Gate");
+		Gate gate = session.getExitGate();
+		assertEquals("View Ads Exit Gate", gate.getName());
 
 		// generated condition
 		CompositeCondition condition = assertHasCompositeCondition(session, "check View Ads Exit Gate");

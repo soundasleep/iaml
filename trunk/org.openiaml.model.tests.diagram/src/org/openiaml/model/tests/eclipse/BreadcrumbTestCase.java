@@ -7,7 +7,6 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.ui.IEditorPart;
-import org.openiaml.model.diagram.edit.parts.InternetApplicationChangePart;
 import org.openiaml.model.diagram.edit.parts.InternetApplicationEditPart;
 import org.openiaml.model.diagram.part.IamlDiagramEditor;
 

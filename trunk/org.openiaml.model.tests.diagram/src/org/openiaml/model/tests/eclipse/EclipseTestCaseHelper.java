@@ -9,6 +9,7 @@ import junit.framework.AssertionFailedError;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.gef.EditPart;
@@ -26,7 +27,6 @@ import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.Condition;
-import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.NamedElement;
@@ -34,6 +34,7 @@ import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.PrimitiveCondition;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
+import org.openiaml.model.model.domain.DomainAttribute;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.domain.DomainSchema;
@@ -184,6 +185,26 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * @param shortcutRequired
 	 * @return
 	 */
+	protected ShapeNodeEditPart assertHasRenderedENamedObject(DiagramDocumentEditor root,
+			Class<? extends ENamedElement> objectClass,
+			String name,
+			boolean checkShortcut,
+			boolean shortcutRequired) {
+		return assertHasRenderedENamedObject(root, objectClass, name, checkShortcut, shortcutRequired, null);
+	}
+	
+	/**
+	 * An abstract method which checks an editors children to see
+	 * if the editor contains a given model element, with the given
+	 * shortcut parameters.
+	 *
+	 * @param root the editor to search
+	 * @param objectClass the EObject class to look for
+	 * @param name the name of the NamedElement
+	 * @param checkShortcut
+	 * @param shortcutRequired
+	 * @return
+	 */
 	protected ShapeNodeEditPart assertHasRenderedNodeObject(DiagramDocumentEditor root,
 			Class<? extends DecisionNode> objectClass,
 			String name,
@@ -225,6 +246,56 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 					if (objectClass.isInstance(obj)) {
 						// check containing feature name
 						NamedElement e = (NamedElement) obj;
+						if (name == null || (e.getName() != null && e.getName().equals(name))) {
+							if (containingFeature == null || containingFeature.equals(obj.eContainingFeature())) {
+							assertNotNull(s);
+							return s;
+							}
+						}
+						found += e.getName() + "[" + obj.eContainingFeature() + "],";
+					}
+				}
+			}
+		}
+
+		// failed
+		fail("No " + objectClass.getSimpleName() + " named '" + name + "' found in editor " + root + " with containing feature '" + containingFeature + "'. Found: " + found);
+		return null;
+	}
+	
+	/**
+	 * An abstract method which checks an editors children to see
+	 * if the editor contains a given model element, with the given
+	 * shortcut parameters, contained with a given containment feature name.
+	 * 
+	 * <p>TODO remove containingFeatureName(String), and replace with containingFeature(EStructuralFeature).
+	 *
+	 * @param root the editor to search
+	 * @param objectClass the EObject class to look for
+	 * @param name the name of the NamedElement, or <code>null</code> to ignore
+	 * @param checkShortcut
+	 * @param shortcutRequired
+	 * @param containingFeature the containing feature, or <code>null</code> if this shouldn't be checked
+	 * @return
+	 */
+	protected ShapeNodeEditPart assertHasRenderedENamedObject(DiagramDocumentEditor root,
+			Class<? extends ENamedElement> objectClass,
+			String name,
+			boolean checkShortcut,
+			boolean shortcutRequired,
+			EStructuralFeature containingFeature) {
+		// debug
+		String found = "";
+
+		for (Object o : root.getDiagramEditPart().getChildren()) {
+			if (o instanceof ShapeNodeEditPart) {
+				ShapeNodeEditPart s = (ShapeNodeEditPart) o;
+				// check for shortcut status if necessary
+				if (!checkShortcut || isShortcut(s) == shortcutRequired) {
+					EObject obj = s.resolveSemanticElement();
+					if (objectClass.isInstance(obj)) {
+						// check containing feature name
+						ENamedElement e = (ENamedElement) obj;
 						if (name == null || (e.getName() != null && e.getName().equals(name))) {
 							if (containingFeature == null || containingFeature.equals(obj.eContainingFeature())) {
 							assertNotNull(s);
@@ -418,7 +489,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * @return
 	 */
 	public ShapeNodeEditPart assertHasDomainSchema(DiagramDocumentEditor root, String storeName) {
-		return assertHasRenderedNamedObject(root, DomainSchema.class, storeName, false, false);
+		return assertHasRenderedENamedObject(root, DomainSchema.class, storeName, false, false);
 	}
 
 	/**
@@ -455,7 +526,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * @return
 	 */
 	public ShapeNodeEditPart assertHasDomainAttribute(DiagramDocumentEditor root, String attrName, boolean checkShortcut, boolean shortcutRequired) {
-		return assertHasRenderedNamedObject(root, DomainAttribute.class, attrName, checkShortcut, shortcutRequired);
+		return assertHasRenderedENamedObject(root, DomainAttribute.class, attrName, checkShortcut, shortcutRequired);
 	}
 
 	/**
@@ -466,7 +537,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 * @return
 	 */
 	public ShapeNodeEditPart assertHasDomainSchema(DiagramDocumentEditor root, String objectName, boolean checkShortcut, boolean shortcutRequired) {
-		return assertHasRenderedNamedObject(root, DomainSchema.class, objectName, checkShortcut, shortcutRequired);
+		return assertHasRenderedENamedObject(root, DomainSchema.class, objectName, checkShortcut, shortcutRequired);
 	}
 
 	/**
@@ -829,7 +900,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 */
 	public ShapeNodeEditPart assertHasDomainSchema(
 			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
-		return assertHasRenderedNamedObject(editor, DomainSchema.class, name, true, shortcutRequired);
+		return assertHasRenderedENamedObject(editor, DomainSchema.class, name, true, shortcutRequired);
 	}
 
 	/**
@@ -850,7 +921,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	 */
 	public ShapeNodeEditPart assertHasDomainAttribute(
 			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
-		return assertHasRenderedNamedObject(editor, DomainAttribute.class, name, true, shortcutRequired);
+		return assertHasRenderedENamedObject(editor, DomainAttribute.class, name, true, shortcutRequired);
 	}
 
 	/**

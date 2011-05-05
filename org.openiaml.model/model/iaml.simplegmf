@@ -110,15 +110,15 @@
   <labelConfigurations name="Stereotype" readOnly="true" prefix=": " specialLabel="METACLASS_NAME">
     <properties xsi:type="sgmf:LabelUnderline" value="true"/>
   </labelConfigurations>
+  <labelConfigurations name="EType" readOnly="true" prefix="Type: " providedAtRuntime="true">
+    <classifiers href="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ETypedElement"/>
+    <feature xsi:type="ecore:EReference" href="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ETypedElement/eType"/>
+  </labelConfigurations>
   <labelConfigurations name="Type" readOnly="true" prefix="Type: " providedAtRuntime="true">
     <classifiers href="iaml.ecore#//domain/DomainAttributeInstance"/>
     <classifiers href="iaml.ecore#//visual/InputTextField"/>
     <classifiers href="iaml.ecore#//visual/Label"/>
     <feature xsi:type="ecore:EReference" href="iaml.ecore#//Changeable/type"/>
-  </labelConfigurations>
-  <labelConfigurations name="Type" readOnly="true" prefix="Type: " providedAtRuntime="true">
-    <classifiers href="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ETypedElement"/>
-    <feature xsi:type="ecore:EReference" href="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//ETypedElement/eType"/>
   </labelConfigurations>
   <labelConfigurations name="Type" readOnly="true" prefix="Type: " providedAtRuntime="true">
     <classifiers href="iaml.ecore#//operations/Parameter"/>
@@ -154,7 +154,6 @@
     <classifiers href="iaml.ecore#//Property"/>
     <classifiers href="iaml.ecore#//components/Gate"/>
     <classifiers href="iaml.ecore#//domain/DomainAttribute"/>
-    <feature xsi:type="ecore:EAttribute" href="iaml.ecore#//NamedElement/name"/>
     <properties xsi:type="sgmf:ForegroundColor" color="gray"/>
   </labelConfigurations>
   <palettes name="Domain Modelling">

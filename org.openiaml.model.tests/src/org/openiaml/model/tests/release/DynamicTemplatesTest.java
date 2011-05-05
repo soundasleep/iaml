@@ -132,6 +132,20 @@ public class DynamicTemplatesTest extends XmlTestCase {
 			replace.put("{template-types}", buffer.toString());
 		}
 		
+		// create {template-etypes}
+		{
+			StringBuffer buffer = new StringBuffer();
+			for (EClass cls : ParentNamesTestCase.getETypedElementClasses()) {
+				String node = cls.getName();
+				Class<?> resolved = cls.getInstanceClass();
+				String fqn = resolved.getPackage().getName() + "." + resolved.getSimpleName();
+				buffer.append(guilOpen).append("IF className=\"").append(node).append("Figure\"").append(guilClose).append("\n");
+				buffer.append(guilOpen).append("EXPAND getETypeName(\"").append(fqn).append("\", \"").append(node).append("\")").append(guilClose).append("\n");
+				buffer.append(guilOpen).append("ENDIF").append(guilClose).append("\n");
+			}
+			replace.put("{template-etypes}", buffer.toString());
+		}
+		
 		// create {template-stereotypes}
 		{
 			StringBuffer buffer = new StringBuffer();

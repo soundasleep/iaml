@@ -40,7 +40,7 @@ public class ParentNamesTestCase extends XmlTestCase {
 	 * one of these types are specified in {@link #PARENT_NAME_ELEMENTS}.
 	 */
 	private static final EClass[] PARENT_NAME_TYPES = new EClass[] {
-		ModelPackage.eINSTANCE.getDomainAttribute(),
+		DomainPackage.eINSTANCE.getDomainAttribute(),
 		DomainPackage.eINSTANCE.getDomainAttributeInstance(),
 		ModelPackage.eINSTANCE.getEventTrigger(),
 		ModelPackage.eINSTANCE.getOperation(),
@@ -57,7 +57,7 @@ public class ParentNamesTestCase extends XmlTestCase {
 	 */
 	private static final EClass[] PARENT_NAME_ELEMENTS = new EClass[] {
 		// DomainAttribute
-		ModelPackage.eINSTANCE.getDomainAttribute(),
+		DomainPackage.eINSTANCE.getDomainAttribute(),
 		// DomainAttributeInstance
 		DomainPackage.eINSTANCE.getDomainAttributeInstance(),
 		// EventTrigger
@@ -200,9 +200,8 @@ public class ParentNamesTestCase extends XmlTestCase {
 		OperationsPackage.eINSTANCE.getTemporaryVariable(),
 		ModelPackage.eINSTANCE.getProperty(),
 		OperationsPackage.eINSTANCE.getParameter(),
-		
+
 		// changeable
-		ModelPackage.eINSTANCE.getDomainAttribute(),
 		DomainPackage.eINSTANCE.getDomainAttributeInstance(),
 		VisualPackage.eINSTANCE.getInputTextField(),
 		VisualPackage.eINSTANCE.getLabel(),
@@ -231,11 +230,45 @@ public class ParentNamesTestCase extends XmlTestCase {
 	}
 	
 	/**
+	 * TODO Ideally this would be from some design document. This
+	 * is the list of all elements that we expect will contain 
+	 * parent name elements.
+	 */
+	private static final EClass[] ETYPED_ELEMENTS = new EClass[] {
+		// ETypedElements
+		DomainPackage.eINSTANCE.getDomainAttribute(),
+	};
+	
+	private static List<String> inst_getETypedElements = null;
+	
+	/**
+	 * Get a list of all elements that should have a eType label.
+	 * @see #getETypedElementClasses()
+	 */
+	public static List<String> getETypedElements() {
+		if (inst_getETypedElements == null) {
+			inst_getETypedElements = new ArrayList<String>();
+			for (EClass cls : ETYPED_ELEMENTS) {
+				inst_getETypedElements.add(cls.getName());
+			}
+		}
+		return inst_getETypedElements;
+	}
+	
+	/**
 	 * Get a list of all elements that should have a type label.
 	 * @see #getTypedElements()
 	 */
 	public static EClass[] getTypedElementClasses() {
 		return TYPED_ELEMENTS;
+	}
+	
+	/**
+	 * Get a list of all elements that should have a eType label.
+	 * @see #getETypedElements()
+	 */
+	public static EClass[] getETypedElementClasses() {
+		return ETYPED_ELEMENTS;
 	}
 	
 	/**
@@ -321,6 +354,16 @@ public class ParentNamesTestCase extends XmlTestCase {
 		
 		doTestAll("TypeFigure", getTypedElements(), "getTypedElements()", 
 				ignore);
+	}
+	
+	/**
+	 * Test to make sure that {@link #getETypedElements()} is
+	 * complete, based on the .gmfgraph.
+	 * 
+	 * @throws Exception
+	 */
+	public void testAllETypes() throws Exception {	
+		doTestAll("ETypeFigure", getETypedElements(), "getETypedElements()");
 	}
 
 	/**

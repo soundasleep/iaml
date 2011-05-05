@@ -4,9 +4,9 @@
 package org.openiaml.model.tests.inference.model0_5_3;
 
 import org.openiaml.model.model.ActionEdge;
-import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Property;
+import org.openiaml.model.model.domain.DomainAttribute;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
 import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;

@@ -6,11 +6,11 @@ package org.openiaml.model.tests.inference.model0_5_2;
 import org.openiaml.model.datatypes.BuiltinDataTypes;
 import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.Condition;
-import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.EXSDDataType;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Property;
+import org.openiaml.model.model.domain.DomainAttribute;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
 import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
@@ -62,9 +62,9 @@ public class IteratorListSetWire extends InferenceTestCase {
 		DomainAttribute title = assertHasDomainAttribute(news, "title");
 		DomainAttribute content = assertHasDomainAttribute(news, "content");
 
-		assertEquals(((EXSDDataType) id.getType()).getDefinition().getURI(), BuiltinDataTypes.getTypeInteger().getURI());
-		assertEquals(((EXSDDataType) title.getType()).getDefinition().getURI(), BuiltinDataTypes.getTypeString().getURI());
-		assertEquals(((EXSDDataType) content.getType()).getDefinition().getURI(), BuiltinDataTypes.getTypeString().getURI());
+		assertEquals(((EXSDDataType) id.getEType()).getDefinition().getURI(), BuiltinDataTypes.getTypeInteger().getURI());
+		assertEquals(((EXSDDataType) title.getEType()).getDefinition().getURI(), BuiltinDataTypes.getTypeString().getURI());
+		assertEquals(((EXSDDataType) content.getEType()).getDefinition().getURI(), BuiltinDataTypes.getTypeString().getURI());
 		
 	}
 	

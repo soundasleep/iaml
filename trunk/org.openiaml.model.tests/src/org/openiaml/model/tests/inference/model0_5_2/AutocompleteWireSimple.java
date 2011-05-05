@@ -4,15 +4,13 @@
 package org.openiaml.model.tests.inference.model0_5_2;
 
 import org.openiaml.model.datatypes.BuiltinDataTypes;
-import org.openiaml.model.drools.DroolsHelperFunctions;
 import org.openiaml.model.model.ActionEdge;
-import org.openiaml.model.model.Changeable;
 import org.openiaml.model.model.Condition;
-import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.EXSDDataType;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Property;
+import org.openiaml.model.model.domain.DomainAttribute;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
 import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;

@@ -8,7 +8,6 @@ import java.util.Set;
 
 import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.CompositeOperation;
-import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.PrimitiveCondition;
@@ -16,6 +15,7 @@ import org.openiaml.model.model.Property;
 import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.components.LoginHandlerTypes;
+import org.openiaml.model.model.domain.DomainAttribute;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
 import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;

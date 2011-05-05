@@ -10,7 +10,9 @@ import java.util.Set;
 
 import junit.framework.AssertionFailedError;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xsd.XSDSimpleTypeDefinition;
 import org.jaxen.JaxenException;
@@ -27,7 +29,6 @@ import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsProperties;
-import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DynamicApplicationElementSet;
 import org.openiaml.model.model.EXSDDataType;
 import org.openiaml.model.model.InternetApplication;
@@ -46,6 +47,7 @@ import org.openiaml.model.model.components.AccessControlHandler;
 import org.openiaml.model.model.components.EntryGate;
 import org.openiaml.model.model.components.ExitGate;
 import org.openiaml.model.model.components.LoginHandler;
+import org.openiaml.model.model.domain.DomainAttribute;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
 import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
@@ -339,7 +341,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public DomainAttribute assertHasDomainAttribute(DomainSchema obj,
 			String string) throws JaxenException {
-		return (DomainAttribute) queryOne(obj, "iaml.domain:attributes[iaml:name='" + string + "']");
+		List<Object> list = nameSelect(typeSelect(obj.getEStructuralFeatures(), DomainAttribute.class), string);
+		assertEquals(1, list.size());
+		return (DomainAttribute) list.get(0);
 	}
 
 	/**
@@ -347,7 +351,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * DomainAttribute.
 	 */
 	public void assertHasNoDomainAttribute(DomainSchema element, String string) throws JaxenException {
-		List<Object> results = nameSelect(typeSelect(element.getAttributes(), DomainAttribute.class), string);
+		List<Object> results = nameSelect(typeSelect(element.getEStructuralFeatures(), DomainAttribute.class), string);
 		assertEquals(0, results.size());
 	}
 
@@ -359,7 +363,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public DomainAttributeInstance assertHasDomainAttributeInstance(Scope obj,
 			String string) throws JaxenException {
-		return (DomainAttributeInstance) queryOne(obj, "iaml:elements[iaml:name='" + string + "']");
+		List<Object> list = nameSelect(typeSelect(obj.getElements(), DomainAttributeInstance.class), string);
+		assertEquals(1, list.size());
+		return (DomainAttributeInstance) list.get(0);
 	}
 
 	/**
@@ -370,7 +376,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public DomainAttributeInstance assertHasDomainAttributeInstance(InternetApplication obj,
 			String string) throws JaxenException {
-		return (DomainAttributeInstance) queryOne(obj, "iaml:elements[iaml:name='" + string + "']");
+		List<Object> list = nameSelect(typeSelect(obj.getElements(), DomainAttributeInstance.class), string);
+		assertEquals(1, list.size());
+		return (DomainAttributeInstance) list.get(0);
 	}
 	
 	/**
@@ -381,18 +389,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public DomainAttributeInstance assertHasDomainAttributeInstance(DomainInstance obj,
 			String string) throws JaxenException {
-		return (DomainAttributeInstance) queryOne(obj, "iaml.domain:featureInstances[iaml:name='" + string + "']");
-	}
-
-	/**
-	 * Assert that the given element does not contain the given
-	 * DomainAttributeInstance.
-	 *
-	 * @return The element found
-	 */
-	public void assertHasNoDomainAttributeInstance(ApplicationElement obj,
-			String string) throws JaxenException {
-		assertHasNone(obj, "iaml:children[iaml:name='" + string + "']");
+		List<Object> list = nameSelect(typeSelect(obj.getFeatureInstances(), DomainAttributeInstance.class), string);
+		assertEquals(1, list.size());
+		return (DomainAttributeInstance) list.get(0);
 	}
 
 	/**
@@ -403,7 +402,8 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public void assertHasNoDomainAttributeInstance(InternetApplication obj,
 			String string) throws JaxenException {
-		assertHasNone(obj, "iaml:children[iaml:name='" + string + "']");
+		List<Object> list = nameSelect(typeSelect(obj.getElements(), DomainAttributeInstance.class), string);
+		assertEquals(0, list.size());
 	}
 	
 	/**
@@ -414,7 +414,8 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 */
 	public void assertHasNoDomainAttributeInstance(DomainInstance obj,
 			String string) throws JaxenException {
-		assertHasNone(obj, "iaml.domain:featureInstances[iaml:name='" + string + "']");
+		List<Object> list = nameSelect(typeSelect(obj.getFeatureInstances(), DomainAttributeInstance.class), string);
+		assertEquals(0, list.size());
 	}
 
 	/**
@@ -424,7 +425,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public DomainSchema assertHasDomainSchema(InternetApplication store, String string) throws JaxenException {
-		return (DomainSchema) queryOne(store, "iaml:schemas[iaml:name='" + string + "']");
+		List<Object> list = nameSelect(store.getSchemas(), string);
+		assertEquals(1, list.size());
+		return (DomainSchema) list.get(0);
 	}
 	
 	/**
@@ -434,7 +437,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public Role assertHasRole(InternetApplication store, String string) throws JaxenException {
-		return (Role) queryOne(store, "iaml:schemas[iaml:name='" + string + "']");
+		List<Object> list = nameSelect(typeSelect(store.getSchemas(), Role.class), string);
+		assertEquals(1, list.size());
+		return (Role) list.get(0);
 	}
 	
 	/**
@@ -1223,6 +1228,17 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	}
 	
 	/**
+	 * Assert there exists <em>no</em> unidirectional ExtendsEdges between
+	 * the given elements.
+	 *
+	 * @return The element found
+	 */
+	public void assertHasNoExtendsEdge(EObject container, ExtendsEdgesSource from, ExtendsEdgeDestination to) throws JaxenException {
+		Set<ExtendsEdge> params = getExtendsEdgesFromTo(container, from, to);
+		assertEquals("Should be exactly no extends edges: " + params, 0, params.size());
+	}
+	
+	/**
 	 * Assert there exists only one unidirectional RequiresEdge between
 	 * the given elements.
 	 *
@@ -1651,6 +1667,8 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 				results.add(o);
 			} else if (o instanceof DecisionNode && ((DecisionNode) o).getName().equals(name)) {
 				results.add(o);
+			} else if (o instanceof ENamedElement && ((ENamedElement) o).getName().equals(name)) {
+				results.add(o);
 			}
 		}
 		
@@ -1721,7 +1739,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 			XSDSimpleTypeDefinition b) {
 		assertTrue(DroolsHelperFunctions.equalDataTypes(a, b));
 	}
-	
+		
 	/**
 	 * Are the two elements of the same type? That is, do their type URIs
 	 * match?
@@ -1744,6 +1762,33 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * Are the two elements of the same type? That is, do their type URIs
 	 * match?
 	 */
+	protected void assertEqualType(XSDSimpleTypeDefinition a,
+			EClassifier b) {
+		assertEqualType(a, ((EXSDDataType) b).getDefinition());
+	}
+	
+	/**
+	 * Are the two elements of the same type? That is, do their type URIs
+	 * match?
+	 */
+	protected void assertEqualType(EClassifier a,
+			XSDSimpleTypeDefinition b) {
+		assertEqualType(b, ((EXSDDataType) a).getDefinition());
+	}
+	
+	/**
+	 * Are the two elements of the same type? That is, do their type URIs
+	 * match?
+	 */
+	protected void assertEqualType(EClassifier a,
+			EClassifier b) {
+		assertEqualType(((EXSDDataType) a).getDefinition(), ((EXSDDataType) b).getDefinition());
+	}
+	
+	/**
+	 * Are the two elements of the same type? That is, do their type URIs
+	 * match?
+	 */
 	protected void assertEqualType(Changeable a,
 			Changeable b) {
 		assertTrue(equalType(a.getType(), b.getType()));
@@ -1756,6 +1801,33 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	protected void assertEqualType(Property a,
 			Changeable b) {
 		assertTrue(equalType(a.getType(), b.getType()));
+	}
+	
+	/**
+	 * Are the two elements of the same type? That is, do their type URIs
+	 * match?
+	 */
+	protected void assertEqualType(Property a,
+			DomainAttribute b) {
+		assertTrue(equalType(a.getType(), (EXSDDataType) b.getEType()));
+	}
+	
+	/**
+	 * Are the two elements of the same type? That is, do their type URIs
+	 * match?
+	 */
+	protected void assertEqualType(DomainAttribute a,
+			DomainAttribute b) {
+		assertEqualType(a.getEType(), b.getEType());
+	}
+	
+	/**
+	 * Are the two elements of the same type? That is, do their type URIs
+	 * match?
+	 */
+	protected void assertEqualType(DomainAttribute a,
+			Changeable b) {
+		assertEqualType(a.getEType(), b.getType());
 	}
 	
 	/**
@@ -1783,6 +1855,24 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	protected void assertNotEqualType(Changeable a,
 			Changeable b) {
 		assertFalse(equalType(a.getType(), b.getType()));
+	}
+	
+	/**
+	 * Are the two elements <em>not</em> of the same type? That is, do their type URIs
+	 * not match?
+	 */
+	protected void assertNotEqualType(DomainAttribute a,
+			Changeable b) {
+		assertFalse(equalType((EXSDDataType) a.getEType(), b.getType()));
+	}
+	
+	/**
+	 * Are the two elements <em>not</em> of the same type? That is, do their type URIs
+	 * not match?
+	 */
+	protected void assertNotEqualType(DomainAttribute a,
+			DomainAttribute b) {
+		assertFalse(equalType((EXSDDataType) a.getEType(), (EXSDDataType) b.getEType()));
 	}
 	
 }

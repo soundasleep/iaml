@@ -3,7 +3,7 @@
  */
 package org.openiaml.model.tests.codegen.functions;
 
-import org.openiaml.model.model.DomainAttribute;
+import org.openiaml.model.model.domain.DomainAttribute;
 import org.openiaml.model.model.domain.DomainSchema;
 
 /**

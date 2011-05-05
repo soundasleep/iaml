@@ -24,8 +24,6 @@ public class AllModel0_1InferenceTests {
 
         suite.addTestSuite(LoadModelTestCase.class);
         suite.addTestSuite(SyncWireTestCase.class);
-        suite.addTestSuite(SyncFormDomainObject.class);
-        suite.addTestSuite(SyncWiresProperties.class);
         
 		return suite;
 	}

@@ -4,9 +4,8 @@
 package org.openiaml.model.tests.inference.model0_5_1;
 
 import org.openiaml.model.datatypes.BuiltinDataTypes;
-import org.openiaml.model.model.DomainAttribute;
-import org.openiaml.model.model.EXSDDataType;
 import org.openiaml.model.model.Property;
+import org.openiaml.model.model.domain.DomainAttribute;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
 import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
@@ -42,11 +41,11 @@ public class ViewDatabaseTypes extends InferenceTestCase {
 		DomainAttribute aEmail = assertHasDomainAttribute(obj, "email");
 		DomainAttribute aAddress = assertHasDomainAttribute(obj, "address");
 		
-		assertEqualType(aString.getType(), BuiltinDataTypes.getTypeString());
-		assertEqualType(aInteger.getType(), BuiltinDataTypes.getTypeInteger());
-		assertEqualType(aDate.getType(), BuiltinDataTypes.getTypeDateTime());
-		assertEqualType(aEmail.getType(), BuiltinDataTypes.getTypeEmail());
-		assertEqualType(aAddress.getType(), BuiltinDataTypes.getTypeAddress());
+		assertEqualType(aString.getEType(), BuiltinDataTypes.getTypeString());
+		assertEqualType(aInteger.getEType(), BuiltinDataTypes.getTypeInteger());
+		assertEqualType(aDate.getEType(), BuiltinDataTypes.getTypeDateTime());
+		assertEqualType(aEmail.getEType(), BuiltinDataTypes.getTypeEmail());
+		assertEqualType(aAddress.getEType(), BuiltinDataTypes.getTypeAddress());
 		
 		assertNotGenerated(obj);
 		assertNotGenerated(aString);

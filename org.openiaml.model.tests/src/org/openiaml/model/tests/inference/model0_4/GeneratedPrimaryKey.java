@@ -3,8 +3,8 @@
  */
 package org.openiaml.model.tests.inference.model0_4;
 
-import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.InternetApplication;
+import org.openiaml.model.model.domain.DomainAttribute;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.tests.inference.EclipseInheritanceInterface;
 
@@ -25,7 +25,7 @@ public class GeneratedPrimaryKey extends EclipseInheritanceInterface {
 	@Override
 	public void checkNotInferredKnowledge(InternetApplication root) throws Exception {
 		DomainSchema ds = assertHasDomainSchema(root, "domain object");
-		assertEquals(0, ds.getAttributes().size());
+		assertEquals(0, ds.getEStructuralFeatures().size());
 
 	}
 
@@ -33,8 +33,8 @@ public class GeneratedPrimaryKey extends EclipseInheritanceInterface {
 	public void checkInferredKnowledge(InternetApplication root) throws Exception {
 
 		DomainSchema ds = assertHasDomainSchema(root, "domain object");
-		assertEquals(1, ds.getAttributes().size());
-		DomainAttribute generated = ds.getAttributes().get(0);
+		assertEquals(1, ds.getEStructuralFeatures().size());
+		DomainAttribute generated = (DomainAttribute) ds.getEStructuralFeatures().get(0);
 		assertEquals("generated primary key", generated.getName());
 		assertGenerated(generated);
 		assertTrue(generated.isPrimaryKey());

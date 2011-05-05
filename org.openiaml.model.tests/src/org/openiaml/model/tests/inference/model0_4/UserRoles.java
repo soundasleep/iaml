@@ -6,7 +6,6 @@ package org.openiaml.model.tests.inference.model0_4;
 import org.openiaml.model.datatypes.BuiltinDataTypes;
 import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.CompositeOperation;
-import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.EXSDDataType;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
@@ -15,6 +14,7 @@ import org.openiaml.model.model.Property;
 import org.openiaml.model.model.components.AccessControlHandler;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.components.LoginHandlerTypes;
+import org.openiaml.model.model.domain.DomainAttribute;
 import org.openiaml.model.model.domain.DomainIterator;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.FinishNode;
@@ -384,7 +384,7 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(password);
 		
 		// check the types
-		assertEqualType(BuiltinDataTypes.getTypeEmail(), ((EXSDDataType) email.getType()).getDefinition());
+		assertEqualType(BuiltinDataTypes.getTypeEmail(), ((EXSDDataType) email.getEType()).getDefinition());
 		// TODO password needs to have iamlPassword data type
 
 	}
@@ -417,11 +417,11 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(assertHasExtendsEdge(root, password2, password));
 
 		// none the other way around
-		assertHasNoWiresFromTo(root, email, email2);
-		assertHasNoWiresFromTo(root, password, password2);
-		assertHasNoWiresFromTo(root, email, email);
-		assertHasNoWiresFromTo(root, email, password);
-		assertHasNoWiresFromTo(root, password2, email);
+		assertHasNoExtendsEdge(root, email, email2);
+		assertHasNoExtendsEdge(root, password, password2);
+		assertHasNoExtendsEdge(root, email, email);
+		assertHasNoExtendsEdge(root, email, password);
+		assertHasNoExtendsEdge(root, password2, email);
 
 	}
 
@@ -451,13 +451,13 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(assertHasExtendsEdge(root, fk, source_id));
 
 		// and none between the PK and PK
-		assertHasNoWiresFromTo(root, id, source_id);
-		assertHasNoWiresFromTo(root, source_id, id);
+		assertHasNoExtendsEdge(root, id, source_id);
+		assertHasNoExtendsEdge(root, source_id, id);
 		
 		// check the types of the keys
-		assertEqualType(BuiltinDataTypes.getTypeInteger(), ((EXSDDataType) id.getType()).getDefinition());
+		assertEqualType(BuiltinDataTypes.getTypeInteger(), ((EXSDDataType) id.getEType()).getDefinition());
 		assertEqualType(id, fk);
-		assertEqualType(BuiltinDataTypes.getTypeInteger(), ((EXSDDataType) fk.getType()).getDefinition());
+		assertEqualType(BuiltinDataTypes.getTypeInteger(), ((EXSDDataType) fk.getEType()).getDefinition());
 
 	}
 

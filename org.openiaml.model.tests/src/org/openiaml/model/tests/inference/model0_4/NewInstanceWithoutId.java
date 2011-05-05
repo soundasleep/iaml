@@ -6,8 +6,8 @@ package org.openiaml.model.tests.inference.model0_4;
 import junit.framework.AssertionFailedError;
 
 import org.openiaml.model.datatypes.BuiltinDataTypes;
-import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.EXSDDataType;
+import org.openiaml.model.model.domain.DomainAttribute;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.tests.inference.ValidInferenceTestCase;
 
@@ -56,7 +56,7 @@ public class NewInstanceWithoutId extends ValidInferenceTestCase {
 		DomainAttribute pk = assertHasDomainAttribute(schema, "generated primary key");
 		assertTrue(pk.isPrimaryKey());
 		assertEquals(BuiltinDataTypes.getTypeInteger().getURI(), 
-				((EXSDDataType) pk.getType()).getDefinition().getURI());
+				((EXSDDataType) pk.getEType()).getDefinition().getURI());
 		
 		// check that assertHasNoDomainAttribute() works
 		try {

@@ -5,11 +5,12 @@ package org.openiaml.model.drools;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xsd.XSDSimpleTypeDefinition;
 import org.jaxen.JaxenException;
 import org.openiaml.model.model.ActionEdge;
-import org.openiaml.model.model.DomainAttribute;
 import org.openiaml.model.model.DynamicApplicationElementSet;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
@@ -20,6 +21,7 @@ import org.openiaml.model.model.Property;
 import org.openiaml.model.model.Scope;
 import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.components.LoginHandler;
+import org.openiaml.model.model.domain.DomainAttribute;
 import org.openiaml.model.model.domain.DomainPackage;
 import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;
@@ -186,7 +188,12 @@ public class DroolsHelperFunctions {
 	 */
 	public String getUserQueryString(Role role) {
 		String q = "";
-		for (DomainAttribute attribute : role.getAttributes()) {
+		for (EStructuralFeature feature : role.getEStructuralFeatures()) {
+			if (!(feature instanceof DomainAttribute))
+				continue;
+			
+			DomainAttribute attribute = (DomainAttribute) feature; 
+			
 			// ignore primary keys
 			if (notPrimaryKey(attribute)) {
 				// ignore attributes which are extensions of other attributes;
@@ -238,7 +245,23 @@ public class DroolsHelperFunctions {
 	}
 
 	public boolean nameMatches(NamedElement e1, NamedElement e2) {
-		return e1.getName().toLowerCase().equals(e2.getName().toLowerCase());
+		return nameMatches(e1.getName(), e2.getName());
+	}
+
+	public boolean nameMatches(ENamedElement e1, NamedElement e2) {
+		return nameMatches(e1.getName(), e2.getName());
+	}
+
+	public boolean nameMatches(NamedElement e1, ENamedElement e2) {
+		return nameMatches(e1.getName(), e2.getName());
+	}
+	
+	public boolean nameMatches(ENamedElement e1, ENamedElement e2) {
+		return nameMatches(e1.getName(), e2.getName());
+	}
+
+	public boolean nameMatches(String e1, String e2) {
+		return e1.toLowerCase().equals(e2.toLowerCase());
 	}
 
 	/**

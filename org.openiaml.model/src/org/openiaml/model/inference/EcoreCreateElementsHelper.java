@@ -3,9 +3,12 @@
  */
 package org.openiaml.model.inference;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.openiaml.model.FileReference;
 import org.openiaml.model.model.Accessible;
@@ -623,6 +626,10 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setValue(element, ModelPackage.eINSTANCE.getNamedElement_Name(), value);
 	}
 
+	public void setName(ENamedElement element, String value) throws InferenceException {
+		setValue(element, EcorePackage.eINSTANCE.getENamedElement_Name(), value);
+	}
+
 	public void setName(DecisionNode element, String value) throws InferenceException {
 		setValue(element, OperationsPackage.eINSTANCE.getDecisionNode_Name(), value);
 	}
@@ -653,6 +660,10 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 	
 	public void setType(Changeable element, EDataType value) throws InferenceException {
 		setValue(element, ModelPackage.eINSTANCE.getChangeable_Type(), value);
+	}
+
+	public void setEType(ETypedElement element, EClassifier value) throws InferenceException {
+		setValue(element, EcorePackage.eINSTANCE.getETypedElement_EType(), value);
 	}
 
 	public void setQuery(DomainIterator element, String value) throws InferenceException {

@@ -15,6 +15,8 @@ import org.openiaml.model.model.operations.*;
 import org.openiaml.model.model.scopes.*;
 import org.openiaml.model.model.domain.*;
 
+import org.eclipse.emf.ecore.*;
+
 #declare any global variables here
 global OverridableCreateElementsHelper handler;
 global DroolsInsertionQueue queue;
@@ -653,7 +655,7 @@ rule "Refresh Domain Object mappings (except for generated primary keys) when sy
 		# create a new one
 		InputTextField text = handler.generatedInputTextField(sync, form);
 		handler.setName(text, attribute.getName());
-		handler.setType(text, attribute.getType());
+		handler.setType(text, (EDataType) attribute.getEType());
 		queue.add(text, drools);
 
 end

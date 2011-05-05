@@ -204,7 +204,6 @@ if (file_exists(CUSTOM_PATH . "templates/header/" . $body_id . ".php")) {
 	<!-- TODO we should remove this once issue 43 is resolved -->
 	<div id="debug_monitors">
 		<div id="ajax_monitor"></div>
-		<div id="counter_store_db"></div>
 		<div id="counter_set_session"></div>
 		<div id="counter_set_application_value"></div>
 		<div id="counter_set_domain_attribute"></div>

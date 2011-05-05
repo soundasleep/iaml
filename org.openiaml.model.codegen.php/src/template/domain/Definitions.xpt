@@ -37,7 +37,7 @@
 		«EXPAND IterateDefinitions::iterateDefinitions FOREACH getRoot().getAllDomainIterators()»
 
 		«EXPAND domainSchemaDefinition FOREACH getRoot().getAllDomainSchemas()»
-		«EXPAND domainAttributeDefinition FOREACH getRoot().eAllContents.typeSelect(model::DomainAttribute)»
+		«EXPAND domainAttributeDefinition FOREACH getRoot().eAllContents.typeSelect(model::domain::DomainAttribute)»
 		«EXPAND domainSourceDefinition FOREACH getRoot().eAllContents.typeSelect(model::domain::DomainSource)»
 		«FOREACH sources AS source»
 			«FOREACH source.outSchemas.to AS schema»
@@ -163,11 +163,11 @@ class Permission_«safeName(p)» extends DomainAttribute {
  */
 class DomainSchema_«safeName()» extends DomainSchema {
 	private function __construct() {
-		«FOREACH attributes.select(a2|a2.outExtendsEdges.to.typeSelect(model::DomainAttribute).select(a|!a.primaryKey).isEmpty) AS a»
+		«FOREACH eStructuralFeatures.typeSelect(model::domain::DomainAttribute).select(a2|a2.outExtendsEdges.to.typeSelect(model::domain::DomainAttribute).select(a|!a.primaryKey).isEmpty) AS a»
 			$this->addAttribute(DomainAttribute_«safeName(a)»::getInstance());
 		«ENDFOREACH»
 		«IF model::users::Role.isInstance(this)»
-			«IF attributes.outExtendsEdges.to.eContainer.typeSelect(model::users::Role).isEmpty»
+			«IF eStructuralFeatures.typeSelect(model::domain::DomainAttribute).outExtendsEdges.to.eContainer.typeSelect(model::users::Role).isEmpty»
 				/* this Role does not extend any other Roles: we need to add a link to the root role */
 				$this->addAttribute(DomainAttribute_UserRole_Link::getInstance());
 			«ENDIF»
@@ -251,8 +251,12 @@ class HasRole_«safeName()»_«safeName(source)» extends DomainIterator {
 «ENDIF»
 «ENDDEFINE»
 
-«DEFINE domainAttributeDefinition FOR model::DomainAttribute»
-«IF !outExtendsEdges.to.typeSelect(model::DomainAttribute).select(a|!a.primaryKey).isEmpty»
+«DEFINE domainAttributeDefinition FOR ecore::EStructuralFeature»
+	«throwException("domainAttributeDefinition not yet implemented for generic EStructuralFeatures")»
+«ENDDEFINE»
+
+«DEFINE domainAttributeDefinition FOR model::domain::DomainAttribute»
+«IF !outExtendsEdges.to.typeSelect(model::domain::DomainAttribute).select(a|!a.primaryKey).isEmpty»
 	/* ignoring DomainAttribute '«escapeString(name)»': it is an extension of a non-primary key (i.e. derived) */
 «ELSE»
 /**
@@ -261,7 +265,7 @@ class HasRole_«safeName()»_«safeName(source)» extends DomainIterator {
 class DomainAttribute_«safeName()» extends DomainAttribute {
 	private function __construct() {
 		$this->isPrimaryKey = «primaryKey ? "true" : "false"»;
-		$this->type = «EXPAND template::operations::Parameters::getTypeURI FOR type»;
+		$this->type = «EXPAND template::operations::Parameters::getTypeURI FOR eType»;
 		$this->name = "«safeNameString(name)»";
 		
 		«FOREACH outExtendsEdges AS extends»

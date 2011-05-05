@@ -225,12 +225,26 @@
 
 /* we have a property to provide [in PHP] */
 «DEFINE staticInitialValue(model::visual::Frame currentFrame) FOR model::Property»
-	«IF containingSession(this) == null»
-		«REM»contained in a Frame or InternetApplication: a static value«ENDREM»
-		value="<?php echo htmlspecialchars(get_application_value("«safeNameString(id)»", "«escapeString(defaultValue)»")); ?>"
+	«IF defaultValue == null»
+		«IF containingSession(this) == null»
+			«REM»contained in a Frame or InternetApplication: a static value«ENDREM»
+			<?php if (get_application_value("«safeNameString(id)»", null) !== null) { ?>
+				value="<?php echo htmlspecialchars(get_application_value("«safeNameString(id)»", null)); ?>"
+			<?php } ?>
+		«ELSE»
+			«REM»contained in a Session: a session value«ENDREM»
+			<?php if (has_session("«safeName(containingSession(this))»_«safeNameString(id)»")) { ?>
+				value="<?php echo htmlspecialchars(require_session("«safeName(containingSession(this))»_«safeNameString(id)»")); ?>"
+			<?php } ?>
+		«ENDIF»
 	«ELSE»
-		«REM»contained in a Session: a session value«ENDREM»
-		value="<?php echo htmlspecialchars(require_session("«safeName(containingSession(this))»_«safeNameString(id)»", "«escapeString(defaultValue)»")); ?>"
+		«IF containingSession(this) == null»
+			«REM»contained in a Frame or InternetApplication: a static value«ENDREM»
+			value="<?php echo htmlspecialchars(get_application_value("«safeNameString(id)»", "«escapeString(defaultValue)»")); ?>"
+		«ELSE»
+			«REM»contained in a Session: a session value«ENDREM»
+			value="<?php echo htmlspecialchars(require_session("«safeName(containingSession(this))»_«safeNameString(id)»", "«escapeString(defaultValue)»")); ?>"
+		«ENDIF»
 	«ENDIF»
 «ENDDEFINE»
 

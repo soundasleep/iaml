@@ -91,6 +91,9 @@
 				/* type features */
 				{template-types}
 				
+				/* eType features */
+				{template-etypes}
+				
 				/* stereotype figures */
 				{template-stereotypes}
 				}
@@ -117,4 +120,20 @@
 	}
 	
 	getFigure«name»TypeFigure().setText("Type: " + typeName);
+«ENDDEFINE»
+
+«DEFINE getETypeName(String fqn, String name) FOR gmfgen::InnerClassViewmap-»
+	// we actually want the type name
+	String typeName = "???";
+	if (resolvedObject instanceof «fqn») {
+		«fqn» actual = («fqn») resolvedObject;
+		
+		if (actual.getEType() == null) {
+			typeName = "Any";
+		} else {
+			typeName = actual.getEType().getName();
+		}
+	}
+	
+	getFigure«name»ETypeFigure().setText("Type: " + typeName);
 «ENDDEFINE»

@@ -290,13 +290,6 @@
 						function_queue_queued = true;		// we are waiting for it to return to execute the function queue
 					«ENDIF»
 				}
-			«ELSEIF isDomainAttribute(eContainer)-»
-				«REM»direct field --> domain attribute«ENDREM»
-				store_db('«safeNameString(((model::DomainAttribute) eContainer).id)»',
-					value);
-
-				// set server/session variables too
-				«EXPAND OutgoingValues::outgoingValue((model::DomainAttribute) eContainer) FOR this»
 			«ELSEIF containingSession(this) == null»
 				«REM»contained in a Frame or InternetApplication: a static value«ENDREM»
 				set_application_value("«safeName(this)»", 
@@ -659,31 +652,6 @@
  *		A {@model DomainAttributeInstance} has a {@model PrimitiveOperation} named 'init'. 
  */
 «DEFINE updateOperationForContainer(Boolean php, model::PrimitiveOperation operation) FOR domain::DomainAttributeInstance»
-	«IF fieldValue == null»
-		«throwException("Cannot set a null fieldValue: " + this)»
-	«ENDIF»
-	/* 'update' PrimitiveOperation */
-	«IF php»
-		$arg0 = $default_arg;
-		«EXPAND setFieldValue(php) FOR fieldValue»
-	«ELSE»
-		var arg0 = default_arg;
-		«EXPAND setFieldValue(php) FOR fieldValue»
-	«ENDIF»
-
-	«IF operation.name == "update"»
-		// call outgoing event triggers (if any) 
-		«EXPAND chainedEventFlow(php) FOR fieldValue-»
-	«ENDIF»
-«ENDDEFINE»
-
-/**
- * @implementation DomainAttribute,PrimitiveOperation
- *		A {@model DomainAttribute} has a {@model PrimitiveOperation} named 'update'. 
- * @implementation DomainAttribute,PrimitiveOperation
- *		A {@model DomainAttribute} has a {@model PrimitiveOperation} named 'init'. 
- */
-«DEFINE updateOperationForContainer(Boolean php, model::PrimitiveOperation operation) FOR model::DomainAttribute»
 	«IF fieldValue == null»
 		«throwException("Cannot set a null fieldValue: " + this)»
 	«ENDIF»

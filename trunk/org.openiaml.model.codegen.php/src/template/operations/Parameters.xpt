@@ -75,7 +75,7 @@
 «DEFINE callParameterValue(Boolean php, Boolean inStoreDb) FOR model::Property»
 	«IF php»
 		«IF inStoreDb»
-			$arg0 /* we assume the value is already in $arg0; see store_db.php::expandDomainAttributeEvents */
+			$arg0 /* we assume the value is already in $arg0 */
 		«ELSE»
 			«REM»
 				values stored in sessions will not always be called 'fieldValue';
@@ -352,8 +352,8 @@
 /**
  * Getting definitions for types.
  */
-«DEFINE getTypeURI FOR ecore::EDataType»
-	«throwException("No support for EDataType")»
+«DEFINE getTypeURI FOR ecore::EClassifier»
+	«throwException("getTypeURI has not yet been implemented for EClassifier")»
 «ENDDEFINE»
 
 «DEFINE getTypeURI FOR model::EXSDDataType-»

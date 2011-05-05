@@ -103,11 +103,6 @@
 				«IF !inParameterEdges.isEmpty», «EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»«ENDIF»
 			);
 		«ENDIF-»		
-	«ELSEIF isDomainAttribute(to.eContainer)-»
-		«REM»direct field --> abstract domain attribute«ENDREM»
-		store_db('«safeNameString(((model::DomainAttribute) to.eContainer).id)»'
-			«IF !inParameterEdges.isEmpty», «EXPAND Parameters::callParameter(php, inStoreDb, false) FOREACH inParameterEdges.sortBy(e|e.name) SEPARATOR ", "»«ENDIF»
-		); 
 	«ELSEIF isDomainAttributeInstance(to.eContainer)-»
 		«REM»direct field --> domain attribute instance«ENDREM»
 		«EXPAND template::domain::AttributeInstance::attributeInstanceCall(php, this, inStoreDb, (model::domain::DomainAttributeInstance) to.eContainer) FOR to»;

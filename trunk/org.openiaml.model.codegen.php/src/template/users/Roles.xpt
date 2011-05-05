@@ -65,13 +65,7 @@ function add_role_«safeName()»_«safeName(userStore)»(DomainIterator $iterator) {
 			throw new IamlRuntimeException("Unexpectedly could not create parent role '«superType.name»'");
 		}
 		
-		«FOREACH attributes AS a»
-			«FOREACH a.outExtendsEdges.to.typeSelect(model::DomainAttribute).select(a2|a2.primaryKey).select(a2|a2.eContainer == superType) AS fk»
-				$fk_names[] = DomainAttribute_«safeName(a)»::getInstance()->getName();
-				$pk_values[] = $role_instance->getAttributeInstance(DomainAttribute_«safeName(fk)»::getInstance())->getValue();
-				$pk_binds[] = "?";
-			«ENDFOREACH»
-		«ENDFOREACH»
+		«EXPAND roleSetup(superType) FOREACH eStructuralFeatures»
 	}
 	«ENDFOREACH»
 	«IF outExtendsEdges.to.typeSelect(model::users::Role).isEmpty»
@@ -147,7 +141,7 @@ function remove_role_«safeName()»_«safeName(userStore)»(DomainIterator $iterator
 	
 	$pk_names = array();
 	$pk_values = array();
-	«FOREACH attributes.select(a|a.primaryKey) AS a»
+	«FOREACH eStructuralFeatures.typeSelect(model::domain::DomainAttribute).select(a|a.primaryKey) AS a»
 	{
 		$pk_attribute = DomainAttribute_«safeName(a)»::getInstance();
 		$pk_names[] = $pk_attribute->getName() . " = ?";
@@ -178,6 +172,18 @@ function remove_role_«safeName()»_«safeName(userStore)»(DomainIterator $iterator
 	log_message("[role] Removed role '«name»' successfully");
 
 }
+«ENDDEFINE»
+
+«DEFINE roleSetup(model::users::Role superType) FOR ecore::EStructuralFeature»
+	«throwException("roleSetup not yet implemented for EStructuralFeature")»
+«ENDDEFINE»
+
+«DEFINE roleSetup(model::users::Role superType) FOR model::domain::DomainAttribute»
+	«FOREACH outExtendsEdges.to.typeSelect(model::domain::DomainAttribute).select(a2|a2.primaryKey).select(a2|a2.eContainer == superType) AS fk»
+		$fk_names[] = DomainAttribute_«safeName()»::getInstance()->getName();
+		$pk_values[] = $role_instance->getAttributeInstance(DomainAttribute_«safeName(fk)»::getInstance())->getValue();
+		$pk_binds[] = "?";
+	«ENDFOREACH»
 «ENDDEFINE»
 
 «DEFINE exception FOR Object»

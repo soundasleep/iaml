@@ -1,7 +1,6 @@
 
 var stored_ajax_monitor = 0;
-var stored_counter = { 'store_db' : 0,
-	'set_session' : 0,
+var stored_counter = { 'set_session' : 0,
 	'set_application_value' : 0 };
 
 /**
@@ -20,7 +19,6 @@ function initAjaxMonitor() {
 	monitor.innerHTML = stored_ajax_monitor;
 	stored_ajax_monitor = null;
 
-	$('counter_store_db').innerHTML = stored_counter['store_db'];
 	$('counter_set_session').innerHTML = stored_counter['set_session'];
 	$('counter_set_application_value').innerHTML = stored_counter['set_application_value'];
 	stored_counter = null;
@@ -376,13 +374,6 @@ function next_store_event() {
 
 function create_stacktrace_parameter() {
 	return "&trace=" + encodeURIComponent(printStackTrace().join("\n"));
-}
-
-/* save directly to database (only one attribute) */
-function store_db(attribute_id, arg0) {
-	var url = 'store_db.php?attribute_id=' + encodeURIComponent(attribute_id) + '&frame=' + encodeURIComponent(frame_id) + '&arg0=' + encodeURIComponent(arg0);
-	url += create_stacktrace_parameter();
-	execute_queued_url(url, 'store_db', false);
 }
 
 /* save a session variable (only one attribute) */

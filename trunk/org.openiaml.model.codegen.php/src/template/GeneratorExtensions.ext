@@ -45,8 +45,14 @@ safeName(model::GeneratedElement this) :
 safeName(emf::EObject this) :
 	throwException("Cannot get the safeName of an EObject: " + this);
 
+safeNameString(ecore::EString s) :
+	s.toString().replaceAll("[^A-Za-z0-9]", "_");
+
 safeNameString(String s) :
 	s.replaceAll("[^A-Za-z0-9]", "_");
+
+escapeString(ecore::EString s) :
+	s.toString().replaceAll("[\"]", "\\\"");
 
 escapeString(String s) :
 	s.replaceAll("[\"]", "\\\"");
@@ -54,6 +60,9 @@ escapeString(String s) :
 /* TODO not a complete encoding, misses \r\n\t\v\f\[0-7]{1,3}\x[0-9A-Fa-f]{1,2} and perhaps unicode too */
 escapePhpString(String s):
 	s.replaceAll("[\\\\]", "\\\\").replaceAll("[\"]", "\\\"").replaceAll("[$]", "\\$");
+
+escapePhpString(ecore::EString s):
+	s.toString().replaceAll("[\\\\]", "\\\\").replaceAll("[\"]", "\\\"").replaceAll("[$]", "\\$");
 
 // TODO this should be used everywhere
 /**
@@ -77,10 +86,10 @@ conditionName(emf::EObject this ) :
 conditionName(model::Condition this) :
 	safeName(this);
 	
-attributeName(model::DomainAttribute this) :
+attributeName(model::domain::DomainAttribute this) :
 	safeNameString(name);
 
-attributeName(domain::DomainAttributeInstance this) :
+attributeName(model::domain::DomainAttributeInstance this) :
 	safeNameString(name);
 	
 attributeName(Void v) :
@@ -318,7 +327,7 @@ model::Scope containingScope(model::InternetApplication this) :
 
 model::domain::DomainSchema getDomainSchema(model::domain::DomainSchema this) :
 	this;
-model::domain::DomainSchema getDomainSchema(model::DomainAttribute this) :
+model::domain::DomainSchema getDomainSchema(model::domain::DomainAttribute this) :
 	if eContainer == null
 		then null
 		else getDomainSchema(eContainer);
@@ -344,9 +353,9 @@ getOperationName(emf::EObject this) :
 isVisibleThing(emf::EObject this) :
 	model::VisibleThing.isInstance(this);
 isDomainAttribute(emf::EObject this) :
-	model::DomainAttribute.isInstance(this);	
+	model::domain::DomainAttribute.isInstance(this);	
 isDomainAttributeInstance(emf::EObject this) :
-	domain::DomainAttributeInstance.isInstance(this);
+	model::domain::DomainAttributeInstance.isInstance(this);
 isDomainIterator(emf::EObject this) :
 	model::domain::DomainIterator.isInstance(this);
 isSession(emf::EObject this) :
@@ -417,21 +426,21 @@ isAutosaveOff(model::domain::DomainIterator this) :
 isAutosaveOff(emf::EObject this):
 	false;
 
-model::DomainAttribute getPrimaryKey(domain::DomainAttributeInstance this) :
+model::domain::DomainAttribute getPrimaryKey(model::domain::DomainAttributeInstance this) :
 	if model::domain::DomainIterator.isInstance(eContainer)
 		then getPrimaryKey((model::domain::DomainIterator) eContainer)
 		else null;
 
-model::DomainAttribute getPrimaryKey(model::domain::DomainSchema this) :
-	attributes.selectFirst( e | e.primaryKey );
+model::domain::DomainAttribute getPrimaryKey(model::domain::DomainSchema this) :
+	eStructuralFeatures.typeSelect(model::domain::DomainAttribute).selectFirst( e | e.primaryKey );
 
-model::DomainAttribute getPrimaryKey(model::DomainAttribute this) :
+model::domain::DomainAttribute getPrimaryKey(model::domain::DomainAttribute this) :
 	getPrimaryKey(eContainer);
 
-model::DomainAttribute getPrimaryKey(model::domain::DomainIterator this) :
+model::domain::DomainAttribute getPrimaryKey(model::domain::DomainIterator this) :
 	getPrimaryKey( outSelects.to.outSchemas.to.first() ); 
 
-model::DomainAttribute getPrimaryKey(emf::EObject this) :
+model::domain::DomainAttribute getPrimaryKey(emf::EObject this) :
 	null;
 	
 isInDomainIterator(model::domain::DomainAttributeInstance this) :
@@ -446,7 +455,7 @@ model::domain::DomainIterator getDomainIterator(model::domain::DomainAttributeIn
  * Does this given attribute instance represent a generated primary key?
  */	
 isGeneratedPrimaryKey(domain::DomainAttributeInstance this) :
-	isGenerated && !outExtendsEdges.to.typeSelect(model::DomainAttribute).select(a|a.primaryKey).isEmpty ;
+	isGenerated && !outExtendsEdges.to.typeSelect(model::domain::DomainAttribute).select(a|a.primaryKey).isEmpty ;
 
 List[model::domain::DomainSchema] allSubtypes(model::domain::DomainSchema this):
 	inExtendsEdges.from.typeSelect(model::domain::DomainSchema).collect(e|allSubtypes(e)).flatten().add(this);
@@ -459,23 +468,23 @@ model::operations::ExecutionEdgesSource castToExecutionEdgesSource(emf::EObject 
  * which isn't actually defined as an extension in the system, so we can't find the containing DomainSchema
  * for it.
  */
-model::DomainAttribute getAttributeForAttributeInstance(domain::DomainAttributeInstance this) :
-	if outExtendsEdges.to.typeSelect(model::DomainAttribute).first() == null
+model::domain::DomainAttribute getAttributeForAttributeInstance(domain::DomainAttributeInstance this) :
+	if outExtendsEdges.to.typeSelect(model::domain::DomainAttribute).first() == null
 		then throwException("Tried to get the parent attribute of an attribute instance that is not an extension: " + this)
-		else getDefinedAttribute(outExtendsEdges.to.typeSelect(model::DomainAttribute).first());
+		else getDefinedAttribute(outExtendsEdges.to.typeSelect(model::domain::DomainAttribute).first());
 	
 /**
  * Get the defined attribute for the given attribute. That is:
  * - any attribute which extends a primary key (i.e. is a foreign key)
  * - any attribute that does not extend anything
  */
-model::DomainAttribute getDefinedAttribute(model::DomainAttribute this) :
-	if !outExtendsEdges.to.typeSelect(model::DomainAttribute).select(a|a.primaryKey).isEmpty
+model::domain::DomainAttribute getDefinedAttribute(model::domain::DomainAttribute this) :
+	if !outExtendsEdges.to.typeSelect(model::domain::DomainAttribute).select(a|a.primaryKey).isEmpty
 	then this
 	else 
-		if outExtendsEdges.to.typeSelect(model::DomainAttribute).isEmpty
+		if outExtendsEdges.to.typeSelect(model::domain::DomainAttribute).isEmpty
 		then this
-		else getDefinedAttribute(outExtendsEdges.to.typeSelect(model::DomainAttribute).first());
+		else getDefinedAttribute(outExtendsEdges.to.typeSelect(model::domain::DomainAttribute).first());
 
 /**
  * Get a list of all the possible execution states from the given node.

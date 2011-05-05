@@ -101,6 +101,12 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 			return "iaml.visual:Label";
 		}
 		
+		// "iaml:DomainAttribute"
+		// --> "iaml.domain:DomainAttribute"
+		if (xsiType.equals("iaml:DomainAttribute")) {
+			return "iaml.domain:DomainAttribute";
+		}
+		
 		return super.replaceType(element, xsiType, errors);
 	}
 
@@ -152,6 +158,13 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 				&& "iaml.domain:DomainIterator".equals(getXsiType((Element) element.getParentNode()))) {
 			return "featureInstances";
 		}
+		
+		// <attributes type="xsd_string">
+		// --> <eStructuralFeatures eType="xsd_string">
+		if ("attributes".equals(element.getNodeName()) &&
+				"schemas".equals(element.getParentNode().getNodeName())) {
+			return "eStructuralFeatures";
+		}
 
 		return super.getRenamedNode(nodeName, element, errors);
 	}
@@ -165,6 +178,13 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 		if (("properties".equals(oldElement.getNodeName()) || "values".equals(oldElement.getNodeName())) &&
 				"value".equals(name)) {
 			return "defaultValue";
+		}
+		
+		// <attributes type="xsd_string">
+		// --> <eStructuralFeatures eType="xsd_string">
+		if ("attributes".equals(oldElement.getNodeName()) && 
+				"type".equals(name)) {
+			return "eType";
 		}
 		
 		// otherwise, just return the same name
@@ -234,6 +254,35 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 		if (element.getNodeName().equals("domainStores")) {
 			errors.add(new ExpectedMigrationException(this, element, "DomainStore has been removed, and needs to be reimplemented as a DomainSource manually."));
 			return true;
+		}
+		
+		if (("iaml.domain:DomainAttribute".equals(xsiType) || "iaml:DomainAttribute".equals(xsiType))
+				&& "scopes".equals(parent.getNodeName())) {
+			errors.add(new ExpectedMigrationException(this, element, "Scopes can no longer contain DomainAttributes directly, and needs to be reimplemented as a DomainAttributeInstance manually."));
+			return true;
+		}
+		
+		// various properties of attributes are no longer permitted
+		if (parent != null && ("attributes".equals(parent.getNodeName()) || "eStructuralFeatures".equals(parent.getNodeName()))) {
+			if ("operations".equals(element.getNodeName())) {
+				errors.add(new ExpectedMigrationException(this, element, "DomainAttributes can no longer contain Operations directly."));
+				return true;
+			}
+
+			if ("conditions".equals(element.getNodeName())) {
+				errors.add(new ExpectedMigrationException(this, element, "DomainAttributes can no longer contain Conditions directly."));
+				return true;
+			}
+
+			if ("onChange".equals(element.getNodeName())) {
+				errors.add(new ExpectedMigrationException(this, element, "DomainAttributes can no longer contain onChange directly."));
+				return true;
+			}
+
+			if ("fieldValue".equals(element.getNodeName())) {
+				errors.add(new ExpectedMigrationException(this, element, "DomainAttributes can no longer contain fieldValue directly."));
+				return true;
+			}
 		}
 		
 		// issue 242: replace <attribute><type href="..."></attribute>
@@ -335,6 +384,16 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 				Map<String,String> map = getXSDTypeMap();
 				for (String key : map.keySet()) {
 					String uri = map.get(key);
+					
+					// check if such an element already exists
+					boolean alreadyExists = false;
+					for (Element e : getChildElements(old)) {
+						if ("xsdDataTypes".equals(e.getNodeName()) && 
+								e.hasAttribute("id") &&
+								key.equals(e.getAttribute("id")))
+						alreadyExists = true;
+					}
+					if (alreadyExists) continue;
 
 					Element et = createElement(document, "xsdDataTypes");
 					et.setAttribute("name", key.replace("_", ":"));
@@ -352,6 +411,16 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 				for (String key : map.keySet()) {
 					String uri = map.get(key);
 
+					// check if such an element already exists
+					boolean alreadyExists = false;
+					for (Element e : getChildElements(old)) {
+						if ("xsdDataTypes".equals(e.getNodeName()) && 
+								e.hasAttribute("id") &&
+								key.equals(e.getAttribute("id")))
+						alreadyExists = true;
+					}
+					if (alreadyExists) continue;
+					
 					Element et = createElement(document, "xsdDataTypes");
 					et.setAttribute("name", key.replace("_", ":"));
 					et.setAttribute("id", key);
@@ -526,6 +595,13 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 				&& oldElement.getParentNode() instanceof Element 
 				&& "iaml.domain:DomainIterator".equals(getXsiType((Element) oldElement.getParentNode()))) {
 			return "iaml.domain:DomainAttributeInstance";
+		}
+		
+		// <attributes type="xsd_string">
+		// --> <eStructuralFeatures xsi:type="iaml.domain:DomainAttribute" eType="xsd_string">
+		if ("attributes".equals(oldElement.getNodeName()) 
+				&& "schemas".equals(oldElement.getParentNode().getNodeName())) {
+			return "iaml.domain:DomainAttribute";
 		}
 
 		// otherwise, call super

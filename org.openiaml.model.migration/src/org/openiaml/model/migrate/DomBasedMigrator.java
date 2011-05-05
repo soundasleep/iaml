@@ -15,6 +15,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * An XML DOM-based migrator. This doesn't do anything
@@ -549,6 +550,17 @@ public abstract class DomBasedMigrator implements IamlModelMigrator {
 			newValue += getMigratedId(ref) + " ";
 		}
 		return newValue.trim();
+	}
+	
+	protected Iterable<Element> getChildElements(Element e) {
+		List<Element> result = new ArrayList<Element>();
+		NodeList nl = e.getChildNodes();
+		for (int i = 0; i < nl.getLength(); i++) {
+			if (nl.item(i) instanceof Element) {
+				result.add((Element) nl.item(i));
+			}
+		}
+		return result;
 	}
 	
 }

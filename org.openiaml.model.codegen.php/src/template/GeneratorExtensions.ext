@@ -528,7 +528,7 @@ List[model::components::EntryGate] getFrameEntryGates(model::visual::Frame this)
 	getFrameEntryGates(eContainer);
 */
 
-List[model::components::EntryGate] getFrameEntryGates(model::Scope this) :
+List[model::components::Gate] getFrameEntryGates(model::Scope this) :
 	if eContainer == null then
 		(if entryGate == null then
 			{}
@@ -539,7 +539,7 @@ List[model::components::EntryGate] getFrameEntryGates(model::Scope this) :
 		else
 			getFrameEntryGates(eContainer).toSet().add( entryGate ));
 
-List[model::components::EntryGate] getFrameEntryGates(emf::EObject this) :
+List[model::components::Gate] getFrameEntryGates(emf::EObject this) :
 	if eContainer == null 
 		then {}
 		else getFrameEntryGates(eContainer);
@@ -556,7 +556,8 @@ List[model::components::EntryGate] getFrameEntryGates(emf::EObject this) :
  *		gates at the same node depth, order is undefined.
  */
 getAllExitGates(model::visual::Frame this) :
-	getRoot().eAllContents.typeSelect(model::components::ExitGate)
+	getRoot().eAllContents.typeSelect(model::components::Gate)
+		.select( g | model::Scope.isInstance(g.eContainer) && ((model::Scope) eContainer).exitGate == g )
 		.sortBy( n | -getNodeDepth(n) );
 
 int getNodeDepth(emf::EObject this) :
@@ -565,7 +566,7 @@ int getNodeDepth(emf::EObject this) :
 		else 1 + getNodeDepth(eContainer);
 
 /** Get all possible resume targets for this gate. */
-getEntryResumeTargets(model::components::EntryGate this) :
+getEntryResumeTargets(model::components::Gate this) :
 	eContainer.eContents.typeSelect(model::visual::Frame);
 
 /** 
@@ -573,7 +574,7 @@ getEntryResumeTargets(model::components::EntryGate this) :
  * Technically this should be all frames that are _not_ protected by a Gate,
  * but I don't think it matters.
  */
-getExitResumeTargets(model::components::ExitGate this) :
+getExitResumeTargets(model::components::Gate this) :
 	getRoot().eAllContents.typeSelect(model::visual::Frame);
 
 /**
@@ -600,17 +601,17 @@ List[model::Property] getClientSideCacheProperties(model::InternetApplication th
 /**
  * Should the given exit gate be activated/enabled on the given frame?
  */
-exitGateNeedsActivating(model::components::ExitGate gate, model::visual::Frame frame) :
+exitGateNeedsActivating(model::components::Gate gate, model::visual::Frame frame) :
 	frame.eContainer != null &&
 	(frame.eContainer.eContents.contains( gate ) /* we aren't exiting if we are in the same scope */
 		|| exitGateNeedsActivatingRecurse(gate, frame.eContainer));
 
-exitGateNeedsActivatingRecurse(model::components::ExitGate gate, model::Scope scope) :
+exitGateNeedsActivatingRecurse(model::components::Gate gate, model::Scope scope) :
 	scope.eContainer != null && 
 	(scope.eContainer.eContents.contains( gate )
 		|| exitGateNeedsActivatingRecurse(gate, scope.eContainer));
 
-exitGateNeedsActivatingRecurse(model::components::ExitGate gate, emf::EObject obj) :
+exitGateNeedsActivatingRecurse(model::components::Gate gate, emf::EObject obj) :
 	false;
 
 /**
@@ -618,10 +619,10 @@ exitGateNeedsActivatingRecurse(model::components::ExitGate gate, emf::EObject ob
  * This should return false if the gate is contained in the parent scope or session
  * of the frame, or likewise.
  */
-exitGateNeedsToRedirect(model::components::ExitGate gate, model::visual::Frame frame) :
+exitGateNeedsToRedirect(model::components::Gate gate, model::visual::Frame frame) :
 	exitGateNeedsToRedirectRecurse(gate, frame);
 		
-exitGateNeedsToRedirectRecurse(model::components::ExitGate gate, model::Scope scope) :
+exitGateNeedsToRedirectRecurse(model::components::Gate gate, model::Scope scope) :
 	if scope.eContents.contains(gate) 
 		then false		// we're in the same scope; don't need to redirect
 		else 
@@ -630,9 +631,9 @@ exitGateNeedsToRedirectRecurse(model::components::ExitGate gate, model::Scope sc
 				else exitGateNeedsToRedirectRecurse(gate, scope.eContainer);
 					// otherwise check the scope's container 
 
-exitGateNeedsToRedirectRecurse(model::components::ExitGate gate, model::InternetApplication root) :
+exitGateNeedsToRedirectRecurse(model::components::Gate gate, model::InternetApplication root) :
 	true;
-exitGateNeedsToRedirectRecurse(model::components::ExitGate gate, emf::EObject obj) :
+exitGateNeedsToRedirectRecurse(model::components::Gate gate, emf::EObject obj) :
 	true;
 
 /**

@@ -2,7 +2,7 @@
 
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE runEntryGate FOR model::components::EntryGate-»
+«DEFINE runEntryGate FOR model::components::Gate-»
 /* entry gate '«safeName()»' */
 
 /* expand conditions - do any of them fail? */
@@ -29,7 +29,7 @@ if (!(«EXPAND template::conditions::Runtime::callCondition(true, false) FOREACH 
  *
  * Should set '$arg' to the new frame ID, or empty if the resume is not set.
  */
-«DEFINE getEntryResumeTarget(String arg) FOR model::components::EntryGate»
+«DEFINE getEntryResumeTarget(String arg) FOR model::components::Gate»
 	«IF containingSession(this) != null»
 		$«arg-» = null;
 		if (isset($_SESSION["«safeName(containingSession(this))»_«safeNameString(id)»"]))
@@ -53,7 +53,7 @@ if (!(«EXPAND template::conditions::Runtime::callCondition(true, false) FOREACH 
 /**
  * Find _any_ target for the Gate (i.e. the resume has not been set)
  */
-«DEFINE getEntryAnyTarget(String arg) FOR model::components::EntryGate»
+«DEFINE getEntryAnyTarget(String arg) FOR model::components::Gate»
 	«IF getEntryResumeTargets(this).isEmpty»
 		«throwException("Gate '" + this + "' did not have any possible resume targets")»
 	«ENDIF»

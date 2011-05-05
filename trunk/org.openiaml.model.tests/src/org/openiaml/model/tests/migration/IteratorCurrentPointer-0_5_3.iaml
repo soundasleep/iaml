@@ -10,7 +10,9 @@
     <executionEdges generatedBy="model.12f95624e39.883c" isGenerated="true" id="operations.12f95625211.3239" name="yes" from="operations.12f95625211.3233" to="operations.12f95625211.3235"/>
     <executionEdges generatedBy="model.12f95624e39.883c" isGenerated="true" id="operations.12f95625211.323a" name="no" from="operations.12f95625211.3233" to="operations.12f95625211.3236"/>
   </conditions>
-  <properties generatedBy="model.12f76d0c22b.d" isGenerated="true" id="model.12f95624e39.883a" name="blank" outFlows="operations.12f95625211.3237" defaultValue="" type="builtin_iamlString" readOnly="true"/>
+  <properties generatedBy="model.12f76d0c22b.d" isGenerated="true" id="model.12f95624e39.883a" name="blank" outFlows="operations.12f95625211.3237" defaultValue="" readOnly="true">
+    <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlString;XSDSimpleTypeDefinition=1"/>
+  </properties>
   <onAccess generatedBy="model.12f76d0c22b.d" isGenerated="true" id="model.12f95624e39.8839"/>
   <onInit generatedBy="model.12f76d0c22b.d" isGenerated="true" id="model.12f95624e39.883b"/>
   <scopes xsi:type="iaml.visual:Frame" generatedElements="model.12f95624e39.8813 model.12f95624e39.8814" id="index" name="Home">
@@ -73,6 +75,33 @@
         <executionEdges generatedBy="model.12f95624e39.883d" isGenerated="true" id="operations.12f95625211.3232" name="no" from="operations.12f95625211.322b" to="operations.12f95625211.322e"/>
       </conditions>
       <onChange generatedBy="domain.12f76f3ecf5.19" isGenerated="true" id="model.12f95624e39.8823" outActions="model.12f95624e39.88b6"/>
+      <attributes generatedBy="domain.12f76f3ecf5.19" isGenerated="true" id="model.12f95624e39.8808" name="content" outWires="wires.12f95625194.1c72" generatedElements="model.12f95624e39.8897 model.12f95624e39.8898 model.12f95624e39.8899 model.12f95624e39.889a model.12f95624e39.889b" outExtendsEdges="wires.12f95625194.1c6e">
+        <operations xsi:type="iaml:PrimitiveOperation" generatedBy="model.12f95624e39.8808" isGenerated="true" id="model.12f95624e39.8898" name="update"/>
+        <extendsEdges generatedBy="domain.12f76f3ecf5.19" isGenerated="true" id="wires.12f95625194.1c6e" from="model.12f95624e39.8808" to="model.12f76d0c22b.1b"/>
+        <conditions xsi:type="iaml:PrimitiveCondition" generatedBy="model.12f95624e39.8808" isGenerated="true" id="model.12f95624e39.889a" name="can cast?"/>
+        <conditions xsi:type="iaml:PrimitiveCondition" generatedBy="model.12f95624e39.8808" isGenerated="true" id="model.12f95624e39.889b" name="fieldValue is set" outConditionEdges="wires.12f95625194.1c82"/>
+        <onChange generatedBy="model.12f95624e39.8808" isGenerated="true" id="model.12f95624e39.8897" outActions="model.12f95624e39.88d0"/>
+        <fieldValue generatedBy="model.12f95624e39.8808" isGenerated="true" id="model.12f95624e39.8899" name="fieldValue" outParameterEdges="wires.12f95625194.1c7b wires.12f95625194.1c7c"/>
+      </attributes>
+      <attributes generatedBy="domain.12f76f3ecf5.19" isGenerated="true" id="model.12f95624e39.8809" name="title" outWires="wires.12f95625194.1c73" generatedElements="model.12f95624e39.8893 model.12f95624e39.8894 model.12f95624e39.8895 model.12f95624e39.8896 model.12f95624e39.88a8" outExtendsEdges="wires.12f95625194.1c6f">
+        <operations xsi:type="iaml:PrimitiveOperation" generatedBy="model.12f95624e39.8809" isGenerated="true" id="model.12f95624e39.8894" name="update"/>
+        <extendsEdges generatedBy="domain.12f76f3ecf5.19" isGenerated="true" id="wires.12f95625194.1c6f" from="model.12f95624e39.8809" to="model.12f76d0c22b.19"/>
+        <conditions xsi:type="iaml:PrimitiveCondition" generatedBy="model.12f95624e39.8809" isGenerated="true" id="model.12f95624e39.8896" name="can cast?"/>
+        <conditions xsi:type="iaml:PrimitiveCondition" generatedBy="model.12f95624e39.8809" isGenerated="true" id="model.12f95624e39.88a8" name="fieldValue is set" outConditionEdges="wires.12f95625194.1c80"/>
+        <onChange generatedBy="model.12f95624e39.8809" isGenerated="true" id="model.12f95624e39.8893" outActions="model.12f95624e39.88cd"/>
+        <fieldValue generatedBy="model.12f95624e39.8809" isGenerated="true" id="model.12f95624e39.8895" name="fieldValue" outParameterEdges="wires.12f95625194.1c7d wires.12f95625194.1c7e"/>
+      </attributes>
+      <attributes generatedBy="domain.12f76f3ecf5.19" isGenerated="true" id="model.12f95624e39.8850" name="generated primary key" generatedElements="model.12f95624e39.88c5 model.12f95624e39.88c6 model.12f95624e39.88c7 model.12f95624e39.88c8 model.12f95624e39.88ca" outExtendsEdges="wires.12f95625194.1c71">
+        <operations xsi:type="iaml:PrimitiveOperation" generatedBy="model.12f95624e39.8850" isGenerated="true" id="model.12f95624e39.88c6" name="update"/>
+        <extendsEdges generatedBy="domain.12f76f3ecf5.19" isGenerated="true" id="wires.12f95625194.1c71" from="model.12f95624e39.8850" to="model.12f95624e39.880a"/>
+        <conditions xsi:type="iaml:PrimitiveCondition" generatedBy="model.12f95624e39.8850" isGenerated="true" id="model.12f95624e39.88c8" name="can cast?"/>
+        <conditions xsi:type="iaml:PrimitiveCondition" generatedBy="model.12f95624e39.8850" isGenerated="true" id="model.12f95624e39.88ca" name="fieldValue is set"/>
+        <onChange generatedBy="model.12f95624e39.8850" isGenerated="true" id="model.12f95624e39.88c5"/>
+        <fieldValue generatedBy="model.12f95624e39.8850" isGenerated="true" id="model.12f95624e39.88c7" name="fieldValue">
+          <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
+        </fieldValue>
+        <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
+      </attributes>
       <onIterate id="model.12f9492b645.c" outActions="model.12f9492b645.14">
         <actions id="model.12f9492b645.14" inParameterEdges="wires.12f9492b711.3" name="run" from="model.12f9492b645.c" to="model.12f948871d7.91"/>
       </onIterate>
@@ -88,32 +117,6 @@
       <currentPointer id="model.12f9492b645.16" name="current pointer" outFlows="operations.12f95625211.3207" outParameterEdges="wires.12f9492b711.3">
         <parameterEdges id="wires.12f9492b711.3" from="model.12f9492b645.16" to="model.12f9492b645.14"/>
       </currentPointer>
-      <currentInstance id="migrated1" name="Current instance">
-        <featureInstances xsi:type="iaml.domain:DomainAttributeInstance" generatedElements="model.12f95624e39.8897 model.12f95624e39.8898 model.12f95624e39.8899 model.12f95624e39.889a model.12f95624e39.889b" generatedBy="domain.12f76f3ecf5.19" isGenerated="true" id="model.12f95624e39.8808" name="content" outWires="wires.12f95625194.1c72" outExtendsEdges="wires.12f95625194.1c6e">
-          <conditions xsi:type="iaml:PrimitiveCondition" generatedBy="model.12f95624e39.8808" isGenerated="true" id="model.12f95624e39.889a" name="can cast?"/>
-          <conditions xsi:type="iaml:PrimitiveCondition" generatedBy="model.12f95624e39.8808" isGenerated="true" id="model.12f95624e39.889b" name="fieldValue is set" outConditionEdges="wires.12f95625194.1c82"/>
-          <onChange generatedBy="model.12f95624e39.8808" isGenerated="true" id="model.12f95624e39.8897" outActions="model.12f95624e39.88d0"/>
-          <fieldValue generatedBy="model.12f95624e39.8808" isGenerated="true" id="model.12f95624e39.8899" name="fieldValue" outParameterEdges="wires.12f95625194.1c7b wires.12f95625194.1c7c"/>
-          <operations xsi:type="iaml:PrimitiveOperation" generatedBy="model.12f95624e39.8808" isGenerated="true" id="model.12f95624e39.8898" name="update"/>
-          <extendsEdges generatedBy="domain.12f76f3ecf5.19" isGenerated="true" id="wires.12f95625194.1c6e" from="model.12f95624e39.8808" to="model.12f76d0c22b.1b"/>
-        </featureInstances>
-        <featureInstances xsi:type="iaml.domain:DomainAttributeInstance" generatedElements="model.12f95624e39.8893 model.12f95624e39.8894 model.12f95624e39.8895 model.12f95624e39.8896 model.12f95624e39.88a8" generatedBy="domain.12f76f3ecf5.19" isGenerated="true" id="model.12f95624e39.8809" name="title" outWires="wires.12f95625194.1c73" outExtendsEdges="wires.12f95625194.1c6f">
-          <conditions xsi:type="iaml:PrimitiveCondition" generatedBy="model.12f95624e39.8809" isGenerated="true" id="model.12f95624e39.8896" name="can cast?"/>
-          <conditions xsi:type="iaml:PrimitiveCondition" generatedBy="model.12f95624e39.8809" isGenerated="true" id="model.12f95624e39.88a8" name="fieldValue is set" outConditionEdges="wires.12f95625194.1c80"/>
-          <onChange generatedBy="model.12f95624e39.8809" isGenerated="true" id="model.12f95624e39.8893" outActions="model.12f95624e39.88cd"/>
-          <fieldValue generatedBy="model.12f95624e39.8809" isGenerated="true" id="model.12f95624e39.8895" name="fieldValue" outParameterEdges="wires.12f95625194.1c7d wires.12f95625194.1c7e"/>
-          <operations xsi:type="iaml:PrimitiveOperation" generatedBy="model.12f95624e39.8809" isGenerated="true" id="model.12f95624e39.8894" name="update"/>
-          <extendsEdges generatedBy="domain.12f76f3ecf5.19" isGenerated="true" id="wires.12f95625194.1c6f" from="model.12f95624e39.8809" to="model.12f76d0c22b.19"/>
-        </featureInstances>
-        <featureInstances xsi:type="iaml.domain:DomainAttributeInstance" generatedElements="model.12f95624e39.88c5 model.12f95624e39.88c6 model.12f95624e39.88c7 model.12f95624e39.88c8 model.12f95624e39.88ca" generatedBy="domain.12f76f3ecf5.19" isGenerated="true" id="model.12f95624e39.8850" type="builtin_iamlInteger" name="generated primary key" outExtendsEdges="wires.12f95625194.1c71">
-          <conditions xsi:type="iaml:PrimitiveCondition" generatedBy="model.12f95624e39.8850" isGenerated="true" id="model.12f95624e39.88c8" name="can cast?"/>
-          <conditions xsi:type="iaml:PrimitiveCondition" generatedBy="model.12f95624e39.8850" isGenerated="true" id="model.12f95624e39.88ca" name="fieldValue is set"/>
-          <onChange generatedBy="model.12f95624e39.8850" isGenerated="true" id="model.12f95624e39.88c5"/>
-          <fieldValue generatedBy="model.12f95624e39.8850" isGenerated="true" id="model.12f95624e39.88c7" name="fieldValue" type="builtin_iamlInteger"/>
-          <operations xsi:type="iaml:PrimitiveOperation" generatedBy="model.12f95624e39.8850" isGenerated="true" id="model.12f95624e39.88c6" name="update"/>
-          <extendsEdges generatedBy="domain.12f76f3ecf5.19" isGenerated="true" id="wires.12f95625194.1c71" from="model.12f95624e39.8850" to="model.12f95624e39.880a"/>
-        </featureInstances>
-      </currentInstance>
     </elements>
     <onInit generatedBy="index" isGenerated="true" id="model.12f95624e39.8814"/>
     <children xsi:type="iaml.visual:InputTextField" id="visual.12f948872b2.19" name="current pointer" generatedElements="model.12f95624e39.8815 model.12f95624e39.8816 model.12f95624e39.8817 model.12f95624e39.8818 model.12f95624e39.8819 model.12f95624e39.881a model.12f95624e39.881b model.12f95624e39.881c model.12f95624e39.881d model.12f95624e39.881e model.12f95624e39.881f visual.12f956250f8.89e model.12f95624e39.8820 model.12f95624e39.884a model.12f95624e39.884b model.12f95624e39.884c">
@@ -274,7 +277,9 @@
             <executionEdges generatedBy="model.12f95624e39.88cb" isGenerated="true" id="operations.12f95625211.3249" name="yes" from="operations.12f95625211.3243" to="operations.12f95625211.3245"/>
             <executionEdges generatedBy="model.12f95624e39.88cb" isGenerated="true" id="operations.12f95625211.324a" name="no" from="operations.12f95625211.3243" to="operations.12f95625211.3246"/>
           </conditions>
-          <properties generatedBy="model.12f95624e39.8855" isGenerated="true" id="model.12f95624e39.88c1" name="one" outFlows="operations.12f95625211.321e operations.12f95625211.3247" defaultValue="1" type="builtin_iamlInteger" readOnly="true"/>
+          <properties generatedBy="model.12f95624e39.8855" isGenerated="true" id="model.12f95624e39.88c1" name="one" outFlows="operations.12f95625211.321e operations.12f95625211.3247" defaultValue="1" readOnly="true">
+            <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
+          </properties>
           <nodes xsi:type="iaml.operations:StartNode" generatedBy="model.12f95624e39.8855" isGenerated="true" id="operations.12f95625211.321a" outExecutions="operations.12f95625211.3221"/>
           <nodes xsi:type="iaml.operations:FinishNode" generatedBy="model.12f95624e39.8855" isGenerated="true" id="operations.12f95625211.321b" inExecutions="operations.12f95625211.3222"/>
           <nodes xsi:type="iaml.operations:Arithmetic" generatedBy="model.12f95624e39.8855" isGenerated="true" id="operations.12f95625211.321c" inFlows="operations.12f95625211.321d operations.12f95625211.321e" outFlows="operations.12f95625211.321f" operationType="SUBTRACT"/>
@@ -354,45 +359,18 @@
       <onChange generatedBy="model.12f76d0c22b.1b" isGenerated="true" id="model.12f95624e39.880b"/>
       <fieldValue generatedBy="model.12f76d0c22b.1b" isGenerated="true" id="model.12f95624e39.880d" name="fieldValue"/>
     </attributes>
-    <attributes generatedBy="domain.12f76d0c47d.1" isGenerated="true" id="model.12f95624e39.880a" name="generated primary key" generatedElements="model.12f95624e39.8851 model.12f95624e39.8852 model.12f95624e39.8853 model.12f95624e39.8854 model.12f95624e39.88c4" inExtendsEdges="wires.12f95625194.1c71" type="builtin_iamlInteger" primaryKey="true">
+    <attributes generatedBy="domain.12f76d0c47d.1" isGenerated="true" id="model.12f95624e39.880a" name="generated primary key" generatedElements="model.12f95624e39.8851 model.12f95624e39.8852 model.12f95624e39.8853 model.12f95624e39.8854 model.12f95624e39.88c4" inExtendsEdges="wires.12f95625194.1c71" primaryKey="true">
       <operations xsi:type="iaml:PrimitiveOperation" generatedBy="model.12f95624e39.880a" isGenerated="true" id="model.12f95624e39.8852" name="update"/>
       <conditions xsi:type="iaml:PrimitiveCondition" generatedBy="model.12f95624e39.880a" isGenerated="true" id="model.12f95624e39.8854" name="can cast?"/>
       <conditions xsi:type="iaml:PrimitiveCondition" generatedBy="model.12f95624e39.880a" isGenerated="true" id="model.12f95624e39.88c4" name="fieldValue is set"/>
       <onChange generatedBy="model.12f95624e39.880a" isGenerated="true" id="model.12f95624e39.8851"/>
-      <fieldValue generatedBy="model.12f95624e39.880a" isGenerated="true" id="model.12f95624e39.8853" name="fieldValue" type="builtin_iamlInteger"/>
+      <fieldValue generatedBy="model.12f95624e39.880a" isGenerated="true" id="model.12f95624e39.8853" name="fieldValue">
+        <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
+      </fieldValue>
+      <type href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
     </attributes>
   </schemas>
   <sources id="domain.12f76da5174.8" name="blog db" outSchemas="domain.12f76dc4258.8" inSelects="domain.12f948872d2.7b">
     <schemaEdges id="domain.12f76dc4258.8" from="domain.12f76da5174.8" to="domain.12f76d0c47d.1"/>
   </sources>
-  <xsdDataTypes name="xsd:integer" id="xsd_integer">
-    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//integer;XSDSimpleTypeDefinition=40"/>
-  </xsdDataTypes>
-  <xsdDataTypes name="xsd:boolean" id="xsd_boolean">
-    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//boolean;XSDSimpleTypeDefinition=10"/>
-  </xsdDataTypes>
-  <xsdDataTypes name="xsd:string" id="xsd_string">
-    <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//string;XSDSimpleTypeDefinition=9"/>
-  </xsdDataTypes>
-  <xsdDataTypes name="builtin:iamlURL" id="builtin_iamlURL">
-    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlURL;XSDSimpleTypeDefinition=5"/>
-  </xsdDataTypes>
-  <xsdDataTypes name="builtin:iamlInteger" id="builtin_iamlInteger">
-    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlInteger;XSDSimpleTypeDefinition"/>
-  </xsdDataTypes>
-  <xsdDataTypes name="builtin:iamlDateTime" id="builtin_iamlDateTime">
-    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlDateTime;XSDSimpleTypeDefinition=4"/>
-  </xsdDataTypes>
-  <xsdDataTypes name="builtin:iamlEmail" id="builtin_iamlEmail">
-    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlEmail;XSDSimpleTypeDefinition=3"/>
-  </xsdDataTypes>
-  <xsdDataTypes name="builtin:iamlString" id="builtin_iamlString">
-    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlString;XSDSimpleTypeDefinition=1"/>
-  </xsdDataTypes>
-  <xsdDataTypes name="builtin:iamlOpenIDURL" id="builtin_iamlOpenIDURL">
-    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlOpenIDURL;XSDSimpleTypeDefinition=6"/>
-  </xsdDataTypes>
-  <xsdDataTypes name="builtin:iamlAddress" id="builtin_iamlAddress">
-    <definition href="platform:/plugin/org.openiaml.model/model/datatypes.xsd#//iamlAddress;XSDSimpleTypeDefinition=2"/>
-  </xsdDataTypes>
 </iaml:InternetApplication>

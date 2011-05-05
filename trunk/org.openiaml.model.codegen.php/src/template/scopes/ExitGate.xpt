@@ -7,7 +7,7 @@
  *    When all incoming {@model Condition Conditions} to an activated {@model ExitGate} fail,
  *    that ExitGate is disabled.
  */    
-«DEFINE runExitGate FOR model::components::ExitGate-»
+«DEFINE runExitGate FOR model::components::Gate-»
 /* exit gate '«safeName()»' */
 
 // TODO move into include
@@ -93,7 +93,7 @@ if (exit_gate_needs_to_redirect_«safeName()»(get_frame_id())) {
  *
  * Should set '$arg' to the new frame ID, or empty if the resume is not set.
  */
-«DEFINE getExitResumeTarget(String arg) FOR model::components::ExitGate»
+«DEFINE getExitResumeTarget(String arg) FOR model::components::Gate»
 	«IF containingSession(this) != null»
 		$«arg-» = null;
 		if (isset($_SESSION["«safeName(containingSession(this))»_«safeNameString(id)»_resume"]))
@@ -117,7 +117,7 @@ if (exit_gate_needs_to_redirect_«safeName()»(get_frame_id())) {
 /**
  * Find _any_ target for the Gate (i.e. the resume has not been set)
  */
-«DEFINE getExitAnyTarget(String arg) FOR model::components::ExitGate»
+«DEFINE getExitAnyTarget(String arg) FOR model::components::Gate»
 	«IF getExitResumeTargets(this).isEmpty»
 		«throwException("Gate '" + this + "' did not have any possible resume targets")»
 	«ENDIF»

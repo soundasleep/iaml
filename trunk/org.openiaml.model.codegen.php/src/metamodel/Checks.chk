@@ -167,20 +167,28 @@ context model::PrimitiveCondition WARNING "Unknown primitive condition name '" +
 context model::operations::Arithmetic ERROR "Arithmetic must have at least one incoming data source edge" :
 	inFlows.size > 0;
 
-context model::components::EntryGate ERROR "An EntryGate needs to have at least one incoming Condition, one outgoing RequiresEdge, or one outgoing 'first' wire, or it will never permit access" :
-	inConditionEdges.size >= 1
-	|| outRequiresEdges.size >= 1
-	|| outWires.typeSelect(model::NamedElement).exists(w | w.name == "first");
+context model::components::Gate ERROR "An entry Gate needs to have at least one incoming Condition, one outgoing RequiresEdge, or one outgoing 'first' wire, or it will never permit access" :
+	!model::Scope.isInstance(eContainer)
+	|| ((model::Scope) eContainer).entryGate != this
+	|| (inConditionEdges.size >= 1
+		|| outRequiresEdges.size >= 1
+		|| outWires.typeSelect(model::NamedElement).exists(w | w.name == "first"));
 
-context model::components::ExitGate ERROR "An ExitGate needs to have at least one incoming Condition, or one outgoing 'last' wire, or it will never permit access" :
-	inConditionEdges.size >= 1
-	|| outWires.typeSelect(model::NamedElement).exists(w | w.name == "last");
+context model::components::Gate ERROR "An exit Gate needs to have at least one incoming Condition, or one outgoing 'last' wire, or it will never permit access" :
+	!model::Scope.isInstance(eContainer)
+	|| ((model::Scope) eContainer).exitGate != this
+	|| (inConditionEdges.size >= 1
+		|| outWires.typeSelect(model::NamedElement).exists(w | w.name == "last"));
 
-context model::components::EntryGate ERROR "An EntryGate nneeds to have at least one outgoing ActionEdge" :
-	!outActions.isEmpty;
+context model::components::Gate ERROR "An entry Gate nneeds to have at least one outgoing ActionEdge" :
+	!model::Scope.isInstance(eContainer)
+	|| ((model::Scope) eContainer).entryGate != this
+	|| !outActions.isEmpty;
 
-context model::components::ExitGate ERROR "An ExitGate nneeds to have at least one outgoing ActionEdge" :
-	!outActions.isEmpty;
+context model::components::Gate ERROR "An exit Gate nneeds to have at least one outgoing ActionEdge" :
+	!model::Scope.isInstance(eContainer)
+	|| ((model::Scope) eContainer).exitGate != this
+	|| !outActions.isEmpty;
 	
 context model::operations::DecisionNode ERROR "A 'can cast?' DecisionNode needs to have an incoming DataFlowEdge from a CastNode" :
 	name != "can cast?" || 

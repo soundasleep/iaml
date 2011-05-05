@@ -158,14 +158,28 @@
 	«throwException("Unknown NavigateAction destination: " + this)»
 «ENDDEFINE»
 
+«DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::ActionEdge wire, Boolean includeSession) FOR model::components::Gate»
+	«IF model::Scope.isInstance(eContainer)»
+		«IF ((model::Scope) eContainer).entryGate == this»
+			«EXPAND getNavigateActionDestinationEntryGate(php, inStoreDb, wire, includeSession)»
+		«ELSEIF ((model::Scope) eContainer).exitGate == this»
+			«EXPAND getNavigateActionDestinationExitGate(php, inStoreDb, wire, includeSession)»
+		«ELSE»
+			«throwException("Unknown container for Gate: " + this)»
+		«ENDIF»
+	«ELSE»
+		«throwException("Gate was not contained within a Scope: " + this)»
+	«ENDIF» 
+«ENDDEFINE»
+
 /**
- * Resuming navigation to a EntryGate.
+ * Resuming navigation to a entry Gate.
  *
  * @semantics Action,EntryGate
- *		When an {@model ActionEdge} executes a {@model EntryGate}, the user is
- *		redirected to the resumption of the given {@model EntryGate}.
+ *		When an {@model ActionEdge} executes a {@model Scope#entryGate entry} {@model Gate}, the user is
+ *		redirected to the resumption of the given {@model Gate}.
  */
-«DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::ActionEdge wire, Boolean includeSession) FOR model::components::EntryGate»
+«DEFINE getNavigateActionDestinationEntryGate(Boolean php, Boolean inStoreDb, model::ActionEdge wire, Boolean includeSession) FOR model::components::Gate»
 	«IF php»
 		/* navigating back to resume a gate */
 		// get the resume ID
@@ -200,13 +214,13 @@
 «ENDDEFINE» 
 
 /**
- * Resuming navigation to an ExitGate.
+ * Resuming navigation to an exit Gate.
  *
- * @semantics Action,ExitGate
- *		When an {@model ActionEdge} executes a {@model ExitGate}, the user is
- *		redirected to the resumption of the given {@model ExitGate}.
+ * @semantics Action,Gate
+ *		When an {@model ActionEdge} executes a {@model Scope#exitGate exit} {@model Gate}, the user is
+ *		redirected to the resumption of the given {@model Gate}.
  */
-«DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::ActionEdge wire, Boolean includeSession) FOR model::components::ExitGate»
+«DEFINE getNavigateActionDestinationExitGate(Boolean php, Boolean inStoreDb, model::ActionEdge wire, Boolean includeSession) FOR model::components::Gate»
 	«IF php»
 		/* navigating back to resume a gate */
 		// get the resume ID

@@ -9,7 +9,7 @@ import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Property;
-import org.openiaml.model.model.components.EntryGate;
+import org.openiaml.model.model.components.Gate;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
@@ -51,7 +51,8 @@ public class EntryGateRequiresOpenID extends InferenceTestCase {
 		Frame see = assertHasFrame(session, "See Your OpenID");
 		assertNotGenerated(see);
 		
-		EntryGate gate = assertHasEntryGate(session, "Entry Gate");
+		Gate gate = session.getExitGate();
+		assertEquals("Entry Gate", gate.getName());
 		assertNotGenerated(gate);
 		
 		assertNotGenerated(assertHasRequiresEdge(root, gate, openid));
@@ -73,7 +74,8 @@ public class EntryGateRequiresOpenID extends InferenceTestCase {
 		Session container = assertHasSession(root, "Containing Session");
 		Session session = assertHasSession(container, "Protected Session");
 		Label openid = assertHasLabel(session, "Current OpenID");
-		EntryGate gate = assertHasEntryGate(session, "Entry Gate");
+		Gate gate = session.getExitGate();
+		assertEquals("Entry Gate", gate.getName());
 		
 		Frame enter = assertHasFrame(container, "Provide Current OpenID");
 		assertGenerated(enter);
@@ -106,7 +108,8 @@ public class EntryGateRequiresOpenID extends InferenceTestCase {
 		Session container = assertHasSession(root, "Containing Session");
 		Session session = assertHasSession(container, "Protected Session");
 		Label openid = assertHasLabel(session, "Current OpenID");
-		EntryGate gate = assertHasEntryGate(session, "Entry Gate");
+		Gate gate = session.getExitGate();
+		assertEquals("Entry Gate", gate.getName());
 		
 		// a condition is set within the openid label, "fieldValue is set"
 		Condition cond = assertHasCondition(openid, "fieldValue is set");
@@ -125,7 +128,8 @@ public class EntryGateRequiresOpenID extends InferenceTestCase {
 		
 		Session container = assertHasSession(root, "Containing Session");
 		Session session = assertHasSession(container, "Protected Session");
-		EntryGate gate = assertHasEntryGate(session, "Entry Gate");
+		Gate gate = session.getExitGate();
+		assertEquals("Entry Gate", gate.getName());
 		
 		Frame enter = assertHasFrame(container, "Provide Current OpenID");
 		

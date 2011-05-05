@@ -246,7 +246,7 @@ rule "If an EntryGate requires a Label value, then a Page should be created outs
 		container : Scope ( )
 		
 		session : Scope ( eContainer == container )
-		gate : EntryGate ( eContainer == session )
+		gate : Gate ( session.entryGate == gate )
 		
 		label : Label ( eContainer == session )		
 		requires : RequiresEdge ( from == gate, to == label )
@@ -268,7 +268,7 @@ rule "For EntryGates that require Label values, connect a NavigateWire to the pr
 		container : Scope ( )
 		
 		session : Scope ( eContainer == container )
-		gate : EntryGate ( eContainer == session )
+		gate : Gate ( session.entryGate == gate )
 		
 		label : Label ( eContainer == session )		
 		requires : RequiresEdge ( from == gate, to == label )
@@ -293,7 +293,7 @@ rule "Create TextFields for all Labels required by an EntryGate"
 		container : Scope ( )
 		
 		session : Scope ( eContainer == container )
-		gate : EntryGate ( eContainer == session )
+		gate : Gate ( session.entryGate == gate )
 		
 		label : Label ( eContainer == session )		
 		requires : RequiresEdge ( from == gate, to == label )
@@ -318,7 +318,7 @@ rule "If an EntryGate requires a Label value, then the 'is set?' Condition in th
 		container : Scope ( )
 		
 		session : Scope ( eContainer == container )
-		gate : EntryGate ( eContainer == session )
+		gate : Gate ( session.entryGate == gate )
 		
 		label : Label ( eContainer == session )		
 		requires : RequiresEdge ( from == gate, to == label )
@@ -340,7 +340,7 @@ rule "If an EntryGate requires a Label, get the containing Scope to update the L
 		container : Scope ( )
 		
 		session : Scope ( eContainer == container )
-		gate : EntryGate ( eContainer == session )
+		gate : Gate ( session.entryGate == gate )
 		
 		label : Label ( eContainer == session )		
 		requires : RequiresEdge ( from == gate, to == label )
@@ -377,7 +377,7 @@ rule "If an EntryGate requires a Label, the Label is only updated externally if 
 		container : Scope ( )
 		
 		session : Scope ( eContainer == container )
-		gate : EntryGate ( eContainer == session )
+		gate : Gate ( session.entryGate == gate )
 		
 		label : Label ( eContainer == session )		
 		requires : RequiresEdge ( from == gate, to == label )
@@ -414,7 +414,7 @@ rule "If an EntryGate requires a Label, the Label is only updated externally if 
 		container : Scope ( )
 		
 		session : Scope ( eContainer == container )
-		gate : EntryGate ( eContainer == session )
+		gate : Gate ( session.entryGate == gate )
 		
 		label : Label ( eContainer == session )		
 		requires : RequiresEdge ( from == gate, to == label )

@@ -9,7 +9,7 @@ import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.PrimitiveOperation;
 import org.openiaml.model.model.Property;
-import org.openiaml.model.model.components.EntryGate;
+import org.openiaml.model.model.components.Gate;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.FinishNode;
@@ -50,7 +50,8 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		Frame required = assertHasFrame(root, "Required Page");
 		assertNotGenerated(required);
 
-		EntryGate gate = assertHasEntryGate(session, "requires a page is viewed first");
+		Gate gate = session.getEntryGate();
+		assertEquals("requires a page is viewed first", gate.getName());
 		assertNotGenerated(gate);
 
 		ActionEdge nav = assertHasNavigateAction(session, gate, required, "first");
@@ -73,7 +74,8 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		assertGenerated(button);
 
 		Session session = assertHasSession(root, "Session");
-		EntryGate gate = assertHasEntryGate(session, "requires a page is viewed first");
+		Gate gate = session.getEntryGate();
+		assertEquals("requires a page is viewed first", gate.getName());
 
 		EventTrigger event = button.getOnClick();
 		assertGenerated(event);
@@ -159,7 +161,8 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		root = loadAndInfer(GateRequiredPage.class);
 
 		Session session = assertHasSession(root, "Session");
-		EntryGate gate = assertHasEntryGate(session, "requires a page is viewed first");
+		Gate gate = session.getEntryGate();
+		assertEquals("requires a page is viewed first", gate.getName());
 
 		// generated condition
 		CompositeCondition condition = assertHasCompositeCondition(session, "check requires a page is viewed first");

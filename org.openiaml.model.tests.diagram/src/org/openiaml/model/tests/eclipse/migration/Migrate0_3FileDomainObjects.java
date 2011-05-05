@@ -13,9 +13,8 @@ import org.openiaml.model.migrate.Migrate0To1;
 import org.openiaml.model.migrate.Migrate1To2;
 import org.openiaml.model.migrate.Migrate2To4;
 import org.openiaml.model.migrate.Migrate4To5;
-import org.openiaml.model.model.DomainAttribute;
+import org.openiaml.model.model.domain.DomainAttribute;
 import org.openiaml.model.model.visual.Frame;
-import org.openiaml.model.tests.eclipse.migration.AbstractMigrateTestCaseWithWarnings;
 
 /**
  * Tests migrating a 0.2 model to 0.3: domain objects

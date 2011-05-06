@@ -304,7 +304,7 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 			String parentName = (parent != null ? parent.getNodeName() : null);
 			if ("attributes".equals(parentName) || "fieldValue".equals(parentName) 
 					|| "properties".equals(parentName) || "children".equals(parentName)
-					|| "labels".equals(parentName)) {
+					|| "labels".equals(parentName) || "variables".equals(parentName)) {
 				
 				return true;
 			}

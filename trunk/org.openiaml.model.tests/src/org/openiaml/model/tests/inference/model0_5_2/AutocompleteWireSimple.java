@@ -345,7 +345,7 @@ public class AutocompleteWireSimple extends InferenceTestCase {
 
 		Property blank = assertHasProperty(root, "blank");
 		assertTrue(blank.isReadOnly());
-		assertEquals(blank.getType(), BuiltinDataTypes.getTypeString());
+		assertEqualType(blank.getType(), BuiltinDataTypes.getTypeString());
 		assertEquals(blank.getDefaultValue(), "");
 		
 		// with the email as the parameter

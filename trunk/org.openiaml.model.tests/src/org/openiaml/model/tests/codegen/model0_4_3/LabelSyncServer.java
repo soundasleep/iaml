@@ -42,7 +42,7 @@ public class LabelSyncServer extends CodegenTestCase {
 		// a text field to change
 		{
 			String target = getLabelIDForText("Source Text Field");
-			assertLabeledFieldEquals(target, "");	// empty
+			assertLabeledFieldEquals(target, "initial");	// derived from remote Property default value
 			setLabeledFormElementField(target, value);
 		}
 		

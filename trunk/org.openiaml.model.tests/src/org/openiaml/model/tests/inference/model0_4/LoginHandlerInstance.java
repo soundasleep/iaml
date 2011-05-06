@@ -189,7 +189,6 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		assertGenerated(target);
 
 		EventTrigger access = page.getOnAccess();
-		assertHasNoWiresFromTo(session, access, target);
 		ActionEdge nav = assertHasNavigateAction(session, access, target);
 		assertGenerated(nav);
 	}
@@ -209,10 +208,8 @@ public class LoginHandlerInstance extends InferenceTestCase {
 
 		Operation check = assertHasOperation(session, "check instance");
 		EventTrigger access = dest.getOnAccess();
-		// no wires
-		assertHasWiresFromTo(0, session, access, check);
 		{
-			// but a run action
+			// a run action
 			ActionEdge run = assertHasRunAction(session, access, check);
 			assertGenerated(run);
 			assertEquals("run", run.getName());
@@ -236,7 +233,6 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		Operation op = assertHasOperation(session, "do logout");
 		EventTrigger access = logout.getOnAccess();
 		// no wires
-		assertHasWiresFromTo(0, session, access, op);
 		{
 			ActionEdge run = assertHasRunAction(session, access, op);
 			assertGenerated(run);
@@ -390,7 +386,6 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		Session loginSession = assertHasSession(root, "login handler login");
 		Frame login = assertHasFrame(loginSession, "login");
 		{
-			assertHasNoWiresFromTo(root, check, login);
 			ActionEdge wire = assertHasNavigateAction(root, check, login, "fail");
 			assertGenerated(wire);
 		}

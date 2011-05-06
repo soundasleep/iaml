@@ -499,6 +499,19 @@ public abstract class ModelTestCase extends WebTestCase implements IXpath {
 	 * @param expected expected value (B)
 	 * @param actual actual value (A)
 	 */
+	public void assertNotEqual(String message, String expected, String actual) {
+		if (expected == null)
+			assertNotNull(message, actual);
+		else
+			assertFalse(message, expected.equals(actual));
+	}
+	
+	/**
+	 * Helper method: assert A != B
+	 * 
+	 * @param expected expected value (B)
+	 * @param actual actual value (A)
+	 */
 	public void assertNotEqual(String a, String b) {
 		if (a == null)
 			assertNotNull("null should not equal null", b);

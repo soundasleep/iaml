@@ -292,6 +292,12 @@ public class Migrate5To6 extends DomBasedMigrator implements IamlModelMigrator {
 			return true;
 		}
 		
+		// issue 253: DynamicApplicationElementSet removed from iaml
+		if ("iaml:DynamicApplicationElementSet".equals(xsiType)) {
+			errors.add(new ExpectedMigrationException(this, element, "DynamicApplicationElementSets are no longer supported in IAML."));
+			return true;
+		}
+		
 		// super call
 		return super.shouldDeleteNode(element, parent, errors);
 	}

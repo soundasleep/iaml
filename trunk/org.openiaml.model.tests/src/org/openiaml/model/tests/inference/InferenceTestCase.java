@@ -29,7 +29,6 @@ import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsProperties;
-import org.openiaml.model.model.DynamicApplicationElementSet;
 import org.openiaml.model.model.EXSDDataType;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.NamedElement;
@@ -797,17 +796,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public Session assertHasSession(Scope root, String string) throws JaxenException {
 		return (Session) queryOne(root, "iaml:scopes[iaml:name='" + string + "']");	
 	}
-	
-	/**
-	 * Assert that the given element contains the given
-	 * DynamicApplicationElementSet.
-	 *
-	 * @return The element found
-	 */
-	public DynamicApplicationElementSet assertHasDynamicApplicationElementSet(InternetApplication element, String string) throws JaxenException {
-		return (DynamicApplicationElementSet) queryOne(element, "iaml:elements[iaml:name='" + string + "']");	
-	}
-	
+
 	/**
 	 * Assert that the given element contains only one
 	 * DecisionNode.
@@ -1852,5 +1841,24 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 			DomainAttribute b) {
 		assertFalse(equalType((EXSDDataType) a.getEType(), (EXSDDataType) b.getEType()));
 	}
+
+	/**
+	 * Check that there are no ConditionEdges from from to to, with
+	 * the given page as a Parameter
+	 * 
+	 * @throws JaxenException 
+	 */
+	protected void assertNoParamtersToConditionEdges(InternetApplication container,
+			ConditionEdgesSource from, ConditionEdgeDestination to, ParameterEdgesSource page) throws JaxenException {
+
+		Set<ConditionEdge> conditions = getConditionEdgesFromTo(container, from, to);
+		for (ConditionEdge condition : conditions) {
+
+			Set<ParameterEdge> params = getParameterEdgesFromTo(container, page, condition);
+			assertEquals("Unexpectedly found ParameterEdge: " + params, 0, params.size());
+		}
+		
+	}
+	
 	
 }

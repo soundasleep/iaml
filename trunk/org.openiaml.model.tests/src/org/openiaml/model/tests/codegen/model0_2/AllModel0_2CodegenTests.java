@@ -28,7 +28,6 @@ public class AllModel0_2CodegenTests {
 		// Requirement1 removed in 0.5.1
 		suite.addTestSuite(Requirement2StaticParams.class);
 		suite.addTestSuite(Requirement3DynamicParams.class);
-		suite.addTestSuite(Requirement4DynamicSources.class);
 		suite.addTestSuite(Requirement5Operations.class);
 		suite.addTestSuite(Requirement6Conditions.class);
 

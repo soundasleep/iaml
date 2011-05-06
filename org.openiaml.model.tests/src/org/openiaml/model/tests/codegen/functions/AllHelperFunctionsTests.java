@@ -26,7 +26,6 @@ public class AllHelperFunctionsTests {
 		suite.addTestSuite(HasDomainAttribute.class);
 		suite.addTestSuite(LastChainedOperation.class);
 		suite.addTestSuite(NameMatches.class);
-		suite.addTestSuite(XPathMatch.class);
 		suite.addTestSuite(OawCodeGeneratorTests.class);
 
 		return suite;

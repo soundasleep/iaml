@@ -56,10 +56,6 @@
     <classifier href="iaml.ecore#//domain/DomainIterator"/>
     <properties xsi:type="sgmf:LinePattern" linePattern="DASH"/>
   </figureConfigurations>
-  <figureConfigurations name="DynamicApplicationElementSet">
-    <classifier href="iaml.ecore#//DynamicApplicationElementSet"/>
-    <properties xsi:type="sgmf:LinePattern" linePattern="DASH"/>
-  </figureConfigurations>
   <figureConfigurations name="ApplicationElement">
     <classifier href="iaml.ecore#//ApplicationElement"/>
     <properties xsi:type="sgmf:BackgroundColor" color="(248,172,170)"/>
@@ -625,9 +621,6 @@
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="Email">
       <classifier href="iaml.ecore#//scopes/Email"/>
-    </elements>
-    <elements xsi:type="sgmf:ContainedNode" name="DynamicApplicationElementSet">
-      <classifier href="iaml.ecore#//DynamicApplicationElementSet"/>
     </elements>
     <elements xsi:type="sgmf:ContainedNode" name="LoginHandler">
       <classifier href="iaml.ecore#//components/LoginHandler"/>

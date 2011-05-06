@@ -53,6 +53,7 @@ public abstract class AbstractMigrateTestCaseWithWarnings extends AbstractMigrat
 			
 			// does it exist?
 			if (!expected.contains(message)) {
+				System.err.println("All warnings found in " + getModel() + ":");
 				for (IStatus w : status.getChildren()) {
 					System.err.println(w.getMessage());
 				}
@@ -65,6 +66,7 @@ public abstract class AbstractMigrateTestCaseWithWarnings extends AbstractMigrat
 		
 		// there should be no messages left
 		if (!expected.isEmpty()) {
+			System.err.println("Leftover warnings found in " + getModel() + ":");
 			for (String w : expected) {
 				System.err.println(w);
 			}

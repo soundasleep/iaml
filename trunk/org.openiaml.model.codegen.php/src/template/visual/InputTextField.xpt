@@ -174,11 +174,16 @@
 
 		«REM»expand all children«ENDREM»
 		«EXPAND Render::renderVisual(currentFrame) FOREACH children.sortBy(c|c.renderOrder)-»
-		
-		«IF type != null && model::EXSDDataType.isInstance(type) && ((model::EXSDDataType) type).definition.uRI == "http://openiaml.org/model/datatypes#iamlOpenIDURL"»
-			«EXPAND textFieldOpenID(currentFrame)»
-		«ENDIF»
 	</label>
+
+	«REM»
+		the OpenID authenticate button is placed <em>outside</em>
+		of the label, to prevent test cases from erroneously picking
+		up the Button caption as part of the label value
+	«ENDREM»
+	«IF type != null && model::EXSDDataType.isInstance(type) && ((model::EXSDDataType) type).definition.uRI == "http://openiaml.org/model/datatypes#iamlOpenIDURL"»
+		«EXPAND textFieldOpenID(currentFrame)»
+	«ENDIF»	
 	</div>
 «ENDDEFINE»
 

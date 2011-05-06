@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" xmlns:iaml.wires="http://openiaml.org/model/wires" id="model.12813a548f4.11">
+<iaml:InternetApplication xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:iaml="http://openiaml.org/model0.5" xmlns:iaml.visual="http://openiaml.org/model/visual" id="model.12813a548f4.11">
   <scopes xsi:type="iaml.visual:Frame" id="index" name="Home">
     <properties id="model.12813a548f4.37" name="one" outParameterEdges="wires.12813b48b22.d" defaultValue="one" readOnly="true">
       <parameterEdges id="wires.12813b48b22.d" name="select" from="model.12813a548f4.37" to="wires.12813a54ad9.d"/>
@@ -24,10 +24,15 @@
     </children>
   </scopes>
   <scopes xsi:type="iaml.visual:Frame" id="visual.12813a54a8b.c" name="Target" inActions="wires.12813a54ad9.d wires.12813a54ad9.f wires.12813b48b22.a wires.12813b48b22.e">
-    <parameters id="model.12813a548f4.2e" name="select" outWires="wires.12813a54ad9.6">
-      <wires xsi:type="iaml.wires:SetWire" id="wires.12813a54ad9.6" name="set" from="model.12813a548f4.2e" to="visual.12813a54a8b.20"/>
+    <onAccess id="model.12fc42b4f75.1e7" outActions="model.12fc42b4f75.1fc">
+      <actions id="model.12fc42b4f75.1fc" inParameterEdges="wires.12fc42b52ff.34" name="run" from="model.12fc42b4f75.1e7" to="model.12fc42b4f75.1c4"/>
+    </onAccess>
+    <parameters id="model.12813a548f4.2e" name="select" outParameterEdges="wires.12fc42b52ff.34">
+      <parameterEdges id="wires.12fc42b52ff.34" from="model.12813a548f4.2e" to="model.12fc42b4f75.1fc"/>
     </parameters>
-    <children xsi:type="iaml.visual:InputTextField" inWires="wires.12813a54ad9.6" id="visual.12813a54a8b.20" name="parameter:"/>
+    <children xsi:type="iaml.visual:InputTextField" id="visual.12813a54a8b.20" name="parameter:">
+      <operations xsi:type="iaml:PrimitiveOperation" id="model.12fc42b4f75.1c4" name="update" inActions="model.12fc42b4f75.1fc"/>
+    </children>
   </scopes>
   <xsdDataTypes name="xsd:integer" id="xsd_integer">
     <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//integer;XSDSimpleTypeDefinition=40"/>

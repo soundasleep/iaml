@@ -5,6 +5,12 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
+/**
+ * @implementation Map
+ *		The visibility of a {@model Map} does not rely on the initial value of
+ *		its {@model Map#visible visibility}, as a {@model Map} should not be
+ *		displayed unless it has a {@model Map#fieldValue}.
+ */
 «DEFINE renderMap(model::visual::Frame currentFrame) FOR model::visual::Map-»
 	<div class="map_«safeNameString(name)»">
 	<label
@@ -20,7 +26,7 @@
 	</label>
 	
 	<div id="«safeNameString(id)-»" class="iaml_map"
-		«EXPAND Render::getVisibilityInlineCode(currentFrame, true)»
+		«EXPAND Render::getVisibilityInlineCode(currentFrame, /* hidden by default */ false)»
 		>
 		<?php
 		switch (MAP_HANDLER) {

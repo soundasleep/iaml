@@ -223,7 +223,14 @@
 «DEFINE staticInitialValue(model::visual::Frame currentFrame) FOR model::WireDestination»
 «ENDDEFINE»
 
-/* we have a property to provide [in PHP] */
+/**
+ * We have a property to provide (in PHP).
+ *
+ * @implementation SyncWire,SetWire,InputTextField
+ *		A {@model InputTextField} connected by a {@model SetWire} or {@model SyncWire} to a
+ *		{@model Property} with a {@model Property#defaultValue} set will be initialised with
+ *		this default value at runtime, if the text field does not yet have a {@model InputTextField#fieldValue value}.
+ */
 «DEFINE staticInitialValue(model::visual::Frame currentFrame) FOR model::Property»
 	«IF defaultValue == null»
 		«IF containingSession(this) == null»

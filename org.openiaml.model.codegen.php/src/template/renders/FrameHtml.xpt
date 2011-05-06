@@ -132,9 +132,6 @@ if (file_exists(CUSTOM_PATH . "templates/meta/" . $body_id . ".php")) {
 		}
 		set_operation_handler(new operation_handler_«safeName()»());
 
-		// dynamic elements
-		«EXPAND template::dynamic::DynamicElements::dynamicElements(false) FOR getRoot()-»
-
 		// cached primitive condition values
 		«EXPAND template::operations::ClientSideCache::cachedPrimitiveConditions FOR getRoot()»
 

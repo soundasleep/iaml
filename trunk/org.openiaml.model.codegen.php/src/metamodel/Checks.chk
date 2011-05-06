@@ -211,7 +211,7 @@ context model::ContainsProperties WARNING "You should not have a contained Prope
  * Two types are specified to be incompatible if they are different.
  * TODO this should be changed, because e.g. email is compatible with string in one direction. 
  */
-context model::Changeable ERROR "Type '" + type + "' is incompatible with contained fieldValue type '" + fieldValue.type + "'":
+context model::Changeable ERROR "Type '" + toString(type.name) + "' is incompatible with contained fieldValue type '" + toString(fieldValue.type.name) + "'":
 	type == null ||
 	fieldValue == null ||
 	fieldValue.type == null ||

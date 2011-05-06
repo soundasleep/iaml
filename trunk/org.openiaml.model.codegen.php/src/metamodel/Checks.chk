@@ -99,9 +99,6 @@ context model::ActionEdge WARNING "This RunAction will not do anything: consider
 context model::Property WARNING "A session property used as part of a login handler should have a default value set, otherwise secure frames will crash with an exception rather than going to the login frame" :
 	!(defaultValue == null && inWires.typeSelect(model::wires::SetWire).from.typeSelect(model::components::LoginHandler).size > 0); 
 
-context model::QueryParameter ERROR "A QueryParameter cannot be used on a Frame outside of its containing frame (" + containingFrame(this.eContainer) + ", " + containingFrame(outWires.first().to.eContainer) + ")" :
-	outWires.forAll( e | isAccessibleOnFrame(containingFrame(this.eContainer), e.to) );
-
 context model::components::LoginHandler ERROR "A LoginHandler[user] can not have more than one incoming ParameterWire" :
 	(type != model::components::LoginHandlerTypes::USER) || inParameterEdges.size <= 1; 
 

@@ -13,7 +13,6 @@
 «DEFINE callEvent(Boolean php) FOR model::EventTrigger»
 	// Event '«simpleName()»'
 	// expand out all outgoing edges
-	«EXPAND template::operations::OperationCall::callOperation(php, false) FOREACH outWires»
 	«EXPAND template::operations::OperationCall::callOperation(php, false) FOREACH outActions.sortBy(e|-e.priority)»
 «ENDDEFINE»
 

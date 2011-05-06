@@ -145,35 +145,69 @@ if (!require_get("ignore_updates", 0)) {
 «DEFINE updateVisibility FOR model::VisibleThing»
 	{
 		/* VisibleThing '«escapeString(name)»' */
-	«IF containingSession() != null»
-		$hidden = require_session("«safeName(containingSession())»_«safeName()»_hidden", "«visible ? 'false' : 'true'»");
-	«ELSE»
-		$hidden = get_application_value("«safeName()»_hidden", "«visible ? 'false' : 'true'»");
-	«ENDIF»
+		$visibility_set = false;
+
+		«IF containingSession() != null»
+			$hidden = require_session("«safeName(containingSession())»_«safeName()»_hidden", "«visible ? 'false' : 'true'»");
+		«ELSE»
+			$hidden = get_application_value("«safeName()»_hidden", "«visible ? 'false' : 'true'»");
+		«ENDIF»
 		$value = make_into_boolean($hidden) ? "false" : "true";
+		
+		if («EXPAND allowDefaultVisibilty») {
+			$visibility_set = true;
+		} else {
+			«IF containingSession() != null»
+				$visibility_set = has_session("«safeName(containingSession())»_«safeName()»_hidden");
+			«ELSE»
+				$visibility_set = get_application_value("«safeName()»_hidden", null) !== null;
+			«ENDIF»
+		}
+		
 		«FOREACH properties.select(p|p.name=="visible") AS p»
 		if («EXPAND template::operations::Parameters::isSetParameter(true) FOR p») {
 			$value = make_into_boolean(«EXPAND template::operations::Parameters::callParameterValue(true, false) FOR p») ? "true" : "false";
+			$visibility_set = true;
 		}
 		«ENDFOREACH»
 
-		// pass it to the client 
-		if (DEBUG) {
-			log_message("outgoing visibility value to («safeNameString(id)»): '$value'");
-			log_message("set_visibility " 
+		// pass it to the client
+		if ($visibility_set) {
+			if (DEBUG) {
+				log_message("outgoing visibility value to («safeNameString(id)»): '$value'");
+				log_message("set_visibility " 
+					. escape_parameter_string("«safeNameString(id)»")
+					. " "
+					. escape_parameter_string($value));
+			}
+			echo "\nset_visibility " 
 				. escape_parameter_string("«safeNameString(id)»")
 				. " "
-				. escape_parameter_string($value));
+				. escape_parameter_string($value);
 		}
-		echo "\nset_visibility " 
-			. escape_parameter_string("«safeNameString(id)»")
-			. " "
-			. escape_parameter_string($value);
 	}
 	
 	«IF model::visual::IteratorList.isInstance(this)»
 		«EXPAND updateVisibilityIteratorList FOR ((model::visual::IteratorList) this)»
 	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE allowDefaultVisibilty FOR model::VisibleThing»
+true
+«ENDDEFINE»
+
+/*
+ * @implementation MapPoint
+ *		The visibility of a {@model MapPoint} does not rely on the initial value of
+ *		its {@model MapPoint#visible visibility}, as a {@model MapPoint} should not be
+ *		displayed unless it has a {@model MapPoint#fieldValue}.
+ */
+«DEFINE allowDefaultVisibilty FOR model::visual::MapPoint»
+	«IF fieldValue != null»
+		(«EXPAND template::operations::Parameters::isSetParameter(true) FOR fieldValue» ? true : false)
+	«ELSE»
+		false
+	«ENDIF» 
 «ENDDEFINE»
 
 «DEFINE updateVisibilityIteratorList FOR model::visual::IteratorList»

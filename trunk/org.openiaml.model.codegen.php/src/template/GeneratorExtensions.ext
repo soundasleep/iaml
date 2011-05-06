@@ -94,9 +94,6 @@ attributeName(model::domain::DomainAttributeInstance this) :
 	
 attributeName(Void v) :
 	throwException("Invalid attribute (Void)");
-
-isXPath(model::DynamicApplicationElementSet this) :
-	query.startsWith("xpath:");
 	
 /**
  * Get the {@model Frame} which can contain the given {@model Operation}.
@@ -391,10 +388,6 @@ cached List[model::visual::Frame] getAllFrames(model::InternetApplication this) 
 /** get all Emails in the InternetApplication */
 cached List[model::scopes::Email] getAllEmails(model::InternetApplication this) :
 	eAllContents.typeSelect(model::scopes::Email);
-	
-/** get all Dynamic Element Sets in the InternetApplication */
-List[model::DynamicApplicationElementSet] getAllDynamicElements(model::InternetApplication this) :
-	eAllContents.typeSelect(model::DynamicApplicationElementSet);
 
 /** get all Domain Attribute Instances in the InternetApplication */
 List[domain::DomainAttributeInstance] getAllDomainAttributeInstances(model::InternetApplication this) :
@@ -406,10 +399,6 @@ List[model::domain::DomainIterator] getAllDomainIterators(model::InternetApplica
 
 getAllDomainSchemas(emf::EObject this) :
 	eAllContents.typeSelect(model::domain::DomainSchema);
-
-/** find all actual matches for the given DynamicApplicationSet in a given root */
-List[emf::EObject] resolveDynamicSet(model::InternetApplication root, model::DynamicApplicationElementSet set) :
-	JAVA org.openiaml.model.codegen.php.OawCodeGenerator.resolveDynamicSet(org.openiaml.model.model.InternetApplication, org.openiaml.model.model.DynamicApplicationElementSet);
 
 getFailHandler(model::ActionEdgeSource this) :
 	outActions.select( w | w.isFailEdge()).first();

@@ -195,11 +195,6 @@
 	<?php /* DomainAttributeInstances are cached */ echo htmlspecialchars(get_attribute_instance_«safeName()»()); ?>
 «ENDDEFINE»
 
-«DEFINE callParameterValue(Boolean php, Boolean inStoreDb) FOR model::DynamicApplicationElementSet»
-	/* dynamic element set "«name-»" */
-	get_dynamic_elements_«safeName()-»()
-«ENDDEFINE»
-
 «DEFINE callParameterValue(Boolean php, Boolean inStoreDb) FOR model::visual::Frame»
 	/* Frame "«name-»" */
 	new Visual_Frame("«id-»", "«name-»")
@@ -317,9 +312,6 @@
 	true
 «ENDDEFINE»
 «DEFINE callParameterValueExists(Boolean php) FOR model::visual::MapPoint»
-	true
-«ENDDEFINE»
-«DEFINE callParameterValueExists(Boolean php) FOR model::DynamicApplicationElementSet»
 	true
 «ENDDEFINE»
 «DEFINE callParameterValueExists(Boolean php) FOR model::visual::Frame»

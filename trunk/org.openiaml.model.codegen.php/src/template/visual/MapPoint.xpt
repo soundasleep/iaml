@@ -26,6 +26,10 @@
  *		The rendered {@model Changeable#fieldValue value} of a {@model MapPoint}
  *		is selected from the following order: the set {@model Changeable#fieldValue}; outgoing
  *		{@model SyncWire}s; incoming {@model SyncWire}s; or incoming {@model SetWire}s.
+ * @implementation MapPoint
+ *		The visibility of a {@model MapPoint} does not rely on the initial value of
+ *		its {@model MapPoint#visible visibility}, as a {@model MapPoint} should not be
+ *		displayed unless it has a {@model MapPoint#fieldValue}.
  */
 «DEFINE continueMapPointRender(model::visual::Frame currentFrame) FOR model::visual::MapPoint-»
 	«REM»print out any required scripting for the point«ENDREM»
@@ -61,7 +65,7 @@
 	<div
 		id="<?php echo $id; ?>" 
 		style="display: none;"
-		«EXPAND Render::getVisibilityInlineCode(currentFrame)»
+		«EXPAND Render::getVisibilityInlineCode(currentFrame, /* hidden by default */ false)»
 		«EXPAND EventHandlers::getInlineClickJavascript(currentFrame)»	
 		> 
 		

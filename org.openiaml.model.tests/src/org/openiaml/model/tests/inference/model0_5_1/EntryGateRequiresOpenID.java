@@ -6,6 +6,7 @@ package org.openiaml.model.tests.inference.model0_5_1;
 import org.openiaml.model.datatypes.BuiltinDataTypes;
 import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.Condition;
+import org.openiaml.model.model.EXSDDataType;
 import org.openiaml.model.model.EventTrigger;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.Property;
@@ -42,7 +43,7 @@ public class EntryGateRequiresOpenID extends InferenceTestCase {
 		assertNotGenerated(session);
 		
 		Label openid = assertHasLabel(session, "Current OpenID");
-		assertEquals(openid.getType(), BuiltinDataTypes.getTypeOpenIDURL());
+		assertEqualType(openid.getType(), BuiltinDataTypes.getTypeOpenIDURL());
 		assertNotGenerated(openid);
 		
 		Frame secure = assertHasFrame(session, "Secure Page");
@@ -51,7 +52,7 @@ public class EntryGateRequiresOpenID extends InferenceTestCase {
 		Frame see = assertHasFrame(session, "See Your OpenID");
 		assertNotGenerated(see);
 		
-		Gate gate = session.getExitGate();
+		Gate gate = session.getEntryGate();
 		assertEquals("Entry Gate", gate.getName());
 		assertNotGenerated(gate);
 		
@@ -74,7 +75,7 @@ public class EntryGateRequiresOpenID extends InferenceTestCase {
 		Session container = assertHasSession(root, "Containing Session");
 		Session session = assertHasSession(container, "Protected Session");
 		Label openid = assertHasLabel(session, "Current OpenID");
-		Gate gate = session.getExitGate();
+		Gate gate = session.getEntryGate();
 		assertEquals("Entry Gate", gate.getName());
 		
 		Frame enter = assertHasFrame(container, "Provide Current OpenID");
@@ -108,7 +109,7 @@ public class EntryGateRequiresOpenID extends InferenceTestCase {
 		Session container = assertHasSession(root, "Containing Session");
 		Session session = assertHasSession(container, "Protected Session");
 		Label openid = assertHasLabel(session, "Current OpenID");
-		Gate gate = session.getExitGate();
+		Gate gate = session.getEntryGate();
 		assertEquals("Entry Gate", gate.getName());
 		
 		// a condition is set within the openid label, "fieldValue is set"
@@ -128,7 +129,7 @@ public class EntryGateRequiresOpenID extends InferenceTestCase {
 		
 		Session container = assertHasSession(root, "Containing Session");
 		Session session = assertHasSession(container, "Protected Session");
-		Gate gate = session.getExitGate();
+		Gate gate = session.getEntryGate();
 		assertEquals("Entry Gate", gate.getName());
 		
 		Frame enter = assertHasFrame(container, "Provide Current OpenID");

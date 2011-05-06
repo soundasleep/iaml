@@ -38,6 +38,9 @@ public abstract class MapsCodegenTestCase extends CodegenTestCase {
 		IElement map = getElementById(wrapper.getAttribute("for"));
 		assertNotNull(map);
 
+		// assert that the map is visible
+		assertTrue("Map " + map + "should be displayed", isDisplayed(map));
+		
 		return map;
 	}
 	
@@ -70,6 +73,9 @@ public abstract class MapsCodegenTestCase extends CodegenTestCase {
 		IElement point = getElementById(wrapper.getAttribute("for"));
 		assertNotNull(point);
 		
+		// assert that the map point is visible
+		assertTrue("Map point " + point + "should be displayed", isDisplayed(point));
+		
 		// this should be contained within the given map
 		List<IElement> elements = map.getElements("//*");
 		assertTrue(elements + " did not contain " + point,
@@ -94,6 +100,9 @@ public abstract class MapsCodegenTestCase extends CodegenTestCase {
 		IElement point = getElementById(wrapper.getAttribute("for"));
 		assertNotNull(point);
 		
+		// assert that the map point is visible
+		assertTrue("Map point " + point + "should be displayed", isDisplayed(point));
+
 		return point;
 	}
 	
@@ -114,13 +123,15 @@ public abstract class MapsCodegenTestCase extends CodegenTestCase {
 	 * @param string
 	 */
 	public void assertHasNoMapPoint(IElement map, String string) {
+		boolean failed = false;
+		IElement point = null;
 		try {
-			IElement point = assertHasMapPoint(map, string);
-
-			throw new RuntimeException("Map point '" + string + "' was unexpectedly found in map '" + map + "': " + point);
+			point = assertHasMapPoint(map, string);
+			failed = true;
 		} catch (AssertionFailedError e) {
 			// expected
 		}
+		assertFalse("Map point '" + string + "' was unexpectedly found in map '" + map + "': " + point, failed);
 	}
 
 	/**

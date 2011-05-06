@@ -557,7 +557,7 @@ List[model::components::Gate] getFrameEntryGates(emf::EObject this) :
  */
 getAllExitGates(model::visual::Frame this) :
 	getRoot().eAllContents.typeSelect(model::components::Gate)
-		.select( g | model::Scope.isInstance(g.eContainer) && ((model::Scope) eContainer).exitGate == g )
+		.select( g | model::Scope.isInstance(g.eContainer) && ((model::Scope) g.eContainer).exitGate == g )
 		.sortBy( n | -getNodeDepth(n) );
 
 int getNodeDepth(emf::EObject this) :

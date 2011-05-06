@@ -11,6 +11,7 @@ import org.openiaml.model.migrate.Migrate0To1;
 import org.openiaml.model.migrate.Migrate1To2;
 import org.openiaml.model.migrate.Migrate2To4;
 import org.openiaml.model.migrate.Migrate4To5;
+import org.openiaml.model.migrate.Migrate5To6;
 import org.openiaml.model.model.InternetApplication;
 
 /**
@@ -52,6 +53,7 @@ public class Migrate0_3FileDomainObjects extends AbstractMigrateTestCaseWithWarn
 		assertClassNotIn(Migrate1To2.class, used);
 		assertClassIn(Migrate2To4.class, used);
 		assertClassIn(Migrate4To5.class, used);
+		assertClassIn(Migrate5To6.class, used);
 	}
 
 	@Override

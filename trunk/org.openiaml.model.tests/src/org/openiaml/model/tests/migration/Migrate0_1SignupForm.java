@@ -10,6 +10,7 @@ import org.openiaml.model.migrate.IamlModelMigrator;
 import org.openiaml.model.migrate.Migrate0To1;
 import org.openiaml.model.migrate.Migrate2To4;
 import org.openiaml.model.migrate.Migrate4To5;
+import org.openiaml.model.migrate.Migrate5To6;
 import org.openiaml.model.model.InternetApplication;
 
 /**

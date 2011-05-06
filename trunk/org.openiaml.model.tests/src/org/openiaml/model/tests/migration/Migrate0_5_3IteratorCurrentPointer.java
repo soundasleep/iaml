@@ -3,6 +3,7 @@
  */
 package org.openiaml.model.tests.migration;
 
+import java.io.File;
 import java.util.List;
 
 import org.openiaml.model.migrate.IamlModelMigrator;
@@ -20,7 +21,7 @@ import org.openiaml.model.model.InternetApplication;
  * @author jmwright
  *
  */
-public class Migrate0_5_3IteratorCurrentPointer extends AbstractMigrateTestCase {
+public class Migrate0_5_3IteratorCurrentPointer extends AbstractMigrateTestCaseWithWarnings {
 
 	/**
 	 * Test to see which migrators were actually used.
@@ -47,6 +48,14 @@ public class Migrate0_5_3IteratorCurrentPointer extends AbstractMigrateTestCase 
 	@Override
 	public void migratedModelTests(InternetApplication root) throws Exception {
 		// TODO currently empty
+	}
+
+	/* (non-Javadoc)
+	 * @see org.openiaml.model.tests.migration.AbstractMigrateTestCaseWithWarnings#getExpectedWarningsFile()
+	 */
+	@Override
+	public File getExpectedWarningsFile() {
+		return new File("src/org/openiaml/model/tests/migration/Migrate0_5_3Warnings.txt");
 	}
 	
 }

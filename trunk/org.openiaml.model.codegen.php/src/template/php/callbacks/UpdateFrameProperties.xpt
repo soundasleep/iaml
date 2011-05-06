@@ -184,6 +184,22 @@ if (!require_get("ignore_updates", 0)) {
 				. escape_parameter_string("«safeNameString(id)»")
 				. " "
 				. escape_parameter_string($value);
+				
+			«IF model::visual::Map.isInstance(this) &&
+					children.typeSelect(model::visual::MapPoint).isEmpty»
+				/* Maps that don't contain MapPoints must also update its implicit container */
+				if (DEBUG) {
+					log_message("outgoing visibility value to (map_«safeNameString(id)»): '$value'");
+					log_message("set_visibility " 
+						. escape_parameter_string("map_«safeNameString(id)»")
+						. " "
+						. escape_parameter_string($value));
+				}
+				echo "\nset_visibility " 
+					. escape_parameter_string("map_«safeNameString(id)»")
+					. " "
+					. escape_parameter_string($value);
+			«ENDIF»
 		}
 	}
 	
@@ -207,6 +223,25 @@ true
 		(«EXPAND template::operations::Parameters::isSetParameter(true) FOR fieldValue» ? true : false)
 	«ELSE»
 		false
+	«ENDIF» 
+«ENDDEFINE»
+
+/*
+ * @implementation Map
+ *		The visibility of a {@model Map} does not rely on the initial value of
+ *		its {@model MapPoint#visible visibility}, as a {@model Map} should not be
+ *		displayed unless it has a {@model MapPoint#fieldValue} or a contained
+ *		{@model MapPoint}.
+ */
+«DEFINE allowDefaultVisibilty FOR model::visual::Map»
+	«IF children.typeSelect(model::visual::MapPoint).isEmpty»
+		«IF fieldValue != null»
+			(«EXPAND template::operations::Parameters::isSetParameter(true) FOR fieldValue» ? true : false)
+		«ELSE»
+			false
+		«ENDIF»
+	«ELSE»
+		true
 	«ENDIF» 
 «ENDDEFINE»
 

@@ -249,10 +249,6 @@ public class UserRoles extends InferenceTestCase {
 
 		CompositeOperation sessionOp = assertHasCompositeOperation(target, "permissions check");
 		assertGenerated(sessionOp);
-
-		// the page's event trigger should not connect to the actual permissions check in the session
-		assertHasNoWiresFromTo(session, event, sessionOp);
-
 	}
 
 	/**

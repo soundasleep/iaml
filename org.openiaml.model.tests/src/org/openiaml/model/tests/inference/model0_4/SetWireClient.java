@@ -108,9 +108,6 @@ public class SetWireClient extends InferenceTestCase {
 		// and an 'update' event in target
 		PrimitiveOperation update = assertHasPrimitiveOperation(source, "update");
 		assertGenerated(update);
-
-		// but NOT connected with a run wire
-		assertHasNoWiresFromTo(page, edit, update);
 	}
 
 	/**

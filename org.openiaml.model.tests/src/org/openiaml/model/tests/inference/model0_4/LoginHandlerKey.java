@@ -105,7 +105,6 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 
 		Operation check = assertHasOperation(session, "check key");
 		EventTrigger access = viewkey.getOnAccess();
-		assertHasWiresFromTo(0, session, access, check);
 		{
 			ActionEdge run = assertHasRunAction(session, access, check);
 			assertGenerated(run);
@@ -129,7 +128,6 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 
 		Operation op = assertHasOperation(session, "do logout");
 		EventTrigger access = page.getOnAccess();
-		assertHasWiresFromTo(0, session, access, op);
 		{
 			ActionEdge run = assertHasRunAction(session, access, op);
 			assertGenerated(run);
@@ -156,7 +154,6 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		assertNotGenerated(target);
 
 		EventTrigger access = page.getOnAccess();
-		assertHasNoWiresFromTo(session, access, target);
 		{
 			ActionEdge nav = assertHasNavigateAction(session, access, target);
 			assertGenerated(nav);
@@ -258,7 +255,6 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		// destination page
 		Frame login = assertHasFrame(loginSession, "login");
 		{
-			assertHasNoWiresFromTo(root, check, login);
 			ActionEdge wire = assertHasNavigateAction(root, check, login, "fail");
 			assertGenerated(wire);
 		}

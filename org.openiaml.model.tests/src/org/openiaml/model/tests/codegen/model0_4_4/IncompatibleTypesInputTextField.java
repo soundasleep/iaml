@@ -29,12 +29,14 @@ public class IncompatibleTypesInputTextField extends CodegenTestCase {
 		assertNotNull(ex.getChildren());
 		assertNotEqual(0, ex.getChildren().length);
 		boolean found = false;
+		StringBuffer errorBuffer = new StringBuffer();
 		for (IStatus s : ex.getChildren()) {
-			if (s.getMessage().startsWith("Type '" + BuiltinDataTypes.TYPE_INTEGER + "' is incompatible with contained fieldValue type '" + BuiltinDataTypes.TYPE_EMAIL + "'")) {
+			if (s.getMessage().startsWith("Type 'builtin:iamlInteger' is incompatible with contained fieldValue type 'builtin:iamlEmail'")) {
 				found = true;
 			}
+			errorBuffer.append(s.getMessage()).append("\n");
 		}
-		assertTrue("Could not find expected status message", found);
+		assertTrue("Could not find expected status message in:\n" + errorBuffer.toString(), found);
 		
 	}
 

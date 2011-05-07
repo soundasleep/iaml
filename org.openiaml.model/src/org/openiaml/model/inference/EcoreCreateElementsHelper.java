@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.openiaml.model.FileReference;
 import org.openiaml.model.model.Accessible;
 import org.openiaml.model.model.Action;
-import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.ActionEdgeSource;
 import org.openiaml.model.model.Changeable;
 import org.openiaml.model.model.CompositeCondition;
@@ -22,18 +21,21 @@ import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsProperties;
 import org.openiaml.model.model.ContainsWires;
-import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.ECARule;
+import org.openiaml.model.model.Event;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.PrimitiveCondition;
 import org.openiaml.model.model.PrimitiveOperation;
-import org.openiaml.model.model.Property;
 import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.Scope;
+import org.openiaml.model.model.SimpleCondition;
+import org.openiaml.model.model.Value;
 import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.WireDestination;
 import org.openiaml.model.model.WireSource;
@@ -49,6 +51,7 @@ import org.openiaml.model.model.domain.DomainSource;
 import org.openiaml.model.model.domain.DomainStoreTypes;
 import org.openiaml.model.model.domain.SchemaEdge;
 import org.openiaml.model.model.domain.SelectEdge;
+import org.openiaml.model.model.operations.ActivityParameter;
 import org.openiaml.model.model.operations.Arithmetic;
 import org.openiaml.model.model.operations.ArithmeticOperationTypes;
 import org.openiaml.model.model.operations.CancelNode;
@@ -64,7 +67,6 @@ import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.JoinNode;
 import org.openiaml.model.model.operations.OperationCallNode;
 import org.openiaml.model.model.operations.OperationsPackage;
-import org.openiaml.model.model.operations.Parameter;
 import org.openiaml.model.model.operations.SplitNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.Email;
@@ -82,13 +84,11 @@ import org.openiaml.model.model.visual.IteratorList;
 import org.openiaml.model.model.visual.Label;
 import org.openiaml.model.model.visual.MapPoint;
 import org.openiaml.model.model.visual.VisualPackage;
-import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ConditionEdgeDestination;
 import org.openiaml.model.model.wires.ConditionEdgesSource;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ExtendsEdgeDestination;
 import org.openiaml.model.model.wires.ExtendsEdgesSource;
-import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.ParameterEdgeDestination;
 import org.openiaml.model.model.wires.ParameterEdgesSource;
 import org.openiaml.model.model.wires.RequiresEdge;
@@ -99,31 +99,33 @@ import org.openiaml.model.model.wires.WiresPackage;
 /**
  * Provides some helpful wrapper methods.
  * 
- * TODO it would be nice one day if this could be automatically generated?
+ * <p>TODO it would be nice one day if this could be automatically generated? This could be
+ * generated from the existing .simplegmf definitions, or simply from the existing
+ * .ecore model.
  * 
  * @author jmwright
  *
  */
 public abstract class EcoreCreateElementsHelper implements ICreateElements {
 
-	public Property generatedProperty(GeneratesElements by, ContainsProperties container) throws InferenceException {
-		return generatedProperty(by, container, ModelPackage.eINSTANCE.getContainsProperties_Properties() );
+	public Value generatedValue(GeneratesElements by, ContainsProperties container) throws InferenceException {
+		return generatedValue(by, container, ModelPackage.eINSTANCE.getContainsProperties_Properties() );
 	}
 	
-	public Property generatedProperty(GeneratesElements by, ContainsProperties container, EReference reference) throws InferenceException {
-		Property fieldValue = (Property) createElement( container, ModelPackage.eINSTANCE.getProperty(), reference );
+	public Value generatedValue(GeneratesElements by, ContainsProperties container, EReference reference) throws InferenceException {
+		Value fieldValue = (Value) createElement( container, ModelPackage.eINSTANCE.getValue(), reference );
 		setGeneratedBy(fieldValue, by);
 		return fieldValue;
 	}
 
-	public Property generatedPropertyFieldValue(GeneratesElements by, Changeable container) throws InferenceException {
-		Property fieldValue = (Property) createElement( container, ModelPackage.eINSTANCE.getProperty(), ModelPackage.eINSTANCE.getChangeable_FieldValue() );
+	public Value generatedPropertyFieldValue(GeneratesElements by, Changeable container) throws InferenceException {
+		Value fieldValue = (Value) createElement( container, ModelPackage.eINSTANCE.getValue(), ModelPackage.eINSTANCE.getChangeable_FieldValue() );
 		setGeneratedBy(fieldValue, by);
 		return fieldValue;
 	}
 	
-	public Property generatedPropertyCurrentInput(GeneratesElements by, VisibleThing container) throws InferenceException {
-		Property fieldValue = (Property) createElement( container, ModelPackage.eINSTANCE.getProperty(), ModelPackage.eINSTANCE.getVisibleThing_CurrentInput() );
+	public Value generatedPropertyCurrentInput(GeneratesElements by, VisibleThing container) throws InferenceException {
+		Value fieldValue = (Value) createElement( container, ModelPackage.eINSTANCE.getValue(), ModelPackage.eINSTANCE.getVisibleThing_CurrentInput() );
 		setGeneratedBy(fieldValue, by);
 		return fieldValue;
 	}
@@ -152,38 +154,38 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setValue(element, ModelPackage.eINSTANCE.getGeneratedElement_GeneratedRule(), ruleName);
 	}
 
-	public EventTrigger generatedEventTriggerOnAccess(GeneratesElements by, Accessible container) throws InferenceException {
-		EventTrigger event = (EventTrigger) createElement( container, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getAccessible_OnAccess() );
+	public Event generatedEventOnAccess(GeneratesElements by, Accessible container) throws InferenceException {
+		Event event = (Event) createElement( container, ModelPackage.eINSTANCE.getEvent(), ModelPackage.eINSTANCE.getAccessible_OnAccess() );
 		setGeneratedBy(event, by);
 		return event;
 	}
 
-	public EventTrigger generatedEventTriggerOnClick(GeneratesElements by, VisibleThing container) throws InferenceException {
-		EventTrigger event = (EventTrigger) createElement( container, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getVisibleThing_OnClick() );
+	public Event generatedEventOnClick(GeneratesElements by, VisibleThing container) throws InferenceException {
+		Event event = (Event) createElement( container, ModelPackage.eINSTANCE.getEvent(), ModelPackage.eINSTANCE.getVisibleThing_OnClick() );
 		setGeneratedBy(event, by);
 		return event;
 	}
 
-	public EventTrigger generatedEventTriggerOnChange(GeneratesElements by, Changeable container) throws InferenceException {
-		EventTrigger event = (EventTrigger) createElement( container, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getChangeable_OnChange() );
+	public Event generatedEventOnChange(GeneratesElements by, Changeable container) throws InferenceException {
+		Event event = (Event) createElement( container, ModelPackage.eINSTANCE.getEvent(), ModelPackage.eINSTANCE.getChangeable_OnChange() );
 		setGeneratedBy(event, by);
 		return event;
 	}
 
-	public EventTrigger generatedEventTriggerOnInit(GeneratesElements by, Scope container) throws InferenceException {
-		EventTrigger event = (EventTrigger) createElement( container, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getScope_OnInit() );
+	public Event generatedEventOnInit(GeneratesElements by, Scope container) throws InferenceException {
+		Event event = (Event) createElement( container, ModelPackage.eINSTANCE.getEvent(), ModelPackage.eINSTANCE.getScope_OnInit() );
 		setGeneratedBy(event, by);
 		return event;
 	}
 
-	public EventTrigger generatedEventTriggerOnInput(GeneratesElements by, VisibleThing container) throws InferenceException {
-		EventTrigger event = (EventTrigger) createElement( container, ModelPackage.eINSTANCE.getEventTrigger(), ModelPackage.eINSTANCE.getVisibleThing_OnInput() );
+	public Event generatedEventOnInput(GeneratesElements by, VisibleThing container) throws InferenceException {
+		Event event = (Event) createElement( container, ModelPackage.eINSTANCE.getEvent(), ModelPackage.eINSTANCE.getVisibleThing_OnInput() );
 		setGeneratedBy(event, by);
 		return event;
 	}
 
-	public EventTrigger generatedEventTrigger(GeneratesElements by, EObject container, EReference reference) throws InferenceException {
-		EventTrigger event = (EventTrigger) createElement( container, ModelPackage.eINSTANCE.getEventTrigger(), reference);
+	public Event generatedEvent(GeneratesElements by, EObject container, EReference reference) throws InferenceException {
+		Event event = (Event) createElement( container, ModelPackage.eINSTANCE.getEvent(), reference);
 		setGeneratedBy(event, by);
 		return event;
 	}
@@ -242,14 +244,14 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return operation;
 	}
 	
-	public Parameter generatedParameter(GeneratesElements by, Operation container) throws InferenceException {
-		Parameter parameter = (Parameter) createElement( container, OperationsPackage.eINSTANCE.getParameter(), ModelPackage.eINSTANCE.getOperation_Parameters() );
+	public ActivityParameter generatedActivityParameter(GeneratesElements by, Operation container) throws InferenceException {
+		ActivityParameter parameter = (ActivityParameter) createElement( container, OperationsPackage.eINSTANCE.getActivityParameter(), ModelPackage.eINSTANCE.getOperation_Parameters() );
 		setGeneratedBy(parameter, by);
 		return parameter;
 	}	
 	
-	public Parameter generatedParameter(GeneratesElements by, CompositeCondition container) throws InferenceException {
-		Parameter parameter = (Parameter) createElement( container, OperationsPackage.eINSTANCE.getParameter(), ModelPackage.eINSTANCE.getCompositeCondition_Parameters() );
+	public ActivityParameter generatedActivityParameter(GeneratesElements by, CompositeCondition container) throws InferenceException {
+		ActivityParameter parameter = (ActivityParameter) createElement( container, OperationsPackage.eINSTANCE.getActivityParameter(), ModelPackage.eINSTANCE.getCompositeCondition_Parameters() );
 		setGeneratedBy(parameter, by);
 		return parameter;
 	}
@@ -450,14 +452,14 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return edge;
 	}
 	
-	public ActionEdge generatedActionEdge(GeneratesElements by, ContainsWires container, ActionEdgeSource source, Action target) throws InferenceException {
-		ActionEdge wire = (ActionEdge) createRelationship(container, ModelPackage.eINSTANCE.getActionEdge(), source, target, ModelPackage.eINSTANCE.getContainsWires_Actions(), ModelPackage.eINSTANCE.getActionEdge_From(), ModelPackage.eINSTANCE.getActionEdge_To());
+	public ECARule generatedECARule(GeneratesElements by, ContainsWires container, ActionEdgeSource source, Action target) throws InferenceException {
+		ECARule wire = (ECARule) createRelationship(container, ModelPackage.eINSTANCE.getECARule(), source, target, ModelPackage.eINSTANCE.getContainsWires_Actions(), ModelPackage.eINSTANCE.getECARule_From(), ModelPackage.eINSTANCE.getECARule_To());
 		setGeneratedBy(wire, by);
 		return wire;
 	}
 
-	public ParameterEdge generatedParameterEdge(GeneratesElements by, ContainsWires container, ParameterEdgesSource source, ParameterEdgeDestination target) throws InferenceException {
-		ParameterEdge wire = (ParameterEdge) createRelationship(container, WiresPackage.eINSTANCE.getParameterEdge(), source, target, ModelPackage.eINSTANCE.getContainsWires_ParameterEdges(), WiresPackage.eINSTANCE.getParameterEdge_From(), WiresPackage.eINSTANCE.getParameterEdge_To());
+	public Parameter generatedParameter(GeneratesElements by, ContainsWires container, ParameterEdgesSource source, ParameterEdgeDestination target) throws InferenceException {
+		Parameter wire = (Parameter) createRelationship(container, ModelPackage.eINSTANCE.getParameter(), source, target, ModelPackage.eINSTANCE.getContainsWires_ParameterEdges(), ModelPackage.eINSTANCE.getParameter_From(), ModelPackage.eINSTANCE.getParameter_To());
 		setGeneratedBy(wire, by);
 		return wire;
 	}
@@ -582,8 +584,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		return object;
 	}
 
-	public ConditionEdge generatedConditionEdge(GeneratesElements by, ContainsWires container, ConditionEdgesSource source, ConditionEdgeDestination target) throws InferenceException {
-		ConditionEdge wire = (ConditionEdge) createRelationship(container, WiresPackage.eINSTANCE.getConditionEdge(), source, target, ModelPackage.eINSTANCE.getContainsWires_ConditionEdges(), WiresPackage.eINSTANCE.getConditionEdge_From(), WiresPackage.eINSTANCE.getConditionEdge_To());
+	public SimpleCondition generatedSimpleCondition(GeneratesElements by, ContainsWires container, ConditionEdgesSource source, ConditionEdgeDestination target) throws InferenceException {
+		SimpleCondition wire = (SimpleCondition) createRelationship(container, ModelPackage.eINSTANCE.getSimpleCondition(), source, target, ModelPackage.eINSTANCE.getContainsWires_ConditionEdges(), ModelPackage.eINSTANCE.getSimpleCondition_From(), ModelPackage.eINSTANCE.getSimpleCondition_To());
 		setGeneratedBy(wire, by);
 		return wire;
 	}
@@ -650,8 +652,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setValue(element, OperationsPackage.eINSTANCE.getExecutionEdge_To(), value);
 	}
 	
-	public void setType(Property element, EDataType value) throws InferenceException {
-		setValue(element, ModelPackage.eINSTANCE.getProperty_Type(), value);
+	public void setType(Value element, EDataType value) throws InferenceException {
+		setValue(element, ModelPackage.eINSTANCE.getValue_Type(), value);
 	}
 
 	public void setType(Arithmetic element, ArithmeticOperationTypes value) throws InferenceException {
@@ -670,8 +672,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setValue(element, DomainPackage.eINSTANCE.getDomainIterator_Query(), value);
 	}
 
-	public void setPriority(ActionEdge element, int value) throws InferenceException {
-		setValue(element, ModelPackage.eINSTANCE.getActionEdge_Priority(), value);
+	public void setPriority(ECARule element, int value) throws InferenceException {
+		setValue(element, ModelPackage.eINSTANCE.getECARule_Priority(), value);
 	}
 	
 	public void setRenderOrder(VisibleThing element, int value) throws InferenceException {
@@ -686,8 +688,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setValue(element, OperationsPackage.eINSTANCE.getCancelNode_ExceptionText(), value);
 	}
 	
-	public void setDefaultValue(Property element, String value) throws InferenceException {
-		setValue(element, ModelPackage.eINSTANCE.getProperty_DefaultValue(), value);
+	public void setDefaultValue(Value element, String value) throws InferenceException {
+		setValue(element, ModelPackage.eINSTANCE.getValue_DefaultValue(), value);
 	}
 	
 	public void setFile(DomainSource element, FileReference value) throws InferenceException {
@@ -718,8 +720,8 @@ public abstract class EcoreCreateElementsHelper implements ICreateElements {
 		setValue(element, ModelPackage.eINSTANCE.getVisibleThing_Visible(), value);
 	}
 	
-	public void setReadOnly(Property element, boolean value) throws InferenceException {
-		setValue(element, ModelPackage.eINSTANCE.getProperty_ReadOnly(), value);
+	public void setReadOnly(Value element, boolean value) throws InferenceException {
+		setValue(element, ModelPackage.eINSTANCE.getValue_ReadOnly(), value);
 	}
 
 }

@@ -42,10 +42,10 @@ public class ParentNamesTestCase extends XmlTestCase {
 	private static final EClass[] PARENT_NAME_TYPES = new EClass[] {
 		DomainPackage.eINSTANCE.getDomainAttribute(),
 		DomainPackage.eINSTANCE.getDomainAttributeInstance(),
-		ModelPackage.eINSTANCE.getEventTrigger(),
+		ModelPackage.eINSTANCE.getEvent(),
 		ModelPackage.eINSTANCE.getOperation(),
-		ModelPackage.eINSTANCE.getCondition(),
-		ModelPackage.eINSTANCE.getProperty(),
+		ModelPackage.eINSTANCE.getFunction(),
+		ModelPackage.eINSTANCE.getValue(),
 		VisualPackage.eINSTANCE.getFrame(),
 		ComponentsPackage.eINSTANCE.getGate(),
 		ModelPackage.eINSTANCE.getVisibleThing(),
@@ -60,16 +60,16 @@ public class ParentNamesTestCase extends XmlTestCase {
 		DomainPackage.eINSTANCE.getDomainAttribute(),
 		// DomainAttributeInstance
 		DomainPackage.eINSTANCE.getDomainAttributeInstance(),
-		// EventTrigger
-		ModelPackage.eINSTANCE.getEventTrigger(),
+		// Event
+		ModelPackage.eINSTANCE.getEvent(),
 		// Operation
 		ModelPackage.eINSTANCE.getPrimitiveOperation(),
 		ModelPackage.eINSTANCE.getCompositeOperation(),
 		// Condition
 		ModelPackage.eINSTANCE.getPrimitiveCondition(),
 		ModelPackage.eINSTANCE.getCompositeCondition(),
-		// Property
-		ModelPackage.eINSTANCE.getProperty(),
+		// Value
+		ModelPackage.eINSTANCE.getValue(),
 		// Frame
 		VisualPackage.eINSTANCE.getFrame(),
 		// Gate
@@ -170,8 +170,8 @@ public class ParentNamesTestCase extends XmlTestCase {
 	 * parent name elements.
 	 */
 	private static final EClass[] CONTAINMENT_FEATURE_ELEMENTS = new EClass[] {
-		ModelPackage.eINSTANCE.getEventTrigger(),
-		ModelPackage.eINSTANCE.getProperty(),
+		ModelPackage.eINSTANCE.getEvent(),
+		ModelPackage.eINSTANCE.getValue(),
 		ModelPackage.eINSTANCE.getPrimitiveCondition(),
 		ComponentsPackage.eINSTANCE.getGate(),
 	};
@@ -198,8 +198,8 @@ public class ParentNamesTestCase extends XmlTestCase {
 	 */
 	private static final EClass[] TYPED_ELEMENTS = new EClass[] {
 		OperationsPackage.eINSTANCE.getTemporaryVariable(),
-		ModelPackage.eINSTANCE.getProperty(),
-		OperationsPackage.eINSTANCE.getParameter(),
+		ModelPackage.eINSTANCE.getValue(),
+		OperationsPackage.eINSTANCE.getActivityParameter(),
 
 		// changeable
 		DomainPackage.eINSTANCE.getDomainAttributeInstance(),

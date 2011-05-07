@@ -131,7 +131,7 @@ end
 rule "Create 'hasNext' PrimitiveCondition"
 	when
 		instance : DomainIterator( )
-		not ( cond : Condition ( instance.hasNext == cond ) )
+		not ( cond : Function ( instance.hasNext == cond ) )
 
 		eval ( handler.veto( instance ))
 	
@@ -151,7 +151,7 @@ end
 rule "Create 'hasPrevious' PrimitiveCondition"
 	when
 		instance : DomainIterator( )
-		not ( cond : Condition ( instance.hasPrevious == cond ) )
+		not ( cond : Function ( instance.hasPrevious == cond ) )
 
 		eval ( handler.veto( instance ))
 	
@@ -171,7 +171,7 @@ end
 rule "Create 'empty' PrimitiveCondition"
 	when
 		instance : DomainIterator( )
-		not ( cond : Condition ( instance.empty == cond ) )
+		not ( cond : Function ( instance.empty == cond ) )
 
 		eval ( handler.veto( instance ))
 	
@@ -191,12 +191,12 @@ end
 rule "Create 'results' Property"
 	when
 		instance : DomainIterator( )
-		not ( property : Property ( instance.results == property ) )
+		not ( property : Value ( instance.results == property ) )
 
 		eval ( handler.veto( instance ))
 	
 	then
-		Property property = handler.generatedProperty(instance, instance, 
+		Value property = handler.generatedValue(instance, instance, 
 			DomainPackage.eINSTANCE.getDomainIterator_Results());
 		handler.setName(property, "results count");
 		handler.setReadOnly(property, true);
@@ -207,18 +207,18 @@ end
 
 /**
  * @inference DomainIterator
- *		A {@model DomainIterator} has a {@model EventTrigger} 
+ *		A {@model DomainIterator} has a {@model Event} 
  *		called '{@model DomainIterator#onIterate}'.
  */
-rule "Create 'onIterate' EventTrigger"
+rule "Create 'onIterate' Event"
 	when
 		instance : DomainIterator( )
-		not ( event : EventTrigger ( instance.onIterate == event ) )
+		not ( event : Event ( instance.onIterate == event ) )
 
 		eval ( handler.veto( instance ))
 	
 	then
-		EventTrigger event = handler.generatedEventTrigger(instance, instance, 
+		Event event = handler.generatedEvent(instance, instance, 
 			DomainPackage.eINSTANCE.getDomainIterator_OnIterate());
 		handler.setName(event, "on iterate");
 		queue.add(event, drools);
@@ -233,7 +233,7 @@ end
 rule "Create 'not empty' composite condition"
 	when
 		instance : DomainIterator( )
-		not ( condition : Condition ( eContainer == instance, name == "not empty" ) )
+		not ( condition : Function ( eContainer == instance, name == "not empty" ) )
 
 		eval ( handler.veto( instance ))
 	
@@ -247,7 +247,7 @@ end
 rule "Create contents of 'not empty' condition"
 	when
 		instance : DomainIterator( )
-		isEmpty : Condition ( instance.empty == isEmpty )
+		isEmpty : Function ( instance.empty == isEmpty )
 		condition : CompositeCondition ( eContainer == instance, name == "not empty" )
 		
 		not ( StartNode ( eContainer == condition ))
@@ -265,7 +265,7 @@ rule "Create contents of 'not empty' condition"
 		DecisionNode decision = handler.generatedDecisionNode(condition, condition);
 		queue.add(decision, drools);
 		
-		ConditionEdge edge = handler.generatedConditionEdge(condition, condition, isEmpty, decision);
+		SimpleCondition edge = handler.generatedSimpleCondition(condition, condition, isEmpty, decision);
 		queue.add(edge, drools);
 		
 		ExecutionEdge e1 = handler.generatedExecutionEdge(condition, condition, start, decision);

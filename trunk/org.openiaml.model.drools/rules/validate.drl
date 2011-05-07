@@ -42,9 +42,9 @@ end
 rule "When two TextFields of different types are under a SyncWire, add a 'validate' operation"
 	when
 		e1 : InputTextField( )
-		e1_property : Property ( e1.fieldValue == e1_property )
+		e1_property : Value ( e1.fieldValue == e1_property )
 		e2 : InputTextField( )
-		e2_property : Property ( e2.fieldValue == e2_property )
+		e2_property : Value ( e2.fieldValue == e2_property )
 		eval ( e1 != e2 )
 		sw : SyncWire ( )
 		eval ( functions.connects(sw, e1, e2) )
@@ -65,25 +65,25 @@ end
 rule "When two TextFields of different types are under a SyncWire, call the 'validate' operation onChange"
 	when
 		e1 : InputTextField( )
-		e1_property : Property ( e1.fieldValue == e1_property )
+		e1_property : Value ( e1.fieldValue == e1_property )
 		e2 : InputTextField( )
-		e2_property : Property ( e2.fieldValue == e2_property )
+		e2_property : Value ( e2.fieldValue == e2_property )
 		eval ( e1 != e2 )
 		sw : SyncWire ( )
 		eval ( functions.connects(sw, e1, e2) )
 		
 		eval ( e1.getType() != e2.getType() )
 		
-		event : EventTrigger ( e1.onChange == event )
+		event : Event ( e1.onChange == event )
 		
 		op : Operation ( name == "validate", eContainer == e1, eval(functions.generatedBy(sw, op)) )
 		
-		not ( run : ActionEdge ( from == event, to == op ) )
+		not ( run : ECARule ( from == event, to == op ) )
 						
 		eval ( handler.veto( sw ))
 		
 	then
-		ActionEdge run = handler.generatedActionEdge(sw, e1, event, op);
+		ECARule run = handler.generatedECARule(sw, e1, event, op);
 		handler.setName(run, "run");
 		queue.add(run, drools);
 
@@ -92,9 +92,9 @@ end
 rule "Create contents of 'validate' operation"
 	when
 		e1 : InputTextField( )
-		e1_property : Property ( e1.fieldValue == e1_property )
+		e1_property : Value ( e1.fieldValue == e1_property )
 		e2 : InputTextField( )
-		e2_property : Property ( e2.fieldValue == e2_property )
+		e2_property : Value ( e2.fieldValue == e2_property )
 		eval ( e1 != e2 )
 		sw : SyncWire ( )
 		eval ( functions.connects(sw, e1, e2) )
@@ -142,7 +142,7 @@ rule "Create contents of 'validate' operation"
 		handler.setName(callHide, "call hide");
 		queue.add(callHide, drools);
 		
-		ActionEdge runHide = handler.generatedActionEdge(o, o, callHide, hide);
+		ECARule runHide = handler.generatedECARule(o, o, callHide, hide);
 		handler.setName(runHide, "run");
 		queue.add(runHide, drools);
 		 
@@ -150,7 +150,7 @@ rule "Create contents of 'validate' operation"
 		handler.setName(callShow, "call show");
 		queue.add(callShow, drools);
 		
-		ActionEdge runShow = handler.generatedActionEdge(o, o, callShow, show);
+		ECARule runShow = handler.generatedECARule(o, o, callShow, show);
 		handler.setName(runShow, "run");
 		queue.add(runShow, drools);
 		
@@ -158,18 +158,18 @@ rule "Create contents of 'validate' operation"
 		handler.setName(callUpdate, "update label");
 		queue.add(callUpdate, drools);
 		
-		ActionEdge runUpdate = handler.generatedActionEdge(o, o, callUpdate, upd);
+		ECARule runUpdate = handler.generatedECARule(o, o, callUpdate, upd);
 		handler.setName(runUpdate, "run");
 		queue.add(runUpdate, drools);
 		
 		// parameter for update
-		Property message = handler.generatedProperty(o, o);
+		Value message = handler.generatedValue(o, o);
 		handler.setReadOnly(message, true);
 		handler.setName(message, "failure message");
 		handler.setDefaultValue(message, "Warning: Invalid input.");
 		queue.add(message, drools);
 		
-		ParameterEdge param = handler.generatedParameterEdge(o, o, message, runUpdate);
+		Parameter param = handler.generatedParameter(o, o, message, runUpdate);
 		queue.add(param, drools);
 		
 		// check (pass) -> finish

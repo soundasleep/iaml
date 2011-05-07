@@ -27,16 +27,16 @@ import org.openiaml.model.inference.EcoreInferenceHandler;
 import org.openiaml.model.inference.ICreateElements;
 import org.openiaml.model.inference.InferenceException;
 import org.openiaml.model.inference.InfiniteSubProgressMonitor;
-import org.openiaml.model.model.ActionEdge;
+import org.openiaml.model.model.ECARule;
+import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.SimpleCondition;
 import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.domain.SchemaEdge;
 import org.openiaml.model.model.domain.SelectEdge;
 import org.openiaml.model.model.operations.DataFlowEdge;
 import org.openiaml.model.model.operations.ExecutionEdge;
-import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ConstraintEdge;
 import org.openiaml.model.model.wires.ExtendsEdge;
-import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.ProvidesEdge;
 import org.openiaml.model.model.wires.RequiresEdge;
 
@@ -202,8 +202,8 @@ public class RemovePhantomEdgesAction extends IamlFileAction {
 		if (obj instanceof Wire && (((Wire) obj).getFrom() == null 
 				|| ((Wire) obj).getTo() == null)) {
 			return true;
-		} else if (obj instanceof ActionEdge && (((ActionEdge) obj).getFrom() == null 
-				|| ((ActionEdge) obj).getTo() == null)) {
+		} else if (obj instanceof ECARule && (((ECARule) obj).getFrom() == null 
+				|| ((ECARule) obj).getTo() == null)) {
 			return true;
 		} else if (obj instanceof ExecutionEdge && (((ExecutionEdge) obj).getFrom() == null 
 				|| ((ExecutionEdge) obj).getTo() == null)) {
@@ -211,8 +211,8 @@ public class RemovePhantomEdgesAction extends IamlFileAction {
 		} else if (obj instanceof DataFlowEdge && (((DataFlowEdge) obj).getFrom() == null 
 				|| ((DataFlowEdge) obj).getTo() == null)) {
 			return true;
-		} else if (obj instanceof ConditionEdge && (((ConditionEdge) obj).getFrom() == null 
-				|| ((ConditionEdge) obj).getTo() == null)) {
+		} else if (obj instanceof SimpleCondition && (((SimpleCondition) obj).getFrom() == null 
+				|| ((SimpleCondition) obj).getTo() == null)) {
 			return true;
 		} else if (obj instanceof ConstraintEdge && (((ConstraintEdge) obj).getFrom() == null 
 				|| ((ConstraintEdge) obj).getTo() == null)) {
@@ -223,8 +223,8 @@ public class RemovePhantomEdgesAction extends IamlFileAction {
 		} else if (obj instanceof ExtendsEdge && (((ExtendsEdge) obj).getFrom() == null 
 				|| ((ExtendsEdge) obj).getTo() == null)) {
 			return true;
-		} else if (obj instanceof ParameterEdge && (((ParameterEdge) obj).getFrom() == null 
-				|| ((ParameterEdge) obj).getTo() == null)) {
+		} else if (obj instanceof Parameter && (((Parameter) obj).getFrom() == null 
+				|| ((Parameter) obj).getTo() == null)) {
 			return true;
 		} else if (obj instanceof ProvidesEdge && (((ProvidesEdge) obj).getFrom() == null 
 				|| ((ProvidesEdge) obj).getTo() == null)) {

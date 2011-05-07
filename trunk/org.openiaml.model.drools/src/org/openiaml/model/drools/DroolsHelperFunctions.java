@@ -7,13 +7,14 @@ import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xsd.XSDSimpleTypeDefinition;
-import org.openiaml.model.model.ActionEdge;
+import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.GeneratesElements;
 import org.openiaml.model.model.NamedElement;
+import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.PrimitiveOperation;
-import org.openiaml.model.model.Property;
 import org.openiaml.model.model.Scope;
+import org.openiaml.model.model.Value;
 import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.domain.DomainAttribute;
@@ -25,7 +26,6 @@ import org.openiaml.model.model.users.Role;
 import org.openiaml.model.model.visual.Label;
 import org.openiaml.model.model.wires.AutocompleteWire;
 import org.openiaml.model.model.wires.ExtendsEdge;
-import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.SyncWire;
 
 /**
@@ -75,7 +75,7 @@ public class DroolsHelperFunctions {
 		return target.getGeneratedBy().contains(by);
 	}
 
-	public boolean loginAttributeMatches(Property p, DomainAttribute a) {
+	public boolean loginAttributeMatches(Value p, DomainAttribute a) {
 		return p.getName() != null && p.getName().equals("current " + a.getName());
 	}
 
@@ -92,7 +92,7 @@ public class DroolsHelperFunctions {
 	 * @return
 	 */
 	public boolean hasIncomingParameterEdgesFrom(LoginHandler handler, DomainSchema dobj) {
-		for (ParameterEdge edge : handler.getInParameterEdges()) {
+		for (Parameter edge : handler.getInParameterEdges()) {
 			if (edge.getFrom() instanceof DomainAttribute) {
 				if (dobj.equals(((DomainAttribute) edge.getFrom()).eContainer())) {
 					// found one
@@ -118,7 +118,7 @@ public class DroolsHelperFunctions {
 	 * What is the last chained operation for the given PrimitiveOperation?
 	 */
 	public PrimitiveOperation lastChainedOperation(PrimitiveOperation op) {
-		for (ActionEdge action : op.getOutActions()) {
+		for (ECARule action : op.getOutActions()) {
 			if (action.getTo() instanceof PrimitiveOperation) {
 				return lastChainedOperation((PrimitiveOperation) action.getTo());
 			}
@@ -176,7 +176,7 @@ public class DroolsHelperFunctions {
 	
 	public String getQueryString(LoginHandler login_handler, DomainSchema dobj) {
 		String q = "";
-		for (ParameterEdge wire : login_handler.getInParameterEdges()) {
+		for (Parameter wire : login_handler.getInParameterEdges()) {
 			if (wire.getFrom() instanceof DomainAttribute &&
 					dobj.equals(wire.getFrom().eContainer())) {
 				// add this attribute as a query

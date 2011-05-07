@@ -67,7 +67,7 @@ end
  * Issue 206: Allow AccessControlHandlers to specify target Login pages.
  *
  * @inference AccessControlHandler
- *		If a {@model AccessControlHandler} specifies a 'login' {@model ActionEdge}
+ *		If a {@model AccessControlHandler} specifies a 'login' {@model ECARule}
  *		that goes to a {@model Frame}, the same Frame will be used as the login Frame
  *		for the generated {@model LoginHandler}.
  */
@@ -78,14 +78,14 @@ rule "If an AccessControlHandler specifies a Login page, connect this to the gen
 		login_handler : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
 		
 		login_page : Frame ( )
-		login_edge : ActionEdge ( from == ach, to == login_page, name == "login" )
+		login_edge : ECARule ( from == ach, to == login_page, name == "login" )
 		
-		not ( ActionEdge( from == login_handler, name == "login" ))
+		not ( ECARule( from == login_handler, name == "login" ))
 		
 		eval ( handler.veto( ach ))
 
 	then
-		ActionEdge edge = handler.generatedActionEdge(ach, session, login_handler, login_page);
+		ECARule edge = handler.generatedECARule(ach, session, login_handler, login_page);
 		handler.setName(edge, "login");
 		queue.add(edge, drools);
 
@@ -95,7 +95,7 @@ end
  * Allow AccessControlHandlers to specify target Logout pages.
  *
  * @inference AccessControlHandler
- *		If a {@model AccessControlHandler} specifies a 'logout' {@model ActionEdge}
+ *		If a {@model AccessControlHandler} specifies a 'logout' {@model ECARule}
  *		that goes to a {@model Frame}, the same Frame will be used as the logout Frame
  *		for the generated {@model LoginHandler}.
  */
@@ -106,14 +106,14 @@ rule "If an AccessControlHandler specifies a Logout page, connect this to the ge
 		login_handler : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
 		
 		login_page : Frame ( )
-		login_edge : ActionEdge ( from == ach, to == login_page, name == "logout" )
+		login_edge : ECARule ( from == ach, to == login_page, name == "logout" )
 		
-		not ( ActionEdge( from == login_handler, name == "logout" ))
+		not ( ECARule( from == login_handler, name == "logout" ))
 		
 		eval ( handler.veto( ach ))
 
 	then
-		ActionEdge edge = handler.generatedActionEdge(ach, session, login_handler, login_page);
+		ECARule edge = handler.generatedECARule(ach, session, login_handler, login_page);
 		handler.setName(edge, "logout");
 		queue.add(edge, drools);
 
@@ -123,7 +123,7 @@ end
  * Allow AccessControlHandlers to specify target Success pages.
  *
  * @inference AccessControlHandler
- *		If a {@model AccessControlHandler} specifies a 'success' {@model ActionEdge}
+ *		If a {@model AccessControlHandler} specifies a 'success' {@model ECARule}
  *		that goes to a {@model Frame}, the same Frame will be used as the successful login Frame
  *		for the generated {@model LoginHandler}.
  */
@@ -134,14 +134,14 @@ rule "If an AccessControlHandler specifies a Success page, connect this to the g
 		login_handler : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
 		
 		login_page : Frame ( )
-		login_edge : ActionEdge ( from == ach, to == login_page, name == "success" )
+		login_edge : ECARule ( from == ach, to == login_page, name == "success" )
 		
-		not ( ActionEdge( from == login_handler, name == "success" ))
+		not ( ECARule( from == login_handler, name == "success" ))
 		
 		eval ( handler.veto( ach ))
 
 	then
-		ActionEdge edge = handler.generatedActionEdge(ach, session, login_handler, login_page);
+		ECARule edge = handler.generatedECARule(ach, session, login_handler, login_page);
 		handler.setName(edge, "success");
 		queue.add(edge, drools);
 
@@ -185,15 +185,15 @@ rule "Connect 'permissions check' up to the 'access' event of the session (ACH i
 		session : Session ( )
 		page : Frame ( eContainer == session )
 		ach : AccessControlHandler ( eContainer == session )
-		access : EventTrigger ( eContainer == page, page.onAccess == access ) 
+		access : Event ( eContainer == page, page.onAccess == access ) 
 		check : Operation ( eContainer == page, name == "permissions check" )
 		
-		not ( ActionEdge ( from == access, to == check ))
+		not ( ECARule ( from == access, to == check ))
 					
 		eval ( handler.veto( ach ))
 	
 	then
-		ActionEdge run = handler.generatedActionEdge(ach, page, access, check);
+		ECARule run = handler.generatedECARule(ach, page, access, check);
 		handler.setName(run, "run");
 		queue.add(run, drools); 	
 
@@ -203,15 +203,15 @@ rule "Connect 'permissions check' up to the 'access' event of the page (ACH in p
 	when
 		page : Frame ( )
 		ach : AccessControlHandler ( eContainer == page )
-		access : EventTrigger ( eContainer == page, page.onAccess == access )
+		access : Event ( eContainer == page, page.onAccess == access )
 		check : Operation ( eContainer == page, name == "page permissions check" )
 		
-		not ( ActionEdge ( from == access, to == check ))
+		not ( ECARule ( from == access, to == check ))
 					
 		eval ( handler.veto( ach ))
 	
 	then
-		ActionEdge run = handler.generatedActionEdge(ach, page, access, check);
+		ECARule run = handler.generatedECARule(ach, page, access, check);
 		handler.setName(run, "run");
 		queue.add(run, drools); 	
 
@@ -223,17 +223,17 @@ rule "Connect fail wire from 'permissions check' to 'login page'"
 		session : Session ( eContainer == root )
 		page : Frame ( eContainer == session )
 		ach : AccessControlHandler ( eContainer == session )
-		access : EventTrigger ( eContainer == page, page.onAccess == access )
+		access : Event ( eContainer == page, page.onAccess == access )
 		check : CompositeOperation ( eContainer == page, name == "permissions check" )
 		lh : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
 		login : Frame ( name == "login", eContainer == root ) 
 		
-		not ( ActionEdge ( from == check, to == login, name == "fail" ))
+		not ( ECARule ( from == check, to == login, name == "fail" ))
 					
 		eval ( handler.veto( ach ))
 	
 	then
-		ActionEdge nav = handler.generatedActionEdge(ach, page, check, login);
+		ECARule nav = handler.generatedECARule(ach, page, check, login);
 		handler.setName(nav, "fail");
 		queue.add(nav, drools);
 
@@ -245,18 +245,18 @@ rule "Connect fail wire from 'permissions check' to 'login page' (in separate lo
 		session : Session ( eContainer == root )
 		page : Frame ( eContainer == session )
 		ach : AccessControlHandler ( eContainer == session )
-		access : EventTrigger ( eContainer == page, page.onAccess == access )
+		access : Event ( eContainer == page, page.onAccess == access )
 		check : CompositeOperation ( eContainer == page, name == "permissions check" )
 		lh : LoginHandler ( type == LoginHandlerTypes.USER, eContainer == session )
 		login_session : Session ( eContainer == root, eval(functions.loginHandlerScopeMatches( login_session, lh )) )
 		login : Frame ( name == "login", eContainer == login_session ) 
 		
-		not ( ActionEdge ( from == check, to == login, name == "fail" ))
+		not ( ECARule ( from == check, to == login, name == "fail" ))
 					
 		eval ( handler.veto( ach ))
 	
 	then
-		ActionEdge nav = handler.generatedActionEdge(ach, page, check, login);
+		ECARule nav = handler.generatedECARule(ach, page, check, login);
 		handler.setName(nav, "fail");
 		queue.add(nav, drools);
 
@@ -361,14 +361,14 @@ rule "A LoginHandler of type 'user' should have an incoming Role as a parameter,
 		user : Role ( eContainer == root, name == "User" )
 	
 		# if there is already an incoming parameter wire, don't connect up User
-		not (ParameterEdge ( to == login_handler ))
+		not (Parameter ( to == login_handler ))
 		
-		not (ParameterEdge ( from == user, to == login_handler ))
+		not (Parameter ( from == user, to == login_handler ))
 		
 		eval ( handler.veto( login_handler ))
 	
 	then
-		ParameterEdge param = handler.generatedParameterEdge(login_handler, session, user, login_handler);
+		Parameter param = handler.generatedParameter(login_handler, session, user, login_handler);
 		queue.add(param, drools);
 
 end
@@ -421,7 +421,7 @@ rule "Create contents of 'permissions check' operation in a Frame (session)"
 		queue.add(opCall, drools);
 		
 		# run wire to this call
-		ActionEdge run = handler.generatedActionEdge(check, check, opCall, ach_check);
+		ECARule run = handler.generatedECARule(check, check, opCall, ach_check);
 		handler.setName(run, "run");
 		queue.add(run, drools); 
 	
@@ -478,7 +478,7 @@ rule "Create contents of 'permissions check' operation in a Frame (page)"
 		queue.add(opCall, drools);
 		
 		# run wire to this call
-		ActionEdge run = handler.generatedActionEdge(check, check, opCall, ach_check);
+		ECARule run = handler.generatedECARule(check, check, opCall, ach_check);
 		handler.setName(run, "run");
 		queue.add(run, drools); 
 	
@@ -512,12 +512,12 @@ rule "An AccessControlHandler that creates a LoginHandler should have the create
 		instance : DomainIterator ( eContainer == session )
 		setWire : SetWire ( from == login_handler, to == instance )
 		
-		not ( ParameterEdge ( from == instance, to == ach )) 
+		not ( Parameter ( from == instance, to == ach )) 
 					
 		eval ( handler.veto( ach ))
 	
 	then
-		ParameterEdge param = handler.generatedParameterEdge(ach, ach, instance, ach);
+		Parameter param = handler.generatedParameter(ach, ach, instance, ach);
 		queue.add(param, drools);
 
 end
@@ -532,12 +532,12 @@ rule "A separate AccessControlHandler that creates a LoginHandler should have th
 		instance : DomainIterator ( eContainer == session )
 		setWire : SetWire ( from == login_handler, to == instance )
 		
-		not ( ParameterEdge ( from == instance, to == ach )) 
+		not ( Parameter ( from == instance, to == ach )) 
 					
 		eval ( handler.veto( ach ))
 	
 	then
-		ParameterEdge param = handler.generatedParameterEdge(ach, ach, instance, ach);
+		Parameter param = handler.generatedParameter(ach, ach, instance, ach);
 		queue.add(param, drools);
 
 end

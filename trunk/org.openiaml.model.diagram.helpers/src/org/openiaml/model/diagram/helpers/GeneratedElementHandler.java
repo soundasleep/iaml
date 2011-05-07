@@ -26,7 +26,7 @@ import org.openiaml.model.helpers.EdgeTypes;
 import org.openiaml.model.helpers.EdgeTypes.EdgeType;
 import org.openiaml.model.inference.EcoreCreateElementsHelper;
 import org.openiaml.model.inference.InferenceException;
-import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.Event;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.NamedElement;
 
@@ -381,7 +381,7 @@ public class GeneratedElementHandler {
 	public String formatElement(EObject element) {
 		if (element instanceof NamedElement) {
 			NamedElement ne = (NamedElement) element;
-			if (ne instanceof EventTrigger && ne.getName() == null) {
+			if (ne instanceof Event && ne.getName() == null) {
 				return ne.eClass().getName() + " " + ne.eContainingFeature().getName();
 			} else {
 				return ne.eClass().getName() + " '" + ne.getName() + "'";

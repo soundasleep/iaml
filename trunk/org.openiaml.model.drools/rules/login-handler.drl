@@ -55,7 +55,7 @@ rule "Create default 'login' page for LoginHandlers"
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		
 		not ( Frame ( eContainer == login_session, name == "login" ))
-		not ( ActionEdge ( from == login_handler, name == "login" ))
+		not ( ECARule ( from == login_handler, name == "login" ))
 			
 		eval ( handler.veto( login_handler ))
 		
@@ -76,13 +76,13 @@ rule "Connect default 'login' page to LoginHandler"
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		login_page : Frame ( eContainer == login_session, name == "login" )
 		
-		not ( ActionEdge ( from == login_handler, to == login_page, name == "login" ))
+		not ( ECARule ( from == login_handler, to == login_page, name == "login" ))
 			
 		eval ( handler.veto( login_handler ))
 		
 	then
 	
-		ActionEdge edge = handler.generatedActionEdge(login_handler, login_session, login_handler, login_page);
+		ECARule edge = handler.generatedECARule(login_handler, login_session, login_handler, login_page);
 		handler.setName(edge, "login");
 		queue.add(edge, drools);
 		
@@ -113,15 +113,15 @@ rule "Instruct 'logout' page to follow to the actual logout destination if set"
 		logout : Frame (eContainer == scope, name=="logout" )
 		
 		destination : Frame ( this != logout )
-		navigate : ActionEdge ( from == login_handler, to == destination, name == "logout")
+		navigate : ECARule ( from == login_handler, to == destination, name == "logout")
 
-		access : EventTrigger ( eContainer == logout, logout.onAccess == access )
-		not (ActionEdge ( from == access, to == destination ))
+		access : Event ( eContainer == logout, logout.onAccess == access )
+		not (ECARule ( from == access, to == destination ))
 		
 		eval ( handler.veto( login_handler ))
 	
 	then
-		ActionEdge wire = handler.generatedActionEdge(login_handler, logout, access, destination);
+		ECARule wire = handler.generatedECARule(login_handler, logout, access, destination);
 		handler.setName(wire, "redirect to intended logout page");
 		queue.add(wire, drools);
 
@@ -132,12 +132,12 @@ rule "Create 'key attribute' property for LoginHandler[type = key]s"
 		scope : Session( ) 
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
 
-		not (Property (eContainer == scope, 
+		not (Value (eContainer == scope, 
 			name=="current login key" ) )
 
 		# the value may not be called "current login key"
 		not (
-			exists ( actual_key : Property ( )
+			exists ( actual_key : Value ( )
 				and SetWire ( name == "set", from == login_handler, to == actual_key )
 			)
 		) 
@@ -146,10 +146,10 @@ rule "Create 'key attribute' property for LoginHandler[type = key]s"
 		
 	then
 
-		Property key = handler.generatedProperty(login_handler, scope);
+		Value key = handler.generatedValue(login_handler, scope);
 		handler.setName(key, "current login key");
 		# need to set a default value, or else require_session(this) will throw an exception before we can catch it to redirect
-		handler.setValue(key, ModelPackage.eINSTANCE.getProperty_DefaultValue(), "");
+		handler.setValue(key, ModelPackage.eINSTANCE.getValue_DefaultValue(), "");
 		queue.add(key, drools);
 		
 end
@@ -158,7 +158,7 @@ rule "Connect 'key' property to LoginHandler"
 	when
 		scope : Session( ) 
 		login_handler : LoginHandler( eContainer == scope )
-		key : Property (eContainer == scope,
+		key : Value (eContainer == scope,
 			name == "current login key")
 		not (SetWire( from == login_handler, to == key, name == "set") )
 		
@@ -191,14 +191,14 @@ rule "Connect 'access' event to 'check' operations"
 	when
 		scope : Session( )
 		page : Frame( eContainer == scope )
-		access : EventTrigger( page.onAccess == access, eContainer == page )
+		access : Event( page.onAccess == access, eContainer == page )
 		check : CompositeOperation( name == "check key" || name == "check instance", eContainer == scope )
-		not (ActionEdge( from == access, to == check ))
+		not (ECARule( from == access, to == check ))
 				
 		eval ( handler.veto( scope ))
 		
 	then
-		ActionEdge wire = handler.generatedActionEdge(scope, page, access, check);
+		ECARule wire = handler.generatedECARule(scope, page, access, check);
 		handler.setName(wire, "run");
 		handler.setPriority(wire, 100); // high priority
 		queue.add(wire, drools);	
@@ -209,20 +209,20 @@ rule "Connect 'login key' parameter to 'check key' operation run wire"
 	when
 		scope : Session( )
 		page : Frame( eContainer == scope )
-		access : EventTrigger( page.onAccess == access, eContainer == page )
+		access : Event( page.onAccess == access, eContainer == page )
 		check : CompositeOperation( name == "check key", eContainer == scope )
 		
 		login_handler : LoginHandler( eContainer == scope )
-		value : Property( )
+		value : Value( )
 		mySetWire : SetWire( from == login_handler, to == value, name == "set" )
 		
-		wire : ActionEdge( from == access, to == check )
-		not (ParameterEdge( from == value, to == wire ))
+		wire : ECARule( from == access, to == check )
+		not ( Parameter ( from == value, to == wire ))
 				
 		eval ( handler.veto( scope ))
 		
 	then
-		ParameterEdge param = handler.generatedParameterEdge(scope, page, value, wire);
+		Parameter param = handler.generatedParameter(scope, page, value, wire);
 		handler.setName(param, "[sessions] 'login key' parameter to 'check key'");
 		queue.add(param, drools);
 
@@ -234,14 +234,14 @@ rule "Connect 'fail' wire from 'check key' or 'check instance' operation to Logi
 		scope : Session( eContainer == container ) 
 		login_handler : LoginHandler( eContainer == scope )
 		login : Frame ( )
-		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
+		login_edge : ECARule ( from == login_handler, to == login, name == "login" )
 		check : CompositeOperation( name == "check key" || name == "check instance", eContainer == scope )
-		not (ActionEdge( from == check, to == login, name == "fail") )
+		not (ECARule( from == check, to == login, name == "fail") )
 			
 		eval ( handler.veto( scope ))
 	
 	then
-		ActionEdge fail = handler.generatedActionEdge(scope, scope, check, login);
+		ECARule fail = handler.generatedECARule(scope, scope, check, login);
 		handler.setName(fail, "fail");
 		queue.add(fail, drools);
 		
@@ -253,8 +253,8 @@ rule "Create contents of 'check key' operation [type=secret_key]"
 		o : CompositeOperation( name == "check key", eContainer == scope )
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
 		
-		expected : Property( ) 
-		expected_param : ParameterEdge( from == expected, to == login_handler )
+		expected : Value( ) 
+		expected_param : Parameter ( from == expected, to == login_handler )
 		
 		not (StartNode( eContainer == o))
 		# not (FinishNode( eContainer == o)) - not necessary
@@ -262,7 +262,7 @@ rule "Create contents of 'check key' operation [type=secret_key]"
 		eval ( handler.veto( o ))
 	
 	then
-		Parameter parameter = handler.generatedParameter(o, o);
+		ActivityParameter parameter = handler.generatedActivityParameter(o, o);
 		handler.setName(parameter, "current key value");
 		queue.add(parameter, drools);
 		
@@ -322,7 +322,7 @@ rule "Create contents of 'check instance' operation [type=domain_object or user]
 		instance : DomainIterator ( eContainer == scope )
 		setWire : SetWire ( from == login_handler, to == instance, name == "set" )
 		
-		ex : Condition ( instance.empty == ex )
+		ex : Function ( instance.empty == ex )
 				
 		checkOperation : CompositeOperation ( eContainer == scope, name == "check instance" )
 
@@ -348,8 +348,8 @@ rule "Create contents of 'check instance' operation [type=domain_object or user]
 		handler.setName(check, "true?");
 		queue.add(check, drools);
 		
-		# connect with a ConditionEdge
-		ConditionEdge ce = handler.generatedConditionEdge(checkOperation, checkOperation, ex, check);
+		# connect with a SimpleCondition
+		SimpleCondition ce = handler.generatedSimpleCondition(checkOperation, checkOperation, ex, check);
 		queue.add(ce, drools);
 		
 		ExecutionEdge edge0 = handler.generatedExecutionEdge(checkOperation, checkOperation);
@@ -378,18 +378,18 @@ rule "Connect expected login key as parameter to check key operation"
 	when 
 		scope : Session( )
 		page : Frame( eContainer == scope )
-		access : EventTrigger( name == "access", eContainer == page )
+		access : Event( name == "access", eContainer == page )
 		check : CompositeOperation( name == "check key", eContainer == scope )
-		wire : ActionEdge( from == access, to == check )
+		wire : ECARule( from == access, to == check )
 		login_handler : LoginHandler( eContainer == scope )
 		
 		expected : StaticValue( ) 
-		expected_param : ParameterEdge( from == expected, to == login_handler )
+		expected_param : Parameter( from == expected, to == login_handler )
 		
 		not (ParameterEdge(from == expected, to == check ))	
 	
 	then
-		ParameterEdge param = handler.generatedParameterEdge(login_handler, page, expected, wire);
+		Parameter param = handler.generatedParameter(login_handler, page, expected, wire);
 		queue.add(param, drools);
 	
 end
@@ -402,7 +402,7 @@ rule "Create login form for 'login' pages"
 		login_handler : LoginHandler( eContainer == scope )
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		login : Frame ( )
-		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
+		login_edge : ECARule ( from == login_handler, to == login, name == "login" )
 
 		not (InputForm( eContainer == login ))
 				
@@ -422,7 +422,7 @@ rule "Create 'Login' button for login form"
 		login_handler : LoginHandler( eContainer == scope )
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		login : Frame ( )
-		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
+		login_edge : ECARule ( from == login_handler, to == login, name == "login" )
 		
 		form : InputForm ( name == "login form", eContainer == login )
 
@@ -445,19 +445,19 @@ rule "Connect 'Login' button to 'do login' operation"
 		login_handler : LoginHandler( eContainer == scope )
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		login : Frame ( )
-		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
+		login_edge : ECARule ( from == login_handler, to == login, name == "login" )
 
 		form : InputForm ( eContainer == login, name == "login form" )
 		button : Button ( eContainer == form, name == "Login" )
 		
 		operation : Operation ( eContainer == login_session, name == "do login" )
 		
-		not (ActionEdge ( from == button, to == operation, name == "onClick"))
+		not (ECARule ( from == button, to == operation, name == "onClick"))
 		
 		eval ( handler.veto( login_handler ))
 
 	then
-		ActionEdge run = handler.generatedActionEdge(login_handler, login, button, operation);
+		ECARule run = handler.generatedECARule(login_handler, login, button, operation);
 		handler.setName(run, "onClick");
 		queue.add(run, drools);
 
@@ -470,7 +470,7 @@ rule "Create text fields for login form of 'login' pages [type=secret_key]"
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		login : Frame ( )
-		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
+		login_edge : ECARule ( from == login_handler, to == login, name == "login" )
 
 		form : InputForm( eContainer == login, name == "login form" )
 		
@@ -493,22 +493,22 @@ rule "Create contents of 'do login' operation [type=secret_key]"
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		login : Frame ( )
-		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
+		login_edge : ECARule ( from == login_handler, to == login, name == "login" )
 
-		value : Property( )
+		value : Value( )
 		mySetWire : SetWire( from == login_handler, to == value, name == "set" )
 
-		expected : Property( ) 
-		expected_param : ParameterEdge( from == expected, to == login_handler )
+		expected : Value( ) 
+		expected_param : Parameter( from == expected, to == login_handler )
 
 		form : InputForm( eContainer == login, name == "login form" )
 		button : Button ( eContainer == form, name == "Login" )
 		
 		field : InputTextField ( eContainer == form, name == "login key" )
-		fieldValue : Property( field.fieldValue == fieldValue )
+		fieldValue : Value( field.fieldValue == fieldValue )
 		
 		loginOperation : CompositeOperation ( eContainer == login_session, name == "do login" )
-		runClick : ActionEdge ( from == button, to == loginOperation, name == "onClick" )
+		runClick : ECARule ( from == button, to == loginOperation, name == "onClick" )
 		
 		not ( StartNode ( eContainer == loginOperation ))
 		
@@ -517,12 +517,12 @@ rule "Create contents of 'do login' operation [type=secret_key]"
 	then
 		
 		# connect field value as parameter
-		ParameterEdge clickParam = handler.generatedParameterEdge(loginOperation, login, fieldValue, runClick);
+		Parameter clickParam = handler.generatedParameter(loginOperation, login, fieldValue, runClick);
 		handler.setName(clickParam, "[sessions] field value as param");
 		queue.add(clickParam, drools);
 		
 		# create contents of login operation
-		Parameter parameter = handler.generatedParameter(loginOperation, loginOperation);
+		ActivityParameter parameter = handler.generatedActivityParameter(loginOperation, loginOperation);
 		handler.setName(parameter, "provided key");
 		queue.add(parameter, drools);
 		
@@ -601,13 +601,13 @@ rule "Create text fields for login form of 'login' pages [type=domain_object]"
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.DOMAIN_OBJECT )
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		login : Frame ( )
-		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
+		login_edge : ECARule ( from == login_handler, to == login, name == "login" )
 
 		form : InputForm( eContainer == login, name == "login form" )
 		
 		# from a domain object
 		attribute : DomainAttribute ( )
-		param : ParameterEdge ( from == attribute, to == login_handler )
+		param : Parameter ( from == attribute, to == login_handler )
 		
 		not ( InputTextField ( eContainer == form, name == attribute.name ))
 		
@@ -633,13 +633,13 @@ rule "Create text fields for login form of 'login' pages [type=user]"
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.USER )
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		login : Frame ( )
-		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
+		login_edge : ECARule ( from == login_handler, to == login, name == "login" )
 
 		form : InputForm( eContainer == login, name == "login form" )
 
 		# from a role		
 		role : Role ( )
-		param : ParameterEdge ( from == role, to == login_handler )
+		param : Parameter ( from == role, to == login_handler )
 		
 		# an attribute in that role
 		attribute : DomainAttribute ( eContainer == role, eval(functions.notPrimaryKey(attribute)) )
@@ -669,7 +669,7 @@ rule "Connect text fields for login form of 'login' pages to 'do login' run wire
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.DOMAIN_OBJECT )
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		login : Frame ( )
-		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
+		login_edge : ECARule ( from == login_handler, to == login, name == "login" )
 		
 		operation : Operation( eContainer == login_session, name == "do login" )
 
@@ -677,20 +677,20 @@ rule "Connect text fields for login form of 'login' pages to 'do login' run wire
 		
 		# from a domain object
 		attribute : DomainAttribute ( )
-		param : ParameterEdge ( from == attribute, to == login_handler )
+		param : Parameter ( from == attribute, to == login_handler )
 		
 		field : InputTextField ( eContainer == form, name == attribute.name )
-		fieldValue : Property ( field.fieldValue == fieldValue )
+		fieldValue : Value ( field.fieldValue == fieldValue )
 		
 		button : Button ( eContainer == form, name == "Login" )
-		run : ActionEdge ( from == button, to == operation, name == "onClick" )
+		run : ECARule ( from == button, to == operation, name == "onClick" )
 		
-		not ( ParameterEdge ( from == fieldValue, to == run, name == attribute.name )) 
+		not ( Parameter ( from == fieldValue, to == run, name == attribute.name )) 
 		
 		eval ( handler.veto( login_handler ))
 
 	then
-		ParameterEdge param2 = handler.generatedParameterEdge(login_handler, fieldValue, fieldValue, run);
+		Parameter param2 = handler.generatedParameter(login_handler, fieldValue, fieldValue, run);
 		handler.setName(param2, attribute.getName());
 		queue.add(param2, drools); 
 		
@@ -703,7 +703,7 @@ rule "Connect text fields for login form of 'login' pages to 'do login' run wire
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.USER )
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		login : Frame ( )
-		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
+		login_edge : ECARule ( from == login_handler, to == login, name == "login" )
 		
 		operation : Operation( eContainer == login_session, name == "do login" )
 
@@ -712,20 +712,20 @@ rule "Connect text fields for login form of 'login' pages to 'do login' run wire
 		# from a role
 		role : Role ( )
 		attribute : DomainAttribute ( eContainer == role )
-		param : ParameterEdge ( from == role, to == login_handler )
+		param : Parameter ( from == role, to == login_handler )
 		
 		field : InputTextField ( eContainer == form, name == attribute.name )
-		fieldValue : Property ( field.fieldValue == fieldValue )		
+		fieldValue : Value ( field.fieldValue == fieldValue )		
 		
 		button : Button ( eContainer == form, name == "Login" )
-		run : ActionEdge ( from == button, to == operation, name == "onClick" )
+		run : ECARule ( from == button, to == operation, name == "onClick" )
 		
-		not ( ParameterEdge ( from == fieldValue, to == run, name == attribute.name )) 
+		not ( Parameter ( from == fieldValue, to == run, name == attribute.name )) 
 		
 		eval ( handler.veto( login_handler ))
 
 	then
-		ParameterEdge param2 = handler.generatedParameterEdge(login_handler, fieldValue, fieldValue, run);
+		Parameter param2 = handler.generatedParameter(login_handler, fieldValue, fieldValue, run);
 		handler.setName(param2, attribute.getName());
 		queue.add(param2, drools); 
 		
@@ -740,7 +740,7 @@ end
  * @implementation Operation,OperationCallNode,Scope
  *		All {@model OperationCallNode operation calls} to {@model Operation}s contained
  *		within {@model Scope}s are first evaluated for any
- * 		{@model Scope#onAccess} {@model EventTrigger events}.
+ * 		{@model Scope#onAccess} {@model Event events}.
  * @implementation LoginHandler
  *		The generated {@model Property} containing the current password
  *		for a {@model LoginHandler} is set before it is evaluated whether
@@ -775,7 +775,7 @@ rule "Create contents of 'do login' operation [type=domain_object]"
 		instance : DomainIterator ( eContainer == scope )
 		setWire : SetWire ( from == login_handler, to == instance, name == "set" )
 		
-		ex : Condition ( instance.empty == ex )
+		ex : Function ( instance.empty == ex )
 				
 		loginOperation : CompositeOperation ( eContainer == login_session, name == "do login" )
 
@@ -814,8 +814,8 @@ rule "Create contents of 'do login' operation [type=domain_object]"
 		handler.setName(check, "true?");
 		queue.add(check, drools);
 		
-		# connect with a ConditionEdge
-		ConditionEdge ce = handler.generatedConditionEdge(loginOperation, loginOperation, ex, check);
+		# connect with a SimpleCondition
+		SimpleCondition ce = handler.generatedSimpleCondition(loginOperation, loginOperation, ex, check);
 		queue.add(ce, drools);
 		
 		ExecutionEdge edge1 = handler.generatedExecutionEdge(loginOperation, loginOperation);
@@ -847,7 +847,7 @@ rule "Create parameter for 'do login' operation inside login handler[type=domain
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		
 		attribute : DomainAttribute ( )
-		paramWire : ParameterEdge( from == attribute, to == login_handler )
+		paramWire : Parameter( from == attribute, to == login_handler )
 		
 		instance : DomainIterator ( eContainer == scope )
 		setWire : SetWire ( from == login_handler, to == instance, name == "set" )
@@ -856,14 +856,14 @@ rule "Create parameter for 'do login' operation inside login handler[type=domain
 		split : SplitNode ( eContainer == operation )
 		join : JoinNode ( eContainer == operation )
 		
-		target : Property ( eContainer == scope, eval(functions.loginAttributeMatches(target, attribute)))
+		target : Value ( eContainer == scope, eval(functions.loginAttributeMatches(target, attribute)))
 
 		not ( Parameter ( eContainer == operation, name == attribute.name ))
 		
 		eval ( handler.veto( operation ))
 
 	then
-		Parameter param = handler.generatedParameter(operation, operation);
+		ActivityParameter param = handler.generatedActivityParameter(operation, operation);
 		handler.setName(param, attribute.getName());
 		queue.add(param, drools);
 		
@@ -906,7 +906,7 @@ rule "Create contents of 'do login' operation [type=user]"
 		instance : DomainIterator ( eContainer == scope )
 		setWire : SetWire ( from == login_handler, to == instance, name == "set" )
 		
-		ex : Condition ( instance.empty == ex )
+		ex : Function ( instance.empty == ex )
 				
 		loginOperation : CompositeOperation ( eContainer == login_session, name == "do login" )
 
@@ -945,8 +945,8 @@ rule "Create contents of 'do login' operation [type=user]"
 		handler.setName(check, "true?");
 		queue.add(check, drools);
 		
-		# connect with a ConditionEdge
-		ConditionEdge ce = handler.generatedConditionEdge(loginOperation, loginOperation, ex, check);
+		# connect with a SimpleCondition
+		SimpleCondition ce = handler.generatedSimpleCondition(loginOperation, loginOperation, ex, check);
 		queue.add(ce, drools);
 		
 		ExecutionEdge edge1 = handler.generatedExecutionEdge(loginOperation, loginOperation);
@@ -979,20 +979,20 @@ rule "Create parameter for 'do login' operation inside login handler[type=user]"
 		
 		role : Role ( )
 		attribute : DomainAttribute ( eContainer == role )
-		paramWire : ParameterEdge( from == role, to == login_handler )
+		paramWire : Parameter( from == role, to == login_handler )
 		
 		operation : CompositeOperation ( eContainer == login_session, name == "do login" )
 		split : SplitNode ( eContainer == operation )
 		join : JoinNode ( eContainer == operation )
 		
-		target : Property ( eContainer == scope, eval(functions.loginAttributeMatches(target, attribute)))
+		target : Value ( eContainer == scope, eval(functions.loginAttributeMatches(target, attribute)))
 
 		not ( Parameter ( eContainer == operation, name == attribute.name ))
 		
 		eval ( handler.veto( operation ))
 
 	then
-		Parameter param = handler.generatedParameter(operation, operation);
+		ActivityParameter param = handler.generatedActivityParameter(operation, operation);
 		handler.setName(param, attribute.getName());
 		queue.add(param, drools);
 		
@@ -1033,18 +1033,18 @@ rule "Connect successful login operation ('success') to navigate to final 'login
 		login_handler : LoginHandler( eContainer == scope )
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		login : Frame ( )
-		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
+		login_edge : ECARule ( from == login_handler, to == login, name == "login" )
 		
 		login_operation : CompositeOperation( eContainer == login_session, name == "do login" )		
 		login_target : Frame ( ) 
-		login_wire : ActionEdge( from == login_handler, to == login_target, name == "success" )
+		login_wire : ECARule( from == login_handler, to == login_target, name == "success" )
 
-		not (ActionEdge(from == login_operation, to == login_target))
+		not (ECARule(from == login_operation, to == login_target))
 		
 		eval ( handler.veto( login_handler ))
 			
 	then
-		ActionEdge wire = handler.generatedActionEdge(login_handler, scope, login_operation, login_target);
+		ECARule wire = handler.generatedECARule(login_handler, scope, login_operation, login_target);
 		handler.setName(wire, "navigate on successful login");
 		queue.add(wire, drools);
 				
@@ -1057,15 +1057,15 @@ rule "Connect failed login operation ('fail') to navigate back to 'login'"
 		login_handler : LoginHandler( eContainer == scope )
 		login_session : Session ( eContainer == container, eval(functions.loginHandlerScopeMatches( login_session, login_handler )) )
 		login : Frame ( )
-		login_edge : ActionEdge ( from == login_handler, to == login, name == "login" )
+		login_edge : ECARule ( from == login_handler, to == login, name == "login" )
 		login_operation : CompositeOperation( eContainer == login_session, name == "do login" )		
 
-		not (ActionEdge(from == login_operation, to == login, name == "fail"))
+		not (ECARule(from == login_operation, to == login, name == "fail"))
 		
 		eval ( handler.veto( login_handler ))
 			
 	then
-		ActionEdge wire = handler.generatedActionEdge(login_handler, scope, login_operation, login);
+		ECARule wire = handler.generatedECARule(login_handler, scope, login_operation, login);
 		handler.setName(wire, "fail");
 		queue.add(wire, drools);
 		
@@ -1096,20 +1096,20 @@ rule "Connect 'access' operation for logout page to 'do logout' operation"
 		login_handler : LoginHandler( eContainer == scope )
 		
 		logout : Frame ( )
-		wire : ActionEdge ( from == login_handler, to == logout, name == "logout" )
+		wire : ECARule ( from == login_handler, to == logout, name == "logout" )
 		
 		logout_operation : Operation ( eContainer == scope, name == "do logout" )
-		access : EventTrigger ( eContainer == logout, logout.onAccess == access )
+		access : Event ( eContainer == logout, logout.onAccess == access )
 		# we can't add it to the end of the 'check key' operation, because then
 		# all operations will have to run it as well.
 		# add it to the end of the access operation chain
 		
-		not (ActionEdge( from == access, to == logout_operation ))
+		not (ECARule( from == access, to == logout_operation ))
 		
 		eval ( handler.veto( login_handler ))
 	
 	then 
-		ActionEdge run = handler.generatedActionEdge(login_handler, logout, access, logout_operation);
+		ECARule run = handler.generatedECARule(login_handler, logout, access, logout_operation);
 		handler.setName(run, "run logout operation");
 		queue.add(run, drools);
 
@@ -1126,14 +1126,14 @@ rule "Connect new navigate wire from logout to logout destination"
 		# in this case, we want all accesses to "do logout" to always redirect to "home" (for example)
 		final_operation : CompositeOperation ( eval(final_operation.equals(functions.lastChainedOperation(logout_operation))) )
 		destination : Frame ( )
-		logout_wire : ActionEdge( from == login_handler, to == destination, name == "logout" )
+		logout_wire : ECARule( from == login_handler, to == destination, name == "logout" )
 		
-		not (ActionEdge( from == final_operation, to == destination ))
+		not (ECARule( from == final_operation, to == destination ))
 		
 		eval ( handler.veto( login_handler ))
 	
 	then
-		ActionEdge wire = handler.generatedActionEdge(login_handler, scope, final_operation, destination);
+		ECARule wire = handler.generatedECARule(login_handler, scope, final_operation, destination);
 		handler.setName(wire, "navigate on successful logout");
 		queue.add(wire, drools);
 		
@@ -1145,7 +1145,7 @@ rule "Create contents of 'do logout' operation [type=secret_key]"
 		o : CompositeOperation( name == "do logout", eContainer == scope )
 		login_handler : LoginHandler( eContainer == scope, type == LoginHandlerTypes.SECRET_KEY )
 
-		value : Property( )
+		value : Value( )
 		mySetWire : SetWire( from == login_handler, to == value, name == "set" )
 		
 		not (StartNode( eContainer == o))
@@ -1155,7 +1155,7 @@ rule "Create contents of 'do logout' operation [type=secret_key]"
 	
 	then
 		# create a 'null' value
-		Property myNull = handler.generatedProperty(o, o);
+		Value myNull = handler.generatedValue(o, o);
 		handler.setReadOnly(myNull, true);
 		handler.setName(myNull, "reset value");
 		handler.setDefaultValue(myNull, "null");
@@ -1209,7 +1209,7 @@ rule "Create contents (initial) of 'do logout' operation [type=object or user]"
 	
 	then
 		# create a 'null' value
-		Property myNull = handler.generatedProperty(o, o);
+		Value myNull = handler.generatedValue(o, o);
 		handler.setReadOnly(myNull, true);
 		handler.setDefaultValue(myNull, "null");
 		handler.setName(myNull, "reset value");
@@ -1248,12 +1248,12 @@ rule "Create contents (specific keys) of 'do logout' operation [type=object]"
 		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT )
 
 		attribute : DomainAttribute ( )
-		paramWire : ParameterEdge ( from == attribute, to == login_handler )
+		paramWire : Parameter ( from == attribute, to == login_handler )
 		
-		key : Property ( eContainer == session, 
+		key : Value ( eContainer == session, 
 			eval(functions.loginAttributeMatches(key, attribute) ) )
 
-		myNull : Property ( eContainer == o, name == "reset value" )
+		myNull : Value ( eContainer == o, name == "reset value" )
 		split : SplitNode ( eContainer == o )
 		join : JoinNode ( eContainer == o )
 			
@@ -1298,12 +1298,12 @@ rule "Create contents (specific keys) of 'do logout' operation [type=user]"
 
 		role : Role ( )
 		attribute : DomainAttribute ( eContainer == role, eval(functions.notPrimaryKey(attribute)) )
-		paramWire : ParameterEdge ( from == role, to == login_handler )
+		paramWire : Parameter ( from == role, to == login_handler )
 		
-		key : Property ( eContainer == session, 
+		key : Value ( eContainer == session, 
 			eval(functions.loginAttributeMatches(key, attribute) ) )
 
-		myNull : Property ( eContainer == o, name == "reset value" )
+		myNull : Value ( eContainer == o, name == "reset value" )
 		split : SplitNode ( eContainer == o )
 		join : JoinNode ( eContainer == o )
 			
@@ -1346,7 +1346,7 @@ rule "Create default login successful page"
 		login_handler : LoginHandler( eContainer == scope )
 		
 		not ( Frame ( eContainer == scope, name == "Login Successful" ) )
-		not ( wire : ActionEdge (from == login_handler, name == "success" ))
+		not ( wire : ECARule (from == login_handler, name == "success" ))
 		
 		eval ( handler.veto( login_handler ))
 
@@ -1364,12 +1364,12 @@ rule "Connect default login successful page to LoginHandler"
 		
 		success : Frame ( eContainer == scope, name == "Login Successful" )
 		
-		not ( wire : ActionEdge (from == login_handler, name == "success" ))
+		not ( wire : ECARule (from == login_handler, name == "success" ))
 		
 		eval ( handler.veto( login_handler ))
 
 	then
-		ActionEdge wire = handler.generatedActionEdge(login_handler, login_handler, login_handler, success);
+		ECARule wire = handler.generatedECARule(login_handler, login_handler, login_handler, success);
 		handler.setName(wire, "success");
 		queue.add(wire, drools);
 
@@ -1381,7 +1381,7 @@ rule "Create default logout successful page"
 		scope : Session ( )
 		login_handler : LoginHandler( eContainer == scope )
 		
-		not ( wire : ActionEdge (from == login_handler, name == "logout" ))
+		not ( wire : ECARule (from == login_handler, name == "logout" ))
 		not ( Frame ( eContainer == container, name == "Logout Successful" ) )
 				
 		eval ( handler.veto( login_handler ))
@@ -1401,12 +1401,12 @@ rule "Connect default logout successful page to LoginHandler"
 		
 		logout : Frame ( eContainer == container, name == "Logout Successful" )
 		
-		not ( wire : ActionEdge (from == login_handler, name == "logout" ))
+		not ( wire : ECARule (from == login_handler, name == "logout" ))
 		
 		eval ( handler.veto( login_handler ))
 
 	then
-		ActionEdge wire = handler.generatedActionEdge(login_handler, login_handler, login_handler, logout);
+		ECARule wire = handler.generatedECARule(login_handler, login_handler, login_handler, logout);
 		handler.setName(wire, "logout");
 		queue.add(wire, drools);
 
@@ -1515,7 +1515,7 @@ rule "Create Query from a DomainSchema [user]"
 		)
 		
 		# the Role is the incoming parameter, not just a DomainAttribute
-		param : ParameterEdge ( from == role, to == login_handler )
+		param : Parameter ( from == role, to == login_handler )
 
 		# with at least one attribute
 		exists ( DomainAttribute ( eContainer == role ))
@@ -1546,7 +1546,7 @@ rule "Update Query from a DomainSchema [user]"
 		)
 		
 		# the Role is the incoming parameter, not just a DomainAttribute
-		param : ParameterEdge ( from == dobj, to == login_handler )
+		param : Parameter ( from == dobj, to == login_handler )
 
 		# with at least one attribute (trigger)
 		DomainAttribute ( eContainer == dobj )
@@ -1570,18 +1570,18 @@ rule "Create 'key attribute' property for LoginHandler[type = object]s"
 		login_handler : LoginHandler( eContainer == session, type == LoginHandlerTypes.DOMAIN_OBJECT )
 		
 		attribute : DomainAttribute ( )
-		paramWire : ParameterEdge ( from == attribute, to == login_handler )
+		paramWire : Parameter ( from == attribute, to == login_handler )
 		
-		not ( p : Property ( eContainer == session, 
+		not ( p : Value ( eContainer == session, 
 			eval(functions.loginAttributeMatches(p, attribute) ) ) )
 		
 		eval ( handler.veto( login_handler ))
 				
 	then
-		Property key = handler.generatedProperty(login_handler, session);
+		Value key = handler.generatedValue(login_handler, session);
 		handler.setName(key, "current " + attribute.getName());
 		# need to set a default value, or else require_session(this) will throw an exception before we can catch it to redirect
-		handler.setValue(key, ModelPackage.eINSTANCE.getProperty_DefaultValue(), "");
+		handler.setValue(key, ModelPackage.eINSTANCE.getValue_DefaultValue(), "");
 		queue.add(key, drools);
 		
 end
@@ -1593,18 +1593,18 @@ rule "Create 'key attribute' property for LoginHandler[type = user]s"
 		
 		role : Role ( )
 		attribute : DomainAttribute ( eContainer == role, eval(functions.notPrimaryKey(attribute)) )
-		paramWire : ParameterEdge ( from == role, to == login_handler )
+		paramWire : Parameter ( from == role, to == login_handler )
 		
-		not ( p : Property ( eContainer == session, 
+		not ( p : Value ( eContainer == session, 
 			eval(functions.loginAttributeMatches(p, attribute) ) ) )
 		
 		eval ( handler.veto( login_handler ))
 				
 	then
-		Property key = handler.generatedProperty(login_handler, session);
+		Value key = handler.generatedValue(login_handler, session);
 		handler.setName(key, "current " + attribute.getName());
 		# need to set a default value, or else require_session(this) will throw an exception before we can catch it to redirect
-		handler.setValue(key, ModelPackage.eINSTANCE.getProperty_DefaultValue(), "");
+		handler.setValue(key, ModelPackage.eINSTANCE.getValue_DefaultValue(), "");
 		queue.add(key, drools);
 		
 end
@@ -1616,14 +1616,14 @@ rule "Connect key properties to LoginHandler for LoginHandler[type = object]"
 		
 		object : DomainSchema ( )
 		attribute : DomainAttribute ( eContainer == object )
-		paramWire : ParameterEdge ( from == attribute, to == login_handler )
+		paramWire : Parameter ( from == attribute, to == login_handler )
 		
 		instance : DomainIterator ( )
 		setWire : SetWire ( from == login_handler, to == instance )
 		
 		# select : SelectWire ( from == object, to == instance )
 		
-		key : Property ( eContainer == session, 
+		key : Value ( eContainer == session, 
 			eval(functions.loginAttributeMatches(key, attribute) ) )
 			
 		not ( SetWire ( from == login_handler, to == key ))
@@ -1644,22 +1644,22 @@ rule "Connect key properties to SelectWire for LoginHandler[type = object]"
 		
 		object : DomainSchema ( )
 		attribute : DomainAttribute ( eContainer == object )
-		paramWire : ParameterEdge ( from == attribute, to == login_handler )
+		paramWire : Parameter ( from == attribute, to == login_handler )
 		
 		instance : DomainIterator ( )
 		setWire : SetWire ( from == login_handler, to == instance )
 		
 		# select : SelectWire ( from == object, to == instance )
 		
-		key : Property ( eContainer == session, 
+		key : Value ( eContainer == session, 
 			eval(functions.loginAttributeMatches(key, attribute) ) )
 			
-		not ( ParameterEdge ( from == key, to == instance ))
+		not ( Parameter ( from == key, to == instance ))
 		
 		eval ( handler.veto( login_handler ))
 		
 	then
-		ParameterEdge wire = handler.generatedParameterEdge(login_handler, session, key, instance);
+		Parameter wire = handler.generatedParameter(login_handler, session, key, instance);
 		handler.setName(wire, attribute.getName());
 		queue.add(wire, drools); 
 	
@@ -1672,22 +1672,22 @@ rule "Connect key properties to SelectWire for LoginHandler[type = user]"
 		
 		role : Role ( )
 		attribute : DomainAttribute ( eContainer == role )
-		paramWire : ParameterEdge ( from == role, to == login_handler )
+		paramWire : Parameter ( from == role, to == login_handler )
 		
 		instance : DomainIterator ( )
 		setWire : SetWire ( from == login_handler, to == instance )
 		
 		# select : SelectWire ( from == role, to == instance )
 		
-		key : Property ( eContainer == session, 
+		key : Value ( eContainer == session, 
 			eval(functions.loginAttributeMatches(key, attribute) ) )
 			
-		not ( ParameterEdge ( from == key, to == instance ))
+		not ( Parameter ( from == key, to == instance ))
 		
 		eval ( handler.veto( login_handler ))
 		
 	then
-		ParameterEdge wire = handler.generatedParameterEdge(login_handler, session, key, instance);
+		Parameter wire = handler.generatedParameter(login_handler, session, key, instance);
 		handler.setName(wire, attribute.getName());
 		queue.add(wire, drools); 
 	
@@ -1794,7 +1794,7 @@ rule "Connect a default DomainSource for LoginHandlers that do not specify a Sel
 		# LoginHandler selecting from a DomainAttribute
 		exists (
 			sourceAttribute : DomainAttribute ( eContainer == schema ) and
-			param : ParameterEdge ( from == sourceAttribute, to == login_handler )
+			param : Parameter ( from == sourceAttribute, to == login_handler )
 		)
 		
 		source : DomainSource ( )
@@ -1826,7 +1826,7 @@ rule "Connect a default DomainSource for LoginHandlers that do not specify a Sel
 		schema : DomainSchema ( )
 		
 		# LoginHandler selecting from a DomainSchema
-		param : ParameterEdge ( from == schema, to == login_handler )
+		param : Parameter ( from == schema, to == login_handler )
 		
 		source : DomainSource ( )
 		schemaEdge : SchemaEdge ( from == source, to == schema )
@@ -1875,7 +1875,7 @@ rule "Connect the DomainSource for the AccessControlHandler to the Current Insta
 
 		# but a <em>different</em> schema is connected		
 		other_schema : DomainSchema ( )
-		param : ParameterEdge ( from == other_schema, to == login_handler )
+		param : Parameter ( from == other_schema, to == login_handler )
 		eval ( other_schema != expected_schema )
 		
 		# and our expected schema has a source
@@ -1910,7 +1910,7 @@ rule "Connect the DomainSource for the AccessControlHandler to the Current Insta
 		# this will also cover if there is a Role and a Permission
 
 		# but the same schema is selected		
-		param : ParameterEdge ( from == expected_schema, to == login_handler )
+		param : Parameter ( from == expected_schema, to == login_handler )
 		
 		# and our expected schema has a source
 		source : DomainSource ( )
@@ -1954,7 +1954,7 @@ rule "Connect the DomainSource for the AccessControlHandler to the Current Insta
 		set : SetWire ( from == login_handler, to == iterator )
 		
 		# the expected schema is connected		
-		param : ParameterEdge ( from == default_schema, to == login_handler )
+		param : Parameter ( from == default_schema, to == login_handler )
 		
 		# and our expected schema has a source
 		source : DomainSource ( )

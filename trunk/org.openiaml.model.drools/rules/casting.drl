@@ -25,7 +25,7 @@ global DroolsHelperFunctions functions;
  * Similar to issue 210: Create PrimitiveConditions by default, but
  * allow later overriding using the same semantics if it was a CompositeCondition.
  *
- * <p>Issue 221: Add 'can cast?' Primitive Condition to all Changeable elements
+ * <p>Issue 221: Add 'can cast?' Primitive Function to all Changeable elements
  *
  * @inference Changeable,PrimitiveCondition
  *		{@model Changeable}s will contain a {@model PrimitiveCondition} named 'can cast?'.
@@ -33,7 +33,7 @@ global DroolsHelperFunctions functions;
 rule "Create 'can cast?' condition for Changeables"
 	when
 		tf : Changeable( )
-		not ( condition : Condition ( name == "can cast?", eContainer == tf ))
+		not ( condition : Function ( name == "can cast?", eContainer == tf ))
 		
 		eval ( handler.veto( tf ))
 	
@@ -47,7 +47,7 @@ end
 rule "Create contents of 'can cast?' condition"
 	when
 		tf : Changeable( )
-		fieldValue : Property ( tf.fieldValue == fieldValue )
+		fieldValue : Value ( tf.fieldValue == fieldValue )
 		c : CompositeCondition ( name == "can cast?", eContainer == tf )
 		
 		not ( start : StartNode ( eContainer == c ))
@@ -58,7 +58,7 @@ rule "Create contents of 'can cast?' condition"
 		StartNode start = handler.generatedStartNode(c, c);		
 		queue.add(start, drools);
 		
-		Parameter param = handler.generatedParameter(c, c);
+		ActivityParameter param = handler.generatedActivityParameter(c, c);
 		handler.setName(param, "value");
 		queue.add(param, drools);
 		
@@ -100,7 +100,7 @@ end
 /**
  * @inference InputTextField,SyncWire
  *		A {@model SyncWire} connecting two elements with a {@model Condition} 'can sync?'
- *		will only {@model ConditionEdge permit} synchronisation if the value can be {@model CastNode cast successfully}.
+ *		will only {@model SimpleCondition permit} synchronisation if the value can be {@model CastNode cast successfully}.
  */
 rule "Add 'can cast?' condition check for onChange connecting to Update"
 	when
@@ -110,33 +110,33 @@ rule "Add 'can cast?' condition check for onChange connecting to Update"
 		sw : SyncWire ( )
 		eval ( functions.connects(sw, source, target) )
 		
-		fieldValue : Property ( source.fieldValue == fieldValue )		
+		fieldValue : Value ( source.fieldValue == fieldValue )		
 
-		event : EventTrigger ( source.onChange == event )
+		event : Event ( source.onChange == event )
 		upd : Operation ( name == "update", eContainer == target )
 		
-		run : ActionEdge ( from == event, to == upd )
+		run : ECARule ( from == event, to == upd )
 		
-		condition : Condition ( name == "can cast?", eContainer == target )
+		condition : Function ( name == "can cast?", eContainer == target )
 		
-		not ( ce : ConditionEdge ( from == condition, to == run )) 
+		not ( ce : SimpleCondition ( from == condition, to == run )) 
 		
 		eval ( handler.veto( sw ))
 	
 	then
-		ConditionEdge ce = handler.generatedConditionEdge(sw, sw, condition, run);
+		SimpleCondition ce = handler.generatedSimpleCondition(sw, sw, condition, run);
 		handler.setName(ce, "prevent incompatible types");
 		queue.add(ce, drools);
 		
-		ParameterEdge param = handler.generatedParameterEdge(sw, sw, fieldValue, ce);
+		Parameter param = handler.generatedParameter(sw, sw, fieldValue, ce);
 		queue.add(param, drools);		
 	
 end
 
 /**
  * @inference SyncWire
- *		For elements connected by a {@model SyncWire}, the 'onAccess' {@model EventTrigger} executing the 'init' {@model Operation}
- *		will {@model ConditionEdge only execute} if the source {@model Property fieldValue} can be {@model CastNode cast successfully}.  
+ *		For elements connected by a {@model SyncWire}, the 'onAccess' {@model Event} executing the 'init' {@model Operation}
+ *		will {@model SimpleCondition only execute} if the source {@model Property fieldValue} can be {@model CastNode cast successfully}.  
  */
 rule "Add 'can cast?' condition check for onAccess connecting to Init"
 	when
@@ -147,34 +147,34 @@ rule "Add 'can cast?' condition check for onAccess connecting to Init"
 		sw : SyncWire ( )
 		eval ( functions.connects(sw, source, target) )
 		
-		fieldValue : Property ( targetc.fieldValue == fieldValue )		
+		fieldValue : Value ( targetc.fieldValue == fieldValue )		
 
-		event : EventTrigger ( source.onAccess == event )
+		event : Event ( source.onAccess == event )
 		upd : Operation ( name == "init", eContainer == source )
 		
-		run : ActionEdge ( from == event, to == upd )
-		p2 : ParameterEdge ( from == fieldValue, to == run )
+		run : ECARule ( from == event, to == upd )
+		p2 : Parameter ( from == fieldValue, to == run )
 		
-		condition : Condition ( name == "can cast?", eContainer == source )
+		condition : Function ( name == "can cast?", eContainer == source )
 		
-		not ( ce : ConditionEdge ( from == condition, to == run )) 
+		not ( ce : SimpleCondition ( from == condition, to == run )) 
 		
 		eval ( handler.veto( sw ))
 	
 	then
-		ConditionEdge ce = handler.generatedConditionEdge(sw, sw, condition, run);
+		SimpleCondition ce = handler.generatedSimpleCondition(sw, sw, condition, run);
 		handler.setName(ce, "prevent incompatible types");
 		queue.add(ce, drools);
 		
-		ParameterEdge param = handler.generatedParameterEdge(sw, sw, fieldValue, ce);
+		Parameter param = handler.generatedParameter(sw, sw, fieldValue, ce);
 		queue.add(param, drools);		
 	
 end
 
 /**
  * @inference SyncWire
- *		For elements connected by a {@model SyncWire}, the 'onAccess' {@model EventTrigger} executing the 'init' {@model Operation}
- *		will {@model ConditionEdge only execute} if the source {@model Property fieldValue} can be {@model CastNode cast successfully}.  
+ *		For elements connected by a {@model SyncWire}, the 'onAccess' {@model Event} executing the 'init' {@model Operation}
+ *		will {@model SimpleCondition only execute} if the source {@model Property fieldValue} can be {@model CastNode cast successfully}.  
  */
 rule "After 'init' has been called on a typed element, call 'validate'"
 	when
@@ -182,19 +182,19 @@ rule "After 'init' has been called on a typed element, call 'validate'"
 		accessible : Accessible ( )
 		eval ( source == accessible )
 		
-		event : EventTrigger ( source.onAccess == event )
+		event : Event ( source.onAccess == event )
 		upd : Operation ( name == "init", eContainer == source )
 		
-		run : ActionEdge ( from == event, to == upd )
+		run : ECARule ( from == event, to == upd )
 		
 		validate : Operation ( name == "validate", eContainer == source )
 		
-		not ( runValidate : ActionEdge ( from == event, to == validate ))
+		not ( runValidate : ECARule ( from == event, to == validate ))
 		
 		eval ( handler.veto( source ))
 	
 	then
-		ActionEdge runValidate = handler.generatedActionEdge(source, source, event, validate);
+		ECARule runValidate = handler.generatedECARule(source, source, event, validate);
 		handler.setName(runValidate, "call validate after init");
 		// must be a lower priority 		
 		handler.setPriority(runValidate, run.getPriority() - 10);
@@ -211,22 +211,22 @@ rule "Only call 'validate' operation onAccess if fieldValue has been set"
 		accessible : Accessible ( )
 		eval ( source == accessible )
 		
-		event : EventTrigger ( source.onAccess == event )
+		event : Event ( source.onAccess == event )
 		upd : Operation ( name == "init", eContainer == source )
 		
-		run : ActionEdge ( from == event, to == upd )
+		run : ECARule ( from == event, to == upd )
 		
 		validate : Operation ( name == "validate", eContainer == source )
-		runValidate : ActionEdge ( from == event, to == validate )
+		runValidate : ECARule ( from == event, to == validate )
 		
-		isSet : Condition ( name == "fieldValue is set", eContainer == source )
+		isSet : Function ( name == "fieldValue is set", eContainer == source )
 		
-		not ( edge : ConditionEdge ( from == isSet, to == runValidate) )
+		not ( edge : SimpleCondition ( from == isSet, to == runValidate) )
 		
 		eval ( handler.veto( runValidate ))
 	
 	then
-		ConditionEdge edge = handler.generatedConditionEdge(runValidate, source, isSet, runValidate);
+		SimpleCondition edge = handler.generatedSimpleCondition(runValidate, source, isSet, runValidate);
 		handler.setName(edge, "only validate if set");
 		queue.add(edge, drools);
 

@@ -105,16 +105,16 @@ rule "Connect Next button to 'next' operation on DomainIterator"
 		set : SetWire ( from == instance, to == form )
 
 		next : Button ( eContainer == form, name == "Next" )
-		onClick : EventTrigger ( next.onClick == onClick )
+		onClick : Event ( next.onClick == onClick )
 		
 		nextOp : Operation ( instance.next == nextOp )
 	
-		not ( run : ActionEdge ( from == onClick, to == nextOp ))  
+		not ( run : ECARule ( from == onClick, to == nextOp ))  
 		
 		eval ( handler.veto( next ))
 
 	then
-		ActionEdge run = handler.generatedActionEdge(next, next, onClick, nextOp);
+		ECARule run = handler.generatedECARule(next, next, onClick, nextOp);
 		handler.setName(run, "run");
 		queue.add(run, drools);
 
@@ -123,23 +123,23 @@ end
 rule "Connect 'hasNext' condition to Next button action"
 	when
 		instance : DomainIterator (  )
-		hasNext : Condition ( instance.hasNext == hasNext )
+		hasNext : Function ( instance.hasNext == hasNext )
 		
 		form : InputForm ( )
 		set : SetWire ( from == instance, to == form )
 
 		next : Button ( eContainer == form, name == "Next" )
-		onClick : EventTrigger ( next.onClick == onClick )
+		onClick : Event ( next.onClick == onClick )
 		
 		nextOp : Operation ( instance.next == nextOp )
-		run : ActionEdge ( from == onClick, to == nextOp )
+		run : ECARule ( from == onClick, to == nextOp )
 	
-		not ( ce : ConditionEdge ( from == hasNext, to == run ) )  
+		not ( ce : SimpleCondition ( from == hasNext, to == run ) )  
 		
 		eval ( handler.veto( run ))
 
 	then
-		ConditionEdge ce = handler.generatedConditionEdge(run, next, hasNext, run);
+		SimpleCondition ce = handler.generatedSimpleCondition(run, next, hasNext, run);
 		queue.add(ce, drools);
 
 end
@@ -152,16 +152,16 @@ rule "Connect Previous button to 'previous' operation on DomainIterator"
 		set : SetWire ( from == instance, to == form )
 
 		prev : Button ( eContainer == form, name == "Previous" )
-		onClick : EventTrigger ( prev.onClick == onClick )
+		onClick : Event ( prev.onClick == onClick )
 		
 		prevOp : Operation ( instance.previous == prevOp )
 	
-		not ( run : ActionEdge ( from == onClick, to == prevOp ))  
+		not ( run : ECARule ( from == onClick, to == prevOp ))  
 		
 		eval ( handler.veto( prev ))
 
 	then
-		ActionEdge run = handler.generatedActionEdge(prev, prev, onClick, prevOp);
+		ECARule run = handler.generatedECARule(prev, prev, onClick, prevOp);
 		handler.setName(run, "run");
 		queue.add(run, drools);
 
@@ -170,23 +170,23 @@ end
 rule "Connect 'hasPrevious' condition to Previous button action"
 	when
 		instance : DomainIterator (  )
-		hasPrevious : Condition ( instance.hasPrevious == hasPrevious )
+		hasPrevious : Function ( instance.hasPrevious == hasPrevious )
 		
 		form : InputForm ( )
 		set : SetWire ( from == instance, to == form )
 
 		prev : Button ( eContainer == form, name == "Previous" )
-		onClick : EventTrigger ( prev.onClick == onClick )
+		onClick : Event ( prev.onClick == onClick )
 		
 		prevOp : Operation ( instance.previous == prevOp )
-		run : ActionEdge ( from == onClick, to == prevOp )
+		run : ECARule ( from == onClick, to == prevOp )
 	
-		not ( ce : ConditionEdge ( from == hasPrevious, to == run ) )  
+		not ( ce : SimpleCondition ( from == hasPrevious, to == run ) )  
 		
 		eval ( handler.veto( run ))
 
 	then
-		ConditionEdge ce = handler.generatedConditionEdge(run, prev, hasPrevious, run);
+		SimpleCondition ce = handler.generatedSimpleCondition(run, prev, hasPrevious, run);
 		queue.add(ce, drools);
 
 end
@@ -199,16 +199,16 @@ rule "Connect First button to 'reset' operation on DomainIterator"
 		set : SetWire ( from == instance, to == form )
 
 		first : Button ( eContainer == form, name == "First" )
-		onClick : EventTrigger ( first.onClick == onClick )
+		onClick : Event ( first.onClick == onClick )
 		
 		resetOp : Operation ( instance.reset == resetOp )
 	
-		not ( run : ActionEdge ( from == onClick, to == resetOp ))  
+		not ( run : ECARule ( from == onClick, to == resetOp ))  
 		
 		eval ( handler.veto( first ))
 
 	then
-		ActionEdge run = handler.generatedActionEdge(first, first, onClick, resetOp);
+		ECARule run = handler.generatedECARule(first, first, onClick, resetOp);
 		handler.setName(run, "run");
 		queue.add(run, drools);
 
@@ -217,23 +217,23 @@ end
 rule "Connect 'not empty' condition to First button action"
 	when
 		instance : DomainIterator (  )
-		notEmpty : Condition ( eContainer == instance, name == "not empty" ) 
+		notEmpty : Function ( eContainer == instance, name == "not empty" ) 
 		
 		form : InputForm ( )
 		set : SetWire ( from == instance, to == form )
 
 		first : Button ( eContainer == form, name == "First" )
-		onClick : EventTrigger ( first.onClick == onClick )
+		onClick : Event ( first.onClick == onClick )
 		
 		resetOp : Operation ( instance.reset == resetOp )
-		run : ActionEdge ( from == onClick, to == resetOp )
+		run : ECARule ( from == onClick, to == resetOp )
 	
-		not ( ce : ConditionEdge ( from == notEmpty, to == run ) )  
+		not ( ce : SimpleCondition ( from == notEmpty, to == run ) )  
 		
 		eval ( handler.veto( run ))
 
 	then
-		ConditionEdge ce = handler.generatedConditionEdge(run, first, notEmpty, run);
+		SimpleCondition ce = handler.generatedSimpleCondition(run, first, notEmpty, run);
 		queue.add(ce, drools);
 
 end
@@ -246,16 +246,16 @@ rule "Connect Last button to 'jump' operation on DomainIterator"
 		set : SetWire ( from == instance, to == form )
 
 		last : Button ( eContainer == form, name == "Last" )
-		onClick : EventTrigger ( last.onClick == onClick )
+		onClick : Event ( last.onClick == onClick )
 		
 		jumpOp : Operation ( instance.jump == jumpOp )
 	
-		not ( run : ActionEdge ( from == onClick, to == jumpOp ))  
+		not ( run : ECARule ( from == onClick, to == jumpOp ))  
 		
 		eval ( handler.veto( last ))
 
 	then
-		ActionEdge run = handler.generatedActionEdge(last, last, onClick, jumpOp);
+		ECARule run = handler.generatedECARule(last, last, onClick, jumpOp);
 		handler.setName(run, "run");
 		queue.add(run, drools);
 
@@ -264,23 +264,23 @@ end
 rule "Connect 'not empty' condition to Last button action"
 	when
 		instance : DomainIterator (  )
-		notEmpty : Condition ( eContainer == instance, name == "not empty" ) 
+		notEmpty : Function ( eContainer == instance, name == "not empty" ) 
 		
 		form : InputForm ( )
 		set : SetWire ( from == instance, to == form )
 
 		last : Button ( eContainer == form, name == "Last" )
-		onClick : EventTrigger ( last.onClick == onClick )
+		onClick : Event ( last.onClick == onClick )
 		
 		jumpOp : Operation ( instance.jump == jumpOp )
-		run : ActionEdge ( from == onClick, to == jumpOp )
+		run : ECARule ( from == onClick, to == jumpOp )
 	
-		not ( ce : ConditionEdge ( from == notEmpty, to == run ) )  
+		not ( ce : SimpleCondition ( from == notEmpty, to == run ) )  
 		
 		eval ( handler.veto( run ))
 
 	then
-		ConditionEdge ce = handler.generatedConditionEdge(run, last, notEmpty, run);
+		SimpleCondition ce = handler.generatedSimpleCondition(run, last, notEmpty, run);
 		queue.add(ce, drools);
 
 end
@@ -294,19 +294,19 @@ rule "Create 'target' property in Last button"
 
 		last : Button ( eContainer == form, name == "Last" )
 		
-		not ( property : Property ( eContainer == last, name == "target" ))
+		not ( property : Value ( eContainer == last, name == "target" ))
 		
 		eval ( handler.veto( last ))
 
 	then
-		Property property = handler.generatedProperty(last, last);
+		Value property = handler.generatedValue(last, last);
 		handler.setName(property, "target");
 		handler.setDefaultValue(property, "not set");	// set empty to prevent session crashes
 		queue.add(property, drools);
 		
 end
 
-rule "Connect 'target' property to ActionEdge in Last button"
+rule "Connect 'target' property to ECARule in Last button"
 	when
 		instance : DomainIterator (  )
 		
@@ -314,18 +314,18 @@ rule "Connect 'target' property to ActionEdge in Last button"
 		set : SetWire ( from == instance, to == form )
 
 		last : Button ( eContainer == form, name == "Last" )
-		onClick : EventTrigger ( last.onClick == onClick )
-		property : Property ( eContainer == last, name == "target" )
+		onClick : Event ( last.onClick == onClick )
+		property : Value ( eContainer == last, name == "target" )
 		
 		jumpOp : Operation ( instance.jump == jumpOp )
-		run : ActionEdge ( from == onClick, to == jumpOp )
+		run : ECARule ( from == onClick, to == jumpOp )
 		
-		not ( param : ParameterEdge ( from == property, to == run ))
+		not ( param : Parameter ( from == property, to == run ))
 		
 		eval ( handler.veto( run ))
 
 	then
-		ParameterEdge param = handler.generatedParameterEdge(run, last, property, run);
+		Parameter param = handler.generatedParameter(run, last, property, run);
 		queue.add(param, drools);
 		
 end
@@ -358,20 +358,20 @@ rule "'Last' button needs to call 'update target' before calling 'reset'"
 		set : SetWire ( from == instance, to == form )
 
 		last : Button ( eContainer == form, name == "Last" )
-		onClick : EventTrigger ( last.onClick == onClick )
-		property : Property ( eContainer == last, name == "target" )
+		onClick : Event ( last.onClick == onClick )
+		property : Value ( eContainer == last, name == "target" )
 		
 		jumpOp : Operation ( instance.jump == jumpOp )
-		run : ActionEdge ( from == onClick, to == jumpOp )
+		run : ECARule ( from == onClick, to == jumpOp )
 		
 		op : Operation ( eContainer == last, name == "update target" )
 		
-		not ( run2 : ActionEdge ( from == onClick, to == op ) ) 
+		not ( run2 : ECARule ( from == onClick, to == op ) ) 
 		
 		eval ( handler.veto( last ))
 
 	then
-		ActionEdge run2 = handler.generatedActionEdge(last, last, onClick, op);
+		ECARule run2 = handler.generatedECARule(last, last, onClick, op);
 		handler.setName(run2, "update target");
 		handler.setPriority(run2, run.getPriority() + 100); 	// higher = run earlier
 		queue.add(run2, drools);
@@ -381,13 +381,13 @@ end
 rule "Create contents of 'update target' operation"
 	when
 		instance : DomainIterator (  )
-		results : Property ( instance.results == results )
+		results : Value ( instance.results == results )
 		
 		form : InputForm ( )
 		set : SetWire ( from == instance, to == form )
 
 		last : Button ( eContainer == form, name == "Last" )
-		target : Property ( eContainer == last, name == "target" )
+		target : Value ( eContainer == last, name == "target" )
 
 		op : CompositeOperation ( eContainer == last, name == "update target" )
 
@@ -406,7 +406,7 @@ rule "Create contents of 'update target' operation"
 		handler.setName(setOp, "set");
 		queue.add(setOp, drools);
 		
-		Property one = handler.generatedProperty(op, op);
+		Value one = handler.generatedValue(op, op);
 		handler.setReadOnly(one, true);
 		handler.setName(one, "one");
 		handler.setDefaultValue(one, "1");
@@ -436,14 +436,14 @@ rule "Create contents of 'update target' operation"
 end
 
 /**
- * @implementation EventTrigger,DomainIterator
+ * @implementation Event,DomainIterator
  *		The '{@model Changeable#onChange}' event for a {@model DomainIterator}
  *		is executed when the results, that the {@model DomainIterator} represent, change.
  */
 rule "Connect Instance.onChange to Results.update"
 	when
 		instance : DomainIterator (  )
-		event : EventTrigger ( instance.onChange == event )
+		event : Event ( instance.onChange == event )
 		
 		form : InputForm ( )
 		set : SetWire ( from == instance, to == form )
@@ -451,12 +451,12 @@ rule "Connect Instance.onChange to Results.update"
 		label : VisibleThing ( eContainer == form, name == "Results" )
 		updateOp : Operation ( eContainer == label, name == "update" )
 		
-		not ( run : ActionEdge ( from == event, to == updateOp ) )
+		not ( run : ECARule ( from == event, to == updateOp ) )
 		
 		eval ( handler.veto( set ))
 		
 	then
-		ActionEdge run = handler.generatedActionEdge(set, set, event, updateOp);
+		ECARule run = handler.generatedECARule(set, set, event, updateOp);
 		handler.setName(run, "update");
 		queue.add(run, drools);
 		
@@ -465,7 +465,7 @@ end
 rule "Connect results parameter to Results label update (onChange)"
 	when
 		instance : DomainIterator (  )
-		event : EventTrigger ( instance.onChange == event )
+		event : Event ( instance.onChange == event )
 		
 		form : InputForm ( )
 		set : SetWire ( from == instance, to == form )
@@ -473,15 +473,15 @@ rule "Connect results parameter to Results label update (onChange)"
 		label : VisibleThing ( eContainer == form, name == "Results" )
 		updateOp : Operation ( eContainer == label, name == "update" )
 		
-		run : ActionEdge ( from == event, to == updateOp )
-		property : Property ( instance.results == property )
+		run : ECARule ( from == event, to == updateOp )
+		property : Value ( instance.results == property )
 		
-		not ( param : ParameterEdge ( from == property, to == run ))
+		not ( param : Parameter ( from == property, to == run ))
 		
 		eval ( handler.veto( set ))
 		
 	then
-		ParameterEdge param = handler.generatedParameterEdge(set, set, property, run);
+		Parameter param = handler.generatedParameter(set, set, property, run);
 		queue.add(param, drools);
 		
 end
@@ -496,18 +496,18 @@ rule "Connect Instance.onAccess to Results.update"
 		instance : DomainIterator (  )
 		
 		form : InputForm ( )
-		event : EventTrigger ( form.onAccess == event )
+		event : Event ( form.onAccess == event )
 		set : SetWire ( from == instance, to == form )
 	
 		label : VisibleThing ( eContainer == form, name == "Results" )
 		updateOp : Operation ( eContainer == label, name == "update" )
 		
-		not ( run : ActionEdge ( from == event, to == updateOp ) )
+		not ( run : ECARule ( from == event, to == updateOp ) )
 		
 		eval ( handler.veto( set ))
 		
 	then
-		ActionEdge run = handler.generatedActionEdge(set, set, event, updateOp);
+		ECARule run = handler.generatedECARule(set, set, event, updateOp);
 		handler.setName(run, "update");
 		queue.add(run, drools);
 		
@@ -518,21 +518,21 @@ rule "Connect results parameter to Results label update (onAccess)"
 		instance : DomainIterator (  )
 		
 		form : InputForm ( )
-		event : EventTrigger ( form.onAccess == event )
+		event : Event ( form.onAccess == event )
 		set : SetWire ( from == instance, to == form )
 
 		label : VisibleThing ( eContainer == form, name == "Results" )
 		updateOp : Operation ( eContainer == label, name == "update" )
 		
-		run : ActionEdge ( from == event, to == updateOp )
-		property : Property ( instance.results == property )
+		run : ECARule ( from == event, to == updateOp )
+		property : Value ( instance.results == property )
 		
-		not ( param : ParameterEdge ( from == property, to == run ))
+		not ( param : Parameter ( from == property, to == run ))
 		
 		eval ( handler.veto( set ))
 		
 	then
-		ParameterEdge param = handler.generatedParameterEdge(set, set, property, run);
+		Parameter param = handler.generatedParameter(set, set, property, run);
 		queue.add(param, drools);
 		
 end

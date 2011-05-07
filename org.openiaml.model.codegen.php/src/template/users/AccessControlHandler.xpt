@@ -9,11 +9,11 @@
 /**
  * Domain instance methods.
  */
-«DEFINE accessControlHandlerOperationCall(Boolean php, model::ActionEdge wire, model::components::AccessControlHandler object) FOR model::WireDestination»
+«DEFINE accessControlHandlerOperationCall(Boolean php, model::ECARule wire, model::components::AccessControlHandler object) FOR model::WireDestination»
 	«throwException("Unexpected accessControlHandlerOperationCall run instance wire destination: " + this)»
 «ENDDEFINE»
 
-«DEFINE accessControlHandlerOperationCall(Boolean php, model::ActionEdge wire, model::components::AccessControlHandler object) FOR model::Action»
+«DEFINE accessControlHandlerOperationCall(Boolean php, model::ECARule wire, model::components::AccessControlHandler object) FOR model::Action»
 	«throwException("Unexpected accessControlHandlerOperationCall run instance action destination: " + this)»
 «ENDDEFINE»
 
@@ -21,7 +21,7 @@
  * @implementation PrimitiveOperation,AccessControlHandler
  *		An {@model AccessControlHandler} has a {@model PrimitiveOperation} named 'check permissions'. 
  */
-«DEFINE accessControlHandlerOperationCall(Boolean php, model::ActionEdge wire, model::components::AccessControlHandler object) FOR model::Operation»
+«DEFINE accessControlHandlerOperationCall(Boolean php, model::ECARule wire, model::components::AccessControlHandler object) FOR model::Operation»
 	«IF php»
 		«IF name=="check permissions"»
 			«REM»

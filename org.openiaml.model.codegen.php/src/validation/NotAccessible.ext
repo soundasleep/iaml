@@ -8,7 +8,7 @@ Set[model::visual::Frame] incomingPages(model::visual::Frame this) :
 		
 	.union(
 		inActions
-		.from.typeSelect(model::EventTrigger).select(e|e.name == "click" || e.name == "onClick")
+		.from.typeSelect(model::Event).select(e|e.name == "click" || e.name == "onClick")
 		.eContainer.typeSelect(model::visual::Button)
 		.eContainer.typeSelect(model::visual::Frame)		
 	);

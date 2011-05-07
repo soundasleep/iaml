@@ -6,11 +6,11 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE remoteValue(boolean php, boolean require, model::Property property) FOR emf::EObject»
+«DEFINE remoteValue(boolean php, boolean require, model::Value property) FOR emf::EObject»
 	«throwException("Cannot find a remote parameter source for " + this)»
 «ENDDEFINE»
 
-«DEFINE remoteValue(boolean php, boolean require, model::Property property) FOR model::domain::DomainAttributeInstance»
+«DEFINE remoteValue(boolean php, boolean require, model::Value property) FOR model::domain::DomainAttributeInstance»
 	«IF php»
 		get_attribute_instance_«safeName()-»()
 	«ELSE»
@@ -21,11 +21,11 @@
 /**
  * Is the current remote value set?
  */
-«DEFINE remoteValueIsSet(boolean php, model::Property property) FOR emf::EObject»
+«DEFINE remoteValueIsSet(boolean php, model::Value property) FOR emf::EObject»
 	«throwException("Cannot find a remote parameter source for " + this)»
 «ENDDEFINE»
 
-«DEFINE remoteValueIsSet(boolean php, model::Property property) FOR model::domain::DomainAttributeInstance»
+«DEFINE remoteValueIsSet(boolean php, model::Value property) FOR model::domain::DomainAttributeInstance»
 	«IF php»
 		has_attribute_instance_«safeName()-»()
 	«ELSE»

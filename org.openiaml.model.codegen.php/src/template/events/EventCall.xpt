@@ -10,7 +10,7 @@
  *		{@model Action}s are run in order of descending priority; that is,
  *		a higher priority {@model Action} will execute first.
  */
-«DEFINE callEvent(Boolean php) FOR model::EventTrigger»
+«DEFINE callEvent(Boolean php) FOR model::Event»
 	// Event '«simpleName()»'
 	// expand out all outgoing edges
 	«EXPAND template::operations::OperationCall::callOperation(php, false) FOREACH outActions.sortBy(e|-e.priority)»

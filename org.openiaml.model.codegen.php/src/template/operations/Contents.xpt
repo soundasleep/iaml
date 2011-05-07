@@ -56,9 +56,9 @@
 	«ELSEIF name == "update" || name == "init"»
 		«REM»Issue 210: Change 'update' CompositeOperation to PrimitiveOperation.«ENDREM»
 		«EXPAND updateOperation(php) FOR this»
-	«ELSEIF name.startsWith("set ") && eContainer.eContents.typeSelect(model::Property).exists(p|"set " + p.name == name)»
+	«ELSEIF name.startsWith("set ") && eContainer.eContents.typeSelect(model::Value).exists(p|"set " + p.name == name)»
 		«REM»Issue 223: create 'set XXX' operation for all properties«ENDREM»
-		«LET eContainer.eContents.typeSelect(model::Property).selectFirst(p|"set " + p.name == name) AS property»
+		«LET eContainer.eContents.typeSelect(model::Value).selectFirst(p|"set " + p.name == name) AS property»
 			«REM»primitive operations only have access to a single argument, currently«ENDREM»
 			«IF php»
 				$arg0 = $default_arg;
@@ -171,7 +171,7 @@
  *		When a {@model Changeable#fieldValue} is changed, the {@model Changeable#onChange} {@model EventTrigger}
  *		will be executed.
  */
-«DEFINE chainedEventFlow(Boolean php) FOR model::Property»
+«DEFINE chainedEventFlow(Boolean php) FOR model::Value»
 	/* Chained event property: «this» */
 	«IF model::Changeable.isInstance(eContainer)»
 		«LET ((model::Changeable) eContainer) AS c»
@@ -190,7 +190,7 @@
  * Chained events?
  * @param type the type of event, i.e. "edit", "access"
  */
-«DEFINE chainedEvent(Boolean php, Boolean inStoreDb, String type) FOR model::EventTrigger»
+«DEFINE chainedEvent(Boolean php, Boolean inStoreDb, String type) FOR model::Event»
 	// expanding chained event trigger «name»
 	«IF type=="edit"»
 		«EXPAND OperationCall::callOperation(php, inStoreDb) FOREACH outActions.sortBy(e|-e.priority)»
@@ -239,7 +239,7 @@
 /**
  * Assumes that $arg0 has been already set.
  */
-«DEFINE setFieldValue(Boolean php) FOR model::Property»
+«DEFINE setFieldValue(Boolean php) FOR model::Value»
 	«IF php»
 		// cast it to something we can actually represent it as first
 		// this make sure we don't accidentally call Javascript's toString() method
@@ -308,7 +308,7 @@
 /**
  * outflowTarget <-- inflowTarget
  */
-«DEFINE setPropertyToValueOperation(model::operations::ExecutionEdgesSource start, Boolean php, model::Property property) FOR model::PrimitiveOperation-»
+«DEFINE setPropertyToValueOperation(model::operations::ExecutionEdgesSource start, Boolean php, model::Value property) FOR model::PrimitiveOperation-»
 	«IF inFlows.isEmpty»
 		«throwException("Trying to call a PrimitiveOperation with no incoming flows: " + this)»
 	«ENDIF»
@@ -361,9 +361,9 @@
 		«ELSE»
 			temp_«safeName(outFlows.first().to)» = «EXPAND DataFlow::dataSource(php) FOR inFlows.first().from-»;
 		«ENDIF»
-	«ELSEIF model::Property.isInstance(outFlows.first().to)»
+	«ELSEIF model::Value.isInstance(outFlows.first().to)»
 		«REM»set a property«ENDREM»
-		«EXPAND setPropertyToValueOperation(start, php, (model::Property) outFlows.first().to) FOR this»
+		«EXPAND setPropertyToValueOperation(start, php, (model::Value) outFlows.first().to) FOR this»
 	«ELSE»
 		«throwException("Unexpected target to set: " + this)»
 	«ENDIF»

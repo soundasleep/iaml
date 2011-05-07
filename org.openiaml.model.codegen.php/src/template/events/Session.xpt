@@ -5,7 +5,7 @@
  */
 «EXTENSION template::GeneratorExtensions»
 
-«DEFINE runSessionEvents(String eventName) FOR model::EventTrigger-»
+«DEFINE runSessionEvents(String eventName) FOR model::Event-»
 	// Session EventTrigger «this» '«eventName»'
 	«IF eventName == "init" || eventName == "access"-»
 		// Actions sorted by priority

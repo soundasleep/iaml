@@ -66,7 +66,7 @@
 «DEFINE implicitButtonClickEvents(model::visual::Frame currentFrame, Boolean php) FOR model::Wire»
 «ENDDEFINE»
 
-«DEFINE implicitButtonClickEvents(model::visual::Frame currentFrame, Boolean php) FOR model::ActionEdge»
+«DEFINE implicitButtonClickEvents(model::visual::Frame currentFrame, Boolean php) FOR model::ECARule»
 	«IF (name == "click" || name == "onClick")»
 		/* expanding implicit trigger (run) */
 		«EXPAND template::operations::OperationCall::callOperation(php, false) FOR this»

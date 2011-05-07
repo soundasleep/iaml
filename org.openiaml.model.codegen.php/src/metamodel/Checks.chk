@@ -43,8 +43,8 @@ context model::operations::DecisionNode ERROR "A DecisionNode can only have at m
 	outExecutions.size <= 2;
 	
 context model::wires::SyncWire ERROR "You cannot have a SyncWire that connects to a read-only Property":
-	!(model::Property.isInstance(from) && ((model::Property) from).readOnly) && 
-	!(model::Property.isInstance(to) && ((model::Property) to).readOnly);
+	!(model::Value.isInstance(from) && ((model::Value) from).readOnly) && 
+	!(model::Value.isInstance(to) && ((model::Value) to).readOnly);
 	
 context model::wires::SyncWire ERROR "You cannot have a SyncWire that connects to a QueryParameter":
 	!model::QueryParameter.isInstance(from) &&
@@ -54,8 +54,8 @@ context model::wires::SyncWire ERROR "A SyncWire cannot connect to itself":
 	from != to;
 
 context model::wires::SyncWire ERROR "You cannot have a SyncWire connecting two ApplicationElementProperties":
-	!(model::Property.isInstance(from) && 
-	model::Property.isInstance(to));
+	!(model::Value.isInstance(from) && 
+	model::Value.isInstance(to));
 	
 context model::domain::DomainSchema ERROR "You cannot have a DomainSchema called single_values (reserved word)" :
 	toString(name) != "single_values";
@@ -72,9 +72,9 @@ context model::Wire ERROR "A Wire must have a 'from'" :
 context model::Wire ERROR "A Wire must have a 'to'" :
 	to != null;
 
-context model::ActionEdge ERROR "An ActionEdge must have a 'from'" :
+context model::ECARule ERROR "An ActionEdge must have a 'from'" :
 	from != null;
-context model::ActionEdge ERROR "An ActionEdge must have a 'to'" :
+context model::ECARule ERROR "An ActionEdge must have a 'to'" :
 	to != null;
 
 context model::wires::ExtendsEdge ERROR "A Role cannot extend itself" :
@@ -93,10 +93,10 @@ context model::operations::OperationCallNode ERROR "An OperationCallNode must ha
 	outActions.size == 1
 		&& model::Operation.isInstance(outActions.first().to);
 
-context model::ActionEdge WARNING "This RunAction will not do anything: consider naming it 'onClick'" :
+context model::ECARule WARNING "This ECA Rule will not do anything: consider naming it 'onClick'" :
 	!(model::VisibleThing.isInstance(from) && !(name == "click" || name == "onClick"));
 
-context model::Property WARNING "A session property used as part of a login handler should have a default value set, otherwise secure frames will crash with an exception rather than going to the login frame" :
+context model::Value WARNING "A session value used as part of a login handler should have a default value set, otherwise secure frames will crash with an exception rather than going to the login frame" :
 	!(defaultValue == null && inWires.typeSelect(model::wires::SetWire).from.typeSelect(model::components::LoginHandler).size > 0); 
 
 context model::components::LoginHandler ERROR "A LoginHandler[user] can not have more than one incoming ParameterWire" :
@@ -144,8 +144,8 @@ context model::PrimitiveOperation WARNING "Unknown primitive operation name '" +
 			(name == "send")) ||
 		name == "true?" || name == "can cast?") ||
 
-	// a Property 'XXX' will generate a PrimitiveOperation named 'set XXX'		
-	(eContainer != null && eContainer.eContents.typeSelect(model::Property).exists(p|name == "set " + p.name));
+	// a Value 'XXX' will generate a PrimitiveOperation named 'set XXX'		
+	(eContainer != null && eContainer.eContents.typeSelect(model::Value).exists(p|name == "set " + p.name));
 
 context model::PrimitiveCondition WARNING "Unknown primitive condition name '" + name + "'" :
 	(eContainer != null && model::domain::DomainIterator.isInstance(eContainer) && ((model::domain::DomainIterator) eContainer).hasNext == this) || 
@@ -240,11 +240,11 @@ context model::domain::DomainSchema WARNING "A DomainSchema should have at least
 context model::domain::DomainIterator WARNING "A DomainIterator should have one DomainSource specified" :
 	outSelects.size == 1;
 
-context model::ActionEdge WARNING "Unknown outgoing ActionEdge '" + name + "' from this AccessControlHandler" :
+context model::ECARule WARNING "Unknown outgoing ECARule '" + name + "' from this AccessControlHandler" :
 	(!model::components::AccessControlHandler.isInstance(from)) ||
 		(name == "login" || name == "logout" || name == "success");
 	
-context model::ActionEdge WARNING "Unknown outgoing ActionEdge '" + name + "' from this LoginHandler" :
+context model::ECARule WARNING "Unknown outgoing ECARule '" + name + "' from this LoginHandler" :
 	(!model::components::LoginHandler.isInstance(from)) ||
 		(name == "login" || name == "logout" || name == "success");
 
@@ -257,9 +257,9 @@ context model::operations::DecisionNode	WARNING "Unknown DecisionNode '" + name 
 		|| name == "empty?";
 
 context model::operations::DataFlowEdge ERROR "Readonly Properties can not be set" :
-	!(to != null && model::Property.isInstance(to) && ((model::Property) to).readOnly);
+	!(to != null && model::Value.isInstance(to) && ((model::Value) to).readOnly);
 
-context model::Property ERROR "Readonly Properties must have a default value set" :
+context model::Value ERROR "Readonly Values must have a default value set" :
 	!(readOnly && defaultValue == null);
 
 /**
@@ -275,11 +275,11 @@ context domain::DomainAttribute ERROR "Using a reserved SQL word for a DomainAtt
 	"rollback", "savepoint", "select", "union", "update", "using", "vacuum", "where"}.contains(toString(name).toLowerCase());
 
 /**
- * A 'login' ActionEdge for an AccessControlHandler should not be in the 
+ * A 'login' ECARule for an AccessControlHandler should not be in the 
  * same Scope as the handler; this will cause an infinite redirection, 
  * as the login page can never be accessed.
  */
-context model::ActionEdge ERROR "A 'login' ActionEdge for an AccessControlHandler should not be in the same Scope as the handler; this will cause an infinite redirection, as the login page can never be accessed." :
+context model::ECARule ERROR "A 'login' ECARule for an AccessControlHandler should not be in the same Scope as the handler; this will cause an infinite redirection, as the login page can never be accessed." :
 	!(from != null && to != null && model::components::AccessControlHandler.isInstance(from) 
 		&& name == "login" && to.eContainer != null && from.eContainer != null
 		&& to.eContainer == from.eContainer);

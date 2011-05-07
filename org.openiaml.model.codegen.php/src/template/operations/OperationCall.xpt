@@ -10,7 +10,7 @@
 	«throwException("Unknown wire to expand: " + this)»
 «ENDDEFINE»
 
-«DEFINE callOperation(Boolean php, Boolean inStoreDb) FOR model::ActionEdge»
+«DEFINE callOperation(Boolean php, Boolean inStoreDb) FOR model::ECARule»
 	«IF inConditionEdges.size > 0» 
 		/* expand conditions */
 		if («EXPAND template::conditions::Runtime::callCondition(php, inStoreDb) FOREACH inConditionEdges SEPARATOR " && "») {
@@ -26,7 +26,7 @@
  *		An {@model ActionEdge} linking to a {@model Frame} or a {@model Gate} will
  *		implicitly be a navigation, rather than executing an {@model Operation}.
  */
-«DEFINE callOperationContents(Boolean php, Boolean inStoreDb) FOR model::ActionEdge-»
+«DEFINE callOperationContents(Boolean php, Boolean inStoreDb) FOR model::ECARule-»
 	«IF model::visual::Frame.isInstance(to) || model::components::Gate.isInstance(to)»
 		«REM»implicit: a NavigateAction«ENDREM»
 		«EXPAND callOperationContentsNavigate(php, inStoreDb) FOR this»
@@ -52,7 +52,7 @@
  *		When a {@model Action} is executed through a {@model ActionEdge},
  *		the type of activity executed is dependent on the subtype of the given {@model Action}.
  */
-«DEFINE callOperationContentsRun(Boolean php, Boolean inStoreDb) FOR model::ActionEdge-»
+«DEFINE callOperationContentsRun(Boolean php, Boolean inStoreDb) FOR model::ECARule-»
 	/* eContainer == «to.eContainer» */
 	
 	«IF php»
@@ -125,11 +125,11 @@
  * We need to switch on the target, because we could navigate to many different types
  * of new destinations?
  */
-«DEFINE callOperationContentsNavigate(Boolean php, Boolean inStoreDb) FOR model::ActionEdge»
+«DEFINE callOperationContentsNavigate(Boolean php, Boolean inStoreDb) FOR model::ECARule»
 	«EXPAND navigateTo(php, inStoreDb, this) FOR to» 
 «ENDDEFINE»
 
-«DEFINE navigateTo(Boolean php, Boolean inStoreDb, model::ActionEdge wire) FOR model::Action»
+«DEFINE navigateTo(Boolean php, Boolean inStoreDb, model::ECARule wire) FOR model::Action»
 	«IF php»
 		$url = null;
 		«EXPAND getNavigateActionDestination(php, inStoreDb, wire, true)»
@@ -154,11 +154,11 @@
  *
  * @param includeSession should PHPSESSID (etc) be included in the URL? Should generally be <code>true</code>
  */
-«DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::ActionEdge wire, Boolean includeSession) FOR model::Action»
+«DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::ECARule wire, Boolean includeSession) FOR model::Action»
 	«throwException("Unknown NavigateAction destination: " + this)»
 «ENDDEFINE»
 
-«DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::ActionEdge wire, Boolean includeSession) FOR model::components::Gate»
+«DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::ECARule wire, Boolean includeSession) FOR model::components::Gate»
 	«IF model::Scope.isInstance(eContainer)»
 		«IF ((model::Scope) eContainer).entryGate == this»
 			«EXPAND getNavigateActionDestinationEntryGate(php, inStoreDb, wire, includeSession)»
@@ -179,7 +179,7 @@
  *		When an {@model ActionEdge} executes a {@model Scope#entryGate entry} {@model Gate}, the user is
  *		redirected to the resumption of the given {@model Gate}.
  */
-«DEFINE getNavigateActionDestinationEntryGate(Boolean php, Boolean inStoreDb, model::ActionEdge wire, Boolean includeSession) FOR model::components::Gate»
+«DEFINE getNavigateActionDestinationEntryGate(Boolean php, Boolean inStoreDb, model::ECARule wire, Boolean includeSession) FOR model::components::Gate»
 	«IF php»
 		/* navigating back to resume a gate */
 		// get the resume ID
@@ -220,7 +220,7 @@
  *		When an {@model ActionEdge} executes a {@model Scope#exitGate exit} {@model Gate}, the user is
  *		redirected to the resumption of the given {@model Gate}.
  */
-«DEFINE getNavigateActionDestinationExitGate(Boolean php, Boolean inStoreDb, model::ActionEdge wire, Boolean includeSession) FOR model::components::Gate»
+«DEFINE getNavigateActionDestinationExitGate(Boolean php, Boolean inStoreDb, model::ECARule wire, Boolean includeSession) FOR model::components::Gate»
 	«IF php»
 		/* navigating back to resume a gate */
 		// get the resume ID
@@ -261,7 +261,7 @@
  *		When an {@model ActionEdge} executes a {@model Frame}, the user is
  *		redirected to the location of the given {@model Frame}.
  */
-«DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::ActionEdge wire, Boolean includeSession) FOR model::visual::Frame»
+«DEFINE getNavigateActionDestination(Boolean php, Boolean inStoreDb, model::ECARule wire, Boolean includeSession) FOR model::visual::Frame»
 	«IF php»
 		/* prevent infinite loops on the current frame */
 		if (!defined('CURRENT_PAGE') || "«safeNameString(id)-»" != CURRENT_PAGE) {
@@ -286,7 +286,7 @@
  * 		Any incoming named {@model ParameterEdge}s to a {@model NavigateAction} will be
  * 		passed along as named <code>GET</code> parameters to the destination.
  */
-«DEFINE addNamedParameters(Boolean php, Boolean inStoreDb, String argName) FOR model::ActionEdge»
+«DEFINE addNamedParameters(Boolean php, Boolean inStoreDb, String argName) FOR model::ECARule»
 	«IF !inParameterEdges.isEmpty»
 		// add named parameters
 		«FOREACH inParameterEdges.select(p|p.name != null && p.name.length != 0) AS param»
@@ -323,7 +323,7 @@
  * Assumes that there is a function call waiting in 'function_queue'.
  * This function will be executed with the response as a parameter.
  */
-«DEFINE callRemoteOperation(Boolean php, Boolean inStoreDb) FOR model::ActionEdge-»
+«DEFINE callRemoteOperation(Boolean php, Boolean inStoreDb) FOR model::ECARule-»
 	«IF inParameterEdges.size > 0» 
 		var arg0 = «EXPAND Parameters::callParameter(php, inStoreDb, false) FOR inParameterEdges.get(0)»;
 	«ELSE»

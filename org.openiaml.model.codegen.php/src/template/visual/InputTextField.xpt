@@ -236,7 +236,7 @@
  *		{@model Property} with a {@model Property#defaultValue} set will be initialised with
  *		this default value at runtime, if the text field does not yet have a {@model InputTextField#fieldValue value}.
  */
-«DEFINE staticInitialValue(model::visual::Frame currentFrame) FOR model::Property»
+«DEFINE staticInitialValue(model::visual::Frame currentFrame) FOR model::Value»
 	«IF defaultValue == null»
 		«IF containingSession(this) == null»
 			«REM»contained in a Frame or InternetApplication: a static value«ENDREM»

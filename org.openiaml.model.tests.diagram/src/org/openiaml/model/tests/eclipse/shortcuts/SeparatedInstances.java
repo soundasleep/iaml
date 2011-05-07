@@ -39,7 +39,7 @@ public class SeparatedInstances extends AbstractShortcutsTestCase {
 		editor_page = openDiagram(page);
 		assertEditorVisual(editor_page);
 
-		ShapeNodeEditPart event = assertHasEventTrigger(editor_page, "access", false);
+		ShapeNodeEditPart event = assertHasEvent(editor_page, "access", false);
 		// shortcut
 		ShapeNodeEditPart op = assertHasOperation(editor_page, "target operation", true);
 		assertHasRunAction(editor_page, event, op, "run");

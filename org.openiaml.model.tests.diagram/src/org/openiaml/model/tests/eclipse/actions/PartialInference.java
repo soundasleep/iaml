@@ -162,9 +162,9 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 			assertNotGenerated(text2);
 			ConnectionNodeEditPart sync = assertHasSyncWire(editor_page, text1, text2, "sync");
 			assertNotGenerated(sync);
-			ShapeNodeEditPart access = assertHasEventTrigger(editor_page, false, ModelPackage.eINSTANCE.getAccessible_OnAccess());
+			ShapeNodeEditPart access = assertHasEvent(editor_page, false, ModelPackage.eINSTANCE.getAccessible_OnAccess());
 			assertGenerated(access);
-			ShapeNodeEditPart init = assertHasEventTrigger(editor_page, false, ModelPackage.eINSTANCE.getScope_OnInit());
+			ShapeNodeEditPart init = assertHasEvent(editor_page, false, ModelPackage.eINSTANCE.getScope_OnInit());
 			assertGenerated(init);
 			
 			// in the fully inferred file, there should be lots of children
@@ -201,9 +201,9 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		assertNotGenerated(text2);
 		ConnectionNodeEditPart sync = assertHasSyncWire(editor_page, text1, text2, "sync");
 		assertNotGenerated(sync);
-		ShapeNodeEditPart access = assertHasEventTrigger(editor_page, false, ModelPackage.eINSTANCE.getAccessible_OnAccess());
+		ShapeNodeEditPart access = assertHasEvent(editor_page, false, ModelPackage.eINSTANCE.getAccessible_OnAccess());
 		assertGenerated(access);
-		ShapeNodeEditPart init = assertHasEventTrigger(editor_page, false,ModelPackage.eINSTANCE.getScope_OnInit());
+		ShapeNodeEditPart init = assertHasEvent(editor_page, false,ModelPackage.eINSTANCE.getScope_OnInit());
 		assertGenerated(init);
 		
 		// in the fully inferred file, there should be lots of children
@@ -228,8 +228,8 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		
 		assertEditorHasChildren(expectedChildren, editor_text);
 		
-		ShapeNodeEditPart access = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getAccessible_OnAccess());
-		ShapeNodeEditPart edit = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getChangeable_OnChange());
+		ShapeNodeEditPart access = assertHasEvent(editor_text, false, ModelPackage.eINSTANCE.getAccessible_OnAccess());
+		ShapeNodeEditPart edit = assertHasEvent(editor_text, false, ModelPackage.eINSTANCE.getChangeable_OnChange());
 		ShapeNodeEditPart update = assertHasOperation(editor_text, "update", false);
 		ShapeNodeEditPart init = assertHasOperation(editor_text, "init", false);
 		ShapeNodeEditPart fieldValue = assertHasFieldValue(editor_text, false);
@@ -240,14 +240,14 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		ShapeNodeEditPart canCast = assertHasPrimitiveCondition(editor_text, "can cast?", false);
 
 		// model 0.5.1
-		ShapeNodeEditPart currentInput = assertHasProperty(editor_text, "currentInput", false);
+		ShapeNodeEditPart currentInput = assertHasValue(editor_text, "currentInput", false);
 		ShapeNodeEditPart condition2 = assertHasCompositeCondition(editor_text, "currentInput is set", false);
 		ShapeNodeEditPart notEmpty = assertHasPrimitiveCondition(editor_text, "not empty", false);
 		ShapeNodeEditPart empty = assertHasPrimitiveCondition(editor_text, "empty", false);
 		ShapeNodeEditPart show = assertHasPrimitiveOperation(editor_text, "show", false);
 		ShapeNodeEditPart hide = assertHasPrimitiveOperation(editor_text, "hide", false);
-		ShapeNodeEditPart onClick = assertHasEventTrigger(editor_text, null, false, ModelPackage.eINSTANCE.getVisibleThing_OnClick());
-		ShapeNodeEditPart onInput = assertHasEventTrigger(editor_text, null, false, ModelPackage.eINSTANCE.getVisibleThing_OnInput());
+		ShapeNodeEditPart onClick = assertHasEvent(editor_text, null, false, ModelPackage.eINSTANCE.getVisibleThing_OnClick());
+		ShapeNodeEditPart onInput = assertHasEvent(editor_text, null, false, ModelPackage.eINSTANCE.getVisibleThing_OnInput());
 
 		// all generated
 		assertGenerated(access);
@@ -288,7 +288,7 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		
 		ShapeNodeEditPart condition2 = assertHasPrimitiveCondition(editor_text, "fieldValue is set", true);
 
-		ShapeNodeEditPart edit2 = assertHasEventTrigger(editor_text, true, ModelPackage.eINSTANCE.getChangeable_OnChange());
+		ShapeNodeEditPart edit2 = assertHasEvent(editor_text, true, ModelPackage.eINSTANCE.getChangeable_OnChange());
 		ShapeNodeEditPart update2 = assertHasOperation(editor_text, "update", true);
 		ShapeNodeEditPart fieldValue2 = assertHasFieldValue(editor_text, true);
 
@@ -306,25 +306,25 @@ public class PartialInference extends AbstractActionTestCase<GraphicalEditPart> 
 		assertGenerated(canCast2);
 		
 		// additional connections on previously contained elements
-		ShapeNodeEditPart access = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getAccessible_OnAccess());
-		ShapeNodeEditPart edit = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getChangeable_OnChange());
+		ShapeNodeEditPart access = assertHasEvent(editor_text, false, ModelPackage.eINSTANCE.getAccessible_OnAccess());
+		ShapeNodeEditPart edit = assertHasEvent(editor_text, false, ModelPackage.eINSTANCE.getChangeable_OnChange());
 		ShapeNodeEditPart init = assertHasOperation(editor_text, "init", false);
 		ShapeNodeEditPart fieldValue = assertHasFieldValue(editor_text, false);
 		
 		// connected by run wire
 		ConnectionNodeEditPart run = assertHasRunAction(editor_text, access, init, "run");
 		assertGenerated(run);
-		ConnectionNodeEditPart param = assertHasParameterEdge(editor_text, fieldValue2, run);
+		ConnectionNodeEditPart param = assertHasParameter(editor_text, fieldValue2, run);
 		assertGenerated(param);
 		
 		// connected by run wire
 		ConnectionNodeEditPart run2 = assertHasRunAction(editor_text, edit, update2, "run");
 		assertGenerated(run2);
-		ConnectionNodeEditPart param2 = assertHasParameterEdge(editor_text, fieldValue, run2);
+		ConnectionNodeEditPart param2 = assertHasParameter(editor_text, fieldValue, run2);
 		assertGenerated(param2);
 		
 		// connected by condition wire
-		ConnectionNodeEditPart condWire = assertHasConditionEdge(editor_text, condition2, run);
+		ConnectionNodeEditPart condWire = assertHasSimpleCondition(editor_text, condition2, run);
 		assertGenerated(condWire);
 	}
 	

@@ -34,8 +34,8 @@ public class NonContainedEdges extends AbstractActionTestCase<GraphicalEditPart>
 	public void testInitial() throws Exception {
 		initializeModelFile();
 
-		assertHasProperty(editor, "target property", false);
-		assertHasCondition(editor, "target condition", false);
+		assertHasValue(editor, "target property", false);
+		assertHasFunction(editor, "target condition", false);
 		assertHasOperation(editor, "target operation", false);
 
 	}
@@ -49,14 +49,14 @@ public class NonContainedEdges extends AbstractActionTestCase<GraphicalEditPart>
 
 		initializeModelFile();
 
-		ShapeNodeEditPart property = assertHasProperty(editor, "target property", false);
-		ShapeNodeEditPart condition = assertHasCondition(editor, "target condition", false);
+		ShapeNodeEditPart property = assertHasValue(editor, "target property", false);
+		ShapeNodeEditPart condition = assertHasFunction(editor, "target condition", false);
 
 		editor_sub = openDiagram(condition);
 		assertEditorCondition(editor_sub);
 
 		// there should be two elements, one shortcut
-		ShapeNodeEditPart property2 = assertHasProperty(editor_sub, "target property", true);
+		ShapeNodeEditPart property2 = assertHasValue(editor_sub, "target property", true);
 		ShapeNodeEditPart var = assertHasTemporaryVariable(editor_sub, "target", false);
 
 		assertHasDataFlowEdge(editor_sub, property2, var);
@@ -76,14 +76,14 @@ public class NonContainedEdges extends AbstractActionTestCase<GraphicalEditPart>
 
 		initializeModelFile();
 
-		ShapeNodeEditPart property = assertHasProperty(editor, "target property", false);
+		ShapeNodeEditPart property = assertHasValue(editor, "target property", false);
 		ShapeNodeEditPart operation = assertHasOperation(editor, "target operation", false);
 
 		editor_sub = openDiagram(operation);
 		assertEditorOperation(editor_sub);
 
 		// there should be two elements, one shortcut
-		ShapeNodeEditPart property2 = assertHasProperty(editor_sub, "target property", true);
+		ShapeNodeEditPart property2 = assertHasValue(editor_sub, "target property", true);
 		ShapeNodeEditPart var = assertHasTemporaryVariable(editor_sub, "target", false);
 
 		assertHasDataFlowEdge(editor_sub, property2, var);

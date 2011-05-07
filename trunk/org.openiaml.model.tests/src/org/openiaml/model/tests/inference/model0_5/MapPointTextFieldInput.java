@@ -3,10 +3,10 @@
  */
 package org.openiaml.model.tests.inference.model0_5;
 
-import org.openiaml.model.model.ActionEdge;
-import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.ECARule;
+import org.openiaml.model.model.Event;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.Property;
+import org.openiaml.model.model.Value;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.MapPoint;
@@ -43,14 +43,14 @@ public class MapPointTextFieldInput extends InferenceTestCase {
 		MapPoint point = assertHasMapPoint(home, "target map point");
 
 		// input.onChange -> point.update()
-		EventTrigger onChange = input.getOnChange();
+		Event onChange = input.getOnChange();
 		Operation update = assertHasOperation(point, "update");
-		ActionEdge run = assertHasRunAction(root, onChange, update);
+		ECARule run = assertHasRunAction(root, onChange, update);
 
-		Property textValue = assertHasFieldValue(input);
-		Property pointValue = assertHasFieldValue(point);
+		Value textValue = assertHasFieldValue(input);
+		Value pointValue = assertHasFieldValue(point);
 
-		assertGenerated(assertHasParameterEdge(root, textValue, run));
+		assertGenerated(assertHasParameter(root, textValue, run));
 
 		assertGenerated(textValue);
 		assertGenerated(pointValue);

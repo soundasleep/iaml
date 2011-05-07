@@ -5,16 +5,16 @@ package org.openiaml.model.tests.inference.model0_4;
 
 import java.util.Set;
 
-import org.openiaml.model.model.ActionEdge;
-import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.ECARule;
+import org.openiaml.model.model.Event;
 import org.openiaml.model.model.PrimitiveCondition;
 import org.openiaml.model.model.PrimitiveOperation;
-import org.openiaml.model.model.Property;
+import org.openiaml.model.model.Value;
 import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.ConditionEdge;
-import org.openiaml.model.model.wires.ParameterEdge;
+import org.openiaml.model.model.SimpleCondition;
+import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 import org.openiaml.model.tests.inference.model0_2.SessionSyncWires;
@@ -67,10 +67,10 @@ public class SetWireClient extends InferenceTestCase {
 		InputTextField target = assertHasInputTextField(page, "target");
 
 		// there should be an 'edit' event in source
-		EventTrigger edit = source.getOnChange();
+		Event edit = source.getOnChange();
 		assertGenerated(edit);
 
-		Property value = assertHasFieldValue(source);
+		Value value = assertHasFieldValue(source);
 		assertGenerated(value);
 
 		// and an 'update' event in target
@@ -78,11 +78,11 @@ public class SetWireClient extends InferenceTestCase {
 		assertGenerated(update);
 
 		// connected with a run wire
-		ActionEdge run = assertHasRunAction(page, edit, update, "run");
+		ECARule run = assertHasRunAction(page, edit, update, "run");
 		assertGenerated(run);
 
 		// which has a parameter
-		ParameterEdge param = assertHasParameterEdge(page, value, run);
+		Parameter param = assertHasParameter(page, value, run);
 		assertGenerated(param);
 	}
 
@@ -99,10 +99,10 @@ public class SetWireClient extends InferenceTestCase {
 		InputTextField target = assertHasInputTextField(page, "target");
 
 		// there should be an 'edit' event in target
-		EventTrigger edit = target.getOnChange();
+		Event edit = target.getOnChange();
 		assertGenerated(edit);
 
-		Property value = assertHasFieldValue(target);
+		Value value = assertHasFieldValue(target);
 		assertGenerated(value);
 
 		// and an 'update' event in target
@@ -124,10 +124,10 @@ public class SetWireClient extends InferenceTestCase {
 		InputTextField target = assertHasInputTextField(page, "target");
 
 		// there should be an 'edit' event in target
-		EventTrigger access = target.getOnAccess();
+		Event access = target.getOnAccess();
 		assertGenerated(access);
 
-		Property value = assertHasFieldValue(source);
+		Value value = assertHasFieldValue(source);
 		assertGenerated(value);
 
 		// and an 'update' event in target
@@ -135,17 +135,17 @@ public class SetWireClient extends InferenceTestCase {
 		assertGenerated(init);
 
 		// connected with a run wire
-		ActionEdge run = assertHasRunAction(page, access, init, "run");
+		ECARule run = assertHasRunAction(page, access, init, "run");
 		assertGenerated(run);
 
 		// which has a parameter
-		ParameterEdge param = assertHasParameterEdge(page, value, run);
+		Parameter param = assertHasParameter(page, value, run);
 		assertGenerated(param);
 
-		// but the parameter of 'target' is not connected to the run wire
-		Property value2 = assertHasFieldValue(target);
+		// but the ActivityParameter of 'target' is not connected to the run wire
+		Value value2 = assertHasFieldValue(target);
 		assertGenerated(value2);
-		
+
 	}
 
 	/**
@@ -163,15 +163,15 @@ public class SetWireClient extends InferenceTestCase {
 		InputTextField target = assertHasInputTextField(page, "target");
 
 		// there should be an 'edit' event in target
-		EventTrigger access = target.getOnAccess();
+		Event access = target.getOnAccess();
 		PrimitiveOperation init = assertHasPrimitiveOperation(target, "init");
-		ActionEdge run = assertHasRunAction(page, access, init, "run");
+		ECARule run = assertHasRunAction(page, access, init, "run");
 
 		// newly created condition
 		PrimitiveCondition cond = assertHasPrimitiveCondition(source, "fieldValue is set");
 		assertGenerated(cond);
 
-		ConditionEdge cw = assertHasConditionEdge(root, cond, run);
+		SimpleCondition cw = assertHasSimpleCondition(root, cond, run);
 		assertGenerated(cw);
 	}
 

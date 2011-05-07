@@ -30,13 +30,15 @@ import org.openiaml.model.codegen.php.CheckModelInstance;
 import org.openiaml.model.drools.CreateMissingElementsWithDrools;
 import org.openiaml.model.drools.ICreateElementsFactory;
 import org.openiaml.model.model.Action;
-import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.ActionEdgeSource;
+import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.ModelFactory;
 import org.openiaml.model.model.ModelPackage;
 import org.openiaml.model.model.NamedElement;
+import org.openiaml.model.model.Parameter;
+import org.openiaml.model.model.SimpleCondition;
 import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.WireDestination;
 import org.openiaml.model.model.WireSource;
@@ -45,13 +47,11 @@ import org.openiaml.model.model.scopes.ScopesPackage;
 import org.openiaml.model.model.users.RequiresEdgeDestination;
 import org.openiaml.model.model.users.RequiresEdgesSource;
 import org.openiaml.model.model.visual.VisualPackage;
-import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ConditionEdgeDestination;
 import org.openiaml.model.model.wires.ConditionEdgesSource;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ExtendsEdgeDestination;
 import org.openiaml.model.model.wires.ExtendsEdgesSource;
-import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.ParameterEdgeDestination;
 import org.openiaml.model.model.wires.ParameterEdgesSource;
 import org.openiaml.model.model.wires.RequiresEdge;
@@ -383,8 +383,8 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @return the wire found or null
 	 * @throws JaxenException
 	 */
-	protected ActionEdge getActionFrom(ActionEdgeSource from, String name) throws JaxenException {
-		for (ActionEdge w : from.getOutActions()) {
+	protected ECARule getECARuleFrom(ActionEdgeSource from, String name) throws JaxenException {
+		for (ECARule w : from.getOutActions()) {
 			if (w instanceof NamedElement && name.equals(((NamedElement) w).getName())) {
 				return w;
 			}
@@ -428,12 +428,12 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @throws JaxenException
 	 * @throws AssertionFailedError if no edge was found, or more than one was found
 	 */
-	protected ParameterEdge getParameterEdgeFromTo(EObject container, ParameterEdgesSource from, ParameterEdgeDestination to) throws JaxenException {
-		List<ParameterEdge> edges = to.getInParameterEdges();
-		ParameterEdge result = null;
+	protected Parameter getParameterFromTo(EObject container, ParameterEdgesSource from, ParameterEdgeDestination to) throws JaxenException {
+		List<Parameter> edges = to.getInParameterEdges();
+		Parameter result = null;
 		int count = 0;
 		
-		for (ParameterEdge e : edges) {
+		for (Parameter e : edges) {
 			if (from.equals(e.getFrom())) {
 				count++;
 				result = e;
@@ -451,10 +451,10 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @return the found ParameterEdges
 	 * @throws JaxenException
 	 */
-	protected Set<ParameterEdge> getParameterEdgesFromTo(EObject container, ParameterEdgesSource from, ParameterEdgeDestination to) throws JaxenException {
-		Set<ParameterEdge> result = new HashSet<ParameterEdge>();
+	protected Set<Parameter> getParametersFromTo(EObject container, ParameterEdgesSource from, ParameterEdgeDestination to) throws JaxenException {
+		Set<Parameter> result = new HashSet<Parameter>();
 		
-		for (ParameterEdge w : from.getOutParameterEdges()) {
+		for (Parameter w : from.getOutParameterEdges()) {
 			if (to.equals(w.getTo())) {
 				result.add(w);
 			}
@@ -471,10 +471,10 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @return the found ParameterEdges
 	 * @throws JaxenException
 	 */
-	protected Set<ParameterEdge> getParameterEdgesFromTo(EObject container, ParameterEdgesSource from, ParameterEdgeDestination to, String name) throws JaxenException {
-		Set<ParameterEdge> result = new HashSet<ParameterEdge>();
+	protected Set<Parameter> getParametersFromTo(EObject container, ParameterEdgesSource from, ParameterEdgeDestination to, String name) throws JaxenException {
+		Set<Parameter> result = new HashSet<Parameter>();
 		
-		for (ParameterEdge w : from.getOutParameterEdges()) {
+		for (Parameter w : from.getOutParameterEdges()) {
 			if (name.equals(w.getName()) && to.equals(w.getTo())) {
 				result.add(w);
 			}
@@ -490,10 +490,10 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @return the found ConditionEdges
 	 * @throws JaxenException
 	 */
-	protected Set<ConditionEdge> getConditionEdgesFromTo(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to) throws JaxenException {
-		Set<ConditionEdge> result = new HashSet<ConditionEdge>();
+	protected Set<SimpleCondition> getSimpleConditionsFromTo(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to) throws JaxenException {
+		Set<SimpleCondition> result = new HashSet<SimpleCondition>();
 		
-		for (ConditionEdge w : from.getOutConditionEdges()) {
+		for (SimpleCondition w : from.getOutConditionEdges()) {
 			if (to.equals(w.getTo())) {
 				result.add(w);
 			}
@@ -503,7 +503,7 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	}
 	
 	/**
-	 * Get <em>all</em> ConditionEdge connecting the given elements,
+	 * Get <em>all</em> SimpleConditions connecting the given elements,
 	 * contained with the given container element or any of its children,
 	 * with the given name.
 	 *
@@ -511,10 +511,10 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @return the found ConditionEdges
 	 * @throws JaxenException
 	 */
-	protected Set<ConditionEdge> getConditionEdgesFromTo(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to, String name) throws JaxenException {
-		Set<ConditionEdge> result = new HashSet<ConditionEdge>();
+	protected Set<SimpleCondition> getSimpleConditionsFromTo(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to, String name) throws JaxenException {
+		Set<SimpleCondition> result = new HashSet<SimpleCondition>();
 		
-		for (ConditionEdge w : from.getOutConditionEdges()) {
+		for (SimpleCondition w : from.getOutConditionEdges()) {
 			if (to.equals(w.getTo())) {
 				result.add(w);
 			}
@@ -587,8 +587,8 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @throws JaxenException
 	 * @see #getWiresFromTo(EObject, WireSource, WireDestination, Class)
 	 */
-	protected Set<ActionEdge> getActionsFromTo(EObject container, ActionEdgeSource fromElement, Action toElement) throws JaxenException {
-		return getActionsFromTo(container, fromElement, toElement, ActionEdge.class);
+	protected Set<ECARule> getActionsFromTo(EObject container, ActionEdgeSource fromElement, Action toElement) throws JaxenException {
+		return getECARulesFromTo(container, fromElement, toElement, ECARule.class);
 	}
 	
 	/**
@@ -613,8 +613,8 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	}
 	
 	/**
-	 * Get all of the actions connecting the two elements together of the
-	 * given class. Does not throw an error if there are no wires.
+	 * Get all of the ECARules connecting the two elements together of the
+	 * given class. Does not throw an error if there are none.
 	 *
 	 * @param container
 	 * @param fromElement
@@ -622,9 +622,9 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 	 * @return the wire found or throws an exception
 	 * @throws JaxenException
 	 */
-	protected Set<ActionEdge> getActionsFromTo(EObject container, ActionEdgeSource fromElement, Action toElement, Class<? extends ActionEdge> type) throws JaxenException {
-		Set<ActionEdge> results = new HashSet<ActionEdge>();
-		for (ActionEdge w : fromElement.getOutActions()) {
+	protected Set<ECARule> getECARulesFromTo(EObject container, ActionEdgeSource fromElement, Action toElement, Class<? extends ECARule> type) throws JaxenException {
+		Set<ECARule> results = new HashSet<ECARule>();
+		for (ECARule w : fromElement.getOutActions()) {
 			if (type.isInstance(w) && w.getTo().equals(toElement)) {
 				results.add(w);
 			}
@@ -737,8 +737,8 @@ public abstract class ModelInferenceTestCase extends ModelTestCase implements IP
 		}
 	}
 
-	protected void assertNoActionsFrom(EObject container, ActionEdgeSource fromElement, Class<? extends ActionEdge> cls) throws JaxenException {
-		for (ActionEdge w : fromElement.getOutActions()) {
+	protected void assertNoECARulesFrom(EObject container, ActionEdgeSource fromElement, Class<? extends ECARule> cls) throws JaxenException {
+		for (ECARule w : fromElement.getOutActions()) {
 			if (cls.isInstance(w)) {
 				fail("Unexpectedly found action '" + w + "' of type '" + cls + "' from element '" + fromElement + "'");
 			}

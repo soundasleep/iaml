@@ -5,17 +5,18 @@ package org.openiaml.model.tests.inference.model0_4;
 
 import java.util.List;
 
-import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.CompositeOperation;
+import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.PrimitiveOperation;
-import org.openiaml.model.model.Property;
+import org.openiaml.model.model.Value;
+import org.openiaml.model.model.operations.ActivityParameter;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DataFlowEdge;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.JoinNode;
-import org.openiaml.model.model.operations.Parameter;
 import org.openiaml.model.model.operations.SplitNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.Session;
@@ -23,7 +24,6 @@ import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.tests.inference.ValidInferenceTestCase;
 
 /**
@@ -80,14 +80,14 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 		assertHasExecutionEdge(doLogin, decision, finish);
 
 		// get the keys in the session
-		Property email = assertHasProperty(session, "current email");
+		Value email = assertHasValue(session, "current email");
 		assertGenerated(email);
-		Property password = assertHasProperty(session, "current password");
+		Value password = assertHasValue(session, "current password");
 		assertGenerated(password);
 
 		// the operation has parameters that are populated
-		Parameter pemail = assertHasParameter(doLogin, "email");
-		Parameter ppassword = assertHasParameter(doLogin, "password");
+		ActivityParameter pemail = assertHasActivityParameter(doLogin, "email");
+		ActivityParameter ppassword = assertHasActivityParameter(doLogin, "password");
 
 		// there will be many operations called 'set'
 		List<?> sets = query(doLogin, "iaml:operations[iaml:name='set']");
@@ -137,26 +137,26 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 		InputForm form = assertHasInputForm(login, "login form");
 		InputTextField temail = assertHasInputTextField(form, "email");
 		InputTextField tpass = assertHasInputTextField(form, "password");
-		Property femail = assertHasFieldValue(temail);
-		Property fpassword = assertHasFieldValue(tpass);
+		Value femail = assertHasFieldValue(temail);
+		Value fpassword = assertHasFieldValue(tpass);
 		Button button = assertHasButton(form, "Login");
 
 		// get the operation
 		Operation doLogin = assertHasOperation(loginSession, "do login");
 
 		// get the run instance wire
-		ActionEdge run = assertHasRunAction(login, button, doLogin, "onClick");
+		ECARule run = assertHasRunAction(login, button, doLogin, "onClick");
 
-		// assert parameter wires
-		ParameterEdge pe = assertHasParameterEdge(root, femail, run);
+		// assert ActivityParameter wires
+		Parameter pe = assertHasParameter(root, femail, run);
 		assertGenerated(pe);
 		assertEquals("email", pe.getName());
-		ParameterEdge pp = assertHasParameterEdge(root, fpassword, run);
+		Parameter pp = assertHasParameter(root, fpassword, run);
 		assertGenerated(pp);
 		assertEquals("password", pp.getName());
 
 	}
-	
+
 	/**
 	 * On the login form, 'email' should appear before 'password' in
 	 * render order.
@@ -175,12 +175,12 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 		InputTextField tpass = assertHasInputTextField(form, "password");
 
 		assertGreater(temail.getRenderOrder(), tpass.getRenderOrder());
-		
+
 		// the 'Login' button should be after the password, too
 		Button submit = assertHasButton(form, "Login");
 
 		assertGreater(tpass.getRenderOrder(), submit.getRenderOrder());
-		
+
 	}
 
 	/**
@@ -196,8 +196,8 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 		Session session = assertHasSession(root, "target session");
 
 		// get the keys in the session
-		Property email = assertHasProperty(session, "current email");
-		Property password = assertHasProperty(session, "current password");
+		Value email = assertHasValue(session, "current email");
+		Value password = assertHasValue(session, "current password");
 
 		// get the keys in the input form
 		Session loginSession = assertHasSession(root, "current user login");
@@ -211,8 +211,8 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 		assertHasNoSetWire(root, email, temail);
 		assertHasNoSetWire(root, password, tpass);
 
-		Property femail = assertHasFieldValue(temail);
-		Property fpassword = assertHasFieldValue(tpass);
+		Value femail = assertHasFieldValue(temail);
+		Value fpassword = assertHasFieldValue(tpass);
 
 		assertHasNoSetWire(root, femail, email);
 		assertHasNoSetWire(root, fpassword, password);
@@ -240,12 +240,12 @@ public class UserModifyRoles extends ValidInferenceTestCase {
 		assertGenerated(assertHasJoinNode(doLogout));
 
 		// get the keys in the session
-		Property email = assertHasProperty(session, "current email");
+		Value email = assertHasValue(session, "current email");
 		assertGenerated(email);
-		Property password = assertHasProperty(session, "current password");
+		Value password = assertHasValue(session, "current password");
 		assertGenerated(password);
 
-		Property myNull = assertHasProperty(doLogout, "reset value");
+		Value myNull = assertHasValue(doLogout, "reset value");
 		assertTrue(myNull.isReadOnly());
 		assertEquals("null", myNull.getDefaultValue());
 

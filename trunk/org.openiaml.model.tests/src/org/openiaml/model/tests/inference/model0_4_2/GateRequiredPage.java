@@ -3,12 +3,12 @@
  */
 package org.openiaml.model.tests.inference.model0_4_2;
 
-import org.openiaml.model.model.ActionEdge;
+import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
-import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.Event;
 import org.openiaml.model.model.PrimitiveOperation;
-import org.openiaml.model.model.Property;
+import org.openiaml.model.model.Value;
 import org.openiaml.model.model.components.Gate;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DecisionNode;
@@ -17,7 +17,7 @@ import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
-import org.openiaml.model.model.wires.ConditionEdge;
+import org.openiaml.model.model.SimpleCondition;
 import org.openiaml.model.tests.inference.ValidInferenceTestCase;
 
 /**
@@ -54,7 +54,7 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		assertEquals("requires a page is viewed first", gate.getName());
 		assertNotGenerated(gate);
 
-		ActionEdge nav = assertHasNavigateAction(session, gate, required, "first");
+		ECARule nav = assertHasNavigateAction(session, gate, required, "first");
 		assertNotGenerated(nav);
 
 	}
@@ -77,16 +77,16 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		Gate gate = session.getEntryGate();
 		assertEquals("requires a page is viewed first", gate.getName());
 
-		EventTrigger event = button.getOnClick();
+		Event event = button.getOnClick();
 		assertGenerated(event);
 
-		ActionEdge nav = assertHasNavigateAction(root, event, gate, "resume");
+		ECARule nav = assertHasNavigateAction(root, event, gate, "resume");
 		assertGenerated(nav);
 
 	}
 
 	/**
-	 * A property is generated which will store the
+	 * A Value is generated which will store the
 	 * value of the visited.
 	 *
 	 * @throws Exception
@@ -97,13 +97,13 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		Session session = assertHasSession(root, "Session");
 
 		// generated property
-		Property property = assertHasProperty(session, "requires a page is viewed first flag");
+		Value property = assertHasValue(session, "requires a page is viewed first flag");
 		assertGenerated(property);
 		assertEquals(property.getDefaultValue(), "false");
 
 		// required page
 		Frame required = assertHasFrame(root, "Required Page");
-		EventTrigger access = required.getOnAccess();
+		Event access = required.getOnAccess();
 		assertGenerated(access);
 
 		// set operation
@@ -111,7 +111,7 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		assertGenerated(set);
 
 		// run wire
-		ActionEdge run = assertHasRunAction(required, access, set);
+		ECARule run = assertHasRunAction(required, access, set);
 		assertGenerated(run);
 
 	}
@@ -125,7 +125,7 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		Session session = assertHasSession(root, "Session");
 
 		// generated property
-		Property property = assertHasProperty(session, "requires a page is viewed first flag");
+		Value property = assertHasValue(session, "requires a page is viewed first flag");
 
 		// required page
 		Frame required = assertHasFrame(root, "Required Page");
@@ -140,7 +140,7 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		assertGenerated(finish);
 		PrimitiveOperation s = assertHasPrimitiveOperation(set, "set");
 		assertGenerated(s);
-		Property value = assertHasProperty(set, "true");
+		Value value = assertHasValue(set, "true");
 		assertTrue(value.isReadOnly());
 		assertGenerated(value);
 		assertEquals("true", value.getDefaultValue());
@@ -154,7 +154,7 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 	}
 
 	/**
-	 * A condition will be created in the Session to check the
+	 * A Function will be created in the Session to check the
 	 * given property.
 	 */
 	public void testConditionWire() throws Exception {
@@ -168,7 +168,7 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		CompositeCondition condition = assertHasCompositeCondition(session, "check requires a page is viewed first");
 		assertGenerated(condition);
 
-		ConditionEdge wire = assertHasConditionEdge(session, condition, gate, "condition");
+		SimpleCondition wire = assertHasSimpleCondition(session, condition, gate, "condition");
 		assertGenerated(wire);
 
 	}
@@ -182,7 +182,7 @@ public class GateRequiredPage extends ValidInferenceTestCase {
 		Session session = assertHasSession(root, "Session");
 
 		// generated property
-		Property property = assertHasProperty(session, "requires a page is viewed first flag");
+		Value property = assertHasValue(session, "requires a page is viewed first flag");
 
 		// generated condition
 		CompositeCondition condition = assertHasCompositeCondition(session, "check requires a page is viewed first");

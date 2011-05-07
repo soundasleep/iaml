@@ -3,16 +3,16 @@
  */
 package org.openiaml.model.tests.inference.model0_2;
 
-import org.openiaml.model.model.ActionEdge;
-import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.ECARule;
+import org.openiaml.model.model.Event;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.PrimitiveCondition;
-import org.openiaml.model.model.Property;
+import org.openiaml.model.model.Value;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.ConditionEdge;
-import org.openiaml.model.model.wires.ParameterEdge;
+import org.openiaml.model.model.SimpleCondition;
+import org.openiaml.model.model.Parameter;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 import org.openiaml.model.tests.inference.model0_4.SetWireClient;
 
@@ -45,25 +45,25 @@ public class SessionSyncWires extends InferenceTestCase {
 
 		// generated events and operations
 		// all part of SyncWire elements generation
-		EventTrigger edit = field1.getOnChange();
+		Event edit = field1.getOnChange();
 		Operation update = assertHasOperation(field2, "update");
-		ActionEdge rw = assertHasRunAction(root, edit, update);
+		ECARule rw = assertHasRunAction(root, edit, update);
 
-		Property fieldValue = assertHasFieldValue(field1);
-		assertGenerated(getParameterEdgeFromTo(root, fieldValue, rw));
+		Value fieldValue = assertHasFieldValue(field1);
+		assertGenerated(getParameterFromTo(root, fieldValue, rw));
 
 		// session should have an 'init' event
-		EventTrigger init = session.getOnInit();
+		Event init = session.getOnInit();
 
 		// it should be connected to 'update'
-		ActionEdge rw2 = assertHasRunAction(root, init, update);
+		ECARule rw2 = assertHasRunAction(root, init, update);
 		assertGenerated(rw2);
 
 	}
 
 	/**
 	 * In version 0.4.1, all access->init operations that are based
-	 * on a session variable should also have a condition to check that
+	 * on a session variable should also have a Function to check that
 	 * the variable has been set.
 	 *
 	 * @see SetWireClient#testSetWireCondition()
@@ -76,25 +76,25 @@ public class SessionSyncWires extends InferenceTestCase {
 		InputTextField field1 = assertHasInputTextField(outside, "target");
 		InputTextField field2 = assertHasInputTextField(inside, "target");
 
-		EventTrigger access = field1.getOnAccess();
+		Event access = field1.getOnAccess();
 		assertGenerated(access);
 		Operation init = assertHasOperation(field1, "init");
 		assertGenerated(init);
 
-		Property value = assertHasFieldValue(field2);
+		Value value = assertHasFieldValue(field2);
 		assertGenerated(value);
 
-		ActionEdge run = assertHasRunAction(field1, access, init, "run");
+		ECARule run = assertHasRunAction(field1, access, init, "run");
 		assertGenerated(run);
 
-		ParameterEdge param = assertHasParameterEdge(field1, value, run);
+		Parameter param = assertHasParameter(field1, value, run);
 		assertGenerated(param);
 
 		// newly created condition
 		PrimitiveCondition cond = assertHasPrimitiveCondition(field2, "fieldValue is set");
 		assertGenerated(cond);
 
-		ConditionEdge cw = assertHasConditionEdge(root, cond, run);
+		SimpleCondition cw = assertHasSimpleCondition(root, cond, run);
 		assertGenerated(cw);
 
 	}

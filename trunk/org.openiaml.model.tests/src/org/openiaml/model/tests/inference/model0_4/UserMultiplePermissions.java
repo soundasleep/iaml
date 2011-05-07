@@ -92,9 +92,9 @@ public class UserMultiplePermissions extends ValidInferenceTestCase {
 		
 		// the LoginHandler has an incoming User (not permissions)
 		// from the default user
-		assertGenerated(assertHasParameterEdge(root, default_user, handler));
-		assertHasNoParameterEdge(root, permission1, handler);
-		assertHasNoParameterEdge(root, permission2, handler);
+		assertGenerated(assertHasParameter(root, default_user, handler));
+		assertHasNoParameter(root, permission1, handler);
+		assertHasNoParameter(root, permission2, handler);
 		
 	}
 	

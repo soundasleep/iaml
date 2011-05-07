@@ -6,12 +6,12 @@ package org.openiaml.model.tests.inference.model0_4;
 import java.util.List;
 import java.util.Set;
 
-import org.openiaml.model.model.ActionEdge;
+import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.CompositeOperation;
-import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.Event;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.PrimitiveCondition;
-import org.openiaml.model.model.Property;
+import org.openiaml.model.model.Value;
 import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.components.LoginHandlerTypes;
@@ -27,7 +27,7 @@ import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.ConditionEdge;
+import org.openiaml.model.model.SimpleCondition;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
@@ -94,14 +94,14 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		Frame login = assertHasFrame(session, "Login Successful");
 		{
 			assertHasNoWiresFromTo(root, handler, login);
-			ActionEdge wire = assertHasNavigateAction(root, handler, login, "success");
+			ECARule wire = assertHasNavigateAction(root, handler, login, "success");
 			assertGenerated(wire);
 		}
 
 		Frame logout = assertHasFrame(root, "Logout Successful");
 		{
 			assertHasNoWiresFromTo(root, handler, logout);
-			ActionEdge wire = assertHasNavigateAction(root, handler, logout, "logout");
+			ECARule wire = assertHasNavigateAction(root, handler, logout, "logout");
 			assertGenerated(wire);
 		}
 
@@ -120,7 +120,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		DomainIterator iterator = assertHasDomainIterator(session, "logged in user");
 		DomainInstance instance = iterator.getCurrentInstance();
 		assertNotGenerated(instance);
-		
+
 		// the domain instance should contain all attributes
 		DomainAttributeInstance apassword = assertHasDomainAttributeInstance(instance, "password");
 		assertGenerated(apassword);
@@ -140,7 +140,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 	 */
 	public void testInferredSelect() throws Exception {
 		root = loadAndInfer(LoginHandlerInstance.class);
-		
+
 		Session session = assertHasSession(root, "my session");
 		LoginHandler handler = assertHasLoginHandler(session, "login handler");
 		DomainIterator instance = assertHasDomainIterator(session, "logged in user");
@@ -149,7 +149,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		assertEquals("password = :password", instance.getQuery());
 
 		// the login handler should have generated a key store
-		Property currentPassword = assertHasProperty(session, "current password");
+		Value currentPassword = assertHasValue(session, "current password");
 		assertGenerated(currentPassword);
 
 		// thuis key must have a default value set
@@ -157,7 +157,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		assertEquals("", currentPassword.getDefaultValue());
 
 		// each key should be connected to the select
-		assertGenerated(getParameterEdgeFromTo(handler, currentPassword, instance));
+		assertGenerated(getParameterFromTo(handler, currentPassword, instance));
 
 		// there should be a set wire connecting to the generated property
 		{
@@ -188,8 +188,8 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		Frame target = assertHasFrame(root, "Logout Successful");
 		assertGenerated(target);
 
-		EventTrigger access = page.getOnAccess();
-		ActionEdge nav = assertHasNavigateAction(session, access, target);
+		Event access = page.getOnAccess();
+		ECARule nav = assertHasNavigateAction(session, access, target);
 		assertGenerated(nav);
 	}
 
@@ -207,10 +207,10 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		assertNotGenerated(dest);
 
 		Operation check = assertHasOperation(session, "check instance");
-		EventTrigger access = dest.getOnAccess();
+		Event access = dest.getOnAccess();
 		{
 			// a run action
-			ActionEdge run = assertHasRunAction(session, access, check);
+			ECARule run = assertHasRunAction(session, access, check);
 			assertGenerated(run);
 			assertEquals("run", run.getName());
 		}
@@ -231,10 +231,10 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		assertGenerated(logout);
 
 		Operation op = assertHasOperation(session, "do logout");
-		EventTrigger access = logout.getOnAccess();
+		Event access = logout.getOnAccess();
 		// no wires
 		{
-			ActionEdge run = assertHasRunAction(session, access, op);
+			ECARule run = assertHasRunAction(session, access, op);
 			assertGenerated(run);
 		}
 
@@ -272,16 +272,16 @@ public class LoginHandlerInstance extends InferenceTestCase {
 
 		// button has an 'onClick' run wire
 		assertHasWiresFromTo(0, root, button, op);
-		ActionEdge run = assertHasRunAction(root, button, op);
+		ECARule run = assertHasRunAction(root, button, op);
 		assertGenerated(run);
 		assertEquals("onClick", run.getName());
 
 		// the text field has a parameter
-		Property prop = assertHasFieldValue(field);
+		Value prop = assertHasFieldValue(field);
 		assertGenerated(prop);
 
 		// connecting to the run wire
-		assertGenerated(assertHasParameterEdge(root, prop, run));
+		assertGenerated(assertHasParameter(root, prop, run));
 
 	}
 
@@ -319,13 +319,13 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		assertNotGenerated(instance);
 		PrimitiveCondition exists = (PrimitiveCondition) instance.getEmpty();
 		assertGenerated(exists);
-		
+
 		// has a DecisionNode
 		DecisionNode node = assertHasDecisionNode(check, "true?");
 		assertGenerated(node);
 
 		// DecisionNode evaluates the incoming condition
-		ConditionEdge edge = assertHasConditionEdge(session, exists, node);
+		SimpleCondition edge = assertHasSimpleCondition(session, exists, node);
 		assertGenerated(edge);
 	}
 
@@ -386,7 +386,7 @@ public class LoginHandlerInstance extends InferenceTestCase {
 		Session loginSession = assertHasSession(root, "login handler login");
 		Frame login = assertHasFrame(loginSession, "login");
 		{
-			ActionEdge wire = assertHasNavigateAction(root, check, login, "fail");
+			ECARule wire = assertHasNavigateAction(root, check, login, "fail");
 			assertGenerated(wire);
 		}
 

@@ -6,15 +6,15 @@ package org.openiaml.model.tests.inference.model0_2;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.jaxen.JaxenException;
-import org.openiaml.model.model.ActionEdge;
+import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.CompositeCondition;
-import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.Event;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.ConditionEdge;
-import org.openiaml.model.model.wires.ParameterEdge;
+import org.openiaml.model.model.SimpleCondition;
+import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.wires.SyncWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
@@ -35,7 +35,7 @@ public class SavedRuleSources extends InferenceTestCase {
 		super.setUp();
 		// remove any previous cache information
 		removeClassFromInferenceCache(ConditionWireFalse.class);
-		// the second parameter makes the inference keep track of rule sources (just names for now)
+		// the second ActivityParameter makes the inference keep track of rule sources (just names for now)
 		root = loadAndInfer(ConditionWireFalse.class, true);
 	}
 
@@ -46,16 +46,16 @@ public class SavedRuleSources extends InferenceTestCase {
 			EObject obj = it.next();
 			if (obj instanceof GeneratedElement) {
 				GeneratedElement ge = (GeneratedElement) obj;
-				
+
 				if (ge.isIsGenerated()) {
 					/*
 					 * There is no point in checking the specific text of
 					 * each generated rule; this makes the test cases
 					 * unnecessarily fragile. All that is important is that
 					 * each generated element has an associated rule.
-					 * 
+					 *
 					 * TODO in the future, this test could be extended to
-					 * check that the rule exists in the rule database as well. 
+					 * check that the rule exists in the rule database as well.
 					 */
 					assertNotNull("Generated rule should be set: " + ge, ge.getGeneratedRule());
 					assertNotEqual("Generated rule should be set: " + ge, ge.getGeneratedRule(), "");

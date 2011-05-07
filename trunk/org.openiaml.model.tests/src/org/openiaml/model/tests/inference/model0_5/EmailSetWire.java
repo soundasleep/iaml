@@ -3,7 +3,7 @@
  */
 package org.openiaml.model.tests.inference.model0_5;
 
-import org.openiaml.model.model.Property;
+import org.openiaml.model.model.Value;
 import org.openiaml.model.model.scopes.Email;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
@@ -13,7 +13,7 @@ import org.openiaml.model.tests.inference.InferenceTestCase;
 
 /**
  * An {@model Email} connected to an {@model InputForm} via a {@model SetWire}
- * should have {@model Property Properties} created for every field within the
+ * should have {@model Value Properties} created for every field within the
  * {@model InputForm}.
  *
  * @author jmwright
@@ -75,7 +75,7 @@ public class EmailSetWire extends InferenceTestCase {
 		Label label = assertHasLabel(email, "field 1");
 
 		// the label should have a fieldValue
-		Property labelValue = assertHasFieldValue(label);
+		Value labelValue = assertHasFieldValue(label);
 		assertGenerated(labelValue);
 
 		// event

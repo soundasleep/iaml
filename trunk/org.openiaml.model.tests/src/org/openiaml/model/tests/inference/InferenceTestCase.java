@@ -18,26 +18,28 @@ import org.eclipse.xsd.XSDSimpleTypeDefinition;
 import org.jaxen.JaxenException;
 import org.openiaml.model.drools.DroolsHelperFunctions;
 import org.openiaml.model.model.Action;
-import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.ActionEdgeSource;
 import org.openiaml.model.model.ActivityNode;
 import org.openiaml.model.model.ApplicationElement;
 import org.openiaml.model.model.Changeable;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
-import org.openiaml.model.model.Condition;
 import org.openiaml.model.model.ContainsConditions;
 import org.openiaml.model.model.ContainsOperations;
 import org.openiaml.model.model.ContainsProperties;
+import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.EXSDDataType;
+import org.openiaml.model.model.Function;
 import org.openiaml.model.model.InternetApplication;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.PrimitiveCondition;
 import org.openiaml.model.model.PrimitiveOperation;
-import org.openiaml.model.model.Property;
 import org.openiaml.model.model.QueryParameter;
 import org.openiaml.model.model.Scope;
+import org.openiaml.model.model.SimpleCondition;
+import org.openiaml.model.model.Value;
 import org.openiaml.model.model.VisibleThing;
 import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.WireDestination;
@@ -52,6 +54,7 @@ import org.openiaml.model.model.domain.DomainSchema;
 import org.openiaml.model.model.domain.DomainSource;
 import org.openiaml.model.model.domain.SchemaEdge;
 import org.openiaml.model.model.domain.SelectEdge;
+import org.openiaml.model.model.operations.ActivityParameter;
 import org.openiaml.model.model.operations.Arithmetic;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.CastNode;
@@ -65,7 +68,6 @@ import org.openiaml.model.model.operations.ExecutionEdgesSource;
 import org.openiaml.model.model.operations.FinishNode;
 import org.openiaml.model.model.operations.JoinNode;
 import org.openiaml.model.model.operations.OperationCallNode;
-import org.openiaml.model.model.operations.Parameter;
 import org.openiaml.model.model.operations.SplitNode;
 import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.operations.TemporaryVariable;
@@ -84,14 +86,12 @@ import org.openiaml.model.model.visual.Label;
 import org.openiaml.model.model.visual.Map;
 import org.openiaml.model.model.visual.MapPoint;
 import org.openiaml.model.model.wires.AutocompleteWire;
-import org.openiaml.model.model.wires.ConditionEdge;
 import org.openiaml.model.model.wires.ConditionEdgeDestination;
 import org.openiaml.model.model.wires.ConditionEdgesSource;
 import org.openiaml.model.model.wires.DetailWire;
 import org.openiaml.model.model.wires.ExtendsEdge;
 import org.openiaml.model.model.wires.ExtendsEdgeDestination;
 import org.openiaml.model.model.wires.ExtendsEdgesSource;
-import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.ParameterEdgeDestination;
 import org.openiaml.model.model.wires.ParameterEdgesSource;
 import org.openiaml.model.model.wires.RequiresEdge;
@@ -108,14 +108,14 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 
 	/**
 	 * A way to selectively filter objects.
-	 * 
+	 *
 	 * @author jmwright
 	 * @param <T> the inner type to filter
 	 */
 	public static interface Filter<T extends Object> {
 		public boolean accept(T o);
 	}
-	
+
 	/**
 	 * A filter that accepts everything.
 	 */
@@ -125,95 +125,95 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 			return true;
 		}
 	};
-	
+
 	/**
 	 * A filter that accepts everything.
 	 */
-	public static final Filter<ActionEdge> ALL_ACTIONS = new Filter<ActionEdge>() {
+	public static final Filter<ECARule> ALL_ECA_RULES = new Filter<ECARule>() {
 		@Override
-		public boolean accept(ActionEdge o) {
+		public boolean accept(ECARule o) {
 			return true;
 		}
 	};
-	
+
 	/**
 	 * Assert that the given element contains the given
-	 * Property.
+	 * Value.
 	 *
 	 * @return The element found
 	 */
-	public Property assertHasProperty(
+	public Value assertHasValue(
 			ContainsProperties element, String string) throws JaxenException {
-		return (Property) queryOne(element, "iaml:properties[iaml:name='" + string + "']");
+		return (Value) queryOne(element, "iaml:properties[iaml:name='" + string + "']");
 	}
 
 	/**
 	 * Assert that the given element does not contains the given
-	 * Property.
+	 * Value.
 	 *
 	 * @return The element found
 	 */
-	public void assertHasNoProperty(
+	public void assertHasNoValue(
 			ApplicationElement element, String string) throws JaxenException {
 		assertHasNone(element, "iaml:properties[iaml:name='" + string + "']");
 	}
 
 	/**
 	 * Assert that the given element does not contains the given
-	 * Property.
+	 * Value.
 	 *
 	 * @return The element found
 	 */
-	public void assertHasNoProperty(
+	public void assertHasNoValue(
 			Scope element, String string) throws JaxenException {
 		assertHasNone(element, "iaml.scopes:properties[iaml:name='" + string + "']");
 	}
 
 	/**
 	 * Assert that the given element does not contains the given
-	 * Property.
+	 * Value.
 	 *
 	 * @return The element found
 	 */
-	public void assertHasNoProperty(
+	public void assertHasNoValue(
 			VisibleThing element, String string) throws JaxenException {
 		assertHasNone(element, "iaml:properties[iaml:name='" + string + "']");
 	}
 
 	/**
 	 * Assert that the given element does not contains the given
-	 * Property stored in 'fieldValue'.
+	 * Value stored in 'fieldValue'.
 	 *
 	 * @return The element found
 	 */
 	public void assertHasNoFieldValue(
 			Changeable element) throws JaxenException {
-		assertNull("Element '" + element + "' had a fieldValue: " + element.getFieldValue(), 
+		assertNull("Element '" + element + "' had a fieldValue: " + element.getFieldValue(),
 				element.getFieldValue());
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
-	 * Property stored in 'fieldValue'.
+	 * Value stored in 'fieldValue'.
 	 *
 	 * @return The element found
 	 */
-	public Property assertHasFieldValue(
+	public Value assertHasFieldValue(
 			Changeable element) throws JaxenException {
-		assertNotNull("Element '" + element + "' had no fieldValue", 
+		assertNotNull("Element '" + element + "' had no fieldValue",
 					element.getFieldValue());
 		return element.getFieldValue();
 	}
 
 	/**
 	 * Assert that the given element contains the given
-	 * Property stored in 'currentInput'.
+	 * Value stored in 'currentInput'.
 	 *
 	 * @return The element found
 	 */
-	public Property assertHasCurrentInput(
+	public Value assertHasCurrentInput(
 			InputTextField element) throws JaxenException {
-		assertNotNull("Element '" + element + "' had no currentInput", 
+		assertNotNull("Element '" + element + "' had no currentInput",
 					element.getCurrentInput());
 		return element.getCurrentInput();
 	}
@@ -247,7 +247,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public PrimitiveOperation assertHasPrimitiveOperation(ContainsOperations element, String string) throws JaxenException {
 		return (PrimitiveOperation) assertHasOperation(element, string);
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
 	 * PrimitiveCondition.
@@ -259,7 +259,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		assertEquals(1, results.size());
 		return (PrimitiveCondition) results.get(0);
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
 	 * Permission.
@@ -271,15 +271,15 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		assertEquals(1, results.size());
 		return (Permission) results.get(0);
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
-	 * Condition.
+	 * Function.
 	 *
 	 * @return The element found
 	 */
-	public Condition assertHasCondition(ContainsConditions element, String string) throws JaxenException {
-		return (Condition) queryOne(element, "iaml:conditions[iaml:name='" + string + "']");
+	public Function assertHasFunction(ContainsConditions element, String string) throws JaxenException {
+		return (Function) queryOne(element, "iaml:conditions[iaml:name='" + string + "']");
 	}
 
 	/**
@@ -293,7 +293,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		assertEquals(1, results.size());
 		return (CompositeCondition) results.get(0);
 	}
-	
+
 	/**
 	 * Assert that the given element does <em>not</em> contain the given
 	 * CompositeCondition.
@@ -302,7 +302,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		List<Object> results = nameSelect(typeSelect(element.getConditions(), CompositeCondition.class), string);
 		assertEquals(0, results.size());
 	}
-	
+
 	/**
 	 * Assert that the given element does <em>not</em> contain the given
 	 * PrimitiveCondition.
@@ -311,16 +311,16 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		List<Object> results = nameSelect(typeSelect(element.getConditions(), PrimitiveCondition.class), string);
 		assertEquals(0, results.size());
 	}
-	
+
 	/**
 	 * Assert that the given element does <em>not</em> contain the given
-	 * Condition.
+	 * Function.
 	 */
-	public void assertHasNoCondition(ContainsConditions element, String string) throws JaxenException {
-		List<Object> results = nameSelect(typeSelect(element.getConditions(), Condition.class), string);
+	public void assertHasNoFunction(ContainsConditions element, String string) throws JaxenException {
+		List<Object> results = nameSelect(typeSelect(element.getConditions(), Function.class), string);
 		assertEquals(0, results.size());
 	}
-	
+
 	/**
 	 * Assert that the given element does <em>not</em> contain the given
 	 * Operation.
@@ -377,7 +377,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		assertEquals(1, list.size());
 		return (DomainAttributeInstance) list.get(0);
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
 	 * DomainAttributeInstance.
@@ -402,7 +402,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		List<Object> list = nameSelect(typeSelect(obj.getElements(), DomainAttributeInstance.class), string);
 		assertEquals(0, list.size());
 	}
-	
+
 	/**
 	 * Assert that the given element does not contain the given
 	 * DomainAttributeInstance.
@@ -426,7 +426,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		assertEquals(1, list.size());
 		return (DomainSchema) list.get(0);
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
 	 * Role.
@@ -438,7 +438,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		assertEquals(1, list.size());
 		return (Role) list.get(0);
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
 	 * DomainSource.
@@ -448,7 +448,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public DomainSource assertHasDomainSource(InternetApplication store, String string) throws JaxenException {
 		return (DomainSource) queryOne(store, "iaml:sources[iaml:name='" + string + "']");
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
 	 * DomainIterator.
@@ -518,7 +518,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public void assertHasNoInputTextField(VisibleThing element, String string) throws JaxenException {
 		assertHasNone(element, "iaml:children[iaml:name='" + string + "']", InputTextField.class);
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
 	 * IteratorList.
@@ -628,7 +628,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public Button assertHasButton(VisibleThing element, String string) throws JaxenException {
 		return (Button) queryOne(element, "iaml:children[iaml:name='" + string + "']");
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
 	 * Button.
@@ -638,7 +638,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public Button assertHasButton(Frame element, String string) throws JaxenException {
 		return (Button) queryOne(element, "iaml.visual:children[iaml:name='" + string + "']");
 	}
-	
+
 	/**
 	 * Assert that the given element does not contains the given
 	 * Button.
@@ -668,7 +668,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public MapPoint assertHasMapPoint(VisibleThing element, String string) throws JaxenException {
 		return (MapPoint) queryOne(element, "iaml:children[iaml:name='" + string + "']");
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
 	 * MapPoint.
@@ -678,7 +678,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public MapPoint assertHasMapPoint(Frame element, String string) throws JaxenException {
 		return (MapPoint) queryOne(element, "iaml.visual:children[iaml:name='" + string + "']");
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
 	 * Map.
@@ -688,7 +688,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public Map assertHasMap(VisibleThing element, String string) throws JaxenException {
 		return (Map) queryOne(element, "iaml:children[iaml:name='" + string + "']");
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
 	 * Map.
@@ -698,7 +698,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public Map assertHasMap(Frame element, String string) throws JaxenException {
 		return (Map) queryOne(element, "iaml.visual:children[iaml:name='" + string + "']");
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
 	 * AccessControlHandler.
@@ -706,9 +706,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public AccessControlHandler assertHasAccessControlHandler(Scope root, String string) throws JaxenException {
-		return (AccessControlHandler) queryOne(root, "iaml:elements[iaml:name='" + string + "']");	
+		return (AccessControlHandler) queryOne(root, "iaml:elements[iaml:name='" + string + "']");
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
 	 * Frame.
@@ -764,7 +764,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public LoginHandler assertHasLoginHandler(Scope session, String string) throws JaxenException {
-		return (LoginHandler) queryOne(session, "iaml:elements[iaml:name='" + string + "']");	
+		return (LoginHandler) queryOne(session, "iaml:elements[iaml:name='" + string + "']");
 	}
 
 	/**
@@ -774,7 +774,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public void assertHasNoLoginHandler(Scope session, String string) throws JaxenException {
-		assertHasNone(session, "iaml.scopes:elements[iaml:name='" + string + "']");	
+		assertHasNone(session, "iaml.scopes:elements[iaml:name='" + string + "']");
 	}
 
 	/**
@@ -784,7 +784,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public Session assertHasSession(InternetApplication root, String string) throws JaxenException {
-		return (Session) queryOne(root, "iaml:scopes[iaml:name='" + string + "']");	
+		return (Session) queryOne(root, "iaml:scopes[iaml:name='" + string + "']");
 	}
 
 	/**
@@ -794,7 +794,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public Session assertHasSession(Scope root, String string) throws JaxenException {
-		return (Session) queryOne(root, "iaml:scopes[iaml:name='" + string + "']");	
+		return (Session) queryOne(root, "iaml:scopes[iaml:name='" + string + "']");
 	}
 
 	/**
@@ -806,9 +806,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public DecisionNode assertHasDecisionNode(CompositeOperation element, String name) throws JaxenException {
 		List<Object> results = nameSelect(typeSelect(element.getNodes(), DecisionNode.class), name);
 		assertEquals(1, results.size());
-		return (DecisionNode) results.get(0);	
+		return (DecisionNode) results.get(0);
 	}
-	
+
 	/**
 	 * Assert that the given element contains only one
 	 * DecisionNode.
@@ -818,9 +818,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public DecisionNode assertHasDecisionNode(CompositeCondition element, String name) throws JaxenException {
 		List<Object> results = nameSelect(typeSelect(element.getNodes(), DecisionNode.class), name);
 		assertEquals(1, results.size());
-		return (DecisionNode) results.get(0);	
+		return (DecisionNode) results.get(0);
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
 	 * SplitNode.
@@ -830,7 +830,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public SplitNode assertHasSplitNode(CompositeOperation element) throws JaxenException {
 		return (SplitNode) assertHasOne(element, "iaml:nodes", SplitNode.class);
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
 	 * JoinNode.
@@ -840,7 +840,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public JoinNode assertHasJoinNode(CompositeOperation element) throws JaxenException {
 		return (JoinNode) assertHasOne(element, "iaml:nodes", JoinNode.class);
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
 	 * StartNode.
@@ -850,7 +850,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public StartNode assertHasStartNode(CompositeOperation element) throws JaxenException {
 		return (StartNode) assertHasOne(element, "iaml:nodes", StartNode.class);
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
 	 * StartNode.
@@ -860,7 +860,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public StartNode assertHasStartNode(CompositeCondition element) throws JaxenException {
 		return (StartNode) assertHasOne(element, "iaml:nodes", StartNode.class);
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
 	 * FinishNode.
@@ -870,7 +870,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public FinishNode assertHasFinishNode(CompositeOperation element) throws JaxenException {
 		return (FinishNode) assertHasOne(element, "iaml:nodes", FinishNode.class);
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
 	 * FinishNode.
@@ -880,7 +880,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public FinishNode assertHasFinishNode(CompositeCondition element) throws JaxenException {
 		return (FinishNode) assertHasOne(element, "iaml:nodes", FinishNode.class);
 	}
-	
+
 	/**
 	 * Assert that the given element <em>does not</em> contains the given
 	 * FinishNode.
@@ -890,7 +890,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public void assertHasNoFinishNode(CompositeOperation element) throws JaxenException {
 		assertHasNone(element, "iaml:nodes", FinishNode.class);
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
 	 * CancelNode.
@@ -900,7 +900,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public CancelNode assertHasCancelNode(CompositeOperation element) throws JaxenException {
 		return (CancelNode) assertHasOne(element, "iaml:nodes", CancelNode.class);
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
 	 * CancelNode.
@@ -910,8 +910,8 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public CancelNode assertHasCancelNode(CompositeCondition element) throws JaxenException {
 		return (CancelNode) assertHasOne(element, "iaml:nodes", CancelNode.class);
 	}
-	
-	
+
+
 	/**
 	 * Assert that the given element contains the given
 	 * CancelNode with the given exception text.
@@ -929,7 +929,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		assertNotNull("Could not find any CancelNodes with exception text '" + exceptionText, found);
 		return found;
 	}
-	
+
 	/**
 	 * Assert that the given element <em>does not</em> contains the given
 	 * CancelNode.
@@ -939,7 +939,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public void assertHasNoCancelNode(CompositeOperation element) throws JaxenException {
 		assertHasNone(element, "iaml:nodes", CancelNode.class);
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
 	 * CastNode.
@@ -949,7 +949,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public CastNode assertHasCastNode(CompositeOperation element) throws JaxenException {
 		return (CastNode) assertHasOne(element, "iaml:nodes", CastNode.class);
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
 	 * CastNode.
@@ -959,7 +959,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public CastNode assertHasCastNode(CompositeCondition element) throws JaxenException {
 		return (CastNode) assertHasOne(element, "iaml:nodes", CastNode.class);
 	}
-	
+
 	/**
 	 * Assert that the given element contains only one
 	 * Arithmetic.
@@ -969,7 +969,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public Arithmetic assertHasArithmetic(CompositeOperation element) throws JaxenException {
 		return (Arithmetic) typeSelect(element.getNodes(), Arithmetic.class).get(0);
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
 	 * OperationCallNode.
@@ -977,9 +977,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public OperationCallNode assertHasOperationCallNode(CompositeOperation element, String string) throws JaxenException {
-		return (OperationCallNode) queryOne(element, "iaml:nodes[iaml:name='" + string + "']");	
+		return (OperationCallNode) queryOne(element, "iaml:nodes[iaml:name='" + string + "']");
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
 	 * OperationCallNode.
@@ -987,9 +987,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public OperationCallNode assertHasOperationCallNode(CompositeCondition element, String string) throws JaxenException {
-		return (OperationCallNode) queryOne(element, "iaml:nodes[iaml:name='" + string + "']");	
+		return (OperationCallNode) queryOne(element, "iaml:nodes[iaml:name='" + string + "']");
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
 	 * TemporaryVariable.
@@ -997,9 +997,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public TemporaryVariable assertHasTemporaryVariable(CompositeOperation element, String string) throws JaxenException {
-		return (TemporaryVariable) queryOne(element, "iaml:variables[iaml:name='" + string + "']");	
+		return (TemporaryVariable) queryOne(element, "iaml:variables[iaml:name='" + string + "']");
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
 	 * TemporaryVariable.
@@ -1007,29 +1007,29 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public TemporaryVariable assertHasTemporaryVariable(CompositeCondition element, String string) throws JaxenException {
-		return (TemporaryVariable) queryOne(element, "iaml:variables[iaml:name='" + string + "']");	
+		return (TemporaryVariable) queryOne(element, "iaml:variables[iaml:name='" + string + "']");
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
 	 * Parameter.
 	 *
 	 * @return The element found
 	 */
-	public Parameter assertHasParameter(CompositeOperation element, String string) throws JaxenException {
-		return (Parameter) queryOne(element, "iaml:parameters[iaml:name='" + string + "']");	
+	public ActivityParameter assertHasActivityParameter(CompositeOperation element, String string) throws JaxenException {
+		return (ActivityParameter) queryOne(element, "iaml:parameters[iaml:name='" + string + "']");
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
 	 * Parameter.
 	 *
 	 * @return The element found
 	 */
-	public Parameter assertHasParameter(CompositeCondition element, String string) throws JaxenException {
-		return (Parameter) queryOne(element, "iaml:parameters[iaml:name='" + string + "']");	
+	public ActivityParameter assertHasActivityParameter(CompositeCondition element, String string) throws JaxenException {
+		return (ActivityParameter) queryOne(element, "iaml:parameters[iaml:name='" + string + "']");
 	}
-	
+
 	/**
 	 * Assert that the given element contains the given
 	 * QueryParameter.
@@ -1037,9 +1037,9 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public QueryParameter assertHasQueryParameter(Frame element, String string) throws JaxenException {
-		return (QueryParameter) queryOne(element, "iaml:parameters[iaml:name='" + string + "']");	
+		return (QueryParameter) queryOne(element, "iaml:parameters[iaml:name='" + string + "']");
 	}
-	
+
 	/**
 	 * Assert there exists only one bidirectional SyncWire between
 	 * the given elements.
@@ -1053,7 +1053,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		assertEquals(name, sw.getName());
 		return sw;
 	}
-	
+
 	/**
 	 * Assert there exists only one bidirectional SyncWire between
 	 * the given elements, with any name.
@@ -1066,7 +1066,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		SyncWire sw = (SyncWire) x.iterator().next();
 		return sw;
 	}
-	
+
 	/**
 	 * Assert there exists only one unidirectional AutocompleteWire between
 	 * the given elements, with any name.
@@ -1076,7 +1076,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public AutocompleteWire assertHasAutocompleteWire(EObject container, WireSource from, WireDestination to) throws JaxenException {
 		return (AutocompleteWire) assertHasWireFromTo(container, from, to, AutocompleteWire.class, ALL);
 	}
-	
+
 	/**
 	 * Assert there exists only one unidirectional SetWire between
 	 * the given elements, with any name.
@@ -1086,7 +1086,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public SetWire assertHasSetWire(EObject container, WireSource from, WireDestination to) throws JaxenException {
 		return (SetWire) assertHasWireFromTo(container, from, to, SetWire.class, ALL);
 	}
-	
+
 	/**
 	 * Assert there exists only one unidirectional DetailWire between
 	 * the given elements, with any name.
@@ -1096,30 +1096,30 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public DetailWire assertHasDetailWire(EObject container, WireSource from, WireDestination to) throws JaxenException {
 		return (DetailWire) assertHasWireFromTo(container, from, to, DetailWire.class, ALL);
 	}
-	
+
 	/**
-	 * Assert there exists only one unidirectional ParameterEdge between
+	 * Assert there exists only one unidirectional ActivityParameter between
 	 * the given elements.
 	 *
 	 * @return The element found
 	 */
-	public ParameterEdge assertHasParameterEdge(EObject container, ParameterEdgesSource from, ParameterEdgeDestination to) throws JaxenException {
-		Set<ParameterEdge> params = getParameterEdgesFromTo(container, from, to);
-		assertEquals("Should be exactly one parameter edge: " + params, 1, params.size());
+	public Parameter assertHasParameter(EObject container, ParameterEdgesSource from, ParameterEdgeDestination to) throws JaxenException {
+		Set<Parameter> params = getParametersFromTo(container, from, to);
+		assertEquals("Should be exactly one ActivityParameter edge: " + params, 1, params.size());
 		return params.iterator().next();
 	}
-	
+
 	/**
-	 * Assert there exists <em>no</em> unidirectional ParameterEdge between
+	 * Assert there exists <em>no</em> unidirectional ActivityParameter between
 	 * the given elements.
 	 *
 	 * @return The element found
 	 */
-	public void assertHasNoParameterEdge(EObject container, ParameterEdgesSource from, ParameterEdgeDestination to) throws JaxenException {
-		Set<ParameterEdge> params = getParameterEdgesFromTo(container, from, to);
-		assertEquals("Should be exactly zero parameter edge: " + params, 0, params.size());
+	public void assertHasNoParameter(EObject container, ParameterEdgesSource from, ParameterEdgeDestination to) throws JaxenException {
+		Set<Parameter> params = getParametersFromTo(container, from, to);
+		assertEquals("Should be exactly zero ActivityParameter edge: " + params, 0, params.size());
 	}
-	
+
 	/**
 	 * Assert there exists only one unidirectional SelectEdge between
 	 * the given elements.
@@ -1137,7 +1137,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		assertNotNull("Found no SelectEdge", result);
 		return result;
 	}
-	
+
 	/**
 	 * Assert there exists only one unidirectional SchemaEdge between
 	 * the given elements.
@@ -1155,7 +1155,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		assertNotNull("Found no SchemaEdge", result);
 		return result;
 	}
-	
+
 	/**
 	 * Assert there exists <em>no</em> unidirectional SchemaEdge between
 	 * the given elements.
@@ -1169,19 +1169,19 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 			}
 		}
 	}
-	
+
 	/**
-	 * Assert there exists only one unidirectional ParameterEdge between
+	 * Assert there exists only one unidirectional Parameter between
 	 * the given elements, with the given name.
 	 *
 	 * @return The element found
 	 */
-	public ParameterEdge assertHasParameterEdge(EObject container, ParameterEdgesSource from, ParameterEdgeDestination to, String name) throws JaxenException {
-		Set<ParameterEdge> params = getParameterEdgesFromTo(container, from, to, name);
-		assertEquals("Should be exactly one parameter edge: " + params, 1, params.size());
+	public Parameter assertHasParameter(EObject container, ParameterEdgesSource from, ParameterEdgeDestination to, String name) throws JaxenException {
+		Set<Parameter> params = getParametersFromTo(container, from, to, name);
+		assertEquals("Should be exactly one ActivityParameter edge: " + params, 1, params.size());
 		return params.iterator().next();
 	}
-	
+
 	/**
 	 * Assert there exists only one unidirectional ExtendsEdge between
 	 * the given elements.
@@ -1193,7 +1193,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		assertEquals("Should be exactly one extends edge: " + params, 1, params.size());
 		return params.iterator().next();
 	}
-	
+
 	/**
 	 * Assert there exists <em>no</em> unidirectional ExtendsEdges between
 	 * the given elements.
@@ -1204,7 +1204,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		Set<ExtendsEdge> params = getExtendsEdgesFromTo(container, from, to);
 		assertEquals("Should be exactly no extends edges: " + params, 0, params.size());
 	}
-	
+
 	/**
 	 * Assert there exists only one unidirectional RequiresEdge between
 	 * the given elements.
@@ -1216,7 +1216,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		assertEquals("Should be exactly one requires edge: " + params, 1, params.size());
 		return params.iterator().next();
 	}
-	
+
 	/**
 	 * Assert there exists <em>no</em> unidirectional RequiresEdge between
 	 * the given elements.
@@ -1226,75 +1226,75 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		Set<RequiresEdge> params = getRequiresEdgesFromTo(container, from, to);
 		assertEquals("Should be exactly no requires edge: " + params, 0, params.size());
 	}
-	
+
 	/**
 	 * Assert there exists only one unidirectional RunAction between
 	 * the given elements, with the given name.
-	 * 
-	 * @deprecated use {@link #assertHasActionEdge(EObject, ActionEdgeSource, Action, String)} instead
+	 *
+	 * @deprecated use {@link #assertHasECARule(EObject, ActionEdgeSource, Action, String)} instead
 	 * @return The element found
 	 */
-	public ActionEdge assertHasRunAction(EObject container, ActionEdgeSource from, Action to, String name) throws JaxenException {
-		return assertHasActionEdge(container, from, to, name);
+	public ECARule assertHasRunAction(EObject container, ActionEdgeSource from, Action to, String name) throws JaxenException {
+		return assertHasECARule(container, from, to, name);
 	}
-	
-	public ActionEdge assertHasActionEdge(EObject container, ActionEdgeSource from, Action to, String name) throws JaxenException {
-		return (ActionEdge) assertHasActionFromTo(container, from, to, 
-				ActionEdge.class, getNameFilter(name));
+
+	public ECARule assertHasECARule(EObject container, ActionEdgeSource from, Action to, String name) throws JaxenException {
+		return (ECARule) assertHasECARuleFromTo(container, from, to,
+				ECARule.class, getNameFilter(name));
 	}
-	
-	public ActionEdge assertHasActionEdge(EObject container, ActionEdgeSource from, Action to) throws JaxenException {
-		return (ActionEdge) assertHasActionFromTo(container, from, to, 
-				ActionEdge.class, new Filter<ActionEdge>() {
+
+	public ECARule assertHasECARule(EObject container, ActionEdgeSource from, Action to) throws JaxenException {
+		return (ECARule) assertHasECARuleFromTo(container, from, to,
+				ECARule.class, new Filter<ECARule>() {
 					@Override
-					public boolean accept(ActionEdge o) {
+					public boolean accept(ECARule o) {
 						return true;
 					}
 				});
 	}
-	
+
 	/**
 	 * Construct a new filter for only selecting {@link ActionEdge}s with a given name.
-	 * 
+	 *
 	 * @param name the name to search for
 	 * @return a new name filter for {@link ActionEdge}s.
 	 */
-	private Filter<ActionEdge> getNameFilter(final String name) {
-		return new Filter<ActionEdge>() {
+	private Filter<ECARule> getNameFilter(final String name) {
+		return new Filter<ECARule>() {
 			@Override
-			public boolean accept(ActionEdge o) {
+			public boolean accept(ECARule o) {
 				if (o instanceof NamedElement) {
 					return name.equals(((NamedElement) o).getName());
-				}						
+				}
 				return false;
 			}
-		};		
+		};
 	}
-	
+
 	/**
 	 * Assert there exists only one unidirectional RunAction between
 	 * the given elements.
 	 *
-	 * @deprecated use {@link #assertHasActionEdge(EObject, ActionEdgeSource, Action, String)} instead
+	 * @deprecated use {@link #assertHasECARule(EObject, ActionEdgeSource, Action, String)} instead
 	 * @return The element found
 	 */
-	public ActionEdge assertHasRunAction(EObject container, ActionEdgeSource from, Action to) throws JaxenException {
-		return (ActionEdge) assertHasActionFromTo(container, from, to, 
-				ActionEdge.class, ALL_ACTIONS);
+	public ECARule assertHasRunAction(EObject container, ActionEdgeSource from, Action to) throws JaxenException {
+		return (ECARule) assertHasECARuleFromTo(container, from, to,
+				ECARule.class, ALL_ECA_RULES);
 	}
-	
+
 	/**
 	 * Assert there exists only one unidirectional RunAction between
 	 * the given elements.
 	 *
-	 * @deprecated use {@link #assertHasActionEdge(EObject, ActionEdgeSource, Action, String)} instead
+	 * @deprecated use {@link #assertHasECARule(EObject, ActionEdgeSource, Action, String)} instead
 	 * @return The element found
 	 */
-	public ActionEdge assertHasRunAction(EObject container, ActionEdgeSource from, Action to, Filter<ActionEdge> filter) throws JaxenException {
-		return (ActionEdge) assertHasActionFromTo(container, from, to, 
-				ActionEdge.class, filter);
+	public ECARule assertHasRunAction(EObject container, ActionEdgeSource from, Action to, Filter<ECARule> filter) throws JaxenException {
+		return (ECARule) assertHasECARuleFromTo(container, from, to,
+				ECARule.class, filter);
 	}
-	
+
 	/**
 	 * Assert there exists only one unidirectional SetWire between
 	 * the given elements.
@@ -1302,10 +1302,10 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @return The element found
 	 */
 	public SetWire assertHasSetWire(EObject container, WireSource from, WireDestination to, String name) throws JaxenException {
-		return (SetWire) assertHasWireFromTo(container, from, to, 
+		return (SetWire) assertHasWireFromTo(container, from, to,
 				SetWire.class, name, ALL);
 	}
-	
+
 	/**
 	 * Assert <em>no</em> unidirectional SetWire exists between
 	 * the given elements.
@@ -1313,7 +1313,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	public void assertHasNoSetWire(EObject container, WireSource from, WireDestination to) throws JaxenException {
 		assertHasNoWiresFromTo(container, from, to, SetWire.class);
 	}
-	
+
 	/**
 	 * Assert <em>no</em> bidirectional SyncWire exists between
 	 * the given elements.
@@ -1322,82 +1322,82 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		Set<Wire> wires = getWiresBidirectional(container, from, to, SyncWire.class);
 		assertEquals("Unexpected SyncWires found: " + wires, 0, wires.size());
 	}
-	
+
 	/**
 	 * Assert <em>no</em> unidirectional RunAction exists between
 	 * the given elements.
-	 * 
+	 *
 	 * @deprecated use {@link #assertHasNoActionEdge(EObject, ActionEdgeSource, Action, String)} instead
 	 */
 	public void assertHasNoRunAction(EObject container, ActionEdgeSource from, Action to) throws JaxenException {
-		assertHasNoActionEdge(container, from, to);
+		assertHasNoECARules(container, from, to);
 	}
-	
-	public void assertHasNoActionEdge(EObject container, ActionEdgeSource from, Action to) throws JaxenException {
-		Set<ActionEdge> actions = getActionsFromTo(container, from, to, ActionEdge.class);
+
+	public void assertHasNoECARules(EObject container, ActionEdgeSource from, Action to) throws JaxenException {
+		Set<ECARule> actions = getECARulesFromTo(container, from, to, ECARule.class);
 		assertEquals("Unexpected actions found: " + actions, 0, actions.size());
 	}
-	
+
 	/**
-	 * Assert <em>no</em> unidirectional ConditionEdge exists between
+	 * Assert <em>no</em> unidirectional SimpleConditions exists between
 	 * the given elements.
 	 */
-	public void assertHasNoConditionEdge(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to, String name) throws JaxenException {
-		for (ConditionEdge e : from.getOutConditionEdges()) {
+	public void assertHasNoSimpleConditions(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to, String name) throws JaxenException {
+		for (SimpleCondition e : from.getOutConditionEdges()) {
 			if (to.equals(e.getTo()) && name.equals(e.getName())) {
-				fail("Found a ConditionEdge from '" + from + "' to '" + to + "' with name '" + name + "' unexpectedly: " + e);
+				fail("Found a SimpleCondition from '" + from + "' to '" + to + "' with name '" + name + "' unexpectedly: " + e);
 			}
 		}
 	}
-	
+
 	/**
-	 * Assert there exists only one unidirectional ConditionEdge between
+	 * Assert there exists only one unidirectional SimpleCondition between
 	 * the given elements.
 	 *
 	 * @return The element found
 	 */
-	public ConditionEdge assertHasConditionEdge(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to, String name) throws JaxenException {
-		Set<ConditionEdge> params = getConditionEdgesFromTo(container, from, to, name);
-		assertEquals("Should be exactly one condition edge with the name '" + name + "': " + params, 1, params.size());
+	public SimpleCondition assertHasSimpleCondition(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to, String name) throws JaxenException {
+		Set<SimpleCondition> params = getSimpleConditionsFromTo(container, from, to, name);
+		assertEquals("Should be exactly one Function edge with the name '" + name + "': " + params, 1, params.size());
 		return params.iterator().next();
 	}
-	
+
 	/**
-	 * Assert there exists only one unidirectional ConditionEdge between
+	 * Assert there exists only one unidirectional SimpleCondition between
 	 * the given elements. Ignores the name.
 	 *
 	 * @return The element found
 	 */
-	public ConditionEdge assertHasConditionEdge(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to) throws JaxenException {
-		Set<ConditionEdge> params = getConditionEdgesFromTo(container, from, to);
-		assertEquals("Should be exactly one condition edge: " + params, 1, params.size());
+	public SimpleCondition assertHasSimpleCondition(EObject container, ConditionEdgesSource from, ConditionEdgeDestination to) throws JaxenException {
+		Set<SimpleCondition> params = getSimpleConditionsFromTo(container, from, to);
+		assertEquals("Should be exactly one Function edge: " + params, 1, params.size());
 		return params.iterator().next();
 	}
-	
+
 	/**
 	 * Assert there exists only one unidirectional NavigateAction between
 	 * the given elements.
 	 *
-	 * @deprecated use {@link #assertHasActionEdge(EObject, ActionEdgeSource, Action, String)} instead
+	 * @deprecated use {@link #assertHasECARule(EObject, ActionEdgeSource, Action, String)} instead
 	 * @return The element found
 	 */
-	public ActionEdge assertHasNavigateAction(EObject container, ActionEdgeSource from, Action to, String name) throws JaxenException {
-		return (ActionEdge) assertHasActionFromTo(container, from, to, 
-				ActionEdge.class, getNameFilter(name) );
+	public ECARule assertHasNavigateAction(EObject container, ActionEdgeSource from, Action to, String name) throws JaxenException {
+		return (ECARule) assertHasECARuleFromTo(container, from, to,
+				ECARule.class, getNameFilter(name) );
 	}
-	
+
 	/**
 	 * Assert there exists only one unidirectional NavigateAction between
 	 * the given elements.
 	 *
-	 * @deprecated use {@link #assertHasActionEdge(EObject, ActionEdgeSource, Action, String)} instead
+	 * @deprecated use {@link #assertHasECARule(EObject, ActionEdgeSource, Action, String)} instead
 	 * @return The element found
 	 */
-	public ActionEdge assertHasNavigateAction(EObject container, ActionEdgeSource from, Action to) throws JaxenException {
-		return (ActionEdge) assertHasActionFromTo(container, from, to, 
-				ActionEdge.class, ALL_ACTIONS);
+	public ECARule assertHasNavigateAction(EObject container, ActionEdgeSource from, Action to) throws JaxenException {
+		return (ECARule) assertHasECARuleFromTo(container, from, to,
+				ECARule.class, ALL_ECA_RULES);
 	}
-	
+
 	/**
 	 * Assert there exists only one unidirectional ExecutionEdge between
 	 * the given elements.
@@ -1421,7 +1421,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		assertNotNull("Did not find an ExecutionEdge from '" + from + "' to '" + to + "'", result);
 		return result;
 	}
-	
+
 	/**
 	 * Assert there exists only one unidirectional ExecutionEdge between
 	 * the given elements, and only with the given name.
@@ -1445,7 +1445,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		assertNotNull("Did not find an ExecutionEdge from '" + from + "' to '" + to + "'", result);
 		return result;
 	}
-	
+
 	/**
 	 * Assert there exists only one unidirectional DataFlowEdge between
 	 * the given elements.
@@ -1469,7 +1469,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		assertNotNull("Did not find an DataFlowEdge from '" + from + "' to '" + to + "'", result);
 		return result;
 	}
-	
+
 	/**
 	 * Does <em>exactly one</em> DataFlowEdge exist between the given elements?
 	 *
@@ -1489,16 +1489,16 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		}
 		return count == 1;
 	}
-	
+
 	/**
 	 * For unnamed objects that are only differentiated by xsi:type, we need
 	 * a special method to find that only one of these types exist.
-	 * 
+	 *
 	 * @param container
 	 * @param query
 	 * @param type
 	 * @return
-	 * @throws JaxenException 
+	 * @throws JaxenException
 	 */
 	public EObject assertHasOne(EObject container, String query, Class<? extends EObject> type) throws JaxenException {
 		EObject result = null;
@@ -1514,18 +1514,18 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		assertNotNull("Did not find any results of '" + query + "' of type '" + type + "' in container '" + container + "'", result);
 		return result;
 	}
-	
+
 	/**
 	 * Assert that there exists <em>only one</em> wire of the given type from the 'from' element
 	 * to the 'to' element.
-	 * 
+	 *
 	 * @see #assertHasWireFromTo(EObject, WireSource, WireDestination, String, Class)
 	 * @param container
 	 * @param from
 	 * @param to
 	 * @param type
 	 * @return the wire edge found
-	 * @throws JaxenException 
+	 * @throws JaxenException
 	 */
 	public Wire assertHasWireFromTo(EObject container, WireSource from, WireDestination to, Class<? extends Wire> type, Filter<Wire> filter) throws JaxenException {
 		Set<Wire> wires = getWiresFromTo(container, from, to);
@@ -1543,23 +1543,23 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		assertNotNull("Did not find any wires connecting '" + from + "' to '" + to + " of type '" + type + "'", result);
 		return result;
 	}
-	
+
 	/**
 	 * Assert that there exists <em>only one</em> wire of the given type from the 'from' element
 	 * to the 'to' element.
-	 * 
+	 *
 	 * @see #assertHasWireFromTo(EObject, WireSource, WireDestination, String, Class)
 	 * @param container
 	 * @param from
 	 * @param to
 	 * @param type
 	 * @return the wire edge found
-	 * @throws JaxenException 
+	 * @throws JaxenException
 	 */
-	public ActionEdge assertHasActionFromTo(EObject container, ActionEdgeSource from, Action to, Class<? extends ActionEdge> type, Filter<ActionEdge> filter) throws JaxenException {
-		Set<ActionEdge> wires = getActionsFromTo(container, from, to);
-		ActionEdge result = null;
-		for (ActionEdge w : wires) {
+	public ECARule assertHasECARuleFromTo(EObject container, ActionEdgeSource from, Action to, Class<? extends ECARule> type, Filter<ECARule> filter) throws JaxenException {
+		Set<ECARule> wires = getActionsFromTo(container, from, to);
+		ECARule result = null;
+		for (ECARule w : wires) {
 			if (type.isInstance(w)) {
 				if (filter == null || filter.accept(w)) {
 					// found it
@@ -1572,11 +1572,11 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		assertNotNull("Did not find any Actions connecting '" + from + "' to '" + to + " of type '" + type + "'", result);
 		return result;
 	}
-	
+
 	/**
 	 * Assert that there exists <em>only one</em> wire of the given type from the 'from' element
 	 * to the 'to' element, with the given name; the wire must implement NamedElement.
-	 * 
+	 *
 	 * @param container
 	 * @param from
 	 * @param to
@@ -1584,7 +1584,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	 * @param name the name of the NamedElement wire
 	 * @param filter an optional filter; may be null
 	 * @return
-	 * @throws JaxenException 
+	 * @throws JaxenException
 	 */
 	public Wire assertHasWireFromTo(EObject container, WireSource from, WireDestination to, Class<? extends Wire> type, String name, Filter<Wire> filter) throws JaxenException {
 		Set<Wire> wires = getWiresFromTo(container, from, to);
@@ -1602,10 +1602,10 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		assertNotNull("Did not find any wires connecting '" + from + "' to '" + to + " of type '" + type + "' with name '" + name + "'", result);
 		return result;
 	}
-	
+
 	/**
 	 * Assert that the given types refer <em>to the same URI</em>.
-	 * 
+	 *
 	 * @param type1
 	 * @param type2
 	 */
@@ -1620,14 +1620,14 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	/**
 	 * Select elements in the given list with the given name.
 	 * Assert that the list is not empty.
-	 * 
+	 *
 	 * @param list
 	 * @param name
 	 * @return
 	 */
 	public static List<Object> nameSelect(List<?> list, String name) {
 		assertFalse("List was empty", list.isEmpty());
-		
+
 		List<Object> results = new ArrayList<Object>();
 		for (Object o : list) {
 			if (o instanceof NamedElement && ((NamedElement) o).getName().equals(name)) {
@@ -1638,14 +1638,14 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 				results.add(o);
 			}
 		}
-		
+
 		return results;
 	}
 
 	/**
 	 * Assert that the given input is exactly the collection in
 	 * the given parameter, but in any order.
-	 * 
+	 *
 	 * @param input the input collection
 	 * @param strings the strings to check against
 	 */
@@ -1655,10 +1655,10 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 		} catch (AssertionFailedError e) {
 			throw new RuntimeException(e.getMessage() + ": " + input, e);
 		}
-		
+
 		// make a copy of the input list
 		List<String> copy = new ArrayList<String>(input);
-		
+
 		for (String s : strings) {
 			if (copy.contains(s)) {
 				copy.remove(s);
@@ -1666,18 +1666,18 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 				fail("Could not find string '" + s + "' in '" + copy + "', original list = '" + input + "'");
 			}
 		}
-		
+
 		// must now be empty
 		assertTrue(copy.isEmpty());
-		
+
 	}
-	
+
 	/**
 	 * Are the two {@link EDataType}s equal? They are equal if
 	 * {@link EDataType#equals(Object)} returns <code>true</code>,
 	 * or if both are {@link EXSDDataType}s and their definition
 	 * URIs are equal.
-	 * 
+	 *
 	 * @see DroolsHelperFunctions#equalDataTypes(XSDSimpleTypeDefinition, XSDSimpleTypeDefinition)
 	 * @param e1
 	 * @param e2
@@ -1686,15 +1686,15 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	protected boolean equalType(EDataType e1, EDataType e2) {
 		if (e1.equals(e2))
 			return true;
-		
+
 		if (e1 instanceof EXSDDataType) {
 			if (e2 instanceof EXSDDataType) {
 				return DroolsHelperFunctions.equalDataTypes(
 						((EXSDDataType) e1).getDefinition(),
-						((EXSDDataType) e2).getDefinition());						
+						((EXSDDataType) e2).getDefinition());
 			}
 		}
-		
+
 		return false;
 	}
 
@@ -1706,7 +1706,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 			XSDSimpleTypeDefinition b) {
 		assertTrue(DroolsHelperFunctions.equalDataTypes(a, b));
 	}
-		
+
 	/**
 	 * Are the two elements of the same type? That is, do their type URIs
 	 * match?
@@ -1715,7 +1715,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 			XSDSimpleTypeDefinition b) {
 		assertEqualType(((EXSDDataType) a).getDefinition(), b);
 	}
-	
+
 	/**
 	 * Are the two elements of the same type? That is, do their type URIs
 	 * match?
@@ -1724,7 +1724,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 			EDataType b) {
 		assertEqualType(a, ((EXSDDataType) b).getDefinition());
 	}
-	
+
 	/**
 	 * Are the two elements of the same type? That is, do their type URIs
 	 * match?
@@ -1733,7 +1733,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 			EClassifier b) {
 		assertEqualType(a, ((EXSDDataType) b).getDefinition());
 	}
-	
+
 	/**
 	 * Are the two elements of the same type? That is, do their type URIs
 	 * match?
@@ -1742,7 +1742,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 			XSDSimpleTypeDefinition b) {
 		assertEqualType(b, ((EXSDDataType) a).getDefinition());
 	}
-	
+
 	/**
 	 * Are the two elements of the same type? That is, do their type URIs
 	 * match?
@@ -1751,7 +1751,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 			EClassifier b) {
 		assertEqualType(((EXSDDataType) a).getDefinition(), ((EXSDDataType) b).getDefinition());
 	}
-	
+
 	/**
 	 * Are the two elements of the same type? That is, do their type URIs
 	 * match?
@@ -1760,25 +1760,25 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 			Changeable b) {
 		assertTrue(equalType(a.getType(), b.getType()));
 	}
-	
+
 	/**
 	 * Are the two elements of the same type? That is, do their type URIs
 	 * match?
 	 */
-	protected void assertEqualType(Property a,
+	protected void assertEqualType(Value a,
 			Changeable b) {
 		assertTrue(equalType(a.getType(), b.getType()));
 	}
-	
+
 	/**
 	 * Are the two elements of the same type? That is, do their type URIs
 	 * match?
 	 */
-	protected void assertEqualType(Property a,
+	protected void assertEqualType(Value a,
 			DomainAttribute b) {
 		assertTrue(equalType(a.getType(), (EXSDDataType) b.getEType()));
 	}
-	
+
 	/**
 	 * Are the two elements of the same type? That is, do their type URIs
 	 * match?
@@ -1787,7 +1787,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 			DomainAttribute b) {
 		assertEqualType(a.getEType(), b.getEType());
 	}
-	
+
 	/**
 	 * Are the two elements of the same type? That is, do their type URIs
 	 * match?
@@ -1796,25 +1796,25 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 			Changeable b) {
 		assertEqualType(a.getEType(), b.getType());
 	}
-	
+
 	/**
 	 * Are the two elements of the same type? That is, do their type URIs
 	 * match?
 	 */
 	protected void assertEqualType(Changeable a,
-			Property b) {
+			Value b) {
 		assertTrue(equalType(a.getType(), b.getType()));
 	}
-	
+
 	/**
 	 * Are the two elements of the same type? That is, do their type URIs
 	 * match?
 	 */
-	protected void assertEqualType(Property a,
-			Property b) {
+	protected void assertEqualType(Value a,
+			Value b) {
 		assertTrue(equalType(a.getType(), b.getType()));
 	}
-	
+
 	/**
 	 * Are the two elements <em>not</em> of the same type? That is, do their type URIs
 	 * not match?
@@ -1823,7 +1823,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 			Changeable b) {
 		assertFalse(equalType(a.getType(), b.getType()));
 	}
-	
+
 	/**
 	 * Are the two elements <em>not</em> of the same type? That is, do their type URIs
 	 * not match?
@@ -1832,7 +1832,7 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 			Changeable b) {
 		assertFalse(equalType((EXSDDataType) a.getEType(), b.getType()));
 	}
-	
+
 	/**
 	 * Are the two elements <em>not</em> of the same type? That is, do their type URIs
 	 * not match?
@@ -1845,20 +1845,20 @@ public abstract class InferenceTestCase extends ModelInferenceTestCase {
 	/**
 	 * Check that there are no ConditionEdges from from to to, with
 	 * the given page as a Parameter
-	 * 
-	 * @throws JaxenException 
+	 *
+	 * @throws JaxenException
 	 */
-	protected void assertNoParamtersToConditionEdges(InternetApplication container,
+	protected void assertNoParamtersToSimpleConditions(InternetApplication container,
 			ConditionEdgesSource from, ConditionEdgeDestination to, ParameterEdgesSource page) throws JaxenException {
 
-		Set<ConditionEdge> conditions = getConditionEdgesFromTo(container, from, to);
-		for (ConditionEdge condition : conditions) {
+		Set<SimpleCondition> conditions = getSimpleConditionsFromTo(container, from, to);
+		for (SimpleCondition condition : conditions) {
 
-			Set<ParameterEdge> params = getParameterEdgesFromTo(container, page, condition);
+			Set<Parameter> params = getParametersFromTo(container, page, condition);
 			assertEquals("Unexpectedly found ParameterEdge: " + params, 0, params.size());
 		}
-		
+
 	}
-	
-	
+
+
 }

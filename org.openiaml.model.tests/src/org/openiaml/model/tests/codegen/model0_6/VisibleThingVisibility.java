@@ -119,15 +119,36 @@ public class VisibleThingVisibility extends MapsCodegenTestCase {
 	public void testMapVisibility() throws Exception {
 		beginAtSitemapThenPage("Home");
 		assertNoProblem();
+
+		// in r2815, a Map is always invisible <em>unless</em>
+		// a field value is set
+		{
+			assertHasNoMap("Map visible");
+		}
 		
 		{
-			IElement map = assertHasMap("Map visible");
+			assertHasNoMap("Map hidden");
+		}
+	}
+	
+	/**
+	 * Check the visibility of {@model Map}s with values.
+	 * 
+	 * @throws Exception
+	 */
+	public void testMapWithValueVisibility() throws Exception {
+		beginAtSitemapThenPage("Home");
+		assertNoProblem();
+
+		// opposite check of #testMapVisibility() above
+		{
+			IElement map = assertHasMap("Map value visible");
+			// as of r2816, this check is also performed by assertHasMap
 			assertTrue("Map is hidden", isDisplayed(map));
 		}
 		
 		{
-			IElement map = assertHasMap("Map hidden");
-			assertFalse("Map is displayed", isDisplayed(map));
+			assertHasNoMap("Map value hidden");
 		}
 	}
 	

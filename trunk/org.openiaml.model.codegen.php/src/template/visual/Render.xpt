@@ -83,10 +83,13 @@
 	«ENDFOREACH»
 	
 	«REM»then revert back to the attribute«ENDREM»
-	if («defaultVisibility» || «EXPAND template::php::callbacks::UpdateFrameProperties::allowDefaultVisibilty») {
-		if (!$found_visible_value) {
+	if (!$found_visible_value) {
+		if («EXPAND template::php::callbacks::UpdateFrameProperties::allowDefaultVisibilty») {
 			// default attribute
 			$visible_value = «IF visible»true«ELSE»false«ENDIF»;
+			$found_visible_value = true;
+		} else {
+			$visible_value = «IF defaultVisibility»true«ELSE»false«ENDIF»;
 			$found_visible_value = true;
 		}
 	}

@@ -11,6 +11,8 @@
     <children xsi:type="iaml.visual:Label" id="visual.12eeb39e537.20" name="Label hidden" defaultValue="Label hidden" visible="false"/>
     <children xsi:type="iaml.visual:Map" id="visual.12eeb39e537.21" name="Map visible"/>
     <children xsi:type="iaml.visual:Map" id="visual.12eeb39e537.23" name="Map hidden" visible="false"/>
+    <children xsi:type="iaml.visual:Map" id="visual.12eeb39e537.21value" name="Map value visible" defaultValue="Wellington, New Zealand"/>
+    <children xsi:type="iaml.visual:Map" id="visual.12eeb39e537.23value" name="Map value hidden" visible="false" defaultValue="Wellington, New Zealand"/>
   </scopes>
   <xsdDataTypes name="xsd:integer" id="xsd_integer">
     <definition href="platform:/plugin/org.eclipse.xsd/cache/www.w3.org/2001/XMLSchema.xsd#//integer;XSDSimpleTypeDefinition=40"/>

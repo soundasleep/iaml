@@ -20,6 +20,9 @@ import org.openiaml.model.model.wires.WiresPackage;
  * A helper run-time class that lists runtime information about all of the
  * edge types in the system; for example, {@link Wire} or {@link ExecutionEdge}.
  * 
+ * <p>TODO In the future, this can be generated automatically from the simplegmf
+ * model instance.
+ * 
  * @author jmwright
  *
  */
@@ -117,11 +120,11 @@ public class EdgeTypes {
 		) );
 		
 		edgeTypes.add( new EdgeType(
-				ModelPackage.eINSTANCE.getActionEdge(), /* type */
+				ModelPackage.eINSTANCE.getECARule(), /* type */
 				ModelPackage.eINSTANCE.getActionEdgeSource(), /* source */
 				ModelPackage.eINSTANCE.getAction(), /* destination */
-				ModelPackage.eINSTANCE.getActionEdge_From(), /* from ref */
-				ModelPackage.eINSTANCE.getActionEdge_To(), /* to ref */
+				ModelPackage.eINSTANCE.getECARule_From(), /* from ref */
+				ModelPackage.eINSTANCE.getECARule_To(), /* to ref */
 				ModelPackage.eINSTANCE.getActionEdgeSource_OutActions(), /* from opposite */
 				ModelPackage.eINSTANCE.getAction_InActions() /* to opposite */
 		) );
@@ -137,11 +140,11 @@ public class EdgeTypes {
 		) );
 		
 		edgeTypes.add( new EdgeType(
-				WiresPackage.eINSTANCE.getConditionEdge(), /* type */
+				ModelPackage.eINSTANCE.getSimpleCondition(), /* type */
 				WiresPackage.eINSTANCE.getConditionEdgesSource(), /* source */
 				WiresPackage.eINSTANCE.getConditionEdgeDestination(), /* destination */
-				WiresPackage.eINSTANCE.getConditionEdge_From(), /* from ref */
-				WiresPackage.eINSTANCE.getConditionEdge_To(), /* to ref */
+				ModelPackage.eINSTANCE.getSimpleCondition_From(), /* from ref */
+				ModelPackage.eINSTANCE.getSimpleCondition_To(), /* to ref */
 				WiresPackage.eINSTANCE.getConditionEdgesSource_OutConditionEdges(),
 				WiresPackage.eINSTANCE.getConditionEdgeDestination_InConditionEdges()
 		) );
@@ -177,11 +180,11 @@ public class EdgeTypes {
 		) );
 		
 		edgeTypes.add( new EdgeType(
-				WiresPackage.eINSTANCE.getParameterEdge(), /* type */
+				ModelPackage.eINSTANCE.getParameter(), /* type */
 				WiresPackage.eINSTANCE.getParameterEdgesSource(), /* source */
 				WiresPackage.eINSTANCE.getParameterEdgeDestination(), /* destination */
-				WiresPackage.eINSTANCE.getParameterEdge_From(), /* from ref */
-				WiresPackage.eINSTANCE.getParameterEdge_To(), /* to ref */
+				ModelPackage.eINSTANCE.getParameter_From(), /* from ref */
+				ModelPackage.eINSTANCE.getParameter_To(), /* to ref */
 				WiresPackage.eINSTANCE.getParameterEdgesSource_OutParameterEdges(),
 				WiresPackage.eINSTANCE.getParameterEdgeDestination_InParameterEdges()
 		) );

@@ -65,8 +65,8 @@ public class Issue47 extends AbstractShortcutsTestCase {
 		
 		// editor should contain both "edit" and "update" operations for
 		// text1 and text2
-		ShapeNodeEditPart text1_edit = assertHasEventTrigger(editor_text, false, ModelPackage.eINSTANCE.getChangeable_OnChange() );
-		ShapeNodeEditPart text2_edit = assertHasEventTrigger(editor_text, true,  ModelPackage.eINSTANCE.getChangeable_OnChange());
+		ShapeNodeEditPart text1_edit = assertHasEvent(editor_text, false, ModelPackage.eINSTANCE.getChangeable_OnChange() );
+		ShapeNodeEditPart text2_edit = assertHasEvent(editor_text, true,  ModelPackage.eINSTANCE.getChangeable_OnChange());
 		assertNotSame(text1_edit, text2_edit);
 		assertGenerated(text1_edit);
 		assertGenerated(text2_edit);
@@ -80,12 +80,12 @@ public class Issue47 extends AbstractShortcutsTestCase {
 		// these should be connected
 		ConnectionNodeEditPart text1_run = assertHasRunAction(editor_text, text1_edit, text2_update, "run");
 		assertGenerated(text1_run);
-		ConnectionNodeEditPart text1_param = assertHasParameterEdge(editor_text, text1_value, text1_run);
+		ConnectionNodeEditPart text1_param = assertHasParameter(editor_text, text1_value, text1_run);
 		assertGenerated(text1_param);
 		
 		ConnectionNodeEditPart text2_run = assertHasRunAction(editor_text, text2_edit, text1_update, "run");
 		assertGenerated(text2_run);
-		ConnectionNodeEditPart text2_param = assertHasParameterEdge(editor_text, text2_value, text2_run);
+		ConnectionNodeEditPart text2_param = assertHasParameter(editor_text, text2_value, text2_run);
 		assertGenerated(text2_param);
 
 	}

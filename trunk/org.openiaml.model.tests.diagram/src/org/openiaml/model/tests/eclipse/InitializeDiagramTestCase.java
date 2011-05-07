@@ -33,7 +33,7 @@ public class InitializeDiagramTestCase extends EclipseTestCaseHelper {
 		// a primitive operation, a frame, and a shortcutted EventTrigger
 		assertHasPrimitiveOperation(editor, "op", false);
 		ShapeNodeEditPart page = assertHasFrame(editor, "page", false);
-		assertHasEventTrigger(editor, true, ModelPackage.eINSTANCE.getScope_OnInit());
+		assertHasEvent(editor, true, ModelPackage.eINSTANCE.getScope_OnInit());
 
 		// open the domain store
 		DiagramDocumentEditor editor_page = openDiagram(page);

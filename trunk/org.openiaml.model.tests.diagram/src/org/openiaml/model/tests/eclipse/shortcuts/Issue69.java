@@ -42,7 +42,7 @@ public class Issue69 extends AbstractShortcutsTestCase {
 			
 			// directly, there is a button and a static value
 			ShapeNodeEditPart button = assertHasButton(editor_page, "direct");
-			ShapeNodeEditPart staticValue = assertHasProperty(editor_page, "parameter");
+			ShapeNodeEditPart staticValue = assertHasValue(editor_page, "parameter");
 			
 			// the button runs an external operation, which is a shortcut
 			ShapeNodeEditPart op = assertHasCompositeOperation(editor_page, "some operation", true);
@@ -51,7 +51,7 @@ public class Issue69 extends AbstractShortcutsTestCase {
 			ConnectionNodeEditPart run = assertHasRunAction(editor_page, button, op, "onClick");
 			
 			// this RunAction has an incoming parameter
-			assertHasParameterEdge(editor_page, staticValue, run);
+			assertHasParameter(editor_page, staticValue, run);
 			
 			// there should only be three children (as above)
 			assertEditorHasChildren(3, editor_page);
@@ -85,7 +85,7 @@ public class Issue69 extends AbstractShortcutsTestCase {
 			try {
 				
 				// it has an event trigger onChange (not a shortcut)
-				ShapeNodeEditPart event = assertHasEventTrigger(editor_button, false, ModelPackage.eINSTANCE.getChangeable_OnChange());
+				ShapeNodeEditPart event = assertHasEvent(editor_button, false, ModelPackage.eINSTANCE.getChangeable_OnChange());
 				
 				// there is a shortcutted operation
 				ShapeNodeEditPart op = assertHasCompositeOperation(editor_button, "some operation", true);
@@ -94,10 +94,10 @@ public class Issue69 extends AbstractShortcutsTestCase {
 				ConnectionNodeEditPart run = assertHasRunAction(editor_button, event, op, "run");
 				
 				// there is also a shortcutted StaticValue, which is the parameter
-				ShapeNodeEditPart staticValue = assertHasProperty(editor_button, "parameter", true);
+				ShapeNodeEditPart staticValue = assertHasValue(editor_button, "parameter", true);
 				
 				// which is connected to the RunAction
-				assertHasParameterEdge(editor_button, staticValue, run);
+				assertHasParameter(editor_button, staticValue, run);
 
 				// there should only be three children (as above)
 				assertEditorHasChildren(3, editor_button);
@@ -137,17 +137,17 @@ public class Issue69 extends AbstractShortcutsTestCase {
 			ConnectionNodeEditPart run = assertHasRunAction(editor_page, button, op, "onClick");
 			
 			// there is a shortcutted event 'onChange'
-			ShapeNodeEditPart event = assertHasEventTrigger(editor_page, true, ModelPackage.eINSTANCE.getChangeable_OnChange());
+			ShapeNodeEditPart event = assertHasEvent(editor_page, true, ModelPackage.eINSTANCE.getChangeable_OnChange());
 			
 			// also connected by a RunAction
 			ConnectionNodeEditPart run2 = assertHasRunAction(editor_page, event, op, "run");
 			
 			// finally, there is a static value that has a shortcut
-			ShapeNodeEditPart staticValue = assertHasProperty(editor_page, "parameter", true);
+			ShapeNodeEditPart staticValue = assertHasValue(editor_page, "parameter", true);
 			
 			// connected to both run actions
-			assertHasParameterEdge(editor_page, staticValue, run);
-			assertHasParameterEdge(editor_page, staticValue, run2);
+			assertHasParameter(editor_page, staticValue, run);
+			assertHasParameter(editor_page, staticValue, run2);
 			
 			// there should only be four children (as above)
 			assertEditorHasChildren(4, editor_page);

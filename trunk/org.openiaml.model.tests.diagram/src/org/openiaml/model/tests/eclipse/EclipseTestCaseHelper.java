@@ -23,17 +23,19 @@ import org.eclipse.gmf.runtime.notation.Style;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
-import org.openiaml.model.model.ActionEdge;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
-import org.openiaml.model.model.Condition;
-import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.ECARule;
+import org.openiaml.model.model.Event;
+import org.openiaml.model.model.Function;
 import org.openiaml.model.model.GeneratedElement;
 import org.openiaml.model.model.NamedElement;
 import org.openiaml.model.model.Operation;
+import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.PrimitiveCondition;
 import org.openiaml.model.model.PrimitiveOperation;
-import org.openiaml.model.model.Property;
+import org.openiaml.model.model.SimpleCondition;
+import org.openiaml.model.model.Value;
 import org.openiaml.model.model.domain.DomainAttribute;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
 import org.openiaml.model.model.domain.DomainIterator;
@@ -52,8 +54,6 @@ import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Label;
-import org.openiaml.model.model.wires.ConditionEdge;
-import org.openiaml.model.model.wires.ParameterEdge;
 import org.openiaml.model.model.wires.SyncWire;
 
 /**
@@ -364,11 +364,11 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	}
 
 	/**
-	 * @see #assertHasEventTrigger(DiagramDocumentEditor, String, boolean, boolean)
+	 * @see #assertHasEvent(DiagramDocumentEditor, String, boolean, boolean)
 	 */
-	public ShapeNodeEditPart assertHasEventTrigger(
+	public ShapeNodeEditPart assertHasEvent(
 			DiagramDocumentEditor editor, String name, boolean shortcutRequired, EStructuralFeature containingFeature) {
-		return assertHasRenderedNamedObject(editor, EventTrigger.class, name, true, shortcutRequired, containingFeature);
+		return assertHasRenderedNamedObject(editor, Event.class, name, true, shortcutRequired, containingFeature);
 	}
 
 	/**
@@ -508,14 +508,14 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	}
 
 	/**
-	 * Look at the editor's children to see if an Event Trigger is being displayed.
+	 * Look at the editor's children to see if an {@link Event} is being displayed.
 	 *
 	 * @param root
 	 * @param pageName
 	 * @return
 	 */
-	public ShapeNodeEditPart assertHasEventTrigger(DiagramDocumentEditor root, String eventName, boolean checkShortcut, boolean shortcutRequired) {
-		return assertHasRenderedNamedObject(root, EventTrigger.class, eventName, checkShortcut, shortcutRequired);
+	public ShapeNodeEditPart assertHasEvent(DiagramDocumentEditor root, String eventName, boolean checkShortcut, boolean shortcutRequired) {
+		return assertHasRenderedNamedObject(root, Event.class, eventName, checkShortcut, shortcutRequired);
 	}
 
 	/**
@@ -624,26 +624,26 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	}
 
 	/**
-	 * Assert that a RunAction exists between two elements in the editor.
+	 * Assert that a {@link ECARule} exists between two elements in the editor.
 	 * 
-	 * @deprecated use {@link #assertHasActionEdge(DiagramDocumentEditor, EditPart, EditPart, String)} instead.
+	 * @deprecated use {@link #assertHasECARule(DiagramDocumentEditor, EditPart, EditPart, String)} instead.
 	 */
 	public ConnectionNodeEditPart assertHasRunAction(DiagramDocumentEditor editor, EditPart source, EditPart target, String name) {
-		return assertHasActionEdge(editor, source, target, name);
+		return assertHasECARule(editor, source, target, name);
 	}
 	
 	/**
-	 * Assert that an ActionEdge exists between two elements in the editor.
+	 * Assert that an {@link ECARule} exists between two elements in the editor.
 	 */
-	public ConnectionNodeEditPart assertHasActionEdge(DiagramDocumentEditor editor, EditPart source, EditPart target, String name) {
+	public ConnectionNodeEditPart assertHasECARule(DiagramDocumentEditor editor, EditPart source, EditPart target, String name) {
 		String found = "";
 
 		for (Object c : editor.getDiagramEditPart().getConnections()) {
 			if (c instanceof ConnectionNodeEditPart) {
 				ConnectionNodeEditPart connection = (ConnectionNodeEditPart) c;
 				EObject element = connection.resolveSemanticElement();
-				if (element instanceof ActionEdge) {
-					ActionEdge w = (ActionEdge) element;
+				if (element instanceof ECARule) {
+					ECARule w = (ECARule) element;
 					if (connection.getSource().equals(source) &&
 							connection.getTarget().equals(target) && w.getName().equals(name))
 						return connection;	// found it
@@ -657,20 +657,20 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	}
 
 	/**
-	 * Assert that a ConditionEdge exists between two elements in the editor,
+	 * Assert that a {@link SimpleCondition} exists between two elements in the editor,
 	 * with the specific name.
 	 * 
 	 * TODO refactor these methods
 	 */
-	public ConnectionNodeEditPart assertHasConditionEdge(DiagramDocumentEditor editor, EditPart source, EditPart target, String name) {
+	public ConnectionNodeEditPart assertHasSimpleCondition(DiagramDocumentEditor editor, EditPart source, EditPart target, String name) {
 		String found = "";
 
 		for (Object c : editor.getDiagramEditPart().getConnections()) {
 			if (c instanceof ConnectionNodeEditPart) {
 				ConnectionNodeEditPart connection = (ConnectionNodeEditPart) c;
 				EObject element = connection.resolveSemanticElement();
-				if (element instanceof ConditionEdge) {
-					ConditionEdge w = (ConditionEdge) element;
+				if (element instanceof SimpleCondition) {
+					SimpleCondition w = (SimpleCondition) element;
 					if (connection.getSource().equals(source) &&
 							connection.getTarget().equals(target) && w.getName().equals(name))
 						return connection;	// found it
@@ -684,20 +684,20 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	}
 
 	/**
-	 * Assert that a ConditionEdge exists between two elements in the editor,
+	 * Assert that a {@link SimpleCondition} exists between two elements in the editor,
 	 * with any name.
 	 * 
 	 * TODO refactor these methods
 	 */
-	public ConnectionNodeEditPart assertHasConditionEdge(DiagramDocumentEditor editor, EditPart source, EditPart target) {
+	public ConnectionNodeEditPart assertHasSimpleCondition(DiagramDocumentEditor editor, EditPart source, EditPart target) {
 		String found = "";
 
 		for (Object c : editor.getDiagramEditPart().getConnections()) {
 			if (c instanceof ConnectionNodeEditPart) {
 				ConnectionNodeEditPart connection = (ConnectionNodeEditPart) c;
 				EObject element = connection.resolveSemanticElement();
-				if (element instanceof ConditionEdge) {
-					ConditionEdge w = (ConditionEdge) element;
+				if (element instanceof SimpleCondition) {
+					SimpleCondition w = (SimpleCondition) element;
 					if (connection.getSource().equals(source) &&
 							connection.getTarget().equals(target))
 						return connection;	// found it
@@ -925,19 +925,19 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	}
 
 	/**
-	 * @see #assertHasEventTrigger(DiagramDocumentEditor, String, boolean, boolean)
+	 * @see #assertHasEvent(DiagramDocumentEditor, String, boolean, boolean)
 	 */
-	public ShapeNodeEditPart assertHasEventTrigger(
+	public ShapeNodeEditPart assertHasEvent(
 			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
-		return assertHasRenderedNamedObject(editor, EventTrigger.class, name, true, shortcutRequired);
+		return assertHasRenderedNamedObject(editor, Event.class, name, true, shortcutRequired);
 	}
 
 	/**
-	 * @see #assertHasEventTrigger(DiagramDocumentEditor, String, boolean, boolean)
+	 * @see #assertHasEvent(DiagramDocumentEditor, String, boolean, boolean)
 	 */
-	public ShapeNodeEditPart assertHasEventTrigger(
+	public ShapeNodeEditPart assertHasEvent(
 			DiagramDocumentEditor editor, boolean shortcutRequired, EStructuralFeature containingFeature) {
-		return assertHasRenderedNamedObject(editor, EventTrigger.class, null, true, shortcutRequired, containingFeature);
+		return assertHasRenderedNamedObject(editor, Event.class, null, true, shortcutRequired, containingFeature);
 	}
 
 	/**
@@ -991,9 +991,9 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	/**
 	 * @see #assertHasCondition(DiagramDocumentEditor, String, boolean, boolean)
 	 */
-	public ShapeNodeEditPart assertHasCondition(
+	public ShapeNodeEditPart assertHasFunction(
 			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
-		return assertHasRenderedNamedObject(editor, Condition.class, name, true, shortcutRequired);
+		return assertHasRenderedNamedObject(editor, Function.class, name, true, shortcutRequired);
 	}
 
 	public ShapeNodeEditPart assertHasButton(
@@ -1029,14 +1029,14 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	/**
 	 * @see #assertHasApplicationElementProperty(DiagramDocumentEditor, String, boolean, boolean)
 	 */
-	public ShapeNodeEditPart assertHasProperty(
+	public ShapeNodeEditPart assertHasValue(
 			DiagramDocumentEditor editor, String name, boolean shortcutRequired) {
-		return assertHasRenderedNamedObject(editor, Property.class, name, true, shortcutRequired);
+		return assertHasRenderedNamedObject(editor, Value.class, name, true, shortcutRequired);
 	}
 	
-	public ShapeNodeEditPart assertHasProperty(
+	public ShapeNodeEditPart assertHasValue(
 			DiagramDocumentEditor editor, String name) {
-		return assertHasRenderedNamedObject(editor, Property.class, name, true, false);
+		return assertHasRenderedNamedObject(editor, Value.class, name, true, false);
 	}
 
 	/**
@@ -1056,11 +1056,11 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	}
 
 	/**
-	 * @see #assertHasEventTrigger(DiagramDocumentEditor, String, boolean, boolean)
+	 * @see #assertHasEvent(DiagramDocumentEditor, String, boolean, boolean)
 	 */
 	public ShapeNodeEditPart assertHasEventTrigger(
 			DiagramDocumentEditor editor, String name) {
-		return assertHasEventTrigger(editor, name, false, false);
+		return assertHasEvent(editor, name, false, false);
 	}
 
 	/**
@@ -1105,14 +1105,14 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 
 
 	/**
-	 * Assert that a ParameterEdge exists between two elements in the editor.
+	 * Assert that a {@link Parameter} exists between two elements in the editor.
 	 *
 	 * @param editor
 	 * @param source
 	 * @param target
 	 * @return
 	 */
-	public ConnectionNodeEditPart assertHasParameterEdge(DiagramDocumentEditor editor,
+	public ConnectionNodeEditPart assertHasParameter(DiagramDocumentEditor editor,
 			ShapeNodeEditPart source, ConnectionNodeEditPart target) {
 
 		String found = "";
@@ -1121,8 +1121,8 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 			if (c instanceof ConnectionNodeEditPart) {
 				ConnectionNodeEditPart connection = (ConnectionNodeEditPart) c;
 				EObject element = connection.resolveSemanticElement();
-				if (element instanceof ParameterEdge) {
-					ParameterEdge w = (ParameterEdge) element;
+				if (element instanceof Parameter) {
+					Parameter w = (Parameter) element;
 					if (connection.getSource().equals(source) &&
 							connection.getTarget().equals(target))
 						return connection;	// found it
@@ -1180,7 +1180,7 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 	}
 
 	/**
-	 * The editor should contain an ApplicationElementProperty called
+	 * The editor should contain an {@link Value} called
 	 * 'fieldValue' that is shortcut=requiredShortcut.
 	 *
 	 * @param editor
@@ -1198,8 +1198,8 @@ public abstract class EclipseTestCaseHelper extends EclipseTestCase {
 				ShapeNodeEditPart s = (ShapeNodeEditPart) o;
 				if (!checkShortcut || isShortcut(s) == shortcutRequired) {
 					EObject obj = s.resolveSemanticElement();
-					if (obj instanceof Property) {
-						Property p = (Property) obj;
+					if (obj instanceof Value) {
+						Value p = (Value) obj;
 						if (p.getName().equals("fieldValue")) {
 							assertNotNull(s);
 							return s;

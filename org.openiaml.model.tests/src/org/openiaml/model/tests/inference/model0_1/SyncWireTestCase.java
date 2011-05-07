@@ -6,13 +6,13 @@ package org.openiaml.model.tests.inference.model0_1;
 import java.util.List;
 
 import org.jaxen.JaxenException;
-import org.openiaml.model.model.ActionEdge;
-import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.ECARule;
+import org.openiaml.model.model.Event;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.Property;
+import org.openiaml.model.model.Value;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.ParameterEdge;
+import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.wires.SyncWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
@@ -56,14 +56,14 @@ public class SyncWireTestCase extends InferenceTestCase {
 		InputTextField name1 = (InputTextField) queryOne(root, "//iaml.visual:children[iaml:name='name1']");
 		InputTextField name2 = (InputTextField) queryOne(root, "//iaml.visual:children[iaml:name='name2']");
 
-		EventTrigger name1edit = name1.getOnChange();
-		EventTrigger name2edit = name2.getOnChange();
+		Event name1edit = name1.getOnChange();
+		Event name2edit = name2.getOnChange();
 
 		Operation name1update = assertHasOperation(name1, "update");
 		Operation name2update = assertHasOperation(name2, "update");
 
-		Property name1value = assertHasFieldValue(name1);
-		Property name2value = assertHasFieldValue(name2);
+		Value name1value = assertHasFieldValue(name1);
+		Value name2value = assertHasFieldValue(name2);
 
 		// none of these can ever be null because queryOne() also calls assert(size>1)
 
@@ -73,24 +73,24 @@ public class SyncWireTestCase extends InferenceTestCase {
 		 *  edit ------------> update
 		 *  update <---------- edit
 		 *
-		 * + parameter wires for both
+		 * + ActivityParameter wires for both
 		 */
 		//assertGreaterEq(4, wire.getWires().size());
 
 		// run instance wires
-		ActionEdge name1editRun = null;
-		ActionEdge name2editRun = null;
-		ParameterEdge name1editParam = null;
-		ParameterEdge name2editParam = null;
+		ECARule name1editRun = null;
+		ECARule name2editRun = null;
+		Parameter name1editParam = null;
+		Parameter name2editParam = null;
 		// get RunActions first
-		for (ActionEdge w : wire.getActions()) {
+		for (ECARule w : wire.getActions()) {
 			if (w.getFrom().equals(name1edit) && w.getTo().equals(name2update) )
 				name1editRun = w;
 			if (w.getFrom().equals(name2edit) && w.getTo().equals(name1update) )
 				name2editRun = w;
 		}
 		// then ParameterWires
-		for (ParameterEdge w : wire.getParameterEdges()) {
+		for (Parameter w : wire.getParameterEdges()) {
 			if (w.getFrom().equals(name1value) && w.getTo().equals(name1editRun) )
 				name1editParam = w;
 			if (w.getFrom().equals(name2value) && w.getTo().equals(name2editRun) )

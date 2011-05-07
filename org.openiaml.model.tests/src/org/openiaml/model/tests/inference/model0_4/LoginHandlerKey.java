@@ -6,11 +6,11 @@ package org.openiaml.model.tests.inference.model0_4;
 import java.util.List;
 import java.util.Set;
 
-import org.openiaml.model.model.ActionEdge;
+import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.CompositeOperation;
-import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.Event;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.Property;
+import org.openiaml.model.model.Value;
 import org.openiaml.model.model.Wire;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.components.LoginHandlerTypes;
@@ -48,7 +48,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		Session session = assertHasSession(root, "my session");
 		assertNotGenerated(session);
 
-		Property value = assertHasProperty(session, "login key");
+		Value value = assertHasValue(session, "login key");
 		assertTrue(value.isReadOnly());
 		assertNotGenerated(value);
 
@@ -60,7 +60,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		assertEquals(handler.getType(), LoginHandlerTypes.SECRET_KEY);
 
 		// stored key
-		Property key = assertHasProperty(session, "my login key");
+		Value key = assertHasValue(session, "my login key");
 		assertNotGenerated(key);
 		// the key must have a default
 		assertNotNull(key.getDefaultValue());
@@ -69,14 +69,14 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		// handler logout--> home
 		{
 			assertHasNoWiresFromTo(handler, handler, page);
-			ActionEdge nav = assertHasNavigateAction(handler, handler, page, "logout");
+			ECARule nav = assertHasNavigateAction(handler, handler, page, "logout");
 			assertNotGenerated(nav);
 		}
 
 		// handler login--> viewkey
 		{
 			assertHasNoWiresFromTo(handler, handler, viewkey);
-			ActionEdge nav = assertHasNavigateAction(handler, handler, viewkey, "success");
+			ECARule nav = assertHasNavigateAction(handler, handler, viewkey, "success");
 			assertNotGenerated(nav);
 		}
 
@@ -104,9 +104,9 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		assertNotGenerated(viewkey);
 
 		Operation check = assertHasOperation(session, "check key");
-		EventTrigger access = viewkey.getOnAccess();
+		Event access = viewkey.getOnAccess();
 		{
-			ActionEdge run = assertHasRunAction(session, access, check);
+			ECARule run = assertHasRunAction(session, access, check);
 			assertGenerated(run);
 			assertEquals("run", run.getName());
 		}
@@ -127,9 +127,9 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		assertNotGenerated(page);
 
 		Operation op = assertHasOperation(session, "do logout");
-		EventTrigger access = page.getOnAccess();
+		Event access = page.getOnAccess();
 		{
-			ActionEdge run = assertHasRunAction(session, access, op);
+			ECARule run = assertHasRunAction(session, access, op);
 			assertGenerated(run);
 		}
 
@@ -153,9 +153,9 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		Frame target = assertHasFrame(root, "Home");
 		assertNotGenerated(target);
 
-		EventTrigger access = page.getOnAccess();
+		Event access = page.getOnAccess();
 		{
-			ActionEdge nav = assertHasNavigateAction(session, access, target);
+			ECARule nav = assertHasNavigateAction(session, access, target);
 			assertGenerated(nav);
 		}
 	}
@@ -170,17 +170,17 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 
 		Session session = assertHasSession(root, "my session");
 
-		Property my = assertHasProperty(session, "my login key");
+		Value my = assertHasValue(session, "my login key");
 		assertNotGenerated(my);
 		assertFalse(my.isReadOnly());
-		
+
 		// in r2677, StaticValue was merged into Property[readOnly]
-		Property key = assertHasProperty(session, "login key");
+		Value key = assertHasValue(session, "login key");
 		assertNotGenerated(key);
 		assertTrue(key.isReadOnly());
 
 		// shouldn't be generated
-		assertHasNoProperty(session, "current login key");
+		assertHasNoValue(session, "current login key");
 
 		// there should only be one
 		assertEquals("Properties found: " + session.getProperties().toString(), 2, session.getProperties().size());
@@ -222,16 +222,16 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 
 		// button has an 'onClick' run wire
 		assertHasWiresFromTo(0, root, button, op);
-		ActionEdge run = assertHasRunAction(root, button, op);
+		ECARule run = assertHasRunAction(root, button, op);
 		assertGenerated(run);
 		assertEquals("onClick", run.getName());
 
 		// the text field has a parameter
-		Property prop = assertHasFieldValue(field);
+		Value prop = assertHasFieldValue(field);
 		assertGenerated(prop);
 
 		// connecting to the run wire
-		assertGenerated(getParameterEdgeFromTo(root, prop, run));
+		assertGenerated(getParameterFromTo(root, prop, run));
 
 	}
 
@@ -255,7 +255,7 @@ public class LoginHandlerKey extends ValidInferenceTestCase {
 		// destination page
 		Frame login = assertHasFrame(loginSession, "login");
 		{
-			ActionEdge wire = assertHasNavigateAction(root, check, login, "fail");
+			ECARule wire = assertHasNavigateAction(root, check, login, "fail");
 			assertGenerated(wire);
 		}
 

@@ -4,14 +4,14 @@
 package org.openiaml.model.tests.inference.model0_2;
 
 import org.jaxen.JaxenException;
-import org.openiaml.model.model.ActionEdge;
-import org.openiaml.model.model.Condition;
-import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.ECARule;
+import org.openiaml.model.model.Function;
+import org.openiaml.model.model.Event;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.Property;
+import org.openiaml.model.model.Value;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.ConditionEdge;
+import org.openiaml.model.model.SimpleCondition;
 import org.openiaml.model.model.wires.SyncWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
@@ -39,11 +39,11 @@ public class ConditionWireFalseServer extends InferenceTestCase {
 		InputTextField field2 = assertHasInputTextField(page2, "field");
 		assertNotSame(field1, field2);
 
-		Condition cond = assertHasCondition(root, "Always False");
-		ConditionEdge cw = assertHasConditionEdge(root, cond, wire);
+		Function cond = assertHasFunction(root, "Always False");
+		SimpleCondition cw = assertHasSimpleCondition(root, cond, wire);
 
 		// [already in model]
-		// there should be a condition wire from cond to sync
+		// there should be a Function wire from cond to sync
 		assertEquals(cw.getFrom(), cond);
 		assertEquals(cw.getTo(), wire);
 
@@ -51,51 +51,51 @@ public class ConditionWireFalseServer extends InferenceTestCase {
 		// field1 and field2 should be connected by SyncWires
 		SyncWire sw = assertHasSyncWire(root, field1, field2);
 
-		// we should have EventTrigger 'edit' in source
-		EventTrigger srcEdit = field1.getOnChange();
+		// we should have Event 'edit' in source
+		Event srcEdit = field1.getOnChange();
 		Operation srcOp = assertHasOperation(field1, "update");
-		EventTrigger targetEdit = field2.getOnChange();
+		Event targetEdit = field2.getOnChange();
 		Operation targetOp = assertHasOperation(field2, "update");
 		assertNotSame(srcEdit, targetEdit);
 		assertNotSame(srcOp, targetOp);
 
 		// there should be a run wire between these two
-		ActionEdge srcRw = assertHasRunAction(wire, srcEdit, targetOp, "run");
-		ActionEdge targetRw = assertHasRunAction(wire, targetEdit, srcOp, "run");
+		ECARule srcRw = assertHasRunAction(wire, srcEdit, targetOp, "run");
+		ECARule targetRw = assertHasRunAction(wire, targetEdit, srcOp, "run");
 
 		// [new]
-		// there should be a condition wire to the new SyncWire
-		assertGenerated(assertHasConditionEdge(root, cond, sw));
+		// there should be a Function wire to the new SyncWire
+		assertGenerated(assertHasSimpleCondition(root, cond, sw));
 
 		// there should be additional ConditionWires to these RunActions
-		assertGenerated(assertHasConditionEdge(page1, cond, srcRw));
-		assertGenerated(assertHasConditionEdge(page1, cond, targetRw));
+		assertGenerated(assertHasSimpleCondition(page1, cond, srcRw));
+		assertGenerated(assertHasSimpleCondition(page1, cond, targetRw));
 
 		// there doesn't need to be any parameters to these ConditionWires
 
-		// we should also have condition wires copied to the 'init' operations
-		EventTrigger srcAccess = field1.getOnAccess();
+		// we should also have Function wires copied to the 'init' operations
+		Event srcAccess = field1.getOnAccess();
 		Operation srcInit = assertHasOperation(field1, "init");
-		EventTrigger targetAccess = field2.getOnAccess();
+		Event targetAccess = field2.getOnAccess();
 		Operation targetInit = assertHasOperation(field2, "init");
 		assertNotSame(srcAccess, targetAccess);
 		assertNotSame(srcInit, targetInit);
 
 		// execution wires
-		ActionEdge srcInitRun = assertHasRunAction(wire, srcAccess, srcInit, "run");
-		ActionEdge targetInitRun = assertHasRunAction(wire, targetAccess, targetInit, "run");
+		ECARule srcInitRun = assertHasRunAction(wire, srcAccess, srcInit, "run");
+		ECARule targetInitRun = assertHasRunAction(wire, targetAccess, targetInit, "run");
 
 		// they should have incoming parameters
-		Property field1value = assertHasFieldValue(field1);
-		Property field2value = assertHasFieldValue(field2);
+		Value field1value = assertHasFieldValue(field1);
+		Value field2value = assertHasFieldValue(field2);
 		assertNotSame(field1value, field2value);
 
-		assertHasParameterEdge(root, field2value, srcInitRun);
-		assertHasParameterEdge(root, field1value, targetInitRun);
+		assertHasParameter(root, field2value, srcInitRun);
+		assertHasParameter(root, field1value, targetInitRun);
 
-		// but they should also have condition wires
-		assertHasConditionEdge(page1, cond, srcInitRun);
-		assertHasConditionEdge(page1, cond, targetInitRun);
+		// but they should also have Function wires
+		assertHasSimpleCondition(page1, cond, srcInitRun);
+		assertHasSimpleCondition(page1, cond, targetInitRun);
 
 
 	}

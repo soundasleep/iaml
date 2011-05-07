@@ -4,15 +4,15 @@
 package org.openiaml.model.tests.inference.model0_4_4;
 
 import org.openiaml.model.datatypes.BuiltinDataTypes;
-import org.openiaml.model.model.ActionEdge;
+import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.CompositeOperation;
-import org.openiaml.model.model.Condition;
+import org.openiaml.model.model.Function;
 import org.openiaml.model.model.EXSDDataType;
-import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.Event;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.PrimitiveCondition;
 import org.openiaml.model.model.PrimitiveOperation;
-import org.openiaml.model.model.Property;
+import org.openiaml.model.model.Value;
 import org.openiaml.model.model.operations.CastNode;
 import org.openiaml.model.model.operations.DecisionNode;
 import org.openiaml.model.model.operations.ExecutionEdgesSource;
@@ -22,7 +22,7 @@ import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Label;
-import org.openiaml.model.model.wires.ConditionEdge;
+import org.openiaml.model.model.SimpleCondition;
 import org.openiaml.model.tests.inference.ValidInferenceTestCase;
 
 /**
@@ -206,7 +206,7 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 		InputTextField integer = assertHasInputTextField(home, "Integer");
 		CompositeOperation validate = assertHasCompositeOperation(integer, "validate");
 
-		EventTrigger onEdit = integer.getOnChange();
+		Event onEdit = integer.getOnChange();
 		assertGenerated(assertHasRunAction(root, onEdit, validate));
 	}
 
@@ -220,7 +220,7 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 
 		// source
 		InputTextField integer = assertHasInputTextField(home, "Integer");
-		Property fieldValue = assertHasFieldValue(integer);
+		Value fieldValue = assertHasFieldValue(integer);
 		CompositeOperation validate = assertHasCompositeOperation(integer, "validate");
 
 		Label annotation = assertHasLabel(integer, "Warning");
@@ -230,7 +230,7 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 
 		// target
 		InputTextField email2 = assertHasInputTextField(home, "Email 2");
-		Property fieldValue2 = assertHasFieldValue(email2);
+		Value fieldValue2 = assertHasFieldValue(email2);
 
 		// now we can check the contents
 		StartNode start = assertHasStartNode(validate);
@@ -249,14 +249,14 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 
 		// 'n' first sets the value of the label
 		OperationCallNode callUpdate = assertHasOperationCallNode(validate, "update label");
-		ActionEdge runUpdate = assertHasRunAction(validate, callUpdate, update);
+		ECARule runUpdate = assertHasRunAction(validate, callUpdate, update);
 		assertHasExecutionEdge(validate, check, callUpdate, "no");
 
 		// with a parmameter of the exception
-		Property warning = assertHasProperty(validate, "failure message");
+		Value warning = assertHasValue(validate, "failure message");
 		assertTrue(warning.isReadOnly());
 		assertEquals("Warning: Invalid input.", warning.getDefaultValue());
-		assertHasParameterEdge(validate, warning, runUpdate);
+		assertHasParameter(validate, warning, runUpdate);
 
 		// and then 'n' calls 'show'
 		OperationCallNode callShow = assertHasOperationCallNode(validate, "call show");
@@ -285,7 +285,7 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 	}
 
 	/**
-	 * All text fields should have a 'can cast?' condition created.
+	 * All text fields should have a 'can cast?' Function created.
 	 *
 	 * @throws Exception
 	 */
@@ -326,22 +326,22 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 		Frame home = assertHasFrame(root, "Home");
 
 		InputTextField email = assertHasInputTextField(home, "Email 2");
-		Property emailValue = assertHasFieldValue(email);
+		Value emailValue = assertHasFieldValue(email);
 		InputTextField integer = assertHasInputTextField(home, "Integer");
 
 		PrimitiveCondition canCast = assertHasPrimitiveCondition(integer, "can cast?");
 
-		EventTrigger onEdit = email.getOnChange();
+		Event onEdit = email.getOnChange();
 		Operation update = assertHasOperation(integer, "update");
 
-		ActionEdge run = assertHasRunAction(root, onEdit, update);
+		ECARule run = assertHasRunAction(root, onEdit, update);
 		assertGenerated(run);
 
-		// should be an incoming condition edge
-		ConditionEdge edge = assertHasConditionEdge(root, canCast, run);
+		// should be an incoming Function edge
+		SimpleCondition edge = assertHasSimpleCondition(root, canCast, run);
 
-		// and the edge should have the current Email.property as a parameter
-		assertHasParameterEdge(root, emailValue, edge);
+		// and the edge should have the current Email.Value as a parameter
+		assertHasParameter(root, emailValue, edge);
 
 	}
 
@@ -356,22 +356,22 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 		Frame home = assertHasFrame(root, "Home");
 
 		InputTextField integer = assertHasInputTextField(home, "Integer");
-		Property intValue = assertHasFieldValue(integer);
+		Value intValue = assertHasFieldValue(integer);
 		InputTextField email = assertHasInputTextField(home, "Email 2");
 
 		PrimitiveCondition canCast = assertHasPrimitiveCondition(email, "can cast?");
 
-		EventTrigger onEdit = integer.getOnChange();
+		Event onEdit = integer.getOnChange();
 		Operation update = assertHasOperation(email, "update");
 
-		ActionEdge run = assertHasRunAction(root, onEdit, update);
+		ECARule run = assertHasRunAction(root, onEdit, update);
 		assertGenerated(run);
 
-		// should be an incoming condition edge
-		ConditionEdge edge = assertHasConditionEdge(root, canCast, run);
+		// should be an incoming Function edge
+		SimpleCondition edge = assertHasSimpleCondition(root, canCast, run);
 
-		// and the edge should have the current Email.property as a parameter
-		assertHasParameterEdge(root, intValue, edge);
+		// and the edge should have the current Email.Value as a parameter
+		assertHasParameter(root, intValue, edge);
 
 	}
 
@@ -389,19 +389,19 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 		InputTextField integer = assertHasInputTextField(home, "Integer");
 		InputTextField email = assertHasInputTextField(home, "Email 2");
 
-		EventTrigger onAccess = integer.getOnAccess();
+		Event onAccess = integer.getOnAccess();
 		Operation init = assertHasOperation(integer, "init");
-		Property emailValue = assertHasFieldValue(email);
+		Value emailValue = assertHasFieldValue(email);
 
 		// Integer.onInit should call Integer.update(Email.fieldValue)
-		ActionEdge run = assertHasRunAction(root, onAccess, init);
-		assertHasParameterEdge(root, emailValue, run);
+		ECARule run = assertHasRunAction(root, onAccess, init);
+		assertHasParameter(root, emailValue, run);
 
-		// now make sure that the condition is connected
+		// now make sure that the Function is connected
 		PrimitiveCondition canCast = assertHasPrimitiveCondition(integer, "can cast?");
 
-		ConditionEdge edge = assertHasConditionEdge(root, canCast, run);
-		assertHasParameterEdge(root, emailValue, edge);
+		SimpleCondition edge = assertHasSimpleCondition(root, canCast, run);
+		assertHasParameter(root, emailValue, edge);
 
 	}
 
@@ -418,15 +418,15 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 
 		InputTextField integer = assertHasInputTextField(home, "Integer");
 
-		EventTrigger onAccess = integer.getOnAccess();
+		Event onAccess = integer.getOnAccess();
 		Operation init = assertHasOperation(integer, "init");
 
 		// Integer.onInit should call Integer.update(Email.fieldValue)
-		ActionEdge runInit = assertHasRunAction(root, onAccess, init);
+		ECARule runInit = assertHasRunAction(root, onAccess, init);
 
 		// validate operation is also called
 		CompositeOperation validate = assertHasCompositeOperation(integer, "validate");
-		ActionEdge runValidate = assertHasRunAction(root, onAccess, validate);
+		ECARule runValidate = assertHasRunAction(root, onAccess, validate);
 
 		// it should be a lower priority
 		assertTrue("Run priority '" + runValidate.getPriority() + "' should be lower than '" + runInit.getPriority() + "'",
@@ -446,15 +446,15 @@ public class InputTextFieldDataTypeSync extends ValidInferenceTestCase {
 		Frame home = assertHasFrame(root, "Home");
 
 		InputTextField integer = assertHasInputTextField(home, "Integer");
-		EventTrigger onAccess = integer.getOnAccess();
+		Event onAccess = integer.getOnAccess();
 
 		// validate operation is also called
 		CompositeOperation validate = assertHasCompositeOperation(integer, "validate");
-		ActionEdge runValidate = assertHasRunAction(root, onAccess, validate);
+		ECARule runValidate = assertHasRunAction(root, onAccess, validate);
 
 		// the 'fieldValue is set' condition
-		Condition isSet = assertHasCondition(integer, "fieldValue is set");
-		assertHasConditionEdge(root, isSet, runValidate);
+		Function isSet = assertHasFunction(integer, "fieldValue is set");
+		assertHasSimpleCondition(root, isSet, runValidate);
 
 	}
 

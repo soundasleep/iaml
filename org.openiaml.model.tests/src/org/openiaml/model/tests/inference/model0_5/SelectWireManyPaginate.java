@@ -3,14 +3,14 @@
  */
 package org.openiaml.model.tests.inference.model0_5;
 
-import org.openiaml.model.model.ActionEdge;
+import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
-import org.openiaml.model.model.Condition;
-import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.Function;
+import org.openiaml.model.model.Event;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.PrimitiveOperation;
-import org.openiaml.model.model.Property;
+import org.openiaml.model.model.Value;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
 import org.openiaml.model.model.domain.DomainInstance;
 import org.openiaml.model.model.domain.DomainIterator;
@@ -25,7 +25,7 @@ import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.Label;
-import org.openiaml.model.model.wires.ParameterEdge;
+import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
@@ -141,17 +141,17 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		DomainIterator instance = assertHasDomainIterator(home, "view news");
 
 		Operation inext = instance.getNext();
-		Condition hasNext = instance.getHasNext();
+		Function hasNext = instance.getHasNext();
 
 		Button next = assertHasButton(form, "Next");
 
-		EventTrigger onClick = next.getOnClick();
+		Event onClick = next.getOnClick();
 		assertGenerated(onClick);
 
-		ActionEdge run = assertHasRunAction(root, onClick, inext);
+		ECARule run = assertHasRunAction(root, onClick, inext);
 		assertGenerated(run);
 
-		assertGenerated(assertHasConditionEdge(root, hasNext, run));
+		assertGenerated(assertHasSimpleCondition(root, hasNext, run));
 
 	}
 
@@ -166,17 +166,17 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 
 		DomainIterator instance = assertHasDomainIterator(home, "view news");
 		Operation iprevious = instance.getPrevious();
-		Condition hasPrevious = instance.getHasPrevious();
+		Function hasPrevious = instance.getHasPrevious();
 
 		Button previous = assertHasButton(form, "Previous");
 
-		EventTrigger onClick = previous.getOnClick();
+		Event onClick = previous.getOnClick();
 		assertGenerated(onClick);
 
-		ActionEdge run = assertHasRunAction(root, onClick, iprevious);
+		ECARule run = assertHasRunAction(root, onClick, iprevious);
 		assertGenerated(run);
 
-		assertGenerated(assertHasConditionEdge(root, hasPrevious, run));
+		assertGenerated(assertHasSimpleCondition(root, hasPrevious, run));
 
 	}
 
@@ -192,19 +192,19 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		DomainIterator instance = assertHasDomainIterator(home, "view news");
 		Operation ireset = instance.getReset();
 
-		// we need to reverse 'empty' into condition 'not empty'
+		// we need to reverse 'empty' into Function 'not empty'
 		CompositeCondition notEmpty = assertHasCompositeCondition(instance, "not empty");
 		assertGenerated(notEmpty);
 
 		Button first = assertHasButton(form, "First");
 
-		EventTrigger onClick = first.getOnClick();
+		Event onClick = first.getOnClick();
 		assertGenerated(onClick);
 
-		ActionEdge run = assertHasRunAction(root, onClick, ireset);
+		ECARule run = assertHasRunAction(root, onClick, ireset);
 		assertGenerated(run);
 
-		assertGenerated(assertHasConditionEdge(root, notEmpty, run));
+		assertGenerated(assertHasSimpleCondition(root, notEmpty, run));
 
 	}
 
@@ -220,33 +220,33 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		DomainIterator instance = assertHasDomainIterator(home, "view news");
 		Operation ijump = instance.getJump();
 
-		// we need to reverse 'empty' into condition 'not empty'
+		// we need to reverse 'empty' into Function 'not empty'
 		CompositeCondition notEmpty = assertHasCompositeCondition(instance, "not empty");
 		assertGenerated(notEmpty);
 
 		// we need to convert 'results' into a jump target (results-1)
 		Button last = assertHasButton(form, "Last");
 
-		EventTrigger onClick = last.getOnClick();
+		Event onClick = last.getOnClick();
 		assertGenerated(onClick);
 
-		ActionEdge run = assertHasRunAction(root, onClick, ijump);
+		ECARule run = assertHasRunAction(root, onClick, ijump);
 		assertGenerated(run);
 
-		assertGenerated(assertHasConditionEdge(root, notEmpty, run));
+		assertGenerated(assertHasSimpleCondition(root, notEmpty, run));
 
 		// has a parameter: the position to jump to
-		Property target = assertHasProperty(last, "target");
+		Value target = assertHasValue(last, "target");
 		assertGenerated(target);
 
-		ParameterEdge param = assertHasParameterEdge(root, target, run);
+		Parameter param = assertHasParameter(root, target, run);
 		assertGenerated(param);
 
 	}
 
 	/**
 	 * When the 'Last' button is pressed, it must first update the
-	 * target property 'target'.
+	 * target Value 'target'.
 	 *
 	 * @throws Exception
 	 */
@@ -256,22 +256,22 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		DomainIterator instance = assertHasDomainIterator(home, "view news");
 		Operation ijump = instance.getJump();
 
-		// we need to reverse 'empty' into condition 'not empty'
+		// we need to reverse 'empty' into Function 'not empty'
 		CompositeCondition notEmpty = assertHasCompositeCondition(instance, "not empty");
 		assertGenerated(notEmpty);
 
 		// we need to convert 'results' into a jump target (results-1)
 		Button last = assertHasButton(form, "Last");
 
-		EventTrigger onClick = last.getOnClick();
+		Event onClick = last.getOnClick();
 
 		CompositeOperation op = assertHasCompositeOperation(last, "update target");
 		assertGenerated(op);
 
-		ActionEdge update = assertHasRunAction(root, onClick, op);
+		ECARule update = assertHasRunAction(root, onClick, op);
 
 		// it must have a higher priority than the action to the instance
-		ActionEdge run = assertHasRunAction(root, onClick, ijump);
+		ECARule run = assertHasRunAction(root, onClick, ijump);
 		assertGreater(run.getPriority(), update.getPriority());
 
 	}
@@ -284,11 +284,11 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		Frame home = assertHasFrame(root, "Home");
 		InputForm form = assertHasInputForm(home, "view news");
 		DomainIterator instance = assertHasDomainIterator(home, "view news");
-		Property results = instance.getResults();
+		Value results = instance.getResults();
 
 		Button last = assertHasButton(form, "Last");
 		CompositeOperation op = assertHasCompositeOperation(last, "update target");
-		Property target = assertHasProperty(last, "target");
+		Value target = assertHasValue(last, "target");
 
 		StartNode start = assertHasStartNode(op);
 		FinishNode finish = assertHasFinishNode(op);
@@ -299,7 +299,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		assertGenerated(assertHasExecutionEdge(op, set, finish));
 
 		Arithmetic arith = assertHasArithmetic(op);
-		Property one = assertHasProperty(op, "one");
+		Value one = assertHasValue(op, "one");
 		assertTrue(one.isReadOnly());
 		assertGenerated(assertHasDataFlowEdge(op, one, arith));
 		assertEquals(arith.getOperationType(), ArithmeticOperationTypes.SUBTRACT);
@@ -319,9 +319,9 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 	public void testContentsOfNotEmpty() throws Exception {
 		Frame home = assertHasFrame(root, "Home");
 		DomainIterator instance = assertHasDomainIterator(home, "view news");
-		Condition empty = instance.getEmpty();
+		Function empty = instance.getEmpty();
 
-		// we need to reverse 'empty' into condition 'not empty'
+		// we need to reverse 'empty' into Function 'not empty'
 		CompositeCondition notEmpty = assertHasCompositeCondition(instance, "not empty");
 
 		StartNode start = assertHasStartNode(notEmpty);
@@ -330,7 +330,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 
 		DecisionNode decision = assertHasDecisionNode(notEmpty, "true?");
 
-		assertGenerated(assertHasConditionEdge(root, empty, decision));
+		assertGenerated(assertHasSimpleCondition(root, empty, decision));
 
 		assertHasExecutionEdge(notEmpty, start, decision);
 
@@ -343,7 +343,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 	}
 
 	/**
-	 * The 'results' property should be Set to the 'Results'
+	 * The 'results' Value should be Set to the 'Results'
 	 * label.
 	 *
 	 * @throws Exception
@@ -352,17 +352,17 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		Frame home = assertHasFrame(root, "Home");
 		InputForm form = assertHasInputForm(home, "view news");
 		DomainIterator instance = assertHasDomainIterator(home, "view news");
-		Property results = instance.getResults();
+		Value results = instance.getResults();
 		Label labelResults = assertHasLabel(form, "Results");
 
 		// onChange updates the Label
-		EventTrigger onChange = instance.getOnChange();
+		Event onChange = instance.getOnChange();
 		Operation update = assertHasOperation(labelResults, "update");
 
-		ActionEdge run = assertHasRunAction(root, onChange, update);
+		ECARule run = assertHasRunAction(root, onChange, update);
 
 		// with the given parameter
-		assertGenerated(assertHasParameterEdge(root, results, run));
+		assertGenerated(assertHasParameter(root, results, run));
 
 	}
 
@@ -377,7 +377,7 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		DomainIterator iterator = assertHasDomainIterator(home, "view news");
 		DomainInstance instance = iterator.getCurrentInstance();
 		assertGenerated(instance);
-		
+
 		DomainAttributeInstance a1 = assertHasDomainAttributeInstance(instance, "title");
 		assertGenerated(a1);
 
@@ -387,19 +387,19 @@ public class SelectWireManyPaginate extends InferenceTestCase {
 		// connected by SetWire
 		assertGenerated(assertHasSetWire(root, a1, t1));
 
-		EventTrigger onChange = a1.getOnChange();
+		Event onChange = a1.getOnChange();
 		assertGenerated(onChange);
 
 		Operation update = assertHasOperation(t1, "update");
 		assertGenerated(update);
 
-		ActionEdge run = assertHasRunAction(root, onChange, update);
+		ECARule run = assertHasRunAction(root, onChange, update);
 		assertGenerated(run);
 
-		Property a1value = assertHasFieldValue(a1);
+		Value a1value = assertHasFieldValue(a1);
 		assertGenerated(a1value);
 
-		assertGenerated(assertHasParameterEdge(root, a1value, run));
+		assertGenerated(assertHasParameter(root, a1value, run));
 
 	}
 

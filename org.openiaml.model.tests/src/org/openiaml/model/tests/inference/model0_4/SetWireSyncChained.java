@@ -3,11 +3,11 @@
  */
 package org.openiaml.model.tests.inference.model0_4;
 
-import org.openiaml.model.model.ActionEdge;
-import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.ECARule;
+import org.openiaml.model.model.Event;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.PrimitiveCondition;
-import org.openiaml.model.model.Property;
+import org.openiaml.model.model.Value;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ParameterEdgesSource;
@@ -64,16 +64,16 @@ public class SetWireSyncChained extends InferenceTestCase {
 		final InputTextField source = assertHasInputTextField(home, "source");
 		InputTextField target = assertHasInputTextField(page2, "target");
 
-		EventTrigger onAccess = target.getOnAccess();
+		Event onAccess = target.getOnAccess();
 		assertNotNull(onAccess);
 		assertGenerated(onAccess);
 
 		Operation init = assertHasOperation(target, "init");
 		assertGenerated(init);
 
-		ActionEdge run = assertHasRunAction(root, onAccess, init, new Filter<ActionEdge>() {
+		ECARule run = assertHasRunAction(root, onAccess, init, new Filter<ECARule>() {
 			@Override
-			public boolean accept(ActionEdge r) {
+			public boolean accept(ECARule r) {
 				if (r.getInParameterEdges().size() != 1)
 					return false;
 				ParameterEdgesSource paramSource = r.getInParameterEdges().get(0).getFrom();
@@ -84,18 +84,18 @@ public class SetWireSyncChained extends InferenceTestCase {
 		});
 		assertGenerated(run);
 
-		Property sourceValue = assertHasFieldValue(source);
+		Value sourceValue = assertHasFieldValue(source);
 		assertGenerated(sourceValue);
 
 		// parameter
-		assertGenerated(assertHasParameterEdge(root, sourceValue, run));
+		assertGenerated(assertHasParameter(root, sourceValue, run));
 		// but there should only be one
 		assertEquals(run.getInParameterEdges().toString(), 1, run.getInParameterEdges().size());
 
 		PrimitiveCondition cond = assertHasPrimitiveCondition(source, "fieldValue is set");
 		assertGenerated(cond);
 
-		assertGenerated(assertHasConditionEdge(root, cond, run));
+		assertGenerated(assertHasSimpleCondition(root, cond, run));
 
 	}
 
@@ -112,16 +112,16 @@ public class SetWireSyncChained extends InferenceTestCase {
 		InputTextField target = assertHasInputTextField(page2, "target");
 		final InputTextField changed = assertHasInputTextField(page3, "changed");
 
-		EventTrigger onAccess = target.getOnAccess();
+		Event onAccess = target.getOnAccess();
 		assertNotNull(onAccess);
 		assertGenerated(onAccess);
 
 		Operation init = assertHasOperation(target, "init");
 		assertGenerated(init);
 
-		ActionEdge run = assertHasRunAction(root, onAccess, init, new Filter<ActionEdge>() {
+		ECARule run = assertHasRunAction(root, onAccess, init, new Filter<ECARule>() {
 			@Override
-			public boolean accept(ActionEdge r) {
+			public boolean accept(ECARule r) {
 				if (r.getInParameterEdges().size() != 1)
 					return false;
 				ParameterEdgesSource paramSource = r.getInParameterEdges().get(0).getFrom();
@@ -132,18 +132,18 @@ public class SetWireSyncChained extends InferenceTestCase {
 		});
 		assertGenerated(run);
 
-		Property sourceValue = assertHasFieldValue(changed);
+		Value sourceValue = assertHasFieldValue(changed);
 		assertGenerated(sourceValue);
 
 		// parameter
-		assertGenerated(assertHasParameterEdge(root, sourceValue, run));
+		assertGenerated(assertHasParameter(root, sourceValue, run));
 		// but there should only be one
 		assertEquals(run.getInParameterEdges().toString(), 1, run.getInParameterEdges().size());
 
 		PrimitiveCondition cond = assertHasPrimitiveCondition(changed, "fieldValue is set");
 		assertGenerated(cond);
 
-		assertGenerated(assertHasConditionEdge(root, cond, run));
+		assertGenerated(assertHasSimpleCondition(root, cond, run));
 
 	}
 
@@ -158,12 +158,12 @@ public class SetWireSyncChained extends InferenceTestCase {
 		Frame home = assertHasFrame(root, "Home");
 		InputTextField source = assertHasInputTextField(home, "source");
 
-		EventTrigger onAccess = source.getOnAccess();
+		Event onAccess = source.getOnAccess();
 		assertNotNull(onAccess);
 		assertGenerated(onAccess);
 
 		// onAccess should do nothing!
-		assertNoActionsFrom(root, onAccess, ActionEdge.class);
+		assertNoECARulesFrom(root, onAccess, ECARule.class);
 
 	}
 

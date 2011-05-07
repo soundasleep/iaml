@@ -3,8 +3,8 @@
  */
 package org.openiaml.model.tests.inference.model0_5;
 
-import org.openiaml.model.model.ActionEdge;
-import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.ECARule;
+import org.openiaml.model.model.Event;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
 import org.openiaml.model.model.domain.DomainInstance;
@@ -104,15 +104,15 @@ public class IteratedSyncWires extends InferenceTestCase {
 		DomainIterator iterator = assertHasDomainIterator(home, "iterable");
 		DomainInstance instance = iterator.getCurrentInstance();
 		assertGenerated(instance);
-		
+
 		InputForm form = assertHasInputForm(home, "View News");
 		InputTextField t1 = assertHasInputTextField(form, "title");
 		DomainAttributeInstance a1 = assertHasDomainAttributeInstance(instance, "title");
 
-		EventTrigger edit = t1.getOnChange();
+		Event edit = t1.getOnChange();
 		Operation update = assertHasOperation(a1, "update");
 
-		ActionEdge run = assertHasRunAction(root, edit, update);
+		ECARule run = assertHasRunAction(root, edit, update);
 		System.out.println(run);
 
 		assertGenerated(run);
@@ -128,15 +128,15 @@ public class IteratedSyncWires extends InferenceTestCase {
 		DomainIterator iterator = assertHasDomainIterator(home, "iterable");
 		DomainInstance instance = iterator.getCurrentInstance();
 		assertGenerated(instance);
-		
+
 		InputForm form = assertHasInputForm(home, "View News");
 		InputTextField t1 = assertHasInputTextField(form, "title");
 		DomainAttributeInstance a1 = assertHasDomainAttributeInstance(instance, "title");
 
-		EventTrigger edit = a1.getOnChange();
+		Event edit = a1.getOnChange();
 		Operation update = assertHasOperation(t1, "update");
 
-		ActionEdge run = assertHasRunAction(root, edit, update);
+		ECARule run = assertHasRunAction(root, edit, update);
 
 		assertGenerated(run);
 

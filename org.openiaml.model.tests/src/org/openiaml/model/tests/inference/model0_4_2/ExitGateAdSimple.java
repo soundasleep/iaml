@@ -3,12 +3,12 @@
  */
 package org.openiaml.model.tests.inference.model0_4_2;
 
-import org.openiaml.model.model.ActionEdge;
+import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.CompositeCondition;
 import org.openiaml.model.model.CompositeOperation;
-import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.Event;
 import org.openiaml.model.model.PrimitiveOperation;
-import org.openiaml.model.model.Property;
+import org.openiaml.model.model.Value;
 import org.openiaml.model.model.components.Gate;
 import org.openiaml.model.model.operations.CancelNode;
 import org.openiaml.model.model.operations.DecisionNode;
@@ -17,7 +17,7 @@ import org.openiaml.model.model.operations.StartNode;
 import org.openiaml.model.model.scopes.Session;
 import org.openiaml.model.model.visual.Button;
 import org.openiaml.model.model.visual.Frame;
-import org.openiaml.model.model.wires.ConditionEdge;
+import org.openiaml.model.model.SimpleCondition;
 import org.openiaml.model.tests.inference.ValidInferenceTestCase;
 
 /**
@@ -62,7 +62,7 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 		assertEquals("View Ads Exit Gate", gate.getName());
 		assertNotGenerated(gate);
 
-		ActionEdge nav = assertHasNavigateAction(session, gate, ad, "last");
+		ECARule nav = assertHasNavigateAction(session, gate, ad, "last");
 		assertNotGenerated(nav);
 
 	}
@@ -84,16 +84,16 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 		Button button = assertHasButton(ad, "Continue");
 		assertGenerated(button);
 
-		EventTrigger event = button.getOnClick();
+		Event event = button.getOnClick();
 		assertGenerated(event);
 
-		ActionEdge nav = assertHasNavigateAction(root, event, gate, "resume");
+		ECARule nav = assertHasNavigateAction(root, event, gate, "resume");
 		assertGenerated(nav);
 
 	}
 
 	/**
-	 * A property is generated which will store the
+	 * A Value is generated which will store the
 	 * value of the visited.
 	 *
 	 * @throws Exception
@@ -105,12 +105,12 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 		Frame ad = assertHasFrame(session, "Advertisement");
 
 		// generated property
-		Property property = assertHasProperty(session, "View Ads Exit Gate flag");
+		Value property = assertHasValue(session, "View Ads Exit Gate flag");
 		assertGenerated(property);
 		assertEquals(property.getDefaultValue(), "false");
 
 		// required page
-		EventTrigger access = ad.getOnAccess();
+		Event access = ad.getOnAccess();
 		assertGenerated(access);
 
 		// set operation
@@ -118,7 +118,7 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 		assertGenerated(set);
 
 		// run wire
-		ActionEdge run = assertHasRunAction(ad, access, set);
+		ECARule run = assertHasRunAction(ad, access, set);
 		assertGenerated(run);
 
 	}
@@ -133,7 +133,7 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 		Frame ad = assertHasFrame(session, "Advertisement");
 
 		// generated property
-		Property property = assertHasProperty(session, "View Ads Exit Gate flag");
+		Value property = assertHasValue(session, "View Ads Exit Gate flag");
 
 		// set operation
 		CompositeOperation set = assertHasCompositeOperation(ad, "Set gate flag");
@@ -145,7 +145,7 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 		assertGenerated(finish);
 		PrimitiveOperation s = assertHasPrimitiveOperation(set, "set");
 		assertGenerated(s);
-		Property value = assertHasProperty(set, "true");
+		Value value = assertHasValue(set, "true");
 		assertTrue(value.isReadOnly());
 		assertGenerated(value);
 		assertEquals("true", value.getDefaultValue());
@@ -159,7 +159,7 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 	}
 
 	/**
-	 * A condition will be created in the Session to check the
+	 * A Function will be created in the Session to check the
 	 * given property.
 	 */
 	public void testConditionWire() throws Exception {
@@ -173,7 +173,7 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 		CompositeCondition condition = assertHasCompositeCondition(session, "check View Ads Exit Gate");
 		assertGenerated(condition);
 
-		ConditionEdge wire = assertHasConditionEdge(session, condition, gate, "condition");
+		SimpleCondition wire = assertHasSimpleCondition(session, condition, gate, "condition");
 		assertGenerated(wire);
 
 	}
@@ -187,7 +187,7 @@ public class ExitGateAdSimple extends ValidInferenceTestCase {
 		Session session = assertHasSession(root, "Advertising Session");
 
 		// generated property
-		Property property = assertHasProperty(session, "View Ads Exit Gate flag");
+		Value property = assertHasValue(session, "View Ads Exit Gate flag");
 
 		// generated condition
 		CompositeCondition condition = assertHasCompositeCondition(session, "check View Ads Exit Gate");

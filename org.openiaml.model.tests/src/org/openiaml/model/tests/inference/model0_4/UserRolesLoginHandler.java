@@ -5,7 +5,7 @@ package org.openiaml.model.tests.inference.model0_4;
 
 import java.util.List;
 
-import org.openiaml.model.model.Property;
+import org.openiaml.model.model.Value;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.domain.DomainAttribute;
 import org.openiaml.model.model.domain.DomainAttributeInstance;
@@ -16,7 +16,7 @@ import org.openiaml.model.model.users.Role;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
-import org.openiaml.model.model.wires.ParameterEdge;
+import org.openiaml.model.model.Parameter;
 import org.openiaml.model.tests.inference.ValidInferenceTestCase;
 
 /**
@@ -31,7 +31,7 @@ public class UserRolesLoginHandler extends ValidInferenceTestCase {
 	public Class<? extends ValidInferenceTestCase> getInferenceClass() {
 		return UserRolesLoginHandler.class;
 	}
-	
+
 	/**
 	 * Test the initial model.
 	 *
@@ -44,94 +44,94 @@ public class UserRolesLoginHandler extends ValidInferenceTestCase {
 		assertNotGenerated(session);
 		LoginHandler handler = assertHasLoginHandler(session, "user login handler");
 		assertNotGenerated(handler);
-		
+
 		// no user instances
 		assertHasNone(session, "iaml:children[iaml:name='current instance']");
-		
+
 	}
-	
+
 	/**
 	 * There should only be one select wire created.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void testSelectWires() throws Exception {
 		root = loadAndInfer(UserRolesLoginHandler.class);
 
 		Session session = assertHasSession(root, "my session");
-		
+
 		// generated
 		DomainIterator ui = assertHasDomainIterator(session, "current instance");
 		assertGenerated(ui);
 
 	}
-	
+
 	/**
 	 * The "generated primary key" of the Registered User/User should
-	 * not be a parameter in the input form.
-	 * 
+	 * not be a ActivityParameter in the input form.
+	 *
 	 * @throws Exception
 	 */
 	public void testPrimaryKeyNotInputField() throws Exception {
 		root = loadAndInfer(UserRolesLoginHandler.class);
-		
+
 		Session loginSession = assertHasSession(root, "user login handler login");
 		Frame login = assertHasFrame(loginSession, "login");
 		InputForm form = assertHasInputForm(login, "login form");
-		
+
 		InputTextField email = assertHasInputTextField(form, "email");
 		assertGenerated(email);
 		InputTextField password = assertHasInputTextField(form, "password");
 		assertGenerated(password);
 		assertHasNoInputTextField(form, "generated primary key");
 		assertHasNoInputTextField(form, "User.generated primary key");
-		
+
 	}
-	
+
 	/**
 	 * There should only be 'current password' and 'current email'
 	 * stored in the session.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void testStoredSessionProperties() throws Exception {
 		root = loadAndInfer(UserRolesLoginHandler.class);
-		
+
 		Session session = assertHasSession(root, "my session");
-		
-		assertGenerated(assertHasProperty(session, "current email"));
-		assertGenerated(assertHasProperty(session, "current password"));
-		assertHasNoProperty(session, "current generated primary key");
-		assertHasNoProperty(session, "current User.generated primary key");
-		assertHasNoProperty(session, "current generated_primary_key");
-		assertHasNoProperty(session, "current User.generated_primary_key");
-		assertHasNoProperty(session, "current User_generated_primary_key");
-		
+
+		assertGenerated(assertHasValue(session, "current email"));
+		assertGenerated(assertHasValue(session, "current password"));
+		assertHasNoValue(session, "current generated primary key");
+		assertHasNoValue(session, "current User.generated primary key");
+		assertHasNoValue(session, "current generated_primary_key");
+		assertHasNoValue(session, "current User.generated_primary_key");
+		assertHasNoValue(session, "current User_generated_primary_key");
+
 	}
-	
+
 	/**
 	 * The DomainIterator should contain DomainAttributeInstances.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void testDomainIteratorHasAttributes() throws Exception {
 
 		root = loadAndInfer(UserRolesLoginHandler.class);
-		
+
 		Session session = assertHasSession(root, "my session");
 		DomainIterator user = assertHasDomainIterator(session, "current instance");
 		DomainInstance instance = user.getCurrentInstance();
 		assertGenerated(instance);
-		
+
 		Role defaultRole = assertHasRole(root, "User");
 		assertGenerated(defaultRole);
-		
+
 		Role registeredUser = assertHasRole(root, "Registered User");
 		assertNotGenerated(registeredUser);
-		
+
 		// registered user is extended from default role
 		assertGenerated(assertHasExtendsEdge(root, registeredUser, defaultRole));
-		
+
 		{
 			DomainAttributeInstance dai = assertHasDomainAttributeInstance(instance, "email");
 			assertGenerated(dai);
@@ -143,7 +143,7 @@ public class UserRolesLoginHandler extends ValidInferenceTestCase {
 			assertGenerated(assertHasExtendsEdge(root, attr, actual));
 			assertGenerated(assertHasExtendsEdge(root, dai, attr));
 		}
-		
+
 		{
 			DomainAttributeInstance dai = assertHasDomainAttributeInstance(instance, "password");
 			assertGenerated(dai);
@@ -155,41 +155,41 @@ public class UserRolesLoginHandler extends ValidInferenceTestCase {
 			assertGenerated(assertHasExtendsEdge(root, attr, actual));
 			assertGenerated(assertHasExtendsEdge(root, dai, attr));
 		}
-		
+
 	}
-		
+
 	/**
 	 * The UserInstance select query should not contain anything
 	 * about generated primary keys.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void testUserInstanceSelectWire() throws Exception {
 		root = loadAndInfer(UserRolesLoginHandler.class);
-		
+
 		Session session = assertHasSession(root, "my session");
 		DomainIterator user = assertHasDomainIterator(session, "current instance");
-		
+
 		assertEqualsOneOf(new String[] {
 				"password = :password and email = :email",
 				"email = :email and password = :password"
 			}, user.getQuery());
-		
-		// there should only be two incoming parameter wires
-		List<ParameterEdge> params = user.getInParameterEdges();
+
+		// there should only be two incoming ActivityParameter wires
+		List<Parameter> params = user.getInParameterEdges();
 		assertEquals(params.toString(), 2, params.size());
-		
+
 		// one from password
-		Property password = assertHasProperty(session, "current password");
+		Value password = assertHasValue(session, "current password");
 		assertGenerated(password);
-		ParameterEdge pw = getParameterEdgeFromTo(session, password, user);
+		Parameter pw = getParameterFromTo(session, password, user);
 		assertGenerated(pw);
 		assertEquals("password", pw.getName());
 
 		// one from email
-		Property email = assertHasProperty(session, "current email");
+		Value email = assertHasValue(session, "current email");
 		assertGenerated(email);
-		ParameterEdge pw2 = getParameterEdgeFromTo(session, email, user);
+		Parameter pw2 = getParameterFromTo(session, email, user);
 		assertGenerated(pw2);
 		assertEquals("email", pw2.getName());
 

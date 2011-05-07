@@ -3,16 +3,16 @@
  */
 package org.openiaml.model.tests.inference.model0_5;
 
-import org.openiaml.model.model.ActionEdge;
-import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.ECARule;
+import org.openiaml.model.model.Event;
 import org.openiaml.model.model.Operation;
-import org.openiaml.model.model.Property;
+import org.openiaml.model.model.Value;
 import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.visual.Map;
 import org.openiaml.model.model.visual.MapPoint;
-import org.openiaml.model.model.wires.ParameterEdge;
+import org.openiaml.model.model.Parameter;
 import org.openiaml.model.tests.inference.InferenceTestCase;
 
 /**
@@ -100,18 +100,18 @@ public class MapFormInput extends InferenceTestCase {
 		MapPoint point1 = assertHasMapPoint(map, "address 1");
 
 		// following generated
-		Property value1 = assertHasFieldValue(field1);
+		Value value1 = assertHasFieldValue(field1);
 		assertGenerated(value1);
 
-		EventTrigger change = field1.getOnChange();
+		Event change = field1.getOnChange();
 		assertNotNull(change);
 
 		Operation update = assertHasOperation(point1, "update");
 
-		ActionEdge run = assertHasRunAction(root, change, update);
+		ECARule run = assertHasRunAction(root, change, update);
 		assertGenerated(run);
 
-		ParameterEdge param = assertHasParameterEdge(root, value1, run);
+		Parameter param = assertHasParameter(root, value1, run);
 		assertGenerated(param);
 
 	}

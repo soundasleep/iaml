@@ -4,13 +4,13 @@
 package org.openiaml.model.tests.inference.model0_4;
 
 import org.openiaml.model.datatypes.BuiltinDataTypes;
-import org.openiaml.model.model.ActionEdge;
+import org.openiaml.model.model.ECARule;
 import org.openiaml.model.model.CompositeOperation;
 import org.openiaml.model.model.EXSDDataType;
-import org.openiaml.model.model.EventTrigger;
+import org.openiaml.model.model.Event;
 import org.openiaml.model.model.Operation;
 import org.openiaml.model.model.PrimitiveCondition;
-import org.openiaml.model.model.Property;
+import org.openiaml.model.model.Value;
 import org.openiaml.model.model.components.AccessControlHandler;
 import org.openiaml.model.model.components.LoginHandler;
 import org.openiaml.model.model.components.LoginHandlerTypes;
@@ -26,7 +26,7 @@ import org.openiaml.model.model.visual.Frame;
 import org.openiaml.model.model.visual.InputForm;
 import org.openiaml.model.model.visual.InputTextField;
 import org.openiaml.model.model.wires.ExtendsEdge;
-import org.openiaml.model.model.wires.ParameterEdge;
+import org.openiaml.model.model.Parameter;
 import org.openiaml.model.model.wires.RequiresEdge;
 import org.openiaml.model.model.wires.SetWire;
 import org.openiaml.model.tests.inference.InferenceTestCase;
@@ -152,7 +152,7 @@ public class UserRoles extends InferenceTestCase {
 
 	/**
 	 * The Login Handler[type=user] should have an incoming
-	 * parameter of 'User' - the default role/user instance
+	 * ActivityParameter of 'User' - the default role/user instance
 	 * to generate.
 	 *
 	 * @throws Exception
@@ -166,8 +166,8 @@ public class UserRoles extends InferenceTestCase {
 		Role user = assertHasRole(root, "User");
 		assertGenerated(user);
 
-		// a Parameter wire: [guest] --> [handler]
-		ParameterEdge param = assertHasParameterEdge(session, user, handler);
+		// a ActivityParameter wire: [guest] --> [handler]
+		Parameter param = assertHasParameter(session, user, handler);
 		assertGenerated(param);
 
 	}
@@ -209,7 +209,7 @@ public class UserRoles extends InferenceTestCase {
 		Frame target = assertHasFrame(session, "target");
 
 		// access event in the session
-		EventTrigger event = target.getOnAccess();
+		Event event = target.getOnAccess();
 		assertGenerated(event);
 
 		// check permissions operation contained in the session, not the page
@@ -217,13 +217,13 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(pageOp);
 
 		// connected
-		ActionEdge run = assertHasRunAction(target, event, pageOp, "run");
+		ECARule run = assertHasRunAction(target, event, pageOp, "run");
 		assertGenerated(run);
 
 		// a failure wire connecting the op to the login page
 		Session loginSession = assertHasSession(root, "role-based login handler for target session login");
 		Frame login = assertHasFrame(loginSession, "login");
-		ActionEdge fail = assertHasNavigateAction(root, pageOp, login, "fail");
+		ECARule fail = assertHasNavigateAction(root, pageOp, login, "fail");
 		assertGenerated(fail);
 
 	}
@@ -241,7 +241,7 @@ public class UserRoles extends InferenceTestCase {
 		Frame target = assertHasFrame(session, "target");
 
 		// access event in the page
-		EventTrigger event = session.getOnAccess();
+		Event event = session.getOnAccess();
 		assertGenerated(event);
 
 		// check permissions operation contained in the session, not the page
@@ -269,17 +269,17 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(check);
 
 		// access event
-		EventTrigger event = target.getOnAccess();
+		Event event = target.getOnAccess();
 		assertGenerated(event);
 
 		// connected
-		ActionEdge run = assertHasRunAction(target, event, check, "run");
+		ECARule run = assertHasRunAction(target, event, check, "run");
 		assertGenerated(run);
 
 		// a failure wire connecting the op to the login page
 		Session loginSession = assertHasSession(root, "role-based login handler for target session login");
 		Frame login = assertHasFrame(loginSession, "login");
-		ActionEdge fail = assertHasNavigateAction(root, check, login, "fail");
+		ECARule fail = assertHasNavigateAction(root, check, login, "fail");
 		assertGenerated(fail);
 
 	}
@@ -302,7 +302,7 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(targetOp);
 
 		// access event
-		EventTrigger event = session.getOnAccess();
+		Event event = session.getOnAccess();
 		assertGenerated(event);
 
 		// check permissions operation contained in the page
@@ -317,7 +317,7 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(cancel);
 		OperationCallNode virtualOp = assertHasOperationCallNode(op, "call permissions operation");
 		assertGenerated(virtualOp);
-		ActionEdge virtualRun = assertHasRunAction(op, virtualOp, targetOp, "run");
+		ECARule virtualRun = assertHasRunAction(op, virtualOp, targetOp, "run");
 		assertGenerated(virtualRun);
 
 		// execution edges between all the operations
@@ -340,7 +340,7 @@ public class UserRoles extends InferenceTestCase {
 		AccessControlHandler ach = assertHasAccessControlHandler(session, "role-based access");
 		DomainIterator instance = assertHasDomainIterator(session, "current instance");
 
-		ParameterEdge param = assertHasParameterEdge(session, instance, ach);
+		Parameter param = assertHasParameter(session, instance, ach);
 		assertGenerated(param);
 
 	}
@@ -378,7 +378,7 @@ public class UserRoles extends InferenceTestCase {
 		assertGenerated(email);
 		DomainAttribute password = assertHasDomainAttribute(guest, "password");
 		assertGenerated(password);
-		
+
 		// check the types
 		assertEqualType(BuiltinDataTypes.getTypeEmail(), ((EXSDDataType) email.getEType()).getDefinition());
 		// TODO password needs to have iamlPassword data type
@@ -449,7 +449,7 @@ public class UserRoles extends InferenceTestCase {
 		// and none between the PK and PK
 		assertHasNoExtendsEdge(root, id, source_id);
 		assertHasNoExtendsEdge(root, source_id, id);
-		
+
 		// check the types of the keys
 		assertEqualType(BuiltinDataTypes.getTypeInteger(), ((EXSDDataType) id.getEType()).getDefinition());
 		assertEqualType(id, fk);
@@ -494,19 +494,19 @@ public class UserRoles extends InferenceTestCase {
 		Session session = assertHasSession(root, "target session");
 		assertNotGenerated(session);
 
-		Property email = assertHasProperty(session, "current email");
+		Value email = assertHasValue(session, "current email");
 		assertGenerated(email);
-		Property password = assertHasProperty(session, "current password");
+		Value password = assertHasValue(session, "current password");
 		assertGenerated(password);
 
 		// but not an 'generated primary key'
-		assertHasNoProperty(session, "current generated primary key");
+		assertHasNoValue(session, "current generated primary key");
 
 	}
 
 	/**
 	 * The UserInstance should have a SelectWire from the given Role
-	 * with the current property values as parameters.
+	 * with the current Value values as parameters.
 	 *
 	 * @throws Exception
 	 */
@@ -516,8 +516,8 @@ public class UserRoles extends InferenceTestCase {
 		Session session = assertHasSession(root, "target session");
 		assertNotGenerated(session);
 
-		Property email = assertHasProperty(session, "current email");
-		Property password = assertHasProperty(session, "current password");
+		Value email = assertHasValue(session, "current email");
+		Value password = assertHasValue(session, "current password");
 
 		// user instance
 		DomainIterator instance = assertHasDomainIterator(session, "current instance");
@@ -529,9 +529,9 @@ public class UserRoles extends InferenceTestCase {
 		}, instance.getQuery());
 
 		// parameters
-		ParameterEdge p1 = assertHasParameterEdge(root, email, instance);
+		Parameter p1 = assertHasParameter(root, email, instance);
 		assertGenerated(p1);
-		ParameterEdge p2 = assertHasParameterEdge(root, password, instance);
+		Parameter p2 = assertHasParameter(root, password, instance);
 		assertGenerated(p2);
 
 	}
